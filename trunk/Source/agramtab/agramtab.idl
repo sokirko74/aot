@@ -1,0 +1,86 @@
+// agramtab.idl : IDL source for agramtab.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (agramtab.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+		object,
+		uuid(ECD62F7D-19B6-11D3-A77A-2679A7000000),
+		dual,
+		helpstring("IGramTab Interface"),
+		pointer_default(unique)
+	]
+	interface IGramTab : IDispatch
+	{
+		[id(1), helpstring("method GetPartOfSpeech")] HRESULT GetPartOfSpeech([in] BSTR gram_code, [retval, out] BYTE* result);
+		[id(2), helpstring("method GetGrammems")] HRESULT GetGrammems([in] BSTR gram_code, [retval, out]  hyper* result);
+		[id(21), helpstring("method GetClauseTypeByName")] HRESULT GetClauseTypeByName([in]BSTR bstrTypeName, [out,retval]long* lType);
+		[id(22), helpstring("method GetClauseTypeByNameIfCan")] HRESULT GetClauseTypeByNameIfCan([in]BSTR bstrTypeName, [out]long* lType, [out,retval]BOOL* Result);
+		[id(23), helpstring("method GetClauseNameByType")] HRESULT GetClauseNameByType([in]long type, [out, retval]BSTR* name);
+		[id(24), helpstring("method GetGramCodeByGrammemsAndPartofSpeechIfCan")] HRESULT GetGramCodeByGrammemsAndPartofSpeechIfCan([in]BYTE Pos, [in] hyper grammems, [out]BSTR* gramcodes, [out, retval]BOOL* bRes);
+		[propget, id(25), helpstring("property PartOfSpeechCount")] HRESULT PartOfSpeechCount([out, retval] BYTE *pVal);
+		[propget, id(26), helpstring("property GrammemsCount")] HRESULT GrammemsCount([out, retval] LONG *pVal);
+		[id(3), helpstring("method GrammemsToStr")] HRESULT GrammemsToStr([in]  hyper grammems, [retval, out] BSTR* result);
+		[id(4), helpstring("method GetPartOfSpeechStr")] HRESULT GetPartOfSpeechStr([in] BYTE PartOfSpeech, [retval, out] BSTR* result);
+		[id(5), helpstring("method Load")] HRESULT Load();
+		[id(6), helpstring("method HaveEqualPartOfSpeech")] HRESULT HaveEqualPartOfSpeech([in]BSTR gram_code1, [in]BSTR gram_code2, [retval, out] BOOL* result);
+		[id(7), helpstring("method ProcessPOSAndGrammems")] HRESULT ProcessPOSAndGrammems([in]BSTR in, [out] BYTE* PartOfSpeech, [out]  hyper* Grammems);
+		[id(8), helpstring("method GleicheGenderNumberCase")] HRESULT GleicheGenderNumberCase([in] BSTR common_noun_gram_code, [in] BSTR noun_gram_code,  [in] BSTR adj_gram_code, [retval, out] BOOL* result);
+		[id(9), helpstring("method GleicheCaseNumber")] HRESULT GleicheCaseNumber([in] BSTR gram_code1,  [in] BSTR gram_code2, [retval, out] BOOL* result);
+		[id(11), helpstring("method GetAllGrammems")] HRESULT GetAllGrammems([in] BSTR gram_code, [retval, out]  hyper* result);
+		[id(12), helpstring("method GleicheGenderNumber")] HRESULT GleicheGenderNumber([in] BSTR gram_code1,  [in] BSTR gram_code2, [retval, out] BOOL* result);
+		[id(13), helpstring("method FindGrammem")] HRESULT FindGrammem([in] BSTR gram_codes, [in]  hyper grammems, [retval,out] BOOL* result);
+		[id(18), helpstring("method GleicheSubjectPredicate")] HRESULT GleicheSubjectPredicate([in]BSTR gram_code1, [in]BSTR gram_code2, [retval, out]BOOL *bRes);
+		[id(19), helpstring("method ProcessPOSAndGrammemsIfCan")] HRESULT ProcessPOSAndGrammemsIfCan([in]BSTR in, [out] BYTE* PartOfSpeech, [out]  hyper* Grammems, [out,retval] BOOL* Result);
+	};
+
+[
+	uuid(ECD62F71-19B6-11D3-A77A-2679A7000000),
+	version(1.0),
+	helpstring("agramtab 1.0 Type Library")
+]
+library AGRAMTABLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	#include "../AgramtabLib/rus_consts.h"
+	#include "../AgramtabLib/ger_consts.h"
+	#include "../AgramtabLib/eng_consts.h"
+	
+
+
+
+
+	[
+		uuid(ECD62F7E-19B6-11D3-A77A-2679A7000000),
+		helpstring("RusGramTab Class")
+	]
+	coclass RusGramTab
+	{
+		[default] interface IGramTab;
+	};
+
+	[
+		uuid(3B09AA0A-27A7-11D3-A791-BCD3B4000000),
+		helpstring("RusGramTab Class")
+	]
+	coclass EngGramTab
+	{
+		[default] interface IGramTab;
+	};
+
+
+	
+	[
+		uuid(2B33F700-3899-4FB3-9EF6-C714926BC700),
+		helpstring("GerGramTab Class")
+	]
+	coclass GerGramTab
+	{
+		[default] interface IGramTab;
+	};
+};
