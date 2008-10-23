@@ -1,0 +1,68 @@
+# in order to compile with stlport, set stlport to 1
+stlport := 0
+
+
+cparams := $(cparams) -I$(RML_PCRE_INCLUDE) -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
+
+
+ifndef libmode
+	libmode := static
+endif
+
+ifeq ($(mode), debug)
+	cparams := $(cparams) -MD -c -O0 -g $(common_parms)  -ftemplate-depth-35
+	ct := d
+else
+	ifeq ($(mode), debug_thread)
+		cparams := $(cparams) -pthread -MD -c -O0 -g $(common_parms)  -ftemplate-depth-35
+		lparams := -pthread
+		ct := td
+	else
+		ifeq ($(mode), release_thread)
+			cparams := $(cparams) -pthread -MD -c -O3 -funroll-loops -fomit-frame-pointer $(common_parms) -ftemplate-depth-35
+			ct := t
+			lparams := -pthread
+		else
+			ct := r
+			ifeq ($(mode), profile)
+				ifdef profile
+					cparams := $(cparams)  -pg  -MD -c -O3 -funroll-loops $(common_parms) -ftemplate-depth-35
+					lparams := -lgcov -pg
+					ct := .prof
+				else
+					cparams := $(cparams) -g -MD -c -O3 -funroll-loops  $(common_parms) -ftemplate-depth-35			
+					ct := .prof
+				endif
+			else
+				ifeq ($(mode), release)
+					cparams := $(cparams) -MD -c -O3 -funroll-loops -fomit-frame-pointer  $(common_parms) -ftemplate-depth-35
+				else
+					mode_error =  $(error unknown mode. It can be debug, release, profile, debug_thread, release_thread)	
+				endif	
+			endif
+		endif
+	endif
+endif
+
+ifneq ($(ct), r)
+	ifneq ($(ct), rs)
+		ExeExten = $(ct)
+	endif
+endif
+
+
+ifeq ($(libmode), static)
+	ct := $(ct)st
+	lib_ext := a
+	LDFLAGS := -O3 -nostdlib 
+	LDPATH :=
+	LDLIBS := /usr/lib/crt1.o /usr/lib/crti.o /usr/local/lib/gcc-lib/i686-pc-linux-gnu/3.2.2/crtbegin.o -L/usr/local/gcc3.2/lib/gcc-lib/i686-pc-linux-gnu/3.2 -L/usr/local/lib/gcc-lib/i686-pc-linux-gnu/3.2.2/../../.. -Wl,-Bstatic -lstdc++ -Wl,-Bdynamic -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/local/lib/gcc-lib/i686-pc-linux-gnu/3.2.2/crtend.o /usr/lib/crtn.o
+else
+	ct := $(ct)sh
+	lib_ext := so
+	cparams := $(cparams) -fPIC
+endif
+
+
+
+
