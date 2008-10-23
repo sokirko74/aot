@@ -1,0 +1,743 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 25, 1\r\n"
+    "#pragma code_page(1251)\r\n"
+    "#include ""res\\Morphwizard.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAIN_FRAME          BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAIN_FRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN_FRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About Morphwizard...",       ID_APP_ABOUT
+        MENUITEM "Help",                        ID_HELP_HELP
+    END
+END
+
+IDR_MorphwizardTYPE MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP " &Tools "
+    BEGIN
+        MENUITEM "Save current list of words to file ", 
+                                                ID_TOOLS_SAVE_LIST_FILE
+        MENUITEM "Paradigm Export",             ID_TOOLS_EXPORT
+        MENUITEM "Find paradigms by list of words", ID_TOOLS_SELECT_BY_FILE
+        MENUITEM "Paradigm Import",             ID_TOOLS_IMPORT
+        MENUITEM "Delete ancode in paradigms",  ID_TOOLS_DEL_ANCODE
+        MENUITEM "Pack",                        ID_TOOLS_PACK_MRD
+        MENUITEM "Set Paradigm No",             ID_TOOLS_SET_PARA_NO
+        MENUITEM "Show paradigm differences",   ID_TOOLS_SHOW_PARA_DIFF
+        MENUITEM "Accent Wizard",               ID_TOOLS_ACCENTWIZARD
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About Morphwizard...",       ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "About Morphwizard"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "Morphwizard Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2003",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+    ICON            IDR_MAIN_FRAME,IDC_STATUS,11,17,20,20
+END
+
+IDD_TOOL_DELANC DIALOG  0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Удалить анкод для списка лемм"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Proceed",IDOK,64,74,50,14
+    LTEXT           "Input file:",IDC_STATIC,9,4,30,8
+    EDITTEXT        IDC_FILE,7,16,120,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_BROWSE,134,16,43,14
+    LTEXT           "Delete:",IDC_STATIC,9,40,24,8
+    EDITTEXT        IDC_ANCODE,7,51,120,14,ES_AUTOHSCROLL
+    CONTROL         "ancodes",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,134,48,
+                    43,10
+    CONTROL         "pos/gram",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,134,59,
+                    43,10
+END
+
+IDD_LOGIN DIALOGEX 0, 0, 165, 82
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION " MorphWizard Login"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT1,7,36,141,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    DEFPUSHBUTTON   "OK",IDOK,7,61,38,14
+    PUSHBUTTON      "Cancel",IDCANCEL,56,61,38,14
+    PUSHBUTTON      "Help",ID_HELP,105,61,38,14
+    CTEXT           "Please enter your login name\n or 'quest' for read-only mode",
+                    IDC_STATIC,7,11,129,19
+END
+
+IDD_INPUTBOX DIALOG  0, 0, 202, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Input box"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT1,17,25,107,16,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,145,20,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,145,40,50,14
+    LTEXT           "Static",IDC_CAPTION,14,10,181,8
+END
+
+IDD_PARAD_DIFF DIALOGEX 0, 0, 410, 218
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_BORDER | WS_SYSMENU
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_PARAD_1,99,19,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Paradigm No 1:",IDC_STATIC,38,22,50,8
+    EDITTEXT        IDC_PARAD_2,229,19,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Paradigm No 2:",IDC_STATIC,173,23,50,8
+    EDITTEXT        IDC_RESULTS,21,41,312,155,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_NOHIDESEL | ES_READONLY | 
+                    ES_WANTRETURN | WS_VSCROLL
+    PUSHBUTTON      "Analyze",ID_ANALYSE,345,52,50,14
+END
+
+IDD_CHANGE_ALL_DLG DIALOGEX 0, 0, 187, 251
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Change All Paradigms"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,34,230,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,102,230,50,14
+    CONTROL         "",IDC_LEMMA_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_NOLABELWRAP | LVS_AUTOARRANGE | LVS_ALIGNLEFT | 
+                    WS_BORDER | WS_TABSTOP,7,7,173,120
+    CONTROL         "the same accent model",IDC_SAME_ACCENT_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,45,136,92,10
+    CONTROL         "any  accent models",IDC_ANY_ACCENT_RADIO,"Button",
+                    BS_AUTORADIOBUTTON,45,148,79,10
+    GROUPBOX        "Set Accents",IDC_STATIC,7,160,173,59
+    CONTROL         "Keep old accents",IDC_RADIO_OLD_ACC,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,23,173,71,10
+    CONTROL         "Fill nonaccented wordforms",IDC_RADIO_OLD_NEW_ACC,
+                    "Button",BS_AUTORADIOBUTTON,23,188,106,10
+    CONTROL         "Use new accents",IDC_RADIO_NEW_ACC,"Button",
+                    BS_AUTORADIOBUTTON,23,203,71,10
+END
+
+IDD_ACCENTWIZARDDLG DIALOGEX 0, 0, 186, 267
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Accent Wizard"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Start",IDOK,41,244,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,100,244,50,16
+    EDITTEXT        IDC_FREQ_DICT_EDIT,7,19,172,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Frequency dictionary:",IDC_FREQ_DICT_STATIC,7,7,65,8
+    CONTROL         "",IDC_LEMMA_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,7,62,172,132
+    LTEXT           "Min Freq:",IDC_STATIC,7,43,29,8
+    EDITTEXT        IDC_MAX_COUNT_EDIT,41,40,48,14,ES_AUTOHSCROLL | 
+                    ES_NUMBER | WS_DISABLED | WS_GROUP
+    CONTROL         "",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,88,40,10,
+                    14
+    CONTROL         "Show in List",IDC_LIST_SHOW_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,128,44,51,10
+    CONTROL         "Partial accented paradigms",
+                    IDC_RADIO_PARTIAL_ACCENTED_PARA,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,23,203,99,10
+    CONTROL         "All nonaccented paradigms",
+                    IDC_RADIO_ALL_NONACCENTED_PAPA,"Button",
+                    BS_AUTORADIOBUTTON,23,220,98,10
+    EDITTEXT        IDC_EDIT_PARTIAL_ACCENTED_PARA,123,203,40,14,
+                    ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_ALL_NONACCENTED_PARA,123,220,40,14,
+                    ES_AUTOHSCROLL | ES_READONLY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "Morphwizard.exe"
+            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "OriginalFilename", "Morphwizard.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1251
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_PARAD_DIFF, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 403
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 211
+    END
+
+    IDD_CHANGE_ALL_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 244
+    END
+
+    IDD_ACCENTWIZARDDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 260
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+IDR_MANIFEST            RT_MANIFEST             "res\\Morphwizard.manifest"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAIN_FRAME          "Morphwizard"
+    IDR_MorphwizardTYPE     "\nMorphWizard\nMorphWizard\nMorphWizard(*.mwz)\n.mwz\nMorphWizard.Doc\nMorphWizard Document"
+    IDR_SLF_TYPE            "\nSLF\nSLF\nSLF Document(*.slf)\n.slf\nMorphWizard.slf\nSLF Document"
+    IDR_DIFF_TYPE           "\nSLF\nSLF\nDIFF Document(*.diff)\n.slf\nMorphWizard.diff\nDIff Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Morphwizard"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BADFSTR             "Not valid filter!"
+END
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SLF_VIEW DIALOGEX 0, 0, 159, 193
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 9, "Tahoma", 400, 0, 0xCC
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,3,4,21,14
+    PUSHBUTTON      "Cancel",IDCANCEL,29,6,28,14
+    LISTBOX         IDC_POSLIST,5,54,36,75,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    LISTBOX         IDC_GRAM_LIST,47,54,32,76,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "1234",IDC_PRD_NO,"Static",SS_SIMPLE | WS_GROUP,84,175,
+                    19,10,WS_EX_STATICEDGE
+    PUSHBUTTON      "Set Para No",IDC_CHANGE_PARADIGM,8,21,47,14
+    EDITTEXT        IDC_PREFIXES,37,158,51,12,ES_AUTOHSCROLL
+    RTEXT           "Prefixes:",IDC_PREFIXES_LBL,6,160,28,8
+    RTEXT           "Type grammems:",IDC_COMMON_GRM_LBL,2,145,63,8
+    LTEXT           "POS",IDC_POS_TITLE,6,45,15,8
+    LTEXT           "Grammems",IDC_GRAM_TITLE,41,44,40,8
+    RTEXT           "Flex",IDC_PRD_NO_TITLE,65,177,15,8
+    PUSHBUTTON      "Change All",IDC_CHANGE_ALL,64,19,47,14
+    RTEXT           "Accent",IDC_ACC_MDL_NO_TITLE,106,177,23,8
+    CONTROL         "1234",IDC_ACC_MDL_NO,"Static",SS_SIMPLE | WS_GROUP,134,
+                    175,19,10,WS_EX_STATICEDGE
+    PUSHBUTTON      "Fix Accent",IDC_FIX_ACCENT_BTN,64,4,40,14
+    COMBOBOX        IDC_TYPE_GRAMMEMS,66,145,48,30,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "1234",IDC_BASE,"Static",SS_SIMPLE | WS_GROUP,28,175,36,
+                    10,WS_EX_STATICEDGE
+    RTEXT           "Base",IDC_BASE_TITLE,2,177,15,8
+    RTEXT           "Comments:",IDC_PRD_LABEL_COMMENTS,83,110,37,8
+    EDITTEXT        IDC_PARADIGM_COMMENTS,3,131,149,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SLF_VIEW, DIALOG
+    BEGIN
+        RIGHTMARGIN, 152
+        BOTTOMMARGIN, 185
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MORHWIZARD_VIEW DIALOGEX 0, 0, 548, 351
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "FIND",IDC_FIND,11,17,49,24,WS_GROUP
+    PUSHBUTTON      "EDIT",IDC_EDIT,62,249,46,22,WS_GROUP
+    PUSHBUTTON      "REMOVE",IDC_REMOVE,13,250,46,22,WS_GROUP
+    EDITTEXT        IDC_PREDICT_WHAT,363,17,142,18,ES_UPPERCASE | 
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "PREDICT",IDC_PREDICT,306,18,40,24
+    PUSHBUTTON      "ADD",IDC_ADD,311,246,58,23
+    EDITTEXT        IDC_STATUS,7,282,504,46,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    GROUPBOX        "ADD PARADIGM",IDC_STATIC,298,7,243,266,WS_GROUP
+    GROUPBOX        "EDIT/REMOVE PARADIGM",IDC_STATIC,7,7,277,269,WS_GROUP
+    CONTROL         " lemma ",IDC_RFIND_LEM,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,47,47,37,10
+    CONTROL         "grammem",IDC_RFIND_GRM,"Button",BS_AUTORADIOBUTTON,90,
+                    47,44,10
+    CONTROL         "word form",IDC_WORD_FORM,"Button",BS_AUTORADIOBUTTON,
+                    173,47,45,10
+    CONTROL         "gramcode",IDC_FIND_BY_GRAMCODE,"Button",
+                    BS_AUTORADIOBUTTON,224,47,45,9
+    CONTROL         "user",IDC_FIND_BY_USERNAME,"Button",BS_AUTORADIOBUTTON,
+                    140,47,27,9
+    RTEXT           "Filter:",IDC_STATIC,165,257,19,9
+    EDITTEXT        IDC_FILTER,185,255,92,16,ES_AUTOHSCROLL
+    ICON            IDI_READONLY,IDC_READONLY_IMAGE,513,14,20,20,SS_NOTIFY,
+                    WS_EX_TRANSPARENT
+    CONTROL         "List1",IDC_PREDICTED_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,309,65,224,177
+    EDITTEXT        IDC_MINIMAL_FREQUENCE,365,44,40,14,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Min. frequence:",IDC_STATIC,309,46,50,8
+    CONTROL         "Only main part of speeches",
+                    IDC_ONLY_MAIN_PART_OF_SPEECHES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,412,247,97,10
+    CONTROL         "",IDC_FOUND_LIST2,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,17,66,260,174
+    EDITTEXT        IDC_EDIT1,465,44,40,14,ES_AUTOHSCROLL
+    LTEXT           "Suffix Length:",IDC_STATIC,419,47,44,8
+    COMBOBOX        IDC_FIND_WHAT,77,22,174,70,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "COMMENTS",IDC_SET_PRD_COMMENTS,111,249,46,22,WS_GROUP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAIN_FRAME          ICON                    "res\\Morphwizard.ico"
+IDR_MorphwizardTYPE     ICON                    "res\\MorphwizardDoc.ico"
+IDI_READONLY            ICON                    "res\\readonly.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAIN_FRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
+    "H",            ID_EDIT_REPLACE,        VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_ZOOM,        ID_FIND_PARADIGM,       VIRTKEY, NOINVERT
+END
+
+IDR_MorphwizardTYPE ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
+    "H",            ID_EDIT_REPLACE,        VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_RETURN,      ID_FIND_PARADIGM,       VIRTKEY, NOINVERT
+END
+
+IDR_SLF_TYPE ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
+    "H",            ID_EDIT_REPLACE,        VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_VOLUME_UP,   ID_FIND_PARADIGM,       VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 25, 1
+#pragma code_page(1251)
+#include "res\Morphwizard.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
