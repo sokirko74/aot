@@ -1,0 +1,1204 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_ROSSDETYPE MENU 
+BEGIN
+    POPUP "&База данных"
+    BEGIN
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "Import",                      ID_MENUITEM32784
+        MENUITEM "Semantic Analysis",           ID_RUN_PROCEDURE_TO_BUILD_RUSSIAN_SEMANTIC_STRUCTURE
+
+        MENUITEM "Open all dictionaries",       ID_OPEN_ALL_ROSSES
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "Build Sem File",              ID_GET_SEMFILE
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "Semantic Hierarchy"
+    BEGIN
+        MENUITEM "Semantic Relations",          ID_MENUITEM32788
+        MENUITEM "Semantic Features",           ID_SEMFET
+    END
+    POPUP "All dictionaries"
+    BEGIN
+        MENUITEM "Empty all dictionaries",      EMPTY_ALL_DICTS
+        MENUITEM "Export all dictionaries",     IDD_EXPORT_ALL_DICTS
+        MENUITEM "Import all dictionaries",     ID_IMPORT_ALL_DICTS
+        MENUITEM "Empty text domains of  all dictionaries", 
+                                                ID_DEL_TEXT_DOMENS
+        MENUITEM "Export all entry names ",     ID_ALL_DICT_ENTRIES
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About RossDev...",           ID_APP_ABOUT
+    END
+END
+
+IDR_HIERARCHYTYPE MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Add a node",                  ID_ADDNODE
+    END
+END
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Semantic Analysis",           ID_RUN_PROCEDURE_TO_BUILD_RUSSIAN_SEMANTIC_STRUCTURE
+
+        MENUITEM "Open all dictionaries",       ID_OPEN_ALL_ROSSES
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "Build Sem File",              ID_GET_SEMFILE
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About RossDev...",           ID_APP_ABOUT
+    END
+END
+
+IDR_POPUP_WORDLIST MENU 
+BEGIN
+    POPUP ""
+    BEGIN
+        POPUP "Sort"
+        BEGIN
+            MENUITEM "By entry",                    ID_SORT_BY_LEMMA
+            MENUITEM "By last modification time",   ID_SORT_BY_DATEANDTIME
+        END
+        POPUP "Selection"
+        BEGIN
+            MENUITEM "Select all entries",          IDR_SELECT_ALL_WORDS
+            MENUITEM "Unselect all entries",        IDR_DESELECT_ALL_WORDS
+            MENUITEM "Invert selection",            IDR_INVERT_SELECTION
+            MENUITEM "Set selection by author",     ID_SELECT_AUTHOR
+            MENUITEM "Set from the current line  downwards", 
+                                                    ID_MENUITEM32804
+        END
+        POPUP "Filter"
+        BEGIN
+            MENUITEM "Show only selected entries",  IDR_SET_FILTER
+        END
+        MENUITEM "List of hidden fields",       IDD_EDIT_DISABLED_FIELDS
+        MENUITEM "Export entries (full report)", IDR_SAVE_ROSS_TO_TXT
+        MENUITEM "Export entry names (only Titles))", IDR_SAVE_ONLY_WORDLIST
+        MENUITEM "Reread from the disk",        ID_RELOAD
+        MENUITEM "Find all entries, which include the current  entry", 
+                                                ID_SEARCH_BY_ARTICLE
+        MENUITEM "Domains and Fields",          IDR_SCHEME_ROSS
+        MENUITEM "Frequence list for field values", ID_STATISTIC_FIELD_VALUE
+        MENUITEM "Statistics",                  IDR_STATISTIC
+        MENUITEM "Set Commentary",              ID_MENUITEM32786
+        MENUITEM "Valency structures",          ID_VALENCIES
+        MENUITEM "Minus-list",                  IDD_MINUS_LIST
+        MENUITEM "Add the current entry to all other entries", 
+                                                IDD_APPENDARTICLE
+        MENUITEM "Delete all entries",          IDR_DEL_ALL_SELECTED
+        MENUITEM "Statistics for GFi",          IDR_GXI_STATISTICS
+        MENUITEM "Empy all entries",            ID_MENUITEM32805
+        MENUITEM "Find entry by a string",      ID_FIND_BY_STR
+        MENUITEM "Search for invalid cross-dictionary entries", 
+                                                ID_FIND_WRONG_REFS
+    END
+END
+
+IDR_REPORTTYPE MENU 
+BEGIN
+    POPUP "&Dictionary"
+    BEGIN
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "Import",                      ID_MENUITEM32784
+        MENUITEM "Semantic Analysis",           ID_RUN_PROCEDURE_TO_BUILD_RUSSIAN_SEMANTIC_STRUCTURE
+
+        MENUITEM "Open all dictionaries",       ID_OPEN_ALL_ROSSES
+        MENUITEM "Export all open dictionaries", IDD_EXPORT_ALL_DICTS
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "Build Sem File",              ID_GET_SEMFILE
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "Semantic Hierarchy"
+    BEGIN
+        MENUITEM "Semantic Relations",          ID_MENUITEM32788
+        MENUITEM "Semantic Features",           ID_SEMFET
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About RossDev...",           ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_WORDLIST_FORM DIALOGEX 0, 0, 476, 287
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "List1",IDC_WORDLIST_GRID,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,7,
+                    23,406,249
+    PUSHBUTTON      "Edit",IDC_WORDLIST_ARTICLE_BTN,419,52,50,14
+    PUSHBUTTON      "Add",IDC_WORDLIST_ADD,419,33,50,16
+    PUSHBUTTON      "Delete",IDC_WORDLIST_DEL,419,71,50,14
+    PUSHBUTTON      "Mark",IDC_SET_SELECTED_BUTTON,419,89,50,14
+    EDITTEXT        IDC_LEMMA_LOCATOR,20,6,123,14,ES_AUTOHSCROLL
+    LTEXT           "Static",IDC_UNITS_SIZE,260,276,139,10
+    LTEXT           ">",IDC_STATIC_LEFT,12,7,8,11
+    LTEXT           "<",IDC_STATIC_RIGHT,149,7,8,8
+    PUSHBUTTON      "Change Title",IDC_CHANGE_TITLE,419,108,50,14
+    PUSHBUTTON      "Set Author",IDC_SET_AUTHOR,419,126,50,14
+    ICON            IDI_READONLY,IDC_READONLY_IMAGE,420,7,20,20,SS_NOTIFY,
+                    WS_EX_TRANSPARENT
+END
+
+IDD_ARTICLEFORM DIALOGEX 0, 0, 447, 303
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Mark Up",IDC_ARTICLEVIEW_MARKUP,390,34,50,14
+    PUSHBUTTON      "Save",ID_FILE_SAVE,390,54,50,14
+    SCROLLBAR       IDC_FLDSCROLL,363,6,13,287,SBS_VERT
+    PUSHBUTTON      "Text",IDC_ARTICLEVIEW_TEXTBTN,390,14,50,14
+    PUSHBUTTON      "Add Field",IDC_ADD_BUTTON,390,74,50,14
+    PUSHBUTTON      "Delete Field",IDC_ARTICLE_VIEW_DEL_FIELD,390,114,50,14
+    PUSHBUTTON      "Edit Field",IDC_ARTICLE_FORM_VALUE,390,94,50,14
+    CONTROL         "",IDC_RICHEDIT21,"RichEdit20A",ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN | WS_BORDER | WS_TABSTOP,
+                    20,15,337,265
+END
+
+IDD_POCKET_FORM DIALOGEX 0, 0, 370, 271
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | 
+                    LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,11,9,261,232
+    LTEXT           "Static",IDC_UNITS_SIZE,116,248,166,8,SS_NOTIFY
+    PUSHBUTTON      "Edit Entry",IDC_BUTTON1,284,11,79,14
+    PUSHBUTTON      "Save to file",IDC_BUTTON2,284,30,79,15
+    PUSHBUTTON      "Select in the main list",IDC_BUTTON3,284,50,79,14
+END
+
+IDD_FIELDLIST_DIALOG DIALOG  0, 0, 186, 306
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+    LISTBOX         IDC_FIELDLIST,11,1,112,301,LBS_NOINTEGRALHEIGHT | 
+                    LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_VALUEDLG DIALOGEX 0, 0, 321, 210
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,22,183,50,14,NOT WS_TABSTOP
+    PUSHBUTTON      "Cancel",IDCANCEL,94,183,50,14,NOT WS_TABSTOP
+    GROUPBOX        "Signatures",IDC_VALUEDLG_SIGNATGROUP,187,7,114,165
+END
+
+IDD_SETEDITOR DIALOGEX 0, 0, 212, 134
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,156,65,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,155,83,50,14
+    LISTBOX         IDC_SETEDITOR_LIST,5,10,137,112,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_SETEDITOR_ADD,156,9,50,14
+    PUSHBUTTON      "Edit",IDC_SETEDITOR_VALUE,157,28,50,14
+    PUSHBUTTON      "Delete",IDC_SETEDITOR_DEL,156,47,50,14
+END
+
+IDD_FORMULAEDITOR DIALOGEX 0, 0, 395, 197
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Empty cell",IDC_BUTTON4,4,12,81,14
+    PUSHBUTTON      "Add new cell",IDC_BUTTON3,4,31,81,14
+    PUSHBUTTON      "Edit cell",IDC_FORMULAEDITOR_VALUE,4,50,81,14
+    PUSHBUTTON      "New line",IDC_BUTTON2,4,69,81,14
+    PUSHBUTTON      "Delete line",IDC_BUTTON1,4,88,81,14
+    DEFPUSHBUTTON   "OK",IDOK,4,107,81,14
+    PUSHBUTTON      "Cancel",IDCANCEL,4,126,81,14
+    CONTROL         "Custom1",IDC_GRID,"MFCGridCtrl",WS_TABSTOP,93,14,284,
+                    161
+END
+
+IDD_SCHEME DIALOGEX 0, 0, 332, 247
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Domains"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,258,80,58,14
+    PUSHBUTTON      "Cancel",IDCANCEL,258,98,58,14
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_TABSTOP,34,26,202,167
+    PUSHBUTTON      "Edit",IDC_BUTTON1,258,26,58,14
+    PUSHBUTTON      "Save to Files",IDC_SAVE_TO_FILES,258,44,58,14
+    PUSHBUTTON      "Load from files",IDC_LOAD_CONST_FROM_FILES,258,62,58,14
+END
+
+IDD_STATIS_DLG DIALOG  0, 0, 495, 250
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Статистика"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,438,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,438,30,50,14
+    CONTROL         "",IDC_RICHEDIT1,"RICHEDIT",TCS_VERTICAL | TCS_BUTTONS | 
+                    TCS_MULTISELECT | WS_BORDER | WS_VSCROLL | WS_TABSTOP,25,
+                    13,406,219
+END
+
+IDD_BASICDOMENDLG DIALOGEX 0, 0, 228, 250
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,165,120,50,15
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_SORTASCENDING | WS_BORDER | 
+                    WS_TABSTOP,20,10,137,222
+    PUSHBUTTON      "Add",IDC_ADD_BUTTON,165,18,50,15
+    PUSHBUTTON      "Delete",IDC_BUTTON2,165,35,50,15
+    PUSHBUTTON      "To file",IDC_BUTTON1,165,52,50,15
+    PUSHBUTTON      "From file",IDC_BUTTON3,165,69,50,15
+    PUSHBUTTON      "Delete All",IDC_DELETE_ALL_ITEMS,165,86,50,15
+    PUSHBUTTON      "Color",IDC_CHANGE_COLOR,165,103,50,15
+END
+
+IDD_IMPORT_DLG DIALOGEX 0, 0, 358, 338
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Импорт"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Exit",IDOK,290,15,50,14
+    CONTROL         "Overwrite",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,19,17,64,10
+    CONTROL         "Add",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    19,28,29,10
+    CONTROL         "Skip",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    19,39,53,10
+    GROUPBOX        "If there is such entry ",IDC_STATIC,15,7,118,47
+    LTEXT           "Protocol",IDC_STATIC,16,231,90,8
+    PUSHBUTTON      "Start import",IDC_BUTTON1,290,33,50,14
+    EDITTEXT        IDC_EDIT2,47,74,145,13,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "File",IDC_STATIC,21,76,12,8
+    PUSHBUTTON      "Browse file",IDC_BUTTON2,193,74,61,13
+    CONTROL         "Test reading",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,166,14,92,16
+    EDITTEXT        IDC_EDIT3,227,47,40,14,ES_AUTOHSCROLL
+    LTEXT           "Start from the entry",IDC_STATIC,145,50,60,8
+    PUSHBUTTON      "Save file",IDC_BUTTON3,262,73,54,13
+    PUSHBUTTON      "Scheme",IDC_BUTTON4,290,50,50,14
+    CONTROL         "HotKey1",IDC_HOTKEY1,"msctls_hotkey32",NOT WS_VISIBLE | 
+                    WS_BORDER | WS_TABSTOP,19,57,80,14
+    CONTROL         "",IDC_RICHEDIT21,"RichEdit20A",ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_NOHIDESEL | 
+                    ES_WANTRETURN | WS_BORDER | WS_TABSTOP,17,93,316,135
+    CONTROL         "",IDC_RICHEDIT22,"RichEdit20A",ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_NOHIDESEL | ES_WANTRETURN | 
+                    WS_BORDER | WS_TABSTOP,16,244,312,79
+END
+
+IDD_SCHEME_CHOICER DIALOGEX 0, 0, 166, 181
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Dictionary Scheme"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,31,140,101,18
+    PUSHBUTTON      "Domains",IDC_BUTTON1,31,14,104,19
+    PUSHBUTTON      "Fields",IDC_BUTTON2,31,42,104,19
+    PUSHBUTTON      "Clear Text Domains",IDC_BUTTON3,31,70,104,19
+END
+
+IDD_FIELDS_EDITOR_FORM DIALOGEX 0, 0, 212, 276
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Поля"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,141,17,50,14
+    PUSHBUTTON      "Edit",IDC_BUTTON1,141,36,50,14
+    PUSHBUTTON      "Add",IDC_ADD_BUTTON,141,57,50,14
+    LISTBOX         IDC_LISTFIELD,19,18,112,244,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Field name",IDC_STATIC,9,7,35,8
+END
+
+IDD_FIELDEDITOR_FORM DIALOGEX 0, 0, 396, 226
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Field properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,331,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,331,25,50,14
+    EDITTEXT        IDC_EDIT1,52,7,181,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Name",IDC_STATIC,9,9,35,7
+    CONTROL         "Single",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,48,51,35,10
+    CONTROL         "Set",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    48,63,27,10
+    CONTROL         "Set of sets",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,48,75,49,10
+    GROUPBOX        "Type of value",IDC_STATIC,40,42,94,50
+    CONTROL         "Applicable  to actants",IDC_CHECK3,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,28,84,10
+    LTEXT           "Signatures",IDC_STATIC,10,96,62,9
+    PUSHBUTTON      "Edit",IDC_BUTTON1,337,120,50,14
+    PUSHBUTTON      "Add",IDC_BUTTON2,337,137,50,14
+    EDITTEXT        IDC_ORDERID_EDT,186,25,40,14,ES_AUTOHSCROLL
+    LTEXT           "Order:",IDC_STATIC,153,27,20,8
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,15,110,305,100
+END
+
+IDD_DOMENLIST DIALOG  0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+END
+
+IDD_POS_CHOICER DIALOGEX 0, 0, 276, 138
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Choose part of speech"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_LIST1,70,24,131,63,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ENGLISH_EQU DIALOGEX 0, 0, 276, 138
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "English translations"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_LIST1,70,24,131,63,LBS_SORT | LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_NEW_TEXTENTRY DIALOGEX 0, 0, 246, 114
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Словарный вход"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT1,89,34,133,14,ES_AUTOHSCROLL
+    LTEXT           "Entry name:",IDC_STATIC,49,22,38,8
+    EDITTEXT        IDC_EDIT2,90,68,38,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Sence No:",IDC_STATIC,51,57,60,8
+END
+
+IDD_NEW_UNIT_WZD DIALOG  0, 0, 188, 81
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Property Page"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "TODO: layout property page",IDC_STATIC,53,59,90,8
+END
+
+IDD_REF_ARTICLES DIALOGEX 0, 0, 276, 138
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create reference articles"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_LIST1,70,24,131,63,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_HIERARCHYVIEW DIALOGEX 0, 0, 401, 278
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "TODO: layout formview",IDC_STATIC,55,42,74,8
+    PUSHBUTTON      "Add node",IDC_BUTTON1,329,14,65,14
+    PUSHBUTTON      "Close",IDC_BUTTON2,328,35,66,14
+END
+
+IDD_FIND_BY_STR_DLG DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+    COMBOBOX        IDC_COMBO1,7,7,118,30,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Search in all open dictionaries",IDC_FIND_IN_ALL_DICTS,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,21,57,110,10
+    CONTROL         "Search in the current dictionary",
+                    IDC_FIND_IN_ACTIVE_DICT,"Button",BS_AUTORADIOBUTTON,21,
+                    71,114,10
+END
+
+IDD_FIND_WRONG_REFS DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Search for invalid references"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+    EDITTEXT        IDC_FIELD_STR,81,13,40,14,ES_AUTOHSCROLL
+    LTEXT           "Field Name",IDC_STATIC,11,14,36,8
+END
+
+IDD_SIGNAT_EDITOR DIALOGEX 0, 0, 336, 242
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "SignatEditor"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,279,24,50,14
+    LISTBOX         IDC_AVAIL_DOMS,7,70,98,156,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_SIGNAT_DOMS,160,71,90,154,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "->",IDC_ADD,110,84,44,14
+    PUSHBUTTON      "<-",IDC_DELETE,109,103,45,14
+    LTEXT           "All domains",IDC_STATIC,15,57,93,8
+    LTEXT           "Domains of this signature",IDC_STATIC,159,58,90,8
+    DEFPUSHBUTTON   "OK",IDOK,279,7,50,14
+    EDITTEXT        IDC_EDIT1,74,15,96,14,ES_AUTOHSCROLL
+    LTEXT           "Name",IDC_STATIC,41,18,20,8
+    EDITTEXT        IDC_EDIT4,73,36,60,14,ES_AUTOHSCROLL
+    LTEXT           "Order in Article",IDC_STATIC,17,39,47,8
+END
+
+IDD_PROGRESSBAR DIALOG  0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Progress"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,65,74,50,14
+    CONTROL         "Progress1",IDC_PROGRESSBAR,"msctls_progress32",
+                    WS_BORDER | 0x1,19,28,144,14
+    LTEXT           "0/0",IDC_Statis,59,53,65,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_WORDLIST_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 469
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 277
+    END
+
+    IDD_ARTICLEFORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 440
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 293
+    END
+
+    IDD_POCKET_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 363
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 264
+    END
+
+    IDD_FIELDLIST_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 299
+    END
+
+    IDD_VALUEDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 314
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_SETEDITOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 127
+    END
+
+    IDD_FORMULAEDITOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 388
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 190
+    END
+
+    IDD_SCHEME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 325
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 240
+    END
+
+    IDD_STATIS_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 488
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 243
+    END
+
+    IDD_BASICDOMENDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 243
+    END
+
+    IDD_IMPORT_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 351
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 331
+    END
+
+    IDD_SCHEME_CHOICER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 159
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 174
+    END
+
+    IDD_FIELDS_EDITOR_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 9
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 269
+    END
+
+    IDD_FIELDEDITOR_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 389
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 219
+    END
+
+    IDD_DOMENLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_POS_CHOICER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 269
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_ENGLISH_EQU, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_NEW_TEXTENTRY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 239
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 107
+    END
+
+    IDD_NEW_UNIT_WZD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 181
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 74
+    END
+
+    IDD_REF_ARTICLES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 269
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_HIERARCHYVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 394
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 271
+    END
+
+    IDD_FIND_BY_STR_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_FIND_WRONG_REFS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_SIGNAT_EDITOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 329
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 235
+    END
+
+    IDD_PROGRESSBAR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_ROSSDEV             REGISTRY                "RossDev.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SPLASH              BITMAP                  "Splsh16.bmp"
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About RossDev"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    ICON            127,IDC_STATIC,11,17,20,20
+    LTEXT           "RossDev Version 1.0",IDC_STATIC,37,15,119,8,SS_NOPREFIX
+    LTEXT           "This environment is created by Alexey Sokirko (1999-2003)",
+                    IDC_STATIC,34,25,194,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_INPUTBOX DIALOG  0, 0, 202, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Input box"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT1,17,25,107,16,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,145,20,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,145,40,50,14
+    LTEXT           "Static",IDC_CAPTION,14,10,181,8
+END
+
+IDD_RICHEDITVIEW DIALOG  0, 0, 453, 247
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "TODO: layout formview",IDC_STATIC,55,42,74,8
+END
+
+IDD_WAIT_DLG DIALOG  0, 0, 101, 38
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE
+FONT 12, "MS Sans Serif"
+BEGIN
+    CONTROL         "Animate1",IDC_ANIMATE_WAIT,"SysAnimate32",ACS_CENTER | 
+                    ACS_TRANSPARENT | ACS_AUTOPLAY | WS_TABSTOP,69,11,20,17
+    CTEXT           "Wait ...",IDC_STATIC,7,5,87,28,SS_CENTERIMAGE | 
+                    WS_BORDER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_INPUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 195
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_RICHEDITVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 446
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 240
+    END
+
+    IDD_WAIT_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 94
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 31
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\RossDev.ico"
+IDR_ROSSDETYPE          ICON                    "res\\RossDevDoc.ico"
+IDI_READONLY            ICON                    "res\\icon1.ico"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\RossDev.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_MINIMIZE_ALL_DICTS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_SEMAN,               VIRTKEY, ALT, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "RossDev MFC Application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "RossDev"
+            VALUE "LegalCopyright", "Copyright (C) 1999"
+            VALUE "OriginalFilename", "RossDev.EXE"
+            VALUE "ProductName", "RossDev Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "RossDev"
+    IDR_ROSSDETYPE          "\nRossDe\nRossDe\nRoss configuration(*.rcf)\n.rcf\nRossDev.Ross\nRossDe Document"
+    IDR_ARTICLETYPE         "\nEntry\nEntry\nRoss Article (*.art)\n.art\nRossDev.ArticleRoss\nRossDe Document"
+    IDR_POCKETTYPE          "\nPocket\nPocket\nRoss Pocket(*.pct)\n.pct\nRossDev.PocketRoss\nPocket Document"
+    IDR_HIERARCHYTYPE       "\nHierarchy\nHierarchy\nRoss Hierarchy(*.hrc)\n.hrc\nRossDev.Hierarchy\nHierarchy Document"
+    IDR_REPORTTYPE          "\nReport\nReport\nRoss Report(*.txt)\n.txt\nRossDev.Report\nReport Document"
+    IDR_SEMANTICSTRUCTURE   "\nSemanticStructure\nSemanticStructure\nSemantic Structure(*.sst)\n.sst\nRossDev.SemanticStructure\nSemantic  Structure Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "RossDev"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON32813          "Minimize all dictionaries"
+    ID_MINIMIZE_ALL_DICTS   "Minimize all dictionaries\nMinimize all dictionaries"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\RossDev.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

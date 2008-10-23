@@ -1,0 +1,37 @@
+============
+TITLE        = with_tihs
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 11/7/6 18:47:54
+//MachineName =  
+//Date = Tuesday, July 11, 2006 
+//Time = 18 : 47
+//UserName = sokirko 
+CONTENT =  with this
+EXM     =  he held the book with this
+GF      = 1  PREP
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+RUS     =  при_этом 1
+============
+TITLE        = with_this
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 11/7/6 18:56:50
+//MachineName =  
+//Date = Tuesday, July 11, 2006 
+//Time = 18 : 56
+//UserName = sokirko 
+CONTENT =  with this
+POS     =  begin
+EXM     =  he held the book with this
+GF      = 1  PREP
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+RUS     =  при_этом 1
