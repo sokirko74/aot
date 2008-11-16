@@ -1,0 +1,26 @@
+HKCR
+{
+	Seman.ComSemRelation.1 = s 'ComSemRelation Class'
+	{
+		CLSID = s '{576AB855-E069-4C26-844B-72F9D0DF2BA9}'
+	}
+	Seman.ComSemRelation = s 'ComSemRelation Class'
+	{
+		CLSID = s '{576AB855-E069-4C26-844B-72F9D0DF2BA9}'
+		CurVer = s 'Seman.ComSemRelation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {576AB855-E069-4C26-844B-72F9D0DF2BA9} = s 'ComSemRelation Class'
+		{
+			ProgID = s 'Seman.ComSemRelation.1'
+			VersionIndependentProgID = s 'Seman.ComSemRelation'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{BD87FBF9-4917-4C26-A85C-1B4E86D39066}'
+		}
+	}
+}
