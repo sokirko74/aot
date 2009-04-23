@@ -1,0 +1,16 @@
+//
+// VISUALSYNAN.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+IDR_AVIWAIT AVI res\wait.avi
+
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
