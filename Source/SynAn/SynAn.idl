@@ -1,0 +1,568 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+/** \mainpage		
+ This is a documentation to COM-Interface for Shallow Syntax Module, which was developed by 
+ Dmitry Pankratov, Lev Gershenzon, Igor Nozhov, and Alexey Sokirko in Dialing Project. 
+ The main purpose of the module is to build clause structure of each input sentence and
+ to build simple NP groups  inside clauses. Clauses and groups can be nested, that's why we use
+ a special term (a "syntax unit" or simply a "unit"), which is a generalization of 
+ the notions of clauses and words. So a subclause as well as a simple word 
+ is a unit inside the superclause.  Each clause contains a set of morphological variants, 
+ where  a morphological variant is a vector of syntax units.  For each morphological variant 
+ we build a set of syntax groups. The main properties of a syntax group and a clause are 
+ the same:<br>
+  - the starting word, <br>
+  - the end word, <br>
+  - the main word <br>
+  - type (name).  <br>
+ Using a clause and group hierarchy we can build a dependency forest, where 
+ relations go from the main words of clauses or groups to the main words 
+ of the immediate subconstituents.
+ Generally, the dependency forest can be considered as an alternative way to access syntax structure.
+ */
+
+/** \example ../TestSynanCOM/TestSynanCOM.cpp  */
+/** \example ../common/COMSyntaxHolder.cpp   */
+/** \example ../common/COMSyntaxHolder.h  */
+/** \example ../common/utilit.h  */
+/** \example ../common/util_classes.h */
+/** \example ../common/utilit.cpp  */
+
+	interface IClauseVariant;
+	interface IGroup;
+	interface IRelationsIterator;
+	interface IGraphmatFile;
+
+	[
+		object,
+		uuid(E022CF53-037F-11D3-8C22-00105A68ADF3),
+		dual,
+		helpstring("ICOMClauseType Interface"),
+		pointer_default(unique)
+	]
+	/** 
+	 An interface to a syntax root of a clause.
+	*/
+	interface IClauseRoot : IDispatch
+	{
+		/** an integer pointer to IGramtab clause type enumeration */
+		[propget, id(1), helpstring("property Type")] HRESULT Type([out, retval] int *pVal);
+		/** an index  of the root word in the sentence coordinates */
+		[propget, id(2), helpstring("property RootWordNo")] HRESULT RootWordNo([out, retval] long *pVal);
+		/** an index  of the used homonym in the root word's homonym set */
+		[propget, id(3), helpstring("property RootHomonymNo")] HRESULT RootHomonymNo([out, retval] long *pVal);
+		/** a string description of the type of the root  */
+		[propget, id(4), helpstring("property Description")] HRESULT Description([out, retval] BSTR *pVal);		
+	};
+
+
+	[
+		object,
+		uuid(7794ED72-F74F-11D3-8DC5-00105A68ADF3),
+		dual,
+		helpstring("ISyntaxUnit Interface"),
+		pointer_default(unique)
+	]
+	/** 
+	 An interface to a syntax unit(a generalization of words and clauses)
+	*/
+	interface ISyntaxUnit : IDispatch
+	{
+		/** Is this unit a word or a clause (EClause or EWord)? */
+		[propget, id(1), helpstring("property Type")] HRESULT Type([out, retval] int *pVal);
+		/** an index  of the word in the sentence coordinates, if this unit is a word */
+		[propget, id(2), helpstring("property WordNum")] HRESULT WordNum([out, retval] long *pVal);
+		/** an index  of the word's homonym set, if this unit is a word */
+		[propget, id(3), helpstring("property ActiveHomonymNum")] HRESULT ActiveHomonymNum([out, retval] long *pVal);
+		/** an index in ISentence::Clause if this unit is a clause */
+		[propget, id(5), helpstring("property ClauseNum")] HRESULT ClauseNum([out, retval] long *pVal);
+		/** an index  of the clause root set, if this unit is a clause */
+		[propget, id(4), helpstring("property ActiveClauseType")] HRESULT ActiveClauseTypeNum([out, retval] long *pVal);
+
+		/** a union of all grammems of the syntax unit */
+		[propget, id(6), helpstring("property Grammems")] HRESULT Grammems([out, retval] hyper *pVal);
+		/** morphological codes  of the syntax unit */
+		[propget, id(7), helpstring("property Gramcodes")] HRESULT Gramcodes([out, retval] BSTR *pVal);
+		/** a string representation of grammems */
+		[propget, id(8), helpstring("property GrammemsStr")] HRESULT GrammemsStr([out, retval] BSTR *pVal);
+		/** The number of simple prepositions which can be interpretations of the unit, if it is a preposition.
+		 This slot is presented because Syntax can solve some cases of ambiguity in the preposition subordination */
+		[propget, id(9), helpstring("property SimplePrepsCount")] HRESULT SimplePrepsCount([out, retval] long *pVal);
+		/** an  ID of a particular simple preposition  */
+		[propget, id(10), helpstring("property SimplePrepId")] HRESULT SimplePrepId([in] long ii, [out, retval] long *pVal);
+		/** a string representation of a particular simple preposition  */
+		[propget, id(11), helpstring("property SimplePrepStr")] HRESULT SimplePrepStr([in]long ii,[out, retval] BSTR *pVal);
+
+	};
+
+
+
+
+	[
+		object,
+		uuid(CB81A1EC-F8C1-11D2-8C0E-00105A68ADF3),
+		dual,
+		helpstring("IHomonym Interface"),
+		pointer_default(unique)
+	]
+	/**
+	 An interface to a word homonym, which contains all morphological properties.
+	 To some extent a word can be considered as a set of its homonyms.
+	*/
+	interface IHomonym : IDispatch
+	{
+		/** the union of all morphological features */
+		[propget, id(2), helpstring("property Grammems")] HRESULT Grammems([out, retval] hyper *pVal);
+		/** lemma ( normal form) */
+		[propget, id(3), helpstring("property Lemma")] HRESULT Lemma([out, retval] BSTR *pVal);
+		/** the  string ID of morphological dictionary, where this word was found */
+		[propget, id(16), helpstring("property LemSign")] HRESULT LemSign([out, retval] BSTR *pVal);
+		/** the union of all part of speeches of the word  */
+		[propget, id(20), helpstring("property Poses")] HRESULT Poses([out, retval] long *pVal);	
+		/** a string description of the morphology interpretation */
+		[propget, id(23), helpstring("property GramDescriptionStr")] HRESULT GramDescriptionStr([out, retval] BSTR *pVal);
+		/** paradigm ID of the morphology interpretation */
+		[propget, id(24), helpstring("property ParadigmID")] HRESULT ParadigmID([out, retval] long *pVal);
+		/** morphological codes of the morphology interpretation */
+		[propget, id(25), helpstring("property GramCodes")] HRESULT GramCodes([out, retval] BSTR *pVal);
+		/** a string representation of Poses (part of speeches) */
+		[propget, id(28), helpstring("property POSStr")] HRESULT POSStr([out, retval] BSTR *pVal);
+		/** true, if this homonym starts an oborot */
+		[propget, id(29), helpstring("property IsOb1")] HRESULT IsOb1([out, retval] BOOL *pVal);
+		/** true, if this homonym terminates an oborot */
+		[propget, id(30), helpstring("property IsOb2")] HRESULT IsOb2([out, retval] BOOL *pVal);
+		/** true, if this homonym is inside an oborot */
+		[propget, id(31), helpstring("property IsInOb")] HRESULT IsInOb([out, retval] BOOL *pVal);
+		/** returns the number of simple prepositions which can be interpretation of this homonym */
+		[propget, id(33), helpstring("property SimplePrepsCount")] HRESULT SimplePrepsCount([out, retval] long *pVal);
+		/** returns an id of a particular simple preposition */
+		[id(32), helpstring("method GetOborDictIdOfSimplePrep")] HRESULT GetOborDictIdOfSimplePrep([in]long iNum,[out, retval] long *pVal);
+		/** returns an id of an oborot if this homonym starts an oborot */
+		[id(36), helpstring("method GetOborotId")] HRESULT GetOborotId([out, retval] long* OborotId);
+		/** returns GF (grammar feature) of the oborot if this homonym starts an oborot */
+		[id(37), helpstring("method GetOborotGF")] HRESULT GetOborotGF([out, retval] BSTR* pVal);
+		[propget, id(38), helpstring("property CommonGrammemsStr")] HRESULT CommonGrammemsStr([out, retval] BSTR* pVal);		
+	};
+
+
+	[
+		object,
+		uuid(CB81A1E2-F8C1-11D2-8C0E-00105A68ADF3),
+		dual,
+		helpstring("IWord Interface"),
+		pointer_default(unique)
+	]
+	/**
+		This is an interface to a word (a set of morphological homonyms). It contains all graphematical
+		properties of a word which are common to its morphological homonyms.
+		The interface describes word's thesaurus interpretations, 
+		since thesaurus interpretation is done once for all homonyms.
+	*/
+	interface IWord : IDispatch
+	{
+		/** input word form 	 */
+		[propget, id(1), helpstring("property WordStr")] HRESULT WordStr([out, retval] BSTR *pVal);
+		/** register of the word:  AnyRegister=0, LowLow=1, UpLow=2, UpUp=3 */
+		[propget, id(2), helpstring("property Register")] HRESULT Register([out, retval] int *pVal);
+		/**  the number of morphological homonyms */
+		[propget, id(14), helpstring("property HomonymsCount")] HRESULT HomonymsCount([out, retval] long *pVal);
+		/**  a homonym by an index */
+		[propget, id(15), helpstring("property Homonym")] HRESULT Homonym([in] long lHomNum, [out, retval] IHomonym* *pVal);
+		/** true, if this word is a part of thesaurus entry */
+		[propget, id(16), helpstring("property IsInThesaurusEntry")] HRESULT IsInThesaurusEntry([out, retval] BOOL *pVal);
+		/** Id of thesaurus entry if the word starts a thesaurus entry */
+		[propget, id(23), helpstring("property ThesaurusEntryID")] HRESULT ThesaurusEntryID([out, retval] long *pVal);
+		/** true, if the word starts a thesaurus entry */
+		[propget, id(24), helpstring("property IsLastInThesaurusEntry")] HRESULT IsLastInThesaurusEntry([out, retval] BOOL *pVal);
+		/** true, if the word terminates a thesaurus entry */
+		[propget, id(25), helpstring("property IsFirstInThesaurusEntry")] HRESULT IsFirstInThesaurusEntry([out, retval] BOOL *pVal);
+		/** returns an ID of thesaurus, if the word starts a thesaurus entry */
+		[propget, id(26), helpstring("property ThesType")] HRESULT ThesType([out, retval] int *pVal);
+		/** an index of the minimal(primitive) clause, which contains this word */
+		[propget, id(28), helpstring("property ClauseNo")] HRESULT ClauseNo([out, retval] long *pVal);
+		/** a string representation of graphematical descriptions */
+		[propget, id(29), helpstring("property GraphDescrs")] HRESULT GraphDescrs([out, retval] BSTR *pVal);
+		/** true, if the word was created by the syntax itself, for example a dash for Russian */
+		[propget, id(30), helpstring("property bArtificialCreated")] HRESULT bArtificialCreated([out, retval] BOOL *pVal);
+		/** true, if the word was deleted and ignored by the chunker */
+		[propget, id(31), helpstring("property bDeleted")] HRESULT bDeleted([out, retval] BOOL *pVal);
+		/** the number  of all main verbs of the auxiliary verb, if this word is an auxiliary verb*/
+		[propget, id(32), helpstring("property MainVerbsCount")] HRESULT MainVerbsCount([out, retval] long *pVal);
+		/** the list of all main verbs of the auxiliary verb, if this word is an auxiliary verb*/
+		[propget, id(33), helpstring("property MainVerbs")] HRESULT MainVerbs([in] long lVerbNo, [out, retval] long *pVal);
+		
+	};
+
+	[
+		object,
+		uuid(CB81A1EA-F8C1-11D2-8C0E-00105A68ADF3),
+		dual,
+		helpstring("IRelation Interface"),
+		pointer_default(unique)
+	]
+	/**
+	 This interface is created to have an access to one binary relation in the dependency forest,
+	 which is based upon the group and clause hierarchy. A target or a source of one 
+	 binary relation can be a word or fixed group (oborot).
+	*/
+	interface IRelation : IDispatch
+	{
+
+		/** is the source syntax unit is a word or a fixed group (EGroup or EWord)? */
+		[propget, id(1), helpstring("property SourceItemType")] HRESULT SourceItemType([out, retval] int* type);
+		/** is the target  syntax unit is a word or a fixed group (EGroup or EWord)? */
+		[propget, id(2), helpstring("property TargetItemType")] HRESULT  TargetItemType([out, retval] int* type);
+		/** the name of the relation */
+		[propget, id(3), helpstring("property Name")] HRESULT Name([out, retval] BSTR *pVal);
+		/** the clause index of the source, if the source is a clause */
+		[propget, id(4), helpstring("property SourceClauseNo")] HRESULT SourceClauseNo([out, retval] long *pVal);
+		/** the clause index of the target, if the target is a clause */
+		[propget, id(5), helpstring("property TargetClauseNo")] HRESULT TargetClauseNo([out, retval] long *pVal);
+		/** the word index of the source, if the source is a word */
+		[propget, id(6), helpstring("property SourceWordNo")] HRESULT SourceItemNo([out, retval] long *pVal);
+		/** the word index of the target, if the target is a word */
+		[propget, id(7), helpstring("property TargetWordNo")] HRESULT TargetItemNo([out, retval] long *pVal);
+	};
+
+
+
+	[
+		object,
+		uuid(CB81A1E5-F8C1-11D2-8C0E-00105A68ADF3),
+		dual,
+		helpstring("IGroup Interface"),
+		pointer_default(unique)
+	]
+	/**
+	 A syntax group(for example: PP,NP) is built in one morphological variant of a clause. 
+	 The main properties of a group are  a starting point, an end point and a type.
+	*/
+	interface IGroup : IDispatch
+	{
+		/** the type of the group  */
+		[propget, id(1), helpstring("property TypeStr")] HRESULT TypeStr([out, retval] BSTR* pVal);
+		/** the first word of the group in clause coordinates */
+		[propget, id(2), helpstring("property FirstWord")] HRESULT FirstWord([out, retval] long *pVal);
+		/** the last word of the group in clause coordinates */
+		[propget, id(3), helpstring("property LastWord")] HRESULT LastWord([out, retval] long *pVal);
+		/** the first word of the main subgroup in clause coordinates */
+		[propget, id(4), helpstring("property MainGroupFirstWord")] HRESULT MainGroupFirstWord([out, retval] long *pVal);
+		/** the last word of the main subgroup in clause coordinates */
+		[propget, id(5), helpstring("property MainGroupLastWord")] HRESULT MainGroupLastWord([out, retval] long *pVal);
+		/** morphological features of the group */
+		[propget, id(6), helpstring("property Grammems")] HRESULT Grammems([out, retval] hyper *pVal);
+		/** the main word of the group which is determined recursively as the main word of the main subgroup */
+		[propget, id(11), helpstring("property MainWord")] HRESULT MainWord([out, retval] long *pVal);
+	};
+
+
+	[
+		object,
+		uuid(CB81A1E8-F8C1-11D2-8C0E-00105A68ADF3),
+		dual,
+		helpstring("IClauseVariant Interface"),
+		pointer_default(unique)
+	]
+	/**
+		IClauseVariant is an interface to one morphological variant of a clause, which is 
+		a vector of syntax units. Based on this vector we build a set of syntax groups, 
+		and find a subject and a predicate.
+	*/
+	interface IClauseVariant : IDispatch
+	{
+		/** the number of all syntax  groups in this variant */
+		[propget, id(1), helpstring("property GroupsCount")] HRESULT GroupsCount([out, retval] long *pVal);
+		/** returns a particular group by an index */
+		[propget, id(2), helpstring("property Group")] HRESULT Group([in] long lGroupNum, [out, retval] IGroup* *pVal);
+		/** the number of all syntax units in this variant */
+		[propget, id(3), helpstring("property UnitsCount")] HRESULT UnitsCount([out, retval] long *pVal);
+		/** returns a particular syntax unit by an index  */
+		[propget, id(12), helpstring("property Unit")] HRESULT Unit([in]long lUnitNum, [out, retval] ISyntaxUnit* *pVal);
+		/**  number of possible subjects */
+		[propget, id(9), helpstring("property SubjectsCount")] HRESULT SubjectsCount([out, retval] long *pVal);
+		/**  an index of a possible subject in this variant in clause coordinates */
+		[propget, id(7), helpstring("property Subjects")] HRESULT Subjects([in] long SubjectNo, [out, retval] long *pVal);
+		/**  an index of a predicate in this variant in clause coordinates */
+		[propget, id(8), helpstring("property Predicate")] HRESULT Predicate([out, retval] long *pVal);
+		/** ClauseRootNo returns an index to clause root set, which this clause variant contains
+		 ClauseRootNo can be -1, if there is no root found in this morphological variant */
+		[propget, id(13), helpstring("property ClauseRootNo")] HRESULT ClauseRootNo([out, retval] long *pVal);
+		/** returns the weight of this variant, which is approximately the number of all words under all syntax groups  */
+		[propget, id(14), helpstring("property VariantWeight")] HRESULT VariantWeight([out, retval] int* pVal);
+	};
+
+
+	[
+		object,
+		uuid(CB81A1E3-F8C1-11D2-8C0E-00105A68ADF3),
+		dual,
+		helpstring("IClause Interface"),
+		pointer_default(unique)
+	]
+	/**
+		Interface IClause provides an access to one clause of the input sentence. A clause is a 
+		chunk from the input sentence with possibly ambiguous clause roots. Each clause has a set of 
+		morphological variants where syntax groups are built.
+	*/
+	interface IClause : IDispatch
+	{
+		/** the first word of the clause in sentence coordination */
+		[propget, id(1), helpstring("property FirstWord")] HRESULT FirstWord([out, retval] long *pVal);
+		/** the last word of the clause in sentence coordination */
+		[propget, id(2), helpstring("property LastWord")] HRESULT LastWord([out, retval] long *pVal);
+		/** antecedent word if it is a relative sentence*/
+		[propget, id(7), helpstring("property AntecedentWord")] HRESULT AntecedentWord([out, retval] long *pVal);
+		/** relative word if it is a relative sentence*/
+		[propget, id(9), helpstring("property RelativeWord")] HRESULT RelativeWord([out, retval] long *pVal);
+		/** the number of morphological variants */
+		[propget, id(3), helpstring("property VariantsCount")] HRESULT VariantsCount([out, retval] long *pVal);
+		/** returns a morphological variant by an index */
+		[propget, id(4), helpstring("property ClauseVariant")] HRESULT ClauseVariant([in] long lVarNum, [out, retval] IClauseVariant* *pVal);
+		/** the number of possible clause roots */
+		[propget, id(5), helpstring("property RootsCount")] HRESULT ClauseRootsCount([out, retval] long *pVal);
+		/** returns a clause root by an index */
+		[propget, id(6), helpstring("property ClauseRoots")] HRESULT ClauseRoots([in]long lNum, [out, retval] IClauseRoot* *pVal);
+		/** a string representaion of the main properties of the clause */
+		[propget, id(8), helpstring("property Description")] HRESULT Description([out, retval] BSTR *pVal);
+		/** the number of all clause conjunctions which start the clause  */
+		[propget, id(14), helpstring("property ConjsCount")] HRESULT ConjsCount([out, retval] long *pVal);
+		/** returns  a string representation of a clause conjunction by an index */
+		[propget, id(18), helpstring("property ConjStr")] HRESULT ConjStr([in]int iNum, [out, retval] BSTR *pVal);
+	};
+
+
+	[
+		object,
+		uuid(CB81A1E0-F8C1-11D2-8C0E-00105A68ADF3),
+		dual,
+		helpstring("ISentence Interface"),
+		pointer_default(unique)
+	]
+	/**
+		A sentence provides an access to one input sentence. A sentence contains a vector of words
+		and a set of clauses. A clause can be called a primitive or minimal one, if there is a word
+		for which this clause is the smallest clause, which contains this word. In principle, it is possible to create  a clause,
+		which contains a one or more subclauses and and which does not immediately contain words. The interface 
+		supports two lists of clauses: the full list(slots ClausesCount and   Clause) and
+		the list of primitive clauses. There is a special function ("PrimitiveClauseNoByClauseNo")
+		which returns an index in the full list by an index of primitive clauses. 
+		The interface also provides an access to IRelationsIterator, which contains a dependency  
+		forest for this sentence.
+	*/
+	interface ISentence : IDispatch
+	{
+		/** the number of all primitive clauses */
+		[propget, id(1), helpstring("property PrimitiveClausesCount")] HRESULT PrimitiveClausesCount([out, retval] long *pVal);
+		/** a primitive clause by an index */
+		[propget, id(2), helpstring("property PrimitiveClause")] HRESULT PrimitiveClause([in] long lClauseNum, [out, retval] IClause* *pVal);
+		/** the number of words in the sentence */
+		[propget, id(3), helpstring("property WordsNum")] HRESULT WordsNum([out, retval] long *pVal);
+		/** a word by an index */
+		[propget, id(4), helpstring("property Word")] HRESULT Word([in] long lWordNum, [out, retval] IWord* *pVal);
+		/** the number of all clauses in the sentence */
+		[propget, id(7), helpstring("property ClausesCount")] HRESULT ClausesCount([out, retval] long *pVal);
+		/** a clause by an index */
+		[propget, id(8), helpstring("property Clause")] HRESULT Clause([in]long lClauseNum, [out, retval] IClause* *pVal);
+		/** returns a pointer to IRelationsIterator, which contains a dependency forest for this sentence */
+		[id(10), helpstring("method CreateRelationsIterator")] HRESULT CreateRelationsIterator([out, retval] IRelationsIterator** piRelsIt);
+		/** returns homonym by a clause variant */
+		[id(11), helpstring("method GetHomonymByClauseVar")] HRESULT GetHomonymByClauseVar([in]long iWord, [in]long iVar,[in]long iClause, [out, retval]IHomonym** piHom);
+		/** returns clause index by a primitive clause index */
+		[id(13), helpstring("method ClauseNoByPrimitiveClauseNo")] HRESULT ClauseNoByPrimitiveClauseNo([in]long lPrClauseNo, [out, retval]long* lClauseNo);
+		/** returns the primitive clause index by the clause index, if it is possible */
+		[id(14), helpstring("method PrimitiveClauseNoByClauseNo")] HRESULT PrimitiveClauseNoByClauseNo([in]long lClauseNo, [out, retval]long* lPrClauseNo);
+		/** returns a string  representation of an oborot by an ID */
+		[id(15), helpstring("method GetOborotStrByOborotId")] HRESULT GetOborotStrByOborotId([in] long OborotId, [out, retval] BSTR* pVal);
+	};
+		
+
+	[
+		object,
+		uuid(7907CB45-2A26-11d3-8C52-00105A68ADF3),
+		dual,
+		helpstring("ISentencesCollection Interface"),
+		pointer_default(unique)
+	]
+	/**
+		ISentencesCollection is the utmost interface in Dialing Syntax MOdule. It contains a set 
+		of sentences, i.e. the input text. It also provides an access to all options of 
+		the syntax process.
+	*/
+	interface ISentencesCollection : IDispatch
+	{
+		/** The method should be called in order to load all dictionaries in the memory 
+		It always should precede a call of ProcessData. */
+		[id(1), helpstring("method InitializeProcesser")] HRESULT InitializeProcesser();
+		/**  creates a syntax structure by the input text */
+		[id(2), helpstring("method ProcessData")] HRESULT ProcessData([in] IUnknown* piPlmLine);
+		/**  the number of processed sentences */
+		[propget, id(5), helpstring("property SentencesCount")] HRESULT SentencesCount([out, retval] long *pVal);
+		/** returns a sentence by an index */
+		[propget, id(6), helpstring("property Sentence")] HRESULT Sentence([in]long i, [out, retval] ISentence* *pVal);
+		/** deletes the set of processed sentences */
+		[id(7), helpstring("method ClearSentences")] HRESULT ClearSentences();
+		/** enables or disables thesauri */
+		[propput, id(10), helpstring("property EnableThesauri")] HRESULT EnableThesauri([in] BOOL newVal);		
+		[propget, id(10), helpstring("property EnableThesauri")] HRESULT EnableThesauri([out, retval] BOOL* Val);		
+		/** true, if no error message should occur during processing */
+		[propput, id(11), helpstring("property SilentMode")] HRESULT SilentMode([in] BOOL newVal);
+		/** sets a pointer to thesaurus ThesId, this function should be called before  
+		InitializeProcesser, otherwise procedure InitializeProcesser loads this thesaurus  */
+		//[id(18), helpstring("method SetThesaurus")] HRESULT SetThesaurus([in] UINT ThesId, [in] IUnknown* Thes);
+		/** KillHomonymsMode sets the mode of killing homonyms. Possible values of this mode are DontKillHomonyms=0,  CoverageKillHomonyms=1 */
+		[propget, id(19), helpstring("property KillHomonymsMode")] HRESULT KillHomonymsMode([out, retval] UINT *pVal);
+		[propput, id(19), helpstring("property KillHomonymsMode")] HRESULT KillHomonymsMode([in] UINT newVal);
+		/** sets a pointer to lemmatizer, this function should be called before  
+		InitializeProcesser, otherwise procedure InitializeProcesser loads a new copy of lemmatizer */
+		[id(20), helpstring("method SetLemmatizer")] HRESULT SetLemmatizer([in] IUnknown* Interf);
+		/** sets a pointer to the dictionary of oborots, this function should be called before 
+		InitializeProcesser, otherwise procedure InitializeProcesser loads a new copy of the dictionary */
+		[id(21), helpstring("method SetOborDic")] HRESULT SetOborDic([in] IUnknown* Interf);
+		/** true, if the syntax module should delete all morphological variants which are less than the maximum by the  coverage weight */
+		[propget, id(22), helpstring("property DeleteEqualPrimitiveClauseVariants")] HRESULT DeleteEqualPrimitiveClauseVariants([out, retval] BOOL *pVal);
+		[propput, id(22), helpstring("property DeleteEqualPrimitiveClauseVariants")] HRESULT DeleteEqualPrimitiveClauseVariants([in] BOOL newVal);
+		/** SyntaxLanguage is the language of the syntax module. Possible values are morphRussian = 1, morphGerman = 3.  This initialization should be done before InitializeProcesser */
+		[propget, id(23), helpstring("property SyntaxLanguage")] HRESULT SyntaxLanguage([out, retval] int* pVal);
+		[propput, id(23), helpstring("property SyntaxLanguage")] HRESULT SyntaxLanguage([in] int newVal);
+		[propget, id(24), helpstring("property EnableProgressBar")] HRESULT EnableProgressBar([out, retval] BOOL* pVal);
+		[propput, id(24), helpstring("property EnableProgressBar")] HRESULT EnableProgressBar([in] BOOL newVal);
+
+	};
+	[
+		object,
+		uuid(23D97177-087F-11D4-8DE4-00105A68ADF3),
+		dual,
+		helpstring("IRelationsIterator Interface"),
+		pointer_default(unique)
+	]
+	/**
+		IRelationsIterator is an interface to the dependency forest which represents another view of syntax results.
+		The nodes of this forest can be words or "firm groups". Firm groups are oborots, or some
+		graphematical chunks like dates, filename and so on. Relations have their own interface 
+		which is called IRelation. One can retrieve relations and nodes  only 
+		after determining morphological variants of all clauses, which is done by method AddClauseNoAndVariantNo.
+	*/
+	interface IRelationsIterator : IDispatch
+	{
+		/** Using this function the user should specify  a morphological variant for each clause in order to create  
+		 a dependency forest. */
+		[id(1), helpstring("method AddClauseNoAndVariantNo")] HRESULT AddClauseNoAndVariantNo([in]long iClauseNo, [in] long iVarNo);
+		/** This method builds dependency forest for the given morphological variants. */
+		[id(2), helpstring("method BuildRelations")] HRESULT BuildRelations();
+		/** the number of relations in the dependency forest  */
+		[propget, id(3), helpstring("property RelationsCount")] HRESULT RelationsCount([out, retval] long *pVal);
+		/** returns a relation from the dependency forest  by an index */
+		[propget, id(4), helpstring("property Relation")] HRESULT Relation([in] long iRel, [out, retval] IRelation* *pVal);
+		/** the number of firm groups (oborots) in the dependency forest   */
+		[propget, id(5), helpstring("property FirmGroupsCount")] HRESULT FirmGroupsCount([out, retval] long *pVal);
+		/** returns a firm group by an index */
+		[propget, id(6), helpstring("property FirmGroup")] HRESULT FirmGroup([in]long iGroup, [out, retval] IGroup* *pVal);
+		/** deletes all nodes and relations in the dependency forest   */
+		[id(7), helpstring("method Reset")] HRESULT Reset();
+	};
+
+[        
+	uuid(79995331-E12C-11D2-8BE2-00105A68ADF3),
+	version(1.0),
+	helpstring("ClauseBuilder 1.0 Type Library")
+]
+library SYNANLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	#include "../AgramtabLib/rus_consts.h"
+	#include "../AgramtabLib/ger_consts.h"
+
+
+	[	
+		uuid(CF509F75-2981-11D3-8C51-00105A68ADF3),
+		helpstring("SentencesCollection Class")
+	]
+	coclass SentencesCollection
+	{
+		[default] interface ISentencesCollection;
+	};
+	[
+		uuid(CE8F3450-E101-11D2-8BE1-00105A68ADF3),
+		helpstring("Sentence Class")
+	]
+	coclass Sentence
+	{
+		[default] interface ISentence;
+	};
+	[
+		uuid(CE8F3452-E101-11D2-8BE1-00105A68ADF3),
+		helpstring("Word Class")
+	]
+	coclass Word
+	{
+		[default] interface IWord;
+	};
+	[
+		uuid(CB81A1E4-F8C1-11D2-8C0E-00105A68ADF3),
+		helpstring("Clause Class")
+	]
+	coclass Clause
+	{
+		[default] interface IClause;
+	};
+	[
+		uuid(CB81A1E6-F8C1-11D2-8C0E-00105A68ADF3),
+		helpstring("Group Class")
+	]
+	coclass Group
+	{
+		[default] interface IGroup;
+	};
+	[
+		uuid(CB81A1E9-F8C1-11D2-8C0E-00105A68ADF3),
+		helpstring("ClauseVariant Class")
+	]
+	coclass ClauseVariant
+	{
+		[default] interface IClauseVariant;
+	};
+	[
+		uuid(CB81A1EB-F8C1-11D2-8C0E-00105A68ADF3),
+		helpstring("Relation Class")
+	]
+	coclass Relation
+	{
+		[default] interface IRelation;
+	};
+	[
+		uuid(CB81A1ED-F8C1-11D2-8C0E-00105A68ADF3),
+		helpstring("Homonym Class")
+	]
+	coclass Homonym
+	{
+		[default] interface IHomonym;
+	};
+	[
+		uuid(E022CF54-037F-11D3-8C22-00105A68ADF3),
+		helpstring("ClauseType Class")
+	]
+	coclass ClauseRoot
+	{
+		[default] interface IClauseRoot;
+	};
+	[
+		uuid(7794ED73-F74F-11D3-8DC5-00105A68ADF3),
+		helpstring("SyntaxUnit Class")
+	]
+	coclass SyntaxUnit
+	{
+		[default] interface ISyntaxUnit;
+	};
+	[
+		uuid(23D97178-087F-11D4-8DE4-00105A68ADF3),
+		helpstring("RelationsIterator Class")
+	]
+	coclass RelationsIterator
+	{
+		[default] interface IRelationsIterator;
+	};
+};
+

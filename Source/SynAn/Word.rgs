@@ -1,0 +1,26 @@
+HKCR
+{
+	ClauseBuilder.Word.1 = s 'Word Class'
+	{
+		CLSID = s '{FE939729-F8BF-11D2-8C0E-00105A68ADF3}'
+	}
+	ClauseBuilder.Word = s 'Word Class'
+	{
+		CLSID = s '{FE939729-F8BF-11D2-8C0E-00105A68ADF3}'
+		CurVer = s 'ClauseBuilder.Word.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {FE939729-F8BF-11D2-8C0E-00105A68ADF3} = s 'Word Class'
+		{
+			ProgID = s 'ClauseBuilder.Word.1'
+			VersionIndependentProgID = s 'ClauseBuilder.Word'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{79995331-E12C-11D2-8BE2-00105A68ADF3}'
+		}
+	}
+}
