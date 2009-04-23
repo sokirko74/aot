@@ -15,7 +15,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CSizeFormView
+// CSizeFormView//
 
 IMPLEMENT_DYNAMIC(CSizeFormView, CFormView)
 
@@ -186,7 +186,7 @@ BOOL CSizeFormView::Create(LPCTSTR /*lpszClassName*/, LPCTSTR /*lpszWindowName*/
 		rect.right - rect.left, rect.bottom - rect.top,
 		SWP_NOZORDER|SWP_NOACTIVATE);
 
-	// make visible if requested
+	// make visible if requested`
 	if (dwRequestedStyle & WS_VISIBLE)
 		ShowWindow(SW_NORMAL);
 

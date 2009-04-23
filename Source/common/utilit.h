@@ -67,7 +67,9 @@ typedef unsigned char BYTE;
 #ifdef WIN32
 	#include  <io.h>
 	#include <fcntl.h>
-	typedef __int64 QWORD;
+    #ifndef _WINDNS_INCLUDED_
+	    typedef __int64 QWORD;
+    #endif
 	
 #else
 	#include  <unistd.h>

@@ -10,8 +10,8 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#define _WIN32_WINNT 0x0400
-#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
+#define _WIN32_WINNT 0x0500
+//#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
@@ -23,7 +23,5 @@
 #import "../../bin/Synan.tlb"
 using namespace SYNANLib;
 
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
 #endif // !defined(AFX_STDAFX_H__506BF518_3AE1_11D5_92A5_005004035BFC__INCLUDED_)
