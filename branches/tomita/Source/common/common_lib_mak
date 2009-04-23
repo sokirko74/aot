@@ -1,0 +1,37 @@
+#########################################
+######## common part  ###################
+#########################################
+
+
+ifeq ($(libmode), shared)
+
+$(LibName).$(lib_ext) : $(objects)
+	$(mode_error)
+	g++ -$(libmode)  -o $@ $^
+	cp $@ $(RML)/Bin
+
+else
+
+$(LibName).$(lib_ext) : $(objects)
+	$(mode_error)
+	ar rcs  $@  $^
+endif
+
+#$(precomp): %.h.gch : %.h
+#	echo "test"
+#	g++ $(cparams) $< -o $@
+
+$(objects): %.o$(ct) : %.cpp
+	$(mode_error)
+	g++ $(cparams) $< -o $@
+
+
+include $(wildcard *.d)
+
+clean : ;
+	-rm $(objects)
+	-rm $(LibName).$(lib_ext)
+	-rm *.d
+	
+
+

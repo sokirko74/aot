@@ -1,0 +1,26 @@
+HKCR
+{
+	MAPost.MAPost.1 = s 'MAPost Class'
+	{
+		CLSID = s '{6AD16947-1802-11D3-8C31-00105A68ADF3}'
+	}
+	MAPost.MAPost = s 'MAPost Class'
+	{
+		CLSID = s '{6AD16947-1802-11D3-8C31-00105A68ADF3}'
+		CurVer = s 'MAPost.MAPost.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6AD16947-1802-11D3-8C31-00105A68ADF3} = s 'MAPost Class'
+		{
+			ProgID = s 'MAPost.MAPost.1'
+			VersionIndependentProgID = s 'MAPost.MAPost'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{5AAB9713-1406-11D3-8C2B-00105A68ADF3}'
+		}
+	}
+}

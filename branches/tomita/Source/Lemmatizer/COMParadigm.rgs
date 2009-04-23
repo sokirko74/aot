@@ -1,0 +1,26 @@
+HKCR
+{
+	Lemmatizer.Paradigm.1 = s 'Paradigm Class'
+	{
+		CLSID = s '{6B232506-1816-11D3-9CC6-00105A68BAF2}'
+	}
+	Lemmatizer.Paradigm = s 'Paradigm Class'
+	{
+		CLSID = s '{6B232506-1816-11D3-9CC6-00105A68BAF2}'
+		CurVer = s 'Lemmatizer.Paradigm.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6B232506-1816-11D3-9CC6-00105A68BAF2} = s 'Paradigm Class'
+		{
+			ProgID = s 'Lemmatizer.Paradigm.1'
+			VersionIndependentProgID = s 'Lemmatizer.Paradigm'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{CA8CF90E-FBB6-11D2-9C98-00105A68BAF2}'
+		}
+	}
+}

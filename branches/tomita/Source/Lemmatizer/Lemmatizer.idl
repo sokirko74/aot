@@ -1,0 +1,161 @@
+// Lemmatizer.idl : IDL source for Lemmatizer.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Lemmatizer.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+typedef enum {	idlFinance = 1, idlComputer = 2, idlLiterature = 4	} idlSubjectEnum;
+typedef enum {	idlRussian = 1, idlEnglish = 2, idlGerman = 3} idlMorphLanguageEnum;
+
+
+	[
+		object,
+		uuid(8D229F36-FD73-11D2-9C9F-00105A68BAF2),
+		dual,
+		helpstring("IParadigm Interface"),
+		pointer_default(unique)
+	]
+	interface IParadigm : IDispatch
+	{
+	 	[propget, id(1), helpstring("property ParadigmID")] HRESULT ParadigmID([out, retval] DWORD *pVal);
+		[propget, id(2), helpstring("property Count")] HRESULT Count([out, retval] DWORD *pVal);
+		[propget, id(3), helpstring("property Ancode")] HRESULT Ancode([in] DWORD pos, [out, retval] BSTR *pVal);
+		[propget, id(4), helpstring("property Norm")] HRESULT Norm([out, retval] BSTR *pVal);
+		[propget, id(DISPID_VALUE), helpstring("property Form")] HRESULT Form([in] DWORD pos, [out, retval] BSTR *pVal);
+		[propget, id(6), helpstring("property TypeAncode")] HRESULT TypeAncode([out, retval] BSTR *pVal);
+		[propget, id(7), helpstring("property Founded")] HRESULT Founded([out, retval] BOOL *pVal);
+		[propget, id(8), helpstring("property SrcAncode")] HRESULT SrcAncode([out, retval] BSTR *pVal);
+		[propget, id(9), helpstring("property SrcNorm")] HRESULT SrcNorm([out, retval] BSTR *pVal);
+		[propget, id(10), helpstring("property HomonymWeight")] HRESULT HomonymWeight([out, retval] int *pVal);
+		[propget, id(11), helpstring("property WordWeight")] HRESULT WordWeight([out, retval] int *pVal);
+		[propget, id(12), helpstring("property HomonymWeightWithForm")] HRESULT HomonymWeightWithForm([in] DWORD pos, [out, retval] int *pVal);
+		[propget, id(13), helpstring("property Accent")] HRESULT Accent([in] DWORD pos, [out, retval] BYTE* pVal);
+		[propget, id(14), helpstring("property BaseLength")] HRESULT BaseLength([out, retval] UINT* pVal);
+		[propget, id(15), helpstring("property LemmaPrefixLength")] HRESULT LemmaPrefixLength([out, retval] int* pVal);
+	};
+
+	[
+		object,
+		uuid(9FCC72D0-FE0A-11D2-9CA0-00105A68BAF2),
+		dual,
+		helpstring("IParadigmCollection Interface"),
+		pointer_default(unique)
+	]
+	interface IParadigmCollection : IDispatch
+	{
+		[propget, id(1), helpstring("property Count")] HRESULT Count([out, retval] long *pVal);
+		[propget, id(DISPID_VALUE), helpstring("property Item")] HRESULT Item([in] long pos, [out, retval] IParadigm* *pVal);
+	};
+	
+	[
+		object,
+		uuid(BBE83451-FBD6-11D2-9C98-00105A68BAF2),
+		dual,
+		helpstring("ILemmatizerRus Interface"),
+		pointer_default(unique)
+	]
+	interface ILemmatizer : IDispatch
+	{
+		[id(4), helpstring("method CreateParadigmCollectionFromNorm")] HRESULT CreateParadigmCollectionFromNorm([in] BSTR norm, [in] BOOL capital, [in] BOOL UsePrediction, [out, retval] IParadigmCollection* *pVal);
+		[id(5), helpstring("method CreateParadigmCollectionFromForm")] HRESULT CreateParadigmCollectionFromForm([in] BSTR form, [in] BOOL capital, [in] BOOL UsePrediction, [out, retval] IParadigmCollection* *pVal);
+		[id(8), helpstring("method CreateParadigmFromID")] HRESULT CreateParadigmFromID([in] long id, [out, retval] IParadigm* *pVal);
+		[id(9), helpstring("method LoadDictionariesRegistry")] HRESULT LoadDictionariesRegistry();
+	 	[propget, id(11), helpstring("property UseStatistic")] HRESULT UseStatistic([out, retval] BOOL *pVal);
+		[propput, id(11), helpstring("property UseStatistic")] HRESULT UseStatistic([in] BOOL newVal);
+		[id(14), helpstring("method LoadStatisticRegistry")] HRESULT LoadStatisticRegistry([in] idlSubjectEnum subj);
+		[propput, id(15), helpstring("property MaximalPrediction")] HRESULT MaximalPrediction([in] BOOL newVal);
+		[id(20), helpstring("method CheckABC")] HRESULT CheckABC([in] BSTR Word, [out,retval] BOOL* Result);
+	};
+	[
+		object,
+		uuid(1887B706-1CAE-11D3-9CCE-00105A68BAF2),
+		dual,
+		helpstring("IPLMLineCollection Interface"),
+		pointer_default(unique)
+	]
+	interface IPLMLineCollection : IDispatch
+	{
+		[propget, id(DISPID_VALUE), helpstring("property Item")] HRESULT Item([in] long pos, [out, retval] BSTR *pVal);
+		[propput, id(DISPID_VALUE), helpstring("property Item")] HRESULT Item([in] long pos, [in] BSTR newVal);
+		[propget, id(1), helpstring("property Count")] HRESULT Count([out, retval] long *pVal);
+		[id(2), helpstring("method Remove")] HRESULT Remove([in] long pos);
+		[id(4), helpstring("method SaveToFile")] HRESULT SaveToFile([in] BSTR filename);
+		[id(5), helpstring("method ProcessPlmLines")] HRESULT ProcessPlmLines([in] IUnknown* piGraphmatFile);
+		[id(6), helpstring("method AttachLemmatizer")] HRESULT AttachLemmatizer(ILemmatizer* pVal);
+		[id(10), helpstring("method Clear")] HRESULT Clear();
+		[id(11), helpstring("method ProcessHyphenWords")] HRESULT ProcessHyphenWords(IUnknown* piGraphan);
+		[id(12), helpstring("method CopyItems")] HRESULT CopyItems([in]IUnknown* piPlmLinesFrom);
+	};
+[
+	uuid(CA8CF90E-FBB6-11D2-9C98-00105A68BAF2),
+	version(1.0),
+	helpstring("Lemmatizer 1.0 Type Library")
+]
+library LEMMATIZERLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(6B232504-1816-11D3-9CC6-00105A68BAF2),
+		helpstring("Paradigm Class")
+	]
+	coclass Paradigm
+	{
+		[default] interface IParadigm;
+	};
+
+
+	[
+		uuid(6B232506-1816-11D3-9CC6-00105A68BAF2),
+		helpstring("ParadigmCollection Class")
+	]
+	coclass ParadigmCollection
+	{
+		[default] interface IParadigmCollection;
+	};
+
+
+	[
+		uuid(6B23250F-1816-11D3-9CC6-00105A68BAF2),
+		helpstring("LemmatizerRussian Class")
+	]
+	coclass LemmatizerRussian
+	{
+		[default] interface ILemmatizer;
+	};
+	[
+		uuid(6B232511-1816-11D3-9CC6-00105A68BAF2),
+		helpstring("LemmatizerEnglish Class"),
+		licensed
+	]
+	coclass LemmatizerEnglish
+	{
+		[default] interface ILemmatizer;
+	};
+
+	[
+		uuid(D26721AC-5BA9-4A1E-BBD0-A74CF86437E7),
+		helpstring("LemmatizerGerman Class"),
+		licensed
+	]
+	coclass LemmatizerGerman
+	{
+		[default] interface ILemmatizer;
+	};
+
+
+	[
+		uuid(34E94E25-6C26-11D3-9D4A-00105A68BAF2),
+		helpstring("PLMLineCollection Class"),
+		licensed
+	]
+	coclass PLMLineCollection
+	{
+		[default] interface IPLMLineCollection;
+	};
+
+};

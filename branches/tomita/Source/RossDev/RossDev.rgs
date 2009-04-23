@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		{844E4297-D53B-11D2-A6F9-A26387000000} = s 'RossDev'
+		'RossDev.EXE'
+		{
+			val AppID = s {844E4297-D53B-11D2-A6F9-A26387000000}
+		}
+	}
+}

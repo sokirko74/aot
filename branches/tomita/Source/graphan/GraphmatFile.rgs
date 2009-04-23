@@ -1,0 +1,26 @@
+HKCR
+{
+	Graphan.GraphmatFile.1 = s 'GraphmatFile Class'
+	{
+		CLSID = s '{ECDEABDA-0855-11D3-A75D-AA5D93000000}'
+	}
+	Graphan.GraphmatFile = s 'GraphmatFile Class'
+	{
+		CLSID = s '{ECDEABDA-0855-11D3-A75D-AA5D93000000}'
+		CurVer = s 'Graphan.GraphmatFile.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {ECDEABDA-0855-11D3-A75D-AA5D93000000} = s 'GraphmatFile Class'
+		{
+			ProgID = s 'Graphan.GraphmatFile.1'
+			VersionIndependentProgID = s 'Graphan.GraphmatFile'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{ECDEABCD-0855-11D3-A75D-AA5D93000000}'
+		}
+	}
+}
