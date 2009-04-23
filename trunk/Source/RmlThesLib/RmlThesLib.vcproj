@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="9,00"
 	Name="RmlThesLib"
 	ProjectGUID="{DDD77DCE-8A14-4307-8E0D-7FD1C56D52CD}"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform

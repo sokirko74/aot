@@ -1,0 +1,45 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorphWizardLib", "MorphWizardLib\MorphWizardLib.vcproj", "{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F} = {2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Morphwizard", "Morphwizard\Morphwizard.vcproj", "{C2FBE3F8-19C6-45E8-9499-513C0ECC5C6E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F} = {2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}
+		{E9B1B8FF-71A8-4721-AA54-61DE19CCB871} = {E9B1B8FF-71A8-4721-AA54-61DE19CCB871}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AgramtabLib", "AgramtabLib\AgramtabLib.vcproj", "{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		Release-Single-Threaded|Win32 = Release-Single-Threaded|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}.Debug|Win32.Build.0 = Debug|Win32
+		{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}.Release|Win32.ActiveCfg = Release|Win32
+		{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}.Release|Win32.Build.0 = Release|Win32
+		{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}.Release-Single-Threaded|Win32.ActiveCfg = Release-Single-Threaded|Win32
+		{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}.Release-Single-Threaded|Win32.Build.0 = Release-Single-Threaded|Win32
+		{C2FBE3F8-19C6-45E8-9499-513C0ECC5C6E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C2FBE3F8-19C6-45E8-9499-513C0ECC5C6E}.Debug|Win32.Build.0 = Debug|Win32
+		{C2FBE3F8-19C6-45E8-9499-513C0ECC5C6E}.Release|Win32.ActiveCfg = Release|Win32
+		{C2FBE3F8-19C6-45E8-9499-513C0ECC5C6E}.Release|Win32.Build.0 = Release|Win32
+		{C2FBE3F8-19C6-45E8-9499-513C0ECC5C6E}.Release-Single-Threaded|Win32.ActiveCfg = Release|Win32
+		{C2FBE3F8-19C6-45E8-9499-513C0ECC5C6E}.Release-Single-Threaded|Win32.Build.0 = Release|Win32
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}.Debug|Win32.Build.0 = Debug|Win32
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}.Release|Win32.ActiveCfg = Release|Win32
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}.Release|Win32.Build.0 = Release|Win32
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}.Release-Single-Threaded|Win32.ActiveCfg = Release-Single-Threaded|Win32
+		{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}.Release-Single-Threaded|Win32.Build.0 = Release-Single-Threaded|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -929,7 +929,7 @@ bool CheckEvaluationTime ()
 	tm today = RmlGetCurrentTime();
 
 	//  2008 year
-	if (today.tm_year > 108)
+	if (today.tm_year > 109)
 	{
 		ErrorMessage("Evaluation period is expired. Write to sokirko@yandex.ru!");
 		return false;
