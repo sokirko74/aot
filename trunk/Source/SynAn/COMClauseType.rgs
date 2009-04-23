@@ -1,0 +1,26 @@
+HKCR
+{
+	ClauseBuilder.COMClauseRoot.1 = s 'COMClauseRoot Class'
+	{
+		CLSID = s '{E022CF54-037F-11D3-8C22-00105A68ADF3}'
+	}
+	ClauseBuilder.COMClauseRoot = s 'COMClauseRoot Class'
+	{
+		CLSID = s '{E022CF54-037F-11D3-8C22-00105A68ADF3}'
+		CurVer = s 'ClauseBuilder.COMClauseRoot.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E022CF54-037F-11D3-8C22-00105A68ADF3} = s 'COMClauseRoot Class'
+		{
+			ProgID = s 'ClauseBuilder.COMClauseRoot.1'
+			VersionIndependentProgID = s 'ClauseBuilder.COMClauseRoot'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{79995331-E12C-11D2-8BE2-00105A68ADF3}'
+		}
+	}
+}

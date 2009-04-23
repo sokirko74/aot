@@ -1,0 +1,26 @@
+HKCR
+{
+	ClauseBuilder.Relation.1 = s 'Relation Class'
+	{
+		CLSID = s '{CB81A1EB-F8C1-11D2-8C0E-00105A68ADF3}'
+	}
+	ClauseBuilder.Relation = s 'Relation Class'
+	{
+		CLSID = s '{CB81A1EB-F8C1-11D2-8C0E-00105A68ADF3}'
+		CurVer = s 'ClauseBuilder.Relation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {CB81A1EB-F8C1-11D2-8C0E-00105A68ADF3} = s 'Relation Class'
+		{
+			ProgID = s 'ClauseBuilder.Relation.1'
+			VersionIndependentProgID = s 'ClauseBuilder.Relation'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{79995331-E12C-11D2-8BE2-00105A68ADF3}'
+		}
+	}
+}
