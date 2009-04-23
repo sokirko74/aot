@@ -237,7 +237,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordDatBin", "WordDatBin\Wo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SynanCGI", "SynanCGI\SynanCgi.vcproj", "{2F9AFAC4-1248-40B4-8BD8-F8DF05EBC9DB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestLemmatizerCOM", "Technical\TestLemmatizerCOM\TestLemmatizerCOM.vcproj", "{2AD59B55-D9F1-4D8E-892E-82E160108185}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestLemmatizerCOM", "TestLemmatizerCOM\TestLemmatizerCOM.vcproj", "{2AD59B55-D9F1-4D8E-892E-82E160108185}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorphGen", "MorphGen\MorphGen.vcproj", "{3CFE48A6-B351-4615-8EBB-1AF85F03A98E}"
 	ProjectSection(ProjectDependencies) = postProject
