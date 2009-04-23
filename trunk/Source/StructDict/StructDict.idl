@@ -1,0 +1,294 @@
+// StructDict.idl : IDL source for StructDict.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (StructDict.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+    [
+		object,
+		uuid(FD4C1F31-2608-11D3-A78E-9089CA000000),
+		dual,
+		helpstring("IDomain Interface"),
+		pointer_default(unique)
+	]
+	interface IDomain : IDispatch
+	{
+		[propget, id(1), helpstring("property DomStr")] HRESULT DomStr([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("property DomStr")] HRESULT DomStr([in] BSTR newVal);
+		[propget, id(2), helpstring("property Source")] HRESULT Source([out, retval] BYTE *pVal);
+		[propput, id(2), helpstring("property Source")] HRESULT Source([in] BYTE newVal);
+		[propget, id(3), helpstring("property PartsSize")] HRESULT PartsSize([out, retval] BYTE *pVal);
+		[propget, id(4), helpstring("property Parts")] HRESULT Parts([in] BYTE PartNo, [out, retval] BYTE *pVal);
+		[propput, id(4), helpstring("property Parts")] HRESULT Parts([in] BYTE PartNo, [in] BYTE newVal);
+		[propget, id(5), helpstring("property Format")] HRESULT Format([out, retval] BSTR *pVal);
+		[propput, id(5), helpstring("property Format")] HRESULT Format([in] BSTR newVal);
+		[propget, id(6), helpstring("property IsFree")] HRESULT IsFree([out, retval] BOOL *pVal);
+		[propput, id(6), helpstring("property IsFree")] HRESULT IsFree([in] BOOL newVal);
+		[propget, id(7), helpstring("property Items")] HRESULT Items([in] LONG index, [out, retval] BSTR *pVal);
+		[id(8), helpstring("method GetItemsCount")] HRESULT GetItemsCount([retval, out] LONG * result);
+		[id(9), helpstring("method FindItem")] HRESULT FindItem([in] BSTR ItemStr, [retval, out] LONG* index);
+		[propget, id(10), helpstring("property IsDelim")] HRESULT IsDelim([out, retval] BOOL *pVal);
+		[propput, id(10), helpstring("property IsDelim")] HRESULT IsDelim([in] BOOL newVal);
+	};
+	
+
+	[
+		object,
+		uuid(3F269911-246D-11D3-A78C-067993000000),
+		dual,
+		helpstring("ISignat Interface"),
+		pointer_default(unique)
+	]
+	interface ISignat : IDispatch
+	{
+		[propget, id(1), helpstring("property FormatForPrintf")] HRESULT FormatForPrintf([out, retval] BSTR *pVal);
+		[propget, id(2), helpstring("property Name")] HRESULT Name([out, retval] BSTR *pVal);
+		[propput, id(2), helpstring("property Name")] HRESULT Name([in] BSTR newVal);
+		[propget, id(3), helpstring("property DomainString")] HRESULT DomainString([out, retval] BSTR *pVal);
+		[propput, id(3), helpstring("property DomainString")] HRESULT DomainString([in] BSTR newVal);
+		[propget, id(4), helpstring("property OrderNo")] HRESULT OrderNo([out, retval] long *pVal);
+		[propput, id(4), helpstring("property OrderNo")] HRESULT OrderNo([in] long newVal);
+		[propget, id(5), helpstring("property DomsWithDelims")] HRESULT DomsWithDelims([in] BYTE index, [out, retval] BYTE *pVal);
+		[propput, id(5), helpstring("property DomsWithDelims")] HRESULT DomsWithDelims([in] BYTE index, [in] BYTE newVal);
+		[propget, id(6), helpstring("property DomsWithDelimsCount")] HRESULT DomsWithDelimsCount([out, retval] BYTE *pVal);
+		[propput, id(6), helpstring("property DomsWithDelimsCount")] HRESULT DomsWithDelimsCount([in] BYTE newVal);
+		[propget, id(7), helpstring("property Doms")] HRESULT Doms([in] BYTE index, [out, retval] BYTE *pVal);
+		[propput, id(7), helpstring("property Doms")] HRESULT Doms([in] BYTE index, [in] BYTE newVal);
+		[propget, id(8), helpstring("property DomsCount")] HRESULT DomsCount([out, retval] BYTE *pVal);
+		[propput, id(8), helpstring("property DomsCount")] HRESULT DomsCount([in] BYTE newVal);
+		[propget, id(9), helpstring("property SignatId")] HRESULT SignatId([out, retval] long *pVal);
+		[propput, id(9), helpstring("property SignatId")] HRESULT SignatId([in] long newVal);
+		[propget, id(10), helpstring("property FormatForDomain")] HRESULT FormatForDomain([out, retval] BSTR *pVal);
+		[id(11), helpstring("method CreateTempSignat")] HRESULT CreateTempSignat();
+	};
+
+   [
+		object,
+		uuid(FD4C1F35-2608-11D3-A78E-9089CA000000),
+		dual,
+		helpstring("IField Interface"),
+		pointer_default(unique)
+	]
+	interface IField : IDispatch
+	{
+		[propget, id(1), helpstring("property FieldStr")] HRESULT FieldStr([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("property FieldStr")] HRESULT FieldStr([in] BSTR newVal);
+		[propget, id(2), helpstring("property Type")] HRESULT Type([out, retval] BYTE *pVal);
+		[propput, id(2), helpstring("property Type")] HRESULT Type([in] BYTE newVal);
+		[propget, id(3), helpstring("property OrderId")] HRESULT OrderId([out, retval] LONG *pVal);
+		[propput, id(3), helpstring("property OrderId")] HRESULT OrderId([in] LONG newVal);
+		[propget, id(4), helpstring("property IsApplicToActant")] HRESULT IsApplicToActant([out, retval] BOOL *pVal);
+		[propput, id(4), helpstring("property IsApplicToActant")] HRESULT IsApplicToActant([in] BOOL newVal);
+		[propget, id(5), helpstring("property Signats")] HRESULT Signats([in] BYTE SignatNo, [out, retval] ISignat* *pVal);
+		[propput, id(5), helpstring("property Signats")] HRESULT Signats([in] BYTE SignatNo, [in] ISignat* newVal);
+		[propget, id(6), helpstring("property SignatCount")] HRESULT SignatCount([out, retval] BYTE *pVal);
+		[id(8), helpstring("method DeleteLastSignat")] HRESULT DeleteLastSignat(void);
+	};
+
+	[
+		object,
+		uuid(B3C7D666-2C57-11D3-A7A1-80F9E5000000),
+		dual,
+		helpstring("ITextField Interface"),
+		pointer_default(unique)
+	]
+	interface ITextField : IDispatch
+	{
+		[propget, id(1), helpstring("property StartLine")] HRESULT StartLine([out, retval] DWORD *pVal);
+		[propput, id(1), helpstring("property StartLine")] HRESULT StartLine([in] DWORD newVal);
+		[propget, id(2), helpstring("property EndLine")] HRESULT EndLine([out, retval] DWORD *pVal);
+		[propput, id(2), helpstring("property EndLine")] HRESULT EndLine([in] DWORD newVal);
+		[propget, id(3), helpstring("property FieldNo")] HRESULT FieldNo([out, retval] BYTE *pVal);
+		[propput, id(3), helpstring("property FieldNo")] HRESULT FieldNo([in] BYTE newVal);
+		[propget, id(4), helpstring("property LeafId")] HRESULT LeafId([out, retval] BYTE *pVal);
+		[propput, id(4), helpstring("property LeafId")] HRESULT LeafId([in] BYTE newVal);
+		[propget, id(5), helpstring("property BracketLeafId")] HRESULT BracketLeafId([out, retval] BYTE *pVal);
+		[propput, id(5), helpstring("property BracketLeafId")] HRESULT BracketLeafId([in] BYTE newVal);
+	};
+
+	interface IDictionary;
+
+	[
+		object,
+		uuid(B3C7D664-2C57-11D3-A7A1-80F9E5000000),
+		dual,
+		helpstring("ITempArticle Interface"),
+		pointer_default(unique)
+	]
+	interface ITempArticle : IDispatch
+	{
+		[propget, id(1), helpstring("property UnitStr")] HRESULT UnitStr([out, retval] BSTR *pVal);
+		[propget, id(2), helpstring("property MeanNum")] HRESULT MeanNum([out, retval] BYTE *pVal);
+		[propget, id(3), helpstring("property Fields")] HRESULT Fields([in] long FieldNo, [out, retval] ITextField* *pVal);
+		[id(5), helpstring("method ReadFromDictionary")] HRESULT ReadFromDictionary([in] WORD UnitNo, [in] BOOL VisualOrder, [in] BOOL ReadOnly);
+		[propget, id(6), helpstring("property ArticleStr")] HRESULT ArticleStr([out, retval] BSTR *pVal);
+		[propput, id(6), helpstring("property ArticleStr")] HRESULT ArticleStr([in] BSTR newVal);
+		[id(7), helpstring("method MarkUp")] HRESULT MarkUp();
+		[id(8), helpstring("method GetFieldsSize")] HRESULT GetFieldsSize([retval,out] WORD* result);
+		[id(9), helpstring("method BuildCortegeList")] HRESULT BuildCortegeList();
+		[id(10), helpstring("method WriteToDictionary")] HRESULT WriteToDictionary();
+		[id(11), helpstring("method IsModified")] HRESULT IsModified([retval, out] BOOL* result);
+		[id(12), helpstring("method GetCortege")] HRESULT GetCortege([in]LONG i, [out] BYTE* FieldNo, [out] BYTE* SignatNo, [out] BYTE*LevelId, [out] BYTE* LeafId, [out] BYTE* BracketLeafId);
+		[id(13), helpstring("method GetCortegesSize")] HRESULT GetCortegesSize([retval, out] LONG* result);
+		[id(14), helpstring("method IntersectByFields")] HRESULT IntersectByFields([in] ITempArticle* Article, [retval, out] LONG* result  );
+		[id(15), helpstring("method AddArticle")] HRESULT AddArticle([in]ITempArticle* Article);
+		[id(16), helpstring("method IsPartOf")] HRESULT IsPartOf([in] ITempArticle* Article, [in] BOOL UseWildCards, [retval, out] BOOL* result);
+		[id(17), helpstring("method AttachToDictionary")] HRESULT AttachToDictionary([in]IDictionary* Dictionary);
+		[id(18), helpstring("method GetCortegeItem")] HRESULT GetCortegeItem([in] LONG CortegeNo, [in] BYTE PositionInCortege, [retval, out] LONG* ItemId);
+		[propget, id(19), helpstring("property LastError")] HRESULT LastError([out, retval] BSTR *pVal);
+		[propget, id(20), helpstring("property ErrorLine")] HRESULT ErrorLine([out, retval] int* pVal);
+	};
+	
+	
+
+    [
+		object,
+		uuid(FCD1516D-23C4-11D3-A78B-0EEA0E000000),
+		dual,
+		helpstring("IDictionary Interface"),
+		pointer_default(unique)
+	]
+	interface IDictionary : IDispatch
+	{
+		[id(1), helpstring("method LoadWithoutComments")] HRESULT LoadWithoutComments([in] BSTR Path);
+		[id(2), helpstring("method GetUnitsSize")] HRESULT GetUnitsSize([retval, out] WORD* result);
+		[id(3), helpstring("method GetUnitStr")] HRESULT GetUnitStr([in] WORD UnitNo, [retval, out] BSTR* result);
+		[id(4), helpstring("method GetUnitMeanNum")] HRESULT GetUnitMeanNum([in] WORD UnitNo, [retval, out] BYTE* MeanNum);
+		[id(5), helpstring("method GetUnitStartPos")] HRESULT GetUnitStartPos([in] WORD UnitNo, [retval, out] LONG*  result);
+		[id(6), helpstring("method GetUnitEndPos")] HRESULT GetUnitEndPos([in] WORD UnitNo, [retval, out] LONG* result);
+		[id(7), helpstring("method GetUnitSelected")] HRESULT GetUnitSelected([in] WORD UnitNo, [retval, out] BOOL* result);
+		[id(8), helpstring("method GetUnitAuthor")] HRESULT GetUnitAuthor([in] WORD UnitNo, [retval, out] BSTR* result);
+		[id(9), helpstring("method IsEmptyArticle")] HRESULT IsEmptyArticle([in] WORD UnitNo, [retval, out] BOOL* result);
+		[id(10), helpstring("method GetCortegeFieldNo")] HRESULT GetCortegeFieldNo([in] LONG CortegeNo, [retval, out] BYTE* result);
+		[id(11), helpstring("method GetCortegeSignatNo")] HRESULT GetCortegeSignatNo([in] LONG CortegeNo, [retval, out] BYTE* result);
+		[id(12), helpstring("method GetCortegeLevelId")] HRESULT GetCortegeLevelId([in] LONG CortegeNo, [retval, out] BYTE* result);
+		[id(13), helpstring("method GetCortegeLeafId")] HRESULT GetCortegeLeafId([in] LONG CortegeNo, [retval, out] BYTE* result);
+		[id(14), helpstring("method GetCortegeItem")] HRESULT GetCortegeItem([in] LONG CortegeNo, [in] BYTE PositionInCortege, [retval, out] LONG* ItemId);
+		[id(15), helpstring("method GetSelectedUnitsSize")] HRESULT GetSelectedUnitsSize([retval, out] LONG* result);
+		[id(16), helpstring("method LocateUnit")] HRESULT LocateUnit([in] BSTR UnitStr, [in] BYTE MeanNum, [retval,out] WORD* result);
+		[id(17), helpstring("method GetItemNoByItemStr")] HRESULT GetItemNoByItemStr([in] BSTR ItemStr, [in] BYTE DomNo, [retval, out] LONG* result);
+		[id(18), helpstring("method GetDomItemStr")] HRESULT GetDomItemStr([in] LONG ItemNo, [retval, out] BSTR* result);
+		[id(20), helpstring("method DelCorteges")] HRESULT DelCorteges([in]LONG StartPos, [in]LONG EndPos);
+		[id(21), helpstring("method GetCortegesSize")] HRESULT GetCortegesSize([retval,out] LONG* result);
+		[id(23), helpstring("method SetUnitStartPos")] HRESULT SetUnitStartPos([in] WORD UnitNo, [in] LONG NewValue);
+		[id(24), helpstring("method SetUnitEndPos")] HRESULT SetUnitEndPos([in] WORD UnitNo, [in] LONG NewValue);
+		[id(25), helpstring("method SetUnitCurrentTime")] HRESULT SetUnitCurrentTime([in] WORD UnitNo);
+		[id(27), helpstring("method GetFieldNoByFieldStr")] HRESULT GetFieldNoByFieldStr([in] BSTR Str, [retval, out]BYTE* result);
+		[id(28), helpstring("method GetLexPlusDomNo")] HRESULT GetLexPlusDomNo([retval, out] BYTE* result);
+		[id(29), helpstring("method GetDomItemsSize")] HRESULT GetDomItemsSize([retval, out] LONG* result);
+		[id(30), helpstring("method GetDomItemDomNo")] HRESULT GetDomItemDomNo([in] LONG ItemNo, [retval, out] BYTE* result);
+		[id(31), helpstring("method InsertDomItem")] HRESULT InsertDomItem([in] BSTR ItemStr, [in] BYTE DomNo, [retval, out] int* ItemNo);
+		[id(32), helpstring("method BuildSignat")] HRESULT BuildSignat([in]ISignat* Signat, [in] BSTR DomainString, [in] BSTR Name);
+		[id(33), helpstring("method DelDomItem")] HRESULT DelDomItem([in] LONG ItemNo);
+		[id(34), helpstring("method GetFieldsSize")] HRESULT GetFieldsSize([retval,out] BYTE* result );
+		[id(35), helpstring("method GetDomainNoByDomStr")] HRESULT GetDomainNoByDomStr([in] BSTR DomStr, [retval, out] BYTE* result);
+		[id(36), helpstring("method InsertUnit")] HRESULT InsertUnit([in] BSTR UnitStr, [in] BYTE MeanNum, [retval, out] LONG* result);
+		[id(37), helpstring("method SetUnitCommentStr")] HRESULT SetUnitCommentStr([in] WORD UnitNo, [in] BSTR Str);
+		[id(38), helpstring("method SetUnitSelected")] HRESULT SetUnitSelected([in] WORD UnitNo, [in] BOOL Selected);
+		[id(39), helpstring("method Save")] HRESULT Save();
+		[id(40), helpstring("method LoadUnitComments")] HRESULT LoadUnitComments();
+		[id(41), helpstring("method GetFieldDomainNo")] HRESULT GetFieldDomainNo([retval, out] BYTE* FieldNo);
+		[id(42), helpstring("method GetDomainsSize")] HRESULT GetDomainsSize([retval, out] BYTE* result);
+		[id(43), helpstring("method BuildFormats")] HRESULT BuildFormats();
+		[id(44), helpstring("method GetSelectedUnitNo")] HRESULT GetSelectedUnitNo([in] WORD UnitNo, [retval,out] WORD* result);
+		[id(45), helpstring("method GetUnitModifTimeStr")] HRESULT GetUnitModifTimeStr([in] WORD UnitNo, [retval,out] BSTR* result);
+		[id(46), helpstring("method SetUnitAuthor")] HRESULT SetUnitAuthor([in] WORD UnitNo, [in] BSTR Author);
+		[id(47), helpstring("method UnitsLowerBound")] HRESULT UnitsLowerBound([in] BSTR UnitStr, [retval, out] WORD* UniNo);
+		[id(48), helpstring("method DelUnit")] HRESULT DelUnit([in] WORD UnitNo);
+		[id(49), helpstring("method GetUnitCommentStr")] HRESULT GetUnitCommentStr([in] WORD UnitNo, [retval, out] BSTR* result);
+		[id(50), helpstring("method GetWildCardDomItemNo")] HRESULT GetWildCardDomItemNo([retval, out] LONG* result);
+		[id(51), helpstring("method SetUnitStr")] HRESULT SetUnitStr([in] WORD UnitNo, [in]  BSTR UnitStr);
+		[propget, id(54), helpstring("property Domains")] HRESULT Domains([in] BYTE DomNo, [out, retval] IDomain* *pVal);
+		[propput, id(54), helpstring("property Domains")] HRESULT Domains([in] BYTE DomNo, [in] IDomain* newVal);
+		[propget, id(55), helpstring("property Fields")] HRESULT Fields([in] BYTE FieldNo, [out, retval] IField **pVal);
+		[propput, id(55), helpstring("property Fields")] HRESULT Fields([in] BYTE FieldNo, [in] IField* newVal);
+		[id(57), helpstring("method IncludeArticle")] HRESULT IncludeArticle([in] WORD UnitNo, [in] BSTR Article, [retval, out] BOOL* result);
+		[id(58), helpstring("method UpdateConstDomains")] HRESULT UpdateConstDomains();
+		[id(62), helpstring("method InitRusConsts")] HRESULT InitRusConsts();
+		[propget, id(63), helpstring("property MaxNumDom")] HRESULT MaxNumDom([out, retval] BYTE *pVal);
+		[id(64), helpstring("method ClearUnit")] HRESULT ClearUnit([in] WORD UnitNo);
+		[id(65), helpstring("method CheckArticleError")] HRESULT CheckArticleError([in] BSTR Article, [out] BSTR* Error, [out, retval] BOOL* Result);
+		[propget, id(66), helpstring("property Name")] HRESULT Name([out, retval] BSTR *pVal);
+		[id(67), helpstring("method GetCortegeBracketLeafId")] HRESULT GetCortegeBracketLeafId([in] long CortegeNo, [out,retval] long* BracketLeafId);
+		[id(68), helpstring("method SetUnitModifTimeStr")] HRESULT SetUnitModifTimeStr([in] WORD UnitNo, [in] BSTR TimeStr);
+		[propget, id(69), helpstring("property UnitEditor")] HRESULT UnitEditor([in] WORD UnitNo, [out, retval] BSTR *pVal);
+		[propput, id(69), helpstring("property UnitEditor")] HRESULT UnitEditor([in] WORD UnitNo, [in] BSTR newVal);
+		[id(70), helpstring("method LocateUnit_Inproc")] HRESULT LocateUnit_Inproc([in]char* UnitStr, [in] BYTE MeanNum, [out, retval]  WORD* UnitNo);
+		[id(71), helpstring("method DelAllItemsInTheDomain")] HRESULT DelAllItemsInTheDomain([in] BYTE DomNo);
+		[propget, id(72), helpstring("property bDontLoadExamples")] HRESULT bDontLoadExamples([out, retval] BOOL *pVal);
+		[propput, id(72), helpstring("property bDontLoadExamples")] HRESULT bDontLoadExamples([in] BOOL newVal);
+		[id(73), helpstring("method GetDomItemStr_Inproc")] HRESULT GetDomItemStr_Inproc([in] LONG ItemNo, [retval, out] LONG* result);
+		[propget, id(74), helpstring("property RussianFields")] HRESULT RussianFields([out, retval] BOOL* pVal);
+		[propput, id(74), helpstring("property RussianFields")] HRESULT RussianFields([in] BOOL newVal);
+		[id(75), helpstring("method ImportFromText")] HRESULT ImportFromText([in] BSTR FileName, [in] BOOL Simulating, [in] int ConflictSolver, [in] int StartEntry, [out,retval] BSTR* Messages);
+		[id(76), helpstring("method GetUnitTextHeader")] HRESULT GetUnitTextHeader([in] WORD UnitNo, [out,retval] BSTR* Result);
+	};
+	
+	
+   	
+	
+[
+	uuid(FCD15161-23C4-11D3-A78B-0EEA0E000000),
+	version(1.0),
+	helpstring("StructDict 1.0 Type Library")
+]
+library STRUCTDICTLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	
+	[
+		uuid(FCD1516E-23C4-11D3-A78B-0EEA0E000000),
+
+		helpstring("Dictionary Class")
+	]
+	coclass Dictionary
+	{
+		[default] interface IDictionary;
+	};
+	[
+		uuid(3F269912-246D-11D3-A78C-067993000000),
+		helpstring("Signat Class")
+	]
+	coclass Signat
+	{
+		[default] interface ISignat;
+	};
+	
+	[
+		uuid(FD4C1F32-2608-11D3-A78E-9089CA000000),
+		helpstring("Domain Class")
+	]
+	coclass Domain
+	{
+		[default] interface IDomain;
+	};
+	[
+		uuid(FD4C1F36-2608-11D3-A78E-9089CA000000),
+		helpstring("Field Class")
+	]
+	coclass Field
+	{
+		[default] interface IField;
+	};
+	[
+		uuid(B3C7D665-2C57-11D3-A7A1-80F9E5000000),
+		helpstring("TempArticle Class")
+	]
+	coclass TempArticle
+	{
+		[default] interface ITempArticle;
+	};
+	[
+		uuid(B3C7D667-2C57-11D3-A7A1-80F9E5000000),
+		helpstring("TextField Class")
+	]
+	coclass TextField
+	{
+		[default] interface ITextField;
+	};
+
+};
