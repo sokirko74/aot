@@ -86,3 +86,4 @@ STDMETHODIMP CCOMRelation::get_TargetItemNo(long *pVal)
 	return S_OK;
 }
 
+//tomita
