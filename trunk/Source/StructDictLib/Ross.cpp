@@ -26,13 +26,17 @@ inline size_t save_to_bytes(const CStructEntry& i, BYTE* buf)
 	buf += save_to_bytes(i.m_EntryId, buf);
 	memcpy(buf, i.m_EntryStr, EntryStrSize);
 	buf += EntryStrSize;
-	buf += save_to_bytes(i.m_MeanNum, buf);
+	
+	// cast to int to pad to 4 bytes (since we write ints
+	// afterwards)
+	buf += save_to_bytes((int)i.m_MeanNum, buf);
+	
 	buf += save_to_bytes(i.m_StartCortegeNo, buf);
 	buf += save_to_bytes(i.m_LastCortegeNo, buf);
 	buf += save_to_bytes((BYTE)i.m_bSelected, buf);
 	buf += save_to_bytes(i.__dummy, buf);
 	memcpy(buf, i.m_AuthorStr, AuthorNameSize);
-	return get_size_in_bytes(i);
+	return get_size_in_bytes(i)+3;
 };
 
 inline size_t restore_from_bytes(CStructEntry& i, const BYTE* buf)
@@ -40,13 +44,18 @@ inline size_t restore_from_bytes(CStructEntry& i, const BYTE* buf)
 	buf += restore_from_bytes(i.m_EntryId, buf);
 	memcpy(i.m_EntryStr, buf , EntryStrSize);
 	buf += EntryStrSize;
-	buf += restore_from_bytes(i.m_MeanNum, buf);
+	
+	// m_MeanNum is padded to 4 bytes
+	int meanNum;
+	buf += restore_from_bytes(meanNum, buf);
+	i.m_MeanNum = meanNum;
+	
 	buf += restore_from_bytes(i.m_StartCortegeNo, buf);
 	buf += restore_from_bytes(i.m_LastCortegeNo, buf);
 	buf += restore_from_bytes((BYTE&)i.m_bSelected, buf);
 	buf += restore_from_bytes(i.__dummy, buf);
 	memcpy(i.m_AuthorStr, buf, AuthorNameSize);
-	return get_size_in_bytes(i);
+	return get_size_in_bytes(i)+3;
 };
 
 //=========================================================

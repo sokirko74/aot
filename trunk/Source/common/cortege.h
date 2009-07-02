@@ -8,6 +8,7 @@
 
 #include <assert.h>
 #include "../common/utilit.h"
+#include "../common/bserialize.h"
 
 const BYTE ErrUChar	= 254;
 
@@ -149,28 +150,39 @@ size_t get_size_in_bytes (const TBasicCortege<MaxNumDom>& t)
 template <int MaxNumDom>
 size_t save_to_bytes(const TBasicCortege<MaxNumDom>& i, BYTE* buf)
 {
-	buf += save_to_bytes(i.m_FieldNo, buf);
-	buf += save_to_bytes(i.m_SignatNo, buf);
-	buf += save_to_bytes(i.m_LevelId, buf);
-	buf += save_to_bytes(i.m_LeafId, buf);
-	buf += save_to_bytes(i.m_BracketLeafId, buf);
+    // We have five bytes to serialize, do some byte shifting magic
+    // in order to round it to 8 bytes (multiple of 4, needed on SPARC).
+    
+    int a = i.m_FieldNo << 24 | i.m_SignatNo << 16 | i.m_LevelId << 8
+          | i.m_LeafId;
+    int b = i.m_BracketLeafId;
+    
+    buf += save_to_bytes(a, buf);
+    buf += save_to_bytes(b, buf);
+
 	for (int j = 0;  j < MaxNumDom; j++)
 		buf += save_to_bytes(i.m_DomItemNos[j], buf);
 
-	return get_size_in_bytes(i);
+	return get_size_in_bytes(i)+3;
 };
 
 template <int MaxNumDom>
 size_t restore_from_bytes(TBasicCortege<MaxNumDom>& i, const BYTE* buf)
 {
-	buf += restore_from_bytes(i.m_FieldNo, buf);
-	buf += restore_from_bytes(i.m_SignatNo, buf);
-	buf += restore_from_bytes(i.m_LevelId, buf);
-	buf += restore_from_bytes(i.m_LeafId, buf);
-	buf += restore_from_bytes(i.m_BracketLeafId, buf);
+    int a, b;
+    buf += restore_from_bytes(a, buf);
+    buf += restore_from_bytes(b, buf);
+    
+	i.m_FieldNo = a >> 24;
+	i.m_SignatNo = (a >> 16) & 0xf;
+    i.m_LevelId = (a >> 8) & 0xf;
+    i.m_LeafId = a & 0xf;
+    i.m_BracketLeafId = b;
+    
 	for (int j = 0;  j < MaxNumDom; j++)
 		buf += restore_from_bytes(i.m_DomItemNos[j], buf);
-	return get_size_in_bytes(i);
+
+	return get_size_in_bytes(i)+3;
 };
 
 

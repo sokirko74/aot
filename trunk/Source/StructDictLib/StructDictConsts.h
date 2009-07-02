@@ -6,7 +6,11 @@
 #define StructDictsConsts
 
 	const	DWORD	MaxDomensUnionSize = 20;
-	const	DWORD	AuthorNameSize = 10;
+	
+	// This size should be a multiple of 4 in order
+	// not to break strict aliasing (SPARC).
+	const	DWORD	AuthorNameSize = 12;
+	
 
 	// максимальное число актантов 
 	const	BYTE	MaxNumAct = 7;
