@@ -144,7 +144,8 @@ size_t get_size_in_bytes (const TBasicCortege<MaxNumDom>& t)
 			+ get_size_in_bytes(t.m_LevelId) 
 			+ get_size_in_bytes(t.m_LeafId) 
 			+ get_size_in_bytes(t.m_BracketLeafId) 
-			+ get_size_in_bytes(t.m_DomItemNos[0])*MaxNumDom; 
+			+ get_size_in_bytes(t.m_DomItemNos[0])*MaxNumDom
+            + 3; 
 };
 
 template <int MaxNumDom>
@@ -163,8 +164,9 @@ size_t save_to_bytes(const TBasicCortege<MaxNumDom>& i, BYTE* buf)
 	for (int j = 0;  j < MaxNumDom; j++)
 		buf += save_to_bytes(i.m_DomItemNos[j], buf);
 
-	return get_size_in_bytes(i)+3;
+	return get_size_in_bytes(i);
 };
+
 
 template <int MaxNumDom>
 size_t restore_from_bytes(TBasicCortege<MaxNumDom>& i, const BYTE* buf)
@@ -172,17 +174,16 @@ size_t restore_from_bytes(TBasicCortege<MaxNumDom>& i, const BYTE* buf)
     int a, b;
     buf += restore_from_bytes(a, buf);
     buf += restore_from_bytes(b, buf);
-    
 	i.m_FieldNo = a >> 24;
-	i.m_SignatNo = (a >> 16) & 0xf;
-    i.m_LevelId = (a >> 8) & 0xf;
-    i.m_LeafId = a & 0xf;
+	i.m_SignatNo = (a >> 16) & 0xFF;
+    i.m_LevelId = (a >> 8) & 0xFF;
+    i.m_LeafId = a & 0xFF;
     i.m_BracketLeafId = b;
     
 	for (int j = 0;  j < MaxNumDom; j++)
 		buf += restore_from_bytes(i.m_DomItemNos[j], buf);
 
-	return get_size_in_bytes(i)+3;
+	return get_size_in_bytes(i);
 };
 
 
