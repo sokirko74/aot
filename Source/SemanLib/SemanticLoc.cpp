@@ -33,6 +33,8 @@ bool CRusSemStructure :: IsLocNode(size_t NodeNo) const
 				||  (    (N.m_Colloc.m_Type  == ThesType)
 					 && (N.m_Colloc.GetThesInterp().m_ThesaurusId  == LocThes)
 			       )
+                   ||  (N.HasGrammems(_QM(rToponym) )
+			       )
 ;
   if (     Result
 	    && (N.GetType() == LocRoss) 
