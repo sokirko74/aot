@@ -95,30 +95,6 @@ bool CFormatCaller::try_and_step_forward(CFormatCall* FC, CGroup& G, int rule)
 };
 
 
-void CFormatCaller::change_if_has_obor_inside(CGroup& group, vector<CPeriod>& oborots)
-{
-	int coef = 0;
-	bool b_first_word_in_termin = false; 
-	long coef1 = 0, coef2 = 0;
-
-	for( int i = 0 ; i < oborots.size() ; i++ )
-	{
-
-		if( oborots[i].m_iLastWord <= group.m_iLastWord)
-			coef2 += oborots[i].size() - 1;
-
-		if( oborots[i].m_iFirstWord < group.m_iFirstWord)
-			coef1 += oborots[i].size() - 1;
-	}
-
-	group.m_iFirstWord += coef1;
-	group.m_iLastWord  += coef2;
-	
-}
-
-
-
-
 int CFormatCaller::main_analyse()
 {
 	int WordNo;
@@ -249,32 +225,6 @@ int FindInList(const char* arrWords, int iLen, const char* word_upper)
 
 
 
-// функция идет по теормину и ищет все обороты, которые полностью вкладываются  в этот термин (сложные союзы)
-// если термин имеет непустое пересечение с каким-то оборотом, но не включает полностью его, тогда 
-// возвращается  false (внутри таких терминов группы строятся не будут),  в пртивном случае возвращается true
-static bool get_oborots_in_termin(const CFormatCaller& F, const SFoundTermin& termin, vector<CPeriod>& oborots)
-{
-	CPeriod obor;
-	bool bInOborot = false;
-	assert (termin.m_iLastWord < F.sent.size());
-	for( int i = termin.m_iFirstWord; i <= termin.m_iLastWord; i++ )
-	{		
-		if(F.sent[i].HasFlag(fl_oborot1) )	
-		{
-			obor.m_iFirstWord = i;
-			bInOborot = true;
-		}
-		if(F.sent[i].HasFlag(fl_oborot2) )	
-		{
-			if (!bInOborot) return false;
-			obor.m_iLastWord = i;
-			oborots.push_back(obor);
-			bInOborot = false;
-		}
-
-	}	
-	return !bInOborot;
-}
 
 
 bool  CFormatCaller::create_groups_from_termin(const SFoundTermin& FoundTermin)
@@ -282,11 +232,18 @@ bool  CFormatCaller::create_groups_from_termin(const SFoundTermin& FoundTermin)
 	if (FoundTermin.size()==1) return false;
 
 	const CGroups* pModel = FoundTermin.m_pModel;
-	vector<CPeriod> oborots;
-	if (!get_oborots_in_termin(*this, FoundTermin, oborots)) return false;
 
-	//группы должны быть в координатах клаузы
-	int iCoef = FoundTermin.m_iFirstWord;
+    vector<size_t> ThesCoord2Real;
+
+    int iCoef = FoundTermin.m_iFirstWord;
+    int Delta = iCoef;
+    for (size_t i=FoundTermin.m_iFirstWord; i<= FoundTermin.m_iLastWord; i++) {
+        ThesCoord2Real.push_back(i);
+        if (sent[i].HasFlag(fl_oborot1)) 
+            for (; i<=FoundTermin.m_iLastWord; i++) 
+                if (sent[i].HasFlag(fl_oborot2))
+                    break;
+    }
 
 	CIntVector groups_num;
 	int GroupNo = 0;
@@ -294,7 +251,7 @@ bool  CFormatCaller::create_groups_from_termin(const SFoundTermin& FoundTermin)
 	{
 		CGroup new_group;		
 		const CGroup& group = pModel->GetGroups()[GroupNo];
-		int save_first_word = group.m_iFirstWord  + iCoef;
+		int save_first_word = ThesCoord2Real[group.m_iFirstWord];
 		bool bGoodGroup = true;
 		int RuleNo = GetRuleByGroupTypeForThesaurus(group.m_GroupType);
 		if (RuleNo != -1)
@@ -307,15 +264,12 @@ bool  CFormatCaller::create_groups_from_termin(const SFoundTermin& FoundTermin)
 		}
 		else
 		{
-			new_group.m_iFirstWord = group.m_iFirstWord + iCoef;
-			new_group.m_iLastWord = group.m_iLastWord + iCoef;
+            new_group.m_iFirstWord = ThesCoord2Real[group.m_iFirstWord];
+			new_group.m_iLastWord = ThesCoord2Real[group.m_iLastWord];
 			new_group.m_GroupType = group.m_GroupType;
-			new_group.m_MainGroup.m_iFirstWord = group.m_MainGroup.m_iFirstWord + iCoef;
-			new_group.m_MainGroup.m_iLastWord  = group.m_MainGroup.m_iLastWord + iCoef;
+			new_group.m_MainGroup.m_iFirstWord = ThesCoord2Real[group.m_MainGroup.m_iFirstWord];
+			new_group.m_MainGroup.m_iLastWord  = ThesCoord2Real[group.m_MainGroup.m_iLastWord];
 			SetMainWordNo(new_group);
-			if( oborots.size() > 0 )
-				change_if_has_obor_inside(new_group, oborots);
-
 			if( new_group.m_MainGroup.size() == 1 )
 			{	
 				assert( (new_group.m_MainGroup.m_iFirstWord >= 0) && ( new_group.m_MainGroup.m_iFirstWord < sent.size() ) );
