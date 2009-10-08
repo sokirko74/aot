@@ -637,12 +637,13 @@ void CreateGroupsForTermins(CClause& C, CFormatCaller& FormatCaller, CMorphVaria
 		if	(FormatCaller.create_groups_from_termin( T)) 
 		{
 			C.m_pSent->m_vectorTermins[TerminNo].m_bGroupsChecked = true;
-			int WordNo = 0;
+			/*int WordNo = 0;
 			for (int UnitNo = T.m_iFirstWord; UnitNo <= T.m_iLastWord; UnitNo++, WordNo++)
 			{
 				CSynWord& W = C.GetWords()[C.m_pSent->m_vectorTermins[TerminNo].m_iFirstWord+WordNo];
-				W.SetAllOtherHomsDel(SynVarHomonyms[UnitNo]); 
+				//W.SetAllOtherHomsDel(SynVarHomonyms[UnitNo]); 
 			};
+            */
 		}
 
 	};
