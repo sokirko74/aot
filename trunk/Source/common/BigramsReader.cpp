@@ -1,5 +1,6 @@
 #include  "BigramsReader.h"
 #include  "../common/bserialize.h"
+#include  <climits>
 
 struct CBigramsWordInfo
 {
