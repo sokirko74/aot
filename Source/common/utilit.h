@@ -35,7 +35,8 @@
 #include  "set"
 #include  "stack"
 #include  "map"
-#include "time.h"
+#include  "time.h"
+#include  <string.h>
 
 
 #pragma warning (disable : 4018)
