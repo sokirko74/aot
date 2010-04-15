@@ -1,0 +1,29 @@
+FreqCollocTypeId;Length;AtomGroups;Relations;Examples;Enabled;LoadTextForm;LanguageId;Groups;
+1#2#"П;С"#"с_опр(2,1)"#"каменный мост"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);"#
+2#2#"С; С рд"#"упр(1,2)"#"Дом Хужожника"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,2);"#
+3#1#"С"#""#"абандон"#TRUE#FALSE#1#""#
+4#1#"П"#""#""#TRUE#FALSE#1#""#
+5#1#"ADJECTIVE"#""#""#TRUE#FALSE#2#""#
+6#1#"NOUN"#""#""#TRUE#FALSE#2#""#
+7#2#"ADJECTIVE;NOUN"#"subord(2,1)"#""#TRUE#FALSE#2#"ADJ_NOUN(1,2);"#
+9#4#"NOUN;PREP;ADJECTIVE;NOUN"#"subord(1,2);subord(2,4);subord(4,2)"#""#TRUE#FALSE#2#"NP_right(1,4);PP(2,4);ADJ_NOUN(3,4);"#
+11#3#"NOUN;PREP;NOUN"#"subord(1,2);subord(2,3)"#""#TRUE#FALSE#2#"NP_right(1,3);PP(2,3);"#
+14#1#"NOUN;NOUN"#""#""#TRUE#FALSE#2#"NP_left(1,2);"#
+15#3#"С;П;С рд"#"с_опр(2,3);упр(1,3)"#""#TRUE#FALSE#1#"ПРИЛ_СУЩ(2,3);ГЕНИТ_ИГ(1,3)"#
+16#3#"NOUN;NOUN;NOUN"#"subord(3,2);subord(2,1)"#"air traffic controller"#TRUE#FALSE#2#"NP_left(1,2);NP_left(1,3);"#
+17#4#"ADJECTIVE;CONJ;ADJECTIVE;NOUN"#""#"gas and electric welder"#TRUE#FALSE#2#"SIMIL_ADJ(1,3);ADJ_NOUN(1,4);"#
+18#4#"NOUN;CONJ;NOUN;NOUN"#""#"TV and radio operator"#TRUE#FALSE#2#"SIMIL_NP(1,3);NP_left(1,4);"#
+19#5#"NOUN;PREP;ARTICLE;NOUN;NOUN"#"subord(5,4);subord(4,3);subord(1,2)"#"worker of the sewing industry"#TRUE#FALSE#2#"NP_right(1,5);PP(2,5);DET_ADJ_NOUN(4,5);ADJ_NOUN(3,5);"#
+21#3#"ADJECTIVE;NOUN;NOUN"#"subord(2,1)"#"hydroelectric power plant"#TRUE#FALSE#2#"ADJ_NOUN(1,2);NP_left(1,3);"#
+23#2#"ARTICLE;NOUN"#""#"the students"#TRUE#FALSE#2#"DET_ADJ_NOUN(1,2);"#
+24#4#"NOUN;PREP;NOUN;NOUN"#""#"child under school age"#TRUE#FALSE#2#"NP_right(1,4);PP(2,4);NP_left(3,4);"#
+25#4#"NOUN;NOUN;CONJ;NOUN"#"subord(2,1)"#"motor licensing and inspection"#TRUE#FALSE#2#"SIMIL_NP(2,4);NP_left(1,4);"#
+26#5#"NOUN;NOUN;CONJ;NOUN;NOUN"#"subord(2,1)"#"motor licensing and inspection department"#TRUE#FALSE#2#"SIMIL_NP(2,4);NP_left(1,4);NP_left(1,5);"#
+27#4#"С;С рд;П;С рд"#"упр(1,2);упр(2,4);с_опр(4,3)"#"выставка достижений народного хозяйства"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,4);ГЕНИТ_ИГ(2,4);ПРИЛ_СУЩ(3,4)"#
+28#4#"П;П;П;С"#"упр(4,1);упр(4,2);упр(4,3)"#"Российский государственный гуманитарный университет"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,4)"#
+29#4#"ADJECTIVE;ADJECTIVE;NOUN;PREP;NOUN"#"subord(3,1);subord(3,2);subord(3,4);subord(3,5)"#"Russian State University for Humanities"#TRUE#FALSE#2#"ADJ_NOUN(1,3);PP(4,5);NP_right(1,5);"#
+30#3#"С;СОЮЗ;С"#"subord(2,1);subord(2,3)"#"мама и папа"#TRUE#FALSE#1#"ОДНОР_ИГ(1,3)"#
+31#3#"NOUN;CONJ;NOUN"#"subord(2,1);subord(2,3)"#"mother and father"#TRUE#FALSE#2#"SIMIL_NP(1,3);"#
+32#3#"С;ПРЕДЛ;С"#"упр(1,2);упр(2,3)"#"Ростов на Дону"#TRUE#FALSE#1#"ИГ(1,3);ПГ(2,3)"#
+33#3#"П;С;С"#"с_опр(2,1);упр(2,3)"#"средняя продолжительность жизни"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ГЕНИТ_ИГ(1,3)"#
+34#2#"NOUN poss;NOUN;"#""#"children's home"#TRUE#FALSE#2#"NP_left(1,2);"#
