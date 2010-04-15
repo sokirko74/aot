@@ -1,0 +1,111 @@
+4.1  FLAME, BLATHER AND SPEW
+ 
+
+Something about online communications seems to make some people 
+particularly irritable.  Perhaps it's the immediacy and semi-anonymity of 
+it all.  Whatever it is, there are whole classes of people you will soon 
+think seem to exist to make you miserable. 
+
+Rather than pausing and reflecting on a message as one might do with a 
+letter received on paper, it's just so easy to hit your R or F key and 
+tell somebody you don't really know what you really think of them.  Even 
+otherwise calm people sometimes find themselves turning into raving 
+lunatics.  When this happens, flames erupt.  
+
+A flame is a particularly nasty, personal attack on somebody for 
+something he or she has written.  Periodically, an exchange of flames 
+erupts into a flame war that begin to take up all the space in a given 
+newsgroup (and sometimes several; flamers like cross-posting to let the 
+world know how they feel).  These can go on for weeks (sometimes they go 
+on for years, in which case they become "holy wars," usually on such 
+topics as the relative merits of Macintoshes and IBMs).  Often, just when 
+they're dying down, somebody new to the flame war reads all the messages, 
+gets upset and issues an urgent plea that the flame war be taken to email so everybody else can get back to whatever the newsgroup's business 
+is.  All this usually does, though, is start a brand new flame war, in 
+which this poor person comes under attack for daring to question the 
+First Amendment, prompting others to jump on the attackers for impugning 
+this poor soul...  You get the idea. 
+
+Every so often, a discussion gets so out of hand that somebody predicts 
+that either the government will catch on and shut the whole thing down or 
+somebody will sue to close down the network, or maybe even the wrath of 
+God will smote everybody involved.  This brings what has become an 
+inevitable rejoinder from others who realize that the network is, in 
+fact, a resilient creature that will not die easily: "Imminent death of 
+Usenet predicted. Film at 11.'' 
+
+Flame wars can be tremendously fun to watch at first.  They quickly grow 
+boring, though.  And wait until the first time you're attacked! 
+
+Flamers are not the only net.characters to watch out for.  
+
+Spewers assume that whatever they are particularly concerned about either 
+really is of universal interest or should be rammed down the throats of 
+people who don't seem to care -- as frequently as possible. You can 
+usually tell a spewer's work by the number of articles he posts in a day 
+on the same subject and the number of newsgroups to which he then sends 
+these articles -- both can reach well into double digits. Often, these 
+messages relate to various ethnic conflicts around the world. Frequently, 
+there is no conceivable connection between the issue at hand and most of 
+the newsgroups to which he posts.  No matter.  If you try to point this 
+out in a response to one of these messages, you will be inundated with 
+angry messages that either accuse you of being an insensitive 
+racist/American/whatever or ignore your point entirely to bring up 
+several hundred more lines of commentary on the perfidy of whoever it is 
+the spewer thinks is out to destroy his people. 
+
+Closely related to these folks are the Holocaust revisionists, who 
+periodically inundate certain groups (such as soc.history) with long 
+rants about how the Holocaust never really happened.  Some people attempt 
+to refute these people with facts, but others realize this only 
+encourages them. 
+
+Blatherers tend to be more benign.  Their problem is that they just can't 
+get to the point -- they can wring three or four screenfuls out of a 
+thought that others might sum up in a sentence or two.  A related 
+condition is excessive quoting.  People afflicted with this will include 
+an entire message in their reply rather than excising the portions not 
+relevant to whatever point they're trying to make.  The worst quote a 
+long message and then add a single line: 
+ 
+     "I agree!"
+ 
+or some such, often followed by a monster .signature (see section 4.7)
+      
+There are a number of other Usenet denizens you'll soon come to 
+recognize.  Among them: 
+     
+     Net.weenies.  These are the kind of people who enjoy LOWER 
+CASEDinsulting others, the kind of people who post nasty messages in a 
+sewing newsgroup just for the hell of it. 
+     Net.geeks.  People to whom the Net is Life, who worry about what 
+happens when they graduate and they lose their free, 24-hour access. 
+     Net.gods.  The old-timers; the true titans of the Net and the 
+keepers of its collective history. They were around when the Net 
+consisted of a couple of computers tied together with baling wire.
+     Lurkers.  Actually, you can't tell these people are there, but 
+they are.  They're the folks who read a newsgroup but never post or 
+respond. 
+     Wizards.  People who know a particular Net-related topic inside 
+and out.  Unix wizards can perform amazing tricks with that operating 
+system, for example. 
+     Net.saints.  Always willing to help a newcomer, eager to share 
+their knowledge with those not born with an innate ability to navigate 
+the Net, they are not as rare as you might think.  Post a question 
+about something and you'll often be surprised how many responses you 
+get.
+     
+The last group brings us back to the Net's oral tradition.  With few 
+written guides, people had traditionally learned their way around the Net 
+by asking somebody, whether at the terminal next to them or on the Net 
+itself.  That tradition continues: if you have a question, ask. 
+
+Today, one of the places you can look for help is in the 
+news.newusers.questions newsgroup, which, as its name suggests, is a 
+place to learn more about Usenet.  But be careful what you post.  Some of 
+the Usenet wizards there get cranky sometimes when they have to answer 
+the same question over and over again. Oh, they'll eventually answer your 
+question, but not before they tell you should have asked your host system 
+administrator first or looked at the postings in news.announce.newusers. 
+ 
+

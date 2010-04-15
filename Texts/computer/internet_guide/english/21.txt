@@ -1,0 +1,33 @@
+3.6  ESSENTIAL NEWSGROUPS
+
+
+With so much to choose from, everybody will likely have their own unique 
+Usenet reading list.  But there are a few newsgroups that are 
+particularly of interest to newcomers.  Among them: 
+
+     news.announce.newusers     This group consists of a series of
+                                articles that explain various facets of
+                                Usenet.
+
+     news.newusers.questions    This is where you can ask questions 
+                                (we'll see how in a bit) about how
+                                Usenet works.
+
+     news.announce.newsgroups   Look here for information about new or
+                                proposed newsgroups.
+
+     news.answers               Contains lists of "Frequently Asked
+                                Questions"  (FAQs) and their answers from 
+                                many different newsgroups.  Learn how to
+                                fight jet lag in the FAQ from 
+                                rec.travel.air; look up answers to common
+                                questions about Microsoft Windows in
+                                an FAQ from comp.os.ms-windows; etc.
+
+     alt.internet.services      Looking for something in particular on 
+                                the Internet?  Ask here.
+
+     alt.infosystems.announce   People adding new information services to
+                                the Internet will post details here.
+
+

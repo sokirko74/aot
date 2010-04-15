@@ -1,0 +1,23 @@
+7.10  FYI
+ 
+Liberal use of archie will help you find specific files or documents.  
+For information on new or interesting ftp sites, try the comp.archives 
+newsgroup on Usenet.  You can also look in the comp.misc, 
+comp.sources.wanted or news.answers newsgroups on Usenet for lists of ftp 
+sites posted every month by Tom Czarnik and Jon Granrose. 
+ 
+The comp.archives newsgroup carries news of new ftp sites and interesting 
+new files on existing sites.                                   
+
+In the comp.virus newsgroup on Usenet, look for postings that list ftp 
+sites carrying anti-viral software for Amiga, MS-DOS, Macintosh, Atari 
+and other computers. 
+
+The comp.sys.ibm.pc.digest and comp.sys.mac.digest newsgroups provide 
+information about new MS-DOS and Macintosh programs as well as answers to 
+questions from users of those computers. 
+
+
+
+
+

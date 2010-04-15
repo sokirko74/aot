@@ -1,0 +1,68 @@
+
+ 
+
+3.11.3 Backgrounding and killing jobs
+
+ 
+Let's begin with a simple example. The command yes is a seemingly useless command which sends an endless stream of y's to standard output. (This is actually useful. If you piped the output of yes to another command which asked a series of yes and no questions, the stream of y's would confirm all of the questions.) 
+
+Try it out. 
+
+/home/larry# yes 
+y 
+y 
+y 
+y 
+y 
+
+        The y's will continue ad infinitum. You can kill the process by hitting your interrupt key, which is usually . So that we don't have to put up with the annoying stream of y's, let's redirect the standard output of yes to /dev/null. As you may remember, /dev/null acts as a ``black hole'' for data. Any data sent to it will disappear. This is a very effective method of quieting an otherwise verbose program. 
+
+/home/larry# yes > /dev/null 
+
+Ah, much better. Nothing is printed, but the shell prompt doesn't come back. This is because yes is still running, and is sending those inane y's to /dev/null. Again, to kill the job, hit the interrupt key. 
+
+Let's suppose that we wanted the yes command to continue to run, but wanted to get our shell prompt back to work on other things. We can put yes into the background, which will allow it to run, but without need for interaction. 
+
+    One way to put a process in the background is to append an ``&'' character to the end of the command. 
+
+/home/larry# yes > /dev/null & 
+[1] 164 
+/home/larry# 
+
+As you can see, we have our shell prompt back. But what is this ``[1] 164''? And is the yes command really running? 
+
+The ``[1]'' represents the job number for the yes process. The shell assigns a job number to every running job. Because yes is the one and only job that we're currently running, it is assigned job number 1. The ``164'' is the process ID, or PID, number given by the system to the job. Either number may be used to refer to the job, as we'll see later. 
+
+  You now have the yes process running in the background, continuously sending a stream of y's to /dev/null. To check on the status of this process, use the shell internal command jobs. 
+
+/home/larry# jobs 
+[1]+ Running yes >/dev/null & 
+/home/larry# 
+
+Sure enough, there it is. You could also use the ps command as demonstrated above to check on the status of the job. 
+
+      To terminate the job, use the command kill. This command takes either a job number or a process ID number as an argument. This was job number 1, so using the command 
+
+/home/larry# kill %1 
+
+will kill the job. When identifying the job with the job number, you must prefix the number with a percent (``%'') character. 
+
+Now that we've killed the job, we can use jobs again to check on it: 
+
+/home/larry# jobs [1]+  Terminated              yes >/dev/null
+/home/larry# 
+
+The job is in fact dead, and if we use the jobs command again nothing should be printed. 
+
+You can also kill the job using the process ID (PID) number, which is printed along with the job ID when you start the job. In our example, the process ID is 164, so the command 
+
+/home/larry# kill 164 
+
+is equivalent to 
+
+/home/larry# kill %1 
+
+You don't need to use the ``%'' when referring to a job by its process ID. 
+
+
+ 

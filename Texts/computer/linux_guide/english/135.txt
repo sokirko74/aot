@@ -1,0 +1,16 @@
+
+ 
+
+3.2.3 Virtual consoles
+
+ 
+    The system's console is the monitor and keyboard connected directly to the system. (Because UNIX is a multiuser operating system, you may have other terminals connected to serial ports on your system, but these would not be the console.) Linux, like some other versions of UNIX, provides access to virtual consoles (or VC's), which allow you to have more than one login session from your console at a time. 
+
+To demonstrate this, login to your system (as demonstrated above). Now, press . You should see the login: prompt again. You're looking at the second virtual console---you logged into the first. To switch back to the first VC, press . Voila! You're back to your first login session. 
+
+A newly-installed Linux system probably allows you to access the first four VC's, using through . However, it is possible to enable up to 12 VC's---one for each function key on your keyboard. As you can see, use of VC's can be very powerful---you can be working on several different VC's at once. 
+
+While the use of VC's is somewhat limiting (after all, you can only be looking at one VC at a time), it should give you a feel for UNIX's multiuser capabilities. While you're working on VC #1, you can switch over to VC #2 and start working on something else. 
+
+
+ 

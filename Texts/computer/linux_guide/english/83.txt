@@ -1,0 +1,13 @@
+ 
+
+1.7.1 Why use Linux?
+
+ 
+Why use Linux instead of a well-known, well-tested, and well-documented commercial operating system? We could give you a thousand reasons. One of the most important, however, is that Linux is an excellent choice for personal UNIX computing. If you're a UNIX software developer, why use MS-DOS at home? Linux will allow you to develop and test UNIX software on your PC, including database and X Windows applications. If you're a student, chances are that your university computing systems run UNIX. With Linux, you can run your own UNIX system and tailor it to your own needs. Installing and running Linux is also an excellent way to learn UNIX if you don't have access to other UNIX machines. 
+
+But let's not lose sight. Linux isn't just for personal UNIX users. It is robust and complete enough to handle large tasks, as well as distributed computing needs. Many businesses---especially small ones---are moving to Linux in lieu of other UNIX-based workstation environments. Universities are finding Linux to be perfect for teaching courses in operating systems design. Larger commercial software vendors are starting to realize the opportunities that a free operating system can provide. 
+
+The following sections should point out the most important differences between Linux and other operating systems. We hope that you'll find that Linux can meet your computing needs, or (at least) enhance your current computing environment. Keep in mind that they best way to get a taste for Linux is just to try it out---you needn't even install a complete system to get a feel for it. In Chapter 2, we'll show you how. 
+
+
+ 

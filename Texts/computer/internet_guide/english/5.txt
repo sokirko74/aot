@@ -1,0 +1,134 @@
+13.2  SOME SPECIFIC RESOURCES FOR STUDENTS AND TEACHERS
+
+
+In addition, there are a number of resources on the Internet aimed 
+specifically at elementary and secondary students and teachers.  You can 
+use these to set up science experiments with classes in another country, 
+learn how to use computers in the classroom or keep up with the latest 
+advances in teaching everything from physics to physical education. 
+
+Among them:
+                           
+ArtsEdge        Federally sponsored Online arts resources for students
+                and teachers, it's available on the web at
+               
+                http://k12.cnidr.org/janice_k12/artsedge/artsedge2.html
+
+Ask Dr. Math    Math professors and college students help k12 students
+                with tough math questions.  Students can ask questions
+                by e-mail and browse past answers on the Web.  The
+                e-mail address is dr.math@forum.swarthmore.edu; the Web 
+                url http://olmo.swarthmore.edu/dr-math/dr-math.html
+
+AskERIC         Run by the Educational Resource and Information Center, 
+                AskERIC provides a way for educators, librarians and 
+                others interested in K-12 education to get more 
+                information about virtually everything.  The center 
+                maintains an e-mail address (askeric@ericir.syr.edu) for 
+                questions and promises answers within 48 hours.  It also 
+                maintains a Web site that contains digests of 
+                questions and answers, lesson plans in a variety of 
+                fields and other educationally related information.  The 
+                Web address is http://ericir.syr.edu/. 
+
+Health-Ed       A mailing list for health educators.  Send a request to 
+                health-ed-request@stjhmc.fidonet.org 
+ 
+K12Net          Begun on the Fidonet hobbyist network, K12Net is now also 
+                carried on many Usenet systems and provides a host of 
+                interesting and valuable services.  These include 
+                international chat for students, foreign-language 
+                discussions (for example, there are French and Germanonly conference where American students can practice 
+                those languages with students from Quebec and German).  
+                There are also conferences aimed at teachers of specific 
+                subjects, from physical education to physics. The K12 
+                network still has limited distribution, so ask your 
+                system administrator if your system carries it. 
+ 
+Kidsphere       Kidsphere is a mailing list for elementary and secondary 
+                teachers, who use it to arrange joint projects and 
+                discuss educational telecommunications.  You will find 
+                news of new software, lists of sites from which you can 
+                get computer-graphics pictures from various NASA 
+                satellites and probes and other news of interest to 
+                modem-using teachers.  
+                     To subscribe, send a request by e-mail to kidsphererequest@vms.cis.pitt.edu or joinkids@vms.cis.pitt.edu and 
+                you will start receiving messages within a couple of 
+                days. 
+                     To contribute to the discussion, send messages to 
+                kidsphere@vms.cis.pitt.edu. 
+                     KIDS is a spin-off of KIDSPHERE just for students 
+                who want to contact students.  To subscribe, send a 
+                request to joinkids@vms.cis.pitt.edu, as above.  To 
+                contribute, send messages to kids@vms.cist.pitt.edu. 
+
+MicroMUSE       This is an online, futuristic city, built entirely by
+                participants (see chapter 12 for information on MUSEs
+                and MUDs in general).  Hundreds of students from all
+                over have participated in this educational exercise,
+                coordinated by MIT. Telnet to michael.ai.mit.edu.
+                Log on as guest and then follow the prompts for more 
+                information. 
+
+NASA Spacelink  This system, run by NASA in Huntsville, Ala., 
+                provides all sorts of reports and data about NASA, its 
+                history and its various missions, past and present.  
+                Telnet spacelink.msfc.nasa.gov or 128.158.13.250. 
+                     When you connect, you'll be given an overview of the 
+                system and asked to register. The system maintains a 
+                large file library of GIF-format space graphics, but note 
+                that you can't download these through telnet. If you want 
+                to, you have to dial the system directly, at (205) 8950028.  Many can be obtained through ftp from 
+                ames.arc.nasa.gov, however. 
+
+Newton          Run by the Argonne National Laboratory, it offers 
+                conferences for teachers and students, including one 
+                called "Ask a Scientist."  
+ 
+                     Telnet: newton.dep.anl.gov.  
+                     Log in as: cocotext 
+ 
+                You'll be asked to provide your name and address.  When 
+                you get the main menu, hit 4 for the various conferences.  
+                The "Ask a Scientist" category lets you ask questions of 
+                scientists in fields from biology to earth science.  
+                Other categories let you discuss teaching, sports and 
+                computer networks. 
+ 
+OERI            The U.S. Department of Education's Office of Educational 
+                Resources and Improvement runs a gopher system that 
+                provides numerous educational resources, information and 
+                statistics for teachers.  Use gopher to connect to
+
+                     gopher.ed.gov. 
+
+Spacemet Forum  If your system doesn't carry the K12 conferences, but 
+                does provide you with telnet, you can reach the 
+                conferences through SpaceMet Forum, a bulletin-board 
+                system aimed at teachers and students that is run by the 
+                physics and astronomy department at the University of 
+                Massachusetts at Amherst.  
+                
+                     Telnet: spacemet.phast.umass.edu. 
+                
+                When you connect, hit escape once, after which you'll be 
+                asked to log on. Like K12Net, SpaceMet Forum began as a 
+                Fidonet system, but has since grown much larger.  Mort 
+                and Helen Sternheim, professors at the university, 
+                started SpaceMet as a one-line bulletin-board system 
+                several years ago to help bolster middle-school science 
+                education in nearby towns. 
+                     In addition to the K12 conferences, SpaceMet carries 
+                numerous educationally oriented conferences.  It also has 
+                a large file library of interest to educators and 
+                students, but be aware that getting files to your site 
+                could be difficult and maybe even impossible.  Unlike 
+                most other Internet sites, Spacemet does not use an ftp 
+                interface. The Sternheims say ZMODEM sometimes works over 
+                the network, but don't count on it. 
+
+Yahoo           This Stanford University web service provides an archive of
+                links to other educational resources on the net at
+                http://akebono.stanford.edu/yahoo/Education/
+
+ 

@@ -1,0 +1,19 @@
+ 
+
+4.11.3 Fixing trashed filesystems
+
+ 
+      If you somehow trash your filesystems, you can run e2fsck (if you use the ext2fs filesystem type, that is) to correct any damaged data on the filesystems from floppy. Other filesystem types use different forms of the fsck command; see Section 4.8 for details. 
+
+When checking your filesystems from floppy, it's best for the filesystems to not be mounted. 
+
+    One common cause of filesystem damage is superblock corruption. The superblock is the ``header'' of the filesystem that contains information on the filesystem status, size, free blocks, and so forth. If you corrupt your superblock (for example, by accidentally writing data directly to the filesystem's partition), the system may not recognize the filesystem at all. Any attempt to mount the filesystem could fail, and e2fsck won't be able to fix the problem. 
+
+Happily, the ext2fs filesystem type saves copies of the superblock at ``block group'' boundaries on the drive---usually, every 8K blocks. In order to tell e2fsck to use a copy of the superblock, you can use a command such as 
+
+# e2fsck -b 8193 
+
+where is the partition on which the filesystem resides. The -b 8193 option tells e2fsck to use the copy of the superblock stored at block 8193 in the filesystem. 
+
+
+ 

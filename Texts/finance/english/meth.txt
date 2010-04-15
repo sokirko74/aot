@@ -1,0 +1,364 @@
+Summary methodology of the Bank of Russia's major macroeconomic and 
+financial data 
+   
+        Contents
+Main aggregates of analitical accounts of banking sector 
+Main aggregates of analitical accounts of monetary authorities 
+Interest rates of the Bank of Russia 
+Money market rates 
+Stock market 
+Balance of payments 
+International reserves 
+Merchandise trade 
+International investment position of credit institutions 
+Official US Dollar to Ruble rate 
+   
+Main aggregates of analitical accounts of banking sector
+M2 (monetary survey metodology)Cash issued by the CBR 
+excluding cash available in the CBR's and credit 
+institutions' cash offices, balances held by the Russian 
+Federation residents (enterprises, organizations (exept 
+for credit ones), self-employed individuals and 
+households) on checking, current, deposit, and other 
+demand accounts (including plastic cards payment 
+accounts) opened with credit institutions in the Russian 
+Federation currency, their time deposits in the Russian 
+Federation currency and all deposits in foreign 
+currency. 
+   
+Cash in circulation M0 (money outside banks)Cash issued 
+by the CBR excluding cash available in the CBR's and 
+credit institutions' cash offices.
+   
+Domestic creditTotality of the banking system's claims 
+on government nonfinancial enterprises, private sector, 
+including households, financial (except for credit ones) 
+institutions and net credit to general government in the 
+Russian Federation currency, in foreign currency, and 
+precious metals.
+   
+Net credit to general government Banking sector's claims 
+on general government over general government's 
+deposits. 
+Claims on general government include credits in domestic 
+and foreign currency extended by banking sector to 
+Minfin, fiscal authorities in the RF member - 
+territories and to local authorities, to the government 
+extrabudgetary funds of the Russian Federation and of 
+the Russian Federation member - territories, securities 
+issued by the Russian Federation Government, the RF 
+member territories, and local authorities and held by 
+CBR and credit institutions. 
+General government's deposits - balances on accounts of 
+the federal budget, the Russian Federation member - 
+territories' budgets and local budgets, deposits and 
+other funds contracted from Minfin, fiscal authorities 
+in the Russian Federation member - territories and local 
+authorities, government extrabudgetary funds and 
+extrabudgetary funds of the Russian Federation member - 
+territories and local authorities. Apart from these 
+items, the indicator includes a balancing entry equaling 
+a sum total of international reserves administered by 
+Minfin.
+   
+Claims on nonfinancial public enterprises Credits 
+(including debt outstanding), overdue interest on 
+credits extended by banking sector to nonfinancial 
+government enterprises in domestic and foreign currency.
+   
+Claims on private sector Credits (including outstanding 
+debt), overdue interest on credits extended by banking 
+sector to nonfinancial nongovernment enterprises, 
+self-employed individuals and households, as well as 
+Bank of Russia's and credit institutions' investments 
+into securities issued by private enterprises.
+   
+Claims on other financial institutions Funds transferred 
+to financial (except for credit ones) institutions 
+regardless of their type of property and credits 
+extended to said organizations.
+   
+Net foreign assets Balances of transactions in assets 
+and liabilities made by monetary authorities and credit 
+institutions with nonresidents.
+Foreign assets — balances on Bank of Russia's and credit 
+institutions' accounts recording transactions made with 
+nonresidents in foreign currency, the Russian Federation 
+currency and precious metals (balances on correspondent 
+accounts; deposits and other funds placed in nonresident 
+banks; credits extended to nonresident banks, 
+nonresident legal entities and individuals, debt 
+liabilities, and bill acquired from foreign governments, 
+banks and other nonresidents, investments into foreign 
+companies' and banks' shares of stock) as well as 
+foreign currency cash in credit institutions’ vault.
+Foreign liabilities — all types of borrowings by banking 
+sector from nonresidents: balances on LORO accounts, 
+credits contracted, deposits, and other funds 
+denominated in foreign currency, in the Russian 
+Federation currency, and precious metals as well as IMF 
+loans extended to Minfin and the CBR. 
+   
+
+Main aggregates of analitical accounts of monetary authorities
+Reserve money Cash issued by the CBR (excluding cash in 
+its vaults), balances on required reserve accounts 
+deposited by credit institutions with the CBR, on 
+correspondent accounts, and other cash balances on 
+accounts of credit institutions (including banks with 
+revoked licenses) with the CBR, credit institutions 
+deposits into the CBR bonds, as well as demand deposits 
+of nonfinancial enterprises and organizations serviced 
+in the CBR in compliance with the effective law.
+   
+Claims on general government Credits in domestic and 
+foreign currency extended to Minfin, the RF government's 
+securities bought by the CBR, except for securities 
+transferred to the CBR by credit institutions on REPO 
+terms. In compliance with international standards on 
+analytical presentation of monetary authorities' 
+statistics, this indicator includes the IMF loans to 
+Minfin.
+   
+Claims on nonfinancial public enterprises Credits 
+(including outstanding debt), overdue interest on 
+credits extended to nonfinancial public enterprises.
+   
+Claims on private sector Credits (including outstanding 
+debt), overdue interest on credits extended to 
+nonfinancial nongovernment enterprises, self-employed 
+individuals, and households as well as the Bank of 
+Russia's deposits into securities of private 
+enterprises.
+   
+Claims on credit institutions Credit institutions' 
+arrears to the CBR (including loans extended to banks 
+with revoked licenses and overdue interest on them) and 
+funds extended to credit institutions on REPO terms.
+   
+Net foreign assetsBalances of transactions in assets and 
+liabilities made by monetary authorities with 
+nonresidents.
+Foreign assets — the Russian Federation international 
+reserves (see their content in comments to the "Gross 
+International Reserves" table) and less liquid, 
+nonreserve assets. Nonreserve assets in this table 
+comprise all other Bank of Russia's assets placed with 
+nonresidents, namely, assets denominated in currency 
+with limited conversion potential and in the Russian 
+Federation currency, and also long—term credits and 
+deposits in convertible currency, and nonresident banks' 
+equity interest.
+Foreign liabilities include all types of borrowings by 
+the CBR from nonresidents (credits, deposits, 
+nonresident banks' correspondent accounts with the CBR, 
+etc.) as well as IMF loans extended to Minfin and the 
+CBR.
+   
+
+Interest rates of the Bank of Russia
+Refinancing rate Monetary instrument by means of which 
+the CBR affects interbank market rates, and rates on 
+deposits of legal entities and individuals, and also 
+rates on credits extended to them by credit 
+institutions. Refinancing rate is one of the interest 
+rates used by the CBR for extending credits to banks in 
+the form of refinancing.
+   
+Deposit ratesInterest rates on resident credit 
+institutions' funds attracted into the CBR's deposit 
+accounts using Reuters Dealing System, on standard terms 
+determined by the CBR Provisions ¹67-P dated 13.01.99.
+  
+Overnight rate (one day settlement credit)Interest rate 
+for overnight secured credits extended by the CBR for 
+banks for settlement purposes pursuant to the CBR 
+Provisions ¹19-P dated 6.03.98.
+   
+
+Money market rates
+Actual rate on one-day interbank creditsCalculated each 
+day as average weighted by one-day credits provided by 
+most significant participants in Moscow interbank 
+market. No records are made of rates on credits extended 
+by banks to its branches or on rollover credits. 
+   
+
+Stock market 
+Share price index (RTS-Interfax index, 
+5.01.98=100%)Computed ratio of the current total value 
+of market capitalization of stocks enlisted for 
+calculation to the total market capitalization of stocks 
+in the base period. The index includes 100 stocks 
+selected by their liquidity (bidding value, number of 
+contracts, development of corporate stock market, 
+issuer’s credit rating, etc), market value 
+(capitalization), availability of information about an 
+issuer, and a number of other criteria. The data on 
+contracts selected for the corporate stock index are 
+obtained from the Russian Trade System (RTS) and the 
+Moscow Stock Exchange (MSE).
+   
+
+Balance of payments
+Current account Includes transactions with goods, 
+services, revenues and current transfers.
+   
+Exports/imports of goodsThis item reflects cost of goods 
+whose proprietary rights within the reporting period 
+were transferred from residents to nonresidents (export) 
+and from nonresidents to residents (import). Apart from 
+export and import of goods registered by the Russian 
+Federation State Customs Committee (SCC), this item 
+incorporates the following transactions on 
+exports/imports unrecorded by the SCC, namely: 
+exports/imports sold (purchased) without trafficking the 
+customs border; migrants' exports/imports); undeclared 
+and/or understated goods when trafficked into the 
+country by legal entities; trafficked in (out) by 
+individuals for merchanting; other goods.
+Exports and imports are given in FOB prices (FOB is the 
+term for selling goods which implies that the price of 
+goods includes its cost as well as its freight and 
+delivery costs on board the ship in the port of 
+departure).
+   
+Exports/imports of servicesServices rendered by 
+residents to nonresidents and by nonresidents to 
+residents (freightage, travel-related services, 
+communication services, construction and financial 
+services, royalties and license payments, operational 
+leasing, and other services).
+   
+Investment income and compensation of employees 
+balanceReturns from providing production factors (labor, 
+capital) to nonresidents by residents or vice versa.
+The "Compensation of employees received” item shows 
+remuneration to employees received by them from 
+nonresidents and payments to nonresident employees 
+engaged in the Russian economy.
+The "Investment income" item records returns from 
+holding foreign financial assets which residents receive 
+from nonresidents (interest, dividends and other similar 
+forms of income) or vice versa.
+  
+Direct investments Form of foreign investments which are 
+made by a resident institutional unit of a country with 
+a view of attaining sustainable influence on operations 
+of the enterprise located in a different country. 
+Sustainable influence implies the development of 
+long-term relations between the investor and the said 
+enterprise and also the investor's significance in 
+managing this enterprise. Transactions recorded as 
+direct investments include not only the initial 
+transaction on attaining an equity share but also all 
+further transactions between the investor and the given 
+enterprise. Invested funds have the character of direct 
+investments if the investor holds 10 or more percent of 
+the enterprise's common shares of stock.
+   
+Portfolio investmentsAlong with the equity interest 
+these investments also comprise debt financial 
+instruments and financial derivatives. The said group 
+does not comprise instruments already included into 
+direct investments and reserve assets.
+   
+Other investmentsAll transactions which are not treated 
+as transactions in direct and portfolio investments or 
+in reserve assets are recorded in the "Other 
+investments" item. Assets and liabilities in the "Other 
+investments" item are subject to classification by 
+financial instrument: foreign exchange cash and 
+deposits; trade credits; grants and loans; outstanding 
+debt; other assets and liabilities.
+   
+Reserve assets Monetary gold and liquid foreign assets 
+of the CBR and the Russian Federation Finance Ministry 
+denominated in freely convertible foreign currency. They 
+include foreign currency cash, balances on correspondent 
+and current accounts as well as on short-term deposits 
+with nonresident and resident banks, liquid securities 
+of foreign governments, IMF's assets (special drawing 
+rights — SDRs, reserve position in the IMF), and other 
+liquid assets.
+   
+
+International reserves
+International reserves International reserves present 
+highly liquid financial instruments hold by the CBR and 
+the RF Finance Ministry and used for funding Russia's 
+balance of payments' deficit as well as for maintaining 
+confidence in the national currency. International 
+reserves consist of foreign exchange reserves and 
+monetary gold.
+   
+
+Merchandise trade
+Export (based on the balance of payments 
+methodology)Trafficking out of the Russian Federation 
+customs territory of goods recorded by SCC in compliance 
+with categories within the "general" foreign trade 
+records framework, as well as export of commodities 
+unrecorded by SCC, namely: marketed to nonresidents 
+without crossing Russia's customs boarder; bought by 
+foreign transport vehicles in Russian ports; trafficked 
+out by emigrants; trafficked out of the country by 
+individuals for merchanting; other goods.
+   
+Import (based on the balance of payments 
+methodology)Trafficking into the Russian Federation 
+customs territory of goods recorded by SCC in compliance 
+with the categories within the "general" foreign trade 
+records framework, as well as supply of goods unrecorded 
+by SCC, namely: purchase from nonresidents without 
+crossing Russia's customs boarder; goods bought by 
+Russian transport vehicles in foreign ports; trafficked 
+into the country by immigrants; undeclared and/or 
+unreliably declared when trafficking by legal entities; 
+trafficked by individuals for merchanting; other goods.
+   
+
+International investment position of credit institutions
+AssetsForeign economic claims held by Russian residents 
+credit institutions at the end of the reporting period. 
+Credit institutions' assets include Direct investments, 
+Portfolio investments and Other investments (foreign 
+currency cash; current accounts and deposits; grants and 
+loans; outstanding debt; other assets).
+   
+LiabilitiesForeign economic liabilities for which 
+Russian residents credit institutions were liable at the 
+end of the reporting period. Credit institutions' 
+liabilities include Direct investments, Portfolio 
+investments and Other investments (current accounts and 
+deposits; grants and loans; outstanding debt; other 
+liabilities).
+   
+Net international investment position of credit 
+institutionsBalance of assets and liabilities of Russian 
+residents credit institutions. Depending on whether the 
+"Net International Investment Position" of credit 
+institutions is positive or negative, it seems possible 
+to attribute the sector under analysis to a "net 
+creditor" or a "net debtor" with regard to nonresidents.
+   
+
+US Dollar to Ruble rate 
+Official US dollar to ruble rateOfficial US dollar to 
+ruble rate is set daily and enacted from the following 
+calendar day. Till 16 August 1998 it was calculated as 
+an arithmetic average of the US dollar purchase/sale 
+rate for Russian ruble on the CBR transactions on the 
+interbank market. Since 17 August 1999 the rate has been 
+set by the CBR based on the current day quotes for 
+foreign exchange markets (both stock market and OTC) 
+based "US dollar to Russian ruble" transactions.
+   
+
+    
+          
+Main macroeconomic data 
+of GoskomstatMain data of the RF Finance MinistryIMF's Dissemination 
+Standards
+Bulletin Board
+

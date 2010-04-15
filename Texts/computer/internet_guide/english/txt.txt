@@ -1,0 +1,2899 @@
+12.4  IRC IN TIMES OF CRISIS
+
+
+IRC has become a new medium for staying on top of really big breaking 
+news.  In 1993, when Russian lawmakers barricaded themselves inside the 
+parliament building, some enterprising Muscovites and a couple of 
+Americans set up a "news channel" on IRC to relay first-person accounts 
+direct from Moscow. The channel was set up to provide a continuous loop 
+of information, much like all-news radio stations that cycle through the 
+day's news every 20 minutes.  In 1994, Los Angeles residents set up a 
+similar channel to relay information related to the Northridge 
+earthquake.  In both cases, logs of the channels were archived somewhere 
+on the Net, for those unable to "tune in" live. 
+
+How would you find such channels in the future?  Use the /list command to 
+scroll through the available channels.  If one has been set up to discuss 
+a particular breaking event, chances are you'll see a brief description 
+next to the channel name that will tell you that's the place to tune. 
+
+
+12.5  MUDs
+ 
+ 
+Multiple-User Dimensions or Dungeons (MUDs) take IRC into the realm of 
+fantasy.  MUDs are live, role-playing games in which you enter assume a 
+new identity and enter an alternate reality through your keyboard.  As 
+you explore this other world, through a series of simple commands (such 
+as "look," "go" and "take"), you'll run across other users, who may 
+engage you in a friendly discussion, enlist your aid in some quest or try 
+to kill you for no apparent reason. 
+
+Each MUD has its own personality and creator (or God) who was willing to 
+put in the long hours required to establish the particular MUD's rules, 
+laws of nature and information databases.  Some MUDs stress the social 
+aspects of online communications -- users frequently gather online to 
+chat and join together to build new structures or even entire realms.  
+Others are closer to "Dungeons and Dragons" and are filled with 
+sorcerers, dragons and evil people out to keep you from completing your 
+quest -- through murder if necessary. 
+
+Many MUDs (there are also related games known as MUCKs and MUSEs) require 
+you to apply in advance, through e-mail, for a character name and 
+password.  One that lets you look around first, though, is HoloMuck at 
+McGill University in Montreal.  The premise of this game is that you 
+arrive in the middle of Tanstaafl, a city on the planet Holo.  You have 
+to find a place to live (else you get thrown into the homeless shelter) 
+and then you can begin exploring.  Magic is allowed on this world, but 
+only outside the city limits.  Get bored with the city and you can roam 
+the rest of the world or even take a trip into orbit (of course, all this 
+takes money; you can either wait for your weekly salary or take a trip to 
+the city casino).  Once you become familiar with the city and get your 
+own character, you can even begin erecting your own building (or subway 
+line, or almost anything else). 
+
+                                0 -1 0 Õ◊“ ƒÓÍ
+12                              2 0 2 ÷  œœ ¿¡« œ–ƒ1
+.                               1 2 1 «œ–
+7                               1 3 1 ÷ 
+ÅÅ                              2 4 2 –«ƒ œ–¡
+THE                             3 6 3 »À≈ ¡¡
+OTHER                           5 10 5 »À≈ ¡¡
+SIDE                            4 16 4 »À≈ ¡¡
+OF                              2 21 2 »À≈ ¡¡
+THE                             3 24 3 »À≈ ¡¡
+COIN                            4 28 4 »À≈ ¡¡ œ–ƒ2
+´                               1 32 1 –«ƒ  —“
+´´                              2 34 2 –«ƒ  —“ ”œ
+All                             3 36 3 »À≈ ¡· »Ã? œ–ƒ1
+is                              2 40 2 »À≈ ··
+not                             3 43 3 »À≈ ··
+fun                             3 47 3 »À≈ ··
+and                             3 51 3 »À≈ ··
+games                           5 55 5 »À≈ ··
+on                              2 61 2 »À≈ ··
+the                             3 64 3 »À≈ ··
+Net                             3 68 3 »À≈ ¡· »Ã?
+.                               1 71 1 «œ– œ–ƒ2
+ÅÅ                              2 72 2 –«ƒ œ–¡
+Like                            4 74 4 »À≈ ¡· »Ã? œ–ƒ1
+any                             3 79 3 »À≈ ··
+community                       9 83 9 »À≈ ··
+,                               1 92 1 «œ–
+the                             3 94 3 »À≈ ··
+Net                             3 98 3 »À≈ ¡· »Ã?
+has                             3 102 3 »À≈ ··
+its                             3 106 3 »À≈ ··
+´                               1 110 1 –«ƒ  —“
+share                           5 111 5 »À≈ ··
+of                              2 117 2 »À≈ ··
+obnoxious                       9 120 9 »À≈ ··
+characters                      10 130 10 »À≈ ··
+who                             3 141 3 »À≈ ··
+seem                            4 145 4 »À≈ ··
+to                              2 150 2 »À≈ ··
+exist                           5 153 5 »À≈ ··
+only                            4 159 4 »À≈ ··
+to                              2 164 2 »À≈ ··
+make                            4 167 4 »À≈ ··
+your                            4 172 4 »À≈ ··
+life                            4 177 4 »À≈ ··
+´                               1 182 1 –«ƒ  —“
+miserable                       9 183 9 »À≈ ··
+(                               1 193 1 «œ– Œ“ 
+you've                          6 194 6 »À≈ ··
+already                         7 201 7 »À≈ ··
+met                             3 209 3 »À≈ ··
+some                            4 213 4 »À≈ ··
+of                              2 218 2 »À≈ ··
+them                            4 221 4 »À≈ ··
+in                              2 226 2 »À≈ ··
+chapter                         7 229 7 »À≈ ··
+4                               1 237 1 ÷ 
+)                               1 238 1 «œ– «¿ 
+.                               1 239 1 «œ– œ–ƒ2
+ÅÅ                              2 240 2 –«ƒ œ–¡
+There                           5 242 5 »À≈ ¡· »Ã? œ–ƒ1
+are                             3 248 3 »À≈ ··
+´                               1 252 1 –«ƒ  —“
+people                          6 253 6 »À≈ ··
+who                             3 260 3 »À≈ ··
+seem                            4 264 4 »À≈ ··
+to                              2 269 2 »À≈ ··
+spend                           5 272 5 »À≈ ··
+a                               1 278 1 »À≈ ··
+bit                             3 280 3 »À≈ ··
+more                            4 284 4 »À≈ ··
+time                            4 289 4 »À≈ ··
+on                              2 294 2 »À≈ ··
+the                             3 297 3 »À≈ ··
+Net                             3 301 3 »À≈ ¡· »Ã?
+than                            4 305 4 »À≈ ··
+many                            4 310 4 »À≈ ··
+would                           5 315 5 »À≈ ··
+find                            4 321 4 »À≈ ··
+´                               1 326 1 –«ƒ  —“
+healthy                         7 327 7 »À≈ ··
+.                               1 334 1 «œ– œ–ƒ2
+ÅÅ                              2 335 2 –«ƒ œ–¡
+It                              2 337 2 »À≈ ¡· »Ã? œ–ƒ1
+also                            4 340 4 »À≈ ··
+has                             3 345 3 »À≈ ··
+its                             3 349 3 »À≈ ··
+criminals                       9 353 9 »À≈ ··
+.                               1 362 1 «œ– œ–ƒ2
+ÅÅ                              2 363 2 –«ƒ œ–¡
+Clifford                        8 365 8 »À≈ ¡· »Ã? œ–ƒ1
+Stoll                           5 374 5 »À≈ ¡· »Ã?
+writes                          6 380 6 »À≈ ··
+in                              2 387 2 »À≈ ··
+"                               1 390 1 «œ–
+The                             3 391 3 »À≈ ¡· »Ã?
+´                               1 395 1 –«ƒ  —“
+Cuckoo's                        8 396 8 »À≈ ¡· »Ã?
+Egg                             3 405 3 »À≈ ¡· »Ã?
+"                               1 408 1 «œ–
+how                             3 410 3 »À≈ ··
+he                              2 414 2 »À≈ ··
+tracked                         7 417 7 »À≈ ··
+a                               1 425 1 »À≈ ··
+team                            4 427 4 »À≈ ··
+of                              2 432 2 »À≈ ··
+German                          6 435 6 »À≈ ¡· »Ã?
+hackers                         7 442 7 »À≈ ··
+who                             3 450 3 »À≈ ··
+were                            4 454 4 »À≈ ··
+breaking                        8 459 8 »À≈ ··
+´                               1 468 1 –«ƒ  —“
+into                            4 469 4 »À≈ ··
+U                               1 474 1 »À≈ ¡¡ ¿¡1
+.                               1 475 1 «œ–
+S                               1 476 1 »À≈ ¡¡
+.                               1 477 1 «œ– ¿¡2
+computers                       9 479 9 »À≈ ··
+and                             3 489 3 »À≈ ··
+selling                         7 493 7 »À≈ ··
+the                             3 501 3 »À≈ ··
+information                     11 505 11 »À≈ ··
+they                            4 517 4 »À≈ ··
+found                           5 522 5 »À≈ ··
+to                              2 528 2 »À≈ ··
+the                             3 531 3 »À≈ ··
+´                               1 535 1 –«ƒ  —“
+Soviets                         7 536 7 »À≈ ¡· »Ã?
+.                               1 543 1 «œ– œ–ƒ2
+ÅÅ                              2 544 2 –«ƒ œ–¡
+Robert                          6 546 6 »À≈ ¡· »Ã? œ–ƒ1
+Morris                          6 553 6 »À≈ ¡· »Ã?
+,                               1 559 1 «œ–
+a                               1 561 1 »À≈ ··
+Cornell                         7 563 7 »À≈ ¡· »Ã?
+University                      10 571 10 »À≈ ¡· »Ã?
+student                         7 582 7 »À≈ ··
+,                               1 589 1 «œ–
+was                             3 591 3 »À≈ ··
+convicted                       9 595 9 »À≈ ··
+of                              2 605 2 »À≈ ··
+´                               1 608 1 –«ƒ  —“
+unleashing                      10 609 10 »À≈ ··
+a                               1 620 1 »À≈ ··
+"                               1 622 1 «œ–
+worm                            4 623 4 »À≈ ··
+"                               1 627 1 «œ–
+program                         7 629 7 »À≈ ··
+that                            4 637 4 »À≈ ··
+effectively                     11 642 11 »À≈ ··
+disabled                        8 654 8 »À≈ ··
+several                         7 663 7 »À≈ ··
+thousand                        8 671 8 »À≈ ··
+´                               1 680 1 –«ƒ  —“
+computers                       9 681 9 »À≈ ··
+connected                       9 691 9 »À≈ ··
+to                              2 701 2 »À≈ ··
+the                             3 704 3 »À≈ ··
+Internet                        8 708 8 »À≈ ¡· »Ã?
+.                               1 716 1 «œ– ”œ œ–ƒ2
+ÅÅ                              2 717 2 –«ƒ œ–¡
+´´                              2 719 2 –«ƒ  —“
+Of                              2 721 2 »À≈ ¡· »Ã? œ–ƒ1
+more                            4 724 4 »À≈ ··
+immediate                       9 729 9 »À≈ ··
+concern                         7 739 7 »À≈ ··
+to                              2 747 2 »À≈ ··
+the                             3 750 3 »À≈ ··
+average                         7 754 7 »À≈ ··
+Net                             3 762 3 »À≈ ¡· »Ã?
+user                            4 766 4 »À≈ ··
+are                             3 771 3 »À≈ ··
+crackers                        8 775 8 »À≈ ··
+who                             3 784 3 »À≈ ··
+seek                            4 788 4 »À≈ ··
+´                               1 793 1 –«ƒ  —“
+to                              2 794 2 »À≈ ··
+find                            4 797 4 »À≈ ··
+other's                         7 802 7 »À≈ ··
+passwords                       9 810 9 »À≈ ··
+to                              2 820 2 »À≈ ··
+break                           5 823 5 »À≈ ··
+into                            4 829 4 »À≈ ··
+Net                             3 834 3 »À≈ ¡· »Ã?
+systems                         7 838 7 »À≈ ··
+and                             3 846 3 »À≈ ··
+people                          6 850 6 »À≈ ··
+who                             3 857 3 »À≈ ··
+infect                          6 861 6 »À≈ ··
+´                               1 868 1 –«ƒ  —“
+programs                        8 869 8 »À≈ ··
+on                              2 878 2 »À≈ ··
+ftp                             3 881 3 »À≈ ··
+sites                           5 885 5 »À≈ ··
+with                            4 891 4 »À≈ ··
+viruses                         7 896 7 »À≈ ··
+.                               1 903 1 «œ– ”œ œ–ƒ2
+´´                              2 905 2 –«ƒ  —“
+There                           5 907 5 »À≈ ¡· »Ã? œ–ƒ1
+is                              2 913 2 »À≈ ··
+a                               1 916 1 »À≈ ··
+widely                          6 918 6 »À≈ ··
+available                       9 925 9 »À≈ ··
+program                         7 935 7 »À≈ ··
+known                           5 943 5 »À≈ ··
+as                              2 949 2 »À≈ ··
+"                               1 952 1 «œ–
+Crack                           5 953 5 »À≈ ¡· »Ã?
+"                               1 958 1 «œ–
+that                            4 960 4 »À≈ ··
+can                             3 965 3 »À≈ ··
+decipher                        8 969 8 »À≈ ··
+´                               1 978 1 –«ƒ  —“
+user                            4 979 4 »À≈ ··
+passwords                       9 984 9 »À≈ ··
+composed                        8 994 8 »À≈ ··
+of                              2 1003 2 »À≈ ··
+words                           5 1006 5 »À≈ ··
+that                            4 1012 4 »À≈ ··
+might                           5 1017 5 »À≈ ··
+be                              2 1023 2 »À≈ ··
+found                           5 1026 5 »À≈ ··
+in                              2 1032 2 »À≈ ··
+a                               1 1035 1 »À≈ ··
+dictionary                      10 1037 10 »À≈ ··
+´                               1 1048 1 –«ƒ  —“
+(                               1 1049 1 «œ– Œ“ 
+this                            4 1050 4 »À≈ ··
+is                              2 1055 2 »À≈ ··
+why                             3 1058 3 »À≈ ··
+you                             3 1062 3 »À≈ ··
+shouldn't                       9 1066 9 »À≈ ··
+use                             3 1076 3 »À≈ ··
+such                            4 1080 4 »À≈ ··
+passwords                       9 1085 9 »À≈ ··
+)                               1 1094 1 «œ– «¿ 
+.                               1 1095 1 «œ– œ–ƒ2
+ÅÅ                              2 1096 2 –«ƒ œ–¡
+Short                           5 1098 5 »À≈ ¡· »Ã? œ–ƒ1
+of                              2 1104 2 »À≈ ··
+that                            4 1107 4 »À≈ ··
+,                               1 1111 1 «œ–
+there                           5 1113 5 »À≈ ··
+are                             3 1119 3 »À≈ ··
+´                               1 1123 1 –«ƒ  —“
+the                             3 1124 3 »À≈ ··
+annoying                        8 1128 8 »À≈ ··
+types                           5 1137 5 »À≈ ··
+who                             3 1143 3 »À≈ ··
+take                            4 1147 4 »À≈ ··
+a                               1 1152 1 »À≈ ··
+special                         7 1154 7 »À≈ ··
+thrill                          6 1162 6 »À≈ ··
+in                              2 1169 2 »À≈ ··
+trying                          6 1172 6 »À≈ ··
+to                              2 1179 2 »À≈ ··
+make                            4 1182 4 »À≈ ··
+you                             3 1187 3 »À≈ ··
+´                               1 1191 1 –«ƒ  —“
+miserable                       9 1192 9 »À≈ ··
+.                               1 1201 1 «œ– œ–ƒ2
+ÅÅ                              2 1202 2 –«ƒ œ–¡
+The                             3 1204 3 »À≈ ¡· »Ã? œ–ƒ1
+best                            4 1208 4 »À≈ ··
+advice                          6 1213 6 »À≈ ··
+in                              2 1220 2 »À≈ ··
+dealing                         7 1223 7 »À≈ ··
+with                            4 1231 4 »À≈ ··
+them                            4 1236 4 »À≈ ··
+is                              2 1241 2 »À≈ ··
+to                              2 1244 2 »À≈ ··
+count                           5 1247 5 »À≈ ··
+to                              2 1253 2 »À≈ ··
+10                              2 1256 2 ÷ 
+and                             3 1259 3 »À≈ ··
+´                               1 1263 1 –«ƒ  —“
+then                            4 1264 4 »À≈ ··
+ignore                          6 1269 6 »À≈ ··
+them                            4 1276 4 »À≈ ··
+--                              2 1281 2 «œ– ƒ≈‘ ÃÕ∆
+like                            4 1284 4 »À≈ ··
+juveniles                       9 1289 9 »À≈ ··
+everywhere                      10 1299 10 »À≈ ··
+,                               1 1309 1 «œ–
+most                            4 1311 4 »À≈ ··
+of                              2 1316 2 »À≈ ··
+their                           5 1319 5 »À≈ ··
+fun                             3 1325 3 »À≈ ··
+comes                           5 1329 5 »À≈ ··
+in                              2 1335 2 »À≈ ··
+´                               1 1338 1 –«ƒ  —“
+seeing                          6 1339 6 »À≈ ··
+how                             3 1346 3 »À≈ ··
+upset                           5 1350 5 »À≈ ··
+you                             3 1356 3 »À≈ ··
+can                             3 1360 3 »À≈ ··
+get                             3 1364 3 »À≈ ··
+.                               1 1367 1 «œ– ”œ œ–ƒ2
+´´                              2 1369 2 –«ƒ  —“
+Meanwhile                       9 1371 9 »À≈ ¡· »Ã? œ–ƒ1
+,                               1 1380 1 «œ–
+two                             3 1382 3 »À≈ ··
+Cornell                         7 1386 7 »À≈ ¡· »Ã?
+University                      10 1394 10 »À≈ ¡· »Ã?
+students                        8 1405 8 »À≈ ··
+pleaded                         7 1414 7 »À≈ ··
+guilty                          6 1422 6 »À≈ ··
+in                              2 1429 2 »À≈ ··
+1992                            4 1432 4 ÷ 
+to                              2 1437 2 »À≈ ··
+´                               1 1440 1 –«ƒ  —“
+uploading                       9 1441 9 »À≈ ··
+virus                           5 1451 5 »À≈ ··
+-                               1 1456 1 «œ– ƒ≈‘
+infected                        8 1457 8 »À≈ ··
+Macintosh                       9 1466 9 »À≈ ¡· »Ã?
+programs                        8 1476 8 »À≈ ··
+to                              2 1485 2 »À≈ ··
+ftp                             3 1488 3 »À≈ ··
+sites                           5 1492 5 »À≈ ··
+.                               1 1497 1 «œ– œ–ƒ2
+ÅÅ                              2 1498 2 –«ƒ œ–¡
+If                              2 1500 2 »À≈ ¡· »Ã? œ–ƒ1
+you                             3 1503 3 »À≈ ··
+plan                            4 1507 4 »À≈ ··
+to                              2 1512 2 »À≈ ··
+´                               1 1515 1 –«ƒ  —“
+try                             3 1516 3 »À≈ ··
+out                             3 1520 3 »À≈ ··
+large                           5 1524 5 »À≈ ··
+amounts                         7 1530 7 »À≈ ··
+of                              2 1538 2 »À≈ ··
+software                        8 1541 8 »À≈ ··
+from                            4 1550 4 »À≈ ··
+ftp                             3 1555 3 »À≈ ··
+sites                           5 1559 5 »À≈ ··
+,                               1 1564 1 «œ–
+it                              2 1566 2 »À≈ ··
+might                           5 1569 5 »À≈ ··
+be                              2 1575 2 »À≈ ··
+wise                            4 1578 4 »À≈ ··
+to                              2 1583 2 »À≈ ··
+´                               1 1586 1 –«ƒ  —“
+download                        8 1587 8 »À≈ ··
+or                              2 1596 2 »À≈ ··
+buy                             3 1599 3 »À≈ ··
+a                               1 1603 1 »À≈ ··
+good                            4 1605 4 »À≈ ··
+anti                            4 1610 4 »À≈ ··
+-                               1 1614 1 «œ– ƒ≈‘
+viral                           5 1615 5 »À≈ ··
+program                         7 1621 7 »À≈ ··
+.                               1 1628 1 «œ– ”œ œ–ƒ2
+´´                              2 1630 2 –«ƒ  —“
+But                             3 1632 3 »À≈ ¡· »Ã? œ–ƒ1
+can                             3 1636 3 »À≈ ··
+law                             3 1640 3 »À≈ ··
+enforcement                     11 1644 11 »À≈ ··
+go                              2 1656 2 »À≈ ··
+too                             3 1659 3 »À≈ ··
+far                             3 1663 3 »À≈ ··
+in                              2 1667 2 »À≈ ··
+seeking                         7 1670 7 »À≈ ··
+out                             3 1678 3 »À≈ ··
+the                             3 1682 3 »À≈ ··
+criminals                       9 1686 9 »À≈ ··
+?                               1 1695 1 «œ– œ–ƒ2
+ÅÅ                              2 1696 2 –«ƒ œ–¡
+The                             3 1698 3 »À≈ ¡· »Ã? œ–ƒ1
+´                               1 1702 1 –«ƒ  —“
+Electronic                      10 1703 10 »À≈ ¡· »Ã?
+Frontier                        8 1714 8 »À≈ ¡· »Ã?
+Foundation                      10 1723 10 »À≈ ¡· »Ã?
+was                             3 1734 3 »À≈ ··
+founded                         7 1738 7 »À≈ ··
+in                              2 1746 2 »À≈ ··
+large                           5 1749 5 »À≈ ··
+part                            4 1755 4 »À≈ ··
+in                              2 1760 2 »À≈ ··
+response                        8 1763 8 »À≈ ··
+to                              2 1772 2 »À≈ ··
+a                               1 1775 1 »À≈ ··
+´                               1 1777 1 –«ƒ  —“
+series                          6 1778 6 »À≈ ··
+of                              2 1785 2 »À≈ ··
+government                      10 1788 10 »À≈ ··
+raids                           5 1799 5 »À≈ ··
+against                         7 1805 7 »À≈ ··
+an                              2 1813 2 »À≈ ··
+alleged                         7 1816 7 »À≈ ··
+gang                            4 1824 4 »À≈ ··
+of                              2 1829 2 »À≈ ··
+hackers                         7 1832 7 »À≈ ··
+.                               1 1839 1 «œ– œ–ƒ2
+ÅÅ                              2 1840 2 –«ƒ œ–¡
+The                             3 1842 3 »À≈ ¡· »Ã? œ–ƒ1
+raids                           5 1846 5 »À≈ ··
+´                               1 1852 1 –«ƒ  —“
+resulted                        8 1853 8 »À≈ ··
+in                              2 1862 2 »À≈ ··
+the                             3 1865 3 »À≈ ··
+near                            4 1869 4 »À≈ ··
+bankruptcy                      10 1874 10 »À≈ ··
+of                              2 1885 2 »À≈ ··
+one                             3 1888 3 »À≈ ··
+game                            4 1892 4 »À≈ ··
+company                         7 1897 7 »À≈ ··
+never                           5 1905 5 »À≈ ··
+alleged                         7 1911 7 »À≈ ··
+to                              2 1919 2 »À≈ ··
+have                            4 1922 4 »À≈ ··
+´                               1 1927 1 –«ƒ  —“
+had                             3 1928 3 »À≈ ··
+anything                        8 1932 8 »À≈ ··
+to                              2 1941 2 »À≈ ··
+do                              2 1944 2 »À≈ ··
+with                            4 1947 4 »À≈ ··
+the                             3 1952 3 »À≈ ··
+hackers                         7 1956 7 »À≈ ··
+,                               1 1963 1 «œ–
+when                            4 1965 4 »À≈ ··
+the                             3 1970 3 »À≈ ··
+government                      10 1974 10 »À≈ ··
+seized                          6 1985 6 »À≈ ··
+its                             3 1992 3 »À≈ ··
+´                               1 1996 1 –«ƒ  —“
+computers                       9 1997 9 »À≈ ··
+and                             3 2007 3 »À≈ ··
+refused                         7 2011 7 »À≈ ··
+to                              2 2019 2 »À≈ ··
+give                            4 2022 4 »À≈ ··
+them                            4 2027 4 »À≈ ··
+back                            4 2032 4 »À≈ ··
+.                               1 2036 1 «œ– œ–ƒ2
+ÅÅ                              2 2037 2 –«ƒ œ–¡
+The                             3 2039 3 »À≈ ¡· »Ã? œ–ƒ1
+case                            4 2043 4 »À≈ ··
+against                         7 2048 7 »À≈ ··
+another                         7 2056 7 »À≈ ··
+´                               1 2064 1 –«ƒ  —“
+alleged                         7 2065 7 »À≈ ··
+participant                     11 2073 11 »À≈ ··
+collapsed                       9 2085 9 »À≈ ··
+in                              2 2095 2 »À≈ ··
+court                           5 2098 5 »À≈ ··
+when                            4 2104 4 »À≈ ··
+his                             3 2109 3 »À≈ ··
+attorney                        8 2113 8 »À≈ ··
+showed                          6 2122 6 »À≈ ··
+the                             3 2129 3 »À≈ ··
+´                               1 2133 1 –«ƒ  —“
+"                               1 2134 1 «œ–
+proprietary                     11 2135 11 »À≈ ··
+"                               1 2146 1 «œ–
+and                             3 2148 3 »À≈ ··
+supposedly                      10 2152 10 »À≈ ··
+hacked                          6 2163 6 »À≈ ··
+information                     11 2170 11 »À≈ ··
+he                              2 2182 2 »À≈ ··
+printed                         7 2185 7 »À≈ ··
+in                              2 2193 2 »À≈ ··
+an                              2 2196 2 »À≈ ··
+´                               1 2199 1 –«ƒ  —“
+electronic                      10 2200 10 »À≈ ··
+newsletter                      10 2211 10 »À≈ ··
+was                             3 2222 3 »À≈ ··
+actually                        8 2226 8 »À≈ ··
+available                       9 2235 9 »À≈ ··
+via                             3 2245 3 »À≈ ··
+an                              2 2249 2 »À≈ ··
+800                             3 2252 3 ÷ 
+number                          6 2256 6 »À≈ ··
+for                             3 2263 3 »À≈ ··
+about                           5 2267 5 »À≈ ··
+´                               1 2273 1 –«ƒ  —“
+$                               1 2274 1 «œ–
+13                              2 2275 2 ÷ 
+--                              2 2278 2 «œ– ƒ≈‘ ÃÕ∆
+from                            4 2281 4 »À≈ ··
+the                             3 2286 3 »À≈ ··
+phone                           5 2290 5 »À≈ ··
+company                         7 2296 7 »À≈ ··
+from                            4 2304 4 »À≈ ··
+which                           5 2309 5 »À≈ ··
+that                            4 2315 4 »À≈ ··
+data                            4 2320 4 »À≈ ··
+was                             3 2325 3 »À≈ ··
+taken                           5 2329 5 »À≈ ··
+.                               1 2334 1 «œ– ”œ œ–ƒ2
+´´´                             3 2336 3 –«ƒ  —“
+12.8  FYI
+ 
+You can find discussions about IRC in the alt.irc newsgroup. 
+
+"A Discussion on Computer Network Conferencing," by Darren Reed (May, 
+1992), provides a theoretical background on why conferencing systems such 
+as IRC are a Good Thing.  It's available through ftp at nic.ddn.mil in 
+the rfc directory as rfc1324.txt. 
+
+Every Friday, Scott Goehring posts a new list of  MUDs and related games 
+and their telnet addresses in the newsgroup rec.games.mud.announce. There 
+are several other mud newsgroups related to specific types of MUDs, 
+including rec.games.mud.social, rec.games.mud.adventure, 
+rec.games.mud.tiny, rec.games.mud.diku and rec.games.mud.lp. 
+
+For a good overview of the impact on the Internet of the Morris Worm, 
+read "Virus Highlights Need for Improved Internet Management," by the 
+U.S. General Accounting Office (June, 1989).  You can get a copy via ftp 
+from cert.sei.cmu.edu in the pub/virus-l/docs directory.  It's listed as 
+gao_rpt. 
+
+Clifford Stoll describes how the Internet works and how he tracked a 
+group of KGB-paid German hackers through it, in "The Cuckoo's Egg: 
+Tracking a Spy through the Maze of Computer Espionage," Doubleday (1989). 
+
+For information on keeping your e-mail private, use anonymous FTP 
+or ncftp to connect to ftp.eff.org and switch to the 
+pub/Net_info/EFF_Net_Guide/Updates directory and get the file 
+netupdate.003.
+
+
+
+
+13.2  SOME SPECIFIC RESOURCES FOR STUDENTS AND TEACHERS
+
+
+In addition, there are a number of resources on the Internet aimed 
+specifically at elementary and secondary students and teachers.  You can 
+use these to set up science experiments with classes in another country, 
+learn how to use computers in the classroom or keep up with the latest 
+advances in teaching everything from physics to physical education. 
+
+Among them:
+                           
+ArtsEdge        Federally sponsored Online arts resources for students
+                and teachers, it's available on the web at
+               
+                http://k12.cnidr.org/janice_k12/artsedge/artsedge2.html
+
+Ask Dr. Math    Math professors and college students help k12 students
+                with tough math questions.  Students can ask questions
+                by e-mail and browse past answers on the Web.  The
+                e-mail address is dr.math@forum.swarthmore.edu; the Web 
+                url http://olmo.swarthmore.edu/dr-math/dr-math.html
+
+AskERIC         Run by the Educational Resource and Information Center, 
+                AskERIC provides a way for educators, librarians and 
+                others interested in K-12 education to get more 
+                information about virtually everything.  The center 
+                maintains an e-mail address (askeric@ericir.syr.edu) for 
+                questions and promises answers within 48 hours.  It also 
+                maintains a Web site that contains digests of 
+                questions and answers, lesson plans in a variety of 
+                fields and other educationally related information.  The 
+                Web address is http://ericir.syr.edu/. 
+
+Health-Ed       A mailing list for health educators.  Send a request to 
+                health-ed-request@stjhmc.fidonet.org 
+ 
+K12Net          Begun on the Fidonet hobbyist network, K12Net is now also 
+                carried on many Usenet systems and provides a host of 
+                interesting and valuable services.  These include 
+                international chat for students, foreign-language 
+                discussions (for example, there are French and Germanonly conference where American students can practice 
+                those languages with students from Quebec and German).  
+                There are also conferences aimed at teachers of specific 
+                subjects, from physical education to physics. The K12 
+                network still has limited distribution, so ask your 
+                system administrator if your system carries it. 
+ 
+Kidsphere       Kidsphere is a mailing list for elementary and secondary 
+                teachers, who use it to arrange joint projects and 
+                discuss educational telecommunications.  You will find 
+                news of new software, lists of sites from which you can 
+                get computer-graphics pictures from various NASA 
+                satellites and probes and other news of interest to 
+                modem-using teachers.  
+                     To subscribe, send a request by e-mail to kidsphererequest@vms.cis.pitt.edu or joinkids@vms.cis.pitt.edu and 
+                you will start receiving messages within a couple of 
+                days. 
+                     To contribute to the discussion, send messages to 
+                kidsphere@vms.cis.pitt.edu. 
+                     KIDS is a spin-off of KIDSPHERE just for students 
+                who want to contact students.  To subscribe, send a 
+                request to joinkids@vms.cis.pitt.edu, as above.  To 
+                contribute, send messages to kids@vms.cist.pitt.edu. 
+
+MicroMUSE       This is an online, futuristic city, built entirely by
+                participants (see chapter 12 for information on MUSEs
+                and MUDs in general).  Hundreds of students from all
+                over have participated in this educational exercise,
+                coordinated by MIT. Telnet to michael.ai.mit.edu.
+                Log on as guest and then follow the prompts for more 
+                information. 
+
+NASA Spacelink  This system, run by NASA in Huntsville, Ala., 
+                provides all sorts of reports and data about NASA, its 
+                history and its various missions, past and present.  
+                Telnet spacelink.msfc.nasa.gov or 128.158.13.250. 
+                     When you connect, you'll be given an overview of the 
+                system and asked to register. The system maintains a 
+                large file library of GIF-format space graphics, but note 
+                that you can't download these through telnet. If you want 
+                to, you have to dial the system directly, at (205) 8950028.  Many can be obtained through ftp from 
+                ames.arc.nasa.gov, however. 
+
+Newton          Run by the Argonne National Laboratory, it offers 
+                conferences for teachers and students, including one 
+                called "Ask a Scientist."  
+ 
+                     Telnet: newton.dep.anl.gov.  
+                     Log in as: cocotext 
+ 
+                You'll be asked to provide your name and address.  When 
+                you get the main menu, hit 4 for the various conferences.  
+                The "Ask a Scientist" category lets you ask questions of 
+                scientists in fields from biology to earth science.  
+                Other categories let you discuss teaching, sports and 
+                computer networks. 
+ 
+OERI            The U.S. Department of Education's Office of Educational 
+                Resources and Improvement runs a gopher system that 
+                provides numerous educational resources, information and 
+                statistics for teachers.  Use gopher to connect to
+
+                     gopher.ed.gov. 
+
+Spacemet Forum  If your system doesn't carry the K12 conferences, but 
+                does provide you with telnet, you can reach the 
+                conferences through SpaceMet Forum, a bulletin-board 
+                system aimed at teachers and students that is run by the 
+                physics and astronomy department at the University of 
+                Massachusetts at Amherst.  
+                
+                     Telnet: spacemet.phast.umass.edu. 
+                
+                When you connect, hit escape once, after which you'll be 
+                asked to log on. Like K12Net, SpaceMet Forum began as a 
+                Fidonet system, but has since grown much larger.  Mort 
+                and Helen Sternheim, professors at the university, 
+                started SpaceMet as a one-line bulletin-board system 
+                several years ago to help bolster middle-school science 
+                education in nearby towns. 
+                     In addition to the K12 conferences, SpaceMet carries 
+                numerous educationally oriented conferences.  It also has 
+                a large file library of interest to educators and 
+                students, but be aware that getting files to your site 
+                could be difficult and maybe even impossible.  Unlike 
+                most other Internet sites, Spacemet does not use an ftp 
+                interface. The Sternheims say ZMODEM sometimes works over 
+                the network, but don't count on it. 
+
+Yahoo           This Stanford University web service provides an archive of
+                links to other educational resources on the net at
+                http://akebono.stanford.edu/yahoo/Education/
+
+ 
+13.3  USENET AND BITNET IN THE CLASSROOM
+
+
+There are numerous Usenet newsgroups of potential interest to 
+teachers and students.  
+
+As you might expect, many are of a scientific bent. You can find these by 
+typing l sci. in rn or using nngrep sci. for nn. There are now close to 
+40, with subjects ranging from archaeology to economics (the "dismal 
+science," remember?) to astronomy to nanotechnology (the construction of 
+microscopically small machines). 
+
+One thing students will quickly learn from many of these groups: science 
+is not just dull, boring facts.  Science is argument and standing your 
+ground and making your case.  The Usenet sci. groups encourage critical 
+thinking. 
+
+Beyond science, social-studies and history classes can keep busy learning 
+about other countries, through the soc.culture newsgroups. 
+
+Most of these newsgroups originated as ways for expatriates of a given 
+country to keep in touch with their homeland and its culture.  In times 
+of crisis, however, these groups often become places to disseminate 
+information from or into the country and to discuss what is happening.  
+From Afghanistan to Yugoslavia, close to 50 countries are now represented 
+on Usenet.  To see which groups are available, use l soc.culture. in rn 
+or nngrep soc.culture. for nn. 
+
+Several "talk" newsgroups provide additional topical discussions, but 
+teachers should screen them first before recommending them to students.  
+They range from talk.abortion and talk.politics.guns to 
+talk.politics.space and talk.environment. 
+
+One caveat:  Teachers might want to peruse particular newsgroups before 
+setting their students loose in them.  Some have higher levels of flaming 
+and blather than others, not to mention content that some might not 
+consider appropriate in a school setting.  Some schools have developed 
+"contracts" that students are required to sign that set out acceptable 
+Net behavior. 
+
+There are also a number of Bitnet discussion groups of potential interest 
+to students and teachers.  See Chapter 5 for information on finding and 
+subscribing to Bitnet discussion groups.  Some with an educational 
+orientation include: 
+ 
+biopi-l     ksuvm.bitnet        Secondary biology education
+chemed-l    uwf.bitnet          Chemistry education
+dts-l       iubvm.bitnet        The Dead Teacher's Society list
+phys-l      uwf.bitnet          Discussions for physics teachers
+physhare    psuvm.bitnet        Where physics teachers share resources
+scimath-l   psuvm.bitnet        Science and math education
+
+To get a list of ftp sites that carry astronomical images in the GIF 
+graphics format, use ftp to connect to nic.funet.fi. Switch to the 
+/pub/astro/general directory and get the file astroftp.txt.  Among the 
+sites listed is ames.arc.nasa.gov, which carries images taken by the 
+Voyager and Galileo probes, among other pictures.
+
+
+
+
+
+CHAPTER 14: BUSINESS ON THE NET
+
+
+
+1.2 GO!
+
+ 
+Once, only people who studied or worked at an institution directly tied 
+to the Net could connect to the world.  Today, though, an ever-growing 
+number of "public-access" systems provide access for everybody.  These 
+systems can now be found in most metropolitan areas (at least in North 
+America) several states, and there are several companies a couple of 
+sites that can provide access across the country. 
+
+   
+
+Some sites are run by for-profit companies; others by non-profit 
+organizations.  Some of these public-access, or host, systems, are free 
+of charge.  Others charge a monthly or yearly fee for unlimited access.  
+And a few charge by the hour. Systems that charge for access will usually 
+let you sign up online with a credit card.  Some also let you set up a 
+billing system if you'd rather pay by check. 
+
+But cost should be only one consideration in choosing a host system, 
+especially if you live in an area with more than one provider.  Most 
+systems let you look around before you sign up.  What is the range of 
+each of their services?  How easy is each to use? What kind of support or 
+help can you get from the system administrators? 
+
+The last two questions are particularly important because many     
+systems provide no user interface at all; when you connect, you are 
+dumped right into the Unix operating system.  If you're already familiar 
+with Unix, or you want to learn how to use it, these systems offer 
+phenomenal power -- in addition to Net access, most also let you tap into 
+the power of Unix to do everything from compiling your own programs to 
+playing online games. 
+
+But if you don't want to have to learn Unix, there are other publicaccess 
+systems that work through menus (just like the ones in 
+restaurants; you are shown a list of choices and then you make your 
+selection of what you want), or which provide a "user interface" that is 
+easier to figure out than the ever cryptic Unix (and fortunately, even on 
+unix systems, there are ways to minimize your exposure to its commands, 
+as we'll see in later chapters). 
+
+Some systems also have their own unique 
+local services, ranging from extensive conferences to large file 
+libraries. 
+
+
+1.6 IF YOUR TOWN HAS NO DIRECT ACCESS
+
+If you don't live in an area with a public-access site, you'll still be 
+able to connect to the Net.  Several services offer access through 
+national data networks such as the CompuServe Packet Network and 
+SprintNet, which have dozens, even hundreds of local dial-in numbers 
+across the country.  These include Holonet in Berkeley, Calf., Portal in 
+Cupertino, Calf., the WELL in Sausalito, Calf., Dial 'N CERF in San 
+Diego, Calf., the World in Brookline, Mass., and Michnet in Ann Arbor, 
+Mich.  Dial 'N CERF offers access through an 800 number.  Expect to pay 
+from $2 to $12 an hour to use these networks, above each provider's basic 
+charges.  The exact amount depends on the network, time of day and type 
+of modem you use.  For more information, contact the above services. 
+
+Four other providers deliver Net access to users across the country: 
+
+Delphi, based in Cambridge, Mass., is a consumer-oriented network much 
+like CompuServe or America Online -- only it now offers subscribers 
+access to Internet services. Delphi charges $3 a month for Internet 
+access, in addition to standard charges.  These are $10 a month for four 
+hours of off-peak (non-working hours) access a month and $4 an hour for 
+each additional hour or $20 for 20 hours of access a month and $1.80 an 
+hour for each additional hour.  For more information, call (800) 6954005. 
+
+BIX (the Byte Information Exchange) offers FTP, Telnet and e-mail access 
+to the Internet as part of their basic service. Owned by the same company 
+as Delphi, it also offers 20 hours of access a month for $20.  For more 
+information, call (800) 695-4775.              
+
+PSI, based in Reston, Va., provides nationwide access to Internet 
+services through scores of local dial-in numbers to owners of IBM and 
+compatible computers.  PSILink. which includes access to e-mail, Usenet 
+and ftp, costs $29 a month, plus a one-time $19 registration fee.  
+Special software is required, but is available free from PSI. PSI's 
+Global Dialup Service provides access to telnet for $39 a month plus a 
+one-time $39 set-up fee.  For more information, call (800) 82PSI82 or 
+(703) 620-6651. 
+
+NovX Systems Integration, based in Seattle, Washington, offers full 
+Internet access through an 800 number reachable across the United States. 
+There is a $24. setup fee, in addition to a monthly fee of $19.95 and a 
+$10.5 hourly charge.  For more information, call (206) 447-0800. 
+
+
+1.7  NET ORIGINS
+
+
+In the 1960s, researchers began experimenting with linking computers to 
+each other through telephone hook-ups, using funds from the 
+U.S Defense Department's Advanced Research Projects Agency (ARPA). 
+
+ARPA wanted to see if computers in different locations could be linked 
+using a new technology known as packet switching. This technology, in 
+which data meant for another location is broken up into little pieces, 
+each with its own "forwarding address" had the promise of letting several 
+users share just one communications line.  Just as important, from ARPA's 
+viewpoint, was that this allowed for creation of networks that could 
+automatically route data around downed circuits or computers.  ARPA's 
+goal was not the creation of today's international computer-using 
+community, but development of a data network that could survive a nuclear 
+attack. 
+
+Previous computer networking efforts had required a line between each 
+computer on the network, sort of like a one-track train route. The packet 
+system allowed for creation of a data highway, in which large numbers of 
+vehicles could essentially share the same lane.  Each packet was given 
+the computer equivalent of a map and a time stamp, so that it could be 
+sent to the right destination, where it would then be reassembled into a 
+message the computer or a human could use. 
+
+This system allowed computers to share data and the researchers to 
+exchange electronic mail, or e-mail.  In itself, e-mail was something of 
+a revolution, offering the ability to send detailed letters at the speed 
+of a phone call. 
+
+As this system, known as ARPANet, grew, some enterprising college 
+students (and one in high school) developed a way to use it to conduct 
+online conferences.  These started as science-oriented discussions, but 
+they soon branched out into virtually every other field, as people 
+recognized the power of being able to "talk" to hundreds, or even 
+thousands, of people around the country. 
+
+In the 1970s, ARPA helped support the development of rules, or protocols, 
+for transferring data between different types of computer networks.  
+These "internet" (from "internetworking") protocols made it possible to 
+develop the worldwide Net we have today that links all sorts of computers 
+across national boundaries. By the close of the 1970s, links developed 
+between ARPANet and counterparts in other countries.  The world was now 
+tied together in a computer web.  
+
+In the 1980s, this network of networks, which became known collectively 
+as the Internet, expanded at a phenomenal rate.  Hundreds, then 
+thousands, of colleges, research companies and government agencies began 
+to connect their computers to this worldwide Net.  Some enterprising 
+hobbyists and companies unwilling to pay the high costs of Internet 
+access (or unable to meet stringent government regulations for access) 
+learned how to link their own systems to the Internet, even if "only" for 
+e-mail and conferences.  Some of these systems began offering access to 
+the public. Now anybody with a computer and modem, persistance and a 
+small amount of money -- and persistence -- could tap into the world. 
+
+In the 1990s, the Net continues to grow at exponential rates.  Some 
+estimates are that the volume of messages transferred through the Net 
+grows 20 percent a month.  In response, government and other users have 
+tried in recent years to expand the Net itself.  Once, the main Net 
+"backbone" in the U.S. moved data at 56,000 bits per second. That proved 
+too slow for the ever increasing amounts of data being sent over it, and 
+in recent years the maximum speed was increased to 1.5 million and then 
+45 million bits per second. Even before the Net was able to reach that 
+latter speed, however, Net experts were already figuring out ways to pump 
+data at speeds of up to 2 billion bits per second -- fast enough to send 
+the entire Encyclopedia Britannica across the country in just one or two 
+seconds.  Another major change has been the development of commercial 
+services that provide internetworking services at speeds comparable to 
+those of the government system.  In fact, what started as a government 
+experiment is now largely a private enterprise.
+
+
+1.8  HOW IT WORKS
+ 
+
+The worldwide Net is actually a complex web of smaller regional networks.  
+To understand it, picture a modern road network of trans-continental 
+superhighways connecting large cities.  From these large cities come 
+smaller freeways and parkways to link together small towns, whose 
+residents travel on slower, narrow residential ways.  
+
+The Net superhighway is the high-speed Internet.  Connected to this are 
+computers that use a particular system of transferring data at high 
+speeds.  In the U.S., the major Internet "backbones" theoretically can 
+move data at rates of 45 million bits per second (compare this to the 
+average home modem, which has a top speed of roughly 9,600 to 14,400 bits 
+per second).  Connected to the backbone computers are smaller networks 
+serving particular geographic regions, which generally move data at 
+speeds around 1.5 million bits per second.  Feeding off these in turn are 
+even smaller networks or individual computers. 
+
+Unlike with commercial networks such as CompuServe or Prodigy, there is 
+no one central computer or computers running the Internet -- its 
+resources are to be found among thousands of individual computers.  This 
+is both its greatest strength and its greatest weakness.   The approach 
+means it is virtually impossible for the entire Net to crash at once -- 
+even if one computer shuts down, the rest of the network stays up.  The 
+design also reduces the costs for an individual or organization to get 
+onto the network.  However, thousands of connected computers can also 
+make it difficult to navigate the Net and find what you want -- 
+especially as different computers may have different commands for 
+plumbing their resources.  It is only recently that Net users have begun 
+to develop the sorts of navigational tools and "maps" that will let 
+neophytes get around without getting lost. 
+
+Nobody really knows how many computers and networks actually make up this 
+Net.  Some estimates say there are now as many as 12,000 networks 
+connecting nearly 4 million computers and more than 20 million 
+people around the world.  Whatever the actual numbers, however, it is 
+clear they are only increasing.   
+
+The Net is more than just a technological marvel. It is human 
+communication at its most fundamental level.  The pace may be a little 
+quicker when the messages race around the world in a few seconds, but 
+it's not much different from a large and interesting party. You'll see 
+things in cyberspace that will make you laugh; you'll see things that 
+will anger you.  You'll read silly little snippets and new ideas that 
+WILL make you think.  You'll make new friends and meet people you wish 
+would just go away. And you'll do it all in a community that transcends 
+state lines and national borders.
+ 
+major network providers continue to work on ways to make it 
+easier for users of one network to communicate with those of another.  
+Work is underway on a system for providing a universal "white pages" 
+in which you could look up somebody's electronic-mail address, for 
+example.  This connectivity trend will likely speed up in coming years 
+as users begin to demand seamless network access, much as telephone 
+users can now dial almost anywhere in the world without worrying about 
+how many phone companies actually have to connect their calls. 
+
+Today, the links grow ever closer between the Internet and such 
+commercial networks as CompuServe and Prodigy, whose users can now 
+exchange electronic mail with their Internet friends.  All of the major 
+commercial networks, such as CompuServe and America Online are gradually 
+bringing internet access to their users (one network, Delphi, already 
+offers complete access). 
+
+And as it becomes easier to use, more and more people will join this 
+worldwide community we call the Net. 
+
+Being connected to the Net takes more than just reading conferences and 
+logging messages to your computer; it takes asking and answering 
+questions, exchanging opinions -- getting involved. 
+
+If you chose to go forward, to use and contribute, you will become a 
+citizen of Cyberspace.  If you're reading these words for the first time, 
+this may seem like an amusing but unlikely notion -- that one could 
+"inhabit" a place without physical space.  But put a mark beside these 
+words.  Join the Net and actively participate for a year.  Then re-read 
+this passage.  It will no longer seem so strange to be a "citizen of 
+Cyberspace."  It will seem like the most natural thing in the world.   
+
+And that leads to another fundamental thing to remember: 
+ 
+                You can't break the Net!
+ 
+As you travel the Net, your computer may freeze, your screen may erupt 
+into a mass of gibberish.  You may think you've just disabled a milliondollar computer somewhere -- or even your own personal computer.  Sooner 
+or later, this feeling happens to everyone -- and likely more than once. 
+But the Net and your computer are hardier than you think, so relax.  You 
+can no more break the Net than you can the phone system.  If something 
+goes wrong, try again.  If nothing at all happens, you can always 
+disconnect.   If worse comes to worse, you can turn off your computer.  
+Then take a deep breath.  And dial right back in. Leave a note for the 
+person who runs the computer to which you've connected to ask for advice.  
+Try it again. Persistence pays.  
+
+Stay and contribute.  The Net will be richer for it -- and so will you.        
+
+
+2.2  ELM -- A BETTER WAY 
+
+ 
+Elm is a combination mailbox and letter-writing system that uses menus to 
+help you navigate through mail.  Most Unix-based host systems now have it 
+online. To use it, type 
+  
+     elm 
+ 
+and hit enter.  You'll get a menu of your waiting mail, along with a list 
+of commands you can execute, that will look something like this: 
+ 
+ 
+     Mailbox is '/usr/spool/mail/adamg' with 38 messages [ELM 2.3 PL11]      
+                                                                               
+                                                                               
+                                                                               
+ You can use any of the following commands by pressing the first character;  
+d)elete or u)ndelete mail,  m)ail a message,  r)eply or f)orward mail,  q)uit 
+  To read a message, press <return>.  j = move down, k = move up, ? = help   
+ 
+
+Each line shows the date you received the message, who sent it, how many 
+lines long the message is, and the message's subject. 
+
+If you are using VT100 or similar emulation, you can move up and down the 
+menu with your up and down arrow keys.  Otherwise, type the line number 
+of the message you want to read or delete and hit enter. 
+
+When you read a message, it pauses every 24 lines, instead of scrolling 
+until it's done.  Hit the space bar to read the next page.  You can type 
+a lowercase r to reply or a lower-case q or i to get back to the menu 
+(the I stands for "index").  
+
+At the main menu, hitting a lowercase m followed by enter will let you 
+start a message.  To delete a message, type a lower-case d.  You can do 
+this while reading the message.  Or, if you are in the menu, move the 
+cursor to the message's line and then hit d. 
+
+When you're done with elm, type a lower-case q.  The program will ask if 
+you really want to delete the messages you marked. Then, it will ask you 
+if you want to move any messages you've read but haven't marked for 
+deletion to a "received" file.  For now, hit your n key.  Elm has 
+a potentially major disadvantage for the beginner. The default text 
+editor it often generally calls up when you hit your r or m key is often 
+a program called emacs. Unixoids swear by emacs, but everybody else 
+almost always finds it impossible.  Unfortunately, you can't always get 
+away from it (or vi, another text editor often found on Unix systems), so 
+later on we'll talk about some basic commands that will keep you from 
+going totally nuts.  If you're lucky, though, your system administrator 
+will have changed emacs to Pico, a much easier to use text processor 
+(more on that in the Pine section below).
+
+If you want to save a message to your own computer, hit s, either within 
+the message or with your cursor on the message entry in the elm menu.  A 
+filename will pop up.  If you do not like it, type a new name (you won't 
+have to backspace).  Hit enter, and the message will be saved with that 
+file name in your "home directory" on your host system.  After you exit 
+elm, you can now download it (ask your system administrator for specifics 
+on how to download -- and upload -- such files). 
+
+ 
+2.3  PINE -- AN EVEN BETTER WAY
+
+Pine is based on elm but includes a number of improvements that make it 
+an ideal mail system for beginners.   Like elm, pine starts you with a 
+menu.  It also has an "address book" feature that is handy for people 
+with long or complex e-mail addresses. Hitting A at the main menu puts 
+you in the address book, where you can type in the person's first name 
+(or nickname) followed by her address. Then, when you want to send that 
+person a message, you only have to type in her first name or nickname, 
+and Pine automatically inserts her actual address. The address book 
+also lets you set up a mailing list.  This feature allows you to send the 
+same message to a number of people at once. 
+
+What really sets Pine apart is its built-in text editor, which looks and 
+feels a lot more like word-processing programs available for MS-DOS and 
+Macintosh users.  Not only does it have word wrap (a revolutionary 
+concept if ever there was one), it also has a spell-checker and a search 
+command. Best of all, all of the commands you need are listed in a twoline mini-menu at the bottom of each screen.  The commands look like 
+this: 
+ 
+     ^W Where is 
+ 
+The little caret is a synonym for the key marked "control" on your 
+keyboard.  To find where a particular word is in your document, hit 
+control-w (depress your control key, then hit w) you'd hit your control 
+key and your W key at the same time, which would bring up a prompt asking 
+you for the word to look for.  Some of Pine's commands are a tad peculiar 
+(control-V for "page down" for example), which comes from being based on 
+a variant of the emacs text processor (which is utterly peculiar).  But 
+again, all of the commands you need are listed on that two-line minimenu, so it shouldn't take you more than a couple of seconds to find the 
+right one.  To use Pine, type 
+ 
+     pine 
+ 
+at the command line and hit enter.                     
+ 
+ 
+2.4  SMILEYS
+ 
+ 
+When you're involved in an online discussion, you can't see the smiles or 
+shrugs that the other person might make in a live conversation to show 
+he's only kidding.  But online, there's no body language. So what you 
+might think is funny, somebody else might take as an insult.  To try to 
+keep such misunderstandings from erupting into bitter disputes, we have 
+smileys.  Tilt your head to the left and look at the following sideways. 
+:-).  Or simply :).  This is your basic "smiley." Use it to indicate 
+people should not take that comment you just made as seriously as they 
+might otherwise.  You make a smiley by typing a colon, a hyphen and a 
+right parenthetical bracket. Some people prefer using the word "grin," 
+usually in this form: 
+ 
+     <grin>   
+ 
+Sometimes, though, you'll see it as *grin* or even just <g> for short. 
+ 
+Some other smileys include: 
+ 
+     ;-)      Wink; 
+     :-(      Frown; 
+     :-O      Surprise; 
+     8-)      Wearing glasses; 
+     =|:-)=   Abe Lincoln. 
+    
+OK, so maybe the last two are a little bogus :-).
+ 
+
+2.5  SENDING E-MAIL TO OTHER NETWORKS
+ 
+ 
+There are a number of computer networks that are not directly part of the 
+Net, but which are now connected through "gateways" that allow the 
+passing of e-mail.  Here's a list of some of the larger networks, how to 
+send mail to them and how their users can send mail to you: 
+ 
+America Online 
+--------------
+ 
+Remove any spaces from a user's name and append "@aol.com," to get 
+ 
+     user@aol.com 
+ 
+America Online users who want to send mail to you need only put your 
+Net address in the "to:" field before composing a message. 
+ 
+ 
+ATTMail 
+-------
+ 
+Address your message to user@attmail.com. 
+   
+From ATTMail, a user would send mail to you in this form: 
+ 
+     internet!domain!user 
+ 
+So if your address were nancyr@world.std.com, your correspondent would 
+send a message to you at 
+ 
+     internet!world.std.com!nancyr 
+ 
+ 
+Bitnet 
+------
+     
+Users of Bitnet (and NetNorth in Canada and EARN in Europe) often have 
+addresses in this form: IZZY@INDVMS.  If you're lucky, all you'll have to 
+do to mail to that address is add "bitnet" at the end, to get 
+izzy@indvms.bitnet.  Sometimes, however, mail to such an address will 
+bounce back to you, because Bitnet addresses do not always translate well 
+into an Internet form.  If this happens, you can send mail through one of 
+two Internet/Bitnet gateways. First, change the @ in the address to a %, 
+so that you get username%site.bitnet.  Then add either @vm.marist.edu or 
+@cunyvm.cuny.edu, so that, with the above example, you would get 
+izzy%indyvms.bitnet@vm.marist.edu or izzy%indvyvms.bitnet@cunyvm.cuny.edu 
+
+Bitnet users have it a little easier: They can usually send mail directly 
+to your e-mail address without fooling around with it at all.  So send 
+them your address and they should be OK. 
+ 
+ 
+CompuServe 
+----------
+ 
+CompuServe users have numerical addresses in this form: 73727,545. 
+To send mail to a CompuServe user, change the comma to a period and add 
+"@compuserve.com"; for example: 73727.545@compuserve.com. 
+
+Note that many CompuServe users must pay extra to receive mail from the 
+Internet. 
+
+If you know CompuServe users who want to send you mail, tell them to GO 
+MAIL and create a mail message. In the address area, instead of typing in 
+a CompuServe number, have them type your address in this form: 
+ 
+     INTERNET:YourID@YourAddress. 
+ 
+For example, INTERNET:adamg@world.std.com.                  
+
+ 
+Delphi
+------
+ 
+To send mail to a Delphi user, the form is username@delphi.com. 
+ 
+Fidonet 
+-------
+ 
+To send mail to people using a Fidonet BBS, you need the name they use to 
+log onto that system and its "node number.''  Fidonet node numbers or 
+addresses consist of three numbers, in this form: 1:322/190.  The first 
+number tells which of several broad geographic zones the BBS is in (1 
+represents the U.S. and Canada, 2 Europe and Israel, 3 Pacific Asia, 4 
+South America).  The second number represents the BBS's network, while 
+the final number is the BBS's "FidoNode'' number in that network. If your 
+correspondent only gives you two numbers (for example, 322/190), it means 
+the system is in zone 1.   
+
+Now comes the tricky part. You have to reverse the numbers and add to 
+them the letters f, n and z (which stand for "FidoNode,''"network,'' and 
+"zone'). For example, the address above would become 
+ 
+     f190.n322.z1. 
+ 
+Now add "fidonet.org'' at the end, to get f190.n322.z1.fidonet.org. Then 
+add "FirstName.LastName@', to get 
+ 
+     FirstName.LastName@f190.n322.z1.fidonet.org
+ 
+Note the period between the first and last names. Also, some countries 
+now have their own Fidonet "backbone" systems, which might affect 
+addressing.  For example, were the above address in Germany, you would 
+end it with "fido.de" instead of "fidonet.org." 
+     
+Whew! 
+
+The reverse process is totally different. First, the person has to have 
+access to his or her BBS's "net mail" area and know the Fidonet address 
+of his or her local Fidonet/UUCP gateway (often their system operator 
+will know it).  Your Fidonet correspondent should address a net-mail 
+message to UUCP (not your name) in the "to:" field.  In the node-number 
+field, they should type in the node number of the Fidonet/UUCP gateway 
+(if the gateway system is in the same regional network as their system, 
+they need only type the last number, for example, 390 instead of 
+322/390).  Then, the first line of the message has to be your Internet 
+address, followed by a blank line.  After that, the person can write the 
+message and send it.  
+
+Because of the way Fidonet moves mail, it could take a day or two for a 
+message to be delivered in either direction.  Also, because many Fidonet 
+systems are run as hobbies, it is considered good form to ask the gateway 
+sysop's permission if you intend to pass large amounts of mail back and 
+forth. Messages of a commercial nature are strictly forbidden (even if 
+it's something the other person asked for). Also, consider it very likely 
+that somebody other than the recipient will read your messages. 
+ 
+ 
+GEnie  
+-----
+
+To send mail to a GEnie user, add "@genie.geis.com" to the end of the 
+GEnie user name, for example: walt@genie.geis.com. 
+ 
+MCIMail 
+-------
+ 
+To send mail to somebody with an MCIMail account, add "@mcimail.com to 
+the end of their name or numerical address. For example: 
+       
+     555-1212@mcimail.com 
+ 
+or 
+     
+     jsmith@mcimail.com 
+ 
+Note that if there is more than one MCIMail subscriber with that name, 
+you will get a mail message back from MCI giving you their names and 
+numerical addresses. You'll then have to figure out which one you want 
+and re-send the message. 
+ 
+From MCI, a user would type 
+ 
+     Your Name (EMS) 
+ 
+at the "To:" prompt.  At the EMS prompt, he or she would type 
+ 
+    internet 
+ 
+followed by your Net address at the "Mbx:" prompt. 
+ 
+Prodigy 
+------- 
+     
+UserID@prodigy.com.  Note that Prodigy users must pay extra for 
+Internet e-mail. 
+
+
+2.6  SEVEN UNIX COMMANDS YOU CAN'T LIVE WITHOUT
+
+ 
+If you connect to the Net through a Unix system, eventually you'll have 
+to come to terms with Unix.  For better or worse, most Unix systems do 
+NOT shield you from their inner workings -- if you want to copy a Usenet 
+posting to a file, for example, you'll have to use some Unix commands if 
+you ever want to do anything with that file. 
+
+Like MS-DOS, Unix is an operating system - it tells the computer how to 
+do things.  Now while Unix may have a reputation as being even more 
+complex than MS-DOS, in most cases, a few basic, and simple, commands 
+should be all you'll ever need. 
+
+If your own computer uses MS-DOS or PC-DOS, the basic concepts will seem 
+very familiar -- but watch out for the cd command, which works 
+differently enough from the similarly named DOS command that it will 
+drive you crazy.  Also, unlike MS-DOS, Unix is case sensitive -- if you 
+type commands or directory names in the wrong case, you'll get an error 
+message. 
+
+If you're used to working on a Mac, you'll have to remember that Unix 
+stores files in "directories" rather than "folders."  Unix directories 
+are organized like branches on a tree. At the bottom is the "root" 
+directory, with sub-directories branching off that (and sub-directories 
+in turn can have sub-directories). 
+The Mac equivalent of a Unix subdirectory is a folder within another folder. 
+ 
+2.7  WHEN THINGS GO WRONG                  
+ 
+     
+* You send a message but get back an ominous looking message from 
+MAILER-DAEMON containing up to several dozen lines of computerese 
+followed by your message.  
+
+Somewhere in those lines you can often find a clue to what went 
+wrong.  You might have made a mistake in spelling the e-mail address.  
+The site to which you're sending mail might have been down for 
+maintenance or a problem. You may have used the wrong "translation" for 
+mail to a non-Internet network. 
+
+* You call up your host system's text editor to write a message or reply 
+to one and can't seem to get out.  
+
+If it's emacs, try control-X, control-C DELETE(in other words, hit your 
+control key and your X key at the same time, followed by control and C).  
+If worse comes to worse, you can hang up. 
+
+* In elm, you accidentally hit the D key for a message you want to save.  
+
+Type the number of the message, hit enter and then U, which will "undelete" the message.  This works only before you exit Elm; once you quit, 
+the message is gone. 
+
+* You try to upload an ASCII message you've written on your own computer 
+into a message you're preparing in Elm or Pine and you get a lot of left 
+brackets, capital Ms, Ks and Ls and some funny-looking characters.  
+
+Believe it or not, your message may actually wind up looking fine; all 
+that garbage is temporary and reflects the problems some Unix text 
+processors have with ASCII uploads.  But it will take much longer for 
+your upload to finish.  One way to deal with this is to call up the 
+simple mail program, which will not produce any weird characters when you 
+upload a text file into a message.  Another way (which is better if your 
+prepared message is a response to somebody's mail), is to create a text 
+file on your host system with cat, for example, 
+ 
+     cat>file
+ 
+and then upload your text into that.  Then, in elm or pine, you can 
+insert the message with a simple command (control-R in pine, for 
+example); only this time you won't see all that extraneous stuff. 
+     
+*  You haven't cleared out your Elm mailbox in awhile, and you 
+accidentally hit "y" when you meant to hit "n" (or vice-versa) when 
+exiting and now all your messages have disappeared.
+
+The system has put all the messages in a file called received in your 
+Mail directory.  To get to the messages, call up Elm again, and hit your 
+c key.  You'll be asked which folder to change to.  Type 
+
+     =received
+
+and hit enter.  You'll be prompted as if you're about to exit Elm; when 
+done answering the questions, you'll get a menu of messages in your 
+receive folder.  You can reply to them, delete them, etc., as you would 
+normally. 
+
+
+
+
+
+
+
+3.2 NAVIGATING USENET WITH nn
+
+
+How do you dive right in?  As mentioned, on some systems, it's all done 
+through menus -- you just keep choosing from a list of choices until you 
+get to the newsgroup you want and then hit the "read" command.  On Unix 
+systems, however, you will have to use a "newsreader" program.  Two of 
+the more common ones are known as rn (for "read news") and nn (for "no 
+news" -- because it's supposed to be simpler to use). 
+
+For beginners, nn may be the better choice because it works with menus -- 
+you get a list of articles in a given newsgroup and then you choose which 
+ones you want to see.  To try it out, connect to your host system and, at 
+the command line, type 
+ 
+     nn news.announce.newusers
+ 
+and hit enter.  After a few seconds, you should see something like this: 
+ 
+Newsgroup: news.announce.newusers                     Articles: 22 of 22/1 NEW 
+ 
+Obviously, this is a good newsgroup to begin your exploration of Usenet!  
+Here's what all this means:  The first letter on each line is the letter 
+you type to read that particular "article" (it makes sense that a 
+"newsgroup" would have "articles").  Next comes the name of the person 
+who wrote that article, followed by its length, in lines, and what the 
+article is about. At the bottom, you see the local time at your access 
+site, what you're doing right now (i.e., SELECTing articles), which key 
+to hit for some help (the ? key) and how many of the articles in the 
+newsgroup you can see on this screen. The "(moderated)" means the 
+newsgroup has a "moderator" who is the only one who can directly post 
+messages to it.  This is generally limited to groups such as this, which 
+contain articles of basic information, or for digests, which are 
+basically online magazines (more on them in a bit). 
+
+Say you're particularly interested in what "Emily Postnews" has to say 
+about proper etiquette on Usenet. Hit your c key (lower case!), and the 
+line will light up.  If you want to read something else, hit the key that 
+corresponds to it.  And if you want to see what's on the next page of 
+articles, hit return or your space bar. 
+
+But you're impatient to get going, and you want to read that article now.  
+The command for that in nn is a capital Z.  
+
+The first few lines are the message's header, similar to the header you 
+get in e-mail messages.  Then comes the beginning of the message.  The 
+last line tells you the time again, the newsgroup name (or part of it, 
+anyway), the position in your message stack that this message occupies, 
+how to get help, and how much of the message is on screen.  If you want 
+to keep reading this message, just hit your space bar (not your enter 
+key!) for the next screen and so on until done. When done, you'll be 
+returned to the newsgroup menu.  For now hit Q (upper case this time), 
+which quits you out of nn and returns you to your host system's command 
+line. 
+
+To get a look at another interesting newsgroup, type 
+ 
+     nn comp.risks
+ 
+and hit enter.  This newsgroup is another moderated group, this time a 
+digest of all the funny and frightening ways computers and the people who 
+run and use them can go wrong.  Again, you read articles by selecting 
+their letters.  If you're in the middle of an article and decide you want 
+to go onto the next one, hit your n key. 
+     
+Now it's time to look for some newsgroups that might be of particular 
+interest to you.  Unix host systems that have nn use a program called 
+nngrep (ever get the feeling Unix was not entirely written in English?) 
+that lets you scan newsgroups.  Exit nn and at your host system's command 
+line, type 
+ 
+     nngrep word
+ 
+where word is the subject you're interested in.  If you use a Macintosh 
+computer, you might try
+ 
+     nngrep mac
+ 
+ 
+Note that some of these obviously have something to do with Macintoshes 
+while some obviously do not; nngrep is not a perfect system.  If you want 
+to get a list of ALL the newsgroups available on your host system, type 
+ 
+     nngrep -a |more
+ 
+or
+
+     nngrep -a |pg
+ 
+and hit enter (which one to use depends on the Unix used on your host 
+system; if one doesn't do anything, try the other). You don't absolutely 
+need the |more or |pg, but if you don't include it, the list will keep 
+scrolling, rather than pausing every 24 lines.  If you are in nn, hitting 
+a capital Y will bring up a similar list. 
+
+Typing "nn newsgroup" for every newsgroup can get awfully tiring after 
+awhile.  When you use nn, your host system looks in a file called 
+.newsrc.  This is basically a list of every newsgroup on the host system 
+along with notations on which groups and articles you have read (all 
+maintained by the computer).  You can also use this file to create a 
+"reading list" that brings up each newsgroup to which you want to 
+"subscribe."  To try it out, type 
+ 
+     nn
+ 
+without any newsgroup name, and hit enter.  
+     
+Unfortunately, you will start out with a .newsrc file that has you 
+"subscribed" to every single newsgroup on your host system!  To delete a 
+newsgroup from your reading list, type a capital U while its menu is on 
+the screen.  The computer will ask you if you're sure you want to 
+"unsubscribe."  If you then hit a Y, you'll be unsubscribed and put in 
+the next group. 
+
+With many host systems carrying thousands of newsgroups, this will take 
+you forever.  
+
+Fortunately, there are a couple of easier ways to do this.  Both involve 
+calling up your .newsrc file in a word or text processor.  In a .newsrc 
+file, each newsgroup takes up one line, consisting of the group's name, 
+an exclamation point or a colon and a range of numbers.  Newsgroups with 
+a colon are ones to which you are subscribed; those followed by an 
+exclamation point are "un-subscribed."  To start with a clean slate, 
+then, you have to change all those colons to exclamation points. 
+
+If you know how to use emacs or vi, call up the .newsrc file (you might 
+want to make a copy of .newsrc first, just in case), and use the searchand-replace function to make the change. 
+
+If you're not comfortable with these text processor, you can download the 
+.newsrc file, make the changes on your own computer and then upload the 
+revised file.  Before you download the file, however, you should do a 
+couple of things.  One is to type 
+ 
+     cp .newsrc temprc
+ 
+and hit enter.  You will actually download this temprc file (note the 
+name does not start with a period -- some computers, such as those using 
+MS-DOS, do not allow file names starting with periods).  After you 
+download the file, open it in your favorite word processor and use its 
+search-and-replace function to change the exclamation points to colons. 
+Be careful not to change anything else!  Save the document in ASCII or 
+text format.  Dial back into your host system.  At the command line, type 
+ 
+     cp temprc temprc1
+ 
+and hit enter.  This new file will serve as your backup .newsrc file 
+just in case something goes wrong. Upload the temprc file from your 
+computer.  This will overwrite the Unix system's old temprc file.  Now 
+type 
+ 
+     cp temprc .newsrc
+ 
+and hit enter.  You now have a clean slate to start creating a reading 
+list.
+
+3.3  nn COMMANDS
+
+ 
+To mark a specific article for reading, type the letter next to it (in lower 
+case).  To mark a specific article and all of its responses, type the letter 
+and an asterisk, for example: 
+ 
+     a* 
+ 
+To un-select an article, type the letter next to it (again, in lower case). 
+ 
+C               Cancels an article (around the world) that you wrote.  
+                Every article posted on Usenet has a unique ID number.  
+                Hitting a capital C sends out a new message that tells host 
+                systems that receive it to find earlier message and delete 
+                it. 
+ 
+F               To post a public response, or follow-up. If selected while 
+                still on a newsgroup "page", asks you which article to 
+                follow up.  If selected while in a specific article, will 
+                follow up that article. In either case, you'll be asked if 
+                you want to include the original article in yours. Caution:
+                puts you in whatever text editor is your default.
+ 
+N               Goes to the next subscribed newsgroup with unread articles. 
+ 
+P               Goes to the previous subscribed newsgroup with unread 
+                articles. 
+ 
+G news.group    Goes to a specific newsgroup. Can be used to subscribe to 
+                new newsgroups.  Hitting G brings up a sub-menu: 
+ 
+                          u     Goes to the group and shows only un-read 
+                                articles. 
+ 
+                          a     Goes to the group and shows all articles, 
+                                even ones you've already read. 
+ 
+                          s     Will show you only articles with a specific 
+                                subject. 
+ 
+                          n     Will show you only articles from a specific 
+                                person. 
+ 
+M               Mails a copy of the current article to somebody.  You'll be 
+                asked for the recipient's e-mail address and whether you 
+                want to add any comments to the article before sending it 
+                off.  As with F, puts you in the default editor.
+ 
+:post           Post an article. You'll be asked for the name of the group. 
+ 
+Q               Quit, or exit, nn. 
+ 
+U               Un-subscribe from the current newsgroup. 
+ 
+R               Responds to an article via e-mail. 
+ 
+space           Hitting the space bar brings up the next page of articles. 
+ 
+X               If you have selected articles, this will show them to you 
+                and then take you to the next subscribed newsgroup with 
+                unread articles. If you don't have any selected articles, 
+                it marks all articles as read and takes you to the next 
+                unread subscribed newsgroup. 
+ 
+=word           Finds and marks all articles in the newsgroup with a 
+                specific word in the "subject:" line, for example: 
+ 
+                          =modem 
+ 
+Z               Shows you selected articles immediately and then returns 
+                you to the current newsgroup. 
+ 
+?               Brings up a help screen. 
+ 
+<               Goes to the previous page in the newsgroup. 
+ 
+>               Goes to the next page in the newsgroup. 
+ 
+$               Goes to the last page in an article.
+ 
+^               Goes to the first page in an article.
+ 
+ 
+3.5  rn COMMANDS
+ 
+ 
+Different commands are available to you in rn depending on whether you 
+are already in a newsgroup or reading a specific article. At any point, 
+typing a lowercase h will bring up a list of available commands and some 
+terse instructions for using them. Here are some of them: 
+ 
+After you've just called up rn, or within a newsgroup:
+ 
+c             Marks every article in a newsgroup as read (or "caught up")
+              so that you don't have to see them again. The system will ask 
+              you if you are sure. Can be done either when asked if you
+              want to read a particular newsgroup or once in the newsgroup.
+ 
+g             Goes to a newsgroup, in this form: 
+     
+                        g news.group 
+      
+              Use this both for going to groups to which you're already 
+              subscribed and subscribing to new groups. 
+ 
+h             Provides a list of available commands with terse 
+              instructions.
+ 
+l             Gives a list of all available newsgroups.
+ 
+p             Goes to the first previous subscribed newsgroup with un-read 
+              articles. 
+ 
+q             Quits, or exits, rn if you have not yet gone into a newsgroup. 
+              If you are in a newsgroup, it quits that one and brings you to 
+              the next subscribed newsgroup. 
+ 
+Only within a newsgroup:
+ 
+=             Gives a list of all available articles in the newsgroup.
+ 
+ 
+m             Marks a specific article or series of articles as "un-read" 
+              again so that you can come back to them later. Typing
+ 
+                        1700m
+ 
+              and hitting enter would mark just that article as un-read. 
+              Typing 
+ 
+                        1700-1800m
+ 
+              and hitting enter would mark all of those articles as unread.
+ 
+space         Brings up the next page of article listings.  If already on
+              the last page, displays the first article in the newsgroup.
+ 
+u             Un-subscribe from the newsgroup. 
+ 
+/text/        Searches through the newsgroup for articles with a specific
+              word or phrase in the "subject:" line, from the current 
+              article to the end of the newsgroup. For example, 
+ 
+                        /EFF/
+ 
+              would bring you to the first article with "EFF" in the 
+              "subject:" line.
+ 
+?text?        The same as /text/ except it searches in reverse order from 
+              the current article.
+ 
+Only within a specific article:
+ 
+e             Some newsgroups consist of articles that are binary files, 
+              typically programs or graphics images.  Hitting e will convert 
+              the ASCII characters within such an article into a file you
+              can then download and use or view (assuming you have the proper
+              computer and software).  Many times, such files will be split
+              into several articles; just keep calling up the articles and
+              hitting e until done.  You'll find the resulting file in your
+              News subdirectory.
+
+C             If you post an article and then decide it was a mistake, call 
+              it up on your host system and hit this.  The message will soon 
+              begin disappearing on systems around the world. 
+ 
+F             Post a public response in the newsgroup to the current 
+              article.  Includes a copy of her posting, which you can then 
+              edit down using your host system's text editor. 
+ 
+f             The same as above except it does not include a copy of the 
+              original message in yours.
+ 
+m             Marks the current article as "un-read" so that you can come 
+              back to it later.  You do not have to type the article 
+              number.       
+ 
+Control-N     Brings up the first response to the article. If there is no 
+              follow-up article, this returns you to the first unread article 
+              in the newsgroup). 
+ 
+Control-P     Goes to the message to which the current article is a reply.
+ 
+n             Goes to the next unread article in the newsgroup. 
+ 
+N             Takes you to the next article in the newsgroup even if you've 
+              already read it.
+ 
+q             Quits, or exits, the current article. Leaves you in the current 
+              newsgroup.
+ 
+R             Reply, via e-mail only, to the author of the current article. 
+              Includes a copy of his message in yours.
+ 
+r             The same as above, except it does not include a copy of his 
+              article.
+ 
+s file        Copies the current article to a file in your News directory, 
+              where "file" is the name of the file you want to save it to. 
+              You'll be asked if you want to use "mailbox" format when 
+              saving. If you answer by hitting your N key, most of the 
+              header will not be saved. 
+
+s|mail user   Mails a copy of the article to somebody. For "user" substitute
+              an e-mail address. Does not let you add comments to the 
+              message first, however.
+ 
+space         Hitting the space bar shows the next page of the article, or, if 
+              at the end, goes to the next un-read article.
+
+
+3.6  ESSENTIAL NEWSGROUPS
+
+
+With so much to choose from, everybody will likely have their own unique 
+Usenet reading list.  But there are a few newsgroups that are 
+particularly of interest to newcomers.  Among them: 
+
+     news.announce.newusers     This group consists of a series of
+                                articles that explain various facets of
+                                Usenet.
+
+     news.newusers.questions    This is where you can ask questions 
+                                (we'll see how in a bit) about how
+                                Usenet works.
+
+     news.announce.newsgroups   Look here for information about new or
+                                proposed newsgroups.
+
+     news.answers               Contains lists of "Frequently Asked
+                                Questions"  (FAQs) and their answers from 
+                                many different newsgroups.  Learn how to
+                                fight jet lag in the FAQ from 
+                                rec.travel.air; look up answers to common
+                                questions about Microsoft Windows in
+                                an FAQ from comp.os.ms-windows; etc.
+
+     alt.internet.services      Looking for something in particular on 
+                                the Internet?  Ask here.
+
+     alt.infosystems.announce   People adding new information services to
+                                the Internet will post details here.
+
+
+3.7  SPEAKING UP
+
+
+"Threads" are an integral part of Usenet.  When somebody posts a message, 
+often somebody else will respond.  Soon, a thread of conversation begins.  
+Following these threads is relatively easy.  In nn, related messages are 
+grouped together.  In rn, when you're done with a message, you can hit 
+control-N to read the next related message, or followup.  As you explore 
+Usenet, it's probably a good idea to read discussions for awhile before 
+you jump in.  This way, you can get a feel for the particular newsgroup 
+-- each has its own rhythms. 
+ 
+Eventually, though, you'll want to speak up.  There are two main ways to 
+do this.  You join an existing conversation, or you can start a whole new 
+thread. 
+
+If you want to join a discussion, you have to decide if you want to 
+include portions of the message you are responding to in your message.  
+The reason to do this is so people can see what you're responding to, 
+just in case the original message has disappeared from their system 
+(remember that most Usenet messages have a short life span on the average 
+host system) or they can't find it.  
+
+If you're using a Unix host system, joining an existing conversation is 
+similar in both nn and rn: hit your F key when done with a given article 
+in the thread.  In rn, type a small f if you don't want to include 
+portions of the message you're responding to; an uppercase F if you do. 
+In nn, type a capital F.  You'll then be asked if you want to include 
+portions of the original message. 
+
+And here's where you hit another Unix wall.  When you hit your F key, 
+your host system calls up its basic Unix text editor.  If you're lucky, 
+that'll be pico, a very easy system.  More likely, however, you'll get 
+dumped into emacs (or possibly vi), which you've already met in the 
+chapter on e-mail.  
+
+The single most important emacs command is 
+ 
+     control-x control-c
+ 
+This means, depress your control key and hit x.  Then depress the control 
+key and hit c.  Memorize this.  In fact, it's so important, it bears 
+repeating: 
+     
+     control-x control-c
+ 
+These keystrokes are how you get out of emacs.  If they work well, you'll 
+be asked if you want to send, edit, abort or list the message you were 
+working on.  If they don't work well (say you accidentally hit some other 
+weird key combination that means something special to emacs) and nothing 
+seems to happen, or you just get more weird-looking emacs prompts on the 
+bottom of your screen, try hitting control-g. This should stop whatever 
+emacs was trying to do (you should see the word "quit" on the bottom of 
+your screen), after which you can hit control-x control-c. But if this 
+still doesn't work, remember that you can always disconnect and dial back 
+in! 
+
+If you have told your newsreader you do want to include portions of the 
+original message in yours, it will automatically put the entire thing at 
+the top of your message.  Use the arrow keys to move down to the lines 
+you want to delete and hit control-K, which will delete one line at a 
+time. 
+
+You can then write your message.  Remember that you have to hit enter 
+before your cursor gets to the end of the line, because emacs does not 
+have word wrapping. 
+
+When done, hit control-X control-C.  You'll be asked the question about 
+sending, editing, aborting, etc.  Chose one.  If you hit Y, your host 
+system will start the process to sending your message across the Net. 
+
+The nn and rn programs work differently when it comes to posting entirely 
+new messages.  In nn, type 
+ 
+     :post
+ 
+and hit enter in any newsgroup.  You'll be asked which newsgroup to 
+post a message to.  Type in its name and hit enter.  Then you'll be 
+asked for "keywords."  These are words you'd use to attract somebody 
+scanning a newsgroup.  Say you're selling your car.  You might type 
+the type of car here.  Next comes a "summary" line, which is somewhat 
+similar.  Finally, you'll be asked for the message's "distribution."
+This is where you put how widely you want your message disseminated.  
+Think about this one for a second.  If you are selling your car, it 
+makes little sense to send a message about it all over the world.  But 
+if you want to talk about the environment, it might make a lot of 
+sense.  Each host system has its own set of distribution 
+classifications, but there's generally a local one (just for users of 
+that system), one for the city, state or region it's in, another for 
+the country (for example, usa), one for the continent (for Americans 
+and Canadians, na) and finally, one for the entire world (usually: 
+world).
+
+Which one to use?  Generally, a couple of seconds' thought will help you 
+decide.  If you're selling your car, use your city or regional 
+distribution -- people in Australia won't much care and may even get 
+annoyed.  If you want to discuss presidential politics, using a USA 
+distribution makes more sense.  If you want to talk about events in the 
+Middle East, sending your message to the entire world is perfectly 
+acceptable. One caveat: these rules are not absolute, some systems pick 
+up messages from all over, regardless of the distribution you've set, so 
+don't be surprised if, sooner or later, you get a response to a "local" 
+message from several thousand miles away. 
+    
+Then you can type your message.  If you've composed your message 
+offline (generally a good idea if you and emacs don't get along), you 
+can upload it now.  You may see a lot of weird looking characters as 
+it uploads into emacs, but those will disappear when you hit control-X 
+and then control-C.  Alternately: "save" the message (for example, by 
+hitting m in rn), log out, compose your message offline, log back on and 
+upload your message into a file on your host system.  Then call up 
+Usenet, find the article you "saved." Start a reply, and you'll be asked 
+if you want to include a prepared message.  Type in the name of the file 
+you just created and hit enter.
+
+In rn, you have to wait until you get to the end of a newsgroup to hit F, 
+which will bring up a message-composing system.  Alternately, at your 
+host system's command line, you can type 
+ 
+     Pnews
+ 
+and hit enter.  You'll be prompted somewhat similarly to the nn 
+system, except that you'll be given a list of possible distributions.  
+If you chose "world," you'll get this message:
+ 
+                                                                               
+ This program posts news to thousands of machines throughout the entire         
+ civilized world.  Your message will cost the net hundreds if not thousands of  
+ dollars to send everywhere.  Please be sure you know what you are doing.       
+                                                                               
+ Are you absolutely sure that you want to do this? [ny]                         
+ 
+Don't worry -- your message won't really cost the Net untold amounts, 
+although, again, it's a good idea to think for a second whether your 
+message really should go everywhere. 
+ 
+If you want to respond to a given post through e-mail, instead of 
+publicly, hit R in nn or r or R in rn.  In rn, as with follow-up 
+articles, the upper-case key includes the original message in yours. 
+
+Most newsgroups are unmoderated, which means that every message you post 
+will eventually wind up on every host system within the geographic region 
+you specified that carries that newsgroup. 
+
+Some newsgroups, however, are moderated, as you saw earlier with 
+comp.risks.  In these groups, messages are shipped to a single location 
+where a moderator, acting much like a magazine editor, decides what 
+actually gets posted.  In some cases, groups are moderated like scholarly 
+journals.  In other cases, it's to try to cut down on the massive number 
+of messages that might otherwise be posted.  
+
+
+You'll notice that many articles in Usenet end with a fancy "signature" 
+that often contains some witty saying, a clever drawing and, almost 
+incidentally, the poster's name and e-mail address.  You too can have 
+your own "signature" automatically appended to everything you post.  On 
+your own computer, create a signature file.  Try to keep it to four lines 
+or less, lest you annoy others on the Net.  Then, while 
+
+connected to your host system, at the prompt, type 
+ 
+     cat>.signature
+ 
+and hit enter (note the period before the s).  Upload your signature 
+file into this using your communications software's ASCII upload 
+protocol.  When done, hit control-D, the Unix command for closing a 
+file.  Now, every time you post a message, this will be appended to it. 
+
+There are a few caveats to posting.  Usenet is no different from a Town 
+Meeting or publication: you're not supposed to break the law, whether 
+that's posting copyrighted material or engaging in illegal activities.  
+It is also not a place to try to sell products (except in certain biz. 
+and for-sale newsgroups). 
+
+
+3.8  CROSS-POSTING
+ 
+
+Sometimes, you'll have an issue you think should be discussed in more 
+than one Usenet newsgroup.  Rather than posting individual messages in 
+each group, you can post the same message in several groups at once, 
+through a process known as cross-posting. 
+
+Say you want to start a discussion about the political ramifications of 
+importing rare tropical fish from Brazil.  People who read rec.aquaria 
+might have something to say. So might people who read 
+alt.politics.animals and talk.politics.misc. 
+
+Cross-posting is easy.  It also should mean that people on other systems 
+who subscribe to several newsgroups will see your message only once, 
+rather than several times -- news-reading software can cancel out the 
+other copies once a person has read the message.  When you get ready to 
+post a message (whether through Pnews for rn or the :post command in nn), 
+you'll be asked in which newsgroups.  Type the names of the various 
+groups, separated by a comma, but no space, for example: 
+ 
+     rec.aquaria,alt.politics.animals,talk.politics.misc
+ 
+and hit enter.  After answering the other questions (geographic 
+distribution, etc.), the message will be posted in the various 
+groups (unless one of the groups is moderated, in which case the 
+message goes to the moderator, who decides whether to make it public). 
+     
+It's considered bad form to post to an excessive number of newsgroups, or 
+inappropriate newsgroups.  Probably, you don't really have to post 
+something in 20 different places.  And while you may think your 
+particular political issue is vitally important to the fate of the world, 
+chances are the readers of rec.arts.comics will not, or at least not 
+important enough to impose on them.  You'll get a lot of nasty e-mail 
+messages demanding you restrict your messages to the "appropriate" 
+newsgroups. 
+Chapter 4: USENET II
+ 
+ 
+4.2  KILLFILES: THE CURE FOR WHAT AILS YOU 
+
+ 
+As you keep reading Usenet, you are going to run across topics or people 
+that really drive you nuts -- or that you just get tired of seeing. 
+
+Killfiles are just the thing for you. When you start your newsreader, it 
+checks to see if you have any lists of words, phrases or names you don't 
+want to see.  If you do, then it blanks out any messages containing those 
+words. 
+
+Such as cascades. 
+
+As you saw earlier, when you post a reply to a message and include parts 
+of that message, the original lines show up with a > in front of them.  
+Well, what if you reply to a reply?  Then you get a >> in front of the 
+line.  And if you reply to that reply? You get >>>.  Keep this up, and 
+soon you get a triangle of >'s building up in your message. 
+
+There are people who like building up these triangles, or cascades.  
+They'll "respond" to your message by deleting everything you've said, 
+leaving only the "In message 123435, you said:" part and the last line of 
+your message, to which they add a nonsensical retort.  On and on they go 
+until the triangle has reached the right end of the page. Then they try 
+to expand the triangle by deleting one > with each new line. Whoever gets 
+to finish this mega-triangle wins.        
+
+There is even a newsgroup just for such folks: alt.cascade.  
+Unfortunately, cascaders would generally rather cascade in other 
+newsgroups. Because it takes a lot of messages to build up a completed 
+cascade, the targeted newsgroup soon fills up with these messages. Of 
+course, if you complain, you'll be bombarded with messages about the 
+First Amendment and artistic expression -- or worse, with another 
+cascade. The only thing you can do is ignore them, by setting up a 
+killfile. 
+
+There are also certain newsgroups where killfiles will come in handy 
+because of the way the newsgroups are organized.  For example, readers of 
+rec.arts.tv.soaps always use an acronym in their subject: line for the 
+show they're writing about (AMC, for example, for "All My Children").  
+This way, people who only want to read about "One Life to Live" can blank 
+out all the messages about "The Young and the Restless" and all the 
+others (to keep people from accidentally screening out messages that 
+might contain the letters "gh" in them, "General Hospital" viewers always 
+use "gh:" in their subject lines). 
+
+Both nn and rn let you create killfiles, but in different ways. 
+
+To create a killfile in nn, go into the newsgroup with the offending 
+messages and type a capital K.  You'll see this at the bottom of your 
+screen: 
+ 
+     AUTO (k)ill or (s)elect (CR => Kill subject 30 days) 
+                                                                               
+If you hit return, nn will ask you which article's subject you're 
+tired of. Chose one and the article and any follow-ups will disappear, 
+and you won't see them again for 30 days. 
+     
+If you type a lower-case k instead, you'll get this: 
+ 
+     AUTO KILL on (s)ubject or (n)ame  (s) 
+                                                                               
+If you hit your S key or just enter,  you'll see this: 
+                                                                               
+     KILL Subject: (=/) 
+ 
+Type in the name of the offending word or phrase and hit enter.  You'll 
+then be prompted: 
+                                                                               
+     KILL in (g)roup 'eff.test' or in (a)ll groups  (g) 
+                                                                               
+except that the name of the group you see will be the one you're actually 
+in at the moment.  Because cascaders and other annoying people often 
+cross-post their messages to a wide range of newsgroups, you might 
+consider hitting a instead of g.  Next comes: 
+ 
+     Lifetime of entry in days (p)ermanent  (30) 
+ 
+The P key will screen out the offending articles forever, while hitting 
+enter will do it for 30 days.  You can also type in a number of days for 
+the blocking. 
+
+Creating killfiles in rn works differently -- its default killfile 
+generator only works for messages in specific groups, rather than 
+globally for your entire newsgroup list.  To create a global killfile, 
+you'll have to write one yourself. 
+
+To create a killfile in rn, go into the newsgroup where the offending 
+messages are and type in its number so you get it on your screen. Type a 
+capital K.  From now on, any message with that subject line will 
+disappear before you read the group. You should probably choose a reply, 
+rather than the original message, so that you will get all of the 
+followups (the original message won't have a "Re: " in its subject line). 
+The next time you call up that newsgroup, rn will tell you it's killing 
+messages. When it's done, hit the space bar to go back into reading mode. 
+
+To create a "global" kill file that will automatically wipe out articles 
+in all groups you read, start rn and type control-K.  This will start 
+your whatever text editor you have as your default on your host system 
+and create a file (called KILL, in your News subdirectory).         
+
+On the first line, you'll type in the word, phrase or name you don't want 
+to see, followed by commands that tell rn whether to search an entire 
+message for the word or name and then what to do when it finds it. 
+
+Each line must be in this form 
+ 
+     /pattern/modifier:j 
+ 
+"Pattern" is the word or phrase you want rn to look for.  It's caseinsensitive: both "test" and "Test" will be knocked out.  The modifier 
+tells rn whether to limit its search to message headers (which can be 
+useful when the object is to never see messages from a particular 
+person): 
+ 
+     a:    Looks through an entire message 
+     h:    Looks just at the header 
+    
+You can leave out the modifier command, in which case rn will look only 
+at the subject line of messages. The "j" at the end tells rn to screen 
+out all articles with the offending word. 
+
+So if you never want to see the word "foo" in any header, ever again, 
+type this: 
+ 
+     /foo/h:j          
+ 
+This is particularly useful for getting rid of articles from 
+people who post in more than one newsgroup, such as cascaders, since 
+an article's newsgroup name is always in the header. 
+
+If you just want to block messages with a subject line about cascades, 
+you could try: 
+  
+     /foo/:j 
+ 
+To kill anything that is a followup to any article, use this pattern: 
+
+     /Subject: *Re:/:j 
+ 
+When done writing lines for each phrase to screen, exit the text editor 
+as you normally would, and you'll be put back in rn. 
+     
+One word of caution: go easy on the global killfile.  An extensive global 
+killfile, or one that makes frequent use of the a: modifier can 
+dramatically slow down rn, since the system will now have to look at 
+every single word in every single message in all the newsgroups you want 
+to read. 
+
+If there's a particular person whose posts you never want to see again, 
+first find his or her address (which will be in the "from:" line of his 
+postings) and then write a line in your killfile like this: 
+ 
+     /From: *name@address\.all/h:j
+
+
+4.4  SOME USENET HINTS
+
+ 
+Case counts in Unix -- most of the time.  Many Unix commands, including 
+many of those used for reading Usenet articles, are case sensitive.  Hit 
+a d when you meant a D and either nothing will happen, or something 
+completely different from what you expected will happen.  So watch that 
+case! 
+
+In nn, you can get help most of the time by typing a question mark (the 
+exception is when you are writing your own message, because then you are 
+inside the text-processing program).  In rn, type a lower-case h at any 
+prompt to get some online help. 
+
+When you're searching for a particular newsgroup, whether through the l 
+command in rn or with nngrep for nn, you sometimes may have to try 
+several keywords.  For example, there is a newsgroup dedicated to the 
+Grateful Dead, but you'd never find it if you tried, say, l grateful 
+dead, because the name is rec.music.gdead.  In general, try the smallest 
+possible part of the word or discussion you're looking for, for example, 
+use "trek" to find newsgroups about "Star Trek."  If one word doesn't 
+produce anything, try another. 
+
+
+4.5 THE BRAIN-TUMOR BOY, THE MODEM TAX AND THE FCC     
+
+Like the rest of the world, Usenet has its share of urban legends and 
+questionable activities.  There are three in particular that plague the 
+network.  Spend more than, oh, 15 minutes within Usenet and you're sure 
+to run into the Brain Tumor Boy, the plot by the evil FCC to tax your 
+modem and Dave Rhode's miracle cure for poverty.  For the record, here's 
+the story on all of them: 
+
+There once was a seven-year-old boy in England named Craig Shergold who 
+was diagnosed with a seemingly incurable brain tumor.  As he lay dying, 
+he wished only to have friends send him postcards.  The local newspapers 
+got a hold of the tear-jerking story.  Soon, the boy's wish had changed: 
+he now wanted to get into the Guinness Book of World Records for the 
+largest postcard collection.  Word spread around the world. People by the 
+millions sent him postcards. 
+
+Miraculously, the boy lived.  An American billionaire even flew him to 
+the U.S. for surgery to remove what remained of the tumor.  And his wish 
+succeeded beyond his wildest dreams -- he made the Guinness Book of World 
+Records. 
+
+But with Craig now well into his teens, his dream has turned into a 
+nightmare for the post office in the small town outside London where he 
+lives.  Like Craig himself, his request for cards just refuses to die, 
+inundating the post office with millions of cards every year.  Just when 
+it seems like the flow is slowing, along comes somebody else who starts 
+up a whole new slew of requests for people to send Craig post cards (or 
+greeting cards or business cards -- Craig letters have truly taken on a 
+life of their own and begun to mutate). Even Dear Abby has been powerless 
+to make it stop! 
+
+What does any of this have to do with the Net? The Craig letter seems to 
+pop up on Usenet as often as it does on cork boards at major 
+corporations.  No matter how many times somebody like Gene Spafford posts 
+periodic messages to ignore them or spend your money on something more 
+sensible (a donation to the local Red Cross, say), somebody manages to 
+post a letter asking readers to send cards to poor little Craig. 
+
+Don't send any cards to the Federal Communications Commission, either. 
+
+In 1987, the FCC considered removing a tax break it had granted 
+CompuServe and other large commercial computer networks for use of the 
+national phone system.  The FCC quickly reconsidered after alarmed users 
+of bulletin-board systems bombarded it with complaints about this "modem 
+tax." 
+
+Now, every couple of months, somebody posts an "urgent" message warning 
+Net users that the FCC is about to impose a modem tax.  This is NOT true.  
+The way you can tell if you're dealing with the hoax story is simple: it 
+ALWAYS mentions an incident in which a talk-show host on KGO radio in San 
+Francisco becomes outraged on the air when he reads a story about the tax 
+in the New York Times.  
+
+Another way to tell it's not true is that it never mentions a specific 
+FCC docket number or closing date for comments. 
+
+Save that letter to your congressman for something else. 
+
+Sooner or later, you're going to run into a message titled "Make Money 
+Fast."  It's your basic chain letter.  The Usenet version is always about 
+some guy named Dave Rhodes who was on the verge of death, or something, 
+when he discovered a perfectly legal way to make tons of money -- by 
+posting a chain letter on computer systems around the world. Yeah, right. 
+
+
+4.7  THE FIRST AMENDMENT AS LOCAL ORDINANCE
+ 
+ 
+Usenet's international reach raises interesting legal questions that have 
+yet to be fully resolved.  Can a discussion or posting that is legal in 
+one country be transmitted to a country where it is against the law?  
+Does the posting even become illegal when it reaches the border?  And 
+what if that country is the only path to a third country where the 
+message is legal as well?  Several foreign colleges and other 
+institutions have cut off feeds of certain newsgroups where Americans 
+post what is, in the U.S., perfectly legal discussions of drugs or 
+alternative sexual practices.  Even in the U.S., some universities have 
+discontinued certain newsgroups their administrators find offensive, 
+again, usually in the alt. hierarchy. 
+
+An interesting example of this sort of question happened in 1993, when a 
+Canadian court issued a gag order on Canadian reporters covering a 
+particularly controversial murder case.  Americans, not bound by the gag 
+order, began posting accounts of the trial -- which any Canadian with a 
+Net account could promptly read. 
+
+
+4.8  USENET HISTORY  
+ 
+
+In the late 1970s, Unix developers came up with a new feature: a system 
+to allow Unix computers to exchange data over phone lines. 
+
+In 1979, two graduate students at Duke University in North Carolina, Tom 
+Truscott and Jim Ellis, came up with the idea of using this system, known 
+as UUCP (for Unix-to-Unix CoPy), to distribute information of interest to 
+people in the Unix community.  Along with Steve Bellovin, a graduate 
+student at the University of North Carolina and Steve Daniel, they wrote 
+conferencing software and linked together computers at Duke and UNC. 
+ 
+Word quickly spread and by 1981, a graduate student at Berkeley, Mark 
+Horton and a nearby high school student, Matt Glickman, had released a 
+new version that added more features and was able to handle larger 
+volumes of postings -- the original North Carolina program was meant for 
+only a few articles in a newsgroup each day. 
+
+Today, this system, now called Usenet, connects tens of thousands of 
+sites around the world, from mainframes to Amigas.  With more than 3,000 
+newsgroups and untold thousands of readers, it is perhaps the world's 
+largest computer network. 
+
+            
+4.10 FYI
+
+
+Leanne Phillips periodically posts a list of frequently asked questions 
+(and answers) about use of the rn killfile function in the 
+news.newusers.questions and news.answers newsgroups on Usenet.  Bill 
+Wohler posts a guide to using the nn newsreader in the news.answers and 
+news.software newsgroups.  Look in the news.announce.newusers and 
+news.groups newsgroups on Usenet for "A Guide to Social Newsgroups and 
+Mailing Lists,'' which gives brief summaries of the various soc. 
+newsgroups. 
+
+"Managing UUCP and Usenet,' by Tim O'Reilly and Grace Todino (O'Reilly & 
+Associates, 1992) is a good guide for setting up your own Usenet system. 
+chap3
+
+
+
+
+
+ 
+ 
+
+5.2 BITNET
+    
+ 
+As if Usenet and mailing lists were not enough, there are Bitnet 
+"discussion groups" or "lists."  
+
+Bitnet is an international network linking colleges and universities, but 
+it uses a different set of technical protocols for distributing 
+information from the Internet or Usenet. It offers hundreds of discussion 
+groups, comparable in scope to Usenet newsgroups.  As with Internet 
+mailing lists, Bitnet discussions take place in e-mail. However, where 
+mailing lists are often maintained by a person, all Bitnet discussion 
+groups are automated -- you subscribe to them through messages to a 
+"listserver" computer.  This is a kind of robot moderator that controls 
+distribution of messages on the list.  In many cases, it also maintains 
+indexes and archives of past postings in a given discussion group, which 
+can be handy if you want to get up to speed with a discussion or just 
+search for some information related to it. 
+
+Many Bitnet discussion groups are now "translated" into Usenet form and 
+carried through Usenet in the bit.listserv hierarchy.  In general, it's 
+probably better to read messages through Usenet if you can.  It saves 
+some storage space on your host system's hard drives as well as reducing 
+clutter in your mailbox. Think of opening your e-mailbox one day to find 
+200 messages in it -- 199 of them from a discussion group and one of them 
+a "real" e-mail message that's important to you. 
+
+Subscribing and canceling subscriptions is done through an e-mail message 
+to the listserver computer.  For addressing, all listservers are known as 
+"listserv" (yep) at some Bitnet address.  This means you will have to add 
+".bitnet" to the end of the address, if it's in a form like this: 
+listserv@miamiu. For example, if you have an interest in environmental 
+issues, you might want to subscribe to the Econet discussion group.  To 
+subscribe, send an e-mail message to 
+ 
+     listserv@miamiu.bitnet
+ 
+Some Bitnet listservers are also connected to the Internet, so if you 
+see a listserver address ending in ".edu", you can e-mail the 
+listserver without adding ".bitnet" to the end. 
+
+Always leave the "subject:" line blank in a message to a listserver.  
+Inside the message, you tell the listserver what you want, with a series 
+of simple commands: 
+ 
+subscribe group Your Name    To subscribe to a list, where "group"
+                             is the list name and "Your Name" is 
+                             your full name, for example:
+                             subscribe econet Henry Fielding
+ 
+unsubscribe group Your Name  To discontinue a group, for example:
+                             unsubscribe econet Henry Fielding
+ 
+list global                  This sends you a list of all available 
+                             Bitnet discussion groups.  But be careful 
+                             -- the list is VERY long! 
+ 
+get refcard                  Sends you a list of other commands you 
+                             can use with a listserver, such as 
+                             commands for retrieving past postings 
+                             from a discussion group. 
+ 
+Each of these commands goes on a separate line in your message (and you 
+can use one or all of them).  If you want to get a list of all Bitnet 
+discussion groups, send e-mail to 
+ 
+     listserv@bitnic.educom.edu
+ 
+Leave the "subject:" line blank and use the list global command.
+     
+When you subscribe to a Bitnet group, there are two important differences 
+from Usenet. 
+
+First, when you want to post a message for others to read in the 
+discussion group, you send a message to the group name at its Bitnet 
+address.  Using Econet as an example, you would mail the message to: 
+ 
+     econet@miamiu.bitnet
+ 
+Note that this is different from the listserv address you used to 
+subscribe to the group to begin with.  Use the listserv address ONLY to 
+subscribe to or unsubscribe from a discussion group.  If you use the 
+discussion-group address to try to subscribe or unsubscribe, your message 
+will go out to every other subscriber, many of whom will think unkind 
+thoughts, which they may share with you in an e-mail message). 
+
+The second difference relates to sending an e-mail message to the author 
+of a particular posting.  Usenet newsreaders such as rn and nn let you do 
+this with one key.  But if you hit your R key to respond to a discussiongroup message, your message will go to the listserver, and from there to 
+everybody else on the list!  This can prove embarrassing to you and 
+annoying to others. To make sure your message goes just to the person who 
+wrote the posting, take down his e-mail address from the posting and then 
+compose a brand-new message. Remember, also, that if you see an e-mail 
+address like IZZY@INDYVMS, it's a Bitnet address. 
+
+Two Bitnet lists will prove helpful for delving further into the network.  
+NEW-LIST tells you the names of new discussion groups. To subscribe, send 
+a message to listserv@ndsuvm1.bitnet: 
+ 
+     sub NEW-LIST Your Name
+ 
+INFONETS is the place to go when you have questions about Bitnet.  It is 
+also  first rate for help on questions about all major computer networks 
+and how to reach them.  To subscribe, send e-mail to 
+info-nets-request@think.com: 
+ 
+     sub INFONETS Your Name
+ 
+Both of these lists are also available on Usenet, the former as 
+bit.listserv.new-list; the latter as bit.listserv.infonets (sometimes 
+bit.listserv.info-nets). 
+
+
+
+
+
+ 
+ 
+6.2  LIBRARY CATALOGS
+     
+
+Several hundred libraries around the world, from the Snohomish Public 
+Library in Washington State to the Library of Congress are now available 
+to you through telnet. You can use Hytelnet to find their names, telnet 
+addresses and use instructions. 
+
+Why would you want to browse a library you can't physically get to?  Many 
+libraries share books, so if yours doesn't have what you're looking for, 
+you can tell the librarian where he or she can get it.  Or if you live in 
+an area where the libraries are not yet online, you can use telnet to do 
+some basic bibliographic research before you head down to the local 
+branch. 
+
+There are several different database programs in use by online libraries.  
+Harvard's is one of the easier ones to use, so let's try it. 
+
+Telnet to hollis.harvard.edu.  
+                                                                               
+     To select one of the applications above, type its name on the command     
+     line followed by your user ID, and press RETURN.                          
+                    ** HOLLIS DOES NOT REQUIRE A USERID **                     
+                                                                               
+     EXAMPLES:   HOLLIS (press RETURN)  or  HUBS userid (press RETURN)         
+ 
+Type
+ 
+              hollis
+ 
+and hit enter.  You'll see several screens flash by quickly until finally 
+the system stops and you'll get this: 
+ 
+                          WELCOME TO HOLLIS                                    
+              (Harvard OnLine Library Information System)                      
+                                                                               
+ To begin, type one of the 2-character database codes listed below:            
+                                                                               
+        HU      Union Catalog of the Harvard libraries                         
+        OW      Catalog of Older Widener materials                             
+ 
+The first thing to notice is the name of the system: Hollis. Librarians 
+around the world seem to be inordinately found of cutesy, 
+anthropomorphized acronyms for their machines (not far from Harvard, the 
+librarians at Brandeis University came up with Library On-Line User 
+Information Service, or Louis; MIT has Barton). 
+
+If you want to do some general browsing, probably the best bet on the 
+Harvard system is to chose HU, which gets you access to their main 
+holdings, including those of its medical libraries.  Chose that, and 
+you'll see this: 
+                          
+              THE HARVARD UNIVERSITY LIBRARY UNION CATALOG                     
+                                                                               
+ 
+Say you want to see if Harvard has shed the starchy legacy of the 
+Puritans, who founded the school.  Why not see if they have "The Joy of 
+Sex" somewhere in their stacks? Type 
+ 
+               TI Joy of Sex
+ 
+and hit enter. This comes up:
+ 
+
+ 
+Oh, well!  Do they have anything that mentions "sex" in the title?  Try 
+another TI search, but this time just: TI sex.  You get:
+ 
+ 
+If you want to get more information on the first line, type 1 and hit enter.
+ 
+ 
+Most library systems give you a way to log off and return to your host 
+system.  On Hollis, hit escape followed by 
+ 
+          xx
+ 
+One particularly interesting system is the one run by the Colorado 
+Alliance of Research Libraries, which maintains databases for libraries 
+throughout Colorado, the West and even in Boston. 
+
+     Telnet pac.carl.org.
+
+Follow the simple log-in instructions. When you get a menu, type 72 (even 
+though that is not listed), which takes you to the Pikes Peak Library 
+District, which serves the city of Colorado Springs. 
+
+Several years ago, its librarians realized they could use their database 
+program not just for books but for cataloging city records and community 
+information, as well.  Today, if you want to look up municipal ordinances 
+or city records, you only have to type in the word you're looking for and 
+you'll get back cites of the relevant laws or decisions. 
+
+Carl will also connect you to the University of Hawaii library, which, 
+like the one in Colorado Springs, has more than just bibliographic 
+material online.  One of its features is an online Hawaiian almanac that 
+can tell you everything you ever wanted to know about Hawaiians, 
+including the number injured in boogie-board accidents each year (seven). 
+
+
+6.4  TELNET BULLETIN-BOARD SYSTEMS
+ 
+You might think that Usenet, with its hundreds of newsgroups, would be 
+enough to satisfy the most dedicated of online communicators. 
+
+But there are a number of "bulletin-board" and other systems that provide 
+even more conferences or other services, many not found directly on the 
+Net.  Some are free; others charge for access.  
+ 
+To be able to write messages and gain access to files, you have to leave 
+a note to SYSOP with your name, address, occupation and phone number.  To 
+do this, at any prompt, hit your M key and then enter, which will bring 
+up the mail system. 
+
+Hitting H brings up a list of commands and how to use 
+them. 
+
+Telnet: bugs.mty.itesm.mx (8 p.m. to 10 a.m., Eastern time, only).
+At the "login:" prompt, type
+ 
+bbs
+ 
+and hit enter.
+ 
+Cleveland Free-Net.  The first of a series of Free-Nets, this represents 
+an ambitious attempt to bring the Net to the public. Originally an inhospital help network, it is now sponsored by Case Western Reserve 
+University, the city of Cleveland, the state of Ohio and IBM. It uses 
+simple menus, similar to those found on CompuServe, but organized like a 
+city. 
+ 
+ 
+The system has a vast and growing collection of public documents, from 
+copies of U.S. and Ohio Supreme Court decisions to the Magna Carta and 
+the U.S. Constitution.  It links residents to various government agencies 
+and has daily stories from USA Today. Beyond Usenet (found in the 
+Teleport area), it has a large collection of local conferences on 
+everything from pets to politics.  And yes, it's free! 
+
+ 
+When you connect to Free-Net, you can look around the system.  However, 
+if you want to be able to post messages hn its conferences or use e-mail, 
+you will have to apply in writing for an account.  Information on this is 
+available when you connect. 
+                                    
+ 
+DUBBS.  This is a bulletin-board system in Delgt in the Nether}ands. The 
+conferences and files are mostly in Dutch, but the help files and the 
+system commands themselves are in English. 
+ 
+ISCA BBS.  Run by the Iowa Student Computer Association, it has more than 
+100 conferences, including several in foreign languages.  After you 
+register, hit K for a list of available conferences and then J to join a 
+particular conference (you have to type in the name of the conference, 
+not the number next to it).  Hitting H brings up information about 
+commands. 
+ 
+Youngstown Free-Net.  The people who created Cleveland Free-Net sell 
+their software for $1 to anybody willing to set up a similar system. A 
+number of cities now have their own Free-Nets, including Youngstown, 
+Ohio. 
+ 
+
+6.5  PUTTING THE FINGER ON SOMEONE
+ 
+Finger is a handy little program which lets you find out more about 
+people on the Net -- and lets you tell others on the Net more about 
+yourself. 
+
+Finger uses the same concept as telnet or ftp. But it works with only one 
+file, called .plan (yes, with a period in front).  This is a text file an 
+Internet user creates with a text editor in his home directory.  You can 
+put your phone number in there, tell a little bit about yourself, or 
+write almost anything at all. 
+
+To finger somebody else's .plan file, type this at the command line: 
+ 
+     finger email-address
+ 
+where email-address is the person's e-mail address.  If that person's 
+site allows incoming finger requests (not all do), You'll get back a 
+display that shows the last time the person was online, whether 
+they've gotten any new mail since that time and what, if anything, is 
+in their .plan file.
+
+Some people and institutions have come up with creative uses for these 
+.plan files, letting you do everything from checking the weather in 
+Massachusetts to getting the latest baseball standings.  Try fingering 
+these e-mail addresses: 
+ 
+weather@cirrus.mit.edu            Latest National Weather Service weather 
+                                  forecasts for regions in Massachusetts.
+ 
+quake@geophys.washington.edu      Locations and magnitudes of recent 
+                                  earthquakes around the world. 
+ 
+jtchern@ocf.berkeley.edu          Current major-league baseball standings and 
+                                  results of the previous day's games.
+ 
+nasanews@space.mit.edu            The day's events at NASA.
+ 
+coke@cs.cmu.edu                   See how many cans of each type of soda
+                                  are left in a particular soda machine
+                                  in the computer-science department of
+                                  Carnegie-Mellon University.
+
+
+6.6  FINDING SOMEONE ON THE NET
+ 
+
+So you have a friend and you want to find out if he has an Internet 
+account to which you can write?  The quickest way may be to just pick up 
+the phone, call him and ask him.  Although there are a variety of "white 
+pages" services available on the Internet, they are far from complete -- 
+college students, users of commercial services such as CompuServe and 
+many Internet public-access sites, and many others simply won't be 
+listed.  Major e-mail providers are working on a universal directory 
+system, but that could be some time away. 
+
+In the meantime, a couple of "white pages" services might give you some 
+leads, or even just entertain you as you look up famous people or longlost acquaintances. 
+
+The whois directory provides names, e-mail and postal mail address and 
+often phone numbers for people listed in it.  To use it, telnet to 
+ 
+     internic.net
+ 
+No log-on is needed.  The quickest way to use it is to type
+ 
+     whois name
+ 
+at the prompt, where "name" is the last name or organization name you're 
+looking for.  If there's a match, you'll get back an e-mail listing.
+
+Another service worth trying, especially since it seems to give beginners 
+fewer problems, is the Knowbot Information Service reachable by telnet at 
+ 
+     info.cnri.reston.va.us 185
+
+Again, no log-on is needed.  This service actually searches through a 
+variety of other "white pages" systems, including the user directory for 
+MCIMail.  To look for somebody, type
+ 
+     query name
+ 
+where "name" is the last name of the person you're looking for.  You can 
+get details of other commands by hitting a question mark at the prompt. 
+You can also use the knowbot system by e-mail.  Start a message to
+
+     netaddress@info.cnri.reston.va.us
+ 
+You can leave the "subject:" line blank. As your message, type
+
+     query name
+
+for the simplest type of search.  If you want details on more complex
+searches, add another line:
+ 
+     man
+
+Another way to search is via the Usenet name server. This is a system at 
+MIT that keeps track of the e-mail addresses of everybody who posts a 
+Usenet message that appears at MIT. It works by e-mail.  Send a message 
+to 
+     
+          mail-server@rtfm.mit.edu
+
+Leave the "subject:" line blank. As your message, write 
+
+           send usenet-addresses/lastname
+
+where "lastname" is the last name of the person you're looking for. The 
+system will write back with any matches and the associated addresses.
+ 
+
+6.8  FYI
+ 
+The Usenet newsgroups alt.internet.services and alt.bbs.internet can 
+provide pointers to new telnet systems.  Scott Yanoff periodically 
+posts his "Updated Internet Services List" in the former. The 
+alt.bbs.internet newsgroup is also where you'll find Aydin Edguer's 
+compendium of FAQs related to Internet bulletin-board systems.                 
+
+Peter Scott, who maintains the Hytelnet database, runs a mailing list 
+about new telnet services and changes in existing ones.   To get on the 
+list, send him a note at scott@sklib.usask.ca. 
+
+Gleason Sackman maintains another mailing list dedicated to new Internet 
+services and news about the new uses to which the Net is being put.  To 
+subscribe, send a message to listserv@internic.net. Leave the "subject:" 
+line blank, and as your message, write: Sub net-happenings Your Name. 
+
+The soc.net-people newsgroup is a place to ask about people you can't
+locate elsewhere.
+
+
+
+
+
+
+7.10  FYI
+ 
+Liberal use of archie will help you find specific files or documents.  
+For information on new or interesting ftp sites, try the comp.archives 
+newsgroup on Usenet.  You can also look in the comp.misc, 
+comp.sources.wanted or news.answers newsgroups on Usenet for lists of ftp 
+sites posted every month by Tom Czarnik and Jon Granrose. 
+ 
+The comp.archives newsgroup carries news of new ftp sites and interesting 
+new files on existing sites.                                   
+
+In the comp.virus newsgroup on Usenet, look for postings that list ftp 
+sites carrying anti-viral software for Amiga, MS-DOS, Macintosh, Atari 
+and other computers. 
+
+The comp.sys.ibm.pc.digest and comp.sys.mac.digest newsgroups provide 
+information about new MS-DOS and Macintosh programs as well as answers to 
+questions from users of those computers. 
+
+
+
+
+
+7.2  YOUR FRIEND ARCHIE
+
+
+How do you find a file you want, though?
+
+Until a few years ago, this could be quite the pain -- there was no 
+master directory to tell you where a given file might be stored on the 
+Net. Who'd want to slog through hundreds of file libraries looking for 
+something? 
+
+Alan Emtage, Bill Heelan and Peter Deutsch, students at McGill University 
+in Montreal, asked the same question.  Unlike the weather, though, they 
+did something about it. 
+
+They created a database system, called archie, that would periodically 
+call up file libraries and basically find out what they had available.  
+In turn, anybody could dial into archie, type in a file name, and see 
+where on the Net it was available. Archie currently catalogs some 1,000 
+file libraries around the world. 
+
+Today, there are three ways to ask archie to find a file for you: through 
+telnet, "client" Archie program on your own host system or e-mail.  All 
+three methods let you type in a full or partial file name and will tell 
+you where on the Net it's stored. 
+
+If you have access to telnet, you can telnet to one of the following 
+addresses: archie.mcgill.ca; archie.sura.net; archie.unl.edu; 
+archie.ans.net; or archie.rutgers.edu.  If asked for a log-in name, type 
+ 
+     archie
+ 
+and hit enter.
+     
+When you connect, the key command is prog, which you use in this form: 
+ 
+     prog filename
+ 
+Followed by enter, where "filename" is the program or file you're looking 
+for. If you're unsure of a file's complete name, try typing in part of 
+the name. For example, "PKZIP" will work as well as "PKZIP204.EXE."  The 
+system does not support DOS or Unix wildcards.  If you ask archie to look 
+for "PKZIP*," it will tell you it couldn't find anything by that name.  
+One thing to keep in mind is that a file is not necessarily the same as a 
+program -- it could also be a document.  This means you can use archie to 
+search for, say, everything online related to the Beetles, as well as 
+computer programs and graphics files. 
+
+A number of Net sites now have their own archie programs that take your 
+request for information and pass it onto the nearest archie database -- 
+ask your system administrator if she has it online. These "client" 
+programs seem to provide information a lot more quickly than the actual 
+archie itself!  If it is available, at your host system's command line, 
+type 
+ 
+     archie -s filename
+ 
+where filename is the program or document you're looking for, and hit 
+enter.  The -s tells the program to ignore case in a file name and lets 
+you search for partial matches. You might actually want to type it this 
+way: 
+ 
+     archie -s filename|more
+ 
+which will stop the output every screen (handy if there are many sites 
+that carry the file you want).  Or you could open a file on your computer 
+with your text-logging function. 
+
+The third way, for people without access to either of the above, is email. Send a message to archie@quiche.cs.mcgill.ca. You can leave the 
+subject line blank.  Inside the message, type 
+ 
+     prog filename
+ 
+where filename is the file you're looking for.  You can ask archie to 
+look up several programs by putting their names on the same "prog" line, 
+like this:
+                       
+     prog file1 file2 file3
+      
+Within a few hours, archie will write back with a list of the appropriate 
+sites. 
+
+In all three cases, if there is a system that has your file, you'll get a 
+response that looks something like this: 
+ 
+   Host sumex-aim.stanford.edu
+ 
+     Location: /info-mac/comm
+            FILE -rw-r--r--     258256  Feb 15 17:07  zterm-09.hqx
+     Location: /info-mac/misc
+            FILE -rw-r--r--       7490  Sep 12 1991  zterm-sys7-color-icons.hqx
+ 
+Chances are, you will get a number of similar looking responses for each 
+program.  The "host" is the system that has the file.  The "Location" 
+tells you which directory to look in when you connect to that system.  
+Ignore the funny-looking collections of r's and hyphens for now.  After 
+them, come the size of the file or directory listing in bytes, the date 
+it was uploaded, and the name of the file.  
+
+

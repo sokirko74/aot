@@ -1,0 +1,22 @@
+
+ 
+
+5.3.3 SLIP Configuration
+
+ 
+        SLIP (Serial Line Internet Protocol) allows you to use TCP/IP over a serial line, be that a phone line, with a dialup modem, or a leased asynchronous line of some sort. Of course, to use SLIP you'll need access to a dial-in SLIP server in your area. Many universities and businesses provide SLIP access for a modest fee. 
+
+    There are two major SLIP-related programs available---dip and slattach. Both of these programs are used to initiate a SLIP connection over a serial device. It is necessary to use one of these programs in order to enable SLIP---it will not suffice to dial up the SLIP server (with a communications program such as kermit) and issue ifconfig and route commands. This is because dip and slattach issue a special ioctl() system call to seize control of the serial device to be used as a SLIP interface. 
+
+dip can be used to dial up a SLIP server, do some handshaking to login to the server (exchanging your username and password, for example) and then initate the SLIP connection over the open serial line. slattach, on the other hand, does very little other than grab the serial device for use by SLIP. It is useful if you have a permanent line to your SLIP server and no modem dialup or handshaking is necessary to initiate the connection. Most dialup SLIP users should use dip, on the other hand. 
+
+dip can also be used to configure your Linux system as a SLIP server, where other machines can dial into your own and connect to the network through a secondary Ethernet connection on your machine. See the documentation and man pages for dip for more information on this procedure. 
+
+        SLIP is quite unlike Ethernet, in that there are only two machines on the ``network''---the SLIP host (that's you) and the SLIP server. For this reason, SLIP is often referred to as a ``point-to-point'' connection. A generalization of this idea, known as PPP (Point to Point Protocol) has also been implemented for Linux. 
+
+When you initiate a connection to a SLIP server, the SLIP server will give you an IP address based on (usually) one of two methods. Some SLIP servers allocate ``static'' IP addresses---in which case your IP address will be the same every time you connect to the server. However, many SLIP servers allocate IP addresses dynamically---in which case you receive a different IP address each time you connect. In general, the SLIP server will print the values of your IP and gateway addresses when you connect. dip is capable of reading these values from the output of the SLIP server login session and using them to configure the SLIP device. 
+
+Essentially, configuring a SLIP connection is just like configuring for loopback or ethernet. The main differences are discussed below. Read the previous section on configuring the basic TCP/IP files, and apply the changes described below. 
+
+
+ 

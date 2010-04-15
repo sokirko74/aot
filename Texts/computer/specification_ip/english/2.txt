@@ -1,0 +1,353 @@
+
+
+
+                                                          
+                                                       
+
+
+
+                              2.  OVERVIEW
+
+2.1.  Relation to Other Protocols
+
+  The following diagram illustrates the place of the internet protocol
+  in the protocol hierarchy:
+
+                                    
+                 +------+ +-----+ +-----+     +-----+  
+                 |Telnet| | FTP | | TFTP| ... | ... |  
+                 +------+ +-----+ +-----+     +-----+  
+                       |   |         |           |     
+                      +-----+     +-----+     +-----+  
+                      | TCP |     | UDP | ... | ... |  
+                      +-----+     +-----+     +-----+  
+                         |           |           |     
+                      +--------------------------+----+
+                      |    Internet Protocol & ICMP   |
+                      +--------------------------+----+
+                                     |                 
+                        +---------------------------+  
+                        |   Local Network Protocol  |  
+                        +---------------------------+  
+
+                         Protocol Relationships
+
+                               Figure 1.
+
+  Internet protocol interfaces on one side to the higher level
+  host-to-host protocols and on the other side to the local network
+  protocol.  In this context a "local network" may be a small network in
+  a building or a large network such as the ARPANET.
+
+2.2.  Model of Operation
+
+  The  model of operation for transmitting a datagram from one
+  application program to another is illustrated by the following
+  scenario:
+
+    We suppose that this transmission will involve one intermediate
+    gateway.
+
+    The sending application program prepares its data and calls on its
+    local internet module to send that data as a datagram and passes the
+    destination address and other parameters as arguments of the call.
+
+    The internet module prepares a datagram header and attaches the data
+    to it.  The internet module determines a local network address for
+    this internet address, in this case it is the address of a gateway.
+
+
+                                                                 
+
+                                                          
+
+Overview
+
+
+
+    It sends this datagram and the local network address to the local
+    network interface.
+
+    The local network interface creates a local network header, and
+    attaches the datagram to it, then sends the result via the local
+    network.
+
+    The datagram arrives at a gateway host wrapped in the local network
+    header, the local network interface strips off this header, and
+    turns the datagram over to the internet module.  The internet module
+    determines from the internet address that the datagram is to be
+    forwarded to another host in a second network.  The internet module
+    determines a local net address for the destination host.  It calls
+    on the local network interface for that network to send the
+    datagram.
+
+    This local network interface creates a local network header and
+    attaches the datagram sending the result to the destination host.
+
+    At this destination host the datagram is stripped of the local net
+    header by the local network interface and handed to the internet
+    module.
+
+    The internet module determines that the datagram is for an
+    application program in this host.  It passes the data to the
+    application program in response to a system call, passing the source
+    address and other parameters as results of the call.
+
+                                    
+   Application                                           Application
+   Program                                                   Program
+         \                                                   /      
+       Internet Module      Internet Module      Internet Module    
+             \                 /       \                /           
+             LNI-1          LNI-1      LNI-2         LNI-2          
+                \           /             \          /              
+               Local Network 1           Local Network 2            
+
+
+
+                            Transmission Path
+
+                                Figure 2
+
+
+
+
+
+
+
+
+
+                                                          
+                                                       
+                                                                Overview
+
+
+
+2.3.  Function Description
+
+  The function or purpose of Internet Protocol is to move datagrams
+  through an interconnected set of networks.  This is done by passing
+  the datagrams from one internet module to another until the
+  destination is reached.  The internet modules reside in hosts and
+  gateways in the internet system.  The datagrams are routed from one
+  internet module to another through individual networks based on the
+  interpretation of an internet address.  Thus, one important mechanism
+  of the internet protocol is the internet address.
+
+  In the routing of messages from one internet module to another,
+  datagrams may need to traverse a network whose maximum packet size is
+  smaller than the size of the datagram.  To overcome this difficulty, a
+  fragmentation mechanism is provided in the internet protocol.
+
+  Addressing
+
+    A distinction is made between names, addresses, and routes [4].   A
+    name indicates what we seek.  An address indicates where it is.  A
+    route indicates how to get there.  The internet protocol deals
+    primarily with addresses.  It is the task of higher level (i.e.,
+    host-to-host or application) protocols to make the mapping from
+    names to addresses.   The internet module maps internet addresses to
+    local net addresses.  It is the task of lower level (i.e., local net
+    or gateways) procedures to make the mapping from local net addresses
+    to routes.
+
+    Addresses are fixed length of four octets (32 bits).  An address
+    begins with a network number, followed by local address (called the
+    "rest" field).  There are three formats or classes of internet
+    addresses:  in class a, the high order bit is zero, the next 7 bits
+    are the network, and the last 24 bits are the local address; in
+    class b, the high order two bits are one-zero, the next 14 bits are
+    the network and the last 16 bits are the local address; in class c,
+    the high order three bits are one-one-zero, the next 21 bits are the
+    network and the last 8 bits are the local address.
+
+    Care must be taken in mapping internet addresses to local net
+    addresses; a single physical host must be able to act as if it were
+    several distinct hosts to the extent of using several distinct
+    internet addresses.  Some hosts will also have several physical
+    interfaces (multi-homing).
+
+    That is, provision must be made for a host to have several physical
+    interfaces to the network with each having several logical internet
+    addresses.
+
+
+
+                                                                 
+
+                                                          
+
+Overview
+
+
+
+    Examples of address mappings may be found in "Address Mappings" [5].
+
+  Fragmentation
+
+    Fragmentation of an internet datagram is necessary when it
+    originates in a local net that allows a large packet size and must
+    traverse a local net that limits packets to a smaller size to reach
+    its destination.
+
+    An internet datagram can be marked "don't fragment."  Any internet
+    datagram so marked is not to be internet fragmented under any
+    circumstances.  If internet datagram marked don't fragment cannot be
+    delivered to its destination without fragmenting it, it is to be
+    discarded instead.
+
+    Fragmentation, transmission and reassembly across a local network
+    which is invisible to the internet protocol module is called
+    intranet fragmentation and may be used [6].
+
+    The internet fragmentation and reassembly procedure needs to be able
+    to break a datagram into an almost arbitrary number of pieces that
+    can be later reassembled.  The receiver of the fragments uses the
+    identification field to ensure that fragments of different datagrams
+    are not mixed.  The fragment offset field tells the receiver the
+    position of a fragment in the original datagram.  The fragment
+    offset and length determine the portion of the original datagram
+    covered by this fragment.  The more-fragments flag indicates (by
+    being reset) the last fragment.  These fields provide sufficient
+    information to reassemble datagrams.
+
+    The identification field is used to distinguish the fragments of one
+    datagram from those of another.  The originating protocol module of
+    an internet datagram sets the identification field to a value that
+    must be unique for that source-destination pair and protocol for the
+    time the datagram will be active in the internet system.  The
+    originating protocol module of a complete datagram sets the
+    more-fragments flag to zero and the fragment offset to zero.
+
+    To fragment a long internet datagram, an internet protocol module
+    (for example, in a gateway), creates two new internet datagrams and
+    copies the contents of the internet header fields from the long
+    datagram into both new internet headers.  The data of the long
+    datagram is divided into two portions on a 8 octet (64 bit) boundary
+    (the second portion might not be an integral multiple of 8 octets,
+    but the first must be).  Call the number of 8 octet blocks in the
+    first portion NFB (for Number of Fragment Blocks).  The first
+    portion of the data is placed in the first new internet datagram,
+    and the total length field is set to the length of the first
+
+
+
+
+ 
+                                                       
+                                                                Overview
+
+
+
+    datagram.  The more-fragments flag is set to one.  The second
+    portion of the data is placed in the second new internet datagram,
+    and the total length field is set to the length of the second
+    datagram.  The more-fragments flag carries the same value as the
+    long datagram.  The fragment offset field of the second new internet
+    datagram is set to the value of that field in the long datagram plus
+    NFB.
+
+    This procedure can be generalized for an n-way split, rather than
+    the two-way split described.
+
+    To assemble the fragments of an internet datagram, an internet
+    protocol module (for example at a destination host) combines
+    internet datagrams that all have the same value for the four fields:
+    identification, source, destination, and protocol.  The combination
+    is done by placing the data portion of each fragment in the relative
+    position indicated by the fragment offset in that fragment's
+    internet header.  The first fragment will have the fragment offset
+    zero, and the last fragment will have the more-fragments flag reset
+    to zero.
+
+2.4.  Gateways
+
+  Gateways implement internet protocol to forward datagrams between
+  networks.  Gateways also implement the Gateway to Gateway Protocol
+  (GGP) [7] to coordinate routing and other internet control
+  information.
+
+  In a gateway the higher level protocols need not be implemented and
+  the GGP functions are added to the IP module.
+
+                                    
+                   +-------------------------------+   
+                   | Internet Protocol & ICMP & GGP|   
+                   +-------------------------------+   
+                           |                 |         
+                 +---------------+   +---------------+ 
+                 |   Local Net   |   |   Local Net   | 
+                 +---------------+   +---------------+ 
+
+                           Gateway Protocols
+
+                               Figure 3.
+
+  
+
+
+
+
+
+                                                                 
+
+                                                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          
+                                                       

@@ -1,0 +1,15 @@
+ 
+
+1.8.1 Motherboard and CPU requirements
+
+ 
+    Linux currently supports systems with an Intel 80386, 80486, or Pentium CPU. This includes all variations on this CPU type, such as the 386SX, 486SX, 486DX, and 486DX2. Non-Intel ``clones'', such as AMD and Cyrix processors, work with Linux as well. 
+
+If you have a 80386 or 80486SX, you may also wish to use a math coprocessor, although one isn't required (the Linux kernel can do FPU emulation if you do not have a math coprocessor). All standard FPU couplings are supported, such as IIT, Cyrix FasMath, and Intel coprocessors. 
+
+The system motherboard must use ISA or EISA bus architecture. These terms define how the system interfaces with peripherals and other components on the main bus. Most systems sold today are either ISA or EISA bus. IBM's MicroChannel (MCA) bus, found on machines such as the IBM PS/2, is not currently supported. 
+
+Systems which use a local bus architecture (for faster video and disk access) are supported as well. It is suggested that you have a standard local bus architecture such as the VESA Local Bus (``VLB''). 
+
+
+ 

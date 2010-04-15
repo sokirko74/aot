@@ -1,0 +1,79 @@
+12.2  INTERNET RELAY CHAT
+ 
+ 
+IRC is a program that lets you hold live keyboard conversations with 
+people around the world.  It's a lot like an international CB radio  - it 
+even uses "channels."  Type something on your computer and it's instantly 
+echoed around the world to whoever happens to be on the same channel with 
+you.  You can join in existing public group chats or set up your own.  
+You can even create a private channel for yourself and as few as one or 
+two other people.  And just like on a CB radio, you can give yourself a 
+unique "handle" or nickname. 
+
+IRC currently links host systems in 20 different countries, from 
+Australia to Hong Kong to Israel.  Unfortunately, it's like telnet -- 
+either your site has it or it doesn't.  If your host system does have it,  
+Just type 
+     
+     irc
+ 
+and hit enter.  
+ 
+You are now in channel 0, the "null" channel, in which you can look up 
+various help files, but not much else. As you can see, IRC takes over 
+your entire screen.  The top of the screen is where messages will appear.  
+The last line is where you type IRC commands and messages.  All IRC 
+commands begin with a /.  The slash tells the computer you are about to 
+enter a command, rather than a message. To see what channels are 
+available, type 
+ 
+     /list
+ 
+and hit enter.                                                                 
+ 
+Because IRC allows for a large number of channels, the list might scroll 
+off your screen, so you might want to turn on your computer's screen 
+capture to capture the entire list.  Note that the channels always have 
+names, instead of numbers.  Each line in the listing tells you the 
+channel name, the number of people currently in it, and whether there's a 
+specific topic for it.  To switch to a particular channel, type 
+ 
+     /join #channel
+ 
+where "#channel" is the channel name and hit enter.  Some "public" 
+channels actually require an invitation from somebody already on it.  To 
+request an invitation, type 
+ 
+     /who #channel-name
+ 
+where channel-name is the name of the channel, and hit enter.  Then ask 
+someone with an @ next to their name if you can join in.  Note that 
+whenever you enter a channel, you have to include the #.  Choose one with 
+a number of users, so you can see IRC in action. 
+     
+If it's a busy channel, as soon as you join it, the top of your screen 
+will quickly be filled with messages.  Each will start with a person's 
+IRC nickname, followed by his message. 
+
+It may seem awfully confusing at first.  There could be two or three 
+conversations going on at the same time and sometimes the messages will 
+come in so fast you'll wonder how you can read them all.  
+
+Eventually, though, you'll get into the rhythm of the channel and things 
+will begin to make more sense.  You might even want to add your two cents 
+(in fact, don't be surprised if a message to you shows up on your screen 
+right away; on some channels, newcomers are welcomed immediately).  To 
+enter a public message, simply type it on that bottom line (the computer 
+knows it's a message because you haven't started the line with a slash) 
+and hit enter.                             
+
+Public messages have a user's nickname in brackets, like this: 
+ 
+     <tomg>
+ 
+If you receive a private message from somebody, his name will be between 
+asterisks, like this: 
+ 
+     *tomg*
+ 
+ 

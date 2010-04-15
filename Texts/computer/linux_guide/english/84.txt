@@ -1,0 +1,33 @@
+
+5.6 News and USENET
+
+         Linux also provides a number of facilities for managing electronic news. You may choose to set up a local news server on your system, which will allow users to post ``articles'' to various ``newsgroups'' on the system...a lively form of discussion. However, if you have access to a TCP/IP or UUCP network, then you will be able to participate in USENET---a worldwide network news service. 
+
+          There are two parts to the news software---the server and the client. The news server is the software which controls the newsgroups and handles delivering articles to other machines (if you are on a network). The news client, or newsreader, is the software which connects to the server to allow users to read and post news. 
+
+                There are several forms of news servers available for Linux. They all follow the same basic protocols and design. The two primary versions are ``C News'' and ``INN''. There are many types of newsreaders, as well, such as rn and tin. The choice of newsreader is more or less a matter of taste; all newsreaders should work equally well with different versions of the server software. That is, the newsreader is independent of the server software, and vice versa. 
+
+If you only want to run news locally (that is, not as part of USENET), then you will need to run a server on your system, as well as install a newsreader for the users. The news server will store the articles in a directory such as /usr/spool/news, and the newsreader will be compiled to look in this directory for news articles. 
+
+However, if you wish to run news over the network, there are several options open to you. TCP/IP network-based news uses a protocol known as NNTP (Network News Transmission Protocol). NNTP allows a newsreader to read news over the network, on a remote machine. NNTP also allows news servers to send articles to each other over the network---this is the software upon which USENET is based. Most businesses and universities have one or more NNTP servers set up to handle all of the USENET news for that site. Every other machine at the site runs an NNTP-based newsreader to read and post news over the network via the NNTP server. This means that only the NNTP server actually stores the news articles on disk. 
+
+Here are some possible scenarios for news configuration. 
+    * You run news locally. That is, you have no network connection, or no desire to run news over the network. In this case, you need to run C News or INN on your machine, and install a newsreader to read the news locally. 
+
+    * You have access to a TCP/IP network and an NNTP server. If your organization has an NNTP news server set up, you can read and post news from your Linux machine by simply installing an NNTP-based newsreader. (Most newsreaders available can be configured to run locally or use NNTP). In this case, you do not need to install a news server or store news articles on your system. The newsreader will take care of reading and posting news over the network. Of course, you will need to have TCP/IP configured and have access to the network (see Section 5.3). 
+
+    * You have access to a TCP/IP network but have no NNTP server. In this case, you can run an NNTP news server on your Linux system. You can install either a local or an NNTP-based newsreader, and the server will store news articles on your system. In addition, you can configure the server to communicate with other NNTP news servers to transfer news articles. 
+
+    * You want to transfer news using UUCP. If you have UUCP access (see Section 5.4), you can participate in USENET as well. You will need to install a (local) news server and a news reader. In addition, you will need to configure your UUCP software to periodically transfer news articles to another nearby UUCP machine (known as your ``news feed''). UUCP does not use NNTP to transfer news; simply, UUCP provides its own mechanism for transferring news articles. 
+
+
+The one downside of most news server and newsreader software is that it must be compiled by hand. Most of the news software does not use configuration files; instead, configuration options are determined at compile time. 
+
+Most of the ``standard'' news software (available via anonymous FTP from ftp.uu.net in the directory /news) will compile out-of-the box on Linux. Necessary patches can be found on sunsite.unc.edu in /pub/Linux/system/Mail (which is, incidentally, also where mail software for Linux is found). Other news binaries for Linux may be found in this directory as well. 
+
+For more information, refer to the Linux News HOWTO from sunsite.unc.edu in /pub/Linux/docs/HOWTO. Also, the LDP's Linux Network Administrator's Guide contains complete information on configuring news software for Linux. The book Managing UUCP and Usenet, by Tim O'Reilly and Grace Todino, is an excellent guide to setting up UUCP and news software. Also of interest is the USENET document ``How to become a USENET site,'' available from ftp.uu.net, in the directory /usenet/news.announce.newusers. 
+
+      
+
+
+ 

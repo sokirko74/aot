@@ -1,0 +1,40 @@
+7.1  TONS OF FILES
+
+hundreds of systems connected to Internet have file libraries, or 
+archives, accessible to the public. Much of this consists of free or lowcost shareware programs for virtually every make of computer.  If you 
+want a different communications program for your IBM, or feel like 
+playing a new game on your Amiga, you'll be able to get it from the Net.
+    
+But there are also libraries of documents as well.  If you want a copy of 
+a recent U.S. Supreme Court decision, you can find it on the Net.  Copies 
+of historical documents, from the Magna Carta to the Declaration of 
+Independence are also yours for the asking, along with a translation of a 
+telegram from Lenin ordering the execution of rebellious peasants.  You 
+can also find song lyrics, poems, even summaries of every "Lost in Space" 
+episode ever made.  You can also find extensive files detailing 
+everything you could ever possibly want to know about the Net itself.  
+First you'll see how to get these files; then we'll show you where 
+they're kept. 
+ 
+Increasingly, you can get these files via gopher or the World-Wide 
+Web (see Chapter 8 for gopher; Chapter 9 for the Web).  But it's still 
+good to know how to use the original way of getting files across the Net: 
+file-transfer protocol, or FTP, because there is still a large 
+number of files stil stored on FTP sites.
+
+Starting ftp is as easy as using telnet. At your host system's command 
+line, type 
+ 
+     ftp site.name
+ 
+and hit enter, where "site.name" is the address of the ftp site you want 
+to reach.  One major difference between telnet and ftp is that it is 
+considered bad form to connect to most ftp sites during their business 
+hours (generally 6 a.m. to 6 p.m. local time).  This is because 
+transferring files across the network takes up considerable computing 
+power, which during the day is likely to be needed for whatever the 
+computer's main function is.  There are some ftp sites that are 
+accessible to the public 24 hours a day, though.  You'll find these noted 
+in the list of ftp sites in section 7.6.
+
+

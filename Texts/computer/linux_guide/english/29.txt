@@ -1,0 +1,41 @@
+ 
+
+3.13.1 Shell scripts
+
+       Let's say that you use a series of commands often, and would like to shorten the amount of required typing by grouping all of them together into a single ``command''. For example, the commands 
+
+/home/larry# cat chapter1 chapter2 chapter3 > book 
+/home/larry# wc -l book 
+/home/larry# lp book 
+
+would concatenate the files chapter1, chapter2, and chapter3 and place the result in the file book. Then, a count of the number of lines in book would be displayed, and finally book would be printed with the lp command. 
+
+Instead of typing all of these commands, you could group them into a shell script. We described shell scripts briefly in Section 3.13.1. The shell script used to run all of these commands would look like 
+
+#!/bin/sh
+# A shell script to create and print the book
+
+cat chapter1 chapter2 chapter3 > book
+wc -l book
+lp book
+
+If this script was saved in the file makebook, you could simply use the command 
+
+/home/larry# makebook 
+
+to run all of the commands in the script. Shell scripts are just plain text files; you can create them with an editor such as emacs or vi . 
+
+Let's look at this shell script. The first line, ``#!/bin/sh'', identifies the file as a shell script, and tells the shell how to execute the script. It instructs the shell to pass the script to /bin/sh for execution, where /bin/sh is the shell program itself. Why is this important? On most UNIX systems, /bin/sh is a Bourne-type shell, such as Bash. By forcing the shell script to run using /bin/sh, we are ensuring that the script will run under a Bourne-syntax shell (instead of, say, a C shell). This will cause your script to run using the Bourne syntax even if you use Tcsh (or another C shell) as your login shell. 
+
+  The second line is a comment. Comments begin with the character ``#'' and continue to the end of the line. Comments are ignored by the shell---they are commonly used to identify the shell script to the programmer. 
+
+The rest of the lines in the script are just commands, as you would type them to the shell directly. In effect, the shell reads each line of the script and runs that line as if you had typed it at the shell prompt. 
+
+    Permissions are important for shell scripts. If you create a shell script, you must make sure that you have execute permission on the script in order to run it. The command 
+
+/home/larry# chmod u+x makebook 
+
+can be used to give yourself execute permission on the shell script makebook. 
+
+
+ 

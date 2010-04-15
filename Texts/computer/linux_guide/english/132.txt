@@ -1,0 +1,46 @@
+ 
+
+2.5.3 Problems installing the software
+
+ 
+  
+
+Actually installing the Linux software should be quite trouble-free, if you're lucky. The only problems that you might experience would be related to corrupt installation media or lack of space on your Linux filesystems. Here is a list of these common problems. 
+
+    
+    * System reports ``Read error'', ``file not found'', or other errors while attempting to install the software. This is indicative of a problem with your installation media. If you are installing from floppy, keep in mind that floppies are quite succeptible to media errors of this type. Be sure to use brand-new, newly-formatted floppies. If you have an MS-DOS partition on your drive, many Linux distributions allow you to install the software from the hard drive. This may be faster and more reliable than using floppies. 
+
+If you are using a CD-ROM, be sure to check the disc for scratches, dust, or other problems which might cause media errors. 
+
+The cause of the problem may be that the media is in the incorrect format. For example, if using floppies, many Linux distributions require that the floppies be formatted in high-density MS-DOS format. (The boot floppy is the exception; it is not in MS-DOS format in most cases.) If all else fails, either obtain a new set of floppies, or recreate the floppies (using new diskettes) if you downloaded the software yourself. 
+
+    * System reports errors such as ``tar: read error'' or ``gzip: not in gzip format''. This problem is usually caused by corrupt files on the installation media itself. In other words, your floppy may be error-free, but the data on the floppy is in some way corrupted. For example, if you downloaded the Linux software using text mode, rather than binary mode, then your files will be corrupt, and unreadable by the installation software. 
+
+    * System reports errors such as ``device full'' while installing. This is a clear-cut sign that you have run out of space when installing the software. Not all Linux distributions will be able to cleanly pick up the mess; you shouldn't be able to abort the installation and expect the system to work. 
+
+The solution is usually to re-create your filesystems (with the mke2fs command) which will delete the partially-installed software. You can then attempt to re-install the software, this time selecting a smaller amount of software to install. In other cases, you may need to start completely from scratch, and rethink your partition and filesystem sizes. 
+
+    * System reports errors such as ``read_intr: 0x10'' while accessing the hard drive. This is usually an indication of bad blocks on your drive. However, if you receive these errors while using mkswap or mke2fs, the system may be having trouble accessing your drive. This can either be a hardware problem (see Section 2.5.2), or it might be a case of poorly specified geometry. If you used the 
+
+hd=,, 
+
+option at boot time to force detection of your drive geometry, and incorrectly specified the geometry, you could be prone to this problem. This can also happen if your drive geometry is incorrectly specified in the system CMOS. 
+
+    * System reports errors such as ``file not found'' or ``permission denied''. This problem can occur if not all of the necessary files are present on the installation media (see the next paragraph) or if there is a permissions problem with the installation software. For example, some distributions of Linux have been known to have bugs in the installation software itself. These are usually fixed very rapidly, and are quite infrequent. If you suspect that the distribution software contains bugs, and you're sure that you have not done anything wrong, contact the maintainer of the distribution to report the bug. 
+
+
+If you have other strange errors when installing Linux (especially if you downloaded the software yourself), be sure that you actually obtained all of the necessary files when downloading. For example, some people use the FTP command 
+
+mget *.* 
+
+when downloading the Linux software via FTP. This will download only those files that contain a ``.'' in their filenames; if there are any files without the ``.'', you will miss them. The correct command to use in this case is 
+
+mget * 
+
+
+The best advice is to retrace your steps when something goes wrong. You may think that you have done everything correctly, when in fact you forgot a small but important step somewhere along the way. In many cases, just attempting to re-download or re-install the Linux software can solve the problem. Don't beat your head against the wall any longer than you have to! 
+
+Also, if Linux unexpectedly hangs during installation, there may be a hardware problem of some kind. See Section 2.5.2 for hints. 
+
+
+ 

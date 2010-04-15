@@ -1,0 +1,175 @@
+3.7  SPEAKING UP
+
+
+"Threads" are an integral part of Usenet.  When somebody posts a message, 
+often somebody else will respond.  Soon, a thread of conversation begins.  
+Following these threads is relatively easy.  In nn, related messages are 
+grouped together.  In rn, when you're done with a message, you can hit 
+control-N to read the next related message, or followup.  As you explore 
+Usenet, it's probably a good idea to read discussions for awhile before 
+you jump in.  This way, you can get a feel for the particular newsgroup 
+-- each has its own rhythms. 
+ 
+Eventually, though, you'll want to speak up.  There are two main ways to 
+do this.  You join an existing conversation, or you can start a whole new 
+thread. 
+
+If you want to join a discussion, you have to decide if you want to 
+include portions of the message you are responding to in your message.  
+The reason to do this is so people can see what you're responding to, 
+just in case the original message has disappeared from their system 
+(remember that most Usenet messages have a short life span on the average 
+host system) or they can't find it.  
+
+If you're using a Unix host system, joining an existing conversation is 
+similar in both nn and rn: hit your F key when done with a given article 
+in the thread.  In rn, type a small f if you don't want to include 
+portions of the message you're responding to; an uppercase F if you do. 
+In nn, type a capital F.  You'll then be asked if you want to include 
+portions of the original message. 
+
+And here's where you hit another Unix wall.  When you hit your F key, 
+your host system calls up its basic Unix text editor.  If you're lucky, 
+that'll be pico, a very easy system.  More likely, however, you'll get 
+dumped into emacs (or possibly vi), which you've already met in the 
+chapter on e-mail.  
+
+The single most important emacs command is 
+ 
+     control-x control-c
+ 
+This means, depress your control key and hit x.  Then depress the control 
+key and hit c.  Memorize this.  In fact, it's so important, it bears 
+repeating: 
+     
+     control-x control-c
+ 
+These keystrokes are how you get out of emacs.  If they work well, you'll 
+be asked if you want to send, edit, abort or list the message you were 
+working on.  If they don't work well (say you accidentally hit some other 
+weird key combination that means something special to emacs) and nothing 
+seems to happen, or you just get more weird-looking emacs prompts on the 
+bottom of your screen, try hitting control-g. This should stop whatever 
+emacs was trying to do (you should see the word "quit" on the bottom of 
+your screen), after which you can hit control-x control-c. But if this 
+still doesn't work, remember that you can always disconnect and dial back 
+in! 
+
+If you have told your newsreader you do want to include portions of the 
+original message in yours, it will automatically put the entire thing at 
+the top of your message.  Use the arrow keys to move down to the lines 
+you want to delete and hit control-K, which will delete one line at a 
+time. 
+
+You can then write your message.  Remember that you have to hit enter 
+before your cursor gets to the end of the line, because emacs does not 
+have word wrapping. 
+
+When done, hit control-X control-C.  You'll be asked the question about 
+sending, editing, aborting, etc.  Chose one.  If you hit Y, your host 
+system will start the process to sending your message across the Net. 
+
+The nn and rn programs work differently when it comes to posting entirely 
+new messages.  In nn, type 
+ 
+     :post
+ 
+and hit enter in any newsgroup.  You'll be asked which newsgroup to 
+post a message to.  Type in its name and hit enter.  Then you'll be 
+asked for "keywords."  These are words you'd use to attract somebody 
+scanning a newsgroup.  Say you're selling your car.  You might type 
+the type of car here.  Next comes a "summary" line, which is somewhat 
+similar.  Finally, you'll be asked for the message's "distribution."
+This is where you put how widely you want your message disseminated.  
+Think about this one for a second.  If you are selling your car, it 
+makes little sense to send a message about it all over the world.  But 
+if you want to talk about the environment, it might make a lot of 
+sense.  Each host system has its own set of distribution 
+classifications, but there's generally a local one (just for users of 
+that system), one for the city, state or region it's in, another for 
+the country (for example, usa), one for the continent (for Americans 
+and Canadians, na) and finally, one for the entire world (usually: 
+world).
+
+Which one to use?  Generally, a couple of seconds' thought will help you 
+decide.  If you're selling your car, use your city or regional 
+distribution -- people in Australia won't much care and may even get 
+annoyed.  If you want to discuss presidential politics, using a USA 
+distribution makes more sense.  If you want to talk about events in the 
+Middle East, sending your message to the entire world is perfectly 
+acceptable. One caveat: these rules are not absolute, some systems pick 
+up messages from all over, regardless of the distribution you've set, so 
+don't be surprised if, sooner or later, you get a response to a "local" 
+message from several thousand miles away. 
+    
+Then you can type your message.  If you've composed your message 
+offline (generally a good idea if you and emacs don't get along), you 
+can upload it now.  You may see a lot of weird looking characters as 
+it uploads into emacs, but those will disappear when you hit control-X 
+and then control-C.  Alternately: "save" the message (for example, by 
+hitting m in rn), log out, compose your message offline, log back on and 
+upload your message into a file on your host system.  Then call up 
+Usenet, find the article you "saved." Start a reply, and you'll be asked 
+if you want to include a prepared message.  Type in the name of the file 
+you just created and hit enter.
+
+In rn, you have to wait until you get to the end of a newsgroup to hit F, 
+which will bring up a message-composing system.  Alternately, at your 
+host system's command line, you can type 
+ 
+     Pnews
+ 
+and hit enter.  You'll be prompted somewhat similarly to the nn 
+system, except that you'll be given a list of possible distributions.  
+If you chose "world," you'll get this message:
+ 
+                                                                               
+ This program posts news to thousands of machines throughout the entire         
+ civilized world.  Your message will cost the net hundreds if not thousands of  
+ dollars to send everywhere.  Please be sure you know what you are doing.       
+                                                                               
+ Are you absolutely sure that you want to do this? [ny]                         
+ 
+Don't worry -- your message won't really cost the Net untold amounts, 
+although, again, it's a good idea to think for a second whether your 
+message really should go everywhere. 
+ 
+If you want to respond to a given post through e-mail, instead of 
+publicly, hit R in nn or r or R in rn.  In rn, as with follow-up 
+articles, the upper-case key includes the original message in yours. 
+
+Most newsgroups are unmoderated, which means that every message you post 
+will eventually wind up on every host system within the geographic region 
+you specified that carries that newsgroup. 
+
+Some newsgroups, however, are moderated, as you saw earlier with 
+comp.risks.  In these groups, messages are shipped to a single location 
+where a moderator, acting much like a magazine editor, decides what 
+actually gets posted.  In some cases, groups are moderated like scholarly 
+journals.  In other cases, it's to try to cut down on the massive number 
+of messages that might otherwise be posted.  
+
+
+You'll notice that many articles in Usenet end with a fancy "signature" 
+that often contains some witty saying, a clever drawing and, almost 
+incidentally, the poster's name and e-mail address.  You too can have 
+your own "signature" automatically appended to everything you post.  On 
+your own computer, create a signature file.  Try to keep it to four lines 
+or less, lest you annoy others on the Net.  Then, while 
+
+connected to your host system, at the prompt, type 
+ 
+     cat>.signature
+ 
+and hit enter (note the period before the s).  Upload your signature 
+file into this using your communications software's ASCII upload 
+protocol.  When done, hit control-D, the Unix command for closing a 
+file.  Now, every time you post a message, this will be appended to it. 
+
+There are a few caveats to posting.  Usenet is no different from a Town 
+Meeting or publication: you're not supposed to break the law, whether 
+that's posting copyrighted material or engaging in illegal activities.  
+It is also not a place to try to sell products (except in certain biz. 
+and for-sale newsgroups). 
+
+

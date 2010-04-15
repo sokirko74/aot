@@ -1,0 +1,71 @@
+
+ 
+
+3.11.4 Stopping and restarting jobs
+
+ 
+  There is another way to put a job into the background. You can start the job normally (in the foreground), stop the job, and then restart it in the background. 
+
+First, start the yes process in the foreground, as you normally would: 
+
+/home/larry# yes > /dev/null 
+
+Again, because yes is running in the foreground, you shouldn't get your shell prompt back. 
+
+Now, instead of interrupting the job with , we'll suspend the job. Suspending a job doesn't kill it: it only temporarily stops the job until you restart it. To do this, you hit the suspend key, which is usually . 
+
+/home/larry# yes > /dev/null 
+[1]+ Stopped yes >/dev/null 
+/home/larry# 
+
+While the job is suspended, it's simply not running. No CPU time is used for the job. However, you can restart the job, which will cause the job to run again as if nothing ever happened. It will continue to run where it left off. 
+
+    To restart the job in the foreground, use the command fg (for ``foreground''). 
+
+/home/larry# fg 
+yes >/dev/null 
+
+    The shell prints the name of the command again so you're aware of which job you just put into the foreground. Stop the job again, with . This time, use the command bg to put the job into the background. This will cause the command to run just as if you started the command with ``&'' as in the last section. 
+
+/home/larry# bg 
+[1]+ yes >/dev/null & 
+/home/larry# 
+
+And we have our prompt back. jobs should report that yes is indeed running, and we can kill the job with kill as we did before. 
+
+How can we stop the job again? Using won't work, because the job is in the background. The answer is to put the job in the foreground, with fg, and then stop it. As it turns out you can use fg on either stopped jobs or jobs in the background. 
+
+There is a big difference between a job in the background and a job which is stopped. A stopped job is not running---it's not using any CPU time, and it's not doing any work (the job still occupies system memory, although it may be swapped out to disk). A job in the background is running, and using memory, as well as completing some task while you do other work. However, a job in the background may try to display text on to your terminal, which can be annoying if you're trying to work on something else. For example, if you used the command 
+
+/home/larry# yes & 
+
+without redirecting stdout to /dev/null, a stream of y's would be printed to your screen, without any way of interrupting it (you can't use to interrupt jobs in the background). In order to stop the endless y's, you'd have to use the fg command, to bring the job to the foreground, and then use to kill it. 
+
+Another note. The fg and bg commands normally foreground or background the job which was last stopped (indicated by a ``+'' next to the job number when you use the command jobs). If you are running multiple jobs at once, you can foreground or background a specific job by giving the job ID as an argument to fg or bg, as in 
+
+/home/larry# fg %2 
+
+(to foreground job number 2), or 
+
+/home/larry# bg %3 
+
+(to background job number 3). You can't use process ID numbers with fg or bg. 
+
+Furthermore, using the job number alone, as in 
+
+/home/larry# %2 
+
+is equivalent to 
+
+/home/larry# fg %2 
+
+
+Just remember that using job control is a feature of the shell. The commands fg, bg and jobs are internal to the shell. If for some reason you use a shell which does not support job control, don't expect to find these commands available. 
+
+In addition, there are some aspects of job control which differ between Bash and Tcsh. In fact, some shells don't provide job control at all---however, most shells available for Linux support job control. 
+
+  
+
+
+
+ 

@@ -1,0 +1,99 @@
+8.1  GOPHERS
+
+
+Even with tools like Hytelnet and archie, telnet and ftp can still be 
+frustrating.  There are all those telnet and ftp addresses to remember.  
+Telnet services often have their own unique commands.  And, oh, those 
+weird directory and file names! 
+
+But now that the Net has become a rich repository of information, people 
+are developing ways to make it far easier to find and retrieve 
+information and files. Gophers and Wide-Area Information Servers (WAISs) 
+are two services that are helping to make the internet far easier to 
+use.
+
+Both gophers and WAISs essentially take a request for information and 
+then scan the Net for it, so you don't have to.  Both also work through 
+menus -- instead of typing in some long sequence of characters, you just 
+move a cursor to your choice and hit enter.  Gophers even let you select 
+files and programs from ftp sites this way. 
+
+Let's first look at gophers (named for the official mascot of thE 
+University of Minnesota, where the system was developed).  Most 
+public-access sites now have gophers online.  To use one, type 
+ 
+     gopher
+ 
+at the command prompt and hit enter.  If you know your site does not have 
+a gopher, or if nothing happens when you type that, telnet to 
+ 
+     consultant.micro.umn.edu
+ 
+At the login prompt, type
+ 
+     gopher
+ 
+and hit enter.  You'll be asked what type of terminal emulation you're 
+using.
+
+Assuming you're using VT100 or some other VT emulation, you'll be able to 
+move among the choices with your up and down arrow keys.  When you have 
+your cursor on an entry that looks interesting, just hit enter, and 
+you'll either get a new menu of choices, a database entry form, or a text 
+file, depending on what the menu entry is linked to (more on how to tell 
+which you'll get in a moment). 
+
+Gophers are great for exploring the resources of the Net.  Just keep 
+making choices to see what pops up.  Play with it; see where it takes 
+you.  Some choices will be documents.  When you read one of these and 
+either come to the end or hit a lower-case q to quit reading it, you'll 
+be given the choice of saving a copy to your home directory or e-mailing 
+it to yourself.  Other choices are simple databases that let you enter a 
+word to look for in a particular database.  To get back to where you 
+started on a gopher, hit your u key at a menu prompt, which will move you 
+back "up" through the gopher menu structure (much like "cd .." in ftp). 
+
+Notice that one of your choices above is "Internet file server (ftp) 
+sites."  Choose this, and you'll be connected to a modified archie 
+program -- an archie with a difference.  When you search for a file 
+through a gopher archie, you'll get a menu of sites that have the file 
+you're looking for, just as with the old archie.  Only now, instead of 
+having to write down or remember an ftp address and directory, all you 
+have to do is position the cursor next to one of the numbers in the menu 
+and hit enter.  You'll be connected to the ftp site, from which you can 
+then choose the file you want.  This time, move the cursor to the file 
+you want and hit a lower-case s.  You'll be asked for a name in your home 
+directory to use for the file, after which the file will be copied to 
+your home system.  Unfortunately, this file-transfer process does not yet 
+work with all public-access sites for computer programs and compressed 
+files.  If it doesn't work with yours, you'll have to get the file the 
+old-fashioned way, via anonymous ftp. 
+
+In addition to ftp sites, there are hundreds of databases and libraries 
+around the world accessible through gophers.  There is not yet a common 
+gopher interface for library catalogs, so be prepared to follow the 
+online directions more closely when you use gopher to connect to one. 
+
+Gopher menu entries that end in a / are gateways to another menu of 
+options.  Entries that end in a period are text, graphics or program 
+files, which you can retrieve to your home directory (or e-mail to 
+yourself or to somebody else).  A line that ends in <?> or <CSO> 
+represents a request you can make to a database for information.  The 
+difference is that <?> entries call up one-line interfaces in which you 
+can search for a keyword or words, while <CSO> brings up an electronic 
+form with several fields for you to fill out (you might see this in 
+online "White Pages" directories at colleges). 
+
+Gophers actually let you perform some relatively sophisticated Boolean 
+searches.  For example, if you want to search only for files that contain 
+the words "MS-DOS" and "Macintosh," you'd type 
+
+     ms-dos and macintosh
+
+(gophers are not case-sensitive) in the keyword field.  Alternately, if 
+you want to get a list of files that mention either "MS-DOS" or 
+"Macintosh," you'd type 
+
+     ms-dos or macintosh
+
+

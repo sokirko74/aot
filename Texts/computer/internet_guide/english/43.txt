@@ -1,0 +1,16 @@
+7.8 PROJECT GUTENBERG -- ELECTRONIC BOOKS
+
+Project Gutenberg, coordinated by Michael Hart, has a fairly ambitious 
+goal: to make more than 10,000 books and other documents available 
+electronically by the year 2001.  In 1993, the project uploaded an 
+average of four books a month to its ftp sites; in 1994, they hope to 
+double the pace. 
+
+Begun in 1971, the project already maintains a "library" of hundreds of 
+books and stories, from Aesop's Fables to "Through the Looking Glass" 
+available for the taking.  It also has a growing number of currentaffairs documents, such as the CIA's annual "World Factbook" almanac. 
+
+Besides nptn.org, Project Gutenberg texts can be retrieved from 
+mrcnext.cso.uiuc.edu in the etext directory. 
+
+

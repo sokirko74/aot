@@ -1,0 +1,21 @@
+
+
+ 
+
+3.3.8 Getting online help
+
+ 
+      Almost every UNIX system, Linux included, provides a facility known as ``manual pages'', or ``man pages'' for short. These man pages contain online documentation for all of the various system commands, resources, configuration files, and so on. 
+
+  The command used to access man pages is man. For example, if you're interested in finding out about the other options of the ls command, you can type 
+
+/home/larry# man ls 
+
+and the man page for ls will be displayed. 
+
+Unfortunately, most of the man pages out there are written for those who already have some idea of what the command or resource does. For this reason, man pages usually only contain the hardcore technical details of the command, without a lot of tutorial. However, man pages can be an invaluable resource for jogging your memory if you forget the syntax of a command. Man pages will also tell you a lot about the commands which we won't tell you in this book. 
+
+I suggest that you try man for the commands we've already gone over, and whenever I introduce a new command. You'll notice some of these commands won't have man pages. This could be for several reasons. For one, the man pages haven't been written yet (the Linux Documentation Project is responsible for man pages under Linux as well. We are gradually accumulating most of the man pages available for the system). Secondly, the the command might be an internal shell command, or an alias (as discussed in Section 3.2.4), in which case it would not have a man page of its own. One example is cd, which is a shell internal command. The shell actually processes the cd---there is no separate program which contains this command. 
+
+
+ 

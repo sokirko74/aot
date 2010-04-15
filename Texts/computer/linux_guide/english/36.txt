@@ -1,0 +1,27 @@
+ 
+
+4.1.1 The root account
+
+ 
+  Ordinary users are generally restricted so that they can't do harm to anybody else on the system, just to themselves. File permissions on the system are arranged such that normal users aren't allowed to delete or modify files in directories shared by all users (such as /bin and /usr/bin. Most users also protect their own files with the appropriate file permissions so that other users can't access or modify those files. 
+
+There are no such restrictions on root. The user root can read, modify, or delete any file on the system, change permissions and ownerships on any file, and run special programs, such as those which partition the drive or create filesystems. The basic idea is that the person or persons who run and take care of the system logs in as root whenever it is necessary to perform tasks that cannot be executed as a normal user. Because root can do anything, it is easy to make mistakes that have catastrophic consequences when logged in using this account.   
+
+For example, as a normal user, if you inadvertently attempt to delete all of the files in /etc, the system will not permit you to do so. However, when logged in as root, the system won't complain at all. It is very easy to trash your system when using root. The best way to prevent accidents is to: 
+    * Sit on your hands before you press on a command which may cause damage. For example, if you're about to clean out a directory, before hitting , re-read the entire command and make sure that it is correct. 
+
+    * Don't get accustomed to using root. The more comfortable you are in the role of the root user, the more likely you are to confuse your privileges with those of a normal user. For example, you might think that you're logged in as larry, when you're really logged in as root. 
+
+  
+    * Use a different prompt for the root account. You should change root's .bashrc or .login file to set the shell prompt to something other than your regular user prompt. For example, many people use the character ``$'' in prompts for regular users, and reserve the character ``#'' for the root user prompt. 
+
+    * Only login as root when absolutely necessary. And, as soon as you're finished with your work as root, log out. The less you use the root account, the less likely you'll be to do damage on your system. 
+
+Of course, there is a breed of UNIX hackers out there who use root for virtually everything. But every one of them has, at some point, made a silly mistake as root and trashed the system. The general rule is, until you're familiar with the lack of restrictions on root, and are comfortable using the system without such restrictions, login as root sparingly. 
+
+Of course, everyone makes mistakes. Linus Torvalds himself once accidentally deleted the entire kernel directory tree on his system. Hours of work were lost forever. Fortunately, however, because of his knowledge of the filesystem code, he was able to reboot the system and reconstruct the directory tree by hand on disk. 
+
+Put another way, if you picture using the root account as wearing a special magic hat that gives you lots of power, so that you can, by waving your hand, destroy entire cities, it is a good idea to be a bit careful about what you do with your hands. Since it is easy to move your hand in a destructive way by accident, it is not a good idea to wear the magic hat when it is not needed, despite the wonderful feeling.   
+
+
+ 

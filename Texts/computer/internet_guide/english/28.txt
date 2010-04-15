@@ -1,0 +1,25 @@
+4.8  USENET HISTORY  
+ 
+
+In the late 1970s, Unix developers came up with a new feature: a system 
+to allow Unix computers to exchange data over phone lines. 
+
+In 1979, two graduate students at Duke University in North Carolina, Tom 
+Truscott and Jim Ellis, came up with the idea of using this system, known 
+as UUCP (for Unix-to-Unix CoPy), to distribute information of interest to 
+people in the Unix community.  Along with Steve Bellovin, a graduate 
+student at the University of North Carolina and Steve Daniel, they wrote 
+conferencing software and linked together computers at Duke and UNC. 
+ 
+Word quickly spread and by 1981, a graduate student at Berkeley, Mark 
+Horton and a nearby high school student, Matt Glickman, had released a 
+new version that added more features and was able to handle larger 
+volumes of postings -- the original North Carolina program was meant for 
+only a few articles in a newsgroup each day. 
+
+Today, this system, now called Usenet, connects tens of thousands of 
+sites around the world, from mainframes to Amigas.  With more than 3,000 
+newsgroups and untold thousands of readers, it is perhaps the world's 
+largest computer network. 
+
+            

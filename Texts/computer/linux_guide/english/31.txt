@@ -1,0 +1,75 @@
+
+ 
+
+3.13.2 Shell variables and the environment
+
+ 
+        The shell allows you to define variables, as most programming languages do. A variable is just a piece of data which is given the name. 
+
+Note that Tcsh, as well as other C-type shells, use a different mechanism for setting variables than is described here. This discussion assumes the use of a Bourne shell, such as Bash (which you're probably using). See the Tcsh man page for details. 
+
+When you assign a value to a variable (using the ``='' operator), you can access the variable by prepending a ``$'' to the variable name, as demonstrated below. 
+
+/home/larry# foo=``hello there'' 
+
+The variable foo is given the value ``hello there''. You can now refer to this value by the variable name, prefixed with a ``$'' character. The command 
+
+/home/larry# echo $foo 
+hello there 
+/home/larry# 
+
+produces the same results as 
+
+/home/larry# echo ``hello there'' 
+hello there 
+/home/larry# 
+
+
+These variables are internal to the shell. This means that only the shell can access these variables. This can be useful in shell scripts; if you need to keep track of a filename, for example, you can store it in a variable, as above. Using the command set will display a list of all defined shell variables. 
+
+    However, the shell allows you to export variables to the environment. The environment is the set of variables which all commands that you execute have access to. Once you define a variable inside the shell, exporting it makes that variable part of the environment as well. The export command is used to export a variable to the environment. 
+
+  Again, here we differ between Bash and Tcsh. If you're using Tcsh, another syntax is used for setting environment variables (the setenv command is used). See the Tcsh man page for more information. 
+
+  The environment is very important to the UNIX system. It allows you to configure certain commands just by setting variables which the commands know about. 
+
+Here's a quick example. The environment variable PAGER is used by the man command. It specifies the command to use to display man pages one screenful at a time. If you set PAGER to be the name of a command, it will use that command to display the man pages, instead of more (which is the default). 
+
+Set PAGER to ``cat''. This will cause output from man to be displayed to the screen all at once, without breaking it up into pages. 
+
+/home/larry# PAGER=``cat'' 
+
+Now, export PAGER to the environment. 
+
+/home/larry# export PAGER 
+
+Try the command man ls. The man page should fly past your screen without pausing for you. 
+
+Now, if we set PAGER to ``more'', the more command will be used to display the man page. 
+
+/home/larry# PAGER=``more'' 
+
+Note that we don't have to use the export command after we change the value of PAGER. We only need to export a variable once; any changes made to it thereafter will automatically be propagated to the environment. 
+
+The man pages for a particular command will tell you if the command uses any environment variables; for example, the man man page explains that PAGER is used to specify the pager command. Some commands share environment variables; for example, many commands use the EDITOR environment variable to specify the default editor to use when one is needed. 
+
+The environment is also used to keep track of important information about your login session. An example is the HOME environment variable, which contains the name of your home directory. 
+
+/home/larry/papers# echo $HOME 
+/home/larry 
+
+
+Another interesting environment variable is PS1, which defines the main shell prompt. For example, 
+
+/home/larry# PS1=``Your command, please: '' 
+Your command, please: 
+
+To set the prompt back to our usual (which contains the current working directory followed by a ``#'' symbol), 
+
+Your command, please: PS1=``\w# '' 
+/home/larry# 
+
+The bash man page describes the syntax used for setting the prompt. 
+
+
+ 

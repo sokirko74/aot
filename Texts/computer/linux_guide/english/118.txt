@@ -1,0 +1,51 @@
+ 
+
+2.2.4 Repartitioning your drives
+
+ 
+    
+
+    
+
+In this section, we'll describe how to resize your current partitions (if any) to make space for Linux. If you are installing Linux on a ``clean'' hard drive, you can skip this section and proceed to Section 2.3, below. 
+
+The usual way to resize an existing partition is to delete it (thus destroying all of the data on that partition) and recreate it. Before repartitioning your drives, backup your system. After resizing the partitions, you can reinstall your original software from the backup. However, there are several programs available for MS-DOS which are able to resize partitions nondestructively. One of these is known as ``FIPS'', and can be found on many Linux FTP sites.     
+
+Also, keep in mind that because you'll be shrinking your original partitions, you may not have space to reinstall everything. In this case, you need to delete enough unwanted software to allow the rest to fit on the smaller partitions. 
+
+The program used to repartition is known as fdisk. Each operating system has its own analogue of this program; for example, under MS-DOS, it is invoked with the FDISK command. You should consult your documentation for whatever operating systems you are currently running for information on repartitioning. Here, we'll discuss how to resize partitions for MS-DOS using FDISK, but this information should be easily extrapolated to other operating systems.       
+
+Please consult the documentation for your current operating systems before repartitioning your drive. This section is meant to be a general overview of the process; there are many subtleties that we do not cover here. You can lose all of the software on your system if you do not repartition the drive correctly. 
+
+A warning: Do not modify or create partitions for any other operating systems (including Linux) using FDISK under MS-DOS. You should only modify partitions for a particular operating system with the version of fdisk included with that operating system; for example, you will create Linux partitions using a version of fdisk for Linux. Later, in Section 2.3.3, we describe how to create Linux partitions, but for now we are concerned with resizing your current ones. 
+
+Let's say that you have a single hard drive on your system, currently devoted entirely to MS-DOS. Hence, your drive consists of a single MS-DOS partition, commonly known as ``C:''. Because this repartitioning method will destroy the data on that partition, you need to create a bootable MS-DOS ``system disk'' which contains everything necessary to run FDISK and restore the software from backup after the repartitioning is complete.       
+
+In many cases, you can use the MS-DOS installation disks for this purpose. However, if you need to create your own system disk, format a floppy with the command 
+
+FORMAT /s A: 
+
+Copy onto this floppy all of the necessary MS-DOS utilities (usually most of the software in the directory \DOS on your drive), as well as the programs FORMAT.COM and FDISK.EXE. You should now be able to boot this floppy, and run the command 
+
+FDISK C: 
+
+to start up FDISK. 
+
+Use of FDISK should be self-explanatory, but consult the MS-DOS documentation for details. When you start FDISK, use the menu option to display the partition table, and write down the information displayed there. It is important to keep a record of your original setup in case you want to back out of the Linux installation. 
+
+To delete an existing partition, choose the FDISK menu option ``Delete an MS-DOS Partition or Logical DOS Drive''. Specify the type of partition that you wish to delete (primary, extended, or logical) and the number of the partition. Verify all of the warnings. Poof! 
+
+To create a new (smaller) partition for MS-DOS, just choose the FDISK option ``Create an MS-DOS Partition or Logical DOS Drive''. Specify the type of partition (primary, extended, or logical), and the size of the partition to create (specified in megabytes). FDISK should create the partition and you're ready to roll. 
+
+After you're done using FDISK, you should exit the program and reformat any new partitions. For example, if you resized the first DOS partition on your drive (C:) you should run the command 
+
+FORMAT /s C: 
+
+You may now reinstall your original software from backup. 
+
+    
+
+  
+
+
+ 

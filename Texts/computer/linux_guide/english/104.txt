@@ -1,0 +1,9 @@
+ 
+
+1.8.6.4 Printers
+
+ 
+  Linux supports the complete range of parallel printers. If you are able to access your printer via the parallel port from MS-DOS or another operating system, you should be able to access it from Linux as well. The Linux printing software consists of the UNIX standard lp and lpr software. This software also allows you to print remotely via the network, if you have one available. 
+
+
+ 

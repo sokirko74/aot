@@ -1,0 +1,74 @@
+1.7  NET ORIGINS
+
+
+In the 1960s, researchers began experimenting with linking computers to 
+each other through telephone hook-ups, using funds from the 
+U.S Defense Department's Advanced Research Projects Agency (ARPA). 
+
+ARPA wanted to see if computers in different locations could be linked 
+using a new technology known as packet switching. This technology, in 
+which data meant for another location is broken up into little pieces, 
+each with its own "forwarding address" had the promise of letting several 
+users share just one communications line.  Just as important, from ARPA's 
+viewpoint, was that this allowed for creation of networks that could 
+automatically route data around downed circuits or computers.  ARPA's 
+goal was not the creation of today's international computer-using 
+community, but development of a data network that could survive a nuclear 
+attack. 
+
+Previous computer networking efforts had required a line between each 
+computer on the network, sort of like a one-track train route. The packet 
+system allowed for creation of a data highway, in which large numbers of 
+vehicles could essentially share the same lane.  Each packet was given 
+the computer equivalent of a map and a time stamp, so that it could be 
+sent to the right destination, where it would then be reassembled into a 
+message the computer or a human could use. 
+
+This system allowed computers to share data and the researchers to 
+exchange electronic mail, or e-mail.  In itself, e-mail was something of 
+a revolution, offering the ability to send detailed letters at the speed 
+of a phone call. 
+
+As this system, known as ARPANet, grew, some enterprising college 
+students (and one in high school) developed a way to use it to conduct 
+online conferences.  These started as science-oriented discussions, but 
+they soon branched out into virtually every other field, as people 
+recognized the power of being able to "talk" to hundreds, or even 
+thousands, of people around the country. 
+
+In the 1970s, ARPA helped support the development of rules, or protocols, 
+for transferring data between different types of computer networks.  
+These "internet" (from "internetworking") protocols made it possible to 
+develop the worldwide Net we have today that links all sorts of computers 
+across national boundaries. By the close of the 1970s, links developed 
+between ARPANet and counterparts in other countries.  The world was now 
+tied together in a computer web.  
+
+In the 1980s, this network of networks, which became known collectively 
+as the Internet, expanded at a phenomenal rate.  Hundreds, then 
+thousands, of colleges, research companies and government agencies began 
+to connect their computers to this worldwide Net.  Some enterprising 
+hobbyists and companies unwilling to pay the high costs of Internet 
+access (or unable to meet stringent government regulations for access) 
+learned how to link their own systems to the Internet, even if "only" for 
+e-mail and conferences.  Some of these systems began offering access to 
+the public. Now anybody with a computer and modem, persistance and a 
+small amount of money -- and persistence -- could tap into the world. 
+
+In the 1990s, the Net continues to grow at exponential rates.  Some 
+estimates are that the volume of messages transferred through the Net 
+grows 20 percent a month.  In response, government and other users have 
+tried in recent years to expand the Net itself.  Once, the main Net 
+"backbone" in the U.S. moved data at 56,000 bits per second. That proved 
+too slow for the ever increasing amounts of data being sent over it, and 
+in recent years the maximum speed was increased to 1.5 million and then 
+45 million bits per second. Even before the Net was able to reach that 
+latter speed, however, Net experts were already figuring out ways to pump 
+data at speeds of up to 2 billion bits per second -- fast enough to send 
+the entire Encyclopedia Britannica across the country in just one or two 
+seconds.  Another major change has been the development of commercial 
+services that provide internetworking services at speeds comparable to 
+those of the government system.  In fact, what started as a government 
+experiment is now largely a private enterprise.
+
+

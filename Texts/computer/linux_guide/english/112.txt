@@ -1,0 +1,33 @@
+
+ 
+
+2.1.1 Getting Linux from the Internet
+
+ 
+  
+
+      If you have access to the Internet, the easiest way to obtain Linux is via anonymous FTP. Appendix C lists a number of FTP archive sites which carry Linux software. One of these is sunsite.unc.edu, and the various Linux distributions can be found in the directory 
+
+/pub/Linux/distributions 
+
+there. 
+
+    Many distributions are released via anonymous FTP as a set of disk images. That is, the distribution consists of a set of files, and each file contains the binary image of a floppy. In order to copy the contents of the image file onto the floppy, you can use the RAWRITE.EXE program under MS-DOS. This program copies, block-for-block, the contents of a file to a floppy, without regard for disk format. 
+
+RAWRITE.EXE is available on the various Linux FTP sites, including sunsite.unc.edu in the directory 
+
+/pub/Linux/system/Install/rawwrite 
+
+
+Therefore, in many cases, you simply download the set of diskette images, and use RAWRITE.EXE with each image in turn to create a set of diskettes. You boot from the so-called ``boot diskette'' and you're ready to roll. The software is usually installed directly from the floppies, although some distributions allow you to install from an MS-DOS partition on your hard drive. Some distributions allow you to install over a TCP/IP network. The documentation for each distribution should describe these installation methods if they are available. 
+
+Other Linux distributions are installed from a set of MS-DOS format floppies. For example, the Slackware distribution of Linux requires only the boot and root diskettes to be created using RAWRITE.EXE. The rest of the diskettes are copied to MS-DOS format diskettes using the MS-DOS COPY command. The system installs the software directly from the MS-DOS floppies. This saves you the trouble of having to use RAWRITE.EXE for many image files, although it requires you to have access to an MS-DOS system to create the diskettes. 
+
+Each distribution of Linux available via anonymous FTP should include a README file describing how to download and prepare the diskettes for installation. Be sure to read all of the available documentation for the release that you are using. 
+
+When downloading the Linux software, be sure to use binary mode for all file transfers (with most FTP clients, the command ``binary'' enables this mode). 
+
+See Section 2.1.4, below, for information on obtaining the Slackware distribution from the Internet. 
+
+
+ 

@@ -1,0 +1,10 @@
+ 
+
+4.1 About Root, Hats, and the Feeling of Power 
+
+  
+
+As you know, UNIX differentiates between different users, so that what they do to each other and to the system can be regulated (one wouldn't want anybody to be able to read one's love letters, for instance). Each user is given an account, which includes a username, home directory, and so on. In addition to accounts given to real people, there are special system-defined accounts which have special privileges. The most important of these is the root account, for the username root.   
+
+
+ 

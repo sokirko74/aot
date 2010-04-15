@@ -1,0 +1,14 @@
+ 
+
+4.10.1 System startup files
+
+       When the system boots, a number of scripts are executed automatically by the system before any user logs in. Here is a description of what happens. 
+
+            At bootup time, the kernel spawns the process /etc/init. init is a program which reads its configuration file, /etc/inittab, and spawns other processes based on the contents of this file. One of the important processes started from inittab is the /etc/getty process started on each virtual console. The getty process grabs the VC for use, and starts a login process on the VC. This allows you to login on each VC; if /etc/inittab does not contain a getty process for a certain VC, you will not be able to login on that VC. 
+
+        Another process executed from /etc/inittab is /etc/rc, the main system initialization file. This file is a simple shell script which executes any initialization commands needed at boot time, such as mounting the filesystems (see Section 4.8) and initializing swap space. 
+
+Your system may execute other initialization scripts as well, such as /etc/rc.local. /etc/rc.local usually contains initialization commands specific to your own system, such as setting the hostname (see the next section). rc.local may be started from /etc/rc or from /etc/inittab directly. 
+
+
+ 

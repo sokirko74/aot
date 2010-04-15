@@ -1,0 +1,62 @@
+6.4  TELNET BULLETIN-BOARD SYSTEMS
+ 
+You might think that Usenet, with its hundreds of newsgroups, would be 
+enough to satisfy the most dedicated of online communicators. 
+
+But there are a number of "bulletin-board" and other systems that provide 
+even more conferences or other services, many not found directly on the 
+Net.  Some are free; others charge for access.  
+ 
+To be able to write messages and gain access to files, you have to leave 
+a note to SYSOP with your name, address, occupation and phone number.  To 
+do this, at any prompt, hit your M key and then enter, which will bring 
+up the mail system. 
+
+Hitting H brings up a list of commands and how to use 
+them. 
+
+Telnet: bugs.mty.itesm.mx (8 p.m. to 10 a.m., Eastern time, only).
+At the "login:" prompt, type
+ 
+bbs
+ 
+and hit enter.
+ 
+Cleveland Free-Net.  The first of a series of Free-Nets, this represents 
+an ambitious attempt to bring the Net to the public. Originally an inhospital help network, it is now sponsored by Case Western Reserve 
+University, the city of Cleveland, the state of Ohio and IBM. It uses 
+simple menus, similar to those found on CompuServe, but organized like a 
+city. 
+ 
+ 
+The system has a vast and growing collection of public documents, from 
+copies of U.S. and Ohio Supreme Court decisions to the Magna Carta and 
+the U.S. Constitution.  It links residents to various government agencies 
+and has daily stories from USA Today. Beyond Usenet (found in the 
+Teleport area), it has a large collection of local conferences on 
+everything from pets to politics.  And yes, it's free! 
+
+ 
+When you connect to Free-Net, you can look around the system.  However, 
+if you want to be able to post messages hn its conferences or use e-mail, 
+you will have to apply in writing for an account.  Information on this is 
+available when you connect. 
+                                    
+ 
+DUBBS.  This is a bulletin-board system in Delgt in the Nether}ands. The 
+conferences and files are mostly in Dutch, but the help files and the 
+system commands themselves are in English. 
+ 
+ISCA BBS.  Run by the Iowa Student Computer Association, it has more than 
+100 conferences, including several in foreign languages.  After you 
+register, hit K for a list of available conferences and then J to join a 
+particular conference (you have to type in the name of the conference, 
+not the number next to it).  Hitting H brings up information about 
+commands. 
+ 
+Youngstown Free-Net.  The people who created Cleveland Free-Net sell 
+their software for $1 to anybody willing to set up a similar system. A 
+number of cities now have their own Free-Nets, including Youngstown, 
+Ohio. 
+ 
+

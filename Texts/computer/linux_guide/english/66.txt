@@ -1,0 +1,19 @@
+ 
+
+4.11.1 Recovering using a maintenance diskette
+
+ 
+                One indispensable tool for the system administrator is the so called ``boot/root disk''---a floppy which can be booted for a complete Linux system, independent of your hard drive. Boot/root disks are actually very simple---you create a root filesystem on the floppy, place all of the necessary utilities on it, and install LILO and a bootable kernel on the floppy. Another technique is to use one floppy for the kernel and another for the root filesystem. In any case, the result is the same: you are running a Linux system completely from floppy. 
+
+The canonical example of a boot/root disk is the Slackware boot disks. These diskettes contain a bootable kernel and a root filesystem, all on floppy. They are intended to be used to install the Slackware distribution, but come in very handy when doing system maintenance. 
+
+The H.J Lu boot/root disk, available from /pub/Linux/GCC/rootdisk on sunsite.unc.edu, is another example of such a maintenance disk. Or, if you're ambitious, you can create your own. In most cases, however, using a pre-made boot/root disk is much easier and will probably be more complete. 
+
+Using a boot/root disk is very simple. Just boot the disk on your system, and login as root (usually no password). In order to access the files on your hard drive, you will need to mount your filesystems by hand. For example, the command 
+
+# mount -t ext2 /dev/hda2 /mnt 
+
+will mount an ext2fs filesystem on /dev/hda2 under /mnt. Remember that / is now on the boot/root disk itself; you need to mount your hard drive filesystems under some directory in order to access the files. Therefore, /etc/passwd on your hard drive is now /mnt/etc/passwd if you mount your root filesystem on /mnt. 
+
+
+ 

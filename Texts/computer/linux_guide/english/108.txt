@@ -1,0 +1,19 @@
+ 
+
+1.9.1 Online documents
+
+ 
+  
+
+If you have access to the Internet, there are many Linux documents available via anonymous FTP from archive sites all over the world. If you do not have direct Internet access, these documents may still be available to you: many Linux distributions on CD-ROM contain all of the documents mentioned here. Also, they are distributed on many other networks, such as Fidonet and CompuServe. If you are able to send mail to Internet sites, you may be able to retrieve these files using one of the ftpmail servers which will electronically mail you the documents or files from FTP archive sites. See Appendix C for more information on using ftpmail. 
+
+There is a great number of FTP archive sites which carry Linux software and related documents. A list of well-known Linux archive sites is given in Appendix C. In order to reduce network traffic, you should always use the FTP site which is geographically (network-wise) closest to you. 
+
+Appendix A contains a listing of some of the Linux documents which are available via anonymous FTP. The filenames will differ depending on the archive site in question; most sites keep Linux-related documents in the docs subdirectory of their Linux archive space. For example, on the FTP site sunsite.unc.edu, Linux files are stored in the directory /pub/Linux, with Linux-related documentation being found in /pub/Linux/docs. 
+
+        Examples of available online documents are the Linux FAQ, a collection of frequently asked questions about Linux; the Linux HOWTO documents, each describing a specific aspect of the system---including the Installation HOWTO, the Printing HOWTO, and the Ethernet HOWTO; and, the Linux META-FAQ, a list of other sources of Linux information on the Internet. 
+
+Most of these documents are also regularly posted to one or more Linux-related USENET newsgroups; see Section 1.9.4 below. 
+
+
+ 

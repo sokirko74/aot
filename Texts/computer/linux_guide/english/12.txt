@@ -1,0 +1,28 @@
+
+ 
+
+1.4.4 The X Window System
+
+ 
+The X Window System is the standard graphics interface for UNIX machines. It is a powerful environment supporting many applications. Using X Windows, the user can have multiple terminal windows on the screen at once, each one containing a different login session. A pointing device such as a mouse is often used with the X interface, although it isn't   required. 
+
+Many X-specific applications have been written, such as games, graphics utilities, programming and documentation tools, and so on. With Linux and X, your system is a bona fide workstation. Coupled with TCP/IP networking, you can even display X applications running on other machines on your Linux display, as is possible with other systems running X. 
+
+The X Window System was originally developed at MIT, and is freely distributable. However, may commercial vendors have distributed proprietary enhancements to the original X Windows software. The version of X Windows available for Linux is known as XFree86, a port of X11R5 made freely distributable for 80386-based UNIX systems such as Linux. XFree86 supports a wide range of video hardware, including VGA, Super VGA, and a number of accelerated video adaptors. This is a complete distribution of the X Windows software, containing the X server itself, many applications   and utilities, programming libraries, and documentation. 
+
+Standard X applications include xterm (a terminal emulator used for most text-based applications within an X window); xdm (the X Session Manager, which handles logins); xclock (a simple clock display); xman (an X-based man page reader), and more. The many X applications available for Linux are too numerous to mention here, but the base XFree86 distribution includes the ``standard'' applications found in the original MIT release. Many others are available separately, and theoretically any application written for X Windows should compile cleanly under Linux. 
+
+The look and feel of the X Windows interface is controlled to a large extent by the window manager. This friendly program is in charge of the placement of windows, the user interface for resizing, iconifying, and moving windows, the appearance of window frames, and so on. The standard XFree86 distribution includes twm, the classic MIT window manager, although more advanced window managers such as the Open Look Virtual Window Manager (olvwm) are available as well. One window manager that is popular among Linux users is fvwm. This is a small window manager, requiring less than half of the memory used by twm. It provides a 3-D appearance for windows, as well a virtual desktop---if the user moves the mouse to the edge of the screen, the entire desktop is shifted as if the display were much larger than it actually is. fvwm is greatly customizable, and allows all functions to be accessed from the keyboard as well as the mouse. Many Linux distributions use fvwm as the standard window manager. 
+
+The XFree86 distribution contains programming libraries and include files for those wily programmers who wish to develop X applications. Various widget sets, such as Athena, Open Look, and Xaw3D are supported. All of the standard fonts, bitmaps, man pages, and documentation are included. PEX (a programming interface for 3-D graphics) is also supported. 
+
+Many X applications programmers use the proprietary Motif widget set for   development. Several vendors sell single and multiple-user licenses for a binary version of Motif for Linux. Because Motif itself is relatively expensive, not many Linux users own it. However, binaries statically linked with Motif routines may be freely distributed. Therefore, if you write a program using Motif and wish to distribute it freely, you may provide a binary so that users without Motif can use the program. 
+
+The only major caveats with X Windows are the hardware and memory requirements. A 386 with 4 megabytes of RAM is capable of running X, but 8 megabytes or more of physical RAM are needed to use it comfortably. A faster processor is nice to have as well, but having enough physical RAM is much more important. In addition, to achieve really slick video performance, an accelerated video card (such as a local bus S3-chipset card) is strongly recommended. Performance ratings in excess of 140,000 xstones have been acheived with Linux and XFree86. With sufficient hardware, you'll find that running X and Linux is as fast, or faster, than running X on other UNIX workstations. 
+
+In Chapter 5 we'll discuss how to install and use X on your system. 
+
+  
+
+
+ 

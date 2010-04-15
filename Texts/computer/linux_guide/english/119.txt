@@ -1,0 +1,69 @@
+
+2.3.1 Booting Linux
+
+ 
+    
+
+The first step is to boot the Linux installation media. In most cases, this is a ``boot floppy'' which contains a small Linux system. Upon booting the floppy, you will be presented with an installation menu of some kind which will lead you through the steps of installing the software. On other distributions, you will be presented with a login prompt when booting this floppy. Here, you usually login as root or install to begin the installation process. 
+
+The documentation which came with your particular distribution will explain what is necessary to boot Linux from the installation media. 
+
+If you are installing the Slackware distribution of Linux, all that is required is to boot the boot floppy which you created in the previous section. 
+
+Most distributions of Linux use a boot floppy which allows you to enter hardware parameters at a boot prompt, to force hardware detection of various devices. For example, if your SCSI controller is not detected when booting the floppy, you will need to reboot and specify the hardware parameters (such as I/O address and IRQ) at the boot prompt. 
+
+Likewise, IBM PS/1, ThinkPad, and ValuePoint machines do not store drive geometry in the CMOS, and you must specify it at boot time. 
+
+The boot prompt is often displayed automatically when booting the boot floppy. This is the case for the Slackware distribution. Other distributions require you to hold down or while booting the floppy. If successful, you should see the prompt 
+
+boot: 
+
+and possibly other messages. 
+
+To try booting without any special parameters, just press enter at the boot prompt. 
+
+Watch the messages as the system boots. If you have a SCSI controller, you should see a listing of the SCSI hosts detected. If you see the message 
+
+SCSI: 0 hosts 
+
+then your SCSI controller was not detected, and you will have to use the following procedure. 
+
+Also, the system will display information on the drive partitions and devices detected. If any of this information is incorrect or missing, you will have to force hardware detection. 
+
+On the other hand, if all goes well and you hardware seems to be detected, you can skip to the following section, Section 2.3.2. 
+
+To force hardware detection, you must enter the appropriate parameters at the boot prompt, using the following syntax: 
+
+ramdisk 
+
+
+There are a number of such parameters available; here are some of the most common. 
+
+hd=,, 
+	Specify the harddrive geometry. Required for systems such as the IBM PS/1, ValuePoint, and ThinkPad. For example, if your drive has 683 cylinders, 16 heads, and 32 sectors per track, enter 
+
+ramdisk hd=683,16,32 
+
+
+tmc8xx=, 
+	Specify address and IRQ for BIOS-less Future Domain TMC-8xx SCSI controller. For example, 
+
+ramdisk tmc8xx=0xca000,5 
+
+Note that the 0x prefix must be used for all values given in hexadecimal. This is true for all of the following options. 
+
+st0x=, 
+	Specify address and IRQ for BIOS-less Seagate ST02 controller. 
+t128=, 
+	Specify address and IRQ for BIOS-less Trantor T128B controller. ncr5380=,, Specify port, IRQ, and DMA channel for generic NCR5380 controller. 
+aha152x=,,,1 
+	Specify port, IRQ, and SCSI ID for BIOS-less AIC-6260 controllers. This includes Adaptec 1510, 152x, and Soundblaster-SCSI controllers. 
+
+
+
+For each of these, you must enter ramdisk followed by the parameter that you wish to use. 
+
+If you have questions about these boot-time options, please read the Linux SCSI HOWTO, which should be available on any Linux FTP archive site (or from wherever you obtained this book), as well as the Linux CD-ROM HOWTO. These documents describe hardware compatibility in much more detail. 
+
+
+ 

@@ -1,0 +1,13 @@
+ 
+
+A.3 Books and Other Published Works
+
+ 
+        Linux Journal is a monthly magazine for and about the Linux community, written and produced by a number of Linux developers and enthusiasts. It is distributed worldwide, and is an excellent way to keep in touch with the dynamics of the Linux world, especially if you don't have access to USENET news. 
+
+At the time of this writing, subscriptions to Linux Journal are US$19/year in the United States, US$24 in Canada, and US$29 elsewhere. To subscribe, or for more information, write to Linux Journal, PO Box 85867, Seattle, WA, 98145-1867, USA, or call +1 206 527-3385. Their FAX number is +1 206 527-2806, and e-mail address is linux@ssc.com. You can also find a Linux Journal FAQ and sample articles via anonymous FTP on sunsite.unc.edu in /pub/Linux/docs/linux-journal. 
+
+As we have said, not many books have been published dealing with Linux specifically. However, if you are new to the world of UNIX, or want more information than is presented here, we suggest that you take a look at the following books which are available. 
+
+
+ 

@@ -1,0 +1,23 @@
+ 
+
+1.4.1 Basic commands and utilities
+
+ 
+Virtually every utility that you would expect to find on standard implementations of UNIX has been ported to Linux. This includes basic commands such as ls, awk, tr, sed, bc, more, and so on. You name it, Linux has it. Therefore, you can expect your familiar working environment on other UNIX systems to be duplicated on Linux. All of the standard commands and utilities are there. (Novice Linux users should see Chapter 3 for an introduction to these basic UNIX commands.) 
+
+Many text editors are available, including vi, ex, pico, jove, as well as GNU Emacs and variants such as Lucid Emacs (which incorporates extensions for use under X Windows) and joe. Whatever text editor you're accustomed to using has more than likely been ported to Linux.         
+
+The choice of a text editor is an interesting one. Many UNIX users still use ``simple'' editors such as vi (in fact, the author wrote this book using vi under Linux). However, vi has many limitations, due to its age, and more modern (and complex) editors such as Emacs are gaining popularity. Emacs supports a complete LISP-based macro language and interpreter, a powerful command syntax, and other fun-filled extensions. Emacs macro packages exist to allow you to read electronic mail and news, edit the contents of directories, and even engage in an artificially intelligent psychotherapy session (indispensible for stressed-out Linux hackers). 
+
+One interesting note is that most of the basic Linux utilities are GNU software.   These GNU utilities support advanced features not found in the standard versions from BSD or AT&T. For example, GNU's version of the vi editor, elvis, includes a structured macro language which differs from the original AT&T implementation. However, the GNU utilities strive to remain compatible with their BSD and System V counterparts. Many people consider the GNU versions of these programs superior to the originals. 
+
+The most important utility to many users is the shell.   The shell is a program which reads and executes commands from the user. In addition, many shells provide features such as job control (allowing the user to manage several running processes at once---not as Orwellian as it sounds), input and output redirection, and a command language for writing shell scripts. A shell script is a file containing a program in the shell command language, analogous to a ``batch file'' under MS-DOS.   
+
+There are many types of shells available for Linux. The most important difference between shells is the command language. For example, the C Shell (csh) uses a command language somewhat like the C programming language. The classic Bourne Shell uses a different command language. One's choice of a shell is often based on the command language that it provides. The shell that you use defines, to some extent, your working environment under Linux.       
+
+No matter what shell you're accustomed to, some version of it has probably been ported to Linux. The most popular shell is the GNU Bourne Again Shell (bash),   a Bourne shell variant which includes many advanced features, such as job control, command history, command and filename completion, an Emacs-like interface for editing the command line, and powerful extensions to the standard Bourne shell language. Another popular shell is tcsh, a version   of the C Shell with advanced functionality similar to that found in bash. Other shells include zsh, a small Bourne-like shell; the Korn shell (ksh); BSD's ash; and rc, the Plan 9 shell. 
+
+What's so important about these basic utilities? Linux gives you the unique opportunity to tailor a custom system to your needs. For example, if you're the only person who uses your system, and you prefer to exclusively use the vi editor, and bash as your shell, there's no reason to install other editors or shells. The ``do it yourself'' attitude is prevalent among Linux hackers and users. 
+
+
+ 

@@ -1,0 +1,29 @@
+ 
+
+C.6 Using ftpmail
+
+ 
+  ftpmail is a service which allows you to obtain files from FTP archive sites via Internet electronic mail. If you don't have direct Internet access, but are able to send mail to the Internet (from a service such as CompuServe, for example), ftpmail is a good way to get files from FTP archive sites. Unfortunately, ftpmail can be slow, especially when sending large jobs. Before attempting to download large amounts of software using ftpmail, be sure that your mail spool will be able to handle the incoming traffic. Many systems keep quotas on incoming electronic mail, and may delete your account if your mail exceeds this quota. Just use common sense. 
+
+sunsite.unc.edu, one of the major Linux FTP archive sites, is home to an ftpmail server. To use this service, send electronic mail to 
+
+ftpmail@sunsite.unc.edu 
+
+with a message body containing only the word: 
+
+help 
+
+This will send you back a list of ftpmail commands and a brief tutorial on using the system. 
+
+For example, to get a listing of Linux files found on sunsite.unc.edu, send mail to the above address containing the text 
+
+open sunsite.unc.edu 
+cd /pub/Linux 
+dir 
+quit 
+
+
+You may use the ftpmail service to connect to any FTP archive site; you are not limited to sunsite.unc.edu. The next section lists a number of Linux FTP archives. 
+
+
+ 

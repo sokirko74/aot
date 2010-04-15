@@ -1,0 +1,15 @@
+ 
+
+1.8.2 Memory requirements
+
+ 
+  Linux requires very little memory to run compared to other advanced operating systems. You should have at the very least 2 megabytes of RAM; however, it is strongly suggested that you have 4 megabytes. The more memory you have, the faster the system will run. 
+
+Linux can support the full 32-bit address range of the 386/486; in other words, it will utilize all of your RAM automatically. 
+
+Linux will run happily with only 4 megabytes of RAM, including all of the bells and whistles such as X Windows, Emacs, and so on. However, having more memory is almost as important as having a faster processor. 8 megabytes is more than enough for personal use; 16 megabytes or more may be needed if you are expecting a heavy user load on the system. 
+
+Most Linux users allocate a portion of their hard drive as swap space, which is used as virtual RAM. Even if you have a great deal of physical RAM in your machine, you may wish to use swap space. While swap space is no replacement for actual physical RAM, it can allow your system to run larger applications by swapping out inactive portions of code to disk. The amount of swap space that you should allocate depends on several factors; we'll come back to this question in Section 2.2.3. 
+
+
+ 

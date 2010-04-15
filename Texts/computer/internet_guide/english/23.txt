@@ -1,0 +1,39 @@
+3.8  CROSS-POSTING
+ 
+
+Sometimes, you'll have an issue you think should be discussed in more 
+than one Usenet newsgroup.  Rather than posting individual messages in 
+each group, you can post the same message in several groups at once, 
+through a process known as cross-posting. 
+
+Say you want to start a discussion about the political ramifications of 
+importing rare tropical fish from Brazil.  People who read rec.aquaria 
+might have something to say. So might people who read 
+alt.politics.animals and talk.politics.misc. 
+
+Cross-posting is easy.  It also should mean that people on other systems 
+who subscribe to several newsgroups will see your message only once, 
+rather than several times -- news-reading software can cancel out the 
+other copies once a person has read the message.  When you get ready to 
+post a message (whether through Pnews for rn or the :post command in nn), 
+you'll be asked in which newsgroups.  Type the names of the various 
+groups, separated by a comma, but no space, for example: 
+ 
+     rec.aquaria,alt.politics.animals,talk.politics.misc
+ 
+and hit enter.  After answering the other questions (geographic 
+distribution, etc.), the message will be posted in the various 
+groups (unless one of the groups is moderated, in which case the 
+message goes to the moderator, who decides whether to make it public). 
+     
+It's considered bad form to post to an excessive number of newsgroups, or 
+inappropriate newsgroups.  Probably, you don't really have to post 
+something in 20 different places.  And while you may think your 
+particular political issue is vitally important to the fate of the world, 
+chances are the readers of rec.arts.comics will not, or at least not 
+important enough to impose on them.  You'll get a lot of nasty e-mail 
+messages demanding you restrict your messages to the "appropriate" 
+newsgroups. 
+Chapter 4: USENET II
+ 
+ 
