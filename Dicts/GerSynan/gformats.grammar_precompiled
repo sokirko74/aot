@@ -1,0 +1,1445 @@
+3
+206
+[
+1 FNAME null 6
+FNAME
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 2
+;filename ../SimpleGrammar/firstname.txt;
+]
+[
+1 FAMILY null 6
+FAMILY
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 2
+;filename ../SimpleGrammar/family.txt;
+]
+[
+1 ACR null 6
+ACR
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;filename ../SimpleGrammar/acr.txt;
+]
+[
+1 HUM null 6
+HUM
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;filename ../SimpleGrammar/hum.txt;
+]
+[
+1 GEO null 6
+GEO
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;filename ../SimpleGrammar/geo.txt;
+]
+[
+1 GEOADJ null 6
+GEOADJ
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;filename ../SimpleGrammar/geoadj.txt;
+]
+[
+1 Det null 6
+Det
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;filename ../SimpleGrammar/det.txt;
+]
+[
+1 Adj null 6
+Adj
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 2 3 ADJ
+0 0 1 0
+;
+]
+[
+1 SPNAME null 6
+SPNAME
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 TITLE null 6
+TITLE
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 FNAME null 1
+FNAME
+0 0 3 null
+0 0 0 0
+;
+]
+[
+1 FAMILY null 1
+FAMILY
+0 0 3 null
+0 0 0 0
+;
+]
+[
+0 von VON 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 5
+TOKEN
+0 0 3 null
+0 0 1 0
+;type ROMAN;
+]
+[
+0 . . 4
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 PNAME null 6
+PNAME
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 2 -
+0 0 1 0
+;
+]
+[
+0 Dr DR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 Doktor DOKTOR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 Professor PROFESSOR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 h H 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 c C 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 Herr HERR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 Frau FRAU 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 PERSON null 6
+PERSON
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ( ( 4
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ) ) 4
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 aus AUS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 PRP_ACC null 6
+PRP_ACC
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 512 3 PRP
+0 0 1 0
+;filename prep_akk.txt;
+]
+[
+1 PRP_GEN null 6
+PRP_GEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 512 3 PRP
+0 0 1 0
+;filename prep_gen.txt;
+]
+[
+1 PRP_DAT null 6
+PRP_DAT
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 512 3 PRP
+0 0 1 0
+;filename prep_dat.txt;
+]
+[
+0 mit MIT 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 oder ODER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ohne OHNE 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 in IN 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 Bezug BEZUG 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 auf AUF 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 zusammen ZUSAMMEN 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 abgesehen ABGESEHEN 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 PP-OBJ null 6
+PP-OBJ
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NP null 6
+NP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 PRO null 6
+PRO
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 welcher WELCHER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 PP null 6
+PP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 bis BIS 1
+TOKEN
+0 512 3 PRP
+0 0 1 0
+;
+]
+[
+0 heute HEUTE 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 morgen MORGEN 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 COMP_PRP_DAT null 6
+COMP_PRP_DAT
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 am AM 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 beim BEIM 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 hinterm HINTERM 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 im IM 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 vom VOM 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 vorm VORM 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 zum ZUM 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 bis BIS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NUMBER_EXT null 6
+NUMBER_EXT
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 WEAK_NP null 1
+WEAK_NP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 COMP_PRP_ACC null 6
+COMP_PRP_ACC
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ans ANS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 aufs AUFS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 durchs DURCHS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 fürs FÜRS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 hinters HINTERS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ins INS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ums UMS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 vors VORS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 WEAK_NP_R null 6
+WEAK_NP_R
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 ZUR null 6
+ZUR
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 zur ZUR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NUMBER null 6
+NUMBER
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 2
+TOKEN
+0 0 3 null
+0 0 1 0
+;type DC;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 8192 3 ZAL
+0 0 1 0
+;
+]
+[
+1 ADV_NUMBER null 6
+ADV_NUMBER
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 mehr MEHR 1
+TOKEN
+0 4 3 ADV
+0 0 1 0
+;
+]
+[
+0 weniger WENIGER 1
+TOKEN
+0 4 3 ADV
+0 0 1 0
+;
+]
+[
+0 viel VIEL 1
+TOKEN
+0 4 3 ADV
+0 0 1 0
+;
+]
+[
+0 mehr MEHR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 weniger WENIGER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 MODIF-NUM null 6
+MODIF-NUM
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 COMP-NUMBER null 6
+COMP-NUMBER
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NUM-MODIF null 6
+NUM-MODIF
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ungefähr UNGEFÄHR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 höchstens HÖCHSTENS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 etwa ETWA 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 wenigstens WENIGSTENS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 zirka ZIRKA 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 frühestens FRÜHESTENS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 spätestens SPÄTESTENS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 mindestens MINDESTENS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 rund RUND 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 zu ZU 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 tausend TAUSEND 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 Million MILLION 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 hundert HUNDERT 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 Mill MILL 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 ZAL_comma null 6
+ZAL_comma
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ein EIN 1
+TOKEN
+0 1 3 ART
+0 0 1 0
+;
+]
+[
+0 , , 4
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 C-CONJ null 6
+C-CONJ
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 AA null 6
+AA
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 3
+;
+]
+[
+1 NOUN null 6
+NOUN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 16 3 SUB
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 8 3 EIG
+0 0 1 0
+;
+]
+[
+1 ADJ null 6
+ADJ
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 PA1 null 6
+PA1
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 64 3 PA1
+0 0 1 0
+;
+]
+[
+1 PA2 null 6
+PA2
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 128 3 PA2
+0 0 1 0
+;
+]
+[
+1 ADV null 6
+ADV
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 4 3 ADV
+0 0 1 0
+;
+]
+[
+1 ADJ-PREDK null 6
+ADJ-PREDK
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+2 2 3 ADJ prd
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 256 3 PRO
+0 0 1 0
+;
+]
+[
+1 VER null 6
+VER
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 32 3 VER
+0 0 1 0
+;
+]
+[
+0 und UND 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 C-CONJ-AND-COMMA null 6
+C-CONJ-AND-COMMA
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 SCHALTWORT null 6
+SCHALTWORT
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;filename schaltwort.txt;
+]
+[
+1 PARAMWORT null 6
+PARAMWORT
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;filename param.txt;
+]
+[
+1 EINWOHNER null 6
+EINWOHNER
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 *er *ER 1
+TOKEN
+288230376151711744 0 3 ew
+0 0 1 0
+;
+]
+[
+1 AP null 6
+AP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 VP null 1
+VP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NOT_SIMIL_NP null 6
+NOT_SIMIL_NP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 STADT_NAME null 6
+STADT_NAME
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 MODIF_NP null 6
+MODIF_NP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 GENIT_NP null 6
+GENIT_NP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 ADJ null 1
+ADJ
+0 0 3 null
+0 0 1 2
+;
+]
+[
+1 PA2 null 1
+PA2
+0 0 3 null
+0 0 1 2
+;
+]
+[
+1 NP_SIMIL null 6
+NP_SIMIL
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NP_SIMIL_COMMA null 6
+NP_SIMIL_COMMA
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 SYN_GROUP null 6
+SYN_GROUP
+0 0 3 null
+1 0 1 0
+;
+]
+[
+1 VERB-MODIF null 6
+VERB-MODIF
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 ADJ-MODIF null 6
+ADJ-MODIF
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ganz GANZ 1
+TOKEN
+0 4 3 ADV
+0 0 1 0
+;
+]
+[
+0 besonders BESONDERS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 sehr SEHR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 zu ZU 1
+TOKEN
+0 4 3 ADV
+0 0 1 0
+;
+]
+[
+0 denkbar DENKBAR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 nicht NICHT 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 DER-DET null 6
+DER-DET
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 der DER 1
+TOKEN
+0 1 3 ART
+0 0 1 0
+;
+]
+[
+0 derselbe DERSELBE 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 derjenige DERJENIGE 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 dieser DIESER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 jedweder JEDWEDER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 jeglicher JEGLICHER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 aller ALLER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 mancher MANCHER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 jeder JEDER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 jener JENER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 ADJ-SEQ null 6
+ADJ-SEQ
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 übrig ÜBRIG 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 EIN-DET null 6
+EIN-DET
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+274877906944 32768 3 PROBEG pos
+0 0 1 0
+;
+]
+[
+0 kein KEIN 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NUM_START null 6
+NUM_START
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ein EIN 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 paar PAAR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 STADT-TYPE null 6
+STADT-TYPE
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 stadt STADT 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 hauptstadt HAUPTSTADT 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 hafenstadt HAFENSTADT 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 küstenstadt KÜSTENSTADT 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 2 -
+0 0 1 2
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+1024 0 3 std
+0 0 1 0
+;
+]
+[
+1 NP_SIMIL_COMP null 6
+NP_SIMIL_COMP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NP_comma null 6
+NP_comma
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 LAST_NP null 6
+LAST_NP
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ähnlich ÄHNLICH 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ander ANDER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NP_comma2 null 6
+NP_comma2
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 ob OB 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 wie WIE 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NP_rep null 6
+NP_rep
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 teils TEILS 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 NP_rep2 null 6
+NP_rep2
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 AP_rep null 6
+AP_rep
+0 0 3 null
+0 0 1 0
+;
+]
+[
+1 AP_rep2 null 6
+AP_rep2
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 entweder ENTWEDER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 weder WEDER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 noch NOCH 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 zwar ZWAR 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 aber ABER 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 test TEST 1
+TOKEN
+0 0 3 null
+0 0 1 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 0 2
+;filename ../SimpleGrammar/firstname.txt;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 0 2
+;filename ../SimpleGrammar/family.txt;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 2 3 ADJ
+0 0 1 2
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 128 3 PA2
+0 0 1 2
+;
+]
+[
+0 $ $ 6
+<empty>
+0 0 3 null
+1 0 1 0
+;
+]
+[
+1 NewRoot $ 6
+<empty>
+0 0 3 null
+1 0 1 0
+;
+]
+0

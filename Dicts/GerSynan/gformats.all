@@ -1,0 +1,374 @@
+%% ===========  Include person grammar  ==============
+
+#include "../SimpleGrammar/person.grm"
+%%#include "../SimpleGrammar/example.grm"
+
+
+%% ===========  Include subrules   ==============
+
+#include "prepositions.grm"
+#include "numbers.grm"
+
+ 
+%% ===========  Common rules  ==============
+
+[AA] -> [TOKEN register="AA"];
+[NOUN] -> [TOKEN grm="SUB"] | [TOKEN grm="EIG"];
+[ADJ] -> [TOKEN grm="ADJ"];
+[PA1] -> [TOKEN grm="PA1"];
+[PA2] -> [TOKEN grm="PA2"];
+[ADV] -> [TOKEN grm="ADV"];
+[ADJ-PREDK] -> [TOKEN grm="ADJ prd"];
+[PRO] -> [TOKEN grm="PRO"];
+[VER] -> [TOKEN grm="VER"] | [TOKEN grm="PA2"] | [TOKEN grm="PA1"];
+[C-CONJ] -> 'und' | 'oder';
+[C-CONJ-AND-COMMA] -> [C-CONJ] | ',';
+[SCHALTWORT] -> [TOKEN filename="schaltwort.txt"];
+[PARAMWORT] ->  [TOKEN filename="param.txt"]; 
+[EINWOHNER] ->  [TOKEN grm="ew" form="*er"];
+
+%% simple rules atomic rules
+
+[AP] -> [ADJ] | [PA1] | [PA2] | [VP grm="PA2"] | [VP grm="PA1"];
+
+[NOT_SIMIL_NP] -> 	  [STADT_NAME] 
+					| [MODIF_NP] 
+					| [NOUN]  
+					| [GENIT_NP]
+					| [PERSON]
+					| [ADJ register="Aa" has_one_grm="plu,sin"]  %% attributive usage
+					| [PA2 register="Aa" has_one_grm="plu,sin"]; %% attributive usage
+
+
+[NP] -> 		[NOT_SIMIL_NP]
+			|	[NP_SIMIL]
+			|	[NP_SIMIL_COMMA];
+
+
+
+
+[SYN_GROUP] -> [AP] | [NP] | [MODIF-NUM] | [VP] | [PP] | [VERB-MODIF];
+
+
+%% ==========   common parenthetic   =
+
+[NP]  ->  [SCHALTWORT] [NP root];
+[AP]  ->  [SCHALTWORT] [AP root];
+
+%% =====================================================
+%% Bruttoinlandsproduktes (BIP)
+%% Biedenkopf (CDU)
+%% Herrmann (43)
+
+[NP] -> [NP] '(' ([AA] | [NUMBER]) ')';
+[NP] -> [NP] '(' [AA]  [NUMBER] ')';
+[NP] -> [NP] '(' [NUMBER] [AA] ')';
+
+
+%% =====================================================
+%% sehr interessant
+%% ganz interessant
+%% besonders strenge
+%% zu konkreten Zielen // a good case of ambiguity
+
+[ADJ-MODIF] -> 		[TOKEN form="ganz" grm="ADV"] 
+				|	'besonders' 
+				| 	'sehr' 
+				|	[TOKEN form="zu" grm="ADV"]  
+				| 	'denkbar';
+
+[AP] -> [ADJ-MODIF] [AP root];
+
+[AP] -> 'nicht' [AP root];
+
+
+%% =========  weak declination   ===============
+
+%% die schwache Resolution
+%% des jungen Boxers
+%% der bunte Stoff
+%% die alte Burg
+%% die kleinen Kinder
+%% dem bunten Stoff
+%% der kleinen Kinder
+%% jeden Tag
+%% die ersten 2 Jahre 
+
+%% die 2  Jahre
+%% die ersten zwei  Jahre 
+%% * die schwachen Resolution
+
+
+[DER-DET] -> [TOKEN grm="ART" form="der"] | 'derselbe' | 'derjenige' | 
+			'dieser' | 'jedweder' | 'jeglicher' | 'aller'  | 
+			'mancher' | 'jeder' | 'welcher' | 'jener';
+
+
+
+[ADJ-SEQ] -> [AP];
+[ADJ-SEQ] -> [ADJ-SEQ] [AP] 
+				: $0.grm := common_case_number_gender($1.grm, $2.grm) ;
+
+[ADJ-SEQ] -> [ADJ-SEQ root] [NUMBER]; 
+[ADJ-SEQ] -> [NUMBER_EXT] [ADJ-SEQ root] ; 
+[ADJ-SEQ] -> [EINWOHNER] [ADJ-SEQ root] ; 
+
+[WEAK_NP] -> [ADJ-SEQ] [NOT_SIMIL_NP root det="false"] 
+				: $0.grm := weak_decl($1.grm, $2.grm);
+
+[WEAK_NP] -> [NOT_SIMIL_NP root det="false"];
+
+[WEAK_NP] -> 'übrig'; %%  "zusammen mit den ìbrigen"
+
+[MODIF_NP] -> [DER-DET] [WEAK_NP root] 
+				: $0.grm := weak_decl($1.grm, $2.grm)
+				: $0.det := true;
+
+[MODIF_NP] -> [DER-DET] ([NUMBER_EXT]|[EINWOHNER]) [WEAK_NP root] 
+				: $0.grm := weak_decl($1.grm, $3.grm)
+				: $0.det := true;
+
+
+
+
+
+%% =========  mixed declination   ===============
+%% ein junger Boxer
+%% mein neues Jahr
+%% keines bunten Lehrers
+
+
+[EIN-DET] -> [TOKEN grm="ART" form="ein"] | [TOKEN grm="PROBEG pos"] | 'kein';
+
+[MODIF_NP] -> [EIN-DET] [ADJ-SEQ] [NP root] : $0.grm := mixed_decl($1.grm, $2.grm, $3.grm);
+[MODIF_NP] -> [EIN-DET] [NP root] 			 : $0.grm := mixed_decl($1.grm, $2.grm);
+[MODIF_NP] -> [EIN-DET] [NUMBER_EXT] [NP root]	 : $0.grm := mixed_decl($1.grm, $3.grm);
+
+
+
+
+%% =========  strong declination   ===============
+%% ein paar  bunte Jahre
+%% zwei Gefechte
+%% gutes Wetter
+%% kleiner guter Junge
+%% junger Frau // rDativ
+
+[NUM_START] ->  [NUMBER_EXT] | ('ein' 'paar');
+
+[MODIF_NP] -> [ADJ-SEQ] [NP root] 	
+							: $0.grm := strong_decl($1.grm, $2.grm);
+
+[MODIF_NP] -> [EINWOHNER] [NP root];
+
+[MODIF_NP] -> [NUM_START] [NP root grm="plu"];
+
+%% "zwei hundert Prozent" (Prozent should be in singular)
+[MODIF_NP] -> [NUM_START] [PARAMWORT root grm="sin"] :
+			$0.grm := convert_to_plural($2.grm);
+
+[MODIF_NP] -> [NUM_START] [ADJ-SEQ] [NP root grm="plu"] 
+							: $0.grm := strong_decl($2.grm, $3.grm);
+
+
+%%  "weniger Geduld"
+[MODIF_NP] -> [ADV_NUMBER] [NP root];
+
+%% "weniger intelligente Nation"
+[MODIF_NP] -> [ADV_NUMBER] [ADJ-SEQ] [NP root] 
+							: $0.grm := strong_decl($2.grm, $3.grm);
+
+
+
+
+%% =========  coordinating  AP   ===============
+%% schwache oder  starke 
+%% starke  oder  sehr neue
+
+
+[AP] -> [AP] [C-CONJ-AND-COMMA] [AP] 
+							: $0.grm := common_case_number_gender($1.grm, $3.grm);
+
+
+
+
+
+%% =========  Genitive  NP   ===============
+%% die Eroberung Bagdads
+%% der Norden des Irak
+%% - der Norden Irak
+%% We use here constraint that if the Genitivattribut has other cases except rGenitiv,
+%% then Genitivattribut should have a determiner or an adjective. 
+%% The  same rule is used in Project ROSA (Robuste SprachAnalyse)
+
+
+[GENIT_NP] -> [NP] [NP] : has_only_case($2.grm, "gen");
+
+[GENIT_NP] -> [NP] [NP root] : has_only_case($1.grm, "gen");
+
+
+
+
+%%  =============  one simple loc-chunk  ==============
+%%  der Hauptstadt Bagdad
+%%  Die Hafenstadt Tanger
+%%  die Stadt Berlin
+
+[STADT-TYPE] -> 'stadt' | 'hauptstadt' | 'hafenstadt' | 'küstenstadt';
+
+[STADT_NAME] -> [TOKEN grm="-" register="Aa"] | [TOKEN grm="std"];
+
+[NP] -> [STADT-TYPE] [STADT_NAME] ;
+
+
+
+
+
+%%  ===============  coordinating NPs with conjunction   ===============
+%% amerikanische Soldaten und kurdische Kömpfer
+%% Tisch, Haus oder ähnliches
+%% uns und unserem sozialistischen Staat
+%% du, er und ich
+%% dir, ihm oder ihr
+
+[NP_SIMIL_COMP] ->  [NOT_SIMIL_NP] | [PRO];
+[NP_comma] -> [NP_SIMIL_COMP];
+[NP_comma] -> [NP_comma] ',' [NP_SIMIL_COMP] 
+					: $0.grm := common_case($1.grm, $3.grm);
+
+[LAST_NP] -> [NP_SIMIL_COMP] | 'ähnlich' | 'ander';
+
+[NP_SIMIL] ->  [NP_comma] [C-CONJ] [LAST_NP]  
+					: $0.grm := common_case($1.grm, $3.grm);
+
+
+%% ======  coordinating NPs without conjunction but with at least 3 members  ===========
+%% Eltern , Lehrer , der große Bruder leisten hier....
+
+
+
+
+[NP_comma2] -> [NOT_SIMIL_NP] ',' [NOT_SIMIL_NP]
+					: $0.grm := common_case($1.grm, $3.grm);
+
+[NP_SIMIL_COMMA] -> [NP_comma2] ','  [NOT_SIMIL_NP]
+					: $0.grm := common_case($1.grm, $3.grm);
+
+[NP_SIMIL_COMMA] -> [NP_SIMIL_COMMA] ',' [NOT_SIMIL_NP]
+					: $0.grm := common_case($1.grm, $3.grm);
+
+
+
+
+
+
+%%  ===============  apposition   ===============
+%% Tikrit, der Heimatstadt Husseins,
+
+[NP] -> [NOT_SIMIL_NP] ',' [NOT_SIMIL_NP] ','
+ 					: $0.grm := common_case($1.grm, $3.grm);
+	
+
+%% Jeder Mensch, ob Mann oder Frau,
+[NP] -> [NP root] ',' 'ob' [NP_SIMIL] ',';
+
+%% Dienste, wie Ersatzteile,
+[NP] -> [NP root] ',' 'wie' [NP] ',';
+
+%%   ===============  verb modifier   ======================
+%%	neulich ausgebrannt 
+%%	gut machen	
+%%  sich sehr bewahren
+%%  richtig ausgebrannt
+
+[VP] -> ([ADV] | [ADJ-PREDK]) [VER root atomic];
+
+
+
+%% ===========   repeating conjunction   ==============
+%% teils das Haus,  teils die Mutter
+
+[VERB-MODIF] ->  [PP]  | [ADV];
+
+[NP_rep] -> 'teils' [NP root];
+
+[NP_rep2] -> [NP_rep] ',' [NP_rep] 
+				:  $0.grm := common_case($1.grm, $3.grm);
+
+[NP_rep2] -> [NP_rep2] ',' [NP_rep] 
+				:  $0.grm := common_case($1.grm, $3.grm);
+
+[NP] -> [NP_rep2];
+
+
+%% teils rot,  teils gelb, teils braun
+
+[AP_rep] -> 'teils' [AP root];
+
+[AP_rep2] -> [AP_rep] ',' [AP_rep]
+				:  $0.grm := common_case_number_gender($1.grm, $3.grm);
+
+
+[AP_rep2] -> [AP_rep2] ',' [AP_rep] 
+				:  $0.grm := common_case_number_gender($1.grm, $3.grm);
+
+[AP] -> [AP_rep2];
+
+
+%% ===========   double conjunction   ==============
+%% entweder du  oder ich
+%% entweder einem Schiedsgericht oder dem Gerichtshof 
+%% zwar unabhängig, aber nicht neutral
+
+[NP] -> 'entweder' [NP root] 'oder' [NP]
+				:  $0.grm := common_case($2.grm, $4.grm);
+
+
+[NP] -> 'entweder' [PRO root] 'oder' [PRO]
+				:  $0.grm := common_case($2.grm, $4.grm);
+
+[AP] -> 'entweder' [AP root] 'oder' [AP]
+				:  $0.grm := common_case_number_gender($2.grm, $4.grm);
+
+
+[VERB-MODIF] -> 'entweder' [VERB-MODIF root] 'oder' [VERB-MODIF];
+
+
+
+[NP] -> 'weder' [NP root] 'noch' [NP]
+				:  $0.grm := common_case($2.grm, $4.grm);
+
+
+[NP] -> 'weder' [PRO root] 'noch' [PRO]
+				:  $0.grm := common_case($2.grm, $4.grm);
+
+[AP] -> 'weder' [AP root] 'noch' [AP]
+				:  $0.grm := common_case_number_gender($2.grm, $4.grm);
+
+
+
+
+
+[NP] -> 'zwar' [NP root] ',' 'aber'  [NP]
+				:  $0.grm := common_case($2.grm, $5.grm);
+
+
+[NP] -> 'zwar' [PRO root] ',' 'aber'  [PRO]
+				:  $0.grm := common_case($2.grm, $5.grm);
+
+[AP] -> 'zwar' [AP root] ',' 'aber' [AP]
+				:  $0.grm := common_case_number_gender($2.grm, $5.grm);
+
+
+[VERB-MODIF] -> 'zwar' [VERB-MODIF root]  ',' 'aber' [VERB-MODIF];
+
+
+
+
+%% ===============   von  ========================
+
+%% too many errors, but there is no other way
+
+[NP] -> [NP] 'von' [NP grm="dat"];
+
+

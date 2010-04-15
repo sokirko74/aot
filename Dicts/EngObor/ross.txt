@@ -1,0 +1,6648 @@
+============
+TITLE        = $adv
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+GF      = 1  ADV
+============
+TITLE        = $avrem
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+ETENSE  =  * - > *
+============
+TITLE        = $conj
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+GF      = 1  CONJ:DISRUPT
+============
+TITLE        = $gh2
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  > V
+============
+TITLE        = $komm
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+RUS     =  там_же...где 1
+============
+TITLE        = $parenth
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+GF      = 1  PARENTH
+============
+TITLE        = $poz
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  *
+============
+TITLE        = $sametime
+SENSE       = 1
+AUTHOR       = graf
+REDACT       = d
+TIME_CREATE       = 2752512/851969/1637700 3146464:2035417365:-1236992000
+CONTENT =  $sametime
+SF      = 1  SIMULT
+============
+TITLE        = $subord
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+GF      = 1  SUBORD
+============
+TITLE        = $time
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  $time
+SF      = 1  TIME
+GF      = 1  ADV
+============
+TITLE        = Humpty_Dumpty_sat_on_the_wall
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:56
+RUS     =  Шалтай_Балтай_сидел_на_стене
+CONTENT =  Humpty Dumpty sat on the wall
+============
+TITLE        = a
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  a
+EXM     =  time a day -
+           время дня
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  из+Р 1
+============
+TITLE        = abaft
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  abaft
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  позади+Р 1
+           за+Т 1
+============
+TITLE        = aboard
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  aboard
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  на_борту+Р 1
+============
+TITLE        = about
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  about
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  о+П 1
+           про+В 1
+============
+TITLE        = above
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  above
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  над+Т 1
+============
+TITLE        = above_all
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  above all
+GF      = 1  PARENTH
+RUS     =  главное 1
+============
+TITLE        = abroad
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  abroad
+EXM     =  Many of Cameroon's finest journalists now work abroad. -
+           Многие из лучших журналистов Камеруна сейчас работают
+           за границей.
+GF      = 1  ADV:MANNER
+SF      = 1  LOK
+VAL     =  LOK ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+RUS     =  за_границей 1
+           за_рубежом 1
+           за пределами страны
+============
+TITLE        = absent
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  absent
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_отсутствие+Р 1
+           без+Р 1
+============
+TITLE        = accompanied_by
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  accompanied by
+EXM     =  A strong wind was blowing across the platform in the direction of the
+           loch, accompanied by a cold <...> driving rain. -
+           Сильный ветер дул на платформе по направлению к озеру вместе с
+           холодным дождем.
+GF      = 1  PREP
+SF      = 1  TOGETHER
+VAL     =  TOGETHER ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  AKTIO
+          2  THINGN
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+RUS     =  в_сопровождении+Р 1
+           вместе_с+Т 1
+============
+TITLE        = according_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  according to
+EXM     =  Each man will be paid according to his ability. -
+           Каждому рабочему будут платить в соответствии с его
+           квалификацией.
+GF      = 1  PREP
+SF      = 1  IN-ACCORD
+VAL     =  IN-ACCORD ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  LEGISL
+          2  SITUAT
+RUS     =  в_соответствии_с+Т 1
+           соответственно+Д 1
+           согласно+Д 1
+           по+Д 1
+============
+TITLE        = according_to_inhabitancy
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  according to inhabitancy
+GF      = 1  ADV
+RUS     =  по_месту_жительства 1
+============
+TITLE        = according_to_the_representation_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  according to representation to
+GF      = 1  PREP
+RUS     =  по_представлению+Р 1
+============
+TITLE        = according_to_the_scale_of_ranks
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  according to the scale of ranks
+GF      = 1  ADV
+RUS     =  в_порядке_подчиненности 1
+COMM    =  Уточнить.
+============
+TITLE        = across
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  across
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  cross
+RUS     =  через+В 1
+============
+TITLE        = addressing_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  addressing to
+GF      = 1  PREP
+RUS     =  по_адресу+Р 1
+           в_адрес+Р 1
+============
+TITLE        = adown
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  adown
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вниз_по+Д 1
+============
+TITLE        = after
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  after
+EXM     =  I reached the station after the train had left. -
+           Я приехал на вокзал после того, как поезд ушёл.
+GF      = 1  SUBORD
+SF      = 1  TIME
+VAL     =  AFTER ( A1 , A2 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+SF2     = 1  PREDIC
+RUS     =  после_того_как 1
+ETENSE  =  буд - > present
+           прш - > past_prf
+============
+TITLE        = after
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  after
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  после+Р 1
+============
+TITLE        = after_all
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  after all
+POS     =  end
+EXM     =  so you have come after all! —
+           значит, вы всё-таки пришли!
+GF      = 1  PART
+GF1     = 1  sent
+          2  VERB
+RUS     =  все-таки 1
+============
+TITLE        = after_the_expiration_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  after the expiration of
+EXM     =  Such a notice states that the planning permission lapses after the
+           expiration of a specified period... -
+           В таком объявлении говорится, что планирующееся разрешение становится
+           недействительным по истечении оговоренного периода.
+GF      = 1  PREP
+SF      = 1  AFTER
+VAL     =  ACT ( C , A1 )
+           AFTER ( C , A2 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ABSTR
+RUS     =  по_истечении+Р 1
+COMM    =  VAL потом заменить, вероятно, на AFTER (А2, А1)
+============
+TITLE        = after_the_manner_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  after the manner of
+GF      = 1  PREP
+VAL     =  ALIKE ( A1 , A2 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  >> NP
+SF2     = 1  NEG
+             ANIM
+RUS     =  на_манер+Р 1
+============
+TITLE        = against
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  against
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  agin
+           gainst
+RUS     =  против+Р 1
+           наперекор+Д 1
+============
+TITLE        = all_the_same_as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  all the same as
+GF      = 1  SOJUZ
+GF2     = 1  >> NP
+             >> gerund
+RUS     =  все_равно_что 1
+============
+TITLE        = all_the_same_that
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  all the same that
+GF      = 1  SOJUZ
+GF2     = 1  >> NP
+             >> gerund
+RUS     =  все_равно_как 1
+============
+TITLE        = allegedly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  allegedly
+EXM     =  He allegedly lost consciousness. -
+           Он будто бы потерял сознание.
+GF      = 1  PART
+SF      = 1  MODL
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  > VERB
+          2  > NP
+RUS     =  будто_бы 1
+           якобы 1
+           вроде_бы 1
+           кажется 1
+           мол 1
+============
+TITLE        = aloft
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  aloft
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  над+Т 1
+           поверх
+============
+TITLE        = along
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  along
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  по+Д 1
+           вдоль
+           вдоль по
+============
+TITLE        = alongside
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  alongside
+EXM     =  The car stopped alongside the kerb. -
+           Машина остановилась у тротуара.
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  около+Р 1
+           у борта
+           к борту
+============
+TITLE        = although
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  although
+EXM     =  Although they tried hard, they did not succeed. -
+           Несмотря на то, что они прилагали все усилия, им не
+           удалось добиться своего.
+GF      = 1  SUBORD
+SF      = 1  NEG
+             ISCONNECTED
+VAL     =  ISCONNECTED ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  несмотря_на_то_что 1
+           хотя...зато 1
+============
+TITLE        = although...yet
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (though|although) ... yet
+GF      = 1  SUBORD_DISRUPT
+RUS     =  хотя_и...но 1
+============
+TITLE        = amid
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  amid
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  amidst
+RUS     =  в_середине+Р 1
+           среди+Р 1
+           посреди+Р 1
+============
+TITLE        = among
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  among
+EXM     =  Among guests were two actors. -
+           Среди гостей были два актёра.
+GF      = 1  PREP
+SF      = 1  PART
+VAL     =  PART ( A1 , A2 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SYN     =  amongst
+           mongst
+RUS     =  в_числе+Р 1
+           среди+Р 1
+============
+TITLE        = and
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  and
+EXM     =  She wants to eat and drink.
+GF      = 1  CONJ
+RUS     =  и 1
+           а_также 1
+============
+TITLE        = and_so
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  and so
+EXM     =  The regulation and growth of cells was much more complicated than
+           originally believed, and so far more than 40 different types
+           of oncogenes have been discovered in experiments using retroviruses <...> -
+           Регуляция и рост клеток был гораздо сложнее, чем считалось изначально,
+           таким образом более 40 различных видов онкогенов были открыты
+           экспериментально с использованием ретровирусов.
+GF      = 1  ADV
+SF      = 1  RESLT
+VAL     =  RESLT ( A2 , A1 )
+GF1     = 1  < sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  в_результате 2
+           в_итоге 2
+           таким_образом 1
+COMM    =  Добавлено в OPER, так как нужно устанавливать, "в итоге чего именно"
+============
+TITLE        = and_then
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  and then
+EXM     =  I drove away slowly and then came to the corner of Union and
+           Gloucester. -
+           Я медленно отъехал, а затем оказался на углу Юнбона и Глустера.
+           And then the interference came. -
+           А потом начались помехи.
+           I saw him there first of all and then he told me they were going to
+           send me to Tidworth. -
+           Первым я увидел там его, и тогда он сказал мне, что они собираются
+           послать меня в Тидворт.
+GF      = 1  CONJ
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  << sent
+          2  << VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+          2  >> VERB
+SYN     =  and after that
+RUS     =  а_затем 1
+           а потом
+           и тогда
+============
+TITLE        = anear
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  anear
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вблизи+Р 1
+           около+Р 1
+           подле+Р 1
+============
+TITLE        = anent
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  anent
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  касательно+Р 1
+           напротив+Р 1
+           около+Р 1
+============
+TITLE        = anigh
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  anigh
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  недалеко_от+Р 1
+============
+TITLE        = anti
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  anti
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  против+Р 1
+============
+TITLE        = around
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  around
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вокруг+Р 1
+           около+Р 1
+============
+TITLE        = as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as
+EXM     =  As we rode, the rock seemed to heighten. -
+           По мере того как мы ехали, нам казалось, что скала
+           становится всё выше и выше.
+GF      = 1  SUBORD
+SF      = 1  SIMULT
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+SF2     = 1  PREDIC
+RUS     =  по_мере_того_как 1
+============
+TITLE        = as
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as
+GF      = 1  SOJUZ
+GF2     = 1  >> NP
+RUS     =  как 1
+           как 2
+           под_видом+Р 1
+           подобно_тому_как 1
+============
+TITLE        = as
+SENSE       = 3
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as
+GF      = 1  SOJUZ
+GF2     = 1  >> ADJ
+RUS     =  насколько 1
+           сколь
+============
+TITLE        = as
+SENSE       = 4
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as
+EXM     =  As I am here, I'd better stay. —
+           Раз я уже здесь, я лучше останусь.
+GF      = 1  SUBORD
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  sent
+GF2     = 1  >> sent
+RUS     =  поскольку 1
+           ввиду_того_что 1
+           раз
+============
+TITLE        = as_a_matter_of_fact
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  (,| )as a matter of fact,
+EXM     =  I had regarded his presence as an encumbrance to the expedition ,
+           but, as a matter of fact , I am now well convinced that his power of
+           endurance is as great as my own . -
+           Я рассматривал его присутствие как помеху экспедиции, но, на самом
+           деле, сейчас у меня сильное убеждение, что он так же вынослив, как и
+           я.
+GF      = 1  PARENTH
+SF      = 1  MODL
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+RUS     =  на_самом_деле 1
+           действительно
+           по сути дела
+           в сущности
+           собственно
+============
+TITLE        = as_a_result_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as a result of
+GF      = 1  PREP
+GF1     = 1  VERB
+GF2     = 1  >> NP
+RUS     =  из-за+Р 1
+============
+TITLE        = as_a_rule
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )as a rule,
+EXM     =  In the country, as a rule, they unbosom themselves to their
+           guests. -
+           В деревне же обыкновенно они изливают душу перед своими
+           гостями.
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  как_правило 1
+============
+TITLE        = as_applied_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as applied to
+EXM     =  It would be difficult to substantiate Lenin's theory of
+           imperialism as applied to the British Empire. -
+           Было бы трудно обосновать империалистическую теорию Ленина
+           применительно к Британской Империи.
+GF      = 1  PREP
+SF      = 1  FOR
+VAL     =  FOR ( A1 , A2 )
+GF1     = 1  sent
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  применительно_к+Д 1
+           по_отношению_к+Д 1
+           в_отношении+Р 1
+============
+TITLE        = as_far_as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as far as
+EXM     =  We walked as far as the post office. -
+           Мы дошли до почты.
+GF      = 1  PREP
+SF      = 1  TRG-PNT
+VAL     =  TRG-PNT ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  MOV
+GF2     = 1  >> NP
+RUS     =  до+Р 1
+           по_мере+Р 1
+============
+TITLE        = as_far_as
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as far as
+POS     =  begin
+EXM     =  As far as I can judge this is correct. -
+           Насколько я могу судить, это правильно.
+GF      = 1  ADV
+SF      = 1  DEGREE
+VAL     =  DEGREE ( C , A1 )
+GF1     = 1  >> sent
+SF1     = 1  AKTIO
+             INTEL
+RUS     =  насколько 1
+============
+TITLE        = as_follows
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  end
+CONTENT =  as follows (|:)
+EXM     =  Mark's stage system is as follows: The guitar goes, via a Sony
+           Wireless system, to a Pete Cornish Control unit. -
+           Ступенчатая система Марка выглядит следующим образом: гитара идет
+           через беспроволочную систему Сони, в блок управления Пита Корниша.
+GF      = 1  ADV
+SF      = 1  METHOD
+             REFERENT
+VAL     =  METHOD ( C , A1 )
+           REFERENT ( A2 , C )
+GF1     = 1  sent
+             > text
+SF1     = 1  PREDIC
+SYN     =  this way (|:)
+RUS     =  следующим_образом 1
+           таким_образом 1
+============
+TITLE        = as_if
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as if
+EXM     =  She gazed at the pages as Carolyn read, as if she could see the
+           events unfolding there. -
+           Она уставилась на страницы, пока Кэролин читала, как будто могла
+           видеть события, которые там разворачивались.
+           OPER
+GF      = 1  SOJUZ
+SF      = 1  COMP
+VAL     =  COMP ( A1 , A2 )
+GF1     = 1  < sent
+SF1     = 1  PREDIC
+GF2     = 1  > sent_pasa
+SYN     =  as though
+RUS     =  как_будто 1
+           будто 2
+           точно 1
+           будто_бы 1
+           как если бы
+COMM    =  sent_pasa = глагольная форма в придаточном: pasa; если требуется
+           глагол be, ставить were
+============
+TITLE        = as_many...as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as many ... as
+EXM     =  He has as many children as you. -
+           У него столько же детей, сколько и у тебя.
+GF      = 1  CONJ:DISRUPT
+SF      = 1  COMP
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  NOUN: count
+          2  VERB
+GF2     = 1  > NP
+          2  > VERB
+RUS     =  столько_же...сколько 1
+============
+TITLE        = as_much...as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as much ... as
+EXM     =  He gets as much money as you. -
+           Он зарабатывает столько же, сколько и ты.
+GF      = 1  CONJ:DISRUPT
+SF      = 1  COMP
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  NOUN: mass
+          2  VERB
+GF2     = 1  > NP
+          2  > VERB
+RUS     =  столько_же...сколько 1
+============
+TITLE        = as_regards
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as regards
+EXM     =  As regards his suggestion I was non-committal. -
+           Что касается его предложения, то я не сказал ничего определённого.
+           with an express salvo as regards certain named rights -
+           со специальной оговоркой в отношении некоторых
+           упомянутых прав
+GF      = 1  PREP
+SF      = 1  THEME
+VAL     =  THEME ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+          3  sent
+SF1     = 1  PREDIC
+             INTEL
+GF2     = 1  >> NP
+SYN     =  a propos
+RUS     =  по_поводу+Р 1
+           в_отношении+Р 1
+           что касается
+============
+TITLE        = as_soon_as
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  as soon as
+EXM     =  My stomach started to churn as soon as we left port. -
+           Как только мы вышли в море, меня замутило
+GF      = 1  SUBORD
+RESTR   =  not_fut !
+           not_fut_past !
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+RUS     =  как_только 1
+============
+TITLE        = as_the_result_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as the result of
+EXM     =  Good books come about as the result of hard work -
+           Хорошие книги появляются в результате большой работы
+GF      = 1  PREP
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  VERB
+          2  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> NP
+RUS     =  в_результате+Р 1
+           как_следствие+Р 1
+============
+TITLE        = as_they_speak
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as they speak
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  как_говорится 1
+============
+TITLE        = as_to
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 1/7/1 14:22:28
+CONTENT =  as to
+EXM     =  as to that book I don't like it —
+           что касается этой книги, то мне она не нравится
+GF      = 1  SUBORD
+SF      = 1  THEME
+VAL     =  THEME ( A1 , A2 )
+GF1     = 1  NP
+GF2     = 1  >> sent
+RUS     =  что_касается...то 1
+============
+TITLE        = as_well
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  as well
+EXM     =  You might as well say that the Nelson Column was not at all
+           the sort of thing that was likely to be set up in
+           Trafalgar Square. -
+           С таким  же  успехом можно сказать, что  колонна Нельсона -
+           совсем не тот памятник,  который  следовало воздвигнуть
+           на Трафальгарской площади.
+GF      = 1  ADV:DEGREE
+SF      = 1  COMP
+VAL     =  COMP ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  с_таким_же_успехом 1
+COMM    =  Надо уточнить, что этот оборот ставится как правило между
+           might и смысловым глаголом.
+============
+TITLE        = as_well
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  end
+CONTENT =  as well
+EXM     =  He takes English lessons on Mondays and Fridays as well. -
+           он занимается английским по понедельникам, а также по
+           пятницам.
+GF      = 1  ADV
+SF      = 1  COMP
+VAL     =  COMP ( C , A1 )
+GF1     = 1  < VERB
+          2  < NP
+          3  < sent
+GF2     = 1  << VERB
+          2  << NP
+          3  << sent
+RUS     =  а_также 1
+           к тому же
+============
+TITLE        = aslant
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  aslant
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  поперек+Р 1
+           через+В 1
+============
+TITLE        = astride
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  astride
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  верхом_на+П 1
+           по обеим сторонам
+           вдоль
+============
+TITLE        = at
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at
+EXM     =  a draft at twenty days for 500 —
+           тратта сроком на двадцать дней на сумму пятьсот фунтов
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  у+Р 1
+           около+Р 1
+           сроком_на+В 1
+============
+TITLE        = at_all
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at all
+POS     =  end
+EXM     =  I was not afraid at all. -
+           Я нисколько не испугался.
+GF      = 1  ADV
+SF      = 1  DEGREE
+VAL     =  DEGREE ( C , A1 )
+GF1     = 1  VERB
+RUS     =  нисколько 1
+           ничуть
+============
+TITLE        = at_any_price
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at any price
+EXM     =  Labour just wanted power at any price and they'll say anything
+           to get it. -
+           Рабочие просто хотели во что бы то ни стало получить власть, и они
+           скажут все что угодно, лишь бы завладеть ею.
+GF      = 1  ADV:DEGREE
+SF      = 1  MODL
+VAL     =  ESTIM ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+SYN     =  at all costs
+RUS     =  во_что_бы_то_ни_стало 1
+           обязательно
+============
+TITLE        = at_any_rate
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )at any rate,
+POS     =  > V
+EXM     =  The first of my revelations, at any rate, shall be
+           concerned with the Club of Queer Trades. -
+           Во всяком случае, первый из моих рассказов связан с
+           "Клубом необычных профессий".
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  во_всяком_случае 1
+============
+TITLE        = at_last
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at last
+EXM     =  At last the hour arrived. -
+           Наконец час настал.
+           The diver came up at last. -
+           Наконец водолаз появился на поверхности.
+GF      = 1  ADV
+          2  PARENTH
+SF      = 1  TIME
+VAL     =  TIME ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  наконец 1
+COMM    =  Если так можно, конечно.
+============
+TITLE        = at_least
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at least
+EXM     =  There's at least an hour or so of sunshine left. -
+           Остался по меньшей мере час, пока солнце не ушло.
+           `Let's at least try it,' Helen replied. -
+           "Давай хотя бы попробуем", - ответила Хелен.
+           Seal all surfaces with at least two coats of gloss paint (not vinyl),
+           and allow to dry for at least 72 hours before the mirror is fixed. -
+           Замажьте все поверхности как минимум двумя слоями глянцевой краски
+           (не винилом), и оставьте сохнуть минимум на 72 часа, пока зеркало не
+           застынет.
+GF      = 1  PART
+SF      = 1  MODL
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+          2  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> VERB
+RUS     =  хотя_бы 1
+           по крайней мере
+           по меньшей мере
+           как минимум
+           минимум
+COMM    =  может вставляться даже между предлогом и ИГ
+============
+TITLE        = at_once
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at once
+POS     =  end
+GF      = 1  ADV
+RUS     =  сразу 1
+============
+TITLE        = at_speed_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at speed of
+EXM     =  The ships then set out to return to base at speed of 10km/h. at 8 p.m. -
+           Потом корабли отправились в 8 часов вечера со скоростью 10 км/ч.
+GF      = 1  PREP
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  со_скоростью+Р 1
+============
+TITLE        = at_that_time
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at that time
+GF      = 1  ADV
+RUS     =  в_то_же_время 1
+============
+TITLE        = at_the_end_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at the end of
+EXM     =  The Prime Minister appeared at the end of the broadcast to
+           warn of further turmoil <...> -
+           Премьер-министр появился в конце передачи, чтобы
+           предупредить о грядущих беспорядках.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  TIME ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  PROC
+          2  EXTENS
+          3  AKTIO
+RUS     =  в_конце+Р 1
+============
+TITLE        = at_the_first_place
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at the first place
+GF      = 1  PARENTH
+RUS     =  во-первых 1
+============
+TITLE        = at_the_moment_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at the moment of
+EXM     =  At the moment of impact, the tail of the lizard breaks away
+           from its body. -
+           В момент удара хвост ящерицы отрывается от тела.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  SIMULT ( A1 , A2 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  на_момент+Р 1
+           во время, когда
+============
+TITLE        = at_the_same_time
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  at the same time,
+POS     =  begin
+EXM     =  At the same time, for many women it can also mark a new beginning. -
+           В то же время для многих женщин это может означать начало нового
+           этапа.
+GF      = 1  PARENTH
+SF      = 1  ISCONNECTED
+VAL     =  ISCONNECTED ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  вместе_с_тем 1
+           в_то_же_время 1
+           однако
+============
+TITLE        = at_the_thought_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at the thought of
+EXM     =  His conventional soul quailed within him at the thought of
+           such fantastic trespass. -
+           Его душа, привыкшая во всем следовать правилам приличия,
+           содрогнулась при мысли о столь чудовищном вторжении в
+           чужие владения.
+GF      = 1  PREP
+SF      = 1  INTEL
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> gerund
+          3  >> inter + sent
+RUS     =  при_мысли_о+П 1
+           при_мысли_о_том 1
+============
+TITLE        = at_the_time_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at the time of
+EXM     =  Barbarossa's troops subdue the Roman mob at the time of his
+           coronation. -
+           Войска Барбароссы подавляют толпу во время его коронации.
+GF      = 1  PREP
+SF      = 1  SIMULT
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  во_время+Р 1
+           в_момент+Р 1
+============
+TITLE        = at_this_moment
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  at this moment
+EXM     =  At this moment the stout old man with white whiskers looked
+           up. -
+           В то же мгновение полный старик с седыми бакенбардами
+           взглянул вверх.
+           OPER
+GF      = 1  ADV
+SF      = 1  TIME
+VAL     =  SIMULT ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_этот_момент 1
+           в настоящее время
+           в данный момент
+           в тот же момент
+COMM    =  Как-то надо указать, что происходит нечто одновременно с
+           описанным до того.
+============
+TITLE        = at_will
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  at will
+EXM     =  He may come and go at will. -
+           Он может приходить и уходить, когда захочет.
+GF      = 1  ADV
+SF      = 1  MODL
+VAL     =  MODL ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+RUS     =  по_желанию 1
+============
+TITLE        = athwart
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  athwart
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  поперек+Р 1
+           вопреки+Д 1
+           назло
+============
+TITLE        = atop
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  atop
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  на+П 1
+           над+Т 1
+           поверх
+============
+TITLE        = atour
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  atour
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  над+Т 1
+           вопреки+Д 1
+============
+TITLE        = bar
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  bar
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  исключая+В 1
+           не_считая+Р 1
+============
+TITLE        = because
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  because
+EXM     =  The boy was crying because he was hungry. -
+           Мальчик плакал, потому что хотел есть.
+GF      = 1  SUBORD
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  << sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  потому_что 1
+           так_как 1
+           в силу того, что
+           из-за того, что
+============
+TITLE        = because_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  because of
+EXM     =  I am also a big Jennifer Capriati fan, because of her
+           attractiveness <...> -
+           Я также большой поклонник Дженнифер Каприати из-за ее
+           привлекательности.
+GF      = 1  PREP
+SF      = 1  RESLT
+VAL     =  RESLT ( A2 , A1 )
+GF1     = 1  VERB
+          2  < sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SYN     =  due to
+RUS     =  по_причине+Р 1
+           в_результате 1
+           из-за+Р 1
+           в_итоге+Р 1
+           в силу
+============
+TITLE        = before
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  before
+EXM     =  Come and see me before you leave. -
+           Зайдите ко мне, прежде чем уедете.
+GF      = 1  SUBORD
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+          2  >> gerund
+RUS     =  прежде_чем 1
+           перед тем как
+ETENSE  =  буд - > present
+           прш - > past_prf
+============
+TITLE        = before
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  before
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF2     = 1  >> NP
+SF2     = 1  SITUAT
+RUS     =  перед+Т 1
+           до+Р 1
+============
+TITLE        = behind
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  behind
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  за+Т 1
+           позади+Р 1
+============
+TITLE        = below
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  below
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  ниже+Р 1
+           под+Т 1
+============
+TITLE        = beneath
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  beneath
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  aneath
+RUS     =  под+Т 1
+============
+TITLE        = beside
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  beside
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  рядом_с+Т 1
+           вне+Р
+           близ
+           возле 1
+============
+TITLE        = beside_this
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  beside this
+GF      = 1  ADV
+RUS     =  наряду_с_этим 1
+           вместе_с_тем 1
+============
+TITLE        = besides
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  besides
+GF      = 1  PREP
+          2  PARENTH
+GF2     = 1  >> NP
+RUS     =  кроме+Р 1
+============
+TITLE        = besides
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  besides
+GF      = 1  PARENTH
+SF      = 1  TOGETHER
+VAL     =  THESAME ( A1 , A2 )
+GF1     = 1  > sent
+SF1     = 1  SITUAT
+RUS     =  кроме_того 1
+COMM    =  с А2 соотносились строки GF2 и SF2, но я их убрала, так как а2 нет в SYNR.
+           Однако тут нужно специальное правило (собственно, как и должно быть при ОПЕРе), чтобы
+           не потерять эту семантическую связь.
+============
+TITLE        = between
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  between
+GF      = 1  PREP
+GF2     = 1  >> NP_pl
+SYN     =  betwixt
+RUS     =  между+Т 1
+============
+TITLE        = beyond
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  beyond
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  за+Т 1
+           вне+Р 1
+============
+TITLE        = both...and
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  both ... and
+GF      = 1  CONJ:DISRUPT
+RUS     =  как...так_и 1
+============
+TITLE        = but
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  but
+GF      = 1  CONJ
+RUS     =  но 1
+============
+TITLE        = but
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  but
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  кроме+Р 1
+============
+TITLE        = by
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by
+GF      = 1  PREP
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  у+Р 1
+           около+Р 1
+           при+П 1
+           возле+Р 1
+============
+TITLE        = by_administrative_means
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by administrative means
+GF      = 1  ADV
+RUS     =  в_административном_порядке 1
+============
+TITLE        = by_any_chance
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by any chance
+EXM     =  Is he, by any chance, behind this scheme? —
+           Не он, случайно, выдвинул этот план?
+GF      = 1  PARENTH
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+RUS     =  случайно
+           случаем
+           часом
+============
+TITLE        = by_default
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by default
+EXM     =  More often than not, browsing is presented to the user
+           by default when the system fails to provide an exact match. -
+           Чаще всего обзор предлагается пользователю по умолчанию, когда
+           система не может предоставить точное совпадение.
+GF      = 1  ADV:MANNER
+SF      = 1  METHOD
+VAL     =  METHOD ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  по_умолчанию 1
+============
+TITLE        = by_means_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by means of
+EXM     =  The internal state of the organism is monitored by
+           means of receptors, mostly situated in the brain stem. -
+           Внутреннее состояние организма контролируется при
+           посредстве рецепторов, в большинстве своем
+           сосредоточенных в стволе мозга.
+GF      = 1  PREP
+SF      = 1  METHOD
+VAL     =  METHOD ( A1 , A2 )
+           ACT ( A2 , C )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  THINGN
+RUS     =  при_посредстве+Р 1
+           через+В 1
+============
+TITLE        = by_no_means
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by no means
+EXM     =  He is by no means a wicked man. -
+           Он совсем не злой человек.
+           OPER
+GF      = 1  ADV:Neg
+SF      = 1  MODL
+VAL     =  METHOD ( C , A1 )
+           RESTR ( C , A2 )
+GF1     = 1  NP
+          2  VERB
+SF1     = 1  NEG
+RUS     =  никоим_образом 1
+           никак
+           ни за что
+           далеко
+COMM    =  Добавлена по OPER, так как семантика этого оборота (и ряда других
+           однословных единиц и оборотов с ни(-) - усиление отрицания.) НЕ знаю, облегчит ли это
+           синтаксический анализ, но на GF1 есть ограничение - ГГ может быть только с отрицанием.
+           Есть ли способ задать это ограничение
+           может вставляться между be и предикативом
+           "не" при нем не переводится
+============
+TITLE        = by_the_end_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by the end of
+EXM     =  By the end of the day half of us were footsore. -
+           К концу дня половина из нас натёрла себе ноги.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  TIME ( A2 , A1 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+SF2     = 1  AKTIO
+          2  PERIO
+RUS     =  к_концу+Р 1
+============
+TITLE        = by_the_similarity_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by the similarity of
+GF      = 1  PREP
+RUS     =  по_сходству_с+Т 1
+============
+TITLE        = by_the_similarity_with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by the similarity with
+GF      = 1  PREP
+RUS     =  по_сходству_с+Т 1
+============
+TITLE        = by_the_way
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  by the way
+EXM     =  By the way, I'm Martin Barre, but sometimes I'm an owl. -
+           Кстати, я Мартин Барр, но иногда я сова.
+GF      = 1  PARENTH
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+RUS     =  кстати 1
+           между прочим
+============
+TITLE        = by_way_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by way of
+EXM     =  <...> a brief biography is also often included by way of
+           introduction. -
+           Краткая биография PARTICо включается в качестве введения.
+           People whose own names she was no long certain of called out her name
+           and she smiled and nodded by way of general response. -
+           Люди, чьи имена она точно не помнила, окликали ее по имени, и она
+           улыбалась и кивала, как будто отвечала им всем.
+GF      = 1  PREP
+SF      = 1  AS
+VAL     =  AS ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  PROF
+          2  P-DEV
+RUS     =  в_качестве+Р 1
+           как 2
+           вместо
+============
+TITLE        = by_way_of_exception
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by way of exception
+GF      = 1  ADV
+RUS     =  в_исключительных_случаях 1
+============
+TITLE        = by_written_order
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  by written order
+GF      = 1  ADV
+RUS     =  в_безналичной_форме 1
+============
+TITLE        = called
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  called
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  по_имени+И 1
+============
+TITLE        = chez
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  chez
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  у+Р 1
+           в+П 1
+============
+TITLE        = circa
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  circa
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  примерно 1
+           около+Р 1
+============
+TITLE        = clearly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+EXM     =  it was clearly one of the drinking - places of the animals -
+           очевидно , звери приходили сюда на водопой
+GF      = 1  PART
+RUS     =  очевидно 1
+============
+TITLE        = close_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  close to
+EXM     =  The house is close to the station. -
+           Дом находится близко от вокзала.
+GF      = 1  PREP
+SF      = 1  LOK
+             TRG-PNT
+VAL     =  LOC_nea ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+          2  THINGN
+GF2     = 1  >> NP
+SYN     =  very close to
+RUS     =  вплотную_к+Д 1
+           впритык_к+Д 1
+           близко к
+COMM    =  То же правило, что и для взаимных глаголов.
+============
+TITLE        = con
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  con
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  с+Т 1
+============
+TITLE        = concerning
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  concerning
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  о+П 1
+           в плане
+           относительно
+           касательно
+============
+TITLE        = considering
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  considering
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  принимая_во_внимание+В 1
+           учитывая
+============
+TITLE        = contacting_with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  contacting with
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_контакте_с+Т 1
+============
+TITLE        = contra
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  contra
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  против+Р 1
+============
+TITLE        = contrary_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  contrary to
+EXM     =  The student should not assume facts contrary to those stated
+           in the problem for the purpose of giving the examiner a piece of
+           information for which he did not ask. -
+           Студенту не следует принимать факты, идущие вразрез с теми, которые
+           указаны в задаче, чтобы предоставить экзаменатору информацию,
+           о которой он не просил.
+           He acted contrary to my wishes. -
+           Он поступил вопреки моим желаниям.
+           Сontrary to my expectations all went well. -
+           Вопреки моим ожиданиям всё прошло хорошо.
+GF      = 1  PREP
+SF      = 1  NEG
+             IN-ACCORD
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  << NP
+          2  < VERB
+          3  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ABSTR
+RUS     =  вразрез_с+Т 1
+           против+Р 1
+           вопреки+Д 1
+============
+TITLE        = coram
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  coram
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_присутствии+Р 1
+           перед+Т 1
+============
+TITLE        = cum
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  cum
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  с+Т 1
+============
+TITLE        = dehors
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  dehors
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вне+Р 1
+============
+TITLE        = depending_on
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  depending on
+EXM     =  It varies a great deal depending on the district council. -
+           Это сильно различается в зависимости от совета округа.
+GF      = 1  PREP
+SF      = 1  COND
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> inter + sent
+RUS     =  в_зависимости_от+Р 1
+           в_зависимости_от_того 1
+           исходя_из+Р 1
+============
+TITLE        = despite
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  despite
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вопреки+Д 1
+           несмотря_на+В 1
+============
+TITLE        = down
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  down
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  с+Р 1
+           вниз_по+Д 1
+============
+TITLE        = down_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  down to
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  до+Р 1
+============
+TITLE        = due_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  due to
+EXM     =  Due to fog the train arrived late. -
+           Поезд прибыл с опозданием из-за тумана.
+           OPER
+GF      = 1  PREP
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  VERB
+          2  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  благодаря+Д 1
+============
+TITLE        = due_to_the_advice_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  due to the advice of
+GF      = 1  PREP
+RUS     =  по_совету+Р 1
+============
+TITLE        = durante
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  durante
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_продолжение+Р 1
+============
+TITLE        = during
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  during
+EXM     =  We hope to enlighten them in regard to the discoveries
+           made during our research. -
+           Мы надеемся проинформировать их относительно открытий,
+           сделанных нами в ходе исследовательской работы.
+GF      = 1  PREP
+SF      = 1  SIMULT
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  NP
+          2  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  AKTIO
+RUS     =  в_ходе+Р 1
+           на протяжении
+           во время
+           в течение
+           по ходу
+============
+TITLE        = eighthly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  eighthly
+GF      = 1  PARENTH
+RUS     =  в-восьмых 1
+============
+TITLE        = en
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  en
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в+П 1
+           по+Д 1
+============
+TITLE        = ere
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  ere
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  до+Р 1
+           перед+Т 1
+============
+TITLE        = especially
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  especially
+GF      = 1  PART
+RUS     =  именно 1
+============
+TITLE        = et_cetera
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  et cetera
+           etc.
+           and so on
+POS     =  end
+RUS     =  и_так_далее 1
+============
+TITLE        = even
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  even
+GF      = 1  PART
+SF      = 1  MODL
+VAL     =  MODL ( C , A1 )
+GF1     = 1  X! : VERB
+          2  X! : NP
+          3  X! : PP
+RUS     =  даже 1
+           аж 1
+============
+TITLE        = ever_since
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  ever since
+EXM     =  I have lived at Sofino and been farming for a long time
+           ever since I left the University. -
+           Я живу в Софьине и занимаюсь хозяйством уже давно, с тех
+           пор, как кончил в университете.
+           Ever since the mysterious visit we always returned to it
+           with some misgivings. -
+           После загадочного посещения мы стали с опаской возвращаться
+           к себе в лагерь.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> sent
+RUS     =  с_тех_пор_как 1
+           с+Р 1
+           после+Р 1
+           с того времени, как
+COMM    =  Следует отметить как-то элемент значения ever, а именно
+           "с тех пор и до сих пор" или "с того времени всегда"
+============
+TITLE        = ever_since
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (|ever) since (|then)
+POS     =  end
+EXM     =  It has been tweaking at my conscience ever since. -
+           С тех пор я испытываю угрызения совести.
+GF      = 1  ADV
+SF      = 1  TIME
+VAL     =  TIME ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  с_тех_пор 1
+           с того времени
+COMM    =  Следует отметить как-то элемент значения ever, а именно
+           "с тех пор и до сих пор" или "с того времени всегда";
+           ставится в конце предложения.
+============
+TITLE        = ex
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  ex
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  с+Р 1
+           без+Р
+           от+Р
+           франко
+============
+TITLE        = exactly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  exactly
+GF      = 1  PART
+RUS     =  как_раз 1
+============
+TITLE        = exceeding_the_limits_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  exceeding the limits of
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вне_рамок+Р 1
+============
+TITLE        = except
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  except
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  excepting
+           barring
+RUS     =  кроме+Р 1
+           за вычетом
+============
+TITLE        = except_for
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  except for
+EXM     =  Your composition is good except for a few spelling
+           mistakes. -
+           Сочинение у вас хорошее, если не считать нескольких
+           орфографических ошибок.
+           Except for your presence I should be bored. -
+           Если бы не ваше присутствие, мне было бы скучно.
+           Except for you I would be dead. -
+           Если бы не вы, я бы погиб.
+GF      = 1  PREP
+GF1     = 1  sent
+GF2     = 1  >> NP
+RUS     =  кроме+Р 1
+           за_исключением+Р 1
+           не_считая+Р 1
+           если бы не
+============
+TITLE        = executing
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  executing
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  во_исполнение+Р 1
+============
+TITLE        = failing
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  failing
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  за_неимением+Р 1
+           ввиду отсутствия
+           в случае отсутствия
+============
+TITLE        = fifthly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  fifthly
+GF      = 1  PARENTH
+RUS     =  в-пятых 1
+============
+TITLE        = first_of_all
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  first of all(|,)
+EXM     =  First of all, be sure of one thing. -
+           Прежде всего будь уверен в одном.
+           First of all, children were likely to protest about
+           their parents' departure. -
+           Прежде всего дети, возможно, протестовали против отъезда родителей.
+           Imagine first of all that our cities become as dim as these Eastern
+           towns. -
+           Представь себе прежде всего, что все наши городы стали такими же
+           тусклыми, как эти восточные города.
+           First of all you have to listen until you hear the silence <...> -
+           Прежде всего вам следует прислушаться, пока вы не услышите тишину.
+           He walked first of all towards the place where he and Christian had
+           tied their horses <...> -
+           Он пошел прежде всего к тому месту, где они с Кристианом привязали
+           лошадей.
+GF      = 1  PART
+SF      = 1  MODL
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  прежде_всего 1
+           во-первых
+COMM    =  Из ASP переведено в OPER, из ВВОДН в ЧАСТ.
+           Не уверена, что ENG подходит для всех случаев.
+           (1) и (1а) несколько отличается от других примеров - это не модальность, а
+           расставление приоритетов в тексте, типа "во-первых", или "начнем с того, что". В этом случае
+           эта ЧАСТ ведет себя как ВВОДН и отделяется запятой.
+============
+TITLE        = following
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  following
+EXM     =  Following the lecture the meeting was open to discussion. -
+           После лекции состоялось обсуждение.
+GF      = 1  PREP
+SF      = 1  AFTER
+VAL     =  AFTER ( A1 , A2 )
+GF1     = 1  VERB
+SF1     = 1  SITUAT
+GF2     = 1  >> NP
+RUS     =  вслед_за+Т 1
+           после+Р 1
+           в_продолжение+Р 1
+           как продолжение
+============
+TITLE        = for
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for
+EXM     =  For many years fast-food restaurants have served meals
+           on disposable plates. -
+           В течение многих лет в кафе самообслуживания блюда
+           подавались на тарелках одноразового использования.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  SITUAT
+GF2     = 1  >> NP
+SF2     = 1  AKTIO
+          2  PREDIC
+             PERIO
+RUS     =  в_течение+Р 1
+           вот_уже_как 1
+============
+TITLE        = for
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for
+GF      = 1  PREP
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  за_то_что 1
+           для+Р 1
+           за+В 1
+           по+П 1
+           ради+Р 1
+           во_имя+Р 1
+           к+Д 1
+============
+TITLE        = for
+SENSE       = 3
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for
+EXM     =  He felt no fear, for he was a brave man. —
+           Он не испытывал страха, так как был храбрым человеком.
+GF      = 1  SUBORD
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A1 , A2 )
+GF1     = 1  sent
+GF2     = 1  >> sent
+RUS     =  так_как 1
+           ведь 1
+============
+TITLE        = for_a_long_while
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for a long (while|time)
+POS     =  end
+EXM     =  Burkin could not sleep for a long while. -
+           Буркин долго не мог заснуть.
+GF      = 1  ADV
+SF      = 1  TIME
+VAL     =  TIME ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  долгое_время 1
+           долго
+============
+TITLE        = for_all
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for all
+GF      = 1  ADV
+RUS     =  при_всем_том 1
+============
+TITLE        = for_example
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (|, )for example(|, )
+EXM     =  Take me for example. -
+           Возьмите меня, например.
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+          2  VERB
+          3  NP
+SYN     =  for instance
+RUS     =  например 1
+           к примеру
+COMM    =  Следует помнить про as for example.
+============
+TITLE        = for_now
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for now(|,)
+EXM     =  For now, he had other things to think about. -
+           Пока что ему было над чем подумать над другим.
+           Take my script and pencil for now. -
+           Возьмите мою рукопись и карандаш пока что.
+GF      = 1  ADV
+SF      = 1  TIME
+VAL     =  TIME ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  пока_что 1
+============
+TITLE        = for_once
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  for once
+EXM     =  For once his wit failed him. -
+           На этот раз он не нашёл остроумного ответа.
+GF      = 1  ADV
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  на_этот_раз 1
+           на сей раз
+           в виде исключения
+============
+TITLE        = for_some_reason
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for some reason
+EXM     =  for some reason in every one of them he had always to have
+           gooseberries. -
+           Почему-то в каждой из них непременно был крыжовник.
+GF      = 1  ADV
+SF      = 1  CAUSE
+VAL     =  CAUSE ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  по_какой-то_причине 1
+           почему-то
+============
+TITLE        = for_the_avoidance_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for the avoidance of
+EXM     =  The same goes for the avoidance of earth loops <...> -
+           То же происходит и во избежание вспучивания земли.
+GF      = 1  PREP
+SF      = 1  AIM
+VAL     =  NO_AIM ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ABSTR
+          2  NEG
+          3  GOOD
+RUS     =  во_избежание+Р 1
+============
+TITLE        = for_the_first_time
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for the first time
+EXM     =  I remarked for the first time the humble fluting. -
+           Я впервые заметил жалкие жолобки.
+GF      = 1  ADV:MANNER
+SF      = 1  TIME
+VAL     =  TIME ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_первый_раз 1
+           впервые
+COMM    =  Может вставляться между вспомогательным и главным глаголом.
+============
+TITLE        = for_the_purpose_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for the purpose of
+EXM     =  There are two methods by which text may be input to a computer for
+           the purpose of recognition. -
+           Есть два метода заложить текст в компьютер с целью распознания.
+GF      = 1  PREP
+SF      = 1  AIM
+VAL     =  AIM ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  в_целях+Р 1
+           с_целью+Р 1
+============
+TITLE        = for_the_relief_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for the relief of
+EXM     =  We contribute food and clothing for the relief of the
+           refugees. -
+           Мы жертвуем продукты питания и одежду в помощь беженцам.
+GF      = 1  PREP
+SF      = 1  AIM
+             GOOD
+VAL     =  PURP ( A2 , A1 )
+           ADR ( A2 , C )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_помощь+Д 1
+============
+TITLE        = for_the_sake_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for the sake of
+GF      = 1  PREP
+VAL     =  ACT ( A1 , A2 )
+GF2     = 1  >> NP
+RUS     =  ради+Р 1
+============
+TITLE        = for_what
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  for what
+GF      = 1  SUBORD
+GF1     = 1  sent
+GF2     = 1  >> sent
+RUS     =  за_то_что 1
+============
+TITLE        = for_what_purpose
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+EXM     =  For what purpose was this building erected? -
+           Зачем было возведено это здание?
+GF      = 1  SUBORD
+SF      = 1  AIM
+VAL     =  AIM ( A1 , A2 )
+GF1     = 1  < sent
+GF2     = 1  > sent
+RUS     =  зачем 1
+============
+TITLE        = fortunately
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  fortunately
+GF      = 1  PARENTH
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  X! : VERB
+          2  X! : NP
+          3  X! : sent
+RUS     =  к_счастью 1
+============
+TITLE        = fourthly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  fourthly
+GF      = 1  PARENTH
+RUS     =  в-третьих 1
+============
+TITLE        = from
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  from
+GF      = 1  PREP
+GF2     = 1  >> NP
+          2  >> gerund
+SYN     =  frae
+RUS     =  от+Р 1
+           из+Р 1
+           из_числа 1
+           начиная_с+Р 1
+============
+TITLE        = from_abroad
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  from abroad
+EXM     =  All it does is to raise the price of things we buy from abroad. -
+           Все это делается для того, чтобы повысить цену на вещи, которые мы
+           покупаем из-за границы.
+GF      = 1  ADV:MANNER
+SF      = 1  SRC-PNT
+VAL     =  SRC-PNT ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  из-за_границы 1
+           из-за_рубежа 1
+============
+TITLE        = from_the_point_of_view_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  from the point of view of
+EXM     =  `It is a very remarkable house,' he says, `from the point
+           of view of English, not only of Wiltshire architecture. -
+           "Это очень выдающийся дом, - сказал он, - с точки зрения английской,
+           а не только Уилтширской архитектуры".
+           From the point of view of an engineer wanting to make a machine that
+           can `see', these two stages are adequate. -
+           С точки зрения инженера, который хочет сделать машину, которая может
+           "видеть", эти две ступени соответствуют требованиям.
+GF      = 1  PREP
+SF      = 1  SRC-PNT
+             ABSTR
+             MODL
+VAL     =  SRC-PNT ( A2 , A1 )
+           BELNG ( C , A2 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  > NP
+RUS     =  с_точки_зрения+Р 1
+           по_мнению 1
+============
+TITLE        = from_under
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  from under
+EXM     =  Her curls peeped out from under her hat. -
+           Её локоны выбивались из-под шляпы.
+GF      = 1  PREP
+VAL     =  ACT ( A1 , A2 )
+GF2     = 1  >> NP
+RUS     =  из-под+Р 1
+============
+TITLE        = generally
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  generally
+           generally speaking
+GF      = 1  PARENTH
+GF1     = 1  X! : sent
+RUS     =  вообще 1
+============
+TITLE        = gin
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  gin
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  к+Д 1
+============
+TITLE        = given
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  given
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  при_наличии+Р 1
+           с_учетом+Р 1
+           принимая_во_внимание+В 1
+============
+TITLE        = good_bye
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 2/4/4 10:50:57
+EXM     =  Good bye!
+CONTENT =  good bye
+RUS     =  до_свидания 1
+============
+TITLE        = having_executed
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  having executed
+GF      = 1  PREP
+RUS     =  по_исполнении+Р 1
+============
+TITLE        = having_seen
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  having seen
+GF      = 1  PREP
+RUS     =  при_виде+Р 1
+============
+TITLE        = having_showed
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  having showed
+GF      = 1  PREP
+RUS     =  по_предъявлении+Р 1
+============
+TITLE        = headed_by
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  headed by
+EXM     =  The existing management, headed by chairman <...> Mike
+           Smith, and all 1,950 staff, will remain intact. -
+           Нынешнее управление во главе с председателем Майком Смитом и
+           все 1950 сотрудников останутся на своих местах.
+GF      = 1  PREP
+SF      = 1  TOGETHER
+VAL     =  INCLUDING ( A2 , A1 )
+GF1     = 1  NP
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+RUS     =  во_главе_с+Т 1
+           под_руководством
+============
+TITLE        = however
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  however
+EXM     =  however, this is not common —
+           тем не менее, это случается не так часто
+           he didn't go to the theatre, however —
+           и всё же он не пошёл в театр
+           I cannot, however, approve of it —
+           я, однако, не могу этого одобрить
+GF      = 1  PARENTH
+          2  SUBORD
+GF1     = 1  X! : sent
+GF2     = 1  X! : sent
+RUS     =  тем_не_менее 1
+           однако 1
+============
+TITLE        = i.e.
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (, )i.e.
+EXM     =  A useful method is to have frames, i.e. sentences with
+           blanks to be filled in. -
+           Полезный метод - иметь рамки, т.е. предложения с
+           пустыми местами, которые надо заполнить.
+GF      = 1  SOJUZ
+SF      = 1  THESAME
+VAL     =  THESAME ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+          3  sent
+SYN     =  that is to say
+RUS     =  т.е. 1
+           то_есть 1
+============
+TITLE        = if
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  if
+EXM     =  If I were the swan, I'd be gone. -
+           Если бы я был лебедем, я бы улетел.
+           If you come, you will see him. -
+           Если вы придёте, вы увидите его.
+           If I am wrong, you are at least not absolutely right. —
+           Пусть я ошибаюсь, но и вы не совсем правы.
+GF      = 1  SUBORD
+RESTR   =  not_fut !
+           not_fut_past !
+SF      = 1  COND
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  если 1
+           если_бы 1
+           пусть...но 1
+============
+TITLE        = if...then
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  if ... then
+EXM     =  If I don't work, then we have nothing. -
+           Если я не буду работать, то у нас не будет ничего.
+GF      = 1  SUBORD_DISRUPT
+RESTR   =  not_fut !
+           not_fut_past !
+SF      = 1  COND
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  >> sent
+SF1     = 1  PREDIC
+GF2     = 1  ^ sent
+RUS     =  если...то 1
+           если_бы...то 1
+============
+TITLE        = if_not...then
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  if not ... then
+GF      = 1  CONJ:DISRUPT
+RUS     =  если_не...то 1
+           если_бы_не...то 1
+============
+TITLE        = in
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in
+GF      = 1  PREP
+SF      = 1  LOK
+VAL     =  LOK ( A2 , A1 )
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  в+П 1
+COMM    =  Еще много чего.
+============
+TITLE        = in_a_state_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in a state of
+EXM     =  The French army was then in a state of paralysis. -
+           Французская армия была тогда в состоянии полной
+           беспомощности.
+GF      = 1  PREP
+SF      = 1  PACIEN
+VAL     =  PACIEN ( A1 , A2 )
+GF1     = 1  VERB
+SF1     = 1  THINGN
+          2  ABSTR
+GF2     = 1  >> NP
+SF2     = 1  AKTIO
+          2  SITUAT
+          3  EMOT
+RUS     =  в_состоянии+Р 1
+============
+TITLE        = in_a_word
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in a word
+GF      = 1  PARENTH
+RUS     =  одним_словом 1
+           короче говоря
+SYN     =  in short
+============
+TITLE        = in_addition_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in addition to
+EXM     =  In addition to sliding along the floor Steg
+           can cling to the walls and ceiling Spiderman-style. -
+           В придачу к скольжению по полу Стег умеет цепляться за стены и
+           потолок, как человек-паук.
+GF      = 1  PREP
+SF      = 1  TOGETHER
+VAL     =  TOGETHER ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  вдобавок_к+Д 1
+           в_придачу_к+Д 1
+           дополнительно_к+Д 1
+           в_дополнение_к+Д 1
+============
+TITLE        = in_all_probability
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (|, )in all probability(|, )
+EXM     =  The tamarin will be preserved, in all probability, only if
+           zoos throughout the world cooperate in breeding programmes. -
+           Игрунка будут разводить, по всей вероятности, только в том
+           случае, если зоопарки по всему миру объединятся в
+           программы по размножению животных.
+GF      = 1  PARENTH
+SF      = 1  MODL
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+          2  VERB
+          3  NP
+SF1     = 1  PREDIC
+RUS     =  по_всей_вероятности 1
+============
+TITLE        = in_answer_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in answer to
+GF      = 1  PREP
+GF1     = 1  VERB
+GF2     = 1  >> NP
+RUS     =  в_ответ_на+В 1
+============
+TITLE        = in_any_case
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  in any case
+EXM     =  It could be argued that such a strategy was in any case unnecessary. -
+           Можно было спорить, что такая стратегия была бы в любом случае
+           ненужной.
+GF      = 1  ADV:DEGREE
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_любом_случае 1
+           во_всех_случаях 1
+============
+TITLE        = in_any_other_case
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  end
+CONTENT =  in any other case
+EXM     =  Waiting <...> for the lift he told himself that he was no more
+           involved than he would be in any other case. -
+           Ожидая лифта, он сказал себе, что он не более увлечен, чем мог быть в
+           любом другом случае.
+           2  OPER
+GF      = 1  ADV
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_любом_другом_случае 1
+           во_всех_остальных_случаях 1
+           иначе
+           в других случаях
+COMM    =  OPER, так как надо знать, по сравнению с чем остальные.
+============
+TITLE        = in_case_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in case of
+EXM     =  In case of intervention our people will not sit back
+           as silent spectators. -
+           В случае интервенции наш народ не останется
+           равнодушным зрителем.
+GF      = 1  PREP
+SF      = 1  COND
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_случае+Р 1
+           в случаях
+           на случай
+============
+TITLE        = in_case_of_necessity
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in case of necessity
+GF      = 1  ADV
+RUS     =  в_необходимых_случаях 1
+============
+TITLE        = in_cash_and_by_written_order
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in cash and by written order
+GF      = 1  ADV
+RUS     =  в_наличной_и_безналичной_форме 1
+============
+TITLE        = in_charge_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in charge of
+EXM     =  He gave the robber in charge of the police. -
+           Он отдал грабителя под надзор полиции.
+GF      = 1  PREP
+SF      = 1  BELNG
+VAL     =  BELNG ( A1 , A2 )
+GF1     = 1  NP
+          2  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  THINGN
+             ANIM
+          2  ORG
+             AUTHORIT
+          3  AKTIO
+             STAT
+RUS     =  в_ведение+Р 1
+           под надзор
+COMM    =  Есть еще конверсивное значение (за мной)!
+============
+TITLE        = in_co-operation_with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in co-operation with
+EXM     =  The Japanese version of the product was developed by
+           the AT&T Co subsidiary in co-operation with Microsoft. -
+           Японский продукт был разработан дочерней компании AT&T
+           в сотрудничестве с компанией Майкрософт.
+GF      = 1  PREP
+SF      = 1  TOGETHER
+VAL     =  TOGETHER ( A2 , A1 )
+GF1     = 1  NP
+          2  VERB
+GF2     = 1  >> NP
+RUS     =  во_взаимодействии_с+Т 1
+           в сотрудничестве с
+============
+TITLE        = in_comparison_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in comparison to
+EXM     =  In comparison to groups who have come since then, they look
+           quite straight. -
+           По сравнению с группами, которые пришли с тех пор, они выглядят
+           вполне обычно.
+GF      = 1  PREP
+SF      = 1  COMP
+VAL     =  COMP ( A1 , A2 )
+GF1     = 1  sent
+          2  VERB
+          3  NP
+SF1     = 1  PREDIC
+          2  THINGN
+GF2     = 1  >> NP
+SF2     = 1  SF ( 1 )
+RUS     =  по_сравнению_с+Т 1
+           относительно+Р 1
+           сравнительно с
+COMM    =  1. Здесь опять нужно аккуратно разбираться, так как сравниваются две ИГ, а
+           синтаксический хозяин - ГГ.
+           2 Из-за примеров 2 и 3 внесено SF2 = 2 TIME, но на самом деле там
+           развертывается: :неплохих результатов по сравнению с прошлым годом = неплохих
+           результатов по сравнению с результатами прошлого года.
+============
+TITLE        = in_comparison_with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in comparison with
+EXM     =  Britain's withdrawal from India or France's loss of Algeria <...>
+           were easy in comparison with the profound political
+           and psychological implications that Ukrainian independence has for
+           Russians. -
+           Уход Британии из Индии или потеря Францией Алжира были легкими по
+           сравнению с глубокими политическими и психологическими смыслами,
+           которые имеет для России независимость Украины.
+           OPER
+GF      = 1  PREP
+SF      = 1  COMP
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+SF2     = 1  THINGN
+          2  ANIM
+          3  ABSTR
+RUS     =  в_сравнении_с+Т 1
+           по_сравнению_с+Т 1
+           сравнительно с
+COMM    =  Отнесено также к категории OPER, так как не очень тривиально устанавливается,
+           по какому параметру производится сравнение. Кроме того, надо предусмотреть, что в СемПе
+           надо отражать, что параметр этот носит относительный характер - возможно даже, что эта
+           характеристика применима к А1 только по сравнению с А2 - ср., например, (3) - возможно,
+           что она вовсе не выглядела бы молодо, если бы не внешность ее сестры.
+============
+TITLE        = in_conclusion
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in conclusion
+EXM     =  In conclusion, the main findings from the project can be summarised
+           as: -
+           В заключение основные итоги проекта могут быть суммированы как:
+           It will be useful in conclusion to look at some incidents which
+           illuminate the way in which symbolism operates in the religion. -
+           Было бы полезно в заключение посмотреть на некоторые побочные
+           обстоятельства, которые проливают свет на то, как символизм оказывает
+           влияние на религию.
+           OPER
+GF      = 1  ADV
+SF      = 1  OPERAT
+VAL     =  OPERAT ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_заключение 1
+           в_итоге 1
+============
+TITLE        = in_concord_with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in concord with
+GF      = 1  PREP
+RUS     =  по_согласованию_с+Т 1
+============
+TITLE        = in_confirmation_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in confirmation of
+EXM     =  Please sign below in confirmation of receipt of the packaging. -
+           Пожалуйста, распишитесь внизу в подтверждение получения упаковки.
+           He indicated a diagnostic panel, where several red lights had begun
+           to blink in confirmation of his words. -
+           Он указал на диагностическую панель, где несколько красных огоньков
+           начали мигать в подтверждение его слов.
+GF      = 1  PREP
+SF      = 1  INF
+VAL     =  ISCONNECTED ( A1 , A2 )
+           OBJ ( A2 , C )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  MEDINF
+RUS     =  в_подтверждение+Р 1
+============
+TITLE        = in_connection_with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in connection with
+EXM     =  By the same token, I shall use the word `style' only
+           in connection with literary uses of language. -
+           Кроме того, я буду использовать слово "стиль" только
+           в связи с использованием языка в литературе.
+GF      = 1  PREP
+SF      = 1  ISCONNECTED
+VAL     =  ISCONNECTED ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_связи_с+Т 1
+============
+TITLE        = in_continuation_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in continuation of
+EXM     =  This consideration has resulted in continuation of the same
+           procedures with some minor modifications for the second phase of
+           pilot schemes. -
+           Это соображение последовало в продолжение тех же процедур с
+           несколькими незначительными изменениями для второй фазы пробных схем.
+GF      = 1  PREP
+SF      = 1  RESTR
+             AFTER
+             TIME
+VAL     =  RESTR ( A2 , A1 )
+           AFTER ( A2 , A1 )
+           OBJ ( C , A3 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_продолжение+Р 1
+           в_дополнение_к+Д 1
+============
+TITLE        = in_contrast_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in contrast to
+EXM     =  Most of them, she observed, were Asian or Caribbean, in contrast to
+           the machine shop where the majority had been white. -
+           Большинство из них, как она увидела, были азиаты или карибы, в
+           отличие от магазина продуктов техники, где большинство было белое.
+GF      = 1  PREP
+SF      = 1  NEG
+          2  EQL
+VAL     =  EQL ( A2 , A1 )
+GF1     = 1  NP
+          2  sent
+SF1     = 1  THINGN
+GF2     = 1  >> NP
+SF2     = 1  SF ( 1 )
+SYN     =  unlike
+RUS     =  в_отличие_от+Р 1
+COMM    =  Отнесено мною к CONJам. Второй конъюнкт закрывается запятой.
+============
+TITLE        = in_defence_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in defence of
+EXM     =  We fight in defence of peace. -
+           Мы боремся в защиту мира.
+GF      = 1  PREP
+SF      = 1  GOOD
+VAL     =  ADR ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+          2  ABSTR
+          3  LEGISL
+RUS     =  в_защиту+Р 1
+           в_пользу+Р 1
+============
+TITLE        = in_due_time
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in due time
+EXM     =  In addition, one citizen cannot benefit from the successful formal
+           objection of another citizen; he must object in due time himself. -
+           Плюс ко всему, один гражданин не может извлечь выгоду из успешного
+           формального протеста другого гражданина; он должен сам подать протест
+           в установленные сроки.
+           2  OPER
+GF      = 1  ADV:MANNER
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+SYN     =  in time
+RUS     =  в_установленные_сроки 1
+           вовремя
+           в срок
+COMM    =  Прибавлена по OPER (ранее содержавшаяся в SF), так как может
+           потребоваться найти по тексту (или еще где), что значит "установленные"
+============
+TITLE        = in_fact
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  (|, )in fact(|, )
+EXM     =  In fact, his second wife outlived him by a quarter of a
+           century. -
+           На самом деле, его вторая жена пережила его на четверть
+           века.
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+          2  VERB
+SF1     = 1  PREDIC
+RUS     =  на_самом_деле 1
+           собственно
+COMM    =  Следует подумать насчет разделения статей "(|, )в самом
+           деле(|, )" и "(|, )на самом деле(|, )"
+============
+TITLE        = in_favour_of
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  in favour of
+EXM     =  90 per cent of the pollees were in favour of it -
+           90% опрошенных высказались за это
+GF      = 1  PREP
+SF      = 1  AIM
+             GOOD
+VAL     =  ADR ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+RUS     =  в_пользу+Р 1
+           для+Р 1
+           ради+Р 1
+============
+TITLE        = in_form_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in form of
+EXM     =  Applications in form of a full CV with names and addresses of two
+           referees should be sent to the Personnel Department at the above
+           address. - Заявления в виде полного CV с именами и адресами двух
+           следует отправлять в отдел кадров по адресу, указанному выше.
+GF      = 1  PREP
+SF      = 1  FORM
+VAL     =  FORM ( A2 , A1 )
+GF1     = 1  NP
+SF1     = 1  THINGN
+             ABSTR
+RUS     =  в_форме+Р 1
+           в_виде+Р 1
+           под_видом+Р 1
+============
+TITLE        = in_front_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in front of
+EXM     =  His note-book was open in front of him and his helmet was on
+           the table. -
+           Его записная книжка была раскрыта перед ним, его шлем лежал на столе.
+GF      = 1  PREP
+SF      = 1  LOK
+VAL     =  LOCK_forward ( A2 , A1 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+SF2     = 1  THINGN
+RUS     =  впереди_от+Р 1
+           перед+Т 1
+============
+TITLE        = in_full_measure
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  end
+CONTENT =  in full measure
+EXM     =  His accounts of the two symphonies and Falstaff have all these
+           qualities in full measure, and yet in the symphonies every movement's
+           structure is well conveyed. -
+           Его описание обеих симфоний и Фальстафа обладают всеми этими
+           качествами в полной мере, и структура каждой части в симфониях хорошо
+           изложена.
+GF      = 1  ADV
+SF      = 1  Magn
+             MODL
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+SYN     =  completely
+RUS     =  в_полной_мере 1
+           полностью 1
+============
+TITLE        = in_general_outline
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  end
+CONTENT =  in general outline
+EXM     =  Constructional forms already described have been intricate in detail
+           but simple in general outline <...>. -
+           Уже описанные структурные формы были сложными в деталях, но
+           простыми в общих чертах.
+GF      = 1  ADV
+SF      = 1  MODL
+VAL     =  MODL ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+SYN     =  roughly
+RUS     =  в_общих_чертах 1
+           в целом
+============
+TITLE        = in_honour_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in honour of
+EXM     =  I have heard it said that they were built by Iron Age men in honour
+           of Megan, a Celtic goddess. -
+           Я слышал, что они были построены людьми Железного века в честь Меган,
+           кельтской богини.
+GF      = 1  PREP
+SF      = 1  AIM
+             GOOD
+VAL     =  ADR ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+RUS     =  в_честь+Р 1
+============
+TITLE        = in_legal_form
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in legal form
+GF      = 1  ADV
+RUS     =  в_судебном_порядке 1
+============
+TITLE        = in_no_way
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  > V S
+CONTENT =  on no account
+EXM     =  in no way could he discover her address -
+           он никак не мог узнать ее адрес
+GF      = 1  ADV:Neg
+SF      = 1  ESTIM
+VAL     =  ESTIM ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  NEG
+             PREDIC
+RUS     =  никак 1
+COMM    =  Помнить про should.
+============
+TITLE        = in_number
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in number
+EXM     =  They were eighteen in number. -
+           Их было числом восемнадцать.
+GF      = 1  ADV
+VAL     =  QUANTIT ( A1 , A2 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+SF2     = 1  QUANTIT
+RUS     =  числом 1
+============
+TITLE        = in_order_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in order to
+EXM     =  But even Helen Huntingdon doesn't seek independence in order
+           to freely give it up again. -
+           Но даже Хелен Хантингтон не ищет независимости с тем, чтобы опять
+           свободно отказаться от нее.
+GF      = 1  SUBORD
+SF      = 1  AIM
+VAL     =  AIM ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  > inf
+SYN     =  so as to
+RUS     =  чтобы 1
+           для_того_чтобы 1
+           с_тем_чтобы 1
+           с целью
+============
+TITLE        = in_other_cases
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  in other cases
+EXM     =  In other cases people don't even have homes to lose. -
+           В иных случаях у людей даже нет дома, чтобы терять. [...]
+           OPER
+GF      = 1  ADV
+SF      = 1  MODL
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  >> sent
+SF1     = 1  PREDIC
+RUS     =  в_иных_случаях 2
+           в других случаях
+COMM    =  Внесено также в OPER, так как требуется установить, по сравнению с чем "иной".
+============
+TITLE        = in_other_cases
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in other cases(|,)
+POS     =  begin
+EXM     =  Sometimes such attitudes are secondary to a patient's current mood
+           state; in other cases they are long-standing and firmly established. -
+           Иногда такие положения вторичны по отношению к текущему состоянию
+           пациента; в остальных случаях они долго длящиеся и твердо
+           обоснованные.
+           OPER
+GF      = 1  ADV
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_остальных_случаях 1
+COMM    =  Переведено из категории RELAT в категорию ASP с сохранением пометы OPER,
+           так как эта семантическая связь может бить довольно далеко, и главное, требовать
+           преобразования СемПа, так как надо искать, "остальное" пр сравнению с чем. (Есть
+           несколько оборотов такого рода - ср. "в иных случаях (2)".)
+============
+TITLE        = in_other_respects
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in other respects
+EXM     =  In other respects, however, this is a cogent and sensible account. -
+           В остальном, однако, это убедительный и разумный доклад.
+           While adequate in other respects, diesel fuel sold in Britain is high
+           in sulphur apparently. -
+           Будучи удовлетворительным в других случаях, дизельное топливо, которе
+           продают в Великобритании, явно имеет большой процент серы.
+           OPER
+GF      = 1  ADV
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_остальном 1
+           в других случаях
+============
+TITLE        = in_other_words
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in other words
+POS     =  begin
+EXM     =  In other words, he should have treated the media business as being
+           just like any other. -
+           Другими словами, ему следовало бы относиться к медиа-бизнесу как к
+           чему угодно другому.
+GF      = 1  PARENTH
+SF      = 1  THESAME
+VAL     =  THESAME ( A1 , A2 )
+GF1     = 1  > sent
+SF1     = 1  SITUAT
+RUS     =  другими_словами 1
+COMM    =  с А2 соотносились строки GF2 и SF2, но я их убрала, так как а2 нет в SYNR.
+           Однако тут нужно специальное правило (собственно, как и должно быть при ОПЕРе), чтобы
+           не потерять эту семантическую связь.
+============
+TITLE        = in_particular
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in particular
+EXM     =  In particular women discovered they were treated with rare attention
+           and understanding. -
+           В частности, женщины обADVужили, что к ним относятся с небольшим
+           вниманием и пониманием.
+           This month's choice in particular rates very highly among my all-time
+           favourites. -
+           Выбор этого месяца, в частности, очень высоко котируется среди того,
+           что я считаю лучшим на все времена.
+           2  OPER
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( A2 , A1 )
+GF1     = 1  NP
+          2  VERB
+          3  sent
+GF2     = 1  NP
+          2  VERB
+          3  sent
+SF2     = 1  SF ( 1 )
+RUS     =  в_частности 1
+           например 1
+COMM    =  К RELAT прибавлено OPER, из PARENTH переведено в СОЧ_СОЮЗы.
+============
+TITLE        = in_person_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in person of
+GF      = 1  PREP
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+RUS     =  в_лице+Р 1
+COMM    =  Уточнить.
+============
+TITLE        = in_reality
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in reality
+POS     =  end
+           begin
+EXM     =  In reality these terms have been interpreted in a number of different
+           ways.  -
+           На самом деле, эти термины были проинтерпретированы большим
+           количеством разных способов.
+           She says she is nothing like that in reality. -
+           Она говорит, что, на самом деле, она совсем другая.
+GF      = 1  PARENTH
+SF      = 1  ESTIM
+VAL     =  ESTIM ( C , A1 )
+GF1     = 1  VERB
+RUS     =  в_действительности 1
+           на_самом_деле 1
+COMM    =  Из категории ASP переведено в категорию OPER, так как синтаксис не помогает
+           построению правильного СемПа для PREPожения с этим словом - нужно специальное
+           правило. Сходу понятно, что задействовано актуальное членение.
+============
+TITLE        = in_respect_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in respect of
+EXM     =  There are difficulties in respect of the wording. -
+           Имеются трудности в отношении формулировки.
+GF      = 1  PREP
+SF      = 1  FOR
+VAL     =  FOR ( A1 , A2 )
+GF1     = 1  NP
+          2  VERB
+SF1     = 1  THINGN
+          2  ATTR
+GF2     = 1  >> NP
+SF2     = 1  SF ( 1 )
+SYN     =  in respect to
+           with respect to
+RUS     =  по_отношению_к+Д 1
+           в_отношении+Р 1
+============
+TITLE        = in_response
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  in response(|,)
+EXM     =  `In response, the demonstrators began to chant `We won't leave'. -
+           В ответ демонстранты начали скандировать "Мы не уйдем".
+           She shouted at them twice as often and the dogs in response yelped
+           twice as loudly. -
+           Она кричала на них в два раза чаще, а собаки в ответ выли вдвое
+           громче.
+GF      = 1  ADV
+SF      = 1  CAUSE
+VAL     =  CAUSE ( C , A1 )
+           REFERENT ( A2 , C )
+GF1     = 1  VERB
+SF1     = 1  SITUAT
+RUS     =  в_ответ_на_это 1
+           в ответ
+============
+TITLE        = in_sign_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in sign of
+EXM     =  Germanys agree on spy swap in sign of improving relations. -
+           Германии соглашаются на обмен шпионами в знак улучшения отношений.
+GF      = 1  PREP
+SF      = 1  REPRES
+VAL     =  RESTR ( A1 , A2 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  NP
+SF2     = 1  PROF
+          2  P-DEV
+RUS     =  в_знак+Р 1
+           как свидетельство
+============
+TITLE        = in_spite_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in spite of
+EXM     =  He loved her in spite of her little frailties. -
+           Он любил её, несмотря на её маленькие слабости.
+GF      = 1  PREP
+SF      = 1  NEG
+             ISCONNECTED
+VAL     =  ISCONNECTED ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  SITUAT
+GF2     = 1  >> NP
+          2  >> inter + sent
+SF2     = 1  ABSTR
+RUS     =  несмотря_на+В 1
+           невзирая_на+В 1
+           несмотря на то
+============
+TITLE        = in_succession
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in succession
+EXM     =  all orders are executed in succession -
+           Все приказания выполнятся в порядке очередности
+GF      = 1  ADV:MANNER
+SF      = 1  Caus
+             LEGISL
+             METHOD
+VAL     =  METHOD ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_порядке_очередности 1
+           по_очереди 1
+           по порядку
+============
+TITLE        = in_support_for
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in suppport for
+GF      = 1  PREP
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_поддержку+Р 1
+============
+TITLE        = in_that_connection
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in that connection
+EXM     =  In that connection she became involved in the Headmaster's plans to
+           invite marriage guidance counsellors to present several sex education
+           films. -
+           В связи с этим она оказалась вовлечена в планы директора школы
+           пригласить членов совета руководства брака, чтобы они показали
+           несколько обучающих фильмов о сексе.
+           They referred in that connection to their arguments with regard to
+           the residence requirement. -
+           В связи с этим они обратились к своим аргументам относительно
+           требований по проживанию.
+GF      = 1  ADV
+SF      = 1  CAUSE
+VAL     =  CAUSE ( C , A1 )
+           REFERENT ( A2 , C )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+SYN     =  thereat
+RUS     =  в_связи_с_этим 1
+           из-за этого
+           вследствие этого
+============
+TITLE        = in_the_absence_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the absence of
+EXM     =  With payment by results, in the absence of an answer, GP pay is going
+           to be skewed. -
+           Платя по итогам, в отсутствие ответа, GP будут наказаны.
+GF      = 1  PREP
+SF      = 1  NEG
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+          2  THINGN
+RUS     =  в_отсутствие+Р 1
+           при_отсутствии+Р 1
+           за_неимением+Р 1
+============
+TITLE        = in_the_beginning_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the beginning of
+EXM     =  This writer was in fashion at the beginning of the
+           century. -
+           Этот писатель был в моде в начале века.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  TIME ( A2 , A1 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+SF2     = 1  AKTIO
+          2  PERIO
+RUS     =  в_начале+Р 1
+============
+TITLE        = in_the_case_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the case of
+EXM     =  It applies in exactly the same way in the case of a breach of
+           contract by the seller. -
+           Это применяется так же в случаях нарушения контракта со стороны
+           продавца.
+GF      = 1  PREP
+SF      = 1  COND
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_случаях+Р 1
+           как_следствие+Р 1
+============
+TITLE        = in_the_case_of_need
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the case of need
+GF      = 1  ADV
+RUS     =  при_необходимости 1
+============
+TITLE        = in_the_direction_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the direction of
+EXM     =  the Sergeant started up the jeep and we entered the cornfield at
+           speed, heading in the direction of the first three canisters. -
+           Сержант завел джип, и мы въехали на кукурузное поле на скорости
+           в направлении первых трех канистр.
+GF      = 1  PREP
+SF      = 1  LOK
+          2  IN-DIRECT
+VAL     =  IN-DIRECT ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+          3  gerund
+SF1     = 1  AKTIO
+SF2     = 1  THINGN
+          2  SPAC
+RUS     =  в_направлении+Р 1
+           в_сторону+Р 1
+           по_направлению_к+Д 1
+============
+TITLE        = in_the_distance
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the distance
+EXM     =  It was a strange clicking noise in the distance not unlike
+           castanets. -
+           Откуда-то издали до нас донеслось странное потрескивание,
+           напоминающее мелкую дробь кастаньет .
+           OPER
+GF      = 1  ADV:PLACE
+SF      = 1  LOK
+VAL     =  LOC_dist ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  вдали 1
+           издали 1
+============
+TITLE        = in_the_domain_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the domain of
+EXM     =  There are many comparable examples in the psychological sphere, as
+           well as in the domain of physical disorder.  -
+           Есть много примеров для сравнения в области психологии, равно как и
+           в сфере физических расстройств.
+GF      = 1  PREP
+SF      = 1  SPHERE
+VAL     =  SPHERE ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  AKTIO
+GF2     = 1  >> NP
+SF2     = 1  EMPL
+          2  PREDIC
+RUS     =  в_области+Р 1
+           в_сфере+Р 1
+============
+TITLE        = in_the_end
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the end
+POS     =  begin
+           end
+EXM     =  In the end I gave in and reluctantly mounted the narrow stairs. -
+           В конце концов я уступил и неохотно поднялся по узким степнькам.
+GF      = 1  ADV
+SF      = 1  TIME
+          2  RESLT
+VAL     =  TIME ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  под_конец 1
+           в_конечном_счете 1
+           в_конце_концов 1
+           наконец 1
+============
+TITLE        = in_the_established_order
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the established order
+GF      = 1  ADV
+RUS     =  в_установленном_порядке 1
+============
+TITLE        = in_the_first_play
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the first play
+GF      = 1  ADV
+RUS     =  в_первую_очередь 1
+           в_первоочередном_порядке 1
+COMM    =  Уточнить.
+============
+TITLE        = in_the_following_order
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the following order
+GF      = 1  ADV
+RUS     =  в_следующем_порядке 1
+============
+TITLE        = in_the_following_variant
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the following variant
+GF      = 1  ADV
+RUS     =  в_следующей_редакции 1
+============
+TITLE        = in_the_interests_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the interests of
+EXM     =  Mr Ram said that in the interests of press freedom he was
+           offering The Hindu's reports to rival newspapers. -
+           Г-н Рэм сказал, что в интересах свободы печати он предоставляет
+           репортажи
+GF      = 1  PREP
+SF      = 1  GOOD
+VAL     =  ADR ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+SF2     = 1  ANIM
+          2  STAT
+SYN     =  in the interest of
+RUS     =  в_интересах+Р 1
+           в_пользу+Р 1
+============
+TITLE        = in_the_light_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the light of
+EXM     =  We refused to argue again in the light of past events. -
+           Мы отказались снова спорить в свете прошлых событий.
+GF      = 1  PREP
+SF      = 1  SPHERE
+VAL     =  SPHERE ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_свете+Р 1
+============
+TITLE        = in_the_listed_cases
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the listed cases
+GF      = 1  ADV
+RUS     =  в_указанных_случаях 1
+============
+TITLE        = in_the_meantime
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  in the meantime
+EXM     =  In the meantime, I changed my mind. -
+           Между тем я передумал.
+           OPER
+GF      = 1  ADV
+SF      = 1  SIMULT
+VAL     =  SIMULT ( A1 , A2 )
+           REFERENT ( C , A2 )
+GF1     = 1  > sent
+SF1     = 1  SITUAT
+GF2     = 1  < text
+SYN     =  meanwhile
+           meantime
+RUS     =  между_тем 1
+           тем временем
+COMM    =  См 2 - не уверена, что выделяется запятой (Был какой-то класс единиц скорее в
+           начале словаря, которые выделяются запятыми только в начале предложения.).В 1 - скорее
+           наречие, в 2 - скорее вводн. Три последних оборота не переводила в PRONO, так как надо
+           продумать, должна ли эта помета сочетаться с другими или заменять их.
+============
+TITLE        = in_the_middle_of
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  in the middle of
+GF      = 1  PREP
+SF      = 1  LOK
+VAL     =  LOK ( A1 , A2 )
+GF2     = 1  >> NP
+RUS     =  посреди+Р 1
+============
+TITLE        = in_the_name_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the name of
+EXM     =  I asked you, in the name of Almighty God, to stop
+           tormenting me and punishing me. -
+           Я просил вас во имя всемогущего Господа прекратить
+           мучить и наказывать меня.
+GF      = 1  PREP
+SF      = 1  AIM
+VAL     =  AIM ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ABSTR
+          2  AKTIO
+RUS     =  во_имя+Р 1
+           ради+Р 1
+============
+TITLE        = in_the_presence_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the presence of
+EXM     =  No-one after all would believe Kylie <...> would shed her
+           bikini top in presence of the blond bombshell and frolic in the
+           waves, unless they were an `item.' -
+           Притом никто бы не поверил, что Кайли могла сбросить верх от бикини в
+           присутствии светловолосой красотки и резвиться в волнах, если б это
+           не был их "номер".
+GF      = 1  PREP
+SF      = 1  EXISTE
+             TOGETHER
+VAL     =  SUB ( A1 , C )
+           TOGETHER ( A2 , A2 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+RUS     =  в_присутствии+Р 1
+============
+TITLE        = in_the_process_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the process of
+EXM     =  we're in the process of redecorating the flat -
+           Мы в процессе переоформления квартиры.
+GF      = 1  PREP
+SF      = 1  SIMULT
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SYN     =  during
+RUS     =  в_процессе+Р 1
+           во_время+Р 1
+============
+TITLE        = in_the_same_place...as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the same place ... as
+EXM     =  We don't want to live in the same place as the residents. -
+           Мы не хотим жить там же, где резиденты.
+GF      = 1  CONJ:DISRUPT
+SF      = 1  THESAME
+VAL     =  THESAME ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  > VERB
+          2  > NP
+RUS     =  там же ... где
+============
+TITLE        = in_the_shape_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the shape of
+EXM     =  Make the invitations in the shape of a skull and crossbones and place
+           them on the door instead of balloons. -
+           Сделайте приглашения в форме черепа и скрещенных костей и приделайте
+           их к двери вместо воздушных шариков.
+GF      = 1  PREP
+SF      = 1  FORM
+VAL     =  FORM ( A2 , A1 )
+GF1     = 1  NP
+          2  VERB
+SF1     = 1  THINGN
+          2  ABSTR
+GF2     = 1  >> NP
+RUS     =  в_форме+Р 1
+           в_виде+Р 1
+============
+TITLE        = in_the_view_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the view of
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_видах+Р 1
+============
+TITLE        = in_the_whole
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in the whole
+GF      = 1  ADV
+RUS     =  в_основном 1
+============
+TITLE        = in_this_case
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )in this case,
+EXM     =  Now , in this case , the bone is certainly not the forearm, and you
+           can see for yourself that this is a single membrane hanging upon a
+           single bone , and therefore that it cannot belong to a bat. -
+           В данном случае кость не имеет ничего общего с костью предплечья , и
+           вы можете убедиться собственными глазами в наличии всего лишь одной
+           перепонки .
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+           REFERENT ( A2 , C )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+SYN     =  in this context
+           in this instance
+RUS     =  в_этом_случае 1
+           в_данном_случае 1
+           в указанном случае
+           в таком случае
+============
+TITLE        = in_total
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in total
+POS     =  end
+EXM     =  The court had heard that the baby died from terrible injuries
+           including three skull fractures measuring 10 inches in total, two
+           broken wrists and multiple bruising.  -
+           Суд услышал, что ребенок умер от ужасных травм включая три черепных
+           перелома, размеров 10 дюймов в общем объеме, два переломанных запястья и
+           многократных избиваний.
+GF      = 1  ADV
+SF      = 1  RESTR
+VAL     =  PARAM ( C , A1 )
+           VALUE ( A2 , C )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  CLAS
+GF2     = 1  << NP
+SF2     = 1  QUANTIT
+RUS     =  в_общем_объеме 1
+============
+TITLE        = in_turn
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in turn
+EXM     =  This in turn makes them cheaper and small enough to fit the average
+           pocket <...> -
+           Это, в свою очередь, делает их дешевле и достаточно маленькими, чтобы
+           подойти по размеру к среднему карману.
+GF      = 1  PARENTH
+SF      = 1  MODL
+VAL     =  MODL ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+RUS     =  в_свою_очередь 1
+COMM    =  Этот "свой" должно бы разобратся общим алгоритмом
+           установления кореферентности для таких слов, - надо велеть ему лезть и в
+           обороты тоже.
+============
+TITLE        = in_turns
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in turns
+POS     =  end
+EXM     =  They run one computer in turns. -
+           Они работают на одном компьютере по очереди.
+GF      = 1  ADV
+SF      = 1  METHOD
+VAL     =  METHOD ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+SYN     =  by rotation
+RUS     =  по_очереди 1
+============
+TITLE        = in_view_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  in view of
+EXM     =  In view of recent developments, we do not think this
+           step advisable. -
+           Ввиду последних событий мы считаем этот шаг
+           нецелесообразным.
+GF      = 1  PREP
+VAL     =  ACT ( A1 , A2 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+RUS     =  ввиду+Р 1
+============
+TITLE        = including
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  including
+EXM     =  Tuck had many other film and TV roles including
+           `Postman's Knock' with Spike Milligan which has
+           recently been shown on TV. -
+           У Така было много других ролей в кино- и телефильмах,
+           в том числе "Стук почтальона" со Спайком Маллиганом,
+           который был недавно показан по ТВ.
+           OPER
+GF      = 1  CONJ
+SF      = 1  PART
+VAL     =  PART ( A2 , A1 )
+GF1     = 1  < NP
+          2  < gerund
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  в_том_числе 1
+           включая+В 1
+COMM    =  Переведено из ПРЕДЛ в СОЧ_СОЮЗы, добавлена категория OPER, так как А1
+           вычисляется очень нетривиально.
+============
+TITLE        = instead_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  instead of
+GF      = 1  SUBORD
+SF      = 1  NEG
+             TOGETHER
+VAL     =  ISCONNECTED ( A2 , A1 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  вместо+Р 1
+           вместо_того_чтобы 1
+============
+TITLE        = inter
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  inter
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  между+Т 1
+           среди+Р 1
+============
+TITLE        = interestingly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+GF      = 1  ADV
+SF      = 1  Bon
+             Adv0 ( interesting )
+             INTEL
+             PERCPT
+             ESTIM
+GF1     = 1  VERB
+          2  that+sent
+RUS     =  интересно 1
+EXM     =  Interestingly enough, a few weeks later, Benjamin
+           remarried...-
+           Достаточно интересно, что спустя несколько недель
+           Бенджамин женился снова.
+============
+TITLE        = into
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  into
+GF      = 1  PREP
+SF      = 1  IN-DIRECT
+VAL     =  IN-DIRECT ( A2 , A1 )
+GF2     = 1  >> NP
+RUS     =  в+В 1
+============
+TITLE        = involving
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  involving
+GF      = 1  PREP
+RUS     =  с_привлечением+Р 1
+============
+TITLE        = irrespective_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  irrespective of
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вне_зависимости_от+Р 1
+============
+TITLE        = irrespectively_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  irrespectively to
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  независимо_от+Р 1
+============
+TITLE        = it_is_most_likely_that
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  it is most likely that
+POS     =  begin
+EXM     =  it most likely that he will not come  -
+           скорее всего он не придет
+GF      = 1  ADV:SENT
+SF      = 1  MODL
+RUS     =  скорее_всего 1
+============
+TITLE        = just_as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  just as
+EXM     =  Still we must believe in love, just as we must believe in free will
+           and objective truth. -
+           Мы по-прежнему должны верить в любовь, равно как должны верить в
+           добрую волю и объективную истину.
+GF      = 1  SUBORD
+SF      = 1  COMP
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+          2  >> NP
+RUS     =  подобно_тому_как 1
+           наравне_с+Т 1
+           так же как
+           равно как
+============
+TITLE        = just_as
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  just as
+EXM     =  Just as we were about to leave, Frank Dick called me to
+           one side and gave me a blistering reprimand. -
+           Как раз когда мы собирались уходить, Фрэнк Дик отозвал меня в сторону
+           и устроил мне большой выговор.
+GF      = 1  SUBORD
+SF      = 1  SIMULT
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  как_раз_когда 1
+           в_то_время_как 1
+============
+TITLE        = later_on
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  later on
+POS     =  begin
+EXM     =  Later on in my career, again in the press, he called me a `sheltered
+           athlete' who kept away from the main opposition. -
+           В дальнейшем на протяжении моей карьеры, снова в прессе он называл
+           меня	"обеспеченным атлетом", который увиливает от главного
+           противостояния.
+           OPER
+GF      = 1  ADV
+SF      = 1  TIME
+             AFTER
+VAL     =  TIME ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  после_этого 1
+           чуть_позже
+           позднее
+COMM    =  Отнесено также к категории OPER, так как ADVечия такого рода служат для
+           упорядочивания событий относительно момента, о котором идет речь (до или после этого
+           момента), и нужны правила для описания этого.
+============
+TITLE        = less
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  less
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  без+Р 1
+============
+TITLE        = less_than
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  less than
+EXM     =  He gets less than one third of the total number. -
+           Он получает меньше одной трети от общего числа.
+           OPER
+GF      = 1  ADV
+SF      = 1  MODL
+             MORE
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  >> NP
+SF2     = 1  QUANTIT
+RUS     =  менее_чем 1
+           не более чем
+============
+TITLE        = let_alone
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  let alone
+EXM     =  They have no money for necessities, let alone for luxuries. -
+           У них нет денег на самое необходимое, не говоря уже о предметах
+           роскоши.
+           There were seven people in the car, let alone three dogs. -
+           В машине было семь человек, не считая трёх собак.
+GF      = 1  PREP
+SF      = 1  MODL
+             QUANTOR
+             MORE
+VAL     =  ISCONNECTED ( A2 , A1 )
+GF1     = 1  sent
+          2  NP
+GF2     = 1  >> NP
+RUS     =  не_говоря_о+П 1
+           не_считая+Р 1
+           кроме+Р 1
+============
+TITLE        = let_us_say
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )let us say,
+EXM     =  A family, let us say, spend their entire life in suburbia.  -
+           Семья, скажем, проводит всю жизнь в пригороде.
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+          2  NP
+          3  VERB
+SF1     = 1  PREDIC
+RUS     =  скажем 1
+============
+TITLE        = like
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  like
+GF      = 1  SOJUZ
+GF2     = 1  >> NP
+             >> gerund
+RUS     =  как 3
+           словно 1
+           будто 1
+           точно 1
+           вроде+Р 1
+============
+TITLE        = long_ago
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  long ago
+POS     =  end
+GF      = 1  ADV
+RUS     =  давно
+           давным-давно
+============
+TITLE        = long_before
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  long before
+EXM     =  The patient often learns to undress by himself long
+           before he can manage to dress. -
+           Пациент часто научается раздеваться задолго до того,
+           как он сможет одеваться.
+GF      = 1  SUBORD
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> sent
+RUS     =  задолго_до 1
+           задолго до того как
+============
+TITLE        = maybe
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  maybe
+EXM     =  Maybe we shall meet him somewhere. —
+           Мы, может быть, его где-нибудь встретим.
+GF      = 1  PARENTH
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+          2  NP
+          3  VERB
+RUS     =  может_быть 1
+           возможно
+SYN     =  perhaps
+============
+TITLE        = meeting_the_demand_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  meeting the demand of
+GF      = 1  ADV
+RUS     =  по_просьбе+Р 1
+============
+TITLE        = mid
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  mid
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  среди+Р 1
+============
+TITLE        = midmost
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  midmost
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  центрально_по_отношению_к+Д 1
+============
+TITLE        = midst
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  midst
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  среди+Р 1
+============
+TITLE        = minus
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  minus
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  минус+И 1
+           без+Р 1
+============
+TITLE        = more_than
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  more than
+EXM     =  The advantages more than balance the disadvantages. -
+           Достоинства вполне покрывают недостатки.
+           This paper has a circulation of more than a million. -
+           Тираж этой газеты превышает миллион.
+           She looked at me with more than faint distaste. -
+           Она посмотрела на меня с нескрываемым неудовольствием.
+           What he lacked in physical size he more than made up
+           in sheer drive and determination. -
+           Свой маленький рост он с избытком компенсировал
+           исключительной напористостью и решительностью.
+           OPER
+GF      = 1  ADV
+SF      = 1  DEGREE
+VAL     =  DEGREE ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PROPERT
+          2  ESTIM
+          3  PREDIC
+          4  ATTR
+RUS     =  более_чем 1
+COMM    =  Может вставляться даже между предлогом и именной группой.
+============
+TITLE        = namely
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  namely
+EXM     =  A caring and just society must depend on public and
+           private provision - and, in the words of John Patten,
+           `a third force', namely the active citizen. -
+           Заботливое и справедливое общество должно зависеть от
+           общем и частном обеспечении - и, говоря словами Джона
+           Паттена, "третьей силы", а именно активных граждан.
+           OPER
+GF      = 1  CONJ
+VAL     =  RESTR ( A2 , A1 )
+GF1     = 1  < NP
+GF2     = 1  >> NP
+RUS     =  а_именно 1
+           точнее
+           конкретно
+COMM    =  правила вычисления первого конъюнкта по SF2 и восстановления синтаксической
+           неполноты второго конъюнкта. Кроме того (ср. пример 2), надо указать, что второй
+           конъюнкт сзади ограничен запятой.
+============
+TITLE        = near
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  near
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  nigh
+RUS     =  возле+Р 1
+           в_нескольких_шагах_от+Р 1
+           около+Р 1
+           у+Р 1
+           близ
+============
+TITLE        = neath
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  neath
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  под+Т 1
+           ниже+Р 1
+============
+TITLE        = neither...nor
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  neither ... nor
+GF      = 1  CONJ:DISRUPT
+RUS     =  ни...ни 1
+============
+TITLE        = next
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  next
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  рядом_с+Т 1
+           около+Р 1
+============
+TITLE        = next to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  next to
+EXM     =  You don't mind if I lie down here next to your bed? -
+           Ничего, если я лягу тут рядом с твоей кроватью?
+GF      = 1  PREP
+SF      = 1  LOK
+VAL     =  LOC_nea ( A2 , A1 )
+GF1     = 1  NP
+          2  VERB
+SF1     = 1  THINGN
+          2  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  SPAC
+RUS     =  рядом_с+Т 1
+           недалеко_от+Р 1
+============
+TITLE        = ninthly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  ninthly
+GF      = 1  PARENTH
+RUS     =  в-девятых 1
+============
+TITLE        = no_doubt
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  no doubt
+           (without|beyond) (|a|any) doubt
+EXM     =  No doubt he will come. -
+           Он, конечно, придет.
+POS     =  begin
+           end
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+          3  sent
+RUS     =  без_сомнения 1
+           конечно 1
+============
+TITLE        = no_matter
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  no matter
+EXM     =  no matter what —
+           несмотря ни на что; что бы ни было
+           no matter how [where] —
+           как [где] бы ни было
+GF      = 1  PART
+VAL     =  MODL ( C , A1 )
+GF1     = 1  NP
+RUS     =  абы 1
+COMM    =  Уточнить.
+============
+TITLE        = not...but
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  not ... but
+GF      = 1  CONJ:DISRUPT
+RUS     =  не...а 1
+============
+TITLE        = not_less_than
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  not less than
+EXM     =  Shareholders have been promised unchanged total dividends of not less
+           than 5.25p this year. -
+           Акционерам были обещаны неизменные общие дивиденды числом не менее
+           5.25 за этот год.
+           OPER
+GF      = 1  ADV
+SF      = 1  MODL
+          2  MORE
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  >> NP
+RUS     =  не_менее 1
+           не_менее_чем 1
+           более 1
+COMM    =  Внесена по OPER из-за сложной семантики "не менее а1" = "а1 или более
+           а1".
+============
+TITLE        = not_more_than
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  not more than
+           OPER
+GF      = 1  ADV
+SF      = 1  NEG
+             MORE
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  >> NP
+RUS     =  не_более 1
+           менее 1
+           только 1
+COMM    =  Внесена по OPERAT из-за сложной семантики "не более а1" = "а1 или менее
+           а1". Надо подумать, стоит ли оставлять MODL в SF.
+============
+TITLE        = not_only...but
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  not only ... but (|also)
+GF      = 1  CONJ:DISRUPT
+RUS     =  не_только...но_и 1
+============
+TITLE        = not_that...but
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  not that ... but
+GF      = 1  CONJ:DISRUPT
+RUS     =  не_то_чтобы...но 1
+============
+TITLE        = notwithstanding
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  notwithstanding
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  несмотря_на+В 1
+           вопреки+Д 1
+============
+TITLE        = of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  of
+GF      = 1  PREP
+GF2     = 1  >> NP
+             >> gerund
+RUS     =  от+Р 1
+           в_размере+Р 1
+============
+TITLE        = of_course
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  (|, )of course(|, )
+EXM     =  All this, of course, in the eyes of the sagacious, was
+           premonitory of that melancholy and farcical day when his
+           wits actually deserted him in open court. -
+           Все это, конечно, в глазах людей проницательных означало,
+           что скоро наступит тот печальный и нелепый день, когда
+           разум совсем покинет судью на каком-нибудь открытом
+           заседании суда.
+           Of course we'll find one that you like. -
+           Конечно, мы найдем такую, как тебе нравится.
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  VERB
+          2  NP
+          3  sent
+RUS     =  конечно 1
+           конечно же
+============
+TITLE        = off
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  off
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  с+Р 1
+============
+TITLE        = omitting
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  omitting
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  исключая+В 1
+           за_исключением+Р 1
+============
+TITLE        = on
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on
+GF      = 1  PREP
+SF      = 1  LOK
+GF2     = 1  >> NP
+SYN     =  upon
+RUS     =  на+П 1
+           в_счет+Р 1
+============
+TITLE        = on
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on
+GF      = 1  PREP
+GF1     = 1  VERB
+          2  < NP
+GF2     = 1  > NP
+RUS     =  о+В 1
+============
+TITLE        = on_an_average
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on an average
+EXM     =  to translate on an average five pages a day -
+           переводить в среднем пять страниц в день
+GF      = 1  ADV
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  NP
+SF1     = 1  QUANTIT
+RUS     =  в_среднем 1
+============
+TITLE        = on_any_account
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on any account
+GF      = 1  ADV
+RUS     =  ни_в_коем_случае 1
+============
+TITLE        = on_behalf_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on behalf of
+EXM     =  However, over three quarters of this business was initiated by
+           market makers and banks rather than on behalf of clients. -
+           Однако более трех четвертей этого бизнеса были начаты скорее
+           создателями рынка и банками, чем от лица клиентов.
+GF      = 1  PREP
+SF      = 1  ACT
+             MEDIATOR
+VAL     =  ACT ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  SITUAT
+          2  ANIM
+GF2     = 1  >> NP
+SF2     = 1  ABSTR
+RUS     =  от_имени+Р 1
+           по_поручению+Р 1
+           от лица
+============
+TITLE        = on_condition_that
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on condition that
+EXM     =  Animal rights activists have been bailed on condition that they do
+           not attend any hunt meetings in England or Wales. -
+           Борцы за права животных были отпущены на поруки при условии, что они
+           не будут присутствовать на охоте в Англии и Уэльсе.
+GF      = 1  SUBORD
+SF      = 1  COND
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+SF2     = 1  SITUAT
+SYN     =  provided that
+RUS     =  при_условии 1
+           если 1
+           при том что
+============
+TITLE        = on_deferred_payments
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on deferred payments
+EXM     =  The firm supplies goods on deferred payments. -
+           Фирма поставляет товары на льготных условиях.
+GF      = 1  ADV
+SF      = 1  IN-ACCORD
+VAL     =  IN-ACCORD ( A1 , C )
+GF1     = 1  VERB
+          2  < NP
+SF1     = 1  PREDIC
+RUS     =  на_льготных_условиях 1
+           на выгодных условиях
+           на льготной основе
+============
+TITLE        = on_hand
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on hand
+EXM     =  Our shop has too many goods on hand. -
+           У нашего магазина в наличии слишком много товаров.
+GF      = 1  ADV:PLACE
+SF      = 1  BELNG
+VAL     =  BELNG ( C , A1 )
+GF1     = 1  < NP
+          2  VERB
+SF1     = 1  PREDIC
+RUS     =  в_наличии 1
+           налично
+COMM    =  Исходная статья оставлена, т.к. я, кажется не знаю примеров на двухвалентный
+           оборот "в наличии" с теми характеристиками, которые в ней указаны. Поэтому сделала свою
+           статью.
+============
+TITLE        = on_no_account
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  begin
+CONTENT =  on no account
+EXM     =  On no account should the bed have wheels -
+           У кровати ни в коем случае не должно быть колес
+GF      = 1  ADV:Neg
+SF      = 1  ESTIM
+VAL     =  ESTIM ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  NEG
+             PREDIC
+LF      =  Anti : on_any_account
+SYN     =  on any account
+RUS     =  ни_в_коем_случае 1
+           никоим_образом 1
+           никак 1
+           ни за что
+COMM    =  Помнить про should.
+============
+TITLE        = on_privileged_conditions
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on privileged conditions
+GF      = 1  ADV
+RUS     =  на_льготных_условиях 1
+============
+TITLE        = on_rare_occasions
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on rare occasions
+EXM     =  He went upstairs into the best rooms only on rare occasions. -
+           Наверху же, в парадных комнатах, он бывал редко.
+GF      = 1  ADV
+SF      = 1  TIME
+VAL     =  TIME ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  в_редких_случаях 1
+           редко 1
+============
+TITLE        = on_the_base_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the base of
+EXM     =  This statement is difficult to refute or accept on the base of
+           current research evidence. -
+           Это утверждение трудно опровергнуть или принять, основываясь на
+           фактах текущих исследований.
+GF      = 1  PREP
+VAL     =  SRC-PNT ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  MEDINF
+          2  INF
+SYN     =  basing on
+RUS     =  на_основании+Р 1
+           на_основе+Р 1
+============
+TITLE        = on_the_basis_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the basis of
+EXM     =  He discovered the virtues of the Gladstone Library at Hawarden
+           near Chester, a <...> library founded on the basis of Mr
+           Gladstone's own books. -
+           Он обADVужил достоинства Библиотеки Гладстона в Хейуордене около
+           Честера, библиотеки, созданной на основе личных книг мистера
+           Гладстона.
+GF      = 1  PREP
+SF      = 1  SRC-PNT
+VAL     =  SRC-PNT ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  ORG
+          2  INF
+          3  MEDINF
+          4  SPAC
+RUS     =  на_базе+Р 1
+           на_основе+Р 1
+============
+TITLE        = on_the_edge_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the edge of
+EXM     =  At night the whole family slept in a rough shelter <...> at the edge
+           of the forest.-
+           Ночью вся семья спала в неуютном прибежище на краю леса.
+GF      = 1  PREP
+SF      = 1  LOK
+VAL     =  LOC_nea ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+          2  ANIM
+GF2     = 1  >> NP
+          2  >> gerund
+SF2     = 1  SPAC
+          2  EMOT
+RUS     =  на_краю+Р 1
+           почти 1
+           близко от
+============
+TITLE        = on_the_eve_of
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  on the eve of
+EXM     =  He was murdered one day after he told Lebanese, on the eve of their
+           46th independence anniversary, that their divided country was close
+           to peace. -
+           Он был убит через день после того, как он сказал ливанцам, накануне
+           46-й	годовщины их независимости, что их разделенная страна близка к
+           миру.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  в_канун+Р 1
+           в_преддверии+Р 1
+============
+TITLE        = on_the_right
+SENSE       = 1
+AUTHOR       = graf
+REDACT       = .?
+TIME_CREATE       = 30712/939524150/762 -1744830464:262144:65536
+CONTENT =  on the right
+EXM     =  On the right stretched a row of hillocks which disappeared
+           in the distance behind the village. -
+           Справа тянулся и потом исчезал далеко за селом ряд холмов.
+GF      = 1  ADV
+SF      = 1  LOK
+VAL     =  LOK ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  справа
+============
+TITLE        = on_the_side_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the side of
+EXM     =  Italy meanwhile <...> negotiated to come into the war on
+           the side of the Allies. -
+           Между тем Италия вела переговоры о том, чтобы вступить
+           в войну на стороне союзников.
+GF      = 1  PREP
+SF      = 1  TOGETHER
+             GOOD
+VAL     =  TOGETHER ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  >> NP
+RUS     =  на_стороне+Р 1
+============
+TITLE        = on_the_strength_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the strength of
+EXM     =  I did it on the strength of your promise. -
+           Я сделал это исходя из вашего обещания.
+GF      = 1  PREP
+SF      = 1  SRC-PNT
+VAL     =  SRC-PNT ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  исходя_из+Р 1
+============
+TITLE        = on_the_subject_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the subject of
+EXM     =  He made a report on the subject of baptism. -
+           Он сделал доклад на тему баптизма.
+GF      = 1  PREP
+SF      = 1  THEME
+VAL     =  THEME ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+          2  INF
+GF2     = 1  >> NP
+RUS     =  на_тему+Р 1
+           о+П 1
+============
+TITLE        = on_the_threshold_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the threshold of
+EXM     =  The market at the moment appears to be on the threshold of a new era
+           of intellectual popularity. -
+           Рынок в настоящий момент оказывается в преддверии новой эры
+           интеллектуальной популярности.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SYN     =  on the eve of
+RUS     =  в_преддверии+Р 1
+           накануне+Р 1
+           перед+Т 1
+           незадолго_до+Р 1
+============
+TITLE        = on_the_way
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the way
+EXM     =  He passed out on the way home. -
+           Он умер по дороге домой.
+GF      = 1  PREP
+SF      = 1  IN-DIRECT
+VAL     =  IN-DIRECT ( A1 , A2 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  SPAC
+          2  ABSTR
+RUS     =  по_пути+ПГ 1
+           по_пути_к+Д 1
+           по_направлению_к+Д 1
+           по дороге
+============
+TITLE        = on_the_way_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the way to
+EXM     =  He passed out on the way to hospital. -
+           Он умер по дороге в больницу.
+GF      = 1  PREP
+SF      = 1  IN-DIRECT
+VAL     =  IN-DIRECT ( A1 , A2 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  SPAC
+          2  ABSTR
+RUS     =  по_пути+ПГ 1
+           по_пути_к+Д 1
+           по_направлению_к+Д 1
+           по дороге
+============
+TITLE        = on_the_whole
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on the whole
+EXM     =  You know, on the whole the police prefer not to make fools of
+           themselves. -
+           Вы знаете, в общем полиция не любит, когда из них делают дураков.
+           Alexei thought that it was on the whole foolish to remain where he
+           was while there was an armed trooper to guard the two women. -
+           Алексей подумал, что это в общем глупо оставаться там, пока есть
+           вооруженный полицейский, который охраняет обеих женщин.
+GF      = 1  PARENTH
+SF      = 1  MODL
+VAL     =  MODL ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+SYN     =  so \ C>A1
+RUS     =  в_общем 1
+           в целом
+============
+TITLE        = on_voluntary_basis
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  on voluntary basis
+GF      = 1  ADV
+RUS     =  в_добровольном_порядке 1
+============
+TITLE        = one_way_or_another
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  one way or another
+EXM     =  One way or another you'll be mine. -
+           Так или иначе ты будешь моей.
+GF      = 1  ADV
+GF1     = 1  X! : VERB
+RUS     =  так_или_иначе 1
+============
+TITLE        = only
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  only
+GF      = 1  PART
+RUS     =  только 1
+           исключительно 1
+           лишь
+============
+TITLE        = onto
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  onto
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  on to
+RUS     =  на+В 1
+============
+TITLE        = or
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  or
+EXM     =  She wants to eat or drink.
+           OPER
+GF      = 1  CONJ
+RUS     =  или 1
+============
+TITLE        = or...or
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  , either ... or
+           , or ... or
+GF      = 1  CONJ:DISRUPT
+SF      = 1  OR
+VAL     =  OR ( A2 , A1 )
+GF1     = 1  ^ sent
+          2  ^ NP
+          3  ^ VERB
+          4  ^ PREP
+GF2     = 1  >> sent
+          2  >> NP
+          3  >> VERB
+          4  >> PREP
+RUS     =  либо...либо 1
+           или ... или
+           ли...ли 1
+============
+TITLE        = otherwise
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  otherwise
+EXM     =  Go at once, otherwise you will miss the train. -
+           Отправляйтесь немедленно, иначе опоздаете на поезд.
+           OPER
+GF      = 1  CONJ
+SF      = 1  MODL
+VAL     =  COND ( A1 , A2 )
+GF1     = 1  << text
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+RUS     =  в_противном_случае 1
+           в_иных_случаях 2
+           иначе
+COMM    =  Отнесено также к категории OPER, так как требуются преобразования СемПа с
+           отрицанием.
+============
+TITLE        = out
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  out
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  из+Р 1
+           за+В 1
+============
+TITLE        = out_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  out of
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  из+Р 1
+============
+TITLE        = outside
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  outside
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вне+Р 1
+           за_пределами+Р 1
+============
+TITLE        = outwith
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  outwith
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  за_пределами+Р 1
+           кроме+Р 1
+============
+TITLE        = over
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  over
+GF      = 1  PREP
+SF      = 1  LOK
+GF2     = 1  >> NP
+RUS     =  над+Т 1
+============
+TITLE        = over
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  over
+GF      = 1  PREP
+SF      = 1  IN-DIRECT
+GF2     = 1  >> NP
+RUS     =  через+В 1
+============
+TITLE        = past
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  past
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  после+Р 1
+           мимо+Р 1
+============
+TITLE        = pendent
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  pendent
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_ожидании+Р 1
+           до+Р 1
+============
+TITLE        = pending
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  pending
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  во_время+Р 1
+           в_течение+Р 1
+           в_ожидании+Р 1
+           до+Р 1
+============
+TITLE        = plus
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  plus
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  плюс+И 1
+============
+TITLE        = quoad
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  quoad
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_отношении+Р 1
+           что касается
+============
+TITLE        = rather_than
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  rather than
+GF      = 1  SOJUZ
+GF2     = 1  >> NP
+          2  >> gerund
+COMM    =  Разобраться.
+============
+TITLE        = re
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  re
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  по_делу_о+П 1
+           касательно+Р 1
+============
+TITLE        = really
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  really
+GF      = 1  PART
+RUS     =  прямо 1
+============
+TITLE        = regarding
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  regarding
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  относительно+Р 1
+           касательно+Р 1
+           о+П 1
+============
+TITLE        = respecting
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  respecting
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  относительно+Р 1
+           касательно+Р 1
+           о+П 1
+============
+TITLE        = round
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  round
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вокруг+Р 1
+============
+TITLE        = sans
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  sans
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  sine
+RUS     =  без+Р 1
+============
+TITLE        = save
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  save
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  за_исключением+Р 1
+============
+TITLE        = saving
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  saving
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  исключая+В 1
+============
+TITLE        = secondly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  secondly
+GF      = 1  PARENTH
+RUS     =  во-вторых 1
+============
+TITLE        = seeing
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  seeing
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  из-за+Р 1
+           в_связи_с+Т 1
+============
+TITLE        = seemingly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  seemingly
+GF      = 1  PART
+RUS     =  вроде_бы 1
+           кажется 1
+============
+TITLE        = separately_from
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  separately from
+EXM     =  Convertible debt is to be displayed separately from other liabilities. -
+           Конвертируемые облигации следует выставить отдельно от других
+           обязательств.
+GF      = 1  PREP
+SF      = 1  NEG
+             SIMULT
+VAL     =  ISCONNECTED ( A2 , A1 )
+           SRC-PNT ( A2 , C )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  отдельно_от+Р 1
+============
+TITLE        = seventhly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  seventhly
+GF      = 1  PARENTH
+RUS     =  в-седьмых 1
+============
+TITLE        = should_this_be_the_case
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )should this be the case,
+POS     =  begin
+EXM     =  Should this be the case, I will let you know soon. -
+           В случае чего я дам вам знать вскорости.
+GF      = 1  ADV
+SF      = 1  COND
+VAL     =  COND ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  в_случае_чего 1
+============
+TITLE        = similar_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  similar to
+GF      = 1  PREP
+GF1     = 1  VERB
+          2  < NP
+GF2     = 1  >> NP
+RUS     =  подобно+Д 1
+============
+TITLE        = since
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  since
+EXM     =  Nothing interesting has happened since we parted. -
+           После того как мы расстались, не произошло ничего
+           интересного.
+GF      = 1  SUBORD
+SF      = 1  TIME
+VAL     =  AFTER ( A1 , A2 )
+GF1     = 1  sent : perf
+SF1     = 1  PREDIC
+GF2     = 1  >> sent : pasa
+RUS     =  с_тех_пор_как 1
+           после_того_как 1
+============
+TITLE        = since
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  since
+EXM     =  We must stop here since it is impossible to go on. -
+           Мы должны остановиться здесь, так как дальше идти
+           невозможно.
+GF      = 1  SUBORD
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  поскольку 1
+           коль_скоро 1
+           ввиду_того_что 1
+           так_как 1
+============
+TITLE        = since
+SENSE       = 3
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  since
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  с+Р 1
+============
+TITLE        = sixthly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  sixthly
+GF      = 1  PARENTH
+RUS     =  в-шестых 1
+============
+TITLE        = so
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  so
+           thence
+EXM     =  It was late, so we went home. -
+           Было поздно, поэтому мы пошли домой.
+GF      = 1  SUBORD
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  << sent
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+SF2     = 1  SF ( 1 )
+RUS     =  так_что 1
+           таким_образом 1
+           поэтому
+============
+TITLE        = so
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  so
+EXM     =  So what can we do now? -
+           Так что же мы можем сейчас сделать?
+GF      = 1  PART
+GF2     = 1  >> VERB
+          2  >> NP
+          3  >> PREP
+RUS     =  так 1
+============
+TITLE        = so-so
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  so-so
+GF      = 1  ADV
+GF1     = 1  VERB
+RUS     =  так_себе 1
+============
+TITLE        = so_that
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  so that
+EXM     =  He stepped aside so that I might pass. -
+           Он отошёл (в сторону), чтобы я мог пройти.
+           He closed the window so that the child might not
+           catch cold. -
+           Он закрыл окно, чтобы ребёнок не простудился.
+GF      = 1  SUBORD
+SF      = 1  AIM
+VAL     =  AIM ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  чтобы 1
+           с_тем_чтобы 1
+           для_того_чтобы 1
+           с целью
+COMM    =  Следует обратить внимание на might.
+============
+TITLE        = sometimes...sometimes
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  sometimes ... sometimes
+GF      = 1  CONJ:DISRUPT
+GF1     = 1  ^ sent
+          2  ^ VERB
+GF2     = 1  >> sent
+          2  >> VERB
+RUS     =  то...то 1
+============
+TITLE        = such_as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (|, )such as
+EXM     =  gut issues, such as jobs and housing -
+           насущные проблемы, такие как занятость и жильё
+GF      = 1  SOJUZ
+SF      = 1  COMP
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  < NP
+GF2     = 1  >> NP
+RUS     =  например 1
+           такой как
+============
+TITLE        = such_as
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (|, )such as
+EXM     =  wooden pattens such as the Lapps use -
+           деревянные лыжи, такие, которыми пользуются лапландцы
+GF      = 1  SOJUZ
+SF      = 1  COMP
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  < NP
+GF2     = 1  >> sent
+RUS     =  такой который
+           такой какой
+COMM    =  Разобраться.
+============
+TITLE        = taking_into_account
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  taking (...|) into account
+GF      = 1  PREP
+RUS     =  с_учетом+Р 1
+GF2     = 1  ^ NP
+          2  >> NP
+============
+TITLE        = tenthly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  tenthly
+GF      = 1  PARENTH
+RUS     =  в-десятых 1
+============
+TITLE        = than
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  than
+EXM     =  Principles are more important than money.
+GF      = 1  SUBORD
+GF1     = 1  NP
+          2  sent
+GF2     = 1  >> NP
+          2  >> sent
+RUS     =  чем 1
+============
+TITLE        = thanks_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (|, )thanks to
+EXM     =  The road back towards the shops and bars melts into water,
+           thanks to the oppressive dry heat. -
+           Дорога обратно к магазинам и барам постепенно переходит в воду из-за
+           гнетущей сухой жары.
+GF      = 1  PREP
+SF      = 1  METHOD
+VAL     =  METHOD ( A1 , A2 )
+           ACT ( A2 , C )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  при_посредстве+Р 1
+           благодаря+Д 1
+           из-за+Р 1
+============
+TITLE        = thanks_to_the_fact_that
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  (| - |, )thanks to the fact that
+EXM     =  Today, his novels -- always popular with the reading public -- are
+           more widely known than ever, thanks to the fact that their plots <...>
+           have translated into highly successful films. -
+           Сегодня его романы - постоянно популярные у читающей публики - еще
+           более известны, чем когда-либо, благодаря тому, что их сюжеты были
+           положены в основу очень успешных фильмов.
+           OPER
+GF      = 1  SUBORD
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+SYN     =  owing to the fact that
+RUS     =  благодаря_тому_что 1
+           из-за_того_что 1
+           по_причине+Р 1
+============
+TITLE        = that
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  that
+EXM     =  I fear that I cannot come. -
+           Боюсь, что не смогу прийти.
+           He made it clear that he did not agree. -
+           Он дал понять, что не согласен.
+           There is no doubt that we were wrong from the start. -
+           Несомненно, мы были не правы с самого начала.
+GF      = 1  SUBORD
+VAL     =  CONTEN ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  COMMUNIC
+          2  AKTIO
+             INTEL
+GF2     = 1  >> sent
+SF2     = 1  PREDIC
+          2  SITUAT
+RUS     =  что 1
+============
+TITLE        = that_is
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )that is
+EXM     =  A useful method is to have frames, that is sentences with
+           blanks to be filled in. -
+           Полезный метод - иметь рамки, то есть предложения с
+           пустыми местами, которые надо заполнить.
+GF      = 1  SOJUZ
+SF      = 1  THESAME
+VAL     =  THESAME ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+          3  sent
+SYN     =  (, )that is to say(, )
+           (, )i.e.
+RUS     =  то_есть 1
+           т.е. 1
+============
+TITLE        = that_is_why
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  that is why
+EXM     =  Nor do I believe in obstructing democracy: that is why I
+           oppose repression and the state of emergency. -
+           Я также не верю в демократию как преграду: вот почему я против
+           репрессий и чрезвычайного положения.
+GF      = 1  SUBORD
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A1 , A2 )
+GF1     = 1  < sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  вот_почему 1
+           поэтому
+============
+TITLE        = the...the
+SENSE       = 1
+AUTHOR       = graf
+REDACT       = alex
+TIME_CREATE       = 1/7/1 15:34:29
+CONTENT =  the ... the
+EXM     =  The sooner the better. -
+           Чем скорее, тем лучше.
+GF      = 1  CONJ:DISRUPT
+SF      = 1  COMP
+VAL     =  COMP ( A2 , A1 )
+GF1     = 1  COMPAR
+SF1     = 1  PREDIC
+GF2     = 1  > COMPAR
+POS1    =  comp : begin
+POS2    =  comp : begin
+RUS     =  чем...тем 1
+COMM    =  "ПОЗi=comp:begin" - некий костыль, который означает,
+           что у i-го актанта надо искать  подчиненные узлы с граммемой
+           comp и ставить им позицию begin.
+============
+TITLE        = the_day_before
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  the day before
+EXM     =  She had bid her old mistress farewell the day before. -
+           Она попрощалась со своей старой хозяйкой накануне.
+           OPER
+GF      = 1  ADV:PLACE
+SF      = 1  TIME
+VAL     =  TIME ( C , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  за_день_до_того 1
+           накануне
+============
+TITLE        = the_day_before
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  the day before
+EXM     =  The day before the seminar, some 500 people attended
+           a public meeting in Buncrana organized by the DUC. -
+           За день до семинара около пятисот человек пришли на
+           публичный митинг в Банкране, организованный DUC.
+           But the day before he boarded the plane the pleasure
+           of the reunion was tinged with sorrow. -
+           Но за день до того, как он сел на самолет, удовольствие
+           от воссоединения смешалось с грустью.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  AFTER ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> sent
+RUS     =  за_день_до+Р 1
+           за_день_до_того_как 1
+           накануне+Р 1
+============
+TITLE        = they_say
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  they say
+GF      = 1  PARENTH
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  X! : sent
+RUS     =  слыхать 1
+============
+TITLE        = thirdly
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  thirdly
+GF      = 1  PARENTH
+RUS     =  в-третьих 1
+============
+TITLE        = though
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  though
+EXM     =  I respect him though I don't like him. -
+           Я уважаю его, хоть он мне и не нравится.
+GF      = 1  SUBORD
+SF      = 1  NEG
+             ISCONNECTED
+VAL     =  ISCONNECTED ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+RUS     =  хотя 1
+           хотя...зато 1
+============
+TITLE        = through
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  through
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  thru
+RUS     =  через+В 1
+============
+TITLE        = throughout
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  throughout
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  через+В 1
+============
+TITLE        = thwart
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  thwart
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  поперек+Р 1
+           через+В 1
+============
+TITLE        = till
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  till
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  до+Р 1
+           пока 1
+ETENSE  =  буд - > present
+============
+TITLE        = till_the_end_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  till the end of
+EXM     =  He has enough money to do him till the end of the year. -
+           Этих денег ему хватит до конца года.
+GF      = 1  PREP
+SF      = 1  TIME
+VAL     =  TIME ( A2 , A1 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+RUS     =  до_конца+Р 1
+============
+TITLE        = to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  to
+GF      = 1  PREP
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  к+Д 1
+============
+TITLE        = to
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  to
+GF      = 1  PART
+GF2     = 1  >> inf
+RUS     =  за+В 1
+============
+TITLE        = to_change
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  to change
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  во_изменение+Р 1
+============
+TITLE        = to_meet
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  to meet
+EXM     =  they were coming up the street to meet us -
+           они шли по улице нам навстречу
+GF      = 1  PREP
+SF      = 1  IN-DIRECT
+VAL     =  IN-DIRECT ( A1 , A2 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> obj
+SF2     = 1  ANIM
+          2  ABSTR
+RUS     =  навстречу+Д 1
+============
+TITLE        = to_my_mind
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )to my mind,
+EXM     =  The very best thing, to my mind, would be to explain
+           every case individually without attempting to
+           generalize . -
+           Самое лучшее, по-моему, - это объяснять каждый случай
+           в отдельности, не пытаясь обобщать.
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  по-моему 1
+============
+TITLE        = to_tell_the_truth
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (,| )to tell the truth,
+EXM     =  And of all my acquaintanceships the most intimate and,
+           to tell the truth, the most agreeable to me was my
+           acquaintance with Luganovitch. -
+           И из всех знакомств самым основательным и, правду
+           сказать, самым приятным для меня было знакомство с
+           Лугановичем.
+GF      = 1  PARENTH
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+RUS     =  по_правде_говоря 1
+           правду сказать
+============
+TITLE        = to_the_detriment_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  to the detriment of
+EXM     =  A mental health orientation places greater emphasis on the former to
+           the detriment of the latter. -
+           Ориентация на душевное здоровье уделяет больше внимание прежнему в
+           ущерб позднему.
+GF      = 1  PREP
+SF      = 1  AIM
+             DAMAG
+VAL     =  ADR ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> NP
+RUS     =  в_ущерб+Д 1
+           не в пользу
+============
+TITLE        = to_the_questions_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  to the questions of
+GF      = 1  PREP
+RUS     =  по_вопросам+Р 1
+============
+TITLE        = to_the_same_place...as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  to the same place ... as
+EXM     =  We usually go to the same place as our friends. -
+           Мы обычно ездим туда же, куда и наши друзья.
+GF      = 1  CONJ:DISRUPT
+SF      = 1  THESAME
+VAL     =  THESAME ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  > VERB
+          2  > NP
+RUS     =  туда же ... куда
+============
+TITLE        = to_the_tune_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  to the tune of
+GF      = 1  PREP
+SF      = 1  RESTR
+VAL     =  RESTR ( A2 , A1 )
+GF1     = 1  VERB
+          2  < NP
+GF2     = 1  >> NP
+SF2     = 1  QUANTIT
+RUS     =  в_размере+Р 1
+============
+TITLE        = together_with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  together with
+EXM     =  We arrived together with our host. -
+           Мы приехали одновременно с нашим хозяином.
+GF      = 1  PREP
+SF      = 1  TOGETHER
+VAL     =  TOGETHER ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  совместно_с+Т 1
+           одновременно_с+Т 1
+           в_сочетании_с+Т 1
+           вместе_с+Т 1
+COMM    =  Опять преобразования как у слов с семантикой взаимности.
+============
+TITLE        = too
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+POS     =  end
+CONTENT =  too
+EXM     =  I went there, too. -
+           Я тоже пошел туда.
+GF      = 1  PART
+GF2     = 1  >> sent
+          2  >> VERB
+RUS     =  тоже 1
+============
+TITLE        = touching
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  touching
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  касательно+Р 1
+           относительно+Р 1
+           что касается
+============
+TITLE        = towards
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  towards
+GF      = 1  PREP
+GF2     = 1  >> NP
+SYN     =  toward
+RUS     =  к+Д 1
+           по_направлению_к+Д 1
+============
+TITLE        = under
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  under
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  под+Т 1
+============
+TITLE        = under_conditions_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  under conditions of
+GF      = 1  PREP
+RUS     =  при_условии+Р 1
+============
+TITLE        = under_the_name_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  under the name of
+EXM     =  Winnie-the-Pooh lived under the name of Sanders. -
+           Винни-Пух жил под именем Сандерс.
+GF      = 1  PREP
+VAL     =  RESTR ( A1 , A2 )
+GF1     = 1  VERB
+GF2     = 1  >> NP
+SF2     = 1  NAME
+RUS     =  под_именем+И 1
+============
+TITLE        = under_the_pretext_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  under the pretext of
+EXM     =  Под предлогом болезни он не вышел на работу.
+GF      = 1  PREP
+SF      = 1  CAUSE
+VAL     =  CAUSE ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  под_предлогом+Р 1
+           по_причине+Р 1
+============
+TITLE        = underneath
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  underneath
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  под+Т 1
+           снизу_у+Р 1
+============
+TITLE        = unless
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  unless
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  за_исключением+Р 1
+============
+TITLE        = unless
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  unless
+EXM     =  I shan't come, unless you really want me to. —
+           Я не приду, разве что вы очень этого захотите.
+GF      = 1  SUBORD
+GF2     = 1  >> sent
+          2  >> PREP
+RUS     =  разве_что 1
+============
+TITLE        = unlike
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  unlike
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в_отличие_от+Р 1
+============
+TITLE        = until
+SENSE       = 1
+COMM       = ¶
+AUTHOR       = graf
+TIME_CREATE       = 196608/19529729/64836 6553600:589824:1638400
+CONTENT =  until
+GF      = 1  SUBORD
+GF2     = 1  >> sent
+          2  >> NP
+RUS     =  пока 1
+           до+Р 1
+ETENSE  =  буд - > present
+============
+TITLE        = unto
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  unto
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  к+Д 1
+============
+TITLE        = up
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  up
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  по+Д 1
+           к+Д 1
+           вверх_по+Д 1
+============
+TITLE        = up_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (| right) up to
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вплоть_до+Р 1
+============
+TITLE        = upon
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  upon
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  по+П 1
+============
+TITLE        = upon_that_point
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  upon that point
+EXM     =  I have my own opinion upon that point -
+           У меня на этот счет особое мнение.
+POS     =  end
+GF      = 1  PREP
+SF      = 1  RESTR
+VAL     =  MODL ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+RUS     =  на_этот_счет 1
+============
+TITLE        = upside_down
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 3/12/4 18:23:36
+CONTENT =  upside down
+EXM     =  he held the book upside down
+GF      = 1  PREP
+SF      = 1  LOK
+VAL     =  LOK ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+RUS     =  upwards 1
+============
+TITLE        = using
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  using
+GF      = 1  PREP
+RUS     =  с_использованием+Р 1
+           с_применением+Р 1
+           с_помощью+Р 1
+============
+TITLE        = versus
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  versus
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  против+Р 1
+           в_противовес+Д 1
+           в_отличие_от+Р 1
+           в_сравнении_с+Т 1
+============
+TITLE        = via
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  via
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  путем+Р 1
+           с_помощью+Р 1
+============
+TITLE        = vice
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  vice
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  вместо+Р 1
+============
+TITLE        = wanting
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  wanting
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  при_отсутствии+Р 1
+============
+TITLE        = when
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  when
+EXM     =  It was ten minutes to nine when he returned. -
+           Когда он вернулся, было уже без десяти девять.
+GF      = 1  SUBORD
+RESTR   =  not_fut !
+           not_fut_past !
+SF      = 1  TIME
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  PREDIC
+GF2     = 1  >> sent
+RUS     =  когда 1
+============
+TITLE        = whether...or
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  whether ... or
+GF      = 1  CONJ:DISRUPT
+SF      = 1  OR
+VAL     =  OR ( A2 , A1 )
+GF1     = 1  ^ sent
+          2  ^ VERB
+          3  ^ inf
+GF2     = 1  >> sent
+          2  >> VERB
+          3  >> inf
+RUS     =  ли...ли 1
+============
+TITLE        = while
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  while
+EXM     =  While there's life there's hope. -
+           Пока живу - надеюсь.
+GF      = 1  SUBORD
+SF      = 1  SIMULT
+VAL     =  SIMULT ( A2 , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> sent
+          2  >> ОБСТ_ГР
+RUS     =  пока 1
+           в_то_время_как 1
+ETENSE  =  * - > Cont
+RESTR   =  not_fut !
+============
+TITLE        = while
+SENSE       = 2
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  while
+GF      = 1  PREP
+GF2     = 1  >> gerund
+RUS     =  при+П 1
+           до+Р 1
+COMM    =  Опять-таки соответствия.
+============
+TITLE        = with
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  with
+GF      = 1  PREP
+GF2     = 1  >> NP
+          2  >> gerund
+SYN     =  withal
+RUS     =  с+Т 1
+           не_без+Р 1
+============
+TITLE        = with_an_eye_to
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  with an eye to
+EXM     =  Lord Taylor's main point is to suggest that judges
+           should pass sentence with an eye to the public's
+           expectations. -
+           Главная мысль лорда Тэйлора была в том, чтобы посоветовать
+           судьям объявлять приговор исходя из ожиданий публики.
+GF      = 1  PREP
+SF      = 1  AIM
+VAL     =  AIM ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> inter + sent
+RUS     =  в_расчете_на+В 1
+           в_расчете_на_то 1
+           исходя_из+Р 1
+           при ориентации на
+============
+TITLE        = with_consent_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (with|by) consent of
+EXM     =  The hearing was in chambers and is reported with consent of Sir
+           Stephen Brown P. -
+           Слушания проходили в палатах и передаются с согласия сэра Стивена
+           Брауна П.
+GF      = 1  PREP
+SF      = 1  IN-ACCORD
+VAL     =  IN-ACCORD ( A1 , A2 )
+           ACT ( A2 , C )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> NP
+SF2     = 1  ANIM
+SYN     =  by consent of
+RUS     =  с_разрешения+Р 1
+           с одобрения
+============
+TITLE        = with_support_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  with support of
+GF      = 1  PREP
+RUS     =  при_поддержке+Р 1
+============
+TITLE        = with_the_assistance_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 327680/21495809/0 6553600:655360:1572864
+CONTENT =  with the assistance of
+EXM     =  North Korea had made immense progress with the assistance of the
+           Soviet Union. -
+           У Северной Кореи был огромный прогресс при содействии Советского
+           Союза.
+GF      = 1  PREP
+SF      = 1  METHOD
+VAL     =  METHOD ( A1 , A2 )
+           ACT ( A2 , C )
+GF1     = 1  sent
+GF2     = 1  >> NP
+RUS     =  при_содействии+Р 1
+           при_участии+Р 1
+============
+TITLE        = with_the_help_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  with the help of
+EXM     =  A police force is selecting new recruits with the help of
+           videos showing them the kind of incidents they might have to tackle. -
+           Полицейские силы выбирают новых сотрудников при помощи видеозаписей,
+           которые показывают им разные виды ситуаций, с которыми им придется
+           столкнуться.
+GF      = 1  PREP
+SF      = 1  METHOD
+VAL     =  METHOD ( A1 , A2 )
+GF1     = 1  sent
+          2  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  THINGN
+          2  ANIM
+SYN     =  by the assistance of
+           by means of \ SF2 = 1 НЕОД
+RUS     =  при_помощи+Р 1
+           с_помощью+Р 1
+           при_содействии+Р 1
+COMM    =  По поводу VAL для перенесения в BSIT см. след. статью.
+============
+TITLE        = with_the_participation_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  with the participation of
+EXM     =  A second demonstration cruise is planned in Korean waters
+           with the participation of other CCOP member-countries. -
+           Второй показательный круиз планируется провести в Корейских водах
+           при участии других стран - участниц CCOP.
+GF      = 1  PREP
+SF      = 1  METHOD
+VAL     =  METHOD ( A1 , A2 )
+           ACT ( A2 , C )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+GF2     = 1  >> NP
+RUS     =  при_участии+Р 1
+           с_участием+Р 1
+============
+TITLE        = with_the_purpose_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  with the purpose of
+EXM     =  During one service, whilst he was preaching, three J.P.s and several
+           soldiers burst into the chapel with the purpose of arresting Richard
+           Baxter. -
+           Во время одной службы, пока он sentоведовал, в часовню ворвались три
+           J.P. и несколько солдат с целью арестовать Ричарда Бэкстера.
+GF      = 1  PREP
+SF      = 1  AIM
+VAL     =  AIM ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+          2  >> gerund
+RUS     =  с_целью+Р 1
+           для_целей+Р 1
+============
+TITLE        = with_the_same_purpose...as
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  with the same purpose ... as
+EXM     =  You've come here with the same purpose as I did. -
+           Вы пришли сюда затем же, зачем и я.
+GF      = 1  CONJ:DISRUPT
+SF      = 1  THESAME
+VAL     =  THESAME ( A2 , A1 )
+GF1     = 1  VERB
+          2  NP
+GF2     = 1  > VERB
+          2  > NP
+RUS     =  затем же ... зачем
+============
+TITLE        = with_this
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 11/7/6 18:56:50
+CONTENT =  with this
+POS     =  begin
+EXM     =  he held the book with this
+GF      = 1  PREP
+SF      = 1  RESTR
+VAL     =  RESTR ( C , A1 )
+GF1     = 1  sent
+SF1     = 1  SITUAT
+RUS     =  при_этом 1
+============
+TITLE        = within
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  within
+GF      = 1  PREP
+GF2     = 1  >> NP
+RUS     =  в+П 1
+           в_течение+Р 1
+============
+TITLE        = within_the_limits_of
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  within the limits of
+EXM     =  DMs original idea was that anyone could find something brilliant to
+           create within the limits of their (in) competence. -
+           Изначальная идея ДМ заключалась в том, что каждый мог найти
+           что-нибудь блестящее для создания в пределах своей (не)компетентности.
+GF      = 1  PREP
+SF      = 1  RESTR
+VAL     =  RESTR ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+SF2     = 1  SPAC
+          2  ABSTR
+RUS     =  в_пределах+Р 1
+           в_рамках+Р 1
+           в_сфере+Р 1
+           в границах
+============
+TITLE        = without
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  without
+GF      = 1  PREP
+VAL     =  ACT ( A1 , A2 )
+GF2     = 1  >> NP
+RUS     =  без+Р 1
+============
+TITLE        = without_regard
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  without regard (for | to)
+EXM     =  The sentence is translated without regard to the
+           context. -
+           Фраза переведена без учёта контекста.
+GF      = 1  PREP
+SF      = 1  RESTR
+VAL     =  RESTR ( A2 , A1 )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+GF2     = 1  >> NP
+RUS     =  без_учета+Р 1
+============
+TITLE        = yet_nevertheless
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 11/6/1 10:47:56
+CONTENT =  (|yet) nevertheless
+EXM     =  I had felt certain that the session had gone well, yet nevertheless
+           waited anxiously to hear officially, but nothing happened. -
+           Я был уверен, что слушания прошли хорошо, и все же нервно ждал,
+           чтобы услышать официально, но ничего не произошло.
+           Yet nevertheless, this well-regarded manager occasionally succumbs to
+           the pressure, and subordinates bear the brunt: -
+           Тем не менее, этот уважаемый менеджер иногда не выдерживает
+           давления, и подчиненные несут основную тяжесть:
+GF      = 1  PART
+SF      = 1  NEG
+             IN-ACCORD
+VAL     =  MODL ( A1 , C )
+GF1     = 1  VERB
+SF1     = 1  PREDIC
+RUS     =  все_же 1
+           тем_не_менее 1
+           все-таки 1
+           но 1
+           однако
+COMM    =  Переведено в OPER, так как, во-первых, PARTICица, во-вторых - так как требуется
+           устанавливать, с какой другой ситуацией соотносит "все же" описываемую ситуацию.

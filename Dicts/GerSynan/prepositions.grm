@@ -1,0 +1,53 @@
+%%  ================  preposition phrases  ==================
+%% in dem Haus
+%% in das Haus
+%% während des folgenden Tages
+
+[PRP_ACC] -> [TOKEN filename="prep_akk.txt" grm="PRP"];
+[PRP_GEN] -> [TOKEN filename="prep_gen.txt" grm="PRP"];
+[PRP_DAT] -> [TOKEN filename="prep_dat.txt" grm="PRP"];
+
+[PRP_ACC] -> 'mit' 'oder' 'ohne';
+[PRP_ACC] -> 'in' 'Bezug' 'auf';
+[PRP_DAT] -> 'zusammen' 'mit';
+[PRP_DAT] -> 'abgesehen' 'von';
+
+[PP-OBJ] -> [NP] | [PRO] | 'welcher';
+
+[PP] ->  [PRP_ACC] [PP-OBJ grm="akk"];
+
+[PP] ->  [PRP_GEN] [PP-OBJ grm="gen"];
+
+[PP] ->  [PRP_DAT] [PP-OBJ grm="dat"];
+
+[PP] ->  [TOKEN grm="PRP" form="bis"] ('heute'|'morgen');
+
+
+%% ================  preposition phrases (compound preposition) ==================
+%% ============   dative  =============
+%% im Haus	
+
+[COMP_PRP_DAT] -> 'am'|'beim'|'hinterm'|'im'|'vom'|'vorm'|'zum';
+[COMP_PRP_DAT] -> 'bis' [COMP_PRP_DAT];
+
+
+[PP] -> [COMP_PRP_DAT] [NUMBER_EXT]? ( [WEAK_NP grm="dat, mas"] | [WEAK_NP grm="dat, neu"] );
+
+%% ===  accusative  =====
+%% ins rote Haus
+
+[COMP_PRP_ACC] -> 'ans'|'aufs'|'durchs'|'fürs'|'hinters'|'ins'|'ums'|'vors';
+
+
+[PP] -> [COMP_PRP_ACC] [NUMBER_EXT]? ([WEAK_NP grm="akk, mas"] | [WEAK_NP grm="akk, neu"]);
+
+
+%% ==========   zur  =========
+%% zur Schule
+
+[WEAK_NP_R] ->  [WEAK_NP grm="fem, dat"];
+[ZUR] -> 'bis'? 'zur';
+
+[PP] -> [ZUR] [NUMBER_EXT]? [WEAK_NP_R];
+
+

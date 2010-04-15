@@ -1,0 +1,45 @@
+%% == common rules for terminals ==
+
+[NOUN] -> [TOKEN grm="Ñ"];
+[ADJ] -> [TOKEN grm="Ï"];
+[SH-ADJ] -> [TOKEN grm="ÊÐ_ÏÐÈË"];
+[PART] -> [TOKEN grm="ÏÐÈ×ÀÑÒÈÅ"];
+[SH-PART] -> [TOKEN grm="ÊÐ_ÏÐÈ×ÀÑÒÈÅ"];
+[DEEPR] -> [TOKEN grm="ÄÅÅÏÐÈ×ÀÑÒÈÅ"];
+[V] -> [TOKEN grm="Ã"];
+[ADV] -> [TOKEN grm="Í"];
+[INF] -> [TOKEN grm="ÈÍÔÈÍÈÒÈÂ"];
+[PRO] -> [TOKEN grm="ÌÑ"];
+[PRO-ADJ] -> [TOKEN grm="ÌÑ-Ï"];
+[PRED] -> [TOKEN grm="ÏÐÅÄÊ"];
+[PRED-PRO] -> [TOKEN grm="ÌÑ-ÏÐÅÄÊ"];
+[NUM] -> [TOKEN grm="×ÈÑË"];
+[DIG] -> [TOKEN type="DC"];
+[PARTICLE] -> [TOKEN form="ËÈ" grm="×ÀÑÒ"] | [TOKEN form="ÆÅ" grm="×ÀÑÒ"] | [TOKEN form="ÁÛ" grm="×ÀÑÒ"] | [TOKEN form="ÓÆ" grm="×ÀÑÒ"] | [TOKEN form="ÒÎËÜÊÎ" grm="×ÀÑÒ"] | [TOKEN form="Æ" grm="×ÀÑÒ"] | [TOKEN form="Á" grm="×ÀÑÒ"] | [TOKEN form="ËÜ" grm="×ÀÑÒ"];
+[COMMA] -> ',';
+[DOT] -> '.';
+[CONJ] -> 'è' | 'èëè';
+[PREP] -> [TOKEN grm="ÏÐÅÄË" hom="yes"];
+[PREP_SIMPLE] -> [TOKEN grm="ÏÐÅÄË" hom="no"];
+[UZH] -> [TOKEN form="óæ" grm="×ÀÑÒ"];
+
+[ROOT] -> [NOUN] | 
+		  [ADJ] | 
+		  [SH-ADJ] | 
+		  [PART] |
+		  [SH-PART] |
+		  [DEEPR] |
+		  [V] |
+		  [ADV] |
+		  [INF] |
+		  [PRO] |
+		  [PRO-ADJ] |
+		  [PRED] |
+		  [DIG] |
+		  [NUM] |
+		  [PARTICLE] |
+		  [COMMA] |
+		  [CONJ] |
+		  [PREP] |
+		  [PREP_SIMPLE] |
+		  [UZH];

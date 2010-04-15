@@ -1,0 +1,228 @@
+%% == format_for_disrupt_conj ==
+
+%% îé äà âàùå âñå íå ðàçáèðàåòñÿ, ïåðåäåëûâàþ
+
+%% ñîãëàñîâàíèå ïî ÷àñòè ðå÷è
+%% íå..., à\íî; íå òîëüêî..., íî (è); êàê..., òàê è; õîòÿ..., çàòî; ïóñòü..., íî; õîòÿ (è)..., íî\à\äà; íå òî ÷òî\÷òîáû..., íî\à; åñëè (íå)..., òî\òàê
+
+%% ïåðâûå ÷àñòè
+[1-NE-NP] -> 'íå' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-NE-TOLKO-NP] -> 'íå' 'òîëüêî' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-KAK-NP] -> 'êàê' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-HOTJA-NP] -> 'õîòÿ' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-PUST-NP] -> 'ïóñòü' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-HOTJA-I-NP] -> 'õîòÿ' 'è' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-NE-TO-CHTO-NP] -> 'íå' 'òî' '÷òî' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-NE-TO-CHTOBY-NP] -> 'íå' 'òî' '÷òîáû' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-ESLI-NP] -> 'åñëè' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+[1-ESLI-NE-NP] -> 'åñëè' 'íå' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]) [COMMA];
+
+%% âòîðûå ÷àñòè
+[2-A-NP] -> 'à' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-NO-NP] -> 'íî' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-NO-I-NP] -> 'íî' 'è' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-TAK-I-NP] -> 'òàê' 'è' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-ZATO-NP] -> 'çàòî' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-DA-NP] ->  'äà' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-TO-NP] ->  'òî' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-TAK-NP] ->  'òàê' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[2-A-TOLKO-NP] -> 'à' 'òîëüêî' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+
+%%âñå âìåñòå
+[NE-A-NO] -> [1-NE-NP] ([2-A-NP root] | [2-NO-NP root]);
+[NE-TOLKO-NO-I] -> [1-NE-TOLKO-NP] ([2-NO-NP root] | [2-NO-I-NP root]);
+[KAK-TAK-I] -> [1-KAK-NP] [2-TAK-I-NP root];
+[HOTJA-ZATO] -> [1-HOTJA-NP] [2-ZATO-NP root];
+[PUST-NO] -> [1-PUST-NP] [2-NO-NP root];
+[HOTJA-I-NO-A-DA] -> ([1-HOTJA-NP] | [1-HOTJA-I-NP]) ([2-A-NP root] | [2-NO-NP root] | [2-DA-NP root]);
+[NE-TO-CHTOBY-NO-A] -> ([1-NE-TO-CHTO-NP] | [1-NE-TO-CHTOBY-NP]) ([2-A-NP root] | [2-NO-NP root]);
+[ESLI-NE-TO-TAK] -> ([1-ESLI-NP] | [1-ESLI-NE-NP]) ([2-TO-NP root] | [2-TAK-NP root]);
+[NE-A-TOLKO] -> [1-NE-NP] [2-A-TOLKO-NP];
+
+%% ïåðâûå ÷àñòè
+[1-NE-ADJ] -> 'íå' [ADJ root] [COMMA];
+[1-NE-TOLKO-ADJ] -> 'íå' 'òîëüêî' [ADJ root] [COMMA];
+[1-KAK-ADJ] -> 'êàê' [ADJ root] [COMMA];
+[1-HOTJA-ADJ] -> 'õîòÿ' [ADJ root] [COMMA];
+[1-PUST-ADJ] -> 'ïóñòü' [ADJ root] [COMMA];
+[1-HOTJA-I-ADJ] -> 'õîòÿ' 'è' [ADJ root] [COMMA];
+[1-NE-TO-CHTO-ADJ] -> 'íå' 'òî' '÷òî' [ADJ root] [COMMA];
+[1-NE-TO-CHTOBY-ADJ] -> 'íå' 'òî' '÷òîáû' [ADJ root] [COMMA];
+[1-ESLI-ADJ] -> 'åñëè' [ADJ root] [COMMA];
+[1-ESLI-NE-ADJ] -> 'åñëè' 'íå' [ADJ root] [COMMA];
+
+%% âòîðûå ÷àñòè
+[2-A-ADJ] -> 'à' [ADJ root];
+[2-NO-ADJ] -> 'íî' [ADJ root];
+[2-NO-I-ADJ] -> 'íî' 'è' [ADJ root];
+[2-TAK-I-ADJ] -> 'òàê' 'è' [ADJ root];
+[2-ZATO-ADJ] -> 'çàòî' [ADJ root];
+[2-DA-ADJ] ->  'äà' [ADJ root];
+[2-TO-ADJ] ->  'òî' [ADJ root];
+[2-TAK-ADJ] ->  'òàê' [ADJ root];
+[2-A-TOLKO-ADJ] -> 'à' 'òîëüêî' [ADJ root];
+
+%%âñå âìåñòå
+[NE-A-NO] -> [1-NE-ADJ] ([2-A-ADJ root] | [2-NO-ADJ root]);
+[NE-TOLKO-NO-I] -> [1-NE-TOLKO-ADJ] ([2-NO-ADJ root] | [2-NO-I-ADJ root]);
+[KAK-TAK-I] -> [1-KAK-ADJ] [2-TAK-I-ADJ root];
+[HOTJA-ZATO] -> [1-HOTJA-ADJ] [2-ZATO-ADJ root];
+[PUST-NO] -> [1-PUST-ADJ] [2-NO-ADJ root];
+[HOTJA-I-NO-A-DA] -> ([1-HOTJA-ADJ] | [1-HOTJA-I-ADJ]) ([2-A-ADJ root] | [2-NO-ADJ root] | [2-DA-ADJ root]);
+[NE-TO-CHTOBY-NO-A] -> ([1-NE-TO-CHTO-ADJ] | [1-NE-TO-CHTOBY-ADJ]) ([2-A-ADJ root] | [2-NO-ADJ root]);
+[ESLI-NE-TO-TAK] -> ([1-ESLI-ADJ] | [1-ESLI-NE-ADJ]) ([2-TO-ADJ root] | [2-TAK-ADJ root]);
+[NE-A-TOLKO] -> [1-NE-ADJ] [2-A-TOLKO-ADJ];
+
+%% ïåðâûå ÷àñòè
+[1-NE-ADV] -> 'íå' [ADV root] [COMMA];
+[1-NE-TOLKO-ADV] -> 'íå' 'òîëüêî' [ADV root] [COMMA];
+[1-KAK-ADV] -> 'êàê' [ADV root] [COMMA];
+[1-HOTJA-ADV] -> 'õîòÿ' [ADV root] [COMMA];
+[1-PUST-ADV] -> 'ïóñòü' [ADV root] [COMMA];
+[1-HOTJA-I-ADV] -> 'õîòÿ' 'è' [ADV root] [COMMA];
+[1-NE-TO-CHTO-ADV] -> 'íå' 'òî' '÷òî' [ADV root] [COMMA];
+[1-NE-TO-CHTOBY-ADV] -> 'íå' 'òî' '÷òîáû' [ADV root] [COMMA];
+[1-ESLI-ADV] -> 'åñëè' [ADV root] [COMMA];
+[1-ESLI-NE-ADV] -> 'åñëè' 'íå' [ADV root] [COMMA];
+
+%% âòîðûå ÷àñòè
+[2-A-ADV] -> 'à' [ADV root];
+[2-NO-ADV] -> 'íî' [ADV root];
+[2-NO-I-ADV] -> 'íî' 'è' [ADV root];
+[2-TAK-I-ADV] -> 'òàê' 'è' [ADV root];
+[2-ZATO-ADV] -> 'çàòî' [ADV root];
+[2-DA-ADV] ->  'äà' [ADV root];
+[2-TO-ADV] ->  'òî' [ADV root];
+[2-TAK-ADV] ->  'òàê' [ADV root];
+[2-A-TOLKO-ADV] -> 'à' 'òîëüêî' [ADV root];
+
+%%âñå âìåñòå
+[NE-A-NO] -> [1-NE-ADV] ([2-A-ADV root] | [2-NO-ADV root]);
+[NE-TOLKO-NO-I] -> [1-NE-TOLKO-ADV] ([2-NO-ADV root] | [2-NO-I-ADV root]);
+[KAK-TAK-I] -> [1-KAK-ADV] [2-TAK-I-ADV root];
+[HOTJA-ZATO] -> [1-HOTJA-ADV] [2-ZATO-ADV root];
+[PUST-NO] -> [1-PUST-ADV] [2-NO-ADV root];
+[HOTJA-I-NO-A-DA] -> ([1-HOTJA-ADV] | [1-HOTJA-I-ADV]) ([2-A-ADV root] | [2-NO-ADV root] | [2-DA-ADV root]);
+[NE-TO-CHTOBY-NO-A] -> ([1-NE-TO-CHTO-ADV] | [1-NE-TO-CHTOBY-ADV]) ([2-A-ADV root] | [2-NO-ADV root]);
+[ESLI-NE-TO-TAK] -> ([1-ESLI-ADV] | [1-ESLI-NE-ADV]) ([2-TO-ADV root] | [2-TAK-ADV root]);
+[NE-A-TOLKO] -> [1-NE-ADV] [2-A-TOLKO-ADV];
+
+%% ïåðâûå ÷àñòè
+[1-NE-INF] -> 'íå' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-NE-TOLKO-INF] -> 'íå' 'òîëüêî' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-KAK-INF] -> 'êàê' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-HOTJA-INF] -> 'õîòÿ' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-PUST-INF] -> 'ïóñòü' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-HOTJA-I-INF] -> 'õîòÿ' 'è' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-NE-TO-CHTO-INF] -> 'íå' 'òî' '÷òî' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-NE-TO-CHTOBY-INF] -> 'íå' 'òî' '÷òîáû' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-ESLI-INF] -> 'åñëè' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+[1-ESLI-NE-INF] -> 'åñëè' 'íå' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]) [COMMA];
+
+%% âòîðûå ÷àñòè
+[2-A-INF] -> 'à' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-NO-INF] -> 'íî' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-NO-I-INF] -> 'íî' 'è' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-TAK-I-INF] -> 'òàê' 'è' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-ZATO-INF] -> 'çàòî' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-DA-INF] ->  'äà' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-TO-INF] ->  'òî' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-TAK-INF] ->  'òàê' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[2-A-TOLKO-INF] -> 'à' 'òîëüêî' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+
+%%âñå âìåñòå
+[NE-A-NO] -> [1-NE-INF] ([2-A-INF root] | [2-NO-INF root]);
+[NE-TOLKO-NO-I] -> [1-NE-TOLKO-INF] ([2-NO-INF root] | [2-NO-I-INF root]);
+[KAK-TAK-I] -> [1-KAK-INF] [2-TAK-I-INF root];
+[HOTJA-ZATO] -> [1-HOTJA-INF] [2-ZATO-INF root];
+[PUST-NO] -> [1-PUST-INF] [2-NO-INF root];
+[HOTJA-I-NO-A-DA] -> ([1-HOTJA-INF] | [1-HOTJA-I-INF]) ([2-A-INF root] | [2-NO-INF root] | [2-DA-INF root]);
+[NE-TO-CHTOBY-NO-A] -> ([1-NE-TO-CHTO-INF] | [1-NE-TO-CHTOBY-INF]) ([2-A-INF root] | [2-NO-INF root]);
+[ESLI-NE-TO-TAK] -> ([1-ESLI-INF] | [1-ESLI-NE-INF]) ([2-TO-INF root] | [2-TAK-INF root]);
+[NE-A-TOLKO] -> [1-NE-INF] [2-A-TOLKO-INF];
+
+%% ïåðâûå ÷àñòè
+[1-NE-PP] -> 'íå' [ÏÃ] [COMMA];
+[1-NE-TOLKO-PP] -> 'íå' 'òîëüêî' [ÏÃ] [COMMA];
+[1-KAK-PP] -> 'êàê' [ÏÃ] [COMMA];
+[1-HOTJA-PP] -> 'õîòÿ' [ÏÃ] [COMMA];
+[1-PUST-PP] -> 'ïóñòü' [ÏÃ] [COMMA];
+[1-HOTJA-I-PP] -> 'õîòÿ' 'è' [ÏÃ] [COMMA];
+[1-NE-TO-CHTO-PP] -> 'íå' 'òî' '÷òî' [ÏÃ] [COMMA];
+[1-NE-TO-CHTOBY-PP] -> 'íå' 'òî' '÷òîáû' [ÏÃ] [COMMA];
+[1-ESLI-PP] -> 'åñëè' [ÏÃ] [COMMA];
+[1-ESLI-NE-PP] -> 'åñëè' 'íå' [ÏÃ] [COMMA];
+
+%% âòîðûå ÷àñòè
+[2-A-PP] -> 'à' [ÏÃ];
+[2-NO-PP] -> 'íî' [ÏÃ];
+[2-NO-I-PP] -> 'íî' 'è' [ÏÃ];
+[2-TAK-I-PP] -> 'òàê' 'è' [ÏÃ];
+[2-ZATO-PP] -> 'çàòî' [ÏÃ];
+[2-DA-PP] ->  'äà' [ÏÃ];
+[2-TO-PP] ->  'òî' [ÏÃ];
+[2-TAK-PP] ->  'òàê' [ÏÃ];
+[2-A-TOLKO-PP] -> 'à' 'òîëüêî' [ÏÃ];
+
+%%âñå âìåñòå
+[NE-A-NO] -> [1-NE-PP] ([2-A-PP root] | [2-NO-PP root]);
+[NE-TOLKO-NO-I] -> [1-NE-TOLKO-PP] ([2-NO-PP root] | [2-NO-I-PP root]);
+[KAK-TAK-I] -> [1-KAK-PP] [2-TAK-I-PP root];
+[HOTJA-ZATO] -> [1-HOTJA-PP] [2-ZATO-PP root];
+[PUST-NO] -> [1-PUST-PP] [2-NO-PP root];
+[HOTJA-I-NO-A-DA] -> ([1-HOTJA-PP] | [1-HOTJA-I-PP]) ([2-A-PP root] | [2-NO-PP root] | [2-DA-PP root]);
+[NE-TO-CHTOBY-NO-A] -> ([1-NE-TO-CHTO-PP] | [1-NE-TO-CHTOBY-PP]) ([2-A-PP root] | [2-NO-PP root]);
+[ESLI-NE-TO-TAK] -> ([1-ESLI-PP] | [1-ESLI-NE-PP]) ([2-TO-PP root] | [2-TAK-PP root]);
+[NE-A-TOLKO] -> [1-NE-PP] [2-A-TOLKO-PP];
+
+%% è ñàä, è îãîðîä
+%% È êðàñèâàÿ, è æåëòàÿ
+%% è ïèòü , è êóðèòü
+
+[I-NP] -> 'è' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[I-I-NP] -> [I-NP] [COMMA] [I-NP root];
+[I-I-NP] -> [I-I-NP] [COMMA] [I-NP];
+
+[I-ADJP] -> 'è' [ADJ root];
+[I-I-ADJP] -> [I-ADJP] [COMMA] [I-ADJP root];
+[I-I-ADJP] -> [I-I-ADJP] [COMMA] [I-ADJP root];
+
+[I-ADVP] -> 'è' [ADV root];
+[I-I-ADVP] -> [I-ADVP] [COMMA] [I-ADVP root];
+[I-I-ADVP] -> [I-I-ADVP] [COMMA] [I-ADVP root];
+
+[I-INF] -> 'è' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[I-I-INF] -> [I-INF] [COMMA] [I-INF root];
+[I-I-INF] -> [I-I-INF] [COMMA] [I-INF root];
+
+[I-PP] -> 'è' [ÏÃ];
+[I-I-PP] -> [I-PP] [COMMA] [I-PP root];
+[I-I-PP] -> [I-I-PP] [COMMA] [I-PP root];
+
+[I-I] -> [I-I-NP] | [I-I-ADJP] | [I-I-ADVP] | [I-I-INF] | [I-I-PP];
+
+%%	òî ëè òî ëè
+
+[TOLI-NP] -> 'òî' 'ëè' ([NOUN root] | [ÏÐÈË_ÑÓÙ root]);
+[TOLI-TOLI-NP] -> [TOLI-NP] [COMMA] [TOLI-NP root];
+[TOLI-TOLI-NP] -> [TOLI-TOLI-NP] [COMMA] [TOLI-NP];
+
+[TOLI-ADJP] -> 'òî' 'ëè' [ADJ root];
+[TOLI-TOLI-ADJP] -> [TOLI-ADJP] [COMMA] [TOLI-ADJP root];
+[TOLI-TOLI-ADJP] -> [TOLI-TOLI-ADJP] [COMMA] [TOLI-ADJP root];
+
+[TOLI-ADVP] -> 'òî' 'ëè' [ADV root];
+[TOLI-TOLI-ADVP] -> [TOLI-ADVP] [COMMA] [TOLI-ADVP root];
+[TOLI-TOLI-ADVP] -> [TOLI-TOLI-ADVP] [COMMA] [TOLI-ADVP root];
+
+[TOLI-INF] -> 'òî' 'ëè' ([INF root] | [ÏÐßÌ_ÄÎÏ root grm="ÈÍÔÈÍÈÒÈÂ"]);
+[TOLI-TOLI-INF] -> [TOLI-INF] [COMMA] [TOLI-INF root];
+[TOLI-TOLI-INF] -> [TOLI-TOLI-INF] [COMMA] [TOLI-INF root];
+
+[TOLI-PP] -> 'òî' 'ëè' [ÏÃ];
+[TOLI-TOLI-PP] -> [TOLI-PP] [COMMA] [TOLI-PP root];
+[TOLI-TOLI-PP] -> [TOLI-TOLI-PP] [COMMA] [TOLI-PP root];
+
+[TOLI-TOLI] -> [TOLI-TOLI-NP] | [TOLI-TOLI-ADJP] | [TOLI-TOLI-ADVP] | [TOLI-TOLI-INF] | [TOLI-TOLI-PP];
+
+[ÐÀÇÐÛÂ_ÑÎÞÇ] -> ([NE-A-NO] | [NE-TOLKO-NO-I] | [KAK-TAK-I] | [HOTJA-ZATO] | [PUST-NO] | [HOTJA-I-NO-A-DA] | [NE-TO-CHTOBY-NO-A] | [ESLI-NE-TO-TAK] | [NE-A-TOLKO] | [I-I] | [TOLI-TOLI]);

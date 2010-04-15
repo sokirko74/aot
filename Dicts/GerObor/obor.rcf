@@ -1,0 +1,22 @@
+[Configuration]
+alex Last
+graf
+user
+af
+boris
+[DomensParams]
+д_яу 255 20
+д_тсмйр 128 10
+д_яел_н 16711680 10
+д_яу 255 20
+д_тсмйр 128 10
+д_яел_н 16711680 10
+д_яу 255 20
+д_тсмйр 128 10
+д_яел_н 16711680 10
+[Options]
+ThesaurusEnable 0
+Language English
+DoNotLock 1
+DoNotSaveLastUserName 0
+ArticleInitTextMode 1
