@@ -76,8 +76,8 @@ run $make_tool -C $RML/Source/GenFreqDict mode=release
 run $make_tool -C $RML/Source/StatDatBin  mode=release
 run $make_tool -C $RML/Source/WordDatBin mode=release
 run $make_tool -C $RML/Source/GenSynDict mode=release
-run $make_tool -C $RML/Source/SemanDaemon mode=release_thread libmode=shared 
-run $make_tool -C $RML/Source/translate mode=release_thread libmode=shared
+#run $make_tool -C $RML/Source/SemanDaemon mode=release_thread libmode=shared 
+#run $make_tool -C $RML/Source/translate mode=release_thread libmode=shared
 run Bin/AprDictGen Dicts/SrcBinDict/dict2809.txt Dicts/BinDict/dict.bin > /dev/null
 run Bin/asp_read Dicts/SrcBinDict/ASP.txt Dicts/BinDict/asp_dict.bin >/dev/null 2>/dev/null
 run Bin/deriv_read Dicts/SrcBinDict/troiki_suff Dicts/BinDict/deriv_suff.bin  >/dev/null 2>/dev/null
