@@ -1,0 +1,2 @@
+MaxNumDom 3
+DictName AOSS

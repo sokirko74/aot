@@ -1,0 +1,218 @@
+abhängig von+D
+angeboren+D
+angemessen+D
+angenehm für+A
+angenehm+D
+angewiesen auf+A
+anständig zu+D
+ansässig in+D
+arm an+D
+aufgelegt zu+D
+aufgeschlossen für+A
+bar+A
+bedenklich für+A
+bedeutungslos für+A
+bedürftig+A
+befindlich in+D
+befreundet mit+D
+begabt in+D
+begierig auf+A/nach+D
+begreiflich+D
+behaftet mit+D
+behilflich bei+D
+behilflich+D
+bekannt für+A/mit+D
+bekannt+D
+beliebt bei+D
+bequem für+A
+bequem+D
+bereit zu+D
+berühmt für+A
+berufen zu+D
+beschwerlich+D
+besessen von+D
+besorgt um+A
+beständig gegen+A
+bewandert in+D/auf+A
+bewusst+A
+bezeichnend für+A
+bitter für+A
+blind gegen+A/gegenüber+D/für+A
+brav zu+D
+böse zu+D/auf+A
+böse+D
+charakteristisch für+A
+dankbar für+A
+dankbar+D
+direkt von+D
+ehrlich zu+D
+eifersüchtig auf+A
+eigen+D
+eigentümlich+D
+eingebildet auf+A
+einig in+D/über+A
+einverstanden mit+D
+empfindlich gegen+A
+empfänglich für+A
+entfernt von+D
+entschieden in+D
+erfahren in+D
+erfreulich für+A
+ergeben+D
+ersichtlich aus+D
+erwünscht+D
+feind+D
+fern von+D
+fern+D
+fertig mit+D
+fest gegen+A
+frech zu+D
+frei von+D
+fremd+D
+froh über+A
+fruchtbar an+D
+fähig zu+D
+fähig+A
+geeignet für+A/zu+D
+gefasst auf+A
+gefährlich für+A
+gefährlich+D
+gefällig+D
+gegenwärtig+D
+geläufig+D
+gemeinsam mit+D
+gemeinsam+D
+gemäß+D
+genehm+D
+geneigt zu+D
+genug für+A
+gerecht+D
+geschickt in/bei+D
+gespannt auf+A
+gesund für+A
+gewachsen+D
+gewandt in+D
+gewiss+A
+gewohnt+A
+gewöhnt an+A
+gewärtig+A
+gierig nach+D
+gleich mit+D
+gleich+D
+gleichgültig gegen+A
+gleichgültig+D
+gleichzeitig mit+D
+glücklich über+A
+günstig+D
+grausam gegen+A
+grob zu+D
+gut für+A/zu+D
+haftbar für+A
+hart gegen+A
+heilsam für+A
+heilsam+D
+heimisch in+D
+herzlich zu+D
+hungrig nach+D
+höflich zu+D
+immun gegen+A
+interessant für+A
+interessiert an+D
+klar zu+D
+klar+D
+kombinierbar mit+D
+krank vor+D
+kritisch gegenüber+D
+kundig+A
+ledig+A
+leid+A
+lieb+D
+los+A
+lästig+D
+matt von/vor+D
+müde+A
+möglich+D
+mächtig+A
+nachteilig für+A
+nahe+D
+nahestehend+D
+neidisch auf+A
+nett zu+D
+neu+D
+neugierig auf+A
+nützlich für+A
+nützlich+D
+nordwestlich von+D
+nordöstlich von+D
+nördlich von+D
+nötig für+A
+überdrüssig+A
+überlegen+D
+überzeugt von+D
+offen für+A
+parallel zu+D
+passend für+A
+peinlich+D
+recht+D
+reich an+D
+reif für+A/zu+D
+satt+A
+scharf auf+A
+schmerzlich für+A
+schuld an+D
+schuldig an+D
+schuldig+A
+schuldig+D
+schwach gegenüber+D
+schädlich+D
+sicher vor+D
+sicher+A
+südlich von+D
+südwestlich von+D
+südöstlich von+D
+speziell für+A
+starr vor+D
+stolz auf+A
+streng zu+D/gegen+A
+stumm vor+D
+taub gegen+A/auf+A
+teuer für+A
+treu+D
+typisch für+A
+unabhängig von+D
+unempfindlich gegen+A
+unmittelbar vor+D
+unschuldig an+D
+unvereinbar mit+D
+verantwortlich für+A
+vereinbar mit+D
+vergleichbar mit+D
+verhasst bei+D
+verhasst+D
+verliebt in
+verschieden von+D
+verständlich für+A
+verständlich+D
+vertraut+D
+verträglich mit+D
+verwandt+D
+verwanzt+D
+verwurzelt in+D/mit+D 
+voll von+D/mit+D
+voll+A
+vorteilhaft für+A
+weit von+D
+wert+A
+wert+D
+westlich von+D
+wichtig für+A
+wichtig+D
+willkommen+D
+würdig+A
+wütend auf+A
+zornig auf+A
+zufrieden mit+D
+zuständig für+A
+östlich von+D
+ähnlich+D
+ärgerlich über+A
