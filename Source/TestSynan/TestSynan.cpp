@@ -159,7 +159,7 @@ try {
                         PrintUsage();
             }
             else {
-                FileName = s;
+                FileName = argv[i];
                 if (!FileExists(FileName.c_str()))
                 {
                     fprintf (stderr, "cannot open file %s\n",  FileName.c_str());
