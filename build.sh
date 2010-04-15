@@ -55,6 +55,9 @@ run $make_tool -C $RML/Source/ConvertTrigramBinary mode=release
 run $make_tool -C $RML/Source/SimpleGrammarPrecompiled mode=release
 run $make_tool -C $RML/Source/SynanDaemon mode=release_thread
 run $make_tool -C $RML/Source/SynanCGI  mode=release_thread
+d=Dicts/Trigram/full.rev/
+run gzip -cd $d/base.lex.gz >$d/base.lex
+run gzip -cd $d/base.ngram.gz >$d/base.ngram
 run Bin/ConvertTrigramBinary  Dicts/Trigram/full.rev.config
 run Bin/TestSynan Russian Test/Synan/Rus/test.txt | cmp - Test/Synan/Rus/result.txt
 
