@@ -1,12 +1,21 @@
-SentNo=0
-ГЛ_ЛИЧН	=	Мама мыла раму . 
-ПРЯМ_ДОП	=	мыла раму 
- ПОДЛ ( мыла -> Мама )
- ПРЯМ_ДОП ( мыла -> раму )
-SentNo=1
-ГЛ_ЛИЧН	=	Папа ушел на работу . 
-ПГ	=	на работу 
- ПГ ( на -> работу )
- ПОДЛ ( ушел -> Папа )
+<chunk>
+<input>Test/Synan/Rus/test.txt</input>
+<sent>
+	<synvar>
+		<clause type="ГЛ_ЛИЧН">Мама мыла раму .</clause>
+		<group type="ПРЯМ_ДОП">мыла раму</group>
+	</synvar>
+	<rel name="ПРЯМ_ДОП"> мыла -> раму </rel>
+	<rel name="ПОДЛ"> мыла -> Мама </rel>
+</sent>
+<sent>
+	<synvar>
+		<clause type="ГЛ_ЛИЧН">Папа ушел на работу .</clause>
+		<group type="ПГ">на работу</group>
+	</synvar>
+	<rel name="ПГ"> на -> работу </rel>
+	<rel name="ПОДЛ"> ушел -> Папа </rel>
+</sent>
+</chunk>
 
 
