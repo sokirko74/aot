@@ -1,0 +1,46 @@
+1.2 GO!
+
+ 
+Once, only people who studied or worked at an institution directly tied 
+to the Net could connect to the world.  Today, though, an ever-growing 
+number of "public-access" systems provide access for everybody.  These 
+systems can now be found in most metropolitan areas (at least in North 
+America) several states, and there are several companies a couple of 
+sites that can provide access across the country. 
+
+   
+
+Some sites are run by for-profit companies; others by non-profit 
+organizations.  Some of these public-access, or host, systems, are free 
+of charge.  Others charge a monthly or yearly fee for unlimited access.  
+And a few charge by the hour. Systems that charge for access will usually 
+let you sign up online with a credit card.  Some also let you set up a 
+billing system if you'd rather pay by check. 
+
+But cost should be only one consideration in choosing a host system, 
+especially if you live in an area with more than one provider.  Most 
+systems let you look around before you sign up.  What is the range of 
+each of their services?  How easy is each to use? What kind of support or 
+help can you get from the system administrators? 
+
+The last two questions are particularly important because many     
+systems provide no user interface at all; when you connect, you are 
+dumped right into the Unix operating system.  If you're already familiar 
+with Unix, or you want to learn how to use it, these systems offer 
+phenomenal power -- in addition to Net access, most also let you tap into 
+the power of Unix to do everything from compiling your own programs to 
+playing online games. 
+
+But if you don't want to have to learn Unix, there are other publicaccess 
+systems that work through menus (just like the ones in 
+restaurants; you are shown a list of choices and then you make your 
+selection of what you want), or which provide a "user interface" that is 
+easier to figure out than the ever cryptic Unix (and fortunately, even on 
+unix systems, there are ways to minimize your exposure to its commands, 
+as we'll see in later chapters). 
+
+Some systems also have their own unique 
+local services, ranging from extensive conferences to large file 
+libraries. 
+
+

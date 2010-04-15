@@ -1,0 +1,25 @@
+6.8  FYI
+ 
+The Usenet newsgroups alt.internet.services and alt.bbs.internet can 
+provide pointers to new telnet systems.  Scott Yanoff periodically 
+posts his "Updated Internet Services List" in the former. The 
+alt.bbs.internet newsgroup is also where you'll find Aydin Edguer's 
+compendium of FAQs related to Internet bulletin-board systems.                 
+
+Peter Scott, who maintains the Hytelnet database, runs a mailing list 
+about new telnet services and changes in existing ones.   To get on the 
+list, send him a note at scott@sklib.usask.ca. 
+
+Gleason Sackman maintains another mailing list dedicated to new Internet 
+services and news about the new uses to which the Net is being put.  To 
+subscribe, send a message to listserv@internic.net. Leave the "subject:" 
+line blank, and as your message, write: Sub net-happenings Your Name. 
+
+The soc.net-people newsgroup is a place to ask about people you can't
+locate elsewhere.
+
+
+
+
+
+

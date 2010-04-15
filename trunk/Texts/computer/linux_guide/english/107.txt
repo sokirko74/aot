@@ -1,0 +1,37 @@
+
+
+ 
+
+1.3 System Features
+
+ 
+Linux supports most of the features found in other implementations of UNIX, plus quite a few that aren't found elsewhere. This section is a nickel tour of the Linux kernel features.         
+
+Linux is a complete multitasking, multiuser operating system (just like all other versions of UNIX). This means that many users can be logged into the same machine at once, running multiple programs simultaneously.   
+
+The Linux system is mostly compatible with a number of UNIX standards (inasmuch as UNIX has standards) on the source level, including IEEE POSIX.1, System V, and BSD features.     It was developed with source portability in mind: therefore, you are most likely to find commonly-used features in the Linux system which are shared across multiple implementations. A great deal of free UNIX software available on the Internet and elsewhere compiles on Linux out of the box. In addition, all source code for the Linux system, including the kernel, device drivers, libraries, user programs, and development tools, is freely distributable. 
+
+Other specific internal features of Linux include POSIX job control (used by shells such as csh and bash),   pseudoterminals (pty devices), and support for national or customized keyboards using dynamically-loadable keyboard drivers. Linux also supports virtual consoles,   which allow you to switch between multiple login sessions from the system console in text mode. Users of the ``screen'' program will find the Linux virtual console implementation familiar. 
+
+The kernel is able to emulate 387-FPU instructions itself, so that systems without a math coprocessor can run programs that require floating-point math instructions.   
+
+Linux supports various filesystem types for storing data. Various filesystems, such as the ext2fs filesystem, have been developed specifically for Linux.   Other filesystem types, such as the Minix-1 and Xenix filesystems, are also supported. The MS-DOS filesystem has been implemented as well, allowing you to access MS-DOS files on hard drive or floppy directly. The ISO 9660 CD-ROM filesystem type, which reads all standard formats of CD-ROMs, is also supported. We'll talk more about filesystems in Chapters 2 and 4. 
+
+Linux provides a complete implementation of TCP/IP networking. This includes device drivers for many popular Ethernet cards, SLIP (Serial Line Internet Protocol, allowing you to access a TCP/IP network via a serial connection), PLIP (Parallel Line Internet Protocol), PPP (Point-to-Point Protocol), NFS (Network File System), and so on. The complete range of TCP/IP clients and services is supported, such as FTP, telnet, NNTP, and SMTP. We'll talk more about networking in Chapter 5.         
+
+The Linux kernel is developed to use the special protected-mode features of the Intel 80386 and 80486 processors.   In particular, Linux makes use of the protected-mode descriptor-based memory management paradigm and many of the other advanced features of these processors. Anyone familiar with 80386 protected-mode programming knows that this chip was designed for a multitasking system such as UNIX (or, actually, Multics). Linux exploits this functionality. 
+
+The Linux kernel supports demand-paged loaded executables. That is, only those segments of a program which are actually used are read into memory from disk. Also, copy-on-write pages are shared among executables, meaning that if several instances of a program are running at once, they will share pages in physical memory, reducing overall memory usage.   
+
+In order to increase the amount of available memory, Linux also implements disk paging: that is, up to 256 megabytes of ``swap space'' can be allocated on disk. When the system requires more physical memory, it will swap out inactive pages to disk, thus allowing you to run larger applications and support more users at once. However, swap is no substitute for physical RAM---it is much slower due to drive access latency times.   
+
+The kernel also implements a unified memory pool for user programs and disk cache. In this way, all free memory is used for caching, and the cache is reduced when running large programs. 
+
+Executables use dynamically linked shared libraries,   meaning that executables share common library code in a single library file found on disk, not unlike the SunOS shared library mechanism. This allows executable files to occupy much less space on disk, especially those that use many library functions. There are also statically-linked libraries for those who wish to use object debugging or maintain ``complete'' executables without the need for shared libraries to be in place. Linux shared libraries are dynamically linked at run-time, allowing the programmer to replace modules of the libraries with their own routines. 
+
+To facilitate debugging, the Linux kernel does core dumps for post-mortem analysis. Using a core dump and an executable linked with debugging support, it is possible to determine what caused a program to crash.       
+
+        
+
+
+ 

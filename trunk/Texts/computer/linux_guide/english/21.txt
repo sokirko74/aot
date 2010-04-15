@@ -1,0 +1,25 @@
+ 
+
+1.4.5 Networking
+
+ 
+Interested in communicating with the world? Yes? No? Maybe? Linux supports the two primary networking protocols for UNIX systems: TCP/IP and UUCP. TCP/IP (Transmission Control Protocol/Internet Protocol, for acronym aficionados) is the set of networking paradigms that allow systems all over the world to communicate on a single network known as the Internet. With Linux, TCP/IP, and a connection to the network, you can communicate with users and machines across the Internet via electronic mail, USENET news, file transfers with FTP, and more. There are many Linux systems currently on the Internet.       
+
+Most TCP/IP networks use Ethernet as the physical network transport. Linux supports many popular Ethernet cards and interfaces for personal computers, including the D-Link pocket Ethernet adaptor for laptops.   
+
+However, because not everyone has an Ethernet drop at home, Linux also supports SLIP (Serial Line Internet Protocol), which allows     you to connect to the Internet via modem. In order to use SLIP, you'll need to have access to a SLIP server, a machine connected to the network which allows dial-in access. Many businesses and universities provide such SLIP servers. In fact, if your Linux system has an Ethernet connection as well as a modem, you can configure it as a SLIP server for other hosts. 
+
+NFS (Network File System) allows your system to seamlessly share files with other machines on the network. FTP (File Transfer Protocol) allows you to       transfer files between other machines. Other applications include sendmail, a system for sending and receiving electronic mail using the SMTP protocol; NNTP-based electronic news systems such as C-News and INN; telnet, rlogin, and rsh, which allow you to login and execute commands on other machines on the network; and finger, which allows you to get information on other Internet users. There are literally tons of TCP/IP-based applications and protocols out there. 
+
+The full range of mail and news readers are available for Linux, such as elm, pine, rn, nn, and tin. Whatever your preference, you can configure your Linux system to send and receive electronic mail and news from all over the world.     
+
+If you have experience with TCP/IP applications on other UNIX systems, Linux will be very familiar to you. The system provides a standard socket programming interface, so virtually any program which uses TCP/IP can be ported to Linux. The Linux X server also supports TCP/IP, allowing you to display applications running on other systems on your Linux display.   
+
+In Chapter 5 we'll discuss configuration and setup of TCP/IP, including SLIP, for Linux. 
+
+UUCP (UNIX-to-UNIX Copy) is an older mechanism used to transfer files,     electronic mail, and electronic news between UNIX machines. Classically, UUCP machines connected to each other over the phone lines via modem, but UUCP is able to transport over a TCP/IP network as well. If you do not have access to a TCP/IP network or a SLIP server, you can configure your system to send and receive files and electronic mail using UUCP. See Chapter 5 for more information. 
+
+    
+
+
+ 

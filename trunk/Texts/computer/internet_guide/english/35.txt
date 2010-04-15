@@ -1,0 +1,68 @@
+6.6  FINDING SOMEONE ON THE NET
+ 
+
+So you have a friend and you want to find out if he has an Internet 
+account to which you can write?  The quickest way may be to just pick up 
+the phone, call him and ask him.  Although there are a variety of "white 
+pages" services available on the Internet, they are far from complete -- 
+college students, users of commercial services such as CompuServe and 
+many Internet public-access sites, and many others simply won't be 
+listed.  Major e-mail providers are working on a universal directory 
+system, but that could be some time away. 
+
+In the meantime, a couple of "white pages" services might give you some 
+leads, or even just entertain you as you look up famous people or longlost acquaintances. 
+
+The whois directory provides names, e-mail and postal mail address and 
+often phone numbers for people listed in it.  To use it, telnet to 
+ 
+     internic.net
+ 
+No log-on is needed.  The quickest way to use it is to type
+ 
+     whois name
+ 
+at the prompt, where "name" is the last name or organization name you're 
+looking for.  If there's a match, you'll get back an e-mail listing.
+
+Another service worth trying, especially since it seems to give beginners 
+fewer problems, is the Knowbot Information Service reachable by telnet at 
+ 
+     info.cnri.reston.va.us 185
+
+Again, no log-on is needed.  This service actually searches through a 
+variety of other "white pages" systems, including the user directory for 
+MCIMail.  To look for somebody, type
+ 
+     query name
+ 
+where "name" is the last name of the person you're looking for.  You can 
+get details of other commands by hitting a question mark at the prompt. 
+You can also use the knowbot system by e-mail.  Start a message to
+
+     netaddress@info.cnri.reston.va.us
+ 
+You can leave the "subject:" line blank. As your message, type
+
+     query name
+
+for the simplest type of search.  If you want details on more complex
+searches, add another line:
+ 
+     man
+
+Another way to search is via the Usenet name server. This is a system at 
+MIT that keeps track of the e-mail addresses of everybody who posts a 
+Usenet message that appears at MIT. It works by e-mail.  Send a message 
+to 
+     
+          mail-server@rtfm.mit.edu
+
+Leave the "subject:" line blank. As your message, write 
+
+           send usenet-addresses/lastname
+
+where "lastname" is the last name of the person you're looking for. The 
+system will write back with any matches and the associated addresses.
+ 
+

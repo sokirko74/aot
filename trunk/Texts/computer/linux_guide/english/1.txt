@@ -1,0 +1,17 @@
+ 
+
+1 Introduction to Linux
+
+ 
+      
+
+Linux is quite possibly the most important achievement of free software since the original Space War, or, more recently, Emacs. It has developed into the operating system for businesses, education, and personal productivity. Linux is no longer just for UNIX wizards  who sit for hours in front of the glowing console (although we assure you that quite a number of users fall into this category). This book will help you get the most out of it. 
+
+Linux  (pronounced with a short i, as in LIH-nucks) is a clone of the UNIX operating system that runs on Intel 80386 and 80486 computers. It supports a wide range of software, from to X Windows to the GNU C/C++ compiler to TCP/IP. It's a versatile, bona fide implementation of UNIX, freely distributed by the terms of the GNU General Public License (see Appendix E). 
+
+Linux can turn any 386 or 486 PC into a workstation. It will give you the full power of UNIX at your fingertips. Businesses are installing Linux on entire networks of machines, using the operating system to manage financial and hospital records, a distributed user computing environment, telecommunications, and more. Universities worldwide are using Linux for teaching courses on operating systems programming and design. And, of course, computing enthusiasts everywhere are using Linux at home, for programming, productivity, and all-around hacking. 
+
+What makes Linux so different is that it is a free implementation of UNIX. It was and still is developed by a group of volunteers, primarily on the Internet, exchanging code, reporting bugs, and fixing problems in an open-ended environment. Anyone is welcome to join in the Linux development effort: all it takes is interest in hacking a free UNIX clone and some kind of programming know-how. The book that you hold in your hands is your tour guide. 
+
+
+ 

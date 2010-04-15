@@ -1,0 +1,18 @@
+ 
+
+2 Obtaining and Installing Linux
+
+ 
+    
+
+    In this chapter, we'll describe how to obtain the Linux software, in the form of one of the various pre-packaged distributions, and how to install the distribution that you choose. 
+
+As we have mentioned, there is no single ``official'' distribution of the Linux software; there are, in fact, many distributions, each of which serves a particular purpose and set of goals. These distributions are available via anonymous FTP from the Internet, on BBS systems worldwide, and via mail on diskette, tape, and CD-ROM. 
+
+Here, we present a general overview of the installation process. Each distribution has its own specific installation instructions, but armed with the concepts presented here you should be able to feel your way through any installation. Appendix A lists sources of information for installation instructions and other help, if you're at a total loss. 
+
+This book contains additional sections detailing the Slackware distribution of Linux. 
+
+
+
+ 

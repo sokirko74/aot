@@ -1,0 +1,55 @@
+
+4.5.3 Putting them together
+
+ 
+Therefore, to archive a group of files and compress the result, you can use the commands: 
+
+# tar cvf backup.tar /etc 
+# gzip -9 backup.tar 
+
+The result will be backup.tar.gz. To unpack this file, use the reverse set of commands: 
+
+# gunzip backup.tar.gz 
+# tar xvf backup.tar 
+
+Of course always make sure that you are in the correct directory before unpacking a tar file. 
+
+You can use some UNIX cleverness to do all of this on one command line, as in the following: 
+
+# tar cvf - /etc gzip -9c > backup.tar.gz 
+
+Here, we are sending the tar file to ``-'', which stands for tar's standard output. This is piped to gzip, which compresses the incoming tar file, and the result is saved in backup.tar.gz. The -c option to gzip tells gzip to send its output to stdout, which is redirected to backup.tar.gz. 
+
+A single command used to unpack this archive would be: 
+
+# gunzip -c backup.tar.gz tar xvf - 
+
+Again, gunzip uncompresses the contents of backup.tar.gz and sends the resulting tar file to stdout. This is piped to tar, which reads ``-'', this time referring to tar's standard input. 
+
+Happily, the tar command also includes the z option to automatically compress/uncompress files on the fly, using the gzip compression algorithm. 
+
+For example, the command 
+
+# tar cvfz backup.tar.gz /etc 
+
+is equivalent to 
+
+# tar cvf backup.tar /etc 
+# gzip backup.tar 
+
+Just as the command 
+
+# tar xvfz backup.tar.Z 
+
+may be used instead of 
+
+# uncompress backup.tar.Z 
+# tar xvf backup.tar 
+
+
+Refer to the man pages for tar and gzip for more information. 
+
+        
+
+
+ 

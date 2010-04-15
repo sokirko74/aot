@@ -1,0 +1,21 @@
+7.4  ODD LETTERS -- DECODING FILE ENDINGS
+
+
+There are a wide variety of compression methods in use.  You can tell 
+which method was used by the last one to three letters at the end of a 
+file. Here are some of the more common ones and what you'll need to uncompress 
+the files they create (most of these decompression programs can 
+be located through archie). 
+
+
+A few last words of caution: Check the size of a file before you get it. 
+The Net moves data at phenomenal rates of speed.  But that 500,000-byte 
+file that gets transferred to your host system in a few seconds could 
+take more than an hour or two to download to your computer if you're 
+using a 2400-baud modem.  Your host system may also have limits on the 
+amount of bytes you can store online at any one time.  Also, although it 
+is really extremely unlikely you will ever get a file infected with a 
+virus, if you plan to do much downloading over the Net, you'd be wise to 
+invest in a good anti-viral program, just in case. 
+
+

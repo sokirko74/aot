@@ -1,0 +1,15 @@
+
+
+ 
+
+3.2 Basic UNIX Concepts
+
+ 
+            UNIX is a multitasking, multiuser operating system. This means that there can be many people using one computer at the same time, running many different applications. (This differs from MS-DOS, where only one person can use the system at any one time.) Under UNIX, for users to identify themselves to the system, they must log in, which entails two steps: Entering your login name (the name which the system identifies you as), and entering your password, which is your personal secret key to logging into your account. Because only you know your password, no one else can login to the system under your username. 
+
+On traditional UNIX systems, the system administrator will assign you a username and an initial password when you are given an account on the system. However, because you are the system administrator, you must set up your own account before you can login---see Section 3.2.1, below. For the following discussions, we'll use the imaginary username ``larry''. 
+
+  In addition, each UNIX system has a hostname assigned to it. It is this hostname that gives your machine a name, gives it character and charm. The hostname is used to identify individual machines on a network, but even if your machine isn't networked, it should have a hostname. In Section 4.10.2 we'll cover setting your system's hostname. For our examples, below, the system's hostname is ``mousehouse''. 
+
+
+ 

@@ -1,0 +1,28 @@
+ 
+
+4.6.2 Using floppies as filesystems
+
+         You can create a filesystem on a floppy just as you would on a hard drive partition. For example, 
+
+# mke2fs /dev/fd0 1440 
+
+creates a filesystem on the floppy in /dev/fd0. The size of the filesystem must correspond to the size of the floppy. High-density 3.5" disks are 1.44 megabytes, or 1440 blocks, in size. High-density 5.25" disks are 1200 blocks. 
+
+  In order to access the floppy, you must mount the filesystem contained on it. The command 
+
+# mount -t ext2 /dev/fd0 /mnt 
+
+will mount the floppy in /dev/fd0 on the directory /mnt. Now, all of the files on the floppy will appear under /mnt on your drive. The ``-t ext2'' specifies an ext2fs filesystem type. If you created another type of filesystem on the floppy, you'll need to specify its type to the mount command. 
+
+  The ``mount point'' (the directory where you're mounting the filesystem) needs to exist when you use the mount command. If it doesn't exist, simply create it with mkdir. 
+
+See Section 4.8 for more information on filesystems, mounting, and mount points. 
+
+    Note that any I/O to the floppy is buffered just as hard disk I/O is. If you change data on the floppy, you may not see the drive light come on until the kernel flushes its I/O buffers. It's important that you not remove a floppy before you unmount it; this can be done with the command 
+
+# umount /dev/fd0 
+
+Do not simply switch floppies as you would on an MS-DOS system; whenever you change floppies, umount the first one and mount the next. 
+
+
+ 

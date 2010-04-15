@@ -1,0 +1,16 @@
+
+ 
+
+2.5.2 Hardware problems
+
+ 
+  
+
+    
+
+The most common form of problem when attempting to install or use Linux is an incompatibility with hardware. Even if all of your hardware is supported by Linux, a misconfiguration or hardware conflict can sometimes cause strange results---your devices may not be detected at boot time, or the system may hang. 
+
+It is important to isolate these hardware problems if you suspect that they may be the source of your trouble. In the following sections we will describe some common hardware problems and how to resolve them. 
+
+
+ 

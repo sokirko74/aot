@@ -1,0 +1,18 @@
+
+ 
+
+5.3.2 Configuring TCP/IP on your system
+
+ 
+  In this section we're going to discuss how to configure an Ethernet TCP/IP connection on your system. Note that this method should work for many systems, but certainly not all. This discussion should be enough to get you on the right path to configuring the network parameters of your machine, but there are numerous caveats and fine details not mentioned here. We direct you to the Linux Network Administrators' Guide and the NET-2-HOWTO for more information. 
+
+First of all, we assume that you have a Linux system that has the TCP/IP software installed. This includes basic clients such as telnet and ftp, system administration commands such as ifconfig and route (usually found in /etc), and networking configuration files (such as /etc/hosts). The other Linux-related networking documents described above explain how to go about installing the Linux networking software if you do not have it already. 
+
+We also assume that your kernel has been configured and compiled with TCP/IP support enabled. See Section 4.7 for information on compiling your kernel. To enable networking, you must answer ``yes'' to the appropriate questions during the make config step, and rebuild the kernel. 
+
+Once this has been done, you must modify a number of configuration files used by NET-2. For the most part this is a simple procedure. Unfortunately, however, there is wide disagreement between Linux distributions as to where the various TCP/IP configuration files and support programs should go. Much of the time, they can be found in /etc, but in other cases may be found in /usr/etc, /usr/etc/inet, or other bizarre locations. In the worst case you'll have to use the find command to locate the files on your system. Also note that not all distributions keep the NET-2 configuration files and software in the same location---they may be spread across several directories. 
+
+The following information applies primarily to Ethernet connections. If you're planning to use SLIP, read this section to understand the concepts, and follow the SLIP-specific instructions in the following section. 
+
+
+ 

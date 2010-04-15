@@ -1,0 +1,8 @@
+ 
+
+A.3.3 The X Window System
+
+	A complete tutorial and reference guide to using the X Window System. If you installed X windows on your Linux system, and want to know how to get the most out of it, you should read this book. Unlike some windowing systems, a lot of the power provided by X is not obvious at first sight. 
+
+
+ 

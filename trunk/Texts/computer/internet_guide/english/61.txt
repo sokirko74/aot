@@ -1,0 +1,89 @@
+6.1  MINING THE NET
+
+
+Like any large community, cyberspace has its libraries, places you can go 
+to look up information or take out a good book.  Telnet is one of your 
+keys to these libraries. 
+
+Telnet is a program that lets you use the power of the Internet to 
+connect you to databases, library catalogs, and other information 
+resources around the world.  Want to see what the weather's like in 
+Vermont? Check on crop conditions in Azerbaijan? Get more information 
+about somebody whose name you've seen online? Telnet lets you do this, 
+and more.  Increasingly, information once available only via telnet is 
+being disseminated by the World-Wide Web (see Chapter 9) -- but it can 
+still be useful to learn your way around telnet.
+
+Alas, there's a big "but!''  Unlike the phone system, Internet is not yet 
+universal;  not everybody can use all of its services.  Almost all 
+colleges and universities on the Internet provide telnet access.   So do 
+all of the for-fee public-access systems listed in Chapter 1. But the 
+Free-Net systems do not give you access to every telnet system.  And if 
+you are using a public-access UUCP or Usenet site, you will not have 
+access to telnet. The main reason for this is cost.  Connecting to the 
+Internet can easily cost $1,000 or more for a leased, high-speed phone 
+line. Some databases and file libraries can be queried by e-mail, 
+however; we'll show you how to do that later on. In the meantime, the 
+rest of this chapter assumes you are connected to a site with at least 
+partial Internet access. 
+     
+Most telnet sites are fairly easy to use and have online help systems. 
+Most also work best (and in some cases, only) with VT100 emulation.  
+Let's dive right in and try one.
+
+At your host system's command line, type
+ 
+     telnet access.usask.ca
+ 
+and hit enter.  That's all you have to do to connect to a telnet site!  
+In this case, you'll be connecting to a service known as Hytelnet, which 
+is a database of computerized library catalogs and other databases 
+available through telnet.
+
+Every telnet site has two addresses -- one composed of words that are 
+easier for people to remember; the other a numerical address better 
+suited for computers.  The "escape character" is good to remember.  When 
+all else fails, depressing your hitting your control key and then the ] 
+key at the same time will disconnect you and return you to your host 
+system.  At the login prompt for this particular site, type 
+ 
+      hytelnet
+ 
+and hit enter.  
+                                                                       
+The first choice, "<WHATIS>" will be highlighted.  Use your down and up 
+arrows to move the cursor among the choices.  Hit enter when you decide 
+on one.  You'll get another menu, which in turn will bring up text files 
+telling you how to connect to sites and giving any special commands or 
+instructions you might need.  Hytelnet does have one quirk. To move back 
+to where you started (for example, from a sub-menu to a main menu), hit 
+the left-arrow key on your computer.  
+
+Play with the system.  You might want to turn on your computer's screencapture, or at the very least, get out a pen and paper. You're bound to 
+run across some interesting telnet services that you'll want to try -- 
+and you'll need their telnet "addresses.'' 
+
+As you move around Hytelnet, it may seem as if you haven't left your host 
+system -- telnet can work that quickly.  Occasionally, when network loads 
+are heavy, however, you will notice a delay between the time you type a 
+command or enter a request and the time the remote service responds. 
+
+To disconnect from Hytelnet and return to your system, hit your q key and 
+enter. 
+
+Some telnet computers are set up so that you can only access them through 
+a specific "port."  In those cases, you'll always see a number after 
+their name, for example:  india.colorado.edu 13. It's important to 
+include that number, because otherwise, you may not get in. 
+
+In fact, try the above address. Type 
+ 
+     telnet india.colorado.edu 13
+ 
+and hit enter.  
+
+What we want is the middle line, which tells you the exact Mountain 
+Standard Time, as determined by a government-run atomic clock in Boulder, 
+Colo. 
+                   
+ 

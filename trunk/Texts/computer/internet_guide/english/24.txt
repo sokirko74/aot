@@ -1,0 +1,155 @@
+4.2  KILLFILES: THE CURE FOR WHAT AILS YOU 
+
+ 
+As you keep reading Usenet, you are going to run across topics or people 
+that really drive you nuts -- or that you just get tired of seeing. 
+
+Killfiles are just the thing for you. When you start your newsreader, it 
+checks to see if you have any lists of words, phrases or names you don't 
+want to see.  If you do, then it blanks out any messages containing those 
+words. 
+
+Such as cascades. 
+
+As you saw earlier, when you post a reply to a message and include parts 
+of that message, the original lines show up with a > in front of them.  
+Well, what if you reply to a reply?  Then you get a >> in front of the 
+line.  And if you reply to that reply? You get >>>.  Keep this up, and 
+soon you get a triangle of >'s building up in your message. 
+
+There are people who like building up these triangles, or cascades.  
+They'll "respond" to your message by deleting everything you've said, 
+leaving only the "In message 123435, you said:" part and the last line of 
+your message, to which they add a nonsensical retort.  On and on they go 
+until the triangle has reached the right end of the page. Then they try 
+to expand the triangle by deleting one > with each new line. Whoever gets 
+to finish this mega-triangle wins.        
+
+There is even a newsgroup just for such folks: alt.cascade.  
+Unfortunately, cascaders would generally rather cascade in other 
+newsgroups. Because it takes a lot of messages to build up a completed 
+cascade, the targeted newsgroup soon fills up with these messages. Of 
+course, if you complain, you'll be bombarded with messages about the 
+First Amendment and artistic expression -- or worse, with another 
+cascade. The only thing you can do is ignore them, by setting up a 
+killfile. 
+
+There are also certain newsgroups where killfiles will come in handy 
+because of the way the newsgroups are organized.  For example, readers of 
+rec.arts.tv.soaps always use an acronym in their subject: line for the 
+show they're writing about (AMC, for example, for "All My Children").  
+This way, people who only want to read about "One Life to Live" can blank 
+out all the messages about "The Young and the Restless" and all the 
+others (to keep people from accidentally screening out messages that 
+might contain the letters "gh" in them, "General Hospital" viewers always 
+use "gh:" in their subject lines). 
+
+Both nn and rn let you create killfiles, but in different ways. 
+
+To create a killfile in nn, go into the newsgroup with the offending 
+messages and type a capital K.  You'll see this at the bottom of your 
+screen: 
+ 
+     AUTO (k)ill or (s)elect (CR => Kill subject 30 days) 
+                                                                               
+If you hit return, nn will ask you which article's subject you're 
+tired of. Chose one and the article and any follow-ups will disappear, 
+and you won't see them again for 30 days. 
+     
+If you type a lower-case k instead, you'll get this: 
+ 
+     AUTO KILL on (s)ubject or (n)ame  (s) 
+                                                                               
+If you hit your S key or just enter,  you'll see this: 
+                                                                               
+     KILL Subject: (=/) 
+ 
+Type in the name of the offending word or phrase and hit enter.  You'll 
+then be prompted: 
+                                                                               
+     KILL in (g)roup 'eff.test' or in (a)ll groups  (g) 
+                                                                               
+except that the name of the group you see will be the one you're actually 
+in at the moment.  Because cascaders and other annoying people often 
+cross-post their messages to a wide range of newsgroups, you might 
+consider hitting a instead of g.  Next comes: 
+ 
+     Lifetime of entry in days (p)ermanent  (30) 
+ 
+The P key will screen out the offending articles forever, while hitting 
+enter will do it for 30 days.  You can also type in a number of days for 
+the blocking. 
+
+Creating killfiles in rn works differently -- its default killfile 
+generator only works for messages in specific groups, rather than 
+globally for your entire newsgroup list.  To create a global killfile, 
+you'll have to write one yourself. 
+
+To create a killfile in rn, go into the newsgroup where the offending 
+messages are and type in its number so you get it on your screen. Type a 
+capital K.  From now on, any message with that subject line will 
+disappear before you read the group. You should probably choose a reply, 
+rather than the original message, so that you will get all of the 
+followups (the original message won't have a "Re: " in its subject line). 
+The next time you call up that newsgroup, rn will tell you it's killing 
+messages. When it's done, hit the space bar to go back into reading mode. 
+
+To create a "global" kill file that will automatically wipe out articles 
+in all groups you read, start rn and type control-K.  This will start 
+your whatever text editor you have as your default on your host system 
+and create a file (called KILL, in your News subdirectory).         
+
+On the first line, you'll type in the word, phrase or name you don't want 
+to see, followed by commands that tell rn whether to search an entire 
+message for the word or name and then what to do when it finds it. 
+
+Each line must be in this form 
+ 
+     /pattern/modifier:j 
+ 
+"Pattern" is the word or phrase you want rn to look for.  It's caseinsensitive: both "test" and "Test" will be knocked out.  The modifier 
+tells rn whether to limit its search to message headers (which can be 
+useful when the object is to never see messages from a particular 
+person): 
+ 
+     a:    Looks through an entire message 
+     h:    Looks just at the header 
+    
+You can leave out the modifier command, in which case rn will look only 
+at the subject line of messages. The "j" at the end tells rn to screen 
+out all articles with the offending word. 
+
+So if you never want to see the word "foo" in any header, ever again, 
+type this: 
+ 
+     /foo/h:j          
+ 
+This is particularly useful for getting rid of articles from 
+people who post in more than one newsgroup, such as cascaders, since 
+an article's newsgroup name is always in the header. 
+
+If you just want to block messages with a subject line about cascades, 
+you could try: 
+  
+     /foo/:j 
+ 
+To kill anything that is a followup to any article, use this pattern: 
+
+     /Subject: *Re:/:j 
+ 
+When done writing lines for each phrase to screen, exit the text editor 
+as you normally would, and you'll be put back in rn. 
+     
+One word of caution: go easy on the global killfile.  An extensive global 
+killfile, or one that makes frequent use of the a: modifier can 
+dramatically slow down rn, since the system will now have to look at 
+every single word in every single message in all the newsgroups you want 
+to read. 
+
+If there's a particular person whose posts you never want to see again, 
+first find his or her address (which will be in the "from:" line of his 
+postings) and then write a line in your killfile like this: 
+ 
+     /From: *name@address\.all/h:j
+
+

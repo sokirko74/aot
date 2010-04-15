@@ -1,0 +1,99 @@
+7.2  YOUR FRIEND ARCHIE
+
+
+How do you find a file you want, though?
+
+Until a few years ago, this could be quite the pain -- there was no 
+master directory to tell you where a given file might be stored on the 
+Net. Who'd want to slog through hundreds of file libraries looking for 
+something? 
+
+Alan Emtage, Bill Heelan and Peter Deutsch, students at McGill University 
+in Montreal, asked the same question.  Unlike the weather, though, they 
+did something about it. 
+
+They created a database system, called archie, that would periodically 
+call up file libraries and basically find out what they had available.  
+In turn, anybody could dial into archie, type in a file name, and see 
+where on the Net it was available. Archie currently catalogs some 1,000 
+file libraries around the world. 
+
+Today, there are three ways to ask archie to find a file for you: through 
+telnet, "client" Archie program on your own host system or e-mail.  All 
+three methods let you type in a full or partial file name and will tell 
+you where on the Net it's stored. 
+
+If you have access to telnet, you can telnet to one of the following 
+addresses: archie.mcgill.ca; archie.sura.net; archie.unl.edu; 
+archie.ans.net; or archie.rutgers.edu.  If asked for a log-in name, type 
+ 
+     archie
+ 
+and hit enter.
+     
+When you connect, the key command is prog, which you use in this form: 
+ 
+     prog filename
+ 
+Followed by enter, where "filename" is the program or file you're looking 
+for. If you're unsure of a file's complete name, try typing in part of 
+the name. For example, "PKZIP" will work as well as "PKZIP204.EXE."  The 
+system does not support DOS or Unix wildcards.  If you ask archie to look 
+for "PKZIP*," it will tell you it couldn't find anything by that name.  
+One thing to keep in mind is that a file is not necessarily the same as a 
+program -- it could also be a document.  This means you can use archie to 
+search for, say, everything online related to the Beetles, as well as 
+computer programs and graphics files. 
+
+A number of Net sites now have their own archie programs that take your 
+request for information and pass it onto the nearest archie database -- 
+ask your system administrator if she has it online. These "client" 
+programs seem to provide information a lot more quickly than the actual 
+archie itself!  If it is available, at your host system's command line, 
+type 
+ 
+     archie -s filename
+ 
+where filename is the program or document you're looking for, and hit 
+enter.  The -s tells the program to ignore case in a file name and lets 
+you search for partial matches. You might actually want to type it this 
+way: 
+ 
+     archie -s filename|more
+ 
+which will stop the output every screen (handy if there are many sites 
+that carry the file you want).  Or you could open a file on your computer 
+with your text-logging function. 
+
+The third way, for people without access to either of the above, is email. Send a message to archie@quiche.cs.mcgill.ca. You can leave the 
+subject line blank.  Inside the message, type 
+ 
+     prog filename
+ 
+where filename is the file you're looking for.  You can ask archie to 
+look up several programs by putting their names on the same "prog" line, 
+like this:
+                       
+     prog file1 file2 file3
+      
+Within a few hours, archie will write back with a list of the appropriate 
+sites. 
+
+In all three cases, if there is a system that has your file, you'll get a 
+response that looks something like this: 
+ 
+   Host sumex-aim.stanford.edu
+ 
+     Location: /info-mac/comm
+            FILE -rw-r--r--     258256  Feb 15 17:07  zterm-09.hqx
+     Location: /info-mac/misc
+            FILE -rw-r--r--       7490  Sep 12 1991  zterm-sys7-color-icons.hqx
+ 
+Chances are, you will get a number of similar looking responses for each 
+program.  The "host" is the system that has the file.  The "Location" 
+tells you which directory to look in when you connect to that system.  
+Ignore the funny-looking collections of r's and hyphens for now.  After 
+them, come the size of the file or directory listing in bytes, the date 
+it was uploaded, and the name of the file.  
+
+

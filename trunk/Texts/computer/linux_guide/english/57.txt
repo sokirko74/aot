@@ -1,0 +1,16 @@
+
+ 
+
+4.7.4 Upgrading other software
+
+ 
+Upgrading other software is usually just a matter of downloading the appropriate files and installing them. Most software for Linux is distributed at gzipped tar files, including either sources or binaries or both. If binaries are not included in the release, you may need to compile them yourself; usually, this means typing make in the directory where the sources are held. 
+
+  Reading the USENET newsgroup comp.os.linux.announce for announcements of new software releases is the easiest way to find out about new software. Whenever you are looking for software on an FTP site, downloading the ls-lR index file from the FTP site and using grep to find the files in question is the easiest way to locate software. If you have archie available to you, it can be of assistance as well. See Appendix A for more details. 
+
+One handy source of Linux software is the Slackware distribution disk images. Each disk contains a number of .tgz files which are simply gzipped tar files. Instead of downloading the disks, you can download the desired .tgz files from the Slackware directories on the FTP site and install them directly. If you run the Slackware distribution, the setup command can be used to automatically load and install a complete series of disks. 
+
+Again, it's usually not a good idea to upgrade by reinstalling with the newest version of Slackware, or another distribution. If you reinstall in this way, you will no doubt wreck your current installation, including user directories and all of your customized configuration. The best way to upgrade software is piecewise; that is, if there is a program that you use often that has a new version, upgrade it. Otherwise, don't bother. Rule of thumb: If it ain't broke, don't fix it. If your current software works, there's no reason to upgrade.     
+
+
+ 

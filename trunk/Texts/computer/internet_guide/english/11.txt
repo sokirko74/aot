@@ -1,0 +1,98 @@
+1.8  HOW IT WORKS
+ 
+
+The worldwide Net is actually a complex web of smaller regional networks.  
+To understand it, picture a modern road network of trans-continental 
+superhighways connecting large cities.  From these large cities come 
+smaller freeways and parkways to link together small towns, whose 
+residents travel on slower, narrow residential ways.  
+
+The Net superhighway is the high-speed Internet.  Connected to this are 
+computers that use a particular system of transferring data at high 
+speeds.  In the U.S., the major Internet "backbones" theoretically can 
+move data at rates of 45 million bits per second (compare this to the 
+average home modem, which has a top speed of roughly 9,600 to 14,400 bits 
+per second).  Connected to the backbone computers are smaller networks 
+serving particular geographic regions, which generally move data at 
+speeds around 1.5 million bits per second.  Feeding off these in turn are 
+even smaller networks or individual computers. 
+
+Unlike with commercial networks such as CompuServe or Prodigy, there is 
+no one central computer or computers running the Internet -- its 
+resources are to be found among thousands of individual computers.  This 
+is both its greatest strength and its greatest weakness.   The approach 
+means it is virtually impossible for the entire Net to crash at once -- 
+even if one computer shuts down, the rest of the network stays up.  The 
+design also reduces the costs for an individual or organization to get 
+onto the network.  However, thousands of connected computers can also 
+make it difficult to navigate the Net and find what you want -- 
+especially as different computers may have different commands for 
+plumbing their resources.  It is only recently that Net users have begun 
+to develop the sorts of navigational tools and "maps" that will let 
+neophytes get around without getting lost. 
+
+Nobody really knows how many computers and networks actually make up this 
+Net.  Some estimates say there are now as many as 12,000 networks 
+connecting nearly 4 million computers and more than 20 million 
+people around the world.  Whatever the actual numbers, however, it is 
+clear they are only increasing.   
+
+The Net is more than just a technological marvel. It is human 
+communication at its most fundamental level.  The pace may be a little 
+quicker when the messages race around the world in a few seconds, but 
+it's not much different from a large and interesting party. You'll see 
+things in cyberspace that will make you laugh; you'll see things that 
+will anger you.  You'll read silly little snippets and new ideas that 
+WILL make you think.  You'll make new friends and meet people you wish 
+would just go away. And you'll do it all in a community that transcends 
+state lines and national borders.
+ 
+major network providers continue to work on ways to make it 
+easier for users of one network to communicate with those of another.  
+Work is underway on a system for providing a universal "white pages" 
+in which you could look up somebody's electronic-mail address, for 
+example.  This connectivity trend will likely speed up in coming years 
+as users begin to demand seamless network access, much as telephone 
+users can now dial almost anywhere in the world without worrying about 
+how many phone companies actually have to connect their calls. 
+
+Today, the links grow ever closer between the Internet and such 
+commercial networks as CompuServe and Prodigy, whose users can now 
+exchange electronic mail with their Internet friends.  All of the major 
+commercial networks, such as CompuServe and America Online are gradually 
+bringing internet access to their users (one network, Delphi, already 
+offers complete access). 
+
+And as it becomes easier to use, more and more people will join this 
+worldwide community we call the Net. 
+
+Being connected to the Net takes more than just reading conferences and 
+logging messages to your computer; it takes asking and answering 
+questions, exchanging opinions -- getting involved. 
+
+If you chose to go forward, to use and contribute, you will become a 
+citizen of Cyberspace.  If you're reading these words for the first time, 
+this may seem like an amusing but unlikely notion -- that one could 
+"inhabit" a place without physical space.  But put a mark beside these 
+words.  Join the Net and actively participate for a year.  Then re-read 
+this passage.  It will no longer seem so strange to be a "citizen of 
+Cyberspace."  It will seem like the most natural thing in the world.   
+
+And that leads to another fundamental thing to remember: 
+ 
+                You can't break the Net!
+ 
+As you travel the Net, your computer may freeze, your screen may erupt 
+into a mass of gibberish.  You may think you've just disabled a milliondollar computer somewhere -- or even your own personal computer.  Sooner 
+or later, this feeling happens to everyone -- and likely more than once. 
+But the Net and your computer are hardier than you think, so relax.  You 
+can no more break the Net than you can the phone system.  If something 
+goes wrong, try again.  If nothing at all happens, you can always 
+disconnect.   If worse comes to worse, you can turn off your computer.  
+Then take a deep breath.  And dial right back in. Leave a note for the 
+person who runs the computer to which you've connected to ask for advice.  
+Try it again. Persistence pays.  
+
+Stay and contribute.  The Net will be richer for it -- and so will you.        
+
+

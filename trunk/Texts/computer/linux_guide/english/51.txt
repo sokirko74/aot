@@ -1,0 +1,23 @@
+ 
+
+4.6.1 Using floppies for backups
+
+ 
+      The easiest way to make a backup using floppies is with tar. The command 
+
+# tar cvfzM /dev/fd0 / 
+
+will make a complete backup of your system using the floppy drive /dev/fd0. The ``M'' option to tar allows the backup to be a multivolume backup; that is, when one floppy is full, tar will prompt for the next. The command 
+
+# tar xvfzM /dev/fd0 
+
+can be used to restore the complete backup. This method can also be used if you have a tape drive (/dev/rmt0) connected to your system. 
+
+    Several other programs exist for making multiple-volume backups; the backflops program found on tsx-11.mit.edu may come in handy. 
+
+Making a complete backup of the system can be time- and resource-consuming. Most system administrators use a incremental backup policy, in which every month a complete backup is taken, and every week only those files which have been modified in the last week are backed up. In this case, if you trash your system in the middle of the month, you can simply restore the last full monthly backup, and then restore the last weekly backups as needed. 
+
+    The find command can be useful in locating files which have changed since a certain date. Several scripts for managing incremental backups can be found on sunsite.unc.edu.     
+
+
+ 

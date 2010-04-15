@@ -1,0 +1,169 @@
+2.5  SENDING E-MAIL TO OTHER NETWORKS
+ 
+ 
+There are a number of computer networks that are not directly part of the 
+Net, but which are now connected through "gateways" that allow the 
+passing of e-mail.  Here's a list of some of the larger networks, how to 
+send mail to them and how their users can send mail to you: 
+ 
+America Online 
+--------------
+ 
+Remove any spaces from a user's name and append "@aol.com," to get 
+ 
+     user@aol.com 
+ 
+America Online users who want to send mail to you need only put your 
+Net address in the "to:" field before composing a message. 
+ 
+ 
+ATTMail 
+-------
+ 
+Address your message to user@attmail.com. 
+   
+From ATTMail, a user would send mail to you in this form: 
+ 
+     internet!domain!user 
+ 
+So if your address were nancyr@world.std.com, your correspondent would 
+send a message to you at 
+ 
+     internet!world.std.com!nancyr 
+ 
+ 
+Bitnet 
+------
+     
+Users of Bitnet (and NetNorth in Canada and EARN in Europe) often have 
+addresses in this form: IZZY@INDVMS.  If you're lucky, all you'll have to 
+do to mail to that address is add "bitnet" at the end, to get 
+izzy@indvms.bitnet.  Sometimes, however, mail to such an address will 
+bounce back to you, because Bitnet addresses do not always translate well 
+into an Internet form.  If this happens, you can send mail through one of 
+two Internet/Bitnet gateways. First, change the @ in the address to a %, 
+so that you get username%site.bitnet.  Then add either @vm.marist.edu or 
+@cunyvm.cuny.edu, so that, with the above example, you would get 
+izzy%indyvms.bitnet@vm.marist.edu or izzy%indvyvms.bitnet@cunyvm.cuny.edu 
+
+Bitnet users have it a little easier: They can usually send mail directly 
+to your e-mail address without fooling around with it at all.  So send 
+them your address and they should be OK. 
+ 
+ 
+CompuServe 
+----------
+ 
+CompuServe users have numerical addresses in this form: 73727,545. 
+To send mail to a CompuServe user, change the comma to a period and add 
+"@compuserve.com"; for example: 73727.545@compuserve.com. 
+
+Note that many CompuServe users must pay extra to receive mail from the 
+Internet. 
+
+If you know CompuServe users who want to send you mail, tell them to GO 
+MAIL and create a mail message. In the address area, instead of typing in 
+a CompuServe number, have them type your address in this form: 
+ 
+     INTERNET:YourID@YourAddress. 
+ 
+For example, INTERNET:adamg@world.std.com.                  
+
+ 
+Delphi
+------
+ 
+To send mail to a Delphi user, the form is username@delphi.com. 
+ 
+Fidonet 
+-------
+ 
+To send mail to people using a Fidonet BBS, you need the name they use to 
+log onto that system and its "node number.''  Fidonet node numbers or 
+addresses consist of three numbers, in this form: 1:322/190.  The first 
+number tells which of several broad geographic zones the BBS is in (1 
+represents the U.S. and Canada, 2 Europe and Israel, 3 Pacific Asia, 4 
+South America).  The second number represents the BBS's network, while 
+the final number is the BBS's "FidoNode'' number in that network. If your 
+correspondent only gives you two numbers (for example, 322/190), it means 
+the system is in zone 1.   
+
+Now comes the tricky part. You have to reverse the numbers and add to 
+them the letters f, n and z (which stand for "FidoNode,''"network,'' and 
+"zone'). For example, the address above would become 
+ 
+     f190.n322.z1. 
+ 
+Now add "fidonet.org'' at the end, to get f190.n322.z1.fidonet.org. Then 
+add "FirstName.LastName@', to get 
+ 
+     FirstName.LastName@f190.n322.z1.fidonet.org
+ 
+Note the period between the first and last names. Also, some countries 
+now have their own Fidonet "backbone" systems, which might affect 
+addressing.  For example, were the above address in Germany, you would 
+end it with "fido.de" instead of "fidonet.org." 
+     
+Whew! 
+
+The reverse process is totally different. First, the person has to have 
+access to his or her BBS's "net mail" area and know the Fidonet address 
+of his or her local Fidonet/UUCP gateway (often their system operator 
+will know it).  Your Fidonet correspondent should address a net-mail 
+message to UUCP (not your name) in the "to:" field.  In the node-number 
+field, they should type in the node number of the Fidonet/UUCP gateway 
+(if the gateway system is in the same regional network as their system, 
+they need only type the last number, for example, 390 instead of 
+322/390).  Then, the first line of the message has to be your Internet 
+address, followed by a blank line.  After that, the person can write the 
+message and send it.  
+
+Because of the way Fidonet moves mail, it could take a day or two for a 
+message to be delivered in either direction.  Also, because many Fidonet 
+systems are run as hobbies, it is considered good form to ask the gateway 
+sysop's permission if you intend to pass large amounts of mail back and 
+forth. Messages of a commercial nature are strictly forbidden (even if 
+it's something the other person asked for). Also, consider it very likely 
+that somebody other than the recipient will read your messages. 
+ 
+ 
+GEnie  
+-----
+
+To send mail to a GEnie user, add "@genie.geis.com" to the end of the 
+GEnie user name, for example: walt@genie.geis.com. 
+ 
+MCIMail 
+-------
+ 
+To send mail to somebody with an MCIMail account, add "@mcimail.com to 
+the end of their name or numerical address. For example: 
+       
+     555-1212@mcimail.com 
+ 
+or 
+     
+     jsmith@mcimail.com 
+ 
+Note that if there is more than one MCIMail subscriber with that name, 
+you will get a mail message back from MCI giving you their names and 
+numerical addresses. You'll then have to figure out which one you want 
+and re-send the message. 
+ 
+From MCI, a user would type 
+ 
+     Your Name (EMS) 
+ 
+at the "To:" prompt.  At the EMS prompt, he or she would type 
+ 
+    internet 
+ 
+followed by your Net address at the "Mbx:" prompt. 
+ 
+Prodigy 
+------- 
+     
+UserID@prodigy.com.  Note that Prodigy users must pay extra for 
+Internet e-mail. 
+
+

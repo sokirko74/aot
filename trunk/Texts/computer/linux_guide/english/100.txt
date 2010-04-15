@@ -1,0 +1,35 @@
+
+
+ 
+
+1.2 A Brief History of Linux
+
+ 
+UNIX is one of the most popular operating systems worldwide because of its large support base and distribution. It was originally developed as a multitasking system for minicomputers and mainframes in the mid-1970's, but has since grown to become one of the most widely used operating systems anywhere, despite its sometimes confusing interface and lack of central standardization. 
+
+    The real reason for UNIX's popularity? Many hackers feel that UNIX is the Right Thing---the One True Operating System. Hence, the development of Linux by an expanding group of UNIX hackers who want to get their hands dirty with their own system. 
+
+Versions of UNIX exist for many systems---ranging from personal computers to supercomputers such as the Cray Y-MP. Most versions of UNIX for personal computers are quite expensive and cumbersome. At the time of this writing, a one-machine version of AT&T's System V for the 386 runs at about US$1500. 
+
+Linux is a freely distributable version of UNIX developed primarily by Linus Torvalds   at the University of Helsinki in Finland. Linux was developed with the help of many UNIX programmers and wizards across the Internet, allowing anyone with enough know-how and gumption the ability to develop and change the system. The Linux kernel uses no code from AT&T or any other proprietary source, and much of the software available for Linux is developed by the GNU project at the Free Software Foundation in Cambridge, Massachusetts. However, programmers all over the world have contributed to the growing pool of Linux software. 
+
+Linux was originally developed as a hobby project by Linus Torvalds. It was inspired by Minix, a small UNIX system developed by Andy Tanenbaum, and     the first discussions about Linux were on the USENET newsgroup comp.os.minix. These discussions were concerned mostly with the development of a small, academic UNIX system for Minix users who wanted more. 
+
+The very early development of Linux was mostly dealing with the task-switching features of the 80386 protected-mode interface, all written in assembly code. Linus writes, ``After that it was plain sailing: hairy coding still, but I had some devices, and debugging was easier. I started using C at this stage, and it certainly speeds up developement. This is also when I start to get serious about my megalomaniac ideas to make `a better Minix than Minix'. I was hoping I'd be able to recompile gcc under Linux some day... 
+    
+    ``Two months for basic setup, but then only slightly longer until I had a disk-driver (seriously buggy, but it happened to work on my machine) and a small filesystem. That was about when I made 0.01 available [around late August of 1991]: it wasn't pretty, it had no floppy driver, and it couldn't do much anything. I don't think anybody ever compiled that version. But by then I was hooked, and didn't want to stop until I could chuck out Minix.'' 
+
+No announcement was ever made for Linux version 0.01. The 0.01 sources weren't even executable: they contained only the bare rudiments of the kernel source, and assumed that you had access to a Minix machine to compile and play with them. 
+
+On 5 October 1991, Linus announced the first ``official'' version of Linux, version 0.02. At this point, Linus was able to run bash (the GNU Bourne Again Shell) and gcc (the GNU C compiler), but not very much else was working. Again, this was intended as a hacker's system. The primary focus was kernel development---none of the issues of user support, documentation, distribution, and so on had even been addressed. Today, the Linux community still seems to treat these ergonomic issues as secondary to the ``real programming''---kernel development. 
+
+Linus wrote in comp.os.minix, ``Do you pine for the nice days of Minix-1.1, when men were men and wrote their own device drivers? Are you without a nice project and just dying to cut your teeth on a OS you can try to modify for your needs? Are you finding it frustrating when everything works on Minix? No more all-nighters to get a nifty program working? Then this post might be just for you. 
+    
+    ``As I mentioned a month ago, I'm working on a free version of a Minix-lookalike for AT-386 computers. It has finally reached the stage where it's even usable (though may not be depending on what you want), and I am willing to put out the sources for wider distribution. It is just version 0.02...but I've successfully run bash, gcc, gnu-make, gnu-sed, compress, etc. under it.'' 
+
+After version 0.03, Linus bumped the version number up to 0.10, as more people started to work on the system. After several further revisions, Linus increased the version number to 0.95, to reflect his expectation that the system was ready for an ``official'' release very soon. (Generally, software is not assigned the version number 1.0 until it is theoretically complete or bug-free.) This was in March of 1992. Almost a year and a half later, in late December of 1993, the Linux kernel was still at version 0.99.pl14---asymptotically approaching 1.0. As of the time of this writing, the current kernel version is 1.1 patchlevel 52, and 1.2 is right around the corner. 
+
+Today, Linux is a complete UNIX clone, capable of running X Windows, TCP/IP, Emacs, UUCP, mail and news software, you name it. Almost all of the major free software packages have been ported to Linux, and commercial software is becoming available. Much more hardware is supported than in original versions of the kernel. Many people have executed benchmarks on 80486 Linux systems and found them comparable with mid-range workstations from Sun Microsystems and Digital Equipment Corporation. Who would have ever guessed that this ``little'' UNIX clone would have grown up to take on the entire world of personal computing? 
+
+
+ 

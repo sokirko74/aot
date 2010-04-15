@@ -1,0 +1,66 @@
+13.3  USENET AND BITNET IN THE CLASSROOM
+
+
+There are numerous Usenet newsgroups of potential interest to 
+teachers and students.  
+
+As you might expect, many are of a scientific bent. You can find these by 
+typing l sci. in rn or using nngrep sci. for nn. There are now close to 
+40, with subjects ranging from archaeology to economics (the "dismal 
+science," remember?) to astronomy to nanotechnology (the construction of 
+microscopically small machines). 
+
+One thing students will quickly learn from many of these groups: science 
+is not just dull, boring facts.  Science is argument and standing your 
+ground and making your case.  The Usenet sci. groups encourage critical 
+thinking. 
+
+Beyond science, social-studies and history classes can keep busy learning 
+about other countries, through the soc.culture newsgroups. 
+
+Most of these newsgroups originated as ways for expatriates of a given 
+country to keep in touch with their homeland and its culture.  In times 
+of crisis, however, these groups often become places to disseminate 
+information from or into the country and to discuss what is happening.  
+From Afghanistan to Yugoslavia, close to 50 countries are now represented 
+on Usenet.  To see which groups are available, use l soc.culture. in rn 
+or nngrep soc.culture. for nn. 
+
+Several "talk" newsgroups provide additional topical discussions, but 
+teachers should screen them first before recommending them to students.  
+They range from talk.abortion and talk.politics.guns to 
+talk.politics.space and talk.environment. 
+
+One caveat:  Teachers might want to peruse particular newsgroups before 
+setting their students loose in them.  Some have higher levels of flaming 
+and blather than others, not to mention content that some might not 
+consider appropriate in a school setting.  Some schools have developed 
+"contracts" that students are required to sign that set out acceptable 
+Net behavior. 
+
+There are also a number of Bitnet discussion groups of potential interest 
+to students and teachers.  See Chapter 5 for information on finding and 
+subscribing to Bitnet discussion groups.  Some with an educational 
+orientation include: 
+ 
+biopi-l     ksuvm.bitnet        Secondary biology education
+chemed-l    uwf.bitnet          Chemistry education
+dts-l       iubvm.bitnet        The Dead Teacher's Society list
+phys-l      uwf.bitnet          Discussions for physics teachers
+physhare    psuvm.bitnet        Where physics teachers share resources
+scimath-l   psuvm.bitnet        Science and math education
+
+To get a list of ftp sites that carry astronomical images in the GIF 
+graphics format, use ftp to connect to nic.funet.fi. Switch to the 
+/pub/astro/general directory and get the file astroftp.txt.  Among the 
+sites listed is ames.arc.nasa.gov, which carries images taken by the 
+Voyager and Galileo probes, among other pictures.
+
+
+
+
+
+CHAPTER 14: BUSINESS ON THE NET
+
+
+

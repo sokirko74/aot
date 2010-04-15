@@ -1,0 +1,33 @@
+12.8  FYI
+ 
+You can find discussions about IRC in the alt.irc newsgroup. 
+
+"A Discussion on Computer Network Conferencing," by Darren Reed (May, 
+1992), provides a theoretical background on why conferencing systems such 
+as IRC are a Good Thing.  It's available through ftp at nic.ddn.mil in 
+the rfc directory as rfc1324.txt. 
+
+Every Friday, Scott Goehring posts a new list of  MUDs and related games 
+and their telnet addresses in the newsgroup rec.games.mud.announce. There 
+are several other mud newsgroups related to specific types of MUDs, 
+including rec.games.mud.social, rec.games.mud.adventure, 
+rec.games.mud.tiny, rec.games.mud.diku and rec.games.mud.lp. 
+
+For a good overview of the impact on the Internet of the Morris Worm, 
+read "Virus Highlights Need for Improved Internet Management," by the 
+U.S. General Accounting Office (June, 1989).  You can get a copy via ftp 
+from cert.sei.cmu.edu in the pub/virus-l/docs directory.  It's listed as 
+gao_rpt. 
+
+Clifford Stoll describes how the Internet works and how he tracked a 
+group of KGB-paid German hackers through it, in "The Cuckoo's Egg: 
+Tracking a Spy through the Maze of Computer Espionage," Doubleday (1989). 
+
+For information on keeping your e-mail private, use anonymous FTP 
+or ncftp to connect to ftp.eff.org and switch to the 
+pub/Net_info/EFF_Net_Guide/Updates directory and get the file 
+netupdate.003.
+
+
+
+

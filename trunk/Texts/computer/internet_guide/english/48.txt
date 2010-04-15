@@ -1,0 +1,28 @@
+8.6  WHEN THINGS GO WRONG
+
+As the Internet grows ever more popular, its resources come under more of 
+a strain.  If you try to use gopher in the middle of the day, at least on 
+the East Coast of the U.S., you'll sometimes notice that it takes a very 
+long time for particular menus or database searches to come up.  
+Sometimes, you'll even get a message that there are too many people 
+connected to whichever service you're trying to use and so you can't get 
+in.  The only alternative is to either try again in 20 minutes or so, or 
+wait until later in the day, when the load might be lower.  When this 
+happens in veronica, try one of the other veronica entries. 
+
+When you retrieve a file through gopher, you'll sometimes be asked if you 
+want to store it under some ludicrously long name (there go our friends 
+the system administrators again, using 128 characters just because Unix 
+lets them).  With certain MS-DOS communications programs, if that name is 
+longer than one line, you won't be able to backspace all the way back to 
+the first line if you want to give it a simpler name.  Backspace as far 
+as you can.  Then, when you get ready to download it to your home 
+computer, remember that the file name will be truncated on your end, 
+because of MS-DOS's file-naming limitations.  Worse, your computer might 
+even reject the whole thing. What to do? Instead of saving it to your 
+home directory, mail it to yourself.  It should show up in your mail by 
+the time you exit gopher.  Then, use your mail command for saving it to 
+your home directory -- at which point you can name it anything you want. 
+Now you can download it. 
+
+

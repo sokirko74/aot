@@ -1,0 +1,128 @@
+3.5  rn COMMANDS
+ 
+ 
+Different commands are available to you in rn depending on whether you 
+are already in a newsgroup or reading a specific article. At any point, 
+typing a lowercase h will bring up a list of available commands and some 
+terse instructions for using them. Here are some of them: 
+ 
+After you've just called up rn, or within a newsgroup:
+ 
+c             Marks every article in a newsgroup as read (or "caught up")
+              so that you don't have to see them again. The system will ask 
+              you if you are sure. Can be done either when asked if you
+              want to read a particular newsgroup or once in the newsgroup.
+ 
+g             Goes to a newsgroup, in this form: 
+     
+                        g news.group 
+      
+              Use this both for going to groups to which you're already 
+              subscribed and subscribing to new groups. 
+ 
+h             Provides a list of available commands with terse 
+              instructions.
+ 
+l             Gives a list of all available newsgroups.
+ 
+p             Goes to the first previous subscribed newsgroup with un-read 
+              articles. 
+ 
+q             Quits, or exits, rn if you have not yet gone into a newsgroup. 
+              If you are in a newsgroup, it quits that one and brings you to 
+              the next subscribed newsgroup. 
+ 
+Only within a newsgroup:
+ 
+=             Gives a list of all available articles in the newsgroup.
+ 
+ 
+m             Marks a specific article or series of articles as "un-read" 
+              again so that you can come back to them later. Typing
+ 
+                        1700m
+ 
+              and hitting enter would mark just that article as un-read. 
+              Typing 
+ 
+                        1700-1800m
+ 
+              and hitting enter would mark all of those articles as unread.
+ 
+space         Brings up the next page of article listings.  If already on
+              the last page, displays the first article in the newsgroup.
+ 
+u             Un-subscribe from the newsgroup. 
+ 
+/text/        Searches through the newsgroup for articles with a specific
+              word or phrase in the "subject:" line, from the current 
+              article to the end of the newsgroup. For example, 
+ 
+                        /EFF/
+ 
+              would bring you to the first article with "EFF" in the 
+              "subject:" line.
+ 
+?text?        The same as /text/ except it searches in reverse order from 
+              the current article.
+ 
+Only within a specific article:
+ 
+e             Some newsgroups consist of articles that are binary files, 
+              typically programs or graphics images.  Hitting e will convert 
+              the ASCII characters within such an article into a file you
+              can then download and use or view (assuming you have the proper
+              computer and software).  Many times, such files will be split
+              into several articles; just keep calling up the articles and
+              hitting e until done.  You'll find the resulting file in your
+              News subdirectory.
+
+C             If you post an article and then decide it was a mistake, call 
+              it up on your host system and hit this.  The message will soon 
+              begin disappearing on systems around the world. 
+ 
+F             Post a public response in the newsgroup to the current 
+              article.  Includes a copy of her posting, which you can then 
+              edit down using your host system's text editor. 
+ 
+f             The same as above except it does not include a copy of the 
+              original message in yours.
+ 
+m             Marks the current article as "un-read" so that you can come 
+              back to it later.  You do not have to type the article 
+              number.       
+ 
+Control-N     Brings up the first response to the article. If there is no 
+              follow-up article, this returns you to the first unread article 
+              in the newsgroup). 
+ 
+Control-P     Goes to the message to which the current article is a reply.
+ 
+n             Goes to the next unread article in the newsgroup. 
+ 
+N             Takes you to the next article in the newsgroup even if you've 
+              already read it.
+ 
+q             Quits, or exits, the current article. Leaves you in the current 
+              newsgroup.
+ 
+R             Reply, via e-mail only, to the author of the current article. 
+              Includes a copy of his message in yours.
+ 
+r             The same as above, except it does not include a copy of his 
+              article.
+ 
+s file        Copies the current article to a file in your News directory, 
+              where "file" is the name of the file you want to save it to. 
+              You'll be asked if you want to use "mailbox" format when 
+              saving. If you answer by hitting your N key, most of the 
+              header will not be saved. 
+
+s|mail user   Mails a copy of the article to somebody. For "user" substitute
+              an e-mail address. Does not let you add comments to the 
+              message first, however.
+ 
+space         Hitting the space bar shows the next page of the article, or, if 
+              at the end, goes to the next un-read article.
+
+

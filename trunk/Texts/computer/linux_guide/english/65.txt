@@ -1,0 +1,15 @@
+ 
+
+4.11 What To Do In An Emergency
+
+ 
+    On some occasions, the system administrator will be faced with the problem of recovering from a complete disaster, such as forgetting the root password or trashing filesystems. The best advice is, don't panic. Everyone makes stupid mistakes---that's the best way to learn about system administration: the hard way. 
+
+Linux is not an unstable version of UNIX. In fact, I have had fewer problems with system hangs than with commercial versions of UNIX on many platforms. Linux also benefits from a strong complement of wizards who can help you get out of a bind. 
+
+The first step in investigating any problem is to attempt to fix it yourself. Poke around, see how things work. Too much of the time, a system administrator will post a desperate plea for help before looking into the problem at all. Most of the time, you'll find that fixing problems yourself is actually very easy. It is the path to guruhood. 
+
+There are very few cases where reinstalling the system from scratch is necessary. Many new users accidentally delete some essential system file, and immediately reach for the installation disks. This is not a good idea. Before taking such drastic measures, investigate the problem and ask others to help fix things up. In almost all cases, you can recover your system from a maintenance diskette. 
+
+
+ 

@@ -1,0 +1,27 @@
+ 
+
+4.8.2 Checking filesystems
+
+ 
+  It is usually a good idea to check your filesystems for damage or corrupt files every now and then. Some systems automatically check their filesystems at boot time (with the appropriate commands in /etc/rc). 
+
+  The command used to check a filesystem depends on the type of the filesystem in question. For ext2fs filesystems (the most commonly used type), this command is e2fsck. For example, the command 
+
+# e2fsck -av /dev/hda2 
+
+will check the ext2fs filesystem on /dev/hda2 and automatically correct any errors. 
+
+      It is usually a good idea to unmount a filesystem before checking it. For example, the command 
+
+# umount /dev/hda2 
+
+will unmount the filesystem on /dev/hda2, after which you can check it. The one exception is that you cannot unmount the root filesystem. In order to check the root filesystem when it's unmounted, you should use a maintenance boot/root diskette (see Section 4.11.1). You also cannot unmount a filesystem if any of the files in it are ``busy''---that is, being used by a running process. For example, you cannot unmount a filesystem if any user's current working directory is on that filesystem. You will receive a ``Device busy'' error if you attempt to unmount a filesystem which is in use. 
+
+      Other filesystem types use different forms of the e2fsck command, such as efsck and xfsck. On some systems, you can simply use the command fsck, which will determine the filesystem type and execute the appropriate command. 
+
+It is important that you reboot your system immediately after checking a mounted filesystem if any corrections were made to that filesystem. (However, in general, you shouldn't check filesystems while they are mounted.) For example, if e2fsck reports that it corrected any errors with the filesystem, you should immediately shutdown -r in order to reboot the system. This is to allow the system to re-sync its information about the filesystem when e2fsck modifies it. 
+
+The /proc filesystem never needs to be checked in this manner. /proc is a memory filesystem, managed directly by the kernel.   
+
+
+ 

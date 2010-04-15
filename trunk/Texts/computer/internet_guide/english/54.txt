@@ -1,0 +1,37 @@
+11.1   CLARINET: ASSOCIATED PRESS, MISS MANNERS AND DILBERT
+
+ 
+Usenet "newsgroups" can be something of a misnomer.  They may be 
+interesting, informative and educational, but they are often not news, at 
+least, not the way most people would think of them. But there are several 
+sources of news and sports on the Net.  
+
+One of the largest is Clarinet, a company in Cupertino, Calf., that 
+distributes wire-service news and columns, along with a news service 
+devoted to computers and even the Dilbert comic strip, in Usenet form.  
+
+Because Clarinet charges for its service, not all host systems carry its 
+articles. Those that do carry them as Usenet groups starting with 
+"clari."  As with other Usenet hierarchies, these are named starting with 
+broad area and ending with more specific categories.  Some of these 
+include business news (clari.biz); general national and foreign news, 
+politics and the like (clari.news), sports (clari.sports); columns by 
+Mike Royko, Miss Manners, and others (clari.feature); and NewsBytes 
+computer and telecommunications reports (clari.nb).  Because Clarinet 
+started in Canada, there is a separate set of clari.canada newsgroups.  
+The clari.nb newsgroups are divided into specific computer types 
+(clari.nb.apple, for example). 
+
+Clari newsgroups feature stories updated around the clock.  There are 
+even a couple of "bulletin" newsgroups for breaking stories: 
+clari.news.bulletin and clari.news.urgent.  Clarinet also sets up new 
+newsgroups for breaking stories that become ongoing ones (such as major 
+natural disasters, coups in large countries and the like). 
+     
+Occasionally, you will see stories in clari newsgroups that just 
+don't seem to belong there.  This happens because of the way wire 
+services work.  AP uses three-letter codes to route its stories to 
+the newspapers and radio stations that make up most of its clientele, and 
+harried editors on deadline sometimes punch in the wrong code. 
+
+

@@ -1,0 +1,35 @@
+ 
+
+4.7.1 Upgrading the kernel
+
+ 
+  Upgrading the kernel is simply a matter of getting the sources and compiling them yourself. You must compile the kernel yourself in order to enable or disable certain features, as well as to ensure that the kernel will be optimized to run on your machine. The process is quite painless. 
+
+ 
+Unpack this tar file from the directory /usr/src; it creates the directory /usr/src/linux which contains the kernel sources. You should delete or rename your existing /usr/src/linux before unpacking the new version. 
+
+Once the sources are unpacked, you need to make sure that two symbolic links in /usr/include are correct. To create these links, use the commands 
+
+# ln -sf /usr/src/linux/include/linux /usr/include/linux 
+# ln -sf /usr/src/linux/include/asm /usr/include/asm 
+
+Once you have created these links once, there is no reason to create them again when you install the next version of the kernel sources. (See Section 3.10 for more about symbolic links.) 
+
+  Note that in order to compile the kernel, you must have the gcc and g++ C and C++ compilers installed on your system. You may need to have the most recent versions of these compilers: see Section 4.7.3, below, for more information. 
+
+To compile the kernel, first cd to /usr/src/linux. Run the command make config. This command will prompt you for a number of configuration options, such as what filesystem types you wish to include in the new kernel. 
+
+Next, edit /usr/src/linux/Makefile. Be sure that the definition for ROOT_DEV is correct---it defines the device used as the root filesystem at boot time. The usual definition is 
+
+ROOT_DEV = CURRENT 
+
+Unless you are changing your root filesystem device, there is no reason to change this. 
+
+Next, run the command make dep to fix all of the source dependencies. This is a very important step. 
+
+  Finally, you're ready to compile the kernel. The command make Image will compile the kernel and leave the new kernel image in the file /usr/src/linux/Image. Alternately, the command make zImage will compile a compressed kernel image, which uncompresses itself at boot time and uses less drive space. 
+
+Once you have the kernel compiled, you need to either copy it to a boot floppy (with a command such as ``cp Image /dev/fd0'') or install it using LILO to boot from your hard drive. See Section 4.2.2 for more information. 
+
+
+ 

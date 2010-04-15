@@ -1,0 +1,88 @@
+The Telecommunications Department
+
+       The main objective of this Department is to build, develop
+       and maintain the work of the telecommunications systems and
+       communications facilities for the effective and uninterrupted
+       functioning of the payments system and to ensure the
+       activities of the Bank of Russia’s units, regional
+       institutions and its other institutions and organisations by:
+
+          * setting up and developing banking telecommunications
+            systems and communications networks;
+          * adopting and introducing telecommunications and
+            communications facilities and technologies into the
+            banking system and ensuring their compatibility with
+            international financial information systems;
+          * organising the development and application of
+            confidential (non-secret) information protection
+            facilities in the banking telecommunications and other
+            communications systems and also facilities ensuring
+            stable operation of the banking telecommunications and
+            other communications networks;
+          * providing the Bank of Russia’s units, regional
+            institutions and its other institutions and
+            organisations with telecommunications and other
+            communications services necessary for their effective
+            functioning.
+
+       To accomplish the tasks assigned to it, the
+       Telecommunications Department performs the following main
+       functions:
+
+          * it participates in drawing up long-term comprehensive
+            and short-term target programmes for the development of
+            informatization and telecommunications systems and
+            ensures their coordination with the projects to develop
+            Russian and international electronic banking systems
+            wherever they are concerned with the development of the
+            telecommunications, communications and information
+            protection systems;
+          * it implements a uniform technical and technological
+            policy in creating and developing a telecommunications
+            environment;
+          * it provides direction and scientific and methodological
+            support for the programme to create a Unified Bank of
+            Russia Telecommunications Network and also participates
+            in the development and implementation of the state,
+            interstate and international programmes and projects in
+            the field of telecommunications and other
+            communications, protection of information and the
+            provision of services in these fields;
+          * it ensures centralised management of the Unified
+            Telecommunications Network (UTN);
+          * it cooperates with Russian and foreign credit
+            organisations and international organisations on matters
+            within the Department's competence;
+          * it analyses the state of the national and international
+            communications and telecommunications systems and
+            paperwork management systems, forecasts their
+            development and puts forward proposals for their
+            application in the banking system and for their
+            improvement;
+          * it builds and develops the Bank of Russia’s
+            communications and telecommunications system, making it
+            compatible with international financial and banking
+            communications systems;
+          * it participates along with other Bank of Russia units in
+            standardising interbank electronic settlement documents,
+            operations and technologies;
+          * it takes part in selecting, testing and compiling
+            reports on the possibility of using or continuation of
+            use of soft- and hardware systems and software products
+            and technologies which are to be introduced or are being
+            used in the regional branches and other institutions and
+            organisations of the Bank of Russia and also in credit
+            organisations, inasmuch as this involves the use of
+            telecommunications, communications and information
+            protection systems;
+          * it organises within the framework of the informatization
+            programme and the programme to create the Central Bank
+            of Russia’s Unified Telecommunications Network the
+            delivery, adaptation and use of advanced soft- and
+            hardware elements of the Central Bank’s
+            telecommunications, communications and information
+            protection systems;
+          * it participates in the development and introduction of
+            methods and means of protecting confidential banking
+            information when it is transmitted through the banking
+            telecommunications and communications systems.

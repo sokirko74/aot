@@ -1,0 +1,16 @@
+
+ 
+
+4.4.4 Setting user attributes
+
+ 
+      After you have created a user, you may need to change attributes for that user, such as home directory or password. The easiest way to do this is to change the values directly in /etc/passwd. To set a user's password, use the passwd command. For example, 
+
+# passwd larry 
+
+will change larry's password. Only root may change other user's password in this manner. Users can change their own passwords with passwd as well. 
+
+            On some systems, the commands chfn and chsh will be available to allow users to set their own fullname and login shell attributes. If not, they will have to ask the system administrator to change these attributes for them. 
+
+
+ 

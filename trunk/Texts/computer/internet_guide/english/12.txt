@@ -1,0 +1,62 @@
+2.2  ELM -- A BETTER WAY 
+
+ 
+Elm is a combination mailbox and letter-writing system that uses menus to 
+help you navigate through mail.  Most Unix-based host systems now have it 
+online. To use it, type 
+  
+     elm 
+ 
+and hit enter.  You'll get a menu of your waiting mail, along with a list 
+of commands you can execute, that will look something like this: 
+ 
+ 
+     Mailbox is '/usr/spool/mail/adamg' with 38 messages [ELM 2.3 PL11]      
+                                                                               
+                                                                               
+                                                                               
+ You can use any of the following commands by pressing the first character;  
+d)elete or u)ndelete mail,  m)ail a message,  r)eply or f)orward mail,  q)uit 
+  To read a message, press <return>.  j = move down, k = move up, ? = help   
+ 
+
+Each line shows the date you received the message, who sent it, how many 
+lines long the message is, and the message's subject. 
+
+If you are using VT100 or similar emulation, you can move up and down the 
+menu with your up and down arrow keys.  Otherwise, type the line number 
+of the message you want to read or delete and hit enter. 
+
+When you read a message, it pauses every 24 lines, instead of scrolling 
+until it's done.  Hit the space bar to read the next page.  You can type 
+a lowercase r to reply or a lower-case q or i to get back to the menu 
+(the I stands for "index").  
+
+At the main menu, hitting a lowercase m followed by enter will let you 
+start a message.  To delete a message, type a lower-case d.  You can do 
+this while reading the message.  Or, if you are in the menu, move the 
+cursor to the message's line and then hit d. 
+
+When you're done with elm, type a lower-case q.  The program will ask if 
+you really want to delete the messages you marked. Then, it will ask you 
+if you want to move any messages you've read but haven't marked for 
+deletion to a "received" file.  For now, hit your n key.  Elm has 
+a potentially major disadvantage for the beginner. The default text 
+editor it often generally calls up when you hit your r or m key is often 
+a program called emacs. Unixoids swear by emacs, but everybody else 
+almost always finds it impossible.  Unfortunately, you can't always get 
+away from it (or vi, another text editor often found on Unix systems), so 
+later on we'll talk about some basic commands that will keep you from 
+going totally nuts.  If you're lucky, though, your system administrator 
+will have changed emacs to Pico, a much easier to use text processor 
+(more on that in the Pine section below).
+
+If you want to save a message to your own computer, hit s, either within 
+the message or with your cursor on the message entry in the elm menu.  A 
+filename will pop up.  If you do not like it, type a new name (you won't 
+have to backspace).  Hit enter, and the message will be saved with that 
+file name in your "home directory" on your host system.  After you exit 
+elm, you can now download it (ask your system administrator for specifics 
+on how to download -- and upload -- such files). 
+
+ 

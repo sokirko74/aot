@@ -1,0 +1,7 @@
+
+
+4.9 Куда обратиться с вопросами 
+
+Линн Филлипс (Leanne Phillips) периодически помещает список часто задаваемых вопросов (и ответов на них) об использовании файлов исключения (killfile) в rn в группах новостей news.newusers.questions и news.answers на Usenet. Билл Уолер (Bill Wohler) помещает руководство по использованию программы чтения новостей nn в группах новостей news.answers и news.software. В группах новостей news.announce.newusers и news.groups на Usenet ищите "A Guide to Social newsgroups and Mailing Lists" (Руководство по социальным группам новостей и спискам рассылки), где дается краткое описание различных групп новостей из иерархии soc. 
+
+"Managing UUCP and Usenet" (Введение UUCP и Usenet) Тима О'Рэйли (Tim O'Reilly) и Грэйс Тодино (Grace Todino) (O'Reilly & Associates, 1992) -хорошее руководство для организации собственной системы Usenet. 

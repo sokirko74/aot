@@ -1,0 +1,71 @@
+3.1  THE GLOBAL WATERING HOLE
+
+
+Imagine a conversation carried out over a period of hours and days, as if 
+people were leaving messages and responses on a bulletin board.  Or 
+imagine the electronic equivalent of a radio talk show where everybody 
+can put their two cents in and no one is ever on hold. 
+
+Unlike e-mail, which is usually "one-to-one,"  Usenet is "many-to-many." 
+Usenet is the international meeting place, where people gather to meet 
+their friends, discuss the day's events, keep up with computer trends or 
+talk about whatever's on their mind.  Jumping into a Usenet discussion 
+can be a liberating experience.  Nobody knows what you look or sound 
+like, how old you are, what your background is.  You're judged solely on 
+your words, your ability to make a point. 
+
+To many people, Usenet IS the Net. In fact, it is often confused with 
+Internet.  But it is a totally separate system. All Internet sites CAN 
+carry Usenet, but so do many non-Internet sites, from sophisticated Unix 
+machines to simple bulletin-board systems running on old XT clones and 
+Apple IIs. 
+
+Technically, Usenet messages are shipped around the world, from host 
+system to host system, using one of several specific Net protocols.  Your 
+host system stores all of its Usenet messages in one place, which 
+everybody with an account on the system can access. That way, no matter 
+how many people actually read a given message, each host system has to 
+store only one copy of it. Many host systems "talk" with several others 
+regularly to exchange messages in case one or another of their links goes 
+down for some reason.  When two host systems connect, they basically 
+compare notes on which Usenet messages they already have.  Any that one 
+is missing the other then transmits, and vice-versa.  Because they are 
+computers, they don't mind running through thousands, even millions, of 
+these comparisons every day. 
+
+Yes, millions.  For Usenet is huge.  Every day, Usenet users pump upwards 
+of 100 million characters a day into the system -- nearly an 
+encyclopedia's worth of writing. Obviously, nobody could possibly keep up 
+with this immense flow of messages.  Let's look at how to find 
+conferences and discussions of interest to you. 
+
+The basic building block of Usenet is the newsgroup, which is a 
+collection of messages with a related theme (on other networks, these 
+would be called conferences, forums, bboards or special-interest groups).  
+There are now more than 9,000 of these newsgroups, in several diferent 
+languages, covering everything from art to zoology, from science fiction 
+to South Africa (not all systems carry all newsgroups, however). 
+
+Some public-access systems, typically the ones that work through menus, 
+try to make it easier by dividing Usenet into several broad categories.  
+Choose one of those and you're given a list of newsgroups in that 
+category.  Then select the newsgroup you're interested in and start 
+reading. 
+
+Other systems let you compile your own "reading list" so that you only 
+see messages in conferences you want.  In both cases, conferences are 
+arranged in a particular hierarchy devised in the early 1980s.  Newsgroup 
+names start with one of a series of broad topic names.  For example, 
+newsgroups beginning with "comp." are about computer-related topics.  
+These broad topics are followed by a series of more focused topics (so 
+that "comp.unix" groups are limited to discussion about Unix).  
+
+In addition, many host systems carry newsgroups for a particular city, 
+state or region.  For example, ne.housing is a newsgroup where New 
+Englanders can look for apartments.  A growing number also carry K12 
+newsgroups, which are aimed at elementary and secondary teachers and 
+students.  And a number of sites carry clari newsgroups, which is 
+actually a commercial service consisting of wire-service stories and a 
+unique online computer news service (more on this in chapter 11). 
+
+

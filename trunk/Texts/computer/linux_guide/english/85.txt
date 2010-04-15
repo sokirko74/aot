@@ -1,0 +1,13 @@
+ 
+
+A Sources of Linux Information
+
+ 
+      
+
+    
+
+This appendix contains information on various sources of Linux information, such as online documents, books, and more. Many of these documents are available either in printed form, or electronically from the Internet or BBS systems. Many Linux distributions also include much of this documentation in the distribution itself, so after you have installed Linux these files may be present on your system. 
+
+
+ 

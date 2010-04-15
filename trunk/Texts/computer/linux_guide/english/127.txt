@@ -1,0 +1,29 @@
+
+
+ 
+
+2.4 Postinstallation procedures
+
+ 
+  
+
+After you have completed installing the Linux software, there should be very little left to do before you can begin to use the system. In most cases, you should be able to reboot the system, login as root, and begin exploring the system. (Each distribution has a slightly different method for doing this.) 
+
+At this point it's a good idea to explain how to reboot and shutdown the system as you're using it. You should never reboot or shutdown your Linux system by pressing the reset switch or with the old ``Vulcan Nerve Pinch''---that is, by pressing in unison. You shouldn't simply switch off the power, either. As with most UNIX systems, Linux caches disk writes in memory. Therefore, if you suddenly reboot the system without shutting down ``cleanly'', you can corrupt the data on your drives, causing untold damage. 
+
+The easiest way to shut down the system is with the shutdown command. As an example, to shutdown and reboot the system immediately, use the following command as root: 
+
+# shutdown --r now   
+
+This will cleanly reboot your system. The man page for shutdown describes the other command-line arguments that are available. 
+
+Note, however, that many Linux distributions do not provide the shutdown command on the installation media. This means that the first time you reboot your system after installation, you may need to use the combination after all. Thereafter, you should always use the shutdown command. 
+
+After you have a chance to explore and use the system, there are several configuration chores that you should undertake. The first is to create a user account for yourself (and, optionally, for any other users that might have access to the system). Creating user accounts is described in Section 4.4. Usually, all that you have to do is login as root, and run the adduser (sometimes useradd) program. This will lead you through several prompts to create a new user account. 
+
+If you created more than one filesystem for Linux, or if you're using a swap partition, you may need to edit the file /etc/fstab in order for those filesystems to be available automatically after rebooting. (For example, if you're using a separate filesystem for /usr, and none of the files that should be in /usr appear to be present, you may simply need to mount that filesystem.) Section 4.8 describes this procedure. 
+
+Note that the Slackware distribution of Linux automatically configures your filesystems and swap space at installation time, so this usually isn't necessary. 
+
+
+ 

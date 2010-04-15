@@ -1,0 +1,57 @@
+7.5  THE KEYBOARD CABAL
+ 
+ 
+System administrators are like everybody else -- they try to make things 
+easier for themselves.  And when you sit in front of a keyboard all day, 
+that can mean trying everything possible to reduce the number of keys you 
+actually have to hit each day. 
+
+Unfortunately, that can make it difficult for the rest of us.
+
+You've already read about bin and lost+found directories. Etc is another 
+seemingly interesting directory that turns out to be another place to 
+store files used by the ftp site itself.  Again, nothing of any real 
+interest. 
+
+Then, once you get into the actual file libraries, you'll find that in 
+many cases, files will have such non-descriptive names as V1.1-AK.TXT.  
+The best known example is probably a set of several hundred files known 
+as RFCs, which provide the basic technical and organizational information 
+on which much of the Internet is built.  These files can be found on many 
+ftp sites, but always in a form such as RFC101.TXT, RFC102.TXT and so on, 
+with no clue whatsoever as to what information they contain. 
+
+Fortunately, almost all ftp sites have a "Rosetta Stone" to help you 
+decipher these names.  Most will have a file named README (or some 
+variant) that gives basic information about the system.  Then, most 
+directories will either have a similar README file or will have an index 
+that does give brief descriptions of each file.  These are usually the 
+first file in a directory and often are in the form 00INDEX.TXT.  Use the 
+ftp command to get this file.  You can then scan it online or download it 
+to see which files you might be interested in. 
+
+Another file you will frequently see is called ls-lR.Z.  This contains a 
+listing of every file on the system, but without any descriptions (the 
+name comes from the Unix command ls -lR, which gives you a listing of all 
+the files in all your directories).  The Z at the end means the file has 
+been compressed, which means you will have to use a Unix un-compress 
+command before you can read the file. 
+
+And finally, we have those system administrators who almost seem to 
+delight in making things difficult -- the ones who take full advantage of 
+Unix's ability to create absurdly long file names.  On some FTP sites, 
+you will see file names as long as 80 characters or so, full of capital 
+letters, underscores and every other orthographic device that will make 
+it almost impossible for you to type the file name correctly when you try 
+to get it. Your secret weapon here is the mget command.  Just type mget, 
+a space, and the first five or six letters of the file name, followed by 
+an asterisk, for example: 
+ 
+     mget This_F*
+ 
+The FTP site will ask you if you want to get the file that begins with 
+that name. If there are several files that start that way, you might have 
+to answer 'n' a few times, but it's still easier than trying to recreate 
+a ludicrously long file name. 
+
+

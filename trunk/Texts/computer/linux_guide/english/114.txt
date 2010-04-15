@@ -1,0 +1,17 @@
+
+ 
+
+2.1.4.2 Getting Slackware from the Internet
+
+ 
+The Slackware release of Linux may be found on any number of FTP sites worldwide. Appendix C lists several of the Linux FTP sites; we suggest that you try to find the software on the FTP site nearest you, to reduce net traffic. However, two of the major Linux FTP archives are sunsite.unc.edu and tsx-11.mit.edu. 
+
+The Slackware release may be found at least on the following sites: 
+    * sunsite.unc.edu:/pub/Linux/distributions/slackware 
+    * tsx-11.mit.edu:/pub/linux/packages/slackware 
+    * ftp.cdrom.com:/pub/linux/slackware 
+
+ftp.cdrom.com is Slackware's home site. 
+
+
+ 

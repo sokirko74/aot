@@ -1,0 +1,43 @@
+12.7  THE OTHER SIDE OF THE COIN
+ 
+
+All is not fun and games on the Net.  Like any community, the Net has its 
+share of obnoxious characters who seem to exist only to make your life 
+miserable (you've already met some of them in chapter 4).  There are 
+people who seem to spend a bit more time on the Net than many would find 
+healthy.  It also has its criminals.  Clifford Stoll writes in "The 
+Cuckoo's Egg" how he tracked a team of German hackers who were breaking 
+into U.S. computers and selling the information they found to the 
+Soviets.  Robert Morris, a Cornell University student, was convicted of 
+unleashing a "worm" program that effectively disabled several thousand 
+computers connected to the Internet.  
+
+Of more immediate concern to the average Net user are crackers who seek 
+to find other's passwords to break into Net systems and people who infect 
+programs on ftp sites with viruses. 
+
+There is a widely available program known as "Crack" that can decipher 
+user passwords composed of words that might be found in a dictionary 
+(this is why you shouldn't use such passwords).  Short of that, there are 
+the annoying types who take a special thrill in trying to make you 
+miserable.  The best advice in dealing with them is to count to 10 and 
+then ignore them -- like juveniles everywhere, most of their fun comes in 
+seeing how upset you can get. 
+
+Meanwhile, two Cornell University students pleaded guilty in 1992 to 
+uploading virus-infected Macintosh programs to ftp sites.  If you plan to 
+try out large amounts of software from ftp sites, it might be wise to 
+download or buy a good anti-viral program. 
+
+But can law enforcement go too far in seeking out the criminals?  The 
+Electronic Frontier Foundation was founded in large part in response to a 
+series of government raids against an alleged gang of hackers.  The raids 
+resulted in the near bankruptcy of one game company never alleged to have 
+had anything to do with the hackers, when the government seized its 
+computers and refused to give them back.  The case against another 
+alleged participant collapsed in court when his attorney showed the 
+"proprietary" and supposedly hacked information he printed in an 
+electronic newsletter was actually available via an 800 number for about 
+$13 -- from the phone company from which that data was taken. 
+
+

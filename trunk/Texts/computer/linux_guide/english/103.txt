@@ -1,0 +1,12 @@
+
+1.8.6.1 Mice and other pointing devices
+
+ 
+  For the most part, you will only be using a mouse under a graphical environment such as the X Window System. However, several Linux applications not associated with a graphics environment do make use of the mouse. 
+
+Linux supports all standard serial mice, including Logitech, MM series, Mouseman, Microsoft (2-button) and Mouse Systems (3-button). Linux also supports Microsoft, Logitech, and ATIXL busmice. The PS/2 mouse interface is supported as well. 
+
+All other pointing devices, such as trackballs, which emulate the above mice, should work as well. 
+
+
+ 

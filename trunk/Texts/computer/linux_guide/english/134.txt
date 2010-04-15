@@ -1,0 +1,30 @@
+
+
+ 
+
+3.2.2 Logging in
+
+ 
+    At login time, you'll see a prompt resembling the following on your screen: 
+
+
+mousehouse login: 
+
+
+Here, enter your username, and press the key. Our hero, larry, would type the following: 
+
+
+mousehouse login: larry 
+Password: 
+
+
+Now, enter your password. It won't be echoed to the screen when you login, so type carefully. If you mistype your password, you'll see the message 
+
+Login incorrect 
+
+and you'll have to try again. 
+
+Once you have correctly entered the username and password, you are officially logged into the system, and are free to roam. 
+
+
+ 

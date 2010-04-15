@@ -1,0 +1,155 @@
+3.2 NAVIGATING USENET WITH nn
+
+
+How do you dive right in?  As mentioned, on some systems, it's all done 
+through menus -- you just keep choosing from a list of choices until you 
+get to the newsgroup you want and then hit the "read" command.  On Unix 
+systems, however, you will have to use a "newsreader" program.  Two of 
+the more common ones are known as rn (for "read news") and nn (for "no 
+news" -- because it's supposed to be simpler to use). 
+
+For beginners, nn may be the better choice because it works with menus -- 
+you get a list of articles in a given newsgroup and then you choose which 
+ones you want to see.  To try it out, connect to your host system and, at 
+the command line, type 
+ 
+     nn news.announce.newusers
+ 
+and hit enter.  After a few seconds, you should see something like this: 
+ 
+Newsgroup: news.announce.newusers                     Articles: 22 of 22/1 NEW 
+ 
+Obviously, this is a good newsgroup to begin your exploration of Usenet!  
+Here's what all this means:  The first letter on each line is the letter 
+you type to read that particular "article" (it makes sense that a 
+"newsgroup" would have "articles").  Next comes the name of the person 
+who wrote that article, followed by its length, in lines, and what the 
+article is about. At the bottom, you see the local time at your access 
+site, what you're doing right now (i.e., SELECTing articles), which key 
+to hit for some help (the ? key) and how many of the articles in the 
+newsgroup you can see on this screen. The "(moderated)" means the 
+newsgroup has a "moderator" who is the only one who can directly post 
+messages to it.  This is generally limited to groups such as this, which 
+contain articles of basic information, or for digests, which are 
+basically online magazines (more on them in a bit). 
+
+Say you're particularly interested in what "Emily Postnews" has to say 
+about proper etiquette on Usenet. Hit your c key (lower case!), and the 
+line will light up.  If you want to read something else, hit the key that 
+corresponds to it.  And if you want to see what's on the next page of 
+articles, hit return or your space bar. 
+
+But you're impatient to get going, and you want to read that article now.  
+The command for that in nn is a capital Z.  
+
+The first few lines are the message's header, similar to the header you 
+get in e-mail messages.  Then comes the beginning of the message.  The 
+last line tells you the time again, the newsgroup name (or part of it, 
+anyway), the position in your message stack that this message occupies, 
+how to get help, and how much of the message is on screen.  If you want 
+to keep reading this message, just hit your space bar (not your enter 
+key!) for the next screen and so on until done. When done, you'll be 
+returned to the newsgroup menu.  For now hit Q (upper case this time), 
+which quits you out of nn and returns you to your host system's command 
+line. 
+
+To get a look at another interesting newsgroup, type 
+ 
+     nn comp.risks
+ 
+and hit enter.  This newsgroup is another moderated group, this time a 
+digest of all the funny and frightening ways computers and the people who 
+run and use them can go wrong.  Again, you read articles by selecting 
+their letters.  If you're in the middle of an article and decide you want 
+to go onto the next one, hit your n key. 
+     
+Now it's time to look for some newsgroups that might be of particular 
+interest to you.  Unix host systems that have nn use a program called 
+nngrep (ever get the feeling Unix was not entirely written in English?) 
+that lets you scan newsgroups.  Exit nn and at your host system's command 
+line, type 
+ 
+     nngrep word
+ 
+where word is the subject you're interested in.  If you use a Macintosh 
+computer, you might try
+ 
+     nngrep mac
+ 
+ 
+Note that some of these obviously have something to do with Macintoshes 
+while some obviously do not; nngrep is not a perfect system.  If you want 
+to get a list of ALL the newsgroups available on your host system, type 
+ 
+     nngrep -a |more
+ 
+or
+
+     nngrep -a |pg
+ 
+and hit enter (which one to use depends on the Unix used on your host 
+system; if one doesn't do anything, try the other). You don't absolutely 
+need the |more or |pg, but if you don't include it, the list will keep 
+scrolling, rather than pausing every 24 lines.  If you are in nn, hitting 
+a capital Y will bring up a similar list. 
+
+Typing "nn newsgroup" for every newsgroup can get awfully tiring after 
+awhile.  When you use nn, your host system looks in a file called 
+.newsrc.  This is basically a list of every newsgroup on the host system 
+along with notations on which groups and articles you have read (all 
+maintained by the computer).  You can also use this file to create a 
+"reading list" that brings up each newsgroup to which you want to 
+"subscribe."  To try it out, type 
+ 
+     nn
+ 
+without any newsgroup name, and hit enter.  
+     
+Unfortunately, you will start out with a .newsrc file that has you 
+"subscribed" to every single newsgroup on your host system!  To delete a 
+newsgroup from your reading list, type a capital U while its menu is on 
+the screen.  The computer will ask you if you're sure you want to 
+"unsubscribe."  If you then hit a Y, you'll be unsubscribed and put in 
+the next group. 
+
+With many host systems carrying thousands of newsgroups, this will take 
+you forever.  
+
+Fortunately, there are a couple of easier ways to do this.  Both involve 
+calling up your .newsrc file in a word or text processor.  In a .newsrc 
+file, each newsgroup takes up one line, consisting of the group's name, 
+an exclamation point or a colon and a range of numbers.  Newsgroups with 
+a colon are ones to which you are subscribed; those followed by an 
+exclamation point are "un-subscribed."  To start with a clean slate, 
+then, you have to change all those colons to exclamation points. 
+
+If you know how to use emacs or vi, call up the .newsrc file (you might 
+want to make a copy of .newsrc first, just in case), and use the searchand-replace function to make the change. 
+
+If you're not comfortable with these text processor, you can download the 
+.newsrc file, make the changes on your own computer and then upload the 
+revised file.  Before you download the file, however, you should do a 
+couple of things.  One is to type 
+ 
+     cp .newsrc temprc
+ 
+and hit enter.  You will actually download this temprc file (note the 
+name does not start with a period -- some computers, such as those using 
+MS-DOS, do not allow file names starting with periods).  After you 
+download the file, open it in your favorite word processor and use its 
+search-and-replace function to change the exclamation points to colons. 
+Be careful not to change anything else!  Save the document in ASCII or 
+text format.  Dial back into your host system.  At the command line, type 
+ 
+     cp temprc temprc1
+ 
+and hit enter.  This new file will serve as your backup .newsrc file 
+just in case something goes wrong. Upload the temprc file from your 
+computer.  This will overwrite the Unix system's old temprc file.  Now 
+type 
+ 
+     cp temprc .newsrc
+ 
+and hit enter.  You now have a clean slate to start creating a reading 
+list.
+

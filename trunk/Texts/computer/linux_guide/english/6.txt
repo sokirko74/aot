@@ -1,0 +1,20 @@
+
+1.4.3 Programming languages and utilities
+
+ 
+Linux provides a complete UNIX programming environment, including all of the standard libraries, programming tools, compilers, and debuggers that you would expect to find on other UNIX systems.   Within the UNIX software development world, applications and systems programming is usually done in C or C++. The standard C and C++ compiler for Linux is GNU's gcc, which is an advanced, modern compiler supporting many options. It is also capable of compiling C++ (including AT&T 3.0 features) as well as Objective-C, another object-oriented dialect of C. 
+
+Besides C and C++, many other compiled and interpreted programming languages have been ported to Linux, such as Smalltalk, FORTRAN, Pascal, LISP, Scheme, and Ada (if you're masochistic enough to program in Ada---we're not going to stop you). In addition, various assemblers for writing protected-mode 80386 code are available, as are UNIX hacking favorites such as Perl (the script language to end all script languages) and Tcl/Tk (a shell-like command processing system including support for developing simple X Windows applications).   
+
+The advanced gdb debugger has been ported, which allows you to     step through a program to find bugs, or examine the cause for a crash using a core dump. gprof, a profiling utility, will give you performance   statistics for your program, letting you know where your program is spending most of its time executing. The Emacs text editor provides an interactive editing and compilation environment for various programming languages. Other tools include GNU make and imake, used to manage compilation of large applications; and RCS, a system for source locking and revision control. 
+
+Linux implements dynamically-linked shared libraries, which allow binaries to be much smaller as the subroutine code is linked at run-time. These DLL libraries also allow the applications programmer to override    function definitions with their own code. For example, if a programmer wished to write her own version of the malloc() library routine, the linker would use the programmer's new routine instead of the one found in the libraries. 
+
+Linux is ideal for developing UNIX applications. It provides a modern   programming environment with all of the bells and whistles. Various standards such as POSIX.1 are supported, allowing software written for Linux to be easily ported to other systems. Professional UNIX programmers and system administrators can use Linux to develop software at home, and then transfer the software to UNIX systems at work. This not only can save a great deal of time and money, but will also let you work in the comfort of your own home. Computer Science students can use Linux to learn UNIX programming and to explore other aspects of the system, such as kernel architecture. 
+
+With Linux, not only do you have access to the complete set of libraries and programming utilities, but you also have the complete kernel and library source code at your fingertips. 
+
+  
+
+
+ 

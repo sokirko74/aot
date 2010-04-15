@@ -1,0 +1,15 @@
+
+ 
+
+3.14 So You Want to Strike Out on Your Own?
+
+ 
+Hopefully we have provided enough information to give you a basic idea of how to use the system. Keep in mind that most of the interesting and important aspects of Linux aren't covered here---these are the very basics. With this foundation, before long you'll be up and running complicated applications and fulfilling the potential of your system. If things don't seem exciting at first, don't despair---there is much to be learned. 
+
+One indispensable tool for learning about the system is to read the man pages. While many of the man pages may appear confusing at first, if you dig beneath the surface there is a wealth of information contained therein. 
+
+We also suggest reading a complete book on using a UNIX system. There is much more to UNIX than meets the eye---unfortunately, most of it is beyond the scope of this book. Some good UNIX books to look at are listed in Appendix A. 
+
+
+
+ 

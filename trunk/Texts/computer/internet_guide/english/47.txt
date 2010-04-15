@@ -1,0 +1,70 @@
+8.5  WIDE-AREA INFORMATION SERVERS
+
+
+Now you know there are hundreds of databases and library catalogs 
+you can search through.  But as you look, you begin to realize that each 
+seems to have its own unique method for searching.  If you connect to 
+several, this can become a pain.  Gophers reduce this problem somewhat.
+
+Wide-area information servers promise another way to zero in on 
+information hidden on the Net. In a WAIS, the user sees only one 
+interface -- the program worries about how to access information on 
+dozens, even hundreds, of different databases.  You tell give a WAIS a 
+word and it scours the net looking for places where it's mentioned.  You 
+get a menu of documents, each ranked according to how relevant to your 
+search the WAIS thinks it is. 
+
+Like gophers, WAIS "client" programs can already be found on many publicaccess Internet sites. If your system has a WAIS client, type 
+ 
+     swais
+ 
+at the command prompt and hit enter (the "s" stands for "simple").  If it 
+doesn't, telnet to bbs.oit.unc.edu, which is run by the University of 
+North Carolina  At the "login:" prompt, type 
+ 
+     bbs
+ 
+and hit enter.  You'll be asked to register and will then get a list of 
+"bulletins,'' which are various files explaining how the system works. 
+When done with those, hit your Q key and you'll get another menu.  Hit 4 
+for the "simple WAIS client,"            
+Each line represents a different database (the .au at the end of some of 
+them means they are in Australia; the .fr on the last line represents a 
+database in France).  And this is just the first page!  If you type a 
+capital K, you'll go to the next page (there are several pages).  
+Hitting a capital J will move you back a page. 
+
+The first thing you want to do is tell the WAIS program which databases 
+you want searched.  To select a database, move the cursor bar over the 
+line you want (using your down and up arrow keys) and hit your space bar.  
+An asterisk will appear next to the line number.  Repeat this until 
+you've selected all of the databases you want searched.  Then hit your W 
+key, after which you'll be prompted for the key words you're looking for.  
+You can type in an entire line of these words -- separate each with a 
+space, not a comma. 
+
+Hit return, and the search begins.  
+
+Let's say you're utterly fascinated with wheat.  So you might select 
+agricultural-market-news to find its current world price.  But you also 
+want to see if it has any religious implications, so you choose the Bible 
+and the Book of Mormon.  What do you do with the stuff?  Select recipes 
+and usenet-cookbook. Are there any recent Supreme Court decisions 
+involving the plant? Chose supreme-court.  How about synonyms? Try rogetthesaurus and just plain thesaurus. 
+
+Now hit w and type in wheat.  Hit enter, and the WAIS program begins its 
+search.  As it looks, it tells you whether any of the databases are 
+offline, and if so, when they might be ready for a search.  In about a 
+minute, the program tells you how many hits it's found.  Then you get a 
+new menu.
+ 
+Each of these represents an article or citing that contains the word wheat, 
+or some related word.  Move the cursor bar (with the down and up arrow 
+keys) to the one you want to see, hit enter, and it will begin to appear 
+on your screen.  The "score" is a WAIS attempt to gauge how closely the 
+citing matches your request.  Doesn't look like the Supreme Court has had 
+anything to say about the plant of late!
+
+Now think of how much time you would have spent logging onto various 
+databases just to find these relatively trivial examples. 
+

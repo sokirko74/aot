@@ -1,0 +1,10 @@
+
+ 
+
+1.4 Software Features
+
+ 
+  In this section, we'll introduce you to many of the software applications available for Linux, and talk about a number of common computing tasks. After all, the most important part of the system is the wide range of software available for it. The fact that most of this software is freely distributable is even more impressive. 
+
+
+ 

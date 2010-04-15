@@ -1,0 +1,17 @@
+ 
+
+C.1 Starting ftp
+
+ 
+Note that in the example ``screens'' printed below I'm only showing the most important information, and what you see may differ. Also, commands in italics represent commands that you type; everything else is screen output. 
+
+To start ftp and connect to a site, simply use the command 
+
+ftp 
+
+where is the name of the site you are connecting to. For example, to connect to the mythical site shoop.vpizza.com we can use the command 
+
+ftp shoop.vpizza.com 
+
+
+ 

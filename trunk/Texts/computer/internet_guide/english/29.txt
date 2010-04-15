@@ -1,0 +1,23 @@
+4.10 FYI
+
+
+Leanne Phillips periodically posts a list of frequently asked questions 
+(and answers) about use of the rn killfile function in the 
+news.newusers.questions and news.answers newsgroups on Usenet.  Bill 
+Wohler posts a guide to using the nn newsreader in the news.answers and 
+news.software newsgroups.  Look in the news.announce.newusers and 
+news.groups newsgroups on Usenet for "A Guide to Social Newsgroups and 
+Mailing Lists,'' which gives brief summaries of the various soc. 
+newsgroups. 
+
+"Managing UUCP and Usenet,' by Tim O'Reilly and Grace Todino (O'Reilly & 
+Associates, 1992) is a good guide for setting up your own Usenet system. 
+chap3
+
+
+
+
+
+ 
+ 
+

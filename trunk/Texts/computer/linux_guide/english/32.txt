@@ -1,0 +1,25 @@
+ 
+
+3.13.2.1 The PATH environment variable
+
+ 
+  When you use the ls command, how does the shell find the ls executable itself? In fact, ls is found in /bin/ls on most systems. The shell uses the environment variable PATH to locate executable files for commands which you type. 
+
+For example, your PATH variable may be set to: 
+
+/bin:/usr/bin:/usr/local/bin:. 
+
+This is a list of directories for the shell to search, each directory separated by a ``:''. When you use the command ls, the shell first looks for /bin/ls, then /usr/bin/ls, and so on. 
+
+Note that the PATH has nothing to do with finding regular files. For example, if you use the command 
+
+/home/larry# cp foo bar 
+
+The shell does not use PATH to locate the files foo and bar---those filenames are assumed to be complete. The shell only uses PATH to locate the cp executable. 
+
+This saves you a lot of time; it means that you don't have to remember where all of the command executables are stored. On many systems, executables are scattered about in many places, such as /usr/bin, /bin, or /usr/local/bin. Instead of giving the command's full pathname (such as /usr/bin/cp), you can simply set PATH to the list of directories that you want the shell to automatically search. 
+
+Notice that PATH contains ``.'', which is the current working directory. This allows you to create a shell script or program and run it as a command from your current directory, without having to specify it directly (as in ./makebook). If a directory isn't on your PATH, then the shell will not search it for commands to run---this includes the current directory. 
+
+
+ 

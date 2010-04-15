@@ -1,0 +1,40 @@
+ 
+
+2.5.2.3 Problems with SCSI controllers and devices
+
+ 
+  
+
+    
+
+Presented here are some of the most common problems with SCSI controllers and devices such as CD-ROMs, hard drives, and tape drives. If you are having problems getting Linux to recognize your drive or controller, read on. 
+
+The Linux SCSI HOWTO (see Appendix A) contains much useful information on SCSI devices in addition to that listed here. SCSI can be particularly tricky to configure at times. 
+
+    * A SCSI device is detected at all possible ID's. This is caused by strapping the device to the same address as the controller. You need to change the jumper settings so that the drive uses a different address from the controller itself. 
+
+    * Linux reports sense errors, even if the devices are known to be error-free. This can be caused by bad cables, or by bad termination. If your SCSI bus is not terminated at both ends, you may have errors accessing SCSI devices. When in doubt, always check your cables. 
+
+    * SCSI devices report timeout errors. This is usually caused by a conflict with IRQ, DMA, or device addresses. Also check that interrupts are enabled correctly on your controller. 
+
+    * SCSI controllers using BIOS are not detected. Detection of controllers using BIOS will fail if the BIOS is disabled, or if your controller's ``signature'' is not recognized by the kernel. See the Linux SCSI HOWTO for more information about this. 
+
+    * Controllers using memory mapped I/O do not work. This is caused when the memory-mapped I/O ports are incorrectly cached. Either mark the board's address space as uncacheable in the XCMOS settings, or disable cache altogether. 
+
+    * When partitioning, you get a warning that ``cylinders > 1024'', or you are unable to boot from a partition using cylinders numbered above 1023. BIOS limits the number of cylinders to 1024, and any partition using cylinders numbered above this won't be accessible from the BIOS. As far as Linux is concerned, this affects only booting; once the system has booted you should be able to access the partition. Your options are to either boot Linux from a boot floppy, or boot from a partition using cylinders numbered below 1024. See Section 2.3.7 for information on creating a boot diskette or installing LILO. 
+
+    * CD-ROM drive or other removeable media devices are not recognized at boot time. Try booting with a CD-ROM (or disk) in the drive. This is necessary for some devices. 
+
+
+If your SCSI controller is not recognized, you may need to force hardware detection at boot time. This is particularly important for BIOS-less SCSI controllers. Most distributions allow you to specify the controller IRQ and shared memory address when booting the installation media. For example, if you are using a TMC-8xx controller, you may be able to enter 
+
+boot: linux tmx8xx=, 
+
+at the LILO boot prompt, where is the IRQ of controller, and is the shared memory address. Whether or not you will be able to do this depends on the distribution of Linux you are using; consult your documentation for details. 
+
+    
+
+    
+
+
+ 

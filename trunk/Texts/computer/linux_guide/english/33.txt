@@ -1,0 +1,21 @@
+
+ 
+
+3.13.3 Shell initialization scripts
+
+       In addition to shell scripts that you create, there are a number of scripts that the shell itself uses for certain purposes. The most important of these are your initialization scripts, scripts automatically executed by the shell when you login. 
+
+The initialization scripts themselves are simply shell scripts, as described above. However, they are very useful in setting up your environment by executing commands automatically when you login. For example, if you always use the mail command to check your mail when you login, you place the command in your initialization script so it will be executed automatically. 
+
+  Both Bash and Tcsh distinguish between a login shell and other invocations of the shell. A login shell is a shell invoked at login time; usually, it's the only shell which you'll use. However, if you ``shell out'' of another program, such as vi, you start another instance of the shell, which isn't your login shell. In addition, whenever you run a shell script, you automatically start another instance of the shell to execute the script. 
+
+            The initialization files used by Bash are: /etc/profile (set up by the system administrator, executed by all Bash users at login time), $HOME/.bash_profile (executed by a login Bash session), and $HOME/.bashrc (executed by all non-login instances of Bash). If .bash_profile is not present, .profile is used instead. 
+
+    Tcsh uses the following initialization scripts: /etc/csh.login (executed by all Tcsh users at login time), $HOME/.tcshrc (executed a login time and by all new instances of Tcsh), and $HOME/.login (executed at login time, following .tcshrc). If .tcshrc is not present, .cshrc is used instead. 
+
+To fully understand the function of these files, you'll need to learn more about the shell itself. Shell programming is a complicated subject, far beyond the scope of this book. See the man pages for bash and/or tcsh to learn more about customizing your shell environment. 
+
+  
+
+
+ 

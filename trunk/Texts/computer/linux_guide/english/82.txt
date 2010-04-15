@@ -1,0 +1,33 @@
+ 
+
+5.5 Electronic Mail
+
+                 Like most UNIX systems, Linux provides a number of software 
+packages for using electronic mail. E-mail on your system can either be local 
+(that is, you only mail other users on your system), or networked (that is, you 
+mail, using either TCP/IP or UUCP, users on other machines on a network). E-mail 
+software usually consists of two parts: a mailer and a transport. The mailer is 
+the user-level software which is used to actually compose and read e-mail 
+messages. Popular mailers include elm and mailx. The transport is the low-level 
+software which actually takes care of delivering the mail, either locally or 
+remotely. The user never sees the transport software; they only interact with 
+the mailer. However, as the system administrator, it is important to understand 
+the concepts behind the transport software and how to configure it. 
+
+    The most popular transport software for Linux is Smail. This software is 
+easy to configure, and is able to send both local and remote TCP/IP and UUCP e-
+mail. The more powerful sendmail transport is used on most UNIX systems, 
+however, because of its complicated setup mechanism, many Linux systems don't 
+use it. 
+
+The Linux Mail HOWTO gives more information on the available mail software for 
+Linux and how to configure it on your system. If you plan to send mail remotely, 
+you'll need to understand either TCP/IP or UUCP, depending on how your machine 
+is networked (see Sections 5.3 and 5.4). The UUCP and TCP/IP documents listed in 
+Appendix A should be of help there. 
+
+Most of the Linux mail software can be retrieved via anonymous FTP from 
+sunsite.unc.edu in the directory /pub/Linux/system/Mail.   
+
+
+ 

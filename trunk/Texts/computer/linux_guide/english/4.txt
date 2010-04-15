@@ -1,0 +1,11 @@
+
+
+ 
+
+3.3 First Steps into UNIX
+
+ 
+Before we begin, it is important to note that all file and command names on a UNIX system are case-sensitive (unlike operating systems such as MS-DOS). For example, the command make is very different than Make or MAKE. The same hold for file and directory names. 
+
+
+ 
