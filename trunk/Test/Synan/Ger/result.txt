@@ -1,0 +1,10 @@
+Input a sentence..
+>PP	=	nach Hause 
+VERBSATZ	=	Ich gehe nach Hause . 
+
+
+>MODIF_NP	=	ein Idiot 
+VERBSATZ	=	Du bist ein Idiot . 
+
+
+>
