@@ -810,6 +810,7 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 	if (StartToken == 0)
 		StartToken++;
 
+	if (StartToken > LastTokenNo) return;
 
 	if (StartToken > 0)
 	{
