@@ -7,10 +7,31 @@ run()
     fi
 }
 
+
 if [ -z $RML ]; then
-	echo "you should first register variable \$RML";
-	exit;
+  RML=$(dirname $(realpath $0))
+  echo "RML=$RML"
 fi;
+
+if [ -z $RML_PCRE_INCLUDE ]; then
+  if [ -e "/usr/include/pcre.h" ]; then
+    RML_PCRE_INCLUDE="/usr/include"
+    echo "RML_PCRE_INCLUDE=$RML_PCRE_INCLUDE"
+  else
+    echo "Please, set RML_PCRE_INCLUDE variable or install libpcre-dev!"
+    exit;
+  fi
+fi
+
+if [ -z $RML_PCRE_LIB ]; then
+  if [ -e "/usr/lib/libpcre.so" ]; then
+    RML_PCRE_LIB="/usr/lib"
+    echo "RML_PCRE_LIB=$RML_PCRE_LIB"
+  else
+    echo "Please, set RML_PCRE_LIB variable or install libpcre-dev!"
+    exit;
+  fi
+fi
 
 
 make_tool=gmake
