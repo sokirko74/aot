@@ -30,6 +30,5 @@ unix_chunker_yacc.cpp unix_chunker_yacc.h :     chunker.y
 	-rm unix_chunker_yacc_tmp.cpp
 
 unix_chunker_lex.cpp : chunker.l unix_chunker_yacc.h
-	flex -os_qlex.cpp.tmp -d chunker.l 
-	sed -f ../common/process_flex.sed < s_qlex.cpp.tmp > unix_chunker_lex.cpp 
+	flex -ounix_chunker_lex.cpp -d chunker.l 
 
