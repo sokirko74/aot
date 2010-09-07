@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AgramtabLib", "AgramtabLib\AgramtabLib.vcproj", "{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LemmatizerLib", "LemmatizerLib\LemmatizerLib.vcproj", "{BC392768-3498-4F23-B7A8-A2958258E098}"
@@ -78,7 +78,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Register", "Technical\Regis
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestLemmatizerCOM", "Technical\TestLemmatizerCOM\TestLemmatizerCOM.vcproj", "{2AD59B55-D9F1-4D8E-892E-82E160108185}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml", "tinyxml\tinyxml_lib.vcproj", "{27BBD00F-6BD4-4093-B7E2-403CD2B67D7F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyxml", "tinyxml\tinyxml_lib.vcproj", "{166ACB77-4121-4B90-AA34-8AACDE04CC2A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AccentUpdater", "AccentUpdater\AccentUpdater.vcproj", "{CDEF331E-030A-4193-A68A-CBCF3ABF77D4}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -188,11 +188,11 @@ Global
 		{2AD59B55-D9F1-4D8E-892E-82E160108185}.Release|Win32.ActiveCfg = Release|Win32
 		{2AD59B55-D9F1-4D8E-892E-82E160108185}.Release|Win32.Build.0 = Release|Win32
 		{2AD59B55-D9F1-4D8E-892E-82E160108185}.Release-Single-Threaded|Win32.ActiveCfg = Release|Win32
-		{27BBD00F-6BD4-4093-B7E2-403CD2B67D7F}.Debug|Win32.ActiveCfg = Debug|Win32
-		{27BBD00F-6BD4-4093-B7E2-403CD2B67D7F}.Debug|Win32.Build.0 = Debug|Win32
-		{27BBD00F-6BD4-4093-B7E2-403CD2B67D7F}.Release|Win32.ActiveCfg = Release|Win32
-		{27BBD00F-6BD4-4093-B7E2-403CD2B67D7F}.Release|Win32.Build.0 = Release|Win32
-		{27BBD00F-6BD4-4093-B7E2-403CD2B67D7F}.Release-Single-Threaded|Win32.ActiveCfg = Release|Win32
+		{166ACB77-4121-4B90-AA34-8AACDE04CC2A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{166ACB77-4121-4B90-AA34-8AACDE04CC2A}.Debug|Win32.Build.0 = Debug|Win32
+		{166ACB77-4121-4B90-AA34-8AACDE04CC2A}.Release|Win32.ActiveCfg = Release|Win32
+		{166ACB77-4121-4B90-AA34-8AACDE04CC2A}.Release|Win32.Build.0 = Release|Win32
+		{166ACB77-4121-4B90-AA34-8AACDE04CC2A}.Release-Single-Threaded|Win32.ActiveCfg = Release|Win32
 		{CDEF331E-030A-4193-A68A-CBCF3ABF77D4}.Debug|Win32.ActiveCfg = Debug|Win32
 		{CDEF331E-030A-4193-A68A-CBCF3ABF77D4}.Debug|Win32.Build.0 = Debug|Win32
 		{CDEF331E-030A-4193-A68A-CBCF3ABF77D4}.Release|Win32.ActiveCfg = Release|Win32
