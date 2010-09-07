@@ -106,7 +106,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(TargetPath)  C:\Inetpub.apache\cgi-bin"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
