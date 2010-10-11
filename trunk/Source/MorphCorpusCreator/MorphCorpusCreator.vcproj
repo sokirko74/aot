@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="9,00"
 	Name="MorphCorpusCreator"
 	ProjectGUID="{6259EF59-6BE9-4350-A817-CCB2CA90E9A2}"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -83,6 +84,8 @@
 				SuppressStartupBanner="true"
 				ProgramDatabaseFile=".\Release/MorphCorpusCreator.pdb"
 				SubSystem="1"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -101,9 +104,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -176,6 +176,8 @@
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/MorphCorpusCreator.pdb"
 				SubSystem="1"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -194,9 +196,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
