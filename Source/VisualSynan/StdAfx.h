@@ -11,7 +11,7 @@
 #endif // _MSC_VER > 1000
 
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
-#define _WIN32_WINNT 0x0400
+#define _WIN32_WINNT 0x0500
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions

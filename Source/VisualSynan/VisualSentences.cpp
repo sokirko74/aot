@@ -320,7 +320,6 @@ void CVisualSentences::BuildRels(CString& report)
 						str = str + (const char*)piSent->GetWord(k)->GetWordStr() + " ";	
 					}			
 				}
-				str = str + "; \"" + (const char*)piRel->GetGrammemsStr() + "\"";
 				str = str + ")";
 
 				report += "  ";
