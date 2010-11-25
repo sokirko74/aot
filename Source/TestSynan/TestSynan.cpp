@@ -101,7 +101,8 @@ void GetRelations(const CSentence& Sentence, string& Result)
 		string RelName = Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
         string Src = GetNodeStr(Sentence, RelIt,piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord);
         string Trg = GetNodeStr(Sentence, RelIt,piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord);
-        Result += Format("\t<rel name=\"%s\"> %s -> %s </rel>\n", RelName.c_str(), Src.c_str(),  Trg.c_str() );
+        string GramRel = Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems);
+        Result += Format("\t<rel name=\"%s\" gram=\"%s\"> %s -> %s </rel>\n", RelName.c_str(), GramRel.c_str(), Src.c_str(),  Trg.c_str() );
     }
 }
 
