@@ -105,7 +105,7 @@ for component in $GERMAN_SYNTAX
 do
   run Bin/SimpleGrammarPrecompiled German Dicts/$component
 done
-run Bin/TestSynan German Test/Synan/Rus/test.txt | cmp - 	
+run Bin/TestSynan German Test/Synan/Rus/test.txt | cmp - Test/Synan/Ger/result.txt 	
 
 #compile seman
 SEMAN="TestSeman AprDictGen asp_read deriv_read GenFreqDict StatDatBin WordDatBin GenSynDict"
