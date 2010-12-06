@@ -16,7 +16,7 @@ libs_argument := -Wl,--start-group $(pcre_libs) $(subst .$(lib_ext),,$(lib_pathe
 
 
 ifeq ($(libmode), static)
-	lib_mode_switch := -static
+	lib_mode_switch := -all-static
 endif
 
 $(ExeName) : $(objects) $(libs)
