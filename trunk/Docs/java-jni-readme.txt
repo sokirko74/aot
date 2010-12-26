@@ -1,3 +1,5 @@
+Java JNI API currently only supports Russian morphology extraction from input words.
+
 This file is about Source/JNIMorphAPI and Source/JNIMorphAPITest folders. They contain
 Java JNI C++ files. The accompanying .java files for this JNI interface are at 
 https://sourceforge.net/projects/seman-java/ . 
