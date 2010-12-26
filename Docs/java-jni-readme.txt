@@ -25,6 +25,6 @@ To build JNIMorphAPITest application, do the following:
 To run JNIMorphAPITest application, do the following:
 - build JNIMorphAPITest application (see above);
 - cd ../../Bin
-- run the text app by typing:
+- run the test app by typing:
 		LD_LIBRARY_PATH=. ./JNIMorphTest
 - if everything is valid, it will output "TEST PASSED".
