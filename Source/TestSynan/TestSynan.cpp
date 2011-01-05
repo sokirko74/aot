@@ -88,6 +88,22 @@ string GetNodeStr(const CSentence& Sentence, const CRelationsIterator& RelIt, in
         return Sentence.m_Words[WordNo].m_strWord;
 }
 
+string GetNodeGrmStr(const CSentence& Sentence, const CRelationsIterator& RelIt, int GroupNo, int WordNo, string& Lemma)
+{
+    Lemma =  "";
+    if (GroupNo != -1)
+        return "";
+    else {
+        size_t ClauseNo = Sentence.GetMinClauseByWordNo(WordNo);
+        const CClause& Clause = Sentence.GetClause(ClauseNo);
+        const CMorphVariant* pSynVar  = &*Clause.GetSynVariantByNo(0);
+        int UnitNo = pSynVar->UnitNoByWordNo(WordNo);
+        const CSynUnit& U = pSynVar->m_SynUnits[UnitNo];
+        Lemma = Sentence.GetWords()[WordNo].GetHomonym(U.m_iHomonymNum)->m_strLemma;
+        return Sentence.GetOpt()->GetGramTab()->GrammemsToStr(U.m_iGrammems|U.m_TypeGrammems);
+    }
+}
+
 void GetRelations(const CSentence& Sentence, string& Result)
 {
     CRelationsIterator RelIt; 
@@ -101,8 +117,13 @@ void GetRelations(const CSentence& Sentence, string& Result)
 		string RelName = Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
         string Src = GetNodeStr(Sentence, RelIt,piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord);
         string Trg = GetNodeStr(Sentence, RelIt,piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord);
+        string SrcLemma, TrgLemma;
+        string SrcGrm = GetNodeGrmStr(Sentence, RelIt,piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord, SrcLemma);
+        string TrgGrm = GetNodeGrmStr(Sentence, RelIt,piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord, TrgLemma);
         string GramRel = Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems);
-        Result += Format("\t<rel name=\"%s\" gram=\"%s\"> %s -> %s </rel>\n", RelName.c_str(), GramRel.c_str(), Src.c_str(),  Trg.c_str() );
+        
+        Result += Format("\t<rel name=\"%s\" gramrel=\"%s\" lemmprnt=\"%s\" grmprnt=\"%s\" lemmchld=\"%s\" grmchld=\"%s\" > %s -> %s </rel>\n", 
+            RelName.c_str(), GramRel.c_str(), SrcLemma.c_str(), SrcGrm.c_str(), TrgLemma.c_str(), TrgGrm.c_str(), Src.c_str(),  Trg.c_str() );
     }
 }
 
