@@ -14,10 +14,24 @@ endif
 
 libs_argument := -Wl,--start-group $(pcre_libs) $(subst .$(lib_ext),,$(lib_pathes)) -Wl,--end-group
 
+ifndef gcc_ver
+	gcc_ver := $(word 3,$(shell gcc --version))
+	dot := .
+	empty:=
+	space:= $(empty) $(empty)
+	tmp1 := $(subst $(dot),$(space),$(gcc_ver))
+	gcc_version_mm := $(word 1,$(tmp1)).$(word 2,$(tmp1))
+endif
 
 ifeq ($(libmode), static)
+ifeq "$(gcc_version_mm)" "3.2"
 	lib_mode_switch := -all-static
+else
+	lib_mode_switch := 
 endif
+endif
+
+
 
 $(ExeName) : $(objects) $(libs)
 	$(mode_error)
