@@ -248,15 +248,16 @@ string CGrammarItem::GetDumpString() const
 
 bool	CGrammarItem::AddAttribute(string Name, string Value, MorphLanguageEnum Language, string& ErrorStr)
 {
-	if (Value[0] == '"')
-	{
-		if ( (Value.length()<2) || (Value[Value.length() - 1] != '"'))
-		{
-			ErrorStr = Format("no matching quotation mark for attribute value \"%s\"",Value.c_str());
-			return false;
-		};
-		Value = Value.substr(1, Value.length()-2);
-	};
+    if (Value.length() > 0) 
+	    if (Value[0] == '"')
+	    {
+		    if ( (Value.length()<2) || (Value[Value.length() - 1] != '"'))
+		    {
+			    ErrorStr = Format("no matching quotation mark for attribute value \"%s\"",Value.c_str());
+			    return false;
+		    };
+		    Value = Value.substr(1, Value.length()-2);
+	    };
 
 	if (Name == "root")
 	{
