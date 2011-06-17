@@ -1,9 +1,0 @@
-; MAPost.def : Declares the module parameters.
-
-LIBRARY      "MAPost.DLL"
-
-EXPORTS
-	DllCanUnloadNow     PRIVATE
-	DllGetClassObject   PRIVATE
-	DllRegisterServer   PRIVATE
-	DllUnregisterServer	PRIVATE

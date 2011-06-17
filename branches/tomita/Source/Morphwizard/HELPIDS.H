@@ -1,4 +1,0 @@
-#define IDH_MORPH_WIZARD_DLG 101
-#define IDH_LOADING 102
-#define IDH_SLF_EDIT 103
-  
