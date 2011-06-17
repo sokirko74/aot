@@ -242,7 +242,7 @@ bool CheckGrammems(const CSynHomonym& L, const CGrammarItem& I)
 	if (!L.m_iPoses)
 		return false;
 	
-	if	((I.m_MorphPattern.m_Grammems & L.m_iGrammems) != I.m_MorphPattern.m_Grammems) 
+    if	((I.m_MorphPattern.m_Grammems & (L.m_iGrammems | L.m_TypeGrammems)) != I.m_MorphPattern.m_Grammems) 
 		return false;
 
 	return		(I.m_MorphPattern.m_Poses== 0) 
@@ -303,6 +303,9 @@ bool CSynWord::IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I)
 			};
 	};
 
+
+    if (!(I.m_GraDescrs == 0 || ((I.m_GraDescrs & GetGraDescr()) == I.m_GraDescrs)))
+        return false;
 	
 	return true;
 };
@@ -314,7 +317,7 @@ bool CSynWord::IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I)
 void CSynWord::BuildTerminalSymbolsByWord()							
 {
 
-	if (GetOpt()->m_Language != morphGerman) return;
+	// if (GetOpt()->m_Language != morphGerman) return;
 
 
 	const CWorkGrammar& G = GetOpt()->m_FormatsGrammar;

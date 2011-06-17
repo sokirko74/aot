@@ -11,7 +11,7 @@ enum MorphSearchStatus {FoundInDictionary=1, NotFoundInDictionary=2, AnyStatus=3
 struct CMorphPattern
 {
 	MorphSearchStatus	m_SearchStatus;				
-	QWORD				m_Grammems;
+    QWORD				m_Grammems;
 	size_t				m_Poses;
 	string				m_GrmAttribute;
 
@@ -42,6 +42,7 @@ struct CGrammarItem
 	MainTokenTypeEnum   m_TokenType;
 	string				m_ItemStrId;
 	string				m_Token;
+    QWORD               m_GraDescrs;
 	CMorphPattern		m_MorphPattern;
 	
 	map<string, string> m_Attributes;

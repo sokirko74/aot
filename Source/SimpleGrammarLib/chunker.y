@@ -213,7 +213,7 @@ attributes :	attribute
 
 attribute :		CHUNK_ATTR
 				{
-					if ( (*$1 != "root") && (*$1 != "atomic"))
+					if ( (*$1 != "root") && (*$1 != "atomic") && (*$1 != "relative") && (*$1 != "participle") && (*$1 != "nso") && (*$1 != "clause"))
 					{
 						yyerror("Bad single attribute name");
 						YYABORT;

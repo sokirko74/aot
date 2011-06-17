@@ -452,7 +452,7 @@ string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_c
 	if (!gram_codes1) return "";
 	if (!gram_codes2) return "";
 	if (!strcmp(gram_codes1, "??")) return gram_codes2;
-	if (!strcmp(gram_codes2, "??")) return gram_codes2;
+	if (!strcmp(gram_codes2, "??")) return gram_codes1;
 	size_t len1 = strlen(gram_codes1);
 	size_t len2 = strlen(gram_codes2);
 	for (size_t l=0; l<len1; l+=2)
@@ -474,6 +474,66 @@ string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_c
  	return Result;
 };
 
+bool CAgramtab::Compare(GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2, QWORD& grammems) const
+{
+	grammems = 0;
+	if (!gram_codes1) return false;
+	if (!gram_codes2) return false;
+	if (!strcmp(gram_codes1, "??")) return false;
+	if (!strcmp(gram_codes2, "??")) return false;
+	size_t len1 = strlen(gram_codes1);
+	size_t len2 = strlen(gram_codes2);
+   	for (size_t l=0; l<len1; l+=2)
+		for (size_t m=0; m<len2; m+=2)
+		{
+            const CAgramtabLine* l1 = GetLine(s2i(gram_codes1+l));
+            const CAgramtabLine* l2 = GetLine(s2i(gram_codes2+m));
+			if ( CompareFunc  (l1, l2) )  
+                grammems |= (l1->m_Grammems & l2->m_Grammems);
+		};
+
+ 	return grammems > 0;
+};
+
+
+
+
+//  uses gleiche to compare ancodes from gram_codes1 with  ancodes gram_codes2
+//  returns all ancodes from gram_codes1, which satisfy CompareFunc
+bool CAgramtab::Compare(GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2, string& grammems) const
+{
+    grammems.clear();
+
+	if (!gram_codes1) return "";
+	if (!gram_codes2) return "";
+	if (!strcmp(gram_codes1, "??"))
+    {
+        grammems.append(gram_codes2);
+        return true;
+    }
+	if (!strcmp(gram_codes2, "??"))
+    {
+        grammems.append(gram_codes2);
+        return true;
+    }
+	size_t len1 = strlen(gram_codes1);
+	size_t len2 = strlen(gram_codes2);
+	for (size_t l=0; l<len1; l+=2)
+	{
+        const CAgramtabLine* l1 = GetLine(s2i(gram_codes1+l));
+   		for (size_t m=0; m<len2; m+=2)	
+		{
+            const CAgramtabLine* l2 = GetLine(s2i(gram_codes2+m));
+			if ( CompareFunc  (l1, l2) )  
+			{
+				grammems.append(gram_codes1+l,2);
+				break;
+			};
+		};
+	};
+
+    return !grammems.empty();
+};
 
 string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const string& s1, const string& s2)
 {

@@ -133,6 +133,8 @@ class CRusGramTab : public CAgramtab{
 	bool GleicheCaseNumber(const char* gram_code1, const char* gram_code2) const;
 	QWORD GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const;
 
+//    agree_case(const string& gram_code_noun, const string& gram_code_adj) const;
+
 	bool GleicheGenderNumber(const char* gram_code1, const char* gram_code2) const;
 	bool GleicheSubjectPredicate(const char* gram_code1, const char* gram_code2) const;
 	long GetClauseTypeByName(const char* TypeName) const;

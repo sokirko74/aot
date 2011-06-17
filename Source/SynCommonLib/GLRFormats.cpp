@@ -33,6 +33,8 @@ void CSentence::BuildTerminalSymbolsByClause(size_t ClauseNo)
 		{
 			CInputSymbol I = *it;
 			I.m_bClause = true;
+            I.m_ClauseType = type.m_Type;
+            I.m_bRelativeClause = Clause.IsRelative();
 			Clause.m_vectorTypes[iType].m_AutomatSymbolInterpetation.insert(I);
 		};
 		Clause.m_AutomatSymbolInterpetationUnion.insert(Clause.m_vectorTypes[iType].m_AutomatSymbolInterpetation.begin(), Clause.m_vectorTypes[iType].m_AutomatSymbolInterpetation.end() );
@@ -55,7 +57,7 @@ void CSentence::ApplyGLR_Parsing (CGLRParser& Parser, const vector<CBuildingUnit
 						m_Words[Unit.m_WordNo].m_AutomatSymbolInterpetationUnion 
 					:	m_Clauses[Unit.m_ChildClauseNo].m_AutomatSymbolInterpetationUnion;
 
-		assert( !Symbols.empty() );
+		// assert( !Symbols.empty() );
 		/*for (set<CInputSymbol>::const_iterator it = Symbols->begin(); it != Symbols->end(); it++)
 		{
 			const CInputSymbol& debug = *it;
@@ -239,7 +241,7 @@ void CSentence::ProjectUsedHomonyms(const CGLRParser& Parser, const COccurrence&
 
 bool CSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const vector< COccurrence>& Occurrences, CClause& pClause, vector<CBuildingUnit>& BuildingUnits)
 {
-	//m_bShowAllGroups = true;
+	m_bShowAllGroups = false;
 	pClause.m_SynVariants.clear();
 
 

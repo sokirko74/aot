@@ -28,8 +28,8 @@ open_bracket "["
 close_bracket "]"
 chars	({rus_alpha}|{eng_alpha})
 name		({chars}|{dig}|[_\-])+
-comments %%.*
-attrib (hom)|(type)|(filename)|(grm)|(type_grm)|(root)|(register)|(form)|(det)|(has_one_grm)|(atomic)
+comments (\/\/|%%).*
+attrib (hom)|(type)|(filename)|(grm)|(type_grm)|(root)|(register)|(form)|(det)|(has_one_grm)|(atomic)|(graf)|(relative)|(participle)|(nso)|(clause)
 attrib_var \$[0-9]\.({attrib})
 include_direc "#include"
 

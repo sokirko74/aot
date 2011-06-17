@@ -606,3 +606,73 @@ string RussianCaseNumberGender(const CAgramtab* pGramTab,  const string& adj, co
 	return "";
 };
 
+string AgreeCaseNumberGender(const CAgramtab* pGramTab,  const string& adj1, const string& adj2)
+{
+	return pGramTab->GleicheAncode1(GenderNumberCaseRussian, adj1.c_str(), adj2.c_str());
+};
+
+string AgreeCaseNumberGenderAnim(const CAgramtab* pGramTab,  const string& adj1, const string& adj2)
+{
+    return pGramTab->GleicheAncode1(GenderNumberCaseAnimRussian, adj1.c_str(), adj2.c_str());
+};
+
+string AgreeCaseNumberGenderNonAnim(const CAgramtab* pGramTab,  const string& adj1, const string& adj2)
+{
+    return pGramTab->GleicheAncode1(GenderNumberCaseNotAnimRussian, adj1.c_str(), adj2.c_str());
+};
+
+string AgreeCaseNumber(const CAgramtab* pGramTab,  const string& adj1, const string& adj2)
+{
+    return pGramTab->GleicheAncode1(CaseNumber, adj1.c_str(), adj2.c_str());
+};
+
+string AgreeCase(const CAgramtab* pGramTab,  const string& adj1, const string& adj2)
+{
+    return pGramTab->GleicheAncode1(Case, adj1.c_str(), adj2.c_str());
+};
+
+string AgreeNumberGender(const CAgramtab* pGramTab,  const string& adj1, const string& adj2)
+{
+	return pGramTab->GleicheAncode1(GenderNumber, adj1.c_str(), adj2.c_str());
+};
+
+
+string SetNomAccPlural(const CAgramtab* pGramTab,  const string& s)
+{
+    assert ((s.length() % 2) == 0);
+	string Result;
+    QWORD q;
+	for (size_t i=0; i < s.length();i+=2)
+	{
+		const CAgramtabLine* L = pGramTab->GetLine(pGramTab->s2i(s.c_str()+i));
+		if (!L) continue;
+		//q = (L->m_Grammems & ~_QM(rSingular) & ~rAllCases);
+        q = L->m_Grammems | _QM(rPlural) | _QM(rNominativ) | _QM(rAccusativ);
+        //q |= (q & ~rAllCases) | _QM(rNominativ) | _QM(rAccusativ);
+        Result += pGramTab->GetAllPossibleAncodes(L->m_PartOfSpeech, q);
+	};
+    return Result;
+};
+
+string SetAllCases(const CAgramtab* pGramTab,  const string& s)
+{
+    assert ((s.length() % 2) == 0);
+	string Result;
+    QWORD q;
+    if (s.empty()) 
+    {
+        Result = pGramTab->GetAllPossibleAncodes(UnknownPartOfSpeech, rAllCases);
+    } 
+    else
+    {
+        for (size_t i=0; i < s.length();i+=2)
+        {
+            const CAgramtabLine* L = pGramTab->GetLine(pGramTab->s2i(s.c_str()+i));
+            if (!L) continue;
+            q = L->m_Grammems; 
+            q |= rAllCases;      
+            Result += pGramTab->GetAllPossibleAncodes(L->m_PartOfSpeech, q);
+        }
+    }
+    return Result;
+};

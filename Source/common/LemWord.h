@@ -111,6 +111,8 @@ public:
     size_t  GetPoses() const;
     QWORD   GetGrammems() const;
     bool    HasAnalyticalBe() const;
+
+    QWORD GetGraDescr() const { return m_GraDescrs; }
 };
 
 

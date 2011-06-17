@@ -63,57 +63,16 @@ void CRusSentence::ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMo
 
 }
 
-bool CRusSentence::RunSyntaxInClauses(ESynRulesSet type)
+bool CRusSentence::RunSyntaxInClauses(ESynRulesSet)
 {
 	try
 	{
 		if( m_pSyntaxOptions == NULL )
 			return false;
-
-		CRusFormatCaller FormatCaller(GetOpt());
-		bool bRebuildAllGroups = false;
-		switch(type)
-		{
-		case	SimpleSimilarRules :
-			{
-				FormatCaller.AddSimpleSimilarRules(  );
-				break;
-			}
-		case RulesBeforeSimClauses: 
-			{
-				FormatCaller.AddRulesBeforeSimClauses(  );
-				break;
-			}
-		case RulesAfterSimClauses : 
-			{
-				FormatCaller.AddRulesAfterSimClauses( );
-				break;
-			}
-		case AllRules			  :
-			{
-				FormatCaller.AddAllRules( );
-				bRebuildAllGroups = true;
-				
-				break;
-			}
-
-		case GroupRulesForClause			  :
-			{
-				FormatCaller.AddGroupRulesForClause( );
-				break;
-			}
-
-		default:
-			return false;		
-		}		
 		
-
-		//я бы с удовольствием здесь for_each запустил, да, блин, передавать надо 4 параметра 
 		for(int i = 0 ; i < GetClausesCount() ; i++ )
 		{
-
-			GetClause(i).BuildGroups(FormatCaller, bRebuildAllGroups);		
-			FormatCaller.Reset();
+			BuildGLRGroupsInClause(GetClause(i));
 		}
 
 		
@@ -125,9 +84,6 @@ bool CRusSentence::RunSyntaxInClauses(ESynRulesSet type)
 		return false;
 	}
 }
-
-
-
 
 
 void TryBuildVerbLemmaWithKa(CSynWord& W)
@@ -179,12 +135,6 @@ void CRusSentence::TryToAddComparativeTypeToClause()
 				
 	}
 }
-
-
-
-
-
-
 
 
 void CRusSentence::DeleteHomOneToThousand()
@@ -578,251 +528,246 @@ void CRusSentence::DeleteSomeTypesInRelativeClauses()
 bool	CRusSentence::IsProfession(const CSynHomonym& H) const
 {
 	return H.CompareWithPredefinedWords(*GetOpt()->m_pProfessions);
-};
+}
 
 bool CRusSentence::BuildClauses()
 {
-	//запись в log файл отключена
-	FILE* log_fp = 0;
-	// log_fp = fopen("current_sentence.log", "w");
-	
-	ProcessFio1Fio2();
+    //ProcessFio1Fio2();
+    //SolveAmbiguityUsingRuleForShortAdj();
+    //DeleteHomonymsIfTooManyPredictedWords();
+    //DeleteHomOneToThousand();
+    //FindGraPairs();
+    //BuildGLRGroupsInSentence();
+    //if(! BuildInitialClauses() )
+    //{
+    //    return false;
 
-	SolveAmbiguityUsingRuleForShortAdj();
-	DeleteHomonymsIfTooManyPredictedWords();
-	m_bPanicMode = IsPanicSentence();
-	if (m_bPanicMode)
-	{
-		rml_TRACE("!!!!!!!!!!  Entering panic mode !!!!!!!!!!!1\n");
-	};
+    //};    
+    //RunSyntaxInClauses(AllRules);
+    //RecalculateRelationsCoordinates();	
+    //AssignClauseNoToWords();	
+    //AddWeightForSynVariantsInClauses();
+    //return true;
 
-	CRusSentence SavedSentence(GetOpt());
-	SavedSentence = *this;
-	m_bShouldUseTwoPotentialRule = !m_bPanicMode;
+    //запись в log файл отключена
+    FILE* log_fp = 0;
+    // log_fp = fopen("current_sentence.log", "w");
+
+    ProcessFio1Fio2();
+
+    SolveAmbiguityUsingRuleForShortAdj();
+    DeleteHomonymsIfTooManyPredictedWords();
+    m_bPanicMode = IsPanicSentence();
+    if (m_bPanicMode)
+    {
+        rml_TRACE("!!!!!!!!!!  Entering panic mode !!!!!!!!!!!1\n");
+    };
+    BuildGLRGroupsInSentence();
+    CRusSentence SavedSentence(GetOpt());
+    SavedSentence = *this;
+    m_bShouldUseTwoPotentialRule = !m_bPanicMode;
 TryWithoutTwoPotentialRule:
-	bool bRes = true;
+    bool bRes = true;
 
-	if (log_fp) 
-	{
-		fprintf (log_fp, "%s....",  GetSentenceBeginStr().c_str());;
-		
-	};
+    if (log_fp) 
+    {
+        fprintf (log_fp, "%s....",  GetSentenceBeginStr().c_str());;
 
-	assert ( GetClausesCount() == 0 );
+    };
 
-	// соединение предикатива нечего: "Вам не о чем волноваться"
-	DisruptPronounPredik();
-	
+    assert ( GetClausesCount() == 0 );
 
-	// удаление префиксов ВИЦЕ- и ЭКС- 
-	CutPrefixEksAndVize();
+    // соединение предикатива нечего: "Вам не о чем волноваться"
+    DisruptPronounPredik();
 
-	
-	//	удаление омонимов вводных слов, если эти слова не выделены запятыми и пр.
-	
-	DetermineParenthesis();
+    // удаление префиксов ВИЦЕ- и ЭКС- 
+    CutPrefixEksAndVize();
 
-	//	удаление омонимов, частоты которых соотносятся 1/1000
+    //	удаление омонимов вводных слов, если эти слова не выделены запятыми и пр.
+    DetermineParenthesis();
 
-	DeleteHomOneToThousand();
+    //	удаление омонимов, частоты которых соотносятся 1/1000
+    // DeleteHomOneToThousand();
 
-	FindGraPairs();
+    FindGraPairs();
 
-	CloneHomonymsForOborots();
+    CloneHomonymsForOborots();
 
-	AscribeSimplePrepositionInterpretations(PREP);
+    AscribeSimplePrepositionInterpretations(PREP);
 
-	FindAllTermins();
+    FindAllTermins();
 
-	bool SecondTryOfCoverageKillHomonyms = false;
-	vector<CSynWord> SaveWords = m_Words;
-	vector<SFoundTermin> SaveFoundTermins = m_vectorTermins;
-
-	
+    bool SecondTryOfCoverageKillHomonyms = false;
+    vector<CSynWord> SaveWords = m_Words;
+    vector<SFoundTermin> SaveFoundTermins = m_vectorTermins;
 
 BuildInitialClausesLabel:
 
-	TraceClauses();
+    TraceClauses();
 
-	if(! BuildInitialClauses() )
-	{
-		fclose(log_fp);
-		return false;
+    if(! BuildInitialClauses() )
+    {
+        fclose(log_fp);
+        return false;
+    }
 
-	};
+    TraceClauses();
 
-	TraceClauses();
+    DeleteSomeTypesInRelativeClauses();
 
-	DeleteSomeTypesInRelativeClauses();
+    TraceClauses();
 
+    if (log_fp)  fprintf (log_fp, "BuildAnalyticalVerbForms\n");
+    BuildAnalyticalVerbForms();
 
-	TraceClauses();
+    if (log_fp)  fprintf (log_fp, "TryToAddComparativeTypeToClause\n");
+    TryToAddComparativeTypeToClause();
 
-	if (log_fp)  fprintf (log_fp, "BuildAnalyticalVerbForms\n");
-	BuildAnalyticalVerbForms();
+    /*if (log_fp)  fprintf (log_fp, "TryToRebuildDashInClause\n");
+    TraceClauses();
+    TryToRebuildDashInClause();
+    TraceClauses();*/
 
+    if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(AllRules)\n");
+    RunSyntaxInClauses(AllRules);
 
-	if (log_fp)  fprintf (log_fp, "TryToAddComparativeTypeToClause\n");
-	TryToAddComparativeTypeToClause();
+    // после первого вызова RunSyntaxInClause нужно удалить омонимы, которые противоречат найденным терминам
+    if (log_fp)  fprintf (log_fp, "DeleteMarkedHomonymsWithClauses\n");
+    DeleteMarkedHomonymsWithClauses(CPeriod(0,(int)m_Words.size()-1));
 
-	if (log_fp)  fprintf (log_fp, "TryToRebuildDashInClause\n");
-	TraceClauses();
-	TryToRebuildDashInClause();
-	TraceClauses();
+    if (log_fp)  fprintf (log_fp, "InitWordsInTermins\n");
+    InitWordsInTermins();
 
-	if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(RulesBeforeSimClauses)\n");
-	RunSyntaxInClauses(RulesBeforeSimClauses);
+    assert ( IsValid() );
 
-	// после первого вызова RunSyntaxInClause нужно удалить омонимы, которые противоречат найденным терминам
-	if (log_fp)  fprintf (log_fp, "DeleteMarkedHomonymsWithClauses\n");
-	DeleteMarkedHomonymsWithClauses(CPeriod(0,(int)m_Words.size()-1));
+    if (!m_bPanicMode)
+    {
+        if (log_fp)  fprintf (log_fp, "OneRunOfClauseRules(m_vectorPrimitiveRules)\n");
+        OneRunOfClauseRules(m_vectorPrimitiveRules);
+        assert ( IsValid() );
 
-	if (log_fp)  fprintf (log_fp, "InitWordsInTermins\n");
-	InitWordsInTermins();
+        if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(RulesAfterSimClauses)\n");
+        RunSyntaxInClauses(RulesAfterSimClauses);
 
-	
+        if (log_fp)  fprintf (log_fp, "OneRunOfClauseRules(m_vectorMainEncloseRules)\n");
+        OneRunOfClauseRules(m_vectorMainEncloseRules);
+        assert ( IsValid() );
 
-	assert ( IsValid() );
+        if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(GroupRulesForClause)\n");
+        RunSyntaxInClauses(GroupRulesForClause);	
 
-	if (!m_bPanicMode)
-	{
-		if (log_fp)  fprintf (log_fp, "OneRunOfClauseRules(m_vectorPrimitiveRules)\n");
-		OneRunOfClauseRules(m_vectorPrimitiveRules);
-		assert ( IsValid() );
+        if (log_fp)  fprintf (log_fp, "OneRunOfClauseRules(m_vectorDisruptRules)\n");
+        OneRunOfClauseRules(m_vectorDisruptRules);
+        assert ( IsValid() );
+    };
 
-		if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(RulesAfterSimClauses)\n");
-		RunSyntaxInClauses(RulesAfterSimClauses);
+    if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(AllRules)\n");
+    RunSyntaxInClauses(AllRules);	
 
-	
-		if (log_fp)  fprintf (log_fp, "OneRunOfClauseRules(m_vectorMainEncloseRules)\n");
-		OneRunOfClauseRules(m_vectorMainEncloseRules);
-		assert ( IsValid() );
+    if (log_fp)  fprintf (log_fp, "BuildClauseRelations()\n");
+    BuildClauseRelations();
+    assert ( IsValid() );
 
-		if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(GroupRulesForClause)\n");
-		RunSyntaxInClauses(GroupRulesForClause);	
-	
-		if (log_fp)  fprintf (log_fp, "OneRunOfClauseRules(m_vectorDisruptRules)\n");
-		OneRunOfClauseRules(m_vectorDisruptRules);
-		assert ( IsValid() );
-	};
-	
-	if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(AllRules)\n");
-	RunSyntaxInClauses(AllRules);	
+    if (log_fp)  fprintf (log_fp, "RecalculateRelationsCoordinates()\n");
+    RecalculateRelationsCoordinates();	
+    AssignClauseNoToWords();
+    assert ( IsValid() );
 
-	// чтобы  собиралась группа ПРИДАТ_ОПР в примере "баба, которая много пьет" нужно еще раз запустить 
-	// GroupRulesForClause, поскольку OneRunOfClauseRules(m_vectorDisruptRules), в котором эта клауза  вложилась, только что отработало.
-	if (log_fp)  fprintf (log_fp, "RunSyntaxInClause(GroupRulesForClause)\n");
-	RunSyntaxInClauses(GroupRulesForClause);	
+    if (log_fp)  fprintf (log_fp, "AddWeightForSynVariantsInClauses()\n");
+    AddWeightForSynVariantsInClauses();
+    assert ( IsValid() );
 
-	if (log_fp)  fprintf (log_fp, "BuildClauseRelations()\n");
-	BuildClauseRelations();
-	assert ( IsValid() );
+    //менять граммемы подлежащего и группы, в которую оно входит, нужно  только после того,
+    //как все клаузы уже построены (после операций объединения и вложения клауз), т.е.
+    //когда отработают все правила фрагментации.
+    //Раньше чистка граммем происходила в ф-ции CFormatCaller::find_subj_for_verb
+    //пример: "Стол, что за нами пристально следит, преследовал меня весь день"
+    //при первоначальной фрагментации подлежащим становился "день", а после объединения клауз "стол",
+    //поэтому терялся вн. у "день".    
+    ChangeSubjAndItsGroupGrammems();
 
-	if (log_fp)  fprintf (log_fp, "RecalculateRelationsCoordinates()\n");
-	RecalculateRelationsCoordinates();	
-	AssignClauseNoToWords();
-	assert ( IsValid() );
+    if (!m_bPanicMode)
+    {
+        for ( int tt = 0; tt < GetClausesCount(); tt++ )
+            if ( 0 == GetClause(tt).GetSynVariantsCount() )
+                if (m_bShouldUseTwoPotentialRule)
+                {
+                    *this = SavedSentence;
+                    m_bShouldUseTwoPotentialRule = false;
+                    if (log_fp)  fprintf (log_fp, "goto TryWithoutTwoPotentialRule\n");
+                    goto TryWithoutTwoPotentialRule;
+                }
+                if (m_pSyntaxOptions->m_KillHomonymsMode == CoverageKillHomonyms)
+                {
 
-	if (log_fp)  fprintf (log_fp, "AddWeightForSynVariantsInClauses()\n");
-	AddWeightForSynVariantsInClauses();
-	assert ( IsValid() );
+                    //	если  были удалены омонимы и программа организует еще один проход  (только один!)
 
-	
+                    if (log_fp)  fprintf (log_fp, "KillHomonymsInAllSentence\n");
+                    if (    KillHomonymsInAllSentence()
+                        && !SecondTryOfCoverageKillHomonyms
+                        )
+                    {
+                        IsValid();
+                        for ( int ClauseNo = 0; ClauseNo < GetClausesCount(); ClauseNo++ )
+                        {
+                            const CClause& Clause = GetClause(ClauseNo);
 
-	 //менять граммемы подлежащего и группы, в которую оно входит, нужно  только после того,
-	 //как все клаузы уже построены (после операций объединения и вложения клауз), т.е.
-	 //когда отработают все правила фрагментации.
-	 //Раньше чистка граммем происходила в ф-ции CFormatCaller::find_subj_for_verb
-	 //пример: "Стол, что за нами пристально следит, преследовал меня весь день"
-	 //при первоначальной фрагментации подлежащим становился "день", а после объединения клауз "стол",
-	 //поэтому терялся вн. у "день".    
-	ChangeSubjAndItsGroupGrammems();
+                            //	если остались ПУСТЫХи или клаузы  c пустым кол-вом вариантов
 
+                            if (			Clause.m_vectorTypes.empty()  
+                                //||		Clause.m_SynVariants.empty() 
+                                )
+                            {
+                                SecondTryOfCoverageKillHomonyms = true;
 
-	if (!m_bPanicMode)
-	{
-		for ( int tt = 0; tt < GetClausesCount(); tt++ )
-			if ( 0 == GetClause(tt).GetSynVariantsCount() )
-				if (m_bShouldUseTwoPotentialRule)
-			{
-				*this = SavedSentence;
-				m_bShouldUseTwoPotentialRule = false;
-				if (log_fp)  fprintf (log_fp, "goto TryWithoutTwoPotentialRule\n");
-				goto TryWithoutTwoPotentialRule;
-			}
+                                //Мы не можем здесь оставить вектор слов(m_Words) так, как он есть,
+                                //поскольку будем заново вызывать функцию BuildAnalyticalVerbForms, которая  будет строить 
+                                //анал. формы,т.е. удалять и менять  сами слова.
+                                //Мы так же не можем  сделать m_Words = SaveWords,
+                                //поскольку тогда  восстановятся все омонимы,которые были удалены KillHomonymsInAllSentence.
+                                //Поэтому мы делаем следующее.
 
+                                vector<CSynWord> p;
+                                for (int i =0; i < SaveWords.size(); i++)
+                                {
+                                    int j=0;
+                                    for (; j< m_Words.size(); j++)
+                                        if (			(SaveWords[i].m_GraphematicalUnitOffset == m_Words[j].m_GraphematicalUnitOffset)
+                                            &&		(SaveWords[i].m_strWord == m_Words[j].m_strWord)
+                                            )
+                                            break;
+                                    if (j < m_Words.size())
+                                    {
+                                        p.push_back(m_Words[j]);
+                                        p.back().m_MainVerbs = SaveWords[i].m_MainVerbs;
+                                        p.back().m_TrennbarePraefixWordNo = SaveWords[i].m_TrennbarePraefixWordNo;
+                                    }
+                                    else
+                                        p.push_back(SaveWords[i]);
 
-
-		if (m_pSyntaxOptions->m_KillHomonymsMode == CoverageKillHomonyms)
-		{
-			
-			//	если  были удалены омонимы и программа организует еще один проход  (только один!)
-			
-			if (log_fp)  fprintf (log_fp, "KillHomonymsInAllSentence\n");
-		    if (    KillHomonymsInAllSentence()
-			   && !SecondTryOfCoverageKillHomonyms
-			   )
-		   {
-               IsValid();
-			   for ( int ClauseNo = 0; ClauseNo < GetClausesCount(); ClauseNo++ )
-			   {
-				   const CClause& Clause = GetClause(ClauseNo);
-				   
-					//	если остались ПУСТЫХи или клаузы  c пустым кол-вом вариантов
-				   
-				   if (			Clause.m_vectorTypes.empty()  
-						//||		Clause.m_SynVariants.empty() 
-					   )
-				   {
-					  SecondTryOfCoverageKillHomonyms = true;
-					  
-						//Мы не можем здесь оставить вектор слов(m_Words) так, как он есть,
-						//поскольку будем заново вызывать функцию BuildAnalyticalVerbForms, которая  будет строить 
-						//анал. формы,т.е. удалять и менять  сами слова.
-						//Мы так же не можем  сделать m_Words = SaveWords,
-						//поскольку тогда  восстановятся все омонимы,которые были удалены KillHomonymsInAllSentence.
-						//Поэтому мы делаем следующее.
-					  
-					  vector<CSynWord> p;
-					  for (int i =0; i < SaveWords.size(); i++)
-					  {
-							int j=0;
-							for (; j< m_Words.size(); j++)
-							  if (			(SaveWords[i].m_GraphematicalUnitOffset == m_Words[j].m_GraphematicalUnitOffset)
-									&&		(SaveWords[i].m_strWord == m_Words[j].m_strWord)
-								  )
-								  break;
-							if (j < m_Words.size())
-							{
-								p.push_back(m_Words[j]);
-								p.back().m_MainVerbs = SaveWords[i].m_MainVerbs;
-								p.back().m_TrennbarePraefixWordNo = SaveWords[i].m_TrennbarePraefixWordNo;
-							}
-							else
-								p.push_back(SaveWords[i]);
-
-					  };
-					  m_Words = p;
-					  m_vectorTermins = SaveFoundTermins;
-					  if (log_fp)  fprintf (log_fp, "goto  BuildInitialClausesLabel\n");
-					  goto  BuildInitialClausesLabel;
-				   };
-			   };
-		   };
+                                };
+                                m_Words = p;
+                                m_vectorTermins = SaveFoundTermins;
+                                if (log_fp)  fprintf (log_fp, "goto  BuildInitialClausesLabel\n");
+                                goto  BuildInitialClausesLabel;
+                            };
+                        };
+                    };
 
 
-		};
-	};
+                };
+    };
 
 
-	assert ( IsValid() );
+    assert ( IsValid() );
 
-	if (log_fp)  fprintf (log_fp, "fclose(log_fp)\n");
-	if (log_fp)  fclose(log_fp);	
+    if (log_fp)  fprintf (log_fp, "fclose(log_fp)\n");
+    if (log_fp)  fclose(log_fp);	
 
-	return true;
-
+    return true;
 }
+
+
 
 
 

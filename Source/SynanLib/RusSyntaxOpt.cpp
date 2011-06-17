@@ -286,6 +286,15 @@ bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 
 	}
 
+	string strFileName = GetSyntaxFilePath()+"gformats.txt";
+	m_FormatsGrammar.m_Language = morphGerman;
+	m_FormatsGrammar.m_pGramTab = GetGramTab();
+	m_FormatsGrammar.m_SourceGrammarFile = strFileName;
+	if (!LoadGrammarForGLR(m_FormatsGrammar, true, false))
+	{
+		ErrorMessage(  Format("Cannot load %s\n", strFileName.c_str()));
+		return false;
+	};
 
 	return true;
 }
