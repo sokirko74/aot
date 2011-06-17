@@ -1,0 +1,26 @@
+HKCR
+{
+	Lemmatizer.PLMLineCollection.1 = s 'PLMLineCollection Class'
+	{
+		CLSID = s '{34E94E25-6C26-11D3-9D4A-00105A68BAF2}'
+	}
+	Lemmatizer.PLMLineCollection = s 'PLMLineCollection Class'
+	{
+		CLSID = s '{34E94E25-6C26-11D3-9D4A-00105A68BAF2}'
+		CurVer = s 'Lemmatizer.PLMLineCollection.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {34E94E25-6C26-11D3-9D4A-00105A68BAF2} = s 'PLMLineCollection Class'
+		{
+			ProgID = s 'Lemmatizer.PLMLineCollection.1'
+			VersionIndependentProgID = s 'Lemmatizer.PLMLineCollection'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{CA8CF90E-FBB6-11D2-9C98-00105A68BAF2}'
+		}
+	}
+}

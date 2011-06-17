@@ -1,0 +1,19 @@
+<chunk>
+<input>Test/Synan/Ger/test.txt</input>
+<sent>
+	<synvar>
+		<clause type="VERBSATZ">Ich gehe nach Hause .</clause>
+		<group type="PP">nach Hause</group>
+	</synvar>
+	<rel name="EXPR" gram=""> gehe -> Ich </rel>
+</sent>
+<sent>
+	<synvar>
+		<clause type="VERBSATZ">Du bist ein Idiot .</clause>
+		<group type="MODIF_NP">ein Idiot</group>
+	</synvar>
+	<rel name="EXPR" gram=""> bist -> Du </rel>
+</sent>
+</chunk>
+
+

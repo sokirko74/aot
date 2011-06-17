@@ -1,0 +1,20 @@
+12.4  IRC IN TIMES OF CRISIS
+
+
+IRC has become a new medium for staying on top of really big breaking 
+news.  In 1993, when Russian lawmakers barricaded themselves inside the 
+parliament building, some enterprising Muscovites and a couple of 
+Americans set up a "news channel" on IRC to relay first-person accounts 
+direct from Moscow. The channel was set up to provide a continuous loop 
+of information, much like all-news radio stations that cycle through the 
+day's news every 20 minutes.  In 1994, Los Angeles residents set up a 
+similar channel to relay information related to the Northridge 
+earthquake.  In both cases, logs of the channels were archived somewhere 
+on the Net, for those unable to "tune in" live. 
+
+How would you find such channels in the future?  Use the /list command to 
+scroll through the available channels.  If one has been set up to discuss 
+a particular breaking event, chances are you'll see a brief description 
+next to the channel name that will tell you that's the place to tune. 
+
+

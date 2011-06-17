@@ -1,0 +1,2896 @@
+============
+TITLE        = $GX
+SENSE       = 1
+COMM       = 5
+AUTHOR       = masha
+REDACT       = alex
+TIME_CREATE       = 27/6/1 12:40:29
+TYP     =  БЕЗУСЛ
+============
+TITLE        = $TTT
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 14:24:1
+LEX*    = *  *
+TYP     =  БЕЗУСЛ
+============
+TITLE        = xxxx
+SENSE       = 1
+COMM       = test
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 17/3/3 16:18:9
+============
+TITLE        = бить_баклуши
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:1
+ROOT    =  1
+CONTENT =  бить баклуши
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  AntiBon
+VAL     =  SUB , A1 , C
+GF(2)   = 1  вн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  twiddle 1
+SYN     =  бездельничать
+TYP     =  БЕЗУСЛ
+============
+TITLE        = больше_нечего
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 15/5/1 14:24:1
+ROOT    =  2
+CONTENT =  много нечего
+EXM     =  мне больше нечего добавить к тому, что вы уже сказали
+CAT     = 1  LABL.SIT
+SF      = 1  NEG
+             CONTEN
+VAL     =  CONTEN , C , A1
+           ACT , A2 , C
+GF(2)   = 1  МС-ПРЕДК
+GF2     = 1  ModalCopul
+GF2(1)  = 1  к_доп : Д
+GF2(2)  = 1  к_доп : инф
+SF2(1)  = 1  ANIM
+SF2(2)  = 1  SITUAT
+ENG     =  nothing_else 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = брать_верх
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:1
+ROOT    =  1
+CONTENT =  брать верх
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+SF2     = 1  ABSTR
+          2  ANIM
+          3  INTEL
+GF2     = 1  > к_доп : над+Т
+ENG     =  overrule 1
+EXM     =  его осторожность взяла верх над его жадностью
+TYP     =  БЕЗУСЛ
+============
+TITLE        = брать_взаймы
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:1
+EXM     =  он брал у меня взаймы деньги
+CONTENT =  брать _ взаймы
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  FIN
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+           C-AGENT , A3 , C
+GF(3)   = 1  Н
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  > п_доп : В
+EGF2(1) = 1  -
+SF2     = 1  THINGN
+          2  FIN
+GF3     = 1  к_доп : у+Р
+SYNR    =  упр ( C1 , C3 )
+ENG     =  borrow_money 1
+           borrow 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = брать_на_себя
+SENSE       = 1
+AUTHOR       = graf
+REDACT       = alex
+TIME_CREATE       = 7/11/1 16:20:43
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  брать себя
+EXM     =  Наша бригада взяла на себя дополнительное обязательство.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(2) =  на+В
+GF1     = 1  подл : И
+GF2     = 1  п_доп : В
+ENG     =  take 1
+============
+TITLE        = брать_себя_в_руки
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+EXM     =  Отец был шокирован этим известием, однако скоро взял
+           себя в руки.
+CONTENT =  брать себя рука
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+PREP(3) =  в+В
+GF(2)   = 1  вн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  pull_oneself_together 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = браться_за_перо
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:7
+CONTENT =  браться перо
+ROOT    =  1
+PREP(2) =  за+В
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  put_pen_to_paper 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = бросать_на_ветер
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+EXM     =  Он бросает обещания на ветер.
+CONTENT =  бросать _ ветер
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(3) =  на+В
+GF(3)   = 1  ед,вн
+GF1     = 1  подл : И
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+SYNR    =  упр ( C1 , C2 )
+ENG     =  chuck_away 1
+           throw down the drain
+TYP     =  БЕЗУСЛ
+============
+TITLE        = бросаться_в_глаза
+SENSE       = 1
+AUTHOR       = graf
+REDACT       = d
+TIME_CREATE       = 3080192/786433/523588 3409377:1728315654:-1236992000
+ROOT    =  1
+CONTENT =  бросаться _ глаза
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+PREP(2) =  в+В
+GF1     = 1  подл : И
+GF2     = 1  ^ к_доп : Д
+          2  > к_доп : Д
+SF2     = 1  ANIM
+ENG     =  strike_the_eye 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = бывать_на_душе
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+EXM     =  у многих людей бывает на душе что-нибудь такое, о чем
+           они хотели бы рассказать
+CONTENT =  бывать душа
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+PREP(2) =  на+П
+GF1     = 1  к_доп : у+Р
+SF1     = 1  ANIM
+GF2     = 1  подл : И
+SF2     = 1  SITUAT
+SYNR    =  упр ( C1 , C2 )
+ENG     =  have_in_heart 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = быть_в_гостях
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:7
+CONTENT =  быть гость
+ROOT    =  1
+PREP(2) =  в+П
+GF(2)   = 1  мн
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ОБСТ_ГР : у+Р
+          2  ОБСТ_ГР : в+П
+SF2     = 1  ANIM
+          2  LOK
+             STAT
+SYN     =  находиться с визитом
+ENG     =  be_on_a_visit 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = быть_в_курсе
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+CONTENT =  быть курс
+EXM     =  Ты в курсе последних событий на факультете?
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  INTEL
+VAL     =  CONTEN , A1 , C
+PREP(2) =  в+П
+GF1     = 1  > к_доп : Р
+SF1     = 1  SITUAT
+          2  PHENOM
+          3  AKTIO
+LEX1    = 1  дело
+          2  события
+SYNR    =  упр ( C1 , C2 )
+ENG     =  keep_up 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = быть_дома
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+CONTENT =  быть дома
+EXM     =  он был дома
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF(2)   = 1  Н
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+LEX1    = 1  я
+             ты
+             он
+             она
+             они
+             мы
+             вы
+ENG     =  be_home 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = быть_цвета
+SENSE       = 1
+AUTHOR       = alex
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+EXM     =  плато было желтого цвета
+CONTENT =  быть цвет
+GF      = 1  Г
+SF      = 1  Copul
+VAL     =  F-ACT , A1 , C
+           S-ACT , A2 , C
+GF(2)   = 1  ед, рд
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  отпредик : Р_ПРИЛ
+ENG     =  be 3
+TYP     =  БЕЗУСЛ
+============
+TITLE        = в_большинстве_своем
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  2
+CONTENT =  большинство свое
+EXM     =  в большинстве своем парламентарии поддерживают это решение
+GF      = 1  С : ПГ
+VAL     =  PROPERT , C , A1
+PREP(1) =  в+П
+GF1     = 1  < X! : ИГ
+          2  > X! : ИГ
+SF1     = 1  ANIM
+          2  COLLEC
+SYNR    =  ПРИЛ-СУЩ ( C1 , C2 )
+TYP     =  БЕЗУСЛ
+============
+TITLE        = в_раз
+SENSE       = 1
+COMM       = 5
+AUTHOR       = _leva
+TIME_CREATE       = 327680/22413313/0 6553600:720896:524288
+ROOT    =  1
+CONTENT =  раз
+EXM     =  золотое содержание рубля было увеличено всего в 4 раза
+GF      = 1  С : ПГ
+SF      = 1  VALUE
+VAL     =  VALUE , A1 , C
+PREP(1) =  в+В
+GF1     = 1  << числ_сущ : ЧИСЛ
+SF1     = 1  QUANTIT
+ENG     =  _times 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = вести_себя
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+CONTENT =  (вести|держать) себя
+EXM     =  Кто себя хорошо вел, тот получит конфетку.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           ESTIM , A2 , C
+GF(2)   = 1  вн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ОБСТ_ГР
+SYNR    =  упр ( C1 , C2 )
+ENG     =  behave 1
+           act 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = вносить_в_список
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:7
+CONTENT =  вносить _ список
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(3) =  в+В
+GF1     = 1  < подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  > п_доп : В
+SF2     = 1  MEDINF
+          2  INF
+          3  ANIM
+ENG     =  list 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = вносить_свой_вклад
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  1
+EXM     =  Каждый из нас должен внести свой вклад в благоустройство дома.
+CONTENT =  вносить (свой вклад|свою лепту)
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           AIM , A2 , C
+GF(3)   = 1  вн,ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : в+В
+SF2     = 1  AKTIO
+SYNR    =  упр ( C1 , C3 )
+           ПРИЛ-СУЩ ( C3 , C2 )
+ENG     =  make_one's_contribution 1
+           do one's bit
+TYP     =  БЕЗУСЛ
+============
+TITLE        = внутренняя_сторона
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  2
+CONTENT =  внутренний (сторона | поверхность)
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  PART
+VAL     =  PART , C , A1
+GF1     = 1  > X! : ИГ
+SF1     = 1  THINGN
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+ENG     =  inside 3
+TYP     =  БЕЗУСЛ
+============
+TITLE        = во_весь_опор
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:7
+CONTENT =  в весь опор
+CAT     = 1  LABL.PROPERT
+GF      = 1  ОБСТ_ГР
+SF      = 1  Magn
+             ESTIM
+VAL     =  ESTIM , C , A1
+GF1     = 1  X! : ГГ
+SF1     = 1  MOV
+ENG     =  hell-for-leather 1
+EXM     =  Он мчался во весь опор.
+TYP     =  БЕЗУСЛ
+============
+TITLE        = во_многом
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:7
+CONTENT =  в многое
+ROOT    =  1
+GF      = 1  С : ПГ
+SF      = 1  Magn
+VAL     =  ESTIM , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+          3  X! : ПРИЛ
+ENG     =  at_large
+EXM     =  ты во многом не прав
+TYP     =  БЕЗУСЛ
+============
+TITLE        = вот_уже
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  2
+CONTENT =  вот уже
+EXM     =  Вот уже пришла весна
+SF      = 1  TIME
+VAL     =  ! TIME , C , A1
+GF(2)   = 1  Н
+GF1     = 1  X! : ГГ
+SF2     = 1  TIME
+ENG     =  already 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = все_остальное
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:7
+ROOT    =  2
+CONTENT =  весь остальное
+GF      = 1  ИГ
+GF(1)   = 1  ср, ед, им
+ENG     =  all_the_rest 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = все_равно
+SENSE       = 1
+AUTHOR       = boris
+REDACT       = alex
+TIME_CREATE       = 7/12/1 18:6:8
+ROOT    =  2
+CONTENT =  все равно
+GF      = 1  ОБСТ_ГР
+VAL     =  PROPERT , C , A1
+GF(1)   = 1  Н
+GF(2)   = 1  Н
+GF1     = 1  X! : ГГ
+ENG     =  anyway 1
+============
+TITLE        = все_равно
+SENSE       = 2
+AUTHOR       = boris
+REDACT       = alex
+TIME_CREATE       = 7/12/1 18:6:19
+ROOT    =  2
+EXM     =  мне все равно, что они обо мне  скажут
+CONTENT =  все равно
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+GF(1)   = 1  Н
+GF(2)   = 1  ПРЕДК
+GF1     = 1  < к_доп : Д
+SF1     = 1  ANIM
+GF2     = 1  > ПРИД_ПР
+SF2     = 1  SITUAT
+ENG     =  all_the_same 1
+============
+TITLE        = вступать_в_силу
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  вступать сила
+EXM     =  Закон вступает в силу после подписания президентом
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  IncepFunc0
+VAL     =  OBJ , A1 , C
+           TIME , A2 , C
+PREP(2) =  в+В
+GF1     = 1  подл : И
+SF1     = 1  LEGISL
+GF2     = 1  ОБСТ_ГР
+SYNR    =  упр ( C1 , C2 )
+ENG     =  come_into_force 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выбиваться_из_сил
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  выбиваться сила
+ROOT    =  1
+EXM     =  Мы бежали, пока не выбились из сил.
+PREP(2) =  из+Р
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+ENG     =  be_exhausted 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выводить_из_себя
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 28/10/1 15:17:2
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+EXM     =  это вывело меня из себя
+CONTENT =  выводить _ себя
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           PACIEN , A2 , C
+PREP(3) =  из+Р
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+SF2     = 1  ANIM
+ENG     =  drive_smb_out_of_his_wits 1
+============
+TITLE        = выводить_из_строя
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Этот рабочий вывел из строя всю систему.
+CONTENT =  выводить _ строй
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  Liqu
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(2) =  из+Р
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+ESF2(2) = 1  DEV
+          2  INSTR
+ESF2(3) = 1  THINGN
+          2  ARTEF
+SF2     = 1  INSTR
+SYNR    =  упр ( C1 , C2 )
+ENG     =  disturb 1
+           put_out_of_action 1
+           break_down 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выводить_из_терпения
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Ты и святого из терпения выведешь!
+CONTENT =  выводить _ терпение
+PREP(3) =  из+Р
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           PACIEN , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+          3  < п_доп : В
+SF2     = 1  ANIM
+ENG     =  try_the_patience 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выкидывать_из_головы
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  выкидывать _ голова
+EXM     =  Выкиньте эту ерунду из головы.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(3) =  из+Р
+GF(3)   = 1  ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+             MEDINF
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+SYNR    =  упр ( C1 , C2 )
+ENG     =  shuffle_out_of_mind 1
+           perish the thought
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выставлять_напоказ
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Незачем выставлять напоказ свою образованность.
+CONTENT =  выставлять напоказ
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  >> п_доп : В
+ENG     =  parade 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выходить_за_рамки
+SENSE       = 1
+COMM       = 5
+AUTHOR       = graf
+REDACT       = alex
+TIME_CREATE       = 7/12/1 18:22:39
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  выходить рамка
+EXM     =  Не следует выходить за рамки дозволенного.
+           В выступлении докладчик несколько раз выходил за рамки темы.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           SRC-PNT , A2 , C
+PREP(2) =  за+В
+GF(2)   = 1  мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : Р
+EGF2(2) = 1  к_доп : Р
+ENG     =  step_out_of_line 1
+           lie_outside_the_scope 1
+============
+TITLE        = выходить_замуж
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  выходить замуж
+EXM     =  Она вышла замуж в 16 лет и не стала от этого несчастной
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  AKTIO
+VAL     =  AGENT , A1 , C
+           C-AGENT , A2 , C
+GF1     = 1  < подл : И
+SF1     = 1  ANIM
+GF2     = 1  > к_доп : за+В
+SF2     = 1  ANIM
+ENG     =  marry 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выходить_из_себя
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Если я опоздаю, герцогиня выйдет из себя.
+CONTENT =  выходить себя
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+PREP(2) =  из+Р
+GF1     = 1  подл : И
+SYNR    =  упр ( C1 , C2 )
+ENG     =  lose_one's_balance 1
+           be angry
+           be beside oneself with rage
+           get mad
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выходить_из_строя
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Аппарат выходил из строя каждые полчаса.
+CONTENT =  выходить строй
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+PREP(2) =  из+Р
+GF(2)   = 1  ед
+GF1     = 1  подл : И
+SF1     = 1  DEV
+          2  P-DEV
+SYNR    =  упр ( C1 , C2 )
+ENG     =  break_down 1
+           go wrong
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выходной_день
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  2
+GF      = 1  ИГ
+SF      = 1  TIME
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+ENG     =  holiday 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = выяснять_отношения
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 7/11/1 15:6:50
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  выяснять отношение
+EXM     =  Я хотел выяснить отношения с ним
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           C-AGENT , A2 , C
+GF(2)   = 1  вн, мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : с+Т
+ENG     =  have_it_out 1
+============
+TITLE        = готовый_на_все
+SENSE       = 1
+AUTHOR       = masha
+REDACT       = alex
+TIME_CREATE       = 2/4/7 12:8:0
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  готовый все
+CAT     = 1  LABL.PROPERT
+VAL     =  PROPERT , C , A1
+GF1     = 1  X! : ИГ
+PREP(2) =  на+В
+ENG     =  desperate 1
+============
+TITLE        = давать_взаймы
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 15:12:15
+EXM     =  он дал мне взаймы деньги
+CONTENT =  давать _ взаймы
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  FIN
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+           OBJ , A3 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : Д
+SF2     = 1  THINGN
+GF3     = 1  п_доп : В
+SYNR    =  упр ( C1 , C3 )
+ENG     =  lend 1
+GF(3)   = 1  Н
+TYP     =  БЕЗУСЛ
+============
+TITLE        = давать_слово
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  давать _ слово
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+           CONTEN , A3 , C
+GF(2)   = 1  вн,ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ к_доп : Д
+          2  > к_доп : Д
+SF2     = 1  ANIM
+GF3     = 1  >> что+ГГ
+ENG     =  pass_one's_word 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = дать_по_шее
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  давать _ шея
+EXM     =  дай ему по шее
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+PREP(2) =  по+Д
+GF(2)   = 1  С ед,дт
+GF1     = 1  < подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ к_доп : Д
+          2  << к_доп : Д
+SF2     = 1  ANIM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  strike_on_the_neck 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = действовать_на_нервы
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  действовать _ нервы
+GF      = 1  Г
+PREP(2) =  на+В
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+GF1     = 1  подл : И
+GF2     = 1  ^ к_доп : Д
+          2  > к_доп : Д
+SF2     = 1  ANIM
+ENG     =  get_on_nerves 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = делать_больно
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  делать больно
+ROOT    =  1
+GF      = 1  ГГ
+GF1     = 1  подл : И
+GF2     = 1  к_доп : Д
+ENG     =  hurt 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = делать_возможным
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  делать _ возможный
+EXM     =  Смерть Сталина сделала возможным возвращение тысяч
+           политзаключенных
+           это сделает возможным для заказчиков проводить в режиме он-лайн
+           все операции
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+           CONTEN , A3 , C
+GF(3)   = 1  тв,ед, мр
+GF1     = 1  подл : И
+GF2     = 1  к_доп : для+Р
+GF3     = 1  ^ п_доп : В
+          2  > п_доп : В
+          3  к_доп : инф
+SF3     = 1  SITUAT
+SYNR    =  упр ( C1 , C3 )
+ENG     =  allow 1
+           make_it_possible 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = делать_честь
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  делать _ честь
+GF      = 1  Г
+VAL     =  CONTEN , A1 , C
+           ADR , A2 , C
+GF(3)   = 1  ед,вн
+GF1     = 1  подл : И
+SF1     = 1  SITUAT
+             AKTIO
+GF2     = 1  ^ к_доп : Д
+          2  > к_доп : Д
+SF2     = 1  ANIM
+ENG     =  do_credit 1
+           stand_to_credit 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = день_рождения
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  день _ рождение
+GF      = 1  ИГ
+SF      = 1  TIME
+VAL     =  BELNG , C , A1
+GF1     = 1  >> к_доп : Р
+          2  ^ с_опр : ПРИТ_МЕСТМ
+ENG     =  birthday 1
+EXM     =  праздновать свой день рождения
+TYP     =  БЕЗУСЛ
+============
+TITLE        = держать_курс
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  держать курс
+ROOT    =  1
+GF(2)   = 1  вн,ед
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           IN-DIRECT , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  >> к_доп : на+В
+SF2     = 1  LOK
+ENG     =  head_on 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = держать_себя_в_руках
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  держать себя рука
+ROOT    =  1
+EXM     =  Когда выполняешь ответственное задание, надо держать
+           себя в руках.
+PREP(3) =  в+П
+GF(3)   = 1  мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  control_one's_feelings 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = держать_слово
+SENSE       = 1
+COMM       = 5
+AUTHOR       = graf
+TIME_CREATE       = 327680/22413313/0 6553600:720896:524288
+CONTENT =  держать слово
+ROOT    =  1
+GF(2)   = 1  вн,ед
+GF      = 1  Г
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  keep_faith 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = доводить_до_сведения
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  доводить _ сведение
+EXM     =  Довожу до вашего сведения, что Ходжа Насреддин скрылся
+           в неизвестном направлении.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+           CONTEN , A3 , C
+PREP(3) =  до+Р
+GF(3)   = 1  ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ с_опр : ПРИТ_МЕСТМ
+          2  >> нс_опр : Р
+SF2     = 1  ANIM
+             MEDINF
+GF3     = 1  п_доп : В
+          2  к_доп : что+ГГ
+          3  ПРИД_ПР
+EGF3(3) = 1  п_доп : В
+SYNR    =  упр ( C1 , C3 )
+ENG     =  warn 1
+           urge 1
+           make_known 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = друг_друга
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  2
+CONTENT =  друг друг
+EXM     =  мы посмотрели друг на друга
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  ANIM
+ENG     =  each_other 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = ездить_верхом
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  (ездить | скакать | ехать) верхом
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+           LOK , A3 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : на+П
+             ОБСТ_ГР
+LEX2    = 1  лошадь
+          2  конь
+ENG     =  ride 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = еле_держаться_на_ногах
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  еле держаться ноги
+ROOT    =  2
+PREP(4) =  на+П
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+ENG     =  sink 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = еще_один
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  2
+CONTENT =  еще один
+GF      = 1  с_опр : МЕСТОИМ
+VAL     =  PROPERT , C , A1
+GF1     = 1  > X! : ИГ
+ENG     =  one_more 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = за_счет
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+CONTENT =  счет
+EXM     =  Студенты долго ломали голову над задачей.
+CAT     = 1  OPER
+GF      = 1  С : ПГ
+VAL     =  RESTR , C , A1
+           BELNG , C , A2
+PREP(1) =  за+В
+GF(1)   = 1  С вн,ед
+GF1     = 1  X! : ГГ
+GF2     = 1  ^ с_опр : ПРИТ_МЕСТМ
+          2  > с_опр : ПРИТ_МЕСТМ
+ENG     =  at_expense 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = забегать_вперед
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+EXM     =  Можно было бы сейчас рассказать о ней, но не будем
+           забегать вперед.
+CONTENT =  забегать вперед
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  get_ahead_of_oneself 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = забивать_козла
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+CONTENT =  забивать козел
+EXM     =  Целыми днями он  «забивал козла» с друзьями.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           C-AGENT , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : с+Т
+SF2     = 1  ANIM
+          2  DEV
+SYNR    =  упр ( C1 , C2 )
+ENG     =  play_domino 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = задерживать_взгляд
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  задерживать взгляд
+ROOT    =  1
+GF(2)   = 1  ед,вн
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : на+П
+ENG     =  let_one's_eye_dwell 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = заключать_под_стражу
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  (заключать | брать)_ стража
+ROOT    =  1
+EXM     =  Его заключили под стражу за правонарушение.
+VAL     =  AGENT , A1 , C
+           OBJ , A2 , C
+           TIME , A3 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  > п_доп : В
+          2  ^ п_доп : В
+SF2     = 1  ANIM
+GF3     = 1  > к_доп : на+В
+PREP(2) =  под+В
+GF(3)   = 1  ед
+ENG     =  secure 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = закусывать_удила
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  закусывать удила
+ROOT    =  1
+GF(2)   = 1  вн
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  kick_over_the_traces 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = застигнуть_врасплох
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 9/7/1 0:25:28
+TYP     =  БЕЗУСЛ
+EXM     =  Он застал меня врасплох своим неожиданным приходом .
+CONTENT =  (застигнуть | заставать) _ врасплох
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+           METHOD , A3 , C
+GF1     = 1  подл : И
+GF2     = 1  ^ п_доп : В
+          2  > п_доп : В
+SF2     = 1  ANIM
+GF3     = 1  к_доп : Т
+SYNR    =  упр ( C1 , C3 )
+ENG     =  take_by_surprise 1
+           take unawares
+============
+TITLE        = заткнуть_за_пояс
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  заткнуть _ пояс
+ROOT    =  1
+PREP(3) =  за+В
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+           SPHERE , A3 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  > п_доп : В
+SF2     = 1  ANIM
+GF3     = 1  < упр : в+П
+          2  > упр : в+П
+ENG     =  give_points 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = играть_роль
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+EXM     =  В нынешней схеме власти президент играет роль марионетки.
+CONTENT =  играть _ роль
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+           SPHERE , A3 , C
+GF(3)   = 1  ед,вн
+GF1     = 1  подл : И
+GF2     = 1  к_доп : Р
+GF3     = 1  к_доп : в+П
+SYNR    =  упр ( C1 , C3 )
+ENG     =  play_the_part 1
+           enact 1
+           signify
+TYP     =  БЕЗУСЛ
+============
+TITLE        = идти_в_гору
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+CONTENT =  идти гора
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+PREP(2) =  в+В
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+          2  ORG
+ENG     =  be_on_the_rise 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = идти_на_убыль
+SENSE       = 1
+COMM       = 5
+AUTHOR       = masha
+TIME_CREATE       = 327680/22413313/0 6553600:720896:524288
+ROOT    =  1
+EXM     =  Зима пойдет на убыль.
+CONTENT =  идти убыль
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+PREP(2) =  на+В
+GF1     = 1  подл : И
+SF1     = 1  ABSTR
+          2  SITUAT
+          3  PHENOM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  subside 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = идти_по_стопам
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+CONTENT =  идти _ след
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           AUTHOR , A2 , C
+PREP(3) =  по+Д
+GF(3)   = 1  мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ с_опр : ПРИТ_МЕСТМ
+          2  >> нс_опр : Р
+SF2     = 1  ANIM
+ENG     =  follow_in_footsteps 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = изо_всех_сил
+SENSE       = 1
+AUTHOR       = masha
+REDACT       = alex
+TIME_CREATE       = 8/1/4 13:59:52
+ROOT    =  2
+TYP     =  БЕЗУСЛ
+EXM     =  изо всех сил старался убедить меня в своей правоте
+CONTENT =  весь сила
+CAT     = 1  LABL.PROPERT
+GF      = 1  С : ПГ
+SF      = 1  Magn
+VAL     =  PROPERT , C , A1
+PREP(2) =  из+Р
+GF(3)   = 1  рд,мн
+GF1     = 1  < X! : ГГ
+          2  > X! : ГГ
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+ENG     =  all_out 1
+============
+TITLE        = иметь_в_виду
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+EXM     =  Я не имел в виду вас обидеть
+           Под диктатурой закона правительство имеет в виду...
+CONTENT =  иметь в вид
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  INTEL
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  > п_доп : В
+          2  > п_доп : инф
+          3  > ПРИД_ПР : что+ГГ
+          4  Copul
+GF2(2)  = 1  к_доп : под+Т
+SYNR    =  упр ( C1 , C2 )
+ENG     =  mean 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = иметь_дело
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  иметь дело
+EXM     =  с ним нелегко иметь дело
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(2)   = 1  вн,ед
+GF1     = 1  подл : И
+GF2     = 1  к_доп : с+Т
+SYNR    =  упр ( C1 , C2 )
+ENG     =  deal 1
+           transact
+TYP     =  БЕЗУСЛ
+============
+TITLE        = иметь_место
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+EXM     =  Вчера на Патриарших прудах имело место возмутительное происшествие.
+CONTENT =  иметь место
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           TIME , A2 , C
+           LOK , A3 , C
+GF(2)   = 1  вн,ед
+GF1     = 1  подл : И
+SF1     = 1  SITUAT
+GF2     = 1  ОБСТ_ГР
+SYNR    =  упр ( C1 , C2 )
+ENG     =  take_place 1
+           find_place
+           be_in_progress 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = иметь_связь
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:13
+EXM     =  с ним нелегко иметь дело
+CONTENT =  иметь _ связь
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  TOGETHER
+VAL     =  F-ACT , A1 , C
+           S-ACT , A2 , C
+GF(3)   = 1  вн,ед
+GF1     = 1  подл : И
+GF2     = 1  к_доп : с+Т
+SYNR    =  упр ( C1 , C3 )
+ENG     =  connect 3
+TYP     =  БЕЗУСЛ
+============
+TITLE        = иметь_честь
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  иметь честь
+ROOT    =  1
+GF(2)   = 1  ед,вн
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  > к_доп : инф
+SF2     = 1  AKTIO
+ENG     =  have_the_honour 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = использовать_в_своих_интересах
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+CONTENT =  использовать _ свой интерес
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(4) =  в+П
+GF(4)   = 1  мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  п_доп : В
+SYNR    =  ПРИЛ-СУЩ ( C4 , C3 )
+ENG     =  take_advantage 1
+           turn_to_one's_advantage 1
+           exploit
+           use 1
+SYN     =  пользоваться в своих интересах
+           злоупотреблять
+TYP     =  БЕЗУСЛ
+============
+TITLE        = испускать_дух
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  испускать дух
+ROOT    =  1
+GF(2)   = 1  вн,ед
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  draw_one's_last_breath 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = исчезать_с_лица_земли
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  исчезать лицо земля
+ROOT    =  1
+EXM     =  Все эти империи давно исчезли с лица земли.
+PREP(2) =  с+Р
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+ENG     =  pass_away 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = каким_образом
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  2
+EXM     =  Каким образом эта коробка очутилась здесь?
+CONTENT =  какой образ
+CAT     = 1  RELAT
+SF      = 1  METHOD
+VAL     =  METHOD , A2 , A1
+GF(2)   = 1  ед,тв
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+ENG     =  how 1
+GF1     = 1  < X! : ГГ
+          2  > X! : ГГ
+GF      = 1  С : ИГ
+TYP     =  БЕЗУСЛ
+============
+TITLE        = кто_угодно
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  кто угодно
+ROOT    =  1
+GF      = 1  МЕСТОИМ
+ENG     =  anybody 1
+           anyone
+TYP     =  БЕЗУСЛ
+============
+TITLE        = ломать_голову
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+ROOT    =  1
+EXM     =  Студенты долго ломали голову над задачей.
+CONTENT =  ломать голова
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(2)   = 1  вн,ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : над+Т
+SF2     = 1  MEDINF
+SYNR    =  упр ( C1 , C2 )
+ENG     =  bother_one's_brains 1
+           puzzle 1
+           break_one's_head 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = на_взгляд
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 9/7/1 0:26:41
+TYP     =  БЕЗУСЛ
+EXM     =  на наш взгляд
+CONTENT =  взгляд
+GF      = 1  С : ВВОДН
+VAL     =  SUB , A1 , C
+           MODL , A2 , C
+PREP(1) =  на+В
+GF(1)   = 1  вн, ед
+GF1     = 1  << с_опр : ПРИТ_МЕСТМ
+          2  >> к_доп : Р
+SF1     = 1  ANIM
+GF2     = 1  X! : ГГ
+ENG     =  in_opinion 1
+============
+TITLE        = на_местах
+SENSE       = 1
+AUTHOR       = alex
+TIME_CREATE       = 15/5/1 14:24:13
+EXM     =  в центре и на местах
+CONTENT =  место
+GF      = 1  С : ПГ
+PREP(1) =  на+П
+GF(1)   = 1  С мн, пр
+ENG     =  provinces
+SYN     =  периферия
+           периферийные организации
+TYP     =  БЕЗУСЛ
+============
+TITLE        = набираться_храбрости
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  набираться храбрость
+ROOT    =  1
+GF(2)   = 1  ед,рд
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+ENG     =  muster_up_one's_courage 1
+           take_one's_courage_in_both_hands
+TYP     =  БЕЗУСЛ
+============
+TITLE        = наилучшим_образом
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:13
+CONTENT =  наилучший образ
+ROOT    =  2
+GF(2)   = 1  ед,тв
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+GF      = 1  С : ОБСТ_ГР
+SF      = 1  METHOD
+VAL     =  METHOD , A1 , C
+GF1     = 1  ГГ
+ENG     =  to_best_advantage
+SYN     =  самым выгодным образом
+           в самом выгодном свете
+TYP     =  БЕЗУСЛ
+============
+TITLE        = не_говоря_о
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 5/11/7 7:50:51
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  говорить[НЕ] уже
+EXM     =  не говоря уже о нас
+GF      = 1  ДЕЕПРИЧАСТИЕ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(1)   = 1  ДЕЕПРИЧАСТИЕ
+GF2     = 1  к_доп : о+П
+ENG     =  not_to_speak_of 1
+============
+TITLE        = не_хватать_духу
+SENSE       = 1
+COMM       = 5
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 20/4/4 11:34:15
+TYP     =  БЕЗУСЛ
+CONTENT =  хватать[НЕ] дух
+EXM     =  ему не хватило духу   сказать правду
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  MODL
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+GF(1)   = 1  Г безл
+GF(2)   = 1  дт,ед
+          2  рд,ед
+GF1     = 1  к_доп : у+Р
+          2  к_доп : Д
+GF2     = 1  к_доп : инф
+          2  к_доп : чтобы+инф
+          3  к_доп : на+В
+SYNR    =  упр ( C1 , C2 )
+ENG     =  have_the_heart 1
+============
+TITLE        = несчастный_случай
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:23
+ROOT    =  2
+CONTENT =  несчастный случай
+EXM     =  С ним произошел несчастный случай на охоте
+           Они потерпели несчастный случай
+CAT     = 1  LABL
+GF      = 1  ИГ
+SF      = 1  SITUAT
+             AntiBon
+VAL     =  OBJ , A1 , C
+           LOK , A2 , C
+GF1     = 1  к_доп : с+Т
+GF2     = 1  ОБСТ_ГР
+LF      =  Func0 : происходить
+           Oper1 : потерпеть
+ENG     =  accident 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = нет_места
+SENSE       = 1
+AUTHOR       = _leva
+REDACT       = alex
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  нет место
+EXM     =  вам нет места в нашем обществе
+GF      = 1  ОБСТ_ГР
+SF      = 1  NEG
+             LOK
+VAL     =  OBJ , A1 , C
+           RESTR , A2 , C
+GF(1)   = 1  ПРЕДК
+GF(2)   = 1  рд,ед
+GF1     = 1  к_доп : Д
+GF2     = 1  к_доп : в+П
+SYNR    =  упр ( C1 , C2 )
+ENG     =  no_place 2
+TYP     =  БЕЗУСЛ
+============
+TITLE        = нет_ничего_удивительного
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  нет ничего удивительного в том, что он не пришел
+CONTENT =  нет ничто удивительный
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  ESTIM
+VAL     =  CONTEN , A1 , C
+GF(3)   = 1  рд, ед, мр
+GF1     = 1  к_доп : что+ГГ
+          2  к_доп : в+П
+SYNR    =  упр ( C1 , C2 )
+           упр ( C1 , C3 )
+ENG     =  no_wonder
+TYP     =  БЕЗУСЛ
+============
+TITLE        = ни_во_что_не_ставить
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  ни что ставить[НЕ]
+ROOT    =  3
+GF      = 1  Г
+PREP(2) =  в+В
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  < п_доп : В
+          2  > п_доп : В
+ENG     =  despise 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = ни_на_йоту
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:15
+EXM     =  ни на йоту не отступить от поставленных нам условий
+CONTENT =  ни йота
+GF      = 1  С : ОБСТ_ГР
+SF      = 1  NEG
+VAL     =  RESTR , C , A1
+GF1     = 1  X! : ГГ
+SYNR    =  упр ( C1 , C2 )
+ENG     =  not_a_jot 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = обнажать_голову
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  обнажать голова
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF(2)   = 1  ед,вн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  bare_one's_head 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = обращать_на_пользу
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  обращать _ (|себя) польза
+GF(3)   = 1  дт
+PREP(4) =  на+В
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  п_доп : В
+ENG     =  turn_to_one's_advantage 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = один_и_тот_же
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 27/6/1 13:25:16
+CONTENT =  один и тот[ЖЕ]
+EXM     =  thinkers of the same breed
+           мыслители одного и того же направления
+TYP     =  БЕЗУСЛ
+ROOT    =  1
+VAL     =  PROPERT , C , A1
+GF1     = 1  X! : ИГ
+ENG     =  same 1
+============
+TITLE        = освобождать_под_залог
+SENSE       = 1
+AUTHOR       = alex
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  (освобождать|выпускать) залог
+EXM     =  освободить кого-то под залог
+CAT     = 1  LABL.SIT
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+           RESTR , A3 , C
+PREP(2) =  под+В
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+LEX1    = 1  суд
+          2  власть
+SF2     = 1  ANIM
+GF2     = 1  п_доп : В
+GF3     = 1  к_доп : в+В
+ENG     =  bail 2
+TYP     =  БЕЗУСЛ
+============
+TITLE        = оставаться_в_силе
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  оставаться сила
+EXM     =  Все предыдущие договоренности остаются в силе до конца текущего года.
+ROOT    =  1
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           TIME , A2 , C
+GF1     = 1  подл : И
+GF2     = 1  к_доп : до+Р
+SF2     = 1  TRG-PNT
+SYNR    =  упр ( C1 , C2 )
+ENG     =  stand_in_force
+           hold_true
+PREP(2) =  в+П
+GF(2)   = 1  ед
+TYP     =  БЕЗУСЛ
+============
+TITLE        = оставлять_желать_лучшего
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  оставлять желать лучший
+EXM     =  Состояние подсобных помещений оставляет желать лучшего.
+ROOT    =  1
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SYNR    =  упр ( C1 , C2 )
+ENG     =  leave_much_to_be_desired 1
+GF(2)   = 1  инф
+GF(3)   = 1  ср,ед,рд
+TYP     =  БЕЗУСЛ
+============
+TITLE        = оставлять_при_себе
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Комментарии можете оставить при себе.
+CONTENT =  оставлять себя
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(2) =  при+П
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  п_доп : В
+SF2     = 1  MEDINF
+SYNR    =  упр ( C1 , C2 )
+ENG     =  keep_to_oneself 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = остановиться_в_развитии
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CAT     = 1  LABL.SIT
+CONTENT =  остановиться развитие
+EXM     =  эта организация давно остановилась в развитии
+GF      = 1  ГГ
+SF      = 1  NEG
+             CHG
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  make_no_progress
+PREP(2) =  в+П
+TYP     =  БЕЗУСЛ
+============
+TITLE        = отдать_богу_душу
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  отдать бог душа
+ROOT    =  1
+GF(2)   = 1  ед,вн
+GF(3)   = 1  ед,дт
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  give_up_the_spirit 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = пить_горькую
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  пить горький
+ROOT    =  1
+GF(2)   = 1  жр,ед,вн
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  be_on_the_drink 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = по_данным
+SENSE       = 1
+AUTHOR       = boris
+REDACT       = alex
+TIME_CREATE       = 9/7/1 0:36:42
+TYP     =  БЕЗУСЛ
+CONTENT =  данные
+EXM     =  по некоторым данным, они не придут
+GF      = 1  С : ВВОДН
+VAL     =  SUB , A1 , C
+           MODL , A2 , C
+PREP(1) =  по+Д
+GF(1)   = 1  дт, мн
+GF1     = 1  << с_опр : ПРИТ_МЕСТМ
+          2  >> к_доп : Р
+SF1     = 1  ANIM
+GF2     = 1  X! : ГГ
+ENG     =  according_to_information 1
+============
+TITLE        = по_мнению
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  мнение
+EXM     =  по нашему мнению
+GF      = 1  С : ВВОДН
+VAL     =  MODL , A1 , C
+           SUB , A2 , C
+PREP(1) =  по+Д
+GF(1)   = 1  дт, ед
+GF1     = 1  X! : ГГ
+GF2     = 1  << с_опр : ПРИТ_МЕСТМ
+          2  >> к_доп : Р
+SF2     = 1  ANIM
+ENG     =  in_opinion 1
+           in the opinion
+TYP     =  БЕЗУСЛ
+============
+TITLE        = по_причинам
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 1/12/1 14:34:7
+TYP     =  БЕЗУСЛ
+EXM     =  по этим причинам
+           по причинам отъезда
+CONTENT =  причина
+GF      = 1  С
+PREP(1) =  по+Д
+VAL     =  CONTEN , A1 , C
+GF1     = 1  к_доп : Р
+ENG     =  by_reason 1
+============
+TITLE        = повлечь_за_собой
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Увольнение главного редактора повлекло за собой уход всех
+           сотрудников.
+CONTENT =  повлечь себя
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           RESLT , A2 , C
+PREP(2) =  за+Т
+GF1     = 1  подл : И
+SF1     = 1  AKTIO
+GF2     = 1  п_доп : В
+SF2     = 1  AKTIO
+SYNR    =  упр ( C1 , C2 )
+ENG     =  entail 1
+           imply 1
+           mean 2
+TYP     =  БЕЗУСЛ
+============
+TITLE        = повышать_голос
+SENSE       = 1
+COMM       = 5
+AUTHOR       = graf
+REDACT       = alex
+TIME_CREATE       = 9/7/1 0:1:2
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  повышать голос
+EXM     =  С чего он взял, что на меня можно повышать голос?
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(2)   = 1  ед,вн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : на+В
+SF2     = 1  ANIM
+ENG     =  raise_one's_voice 1
+============
+TITLE        = поддерживать_контакт
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:37
+EXM     =  Учителю очень важно в течение всего урока
+           поддерживать контакт с целым классом
+CONTENT =  поддерживать контакт
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           C-AGENT , A2 , C
+GF1     = 1  < подл : И
+GF2     = 1  > к_доп : с+Т
+SF2     = 1  ANIM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  keep_in_touch
+TYP     =  БЕЗУСЛ
+============
+TITLE        = пожимать_плечами
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  пожимать плечи
+ROOT    =  1
+EXM     =  Когда я спрашивал соседей, они лишь пожимали плечами
+           в ответ.
+GF(2)   = 1  мн,тв
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  shrug_one's_shoulders 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = пожинать_лавры
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  пожинать лавр
+ROOT    =  1
+GF(2)   = 1  мн,вн
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  reap_one's_laurels 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = позволять_себе
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  позволять себя
+EXM     =  Я позволю себе еще ненадолго задержать ваше внимание.
+           Что вы себе позволяете?
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(2)   = 1  дт
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  инф
+          2  п_доп : В
+SF2     = 1  AKTIO
+SYNR    =  упр ( C1 , C2 )
+ESF2(2) = 1  FIN
+ENG     =  take_the_liberty 1
+           afford 1
+           venture
+           make_bold
+TYP     =  БЕЗУСЛ
+============
+TITLE        = поливать_грязью
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  поливать _ грязь
+EXM     =  Я не позволю вам поливать грязью этого достойнейшего
+           человека!
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(3)   = 1  тв,ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  > п_доп : В
+SF2     = 1  ANIM
+          2  ABSTR
+SYNR    =  упр ( C1 , C2 )
+ENG     =  throw_mud 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = полным_ходом
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:37
+EXM     =  Процесс внедрения полностью контролируемой государством
+           "свободы" СМИ идет полным ходом
+CONTENT =  полный ход
+CAT     = 1  LABL.PROPERT
+GF      = 1  ОБСТ_ГР
+SF      = 1  Magn
+             ESTIM
+VAL     =  PROPERT , C , A1
+GF1     = 1  X! : ГГ
+SF1     = 1  MOV
+LEX1    = 1  идти
+          2  ехать
+ENG     =  at_full_drive
+TYP     =  БЕЗУСЛ
+============
+TITLE        = получать_огласку
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  получать огласка
+EXM     =  Если этот документ получит огласку, все наше
+           предприятие пойдет прахом.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF1     = 1  < подл : И
+SF1     = 1  MEDINF
+          2  SITUAT
+SYNR    =  упр ( C1 , C2 )
+ENG     =  take_air 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = попадать_в_сети
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  попадать _ сеть
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           BELNG , A2 , C
+PREP(3) =  в+В
+GF(3)   = 1  мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ с_опр : ПРИТ_МЕСТМ
+          2  > к_доп : Д
+          3  > к_доп : Р
+SF2     = 1  ANIM
+ENG     =  get_caught_in_the_toils 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = попытать_счастья
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  попытать счастье
+EXM     =  он отправляется попытать счастья в Лондоне
+GF      = 1  ГГ
+CAT     = 1  LABL.SIT
+VAL     =  SUB , A1 , C
+           SPHERE , A2 , C
+           LOK , A3 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : в+П
+SF2     = 1  SITUAT
+          2  EMPL
+GF3     = 1  ОБСТ_ГР
+SF3     = 1  GEOGR
+SYNR    =  упр ( C1 , C2 )
+ENG     =  try_luck
+SYN     =  искать счастья
+GF(2)   = 1  рд,ед
+TYP     =  БЕЗУСЛ
+============
+TITLE        = появляться_на_сцене
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  появляться _ сцена
+EXM     =  Когда на политической сцене появилась эта партия,
+           расклад сил сразу стал другим.
+           И тут на сцене появился представитель органов.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  Incep
+             EXISTE
+VAL     =  SUB , A1 , C
+PREP(3) =  на+П
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+          2  PHENOM
+ENG     =  come_on_the_scene 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = превосходить_вдвое
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  превосходить вдвое
+EXM     =  our force doubles that of the enemy —
+           наши силы вдвое превосходят силы противника
+ROOT    =  1
+GF      = 1  Г
+SF      = 1  QUANTIT
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+GF2     = 1  п_доп : В
+ENG     =  double 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = предавать_огласке
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  предавать _ огласка
+ROOT    =  1
+GF      = 1  Г
+GF(2)   = 1  дт,ед
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+SF2     = 1  SITUAT
+ENG     =  plant 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = представлять_себе
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+EXM     =  Представьте себе обыкновенного человека.
+CONTENT =  (представлять | воображать) себя
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(2)   = 1  дт
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  > п_доп : В
+ENG     =  imagine 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = представлять_собой
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  представлять себя
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(2)   = 1  тв
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  > п_доп : В
+ENG     =  represent 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = приводить_в_порядок
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  приводить _ порядок
+EXM     =  приводить в порядок волосы
+           Приведи себя в порядок и выйди к гостям!
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  Bon
+             CHG
+VAL     =  AGENT , A1 , C
+           CONTEN , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+ENG     =  arrange 1
+PREP(2) =  в+В
+TYP     =  БЕЗУСЛ
+============
+TITLE        = принимать_в_расчет
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+EXM     =  Мы принимаем в расчет ваши требования.
+CONTENT =  принимать _ расчет
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+PREP(2) =  в+В
+GF(3)   = 1  ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+          3  что+ГГ
+          4  ПРИД_ПР
+SF2     = 1  MEDINF
+SYNR    =  упр ( C1 , C3 )
+ENG     =  reckon
+           count
+SYN     =  брать_в_расчет
+TYP     =  БЕЗУСЛ
+============
+TITLE        = принимать_меры
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+EXM     =  Власть принимает меры против "зарвавшихся журналистов".
+           Следует немедленно принять все необходимые меры по
+           предотвращению аварии.
+CONTENT =  принимать _ мера
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           AIM , A2 , C
+           RESTR , A3 , C
+GF(3)   = 1  мн,вн
+GF1     = 1  подл : И
+GF2     = 1  к_доп : по+Д
+GF3     = 1  к_доп : против+Р
+INCONS  =  A2 , A3
+ENG     =  take_measures 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = приходить_в_голову
+SENSE       = 1
+AUTHOR       = _leva
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  (приходить| прийти) голова
+EXM     =  та же мысль пришла в голову Элизабет
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  INTEL
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+GF1     = 1  подл : И
+          2  к_доп : что+ГГ
+SF1     = 1  INF
+          2  SITUAT
+GF2     = 1  к_доп : Д
+SF2     = 1  ANIM
+          2  NAME
+SYNR    =  упр ( C1 , C2 )
+ENG     =  occur 2
+TYP     =  БЕЗУСЛ
+============
+TITLE        = приходить_в_гости
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  (приходить | прийти) _ гость
+EXM     =  Мы пришли в гости к Элизабет
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  AKTIO
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+PREP(2) =  в+В
+GF1     = 1  < подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ к_доп : к+Д
+          2  > к_доп : к+Д
+SF2     = 1  ANIM
+          2  NAME
+LF      =  S1 : гость
+ENG     =  visit 1
+           come_and_see
+TYP     =  БЕЗУСЛ
+============
+TITLE        = пробегать_глазами
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  пробегать глаза
+EXM     =  Он еще раз пробежал глазами письмо.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(2)   = 1  тв,мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  п_доп : В
+SF2     = 1  MEDINF
+SYNR    =  упр ( C1 , C2 )
+ENG     =  run_one's_eye 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = производить_на_свет
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  производить свет
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(2) =  на+В
+GF(2)   = 1  вн,ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  п_доп : В
+SF2     = 1  ANIM
+          2  ABSTR
+          3  PHENOM
+ENG     =  bring_into_life 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = пускать_в_ход
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+EXM     =  Ему придется пустить в ход всю свою изобретательность.
+CONTENT =  пускать _ ход
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(3) =  в+В
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  >> п_доп : В
+          2  п_доп : В
+ENG     =  bring_into_play 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = рабочее_место
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:37
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+ROOT    =  2
+CONTENT =  рабочий место
+SF      = 1  LOK
+VAL     =  BELNG , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТМ
+SF1     = 1  ANIM
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+ENG     =  workplace 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = расправлять_плечи
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+CONTENT =  расправлять плечи
+ROOT    =  1
+GF(2)   = 1  мн,вн
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  straighten_one's_shoulders 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = ровным_счетом_ничего
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 9/7/1 0:1:52
+ROOT    =  3
+TYP     =  БЕЗУСЛ
+CONTENT =  ровный счет ничто
+GF      = 1  МЕСТОИМ
+GF(2)   = 1  тв,ед
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+           упр ( C3 , C2 )
+ENG     =  absolutely_nothing
+============
+TITLE        = сам_себя
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  2
+CONTENT =  сам себя
+EXM     =  он сам себя вылечил
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  ANIM
+ENG     =  #oneself 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = самое_большее
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:37
+TYP     =  БЕЗУСЛ
+============
+TITLE        = сбивать_с_толку
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+CONTENT =  сбивать _ толк
+EXM     =  Он сбил меня с толку своим неожиданным вопросом
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+           METHOD , A3 , C
+PREP(2) =  с+Р
+GF(2)   = 1  вн,ед
+GF1     = 1  подл : И
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+GF3     = 1  к_доп : Т
+          2  подл : И
+SYNR    =  упр ( C1 , C2 )
+ENG     =  bewilder 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = сводить_на_нет
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 18/10/4 14:35:26
+TYP     =  БЕЗУСЛ
+CONTENT =  сводить  на нет
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+SF      = 1  Liqu
+VAL     =  SUB , A1 , C
+           CONTEN , A2 , C
+GF1     = 1  подл : И
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+ENG     =  micrify 1
+           neutralize 1
+           nullify 1
+============
+TITLE        = сводить_счеты
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 14:24:37
+ROOT    =  1
+EXM     =  Я еще сведу счеты с этим негодяем.
+CONTENT =  сводить счеты
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+GF(2)   = 1  вн,мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : с+Т
+SF2     = 1  ANIM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  settle_a_score 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = сдвигаться_с_места
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Работа сдвинулась с места.
+CONTENT =  сдвигаться место
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+PREP(2) =  с+Р
+GF1     = 1  подл : И
+SF1     = 1  PROC
+SYNR    =  упр ( C1 , C2 )
+ENG     =  be_getting_somewhere 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = сделать_свое_дело
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  сделать свой	дело
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF(3)   = 1  ед,вн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+SYNR    =  ПРИЛ-СУЩ ( C3 , C2 )
+ENG     =  do_one's_work 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = сесть_за_стол
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 12/7/1 11:37:11
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  (сесть|усесться) (стол|столик)
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+PREP(2) =  за+В
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  sit_down_the_table 1
+============
+TITLE        = сломя_голову
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  сломя голова
+CAT     = 1  LABL.PROPERT
+GF      = 1  ОБСТ_ГР
+SF      = 1  Magn
+             ESTIM
+VAL     =  ESTIM , C , A1
+GF1     = 1  X! : ГГ
+SF1     = 1  MOV
+ENG     =  hell-for-leather 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = сменить_гнев_на_милость
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Отец долго кричал и ругался, но потом все-таки сменил
+           гнев на милость.
+CONTENT =  сменить гнев милость
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+GF(2)   = 1  ед,вн
+PREP(3) =  на+В
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+ENG     =  have_a_change_of_heart 1
+           be_appeased
+TYP     =  БЕЗУСЛ
+============
+TITLE        = смещать_с_должности
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 15:12:15
+EXM     =  его сместили с поста за пять лет до пенсии
+CONTENT =  смещать _ должность
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(3)   = 1  вн,ед
+GF1     = 1  подл : И
+GF2     = 1  ^ п_доп : В
+          2  >> п_доп : В
+SYNR    =  упр ( C1 , C2 )
+ENG     =  demote 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = собираться_с_мыслями
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  Соберись с мыслями и придумай что-нибудь.
+CONTENT =  собираться мысль
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+PREP(2) =  с+Т
+GF(2)   = 1  мн
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  collect_one's_thoughts 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = спускать_с_лестницы
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  спускать _ лестница
+EXM     =  Если ты еще раз появишься здесь, я тебя с лестницы спущу.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(2) =  с+Р
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  < п_доп : В
+          3  > п_доп : В
+SF2     = 1  ANIM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  heave_down_the_stairs 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = ставить_на_место
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  ставить _ место
+ROOT    =  1
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(2) =  на+В
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  > п_доп : В
+SF2     = 1  ANIM
+ENG     =  let_down 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = строить_из_себя
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  строить себя
+EXM     =  Что ты вечно строишь из себя?!
+           В таких случаях он начинает строить из себя мудреца.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+PREP(2) =  из+Р
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  п_доп : В
+SF2     = 1  ANIM
+             ESTIM
+SYNR    =  упр ( C1 , C2 )
+ENG     =  make_of_oneself 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = сходить_с_ума
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  сходить ум
+EXM     =  Я буду тебя преследовать, пока ты не сойдешь с ума.
+           Весь мир сошел с ума от беспрестанных войн.
+CAT     = 1  LABL.SIT
+GF      = 1  ГГ
+VAL     =  SUB , A1 , C
+           CAUSE , A2 , C
+PREP(2) =  с+Р
+GF(2)   = 1  ед
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : от+Р
+SYNR    =  упр ( C1 , C2 )
+ENG     =  go_mad 1
+           go_crazy
+TYP     =  БЕЗУСЛ
+============
+TITLE        = съестные_припасы
+SENSE       = 1
+AUTHOR       = _leva
+REDACT       = alex
+TIME_CREATE       = 2/7/4 12:19:57
+ROOT    =  2
+TYP     =  БЕЗУСЛ
+CONTENT =  съестной припас
+EXM     =  они перенесли наверх мешок со съестными припасами
+GF      = 1  ИГ
+SF      = 1  SUBST
+GF(2)   = 1  мн
+SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
+ENG     =  provision 2
+============
+TITLE        = такой_же
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+EXM     =  такой же человек
+CONTENT =  такой[ЖЕ]
+GF      = 1  МЕСТОИМ : с_опр
+SF      = 1  EQL
+VAL     =  PROPERT , C , A1
+GF1     = 1  > X! : ИГ
+ENG     =  same 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = там_и_сям
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:15
+ROOT    =  1
+CONTENT =  там и сям
+GF      = 1  ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+SF1     = 1  MOV
+          2  AKTIO
+          3  THINGN
+          4  ANIM
+ENG     =  here_and_there
+TYP     =  БЕЗУСЛ
+============
+TITLE        = тот_же_самый
+SENSE       = 1
+AUTHOR       = kcc
+REDACT       = alex
+TIME_CREATE       = 9/7/1 0:1:12
+TYP     =  БЕЗУСЛ
+EXM     =  тот же самый человек
+CONTENT =  тот[ЖЕ] самый
+GF      = 1  МЕСТОИМ : с_опр
+SF      = 1  EQL
+VAL     =  PROPERT , C , A1
+GF1     = 1  > X! : ИГ
+ENG     =  same 1
+============
+TITLE        = увеличивать_вдвое
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:15
+CONTENT =  увеличивать вдвое
+ROOT    =  1
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+GF2     = 1  п_доп : В
+ENG     =  double 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = упускать_из_виду
+SENSE       = 1
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:16
+CONTENT =  упускать _ вид
+ROOT    =  1
+GF      = 1  Г
+PREP(2) =  из+Р
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  ^ п_доп : В
+          2  > п_доп : В
+ENG     =  lose_sight 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = целую_
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 2/4/4 14:33:5
+ROOT    =  1
+EXM     =  это условное словосочетание, контрпример: Я ее целую , и она уходит.
+TYP     =  УСЛ
+CONTENT =  целовать ,
+GF      = 1  Г
+VAL     =  SUB , A1 , C
+GF(1)   = 1  Г 1л,нст
+GF1     = 1  > подл : И
+ENG     =  with_love 1
+============
+TITLE        = чинить_препятствия
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 15/5/1 15:12:16
+ROOT    =  1
+EXM     =  Он постоянно чинит мне препятствия в моей работе.
+CONTENT =  чинить _ препятствия
+GF      = 1  ГГ
+SF      = 1  AntiBon
+VAL     =  AGENT , A1 , C
+           OBJ , A2 , C
+           RESTR , A3 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+GF2     = 1  к_доп : Д
+SF2     = 1  ANIM
+             SITUAT
+GF3     = 1  к_доп : в+П
+SF3     = 1  EMPL
+          2  SITUAT
+LEX3    = 1  на пути
+SYNR    =  упр ( C1 , C2 )
+           упр ( C1 , C3 )
+ENG     =  breed_impediments 1
+TYP     =  БЕЗУСЛ
+============
+TITLE        = что-нибудь_такое
+SENSE       = 1
+AUTHOR       = _leva
+REDACT       = alex
+TIME_CREATE       = 9/7/1 0:36:27
+TYP     =  БЕЗУСЛ
+CONTENT =  что-нибудь такой
+EXM     =  у каждого есть что-нибудь такое, что стоит скрывать
+GF      = 1  ИГ
+VAL     =  CONTEN , A1 , C
+GF1     = 1  > к_доп : что+ГГ
+ENG     =  something 1
+============
+TITLE        = что_угодно
+SENSE       = 1
+COMM       = test
+AUTHOR       = graf
+TIME_CREATE       = 15/5/1 15:12:16
+ROOT    =  1
+CONTENT =  что угодно
+GF      = 1  МЕСТОИМ
+ENG     =  anything 1
+TYP     =  БЕЗУСЛ

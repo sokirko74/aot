@@ -1,0 +1,10 @@
+
+
+ 
+
+3.10 Managing file links
+
+           Links allow you to give a single file multiple names. Files are actually identified to the system by their inode number, which is just the unique filesystem identifier for the file. A directory is actually a listing of inode numbers with their corresponding filenames. Each filename in a directory is a link to a particular inode. 
+
+
+ 

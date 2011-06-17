@@ -1,0 +1,28 @@
+ 
+
+4.7.2 Upgrading the libraries
+
+     As mentioned before, most of the software on the system is compiled to use shared libraries, which contain common subroutines shared among different programs. 
+
+If you see the message 
+
+Incompatible library version 
+
+when attempting to run a program, then you need to upgrade to the version of the libraries which the program requires. Libraries are back-compatible; that is, a program compiled to use an older version of the libraries should work with the new version of the libraries installed. However, the reverse is not true. 
+
+The newest version of the libraries can be found on the Linux FTP sites. On sunsite.unc.edu, they are located in /pub/Linux/GCC. The ``release'' files there should explain what files you need to download and how to install them. Briefly, you should get the files image-version.tar.gz and inc-version.tar.gz where version is the version of the libraries to install, such as 4.4.1. These are gzipped tar files; the image file contains the library images to install in /lib and /usr/lib. The inc file contains include files to install in /usr/include 
+
+The release-version.tar.gz should explain the installation procedure in detail (the exact instructions vary for each release). In general you need to install the library .a and .sa files in /usr/lib. These are the libraries used at compilation time. 
+
+In addition, the shared library image files, libc.so.version are installed in /lib. These are the shared library images loaded at runtime by programs using the libraries. Each library has a symbolic link using the major version number of the library in /lib. 
+
+For example, the libc library version 4.4.1 has a major version number of 4. The file containing the library is libc.so.4.4.1. A symbolic link of the name libc.so.4 is also in /lib pointing to this file. You need to change this symbolic link when upgrading the libraries. For example, when upgrading from libc.so.4.4 to libc.so.4.4.1, you need to change the symbolic link to point to the new version. 
+
+It is very important that you change the symbolic link in one step, as given below. If you somehow delete the symbolic link libc.so.4, then programs which depend on the link (including basic utilities like ls and cat) will stop working. Use the following command to update the symbolic link libc.so.4 to point to the file libc.so.4.4.1: 
+
+# ln -sf /lib/libc.so.4.4.1 /lib/libc.so.4 
+
+You also need to change the symbolic link libm.so.version in the same manner. If you are upgrading to a different version of the libraries substitute to appropriate filenames above. The library release notice should explain the details. (See Section 3.10 for more information about symbolic links.) 
+
+
+ 

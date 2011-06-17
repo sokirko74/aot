@@ -1,0 +1,11 @@
+ 
+
+4.6 Using Floppies and Making Backups
+
+ 
+    Floppies are usually used as backup media. If you don't have a tape drive connected to your system, floppy disks can be used (although they are slower and somewhat less reliable). 
+
+You may also use floppies to hold individual filesystems---in this way, you can mount the floppy to access the data on it. 
+
+
+ 

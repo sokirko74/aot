@@ -1,0 +1,16 @@
+
+ 
+
+1.8.4 Hard drive space requirements
+
+ 
+  Of course, to install Linux, you'll need to have some amount of free space on your hard drive. Linux will support multiple hard drives in the same machine; you can allocate space for Linux across multiple drives if necessary. 
+
+The amount of hard drive space that you will require depends greatly on your needs and the amount of software that you're installing. Linux is relatively small as UNIX implementations go; you could run a complete system in 10 to 20 megabytes of space on your drive. However, if you want to have room for expansion, and for larger packages such as X Windows, you will need more space. If you plan to allow multiple users to use the machine, you will need to allocate storage for their files. 
+
+Also, unless you have a large amount of physical RAM (16 megabytes or more), you will more than likely want to allocate swap space, to be used as virtual RAM. We will discuss all of the details of installing and using swap space in Section 2.2.3. 
+
+Each distribution of Linux usually comes with some literature that should help you to gauge the precise amount of required storage depending on the amount of software you plan to install. You can run a minimal system with less than 20 megabytes; a complete system with all of the bells and whistles in 80 megabytes or less; and a very large system with room for many users and space for future expansion in the range of 100-150 megabytes. Again, these figures are meant only as a ballpark approximation; you will have to look at your own needs and goals in order to determine your specific storage requirements. 
+
+
+ 

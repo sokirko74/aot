@@ -1,0 +1,33 @@
+10.3  SENDING FILES TO NON-INTERNET SITES
+                                  
+
+What if your friend only connects with a non-Unix system, such as 
+CompuServe or MCIMail?  There are programs available for MS-DOS, Apple 
+and Amiga computers that will encode and decode files.  Of course, since 
+you can't send one of these programs to your friend via e-mail (how would 
+she un-encode it?), you'll have to mail (the old-fashioned way) or give 
+her a diskette with the program on it first.   Then, she can get the file 
+by e-mail and go through the above process (only on her own computer) to 
+get a usable file.  Remember to give her an encoder program as well, if 
+she wants to send you files in return. 
+
+For MS-DOS machines, you'll want to get uunecode.com and uudecode.com.  
+Both can be found through anonymous ftp at wuarchive.wustl.edu in the 
+/mirrors/msdos/starter directory. The MS-DOS version is as easy to use as 
+the Unix one: Just type 
+ 
+     uudecode filename.ext
+ 
+and hit enter.
+     
+Mac users should get a program called uutool, which can be found in the 
+info-mac/util directory on sumex-aim.stanford.edu. 
+
+Think twice before sending somebody a giant file. Although large sites 
+connected directly to the Internet can probably handle mega-files, many 
+smaller systems cannot. Some commercial systems, such as CompuServe and 
+MCIMail, limit the size of mail messages their users can receive.  
+Fidonet doesn't even allow encoded messages.  In general, a file size of 
+30,000 or so bytes is a safe upper limit for non-Internet systems. 
+
+

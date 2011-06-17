@@ -1,0 +1,26 @@
+HKCR
+{
+	StructDict.Field.1 = s 'Field Class'
+	{
+		CLSID = s '{FD4C1F36-2608-11D3-A78E-9089CA000000}'
+	}
+	StructDict.Field = s 'Field Class'
+	{
+		CLSID = s '{FD4C1F36-2608-11D3-A78E-9089CA000000}'
+		CurVer = s 'StructDict.Field.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {FD4C1F36-2608-11D3-A78E-9089CA000000} = s 'Field Class'
+		{
+			ProgID = s 'StructDict.Field.1'
+			VersionIndependentProgID = s 'StructDict.Field'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{FCD15161-23C4-11D3-A78B-0EEA0E000000}'
+		}
+	}
+}

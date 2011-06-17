@@ -1,0 +1,152 @@
+// graphan.idl : IDL source for graphan.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (graphan.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+   
+/** \example ../TestCOMGraphan/TestCOMGraphan.cpp */
+/** \example ../TestCOMGraphan/Test2.cpp */
+
+/** \mainpage		
+ This is a documentation for COM-Interface of Graphan Module, which was developed by Alexey Sokirko
+ in Dialing Project. The main purpose of the module is to divide the input text 
+ into  words, sentences and paragraphs.  The module also finds some types of 
+ person entities , file names etc. 
+ Unix users are encouraged to read this documentation because COM-functionality 
+ is just a small subset of the C++ interface.
+*/
+	
+	
+	[
+		object,
+		uuid(ECDEABD9-0855-11D3-A75D-AA5D93000000),
+		dual,
+		helpstring("IGraphmatFile Interface"),
+		pointer_default(unique)
+	]
+
+
+	/*! 
+		The main interface of Module Graphematics.
+	*/
+	interface IGraphmatFile : IDispatch
+	{
+		/*! true, if the module builds macro-syntax hierarchy*/
+		[propget, id(1), helpstring("property bMacSynHierarchy")] HRESULT bMacSynHierarchy([out, retval] BOOL *pVal);
+		[propput, id(1), helpstring("property bMacSynHierarchy")] HRESULT bMacSynHierarchy([in] BOOL newVal);
+
+		/*! an .xml file to write macro syntax hierarchy of the input text */
+		[propget, id(2), helpstring("property XmlMacSynOutputFile")] HRESULT XmlMacSynOutputFile([out, retval] BSTR *pVal);
+		[propput, id(2), helpstring("property XmlMacSynOutputFile")] HRESULT XmlMacSynOutputFile([in] BSTR newVal);
+
+		/*! the language of the input text: Russian = 1, English = 2, German = 3 */
+		[propget, id(3), helpstring("property Language")] HRESULT Language([out, retval] int *pVal);
+		[propput, id(3), helpstring("property Language")] HRESULT Language([in] int newVal);
+
+		/*! true, if empty lines are sentence delimiters*/
+		[propget, id(5), helpstring("property bEmptyLineIsSentenceDelim")] HRESULT bEmptyLineIsSentenceDelim([out, retval] BOOL *pVal);
+		[propput, id(5), helpstring("property bEmptyLineIsSentenceDelim")] HRESULT bEmptyLineIsSentenceDelim([in] BOOL newVal);
+
+		/*! true, if the module  considers "\</p\>" as a paragraph*/
+		[propget, id(6), helpstring("property bUseParagraphTagToDivide")] HRESULT bUseParagraphTagToDivide([out, retval] BOOL *pVal);
+		[propput, id(6), helpstring("property bUseParagraphTagToDivide")] HRESULT bUseParagraphTagToDivide([in] BOOL newVal);
+
+		/*! true, if the module uses indention to find paragraphs*/
+		[propget, id(7), helpstring("property bUseIndention")] HRESULT bUseIndention([out, retval] BOOL *pVal);
+		[propput, id(7), helpstring("property bUseIndention")] HRESULT bUseIndention([in] BOOL newVal);
+
+		/*! true, if the module subdues unknown macro-syntax units to the meta root*/
+		[propget, id(10), helpstring("property bSubdueWrongMacroSynUnitToMainRoot")] HRESULT bSubdueWrongMacroSynUnitToMainRoot([out, retval] BOOL* pVal);
+		[propput, id(10), helpstring("property bSubdueWrongMacroSynUnitToMainRoot")] HRESULT bSubdueWrongMacroSynUnitToMainRoot([in] BOOL newVal);
+
+		/*! file for graphematical table, by default it is empty*/
+		[propget, id(11), helpstring("property GraOutputFile")] HRESULT GraOutputFile([out, retval] BSTR *pVal);
+		[propput, id(11), helpstring("property GraOutputFile")] HRESULT GraOutputFile([in] BSTR newVal);
+
+		/*! initializes the whole module, loads dictionaries*/
+		[id(12), helpstring("method LoadDicts")] HRESULT LoadDicts();
+
+		/*! load a file into graphematics*/
+		[id(13), helpstring("method LoadFileToGraphan")] HRESULT LoadFileToGraphan([in] BSTR CommandLine);
+
+		/*! load a string into graphematics*/
+		[id(14), helpstring("method LoadStringToGraphan")] HRESULT LoadStringToGraphan([in] BSTR Buffer);
+
+		/*! true, if  a file or s string was loaded into the module*/
+		[propget, id(15), helpstring("property IsTableLoaded")] HRESULT IsTableLoaded([out, retval] BOOL *pVal);
+
+		/*! get the number of lines in the graphematical table*/
+		[id(17), helpstring("method GetLineCount")] HRESULT GetLineCount([retval,out]UINT* Count);
+
+		/*! get the word by the line index*/
+		[id(18), helpstring("method GetWord")] HRESULT GetWord([in] UINT LineNo, [retval, out] BSTR* s);
+
+		/*! true, if a line index <a> LineNo</a> in the graphematical table contains descriptor <a>D</a> */
+		[id(16), helpstring("method HasDescr")] HRESULT HasDescr([in] UINT LineNo, [in]UINT D, [retval, out] BOOL* result);
+
+		/*! get a string representation of a graphematical descriptor*/		
+		[id(19), helpstring("method GetDescriptorStr")] HRESULT GetDescriptorStr([in] UINT DescriptorNo, [retval, out] BSTR* result);
+
+		[id(20), helpstring("method GetRubiconTypeStr")] HRESULT GetRubiconTypeStr([in]UINT RubiconTypeNo, [retval, out] BSTR* result);
+
+		/*! get a string representation of row LineNo from the graphematical table*/		
+		[id(21), helpstring("method GetLine")] HRESULT GetLine([in] UINT LineNo, [retval, out] BSTR* result);
+
+		/*! get a oborot index that starts from LineNo, -1 if there is no oborots*/		
+		[id(22), helpstring("method GetOborotNo")] HRESULT GetOborotNo([in] UINT LineNo, [retval, out] LONG* result);
+	
+		/*! set a pointer to oborot-dictionary. It should be set before calling LoadDicts,
+		otherwise another copy of the dictionary would be loaded by the module itself*/		
+		[id(24), helpstring("method SetOborDic")] HRESULT SetOborDic([in] IUnknown* Dic);
+
+		/*! get offset in the input buffer of line LineNo, for plain text files or strings this offset 
+		is equal to the file offset*/		
+		[id(25), helpstring("method GetUnitOffset")] HRESULT GetUnitOffset([in] int LineNo, [out, retval] int* Offset );
+
+		/*! get the length of the input token of line LineNo*/		
+		[id(26), helpstring("method GetUnitLength")] HRESULT GetUnitLength([in] int LineNo, [out, retval] BYTE* Length );
+
+		/*! delete the current graphematical table*/		
+		[id(27), helpstring("method FreeTable")] HRESULT FreeTable();
+
+		/*! free all dictionaries*/		
+		[id(28), helpstring("method FreeDicts")] HRESULT FreeDicts();
+
+		/*! get the language of token at line LineNo*/		
+		[id(29), helpstring("method GetTokenLanguage")] HRESULT GetTokenLanguage([in] int LineNo, [out, retval]int* Language);
+
+
+
+	};
+		
+	
+[
+	uuid(ECDEABCD-0855-11D3-A75D-AA5D93000000),
+	version(1.0),
+	helpstring("graphan 1.0 Type Library")
+]
+library GRAPHANLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb"); 
+
+	#include "../common/gra_descr.h"
+
+	[
+		uuid(ECDEABDA-0855-11D3-A75D-AA5D93000000),
+		helpstring("GraphmatFile Class"),
+		licensed
+	]
+	coclass GraphmatFile
+	{
+		[default] interface IGraphmatFile;
+	};
+	
+};
+
+

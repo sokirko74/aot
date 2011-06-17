@@ -1,0 +1,330 @@
+2.1  THE BASICS
+
+
+Electronic mail, or e-mail, is your personal connection to the world of 
+the Net. 
+
+All of the millions of people around the world who use the Net have their 
+own e-mail addresses.  A growing number of "gateways" tie more and more 
+people to the Net every day.  
+
+The basic concepts behind e-mail parallel those of regular mail.  You 
+send mail to people at their particular addresses.  In turn, they write 
+to you at your e-mail address.  You can subscribe to the electronic 
+equivalent of magazines and newspapers. Sooner or later, you'll probably 
+even get electronic junk mail. 
+
+E-mail has two distinct advantages over regular mail.  The most obvious 
+is speed. Instead of several days, your message can reach the other side 
+of the world in hours, minutes or even seconds (depending on where you 
+drop off your mail and the state of the connections between there and 
+your recipient).  The other advantage is that once you master the basics, 
+you'll be able to use e-mail to access databases and file libraries.  
+You'll see how to do this later, in chapter 10, along with learning how 
+to transfer program and data files through e-mail. 
+
+E-mail also has advantages over the telephone.  You send your message 
+when it's convenient for you.  Your recipients respond at their 
+convenience.  No more telephone tag.  And while a phone call across the 
+country or around the world can quickly result in huge phone bills, email lets you exchange vast amounts of mail for only a few pennies -- 
+even if the other person is on the other side of the earth. 
+
+E-mail is your connection to help -- your Net lifeline.  The Net can 
+sometimes seem a frustrating place!  No matter how hard you try, no 
+matter where you look, you just might not be able to find the answer to 
+whatever is causing you problems. But when you know how to use e-mail, 
+help is often just a few keystrokes away: you can ask your system 
+administrator or a friend for help in an e-mail message. 
+
+The quickest way to start learning e-mail is to send yourself a message.  
+Most public-access sites actually have several different types of mail 
+systems, all of which let you both send and receive mail. We'll start 
+with the simplest one, known, appropriately enough, as "mail," and then 
+look at a couple of other interfaces. At your host system's command 
+prompt, type: 
+ 
+     mail username 
+ 
+where username is the name you gave yourself when you first logged on.  
+Hit enter.  The computer might respond with 
+    
+     subject: 
+ 
+Type 
+ 
+     test 
+ 
+or, actually, anything at all (but you'll have to hit enter before you 
+get to the end of the screen). Hit enter. 
+
+The cursor will drop down a line. You can now begin writing the actual 
+message. Type a sentence, again, anything at all.  And here's where you 
+hit your first Unix frustration, one that will bug you repeatedly: you 
+have to hit enter before you get to the very end of the line.  Just like 
+typewriters, many Unix programs have no word-wrapping (although there are 
+ways to get some Unix text processors, such as emacs, to word-wrap). 
+
+When done with your message, hit return. Now hit control-D (hold down the 
+control key, then hit your d key).  This is a Unix command that tells the 
+computer you're done writing and that it should close your "envelope" and 
+mail it off (you could also hit enter once and then, on a blank line, 
+type a period at the beginning of the line and hit enter again). 
+
+You've just sent your first e-mail message.  And because you're sending 
+mail to yourself, rather than to someone somewhere else on the Net, your 
+message has already arrived, as we'll see in a moment. 
+
+If you had wanted, you could have even written your message on your own 
+computer and then uploaded it into this electronic "envelope."  There are 
+a couple of good reasons to do this with long or involved messages.  One 
+is that once you hit enter at the end of a line in "mail" you can't 
+readily fix any mistakes on that line (unless you use some special 
+commands to call up a Unix text processor).  Also, if you are paying for 
+access by the hour, uploading a prepared message can save you money.  
+Remember to save the document in ASCII or text format.  Uploading a 
+document you've created in a word processor that uses special formatting 
+commands (which these days means many programs) will cause strange 
+effects. 
+
+When you get that blank line after the subject line, upload the message 
+using the ASCII protocol.  Or you can copy and paste the text, if your 
+software allows that. When done, hit control-D as above. 
+
+Now you have mail waiting for you.  Normally, when you log on, your 
+public-access site will tell you whether you have new mail waiting.  To 
+open your mailbox and see your waiting mail, type 
+                 
+     mail 
+ 
+and hit enter. 
+
+When the host system sees "mail" without a name after it, it knows you 
+want to look in your mailbox rather than send a message. On a plainUnix system, your screen will display something like:
+ 
+     Mail version SMI 4.0 Mon Apr 24 18:34:15 PDT 1989  Type ? for help. 
+     "/usr/spool/mail/adamg": 1 message 1 new 1 unread 
+  
+     >N 1 adamg              Sat Jan 15 20:04   12/290   test 
+   
+Ignore the first line; it's just computerese of value only to the 
+people who run your system. You can type a question mark and hit return 
+to bring up a list of help files, but unless you're familiar with Unix, 
+most of what you'll see won't make much sense.
+
+The second line tells you the directory on the host system where your 
+mail messages are put, which again, is not something you'll likely need 
+to know.  The second line also tells you how many messages are in your 
+mailbox, how many have come in since the last time you looked and how 
+many messages you haven't read yet. 
+
+It's the third line that is of real interest -- it tells you who the 
+message is from, when it arrived, how many lines and characters it takes 
+up, and what the subject is.  The "N" means it is a new message -- it 
+arrived after the last time you looked in your mailbox.  Hit enter. And 
+there's your message -- only now it's a lot longer than what you wrote! 
+ 
+Whoa! What is all that stuff? It's your message with a postmark gone mad.  
+Just as the postal service puts its marks on every piece of mail it 
+handles, so do Net postal systems.  Only it's called a "header" instead 
+of a postmark. Each system that handles or routes your mail puts its 
+stamp on it.  Since many messages go through a number of systems on their 
+way to you, you will often get messages with headers that seem to go on 
+forever.  Among other things, a header will tell you exactly when a 
+message was sent and received (even the difference between your local 
+time and Greenwich Mean Time -- as at the end of line 4 above). 
+
+If this had been a long message, it would just keep scrolling across and 
+down your screen -- unless the people who run your public-access site 
+have set it up to pause every 24 lines.  One way to deal with a message 
+that doesn't stop is to use your telecommunication software's logging or 
+text-buffer function.  Start it before you hit the number of the message 
+you want to see.  Your computer will ask you what you want to call the 
+file you're about to create. After you name the file and hit enter, type 
+the number of the message you want to see and hit enter.  When the 
+message finishes scrolling, turn off the text-buffer function. The 
+message is now saved in your computer.  This way, you can read the 
+message while not connected to the Net (which can save you money if 
+you're paying by the hour) and write a reply offline. 
+
+But in the meantime, now what?  You can respond to the message, delete it 
+or save it.  To respond, type a lowercase r and hit enter.  You'll get 
+something like this: 
+ 
+     To: adamg 
+     Subject: Re:  test 
+ 
+Note that this time, you don't have to enter a user name.  The computer 
+takes it from the message you're replying to and automatically addresses 
+your message to its sender. The computer also automatically inserts a 
+subject line, by adding "Re:" to the original subject.  From here, it's 
+just like writing a new message. But say you change your mind and decide 
+not to reply after all. How do you get out of the message? Hit control-C 
+once. You'll get this: 
+ 
+     (Interrupt -- one more to kill letter) 
+ 
+If you hit control-C once more, the message will disappear and you'll get 
+back to your mail's command line. 
+
+Now, if you type a lowercase d and then hit enter, you'll delete the 
+original message.  Type a lowercase q to exit your mailbox.  
+
+If you type a q without first hitting d, your message is transferred to a 
+file called mbox.  This file is where all read, but un-deleted, messages 
+go.  If you want to leave it in your mailbox for now, type a lowercase x 
+and hit enter.  This gets you out of mail without making any changes. 
+The mbox file works a lot like your mailbox.  To access it, type 
+   
+     mail -f mbox 
+ 
+at your host system's command line and hit enter.  
+
+You'll get a menu identical to the one in your mailbox from which you can 
+read these old messages, delete them or respond to them.  It's probably a 
+good idea to clear out your mailbox and mbox file from time to time, if 
+only to keep them uncluttered. 
+
+Are there any drawbacks to e-mail?  There are a few.  One is that people 
+seem more willing to fly off the handle electronically than in person, or 
+over the phone.  Maybe it's because it's so easy to hit r and reply to a 
+message without pausing and reflecting a moment.  That's why we have 
+smileys (see section 2.4)!  There's no online equivalent yet of a return 
+receipt: chances are your message got to where it's going, but there's no 
+absolute way for you to know for sure unless you get a reply from the 
+other person.                
+
+So now you're ready to send e-mail to other people on the Net.  Of 
+course, you need somebody's address to send them mail.  How do you get 
+it?  
+
+Alas, the simplest answer is not what you'd call the most elegant: you 
+call them up on the phone or write them a letter on paper and ask them.  
+Residents of the electronic frontier are only beginning to develop the 
+equivalent of phone books, and the ones that exist today are far from 
+complete (still, later on, in Chapter 6, we'll show you how to use some 
+of these directories). 
+
+Eventually, you'll start corresponding with people, which means you'll 
+want to know how to address mail to them.  It's vital to know how to do 
+this, because the smallest mistake -- using a comma when you should have 
+used a period, for instance, can bounce the message back to you, 
+undelivered.  In this sense, Net addresses are like phone numbers: one 
+wrong digit and you get the wrong person.  Fortunately, most net 
+addresses now adhere to a relatively easy-to-understand system. 
+
+Earlier, you sent yourself a mail message using just your user-name.  
+This was sort of like making a local phone call -- you didn't have to 
+dial a 1 or an area code.  This also works for mail to anybody else who 
+has an account on the same system as you. 
+
+Sending mail outside of your system, though, will require the use of the 
+Net equivalent of area codes, called "domains." A basic Net address will 
+look something like this: 
+ 
+     tomg@world.std.com 
+ 
+Tomg is somebody's user ID, and he is at (hence the @ sign) a site (or in 
+Internetese, a "domain") known as std.com.  Large organizations often 
+have more than one computer linked to the Internet; in this case, the 
+name of the particular machine is world (you will quickly notice that, 
+like boat owners, Internet computer owners always name their machines). 
+
+Domains tell you the name of the organization that runs a given e-mail 
+site and what kind of site it is or, if it's not in the U.S., what 
+country it's located in.  Large organizations may have more than one 
+computer or gateway tied to the Internet, so you'll often see a two-part 
+domain name; and sometimes even three- or four-part domain names. 
+
+In general, American addresses end in an organizational suffix, such as 
+".edu"  (which means the site is at a college or university). Other 
+American suffixes include: 
+          
+     .com for businesses 
+     .org for non-profit organizations 
+     .gov and .mil for government and military agencies 
+     .net for companies or organizations that run large networks.  
+ 
+Sites in the rest of the world tend to use a two-letter code that 
+represents their country.  Most make sense, such as .ca for Canadian 
+sites, but there are a couple of seemingly odd ones (at least to 
+Americans).  Swiss sites end in .ch, while South African ones end in .za.  
+A few U.S. sites have followed this international convention (such as 
+nred.reading.ma.us). 
+
+You'll notice that the above addresses are all in lower-case.  Unlike 
+almost everything else having anything at all to do with Unix, most Net 
+mailing systems don't care about case, so you generally don't have to 
+worry about capitalizing e-mail addresses.  Alas, there are a few 
+exceptions -- some public-access sites do allow for capital letters in 
+user names.  When in doubt, ask the person you want to write to, or let 
+her send you a message first (recall how a person's e-mail address is 
+usually found on the top of her message). The domain name, the part of 
+the address after the @ sign, never has to be capitalized.               
+
+It's all a fairly simple system that works very well, except, again, it's 
+vital to get the address exactly right -- just as you have to dial a 
+phone number exactly right.  Send a message to tomg@unm.edu (which is the 
+University of New Mexico) when you meant to send it to tomg@umn.edu (the 
+University of Minnesota), and your letter will either bounce back to you 
+undelivered, or go to the wrong person. 
+
+If your message is bounced back to you as undeliverable, you'll get an 
+ominous looking-message from MAILER-DAEMON (actually a rather benign Unix 
+program that exists to handle mail), with an evil-looking header followed 
+by the text of your message. Sometimes, you can tell what went wrong by 
+looking at the first few lines of the bounced message.  Besides an 
+incorrect address, it's possible your host system does not have the other 
+site in the "map" it maintains of other host systems. Or you could be 
+trying to send mail to another network, such as Bitnet or CompuServe, 
+that has special addressing requirements. 
+
+Sometimes, figuring all this out can prove highly frustrating.  But 
+remember the prime Net commandment: Ask.  Send a message to your system 
+administrator. Include a copy of the header from the original message.  
+He or she might be able to help decipher the problem. 
+
+There is one kind of address that may give your host system particular 
+problems.  There are two main ways that Unix systems exchange mail.  One 
+is known as UUCP and started out with a different addressing system than 
+the rest of the Net.  Most UUCP systems have since switched over to the 
+standard Net addressing system, but a few traditional sites still cling 
+to their original type, which tends to have lots of exclamation points in 
+it, like this: 
+ 
+     uunet!somesite!othersite!mybuddy 
+ 
+The problem for many host sites is that exclamation points (also known as 
+"bangs") now mean something special in the more common systems or 
+"shells" used to operate many Unix computers. This means that addressing 
+mail to such a site (or even responding to a message you received from 
+one) could confuse the poor computer to no end and your message never 
+gets sent out. If that happens, try putting backslashes in front of each 
+exclamation point, so that you get an address that looks like this: 
+          
+     uunet\!somesite\!othersite\!mybuddy 
+ 
+Note that this means you may not be able to respond to such a message by 
+typing a lowercase r  -- you may get an error message and you'll have to 
+create a brand-new message.
+
+If you want to get a taste of what's possible on the Net, start a message 
+to this address: 
+
+     president@whitehouse.gov
+
+Compose some well wishes (or grumblings, if you're so inclined).  Send 
+off the message, and within a few seconds to a few hours (depending on 
+the state of your Net connection), you'll get back a reply that your 
+message has been received.  If you don't feel like starting at the top, 
+send a message instead to 
+
+     vice-president@whitehouse.gov
+
+
+The "mail" program is actually a very powerful one and a Netwide 
+standard, at least on Unix computers.  But it can be hard to figure out -
+- you can type a question mark to get a list of commands, but these may 
+be of limited use unless you're already familiar with Unix. Fortunately, 
+there are a couple of other mail programs that are easier to use. 
+
+

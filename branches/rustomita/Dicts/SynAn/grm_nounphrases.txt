@@ -1,0 +1,184 @@
+%% == format_for_noun_num ==
+%% ЙЮЙ ХЯЙКЧВХРЭ ХГ ЛМНФЕЯРБЮ ВХЯКХРЕКЭМШУ ДКЪ ЩРНЦН ОПЮБХКЮ ЯКНБЮ ХГ ЯОХЯЙЮ num_pr.dat?
+[ясы_вхяк1] -> [ндмнп_вхяк] | [йнкхв] | [якнф_вхяк] | [NUMORD] | [NUMCARD] | [DIG];
+[ясы_вхяк] -> [TOKEN root filename="noun_num.dat"] [ясы_вхяк1];
+
+%% == format_for_selective_groups ==
+
+%% ЮМЮКНЦ CanNumeralBeNoun
+[SUBST_NUM] -> 'ДБНЕ' | 'РПНЕ' | 'ВЕРБЕПН' | 'ОЪРЕПН' | 'ЬЕЯРЕПН' | 
+			   'ЯЕЛЕПН' | 'БНЯЭЛЕПН' | 'ДЕБЪРЕПН' | 'ДЕЯЪРЕПН' | 'НАЮ';
+			   
+[ELECT_1PART] -> 'ЙЮЙНИ' | 'НДХМ' | 'КЧАНИ' | [TOKEN form="ЙЮФДШИ" grm="ЕД"] | 
+				 [TOKEN form="ЛМНЦХИ" grm="ЛМ"] | [TOKEN form="МЕЙНРНПШИ" grm="ЛМ"] | 
+				 [ADJ grm="ОПЕБ"] | ('ЯЮЛШИ' [ADJ]) | [NUMORD] | [SUBST_NUM];
+
+[щкейр_хц1] -> [NOUN] | [PRO] | [PRO-ADJ] | [опхк_ясы];
+[щкейр_хц] -> [ELECT_1PART root] 'ХГ' [щкейр_хц1];
+
+%% == format_for_noun_groups ==
+%% НФХДЮЧЫЕЛС МЕОПХЪРМНЯРЕИ ЛЮКЭВХЙС
+[опхк_ясы0] -> [ADJ] | [лндхт_опхк] | [мюп_опхк] | [PRO-ADJ] | [NUMORD] | [юмюр_япюбм];
+[опхк_ясы1] -> [опхк_ясы0] | [ндмнп_опхк grm="о"]| [пюгпшб_янчг grm="о"] | [PART grm="ДЯР"] | [опъл_дно grm="опхвюярхе,ДЯР"];
+[опхк_ясы2] -> [NOUN] | [цемхр_хц] | [вхяк_ясы];
+[опхк_ясы] ->  [опхк_ясы1] [опхк_ясы2 root]
+		    : $0.grm := agrcng($1.grm, $2.grm);
+
+[опхк_ясы] -> [опхк_ясы1] [PARTICLE] [опхк_ясы2 root]
+		    : $0.grm := agrcng($1.grm, $3.grm);
+			
+[опхк_ясы] -> [опхк_ясы0] [опхк_ясы root]
+            : $0.grm := agrcng($1.grm, $2.grm);
+            
+[опхк_ясы] -> [опхк_ясы0] [PARTICLE] [опхк_ясы root]
+            : $0.grm := agrcng($1.grm, $3.grm);
+            
+[опхк_ясы] -> [COMMA] ([ADJ] | [лндхт_опхк] | [мюп_опхк] | [PART] | [ндмнп_опхк grm="о"] | [PRO-ADJ]) [COMMA] [PRO root]
+            : $0.grm := agrcng($2.grm, $4.grm);
+
+[опхк_ясы] -> [ндмнп_опхк grm="о, ЕД"] [NOUN root grm="ЛМ"]
+            : $0.grm := agrc($1.grm, $2.grm);
+
+[опхк_ясы] -> ([ADJ grm="ЛМ"] | [лндхт_опхк grm="ЛМ"] | [мюп_опхк grm="ЛМ"]) [NOUN-COORD-SPECIAL root]
+            : $0.grm := agrc($1.grm, $2.grm);
+
+[NOUN-COORD-SPECIAL] -> [NOUN grm="ЕД"] 'Х' [NOUN root]
+            : $0.grm := agrc($1.grm, $3.grm);
+[NOUN-COORD-SPECIAL1] -> [NOUN] 'Х' [NOUN root]
+            : $0.grm := agrc($1.grm, $3.grm);
+[NOUN-COORD-SPECIAL1] -> [NOUN] [COMMA] [NOUN-COORD-SPECIAL1 root]
+            : $0.grm := agrc($1.grm, $3.grm);
+[NOUN-COORD-SPECIAL] -> [NOUN grm="ЕД"] [COMMA] [NOUN-COORD-SPECIAL1 root]
+            : $0.grm := agrc($1.grm, $3.grm);
+
+%% == format_for_gen_chains ==
+%%	мХЙЮЙХЕ БНОПНЯШ ОНДДЕПФЙХ ПЮАНРШ Я ОНКЭГНБЮРЕКЕЛ , ДНЙСЛЕМРХПНБЮМХЪ , РХПЮФХПНБЮМХЪ - РЕГЮСПСЯ
+%% ПСЙНБНДХРЕКЪЛ НРДЕКЮ Х БЯЕЦН ОПНЕЙРЮ
+[цемхр_хц1] -> [NOUN] | [ясы_вхяк] | [вхяк_ясы] | [цемхр_хц] | [опхк_ясы] | [тхн root]; 
+[цемхр_хц2] -> [NOUN] | [опхк_ясы] | [ясы_вхяк] | [вхяк_ясы] | [цемхр_хц] | [ндмнп_хц] | [опхв_ясы];
+[цемхр_хц] -> [цемхр_хц1 root] [цемхр_хц2 grm="ПД"];
+
+%% == format_for_number_noun ==
+%% == format_for_both
+%% == format_standard_param_abbr
+%% == format_for_small_number_noun
+%% == format_for_odin_group
+%% РШЯЪВХ ЛХКЭ
+[вхяк_ясы1] -> [йнкхв] | [DIG] | [якнф_вхяк] | [NUMCARD];
+[вхяк_ясы2] -> [NOUN] | [опхк_ясы];
+
+[вхяк_ясы] -> [вхяк_ясы1 has_one_grm="ХЛ,БМ"] [вхяк_ясы2 root grm="ПД, ЛМ"];
+[вхяк_ясы] -> [вхяк_ясы1] [вхяк_ясы2 root]
+		   : $0.grm := agrc($1.grm, $2.grm);
+
+[вхяк_ясы] -> 'наю' [PRO root grm="ЛМ"];
+[вхяк_ясы] -> [PRO root grm="ЛМ"] 'наю';
+
+[MSR] -> 'йц' | 'йл' | 'ял'|'лк' | 'ла'|'йа' | 'лцж' | 'йб';
+[вхяк_ясы] -> ([вхяк_ясы1] |'1'| 'ндхм') [MSR root] : $0.grm := set_all_cases($2.grm);
+
+[вхяк_ясы] -> ('1'| 'ндхм') [вхяк_ясы2 root]
+		   : $0.grm := agrcng($1.grm, $2.grm);
+
+[вхяк_ясы] -> [SMALL-NUM] ([NOUN root grm="ЛМ"] | [опхк_ясы root grm="ЛМ"])
+            : $0.grm := agrc($1.grm, $2.grm);
+
+[вхяк_ясы] -> ([SMALL-NUM grm="ХЛ"] | [SMALL-NUM grm="БМ"] | [SMALL-DIG]) ([NOUN root grm="ПД"] | [опхк_ясы root grm="ПД"]);
+   
+%% == format_for_approx_noun_prep ==
+%% МСФМН ДНАЮБХРЭ ЯНЦКЮЯНБЮМХЕ
+[юоопнйя_оц] -> [NOUN root] [PREP_SIMPLE] ([вхяк_ясы] | [NUMCARD]);        
+
+%% == format_for_number_adverb ==
+[NUM_PR] -> [TOKEN filename="num_pr.dat"];
+[мюп_вхяк_ясы1] -> [вхяк_ясы grm="ПД"] | [NOUN grm="ПД, ЛМ"] | [опхк_ясы grm="ПД, ЛМ"] | [щкейр_хц grm="ПД, ЛМ"];
+[мюп_вхяк_ясы] -> [NUM_PR root] [мюп_вхяк_ясы1 grm="ПД"];
+
+%% == format_for_similar_noun_groups ==
+[ндмнп_хц] -> ([NOUN] | [опхк_ясы] | [цемхр_хц] | [PRO]) ('Х' | 'ХКХ') ([NOUN root] | [опхк_ясы root] | [цемхр_хц root] | [PRO root])
+            : $0.grm := agrc($1.grm, $3.grm);
+[ндмнп_хц] -> [COORD-NP-COMMA] ('Х' | 'ХКХ') ([NOUN root] | [опхк_ясы root] | [цемхр_хц root] | [PRO root])
+            : $0.grm := agrc($1.grm, $3.grm);
+[COORD-NP-COMMA] -> ([NOUN] | [опхк_ясы] | [цемхр_хц] | [PRO]) [COMMA] ([NOUN root] | [опхк_ясы root] | [цемхр_хц root] | [PRO root])
+            : $0.grm := agrc($1.grm, $3.grm);
+[COORD-NP-COMMA] -> [COORD-NP-COMMA] [COMMA] ([NOUN root] | [опхк_ясы root] | [цемхр_хц root] | [PRO root])
+            : $0.grm := agrc($1.grm, $3.grm);
+[ндмнп_хц] -> [COORD-NP-COMMA];
+
+%% == format_for_noun_adj_postposition ==
+[опхк_оняроня1] -> [NOUN] | [опхк_ясы];
+[опхк_оняроня2] -> [ADJ] | [лндхт_опхк] | [ндмнп_опхк grm="о"] | [мюп_опхк];
+[опхк_оняроня] -> [опхк_оняроня1 root] [опхк_оняроня2]
+		    : $0.grm := agrcng($1.grm, $2.grm);
+
+%% == format_for_noun_detached_adj_postposition ==
+
+%% ГЮЦЮДЙХ , МНБШИ - ЩРН ГЮВЕЛ?
+%% ЕЫЕ МСФЕМ ЙНМЕЖ ОПЕДКНФЕМХЪ
+[ясы_ная_опхк1] -> [NOUN] | [PRO] | [опхк_ясы] | [вхяк_ясы];
+[ясы_ная_опхк2] -> [ADJ] | [лндхт_опхк] | [ндмнп_опхк grm="о"] | [мюп_опхк];
+
+[ясы_ная_опхк] -> [ясы_ная_опхк1 root] [COMMA] [ясы_ная_опхк2] [COMMA]		    
+			   : $0.grm := agrcng($1.grm, $3.grm);
+			   
+[ясы_ная_опхк] -> [ндмнп_хц root grm="ЕД"] [COMMA] [ясы_ная_опхк2 grm="ЛМ"] [COMMA]	    
+			   : $0.grm := agrc($1.grm, $3.grm);
+
+[ясы_ная_опхк] -> [ясы_ная_опхк1 root grm="ЛМ"] [COMMA] [ясы_ная_опхк2 grm="ЕД"] [COMMA]	    
+			   : $0.grm := agrc($1.grm, $3.grm);
+
+%% == format_for_noun_adjunct_group ==
+[опхкнфемхе] -> ([NOUN root grm="ЕД"] | [опхк_ясы root grm="ЕД"]) [COMMA] ([NOUN grm="ЕД"] | [опхк_ясы grm="ЕД"]) [COMMA]
+		    : $0.grm := agrcn($1.grm, $3.grm);
+
+[опхкнфемхе] -> ([NOUN root grm="ЛМ"] | [опхк_ясы root grm="ЛМ"]) [COMMA] ([NOUN grm="ЛМ"] | [опхк_ясы grm="ЛМ"]) [COMMA]
+		    : $0.grm := agrcn($1.grm, $3.grm);
+
+%% == format_for_partic_clause ==
+[опхв_ясы1] -> [NOUN] | [PRO] | [опхк_ясы] | [вхяк_ясы] | [цемхр_хц]; 
+[опхв_ясы2] -> [PART clause] | [DEEPR clause];
+[опхв_ясы] -> [опхв_ясы1 root] [COMMA] [опхв_ясы2] ;
+[опхв_ясы] -> [опхв_ясы1 root] [опхв_ясы2];
+
+%% == format_for_whose_clause ==
+[опхдюр_ноп1] -> [NOUN] | [PRO] | [опхк_ясы]  | [вхяк_ясы] | [цемхр_хц];
+[опхдюр_ноп2] -> [V] | [SH-PART] | [мюпев_цкюцнк] | [оеп_цкюц_хмт] | [хмярп_дно] | [нрп_тнплю] | [опъл_дно] | [оеп_цкюц_хмт];
+[опхдюр_ноп] -> [опхдюр_ноп1 root] [COMMA] [опхдюр_ноп2 relative];
+[опхдюр_ноп] -> [опхдюр_ноп1 root] [опхдюр_ноп2 relative];
+
+%% == format_for_from_compar ==
+[нряпюбм] -> [ADJ root grm="ЯПЮБМ"] ([NOUN grm="ПД"] | [PRO grm="ПД"] | [опхк_ясы grm="ПД"] | [ясы_вхяк grm="ПД"] | [вхяк_ясы grm="ПД"] | [цемхр_хц grm="ПД"]);
+
+%% == format_for_FAM1_FAM2 ==
+
+%% кюгюпеб б.о. ц.яюлюпю // тхн МЕ ДНКФМШ ОЕПЕЯЕЙЮРЭЯЪ
+
+[тхн] -> [TOKEN graf="FAM1"] [TOKEN graf="FAM2" root];
+[тхн] -> [TOKEN graf="FAM1"] [TOKEN atomic] [TOKEN graf="FAM2" root];
+[тхн] -> [TOKEN graf="FAM1"] [TOKEN atomic] [TOKEN atomic] [TOKEN graf="FAM2" root];
+[тхн] -> [TOKEN graf="FAM1"] [TOKEN atomic] [TOKEN atomic] [TOKEN atomic] [TOKEN graf="FAM2" root];
+
+%% == format_for_web_addr,"щк_юдпея"  ==
+[щк_юдпея] -> [TOKEN graf="EA"];
+
+%% == format_for_rank_surname,"днкф_тхн"  ==
+[днкф_тхн] -> [TOKEN root filename="profes.txt"] ([тхн]|[TOKEN graf="NAM?"]);
+
+%% == format_for_keyb,"йкб"  ==
+[йкб] -> [TOKEN graf="KEY1"] [TOKEN atomic] [TOKEN graf="KEY2" root];
+
+
+%% == format_for_oborots,"нанпнр"  ==
+%% [нанпнр] -> [TOKEN graf="EXPR1"] [TOKEN graf="EXPR2" root];
+%% [нанпнр] -> [TOKEN graf="EXPR1"] [TOKEN atomic] [TOKEN graf="EXPR2" root];
+%% [нанпнр] -> [TOKEN graf="EXPR1"] [TOKEN atomic] [TOKEN atomic] [TOKEN graf="EXPR2" root];
+%% [нанпнр] -> [TOKEN graf="EXPR1"] [TOKEN atomic] [TOKEN atomic] [TOKEN atomic] [TOKEN graf="EXPR2" root];
+
+%% == format_for_foreign_term,"хмнярп_кейя"  ==
+[хмнярп_кейя] -> [TOKEN type="LLE"];
+
+			   			   
+[ROOT] -> [щкейр_хц] | [ясы_вхяк] | [опхк_ясы] | [цемхр_хц] | [вхяк_ясы] | 
+          [юоопнйя_оц] | [мюп_вхяк_ясы] | [ндмнп_хц] | [мюп_вхяк_ясы] | 
+          [опхк_оняроня] | [ясы_ная_опхк] | [опхв_ясы] | [опхкнфемхе] | [опхдюр_ноп] | [нряпюбм] |
+          [тхн] | [днкф_тхн] | [щк_юдпея] | [йкб] | [хмнярп_кейя];

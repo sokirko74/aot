@@ -1,0 +1,19 @@
+[Configuration]
+alex Last
+maya
+user
+boris
+oleg
+graf
+masha
+af
+[DomensParams]
+д_яу 32768 10
+д_яел_н 16711680 10
+д_кт 255 10
+д_1 8388736 10
+[Options]
+Language English
+DoNotLock 1
+DoNotSaveLastUserName 0
+ArticleInitTextMode 1

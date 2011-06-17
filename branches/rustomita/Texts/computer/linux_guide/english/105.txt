@@ -1,0 +1,9 @@
+ 
+
+1.8.6.5 Modems
+
+ 
+  As with printer support, Linux supports the full range of serial modems, both internal and external. There is a great deal of telecommunications software available for Linux, including Kermit, pcomm, minicom, and Seyon. If your modem is accessible from another operating system on the same machine, you should be able to access it from Linux with no difficulty. 
+
+
+ 

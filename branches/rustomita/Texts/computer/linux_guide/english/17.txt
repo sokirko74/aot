@@ -1,0 +1,17 @@
+
+
+ 
+
+3.9.3 Dependencies
+
+ 
+      It is important to note that the permissions granted to a file also depend on the permissions of the directory in which the file is located. For example, even if a file is set to -rwxrwxrwx, other users cannot access the file unless they have read and execute access to the directory in which the file is located. For example, if Larry wanted to restrict access to all of his files, he could simply set the permissions on his home directory /home/larry to -rwx------. In this way, no other user has access to his directory, and all files and directories within it. Larry doesn't need to worry about the individual permissions on each of his files. 
+
+In other words, to access a file at all, you must have execute access to all directories along the file's pathname, and read (or execute) access to the file itself. 
+
+Usually, users on a UNIX system are very open with their files. The usual set of permissions given to files is -rw-r--r--, which will allow other users to read the file, but not change it in any way. The usual set of permissions given to directories is -rwxr-xr-x, which will allow other users to look through your directories, but not create or delete files within them. 
+
+However, many users wish to keep other users out of their files. Setting the permissions of a file to -rw------- will not allow any other user to access the file. Likewise, setting the permissions of a directory to -rwx------ will keep other users out of the directory in question. 
+
+
+ 

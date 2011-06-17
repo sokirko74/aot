@@ -1,0 +1,38 @@
+============
+TITLE        = готовый_на_все
+SENSE       = 1
+AUTHOR       = masha
+REDACT       = alex
+TIME_CREATE       = 2/4/7 12:8:0
+//MachineName =  
+//Date = Monday, April 02, 2007 
+//Time = 12 : 08
+//UserName = sokirko 
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  готовый все
+CAT     = 1  LABL.PROPERT
+VAL     =  PROPERT , C , A1
+GF1     = 1  X! : ИГ
+PREP(2) =  на+В
+ENG     =  desperate 1
+============
+TITLE        = не_говоря_о
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 5/11/7 7:50:51
+//MachineName =  
+//Date = Monday, November 05, 2007 
+//Time = 07 : 50
+//UserName = sokirko 
+ROOT    =  1
+TYP     =  БЕЗУСЛ
+CONTENT =  говорить[НЕ] уже
+EXM     =  не говоря уже о нас
+GF      = 1  ДЕЕПРИЧАСТИЕ
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF(1)   = 1  ДЕЕПРИЧАСТИЕ
+GF2     = 1  к_доп : о+П
+ENG     =  not_to_speak_of 1

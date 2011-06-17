@@ -1,0 +1,44 @@
+This is a RML package (RML is Russian acronym, stands for Linguistic Environment).
+
+This program is distributed under the Library GNU Public Licence, which is in the file
+COPYING.  
+
+This program was  written by Alexey Sokirko, Igor Nozhov, Lev Gershenzon, Andrey Putrin 
+and many other people.
+
+The project started in Moscow in Dialing 
+Company (Russian and English language). The German part was created  
+at Berlin-Brandenburg Academy of Sciences and Humanities in  Berlin (the project DWDS). 
+
+Russian website (Russian documents) is www.aot.ru.
+
+1. First you should register  RML variable, for example
+  export  RML=/home/sokirko/RML
+
+2.  Your system should have flex and bison installed in order to compile the sources.
+I use bison 1.875 and flex 2.5.4 to process query language.
+I compiled all sources with gcc 3.2. Lower versions are not supported.
+
+
+
+3. The project uses a regular expression library "PCRE" (Perl Compatible Regular Expressions).
+We test compilation only with version 6.4. Other versions were not tested. 
+One should download this version  from the official site and install it 
+to the default place. If you do not want to install it or you do not have enough
+rights to do it, then you should  create two environment variables: 
+	1.  RML_PCRE_LIB, that  points to PCRE library directory, where
+libpcre.a and libpcrecpp.a should be located, for example:
+	export RML_PCRE_LIB=~/RML/contrib/pcre-6.4/.libs
+    2  RML_PCRE_INCLUDE, that points to PCRE include catalog, 
+where "pcrecpp.h" is located, for example
+    export RML_PCRE_INCLUDE=~/RML/contrib/pcre-6.4
+Varianbles  RML_PCRE_INCLUDE and RML_PCRE_LIB are needed only for compilation.
+
+4. Then you should type
+   sh build.sh
+
+The script  builds the whole system.
+
+
+
+More detail about Morphology dicts is here: Docs/Morph_UNIX.txt

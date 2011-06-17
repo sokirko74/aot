@@ -1,0 +1,19 @@
+ 
+
+5.3.2.8 Trying it out
+
+ 
+    Once you have all of these files set up, you should be able to reboot your new kernel and attempt to use the network. There are many places where things can go wrong, so it's a good idea to test individual aspects of the network configuration (e.g., it's probably not a good idea to test your network configuration by firing up Mosaic over a network-based X connection). 
+
+    You can use the netstat command to display your routing tables; this is usually the source of the most trouble. The netstat man page describes the exact syntax of this command in detail. In order to test network connectivity, we suggest using a client such as telnet to connect to machines both on your local subnetwork and external networks. This will help to narrow down the source of the problem. (For example, if you're unable to connect to local machines, but can connect to machines on other networks, more than likely there is a problem with your netmask and routing table configuration). You can also invoke the route command directly (as root) to play with the entries in your routing table. 
+
+You should also test network connectivity by specifying IP addresses directly, instead of hostnames. For example, if you have problems with the command 
+
+$ telnet shoop.vpizza.com 
+
+the cause may be incorrect nameserver configuration. Try using the actual IP address of the machine in question; if that works, then you know that your basic network setup is (more than likely) correct, and the problem lies in your specification of the name server address. 
+
+Debugging network configurations can be a difficult task, and we can't begin to cover it here. If you are unable to get help from a local guru we strongly suggest reading the Linux Network Administrators' Guide from the LDP. 
+
+
+ 

@@ -1,0 +1,169 @@
+15:55, 30 April 2003 > Opened by alex
+15:57, 30 April 2003 > Opened by alex
+15:59, 30 April 2003 > Opened by alex
+15:59, 30 April 2003 > - MANY +#%MANY*aa%MORE*ab%MOST*ac
+15:59, 30 April 2003 > + MANY +#%ANY*xi%ORE*cb%OST*cc
+16:00, 30 April 2003 > - SEVERAL +#%*aa
+16:00, 30 April 2003 > + SEVERAL +#%*xi
+16:00, 30 April 2003 > Saved by alex
+13:57, 07 May 2003 > Opened by alex
+14:00, 07 May 2003 > Opened by alex
+14:01, 07 May 2003 > - CHARISMA +#%*ni%TA*nk
+14:01, 07 May 2003 > + CHARISMA +#%*ni
+14:01, 07 May 2003 > - EPHEMERA +#%A*ni%AS*nk%IDAE*nk
+14:01, 07 May 2003 > + EPHEMERA +#%*ni
+14:02, 07 May 2003 > - MASTERFULNESS +#%*ni%ES*nk
+14:02, 07 May 2003 > + MASTERFULNESS +#%*ni
+14:03, 07 May 2003 > - MOMENTUM +#%UM*ni%A*nk%UMS*nk
+14:03, 07 May 2003 > + MOMENTUM +#%*ni
+14:04, 07 May 2003 > - PARAPHERNALIA +#%*nk
+14:04, 07 May 2003 > + PARAPHERNALIA +#%*nb
+14:04, 07 May 2003 > - ROM +#%*ni%A*nk%S*nk
+14:04, 07 May 2003 > + ROM +#%*ne%S*ng
+14:04, 07 May 2003 > Saved by alex
+14:07, 07 May 2003 > import file C:\Rml\Dicts\SrcMorph\paradigms.slf
+14:07, 07 May 2003 > Successfully tested 18 paradigms
+14:07, 07 May 2003 > import file C:\Rml\Dicts\SrcMorph\paradigms.slf
+14:07, 07 May 2003 > Successfully imported 18 paradigms
+14:13, 07 May 2003 > Saved by alex
+12:08, 25 June 2003>Opened by alex
+12:08, 25 June 2003>import file C:\Rml\Dicts\SrcMorph\all_eng.out
+12:13, 25 June 2003>Successfully imported 104951 paradigms
+12:13, 25 June 2003>Saved by alex
+14:59, 02 July 2003>Opened by alex
+16:54, 13 October 2003>Opened by alex
+17:01, 13 October 2003>Opened by alex
+17:02, 13 October 2003>finding all used flexia and accent modleys
+17:02, 13 October 2003>creating new flexia models without unused items
+17:02, 13 October 2003>creating new accent models without unused items
+17:02, 13 October 2003>fixing index from lemmas to paradigms
+17:02, 13 October 2003>import file E:\temp\Morph\eng.new.slf
+17:03, 13 October 2003>Errors were written to file paradigms.err
+17:06, 13 October 2003>Opened by alex
+17:06, 13 October 2003>import file E:\temp\Morph\eng.new.slf
+17:07, 13 October 2003>Errors were written to file paradigms.err
+17:07, 13 October 2003>import file E:\temp\Morph\eng.new.slf
+17:08, 13 October 2003>Errors were written to file paradigms.err
+17:10, 13 October 2003>Opened by alex
+17:10, 13 October 2003>finding all used flexia and accent modleys
+17:10, 13 October 2003>creating new flexia models without unused items
+17:10, 13 October 2003>creating new accent models without unused items
+17:10, 13 October 2003>fixing index from lemmas to paradigms
+17:10, 13 October 2003>Saved by alex
+17:11, 13 October 2003>import file E:\temp\Morph\eng.new.slf
+17:11, 13 October 2003>Successfully tested 104951 paradigms
+17:11, 13 October 2003>import file E:\temp\Morph\eng.new.slf
+17:12, 13 October 2003>Successfully imported 104951 paradigms
+17:12, 13 October 2003>Saved by alex
+09:18, 26 January 2004>Opened by alex
+10:16, 27 January 2004>Opened by alex
+10:17, 27 January 2004>- HIDE %IDE*va%IDES*vb%ID*vc%IDDEN*vd%*vd%IDING*ve
+10:17, 27 January 2004>+ HIDE %E*va%ES*vb%*vc%DEN*vd%ING*ve
+10:18, 27 January 2004>Saved by alex
+09:41, 02 February 2004>Opened by alex
+09:41, 02 February 2004>- APERU %*na%S*nb
+09:41, 02 February 2004>+ APER?U %*na%S*nb
+09:42, 02 February 2004>Saved by alex
+09:43, 02 February 2004>Saved by alex
+14:23, 02 February 2004>Opened by alex
+14:25, 02 February 2004>- APER?U %*na%S*nb
+14:25, 02 February 2004>+ APERÇU %*na%S*nb
+14:27, 02 February 2004>- ARRIÐRE-BAN %*na%S*nb
+14:27, 02 February 2004>+ ARRIÈRE-BAN %*na%S*nb
+14:38, 02 February 2004>- ARRÒT %*na%S*nb
+14:38, 02 February 2004>+ ARRÊT %*na%S*nb
+14:40, 02 February 2004>- ARÒTE %*na%S*nb
+14:40, 02 February 2004>+ ARÊTE %*na%S*nb
+14:42, 02 February 2004>- BAYADÐRE %*na%S*nb
+14:42, 02 February 2004>+ BAYADÈRE %*na%S*nb
+14:42, 02 February 2004>- BERGÐRE %*na%S*nb
+14:42, 02 February 2004>+ BERGÈRE %*na%S*nb
+14:43, 02 February 2004>- BIBLIOTHÐQUE %*na%S*nb
+14:43, 02 February 2004>+ BIBLIOTHÈQUE %*na%S*nb
+14:44, 02 February 2004>- BÒCHE-DE-MER %*na%S*nb
+14:44, 02 February 2004>+ BÊCHE-DE-MER %*na%S*nb
+14:44, 02 February 2004>- BÊCHE-DE-MER %*na%S*nb
+14:44, 02 February 2004>+ BKCHE-DE-MER %KCHE-DE-MER*na%ÊCHE-DE-MERS*nb
+14:44, 02 February 2004>- BKCHE-DE-MER %KCHE-DE-MER*na%ÊCHE-DE-MERS*nb
+14:44, 02 February 2004>+ BÊCHE-DE-MER %*na%S*nb
+14:47, 02 February 2004>- B×T-HORSE %*na%S*nb
+14:47, 02 February 2004>+ BÂT-HORSE %*na%S*nb
+14:48, 02 February 2004>- CACHAA %*na%S*nb
+14:48, 02 February 2004>+ CACHAÇA %*na%S*nb
+14:49, 02 February 2004>- CANTINIÐRE %*na%S*nb
+14:49, 02 February 2004>+ CANTINIÈRE %*na%S*nb
+14:49, 02 February 2004>Saved by alex
+14:55, 02 February 2004>- CA¡ADA %*na%S*nb
+14:55, 02 February 2004>- CA¡ON %*na%S*nb
+14:55, 02 February 2004>Saved by alex
+14:56, 02 February 2004>- CH×TEAU %*na%X*nb
+14:56, 02 February 2004>+ CHÂTEAU %*na%X*nb
+14:56, 02 February 2004>- COMMÐRE %*na%S*nb
+14:56, 02 February 2004>+ COMMÈRE %*na%S*nb
+14:56, 02 February 2004>- CONFRÐRE %*na%S*nb
+14:56, 02 February 2004>+ CONFRÈRE %*na%S*nb
+14:57, 02 February 2004>- CORTÐGE %*na%S*nb
+14:57, 02 February 2004>+ CORTÈGE %*na%S*nb
+14:57, 02 February 2004>- COUTURIÐRE %*na%S*nb
+14:57, 02 February 2004>+ COUTURIÈRE %*na%S*nb
+14:59, 02 February 2004>- CRO"TON %*na%S*nb
+15:00, 02 February 2004>- CRÐCHE %*na%S*nb
+15:00, 02 February 2004>+ CRÈCHE %*na%S*nb
+15:00, 02 February 2004>- CRÐME %*na%S*nb
+15:00, 02 February 2004>+ CRÉME %*na%S*nb
+15:01, 02 February 2004>- CRÒPE %*na%S*nb
+15:01, 02 February 2004>+ CRÊPE %*na%S*nb
+15:01, 02 February 2004>- CURAAO %*na%S*nb
+15:01, 02 February 2004>+ CURAÇAO %*na%S*nb
+15:02, 02 February 2004>Saved by alex
+15:05, 02 February 2004>- ENTREC¤TE %*na%S*nb
+15:05, 02 February 2004>+ ENTRECÔTE %*na%S*nb
+15:05, 02 February 2004>- ENTREP¤T %*na%S*nb
+15:05, 02 February 2004>+ ENTREPÔT %*na%S*nb
+15:06, 02 February 2004>- FAADE %*na%S*nb
+15:06, 02 February 2004>+ FAÇADE %*na%S*nb
+15:06, 02 February 2004>- FLÐCHE %*na%S*nb
+15:06, 02 February 2004>+ FLÈCHE %*na%S*nb
+15:07, 02 February 2004>- FOURRAGÐRE %*na%S*nb
+15:07, 02 February 2004>+ FOURRAGÈRE %*na%S*nb
+15:07, 02 February 2004>Saved by alex
+15:09, 02 February 2004>- F¦HN %*na%S*nb
+15:09, 02 February 2004>+ FÖHN %*na%S*nb
+15:10, 02 February 2004>- FÒTE %*na%S*nb
+15:10, 02 February 2004>+ FÊTE %*na%S*nb
+15:11, 02 February 2004>Saved by alex
+15:12, 02 February 2004>Saved by alex
+15:28, 02 February 2004>Opened by alex
+15:30, 02 February 2004>- HAUT-GO"T %*na%S*nb
+15:30, 02 February 2004>+ HAUT-GOÛT %*na%S*nb
+15:31, 02 February 2004>+ CROÛTON %*na%S*nb
+15:32, 02 February 2004>- DONA %*na%S*nb
+15:32, 02 February 2004>+ DOÑA %*na%S*nb
+15:35, 02 February 2004>Saved by alex
+15:38, 02 February 2004>Saved by alex
+15:38, 02 February 2004>Opened by alex
+16:30, 08 February 2004>Opened by alex
+16:30, 08 February 2004>- A.O.K. %*ba
+16:30, 08 February 2004>Saved by alex
+16:31, 08 February 2004>- ANTI-U.S. %*aa
+16:31, 08 February 2004>- NO. %*va%'S*vb%'D*vc%'D*vd%'ING*ve
+16:31, 08 February 2004>- O.K. %*aa
+16:31, 08 February 2004>- O.K. %*va%'S*vb%'D*vc%'D*vd%'ING*ve
+16:31, 08 February 2004>- O.K. %*xb
+16:31, 08 February 2004>Saved by alex
+18:27, 10 February 2004>Opened by alex
+18:27, 10 February 2004>finding all used flexia and accent modleys
+18:27, 10 February 2004>creating new flexia models without unused items
+18:27, 10 February 2004>creating new accent models without unused items
+18:27, 10 February 2004>fixing index from lemmas to paradigms
+18:27, 10 February 2004>Opened by alex
+18:28, 10 February 2004>finding all used flexia and accent modleys
+18:28, 10 February 2004>creating new flexia models without unused items
+18:28, 10 February 2004>creating new accent models without unused items
+18:28, 10 February 2004>fixing index from lemmas to paradigms
+18:28, 10 February 2004>Saved by alex
+10:51, 12 February 2004>Opened by alex
+10:52, 12 February 2004>- BIND %*va%S*vb%ED*vc%ED*vd%ING*ve
+10:52, 12 February 2004>Saved by alex
+16:30, 18 February 2004>Opened by alex
+05:26, 05 January 2008>Opened by alex

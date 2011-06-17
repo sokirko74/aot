@@ -1,0 +1,41 @@
+
+4.9 Using a swap file
+
+   
+
+  Instead of reserving an individual partition for swap space, you can use a file. However, to do so you'll need install the Linux software and get everything going before you create the swap file. 
+
+If you have a Linux system installed, you can use the following commands to create a swap file. Below, we're going to create a swap file of size 8208 blocks (about 8 megs). 
+
+# dd if=/dev/zero of=/swap bs=1024 count=8208 
+
+This command creates the swap file itself. Replace the ``count='' with the size of the swap file in blocks.   
+
+# mkswap /swap 8208 
+
+This command will initialize the swapfile; again, replace the name and size of the swapfile with the appropriate values.   
+
+# /etc/sync 
+# swapon /swap 
+
+Now we are swapping on the file /swap which we have created, after syncing, which ensures that the file has been written to disk. 
+
+The one major drawback to using a swapfile in this manner is that all access to the swap file is done through the filesystem. This means that the blocks which make up the swap file may not be contiguous. Therefore, performance may not be as great as using a swap partition, for which blocks are always contiguous and I/O requests are done directly to the device. 
+
+Another drawback in using a swapfile is the chance to corrupt your filesystem data---when using large swap files, there is the chance that you can corrupt your filesystem if something goes wrong. Keeping your filesystems and swap partitions separate will prevent this from happening. 
+
+  Using a swap file can be very useful if you have a temporary need for more swap space. For example, if you're compiling a large program and would like to speed things up somewhat, you can temporarily create a swap file and use it in addition to your regular swap space. 
+
+    To get rid of a swap file, first use swapoff, as in 
+
+# swapoff /swap 
+
+And you can safely delete the file. 
+
+# rm /swap 
+
+
+Remember that each swap file (or partition) may be as large as 16 megabytes, but you may use up to 8 swap files or partitions on your system.   
+
+
+ 

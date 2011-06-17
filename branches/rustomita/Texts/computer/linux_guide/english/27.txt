@@ -1,0 +1,20 @@
+
+ 
+
+3.12.6 Moving commands
+
+ 
+  You already know how to use the arrow keys to move around the document. In addition, you can use the h, j, k, and l commands to move the cursor left, down, up, and right, respectively. This comes in handy when (for some reason) your arrow keys aren't working correctly. 
+
+The w command moves the cursor to the beginning of the next word; the b moves it to the beginning of the previous word. 
+
+The 0 (that's a zero) command moves the cursor to the beginning of the current line, and the $ command moves it to the end of the line. 
+
+When editing large files, you'll want to move forwards or backwards through the file a screenful at a time. Pressing moves the cursor one screenful forward, and moves it a screenful back. 
+
+In order to move the cursor to the end of the file, type G. You can also move to an arbitrary line; for example, typing the command 10G would move the cursor to line 10 in the file. To move to the beginning of the file, use 1G. 
+
+You can couple moving commands with other commands, such as deletion. For example, the command d$ will delete everything from the cursor to the end of the line; dG will delete everything from the cursor to the end of the file, and so on. 
+
+
+ 

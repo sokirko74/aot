@@ -1,0 +1,15 @@
+ 
+
+4.4.3 Deleting users
+
+ 
+        Similarly, deleting users can be accomplished with the commands userdel or deluser depending on what software was installed on the system. 
+
+    If you'd like to temporarily ``disable'' a user from logging into the system (without deleting the user's account), you can simply prepend an asterisk (``*'') to the password field in /etc/passwd. For example, changing kiwi's /etc/passwd entry to 
+
+kiwi:*Xv8Q981g71oKK:102:100:Laura Poole:/home/kiwi:/bin/bash 
+
+will restrict kiwi from logging in. 
+
+
+ 

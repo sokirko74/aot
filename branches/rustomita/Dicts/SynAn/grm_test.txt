@@ -1,0 +1,5 @@
+[NP] -> [TOKEN grm="Ñ" root];
+[NP] -> [NP root] [TOKEN atomic];
+[NP] -> [NP root] ',' [TOKEN relative];
+[NP] -> [TOKEN grm="Ï"] [NP root];
+[ROOT] -> [NP];

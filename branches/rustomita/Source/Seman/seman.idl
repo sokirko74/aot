@@ -1,0 +1,141 @@
+
+import "oaidl.idl";
+import "ocidl.idl";
+	/*анадлогичное перечисление в TranslatorHolder.h*/
+	typedef enum   { idlNoneRoss=1, idlRoss=2, idlLocRoss=3, idlCollocRoss=4, idlTimeRoss=5, idlOborRoss=6, idlAoss=7 , idlEngCollocRoss=8, idlEngObor=9, idlFinRoss=10, idlCompRoss=11, idlOmniRoss=12 } idlDictTypeEnum;
+	[
+		object,
+		uuid(BCE1821B-EC2B-4E22-877A-69E960BF07EE),
+		dual,
+		helpstring("IComSemWord Interface"),
+		pointer_default(unique)
+	]
+	interface IComSemWord : IDispatch
+	{
+		[propget, id(1), helpstring("property WordStr")] HRESULT WordStr([out, retval] BSTR *pVal);
+		[propget, id(2), helpstring("property Lemma")] HRESULT Lemma([out, retval] BSTR *pVal);
+		[propget, id(3), helpstring("property SyntaxWordNo")] HRESULT SyntaxWordNo([out, retval] long *pVal);
+		[propget, id(4), helpstring("property Poses")] HRESULT Poses([out, retval] long *pVal);
+		[propget, id(5), helpstring("property Grammems")] HRESULT Grammems([out, retval] hyper *pVal);
+	};
+
+	[
+		object,
+		uuid(A6AE5BC7-9CDD-468E-8E10-EA37350A6CEC),
+		dual,
+		helpstring("IComSemNode Interface"),
+		pointer_default(unique)
+	]
+	interface IComSemNode : IDispatch
+	{
+		[propget, id(1), helpstring("property DictType")] HRESULT DictType([out, retval] idlDictTypeEnum *pVal);
+		[propget, id(2), helpstring("property UnitNo")] HRESULT UnitNo([out, retval] WORD *pVal);
+		[propget, id(3), helpstring("property WordsCount")] HRESULT WordsCount([out, retval] long *pVal);
+		[propget, id(4), helpstring("property Words")] HRESULT Words([in] long pos, [out, retval] IComSemWord* *pVal);
+		[propget, id(5), helpstring("property GramCodes")] HRESULT GramCodes([out, retval] BSTR *pVal);
+		[propget, id(7), helpstring("property Grammems")] HRESULT Grammems([out, retval] hyper *pVal);
+		[propget, id(8), helpstring("property ClauseNo")] HRESULT ClauseNo([out, retval] long *pVal);
+		[propget, id(9), helpstring("property Poses")] HRESULT Poses([out, retval] long *pVal);
+		[propget, id(10), helpstring("property RelOperatorsCount")] HRESULT RelOperatorsCount([out, retval] int* pVal);
+		[propget, id(11), helpstring("property RelOperators")] HRESULT RelOperators([in] int Index, [out, retval] BSTR* pVal);
+		[propget, id(12), helpstring("property Prep")] HRESULT Prep([out, retval] BSTR* pVal);
+	};
+	[
+		object,
+		uuid(25C2205C-8D1F-45C1-977E-D7CF7B486A12),
+		dual,
+		helpstring("IComSemRelation Interface"),
+		pointer_default(unique)
+	]
+	interface IComSemRelation : IDispatch
+	{
+		[propget, id(1), helpstring("property SourceNodeNo")] HRESULT SourceNodeNo([out, retval] long *pVal);
+		[propget, id(2), helpstring("property TargetNodeNo")] HRESULT TargetNodeNo([out, retval] long *pVal);
+		[propget, id(3), helpstring("property Name")] HRESULT Name([out, retval] BSTR *pVal);
+		[propget, id(4), helpstring("property WordRealization")] HRESULT WordRealization([out, retval] BSTR* pVal);
+	};
+
+	[
+		object,
+		uuid(6E6815E7-3F0B-4FA2-9B56-FF1C1AC5136A),
+		dual,
+		helpstring("ISemStructure Interface"),
+		pointer_default(unique)
+	]
+	interface ISemStructure : IDispatch
+	{
+		[id(1), helpstring("method InitPresemanDicts")] HRESULT InitPresemanDicts();
+		[id(2), helpstring("method InitSemanDicts")] HRESULT InitSemanDicts();
+		[id(11), helpstring("method GetSyntaxTreeByText")] HRESULT GetSyntaxTreeByText([in] BSTR text, [in] int ClauseVarNo, [out,retval] BSTR* Graph);
+		[propget, id(12), helpstring("property CurrentTime")] HRESULT CurrentTime([out, retval] long *pVal);
+		[propput, id(12), helpstring("property CurrentTime")] HRESULT CurrentTime([in] long newVal);
+		[id(13), helpstring("method FindSituations")] HRESULT FindSituations([in]BSTR text, [in]long UserTreeVariantNo, [in]BSTR PO, [in]long PanicTreeVariantCount, [in]long  UserClauseVariantsCombinationNo, [in] BSTR AllowableLexVars, [out,retval] BSTR* Graph);
+		[id(14), helpstring("method TranslateToEnglish")] HRESULT TranslateToEnglish([out,retval] BSTR* Graph);
+		[id(15), helpstring("method BuildSentence")] HRESULT BuildSentence([out,retval] BSTR* Sentence);
+		
+		[propget, id(16), helpstring("property LastError")] HRESULT LastError([out, retval] BSTR *pVal);
+		[id(19), helpstring("method FindSituationsForNextSentence")] HRESULT FindSituationsForNextSentence([out, retval] BOOL* Result);
+		[id(39), helpstring("method InitializeIndices")] HRESULT InitializeIndices();
+		[propget, id(47), helpstring("property NodesCount")] HRESULT NodesCount([out, retval] long *pVal);
+		[propget, id(48), helpstring("property Nodes")] HRESULT Nodes([in]  long pos, [out, retval] IComSemNode* *pVal);
+		[propget, id(49), helpstring("property RelationsCount")] HRESULT RelationsCount([out, retval] long *pVal);
+		[propget, id(50), helpstring("property Relations")] HRESULT Relations([in] long pos, [out, retval] IComSemRelation* *pVal);
+		[id(42), helpstring("method Stop")] HRESULT Stop();
+		[propget, id(43), helpstring("property ModuleTimeStatistics")] HRESULT ModuleTimeStatistics([out, retval] BSTR *pVal);
+		[propget, id(44), helpstring("property ShouldBuildTclGraph")] HRESULT ShouldBuildTclGraph([out, retval] BOOL *pVal);
+		[propput, id(44), helpstring("property ShouldBuildTclGraph")] HRESULT ShouldBuildTclGraph([in] BOOL newVal);
+		[propget, id(51), helpstring("property SilentMode")] HRESULT SilentMode([out, retval] BOOL* pVal);
+		[propput, id(51), helpstring("property SilentMode")] HRESULT SilentMode([in] BOOL newVal);
+		[id(52), helpstring("method SyntRusSentence")] HRESULT SyntRusSentence([out,retval] BSTR* Sentence);
+		[id(53), helpstring("method SetLemmasToReplace")] HRESULT SetLemmasToReplace([in] BSTR LemmasToReplace);
+		[id(54), helpstring("method SaveThisSentence")] HRESULT SaveThisSentence(void);
+		[id(55), helpstring("method ClearSavedSentences")] HRESULT ClearSavedSentences(void);
+		[id(56), helpstring("method Answer")] HRESULT Answer([out,retval] BSTR* sAnswer);
+		[propget, id(57), helpstring("property DopRelationsCount")] HRESULT DopRelationsCount([out, retval] long *pVal);
+		[propget, id(58), helpstring("property DopRelations")] HRESULT DopRelations([in] long pos, [out, retval] IComSemRelation* *pVal);
+	};
+
+[
+	uuid(BD87FBF9-4917-4C26-A85C-1B4E86D39066),
+	version(1.0),
+	helpstring("seman 1.0 Type Library")
+]
+library SEMANLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(DE070989-F926-404D-B5EC-5790E28E12F3),
+		helpstring("SemStructure Class")
+	]
+	coclass SemStructure
+	{
+		[default] interface ISemStructure;
+	};
+
+	[
+		uuid(2FA2ACDC-1A64-448F-BACE-EB5AE4122271),
+		helpstring("ComSemNode Class")
+	]
+	coclass ComSemNode
+	{
+		[default] interface IComSemNode;
+	};
+	[
+		uuid(2E3267A1-D488-4904-8030-61929CB1E58C),
+		helpstring("ComSemWord Class")
+	]
+	coclass ComSemWord
+	{
+		[default] interface IComSemWord;
+	};
+	[
+		uuid(576AB855-E069-4C26-844B-72F9D0DF2BA9),
+		helpstring("ComSemRelation Class")
+	]
+	coclass ComSemRelation
+	{
+		[default] interface IComSemRelation;
+	};
+};

@@ -1,0 +1,34 @@
+
+ 
+
+4.2.1 Using a boot floppy
+
+ 
+  Many people boot Linux using a ``boot floppy'' which contains a copy of the Linux kernel. This kernel has the Linux root partition coded into it, so it will know where to look on the hard drive for the root filesystem. (The rdev command can be used to set the root partition in the kernel image; see below.) This is the type of floppy created by Slackware during installation, for example. 
+
+          To create your own boot floppy, first locate the kernel image on your hard disk. It should be in the file /Image or /etc/Image. Some installations use the file /vmlinux for the kernel. 
+
+      You may instead have a compressed kernel. A compressed kernel uncompresses itself into memory at boot time, and takes up much less space on the hard drive. If you have a compressed kernel, it may be found in the file /zImage or /etc/zImage. 
+
+    Once you know where the kernel is, set the root device in the kernel image to the name of your Linux root partition with the rdev command. The format of the command is 
+
+rdev 
+
+where is the name of the kernel image, and is the name of the Linux root partition. For example, to set the root device in the kernel /etc/Image to /dev/hda2, use the command 
+
+# rdev /etc/Image /dev/hda2 
+
+
+rdev can set other options in the kernel as well, such as the default SVGA mode to use at boot time. Just use ``rdev -h'' to get a help message. 
+
+After setting the root device, you can simply copy the kernel image to the floppy. Whenever copying data to a floppy, it's a good idea to MS-DOS format the floppy first. This lays down the sector and track information on the floppy, so it can be detected as either high or low density. 
+
+For example, to copy the kernel in the file /etc/Image to the floppy in /etc/fd0, use the command 
+
+# cp /etc/Image /dev/fd0 
+
+
+This floppy should now boot Linux. 
+
+
+ 

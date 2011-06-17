@@ -1,0 +1,70 @@
+
+%%  ===============  common numeral  chunks   ===============
+
+
+[NUMBER] -> [TOKEN type="DC"] | [TOKEN grm="ZAL"];
+
+[ADV_NUMBER] -> 	[TOKEN grm="ADV" form="mehr"]
+				|	[TOKEN grm="ADV" form="weniger"]
+				|	[TOKEN grm="ADV" form="viel"]
+				|	('mehr' 'oder' 'weniger')
+;
+
+
+[NUMBER_EXT] -> 	[NUMBER] 
+				| 	[MODIF-NUM] 
+				| 	[COMP-NUMBER]
+            	|	[ADV_NUMBER]
+;
+
+
+
+
+%%  ===============  numeral chunks   ===============
+%% Mindestens 43 Menschen 
+%% ungefähr 2 Franken 
+%% höchstens zwei 
+%% bis zu 7 Jahren
+%% etwa sieben Jahren
+%% wenigstens drei Mitgliedern
+%% zirka zwei Milliarden
+%% frühestens drei Monate 
+
+[NUM-MODIF] -> 	'ungefähr' | 'höchstens' | 'etwa' | 'wenigstens' | 'zirka' | 'frühestens' | 'spätestens' | 'mindestens' | 'rund' ;
+
+[NUM-MODIF] -> 'bis' 'zu';
+
+[MODIF-NUM] -> [NUM-MODIF] [NUMBER root];
+
+
+%% ===============   Large Numbers ========================
+
+[COMP-NUMBER] -> [NUMBER] ('tausend' | 'Million' | 'hundert' | ('Mill' '.'));
+
+
+
+
+%%  ===============  coordinating numerals   ===============
+%% einem oder zwei
+%% zwei , vier oder drei
+
+[ZAL_comma] -> [NUMBER_EXT];
+
+[ZAL_comma] -> [TOKEN grm="ART" form="ein"];
+
+[ZAL_comma] -> [ZAL_comma] ',' [NUMBER_EXT];
+
+[NUMBER_EXT] ->  [ZAL_comma] [C-CONJ] [NUMBER_EXT];
+
+
+%% ============ Mantissa ===================
+%% 2.650
+%% 2,650
+
+[NUMBER] -> [TOKEN type="DC"]('.' | ',') [TOKEN type="DC"];
+
+
+%% ============ ordinal numbers  ===================
+%% Das 5. Corps
+
+[NUMBER_EXT] -> [TOKEN type="DC"] '.';

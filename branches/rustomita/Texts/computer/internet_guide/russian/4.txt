@@ -1,0 +1,12 @@
+
+
+11.8 Куда обратиться с вопросами 
+
+Найти обсуждение вопросов, связанных с IRC, можно в группе новостей alt.irc newsgroup . "Обсуждение сетевых компьютерных конференций" ("A Discussion on Computer Network Conferencing") Даррена Рида(Darren Reed) (Май, 1992), дает теоретическую основу для суждений о том, почему системы конференций типа IRC - Хорошая Вещь. К ней можно получить доступ через ftp при nic.ddn.mil в директории rfc по имени rfc1324.txt. 
+
+Каждую пятницу Скотт Геринг (Scott Goehring) помещает новый список MUD и связанных с ними игр, а также их адреса telnet в группе новостей rec.games.mud.announce. Есть еще несколько групп новостей mud, относящихся к определенным типам MUD, в том числеrec.games.mud.social, rec.games.mud.adventure, rec.games.mud.tiny, rec.games.mud.diku и rec.games.mud.lp.
+
+ Хороший обзор впечатлений от Internet Морриса Ворма (Morris Worm) можно прочесть в работе "Вирусы указывают на необходимость улучшения управления Internet" ("Virus Highlights Need for Improved Internet Management"), изданного U.S. General Accounting Office (июнь, 1989). Копию этой работы можно получить по ftp от cert.sei.cmu.edu в директории pub/virus-l/docs. Она там под именем gao_rpt. 
+
+Клиффорд Столл (Clifford Stoll) описывает, как работает Internet и как он по нему отловил группу хакеров из Германии, работавшую на КГБ, в книге "Яйцо кукушки: Выслеживание шпиона в лабиринте компьютерного шпионажа" ("Cuckoo's Egg: Tracking a Spy through the Maze of Computer Espionage,") Даблдей (Doubleday) (1989). 
+

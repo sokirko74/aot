@@ -1,0 +1,28 @@
+2.6  SEVEN UNIX COMMANDS YOU CAN'T LIVE WITHOUT
+
+ 
+If you connect to the Net through a Unix system, eventually you'll have 
+to come to terms with Unix.  For better or worse, most Unix systems do 
+NOT shield you from their inner workings -- if you want to copy a Usenet 
+posting to a file, for example, you'll have to use some Unix commands if 
+you ever want to do anything with that file. 
+
+Like MS-DOS, Unix is an operating system - it tells the computer how to 
+do things.  Now while Unix may have a reputation as being even more 
+complex than MS-DOS, in most cases, a few basic, and simple, commands 
+should be all you'll ever need. 
+
+If your own computer uses MS-DOS or PC-DOS, the basic concepts will seem 
+very familiar -- but watch out for the cd command, which works 
+differently enough from the similarly named DOS command that it will 
+drive you crazy.  Also, unlike MS-DOS, Unix is case sensitive -- if you 
+type commands or directory names in the wrong case, you'll get an error 
+message. 
+
+If you're used to working on a Mac, you'll have to remember that Unix 
+stores files in "directories" rather than "folders."  Unix directories 
+are organized like branches on a tree. At the bottom is the "root" 
+directory, with sub-directories branching off that (and sub-directories 
+in turn can have sub-directories). 
+The Mac equivalent of a Unix subdirectory is a folder within another folder. 
+ 

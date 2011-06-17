@@ -1,0 +1,19 @@
+FreqCollocTypeId;Length;AtomGroups;Relations;Examples;Enabled;LoadTextForm;LanguageId;Groups;
+1#2#"П;С"#"с_опр(2,1)"#"Каспийское море"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);"#
+2#2#"С; С рд"#"упр(1,2)"#"штат США"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,2);"#
+3#1#"С"#""#"Москва"#TRUE#FALSE#1#""#
+4#1#"П"#""#"австрийский"#TRUE#FALSE#1#""#
+5#1#"ADJECTIVE"#""#""#TRUE#FALSE#2#""#
+6#1#"NOUN"#""#"Moscow"#TRUE#FALSE#2#""#
+7#2#"ADJECTIVE;NOUN"#"subord(2,1)"#"South America"#TRUE#FALSE#2#"ADJ_NOUN(1,2);"#
+9#4#"NOUN;PREP;ADJECTIVE;NOUN"#"subord(1,2);subord(2,4);subord(4,3)"#"Republic of  Southern Africa"#TRUE#FALSE#2#"NP_right(1,4);PP(2,4);ADJ_NOUN(3,4);"#
+10#4#"ADJECTIVE;NOUN;PREP;NOUN"#"subord(2,1);subord(2,3);subord(3,4)"#"Federal Republic of  Germany"#TRUE#FALSE#2#"ADJ_NOUN(1,2);PP(3,4);NP_right(1,4);"#
+12#2#"С;П"#"с_опр(1,2)"#"Река Белая"#TRUE#FALSE#1#"ИГ(1,2);"#
+13#2#"С;С им"#"упр(1,2)"#"Компания Диатех"#TRUE#FALSE#1#"ИГ(1,2);"#
+14#1#"NOUN;NOUN"#""#"President republic"#TRUE#FALSE#2#"NP_left(1,2);"#
+15#1#"Н"#""#"ДАЛЕКО"#TRUE#FALSE#1#""#
+16#1#"ADVERB"#""#"here"#TRUE#FALSE#2#""#
+17#2#"PREP;ADVERB"#"subord(1,2)"#"at home"#TRUE#FALSE#2#"NP_left(1,2);"#
+18#3#"ПРИЧАСТИЕ;С; С рд"#"с_опр(2,1);упр(2,3)"#"Соединенные Штаты Америки"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ГЕНИТ_ИГ(1,3);"#
+19#3#"С;ПРЕДЛ;С"#"упр(1,2);упр(2,3)"#"Ростов на ДОну"#TRUE#FALSE#1#"ИГ(1,3);ПГ(2,3);"#
+20#3#"NOUN;PREP;NOUN"#"subord(1,2);subord(2,3)"#"Rostov on Don"#TRUE#FALSE#2#"NP_right(1,3);NP_left(2,3);"#

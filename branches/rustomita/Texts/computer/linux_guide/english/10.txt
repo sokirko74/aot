@@ -1,0 +1,142 @@
+
+
+ 
+
+3.5 Exploring the File System
+
+   
+
+  The file system is the collection of files and the hierarchy of directories on your system. I promised before to escort you around the filesystem and the time has come. 
+
+You have the skills and the knowledge to make sense out of what I'm saying, and you have a roadmap. (Refer to Figure 3.2.8 on page ). 
+
+First, change to the root directory (cd /), and do an ls -F. You'll probably see these directories: bin, dev, etc, home, install, lib, mnt, proc, root, tmp, user, usr, and var. 
+
+Let's take a look at each of these directories. 
+
+
+    
+/bin 
+	/bin is short for ``binaries'', or executables. This is where many essential system programs reside. Use the command ``ls -F /bin'' to list the files here. If you look down the list you may see a few commands that you recognize, such as cp, ls, and mv. These are the actual programs for these commands. When you use the cp command, you're running the program /bin/cp. 
+
+Using ls -F, you'll see that most (if not all) of the files in /bin have an asterisk (``*'') appended to their filenames. This indicates that the files are executables, as described in Section 3.3.2. 
+
+    
+/dev 
+	Next on our stop is /dev. Take a look, again with ls -F. 
+
+      The ``files'' in /dev are known as device drivers---they are used to access system devices and resources, such as disk drives, modems, memory, and so on. For example, just as you can read data from a file, you can read input from the mouse by accessing /dev/mouse. 
+
+      The filenames beginning with fd are floppy disk devices. fd0 is the first floppy disk drive, fd1 the second. Now, the astute among you will notice that there are more floppy disk devices then just the two I've listed above: they represent specific types of floppy disks. For example, fd1H1440 will access high-density, 3.5" diskettes in drive 1. 
+
+Here is a list of some of the most commonly used device files. Note that even though you may not have some of the devices listed below, the chances are that you'll have entries in /dev for them anyway. 
+
+        
+    * /dev/console refers to the system's console---that is, the monitor connected directly to your system. 
+
+            
+    * The various /dev/ttyS and /dev/cua devices are used for accessing serial ports. For example, /dev/ttyS0 refers to ``COM1'' under MS-DOS. The /dev/cua devices are ``callout'' devices, which are used in conjunction with a modem. 
+
+        
+    * The device names beginning with hd access hard drives. /dev/hda refers to the whole first hard disk, while hda1 refers to the first partition on /dev/hda. 
+
+                
+    * The device names beginning with sd are SCSI drives. If you have a SCSI hard drive, instead of accessing it through /dev/hda, you would access /dev/sda. SCSI tapes are accessed via st devices, and SCSI CD-ROM via sr devices. 
+
+        
+    * The device names beginning with lp access parallel ports. /dev/lp0 refers to ``LPT1'' in the MS-DOS world. 
+
+        
+    * /dev/null is used as a ``black hole''---any data sent to this device is gone forever. Why is this useful? Well, if you wanted to suppress the output of a command appearing on your screen, you could send that output to /dev/null. We'll talk more about this later. 
+
+        
+    * The device names beginning with /dev/tty refer to the ``virtual consoles'' on your system (accessed via by pressing , , and so on). /dev/tty1 refers to the first VC, /dev/tty2 refers to the second, and so on. 
+
+        
+    * The device names beginning with /dev/pty are ``pseudo-terminals''. They are used to provide a ``terminal'' to remote login sessions. For example, if your machine is on a network, incoming telnet logins would use one of the /dev/pty devices. 
+
+    
+/etc 
+	/etc contains a number of miscellaneous system configuration files. These include /etc/passwd (the user database), /etc/rc (the system initialization script), and so on. 
+
+    
+/sbin 
+	sbin is used for storing essential system binaries, to be used by the system administrator. 
+
+    
+/home 
+	/home contains user's home directories. For example, /home/larry is the home directory for the user ``larry''. On a newly-installed system, there may not be any users in this directory. 
+
+    
+/lib 
+	/lib contains shared library images. These files contain code which many programs share in common. Instead of each program containing its own copy of these shared routines, they are all stored in one common place, in /lib. This makes executable files smaller, and saves space on your system. 
+
+    
+/proc 
+	/proc is a ``virtual filesystem'', the files in which are stored in memory, not on the drive. They refer to the various processes running on the system, and allow you to get information about what programs and processes are running at any given time. We'll go into more detail in Section 3.11.1. 
+
+    
+/tmp 
+	Many programs have a need to generate some information and store it in a temporary file. The canonical location for these files is in /tmp. 
+
+    
+/usr 
+	/usr is a very important directory. It contains a number of subdirectories which in turn contain some of the most important and useful programs and configuration files used on the system. 
+
+The various directories described above are essential for the system to operate, but most of the things found in /usr are optional for the system. However, it is those optional things which make the system useful and interesting. Without /usr, you'd more or less have a boring system, only with programs like cp and ls. /usr contains most of the larger software packages and the configuration files which accompany them. 
+
+    
+/usr/X386 
+	/usr/X386 contains The X Window System, if you installed it. The X Window System is a large, powerful graphical environment which provides a large number of graphical utilities and programs, displayed in ``windows'' on your screen. If you're at all familiar with the Microsoft Windows or Macintosh environments, X Windows will look very familiar. The /usr/X386 directory contains all of the X Windows executables, configuration files, and support files. This will be covered in more detail in Section 5.1. 
+
+  
+/usr/bin 
+	/usr/bin is the real warehouse for software on any UNIX system. It contains most of the executables for programs not found in other places, such as /bin. 
+
+    
+/usr/etc 
+	Just as /etc contained miscellaneous system programs and configuration files, /usr/etc contains even more of these utilities and files. In general, the files found in /usr/etc are not essential to the system, unlike those found in /etc, which are. 
+
+    
+/usr/include 
+	/usr/include contains include files for the C compiler. These files (most of which end in .h, for ``header'') declare data structure names, subroutines, and constants used when writing programs in C. Those files found in /usr/include/sys are generally used when programming on the UNIX system level. If you are familiar with the C programming language, here you'll find header files such as stdio.h, which declares functions such as printf(). 
+
+    
+/usr/g++-include 
+	/usr/g++-include contains include files for the C++ compiler (much like /usr/include). 
+
+    
+/usr/lib 
+	/usr/lib contains the ``stub'' and ``static'' library equivalents to the files found in /lib. When compiling a program, the program is ``linked'' with the libraries found in /usr/lib, which then directs the program to look in /lib when it needs the actual code in the library. In addition, various other programs store configuration files in /usr/lib. 
+
+    
+/usr/local 
+	/usr/local is a lot like /usr---it contains various programs and files not essential to the system, but which make the system fun and exciting. In general, those programs found in /usr/local are specialized for your system specifically---that is, /usr/local differs greatly between UNIX systems. 
+
+Here, you'll find large software packages such as (a document formatting system) and Emacs (a large and powerful editor), if you installed them. 
+
+    
+/usr/man 
+	This directory contains the actual man pages. There are two subdirectories for every man page ``section'' (use the command man man for details). For example, /usr/man/man1 contains the source (that is, the unformatted original) for man pages in section 1, and /usr/man/cat1 contains the formatted man pages for section 1. 
+
+    
+/usr/src 
+	/usr/src contains the source code (the uncompiled program) for various programs on your system. The most important thing here is /usr/src/linux, which contains the source code for the Linux kernel. 
+
+    
+/var 
+	/var holds directories that often change in size or tend to grow. Many of those directories used to reside in /usr, but since we are trying to keep it relatively unchangeable, the directories that change often have been moved to /var. Some of those directories are: 
+
+    
+/var/adm 
+	/var/adm contains various files of interest to the system administrator, specifically system logs, which record any errors or problems with the system. Other files record logins to the system, as well as failed login attempts. This will be covered in Chapter 4. 
+
+    
+/var/spool 
+	/var/spool contains files which are to be ``spooled'' to another program. For example, if your machine is connected to a network, incoming mail will be stored in /var/spool/mail, until you read it or delete it. Outgoing or incoming news articles may be found in /var/spool/news, and so on. 
+
+
+  
+
+
+ 

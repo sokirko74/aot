@@ -1,0 +1,44 @@
+1.6 IF YOUR TOWN HAS NO DIRECT ACCESS
+
+If you don't live in an area with a public-access site, you'll still be 
+able to connect to the Net.  Several services offer access through 
+national data networks such as the CompuServe Packet Network and 
+SprintNet, which have dozens, even hundreds of local dial-in numbers 
+across the country.  These include Holonet in Berkeley, Calf., Portal in 
+Cupertino, Calf., the WELL in Sausalito, Calf., Dial 'N CERF in San 
+Diego, Calf., the World in Brookline, Mass., and Michnet in Ann Arbor, 
+Mich.  Dial 'N CERF offers access through an 800 number.  Expect to pay 
+from $2 to $12 an hour to use these networks, above each provider's basic 
+charges.  The exact amount depends on the network, time of day and type 
+of modem you use.  For more information, contact the above services. 
+
+Four other providers deliver Net access to users across the country: 
+
+Delphi, based in Cambridge, Mass., is a consumer-oriented network much 
+like CompuServe or America Online -- only it now offers subscribers 
+access to Internet services. Delphi charges $3 a month for Internet 
+access, in addition to standard charges.  These are $10 a month for four 
+hours of off-peak (non-working hours) access a month and $4 an hour for 
+each additional hour or $20 for 20 hours of access a month and $1.80 an 
+hour for each additional hour.  For more information, call (800) 6954005. 
+
+BIX (the Byte Information Exchange) offers FTP, Telnet and e-mail access 
+to the Internet as part of their basic service. Owned by the same company 
+as Delphi, it also offers 20 hours of access a month for $20.  For more 
+information, call (800) 695-4775.              
+
+PSI, based in Reston, Va., provides nationwide access to Internet 
+services through scores of local dial-in numbers to owners of IBM and 
+compatible computers.  PSILink. which includes access to e-mail, Usenet 
+and ftp, costs $29 a month, plus a one-time $19 registration fee.  
+Special software is required, but is available free from PSI. PSI's 
+Global Dialup Service provides access to telnet for $39 a month plus a 
+one-time $39 set-up fee.  For more information, call (800) 82PSI82 or 
+(703) 620-6651. 
+
+NovX Systems Integration, based in Seattle, Washington, offers full 
+Internet access through an 800 number reachable across the United States. 
+There is a $24. setup fee, in addition to a monthly fee of $19.95 and a 
+$10.5 hourly charge.  For more information, call (206) 447-0800. 
+
+

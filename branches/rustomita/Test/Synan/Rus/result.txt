@@ -1,0 +1,21 @@
+<chunk>
+<input>Test/Synan/Rus/test.txt</input>
+<sent>
+	<synvar>
+		<clause type="ГЛ_ЛИЧН">Мама мыла раму .</clause>
+		<group type="ПРЯМ_ДОП">мыла раму</group>
+	</synvar>
+	<rel name="ПРЯМ_ДОП" gram="дст,пе,нс,прш,жр,ед,"> мыла -> раму </rel>
+	<rel name="ПОДЛ" gram=""> мыла -> Мама </rel>
+</sent>
+<sent>
+	<synvar>
+		<clause type="ГЛ_ЛИЧН">Папа ушел на работу .</clause>
+		<group type="ПГ">на работу</group>
+	</synvar>
+	<rel name="ПГ" gram="вн,"> на -> работу </rel>
+	<rel name="ПОДЛ" gram=""> ушел -> Папа </rel>
+</sent>
+</chunk>
+
+

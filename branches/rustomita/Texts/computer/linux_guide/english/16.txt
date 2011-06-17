@@ -1,0 +1,39 @@
+
+
+ 
+
+3.9.2 Interpreting file permissions
+
+ 
+        Let's look at an example to demonstrate file permissions. Using the ls command with the -l option will display a ``long'' listing of the file, including file permissions. 
+
+/home/larry/foo# ls -l stuff -rw-r--r--   1 larry    users         505 Mar 13 19:05 stuff
+/home/larry/foo# 
+
+
+The first field printed in the listing represents the file permissions. The third field is the owner of the file (larry), and the fourth field is the group to which the file belongs (users). Obviously, the last field is the name of the file (stuff), and we'll cover the other fields later. 
+
+This file is owned by larry, and belongs to the group users. Let's look at the file permissions. The string -rw-r--r-- lists, in order, the permissions granted to the file's owner, the file's group, and everybody else. 
+
+The first character of the permissions string (``-'') represents the type of file. A ``-'' just means that this is a regular file (as opposed to a directory or device driver). The next three letters (``rw-'') represent the permissions granted to the file's owner, larry. The ``r'' stands for ``read'' and the ``w'' stands for ``write''. Thus, larry has read and write permission to the file stuff. 
+
+As we mentioned, besides read and write permission, there is also ``execute'' permission---represented by an ``x''. However, there is a ``-'' here in place of the ``x'', so Larry doesn't have execute permission on this file. This is fine, the file stuff isn't a program of any kind. Of course, because Larry owns the file, he may grant himself execute permission for the file if he so desires. This will be covered shortly. 
+
+The next three characters, r--, represent the group's permissions on the file. The group which owns this file is users. Because only an ``r'' appears here, any user which belongs to the group users may read this file. 
+
+The last three characters, also r--, represent the permissions granted to every other user on the system (other than the owner of the file and those in the group users). Again, because only an ``r'' is present, other users may read the file, but not write to it or execute it. 
+
+Here are some other examples of group permissions. 
+
+-rwxr-xr-x 
+	The owner of the file may read, write, and execute the file. Users in the file's group, and all other users, may read and execute the file. 
+
+-rw------- 
+	The owner of the file may read and write the file. No other user can access the file. 
+
+-rwxrwxrwx 
+	All users may read, write, and execute the file. 
+
+
+
+ 

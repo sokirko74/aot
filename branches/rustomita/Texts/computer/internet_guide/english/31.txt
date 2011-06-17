@@ -1,0 +1,100 @@
+6.2  LIBRARY CATALOGS
+     
+
+Several hundred libraries around the world, from the Snohomish Public 
+Library in Washington State to the Library of Congress are now available 
+to you through telnet. You can use Hytelnet to find their names, telnet 
+addresses and use instructions. 
+
+Why would you want to browse a library you can't physically get to?  Many 
+libraries share books, so if yours doesn't have what you're looking for, 
+you can tell the librarian where he or she can get it.  Or if you live in 
+an area where the libraries are not yet online, you can use telnet to do 
+some basic bibliographic research before you head down to the local 
+branch. 
+
+There are several different database programs in use by online libraries.  
+Harvard's is one of the easier ones to use, so let's try it. 
+
+Telnet to hollis.harvard.edu.  
+                                                                               
+     To select one of the applications above, type its name on the command     
+     line followed by your user ID, and press RETURN.                          
+                    ** HOLLIS DOES NOT REQUIRE A USERID **                     
+                                                                               
+     EXAMPLES:   HOLLIS (press RETURN)  or  HUBS userid (press RETURN)         
+ 
+Type
+ 
+              hollis
+ 
+and hit enter.  You'll see several screens flash by quickly until finally 
+the system stops and you'll get this: 
+ 
+                          WELCOME TO HOLLIS                                    
+              (Harvard OnLine Library Information System)                      
+                                                                               
+ To begin, type one of the 2-character database codes listed below:            
+                                                                               
+        HU      Union Catalog of the Harvard libraries                         
+        OW      Catalog of Older Widener materials                             
+ 
+The first thing to notice is the name of the system: Hollis. Librarians 
+around the world seem to be inordinately found of cutesy, 
+anthropomorphized acronyms for their machines (not far from Harvard, the 
+librarians at Brandeis University came up with Library On-Line User 
+Information Service, or Louis; MIT has Barton). 
+
+If you want to do some general browsing, probably the best bet on the 
+Harvard system is to chose HU, which gets you access to their main 
+holdings, including those of its medical libraries.  Chose that, and 
+you'll see this: 
+                          
+              THE HARVARD UNIVERSITY LIBRARY UNION CATALOG                     
+                                                                               
+ 
+Say you want to see if Harvard has shed the starchy legacy of the 
+Puritans, who founded the school.  Why not see if they have "The Joy of 
+Sex" somewhere in their stacks? Type 
+ 
+               TI Joy of Sex
+ 
+and hit enter. This comes up:
+ 
+
+ 
+Oh, well!  Do they have anything that mentions "sex" in the title?  Try 
+another TI search, but this time just: TI sex.  You get:
+ 
+ 
+If you want to get more information on the first line, type 1 and hit enter.
+ 
+ 
+Most library systems give you a way to log off and return to your host 
+system.  On Hollis, hit escape followed by 
+ 
+          xx
+ 
+One particularly interesting system is the one run by the Colorado 
+Alliance of Research Libraries, which maintains databases for libraries 
+throughout Colorado, the West and even in Boston. 
+
+     Telnet pac.carl.org.
+
+Follow the simple log-in instructions. When you get a menu, type 72 (even 
+though that is not listed), which takes you to the Pikes Peak Library 
+District, which serves the city of Colorado Springs. 
+
+Several years ago, its librarians realized they could use their database 
+program not just for books but for cataloging city records and community 
+information, as well.  Today, if you want to look up municipal ordinances 
+or city records, you only have to type in the word you're looking for and 
+you'll get back cites of the relevant laws or decisions. 
+
+Carl will also connect you to the University of Hawaii library, which, 
+like the one in Colorado Springs, has more than just bibliographic 
+material online.  One of its features is an online Hawaiian almanac that 
+can tell you everything you ever wanted to know about Hawaiians, 
+including the number injured in boogie-board accidents each year (seven). 
+
+

@@ -1,0 +1,23 @@
+2.1.4.2 Получение Slackware из Internet 
+
+
+Версии Slackware Linux на многих FTP-серверах мира. В Приложении C дан список некоторых из них. Мы предлагаем вам найти ближайший к вам FTP-сервер, чтобы минимизировать трафик. Тем не менее есть два главных Linux FTP-архива: sunsite.unc.edu и tsx-11.mit.edu.
+
+ 
+
+
+Версию Slackware можно найти по крайней мере на следующих серверах:
+
+ 
+    * sunsite.unc.edu:/pub/Linux/distributions/slackware 
+    * tsx-11.mit.edu:/pub/linux/packages/slackware 
+    * ftp.cdrom.com:/pub/linux/slackware 
+
+
+
+
+ftp.cdrom.com - это родной сервер Slackware.
+
+ 
+
+

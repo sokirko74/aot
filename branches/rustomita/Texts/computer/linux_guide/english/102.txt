@@ -1,0 +1,12 @@
+
+ 
+
+1.8.5 Monitor and video adapator requirements
+
+ 
+    Linux supports all standard Hercules, CGA, EGA, VGA, IBM monochrome, and Super VGA video cards and monitors for the default text-based interface. In general, if the video card and monitor coupling works under another operating system such as MS-DOS, it should work fine with Linux. Original IBM CGA cards suffer from ``snow'' under Linux, which is not pleasant to use. 
+
+Graphical environments such as the X Window System have video hardware requirements of their own. Instead of listing these requirements here, we relegate the discussion to Section 5.1.1. In short, to run the X Window System on your Linux machine, you will need one of the video cards listed in that section. 
+
+
+ 

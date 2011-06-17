@@ -1,0 +1,84 @@
+3.3  nn COMMANDS
+
+ 
+To mark a specific article for reading, type the letter next to it (in lower 
+case).  To mark a specific article and all of its responses, type the letter 
+and an asterisk, for example: 
+ 
+     a* 
+ 
+To un-select an article, type the letter next to it (again, in lower case). 
+ 
+C               Cancels an article (around the world) that you wrote.  
+                Every article posted on Usenet has a unique ID number.  
+                Hitting a capital C sends out a new message that tells host 
+                systems that receive it to find earlier message and delete 
+                it. 
+ 
+F               To post a public response, or follow-up. If selected while 
+                still on a newsgroup "page", asks you which article to 
+                follow up.  If selected while in a specific article, will 
+                follow up that article. In either case, you'll be asked if 
+                you want to include the original article in yours. Caution:
+                puts you in whatever text editor is your default.
+ 
+N               Goes to the next subscribed newsgroup with unread articles. 
+ 
+P               Goes to the previous subscribed newsgroup with unread 
+                articles. 
+ 
+G news.group    Goes to a specific newsgroup. Can be used to subscribe to 
+                new newsgroups.  Hitting G brings up a sub-menu: 
+ 
+                          u     Goes to the group and shows only un-read 
+                                articles. 
+ 
+                          a     Goes to the group and shows all articles, 
+                                even ones you've already read. 
+ 
+                          s     Will show you only articles with a specific 
+                                subject. 
+ 
+                          n     Will show you only articles from a specific 
+                                person. 
+ 
+M               Mails a copy of the current article to somebody.  You'll be 
+                asked for the recipient's e-mail address and whether you 
+                want to add any comments to the article before sending it 
+                off.  As with F, puts you in the default editor.
+ 
+:post           Post an article. You'll be asked for the name of the group. 
+ 
+Q               Quit, or exit, nn. 
+ 
+U               Un-subscribe from the current newsgroup. 
+ 
+R               Responds to an article via e-mail. 
+ 
+space           Hitting the space bar brings up the next page of articles. 
+ 
+X               If you have selected articles, this will show them to you 
+                and then take you to the next subscribed newsgroup with 
+                unread articles. If you don't have any selected articles, 
+                it marks all articles as read and takes you to the next 
+                unread subscribed newsgroup. 
+ 
+=word           Finds and marks all articles in the newsgroup with a 
+                specific word in the "subject:" line, for example: 
+ 
+                          =modem 
+ 
+Z               Shows you selected articles immediately and then returns 
+                you to the current newsgroup. 
+ 
+?               Brings up a help screen. 
+ 
+<               Goes to the previous page in the newsgroup. 
+ 
+>               Goes to the next page in the newsgroup. 
+ 
+$               Goes to the last page in an article.
+ 
+^               Goes to the first page in an article.
+ 
+ 

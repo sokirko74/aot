@@ -1,0 +1,20 @@
+
+ 
+
+2.3.6 Installing the software
+
+ 
+  
+
+Finally, you are ready to install the software on your system. Every distribution has a different mechanism for doing this. Many distributions have a self-contained program which will step you through the installation. On other distributions, you will have to mount your filesystems in a certain subdirectory (such as /mnt) and copy the software to them by hand. On CD-ROM distributions, you may be given the option to install a portion of the software on your hard drives, and leave most of the software on the CD-ROM. 
+
+Some distributions offer several different ways to install the software. For example, you may be able to install the software directly from an MS-DOS partition on your hard drive, instead of from floppies. Or, you may be able to install over a TCP/IP network via FTP or NFS. See your distribution's documentation for details. 
+
+For example, the Slackware distribution only requires you to create partitions with fdisk, optionally create swap space with mkswap and swapon (if you have 4 megs or less of RAM), and then run the setup program. Setup leads you through a very self-explanatory menu system to install the software. 
+
+Use of setup is described in detail below. 
+
+The exact method used to install the Linux software differs greatly with each distribution. We're hoping that installing the Linux software should be self-explanatory, as it is with most distributions. 
+
+
+ 

@@ -1,0 +1,147 @@
+1.1 READY, SET ...
+
+The world is just a phone call away.  With a computer and modem, you'll 
+be able to connect to the Internet, the world's largest computer network 
+(and if you're lucky, you won't even need the modem; many colleges and 
+companies now give their students or employees direct access to the 
+Internet). 
+
+The phone line can be your existing voice line -- just remember that if 
+you have any extensions, you (and everybody else in the house or office) 
+won't be able to use them for voice calls while you are connected to the 
+Net. 
+
+A modem is a sort of translator between computers and the phone system. 
+It's needed because computers and the phone system process and transmit 
+data, or information, in two different, and incompatible ways.  Computers 
+"talk" digitally; that is, they store and process information as a series 
+of discrete numbers.  The phone network relies on analog signals, which 
+on an oscilloscope would look like a series of waves.  When your computer 
+is ready to transmit data to another computer over a phone line, your 
+modem converts the computer numbers into these waves (which sound like a 
+lot of screeching) -- it "modulates" them.  In turn, when information 
+waves come into your modem, it converts them into numbers your computer 
+can process, by "demodulating" them. 
+
+Increasingly, computers come with modems already installed. If yours 
+didn't, you'll have to decide what speed modem to get.  Modem speeds are 
+judged in bits per second or "bps."  One bps means the modem can 
+transfer roughly one bit per second; the greater the bps rate, the more 
+quickly a modem can send and receive information.  A letter or character 
+is made up of eight bits.  You can now buy a 14,400-bps modem for under 
+$100 -- and most now come with the ability to handle fax messages as 
+well.  For under $300, you can buy a modem that can transfer data at 
+28,800 bps (and often even faster, using special compression techniques).  
+If you think you might be using the Net to transfer large numbers of 
+files, a faster modem is always worth the price. It will dramatically 
+reduce the amount of time your modem or computer is tied up transferring 
+files and, if you are paying for Net access by the hour, will save you 
+quite a bit in online charges. 
+
+Like the computer to which it attaches, a modem is useless without 
+software to tell it how to work.  Most modems today come with easy-toinstall software that will let you connect not only to the Internet but 
+other services, such as bulletin-board systems and many commercial online 
+networks, such as CompuServe.  Try the program out. If you find it 
+difficult to use or understand, consider a trip to the local software 
+store to find a better program.  You can spend several hundred dollars on 
+a communications program, but unless you have very specialized needs, 
+this will be a waste of money, as there are a host of excellent programs 
+available for around $100 or less.  Among the basic features you want to 
+look for are a choice of different "protocols" (more on them in a bit) 
+for transferring files to and from the Net and the ability to write 
+"script" or "command" files that let you automate such steps as logging 
+into a host system. 
+
+When you buy a modem and the software, ask the dealer how to install 
+and use them.  Try out the software if you can.  If the dealer can't help 
+you, find another dealer.  You'll not only save yourself a lot of 
+frustration, you'll also have practiced the prime Internet directive:  
+"Ask. People Know."
+
+In addition to the software that comes with your modem, you can now also 
+buy special software kits for getting onto the internet -- at least, if 
+you use Windows or a Macintosh. Some of these work only with a particular 
+Internet provider; others let you connect to the provider of your choice.  
+There are both advantages and disadvantages to these packages; we'll 
+look at these programs in a little more detail in Chapter 9.  This guide 
+is geared more toward folks using older style software, such as Procomm, 
+Crosstalk and Zterm, but even if you use one of the newer all-in-one 
+internet access kits,  many of the things described in coming chapters 
+will generally be good to know (you never know when you'll find yourself 
+stuck in a room with only an MS-DOS computer). 
+ 
+To take full Take advantage of the Net, you must spend a few minutes 
+going over the manuals or documentation that comes with your software.  
+There are a few things you should pay special attention to: uploading and 
+downloading; screen capturing (sometimes called "screen dumping"); 
+logging; how to change protocols; and terminal emulation.  It is also 
+essential to know how to convert a file created with your word processing 
+program into "ASCII" or "text" format, which will let you share your 
+thoughts with others across the Net. 
+
+Uploading is the process of sending a file from your computer to a 
+system on the Net. Downloading is retrieving a file from somewhere on the 
+Net to your computer. In general, things in cyberspace go "up" to the Net 
+and come "down" to you. 
+
+Chances are your software will come with a choice of several METHODS 
+to use for these transfers.  These different methods are systems designed 
+to ensure that line noise or static does not cause errors that could ruin 
+whatever information you are trying to transfer.  Essentially, when using 
+a protocol, you are transferring a file in a series of pieces.  After 
+each piece is sent or received, your computer and the Net system compare 
+it. If the two pieces don't match exactly, they transfer it again, until 
+they agree that the information they both have is identical.  If, after 
+several tries, the information just doesn't make it across, you'll either 
+get an error message or your screen will freeze (at which point you get 
+out the computer manual to see how to re-boot).  In that case, try it 
+again.  If, after five tries, you are still stymied, something is wrong 
+with a) the file; b) the telephone line; c) the system you're connected 
+to; or d) your own computer. 
+
+From time to time, you will likely see messages on the Net that you want 
+to save for later viewing -- a recipe, a particularly witty remark, 
+something you want to write your congressman about, whatever. This is 
+where screen capturing and logging come in. 
+
+When you tell your communications software to capture a screen, it opens 
+a file in your computer (usually in the same directory or folder used by 
+the software) and "dumps" an image of whatever happens to be on your 
+screen at the time. 
+
+Logging works a bit differently.  When you issue a logging command, you 
+tell the software to open a file (again, usually in the same directory or 
+folder as used by the software) and then give it a name. Then, until you 
+turn off the logging command, everything that scrolls on your screen is 
+copied into that file, sort of like recording on videotape.  This is 
+useful for capturing long documents that scroll for several pages -- 
+using screen capture, you would have to repeat the same command for each 
+new screen. 
+
+Terminal emulation is a way for your computer to mimic, or emulate, the 
+way other computers put information on the screen and accept commands 
+from a keyboard.  In general, most systems on the Net use a system called 
+VT100.  Fortunately, almost all communications programs now on the market 
+support this system as well -- make sure yours does.                  
+
+You'll also have to know about protocols.  There are several different 
+ways for computers to transmit characters.  Fortunately, there are only 
+two protocols that you're likely to run across: 8-1-N (which stands for 
+"8 bits, 1 stop bit, no parity" -- yikes!) and 7-1-E (7 bits, 1 stop bit, 
+even parity).  The latter is fairly rare these days, except on some 
+older systems, such as CompuServe (which, as of this writing, does not 
+offer full Internet access anyway).  What if you don't know what kind of 
+system you're connecting to?  Try one of the settings.  If you get what 
+looks like gobbledygook when you connect, you may need the other setting.  
+If so, you can either change the setting while connected, and then hit 
+enter, or hang up and try again with the other setting.  It's also 
+possible your modem and the modem at the other end can't agree on the 
+right bps rate.  If changing the protocols doesn't work, try using 
+another bps rate (but no faster than the one listed for your modem). 
+Don't worry, remember, you can't break anything!  If something looks 
+wrong, it probably is wrong.  Change your settings and try again.  
+Nothing is learned without trial, error and effort. 
+
+There are the basics.  Now on to the Net! 
+
+

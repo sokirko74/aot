@@ -1,0 +1,19 @@
+
+ 
+
+5.3.3.3 Dynamic IP address SLIP connections using dip
+
+ 
+      If your SLIP server allocates an IP address dynamically, then you certainly don't know your address in advance---therefore, you can't include an entry for it in /etc/hosts. (You should, however, include an entry for your host with the loopback address, 127.0.0.1.) 
+
+Many SLIP servers print your IP address (as well as the server's address) when you connect. For example, one type of SLIP server prints a string such as, 
+
+Your IP address is 128.253.154.44. 
+Server address is 128.253.154.2. 
+
+dip can capture these numbers from the output of the server and use them to configure the SLIP device. 
+
+See Section 5.3.3.1, above, for information on configuring your various TCP/IP files for use with SLIP. Below, we explain how to configure dip to connect to the SLIP server. 
+
+
+ 

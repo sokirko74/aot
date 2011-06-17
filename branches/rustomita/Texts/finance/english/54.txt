@@ -1,0 +1,210 @@
+
+        Payments System
+
+        The payments system as a sum total of
+        organisational forms, instruments and procedures
+        facilitating the circulation of money is of great
+        importance for the implementation of an effective
+        monetary policy by the Bank of Russia. The
+        settlements procedure, forms and rules in the
+        Russian Federation are binding on all economic
+        agents, enterprises, organisations and private
+        individuals. The forms of non-cash settlements are
+        determined by the Civil Code of the Russian
+        Federation.
+
+        The main forms of non-cash settlements are payments
+        orders; payment claims (for collection) are used
+        less frequently and letters of credit and cheques
+        are even less common.
+
+        A part of settlements by legal entities and natural
+        persons is implemented by means of payment cards,
+        which are gaining ever wider acceptance. Commercial
+        banks issue their own payment cards, Russian system
+        cards (STB Card, Union Card and Zolotaya Korona)
+        and international payment cards, such as VISA,
+        Eurocard/MasterCard, Diners Club, JCB and American
+        Express.
+
+        The Bank of Russia sees to it that the system of
+        settlements functions smoothly, rapidly and
+        reliably. Most payments are made through the Bank
+        of Russia settlements system. Statistics for
+        October 1997 indicate that there were 1,490 cash
+        settlement centres and other Bank of Russia
+        institutions in Russia, which provided cash
+        settlement services for 1,756 credit organisations
+        and their 4,584 branches and kept the accounts of
+        the budgets of all levels, state extra-budgetary
+        funds, federal treasury bodies and other legal
+        entities in the cases stipulated by applicable
+        legislation.
+
+        The Bank of Russia has put out a Bank
+        Identification Code Directory for the Russian
+        Federation (Spravochnik BIK RF), which contains the
+        names of credit organisations participating in
+        settlements, their bank identification codes, their
+        correspondent accounts in the Bank of Russia,
+        addresses and other data. The Directory is
+        regularly updated.
+
+        The credit organisations located in the Russian
+        Federation (resident credit organisations) and
+        having Central Bank licence to conduct banking
+        operations can open only one correspondent account
+        in one of the Bank of Russia institutions (a cash
+        settlement centre or operation division), which
+        services them. The branches of credit organisations
+        have correspondent subaccounts, but some branches
+        make settlements through the parent bank's
+        correspondent account only.
+
+        To effect non-cash settlements legal entities and
+        natural persons open accounts in commercial banks
+        and in some cases legal entities may open accounts
+        in Bank of Russia institutions. Settlements between
+        clients of one bank and those of another and their
+        settlements with the budget and extrabudgetary
+        funds are made through correspondent accounts only.
+        As for the settlements between the clients of one
+        bank, they are effected by debiting or crediting to
+        the clients' accounts, bypassing the bank's
+        correspondent account. Settlements between the
+        banks located in one city or banks serviced by one
+        computer centre are often effected through the
+        mutual settlements account. All information on the
+        settlement documents, processed in a commercial
+        bank in accordance with the established procedure,
+        is loaded into a computer. The bank's correspondent
+        account in a cash settlement centre only registers
+        the balance of the operations conducted. Such
+        settlements are a kind of local clearing.
+
+        Settlements between the cash settlement centres on
+        operations by credit organisations and their own
+        operations are made through the interbranch
+        turnover accounts (MFO), and the MFO letter of
+        advice is the instrument of interbranch
+        settlements.
+
+        The correctness of the settlements made by the cash
+        settlement centres is confirmed by matching the
+        initial and reply turnovers in the process of
+        offsetting, that is, comparing each reply entry
+        with the initial entry. Payments are made provided
+        that there is money in the correspondent accounts
+        and within the amount kept in the account. Should a
+        bank fall short of funds, the priority in which
+        money is debited to the correspondent accounts for
+        creditworthy clients' payments and for the bank's
+        own payments is established by the Civil Code of
+        the Russian Federation. In that case, unpaid
+        settlement documents are placed in a file with the
+        bank's correspondent account.
+
+        Payments are made by mail or by telegraph (paper
+        method) and by electronic mail (paperless method).
+        The share of electronic payments increases in
+        number and sum of documents passed due to decrease
+        in share of the postal and telegraphic payments.
+
+        In accordance with the Federal Law on the Central
+        Bank of the Russian Federation (Bank of Russia),
+        the non-cash settlement term must not exceed two
+        operating days inside a constituent territory of
+        the Russian Federation and five operating days
+        within the Russian Federation. A part of interbank
+        settlements, such as the settlements of
+        multi-branch banks, including the settlements
+        involved in a re-distribution of credit resources,
+        are conducted between the parent bank and its
+        branches and between bank branches, these
+        settlements being recorded in their on-balance
+        accounts. Intrabank settlements are rapidly gaining
+        ground. Interbank settlements are also made through
+        correspondent accounts opened with other banks. The
+        procedure for opening such accounts and the
+        operating conditions of the correspondent account
+        of one bank with another bank are established by
+        agreement between the banks. The operations
+        conducted with the correspondent accounts of the
+        correspondent banks are divided into two major
+        categories: the operations based on the servicing
+        of clients and the interbank operations proper. The
+        former include the operations in the clients'
+        commercial transactions; the latter comprise credit
+        operations, transactions in buying and selling
+        currencies, funds trading in the money market, and
+        so on. The banks that have a developed
+        correspondent network can effect settlements with
+        maximum speed and they create their own settlement
+        systems. The development of correspondent relations
+        depends on various factors: mutual payment flows,
+        the price of credits and demand for them in the
+        market, the possibility of participating in trading
+        at the regional currency exchanges, etc.
+        Settlements between the correspondent banks account
+        for a large part of Russia's entire payments
+        turnover. A large part of settlements with CIS and
+        other foreign banks is effected by this means.
+        Settlements through clearing houses is yet another
+        means of interbank settlements. There are two
+        underlying models of clearing operations. One model
+        does not require the participating banks to deposit
+        funds in advance in their accounts in a clearing
+        institution. In this case it is the Central Bank
+        that makes the final settlement. The other model
+        requires that the participating banks deposit funds
+        in advance in their accounts with a clearing
+        institution. The settling agent in this case is the
+        clearing institution.
+
+        The Clearing House of the Interbank Finance House
+        is to begin operating in 1997 in Moscow using the
+        first model. Statistics for October 1997 indicate
+        that there were seven clearing institutions
+        operating in accordance with the second model and
+        nearly 200 credit organisations, branches and other
+        legal entities carried out settlements though them.
+        At present the share of settlements conducted
+        through them is small. The Bank of Russia plays a
+        leading role in elaborating the principles of
+        organising clearing operations and monitors
+        compliance with these principles.
+
+        The strategy for the development of the national
+        payments system in Russia, formulated in 1996,
+        envisages a series of long-term and medium-term
+        measures. These include the creation of a
+        settlements system operating in real time, that is,
+        transition to a qualitatively new method of
+        transmitting banking information, the development
+        of non-governmental settlement and clearing systems
+        with the corresponding regulation and supervision
+        of their activities, the establishment of
+        procedures for standardising and certifying banking
+        technologies, and creation of conditions for
+        introducing settlements by payment (plastic) cards.
+        The main objective of the Methodology and
+        Organisation of Settlements Department is to ensure
+        efficient and uninterrupted functioning of the
+        settlements system on the basis of a single policy
+        on non-cash settlements.
+
+        This Department is concerned with non-cash
+        settlements effected in roubles on the territory of
+        the Russian Federation and it works out the rules,
+        forms, deadlines and standards of non-cash
+        settlements and supervises the passage of
+        operations through the Bank of Russia settlement
+        network. For this purpose the Department develops
+        the methods of identifying the participants in
+        settlements, examines the payments turnover and
+        analyses the state of the various settlement and
+        payment systems.
+
+        Latest update on December 29, 1997.
+
+

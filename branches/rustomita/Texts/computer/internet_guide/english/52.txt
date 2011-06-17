@@ -1,0 +1,33 @@
+10.7  THE ALL KNOWING ORACLE
+
+
+One other thing you can do through e-mail is consult with the Usenet 
+Oracle.  You can ask the Oracle anything at all and get back an answer 
+(whether you'll like the answer is another question). 
+
+First, you'll want to get instructions on how to address the Oracle (he, 
+or she, or it, is very particular about such things and likes being 
+addressed in august, solemn and particularly sycophantic tones).  Start 
+an e-mail message to 
+ 
+     oracle@iuvax.cs.indiana.edu 
+ 
+In the "subject:" line, type 
+ 
+     help 
+  
+and hit enter.  You don't actually have to say anything in the message 
+itself -- at least not yet.  Hit control-D to send off your request 
+for help.  Within a few hours, the Oracle will mail you back detailed 
+instructions.  It's a fairly long file, so before you start reading 
+it, turn on your communications software's logging function, to save 
+it to your computer (or save the message to a file on your host system's 
+home directory and then download the file).  After you've digested it, 
+you can compose your question to the Oracle.  Mail it to the above 
+address, only this time with a subject line that describes your 
+question.  Expect an answer within a couple of days. And don't be 
+surprised if you also find a question in your mailbox -- the Oracle 
+extracts payment by making seekers of knowledge answer questions as 
+well!
+
+

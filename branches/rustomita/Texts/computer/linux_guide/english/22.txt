@@ -1,0 +1,24 @@
+ 
+
+3.11.1 Jobs and processes
+
+ 
+   
+
+  Job control is a feature provided by many shells (Bash and Tcsh included) which allows you to control multiple running commands, or jobs, at once. Before we can delve much further, we need to talk about processes. 
+
+      Every time you run a program, you start what is known as a process---which is just a fancy name for a running program. The command ps displays a list of currently running processes. Here's an example: 
+
+/home/larry# ps   PID TT STAT  TIME COMMAND 
+   24  3 S     0:03 (bash) 
+  161  3 R     0:00 ps
+/home/larry# 
+
+  The PID listed in the first column is the process ID, a unique number given to every running process. The last column, COMMAND, is the name of the running command. Here, we're only looking at the processes which Larry is currently running. These are bash (Larry's shell), and the ps command itself. As you can see, bash is running concurrently with the ps command. bash executed ps when Larry typed the command. After ps is finished running (after the table of processes is displayed), control is returned to the bash process, which displays the prompt, ready for another command. 
+
+  A running process is known as a job to the shell. The terms process and job are interchangeable. However, a process is usually referred to as a ``job'' when used in conjunction with job control---a feature of the shell which allows you to switch between several independent jobs. 
+
+In most cases users are only running a single job at a time---that being whatever command they last typed to the shell. However, using job control, you can run several jobs at once, switching between them as needed. How might this be useful? Let's say that you're editing a text file and need to suddenly interrupt your editing and do something else. With job control, you can temporarily suspend the editor, and back at the shell prompt start to work on something else. When you're done, you can start the editor back up, and be back where you started, as if you never left the editor. This is just one example. There are many practical uses for job control. 
+
+
+ 

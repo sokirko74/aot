@@ -1,0 +1,37 @@
+2.3  PINE -- AN EVEN BETTER WAY
+
+Pine is based on elm but includes a number of improvements that make it 
+an ideal mail system for beginners.   Like elm, pine starts you with a 
+menu.  It also has an "address book" feature that is handy for people 
+with long or complex e-mail addresses. Hitting A at the main menu puts 
+you in the address book, where you can type in the person's first name 
+(or nickname) followed by her address. Then, when you want to send that 
+person a message, you only have to type in her first name or nickname, 
+and Pine automatically inserts her actual address. The address book 
+also lets you set up a mailing list.  This feature allows you to send the 
+same message to a number of people at once. 
+
+What really sets Pine apart is its built-in text editor, which looks and 
+feels a lot more like word-processing programs available for MS-DOS and 
+Macintosh users.  Not only does it have word wrap (a revolutionary 
+concept if ever there was one), it also has a spell-checker and a search 
+command. Best of all, all of the commands you need are listed in a twoline mini-menu at the bottom of each screen.  The commands look like 
+this: 
+ 
+     ^W Where is 
+ 
+The little caret is a synonym for the key marked "control" on your 
+keyboard.  To find where a particular word is in your document, hit 
+control-w (depress your control key, then hit w) you'd hit your control 
+key and your W key at the same time, which would bring up a prompt asking 
+you for the word to look for.  Some of Pine's commands are a tad peculiar 
+(control-V for "page down" for example), which comes from being based on 
+a variant of the emacs text processor (which is utterly peculiar).  But 
+again, all of the commands you need are listed on that two-line minimenu, so it shouldn't take you more than a couple of seconds to find the 
+right one.  To use Pine, type 
+ 
+     pine 
+ 
+at the command line and hit enter.                     
+ 
+ 

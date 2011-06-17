@@ -1,0 +1,60 @@
+#########################################
+######## common part  ###################
+#########################################
+
+
+lib_pathes := $(subst ..,-L..,$(subst lib, -l,$(libs)))
+
+# we have to use "--start-group --end-group" in order to solve cross-references
+
+ifeq ($(link_pcre),1)
+	pcre_libs := -L$(RML_PCRE_LIB) -lpcrecpp -L$(RML_PCRE_LIB) -lpcre
+endif
+
+
+libs_argument := -Wl,--start-group $(pcre_libs) $(subst .$(lib_ext),,$(lib_pathes)) -Wl,--end-group
+
+ifndef gcc_ver
+	gcc_ver := $(word 3,$(shell gcc --version))
+	dot := .
+	empty:=
+	space:= $(empty) $(empty)
+	tmp1 := $(subst $(dot),$(space),$(gcc_ver))
+	gcc_version_mm := $(word 1,$(tmp1)).$(word 2,$(tmp1))
+endif
+
+ifeq ($(libmode), static)
+ifeq "$(gcc_version_mm)" "3.2"
+	lib_mode_switch := -all-static
+else
+	lib_mode_switch := 
+endif
+endif
+
+
+
+$(ExeName) : $(objects) $(libs)
+	$(mode_error)
+	g++  $(lib_mode_switch) $(lparams)  $(objects) $(contrib) $(libs_argument) $(stllib)  -o $(ExeName)
+	cp $(ExeName) ../../Bin
+
+$(libs): %$(ct).$(lib_ext) : FORCE
+	$(mode_error)
+	$(MAKE) -C $(dir $@) mode=$(mode) libmode=$(libmode)
+
+$(objects): %.o$(ct) : %.cpp
+	$(mode_error)
+	g++ $(cparams) $< -o $@
+
+
+
+FORCE:
+
+include $(wildcard *.d)
+
+clean: ;
+	-rm $(objects)
+	-rm *.d
+	-rm $(ExeName)
+	-for catal in $(dir $(libs)); do  $(MAKE) -C  $$catal mode=$(mode) clean;  done	
+

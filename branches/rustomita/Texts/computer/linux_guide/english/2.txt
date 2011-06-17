@@ -1,0 +1,28 @@
+
+ 
+
+3.2.7 Files and directories
+
+ 
+  Under most operating systems (UNIX included), there is the concept of a file, which is just a bundle of information which is given a name (called a filename). Examples of files would be your history term paper, an e-mail message, or an actual program which can be executed. Essentially, anything which is saved on disk is saved in an individual file. 
+
+  Files are identified by their filenames. For example, the file containing your history paper might be saved with the filename history-paper. These names usually identify the file and its contents in some form which is meaningful to you. There is no standard format for filenames as there is under MS-DOS and other operating systems; in general, filenames may contain any character (except /---see the discussion of pathnames, below), and are limited to 256 characters in length. 
+
+  With the concept of files comes the concept of directories. A directory is just a collection of files. It can be thought of as a ``folder'' which contains many different files. Directories themselves are given names, with which you can identify them. Furthermore, directories are maintained in a tree-like structure; that is, directories may contain other directories. 
+
+  A file may be referred to by its pathname, which is made up of the filename, preceded by the name of the directory which contains the file. For example, let's say that Larry has a directory called papers, which contains three files: history-final, english-lit, and masters-thesis. (Each of these three files contains information for three of Larry's ongoing projects.) To refer to the file english-lit, Larry can specify the file's pathname: 
+
+papers/english-lit 
+
+
+  As you can see, the directory and file names are separated by a single slash (/). For this reason, filenames themselves cannot contain the / character. MS-DOS users will find this convention familiar, although in the MS-DOS world, the backslash (\) is used instead. 
+
+  As mentioned, directories can be nested within each other as well. For example, let's say that Larry has another directory, within papers, called notes. This directory contains the files math-notes and cheat-sheet. The pathname of the file cheat-sheet would be 
+
+papers/notes/cheat-sheet 
+
+
+    Therefore, the pathname really is a ``path'' which you take to locate a certain file. The directory above a given subdirectory is known as the parent directory. Here, the directory papers is the parent of the notes directory. 
+
+
+ 

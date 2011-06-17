@@ -1,0 +1,68 @@
+5.1  INTERNET MAILING LISTS
+
+
+Usenet is not the only forum on the Net.  Scores of "mailing lists"  
+represent another way to interact with other Net users.  Unlike Usenet 
+messages,  which are stored in one central location on your host system's 
+computer, mailing-list messages are delivered right to your e-mail box. 
+
+You have to ask for permission to join a mailing list -- although 
+in many cases that means only sending a message to a particular computer, 
+which then automatically adds you to the list.  Unlike Usenet, where your 
+message is distributed to the world, on a mailing list, you send your 
+messages to a central moderator, who either re-mails it to the other 
+people on the list or uses it to compile a periodic "digest" mailed to 
+subscribers. 
+
+Given the number of newsgroups, why would anybody bother with a mailing 
+list?  
+ 
+Even on Usenet, there are some topics that just might not generate enough 
+interest for a newsgroup; for example, the Queen list, which is all about 
+the late Freddie Mercury's band.  
+
+And because a moderator decides who can participate, a mailing list can 
+offer a degree of freedom to speak one's mind (or not worry about 
+net.weenies) that is not necessarily possible on Usenet.  Several groups 
+offer anonymous postings -- only the moderator knows the real names of 
+people who contribute. Examples include 12Step, where people enrolled in 
+such programs as Alcoholics Anonymous can discuss their experiences, and 
+sappho, a list limited to gay and bisexual women. 
+
+You can find mailing addresses and descriptions of these lists in the 
+news.announce.newusers newsgroup with the subject of "Publicly Accessible 
+Mailing Lists."  Mailing lists now number in the hundreds, so this 
+posting is divided into several parts.  
+
+If you find a list to which you want to subscribe, send an e-mail message 
+to the listed address, which will often be of the form 
+
+     list-request@address.site 
+
+or
+     
+     majordomo@address.site
+
+(majordomo is a common program used to manage mailing lists). If you're 
+writing to a list-request address, chances are good your message will go 
+to a live person.  Ask to be put on the list and include your e-mail 
+address, just in case something happens to your header.  If it's a 
+majordomo address, you'll typically be told to send a message in this 
+form: 
+
+     subscribe listname
+
+where "listname" is the name of the list.  As with Usenet, it's generally 
+a good idea to "listen" to the messages for a few days before jumping in.  
+once you want to send a message to everybody on the list, send it to 
+
+     listname@address.site
+
+If you want to get off a mailing list, write to the same address you used 
+for subscribing in the first place, only this time, write 
+
+     unsubscribe listname 
+
+substituting the actual name of the mailing list. 
+  
+

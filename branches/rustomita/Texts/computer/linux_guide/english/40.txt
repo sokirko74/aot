@@ -1,0 +1,13 @@
+ 
+
+4.1.5 What it all means
+
+ 
+  We can't tell you how to run your system to the last detail. Most of the philosophy depends on how you're using the system. If you have many users, things are much different than if you only have a few users, or if you're the only user on the system. However, it's always a good idea---in any situation---to understand what being the system administrator really means. 
+
+Being the system administrator doesn't make you a UNIX wizard. There are many system admins out there who know very little about UNIX. Likewise, there are many ``normal'' users out there who know more about UNIX than any system administrator could. Also, being the system administrator does not allow you to use malice against your users. Just because the system gives you the privilege to mess with user files does not mean that you have any right to do so. 
+
+Lastly, being the system administrator is really not a big deal. It doesn't matter if your system is a little 386 or a Cray supercomputer. Running the system is the same, regardless. Knowing the root password isn't going to earn you money or fame. It will allow you to maintain the system, and keep it running. That's it. 
+
+
+ 

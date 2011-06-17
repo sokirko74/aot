@@ -1,0 +1,24 @@
+4.4  SOME USENET HINTS
+
+ 
+Case counts in Unix -- most of the time.  Many Unix commands, including 
+many of those used for reading Usenet articles, are case sensitive.  Hit 
+a d when you meant a D and either nothing will happen, or something 
+completely different from what you expected will happen.  So watch that 
+case! 
+
+In nn, you can get help most of the time by typing a question mark (the 
+exception is when you are writing your own message, because then you are 
+inside the text-processing program).  In rn, type a lower-case h at any 
+prompt to get some online help. 
+
+When you're searching for a particular newsgroup, whether through the l 
+command in rn or with nngrep for nn, you sometimes may have to try 
+several keywords.  For example, there is a newsgroup dedicated to the 
+Grateful Dead, but you'd never find it if you tried, say, l grateful 
+dead, because the name is rec.music.gdead.  In general, try the smallest 
+possible part of the word or discussion you're looking for, for example, 
+use "trek" to find newsgroups about "Star Trek."  If one word doesn't 
+produce anything, try another. 
+
+

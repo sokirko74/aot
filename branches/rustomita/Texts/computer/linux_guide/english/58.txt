@@ -1,0 +1,9 @@
+
+ 
+
+4.8 Managing Filesystems
+
+     Another task of the system administrator is taking care of filesystems. Most of this job entails periodically checking the filesystems for damage or corrupted files; many systems automatically check the filesystems at boot time. 
+
+
+ 

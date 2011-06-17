@@ -1,0 +1,16 @@
+
+ 
+
+3.12 Using the vi Editor
+
+   
+
+      A text editor is simply a program used to edit files which contain text, such as a letter, C program, or a system configuration file. While there are many such editors available for Linux, the only editor which you are guaranteed to find on any UNIX system is vi---
+the ``visual editor''. vi is not the easiest editor to use, nor is it very self-explanatory. However, because it is so common in the UNIX world, and at times you may be required to use it, it deserves some documentation here. 
+
+    Your choice of an editor is mostly a question of personal taste and style. Many users prefer the baroque, self-explanatory and powerful Emacs---an editor with more features than any other single program in the UNIX world. For example, Emacs has its own built-in dialect of the LISP programming language, and has many extensions (one of which is an ``Eliza''-like AI program). However, because Emacs and all of its support files are relatively large, you may not have access to it on many systems. vi, on the other hand, is small and powerful, but more difficult to use. However, once you know your way around vi, it's actually very easy. It's just the learning curve which is sometimes difficult to cross. 
+
+This section is a coherent introduction to vi---we won't discuss all of its features, just the ones you need to know to get you started. You can refer to the man page for vi if you're interested in learning about more of this editor's features. Or, you can read the book Learning the vi Editor from O'Reilly and Associates. See Appendix A for information. 
+
+
+ 

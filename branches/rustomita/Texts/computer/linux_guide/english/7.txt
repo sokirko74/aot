@@ -1,0 +1,11 @@
+3.3.5 Moving files
+
+ 
+      A new command named mv moves files, instead of copying them. The syntax is very straightforward. 
+
+Notice how termcap no longer exists, but in its place is the file sells. This can be used to rename files, as we have just done, but also to move a file to a completely new directory. 
+
+Note: mv and cp will overwrite the destination file (if it already exists) without asking you. Be careful when you move a file into another directory: there may already be a file with the same name in that directory, which you'll overwrite! 
+
+
+ 

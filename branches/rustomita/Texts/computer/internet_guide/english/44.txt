@@ -1,0 +1,116 @@
+8.2  BURROWING DEEPER
+
+
+As fascinating as it can be to explore "gopherspace," you might one day 
+want to quickly retrieve some information or a file.  Or you might grow 
+tired of calling up endless menus to get to the one you want. 
+Fortunately,  there are ways to make even gophers easier to use. 
+
+One is with archie's friend, veronica (it allegedly is an acronym, but 
+don't believe that for a second), who does for gopherspace what archie 
+does for ftp sites. 
+
+In most gophers, you'll find veronica by selecting "Other gopher and 
+information services" at the main menu and then "Searching through 
+gopherspace using veronica."  Select this and you'll get something like 
+this: 
+
+                    Internet Gopher Information Client v1.1
+
+                  Search titles in Gopherspace using veronica
+
+ -->  
+      1.  FAQ:  Frequently-Asked Questions about veronica  (1993/08/23).
+      2.  How to compose  veronica queries (NEW June 24) READ ME!!.
+      3.  Search Gopher Directory Titles at PSINet <?>
+
+
+A few choices there!  First, the difference between searching directory 
+titles and just plain ol' gopherspace.  If you already know the sort of 
+directory you're looking for (say a directory containing MS-DOS 
+programs), do a directory-title search.  But if you're not sure what kind 
+of directory your information might be in, then do a general gopherspace 
+search. In general, it doesn't matter which of the particular veronicas 
+you use -- they should all be able to produce the same results.  The 
+reason there is more than one is because the Internet has become so 
+popular that only one veronica (or one gopher or one of almost anything) 
+would quickly be overwhelmed by all the information requests from around 
+the world.  
+
+You can use veronica to search for almost anything.  Want to find museums 
+that might have online displays from their exhibits?  Try searching for 
+"museum."  Looking for a copy of the Declaration of Independence?  Try 
+"declaration." 
+
+In many cases, your search will bring up a new gopher menu of choices to 
+try. 
+
+Say you want to impress those guests coming over for dinner on Friday by 
+cooking cherries flambe. If you were to call up veronica and type in 
+"flambe" after calling up veronica, you would soon get a menu listing 
+several flambe recipes, including one called "dessert flambe."  Put your 
+cursor on that line of the menu and hit enter, and you'll find it's a 
+menu for cherries flambe.  Then hit your q key to quit, and gopher will 
+ask you if you want to save the file in your home directory on your 
+public-access site or whether you want to e-mail it somewhere. 
+
+As you can see, you can use veronica as an alternative to archie, which, 
+because of the Internet's growing popularity, seems to take longer and 
+longer to work. 
+
+In addition to archie and veronica, we now also have jugheads (no bettys 
+yet, though).  These work the same as veronicas, but their searches are 
+limited to the specific gopher systems on which they reside. 
+
+If there are particular gopher resources you use frequently, there are a 
+couple of ways to get to them even more directly. 
+
+One is to use gopher in a manner similar to the way you can use telnet. 
+If you know a particular gopher's Internet address (often the same as its 
+telnet or ftp address), you can connect to it directly, rather than going 
+through menus.  For example, say you want to use the gopher at 
+info.umd.edu.  If your public-access site has a gopher system installed, 
+type this 
+           
+     gopher info.umd.edu
+
+at your command prompt and you'll be connected.
+     
+But even that can get tedious if there are several gophers you use 
+frequently. That's where bookmarks come in.  Gophers let you create a 
+list of your favorite gopher sites and even database queries.  Then, 
+instead of digging ever deeper into the gopher directory structure, you 
+just call up your bookmark list and select the service you want. 
+
+To create a bookmark for a particular gopher site, first call up gopher.  
+Then go through all the gopher menus until you get to the menu you want.  
+Type a capital A. You'll be given a suggested name for the bookmark enty, 
+which you can change if you want by backspacing over the suggestion and 
+typing in your own.  When done, hit enter.  Now, whenever you're in 
+gopherspace and want to zip back to that particular gopher service, just 
+hit your V key (upper- or lower-case; in this instance, gopher doesn't 
+care) anywhere within gopher.  This will bring up a list of your 
+bookmarks. Move to the one you want and hit enter, and you'll be 
+connected. 
+
+Using a capital A is also good for saving particular database or veronica 
+queries that you use frequently (for example, searching for news stories 
+on a particular topic if your public-access site maintains an indexed 
+archive of wire-service news). 
+
+Instead of a capital A, you can also hit a lower-case a.  This will bring 
+you to the particular line within a menu, rather than show you the entire 
+menu.  
+
+If you ever want to delete a bookmark, hit V within gopher, select the 
+item you want to get rid of, and then hit your D key. 
+
+One more hint: 
+
+If you want to find the address of a particular gopher service, hit your 
+'=' key after you've highlighted its entry in a gopher menu.  You'll get 
+back a couple of lines, most of which will be technicalese of no 
+immediate value to most folks, but some of which will consist of the 
+site's address. 
+
+

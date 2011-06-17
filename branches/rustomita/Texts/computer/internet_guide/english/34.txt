@@ -1,0 +1,44 @@
+6.5  PUTTING THE FINGER ON SOMEONE
+ 
+Finger is a handy little program which lets you find out more about 
+people on the Net -- and lets you tell others on the Net more about 
+yourself. 
+
+Finger uses the same concept as telnet or ftp. But it works with only one 
+file, called .plan (yes, with a period in front).  This is a text file an 
+Internet user creates with a text editor in his home directory.  You can 
+put your phone number in there, tell a little bit about yourself, or 
+write almost anything at all. 
+
+To finger somebody else's .plan file, type this at the command line: 
+ 
+     finger email-address
+ 
+where email-address is the person's e-mail address.  If that person's 
+site allows incoming finger requests (not all do), You'll get back a 
+display that shows the last time the person was online, whether 
+they've gotten any new mail since that time and what, if anything, is 
+in their .plan file.
+
+Some people and institutions have come up with creative uses for these 
+.plan files, letting you do everything from checking the weather in 
+Massachusetts to getting the latest baseball standings.  Try fingering 
+these e-mail addresses: 
+ 
+weather@cirrus.mit.edu            Latest National Weather Service weather 
+                                  forecasts for regions in Massachusetts.
+ 
+quake@geophys.washington.edu      Locations and magnitudes of recent 
+                                  earthquakes around the world. 
+ 
+jtchern@ocf.berkeley.edu          Current major-league baseball standings and 
+                                  results of the previous day's games.
+ 
+nasanews@space.mit.edu            The day's events at NASA.
+ 
+coke@cs.cmu.edu                   See how many cans of each type of soda
+                                  are left in a particular soda machine
+                                  in the computer-science department of
+                                  Carnegie-Mellon University.
+
+

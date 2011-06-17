@@ -1,0 +1,59 @@
+
+ 
+
+4.4.1 User management concepts
+
+ 
+The system keeps track of a number of pieces of information about each user. They are summarized below. 
+
+    
+username 
+	The username is the unique identifier given to every user on the system. Examples of usernames are larry, karl, and mdw. Letters and digits may be used, as well as the characters ``_'' (underscore) and ``.'' (period). Usernames are usually limited to 8 characters in length. 
+
+      
+user ID 
+	The user ID, or UID, is a unique number given to every user on the system. The system usually keeps track of information by UID, not username. 
+
+    
+group ID 
+	The group ID, or GID, is the ID of the user's default group. In Section 3.9 we discussed group permissions; each user belongs to one or more groups defined by the system administrator. More about this below. 
+
+  
+password 
+	The system also stores the user's encrypted password. The passwd command is used to set and change user passwords. 
+
+  
+full name 
+	The user's ``real name'' or ``full name'' is stored along with the username. For example, the user schmoj may have the name ``Joe Schmo'' in real life. 
+
+    
+home directory 
+	The home directory is the directory in which the user is initially placed at login time. Every user should have his or her own home directory, usually found under /home. 
+
+    
+login shell 
+	The user's login shell is the shell which is started for the user at login time. Examples are /bin/bash and /bin/tcsh. 
+
+
+
+    The file /etc/passwd contains this information about users. Each line in the file contains information about a single user; the format of each line is 
+
+username:encrypted password:UID:GID:full name:home directory:login shell 
+
+An example might be: 
+
+kiwi:Xv8Q981g71oKK:102:100:Laura Poole:/home/kiwi:/bin/bash 
+
+
+As we can see, the first field, ``kiwi'', is the username. 
+
+The next field, ``Xv8Q981g71oKK'', is the encrypted password. Passwords are not stored on the system in any human-readable format. The password is encrypted using itself as the secret key. In other words, you need to know the password to decrypt it. This form of encryption is fairly secure. 
+
+Some systems use ``shadow password'' in which password information is relegated to the file /etc/shadow. Because /etc/passwd is world-readable, /etc/shadow provides some degree of extra security because it is not. Shadow password provides some other features such as password expiration and so on; we will not go into these features here. 
+
+The third field, ``102'', is the UID. This must be unique for each user. The fourth field, ``100'', is the GID. This user belongs to the group numbered 100. Group information, like user information, is stored in the file /etc/group. See Section 4.4.5 for more information. 
+
+The fifth field is the user's full name, ``Laura Poole''. The last two fields are the user's home directory (/home/kiwi) and login shell (/bin/bash), respectively. It is not required that the user's home directory be given the same name as the username. It does help identify the directory, however. 
+
+
+ 

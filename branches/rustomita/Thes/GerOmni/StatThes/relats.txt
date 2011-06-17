@@ -1,0 +1,3 @@
+Concept1Id;Concept2Id;RelationId;Concept2CutStr;
+100000#100001#10#"DI"#
+100001#100000#30#"OR"#

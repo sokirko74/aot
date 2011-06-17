@@ -1,0 +1,65 @@
+2.7  WHEN THINGS GO WRONG                  
+ 
+     
+* You send a message but get back an ominous looking message from 
+MAILER-DAEMON containing up to several dozen lines of computerese 
+followed by your message.  
+
+Somewhere in those lines you can often find a clue to what went 
+wrong.  You might have made a mistake in spelling the e-mail address.  
+The site to which you're sending mail might have been down for 
+maintenance or a problem. You may have used the wrong "translation" for 
+mail to a non-Internet network. 
+
+* You call up your host system's text editor to write a message or reply 
+to one and can't seem to get out.  
+
+If it's emacs, try control-X, control-C DELETE(in other words, hit your 
+control key and your X key at the same time, followed by control and C).  
+If worse comes to worse, you can hang up. 
+
+* In elm, you accidentally hit the D key for a message you want to save.  
+
+Type the number of the message, hit enter and then U, which will "undelete" the message.  This works only before you exit Elm; once you quit, 
+the message is gone. 
+
+* You try to upload an ASCII message you've written on your own computer 
+into a message you're preparing in Elm or Pine and you get a lot of left 
+brackets, capital Ms, Ks and Ls and some funny-looking characters.  
+
+Believe it or not, your message may actually wind up looking fine; all 
+that garbage is temporary and reflects the problems some Unix text 
+processors have with ASCII uploads.  But it will take much longer for 
+your upload to finish.  One way to deal with this is to call up the 
+simple mail program, which will not produce any weird characters when you 
+upload a text file into a message.  Another way (which is better if your 
+prepared message is a response to somebody's mail), is to create a text 
+file on your host system with cat, for example, 
+ 
+     cat>file
+ 
+and then upload your text into that.  Then, in elm or pine, you can 
+insert the message with a simple command (control-R in pine, for 
+example); only this time you won't see all that extraneous stuff. 
+     
+*  You haven't cleared out your Elm mailbox in awhile, and you 
+accidentally hit "y" when you meant to hit "n" (or vice-versa) when 
+exiting and now all your messages have disappeared.
+
+The system has put all the messages in a file called received in your 
+Mail directory.  To get to the messages, call up Elm again, and hit your 
+c key.  You'll be asked which folder to change to.  Type 
+
+     =received
+
+and hit enter.  You'll be prompted as if you're about to exit Elm; when 
+done answering the questions, you'll get a menu of messages in your 
+receive folder.  You can reply to them, delete them, etc., as you would 
+normally. 
+
+
+
+
+
+
+

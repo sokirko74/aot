@@ -1,0 +1,1261 @@
+============
+TITLE        = 176730
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : вольфрамовый
+RESTR   =  ед !
+============
+TITLE        = 176744
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : германиевый
+============
+TITLE        = 176746
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : гипсовый
+============
+TITLE        = 176753
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176754
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : топливный
+RESTR   =  ед !
+VAL     =  PURP , A1 , C
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  DEV
+GF2     = 1  прим_опр : И
+============
+TITLE        = 176765
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : каменный
+============
+TITLE        = 176766
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : йодный
+============
+TITLE        = 176770
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : железный
+============
+TITLE        = 176771
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : железобетонный
+RESTR   =  ед !
+============
+TITLE        = 176773
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176775
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 | земляной
+RESTR   =  ед !
+============
+TITLE        = 176777
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176779
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : золотой
+============
+TITLE        = 176781
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : известковый
+============
+TITLE        = 176783
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : изотопный
+============
+TITLE        = 176787
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176790
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : иридиевый
+RESTR   =  ед !
+============
+TITLE        = 176792
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : иттриевый
+RESTR   =  ед !
+============
+TITLE        = 176794
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : йодный
+RESTR   =  ед !
+============
+TITLE        = 176796
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : кадмиевый
+RESTR   =  ед !
+============
+TITLE        = 176798
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : калийный
+============
+TITLE        = 176800
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : кальциевый
+RESTR   =  ед !
+============
+TITLE        = 176805
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : картонный
+RESTR   =  ед !
+============
+TITLE        = 176807
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : керосиновый
+RESTR   =  ед !
+============
+TITLE        = 176809
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : кислородный
+RESTR   =  ед !
+============
+TITLE        = 176811
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : кобальтовый
+RESTR   =  ед !
+============
+TITLE        = 176813
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176815
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : коксовый
+RESTR   =  ед !
+============
+TITLE        = 176817
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : лантановый
+============
+TITLE        = 176819
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : латунный
+RESTR   =  ед !
+============
+TITLE        = 176820
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 | лекарственный
+VAL     =  PURP , A1 , C
+GF1     = 1  к_доп : от+Р
+SF1     = 1  PREDIC
+============
+TITLE        = 176822
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : литиевый
+============
+TITLE        = 176824
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : магниевый
+RESTR   =  ед !
+============
+TITLE        = 176826
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : мазутный
+============
+TITLE        = 176829
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : марганцевой
+           A0 : марганцевый
+RESTR   =  ед !
+============
+TITLE        = 176831
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  мн !
+============
+TITLE        = 176834
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : медный
+RESTR   =  ед !
+============
+TITLE        = 176836
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 | металлический
+============
+TITLE        = 176846
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : молибденовый
+============
+TITLE        = 176848
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : мраморный
+RESTR   =  ед !
+============
+TITLE        = 176853
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 | наркотический
+============
+TITLE        = 176855
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : натриевый
+RESTR   =  ед !
+============
+TITLE        = 176861
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 | нефтяной
+           CausFunc0 : добыча
+============
+TITLE        = 176862
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  CausFunc0 : production 1
+============
+TITLE        = 176863
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176865
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : ниобиевый
+RESTR   =  ед !
+============
+TITLE        = 176867
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : нитратный
+============
+TITLE        = 176872
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : оловянный
+RESTR   =  ед !
+============
+TITLE        = 176874
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176876
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : палладиевый
+RESTR   =  ед !
+============
+TITLE        = 176878
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : пестицидный
+============
+TITLE        = 176883
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : пластмассовый
+============
+TITLE        = 176885
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : платиновый
+RESTR   =  ед !
+============
+TITLE        = 176886
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : плутониевый
+RESTR   =  ед !
+============
+TITLE        = 176890
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : поливинилхлоридный
+RESTR   =  ед !
+============
+TITLE        = 176892
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : полимерный
+============
+TITLE        = 176894
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : полистирольный
+RESTR   =  ед !
+============
+TITLE        = 176896
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : полиэтиленовый
+RESTR   =  ед !
+============
+TITLE        = 176898
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176900
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : радиевый
+RESTR   =  ед !
+============
+TITLE        = 176902
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : радиоизотопный
+============
+TITLE        = 176904
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : радоновый
+============
+TITLE        = 176906
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  IDENT , C , A1
+           FOR , C , A2
+GF1     = 1  прим_опр : И
+GF2     = 1  к_доп : Р
+          2  к_доп : для+Р
+EXM     =  растворитель  646
+           растворитель краски
+============
+TITLE        = 176910
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : резиновый
+============
+TITLE        = 176913
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : ртутный
+============
+TITLE        = 176917
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : рубиновый
+============
+TITLE        = 176919
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : рудный
+============
+TITLE        = 176923
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : сапфировый
+============
+TITLE        = 176925
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : свинцовый
+RESTR   =  ед !
+============
+TITLE        = 176927
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : серебряный
+RESTR   =  ед !
+============
+TITLE        = 176929
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176935
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : спиртовой
+============
+TITLE        = 176938
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : стальной
+============
+TITLE        = 176940
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : стеклянный
+============
+TITLE        = 176946
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176948
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  Real : вносить
+VAL     =  IDENT , A1 , C
+GF1     = 1  прим_опр : И
+============
+TITLE        = 176951
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176955
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : твердотопливный
+============
+TITLE        = 176959
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : титановый
+RESTR   =  ед !
+============
+TITLE        = 176961
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 176963
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : тротиловый
+RESTR   =  ед !
+============
+TITLE        = 176965
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : углеводородный
+============
+TITLE        = 176967
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : угольный
+============
+TITLE        = 176975
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : урановый
+RESTR   =  ед !
+============
+TITLE        = 176977
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : фарфоровый
+============
+TITLE        = 176979
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : фаянсовый
+RESTR   =  ед !
+============
+TITLE        = 176981
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : ферросплавный
+============
+TITLE        = 176983
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : фосфорный
+RESTR   =  ед !
+============
+TITLE        = 176985
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : фтористый
+RESTR   =  ед !
+============
+TITLE        = 176991
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  мн !
+============
+TITLE        = 176997
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : хлебный
+CAT     = 1  LABL.OBJ
+VAL     =  RESTR , A1 , C
+GF      = 1  СУЩ:ИГ
+GF1     = 1  к_доп : из+Р
+============
+TITLE        = 176998
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+VAL     =  RESTR , A1 , C
+GF1     = 1  NP_attr
+============
+TITLE        = 177004
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 177006
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+============
+TITLE        = 177008
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : целлюлозный
+============
+TITLE        = 177010
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : цементный
+RESTR   =  ед !
+============
+TITLE        = 177012
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : цементобетонный
+RESTR   =  ед !
+============
+TITLE        = 177014
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : цинковый
+============
+TITLE        = 177015
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : циркониевый
+RESTR   =  ед !
+============
+TITLE        = 177017
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : чугунный
+============
+TITLE        = 177019
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : шиферный
+RESTR   =  ед !
+============
+TITLE        = 177020
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : щелочный
+============
+TITLE        = 177025
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  ед !
+LF      =  A0 : янтарный
+============
+TITLE        = 177028
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 177032
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+AUX     =  ACT ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 177479
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  SPHERE , A1 , C
+GF1     = 1  к_доп : по+Д
+============
+TITLE        = 177480
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  SPHERE , A1 , C
+GF1     = 1  NP_attr
+============
+TITLE        = 177509
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+DETERM  =  -
+CAT     = 1  LABL.OBJ
+SF      = 1  ANIM
+             SOC
+             PROF
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP_attr
+SF1     = 1  NAME
+GF2     = 1  NP_poss
+SF2     = 1  ANIM
+          2  ANIM
+============
+TITLE        = 177816
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  SPHERE , A1 , C
+GF1     = 1  к_доп : по+Д
+SF1     = 1  EMPL
+          2  ABSTR
+============
+TITLE        = 177817
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  SPHERE , A1 , C
+GF1     = 1  of+NP
+SF1     = 1  EMPL
+          2  ABSTR
+============
+TITLE        = 177980
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  ! BELNG , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  COLLEC
+             ANIM
+          2  MULTI
+============
+TITLE        = 178017
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  CONTNR
+VAL     =  PURP , A1 , C
+GF1     = 1  к_доп : для+Р
+SF1     = 1  SITUAT
+          2  THINGN
+============
+TITLE        = 178018
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  CONTNR
+VAL     =  PURP , A1 , C
+GF1     = 1  for+NP
+          2  for+gerund
+SF1     = 1  SITUAT
+          2  THINGN
+============
+TITLE        = 178091
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  LOK
+             ARTEF
+             CONTNR
+VAL     =  BELNG , C , A1
+           MATER , A2 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  ORG
+GF2     = 1  к_доп : из+Р
+SF2     = 1  SUBST
+LF      =  CausFunc0 : строить
+           CausFunc0 : возводить
+============
+TITLE        = 178092
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  CONTNR
+VAL     =  BELNG , C , A1
+           PURP , A2 , C
+GF2     = 1  for+gerund
+          2  for+NP
+SF1     = 1  ORG
+GF1     = 1  NP_poss
+          2  PN_poss
+SF2     = 1  SITUAT
+============
+TITLE        = 178118
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  CONTNR
+VAL     =  BELNG , C , A1
+           PURP , A2 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  ORG
+GF2     = 1  к_доп : для+Р
+SF2     = 1  SITUAT
+============
+TITLE        = 178133
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  PURP , A1 , C
+GF1     = 1  к_доп : для+Р
+SF1     = 1  SITUAT
+============
+TITLE        = 178237
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+SF      = 1  ORG
+VAL     =  IDENT , A1 , C
+GF1     = 1  прим_опр : И
+============
+TITLE        = 178455
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  MULTI , C , A1
+           BELNG , C , A2
+GF1     = 1  к_доп : Р_мн
+SF1     = 1  SPEC
+GF2     = 1  к_доп : Р
+SF2     = 1  STAT
+          2  ORG
+LF      =  Oper1 : входить в+В
+           Oper1 : быть членом
+============
+TITLE        = 179015
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  CausFunc0 : включить
+           LiquFunc0 : выключить
+============
+TITLE        = 179347
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  BELNG , C , A1
+           SPEC , A2 , C
+           IDENT , A3 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  ORG
+GF2     = 1  к_доп : по+Д
+SF2     = 1  EMPL
+          2  PREDIC
+GF3     = 1  прим_опр : И
+          2  прим_опр : квч
+SF3     = 1  NAME
+============
+TITLE        = 179454
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+VAL     =  SPHERE , A1 , C
+GF1     = 1  к_доп : по+Д
+SF1     = 1  SITUAT
+============
+TITLE        = 179455
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+VAL     =  SPHERE , A1 , C
+GF1     = 1  of+NP
+SF1     = 1  SITUAT
+============
+TITLE        = 179577
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : федеративный
+           A0 : федеральный
+============
+TITLE        = 179578
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  A0 : federal
+============
+TITLE        = 179583
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  COLLEC
+VAL     =  MULTI , C , A1
+           BELNG , C , A2
+GF1     = 1  к_доп : Р_мн
+SF1     = 1  MEDINF
+          2  THINGN
+          3  LOK
+          4  FIN
+GF2     = 1  к_доп : Р
+SF2     = 1  STAT
+          2  ANIM
+============
+TITLE        = 179584
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+SF      = 1  COLLEC
+VAL     =  MULTI , C , A1
+           BELNG , C , A2
+GF1     = 1  of+NP
+SF1     = 1  MEDINF
+          2  THINGN
+          3  LOK
+          4  FIN
+GF2     = 1  of+NP
+SF2     = 1  STAT
+          2  ANIM
+============
+TITLE        = 179612
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  BELNG , A1 , C
+GF1     = 1  к_доп : Р
+============
+TITLE        = 179628
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL
+GF      = 1  ПРИЛ:с_опр
+SF      = 1  A0 ( дециметр )
+             UNIT
+VAL     =  ESTIM , C , A1
+GF1     = 1  X! : ИГ
+SF1     = 1  PARAM
+          2  THINGN
+============
+TITLE        = 179647
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  PURP , A1 , C
+GF1     = 1  к_доп : Р
+          2  к_доп : для+Р
+SF1     = 1  ANIM
+============
+TITLE        = 179648
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  PURP , A1 , C
+GF1     = 1  of+NP
+          2  for+NP
+SF1     = 1  ANIM
+============
+TITLE        = 179672
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  PURP , A1 , C
+GF1     = 1  for+gerund
+SF1     = 1  SITUAT
+============
+TITLE        = 179674
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  мн !
+============
+TITLE        = 179675
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  к_доп : ИГ
+============
+TITLE        = 179689
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  Oper1 : осуществлять
+           Bon : бесперебойный
+           Bon : надежный
+============
+TITLE        = 179693
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+GF      = 1  СУЩ:ИГ
+VAL     =  BELNG , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТМ
+SF1     = 1  ANIM
+============
+TITLE        = 179771
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  AUTHOR , A1 , C
+           SPHERE , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТМ
+SF1     = 1  STAT
+          2  ANIM
+LEX1    =  суд
+GF2     = 1  к_доп : по+Д
+LEX2    =  дело
+GF3     = 1  к_доп : о+П
+          2  прим_опр : квч
+============
+TITLE        = 179777
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  LEGISL
+VAL     =  BELNG , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  STAT
+          2  LOK
+============
+TITLE        = 179778
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL
+GF      = 1  NOUN
+SF      = 1  INF
+          2  SOC
+VAL     =  BELNG , C , A1
+GF1     = 1  of+NP
+SF1     = 1  STAT
+          2  LOK
+============
+TITLE        = 179783
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  AUTHOR , A1 , C
+           ADR , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  к_доп : Р
+          2  к_доп : от+Р
+          3  с_опр : ПРИТ_МЕСТМ
+SF1     = 1  ANIM
+          2  NAME
+GF2     = 1  к_доп : Д
+          2  к_доп : для+Р
+GF3     = 1  к_доп : о+П
+============
+TITLE        = 179784
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  AUTHOR , A1 , C
+           ADR , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  of+NP
+          2  -
+GF2     = 1  to+NP
+          2  -
+GF3     = 1  about+NP
+          2  -
+============
+TITLE        = 179795
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : квч
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТМ
+============
+TITLE        = 179796
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP_attr
+GF2     = 1  NP_poss
+============
+TITLE        = 179798
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+EXM     =  его рассказ о путешествии
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  AUTHOR , A1 , C
+           IDENT , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  ANIM
+GF2     = 1  прим_опр : И
+SF2     = 1  NAME
+GF3     = 1  к_доп : о+П
+SF3     = 1  ANIM
+          2  SITUAT
+============
+TITLE        = 179799
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+EXM     =  его рассказ о путешествии
+CAT     = 1  LABL.OBJ
+GF      = 1  VERB
+VAL     =  AUTHOR , A1 , C
+           IDENT , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  NP_poss
+          2  PN_poss
+SF1     = 1  ANIM
+GF2     = 1  NP_attr
+SF2     = 1  NAME
+GF3     = 1  about+NP
+SF3     = 1  ANIM
+          2  SITUAT
+============
+TITLE        = 179811
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  AUTHOR , A1 , C
+           CONTEN , A2 , C
+           IDENT , A3 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТМ
+SF1     = 1  ANIM
+          2  ORG
+GF2     = 1  к_доп : о+П
+          2  к_доп : по+Д
+GF3     = 1  прим_опр : квч
+          2  прим_опр : ЦБК
+============
+TITLE        = 179816
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  PURP , A1 , C
+GF1     = 1  к_доп : для+Р
+SF1     = 1  THINGN
+============
+TITLE        = 179818
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  Oper1 : заниматься
+============
+TITLE        = 179846
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+SF      = 1  DEV
+             COLLEC
+VAL     =  BELNG , C , A1
+           PURP , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТМ
+SF1     = 1  LOK
+          2  CONTNR
+          3  ORG
+GF2     = 1  к_доп : для+Р
+SF2     = 1  SITUAT
+LF      =  CausFunc0 : снабжать
+           CausFunc0 : устанавливать
+============
+TITLE        = 179856
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  мн !
+============
+TITLE        = 179857
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+RESTR   =  мн !
+============
+TITLE        = 179864
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+LF      =  Oper1 : приходиться
+============
+TITLE        = 179931
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  PURP , A1 , C
+GF1     = 1  к_доп : для+Р
+SF1     = 1  SITUAT
+============
+TITLE        = 179934
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  к_доп : Р
+LEX1    =  #STAT
+AUX     =  ACT ( A3 , A1 )
+           PROPERT ( A2 , A3 )
+============
+TITLE        = 179937
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+AUX     =  ACT ( A2 , A1 )
+============
+TITLE        = 179941
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+VAL     =  BELNG , C , A1
+GF1     = 1  NP_poss
+SF1     = 1  STAT
+============
+TITLE        = 179948
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL
+VAL     =  BELNG , C , A1
+GF1     = 1  к_доп : Р
+LEX1    =  Земля
+============
+TITLE        = 179949
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL
+VAL     =  BELNG , C , A1
+GF1     = 1  NP_poss
+============
+TITLE        = 179959
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  к_доп : Р
+LEX1    =  #STAT
+AUX     =  SPHERE ( C2 , C1 )
+============
+TITLE        = 179960
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+DETERM  =  the
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  of+NP
+LEX1    =  #STAT
+============
+TITLE        = 179961
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  к_доп : Р
+LEX1    =  #STAT
+AUX     =  ACT ( A3 , A1 )
+           PROPERT ( A2 , A3 )
+============
+TITLE        = 179962
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+VAL     =  BELNG , C , A1
+GF1     = 1  NP_poss
+SF1     = 1  STAT
+============
+TITLE        = 179963
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  к_доп : Р
+LEX1    =  #STAT
+AUX     =  ACT ( A3 , A1 )
+           PROPERT ( A2 , A3 )
+============
+TITLE        = 179964
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+CAT     = 1  LABL.OBJ
+VAL     =  BELNG , C , A1
+GF1     = 1  NP_poss
+SF1     = 1  STAT
+============
+TITLE        = 179965
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  к_доп : Р
+LEX1    =  #STAT
+AUX     =  ACT ( A3 , A1 )
+           PROPERT ( A2 , A3 )
+============
+TITLE        = 179966
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  к_доп : Р
+LEX1    =  #STAT
+AUX     =  SPHERE ( C2 , C1 )
+============
+TITLE        = 179967
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+DETERM  =  the
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  of+NP
+LEX1    =  #STAT
+============
+TITLE        = 179968
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+DETERM  =  the
+VAL     =  ! BELNG , A1 , C
+GF1     = 1  of+NP
+LEX1    =  #STAT
+============
+TITLE        = 179974
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+AUX     =  PARAM ( C3 , C2 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 179987
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:34:19
+AUX     =  PROPERT ( C1 , C2 )
+           IDENT ( C3 , C2 )
+============
+TITLE        = @Модель1
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:34:19
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = @Модель3
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:34:19
+COMM    =  словарная статья для существительного
+GF      = 1  СУЩ:ИГ
+============
+TITLE        = @Модель4
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:34:19
+COMM    =  словарная статья для прилагательного
+CAT     = 1  LABL.PROPERT
+VAL     =  PROPERT , C , A1
+GF      = 1  ПРИЛ:с_опр
+GF1     = 1  X! : ИГ
+SF1     = 1  SITUAT
+          2  THINGN
+          3  ANIM

@@ -1,0 +1,618 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>АОТ :: Технологии :: Графематика: программный интерфейс</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+		<link href="../aot.css" rel="stylesheet" type="text/css">
+	</head>
+	<body bgcolor="#f3f3f3" text="#000000" link="#000000" vlink="#999999" alink="#000000">
+		<a name="top"></a>
+		<table border="0" align="center" cellpadding="1" cellspacing="0">
+			<tr>
+				<td bgcolor="#666666"><table width="760" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+						<tr>
+							<td><table border="0" cellspacing="0" cellpadding="5">
+									<tr>
+										<td width="30">&nbsp;</td>
+										<td><font size="+7" face="Arial, Helvetica, sans-serif"><b>АОТ</b></font></td>
+										<td width="40">&nbsp;</td>
+										<td valign="baseline"><font size="+1" face="Arial, Helvetica, sans-serif"> Автоматическая 
+												Обработка Текста</font></td>
+									</tr>
+								</table>
+								<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+									<tr>
+										<td height="4"><img src="../images/transparent.gif" width="1" height="4"></td>
+									</tr>
+								</table>
+								<table width="760" border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td valign="top"><table border="0" cellspacing="0" cellpadding="20">
+												<tr>
+													<td class="text">
+														<p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a>
+																<a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.shtml">
+																	скачать</a> <a href="/onlinedemo.html">&nbsp;демо</a> <a href="/technology.html">
+																	<b>технологии</b></a> <a href="/links.html">ссылки</a> <a href="/forum/viewall.asp">
+																	форум</a> <a href="../cgi-bin/forum.cgi?board=forum&amp;action=index">гостевая</a>
+																<a href="/search.html">поиск</a>&nbsp; <a href="#top" title="наверх">^</a></font></p>
+														<table width="720" border="0" cellpadding="3" cellspacing="0" bgcolor="#cccccc">
+															<tr>
+																<td class="titleblack">Графематика</td>
+															</tr>
+														</table>
+														<table width="720" border="0" align="center" cellpadding="0" cellspacing="0">
+															<tr>
+																<td height="7"><img src="../images/transparent.gif" width="1" height="7"></td>
+															</tr>
+															<tr>
+																<td height="2" bgcolor="#000000"><img src="../images/transparent.gif" width="1" height="2"></td>
+															</tr>
+															<tr>
+																<td height="7"><img src="../images/transparent.gif" width="1" height="7"></td>
+															</tr>
+														</table>
+														<p><a href="#1">1. Общее описание</a></p>
+														<p><a href="#2">2. Входные и выходные данные</a></p>
+														<p><a href="#3">3. Графематические дескрипторы</a></p>
+														<p><a href="#4">4. Деление на предложения</a></p>
+														<p><a href="Graphan/index.html">5. Описание COM-Interface</a></p>
+														<p>&nbsp;</p>
+														<table width="720" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td class="titleblack"><a name="1" id="1"></a> 1. Общее описание</td>
+																<td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+															</tr>
+														</table>
+														<p>Графематический анализ (ГрафАн) 
+															-&nbsp;это&nbsp;программа&nbsp;начального&nbsp;анализа естественного 
+															текста,&nbsp;представленного в&nbsp;виде цепочки 
+															ASCII&nbsp;символов,&nbsp;вырабатывающая&nbsp;информацию,&nbsp;необходимую для 
+															дальнейшей обработки Морфологическим&nbsp; и Синтаксическим процессорами. В 
+															задачу графематического анализа входят:</p>
+														<ol>
+															<li>
+															Разделение входного текста на слова, разделители и т.д.
+															<li>
+															Сборка слов, написанных в разрядку;
+															<li>
+															Выделение устойчивых оборотов, не имеющих словоизменительных вариантов;
+															<li>
+															Выделение ФИО (фамилия, имя, отчество), когда имя и отчество написаны 
+															инициалами;
+															<li>
+															Выделение электронных адресов и имен файлов;
+															<li>
+															Выделение предложений из входного текста;
+															<li>
+																Выделение абзацев, заголовков, примечаний.</li>
+														</ol>
+														<p>&nbsp;Графематический анализ оформлен как СОM-объект, для которого создано 
+															описание на языке idl.
+														</p>
+														<p>&nbsp;</p>
+														<table width="720" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td class="titleblack"><a name="2" id="2"></a>2. Входные и выходные данные</td>
+																<td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+															</tr>
+														</table>
+														<p>На вход графематике подается файл плайн-текста в Windows-кодировке. На выходе 
+															графематика строит таблицу, состоящую из двух столбцов. В первом 
+															столбце&nbsp;стоит некоторый кусок входного текста (выделенный по правилам, о 
+															которых мы скажем ниже), во втором столбце стоят графематические дескрипторы, 
+															характеризующие этот кусок текста. Например,&nbsp;из текста "Иван спал" будет 
+															построена таблица из трех строк</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr align="center" bgcolor="#cccccc">
+																<td><b> Кусок входного текста</b></td>
+																<td><b> Графематические дескрипторы</b></td>
+															</tr>
+															<tr>
+																<td width="300">
+																	Иван</td>
+																<td>
+																	RLE Aa NAM?</td>
+															</tr>
+															<tr>
+																<td width="300">
+																	спал</td>
+																<td>
+																	RLE aa SENT_END</td>
+															</tr>
+														</table>
+														<p>
+															В первый&nbsp;столбец всегда помещается часть входного текста. Если входные 
+															символы являются последовательностью из мягких разделителей (пробел, табуляция, 
+															возврат каретки), тогда используются другие символы, номера которых включены в 
+															описание на языке idl.</p>
+														<p>&nbsp;</p>
+														<table width="720" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td class="titleblack"><a name="3" id="3"></a>3. Графематические дескрипторы</td>
+																<td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+															</tr>
+														</table>
+														<p>Сначала приведем перечень главных дескрипторов, один из которых обязательно 
+															должен присутствовать на каждой строке графематической таблицы.
+														</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr bgcolor="#cccccc">
+																<td width="64" align="center"><b> Название</b></td>
+																<TD align="center"><STRONG>Русское название<A name="1"></A></STRONG></TD>
+																<td align="center"><b> Объяснение</b></td>
+																<td width="130" align="center"><b> Примеры</b></td>
+															</tr>
+															<tr>
+																<td width="64" valign="top">
+																	RLE</td>
+																<TD>ЛЕ</TD>
+																<td>
+																	русская лексема, присваивается последовательностям, состоящим из кириллицы</td>
+																<td width="130" valign="top">
+																	<i>Иван</i></td>
+															</tr>
+															<tr>
+																<td width="64" valign="top">
+																	LLE</td>
+																<TD>ИЛЕ</TD>
+																<td>
+																	иностранная лексема, присваивается&nbsp;последовательностям из латиницы</td>
+																<td width="130" valign="top">
+																	<i>John</i></td>
+															</tr>
+															<tr>
+																<td width="64" valign="top">
+																	DEL</td>
+																<TD>РЗД</TD>
+																<td>
+																	разделитель.
+																</td>
+																<td width="130" valign="top">
+																	"*', '=', '_'<i></i></td>
+															</tr>
+															<tr>
+																<td width="64" valign="top">
+																	PUN</td>
+																<TD>ЗПР</TD>
+																<td>
+																	знак препинания, присваивается последовательностям, состоящим из одинаковых 
+																	знаков препинания</td>
+																<td width="130" valign="top">
+																	".", '[', ']', '(', ')', '-', ':', ';'</td>
+															</tr>
+															<tr>
+																<td width="64" valign="top">
+																	DC</td>
+																<TD>ЦК</TD>
+																<td>
+																	цифровой комплекс, присваивается последовательностям, состоящим из цифр</td>
+																<td width="130" valign="top">
+																	1234</td>
+															</tr>
+															<tr>
+																<td width="64" valign="top">
+																	DSC</td>
+																<TD>ЦБК</TD>
+																<td>
+																	цифро-буквенный комплекс, присваивается последовательностям, состоящим из цифр 
+																	и букв</td>
+																<td width="130" valign="top">
+																	34h</td>
+															</tr>
+															<tr>
+																<td width="62" valign="top">
+																	GRAUNK</td>
+																<TD></TD>
+																<td>
+																	сложный узел, присваивается последовательностям, не обладающим 
+																	вышеперечисленными признаками</td>
+																<td width="130" valign="top">&nbsp;
+																</td>
+															</tr>
+														</table>
+														<p>Разновидности дескриптора DEL</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr>
+																<td width="86">
+																	SPC</td>
+																<TD>ПРБ</TD>
+																<td>
+																	строка пробелов или табуляций</td>
+															</tr>
+															<tr>
+																<td width="86">
+																	EOLN</td>
+																<TD>КСТ</TD>
+																<td>
+																	признак конца строки</td>
+															</tr>
+															<tr>
+																<td width="86">
+																	PAR_SYM</td>
+																<TD></TD>
+																<td>
+																	символ параграфа</td>
+															</tr>
+															<tr>
+																<td width="86">
+																	EMSYM</td>
+																<TD></TD>
+																<td>
+																	нулевой символ</td>
+															</tr>
+														</table>
+														<p>Разновидности дескриптора PUN:</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr>
+																<td width="100">
+																	OPN</td>
+																<td>
+																	открывающая скобка</td>
+																<td width="100">
+																	'{', '[', '('</td>
+															</tr>
+															<tr>
+																<td width="100">
+																	CLS</td>
+																<td>
+																	закрывающая скобка</td>
+																<td width="100">
+																	'}', ']', ')'</td>
+															</tr>
+															<tr>
+																<td width="100">
+																	HYP</td>
+																<td>
+																	дефис</td>
+																<td width="100">
+																	-</td>
+															</tr>
+														</table>
+														<p>Разновидности дескриптора ЗПР и РЗД:</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr>
+																<td width="80">
+																	DPUN</td>
+																<td>
+																	последовательность одинаковых символов, длина которой больше 20</td>
+															</tr>
+															<tr>
+																<td width="80">
+																	PLP</td>
+																<td>
+																	последовательность одинаковых символов, длина которой больше 1</td>
+															</tr>
+														</table>
+														<p>Разновидности дескриптора ЛЕ и ИЛЕ:</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr>
+																<td width="80">
+																	aa</td>
+																<td>
+																	признак того, что все символы лексемы - малые</td>
+																<td width="80">
+																	мама</td>
+															</tr>
+															<tr>
+																<td width="80">
+																	Aa</td>
+																<td>
+																	признак того, что первый символ лексемы - большой;</td>
+																<td width="80">
+																	Мама</td>
+															</tr>
+															<tr>
+																<td width="80">
+																	AA</td>
+																<td>
+																	признак того, что все символы лексемы - большие</td>
+																<td width="80">
+																	МАМА</td>
+															</tr>
+														</table>
+														<p>Теперь опишем дескрипторы, которые появляются на строке в зависимости от 
+															контекста, т.е. они вычисляются не только из текущей строки, но и из номера 
+															текущей строки и строк, которые находятся выше и ниже вычисляемой.</p>
+														<p>Контекстные дескрипторы:</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr>
+																<td width="120">
+																	BEG</td>
+																<td>
+																	ставится на начале текста (входного файла), т.е. всегда стоит на нулевой строке 
+																	таблице. Причем, важно сказать, что нулевая строка таблицы используется как 
+																	служебная ( содержимое первого столбца нулевой строки не входит во входной 
+																	текст)</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	EOP</td>
+																<td>
+																	ставится на конце фразы.Концом фразы считается только ";".</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	SENT_END</td>
+																<td>
+																	конец предложения</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	NAM?</td>
+																<td>
+																	признак того, что лексема, возможно, является частьюимени собственного. 
+																	Присваивается лексеме, начинающейся с большойбуквы и не имеющей перед собой 
+																	символа конца предложения.</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	BUL</td>
+																<td>
+																	ставится на начале пункта перечисления</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	INDENT</td>
+																<td>
+																	ставится на начале абзаца</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	EXPR1</td>
+																<td>
+																	ставится на начале оборота</td>
+																<td width="180">
+																	типа "во взаимодействии с"</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	EXPR2</td>
+																<td>
+																	ставится на конце оборота
+																</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	FAM1</td>
+																<td>
+																	ставится на начале ФИО</td>
+																<td width="180">
+																	типа "Иванов И.И."
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	FAM2</td>
+																<td>
+																	ставится на конце ФИО</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	FILE1</td>
+																<td>
+																	начало имени файла</td>
+																<td width="180">
+																	c:\test.txt</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	FILE1</td>
+																<td>
+																	конец имени файла</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	ABB1</td>
+																<td>
+																	начало&nbsp;сокращения</td>
+																<td width="180">
+																	и т.п.</td>
+															</tr>
+															<tr>
+																<td width="120">
+																	ABB2</td>
+																<td>
+																	конец сокращение</td>
+																<td width="180">&nbsp;
+																</td>
+															</tr>
+															<TR>
+																<TD width="120">KEY1</TD>
+																<TD>начало последовательности обозначений клавиш&nbsp;</TD>
+																<TD width="180">Ctrl-F</TD>
+															</TR>
+															<TR>
+																<TD width="120">KEY2</TD>
+																<TD>начало последовательности обозначений клавиш</TD>
+																<TD width="180"></TD>
+															</TR>
+															<TR>
+																<TD width="120">EA</TD>
+																<TD>электронный адрес</TD>
+																<TD width="180">
+																	<P><A href="http://www.aot.ru">www.aot.ru</A></P>
+																	<P><A href="mailto:sokirko@yandex.ru">sokirko@yandex.ru</A></P>
+																</TD>
+															</TR>
+														</table>
+														<p>Кроме этого, используются дескрипторы, относящиеся к макросинтаксическому 
+															анализу (анализу расположения абзацев, заголовков). В макросинтакксическом 
+															анализе[1] абзацы, заголовки и т.д. называются условно предложениями (УП). 
+															Макросинтаксические дескрипторы&nbsp;ставятся на конце УП в 2зависимости от 
+															типа УП.</p>
+														<table width="720" border="1" cellpadding="3" cellspacing="0" bordercolor="#cccccc">
+															<tr>
+																<td width="140">
+																	CS?</td>
+																<td>
+																	ставится на конце УП, тип которого не определен
+																</td>
+															</tr>
+															<tr>
+																<td width="140">
+																	CS</td>
+																<td>
+																	ставится на конце простого УП
+																</td>
+															</tr>
+															<tr>
+																<td width="140">
+																	HDNG</td>
+																<td>
+																	ставится на конце заголовка</td>
+															</tr>
+															<tr>
+																<td width="140">
+																	CS_AUX</td>
+																<td>
+																	ставится на конце УП, заключенного в скобки
+																</td>
+															</tr>
+															<tr>
+																<td width="140">
+																	CS_PRNT</td>
+																<td>
+																	ставится на конце УП, заканчивающегося на двоеточие
+																</td>
+															</tr>
+															<tr>
+																<td width="140">
+																	DOC</td>
+																<td>
+																	ставится на нулевой строке графематической таблицы</td>
+															</tr>
+														</table>
+														<p>Все объяснения того, как работает макросинтаксический анализ можно найти в 
+															здесь.</p>
+														<p>&nbsp;</p>
+														<table width="720" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td class="titleblack"><a name="4" id="4"></a>4. Деление на предложения</td>
+																<td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+															</tr>
+														</table>
+														<p>Этот алгоритм работает на графематике, поскольку на результаты его 
+															работы&nbsp;опирается макросинтаксический анализ. На вход алгоритма подается 
+															два числа StartPos и EndPos, которые обозначают&nbsp;первую и последнюю строки 
+															входного текста.</p>
+														<p>
+															Программа ищет конец предложения, а потом после него ищет начало предложения. 
+															Алгоритм&nbsp;основывается на следующих постулатах:</p>
+														<ol>
+															<li>
+															Начало текста совпадает с началом первого предложения, конец текста – с концом 
+															последнего.
+															<li>
+															Предложение всегда начинается с большой буквы;
+															<li>
+															Предложение не бывает больше одного абазаца.
+															<li>
+																Предложение не может состоять только из знаков препинания.</li>
+														</ol>
+														<p>Определим вспомогательный примитив IsSentenceEndMark. На вход 
+															подается&nbsp;номер строки. Функция возвращает истину, если эта строка содержит 
+															символ "?", "!", "." или многоточие</p>
+														<p>Определим вспомогательный примитив IsSentenceEndSeq. На вход подается&nbsp;номер 
+															строки. Функция возвращает истину в двух следующих случаях:</p>
+														<ol start="1" type="1">
+															<li>
+															Если&nbsp;для этой строки верна функция IsSentenceEndMark; и контактно справа 
+															нет закрывающей кавычки (если предложение закавычено, закрывающая кавычка 
+															входит в это предложение);
+															<li>
+																Если строка является закрывающей кавычкой,&nbsp;а контактно слева стоит строка, 
+																для которой верно IsSentenceEndMark.</li>
+														</ol>
+														<p>Программа делает следующее:</p>
+														<ol start="1" type="1">
+															<li>
+															Пусть i – текущая строка между StartPos и EndPos.
+															<li>
+															Если на строке i стоит помета начала абазаца,&nbsp;тогда нужно пройти назад все 
+															пробелы и длинные разделители&nbsp;(PLP) и дойти до конца предыдущего абзаца. 
+															Если в конце абзаца (до первого слова) стоит строка, которая удовлетворяет 
+															IsSentenceEndSeq, тогда нужно поставить&nbsp;SENT_END этой строке, 
+															иначе&nbsp;нужно поставить SENT_END на конец предыдущего абзаца.
+															<li>
+															Если на строке i стоит помета макросинтаксическая помета УП, тогда&nbsp;нужно 
+															сделать то же самое, что и в пункте 3, только надо учесть, что помета УП 
+															ставится на конце абзаца, а не начале (как в пункте 3).
+															<li>
+															Если до начала текущего предложений стояла открывающая скобка, и текущая строка 
+															указывает на слово до соотв. закрывающей скобки, тогда нужно поставить SENT_END 
+															на закрывающую кавычку, а текущую строку сместить на ближайшее&nbsp;после 
+															закрывающей кавычки слово.
+															<li>
+																Если текущая строка удовлетворяет функции IsSentenceEndSeq и не стоит внутри 
+																графематических групп (FIO1-FIO2 и т.д.), тогда проходим все знаки препинания 
+																от текущей строки. Проверяем, что знак препинания, который заканчивает 
+																предложения, не должен стоять в самом начале строки. Далее ищем первое слово от 
+																текущей строки и считаем его началом нового предложения.&nbsp;</li>
+														</ol>
+														<p>&nbsp;</p>
+														<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+															<tr>
+																<td height="2"><img src="../images/transparent.gif" width="1" height="2"></td>
+															</tr>
+														</table>
+														<p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a>
+																<a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.shtml">
+																	скачать</a> <a href="/onlinedemo.html">&nbsp;демо</a> <a href="/technology.html">
+																	<b>технологии</b></a> <a href="/links.html">ссылки</a> <a href="/forum/viewall.asp">
+																	форум</a> <a href="../cgi-bin/forum.cgi?board=forum&amp;action=index">гостевая</a>
+																<a href="/search.html">поиск</a>&nbsp; <a href="#top" title="наверх">^</a></font></p>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td valign="bottom"><table width="750" border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td>&nbsp;</td>
+													<td align="right"><table border="0" cellspacing="5" cellpadding="0">
+															<tr>
+																<td align="right"><font color="#999999" size="1">Разработка <a href="mailto:simple@mosk.ru">
+																			<font color="#999999">DiP</font></a>.<br>
+																		© 2003 <a href="http://www.aot.ru/"><font color="#999999">АОТ</font></a>. Все 
+																		права защищены.</font></td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td bgcolor="#cccccc"><img src="../images/transparent.gif" width="1" height="1"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#cccccc"><img src="../images/transparent.gif" width="1" height="1"></td>
+				<td bgcolor="#cccccc"><img src="../images/transparent.gif" width="1" height="1"></td>
+			</tr>
+		</table>
+	</body>
+</html>
