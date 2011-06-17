@@ -19,16 +19,22 @@ extern bool	 HasGrammem(const CAgramtab*,  const string&, const size_t&, const Q
 extern bool	 HasOneGrammem(const CAgramtab*,  const string&, const size_t&, const QWORD& );
 extern string CommonCase(const CAgramtab*,  const string&, const string&);
 
+extern string AgreeCase(const CAgramtab*,  const string&, const string&);
+extern string AgreeCaseNumber(const CAgramtab*,  const string&, const string&);
+extern string AgreeCaseNumberGender(const CAgramtab*,  const string&, const string&);
+extern string AgreeNumberGender(const CAgramtab*,  const string&, const string&);
+extern string AgreeCaseNumberGenderAnim(const CAgramtab*,  const string&, const string&);
+extern string AgreeCaseNumberGenderNonAnim(const CAgramtab*,  const string&, const string&);
+
+extern string SetAllCases(const CAgramtab*,  const string&);
+extern string SetNomAccPlural(const CAgramtab*,  const string&);
+
+bool is_relative() { return true; };
 
 bool set_true() {	return true; };
 bool set_false() {	return false; };
 bool is_true(const bool b) {	return b; };
 bool is_false(const bool b) {	return !b; };
-
-
-
-
-
 
 const size_t PossibleAssignFunc0Count = 2;
 pair<string, AssignType0*> PossibleAssignFunc0[PossibleAssignFunc0Count] = {
@@ -36,12 +42,15 @@ pair<string, AssignType0*> PossibleAssignFunc0[PossibleAssignFunc0Count] = {
 	make_pair(string("false"), (AssignType0*)set_false)
 };
 
-
-const size_t PossibleCheckFunc1Count = 3;
+const size_t PossibleCheckFunc1Count = 7;
 pair<string, CheckType1*> PossibleCheckFunc1[PossibleCheckFunc1Count] = {
 	make_pair(string("true"), (CheckType1*)is_true),
 	make_pair(string("false"), (CheckType1*)is_false),
-	make_pair(string("is_atomic"), (CheckType1*)is_true)
+	make_pair(string("is_atomic"), (CheckType1*)is_true),
+    make_pair(string("is_relative"), (CheckType1*)is_true),
+    make_pair(string("is_participle"), (CheckType1*)is_true),
+    make_pair(string("is_nso"), (CheckType1*)is_true),
+    make_pair(string("is_clause"), (CheckType1*)is_true)
 };
 
 const size_t PossibleCheckFunc3Count = 3;
@@ -51,18 +60,26 @@ pair<string, CheckType3*> PossibleCheckFunc3[PossibleCheckFunc3Count] = {
 	make_pair(string("has_one_grm"), (CheckType3*)HasOneGrammem)
 };
 
-const size_t PossibleFunc1Count = 1;
+const size_t PossibleFunc1Count = 3;
 pair<string, AssignType1*> PossibleFunc1[PossibleFunc1Count] = {
-	make_pair(string("convert_to_plural"), (AssignType1*)ConvertToPlural)
+	make_pair(string("convert_to_plural"), (AssignType1*)ConvertToPlural),
+    make_pair(string("set_all_cases"), (AssignType1*)SetAllCases),
+    make_pair(string("set_nomacc_plural"), (AssignType1*)SetNomAccPlural)
 };
 
-const size_t PossibleFunc2Count = 5;
+const size_t PossibleFunc2Count = 11;
 pair<string, AssignType2*> PossibleFunc2[PossibleFunc2Count] = {
 	make_pair(string("common_case_number_gender"), (AssignType2*)CommonCaseNumberGender),
 	make_pair(string("weak_decl"), (AssignType2*)WeakDeclAssignFunction2),
 	make_pair(string("mixed_decl"), (AssignType2*)MixedDeclAssignFunction2),
 	make_pair(string("strong_decl"), (AssignType2*)StrongDeclAssignFunction),
-	make_pair(string("common_case"), (AssignType2*)CommonCase)
+	make_pair(string("common_case"), (AssignType2*)CommonCase),
+    make_pair(string("agrcng"), (AssignType2*)AgreeCaseNumberGender),
+    make_pair(string("agrcnga"), (AssignType2*)AgreeCaseNumberGenderAnim),
+    make_pair(string("agrcngn"), (AssignType2*)AgreeCaseNumberGenderNonAnim),
+    make_pair(string("agrc"), (AssignType2*)AgreeCase),
+    make_pair(string("agrcn"), (AssignType2*)AgreeCaseNumber),
+    make_pair(string("agrng"), (AssignType2*)AgreeNumberGender)
 };
 
 const size_t PossibleFunc3Count = 3;
@@ -127,7 +144,7 @@ bool CRuleFeature::InitFuncName(string s)
 	else
 	{
 		assert  (m_Type == foeCheck);
-		switch (m_RightItems.size()) {
+		switch (m_RightItems.size()) {            
 			case 1:	
 				{
 					for (size_t i=0; i< PossibleCheckFunc1Count; i++)

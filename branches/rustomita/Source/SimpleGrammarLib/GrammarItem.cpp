@@ -1,6 +1,6 @@
 #include "SimpleGrammarLib.h"
 #include "GrammarItem.h"
-
+#include "../common/gra_descr_primitives.h"
 extern string CurrentSourceFileName;
 
 
@@ -124,6 +124,7 @@ void CGrammarItem::InitGrammarItem()
 	m_Token = "";
 	m_ItemStrId = "";
 	m_TokenType = OTHER_TOKEN_TYPE;
+    m_GraDescrs = 0;
 };
 
 CGrammarItem::CGrammarItem()
@@ -153,6 +154,9 @@ bool CGrammarItem::operator <(const CGrammarItem& _X1) const
 	if (m_Register != _X1.m_Register)
 		return m_Register < _X1.m_Register;
 
+    if (m_GraDescrs != _X1.m_GraDescrs)
+		return m_GraDescrs < _X1.m_GraDescrs;
+
 	return m_Attributes < _X1.m_Attributes;
 };
 
@@ -178,7 +182,8 @@ bool CGrammarItem::operator ==(const CGrammarItem& _X1) const
 	bool b =    RuleItemPartialEqual(_X1)
 			&&	m_MorphPattern == _X1.m_MorphPattern
 			&&	m_bCanHaveManyHomonyms == _X1.m_bCanHaveManyHomonyms
-			&&	m_Register == _X1.m_Register;
+			&&	m_Register == _X1.m_Register
+            &&  m_GraDescrs == _X1.m_GraDescrs;
 	return b;
 };
 
@@ -194,6 +199,9 @@ void CGrammarItem::CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item)
 
 	if (Item.m_Register != AnyRegister)
 		m_Register = Item.m_Register;
+
+    if (Item.m_GraDescrs != 0)
+        m_GraDescrs = Item.m_GraDescrs;
 };
 
 
@@ -358,10 +366,16 @@ bool	CGrammarItem::AddAttribute(string Name, string Value, MorphLanguageEnum Lan
 				m_TokenType = (Language == morphRussian) ? RLE : LLE;
 	}
 
+    if (Name == "graf")
+    {
+        string unparsed;
+        m_GraDescrs = parse_gra_descriptors(Value.c_str(), unparsed);
+        return true;
+    }
 
 	m_Attributes[Name] = Value;
 
-	return true;
+    return true;
 };
 
 
@@ -379,8 +393,12 @@ string	CGrammarItem::toString() const
 	Result += Format("%s\x1\n", m_Source.c_str());
 
 	Result += m_MorphPattern.ToString();
-	Result += Format("%i %i %i %i\n", m_bGrammarRoot?1:0, m_bSynMain?1:0, m_bCanHaveManyHomonyms?1:0, (int)m_Register);
-
+	Result += Format("%i %i %i %i", m_bGrammarRoot?1:0, m_bSynMain?1:0, m_bCanHaveManyHomonyms?1:0, (int)m_Register);
+#ifdef WIN32
+	Result += Format(" %I64i\n", m_GraDescrs);
+#else
+    Result += Format(" %lli\n", m_GraDescrs);
+#endif
 	for (map<string, string>::const_iterator i =m_Attributes.begin();  i != m_Attributes.end(); i++)
 		Result += Format(";%s %s", i->first.c_str(),i->second.c_str());
 	Result += ";\n";
@@ -407,6 +425,7 @@ bool	CGrammarItem::fromString(string& Result)
 			char buff2[1024];
 			int iMeta;
 			int iTokenType;
+
 			if (sscanf(line.c_str(),  "%i %s %s %i\n", &iMeta, buff1, buff2, &iTokenType) != 4) 
 				return false;
 			m_bMeta = (bool)iMeta;
@@ -434,14 +453,17 @@ bool	CGrammarItem::fromString(string& Result)
 		};
 		if (LineNo == 5)
 		{
-			int i1, i2,i3, i4;
-			if (sscanf(line.c_str(),  "%i %i %i %i", &i1, &i2, &i3, &i4) != 4) return false;
+    		int i1, i2,i3, i4;
+#ifdef WIN32
+			if (sscanf(line.c_str(),  "%i %i %i %i %I64i", &i1, &i2, &i3, &i4, &m_GraDescrs) != 5) return false;
+#else
+            if (sscanf(line.c_str(),  "%i %i %i %i %lli", &i1, &i2, &i3, &i4, &m_GraDescrs) != 5) return false;
+#endif
 			m_bGrammarRoot = i1==1;
 			m_bSynMain = i2==1;
 			m_bCanHaveManyHomonyms = i3==1;
 			m_Register = (RegisterEnum)i4;
 		};
-
 		if (LineNo == 6)
 		{
 			m_Attributes.clear();
@@ -454,6 +476,12 @@ bool	CGrammarItem::fromString(string& Result)
 				sscanf (_pair.c_str(), "%s %s", buff1, buff2);
 				m_Attributes[buff1] = buff2;
 			};
+            map<string, string>::const_iterator it = m_Attributes.find("graf");
+            if (it != m_Attributes.end())
+            {
+                string unparsed;
+                m_GraDescrs = parse_gra_descriptors(it->second.c_str(), unparsed);
+            }
 
 		};
 

@@ -102,9 +102,9 @@ class CAgramtab {
 	string	GetAllPossibleAncodes(BYTE pos, QWORD grammems) const;
     QWORD Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
 	string GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
-	
-    
 
+    bool Compare(GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2, string& grammems) const;    
+    bool Compare(GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2, QWORD& grammems) const;    
 };
 
 

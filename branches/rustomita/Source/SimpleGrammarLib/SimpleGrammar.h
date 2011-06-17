@@ -41,13 +41,14 @@ enum FeatureOperatorEnum {foeCheck, foeAssignement};
 
 class CAgramtab;
 
-enum FeatureFuncEnum { ffeAssign0, ffeAssign1, ffeAssign2, ffeAssign3, ffeCheck1, ffeCheck3};
+enum FeatureFuncEnum { ffeAssign0, ffeAssign1, ffeAssign2, ffeAssign3, ffeCheck0, ffeCheck1, ffeCheck3};
 
 typedef bool	AssignType0 ();
 typedef string	AssignType1 (const CAgramtab*, const string&);
 typedef string	AssignType2 (const CAgramtab*, const string&,	const string&);
 typedef string	AssignType3 (const CAgramtab*, const string&,	const string&, const string&);
 
+typedef bool	CheckType0 ();
 typedef bool	CheckType1 (const bool);
 typedef bool	CheckType3 (const CAgramtab*, const string&, const size_t&, const QWORD&);
 
@@ -77,7 +78,8 @@ struct CRuleFeature
 	FeatureFuncEnum			m_FuncType;
 	string					m_FuncNameStr;
 
-	CheckType1*				m_pCheck1;
+	CheckType0*				m_pCheck0;
+    CheckType1*				m_pCheck1;
 	CheckType3*				m_pCheck3;
 	AssignType0*			m_pAssign0;
 	AssignType1*			m_pAssign1;

@@ -153,8 +153,102 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 		Features.push_back(F);
 
 	};
+    if (		(I.m_bMeta)  
+			&&	(I.m_Attributes.find("relative") != I.m_Attributes.end())
+		)
+	{
+		map<string, string>::iterator it  = I.m_Attributes.find("relative");
+		CRuleFeature F;
+		{
+			CAttribAndId A;
+			A.m_AttribName = "relative";
+			A.m_Id = CurrentItemNo;
+			F.m_RightItems.push_back(A);
+		}
+		F.m_Type = foeCheck;
+		bool b = F.InitFuncName("is_relative");
+		if (!b)
+		{
+			assert (b);
+			ErrorStr = Format("Cannot convert \"relative\" to a feature function name"); 
+			return false;
+		};
+		I.m_Attributes.erase(it);
 
+		Features.push_back(F);
+	};
+    if (		(I.m_bMeta)  
+			&&	(I.m_Attributes.find("participle") != I.m_Attributes.end())
+		)
+	{
+		map<string, string>::iterator it  = I.m_Attributes.find("participle");
+		CRuleFeature F;
+		{
+			CAttribAndId A;
+			A.m_AttribName = "participle";
+			A.m_Id = CurrentItemNo;
+			F.m_RightItems.push_back(A);
+		}
+		F.m_Type = foeCheck;
+		bool b = F.InitFuncName("is_participle");
+		if (!b)
+		{
+			assert (b);
+			ErrorStr = Format("Cannot convert \"participle\" to a feature function name"); 
+			return false;
+		};
+		I.m_Attributes.erase(it);
 
+		Features.push_back(F);
+	};
+    if (		(I.m_bMeta)  
+			&&	(I.m_Attributes.find("nso") != I.m_Attributes.end())
+		)
+	{
+		map<string, string>::iterator it  = I.m_Attributes.find("nso");
+		CRuleFeature F;
+		{
+			CAttribAndId A;
+			A.m_AttribName = "nso";
+			A.m_Id = CurrentItemNo;
+			F.m_RightItems.push_back(A);
+		}
+		F.m_Type = foeCheck;
+		bool b = F.InitFuncName("is_nso");
+		if (!b)
+		{
+			assert (b);
+			ErrorStr = Format("Cannot convert \"nso\" to a feature function name"); 
+			return false;
+		};
+		I.m_Attributes.erase(it);
+
+		Features.push_back(F);
+	};
+    if (		(I.m_bMeta)  
+			&&	(I.m_Attributes.find("clause") != I.m_Attributes.end())
+		)
+	{
+		map<string, string>::iterator it  = I.m_Attributes.find("clause");
+		CRuleFeature F;
+		{
+			CAttribAndId A;
+			A.m_AttribName = "clause";
+			A.m_Id = CurrentItemNo;
+			F.m_RightItems.push_back(A);
+		}
+		F.m_Type = foeCheck;
+		bool b = F.InitFuncName("is_clause");
+		if (!b)
+		{
+			assert (b);
+			ErrorStr = Format("Cannot convert \"clause\" to a feature function name"); 
+			return false;
+		};
+		I.m_Attributes.erase(it);
+
+		Features.push_back(F);
+	};
 	return true;
 };
 
