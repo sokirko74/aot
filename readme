@@ -19,8 +19,6 @@ Russian website (Russian documents) is www.aot.ru.
 I use bison 1.875 and flex 2.5.4 to process query language.
 I compiled all sources with gcc 3.2. Lower versions are not supported.
 
-
-
 3. The project uses a regular expression library "PCRE" (Perl Compatible Regular Expressions).
 We test compilation only with version 6.4. Other versions were not tested. 
 One should download this version  from the official site and install it 
@@ -29,6 +27,10 @@ rights to do it, then you should  create two environment variables:
 	1.  RML_PCRE_LIB, that  points to PCRE library directory, where
 libpcre.a and libpcrecpp.a should be located, for example:
 	export RML_PCRE_LIB=~/RML/contrib/pcre-6.4/.libs
+	
+	(libpcrecpp.a is only built when g++ is present, so make sure 
+	you install g++ before you build pcre.)
+	
     2  RML_PCRE_INCLUDE, that points to PCRE include catalog, 
 where "pcrecpp.h" is located, for example
     export RML_PCRE_INCLUDE=~/RML/contrib/pcre-6.4
