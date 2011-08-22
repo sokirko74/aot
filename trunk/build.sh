@@ -11,7 +11,8 @@ run()
 
 
 if [ -z $RML ]; then
-  RML=$(dirname $(realpath $0))
+  cd `dirname $0`
+  RML=`pwd`
   if [ -z $RML ]; then
    # still empty: try to detect absolute path using Perl
    # (Cwd is in Perl's core distribution, this should not fail)
@@ -20,6 +21,15 @@ if [ -z $RML ]; then
   export RML=$RML
 fi;
 
+echo "RML=$RML"
+
+if [ -z $RML_PCRE_INCLUDE ]; then
+  if [ -e "$RML/contrib/pcre-6.4" ]; then
+    RML_PCRE_INCLUDE="$RML/contrib/pcre-6.4"
+    export RML_PCRE_INCLUDE=$RML_PCRE_INCLUDE
+  fi
+fi
+
 if [ -z $RML_PCRE_INCLUDE ]; then
   if [ -e "/usr/include/pcre.h" ]; then
     RML_PCRE_INCLUDE="/usr/include"
@@ -27,6 +37,13 @@ if [ -z $RML_PCRE_INCLUDE ]; then
   else
     echo "Please, set RML_PCRE_INCLUDE variable or install libpcre-dev!"
     exit;
+  fi
+fi
+
+if [ -z $RML_PCRE_LIB ]; then
+  if [ -e "$RML_PCRE_INCLUDE/.libs" ]; then
+    RML_PCRE_LIB="$RML_PCRE_INCLUDE/.libs"
+    export RML_PCRE_LIB=$RML_PCRE_LIB
   fi
 fi
 
@@ -40,24 +57,14 @@ if [ -z $RML_PCRE_LIB ]; then
   fi
 fi
 
-echo "RML=$RML"
 echo "RML_PCRE_LIB=$RML_PCRE_LIB"
 echo "RML_PCRE_INCLUDE=$RML_PCRE_INCLUDE"
 
-make_tool=gmake
+make_tool=make
 cd $RML
 
 #compile struct dicts
 run $make_tool -C $RML/Source/StructDictLoader mode=release
-
-for f in Obor Ross Aoss Collocs EngCollocs EngObor GerObor TimeRoss; do 
-  run Bin/StructDictLoader FromTxt Dicts/$f/ross.txt  Dicts/$f
-done;
-
-
-for f in Comp Fin Omni Loc ; do 
-  run Bin/StructDictLoader FromTxt Thes/$f/Ross/ross.txt  Thes/$f/Ross
-done;
 
 #compile graphematics
 run $make_tool -C $RML/Source/GraphmatThick mode=release
@@ -66,13 +73,38 @@ run cmp gra Test/Graphan/Rus/result.gra
 run Bin/GraphmatThick German Test/Graphan/Ger/text1.txt -gra gra
 run cmp gra Test/Graphan/Ger/result.gra
 
-
 #compile morphology
 MORPHOLOGY_COMPONENTS="MorphGen TestLem FileLem"
 for component in $MORPHOLOGY_COMPONENTS
 do
   run $make_tool -C $RML/Source/$component mode=release
 done
+
+#compile synan
+run $make_tool -C $RML/Source/TestSynan mode=release
+run $make_tool -C $RML/Source/ConvertTrigramBinary mode=release
+run $make_tool -C $RML/Source/SimpleGrammarPrecompiled mode=release
+run $make_tool -C $RML/Source/SynanDaemon mode=release_thread
+run $make_tool -C $RML/Source/SynanCGI  mode=release_thread
+
+#compile seman
+SEMAN="TestSeman AprDictGen asp_read deriv_read GenFreqDict StatDatBin WordDatBin GenSynDict"
+for component in $SEMAN
+do
+  run $make_tool -C $RML/Source/$component mode=release
+done
+#run $make_tool -C $RML/Source/SemanDaemon mode=release_thread libmode=shared 
+#run $make_tool -C $RML/Source/translate mode=release_thread libmode=shared
+
+echo Compiled All. Running tools...
+
+for f in Obor Ross Aoss Collocs EngCollocs EngObor GerObor TimeRoss; do 
+  run Bin/StructDictLoader FromTxt Dicts/$f/ross.txt  Dicts/$f
+done;
+
+for f in Comp Fin Omni Loc ; do 
+  run Bin/StructDictLoader FromTxt Thes/$f/Ross/ross.txt  Thes/$f/Ross
+done;
 
 MORPHOLOGY_LANGUAGES="Rus Ger Eng"
 for language in $MORPHOLOGY_LANGUAGES
@@ -83,13 +115,6 @@ run Bin/TestLem Russian <Test/Morph/Rus/test.txt | cmp - Test/Morph/Rus/result.t
 run Bin/TestLem German <Test/Morph/Ger/test.txt  | cmp - Test/Morph/Ger/result.txt
 run Bin/TestLem English <Test/Morph/Eng/test.txt | cmp - Test/Morph/Eng/result.txt
 
-
-#compile synan
-run $make_tool -C $RML/Source/TestSynan mode=release
-run $make_tool -C $RML/Source/ConvertTrigramBinary mode=release
-run $make_tool -C $RML/Source/SimpleGrammarPrecompiled mode=release
-run $make_tool -C $RML/Source/SynanDaemon mode=release_thread
-run $make_tool -C $RML/Source/SynanCGI  mode=release_thread
 d=Dicts/Trigram/full.rev/
 run gzip -cd $d/base.lex.gz >$d/base.lex
 run gzip -cd $d/base.ngram.gz >$d/base.ngram
@@ -107,14 +132,6 @@ do
 done
 run Bin/TestSynan German Test/Synan/Rus/test.txt | cmp - Test/Synan/Ger/result.txt 	
 
-#compile seman
-SEMAN="TestSeman AprDictGen asp_read deriv_read GenFreqDict StatDatBin WordDatBin GenSynDict"
-for component in $SEMAN
-do
-  run $make_tool -C $RML/Source/$component mode=release
-done
-#run $make_tool -C $RML/Source/SemanDaemon mode=release_thread libmode=shared 
-#run $make_tool -C $RML/Source/translate mode=release_thread libmode=shared
 run Bin/AprDictGen Dicts/SrcBinDict/dict2809.txt Dicts/BinDict/dict.bin > /dev/null
 run Bin/asp_read Dicts/SrcBinDict/ASP.txt Dicts/BinDict/asp_dict.bin >/dev/null 2>/dev/null
 run Bin/deriv_read Dicts/SrcBinDict/troiki_suff Dicts/BinDict/deriv_suff.bin  >/dev/null 2>/dev/null
@@ -131,3 +148,4 @@ for d in L C F; do
 done;
 run Bin/GenSynDict  Dicts/SrcBinDict/synonyms.txt Dicts/BinDict/synonyms.bin 2>/dev/null
 
+echo All done.
