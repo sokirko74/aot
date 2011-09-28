@@ -1,0 +1,17 @@
+Ich gehe\n\nIch gehe // break by an empty line
+[Reuter] We were informed... // sentence brackets, which enclose the whole sentence
+Du gehst! Gehe ich? Wir gehen...  Ich gehe.  // normal sentences
+Du (gehst!) Gehe ich. // an end of sentence inside brackets (an unusual, arguable case!)
+Du (gehst!) ins Haus. // a false end of sentence, which is recognized by the following lowercase letter.
+Mutter //  the text end is always an end of sentence (without any punctuation marks)
+Ich gehe. "Du gehst." // a close quotation mark can be an end of sentence 
+Ich gehe. "Du gehst."  Ich gehe. // a close quotation mark can be an end of sentence 
+Ich gehe. "Du gehst".  Ich gehe. 
+Ich gehe. Du "gehst."  Ich gehe. // quotations
+Ich gng., Peter macht den Korb. // commas are prohibited between sentences
+auf den 8. Mai. Das 5.  Corps // ordinal German numerals with a full stop
+Dr. Geyken grüsst Mr. Bush. // abkuerzung
+sf .html // conflict between normal abbreviation ("SW. /:a") and file extension ".html"
+Am 21 . Juni 1931  // simple German dates
+Von Dr . L . Fleck und Dr . J . Hescheles // abbreviations
+"Kennen  jungen!" Das. // the end of sentence should be at the last quotation mark
