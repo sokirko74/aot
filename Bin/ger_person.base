@@ -1,0 +1,81 @@
+[001] EMPTY	=	Alexey Sokirko SPNAME	=	Alexey Sokirko 
+[002] EMPTY	=	Helmut Kohl Homonyms	=	Kohl KOHL[EIG] KOHL[SUB]SPNAME	=	Helmut Kohl 
+[002] EMPTY	=	Helmut Kohl SPNAME	=	Helmut Kohl 
+[003] EMPTY	=	Kai Sokirko SPNAME	=	Kai Sokirko 
+[004] EMPTY	=	Gräfin Tita von Hardenberg SPNAME	=	Gräfin Tita von Hardenberg 
+[005] EMPTY	=	Dr . Alexey Sokirko SPNAME	=	Dr . Alexey Sokirko TITLE	=	Dr . 
+[006] EMPTY	=	Elisabeth II . SPNAME	=	Elisabeth II . 
+[007] EMPTY	=	Herzog von Hohenlohe Homonyms	=	Herzog HERZIEHEN[VER] HERZOG[EIG] HERZOG[SUB]Homonyms	=	Hohenlohe HOHENLOHE[SUB] HOHENLOH[ADJ]NP	=	Herzog von Hohenlohe SPNAME	=	Herzog von Hohenlohe VERBSATZ	=	Herzog von Hohenlohe 
+[007] EMPTY	=	Herzog von Hohenlohe Homonyms	=	Herzog HERZIEHEN[VER] HERZOG[EIG] HERZOG[SUB]NP	=	Herzog von Hohenlohe SPNAME	=	Herzog von Hohenlohe VERBSATZ	=	Herzog von Hohenlohe 
+[007] EMPTY	=	Herzog von Hohenlohe NP	=	Herzog von Hohenlohe SPNAME	=	Herzog von Hohenlohe VERBSATZ	=	Herzog von Hohenlohe 
+[007] EMPTY	=	Herzog von Hohenlohe NP	=	Herzog von Hohenlohe VERBSATZ	=	Herzog von Hohenlohe 
+[007] EMPTY	=	Herzog von Hohenlohe SPNAME	=	Herzog von Hohenlohe VERBSATZ	=	Herzog von Hohenlohe 
+[008] EMPTY	=	Claudio Aly SPNAME	=	Claudio Aly 
+[009] EMPTY	=	Präsident Schwewadnadse PERSON	=	Präsident Schwewadnadse 
+[010] EMPTY	=	Der ehemalige Präsident Gorbatschow PERSON	=	Der ehemalige Präsident Gorbatschow 
+[011] EMPTY	=	Parmas Torhüter Buffon PERSON	=	Parmas Torhüter Buffon 
+[012] ADDITION	=	( Berlin ) EMPTY	=	Dr . Alexey Sokirko ( Berlin ) PERSON	=	Dr . Alexey Sokirko ( Berlin ) SPNAME	=	Dr . Alexey Sokirko TITLE	=	Dr . 
+[013] ADDITION	=	, 198 , EMPTY	=	Dr . Alexey Sokirko , 198 , PERSON	=	Dr . Alexey Sokirko , 198 , SPNAME	=	Dr . Alexey Sokirko TITLE	=	Dr . 
+[014] APPOS	=	Leiter der Uni-Klinik Freiburg EMPTY	=	Dr . Aloys Berg , Leiter der Uni-Klinik Freiburg , Homonyms	=	Leiter LEITER[SUB] LEITER[SUB]PERSON	=	Dr . Aloys Berg , Leiter der Uni-Klinik Freiburg , SPNAME	=	Dr . Aloys Berg TITLE	=	Dr . 
+[014] APPOS	=	Leiter der Uni-Klinik Freiburg EMPTY	=	Dr . Aloys Berg , Leiter der Uni-Klinik Freiburg , PERSON	=	Dr . Aloys Berg , Leiter der Uni-Klinik Freiburg , SPNAME	=	Dr . Aloys Berg TITLE	=	Dr . 
+[015] APPOS	=	Leiter des Anti-Doping Labors in Köln EMPTY	=	Aloys Berg , Leiter des Anti-Doping Labors in Köln , Homonyms	=	Leiter LEITER[SUB] LEITER[SUB]PERSON	=	Aloys Berg , Leiter des Anti-Doping Labors in Köln , PNAME	=	Aloys Berg 
+[015] APPOS	=	Leiter des Anti-Doping Labors in Köln EMPTY	=	Aloys Berg , Leiter des Anti-Doping Labors in Köln , PERSON	=	Aloys Berg , Leiter des Anti-Doping Labors in Köln , PNAME	=	Aloys Berg 
+[016] EMPTY	=	Klassenlehrerin Susi Agethen PERSON	=	Klassenlehrerin Susi Agethen PNAME	=	Susi Agethen 
+[017] EMPTY	=	Christina Agethen SPNAME	=	Christina Agethen 
+[018] EMPTY	=	Palästinenserpräsident Jassir Arafat PERSON	=	Palästinenserpräsident Jassir Arafat PNAME	=	Jassir Arafat 
+[019] EMPTY	=	Parteichef Ashdown PERSON	=	Parteichef Ashdown 
+[020] EMPTY	=	Paddy Ashdown SPNAME	=	Paddy Ashdown 
+[021] EMPTY	=	Präsidenten Assad PERSON	=	Präsidenten Assad 
+[022] EMPTY	=	Arbeitsministerin Aubry Aubry PERSON	=	Arbeitsministerin Aubry Aubry PNAME	=	Aubry Aubry 
+[023] EMPTY	=	CDU-Haushaltsexperte Dietrich Austermann PERSON	=	CDU-Haushaltsexperte Dietrich Austermann PNAME	=	Dietrich Austermann 
+[024] EMPTY	=	spanischen Ministerpräsidenten Aznar Aznar PERSON	=	spanischen Ministerpräsidenten Aznar 
+[025] EMPTY	=	Yereh Bahir SPNAME	=	Yereh Bahir 
+[026] APPOS	=	politische Direktorin der Westeuropäischen Union EMPTY	=	Alyson Bailes , politische Direktorin der Westeuropäischen Union , Homonyms	=	Bailes BAIL[ADJ] BAIL[SUB]PERSON	=	Alyson Bailes , politische Direktorin der Westeuropäischen Union , PNAME	=	Alyson Bailes 
+[026] APPOS	=	politische Direktorin der Westeuropäischen Union EMPTY	=	Alyson Bailes , politische Direktorin der Westeuropäischen Union , PERSON	=	Alyson Bailes , politische Direktorin der Westeuropäischen Union , PNAME	=	Alyson Bailes 
+[027] EMPTY	=	Premierminister Edouard Balladur PERSON	=	Premierminister Edouard Balladur PNAME	=	Edouard Balladur 
+[028] EMPTY	=	Vizepremier Wu Bangguo PERSON	=	Vizepremier Wu Bangguo PNAME	=	Wu Bangguo 
+[029] EMPTY	=	Ehud Barak SPNAME	=	Ehud Barak 
+[030] EMPTY	=	Jehud Barak SPNAME	=	Jehud Barak 
+[031] EMPTY	=	Ministerpräsident Baraks PERSON	=	Ministerpräsident Baraks 
+[032] EMPTY	=	französischen Kommissar Barnier PERSON	=	französischen Kommissar Barnier 
+[033] EMPTY	=	Martin Bartenstein SPNAME	=	Martin Bartenstein 
+[034] EMPTY	=	Familienminister Martin Bartenstein PERSON	=	Familienminister Martin Bartenstein PNAME	=	Martin Bartenstein 
+[035] EMPTY	=	Grünen-Bundestagsabgeordnete Volker Beck Homonyms	=	Grünen-Bundestagsabgeordnete GRÜN-BUNDESTAGSABGEORDNETE[SUB] GRÜNE-BUNDESTAGSABGEORDNETE[SUB] GRÜNEN-BUNDESTAGSABGEORDNETE[SUB]PERSON	=	Grünen-Bundestagsabgeordnete Volker Beck PNAME	=	Volker Beck 
+[035] EMPTY	=	Grünen-Bundestagsabgeordnete Volker Beck Homonyms	=	Grünen-Bundestagsabgeordnete GRÜN-BUNDESTAGSABGEORDNETE[SUB] GRÜNE-BUNDESTAGSABGEORDNETE[SUB] GRÜNEN-BUNDESTAGSABGEORDNETE[SUB] GRÜNEN-BUNDESTAGSABGEORDNETE[SUB]PERSON	=	Grünen-Bundestagsabgeordnete Volker Beck PNAME	=	Volker Beck 
+[035] EMPTY	=	Grünen-Bundestagsabgeordnete Volker Beck PERSON	=	Grünen-Bundestagsabgeordnete Volker Beck PNAME	=	Volker Beck 
+[036] EMPTY	=	Angelika Beer Homonyms	=	Beer BEER[SUB] BE[ADJ]SPNAME	=	Angelika Beer 
+[036] EMPTY	=	Angelika Beer SPNAME	=	Angelika Beer 
+[037] EMPTY	=	Bischof Carlos Belo PERSON	=	Bischof Carlos Belo PNAME	=	Carlos Belo 
+[038] EMPTY	=	Hartwig Berger SPNAME	=	Hartwig Berger 
+[039] EMPTY	=	Clintons Sicherheitsberater Sandy Berger GENIT_NP	=	Clintons Sicherheitsberater Sandy Berger PERSON	=	Sicherheitsberater Sandy Berger PNAME	=	Sandy Berger 
+[039] EMPTY	=	Clintons Sicherheitsberater Sandy Berger NP	=	Clintons Sicherheitsberater Sandy Berger PERSON	=	Sicherheitsberater Sandy Berger PNAME	=	Sandy Berger 
+[040] EMPTY	=	Frauenministerin Christine Bergmann PERSON	=	Frauenministerin Christine Bergmann PNAME	=	Christine Bergmann 
+[041] EMPTY	=	Ministerpräsident Biedenkopf PERSON	=	Ministerpräsident Biedenkopf 
+[042] EMPTY	=	PDS-Vorsitzende Bisky PERSON	=	PDS-Vorsitzende Bisky 
+[043] EMPTY	=	Kurt Biedenkopf ( CDU ) NP	=	Kurt Biedenkopf ( CDU ) SPNAME	=	Kurt Biedenkopf 
+[044] EMPTY	=	Vorgängerin Ritt Bjerregaard PERSON	=	Vorgängerin Ritt Bjerregaard PNAME	=	Ritt Bjerregaard 
+[045] EMPTY	=	Admiral Dennis Blair PERSON	=	Admiral Dennis Blair PNAME	=	Dennis Blair 
+[046] EMPTY	=	Luc Bondy SPNAME	=	Luc Bondy 
+[047] EMPTY	=	Ralph Bornhöft , Leiter des Einwohnerzentralamtes , GENIT_NP	=	Leiter des Einwohnerzentralamtes Homonyms	=	Leiter LEITER[SUB] LEITER[SUB]MODIF_NP	=	des Einwohnerzentralamtes NP	=	Ralph Bornhöft , Leiter des Einwohnerzentralamtes , SPNAME	=	Ralph Bornhöft 
+[047] EMPTY	=	Ralph Bornhöft , Leiter des Einwohnerzentralamtes , GENIT_NP	=	Leiter des Einwohnerzentralamtes MODIF_NP	=	des Einwohnerzentralamtes NP	=	Ralph Bornhöft , Leiter des Einwohnerzentralamtes , SPNAME	=	Ralph Bornhöft 
+[047] EMPTY	=	Ralph Bornhöft , Leiter des Einwohnerzentralamtes , MODIF_NP	=	des Einwohnerzentralamtes NP	=	Leiter des Einwohnerzentralamtes NP	=	Ralph Bornhöft , Leiter des Einwohnerzentralamtes , SPNAME	=	Ralph Bornhöft 
+[048] EMPTY	=	Parteivize Gerhard Botz Homonyms	=	Parteivize PARTEIVIZEN[VER] PARTEIVIZE[SUB]PERSON	=	Parteivize Gerhard Botz PNAME	=	Gerhard Botz VERBSATZ	=	Parteivize Gerhard Botz 
+[048] EMPTY	=	Parteivize Gerhard Botz PERSON	=	Parteivize Gerhard Botz PNAME	=	Gerhard Botz VERBSATZ	=	Parteivize Gerhard Botz 
+[049] EMPTY	=	CDU-Wehrexperte Paul Breuer Homonyms	=	Breuer BREUER[SUB] BREU[ADJ]PERSON	=	CDU-Wehrexperte Paul Breuer PNAME	=	Paul Breuer 
+[049] EMPTY	=	CDU-Wehrexperte Paul Breuer PERSON	=	CDU-Wehrexperte Paul Breuer PNAME	=	Paul Breuer 
+[050] EMPTY	=	der Ehemann Valerie Brownings PERSON	=	der Ehemann Valerie Brownings PNAME	=	Valerie Brownings 
+[051] EMPTY	=	die Australierin Valerie Browning PERSON	=	die Australierin Valerie Browning PNAME	=	Valerie Browning 
+[052] EMPTY	=	Ignatz Bubis Homonyms	=	Bubis BUBIS[EIG] BUBI[SUB]SPNAME	=	Ignatz Bubis 
+[052] EMPTY	=	Ignatz Bubis SPNAME	=	Ignatz Bubis 
+[053] EMPTY	=	Forschungsministerin Edelgard Bulmahn PERSON	=	Forschungsministerin Edelgard Bulmahn PNAME	=	Edelgard Bulmahn 
+[054] EMPTY	=	grüne Bundestagsabgeordnete Annelie Buntenbach PERSON	=	grüne Bundestagsabgeordnete Annelie Buntenbach PNAME	=	Annelie Buntenbach 
+[055] EMPTY	=	Bundesgeschäftsführer Reinhard Bütikofer Homonyms	=	Bütikofer BÜTIKOFER[SUB] BÜTIKOF[ADJ]PERSON	=	Bundesgeschäftsführer Reinhard Bütikofer PNAME	=	Reinhard Bütikofer 
+[055] EMPTY	=	Bundesgeschäftsführer Reinhard Bütikofer PERSON	=	Bundesgeschäftsführer Reinhard Bütikofer PNAME	=	Reinhard Bütikofer 
+[056] EMPTY	=	die Milizenführer Enrico Guterres und Cancio Carvalho PERSON	=	die Milizenführer Enrico Guterres und Cancio Carvalho PNAME	=	Cancio Carvalho PNAME	=	Enrico Guterres 
+[057] EMPTY	=	türkischen Außenminister Cem PERSON	=	türkischen Außenminister Cem 
+[058] EMPTY	=	Gründer Jacques Chirac PERSON	=	Gründer Jacques Chirac PNAME	=	Jacques Chirac 
+[059] EMPTY	=	Nato-Oberkommandierenden Wesley Clark PERSON	=	Nato-Oberkommandierenden Wesley Clark PNAME	=	Wesley Clark 
+[060] EMPTY	=	US-Präsident Bill Clinton PERSON	=	US-Präsident Bill Clinton PNAME	=	Bill Clinton 
+[061] EMPTY	=	amerikanische Inspektor Columbo PERSON	=	amerikanische Inspektor Columbo 
+[062] EMPTY	=	die Milizenführer Enrico Guterrfffffes , Joao Tavarhhhes und Cancio Carvxxxx Homonyms	=	Guterrfffffes GUTERRFFFFF[ADJ] GUTERRFFFFF[SUB]Homonyms	=	Tavarhhhes TAVARHHH[ADJ] TAVARHHH[SUB]PERSON	=	die Milizenführer Enrico Guterrfffffes , Joao Tavarhhhes und Cancio Carvxxxx PNAME	=	Cancio Carvxxxx PNAME	=	Enrico Guterrfffffes PNAME	=	Joao Tavarhhhes 
+[062] EMPTY	=	die Milizenführer Enrico Guterrfffffes , Joao Tavarhhhes und Cancio Carvxxxx PERSON	=	die Milizenführer Enrico Guterrfffffes , Joao Tavarhhhes und Cancio Carvxxxx PNAME	=	Cancio Carvxxxx PNAME	=	Enrico Guterrfffffes PNAME	=	Joao Tavarhhhes 

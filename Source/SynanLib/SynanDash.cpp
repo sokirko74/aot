@@ -38,6 +38,16 @@ bool HasNounInGen(const CSynWord& _W)
 
 }
 
+bool HasGenderNumberCaseNP(const CSynWord& _W1, const CSynWord& _W2)
+{
+	for (int i = 0; i < _W1.m_Homonyms.size(); i++)
+        for (int k = 0; k < _W2.m_Homonyms.size(); k++)
+            if (_W1.GetOpt()->GetGramTab()->GleicheGenderNumberCase(_W2.m_Homonyms[k].m_CommonGramCode.c_str(), _W1.m_Homonyms[i].m_GramCodes.c_str(), _W2.m_Homonyms[k].m_GramCodes.c_str()))
+                return true;
+    return false;
+}
+
+
 
 bool HasNounInNomSgPl(const CSynWord &W)
 {
@@ -299,7 +309,9 @@ void CRusSentence::TryToRebuildDashInClause()
 		if ( Noun_Nom.size() > 0 && Adj_Nom.size() > 0 )
 		{
 			for (int k = 0; k < Noun_Nom.size() && k < Adj_Nom.size(); k++)
-				if (Noun_Nom[k] < Adj_Nom[k])
+				if (      Noun_Nom[k] < Adj_Nom[k] 
+                     &&  (pClause.m_iLastWord == Adj_Nom[k] || !HasGenderNumberCaseNP(m_Words[Adj_Nom[k]], m_Words[Adj_Nom[k]+1]))
+                   )
 						BuildDash(ClauseNo, Noun_Nom[k]);
 
 			continue;
