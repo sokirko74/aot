@@ -65,6 +65,9 @@ cd $RML
 
 #compile struct dicts
 run $make_tool -C $RML/Source/StructDictLoader mode=release
+for f in Obor Ross Aoss Collocs EngCollocs EngObor GerObor TimeRoss; do 
+  run Bin/StructDictLoader FromTxt Dicts/$f/ross.txt  Dicts/$f
+done;
 
 #compile graphematics
 run $make_tool -C $RML/Source/GraphmatThick mode=release
@@ -98,9 +101,6 @@ done
 
 echo Compiled All. Running tools...
 
-for f in Obor Ross Aoss Collocs EngCollocs EngObor GerObor TimeRoss; do 
-  run Bin/StructDictLoader FromTxt Dicts/$f/ross.txt  Dicts/$f
-done;
 
 for f in Comp Fin Omni Loc ; do 
   run Bin/StructDictLoader FromTxt Thes/$f/Ross/ross.txt  Thes/$f/Ross
