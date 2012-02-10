@@ -21,6 +21,7 @@
 #include "../LemmatizerLib/Paradigm.h"
 
 bool				bPrintIds = true;;
+bool				bPrintForms = false;
 MorphLanguageEnum	Language;
 CLemmatizer*		pLemmatizer;
 CAgramtab*			pAgramtab;
@@ -37,27 +38,6 @@ string GetGrammems (const char* tab_str)
 	return s;
 }
 
-
-void RussianConvertToDictionary (std::string& S)
-{
-	#ifdef WIN32
-		OemToCharBuff((char*)S.c_str(), (char*)S.c_str(), S.length());		 
-	#else
-		KOI8ToWin(S);
-	#endif
-
-};
-
-void RussianConvertToScreen (std::string& S)
-{
-	#ifdef WIN32
-		CharToOemBuff((char*)S.c_str(), (char*)S.c_str(), S.length());		 
-	#else
-		WinToKOI8(S);
-	#endif
-
-};
-
 std::string  GetMorphInfo (std::string  Form)
 {
 	
@@ -69,44 +49,47 @@ std::string  GetMorphInfo (std::string  Form)
 
 	pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
 
-	for (int i =0; i < Paradigms.size(); i++)
+	for (int i=0; i < Paradigms.size(); i++)
 	{
+        if (i > 0) 
+            Result += "\t";
 		const CFormInfo& F = Paradigms[i];
 		Result += F.m_bFound ? "+ " : "- ";
 
-		Result += "{"; 
-		Result += F.GetWordForm(0); 
-		Result += ", ";
+		Result += F.GetWordForm(0) + " "; 
 
 		{
 			string GramCodes =	F.GetSrcAncode();
 			BYTE  PartOfSpeech = pAgramtab->GetPartOfSpeech (GramCodes.c_str());
-			Result	+= pAgramtab->GetPartOfSpeechStr(PartOfSpeech) + std::string(", ") ;	
+			Result	+= pAgramtab->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ") ;	
 
 			string  CommonAncode = F.GetCommonAncode();
-			Result += Format ("\"%s\",  (", (CommonAncode.empty()) ? "" : GetGrammems(CommonAncode.c_str()).c_str());
+			Result += Format ("%s ", (CommonAncode.empty()) ? "" : GetGrammems(CommonAncode.c_str()).c_str());
 
-			for (long i=0; i < GramCodes.length(); i+=2)
-				Result += Format ("\"%s\",", GetGrammems(GramCodes.c_str()+i).c_str());
+            for (long i=0; i < GramCodes.length(); i+=2) {
+                if (i > 0)
+                    Result += ";";
+				Result += Format ("%s", GetGrammems(GramCodes.c_str()+i).c_str());
+            }
 
-			Result += ") }";
-		}
+	   }
 
 		if (bPrintIds)
-			Result += Format(" Id=%i",F.GetParadigmId())+" " ;
+			Result += Format(" %i",F.GetParadigmId());
 
 		BYTE Accent = F.GetSrcAccentedVowel();
 		if (Accent != 0xff)
-			Result += Format("Accented=%s'%s", Form.substr(0, Accent+1).c_str(), Form.substr(Accent+1).c_str());
+			Result += Format(" %s'%s", Form.substr(0, Accent+1).c_str(), Form.substr(Accent+1).c_str());
 
-		Result += "\nAll forms: ";
-		for (int k=0; k < F.GetCount (); k++)
-		{
-			Result += Paradigms[i].GetWordForm(k);
-			Result += " ";
-		};
-		Result += "\n\n";
-
+        if (bPrintForms) {
+		    Result += " ";
+		    for (int k=0; k < F.GetCount (); k++)
+		    {
+                if (k > 0)
+                    Result += ",";
+			    Result += Paradigms[i].GetWordForm(k);
+		    };
+        }
    	};
 
 	return Result;
@@ -219,28 +202,45 @@ void PrintUsage()
 
 int main(int argc, char **argv)
 {
-	if (argc < 2)
+   	
+    vector<string> ARGV;
+    bool bEchoInput = false;
+    for (size_t i=1; i <  argc; i++)
+    {
+		string s = argv[i];
+        if (s == "-h" || s == "-help" ||  s == "/h" || s == "/help") {
+            PrintUsage();
+        }
+        else if (s == "-echo") 
+        {
+            bEchoInput = true;
+        }
+		else if (s == "-noids")
+		{
+			bPrintIds  = false;
+		}
+		else if (s == "-forms")
+		{
+			bPrintForms  = true;
+		}
+        else {
+            ARGV.push_back(s);
+        }
+    }
+	if (ARGV.size() < 1)
 		PrintUsage();
-
-	if (!GetLanguageByString(argv[1], Language))
+    
+    if (!GetLanguageByString(ARGV[0], Language))
 	{
 		PrintUsage();
 	};
 
-	if (		!strcmp (argv[1],  "-h")
-			||  !strcmp (argv[1],  "-help")
-			||  !strcmp (argv[1],  "/h")
-			||  !strcmp (argv[1],  "/help")
-	)
-		PrintUsage();
-
-
 	std::string FileName;
-	if (argc > 2)
-		FileName = argv[2];
+	if (ARGV.size() > 1)
+		FileName = ARGV[1];
 
 	// ===============  LOADING DICTS ================
-	printf ("Loading..\n");
+	fprintf (stderr,"Loading..\n");
 	bool bResult = false;
 	switch (Language)
 	{
@@ -270,31 +270,19 @@ int main(int argc, char **argv)
 
 	// ===============  WORKING ===============
 	
-	printf ("Input a word..\n");
-	for (;;)
+	fprintf (stderr,"Input a word..\n");
+    char Form[100];	
+	while (fgets(Form, 1000, stdin))
 	{
-		printf (">");
-		char buffer[1000] = "";
-		char Form[100];	
-		fgets(Form, 1000, stdin);
 		std::string s = Form;
 		Trim(s);
 		if (s.empty()) break;
-		if (s == "noids")
-		{
-			bPrintIds  = false;
-			continue;
-		};
-
-		if (Language == morphRussian) 	
-			RussianConvertToDictionary(s);
-		
 		string Result = GetMorphInfo(s);
 
-		if  ( morphRussian == Language)    
-			RussianConvertToScreen(Result);
-
-		printf ("%s", Result.c_str());
+        if (bEchoInput)  {
+            printf ("%s\t", s.c_str());
+        }
+		printf ("%s\n", Result.c_str());
 		 
 	};
 	delete pLemmatizer;
