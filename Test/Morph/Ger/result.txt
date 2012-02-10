@@ -1,6 +1,1 @@
-Loading..
-Input a word..
->>+ {MUTTER, SUB, "",  ("nom,sin,fem","gen,sin,fem","dat,sin,fem","akk,sin,fem",) }
-All forms: MUTTER MUTTER MUTTER MUTTER MÜTTER MÜTTER MÜTTERN MÜTTER 
-
->
+Mutter	+ MUTTER SUB  nom,sin,fem;gen,sin,fem;dat,sin,fem;akk,sin,fem MUTTER,MUTTER,MUTTER,MUTTER,MÜTTER,MÜTTER,MÜTTERN,MÜTTER

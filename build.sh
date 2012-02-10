@@ -111,9 +111,9 @@ for language in $MORPHOLOGY_LANGUAGES
 do
   run $RML/Source/MorphGen/MorphGen Dicts/SrcMorph/$language.mwz Dicts/Morph/$language 5 3
 done
-run Bin/TestLem Russian <Test/Morph/Rus/test.txt | cmp - Test/Morph/Rus/result.txt
-run Bin/TestLem German <Test/Morph/Ger/test.txt  | cmp - Test/Morph/Ger/result.txt
-run Bin/TestLem English <Test/Morph/Eng/test.txt | cmp - Test/Morph/Eng/result.txt
+run Bin/TestLem -echo -noids -forms Russian <Test/Morph/Rus/test.txt | cmp - Test/Morph/Rus/result.txt
+run Bin/TestLem -echo -noids -forms German <Test/Morph/Ger/test.txt  | cmp - Test/Morph/Ger/result.txt
+run Bin/TestLem -echo -noids -forms English <Test/Morph/Eng/test.txt | cmp - Test/Morph/Eng/result.txt
 
 d=Dicts/Trigram/full.rev/
 run gzip -cd $d/base.lex.gz >$d/base.lex
