@@ -233,7 +233,6 @@ void CMAPost::Rule_Fio()
         for (long FormatNo=0; FormatNo < FioFormats.size(); FormatNo++)
             if (SetFioFormat (*this, FioFormats[FormatNo], it))
             {
-				SetFioFormat (*this, FioFormats[FormatNo], it);
                 break;
             }
     };
