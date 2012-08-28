@@ -32,6 +32,10 @@ CMAPost::CMAPost()
 	m_bCanChangeInputText = true;
     m_bHumanFriendlyOutput = false;
 
+	#ifdef _DEBUG
+		m_LogFileName = "mapost.log";
+	#endif
+
 }
 
 CMAPost::~CMAPost()

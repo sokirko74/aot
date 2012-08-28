@@ -46,7 +46,7 @@ void CMAPost::RunRules()
 			Odnobuk();
 
 
-			if (m_bCanChangeInputText)
+				if (m_bCanChangeInputText)
 			{
 				log("Cifrdef");
 				Cifrdef();
@@ -338,7 +338,7 @@ string CMAPost::GetSimilarNumAncode (const string&  Lemma, const string&  Flexia
 	vector<CFormInfo> Paradigms;
 	string h = Lemma;
 	m_pRusLemmatizer->CreateParadigmCollection(false, h, false, false, Paradigms);
-
+	if ( Paradigms.size() == 0 ) return ""; // например, нету в Ё-словаре слова ЧЕТВЕРТЫЙ
 	// ищем числительное
 	long k=0;
 	for (; k < Paradigms.size(); k++)
@@ -364,7 +364,7 @@ string CMAPost::GetSimilarNumAncode (const string&  Lemma, const string&  Flexia
 		  EngRusMakeLower(Form);
 
 		  if (Form.length() > Flexia.length())
-			  if (Flexia == Form.substr (Form.length()-Flexia.length()))
+			  if (Flexia == "" || Flexia == Form.substr (Form.length()-Flexia.length()))
 				  AnCodes += P.GetAncode(k);
 	};
 
@@ -381,18 +381,19 @@ void CMAPost::Cifrdef()
 	// 1960-го                           2 6 DSC
 	//и лемматизируем этого слово как числительное 
 	//	1960-го                            4 0 4 RLE -= 1848 яя -1 #0
+	// А так же нулевые окончания
 
 	for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
 	{
         CPostLemWord& W = *it;
-        if (W.m_strWord.length() < 3) continue;
+        //if (W.m_strWord.length() < 3) continue;
         int hyp = W.m_strWord.find("-");
-        if (hyp == string::npos) continue;
+        //if (hyp == string::npos) continue;
         if (W.IsInOborot()) continue;
-        // первая часть - цифры, второая - русская
-        if (!isdigit((BYTE)W.m_strWord[0]) &&  !is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1])) continue;
-        string NumWordForm = it->m_strWord.substr(0, hyp); 
-		string Flexia = it->m_strWord.substr(hyp+1); ;
+        // первая часть - цифры, второая - русская, если есть окончание
+        if (!isdigit((BYTE)W.m_strWord[0]) &&  !(hyp > 0 && is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1]))) continue; 
+        string NumWordForm = hyp < 0 ? it->m_strWord : it->m_strWord.substr(0, hyp); 
+		string Flexia = hyp < 0 ? "" : it->m_strWord.substr(hyp+1); ;
 
 		//  Идем с  конца ищем числительное, которое максимально совпадает с конца с числительным во входном тексте.
 		int i = NumeralToNumberCount - 1;
@@ -413,8 +414,8 @@ void CMAPost::Cifrdef()
         
 	    EngRusMakeLower(Flexia);
         string AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Cardinal, Flexia, NumeralToNumber[i].m_bNoun);
-        if  ( AnCodes.empty() )
-		    AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
+        if  ( AnCodes.empty() || Flexia == "" )
+			   AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
         if  ( AnCodes.empty() ) 
         {
             // "20-летний"
