@@ -6,6 +6,7 @@ using LemmatizerNET.Implement.Agramtab;
 namespace LemmatizerNET.Implement {
 	internal class ABCEncoder {
 		private Lemmatizer _lemmatizer;
+        private InternalMorphLanguage _language;
 		private char _annotChar;
 		private int _alphabetSize;
 		protected int[] _alphabet2Code=new int[Constants.AlphabetSize];
@@ -21,7 +22,7 @@ namespace LemmatizerNET.Implement {
 		}
 		public InternalMorphLanguage Language {
 			get {
-				return _lemmatizer.Language;
+                return _language;
 			}
 		}
 
@@ -61,7 +62,8 @@ namespace LemmatizerNET.Implement {
 			return AlphabetSize;
 		}
 		public ABCEncoder(Lemmatizer lemmatizer,InternalMorphLanguage language, char annotChar) {
-			_lemmatizer = lemmatizer;
+            _lemmatizer = lemmatizer;
+            _language = language;
 			_annotChar=annotChar;
 			_alphabetSize = InitAlphabet(language, _code2Alphabet, _alphabet2Code, _annotChar);
 			_alphabetSizeWithoutAnnotator = InitAlphabet(language,_code2AlphabetWithoutAnnotator,_alphabet2CodeWithoutAnnotator,(char)257/* non-exeting symbol */);
