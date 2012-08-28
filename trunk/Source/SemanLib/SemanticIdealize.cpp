@@ -278,7 +278,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 					if (j==-1) continue;
 					s.erase(0, j+1);
 					CaseItemNo = RossHolder->GetItemNoByItemStr (s.c_str(), "D_CASE");
-				};
+				}
 			}
 			else
 				CaseItemNo = RossHolder->GetSynFet(C);
@@ -315,7 +315,30 @@ void CRusSemStructure::ApplySubordinationCases ()
 			m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rSingular);
 		};
 
- 
+	// падеж числительных
+	for (long i=0;  i < m_Relations.size(); i++)
+		if( m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" 						
+			&& !IsPowerOfTwo(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & rAllCases) )	// падеж не определен
+			for (long j=0;  j < m_Relations.size(); j++)
+				if( m_Relations[i].m_SourceNodeNo == m_Relations[j].m_TargetNodeNo ) 
+				{
+					if( (m_Relations[j].m_Valency.m_RelationStr == "TIME") // ≈му 100 лет
+						&& (m_Nodes[m_Relations[j].m_SourceNodeNo].m_Words[0].m_Word == "есть")
+						&& !IsPowerOfTwo(m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() & rAllCases & !rGenitiv)) 
+						{
+							m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllCases);
+							m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rGenitiv);
+							m_Nodes[m_Relations[i].m_TargetNodeNo].DeleteGrammems ( rAllCases);
+							m_Nodes[m_Relations[i].m_TargetNodeNo].AddOneGrammem ( rAccusativ);
+						}
+					if( (m_Relations[j].m_Valency.m_RelationStr == "ACT" || m_Relations[j].m_Valency.m_RelationStr == "S-ACT") // Ќаличие двух стволов. “ам есть 100 тонн.
+						&& IsPowerOfTwo(m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() & rAllCases)) // падеж определен
+						{
+							m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems ( m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() );
+						}
+					break;
+				};
+	
    // если русское подлежащее было неизмен€емым, а в него идет стрелка  от сказуемого, 
    // которое стоит строго либо в мн., либо  ед., тогда нужно удалить граммему, 
    // противоречающую сказуемому
