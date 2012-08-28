@@ -140,6 +140,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		vector<int> Noun_Nom, Adj_Nom, Eto, Noun_Gen, Copul_Words, Noun_NomSgPl;
 		int Prep_U = -1;
+		bool Vozrast = false;
 
 		for (j = pClause.m_iFirstWord; j <= pClause.m_iLastWord; j++)
 		{
@@ -169,7 +170,8 @@ void CRusSentence::TryToRebuildDashInClause()
 				continue;
 			
 			}
-			if (	HasAdjInNom(m_Words[j]) && !m_Words[j].HasDes(OFAM2) )
+
+			if ( 	HasAdjInNom(m_Words[j]) && !m_Words[j].HasDes(OFAM2) )
 			{
 				Adj_Nom.push_back(j);
 				continue;
@@ -187,11 +189,37 @@ void CRusSentence::TryToRebuildDashInClause()
 			if ( HasNounInNomSgPl( m_Words[j] ) )
 				Noun_NomSgPl.push_back(j);
 			
+			if (0 == Adj_Nom.size() && 0 == Noun_Nom.size()
+				&& isdigit((BYTE)m_Words[j].m_strWord[0]) // Ему 33.
+				&& m_Words[j].m_strWord.find("-") == -1) 
+			{
+				Vozrast = true;
+				Adj_Nom.push_back(j);
+				continue;
+			}
 		}
 		
 		if (0 == Noun_Nom.size() && 0 == Eto.size() && 
 			0 == Adj_Nom.size() && -1 == Prep_U)
 			continue;
+
+		if (0 == Noun_Nom.size() && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) // Глаза красивые.
+			for (j = pClause.m_iFirstWord; j <= pClause.m_iLastWord; j++)
+			{
+				for (int i = 0; i < m_Words[j].m_Homonyms.size() && 0 == Noun_Nom.size(); i++) 
+				{
+					if (  m_Words[j].m_Homonyms[i].IsSynNoun() ) 
+					{
+						if (  m_Words[j].m_Homonyms[i].HasGrammem(rNominativ) ||
+							(Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ))) // Ему 33.
+						{
+							Noun_Nom.push_back(j);
+							break;
+						}
+					}
+				}
+			}
+		else Vozrast = false;
 
 		if (Noun_Nom.size() > 1)
 		{
@@ -310,9 +338,14 @@ void CRusSentence::TryToRebuildDashInClause()
 		{
 			for (int k = 0; k < Noun_Nom.size() && k < Adj_Nom.size(); k++)
 				if (      Noun_Nom[k] < Adj_Nom[k] 
-                     &&  (pClause.m_iLastWord == Adj_Nom[k] || !HasGenderNumberCaseNP(m_Words[Adj_Nom[k]], m_Words[Adj_Nom[k]+1]))
+                     &&  (pClause.m_iLastWord == Adj_Nom[k] || !HasGenderNumberCaseNP(m_Words[Adj_Nom[k]], m_Words[Adj_Nom[k]+1]) 
+					 ||  Vozrast) //Ему 33 года
                    )
+					 {
+						if(Vozrast) m_Words[Adj_Nom[k]].GetSynHomonym(0).ModifyGrammems( _QM(rPlural) | _QM(rNominativ) | _QM(rAccusativ));
 						BuildDash(ClauseNo, Noun_Nom[k]);
+						
+					 }
 
 			continue;
 		}		
