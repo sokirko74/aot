@@ -41,6 +41,13 @@ namespace LemmatizerNET.Implement {
 				return GetAccent(_innerAnnot.ItemNo);
 			}
 		}
+        public int AccentModelNo
+        {
+            get
+            {
+                return LemmaInfo.LemmaInfo.AccentModelNo;
+            }
+        }
 		public char LemSign {
 			get {
 				return _found ? '+' : '-';
@@ -208,7 +215,7 @@ namespace LemmatizerNET.Implement {
 				if (!IsValid) {
 					return "";
 				}
-				return FlexiaModel[_innerAnnot.ItemNo].Gramcode;
+				return FlexiaModel[_innerAnnot.ItemNo].FlexiaStr + "*" + FlexiaModel[_innerAnnot.ItemNo].Gramcode;
 			}
 		}
 		public string SrcNorm {

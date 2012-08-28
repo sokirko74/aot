@@ -12,6 +12,9 @@ namespace LemmatizerNET {
 		string TypeAncode { get; }
 		bool Founded { get; }
 		string SrcAncode { get; }
+        int SrcAccentedVowel { get; }
+        int AccentModelNo { get; }
+        //string SrcAccent { get; }
 		string SrcNorm { get; }
 		int HomonymWeight { get; }
 		int WordWeight { get; }

@@ -89,12 +89,18 @@ namespace LemmatizerNET.Implement {
 				}
 			}
 		}
-		private void CreateDecartProduction(IList<FormInfo> results1, IList<FormInfo> results2, IList<FormInfo> results) {
+        //private void CreateDecartProduction(IList<FormInfo> results1, IList<FormInfo> results2, IList<FormInfo> results) { 
+        //CreateDecartProduction(results1, results2,  results,  "") ;}
+        private void CreateDecartProduction(IList<FormInfo> results1, IList<FormInfo> results2, IList<FormInfo> results, string firstPart)
+        {
+
 			results.Clear();
 			for (var i = 0; i < results1.Count; i++) {
 				for (var k = 0; k < results2.Count; k++) {
 					var f = (FormInfo)results2[k].Clone();
-					f.SetUserPrefix(results1[i].GetForm(0) + "-");
+                    int j = results1[i].Count;
+                    while (--j > 0 && results1[i].GetForm(j) != firstPart) ;
+					f.SetUserPrefix(results1[i].GetForm(j) + "-");
 					results.Add(f);
 				}
 			}
@@ -255,7 +261,7 @@ namespace LemmatizerNET.Implement {
 							&& secondPart.Length > 2) {
 							// if both words were found in the dictionary
 							// then we should create a decart production
-							CreateDecartProduction(results1, results2, result);
+                                CreateDecartProduction(results1, results2, result, firstPart);
 							for (var i = 0; i < result.Count; i++) {
 								result[i].SetUserUnknown();
 							}
