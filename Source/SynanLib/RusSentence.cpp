@@ -583,7 +583,7 @@ bool	CRusSentence::IsProfession(const CSynHomonym& H) const
 bool CRusSentence::BuildClauses()
 {
 	//запись в log файл отключена
-	FILE* log_fp = 0;
+	//FILE* log_fp = 0;//есть общий лог в rml_TRACE
 	// log_fp = fopen("current_sentence.log", "w");
 	
 	ProcessFio1Fio2();
@@ -646,7 +646,7 @@ BuildInitialClausesLabel:
 
 	if(! BuildInitialClauses() )
 	{
-		fclose(log_fp);
+		//fclose(log_fp);
 		return false;
 
 	};
@@ -818,7 +818,7 @@ BuildInitialClausesLabel:
 	assert ( IsValid() );
 
 	if (log_fp)  fprintf (log_fp, "fclose(log_fp)\n");
-	if (log_fp)  fclose(log_fp);	
+	//if (log_fp)  fclose(log_fp);	
 
 	return true;
 

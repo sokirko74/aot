@@ -31,6 +31,7 @@ CThesaurus::~CThesaurus()
 
 bool CThesaurus::ReadThesaurusFromDisk()
 {
+	//ErrorMessage ("Cannot Load models " +m_Directory+"/StatThes/FreqCollocTypes.txt");
 	if (m_bDontLoad) return true;
 
 	if (!m_pMainGramTab) return false;

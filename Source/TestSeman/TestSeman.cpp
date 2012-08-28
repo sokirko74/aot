@@ -1,5 +1,6 @@
 /*
 Пример вызова интерфейса Seman. В stdin подаются предложения в  кодировке Win-1251(по одному на каждой строке). 
+Определите дерективу DOS для кодировки DOS
 Программа печатает семантические узлы и отношения для каждого входного предложения.
 Для каждого слова  семантического узла печатается лемма, часть речи и граммемы.
 
@@ -12,7 +13,6 @@ Relations:
 	SUB (0, 1)
 	OBJ (2, 1)
 */
-
 #include "../SemanLib/SemStructureBuilder.h"
 
 
@@ -34,7 +34,6 @@ string GetGramInfo (long Poses, QWORD Grammems )
 		Result +=  " ";
 	}
 	Result += SemBuilder.m_RusStr.m_pData->GetRusGramTab()->GrammemsToStr(Grammems);
-
 	return  Result;
 }
 
@@ -80,7 +79,8 @@ string GetWordStrOfNode (const CRusSemNode&  Node, bool bOnlyWords = false)
 		    NodeStr += " ";
 		    NodeStr += GetGramInfo(Word.m_Poses, Word.GetAllGrammems());
 	    }
-	    NodeStr += " Отредакт. морф. информация: ";
+		if(!NodeStr.empty())
+	    NodeStr += " -> "; // Отредакт. морф. информация:
 	    NodeStr += GetGramInfo(Node.GetNodePoses(), Node.GetGrammems());
 	    if (!Node.m_AntecedentStr.empty())
 	    {
@@ -178,6 +178,27 @@ int main(int argc, char* argv[])
 	return 0;
 }
 */
+char* Decode_DOS_to_Win(char * str)
+{
+#ifdef DOS
+   char *buf = new char[std::strlen(str) + 1];
+   OemToCharA(str, buf);
+   return buf;
+#endif
+    return str;
+}
+
+//из Windows в DOS
+char* Decode_Win_to_DOS(const char * str)
+{
+#ifdef DOS
+   char *buf = new char[std::strlen(str) + 1];
+   CharToOemA(str, buf); 
+   return buf;
+#endif
+
+	return (char *)str;
+}
 
 int main(int argc, char* argv[])
 {
@@ -221,7 +242,7 @@ int main(int argc, char* argv[])
 			LineCount++;
 			fprintf (stderr,  "%i\n", LineCount);
 			fflush(stderr);
-			Source = buffer;
+			Source = Decode_DOS_to_Win(buffer);
 			rtrim(buffer);
 			string ResGraph;
 			if (strlen(buffer) > 250)
@@ -237,23 +258,42 @@ int main(int argc, char* argv[])
 			try 
 			{
 				SemBuilder.FindSituations(Source,0,"общ",20000,-1,"", ResGraph);
+				printf ("Nodes:\n");
 				for (int i = 0; i < SemBuilder.m_RusStr.m_Nodes.size(); i++)
 				{
-					printf ("%s",  GetWordStrOfNode(SemBuilder.m_RusStr.m_Nodes[i], true).c_str());
+					string Nstr = GetWordStrOfNode(SemBuilder.m_RusStr.m_Nodes[i]).c_str();
+					printf ("  Node %i %s\n",  i, Decode_Win_to_DOS((Nstr.empty() ? SemBuilder.m_RusStr.GetNodeStr1(i) : Nstr).c_str()));
+				}
+				printf ("Relations:\n");
+
+				for (int i = 0; i < SemBuilder.m_RusStr.m_Relations.size(); i++)
+				{
+					const CRusSemRelation& R = SemBuilder.m_RusStr.m_Relations[i];
+					long m_TargetNodeNo = R.m_Valency.m_Direction == C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+					long m_SourceNodeNo = R.m_Valency.m_Direction != C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+
+					if (!R.m_Valency.m_RelationStr.empty())
+						printf ("  %s (%s, %s) = (%i, %i)\n", Decode_Win_to_DOS(R.m_Valency.m_RelationStr.c_str()), Decode_Win_to_DOS(SemBuilder.m_RusStr.GetNodeStr1(m_TargetNodeNo).c_str()), Decode_Win_to_DOS(SemBuilder.m_RusStr.GetNodeStr1(m_SourceNodeNo).c_str()),m_TargetNodeNo,m_SourceNodeNo);
+				};
+				for (int i = 0; i < SemBuilder.m_RusStr.m_Nodes.size(); i++)
+				{
+					printf ("%s",  Decode_Win_to_DOS(GetWordStrOfNode(SemBuilder.m_RusStr.m_Nodes[i], true).c_str()));
 				    for (int k = 0; k < SemBuilder.m_RusStr.m_Relations.size(); k++)
 				    {
                         const CRusSemRelation& R = SemBuilder.m_RusStr.m_Relations[k];
-                        if (!R.m_Valency.m_RelationStr.empty() && R.m_TargetNodeNo == i) {
+						long m_TargetNodeNo = R.m_Valency.m_Direction == C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+						long m_SourceNodeNo = R.m_Valency.m_Direction != C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+                        if (!R.m_Valency.m_RelationStr.empty() && m_TargetNodeNo == i) {
                             string q = R.m_Valency.m_RelationStr;
                             EngRusMakeLower(q);
-                            printf ("[%s]", q.c_str());
+                            printf ("[%s]", Decode_Win_to_DOS(q.c_str()));
                             break;
                         }
                     }
                     printf (" ");
-
 				}
                 printf ("\n");
+				if(log_fp != 0) { fclose(log_fp); log_fp = 0; }
 
 			} 
 			catch(...)

@@ -207,7 +207,7 @@ void CRusSemStructure::GetClauseRootsWithoutDeleted (size_t ClauseNo, vector<lon
 			if (!m_Nodes[i].m_bToDelete)
 				Nodes.push_back(i);
 
-	/*проходим по всем связям, если свящь идет от узла, которые помечен на удаление,
+	/*проходим по всем связям, если связь идет от узла, которые помечен на удаление,
 	тогда,  и идет в узел, в который входит только одна связь - тогда это вершина 
 	*/
 	for (size_t i=0; i<m_Relations.size(); i++)

@@ -71,7 +71,8 @@ bool CFormatCaller::try_and_step_forward(CFormatCall* FC, CGroup& G, int rule)
 		create_group(G);
 
 		
-		rml_TRACE("%s (%i, %i)  is created\n", GetOpt()->GetGroupNameByIndex(G.m_GroupType), G.m_iFirstWord, G.m_iLastWord);
+		rml_TRACE("%s (%i, %i) (%s, %s) is created\n", GetOpt()->GetGroupNameByIndex(G.m_GroupType), G.m_iFirstWord, G.m_iLastWord,
+			sent[G.m_iFirstWord].get_word(),sent[G.m_iLastWord].get_word());
 		
 		return true;
 	}
