@@ -41,7 +41,7 @@ enum rPartOfSpeeches
 enum rGrammems {
 		 rPlural     = 0,
 		 rSingular   = 1,
-		 rAllNumbers = (1<<rSingular) | (1<<rPlural),
+		 rAllNumbers = ((1<<rSingular) | (1<<rPlural)),
 
 		 rNominativ  = 2,
 		 rGenitiv    = 3,
@@ -50,30 +50,30 @@ enum rGrammems {
 		 rInstrumentalis = 6,
 		 rLocativ    = 7,
 		 rVocativ    = 8,
-		 rAllCases   = (1<<rNominativ) | (1<<rGenitiv) | (1<<rDativ) | (1<<rAccusativ) | (1<<rInstrumentalis) | (1<<rVocativ) | (1<<rLocativ),
+		 rAllCases   = ((1<<rNominativ) | (1<<rGenitiv) | (1<<rDativ) | (1<<rAccusativ) | (1<<rInstrumentalis) | (1<<rVocativ) | (1<<rLocativ)),
 
 		 rMasculinum = 9,
 		 rFeminum    = 10,
 		 rNeutrum    = 11,
 		 rMascFem    = 12,
-		 rAllGenders   = (1<<rMasculinum) | (1<<rFeminum) | (1<<rNeutrum),
+		 rAllGenders   = ((1<<rMasculinum) | (1<<rFeminum) | (1<<rNeutrum)),
 
 
 		 rPresentTense = 13,
 		 rFutureTense = 14,
 		 rPastTense = 15,
-		 rAllTimes   = (1<<rPresentTense) | (1<<rFutureTense) | (1<<rPastTense),
+		 rAllTimes   = ((1<<rPresentTense) | (1<<rFutureTense) | (1<<rPastTense)),
 
 		 rFirstPerson = 16,
 		 rSecondPerson = 17,
 		 rThirdPerson = 18,
-		 rAllPersons = (1 << rFirstPerson) | (1 << rSecondPerson) | (1 << rThirdPerson),
+		 rAllPersons = ((1 << rFirstPerson) | (1 << rSecondPerson) | (1 << rThirdPerson)),
 
 		 rImperative = 19,
 
 		 rAnimative = 20,
 		 rNonAnimative = 21,
-		 rAllAnimative   = (1<<rAnimative) | (1<<rNonAnimative),
+		 rAllAnimative   = ((1<<rAnimative) | (1<<rNonAnimative)),
 
 		 rComparative = 22,
 

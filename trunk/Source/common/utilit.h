@@ -192,7 +192,7 @@ extern void		KOI8ToWin (string& s);
 extern void		WinToKOI8 (string& s);
 extern DWORD	StringCrc32(const char* szString);
 
-
+extern FILE* log_fp;
 
 extern void QPEncodeString(string& s);
 extern void QPDecodeString(string& s);
@@ -381,4 +381,5 @@ enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
 #endif
 
+#define IsPowerOfTwo(x) (((x) != 0) && (((x) & ((x) - 1)) == 0))
 

@@ -466,6 +466,7 @@ string	CreateTempFileName()
 
 };
 
+FILE* log_fp = 0;
 
 void rml_TRACE( const char* format, ... )
 {
@@ -483,7 +484,15 @@ void rml_TRACE( const char* format, ... )
           va_start( arglst, format );
 	      vsprintf( s, format, arglst);
 	      va_end( arglst );
-		  OutputDebugString(s);
+		  OutputDebugString((s));
+		  
+		  if (log_fp)
+		  {
+			  fprintf (log_fp, "%s", s);
+			  fflush (log_fp);
+		  }
+		  else log_fp =  fopen("debug.log", "w+");
+
 	#endif
 #endif
 };
@@ -929,7 +938,7 @@ bool CheckEvaluationTime ()
 	tm today = RmlGetCurrentTime();
 
 	//  2011 year
-	if (today.tm_year > 111)
+	if (today.tm_year < 111)
 	{
 		ErrorMessage("Evaluation period is expired. Write to sokirko@yandex.ru!");
 		return false;

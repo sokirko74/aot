@@ -1147,7 +1147,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 				double AllTicks = EndTimer("FindSituationsForClauseVariantCombination");
 				WordsPerSecond =  (AllTicks == 0) ?  0 : (double)(m_Nodes.size())  / (AllTicks/CLOCKS_PER_SEC);
 
-#ifndef DEBUG
+#ifndef _DEBUG
 
 				/*
 				В релизной  версии, если  скорость меньше, чем полсекунды на слово,
@@ -1216,7 +1216,6 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_ClauseVariantsStatistics = "";
 		for (long j=0;j <m_AlreadyBuiltClauseVariants.size(); j++)
 			m_ClauseVariantsStatistics += m_AlreadyBuiltClauseVariants[j].GetStr() + string ("\n");
-
 
 		return  BestClauseVariantsCombinationWeight;
 	}
