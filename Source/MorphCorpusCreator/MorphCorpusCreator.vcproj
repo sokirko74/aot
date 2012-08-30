@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="MorphCorpusCreator"
 	ProjectGUID="{6259EF59-6BE9-4350-A817-CCB2CA90E9A2}"
+	RootNamespace="MorphCorpusCreator"
 	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
@@ -116,7 +117,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>
