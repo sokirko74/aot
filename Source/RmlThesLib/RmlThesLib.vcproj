@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="RmlThesLib"
 	ProjectGUID="{DDD77DCE-8A14-4307-8E0D-7FD1C56D52CD}"
+	RootNamespace="RmlThesLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -101,7 +102,7 @@
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>

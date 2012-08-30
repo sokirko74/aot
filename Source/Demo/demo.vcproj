@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="demo"
 	ProjectGUID="{CB5AA0C0-E2A2-4D35-8A26-15265A42174C}"
+	RootNamespace="demo"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	Keyword="MFCProj"

@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="SimpleGrammarPrecompiled"
 	ProjectGUID="{72DF32F4-AD80-43EC-AAEF-EB498D924722}"
+	RootNamespace="SimpleGrammarPrecompiled"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -104,6 +105,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool

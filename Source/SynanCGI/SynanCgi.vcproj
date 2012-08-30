@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="SynanCGI"
 	ProjectGUID="{2F9AFAC4-1248-40B4-8BD8-F8DF05EBC9DB}"
+	RootNamespace="SynanCGI"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -115,7 +116,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>

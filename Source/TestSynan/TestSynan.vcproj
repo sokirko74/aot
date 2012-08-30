@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="TestSynan"
 	ProjectGUID="{4CE60B5F-0CE0-44EB-B587-26561BEB878C}"
+	RootNamespace="TestSynan"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -118,7 +119,7 @@
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>

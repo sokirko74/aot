@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="LemmatizerLib"
 	ProjectGUID="{BC392768-3498-4F23-B7A8-A2958258E098}"
+	RootNamespace="LemmatizerLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"

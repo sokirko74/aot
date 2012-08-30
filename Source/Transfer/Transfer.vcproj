@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="Transfer"
 	ProjectGUID="{C74E5A2C-E38F-4CC1-BC29-F278302DB510}"
+	RootNamespace="Transfer"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -103,7 +104,7 @@
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>

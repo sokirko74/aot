@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="SynanLib"
 	ProjectGUID="{913F5B92-6E3F-4034-BBB3-6A426F0C0C78}"
+	RootNamespace="SynanLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -102,7 +103,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>

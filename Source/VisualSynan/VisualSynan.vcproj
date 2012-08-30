@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="VisualSynan"
 	ProjectGUID="{19769A0E-EDDD-45DE-AD47-84DBFF70EEF5}"
+	RootNamespace="VisualSynan"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	Keyword="MFCProj"
@@ -123,6 +124,7 @@
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"

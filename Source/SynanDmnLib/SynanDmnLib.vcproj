@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="SynanDmnLib"
 	ProjectGUID="{4ADDDB93-98F7-4F59-A42D-BD97D07421D3}"
+	RootNamespace="SynanDmnLib"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -89,6 +90,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool
