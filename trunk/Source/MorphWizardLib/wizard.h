@@ -274,6 +274,7 @@ public:
 	string  GetUserName() const;
 	void	StartLastSessionOfUser(string user_name);
 	WORD	RegisterSession(const CMorphSession& S);
+    bool    Filter(string flt_str, std::vector<lemma_iterator_t>& found_paradigms) const;
 private:
 	BYTE	_GetReverseVowelNo( const string& form, WORD accentModelNo, WORD formInd ) const;
 	void	SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, string& form) const;
