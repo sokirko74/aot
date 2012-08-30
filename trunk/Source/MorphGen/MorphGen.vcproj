@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="MorphGen"
 	ProjectGUID="{3CFE48A6-B351-4615-8EBB-1AF85F03A98E}"
+	RootNamespace="MorphGen"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -22,7 +23,7 @@
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>

@@ -1,7 +1,6 @@
 include ../common/common_mak
 ExeName = MorphGen$(ExeExten)
 objects = MorphGen.o$(ct) 
-link_pcre = 1
 
 libs = ../LemmatizerLib/libLemmatizer$(ct).$(lib_ext) \
 ../AgramtabLib/libAgramtab$(ct).$(lib_ext) \
