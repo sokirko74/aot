@@ -317,27 +317,36 @@ void CRusSemStructure::ApplySubordinationCases ()
 
 	// падеж числительных
 	for (long i=0;  i < m_Relations.size(); i++)
-		if( m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" 						
-			&& !IsPowerOfTwo(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & rAllCases) )	// падеж не определен
+		if( (m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" 
+			|| (m_Relations[i].m_Valency.m_RelationStr == "PROPERT" && m_Nodes[m_Relations[i].m_TargetNodeNo].HasPOS(NUMERAL_P)) ) //Задача 1777 года.					
+			&& !IsPowerOfTwo(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & rAllCases) )	// падеж ЧИСЛ не определен
+		{
 			for (long j=0;  j < m_Relations.size(); j++)
 				if( m_Relations[i].m_SourceNodeNo == m_Relations[j].m_TargetNodeNo ) 
 				{
 					if( (m_Relations[j].m_Valency.m_RelationStr == "TIME") // Ему 100 лет
 						&& (m_Nodes[m_Relations[j].m_SourceNodeNo].m_Words[0].m_Word == "есть")
-						&& !IsPowerOfTwo(m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() & rAllCases & !rGenitiv)) 
+						&& !IsPowerOfTwo(m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() & (rAllCases))) // & ~_QM(rGenitiv)
 						{
 							m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllCases);
 							m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rGenitiv);
 							m_Nodes[m_Relations[i].m_TargetNodeNo].DeleteGrammems ( rAllCases);
 							m_Nodes[m_Relations[i].m_TargetNodeNo].AddOneGrammem ( rAccusativ);
 						}
-					if( (m_Relations[j].m_Valency.m_RelationStr == "ACT" || m_Relations[j].m_Valency.m_RelationStr == "S-ACT") // Наличие двух стволов. Там есть 100 тонн.
+					if( (m_Relations[j].m_Valency.m_RelationStr == "ACT" || m_Relations[j].m_Valency.m_RelationStr == "S-ACT") // Наличие 5 стволов. Там есть 100 тонн.
 						&& IsPowerOfTwo(m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() & rAllCases)) // падеж определен
 						{
 							m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems ( m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() );
 						}
 					break;
-				};
+				}
+			if (!IsPowerOfTwo(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & rAllCases) // падеж ЧИСЛ не определен
+				&& IsPowerOfTwo(m_Nodes[m_Relations[i].m_SourceNodeNo].GetGrammems() & (rAllCases)) )   // падеж определен 
+			{
+				m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems ( m_Nodes[m_Relations[i].m_SourceNodeNo].GetGrammems() );
+			}
+
+		}
 	
    // если русское подлежащее было неизменяемым, а в него идет стрелка  от сказуемого, 
    // которое стоит строго либо в мн., либо  ед., тогда нужно удалить граммему, 

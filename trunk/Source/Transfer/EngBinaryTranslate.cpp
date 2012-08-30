@@ -766,8 +766,8 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 		{
 			// восстанавливаем лемму
 			assert (i < RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWordsSize());
-
-			m_Nodes[NodeNo].m_Words[i].m_Lemma = RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWord(i).m_Lemma;
+			if( i < RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWordsSize() )
+				m_Nodes[NodeNo].m_Words[i].m_Lemma = RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWord(i).m_Lemma;
 
 			helper.transliterate(m_Nodes[NodeNo].m_Words[i]);
 		};
