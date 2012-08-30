@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="MAPostLib"
 	ProjectGUID="{826C72AF-77D2-4FAA-8E2E-2EC05530FC91}"
+	RootNamespace="MAPostLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -101,7 +102,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>
