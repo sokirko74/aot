@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="MorphWizardLib"
 	ProjectGUID="{E9B1B8FF-71A8-4721-AA54-61DE19CCB871}"
+	RootNamespace="MorphWizardLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -48,7 +49,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="false"
 				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="&quot;C:\Program Files\GnuWin32\src\pcre\6.4\pcre-6.4\&quot; "
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="WIN32,NDEBUG,_LIB"
 				StringPooling="false"
 				MinimalRebuild="false"
@@ -76,7 +77,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="..\..\contrib\pcre\pcre.lib"
 				OutputFile=".\Release\MorphWizardLib.lib"
 				SuppressStartupBanner="true"
 			/>
@@ -124,7 +124,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Program Files\GnuWin32\src\pcre\6.4\pcre-6.4\&quot; "
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="WIN32,_DEBUG,_LIB"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -151,7 +151,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="..\..\contrib\pcre\pcre.lib"
 				OutputFile=".\Debug\MorphWizardLib.lib"
 				SuppressStartupBanner="true"
 			/>
