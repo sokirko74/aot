@@ -1,5 +1,4 @@
 cparams := $(cparams) -DUSE_TRIGRAM_LEMMATIZER
-link_pcre = 1
 include ../common/common_mak
 
 ExeName = ConvertTrigramBinary$(ExeExten)
@@ -11,6 +10,7 @@ libs = ../TrigramLib/libTrigram$(ct).$(lib_ext) \
 ../GraphanLib/libGraphan$(ct).$(lib_ext) \
 ../MorphWizardLib/libMorphWizard$(ct).$(lib_ext) \
 ../StructDictLib/libStructDict$(ct).$(lib_ext) \
+../PCRE/libPCRE$(ct).$(lib_ext) \
 ../LemmatizerLib/libLemmatizer$(ct).$(lib_ext)
 
 
