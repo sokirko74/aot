@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="SimpleGrammarLib"
 	ProjectGUID="{3C8B7775-838C-44E6-9B56-89A9F9E243C3}"
+	RootNamespace="SimpleGrammarLib"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -90,6 +91,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool

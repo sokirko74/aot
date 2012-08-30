@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="graphan"
 	ProjectGUID="{DFC6E289-AD89-4CDC-BC52-32A71B230CF6}"
+	RootNamespace="graphan"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	Keyword="AtlProj"
@@ -125,7 +126,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>
@@ -135,7 +136,7 @@
 			<Tool
 				Name="VCCustomBuildTool"
 				Description="Performing registration"
-				CommandLine="regsvr32 /s /c &quot;$(TargetPath)&quot;&#x0D;&#x0A;echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; ..\Bin"
+				CommandLine="regsvr32 /s /c &quot;$(TargetPath)&quot;&#x0D;&#x0A;echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; ..\Bin&#x0D;&#x0A;"
 				Outputs="$(OutDir)\regsvr32.trg"
 			/>
 			<Tool

@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="StructDictLoader"
 	ProjectGUID="{09C24082-A6F9-4E19-8C80-99E68E71BF94}"
+	RootNamespace="StructDictLoader"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -106,6 +107,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool

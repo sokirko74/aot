@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="BinaryDictsLib"
 	ProjectGUID="{2441799D-228E-4666-AB47-2D6C794C501E}"
+	RootNamespace="BinaryDictsLib"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -21,6 +22,7 @@
 			IntermediateDirectory="Debug"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool

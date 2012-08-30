@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="SynCommonLib"
 	ProjectGUID="{0F7F8378-5CBA-4B88-9AF9-2BF88E1084AB}"
+	RootNamespace="SynCommonLib"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -21,6 +22,7 @@
 			IntermediateDirectory="Debug"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool

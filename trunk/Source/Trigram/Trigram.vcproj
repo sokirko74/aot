@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="Trigram"
 	ProjectGUID="{4292E1EC-F61A-41D5-A3E0-6EB3FFA97384}"
+	RootNamespace="Trigram"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -21,6 +22,7 @@
 			IntermediateDirectory="Debug"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool

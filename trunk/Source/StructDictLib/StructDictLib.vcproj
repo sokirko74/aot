@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="StructDictLib"
 	ProjectGUID="{D42CFD9A-41D1-447A-A97F-02E5B4FFE639}"
+	RootNamespace="StructDictLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"

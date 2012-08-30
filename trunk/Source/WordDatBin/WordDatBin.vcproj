@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="WordDatBin"
 	ProjectGUID="{88477BD4-CE86-40B6-BAE7-B6141DEC4290}"
+	RootNamespace="WordDatBin"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
@@ -22,7 +23,7 @@
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>
