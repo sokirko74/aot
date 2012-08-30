@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="AgramtabLib"
 	ProjectGUID="{2C4C16AF-7F03-4F3F-BDAD-5F3D3FDFAD5F}"
+	RootNamespace="AgramtabLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"
