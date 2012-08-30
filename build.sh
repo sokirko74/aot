@@ -23,42 +23,6 @@ fi;
 
 echo "RML=$RML"
 
-if [ -z $RML_PCRE_INCLUDE ]; then
-  if [ -e "$RML/contrib/pcre-6.4" ]; then
-    RML_PCRE_INCLUDE="$RML/contrib/pcre-6.4"
-    export RML_PCRE_INCLUDE=$RML_PCRE_INCLUDE
-  fi
-fi
-
-if [ -z $RML_PCRE_INCLUDE ]; then
-  if [ -e "/usr/include/pcre.h" ]; then
-    RML_PCRE_INCLUDE="/usr/include"
-    export RML_PCRE_INCLUDE=$RML_PCRE_INCLUDE
-  else
-    echo "Please, set RML_PCRE_INCLUDE variable or install libpcre-dev!"
-    exit;
-  fi
-fi
-
-if [ -z $RML_PCRE_LIB ]; then
-  if [ -e "$RML_PCRE_INCLUDE/.libs" ]; then
-    RML_PCRE_LIB="$RML_PCRE_INCLUDE/.libs"
-    export RML_PCRE_LIB=$RML_PCRE_LIB
-  fi
-fi
-
-if [ -z $RML_PCRE_LIB ]; then
-  if [ -e "/usr/lib/libpcre.so" ]; then
-    RML_PCRE_LIB="/usr/lib"
-    export RML_PCRE_LIB=$RML_PCRE_LIB
-  else
-    echo "Please, set RML_PCRE_LIB variable or install libpcre-dev!"
-    exit;
-  fi
-fi
-
-echo "RML_PCRE_LIB=$RML_PCRE_LIB"
-echo "RML_PCRE_INCLUDE=$RML_PCRE_INCLUDE"
 
 make_tool=make
 cd $RML
