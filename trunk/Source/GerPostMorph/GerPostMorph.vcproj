@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="GerPostMorph"
 	ProjectGUID="{340C354E-7543-45C8-B606-E8F7DC8330D7}"
+	RootNamespace="GerPostMorph"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	Keyword="Win32Proj"
@@ -91,6 +92,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool

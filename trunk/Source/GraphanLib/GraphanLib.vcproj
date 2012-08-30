@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="GraphanLib"
 	ProjectGUID="{4E2ABCE5-A4AE-4F69-BA4F-6B8FF6FE9C39}"
+	RootNamespace="GraphanLib"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
 	TargetFrameworkVersion="131072"

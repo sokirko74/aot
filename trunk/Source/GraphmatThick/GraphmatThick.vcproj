@@ -4,8 +4,10 @@
 	Version="9,00"
 	Name="GraphmatThick"
 	ProjectGUID="{5511CAFB-AC80-4CED-B789-553CEB239B6C}"
+	RootNamespace="GraphmatThick"
 	SccLocalPath="."
 	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -100,9 +102,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 				CommandLine="copy $(TargetPath) ..\..\Bin"
 			/>
@@ -113,7 +112,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -171,9 +170,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
