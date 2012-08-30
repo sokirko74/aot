@@ -2,13 +2,13 @@
 #include "pcre_rml.h"
 //#include "internal.h"
 
-#ifdef WIN32
+//#ifdef WIN32
 	
 	bool pcrecpp::Arg::parse_null          (const char* str, int n, void* dest)
 	{
 		return str == 0;
 	}
-#endif
+//#endif
 
 /* Bit definitions for entries in the pcre_ctypes table. */
 
