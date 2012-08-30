@@ -1,8 +1,3 @@
-#########################################
-######## common part  ###################
-#########################################
-
-
 ifeq ($(libmode), shared)
 
 $(LibName).$(lib_ext) : $(objects)
@@ -16,10 +11,6 @@ $(LibName).$(lib_ext) : $(objects)
 	$(mode_error)
 	ar rcs  $@  $^
 endif
-
-#$(precomp): %.h.gch : %.h
-#	echo "test"
-#	g++ $(cparams) $< -o $@
 
 $(objects): %.o$(ct) : %.cpp
 	$(mode_error)
