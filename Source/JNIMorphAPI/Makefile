@@ -1,5 +1,3 @@
-link_pcre = 1
-
 VPATH = ../
 
 include ../common/common_mak
@@ -71,6 +69,7 @@ $(PCRE_OBJECTS_LIB)/pcre_valid_utf8.o \
 $(PCRE_OBJECTS_LIB)/pcre_version.o \
 $(PCRE_OBJECTS_LIB)/pcre_xclass.o
 
-libs = 
+libs =  ../PCRE/libPCRE$(ct).$(lib_ext)
+
 
 include ../common/common_lib_mak
