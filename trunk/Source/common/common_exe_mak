@@ -7,12 +7,7 @@ lib_pathes := $(subst ..,-L..,$(subst lib, -l,$(libs)))
 
 # we have to use "--start-group --end-group" in order to solve cross-references
 
-ifeq ($(link_pcre),1)
-	pcre_libs := -L$(RML_PCRE_LIB) -lpcrecpp -L$(RML_PCRE_LIB) -lpcre
-endif
-
-
-libs_argument := -Wl,--start-group $(pcre_libs) $(subst .$(lib_ext),,$(lib_pathes)) -Wl,--end-group
+libs_argument := -Wl,--start-group $(subst .$(lib_ext),,$(lib_pathes)) -Wl,--end-group
 
 ifndef gcc_ver
 	gcc_ver := $(word 3,$(shell gcc --version))
