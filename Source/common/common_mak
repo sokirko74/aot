@@ -1,9 +1,4 @@
-# in order to compile with stlport, set stlport to 1
-stlport := 0
-
-
-cparams := $(cparams) -I$(RML_PCRE_INCLUDE) -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
-
+cparams := $(cparams) -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
 ifndef libmode
 	libmode := static
