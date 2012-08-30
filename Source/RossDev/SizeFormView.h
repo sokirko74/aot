@@ -19,33 +19,34 @@
 class CSizeFormView : public CFormView
 {
 protected:
-	CSizeFormView( LPCTSTR lpszTemplateName );
-	CSizeFormView( UINT nIDTemplate );
-	DECLARE_DYNAMIC(CSizeFormView)
+    CSizeFormView( LPCTSTR lpszTemplateName );
+    CSizeFormView( UINT nIDTemplate );
+    DECLARE_DYNAMIC(CSizeFormView)
 
 // Form Data
 public:
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CSizeFormView)
-	public:
-	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwRequestedStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext);
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CSizeFormView)
+    public:
+    virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwRequestedStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext);
+
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
-	virtual ~CSizeFormView();
+    virtual ~CSizeFormView();
 #ifdef _DEBUG
-	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+    virtual void AssertValid() const;
+    virtual void Dump(CDumpContext& dc) const;
 #endif
-	// Generated message  functions
-	//{{AFX_MSG(CSizeFormView)
-	afx_msg void OnSize(UINT nType, int cx, int cy); 
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message  functions
+    //{{AFX_MSG(CSizeFormView)
+    afx_msg void OnSize(UINT nType, int cx, int cy);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 private:
-	GADGETRESIZEHANDLE m_hGadgetResize;
+    GADGETRESIZEHANDLE m_hGadgetResize;
 };
 
 /////////////////////////////////////////////////////////////////////////////
