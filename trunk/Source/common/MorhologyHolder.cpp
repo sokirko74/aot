@@ -111,8 +111,6 @@ bool CMorphologyHolder::GetMorphology(string str, bool bFile, int& CountOfWords)
 	CountOfWords = 0;
 
 	try {
-		
-
 		// ============  Graphematics =======================
 		if (m_bTimeStatis) t1= clock();
 		bool bResult = (bFile) ? m_Graphan.LoadFileToGraphan(str.c_str()):m_Graphan.LoadStringToGraphan(str.c_str());
@@ -133,8 +131,6 @@ bool CMorphologyHolder::GetMorphology(string str, bool bFile, int& CountOfWords)
 
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
 			fprintf(stderr,"Graphan: Ticks = %i Speed = %6.0f\n", t2-t1, speed );
-			
-
 		};
 
 		// ============  Morphology =======================
