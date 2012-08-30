@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="GerSynanLib"
 	ProjectGUID="{9E8E1DB9-71B4-4602-A356-23931ABBC79F}"
+	RootNamespace="GerSynanLib"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -90,6 +91,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool
