@@ -55,7 +55,7 @@
 				MinimalRebuild="false"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=".\Release/MorphWizardLib.pch"
+				PrecompiledHeaderFile=""
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"

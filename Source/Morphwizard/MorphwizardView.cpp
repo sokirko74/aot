@@ -357,35 +357,9 @@ void CMorphwizardView::FilterFoundParadigms()
 	}
 	else
 	{
-		BYTE pos;
-		QWORD grm;
-		if	(		!GetWizard()->m_pGramTab->ProcessPOSAndGrammemsIfCan(flt_str.c_str(),&pos,&grm) 
-				&&	!GetWizard()->m_pGramTab->ProcessPOSAndGrammemsIfCan(string("* "+flt_str).c_str(),&pos,&grm)
-		)
-		{
-				AfxMessageBox(IDS_BADFSTR,MB_ICONERROR|MB_OK);
-		}
-		else
-		{
-			std::string flt_pos;
-			if (pos != UnknownPartOfSpeech)
-				flt_pos = GetWizard()->m_pGramTab->GetPartOfSpeechStr(pos);
-			std::vector<lemma_iterator_t> filter_paradigms;
-			for( int i=0; i<found_paradigms.size(); i++ )
-			{
-				std::string str_pos = GetWizard()->get_pos_string(found_paradigms[i]);
-
-				if (!flt_pos.empty())
-					if( flt_pos != str_pos )
-						continue;
-
-				if( (GetWizard()->get_all_lemma_grammems(found_paradigms[i]) & grm)  != grm) 
-					continue;
-
-				filter_paradigms.push_back(found_paradigms[i]);
-			}
-			found_paradigms = filter_paradigms;
-		}
+        if (!GetWizard()->Filter(flt_str, found_paradigms)) {
+            AfxMessageBox(IDS_BADFSTR,MB_ICONERROR|MB_OK);
+        }
 	};
 
 };

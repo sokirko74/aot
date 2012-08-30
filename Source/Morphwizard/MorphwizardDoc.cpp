@@ -308,3 +308,4 @@ BOOL CMorphwizardDoc::SaveModified()
 	return TRUE;    // keep going
 }
 */
+

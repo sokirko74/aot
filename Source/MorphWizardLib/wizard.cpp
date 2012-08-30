@@ -2854,3 +2854,38 @@ bool MorphoWizard::ReadNextParadigmFromFile(FILE* fp, CDumpParadigm& P, int& lin
 	return true; 
 
 };
+
+//----------------------------------------------------------------------------
+bool MorphoWizard::Filter(string flt_str, std::vector<lemma_iterator_t>& found_paradigms) const
+{
+	BYTE pos;
+	QWORD grm;
+	if	(		!m_pGramTab->ProcessPOSAndGrammemsIfCan(flt_str.c_str(),&pos,&grm) 
+			&&	!m_pGramTab->ProcessPOSAndGrammemsIfCan(string("* "+flt_str).c_str(),&pos,&grm)
+	)
+	{
+			return false;
+	}
+	else
+	{
+		std::string flt_pos;
+		if (pos != UnknownPartOfSpeech)
+			flt_pos = m_pGramTab->GetPartOfSpeechStr(pos);
+		std::vector<lemma_iterator_t> filter_paradigms;
+		for( int i=0; i<found_paradigms.size(); i++ )
+		{
+			std::string str_pos = get_pos_string(found_paradigms[i]);
+
+			if (!flt_pos.empty())
+				if( flt_pos != str_pos )
+					continue;
+
+			if( (get_all_lemma_grammems(found_paradigms[i]) & grm)  != grm) 
+				continue;
+
+			filter_paradigms.push_back(found_paradigms[i]);
+		}
+        filter_paradigms.swap(found_paradigms);
+	}
+    return true;
+}
