@@ -1,4 +1,3 @@
-link_pcre = 1
 include ../common/common_mak
 ExeName = SynanDaemon$(ExeExten)
 objects = Main.o$(ct)
@@ -17,6 +16,7 @@ libs = \
 ../GerSynanLib/libGerSynan$(ct).$(lib_ext) \
 ../EngSynanLib/libEngSynan$(ct).$(lib_ext) \
 ../GerPostMorph/libGerPostMorph$(ct).$(lib_ext) \
+../PCRE/libPCRE$(ct).$(lib_ext) \
 ../SynanLib/libSynan$(ct).$(lib_ext) \
 ../SimpleGrammarLib/libSimpleGrammar$(ct).$(lib_ext)
 
