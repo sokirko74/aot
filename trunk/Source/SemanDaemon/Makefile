@@ -1,7 +1,6 @@
 include ../common/common_mak
 ExeName = SemanDaemon$(ExeExten)
 objects = Main.o$(ct)
-link_pcre = 1
 
 libs = \
 ../GraphanLib/libGraphan$(ct).$(lib_ext) \
@@ -22,6 +21,7 @@ libs = \
 ../SemanLib/libSeman$(ct).$(lib_ext) \
 ../BinaryDictsLib/libBinaryDicts$(ct).$(lib_ext) \
 ../SemanDmnLib/libSemanDmn$(ct).$(lib_ext) \
+../PCRE/libPCRE$(ct).$(lib_ext) \
 ../Transfer/libTransfer$(ct).$(lib_ext) 
 
 
