@@ -206,6 +206,7 @@ void CRusSentence::TryToRebuildDashInClause()
 		if (0 == Noun_Nom.size() && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) // Глаза красивые.
 			for (j = pClause.m_iFirstWord; j <= pClause.m_iLastWord; j++)
 			{
+				m_Words[j].SetHomonymsDel(true);
 				for (int i = 0; i < m_Words[j].m_Homonyms.size() && 0 == Noun_Nom.size(); i++) 
 				{
 					if (  m_Words[j].m_Homonyms[i].IsSynNoun() ) 
@@ -213,11 +214,14 @@ void CRusSentence::TryToRebuildDashInClause()
 						if (  m_Words[j].m_Homonyms[i].HasGrammem(rNominativ) ||
 							(Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ))) // Ему 33.
 						{
+							m_Words[j].m_Homonyms[i].m_bDelete = false;
 							Noun_Nom.push_back(j);
-							break;
 						}
 					}
 				}
+				if (Noun_Nom.size() > 0 && find(Noun_Nom.begin(), Noun_Nom.end(), j) != Noun_Nom.end())
+					m_Words[j].DeleteMarkedHomonymsBeforeClauses();
+				else m_Words[j].SetHomonymsDel(false);
 			}
 		else Vozrast = false;
 

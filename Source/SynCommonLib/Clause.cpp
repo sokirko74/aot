@@ -91,8 +91,9 @@ string  CClause::GetTraceStr() const
 			T+= "|";
 	};
 	if (T == "") T = "no_type";
-	return Format("%s(%i %i) (%s %s)", T.c_str(), m_iFirstWord, m_iLastWord, 
-		(CLemWord*)(&(m_pSent->m_Words[m_iFirstWord]))->m_strWord.c_str(),(CLemWord*)(&(m_pSent->m_Words[m_iLastWord]))->m_strWord.c_str());
+	return Format("%s(%i %i) (%s %s)", T.c_str(), m_iFirstWord, m_iLastWord,
+		m_iFirstWord < m_pSent->m_Words.size() ? m_pSent->m_Words[m_iFirstWord].m_strWord.c_str() : "",
+		m_iLastWord  < m_pSent->m_Words.size() ? m_pSent->m_Words[m_iLastWord].m_strWord.c_str() : "");
 };
 
 
