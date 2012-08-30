@@ -1,4 +1,3 @@
-link_pcre = 1
 include ../common/common_mak
 
 ExeName = TestSeman$(ExeExten)
@@ -14,6 +13,7 @@ libs = ../LemmatizerLib/libLemmatizer$(ct).$(lib_ext) \
 ../StructDictLib/libStructDict$(ct).$(lib_ext) \
 ../SynCommonLib/libSynCommon$(ct).$(lib_ext) \
 ../GerSynanLib/libGerSynan$(ct).$(lib_ext) \
+../PCRE/libPCRE$(ct).$(lib_ext) \
 ../EngSynanLib/libEngSynan$(ct).$(lib_ext) \
 ../GerPostMorph/libGerPostMorph$(ct).$(lib_ext) \
 ../SynanLib/libSynan$(ct).$(lib_ext) \

@@ -1,5 +1,3 @@
-#profile = 1
-link_pcre = 1
 include ../common/common_mak
 ExeName = TestSynan$(ExeExten)
 
@@ -15,6 +13,7 @@ libs = \
 ../RmlThesLib/libRmlThes$(ct).$(lib_ext) \
 ../LemmatizerLib/libLemmatizer$(ct).$(lib_ext) \
 ../AgramtabLib/libAgramtab$(ct).$(lib_ext) \
+../PCRE/libPCRE$(ct).$(lib_ext) \
 ../MorphWizardLib/libMorphWizard$(ct).$(lib_ext) \
 ../MAPostLib/libMAPost$(ct).$(lib_ext) \
 ../StructDictLib/libStructDict$(ct).$(lib_ext) \
