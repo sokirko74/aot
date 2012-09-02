@@ -211,8 +211,10 @@ void CRusSentence::TryToRebuildDashInClause()
 				{
 					if (  m_Words[j].m_Homonyms[i].IsSynNoun() ) 
 					{
-						if (  m_Words[j].m_Homonyms[i].HasGrammem(rNominativ) ||
-							(Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ))) // ≈му 33.
+						if (  (m_Words[j].m_Homonyms[i].HasGrammem(rNominativ)
+							&& (m_Words[j].m_Homonyms[i].m_iGrammems & rAllNumbers & m_Words[Adj_Nom[0]].GetGrammems())>0
+							&& (m_Words[j].m_Homonyms[i].m_iGrammems & rAllGenders & m_Words[Adj_Nom[0]].GetGrammems())>0) 
+							|| (Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ))) // ≈му 33.
 						{
 							m_Words[j].m_Homonyms[i].m_bDelete = false;
 							Noun_Nom.push_back(j);
