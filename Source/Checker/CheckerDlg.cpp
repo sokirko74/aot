@@ -1021,6 +1021,35 @@ static UINT MakeProc(LPVOID pArg)
 		if( !binary_search(pDlg->m_base.begin(),pDlg->m_base.end(),b) )
 		{
 			bool bDebug = binary_search(pDlg->m_base.begin(),pDlg->m_base.end(),b);
+			// ignoring homonims order for PostMorphCheck
+			int k = 0;
+			for	(; pDlg->m_base[SentenceNo+k].num != b.num; k++);
+			string s = pDlg->m_base[SentenceNo+k].txt;
+			if ( pDlg->m_CheckerType == PostMorphCheck && s.length() ==  Result.length())
+			{
+				
+				int startw = 0, starth = 0, endh = 0, endw = 0;
+				for	(int i = 0; i<Result.length() - 1; i++)
+				{
+					if (Result[i] == 1)
+						if (Result[i+1] != 0x20)
+							if (s[i+1] != Result[i+1]) goto push;
+							else
+								startw = starth = i+1;
+						else if (Result[i+2] == 0x20) i = starth = i+3;
+					if (Result[i]!=s[i])
+					{
+						for (endh = i; Result[endh] != 1; endh++);
+						for (endw = endh; endw < (s.length() - 1) && !(s[endw] == 1 && s[endw+1] != 0x20); endw++);
+						if (s.substr(startw, endw - startw).find(Result.substr(starth, endh - starth)) == -1) 
+							goto push;
+						else i = max(i, endh - 1);
+					}
+				}
+				pDlg->m_base[SentenceNo].txt = Result;
+				continue;
+			}
+push:
 			pDlg->m_nbad.push_back(i+pDlg->m_from-1);
 		}
 		
