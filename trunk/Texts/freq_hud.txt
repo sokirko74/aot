@@ -1,1 +1,1 @@
-Texts/hud.lit/zzz
+Texts/hud.lit.txt

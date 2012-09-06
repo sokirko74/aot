@@ -231,13 +231,13 @@ bool CGLRTable::ConvertAndSaveGLRTable(string FileName)
 		ErrorMessage (Format("Cannot write to %s",FileName.c_str()));
 		return false;
 	};
-	fprintf (fp, "%i\n", m_RuleInfos.size());
+	fprintf (fp, "%lu\n", m_RuleInfos.size());
 	WriteVectorInner(fp, m_RuleInfos);
 
-	fprintf (fp, "%i\n", m_WorkTable.size());
+	fprintf (fp, "%lu\n", m_WorkTable.size());
 	WriteVectorInner(fp, m_WorkTable);
 
-	fprintf (fp, "%i\n", m_ReduceRuleSets.size());
+	fprintf (fp, "%lu\n", m_ReduceRuleSets.size());
 	WriteVectorInner(fp, m_ReduceRuleSets);
 
 	fclose(fp);
@@ -274,14 +274,14 @@ bool CGLRTable::LoadGLRTable(string FileName)
 	char buffer[512];
 
 	if (!fgets(buffer, 512, fp)) return false;
-	if (sscanf (buffer, "%i\n", &Count) != 1) return false;
+	if (sscanf (buffer, "%lu\n", &Count) != 1) return false;
 	if (!Count) return false;
 	m_RuleInfos.clear();
 	ReadVectorInner(fp, m_RuleInfos, Count);
 
 
 	if (!fgets(buffer, 512, fp)) return false;
-	if (sscanf (buffer, "%i\n", &Count) != 1) return false;
+	if (sscanf (buffer, "%lu\n", &Count) != 1) return false;
 	if (!Count) return false;
 	m_WorkLineSize = m_pWorkGrammar->m_UniqueGrammarItems.size();
 	if (m_WorkLineSize == 0)
@@ -298,7 +298,7 @@ bool CGLRTable::LoadGLRTable(string FileName)
 	ReadVectorInner(fp, m_WorkTable, Count);
 	
 	if (!fgets(buffer, 512, fp)) return false;
-	if (sscanf (buffer, "%i\n", &Count) != 1) return false;
+	if (sscanf (buffer, "%lu\n", &Count) != 1) return false;
 	ReadVectorInner(fp, m_ReduceRuleSets, Count);
 
 	fclose(fp);
