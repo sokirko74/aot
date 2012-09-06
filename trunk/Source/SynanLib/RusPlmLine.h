@@ -9,11 +9,12 @@
 #include "../SynCommonLib/SynPlmLine.h"
 
 
-const int  g_BigNumeralsCount = 4;
+const int  g_BigNumeralsCount = 5;
 const char g_BigNumerals[g_BigNumeralsCount][MAX_WORD_LEN]  = { 
 												"ÌÈËËÈÎÍ", 
 												"ÌÈËËÈÀĞÄ",
 												"ÒĞÈËËÈÎÍ",
+												"ÊÂÀÄĞÈËËÈÎÍ",
 												"ÒÛÑß×À"
 												};
 

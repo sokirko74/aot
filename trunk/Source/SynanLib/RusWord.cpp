@@ -81,12 +81,12 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 							||	(pWord->m_strWord[iLen - 2] != '1')
 						);
 
-	if( pWord->HasDes(ODigits) && (iLen == 1) && ( pWord->m_strWord[0] == '1') )
-	{
-		H.m_GramCodes = "יאיביגידיהיויזיחיטיייךיכיליםימיןיניס";
-        H.InitAncodePattern( );
-		
-	}
+	//if( pWord->HasDes(ODigits) && (iLen == 1) && ( pWord->m_strWord[0] == '1') )
+	//{
+	//	H.m_GramCodes = "יאיביגידיהיויזיחיטיייךיכיליםימיןיניס";
+ //       H.InitAncodePattern( );
+	//	
+	//}
 
 	if( (iLen > 1) && pWord->HasDes(ODigits) )
 		if(pWord->m_strWord[iLen - 2] == '1')
