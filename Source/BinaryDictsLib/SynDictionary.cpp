@@ -20,6 +20,10 @@ bool CSynDictionary::Load(string FileName)
 	try {
 
 		string fname = FileName;
+		if ( ! FileExists (FileName.c_str()) ) {
+			fprintf (stderr, "Cannot find  file  %s\n", FileName.c_str());
+			return false;
+		}
 		ifstream dict(fname.c_str(), std::ios::in | std::ios::binary);
 		
 		dict.read((char*)&all_synsets_count, sizeof(long));
@@ -41,7 +45,7 @@ bool CSynDictionary::Load(string FileName)
 	}
 	catch (...)
 	{
-		fprintf (stderr, "Cannot read synset %i from (%i) %s\n", pos, all_synsets_count, FileName.c_str());
+		fprintf (stderr, "Cannot read synset %lu from (%lu) %s\n", pos, all_synsets_count, FileName.c_str());
 		return false;
 	};
 

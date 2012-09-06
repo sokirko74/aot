@@ -111,5 +111,6 @@ for d in L C F; do
   run Bin/WordDatBin  Dicts/SrcBinDict/WordData.txt -$d Dicts/Morph/Rus/ >/dev/null
 done;
 run Bin/GenSynDict  Dicts/SrcBinDict/synonyms.txt Dicts/BinDict/synonyms.bin 2>/dev/null
+Bin/TestSeman <Test/Seman/Rus/test.txt | cmp - Test/Seman/Rus/result.txt
 
 echo All done.

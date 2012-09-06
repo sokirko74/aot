@@ -1,1 +1,1 @@
-Texts/computer/zzz
+Texts/computer.txt
