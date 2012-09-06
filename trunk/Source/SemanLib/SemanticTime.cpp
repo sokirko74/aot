@@ -374,7 +374,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 
 	 
 		 
-		 //rml_TRACE  ("TimeUnit %s%i\n",(const char*)GetRoss(TimeRoss)->GetEntryStr(UnitNo),GetRoss(TimeRoss)->GetUnitMeanNum(UnitNo));
+		 //rml_TRACE  ("TimeUnit %s%i\n",GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str(),GetRoss(TimeRoss)->GetUnitMeanNum(UnitNo));
 	     long SimilarNumeralLength = 0;	
 		 
 		 BYTE PlaceNo = 0;
