@@ -157,7 +157,7 @@ void CRusSentence::TryToRebuildDashInClause()
 					continue;
 				}
 
-			if ( m_Words[j].GetHomonymsCount() > 1 ) continue;
+			if ( m_Words[j].GetHomonymsCount() > 1 && !isdigit((BYTE)m_Words[j].m_strWord[0]) ) continue;
 
 			if ( m_Words[j].GetSynHomonym(0).IsLemma("КОТОРЫЙ") )
 				continue;
@@ -212,9 +212,10 @@ void CRusSentence::TryToRebuildDashInClause()
 					if (  m_Words[j].m_Homonyms[i].IsSynNoun() ) 
 					{
 						if (  (m_Words[j].m_Homonyms[i].HasGrammem(rNominativ)
-							&& (m_Words[j].m_Homonyms[i].m_iGrammems & rAllNumbers & m_Words[Adj_Nom[0]].GetGrammems())>0
-							&& (m_Words[j].m_Homonyms[i].m_iGrammems & rAllGenders & m_Words[Adj_Nom[0]].GetGrammems())>0) 
-							|| (Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ))) // Ему 33.
+							&& (m_Words[j].m_Homonyms[i].m_iGrammems & rAllNumbers & m_Words[Adj_Nom[0]].GetGrammems())
+							&& (m_Words[j].m_Homonyms[i].HasGrammem(rPlural) // согласуем род если ед.ч.
+								|| (m_Words[j].m_Homonyms[i].m_iGrammems & rAllGenders & m_Words[Adj_Nom[0]].GetGrammems()))) 
+								|| (Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ) )) // Ему 33.
 						{
 							m_Words[j].m_Homonyms[i].m_bDelete = false;
 							Noun_Nom.push_back(j);
@@ -348,7 +349,12 @@ void CRusSentence::TryToRebuildDashInClause()
 					 ||  Vozrast) //Ему 33 года
                    )
 					 {
-						if(Vozrast) m_Words[Adj_Nom[k]].GetSynHomonym(0).ModifyGrammems( _QM(rPlural) | _QM(rNominativ) | _QM(rAccusativ));
+						if(Vozrast) 
+							for (int h = 0; h < m_Words[Adj_Nom[k]].GetHomonymsCount(); h++)
+								if(m_Words[Adj_Nom[k]].GetHomonym(h)->HasPos(NUMERAL))
+									m_Words[Adj_Nom[k]].GetHomonym(h)->ModifyGrammems( _QM(rPlural) | _QM(rNominativ) | _QM(rAccusativ));
+								else m_Words[Adj_Nom[k]].EraseHomonym(h);
+			
 						BuildDash(ClauseNo, Noun_Nom[k]);
 						
 					 }

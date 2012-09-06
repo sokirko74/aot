@@ -382,7 +382,6 @@ void CMAPost::Cifrdef()
 	//и лемматизируем этого слово как числительное 
 	//	1960-го                            4 0 4 RLE -= 1848 яя -1 #0
 	// А так же нулевые окончания
-
 	for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
 	{
         CPostLemWord& W = *it;
@@ -397,6 +396,9 @@ void CMAPost::Cifrdef()
 
 		//  Идем с  конца ищем числительное, которое максимально совпадает с конца с числительным во входном тексте.
 		int i = NumeralToNumberCount - 1;
+		string NumWordForm2 = NumWordForm;
+		while(atoi(NumWordForm2.c_str())>1000 && NumWordForm2.substr(NumWordForm2.length()-3) == "000" )
+			NumWordForm2 = NumWordForm2.substr(0, NumWordForm2.length() - 3 );
 		for(; i >= 0;  i--)
 		{
 			string NumValue;
@@ -406,14 +408,15 @@ void CMAPost::Cifrdef()
 				NumValue = IntToStr(NumeralToNumber[i].m_Number);
 			
 			if (NumValue.length() > 0)
-				if (NumWordForm.length() >= NumValue.length())
-					if (NumValue  == NumWordForm.substr(NumWordForm.length() - NumValue.length()) )
+				if (NumWordForm2.length() >= NumValue.length())
+					if (NumValue  == NumWordForm2.substr(NumWordForm2.length() - NumValue.length()) )
 						break;
 		};
 		if (i < 0)  continue;
         
 	    EngRusMakeLower(Flexia);
         string AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Cardinal, Flexia, NumeralToNumber[i].m_bNoun);
+		string AnCodes0 = AnCodes;
         if  ( AnCodes.empty() || Flexia == "" )
 			   AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
         if  ( AnCodes.empty() ) 
@@ -432,12 +435,36 @@ void CMAPost::Cifrdef()
             W.AddDes(ORLE);
             W.AddDes(OLw);
             W.DeleteAllHomonyms();
+			
+			CLineIter next_it=it;
+			CLineIter prev_it=it;
+			next_it++;
 
-            CHomonym* pH = W.AddNewHomonym();
-            pH->SetMorphUnknown();
-            pH->m_GramCodes = AnCodes;
-            pH->m_strLemma = NumWordForm;
-            pH->InitAncodePattern();
+			if  ( !AnCodes0.empty() ) // ЧИСЛ
+			{
+				CHomonym* pH = W.AddNewHomonym();
+				pH->SetMorphUnknown();
+				pH->m_GramCodes = AnCodes0;
+				pH->m_strLemma = NumWordForm;
+				pH->InitAncodePattern();
+				if ( it !=  m_Words.begin() && ((--prev_it)->HasGrammem(rComparative) || prev_it->m_strUpperWord == "СВЫШЕ"))  // "более 5 человек"
+				{
+					pH->ModifyGrammems(pH->m_iGrammems & ~rAllCases | _QM(rGenitiv), pH->m_iPoses);//pH->m_iPoses
+					string q = 					pH->GetGrammemsStr();
+					continue;
+				}
+			}
+
+			if  ( !(( next_it !=  m_Words.end() && (next_it)->m_strUpperWord == "ЛЕТ")	// "в течение 2 лет"
+				 //|| ( it !=  m_Words.begin() && (--prev_it)->HasGrammem(rComparative)) // "более 5 человек" 
+				 )) 
+			{
+				CHomonym* pH = W.AddNewHomonym(); //ЧИСЛ-П
+				pH->SetMorphUnknown();
+				pH->m_GramCodes = AnCodes;
+				pH->m_strLemma = NumWordForm;
+				pH->InitAncodePattern();
+			}
         }
 
 	};

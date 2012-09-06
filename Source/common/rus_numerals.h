@@ -14,7 +14,7 @@ struct CNumeralToNumber
     bool                m_bNoun; // false
 };
 
-const size_t NumeralToNumberCount = 40;
+const size_t NumeralToNumberCount = 42;
 extern const CNumeralToNumber NumeralToNumber[];
 
 extern string IntToStr (double i);

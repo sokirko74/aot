@@ -35,6 +35,21 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 			GenitFormsOfCardinal.push_back("ÌÈËËÈÎÍÎ");
 			continue;
 		};
+		if (NumeralToNumber[i].m_Number == 1000000000)
+		{
+			GenitFormsOfCardinal.push_back("ÌÈËËÈÀĞÄÍÎ");
+			continue;
+		};
+		if (NumeralToNumber[i].m_Number == 1000000000000)
+		{
+			GenitFormsOfCardinal.push_back("ÒĞÈËËÈÎÍÎ");
+			continue;
+		};
+		if (NumeralToNumber[i].m_Number == 1000000000000000)
+		{
+			GenitFormsOfCardinal.push_back("ÊÂÀÄĞÈËËÈÎÍÎ");
+			continue;
+		};
 		vector<CFormInfo> ParadigmCollection;
 		string WordForm = NumeralToNumber[i].m_Cardinal;
 		piRusLemmatizer->CreateParadigmCollection(true, WordForm, false, false, ParadigmCollection);

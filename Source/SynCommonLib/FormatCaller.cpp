@@ -71,8 +71,11 @@ bool CFormatCaller::try_and_step_forward(CFormatCall* FC, CGroup& G, int rule)
 		create_group(G);
 
 		
-		rml_TRACE("%s (%i, %i) (%s, %s) is created\n", GetOpt()->GetGroupNameByIndex(G.m_GroupType), G.m_iFirstWord, G.m_iLastWord,
-			sent[G.m_iFirstWord].get_word(),sent[G.m_iLastWord].get_word());
+		rml_TRACE("%s (%i, %i) (%s, %s) (%s , %s) %s is created\n", GetOpt()->GetGroupNameByIndex(G.m_GroupType), G.m_iFirstWord, G.m_iLastWord,
+			sent[G.m_iFirstWord].get_word(),sent[G.m_iLastWord].get_word(),
+			GetOpt()->GetGramTab()->GrammemsToStr(  sent[G.m_iFirstWord].GetGrammems() ).c_str(),
+			GetOpt()->GetGramTab()->GrammemsToStr(  sent[G.m_iLastWord].GetGrammems() ).c_str(),
+			GetOpt()->GetGramTab()->GrammemsToStr(  G.GetGrammems() ).c_str());
 		
 		return true;
 	}
@@ -113,7 +116,9 @@ int CFormatCaller::main_analyse()
 
 			{
 				int s = get_maximal_group_no(WordNo);
-				if( (s != -1 ) && (GetGroups()[s].m_iFirstWord != WordNo) )
+				vector<CGroup>		m_Groups = GetGroups();
+				if( (s != -1 ) && (GetGroups()[s].m_iFirstWord != WordNo)
+					&& !(FormatCall.m_name.compare("׳ָֻׁ_ׁ׃Ù") == 0 && GetGroups()[s].m_RuleNo == 13)) // במכוו ןÿעט קוכמגוך -> QUANTIT (5, ׳ֵֻ־ֲֵÊ) 
 				{
                     if (FormatCall.m_direction == FROM_LEFT)
                     {

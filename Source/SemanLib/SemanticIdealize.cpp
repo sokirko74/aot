@@ -314,38 +314,62 @@ void CRusSemStructure::ApplySubordinationCases ()
 			m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllNumbers);
 			m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rSingular);
 		};
+	// число числительных
 
 	// падеж числительных
-	for (long i=0;  i < m_Relations.size(); i++)
-		if( (m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" 
-			|| (m_Relations[i].m_Valency.m_RelationStr == "PROPERT" && m_Nodes[m_Relations[i].m_TargetNodeNo].HasPOS(NUMERAL_P)) ) //Задача 1777 года.					
-			&& !IsPowerOfTwo(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & rAllCases) )	// падеж ЧИСЛ не определен
+	for (long i=0;  i < m_Relations.size() ; i++)
 		{
-			for (long j=0;  j < m_Relations.size(); j++)
-				if( m_Relations[i].m_SourceNodeNo == m_Relations[j].m_TargetNodeNo ) 
-				{
-					if( (m_Relations[j].m_Valency.m_RelationStr == "TIME") // Ему 100 лет
-						&& (m_Nodes[m_Relations[j].m_SourceNodeNo].m_Words[0].m_Word == "есть")
-						&& !IsPowerOfTwo(m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() & (rAllCases))) // & ~_QM(rGenitiv)
-						{
-							m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllCases);
-							m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rGenitiv);
-							m_Nodes[m_Relations[i].m_TargetNodeNo].DeleteGrammems ( rAllCases);
-							m_Nodes[m_Relations[i].m_TargetNodeNo].AddOneGrammem ( rAccusativ);
-						}
-					if( (m_Relations[j].m_Valency.m_RelationStr == "ACT" || m_Relations[j].m_Valency.m_RelationStr == "S-ACT") // Наличие 5 стволов. Там есть 100 тонн.
-						&& IsPowerOfTwo(m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() & rAllCases)) // падеж определен
-						{
-							m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems ( m_Nodes[m_Relations[j].m_TargetNodeNo].GetGrammems() );
-						}
-					break;
-				}
-			if (!IsPowerOfTwo(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & rAllCases) // падеж ЧИСЛ не определен
-				&& IsPowerOfTwo(m_Nodes[m_Relations[i].m_SourceNodeNo].GetGrammems() & (rAllCases)) )   // падеж определен 
-			{
-				m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems ( m_Nodes[m_Relations[i].m_SourceNodeNo].GetGrammems() );
-			}
+			QWORD NumSrcGr = m_Nodes[m_Relations[i].m_SourceNodeNo].GetGrammems();
+			if(m_Nodes[m_Relations[i].m_SourceNodeNo].m_Words.size() ==0 ||m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words.size()==0) continue;
+			CRusSemWord& w1 = m_Nodes[m_Relations[i].m_SourceNodeNo].m_Words[m_Nodes[m_Relations[i].m_SourceNodeNo].m_MainWordNo];
+			CRusSemWord& w2 = m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[m_Nodes[m_Relations[i].m_TargetNodeNo].m_MainWordNo]; // Числ
 
+			if( (m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" 
+			|| (m_Relations[i].m_Valency.m_RelationStr == "PROPERT" && w2.HasPOS(NUMERAL_P)) )) 				
+		
+			if (!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases) )	// падеж ЧИСЛ не определен
+			{
+				for (long j=0;  j < m_Relations.size(); j++)
+					if( m_Relations[i].m_SourceNodeNo == m_Relations[j].m_TargetNodeNo ) 
+					{
+						if( (m_Relations[j].m_Valency.m_RelationStr == "TIME") 
+							&& (m_Nodes[m_Relations[j].m_SourceNodeNo].HasPOS(VERB)) )// .m_Word == "есть")
+						{
+							if( !IsPowerOfTwo(NumSrcGr & rAllCases) ) // Ему 100 лет
+								w1.SetFormGrammems(w1.GetFormGrammems() & ~rAllCases | _QM(rGenitiv));
+							w2.SetFormGrammems(w2.GetFormGrammems() & ~rAllCases | _QM(rAccusativ));
+						}
+						else
+						if( (m_Relations[j].m_Valency.m_RelationStr != "SUB" )
+							//|| m_Relations[j].m_Valency.m_RelationStr == "S-ACT" // Наличие 5 стволов. Там есть 100 тонн.
+							//|| m_Relations[j].m_Valency.m_RelationStr == "BELNG") // Задача 1777 года.	
+							&& IsPowerOfTwo(NumSrcGr & rAllCases) ) // падеж определен
+						{
+							w2.SetFormGrammems ( NumSrcGr );
+							m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems( NumSrcGr );
+						}
+						break;
+					}
+					if (!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases)) // падеж ЧИСЛ не определен
+					if(IsPowerOfTwo( NumSrcGr & rAllCases) || ((NumSrcGr & rAllCases & ~(_QM(rAccusativ) | _QM(rNominativ))) ==0)  )   // падеж Гр определен или им или вин
+					{
+						if ( NumSrcGr & _QM(rSingular) && NumSrcGr & _QM(rGenitiv) //в 4 часа
+							&& !w2.HasOneGrammem(rSingular) ) //m_Words[0].m_Word.rfind("1") != 0
+							w2.SetFormGrammems ( NumSrcGr & ~rAllCases | _QM(rAccusativ) & ~rAllNumbers | _QM(rPlural));
+						else
+							w2.SetFormGrammems ( NumSrcGr ); //Ему 1 год
+					}
+					else if(IsPowerOfTwo( w1.GetFormGrammems() & rAllCases)) // падеж Сущ определен
+							if(IsPowerOfTwo( w1.GetFormGrammems() & _QM(rGenitiv))) // "Заплатить за 5 вещей" , "нет 5 вещей"
+								w2.SetFormGrammems ( w2.GetFormGrammems() & (_QM(rAccusativ) | _QM(rNominativ)| _QM(rGenitiv)) );
+							else
+								w2.SetFormGrammems ( w1.GetFormGrammems()); // "Пользуюсь 5 вещами"
+					m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & w2.GetFormGrammems());
+					//m_Nodes[m_Relations[i].m_SourceNodeNo].SetGrammems(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & w2.GetFormGrammems());
+			}
+			else
+				if( w1.HasOneGrammem(rGenitiv) )
+					w1.SetFormGrammems ( w1.GetFormGrammems()  & ~rAllCases | _QM(rGenitiv) ); //"Пришел через 2 недели"
 		}
 	
    // если русское подлежащее было неизменяемым, а в него идет стрелка  от сказуемого, 
@@ -508,7 +532,7 @@ bool HasSynFet (const CSemPattern& P, long ItemNo)
 {
 	
 	for (long i=0;i < P.m_GramCorteges.size(); i++)
-		if (P.GetSynFet(i) == ItemNo)
+		if (P.GetSynFet(i) == ItemNo) 
 			return true;
 
      return false;
