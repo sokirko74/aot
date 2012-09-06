@@ -340,6 +340,10 @@ void CSemanticStructure::PrintNodes() const
  for (size_t i=0; i<GetNodesSize(); i++)
  {
 	 rml_TRACE(GetNodeStr1(i).c_str());
+
+	 rml_TRACE(Format(" GF = %s %s",  GetNodePosesStr(i).c_str(),  
+		 m_pData->GetRusGramTab()->GrammemsToStr(  GetNode(i).GetGrammems()).c_str() ).c_str());
+
 	 string Q = Format(" ClauseNo = %i ", GetNode(i).m_ClauseNo);
 	 rml_TRACE(Q.c_str());
 	 if (GetNode(i).GetType() == LocRoss) rml_TRACE (" geo");

@@ -115,7 +115,7 @@ bool CSemPattern::LoadSemFromDict()
 		return false;
 
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
-	//rml_TRACE  ("Load pattern of %s\n", (const char*) Ross->GetEntryStr(UnitNo));
+	//rml_TRACE  ("Load pattern of %s\n", Ross->GetEntryStr(UnitNo).c_str());
 	long EnfCortegeNo = Ross->GetUnitEndPos(UnitNo);
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)
@@ -166,7 +166,7 @@ bool CSemPattern::LoadGramFromDict()
 	
 
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
-	//rml_TRACE  ("Load pattern of %s\n", (const char*) Ross->GetEntryStr(UnitNo));
+	//rml_TRACE  ("Load pattern of %s\n", Ross->GetEntryStr(UnitNo).c_str());
 	long EnfCortegeNo = Ross->GetUnitEndPos(UnitNo);
 
 
