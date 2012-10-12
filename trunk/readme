@@ -39,8 +39,10 @@ Varianbles  RML_PCRE_INCLUDE and RML_PCRE_LIB are needed only for compilation.
 4. Then you should type
    sh build.sh
 
-The script  builds the whole system.
-
+The script  builds the whole system. Run "build.sh --VS" if don't need to run make,
+for example, you run build.sh in MSYS or Cygwin under Windows and build Sources in Visual Sudio.
+Make sure you have correct path to FlexLexer.h in Source/SimpleGrammarLib/MyFlexLexer.h 
+if you build under Windows.
 
 
 More detail about Morphology dicts is here: Docs/Morph_UNIX.txt

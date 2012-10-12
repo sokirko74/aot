@@ -23,8 +23,8 @@ fi;
 
 echo "RML=$RML"
 
-
 make_tool=make
+echo $* | grep -vq "\-\-VS" || make_tool="echo Skipping: make "
 cd $RML
 
 #compile struct dicts
@@ -73,7 +73,7 @@ done;
 MORPHOLOGY_LANGUAGES="Rus Ger Eng"
 for language in $MORPHOLOGY_LANGUAGES
 do
-  run $RML/Source/MorphGen/MorphGen Dicts/SrcMorph/$language.mwz Dicts/Morph/$language 5 3
+  run Bin/MorphGen Dicts/SrcMorph/$language.mwz Dicts/Morph/$language 5 3
 done
 run Bin/TestLem -echo -noids -forms Russian <Test/Morph/Rus/test.txt | cmp - Test/Morph/Rus/result.txt
 run Bin/TestLem -echo -noids -forms German <Test/Morph/Ger/test.txt  | cmp - Test/Morph/Ger/result.txt
