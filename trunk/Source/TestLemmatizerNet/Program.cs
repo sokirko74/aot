@@ -51,7 +51,7 @@ namespace LemmatizerNetTest
             string rgt = "";
             try
             {
-                StreamReader r = new StreamReader(rmlPath + @"Dicts\Morph\" + langStr + "gramtab.tab", Encoding.Default);
+                StreamReader r = new StreamReader(rmlPath + @"\Dicts\Morph\" + langStr.ToLower() + "gramtab.tab", Encoding.GetEncoding(1251));
                 rgt = r.ReadToEnd(); r.Close();
             }
             catch (Exception e)
