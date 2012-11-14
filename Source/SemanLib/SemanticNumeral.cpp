@@ -40,12 +40,12 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 			GenitFormsOfCardinal.push_back("ÌÈËËÈÀĞÄÍÎ");
 			continue;
 		};
-		if (NumeralToNumber[i].m_Number == 1000000000000)
+		if (NumeralToNumber[i].m_Number == 1000000000000.0)
 		{
 			GenitFormsOfCardinal.push_back("ÒĞÈËËÈÎÍÎ");
 			continue;
 		};
-		if (NumeralToNumber[i].m_Number == 1000000000000000)
+		if (NumeralToNumber[i].m_Number == 1000000000000000.0)
 		{
 			GenitFormsOfCardinal.push_back("ÊÂÀÄĞÈËËÈÎÍÎ");
 			continue;
