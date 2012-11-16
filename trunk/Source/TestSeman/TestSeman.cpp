@@ -1,6 +1,6 @@
 /*
 Пример вызова интерфейса Seman. В stdin подаются предложения в  кодировке Win-1251(по одному на каждой строке). 
-Определите дерективу DOS для кодировки DOS
+Определите дерективу DOS для кодировки DOS (для работы в консоли Windows)
 Программа печатает семантические узлы и отношения для каждого входного предложения.
 Для каждого слова  семантического узла печатается лемма, часть речи и граммемы.
 
@@ -269,8 +269,8 @@ int main(int argc, char* argv[])
 				for (int i = 0; i < SemBuilder.m_RusStr.m_Relations.size(); i++)
 				{
 					const CRusSemRelation& R = SemBuilder.m_RusStr.m_Relations[i];
-					long m_TargetNodeNo = R.m_Valency.m_Direction == C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
-					long m_SourceNodeNo = R.m_Valency.m_Direction != C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+          long m_TargetNodeNo = R.m_Valency.m_Direction == C_A && !R.m_bReverseRel ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+          long m_SourceNodeNo = !(R.m_Valency.m_Direction == C_A && !R.m_bReverseRel) ? R.m_SourceNodeNo : R.m_TargetNodeNo;
 
 					if (!R.m_Valency.m_RelationStr.empty())
 						printf ("  %s (%s, %s) = (%i, %i)\n", Decode_Win_to_DOS(R.m_Valency.m_RelationStr.c_str()), Decode_Win_to_DOS(SemBuilder.m_RusStr.GetNodeStr1(m_TargetNodeNo).c_str()), Decode_Win_to_DOS(SemBuilder.m_RusStr.GetNodeStr1(m_SourceNodeNo).c_str()),m_TargetNodeNo,m_SourceNodeNo);
@@ -280,17 +280,17 @@ int main(int argc, char* argv[])
 					printf ("%s",  Decode_Win_to_DOS(GetWordStrOfNode(SemBuilder.m_RusStr.m_Nodes[i], true).c_str()));
 				    for (int k = 0; k < SemBuilder.m_RusStr.m_Relations.size(); k++)
 				    {
-                        const CRusSemRelation& R = SemBuilder.m_RusStr.m_Relations[k];
-						long m_TargetNodeNo = R.m_Valency.m_Direction == C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
-						long m_SourceNodeNo = R.m_Valency.m_Direction != C_A ? R.m_SourceNodeNo : R.m_TargetNodeNo;
-                        if (!R.m_Valency.m_RelationStr.empty() && m_TargetNodeNo == i) {
-                            string q = R.m_Valency.m_RelationStr;
-                            EngRusMakeLower(q);
-                            printf ("[%s]", Decode_Win_to_DOS(q.c_str()));
-                            break;
-                        }
-                    }
-                    printf (" ");
+                const CRusSemRelation& R = SemBuilder.m_RusStr.m_Relations[k];
+                long m_TargetNodeNo = R.m_Valency.m_Direction == C_A && !R.m_bReverseRel ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+                long m_SourceNodeNo = !(R.m_Valency.m_Direction == C_A && !R.m_bReverseRel) ? R.m_SourceNodeNo : R.m_TargetNodeNo;
+                if (!R.m_Valency.m_RelationStr.empty() && m_TargetNodeNo == i) {
+                    string q = R.m_Valency.m_RelationStr;
+                    EngRusMakeLower(q);
+                    printf ("[%s]", Decode_Win_to_DOS(q.c_str()));
+                    break;
+                }
+            }
+            printf (" ");
 				}
                 printf ("\n");
 				if(log_fp != 0) { fclose(log_fp); log_fp = 0; }
