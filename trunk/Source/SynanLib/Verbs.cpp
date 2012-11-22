@@ -66,6 +66,9 @@ bool CRusFormatCaller::format_for_dir_obj (CGroup& G)
 	G.m_MainGroup = VerbGroup;
 	G.m_GroupType = DIR_OBJ;
 	G.SetGrammems( Wi.GetGrammems() );
+ 	QWORD g = ObjGroup.GetGrammems() & (_QM(rAccusativ) | ~rAllCases); //убиваем лишние падежи, "открыл дверь"
+	((CGroup&)ObjGroup).SetGrammems(g);
+	Wk.SetGrammems(g);
 	return true;
 }
 

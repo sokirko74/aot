@@ -191,7 +191,7 @@ void CRusSentence::TryToRebuildDashInClause()
 			
 			if (0 == Adj_Nom.size() && 0 == Noun_Nom.size()
 				&& isdigit((BYTE)m_Words[j].m_strWord[0]) // Ему 33.
-				&& m_Words[j].m_strWord.find("-") == -1) 
+				&& m_Words[j].m_strWord.find("-") == string::npos && j >= m_Words.size()-2 ) 
 			{
 				Vozrast = true;
 				Adj_Nom.push_back(j);
@@ -202,6 +202,8 @@ void CRusSentence::TryToRebuildDashInClause()
 		if (0 == Noun_Nom.size() && 0 == Eto.size() && 
 			0 == Adj_Nom.size() && -1 == Prep_U)
 			continue;
+		if ( Vozrast && 0 < Noun_Nom.size() && m_Words[Noun_Nom[0]].m_strUpperWord == "ГОД" && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) //ему 21 год
+			Noun_Nom.clear();
 
 		if (0 == Noun_Nom.size() && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) // Глаза красивые.
 			for (j = pClause.m_iFirstWord; j <= pClause.m_iLastWord; j++)

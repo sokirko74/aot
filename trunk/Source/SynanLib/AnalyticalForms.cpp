@@ -125,7 +125,7 @@ void BuildAnalyticalVerbFormsZaplata2(CRusSentence& S, int ClauseNo)
 bool HasCompar(const CSynWord& W)
 {
 	for (int i = 0; i < W.m_Homonyms.size(); i++)
-		if ( (W.m_Homonyms[i].HasPos(ADJ_FULL)) && ( W.m_Homonyms[i].HasGrammem(rComparative) ) )
+		if ( (W.m_Homonyms[i].HasPos(ADJ_FULL) || W.m_Homonyms[i].HasPos(NUMERAL)) && ( W.m_Homonyms[i].HasGrammem(rComparative) ) )
 			return true;
 		
 	return false; 	
@@ -356,7 +356,7 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
                     )
 					AnalyticHom.push_back(j);
 
-				if ( (ShortFormHom.HasPos(ADJ_FULL)) && ( ShortFormHom.HasGrammem(rComparative) ) )
+				if ( (ShortFormHom.HasPos(ADJ_FULL) || ShortFormHom.HasPos(NUMERAL)) && ( ShortFormHom.HasGrammem(rComparative) ) )
 					AnalyticHom.push_back(j);	
 				
 				if (ShortFormHom.HasPos(PARTICIPLE_SHORT) || ShortFormHom.HasPos(ADJ_SHORT) )

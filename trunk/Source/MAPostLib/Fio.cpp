@@ -105,7 +105,9 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
 
         case fiStop     :  return Word.m_strWord == ".";
         case fiRoman    :  return Word.HasDes(ORoman);
-		case fiOrdinal  :  return pH->HasPos(NUMERAL_P) && (unsigned char)Word.m_strWord[0]<224; //отбрасываем "Петр первый" вместо "Петр Первый"
+		case fiOrdinal  :  return pH->HasPos(NUMERAL_P) 
+							   && (unsigned char)Word.m_strWord[0]<224 //отбрасываем "Петр первый" вместо "Петр Первый"
+							   && !isdigit((BYTE)Word.m_strWord[0]);
         case fiProbName :  return Word.HasDes(ONam);
         default         :  return pH->m_strLemma == I.m_ItemStr;
     }                

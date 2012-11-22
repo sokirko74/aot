@@ -1677,7 +1677,18 @@ void ConvertJO2Je(char* src, size_t Length)
 	ConvertJO2JeTemplate(src, Length);
 };
 
-
+bool HasJO(string src) 
+{
+	for (size_t i = 0; i < src.length(); i++)
+	{
+		if ( ((BYTE)src[i]) == LowerJO )
+			return true;
+		else
+			if ( ( (BYTE)src[i]) == UpperJO)
+			 return true;
+	}
+	return false;
+}
 
 void ConvertJO2Je(string& src) 
 {
@@ -2574,4 +2585,14 @@ string BuildRMLPath (const char* s)
     if (i != string::npos)
         path.replace(i, 4, GetRmlVariable());
     return path;
+}
+
+int CountBits(QWORD value)
+{
+	int count = 0;
+	for (int i=0; i < 64; i++)
+	{
+		count += (value >> i) & 1;
+	}
+	return count;
 }
