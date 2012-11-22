@@ -333,7 +333,7 @@ extern bool CheckLanguage (const char *word, MorphLanguageEnum langua);
 extern bool CheckLanguage (const string& word, MorphLanguageEnum langua);
 
 
-
+extern bool HasJO(string src);
 extern void ConvertJO2Je(string& src);
 extern void ConvertJO2Je(char* src);
 extern void ConvertJO2Je(char* src, size_t Length);
@@ -383,3 +383,4 @@ enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
 #define IsPowerOfTwo(x) (((x) != 0) && (((x) & ((x) - 1)) == 0))
 
+extern int CountBits(QWORD value);

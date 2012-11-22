@@ -129,6 +129,14 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 
 	G.m_iLastWord = prep_gr.m_iLastWord;
 	G.m_GroupType = SELECTIVE_GR;
+	//проверяем род и удаляем лишние граммемы
+	QWORD LWGen = sent[G.m_iLastWord].GetGrammems() & rAllGenders;
+	if( (sent[G.m_iFirstWord].GetGrammems() & rAllGenders)>0 && LWGen>0 &&
+		((sent[G.m_iFirstWord].GetGrammems() & rAllGenders & LWGen) == 0) )
+		return false;
+	if( CountBits(LWGen)==1 )
+		sent[G.m_iFirstWord].SetGrammems(sent[G.m_iFirstWord].GetGrammems() & ~rAllGenders | LWGen);
+
 	G.SetGrammems( sent[G.m_iFirstWord].GetGrammems() );
 	G.m_MainGroup = get_maximal_group(G.m_iFirstWord);
 	create_syn_rel(G, get_main_word(G.m_iFirstWord) , get_main_word(prep_gr.m_iFirstWord), SELECTIVE_GR);

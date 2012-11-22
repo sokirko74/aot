@@ -77,61 +77,61 @@ enum rGrammems {
 
 		 rComparative = 22,
 
-		 rPerfective = 23,
-		 rNonPerfective = 24,
+		 rPerfective = 23,//св
+		 rNonPerfective = 24,//нс
 
-		 rNonTransitive = 25,
-		 rTransitive = 26,
+		 rNonTransitive = 25,//нп
+		 rTransitive = 26,//пе
 
-		 rActiveVoice = 27,
-		 rPassiveVoice = 28,
+		 rActiveVoice = 27,//дст
+		 rPassiveVoice = 28,//стр
 
 
-		 rIndeclinable = 29,
-	     rInitialism = 30,
+		 rIndeclinable = 29, //"0"
+	     rInitialism = 30,	//"аббр"
 
-		 rPatronymic = 31,
+		 rPatronymic = 31, // "отч"
 
-		 rToponym = 32,
-		 rOrganisation = 33,
+		 rToponym = 32,//лок
+		 rOrganisation = 33,//орг
 
-		 rQualitative = 34,
-		 rDeFactoSingTantum = 35,
+		 rQualitative = 34,//кач
+		 rDeFactoSingTantum = 35,//дфст
 
-		 rInterrogative = 36,
-		 rDemonstrative = 37,
+		 rInterrogative = 36,//вопр
+		 rDemonstrative = 37,//указат
 
 		 rName	    = 38,
 		 rSurName	= 39,
-		 rImpersonal = 40,
-		 rSlang	= 41,
-		 rMisprint = 42,
-		 rColloquial = 43,
-		 rPossessive = 44,
-		 rArchaism = 45,
+		 rImpersonal = 40,//безл
+		 rSlang	= 41,//жарг
+		 rMisprint = 42,//опч
+		 rColloquial = 43,//разг
+		 rPossessive = 44,//притяж
+		 rArchaism = 45,//арх
 		 rSecondCase = 46,
 		 rPoetry = 47,
 		 rProfession = 48,
-		 rSuperlative = 49,
-		 rPositive = 50
+		 rSuperlative = 49,//прев
+		 rPositive = 50//полож
     };
 
 
 
 
 typedef enum {
-	VERB_PERS_T=0,
-	ADVERB_PARTICIPLE_T=1, 
-	PARTICIPLE_SHORT_T=2,	
-	ADJ_SHORT_T=3,
-	PREDK_T=4, 
-	PARTICIPLE_T=5,	
-	INFINITIVE_T=6,	
-	INP_T=7, 
-	DASH_T=8,
-	UNDETACHED_ADJ_PATIC=9,
-	COMPARATIVE_T=10,
-	COPUL_T=11
+	VERB_PERS_T=0,//ГЛ_ЛИЧН
+	ADVERB_PARTICIPLE_T=1, //ДПР
+	PARTICIPLE_SHORT_T=2,	//КР_ПРЧ
+	ADJ_SHORT_T=3,//КР_ПРИЛ
+	PREDK_T=4, //ПРЕДК
+	PARTICIPLE_T=5,	//ПРЧ
+	INFINITIVE_T=6,	//ИНФ
+	INP_T=7, //ВВОД
+	DASH_T=8,//ТИРЕ
+	UNDETACHED_ADJ_PATIC=9,//НСО
+	COMPARATIVE_T=10,//СРАВН
+	COPUL_T=11//КОПУЛ
 } rClauseTypeEnum ;
 
 

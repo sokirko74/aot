@@ -7824,23 +7824,24 @@ SYN     =  вверху
 ============
 TITLE        = свыше+Р
 SENSE       = 1
-AUTHOR       = alex
-REDACT       = alex
-TIME_CREATE       = 29/3/7 16:9:50
-EXM     =  температура свыше 100 градусов Цельсия
-           это свыше наших сил
-CAT     = 1  OPER
-GF      = 1  ПРЕДЛ
-SF      = 1  DEGREE
-VAL     =  F-ACT , A1 , C
-           S-ACT , A2 , C
-GF1     = 1  подл : И
-SF1     = 1  ABSTR
-          2  PARAM
-GF2     = 1  к_доп : Р
-          2  нар_опр : ЦК
-          3  к_доп : ЦБК
-SF2     = 1  QUANTIT
+TIME_CREATE       = 14/2/1 20:49:1
+CONTENT =  свыше
+GF      = 1  ПРОСТ_ПРЕДЛ
+VAL     =  ACT , A1 , A2
+GF1     = 1  ГГ
+          2  < ИГ
+GF2     = 1  >> Р
+ENG     =  over 1
+============
+TITLE        = выше+Р
+SENSE       = 1
+TIME_CREATE       = 14/2/1 20:49:1
+CONTENT =  выше
+GF      = 1  ПРОСТ_ПРЕДЛ
+VAL     =  ACT , A1 , A2
+GF1     = 1  ГГ
+          2  < ИГ
+GF2     = 1  >> Р
 ENG     =  over 1
 ============
 TITLE        = себе

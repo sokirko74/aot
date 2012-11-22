@@ -324,12 +324,21 @@ void CRusSemStructure::ApplySubordinationCases ()
 			CRusSemWord& w1 = m_Nodes[m_Relations[i].m_SourceNodeNo].m_Words[m_Nodes[m_Relations[i].m_SourceNodeNo].m_MainWordNo];
 			CRusSemWord& w2 = m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[m_Nodes[m_Relations[i].m_TargetNodeNo].m_MainWordNo]; // Числ
 
+			//if( m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" && w2.HasPOS(NUMERAL_P)) // согласуем ЧИСЛ-П: "больше 10 номеров"
+			//{
+			//	w2.SetFormGrammems ( w1.GetFormGrammems() & w2.GetFormGrammems() );
+			//	m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems( w1.GetFormGrammems() & w2.GetFormGrammems() );
+			//}
+
 			if( (m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" 
-			|| (m_Relations[i].m_Valency.m_RelationStr == "PROPERT" && w2.HasPOS(NUMERAL_P)) )) 				
+			|| (m_Relations[i].m_Valency.m_RelationStr == "PROPERT" && w2.HasPOS(NUMERAL_P)) )
+			&& !w2.HasOneGrammem(rComparative)) 				
 		
-			if (!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases) )	// падеж ЧИСЛ не определен
+			if (!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases) ||  // падеж ЧИСЛ не определен
+				(w2.HasPOS(NUMERAL_P) && (!IsPowerOfTwo(w2.GetFormGrammems() & rAllGenders) || !IsPowerOfTwo(w2.GetFormGrammems() & rAllNumbers))))	// род или число ЧИСЛ-П не определен
 			{
-				for (long j=0;  j < m_Relations.size(); j++)
+				long j;
+				for (j=0;  j < m_Relations.size(); j++)
 					if( m_Relations[i].m_SourceNodeNo == m_Relations[j].m_TargetNodeNo ) 
 					{
 						if( (m_Relations[j].m_Valency.m_RelationStr == "TIME") 
@@ -337,20 +346,23 @@ void CRusSemStructure::ApplySubordinationCases ()
 						{
 							if( !IsPowerOfTwo(NumSrcGr & rAllCases) ) // Ему 100 лет
 								w1.SetFormGrammems(w1.GetFormGrammems() & ~rAllCases | _QM(rGenitiv));
-							w2.SetFormGrammems(w2.GetFormGrammems() & ~rAllCases | _QM(rAccusativ));
+							if( w2.HasPOS(NUMERAL_P) )
+								w2.SetFormGrammems(w2.GetFormGrammems() & ~rAllCases | _QM(rGenitiv)); // 11 числа я ушел
+							else
+								w2.SetFormGrammems(w2.GetFormGrammems() & ~rAllCases | _QM(rAccusativ));
 						}
 						else
 						if( (m_Relations[j].m_Valency.m_RelationStr != "SUB" )
 							//|| m_Relations[j].m_Valency.m_RelationStr == "S-ACT" // Наличие 5 стволов. Там есть 100 тонн.
 							//|| m_Relations[j].m_Valency.m_RelationStr == "BELNG") // Задача 1777 года.	
-							&& IsPowerOfTwo(NumSrcGr & rAllCases) ) // падеж определен
+							&& IsPowerOfTwo(NumSrcGr & rAllCases) && !(!w2.HasPOS(NUMERAL_P) && (NumSrcGr & rAllCases) == _QM(rGenitiv) && (NumSrcGr & rAllNumbers) == _QM(rSingular))) // падеж определен //В конце 2 года
 						{
-							w2.SetFormGrammems ( NumSrcGr );
-							m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems( NumSrcGr );
+							w2.SetFormGrammems ( w2.GetFormGrammems() & NumSrcGr );
+							m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems( m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & NumSrcGr );
 						}
 						break;
 					}
-					if (!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases)) // падеж ЧИСЛ не определен
+					if ( j == m_Relations.size() ) //!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases)) // падеж ЧИСЛ не определен
 					if(IsPowerOfTwo( NumSrcGr & rAllCases) || ((NumSrcGr & rAllCases & ~(_QM(rAccusativ) | _QM(rNominativ))) ==0)  )   // падеж Гр определен или им или вин
 					{
 						if ( NumSrcGr & _QM(rSingular) && NumSrcGr & _QM(rGenitiv) //в 4 часа
