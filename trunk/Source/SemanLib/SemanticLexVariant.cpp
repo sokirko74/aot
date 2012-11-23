@@ -862,8 +862,11 @@ void CRusSemStructure::InterpretPrepNouns(long ClauseNo)
                     m_Nodes[NounNode].m_RelOperators.begin(), 
                     m_Nodes[PrepNode].m_RelOperators.begin(),
                     m_Nodes[PrepNode].m_RelOperators.end());
-
-                if (CanBeDeleted(PrepNode))
+				
+				//if(m_Nodes[PrepNode].m_Words.size() == 1 && m_Nodes[PrepNode].m_Words[0].m_Word.size() == 1)
+				m_Nodes[NounNode].DeleteGrammems(_QM(rNominativ)); //удаляем им.п.
+                
+				if (CanBeDeleted(PrepNode))
                     DelNode(PrepNode);
             }
             else

@@ -682,7 +682,7 @@ bool CClause::BuildGroupsAndSynVariants(CFormatCaller& FormatCaller)
 			
 			AssignVariantWeight(synVariant);
 			TranslateFormatCallerGroups(synVariant);
-
+			//rml_TRACE("m_iWeight = %d\n", synVariant.m_iWeight);
 			AssignSynVariantsGrammems(synVariant, FormatCaller);
 			AssignOborotMarksToDisruptConj(FormatCaller, synVariant);
 		}
@@ -1091,7 +1091,6 @@ void CClause::DeleteHomonym(int iW,int  iH)
 		m_pSent->m_Words[iW].m_Homonyms.size(),
 		m_pSent->m_Words[iW].m_Homonyms[iH].m_bInOb ? "true" : "false"
 		);
-
 	int SynVarWordNo = UnitNoByWordNo(iW);
 
     
