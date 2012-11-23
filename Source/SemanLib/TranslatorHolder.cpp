@@ -145,17 +145,17 @@ bool CTranslatorHolder::InitAspDict()
 
 };
 
-
 bool CTranslatorHolder::Init()
 {
 	//CMyTimeSpanHolder Test;
 	//Test.StartTimer("Test",0);
+	//vector<double> ts; clock_t m_TimeSpan = clock();
 	if (!m_EngHolder.LoadGraphanAndLemmatizer(morphEnglish))
 		return false;
-
+	//fprintf (stderr, "morphEnglish %f\n", (double)(clock() - m_TimeSpan));m_TimeSpan = clock();
 	if (!m_RusHolder.LoadSyntax(morphRussian))
 		return false;
-
+	//fprintf (stderr, "morphRussian %f\n", (double)(clock() - m_TimeSpan));m_TimeSpan = clock();
 	if (!InitAspDict())
 		return false;
 
@@ -232,7 +232,6 @@ bool CTranslatorHolder::Init()
 		ErrorMessage("Не могу загрузить перечень \"Русские превосходные степени\"");
 		return false;
 	}*/
-
  	return true;
 }
 

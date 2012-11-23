@@ -438,7 +438,7 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause& C, SVI pSynVar)
 
 	string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(isubj_gram);
 	debug = C.GetOpt()->GetGramTab()->GrammemsToStr(ipredk_gram);
-
+	//if( isubj_gram & rAllGenders & ipredk_gram == 0) return; //разный род
     QWORD new_subj_grammems = (ipredk_gram & isubj_gram & rAllNumbers) | _QM(rNominativ); 
 	debug = C.GetOpt()->GetGramTab()->GrammemsToStr(new_subj_grammems);
 
@@ -523,7 +523,7 @@ EClauseType CRusSentence::GetClauseTypeByAncodePattern (const CAncodePattern& Pa
     if( Pattern.HasPos(INP) )
         return INP_T;
     else
-	if	( Pattern.HasPos(ADJ_FULL) && Pattern.HasGrammem(rComparative) )
+	if	( (Pattern.HasPos(ADJ_FULL) || Pattern.HasPos(NUMERAL)) && Pattern.HasGrammem(rComparative) )
 		return COMPARATIVE_T;
 
 	//возвращаем  несуществующую часть речи
