@@ -157,7 +157,7 @@ long CRusSemStructure::Idealize ()
 			FindDividedTermins();
 			FindAbbrTermins();
 			FindEnglishTermins();
-			MovePrepNodeToRelationForMainTimeGroups();
+			Bonus += MovePrepNodeToRelationForMainTimeGroups();
 			ClearInterpsForFreeTimeGroups();
 			Bonus += CreateDefaultSubjectFromPreviousClause();
 			ConvertVSE2_toOperator();
@@ -314,75 +314,22 @@ void CRusSemStructure::ApplySubordinationCases ()
 			m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllNumbers);
 			m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rSingular);
 		};
-	// число числительных
-
-	// падеж числительных
-	for (long i=0;  i < m_Relations.size() ; i++)
+	// число, падеж числительных
+	for (long i=0;  i < m_Relations.size(); i++)
+		if	(		(m_Relations[i].m_Valency.m_RelationStr == "QUANTIT") )
 		{
-			QWORD NumSrcGr = m_Nodes[m_Relations[i].m_SourceNodeNo].GetGrammems();
-			if(m_Nodes[m_Relations[i].m_SourceNodeNo].m_Words.size() ==0 ||m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words.size()==0) continue;
-			CRusSemWord& w1 = m_Nodes[m_Relations[i].m_SourceNodeNo].m_Words[m_Nodes[m_Relations[i].m_SourceNodeNo].m_MainWordNo];
-			CRusSemWord& w2 = m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[m_Nodes[m_Relations[i].m_TargetNodeNo].m_MainWordNo]; // Числ
-
-			//if( m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" && w2.HasPOS(NUMERAL_P)) // согласуем ЧИСЛ-П: "больше 10 номеров"
-			//{
-			//	w2.SetFormGrammems ( w1.GetFormGrammems() & w2.GetFormGrammems() );
-			//	m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems( w1.GetFormGrammems() & w2.GetFormGrammems() );
-			//}
-
-			if( (m_Relations[i].m_Valency.m_RelationStr == "QUANTIT" 
-			|| (m_Relations[i].m_Valency.m_RelationStr == "PROPERT" && w2.HasPOS(NUMERAL_P)) )
-			&& !w2.HasOneGrammem(rComparative)) 				
-		
-			if (!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases) ||  // падеж ЧИСЛ не определен
-				(w2.HasPOS(NUMERAL_P) && (!IsPowerOfTwo(w2.GetFormGrammems() & rAllGenders) || !IsPowerOfTwo(w2.GetFormGrammems() & rAllNumbers))))	// род или число ЧИСЛ-П не определен
-			{
-				long j;
-				for (j=0;  j < m_Relations.size(); j++)
-					if( m_Relations[i].m_SourceNodeNo == m_Relations[j].m_TargetNodeNo ) 
-					{
-						if( (m_Relations[j].m_Valency.m_RelationStr == "TIME") 
-							&& (m_Nodes[m_Relations[j].m_SourceNodeNo].HasPOS(VERB)) )// .m_Word == "есть")
-						{
-							if( !IsPowerOfTwo(NumSrcGr & rAllCases) ) // Ему 100 лет
-								w1.SetFormGrammems(w1.GetFormGrammems() & ~rAllCases | _QM(rGenitiv));
-							if( w2.HasPOS(NUMERAL_P) )
-								w2.SetFormGrammems(w2.GetFormGrammems() & ~rAllCases | _QM(rGenitiv)); // 11 числа я ушел
-							else
-								w2.SetFormGrammems(w2.GetFormGrammems() & ~rAllCases | _QM(rAccusativ));
-						}
-						else
-						if( (m_Relations[j].m_Valency.m_RelationStr != "SUB" )
-							//|| m_Relations[j].m_Valency.m_RelationStr == "S-ACT" // Наличие 5 стволов. Там есть 100 тонн.
-							//|| m_Relations[j].m_Valency.m_RelationStr == "BELNG") // Задача 1777 года.	
-							&& IsPowerOfTwo(NumSrcGr & rAllCases) && !(!w2.HasPOS(NUMERAL_P) && (NumSrcGr & rAllCases) == _QM(rGenitiv) && (NumSrcGr & rAllNumbers) == _QM(rSingular))) // падеж определен //В конце 2 года
-						{
-							w2.SetFormGrammems ( w2.GetFormGrammems() & NumSrcGr );
-							m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems( m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & NumSrcGr );
-						}
-						break;
-					}
-					if ( j == m_Relations.size() ) //!IsPowerOfTwo(w2.GetFormGrammems() & rAllCases)) // падеж ЧИСЛ не определен
-					if(IsPowerOfTwo( NumSrcGr & rAllCases) || ((NumSrcGr & rAllCases & ~(_QM(rAccusativ) | _QM(rNominativ))) ==0)  )   // падеж Гр определен или им или вин
-					{
-						if ( NumSrcGr & _QM(rSingular) && NumSrcGr & _QM(rGenitiv) //в 4 часа
-							&& !w2.HasOneGrammem(rSingular) ) //m_Words[0].m_Word.rfind("1") != 0
-							w2.SetFormGrammems ( NumSrcGr & ~rAllCases | _QM(rAccusativ) & ~rAllNumbers | _QM(rPlural));
-						else
-							w2.SetFormGrammems ( NumSrcGr ); //Ему 1 год
-					}
-					else if(IsPowerOfTwo( w1.GetFormGrammems() & rAllCases)) // падеж Сущ определен
-							if(IsPowerOfTwo( w1.GetFormGrammems() & _QM(rGenitiv))) // "Заплатить за 5 вещей" , "нет 5 вещей"
-								w2.SetFormGrammems ( w2.GetFormGrammems() & (_QM(rAccusativ) | _QM(rNominativ)| _QM(rGenitiv)) );
-							else
-								w2.SetFormGrammems ( w1.GetFormGrammems()); // "Пользуюсь 5 вещами"
-					m_Nodes[m_Relations[i].m_TargetNodeNo].SetGrammems(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & w2.GetFormGrammems());
-					//m_Nodes[m_Relations[i].m_SourceNodeNo].SetGrammems(m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() & w2.GetFormGrammems());
-			}
-			else
-				if( w1.HasOneGrammem(rGenitiv) )
-					w1.SetFormGrammems ( w1.GetFormGrammems()  & ~rAllCases | _QM(rGenitiv) ); //"Пришел через 2 недели"
-		}
+			const CRusGramTab *R = (CRusGramTab*)m_piSent->GetOpt()->GetGramTab();
+			CRusSemNode& NounN = m_Nodes[m_Relations[i].m_SourceNodeNo];
+			CRusSemNode& NumN = m_Nodes[m_Relations[i].m_TargetNodeNo];
+			string gcNoun = NounN.m_Words[NounN.m_MainWordNo].m_GramCodes;
+			string gc4 = NumN.m_GramCodes;
+			if(gc4.length() == 2 && gcNoun.length() == 2) continue;
+			gc4 = R->GleicheAncode1(CaseNumberGender0, gc4, 
+				R->GetGramCodes(NUMERAL, NounN.GetGrammems() & (rAllCases|rAllGenders), CaseGender),
+				gcNoun);
+			NumN.ModifyGramCodes(gc4 , 3, R);
+			NounN.ModifyGramCodes(gcNoun , 2, R);
+		};
 	
    // если русское подлежащее было неизменяемым, а в него идет стрелка  от сказуемого, 
    // которое стоит строго либо в мн., либо  ед., тогда нужно удалить граммему, 
