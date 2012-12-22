@@ -107,8 +107,7 @@ struct CLemmaInfo
 	}
 
 };
-
-
+extern void ReadAllModels_mt(FILE* fp, vector<CFlexiaModel>& FlexiaModels,vector<CAccentModel>&	AccentModels, StringVector& m_Prefixes);
 extern void ReadFlexiaModels(FILE* fp, vector<CFlexiaModel>& FlexiaModels );
 extern void WriteFlexiaModels(FILE* out_fp, const vector<CFlexiaModel>& FlexiaModels );
 extern void ReadAccentModels (FILE* fp, vector<CAccentModel>&	AccentModels );

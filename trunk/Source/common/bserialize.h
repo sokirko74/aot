@@ -6,6 +6,11 @@
  #define bserialze_h
 
 #include  "utilit.h"
+#ifdef BOOST
+#include <boost/thread.hpp>
+#include <boost/array.hpp>
+#include <cstdio>
+#endif
 
 // ============== DWORD =====================
 inline size_t get_size_in_bytes (const DWORD& t)
@@ -231,6 +236,19 @@ bool BinaryReadItem (FILE* fp, T& V)
     restore_from_bytes (V, buffer);
     return true;
 }
+#ifdef BOOST
+template <class T>
+void tt(vector< boost::array<BYTE,VectorMaxStructSize>>* sss, vector<T>* V)
+{
+	vector< boost::array<BYTE,VectorMaxStructSize>> ss = (*sss);
+	T dummy;
+	for(int num = 0; num < ss.size(); num++)
+	{
+		restore_from_bytes (dummy, &(ss[num])[0]);
+		(*V).push_back(dummy);
+	}
+}
+#endif
 
 template <class T>
 void ReadVectorInner (FILE* fp, vector<T>& V, size_t Count)
@@ -247,7 +265,30 @@ void ReadVectorInner (FILE* fp, vector<T>& V, size_t Count)
 
 		BYTE buffer[VectorMaxStructSize];
 		assert (size_of_t < VectorMaxStructSize);
-
+#ifdef BOOST2
+		if(Count > 100000)
+		{
+			using namespace boost; 
+			const int tc = 4;
+			vector< boost::array<BYTE,VectorMaxStructSize> > ss[tc];
+			vector<T> FF[tc];
+			thread t[tc];
+			int q = 0;
+			for (int i = 0; i < Count; i++)
+			{
+				if (fread ((void*)buffer, size_of_t, 1, fp)!=1)
+					throw CExpc(Format("cannot read %i item in ReadVectorInner",i));
+				boost::array<BYTE,VectorMaxStructSize> b2;// (&(buffer[0]));
+				std::copy(buffer, buffer + VectorMaxStructSize, b2.begin());
+				//for (int j = 0; j < VectorMaxStructSize; j++) b2[j] = buffer[j];
+				ss[q].push_back( b2 );
+				if( ss[q].size() > Count/tc ) {t[q] = thread(&tt<T>, (&ss[q]), (&FF[q])); q++;}
+			}
+			t[q] = thread(&tt<T>, (&ss[q]), (&FF[q]));
+			for(int num = 0; num < tc; num++) { t[num].join(); V.insert(V.end(), FF[num].begin(), FF[num].end());}
+			return;
+		}
+#endif
 		V.reserve(V.size() + Count);
 		if (V.capacity() < Count) 
 			throw CExpc(Format("cannot allocate %u bytes in ReadVectorInner",size_of_t*Count));

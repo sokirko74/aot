@@ -149,8 +149,6 @@ bool CSyntaxOpt::LoadTerminsForOneThesaurus(const char* ThesName)
 		P.SetPointer(m_pThesaurus->LoadThesaurus(ThesName), true);
 
 	if (!P.m_Pointer) return false;
-
-
 	return m_pThesaurus->ReadThesaurusForSyntax(ThesName, P.m_Pointer, m_pProfessions->m_vectorDatItems);
 };
 
@@ -158,7 +156,32 @@ bool CSyntaxOpt::LoadTermins(const CDictionary* piOborDic)
 {
 	try
 	{
-	
+#ifdef BOOST2
+		using namespace boost; 
+		vector<CThesaurus*> FF;
+		thread_group tg;
+		if( m_bEnableLocThesaurus ) 
+			tg.add_thread(new thread(bind(&CThesaurusForSyntax::LoadThesaurus_mt, m_pThesaurus, "RML_THES_LOC", &FF)));
+		if( m_bEnableFinThesaurus ) 
+			tg.add_thread(new thread(bind(&CThesaurusForSyntax::LoadThesaurus_mt, m_pThesaurus, "RML_THES_FIN", &FF)));
+		if( m_bEnableCompThesaurus )
+			tg.add_thread(new thread(bind(&CThesaurusForSyntax::LoadThesaurus_mt, m_pThesaurus, "RML_THES_COMP", &FF)));
+		if( m_bEnableOmniThesaurus )
+			tg.add_thread(new thread(bind(&CThesaurusForSyntax::LoadThesaurus_mt, m_pThesaurus, "RML_THES_OMNI", &FF)));
+
+		tg.join_all();
+		for(int i=0; i<FF.size(); i++)
+		{
+			_share_pointer_t<const CThesaurus*>& P = GetThesPointerByThesId(GetThesTypeByStr(FF[i]->m_Name));
+
+			if (P.m_Pointer == 0)
+				P.SetPointer(FF[i], true);
+
+			if (!P.m_Pointer) return false;
+			m_pThesaurus->ReadThesaurusForSyntax(FF[i]->m_Name.c_str(), P.m_Pointer, m_pProfessions->m_vectorDatItems);
+		}
+#else
+
 		if (m_bEnableLocThesaurus)
 			LoadTerminsForOneThesaurus("RML_THES_LOC");
 
@@ -170,9 +193,9 @@ bool CSyntaxOpt::LoadTermins(const CDictionary* piOborDic)
 
 		if( m_bEnableOmniThesaurus )
 			LoadTerminsForOneThesaurus("RML_THES_OMNI");
+#endif
 
 		m_pThesaurus->SortIndexes();
-
 	}
 	catch(...)
 	{

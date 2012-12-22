@@ -125,19 +125,20 @@ void CMorphDict::CreateModelsIndex()
 	for (size_t i=0; i< m_LemmaInfos.size(); i++)
 			for (; CurrentModel < m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo; CurrentModel++ )
 			{
-				int debug = m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo;
+				//int debug = m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo;
 				m_ModelsIndex[CurrentModel+1] = i;
 			};
 	
 	for (; CurrentModel < m_FlexiaModels.size(); CurrentModel++ )
 		m_ModelsIndex[CurrentModel+1] = m_LemmaInfos.size();
-	
+#ifdef DEBUG	
 	for (size_t i=0; i< m_LemmaInfos.size(); i++)
 	{
 		int debug = m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo;
 		assert (m_ModelsIndex[debug] <= i);
 		assert (i < m_ModelsIndex[debug+1]);
 	};
+#endif
 };
 
 bool CMorphDict::Load(string GrammarFileName)
@@ -153,15 +154,17 @@ bool CMorphDict::Load(string GrammarFileName)
 		ErrorMessage (Format("Cannot open %s", PrecompiledFile.c_str()));
 		return false;
 	};
-	
+	int Count;
+	char buffer[256];
+#ifdef BOOST
+	ReadAllModels_mt(fp , m_FlexiaModels, m_AccentModels, m_Prefixes);
+#else
 	ReadFlexiaModels(fp, m_FlexiaModels);
 
 	ReadAccentModels(fp, m_AccentModels);
 
 
 	
-	int Count;
-	char buffer[256];
 
 	{
 		if (!fgets(buffer, 256, fp)) return false;
@@ -178,8 +181,8 @@ bool CMorphDict::Load(string GrammarFileName)
 		assert (!q.empty());
 		m_Prefixes.push_back(q);
 	};
-
-	
+	//fprintf (stderr, "m_Prefixes %f\n", (double)(clock() - m_TimeSpan));	
+#endif
 	{
 		if (!fgets(buffer, 256, fp)) return false;
 		Count = atoi(buffer);

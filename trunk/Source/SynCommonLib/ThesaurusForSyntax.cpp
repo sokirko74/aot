@@ -24,6 +24,30 @@ CThesaurusForSyntax::~CThesaurusForSyntax()
 		delete m_pEngGramTab;
 };
 
+bool CThesaurusForSyntax::LoadThesaurus_mt(string tn, vector<CThesaurus*>* ts)
+{
+#ifdef BOOST
+	using namespace boost; 
+	thread_group tg;
+	CThesaurus* T = new CThesaurus;
+	const char* ThesName =  tn.c_str() ;
+	if (!T) return false;
+	if (!T->SetDatabase(ThesName)) return false;
+	assert (GetOpt()->GetOborDic() != 0);
+	T->m_MainLanguage = GetOpt()->m_Language;
+	T->m_pOborDic = GetOpt()->GetOborDic();
+	assert (GetOpt()->GetGramTab() != 0);
+	T->m_pMainGramTab = GetOpt()->GetGramTab();
+	assert (m_pEngGramTab != 0);
+	T->m_pEngGramTab = m_pEngGramTab;
+	clock_t m_TimeSpan = clock();
+	tg.create_thread (bind(&CThesaurus::ReadThesaurusFromDisk,T));
+	tg.create_thread (bind(&CThesaurus::ReadRelationsFromDisk,T));
+	tg.join_all();
+	(*ts).push_back(T);
+#endif
+	return true;
+}
 
 CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 {
