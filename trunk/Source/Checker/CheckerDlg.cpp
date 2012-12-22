@@ -486,9 +486,9 @@ BOOL CCheckerDlg::LoadBase()
 	FILE *fb;
 	if( (fb=fopen(GetBaseFileName().c_str(),"rt"))==NULL )
 	{
-		/*if( AfxMessageBox(IDS_NOBASE,MB_ICONQUESTION|MB_YESNO)!=IDYES )
+		if( AfxMessageBox(IDS_NOBASE,MB_ICONQUESTION|MB_YESNO)!=IDYES )
 			return FALSE;
-		else*/
+		else
 		return TRUE;
 	}
 
@@ -1018,7 +1018,7 @@ static UINT MakeProc(LPVOID pArg)
 		CBase b;
 		b.num = SentenceNo+1;
 		b.txt = Result;
-		if( !binary_search(pDlg->m_base.begin(),pDlg->m_base.end(),b) )
+		if( !binary_search(pDlg->m_base.begin(),pDlg->m_base.end(),b) && pDlg->m_base.size() > 0 )
 		{
 			bool bDebug = binary_search(pDlg->m_base.begin(),pDlg->m_base.end(),b);
 			// ignoring homonims order for PostMorphCheck

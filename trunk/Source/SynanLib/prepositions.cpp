@@ -87,7 +87,6 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 
 	 if (Wk.m_UnitType != EWord)
 		 return false;
-		
  
 	 if (	(    !Wk.is_syn_noun() 
               && !Wk.HasPOS(PRONOUN_PREDK ) 
@@ -129,7 +128,6 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 			grammems = GetMaxQWORD();
 	}
 
-
 	if ((depend_cases & grammems & rAllCases)  == 0)
 	{
 
@@ -148,11 +146,12 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 		 return false;
 	};
 
-	// специальна€  проверка дл€  в+»_мн
+	// специальна€  проверка дл€  в+»_мн //"мен€ прин€ли в пионеры"
 	if (		((depend_cases & grammems & rAllCases)  == _QM(rNominativ) )
-			&&	((grammems & _QM(rPlural)) == 0)
+		&&	((grammems & _QM(rPlural)) != 0)
 		)
 	return false;
+	else depend_cases &= ~_QM(rNominativ);
 
 	/*
 		запретить:
@@ -180,8 +179,6 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 	if( i_group != -1 )
 		change_group_grammems(*GetGroupPtr(i_group), depend_cases, rAllCases);
 	
-
-
 	if ( !(depend_cases & grammems) ) 
 		W1.m_FoundPrepDependCases = _QM(rDativ ); //  почему датив? —окирко но€брь, 2002
 	else

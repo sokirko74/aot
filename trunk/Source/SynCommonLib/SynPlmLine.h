@@ -17,17 +17,17 @@
 
 enum  PlmLineFlagEnum {
 	fl_punct=1<<1,
-	fl_russian_odin=1<<2, // for Russian
+	fl_russian_odin=1<<2, // for Russian //  может заканчиваться на 01, 21,31,41,51,61,71,81,91, но не на 11
 	fl_oborot1=1<<3,
 	fl_oborot2=1<<4,
 	fl_in_oborot=1<<5,
-	fl_le=1<<6, // for Russian
-	fl_ile=1<<7,
+	fl_le=1<<6, //лексема // for Russian
+	fl_ile=1<<7, //иностранная лексема
 	fl_ranknoun=1<<8,
 	fl_digit=1<<9,
 	fl_ambiguous  =1<<10, 
 	fl_comma=1<<11,
-	fl_small_number=1<<12, // for Russian
+	fl_small_number=1<<12, // for Russian //  может заканчиваться на 2, 3 или 4
 	fl_dg_ch=1<<13,
 	fl_standard_param_abbr=1<<14,
 	fl_fullstop=1<<15,
@@ -94,6 +94,7 @@ public:
 
     void	SetFlag (PlmLineFlagEnum PlmLineFlag);
 	void	SetGrammems (QWORD value);
+	void	SetGramcodes (string value);
 	void	SetPoses (size_t value);
 	void	SetMorphByAncodePattern (const CAncodePattern & P);
     const char* get_word() const;

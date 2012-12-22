@@ -362,7 +362,7 @@ void	CPlmLine :: SetGramCodes(const string& NewGramCodes, const CAgramtab* pRusG
 		m_Pos = 255;
 	};
 
-	if ( (m_CommonGramCode.length() == 2) && (m_CommonGramCode != "??") )
+	if ( (m_CommonGramCode.length() > 1) && (m_CommonGramCode != "??") )
 		m_Grammems |= pRusGramTab->GetAllGrammems(m_CommonGramCode.c_str());
 
 };

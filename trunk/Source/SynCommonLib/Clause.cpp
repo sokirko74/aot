@@ -970,6 +970,7 @@ void CClause::AssignSynVariantsGrammems(CMorphVariant&  synVariant, const CForma
 			continue;
 
         synVariant.m_SynUnits[UnitNo].ModifyGrammems ( W.GetGrammems(),W.GetPoses());
+		synVariant.m_SynUnits[UnitNo].m_GramCodes = string(W.m_gramcodes);
 		
 	}
 

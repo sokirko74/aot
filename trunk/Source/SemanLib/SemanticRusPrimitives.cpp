@@ -3,7 +3,7 @@
 #include "SemanticRusStructure.h"
 
 
-
+	
 const CSemNode&		CRusSemStructure::GetNode(int NodeNo) const 
 {
 	return m_Nodes[NodeNo];
@@ -1068,7 +1068,21 @@ void  CRusSemNode::SetMainWordNo (long WordNo)
 		m_RichPoses = 0;
 };
 
-
+void CRusSemNode::ModifyGramCodes(string GramCodes, int mode, const CRusGramTab *R)
+{
+	//if( GramCodes == "" ) return;
+	if( mode & 1 )
+	{
+		m_GramCodes = GramCodes;
+		SetGrammems( GetGrammems()  & ~3665919 | R->GetAllGrammems(GramCodes.c_str()) ); 
+	}
+	if( mode & 2 )
+		for (long i=0; i < m_Words.size(); i++)
+		{
+			m_Words[i].m_GramCodes = R->GleicheAncode1(CaseNumber0, m_Words[i].m_GramCodes, GramCodes);
+			m_Words[i].SetFormGrammems(m_Words[i].GetFormGrammems()  & ~3665919 | R->GetAllGrammems(m_Words[i].m_GramCodes.c_str()) ); 
+		}
+}
 //================================================
 
 void CRusSemWord::Init() 

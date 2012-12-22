@@ -8,6 +8,7 @@
 #include "Group.h"
 #include "SyntaxInit.h"
 #include "MorphVariant.h"
+#include "../SynanLib/RusSyntaxOpt.h"
 
 // ================================================
 // ================  CRelation ====================
@@ -84,6 +85,17 @@ void CGroup::Reset()
 void CGroup::SetGrammems(QWORD Grammems)
 {
 	grammems = Grammems;
+}
+
+void CGroup::SetGrammems(QWORD Grammems, const char * GramCodes)
+{
+	grammems = Grammems;
+	m_GramCodes = string(GramCodes);
+}
+void CGroup::SetGrammems(CSynPlmLine W)
+{
+	grammems = W.GetGrammems();
+	m_GramCodes = string(W.m_gramcodes);
 }
 
 QWORD CGroup::GetGrammems() const
@@ -321,6 +333,10 @@ const CGroup& CGroups :: get_maximal_group(size_t WordNo)  const
 	else
 		return m_AtomicGroups[WordNo];
 };
+const CGroup& CGroups :: get_atomic_group(size_t WordNo)  const 
+{
+		return m_AtomicGroups[WordNo];
+};
 
 
 const CGroup* CGroups :: get_maximal_group_ptr(size_t WordNo)  const 
@@ -335,10 +351,54 @@ const CGroup* CGroups :: get_maximal_group_ptr(size_t WordNo)  const
 
 
 void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD grammems, QWORD breaks)
+{	
+	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
+		{
+			CGroup& Gi = ((CGroup&)get_maximal_group(i));
+
+			if( Gi.m_MainWordNo == i && GetOpt()->m_Language == morphRussian
+				&& (Gi.m_GroupType == NUMERAL_NOUN || Gi.m_GroupType == NOUN_NUMERAL_APPROX) ) //имеют зависимые грамкоды
+			{
+				Gi.SetGrammems(Gi.GetGrammems() & (grammems | ~breaks));
+				string gcNoun = string(sent[i].m_gramcodes);
+				string gcNum = string(sent[Gi.m_OtherGroup.m_iFirstWord].m_gramcodes);
+				const CAgramtab *R = GetOpt()->GetGramTab(); 
+				if(gcNoun.length() == 2 || !(grammems & rAllCases)) continue;
+				R->GleicheAncode1(CaseNumberGender0, gcNum, 
+					R->FilterGramCodes(gcNum, grammems & rAllCases | ~rAllCases, 0), gcNoun);
+				sent[i].SetGramcodes(gcNoun);
+				continue;
+			}
+			
+			sent[i].SetGrammems(sent[i].GetGrammems() & (grammems | ~breaks));
+			m_AtomicGroups[i].SetGrammems(sent[i].GetGrammems());
+		};
+}
+
+bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const char* gramcodes, GrammemCompare CompareFunc)
+{
+	const CAgramtab *R = GetOpt()->GetGramTab(); 
+	bool isok = true;
+	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
+	{
+		string new_grc = R->GleicheAncode1(CompareFunc, R->FilterGramCodes(string(sent[i].m_gramcodes), ~_QM(rIndeclinable), 0),
+			gramcodes);
+		if(new_grc=="") { isok = false; continue; }
+		QWORD grammems = sent[i].GetGrammems() & ~(rAllCases|rAllGenders|rAllTimes|rAllPersons|rAllAnimative)
+			| R->GetAllGrammems( new_grc.c_str() );
+		sent[i].SetGramcodes(new_grc); 
+		m_AtomicGroups[i].m_GramCodes = new_grc;//-> synVariant.m_SynUnits[UnitNo].m_GramCodes = string(W.m_gramcodes);
+		sent[i].SetGrammems(grammems);
+		m_AtomicGroups[i].SetGrammems(grammems);
+	};
+	return isok;
+}
+
+void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD grammems) //для добавления рода к СЛОЖ_ЧИСЛ
 {
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
 	{
-		sent[i].SetGrammems(sent[i].GetGrammems() & (grammems | ~breaks));
+		sent[i].SetGrammems(grammems);
 		m_AtomicGroups[i].SetGrammems(sent[i].GetGrammems());
 	};
 }
@@ -500,6 +560,7 @@ void CGroups::create_syn_rel(CGroup& new_group, int iSource, int iTarget, EGroup
 	new_rel.m_iLastWord = iTarget;
 	new_rel.type = type;
 	new_rel.m_iGrammems = new_group.GetGrammems();
+	new_rel.m_GramCodes = new_group.m_GramCodes;
     new_rel.AssertValid();
 	m_Relations.push_back(new_rel);
     new_group.m_bAlreadyBuiltRelations = true;

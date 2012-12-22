@@ -275,7 +275,10 @@ size_t CGraLine::LengthUntilDelimiters (const char *s, const CGraphmatFile* G)
 
 		if (i > 0)
 		{
-			if (s[i] == '-') continue; //  let an inner hyphen be part of the word, for example "test-test"
+			if (s[i] == '-') //  let an inner hyphen be part of the word, for example "test-test"
+				if((i+1 < CriticalTokenLength) && isdigit((BYTE)s[i+1]) && isdigit((BYTE)s[i-1])) // not ok for "1-2"
+					break;
+				else continue;
 			if ((s[i] == '.') && (i+1 < CriticalTokenLength))
 			{	
 				if (		(isdigit((BYTE)s[i-1]) == isdigit((BYTE)s[i+1]))

@@ -114,7 +114,7 @@ void CGraphmatFile :: InitNonContextDescriptors (CGraLine& L)
 		)
 	{
 
-		if (fl_ra&&fl_la)  // встретились русские и латинские буквы
+		if (fl_ra&&fl_la&& !is_russian_alpha((BYTE)Token[sizeof(Token) - 1]))  // встретились русские и латинские буквы, "IP-адрес"
 			if (!m_bForceToRus) // если не надо приводить к русскому алфавиту
 				L.SetDes(OUnk); // установить дескриптор "вопрос"
 			else // попробовать привести слово к русскому алфав.

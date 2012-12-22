@@ -441,16 +441,24 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause& C, SVI pSynVar)
 	//if( isubj_gram & rAllGenders & ipredk_gram == 0) return; //разный род
     QWORD new_subj_grammems = (ipredk_gram & isubj_gram & rAllNumbers) | _QM(rNominativ); 
 	debug = C.GetOpt()->GetGramTab()->GrammemsToStr(new_subj_grammems);
-
+	if(!(new_subj_grammems & rAllNumbers)) new_subj_grammems |= rAllNumbers;
+	int GT = GrpWithSubj ? GrpWithSubj->m_GroupType : -1;
+	bool numeral = (GT==NUMERAL_NOUN||GT==NOUN_NUMERAL||GT==NUMERAL_ADVERB||GT==NUMERALS||GT==NOUN_NUMERAL_APPROX);
+	if(  numeral ) 
+		isubj_gram |= _QM(rSingular) |_QM(rNeutrum); //группа, вводимая количественным наречием: В углу стояло 5 стульев
+	if( ((CRusGramTab*)C.GetOpt()->GetGramTab())->ConflictGrammems(isubj_gram, ipredk_gram, rAllGenders | rAllNumbers))  //разный род или число
+		return;
 
 	// setting grammems  for group and relation
 	if ( GrpWithSubj )
 	{
 		size_t breaks = rAllCases | rAllNumbers;	
-		GrpWithSubj->SetGrammems( GrpWithSubj->GetGrammems() & (new_subj_grammems | ~breaks) );
+		GrpWithSubj->SetGrammems( isubj_gram & (new_subj_grammems | ~breaks) );// GrpWithSubj->GetGrammems()
         for ( int i = 0; i < pSynVar->m_vectorGroups.m_Relations.size(); i++ )
 		{
-            if (GrpWithSubj->m_MainWordNo == pSynVar->m_vectorGroups.m_Relations[i].m_iFirstWord)
+            if (GrpWithSubj->m_MainWordNo == pSynVar->m_vectorGroups.m_Relations[i].m_iFirstWord &&
+				!((CRusGramTab*)C.GetOpt()->GetGramTab())->ConflictGrammems(
+				pSynVar->m_vectorGroups.m_Relations[i].m_iGrammems, GrpWithSubj->GetGrammems(), breaks))
             {
 			    pSynVar->m_vectorGroups.m_Relations[i].m_iGrammems = GrpWithSubj->GetGrammems();
 			    if (GrpWithSubj->m_GroupType == NOUN_ADJ)
@@ -463,9 +471,7 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause& C, SVI pSynVar)
 		}
 	}
 
-    pSynVar->m_SynUnits[pSynVar->GetFirstSubject()].ModifyGrammems(new_subj_grammems);	
-	
-
+    pSynVar->m_SynUnits[pSynVar->GetFirstSubject()].ModifyGrammems(new_subj_grammems);
 }
 
 void CRusSentence::ChangeSubjAndItsGroupGrammems()

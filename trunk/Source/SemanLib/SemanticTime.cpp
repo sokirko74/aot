@@ -296,6 +296,10 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
 	  QWORD Grammems = GetCaseGrammem(GetRossHolder(Ross), ItemNo);
 	  QWORD Grm =  m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].GetGrammems();
 
+	  for (long j=0; j <  V.size(); j++)
+		  if( V[j].m_bShouldBeNumeral_P && !m_Nodes[V[j].m_NodeNo].HasPOS(NUMERAL_P))
+			  return false;
+
 	  /*
 	   для сокращений проверку на ПР_УПР проводить не нужно
 	  */
@@ -452,6 +456,10 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 			 long nd = BestHypot.m_Periods[PeriodNo].m_NodeNo;
 			 if (HasSynRelation (nd, "ОДНОР_ЧИСЛ"))
 				 nd = GetSynHost(nd);
+			 if ( m_pData->m_TimeUnits[BestHypot.m_UnitNo].m_Rels.size() == 0 //не работал TimeHypotIsSyntaxAgree
+				 && (!BestHypot.m_Periods[PeriodNo].m_bShouldBeNumeral_P && !HasSynRelation (nd, "ЧИСЛ_СУЩ")) 
+				 )
+				 continue;
 			 m_Nodes[nd].m_Colloc.m_Type = RossType;
 			 m_Nodes[nd].m_Colloc.GetRossInterp().m_DictType = TimeRoss;
 			 m_Nodes[nd].m_Colloc.GetRossInterp().m_UnitNo = BestHypot.m_UnitNo;
@@ -580,8 +588,9 @@ void CRusSemStructure::ClearInterpsForFreeTimeGroups()
   его перевод равен "till + A1(НЕ)", т.е. при переводе "не ранее" у его отца
   должно будет появиться отрицание, а сам предлог должен будет перевестись в "till".
 */
-void CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
+long CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
 {
+  long res = 0;
   for (long NodeNo=0; NodeNo<m_Nodes.size(); NodeNo++)
    if (   m_Nodes[NodeNo].IsMainTimeRossNode()
 	  )
@@ -604,9 +613,44 @@ void CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
 		 {
 			 m_Relations[R.m_Rels[0]].m_SynReal.m_Preps.clear();
 			 m_Relations[R.m_Rels[0]].m_SynReal.m_Preps.push_back(*m_Nodes[PrepNodeNo].GetInterp());
-		 };
+		 }
+		 else 
+			 if ( HasSynRelation(NodeNo, "врем_группа"))
+			 {
+				 //res +=300; //штраф за удаленный узел и связи, "В конце 2 года"
+				 //удаляем не состоявшуюся группу и пересчитываем лучший вариант
+				 DeleteSynRelationsByName(NodeNo, "врем_группа");
+				 m_Nodes[PrepNodeNo].DelAllInterps(); 
+				 for (long ClauseNo=0; ClauseNo <m_Clauses.size(); ClauseNo++)
+				 {
+					 CLexVariant& V = m_AlreadyBuiltClauseVariants[m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[ClauseNo].m_CurrLexVariantNo];
+					 bool bCheckSAMNode = CheckSAMNode(ClauseNo);
+					 size_t LexVariantInCurrSetCollocNo = 0;
+					 size_t CurrSetCollocHypNo = 0;
+					 SetLexVariant(ClauseNo, LexVariantInCurrSetCollocNo, CurrSetCollocHypNo);
+
+					 V = BuildTheVariant(ClauseNo);
+					 //PrintRelations();
+					 //PrintNodes();
+					 V.m_BestValue.SAMNodeViolation = !bCheckSAMNode;
+					 V.m_LexVariantNo = LexVariantInCurrSetCollocNo;
+					 V.m_SetCollocHypNo = CurrSetCollocHypNo; 
+					 V.m_BestValue.CollocsCount = m_ClauseSetCollocHyps[ClauseNo][V.m_SetCollocHypNo].size();
+					 V.CopyLexVar(*this);
+
+					 //V.m_Nodes = m_Nodes;
+					 //V.m_Relations = m_Relations;
+					 //V.m_DopRelations = m_DopRelations;
+					 //V.m_SynRelations = m_SynRelations;
+					 //V.m_ThesSemRelations = m_ThesSemRelations;
+				 }
+				 continue;
+			 }
+
 		 DelNode(PrepNodeNo);
+		 
 		 /*предлог стоял перед главным словом*/
 		 NodeNo--;
    };
+   return res;
 }

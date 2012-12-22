@@ -262,6 +262,7 @@ public:
 	bool	check_prefixes(string prefixes) const;
 	bool	attach_form_prefixes_to_bases();
 	bool	prepare_for_RML();
+	bool	prepare_for_RML2();
 
 	bool				HasMeter() const		{ return  !!m_pMeter; }
 	MorphWizardMeter*	GetMeter()				{ return  m_pMeter; }

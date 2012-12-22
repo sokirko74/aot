@@ -54,7 +54,14 @@ void CSynPlmLine :: SetGrammems (QWORD value)
 {
 	m_Grammems = value;
 };
+void CSynPlmLine :: SetGramcodes (string str) 
+{
+	char * writable = new char[str.size() + 1];
+	std::copy(str.begin(), str.end(), writable);
+	writable[str.size()] = '\0'; // don't forget the terminating 0
 
+	m_gramcodes =  (const char *)writable;
+};
 
 void CSynPlmLine :: SetMorphByAncodePattern (const CAncodePattern & P) 
 {

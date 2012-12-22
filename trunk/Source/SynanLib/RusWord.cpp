@@ -73,13 +73,15 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
     H.m_bSmallNumber =    pWord->HasDes(ODigits)
 	                  && (    pWord->m_strWord[iLen - 1] == '2' 
 					       || pWord->m_strWord[iLen - 1] == '3'
-						   || pWord->m_strWord[iLen - 1] == '4');
+						   || pWord->m_strWord[iLen - 1] == '4')
+						   && FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
 	H.m_bRussianOdin =	 pWord->HasDes(ODigits)
 					&&	pWord->m_strWord[iLen - 1] == '1'
 					//  может заканчиваться на 01, 21,31,41,51,61,71,81,91, но не на 11
 					&&	(		(iLen == 1) 
 							||	(pWord->m_strWord[iLen - 2] != '1')
-						);
+						)
+						&& FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
 
 	//if( pWord->HasDes(ODigits) && (iLen == 1) && ( pWord->m_strWord[0] == '1') )
 	//{

@@ -47,9 +47,9 @@ enum rGrammems {
 		 rGenitiv    = 3,
 		 rDativ      = 4,
 		 rAccusativ  = 5,
-		 rInstrumentalis = 6,
-		 rLocativ    = 7,
-		 rVocativ    = 8,
+		 rInstrumentalis = 6,//тв,
+		 rLocativ    = 7,	//пр,
+		 rVocativ    = 8,	//зв,
 		 rAllCases   = ((1<<rNominativ) | (1<<rGenitiv) | (1<<rDativ) | (1<<rAccusativ) | (1<<rInstrumentalis) | (1<<rVocativ) | (1<<rLocativ)),
 
 		 rMasculinum = 9,

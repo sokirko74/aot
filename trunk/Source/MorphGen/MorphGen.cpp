@@ -20,6 +20,7 @@ void PrintUsage()
 		printf ("     The size of the prediction base depends crucialy upon this value\n");
 		printf ("<MinFreq> is the minimal frequence of the predicting postfix in the dictionary\n");
 		printf ("if --allow-russian-jo is swithched, then the program does not convert Russian 'jo' to 'e'\n");
+		printf ("if --allow-russian-jejo is swithched, then the program supports both 'e' and 'jo'\n");
 		
 		printf ("Example: MorphGen rus.mwz c:/RUS_BIN/ 3 2\n");
 		exit(1);
@@ -44,10 +45,18 @@ extern bool GenerateMorphDict(std::string filename, std::string out_path, int Po
 int main(int argc, char* argv[])
 {
 	bool bAllowRussianJo = false;
+	bool bAllowRussianJeJo = false;
 	if(argc == 6) 
 		if (string(argv[5]) == "--allow-russian-jo")
 		{
 			bAllowRussianJo = true;
+			argc = 5;
+		}
+		else		
+		if (string(argv[5]) == "--allow-russian-jejo")
+		{
+			bAllowRussianJo = true;
+			bAllowRussianJeJo = true;
 			argc = 5;
 		}
 		else
@@ -101,6 +110,12 @@ int main(int argc, char* argv[])
 		{
 			fprintf (stderr,"prepare_for_RML\n");
 			if (!Wizard.prepare_for_RML())
+				return 1;
+		};
+		if (bAllowRussianJeJo)
+		{
+			fprintf (stderr,"prepare_for_RML2\n");
+			if (!Wizard.prepare_for_RML2())
 				return 1;
 		};
 
