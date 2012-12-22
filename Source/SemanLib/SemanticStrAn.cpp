@@ -828,6 +828,30 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 		long Improvements = Idealize();
 
+		/*if ( Improvements > 0 )
+		{
+			CSemClauseVariantResult& ClauseVar = m_AlreadyBuiltClauseVariants[m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo];
+			bool bCheckSAMNode = CheckSAMNode(ClauseNo);
+			CLexVariant V = BuildTheVariant(ClauseNo);
+			PrintRelations();
+			PrintNodes();
+			ClauseVar.m_NodesCount  += m_Clauses[ClauseNo].GetNodesCount();
+			ClauseVar.m_PanicRelationsCount += V.AllRelationsCount;
+			V.m_BestValue.SAMNodeViolation = !bCheckSAMNode;
+			V.m_LexVariantNo = LexVariantInCurrSetCollocNo;
+			V.m_SetCollocHypNo = CurrSetCollocHypNo; 
+			V.m_BestValue.CollocsCount = m_ClauseSetCollocHyps[ClauseNo][CurrSetCollocHypNo].size();
+			V.CopyLexVar(*this);
+
+
+			rml_TRACE ("Клауза %i\n", ClauseNo);
+			rml_TRACE ("Лексический вариант(ClauseNo = %i) =  %i, Набор сл-ний = %i(из %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
+			rml_TRACE ("Вес лучшего варианта дерева %i\n", V.GetBestTreeWeight());
+			ClauseVar.m_BestLexVariants.push_back(V);
+			CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[ClauseNo].m_CurrLexVariantNo];
+			Weight += W.GetBestTreeWeight1(!IsConn);
+
+		}*/
 		return GetStructureWeight() + Improvements;
 
 
@@ -863,6 +887,7 @@ long CRusSemStructure::GetStructureWeight()
 		{
 		   CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
 		   Weight += W.GetBestTreeWeight1(!IsConn);
+		   //rml_TRACE("%d %s\n", W.GetBestTreeWeight1(!IsConn), W.m_BestValue.GetStr().c_str());
 		 };
 	};
 
@@ -903,7 +928,7 @@ long CRusSemStructure::GetStructureWeight()
 
 
 	Weight -= GetAnaphoricRelationsCount(Tag) * 5;
-
+	//rml_TRACE("%s\n", Summa.GetStr().c_str());
 	/*
 	 если были использованы недостоверные межклаузные  связи, тогда
 	 нужно дать штраф этой структуре
@@ -1175,6 +1200,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		else
 		{
 			m_ClauseVariantsCombinationNo = BestClauseVariantsCombinationNo;
+			rml_TRACE ("--------------------------------------------------------------\n");
 			GetClauseVariantCombination();
 
 			m_bLastTry = true;

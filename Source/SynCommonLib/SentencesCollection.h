@@ -34,7 +34,7 @@ public:
 	{
 		return m_pSyntaxOptions;
 	};
-
+	void SetKillHomonymsMode(KillHomonymsEnum k){ m_pSyntaxOptions->m_KillHomonymsMode =  k;}
 
 protected:
 	

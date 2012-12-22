@@ -7,6 +7,7 @@
 
 #include  <stdio.h>
 
+//#define BOOST
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
@@ -374,7 +375,7 @@ T& GerEngRusMakeUpperTemplate (T& word, MorphLanguageEnum Langua, size_t Len )
 
 
 //  QWORD mask
-#define _QM(X) (((QWORD)1)<<X)
+#define _QM(X) (((QWORD)1)<<(X))
 
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
@@ -383,4 +384,7 @@ enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
 #define IsPowerOfTwo(x) (((x) != 0) && (((x) & ((x) - 1)) == 0))
 
+extern QWORD pow(QWORD x,int y);
+
 extern int CountBits(QWORD value);
+extern size_t FindFloatingPoint(const char* str);

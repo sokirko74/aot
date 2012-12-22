@@ -100,9 +100,13 @@ class CAgramtab {
 	BYTE	GetFirstPartOfSpeech(const DWORD poses) const;
 	
 	string	GetAllPossibleAncodes(BYTE pos, QWORD grammems) const;
+	string	GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const;
     QWORD Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
 	string GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
-	
+	string GleicheAncode1 (GrammemCompare CompareFunc, string gram_codes1, string gram_codes2) const;
+	string GleicheAncode1 (GrammemCompare CompareFunc, string GramCodes1, string GramCodes2, string& GramCodes1pair) const;
+	string UniqueGramCodes(string gram_codes) const;
+	string FilterGramCodes(string gram_codes, QWORD grammems1, QWORD grammems2) const;
     
 
 };

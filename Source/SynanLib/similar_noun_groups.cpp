@@ -240,7 +240,8 @@ bool CRusFormatCaller::format_for_similar_noun_groups (CGroup& G)
 				i += (gr.size() + 1);		
 				
 			}
-		
+
+		//G.SetGrammems(G.GetGrammems() | _QM(rPlural)); //"мама с папой пришли"
 		
 		return true;
 	};

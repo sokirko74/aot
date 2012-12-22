@@ -117,8 +117,7 @@ int CFormatCaller::main_analyse()
 			{
 				int s = get_maximal_group_no(WordNo);
 				vector<CGroup>		m_Groups = GetGroups();
-				if( (s != -1 ) && (GetGroups()[s].m_iFirstWord != WordNo)
-					&& !(FormatCall.m_name.compare("׳ָֻׁ_ׁ׃Ù") == 0 && GetGroups()[s].m_RuleNo == 13)) // במכוו ןÿעט קוכמגוך -> QUANTIT (5, ׳ֵֻ־ֲֵÊ) 
+				if( (s != -1 ) && (GetGroups()[s].m_iFirstWord != WordNo) )
 				{
                     if (FormatCall.m_direction == FROM_LEFT)
                     {

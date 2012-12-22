@@ -350,7 +350,7 @@ string CMAPost::GetSimilarNumAncode (const string&  Lemma, const string&  Flexia
         if (POS == NOUN)
             break;
     }
-    if ( (POS == NUMERAL) ||  (POS == NUMERAL_P))
+    if ( (POS == NUMERAL) ||  (POS == NUMERAL_P) || Lemma == "НУЛЕВОЙ")
 	    break;
 	};
 	assert (k < Paradigms.size());
@@ -362,13 +362,14 @@ string CMAPost::GetSimilarNumAncode (const string&  Lemma, const string&  Flexia
 	{
 		  string Form = P.GetWordForm(k);
 		  EngRusMakeLower(Form);
-
+		  if ( IsNoun && Form != h && string("ао,ап,ат,ау,ац,ач,аъ").find(P.GetAncode(k)) != string::npos ) // 1000 - не аббр, "свыше 1000 человек"
+			  continue;
 		  if (Form.length() > Flexia.length())
 			  if (Flexia == "" || Flexia == Form.substr (Form.length()-Flexia.length()))
 				  AnCodes += P.GetAncode(k);
 	};
 
-	return AnCodes;
+	return m_pRusGramTab->UniqueGramCodes(AnCodes);
 	
 
 };
@@ -382,22 +383,60 @@ void CMAPost::Cifrdef()
 	//и лемматизируем этого слово как числительное 
 	//	1960-го                            4 0 4 RLE -= 1848 яя -1 #0
 	// А так же нулевые окончания
+	CLineIter dollar = m_Words.end();
 	for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
 	{
         CPostLemWord& W = *it;
+		CLineIter next_it=it;
+		CLineIter prev_it=it;
+		next_it++;
+		if ( it !=  m_Words.begin() ) prev_it--;
         //if (W.m_strWord.length() < 3) continue;
         int hyp = W.m_strWord.find("-");
         //if (hyp == string::npos) continue;
-        if (W.IsInOborot()) continue;
+        if (W.IsInOborot()) continue;	
+		
         // первая часть - цифры, второая - русская, если есть окончание
-        if (!isdigit((BYTE)W.m_strWord[0]) &&  !(hyp > 0 && is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1]))) continue; 
-        string NumWordForm = hyp < 0 ? it->m_strWord : it->m_strWord.substr(0, hyp); 
-		string Flexia = hyp < 0 ? "" : it->m_strWord.substr(hyp+1); ;
+        if (!isdigit((BYTE)W.m_strWord[0]) &&  !(hyp > 0 && is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1]))) 
+		if (dollar==prev_it)//$9,4 млрд
+		{
+			vector<CFormInfo> Paradigms;
+			m_pRusLemmatizer->CreateParadigmCollection(false, W.m_strWord, false, false, Paradigms);
+			if ( Paradigms.size() == 0 ) 
+				continue;
+			for (long k=0; k < Paradigms.size(); k++)
+				//if (m_pRusGramTab->GetPartOfSpeech(Paradigms[k].GetAncode(0).c_str()) == NOUN)
+				{
+					string Form = Paradigms[k].GetWordForm(0);
+					for(int i = NumeralToNumberCount; i >= 0;  i--)
+						if ( NumeralToNumber[i].m_Cardinal == Form || NumeralToNumber[i].m_Ordinal == Form )
+						{
+							if((*it).HasDes(OSentEnd)) {(*it).DelDes(OSentEnd);(*prev_it).AddDes(OSentEnd);}
+							if((*it).HasDes(CS_Undef)) {(*it).DelDes(CS_Undef);(*prev_it).AddDes(CS_Undef);}
+							iter_swap(prev_it, it);
+							dollar++;
+							break;
+						}
+					break;
+				}
+		}
+		else 
+			continue; 
 
+        string NumWordForm = hyp < 0 ? it->m_strWord : it->m_strWord.substr(0, hyp); 
+		string Flexia = hyp < 0 ? "" : it->m_strWord.substr(hyp+1); 
+
+		if( Flexia == "" && next_it !=  m_Words.end() && isdigit((BYTE)next_it->m_strWord[0]) && next_it->m_strWord.length()==3) // "в 1 300 световых годах" -> 1300
+		{
+			next_it->m_strWord = W.m_strWord + next_it->m_strWord;
+			W.DeleteAllHomonyms();
+			m_Words.erase(it, it);
+			continue;
+		}
 		//  Идем с  конца ищем числительное, которое максимально совпадает с конца с числительным во входном тексте.
-		int i = NumeralToNumberCount - 1;
+		int i = NumeralToNumberCount + (NumWordForm == "0" ? 0 : - 1); //включая ноль
 		string NumWordForm2 = NumWordForm;
-		while(atoi(NumWordForm2.c_str())>1000 && NumWordForm2.substr(NumWordForm2.length()-3) == "000" )
+		while(atoi(NumWordForm2.c_str())>=1000 && NumWordForm2.substr(NumWordForm2.length()-3) == "000" )
 			NumWordForm2 = NumWordForm2.substr(0, NumWordForm2.length() - 3 );
 		for(; i >= 0;  i--)
 		{
@@ -416,10 +455,15 @@ void CMAPost::Cifrdef()
         
 	    EngRusMakeLower(Flexia);
         string AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Cardinal, Flexia, NumeralToNumber[i].m_bNoun);
-		string AnCodes0 = AnCodes;
-        if  ( AnCodes.empty() || Flexia == "" )
-			   AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
-        if  ( AnCodes.empty() ) 
+		if  ( AnCodes.empty() && Flexia != "" )
+			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun);
+		if( !strcmp(NumeralToNumber[i].m_Cardinal, "ОДИН")) AnCodes = "эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"; //все грамкоды с родом
+		string AnCodes0 = AnCodes; //числ
+        if  (NumWordForm != "0")
+			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
+		if ( FindFloatingPoint(NumWordForm.c_str()) != -1 || AnCodes0 == AnCodes)
+			AnCodes = "";
+        if  ( AnCodes.empty() && AnCodes0.empty() ) 
         {
             // "20-летний"
             if (W.LemmatizeForm(Flexia, m_pRusLemmatizer))
@@ -435,35 +479,69 @@ void CMAPost::Cifrdef()
             W.AddDes(ORLE);
             W.AddDes(OLw);
             W.DeleteAllHomonyms();
-			
-			CLineIter next_it=it;
-			CLineIter prev_it=it;
-			next_it++;
 
-			if  ( !AnCodes0.empty() ) // ЧИСЛ
+			if  ( !(AnCodes0.empty() || ( next_it !=  m_Words.end() && (next_it->m_strUpperWord == "ГГ") ) ) ) // ЧИСЛ
 			{
 				CHomonym* pH = W.AddNewHomonym();
 				pH->SetMorphUnknown();
 				pH->m_GramCodes = AnCodes0;
 				pH->m_strLemma = NumWordForm;
 				pH->InitAncodePattern();
-				if ( it !=  m_Words.begin() && ((--prev_it)->HasGrammem(rComparative) || prev_it->m_strUpperWord == "СВЫШЕ"))  // "более 5 человек"
-				{
-					pH->ModifyGrammems(pH->m_iGrammems & ~rAllCases | _QM(rGenitiv), pH->m_iPoses);//pH->m_iPoses
-					string q = 					pH->GetGrammemsStr();
-					continue;
-				}
 			}
-
-			if  ( !(( next_it !=  m_Words.end() && (next_it)->m_strUpperWord == "ЛЕТ")	// "в течение 2 лет"
-				 //|| ( it !=  m_Words.begin() && (--prev_it)->HasGrammem(rComparative)) // "более 5 человек" 
-				 )) 
+			
+			CLineIter spec_it=it;
+			if( next_it !=  m_Words.end() && (next_it->m_strWord == "%" || next_it->m_strWord == "$"))  //доллары, проценты
+				spec_it = next_it;
+			else if ( it !=  m_Words.begin() && prev_it->m_strWord == "$")
+				spec_it = prev_it;
+			if( it != spec_it)
 			{
-				CHomonym* pH = W.AddNewHomonym(); //ЧИСЛ-П
+				CPostLemWord& W2 = *spec_it;
+				vector<CFormInfo> Paradigms;
+				W2.DeleteOborotMarks();
+				W2.AddDes(ORLE);
+				W2.DelDes(OPun);
+				W2.DeleteAllHomonyms();
+				CHomonym* pH = W2.AddNewHomonym();
+				pH->SetMorphUnknown();
+				pH->m_CommonGramCode = "Фа";				
+				pH->m_GramCodes = "ао";
+				if ( W2.m_strWord == "%" )
+				{
+					W2.m_strUpperWord = W2.m_strWord = "ПРОЦ";
+					pH->m_strLemma = "ПРОЦЕНТ";
+				}
+				else  if ( W2.m_strWord == "$" )
+				{
+					if(spec_it == prev_it) //$12
+						dollar = prev_it;
+					W2.m_strUpperWord = W2.m_strWord = "ДОЛЛ";
+					pH->m_strLemma = "ДОЛЛАР";
+				}
+				m_pRusLemmatizer->CreateParadigmCollection(true,  pH->m_strLemma, true, false, Paradigms);
+				pH->m_lPradigmID = Paradigms[0].GetParadigmId();
+				W2.m_bWord = true;
+				W2.m_bPredicted = false;
+				pH->m_LemSign = '+';
+				pH->InitAncodePattern();
+			}
+			else
+			if  ( !(( next_it !=  m_Words.end() && (next_it->m_strUpperWord == "ЛЕТ"))	// "в течение 2 лет"
+				 ))
+			if  ( !AnCodes.empty() )  //ЧИСЛ-П
+			{
+				CHomonym* pH = W.AddNewHomonym(); 
 				pH->SetMorphUnknown();
 				pH->m_GramCodes = AnCodes;
 				pH->m_strLemma = NumWordForm;
 				pH->InitAncodePattern();
+			}
+			if( dollar == prev_it )
+			{
+				if((*it).HasDes(OSentEnd)) {(*it).DelDes(OSentEnd);(*prev_it).AddDes(OSentEnd);}
+				if((*it).HasDes(CS_Undef)) {(*it).DelDes(CS_Undef);(*prev_it).AddDes(CS_Undef);}
+				iter_swap(prev_it, it);
+				dollar++;
 			}
         }
 
@@ -1452,6 +1530,19 @@ void CMAPost::Rule_Abbreviation()
         if (HomNo == -1) continue;
         if (W.GetHomonymsCount() > 1)
             W.EraseHomonym(HomNo);
+		else
+		{
+			CHomonym* pH = W.GetHomonym(HomNo);
+			vector<CFormInfo> Paradigms;
+			CFormInfo P;
+			string AnCodes;
+			m_pRusLemmatizer->CreateParadigmFromID(pH->m_lPradigmID,  P);
+			pH->m_CommonGramCode += pH->m_GramCodes;
+			pH->m_GramCodes = "";
+			for (long k=0; k < P.GetCount(); k++)
+				if((pH->m_CommonGramCode + pH->m_GramCodes).find(P.GetAncode(k)) == string::npos )
+					pH->m_GramCodes += P.GetAncode(k);
+		}
 	};
 };
 
@@ -1648,12 +1739,12 @@ bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) co
         CHomonym* pH = W.GetHomonym(i);
         if (m_TrigramModel.FindGramTabLineInTags(Tags, pH->m_iPoses, pH->m_iGrammems  | pH->m_TypeGrammems))
             Lemmas.insert(pH->m_strLemma);
-        //pH->m_bDelete = !m_TrigramModel.FindGramTabLineInTags(Tags, pH->m_iPoses, pH->m_iGrammems  | pH->m_TypeGrammems);
+        pH->m_bDelete = !m_TrigramModel.FindGramTabLineInTags(Tags, pH->m_iPoses, pH->m_iGrammems  | pH->m_TypeGrammems);
     }
     for (int i =0; i < W.GetHomonymsCount(); i++)
     {
         CHomonym* pH = W.GetHomonym(i);
-        pH->m_bDelete = Lemmas.find(pH->m_strLemma) == Lemmas.end();
+        pH->m_bDelete |= Lemmas.find(pH->m_strLemma) == Lemmas.end();
     }
     W.SafeDeleteMarkedHomonyms();
     return true;

@@ -55,6 +55,7 @@ struct CClauseRelation
 struct CRelation : public CPeriod 
 {
 		QWORD		m_iGrammems;
+		string		m_GramCodes;
 		EUnitType	m_SourceType;
 		EUnitType	m_TargetType;
 		ERelType	type; 
@@ -127,6 +128,7 @@ public:
 
 	//  used only for GLR Grammar
 	string			m_GramCodes;
+	CPeriod			m_OtherGroup;
     
 	CGroup();
  	CGroup(size_t _first, size_t _last, const char* _cause);
@@ -140,7 +142,8 @@ public:
 
 	QWORD GetGrammems() const;
 	void SetGrammems(QWORD Grammems);
-
+	void SetGrammems(QWORD Grammems, const char * GramCodes);
+	void SetGrammems(CSynPlmLine W);
 };
 
 
@@ -207,6 +210,7 @@ public:
 	int					get_maximal_group_no_without_clause(size_t WordNo)  const;
 	const CGroup&		get_maximal_group(size_t WordNo)  const;
 	const CGroup*		get_maximal_group_ptr(size_t WordNo)  const;
+	const CGroup&		get_atomic_group(size_t WordNo)  const;
 	bool				has_sub_clauses(size_t GroupNo)  const;
 	QWORD				get_group_grammems(size_t WordNo) const;
 	void				get_full_sentence(string& str_sent) const;
@@ -218,6 +222,8 @@ public:
 
 	// changers
 	void	change_words_in_group_grammems(const CPeriod& group, QWORD grammems, QWORD breaks);
+	bool    change_words_in_group_gramcodes(const CPeriod& group, const char* gramcodes, GrammemCompare CompareFunc);
+	void	change_words_in_group_grammems(const CPeriod& group, QWORD grammems);
 	void	change_group_grammems(CGroup& group, QWORD grammems, QWORD breaks);
 	void	BuildSimilarSynRels(CGroup& G,int iGroupNum);
 	void	create_syn_rel(CGroup& new_group, int iSource, int iTarget, EGroupType type);

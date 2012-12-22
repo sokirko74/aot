@@ -172,7 +172,7 @@ bool CAncodePattern::InitAncodePattern()
 		}		
 	}
 	
-	if	(		(m_CommonGramCode.length() == 2)
+	if	(		(m_CommonGramCode.length() > 1)
 			&&	(m_CommonGramCode != "??")
 		)
 	{
@@ -182,6 +182,21 @@ bool CAncodePattern::InitAncodePattern()
 		{
 			ErrorMessage(Format("Cannot get grammems by type gramcode %s ",m_CommonGramCode.c_str()));
 		};
+
+		//добавл€ем граммкод аббр в m_TypeGrammems,а все полные формы аббр будут в FormGramCodes
+		for (size_t j=0; j < m_CommonGramCode.length(); j+=2)
+		{
+				QWORD CurrGrammems = 0;		
+				bool b = GetGramTab()->GetGrammems(m_CommonGramCode.c_str() + j, CurrGrammems);
+				assert (b);
+				if (!b)
+				{
+                    ErrorMessage(Format("Cannot get grammems by gramcode %s ",m_CommonGramCode.substr(j,2).c_str()));
+				};
+				m_TypeGrammems |= CurrGrammems;				
+		}
+		if(m_CommonGramCode.length()>2) //аббр
+			m_TypeGrammems &= ~(m_iGrammems|256); // rVocativ = 256 = зв падеж, "км  12 2  RLE aa CS? SENT_END +‘аао  »Ћќћ≈“– абавагадаеажазаиайакал"
 	};
 
 

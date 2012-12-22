@@ -2587,6 +2587,12 @@ string BuildRMLPath (const char* s)
     return path;
 }
 
+QWORD pow(QWORD x,int y)
+{
+	if(x>1&&y>100) return 0;
+	return y==0 || x==1 ? 1 : x*pow(x,y-1);
+}
+
 int CountBits(QWORD value)
 {
 	int count = 0;
@@ -2595,4 +2601,13 @@ int CountBits(QWORD value)
 		count += (value >> i) & 1;
 	}
 	return count;
+}
+size_t FindFloatingPoint(const char* str)
+{
+	if(!str || sizeof(str)<3) return -1;
+	string s(str);
+	size_t c = s.rfind(",");
+	if (c == string::npos) 
+		c = s.rfind(".");
+	return c == string::npos ? -1 : c;
 }

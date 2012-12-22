@@ -26,6 +26,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 			{   G.m_iLastWord++;
 
 	            G.m_MainGroup = G.m_iLastWord;
+				G.SetGrammems(sent[G.m_iLastWord]);
 				create_syn_rel(G, G.m_iFirstWord, G.m_iLastWord, COMP_ADV);				
 			    G.m_Cause = " Аналитическая форма сравнительной степени прил. или наречия.";}
 	   else;
@@ -35,6 +36,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 	  {   
 		  G.m_iLastWord = GetGroups()[I].m_iLastWord;
 	      G.m_MainGroup = GetGroups()[I].m_MainGroup.m_iFirstWord;
+		  G.SetGrammems(sent[GetGroups()[I].m_MainGroup.m_iFirstWord]);
 		  create_syn_rel(G, G.m_iFirstWord,get_main_word_in_group(GetGroups()[I]), COMP_ADV);
 		  G.m_Cause = " Аналитическая форма сравнительной степени соч. группы прил.";
 	  }
@@ -89,6 +91,7 @@ bool CRusFormatCaller::format_for_adv_adj(CGroup& G)
 		G.m_GroupType = ADV_ADJ;
 
 		G.m_MainGroup = get_maximal_group(j);
+		G.SetGrammems(Wj);
 		G.m_iLastWord = G.m_MainGroup.m_iLastWord;
 		for (size_t k=get_main_word(G.m_iFirstWord); k != j; k  = get_next_main_word(k))
 			create_syn_rel(G, j, k, ADV_ADJ);
@@ -133,6 +136,7 @@ bool CRusFormatCaller::format_for_adv_number_adverb (CGroup& G)
 	G.m_GroupType = ADV_NUM_ADV;
 
 	G.m_MainGroup = get_maximal_group(j);
+	G.SetGrammems(Wj);
 	G.m_iLastWord = G.m_MainGroup.m_iLastWord;
 	for (size_t k=get_main_word(G.m_iFirstWord); k != j; k  = get_next_main_word(k))
 		create_syn_rel(G, j, k, ADV_NUM_ADV);
@@ -179,6 +183,7 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 
 	G.m_GroupType = ADV_ADV;	
 	G.m_MainGroup = get_maximal_group(j);
+	G.SetGrammems(Wj);
 	G.m_iLastWord = G.m_MainGroup.m_iLastWord;
 	for (size_t k=get_main_word(G.m_iFirstWord); k != j; k  = get_next_main_word(k))
 		create_syn_rel(G, j, k, ADV_ADV);
@@ -212,6 +217,7 @@ bool CRusFormatCaller::format_for_adv_predik(CGroup& G)
 	G.m_GroupType = ADV_PREDIK;	
 	G.m_MainGroup = get_maximal_group(j);
 	G.m_iLastWord = G.m_MainGroup.m_iLastWord;
+	G.SetGrammems(Wj);
 	for (size_t k=get_main_word(G.m_iFirstWord); k != j; k  = get_next_main_word(k))
 		create_syn_rel(G, j, k, ADV_PREDIK);
 	return true;
@@ -240,6 +246,7 @@ bool CRusFormatCaller::format_for_adv_verb(CGroup& G)
 	if  (!is_morph_adv(sent[G1.m_MainWordNo])  ) return false;
 	if    (!is_verb_form(sent[G2.m_MainWordNo]) || sent[G2.m_MainWordNo].m_UnitType == EClause)  return false;
 	G.m_iLastWord = G2.m_iLastWord;
+	G.SetGrammems(sent[G2.m_MainWordNo]);
 	G.m_GroupType = ADV_VERB;
     create_syn_rel(G, G2.m_MainWordNo, G1.m_MainWordNo, ADV_VERB);
 	G.m_MainGroup =  G2;

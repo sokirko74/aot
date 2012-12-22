@@ -149,8 +149,8 @@ public:
 	bool IsWordForm(string WordForm) const;
 	bool IsLemmaList( const char*  FirstLemma, ... ) const;
 	bool IsEqualMorph (const CRusSemNode& N) 	const;
-	void  SetMainWordNo (long WordNo);
-	
+	void SetMainWordNo (long WordNo);
+	void ModifyGramCodes(string GramCodes, int mode, const CRusGramTab *R);
 
 };
 
@@ -1223,6 +1223,7 @@ public:
 		bool			IsProjectedNew(long Tag) const;	
 		// конвертирует все руские числительные в арабскую запись
 		void			ConvertRusNumeralsToArabic();
+		string			ConvertArabictoRusNumeral(const CRusSemNode& Node); //и обратно
 		// обработка клауз типа "давай пойдем в лес"
 		void			DealInvitatoryMoodBeforeTree (long ClauseNo);
 		void			DealInvitatoryMoodAfterTree ();
@@ -1339,7 +1340,7 @@ public:
 		// не временную валентность
 		void			ClearInterpsForFreeTimeGroups();
 		// см. описание рядом с телом процедуры 
-		void			MovePrepNodeToRelationForMainTimeGroups();
+		long			MovePrepNodeToRelationForMainTimeGroups();
 		// если в клаузе есть узел САМ и узел  СЕБЯ, тогда удаляем  узел САМ
 		void			ProcessSAM_SEBJA();
 		void			ConvertVSE2_toOperator();

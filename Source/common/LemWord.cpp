@@ -511,6 +511,7 @@ string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  c
 {
     string Result;
     if (!bFirstHomonym) Result = "  ";
+	if(!pHomonym) pHomonym = GetHomonym(0);
 	Result += m_strWord;
 	Result += " ";
     Result += Format (" %i %i ", m_GraphematicalUnitOffset, m_TokenLengthInFile);

@@ -63,6 +63,9 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 			return false;
 	if (!(RightGroup.GetGrammems() & _QM(rGenitiv))) return false;
 
+	change_group_grammems((CGroup&)RightGroup, _QM(rGenitiv), rAllCases);
+	sent[RightGroup.m_MainWordNo].SetGrammems(sent[RightGroup.m_MainWordNo].GetGrammems() & ~rAllCases | _QM(rGenitiv));
+	//change_words_in_group_grammems((CGroup&)RightGroup, _QM(rGenitiv), rAllCases);
 	if (Wk.HasFlag(fl_ambiguous)) return false;
 	
 

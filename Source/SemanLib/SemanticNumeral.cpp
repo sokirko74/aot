@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "SemanticRusStructure.h"
 #include "../common/rus_numerals.h"
-
-
 static StringVector GenitFormsOfCardinal;
 
 
@@ -15,6 +13,11 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 	GenitFormsOfCardinal.clear();
 	for(int i = 0 ; i < NumeralToNumberCount; i++ )
 	{
+		if (NumeralToNumber[i].m_Number == 0)
+		{
+			GenitFormsOfCardinal.push_back("Ќ”Ћ№");
+			continue;
+		};
 		if (NumeralToNumber[i].m_Number == 1)
 		{
 			GenitFormsOfCardinal.push_back("ќƒЌќ");
@@ -157,7 +160,13 @@ int GetNumeralPrefixGenitForm(string word, int& PrefixLength)
 			PrefixLength = 4;
 			assert (NumeralToNumber[NumLine].m_Number == 1);
 		};
-
+	if (PrefixLength < 4)
+  	 if( !strncmp(word.c_str(), "Ќ”Ћ№", 4) ) // нульмодемный
+		{
+			NumLine = NumeralToNumberCount;
+			PrefixLength = 4;
+			assert (NumeralToNumber[NumLine].m_Number == 0);
+		};
 	
 	return NumLine;
 };
@@ -192,7 +201,7 @@ double ConvertNumeralByTable (vector<CRusSemWord>::const_iterator Start, vector<
 	 	 && isdigit((BYTE)Word->m_Word[0])
 	   )
 	   //  "15 тыс€ч граждан"
-		Res = atoi(Word->m_Word.c_str());
+		Res = atof(Word->m_Word.c_str());
 	  else
 		//  "п€тнадцать тыс€ч граждан"
 		Res = FindInTable(Word->m_Lemma);
@@ -250,6 +259,7 @@ string ConvertHugeNumeral  (vector<CRusSemWord>::const_iterator Start, vector<CR
   if (Order == 1)
   {
        Result = IntToStr(ConvertNumeralByTable (Start, End));
+	   if( Result == "-1") Result = ""; //"$200 тыс."
   }
   else 
   {
@@ -291,8 +301,11 @@ bool FullAdjWithNumeralPrefix (const CRusSemNode& Node)
 string ConvertRusNumeral(const CRusSemNode& Node)
 {
   string Result;
-  Result = ConvertHugeNumeral (Node.m_Words.begin(),Node.m_Words.end(), 1000000000);
-  return Result;
+  if ( Node.m_Words.size() == 1 && ( FindFloatingPoint(Node.m_Words[0].m_Word.c_str()) != -1 ||  Node.m_Words[0].HasOneGrammem(rComparative)) )
+	  Result = Node.m_Words[0].m_Word;
+  else
+	Result = ConvertHugeNumeral (Node.m_Words.begin(),Node.m_Words.end(), 1000000000000);
+  return Result == "" ? Node.m_Words[0].m_Word : Result;
 };
 
 
@@ -309,7 +322,10 @@ void InterpretAdjectivesWithNumeral(CRusSemStructure& R, long NodeNo)
    };
 
 };
-
+string CRusSemStructure::ConvertArabictoRusNumeral(const CRusSemNode& Node)
+{
+return ConvertRusNumeral(Node);
+}
 void CRusSemStructure::ConvertRusNumeralsToArabic()
 {
 	// прилагательные типа 2-кратный берутс€ на Maposte
@@ -419,7 +435,11 @@ void CRusSemStructure::ConvertRusNumeralsToArabic()
 		};
 		m_Nodes[NodeNo].m_Words[0].m_Word = ConvertedWord;
 		if (HasRichPOS (NodeNo, NOUN)) // миилион, миллиард
-		  m_Nodes[NodeNo].m_Words[0].m_Poses = 1<<NUMERAL;
+		{
+			m_Nodes[NodeNo].m_Words[0].m_Poses = 1<<NUMERAL;
+			m_Nodes[NodeNo].m_Words[0].SetFormGrammems( m_Nodes[NodeNo].GetGrammems() );
+			m_Nodes[NodeNo].m_Words[0].m_GramCodes = m_Nodes[NodeNo].m_GramCodes;
+		}
 		if (ConvertedWordHyphen != "-1")
 		{
 			m_Nodes[NodeNo].m_Words[0].m_Word += "("+ConvertedWordHyphen+")";

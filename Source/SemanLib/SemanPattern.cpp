@@ -700,8 +700,19 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 					if (   m_Nodes[P.m_SourceNo].HasOneGrammem(rImperative)
 						&& !CanBeSubjectForImperative(NodeNo, P.m_SourceNo)
 						&& ((m_Nodes[P.m_SourceNo].GetGrammems() & rAllTimes) == 0)
-				  )
-				  return false;
+						)
+						return false;
+					//"мама и папа пришли"
+					if( m_Nodes[P.m_SourceNo].HasPOS(VERB) && ((m_Nodes[NodeNo].HasPOS(NOUN)	
+						&& m_pData->GetRusGramTab()->ConflictGenderNumber(m_Nodes[P.m_SourceNo].m_GramCodes.c_str(),m_Nodes[NodeNo].m_GramCodes.c_str()))
+						|| (m_Nodes[NodeNo].m_NodeType == MNA && ((m_Nodes[P.m_SourceNo].GetGrammems() & rAllNumbers) == _QM(rSingular) ) ) )
+						)
+							//m_Nodes[NodeNo].m_NodeType == MNA ? m_pData->GetRusGramTab()->GetGramCodes(NOUN, _QM(rPlural) | _QM(rNominativ), CaseNumber).c_str()
+							//: 
+						return false;
+					bool xx = m_Nodes[NodeNo].m_NodeType == MNA ;
+					xx = ((m_Nodes[P.m_SourceNo].GetGrammems() & rAllNumbers) == _QM(rSingular) );
+					xx= m_Nodes[P.m_SourceNo].HasPOS(VERB);
 					SynRealization.m_Grammems = _QM(rNominativ);
 					return true;
 				}

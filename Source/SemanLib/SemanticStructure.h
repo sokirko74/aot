@@ -63,6 +63,7 @@ public:
 	string        m_Word;
 	// лемма
 	string        m_Lemma;
+	string        m_GramCodes;
 	// номер парадигмы в морф. словаре 
 	long           m_ParadigmId;
 	// добавочный номер парадигмы в морф. словаре (для приложений типа "муж-алкоголик")
@@ -325,6 +326,7 @@ public:
     WORD	GetUnitNo() const;
 	QWORD	GetGrammems() const;
 	void	SetGrammems(QWORD g);
+	void	ModifyGramCodes(string GramCodes, bool andwords, const CRusGramTab *R);
 	void	AddOneGrammem(int g);
 	bool	HasOneGrammem(int g) const;
 	bool	HasGrammems(QWORD g) const;

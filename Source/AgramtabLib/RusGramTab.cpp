@@ -118,12 +118,7 @@ bool CRusGramTab :: ProcessPOSAndGrammems (const char* tab_str, BYTE& PartOfSpee
 
 
 
-// Стандартное согласование между двумя именами  по  числу и падежу
-inline bool CaseNumber (const CAgramtabLine* l1, const CAgramtabLine* l2) 
-  {
-      return ((rAllCases  & l1->m_Grammems & l2->m_Grammems) > 0) &&
-		     ((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0) ;
-  };
+
 
 // Стандартное согласование между двумя именами  по  падежу, причем первый код должен
 // иметь граммему множественного числа 
@@ -343,6 +338,22 @@ bool CRusGramTab::GleicheCaseNumber(const char* gram_code1, const char* gram_cod
 bool CRusGramTab::GleicheGenderNumber(const char* gram_code1, const char* gram_code2) const
 {
 	return  Gleiche(GenderNumber, gram_code1, gram_code2) != 0;
+}
+//with absent grammems check, less strict than GleicheGenderNumber
+bool CRusGramTab::ConflictGenderNumber(const char* gram_code1, const char* gram_code2) const
+{
+	return  Gleiche(GenderNumber0, gram_code1, gram_code2) == 0;
+}
+bool CRusGramTab::ConflictGrammems(QWORD g1, QWORD g2, QWORD breaks) const
+{
+	QWORD BR [] = {rAllCases, rAllNumbers, rAllGenders};
+	bool R = true;
+	for(int i = 0 ; i < (sizeof BR)/(sizeof BR[0]) && R; i++ )
+	{
+		if(breaks & BR[i])
+			R &= ((BR[i] & g1 & g2) > 0 || !(BR[i] & g1) || !(BR[i] & g2));
+	}
+	return  !R;
 }
 bool CRusGramTab::GleicheSubjectPredicate(const char* gram_code1, const char* gram_code2) const
 {
