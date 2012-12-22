@@ -477,17 +477,18 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 	{
 		//  reading grammems from "type ancode"
 
-		if ( (H.m_CommonGramCode.length() == 2) && (H.m_CommonGramCode != "??") )
+		if ( (H.m_CommonGramCode.length() > 1) && (H.m_CommonGramCode != "??") )
 		{
 			TypeAncode = H.m_CommonGramCode;	
-			SemWord.SetTypeGrammems ( m_pData->GetRusGramTab()->GetAllGrammems(TypeAncode.c_str()));
+			SemWord.SetTypeGrammems ( H.m_CommonGramCode.length() > 2 ? H.m_TypeGrammems
+				: m_pData->GetRusGramTab()->GetAllGrammems(TypeAncode.c_str()));
 		};
 
 	}
 	SemWord.m_Poses = H.m_iPoses;
 	string GramCodes = H.m_GramCodes;
 	SemWord.m_pData =  m_pData;
-
+	SemWord.m_GramCodes = GramCodes;
 
 	
 	InitWordFeatures(WordNo, SemWord);
@@ -758,14 +759,16 @@ CRusSemNode CRusSemStructure::CreateNode(const CRelationsIterator* RelIt, long G
 	   SemWord.m_ParadigmId = H.m_lPradigmID; 
 
 	   SemWord.SetFormGrammems (H.m_iGrammems);
+	   SemWord.m_GramCodes = H.m_GramCodes;
 	   SemWord.m_Poses = H.m_iPoses;
 	   SemWord.m_pData =  m_pData;
 	   	{
 			//  reading grammems from "type ancode"
-			if ( (H.m_CommonGramCode.length() == 2) && (H.m_CommonGramCode != "??") )
+			if ( (H.m_CommonGramCode.length() > 1) && (H.m_CommonGramCode != "??") )
 			{
 				string TypeAncode = H.m_CommonGramCode;	
-				SemWord.SetTypeGrammems ( m_pData->GetRusGramTab()->GetAllGrammems(TypeAncode.c_str()));
+				SemWord.SetTypeGrammems (  H.m_CommonGramCode.length() > 2 ? H.m_TypeGrammems :
+					m_pData->GetRusGramTab()->GetAllGrammems(TypeAncode.c_str()));
 			};
 		}
 
@@ -793,9 +796,9 @@ CRusSemNode CRusSemStructure::CreateNode(const CRelationsIterator* RelIt, long G
 
 
 		N.m_Words.push_back(SemWord);
-		if (j == G.m_MainWordNo)
+		if ( j == G.m_MainWordNo )
 		{
-  			N.SetMainWordNo(N.m_Words.size()-1);
+			N.SetMainWordNo(N.m_Words.size()-1);
 			N.m_GramCodes = H.m_GramCodes;
 			InitInterps(SemWord, false, ClauseNo, N);
 		};
@@ -864,8 +867,12 @@ void CRusSemStructure::InterpretPrepNouns(long ClauseNo)
                     m_Nodes[PrepNode].m_RelOperators.end());
 				
 				//if(m_Nodes[PrepNode].m_Words.size() == 1 && m_Nodes[PrepNode].m_Words[0].m_Word.size() == 1)
-				m_Nodes[NounNode].DeleteGrammems(_QM(rNominativ)); //удаляем им.п.
+				if(!m_Nodes[PrepNode].HasOneGrammem(rNominativ))
+					m_Nodes[NounNode].DeleteGrammems(_QM(rNominativ)); //удаляем им.п.
                 
+				if(m_Nodes[PrepNode].GetGrammems() & rAllCases)
+					m_Nodes[NounNode].SetGrammems(m_Nodes[NounNode].GetGrammems() & (m_Nodes[PrepNode].GetGrammems() | ~rAllCases));
+
 				if (CanBeDeleted(PrepNode))
                     DelNode(PrepNode);
             }
@@ -1671,7 +1678,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 
 void CRusSemStructure::BuildSemNodesBySyntax() 
 {
-	//log ("starting BuildSemNodesBySyntax\n");
+  	rml_TRACE ("starting BuildSemNodesBySyntax\n");	
 	m_SynRelations.clear();
 	m_SynClauseRels.clear();
 	m_Relations.clear();
@@ -1751,7 +1758,20 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 					)
 					m_Nodes[m_SynRelations.back().m_SourceNodeNo].AddOneGrammem (rGenitiv);
 		};
-
+		if( m_SynRelations.back().m_SynRelName.find("ЧИСЛ_СУЩ")!=string::npos
+			|| piRel.m_Relation.type == 25) //NOUN_NUMERAL_APPROX
+		{
+			const CRusGramTab *R = (CRusGramTab*)piRel.GetOpt()->GetGramTab();
+			if( piRel.m_Relation.m_GramCodes != "" && m_SynRelations.back().m_SynRelName!="НАР_ЧИСЛ_СУЩ")
+				m_Nodes[TargetNodeNo].m_GramCodes = piRel.m_Relation.m_GramCodes; //ЧИСЛ
+			QWORD RelGr = piRel.m_Relation.m_iGrammems;
+			if( !(RelGr& rAllGenders) ) 
+				RelGr |= m_Nodes[SourceNodeNo].GetGrammems() & rAllGenders;
+			m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0, "ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел",
+				R->GetGramCodes(NOUN, RelGr, CaseNumberGender0));
+			m_Nodes[SourceNodeNo].SetGrammems(RelGr);
+			m_Nodes[TargetNodeNo].SetGrammems(RelGr); //m_Nodes[TargetNodeNo].GetGrammems() & ~(rAllCases|rAllGenders|rAllPersons|rAllAnimative) | 
+		}
 		// Морфологическую "одушевленнсть" нужно брать от главного слова, поскольку,
 		//  например, группа ПРИЛ_СУЩ, пересекает граммемы существительного и прилагательных,
 		// а у прилагательного не бывает одушевленности. Поэтому и у всей группы не может быть одушевленности.

@@ -208,11 +208,10 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	};
 
 	if( G.m_iFirstWord > 0 )
-		if(is_small_number_group(G.m_iFirstWord - 1) )	  
-		{
-			QWORD dummy;
-			gleiche_for_small_numbers(i, G.m_iFirstWord - 1, false, dummy, bAdjShouldBeInNominativOrGenitiv);		  
-		}
+	{
+		QWORD dummy;
+		gleiche_for_plural_numbers(i, G.m_iFirstWord - 1, false, dummy, bAdjShouldBeInNominativOrGenitiv, is_small_number_group(G.m_iFirstWord - 1));		  
+	}
 
 	// Согласование по падежу, числу и роду проверяться здесь.
 	for (j = G.m_iFirstWord; j <  FirstWordOfNounGroup; j = get_maximal_group(j).m_iLastWord + 1)

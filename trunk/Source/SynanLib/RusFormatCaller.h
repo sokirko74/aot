@@ -89,7 +89,7 @@ public:
 
 	bool StandardGleiche (size_t i, size_t k);
 
-	bool format_for_small_number_noun(CGroup& G);
+	bool format_for_plural_number_noun(CGroup& G, bool small_number);
 	bool format_for_both(CGroup& G);
 	
 
@@ -158,7 +158,7 @@ public:
 
 	bool CanConnectSimilar(const CSynPlmLine& L) const;
 	
-	bool gleiche_for_small_numbers(int i_noun, int i_number, bool change_grammems, QWORD& new_group_grammems, bool& unusual_case);
+	bool gleiche_for_plural_numbers(int i_noun, int i_number, bool change_grammems, QWORD& new_group_grammems, bool& unusual_case, bool small_number);
 	bool gleiche_noun_numeral_for_approx(int i_noun, int i_num);
 	bool is_Pronoun_P_in_similar_groups(const CGroup& G);
 	bool format_for_noun_adj_postposition(CGroup& G);
