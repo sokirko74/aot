@@ -115,6 +115,7 @@ public:
 	virtual ~CThesaurusForSyntax();
 
 	CThesaurus* LoadThesaurus(const char* ThesName) const;
+	bool LoadThesaurus_mt(string tn, vector<CThesaurus*>* ts);
 
 	bool ReadThesaurusForSyntax(const char* ThesName, const CThesaurus* Thes, StringVector& p_vectorAccost);
 	bool ReadTermins(const CThesaurus* piThes, EThesType eThesType);

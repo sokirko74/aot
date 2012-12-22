@@ -9,6 +9,9 @@
 
 #include "../PCRE/pcre_rml.h"
 
+#ifdef BOOST
+#include <boost/thread.hpp>
+#endif
 //----------------------------------------------------------------------------
 const char* AnyCommonAncode = " ";
 
@@ -569,9 +572,133 @@ static void CreateLockFile(const string& LockFileName)
 		fclose(fp);
 	}
 }
+template <class T>
+void t1(vector<string>* sss, vector<T>* FlexiaModels)
+{
+	vector<string> ss = (*sss);
+	for(int num = 0; num < ss.size(); num++)
+	{
+		Trim(ss[num]);
+		T M;
+		if (!M.ReadFromString(ss[num]))
+			throw CExpc("Cannot parse paradigm No %i", num+1);
+		
+		(*FlexiaModels).push_back(M);
+	}
+}
+template <class T>
+void ReadModels_mt(FILE* fp, vector<T>& FlexiaModels )
+{
+#ifdef BOOST
+	char buffer[MaxMrdLineLength];	
+	if( !fgets(buffer,  MaxMrdLineLength, fp) )
+		throw CExpc("Cannot parse mrd file");
+
+	FlexiaModels.clear();
+
+	int paradigm_count = atoi(buffer);
+	const int tc = 17;
+	vector<T> FF[tc];
+	vector<string> ss[tc];
+	int i = 0;
+	using namespace boost; 
+	thread t[tc];
+
+	for(int num = 0; num < paradigm_count; num++){
+		if( !fgets(buffer,  MaxMrdLineLength, fp) )	
+			throw CExpc("Too few lines in mrd file");
+		string line  = buffer;
+		ss[i].push_back(line);
+		if( ss[i].size() > paradigm_count/tc ) //t[i++] = thread(&t1<T>, (&ss[i]), (&FF[i])); 
+		{
+			t[i] = thread(&t1<T>, (&ss[i]), (&FF[i])); 
+			i++;
+		}
+	}
+	t[i] = thread(&t1<T>, (&ss[i]), (&FF[i])); 
+	for(int num = 0; num < tc; num++) 
+	{
+		t[num].join();
+		FlexiaModels.insert(FlexiaModels.end(), FF[num].begin(), FF[num].end());
+	}
+#endif
+}
+void ReadAllModels_mt(FILE* fp, vector<CFlexiaModel>& FlexiaModels, vector<CAccentModel>&	AccentModels, StringVector& m_Prefixes)
+{
+#ifdef BOOST
+	char buffer[MaxMrdLineLength];	
+	if( !fgets(buffer,  MaxMrdLineLength, fp) )
+		throw CExpc("Cannot parse mrd file");
+
+	FlexiaModels.clear();
+
+	int paradigm_count = atoi(buffer);
+	const int tc = 7;
+	vector<CFlexiaModel> FF[tc];
+	vector<string> ss[2*tc];
+	int i = 0;
+	using namespace boost; 
+	thread t[tc*2];
+	for(int num = 0; num < paradigm_count; num++){
+		if( !fgets(buffer,  MaxMrdLineLength, fp) )	
+			throw CExpc("Too few lines in mrd file");
+		string line  = buffer;
+		ss[i].push_back(line);
+		if( ss[i].size() > paradigm_count/tc ) {t[i] = thread(&t1<CFlexiaModel>, (&ss[i]), (&FF[i])); i++;}
+	}
+	t[i] = thread(&t1<CFlexiaModel>, (&ss[i]), (&FF[i])); i++;
+
+	if( !fgets(buffer,  MaxMrdLineLength, fp) )
+		throw CExpc("Cannot parse mrd file");
+
+	AccentModels.clear();
+	paradigm_count = atoi(buffer);
+	vector<CAccentModel> FF2[tc];
+	for(int num = 0; num < paradigm_count; num++){
+		if( !fgets(buffer,  MaxMrdLineLength, fp) )	
+			throw CExpc("Too few lines in mrd file");
+		ss[i].push_back((string)buffer);
+		if( ss[i].size() > paradigm_count/tc )  {t[i] = thread(&t1<CAccentModel>, (&ss[i]), (&FF2[i - tc])); i++;}
+	}
+	t[i] = thread(&t1<CAccentModel>, (&ss[i]), (&FF2[i - tc])); i++;
+
+	int Count;
+	char buf[256];
+
+	{
+		if (!fgets(buf, 256, fp)) throw CExpc("Cannot parse mrd file");
+		Count = atoi(buf);
+	}
+	// add empty prefix
+	m_Prefixes.resize(1,"");
+	for (size_t i=0; i < Count; i++)
+	{
+		char buf[256];
+		if (!fgets(buf, 256, fp)) throw CExpc("Cannot parse mrd file");
+		string q = buf;
+		Trim(q);
+		assert (!q.empty());
+		m_Prefixes.push_back(q);
+	};
+
+	for(int num = 0; num < tc; num++) 
+	{
+		t[num].join();
+		FlexiaModels.insert(FlexiaModels.end(), FF[num].begin(), FF[num].end());
+	}
+	for(int num = tc; num < 2*tc; num++) 
+	{
+		t[num].join();
+		AccentModels.insert(AccentModels.end(), FF2[num-tc].begin(), FF2[num-tc].end());
+	}
+#endif
+}
 
 void ReadFlexiaModels(FILE* fp, vector<CFlexiaModel>& FlexiaModels )
 {
+#ifdef BOOST
+	ReadModels_mt<CFlexiaModel>(fp, FlexiaModels);
+#else
 	char buffer[MaxMrdLineLength];	
 	if( !fgets(buffer,  MaxMrdLineLength, fp) )
 		throw CExpc("Cannot parse mrd file");
@@ -593,6 +720,7 @@ void ReadFlexiaModels(FILE* fp, vector<CFlexiaModel>& FlexiaModels )
 		
 		FlexiaModels.push_back(M);
 	}
+#endif
 };
 
 void WriteFlexiaModels(FILE* out_fp, const vector<CFlexiaModel>& FlexiaModels )
@@ -605,6 +733,9 @@ void WriteFlexiaModels(FILE* out_fp, const vector<CFlexiaModel>& FlexiaModels )
 
 void ReadAccentModels (FILE* fp, vector<CAccentModel>&	AccentModels )
 {
+#ifdef BOOST
+	ReadModels_mt<CAccentModel>(fp, AccentModels);
+#else
 	AccentModels.clear();
 
 	char buffer[MaxMrdLineLength];	
@@ -625,7 +756,7 @@ void ReadAccentModels (FILE* fp, vector<CAccentModel>&	AccentModels )
 		AccentModels.push_back(M);
 
 	};
-
+#endif
 };
 
 void WriteAccentModels(FILE* out_fp, const vector<CAccentModel>& AccentModels )
@@ -826,7 +957,7 @@ void MorphoWizard::load_mrd(bool guest, bool bCreatePrediction)
 		m_pMeter->SetFileMaxPos(fp);
 
 	ReadFlexiaModels(fp, m_FlexiaModels);
-
+//ReadAllModels_mt(fp , m_FlexiaModels, m_AccentModels);
 	ReadAccentModels(fp, m_AccentModels);
 
 	ReadSessions(fp);
@@ -2580,6 +2711,53 @@ bool	MorphoWizard::prepare_for_RML()
 	return true;
 }
 
+//вариант е+ё
+bool	MorphoWizard::prepare_for_RML2()
+{
+	if (m_Language != morphRussian) return true;
+
+	
+	int sz = m_FlexiaModels.size();
+	map<int,int> joFlex;
+	typedef pair <int, int> Int_Pair;
+	for (int ModelNo = 0; ModelNo < sz; ModelNo++)
+	{
+		bool hasjo = false;
+		for (size_t k=0; k< m_FlexiaModels[ModelNo].m_Flexia.size(); k++)
+			if( HasJO(m_FlexiaModels[ModelNo].m_Flexia[k].m_PrefixStr + m_FlexiaModels[ModelNo].m_Flexia[k].m_FlexiaStr ))
+			{
+				if(!hasjo)
+				{
+					m_FlexiaModels.push_back(m_FlexiaModels[ModelNo]);
+					joFlex.insert(  Int_Pair(ModelNo, m_FlexiaModels.size() - 1));
+				}
+				hasjo = true;
+				ConvertJO2Je(m_FlexiaModels[ModelNo].m_Flexia[k].m_PrefixStr); // перевод "ё"  в "е"
+				ConvertJO2Je(m_FlexiaModels[ModelNo].m_Flexia[k].m_FlexiaStr);
+			};
+		
+	}
+	LemmaMap nojo;
+	for (lemma_iterator_t lemm_it = m_LemmaToParadigm.begin(); lemm_it!=m_LemmaToParadigm.end(); )
+	{
+		string Lemma (lemm_it->first.length(), ' ');
+		copy(lemm_it->first.begin(), lemm_it->first.end(), Lemma.begin());
+		ConvertJO2Je(Lemma);
+		lemma_iterator_t next_lemm_it =  lemm_it;
+		next_lemm_it++;
+		CParadigmInfo P = lemm_it->second;
+		if (Lemma != lemm_it->first || joFlex.find(P.m_FlexiaModelNo) != joFlex.end())
+		{
+			//m_LemmaToParadigm.erase(lemm_it);
+			nojo.insert(make_pair(Lemma, P)); // no jo
+		};
+		if (joFlex.find(P.m_FlexiaModelNo) != joFlex.end())
+			lemm_it->second.m_FlexiaModelNo = joFlex.find(P.m_FlexiaModelNo)->second;
+		lemm_it = next_lemm_it;
+	};
+	m_LemmaToParadigm.insert(nojo.begin(), nojo.end());
+	return true;
+}
 //----------------------------------------------------------------------------
 bool MorphoWizard::HasUnknownAccents( lemma_iterator_t it ) const
 {
