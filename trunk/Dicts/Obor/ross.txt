@@ -3967,6 +3967,18 @@ ENG     =  from 1
            out 1
            a 1
 ============
+TITLE        = ×ÈÑË_èç+Ð_×ÈÑË
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 20/9/2 15:10:42
+CONTENT =  èç
+GF      = 1  ÏÐÎÑÒ_ÏÐÅÄË
+SF      = 1  PART
+VAL     =  PART , A2 , A1
+GF1     = 1  ×ÈÑË_Ð
+GF2     = 1  ×ÈÑË
+ENG     =  from 1          
+============
 TITLE        = èç-çà+Ð
 SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:31
@@ -8264,6 +8276,16 @@ GF2     = 1  > ÈÃ
           2  > ÃÃ
 ENG     =  as_many...as 1
            as_much...as 1
+============
+TITLE        = ñóäÿ(ÔÐÀÇ)_ïî+Ä
+SENSE       = 1
+TIME_CREATE       = 14/2/1 20:49:2
+CONTENT =  ñóäÿ ïî
+GF      = 1  ÏÐÎÑÒ_ÏÐÅÄË
+VAL     =  ACT , A1 , A2
+GF1     = 1  ÏÐÎÏ
+GF2     = 1  >> Ä
+ENG     =  justice_of 1
 ============
 TITLE        = ò.å.
 SENSE       = 1
