@@ -381,7 +381,8 @@ int CSentence::IsClauseBorder(int WordNo, int& iStartSearch,int& iPunctsCount, i
 		//отсекаем случаи "Он получил 12,3 тонны еды.", чтобы по этой запятой не разбивалось
 		if (WordNo < m_Words.size() - 1)
 		{
-            if( m_Words[WordNo-1].HasDes(ODigits) && m_Words[WordNo+1].HasDes(ODigits) )
+            if( m_Words[WordNo-1].HasDes(ODigits) && m_Words[WordNo+1].HasDes(ODigits) 
+				&& m_Words[WordNo].m_strWord != ")" && m_Words[WordNo].m_strWord != "(")
             {
 			
 				iStartSearch = WordNo + 1;

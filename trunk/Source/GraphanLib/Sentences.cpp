@@ -319,8 +319,9 @@ bool CGraphmatFile::DealSentBreaker ()
 		
 			// if the next sentence  starts with a word then its first char should be uppercase
 			if	(       StartSent<EndPos 
-					&&   (HasDescr (StartSent, ORLE) || HasDescr (StartSent, OLLE))
+					&& (  (HasDescr (StartSent, ORLE) || HasDescr (StartSent, OLLE))
 					&&  !(HasDescr (StartSent, OUp) || HasDescr (StartSent, OUpLw))
+					|| StartSent > 1 && HasDescr (StartSent, ODigits) && GetUnits()[StartSent - 2].IsWordOrNumberOrAbbr()) //Number after Abbr: "ñò. 129 ÓÊ ÐÔ"
 				)
 				continue;
 

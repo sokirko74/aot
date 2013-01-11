@@ -18,6 +18,7 @@ bool CClause::KillHomonymsCoverage( )
 	bool bResult = false;
 	if (m_SynVariants.empty()) return bResult;
 	long BestWeight = m_SynVariants.begin()->m_iWeight;
+	bool HasPredk = m_SynVariants.begin()->HasPredk();
 
 	
 	//удаляем все варианты, у которых вес меньше самого лучшего
@@ -25,7 +26,8 @@ bool CClause::KillHomonymsCoverage( )
 	for (SVI pSynVar = m_SynVariants.begin(); pSynVar != m_SynVariants.end(); )
 	{
 		const CMorphVariant& V = *pSynVar;
-		if (pSynVar->m_iWeight < BestWeight)
+		if (pSynVar->m_iWeight < BestWeight
+			&& !(!HasPredk && pSynVar->HasPredk()) ) //"я сама жила в среде" - сохраняем глагол
 		{
 			pSynVar = EraseMorphVariant(pSynVar );
 		}

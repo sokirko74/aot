@@ -1635,7 +1635,8 @@ bool CRusSemStructure::TryClauseKOTORYJ (long ClauseRuleNo, long ClauseNo1, long
 	if (nd ==  -1) return false;
 
 	long HostNodeNo  =  nd;
-
+	m_Nodes[nd].m_GramCodes =  m_pData->GetRusGramTab()->GleicheAncode1(GenderNumber0, m_Nodes[nd].m_GramCodes.c_str(),m_Nodes[KOTORYJ_NodeNo].m_GramCodes.c_str());
+	m_Nodes[nd].SetGrammems(m_pData->GetRusGramTab()->GetAllGrammems(m_Nodes[nd].m_GramCodes.c_str()) & m_Nodes[nd].GetGrammems());
 	AddRelation(CRusSemRelation(CValency("THESAME", A_C, GetRossHolder(Ross)),  KOTORYJ_NodeNo, HostNodeNo,  ""));  
 	m_Relations.back().m_ClauseRuleNo = ClauseRuleNo;
 	// переносим одушевленность с узла HostNodeNo на узел KOTORYJ_NodeNo, если у HostNodeNo она определена

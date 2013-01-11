@@ -12,7 +12,8 @@ bool CRusFormatCaller::format_for_foreign_term(CGroup& G)
 {
     if( W1.HasFlag(fl_ile) )
 	 {
-		   for (int j = G.m_iFirstWord; (j < sent.size()) &&  sent[j].HasFlag(fl_ile); j++)
+		   for (int j = G.m_iFirstWord; (j < sent.size()) &&  (sent[j].HasFlag(fl_ile) 
+			   || (sent[j].HasFlag(fl_digit) && j>G.m_iFirstWord && is_english_upper(sent[j-1].get_word()[0]))); j++) //Corning представит Gorilla Glass 3 на CES 2013
 		   {
 			   // возможно, что иностранная лексема вошла куда-то, тогда надо выйти
 			   if (get_maximal_group(j).size() > 1) return false;

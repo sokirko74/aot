@@ -470,7 +470,7 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause& C, SVI pSynVar)
             }
 		}
 	}
-
+	rml_TRACE("ChangeSubjAndItsGroupGrammemsInClause %d\n", pSynVar->GetFirstSubject());
     pSynVar->m_SynUnits[pSynVar->GetFirstSubject()].ModifyGrammems(new_subj_grammems);
 }
 

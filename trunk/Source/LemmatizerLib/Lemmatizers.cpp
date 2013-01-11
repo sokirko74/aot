@@ -5,7 +5,7 @@
 #include "Lemmatizers.h"
 #include "../common/utilit.h"
 #include "Paradigm.h"
-
+#include "../common/rus_numerals.h"
 
 CLemmatizer::CLemmatizer(MorphLanguageEnum Language) : CMorphDict(Language), m_Predict(Language)
 {	
@@ -360,11 +360,33 @@ bool CLemmatizer::CreateParadigmCollection(bool bNorm, string& InputWordStr, boo
         vector<CFormInfo> results1, results2;
 
 		int hyph = InputWordStr.find("-");
+		bool gennum = false;
+		int pos = -1;
+		if( GetLanguage() == morphRussian && InputWordStr.length() > 12 && hyph == string::npos)
+		for(int n = 0; n < NumeralToNumberCount; n++)
+		{
+			if( !NumeralToNumber[n].m_bNoun ) continue;
+			int len = strlen(NumeralToNumber[n].m_Ordinal);
+			if(NumeralToNumber[n].m_Ordinal[0]!=0 && InputWordStr.length()>len+1
+				&& (pos = InputWordStr.substr(InputWordStr.length() - len - 1).rfind(string(NumeralToNumber[n].m_Ordinal).substr(0, len - 2))) != string::npos)
+				//InputWordStr.substr(0, strlen(NumeralToNumber[n].m_Ordinal)) == NumeralToNumber[n].m_Ordinal )
+			{
+				CreateParadigmCollection(false, InputWordStr.substr(InputWordStr.length() - len - 1 + pos), capital, false, results1 );
+				if ( results1.size()>0 )
+				{
+					Result = results1;
+					Result[0].m_InputWordBase = InputWordStr.substr(0, InputWordStr.length() - len - 1 + pos) 
+						+ Result[0].m_InputWordBase;
+					Result[0].SetUserUnknown();
+				}
+				break;
+			}
+		}
 		if (hyph != string::npos)
 		{
 			// try to lemmatize each parts without predictions
 			string first_part = InputWordStr.substr(0, hyph);
-			string second_part = InputWordStr.substr(hyph+1);
+			string second_part = InputWordStr.substr(gennum ? hyph : hyph+1);
 			CreateParadigmCollection(false, first_part, capital, false, results1 );
 
 			/*

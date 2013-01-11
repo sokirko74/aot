@@ -6,6 +6,7 @@
 #include "stdafx.h"
 #include "Sentence.h"
 #include "assert.h"
+#include "../SynanLib/RusSyntaxOpt.h"
 #undef NDEBUG
 
 // language specific 
@@ -1599,7 +1600,59 @@ void CSentence::CloneHomonymsForOborots()
       		// многословные обороты
             for(int j = i ; j < m_Words.size() ; j++ )							
             {
-				m_Words[j].CloneHomonymForOborot();			
+				//"судя по многочисленным фактам" 
+				string title = EngRusMakeUpper(GetOpt()->m_pOborDic->m_Entries[m_Words[j].m_Homonyms[0].m_OborotNo].m_OborotEntryStr);
+				int b = title.find (m_Words[j].m_strUpperWord + "(");
+				if (b != -1)
+				{
+					b +=m_Words[j].m_strUpperWord.length();
+					string GramFet = title.substr(b+1,title.find (")")-b-1);
+					DWORD Pose;
+					QWORD Grammems;
+					//m_pData->GetCustomGrammems(GramFet, Grammems, Pose);
+					{
+						Trim(GramFet);
+						QWORD G;
+						BYTE Pos;
+						const CRusGramTab *R = (CRusGramTab*)(GetOpt()->GetGramTab());
+						//const CRusGramTab *R = (CRusGramTab*)GetGramTab();
+						if (R->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G))
+						{
+							Grammems = G;
+							if (Pos == VERB)
+								Pose  = (1<<VERB) | (1<<INFINITIVE) | (1 << ADVERB_PARTICIPLE) | (1 << PARTICIPLE) | (1 << PARTICIPLE_SHORT);
+							else
+								Pose  = (1<<(size_t)Pos);
+						}
+						else
+						{
+							GramFet = "С "+ GramFet;
+							if (R->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G) )
+							{
+								Grammems = G;
+								Pose  = 0xffffffff;
+							}
+							else
+							{
+								Grammems = 0xffffffff;
+								Pose  = 0xffffffff;
+							};
+
+						};
+					}
+					int k = 0;
+					for( ; k < m_Words[j].GetHomonymsCount() ; k++ )
+					{
+						CSynHomonym& H = m_Words[j].GetSynHomonym(k);
+						if (!(Pose & H.m_iPoses))
+							continue;
+						if (Grammems>0 && !(Grammems & (H.m_iGrammems|H.m_TypeGrammems)))
+							continue;
+						break;
+					}
+					b = k < m_Words[j].GetHomonymsCount() ? k : -1;
+				}
+				m_Words[j].CloneHomonymForOborot(b);			
                 if (m_Words[j].HasOborot2()) break;
             }
 		}

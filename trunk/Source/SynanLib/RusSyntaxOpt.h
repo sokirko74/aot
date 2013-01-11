@@ -30,7 +30,7 @@ public:
     
 
 	StringVector* m_pCompAdvList;
-    StringVector* m_pNounNumList;
+    StringVector* m_pNounNumList;//из Dicts\SynAn\noun_num.dat
     StringVector* m_pNumberAdverbsList;
 	
 

@@ -219,12 +219,15 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 			return false;
 	};
 
+	bool hasprep = false;
 	//не строить подлежащее, сто€щее справа через две группы от сказуемого 
 	{
 		int iGrCount = 0;
 		for ( int tt = synVariant.m_vectorGroups.get_main_word(RootWordNo); tt < SubjWordNo; tt = synVariant.m_vectorGroups.get_next_main_word(tt))
 		{
 			const CSynUnit& U = synVariant.m_SynUnits[tt];
+			if( tt == SubjWordNo - 1 && (U.HasPos(PREP)))
+				hasprep = true;
 			if (U.m_Type == EClause) continue;
 			const CSynWord& W = m_Words[U.m_SentPeriod.m_iFirstWord];
 			const CSynHomonym& H = W.m_Homonyms[U.m_iHomonymNum];
@@ -333,9 +336,9 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 					else
 					// если слово не входит в группу, тогда только указаные части речи
 					// могут быть подлежащим, например  
-                    if(		 SubjHom.HasPos(NUMERAL_P )
+                    if(		 (SubjHom.HasPos(NUMERAL_P ) 
 						||	 CanNumeralBeNoun(SubjHom.m_strLemma.c_str() ) 
-						||	 SubjHom.HasPos( ADJ_FULL	) 
+						||	 SubjHom.HasPos( ADJ_FULL	) ) && !hasprep //–аботал с 1901 до 1921 года
 					  )
 					return true;
 
@@ -667,10 +670,10 @@ bool CRusSentence::find_subj(CMorphVariant& synVariant, int predk)
 	“еперь чистка граммем происходит в ф-ции CSentence::ChangeSubjAndItsGroupGrammems()
 	*/
 	synVariant.ResetSubj();
+	synVariant.m_iPredk = predk;
 	if (SubjUnitNo != -1)
 	{
 		synVariant.m_Subjects.push_back( SubjUnitNo );
-		synVariant.m_iPredk = predk;
 		return true;
 	};
 	return false;

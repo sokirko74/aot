@@ -377,6 +377,7 @@ void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD gramm
 
 bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const char* gramcodes, GrammemCompare CompareFunc)
 {
+	if( gramcodes[0]==0 ) return false;
 	const CAgramtab *R = GetOpt()->GetGramTab(); 
 	bool isok = true;
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )

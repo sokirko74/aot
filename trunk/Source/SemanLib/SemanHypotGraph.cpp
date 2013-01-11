@@ -530,7 +530,7 @@ void CRusSemStructure::ProcessEveryIdents(long ClauseNo)
 	 */
 
   for (long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo+1;  NodeNo < m_Clauses[ClauseNo].m_EndNodeNo - 1; NodeNo++)
-    if (    HasOutcomingSynRelation(NodeNo, "ÑÓÙ_×ÈÑË") 
+    if (    HasOutcomingSynRelation(NodeNo, "ÑÓÙ_×ÈÑË", NodeNo-1) 
 		 && HasRichPOS(NodeNo-1,NOUN) 
        )
 	{

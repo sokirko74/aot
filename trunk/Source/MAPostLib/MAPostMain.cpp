@@ -7,6 +7,7 @@
 #include "../common/utilit.h"
 #include "../common/rus_numerals.h"
 #include "../TrigramLib/TrigramModel.h"
+#include "../AgramtabLib/RusGramTab.h"
 
 void CMAPost::log(string s)
 {
@@ -131,6 +132,8 @@ void CMAPost::RunRules()
 			Rule_Abbreviation();
 
 			Rule_ChangePatronymicLemmas();
+
+			OtherRules();
 	}
 	catch(...)
 	{
@@ -241,7 +244,7 @@ void CMAPost::Odnobuk()
 		
         const size_t poses = (1<<PREP) | (1<<CONJ) | (1<<INTERJ) | (1<<PARTICLE);
         // данное слово может являться  только предлогом, союзом, междометием или частицей
-        if (W.GetPoses() & ~poses) continue;
+        if (W.GetPoses() & ~poses) continue;//?? "по Б.Татарской улице"
         CLineIter next_it=it;
         next_it++;
         if(next_it==m_Words.end())continue;
@@ -396,7 +399,7 @@ void CMAPost::Cifrdef()
         //if (hyp == string::npos) continue;
         if (W.IsInOborot()) continue;	
 		
-        // первая часть - цифры, второая - русская, если есть окончание
+        // Доллары
         if (!isdigit((BYTE)W.m_strWord[0]) &&  !(hyp > 0 && is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1]))) 
 		if (dollar==prev_it)//$9,4 млрд
 		{
@@ -421,8 +424,34 @@ void CMAPost::Cifrdef()
 				}
 		}
 		else 
+			if (isdigit((BYTE)W.m_strWord[W.m_strWord.length()-1]) && hyp > 0 && is_russian_alpha((BYTE)W.m_strWord[0]))
+			{
+				W.DelDes(ONumChar);
+				W.AddDes(ORLE);
+				W.DeleteAllHomonyms();
+				CHomonym* pNew = W.AddNewHomonym();
+				vector<CFormInfo> Paradigms;
+				m_pRusLemmatizer->CreateParadigmCollection(false, W.m_strWord.substr(0,hyp), false, false, Paradigms);
+				if(Paradigms.size() > 0) // плутония-238
+				{
+					pNew->m_lPradigmID = Paradigms[0].GetParadigmId();
+					pNew->m_CommonGramCode = Paradigms[0].GetCommonAncode();				
+					pNew->m_GramCodes = Paradigms[0].GetSrcAncode();
+					pNew->m_LemSign = '+';
+					W.m_bWord = true;
+					W.m_bPredicted = false;
+				}
+				else
+				{
+					pNew->m_GramCodes = m_DURNOVOGramCode;
+					pNew->SetMorphUnknown();
+				}
+				pNew->m_strLemma = W.m_strUpperWord;
+				pNew->InitAncodePattern();
+			}
+			else
 			continue; 
-
+		// первая часть - цифры, второая - русская, если есть окончание
         string NumWordForm = hyp < 0 ? it->m_strWord : it->m_strWord.substr(0, hyp); 
 		string Flexia = hyp < 0 ? "" : it->m_strWord.substr(hyp+1); 
 
@@ -461,6 +490,8 @@ void CMAPost::Cifrdef()
 		string AnCodes0 = AnCodes; //числ
         if  (NumWordForm != "0")
 			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
+		if ( Flexia == "" )
+			AnCodes = m_pRusGramTab->FilterGramCodes(rAllNumbers,AnCodes, _QM(rSingular));
 		if ( FindFloatingPoint(NumWordForm.c_str()) != -1 || AnCodes0 == AnCodes)
 			AnCodes = "";
         if  ( AnCodes.empty() && AnCodes0.empty() ) 
@@ -488,11 +519,10 @@ void CMAPost::Cifrdef()
 				pH->m_strLemma = NumWordForm;
 				pH->InitAncodePattern();
 			}
-			
 			CLineIter spec_it=it;
 			if( next_it !=  m_Words.end() && (next_it->m_strWord == "%" || next_it->m_strWord == "$"))  //доллары, проценты
 				spec_it = next_it;
-			else if ( it !=  m_Words.begin() && prev_it->m_strWord == "$")
+			else if ( it !=  m_Words.begin() && (prev_it->m_strWord == "$"||prev_it->m_strWord == "№"))
 				spec_it = prev_it;
 			if( it != spec_it)
 			{
@@ -518,6 +548,12 @@ void CMAPost::Cifrdef()
 					W2.m_strUpperWord = W2.m_strWord = "ДОЛЛ";
 					pH->m_strLemma = "ДОЛЛАР";
 				}
+				else  if ( W2.m_strWord == "№" )
+				{
+					W2.m_strUpperWord = W2.m_strWord = "№";
+					pH->m_strLemma = "НОМЕР";
+					//pH->m_GramCodes = "";
+				}
 				m_pRusLemmatizer->CreateParadigmCollection(true,  pH->m_strLemma, true, false, Paradigms);
 				pH->m_lPradigmID = Paradigms[0].GetParadigmId();
 				W2.m_bWord = true;
@@ -526,16 +562,17 @@ void CMAPost::Cifrdef()
 				pH->InitAncodePattern();
 			}
 			else
-			if  ( !(( next_it !=  m_Words.end() && (next_it->m_strUpperWord == "ЛЕТ"))	// "в течение 2 лет"
-				 ))
-			if  ( !AnCodes.empty() )  //ЧИСЛ-П
-			{
-				CHomonym* pH = W.AddNewHomonym(); 
-				pH->SetMorphUnknown();
-				pH->m_GramCodes = AnCodes;
-				pH->m_strLemma = NumWordForm;
-				pH->InitAncodePattern();
-			}
+				if  ( !(( next_it !=  m_Words.end() && (next_it->m_strUpperWord == "ЛЕТ"))	// "в течение 2 лет"
+					//|| (it !=  m_Words.begin() && prev_it->HasGrammem(rComparative) && prev_it->HasPos(NUMERAL)) // "совершила более 40 тяжких преступлений"
+					) )  
+				 if  ( !AnCodes.empty() )  //ЧИСЛ-П
+				 {
+					 CHomonym* pH = W.AddNewHomonym(); 
+					 pH->SetMorphUnknown();
+					 pH->m_GramCodes = AnCodes;
+					 pH->m_strLemma = NumWordForm;
+					 pH->InitAncodePattern();
+				 }
 			if( dollar == prev_it )
 			{
 				if((*it).HasDes(OSentEnd)) {(*it).DelDes(OSentEnd);(*prev_it).AddDes(OSentEnd);}
@@ -758,6 +795,35 @@ void CMAPost::FixedCollocations()
 	}
 };
 
+
+void CMAPost::OtherRules() 
+{
+	for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
+	{
+		CPostLemWord& W = *it;
+		CLineIter next_it=it;
+		CLineIter prev_it=it;
+		next_it++;
+		if ( it !=  m_Words.begin() ) 
+		{
+			prev_it--;
+			if (W.HasPos(VERB) && W.GetHomonymsCount()>0 && (*prev_it).GetHomonymsCount() == 1 && (*prev_it).HasPos(PREP))
+				for (int HomNo=0; HomNo < W.GetHomonymsCount(); HomNo++)
+					if( W.GetHomonym(HomNo)->HasPos(VERB) )
+						W.EraseHomonym ( HomNo );
+		}
+		if( W.HasDes(ONumChar) && is_alpha((BYTE)W.m_strWord[0]) && W.GetPoses()==0 )
+		{
+			W.DeleteAllHomonyms();
+            CHomonym* pNew = W.AddNewHomonym();
+            pNew->SetMorphUnknown();
+            pNew->m_strLemma = W.m_strUpperWord;
+			pNew->m_CommonGramCode = "Фа";pNew->m_GramCodes = m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
+            pNew->InitAncodePattern();
+			W.AddDes( is_alpha((BYTE)W.m_strWord[0], morphEnglish) ? OLLE : ORLE);
+		}
+	};
+}
 
 /*
  удаляем пометы EXPR1 и EXPR_NOxxx из графемат. помет, если для него  не было найдено 
@@ -1130,7 +1196,7 @@ struct CQuoteMark
 (закрывающей) ставит помету #QUOTED.  Если для открывающей кавычки Х не было найдено закрывающей до конца предложения,  
 тогда считается, что последняя
 кавычка в предложении закрывает две предыдущих кавычки, например:
-Мама сказала: "Я люблю "Единую Россию".
+Мама сказала: "Я презираю "Единую Россию".
 
 */
 void CMAPost::Rule_QuoteMarks()    
@@ -1183,6 +1249,7 @@ void CMAPost::Rule_QuoteMarks()
             prev_it =  it;
     }
 
+
 };
 
 
@@ -1200,7 +1267,10 @@ void CMAPost::Rule_ILE()
             CHomonym* pNew = W.AddNewHomonym();
             pNew->SetMorphUnknown();
             pNew->m_strLemma = W.m_strUpperWord;
-            pNew->m_GramCodes = m_DURNOVOGramCode;
+			pNew->m_CommonGramCode = "Фа";
+			//if ( W.HasDes(OUp) ) 
+			//	pNew->m_CommonGramCode += "аоатац";//m_DURNOVOGramCode;
+			pNew->m_GramCodes = m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
             pNew->InitAncodePattern();
 		}
 	};
@@ -1482,6 +1552,8 @@ void CMAPost::Rule_UnknownNames()
 	+ триста сорок пятый
 	+ сорок один
 	? триста сорок пятого убили (триста сорок(птиц) убили пятого)
+
+	так же для "семью": "иметь семью" - здесь не наречие
 */
 
 
@@ -1503,6 +1575,12 @@ void CMAPost::Rule_SOROK()
                 if (next_it->GetPoses() & ( (1<<NUMERAL) | (1<<NUMERAL_P)))
                     pH->m_bDelete = true;
             }
+			if (pH->m_strLemma == "СЕМЬЮ")
+			{
+				CLineIter next_it = NextNotSpace(it);
+				if (next_it == m_Words.end() || !(next_it->GetPoses() & ( (1<<NUMERAL) | (1<<NUMERAL_P))))
+					pH->m_bDelete = true;
+			}
         }
         W.SafeDeleteMarkedHomonyms();
     }
@@ -1525,24 +1603,39 @@ void CMAPost::Rule_Abbreviation()
 	{
 	    CPostLemWord& W = *it;
         if (!W.HasDes(ORLE)) continue;
+		//ЦБ      С ср,0 -> 
+		for(int HomNo = 0 ; HomNo < W.GetHomonymsCount() ; HomNo++)
+			if(W.GetHomonym(HomNo)->HasPos(NOUN) && W.GetHomonym(HomNo)->HasGrammem(rIndeclinable) && !W.GetHomonym(HomNo)->HasGrammem(rInitialism) ) 
+			{
+				CHomonym* pH = W.GetHomonym(HomNo);
+				pH->m_CommonGramCode += pH->m_GramCodes;
+				pH->m_GramCodes = m_pRusGramTab->GleicheAncode1(GenderNumber0, 
+					m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0), pH->m_GramCodes);  //rAllNumbers, AnCodes, _QM(rSingular));
+			}
         if (W.HasDes(OUp)) continue;
-        int HomNo = W.GetHomonymByGrammem(rInitialism);
-        if (HomNo == -1) continue;
-        if (W.GetHomonymsCount() > 1)
-            W.EraseHomonym(HomNo);
-		else
-		{
-			CHomonym* pH = W.GetHomonym(HomNo);
-			vector<CFormInfo> Paradigms;
-			CFormInfo P;
-			string AnCodes;
-			m_pRusLemmatizer->CreateParadigmFromID(pH->m_lPradigmID,  P);
-			pH->m_CommonGramCode += pH->m_GramCodes;
-			pH->m_GramCodes = "";
-			for (long k=0; k < P.GetCount(); k++)
-				if((pH->m_CommonGramCode + pH->m_GramCodes).find(P.GetAncode(k)) == string::npos )
-					pH->m_GramCodes += P.GetAncode(k);
-		}
+
+		for(int HomNo = 0 ; HomNo < W.GetHomonymsCount(); HomNo++)
+			if( W.GetHomonym(HomNo)->HasGrammem(rInitialism) )
+				if (W.GetHomonymsCount() > 1 && W.GetHomonym(HomNo)->m_strLemma == W.m_strUpperWord) //свыше 50 проц
+					W.EraseHomonym(HomNo);
+				else
+				{
+					CHomonym* pH = W.GetHomonym(HomNo);
+					vector<CFormInfo> Paradigms;
+					CFormInfo P;
+					string AnCodes;
+					m_pRusLemmatizer->CreateParadigmFromID(pH->m_lPradigmID,  P);
+					pH->m_CommonGramCode += pH->m_GramCodes;
+					AnCodes = pH->m_GramCodes;
+					pH->m_GramCodes = "";
+					string xx = P.GetAncode(0);
+					for (long k=0; k < P.GetCount(); k++)
+						if( m_pRusGramTab->GleicheAncode1(0, pH->m_CommonGramCode + pH->m_GramCodes, P.GetAncode(k)) == ""
+							&& (m_pRusGramTab->GetAllGrammems(P.GetAncode(k).c_str()) & m_pRusGramTab->GetAllGrammems(AnCodes.c_str())) == m_pRusGramTab->GetAllGrammems(P.GetAncode(k).c_str())
+							&& m_pRusGramTab->GetPartOfSpeech(P.GetAncode(k).c_str()) == m_pRusGramTab->GetPartOfSpeech(AnCodes.c_str())
+							)
+							pH->m_GramCodes += P.GetAncode(k);
+				}
 	};
 };
 

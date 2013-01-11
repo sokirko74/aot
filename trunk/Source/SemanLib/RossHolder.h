@@ -79,16 +79,17 @@ public:
 
 
    // синтаксические отношения 
-   int ReverseSynONo;
-   int UncoordAttrSynONo;
-   int DirectObjSynONo;
-   int SubjSynONo;
-   int EnglSubjSynONo;
-   int ParatAttrSynONo;
-   int FromPredicSynONo;
-   int CoordAttrSynONo;
-   int PostSpecifSynONo;
-   int IndirObjSynONo;
+   int IndirObjSynONo; //к_доп
+   int ReverseSynONo; //X! // пассивная валентность на именную группу
+   int UncoordAttrSynONo; //нс_опр
+   int CoordAttrSynONo; //с_опр
+   int DirectObjSynONo; //п_доп
+   int SubjSynONo; //подл
+   int EnglSubjSynONo; //subj
+   int ParatAttrSynONo; //прим_опр
+   int FromPredicSynONo; //отпредик
+   int PostSpecifSynONo; //уточн
+
 
    // уточнения групп 
 	  int QuoteMarkNo;
@@ -103,7 +104,7 @@ public:
 	  int PossPronNo;
 	  int NumeralNo;
 
-	  		// константы полей
+	  // константы полей
 	  BYTE SemFeatureNo; 
 	  BYTE LexDerivationNo;  
 	  BYTE LemmaVariantsNo;  

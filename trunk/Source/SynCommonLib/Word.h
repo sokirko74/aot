@@ -154,7 +154,7 @@ public:
 	void SetGoodHomonym(int i );
 	void EraseHomonym(int iHom);
 
-	void	CloneHomonymForOborot();
+	void	CloneHomonymForOborot(int HNum = -1);
 	void	TryBuildVerbLemmaWithKa();
 
 	const COborotForSyntax*	GetOborotPtr() const;

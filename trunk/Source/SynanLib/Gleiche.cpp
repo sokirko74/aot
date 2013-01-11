@@ -210,8 +210,11 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	if( G.m_iFirstWord > 0 )
 	{
 		QWORD dummy;
-		gleiche_for_plural_numbers(i, G.m_iFirstWord - 1, false, dummy, bAdjShouldBeInNominativOrGenitiv, is_small_number_group(G.m_iFirstWord - 1));		  
+		//gleiche_for_plural_numbers(i, G.m_iFirstWord - 1, false, dummy, bAdjShouldBeInNominativOrGenitiv, is_small_number_group(G.m_iFirstWord - 1));		  
 	}
+
+	if ( sent[G.m_iFirstWord].HasFlag(fl_digit) && sent[G.m_iFirstWord].HasPOS(NUMERAL_P) && sent[FirstWordOfNounGroup].HasFlag(fl_ile) ) // "вызвать 5 API"
+		return false;
 
 	// Согласование по падежу, числу и роду проверяться здесь.
 	for (j = G.m_iFirstWord; j <  FirstWordOfNounGroup; j = get_maximal_group(j).m_iLastWord + 1)
