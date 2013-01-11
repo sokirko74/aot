@@ -29,7 +29,7 @@ CGraphmatFile :: CGraphmatFile()
 	m_bUseParagraphTagToDivide = false;
 	m_bUseIndention = true;
 	m_bConvertRussianJo2Je = false;
-	m_bFilterUnprintableSymbols = true;
+	m_bFilterUnprintableSymbols = false;
 	m_MaxSentenceLength = 9000;
 	m_bRecognizeShortFIOs = false;
 }
@@ -254,7 +254,7 @@ bool CGraphmatFile :: GraphmatMain ()
 			m_LastError = "An exception occurred in Sentence breaker";
 			return false;
 		};
-
+	//m_GraOutputFile = "m_GraOutputFile.txt";
 
 
 	if   (!m_GraOutputFile.empty())

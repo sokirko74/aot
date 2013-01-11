@@ -1079,7 +1079,7 @@ void CRusSemNode::ModifyGramCodes(string GramCodes, int mode, const CRusGramTab 
 	if( mode & 2 )
 		for (long i=0; i < m_Words.size(); i++)
 		{
-			m_Words[i].m_GramCodes = R->GleicheAncode1(CaseNumber0, m_Words[i].m_GramCodes, GramCodes);
+			m_Words[i].m_GramCodes = R->GleicheAncode1(CaseNumberGender0, m_Words[i].m_GramCodes, GramCodes);
 			m_Words[i].SetFormGrammems(m_Words[i].GetFormGrammems()  & ~3665919 | R->GetAllGrammems(m_Words[i].m_GramCodes.c_str()) ); 
 		}
 }

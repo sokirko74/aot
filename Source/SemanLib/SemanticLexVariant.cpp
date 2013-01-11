@@ -1757,21 +1757,22 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 					|| m_Nodes[m_SynRelations.back().m_TargetNodeNo].IsWordForm("МЕНЬШЕ")  
 					)
 					m_Nodes[m_SynRelations.back().m_SourceNodeNo].AddOneGrammem (rGenitiv);
+			//случай ЧИСЛ_СУЩ
+			if( m_SynRelations.back().m_SynRelName.find("ЧИСЛ_СУЩ")!=string::npos
+				|| piRel.m_Relation.type == 25) //NOUN_NUMERAL_APPROX
+			{
+				const CRusGramTab *R = (CRusGramTab*)piRel.GetOpt()->GetGramTab();
+				if( piRel.m_Relation.m_GramCodes != "" && m_SynRelations.back().m_SynRelName!="НАР_ЧИСЛ_СУЩ")
+					m_Nodes[TargetNodeNo].m_GramCodes = piRel.m_Relation.m_GramCodes; //ЧИСЛ
+				QWORD RelGr = piRel.m_Relation.m_iGrammems;
+				if( !(RelGr& rAllGenders) ) 
+					RelGr |= m_Nodes[SourceNodeNo].GetGrammems() & rAllGenders;
+				m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0, "ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел",
+					R->GetGramCodes(NOUN, RelGr, CaseNumberGender0));
+				m_Nodes[SourceNodeNo].SetGrammems(RelGr);
+				m_Nodes[TargetNodeNo].SetGrammems(RelGr); //m_Nodes[TargetNodeNo].GetGrammems() & ~(rAllCases|rAllGenders|rAllPersons|rAllAnimative) | 
+			}
 		};
-		if( m_SynRelations.back().m_SynRelName.find("ЧИСЛ_СУЩ")!=string::npos
-			|| piRel.m_Relation.type == 25) //NOUN_NUMERAL_APPROX
-		{
-			const CRusGramTab *R = (CRusGramTab*)piRel.GetOpt()->GetGramTab();
-			if( piRel.m_Relation.m_GramCodes != "" && m_SynRelations.back().m_SynRelName!="НАР_ЧИСЛ_СУЩ")
-				m_Nodes[TargetNodeNo].m_GramCodes = piRel.m_Relation.m_GramCodes; //ЧИСЛ
-			QWORD RelGr = piRel.m_Relation.m_iGrammems;
-			if( !(RelGr& rAllGenders) ) 
-				RelGr |= m_Nodes[SourceNodeNo].GetGrammems() & rAllGenders;
-			m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0, "ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел",
-				R->GetGramCodes(NOUN, RelGr, CaseNumberGender0));
-			m_Nodes[SourceNodeNo].SetGrammems(RelGr);
-			m_Nodes[TargetNodeNo].SetGrammems(RelGr); //m_Nodes[TargetNodeNo].GetGrammems() & ~(rAllCases|rAllGenders|rAllPersons|rAllAnimative) | 
-		}
 		// Морфологическую "одушевленнсть" нужно брать от главного слова, поскольку,
 		//  например, группа ПРИЛ_СУЩ, пересекает граммемы существительного и прилагательных,
 		// а у прилагательного не бывает одушевленности. Поэтому и у всей группы не может быть одушевленности.

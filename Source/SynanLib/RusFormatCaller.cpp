@@ -155,6 +155,7 @@ void CRusFormatCaller::AddAllRules()
 	m_vectorRulesNumbers.push_back(rule_for_plural_noun_adj);
 	m_vectorRulesNumbers.push_back(rule_for_noun_adj_postposition);
 	m_vectorRulesNumbers.push_back(rule_for_noun_detached_adj_postposition);
+	m_vectorRulesNumbers.push_back(rule_for_number_noun); // "совершила более 40 тяжких преступлений"
 	m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);	
 	m_vectorRulesNumbers.push_back(rule_for_number_noun);
@@ -227,6 +228,7 @@ void CRusFormatCaller::AddRulesBeforeSimClauses( )
 	m_vectorRulesNumbers.push_back(rule_for_plural_noun_adj);
 	m_vectorRulesNumbers.push_back(rule_for_noun_adj_postposition);
 	m_vectorRulesNumbers.push_back(rule_for_noun_detached_adj_postposition);
+	m_vectorRulesNumbers.push_back(rule_for_number_noun); // "совершила более 40 тяжких преступлений"
 	m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	m_vectorRulesNumbers.push_back(rule_for_number_noun);
 	m_vectorRulesNumbers.push_back(rule_for_rank_surname);

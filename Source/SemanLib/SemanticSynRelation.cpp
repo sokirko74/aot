@@ -150,10 +150,10 @@ bool CRusSemStructure::HasSynRelation(long NodeNo, string RelationStr) const
 
 	return false;
 };
-bool CRusSemStructure::HasOutcomingSynRelation(long NodeNo, string RelationStr) const
+bool CRusSemStructure::HasOutcomingSynRelation(long NodeNo, string RelationStr, long NodeNo2) const
 {
 	for (long i=0; i<m_SynRelations.size(); i++)
-    if (m_SynRelations[i].m_SourceNodeNo == NodeNo)
+    if (m_SynRelations[i].m_SourceNodeNo == NodeNo && (NodeNo2 == -1 || m_SynRelations[i].m_TargetNodeNo == NodeNo2))
 		 if (m_SynRelations[i].m_SynRelName == RelationStr) return true; 
 
 	return false;

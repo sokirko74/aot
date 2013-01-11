@@ -69,7 +69,7 @@ bool CRusFormatCaller::format_for_dir_obj (CGroup& G)
  	QWORD g = ObjGroup.GetGrammems() & (_QM(rAccusativ) | ~rAllCases); //убиваем лишние падежи, "открыл дверь"
 	((CGroup&)ObjGroup).SetGrammems(g);
 	if (Wk.GetGrammems() & _QM(rAccusativ) )
-		Wk.SetGrammems(Wk.GetGrammems() & (_QM(rAccusativ) | ~rAllCases));
+		Wk.SetGrammems(Wk.GetGrammems() & (_QM(rAccusativ) | _QM(rDativ) | ~rAllCases)); //rDativ для "правительство выделило церкви гектар"
 	return true;
 }
 

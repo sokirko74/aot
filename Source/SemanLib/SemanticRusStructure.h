@@ -753,7 +753,7 @@ public:
 	// проверяет, что  у узла NodeNo есть входящее или исходящее отношение RelationStr
 	bool			HasSynRelation(long NodeNo, string RelationStr) const; 
 	// проверяет, что  у узла NodeNo есть исходящее отношение RelationStr
-	bool			HasOutcomingSynRelation(long NodeNo, string RelationStr) const; 
+	bool			HasOutcomingSynRelation(long NodeNo, string RelationStr, long NodeNo2 = -1) const; 
 	// свободная локативная валентность
 	void			HeuristicsLocative(long ClauseNo); 
 	void			DeleteSynRelationsOfClause(long ClauseNo);

@@ -431,7 +431,7 @@ string	CAgramtab::GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareF
 		{
 			const CAgramtabLine* L =  GetLine(i);
 			if (			(L->m_PartOfSpeech == pos)
-					&&		 ( CompareFunc  (L, &L0) ) //  ((grammems & (L->m_Grammems & mask)) == grammems)
+				&&		 ( CompareFunc ? CompareFunc  (L, &L0) : (L->m_Grammems & grammems) == L->m_Grammems && !(pos==NOUN && (L->m_Grammems&rAllGenders)==rAllGenders) ) //  ((grammems & (L->m_Grammems & mask)) == grammems)
 				)
 				Result += i2s(i);
 		};
@@ -544,7 +544,29 @@ string CAgramtab::FilterGramCodes(string gram_codes, QWORD grammems1, QWORD gram
 	//if(has_pair) gram_codes1pair = pair;
  	return Result;
 }	
-
+string CAgramtab::FilterGramCodes(QWORD breaks, string gram_codes, QWORD g1) const
+{
+	string Result;
+	QWORD BR [] = {rAllCases, rAllNumbers, rAllGenders, rAllAnimative, rAllPersons, rAllTimes};
+	const char * gram_codes1 = gram_codes.c_str();
+	if (!strcmp(gram_codes1, "??")) return gram_codes1;
+	size_t len1 = strlen(gram_codes1);
+	for (size_t l=0; l<len1; l+=2)
+	{
+		const CAgramtabLine* l1 = GetLine(s2i(gram_codes1+l));
+		bool R = true;
+		for(int i = 0 ; i < (sizeof BR)/(sizeof BR[0]) && R; i++ )
+		{
+			QWORD g2 = l1->m_Grammems;
+			if(breaks & BR[i])
+				R &= ((BR[i] & g1 & g2) > 0 || !(BR[i] & g1) || !(BR[i] & g2));
+		}
+		if ( R )  
+			Result.append(gram_codes1+l,2);
+	}
+	//if(has_pair) gram_codes1pair = pair;
+ 	return Result;
+}	
 
 string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const string& s1, const string& s2)
 {

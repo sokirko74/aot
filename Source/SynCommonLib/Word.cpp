@@ -137,11 +137,11 @@ CSynHomonym CSynWord::CloneHomonymByAnotherHomonym(const CSynHomonym* pHomonym, 
 
 
 
-void CSynWord::CloneHomonymForOborot()
+void CSynWord::CloneHomonymForOborot(int HNum)
 {
 	assert(m_Homonyms.size() > 0);
 
-	CSynHomonym H = CloneHomonymByAnotherHomonym(&m_Homonyms.back(), 0, UnknownPartOfSpeech);
+	CSynHomonym H = CloneHomonymByAnotherHomonym( HNum == -1 ? &m_Homonyms.back() : &m_Homonyms[HNum], 0, UnknownPartOfSpeech);
 	
 	if( HasOborot1() )
 	{
@@ -153,7 +153,8 @@ void CSynWord::CloneHomonymForOborot()
             }
 		
 	}
-	H.m_lPradigmID = -1;
+	if(HNum == -1 && m_Homonyms.size()>1)
+		H.m_lPradigmID = -1;
 
 	// у всех остальных омонимов помуты оборота стоять не будет
 	DeleteOborotMarks();

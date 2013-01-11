@@ -682,7 +682,7 @@ bool CClause::BuildGroupsAndSynVariants(CFormatCaller& FormatCaller)
 			
 			AssignVariantWeight(synVariant);
 			TranslateFormatCallerGroups(synVariant);
-			//rml_TRACE("m_iWeight = %d\n", synVariant.m_iWeight);
+			rml_TRACE("m_iWeight = %d\n", synVariant.m_iWeight);
 			AssignSynVariantsGrammems(synVariant, FormatCaller);
 			AssignOborotMarksToDisruptConj(FormatCaller, synVariant);
 		}

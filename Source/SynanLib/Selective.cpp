@@ -84,7 +84,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 			/*
 			 если это порядковое чилительное 
 			*/
-		if  (first_word_plm.HasPOS(NUMERAL_P) )
+		if  (first_word_plm.HasPOS(NUMERAL_P) || (first_word_plm.HasPOS(NUMERAL) ) )//42 из наиболее важных стран
 		{
 	  		next_word = G.m_iFirstWord + 1;
 		}

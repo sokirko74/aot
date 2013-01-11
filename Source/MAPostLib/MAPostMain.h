@@ -126,6 +126,7 @@ protected:
 	void Rule_Ideclinable();
 	void Rule_DeadPlurals();
 	void Rule_RelationalAdjective();
+	void OtherRules();
 	
 	string GetNormSurnameSuffix(long ParadigmNo) const;
 	void Rule_QuoteMarks();

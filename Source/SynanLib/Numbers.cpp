@@ -150,6 +150,7 @@ bool CRusFormatCaller::format_for_num_complex (CGroup& G)
 {
 	if  (		(G.m_iFirstWord + 2 >= sent.size())
 			|| !W2.HasFlag(fl_punct)
+			|| W2.is_lemma("(") || W2.is_lemma(")")
 			|| !W3.HasFlag(fl_digit)
 	 )
 	return false;
@@ -199,17 +200,25 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 	if (		!is_numeral(Wk)
         &&	!Wk.HasPOS(NUMERAL_P )  
 		&&	!Wk.HasFlag(fl_digit)
+		&&	(!Wk.get_word() || strcmp(Wk.get_word(), "№"))
 		) 
 	return false;
 
 	// запрещаем фразу "дом несколько", поскльку "несколько" - числительное
 	if (has_item (GetOpt()->m_pNumberAdverbsList, Wk.get_lemma())) return false;
-	if (!has_item (GetOpt()->m_pNounNumList, (!Wi.has_lemma() ? Wi.get_word() : Wi.get_lemma()))) return false;
+	if (!has_item (GetOpt()->m_pNounNumList, (!Wi.has_lemma() ? Wi.get_word() : Wi.get_lemma()))
+		&& !(Wi.has_des(OUpLw) && (Wi.has_des(OLLE) || k==sent.size()-1 || Wi.has_des(OQuoted) && !sent[k+1].has_des(OQuoted)) && (i == k - 1) && Wk.HasFlag(fl_digit))) return false; //Банк вводит вклад "Доход 2013"
 
 	G.m_GroupType = NOUN_NUMERAL;
 	
 	G.m_iLastWord += get_maximal_group_size(G.m_iLastWord)-1;
 	const CGroup& MainGroup = get_maximal_group(G.m_iFirstWord);
+	change_words_in_group_gramcodes(get_maximal_group(k), "аа", CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
+	if(!strcmp(Wk.get_word(), "№") &&  is_numeral(sent[k+1])) //я вышел из дома №26
+	{
+		Wk.m_gramcodes = "аа";
+		change_words_in_group_gramcodes(get_maximal_group(k+1), "аа", CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
+	}
 	G.m_MainGroup = MainGroup;
 	G.SetGrammems( Wi.GetGrammems() );  
 	create_syn_rel(G,get_main_word_in_group(MainGroup),get_main_word_in_group(get_maximal_group(G.m_iLastWord)), NOUN_NUMERAL);
@@ -707,7 +716,8 @@ bool CRusFormatCaller::format_for_plural_number_noun(CGroup& G, bool small_numbe
 	int i = get_main_word (G.m_iFirstWord);
     if  (       (!small_number || is_numeral(sent[G1.m_MainWordNo])  
 	        ||  sent[G1.m_MainWordNo].HasFlag(fl_digit))
-			&& (small_number || k != -1 && sent[k].is_morph_noun()
+			//&& (small_number || k != -1 && sent[k].is_morph_noun()
+			&& (small_number || sent[i].HasFlag(fl_digit) || k != -1 
 				&& !(!Wk.has_grammem(rIndeclinable) && !Wk.has_grammem(rPlural)) // "пять пальто"
 				&& !( !check_number_noun_coordination(Wi.GetGrammems(), Wk, GetGramTab()) 
 					&& ( !sent[i].HasFlag(fl_digit) || (Wk.GetGrammems() & rAllCases) != rAllCases && Wk.has_grammem(rNominativ)))) // чтобы  не строилась группа ЧИСЛ_СУЩ "1999 года"
@@ -828,13 +838,13 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 	const CRusGramTab *R = (CRusGramTab*)GetGramTab();
 	string new_grc = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].m_gramcodes, 
 		(R->GetGramCodes(NOUN, rAllCases | _QM(rSingular), CaseNumber)).c_str())); 
-	if(new_grc=="") 
+	if(new_grc=="" || sent[i_number].HasFlag(fl_digit) && sent[i_noun].is_month()) 
 		return false;
 
 	if( sent[i_number].HasFlag(fl_digit) ) // до 81 унции
 	{
-		string num_grc = "эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэчасЙш"; //ЧИСЛ мр..ср им("пять");рд;..пр
-		string noun_pair = "ааабавагадаегагбгвгггдгееаебевегедееаага"; //С мр..ср рд,ед("домов");рд,ед;..;пр,ед
+		string num_grc = R->GetGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender); //"эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэчасЙш"; //ЧИСЛ мр..ср им("один");рд;..пр
+		string noun_pair =  "ааабавагадаегагбгвгггдгееаебевегедее"; //С мр..ср им,ед("дом");рд,ед;..;пр,ед
 		R->GleicheAncode1(CaseNumberGender0, noun_pair.c_str(), new_grc.c_str(), num_grc);
 		num_grc = R->UniqueGramCodes(R->GleicheAncode1(CaseNumberGender0, num_grc.c_str(), R->UniqueGramCodes(sent[i_number].m_gramcodes)));
 		if(num_grc=="")

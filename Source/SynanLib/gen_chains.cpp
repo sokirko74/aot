@@ -59,7 +59,7 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 
 	if (!Wk.is_morph_noun() || Wk.is_lemma(" Œ“Œ–€…")) return false;
 	const CGroup& RightGroup = get_maximal_group (k);
-	if( RightGroup.m_GroupType == NUMERALS)
+	if( RightGroup.m_GroupType == NUMERALS || RightGroup.m_GroupType == NUMERAL_NOUN)
 			return false;
 	if (!(RightGroup.GetGrammems() & _QM(rGenitiv))) return false;
 

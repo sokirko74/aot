@@ -96,7 +96,12 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
     switch (I.m_fiType)
     {
         case fiName     :  return pH->HasGrammem(rName);
-        case fiSurname  :  return pH->HasGrammem(rSurName);
+        case fiSurname  :  return pH->HasGrammem(rSurName) || (Word.m_bFirstUpperAlpha 
+							   && (pH->m_strLemma.rfind("ИЙ")==pH->m_strLemma.size()-2
+							    || pH->m_strLemma.rfind("АЯ")==pH->m_strLemma.size()-2
+							    || pH->m_strLemma.rfind("ОВ")==pH->m_strLemma.size()-2
+								|| pH->m_strLemma.rfind("ОВА")==pH->m_strLemma.size()-3
+								));
         case fiMiddle   :  return pH->HasGrammem(rPatronymic);
 
         case fiAbbr     :  return      Word.m_bFirstUpperAlpha
@@ -181,14 +186,15 @@ static bool SetFioFormat (CMAPost& C, const CFIOFormat& Format, CLineIter it)
        pH->m_bDelete = false;
        pH->DeleteOborotMarks(); // удаляем однословные оборотыб (многословных там быть не может)
        W.DeleteMarkedHomonymsBeforeClauses();
-       if (W.HasDes(OSentEnd))
+	   if (W.HasDes(OSentEnd))
        {
            /*
              если ФИО содержало конец предложения, а после ФИО нет ни одной пометы 
 	         конца предложения, тогда надо поставить SENT_END на последнюю строчку ФИО.
            */
            W.DelDes(OSentEnd);
-           FioWords.back()->AddDes(OSentEnd);
+		   if ( W.m_strWord!="." )
+			   FioWords.back()->AddDes(OSentEnd);
        }
    }
 
