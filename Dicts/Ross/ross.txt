@@ -131,7 +131,7 @@ REDACT       = boris
 TIME_CREATE       = 14/2/1 19:26:12
 SF      == 1  ORG
 VAL     =  IDENT , A1 , C
-           BELNG , A2 , C
+           BELNG , C , A2
 GF1     = 1  прим_опр : квч
 SF1     = 1  NAME
              ORG
@@ -146,7 +146,7 @@ REDACT       = boris
 TIME_CREATE       = 14/2/1 19:26:12
 SF      == 1  PROF
 VAL     =  NAME , A1 , C
-           BELNG , A2 , C
+           BELNG , C , A2
 GF1     = 1  прим_опр : И
 GF2     = 1  к_доп : Р
 SF2     = 1  ORG
@@ -325,7 +325,7 @@ GF      == 1  С но
 SF      = 1  THINGN
           2  SITUAT
 VAL     =  ? IDENT , A1 , C
-           ? BELNG , A2 , C
+           ? BELNG , C , A2
 GF1     = 1  прим_опр : И
           2  к_доп : квч
 GF2     = 1  к_доп : Р
@@ -338,7 +338,7 @@ REDACT       = alex
 TIME_CREATE       = 18/1/1 13:49:16
 GF      == 1  С од
 SF      = 1  ANIM
-VAL     =  ? BELNG , A1 , C
+VAL     =  ? BELNG , C , A1
 GF1     = 1  к_доп : Р
 TYP     =  ЗАГЛУШКА
 ============
@@ -3675,10 +3675,10 @@ LEX1    =  я
            мы
            вы
            это
-GF2     = 1  отпредик : Т
+GF2     = 1  отпредик : И
           2  отпредик : Т_ПРИЛ
           3  отпредик : прч
-          4  отпредик : И
+          4  отпредик : Т
           5  отпредик : сравн
 SF2     = 1  PROPERT
           2  ATTR
@@ -9252,6 +9252,37 @@ SF2     = 1  ANIM
 GF3     = 1  ОБСТ_ГР : с+Р
           2  ОБСТ_ГР : из+Р
 ENG     =  exclusion 1
+============
+TITLE        = выделить
+SENSE       = 1
+TIME_CREATE       = 18/1/1 13:49:49
+EXM     =  правительство выделило церкви 0,45 гектара
+           восстановление разрушенных домов
+CAT     = 1  LABL.SIT
+GF      = 1  ГЛ:ГГ
+SF      = 1  FIN
+VAL     =  AGENT , A1 , C
+           OBJ , A2 , C
+           ADR , A3 , C
+           AIM , A4 , C
+           SRC , A5 , C
+GF1     = 1  подл : И
+SF1     = 1  ANIM
+          2  STAT
+          3  ORG
+GF2     = 1  к_доп : Д
+SF2     = 1  LOK
+          2  ORG
+          3  ANIM          
+GF3     = 1  п_доп : В
+          2  к_доп : для+Р
+GF4     = 1  к_доп : на+В
+SF4     = 1  SITUAT
+GF5     = 1  к_доп : из+Р
+SF5     = 1  COLLEC
+AUX     =  PART ( A2 , A5 )
+ENG     =  allot 1
+           pick_out 1
 ============
 TITLE        = выделение
 SENSE       = 1
@@ -50235,6 +50266,31 @@ SF2     = 1  SITUAT
 LF      =  Magn : основной
 ENG     =  item 1
 ============
+TITLE        = положенный
+SENSE       = 1
+REDACT       = boris
+TIME_CREATE       = 14/2/1 19:26:19
+EXM     =  положенные россиянину налоги
+CAT     = 1  LABL.PROPERT
+GF      = 1  ПРИЛ:с_опр
+QUALIT  =  +
+SF      = 1  MODL
+             ESTIM
+VAL     =  PROPERT , C , A1
+           RESTR , A2 , C
+GF1     = 1  X! : ИГ
+SF1     = 1  SITUAT
+          2  SUBST
+          3  THINGN
+GF2     = 1  к_доп : Д
+          2  к_доп : для+Р
+SF2     = 1  ANIM
+          2  ABSTR
+          3  SOC
+          4  SITUAT
+AUX     =  ADR ( A2 , A1 )		  
+ENG     =   prescribed 2
+============
 TITLE        = положительный
 SENSE       = 1
 TIME_CREATE       = 14/2/1 19:26:21
@@ -59107,6 +59163,7 @@ CAT     = 1  LABL
 GF      = 1  СУЩ:ИГ
 DERIV   =  ПРИЛ ( процентный )
 SF      = 1  PARAM
+          2  FIN
 VAL     =  PART , C , A1
            VALUE , A2 , C
 GF1     = 1  к_доп : Р
@@ -59134,6 +59191,7 @@ CAT     = 1  LABL.OBJ
 GF      = 1  СУЩ:ИГ
 DERIV   =  ПРИЛ ( процентный )
 SF      = 1  UNIT
+          2  FIN
 VAL     =  UNIT , C , A1
 GF1     = 1  X! : ЧИСЛ
 SF1     = 1  QUANTIT
@@ -59154,6 +59212,7 @@ DERIV   =  ПРИЛ ( стопроцентный )
 QUALIT  =  -
 SF      = 1  A0 ( процент )
              UNIT
+          2  FIN
 VAL     =  PROPERT , C , A1
 GF1     = 1  X! : ИГ
 SF1     = 1  FIN
