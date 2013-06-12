@@ -704,6 +704,7 @@ void AddFile(const char* MainFile, const char* ToAdd)
 };
 
 #ifdef WIN32
+    #include <windows.h>
 	string TryReadRMLFromRegistry()
 	{
 		HKEY hKeyResult; 

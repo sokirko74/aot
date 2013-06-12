@@ -148,6 +148,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "graphan", "graphan\graphan.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphmatThick", "GraphmatThick\GraphmatThick.vcproj", "{5511CAFB-AC80-4CED-B789-553CEB239B6C}"
 	ProjectSection(ProjectDependencies) = postProject
+		{DFC6E289-AD89-4CDC-BC52-32A71B230CF6} = {DFC6E289-AD89-4CDC-BC52-32A71B230CF6}
 		{D42CFD9A-41D1-447A-A97F-02E5B4FFE639} = {D42CFD9A-41D1-447A-A97F-02E5B4FFE639}
 		{4E2ABCE5-A4AE-4F69-BA4F-6B8FF6FE9C39} = {4E2ABCE5-A4AE-4F69-BA4F-6B8FF6FE9C39}
 	EndProjectSection
@@ -233,6 +234,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SynanCGI", "SynanCGI\SynanCgi.vcproj", "{2F9AFAC4-1248-40B4-8BD8-F8DF05EBC9DB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestLemmatizerCOM", "TestLemmatizerCOM\TestLemmatizerCOM.vcproj", "{2AD59B55-D9F1-4D8E-892E-82E160108185}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F8DD161-E4D1-420D-8F89-08D0DCA9BC78} = {5F8DD161-E4D1-420D-8F89-08D0DCA9BC78}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorphGen", "MorphGen\MorphGen.vcproj", "{3CFE48A6-B351-4615-8EBB-1AF85F03A98E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -282,6 +286,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo", "Demo\demo.vcproj", "{CB5AA0C0-E2A2-4D35-8A26-15265A42174C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_graphan", "test_graphan\test_graphan.vcproj", "{7069326B-7527-4BDD-8F9E-2ED52564621E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DFC6E289-AD89-4CDC-BC52-32A71B230CF6} = {DFC6E289-AD89-4CDC-BC52-32A71B230CF6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorphCorpusCreator", "MorphCorpusCreator\MorphCorpusCreator.vcproj", "{6259EF59-6BE9-4350-A817-CCB2CA90E9A2}"
 EndProject

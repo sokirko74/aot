@@ -73,7 +73,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib"
+				AdditionalDependencies="Advapi32.lib"
 				OutputFile=".\Debug/MorphGen.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -142,6 +142,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Advapi32.lib"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 			/>
@@ -224,7 +225,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib"
+				AdditionalDependencies="Advapi32.lib"
 				OutputFile=".\Debug/MorphGen.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"

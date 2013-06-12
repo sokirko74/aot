@@ -66,6 +66,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Advapi32.lib"
 				OutputFile="$(OutDir)/SimpleGrammarPrecompiled.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
@@ -146,6 +147,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Advapi32.lib"
 				OutputFile="$(OutDir)/SimpleGrammarPrecompiled.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
