@@ -431,7 +431,8 @@ void CMAPost::Cifrdef()
 				W.DeleteAllHomonyms();
 				CHomonym* pNew = W.AddNewHomonym();
 				vector<CFormInfo> Paradigms;
-				m_pRusLemmatizer->CreateParadigmCollection(false, W.m_strWord.substr(0,hyp), false, false, Paradigms);
+                string TmpStr = W.m_strWord.substr(0,hyp);
+				m_pRusLemmatizer->CreateParadigmCollection(false, TmpStr, false, false, Paradigms);
 				if(Paradigms.size() > 0) // плутония-238
 				{
 					pNew->m_lPradigmID = Paradigms[0].GetParadigmId();

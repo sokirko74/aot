@@ -466,11 +466,13 @@ QWORD CAgramtab::Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, c
 //  returns all ancodes from gram_codes1, which satisfy CompareFunc
 string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
 {
-	return GleicheAncode1(CompareFunc, string(gram_codes1), string(gram_codes2), string(""));//string(gram_codes1)
+    string EmptyString;
+	return GleicheAncode1(CompareFunc, string(gram_codes1), string(gram_codes2), EmptyString);
 }
 string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, string gram_codes1, string gram_codes2) const
 {
-	return GleicheAncode1(CompareFunc, gram_codes1, gram_codes2, string(""));
+    string EmptyString;
+	return GleicheAncode1(CompareFunc, gram_codes1, gram_codes2, EmptyString);
 }
 //changes GramCodes1pair according to satisfied GramCodes1 
 //(if gramcode number N is good(bad) in GramCodes1 it must be good(bad) in GramCodes1pair)
