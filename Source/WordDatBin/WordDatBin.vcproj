@@ -74,7 +74,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib Advapi32.lib"
 				OutputFile=".\Debug/WordDatBin.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -163,7 +163,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib Advapi32.lib"
 				OutputFile=".\Release/WordDatBin.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"

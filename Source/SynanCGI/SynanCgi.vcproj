@@ -78,7 +78,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib ws2_32.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib ws2_32.lib Advapi32.lib  Ole32.lib "
 				OutputFile=".\Release/SynanCGI.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
@@ -166,7 +166,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib ws2_32.lib"
+				AdditionalDependencies="odbc32.lib odbccp32.lib ws2_32.lib Advapi32.lib  Ole32.lib "
 				OutputFile=".\Debug/SynanCGI.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -196,7 +196,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(TargetPath)  E:\inetpub\Scripts"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
