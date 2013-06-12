@@ -3975,7 +3975,7 @@ CONTENT =  ХГ
 GF      = 1  опняр_опедк
 SF      = 1  PART
 VAL     =  PART , A2 , A1
-GF1     = 1  вхяк_п
+GF1     = 1  вхяк
 GF2     = 1  вхяк
 ENG     =  from 1          
 ============
