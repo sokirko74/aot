@@ -369,9 +369,9 @@ bool CLemmatizer::CreateParadigmCollection(bool bNorm, string& InputWordStr, boo
 			int len = strlen(NumeralToNumber[n].m_Ordinal);
 			if(NumeralToNumber[n].m_Ordinal[0]!=0 && InputWordStr.length()>len+1
 				&& (pos = InputWordStr.substr(InputWordStr.length() - len - 1).rfind(string(NumeralToNumber[n].m_Ordinal).substr(0, len - 2))) != string::npos)
-				//InputWordStr.substr(0, strlen(NumeralToNumber[n].m_Ordinal)) == NumeralToNumber[n].m_Ordinal )
 			{
-				CreateParadigmCollection(false, InputWordStr.substr(InputWordStr.length() - len - 1 + pos), capital, false, results1 );
+				string s = InputWordStr.substr(InputWordStr.length() - len - 1 + pos);
+				CreateParadigmCollection(false, s, capital, false, results1 );
 				if ( results1.size()>0 )
 				{
 					Result = results1;
