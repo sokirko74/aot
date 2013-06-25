@@ -55,6 +55,7 @@
 				PrecompiledHeaderFile=".\Debug/AgramtabLib.pch"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
+				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="4"
 				CompileAs="0"
 			/>

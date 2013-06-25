@@ -125,6 +125,7 @@
 				Optimization="0"
 				PreprocessorDefinitions="WIN32,NDEBUG,_LIB"
 				RuntimeLibrary="3"
+				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
 			/>
 			<Tool

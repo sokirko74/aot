@@ -114,10 +114,8 @@ bool LoadFileToString(const char* FileName, std::string& Result)
 
 int main(int argc, char** argv)
 {
-	// ������������� �������
 	setlocale(LC_CTYPE, "russian");
 
-	// ������������ COM
 	::CoInitialize(NULL); 
 
 	//LEMMATIZERLib::ILemmatizerPtr piLemmatizerRu = initLematizerRu();

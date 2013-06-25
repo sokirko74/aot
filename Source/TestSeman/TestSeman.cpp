@@ -98,28 +98,7 @@ string GetWordStrOfNode (CRusSemStructure SS, int ssi, bool bOnlyWords = false)
 	return NodeStr;
 };
 
-char* Decode_DOS_to_Win(char * str)
-{
-#ifdef DOS
-   char *buf = new char[std::strlen(str) + 1];
-   OemToCharA(str, buf);
-   return buf;
-#endif
-    return str;
-}
 
-//из Windows в DOS
-char* Decode_Win_to_DOS(const char * str)
-{
-#ifdef DOS
-   char *buf = new char[std::strlen(str) + 1];
-   CharToOemA(str, buf); 
-   return buf;
-#endif
-
-	return (char *)str;
-}
-char* w2d(string str) {return Decode_Win_to_DOS(str.c_str());}
 
 /*Use in .NET to import dll:
 [DllImport(dll)]
@@ -160,7 +139,6 @@ extern "C" __declspec(dllexport) char* __stdcall FindSituations(char* Source)
 char * FindSituations(const char * Source)
 #endif
 {
-	char  result[100];// = new char[100]();
 	string r;
 	string ResGraph;
 	SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);//DontKillHomonyms CoverageKillHomonyms
@@ -171,9 +149,9 @@ char * FindSituations(const char * Source)
 	printf ("Nodes:\n");
 	for (int i = 0; i < SemBuilder.m_RusStr.m_Nodes.size(); i++)
 	{
-		string Nstr = GetWordStrOfNode(SemBuilder.m_RusStr, i).c_str();
-		printf ("  Node %i %s\n",  i, w2d((Nstr.empty() ? SemBuilder.m_RusStr.GetNodeStr1(i) : Nstr)));
-	}
+		string Nstr = GetWordStrOfNode(SemBuilder.m_RusStr, i);
+        printf ("  Node %i %s\n",  i, (Nstr.empty() ? SemBuilder.m_RusStr.GetNodeStr1(i).c_str() : Nstr.c_str()));
+    }
 	printf ("Relations:\n");
 
 	for (int i = 0; i < SemBuilder. m_RusStr.m_Relations.size(); i++)
@@ -183,9 +161,12 @@ char * FindSituations(const char * Source)
 		long m_SourceNodeNo = !(R.m_Valency.m_Direction == C_A && !R.m_bReverseRel) ? R.m_SourceNodeNo : R.m_TargetNodeNo;
 		//if (!R.m_Valency.m_RelationStr.empty())
 		printf ("  %s (%s, %s) = %s (%i, %i)\n", 
-			w2d(R.m_Valency.m_RelationStr), 
-			w2d(SemBuilder.m_RusStr.GetNodeStr1(m_TargetNodeNo)), w2d(SemBuilder.m_RusStr.GetNodeStr1(m_SourceNodeNo)),
-			w2d(R.m_SyntacticRelation),m_TargetNodeNo,m_SourceNodeNo);
+			R.m_Valency.m_RelationStr.c_str(), 
+			SemBuilder.m_RusStr.GetNodeStr1(m_TargetNodeNo).c_str(), 
+            SemBuilder.m_RusStr.GetNodeStr1(m_SourceNodeNo).c_str(),
+			R.m_SyntacticRelation.c_str(),
+            m_TargetNodeNo,
+            m_SourceNodeNo);
 
 	};
 	if (SemBuilder.m_RusStr.m_DopRelations.size() > 0)
@@ -198,9 +179,12 @@ char * FindSituations(const char * Source)
 			long m_SourceNodeNo = !(R.m_Valency.m_Direction == C_A && !R.m_bReverseRel) ? R.m_SourceNodeNo : R.m_TargetNodeNo;
 			//if (!R.m_Valency.m_RelationStr.empty())
 			printf ("  %s (%s, %s) = %s (%i, %i)\n", 
-				w2d(R.m_Valency.m_RelationStr), 
-				w2d(SemBuilder.m_RusStr.GetNodeStr1(m_TargetNodeNo)), w2d(SemBuilder.m_RusStr.GetNodeStr1(m_SourceNodeNo)),
-				w2d(R.m_SyntacticRelation),m_TargetNodeNo,m_SourceNodeNo);
+				R.m_Valency.m_RelationStr.c_str(), 
+				SemBuilder.m_RusStr.GetNodeStr1(m_TargetNodeNo).c_str(),
+                SemBuilder.m_RusStr.GetNodeStr1(m_SourceNodeNo).c_str(),
+                R.m_SyntacticRelation.c_str(),
+                m_TargetNodeNo,
+                m_SourceNodeNo);
 
 		}
 	}
@@ -208,8 +192,6 @@ char * FindSituations(const char * Source)
 		if (words[i]!="")
 			r += words[i] + " ";
 
-	//printf (w2d(r.c_str()));
-	//printf ("\n");
 	if(log_fp != 0) { fclose(log_fp); log_fp = 0; }
 
 	res[r.size()]=0;
@@ -239,7 +221,7 @@ int main(int argc, char* argv[])
 		LineCount++;
 		fprintf (stderr,  "%i) %s\n", LineCount, buffer);
 		fflush(stderr);
-		Source = Decode_DOS_to_Win(buffer);
+		Source = buffer;
 		int comment = 0;
 		if ((comment = Source.find("//")) > -1) 
 			Source = Source.substr(0, comment);
