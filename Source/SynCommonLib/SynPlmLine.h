@@ -51,6 +51,7 @@ class CSynPlmLine
 
 	// a union of all possible grammems, which is built by m_gramcodes
 	QWORD					m_Grammems; 
+	string				    m_gramcodes;
 
 
 	// all possible part of speeches
@@ -68,7 +69,6 @@ public:
 	QWORD					m_FoundPrepDependCases;
 
 	
-	const char*				m_gramcodes;
 	const char*				m_type_gram_code;
 	
 	
@@ -95,6 +95,7 @@ public:
     void	SetFlag (PlmLineFlagEnum PlmLineFlag);
 	void	SetGrammems (QWORD value);
 	void	SetGramcodes (string value);
+	const char*  GetGramcodes () const;
 	void	SetPoses (size_t value);
 	void	SetMorphByAncodePattern (const CAncodePattern & P);
     const char* get_word() const;

@@ -22,7 +22,7 @@ void CSynPlmLine :: reset ()
     m_pActiveWord = 0;
     m_pActiveHomonym = 0;
 	m_ClauseType = UnknownSyntaxElement;
-    m_gramcodes = 0;
+    m_gramcodes = "";
 	m_Grammems = 0;
     poses = 0;
 	m_Flags = 0;
@@ -54,21 +54,24 @@ void CSynPlmLine :: SetGrammems (QWORD value)
 {
 	m_Grammems = value;
 };
+
 void CSynPlmLine :: SetGramcodes (string str) 
 {
-	char * writable = new char[str.size() + 1];
-	std::copy(str.begin(), str.end(), writable);
-	writable[str.size()] = '\0'; // don't forget the terminating 0
-
-	m_gramcodes =  (const char *)writable;
+	m_gramcodes =  str;
 };
+
+const char* CSynPlmLine :: GetGramcodes () const  
+{
+	return m_gramcodes.c_str();
+};
+
 
 void CSynPlmLine :: SetMorphByAncodePattern (const CAncodePattern & P) 
 {
 	m_Grammems = P.m_iGrammems | P.m_TypeGrammems;
 	//m_TypeGrammems = P.m_TypeGrammems;
 	poses = P.m_iPoses;
-	m_gramcodes = P.m_GramCodes.c_str();
+	m_gramcodes = P.GetGramCodes();
 	m_type_gram_code = P.m_CommonGramCode.c_str();
 };
 

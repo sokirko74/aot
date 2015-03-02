@@ -27,7 +27,7 @@ bool CRusFormatCaller :: format_for_rank_surname (CGroup& G)
 
 	if ( !Wj.has_grammem( rSurName ) && !Wj.has_grammem( rName ) ) return false;
 
-	if ( !GetGramTab()->GleicheCaseNumber(Wi.m_gramcodes, Wj.m_gramcodes) ) return false;
+	if ( !GetGramTab()->GleicheCaseNumber(Wi.GetGramcodes(), Wj.GetGramcodes()) ) return false;
 
 	G.m_iLastWord = get_maximal_group(j).m_iLastWord;
 	G.SetGrammems( Wi.GetGrammems() );
@@ -64,7 +64,7 @@ bool CRusFormatCaller :: format_for_adj_in_commas_preposition(CGroup& G)
 	 if (MaxGrp.m_iFirstWord >0 && sent[MaxGrp.m_iFirstWord-1].HasFlag(fl_comma)) 
 		 vB = true;
 	
-	if ( GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.m_gramcodes, Wj.m_gramcodes) )
+	if ( GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(), Wj.GetGramcodes()) )
 	{
 		G.m_GroupType = NOUN_ADJ;
 		G.m_iLastWord = i;
@@ -90,14 +90,14 @@ bool CRusFormatCaller::format_for_plural_noun_adj(CGroup& G)
 	const CSynPlmLine& Noun = sent[noun_main_word];
 	const CGroup& NounMaxGrp = get_maximal_group(noun_main_word);
 
-	if (!Adj.m_gramcodes || !Noun.m_gramcodes) return false; 
+	if (!Adj.GetGramcodes() || !Noun.GetGramcodes()) return false; 
 
 	bool bCase1 = 
 		(		(AdjMaxGrp.m_GroupType == SIMILAR_ADJS)
 			&&	(Noun.GetGrammems() & _QM(rPlural)) 
 			&&  Noun.is_morph_noun( ) 
 			&&  (NounMaxGrp.size() == 1)
-			&&	GetGramTab()->GleicheCase(Adj.m_gramcodes, Noun.m_gramcodes)
+			&&	GetGramTab()->GleicheCase(Adj.GetGramcodes(), Noun.GetGramcodes())
 		);
 
 	bool bCase2 = 
@@ -108,7 +108,7 @@ bool CRusFormatCaller::format_for_plural_noun_adj(CGroup& G)
 			&&	(Noun.GetGrammems() & _QM(rSingular))
 			&&	AdjMaxGrp.size() == 1
 			&&	is_morph_adj(Adj)
-			&&	GetGramTab()->GleicheCase(Adj.m_gramcodes,Noun.m_gramcodes)
+			&&	GetGramTab()->GleicheCase(Adj.GetGramcodes(),Noun.GetGramcodes())
 		);
 		
 	if (bCase1 || bCase2)
@@ -137,7 +137,7 @@ bool CRusFormatCaller::format_for_noun_adj_postposition(CGroup& G)
 	if (!is_morph_adj(Wj)) return false;
 	if (Wj.m_UnitType != EWord) return false;
 	
-	if (! GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.m_gramcodes, Wj.m_gramcodes) ) return false;
+	if (! GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(), Wj.GetGramcodes()) ) return false;
 
 	G.m_GroupType = NOUN_ADJ_POSTPOSITION;
 	G.m_iLastWord = get_maximal_group(j).m_iLastWord;
@@ -174,15 +174,15 @@ bool CRusFormatCaller::format_for_noun_detached_adj_postposition(CGroup& G)
 	   )
 		return false;
 	bool bGr = false;
-	if (  GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.m_gramcodes,Wj.m_gramcodes) )
+	if (  GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(),Wj.GetGramcodes()) )
 		bGr = true;
 
 	if ((Wi.GetGrammems() & (1 <<rPlural)) && (Wj.GetGrammems() & (1 <<rSingular)))
-		if ( GetGramTab()->GleicheCase(Wi.m_gramcodes, Wj.m_gramcodes))
+		if ( GetGramTab()->GleicheCase(Wi.GetGramcodes(), Wj.GetGramcodes()))
 			bGr = true;
 
 	if ((Wi.GetGrammems() & (1 <<rSingular)) && (Wj.GetGrammems() & (1 <<rPlural)))
-		if (GetGramTab()->GleicheCase(Wi.m_gramcodes, Wj.m_gramcodes))
+		if (GetGramTab()->GleicheCase(Wi.GetGramcodes(), Wj.GetGramcodes()))
 			bGr = true;
 
 	if (bGr == true)

@@ -255,7 +255,7 @@ void CMAPost::Odnobuk()
             CHomonym *pH = W.AddNewHomonym();
             pH->m_strLemma = W.m_strUpperWord;
             pH->SetMorphUnknown();
-            pH->m_GramCodes = m_DURNOVOGramCode;
+            pH->SetGramCodes(m_DURNOVOGramCode);
             pH->InitAncodePattern();
 	    }
 	}
@@ -437,14 +437,14 @@ void CMAPost::Cifrdef()
 				{
 					pNew->m_lPradigmID = Paradigms[0].GetParadigmId();
 					pNew->m_CommonGramCode = Paradigms[0].GetCommonAncode();				
-					pNew->m_GramCodes = Paradigms[0].GetSrcAncode();
+					pNew->SetGramCodes(Paradigms[0].GetSrcAncode());
 					pNew->m_LemSign = '+';
 					W.m_bWord = true;
 					W.m_bPredicted = false;
 				}
 				else
 				{
-					pNew->m_GramCodes = m_DURNOVOGramCode;
+					pNew->SetGramCodes(m_DURNOVOGramCode);
 					pNew->SetMorphUnknown();
 				}
 				pNew->m_strLemma = W.m_strUpperWord;
@@ -516,7 +516,7 @@ void CMAPost::Cifrdef()
 			{
 				CHomonym* pH = W.AddNewHomonym();
 				pH->SetMorphUnknown();
-				pH->m_GramCodes = AnCodes0;
+				pH->SetGramCodes(AnCodes0);
 				pH->m_strLemma = NumWordForm;
 				pH->InitAncodePattern();
 			}
@@ -536,7 +536,7 @@ void CMAPost::Cifrdef()
 				CHomonym* pH = W2.AddNewHomonym();
 				pH->SetMorphUnknown();
 				pH->m_CommonGramCode = "Фа";				
-				pH->m_GramCodes = "ао";
+				pH->SetGramCodes("ао");
 				if ( W2.m_strWord == "%" )
 				{
 					W2.m_strUpperWord = W2.m_strWord = "ПРОЦ";
@@ -570,7 +570,7 @@ void CMAPost::Cifrdef()
 				 {
 					 CHomonym* pH = W.AddNewHomonym(); 
 					 pH->SetMorphUnknown();
-					 pH->m_GramCodes = AnCodes;
+					 pH->SetGramCodes(AnCodes);
 					 pH->m_strLemma = NumWordForm;
 					 pH->InitAncodePattern();
 				 }
@@ -616,7 +616,7 @@ void CMAPost::ParticipleAndVerbInOneForm()
         for (int HomNo=0; HomNo < W.GetHomonymsCount(); HomNo++)
         {
             CHomonym* pH = W.GetHomonym(HomNo);
-            const string& GramCodes = pH->m_GramCodes;
+            const string& GramCodes = pH->GetGramCodes();
             string VerbGramCodes;
             string PartGramCodes;
             if (GramCodes == "??") continue;
@@ -631,13 +631,13 @@ void CMAPost::ParticipleAndVerbInOneForm()
                         VerbGramCodes += gram;
             };
             if (VerbGramCodes.empty() || PartGramCodes.empty()) continue;
-            pH->m_GramCodes = VerbGramCodes;
+            pH->SetGramCodes(  VerbGramCodes );
             pH->InitAncodePattern();
             CHomonym NewHom = *pH;
 
             CHomonym* pNewHom = W.AddNewHomonym();
             *pNewHom = NewHom;
-            pNewHom->m_GramCodes = PartGramCodes;
+            pNewHom->SetGramCodes ( PartGramCodes);
             pNewHom->InitAncodePattern();
         }
     };
@@ -684,7 +684,7 @@ void CMAPost::PronounP_Pronoun_Homonymy()
         for (int i =0; i < next_it->GetHomonymsCount(); i++)
         {
             const CHomonym* pNoun = next_it->GetHomonym(i);
-            bAgreed = bAgreed && m_pRusGramTab->GleicheGenderNumberCase (pNoun->m_CommonGramCode.c_str(), pNoun->m_GramCodes.c_str(), W.GetHomonym(HomNo)->m_GramCodes.c_str());
+            bAgreed = bAgreed && m_pRusGramTab->GleicheGenderNumberCase (pNoun->m_CommonGramCode.c_str(), pNoun->GetGramCodes().c_str(), W.GetHomonym(HomNo)->GetGramCodes().c_str());
         }
         if (bAgreed)
             W.KillHomonymOfPartOfSpeech(PRONOUN);
@@ -819,7 +819,8 @@ void CMAPost::OtherRules()
             CHomonym* pNew = W.AddNewHomonym();
             pNew->SetMorphUnknown();
             pNew->m_strLemma = W.m_strUpperWord;
-			pNew->m_CommonGramCode = "Фа";pNew->m_GramCodes = m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
+			pNew->m_CommonGramCode = "Фа";
+            pNew->SetGramCodes (m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
             pNew->InitAncodePattern();
 			W.AddDes( is_alpha((BYTE)W.m_strWord[0], morphEnglish) ? OLLE : ORLE);
 		}
@@ -962,10 +963,10 @@ void CMAPost::SemiNouns()
             string GramCodes;
             
             bool SingularGenitivFound = false;
-            for (int i=0; i < pH->m_GramCodes.length(); i+=2) 
-                if (pH->m_GramCodes[i]!='?')
+            for (int i=0; i < pH->GetGramCodes().length(); i+=2) 
+                if (pH->GetGramCodes()[i]!='?')
                 {
-                    m_pRusGramTab->GetGrammems((pH->m_GramCodes.c_str() + i), Grammems);
+                    m_pRusGramTab->GetGrammems((pH->GetGramCodes().c_str() + i), Grammems);
                     if (Grammems & _QM(rSingular))
                     {
                         // конвертируем во множественное число
@@ -989,13 +990,13 @@ void CMAPost::SemiNouns()
                         }
                     }
                     else
-                        GramCodes += pH->m_GramCodes.substr(i,2);
+                        GramCodes += pH->GetGramCodes().substr(i,2);
 
                 };
 
             if (!GramCodes.empty() )
             {
-                pH->m_GramCodes = GramCodes;
+                pH->SetGramCodes( GramCodes );
                 pH->InitAncodePattern();
             }
 
@@ -1088,16 +1089,16 @@ void CMAPost::Rule_Ideclinable()
             if ( (pH->m_iGrammems & rAllCases) != rAllCases) continue; 
 		    if ( (pH->m_iGrammems & rAllNumbers) != rAllNumbers) continue;
 
-		    string GramCodes = pH->m_GramCodes;
+		    string GramCodes = pH->GetGramCodes();
 		    // анкод должен быть только один, поскольк это неизменяемое существительное
 		    if (GramCodes.length() != 2) continue;
 		    if (!NounHasObviousPluralContext(it))
 		    {
 			    // отрубаем множественное число
 			    string NewGramCode;
-			    if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (NOUN, pH->m_iGrammems&~_QM(rPlural), NewGramCode))
+			    if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (NOUN, pH->m_iGrammems & ~_QM(rPlural), NewGramCode))
                 {
-                    pH->m_GramCodes = NewGramCode;
+                    pH->SetGramCodes( NewGramCode );
                     pH->InitAncodePattern();
                 }
                 else
@@ -1271,7 +1272,7 @@ void CMAPost::Rule_ILE()
 			pNew->m_CommonGramCode = "Фа";
 			//if ( W.HasDes(OUp) ) 
 			//	pNew->m_CommonGramCode += "аоатац";//m_DURNOVOGramCode;
-			pNew->m_GramCodes = m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
+			pNew->SetGramCodes ( m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
             pNew->InitAncodePattern();
 		}
 	};
@@ -1448,7 +1449,7 @@ void CMAPost::Rule_CHTO_ZA()
             for (int k=0; k<noun_it->GetHomonymsCount(); k++)
             {
                 const CHomonym* pNoun = noun_it->GetHomonym(k);
-                if (m_pRusGramTab->GleicheGenderNumberCase(pNoun->m_CommonGramCode.c_str(), pNoun->m_GramCodes.c_str(), Kakoi[0].GetAncode(j).c_str()))
+                if (m_pRusGramTab->GleicheGenderNumberCase(pNoun->m_CommonGramCode.c_str(), pNoun->GetGramCodes().c_str(), Kakoi[0].GetAncode(j).c_str()))
                 {
                     GramCodes += Kakoi[0].GetAncode(j);
                     WordForm = Kakoi[0].GetWordForm(j);
@@ -1457,7 +1458,7 @@ void CMAPost::Rule_CHTO_ZA()
         W.DeleteAllHomonyms();
         CHomonym* pNew =  W.AddNewHomonym();
         pNew->SetHomonym(&Kakoi[0]);
-        pNew->m_GramCodes = GramCodes;
+        pNew->SetGramCodes (GramCodes);
         RmlMakeLower(WordForm, morphRussian);
         W.SetWordStr(WordForm, morphRussian);
         W.DeleteOborotMarks();
@@ -1609,9 +1610,9 @@ void CMAPost::Rule_Abbreviation()
 			if(W.GetHomonym(HomNo)->HasPos(NOUN) && W.GetHomonym(HomNo)->HasGrammem(rIndeclinable) && !W.GetHomonym(HomNo)->HasGrammem(rInitialism) ) 
 			{
 				CHomonym* pH = W.GetHomonym(HomNo);
-				pH->m_CommonGramCode += pH->m_GramCodes;
-				pH->m_GramCodes = m_pRusGramTab->GleicheAncode1(GenderNumber0, 
-					m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0), pH->m_GramCodes);  //rAllNumbers, AnCodes, _QM(rSingular));
+				pH->m_CommonGramCode += pH->GetGramCodes();
+				pH->SetGramCodes (m_pRusGramTab->GleicheAncode1(GenderNumber0, 
+					m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0), pH->GetGramCodes()));  //rAllNumbers, AnCodes, _QM(rSingular));
 			}
         if (W.HasDes(OUp)) continue;
 
@@ -1626,16 +1627,16 @@ void CMAPost::Rule_Abbreviation()
 					CFormInfo P;
 					string AnCodes;
 					m_pRusLemmatizer->CreateParadigmFromID(pH->m_lPradigmID,  P);
-					pH->m_CommonGramCode += pH->m_GramCodes;
-					AnCodes = pH->m_GramCodes;
-					pH->m_GramCodes = "";
+					pH->m_CommonGramCode += pH->GetGramCodes();
+					AnCodes = pH->GetGramCodes();
+					pH->SetGramCodes( "" );
 					string xx = P.GetAncode(0);
 					for (long k=0; k < P.GetCount(); k++)
-						if( m_pRusGramTab->GleicheAncode1(0, pH->m_CommonGramCode + pH->m_GramCodes, P.GetAncode(k)) == ""
+						if( m_pRusGramTab->GleicheAncode1(0, pH->m_CommonGramCode + pH->GetGramCodes(), P.GetAncode(k)) == ""
 							&& (m_pRusGramTab->GetAllGrammems(P.GetAncode(k).c_str()) & m_pRusGramTab->GetAllGrammems(AnCodes.c_str())) == m_pRusGramTab->GetAllGrammems(P.GetAncode(k).c_str())
 							&& m_pRusGramTab->GetPartOfSpeech(P.GetAncode(k).c_str()) == m_pRusGramTab->GetPartOfSpeech(AnCodes.c_str())
 							)
-							pH->m_GramCodes += P.GetAncode(k);
+							pH->SetGramCodes( pH->GetGramCodes() + P.GetAncode(k) );
 				}
 	};
 };
@@ -1663,7 +1664,9 @@ void CMAPost::Rule_AdverbFromAdjectives()
         CHomonym* pNew = W.AddNewHomonym();
 		pNew->m_strLemma = it->m_strUpperWord;
         pNew->SetMorphUnknown();
-        m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (ADV, 0, pNew->m_GramCodes);
+        string NewGramCode;
+        m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (ADV, 0, NewGramCode);
+        pNew->SetGramCodes( NewGramCode );
         pNew->InitAncodePattern();
     }
 
@@ -1723,7 +1726,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 		string Word = W.m_strWord;
 		m_pRusLemmatizer->CreateParadigmCollection(false, Word, true, true, Paradigms);
 		for (long k=0; k < Paradigms.size(); k++)
-            if (Paradigms[k].GetSrcAncode() == pH->m_GramCodes)
+            if (Paradigms[k].GetSrcAncode() == pH->GetGramCodes())
 			{
 				for (size_t j=0; j<Paradigms[k].GetCount(); j++)
 				{

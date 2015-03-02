@@ -25,7 +25,7 @@ bool CRusFormatCaller::format_for_modif_adj_groups (CGroup& G)
     if( !is_morph_adj(sent[H.m_MainWordNo]) )
             return false;
 
-    if( !GetGramTab()->GleicheGenderNumberCase(sent[H.m_MainWordNo].m_type_gram_code, sent[H.m_MainWordNo].m_gramcodes, Wj.m_gramcodes ) )
+    if( !GetGramTab()->GleicheGenderNumberCase(sent[H.m_MainWordNo].m_type_gram_code, sent[H.m_MainWordNo].GetGramcodes(), Wj.GetGramcodes() ) )
         return false;
 
     G.m_iLastWord = H.m_iLastWord;
@@ -230,7 +230,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 		if ( !bAdjShouldBeInNominativOrGenitiv )
 		{
 			//  проверяем согласование между прилагательным и существительным
-			QWORD CommonGrams = GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.m_gramcodes, sent[MainWordNo].m_gramcodes); 
+			QWORD CommonGrams = GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(), sent[MainWordNo].GetGramcodes()); 
 			if (!CommonGrams)
 				if	(		NounGroupNo != -1 
 						&& GetGroups()[NounGroupNo].m_GroupType == NUMERAL_NOUN
@@ -346,7 +346,7 @@ bool  CRusFormatCaller::format_for_partic_clause(CGroup& G)
 			varMainWrd = j;
 
 
-		if (		GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.m_gramcodes, Wj.m_gramcodes ) 
+		if (		GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(), Wj.GetGramcodes() ) 
 			||		(		sent[MaxGrp.m_iFirstWord].HasFlag(fl_small_number)
 						&&	((Wi.GetGrammems() &  ( (1 << rGenitiv)  | (1 << rPlural))) == ( (1 << rGenitiv)  | 	(1 << rPlural)) )
 					)
@@ -377,7 +377,7 @@ bool  CRusFormatCaller::format_for_partic_clause(CGroup& G)
 
 		 if (m != -1 && GetGroups()[m].m_iLastWord == i-1)
 		   if (GetGroups()[m].m_GroupType == SIMILAR_NOUN_GROUPS)
-			   if (GetGramTab()->GleicheCase(Wi.m_gramcodes,Wj.m_gramcodes))
+			   if (GetGramTab()->GleicheCase(Wi.GetGramcodes(),Wj.GetGramcodes()))
 			{
 				G.m_GroupType = NOUN_PARTICIPLE;
 				G.m_iLastWord = G.m_iFirstWord;
@@ -425,7 +425,7 @@ bool  CRusFormatCaller::format_for_whose_clause(CGroup& G) //правило построения 
 		else
 			varMainWrd = j;
 
-		if ( GetGramTab()->GleicheGenderNumber(Wi.m_gramcodes, Wj.m_gramcodes ) )
+		if ( GetGramTab()->GleicheGenderNumber(Wi.GetGramcodes(), Wj.GetGramcodes() ) )
 		 if (varMainWrd == j || j == i-1)
 		 {
 			G.m_GroupType = WHOSE_SUBORDINATE;
@@ -451,7 +451,7 @@ bool  CRusFormatCaller::format_for_whose_clause(CGroup& G) //правило построения 
 
 		 if (m != -1 && GetGroups()[m].m_iLastWord == i-1)
 		   if (GetGroups()[m].m_GroupType == SIMILAR_NOUN_GROUPS)
-			if (GetGramTab()->GleicheCase(Wi.m_gramcodes, Wj.m_gramcodes) )
+			if (GetGramTab()->GleicheCase(Wi.GetGramcodes(), Wj.GetGramcodes()) )
 			{
 				G.m_GroupType = WHOSE_SUBORDINATE;
 				G.m_iLastWord = G.m_iFirstWord;

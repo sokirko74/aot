@@ -45,7 +45,7 @@ void CRusSentence::SolveAmbiguityUsingRuleForShortAdj()
 					{
 						const CSynHomonym& hom1 = word1.GetSynHomonym(k);
 						if (  hom1.IsSynNoun()  )
-							if( GetRusGramTab()->GleicheSubjectPredicate( hom1.m_GramCodes.c_str(), hom.m_GramCodes.c_str()  ))
+							if( GetRusGramTab()->GleicheSubjectPredicate( hom1.GetGramCodes().c_str(), hom.GetGramCodes().c_str()  ))
 							{
 								bFound = true;
 								break;

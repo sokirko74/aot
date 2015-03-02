@@ -457,7 +457,7 @@ bool CRusSentence::check_verb_subj_coordination(const CMorphVariant& synVariant,
 	const CSynHomonym& SubjHom = m_Words[SubjUnit.m_SentPeriod.m_iFirstWord].m_Homonyms[SubjUnit.m_iHomonymNum];
 
 
-	if(    GetOpt()->GetGramTab()->GleicheSubjectPredicate(SubjHom.m_GramCodes.c_str(), PredUnit.m_GramCodes.c_str() )	
+	if(    GetOpt()->GetGramTab()->GleicheSubjectPredicate(SubjHom.GetGramCodes().c_str(), PredUnit.GetGramCodes().c_str() )	
 		|| gleiche_subj_pred_for_numerals_as_nouns(synVariant, predk, main_word ) 
 	  )
 	{
@@ -531,7 +531,7 @@ bool CRusSentence::check_adj_subj_coordination(const CMorphVariant& synVariant, 
 			return true;
 		} 
 	}else
-		if(		GetOpt()->GetGramTab()->GleicheGenderNumber(SubjHom.m_GramCodes.c_str(), PredHom.m_GramCodes.c_str()) 
+		if(		GetOpt()->GetGramTab()->GleicheGenderNumber(SubjHom.GetGramCodes().c_str(), PredHom.GetGramCodes().c_str()) 
 			|| gleiche_subj_pred_for_numerals_as_nouns(synVariant, predk, main_word ) 
 		  )
 		{

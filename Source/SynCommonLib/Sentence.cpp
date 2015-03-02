@@ -1346,7 +1346,7 @@ bool FindAntecedentForRelativePronoun(CSentence& C, int iClauseNum, int MainClau
 
 			if( C.CanBeRelativeAntecedent(pWord.m_Homonyms[HomonymNo]) )
                 if (!pWord.HasOborot1() && !pWord.HasOborot2())
-				if(     C.GetOpt()->GetGramTab()->GleicheGenderNumber( RelativHomonym.m_GramCodes.c_str(), pWord.m_Homonyms[HomonymNo].m_GramCodes.c_str()) 
+				if(     C.GetOpt()->GetGramTab()->GleicheGenderNumber( RelativHomonym.GetGramCodes().c_str(), pWord.m_Homonyms[HomonymNo].GetGramCodes().c_str()) 
 					|| (		bSimilarGroup
 						 &&		(RelativHomonym.m_iGrammems  & C.GetOpt()->m_PluralMask)
 						)

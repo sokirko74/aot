@@ -338,7 +338,7 @@ string CPlmLine :: GetStr ()  const
 
 	if (m_MorphSign != 0)
 	{
-		Result += m_MorphSign+m_CommonGramCode + " " + m_Lemma + " " + m_GramCodes + " ";
+		Result += m_MorphSign+m_CommonGramCode + " " + m_Lemma + " " + GetGramCodes() + " ";
 		Result +=  m_ParadigmId + " " + m_HomoWeight;
 	};
 

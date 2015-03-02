@@ -302,15 +302,15 @@ void CGerSentence::ParticipleAndVerbInOneForm()
 		for (size_t h=0; h < W.m_Homonyms.size(); h++)
 		{
 			CSynHomonym& H = W.m_Homonyms[h];
-			if (H.m_GramCodes == "??") continue;
+			if (H.GetGramCodes() == "??") continue;
 			if (!H.HasPos(gPA2) || !H.HasPos(gVER)) continue;
 
 			string VerbGramCodes;
 			string PartGramCodes;
 			
-			for (long i=0; i < H.m_GramCodes.length(); i+=2)
+			for (long i=0; i < H.GetGramCodes().length(); i+=2)
 			{
-				string gram = H.m_GramCodes.substr(i, 2);
+				string gram = H.GetGramCodes().substr(i, 2);
 				BYTE POS = GetOpt()->GetGramTab()->GetPartOfSpeech(gram.c_str());
 				if (POS == gPA2)
 					PartGramCodes += gram;
@@ -319,11 +319,11 @@ void CGerSentence::ParticipleAndVerbInOneForm()
 			};
 			assert(!VerbGramCodes.empty() && !PartGramCodes.empty());
 
-			H.m_GramCodes = VerbGramCodes;
+			H.SetGramCodes ( VerbGramCodes);
 			InitHomonymMorphInfo(H);
 
 			CSynHomonym PartHom = H;
-			PartHom.m_GramCodes = PartGramCodes;
+			PartHom.SetGramCodes ( PartGramCodes );
 			InitHomonymMorphInfo(PartHom);
 			W.m_Homonyms.push_back(PartHom);
 

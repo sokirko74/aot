@@ -2,7 +2,7 @@
 #include "GerFormatCaller.h"
 #include "GerWord.h"
 
-	const size_t MaxNPSize = 100;
+const size_t MaxNPSize = 100;
 
 
 inline bool MixedGleiche (QWORD noun, QWORD adj) 
@@ -148,9 +148,9 @@ bool CGerFormatCaller::format_for_det_adj_nomen (CGroup& G)
 		else
 		{
 			if (bMixed)
-				CurrGleiche = GetGramTab()->Gleiche(MixedGleiche, sent[noun].m_gramcodes, Wk.m_gramcodes);
+				CurrGleiche = GetGramTab()->Gleiche(MixedGleiche, sent[noun].GetGramcodes(), Wk.GetGramcodes());
 			else
-				CurrGleiche = GetGramTab()->Gleiche(WeakGleiche, sent[noun].m_gramcodes, Wk.m_gramcodes);
+				CurrGleiche = GetGramTab()->Gleiche(WeakGleiche, sent[noun].GetGramcodes(), Wk.GetGramcodes());
 
 			if (!CurrGleiche)
 				return false;
@@ -248,7 +248,7 @@ bool CGerFormatCaller::format_for_adj_nomen (CGroup& G)
 	// since all adjective's flexia are equal we can get group grammems from the first adjective 
 	// and from the noun
 	if (FirstAdjWordNo != -1)
-		G.SetGrammems( GetGramTab()->Gleiche(SoloGleiche, sent[noun].m_gramcodes, sent[FirstAdjWordNo].m_gramcodes) );
+		G.SetGrammems( GetGramTab()->Gleiche(SoloGleiche, sent[noun].GetGramcodes(), sent[FirstAdjWordNo].GetGramcodes()) );
 	else
 	{
 		// "zwei Gefechte"

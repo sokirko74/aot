@@ -13,13 +13,13 @@ bool CRusSentence::CheckCoordinationOfNounAndParticiple(const CSynHomonym& Parti
 	const CSynHomonym& Noun  = m_Words[NounWordNo].GetSynHomonym(NounHomonymNo);
 	
 	// мальчик, ушедший домой, пришел
-	if(	 GetRusGramTab()->GleicheGenderNumberCase(Noun.m_CommonGramCode.c_str(), Noun.m_GramCodes.c_str(), Participle.m_GramCodes.c_str()) )
+	if(	 GetRusGramTab()->GleicheGenderNumberCase(Noun.m_CommonGramCode.c_str(), Noun.GetGramCodes().c_str(), Participle.GetGramCodes().c_str()) )
 		return true;
 
 	// мальчик и девочка, ушедшие домой, пришли
 	CSVI Dummy;
 	if (	(pClause->IsInThisGroup(NounWordNo, SIMILAR_NOUN_GROUPS, Dummy) != NULL)
-		&&  GetRusGramTab()->GleicheCase(Participle.m_GramCodes.c_str(), Noun.m_GramCodes.c_str())
+		&&  GetRusGramTab()->GleicheCase(Participle.GetGramCodes().c_str(), Noun.GetGramCodes().c_str())
 	   )
 	   return true;
 

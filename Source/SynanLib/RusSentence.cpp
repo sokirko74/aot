@@ -296,7 +296,7 @@ void CreateHomonymFor_NECHEGO(CSynHomonym& H, long plPardigmID, string psAncode,
  		Result = Agramtab->GetGramCodeByGrammemsAndPartofSpeechIfCan(iPos, iGrm, n_code);
 		assert (Result);
 
-		H.m_GramCodes += n_code; 
+		H.SetGramCodes( H.GetGramCodes() +   n_code); 
 	}
 	
 	
@@ -340,7 +340,7 @@ void CreateHomonymFor_EksVice(CSynHomonym& H,long plPardigmID, string psAncode, 
 {
 	const CAgramtab* Agramtab = H.GetOpt()->GetGramTab();
 	H.m_lPradigmID = plPardigmID;
-	H.m_GramCodes = psAncode;
+	H.SetGramCodes ( psAncode );
 	H.m_lFreqHom = 1;
 	H.SetLemma(sLem);
 	H.m_iCmpnLen = sLem.length();

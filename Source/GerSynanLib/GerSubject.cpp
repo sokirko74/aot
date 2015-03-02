@@ -62,7 +62,7 @@ int CGerSentence::get_weight_of_subj_pred_relation(const CMorphVariant& synVaria
 			||	(synVariant.m_vectorGroups.GetGroups()[GroupNo].m_GroupType != GetOpt()->m_SimilarNPGroupType)
 		)
 	{
-		if (!GetOpt()->GetGramTab()->GleicheSubjectPredicate(SubjUnit.m_GramCodes.c_str(), PredUnit.m_GramCodes.c_str()))
+		if (!GetOpt()->GetGramTab()->GleicheSubjectPredicate(SubjUnit.GetGramCodes().c_str(), PredUnit.GetGramCodes().c_str()))
 			return 0;
 	}
 	else

@@ -119,7 +119,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 					assert( SynVarUnit.m_iHomonymNum < GetWords()[iWordNum].GetHomonymsCount() );
 					GetWords()[iWordNum].InitializePlmLine(plmWord, SynVarUnit.m_iHomonymNum);
 					plmWord.SetGrammems(SynVarUnit.m_iGrammems);
-					plmWord.m_gramcodes =  SynVarUnit.m_GramCodes.c_str();
+					plmWord.SetGramcodes ( SynVarUnit.GetGramCodes() );
 					iWordNum++;
 				}
 				else
@@ -160,7 +160,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 				if( FormatCaller.sent[i].m_UnitType == EClause )
 					continue;
 				assert(i <  synVariant.GetUnitsCount());
-				FormatCaller.SetGrammems(i,  synVariant.m_SynUnits[i].m_iGrammems, synVariant.m_SynUnits[i].m_GramCodes.c_str());
+				FormatCaller.SetGrammems(i,  synVariant.m_SynUnits[i].m_iGrammems, synVariant.m_SynUnits[i].GetGramCodes().c_str());
 			}
 
 			vector<SFoundTermin> m_vTermins;

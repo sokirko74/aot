@@ -108,7 +108,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 		  };
 	};
 
-	if( (H.m_strLemma=="ндхм") &&  H.m_GramCodes[0] == 'Щ'/*(m_iPoses & (1 << NUMERAL))*/)
+	if( (H.m_strLemma=="ндхм") &&  H.GetGramCodes()[0] == 'Щ'/*(m_iPoses & (1 << NUMERAL))*/)
 		H.m_bRussianOdin = true;
 }
 

@@ -11,13 +11,13 @@
 
 bool check_number_noun_coordination(const QWORD& number_grammems, const CSynPlmLine& Noun, const CAgramtab* piRusGramTab )
 {
-	if (!Noun.m_gramcodes) return false;
+	if (!Noun.GetGramcodes()) return false;
 	if (!(Noun.GetGrammems() & (1<<rPlural))) return false;
 
-	for(int i = 0 ; i < strlen(Noun.m_gramcodes) ; i += 2 )
+	for(int i = 0 ; i < strlen(Noun.GetGramcodes()) ; i += 2 )
 	{
 		QWORD gram;
-		piRusGramTab->GetGrammems(Noun.m_gramcodes+i, gram);
+		piRusGramTab->GetGrammems(Noun.GetGramcodes()+i, gram);
 		if (gram & (1<<rPlural))
 		{
 			if (number_grammems & ( (1<<rNominativ) |  (1<<rAccusativ)) ) //"пять мальчиков", "пять мальчиков"
@@ -110,7 +110,7 @@ bool CRusFormatCaller::format_for_numbers (CGroup& G)
 	G.m_MainGroup = MainGroup;
 	G.SetGrammems( MainGroup.GetGrammems() );
 	string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
-	G.m_GramCodes = string(sent[G.m_iFirstWord].m_gramcodes);
+	G.m_GramCodes = string(sent[G.m_iFirstWord].GetGramcodes());
 		
 	for (i = G.m_iFirstWord; i < G.m_iLastWord; i++)
 		create_syn_rel (G, i+1,i, NUMERALS);
@@ -216,7 +216,7 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 	change_words_in_group_gramcodes(get_maximal_group(k), "аа", CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
 	if(!strcmp(Wk.get_word(), "№") &&  is_numeral(sent[k+1])) //я вышел из дома №26
 	{
-		Wk.m_gramcodes = "аа";
+		Wk.SetGramcodes( "аа" );
 		change_words_in_group_gramcodes(get_maximal_group(k+1), "аа", CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
 	}
 	G.m_MainGroup = MainGroup;
@@ -230,11 +230,11 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 size_t get_number_with_this_case(const CSynPlmLine& L,rGrammems Case, const CAgramtab* piRusGramTab )
 {
 	unsigned int ret_gram = 0;
-	if (!L.m_gramcodes) return 0;
-	for(int i = 0 ; i < strlen(L.m_gramcodes) ; i += 2 )
+	if (!L.GetGramcodes()) return 0;
+	for(int i = 0 ; i < strlen(L.GetGramcodes()) ; i += 2 )
 	{
 		QWORD gram;
-		piRusGramTab->GetGrammems(L.m_gramcodes+i, gram);
+		piRusGramTab->GetGrammems(L.GetGramcodes()+i, gram);
 		if( gram & _QM(Case))
 		{
 			if( gram & _QM(rPlural))
@@ -494,10 +494,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 		const CRusGramTab *R = (CRusGramTab*)GetGramTab();
 		CGroup& Gi = ((CGroup&)get_maximal_group(i_number));
 		bool has_point = !small_number && FindFloatingPoint(sent[Gi.m_iLastWord].get_word()) != -1 && Gi.m_GroupType != NUMERALS; //float point кроме КОЛИЧ
-		string new_grc = R->UniqueGramCodes(R->FilterGramCodes(string(sent[i_first_noun].m_gramcodes), 
+		string new_grc = R->UniqueGramCodes(R->FilterGramCodes(string(sent[i_first_noun].GetGramcodes()), 
 			small_number ? ~rAllCases | _QM(rGenitiv) : 0, has_point ? ~(rAllCases|rAllNumbers) | _QM(rGenitiv)  | _QM(rSingular) : //для small_number rGenitiv во всех числах
 			~(rAllCases|rAllNumbers) | rAllCases & ~_QM(rNominativ) & ~_QM(rAccusativ)  | _QM(rPlural)));
-		string new_grc2 = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].m_gramcodes, 
+		string new_grc2 = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(), 
 			(R->GetGramCodes(NOUN, has_point ?  _QM(rGenitiv)  | _QM(rSingular) :
 			rAllCases & ~_QM(rNominativ) & ~_QM(rAccusativ)  | _QM(rPlural), CaseNumber)).c_str())); 
 		if(new_grc=="" || ((noun_grammems & rAllNumbers) == _QM(rSingular) && sent[i_noun].is_month()))
@@ -513,7 +513,7 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 			noun_pair = "абабабабабабгбгбгбгбгбгбебебебебебеб"; //С мр..ср рд,мн("1.4 метра");рд,мн;..;ср,рд,мн
 		R->GleicheAncode1(CaseNumberGender0, noun_pair, new_grc, num_grc);
 		num_grc = R->UniqueGramCodes(R->GleicheAncode1(sent[i_number].HasPOS(NOUN)? CaseNumber0 : CaseNumberGender0, num_grc.c_str(), 
-			R->UniqueGramCodes(sent[i_number].HasPOS(NOUN)? Gi.m_GramCodes : sent[i_number].m_gramcodes)));
+			R->UniqueGramCodes(sent[i_number].HasPOS(NOUN)? Gi.m_GramCodes : sent[i_number].GetGramcodes())));
 		if(num_grc=="")
 			return false;
 		if(num_grc.length()==4)//small_number
@@ -836,7 +836,7 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 		return false;
 
 	const CRusGramTab *R = (CRusGramTab*)GetGramTab();
-	string new_grc = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].m_gramcodes, 
+	string new_grc = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(), 
 		(R->GetGramCodes(NOUN, rAllCases | _QM(rSingular), CaseNumber)).c_str())); 
 	if(new_grc=="" || sent[i_number].HasFlag(fl_digit) && sent[i_noun].is_month()) 
 		return false;
@@ -846,7 +846,7 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 		string num_grc = R->GetGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender); //"эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэчасЙш"; //ЧИСЛ мр..ср им("один");рд;..пр
 		string noun_pair =  "ааабавагадаегагбгвгггдгееаебевегедее"; //С мр..ср им,ед("дом");рд,ед;..;пр,ед
 		R->GleicheAncode1(CaseNumberGender0, noun_pair.c_str(), new_grc.c_str(), num_grc);
-		num_grc = R->UniqueGramCodes(R->GleicheAncode1(CaseNumberGender0, num_grc.c_str(), R->UniqueGramCodes(sent[i_number].m_gramcodes)));
+		num_grc = R->UniqueGramCodes(R->GleicheAncode1(CaseNumberGender0, num_grc.c_str(), R->UniqueGramCodes(sent[i_number].GetGramcodes())));
 		if(num_grc=="")
 			return false;
 
@@ -859,7 +859,7 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 		G.m_OtherGroup = get_maximal_group(i_number);
 	}
 	else
-		if( !GetGramTab()->GleicheGenderNumberCase(sent[i_noun].m_type_gram_code,sent[i_noun].m_gramcodes, sent[i_number].m_gramcodes ) )
+		if( !GetGramTab()->GleicheGenderNumberCase(sent[i_noun].m_type_gram_code,sent[i_noun].GetGramcodes(), sent[i_number].GetGramcodes() ) )
 		{
 			G.SetGrammems(  sent[i_noun].GetGrammems() & sent[i_number].GetGrammems() );
 			change_words_in_group_grammems(G, G.GetGrammems(), (rAllNumbers | rAllCases));
