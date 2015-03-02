@@ -1,9 +1,6 @@
 #include "SimpleGrammarLib.h"
 #include "GrammarItem.h"
 
-extern string CurrentSourceFileName;
-
-
 //==========================================
 void	CMorphPattern::CopyFrom(const CMorphPattern& P)
 {
@@ -246,7 +243,7 @@ string CGrammarItem::GetDumpString() const
 };
 
 
-bool	CGrammarItem::AddAttribute(string Name, string Value, MorphLanguageEnum Language, string& ErrorStr)
+bool	CGrammarItem::AddAttribute(string Name, string Value, MorphLanguageEnum Language, string& ErrorStr, const string& SourceFileName)
 {
     if (Value.length() > 0) 
 	    if (Value[0] == '"')
@@ -353,7 +350,7 @@ bool	CGrammarItem::AddAttribute(string Name, string Value, MorphLanguageEnum Lan
 
 	if (Name == "filename")
 	{
-		Value = GetPathByFile(CurrentSourceFileName) + Value;
+		Value = GetPathByFile(SourceFileName) + Value;
 		if (m_TokenType == OTHER_TOKEN_TYPE)
 				m_TokenType = (Language == morphRussian) ? RLE : LLE;
 	}

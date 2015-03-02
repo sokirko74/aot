@@ -40,7 +40,6 @@ include_direc "#include"
 %x OUT_OF_RULE
 
 %%
-	extern int CurrentSourceLineNo;
 
 "\""	BEGIN(ATTRIB_VALUE_COND);
 <ATTRIB_VALUE_COND>[^"]* return CHUNK_ATTRIB_VALUE;
@@ -68,7 +67,7 @@ include_direc "#include"
 {comments}	/* skip blanks and tabs */;
 {ws}    /* skip blanks and tabs */;
 \n  {
-		CurrentSourceLineNo++;
+		m_CurrentSourceLineNo++;
 	};
 .			return ((int)YYText()[0]);
 

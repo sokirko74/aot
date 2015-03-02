@@ -7,8 +7,8 @@
 #define YYDEBUG 1
 
 #ifndef chunk_query_l
-	#include "MyFlexLexer.h"
-	//#include <C:/cygwin/usr/include/FlexLexer.h>
+	//#include "MyFlexLexer.h"
+	#include <C:/cygwin/usr/include/FlexLexer.h>
 #endif
 
 
@@ -24,7 +24,9 @@ public:
 	CChunkGrammar			m_ChunkGrammar;	
 	const CAgramtab*		m_pGramTab;
 	int						m_line_num;
-	
+	int                     m_CurrentSourceLineNo;
+    string                  m_CurrentSourceFileName;
+
 	void	CleanParser();
 	int yylex (void* valp);
 protected:
@@ -35,7 +37,7 @@ public:
 
 	CChunkParser();
 	bool	ParseGrammar(const char* src);
-	bool	ParseGrammarInFile(string FileName);
+	bool	ParseGrammarInFile(string FileName, string RefererFile="");
 	virtual ~CChunkParser();
 	void yyerror(const char *a);
 };

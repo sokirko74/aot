@@ -180,7 +180,7 @@ bool CWorkGrammar::LoadOptions()
 	FILE* fp = fopen(FileName.c_str(), "r");
 	if (!fp)
 	{
-		ErrorMessage( Format("cannot open file %s\n",FileName.c_str()));
+		ErrorMessage( Format("CWorkGrammar::LoadOptions cannot open file %s\n",FileName.c_str()));
 		return false;
 	};
 
@@ -266,7 +266,7 @@ bool CWorkGrammar::CreateTokenList(string& ErrorStr)
 
 			if (!fp) 
 			{
-				ErrorMessage(Format("cannot open %s\n",FileName.c_str()));
+				ErrorMessage(Format("CWorkGrammar::CreateTokenList cannot open %s\n",FileName.c_str()));
 				//fclose(tokens);
 				return false;
 			};
