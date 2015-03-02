@@ -1,1 +1,2 @@
-Mutter	+ MUTTER SUB  nom,sin,fem;gen,sin,fem;dat,sin,fem;akk,sin,fem MUTTER,MUTTER,MUTTER,MUTTER,MÜTTER,MÜTTER,MÜTTERN,MÜTTER
+sortMutter	+ MUTTER SUB  nom,sin,fem;gen,sin,fem;dat,sin,fem;akk,sin,fem MUTTER,MUTTER,MUTTER,MUTTER,MÜTTER,MÜTTER,MÜTTERN,MÜTTER
+
