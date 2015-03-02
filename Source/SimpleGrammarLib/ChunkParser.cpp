@@ -11,20 +11,15 @@
 
 extern int yydebug;
 
-int yyparse (void *);
+int yyparse (CChunkParser*);
 
-int yylex (void* valp, void* _p)
+int yylex (void* valp, CChunkParser* _prs)
 {
-	CChunkParser* _prs =  (CChunkParser*)_p;
-
 	return _prs->yylex(valp);
 };
 
 
-int CurrentSourceLineNo;
-string CurrentSourceFileName;
-
-void yyerror(const char *a)
+void yyerror(CChunkParser* _prs, const char *a)
 {
 	string error;
 	if (a && strlen(a))
@@ -32,7 +27,7 @@ void yyerror(const char *a)
 	else
 		error = "error";
 
-	fprintf(stderr, "%s at line %i in file %s\n",error.c_str(), CurrentSourceLineNo, CurrentSourceFileName.c_str());
+	fprintf(stderr, "%s at line %i in file %s\n", error.c_str(), _prs->m_CurrentSourceLineNo, _prs->m_CurrentSourceFileName.c_str());
 
 };
 
@@ -52,14 +47,14 @@ bool CChunkParser::ParseGrammar(const char* src)
 {
 	//yydebug  = 1;
 	//yy_flex_debug = 1;
-	CurrentSourceLineNo = 1;
+	m_CurrentSourceLineNo = 1;
 	if (src == NULL) return false;
 
 	string  Query = src;
 	istringstream 			QueryStream (Query.c_str());
 	switch_streams((istream*)(&QueryStream), 0);
 	int m_line_num = 1;
-	if (yyparse((void*)this) != 0)
+	if (yyparse(this) != 0)
 	{
 		CleanParser();
 
@@ -69,32 +64,26 @@ bool CChunkParser::ParseGrammar(const char* src)
 	return true;
 
 }
-bool CChunkParser::ParseGrammarInFile(string FileName)
+bool CChunkParser::ParseGrammarInFile(string FileName, string RefererFile)
 {	
 	string Grammar;
 	if (!LoadFileToString(FileName, Grammar))
 	{
 		bool bResult = false;
-		if (!CurrentSourceFileName.empty())
+		if (!RefererFile.empty())
 		{
-			FileName = GetPathByFile(CurrentSourceFileName) + FileName;
+			FileName = GetPathByFile(RefererFile) + FileName;
 			bResult = LoadFileToString(FileName, Grammar);
 		};
 		if (!bResult)
 		{
-			fprintf(stderr, "cannot open %s\n", FileName.c_str());
+			fprintf(stderr, "CChunkParser::ParseGrammarInFile cannot open %s\n", FileName.c_str());
 			return false;
 		};
 	}
-	string SaveName = CurrentSourceFileName;
-	int SaveNumLine = CurrentSourceLineNo;
-
-	CurrentSourceFileName = FileName;
-	fprintf (stderr, "Loading %s\n", CurrentSourceFileName.c_str());
+	m_CurrentSourceFileName = FileName;
+	fprintf (stderr, "Loading %s\n", m_CurrentSourceFileName.c_str());
 	bool bResult = ParseGrammar(Grammar.c_str());
-
-	CurrentSourceFileName = SaveName;
-	CurrentSourceLineNo = SaveNumLine;
 
 	return bResult;
 };	

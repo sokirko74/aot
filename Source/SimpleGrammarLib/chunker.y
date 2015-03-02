@@ -7,20 +7,22 @@
 
 
 #define YYERROR_VERBOSE
-#define YYPARSE_PARAM _parser
+//#define YYPARSE_PARAM _parser
 #define YYLEX_PARAM _parser
-#define _prs ((CChunkParser*) _parser)
+//#define _prs ((CChunkParser*) _parser)
 
 
-void yyerror (const char *error);
-int yylex (void*,  void*);
-extern int CurrentSourceLineNo;
-extern string CurrentSourceFileName;
+void yyerror (CChunkParser* _prs, const char *error);
+//int yylex (void*,  void*);
+int yylex (void* valp, CChunkParser* _prs);
+
 
 
 
 %} 
-%pure-parser
+%define api.pure
+%parse-param { CChunkParser*  _prs }
+%lex-param { CChunkParser*  _prs }
 %debug
 %union 
 {
@@ -97,7 +99,7 @@ chunker : chunk_rule CHUNK_RULE_DELIM
 			CChunkGrammar* pObj = $1;
 			assert (pObj == &_prs->m_ChunkGrammar);
 			CChunkParser P;
-			if (!P.ParseGrammarInFile(*$3))
+			if (!P.ParseGrammarInFile(*$3, _prs->m_CurrentSourceFileName))
 				YYABORT;
 			pObj->AddRules(P.m_ChunkGrammar);		
 			P.m_ChunkGrammar.m_Rules.clear(); // prevent destructor for rules
@@ -107,7 +109,7 @@ chunker : chunk_rule CHUNK_RULE_DELIM
 		{
 			CChunkGrammar* pObj = &_prs->m_ChunkGrammar;
 			CChunkParser P;
-			if (!P.ParseGrammarInFile(*$2))
+			if (!P.ParseGrammarInFile(*$2, _prs->m_CurrentSourceFileName))
 				YYABORT;
 			pObj->AddRules(P.m_ChunkGrammar);		
 			P.m_ChunkGrammar.m_Rules.clear(); // prevent destructor for rules
@@ -125,9 +127,9 @@ chunk_rule : chunk_descr CHUNK_RULE_PART_DELIM  seq_descr
 		{
 			CChunkRule* pObj = $3;
 			pObj->SetLeftHandNode($1);
-			pObj->m_SourceLineNo = CurrentSourceLineNo;
+			pObj->m_SourceLineNo = _prs->m_CurrentSourceLineNo;
 			
-			pObj->m_SourceFileName = CurrentSourceFileName;
+			pObj->m_SourceFileName = _prs->m_CurrentSourceFileName;
 			$$ = pObj;
 		};
 
@@ -201,13 +203,13 @@ attributes :	attribute
 					if (!pObj) 
 						YYABORT;
 					pObj->m_Items.push_back( $1 );	
-					$$ = pObj
+					$$ = pObj;
 				}
 			|	attributes attribute
 				{
 					CNodeAttributes* pObj = $1;
 					pObj->m_Items.push_back( $2 );	
-					$$ = pObj
+					$$ = pObj ;
 				};
 		
 
@@ -215,20 +217,20 @@ attribute :		CHUNK_ATTR
 				{
 					if ( (*$1 != "root") && (*$1 != "atomic"))
 					{
-						yyerror("Bad single attribute name");
+						yyerror(_prs, "Bad single attribute name");
 						YYABORT;
 					};
 					CNodeAttribute* pObj = new CNodeAttribute(*$1, "");
 					if (!pObj) 
 						YYABORT;
-					$$ = pObj
+					$$ = pObj;
 				}
 			|	CHUNK_ATTR  CHUNK_ATTR_EQU_CHAR CHUNK_ATTRIB_VALUE
 				{
 					CNodeAttribute* pObj = new CNodeAttribute(*$1, *$3);
 					if (!pObj) 
 						YYABORT;
-					$$ = pObj
+					$$ = pObj;
 				};
 				
 	feature_bundle :  CHUNK_ATTR_VARIABLE CHUNK_ATTR_ASSIGNMENT CHUNK_NAME func_expr
@@ -239,7 +241,7 @@ attribute :		CHUNK_ATTR
 					string ErrorStr = pFeat->InitAssignement(*$1, *$3);
 					if (!ErrorStr.empty())
 					{
-						yyerror(ErrorStr.c_str());
+						yyerror(_prs, ErrorStr.c_str());
 						YYABORT;
 					};
 					$$ = pFeat;
@@ -252,7 +254,7 @@ attribute :		CHUNK_ATTR
 					string ErrorStr = pFeat->InitCheck(*$1);
 					if (!ErrorStr.empty())
 					{
-						yyerror(ErrorStr.c_str());
+						yyerror(_prs, ErrorStr.c_str());
 						YYABORT;
 					};
 					$$ = pFeat;
@@ -265,7 +267,7 @@ attribute :		CHUNK_ATTR
 					string ErrorStr = pFeat->InitAssignement(*$1, *$3);
 					if (!ErrorStr.empty())
 					{
-						yyerror(ErrorStr.c_str());
+						yyerror(_prs, ErrorStr.c_str());
 						YYABORT;
 					};
 					$$ = pFeat;
@@ -284,7 +286,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				if (!pObj->AddFeatureArgument(*$1))
 				{
 					string ErrorStr = string("Bad item id:") + *$1;
-					yyerror(ErrorStr.c_str());
+					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};
 				$$ = pObj;
@@ -295,7 +297,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				if (!pObj->AddFeatureArgument(*$3))
 				{
 					string ErrorStr = string("Bad item id:") + *$3;
-					yyerror(ErrorStr.c_str());
+					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};
 				$$ = pObj;
@@ -306,7 +308,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				if (!pObj->AddFeatureValue(_prs->m_pGramTab, *$1))
 				{
 					string ErrorStr = string("Bad argument:") + *$1;
-					yyerror(ErrorStr.c_str());
+					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};
 				$$ = pObj;
@@ -317,7 +319,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				if (!pObj->AddFeatureValue(_prs->m_pGramTab, *$3))
 				{
 					string ErrorStr = string("Bad argument :") + *$3;
-					yyerror(ErrorStr.c_str());
+					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};
 				$$ = pObj;

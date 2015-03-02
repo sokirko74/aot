@@ -5,10 +5,9 @@
 #include "SimpleGrammarLib.h"
 #include "SimpleGrammar.h"
 #include "ChunkParser.h"
-extern string CurrentSourceFileName;
 
 
-bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLanguageEnum Language, CGrammarItem& I, string& ErrorStr )
+bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLanguageEnum Language, CGrammarItem& I, string& ErrorStr, const string& SourceFileName )
 {
 	I.InitGrammarItem();
 	I.m_bMeta = (pNode->m_AtomicName != "TOKEN");
@@ -20,7 +19,7 @@ bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLa
 		for (list<CNodeAttribute*>::const_iterator it = pNode->m_pAttributes->m_Items.begin(); it != pNode->m_pAttributes->m_Items.end(); it++)
 		{
 			const CNodeAttribute* A = (*it);
-			if (!I.AddAttribute(A->m_Name,A->m_Value, Language, ErrorStr))
+			if (!I.AddAttribute(A->m_Name,A->m_Value, Language, ErrorStr, SourceFileName))
 			{
 				return false;
 			};
@@ -160,7 +159,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 
 
 
-bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGrammar, CWorkRule& NewRule, string& ErrorStr )
+bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGrammar, CWorkRule& NewRule, string& ErrorStr, const string& SourceFileName )
 {
 	const vector<CChunkNode*>& V = pNode->GetChildren();	
 
@@ -169,13 +168,13 @@ bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGr
 		const CChunkNode* P = V[i];
 		if (P->m_AtomicName.empty())
 		{
-			if (!GetRightPartRecursive((const CChunkSequenceNode*)P, WorkGrammar, NewRule, ErrorStr ))
+			if (!GetRightPartRecursive((const CChunkSequenceNode*)P, WorkGrammar, NewRule, ErrorStr, SourceFileName ))
 				return false;
 		}
 		else
 		{
 			CGrammarItem I;
-			if (!BuildGrammarItem(P, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr))
+			if (!BuildGrammarItem(P, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, SourceFileName))
 				return false;
 
 			if (!AttributesToFeatures(	WorkGrammar, 
@@ -214,9 +213,8 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 		const CChunkRule* Rule = *it;
 		CGrammarItem I;
 		string ErrorStr;
-		CurrentSourceFileName = Rule->m_SourceFileName;
 		
-		if (!BuildGrammarItem(Rule->m_pLeftHand, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr))
+		if (!BuildGrammarItem(Rule->m_pLeftHand, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, Rule->m_SourceFileName))
 		{
 			fprintf (stderr, "%s at line %i in file %s\n", ErrorStr.c_str(), Rule->m_SourceLineNo, Rule->m_SourceFileName.c_str());
 			return false;
@@ -231,7 +229,7 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 			WorkRule.m_RuleId = RuleId;
 			WorkRule.m_RightPart.m_SynMainItemNo = 0xffffffff;
 			WorkRule.m_RuleFeaturesNo = WorkGrammar.m_RuleFeatures.size() - 1;
-			if (!GetRightPartRecursive(*it1, WorkGrammar, WorkRule, ErrorStr))
+			if (!GetRightPartRecursive(*it1, WorkGrammar, WorkRule, ErrorStr, Rule->m_SourceFileName))
 			{
 				fprintf (stderr, "%s at line %i in file %s\n", ErrorStr.c_str(), Rule->m_SourceLineNo, Rule->m_SourceFileName.c_str());
 				return false;
@@ -257,7 +255,7 @@ bool BuildWorkGrammar(CWorkGrammar& WorkGrammar, bool bPrintRules)
 	fprintf (stderr, "reading from the source file %s\n",WorkGrammar.m_SourceGrammarFile.c_str());
 	CChunkParser Parser;
 	Parser.m_pGramTab = WorkGrammar.m_pGramTab;
-	bool bResult = Parser.ParseGrammarInFile(WorkGrammar.m_SourceGrammarFile);
+	bool bResult = Parser.ParseGrammarInFile(WorkGrammar.m_SourceGrammarFile, "");
 	if (!bResult)
 	{
 		fprintf(stderr, "cannot parse %s\n", WorkGrammar.m_SourceGrammarFile.c_str());
