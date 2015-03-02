@@ -22,6 +22,7 @@
 
 bool				bPrintIds = true;;
 bool				bPrintForms = false;
+bool                bSortParadigms = false;
 MorphLanguageEnum	Language;
 CLemmatizer*		pLemmatizer;
 CAgramtab*			pAgramtab;
@@ -41,7 +42,6 @@ string GetGrammems (const char* tab_str)
 std::string  GetMorphInfo (std::string  Form)
 {
 	
-	std::string  Result;
 
 	bool bCapital   = is_upper_alpha((BYTE)Form[0], Language);
 
@@ -49,10 +49,10 @@ std::string  GetMorphInfo (std::string  Form)
 
 	pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
 
+	std::vector< std::string>  Results;
 	for (int i=0; i < Paradigms.size(); i++)
 	{
-        if (i > 0) 
-            Result += "\t";
+        std::string Result;
 		const CFormInfo& F = Paradigms[i];
 		Result += F.m_bFound ? "+ " : "- ";
 
@@ -89,9 +89,19 @@ std::string  GetMorphInfo (std::string  Form)
                     Result += ",";
 			    Result += Paradigms[i].GetWordForm(k);
 		    };
-        }
+        };
+        Results.push_back(Result);
    	};
 
+    if (bSortParadigms) {
+        std::sort( Results.begin(), Results.end() );
+    };
+    std::string Result;
+	for (int i=0; i < Results.size(); i++) {
+        if (i > 0) 
+            Result += "\t";
+        Result  +=  Results[i] + "\n";
+    }
 	return Result;
 };
 
@@ -218,6 +228,10 @@ int main(int argc, char **argv)
 		else if (s == "-noids")
 		{
 			bPrintIds  = false;
+		}
+		else if (s == "-sort")
+		{
+			bSortParadigms  = true;
 		}
 		else if (s == "-forms")
 		{
