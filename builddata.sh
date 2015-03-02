@@ -1,5 +1,7 @@
 #!/bin/sh
 source setrml.sh
+set -o errexit
+set -o pipefail
 
 cd $RML
 
@@ -16,14 +18,18 @@ for f in Comp Fin Omni Loc ; do
   run Bin/StructDictLoader FromTxt Thes/$f/Ross/ross.txt  Thes/$f/Ross
 done;
 
+
+run Bin/SimpleGrammarPrecompiled German Source/SimpleGrammarPrecompiled/tests/test.grm 2>test_glr.log
+run cmp test_glr.log Source/SimpleGrammarPrecompiled/tests/tests.log
+
 MORPHOLOGY_LANGUAGES="Rus Ger Eng"
 for language in $MORPHOLOGY_LANGUAGES
 do
   run Bin/MorphGen Dicts/SrcMorph/$language.mwz Dicts/Morph/$language 5 3
 done
-run Bin/TestLem -echo -noids -forms Russian <Test/Morph/Rus/test.txt | cmp - Test/Morph/Rus/result.txt
-run Bin/TestLem -echo -noids -forms German <Test/Morph/Ger/test.txt  | cmp - Test/Morph/Ger/result.txt
-run Bin/TestLem -echo -noids -forms English <Test/Morph/Eng/test.txt | cmp - Test/Morph/Eng/result.txt
+run Bin/TestLem -sort -echo -noids -forms Russian <Test/Morph/Rus/test.txt | cmp - Test/Morph/Rus/result.txt
+run Bin/TestLem -sort -echo -noids -forms German <Test/Morph/Ger/test.txt  | cmp - Test/Morph/Ger/result.txt
+run Bin/TestLem -sort -echo -noids -forms English <Test/Morph/Eng/test.txt | cmp - Test/Morph/Eng/result.txt
 
 d=Dicts/Trigram/full.rev/
 run gzip -cd $d/base.lex.gz >$d/base.lex
@@ -40,7 +46,7 @@ for component in $GERMAN_SYNTAX
 do
   run Bin/SimpleGrammarPrecompiled German Dicts/$component
 done
-run Bin/TestSynan German Test/Synan/Rus/test.txt | cmp - Test/Synan/Ger/result.txt 	
+run Bin/TestSynan German Test/Synan/Ger/test.txt | cmp - Test/Synan/Ger/result.txt 	
 
 run Bin/AprDictGen Dicts/SrcBinDict/dict2809.txt Dicts/BinDict/dict.bin > /dev/null
 run Bin/asp_read Dicts/SrcBinDict/ASP.txt Dicts/BinDict/asp_dict.bin >/dev/null 2>/dev/null
@@ -58,5 +64,6 @@ for d in L C F; do
 done;
 run Bin/GenSynDict  Dicts/SrcBinDict/synonyms.txt Dicts/BinDict/synonyms.bin 2>/dev/null
 Bin/TestSeman <Test/Seman/Rus/test.txt | cmp - Test/Seman/Rus/result.txt
+
 
 echo All done.
