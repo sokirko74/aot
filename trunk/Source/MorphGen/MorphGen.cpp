@@ -187,6 +187,7 @@ int main(int argc, char* argv[])
 		printf("Can not Generate\n");
 		return 1;
 	}
+
 	fprintf(stderr, "exit\n");
 
 	return 0;
