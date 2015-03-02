@@ -52,8 +52,8 @@ bool CThesaurusForSyntax::LoadThesaurus_mt(string tn, vector<CThesaurus*>* ts)
 CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 {
 	CThesaurus* T = new CThesaurus;
-	if (!T) return false;
-	if (!T->SetDatabase(ThesName)) return false;
+	if (!T) return 0;
+	if (!T->SetDatabase(ThesName)) return 0;
 	assert (GetOpt()->GetOborDic() != 0);
 	T->m_MainLanguage = GetOpt()->m_Language;
 	T->m_pOborDic = GetOpt()->GetOborDic();
@@ -61,8 +61,8 @@ CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 	T->m_pMainGramTab = GetOpt()->GetGramTab();
 	assert (m_pEngGramTab != 0);
 	T->m_pEngGramTab = m_pEngGramTab;
-	if (!T->ReadThesaurusFromDisk()) return false;
-	if (!T->ReadRelationsFromDisk()) return false;
+	if (!T->ReadThesaurusFromDisk()) return 0;
+	if (!T->ReadRelationsFromDisk()) return 0;
 
 	return T;
 };

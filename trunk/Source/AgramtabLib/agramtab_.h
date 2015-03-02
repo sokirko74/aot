@@ -108,6 +108,7 @@ class CAgramtab {
 	string UniqueGramCodes(string gram_codes) const;
 	string FilterGramCodes(string gram_codes, QWORD grammems1, QWORD grammems2) const;
     string FilterGramCodes(QWORD breaks, string gram_codes, QWORD g1) const;
+    bool CheckGramCode(const char* gram_code) const;
 
 };
 

@@ -917,7 +917,7 @@ const CGroup* CFormatCaller::create_disrupt_conj_group(CGroup& G, const CGroup* 
 		if (   W_1.is_morph_noun() 
 			|| is_morph_pronoun(W_1)
 		   )
-		   if (!GetGramTab()->GleicheCase(W_2.m_gramcodes, W_1.m_gramcodes))
+		   if (!GetGramTab()->GleicheCase(W_2.GetGramcodes(), W_1.GetGramcodes()))
 				return 0;
 
 
@@ -925,7 +925,7 @@ const CGroup* CFormatCaller::create_disrupt_conj_group(CGroup& G, const CGroup* 
 		check coordination by case, number and gender if groups are AdjP
 	   */
 		if ( is_left_noun_modifier(W_1)   )
-			if (!GetGramTab()->GleicheGenderNumberCase(W_2.m_type_gram_code, W_2.m_gramcodes, W_1.m_gramcodes))
+			if (!GetGramTab()->GleicheGenderNumberCase(W_2.m_type_gram_code, W_2.GetGramcodes(), W_1.GetGramcodes()))
 				return 0;
 
 		

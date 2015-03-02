@@ -170,8 +170,8 @@ bool CRusSentence::RuleForFragNounGroup(int iClauseNum)
 
 						if(	GetRusGramTab()->GleicheGenderNumberCase(
 								CoordinatingNoun.m_Homonyms[iPartN].m_CommonGramCode.c_str(),
-								CoordinatingNoun.m_Homonyms[iPartN].m_GramCodes.c_str(),
-								MainStartingAdj.m_Homonyms[AdjPartNo].m_GramCodes.c_str()) 
+								CoordinatingNoun.m_Homonyms[iPartN].GetGramCodes().c_str(),
+								MainStartingAdj.m_Homonyms[AdjPartNo].GetGramCodes().c_str()) 
 							)
 						{
 							SClauseType ClType(UNDETACHED_ADJ_PATIC, WordNo, 0);

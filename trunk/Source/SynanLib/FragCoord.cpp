@@ -24,7 +24,7 @@ bool CRusSentence::CheckCoordinarionBetweenClauseRoots(GrammemCompare CompareFun
 			{
 				const CSynHomonym& H1 = m_Words[C1.m_vectorTypes[i].m_Root.m_WordNo].m_Homonyms[C1.m_vectorTypes[i].m_Root.m_HomonymNo];
 				const CSynHomonym& H2 = m_Words[C2.m_vectorTypes[k].m_Root.m_WordNo].m_Homonyms[C2.m_vectorTypes[k].m_Root.m_HomonymNo];
-                if (GetOpt()->GetGramTab()->Gleiche(CompareFunc, H1.m_GramCodes.c_str(), H2.m_GramCodes.c_str()))
+                if (GetOpt()->GetGramTab()->Gleiche(CompareFunc, H1.GetGramCodes().c_str(), H2.GetGramCodes().c_str()))
                     return true;
 			};
 	return false;

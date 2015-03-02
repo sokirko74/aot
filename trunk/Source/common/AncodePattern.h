@@ -8,14 +8,14 @@ class CSyntaxOpt;
 class CAncodePattern 
 {
     const	CAgramtab* m_pGramTab;
-     void    ResetFlags();
+    void    ResetFlags();
+	string			m_GramCodes;
 
 public:
 	QWORD			m_TypeGrammems;
 	QWORD			m_iGrammems;
 	char			m_LemSign;
 	string			m_CommonGramCode;
-	string			m_GramCodes;
 	size_t			m_iPoses;
     bool            m_bUnkGramcodes;
 			
@@ -33,6 +33,9 @@ public:
     void    SetMorphUnknown();
     bool    DeleteAncodesByGrammemIfCan(BYTE Grammem);
     string	GetPartOfSpeechStr() const;
+    const string& GetGramCodes() const;
+    void  SetGramCodes(const string&);
+    void  SetGramCodes(const char*);
 
 };
 

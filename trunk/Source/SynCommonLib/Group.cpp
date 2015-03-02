@@ -95,7 +95,7 @@ void CGroup::SetGrammems(QWORD Grammems, const char * GramCodes)
 void CGroup::SetGrammems(CSynPlmLine W)
 {
 	grammems = W.GetGrammems();
-	m_GramCodes = string(W.m_gramcodes);
+	m_GramCodes = string(W.GetGramcodes());
 }
 
 QWORD CGroup::GetGrammems() const
@@ -360,8 +360,8 @@ void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD gramm
 				&& (Gi.m_GroupType == NUMERAL_NOUN || Gi.m_GroupType == NOUN_NUMERAL_APPROX) ) //имеют зависимые грамкоды
 			{
 				Gi.SetGrammems(Gi.GetGrammems() & (grammems | ~breaks));
-				string gcNoun = string(sent[i].m_gramcodes);
-				string gcNum = string(sent[Gi.m_OtherGroup.m_iFirstWord].m_gramcodes);
+				string gcNoun = string(sent[i].GetGramcodes());
+				string gcNum = string(sent[Gi.m_OtherGroup.m_iFirstWord].GetGramcodes());
 				const CAgramtab *R = GetOpt()->GetGramTab(); 
 				if(gcNoun.length() == 2 || !(grammems & rAllCases)) continue;
 				R->GleicheAncode1(CaseNumberGender0, gcNum, 
@@ -382,13 +382,13 @@ bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const char
 	bool isok = true;
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
 	{
-		string new_grc = R->GleicheAncode1(CompareFunc, R->FilterGramCodes(string(sent[i].m_gramcodes), ~_QM(rIndeclinable), 0),
+		string new_grc = R->GleicheAncode1(CompareFunc, R->FilterGramCodes(string(sent[i].GetGramcodes()), ~_QM(rIndeclinable), 0),
 			gramcodes);
 		if(new_grc=="") { isok = false; continue; }
 		QWORD grammems = sent[i].GetGrammems() & ~(rAllCases|rAllGenders|rAllTimes|rAllPersons|rAllAnimative)
 			| R->GetAllGrammems( new_grc.c_str() );
 		sent[i].SetGramcodes(new_grc); 
-		m_AtomicGroups[i].m_GramCodes = new_grc;//-> synVariant.m_SynUnits[UnitNo].m_GramCodes = string(W.m_gramcodes);
+		m_AtomicGroups[i].m_GramCodes = new_grc;//-> synVariant.m_SynUnits[UnitNo].m_GramCodes = string(W.GetGramcodes());
 		sent[i].SetGrammems(grammems);
 		m_AtomicGroups[i].SetGrammems(grammems);
 	};
@@ -602,7 +602,7 @@ void CGroups::Reset()
 void CGroups::SetGrammems(int WordNo, QWORD Grammems, const char* Gramcodes)
 {
 	sent[WordNo].SetGrammems(Grammems);
-	sent[WordNo].m_gramcodes = Gramcodes;
+	sent[WordNo].SetGramcodes(Gramcodes);
 	m_AtomicGroups[WordNo].SetGrammems(Grammems);		
 }
 

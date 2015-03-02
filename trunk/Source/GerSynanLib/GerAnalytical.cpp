@@ -765,11 +765,15 @@ void BuildZuForms(CGerSentence &C)
 		W.m_strWord =  "zu-"+W.m_strWord;
 
 		QWORD g = (gAllVerbClasses & W.m_Homonyms[0].m_iGrammems) |  _QM(gZuVerbForm);
-		if (!C.GetGerGramTab()->GetGramCodeByGrammemsAndPartofSpeechIfCan(gVER, g, W.m_Homonyms[0].m_GramCodes))
+        string NewGramCodes;
+		if (!C.GetGerGramTab()->GetGramCodeByGrammemsAndPartofSpeechIfCan(gVER, g, NewGramCodes))
 		{
 			string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(g);
 			ErrorMessage("Cannot find Gramtab line  for "+ debug);
-		};
+		}
+        else  {
+            W.m_Homonyms[0].SetGramCodes( NewGramCodes );
+        }
 		C.InitHomonymMorphInfo(W.m_Homonyms[0]);
 		
 

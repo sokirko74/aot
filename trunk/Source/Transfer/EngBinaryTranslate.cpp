@@ -5,7 +5,7 @@
 #include "../AprRead/all_labels.h"
 
 
-int find_label(char *label)
+int find_label(const char *label)
 {
 	for(int i = 0;  i < GetTransLabelsCount(); i++){
 		if(!strcmp(label, GetTransLabels()[i].str)) return i;

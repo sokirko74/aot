@@ -349,7 +349,7 @@ bool CSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const vecto
 			const CGroup& G = synVariant.m_vectorGroups.GetGroups()[i];
 			CSynUnit& U = synVariant.m_SynUnits[G.m_MainWordNo];
 			U.m_iGrammems = G.GetGrammems();
-			U.m_GramCodes = G.m_GramCodes;
+			U.SetGramCodes(  G.m_GramCodes );
 		};
 
 

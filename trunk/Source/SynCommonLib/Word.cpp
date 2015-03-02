@@ -174,7 +174,7 @@ bool CSynWord::InitializePlmLine(CSynPlmLine& pPlmWord, int HomonymNo)  const
 	const CSynHomonym& pActiveHomonym = m_Homonyms[HomonymNo];
 	pPlmWord.SetGrammems(pActiveHomonym.m_iGrammems) ;
 	pPlmWord.SetPoses(pActiveHomonym.m_iPoses);
-    pPlmWord.m_gramcodes = pActiveHomonym.m_GramCodes.c_str();
+    pPlmWord.SetGramcodes(  pActiveHomonym.GetGramCodes() );
 
     pPlmWord.InitSynPlmLine(this,&pActiveHomonym);
 	
@@ -350,7 +350,7 @@ void CSynWord::BuildTerminalSymbolsByWord()
 		for (size_t j=0; j<m_Homonyms.size(); j++)
 			if (IsEqualToGrammarItem(m_Homonyms[j], I))
 			{
-				CInputSymbol N(i, m_Homonyms[j].m_GramCodes, m_Homonyms[j].m_CommonGramCode);
+				CInputSymbol N(i, m_Homonyms[j].GetGramCodes(), m_Homonyms[j].m_CommonGramCode);
 				m_Homonyms[j].m_AutomatSymbolInterpetation.insert(N);
 				m_AutomatSymbolInterpetationUnion.insert(N);
 			};

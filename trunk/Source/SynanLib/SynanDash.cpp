@@ -42,7 +42,7 @@ bool HasGenderNumberCaseNP(const CSynWord& _W1, const CSynWord& _W2)
 {
 	for (int i = 0; i < _W1.m_Homonyms.size(); i++)
         for (int k = 0; k < _W2.m_Homonyms.size(); k++)
-            if (_W1.GetOpt()->GetGramTab()->GleicheGenderNumberCase(_W2.m_Homonyms[k].m_CommonGramCode.c_str(), _W1.m_Homonyms[i].m_GramCodes.c_str(), _W2.m_Homonyms[k].m_GramCodes.c_str()))
+            if (_W1.GetOpt()->GetGramTab()->GleicheGenderNumberCase(_W2.m_Homonyms[k].m_CommonGramCode.c_str(), _W1.m_Homonyms[i].GetGramCodes().c_str(), _W2.m_Homonyms[k].GetGramCodes().c_str()))
                 return true;
     return false;
 }

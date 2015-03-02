@@ -519,14 +519,14 @@ string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  c
 	if (pHomonym->m_LemSign != 0)
 	{
         assert (!pHomonym->m_strLemma.empty());
-        assert (!pHomonym->m_GramCodes.empty());
+        assert (!pHomonym->GetGramCodes().empty());
         assert (!pHomonym->m_CommonGramCode.empty());
 
         Result += " " + Format("%c",pHomonym->m_LemSign);
         Result += " " + pHomonym->m_strLemma;
         Result += " " + pHomonym->GetGramTab()->GetTabStringByGramCode(pHomonym->m_CommonGramCode.c_str());
-        for (int i=0; i < pHomonym->m_GramCodes.length(); i+=2)
-            Result += " " + pHomonym->GetGramTab()->GetTabStringByGramCode(pHomonym->m_GramCodes.c_str()+i);
+        for (int i=0; i < pHomonym->GetGramCodes().length(); i+=2)
+            Result += " " + pHomonym->GetGramTab()->GetTabStringByGramCode(pHomonym->GetGramCodes().c_str()+i);
     }
 	return  Result;
 }
@@ -546,10 +546,10 @@ string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  con
 	if (pHomonym->m_LemSign != 0)
 	{
         assert (!pHomonym->m_strLemma.empty());
-        assert (!pHomonym->m_GramCodes.empty());
+        assert (!pHomonym->GetGramCodes().empty());
         assert (!pHomonym->m_CommonGramCode.empty());
         
-        Result += pHomonym->m_LemSign + pHomonym->m_CommonGramCode + " " + pHomonym->m_strLemma + " " + pHomonym->m_GramCodes + " ";
+        Result += pHomonym->m_LemSign + pHomonym->m_CommonGramCode + " " + pHomonym->m_strLemma + " " + pHomonym->GetGramCodes() + " ";
         Result +=  Format("%i %i", pHomonym->m_lPradigmID, pHomonym->m_lFreqHom);
 	};
 

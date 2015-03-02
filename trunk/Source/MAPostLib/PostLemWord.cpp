@@ -29,7 +29,8 @@ void CPostLemWord::EraseHomonym(int iHom)
 
 CHomonym* CPostLemWord::AddNewHomonym()
 {
-    m_Homonyms.push_back (CHomonym(m_pGramTab));
+    CHomonym hom(m_pGramTab);
+    m_Homonyms.push_back (hom);
     return &m_Homonyms.back();
 
 }

@@ -118,8 +118,11 @@ static void  AssignGroupMainGroup(CGroups& model, const size_t GroupNo, const CI
 		} 
 	}
 
-	
-	assert( (m_MainGroup.m_iFirstWord != -1) );
+    if  (m_MainGroup.m_iFirstWord == -1) {
+        throw CExpc("RusThesaurus.AssignGroupMainGroup: cannot find main group for Mode id %i", piModel.m_ModelId);
+    }
+
+	assert( m_MainGroup.m_iFirstWord != -1 );
 
 	//  если все-таки не было найдено главной группы, тогда объ€вл€ем главной группо просто первое слово
 	if( m_MainGroup.m_iFirstWord == -1)
