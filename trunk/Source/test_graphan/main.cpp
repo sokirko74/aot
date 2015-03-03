@@ -5,8 +5,8 @@
 #include <comdef.h>
 #include <string>
 
-#import "c:/Rml/Bin/Lemmatizer.tlb" 
-#import "c:/Rml/Bin/graphan.tlb"
+#import "../../Bin/Lemmatizer.tlb" 
+#import "../../Bin/graphan.tlb"
 
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------

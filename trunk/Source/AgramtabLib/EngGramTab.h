@@ -80,7 +80,7 @@ public:
 		return "Software\\Dialing\\Lemmatizer\\English\\Egramtab";
 	};
 
-	long GetClauseTypeByName(const char* TypeName) const {assert(false); return 0;};
+	long GetClauseTypeByName(const char*) const {assert(false); return 0;};
 	const char* GetClauseNameByType(long type) const {assert(false); return 0;};
 	bool GleicheGenderNumber(const char* gram_code1, const char* gram_code2) const;
 	bool GleicheSubjectPredicate(const char* gram_code1, const char* gram_code2) const;

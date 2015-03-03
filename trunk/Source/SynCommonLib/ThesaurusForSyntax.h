@@ -69,7 +69,7 @@ public:
 	}
 	bool operator() (int i1, int i2)
 	{
-		int size = m_pTermins->size();
+		int size = (int)m_pTermins->size();
 		assert((i1 < size) && (i2 < size) );
 
 		if( (i1 == -1) && (i2 >= 0) ) 

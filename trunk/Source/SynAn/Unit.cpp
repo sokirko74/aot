@@ -114,7 +114,7 @@ STDMETHODIMP CCOMUnit::get_Gramcodes(BSTR *pVal)
 		if( !m_pUnit )
 			return E_FAIL;
 
-		*pVal = _bstr_t(m_pUnit->m_GramCodes.c_str()).copy();
+		*pVal = _bstr_t(m_pUnit->GetGramCodes().c_str()).copy();
 
 	}
 	catch(...)

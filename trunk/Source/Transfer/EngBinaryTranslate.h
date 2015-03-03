@@ -89,7 +89,7 @@ public:
 	void synthesize(CEngSemWord& EngWord) const;
 	void synthesize_by_node(CEngSemNode& Node) const;
 
-    void translate_id(long id, vector<long> &res, UINT Poses) const;
+    void translate_id(long id, vector<long> &res, poses_mask_t Poses) const;
 
 	void transliterate(CEngSemWord& EngWord);
 	
