@@ -90,7 +90,7 @@ STDMETHODIMP CCOMHomonym::get_GramCodes(BSTR *pVal)
 {
 	try
 	{
-		*pVal = _bstr_t(m_pHomonym->m_GramCodes.c_str()).copy();
+		*pVal = _bstr_t(m_pHomonym->GetGramCodes().c_str()).copy();
 	}
 	catch(...)
 	{

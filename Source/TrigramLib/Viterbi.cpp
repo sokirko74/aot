@@ -102,7 +102,7 @@ void CTrigramModel::ViterbiForward(const vector<string>& words, vector<CViterbiI
 		fprintf(stderr, "\n===========  ViterbiForward =============== \n\n");
 		fprintf(stderr, "\n Number of word:%i\n", words.size());
 	}
-	size_t WordsCount = words.size();
+	size_t WordsCount = (int)words.size();
 	Triplet[0].SetProb(0,0, 0.0);
 	set<WORD> OuterBoundTags;
 	OuterBoundTags.insert(0);
@@ -342,7 +342,7 @@ bool CTrigramModel::testing(string FileName) const
 		for (size_t i=0; i<words.size(); i++)
 		{
 			
-			WORD ref = refs[i];
+			WORD ref = (WORD)refs[i];
 
 			// не берем в расчет знаки препинания и слова, записанные латиницей					
 			if (!CheckLanguage(words[i], m_Language))

@@ -104,7 +104,7 @@ public:
 	bool	IsInOborot() const;
 	bool	CanBeSynNoun() const;
 	void	KillHomonymOfPartOfSpeech(int iPartOfSpeech);
-    virtual void InitLevelSpecific(CHomonym* pHom) {};
+    virtual void InitLevelSpecific(CHomonym* ) {};
     string  GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const;
     string  GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const;
     string BuildGraphemDescr ()  const;

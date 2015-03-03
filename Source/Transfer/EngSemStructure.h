@@ -599,7 +599,7 @@ public:
 	// проверяет, что у  узла есть выходящее отношение, идущее в примитивный узел, который содержит слово  Word
 	int				GetOutRelationByWord(long NodeNo, string Word) const;
 	// проверяет, что у  узла есть выходящее отношение, идущее в узел, которому приписана  часть речи POS
-	bool			HasOutRelationByPoses(long NodeNo, UINT Pos) const;
+	bool			HasOutRelationByPoses(long NodeNo, poses_mask_t Pos) const;
 
 	// переводит аббревиатурные формы теримнов
 	void			translate_abbr_termin_node(int MainNodeNo);	
