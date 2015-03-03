@@ -19,6 +19,7 @@ struct CAgramtabLine
 };
 
 
+
 typedef bool(*GrammemCompare)(const CAgramtabLine* l1, const CAgramtabLine* l2);
 
 class CAgramtab {
@@ -56,25 +57,25 @@ class CAgramtab {
 		a variant of the clause root, but these infinitive roots are not mutually exclusive, hence they are not
 		strong.
 	*/
-	virtual bool IsStrongClauseRoot(const DWORD Poses) const = 0;
+	virtual bool IsStrongClauseRoot(const poses_mask_t poses) const = 0;
 	virtual bool is_month (const char* lemma) const = 0;
 	virtual bool is_small_number (const char* lemma) const = 0;
-	virtual bool IsMorphNoun (size_t Poses)  const = 0;
-	virtual bool is_morph_adj (size_t poses) const = 0;
-	virtual bool is_morph_participle (size_t poses) const = 0;
-	virtual bool is_morph_pronoun (size_t poses) const = 0;
-	virtual bool is_morph_pronoun_adjective(size_t poses) const = 0;
-	virtual bool is_left_noun_modifier  (size_t Poses, QWORD grammems) const = 0;
-	virtual bool is_numeral (size_t poses) const = 0;
-	virtual bool is_verb_form (size_t poses) const  = 0;
-	virtual bool is_infinitive(size_t poses) const  = 0;
-	virtual bool is_morph_predk(size_t poses) const  = 0;
-	virtual bool is_morph_adv(size_t poses) const  = 0;
-	virtual bool is_morph_personal_pronoun (size_t poses, QWORD grammems) const = 0;
-	virtual bool is_morph_article(size_t poses)  const = 0;
+	virtual bool IsMorphNoun (poses_mask_t poses)  const = 0;
+	virtual bool is_morph_adj (poses_mask_t poses) const = 0;
+	virtual bool is_morph_participle (poses_mask_t poses) const = 0;
+	virtual bool is_morph_pronoun (poses_mask_t poses) const = 0;
+	virtual bool is_morph_pronoun_adjective(poses_mask_t poses) const = 0;
+	virtual bool is_left_noun_modifier  (poses_mask_t poses, QWORD grammems) const = 0;
+	virtual bool is_numeral (poses_mask_t poses) const = 0;
+	virtual bool is_verb_form (poses_mask_t poses) const  = 0;
+	virtual bool is_infinitive(poses_mask_t poses) const  = 0;
+	virtual bool is_morph_predk(poses_mask_t poses) const  = 0;
+	virtual bool is_morph_adv(poses_mask_t poses) const  = 0;
+	virtual bool is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const = 0;
+	virtual bool is_morph_article(poses_mask_t poses)  const = 0;
 
-	virtual bool IsSimpleParticle(const char* lemma, size_t poses) const  = 0;
-	virtual bool IsSynNoun(size_t Poses, const char* Lemma) const  = 0;
+	virtual bool IsSimpleParticle(const char* lemma, poses_mask_t poses) const  = 0;
+	virtual bool IsSynNoun(poses_mask_t poses, const char* Lemma) const  = 0;
 	virtual bool IsStandardParamAbbr (const char* WordStrUpper) const = 0;
 
 	virtual bool GleicheCase(const char* gram_code_noun, const char* gram_code_adj) const = 0;
@@ -97,7 +98,7 @@ class CAgramtab {
 	size_t	GetSourceLineNo(const char* gram_code) const;
 	QWORD	GetAllGrammemsThatContains(const char *gram_code) const;
 	bool	GetGrammems(const char* gram_code, QWORD& grammems)  const;
-	BYTE	GetFirstPartOfSpeech(const DWORD poses) const;
+	BYTE	GetFirstPartOfSpeech(const poses_mask_t poses) const;
 	
 	string	GetAllPossibleAncodes(BYTE pos, QWORD grammems) const;
 	string	GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const;

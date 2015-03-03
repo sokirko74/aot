@@ -426,7 +426,7 @@ const CThesaurus*   translate_helper::GetThes(int ThesId)  const
 }
 
 
-void translate_helper::translate_id(long Id, vector<long> &res, UINT RusPoses) const
+void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t RusPoses) const
 {
 	
 	// получение всех видовых пар данного слова, если это глагол,

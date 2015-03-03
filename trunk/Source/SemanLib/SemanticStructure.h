@@ -69,7 +69,7 @@ public:
 	// добавочный номер парадигмы в морф. словаре (для приложений типа "муж-алкоголик")
 	long           m_AdditParadigmId;
 	// части речи, которые приписаны слову 
-	size_t         m_Poses;
+	poses_mask_t   m_Poses;
 	// номер слова в синтаксическом представлении
 	long           m_WordNo;
 	// Полные эквиваленты слова, здесь обычно лежит 
@@ -334,7 +334,7 @@ public:
 	void	DeleteGrammems(QWORD grammems);
 
 	// выдает части речи, которые приписаны главному слову узла
-	long	GetNodePoses() const;
+	poses_mask_t GetNodePoses() const;
 
 };
 
@@ -596,7 +596,7 @@ public:
 
     //======================    работа со словарными интерпретациями
     // выдает набор частей речи по GF-главному статьи UnitNo
-	long			GetPosesFromRusArticle(CRossHolder& Ross,WORD UnitNo) const;
+	poses_mask_t    GetPosesFromRusArticle(CRossHolder& Ross,WORD UnitNo) const;
 	// проверяет согласование словарной статьи UnitNo со словом W по частям речи 
 	bool			GramFetAgreeWithPoses (CRossHolder& Ross,WORD UnitNo, const CSemWord& W ) const;
 	// проверяет, что в одном из значений поля CAT стоит константа Type		(семантическая категория)
@@ -691,7 +691,7 @@ public:
 	// ====================   работа с валентностями
 	//инициализация валентностей из текущей словарной интерпретации
 	void		InitVals(CSemNode& Node);
-	long        FindAbstractPlugArticle (DictTypeEnum type, QWORD Grammems, long Poses, long ClauseType) const;
+	long        FindAbstractPlugArticle (DictTypeEnum type, QWORD Grammems, poses_mask_t Poses, long ClauseType) const;
 	void        FindAbstractAdditionArticle (DictTypeEnum type, const CSemNode& Node, vector<long>& Articles,  bool IsClauseSyntaxRoot, long ClauseType);
 	void		AddAbstractAdditionVals (DictTypeEnum type, CSemNode& Node, const vector<long>& Articles);
 

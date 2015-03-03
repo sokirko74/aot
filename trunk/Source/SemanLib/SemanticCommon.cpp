@@ -354,7 +354,7 @@ bool	CSemNode::HasOneGrammem(int g) const
 	return (m_Grammems & _QM(g)) > 0;
 };
 
-long CSemNode::GetNodePoses() const 
+poses_mask_t CSemNode::GetNodePoses() const 
 {
 	if (m_MainWordNo == -1) return 0;
 	return  GetWord(m_MainWordNo).m_Poses;
@@ -1636,7 +1636,7 @@ bool CSemanticStructure::IsConnected()
 
 
 
-long CSemanticStructure::FindAbstractPlugArticle (DictTypeEnum type, QWORD Grammems, long Poses, long ClauseType) const
+long CSemanticStructure::FindAbstractPlugArticle (DictTypeEnum type, QWORD Grammems, poses_mask_t Poses, long ClauseType) const
 {
 
 	const vector<CAbstractArticle>& AbstractArticles = *m_pData->GetAbstractArticles(type);
@@ -1999,7 +1999,7 @@ bool			CSemanticStructure::HasSemType (const CSemNode& Node, string Type) const
        return (Node.GetType() != NoneRoss) && HasItem (Node.GetType(), Node.GetUnitNo(), "CAT", Type, "D_CAT", 0, 0);
 };
 
-bool			CSemanticStructure::GramFetAgreeWithPoses (CRossHolder& Ross,WORD UnitNo, const CSemWord& W ) const
+bool			CSemanticStructure::GramFetAgreeWithPoses (CRossHolder& Ross, WORD UnitNo, const CSemWord& W ) const
 {
 	return (W.m_Poses & GetPosesFromRusArticle(Ross, UnitNo)) > 0; 
 };

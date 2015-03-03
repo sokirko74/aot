@@ -275,7 +275,7 @@ public:
 	bool lemmatize_file(string FileName) ;
 	bool CheckTagsForFormInfo(const vector<CTag>& Tags, const CFormInfo& F) const;
 	string GetParticipleLemma(const CFormInfo& F) const;
-    bool FindGramTabLineInTags(const vector<CTag>& Tags, size_t Poses, QWORD AllGrammems) const;
+    bool FindGramTabLineInTags(const vector<CTag>& Tags, poses_mask_t Poses, QWORD AllGrammems) const;
 #endif
 
 	bool write_dictionary_binary(const map<string, vector<CLexProb> >& Dictionary) const;

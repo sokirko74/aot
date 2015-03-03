@@ -405,7 +405,7 @@ const char* CRusGramTab::GetClauseNameByType(long type) const
 /*
 	истина для предикативных типов клауз.
 */
-bool CRusGramTab::IsStrongClauseRoot(const DWORD poses) const
+bool CRusGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
 {
 	return		(poses & (1<<VERB))
 			||	(poses & (1<<ADVERB_PARTICIPLE)) // субъект деепричастия  совпадлает с субъектом
@@ -445,7 +445,7 @@ bool CRusGramTab::is_small_number (const char* lemma) const
 }
 
 
-bool CRusGramTab::IsMorphNoun (size_t poses)  const
+bool CRusGramTab::IsMorphNoun (poses_mask_t poses)  const
 {
 	return  ( poses & ( 1 << NOUN)   );
 };
@@ -453,31 +453,31 @@ bool CRusGramTab::IsMorphNoun (size_t poses)  const
 
 
 
-bool CRusGramTab::is_morph_adj (size_t poses) const
+bool CRusGramTab::is_morph_adj (poses_mask_t poses) const
 {
 	return		( poses & (1 <<ADJ_FULL  ))
 			|| ( poses & (1 << ADJ_SHORT ) );
 };
 
-bool CRusGramTab::is_morph_participle (size_t poses) const
+bool CRusGramTab::is_morph_participle (poses_mask_t poses) const
 {
 	return  ( poses & (1 <<PARTICIPLE  ))
 			|| ( poses & (1 << PARTICIPLE_SHORT   ));
 };
  
-bool CRusGramTab::is_morph_pronoun (size_t poses) const
+bool CRusGramTab::is_morph_pronoun (poses_mask_t poses) const
 {
 	return  ( poses & (1 <<PRONOUN  )) != 0;
 };
 
 
-bool CRusGramTab::is_morph_pronoun_adjective(size_t poses) const
+bool CRusGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
 {
 	return  ( poses & (1 <<PRONOUN_P )) != 0;
 };
 
 
-bool CRusGramTab::is_left_noun_modifier  (size_t poses, QWORD grammems) const
+bool CRusGramTab::is_left_noun_modifier  (poses_mask_t poses, QWORD grammems) const
 {
 	return     ( poses & (1 << ADJ_FULL  ))
 			|| ( poses & (1 << NUMERAL_P ))
@@ -486,12 +486,12 @@ bool CRusGramTab::is_left_noun_modifier  (size_t poses, QWORD grammems) const
 }
 
 
-bool CRusGramTab::is_numeral (size_t poses) const
+bool CRusGramTab::is_numeral (poses_mask_t poses) const
 { 
 	return  ( poses & (1 << NUMERAL ) ) != 0;
 };
 
-bool CRusGramTab::is_verb_form (size_t poses) const
+bool CRusGramTab::is_verb_form (poses_mask_t poses) const
 {
 	return     is_morph_participle(poses) 
 			||  (poses & ( 1 << VERB )) 
@@ -501,24 +501,24 @@ bool CRusGramTab::is_verb_form (size_t poses) const
 
 
 
-bool CRusGramTab::is_infinitive(size_t poses) const
+bool CRusGramTab::is_infinitive(poses_mask_t poses) const
 {
 	return (poses & (1 << INFINITIVE )) != 0; 
 }
 
-bool CRusGramTab::is_morph_predk(size_t poses) const
+bool CRusGramTab::is_morph_predk(poses_mask_t poses) const
 {
 	return (poses & (1 << PREDK )) || 
 		(poses & (1 << PRONOUN_PREDK )); 
 }
 
-bool CRusGramTab::is_morph_adv(size_t poses) const
+bool CRusGramTab::is_morph_adv(poses_mask_t poses) const
 {
 	return (poses & (1 << ADV )) != 0; 
 }
 
 
-bool CRusGramTab::is_morph_personal_pronoun (size_t poses, QWORD grammems) const
+bool CRusGramTab::is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const
 {
 	return		 ( poses & (1 <<PRONOUN  )) != 0 
 			&&   ( grammems &( _QM(rFirstPerson) | _QM(rSecondPerson) | _QM(rThirdPerson)));
@@ -529,7 +529,7 @@ bool CRusGramTab::is_morph_personal_pronoun (size_t poses, QWORD grammems) const
 const size_t  ParticleCount = 8;
 const char Particles[ParticleCount][20] = {"ЛИ","ЖЕ","БЫ","УЖ","ТОЛЬКО", "Ж", "Б", "ЛЬ"};
 
-bool CRusGramTab::IsSimpleParticle(const char* lemma, size_t poses) const
+bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 {
 	if (!lemma) return false;
 	if (!(poses & (1 << PARTICLE))) return false;
@@ -572,7 +572,7 @@ bool CRusGramTab::IsSimpleParticle(const char* lemma, size_t poses) const
 
 	1 марта 2001 года, Сокирко
 */
-bool CRusGramTab::IsSynNoun(size_t poses, const char* Lemma) const
+bool CRusGramTab::IsSynNoun(poses_mask_t poses, const char* Lemma) const
 {
 	return   IsMorphNoun (poses) 
 			||( poses & (1 <<PRONOUN ))
@@ -604,7 +604,7 @@ bool CRusGramTab::IsStandardParamAbbr (const char* WordStrUpper) const
 }
 
 
-bool CRusGramTab::is_morph_article(size_t poses)  const 
+bool CRusGramTab::is_morph_article(poses_mask_t poses)  const 
 {
 	return  false;
 };

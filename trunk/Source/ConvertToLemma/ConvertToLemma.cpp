@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
 	int ColumnNo = atoi(Argv[1].c_str());
 	fprintf (stderr, "ColumnNo  = %i\n", ColumnNo );
 	std::string strPOS = Argv[2];
-	size_t PatternPoses = 0;
+	poses_mask_t PatternPoses = 0;
 	QWORD PatternGrammems = 0;
 	if (strPOS != "*")
 	{
@@ -174,7 +174,7 @@ int main(int argc, char *argv[])
 			for (int j=0; j < ParadigmCollection.size(); j++)
 			{
 				const CFormInfo& Paradigm = ParadigmCollection[j];
-				size_t Poses = 0;
+				poses_mask_t Poses = 0;
 				string Ancodes = Paradigm.GetSrcAncode();
 				for (size_t uu=0; uu < Ancodes.size(); uu += 2)
 					Poses |= 1 << Holder.m_pGramTab->GetPartOfSpeech(Ancodes.c_str() + uu);

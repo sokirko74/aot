@@ -401,7 +401,7 @@ bool CAgramtab::LoadFromRegistryAndCheck ()
 };
 
 
-BYTE CAgramtab::GetFirstPartOfSpeech(const DWORD poses) const
+BYTE CAgramtab::GetFirstPartOfSpeech(const poses_mask_t poses) const
 {
 	BYTE Count = GetPartOfSpeechesCount();
 	for (BYTE i = 0; i < Count; i++)

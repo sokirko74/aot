@@ -377,6 +377,8 @@ T& GerEngRusMakeUpperTemplate (T& word, MorphLanguageEnum Langua, size_t Len )
 //  QWORD mask
 #define _QM(X) (((QWORD)1)<<(X))
 
+typedef  DWORD poses_mask_t;
+
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
 

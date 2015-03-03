@@ -16,7 +16,7 @@ public:
 	QWORD			m_iGrammems;
 	char			m_LemSign;
 	string			m_CommonGramCode;
-	size_t			m_iPoses;
+	poses_mask_t    m_iPoses;
     bool            m_bUnkGramcodes;
 			
 	// all single preposition interpretations
@@ -28,7 +28,7 @@ public:
 	bool	HasGrammem(BYTE gram) const;
 	bool	HasPos(BYTE pos) const;
 	string	GetGrammemsByAncodes() const;
-	bool	ModifyGrammems(QWORD Grammems, size_t Poses=0xffffffff);
+	bool	ModifyGrammems(QWORD Grammems, poses_mask_t Poses=0xffffffff);
 	bool	InitAncodePattern();
     void    SetMorphUnknown();
     bool    DeleteAncodesByGrammemIfCan(BYTE Grammem);

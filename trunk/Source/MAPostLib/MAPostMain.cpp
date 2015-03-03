@@ -242,7 +242,7 @@ void CMAPost::Odnobuk()
         if (W.HasOborot1() != W.HasOborot2()) continue;// "т.е." - это оборот, его обрабатывать не надо
 
 		
-        const size_t poses = (1<<PREP) | (1<<CONJ) | (1<<INTERJ) | (1<<PARTICLE);
+        const poses_mask_t poses = (1<<PREP) | (1<<CONJ) | (1<<INTERJ) | (1<<PARTICLE);
         // данное слово может являться  только предлогом, союзом, междометием или частицей
         if (W.GetPoses() & ~poses) continue;//?? "по Б.Татарской улице"
         CLineIter next_it=it;
@@ -694,7 +694,7 @@ void CMAPost::PronounP_Pronoun_Homonymy()
 };
 
 // выдает по форме и части речи парадигму
-bool CMAPost::HasParadigmOfFormAndPoses(string WordForm, size_t Poses) const
+bool CMAPost::HasParadigmOfFormAndPoses(string WordForm, poses_mask_t Poses) const
 {
 	vector<CFormInfo> Paradigms;
 	m_pRusLemmatizer->CreateParadigmCollection(false, WordForm, false, false, Paradigms);
