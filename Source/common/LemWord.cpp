@@ -432,9 +432,9 @@ int  CLemWord::GetHomonymByPOS(BYTE POS) const
 	return -1;
 }
 
-size_t  CLemWord::GetPoses() const
+poses_mask_t  CLemWord::GetPoses() const
 {
-    size_t Poses = 0;
+    poses_mask_t Poses = 0;
 	for(int i = 0 ; i < GetHomonymsCount(); i++)
         Poses |= GetHomonym(i)->m_iPoses;
 	return Poses;
@@ -478,7 +478,7 @@ int CLemWord::GetHomonymByPOSandGrammem(BYTE POS, BYTE grammem) const
 	return -1;
 }
 
-int CLemWord::GetHomonymByPosesandGrammem(size_t Poses, BYTE grammem) const
+int CLemWord::GetHomonymByPosesandGrammem(poses_mask_t Poses, BYTE grammem) const
 {
 	for(int i = 0 ; i < GetHomonymsCount(); i++)
 		if(			GetHomonym(i)->HasGrammem(grammem) 

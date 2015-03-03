@@ -38,7 +38,7 @@ bool CEngGramTab::GleicheSubjectPredicate(const char* gram_code1, const char* gr
 }
 
 
-bool CEngGramTab::IsStrongClauseRoot(const DWORD Poses)  const
+bool CEngGramTab::IsStrongClauseRoot(const poses_mask_t poses)  const
 {
 	return	false;
 };
@@ -54,70 +54,70 @@ bool CEngGramTab::is_month (const char* lemma) const
 	return false;
 };
 
-bool CEngGramTab::IsMorphNoun (size_t Poses)  const
+bool CEngGramTab::IsMorphNoun (poses_mask_t poses)  const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_morph_adj (size_t poses) const
+bool CEngGramTab::is_morph_adj (poses_mask_t poses) const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_morph_participle (size_t poses) const
+bool CEngGramTab::is_morph_participle (poses_mask_t poses) const
 {
 	return  false;
 };
  
-bool CEngGramTab::is_morph_pronoun (size_t poses) const
+bool CEngGramTab::is_morph_pronoun (poses_mask_t poses) const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_morph_pronoun_adjective(size_t poses) const
+bool CEngGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_left_noun_modifier (size_t poses, QWORD grammems) const
+bool CEngGramTab::is_left_noun_modifier (poses_mask_t poses, QWORD grammems) const
 {
 	return     false;
 }
 
 
-bool CEngGramTab::is_numeral (size_t poses) const
+bool CEngGramTab::is_numeral (poses_mask_t poses) const
 { 
 	return  false;
 };
 
-bool CEngGramTab::is_verb_form (size_t poses) const
+bool CEngGramTab::is_verb_form (poses_mask_t poses) const
 {
 	return     false;
 };
 
 
 
-bool CEngGramTab::is_infinitive(size_t poses) const
+bool CEngGramTab::is_infinitive(poses_mask_t poses) const
 {
 	return false; 
 }
 
-bool CEngGramTab::is_morph_predk(size_t poses) const
+bool CEngGramTab::is_morph_predk(poses_mask_t poses) const
 {
 	return false;
 }
 
-bool CEngGramTab::is_morph_adv(size_t poses) const
+bool CEngGramTab::is_morph_adv(poses_mask_t poses) const
 {
 	return false; 
 }
 
-bool CEngGramTab::is_morph_personal_pronoun (size_t poses, QWORD grammems) const
+bool CEngGramTab::is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const
 {
 	return		false;
 };
 
-bool CEngGramTab::IsSimpleParticle(const char* lemma, size_t poses) const
+bool CEngGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 {
 	return false;
 }
@@ -128,7 +128,7 @@ bool CEngGramTab::IsSimpleParticle(const char* lemma, size_t poses) const
 
 
 
-bool CEngGramTab::IsSynNoun(size_t Poses, const char* Lemma) const
+bool CEngGramTab::IsSynNoun(poses_mask_t poses, const char* Lemma) const
 {
 	return false;
 };
@@ -153,7 +153,7 @@ QWORD CEngGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, co
 	return 0;
 };
 
-bool CEngGramTab::is_morph_article(size_t poses)  const 
+bool CEngGramTab::is_morph_article(poses_mask_t poses)  const 
 {
 	return false;
 };

@@ -103,7 +103,7 @@ protected:
 	int Count() const	{ return m_Words.size(); };
 
 	string		GetSimilarNumAncode (const string&  Lemma, const string&  Flexia, bool IsNoun);
-	bool		HasParadigmOfFormAndPoses(string WordForm, size_t Poses) const;
+	bool		HasParadigmOfFormAndPoses(string WordForm, poses_mask_t Poses) const;
 	bool		NounHasObviousPluralContext(CLineIter it);
     
 

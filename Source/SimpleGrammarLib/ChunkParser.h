@@ -7,8 +7,7 @@
 #define YYDEBUG 1
 
 #ifndef chunk_query_l
-	//#include "MyFlexLexer.h"
-	#include <C:/cygwin/usr/include/FlexLexer.h>
+	#include "MyFlexLexer.h"
 #endif
 
 

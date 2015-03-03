@@ -122,7 +122,7 @@ int CEngSemStructure::GetOutRelationByWord(long NodeNo, string Word) const
 }
 
 
-bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, UINT  Poses) const
+bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, poses_mask_t  Poses) const
 {
 	vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);

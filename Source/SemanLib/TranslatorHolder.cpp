@@ -308,7 +308,7 @@ void CTranslatorHolder::ErrorMessage (string Mess)
 };
 
 
-DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, string WordForm, long Poses, string& ResultLemma) const
+DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, string WordForm, poses_mask_t Poses, string& ResultLemma) const
 {
 	const CLemmatizer*  L  = GetLemmatizer(langua);
 	const CAgramtab*  G  = GetGramTab(langua);
@@ -347,7 +347,7 @@ DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma (const MorphLanguageEnum lan
 };
 
 
-DWORD  CTranslatorHolder::GetFirstParadigmId (const MorphLanguageEnum langua, string Lemma, long Poses) const
+DWORD  CTranslatorHolder::GetFirstParadigmId (const MorphLanguageEnum langua, string Lemma, poses_mask_t Poses) const
 {
 	const CLemmatizer*  L  = GetLemmatizer(langua);
 	const CAgramtab*  G  = GetGramTab(langua);

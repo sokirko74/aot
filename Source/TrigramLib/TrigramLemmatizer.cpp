@@ -43,7 +43,7 @@ bool CTrigramModel::CheckTagsForFormInfo(const vector<CTag>& Tags, const CFormIn
     return    FindGramTabLineInTags(Tags, 1<<SrcPoS, Grammems | CommonGrammems);
 }
 
-bool CTrigramModel::FindGramTabLineInTags(const vector<CTag>& Tags, size_t Poses, QWORD AllGrammems) const
+bool CTrigramModel::FindGramTabLineInTags(const vector<CTag>& Tags, poses_mask_t Poses, QWORD AllGrammems) const
 {
     for (int j=0; j < Tags.size(); j++)
 	{

@@ -11,7 +11,7 @@ const int PrefixesCount = 2;
 const CProductivePrefix Prefixes[PrefixesCount] = { {"¿¬»¿", "¿¬»¿"},{"¿›–Œ", "¿¬»¿"} };
 
 
-long CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD UnitNo) const
+poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD UnitNo) const
 {
 	StringVector GramFets;
     Ross.GetSimpleFieldItemsFromArticle (UnitNo, "GF", 0, 0, GramFets);

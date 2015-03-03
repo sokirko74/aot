@@ -8,7 +8,7 @@
 
 #define YYERROR_VERBOSE
 //#define YYPARSE_PARAM _parser
-#define YYLEX_PARAM _parser
+//#define YYLEX_PARAM _parser
 //#define _prs ((CChunkParser*) _parser)
 
 

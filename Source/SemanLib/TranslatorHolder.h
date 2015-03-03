@@ -126,8 +126,8 @@ public:
     StringVector GetAspVerb (string Verb, bool IsPerfective);
 	void ErrorMessage (string Mess);
 	bool MakeSyntaxStr(const char* text, CMyTimeSpanHolder& GlobalSpan);
-	DWORD GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, string WordForm, long Poses, string& ResultLemma) const;
-	DWORD  GetFirstParadigmId (const MorphLanguageEnum langua, string WordForm,  long Poses) const;
+	DWORD GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, string WordForm, poses_mask_t Poses, string& ResultLemma) const;
+	DWORD  GetFirstParadigmId (const MorphLanguageEnum langua, string WordForm,  poses_mask_t Poses) const;
 	string GetThesPath(int ThesId) const;
 	const CDictionary* GetRusOborots() const;
 

@@ -101,11 +101,11 @@ bool CAncodePattern::DeleteAncodesByGrammemIfCan(BYTE Grammem)
     return true;
 }
 
-bool CAncodePattern::ModifyGrammems(QWORD Grammems , size_t Poses)
+bool CAncodePattern::ModifyGrammems(QWORD Grammems, poses_mask_t Poses)
 {
 	string strOldGramcodes = m_GramCodes;	
 	QWORD  savegrammems = m_iGrammems;	
-	size_t saveposes = m_iPoses;
+	poses_mask_t saveposes = m_iPoses;
 	m_iGrammems = 0;
 	m_iPoses = 0;
 	m_GramCodes = "";

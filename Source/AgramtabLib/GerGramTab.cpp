@@ -106,7 +106,7 @@ bool CGerGramTab::GleicheSubjectPredicate(const char* subj, const char* pred) co
 
 
 
-bool CGerGramTab::IsStrongClauseRoot(const DWORD poses) const
+bool CGerGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
 {
 	return		(poses & (1<<gVER)) != 0;
 };
@@ -123,35 +123,35 @@ bool CGerGramTab::is_month (const char* lemma) const
 	return false;
 };
 
-bool CGerGramTab::IsMorphNoun (size_t poses)  const
+bool CGerGramTab::IsMorphNoun (poses_mask_t poses)  const
 {
 	return  ( ( poses & ( 1 << gSUB)   ) >0)
 		 || ( ( poses & ( 1 << gEIG)   ) >0);
 };
 
-bool CGerGramTab::is_morph_adj (size_t poses) const
+bool CGerGramTab::is_morph_adj (poses_mask_t poses) const
 {
 	return  ( poses & (1 <<gADJ  )) >0 ;
 };
 
-bool CGerGramTab::is_morph_participle (size_t poses) const
+bool CGerGramTab::is_morph_participle (poses_mask_t poses) const
 {
 	return  ( poses & (1 <<gPA1  ))
 			|| ( poses & (1 << gPA2  ));
 };
  
-bool CGerGramTab::is_morph_pronoun (size_t poses) const
+bool CGerGramTab::is_morph_pronoun (poses_mask_t poses) const
 {
 	return  ( poses & (1 <<gPRONOMEN  )) != 0;
 };
 
 
-bool CGerGramTab::is_morph_pronoun_adjective(size_t poses) const
+bool CGerGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
 {
 	return	   ( poses & (1 <<gPRO_BEG  )) != 0	;
 };
 
-bool CGerGramTab::is_left_noun_modifier (size_t poses, QWORD grammems) const
+bool CGerGramTab::is_left_noun_modifier (poses_mask_t poses, QWORD grammems) const
 {
 	if (poses & (1 <<gZAL )) return true;
 	if (!(grammems & gAllCases)) return false;
@@ -163,12 +163,12 @@ bool CGerGramTab::is_left_noun_modifier (size_t poses, QWORD grammems) const
 }
 
 
-bool CGerGramTab::is_numeral (size_t poses) const
+bool CGerGramTab::is_numeral (poses_mask_t poses) const
 { 
 	return  false;
 };
 
-bool CGerGramTab::is_verb_form (size_t poses) const
+bool CGerGramTab::is_verb_form (poses_mask_t poses) const
 {
 	return 
 			is_morph_participle(poses) 
@@ -177,27 +177,27 @@ bool CGerGramTab::is_verb_form (size_t poses) const
 
 
 
-bool CGerGramTab::is_infinitive(size_t poses) const
+bool CGerGramTab::is_infinitive(poses_mask_t poses) const
 {
 	return false; 
 }
 
-bool CGerGramTab::is_morph_predk(size_t poses) const
+bool CGerGramTab::is_morph_predk(poses_mask_t poses) const
 {
 	return false;
 }
 
-bool CGerGramTab::is_morph_adv(size_t poses) const
+bool CGerGramTab::is_morph_adv(poses_mask_t poses) const
 {
 	return  ( poses & (1 <<gADV )) != 0;
 }
 
-bool CGerGramTab::is_morph_personal_pronoun (size_t poses, QWORD grammems) const
+bool CGerGramTab::is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const
 {
 	return		false;
 };
 
-bool CGerGramTab::IsSimpleParticle(const char* lemma, size_t poses) const
+bool CGerGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 {
 	return false;
 }
@@ -205,7 +205,7 @@ bool CGerGramTab::IsSimpleParticle(const char* lemma, size_t poses) const
 
 
 
-bool CGerGramTab::IsSynNoun(size_t poses, const char* Lemma) const
+bool CGerGramTab::IsSynNoun(poses_mask_t poses, const char* Lemma) const
 {
 	return			is_morph_pronoun(poses)
 			||		IsMorphNoun(poses);
@@ -250,7 +250,7 @@ QWORD CGerGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun,con
 	return  Gleiche(GenderNumberCaseGerman, gram_code_noun, gram_code_adj);
 };
 
-bool CGerGramTab::is_morph_article(size_t poses)  const 
+bool CGerGramTab::is_morph_article(poses_mask_t poses)  const 
 {
 	return  ( poses & (1 <<gART  )) != 0;
 };
@@ -324,26 +324,26 @@ string CommonCase(const CAgramtab* pGramTab, const string& noun1, const string& 
 };
 
 
-bool HasOnlyOneCase(const CAgramtab* pGramTab,  const string& Ancodes, const size_t& poses, const QWORD& Grammems)
+bool HasOnlyOneCase(const CAgramtab* pGramTab,  const string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
 {
-	DWORD oPoses;
+	poses_mask_t oPoses;
 	QWORD  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return  (oGrammems & gAllCases) == Grammems;
 };
 
-bool HasGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const size_t& poses, const QWORD& Grammems)
+bool HasGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
 {
-	DWORD oPoses;
+	poses_mask_t oPoses;
 	QWORD  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return		((oGrammems & Grammems) == Grammems)
 		&&		((oPoses & poses) == poses);
 };
 
-bool HasOneGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const size_t& poses, const QWORD& Grammems)
+bool HasOneGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
 {
-	DWORD oPoses;
+	poses_mask_t oPoses;
 	QWORD  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return		(oGrammems & Grammems) > 0;
