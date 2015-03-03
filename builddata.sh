@@ -19,9 +19,6 @@ for f in Comp Fin Omni Loc ; do
 done;
 
 
-run Bin/SimpleGrammarPrecompiled German Source/SimpleGrammarPrecompiled/tests/test.grm 2>test_glr.log
-run cmp test_glr.log Source/SimpleGrammarPrecompiled/tests/tests.log
-
 MORPHOLOGY_LANGUAGES="Rus Ger Eng"
 for language in $MORPHOLOGY_LANGUAGES
 do
@@ -36,6 +33,9 @@ run gzip -cd $d/base.lex.gz >$d/base.lex
 run gzip -cd $d/base.ngram.gz >$d/base.ngram
 run Bin/ConvertTrigramBinary  Dicts/Trigram/full.rev.config
 run Bin/TestSynan Russian Test/Synan/Rus/test.txt | cmp - Test/Synan/Rus/result.txt
+
+run Bin/SimpleGrammarPrecompiled German Source/SimpleGrammarPrecompiled/tests/test.grm 2>test_glr.log
+run cmp test_glr.log Source/SimpleGrammarPrecompiled/tests/tests.log
 
 #german syntax
 GERMAN_SYNTAX="GerSynan/gformats.txt
