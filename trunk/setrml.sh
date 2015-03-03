@@ -8,6 +8,15 @@ run()
 	  exit 1;
     fi
 }
+check_executable()
+{
+    which $1;
+    if [ "$?" -ne "0" ]; then
+	  echo "cannot find $1. Install it";
+	  exit 1;
+    fi
+}
+
 
 
 if [ -z $RML ]; then
