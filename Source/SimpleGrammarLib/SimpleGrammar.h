@@ -211,7 +211,7 @@ public:
 	string	GetRuleStr(const CWorkRule& R, int AsteriskNo, bool bPrintFeatures=true) const;
 	bool	GetPossibleTerminalStrings(size_t NonTerminalSymbolNo, map<size_t, vector< CWorkRightRulePart > >& MetaSymbolToTerminalRules) const;
 	size_t	GetCountOfRoots()  const;
-	bool	ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection& PlmLines, const CAgramtab*	pGramTab, CPlmLineCollection& Result, bool bDumpOccurrences) const;
+	bool	ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection& PlmLines, const CAgramtab*	pGramTab, vector<string>& Result, bool bDumpOccurrences) const;
 	void	BuildAutomat(set<CWorkRule>& EncodedRules);
 	bool	IsValid() const;
 	bool	SavePrecompiled(string GrammarFileName) const;

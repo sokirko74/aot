@@ -34,10 +34,14 @@ STDMETHODIMP CCOMMAPost::ProcessData(IUnknown *piInputTextItems, IUnknown **piOu
 	CCOMPLMLineCollection* Out = reinterpret_cast<CCOMPLMLineCollection*>(piPlmLines.GetInterfacePtr());
 	Out->AddRef();
 
-	if (!m_pPostMorphInterface->ProcessData (In, *Out))
-			return E_FAIL;
+	if (!m_pPostMorphInterface->ProcessData (In))
+	    return E_FAIL;
 
-	*piOutputTextItems = Out;
+    for (size_t i = 0; i < m_pPostMorphInterface->GetResultLemWordCount(); ++i) {
+        piPlmLines->AddLine(m_pPostMorphInterface->GetResultLemWord(i).c_str());
+    }
+
+    *piOutputTextItems = Out;
 
 	return S_OK;
 }

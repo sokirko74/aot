@@ -15,7 +15,7 @@ public:
 	CGermanPostMorph();
 	~CGermanPostMorph();
 
-	bool	ProcessData(const CPlmLineCollection *piInTextItems, CPlmLineCollection& piOutTextItems);
+	bool	ProcessData(const CPlmLineCollection *piInTextItems);
 	bool	Init(const CAgramtab* GerGramTab);
 	
 };

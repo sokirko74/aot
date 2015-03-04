@@ -223,8 +223,8 @@ template <class T>
 void ClearVector(vector<T>& V)
 {
 	V.clear();
-	vector<T> dummy (V);
-	V.swap (dummy);
+//	vector<T> dummy (V);
+//	V.swap (dummy);
 };
 
 

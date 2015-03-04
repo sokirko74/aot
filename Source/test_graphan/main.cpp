@@ -118,9 +118,6 @@ int main(int argc, char** argv)
 
 	::CoInitialize(NULL); 
 
-	//LEMMATIZERLib::ILemmatizerPtr piLemmatizerRu = initLematizerRu();
-	//LEMMATIZERLib::ILemmatizerPtr piLemmatizerEn = initLematizerEn();
-	//LEMMATIZERLib::ILemmatizerPtr piLemmatizerDe = initLematizerDe();
     {
 	    GRAPHANLib::IGraphmatFilePtr piGraphan = 0;
 	    HRESULT hr = piGraphan.CreateInstance( __uuidof( GRAPHANLib::GraphmatFile ) );

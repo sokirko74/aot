@@ -126,15 +126,15 @@ bool IsPartOfNonSingleOborot(const CHomonym* pH)
     return pH->m_bOborot1 != pH->m_bOborot2;
 }
 
-static bool SetFioFormat (CMAPost& C, const CFIOFormat& Format, CLineIter it) 
+bool CMAPost::SetFioFormat (const CFIOFormat* Format, CLineIter it) 
 {
    vector<SmallHomonymsVec> Hypots;
    SmallWordsVec FioWords;
 
-   Hypots.resize(Format.m_Items.size());
+   Hypots.resize(Format->m_Items.size());
    
    int CountOfVariants = 1;
-   for (long ItemNo = 0; ItemNo < Format.m_Items.size() && it != C.m_Words.end(); ItemNo++, it=C.NextNotSpace(it))
+   for (long ItemNo = 0; ItemNo < Format->m_Items.size() && it != m_Words.end(); ItemNo++, it=NextNotSpace(it))
    {
         FioWords.Add(it);
 		CPostLemWord& W = *it;
@@ -145,14 +145,14 @@ static bool SetFioFormat (CMAPost& C, const CFIOFormat& Format, CLineIter it)
 			// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
             if (IsPartOfNonSingleOborot(pH)) return false;
 
-			if (IsPartFio(C, Format.m_Items[ItemNo], W, pH))
+			if (IsPartFio(*this, Format->m_Items[ItemNo], W, pH))
 					Hypots[ItemNo].Add(pH);
 		};
         if ( Hypots[ItemNo].empty() ) return false;
 		CountOfVariants *= Hypots[ItemNo].size();
    };
 
-   if (FioWords.size() != Format.m_Items.size()) return false; // не достроилось
+   if (FioWords.size() != Format->m_Items.size()) return false; // не достроилось
 
    SmallHomonymsVec V; // текущий вариант 
    vector<SmallHomonymsVec> Variants;
@@ -160,7 +160,7 @@ static bool SetFioFormat (CMAPost& C, const CFIOFormat& Format, CLineIter it)
    V.m_ItemsCount = Hypots.size();
    GetCommonVariants(Hypots, V, Variants, 0);
 
-   if (Format.m_GleicheCase)
+   if (Format->m_GleicheCase)
 	for (long VarNo=0; VarNo < Variants.size(); VarNo++)
 	{
 		QWORD Grammems = rAllCases | rAllNumbers;
@@ -239,7 +239,7 @@ void CMAPost::Rule_Fio()
     for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
     {
         for (long FormatNo=0; FormatNo < FioFormats.size(); FormatNo++)
-            if (SetFioFormat (*this, FioFormats[FormatNo], it))
+            if (SetFioFormat (&FioFormats[FormatNo], it))
             {
                 break;
             }

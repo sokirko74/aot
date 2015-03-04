@@ -208,9 +208,11 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(string str, BOOL bFile, BOOL bWriteInte
 			m_piBeforeSyntaxPlmLines->AttachLemmatizer(m_piLemmatizer);			
 			m_piBeforeSyntaxPlmLines->CopyItems(m_piAfterMorphPlmLines);
 		}
-		else
+        else {
 			m_piBeforeSyntaxPlmLines = m_piMAPost->ProcessData(m_piAfterMorphPlmLines);
-		if (bWriteIntermFiles)
+        }
+
+        if (bWriteIntermFiles)
 			m_piBeforeSyntaxPlmLines->SaveToFile(string(log_path+"after.lem").c_str()); 
 
 	COM_CATCH( "PostMorphology has crushed.");
@@ -224,7 +226,6 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(string str, BOOL bFile, BOOL bWriteInte
 BOOL CCOMSyntaxHolder::BuildSyntax(BOOL bSaveIntermResults)
 {
 	COM_TRY
-		
 		assert( !(m_piSentCollection == NULL) );
 		HRESULT hr = m_piSentCollection->raw_ProcessData(m_piBeforeSyntaxPlmLines);
 		if( FAILED(hr) )

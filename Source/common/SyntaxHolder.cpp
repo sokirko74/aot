@@ -82,16 +82,18 @@ bool CSyntaxHolder::GetSentencesFromSynAn(string str, bool bFile)
         #endif
 		// ============  Postmorphology =======================
 
-		CPlmLineCollection MapostPlmLines;
 		if (m_bTimeStatis) t1= clock();
 
-		if (!m_pPostMorph->ProcessData(&m_PlmLines, MapostPlmLines))
+		if (!m_pPostMorph->ProcessData(&m_PlmLines))
 		{
 			fprintf (stderr, "  Cannot process Mapost\n");
 			return false;
 
-		};;
-		if (m_bTimeStatis) 
+		};
+        CPlmLineCollection MapostPlmLines;
+        m_pPostMorph->SwapResults(MapostPlmLines.m_Items);
+
+        if (m_bTimeStatis) 
 		{
 			t2 = clock();
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
