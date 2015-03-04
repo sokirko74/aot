@@ -47,7 +47,7 @@ bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
 	return true;
 };
 
-bool	CGermanPostMorph::ProcessData(const CPlmLineCollection *piInTextItems, CPlmLineCollection& piOutTextItems)
+bool	CGermanPostMorph::ProcessData(const CPlmLineCollection *piInTextItems)
 {
 	
 	//if (!m_PersonGrammar.ParseFile(TrieParsingMethod, *piInTextItems, m_GerGramTab, piOutTextItems))
@@ -61,7 +61,7 @@ bool	CGermanPostMorph::ProcessData(const CPlmLineCollection *piInTextItems, CPlm
 		return false;
 	};
 
-	if (!m_PersonGrammar.ParseFile(GLRRestartParsing, *piInTextItems, m_GerGramTab, piOutTextItems, false))
+	if (!m_PersonGrammar.ParseFile(GLRRestartParsing, *piInTextItems, m_GerGramTab, m_ResultLemWords, false))
 		return false;
 
 	return true;

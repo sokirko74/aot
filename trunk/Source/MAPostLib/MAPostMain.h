@@ -61,30 +61,29 @@ typedef LineCollection::iterator CLineIter;
 typedef LineCollection::const_iterator CConstLineIter;
 
 typedef CSmallVector<CLemmaAndCodes, 20> SurnameHypotsVec;
+struct CFIOFormat;
 
-
-/////////////////////////////////////////////////////////////////////////////
-// CCOMMAPost
 class CMAPost  : public CPostMorphInteface
 {
+	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
+	string          m_DURNOVOGramCode;
+	list<CPostLemWord>	m_Words;
+    
+
 public:
 	CMAPost();
 	~CMAPost();
 public:
-	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
-	string          m_DURNOVOGramCode;
-	list<CPostLemWord>	m_Words;
 	
-
+    
     bool    LoadWords(const CPlmLineCollection *piInTextItems);
-	bool	ProcessData(const CPlmLineCollection *piInTextItems, CPlmLineCollection& piOutTextItems);
+	bool	ProcessData(const CPlmLineCollection *piInTextItems);
 	bool	Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab);
 	CLineIter Remove(CLineIter it, bool bRemoveSpaceAfterDeletedWord);
     CLineIter PassSpaces(CLineIter it);
     CLineIter BackSpaces(CLineIter it);
     CLineIter NextNotSpace(CLineIter it);
 
-	
 
 protected:
 	const CLemmatizer*			m_pRusLemmatizer;
@@ -154,6 +153,7 @@ protected:
     bool FilterOnePostLemWord(CPostLemWord& W, WORD tagid, WORD tagid2) const;
     void Rule_TwoPredicates();
     void SolveAmbiguityUsingRuleForTwoPredicates(CLineIter start, CLineIter end);
+    bool SetFioFormat (const CFIOFormat* Format, CLineIter it); 
 
 };
 

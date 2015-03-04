@@ -73,7 +73,7 @@ struct CInputSentence
 	};
 
 	size_t	ReadSentence (const CPlmLineCollection&	PlmLines, size_t StartLineNo);
-	void	AddToResultPlmLinesCollection(CPlmLineCollection& Result) const;
+	void	AddToResultPlmLinesCollection(vector<string>& Result) const;
 	size_t	GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo) const;
 
 };
@@ -227,13 +227,13 @@ size_t CInputSentence::GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo
 	return StartWordNo+Result;
 };
 
-void CInputSentence::AddToResultPlmLinesCollection(CPlmLineCollection& Result) const
+void CInputSentence::AddToResultPlmLinesCollection(vector<string>& Result) const
 {
 	for (size_t i=0; i<m_Words.size(); i++)
 		for (size_t j=0; j < m_Words[i].m_Homonyms.size(); j++)
 		{
 			const CPlmLine& L = m_Words[i].m_Homonyms[j];
-			Result.m_Items.push_back(L.GetStr());
+			Result.push_back(L.GetStr());
 		};
 
 };
@@ -616,15 +616,15 @@ void CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 
 
 
-bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection& PlmLines, const CAgramtab*	pGramTab, CPlmLineCollection& Result, bool bDumpOccurrences) const
+bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection& PlmLines, const CAgramtab*	pGramTab, vector<string>& Result, bool bDumpOccurrences) const
 {
 	//printf ("Parsing  file.... \n");
 	remove ("occurrs.txt");
 	if (PlmLines.m_Items.empty()) return false;
 	PlmLines.SaveToFile("input.lem");
 	size_t Count = PlmLines.m_Items.size();
-	Result.m_Items.clear();	
-	Result.m_Items.push_back(PlmLines.m_Items[0]);
+	Result.clear();	
+	Result.push_back(PlmLines.m_Items[0]);
 
 	CInputSentenceGLR Sentence(pGramTab);
 	
@@ -651,8 +651,6 @@ bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollecti
 	};
 
 
-	Result.SaveToFile("result.lem");
-	//printf ("Parsing  was finished\n");
 	return true;
 };
 

@@ -56,13 +56,9 @@ public:
 		m_Items[pos] = (const char*)_bstr_t(newVal);
 		return S_OK;
 	}
-	STDMETHODIMP CCOMPLMLineCollection::InsertLine(int LineNo, BSTR LineStr)
+	STDMETHODIMP CCOMPLMLineCollection::AddLine(BSTR LineStr)
 	{
-	   // TODO: Add your implementation code here
-		if (LineNo >= m_Items.size())
-			m_Items.push_back((const char*)_bstr_t(LineStr));
-		else
-			m_Items.insert( m_Items.begin()+LineNo, (const char*)_bstr_t(LineStr));
+	   	m_Items.push_back((const char*)_bstr_t(LineStr));
 		return S_OK;
 	}
 

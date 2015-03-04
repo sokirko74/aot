@@ -186,23 +186,22 @@ bool CMAPost::LoadWords(const CPlmLineCollection *piInTextItems)
 	}
 }
 
-bool CMAPost::ProcessData(const CPlmLineCollection *piInTextItems, CPlmLineCollection& piOutTextItems)
+bool CMAPost::ProcessData(const CPlmLineCollection *piInTextItems)
 {
 	try
 	{
-		
         LoadWords(piInTextItems);
 
 		RunRules();
 
-		ClearVector(piOutTextItems.m_Items);
+		ClearVector(m_ResultLemWords);
         for (list<CPostLemWord>::const_iterator it = m_Words.begin(); it !=  m_Words.end(); it++)
             for (size_t i=0; i < it->GetHomonymsCount(); i++)
             {
                 if (m_bHumanFriendlyOutput)
-                    piOutTextItems.m_Items.push_back(it->GetDebugString(it->GetHomonym(i), i==0));
+                    m_ResultLemWords.push_back(it->GetDebugString(it->GetHomonym(i), i==0));
                 else
-			        piOutTextItems.m_Items.push_back(it->GetPlmStr(it->GetHomonym(i), i==0));
+			        m_ResultLemWords.push_back(it->GetPlmStr(it->GetHomonym(i), i==0));
             }
                 
 		m_Words.clear();
