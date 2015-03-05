@@ -136,29 +136,7 @@ int	main(int argc, char	**argv)
 
 	if (Action == "start")
 	{		
-		//	working	as a daemon
-		int	fd;	int	i;
-		struct rlimit flim;
-		if (getppid()!=1)
-		{
-			signal(SIGTTOU,SIG_IGN);
-			signal(SIGTTIN,SIG_IGN);
-			signal(SIGTSTP,SIG_IGN);
-			if(fork()!=0)
-			{
-				exit(0);
-			};
-			setsid();
-		}
-
-		getrlimit(RLIMIT_NOFILE, &flim);
-
-		for(fd=0;fd<flim.rlim_max;fd++)
-			close(fd);
-		chdir("/");
-
-		openlog("Synan Server",	LOG_PID| LOG_CONS, LOG_DAEMON );
-
+        start_as_daemon ("Synan Server");
 	}
 
 	try{

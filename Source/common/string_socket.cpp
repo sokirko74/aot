@@ -14,7 +14,9 @@
 		#include <netdb.h>
 		#include <stdio.h>
 		#define SOCKET int
-
+        #include <syslog.h>
+        #include <sys/wait.h>
+        #include <sys/resource.h>
 #endif
 
 
@@ -775,3 +777,25 @@ void CHost::CopyAddressParametersFrom(const CHost& X)
 };
 
 
+void start_as_daemon(const char* daemon_name) {
+    //      working as a daemon
+    if (getppid()!=1)
+    {
+        signal(SIGTTOU,SIG_IGN);
+        signal(SIGTTIN,SIG_IGN);
+        signal(SIGTSTP,SIG_IGN);
+        if(fork()!=0) {
+            exit(0);
+        };
+        setsid();
+    }
+
+    struct rlimit flim;
+    getrlimit(RLIMIT_NOFILE, &flim);
+
+    for(int fd=0;fd<flim.rlim_max;fd++)
+            close(fd);
+    chdir("/");
+
+    openlog(daemon_name, LOG_PID| LOG_CONS, LOG_DAEMON );
+}

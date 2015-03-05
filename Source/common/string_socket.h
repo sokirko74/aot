@@ -70,6 +70,7 @@ extern bool SetSocketSendBuffer(int socket_fd, int BufferSize);
 extern bool SocketInitialize(bool bReadFromLocalFile);
 extern bool SocketDeinitialize();
 extern bool	LoadHosts (string Path, vector<CHost>& Hosts);
+extern void start_as_daemon(const char* daemon_name);
 bool CloseSocket(int l_socket);
 
 	
