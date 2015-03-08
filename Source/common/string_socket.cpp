@@ -140,10 +140,11 @@ inline bool send_buffer(int client_fd, const char* Buffer,int Length, string& Er
 
 
 
+const size_t PacketHeaderSize = 20;
 bool SendString (int client_fd, const char* Str, size_t  PacketLength, string& ErrorStr)
 {
 	try {
-		if (!send_buffer(client_fd, (const char*)&PacketLength, sizeof(PacketLength), ErrorStr) )
+		if (!send_buffer(client_fd, Format("%020i", PacketLength).c_str(), PacketHeaderSize, ErrorStr) )
 		{
 			return false;
 		}
@@ -223,13 +224,16 @@ NetworkErrorsEnum RecieveString (int  client_fd, string& Result, int TimeOut)
 	try {
 		int PacketLength;
 		int have_read;
-
-		NetworkErrorsEnum Res = recieve_buffer (client_fd, (char*)&PacketLength, sizeof(PacketLength), have_read, TimeOut);
+        char PacketLengthStr[PacketHeaderSize + 1];
+		NetworkErrorsEnum Res = recieve_buffer (client_fd, PacketLengthStr, PacketHeaderSize, have_read, TimeOut);
 		if (Res != neSuccess )
 		{
 			return Res;
 		}
-
+        PacketLengthStr[PacketHeaderSize] = 0;
+        PacketLength = atoi(PacketLengthStr);
+        
+        
 		
 		const int buffer_len = 1000;
 		char buffer[buffer_len+1];

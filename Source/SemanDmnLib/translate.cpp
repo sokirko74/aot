@@ -10,7 +10,7 @@ RussianIntoEnglishTranslator *translater = 0;
 
 void seman_daemon_log(const string&  t)
 {
-	string FileName = "tr_srv.log";
+	string FileName = "seman_daemon.log";
 	try {
 		string log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
 		FileName = log_path + FileName;
@@ -70,22 +70,16 @@ string& ConvertPath (string& s) {
 };
 
 
-int Count = 0;
 string RussianIntoEnglishTranslator::translate(string russian, const string &po)
 {
 	string R = russian;
-	Count++;
-	if (Count  == 716)
-	{
-		int z = 0;
-	}
 	TrimLeft (R);
 	russian = R.c_str();
 
 	string Graph;
 
 	try {
-		seman_daemon_log(Format("  FindSituations %s\n", russian.c_str()));
+		seman_daemon_log(Format("  FindSituations (po=%s) %s\n", po.c_str(), russian.c_str()));
 		m_SemBuilder.FindSituations(russian.c_str(), 0, po.c_str(), 20000, -1, "", Graph);
 		
 	} 
