@@ -2,7 +2,11 @@ include ../common/common_mak
 
 ExeName = TestLem$(ExeExten)
 
-objects = TestLem.o$(ct) ../common/utilit.o$(ct)
+objects = TestLem.o$(ct) \
+        ../common/utilit.o$(ct) \
+        ../common/Morphan.o$(ct) \
+        ../common/MorhologyHolder.o$(ct)
+
 
 libs = ../LemmatizerLib/libLemmatizer$(ct).$(lib_ext) \
 ../AgramtabLib/libAgramtab$(ct).$(lib_ext) \

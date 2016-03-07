@@ -22,6 +22,7 @@ public:
 	~CMorphologyHolder();
 
 	bool GetMorphology(string str, bool bFile, int& CountOfWords);
+    bool LoadLemmatizer(MorphLanguageEnum langua);
 	bool LoadGraphanAndLemmatizer(MorphLanguageEnum langua);
 	void DeleteProcessors();
 	DwordVector GetParadigmIdsByNormAndAncode(std::string &str, const std::string &code) const;

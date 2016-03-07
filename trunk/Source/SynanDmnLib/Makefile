@@ -5,9 +5,9 @@ LibName = libSynanDmn$(ct)
 
 objects = \
 JVisualSynAnParamBuilder.o$(ct) \
-Morphan.o$(ct) \
 SynanDmn.o$(ct) \
 ../common/string_socket.o$(ct) \
+../common/Morphan.o$(ct) \
 ../common/SyntaxHolder.o$(ct) \
 ../common/BigramsReader.o$(ct) \
 ../common/MorhologyHolder.o$(ct)
