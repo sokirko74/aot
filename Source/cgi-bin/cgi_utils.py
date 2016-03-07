@@ -69,10 +69,8 @@ def  SendString (socket_conn, s):
 def  RecieveString (socket_conn):
     PacketLength = int(socket_conn.recv(20))
     res = ""
-    buffer_size = 4096
-    for i in xrange(PacketLength/buffer_size):
-        res += socket_conn.recv(buffer_size)
-    res += socket_conn.recv(PacketLength % buffer_size)
+    while len(res) < PacketLength:
+        res += socket_conn.recv(4096)
     return res
         
 
