@@ -4,7 +4,7 @@
 #include "../common/string_socket.h"
 #include "../common/BigramsReader.h"
 #include "JVisualSynAnParamBuilder.h"
-#include "Morphan.h"
+#include "../common/Morphan.h"
 
 struct CSynHost : public CHost
 {
@@ -180,7 +180,7 @@ bool LoadSynan()
     };
     assert (pGlobalSynHost == 0);
 
-    pGlobalSynHost = new  CSynHost(false,pdMediumDensity);
+    pGlobalSynHost = new  CSynHost(false, pdHeavyDensity);
     pGlobalSynHost->CopyAddressParametersFrom(Hosts[0]);
     pGlobalSynHost->m_LogFunction = synan_daemon_log;
     GlobalErrorMessage = synan_daemon_log;

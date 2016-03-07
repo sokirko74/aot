@@ -41,16 +41,10 @@ void CMorphologyHolder::DeleteProcessors()
 
 };
 
-
-bool CMorphologyHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua)
+bool CMorphologyHolder::LoadLemmatizer(MorphLanguageEnum langua)
 {
-	try
-	{
-		DeleteProcessors();
-
-		m_Graphan.FreeDicts();
-		m_Graphan.m_Language = langua;
-
+    try {
+        DeleteProcessors();
 		if (langua == morphRussian)
 		{
 			m_pGramTab = new CRusGramTab;
@@ -73,14 +67,6 @@ bool CMorphologyHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua)
 				ErrorMessage ("unsupported language");
 				return false;
 			};
-				
-
-        if (!m_Graphan.LoadDicts())
-		{	
-			ErrorMessage("Cannot load graphan\n");
-			return false;
-		}
-
 		string strError;
 		if (!m_pLemmatizer->LoadDictionariesRegistry(strError))
 		{
@@ -95,6 +81,32 @@ bool CMorphologyHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua)
 
 		m_PlmLines.m_pLemmatizer = m_pLemmatizer;
 		m_CurrentLanguage = langua;
+		return true;
+	}
+	catch(...)
+	{
+		return false;
+	};
+
+}
+
+
+bool CMorphologyHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua)
+{
+	try
+	{
+		DeleteProcessors();
+
+		m_Graphan.FreeDicts();
+		m_Graphan.m_Language = langua;
+        if (!m_Graphan.LoadDicts())
+		{	
+			ErrorMessage("Cannot load graphan\n");
+			return false;
+		}
+        if (! LoadLemmatizer(langua) )
+            return false;
+
 		return true;
 	}
 	catch(...)

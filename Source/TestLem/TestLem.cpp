@@ -14,6 +14,8 @@
 #include <locale.h>
 
 #include "../common/utilit.h"
+#include "../common/Morphan.h"
+#include "../common/MorphologyHolder.h"
 #include "../AgramtabLib/RusGramTab.h"
 #include "../AgramtabLib/EngGramTab.h"
 #include "../AgramtabLib/GerGramTab.h"
@@ -23,17 +25,15 @@
 bool				bPrintIds = true;;
 bool				bPrintForms = false;
 bool                bSortParadigms = false;
-MorphLanguageEnum	Language;
-CLemmatizer*		pLemmatizer;
-CAgramtab*			pAgramtab;
+CMorphologyHolder Holder;
 
 
 
 string GetGrammems (const char* tab_str)
 {
 	QWORD G;
-	pAgramtab->GetGrammems(tab_str, G);
-	string s = pAgramtab->GrammemsToStr (G);
+	Holder.m_pGramTab->GetGrammems(tab_str, G);
+	string s = Holder.m_pGramTab->GrammemsToStr (G);
 	if (!s.empty() && (s[s.length() -1] == ','))
 		s.erase(s.length() - 1);
 	return s;
@@ -43,11 +43,10 @@ std::string  GetMorphInfo (std::string  Form)
 {
 	
 
-	bool bCapital   = is_upper_alpha((BYTE)Form[0], Language);
+	bool bCapital   = is_upper_alpha((BYTE)Form[0], Holder.m_CurrentLanguage);
 
 	std::vector<CFormInfo> Paradigms;
-
-	pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
+	Holder.m_pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
 
 	std::vector< std::string>  Results;
 	for (int i=0; i < Paradigms.size(); i++)
@@ -60,8 +59,8 @@ std::string  GetMorphInfo (std::string  Form)
 
 		{
 			string GramCodes =	F.GetSrcAncode();
-			BYTE  PartOfSpeech = pAgramtab->GetPartOfSpeech (GramCodes.c_str());
-			Result	+= pAgramtab->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ") ;	
+			BYTE  PartOfSpeech = Holder.m_pGramTab->GetPartOfSpeech (GramCodes.c_str());
+			Result	+= Holder.m_pGramTab->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ") ;	
 
 			string  CommonAncode = F.GetCommonAncode();
 			Result += Format ("%s ", (CommonAncode.empty()) ? "" : GetGrammems(CommonAncode.c_str()).c_str());
@@ -126,7 +125,7 @@ void ProcessFile(std::string Filename)
 			std::string q =  buffer;
 			Trim(q);
 			if (q.empty()) continue;
-			RmlMakeUpper(q,pLemmatizer->GetLanguage());
+			RmlMakeUpper(q, Holder.m_pLemmatizer->GetLanguage());
 			Forms.push_back(q);
 		};
 		fclose (fp);
@@ -141,17 +140,16 @@ void ProcessFile(std::string Filename)
 	char OutBuffer[OutBufferSize];
 	for (size_t i=0; i < Count; i++)
 	{
-		if (!pLemmatizer->GetAllAncodesAndLemmasQuick(Forms[i], true, OutBuffer, OutBufferSize, true))
+		if (!Holder.m_pLemmatizer->GetAllAncodesAndLemmasQuick(Forms[i], true, OutBuffer, OutBufferSize, true))
 		{
 			printf ("Too many variants for %s\n", Forms[i].c_str());
 		};
-		//pLemmatizer->GetAllAncodesQuick((const BYTE*)Forms[i].c_str(), true, OutBuffer);
 		Results[i] = (char*)OutBuffer;
 	};
 	long ticks = clock() - start;
-	printf ("Count of words = %i\n", Count);
+	printf ("Count of words = %lu\n", Count);
 	double seconds = (double)ticks/(double)CLOCKS_PER_SEC;
-	printf ("Time = %g seconds; %i ticks\n", seconds,ticks);
+	printf ("Time = %g seconds; %lu ticks\n", seconds,  (size_t)ticks);
 	if (seconds > 0)
 		printf ("Speed = %g words per seconds\n", (((double)Count)/seconds));
 	else
@@ -176,28 +174,6 @@ void ProcessFile(std::string Filename)
 };
 
 
-template <class  T, class Y>
-bool InitMorphologySystem()
-{
-	std::string langua_str = GetStringByLanguage(Language);
-	pLemmatizer = new T;
-	string strError;
-	if (!pLemmatizer->LoadDictionariesRegistry(strError))
-	{
-   		fprintf (stderr, "Cannot load %s  morphological dictionary\n", langua_str.c_str());
-		fprintf (stderr, "Return error: %s\n", strError.c_str());
-		return false;
-	};
-	pAgramtab = new Y;
-	if (!pAgramtab->LoadFromRegistry())
-	{
-   		fprintf (stderr, "Cannot load %s  gramtab\n", langua_str.c_str() );
-		return false;
-	};
-	return true;
-};
-
-
 void PrintUsage()
 {
 		printf ("Dialing Command Line Morphology (www.aot.ru)\n");
@@ -215,6 +191,8 @@ int main(int argc, char **argv)
    	
     vector<string> ARGV;
     bool bEchoInput = false;
+    bool bPrintMorphan = false;
+    MorphLanguageEnum	Language;
     for (size_t i=1; i <  argc; i++)
     {
 		string s = argv[i];
@@ -237,6 +215,10 @@ int main(int argc, char **argv)
 		{
 			bPrintForms  = true;
 		}
+		else if (s == "-morphan")
+		{
+			bPrintMorphan  = true;
+		}
         else {
             ARGV.push_back(s);
         }
@@ -245,9 +227,7 @@ int main(int argc, char **argv)
 		PrintUsage();
     
     if (!GetLanguageByString(ARGV[0], Language))
-	{
 		PrintUsage();
-	};
 
 	std::string FileName;
 	if (ARGV.size() > 1)
@@ -255,29 +235,15 @@ int main(int argc, char **argv)
 
 	// ===============  LOADING DICTS ================
 	fprintf (stderr,"Loading..\n");
-	bool bResult = false;
-	switch (Language)
-	{
-		case morphRussian: 
-					bResult = InitMorphologySystem<CLemmatizerRussian, CRusGramTab>();
-					break;
-		case morphEnglish : 
-					bResult = InitMorphologySystem<CLemmatizerEnglish, CEngGramTab>();
-					break;
-		case morphGerman: 
-					bResult = InitMorphologySystem<CLemmatizerGerman, CGerGramTab>();
-					break;
-		default : PrintUsage();
-		
-	};
-	if (!bResult)
+	if (!Holder.LoadLemmatizer(Language)) {
+        fprintf (stderr,"Cannot load %s morphology\n", ARGV[0].c_str());
 		return 1;
+    }
 
 	if (!FileName.empty())
 	{
 		ProcessFile(FileName);
-		delete pLemmatizer;
-		delete pAgramtab;
+        Holder.DeleteProcessors();
 		return 0;
 	};
 	
@@ -285,13 +251,26 @@ int main(int argc, char **argv)
 	// ===============  WORKING ===============
 	
 	fprintf (stderr,"Input a word..\n");
-    char Form[100];	
+    char Form[255];	
 	while (fgets(Form, 1000, stdin))
 	{
 		std::string s = Form;
 		Trim(s);
 		if (s.empty()) break;
-		string Result = GetMorphInfo(s);
+        string Result;
+
+        if (bPrintMorphan) {
+            int LemmasCount;
+            Result = Lemmatize(s.c_str(), &Holder, LemmasCount);
+            if (bPrintForms) 
+                for (int i = 0; i < LemmasCount; i++)
+                {
+                    Result += "\n";
+                    Result += GetParadigm(s, i, &Holder);
+                };
+        }
+        else 
+		    Result = GetMorphInfo(s);
 
         if (bEchoInput)  {
             printf ("%s\t", s.c_str());
@@ -299,8 +278,7 @@ int main(int argc, char **argv)
 		printf ("%s\n", Result.c_str());
 		 
 	};
-	delete pLemmatizer;
-	delete pAgramtab;
+    Holder.DeleteProcessors();
 	return 0;
 }
 
