@@ -1,0 +1,1222 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./nti1997-Dateien/filelist.xml">
+<title>Программная реализация русского общесемантического словаря </title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>alex</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>DWDS</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>14</o:TotalTime>
+  <o:LastPrinted>1997-10-24T15:49:00Z</o:LastPrinted>
+  <o:Created>2004-03-02T09:07:00Z</o:Created>
+  <o:LastSaved>2004-03-02T09:07:00Z</o:LastSaved>
+  <o:Pages>5</o:Pages>
+  <o:Words>1796</o:Words>
+  <o:Characters>10240</o:Characters>
+  <o:Company>cir</o:Company>
+  <o:Bytes>36864</o:Bytes>
+  <o:Lines>85</o:Lines>
+  <o:Paragraphs>20</o:Paragraphs>
+  <o:CharactersWithSpaces>12575</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:DrawingGridHorizontalSpacing>6 pt</w:DrawingGridHorizontalSpacing>
+  <w:DrawingGridVerticalSpacing>6 pt</w:DrawingGridVerticalSpacing>
+  <w:DisplayVerticalDrawingGridEvery>0</w:DisplayVerticalDrawingGridEvery>
+  <w:UseMarginsForDrawingGridOrigin/>
+  <w:Compatibility>
+   <w:SpaceForUL/>
+   <w:BalanceSingleByteDoubleByteWidth/>
+   <w:DoNotLeaveBackslashAlone/>
+   <w:ULTrailSpace/>
+   <w:DoNotExpandShiftReturn/>
+   <w:UsePrinterMetrics/>
+   <w:WW6BorderRules/>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:AutoSpaceLikeWord95/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Times New Roman CYR";
+	panose-1:2 2 6 3 5 4 5 2 3 4;
+	mso-font-charset:204;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:536902279 -2147483648 8 0 511 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin-top:0cm;
+	margin-right:-45.0pt;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman CYR";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-language:RU;}
+h2
+	{mso-style-next:Standard;
+	margin-top:12.0pt;
+	margin-right:-45.0pt;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-language:RU;
+	mso-bidi-font-weight:normal;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{margin-top:0cm;
+	margin-right:-45.0pt;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman CYR";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-language:RU;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin-top:0cm;
+	margin-right:-45.0pt;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 207.65pt right 415.3pt;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman CYR";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-language:RU;}
+span.MsoFootnoteReference
+	{vertical-align:super;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-even-footer:url("./nti1997-Dateien/header.htm") ef1;
+	mso-footer:url("./nti1997-Dateien/header.htm") f1;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:264001312;
+	mso-list-type:simple;
+	mso-list-template-ids:615948818;}
+@list l0:level1
+	{mso-level-text:"%1\. ";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	mso-level-legacy:yes;
+	mso-level-legacy-indent:18.0pt;
+	mso-level-legacy-space:0cm;
+	margin-left:42.0pt;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:12.0pt;
+	font-family:"Times New Roman CYR";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@list l1
+	{mso-list-id:994797131;
+	mso-list-type:simple;
+	mso-list-template-ids:615948818;}
+@list l1:level1
+	{mso-level-text:"%1\. ";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	mso-level-legacy:yes;
+	mso-level-legacy-indent:18.0pt;
+	mso-level-legacy-space:0cm;
+	margin-left:18.0pt;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:12.0pt;
+	font-family:"Times New Roman CYR";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@list l2
+	{mso-list-id:1096052429;
+	mso-list-type:simple;
+	mso-list-template-ids:168316754;}
+@list l2:level1
+	{mso-level-text:"%1\. ";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	mso-level-legacy:yes;
+	mso-level-legacy-indent:18.0pt;
+	mso-level-legacy-space:0cm;
+	margin-left:54.0pt;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@list l3
+	{mso-list-id:1100375146;
+	mso-list-type:simple;
+	mso-list-template-ids:168316754;}
+@list l3:level1
+	{mso-level-text:"%1\. ";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	mso-level-legacy:yes;
+	mso-level-legacy-indent:18.0pt;
+	mso-level-legacy-space:0cm;
+	margin-left:42.0pt;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@list l4
+	{mso-list-id:1690057425;
+	mso-list-type:simple;
+	mso-list-template-ids:168316754;}
+@list l4:level1
+	{mso-level-text:"%1\. ";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	mso-level-legacy:yes;
+	mso-level-legacy-indent:18.0pt;
+	mso-level-legacy-space:0cm;
+	margin-left:54.0pt;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@list l5
+	{mso-list-id:2008553925;
+	mso-list-type:simple;
+	mso-list-template-ids:-2070236618;}
+@list l5:level1
+	{mso-level-text:"%1\. ";
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	mso-level-legacy:yes;
+	mso-level-legacy-indent:18.0pt;
+	mso-level-legacy-space:0cm;
+	margin-left:18.0pt;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:12.0pt;
+	font-family:"Times New Roman CYR";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:italic;
+	text-decoration:none;
+	text-underline:none;}
+@list l1:level1 lfo2
+	{mso-level-start-at:2;
+	mso-level-numbering:continue;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	mso-level-legacy:yes;
+	mso-level-legacy-indent:18.0pt;
+	mso-level-legacy-space:0cm;
+	margin-left:18.0pt;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:12.0pt;
+	font-family:"Times New Roman CYR";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+</head>
+
+<body lang=DE style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'>Сокирко А.В. <o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt;font-family:"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt;font-family:"Times New Roman"'><span
+style="mso-spacerun: yes"> </span></span><span lang=RU style='font-size:14.0pt;
+mso-bidi-font-size:10.0pt'>Программная реализация русского общесемантического
+словаря <o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:36.0pt'><b style='mso-bidi-font-weight:
+normal'><span lang=RU>Аннотация<span style="mso-spacerun: yes">  </span></span></b></p>
+
+<p class=MsoNormal style='text-indent:36.0pt'><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:-45.1pt;text-indent:36.0pt'><span
+lang=RU><span style="mso-spacerun: yes">  </span></span><span lang=RU
+style='font-size:10.0pt'><span style="mso-spacerun: yes"> </span></span><span
+lang=RU>В статье кратко сформулированы основные положения, которые были
+использованы для создания программной оболочки<span style="mso-spacerun: yes"> 
+</span>русского общесемантического словаря. Кроме этого, в статье приведены
+статистические данные, полученные с помощью новой оболочки.<span
+style="mso-spacerun: yes">   </span></span></p>
+
+<p class=MsoNormal style='text-indent:36.0pt'><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:36.0pt'><b style='mso-bidi-font-weight:
+normal'><span lang=RU>Общие слова <o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">       
+</span>Русский общесемантический словарь (далее словарь РОСС) занимает
+центральное место в<span style="mso-spacerun: yes">  </span>системе
+лингвистических процессоров, разрабатываемой в институте США и Канады. Словарь
+содержит семантическое и синтаксическое описание слов, традиционно относимых к
+ядру русского языка, которое, тем самым, можно понимать как пересечение
+лексиконов всех предметных областей.<span style="mso-spacerun: yes"> 
+</span>Поскольку словарь используется для автоматического<span
+style="mso-spacerun: yes">  </span>анализа текстов, информация в нем должна
+быть представлена <b style='mso-bidi-font-weight:normal'>формально</b>, а<span
+style="mso-spacerun: yes">  </span>ввиду того,<b style='mso-bidi-font-weight:
+normal'> </b><span style="mso-spacerun: yes"> </span>что<span
+style="mso-spacerun: yes">  </span>словарь описывает только лишь ядро языка,
+его структура должна быть доступной для других<span style="mso-spacerun: yes"> 
+</span>частных (предметно-ориентированных) баз данных. Структура словаря или схема
+словаря - это некоторая система списков констант, правил и форматов,
+определяющая, какими единицами и какими способами<span style="mso-spacerun:
+yes">  </span>можно описывать словарные входы. В таком случае словарь
+представим как множество пар вида:</span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">    
+</span>&lt;словарный вход, словарная статья&gt;,<span style="mso-spacerun:
+yes">  </span>где<span style="mso-spacerun: yes">  </span>“словарный вход” -
+некий уникальный ключ, а словарная статья - выражение, удовлеторяющее схеме
+словаря<span style="mso-spacerun: yes">  </span>и несущее основную информацию о
+словарном входе.</span></p>
+
+<p class=MsoNormal><span lang=RU>Схема словаря всегда может быть
+модифицирована, причем операции над схемой, естественно, повлияют на словарные
+статьи,<span style="mso-spacerun: yes">  </span>поэтому допустимости некоторых
+операций зависят от тех или иных особенностей состава словарных статей. </span></p>
+
+<p class=MsoNormal><span lang=RU>Важно отметить, что человеческое или
+программное обращение к словарю возможно только через схему словаря, а напрямую
+невозможно. </span></p>
+
+<p class=MsoNormal><span lang=RU>Программы или базы данных могут
+использовать<span style="mso-spacerun: yes">  </span>только схему или часть
+схемы словаря, например,<span style="mso-spacerun: yes">   </span>для
+построения своих собственных схем. В другом случае, программы могут<span
+style="mso-spacerun: yes">  </span>обращаться к самим словарным статьям, таким
+образом неявно задействуя часть<span style="mso-spacerun: yes">  </span>схемы словаря,<span
+style="mso-spacerun: yes">  </span>а именно ту, что была использована в
+словарных статьях. Считая, что схема словаря состоит сплошь из списков
+чего-либо (констант, правил и т.д.), можно назвать<span style="mso-spacerun:
+yes">  </span>первый вид программного доступа<span style="mso-spacerun: yes"> 
+</span>- вертикальным, имея в виду, что здесь словарь отдает обращающейся
+программе списки целиком, полностью. Второй способ можно назвать
+горизонтальным, так как для получения словарной статьи нам необходимы только
+части списков, так сказать, проекция словарной статьи на схему словаря.<span
+style="mso-spacerun: yes">  </span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-family:"Times New Roman";
+mso-ansi-language:EN-US'>C</span><span lang=RU>ловарь РОСС вертикально связан с
+базой данных “Словосочетания”, так как последняя база данных использует<span
+style="mso-spacerun: yes">  </span>перечень семантических характеристик<span
+style="mso-spacerun: yes">   </span>и перечень лексических функций, которые
+определены<span style="mso-spacerun: yes">  </span>в словаре РОСС. Словарь
+РОСС<span style="mso-spacerun: yes">  </span>горизонтально связан с базой
+данных “География” и семантическим процессором, так последние получают только
+словарные статьи от словаря РОСС, а не перечни, входящие в схему. </span></p>
+
+<p class=MsoNormal><span lang=RU>Вертикальная связь всегда постоянна,<span
+style="mso-spacerun: yes">  </span>здесь часть схемы является как бы
+разделенным ресурсом, который совместно используют<span style="mso-spacerun:
+yes">  </span>словарь и внешняя программа. При вертикальной связи можно<span
+style="mso-spacerun: yes">  </span>разрешить или запретить внешней программе
+изменять разделенный ресурс. Горизонтальная связь обычно не протяженна во
+времени, и здесь внешняя программа не может менять схему словаря. </span></p>
+
+<p class=MsoNormal><span lang=RU>Теперь перейдем к описанию схемы словаря РОСС.</span></p>
+
+<h2 style='margin-top:0cm;margin-right:-45.0pt;margin-bottom:0cm;margin-left:
+0cm;margin-bottom:.0001pt'><span lang=RU style='font-family:"Times New Roman CYR";
+mso-bidi-font-family:"Times New Roman";font-style:normal'><span
+style="mso-spacerun: yes">  </span>Схема словаря РОСС<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU>Схема словаря - это некоторый набор списков,
+определящих элементарные единицы и правила построения словарных статей. В
+словаре РОСС списки делятся на три группы:</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:0cm;mso-list:l1 level1 lfo1'><![if !supportLists]><span
+lang=RU>1. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Список словарных полей - это<span style="mso-spacerun: yes"> 
+</span>набор слов специального языка, которые используются для выделения<span
+style="mso-spacerun: yes">  </span>и обозначения информации, записанной в одной
+словарной статье. Проще говоря, информация в словарной статье<span
+style="mso-spacerun: yes">  </span>записана как бы по пунктам, каждый их
+которых описывает слово<span style="mso-spacerun: yes">  </span>с<span
+style="mso-spacerun: yes">  </span>какой-то одной стороны. Словарные поля - это
+названия этих пунктов, а содержимое пункта мы будем называть значением
+словарного<span style="mso-spacerun: yes">  </span>поля.</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:0cm;mso-list:l1 level1 lfo2'><![if !supportLists]><span
+lang=RU>2. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Домены - это такие списки, в которых содержатся<span
+style="mso-spacerun: yes">  </span>элементарные единицы, из которых строится
+значение поля. Любая словарная статья состоит только из названий полей и<span
+style="mso-spacerun: yes">  </span>элементов доменов.<span style="mso-spacerun:
+yes">  </span>Любые<span style="mso-spacerun: yes">  </span>сведения,<span
+style="mso-spacerun: yes">  </span>которые могут содержаться<span
+style="mso-spacerun: yes">  </span>в словарной статье, должны быть выражены
+элементами доменов или комбинациями элементов, эти последние можно называть <b
+style='mso-bidi-font-weight:normal'>выражениями</b>.</span></p>
+
+<p class=MsoNormal style='margin-left:0cm;text-indent:0cm;mso-list:l1 level1 lfo1'><![if !supportLists]><span
+lang=RU>3. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Форматы - это такие списки, которые определяют правила построения
+сложных выражений, состоящих из элементов доменов. Для любого формата и любой
+цепочки элементов домена<span style="mso-spacerun: yes">   </span>можно
+сказать, удовлетворяет ли данная цепочка данному формату или нет. Для каждого
+формата F назовем форматным множеством<span style="mso-spacerun: yes">  
+</span>FormatSet (F) - множество всех цепочек, которые удовлетворяют F.
+Всевозможные<span style="mso-spacerun: yes">  </span>цепочки, которые
+состоят<span style="mso-spacerun: yes">   </span>только из цепочек,
+принадлежащих FormatSet (F),<span style="mso-spacerun: yes"> 
+</span>назовем<span style="mso-spacerun: yes">  </span>мультиформатным
+множеством MultiFormatSet (F). Эти определения легко переносятся с одного
+формата<span style="mso-spacerun: yes">  </span>на множества (списки) форматов.
+</span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes"> </span>Как
+было сказано, для каждого словарного поля Х определен набор форматов С, и в
+словаре любое значения этого поля должно входить в MultiFormatSet (С) . </span></p>
+
+<p class=MsoNormal><span lang=RU>Для списков и элементов каждой из трех групп
+определены некоторые операции, к перечислению которых<span style="mso-spacerun:
+yes">  </span>мы сейчас приступим.</span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes"> </span>В
+список словарных полей можно добавить новое поле. Из него можно удалить<span
+style="mso-spacerun: yes">   </span>поле, при условии, что<span
+style="mso-spacerun: yes">  </span>поле не входит в словарные статьи словаря
+или баз данных, вертикально связанных со словарем. Полю можно приписать набор
+форматов, т.е. список форматов (см. ниже). Поле можно переименовать. </span></p>
+
+<p class=MsoNormal><span lang=RU>В списки форматов можно также добавлять
+элементы и удалять из них элементы. Каждый формат имеет название, который,
+естественно, можно менять.<span style="mso-spacerun: yes">  </span>Иногда на
+набор форматов накладывается условие однозначности в том смысле, что для любого
+выражения Х не найдется двух форматов из этого набора, которым<span
+style="mso-spacerun: yes">  </span>Х<span style="mso-spacerun: yes"> 
+</span>удовлетворяет одновременно. При работе с однозначными<span
+style="mso-spacerun: yes">  </span>наборами форматов не возникает
+неопределенности в интрепретации любого выражения Х. </span></p>
+
+<p class=MsoNormal><span lang=RU>Кроме этого, есть возможность менять сам
+формат, если, конечно,<span style="mso-spacerun: yes">  </span>при этом не
+возникает потери информации, записанной в этом формате, то есть тогда, когда
+мультиформатное множество старого формата входит в мультиформатное<span
+style="mso-spacerun: yes">  </span>множество нового формата.<span
+style="mso-spacerun: yes">  </span>Однако, если формат входит в набор, на
+который наложено условие однозначности, то при изменении формата
+мультиформатное множество может увеличиться, а значит , может нарушиться<span
+style="mso-spacerun: yes">  </span>условие однозначности - за этим нужно
+следить.</span></p>
+
+<p class=MsoNormal><span lang=RU>Операций над доменами больше, поскольку
+доменов в словаре очень много.<span style="mso-spacerun: yes">  </span>В
+словарь можно добавить домен, дав ему определенное название. Из словаря можно
+удалить домен, если он не используется<span style="mso-spacerun: yes"> 
+</span>в словаре.<span style="mso-spacerun: yes">  </span>Домену можно
+приписать список констант (элементарных единиц, из которых строится значение
+поля). Для домена можно определить меру свободы в динамической модификации
+констант доменов, по этому признаку домены бывают свободными и константными.
+Состав свободных доменов могут изменять любые внешние программы, а<span
+style="mso-spacerun: yes">   </span>константных - нет. При желании домену можно
+дать формат,<span style="mso-spacerun: yes">  </span>в котором нужно записывать
+константы домена.<span style="mso-spacerun: yes">  </span>Принята следующая
+классификация доменов:</span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l0 level1 lfo3'><![if !supportLists]><span
+lang=RU>1. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Базовые домены.<span style="mso-spacerun: yes">  </span>Здесь собраны
+все основные домены, константы которого принадлежат<span style="mso-spacerun:
+yes">  </span>языку описания<span style="mso-spacerun: yes"> 
+</span>естественного языка.<span style="mso-spacerun: yes">  </span>Констант в
+базовых доменах мало, формат домена<span style="mso-spacerun: yes">  </span>не
+определен. Изменение состава базового домена - очень ответственная задача.
+Примером базового домена может служить домен падежей, куда включены шесть
+констант для обозначения падежей русского языка.</span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l0 level1 lfo3'><![if !supportLists]><span
+lang=RU>2. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Домены-разделители.<span style="mso-spacerun: yes">  </span>В каждый
+домен-разделитель<span style="mso-spacerun: yes">  </span>входит по одной
+константе (знаки препинания, спец-символы и т.д.). Разделители используются для
+наглядного представления выражений.<span style="mso-spacerun: yes">   </span></span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l0 level1 lfo3'><![if !supportLists]><span
+lang=RU>3. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Текстовые домены.<span style="mso-spacerun: yes">  </span>Сюда включены
+домены словоформ русского языка, словоформ английского<span
+style="mso-spacerun: yes">  </span>языка и т.д. Для каждого домена определен
+формат, который ограничивает состав домена (например,<span style="mso-spacerun:
+yes">  </span>нельзя поместить английскую словоформу в домен словосочетаний
+русского языка). Некоторые из этих доменов свободны. </span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l0 level1 lfo3'><![if !supportLists]><span
+lang=RU>4. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Домены-объединения. Эти домены построены в результате объединения
+некоторых других, прежде определенных<span style="mso-spacerun: yes"> 
+</span>доменов. </span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l0 level1 lfo3'><![if !supportLists]><span
+lang=RU>5. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=RU>Форматные константные домены. Для этих доменов обязательно определен
+формат.<span style="mso-spacerun: yes">  </span></span></p>
+
+<p class=MsoNormal><span lang=RU>Перечислив основные объекты схемы словаря
+РОСС, перейдем к описанию самого словаря.</span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'>Словарные входы</span></b><span
+lang=RU><span style="mso-spacerun: yes">        </span></span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">  </span><span
+style="mso-spacerun: yes">   </span>В словаре РОСС<span style="mso-spacerun:
+yes">  </span>словарным входом является пара:</span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">    
+</span>&lt;лемма русского языка, номер значения леммы&gt;, где номер
+значения<span style="mso-spacerun: yes">  </span>- число от 1 до 10.</span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">     </span>В
+текущем наполнении словаря РОСС лемм мало , у которых<span style="mso-spacerun:
+yes">  </span>много значений, более того, можно сказать, что размеры классов
+лемм<span style="mso-spacerun: yes">  </span>с одинаковым числом значений
+уменьшаются экспонентно. Ниже приведены статистические данные, подтверждающие
+это<a style='mso-footnote-id:ftn1' href="#_ftn1" name="_ftnref1" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[1]<![endif]></span></span></a>
+:</span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .75pt;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=181 valign=top style='width:135.9pt;border:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Число значений леммы:</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>1</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>2</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>3</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>4</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>5</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>6</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>7</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=181 valign=top style='width:135.9pt;border:solid windowtext .75pt;
+  border-top:none;mso-border-top-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Процент лемм:</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>81 %</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>13 %</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>3<span style="mso-spacerun: yes">  </span>%</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>0.8 %</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>0.2 %</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>0.03 %</span></p>
+  </td>
+  <td width=58 valign=top style='width:43.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>0.03 %</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">   </span></span><b
+style='mso-bidi-font-weight:normal'><span lang=RU style='font-size:14.0pt;
+mso-bidi-font-size:10.0pt'>Словарные статьи </span></b></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU>Словарный вход соотносится с одной словарной
+статьей, которая предсказывает синтаксическое и семантическое поведение слова в
+тексте. Словарная статья содержит следующую информацию:</span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l3 level1 lfo4'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>1. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Описание собственной семантики слова,
+выраженное формулой, в качестве атомов<span style="mso-spacerun: yes"> 
+</span>которой используются элементы доменов семантических характеристик и
+смысловых отношений. </span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l3 level1 lfo4'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>2. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Описание грамматической роли леммы в
+предложении.</span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l3 level1 lfo4'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>3. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Описание валентной структуры слова,
+выраженное на языке смысловых отношений.</span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l3 level1 lfo4'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>4. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Семантические ограничения на выражения актантов
+слова в тексте, записанные на языке семантических характеристик.</span></p>
+
+<p class=MsoNormal style='margin-left:24.0pt;text-indent:0cm;mso-list:l3 level1 lfo4'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>5. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Грамматические ограничения на выражения
+актантов слова в тексте.</span></p>
+
+<p class=MsoNormal><span lang=RU>Мы не будем описывать<span
+style="mso-spacerun: yes">  </span>внутреннее устройство<span
+style="mso-spacerun: yes">  </span>словарной статьи, так как оно достаточно
+подробно описано в статье настоящего выпуска. Приведем<span
+style="mso-spacerun: yes">  </span>статистическое описание словарного состава
+словаря РОСС:</span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU>Таблица распределения словарных статей<span
+style="mso-spacerun: yes">  </span>по частям речи</span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .75pt;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=199 valign=top style='width:149.4pt;border:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Часть речи </span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Существит.</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Глагол</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Прилагат.</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Причастие </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=199 valign=top style='width:149.4pt;border:solid windowtext .75pt;
+  border-top:none;mso-border-top-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Процент статей </span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>68 %</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>19 %</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>12 %</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>1 %</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU>Таблица распределения словарных статей<span
+style="mso-spacerun: yes">  </span>по числу<span style="mso-spacerun: yes"> 
+</span>валентностей </span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .75pt;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=199 valign=top style='width:149.4pt;border:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Число валентностей </span></p>
+  </td>
+  <td width=48 valign=top style='width:36.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>1</span></p>
+  </td>
+  <td width=48 valign=top style='width:36.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>2</span></p>
+  </td>
+  <td width=54 valign=top style='width:40.5pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>3</span></p>
+  </td>
+  <td width=42 valign=top style='width:31.5pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>4</span></p>
+  </td>
+  <td width=42 valign=top style='width:31.5pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>5</span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>6</span></p>
+  </td>
+  <td width=60 valign=top style='width:45.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>7</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=199 valign=top style='width:149.4pt;border:solid windowtext .75pt;
+  border-top:none;mso-border-top-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Процент статей </span></p>
+  </td>
+  <td width=48 valign=top style='width:36.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>21 %</span></p>
+  </td>
+  <td width=48 valign=top style='width:36.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>40 %</span></p>
+  </td>
+  <td width=54 valign=top style='width:40.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>25 %</span></p>
+  </td>
+  <td width=42 valign=top style='width:31.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoFootnoteText><span lang=RU>2 %</span></p>
+  </td>
+  <td width=42 valign=top style='width:31.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>3%</span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>0.1 %</span></p>
+  </td>
+  <td width=60 valign=top style='width:45.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>0.1 %</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU>Таблица распределения некоторых семантических
+характеристик</span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .75pt;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=199 valign=top style='width:149.4pt;border:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Семант. характеристика </span></p>
+  </td>
+  <td width=72 valign=top style='width:54.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ДЕЙСТВ</span></p>
+  </td>
+  <td width=72 valign=top style='width:54.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ИНТЕЛ</span></p>
+  </td>
+  <td width=54 valign=top style='width:40.5pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>КАУЗ</span></p>
+  </td>
+  <td width=85 valign=top style='width:64.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>НОСИНФ</span></p>
+  </td>
+  <td width=53 valign=top style='width:39.4pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ФИН</span></p>
+  </td>
+  <td width=72 valign=top style='width:54.15pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ДОЛЖ</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=199 valign=top style='width:149.4pt;border:solid windowtext .75pt;
+  border-top:none;mso-border-top-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>Процент статей </span></p>
+  </td>
+  <td width=72 valign=top style='width:54.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>16 %</span></p>
+  </td>
+  <td width=72 valign=top style='width:54.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>3 %</span></p>
+  </td>
+  <td width=54 valign=top style='width:40.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>23 %</span></p>
+  </td>
+  <td width=85 valign=top style='width:64.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>3 %</span></p>
+  </td>
+  <td width=53 valign=top style='width:39.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>4 %</span></p>
+  </td>
+  <td width=72 valign=top style='width:54.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>5 %</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU>Таблица распределения некоторых смысловых
+отношений</span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .75pt;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=73 valign=top style='width:54.9pt;border:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>СО </span></p>
+  </td>
+  <td width=77 valign=top style='width:57.85pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ПРИНАД</span></p>
+  </td>
+  <td width=67 valign=top style='width:50.15pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ИДЕНТ</span></p>
+  </td>
+  <td width=60 valign=top style='width:45.0pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>АГЕНТ</span></p>
+  </td>
+  <td width=45 valign=top style='width:33.9pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>АДР</span></p>
+  </td>
+  <td width=53 valign=top style='width:39.9pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ЗНАЧ</span></p>
+  </td>
+  <td width=52 valign=top style='width:39.1pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ОГРН</span></p>
+  </td>
+  <td width=75 valign=top style='width:56.45pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ПАЦИЕН</span></p>
+  </td>
+  <td width=51 valign=top style='width:38.6pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>СУБ</span></p>
+  </td>
+  <td width=47 valign=top style='width:35.15pt;border:solid windowtext .75pt;
+  border-left:none;mso-border-left-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>ОБ</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=73 valign=top style='width:54.9pt;border:solid windowtext .75pt;
+  border-top:none;mso-border-top-alt:solid windowtext .75pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>% статей</span></p>
+  </td>
+  <td width=77 valign=top style='width:57.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>12 %</span></p>
+  </td>
+  <td width=67 valign=top style='width:50.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>9 %</span></p>
+  </td>
+  <td width=60 valign=top style='width:45.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>14 %</span></p>
+  </td>
+  <td width=45 valign=top style='width:33.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>7 %</span></p>
+  </td>
+  <td width=53 valign=top style='width:39.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>8 %</span></p>
+  </td>
+  <td width=52 valign=top style='width:39.1pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>10 %</span></p>
+  </td>
+  <td width=75 valign=top style='width:56.45pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>9%</span></p>
+  </td>
+  <td width=51 valign=top style='width:38.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>25%</span></p>
+  </td>
+  <td width=47 valign=top style='width:35.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .75pt;border-right:solid windowtext .75pt;
+  mso-border-top-alt:solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=RU>25 %</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">     
+</span>Теперь перечислим<span style="mso-spacerun: yes">  </span>все операции,
+которые определены на словарных статьях. Словарную статью можно представлять
+как множество пар &lt;словарное поле, словарное значение&gt;. Значит,<span
+style="mso-spacerun: yes">  </span>на<span style="mso-spacerun: yes"> 
+</span>статьях можно определить операции объединения,<span style="mso-spacerun:
+yes">  </span>пересечения. При непосредственной проверке оказалось, что в
+словаре нет статей, которые полностью включаются в другие статьи.<span
+style="mso-spacerun: yes">  </span>Для словарной статьи можно создать проекцию
+на определенные словарные поля (т.н. “срез словаря”).<span style="mso-spacerun:
+yes">  </span>Проекция <br>
+статьи<span style="mso-spacerun: yes">  </span>Х на набор полей С - это статья,
+полученная из<span style="mso-spacerun: yes">  </span>Х выбрасыванием всех
+полей,<span style="mso-spacerun: yes">  </span>не входящих в набор С.</span></p>
+
+<p class=MsoNormal><span lang=RU>Кроме операций на словарных статьях, можно
+определить отношения, которые более основательно эксплуатируют значения
+словарных полей, в частности следующие отношения:</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:0cm;mso-list:l2 level1 lfo5'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>1. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>CanBeGrammActant (X, Y) -
+устанавливается, когда Х удовлетворяет грамматическим ограничениям некоторого
+из актантов Y.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:0cm;mso-list:l2 level1 lfo5'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>2. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>CanBeSemActant (X, Y) - устанавливается,
+когда Х удовлетворяет семантическим<span style="mso-spacerun: yes">  
+</span>ограничениям некоторого из актантов Y.</span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">  </span>Эти
+отношения<span style="mso-spacerun: yes">  </span>используются семантическим
+анализом.</span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'>Программная оболочка <o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">     
+</span>Программа-оболочка для словаря написана на Delphi 2.0 под операционную
+среду <br>
+Windows NT.<span style="mso-spacerun: yes">  </span>Программа активно
+использует стандартные объекты<span style="mso-spacerun: yes"> 
+</span>реляционных баз данных, однако, не может быть названа реляционной базой
+данных ввиду следующих отклонений, возникших в результате оптимизации программы
+по скорости и размеру:</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:0cm;mso-list:l4 level1 lfo6'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>1. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Некоторые<span style="mso-spacerun:
+yes">  </span>атрибуты некоторых отношений (читай “таблиц”) не атомарны.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:0cm;mso-list:l4 level1 lfo6'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>2. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Схемы некоторых отношений включают в себя
+две ссылки на одну таблицу.</span><b style='mso-bidi-font-weight:normal'><span
+lang=RU style='font-size:14.0pt;mso-bidi-font-size:10.0pt;font-family:"Times New Roman"'><o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:0cm;mso-list:l4 level1 lfo6'><![if !supportLists]><span
+lang=RU style='font-family:"Times New Roman"'>3. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=RU>Во время<span style="mso-spacerun:
+yes">   </span>работы программы часть таблиц преобразуется<span
+style="mso-spacerun: yes">  </span>в специальные структуры в оперативной
+памяти, что необходимо для ускорения работы.</span><b style='mso-bidi-font-weight:
+normal'><span lang=RU style='font-size:14.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Times New Roman"'><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">   
+</span>Несмотря на эти отклонения программа, активно использует в своей работе
+язык SQL.</span></p>
+
+<p class=MsoNormal><span lang=RU><span style="mso-spacerun: yes">   
+</span>Программа прошла тестирование и сейчас функционирует в сетевом режиме
+(два терминала).</span></p>
+
+<p class=MsoNormal style='line-height:200%'><span lang=RU><span
+style="mso-spacerun: yes"> </span></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'>Литература <o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:-21.6pt;margin-bottom:
+0cm;margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;mso-list:l5 level1 lfo7'><![if !supportLists]><i
+style='mso-bidi-font-style:normal'><span lang=EN-US style='mso-ansi-language:
+EN-US'>1. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span></i><![endif]><i
+style='mso-bidi-font-style:normal'><span lang=RU>Н.Н.Леонтьева. &quot;Политекст&quot;:
+информационный анализ политических текстов. - НТИ, сер.2, N4, с.5-18. </span></i><i
+style='mso-bidi-font-style:normal'><span lang=EN-US style='mso-ansi-language:
+EN-US'>1995.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:-21.6pt;margin-bottom:
+0cm;margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;mso-list:l5 level1 lfo7'><![if !supportLists]><i
+style='mso-bidi-font-style:normal'><span lang=EN-US style='mso-ansi-language:
+EN-US'>2. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span></i><![endif]><i
+style='mso-bidi-font-style:normal'><span lang=EN-US style='font-family:"Times New Roman";
+mso-ansi-language:EN-US'>Y</span></i><i style='mso-bidi-font-style:normal'><span
+lang=EN-US style='mso-ansi-language:EN-US'>udina T. IS Russia: An Artificial
+Intelligence - Based Document Retrieval System in <br>
+Oracle 7// Select. - 1995.-2, No 1.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:-21.6pt;margin-bottom:
+0cm;margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;mso-list:l5 level1 lfo7'><![if !supportLists]><i
+style='mso-bidi-font-style:normal'><span lang=RU>3. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span></i><![endif]><i style='mso-bidi-font-style:normal'><span
+lang=RU>Д. Меейр.<span style="mso-spacerun: yes">  </span>Теория
+реляционная<span style="mso-spacerun: yes">  </span>баз данных. Москва-Мир.
+1987 год<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:-21.6pt;margin-bottom:
+0cm;margin-left:18.0pt;margin-bottom:.0001pt;text-indent:-18.0pt;mso-list:l5 level1 lfo7'><![if !supportLists]><i
+style='mso-bidi-font-style:normal'><span lang=RU>4. <span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span></i><![endif]><i style='mso-bidi-font-style:normal'><span
+lang=EN-US style='font-family:"Times New Roman";mso-ansi-language:EN-US'>A</span></i><i
+style='mso-bidi-font-style:normal'><span lang=RU style='font-family:"Times New Roman"'>.
+</span><span lang=RU>Сокирко</span></i><i style='mso-bidi-font-style:normal'><span
+lang=RU style='font-family:"Times New Roman"'>.</span><span lang=RU>
+Программная реализация русского общесемантического словаря.- дипломная работа</span></i><i
+style='mso-bidi-font-style:normal'><span lang=RU style='font-family:"Times New Roman"'>,
+</span><span lang=RU>РГГУ, 1997 год. <o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:-21.6pt;margin-bottom:
+0cm;margin-left:36.0pt;margin-bottom:.0001pt;text-indent:-36.0pt'><i
+style='mso-bidi-font-style:normal'><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=RU
+style='font-size:14.0pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=RU><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote-list'><![if !supportFootnotes]><br clear=all>
+
+<hr align=left size=1 width="33%">
+
+<![endif]>
+
+<div style='mso-element:footnote' id=ftn1>
+
+<p class=MsoFootnoteText><a style='mso-footnote-id:ftn1' href="#_ftnref1"
+name="_ftn1" title=""><span class=MsoFootnoteReference><span lang=RU><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[1]<![endif]></span></span></span></a><span
+lang=RU> Все статистические данные получены новой программной оболочкой<span
+style="mso-spacerun: yes">  </span>словаря, специально разработанной по гранту
+РГНФ.</span></p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

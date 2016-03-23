@@ -1,0 +1,432 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:p="urn:schemas-microsoft-com:office:powerpoint">
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="45"/>
+  <o:rules v:ext="edit">
+   <o:r id="V:Rule1" type="arc" idref="#_x0000_s46142"/>
+  </o:rules>
+ </o:shapelayout><p:colorscheme
+  colors="#FFFFFF,#40458C,#B7C1EB,#660066,#ECD882,#B2B2B2,#6F89F7,#CFDBFD"/>
+ <v:background id="_x0000_s46081" o:bwmode="white" fillcolor="white [0]">
+  <v:fill color2="#b2b2b2 [5]"/>
+ </v:background><p:shaperange id="_x0000_s46082">
+  <v:group id="_x0000_s46082" style='position:absolute;left:0;top:0;width:10in;
+   height:540pt' coordsize="5760,4320">
+   <v:group id="_x0000_s46083" style='position:absolute;width:5760;height:4320'
+    coordsize="5760,4320">
+    <v:group id="_x0000_s46084" style='position:absolute;top:192;width:5760;
+     height:4032' coordorigin=",192" coordsize="5760,4032">
+     <v:line id="_x0000_s46085" style='position:absolute;mso-wrap-style:none;
+      v-text-anchor:middle' from="0,192" to="5760,192" o:bwmode="white"
+      strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46086" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,384" to="5760,384"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46087" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,576" to="5760,576"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46088" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,768" to="5760,768"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46089" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,960" to="5760,960"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46090" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,1152" to="5760,1152"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46091" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,1344" to="5760,1344"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46092" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,1536" to="5760,1536"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46093" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,1728" to="5760,1728"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46094" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,1920" to="5760,1920"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46095" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,2112" to="5760,2112"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46096" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,2304" to="5760,2304"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46097" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,2496" to="5760,2496"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46098" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,2688" to="5760,2688"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46099" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,2880" to="5760,2880"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46100" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,3072" to="5760,3072"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46101" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,3264" to="5760,3264"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46102" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,3456" to="5760,3456"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46103" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,3648" to="5760,3648"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46104" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,3840" to="5760,3840"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46105" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,4032" to="5760,4032"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46106" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="0,4224" to="5760,4224"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line></v:group><v:group id="_x0000_s46107" style='position:absolute;
+     left:192;width:5376;height:4320' coordorigin="192" coordsize="5376,4320">
+     <v:line id="_x0000_s46108" style='position:absolute;mso-wrap-style:none;
+      v-text-anchor:middle' from="192,0" to="192,4320" o:bwmode="white"
+      strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46109" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="384,0" to="384,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46110" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="576,0" to="576,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46111" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="768,0" to="768,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46112" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="960,0" to="960,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46113" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="1152,0" to="1152,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46114" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="1344,0" to="1344,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46115" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="1536,0" to="1536,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46116" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="1728,0" to="1728,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46117" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="1920,0" to="1920,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46118" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="2112,0" to="2112,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46119" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="2304,0" to="2304,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46120" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="2496,0" to="2496,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46121" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="2688,0" to="2688,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46122" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="2880,0" to="2880,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46123" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="3072,0" to="3072,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46124" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="3264,0" to="3264,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46125" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="3456,0" to="3456,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46126" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="3648,0" to="3648,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46127" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="3840,0" to="3840,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46128" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="4032,0" to="4032,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46129" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="4224,0" to="4224,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46130" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="4416,0" to="4416,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46131" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="4608,0" to="4608,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46132" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="4800,0" to="4800,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46133" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="4992,0" to="4992,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46134" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="5184,0" to="5184,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46135" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="5376,0" to="5376,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line><v:line id="_x0000_s46136" style='position:absolute;
+      mso-wrap-style:none;v-text-anchor:middle' from="5568,0" to="5568,4320"
+      o:bwmode="white" strokecolor="#cfdbfd [7]">
+      <v:stroke src="master06_image001.gif" o:title="" color2="white [0]"
+       filltype="pattern"/>
+      <v:shadow color="#b7c1eb [2]"/>
+     </v:line></v:group></v:group><v:rect id="_x0000_s46137" style='position:absolute;
+    left:2112;width:3648;height:96;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="lightGrayScale" o:allowincell="f" fillcolor="#cfdbfd [7]"
+    stroked="f" strokecolor="#40458c [1]">
+    <v:fill src="master06_image002.gif" o:title="60%" color2="white [0]"
+     type="pattern"/>
+    <v:shadow color="#b7c1eb [2]"/>
+   </v:rect><v:line id="_x0000_s46138" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="5568,0" to="5568,1488"
+    o:bwmode="lightGrayScale" strokecolor="#6f89f7 [6]">
+    <v:shadow color="#b7c1eb [2]"/>
+   </v:line><v:group id="_x0000_s46139" style='position:absolute;left:261;
+    top:892;width:1124;height:1464' coordorigin="96,916" coordsize="2208,2876">
+    <v:line id="_x0000_s46140" style='position:absolute;flip:x;
+     mso-wrap-style:none;v-text-anchor:middle' from="96,1037" to="2304,1037"
+     o:bwmode="lightGrayScale" strokecolor="#6f89f7 [6]">
+     <v:shadow color="#b7c1eb [2]"/>
+    </v:line><v:line id="_x0000_s46141" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="336,920" to="336,3792"
+     o:bwmode="lightGrayScale" strokecolor="#6f89f7 [6]">
+     <v:shadow color="#b7c1eb [2]"/>
+    </v:line><v:shapetype id="_x0000_t19" coordsize="21600,21600" o:spt="19"
+     adj="-5898240,,,21600,21600" path="wr-21600,,21600,43200,,,21600,21600nfewr-21600,,21600,43200,,,21600,21600l0,21600nsxe"
+     filled="f">
+     <v:formulas>
+      <v:f eqn="val #2"/>
+      <v:f eqn="val #3"/>
+      <v:f eqn="val #4"/>
+     </v:formulas>
+     <v:path arrowok="t" o:extrusionok="f" gradientshapeok="t" o:connecttype="custom"
+      o:connectlocs="0,0;21600,21600;0,21600"/>
+     <v:handles>
+      <v:h position="@2,#0" polar="@0,@1"/>
+      <v:h position="@2,#1" polar="@0,@1"/>
+     </v:handles>
+    </v:shapetype><v:shape id="_x0000_s46142" type="#_x0000_t19" style='position:absolute;
+     left:217;top:916;width:239;height:239;flip:x;mso-wrap-style:none;
+     v-text-anchor:middle' coordsize="43195,43200" o:bwmode="lightGrayScale"
+     adj="-5981881,11717252,21595" path="wr-5,,43195,43200,21114,5,,22056nfewr-5,,43195,43200,21114,5,,22056l21595,21600nsxe"
+     fillcolor="#ecd882 [4]" strokecolor="#6f89f7 [6]">
+     <v:fill color2="white [0]"/>
+     <v:shadow color="#b7c1eb [2]"/>
+     <v:path o:connectlocs="21114,5;0,22056;21595,21600"/>
+    </v:shape></v:group></v:group></p:shaperange>
+ <p:shaperange id="_x0000_m46143">
+  <v:shapetype id="_x0000_m46143" style='position:absolute;left:48pt;top:24pt;
+   width:612pt;height:90pt;v-text-anchor:bottom' coordsize="21600,21600"
+   o:master="" o:spt="1" path="m0,0l0,21600,21600,21600,21600,0xe" filled="f"
+   fillcolor="#ecd882 [4]" stroked="f" strokecolor="#40458c [1]">
+   <v:fill color2="white [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="#b7c1eb [2]"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <p:placeholder type="title"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_m46144">
+  <v:shapetype id="_x0000_m46144" alt="Rectangle: Click to edit Master text styles&#13;&#10;Second level&#13;&#10;Third level&#13;&#10;Fourth level&#13;&#10;Fifth level"
+   style='position:absolute;left:66pt;top:150pt;width:612pt;height:324pt'
+   coordsize="21600,21600" o:master="" o:spt="1" path="m0,0l0,21600,21600,21600,21600,0xe"
+   filled="f" fillcolor="#ecd882 [4]" stroked="f" strokecolor="#40458c [1]">
+   <v:fill color2="white [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="#b7c1eb [2]"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <p:placeholder type="body" position="1"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_s46145">
+  <v:shapetype id="_x0000_s46145" style='position:absolute;left:54pt;top:492pt;
+   width:150pt;height:36pt;v-text-anchor:bottom' coordsize="21600,21600"
+   o:master="" o:spt="1" path="m0,0l0,21600,21600,21600,21600,0xe" filled="f"
+   fillcolor="#ecd882 [4]" stroked="f" strokecolor="#40458c [1]">
+   <v:fill color2="white [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="#b7c1eb [2]"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <p:placeholder type="dateTime" position="2" size="half"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_s46146">
+  <v:shapetype id="_x0000_s46146" style='position:absolute;left:246pt;top:492pt;
+   width:228pt;height:36pt;v-text-anchor:bottom' coordsize="21600,21600"
+   o:master="" o:spt="1" path="m0,0l0,21600,21600,21600,21600,0xe" filled="f"
+   fillcolor="#ecd882 [4]" stroked="f" strokecolor="#40458c [1]">
+   <v:fill color2="white [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="#b7c1eb [2]"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <p:placeholder type="footer" position="3" size="quarter"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_s46147">
+  <v:shapetype id="_x0000_s46147" style='position:absolute;left:516pt;top:492pt;
+   width:150pt;height:36pt;v-text-anchor:bottom' coordsize="21600,21600"
+   o:master="" o:spt="1" path="m0,0l0,21600,21600,21600,21600,0xe" filled="f"
+   fillcolor="#ecd882 [4]" stroked="f" strokecolor="#40458c [1]">
+   <v:fill color2="white [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="#b7c1eb [2]"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <p:placeholder type="slideNumber" position="4" size="quarter"/>
+  </v:shapetype></p:shaperange>
+</xml>

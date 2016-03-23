@@ -1,0 +1,39 @@
+<html><br>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251"><br>
+<br>
+<br>
+#coding=cp1251<br>
+ <br>
+# Предварительно в программе PythonWin (www.activestate.com) нужно <br>
+# в меню Tools запустить COM Makepy Utility и в списке выбрать<br>
+# Lemmatizer 1.0 Type Library<br>
+# После этого запустить этот скрипт<br>
+# Проверено на Python 2.3 под WinXP<br>
+ <br>
+import win32com.client<br>
+ <br>
+# Создаем лемматизатор<br>
+Lemmatizer = win32com.client.Dispatch("Lemmatizer.LemmatizerRussian.1")<br>
+ <br>
+# Грузим словари<br>
+Lemmatizer.LoadDictionariesRegistry()<br>
+ <br>
+Wordform = 'душка'<br>
+# Ищем слово<br>
+ParadigmCollection = Lemmatizer.CreateParadigmCollectionFromForm(Wordform, False, False)<br>
+ <br>
+for i in range(ParadigmCollection.Count):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print 'Norm:\t%s' % ParadigmCollection.Item(i).Norm<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print 'SrcAncode:\t%s' % ParadigmCollection.Item(i).SrcAncode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print 'SrcNorm:\t%s' % ParadigmCollection.Item(i).SrcNorm<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print 'WordWeight:\t%s' % ParadigmCollection.Item(i).WordWeight<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if not ParadigmCollection.Item(i).Founded:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print 'Non found'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print 'Paradigm:'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;# Распечатываем парадигмы<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for j in range(ParadigmCollection.Item(i).Count):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form = ParadigmCollection.Item(i).Form(j)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ancode = ParadigmCollection.Item(i).Ancode(j)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print '\t%s\t%s' % (Form, Ancode)<br>
+<br>
+</html><br>
