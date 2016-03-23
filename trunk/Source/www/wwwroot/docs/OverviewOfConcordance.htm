@@ -1,0 +1,2010 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./OverviewOfConcordance-Dateien/filelist.xml">
+<title>A technical overview of DWDS/Dialing Concordance</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>sokirko</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>sokirko</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:Created>2003-08-21T10:28:00Z</o:Created>
+  <o:LastSaved>2003-08-21T10:28:00Z</o:LastSaved>
+  <o:Pages>3</o:Pages>
+  <o:Words>3064</o:Words>
+  <o:Characters>17470</o:Characters>
+  <o:Company>dwds</o:Company>
+  <o:Lines>145</o:Lines>
+  <o:Paragraphs>34</o:Paragraphs>
+  <o:CharactersWithSpaces>21454</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:HyphenationZone>21</w:HyphenationZone>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Standard;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Standard;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.MsoFootnoteReference
+	{vertical-align:super;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin-top:0in;
+	margin-right:204.0pt;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-US;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin-top:0in;
+	margin-right:.75pt;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	text-indent:.5in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-US;}
+p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2
+	{margin-top:0in;
+	margin-right:213.0pt;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 11.5in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-US;}
+p.MsoBodyText3, li.MsoBodyText3, div.MsoBodyText3
+	{margin-top:0in;
+	margin-right:303.0pt;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-US;}
+p.MsoBodyTextIndent2, li.MsoBodyTextIndent2, div.MsoBodyTextIndent2
+	{margin-top:0in;
+	margin-right:.75pt;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	text-indent:.25in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-US;}
+p.MsoBlockText, li.MsoBlockText, div.MsoBlockText
+	{margin-top:0in;
+	margin-right:.75pt;
+	margin-bottom:0in;
+	margin-left:35.4pt;
+	margin-bottom:.0001pt;
+	text-indent:.6pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-US;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.text12, li.text12, div.text12
+	{mso-style-name:text12;
+	margin-right:0in;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	color:black;}
+@page Section1
+	{size:595.45pt 841.7pt;
+	margin:56.9pt 59.75pt 56.9pt 84.95pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:108472451;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-928093018 -744467036 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l0:level1
+	{mso-level-tab-stop:53.4pt;
+	mso-level-number-position:left;
+	margin-left:53.4pt;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:214122103;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1248239502 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l1:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2
+	{mso-list-id:219292912;
+	mso-list-type:hybrid;
+	mso-list-template-ids:968408482 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l2:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3
+	{mso-list-id:292566322;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-154759392 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l3:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4
+	{mso-list-id:826551682;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-129702768 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l4:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5
+	{mso-list-id:896286197;
+	mso-list-type:hybrid;
+	mso-list-template-ids:879139532 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l5:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6
+	{mso-list-id:905261994;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1936271664 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l6:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l7
+	{mso-list-id:920867241;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1056978574 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l7:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l8
+	{mso-list-id:1103959464;
+	mso-list-type:hybrid;
+	mso-list-template-ids:163755986 -744467036 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l8:level1
+	{mso-level-tab-stop:53.4pt;
+	mso-level-number-position:left;
+	margin-left:53.4pt;
+	text-indent:-.25in;}
+@list l9
+	{mso-list-id:1124619766;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1030538078 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l9:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l10
+	{mso-list-id:1379941140;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-637004322 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l10:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l11
+	{mso-list-id:2022275210;
+	mso-list-type:hybrid;
+	mso-list-template-ids:634306926 67567631 67567641 67567643 67567631 67567641 67567643 67567631 67567641 67567643;}
+@list l11:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+</head>
+
+<body lang=DE link=blue vlink=purple style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='mso-ansi-language:EN-US'>Alexey Sokirko, 2003 <o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='mso-ansi-language:EN-US'><a href="mailto:sokirko@dwds.de">sokirko@dwds.de</a><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h1 style='margin-right:-13.05pt;tab-stops:center .5in 45.0pt 1.75in 5.75in'><span
+lang=EN-US style='mso-ansi-language:EN-US'>A technical overview of DWDS/Dialing
+Concordance<o:p></o:p></span></h1>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-right:243.75pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>Unit 1. Introduction<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyText style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US>The main purpose of DWDS/Dialing Concordance (&quot;DDC&quot;) is to
+search words or sequences of words<span style="mso-spacerun: yes"> 
+</span>together with morphological patterns. DDC is created to help linguists
+to<span style="mso-spacerun: yes">  </span>find a particular collocation or
+word in the given context. Roughly speaking, the functionality of DDC is
+similar to the search engine “SARA” that is accessible at the site of British
+National Corpus (<a href="http://sara.natcorp.ox.ac.uk/lookup.html">http://sara.natcorp.ox.ac.uk/lookup.html</a>).</span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'>Generally, the
+majority of web search engines were designed to look for the information. It
+means that they must be able<span style="mso-spacerun: yes">  </span>to process
+all text formats and aggregate all text variance into one representation. After
+all they are to give the most relevant hits to the end-user. <span lang=EN-US
+style='mso-ansi-language:EN-US'>The target user of<span style="mso-spacerun:
+yes">  </span>the internet search engines searches for the information and not
+for the variance of its representation. </span>A web search engine uses usually
+stop word lists, various dictionaries of synonyms, dictionaries of proper
+names, and it indexes the corpora by files, not by sentences. All these notions
+are useless for a linguistic search engine. For example, using a stop word list
+is senseless, since for a linguist stop words are the most relevant words of
+the language (prepositions, conjunctions and so on). Therefore we cannot simply
+use a web search engine for linguistic purposes, but are to design a special
+version of a search engine.</p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>There are two possible strategies to
+search something in a corpus. On the one hand we can create a program like Unix
+&quot;grep&quot;, which doesn't use any index at all. It is a good solution
+because we really can create a very sophisticated query language. Once a
+sentence (a hit) is found, and its morphological interpretation is built, it is
+possible to go through the sentence many times and to check all conditions,
+which the query contains. Of course, the speed of the process will be equal to
+the speed of indexing, i.e. to the speed of linguistic processors (morphology,
+syntax). Apart from the speed there is one more disadvantage of this solution.
+When the search goal lies at the end of the corpus, the end-user is to wait
+till the whole corpus is processed. And for our opinion, the last consideration
+is the most important cause to give up the grep-like searching.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Obviously the only one alternative
+we have, is to create special indices. The creation of indices, in the way it
+is done in DDC, is described in Unit 2; the usage of index is described in Unit
+3.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The current version of DDC supports
+three languages: Russian, English, and German. But the corpus must be<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>homogeneous and the language of the corpus
+should be specified before the process of indexing. DDC doesn't<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>solve the problem of language recognition by
+coding pages. Thus any English words in the German corpora will be considered
+as German ones.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Accordingly to the language DDC
+contains three morphological systems: Russian, English, and German. Russian and
+English morphology systems were adopted from Dialing Project The German
+morphology was borrowed from Morphy System.<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>For each input word form the
+morphological procedure finds all morphological interpretations in the
+morphology dictionary. Morphology interpretation is a tuple:</span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>&lt;Normal form, Part of Speech,
+Grammems&gt;, for example:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>doing -&gt; &lt;do, VERB, ing&gt;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>Grammems are special features like
+&quot;sin&quot;<span style="mso-spacerun: yes">  </span>singular,
+&quot;plu&quot;<span style="mso-spacerun: yes">  </span>plural and so on. We
+call a pair <br>
+<span style="mso-spacerun: yes">             </span>&lt;Part of Speech,
+Grammems&gt; a morphological pattern.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Generally, the morphology system is
+used in two places:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:53.4pt;margin-bottom:.0001pt;text-indent:-.25in;mso-list:l0 level1 lfo2;
+tab-stops:list 53.4pt'><![if !supportLists]><span lang=EN-US style='mso-ansi-language:
+EN-US'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=EN-US style='mso-ansi-language:EN-US'>In
+processing of queries, when it is necessary to build all forms of the given
+word form;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:53.4pt;margin-bottom:.0001pt;text-indent:-.25in;mso-list:l0 level1 lfo2;
+tab-stops:list 53.4pt'><![if !supportLists]><span lang=EN-US style='mso-ansi-language:
+EN-US'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span lang=EN-US style='mso-ansi-language:EN-US'>In
+indexing, when we are to store all possible morphological interpretations of
+the given word form.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>The corpora itself is a list of text or html
+files. This list is stored in a file like this:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:70.8pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>C:\test\test1.txt<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:70.8pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>C:\test\test2.txt<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:70.8pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>...<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:70.8pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>DDC supports plain text format and
+standard html-format. We think, that for linguistic purposes these two formats
+are quite sufficient.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-right:.75pt'><span lang=EN-US style='mso-ansi-language:EN-US'>Unit
+2. Indexing<o:p></o:p></span></h2>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The process of indexing starts with
+loading of the list of input files. Every file should really exist and it
+should be stored on the local hard disk. The size of all files of the corpus
+cannot be more than 2,5 Gigabyte.<span style='mso-tab-count:1'>            </span>This
+restriction follows from the inner structure of the program, since we use
+something like global offsets,<span style='mso-tab-count:1'>            </span>which
+can point to any place of the whole corpora. And the maximal value of these
+offsets cannot be more than 4 Gigabyte. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>After loading a list of files, the
+program must be supplied with a language identifier (German, English or
+Russian). Then the program starts the main cycle of indexing which looks like
+this <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>for every file from the list of files do<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>begin<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>Create sentence and paragraph index;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>Create word and morphological index;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>if the size of the current index is more than 50 MB<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:70.8pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>then do some swapping in order to clean memory;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>end;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The first procedure creates the
+index of sentences borders. Paragraphs are just sequences of sentences and
+therefore they are processed in the same way as sentences. The procedure goes
+through the input file and for every end of sentence stores two numbers:<o:p></o:p></span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l10 level1 lfo4;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>The
+     offset of the end of sentence in tokens;<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l10 level1 lfo4;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>The
+     offset of the end of sentence in bytes.<o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:.25in'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Both offsets are global, i.e. the
+first offset of a file is equal to the end offset of the previous file. This is
+a very quick procedure, because it doesn't allocate much memory, since all
+offsets are written directly to the hard disk.<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent2><span lang=EN-US>The second procedure builds the
+main index of tokens and morphological patterns. A token is a text item to be
+indexed. In the current version of the program token can be:</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l4 level1 lfo6;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>A
+     word (depending upon the language);<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l4 level1 lfo6;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>A
+     number in decimal notation;<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l4 level1 lfo6;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>A
+     sequence of punctuation marks, which is thought to be the end of sentence.<o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:.25in'><span
+lang=EN-US style='mso-ansi-language:EN-US'>All other text items (that are not
+tokens) are disregarded. It is quite easy to change the definition of a token,<span
+style='mso-tab-count:1'>  </span>and to index, for example, all punctuation
+marks also.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:.25in'><span
+lang=EN-US style='mso-ansi-language:EN-US'>While indexing, the program
+maintains a set of all string representations of tokens and a set of all
+possible morphological patterns. Actually, these two sets are implemented in
+the same way, i.e. there is only one program class for both. Such sets are
+called <u>index sets</u>.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:.25in'><span
+lang=EN-US style='mso-ansi-language:EN-US'>An index set is a set of all
+possible index items (words or morphological patterns).<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:.25in'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Initially index sets are empty.
+While indexing they are growing when a new token or a new morphological pattern
+occurs. For every index item we store its occurrences:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>&quot;Haus&quot; -&gt; 1, 678, 2345 ...<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>&quot;Hause&quot; -&gt; 12, 38, 234 ...<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>...<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>It is clear that while indexing we
+need not store all occurrences in the corpora in the short-term memory, that's
+why from time to time we can save occurrences to the hard disk. This swapping
+is done in the main cycle of indexing. Thus we hold in memory only two sets of
+indexing items without occurences, and these sets are usually grow very slow<a
+style='mso-footnote-id:ftn1' href="#_ftn1" name="_ftnref1" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[1]<![endif]></span></span></a>[1].<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>We are going to present some
+statistics about the indexing process. For testing purposes we used P4 1,5 GHz<span
+style='mso-tab-count:1'>            </span>Windows 2000. The statistic results
+depend upon the language of the corpus, since we used different
+linguisticprocessors to obtain tokens and sentence division.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-size:11.0pt;mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:30.5pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 3.5pt 0in 3.5pt'>
+ <tr>
+  <td width=176 valign=top style='width:131.65pt;border:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Corpus Name</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=76 valign=top style='width:56.8pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Language</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Count of tokens</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Size in bytes</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=81 valign=top style='width:60.6pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Elapsed Time</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=75 valign=top style='width:56.4pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Memory Usage</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=176 valign=top style='width:131.65pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>DWDS-
+  corpus1<o:p></o:p></span></p>
+  </td>
+  <td width=76 valign=top style='width:56.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='font-size:11.0pt;mso-ansi-language:
+  EN-GB'>German</span><span lang=EN-GB style='mso-ansi-language:EN-GB'><o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>11 mln.<o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>85 Mb<o:p></o:p></span></p>
+  </td>
+  <td width=81 valign=top style='width:60.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>9 min<o:p></o:p></span></p>
+  </td>
+  <td width=75 valign=top style='width:56.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>40 Mb<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=176 valign=top style='width:131.65pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>DWDS</span><span
+  lang=EN-US style='mso-ansi-language:EN-US'>- </span><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>corpus</span><span lang=EN-US
+  style='mso-ansi-language:EN-US'>2<o:p></o:p></span></p>
+  </td>
+  <td width=76 valign=top style='width:56.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>German</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>30 mln.<o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>160 Mb<o:p></o:p></span></p>
+  </td>
+  <td width=81 valign=top style='width:60.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>20 min.<o:p></o:p></span></p>
+  </td>
+  <td width=75 valign=top style='width:56.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>60 </span><span
+  lang=EN-US style='mso-ansi-language:EN-US'>Mb</span><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=176 valign=top style='width:131.65pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>Moshkov-subset1<o:p></o:p></span></p>
+  </td>
+  <td width=76 valign=top style='width:56.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Russian</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>15 mln<o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>100 Mb<o:p></o:p></span></p>
+  </td>
+  <td width=81 valign=top style='width:60.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>13 min<o:p></o:p></span></p>
+  </td>
+  <td width=75 valign=top style='width:56.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>60 Mb<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=176 valign=top style='width:131.65pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>Moshkov</span><span
+  lang=EN-US style='mso-ansi-language:EN-US'>-</span><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>subset</span><span lang=EN-US
+  style='mso-ansi-language:EN-US'>2<o:p></o:p></span></p>
+  </td>
+  <td width=76 valign=top style='width:56.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+  EN-US'>Russian</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>54 mln.<o:p></o:p></span></p>
+  </td>
+  <td width=72 valign=top style='width:.75in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>350 Mb<o:p></o:p></span></p>
+  </td>
+  <td width=81 valign=top style='width:60.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>55</span><span
+  lang=EN-US style='mso-ansi-language:EN-GB'> </span><span lang=EN-US
+  style='mso-ansi-language:EN-US'>min</span><span lang=EN-GB style='mso-ansi-language:
+  EN-GB'><o:p></o:p></span></p>
+  </td>
+  <td width=75 valign=top style='width:56.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>80 </span><span
+  lang=EN-US style='mso-ansi-language:EN-US'>Mb</span><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-size:11.0pt;mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-size:11.0pt;mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:35.4pt;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+EN-US'>It may be worth adding that the program always allocates at least 18 Mb
+for the morphological dictionaries. The Linux version of the program works
+approximately 20% quicker than the Windows version.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-size:11.0pt;mso-ansi-language:EN-US'>The result index
+contains two huge files with occurrences of tokens and occurrences of
+morphological patterns. The size of these two files together is approximately
+equal to the size of corpora in bytes. Thus the<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+lang=EN-US style='font-size:11.0pt;mso-ansi-language:EN-US'>built index has the
+same size as the corpora itself.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:35.4pt;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+EN-US'>At the last stage of the indexing process we create an index of inverted
+tokens in order to run a query with the right truncation like &quot;*nat&quot;.
+We need not a special index for the left truncation since we can use for it the
+set of tokens itself.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:35.4pt;mso-layout-grid-align:none;
+text-autospace:none'><span lang=EN-US style='font-size:11.0pt;mso-ansi-language:
+EN-US'>We have mentioned some of the restrictions that DDC has. Here is the
+full list of them:</span><span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l9 level1 lfo8;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>The
+     size of the corpus cannot be more than 2,5 Gb. We recommend that the
+     corpus size should be less or equal to the size of short-term memory (see
+     explanation in Unit 3).<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l9 level1 lfo8;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>The
+     size of index set cannot be more than 8 mln. For example, it means that we
+     cannot index huge corpora with files of different languages. Russian,
+     English and German languages together contain more than 8 mln different
+     words, that's why we cannot include their complete lists of word forms
+     in<span style="mso-spacerun: yes">  </span>one DDC corpus.<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l9 level1 lfo8;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>The
+     size of one sentence in the corpus cannot be more than 20 Kb (2000 Words).<o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<b><i><span lang=EN-US style='font-size:14.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:EN-US;mso-fareast-language:DE;mso-bidi-language:
+AR-SA'><br clear=all style='page-break-before:always'>
+</span></i></b>
+
+<h2><span lang=EN-US style='mso-ansi-language:EN-US'>Unit 3. Running a query<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>In the current version of the program query
+language contains the following constructions:<o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" bgcolor=white
+ style='width:100.0%;mso-cellspacing:0in;background:white;border:outset silver .75pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr>
+  <td valign=top style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  lang=EN-US style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:
+  EN-US'>Query Type</span></b><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  lang=EN-US style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:
+  EN-US'>Purpose</span></b><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  lang=EN-US style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:
+  EN-US'>Example</span></b><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  lang=EN-US style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:
+  EN-US'>Result</span></b><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>Word<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>word
+  description<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>Hause<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences of the corpora which&nbsp;
+  contain&nbsp; some&nbsp; morphological variant of &quot;Hause&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>Word*<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>word
+  description<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>Ha*<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences which contain a word that
+  starts with &quot;Ha&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>*Word<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>word
+  description<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>*ken<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences which contain a word that
+  ends&nbsp; with &quot;ken&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>[PartOfSpeech
+  {Features}]<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>word
+  description<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>[SUB
+  sin]<br>
+  [VER aux,inf,]<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>&quot;PartOfSpeech&quot; is a lexical
+  category, &quot;Features&quot; is a comma-delimited list of morphological
+  features (see below for complete lists of features and parts of speech).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=FR
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:FR'>@<i>Word</i><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=FR
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:FR'>word
+  description<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>@Hause<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences of the corpora which
+  contain&nbsp; wordform &quot;Hause&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>{H}<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>word
+  description<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>{AMTBERUFG}<br>
+  {EIG}<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences of the corpora which
+  contain a subtype of the given thesaurus node &nbsp; (DWDS thesaurus is used)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=FR
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:FR'>&quot;X1 X2
+  ? XN&quot;<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>sequence
+  of word descriptions<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='mso-bidi-font-size:9.0pt;color:black'>&quot;mein Haus&quot;<br>
+  &quot;Haus [VER]&quot;<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences which contain &quot;mein
+  Haus&quot;.<br>
+  All sentences which contain &quot;Haus&quot; which is followed by a verb.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>Q1&nbsp;&amp;&amp;&nbsp;Q2<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>conjunction
+  of word or sequence&nbsp; descriptions<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>&nbsp;</span><span
+  style='mso-bidi-font-size:9.0pt;color:black'>Hause &amp;&amp; [SUB sin]<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences of the corpora which
+  contain Q1 and Q2 <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>Q1 || Q2<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>disjunction
+  of word or sequence descriptions<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=FR
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:FR'>[VER
+  aux,inf,] &amp;&amp; [SUB sin]<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences of the corpora which
+  contain Q1 or Q2<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>near(Q1;Q2;n)<br
+  style='mso-special-character:line-break'>
+  <![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+  <![endif]><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>two near
+  words <br>
+  0&lt;= n &lt;= 10<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>NEAR
+  (Hause ; [SUB]; 2)<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>All sentences which contain
+  &quot;Hause&quot; and some noun, and the distance between them is less or
+  equal 2. The order of&nbsp; the occurrences is disregarded.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>&quot;X1
+  #D1 X2 #D2 ? XN&quot;<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+  style='mso-bidi-font-size:9.0pt;color:black;mso-ansi-language:EN-US'>sequence
+  of word descriptions with distances<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='mso-bidi-font-size:9.0pt;color:black'>&quot;mein #1 Haus&quot; <br>
+  &quot;Haus #10 [VER]&quot;<o:p></o:p></span></p>
+  </td>
+  <td style='border:inset silver .75pt;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-bidi-font-size:9.0pt;
+  color:black;mso-ansi-language:EN-US'>1. All sentences which contain
+  &quot;mein&quot; and &quot;Haus&quot;, which may be divided by one
+  token&nbsp;<br>
+  2. All sentences which contain &quot;Haus&quot; and some verb and there can
+  be 10 tokens between &quot;Haus&quot; and the verb. The order of&nbsp; the
+  occurrences is important.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:.5in;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'>To the end of the query the user can add a <u>context size operator</u>
+in form:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:.5in;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'><br>
+#cntxt N, where N=1,…,5. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:.5in;margin-bottom:.0001pt'><span lang=EN-US style='mso-ansi-language:
+EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'>Context size
+operator tells the program to show not only the sentence where the given query
+is found but also N previous and following sentences.<span style="mso-spacerun:
+yes">  </span><span lang=EN-US style='mso-ansi-language:EN-US'>For example, a
+query <br>
+<span style="mso-spacerun: yes">               </span>test #cntxt 2<br>
+gives<span style="mso-spacerun: yes">  </span>us all hits with the word “test”
+together with the two sentence context.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Actually DDC can process the query
+in two different ways. Firstly, we can ask the<span style="mso-spacerun: yes"> 
+</span>system to present us the count of hits (count of sentences which match
+with this query). Secondly, we can ask to give us some examples of the hits. It
+is quite obvious that the first<span style="mso-spacerun: yes">  </span>type of
+query (we call it a statistical query) takes much more time than the second
+type(we call it an example query), since a statistical query is to process the
+whole corpus. The speed of statistical query depends crucially upon the corpus
+frequencies of the items, which<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>constitute this query. Thus a query like
+&quot;[ART] [ADJ] [NOUN]&quot; (a pattern for &quot;the smart dog&quot;,
+&quot;a deep pool&quot; and so on) will be processed thousand times slower than
+a query like &quot;a red boy&quot;, since there are millions of articles,
+adjectives and nouns in the corpora in comparison with count of &quot;red&quot;
+or &quot; boy&quot;. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>It goes without saying that the
+count of hits is calculated by all web engines but the problem is that a
+&quot;web hit&quot; is a document, not a sentence. For example for a query like
+&quot;a*&quot; Yahoo gives 642710 hits while DDC gives 1185283 hits (two times
+more) for the corpora of 40 mln. tokens. Some search engines (like
+&quot;Google&quot;) give us only the approximate count of hits, that's of
+course quite simple. However it is claimed that Google has more than 1.5
+billion indexed pages.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>All this leads us to the conclusion
+that statistical queries should be used only when they are really necessary, in
+other cases it is better to use only example queries. In both cases
+(statistical and example) the query should be parsed. The parsing is made with
+the help<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>of Yacc&amp;Lex. The grammar is written in
+quite straightforward way except the parsing of morphological patterns, which
+is made by a special function. If there is no parsing error then the query will
+be evaluated. The evaluation process is the process of getting hits from the
+corpus according to parse tree of the query. When it is possible we use
+depth-first search. For example, for query like:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=IT
+style='mso-ansi-language:IT'>( ( ( (A &amp;&amp; B) &amp;&amp; C) &amp;&amp; D)
+&amp;&amp; (E &amp;&amp; F))<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>the sequence of evaluation steps is as follows:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=IT
+style='mso-ansi-language:IT'>(A &amp;&amp; B)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=IT
+style='mso-ansi-language:IT'>( (A &amp;&amp; B) &amp;&amp; C)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=IT
+style='mso-ansi-language:IT'>( ( (A &amp;&amp; B) &amp;&amp; C) &amp;&amp; D)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=IT
+style='mso-ansi-language:IT'>(E &amp;&amp; F)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=IT
+style='mso-ansi-language:IT'>( ( ( (A &amp;&amp; B) &amp;&amp; C) &amp;&amp; D)
+&amp;&amp; (E &amp;&amp; F))<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>A depth-first algorithm is
+preferable since a breadth-first algorithm is more space-consuming,<span
+style="mso-spacerun: yes">  </span>It is very important that we can apply the
+evaluation procedure to some subset of the corpus, since in this case the usage
+of short-term memory is under our control. The whole body of corpus is divided
+internally into smaller subcorpora. The size of subcorpus<a style='mso-footnote-id:
+ftn2' href="#_ftn2" name="_ftnref2" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[2]<![endif]></span></span></a>
+was obtained empirically after several experiments, and perhaps it depends upon
+operational systems<a style='mso-footnote-id:ftn3' href="#_ftn3" name="_ftnref3"
+title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[3]<![endif]></span></span></a>[3].<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The steps of evaluation are made
+without any optimization according to the semantics of query operators. For<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>instance, let's take a close look at near
+operator. The syntax of this operator is as follows<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>near (Q1;Q2;n), where Q1 and Q2 are token
+descriptions and n is a maximal distance between them.<span style='mso-tab-count:
+1'>            </span>In order to evaluate this operator we have to get all
+occurrences of Q1 and Q2 in the current subcorpus. Thenthe occurrences should
+be sorted. It is worth mentioning that the sorting of occurrences takes half of
+the processor time for queries containing very frequent items. Thus it is safe
+to say that quite a long time DDC is busy with regrouping (sorting) of
+occurrences.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Let occurrences of Q1 be x1, x2,
+..., xk, and let occurrences of Q2 be y1, y2, ..., ym. The following algorithm
+finds all such pairs &lt;xi yj&gt; that | xi - yj | &lt;= n (n is a distance).<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>Start
+:= 0;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>for
+i:=0 to k-1 do<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>begin<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>j := Start;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>while (j &lt; m-1)<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>begin<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>if ( xi &lt;= yj + n) <o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>then<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:70.8pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>break;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>j := j+1;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>end;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>Start = k;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>while (j &lt; m-1)<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>begin<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>if (xi + n &lt; yj)<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>then<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:70.8pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>break;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>else<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>&lt;xi yj &gt; is a new pair;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>j := j+1;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>end:<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>end<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The efficiency of this algorithm is
+O (n*k), where n is a distance and k is the count of occurrences of Q1.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'>The other
+operators are implemented in the same straightforward way. There is a slight
+difference between logical operations (&amp;&amp; and ||) and the other ones.
+These logical operations deal with hits (sentences which match the query). The
+other operations deal with occurrences of tokens. <span lang=EN-US
+style='mso-ansi-language:EN-US'>The result of evaluation is always a set of
+hits, i.e. we dare say that on the bottom level of parsing tree, the program
+operates only occurrences,while on the top levels it deals with hits. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<span style="mso-spacerun: yes">       </span>Obviously there must be a
+function that converts occurrences to hits, and this function really exists and
+looks like this:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=FR
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:FR'>x1, x2,
+..., xk, - occurrences<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>h1,
+h2, ..., hm, - hits (end of sentences)<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>i :=
+0 // index of occurence<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>q :=
+0; // index of hit<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>while
+(i &lt; k)<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>{<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>// binary search of xi in hits between q and m<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>q := lower_bound (q, m, xi)<a style='mso-footnote-id:ftn4' href="#_ftn4"
+name="_ftnref4" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[4]<![endif]></span></span></a>;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>// adjusting q<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>if (hq == xi)<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:.75pt;margin-bottom:0in;
+margin-left:35.4pt;margin-bottom:.0001pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>q := q+1;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>hq is a new hit<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><b><i><span
+lang=EN-US style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:
+EN-US'>i := i+1;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'>};<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>This procedure takes 30 percent of
+time for queries containing very frequent items. It is the second slow
+procedure of the quering mechanism.<span style='mso-tab-count:1'>            </span>Having
+described the most time-consuming algorithms we are going to present some
+statistics<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width=612 style='width:459.0pt;
+ margin-left:5.4pt;border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=192 valign=top style='width:2.0in;border:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>Corpus
+  Name</span><span lang=EN-GB style='mso-ansi-language:EN-GB'><o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>Type of query<o:p></o:p></span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>Moshkov</span><span lang=RU style='mso-ansi-language:
+  RU'>1<o:p></o:p></span></p>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span style='mso-ansi-language:
+  DE'>15 mln<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span style='mso-ansi-language:
+  DE'>Moshkov2<o:p></o:p></span></p>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span style='mso-ansi-language:
+  DE'>54 Mln.<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>DWDS1<o:p></o:p></span></p>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>190 Mln.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=192 valign=top style='width:2.0in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>Mutter <o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>Example<o:p></o:p></span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>0.05<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>0.05<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>0.07<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=192 valign=top style='width:2.0in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>Mutter<o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>Statistical</span><span
+  lang=EN-GB style='mso-ansi-language:EN-GB'><o:p></o:p></span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>0.007<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>0.015<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>0.045<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=192 valign=top style='width:2.0in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span lang=EN-GB style='mso-ansi-language:EN-GB'>Ba* <o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-GB
+  style='mso-ansi-language:EN-GB'>Example<o:p></o:p></span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>0,06<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>0.07<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>0.</span><span style='mso-ansi-language:DE'>15</span><span
+  lang=RU style='mso-ansi-language:RU'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=192 valign=top style='width:2.0in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Ba<span lang=RU style='mso-ansi-language:RU'>* <o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>Statistical</span><span
+  lang=RU style='mso-ansi-language:RU'><o:p></o:p></span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>0.1<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>0.3<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>1,3</span><span style='mso-ansi-language:DE'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=192 valign=top style='width:2.0in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'>“[ADJ]
+  [SUB][VER]”<span class=MsoFootnoteReference> </span></span><a
+  style='mso-footnote-id:ftn5' href="#_ftn5" name="_ftnref5" title=""><span
+  class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[5]<![endif]></span></span></a><span
+  lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>Example</span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>1,1<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>1,1</span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>1,25</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=192 valign=top style='width:2.0in;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>„[ADJ]
+  [SUB] [VER]“</span></p>
+  </td>
+  <td width=96 valign=top style='width:1.0in;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=EN-US>Statistical</span><span
+  lang=RU style='mso-ansi-language:RU'><o:p></o:p></span></p>
+  </td>
+  <td width=84 valign=top style='width:63.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>2,5<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span lang=RU
+  style='mso-ansi-language:RU'>14<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:1.25in;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoBodyTextIndent style='text-indent:0in'><span style='mso-ansi-language:
+  DE'>25<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=RU
+style='mso-ansi-language:RU'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=RU style='mso-ansi-language:
+RU'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Google Engine processes any query
+with the speed from 0.1 Sek to 1 Sek, but there are hundreds of Google servers
+and also there are thousands of simultaneous users. That's why the comparison
+is hardly valuable. Surely, that being run on one separate computer Google Web
+Engine is much more faster than DDC.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>We should explain why the corpus of
+54 mln tokens(&quot;Moshkov Library&quot;) is processed ten times slower than
+the corpus of 15 Mln tokens(&quot;Moshkov Library subset&quot;), while the
+former is only four times bigger than the latter. As far as we can understand
+the problem lies in the size of short-term memory. The sum of the index of the
+smaller corpus is less than the size of free memory, which we have on the test
+computer (130 Mb). Windows system seems to load the whole index to the memory,
+and therefore it works much quicker. The size of the index of &quot;Moshkov
+Library&quot; is 450, this file cannot be loaded into the memory, that's why
+the<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>system is to swap it to a hard disk. We have
+tried the same query on a computer with 512 MB, it was accomplished in 5
+Seconds. Generally for DDC the following requirement should be fulfilled .<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='mso-ansi-language:EN-US'><span style='mso-tab-count:1'>            </span>The
+size of index must be equal&ouml; to the size of short-term memory<span
+style="mso-spacerun: yes">  </span>on the computer, otherwise the querying
+works approximately<span style="mso-spacerun: yes">  </span>two times slower.<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><b><i><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The restrictions on speed and size
+of the corpus can be overcome by using parallel processing. It is possible for
+DDC to create several corpora, put them on several computers and run a query
+against these corpora simultaneously. For network transfer DDC uses Berkeley
+Sockets over TCP/IP. There is one client in the middle of the structure. This
+client holds only the list of corpus servers like this: <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 3.5pt 0in 3.5pt'>
+ <tr>
+  <td width=153 valign=top style='width:114.4pt;border:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=IT style='mso-ansi-language:
+  IT'>CorporaName<o:p></o:p></span></p>
+  </td>
+  <td width=153 valign=top style='width:114.45pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=IT style='mso-ansi-language:
+  IT'>IP<o:p></o:p></span></p>
+  </td>
+  <td width=153 valign=top style='width:114.45pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=IT style='mso-ansi-language:
+  IT'>PORT<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=153 valign=top style='width:114.4pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+  style='mso-ansi-language:EN-US'>GermanInternet<o:p></o:p></span></p>
+  </td>
+  <td width=153 valign=top style='width:114.45pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+  style='mso-ansi-language:EN-US'>192.168.1.69<o:p></o:p></span></p>
+  </td>
+  <td width=153 valign=top style='width:114.45pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+  style='mso-ansi-language:EN-US'>1<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=153 valign=top style='width:114.4pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+  style='mso-ansi-language:EN-US'>Kollok<o:p></o:p></span></p>
+  </td>
+  <td width=153 valign=top style='width:114.45pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+  style='mso-ansi-language:EN-US'>192.168.1.61<o:p></o:p></span></p>
+  </td>
+  <td width=153 valign=top style='width:114.45pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 3.5pt 0in 3.5pt'>
+  <p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+  style='mso-ansi-language:EN-US'>2<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>When a user runs a query this client
+simply redirects the query to all corpora and after this it sums up the result
+data and outputs it to the user. In its turn each corpus server should open a
+socket in order to receive queries and to send the result. The parallel
+processing can help us to work with an unlimited corpus as though this corpus
+is a small one.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><span lang=EN-US style='mso-ansi-language:EN-US'>Unit 4. Archiving
+occurrences<o:p></o:p></span></h2>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>In order to reduce the size of index
+we introduce an archiving algorithm for occurrences. A list of occurrences is a
+long sorted list of positive numbers. An average difference between two
+neighbour items is between 10 and 100 depending upon the index set. And the
+algorithm we are using is based on that fact.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Normally, without archiving, each
+occurrence is stored in one four-byte number. It is too wasteful. The first
+step is consists of replacing occurrences by differences of two adjacent items.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span lang=FR
+style='mso-ansi-language:FR'>X1, X2,X3,....., Xn -&gt; (X1), (X2-X1),
+(X3-X2)....., (Xn-Xn-1)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>This operation greatly reduces the
+average value of a list item. The operation itself and its undo is performed in
+O(N) where N is the length of the list.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>After this we can apply a
+length-depended method of number storing. According to this method the number
+is stored as follows:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>A1, A2, ...,A5, B1, B2, ...,Bk,where
+Ai and Bj are bits.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The bit sequences A1, A2, ...,A5
+holds a length of the sequence of B1, B2, ...,Bk, i.e. it holds the value of k.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'>The maximum
+value of k is 32. The bit sequence B1, B2, ...,Bk holds the number itself (the
+item of the list). <span lang=EN-US style='mso-ansi-language:EN-US'>If values
+if items are approximately low then this operation reduces the storage space
+for the list. Otherwise the storage space could grow. The precise formula that
+explains conditions under which the storage space begins to extend, can be
+acquired, but it is hardly necessary.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The composition of these two
+operations (replacing an occurence by the difference of two adjacent items and
+the length-depended method of number storing) constitute the archiving
+algorithm of DDC. Obviously it works with linear speed. The ratio of reducing
+of the corpus index is approximately 40%.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><span lang=EN-US style='mso-ansi-language:EN-US'>Unit 5. Conclusion<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt;text-indent:35.4pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>On the whole we are to accept that
+DDC is a quite simple system, which to our mind has the following benefits:<o:p></o:p></span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l2 level1 lfo10;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>Indexing
+     in &quot;constant size&quot; memory;<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l2 level1 lfo10;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>Indexing
+     by sentences not by documents;<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l2 level1 lfo10;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>Querying
+     using subcorpora, that means, that querying is also run in &quot;constant
+     size&quot; memory;<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l2 level1 lfo10;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>Parallel
+     querying, that enables us to deal with unlimited corpora.<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l2 level1 lfo10;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>Distinction
+     between statistical queries and example ones.<o:p></o:p></span></li>
+</ol>
+
+<p class=MsoBodyTextIndent2><span lang=EN-US>On the other hand there are some
+evident drawbacks:</span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l7 level1 lfo12;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>The
+     speed of the engine is much more slower than the speed of current web
+     search engines<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l7 level1 lfo12;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>There
+     is no systematic analysis of the two most time-consuming procedures of the
+     query mechanism<o:p></o:p></span></li>
+ <li class=MsoNormal style='margin-right:.75pt;mso-list:l7 level1 lfo12;
+     tab-stops:list .5in'><span lang=EN-US style='mso-ansi-language:EN-US'>The
+     index files take the same room as the corpus itself without archiving.<o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>We hope that these drawbacks don't overweigh
+the benefits and we hope also that DDC will be helpful for the linguistic
+society.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote-list'><![if !supportFootnotes]><br clear=all>
+
+<hr align=left size=1 width="33%">
+
+<![endif]>
+
+<div style='mso-element:footnote' id=ftn1>
+
+<p class=MsoNormal style='margin-right:.75pt'><a style='mso-footnote-id:ftn1'
+href="#_ftnref1" name="_ftn1" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[1]<![endif]></span></span></a><span
+lang=EN-US style='mso-ansi-language:EN-US'> For a German corpus of 25 Mln
+tokens, the set of morphological patterns is 6000,<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:.75pt'><span lang=EN-US
+style='mso-ansi-language:EN-US'>and the set of tokens is 600.000.<o:p></o:p></span></p>
+
+<p class=MsoFootnoteText><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn2>
+
+<p class=MsoNormal style='margin-right:.75pt'><a style='mso-footnote-id:ftn2'
+href="#_ftnref2" name="_ftn2" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[2]<![endif]></span></span></a><span
+lang=EN-US style='mso-ansi-language:EN-US'> In the current version the size of
+a subcorpus is 1 mln. token.<o:p></o:p></span></p>
+
+<p class=MsoFootnoteText><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn3>
+
+<p class=MsoNormal style='margin-right:.75pt'><a style='mso-footnote-id:ftn3'
+href="#_ftnref3" name="_ftn3" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[3]<![endif]></span></span></a><span
+lang=EN-US style='mso-ansi-language:EN-US'> DDC was created under Windows 2000.<o:p></o:p></span></p>
+
+<p class=MsoFootnoteText><span lang=EN-US style='mso-ansi-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn4>
+
+<p class=MsoNormal style='margin-right:.75pt'><a style='mso-footnote-id:ftn4'
+href="#_ftnref4" name="_ftn4" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[4]<![endif]></span></span></a><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style="mso-spacerun: yes"> 
+</span>lower_bound function determines the lowest value of A in the range [q,m)
+such that, for each j in the range [q, A) hj &lt; xi<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn5>
+
+<p class=MsoFootnoteText><a style='mso-footnote-id:ftn5' href="#_ftnref5"
+name="_ftn5" title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[5]<![endif]></span></span></a><span
+lang=EN-US style='mso-ansi-language:EN-US'> Any adjective, followed by a noun,
+which is followed by a verb.<o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

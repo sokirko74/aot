@@ -1,0 +1,872 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>АОТ :: Технологии :: A short description of Dialing Project</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<link href="../../aot.css" rel="stylesheet" type="text/css">
+</head>
+
+<body bgcolor="#F3F3F3" text="#000000" link="#000000" vlink="#999999" alink="#000000">
+<a name="top"></a>
+<table border="0" align="center" cellpadding="1" cellspacing="0">
+  <tr>
+    <td bgcolor="#666666"><table width="760" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          <td><table border="0" cellspacing="0" cellpadding="5">
+              <tr>
+                <td width="30">&nbsp;</td>
+                <td><font size="+7" face="Arial, Helvetica, sans-serif"><b>АОТ</b></font></td>
+                <td width="40">&nbsp;</td>
+                <td valign="baseline"><font size="+1" face="Arial, Helvetica, sans-serif"> Автоматическая  Обработка  Текста</font></td>
+              </tr>
+            </table>
+            <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+              <tr>
+                <td height="4"><img src="../../images/transparent.gif" width="1" height="4"></td>
+              </tr>
+            </table>
+            <table width="760" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td valign="top"><table border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                      <td class="text">
+                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.shtml">скачать</a> <a href="/onlinedemo.html">&nbsp;демо</a> <a href="/technology.html"><b>технологии</b></a> &nbsp; <a href="#top" title="наверх">^</a></font></p>
+                        <table width="720" border="0" cellpadding="3" cellspacing="0" bgcolor="#CCCCCC">
+                          <tr>
+                            <td class="titleblack">A short description of Dialing Project. Alexey Sokirko, 2001.</td>
+                          </tr>
+                        </table>
+                        <table width="720" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td height="7"><img src="../../images/transparent.gif" width="1" height="7"></td>
+                          </tr>
+                          <tr>
+                            <td height="2" bgcolor="#000000"><img src="../../images/transparent.gif" width="1" height="2"></td>
+                          </tr>
+                          <tr>
+                            <td height="7"><img src="../../images/transparent.gif" width="1" height="7"></td>
+                          </tr>
+                        </table>
+                        <p><a href="#1">A short description of Dialing Project</a></p>
+                        <p><a href="#2">Introduction</a></p>
+                        <p><a href="#3">Before the First Level Semantics</a></p>
+                        <p><a href="#4">Basic Semantic Description</a></p>
+                        <p><a href="#5">Building Semantic Nodes</a></p>
+                        <p><a href="#6">Building
+all possible semantic relations</a></p>
+                        <p><a href="#7">Building Tree Variants</a></p>
+                        <p><a href="#8">After the First Level Semantics</a></p>
+                        <p><a href="#9">Acknowledgments</a></p>
+                        <p><a href="#10">References</a></p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="1"></a>A short
+description of Dialing Project </td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>This paper gives
+a short description of a  natural
+language processing system (NLP-system) that is called Dialing
+Project (1999-2001). Dialing Project is a Russian-to-English machine translation
+system that is based on French-to-Russian machine translation system [<a name="p1" href="#pp1">1</a>] developed by Dr.Leontieva and her group in 1976-84. The author of the paper
+pays attention mainly to the semantic module of Dialing Project  since he 
+participated in its development.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="2" id="2"></a>Introduction</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>Dialing System consists of six modules of text processing:</p>
+                        <ol start=1 type=1>
+                          <li>Graphematics;</li>
+                          <li>Morphology;</li>
+                          <li>Group Syntax;</li>
+                          <li>First-level Semantics; </li>
+                          <li>Transfer;</li>
+                          <li>Synthesis.</li>
+                        </ol>
+                        <p>On each stage there is a special formal language in which one can
+translate the input text. Firstly, the input text is translated to
+graphematical language, then from graphematical  to morphological  and so
+on. Evidently, these languages  share
+some words between each other. In principle it is possible to  translate from one language to another without
+intermediate languages. In practice one should avoid it because it violates the
+well-known Law of Demeter(&quot;each component should only know about closely
+related components&quot;).  For example, one
+should avoid references to Russian graphematical representation  from English Synthesis stage. Still this
+scheme makes   possible to use the
+modules in different combinations,  or
+even stand-alone, that&quot;s why  one can
+convert the  machine translation system
+Dialing to various types of NLP systems.</p>
+                        <p>The main symbols of  these six
+special languages are descriptors that are 
+special constants which  describe
+one word or group of words of the input text. We can build complex construction
+based on descriptors, i.e. sets or lists of descriptors, logical forms and so
+on. Each descriptor has its meaning and a set of rules that can assign it to a
+particular word or group of words. For example, descriptor &quot;EOS&quot; means end of
+sentence, and its set of assigning rules is based on analysis of full stops,
+exclamation or question marks.  While working
+with natural languages one can find it helpful to use the same descriptors for
+different natural languages. The shared descriptors always have the same
+meaning, but can differ in sets of assigning rules.</p>
+                        <p>In text processing a descriptor can be attached to a word or group.
+In Dialing Project any group of words always has a single main word. A group
+can be continuous and not.  A continuous
+group can be defined by lower and upper borders. A non-continuous group can be
+defined only word by word. A group of two words is called a relation.</p>
+                        <p>Besides the modules of analysis there are dictionaries that hold
+predefined information about words and groups. This is the most important part
+of the system, since it is the only source of real knowledge for the computer.
+When we find an entry in dictionaries that matches the input word or group, we
+say that we find an interpretation. If there are many interpretations for one
+text item then it is the case of ambiguity. Normally we should choose only one
+interpretation for a text item. Speaking roughly the process of analysis can be
+viewed as a sequence of interpretation choices. In most cases an interpretation
+of  some text item A depends  on interpretations of neighbor items, which
+depend  themselves on the interpretation
+of A. In other  words ambiguous items
+are cross dependent. That&quot;s why we are to process all text variants of  the word&quot;s context and choose the best.
+If  the number of variants is too
+large  then the programmer should narrow
+the context or simply cut some variants off. Such narrowing is an unavoidable
+source of interpretation errors that a computer usually makes.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="3" id="3"></a>Before the First Level Semantics</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>Now let us describe Dialing process stages in more detail. The first
+processor (Graphematics) divides the input text into words, digital sequences,
+alpha-numeral sequences. It finds electronic addresses, file names, some
+abbreviations. Graphematical procedure splits input text into  sentences, paragraphs, and headings.</p>
+                        <p>The second processor is morphology. For each input word form the
+procedure finds all morphological interpretations in the morphology dictionary.
+Morphology interpretation is a tuple:</p>
+                        <p>&lt;Normal
+form, Part of Speech, Grammems&gt;, for example:</p>
+                        <p><i>doing</i> -&gt; &lt;do, VERB, ing-form&gt;</p>
+                        <p>In addition the morphological processor applies heuristic
+context-dependent rules that resolve some simple cases of morphological
+ambiguity.</p>
+                        <p>The next stage is occupied by syntax
+and fragmentation modules that are closely connected.  The fragmentation  module
+finds clauses in Russian  compound
+sentences. The syntax module builds continuous syntax groups inside clauses
+(NP, PP etc).  Any word of a syntax
+group has a determined morphological interpretation whereas clause can include some
+items that are not fully interpreted. Since Russian language has free word
+order, syntax groups of Dialing Project cover 70% of words. We consider that
+the rest of the syntax structure(30%) should be built on the next stage, i.e.
+First Level Semantics.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="4" id="4"></a>Basic Semantic Description</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>The First Level Semantic  analysis builds a semantic graph for one
+Russian sentence.  Speaking generally,
+the concept of &quot;semantics&quot; is not well defined in computational linguistics.
+Theoretical linguists and art scholars 
+understand this word deeper than specialists of applied linguistics.
+Usually pure humanists think that natural language semantics  is a science that deals with definitions
+of  words and collocations. Accordingly,  they feel that formal linguistics should
+build formal definitions. However the last investigations in this domain
+convince us that full formal descriptions of 
+words cannot be effectually combined to result in a structure for the
+whole input text. The main reason of it is the size of the descriptions.  For example, consider a definition of word
+&quot;Table&quot; [<a name="p2" href="#pp2">2</a>]:</p>
+                        <p>&quot;Table&quot; = &quot;a piece
+of furniture having a smooth flat top supported by one or more vertical legs&quot;
+(Wordnet). </p>
+                        <p>Now imagine what a mess the input text will be after replacing all
+original words by such definitions. </p>
+                        <p>If formal definitions cannot be used in computational linguistics
+due to their size, then what is the difference between semantics and syntax?
+Following Dr. Leontieva[9-10] we assume that the difference is in the relations
+and descriptors. Semantic relations are universal while syntax relations are
+language-dependent. Thus semantic structure is a graph with semantic relations.
+The number of nodes in the graph is approximately  equal to the number of 
+words in the input text, but there are some exceptions.  Certain words  can be divided into two or more nodes, for example,  German word &quot;Donaudampfschifffahrtsgesellschaftskapit&auml;nswitwenrentenauszahlungsstelle&quot;. will be translated into 8 nodes (&quot;Danube&quot;, &quot;steamship company&quot;,
+&quot;society&quot;, &quot;capitan&quot;, &quot;widow&quot;, &quot;rent&quot;, 
+&quot;payment&quot;, &quot;office&quot; ). On the other hand, some words can be united in
+one semantic node, for example &quot;one hundred and forty&quot; -&gt; &quot;140&quot;. But the
+most frequent correspondence  is  &quot;one word -&gt; one node&quot;, which makes the
+whole structure transparent. Consider the example of analysis:</p>
+                        <p><b>Input Text</b>: <i>I write with a pencil</i><br>
+  <b>Syntax Structure</b>:  NP =&gt;
+I;  V -&gt; write; PP -&gt; <sub> </sub>with a pencil</p>
+                        <p><b>Semantic Structure</b>:  <b>Agent</b>(I, write); <b>Instrument</b>
+(pencil, write)</p>
+                        <p>Although the semantic structure is 
+very simple and therefore very productive,  it is necessary to understand that it is very hard to get such
+structure without  errors.  In this light one should  not overvalue computational semantics in
+whole. For example, if you remove the semantic module  from Dialing Project  the
+translation will become only 20% worse. </p>
+                        <p>Now we are ready  to describe the  semantic machinery used in Dialing Project.   There are three types of objects to be
+discussed:</p>
+                        <ol start=1 type=1>
+                          <li>semantic relations;</li>
+                          <li>semantic descriptors;</li>
+                          <li>semantic categories.</li>
+                        </ol>
+                        <p>Most  of semantic relations
+we use are wide spread (see, for example <a href="http://www.unl.ias.unu.edu/">Universal
+Networking Language</a>). Semantic relations are written in the following
+format:</p>
+                        <p>R(A,B), where R is a relation name, A is slave semantic node and B is  master semantic node.  </p>
+                        <p>Formula R(A,B)
+with some R,A, and B  agrees  with the input text iff  &quot;A is R 
+for B&quot; , i.e.: </p>
+                        <p>R(A,B) &lt;=&gt;  &quot;A is R  for B&quot;. </p>
+                        <p>For example, formula <b>Author</b>(Leo Tolstoy, War and Peace)
+agrees with the text &quot;<i>the author of &quot;War and Peace&quot; Leo Tolstoy&quot; </i>since
+the text implies that Leo Tolstoy is the author of  &quot;War and Peace&quot;. </p>
+                        <p>The next principal object of our semantics is semantic
+descriptor.   There are about 40
+semantic descriptors in the dictionary, like <b>Animative</b>, <b>Rank</b>, <b>Organization</b>
+etc. A formula that is built on logical operations (conjunction, disjunction)
+and semantic descriptors as atoms  is
+attached to each entry in the dictionary and to each actant pattern.  For example:</p>
+                        <p>SemDes(<i>president</i>) = <b>Power</b> &amp; <b>Rank</b>.</p>
+                        <p>Initially such formulae were introduced to choose the right sense of
+words, if more than one sense exist. Subsequently semantic descriptor acquired
+some special meaning that means that </p>
+                        <p>
+SemDes(A) = SemDes(B) &lt;=&gt; &quot;Meanings of A and B have something in common&quot;.</p>
+                        <p>The third semantic instrument is semantic categories.  There are four of them:1. <b>Situations</b>;
+2.<b>Objects</b>; 3. <b>Properties</b>; 4 <b>Operators</b>. Situations(<i>go</i>,
+<i>explosion, ...</i>) always have two latent valencies: where  and when it happened.  Objects(<i>keyboard</i>,  <i>monitor, ...</i>) have only one latent
+valency: where it is located . Properties(<i>red, old</i>..) modify situations
+and objects. Operators (<i>not, yet,...)</i> only modify semantic structure, they
+never correspond  to separate semantic
+nodes,.</p>
+                        <p>All these instruments are used in description of word senses. Consider
+an example:</p>
+                        <blockquote>
+                          <p>
+Title  = 
+read<br>
+Sense = 1<br>
+Category  = <b>Situation</b><br>
+SemDes = <b>Process</b> <br>
+Valency = <b>Agent</b>(C,
+A1);  <b>Object</b>(C, A2)<br>
+  SemDes1 = <b>Animative</b><br>
+GramDes1 = <b>subj<br>
+  </b>SemDes2 = <b>Information</b> &amp; <b>Thing<br>
+  </b>GramDes2 = <b>obj</b></p>
+                        </blockquote>
+                        <p>That was a short description of the adopted semantic theory that is
+used in Dialing Project. Let us proceed with the description of the program.</p>
+                        <p>The input of the semantic module is a set of syntax linkages. The
+output is semantic structure. While 
+building the resulting semantic structure the program faces the
+following problems:</p>
+                        <ol>
+                          <li>
+  
+  Morphological ambiguity, since it
+cannot be fully resolved on the syntax stage.</li>
+                          <li>
+  
+  Lexical ambiguity, for example  I saw a bat, where a
+bat might refer to an animal or, among others, a table tennis bat.</li>
+                          <li>
+  
+  Structural ambiguity, for example
+&quot;John sold the dog apple&quot;,  where at
+least two interpretations are possible: 
+&quot;John sold the apple to the dog&quot; or &quot;John sold the apple that somehow
+resembles a dog&quot;</li>
+                        </ol>
+                        <p>The types of ambiguity constitute the design of the semantic module:</p>
+                        <blockquote>
+                          <p>input text -&gt; M1,...,Mn – morphological variants</p>
+                          <p>each Mi -&gt; L1,...,Ln – lexical 
+variants</p>
+                          <p>each Li -&gt; S1,...,Sn – structural 
+variants</p>
+                        </blockquote>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="5" id="5"></a>Building Semantic Nodes</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>On the first level the procedure works with one morphological
+variant. In short this level is aimed to build semantic nodes and to assign
+them dictionary interpretations.  The
+most interesting parts of the level are as follows:</p>
+                        <ol>
+                          <li>
+  
+  Finding time groups;</li>
+                          <li>
+  
+  Finding fixed collocations;</li>
+                          <li>
+  
+  Getting all semantic interpretations
+for each semantic node.</li>
+                        </ol>
+                        <p>The procedures 1) and 2) deal with collocations, and  it is time to have  a look at collocations in Dialing Project.  Algorithmically, there are two
+distributions: conditional/unconditional collocations and closed/open
+collocations.  Conditional collocations
+differ from unconditional ones in the method of finding. To find an
+unconditional collocation in a text one should only know its syntax and
+morphological properties. On the contrary, there must be strong <b>semantic</b>
+evidence for conditional collocations, that&quot;s why  we have to find conditional collocations only on the semantic
+stage. Here are examples:</p>
+                        <p><b>Unconditional:</b></p>
+                        <ol>
+                          <li>
+  
+  to be chip off the old block<br>
+  <i>Yes, Tom is just a chip off the old block.</i></li>
+                          <li>
+  
+  come hell or high water <br>
+  <i>Finish your homework come hell or high water!</i></li>
+                        </ol>
+                        <p><b>Conditional:</b>
+                        <ol>
+                          <li> clear the air
+                            <ol type="a">
+                              <li><i>His apology
+cleared the air</i></li>
+                              <li><i>
+Drivers! Clear the air with
+Flame Gard Filters</i></li>
+                            </ol>
+                          </li>
+                          <li> climb
+the wall 
+                            <ol type="a">
+                              <li><i>If I don't
+go on a vacation soon, I'll climb the wall.</i></li>
+                              <li><i>
+ If you can't climb the wall,
+build a door</i></li>
+                            </ol>
+                          </li>
+                        </ol>
+                        <p>Unconditional collocations are
+usually more idiomatic and longer than conditional. </p>
+                        <p>The difference between open and closed collocations is more rigid.
+Any closed collocation corresponds  to
+only one semantic node in a semantic structure while  open collocations have as many semantic nodes as their words.
+Words of an open collocation can be connected with other nodes of the semantic
+structure, but of course, there must be 
+some irregularity  either in
+syntax of the collocation, or in its translation. Each node of an open
+collocation has a separate dictionary interpretation whereas a closed
+collocation can be interpreted only as a whole.</p>
+                        <p>Examples:</p>
+                        <p><b>Open collocations</b>:</p>
+                        <ol>
+                          <li>
+1.time groups with  the special use of
+colon
+                            <ol type="a">
+                              <li><i>at 7 : 30</i></li>
+                              <li><i>at 7 : 30 Friday evening</i></li>
+                            </ol>
+                          </li>
+                          <li><i>crack a smile</i> 
+                            <ol type="a">
+                              <li><i>I finally
+got him to crack a smile.</i></li>
+                              <li><i>He would
+crack a forced smile</i></li>
+                            </ol>
+                          </li>
+                        </ol>
+                        <p><b>Closed collocations</b></p>
+                        <ol>
+                          <li><i>cut and dried<br>
+  </i><i>That's my
+answer, cut and dried</i></li>
+                          <li> cross the Rubicon<br>
+  <i>He crossed the
+Rubicon</i>       </li>
+                        </ol>
+                        <p>Obviously, this distribution is not absolute but it is very
+practical. It is clear that the computer can process unconditional/closed
+collocations quicker than conditional/open ones. If  we want to forget about optimization issues we should make all
+collocations open (just in case) and conditional. </p>
+                        <p>Collocations are stored in the
+collocation dictionaries, some of which will be described below.</p>
+                        <p>The <b>dictionary of fixed
+functional words</b> consists of 
+complex conjunctions (<i>in order to</i>, <i>so that</i>...) and complex
+prepositions (<i>on behalf
+of&nbsp;</i>...).They are closed and unfortunately open,
+since there are some examples like this:</p>
+                        <blockquote>
+                          <p>(1) <i>to be, or not to be — <b>that is</b> the question</i> // not
+conjunction</p>
+                          <p>
+(2) <i>God has given us
+complete autonomy, <b>that is</b> self-government</i> //conjunction</p>
+                        </blockquote>
+                        <p>The next dictionary is Dialing
+Thesaurus. Its structure  resembles
+Wordnet. The basic relations are hypernymy/hyponymy and meronymy/holonymy. One
+thesaurus relation can link two synsets together. That is the common place.
+However there are some differences from standard thesauri:</p>
+                        <ol>
+                          <li>
+  
+  Only noun phrase can be inserted into  Dialing Thesaurus,  no VP.</li>
+                          <li>
+  
+  Each thesaurus entry can be supplied with a valency structure that is
+expressed by means of semantic relations and descriptors.</li>
+                          <li>
+  
+  Any thesaurus synset can be used as semantic descriptor to select a
+word&quot;s actant. </li>
+                        </ol>
+                        <p>By default all thesaurus entries are open and unconditional
+collocations.</p>
+                        <p>The next collocation dictionary is Time Group Dictionary. Time
+groups fill <b>Time</b> valencies, for example: </p>
+                        <blockquote>
+                          <p>
+<i><b>On Monday</b> we go to the Zoo.</i> </p>
+                        </blockquote>
+                        <p>These collocations are open and unconditional, even though
+non-prepositional time phrases can be conditional, for example</p>
+                        <blockquote>
+                          <p>
+  
+  (1) <i><b>Sunday morning</b> will be all right</i>  (not <b>Time</b> valency)</p>
+                          <p>
+  
+  (2) <i>We&quot;ll meet <b>Sunday morning</b> </i>(<b>Time</b> valency)</p>
+                        </blockquote>
+                        <p>The syntax of time groups is very special, that&quot;s why we consider
+them collocations:</p>
+                        <blockquote>
+                          <p>
+(1)  <i>Tuesday September 4 1:34 AM ET</i></p>
+                          <p>(2)<i>  in the 1980s</i></p>
+                        </blockquote>
+                        <p>The last collocation dictionary is called Fixed Collocation
+Dictionary. Most of entries of this dictionary are verb phrases, like <i>clear
+the air</i> or <i>climb the wall,  </i>and<i> </i>considered
+unconditional and closed, for example <i>chip off the
+old block</i>.</p>
+                        <p>Besides the
+collocation dictionaries there is also one big dictionary for words that is
+called Russian Common-Puprose Dictionary. Thus, the Dialing Project uses the
+following Russian dictionaries: </p>
+                        <ol>
+                          <li>
+  
+  Russian Common-Puprose
+Dictionary (main);</li>
+                          <li>Thesaurus;</li>
+                          <li>
+  
+  Time Group Dictionary;</li>
+                          <li>
+  
+  Functional Words Dictionary;</li>
+                          <li>
+  
+  Fixed Collocations Dictionary.  </li>
+                        </ol>
+                        <p>Each entry 
+of these dictionaries is identified by Title and SenseId. In other
+words, dictionary   interpretation is
+the following tuple:</p>
+                        <p> &lt;Dictionary Name, 
+Title, SenseId&gt;  </p>
+                        <p>If no dictionary
+interpretation can be found for a word, the default one is used. For example,
+there is a default interpretation for transitive verbs. Of course, the program
+should choose only one dictionary interpretation for one semantic node, that&quot;s
+why the program has to search among all lexical variants (a variant of
+attaching  dictionary interpretations to
+semantic nodes).</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="6" id="6"></a>Building
+all possible semantic relations</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>The main
+steps the program makes while processing 
+one lexical variant  concern
+semantic relations:</p>
+                        <ol>
+                          <li>
+  
+  Building valency
+structure of each node;</li>
+                          <li>
+  
+  Building all possible
+relations;</li>
+                          <li>
+  
+  Processing  similar nodes;</li>
+                        </ol>
+                        <p>The
+first  procedure builds valency
+structure of  each node. Here are
+further complications to worry us. 
+Firstly, some valencies are not compatible with the others, and this information
+is written in the dictionary in a special format. Secondly, there are default
+valencies that should be added  in any
+case to some types of nodes. For example, any <b>Situation</b> node has  a default <b>Time</b> valency. Thirdly, some
+valencies are mandatory, and some valencies are not.</p>
+                        <p>The
+second procedure builds all possible semantic relations without checking
+semantic conditions. It uses morphological and syntax information about nodes
+and information that is written in <b>GramDes</b> field [<a name="p3" href="#pp3">3</a>]
+of node&quot;s article. For example, let X be a node. Let A<sub>n</sub> be the n-th
+valency of word X.  If  the dictionary article of X includes  formula &quot;GramDes<sub>n</sub>
+=  <b>of+NP&quot;  </b>then  each PP with the
+preposition &quot;<b>of&quot; </b>will be connected to X. Usually this procedure builds
+much more relations than needed.  It is
+a task for the next procedures to choose the right hypothesis. </p>
+                        <p>The
+ratio  R/N, where R  is 
+the number of all possible relations and N is  the number of nodes can measure 
+the  complicity of the input
+text. If R/N  &gt; 1,7 then the current version
+of the program invokes heuristic procedures that delete unpromising relations. </p>
+                        <p> It is well
+known that the worst enemies of NLP are ambiguity and similarity that&quot;s why the
+procedure for similar nodes is one of the important part of this level. Similar
+words occupy only one  valency place,
+that&quot;s why there should be a proxy (we call it Multiple Node Actant, or MNA )
+that  represents all similar words.
+There are several MNA syntax types:</p>
+                        <blockquote>
+                          <p>
+(1)  <i>I like Peter, Mary, and John</i>
+(basic)</p>
+                          <p>
+(2)  <i>I like neither Peter nor Mary </i>(corr.
+conj)</p>
+                          <p>(3) <i>That will do more harm than good  (</i>comparative)</p>
+                        </blockquote>
+                        <p>After some
+kind of MNA is found  then we need to
+identify all possible nodes that should be subdued by this MNA and to find all
+possible parents of this MNA.</p>
+                        <p>Our solution of the
+last problem resembles Link Parser[3] Similar Rule where linkage of sentence </p>
+                        <blockquote>
+                          <p>
+<i>I like Peter and John </i> </p>
+                          <p>is built from two linkages </p>
+                          <p>
+<i>I like Peter</i></p>
+                          <p><i>I  like John.</i></p>
+                        </blockquote>
+                        <p>In short, node X
+becomes a parent of MNA if X subdues two children of the MNA: </p>
+                        <table border="0" cellspacing="0" cellpadding="5">
+                          <tr>
+                            <td><img src="images/eng-001.gif" width="587" height="135"></td>
+                          </tr>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="7" id="7"></a>Building Tree Variants</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>The last procedure searches the best tree variant and it is the
+slowest part of the whole program. 
+Obviously it is impossible to check all tree variants for a sentence of
+standard length (20-30 words). We know two implemented methods to restrict the
+search space. The first method  that is
+used in ETAP System[4] chooses the best variant for each node locally.
+Initially it finds the root of the clause, then it  chooses root&quot;s children and 
+so on.  It means that choices on
+different levels are independent. Evidently that is not a correct method
+because it is not clear in which order 
+the program should  go through
+the nodes. But we don&quot;t  want to
+criticize it since the existence of fully correct methods  is questionable. The second known method was
+developed in Mikrokosmos Project by Beale Stephen[5]. It is based on Constraint
+Satisfaction [6]. In short, this method divides the graph into subgraphs with minimal  ratio N/M, where N is the number of nodes in
+this subgraph and M is the number of nodes of the subgraph that are
+connected  to nodes that are not in this
+subgraph. </p>
+                        <table border="0" cellspacing="0" cellpadding="5">
+                          <tr>
+                            <td><img src="images/eng-002.gif" width="467" height="67"></td>
+                          </tr>
+                        </table>
+                        <p>After finding the first subgraph division it solves ambiguity in
+each subgraph.  Then it finds new
+subgraphs and so on. One can see that Mikrokosmos method  is not also fully correct since  choices in different subgraphs are
+independent, but we know that the only correct method is too slow. That&quot;s why,
+to some extent, the Dialing tree variant procedure is a kind of
+Microkosmos  method. </p>
+                        <p>Our procedure hinges on the assumption that the number of cycles in
+the graph of all possible relations is small. For Russian language this fact is
+proved experimentally,  though there is
+no evidence  that it is true for other
+languages. If the number of cycles is small then the following steps are
+reasonable:</p>
+                        <ol>
+                          <li>
+  
+  Delete one relation in each cycle in
+all possible ways that produce a set of uncycled graph variants, for example,
+if there is one cycle with three  nodes
+then there are three ways to make the graph uncycled;</li>
+                          <li>
+  
+  If there is only one relation that
+points to a node, then fix this relation. We are sure that all fixed relations
+will be in the resulting variant, because the result variant should be
+connected;</li>
+                          <li>
+  
+  
+  
+  Find best tree variants in each
+maximal connected component that has no fixed relation.</li>
+                          <li>
+  
+  Combine all best tree variants in the
+resulting tree variant.</li>
+                        </ol>
+                        <p>One can
+see that besides the number of cycles the number of fixed relations is also
+crucial for this procedure.  If the
+input graph has no fixed relation then 
+the whole  procedure turns out to
+be the full search. In practice the part of fixed relations is 20%, which makes
+the procedure several times quicker than the full search.  This method was tested and no counter-examples
+were found.</p>
+                        <p>Now the
+key question is the evaluation of tree variants. There are several parameters
+of different importance that produces the value of a tree variant:</p>
+                        <ol>
+                          <li>Number of Connected components;</li>
+                          <li>
+  
+  Projectivity</li>
+                          <li>
+
+  
+  Length of relations</li>
+                          <li>
+  
+  Valency order;</li>
+                          <li>
+  
+  Mandatory and optional valencies;</li>
+                          <li>
+  
+  Matching Semantic Descriptors; </li>
+                          <li>
+  
+  ...</li>
+                        </ol>
+                        <p>There are
+more than twenty parameters the program uses. The most important thing about
+them is that the parameters should be linguistically transparent – no special
+search trick is admitted. Thus,  Dialing
+Project uses transparent search algorithm (with fixed relation) and
+linguistically motivated set of parameters to estimate variants. We
+believe,  any NLP system should be
+designed in such way: </p>
+                        <ul>
+                          <li>search algorithm should be simple and performs nearly full search;</li>
+                          <li>measures should  be linguistically transparent.</li>
+                        </ul>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="8" id="8"></a>After the First Level Semantics</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>The First
+Level Semantics sends the best semantic structure to the Transfer stage, which
+performs  two main tasks. Firstly, it
+maps  the  semantic structure  to the
+ English Semantic Dictionary, i.e. finds
+the best translation for a semantic node. To find the best translation one
+should consider semantic node&quot;s 
+descriptors and valencies. 
+Secondly,   the program makes
+some changes in the  semantic structure
+to prepare it for English Synthesis. For example,  in Dialing Project  all
+phrases like:</p>
+                        <blockquote>
+                          <p><i>The girl is beautiful</i></p>
+                          <p><i>
+The beautiful  girl </i></p>
+                          <p><i>
+The girl who is beautiful</i></p>
+                        </blockquote>
+                        <p>have the
+same semantic structure <b>Attrib</b>(<i>beautiful, girl) </i>with different
+syntax information, hence Transfer 
+should have a  procedure
+which  inserts node &quot;<i>be</i>&quot; in the
+structure like this:</p>
+                        <table border="0" cellspacing="0" cellpadding="5">
+                          <tr>
+                            <td>girl</td>
+                            <td>&nbsp;</td>
+                            <td width="40">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>be</td>
+                            <td>&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td><img src="images/eng-004.gif" width="41" height="23"></td>
+                            <td width="40">&nbsp;</td>
+                            <td><img src="images/eng-003.gif" width="41" height="23"></td>
+                            <td>&nbsp;</td>
+                            <td><img src="images/eng-004.gif" width="41" height="23"></td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td>beautiful</td>
+                            <td width="40">&nbsp;</td>
+                            <td>girl</td>
+                            <td>&nbsp;</td>
+                            <td>beautiful</td>
+                          </tr>
+                        </table>
+                        <p>The last step is
+English Synthesis. Its main task is to produce a string of English Words, therefore
+all problems with word order are solved here. 
+The Word Order Problem is relatively simple when the semantic graph has
+only one connected component. The things become worse when the graph is not
+connected. In this case we are to put all connected components one after another
+in the output sentence, which usually 
+produces unsound results. Now we say 
+that in Dialing Project it is crucial to achieve fully connected graphs
+on the First  Level Semantic Stage. To
+achieve it we need to enlarge  our
+semantic dictionaries.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="9" id="9"></a>Acknowledgments</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>I would like to
+thank all members and consultants of Dialing Project and especially Dialing
+Company President Eduard Khachukaev, who funded this project.  More information about the Project can be
+found on <a href="http://www.aot.ru/">www.aot.ru</a>.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          
+                          <tr>
+                            
+                            <td class="titleblack"><a name="10" id="10"></a>References</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        
+                        </table>
+                        <p>[1] <a href="http://www.xrefer.com/books/oupdling/about.jsp">The Concise Oxford Dictionary of Linguistics,  &copy; Oxford University Press 1997</a></p>
+                        <p>[2] English as 2nd Language <a href="http://esl.about.com/">http://esl.about.com</a></p>
+                        <p>[3] Temperley D, Lafferty J., Sleator D. 1995.Link Grammar Parser  <a href="http://www.link.cs.cmu.edu/link">http://www.link.cs.cmu.edu/link</a></p>
+                        <p>[4] Russian Academy of Sciences Institute for Information Transmission Problems, ETAP-3 system  <a href="http://proling.iitp.ru/Etap/index_e.html">http://proling.iitp.ru/Etap/index_e.html</a></p>
+                        <p>[5] Beale Stephen. (1996) Hunter-Gatherer: Applying Constraint Satisfaction, Branch-and-Bound and Solution Synthesis to Natural Language Semantics NMSU CRL Technical Report. MCCS-96-292.</p>
+                        <p>[6] Tsang E. 1993. Foundation of Constraint Satisfaction. Academic Press, London.</p>
+                        <p>[7] Michael Blekhman, Boris Pevzner; First Steps of Language Engineering in the USSR: The 50s through 70s;
+ <a href="http://www.bcs.org.uk/siggroup/nalatran/mtreview/mtr-11/mtr-11-6.htm">http://www.bcs.org.uk/siggroup/nalatran/mtreview/mtr-11/mtr-11-6.htm</a></p>
+                        <p>[8] W.John Hutchins; Machine translation over fifty years; <a href="http://ourworld.compuserve.com/homepages/WJHutchins/HEL.htm">http://ourworld.compuserve.com/homepages/WJHutchins/HEL.htm</a></p>
+                        <p>[9] Leontieva Nina. Textual Facts as Units of Coherent Text Semantic Analysis // Arbeitspapiere der GMD 671. Darmstadt, 1992. 0,6</p>
+                        <p>[10] Leontieva Nina. ROSS: Semantic Dictionary for Text Understanding and Summarization // META. - 1995.- 40, No 1. Montreal, 1995.</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>[<a name="pp1" href="#p1">1</a>] Some information about the system can be found in [7] and [8].</p>
+                        <p>[<a name="pp2" href="#p2">2</a>] Many examples in this paper are translated into English to help reader to understand problems that exist in Russian.</p>
+                        <p>[<a name="pp3" href="#p3">3</a>] = Grammatical Description Field.</p>
+<p>&nbsp;</p>
+                        <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+                          <tr>
+                            <td height="2"><img src="../../images/transparent.gif" width="1" height="2"></td>
+                          </tr>
+                        </table>
+                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.shtml">скачать</a> <a href="/onlinedemo.html">&nbsp;демо</a> <a href="/technology.html"><b>технологии</b></a>  &nbsp; <a href="#top" title="наверх">^</a></font></p></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td valign="bottom"><table width="750" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td align="right"><table border="0" cellspacing="5" cellpadding="0">
+                          <tr> 
+                            <td align="right"><font color="#999999" size="1">Разработка 
+                              <a href="mailto:simple@mosk.ru"><font color="#999999">DiP</font></a>.<br>
+                              &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">АОТ</font></a>. 
+                              Все права защищены.</font></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+    <td bgcolor="#CCCCCC"><img src="../../images/transparent.gif" width="1" height="1"></td>
+  </tr>
+  <tr>
+    <td bgcolor="#CCCCCC"><img src="../../images/transparent.gif" width="1" height="1"></td>
+    <td bgcolor="#CCCCCC"><img src="../../images/transparent.gif" width="1" height="1"></td>
+  </tr>
+</table>
+</body>
+</html>
