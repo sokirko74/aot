@@ -24,7 +24,6 @@ run $make_tool -C $RML/Source/TestSynan mode=release
 run $make_tool -C $RML/Source/ConvertTrigramBinary mode=release
 run $make_tool -C $RML/Source/SimpleGrammarPrecompiled mode=release
 run $make_tool -C $RML/Source/SynanDaemon mode=release_thread
-run $make_tool -C $RML/Source/SynanCGI  mode=release_thread
 
 #compile seman
 SEMAN="TestSeman AprDictGen asp_read deriv_read GenFreqDict StatDatBin WordDatBin GenSynDict"
@@ -33,6 +32,5 @@ do
   run $make_tool -C $RML/Source/$component mode=release
 done
 #run $make_tool -C $RML/Source/SemanDaemon mode=release_thread libmode=shared 
-#run $make_tool -C $RML/Source/translate mode=release_thread libmode=shared
 
 echo All done.
