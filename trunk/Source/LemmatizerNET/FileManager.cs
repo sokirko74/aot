@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-
+using System.Text;
 using LemmatizerNET.Files.FileSystem;
 using LemmatizerNET.Implement;
 using LemmatizerNET.Implement.Agramtab;
@@ -13,6 +13,13 @@ namespace LemmatizerNET {
 	public abstract class FileManager {
 		private string _registryValue;
 		private string _registryPath;
+		private Tools _tools;
+
+		public FileManager()
+		{
+			_tools = new Tools();
+		}
+
 		private string INIFileName {
 			get {
 				return "/Bin/" + Constants.RMLRegistryFilename;
@@ -28,14 +35,15 @@ namespace LemmatizerNET {
 		public static FileManager GetFileManager(string path){
 			return new FileSystemFileManager(path);
 		}
-		public Stream GetFile(string registry, string name) {
-			string path = GetStringInnerFromTheFile(registry);
+		public Stream GetFile(string registry, string name, int codePage) {
+			string path = GetStringInnerFromTheFile(registry, codePage);
 			return GetFile(path + name);
 		}
-		private string GetStringInnerFromTheFile(string registryPath) {
+		private string GetStringInnerFromTheFile(string registryPath, int codePage) {
 			if (registryPath != _registryPath) {
 				using (var stream = GetFile(INIFileName)) {
-					using (var reader = new StreamReader(stream, Tools.InternalEncoding)) {
+					using (var reader = new StreamReader(stream, _tools.InternalEncoding(codePage))) 
+					{	
 						var line = reader.ReadLine();
 						bool find = false;
 						while (line != null) {

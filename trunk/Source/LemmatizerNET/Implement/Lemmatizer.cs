@@ -17,7 +17,8 @@ namespace LemmatizerNET.Implement {
 		private bool _maximalPrediction;
 		private bool _useStatistic;
 		private bool _allowRussianJo;
-		
+		private Tools _tools;
+
 		public ICollection<string> HyphenPrefixes {
 			get {
 				return _hyphenPrefixes;
@@ -53,14 +54,15 @@ namespace LemmatizerNET.Implement {
 			_maximalPrediction = false;
 			_allowRussianJo = false;
 			_predict = new PredictBase(this,language);
+			_tools = new Tools();
 			InitAutomat(new MorphAutomat(this,language, Constants.MorphAnnotChar));
 		}
 		protected abstract string FilterSrc(string src);
 		
 		private void ReadOptions(string fileName,FileManager manager) {
 			string res;
-			using (var stream = manager.GetFile(Registry, fileName)) {
-				Tools.LoadFileToString(stream, out res);
+			using (var stream = manager.GetFile(Registry, fileName, CodePage)) {
+				_tools.LoadFileToString(stream, out res, manager, CodePage);
 			}
 			var lines = res.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 			foreach (var item in lines) {
@@ -89,17 +91,15 @@ namespace LemmatizerNET.Implement {
 				}
 			}
 		}
-        //private void CreateDecartProduction(IList<FormInfo> results1, IList<FormInfo> results2, IList<FormInfo> results) { 
-        //CreateDecartProduction(results1, results2,  results,  "") ;}
-        private void CreateDecartProduction(IList<FormInfo> results1, IList<FormInfo> results2, IList<FormInfo> results, string firstPart)
-        {
+		private void CreateDecartProduction(IList<FormInfo> results1, IList<FormInfo> results2, IList<FormInfo> results, string firstPart)
+		{
 
 			results.Clear();
 			for (var i = 0; i < results1.Count; i++) {
 				for (var k = 0; k < results2.Count; k++) {
 					var f = (FormInfo)results2[k].Clone();
-                    int j = results1[i].Count;
-                    while (--j > 0 && results1[i].GetForm(j) != firstPart) ;
+					int j = results1[i].Count;
+					while (--j > 0 && results1[i].GetForm(j) != firstPart) ;
 					f.SetUserPrefix(results1[i].GetForm(j) + "-");
 					results.Add(f);
 				}
@@ -194,7 +194,7 @@ namespace LemmatizerNET.Implement {
 		}
 		private bool CheckAbbreviation(string inputWord, IList<AutomAnnotationInner> findResults, bool isCap) {
 			for (var i = 0; i < inputWord.Length; i++) {
-				if (!Lang.is_upper_consonant(Tools.GetByte(inputWord[i]), Language)) {
+				if (!Lang.is_upper_consonant(_tools.GetByte(inputWord[i], CodePage), Language)) {
 					return false;
 				}
 			}
@@ -261,7 +261,7 @@ namespace LemmatizerNET.Implement {
 							&& secondPart.Length > 2) {
 							// if both words were found in the dictionary
 							// then we should create a decart production
-                                CreateDecartProduction(results1, results2, result, firstPart);
+							CreateDecartProduction(results1, results2, result, firstPart);
 							for (var i = 0; i < result.Count; i++) {
 								result[i].SetUserUnknown();
 							}

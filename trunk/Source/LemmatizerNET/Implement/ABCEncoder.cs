@@ -14,6 +14,7 @@ namespace LemmatizerNET.Implement {
 		private int _alphabetSizeWithoutAnnotator;
 		private int[] _alphabet2CodeWithoutAnnotator = new int[Constants.AlphabetSize];
 		private int[] _code2AlphabetWithoutAnnotator = new int[Constants.MaxAlphabetSize];
+		private Tools _tools;
 
 		public string CriticalNounLetterPack {
 			get {
@@ -22,7 +23,7 @@ namespace LemmatizerNET.Implement {
 		}
 		public InternalMorphLanguage Language {
 			get {
-                return _language;
+				return _language;
 			}
 		}
 
@@ -62,11 +63,12 @@ namespace LemmatizerNET.Implement {
 			return AlphabetSize;
 		}
 		public ABCEncoder(Lemmatizer lemmatizer,InternalMorphLanguage language, char annotChar) {
-            _lemmatizer = lemmatizer;
-            _language = language;
+			_lemmatizer = lemmatizer;
+			_language = language;
 			_annotChar=annotChar;
 			_alphabetSize = InitAlphabet(language, _code2Alphabet, _alphabet2Code, _annotChar);
 			_alphabetSizeWithoutAnnotator = InitAlphabet(language,_code2AlphabetWithoutAnnotator,_alphabet2CodeWithoutAnnotator,(char)257/* non-exeting symbol */);
+			_tools = new Tools();
 			if (_alphabetSizeWithoutAnnotator + 1 != _alphabetSize) {
 				throw new MorphException("_alphabetSizeWithoutAnnotator + 1 != _alphabetSize");
 			}
@@ -84,7 +86,7 @@ namespace LemmatizerNET.Implement {
 		public bool CheckABCWithAnnotator(string wordForm) {
 			var len = wordForm.Length;
 			for (var i = 0; i < len; i++) {
-				if (_alphabet2Code[Tools.GetByte(wordForm[i])] == -1) {
+				if (_alphabet2Code[_tools.GetByte(wordForm[i], _lemmatizer.CodePage)] == -1) {
 					return false;
 				}
 			}
@@ -93,7 +95,7 @@ namespace LemmatizerNET.Implement {
 		public bool CheckABCWithoutAnnotator(string wordForm) {
 			var len = wordForm.Length;
 			for (var i = 0; i < len; i++)
-				if (_alphabet2CodeWithoutAnnotator[Tools.GetByte(wordForm[i])] == -1)
+				if (_alphabet2CodeWithoutAnnotator[_tools.GetByte(wordForm[i], _lemmatizer.CodePage)] == -1)
 					return false;
 			return true;
 		}
@@ -102,7 +104,7 @@ namespace LemmatizerNET.Implement {
 			var c = 1;
 			var Result = 0;
 			for (var i = 0; i < len; i++) {
-				Result += _alphabet2CodeWithoutAnnotator[Tools.GetByte(v[i])] * c;
+				Result += _alphabet2CodeWithoutAnnotator[_tools.GetByte(v[i], _lemmatizer.CodePage)] * c;
 				c *= _alphabetSizeWithoutAnnotator;
 			};
 			return Result;

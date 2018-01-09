@@ -13,6 +13,7 @@ namespace LemmatizerNET.Implement {
 		private Lemmatizer _parent;
 		private string _inputWordBase;
 		private bool _found;
+		private Tools _tools;
 
 		private LemmaInfoAndLemma LemmaInfo {
 			get {
@@ -41,13 +42,13 @@ namespace LemmatizerNET.Implement {
 				return GetAccent(_innerAnnot.ItemNo);
 			}
 		}
-        public int AccentModelNo
-        {
-            get
-            {
-                return LemmaInfo.LemmaInfo.AccentModelNo;
-            }
-        }
+		public int AccentModelNo
+		{
+			get
+			{
+				return LemmaInfo.LemmaInfo.AccentModelNo;
+			}
+		}
 		public char LemSign {
 			get {
 				return _found ? '+' : '-';
@@ -64,7 +65,7 @@ namespace LemmatizerNET.Implement {
 			_inputWordBase = inputWordForm;
 			var m = FlexiaModel[a.ItemNo];
 			var flexLength = m.FlexiaStr.Length;
-
+			_tools = new Tools();
 			//  It can be so( if CLemmatizer::PredictByDataBase was used) that 
 			//  the flexion  is not suffix of m_InputWordBase, but only part of  it.
 			//  If so, then we cannot generate paradigm, since the current form cannot be 
@@ -264,7 +265,7 @@ namespace LemmatizerNET.Implement {
 				return Constants.UnknownAccent;
 			}
 			var backVowelNo = _parent.AccentModels[LemmaInfo.LemmaInfo.AccentModelNo][index];
-			return Tools.TransferReverseVowelNoToCharNo(GetForm(index).ToLower(), backVowelNo, _parent.Language);
+			return _tools.TransferReverseVowelNoToCharNo(GetForm(index).ToLower(), backVowelNo, _parent.Language, _parent.CodePage);
 		}
 		public int BaseLength {
 			get {

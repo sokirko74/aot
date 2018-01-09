@@ -7,15 +7,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace LemmatizerNET.Implement.Agramtab {
-	internal static class Tools {
-		private static Encoding _encoding;
-		public static Encoding InternalEncoding {
-			get {
-				if (_encoding == null) {
-					_encoding = Encoding.GetEncoding(1251);
-				}
-				return _encoding;
+	internal class Tools {
+		private Encoding _encoding;
+		private int _codepage;
+
+		public Encoding InternalEncoding(int CodePage/*, [CallerMemberName] string p = null*/)
+		{
+			if (_codepage != CodePage || _encoding == null)
+			{
+				_encoding = Encoding.GetEncoding(CodePage);
+				_codepage = CodePage;
 			}
+			return _encoding;
 		}
 		public static bool ListEquals<T>(IEnumerable<T> l1, IEnumerable<T> l2) {
 			return ListEquals(l1, l2, null);
@@ -49,9 +52,10 @@ namespace LemmatizerNET.Implement.Agramtab {
 
 			
 		}
-		public static bool LoadFileToString(Stream stream, out string result) {
+		public bool LoadFileToString(Stream stream, out string result, FileManager manager, int CodePage)
+		{
 			try {
-				var file = new StreamReader(stream, InternalEncoding);
+				var file = new StreamReader(stream, InternalEncoding(CodePage));
 				result = file.ReadToEnd();
 				return true;
 			} catch {
@@ -97,13 +101,13 @@ namespace LemmatizerNET.Implement.Agramtab {
 				default: return "unk";
 			}
 		}
-		public static char GetChar(byte b) {
-			return InternalEncoding.GetChars(new[] { b })[0];
+		public char GetChar(byte b, int codePage) {
+			return InternalEncoding(codePage).GetChars(new[] { b })[0];
 		}
-		public static byte GetByte(char ch) {
-			return InternalEncoding.GetBytes(new[] { ch })[0];
+		public byte GetByte(char ch, int codePage) {
+			return InternalEncoding(codePage).GetBytes(new[] { ch })[0];
 		}
-		public static byte TransferReverseVowelNoToCharNo(string form, byte accentCharNo, InternalMorphLanguage language) {
+		public byte TransferReverseVowelNoToCharNo(string form, byte accentCharNo, InternalMorphLanguage language, int codePage) {
 			if (accentCharNo == Constants.UnknownAccent) {
 				return Constants.UnknownAccent;
 			}
@@ -116,8 +120,8 @@ namespace LemmatizerNET.Implement.Agramtab {
 				throw new MorphException("i >= UnknownAccent");
 			}
 			for (; i >= 0; i--) {
-				if (Lang.is_lower_vowel(Tools.GetByte(form[i]), language)
-					|| Lang.is_upper_vowel(Tools.GetByte(form[i]), language)
+				if (Lang.is_lower_vowel(GetByte(form[i], codePage), language)
+					|| Lang.is_upper_vowel(GetByte(form[i], codePage), language)
 				) {
 					countOfVowels++;
 				}

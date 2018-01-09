@@ -7,6 +7,7 @@ namespace LemmatizerNET.Implement {
 		public LemmatizerEnglish()
 			: base(InternalMorphLanguage.morphEnglish) {
 			Registry = "Software\\Dialing\\Lemmatizer\\English\\DictPath";
+			CodePage = 1250;
 		}
 		protected override string FilterSrc(string src) {
 			return src;
