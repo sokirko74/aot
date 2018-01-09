@@ -7,6 +7,7 @@ namespace LemmatizerNET.Implement {
 		public LemmatizerRussian()
 			: base(InternalMorphLanguage.morphRussian) {
 			Registry = "Software\\Dialing\\Lemmatizer\\Russian\\DictPath";
+			CodePage = 1251;
 			
 			HyphenPostfixes.Add("КА");
 			HyphenPostfixes.Add("ТО");

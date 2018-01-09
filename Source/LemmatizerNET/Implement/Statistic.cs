@@ -75,10 +75,10 @@ namespace LemmatizerNET.Implement {
 		private List<Homonode> _homoWeights=new List<Homonode>();
 
 		public void Load(Lemmatizer lemmatizer, string prefix, FileManager manager) {
-			using (var file = manager.GetFile(lemmatizer.Registry, prefix + Constants.HomoweightBinPath)) {
+			using (var file = manager.GetFile(lemmatizer.Registry, prefix + Constants.HomoweightBinPath, lemmatizer.CodePage)) {
 				Tools.LoadList(file, _homoWeights);
 			}
-			using (var file = manager.GetFile(lemmatizer.Registry, prefix + Constants.WordweightBinPath)) {
+			using (var file = manager.GetFile(lemmatizer.Registry, prefix + Constants.WordweightBinPath, lemmatizer.CodePage)) {
 				Tools.LoadList(file, _wordWeights);
 			}
 		}

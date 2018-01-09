@@ -10,6 +10,7 @@ namespace LemmatizerNET.Implement {
 		private MorphAutomNode[] _nodes;
 		private MorphAutomRelation[] _relations;
 		private int[] _childrenCache;
+		private Tools _tools;
 
 		private int FindStringAndPassAnnotChar(string text, int pos) {
 			var TextLenth = text.Length;
@@ -42,7 +43,7 @@ namespace LemmatizerNET.Implement {
 			currPath.CopyTo(0, buff, 0, currPathSize);
 			for (var i = 0; i < count; i++) {
 				var p = GetChildren(nodeNo, i);
-				buff[currPathSize] = Tools.GetChar(p.RelationalChar);
+				buff[currPathSize] = _tools.GetChar(p.RelationalChar, Lemmatizer.CodePage);
 				GetAllMorphInterpsRecursive(p.ChildNo, new string(buff), infos);
 			}
 		}
@@ -71,16 +72,17 @@ namespace LemmatizerNET.Implement {
 		}
 		public MorphAutomat(Lemmatizer lemmatizer,InternalMorphLanguage language, char annotChar)
 			: base(lemmatizer,language, annotChar) {
+			_tools = new Tools();
 		}
 		public int NextNode(int nodeNo, char relationChar) {
 			if (nodeNo < Constants.ChildrenCacheSize) {
-				int z = _alphabet2Code[Tools.GetByte(relationChar)];
+				int z = _alphabet2Code[_tools.GetByte(relationChar, Lemmatizer.CodePage)];
 				if (z == -1) {
 					return -1;
 				}
 				return _childrenCache[nodeNo * Constants.MaxAlphabetSize + z];
 			} else {
-				var num = Tools.GetByte(relationChar);
+				var num = _tools.GetByte(relationChar, Lemmatizer.CodePage);
 				var start = _nodes[nodeNo].ChildrenStart;
 				var count = GetChildrenCount(nodeNo);
 				for (int i = 0; i < count; i++) {
@@ -111,9 +113,9 @@ namespace LemmatizerNET.Implement {
 		}
 		public bool Load(string grammarFileName,FileManager manager) {
 			Clear();
-			using (var file = manager.GetFile(Lemmatizer.Registry, grammarFileName)) {
+			using (var file = manager.GetFile(Lemmatizer.Registry, grammarFileName, Lemmatizer.CodePage)) {
 				string line = null;
-				var reader = new BinaryReader(file, Tools.InternalEncoding);
+				var reader = new BinaryReader(file, _tools.InternalEncoding(Lemmatizer.CodePage));
 				line = Tools.ReadLine(reader);
 				if (line == null) {
 					return false;

@@ -41,7 +41,6 @@ namespace LemmatizerNET.Implement {
 		private MorphAutomat _formAutomat;
 		private int[] _modelsIndex;
 		private byte[] _NPSs;
-		private FileManager _manager;
 		private List<string> _prefixes = new List<string>();
 		private List<CFlexiaModel> _flexiaModels = new List<CFlexiaModel>();
 		private List<CAccentModel> _accentModels = new List<CAccentModel>();
@@ -49,6 +48,8 @@ namespace LemmatizerNET.Implement {
 		private StringHolder _bases = new StringHolder();
 		private InternalComparer _comparer;
 		private string _registry;
+		private int _codepage;
+		private Tools _tools;
 
 		protected MorphAutomat FormAutomat {
 			get {
@@ -95,9 +96,23 @@ namespace LemmatizerNET.Implement {
 			}
 		}
 
+		public int CodePage
+		{
+			get
+			{
+				return _codepage;
+			}
+			protected set
+			{
+				_codepage = value;
+			}
+		}
+
+
 		protected MorphDict(InternalMorphLanguage language) {
 			_formAutomat = null;
 			_comparer = new InternalComparer(_bases);
+			_tools = new Tools();
 		}
 		protected void GetLemmaInfos(string text, int textPos, IList<AutomAnnotationInner> infos) {
 			int count=infos.Count;
@@ -145,8 +160,8 @@ namespace LemmatizerNET.Implement {
 				return false;
 			}
 			var PrecompiledFile = MakeFName(grammarFileName, "annot");
-			using (var file = manager.GetFile(Registry, PrecompiledFile)) {
-				var reader = new BinaryReader(file, Tools.InternalEncoding);
+			using (var file = manager.GetFile(Registry, PrecompiledFile, CodePage)) {
+				var reader = new BinaryReader(file, _tools.InternalEncoding(CodePage));
 				ReadFlexiaModels(reader, _flexiaModels);
 				ReadAccentModels(reader, _accentModels);
 				int Count;
@@ -191,8 +206,8 @@ namespace LemmatizerNET.Implement {
 					throw new MorphException("_NPSs.Count!=_FlexiaModels.Count");
 				}
 			}
-			using (var file = manager.GetFile(Registry, MakeFName(grammarFileName, "bases"))) {
-				_bases.ReadShortStringHolder(file);
+			using (var file = manager.GetFile(Registry, MakeFName(grammarFileName, "bases"), CodePage)) {
+				_bases.ReadShortStringHolder(file, CodePage);
 			}
 			CreateModelsIndex();
 			return true;
@@ -212,7 +227,7 @@ namespace LemmatizerNET.Implement {
 				var ancode = reader.ReadChars(Constants.CommonAncodeSize);
 				var skip = reader.ReadInt16();
 				var lemmaStrNo = reader.ReadInt32();
-				
+
 				_lemmaInfos.Add(new LemmaInfoAndLemma(lemmaStrNo, model, accent, ancode));
 			}
 			return true;

@@ -8,7 +8,8 @@ namespace LemmatizerNET.Implement {
 	internal class PredictBase {
 		private MorphAutomat _suffixAutomat;
 		private List<int> _modelFreq = new List<int>();
-
+		private int _codepage;
+		private Tools _tools;
 		public IList<int> ModelFreq {
 			get {
 				return _modelFreq;
@@ -16,9 +17,11 @@ namespace LemmatizerNET.Implement {
 		}
 		public PredictBase(Lemmatizer lemmatizer,InternalMorphLanguage lang) {
 			_suffixAutomat = new MorphAutomat(lemmatizer,lang, Constants.MorphAnnotChar);
+			_codepage = lemmatizer.CodePage;
 		}
 		public void Load(string path, FileManager manager) {
 			_suffixAutomat.Load(path, manager);
+			_tools = new Tools();
 		}
 		public bool Find(string lettId, IList<PredictTuple> res) {
 			var TextLength = lettId.Length;
@@ -78,7 +81,7 @@ namespace LemmatizerNET.Implement {
 			currPath.CopyTo(0, buff, 0, currPathSize);
 			for (var i = 0; i < count; i++) {
 				var p = _suffixAutomat.GetChildren(r, i);
-				buff[currPathSize] = Tools.GetChar(p.RelationalChar);
+				buff[currPathSize] = _tools.GetChar(p.RelationalChar,  _codepage);
 				FindRecursive(p.ChildNo, new string(buff), infos);
 			}
 		}

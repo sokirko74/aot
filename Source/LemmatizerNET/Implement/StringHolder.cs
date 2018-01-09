@@ -6,9 +6,14 @@ using LemmatizerNET.Implement.Agramtab;
 
 namespace LemmatizerNET.Implement {
 	internal class StringHolder : List<string> {
-		internal void ReadShortStringHolder(Stream file) {
+		private Tools _tools;
+		public StringHolder()
+		{
+			_tools = new Tools();
+		}
+		internal void ReadShortStringHolder(Stream file, int codePage) {
 			Clear();
-			var reader = new BinaryReader(file, Tools.InternalEncoding);
+			var reader = new BinaryReader(file, _tools.InternalEncoding(codePage));
 			var count = reader.ReadInt32();
 			for (int i = 0; i < count; i++) {
 				var stringLen = reader.ReadByte();
