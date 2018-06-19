@@ -1,1 +1,1 @@
-Texts/computer.txt
+computer.txt
