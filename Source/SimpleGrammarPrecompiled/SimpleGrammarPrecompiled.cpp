@@ -3,20 +3,19 @@
 
 #include "../common/argparse.h"
 
-ArgumentParser getArgParser(int argc, const char **argv) {
-    ArgumentParser parser;
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "input file");
     parser.AddArgument("--output", "output file");
     parser.AddArgument("--language", "language");
     parser.AddOption("--print-rules");
     parser.Parse(argc, argv);
-    return parser;
 }
 
 
 int main(int argc, const char **argv) {
-    auto args = getArgParser(argc, argv);
+    ArgumentParser args;
+    initArgParser(argc, argv, args);
 
     bool bPrintRules = args.Exists("print-rules");
 

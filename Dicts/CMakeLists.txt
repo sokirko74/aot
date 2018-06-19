@@ -1,5 +1,5 @@
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.5)
 
 macro (ConvertStructDict name)
     add_custom_target(
@@ -12,6 +12,7 @@ macro (ConvertStructDict name)
         COMMAND StructDictLoader FromTxt ross.txt  .
         DEPENDS StructDictLoader ross.txt
         COMMENT "Convert StructDict for ${name} to the binary format"
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/Dicts/${name}
         VERBATIM
     )
 
