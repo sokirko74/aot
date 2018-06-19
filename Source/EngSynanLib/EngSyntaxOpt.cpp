@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 #include "EngSyntaxOpt.h"
+#include "EngSentence.h"
+#include "EngOborDic.h"
 
 const int eSyntaxGroupTypesCount = 13;
 const char eSyntaxGroupTypes [eSyntaxGroupTypesCount][30] = 
@@ -16,6 +18,35 @@ CSyntaxOpt*  NewOptionsEnglish ()
 	return new CEngSyntaxOpt (morphEnglish);
 };
 
+CSentence* CEngSyntaxOpt::NewSentence() const {
+	return new CEngSentence(this);
+};
+
+CAgramtab *CEngSyntaxOpt::NewGramTab() const {
+    return new CEngGramTab();
+};
+
+CLemmatizer *CEngSyntaxOpt::NewLemmatizer() const {
+    return new CLemmatizerEnglish();
+};
+
+COborDic * CEngSyntaxOpt::NewOborDic(const CSyntaxOpt* opt)  {
+    return new CEngOborDic(opt);
+};
+
+class CEngThesaurusForSyntax  : public  CThesaurusForSyntax
+{
+public:
+	CEngThesaurusForSyntax(const CSyntaxOpt* Opt) : CThesaurusForSyntax(Opt) {};
+protected:
+	void AssignMainGroupsToModel(CGroups& model, const CInnerModel& piModel) {return;};
+};
+
+CThesaurusForSyntax* CEngSyntaxOpt::NewThesaurus(const CSyntaxOpt* opt) {
+    return new CEngThesaurusForSyntax(opt);
+};
+
+
 CEngSyntaxOpt :: CEngSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 {
 	m_IndeclinableMask = 0;
@@ -24,10 +55,6 @@ CEngSyntaxOpt :: CEngSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 		m_SyntaxGroupTypes.push_back(eSyntaxGroupTypes[i]);
 }
 
-CAgramtab* CEngSyntaxOpt::GetNewGramTab () const
-{
-	return	new CEngGramTab;
-};
 
 void CEngSyntaxOpt::DestroyOptions ()
 {

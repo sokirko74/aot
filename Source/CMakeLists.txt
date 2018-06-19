@@ -1,0 +1,72 @@
+set(CMAKE_LEGACY_CYGWIN_WIN32 0)
+cmake_minimum_required(VERSION 3.6)
+
+message ("CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
+if(CMAKE_BUILD_TYPE MATCHES "Release")
+     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} -O2")
+elseif(CMAKE_BUILD_TYPE MATCHES "Debug")
+     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
+     message ("enable_testing")
+     enable_testing()
+endif(CMAKE_BUILD_TYPE MATCHES "Release")
+
+add_subdirectory (tinyxml)
+add_subdirectory (common)
+add_subdirectory (PCRE)
+
+add_subdirectory (StructDictLib)
+add_subdirectory (StructDictLoader)
+add_subdirectory (AgramtabLib)
+add_subdirectory (GraphanLib)
+add_subdirectory (RmlThesLib)
+add_subdirectory (GraphmatThick)
+add_subdirectory (MorphWizardLib)
+add_subdirectory (LemmatizerLib)
+add_subdirectory (TestLem)
+add_subdirectory (FileLem)
+add_subdirectory (MorphGen)
+
+if ($JAVA_INCLUDES)  # not tested under cmake
+    add_subdirectory (JNIMorphAPI)
+    add_subdirectory (JNIMorphAPITest)
+endif()
+
+add_subdirectory (Bigrams)
+add_subdirectory (BigramsCGI)
+add_subdirectory (BinaryDictsClient)
+add_subdirectory (BinaryDictsLib)
+add_subdirectory (AprDictGen)
+add_subdirectory (asp_read)
+add_subdirectory (GenFreqDict)
+add_subdirectory (StatDatBin)
+add_subdirectory (WordDatBin)
+add_subdirectory (deriv_read)
+add_subdirectory (ConvertTrigramBinary)
+add_subdirectory (Trigram)
+add_subdirectory (TrigramLib)
+add_subdirectory (TrigramRusCorporaXml)
+
+add_subdirectory (GerPostMorph)
+add_subdirectory (MAPostLib)
+add_subdirectory (SimpleGrammarLib)
+add_subdirectory (SimpleGrammarPrecompiled)
+
+add_subdirectory (GenSynDict)
+add_subdirectory (EngSynanLib)
+add_subdirectory (GerSynanLib)
+add_subdirectory (RusSynanLib)
+add_subdirectory (SynCommonLib)
+add_subdirectory (SynanDaemon)
+add_subdirectory (SynanDmnLib)
+add_subdirectory (SynanLib)
+add_subdirectory (TestSynan)
+
+add_subdirectory (SemanDaemon)
+add_subdirectory (SemanDmnLib)
+add_subdirectory (SemanLib)
+add_subdirectory (TestSeman)
+add_subdirectory (Transfer)
+
+
+
+

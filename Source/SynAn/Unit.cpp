@@ -211,7 +211,7 @@ STDMETHODIMP CCOMUnit::get_SimplePrepStr(long ii,BSTR *pVal)
 		if( !m_pClause->GetOpt() )
 			return E_FAIL;
 
-		*pVal = _bstr_t(m_pClause->GetOpt()->m_pOborDic->m_Entries[m_pUnit->m_SimplePrepNos[ii]].m_OborotEntryStr.c_str()).copy();
+		*pVal = _bstr_t(m_pClause->GetOpt()->GetOborDic()->m_Entries[m_pUnit->m_SimplePrepNos[ii]].m_OborotEntryStr.c_str()).copy();
 
 	}
 	catch(...)

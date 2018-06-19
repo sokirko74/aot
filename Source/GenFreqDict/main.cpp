@@ -13,7 +13,7 @@
 #include "../AgramtabLib/eng_consts.h"
 #pragma warning(disable:4786)
 #pragma warning(disable:4503)
-#include "../common/MorphologyHolder.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 #include "../BinaryDictsLib/BinaryDictionary.h"
 
 CMorphologyHolder MorphHolderRus;
@@ -57,7 +57,7 @@ void init_dicts()
 
 int  mymain(int argc, char **argv)
 {
-		init_dicts();
+	init_dicts();
 	if (argc != 4)
 	{
 		throw CExpc ("bad number of arguments");
@@ -133,6 +133,7 @@ int  mymain(int argc, char **argv)
 
 	std::cerr << "Parsing aligned sentences\t\t\t\r";
 	const char *in_str = argv[1];
+	string mainFolder = GetPathByFile(in_str);
 	const char *out_str = argv[2];
 	std::ifstream file_list(in_str);
 	out.open(out_str, std::ios::binary);
@@ -152,7 +153,7 @@ int  mymain(int argc, char **argv)
 		std::string file_name;
 		file_list >> file_name;
 		if(!file_list) break;
-		std::ifstream in(file_name.c_str());
+		std::ifstream in(mainFolder + file_name);
 		assert(in.is_open());
 		int sent_no = 0;
 		while(true){

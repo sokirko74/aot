@@ -24,10 +24,7 @@ distribution.
 
 #include <ctype.h>
 #include "tinyxml.h"
-
-#ifdef TIXML_USE_STL
 #include <sstream>
-#endif
 
 
 bool TiXmlBase::condenseWhiteSpace = true;
@@ -488,14 +485,12 @@ TiXmlElement::TiXmlElement (const char * _value)
 }
 
 
-#ifdef TIXML_USE_STL
-TiXmlElement::TiXmlElement( const std::string& _value ) 
+TiXmlElement::TiXmlElement( const std::string& _value )
 	: TiXmlNode( TiXmlNode::ELEMENT )
 {
 	firstChild = lastChild = 0;
 	value = _value;
 }
-#endif
 
 
 TiXmlElement::TiXmlElement( const TiXmlElement& copy)
@@ -627,61 +622,6 @@ void TiXmlElement::SetAttribute( const char * name, const char * _value )
 	}
 }
 
-void TiXmlElement::Print( FILE* cfile, int depth ) const
-{
-	int i;
-    if (TiXmlBase::IsWhiteSpaceCondensed())
-	    for ( i=0; i<depth; i++ )
-	    {
-		    fprintf( cfile, "    " );
-	    }
-
-	fprintf( cfile, "<%s", value.c_str() );
-
-	TiXmlAttribute* attrib;
-	for ( attrib = attributeSet.First(); attrib; attrib = attrib->Next() )
-	{
-		fprintf( cfile, " " );
-		attrib->Print( cfile, depth );
-	}
-
-	// There are 3 different formatting approaches:
-	// 1) An element without children is printed as a <foo /> node
-	// 2) An element with only a text child is printed as <foo> text </foo>
-	// 3) An element with children is printed on multiple lines.
-	TiXmlNode* node;
-	if ( !firstChild )
-	{
-		fprintf( cfile, " />" );
-	}
-	else if ( firstChild == lastChild && firstChild->ToText() )
-	{
-		fprintf( cfile, ">" );
-		firstChild->Print( cfile, depth + 1 );
-		fprintf( cfile, "</%s>", value.c_str() );
-	}
-	else
-	{
-		fprintf( cfile, ">" );
-
-		for ( node = firstChild; node; node=node->NextSibling() )
-		{
-			if ( !node->ToText() )
-			{
-                if (TiXmlBase::IsWhiteSpaceCondensed())
-				    fprintf( cfile, "\n" );
-			}
-			node->Print( cfile, depth+1 );
-		}
-        if (TiXmlBase::IsWhiteSpaceCondensed())
-        {
-		    fprintf( cfile, "\n" );
-		    for( i=0; i<depth; ++i )
-		    fprintf( cfile, "    " );
-        }
-		fprintf( cfile, "</%s>", value.c_str() );
-	}
-}
 
 void TiXmlElement::StreamOut( TIXML_OSTREAM * stream ) const
 {
@@ -762,14 +702,12 @@ TiXmlDocument::TiXmlDocument( const char * documentName ) : TiXmlNode( TiXmlNode
 }
 
 
-#ifdef TIXML_USE_STL
 TiXmlDocument::TiXmlDocument( const std::string& documentName ) : TiXmlNode( TiXmlNode::DOCUMENT )
 {
 	tabsize = 4;
     value = documentName;
 	ClearError();
 }
-#endif
 
 
 TiXmlDocument::TiXmlDocument( const TiXmlDocument& copy ) : TiXmlNode( TiXmlNode::DOCUMENT )
@@ -791,18 +729,6 @@ bool TiXmlDocument::LoadFile( TiXmlEncoding encoding )
 	StringToBuffer buf( value );
 
 	if ( buf.buffer && LoadFile( buf.buffer, encoding ) )
-		return true;
-
-	return false;
-}
-
-
-bool TiXmlDocument::SaveFile() const
-{
-	// See STL_STRING_BUG below.
-	StringToBuffer buf( value );
-
-	if ( buf.buffer && SaveFile( buf.buffer ) )
 		return true;
 
 	return false;
@@ -867,20 +793,6 @@ bool TiXmlDocument::LoadFile( const char* filename, TiXmlEncoding encoding )
 	return false;
 }
 
-bool TiXmlDocument::SaveFile( const char * filename ) const
-{
-	// The old c stuff lives on...
-	FILE* fp = fopen( filename, "w" );
-	if ( fp )
-	{
-		Print( fp, 0 );
-		fclose( fp );
-		return true;
-	}
-	return false;
-}
-
-
 void TiXmlDocument::CopyTo( TiXmlDocument* target ) const
 {
 	TiXmlNode::CopyTo( target );
@@ -904,18 +816,6 @@ TiXmlNode* TiXmlDocument::Clone() const
 
 	CopyTo( clone );
 	return clone;
-}
-
-
-void TiXmlDocument::Print( FILE* cfile, int depth ) const
-{
-	TiXmlNode* node;
-	for ( node=FirstChild(); node; node=node->NextSibling() )
-	{
-		node->Print( cfile, depth );
-        if (TiXmlBase::IsWhiteSpaceCondensed())
-		    fprintf( cfile, "\n" );
-	}
 }
 
 void TiXmlDocument::StreamOut( TIXML_OSTREAM * out ) const
@@ -951,20 +851,6 @@ TiXmlAttribute* TiXmlAttribute::Previous() const
 	if ( prev->value.empty() && prev->name.empty() )
 		return 0;
 	return prev;
-}
-
-
-void TiXmlAttribute::Print( FILE* cfile, int /*depth*/ ) const
-{
-	TIXML_STRING n, v;
-
-	PutString( name, &n );
-	PutString( value, &v );
-
-	if (value.find ('\"') == TIXML_STRING::npos)
-		fprintf (cfile, "%s=\"%s\"", n.c_str(), v.c_str() );
-	else
-		fprintf (cfile, "%s='%s'", n.c_str(), v.c_str() );
 }
 
 
@@ -1038,15 +924,6 @@ void TiXmlComment::operator=( const TiXmlComment& base )
 }
 
 
-void TiXmlComment::Print( FILE* cfile, int depth ) const
-{
-	for ( int i=0; i<depth; i++ )
-	{
-		fputs( "    ", cfile );
-	}
-	fprintf( cfile, "<!--%s-->", value.c_str() );
-}
-
 void TiXmlComment::StreamOut( TIXML_OSTREAM * stream ) const
 {
 	(*stream) << "<!--";
@@ -1071,14 +948,6 @@ TiXmlNode* TiXmlComment::Clone() const
 
 	CopyTo( clone );
 	return clone;
-}
-
-
-void TiXmlText::Print( FILE* cfile, int /*depth*/ ) const
-{
-	TIXML_STRING buffer;
-	PutString( value, &buffer );
-	fprintf( cfile, "%s", buffer.c_str() );
 }
 
 
@@ -1118,7 +987,6 @@ TiXmlDeclaration::TiXmlDeclaration( const char * _version,
 }
 
 
-#ifdef TIXML_USE_STL
 TiXmlDeclaration::TiXmlDeclaration(	const std::string& _version,
 									const std::string& _encoding,
 									const std::string& _standalone )
@@ -1128,7 +996,6 @@ TiXmlDeclaration::TiXmlDeclaration(	const std::string& _version,
 	encoding = _encoding;
 	standalone = _standalone;
 }
-#endif
 
 
 TiXmlDeclaration::TiXmlDeclaration( const TiXmlDeclaration& copy )
@@ -1142,20 +1009,6 @@ void TiXmlDeclaration::operator=( const TiXmlDeclaration& copy )
 {
 	Clear();
 	copy.CopyTo( this );
-}
-
-
-void TiXmlDeclaration::Print( FILE* cfile, int /*depth*/ ) const
-{
-	fprintf (cfile, "<?xml ");
-
-	if ( !version.empty() )
-		fprintf (cfile, "version=\"%s\" ", version.c_str ());
-	if ( !encoding.empty() )
-		fprintf (cfile, "encoding=\"%s\" ", encoding.c_str ());
-	if ( !standalone.empty() )
-		fprintf (cfile, "standalone=\"%s\" ", standalone.c_str ());
-	fprintf (cfile, "?>");
 }
 
 void TiXmlDeclaration::StreamOut( TIXML_OSTREAM * stream ) const
@@ -1205,13 +1058,6 @@ TiXmlNode* TiXmlDeclaration::Clone() const
 	return clone;
 }
 
-
-void TiXmlUnknown::Print( FILE* cfile, int depth ) const
-{
-	for ( int i=0; i<depth; i++ )
-		fprintf( cfile, "    " );
-	fprintf( cfile, "<%s>", value.c_str() );
-}
 
 
 void TiXmlUnknown::StreamOut( TIXML_OSTREAM * stream ) const
@@ -1294,7 +1140,6 @@ TiXmlAttribute*	TiXmlAttributeSet::Find( const char * name ) const
 }
 
 
-#ifdef TIXML_USE_STL	
 TIXML_ISTREAM & operator >> (TIXML_ISTREAM & in, TiXmlNode & base)
 {
 	TIXML_STRING tag;
@@ -1304,7 +1149,6 @@ TIXML_ISTREAM & operator >> (TIXML_ISTREAM & in, TiXmlNode & base)
 	base.Parse( tag.c_str(), 0, TIXML_DEFAULT_ENCODING );
 	return in;
 }
-#endif
 
 
 TIXML_OSTREAM & operator<< (TIXML_OSTREAM & out, const TiXmlNode & base)
@@ -1314,7 +1158,6 @@ TIXML_OSTREAM & operator<< (TIXML_OSTREAM & out, const TiXmlNode & base)
 }
 
 
-#ifdef TIXML_USE_STL	
 std::string & operator<< (std::string& out, const TiXmlNode& base )
 {
    std::ostringstream os_stream( std::ostringstream::out );
@@ -1323,7 +1166,6 @@ std::string & operator<< (std::string& out, const TiXmlNode& base )
    out.append( os_stream.str() );
    return out;
 }
-#endif
 
 
 TiXmlHandle TiXmlHandle::FirstChild() const

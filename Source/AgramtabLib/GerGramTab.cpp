@@ -232,7 +232,7 @@ bool CGerGramTab::GleicheCaseNumber(const char* gram_code1, const char* gram_cod
 	return false;
 };
 
-inline bool GenderNumberCaseGerman (const CAgramtabLine* noun_l, const CAgramtabLine* adj_l ) 
+bool GenderNumberCaseGerman (const CAgramtabLine* noun_l, const CAgramtabLine* adj_l ) 
 {	
     const QWORD& noun = noun_l->m_Grammems;
     const QWORD& adj = adj_l->m_Grammems;

@@ -1,0 +1,17 @@
+reading from the source file test.grm
+Number of rules = 3
+Roots : [PNAME ],
+creating all variants of nodes from nodes with work attributes
+Number of rules = 3
+checking coherence
+validation
+loading test.opt
+Number of second pass symbols : 1
+build RootPrefixes( 3)
+build automat for prefixes 
+ConvertToPrecompiled
+Roots : [PNAME ],
+create token list for each node
+Seconds = 0
+ok
+SavePrecompiled to tests/test.grammar_precompiled

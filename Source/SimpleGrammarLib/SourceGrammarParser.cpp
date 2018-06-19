@@ -216,7 +216,7 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 		
 		if (!BuildGrammarItem(Rule->m_pLeftHand, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, Rule->m_SourceFileName))
 		{
-			fprintf (stderr, "%s at line %i in file %s\n", ErrorStr.c_str(), Rule->m_SourceLineNo, Rule->m_SourceFileName.c_str());
+			WorkGrammar.LogStream <<  ErrorStr << "at line " << Rule->m_SourceLineNo << " in file " << Rule->m_SourceFileName << "\n";
 			return false;
 		};
 		size_t LeftPartId = WorkGrammar.GetItemId(I);
@@ -231,14 +231,12 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 			WorkRule.m_RuleFeaturesNo = WorkGrammar.m_RuleFeatures.size() - 1;
 			if (!GetRightPartRecursive(*it1, WorkGrammar, WorkRule, ErrorStr, Rule->m_SourceFileName))
 			{
-				fprintf (stderr, "%s at line %i in file %s\n", ErrorStr.c_str(), Rule->m_SourceLineNo, Rule->m_SourceFileName.c_str());
+				WorkGrammar.LogStream <<  ErrorStr << "at line " << Rule->m_SourceLineNo << " in file " << Rule->m_SourceFileName << "\n";
 				return false;
 			};
 
 			if (WorkRule.m_RightPart.m_SynMainItemNo == 0xffffffff)
 				WorkRule.m_RightPart.m_SynMainItemNo = 0;
-
-
 
 			if (WorkGrammar.m_EncodedRules.insert(WorkRule).second)
 				RuleId++;
@@ -252,16 +250,16 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 
 bool BuildWorkGrammar(CWorkGrammar& WorkGrammar, bool bPrintRules)
 {
-	fprintf (stderr, "reading from the source file %s\n",WorkGrammar.m_SourceGrammarFile.c_str());
+	WorkGrammar.LogStream <<  "reading from the source file " << WorkGrammar.m_SourceGrammarFile << "\n";
 	CChunkParser Parser;
 	Parser.m_pGramTab = WorkGrammar.m_pGramTab;
 	bool bResult = Parser.ParseGrammarInFile(WorkGrammar.m_SourceGrammarFile, "");
 	if (!bResult)
 	{
-		fprintf(stderr, "cannot parse %s\n", WorkGrammar.m_SourceGrammarFile.c_str());
+		WorkGrammar.LogStream <<  "cannot parse " << WorkGrammar.m_SourceGrammarFile  << "\n";
 		return false;
 	};
-	fprintf(stderr, "Number of rules = %i\n", Parser.m_ChunkGrammar.m_Rules.size());
+	WorkGrammar.LogStream <<  "Number of rules = " << Parser.m_ChunkGrammar.m_Rules.size() << "\n";
 
 	
 	if (!ConvertToWorkGrammar(Parser.m_ChunkGrammar, WorkGrammar))
@@ -279,16 +277,16 @@ bool BuildWorkGrammar(CWorkGrammar& WorkGrammar, bool bPrintRules)
 		WorkGrammar.Print();
 
 	string ErrorStr;
-	fprintf (stderr, "creating all variants of nodes from nodes with work attributes\n");
+	WorkGrammar.LogStream <<  "creating all variants of nodes from nodes with work attributes\n";
 	if (!WorkGrammar.CreateNodesForNodesWithWorkAttributes(ErrorStr))
 	{
 		ErrorMessage(ErrorStr);
 		return false;
 	};
 
-	fprintf(stderr, "Number of rules = %i\n", WorkGrammar.m_EncodedRules.size());
+	WorkGrammar.LogStream <<  "Number of rules = " << WorkGrammar.m_EncodedRules.size() << "\n";
 
-	fprintf (stderr, "checking coherence\n");
+	WorkGrammar.LogStream <<  "checking coherence\n";
 	if (!WorkGrammar.CheckCoherence())
 		return false;
 
@@ -299,7 +297,7 @@ bool BuildWorkGrammar(CWorkGrammar& WorkGrammar, bool bPrintRules)
 	{
 		WorkGrammar.Print();
 	};
-	fprintf (stderr, "validation\n");
+	WorkGrammar.LogStream <<  "validation\n";
 	bool bValid = WorkGrammar.IsValid();
 	return bValid;
 };

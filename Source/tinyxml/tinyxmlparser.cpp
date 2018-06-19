@@ -334,7 +334,6 @@ const char* TiXmlBase::SkipWhiteSpace( const char* p, TiXmlEncoding encoding )
 	return p;
 }
 
-#ifdef TIXML_USE_STL
 /*static*/ bool TiXmlBase::StreamWhiteSpace( TIXML_ISTREAM * in, TIXML_STRING * tag )
 {
 	for( ;; )
@@ -366,7 +365,6 @@ const char* TiXmlBase::SkipWhiteSpace( const char* p, TiXmlEncoding encoding )
 	}
 	return false;
 }
-#endif
 
 const char* TiXmlBase::ReadName( const char* p, TIXML_STRING * name, TiXmlEncoding encoding )
 {
@@ -599,7 +597,6 @@ const char* TiXmlBase::ReadText(	const char* p,
 	return p + strlen( endTag );
 }
 
-#ifdef TIXML_USE_STL
 
 void TiXmlDocument::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 {
@@ -662,9 +659,6 @@ void TiXmlDocument::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 	SetError( TIXML_ERROR, 0, 0, TIXML_ENCODING_UNKNOWN );
 }
 
-#endif
-
-//#pragma optimize ("", off)
 const char* TiXmlDocument::Parse( const char* p, TiXmlParsingData* prevData, TiXmlEncoding encoding )
 {
 	ClearError();
@@ -852,7 +846,6 @@ TiXmlNode* TiXmlNode::Identify( const char* p, TiXmlEncoding encoding )
 	return returnNode;
 }
 
-#ifdef TIXML_USE_STL
 
 void TiXmlElement::StreamIn (TIXML_ISTREAM * in, TIXML_STRING * tag)
 {
@@ -980,7 +973,6 @@ void TiXmlElement::StreamIn (TIXML_ISTREAM * in, TIXML_STRING * tag)
 		}
 	}
 }
-#endif
 
 const char* TiXmlElement::Parse( const char* p, TiXmlParsingData* data, TiXmlEncoding encoding )
 {
@@ -1191,7 +1183,6 @@ const char* TiXmlElement::ReadValue( const char* p, TiXmlParsingData* data, TiXm
 }
 
 
-#ifdef TIXML_USE_STL
 void TiXmlUnknown::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 {
 	while ( in->good() )
@@ -1213,7 +1204,6 @@ void TiXmlUnknown::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 		}
 	}
 }
-#endif
 
 
 const char* TiXmlUnknown::Parse( const char* p, TiXmlParsingData* data, TiXmlEncoding encoding )
@@ -1261,7 +1251,6 @@ const char* TiXmlUnknown::Parse( const char* p, TiXmlParsingData* data, TiXmlEnc
 	return p;
 }
 
-#ifdef TIXML_USE_STL
 void TiXmlComment::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 {
 	while ( in->good() )
@@ -1286,7 +1275,6 @@ void TiXmlComment::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 		}
 	}
 }
-#endif
 
 
 const char* TiXmlComment::Parse( const char* p, TiXmlParsingData* data, TiXmlEncoding encoding )
@@ -1385,7 +1373,6 @@ const char* TiXmlAttribute::Parse( const char* p, TiXmlParsingData* data, TiXmlE
 	return p;
 }
 
-#ifdef TIXML_USE_STL
 void TiXmlText::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 {
 	while ( in->good() )
@@ -1405,7 +1392,6 @@ void TiXmlText::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 		in->get();
 	}
 }
-#endif
 
 const char* TiXmlText::Parse( const char* p, TiXmlParsingData* data, TiXmlEncoding encoding )
 {
@@ -1425,7 +1411,6 @@ const char* TiXmlText::Parse( const char* p, TiXmlParsingData* data, TiXmlEncodi
 	return 0;
 }
 
-#ifdef TIXML_USE_STL
 void TiXmlDeclaration::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 {
 	while ( in->good() )
@@ -1447,7 +1432,6 @@ void TiXmlDeclaration::StreamIn( TIXML_ISTREAM * in, TIXML_STRING * tag )
 		}
 	}
 }
-#endif
 
 const char* TiXmlDeclaration::Parse( const char* p, TiXmlParsingData* data, TiXmlEncoding _encoding )
 {

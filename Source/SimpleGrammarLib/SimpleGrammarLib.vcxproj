@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -12,17 +12,19 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C8B7775-838C-44E6-9B56-89A9F9E243C3}</ProjectGuid>
+    <RootNamespace>SimpleGrammarLib</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
@@ -39,7 +41,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
+    <_ProjectFileVersion>15.0.27625.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Release\</OutDir>
@@ -84,9 +86,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="chunk_yacc.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
+    <ClCompile Include="AhoKorasick.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SimpleGrammarLib.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="chunker_lex.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -94,10 +97,9 @@
     </ClCompile>
     <ClCompile Include="ChunkNode.cpp" />
     <ClCompile Include="ChunkParser.cpp" />
-    <ClCompile Include="AhoKorasick.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SimpleGrammarLib.h</PrecompiledHeaderFile>
+    <ClCompile Include="chunk_yacc.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="FirstAndFollow.cpp" />
     <ClCompile Include="GetMaxCoverage.cpp" />
@@ -138,20 +140,20 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="chunk_yacc.h" />
+    <ClInclude Include="..\common\PlmLine.h" />
+    <ClInclude Include="..\common\utilit.h" />
+    <ClInclude Include="AhoKorasick.h" />
     <ClInclude Include="ChunkNode.h" />
     <ClInclude Include="ChunkParser.h" />
-    <ClInclude Include="MyFlexLexer.h" />
-    <ClInclude Include="AhoKorasick.h" />
+    <ClInclude Include="chunk_yacc.h" />
     <ClInclude Include="GLR.h" />
     <ClInclude Include="GLRTable.h" />
     <ClInclude Include="GrammarItem.h" />
     <ClInclude Include="InputSymbol.h" />
     <ClInclude Include="LR-items.h" />
-    <ClInclude Include="..\common\PlmLine.h" />
+    <ClInclude Include="MyFlexLexer.h" />
     <ClInclude Include="SimpleGrammar.h" />
     <ClInclude Include="SimpleGrammarLib.h" />
-    <ClInclude Include="..\common\utilit.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="chunker.l">

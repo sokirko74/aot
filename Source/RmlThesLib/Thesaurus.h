@@ -121,7 +121,7 @@ public:
     vector<CInnerModel>	m_Models;
 	const CAgramtab*	m_pEngGramTab;
 	const CAgramtab*	m_pMainGramTab;
-	const CDictionary*	m_pOborDic;
+	const CDictionary*	m_pOborDictionary;
 	
 	vector<COborot>			m_Oborots;
 	vector<CInnerTermin>	m_Termins;

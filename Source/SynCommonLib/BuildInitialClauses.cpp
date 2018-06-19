@@ -2,7 +2,6 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#include "stdafx.h"
 #include "Sentence.h"
 #include "FormatCaller.h"
 #include "../AgramtabLib/rus_consts.h"
@@ -26,7 +25,7 @@ static int GetConjProperties(const CSentence& S, int WordNo, ConjFromWhatList& F
 	int OborotNo = S.m_Words[WordNo].GetOborotNo();
 
 	if	(		OborotNo != -1 
-			&& 	S.GetOpt()->m_pOborDic->m_Entries[OborotNo].HasPartOfSpeech(S.GetOpt()->m_Conjunction) 
+			&& 	S.GetOpt()->GetOborDic()->m_Entries[OborotNo].HasPartOfSpeech(S.GetOpt()->m_Conjunction)
 		)
 	{
 		for(size_t i = WordNo ; i < UpperBorder; i++ )	

@@ -2,12 +2,6 @@
 #include "GerFormatCaller.h"
 #include "GerClause.h"
 
-CFormatCaller* NewFormatCallerGerman(const CSyntaxOpt* Opt)
-{
-	return new CGerFormatCaller(Opt);
-};
-
-
 CGerFormatCaller::CGerFormatCaller(const CSyntaxOpt* Opt) : CFormatCaller(Opt) 
 {
 };

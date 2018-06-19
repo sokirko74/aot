@@ -1,1 +1,0 @@
-SimpleGrammarPrecompiled German gformats.txt

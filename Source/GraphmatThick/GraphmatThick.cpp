@@ -221,15 +221,6 @@ int main(int argc, char* argv[])
 
 		printf ("Found Units %u\n", Count);
 
-		/*for (size_t i=0; i < 256; i++)
-			if (isdelim(i))
-				if (i > 32)
-					printf ("1, // %c\n",(BYTE)i);
-				else
-					printf ("1, // non-printable\n",(BYTE)i);
-			else
-					printf ("0, \n");*/
-
 		return 0;
 	}
 	catch (CExpc C)

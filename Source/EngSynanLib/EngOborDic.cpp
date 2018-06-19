@@ -34,7 +34,7 @@ static const CCoordConjType CoordConjTypes[CoordConjTypesCount] = {
 	{"WHILST", false}
 };
 
-CEngOborDic::CEngOborDic(CSyntaxOpt* Opt) : COborDic(Opt)
+CEngOborDic::CEngOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
 {
 	m_SimpleCoordConj.clear();
 	for (size_t i=0; i < CoordConjTypesCount;i++)

@@ -1,7 +1,3 @@
-////////////////////
-
-
-
 #include <stdio.h>
 #include <fstream>
 #include <iostream>
@@ -12,27 +8,10 @@
 #include <ctime>
 
 #include "../common/util_classes.h"
-#include "../common/MorphologyHolder.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 
 CMorphologyHolder MorphHolderRus;
 CMorphologyHolder MorphHolderEng;
-
-//#import "../../bin/lemmatizer.tlb"
-//#import "../../bin/agramtab.tlb"
-
-
-//#undef NDEBUG
-//#include <cassert>
-
-
-
-/*using	namespace AGRAMTABLib;
-using	namespace LEMMATIZERLib;
-static ILemmatizerPtr piLemmatizerRussian;
-static ILemmatizerPtr piLemmatizerEnglish;
-*/
-
-
 
 
 #pragma warning(disable:4786)
@@ -52,39 +31,6 @@ bool init_dicts()
 	return true;
 }
 
-//----------------------------------------------------------------------------------------
-/*DwordVector get_id(const std::string &str, const std::string &code, const CMorphologyHolder& MorphHolder)
-{
-	IParadigmCollectionPtr piParadigmCollection;
-	DwordVector res;
-	try{
-		piParadigmCollection = 
-			lemmatizer->CreateParadigmCollectionFromNorm(str.c_str(), true);
-	}catch(...){
-		assert(false);
-		return res;
-	}
-	
-	int count = piParadigmCollection->Count;
-//	assert(count > 0);
-	UINT id;
-	for(int i = 0; i < count; i++){
-		IParadigmPtr piParadigm = piParadigmCollection->Item[i];
-		if(!piParadigm->Founded) continue;
-		std::string ancode = (char*) piParadigm->GetAncode(0);
-		for (long j=0;  j < code.size(); j+=2)
-		 for (long k=0;  k < ancode.size(); k+=2)
-		  if(ancode.substr(k, 2) == code.substr(j, 2)){
-			id = piParadigm->ParadigmID;
-			res.push_back(id);
-			goto _exit;
-		}
-_exit:;
-	}
-//	assert(res.size());
-	return res;
-}
-*/
 
 
 void make_bin(std::string &r, std::string &rc, std::string &e, std::string &ec, UINT d[5], std::ostream &out)
@@ -95,10 +41,10 @@ void make_bin(std::string &r, std::string &rc, std::string &e, std::string &ec, 
 	//out << e_id << " ";
 	//out << d[0] << " " << d[1] << " " << d[2] << " " << d[3] << " " << d[4];
 	//out << endl;
-	if (r_id.empty())
-			printf ("%s %s is not found in the morph. dictionary!\n",r.c_str(), rc.c_str());
-	if (e_id.empty())
-			printf ("%s %s is not found in the morph. dictionary!\n",e.c_str(), ec.c_str());
+	//if (r_id.empty())
+	//		printf ("%s %s is not found in the morph. dictionary!\n",r.c_str(), rc.c_str());
+	//if (e_id.empty())
+	//		printf ("%s %s is not found in the morph. dictionary!\n",e.c_str(), ec.c_str());
 	for(int i = 0; i < r_id.size(); i++){
 		for(int j = 0; j < e_id.size(); j++){
 			out.write((char*)&(r_id[i]), sizeof(UINT));

@@ -42,12 +42,12 @@ CGraphanDicts::CGraphanDicts(MorphLanguageEnum Language)
 
 CGraphanDicts::~CGraphanDicts()
 {
-	m_pOborDic.FreePointer();
+	m_pOborDictionary.FreePointer();
 };
 
 void CGraphanDicts ::FreeData()
 {
-	m_pOborDic.FreePointer();
+	m_pOborDictionary.FreePointer();
 	m_EnglishNames.clear();
 	m_Oborottos.clear();
 	m_Abbrevs.clear();

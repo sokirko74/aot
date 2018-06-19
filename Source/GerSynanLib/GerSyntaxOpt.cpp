@@ -1,7 +1,7 @@
-#pragma warning(disable:4786)
-
 #include  "GerSynan.h"
+#include  "GerSentence.h"
 #include  "GerSyntaxOpt.h"
+#include  "GerThesaurus.h"
 #include  "../StructDictLib/TempArticle.h"
 #include "../SimpleGrammarLib/SimpleGrammar.h"
 
@@ -19,7 +19,9 @@ const char gSyntaxGroupTypes [gSyntaxGroupTypesCount][30] =
 	"GENIT_PRE"
 };
 
-
+CSentence* CGerSyntaxOpt::NewSentence() const {
+	return new CGerSentence(this);
+};
 
 CSyntaxOpt*  NewOptionsGerman ()
 {
@@ -58,10 +60,22 @@ CGerSyntaxOpt :: CGerSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 	m_pAdjPrp = new StringVector;
 }
 
-CAgramtab* CGerSyntaxOpt::GetNewGramTab () const
-{
-	return	new CGerGramTab;
+CAgramtab *CGerSyntaxOpt::NewGramTab() const {
+	return new CGerGramTab();
 };
+
+CLemmatizer *CGerSyntaxOpt::NewLemmatizer() const {
+	return new CLemmatizerGerman();
+};
+
+COborDic * CGerSyntaxOpt::NewOborDic(const CSyntaxOpt* opt)  {
+	return new CGerOborDic(opt);
+};
+
+CThesaurusForSyntax* CGerSyntaxOpt::NewThesaurus(const CSyntaxOpt* opt) {
+	return new CGerThesaurusForSyntax(opt);
+};
+
 
 void CGerSyntaxOpt::DestroyOptions ()
 {
@@ -106,7 +120,7 @@ bool CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 
 	// reading formats
 	
-	strFileName = GetSyntaxFilePath()+"gformats.txt";
+	strFileName = GetSyntaxFilePath()+"gformats.grm";
 	m_FormatsGrammar.m_Language = morphGerman;
 	m_FormatsGrammar.m_pGramTab = GetGramTab();
 	m_FormatsGrammar.m_SourceGrammarFile = strFileName;

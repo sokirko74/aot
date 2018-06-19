@@ -87,15 +87,15 @@ public:
 	bool		ReadENames (string FileName);
 	
 
-	mutable _share_pointer_t<CDictionary*>		m_pOborDic;
+	mutable _share_pointer_t<CDictionary*>	m_pOborDictionary;
 	const CDictionary* GetOborDic() const
 	{
-		return m_pOborDic.m_Pointer;
+		return m_pOborDictionary.m_Pointer;
 	};
 
 	void  SetOborDic(CDictionary* Dic) 
 	{
-		m_pOborDic.SetPointer(Dic, false );
+		m_pOborDictionary.SetPointer(Dic, false );
 	};
 
 	

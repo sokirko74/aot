@@ -1,9 +1,4 @@
-#ifndef TRANSLATERHOLDER_H
-#define TRANSLATERHOLDER_H
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include "assert.h"
 #include "../common/util_classes.h"
@@ -15,7 +10,7 @@
 #include  "../BinaryDictsLib/SynDictionary.h"
 #include  "../BinaryDictsLib/BinaryDictionary.h"
 
-#include  "../common/SyntaxHolder.h"
+#include  "../SynanLib/SyntaxHolder.h"
 
 
 enum LanguageEnum { Russian, English};
@@ -132,7 +127,3 @@ public:
 	const CDictionary* GetRusOborots() const;
 
 };
-
-
-
-#endif 

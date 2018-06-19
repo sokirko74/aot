@@ -2,7 +2,6 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#include "stdafx.h"
 #include "Sentence.h"
 
 
@@ -212,7 +211,7 @@ static void DeleteMarkedHomonymsAndFIOForTermins(CWordVector& Words, size_t star
 void CSentence::FindTermins()
 {
 
-	const CThesaurusForSyntax& Thesaurus = m_pSyntaxOptions->GetThesaurus();
+	const CThesaurusForSyntax& Thesaurus = *m_pSyntaxOptions->GetThesaurus();
 	const CVectorOfTermins* pTermins = Thesaurus.GetTermins();
 
 	CTerminSort_less pred(pTermins);

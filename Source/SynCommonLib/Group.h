@@ -121,6 +121,7 @@ public:
 
 	// Only for Russian, true, if the numeral value of the group  is more than 999
 	bool			m_bNumeralMoreThanThousand;
+    bool            m_bRussianNounNumeralGroup;
 
 	bool			m_bCommaDelimited;
 

@@ -2,12 +2,7 @@
 
 #define chunk_query_l
 #include "ChunkParser.h"
-
-#ifdef WIN32
-    #include "chunk_yacc.h"
-#else
-    #include "unix_chunker_yacc.h"
-#endif
+#include "chunker_yacc.hpp"
 
 
 

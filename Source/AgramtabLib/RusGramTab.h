@@ -161,7 +161,8 @@ class CRusGramTab : public CAgramtab{
 	bool IsSimpleParticle(const char* lemma, poses_mask_t poses) const;
 	bool IsSynNoun(poses_mask_t poses, const char* Lemma) const;
 	bool IsStandardParamAbbr (const char* WordStrUpper) const;
-
+    bool FilterNounNumeral(string& gcNoun, const string& gcNum, QWORD& grammems) const override;
+    QWORD ChangeGleicheAncode1(GrammemCompare CompareFunc, const string& wordGramCodes,  string& groupGramCodes, const QWORD wordGrammems) const override;
 };
 
 extern bool GenderNumberCaseRussian (const CAgramtabLine* l1, const CAgramtabLine* l2);

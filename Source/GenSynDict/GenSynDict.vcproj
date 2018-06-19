@@ -201,7 +201,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\GenSynDict.cpp"
+			RelativePath=".\main.cpp"
 			>
 			<FileConfiguration
 				Name="Debug|Win32"

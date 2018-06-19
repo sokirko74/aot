@@ -31,7 +31,7 @@ public:
 	void ReadNextFromPlmLinesLanguageSpecific();
 	void DeleteHomOneToThousand();
 	bool RunSyntaxInClauses(ESynRulesSet);
-	
+    CFormatCaller* GetNewFormatCaller() const override;	
 	
 	void AddWeightForSynVariantsInClauses();
 	
@@ -87,7 +87,7 @@ public:
 	void	ChooseClauseType(const  vector<SClauseType>& vectorTypes,CMorphVariant& V);
 	bool	CheckLastPredicatePosition(size_t ClauseLastWordNo, long RootWordNo)  const;
 	void	FindReflexivePronomen();
-
+    void    CloneHomonymsForOborots() override {};
 };
 
 

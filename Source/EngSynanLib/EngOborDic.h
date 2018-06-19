@@ -12,7 +12,7 @@ class CEngOborDic : public COborDic
 public:
 	
 
-	CEngOborDic(CSyntaxOpt* Opt);
+	CEngOborDic(const CSyntaxOpt* Opt);
 
 protected:
 	bool	ReadOborDic (const CDictionary* piOborDic);

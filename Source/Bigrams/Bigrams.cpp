@@ -233,9 +233,9 @@ int BuildBigrams(int argc, char* argv[])
 try 
 {
 	CTrigramModel HMM;
-	if (bUseHMM)
-		if (!HMM.ReadFromConfigFile(HmmConfigFile))
-			return 1;
+	if (bUseHMM) {
+		HMM.InitModelFromConfigAndBuildTagset(HmmConfigFile);
+    }
 	
 	CGraphmatFile Graphan;
 	Graphan.m_Language = Langua;
@@ -318,7 +318,7 @@ try
 					
 
 					// add words from this window size 
-					int WindowEnd = min(SentSize, MaxWindowSize+LineNo+1);
+					int WindowEnd = std::min(SentSize, (int)(MaxWindowSize + LineNo + 1));
 					for (size_t k=LineNo+1; k < WindowEnd; k++)
 					{
 							string  s2 = (*it)[k];

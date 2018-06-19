@@ -6,7 +6,7 @@
 #include <set>
 #include <algorithm>
 #include "../common/util_classes.h"
-#include "../common/MorphologyHolder.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 
 
 static const char *default_path_suff = "troiki_suff";
@@ -51,7 +51,7 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 		std::string right = tok();
 		Trim(right);
 		if(left.size() < 3 || right.size() < 3){
-			std::cerr << left.c_str() << '\t' << right.c_str() << std::endl;
+			//std::cerr << left.c_str() << '\t' << right.c_str() << std::endl;
 			if(little_roots.count(left) <= 0) continue;
 		}
 		std::string rest = tok();

@@ -18,7 +18,7 @@ bool CGerFormatCaller::format_for_verb_modif(CGroup& G)
 	const CSynPlmLine& ww = sent[get_main_word(G.m_iFirstWord)];
 
 	// to prohibit "wann machen" as a group
-	if( GetOpt()->m_pOborDic->FindSubConj (ww.m_lemma ) != -1 )
+	if( GetOpt()->GetOborDic()->FindSubConj (ww.m_lemma ) != -1 )
 		return false;
 
 	// to prohibit "sehr machen"  as a group
