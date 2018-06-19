@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.5)
 
 project(SimpleGrammarLib)
 
@@ -27,15 +27,17 @@ target_link_libraries(SimpleGrammarLib
     LemmatizerLib
 )
 
-add_custom_command(OUTPUT chunker_yacc.cpp chunker_yacc.hpp
-    DEPENDS chunker.y
+add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/chunker_yacc.cpp chunker_yacc.hpp
+    DEPENDS ${PROJECT_SOURCE_DIR}/chunker.y
 	COMMAND bison -d -ochunker_yacc.cpp chunker.y 
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM
 )
 
-add_custom_command( OUTPUT chunker_lex.cpp
-    DEPENDS chunker.l chunker_yacc.hpp
+add_custom_command( OUTPUT ${PROJECT_SOURCE_DIR}/chunker_lex.cpp
+    DEPENDS ${PROJECT_SOURCE_DIR}/chunker.l chunker_yacc.hpp
 	COMMAND flex -ochunker_lex.cpp -d chunker.l
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM
 )
 

@@ -3,6 +3,7 @@
 #include "../common/bserialize.h"
 #include <time.h>
 #include <errno.h>
+#include <limits>
 
 //  for mkdir
 #ifdef WIN32
@@ -1029,8 +1030,8 @@ bool GetLanguageByString (string s, MorphLanguageEnum& Result)
 string GetStringByLanguage (MorphLanguageEnum Langua)
 {
 	switch (Langua) {
-		case morphRussian: return  "Russian";
-		case morphEnglish: return  "English";
+		case morphRussian: return "Russian";
+		case morphEnglish: return "English";
 		case morphGerman: return  "German";
 		case morphGeneric: return  "Generic";
 		case morphURL: return  "URL_ABC";
@@ -1921,7 +1922,7 @@ bool CShortStringHolder::WriteShortStringHolder(const string& FileName) const
 	if (!fp)	return false;
 	try
 	{
-	    assert (size() < numeric_limits<DWORD>::max());
+	    assert (size() < std::numeric_limits<DWORD>::max());
         DWORD nLength = size();
 		if (fwrite((void*)&nLength, sizeof(nLength), 1,  fp) != 1)
 		{
@@ -1960,7 +1961,7 @@ void CMyTimeSpan::GetStrRepresentation(const char* Name, char* buffer, double Al
 	for (long i=0; i<m_InterfaceNestId; i++)
 		strcat(buffer,"\t");
 	char t[300];
-	sprintf (t, "%s  = %6.0f seconds;%6.0f ticks ;%i calls", 
+	sprintf (t, "%s  = %6.0f seconds;%6.0f ticks ;%lu calls", 
 		Name, 
 		m_TimeSpan/(double)CLOCKS_PER_SEC, 
 

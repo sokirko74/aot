@@ -1,17 +1,21 @@
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 cmake_minimum_required(VERSION 3.5)
 
-macro (ConvertMorph name)
+macro (ConvertMorph langua)
+    set( target_name "${langua}Morph")
+    set( folder  ${PROJECT_SOURCE_DIR}/Dicts/Morph/${langua} )
     add_custom_target(
-        ${name}
+        ${target_name}
         SOURCES morph.bases
+        WORKING_DIRECTORY ${folder}
     )
 
     add_custom_command(
-        OUTPUT morph.bases
+        OUTPUT ${folder}/morph.bases
         COMMAND MorphGen project.mwz . 5 3
         DEPENDS MorphGen morphs.mrd project.mwz gramtab.tab
-        COMMENT "Convert Morphology ${name}"
+        COMMENT "Convert Morphology ${langua}"                 
+        WORKING_DIRECTORY ${folder}
         VERBATIM
     )
 
