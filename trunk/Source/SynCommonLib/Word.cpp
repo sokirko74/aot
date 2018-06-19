@@ -4,11 +4,9 @@
 
 
 
-#include "stdafx.h"
 #include "Sentence.h"
 #include "Word.h"
 #include "assert.h"
-#undef NDEBUG
 #include "SynPlmLine.h"
 #include "../SimpleGrammarLib/SimpleGrammar.h"
 #include "../AgramtabLib/ger_consts.h"
@@ -85,7 +83,7 @@ void CSynWord::UpdateConjInfo()
 						)
 				)
 
-				m_SubordinateConjNo = GetOpt()->m_pOborDic->FindSubConj(pHomonym.m_strLemma.c_str() );
+				m_SubordinateConjNo = GetOpt()->GetOborDic()->FindSubConj(pHomonym.m_strLemma.c_str() );
             pHomonym.m_CoordConjNo = m_pSent->GetCoordConjNo(pHomonym.m_strLemma.c_str());
 		}
 	}

@@ -1841,8 +1841,8 @@ void CShortStringHolder::ReadShortStringHolder(string filename)
 
 	FILE* fp = fopen(filename.c_str(), "rb");
 	if (!fp) return;
-	size_t Count;
-	fread ((void *)&Count, 1, sizeof(size_t), fp);
+	DWORD Count;
+	fread ((void *)&Count, 1, sizeof(Count), fp);
 	try {
 		m_Buffer.clear();
 		ReadVectorInner(fp, m_Buffer, BufferSize);
@@ -1873,7 +1873,7 @@ bool CShortStringHolder::CreateFromSequence(T begin, T end)
 {
 	
 	m_Buffer.clear();
-	size_t Count = 0;
+	DWORD Count = 0;
 	for (; begin != end; begin++)
 	{
 		size_t length = begin->length();
@@ -1921,8 +1921,9 @@ bool CShortStringHolder::WriteShortStringHolder(const string& FileName) const
 	if (!fp)	return false;
 	try
 	{
-		size_t nLength = size();
-		if (fwrite((void*)&nLength, sizeof(size_t), 1,  fp) != 1)
+	    assert (size() < numeric_limits<DWORD>::max());
+        DWORD nLength = size();
+		if (fwrite((void*)&nLength, sizeof(nLength), 1,  fp) != 1)
 		{
 				fclose(fp);
 				return false;

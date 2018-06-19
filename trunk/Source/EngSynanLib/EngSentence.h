@@ -11,6 +11,7 @@ class CEngSentence :	public CSentence
 public:
 	CEngSentence(const CSyntaxOpt* m_pSyntaxOptions);
 	~CEngSentence();
+    CFormatCaller* GetNewFormatCaller() const override;
 
 	const CEngSyntaxOpt* GetOpt() const 
 	{
@@ -54,7 +55,7 @@ public:
 	
 	void	ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMorphVariant& V);
 	bool	CheckLastPredicatePosition(size_t ClauseLastWordNo, long RootWordNo)  const { return true;};	
-
+    void    CloneHomonymsForOborots() override {};
 };
 
 #endif

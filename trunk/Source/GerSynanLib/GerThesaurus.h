@@ -6,7 +6,7 @@
 class CGerThesaurusForSyntax  : public  CThesaurusForSyntax 
 {
 public:
-	CGerThesaurusForSyntax(CSyntaxOpt* Opt);
+	CGerThesaurusForSyntax(const CSyntaxOpt* Opt);
 protected:
 	void AssignMainGroupsToModel(CGroups& model, const CInnerModel& piModel);
 

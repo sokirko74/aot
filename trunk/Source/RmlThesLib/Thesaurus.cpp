@@ -18,7 +18,7 @@ bool _find(_II It, const _Ty& _V)
 
 CThesaurus::CThesaurus()
 {
-	m_pOborDic = 0;
+	m_pOborDictionary = 0;
 	m_pMainGramTab = 0;
 	m_pEngGramTab = 0;
 	m_MainLanguage = morphUnknown;
@@ -553,7 +553,7 @@ bool CThesaurus::LoadSynItems(string FileName)
 void	CThesaurus::SetDicts(MorphLanguageEnum MainLanguage, const CDictionary* OborDic, const CAgramtab* MainGramtab, const CAgramtab* EngGramtab)
 {
 	m_MainLanguage = MainLanguage;
-	m_pOborDic = OborDic;
+	m_pOborDictionary = OborDic;
 	m_pMainGramTab = MainGramtab;
 	m_pEngGramTab = EngGramtab;
 }

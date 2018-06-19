@@ -2,17 +2,8 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef sentence_h
-#define sentence_h
-
-#include "stdafx.h"
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
-
 #include "Word.h"
-
 #include "Clause.h"
 #include "oborot.h"
 
@@ -214,14 +205,14 @@ public:
 	bool	IsPanicSentence();
 	void	RecalculateIndicesAfterInsertingWord(int InsertWordNo);
 	bool	IsBetweenGraphematicalPairDescriptors(int WordNo) const;
-	void	CloneHomonymsForOborots();
+	virtual void	CloneHomonymsForOborots() = 0;
 
 	bool	RunClauseRule(const CClauseRule*it, int iClauseNum);
 	void	OneRunOfClauseRules(const vector<CClauseRule>& ListOfRules);
 	int	    GetCoordConjNo(const char* WordUpper) const;
 
 	int		FindWordWithOneHomonym(int iFirstWord, int iLastWord, BYTE pos) const;
-	CFormatCaller* GetNewFormatCaller() const;
+	virtual CFormatCaller* GetNewFormatCaller() const = 0;
 
 	
 
@@ -273,5 +264,3 @@ public:
 
 extern  bool GetHomonymByClauseVariantWithModifiedProperties (int iUnit, const CSynWord& word, const CMorphVariant& syn_var, CSynHomonym& H);
 
-
-#endif 

@@ -34,7 +34,6 @@ distribution.
 #include "byte_stream.h"
 #include "xpath_syntax.h"
 #include "tinyxml.h"
-#include "tinystr.h"
 
 namespace TinyXPath
 {
@@ -42,7 +41,7 @@ namespace TinyXPath
 /**
    A specialized version of byte_stream for XPath 
 */
-class xpath_stream : public byte_stream 
+class xpath_stream : public byte_stream
 {
 protected :
    /// List of tokens

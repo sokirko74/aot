@@ -264,7 +264,6 @@ public:
 	void print_tag_set() const;
 	bool save_lambdas(string FileName) const;
 	bool lemmatize_sentence(vector<string> words, vector<string>& lemmas) const;
-	bool LoadModelUsingConfig(string FileName, const CLemmatizer* Lemmatizer=0, const CAgramtab* GramTab=0);
     void InitModelFromConfigAndBuildTagset(string FileName, const CLemmatizer* Lemmatizer=0, const CAgramtab* GramTab=0,  bool LoadReverseModel=true);
 
 #ifdef  USE_TRIGRAM_LEMMATIZER

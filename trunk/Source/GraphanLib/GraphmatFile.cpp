@@ -90,16 +90,16 @@ bool CGraphmatFile::LoadDicts ()
 			return false;
 		};
 
-		if (m_pDicts->m_pOborDic.m_Pointer == 0) 
+		if (m_pDicts->m_pOborDictionary.m_Pointer == 0)
 		{
 
-			pDicts->m_pOborDic.SetPointer(new CDictionary, true);
+			pDicts->m_pOborDictionary.SetPointer(new CDictionary, true);
 			string Path;
 			if (m_Language != morphGerman) 
 				Path = GetRegistryString("Software\\Dialing\\Obor\\DictPath").c_str();
 			else
 				Path = GetRegistryString("Software\\Dialing\\GerObor\\DictPath").c_str();
-			if (!pDicts->m_pOborDic.m_Pointer->Load(Path.c_str() ) )
+			if (!pDicts->m_pOborDictionary.m_Pointer->Load(Path.c_str() ) )
 			{
 				delete pDicts;
 				m_LastError = "Cannot load oborots";
@@ -109,12 +109,12 @@ bool CGraphmatFile::LoadDicts ()
 		}
 		else
 		{
-			pDicts->m_pOborDic.SetPointer(m_pDicts->m_pOborDic.m_Pointer, m_pDicts->m_pOborDic.m_bOwnPointer);
-			//  we create a full clone of this share pointer (m_pDicts->m_pOborDic) 
+			pDicts->m_pOborDictionary.SetPointer(m_pDicts->m_pOborDictionary.m_Pointer, m_pDicts->m_pOborDictionary.m_bOwnPointer);
+			//  we create a full clone of this share pointer (m_pDicts->GetOborDic())
 			// in new pDicts, and afterwards we will delete the current version of m_pDicts
 			// and replace it with the new version that' why  we should'not delete 
 			// this share pointer when the we free we old pointer.
-			const_cast<CGraphanDicts*>(m_pDicts)->m_pOborDic.m_bOwnPointer = false;
+			const_cast<CGraphanDicts*>(m_pDicts)->m_pOborDictionary.m_bOwnPointer = false;
 		};
 
 		pDicts->BuildOborottos();

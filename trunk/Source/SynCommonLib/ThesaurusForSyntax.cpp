@@ -11,7 +11,7 @@
 
 
 
-CThesaurusForSyntax::CThesaurusForSyntax(CSyntaxOpt* Opt) 
+CThesaurusForSyntax::CThesaurusForSyntax(const CSyntaxOpt* Opt)
 { 
 	m_pSyntaxOptions = Opt;
 	m_pEngGramTab  = new CEngGramTab;
@@ -24,39 +24,14 @@ CThesaurusForSyntax::~CThesaurusForSyntax()
 		delete m_pEngGramTab;
 };
 
-bool CThesaurusForSyntax::LoadThesaurus_mt(string tn, vector<CThesaurus*>* ts)
-{
-#ifdef BOOST
-	using namespace boost; 
-	thread_group tg;
-	CThesaurus* T = new CThesaurus;
-	const char* ThesName =  tn.c_str() ;
-	if (!T) return false;
-	if (!T->SetDatabase(ThesName)) return false;
-	assert (GetOpt()->GetOborDic() != 0);
-	T->m_MainLanguage = GetOpt()->m_Language;
-	T->m_pOborDic = GetOpt()->GetOborDic();
-	assert (GetOpt()->GetGramTab() != 0);
-	T->m_pMainGramTab = GetOpt()->GetGramTab();
-	assert (m_pEngGramTab != 0);
-	T->m_pEngGramTab = m_pEngGramTab;
-	clock_t m_TimeSpan = clock();
-	tg.create_thread (bind(&CThesaurus::ReadThesaurusFromDisk,T));
-	tg.create_thread (bind(&CThesaurus::ReadRelationsFromDisk,T));
-	tg.join_all();
-	(*ts).push_back(T);
-#endif
-	return true;
-}
-
 CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 {
 	CThesaurus* T = new CThesaurus;
 	if (!T) return 0;
 	if (!T->SetDatabase(ThesName)) return 0;
-	assert (GetOpt()->GetOborDic() != 0);
+	assert (GetOpt()->GetOborDictionary() != 0);
 	T->m_MainLanguage = GetOpt()->m_Language;
-	T->m_pOborDic = GetOpt()->GetOborDic();
+	T->m_pOborDictionary = GetOpt()->GetOborDictionary();
 	assert (GetOpt()->GetGramTab() != 0);
 	T->m_pMainGramTab = GetOpt()->GetGramTab();
 	assert (m_pEngGramTab != 0);
@@ -80,10 +55,6 @@ bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const C
 
 		
 
-		
-		//для форматки  format_for_rank_surname (ДОЛЖ-ФИО) нужно 
-		//прочитать перечент всех должностей из общего тезауруса
-		
 		if ( !strcmp(strDBName, "RML_THES_OMNI") )
 		{
 			try 
@@ -188,9 +159,9 @@ bool CThesaurusForSyntax::ReadTermins(const CThesaurus* piThes, EThesType eThesT
 						const CInnerSynItem& piItem = piThes->m_SynItems[piTermin.m_Items[j]];;
 						const char* str = piItem.m_ItemStr.c_str();
 						
-						//если оболочка тезауруса не собрала части дефисного слова в один элемент,
-						//тогда будем игнорировать такой термин.
-						//Например, слово "красно-белый" -  должно быть одним элементом.
+						//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+						//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
+						//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ" -  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 						
 						if(		str == 0
 							||	(strlen(str) == 0)

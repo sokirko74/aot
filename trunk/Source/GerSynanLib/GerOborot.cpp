@@ -2,13 +2,6 @@
 #include "GerSynan.h"
 #include "GerOborot.h"
 
-
-
-COborDic* NewOborDicGerman (CSyntaxOpt* Opt)
-{
-	return new CGerOborDic(Opt);
-};
-
 static const size_t CoordConjTypesCount = 3;
 static const CCoordConjType CoordConjTypes[CoordConjTypesCount] = {
 	{"UND", false},
@@ -17,7 +10,7 @@ static const CCoordConjType CoordConjTypes[CoordConjTypesCount] = {
 	
 	};
 
-CGerOborDic::CGerOborDic(CSyntaxOpt* Opt) : COborDic(Opt)
+CGerOborDic::CGerOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
 {
 	m_SimpleCoordConj.clear();
 	for (size_t i=0; i < CoordConjTypesCount;i++)
@@ -30,12 +23,6 @@ static long GetItemNoByItemStr(const CDictionary* piOborDic, const char* ItemStr
 	BYTE DomNo = piOborDic->GetDomenNoByDomStr(_DomStr);
     return piOborDic->GetItemNoByItemStr(ItemStr, DomNo);
 }
-
-
-
-
-
-
 
 bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 {
@@ -100,8 +87,6 @@ bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 		assert(AccusativItemNo != -1);
 		long DativItemNo = GetItemNoByItemStr(piOborDic,"D", "D_CASE");
 		assert(DativItemNo != -1);
-
-
 
 		for(int UnitNo = 0 ; UnitNo < iSize ; UnitNo++ )
 		{

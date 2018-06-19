@@ -2,12 +2,10 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#pragma warning(disable:4786) 
 #include "stdafx.h"
 #include "../common/cortege.h"
 #include "oborot.h"
 #include "SyntaxInit.h"
-
 
 
 void COborotForSyntax::Init() 
@@ -53,12 +51,7 @@ const CSyntaxOpt* COborDic::GetOpt() const
 	return m_pSyntaxOptions;
 };
 
-
-
-
-
 const char OborotDels[] = " \t";
-
 
 int COborDic::FindSubConj(const char* word_upper) const
 {
@@ -79,13 +72,13 @@ bool COborDic::ReadOborots(const CDictionary* piOborDic)
 };
 
 
-vector<int> COborDic::FindAllArticlesForSimplePrep(string strPrep)
+vector<int> COborDic::FindAllArticlesForSimplePrep(string strPrep) const
 {
 	vector<int> v;
 	if (strPrep.empty()) return v;
 	RmlMakeLower(strPrep, GetOpt()->m_Language);
 
-	CSimplePrepToArticles::iterator it = m_mapSimplePrep.find(strPrep);
+	CSimplePrepToArticles::const_iterator it = m_mapSimplePrep.find(strPrep);
 
 	assert (!m_mapSimplePrep.empty());
 
@@ -99,11 +92,11 @@ vector<int> COborDic::FindAllArticlesForSimplePrep(string strPrep)
 }
 
 
-int COborDic::FindSimplePrep(string strPrep)
+int COborDic::FindSimplePrep(string strPrep) const
 {
 	RmlMakeLower(strPrep, GetOpt()->m_Language);
 
-	CSimplePrepToArticles::iterator it = m_mapSimplePrep.find(strPrep);
+	CSimplePrepToArticles::const_iterator it = m_mapSimplePrep.find(strPrep);
 	if( it != m_mapSimplePrep.end() )	
 	{
 		assert(it->second.size() > 0 );

@@ -99,7 +99,7 @@ string  CClause::GetTraceStr() const
 
 int CClause::FindClauseSubordConj(const char* ConjStr)  const
 {
-	const COborDic* D = GetOpt()->m_pOborDic;
+	const COborDic* D = GetOpt()->GetOborDic();
 	for(int i = 0; i < m_vectorConjs.size() ; i++ )
 	{
 		const SConjIndex& conj = m_vectorConjs[i];
@@ -164,7 +164,7 @@ bool CClause::HasOnlyOneSimConjFromOborDic() const
 	{
 		const SConjIndex& conj = m_vectorConjs[i];
 		if(		(conj.m_FromWhere == FROM_OBOR_DIC)
-			&&	(GetOpt()->m_pOborDic->m_Entries[conj.m_index].m_ConjType != sub_conj) )
+			&&	(GetOpt()->GetOborDic()->m_Entries[conj.m_index].m_ConjType != sub_conj) )
 			c++;
 	}
 	return (c == 1);
@@ -996,7 +996,7 @@ void CClause::AssignSynVariantsGrammems(CMorphVariant&  synVariant, const CForma
 				if (FormatCaller.sent[UnitNo].m_FoundPrepDependCases == 0)
 					synVariant.m_SynUnits[UnitNo].m_SimplePrepNos.push_back(preps[k]);			
 				else
-					if( GetOpt()->m_pOborDic->m_Entries[preps[k]].m_DependCases & FormatCaller.sent[UnitNo].m_FoundPrepDependCases )
+					if( GetOpt()->GetOborDic()->m_Entries[preps[k]].m_DependCases & FormatCaller.sent[UnitNo].m_FoundPrepDependCases )
 						synVariant.m_SynUnits[UnitNo].m_SimplePrepNos.push_back(preps[k]);			
 		}
 	}
@@ -1007,7 +1007,7 @@ void CClause::AssignSynVariantsGrammems(CMorphVariant&  synVariant, const CForma
 
 static const CGroup* IsInThisGroupInner(const CClause& C, int iWord, const CMorphVariant& pVar, EGroupType type) 
 {
-	for(int i = 0 ;  i < pVar.m_vectorGroups.GetGroups().size() ; i++)
+	for (int i = 0 ;  i < pVar.m_vectorGroups.GetGroups().size() ; i++)
 	{
 		const CGroup& pGroup = pVar.m_vectorGroups.GetGroups()[i];
 		if( (pGroup.m_iFirstWord <= iWord) && (pGroup.m_iLastWord >= iWord) )

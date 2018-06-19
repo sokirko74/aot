@@ -609,6 +609,14 @@ bool CRusGramTab::is_morph_article(poses_mask_t poses)  const
 	return  false;
 };
 
+bool CRusGramTab::FilterNounNumeral(string& gcNoun, const string& gcNum, QWORD& grammems) const 
+{
+    if(gcNoun.length() == 2 || !(grammems & rAllCases)) return false;
+	GleicheAncode1(CaseNumberGender0, gcNum, 
+				FilterGramCodes(gcNum, grammems & rAllCases | ~rAllCases, 0), gcNoun);
+    return true;
+}
+
 
 string RussianCaseNumberGender(const CAgramtab* pGramTab,  const string& adj, const string& common_noun_grm, const string& noun)
 {
@@ -616,4 +624,12 @@ string RussianCaseNumberGender(const CAgramtab* pGramTab,  const string& adj, co
 	//return pGramTab->GleicheGenderNumberCase(common_noun_grm.c_str(), noun.c_str(), adj.c_str());
 	return "";
 };
+
+QWORD CRusGramTab::ChangeGleicheAncode1(GrammemCompare CompareFunc, const string& wordGramCodes,  string& groupGramCodes, const QWORD wordGrammems) const 
+{
+    groupGramCodes = GleicheAncode1(CompareFunc, FilterGramCodes(wordGramCodes, ~_QM(rIndeclinable), 0), groupGramCodes);
+    if(groupGramCodes == "") { return 0; }
+    const QWORD gramFilter = rAllCases|rAllGenders|rAllTimes|rAllPersons|rAllAnimative;
+	return 	wordGrammems & ~(gramFilter) | GetAllGrammems( groupGramCodes.c_str() );
+}
 

@@ -1,15 +1,6 @@
-// : interface for the JVisualSynAnParamBuilder class.
-//
-//////////////////////////////////////////////////////////////////////
-
-#ifndef JVisualSynAnParamBuilder_h
-#define JVisualSynAnParamBuilder_h
-
-#if _MSC_VER > 1000
 #pragma once
-#endif 
 
-#include "../common/SyntaxHolder.h"
+#include "../SynanLib/SyntaxHolder.h"
 
 
 struct SGroup
@@ -65,5 +56,3 @@ protected:
 
 
 };
-
-#endif 

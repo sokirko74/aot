@@ -19,7 +19,7 @@ bool CThesaurus::LoadOborots (string FileName)
 	if (Header != "OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;")
 		return false;
 
-	if (!m_pOborDic) return false;
+	if (!m_pOborDictionary) return false;
 
     while   (fgets(buff, 2000, fp))
 	{
@@ -50,7 +50,7 @@ bool CThesaurus::LoadOborots (string FileName)
 		};
 
 		if (OborotStr.empty()) return false;
-        O.m_UnitNo = m_pOborDic->LocateUnit(OborotStr.c_str(), 1);
+        O.m_UnitNo = m_pOborDictionary->LocateUnit(OborotStr.c_str(), 1);
 		if ( O.m_UnitNo == ErrUnitNo)
 		{
 			//ErrorMessage ("Cannot find oborot; This oborot was probably deleted! "+OborotStr);

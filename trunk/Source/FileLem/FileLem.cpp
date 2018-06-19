@@ -3,7 +3,7 @@
 // ==========   Dialing Lemmatizer (www.aot.ru)
 //================================
 #include "../common/utilit.h"
-#include "../common/MorphologyHolder.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 
 
 void PrintUsage()

@@ -2,11 +2,6 @@
 #include "EngFormatCaller.h"
 
 
-CFormatCaller* NewFormatCallerEnglish(const CSyntaxOpt* Opt)
-{
-	return new CEngFormatCaller(Opt);
-};
-
 
 CEngFormatCaller::CEngFormatCaller(const CSyntaxOpt* Opt) : CFormatCaller(Opt) 
 {

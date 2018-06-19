@@ -23,6 +23,11 @@ void CEngSentence::ReadNextFromPlmLinesLanguageSpecific()
 };
 
 
+CFormatCaller* CEngSentence::GetNewFormatCaller() const
+{
+    return new CEngFormatCaller(GetOpt());
+};
+
 void CEngSentence::ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMorphVariant& V)
 {
 	int empty_type = -1; 

@@ -24,7 +24,7 @@
 #include <string>
 #include <map>
 
-#include "../common/COMSyntaxHolder.h"
+#include "../SynCommonLib/COMSyntaxHolder.h"
 
 struct CGroup
 {

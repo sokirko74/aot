@@ -134,8 +134,8 @@ public:
 	const StringVector&			GetSubConjs() const {return m_SimpleSubConj;};
 	int								FindSubConj(const char* word_upper) const;
 
-	int						FindSimplePrep(string strPrep);
-	vector<int>				FindAllArticlesForSimplePrep(string strPrep);
+	int						FindSimplePrep(string strPrep) const;
+	vector<int>				FindAllArticlesForSimplePrep(string strPrep) const;
 	
 	void					WriteSimplePrep(string s, int OborotNo); 
 	void					TokenizeDoubleConj(string s, int OborotNo);

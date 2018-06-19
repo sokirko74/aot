@@ -110,7 +110,8 @@ class CAgramtab {
 	string FilterGramCodes(string gram_codes, QWORD grammems1, QWORD grammems2) const;
     string FilterGramCodes(QWORD breaks, string gram_codes, QWORD g1) const;
     bool CheckGramCode(const char* gram_code) const;
-
+    virtual bool FilterNounNumeral(string& gcNoun, const string& gcNum, QWORD& grammems) const {assert(false); return false;};
+    virtual QWORD ChangeGleicheAncode1(GrammemCompare, const string& ,  string&, const QWORD ) const {assert(false); return 0;};
 };
 
 

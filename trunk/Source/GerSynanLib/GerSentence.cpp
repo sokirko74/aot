@@ -17,6 +17,12 @@ CGerSentence::CGerSentence(const CSyntaxOpt* pSyntaxOptions)  : CSentence(pSynta
 
 }
 
+CFormatCaller* CGerSentence::GetNewFormatCaller() const
+{
+	return new CGerFormatCaller(GetOpt());
+};
+
+
 CGerSentence::~CGerSentence()
 {
 

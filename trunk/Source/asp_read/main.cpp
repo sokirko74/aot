@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include "../common/MorphologyHolder.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 
 
 
@@ -39,11 +39,11 @@ int get_id(std::string str, DwordVector &res, bool is_left)
 
 		if(is_perfective && is_nonperfective) 
 		{
-			std::cerr << "двувидовой:" << str.c_str() << std::endl;
+			///std::cerr << "двувидовой:" << str.c_str() << std::endl;
 		}
 		if(!is_perfective && !is_nonperfective) 
 		{
-			std::cerr << "нет граммемы вида:" << str.c_str() << std::endl;
+			//std::cerr << "нет граммемы вида:" << str.c_str() << std::endl;
 		};
 		
 		if(is_left && is_nonperfective || !is_left && is_perfective)
@@ -147,7 +147,7 @@ int main(int argc, char ** argv)
 {
 	if (argc != 3)
 	{
-		fprintf(stderr, "bad number of arguments\n");
+		fprintf(stderr, "bad number of arguments, need 3, %i are provided\n", argc);
 		return 1;
 	}
 
@@ -188,13 +188,13 @@ int main(int argc, char ** argv)
 				get_id(l, l_vec, true);
 				get_id(r, r_vec, false);
 
-				std::cout << l.c_str() << " " << r.c_str() << l_vec.size() << '\t' << r_vec.size()<< std::endl;
+				//std::cout << l.c_str() << " " << r.c_str() << l_vec.size() << '\t' << r_vec.size()<< std::endl;
 				for(int i = 0; i < l_vec.size(); i++)
 				{
 					for(int j = 0; j < r_vec.size(); j++){
 						left.push_back(l_vec[i]);
 						right.push_back(r_vec[j]);
-						std::cout << l.c_str() << " " << r.c_str() << " " << l_vec[i] << " " << r_vec[j] << std::endl;
+						//std::cout << l.c_str() << " " << r.c_str() << " " << l_vec[i] << " " << r_vec[j] << std::endl;
 					}
 				}
 			}

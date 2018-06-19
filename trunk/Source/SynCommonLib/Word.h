@@ -2,15 +2,8 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef synan_word_h
-#define synan_word_h
+#pragma once 
 
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
-
-
-#include "stdafx.h"
 #include "SyntaxInit.h"
 #include "Word.h"
 #include "SynPlmLine.h"
@@ -25,7 +18,7 @@ public:
 	const COborotForSyntax*	GetOborotPtr()  const
 	{
 		assert ( m_OborotNo != -1);
-		return &GetOpt()->m_pOborDic->m_Entries[m_OborotNo];
+		return &GetOpt()->GetOborDic()->m_Entries[m_OborotNo];
 	};
 	
 	bool m_bAdvAdj;
@@ -79,7 +72,7 @@ public:
 	// is a simple coordinating conjunction
 	bool m_bSimilarConj;
 
-	// the result of the search of subordinating  conjunction list via GetOpt()->m_pOborDic->FindSubConj
+	// the result of the search of subordinating  conjunction list via GetOpt()->GetOborDic()->FindSubConj
 	int  m_SubordinateConjNo;
 
 
@@ -167,11 +160,3 @@ public:
 };
 
 typedef vector<CSynWord> CWordVector;
-
-
-
-
-
-
-
-#endif 

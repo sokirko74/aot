@@ -165,13 +165,13 @@ STDMETHODIMP CCOMClause::get_Description(BSTR *pVal)
 			case FROM_OBOR_DIC:
 				{
 					S += "\"";
-					S += GetOpt()->m_pOborDic->m_Entries[iConjIndex].m_OborotEntryStr;
+					S += GetOpt()->GetOborDic()->m_Entries[iConjIndex].m_OborotEntryStr;
 					S += "\"";
 					break;
 				}
 			case FROM_SUB_CONJ:
 				{
-					S += GetOpt()->m_pOborDic->GetSubConjs()[iConjIndex];
+					S += GetOpt()->GetOborDic()->GetSubConjs()[iConjIndex];
 					break;
 				}
 			
@@ -225,12 +225,12 @@ STDMETHODIMP CCOMClause::get_ConjStr(int iNum, BSTR *pVal)
 		{
 		case FROM_OBOR_DIC:
 			{
-				strcpy(strBuf, GetOpt()->m_pOborDic->m_Entries[iConj].m_OborotEntryStr.c_str());				
+				strcpy(strBuf, GetOpt()->GetOborDic()->m_Entries[iConj].m_OborotEntryStr.c_str());				
 				break;
 			}
 		case FROM_SUB_CONJ:
 			{
-				strcpy(strBuf,GetOpt()->m_pOborDic->GetSubConjs()[iConj].c_str());
+				strcpy(strBuf,GetOpt()->GetOborDic()->GetSubConjs()[iConj].c_str());
 				break;
 			}
 		

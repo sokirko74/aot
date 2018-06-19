@@ -426,7 +426,7 @@ int CFormatCaller::check_first_part_of_prep_noun (const CGroup& G, QWORD& depend
 			&&		!W1.get_simple_preps()->empty()
 			)
 		{
-			depend_cases = GetOpt()->m_pOborDic->m_Entries[(*W1.get_simple_preps())[0]].m_AllPossibleDependCases;
+			depend_cases = GetOpt()->GetOborDic()->m_Entries[(*W1.get_simple_preps())[0]].m_AllPossibleDependCases;
 			return G.m_iFirstWord;
 
 		}
@@ -524,12 +524,12 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 	};
 	// ===  end
 
-	// searching for  the first part of a conjunction in GetOpt()->m_pOborDic->m_DisruptConj
-	vector<SDoubleConj>::const_iterator it = lower_bound (GetOpt()->m_pOborDic->m_DisruptConj.begin(), GetOpt()->m_pOborDic->m_DisruptConj.end(), sent[G.m_iFirstWord].get_upper_word(),DobleConjLess());
+	// searching for  the first part of a conjunction in GetOpt()->GetOborDic()->m_DisruptConj
+	vector<SDoubleConj>::const_iterator it = lower_bound (GetOpt()->GetOborDic()->m_DisruptConj.begin(), GetOpt()->GetOborDic()->m_DisruptConj.end(), sent[G.m_iFirstWord].get_upper_word(),DobleConjLess());
 
 	// checking all conjunction with the same first part
 	for ( ;
-		      (it != GetOpt()->m_pOborDic->m_DisruptConj.end()) 
+		      (it != GetOpt()->GetOborDic()->m_DisruptConj.end())
 		   && sent[G.m_iFirstWord].is_word_upper(it->m_FirstPart[0].m_item);
 		   it++)
 	{		
