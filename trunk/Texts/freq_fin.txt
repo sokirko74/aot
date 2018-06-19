@@ -1,1 +1,1 @@
-Texts/finance.txt
+finance.txt
