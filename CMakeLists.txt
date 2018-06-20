@@ -12,14 +12,16 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
 macro (ConvertStructDict name)
     add_custom_target(
         ${name}
-        SOURCES units.bin
+        SOURCES ${PROJECT_SOURCE_DIR}/units.bin
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     )
 
     add_custom_command(
-        OUTPUT units.bin
+        OUTPUT ${PROJECT_SOURCE_DIR}/units.bin
         COMMAND StructDictLoader FromTxt ross.txt  .
         DEPENDS StructDictLoader ross.txt
         COMMENT "Convert StructDict for ${name} to the binary format"
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         VERBATIM
     )
 

@@ -140,8 +140,7 @@ string GetStringBySyntax(const CSentencesCollection &SC, const CAgramtab &A, str
 };
 
 
-ArgumentParser getArgParser(int argc, const char **argv) {
-    ArgumentParser parser;
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "input file");
     parser.AddArgument("--output", "output file");
@@ -149,7 +148,6 @@ ArgumentParser getArgParser(int argc, const char **argv) {
     parser.AddOption("--speed-test");
     parser.AddOption("--input-is-list-file");
     parser.Parse(argc, argv);
-    return parser;
 }
 
 void checkSpeed(ArgumentParser& args, CSyntaxHolder& H) {
@@ -162,8 +160,9 @@ void checkSpeed(ArgumentParser& args, CSyntaxHolder& H) {
     }
 }
 
-int main(int argc, const char *argv[]) {
-    auto args = getArgParser(argc, argv);
+int main(int argc, const char **argv) {
+    ArgumentParser args;
+    initArgParser(argc, argv, args);
 
     CSyntaxHolder H;
     if (!H.LoadSyntax(args.GetLanguage())) {

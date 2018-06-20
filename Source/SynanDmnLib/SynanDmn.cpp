@@ -6,6 +6,7 @@
 #include "../common/BigramsReader.h"
 #include "JVisualSynAnParamBuilder.h"
 #include "../LemmatizerLib/Morphan.h"
+#include <thread>
 
 struct CSynHost : public CHost {
     CSynHost(bool bDoubleMessage, ProtocolDensityEnum pdProtocolDensity) :

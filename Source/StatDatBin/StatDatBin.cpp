@@ -5,8 +5,8 @@
 #include "../common/argparse.h"
 #include <fstream>
 
-// Подгружает данные из файла <DataFile> (см. StatTxtDat)
-// Записывает триады <pid,form-num,weight> в файл "r*homoweight.bin"
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ <DataFile> (пїЅпїЅ. StatTxtDat)
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ <pid,form-num,weight> пїЅ пїЅпїЅпїЅпїЅ "r*homoweight.bin"
 
 struct CGroup {
     int pid;
@@ -188,18 +188,17 @@ static bool saveBin(std::string name) {
     return true;
 }
 
-ArgumentParser getArgParser(int argc, const char **argv) {
-    ArgumentParser parser;
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "input file");
     parser.AddArgument("--output", "output file");
     parser.AddArgument("--language", "language");
     parser.Parse(argc, argv);
-    return parser;
 }
 
 int main(int argc, const char **argv) {
-    auto args = getArgParser(argc, argv);
+    ArgumentParser args;
+    initArgParser(argc, argv, args);
     if (!MorphHolder.LoadGraphanAndLemmatizer(args.GetLanguage())) {
         fprintf(stderr, "cannot load morphology holder\n");
         return 1;

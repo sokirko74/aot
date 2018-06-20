@@ -1,27 +1,12 @@
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 cmake_minimum_required(VERSION 3.5)
 
-macro (ConvertStructDict name)
-    add_custom_target(
-        ${name}
-        SOURCES units.bin
-    )
-
-    add_custom_command(
-        OUTPUT units.bin
-        COMMAND StructDictLoader FromTxt ross.txt  .
-        DEPENDS StructDictLoader ross.txt
-        COMMENT "Convert StructDict for ${name} to the binary format"
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/Dicts/${name}
-        VERBATIM
-    )
-
-endmacro(ConvertStructDict)
 
 macro (CompileSimpleGrammar name grmFile tableFile)
     add_custom_target( 
         ${name}
         SOURCES ${tableFile}                     
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     )
 
     add_custom_command(
@@ -29,6 +14,7 @@ macro (CompileSimpleGrammar name grmFile tableFile)
         COMMAND SimpleGrammarPrecompiled --language German --input ${grmFile} --output -
         DEPENDS SimpleGrammarPrecompiled ${grmFile}
         COMMENT "Compile ${grmFile} "
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         VERBATIM
     )
 

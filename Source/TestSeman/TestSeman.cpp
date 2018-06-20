@@ -127,6 +127,10 @@ int InitDicts()
         SemBuilder.m_RusStr.m_pData->InitializeIndices();
         SemBuilder.m_bShouldBuildTclGraph = false;
     }
+    catch (CExpc c) {
+        std::cerr << c.m_strCause << "\n";
+        return 1;
+    }
     catch (...) {
         std::cerr << "general initialize exception";
         return 1;
@@ -185,7 +189,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 
 int main(int argc, const char *argv[]) {
     ArgumentParser args;
-    getArgParser(argc, argv, args);
+    initArgParser(argc, argv, args);
 
     GlobalErrorMessage = MyGlobalErrorMessage;
     std::cerr << "init dicts ... (wait one minute)\n";

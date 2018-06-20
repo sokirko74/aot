@@ -10,8 +10,16 @@ target_link_libraries(TestSynan
 )
 
 macro (TestSynanLang lang)
-    add_test(NAME ${lang}Synan COMMAND TestSynan --language ${lang} --input test/${lang}/test.txt --output test/${lang}/out.txt)
-    add_test(NAME ${lang}SynanCompare COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}/canon.txt test/${lang}/out.txt)
+    add_test(
+        NAME ${lang}Synan 
+        COMMAND TestSynan --language ${lang} --input test/${lang}/test.txt --output test/${lang}/out.txt
+        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
+    )
+    add_test(
+        NAME ${lang}SynanCompare 
+        COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}/canon.txt test/${lang}/out.txt
+        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
+    )
 endmacro(TestSynanLang)
 
 TestSynanLang(Russian)

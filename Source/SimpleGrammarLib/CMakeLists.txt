@@ -18,8 +18,8 @@ Parser.cpp
 SimpleGrammarLib.cpp
 SolvePeriodAmbiguity.cpp
 SourceGrammarParser.cpp
-chunker_yacc.cpp
-chunker_lex.cpp
+${PROJECT_SOURCE_DIR}/chunker_yacc.cpp
+${PROJECT_SOURCE_DIR}/chunker_lex.cpp
 )
 
 target_link_libraries(SimpleGrammarLib
@@ -27,15 +27,15 @@ target_link_libraries(SimpleGrammarLib
     LemmatizerLib
 )
 
-add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/chunker_yacc.cpp chunker_yacc.hpp
-    DEPENDS ${PROJECT_SOURCE_DIR}/chunker.y
+add_custom_command(OUTPUT chunker_yacc.cpp chunker_yacc.hpp
+    DEPENDS chunker.y
 	COMMAND bison -d -ochunker_yacc.cpp chunker.y 
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM
 )
 
-add_custom_command( OUTPUT ${PROJECT_SOURCE_DIR}/chunker_lex.cpp
-    DEPENDS ${PROJECT_SOURCE_DIR}/chunker.l chunker_yacc.hpp
+add_custom_command( OUTPUT chunker_lex.cpp
+    DEPENDS chunker.l chunker_yacc.hpp
 	COMMAND flex -ochunker_lex.cpp -d chunker.l
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM

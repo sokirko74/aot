@@ -9,8 +9,17 @@ target_link_libraries(TestLem
 )
 
 macro (TestLemLang lang)
-    add_test(NAME ${lang}Morphan COMMAND TestLem --echo  --no-ids --forms --language ${lang} --input test/${lang}/test.txt --output test/${lang}/out.txt)
-    add_test(NAME ${lang}MorphanCompare COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}/canon.txt test/${lang}/out.txt)
+    add_test(
+        NAME ${lang}Morphan 
+        COMMAND TestLem --echo  --no-ids --forms --language ${lang} --input test/${lang}/test.txt --output test/${lang}/out.txt
+        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
+    )
+
+    add_test(
+        NAME ${lang}MorphanCompare 
+        COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}/canon.txt test/${lang}/out.txt
+        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
+    )
 endmacro(TestLemLang)
 
 TestLemLang(Russian)
