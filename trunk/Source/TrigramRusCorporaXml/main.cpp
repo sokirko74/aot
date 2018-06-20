@@ -1,7 +1,7 @@
-// программа читает xml-файл в стандарте MorphCorpusCreator 
-// На  выходе программа строит файл, где на каждой строке стоит отдельное предложение.
-// После каждого слова стоит тэг этого слова.  Файл в таком формате может читать пакет acopost, такой 
-// формат в этом пакете называется "cooked" формат.
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ xml-пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ MorphCorpusCreator 
+// пїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.  пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ acopost, пїЅпїЅпїЅпїЅпїЅ 
+// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "cooked" пїЅпїЅпїЅпїЅпїЅпїЅ.
 #include "../common/util_classes.h"
 #include "../common/MorphXmlToken.h"
 #include "RusCorpXml.h"
@@ -43,7 +43,7 @@ void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const 
             string pos = "UNK";
 
             if (isdigit((BYTE) pos[0]))
-                pos = "ЦК";
+                pos = "пїЅпїЅ";
             else if (W.IsImportantPunct())
                 pos = W.m_WordStr.c_str();
 
@@ -101,8 +101,7 @@ bool Disambiguate(const CTrigramModel &M, istream& inputStream, ostream& outputS
 }
 
 
-ArgumentParser getArgParser(int argc, const char **argv) {
-    ArgumentParser parser;
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "is a ruscorpus .xhtml3  file");
     parser.AddArgument("--output", "output file");
@@ -110,11 +109,11 @@ ArgumentParser getArgParser(int argc, const char **argv) {
     parser.AddOption("--input-is-list-file");
     parser.AddArgument("--trigram-config", "<trigram.cfg>  is a trigram model config", false);
     parser.Parse(argc, argv);
-    return parser;
 }
 
 int main(int argc, const char *argv[]) {
-    auto args = getArgParser(argc, argv);
+    ArgumentParser args;
+    initArgParser(argc, argv, args);
 
     CTrigramModel M;
     string Action = args.Retrieve("action");

@@ -5,3 +5,8 @@ add_subdirectory (Comp/Ross)
 add_subdirectory (Loc/Ross)
 add_subdirectory (Fin/Ross)
 add_subdirectory (Omni/Ross)
+
+add_custom_target ( 
+    ThesRosses
+    DEPENDS OmniRoss FinRoss CompRoss LocRoss
+)

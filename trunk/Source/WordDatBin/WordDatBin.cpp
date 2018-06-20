@@ -1,5 +1,5 @@
-// Подгружает данные из файла <DataFile> (см. StatTxtDat)
-// Записывает пары <pid,weight> в файл "r*wordweight.bin"
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ <DataFile> (пїЅпїЅ. StatTxtDat)
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ <pid,weight> пїЅ пїЅпїЅпїЅпїЅ "r*wordweight.bin"
 
 
 #include "../common/util_classes.h"
@@ -178,18 +178,17 @@ static bool saveBin(std::string name) {
     return WriteVector(name, ww);
 }
 
-ArgumentParser getArgParser(int argc, const char **argv) {
-    ArgumentParser parser;
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "input file");
     parser.AddArgument("--output", "output file");
     parser.AddArgument("--language", "language");
     parser.Parse(argc, argv);
-    return parser;
 }
 
 int main(int argc, const char **argv) {
-    auto args = getArgParser(argc, argv);
+    ArgumentParser args;
+    initArgParser(argc, argv, args);
     if (!MorphHolderRus.LoadGraphanAndLemmatizer(args.GetLanguage())) {
         fprintf(stderr, "cannot load morphology holder\n");
         return 1;

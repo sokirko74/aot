@@ -29,6 +29,7 @@ enum ProtocolDensityEnum {
 #ifdef WIN32
 	struct sockaddr_in;
 #endif
+#include <thread>
 
 
 class CHost  
@@ -39,6 +40,7 @@ class CHost
 	bool					m_bDoubleMessage;
 	string					m_LocalPath;
 	ProtocolDensityEnum		m_pdProtocolDensity;
+	std::thread 			m_Listener;
 
 	void		AnswerByRequest (SOCKET rConnectedSocket, const struct sockaddr_in* client_addr, int TimeOut, bool& bCloseSocket );
 
@@ -46,12 +48,14 @@ protected:
 	virtual string	ProcessSocketString(const string& S, SOCKET rConnectedSocket);
 
 public:
-	
 	string				m_CorporaName;
 	void			(*m_LogFunction)(const string&);
 	
 
 	CHost(bool bDoubleMessage, ProtocolDensityEnum pdProtocolDensity);
+	CHost();
+	//CHost(CHost&& o) noexcept;
+
 	bool			ReadFromString (string S);
 	void			CreateListener();
 	void			CopyAddressParametersFrom(const CHost& X);

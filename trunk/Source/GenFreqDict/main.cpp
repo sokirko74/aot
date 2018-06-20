@@ -234,7 +234,7 @@ int  mymain(int argc, char **argv)
 		out.write((char*)&(freq), sizeof(unsigned short ));
 
 		// выводим дамп
-		std::cout << it->second << '\t' << rus.c_str() << '\t' << eng.c_str() << std::endl;
+		//std::cout << it->second << '\t' << rus.c_str() << '\t' << eng.c_str() << std::endl;
 		written++;
 	}
 
@@ -284,14 +284,14 @@ int  mymain(int argc, char **argv)
 		
 		if(!BinaryDictionary.HavePair(shira_it->second, shira_it->first))
 		{
-			std::cerr << rus << " " << 
-				rp.GetAncode(0).c_str() << " "
-				<< eng ;
-			std::cerr << " " << 
-				ep.GetAncode(0).c_str() << " " << t_pos
-				<< " 0 0 0 0"<< std::endl;
+			//std::cerr << rus << " " <<
+			//	rp.GetAncode(0).c_str() << " "
+			//	<< eng ;
+			///std::cerr << " " <<
+			//	ep.GetAncode(0).c_str() << " " << t_pos
+			//	<< " 0 0 0 0"<< std::endl;
 		}
-		std::cout << 5 << '\t' << rus << '\t' << eng	 << std::endl;
+		//std::cout << 5 << '\t' << rus << '\t' << eng	 << std::endl;
 		written++;
 	}
 

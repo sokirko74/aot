@@ -46,5 +46,11 @@ target_link_libraries(SemanLib
     BinaryDictsLib
 )
 
-add_dependencies (SemanLib BinDicts)
-
+add_dependencies (SemanLib 
+    BinDicts 
+    ThesRosses
+    Ross 
+    Aoss
+    Collocs
+    EngCollocs
+    TimeRoss) 

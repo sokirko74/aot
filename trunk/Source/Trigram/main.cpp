@@ -1,6 +1,7 @@
 #include "../common/utilit.h"
 #include "../TrigramLib/TrigramModel.h"
 
+#include <iostream>
 
 
 void PrintUsageAndExit()
@@ -136,7 +137,7 @@ int main(int argc, char **argv)
     }
     catch (CExpc c)
     {
-        fprintf (stderr, "%s", c.m_strCause);
+        std::cerr << c.m_strCause;
         return 1;
     }
 	
