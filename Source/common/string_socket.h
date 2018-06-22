@@ -1,9 +1,7 @@
-#ifndef _string_socket_h
-#define _string_socket_h
-
-
+#pragma once
 
 #include "../common/utilit.h"
+#include <thread>
 
 enum NetworkErrorsEnum {
 	neSuccess = 0,
@@ -29,7 +27,6 @@ enum ProtocolDensityEnum {
 #ifdef WIN32
 	struct sockaddr_in;
 #endif
-#include <thread>
 
 
 class CHost  
@@ -48,14 +45,12 @@ protected:
 	virtual string	ProcessSocketString(const string& S, SOCKET rConnectedSocket);
 
 public:
+	
 	string				m_CorporaName;
 	void			(*m_LogFunction)(const string&);
 	
 
 	CHost(bool bDoubleMessage, ProtocolDensityEnum pdProtocolDensity);
-	CHost();
-	//CHost(CHost&& o) noexcept;
-
 	bool			ReadFromString (string S);
 	void			CreateListener();
 	void			CopyAddressParametersFrom(const CHost& X);
@@ -78,4 +73,3 @@ extern void start_as_daemon(const char* daemon_name);
 bool CloseSocket(int l_socket);
 
 	
-#endif
