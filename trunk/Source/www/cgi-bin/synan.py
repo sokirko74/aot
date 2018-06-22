@@ -7,7 +7,6 @@ import cgi
 import cgitb
 import cgi_utils
 
-
 def print_synan_result(InputText, syn_str, LanguaStr, FileName):
     s = open (FileName, "r").read()     
     syn_str = syn_str.replace ("\n", "$$$")
@@ -16,7 +15,6 @@ def print_synan_result(InputText, syn_str, LanguaStr, FileName):
     s = s.replace ("InputText>", "InputText>" + InputText.strip())
     s = s.replace ("$syn_struct", syn_str)
     print s
-
 
 if __name__ == '__main__':
     cgitb.enable()
@@ -30,9 +28,6 @@ if __name__ == '__main__':
         InputText = FORM.getvalue('InputText').strip()
         Langua = FORM.getvalue('Language')
         TemplateFile = FORM.getvalue('TemplateFile')
-        #InputText = "test"
-        #Langua = "_Russian"
-        #TemplateFile = '../wwwroot/demo/synt.html'
         socket_conn = cgi_utils.GetDaemon("synandmn.cfg", "SynanDaemon")
         cgi_utils.SendString(socket_conn, "%s#%s" % (Langua, InputText))
         syn_str = cgi_utils.RecieveString(socket_conn)

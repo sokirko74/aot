@@ -1,11 +1,11 @@
 
-
+//  include headers for processes and sockets
 #ifdef WIN32
 	#include <winsock2.h>
 	#include <Ws2tcpip.h>
 	#include <process.h>
 #else
-		//#include <pthread.h>
+		#include <pthread.h>
 		#include <arpa/inet.h>
 		#include <sys/types.h>
 		#include <sys/socket.h>
@@ -445,31 +445,15 @@ string GetNetworkErrorString(const NetworkErrorsEnum& t)
 	return "Unknown error code";
 };
 
-CHost::CHost() {
-	m_LogFunction = 0;
-	m_ListenSocket = -1;
-	m_Port = -1;
-};
-
 
 CHost::CHost(bool bDoubleMessage, ProtocolDensityEnum pdProtocolDensity)
 {
+	m_LogFunction = 0;
 	m_pdProtocolDensity = pdProtocolDensity;
 	m_bDoubleMessage = bDoubleMessage;
-	m_LogFunction = 0;
 	m_ListenSocket = -1;
 	m_Port = -1;
 };
-
-/*CHost::CHost(CHost&& o) noexcept : m_Listener(std::move(o.m_Listener)) {
-	m_LogFunction = o.m_LogFunction;
-	m_ListenSocket = o.m_ListenSocket;
-	m_Port = o.m_Port;
-	m_pdProtocolDensity = o.m_pdProtocolDensity;
-	m_bDoubleMessage = o.m_bDoubleMessage;
-	m_CorporaName = o.m_CorporaName;
-	m_HostName = o.m_HostName;
-}*/
 
 
 
@@ -538,8 +522,8 @@ bool LoadHosts (string Path, vector<CHost>& Hosts)
 			fclose(fp);
 			return false;
 		};
-		
-		Hosts.emplace_back(std::move(T));
+
+		Hosts.push_back(std::move(T));
 	};
 	
 	fclose(fp);
@@ -763,17 +747,8 @@ void   CHost::RunThread()
 
 void CHost::CreateListener() 
 {
-
 	m_LogFunction( Format ("Create Listener %s (%s)", m_CorporaName.c_str(), GetAddressStr().c_str()) );
-	m_Listener = std::thread (ListenerThread, (void*)this);
-	/*#ifdef WIN32
-		_beginthread( ListenerThread, 0, (void*)this );
-	#else
-		pthread_t aThread;
-		pthread_create(&aThread, NULL, ListenerThread, (void*)this);
-	#endif*/
-
-
+	m_Listener  = std::thread(ListenerThread, this);
 };
 
 string	CHost::GetAddressStr() const

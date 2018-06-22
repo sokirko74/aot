@@ -1,3 +1,2 @@
 // CorporaName      IP          PORT   LocalName		
-SynanDaemon localhost   5 E:/Inetpub/wwwroot/dialing_docs.con 
-// SynanDaemon home.tyoma.com 4330 
+SynanDaemon localhost   17017  dummy
