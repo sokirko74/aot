@@ -519,7 +519,6 @@ inline size_t restore_from_bytes(CPrecompiledWorkRule &t, const BYTE *buf) {
 bool CWorkGrammar::SavePrecompiled(string GrammarFileName) const {
 
     string PrecompiledFile = MakeFName(GrammarFileName, "grammar_precompiled");
-    LogStream << "SavePrecompiled to " << PrecompiledFile << "\n";
 
     FILE *fp = fopen(PrecompiledFile.c_str(), "wb");
     if (!fp) {

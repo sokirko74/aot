@@ -14,4 +14,3 @@ Roots : [PNAME ],
 create token list for each node
 Seconds = 0
 ok
-SavePrecompiled to tests/test.grammar_precompiled

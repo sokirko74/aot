@@ -18,10 +18,16 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 
 =================   Compilation =======================
-
+  Install cmake (at least 3.5) from https://cmake.org/download/
+  Install g++(at least 4.6) or clang 
+               
   export RML=/home/sokirko/RML
+  export CXX=/usr/bin/g++-4.7
+  export CC=/usr/bin/gcc-4.9
   cd $RML
-  cmake .
+  mkdir build
+  cd build
+  cmake ..
   make
 
 
