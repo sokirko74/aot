@@ -5,16 +5,6 @@
 #include "StdMorph.h"
 #include "Predict.h"
 
-#ifdef DETECT_MEMORY_LEAK
-	#ifdef _DEBUG
-	#define new DEBUG_NEW
-
-	#undef THIS_FILE
-	static char THIS_FILE[] = __FILE__;
-	#endif
-#endif
-
-
 CPredictBase::CPredictBase(MorphLanguageEnum langua) :m_SuffixAutomat(langua, MorphAnnotChar)
 {
 	

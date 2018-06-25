@@ -50,14 +50,6 @@ struct CModelPostfix
 typedef map<string, vector<CPredictWord> > Flex2WordMap;
 typedef map<CModelPostfix, size_t > Postfix2FreqMap;
 
-#ifdef DETECT_MEMORY_LEAK
-	#ifdef _DEBUG
-	#define new DEBUG_NEW
-	#undef THIS_FILE
-	static char THIS_FILE[] = __FILE__;
-	#endif
-#endif
-
 
 /*
  this function add  a new item to svMapRaw.

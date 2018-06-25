@@ -6,16 +6,6 @@
 #include "MorphAutomat.h"
 #include "../common/bserialize.h"
 
-#ifdef DETECT_MEMORY_LEAK
-	#ifdef _DEBUG
-	#define new DEBUG_NEW
-
-	#undef THIS_FILE
-	static char THIS_FILE[] = __FILE__;
-	#endif
-#endif
-
-
 static int  InitAlphabet(MorphLanguageEnum Language, int* pCode2Alphabet, int *pAlphabet2Code, size_t AnnotChar)
 {
 	assert (!is_upper_alpha(AnnotChar, Language));
