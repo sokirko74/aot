@@ -7,16 +7,6 @@
 #include "../common/bserialize.h"
 
 
-#ifdef DETECT_MEMORY_LEAK
-	#ifdef _DEBUG
-	#define new DEBUG_NEW
-
-	#undef THIS_FILE
-	static char THIS_FILE[] = __FILE__;
-	#endif
-#endif
-
-
 void	CStatistic::Load(const string& path)
 {
 	ReadVector(path + HOMOWEIGHT_BIN_PATH, m_HomoWeights);
