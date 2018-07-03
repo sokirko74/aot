@@ -1,7 +1,6 @@
 // CheckGramTab.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include "../AgramtabLib/RusGramTab.h"
 #include "../AgramtabLib/EngGramTab.h"
 #include "../AgramtabLib/GerGramTab.h"

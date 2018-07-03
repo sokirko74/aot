@@ -166,12 +166,8 @@ STDMETHODIMP CComGraphmatFile::LoadFileToGraphan(BSTR CommandLine)
 	return CGraphmatFile::LoadFileToGraphan((const char*)t) ? S_OK : E_FAIL;
 };
 
-extern bool CheckPersonalLicense();
 STDMETHODIMP CComGraphmatFile::LoadDicts()
 {
-	if (!CheckPersonalLicense())
-		if (!CheckEvaluationTime()) 
-			return false;
 	return CGraphmatFile::LoadDicts() ? S_OK : E_FAIL;
 };
 

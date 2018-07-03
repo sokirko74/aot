@@ -20,27 +20,6 @@
 
 
 
-//#ifndef HAVE_DECL_GETADDRINFO
-//	# if !HAVE_DECL_GETADDRINFO
-//	/* Translate name of a service location and/or a service name to set of
-//		socket addresses.
-//		For more details, see the POSIX:2001 specification */
-//		extern void getaddrinfo ( const char* nodename,
-//								  const char* servname,
-//								  const struct addrinfo* hints,
-//								  struct addrinfo **restrict res);
-//	# endif
-//# endif
-// 
-//# ifndef HAVE_DECL_FREEADDRINFO
-//	# if !HAVE_DECL_FREEADDRINFO
-// /* Free `addrinfo' structure AI including associated storage.
-//    For more details, see the POSIX:2001 specification
-//    <http://www.opengroup.org/susv3xsh/getaddrinfo.html>.  */
-//		extern void freeaddrinfo (struct addrinfo *ai);
-//	# endif
-//# endif
-
 
 #include "string_socket.h"
 #include "../common/util_classes.h"
@@ -53,9 +32,6 @@
 	static char THIS_FILE[] = __FILE__;
 	#endif
 #endif
-
-
-
 
 
 struct ERROR_STRUCT
@@ -359,7 +335,7 @@ SOCKET create_socket (const char* HostName, int Port, bool bBind, string& strErr
 				l_socket = -1;
 				continue;
 			};
-			Res = bind(l_socket, res->ai_addr, res->ai_addrlen);
+			Res = ::bind(l_socket, res->ai_addr, res->ai_addrlen);
 		}
 		else
 			Res = connect(l_socket, res->ai_addr, res->ai_addrlen);
@@ -772,7 +748,7 @@ void CHost::CopyAddressParametersFrom(const CHost& X)
 	m_CorporaName = X.m_CorporaName;
 };
 
-
+#ifndef WIN32
 void start_as_daemon(const char* daemon_name) {
     //      working as a daemon
     if (getppid()!=1)
@@ -795,3 +771,4 @@ void start_as_daemon(const char* daemon_name) {
 
     openlog(daemon_name, LOG_PID| LOG_CONS, LOG_DAEMON );
 }
+#endif

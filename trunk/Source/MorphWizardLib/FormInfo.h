@@ -1,6 +1,4 @@
-#ifndef _FORM_INFO_H
-#define _FORM_INFO_H
-
+#pragma once
 
 struct CMorphForm 
 {
@@ -107,10 +105,7 @@ struct CLemmaInfo
 	}
 
 };
-extern void ReadAllModels_mt(FILE* fp, vector<CFlexiaModel>& FlexiaModels,vector<CAccentModel>&	AccentModels, StringVector& m_Prefixes);
-extern void ReadFlexiaModels(FILE* fp, vector<CFlexiaModel>& FlexiaModels );
+extern void ReadFlexiaModels(std::ifstream&, vector<CFlexiaModel>& FlexiaModels );
 extern void WriteFlexiaModels(FILE* out_fp, const vector<CFlexiaModel>& FlexiaModels );
-extern void ReadAccentModels (FILE* fp, vector<CAccentModel>&	AccentModels );
+extern void ReadAccentModels (std::ifstream&, vector<CAccentModel>&	AccentModels );
 extern void WriteAccentModels(FILE* out_fp, const vector<CAccentModel>& AccentModels );
-
-#endif

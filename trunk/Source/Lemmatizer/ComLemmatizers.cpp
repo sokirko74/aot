@@ -10,13 +10,8 @@
 
 
 
-extern bool CheckPersonalLicense();
 STDMETHODIMP CCOMLemmatizer::LoadDictionariesRegistry() 
 {	
-
-	if (!CheckPersonalLicense())
-		if (!CheckEvaluationTime())
-			return E_FAIL;
 	string strError;
 	m_pLemmatizer->LoadDictionariesRegistry(strError);
 	if (	m_pLemmatizer->m_bLoaded )

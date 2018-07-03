@@ -12,14 +12,6 @@
 	#include <sys/stat.h>
 #endif
 
-#ifdef DETECT_MEMORY_LEAK
-	#ifdef _DEBUG
-	#define new DEBUG_NEW
-	#undef THIS_FILE
-	static char THIS_FILE[] = __FILE__;
-	#endif
-#endif
-
 const WORD fWordDelim = 1;
 const WORD RusUpper = 2;
 const WORD RusLower = 4;
@@ -1922,7 +1914,7 @@ bool CShortStringHolder::WriteShortStringHolder(const string& FileName) const
 	if (!fp)	return false;
 	try
 	{
-	    assert (size() < std::numeric_limits<DWORD>::max());
+        assert (size() < std::numeric_limits<DWORD>::max());
         DWORD nLength = size();
 		if (fwrite((void*)&nLength, sizeof(nLength), 1,  fp) != 1)
 		{
@@ -2436,25 +2428,6 @@ string StringTokenizer::next_token ()
 		return string();
 }
 
-
-
-// redifined operators new and delete are used to find memory leaks
-#ifdef DETECT_MEMORY_LEAK
-#undef new
-	bool bStartTraceAllocation = false;
-	void* operator new(size_t nSize, LPCSTR lpszFileName, int nLine)
-	{
-		void *p = new char[nSize];
-		if (bStartTraceAllocation)
-			rml_TRACE("allocation %X size %i from file %s line %i\n", p, nSize, lpszFileName, nLine);
-		return p;
-	};
-
-	void  operator delete(void* p, LPCSTR lpszFileName, int nLine)
-	{
-		delete p;
-	};
-#endif
 
 
 

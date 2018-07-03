@@ -249,7 +249,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 			string wordform = base + flexia;
 			if (wordform.length() < PostfixLength) continue;
 			string Postfix = wordform.substr(wordform.length() - PostfixLength);
-			AddElem(svMapRaw, Postfix, lin, nps, i, Postfix2Freq, m_LemmaInfos);
+			AddElem(svMapRaw, Postfix, lin, nps, (WORD)i, Postfix2Freq, m_LemmaInfos);
 		}
 		
 	}

@@ -353,7 +353,7 @@ bool   TItemContainer::BuildDomens (char* LastReadLine)
 			strcpy (m_Domens[k].Format, tok.val());
 		}
 		m_Domens[k].m_pParent = this;
-		m_Domens[k].m_DomNo = k;
+		m_Domens[k].m_DomNo = (BYTE)k;
 
 	}
 	// закрываем файл

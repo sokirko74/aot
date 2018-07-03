@@ -2,16 +2,11 @@
 // Splash.cpp : implementation file
 //
 
-#include "stdafx.h"  // e. g. stdafx.h
+#include "StdAfx.h"  // e. g. stdafx.h
 #include "resource.h"  // e.g. resource.h
 
 #include "Splash.h"  // e.g. splash.h
 
-#ifdef DETECT_MEMORY_LEAK
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char BASED_CODE THIS_FILE[] = __FILE__;
-#endif
 
 /////////////////////////////////////////////////////////////////////////////
 //   Splash Screen class

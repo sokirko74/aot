@@ -5,80 +5,80 @@
 #include "StdMorph.h"
 #include "MorphDict.h"
 #include "LemmaInfoSerialize.h"
-
+#include <fstream>
 
 
 //======================================================
-//=============		CMorphDict			   =============
+//=============        CMorphDict               =============
 //======================================================
 
 
 CMorphDict::CMorphDict(MorphLanguageEnum Language) : 
-	m_SearchInfoLess(m_Bases)
+    m_SearchInfoLess(m_Bases)
 {
-	m_pFormAutomat  = 0;
+    m_pFormAutomat  = 0;
 };
 
 CMorphDict::~CMorphDict() 
 {
-	if (m_pFormAutomat != 0)
-		delete m_pFormAutomat;
-	m_pFormAutomat = 0;
+    if (m_pFormAutomat != 0)
+        delete m_pFormAutomat;
+    m_pFormAutomat = 0;
 };
 
-void CMorphDict::InitAutomat(CMorphAutomat*	pFormAutomat)
+void CMorphDict::InitAutomat(CMorphAutomat*    pFormAutomat)
 {
-	assert (m_pFormAutomat == 0);
-	assert (pFormAutomat != 0);
-	m_pFormAutomat = pFormAutomat;
-};
-
-
-void	CMorphDict::GetLemmaInfos (const string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const 
-{
-	const size_t TextLength = Text.length();
-	size_t Count = 	Infos.size();
-	
-	for (size_t i=0; i<Count; i++)
-	{
-		const CAutomAnnotationInner&  A = Infos[i];
-		const CFlexiaModel& F = m_FlexiaModels[A.m_ModelNo];
-		const CMorphForm& M = F.m_Flexia[A.m_ItemNo];
-		size_t TextStartPos = TextPos+m_Prefixes[A.m_PrefixNo].length()+M.m_PrefixStr.length();
-		//string Base = Text.substr(TextStartPos, TextLength-TextStartPos-M.m_FlexiaStr.length());
-		string Base = m_Prefixes[A.m_PrefixNo]+Text.substr(TextStartPos, TextLength-TextStartPos-M.m_FlexiaStr.length());
-
-		vector<CLemmaInfoAndLemma>::const_iterator start = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo];
-		vector<CLemmaInfoAndLemma>::const_iterator end = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo+1];
-
-		vector<CLemmaInfoAndLemma>::const_iterator it =  
-			lower_bound (start,  end, Base.c_str(), m_SearchInfoLess);
-		
-	
-		assert (it != m_LemmaInfos.end());
-		{
-			int LemmaStrNo = it->m_LemmaStrNo;
-			assert (Base == m_Bases[LemmaStrNo].GetString());
-		}
-
-		Infos[i].m_LemmaInfoNo = it-m_LemmaInfos.begin();
-
-	};
-
+    assert (m_pFormAutomat == 0);
+    assert (pFormAutomat != 0);
+    m_pFormAutomat = pFormAutomat;
 };
 
 
-
-void	CMorphDict::PredictBySuffix (const string& Text, size_t& TextPos, size_t MinimalPredictSuffixlen, vector<CAutomAnnotationInner>& Infos) const 
+void    CMorphDict::GetLemmaInfos (const string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const 
 {
-	size_t Count = Text.length();
-	
-	for (TextPos=1; TextPos+MinimalPredictSuffixlen<=Count; TextPos++)
-	{
-		m_pFormAutomat->GetInnerMorphInfos(Text, TextPos, Infos);
-		if (!Infos.empty()) break;
-	};
-	
+    const size_t TextLength = Text.length();
+    size_t Count =     Infos.size();
+    
+    for (size_t i=0; i<Count; i++)
+    {
+        const CAutomAnnotationInner&  A = Infos[i];
+        const CFlexiaModel& F = m_FlexiaModels[A.m_ModelNo];
+        const CMorphForm& M = F.m_Flexia[A.m_ItemNo];
+        size_t TextStartPos = TextPos+m_Prefixes[A.m_PrefixNo].length()+M.m_PrefixStr.length();
+        //string Base = Text.substr(TextStartPos, TextLength-TextStartPos-M.m_FlexiaStr.length());
+        string Base = m_Prefixes[A.m_PrefixNo]+Text.substr(TextStartPos, TextLength-TextStartPos-M.m_FlexiaStr.length());
+
+        vector<CLemmaInfoAndLemma>::const_iterator start = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo];
+        vector<CLemmaInfoAndLemma>::const_iterator end = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo+1];
+
+        vector<CLemmaInfoAndLemma>::const_iterator it =  
+            lower_bound (start,  end, Base.c_str(), m_SearchInfoLess);
+        
+    
+        assert (it != m_LemmaInfos.end());
+        {
+            int LemmaStrNo = it->m_LemmaStrNo;
+            assert (Base == m_Bases[LemmaStrNo].GetString());
+        }
+
+        Infos[i].m_LemmaInfoNo = it-m_LemmaInfos.begin();
+
+    };
+
+};
+
+
+
+void    CMorphDict::PredictBySuffix (const string& Text, size_t& TextPos, size_t MinimalPredictSuffixlen, vector<CAutomAnnotationInner>& Infos) const 
+{
+    size_t Count = Text.length();
+    
+    for (TextPos=1; TextPos+MinimalPredictSuffixlen<=Count; TextPos++)
+    {
+        m_pFormAutomat->GetInnerMorphInfos(Text, TextPos, Infos);
+        if (!Infos.empty()) break;
+    };
+    
 };
 
 
@@ -86,22 +86,22 @@ void	CMorphDict::PredictBySuffix (const string& Text, size_t& TextPos, size_t Mi
 
 inline size_t get_size_in_bytes (const CLemmaInfoAndLemma& t)
 {
-	return		get_size_in_bytes(t.m_LemmaInfo) 
-		+	get_size_in_bytes(t.m_LemmaStrNo);
+    return        get_size_in_bytes(t.m_LemmaInfo) 
+        +    get_size_in_bytes(t.m_LemmaStrNo);
 };
 
 inline size_t save_to_bytes(const CLemmaInfoAndLemma& t, BYTE* buf)
 {
-	buf += save_to_bytes(t.m_LemmaInfo, buf);
-	buf += save_to_bytes(t.m_LemmaStrNo, buf);
-	return get_size_in_bytes(t);
+    buf += save_to_bytes(t.m_LemmaInfo, buf);
+    buf += save_to_bytes(t.m_LemmaStrNo, buf);
+    return get_size_in_bytes(t);
 };
 
 inline size_t restore_from_bytes(CLemmaInfoAndLemma& t, const BYTE* buf)
 {
-	buf += restore_from_bytes(t.m_LemmaInfo, buf);
-	buf += restore_from_bytes(t.m_LemmaStrNo, buf);
-	return get_size_in_bytes(t);
+    buf += restore_from_bytes(t.m_LemmaInfo, buf);
+    buf += restore_from_bytes(t.m_LemmaStrNo, buf);
+    return get_size_in_bytes(t);
 };
 
 
@@ -114,157 +114,146 @@ inline size_t restore_from_bytes(CLemmaInfoAndLemma& t, const BYTE* buf)
 //    that flexia model i is not used. To delete unused models the dictionary should be packed.
 void CMorphDict::CreateModelsIndex()
 {
-	m_ModelsIndex.clear();
-	if (m_LemmaInfos.empty()) return;
+    m_ModelsIndex.clear();
+    if (m_LemmaInfos.empty()) return;
 
-	m_ModelsIndex.resize(m_FlexiaModels.size() + 1);
+    m_ModelsIndex.resize(m_FlexiaModels.size() + 1);
 
-	int CurrentModel  = m_LemmaInfos[0].m_LemmaInfo.m_FlexiaModelNo;
-	m_ModelsIndex[CurrentModel] = 0;
+    int CurrentModel  = m_LemmaInfos[0].m_LemmaInfo.m_FlexiaModelNo;
+    m_ModelsIndex[CurrentModel] = 0;
 
-	for (size_t i=0; i< m_LemmaInfos.size(); i++)
-			for (; CurrentModel < m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo; CurrentModel++ )
-			{
-				//int debug = m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo;
-				m_ModelsIndex[CurrentModel+1] = i;
-			};
-	
-	for (; CurrentModel < m_FlexiaModels.size(); CurrentModel++ )
-		m_ModelsIndex[CurrentModel+1] = m_LemmaInfos.size();
-#ifdef DEBUG	
-	for (size_t i=0; i< m_LemmaInfos.size(); i++)
-	{
-		int debug = m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo;
-		assert (m_ModelsIndex[debug] <= i);
-		assert (i < m_ModelsIndex[debug+1]);
-	};
+    for (size_t i=0; i< m_LemmaInfos.size(); i++)
+            for (; CurrentModel < m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo; CurrentModel++ )
+            {
+                //int debug = m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo;
+                m_ModelsIndex[CurrentModel+1] = i;
+            };
+    
+    for (; CurrentModel < m_FlexiaModels.size(); CurrentModel++ )
+        m_ModelsIndex[CurrentModel+1] = m_LemmaInfos.size();
+#ifdef DEBUG    
+    for (size_t i=0; i< m_LemmaInfos.size(); i++)
+    {
+        int debug = m_LemmaInfos[i].m_LemmaInfo.m_FlexiaModelNo;
+        assert (m_ModelsIndex[debug] <= i);
+        assert (i < m_ModelsIndex[debug+1]);
+    };
 #endif
 };
 
+static size_t getCount(std::ifstream& mrdFile, const char* sectionName) {
+    string line;
+    if (!getline(mrdFile, line)) {
+        throw CExpc("Cannot get size of section  %s", sectionName);
+    }
+    return atoi( line.c_str() );
+}
+
 bool CMorphDict::Load(string GrammarFileName)
 {
-	//fprintf (stderr," open %s\n", GrammarFileName.c_str());
-	if (!m_pFormAutomat->Load(MakeFName(GrammarFileName,"forms_autom")))
-		return false;
+    //fprintf (stderr," open %s\n", GrammarFileName.c_str());
+    if (!m_pFormAutomat->Load(MakeFName(GrammarFileName,"forms_autom")))
+        return false;
 
-	string PrecompiledFile = MakeFName(GrammarFileName,"annot");
-	FILE * fp = fopen(PrecompiledFile.c_str(), "rb");
-	if (!fp)
-	{
-		ErrorMessage (Format("Cannot open %s", PrecompiledFile.c_str()));
-		return false;
-	};
-	int Count;
-	char buffer[256];
-#ifdef BOOST
-	ReadAllModels_mt(fp , m_FlexiaModels, m_AccentModels, m_Prefixes);
-#else
-	ReadFlexiaModels(fp, m_FlexiaModels);
+    string PrecompiledFile = MakeFName(GrammarFileName,"annot");
+    std::ifstream annotFile(PrecompiledFile, ios::binary);
+    if (!annotFile.is_open() )
+    {
+        ErrorMessage (Format("Cannot open %s", PrecompiledFile.c_str()));
+        return false;
+    };
+    ReadFlexiaModels(annotFile, m_FlexiaModels);
+    ReadAccentModels(annotFile, m_AccentModels);
 
-	ReadAccentModels(fp, m_AccentModels);
+    {
+       size_t count = getCount(annotFile, "prefix sets");
+       m_Prefixes.resize(1, "");
+       for (size_t num = 0; num < count; num++)
+       {
+           string q;
+           if (!getline(annotFile, q)) return false;
+           Trim(q);
+           assert (!q.empty());
+           m_Prefixes.push_back(q);
+        };
+    }
 
+    {
+        size_t count = getCount(annotFile, "lemma infos");
+        m_LemmaInfos.clear();
+        ReadVectorInner(annotFile, m_LemmaInfos, count);
+    }
 
-	
+    {
+        size_t count = getCount(annotFile, "nps infos");
+        m_NPSs.clear();
+        ReadVectorInner(annotFile, m_NPSs, count);
+        assert (m_NPSs.size()  == m_FlexiaModels.size());
+    }
 
-	{
-		if (!fgets(buffer, 256, fp)) return false;
-		Count = atoi(buffer);
-	}
-	// add empty prefix
-	m_Prefixes.resize(1,"");
-	for (size_t i=0; i < Count; i++)
-	{
-		char buffer[256];
-		if (!fgets(buffer, 256, fp)) return false;
-		string q = buffer;
-		Trim(q);
-		assert (!q.empty());
-		m_Prefixes.push_back(q);
-	};
-	//fprintf (stderr, "m_Prefixes %f\n", (double)(clock() - m_TimeSpan));	
-#endif
-	{
-		if (!fgets(buffer, 256, fp)) return false;
-		Count = atoi(buffer);
-	}
-	m_LemmaInfos.clear();
-	ReadVectorInner(fp, m_LemmaInfos, Count);
+    m_Bases.ReadShortStringHolder(MakeFName(GrammarFileName,"bases"));
 
+    CreateModelsIndex();
 
-	{
-		if (!fgets(buffer, 256, fp)) return false;
-		Count = atoi(buffer);
-	}
-
-	m_NPSs.clear();
-	ReadVectorInner(fp, m_NPSs, Count);
-	assert (m_NPSs.size()  == m_FlexiaModels.size());
-
-	fclose(fp);
-
-	m_Bases.ReadShortStringHolder(MakeFName(GrammarFileName,"bases"));
-
-	CreateModelsIndex();
-
-	return true;
+    return true;
 };
 
 bool CMorphDict::Save(string GrammarFileName) const
 {
-	try {
-		if (!m_pFormAutomat->Save(MakeFName(GrammarFileName,"forms_autom")))
-		{
-			ErrorMessage (Format("Cannot write to %s", MakeFName(GrammarFileName,"forms_autom").c_str()));
-			return false;
-		}
+    try {
+        if (!m_pFormAutomat->Save(MakeFName(GrammarFileName,"forms_autom")))
+        {
+            ErrorMessage (Format("Cannot write to %s", MakeFName(GrammarFileName,"forms_autom").c_str()));
+            return false;
+        }
 
 
-		string PrecompiledFile = MakeFName(GrammarFileName,"annot");
-		FILE * fp = fopen(PrecompiledFile.c_str(), "wb");
-		if (!fp)
-		{
-			ErrorMessage (Format("Cannot write to %s", PrecompiledFile.c_str()));
-			return false;
-		};
+        string PrecompiledFile = MakeFName(GrammarFileName,"annot");
+        FILE * fp = fopen(PrecompiledFile.c_str(), "wb");
+        if (!fp)
+        {
+            ErrorMessage (Format("Cannot write to %s", PrecompiledFile.c_str()));
+            return false;
+        };
 
-		
+        
 
-		WriteFlexiaModels(fp, m_FlexiaModels);
+        WriteFlexiaModels(fp, m_FlexiaModels);
 
-		WriteAccentModels(fp, m_AccentModels);
+        WriteAccentModels(fp, m_AccentModels);
 
-		
-		assert (!m_Prefixes.empty() && m_Prefixes[0].empty());
-		// do not write the first empty prefix, instead add it manually each time during loading
-		fprintf(fp, "%i\n", m_Prefixes.size()-1);
+        
+        assert (!m_Prefixes.empty() && m_Prefixes[0].empty());
+        // do not write the first empty prefix, instead add it manually each time during loading
+        fprintf(fp, "%i\n", m_Prefixes.size()-1);
 
-		for (size_t i=1; i < m_Prefixes.size(); i++)
-			fprintf (fp, "%s\n",m_Prefixes[i].c_str());
-		
+        for (size_t i=1; i < m_Prefixes.size(); i++)
+            fprintf (fp, "%s\n",m_Prefixes[i].c_str());
+        
 
-		fprintf(fp, "%i\n", m_LemmaInfos.size());
-		if (!WriteVectorInner(fp, m_LemmaInfos)) return false;
+        fprintf(fp, "%i\n", m_LemmaInfos.size());
+        if (!WriteVectorInner(fp, m_LemmaInfos)) return false;
 
-		assert (m_NPSs.size()  == m_FlexiaModels.size());
-		fprintf(fp, "%i\n", m_NPSs.size());
-		if (!WriteVectorInner(fp, m_NPSs)) return false;
-		
+        assert (m_NPSs.size()  == m_FlexiaModels.size());
+        fprintf(fp, "%i\n", m_NPSs.size());
+        if (!WriteVectorInner(fp, m_NPSs)) return false;
+        
 
-		fclose(fp);
+        fclose(fp);
 
-		if (!m_Bases.WriteShortStringHolder(MakeFName(GrammarFileName,"bases")))
-		{
-			fprintf(stderr, "Cannot save bases\n");
-			return false;
-		};
+        if (!m_Bases.WriteShortStringHolder(MakeFName(GrammarFileName,"bases")))
+        {
+            fprintf(stderr, "Cannot save bases\n");
+            return false;
+        };
 
-		return true;
-	}
-	catch (...)
-	{
-		fprintf (stderr, "Cannot save CMorphDict");
-		return false;
-	};
+        return true;
+    }
+    catch (...)
+    {
+        fprintf (stderr, "Cannot save CMorphDict");
+        return false;
+    };
 };
 
 
