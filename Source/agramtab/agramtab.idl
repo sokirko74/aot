@@ -7,6 +7,7 @@
 import "oaidl.idl";
 import "ocidl.idl";
 
+
 	[
 		object,
 		uuid(ECD62F7D-19B6-11D3-A77A-2679A7000000),
@@ -38,6 +39,8 @@ import "ocidl.idl";
 		[id(19), helpstring("method ProcessPOSAndGrammemsIfCan")] HRESULT ProcessPOSAndGrammemsIfCan([in]BSTR in, [out] BYTE* PartOfSpeech, [out]  hyper* Grammems, [out,retval] BOOL* Result);
 	};
 
+
+
 [
 	uuid(ECD62F71-19B6-11D3-A77A-2679A7000000),
 	version(1.0),
@@ -50,11 +53,7 @@ library AGRAMTABLib
 	#include "../AgramtabLib/rus_consts.h"
 	#include "../AgramtabLib/ger_consts.h"
 	#include "../AgramtabLib/eng_consts.h"
-	
-
-
-
-
+		
 	[
 		uuid(ECD62F7E-19B6-11D3-A77A-2679A7000000),
 		helpstring("RusGramTab Class")

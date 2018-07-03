@@ -20,7 +20,7 @@
 		#define DEBUG_NEW new(THIS_FILE, __LINE__)
 	#endif
 	
-
+	#define NOMINMAX 
 	#include "windows.h"
 	#include "winuser.h"
 #endif

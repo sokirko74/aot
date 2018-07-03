@@ -2,15 +2,10 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
-#ifndef bserialze_h
- #define bserialze_h
+#pragma once
 
 #include  "utilit.h"
-#ifdef BOOST
-#include <boost/thread.hpp>
-#include <boost/array.hpp>
-#include <cstdio>
-#endif
+#include  <fstream>
 
 // ============== DWORD =====================
 inline size_t get_size_in_bytes (const DWORD& t)
@@ -236,19 +231,6 @@ bool BinaryReadItem (FILE* fp, T& V)
     restore_from_bytes (V, buffer);
     return true;
 }
-#ifdef BOOST
-template <class T>
-void tt(vector< boost::array<BYTE,VectorMaxStructSize>>* sss, vector<T>* V)
-{
-	vector< boost::array<BYTE,VectorMaxStructSize>> ss = (*sss);
-	T dummy;
-	for(int num = 0; num < ss.size(); num++)
-	{
-		restore_from_bytes (dummy, &(ss[num])[0]);
-		(*V).push_back(dummy);
-	}
-}
-#endif
 
 template <class T>
 void ReadVectorInner (FILE* fp, vector<T>& V, size_t Count)
@@ -265,30 +247,6 @@ void ReadVectorInner (FILE* fp, vector<T>& V, size_t Count)
 
 		BYTE buffer[VectorMaxStructSize];
 		assert (size_of_t < VectorMaxStructSize);
-#ifdef BOOST2
-		if(Count > 100000)
-		{
-			using namespace boost; 
-			const int tc = 4;
-			vector< boost::array<BYTE,VectorMaxStructSize> > ss[tc];
-			vector<T> FF[tc];
-			thread t[tc];
-			int q = 0;
-			for (int i = 0; i < Count; i++)
-			{
-				if (fread ((void*)buffer, size_of_t, 1, fp)!=1)
-					throw CExpc(Format("cannot read %i item in ReadVectorInner",i));
-				boost::array<BYTE,VectorMaxStructSize> b2;// (&(buffer[0]));
-				std::copy(buffer, buffer + VectorMaxStructSize, b2.begin());
-				//for (int j = 0; j < VectorMaxStructSize; j++) b2[j] = buffer[j];
-				ss[q].push_back( b2 );
-				if( ss[q].size() > Count/tc ) {t[q] = thread(&tt<T>, (&ss[q]), (&FF[q])); q++;}
-			}
-			t[q] = thread(&tt<T>, (&ss[q]), (&FF[q]));
-			for(int num = 0; num < tc; num++) { t[num].join(); V.insert(V.end(), FF[num].begin(), FF[num].end());}
-			return;
-		}
-#endif
 		V.reserve(V.size() + Count);
 		if (V.capacity() < Count) 
 			throw CExpc(Format("cannot allocate %u bytes in ReadVectorInner",size_of_t*Count));
@@ -313,6 +271,42 @@ void ReadVectorInner (FILE* fp, vector<T>& V, size_t Count)
 	};
 
 };
+
+template <class T>
+void ReadVectorInner(ifstream& inputStream, vector<T>& V, size_t Count)
+{
+	try
+	{
+		T dummy;
+		size_t size_of_t = get_size_in_bytes(dummy);
+
+		BYTE buffer[VectorMaxStructSize];
+		assert(size_of_t < VectorMaxStructSize);
+		V.reserve(V.size() + Count);
+		if (V.capacity() < Count)
+			throw CExpc(Format("cannot allocate %u bytes in ReadVectorInner", size_of_t*Count));
+
+		for (int i = 0; i < Count; i++)
+		{
+			if (!inputStream.read((char*)buffer, size_of_t))
+				throw CExpc(Format("cannot read %i item in ReadVectorInner", i));
+			restore_from_bytes(dummy, buffer);
+			V.push_back(dummy);
+		};
+	}
+	catch (length_error  &e)
+	{
+		fprintf(stderr, "ReadVectorInner:length_error exception is caught: %s\n", e.what());
+		throw;
+	}
+	catch (exception &e)
+	{
+		fprintf(stderr, "ReadVectorInner: general std::exception is caught: %s\n", e.what());
+		throw;
+	};
+
+};
+
 
 template <class T>
 size_t GetSizeInBytes()
@@ -397,7 +391,4 @@ inline bool WriteVector (const string& FileName, const vector<T>& V)
 	fclose (fp);
 	return b;
 };
-
-#endif
-
 

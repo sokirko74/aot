@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "string.h"
 #include <string>
-#import "../../bin/graphan.tlb"
+#import "../graphan/graphan.tlb"
 
 
 

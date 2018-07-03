@@ -10,12 +10,6 @@
 
 #include "Splash.h"
 
-#ifdef DETECT_MEMORY_LEAK
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 
 #define INLANG_ALL		0
 #define INLANG_RUSSIAN	1

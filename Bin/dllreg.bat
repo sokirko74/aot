@@ -1,7 +1,9 @@
-regsvr32 /s agramtab.dll
-regsvr32 /s graphan.dll
-regsvr32 /s Lemmatizer.dll
-regsvr32 /s MAPost.dll
-regsvr32 /s seman.dll
-regsvr32 /s structDict.dll
-regsvr32 /s synAn.dll
+SET rmlbin=%~dp0
+regsvr32 /s %rmlbin%graphan.dll
+regsvr32 /s %rmlbin%agramtab.dll
+regsvr32 /s %rmlbin%graphan.dll
+regsvr32 /s %rmlbin%Lemmatizer.dll
+regsvr32 /s %rmlbin%MAPost.dll
+regsvr32 /s %rmlbin%Seman.dll
+regsvr32 /s %rmlbin%StructDict.dll
+regsvr32 /s %rmlbin%SynAn.dll

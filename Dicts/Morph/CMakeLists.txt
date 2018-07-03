@@ -12,7 +12,7 @@ macro (ConvertMorph langua)
 
     add_custom_command(
         OUTPUT ${folder}/morph.bases
-        COMMAND MorphGen project.mwz . 5 3
+        COMMAND MorphGen --input project.mwz --output-folder . --postfix-len 5 --min-freq 3
         DEPENDS MorphGen morphs.mrd project.mwz gramtab.tab
         COMMENT "Convert Morphology ${langua}"                 
         WORKING_DIRECTORY ${folder}

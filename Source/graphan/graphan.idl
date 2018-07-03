@@ -6,9 +6,8 @@
 
 import "oaidl.idl";
 import "ocidl.idl";
-
-
    
+
 /** \example ../TestCOMGraphan/TestCOMGraphan.cpp */
 /** \example ../TestCOMGraphan/Test2.cpp */
 

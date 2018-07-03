@@ -16,7 +16,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
-#ifndef NO_UNISTD
+#ifndef WIN32
 #include <unistd.h>
 #endif /* NO_UNISTD */
 #include "cgic.h"

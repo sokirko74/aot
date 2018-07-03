@@ -4,7 +4,7 @@
 //      To build a separate proxy/stub DLL, 
 //      run nmake -f agramtabps.mk in the project directory.
 #pragma warning (disable  : 4530)
-#include <stdafx.h>
+#include "StdAfx.h"
 #include "agram_resource.h"
 #include <initguid.h>
 #include "agramtab.h"

@@ -3,12 +3,14 @@
 #pragma warning(disable:4786)
 #pragma warning(disable:4503)
 
-#include "../common/utilit.h"
+
 #include "../LemmatizerLib/StdMorph.h"
 #include "../LemmatizerLib/Predict.h"
 #include "../MorphWizardLib/wizard.h"
 #include "../LemmatizerLib/MorphDictBuilder.h"
 
+#include "../common/utilit.h"
+#include "../common/argparse.h"
 
 void PrintUsage()
 {
@@ -39,56 +41,50 @@ string GetPrefixPartOfSpeech (MorphLanguageEnum Langua)
 
 extern bool GenerateMorphDict(std::string filename, std::string out_path, int PostfixLength, int MinFreq);
 
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
+	parser.AddOption("--help");
+	parser.AddArgument("--input", "input file");
+	parser.AddArgument("--output-folder", "output folder");
+	parser.AddArgument("--postfix-len", "postfix len");
+	parser.AddArgument("--min-freq", "min freq");
+	parser.AddOption("--allow-russian-jo");
+	parser.AddOption("--allow-russian-jejo");
+	parser.Parse(argc, argv);
+}
 
 
 
-int main(int argc, char* argv[])
+int main(int argc, const char* argv[])
 {
-	bool bAllowRussianJo = false;
-	bool bAllowRussianJeJo = false;
-	if(argc == 6) 
-		if (string(argv[5]) == "--allow-russian-jo")
-		{
-			bAllowRussianJo = true;
-			argc = 5;
-		}
-		else		
-		if (string(argv[5]) == "--allow-russian-jejo")
-		{
-			bAllowRussianJo = true;
-			bAllowRussianJeJo = true;
-			argc = 5;
-		}
-		else
-			PrintUsage();
-
-	int PostfixLength = atoi(argv[3]);
-	if (	(PostfixLength == 0) ||  (PostfixLength > 5) )
+	ArgumentParser args;
+	initArgParser(argc, argv, args);
+	bool bAllowRussianJeJo = args.Exists("allow-russian-jejo");
+	bool bAllowRussianJo = bAllowRussianJeJo || args.Exists("allow-russian-jo");
+	int PostfixLength = atoi(args.Retrieve("postfix-len").c_str());
+	if ((PostfixLength == 0) ||  (PostfixLength > 5) )
 	{
-		printf ("PostfixLength should be between 1 and 5\n");
+		std::cerr << "PostfixLength is set to " << PostfixLength << "\n";
+		std::cerr << "PostfixLength should be between 1 and 5\n";
 		return 1;
 	};
 
-	int MinFreq  = atoi(argv[4]);
-	if (MinFreq <= 0)
-	{
-		printf ("MinFreq should be more than 0\n");
+	int MinFreq = atoi(args.Retrieve("min-freq").c_str());
+	if (MinFreq <= 0)	{
+		std::cerr << "MinFreq should be more than 0\n";
 		return 1;
 	};
 
 	std::string  Error;
-	if(!IsRmlRegistered(Error))
-	{
-		printf ("%s\n",Error.c_str());
+	if(!IsRmlRegistered(Error))	{
+		std::cerr << Error << "\n";
 		return 1;
-			
 	};
 
 
 	try{
 
 		//  adding "/" to the end of  OutputPath
-		std::string OutputPath = argv[2];
+		std::string OutputPath = args.Retrieve("output");
 		if (!OutputPath.empty())
 		{
 			char c = OutputPath[OutputPath.length() - 1];
@@ -100,7 +96,7 @@ int main(int argc, char* argv[])
 
 		MorphoWizard Wizard;
 		std::string WizardFilename = argv[1];
-		if (!Wizard.load_wizard(WizardFilename.c_str(), "guest",false))
+		if (!Wizard.load_wizard(args.Retrieve("input").c_str(), "guest", false))
 		{	
 			fprintf (stderr,"Cannot load mrd-file : %s\n", WizardFilename.c_str());
 			return 1;

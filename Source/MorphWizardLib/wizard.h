@@ -144,7 +144,7 @@ class MorphoWizard
 	MorphWizardMeter* m_pMeter;	// Nick 30.11.2003
 
 	void load_gramtab();
-	void ReadSessions (FILE* fp);
+	void ReadSessions (std::ifstream& mrdFile);
 public:
 	struct AncodeLess
 	{
@@ -281,7 +281,7 @@ private:
 	void	SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, string& form) const;
 	string	get_prefix_set_str(WORD PrefixSetNo) const;
 	void	ReadOnePrefixSet(string PrefixSet, set<string>& Result) const;
-	void	ReadPrefixSets (FILE* fp);
+	void	ReadPrefixSets (std::ifstream& mrdFile);
 	WORD	AddPrefixSet(string PrefixSetStr);
 
 	

@@ -1,0 +1,23 @@
+﻿add_library(SynAn
+COMClause.cpp
+COMClauseType.cpp
+COMClauseVariant.cpp
+COMGroup.cpp
+COMHomonym.cpp
+COMSentence.cpp
+COMSentencesCollection.cpp
+COMSyntaxHolder.cpp
+COMWord.cpp
+ComRelation.cpp
+ComRelationIterator.cpp
+StdAfx.cpp
+SynAn.cpp
+SynAn.idl
+SynAn.rc
+Unit.cpp
+)
+
+target_link_libraries(SynAn
+    SynCommonLib
+    SynanLib
+)

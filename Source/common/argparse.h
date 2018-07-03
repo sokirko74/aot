@@ -14,7 +14,7 @@
 
 class ArgumentParser {
 private:
-    class Argument;
+    struct Argument;
     typedef std::string String;
 
     String AppName;
@@ -62,7 +62,7 @@ private:
             std::ostringstream s;
             String uname = upper(Name);
             if (Optional) s << "[";
-            if (not Final) {
+            if (!Final) {
                 s << "--" << Name;
                 s << " ";
             }
@@ -85,10 +85,10 @@ private:
     }
 
     const Argument* FindNotFreeArgument(String name) const {
-        if (name.length() > 2 and name.substr(0,2) == "--") {
+        if ((name.length() > 2) && (name.substr(0,2) == "--")) {
             name = name.substr(2);
             for (auto &a: Arguments) {
-                if (not a.Final) {
+                if (!a.Final) {
                     if (name == a.Name) {
                         return &a;
                     }
@@ -100,10 +100,10 @@ private:
 
     void CheckValidAndInitCommon()  {
         for (auto& a : Arguments) {
-            if (!a.Optional and !Exists(a.Name)) {
+            if (!a.Optional && !Exists(a.Name)) {
                 ArgumentError(String("argument is missing: ") + a.Name);
             }
-            if (Exists(a.Name) and a.MustHaveValue and Retrieve(a.Name).empty()) {
+            if (Exists(a.Name) && a.MustHaveValue && Retrieve(a.Name).empty()) {
                 ArgumentError(String("argument value is missing: ") + a.Name);
             }
             if (a.Name == "language") {
@@ -164,7 +164,7 @@ public:
                 if (newActive) {
                     active = newActive;
                     ArgumentValues[active->Name] = "";
-                } else if (active and active->MustHaveValue) {
+                } else if (active && active->MustHaveValue) {
                     ArgumentValues[active->Name] = argStr;
                     active = nullptr;
                 } else {
@@ -220,13 +220,13 @@ public:
 
         // get the required arguments
         for (auto arg : Arguments) {
-            if (!arg.Optional and  !arg.Final)
+            if (!arg.Optional &&  !arg.Final)
                 help << indent << arg.ToString() << "\n";
         }
 
         // get the Optional arguments
         for (auto arg : Arguments) {
-            if (arg.Optional and !arg.Final )
+            if (arg.Optional && !arg.Final )
                 help << indent << arg.ToString() << "\n";
         }
 

@@ -7,14 +7,6 @@
 #include "Splash.h"
 #include "../common/utilit.h"
 
-#ifdef DETECT_MEMORY_LEAK
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
-/////////////////////////////////////////////////////////////////////////////
-// CDemoApp
 
 
 BEGIN_MESSAGE_MAP(CDemoApp, CWinApp)
