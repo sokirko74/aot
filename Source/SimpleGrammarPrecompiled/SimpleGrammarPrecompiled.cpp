@@ -1,6 +1,10 @@
 #include "../SimpleGrammarLib/SimpleGrammar.h"
 #include "../LemmatizerLib/MorphologyHolder.h"
 
+#ifdef WIN32
+#include <direct.h> // _getcwd
+#endif
+
 #include "../common/argparse.h"
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {

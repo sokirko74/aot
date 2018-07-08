@@ -157,7 +157,7 @@ int main(int argc, const char **argv) {
     initArgParser(argc, argv, args);
     MorphLanguageEnum  Language = args.GetLanguage();
 
-    bPrintIds = not args.Exists("no-ids");
+    bPrintIds = !args.Exists("no-ids");
     bPrintForms = args.Exists("forms");
     bSortParadigms = args.Exists("sort");
     bool bEchoInput = args.Exists("echo");

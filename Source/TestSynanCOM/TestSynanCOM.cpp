@@ -3,7 +3,7 @@
  The program processes a sentence, and then prints all found syntax groups 
 
 */
-#include "../common/COMSyntaxHolder.h"
+#include "../SynAn/COMSyntaxHolder.h"
 #include "../common/utilit.h"
 
 int main(int argc, char* argv[])

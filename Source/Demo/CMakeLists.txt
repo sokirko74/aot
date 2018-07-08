@@ -5,7 +5,7 @@ project(demo)
 add_definitions(-D_AFXDLL)
 set(CMAKE_MFC_FLAG 2)
 
-add_executable (demo WIN32
+add_executable (${PROJECT_NAME} WIN32
     Splash.cpp
     StdAfx.cpp
     demo.cpp
@@ -13,8 +13,17 @@ add_executable (demo WIN32
     demoDlg.cpp
 )
 
-target_link_libraries(demo 
+add_dependencies(${PROJECT_NAME} 
     Lemmatizer
 )
 
-add_dependencies (demo MorphDicts)
+target_link_libraries(${PROJECT_NAME}
+    aot_common
+)
+
+CopyExe(${PROJECT_NAME})
+
+
+if (BUILD_DICTS)
+    add_dependencies (${PROJECT_NAME} MorphDicts)
+endif()

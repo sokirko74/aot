@@ -6,8 +6,6 @@
 #include "ComSemRelation.h"
 #include "SemStructure.h"
 
-extern bool CheckPersonalLicense();
-
 CSemStructure::CSemStructure() 
 {
 	m_CurrentSentence = 0;
@@ -20,22 +18,13 @@ CSemStructure::~CSemStructure()
 
 STDMETHODIMP CSemStructure::InitPresemanDicts()
 {
-	if (!CheckPersonalLicense())
-		if (!CheckEvaluationTime())
-			return E_FAIL;
-
 	if (!m_RusStr.m_pData->Init()) 
 		return E_FAIL; 
-
 	return S_OK;
 }
 
 STDMETHODIMP CSemStructure::InitSemanDicts()	
 {
-	if (!CheckPersonalLicense())
-		if (!CheckEvaluationTime())
-			return E_FAIL;
-
 	m_RusStr.m_pData->m_bSilentMode = true;
 	try {
 	   m_RusStr.m_pData->Initialize();

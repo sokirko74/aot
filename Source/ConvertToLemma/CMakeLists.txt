@@ -6,4 +6,6 @@ target_link_libraries(ConvertToLemma
     LemmatizerLib
 )
 
-add_dependencies (ConvertToLemma MorphDicts)
+if (BUILD_DICTS)
+    add_dependencies (ConvertToLemma MorphDicts)
+endif()

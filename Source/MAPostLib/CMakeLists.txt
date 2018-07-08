@@ -13,5 +13,8 @@ target_link_libraries(MAPostLib
     TrigramLib
 )
 
-add_dependencies (MAPostLib MorphDicts TrigramData)
+if (BUILD_DICTS)
+    add_dependencies (MAPostLib MorphDicts TrigramData)
+endif()
+
 

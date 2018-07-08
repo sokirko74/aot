@@ -1,6 +1,7 @@
 %{
 
-#define chunk_query_l
+//#define chunk_query_l
+#define YY_NO_UNISTD_H
 #include "ChunkParser.h"
 #include "chunker_yacc.hpp"
 
