@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "SemanticRusStructure.h"
+#include "../SemanLib/SemanticRusStructure.h"
 
 
 static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word, QWORD OldGrammems)

@@ -1,4 +1,13 @@
-﻿add_library(SynAn
+﻿project (SynAn)
+
+list (APPEND LIB_DEPENDS 
+    SynCommonLib
+    SynanLib
+)
+ 
+CompileIDL(${PROJECT_NAME})
+
+add_library(${PROJECT_NAME} SHARED
 COMClause.cpp
 COMClauseType.cpp
 COMClauseVariant.cpp
@@ -17,7 +26,9 @@ SynAn.rc
 Unit.cpp
 )
 
-target_link_libraries(SynAn
-    SynCommonLib
-    SynanLib
+
+target_link_libraries(${PROJECT_NAME}
+    ${LIB_DEPENDS}
 )
+
+

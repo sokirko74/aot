@@ -26,4 +26,6 @@ TestLemLang(Russian)
 TestLemLang(German)
 TestLemLang(English)
 
-add_dependencies (TestLem MorphDicts)
+if (BUILD_DICTS)
+    add_dependencies (TestLem MorphDicts)
+endif()

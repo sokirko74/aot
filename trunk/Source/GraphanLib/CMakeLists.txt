@@ -25,4 +25,6 @@ target_link_libraries(GraphanLib
     RmlThesLib
 )
 
-add_dependencies (GraphanLib Obor GerObor EngObor)
+if (BUILD_DICTS)
+    add_dependencies (GraphanLib Obor GerObor EngObor)
+endif()

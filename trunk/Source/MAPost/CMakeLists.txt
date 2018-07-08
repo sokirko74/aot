@@ -1,7 +1,8 @@
 project(MAPost)
 
 list (APPEND LIB_DEPENDS 
-     MAPostLib
+    MAPostLib
+    GerPostMorph
 )
 
 CompileIDL(${PROJECT_NAME})

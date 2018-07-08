@@ -6,8 +6,11 @@ add_library (GerPostMorph GermanPostMorph.cpp)
 
 target_link_libraries(GerPostMorph 
     LemmatizerLib
+    SimpleGrammarLib
 )
 
-add_dependencies (GerPostMorph 
-    GermanGLRSynan
-)
+if (BUILD_DICTS)
+    add_dependencies (GerPostMorph 
+        GermanGLRSynan
+    )
+endif()

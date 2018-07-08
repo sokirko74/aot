@@ -6,8 +6,8 @@
 
 #define YYDEBUG 1
 
-#ifndef chunk_query_l
-	#include "MyFlexLexer.h"
+#ifndef yyFlexLexerOnce
+	#include <FLexLexer.h>
 #endif
 
 

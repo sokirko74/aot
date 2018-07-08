@@ -27,18 +27,29 @@ target_link_libraries(SimpleGrammarLib
     LemmatizerLib
 )
 
-add_custom_command(OUTPUT chunker_yacc.cpp chunker_yacc.hpp
+if (WIN32) 
+    SET (WIN_FLEX_FOLDER C:/Users/sokirko/Downloads/winflex) # download from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
+    SET (FLEX_TOOL ${WIN_FLEX_FOLDER}/win_flex) 
+    SET (BISON_TOOL ${WIN_FLEX_FOLDER}/win_bison) 
+    include_directories (AFTER ${WIN_FLEX_FOLDER})
+else()
+    SET (FLEX_TOOL flex) 
+    SET (BISON_TOOL bison) 
+endif()
+
+add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/chunker_yacc.cpp chunker_yacc.hpp
     DEPENDS chunker.y
-	COMMAND bison -d -ochunker_yacc.cpp chunker.y 
+	COMMAND ${BISON_TOOL} -d -ochunker_yacc.cpp chunker.y 
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM
 )
 
-add_custom_command( OUTPUT chunker_lex.cpp
-    DEPENDS chunker.l chunker_yacc.hpp
-	COMMAND flex -ochunker_lex.cpp -d chunker.l
+add_custom_command( OUTPUT ${PROJECT_SOURCE_DIR}/chunker_lex.cpp
+    DEPENDS chunker.l chunker_yacc.hpp                              
+	COMMAND ${FLEX_TOOL} -ochunker_lex.cpp -d chunker.l
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM
 )
+
 
 

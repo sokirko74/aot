@@ -18,4 +18,6 @@ target_link_libraries(SynanLib
     EngSynanLib
 )
 
-add_dependencies(SynanLib Ross)
+if (BUILD_DICTS)
+    add_dependencies(SynanLib Ross)
+endif()
