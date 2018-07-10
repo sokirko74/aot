@@ -10,14 +10,14 @@
 #ifndef COMSyntaxHolder
 #define COMSyntaxHolder
 
-#include "../common/utilit.h"
+#include "../utilit.h"
 #include <comdef.h>
 #include <atlbase.h>
-#import "../../bin/Lemmatizer.tlb"
-#import "../../bin/MAPost.tlb"
-#import "../../bin/Agramtab.tlb"
-#import "../../bin/Graphan.tlb"
-#import "../../bin/Synan.tlb"
+#import "../../../Bin/Lemmatizer.tlb"
+#import "../../../Bin/MAPost.tlb"
+#import "../../../Bin/Agramtab.tlb"
+#import "../../../Bin/Graphan.tlb"
+#import "../../../Bin/Synan.tlb"
 
 class CCOMSyntaxHolder
 {

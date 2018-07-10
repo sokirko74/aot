@@ -6,7 +6,6 @@
 #include "COMGroup.h"
 
 
-
 STDMETHODIMP CCOMGroup::get_TypeStr(BSTR* pVal)
 {
 	try

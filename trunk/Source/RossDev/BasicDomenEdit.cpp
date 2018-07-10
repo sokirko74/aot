@@ -253,7 +253,7 @@ void CBasicDomainEdit::OnButton1()
 	if (D.DoModal() != IDOK) return;
 	FILE* fp = fopen (D.GetPathName(), "wb");
 	for (size_t i = 0; i < m_List.GetItemCount(); i++)
-		fprintf (fp, "%s\r\n", m_List.GetItemText(i, 0));
+		fprintf (fp, "%s\r\n", (const char*)m_List.GetItemText(i, 0));
 	fclose(fp);
 }
 

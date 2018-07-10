@@ -28,13 +28,7 @@ target_link_libraries(SimpleGrammarLib
 )
 
 if (WIN32) 
-    SET (WIN_FLEX_FOLDER C:/Users/sokirko/Downloads/winflex) # download from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
-    SET (FLEX_TOOL ${WIN_FLEX_FOLDER}/win_flex) 
-    SET (BISON_TOOL ${WIN_FLEX_FOLDER}/win_bison) 
     include_directories (AFTER ${WIN_FLEX_FOLDER})
-else()
-    SET (FLEX_TOOL flex) 
-    SET (BISON_TOOL bison) 
 endif()
 
 add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/chunker_yacc.cpp chunker_yacc.hpp
