@@ -10,7 +10,6 @@ import "ocidl.idl";
 typedef enum {	idlFinance = 1, idlComputer = 2, idlLiterature = 4	} idlSubjectEnum;
 typedef enum {	idlRussian = 1, idlEnglish = 2, idlGerman = 3} idlMorphLanguageEnum;
 
-
 	[
 		object,
 		uuid(8D229F36-FD73-11D2-9C9F-00105A68BAF2),

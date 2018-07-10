@@ -105,6 +105,17 @@ IF (MSVC)
 
     endmacro()
 
+    macro(CopyAndRegsvr Project)
+        add_custom_command(
+            TARGET ${Project}
+            POST_BUILD        
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(OutDir)${Project}.dll ${CMAKE_SOURCE_DIR}/Bin
+            COMMAND echo "regsvr32 /s ${CMAKE_SOURCE_DIR}/Bin/${Project}.dll (need admin rights))"
+            COMMAND regsvr32 /s ${CMAKE_SOURCE_DIR}/Bin/${Project}.dll
+            VERBATIM
+        )
+    endmacro()
+
     macro(CopyExe Project)
         add_custom_command(
             TARGET ${Project}
@@ -113,15 +124,6 @@ IF (MSVC)
             VERBATIM
         )
 
-    endmacro()
-
-    macro(Regsvr32 Project)
-        add_custom_command(
-            TARGET ${Project}
-            POST_BUILD        
-            COMMAND echo "skip registering ${CMAKE_SOURCE_DIR}/Bin/${Project}.dll (need admin rights), run $RML/Bin/dllreg.bat manually with admin rights)"
-            VERBATIM
-        )
     endmacro()
 
     add_subdirectory (agramtab)
@@ -136,8 +138,8 @@ IF (MSVC)
     add_subdirectory (TestLemmatizerCOM)
     add_subdirectory (TestSemanCOM)
     add_subdirectory (TestSynanCOM)
-    #add_subdirectory (VisualSynan)
-    #add_subdirectory (RossDev)
+    add_subdirectory (VisualSynan)
+    add_subdirectory (RossDev)
 ELSE(WIN32)
     add_subdirectory (SemanDaemon)
     add_subdirectory (SemanDmnLib)

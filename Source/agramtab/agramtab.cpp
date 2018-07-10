@@ -12,7 +12,6 @@
 #include "agramtab_i.c"
 #include "ComGramTab.h"
 
-
 CComModule _Module; 
 
 BEGIN_OBJECT_MAP(ObjectMap)

@@ -9,7 +9,6 @@
 #include "../LemmatizerLib/Lemmatizers.h"
 
 
-
 STDMETHODIMP CCOMLemmatizer::LoadDictionariesRegistry() 
 {	
 	string strError;

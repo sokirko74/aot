@@ -12,7 +12,6 @@
 
 #include "MAPost_i.c"
 #include "MAPostCOM.h"
-//#include "TextItems_i.c"
 
 CComModule _Module;
 
