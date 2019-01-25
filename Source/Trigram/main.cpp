@@ -67,7 +67,7 @@ int mymain(int argc, char **argv)
 				fprintf(stderr, "wrong second local coef: %s\n",  argv[i]);
 				return 1;
 			};
-            fprintf(stderr, "second local coef: %i\n",  M.m_SecondLocalCoef);
+            fprintf(stderr, "second local coef: %lu\n",  M.m_SecondLocalCoef);
 		}
         else
         if (s == "--supress-morph-errors")
