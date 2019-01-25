@@ -5,7 +5,7 @@ if (EXISTS  CMakeLists.my)
     include (CMakeLists.my)
 endif()
 
-#set(BUILD_DICTS 0)  # to disable dicts rebuilding
+set(BUILD_DICTS 1)  # to disable dicts rebuilding
 
 set (RML $ENV{RML})
 
