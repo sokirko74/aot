@@ -31,7 +31,7 @@ if (WIN32)
     include_directories (AFTER ${WIN_FLEX_FOLDER})
 endif()
 
-add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/chunker_yacc.cpp chunker_yacc.hpp
+add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/chunker_yacc.cpp ${PROJECT_SOURCE_DIR}/chunker_yacc.hpp
     DEPENDS chunker.y
 	COMMAND ${BISON_TOOL} -d -ochunker_yacc.cpp chunker.y 
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
