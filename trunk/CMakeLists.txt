@@ -8,6 +8,7 @@ endif()
 set(BUILD_DICTS 1)  # to disable dicts rebuilding
 
 set (RML $ENV{RML})
+set (INSTALL_BIN_FOLDER $ENV{RML}/Bin)
 
 if (NOT RML)
     message (FATAL_ERROR "environment variable RML is not set")
