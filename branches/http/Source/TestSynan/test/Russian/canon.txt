@@ -1,0 +1,22 @@
+<chunk>
+<input>Мама мыла раму.</input>
+<sent>
+	<synvar>
+		<clause type="ГЛ_ЛИЧН">Мама мыла раму .</clause>
+		<group type="ПРЯМ_ДОП">мыла раму</group>
+	</synvar>
+	<rel name="ПРЯМ_ДОП" gramrel="дст,пе,нс,прш,жр,ед," lemmprnt="МЫТЬ" grmprnt="дст,пе,нс,прш,жр,ед," lemmchld="РАМА" grmchld="но,жр,вн,ед," > мыла -> раму </rel>
+	<rel name="ПОДЛ" gramrel="" lemmprnt="МЫТЬ" grmprnt="дст,пе,нс,прш,жр,ед," lemmchld="МАМА" grmchld="од,жр,им,ед," > мыла -> Мама </rel>
+</sent>
+</chunk>
+<chunk>
+<input>Папа ушел на работу.</input>
+<sent>
+	<synvar>
+		<clause type="ГЛ_ЛИЧН">Папа ушел на работу .</clause>
+		<group type="ПГ">на работу</group>
+	</synvar>
+	<rel name="ПГ" gramrel="вн," lemmprnt="НА" grmprnt="" lemmchld="РАБОТА" grmchld="но,жр,вн,ед," > на -> работу </rel>
+	<rel name="ПОДЛ" gramrel="" lemmprnt="УЙТИ" grmprnt="дст,нп,св,прш,мр,ед," lemmchld="ПАПА" grmchld="од,мр,им,ед," > ушел -> Папа </rel>
+</sent>
+</chunk>

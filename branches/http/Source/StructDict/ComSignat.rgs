@@ -1,0 +1,26 @@
+HKCR
+{
+	StructDict.Signat.1 = s 'Signat Class'
+	{
+		CLSID = s '{3F269912-246D-11D3-A78C-067993000000}'
+	}
+	StructDict.Signat = s 'Signat Class'
+	{
+		CLSID = s '{3F269912-246D-11D3-A78C-067993000000}'
+		CurVer = s 'StructDict.Signat.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {3F269912-246D-11D3-A78C-067993000000} = s 'Signat Class'
+		{
+			ProgID = s 'StructDict.Signat.1'
+			VersionIndependentProgID = s 'StructDict.Signat'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{FCD15161-23C4-11D3-A78B-0EEA0E000000}'
+		}
+	}
+}

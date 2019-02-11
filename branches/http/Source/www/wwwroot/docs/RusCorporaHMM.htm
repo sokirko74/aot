@@ -1,0 +1,1469 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=Generator content="Microsoft Word 11 (filtered)">
+<title>Сравнение  эффективности двух методик снятия лексической и
+морфологической неоднозначности для русского языка (скрытая модель </title>
+
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:Times;
+	panose-1:2 2 6 3 5 4 5 2 3 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h2
+	{margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+span.MsoFootnoteReference
+	{vertical-align:super;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoCommentSubject, li.MsoCommentSubject, div.MsoCommentSubject
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:Tahoma;}
+p.Paragraph, li.Paragraph, div.Paragraph
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-indent:14.2pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.AbstractHeading, li.AbstractHeading, div.AbstractHeading
+	{margin-top:0cm;
+	margin-right:17.85pt;
+	margin-bottom:0cm;
+	margin-left:17.85pt;
+	margin-bottom:.0001pt;
+	text-align:center;
+	line-height:150%;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.AbstractText, li.AbstractText, div.AbstractText
+	{margin-top:0cm;
+	margin-right:17.85pt;
+	margin-bottom:0cm;
+	margin-left:17.85pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.Address, li.Address, div.Address
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.Author, li.Author, div.Author
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	line-height:150%;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.Heading, li.Heading, div.Heading
+	{margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.InitialParagraph, li.InitialParagraph, div.InitialParagraph
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.PaperTitle, li.PaperTitle, div.PaperTitle
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	line-height:150%;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.Englishtitle, li.Englishtitle, div.Englishtitle
+	{margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-align:center;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.Default, li.Default, div.Default
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-autospace:none;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	color:black;}
+p.BodyTextIndent1, li.BodyTextIndent1, div.BodyTextIndent1
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-autospace:none;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.List1, li.List1, div.List1
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-autospace:none;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+ins
+	{text-decoration:none;}
+span.msoIns
+	{text-decoration:underline;}
+span.msoDel
+	{text-decoration:line-through;
+	color:red;}
+ /* Page Definitions */
+ @page Section1
+	{size:421.0pt 595.05pt;
+	margin:51.05pt 62.35pt 51.05pt 62.35pt;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=RU link=blue vlink=purple>
+
+<div class=Section1>
+
+<p class=PaperTitle style='line-height:110%'>Сравнение  эффективности двух
+методик снятия лексической и морфологической неоднозначности для русского языка
+(скрытая модель Маркова и синтаксический  анализатор именных групп)</p>
+
+<p class=Author>&nbsp;</p>
+
+<p class=Author>А.В. Сокирко </p>
+
+<p class=Address>Интегрум-техно, Москва, sokirko@yandex.ru</p>
+
+<p class=Address>&nbsp;</p>
+
+<p class=Author>С.Ю.Толдова </p>
+
+<p class=Author>МГУ, <span lang=EN-GB>toldova</span>@<span lang=EN-GB>pisem</span>.<span
+lang=EN-GB>net</span></p>
+
+<p class=Address>&nbsp;</p>
+
+<p class=Address>&nbsp;</p>
+
+<p class=AbstractHeading>Аннотация</p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>В работе описывается серия
+экспериментов по снятию морфологической и лексической (лемматической)
+неоднозначности с использованием скрытых моделей Маркова. Для обучения модели
+используется Национальный корпус русского языка.  Проводятся сравнения модели
+Маркова с программой, построенной на правилах, составленных вручную и с
+моделями, построенными на  других формализмах (вероятностных или гибридных).
+Авторы приходят к выводу о перспективности использования скрытых моделей
+Маркова для разрешения морфологической неоднозначности. Вместе с тем точность
+снятия лексической неоднозначности, с которой работает модель Маркова, ниже,
+чем  у других вероятностных моделей.</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=Heading style='margin-left:18.0pt;text-indent:-18.0pt'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Постановка
+задачи</p>
+
+<p class=Paragraph>Задача снятия лексической и морфологической неоднозначности(&quot;tagging&quot;)
+актуальна для многих прикладных систем.  За рубежом этой теме уделяется много
+внимания, ей посвящены сотни научных статей, изданных на протяжении нескольких
+десятков лет.  Большинство систем анализа текста, коммерческих или академических,
+ используют те или иные методы снятия неоднозначности.  В отечественных
+проектах автоматической обработки текста эта  проблема до сих пор не получила 
+должной разработки. Причиной тому послужило распространенное мнение, пришедшее,
+по-видимому, еще из 60-х годов, что неоднозначность на одном языковом уровне 
+должна решаться за счет следующего уровня, в частности, морфологическая
+неоднозначность должна  решаться на синтаксисе. Согласившись, в принципе, что
+такой подход теоретически оправдан, заметим однако, что анализаторы уровня Х
+обычно либо на порядок быстрее анализатора уровня Х+1, либо проще его на тот же
+порядок.  Можно провести аналогию, что  решать неоднозначность одного уровня на
+следующем уровне все равно, что буксировать сломавшуюся машину с помощью
+вертолета. Эффектно - но дорогостояще.   Учитывая непрактичность этого решения,
+за рубежом стали активно развиваться специализированные модули разрешения
+омонимии, которые можно разделить на:</p>
+
+<p class=Paragraph>1. Системы, построенные на правилах, составленных ручным
+способом. </p>
+
+<p class=Paragraph>2. Системы, построенные на вероятностных моделях и обученные
+на размеченных корпусах.</p>
+
+<p class=Paragraph>3. Гибридные системы, включающие как вероятностные модели,
+так  и правила.</p>
+
+<p class=Paragraph>Конечно,  системы, построенные только на большом количестве
+правил, начинают с некоторого уровня больше походить на анализаторы
+последующего уровня,  т.к. для разрешения морфологической неоднозначности
+системе в любом случае приходится строить именные группы, которые  являются уже
+синтаксической сущностью. Однако в отличие от анализаторов следующего уровня, 
+системы снятия неоднозначности, построенные на правилах, обычно работают с
+линейной скоростью.    Системы, построенные на вероятностных моделях,  
+работают медленней, но реализовать их проще, и главное, методы, которые их
+усовершенствуют,  часто переносимы с одного естественного языка на другой. Все
+вероятностные модели тренируются на размеченных корпусах, т.е. на текстах, где
+словам вручную приписана интерпретация. Размер корпуса  играет важную роль. Так
+некоторые модели могут обучаться только на небольших корпусах (полмиллиона слов
+или меньше), и обучение на больших корпусах не улучшает их, а  иногда и вредит
+качеству алгоритма.</p>
+
+<p class=Paragraph>Один из вероятностных методов - метод скрытой  марковской
+модели (HMM - Hidden Markov Model). Для английского языка, имеющего бедную
+морфологию, данный метод достигает достаточно высокой точности: порядка 98%
+(см.[12]). Простое перенесение этого метода на материал языков с более развитой
+морфологией дает обычно более низкие результаты, так, первые эксперименты на материале
+чешского языка давали точность около 95% (см.[11]). Однако низкие результаты
+первых экспериментов не  привели чешских исследователей к выводу о том, что
+метод скрытых марковских моделей не применим к языкам с сильно развитой
+морфологией, а скорее стимулировали поиск путей усовершенствования данного
+метода. Так в работе [11] было показано, как для чешского языка с 95% можно
+дойти до 95,38%. Насколько мы понимаем,  чешские исследователи не собираются
+останавливаться на достигнутых результатах.  Чешская модель относится к 
+гибридному типу, т.е. к типу, где совмещены  две технологии - технология,
+основанная на правилах, и статистическая.</p>
+
+<p class=Paragraph>Основная цель данной работы заключается в том, чтобы начать
+эксперименты по применению скрытых марковских моделей  к разрешению лексической
+и морфологической омонимии для русского языка.  Актуальность данной работы
+обуславливается использованием для обучения модели Национального корпуса
+русского языка (см. [3]), который стал доступен в таком объеме (5 млн. слов)
+только в 2005 году.  Мы будем сравнивать систему,  построенную на правилах, с
+разными модификациями системы, построенной на марковской модели.  </p>
+
+<p class=Heading>2. Морфологический анализ и наборы тегов</p>
+
+<p class=Heading style='margin:0cm;margin-bottom:.0001pt;text-indent:18.0pt'><span
+style='font-size:10.0pt;font-weight:normal'>Используемый морфологический анализ
+слова в общих чертах основан на морфологическом словаре Зализняка[2], где
+каждой словоформе приписан некоторый набор граммем, которые являются значениями
+морфологических категорий (род, число, падеж и т.д.). Этот набор обычно
+называется морфологической интерпретацией слова. Кроме этого, в словаре каждой
+морфологической интерпретации приписана нормальная форма слова (лемма). Таким
+образом, для каждой словоформы S словарь выдает набор пар &lt;M,L&gt;, где М -
+морфологическая интерпретация S, а L - лемма словоформы S. В заданном входном
+тексте, как правило, только одна морфологическая интерпретация является верной.
+Задачей нашего алгоритма - нахождение этой интерпретации, используя
+непосредственный контекст слова, или, по крайней мере, удаление некоторых
+неверных вариантов. Пусть Output(W) - множество пар &lt;M,L&gt;, которое
+осталось для слова W  после работы алгоритма. Оценивать работу алгоритма мы
+будем по трем целевым параметрам:</span></p>
+
+<p class=Heading style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:36.0pt;margin-bottom:.0001pt;text-indent:-18.0pt'><span
+style='font-size:10.0pt;font-family:Symbol;font-weight:normal'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:10.0pt;font-weight:normal'>Уровень
+оставшейся неоднозначности: число элементов в Output(W) для всех  слов текста,
+поделенное на число слов в тексте.  Если алгоритм работает однозначно, то этот
+параметр равняется 1.</span></p>
+
+<p class=Heading style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:36.0pt;margin-bottom:.0001pt;text-indent:-18.0pt'><span
+style='font-size:10.0pt;font-family:Symbol;font-weight:normal'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:10.0pt;font-weight:normal'>Лексической
+точностью алгоритма мы называем число слов текста, для которых правильная лемма
+осталась в Output(W), поделенное на общее число слов в тексте.</span></p>
+
+<p class=Heading style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:36.0pt;margin-bottom:.0001pt;text-indent:-18.0pt'><span
+style='font-size:10.0pt;font-family:Symbol;font-weight:normal'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:10.0pt;font-weight:normal'>Точностью 
+назовем число слов текста, для которых в Output(W) осталась правильная
+морфологическая интерпретация, поделенное на общее число слов в тексте.</span></p>
+
+<p class=Heading style='margin:0cm;margin-bottom:.0001pt;text-indent:18.0pt'><span
+style='font-size:10.0pt;font-weight:normal'>Для работы с моделью Маркова мы
+будем использовать понятие <u>тега</u>. Тегом мы называем  строковую константу,
+которая соответствует  некоторому множеству пар &lt;M,L&gt;.  Набором тегов мы
+называем множество тегов, которые полностью и однозначно покрывают все
+множество возможных пар &lt;M,L&gt;.  Набором полных тегов мы называем такой
+набор, где каждый тег соответствует множеству пар &lt;M<sub>max</sub>,L&gt;,
+где M<sub>max</sub> - одна из максимально полных морфологических интерпретаций 
+слова, а L - лемма, у которой есть словоформа с интерпретацией M<sub>max</sub>.
+В нашем случае набор полных тегов состоит из 900 штук.</span></p>
+
+<p class=Heading style='margin:0cm;margin-bottom:.0001pt;text-indent:18.0pt'><span
+style='font-size:10.0pt;font-weight:normal'>От размера набора тегов  сильно
+зависят скорость работы модели Маркова и ее размер.  Кроме того, при увеличении
+набора тегов, модели требуется более чем линейное увеличение размера обучающего
+корпуса.  Поэтому остается открытым вопрос  о том, какой набор тегов нужно
+использовать для максимизации значений целевых параметров алгоритма.  Можно ли сформулировать
+какие-то теоретические законы, которые определят  достаточность данного набора
+тегов для решения данного типа  неоднозначности? Наша работа не дает ответа на
+этот вопрос, мы лишь предлагаем результаты некоторых базовых экспериментов с
+разными  наборами тегов.</span></p>
+
+<b><span style='font-size:12.0pt;font-family:"Times New Roman"'><br clear=all
+style='page-break-before:always'>
+</span></b>
+
+<p class=Heading>3. Предыдущие работы</p>
+
+<p class=InitialParagraph style='text-indent:35.4pt'>К сожалению, авторам не
+известны работы по применению марковских моделей  к русскому языку, кроме [13]
+и [8].  В работе Ножова[13] была создана модель в рамках программы русификации
+продуктов компании <span lang=EN-US>Inxight</span>. Модель обучалась на
+небольшом корпусе текстов (40 тыс. слов).  Использовался средний набор тегов -
+80 штук.  Результат был достигнут довольно высокий (94,5%  - это точность
+приписывания тега слову).  Однако, к сожалению, в этой работе не указаны
+размеры и жанр тестируемого корпуса, кроме того, остаются неизвестными
+параметры модели Маркова,  которые  использовались в работе, поскольку эта
+программа является  коммерческим продуктом.</p>
+
+<p class=InitialParagraph style='text-indent:35.4pt'>В работе американских
+исследователей <span lang=EN-US>Hana</span> и <span lang=EN-US>Feldman</span>[8] 
+был проведен эксперимент по переносу модели, обученной на чешском корпусе, на
+русский язык. Был использован набор  полных тегов (900 штук). Полученная
+точность - 72,6%. Исследователи использовали лексикон (морфологический
+словарь), построенный на размеченном корпусе и снабженный довольно широкой
+функцией предсказания. Именно эта функции предсказания и была, как нам
+представляется, причиной столь низкого результата. Подтверждением  тому служит
+факт, что уровень входной морфологической неоднозначности у них составляет
+3,1,  тогда как в наших экспериментах - только 2,1.</p>
+
+<p class=Heading>4. Синтаксический анализатор именных групп Synan</p>
+
+<p class=MsoNormal>            <span style='font-size:10.0pt'>Чтобы оценить
+качество работы модели Маркова по разрешению морфологической омонимии, мы 
+сравнивали ее с поверхностным синтаксическим анализатором Synan (см [4]).  Мы учли,
+что  модуль Synan использует те же морфологический и графематический
+анализаторы, которые использовались при создании размеченной части
+Национального корпуса.  Исследователи часто пишут о невозможности сравнения
+разных систем разрешения неоднозначности, поскольку они используют разные по
+наполнению словари. В эксперименте, который описывается в этой статье, такой
+проблемы нет.</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>                Модуль Synan 
+не предназначался напрямую для разрешения омонимии. Главная его цель состояла в
+том, чтобы построить на предложении набор клауз (фрагментов), внутри которых
+нужно было выделить подлежащие со сказуемым и именные группы.  Этот модуль не
+строил полное синтаксическое дерево, поэтому в нем не использовалось,
+например,  глагольное управление для разрешения морфологической
+неоднозначности.  </span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>                В нормальном
+режиме модуль Synan разрешал морфологическую неоднозначность только на 30
+процентов (c входного уровня  неоднозначности 2,1 до выходного   - 1,7). Затем
+мы использовали еще одну модификацию Synan, когда после основной работы модуль
+выбирал самую частую для данного слова морфологическую интерпретацию, а
+остальные удалял. Последняя модификация выдавала однозначную интерпретацию, но
+с очень низкой точностью  - 88.80% (см. ниже  таблицу 3).</span></p>
+
+<p class=Heading>5. Модель Trigram</p>
+
+<p class=Default style='text-indent:18.0pt'><span style='font-size:10.0pt'>В
+основу нашей модели (рабочее название “</span><span lang=EN-US
+style='font-size:10.0pt'>Trigram</span><span style='font-size:10.0pt'>”) была
+положена модель, предложенная для чешского языка в работе [11] .  Ниже будут
+кратко определены основные параметры этой модели (детальное объяснение теории
+моделей Маркова можно найти, например, в работе </span><span lang=EN-US
+style='font-size:10.0pt'>L</span><span style='font-size:10.0pt'>.</span><span
+lang=EN-US style='font-size:10.0pt'>R</span><span style='font-size:10.0pt'>.</span><span
+lang=EN-US style='font-size:10.0pt'>Rabiner</span><span style='font-size:10.0pt'>[6]).
+Модель </span><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+style='font-size:10.0pt'>, как и работе [11], состоит из двух частей:</span></p>
+
+<p class=Default style='margin-left:36.0pt;text-indent:-18.0pt'><span
+style='font-size:10.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:10.0pt'>Трехграммная модель для тегов: </span><span
+lang=EN-US style='font-size:10.0pt'>p</span><span style='font-size:10.0pt'>(</span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span style='font-size:
+10.0pt'> | </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-2</span></sub><span style='font-size:10.0pt'>, </span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-1</span></sub><span style='font-size:10.0pt'>) –
+вероятность того, что некоторый тег  </span><span lang=EN-US style='font-size:
+10.0pt'>t<sub>i</sub></span><span style='font-size:10.0pt'> может следовать во
+входном   тексте за тегами </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-1 </span></sub><span style='font-size:10.0pt'>и </span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-2</span></sub><span style='font-size:10.0pt'>.</span></p>
+
+<p class=Default style='margin-left:36.0pt;text-indent:-18.0pt'><span
+style='font-size:10.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:10.0pt'>Биграммная  модель для словоформ: </span><span
+lang=EN-US style='font-size:10.0pt'>p</span><span style='font-size:10.0pt'>(</span><span
+lang=EN-US style='font-size:10.0pt'>w<sub>i</sub></span><span style='font-size:
+10.0pt'> | </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span
+style='font-size:10.0pt'>, </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-1</span></sub><span style='font-size:10.0pt'>) –
+вероятность того, что некоторое слово </span><span lang=EN-US style='font-size:
+10.0pt'>w<sub>i</sub></span><span style='font-size:10.0pt'> может иметь тег </span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span style='font-size:
+10.0pt'>, если предыдущему слову было приписан тег </span><span lang=EN-US
+style='font-size:10.0pt'>t<sub>i</sub></span><sub><span style='font-size:10.0pt'>-1</span></sub><span
+style='font-size:10.0pt'>. Эта модель еще называется лексической вероятностью.</span></p>
+
+<p class=Default><span style='font-size:10.0pt'>Для каждого входного
+предложения </span><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+style='font-size:10.0pt'> определяет наиболее вероятные теги каждого слова по
+следующим формулам: </span></p>
+
+<p class=Default><span style='font-size:10.0pt'>                </span><span
+lang=EN-US style='font-size:10.0pt'>T = argmax<sub>T</sub> P(W|T)P(T),</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span lang=EN-US style='font-size:
+10.0pt'>P(T) = </span><span style='font-size:10.0pt'>П</span><sub><span
+lang=EN-US style='font-size:10.0pt'>i=3..n </span></sub><span lang=EN-US
+style='font-size:10.0pt'>p<sub>smooth </sub>(t<sub>i</sub> | t<sub>i-2</sub>, t<sub>i-1</sub>)   
+</span><span style='font-size:10.0pt'>и</span><span lang=EN-US
+style='font-size:10.0pt'>                                                    (1)</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span lang=EN-US style='font-size:
+10.0pt'>P(W|T) =  </span><span style='font-size:10.0pt'>П</span><sub><span
+lang=EN-US style='font-size:10.0pt'>i=3..n </span></sub><span lang=EN-US
+style='font-size:10.0pt'>p<sub>smooth_lex </sub>(w<sub>i</sub> | t<sub>i</sub>,
+t<sub>i-1</sub>).                                </span></p>
+
+<p class=Default><span style='font-size:10.0pt'><br>
+Вероятности </span><span lang=EN-US style='font-size:10.0pt'>p<sub>smooth</sub></span><sub><span
+lang=EN-US style='font-size:10.0pt'> </span></sub><span style='font-size:10.0pt'> строятся
+с помощью сглаживания (”</span><span lang=EN-US style='font-size:10.0pt'>smoothing</span><span
+style='font-size:10.0pt'>”):<br>
+<br>
+</span></p>
+
+<p class=Default><span lang=EN-US style='font-size:10.0pt'>      p<sub>smooth </sub>(t<sub>i</sub>
+| t<sub>i-2</sub>, t<sub>i-1</sub>) = </span><span lang=EN-US style='font-size:
+10.0pt;font-family:Symbol'>l</span><sub><span lang=EN-US style='font-size:10.0pt'>3</span></sub><span
+lang=EN-US style='font-size:10.0pt'> p(t<sub>i</sub> | t<sub>i-2</sub>, t<sub>i-1</sub>)+
+</span><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+lang=EN-US style='font-size:10.0pt'>2</span></sub><span lang=EN-US
+style='font-size:10.0pt'> p(t<sub>i</sub> | t<sub>i-1</sub>) +</span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+lang=EN-US style='font-size:10.0pt'>1</span></sub><span lang=EN-US
+style='font-size:10.0pt'> p(t<sub>i</sub>),        (2)</span></p>
+
+<p class=Default><span lang=EN-US style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>где </span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>1</span></sub><span style='font-size:10.0pt'>+</span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>2</span></sub><span style='font-size:10.0pt'>+</span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>3</span></sub><span style='font-size:10.0pt'>=1. Если
+не использовать сглаживания, тогда в тех случаях, когда  некая триграмма &lt;</span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span style='font-size:
+10.0pt'>, </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-2</span></sub><span style='font-size:10.0pt'>, </span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-1</span></sub><span style='font-size:10.0pt'>&gt; ни
+разу не встречалась в обучающем корпусе, «сырая» вероятность  </span><span
+lang=EN-US style='font-size:10.0pt'>p</span><span style='font-size:10.0pt'>(</span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span style='font-size:
+10.0pt'> | </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-2</span></sub><span style='font-size:10.0pt'>, </span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-1</span></sub><span style='font-size:10.0pt'>)
+обращается в ноль, и модель не может приписать слову тег </span><span
+lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span style='font-size:
+10.0pt'>, если перед ним стояли теги </span><span lang=EN-US style='font-size:
+10.0pt'>t<sub>i</sub></span><sub><span style='font-size:10.0pt'>-2 </span></sub><span
+style='font-size:10.0pt'>и </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-1</span></sub><span style='font-size:10.0pt'>. </span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Коэффициенты
+</span><span lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>1</span></sub><span style='font-size:10.0pt'>,</span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>2</span></sub><span style='font-size:10.0pt'>,</span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>3</span></sub><span style='font-size:10.0pt'> из
+формулы (2) могут быть вычислены для всего множества триграмм, или же множество
+всех триграмм  может быть поделено на группы, и для каждой из них отдельно
+вычисляются оптимальные значения </span><span lang=EN-US style='font-size:10.0pt;
+font-family:Symbol'>l</span><sub><span style='font-size:10.0pt'>1</span></sub><span
+style='font-size:10.0pt'>,</span><span lang=EN-US style='font-size:10.0pt;
+font-family:Symbol'>l</span><sub><span style='font-size:10.0pt'>2</span></sub><span
+style='font-size:10.0pt'>,</span><span lang=EN-US style='font-size:10.0pt;
+font-family:Symbol'>l</span><sub><span style='font-size:10.0pt'>3</span></sub><span
+style='font-size:10.0pt'>.  В последнем случае говорится, что применяется
+группировка (“</span><span lang=EN-US style='font-size:10.0pt'>bucketing</span><span
+style='font-size:10.0pt'>”) триграмм.  Повышение точности алгоритма при
+использовании группировки объясняется тем, что одни  теги зависят больше от
+предыдущих тегов, чем от тегов, которые стоят через один от них. В таких
+случаях значение </span><span lang=EN-US style='font-size:10.0pt;font-family:
+Symbol'>l</span><sub><span style='font-size:10.0pt'>2 </span></sub><span
+style='font-size:10.0pt'> должно быть выше, чем значение </span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>3</span></sub><span style='font-size:10.0pt'>.
+Понятно, что возможны и обратные случаи. Алгоритм деления множества тегов на
+группы описан в работе </span><span lang=EN-US style='font-size:10.0pt'>Chen</span><span
+style='font-size:10.0pt'>[10]. Этот алгоритм там образно назван “построением
+стены из кирпича” (</span><span lang=EN-US style='font-size:10.0pt'>wall</span><span
+lang=EN-US style='font-size:10.0pt'> </span><span lang=EN-US style='font-size:
+10.0pt'>of</span><span lang=EN-US style='font-size:10.0pt'> </span><span
+lang=EN-US style='font-size:10.0pt'>bricks</span><span lang=EN-US
+style='font-size:10.0pt'> </span><span lang=EN-US style='font-size:10.0pt'>process</span><span
+style='font-size:10.0pt'>)  и базируется он на сортировке всех триграмм по
+частоте встречаемости с дальнейшей  разделением триграмм на </span><span
+lang=EN-US style='font-size:10.0pt'>N</span><span style='font-size:10.0pt'>
+групп. Внутри каждой группы вычисление  оптимальных значений </span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>1</span></sub><span style='font-size:10.0pt'>,</span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>2</span></sub><span style='font-size:10.0pt'>,</span><span
+lang=EN-US style='font-size:10.0pt;font-family:Symbol'>l</span><sub><span
+style='font-size:10.0pt'>3 </span></sub><span style='font-size:10.0pt'>осуществляется
+с помощью интерполяции удаления (“</span><span lang=EN-US style='font-size:
+10.0pt'>deleted</span><span lang=EN-US style='font-size:10.0pt'> </span><span
+lang=EN-US style='font-size:10.0pt'>interpolation</span><span style='font-size:
+10.0pt'>” см. [16]) .</span></p>
+
+<p class=Default><span style='font-size:10.0pt'>                Для сглаживания
+лексической вероятности мы использовали схожую формулу из работы </span><span
+lang=EN-US style='font-size:10.0pt'>Thede</span><span style='font-size:10.0pt'>&amp;</span><span
+lang=EN-US style='font-size:10.0pt'>Harper</span><span style='font-size:10.0pt'>
+[12]:</span></p>
+
+<p class=Default><span style='font-size:10.0pt'><sub><img width=403 height=43
+src="RusCorporaHMM_files/image001.gif"></sub>                                                                                                                     (3)<br>
+где </span><span lang=EN-US style='font-size:10.0pt'>N<sub>log</sub></span><sub><span
+lang=EN-US style='font-size:10.0pt'> </span></sub><span style='font-size:10.0pt'>=
+</span><span lang=EN-US style='font-size:10.0pt'>log</span><span
+style='font-size:10.0pt'>(</span><span lang=EN-US style='font-size:10.0pt'>N</span><sub><span
+style='font-size:10.0pt'>3</span></sub><span style='font-size:10.0pt'>+1)+1, а </span><span
+lang=EN-US style='font-size:10.0pt'>N</span><sub><span style='font-size:10.0pt'>3
+</span></sub><span style='font-size:10.0pt'>– количество вхождений слова </span><span
+lang=EN-US style='font-size:10.0pt'>w<sub>i</sub></span><span style='font-size:
+10.0pt'> с тегом </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span
+style='font-size:10.0pt'>, таких что до слова </span><span lang=EN-US
+style='font-size:10.0pt'>w<sub>i</sub></span><span style='font-size:10.0pt'>
+стояло  слово с тегом </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><sub><span
+style='font-size:10.0pt'>-1</span></sub><span style='font-size:10.0pt'>.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Формула
+(3)  применялась только в том случае, если слово с таким тегом встречалось в
+обучающем корпусе (</span><span lang=EN-US style='font-size:10.0pt'>p</span><span
+style='font-size:10.0pt'>(</span><span lang=EN-US style='font-size:10.0pt'>w<sub>i</sub></span><span
+style='font-size:10.0pt'> | </span><span lang=EN-US style='font-size:10.0pt'>t<sub>i</sub></span><span
+style='font-size:10.0pt'>) &gt; 0). Если же этого не произошло, тогда </span></p>
+
+<p class=Default style='text-indent:35.4pt'><span lang=EN-US style='font-size:
+10.0pt'>p<sub>smooth_lex </sub>(w<sub>i</sub> | t<sub>i</sub>, t<sub>i-1</sub>)
+= 1/M,                                                                (4)</span></p>
+
+<p class=Default><span style='font-size:10.0pt'>где </span><span lang=EN-US
+style='font-size:10.0pt'>M</span><span style='font-size:10.0pt'> – число
+вхождений слова </span><span lang=EN-US style='font-size:10.0pt'>w<sub>i</sub></span><span
+style='font-size:10.0pt'> с тегом </span><span lang=EN-US style='font-size:
+10.0pt'>t</span><span style='font-size:10.0pt'>, таком что </span><span
+lang=EN-US style='font-size:10.0pt'>p</span><span style='font-size:10.0pt'>(</span><span
+lang=EN-US style='font-size:10.0pt'>w<sub>i</sub></span><span style='font-size:
+10.0pt'> | </span><span lang=EN-US style='font-size:10.0pt'>t</span><span
+style='font-size:10.0pt'>) мак</span><span lang=EN-US style='font-size:10.0pt'>c</span><span
+style='font-size:10.0pt'>имально. Таким образом новой интерпретации
+приписывается минимально низкая вероятность (см. </span><span lang=EN-US
+style='font-size:10.0pt'>Jurish</span><span style='font-size:10.0pt'>[14] о
+других возможных способах интеграции новых морфологических интерпретаций слова,
+не вошедших в обучающий корпус).</span></p>
+
+<p class=Default><span style='font-size:10.0pt'>                В последнем
+рабочем варианте мы умножали значение, полученное по формуле (3),  на длину 
+входного слова, что очень незначительно  увеличивало точность алгоритма (чем
+длиннее слово, тем меньше в среднем оно зависит от общего трехграммного
+контекста, а больше зависит от лексической вероятности). </span></p>
+
+<p class=Heading>5. Условия эксперимента</p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Для
+обучения  модели мы использовали Национальный корпус русского языка. 
+Морфологическая разметка корпуса была переведена в стандарт </span><span
+lang=EN-US style='font-size:10.0pt'>aot</span><span style='font-size:10.0pt'>.</span><span
+lang=EN-US style='font-size:10.0pt'>ru</span><span style='font-size:10.0pt'>[5].
+При переводе в морфологических интерпретациях исчезали граммемы, которых нет в
+стандарте  </span><span lang=EN-US style='font-size:10.0pt'>aot</span><span
+style='font-size:10.0pt'>.</span><span lang=EN-US style='font-size:10.0pt'>ru</span><span
+style='font-size:10.0pt'>. В некоторых случаях из-за того, что неоднозначность
+в корпусе сознательно не была разрешена полностью, программе приходилось
+строить новую морфологическую интерпретацию, которую принципиально не может
+построить морфологический словарь или модуль </span><span lang=EN-US
+style='font-size:10.0pt'>Synan</span><span style='font-size:10.0pt'>.  Таким
+образом, наша попытка уровнять шансы модуля </span><span lang=EN-US
+style='font-size:10.0pt'>Synan</span><span style='font-size:10.0pt'> и </span><span
+lang=EN-US style='font-size:10.0pt'>Trigram</span><span style='font-size:10.0pt'>
+не увенчалась полным успехом. Однако нам представляется, что уровень несоответствия 
+здесь не может считаться значительным.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Для
+тестирования были созданы три непересекающихся подкорпуса, каждый на 3300
+предложений (1/100 корпуса). Каждый раз при тестировании один подкорпус 
+исключался из обучения, и на нем проводилось тестирование. В результирующих 
+таблицах 1-3 приведены средние значения по трем тестируемым подкорпусам. </span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Отдельный
+вопрос составляет то, какое определение слова (токена)  нужно использовать для
+вычисления точности алгоритмов. В большинстве  работ при оценке точности не
+учитываются знаки препинания, цифробуквенные комплексы. Это делается потому,
+что знаки препинания и числа почти всегда однозначны. В нашем эксперименте,
+кроме вышеперечисленного, не учитывались еще слова, записанные латиницей. 
+Однако в работе[11] знаки препинания учитывались, хотя это не говорится в
+тексте (нам пришлось напрямую связываться с один из авторов, чтобы выяснить
+этот вопрос). Разница здесь может быть существенной, например, для набора
+полных тегов с учетом знаков препинания и чисел лучшая точность модели </span><span
+lang=EN-US style='font-size:10.0pt'>Trigram</span><span style='font-size:10.0pt'>
+– 95,39%, а без учета 94,46%.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Кроме
+модулей </span><span lang=EN-US style='font-size:10.0pt'>Synan</span><span
+style='font-size:10.0pt'> и </span><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+style='font-size:10.0pt'>, в эксперименте был использован модуль </span><span
+lang=EN-US style='font-size:10.0pt'>Accopost</span><span style='font-size:10.0pt'>
+(см. [9]). Реализация модели Маркова в модуле </span><span lang=EN-US
+style='font-size:10.0pt'>Accopost</span><span style='font-size:10.0pt'> почти
+полностью следует известной реализации </span><span lang=EN-US
+style='font-size:10.0pt'>TnT</span><span style='font-size:10.0pt'> (см.  [7]). 
+Таким образом модуль </span><span lang=EN-US style='font-size:10.0pt'>Accopost</span><span
+style='font-size:10.0pt'> является представителем классической базовой
+реализации моделей Маркова, которая применяется для немецкого, английского и
+французского языков.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Нами
+было использованы три набора тегов:</span></p>
+
+<p class=Default style='margin-left:18.0pt;text-indent:-9.0pt'><span
+style='font-size:10.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:10.0pt'>Частеречный набор(Таблица 1)
+состоит из 19 тегов, которые соответствуют частям речи. На самом деле, с учетом
+того, что частеречная омонимия  не везде  была снята, этот набор тегов
+вырастал  до 150 (один тег мог состоят из двух и более частей речи, например,
+СОЮЗ_ЧАСТ).</span></p>
+
+<p class=Default style='margin-left:18.0pt;text-indent:-9.0pt'><span
+style='font-size:10.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span lang=EN-US style='font-size:10.0pt'>Inxight</span><span
+style='font-size:10.0pt'> набор (Таблица 2) состоял из 91 тега (тоже вырастал
+до 228 тега из-за недоснятой омонимии). Этот набор тегов использовался для
+сравнения нашей модели с моделью компании </span><span lang=EN-US
+style='font-size:10.0pt'>Inxight</span><span style='font-size:10.0pt'> (см.
+Ножов[13])</span></p>
+
+<p class=Default style='margin-left:18.0pt;text-indent:-9.0pt'><span
+style='font-size:10.0pt;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:10.0pt'>Набор полных тегов (Таблица 3)
+состоял из 829 тега.</span></p>
+
+<p class=Default style='text-indent:27.0pt'><span style='font-size:10.0pt'>В
+следующих таблицах собраны данные о проведенных экспериментах:</span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=78 valign=top style='width:58.7pt;border:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Название модуля</span></p>
+  </td>
+  <td width=86 valign=top style='width:64.8pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Частичное снятие омонимии</span></p>
+  </td>
+  <td width=142 valign=top style='width:106.2pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Средний уровень оставшейся
+  неоднозначности<a href="#_ftn1" name="_ftnref1" title=""><span
+  class=MsoFootnoteReference><span class=MsoFootnoteReference><span
+  style='font-size:10.0pt;font-family:"Times New Roman";color:black'>[1]</span></span></span></a></span></p>
+  </td>
+  <td width=98 valign=top style='width:73.8pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Точность</span></p>
+  </td>
+  <td width=100 valign=top style='width:75.25pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Лексическая точность</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=78 valign=top style='width:58.7pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Synan</span></p>
+  </td>
+  <td width=86 valign=top style='width:64.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Да</span></p>
+  </td>
+  <td width=142 valign=top style='width:106.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>1.14</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>99.13%</span></p>
+  </td>
+  <td width=100 valign=top style='width:75.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>99.26%</span></p>
+  </td>
+ </tr>
+ <tr style='height:8.35pt'>
+  <td width=78 valign=top style='width:58.7pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Synan</span></p>
+  </td>
+  <td width=86 valign=top style='width:64.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>Нет</span></p>
+  </td>
+  <td width=142 valign=top style='width:106.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.00</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>96.87% </span></p>
+  </td>
+  <td width=100 valign=top style='width:75.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>99.26%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=78 valign=top style='width:58.7pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram</span></p>
+  </td>
+  <td width=86 valign=top style='width:64.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Да</span></p>
+  </td>
+  <td width=142 valign=top style='width:106.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>1.14</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>99.07%</span></p>
+  </td>
+  <td width=100 valign=top style='width:75.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>99.76%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=78 valign=top style='width:58.7pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram</span></p>
+  </td>
+  <td width=86 valign=top style='width:64.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Да</span></p>
+  </td>
+  <td width=142 valign=top style='width:106.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>1.08</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>98.67%</span></p>
+  </td>
+  <td width=100 valign=top style='width:75.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>99.63%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=78 valign=top style='width:58.7pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram</span></p>
+  </td>
+  <td width=86 valign=top style='width:64.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Нет</span></p>
+  </td>
+  <td width=142 valign=top style='width:106.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.00</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>97.26%</span></p>
+  </td>
+  <td width=100 valign=top style='width:75.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>99.17%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=78 valign=top style='width:58.7pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Accopost</span></p>
+  </td>
+  <td width=86 valign=top style='width:64.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Нет</span></p>
+  </td>
+  <td width=142 valign=top style='width:106.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.00</span></p>
+  </td>
+  <td width=98 valign=top style='width:73.8pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>96.62%</span></p>
+  </td>
+  <td width=100 valign=top style='width:75.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>-</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=Default><b><span style='font-size:10.0pt'>Таблица 1: Сравнение модуля </span></b><b><span
+lang=EN-US style='font-size:10.0pt'>Synan</span></b><b><span style='font-size:
+10.0pt'> и </span></b><b><span lang=EN-US style='font-size:10.0pt'>Trigram</span></b><b><span
+style='font-size:10.0pt'> на частеречном наборе тегов </span></b></p>
+
+<p class=Default><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=347 valign=top style='width:260.6pt;border:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Теггер</span></p>
+  </td>
+  <td width=132 valign=top style='width:99.0pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Точность</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=347 valign=top style='width:260.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Inxight</span><span
+  style='font-size:10.0pt'> (согласно [13] )</span></p>
+  </td>
+  <td width=132 valign=top style='width:99.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>94,5%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=347 valign=top style='width:260.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram</span></p>
+  </td>
+  <td width=132 valign=top style='width:99.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>94.6%</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=BodyTextIndent1 style='margin:0cm;margin-bottom:.0001pt;text-align:
+justify;text-indent:0cm'><b><span style='font-size:10.0pt'>Таблица 2: Сравнение
+модели </span></b><b><span lang=EN-US style='font-size:10.0pt'>HMM</span></b><b><span
+style='font-size:10.0pt'> из работы Ножова[13] и </span></b><b><span
+lang=EN-US style='font-size:10.0pt'>Trigram</span></b><b><span
+style='font-size:10.0pt'> на наборе тегов </span></b><b><span lang=EN-US
+style='font-size:10.0pt'>Inxight</span></b><b><span style='font-size:10.0pt'>
+(полное разрешение неоднозначности)</span></b></p>
+
+<p class=Default><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Теггер</span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Частичное снятие омонимии</span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Средний уровень оставшейся
+  неоднозна-чности</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Точность</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Лекси-ческая точность</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram </span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Да</span><span lang=EN-US
+  style='font-size:10.0pt'> </span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>1.63</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>98.34%</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>99.71%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram </span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Да </span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.13</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>97.04%</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>99.42%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+  style='font-size:10.0pt'> </span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Нет</span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.00</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>94.46%</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>99.10%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+  style='font-size:10.0pt'> без группировки</span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Нет</span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.00</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>94.41%</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>99.02%</span></p>
+  </td>
+ </tr>
+ <tr style='height:67.15pt'>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:67.15pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+  style='font-size:10.0pt'> без группировки и без зависи-мости лекси-ческой
+  вероятности от предыдущего тега</span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:67.15pt'>
+  <p class=Default><span style='font-size:10.0pt'>Нет</span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:67.15pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.00</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:67.15pt'>
+  <p class=Default><span style='font-size:10.0pt'>93.81%</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:67.15pt'>
+  <p class=Default><span style='font-size:10.0pt'>98.96%</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Synan</span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>Да</span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.69</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>98.65%</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=Default><span style='font-size:10.0pt'>99.06%</span></p>
+  </td>
+ </tr>
+ <tr style='height:8.35pt'>
+  <td width=103 valign=top style='width:77.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span lang=EN-US style='font-size:10.0pt'>Synan</span></p>
+  </td>
+  <td width=78 valign=top style='width:58.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>Нет</span></p>
+  </td>
+  <td width=87 valign=top style='width:65.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>1.00</span></p>
+  </td>
+  <td width=72 valign=top style='width:53.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>88.80%</span></p>
+  </td>
+  <td width=70 valign=top style='width:52.5pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:8.35pt'>
+  <p class=Default><span style='font-size:10.0pt'>99.06%</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=Default><b><span style='font-size:10.0pt'>Таблица 3: Сравнение </span></b><b><span
+lang=EN-US style='font-size:10.0pt'>Trigram</span></b><b><span
+style='font-size:10.0pt'> и модуля </span></b><b><span lang=EN-US
+style='font-size:10.0pt'>Synan</span></b><b><span style='font-size:10.0pt'> на
+наборе полных тегов</span></b></p>
+
+<p class=Heading>6. Анализ результатов: полное или частичное снятие
+неоднозначности</p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>При
+полном снятии неоднозначности </span><span lang=EN-US style='font-size:10.0pt'>Synan</span><span
+style='font-size:10.0pt'> явно проигрывает модулю </span><span lang=EN-US
+style='font-size:10.0pt'>Trigram</span><span style='font-size:10.0pt'>. Для
+набора полных тегов (Таблица 3) эта разница составляет 94,46% – 88,80% = 5,66%.
+Однако, как уже говорилось, </span><span lang=EN-US style='font-size:10.0pt'>Synan</span><span
+style='font-size:10.0pt'> не проектировался специально для этой задачи.  С
+другой стороны, в случае частичного снятия неоднозначности модуль </span><span
+lang=EN-US style='font-size:10.0pt'>Trigram</span><span style='font-size:10.0pt'>
+немного уступает модулю </span><span lang=EN-US style='font-size:10.0pt'>Synan</span><span
+style='font-size:10.0pt'>. Для набора полных тегов эта разница составляет
+98,65% – 98,34% = 0.3%.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Следовательно,
+система, работающая на правилах, составленных ручным способом, работает в той 
+области, для которых были сделаны эти правила,  лучше,  чем вероятностная
+модель. Этот вывод можно подтвердить тем, что, например, лучший модуль для
+различения частеречной омонимии для английского языка работает на правилах (см.
+[1]),  а не на вероятностной модели, причем этот модуль значительно опережает
+все чисто вероятностные модели (99,5% точности). Вместе с тем остается открытым
+вопрос, возможно ли построить такую же модель на правилах для  набора полных
+тегов. Ведь полный набор тегов  в 40 раз больше частеречного набора тегов. Нам
+представляется, что ответ на этот вопрос скорее отрицательный, чем
+положительный, т.е., по нашему мнению, для набора полных тегов в случае полного
+разрешения неоднозначности нужно использовать вероятностную модель.</span></p>
+
+<p class=InitialParagraph>&nbsp;</p>
+
+<p class=Heading>7.Анализ результатов: группировка</p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Для
+набора полных тегов экспериментальным путем было получено, что число групп
+должно быть около 20 (для чешского языка[11] оптимальное число было 32). Однако
+в нашем эксперименте группировка не дала такого эффекта, как для чешского языка
+(улучшение </span><span lang=EN-US style='font-size:10.0pt'>c</span><span
+style='font-size:10.0pt'> 94.97% до 95.16%, т.е. 4% относительного прироста). А
+в нашем эксперименте - улучшение с 94.41% до 94.46%, т.е. 0,8% относительного
+прироста.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Возможно,
+столь низкий прирост происходит из-за того, что в нашей модели отсутствует
+группировка для лексической вероятности (для чешского языка работали обе
+группировки, а в нашей модели группы лексической вероятности фактически
+состояли из отдельных триграмм, т.е.  сколько триграмм, столько и групп).  Еще
+более вероятным представляется утверждение, что группировка не дает большого
+результата, если обучающий корпус достаточно велик (у нас 5 млн. словоформ, а
+для чешского языка – 1,8 млн.).</span></p>
+
+<p class=Heading>8.Анализ результатов: лексическая точность</p>
+
+<p class=Default><span style='font-size:10.0pt'>                Из сравнения
+данных из таблиц 1 и 3 следует, что лексическая точность в частеречной
+модели(99,17%) выше, чем лексическая точность для набора полных тегов (99.10%),
+в том случае,  если модели выдают однозначную интерпретацию.  Оказывается,  что
+добавление  новой информации о словах (падеж, число) не  улучшает распознание
+леммы, а даже немного  ухудшает. Одно из объяснений может заключаться в так
+называемом проблеме разреженности (</span><span lang=EN-US style='font-size:
+10.0pt'>sparsedness</span><span lang=EN-US style='font-size:10.0pt'> </span><span
+lang=EN-US style='font-size:10.0pt'>problem</span><span style='font-size:10.0pt'>),
+которая заключается в том, что размер обучающего корпуса должен кубически
+(количество разных триграмм) зависеть от размера набора  тегов. Т.е. если мы
+считаем, что 5 млн. словоформ достаточно для частеречного набора, то для набора
+полных  тегов нужен корпус более 1трлн. </span><span lang=EN-US
+style='font-size:10.0pt'>c</span><span style='font-size:10.0pt'>ловоформ. В
+противном случае программа будет работать с очень низкими частотами триграмм,
+что приводит к невозможности статистических обобщений.  </span></p>
+
+<p class=Heading>9.Анализ результатов: другие модели</p>
+
+<p class=Default><span style='font-size:10.0pt'>                Нами было
+проведено сравнение программы </span><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+style='font-size:10.0pt'>  с вероятностной моделью, предложенной Ю.Г.Зеленковым
+и др. (см. [15]). Эта модель строит лемму омонимичного слова, учитывая 
+окончания слов, входящих в левые и правые контексты омонимичного слова. Модель
+предварительно должна быть обучена  на корпусе со снятой омонимией. Оценка
+качества этой модели проводилась в том числе на  некотором специальном корпусе
+(взятом из проекта ЭТАП), состоящем из  22548 словоформ, из которых 3549
+являлись омонимами. Модель Зеленкова и др. правильно разрешила неоднозначность
+в 3457 случаях (точность - 97.42%).  Программа </span><span lang=EN-US
+style='font-size:10.0pt'>Trigram</span><span style='font-size:10.0pt'> 
+правильно разрешила неоднозначность в 3449 случаях (точность - 97.18%). 
+Учитывая, что модель Зеленкова и др. имеет более высокую скорость обработки
+входного текста, следует признать, что для русского языка при снятии
+неоднозначности по леммам предпочтительней использовать модель Зеленкова и др.</span></p>
+
+<p class=Default><span style='font-size:10.0pt'>                Кроме этого, в
+работе  Ножова[13] приводится информация, что модель Маркова для русского
+языка, разработанная в компании </span><span lang=EN-US style='font-size:10.0pt'>Inxight</span><span
+style='font-size:10.0pt'>, правильно выбирала лемму в 99% случаях (учитывая
+только словоформы с разными леммами). К сожалению, автор работы не приводит
+описание процедуры проверки  точности. К тому же возможно,  что в наших
+словарях были по-разному определены леммы для некоторых частотных омонимов.
+Например, нами было подсчитано, что, если не различать омонимию хотя бы для
+словоформ </span></p>
+
+<p class=Default style='margin-left:35.4pt'><i><span style='font-size:10.0pt'>его/их/ее</span></i><span
+style='font-size:10.0pt'>:  (<i>Я увидел его.</i> </span><span lang=EN-US
+style='font-size:10.0pt'>vs</span><span style='font-size:10.0pt'>.  <i>Его дом
+стоял на горе.</i>)<br>
+<i>все</i>:  ( <i>Я знаю все</i>.  </span><span lang=EN-US style='font-size:
+10.0pt'>vs</span><span style='font-size:10.0pt'>.  <i>Я знаю все дома</i>)</span></p>
+
+<p class=Default style='margin-left:35.4pt'><i><span style='font-size:10.0pt'>это</span></i><span
+style='font-size:10.0pt'>:  ( <i>Я это знаю</i>.  </span><span lang=EN-US
+style='font-size:10.0pt'>vs</span><span style='font-size:10.0pt'>.  <i>Я знаю
+это слово</i>)</span></p>
+
+<p class=Default style='margin-left:35.4pt'><span style='font-size:10.0pt'>точность
+</span><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+style='font-size:10.0pt'> по выбору омонимичных лемм вырастет с 97,18% до
+97,80%.</span></p>
+
+<p class=Heading>10. Заключение и будущие работы</p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>В
+работе было показано, что предложенная модель может точнее приписывать
+однозначную морфологическую интерпретацию словам, чем это делает синтаксический
+модуль </span><span lang=EN-US style='font-size:10.0pt'>Synan</span><span
+style='font-size:10.0pt'>. </span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Вместе
+с тем было  показано, что предложенная модель хуже справляется с задачей
+разрешения лексической неоднозначности, чем модель Зеленкова и др.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Необходимо
+учитывать, что около 10% несоответствий между тегами, которые выдает программа </span><span
+lang=EN-US style='font-size:10.0pt'>Trigram</span><span style='font-size:10.0pt'>,
+и тегами, которые приписаны в Национальном корпусе, являются ошибками корпуса
+(проценты, приведенные в таблицах 1-3, были получены автоматически). Это может
+означать очень многое, учитывая то, что на подобных  ошибках модель
+тренировалась.  Мы надеемся, что в будущем нам станет доступно новое издание
+Национального корпуса, в котором ошибки будут исправлены, и тогда качество
+работы </span><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+style='font-size:10.0pt'> можно будет оценить снова.</span></p>
+
+<p class=Default style='text-indent:35.4pt'><span style='font-size:10.0pt'>Возможно
+еще дополнение программы </span><span lang=EN-US style='font-size:10.0pt'>Trigram</span><span
+style='font-size:10.0pt'> специальным блоком простых контекстных правил,
+написанных вручную, по образцу тех, что были сделаны для чешского языка.</span></p>
+
+<p class=Heading>11. Благодарность</p>
+
+<p class=InitialParagraph>Работа выполнена при поддержке ООО “Яндекс” (грант  <span
+lang=EN-US>N</span> 92802 за 2005 год).</p>
+
+<p class=Heading><span style='font-size:10.0pt'>12. Л</span>итература</p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>[1] Voutilainen A.
+EngCG tagger, Version 2, In Brondsted T., Lytje I. (eds.). Sprog og
+Multimedier.Aalborg Universitetsforlag, Aalborg (1997).</span></p>
+
+<p class=Default><span style='font-size:10.0pt'> [2]  Зализняк
+А.А.&quot;Грамматический словарь русского языка&quot; М.: Русский язык, 1980 г.</span></p>
+
+<p class=List1 style='margin-left:21.6pt;text-align:justify;text-indent:-21.6pt'><span
+style='font-size:10.0pt'>[3]  Национальный корпус русского языка, </span><span
+lang=EN-US style='font-size:10.0pt'><a href="http://www.ruscorpora.ru/">www<span
+lang=RU>.</span>ruscorpora<span lang=RU>.</span>ru</a></span></p>
+
+<p class=List1 style='margin-left:21.6pt;text-align:justify;text-indent:-21.6pt'><span
+style='font-size:10.0pt'>[4] Гершензон Л.М, Ножов И.М., Панкратов Д.В., Сокирко
+А.В., Синтаксический анализ в системе РМЛ <a
+href="http://www.aot.ru/docs/synan.html">http://www.aot.ru/docs/synan.html</a> </span></p>
+
+<p class=List1 style='margin-left:21.6pt;text-align:justify;text-indent:-21.6pt'><span
+style='font-size:10.0pt'>[5] Сокирко А.В. <a
+href="http://www.aot.ru/docs/SOKIRKO/Dialog2004.htm">Морфологические модули на
+сайте www.aot.ru </a></span><b><span style='font-size:10.0pt;font-family:Arial'>.
+</span></b><span style='font-size:10.0pt'>Диалог’2004. Верхневолжский, 2-7 июня
+2004 г. </span></p>
+
+<p class=Default><span lang=EN-US style='font-size:10.0pt'>[6] L. R. Rabiner,
+&quot;A Tutorial on Hidden Markov Models and Selected Applications in Speech
+Recognition,&quot; Proc. of the IEEE, Feb. 1989</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt'>[7] </span><span lang=EN-US style='font-size:10.0pt'>Thorsten
+Brants,  TnT - A Statistical Part-of-Speech Tagger. In <i>Proceedings of
+ANLP-NAACL</i>,pages 224–231, 2000.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt'>[8] </span><span lang=EN-US style='font-size:10.0pt'>Jiri
+Hana and Anna Feldman, Portable Language Technology: The case of Czech and
+Russian. In <i>Proceedings from the Midwest Computational Linguistics
+Colloquium, June 25-26, 2004</i>,</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+  style='font-size:10.0pt'>Bloomington</span><span lang=EN-US style='font-size:
+ 10.0pt'>, Indiana</span><span lang=EN-US style='font-size:10.0pt'>.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt'>[9] Ingo Schr&ouml;der, A Case Study in Part-of-Speech
+tagging Using the ICOPOST Toolkit. <i>Computer Science Memo 314/02</i>,
+Department of Computer Science. University of Hamburg. Hamburg, Germany 2002.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt'>[10] Stanley F. Chen, <span class=goohl0>Building
+Probabilistic Models for Natural</span> Language. PhD thesis Harvard University, 1996.</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:Times'>[11] Jan Hajic, Pavel Krbec, Pavel
+Kveton, Karel Oliva, and Vladimr Petkevic.. Serial  Combination of Rules and
+Statistics: A Case Study in Czech Tagging. In Proceedings of the 39th Annual
+Meeting of the Association for Computational Linguistics (ACL 2001),Toulouse, France, 2001.</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>[12] S. M. Thede
+and M. P. Harper. A Second-Order Hidden Markov Model for Part-of-Speech
+Tagging. In </span><span lang=EN-US style='font-size:10.0pt'>Proceedings of the
+37th Annual Meeting of the ACL</span><span lang=EN-US style='font-size:10.0pt'>,
+1999</span></p>
+
+<p class=BodyTextIndent1 style='margin:0cm;margin-bottom:.0001pt;text-align:
+justify;text-indent:0cm'><span style='font-size:10.0pt'> [13] Ножов И.М.
+Морфологическая и синтаксическая обработка текста (модели и программы),
+диссертационная работа, 2000, Москва</span></p>
+
+<p class=Default><span lang=EN-US style='font-size:10.0pt'>[14] Bryan Jurish, A
+Hybrid Approach to Part-of-Speech Tagging, Final Report at
+Berlin-Brandenburgische Akademie der Wissenschaften, Berlin, 2003.</span></p>
+
+<p class=BodyTextIndent1 style='margin:0cm;margin-bottom:.0001pt;text-align:
+justify;text-indent:0cm'><span style='font-size:10.0pt'>[15] Зеленков Ю.Г.,
+Сегалович И.В., Титов В.А., Вероятностная модель снятия морфологической
+омонимии на основе нормализующих подстановок и позиций соседних слов. //
+Компьютерная лингвистика и интеллектуальные технологии. Труды международного
+семинара Диалог’2005., 2005. </span></p>
+
+<p class=Default><span lang=EN-US style='font-size:10.0pt'>[16] Cristopher D.
+Manning, Hinrich Schuetze. Foundation of Statistical Natural Language
+Processing, 1999.</span></p>
+
+<p class=Default><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=Englishtitle>С<span lang=EN-US>omparing a stochastic tagger based on
+Hidden Markov Model with a rule-based tagger for Russian <br>
+<br>
+</span></p>
+
+<p class=Author><span lang=EN-US>Alexey Sokirko </span></p>
+
+<p class=Address><span lang=EN-US>Integrum-Techno, Moscow, sokirko@yandex.ru</span></p>
+
+<p class=Address><span lang=EN-US>&nbsp;</span></p>
+
+<p class=Author><span lang=EN-US>Svetlana Toldova </span></p>
+
+<p class=Author><span lang=EN-US>Moscow</span><span lang=EN-US> State University </span><span lang=EN-GB>, toldova@pisem.net</span></p>
+
+<p class=Paragraph align=center style='text-align:center'><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=AbstractText><span lang=EN-US style='font-size:12.0pt'>Abstract </span></p>
+
+<p class=AbstractText style='margin-left:0cm;text-indent:27.0pt'><span
+lang=EN-GB>A set of experiments to resolve lexical and morphological ambiguity
+in Russian using Hidden Markov Model(HMM) is described.  The HMM-tagger is
+trained by Russian National Corpus. Three different tag sets are used. The
+authors compare the HMM-tagger with a rule-based shallow syntax program(Synan)
+and also with some other taggers(stochastic or hybrid). The experiments show
+that that for the same amount of remaining morphological ambiguity, the error
+rate of the HMM-tagger is almost the same as of Synan program, but if the
+output morphological interpretation should be unambiguous, then the HMM-tagger
+is considerably better. Nevertheless while resolving lexical ambiguity the
+proposed HMM-tagger yields less accurate results, than the programs which are
+on other stochastic models.</span></p>
+
+</div>
+
+<div><br clear=all>
+
+<hr align=left size=1 width="33%">
+
+<div id=ftn1>
+
+<p class=MsoFootnoteText><a href="#_ftnref1" name="_ftn1" title=""><span
+class=MsoFootnoteReference><span class=MsoFootnoteReference><span
+style='font-size:10.0pt;font-family:"Times New Roman"'>[1]</span></span></span></a>
+Этот параметр определялся как отношение <span lang=EN-US>T</span>/<span
+lang=EN-US>C</span>, где Т – число оставшихся тегов, приписанных словам, а С –
+число слов в тексте.</p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

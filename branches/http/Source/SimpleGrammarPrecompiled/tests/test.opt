@@ -1,0 +1,10 @@
+%% SecondPass is a list for finding all abridged named entities, which are 
+%% normally referenced to a full version of a named entity. For example:
+%%  "Dr. Alexey Sokirko ....  Sokirko". Here "Dr. Alexey Sokirko" is a 
+%% full version of a named entity, which should be recognized by the main grammar,
+%% and  "Sokirko" is an abriged reference.
+%% The list below includes all grammar symbols, which can uniquely refer to 
+%% a some full named entity.
+
+%% SecondPass = FAMILY PNAME
+SecondPass PNAME

@@ -1,0 +1,26 @@
+HKCR
+{
+	Seman.ComSemWord.1 = s 'ComSemWord Class'
+	{
+		CLSID = s '{2E3267A1-D488-4904-8030-61929CB1E58C}'
+	}
+	Seman.ComSemWord = s 'ComSemWord Class'
+	{
+		CLSID = s '{2E3267A1-D488-4904-8030-61929CB1E58C}'
+		CurVer = s 'Seman.ComSemWord.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {2E3267A1-D488-4904-8030-61929CB1E58C} = s 'ComSemWord Class'
+		{
+			ProgID = s 'Seman.ComSemWord.1'
+			VersionIndependentProgID = s 'Seman.ComSemWord'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{BD87FBF9-4917-4C26-A85C-1B4E86D39066}'
+		}
+	}
+}

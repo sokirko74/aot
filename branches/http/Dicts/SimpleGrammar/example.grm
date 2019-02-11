@@ -1,0 +1,65 @@
+%% Title: Simple local grammar for the recognition of persons (An example)
+%% Date: 09.07.2003: 
+%% Adopted by Alexey Sokirko (The original full grammar was created by Alexander Geyken)
+%% 
+%% Description: 
+%% This simple local grammer recognizes local contexts of person nouns
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% A) Rules Format: 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% non recursive production rules such as [A]->'a',[B],[C]
+%% The RHS can contain terminal symbols (a,b,c, ...) or non-terminal symbols (A,B,C,...).
+%% Non-terminal symbols can have attributes with values, noted as: [A f="val"]
+%% Further, '|' stands for disjunction, '?' for 0 or 1 occurrences
+%% NB: a formalism exploiting this grammar is supposed to return the longest match...
+%%
+
+[FNAME] -> [TOKEN filename="firstname.txt"  register="Aa"];
+[FAMILY] -> [TOKEN filename="family.txt"  register="Aa"];
+[ACR] -> [TOKEN filename="acr.txt"];
+
+[HUM] -> [TOKEN filename="hum.txt"];
+
+[GEO] -> [TOKEN filename="geo.txt"];
+[GEOADJ] -> [TOKEN filename="geoadj.txt"];
+[Det] -> [TOKEN filename="det.txt"];
+[Adj] -> [TOKEN grm="ADJ"];
+
+
+%% secure person names
+[SPNAME] -> [TITLE]? [FNAME hom="no"] [FAMILY hom="no"];  %% Alexey Sokirko
+[SPNAME] -> [TITLE]? [FNAME hom="yes"]? [FAMILY hom="no"]; %% Kai Sokirko
+[SPNAME] -> [TITLE]? [FNAME hom="no"] [FAMILY hom="yes"]; %% Helmut Kohl
+[SPNAME] -> [TITLE]? [FNAME] 'von' [FAMILY]; %% "Gr¤fin Tita von Hardenberg"
+[SPNAME] -> [TITLE] [FNAME] [FAMILY]; %% Dr. Kai Zimmer
+[SPNAME] -> [TITLE]? [FNAME]  [TOKEN type="ROMAN"] '.'; %% "Elisabeth II."
+
+
+
+%% partial person names
+[PNAME] -> [FNAME hom="yes"] [FAMILY hom="yes"]; %% "Kai Zimmer"
+[PNAME] -> [FAMILY hom="yes"]; %% Fischer
+[PNAME] -> [FNAME]? [TOKEN grm="-"]; %% Claudio Aly
+
+
+[TITLE] -> 'Dr' '.';
+[TITLE] -> ('Doktor'|'Professor') 'Doktor';
+[TITLE] -> ('Doktor'|'Professor') 'Doktor''h' '.' 'c' '.';
+[TITLE] -> ('Herr'|'Frau') ('Doktor'|'Professor');
+[TITLE] -> ('Herr'|'Frau') ('Doktor'|'Professor') 'Doktor';
+[TITLE] -> ('Herr'|'Frau') ('Doktor'|'Professor') 'Doktor' 'h'  '.'  'c'  '.';
+
+
+[PERSON] -> [SPNAME];
+[PERSON] -> [Det]? [Adj]? [HUM] ([PNAME]|[SPNAME]);
+[PERSON] -> [Det] [GEOADJ]? [HUM] ([PNAME]|[SPNAME]);
+[PERSON] -> [GEO grm="gen"] [HUM] ([PNAME]|[SPNAME]);
+
+[PERSON] -> [HUM] ([PNAME]|[SPNAME]|[TOKEN grm="-"]) '(' [ACR] ')';
+[PERSON] -> [HUM] ([PNAME]|[SPNAME]|[TOKEN grm="-"]) 'aus' [GEO];
+
+
+

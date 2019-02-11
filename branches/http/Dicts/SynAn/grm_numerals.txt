@@ -1,0 +1,26 @@
+%% == format_for_numbers ==
+[NUMCARD] -> [TOKEN grm="вхяк"];
+[NUMORD] -> [TOKEN grm="вхяк-о"];
+[BIG-NUM] -> 'РШЯЪВЮ' | 'ЛХККХНМ' | 'ЛХККХЮПД' | 'РПХККХНМ';
+[ABBR] -> [TOKEN grm="ЮААП" root] [DOT];
+[йнкхв1] -> [BIG-NUM] | [DIG] | [NUMCARD]; %% [TOKEN filename!="num_pr.dat"]
+[йнкхв2] -> [BIG-NUM] | [DIG] | [NUMCARD] | [NUMORD] | [ABBR];
+[йнкхв] -> [йнкхв1] [йнкхв2 root];
+[йнкхв] -> [йнкхв] [йнкхв2 root];
+
+[SMALL-DIG] -> '2' | '3' | '4' | '*2' | '*3' | '*4' ;
+[SMALL-NUM] -> 'ДБЮ' | 'РПХ' | 'ВЕРШПЕ' | [SMALL-DIG];
+[йнкхв] -> [SMALL-NUM] [BIG-NUM root grm="ЕД, ПД"]; %% : $0.grm := set_nomacc_plural($2.grm);
+[йнкхв] -> [NUMCARD] [BIG-NUM root grm="ЛМ, ПД"]; %% : $0.grm := set_nomacc_plural($2.grm);
+				 
+%% == format_for_num_complex ==
+[якнф_вхяк] -> [DIG] ([COMMA] | [DOT]) [DIG root];
+
+%% == format_for_similar_numerals ==
+%% ОПНАКЕЛЮ Я ПЮГКХВЕМХЕЛ "23,7 Х 5" Х "23, 7 Х 5" 
+
+[ндмнп_вхяк1] -> [NUMCARD] | [DIG] | [йнкхв] | [якнф_вхяк];
+[ндмнп_вхяк] -> [ндмнп_вхяк1] ([CONJ]|[COMMA]) [ндмнп_вхяк1 root] : $0.grm := agrc($1.grm, $3.grm);
+[ндмнп_вхяк] -> [ндмнп_вхяк] ([CONJ]|[COMMA]) [ндмнп_вхяк1 root];
+
+[ROOT] -> [йнкхв] | [якнф_вхяк] | [ндмнп_вхяк];

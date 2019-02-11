@@ -1,0 +1,16 @@
+[Configuration]
+alex
+user Default
+maya
+uuu
+[DomensParams]
+д_яу 255 20
+д_тсмйр 128 10
+д_яел_н 16711680 10
+[Options]
+ThesaurusEnable 0
+Language Russian
+LinkThesaurus RML_THES_OMNI
+DoNotLock 0
+DoNotSaveLastUserName 0
+ArticleInitTextMode 0

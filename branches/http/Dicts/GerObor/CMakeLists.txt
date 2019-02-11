@@ -1,0 +1,3 @@
+project(GerObor)
+ConvertStructDict(GerObor)
+

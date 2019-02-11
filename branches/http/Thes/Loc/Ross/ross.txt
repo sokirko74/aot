@@ -1,0 +1,1504 @@
+============
+TITLE        = 176219
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 | АЗИАТСКИЙ
+============
+TITLE        = 176220
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+============
+TITLE        = 176224
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 | АНГЛИЙСКИЙ
+============
+TITLE        = 176233
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : АФРИКАНСКИЙ
+============
+TITLE        = 176236
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БАШКИРСКИЙ
+============
+TITLE        = 176238
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БЕЛОРУССКИЙ
+============
+TITLE        = 176241
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БОЛГАРСКИЙ
+============
+TITLE        = 176244
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БОЛИВИЙСКИЙ
+============
+TITLE        = 176246
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БРАЗИЛЬСКИЙ
+============
+TITLE        = 176253
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ВЕНСКИЙ
+============
+TITLE        = 176266
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ГЕРМАНСКИЙ
+============
+TITLE        = 176271
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( портовый )
+           СУЩ ( портовик )
+           АББР ( п. )
+SF      = 1  SPAC
+             FLUI
+             STAT
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : входить
+           Loc : в+П
+ENC     =  BELNG ( C , море )
+============
+TITLE        = 176274
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ДАЛЬНЕВОСТОЧНЫЙ
+============
+TITLE        = 176277
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ЕВРОПЕЙСКИЙ
+============
+TITLE        = 176290
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ИТАЛЬЯНСКИЙ
+============
+TITLE        = 176295
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : КАНАДСКИЙ
+============
+TITLE        = 176298
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : КАСПИЙСКИЙ
+============
+TITLE        = 176300
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : КЕМБРИДЖСКИЙ
+============
+TITLE        = 176302
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : КИПРСКИЙ
+============
+TITLE        = 176306
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : КИТАЙСКИЙ
+============
+TITLE        = 176358
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ПЕРМСКИЙ
+============
+TITLE        = 176401
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ТУРЕЦКИЙ
+============
+TITLE        = 176409
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ФРАНЦУЗСКИЙ
+============
+TITLE        = 176428
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : швейцарский
+============
+TITLE        = 176430
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ШВЕДСКИЙ
+============
+TITLE        = 176440
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ЯПОНСКИЙ
+============
+TITLE        = 176447
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : asian
+============
+TITLE        = 176452
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : English
+============
+TITLE        = 176459
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : atlantic
+============
+TITLE        = 176461
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : AFRICAN
+============
+TITLE        = 176464
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : bashkir
+============
+TITLE        = 176466
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : belorussian
+============
+TITLE        = 176469
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : bulgarian
+============
+TITLE        = 176472
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : bolivian
+============
+TITLE        = 176474
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : brazilian
+============
+TITLE        = 176478
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : Brussels
+============
+TITLE        = 176481
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : viennese
+============
+TITLE        = 176493
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : german
+============
+TITLE        = 176501
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : far eastern
+============
+TITLE        = 176504
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : european
+============
+TITLE        = 176517
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : italian
+============
+TITLE        = 176522
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : canadian
+============
+TITLE        = 176525
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : caspian
+============
+TITLE        = 176527
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : cantabrigian
+============
+TITLE        = 176529
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : cyprian
+============
+TITLE        = 176533
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : chinese
+============
+TITLE        = 176563
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : netherlandish
+============
+TITLE        = 176585
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : PERMIAN
+============
+TITLE        = 176628
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : turkish
+============
+TITLE        = 176636
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : FRENCH
+============
+TITLE        = 176655
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : swiss
+============
+TITLE        = 176657
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : swedish
+============
+TITLE        = 176665
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : south american
+============
+TITLE        = 176667
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : japanese
+============
+TITLE        = 176689
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+VAL     =  BELNG , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  LOK
+============
+TITLE        = 176690
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  VERB
+VAL     =  BELNG , C , A1
+GF1     = 1  of+NP
+SF1     = 1  LOK
+============
+TITLE        = 176728
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : лесной
+           CausFunc0 : сажать
+           LiquFunc0 : уничтожать
+           LiquFunc0 : сводить
+============
+TITLE        = 176742
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+VAL     =  IDENT , A1 , C
+SF1     = 1  NAME
+GF1     = 1  прим_опр : ИГ
+============
+TITLE        = 176746
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  LOK
+VAL     =  IDENT , A1 , C
+           LOK , A2 , C
+GF1     = 1  прим_опр : ИГ
+          2  с_опр : ПРИЛ
+SF1     = 1  NAME
+GF2     = 1  к_доп : Р
+          2  к_доп : в+П
+============
+TITLE        = 176778
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+PREP    =  по+Д : LOK : on
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  IDENT , A1 , C
+GF1     = 1  прим_опр : ИГ
+SF1     = 1  NAME
+============
+TITLE        = 176779
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP_attr
+SF1     = 1  NAME
+============
+TITLE        = 176805
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+PREP    =  на+В : TRG-PNT : on
+============
+TITLE        = 176815
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+SF      = 1  ADM
+============
+TITLE        = 176817
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+SF      = 1  ADM
+============
+TITLE        = 176827
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+DERIV   =  СОКР ( г. )
+LF      =  S3 : горожанин
+============
+TITLE        = 176845
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+EXM     =  The earth goes round the sun. -
+           Земля вращается вокруг солнца.
+DETERM  =  the
+============
+TITLE        = 176885
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+PREP    =  по+Д : LOK : down
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( дорожный )
+SF      = 1  SPAC
+             ARTEF
+             SOLIDUS
+             EXTENS
+VAL     =  SRC-PNT , A1 , C
+           TRG-PNT , A2 , C
+           NAME , A3 , C
+GF1     = 1  к_доп : из+Р
+SF1     = 1  STAT
+GF2     = 1  к_доп : в+В
+          2  к_доп : к+Д
+LF      =  Func : находиться
+           Func : располагаться
+           Func : вести
+           Func : сворачивать
+           IncepCaus : прокладывать
+           IncepCaus : проводить
+           Adv0 : по дороге
+           Adv0 : в дороге
+           Loc : на+П
+============
+TITLE        = 176889
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+VAL     =  IDENT , A1 , C
+GF1     = 1  прим_опр : И
+============
+TITLE        = 176890
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+VAL     =  BELNG , C , A1
+GF1     = 1  of+NP
+SF1     = 1  LOK
+DETERM1 =  the
+============
+TITLE        = 176908
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+VAL     =  BELNG , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  LOK
+============
+TITLE        = 176931
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+PREP    =  на+П : LOK : in
+GF      = 1  СУЩ:ИГ
+DERIV   =  СОКР ( ул. )
+SF      = 1  ADM
+VAL     =  IDENT , A1 , C
+GF1     = 1  прим_опр : И
+          2  к_доп : Р
+============
+TITLE        = 176946
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( болотный )
+           ПРИЛ ( болотистый )
+SF      = 1  SPAC
+             FLUI
+             ERD
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  STAT
+LF      =  Func : находиться
+           Func : располагаться
+           Func : засасывать
+           Func : топить
+           Magn : топкое
+           Loc : в+П
+           Loc : на+П
+ENC     =  БОЛ_РАЗ ( море , C )
+============
+TITLE        = 176947
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( аллейный )
+SF      = 1  SPAC
+             ARTEF
+             SOLIDUS
+             EXTENS
+VAL     =  SRC-PNT , A1 , C
+           TRG-PNT , A2 , C
+           NAME , A3 , C
+GF1     = 1  к_доп : от+Р
+SF1     = 1  STAT
+GF2     = 1  к_доп : до+Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func : вести
+           Func : соединять
+           Func : идти
+           Magn : широкий
+           Loc : на+П
+ENC     =  BELNG ( C , город )
+============
+TITLE        = 176948
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( вершинный )
+           АББР ( в. )
+SF      = 1  SPAC
+             SOLIDUS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func : возвышаться
+           Loc : на+П
+ENC     =  ВЫШЕ_ГЕО ( C , склон )
+           BELNG ( C , гора )
+============
+TITLE        = 176950
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( возвышенный )
+           АББР ( возв. )
+SF      = 1  SPAC
+             SOLIDUS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func : подниматься
+           Loc : на+П
+ENC     =  BELNG ( C , суша )
+           ВЫШЕ_ГЕО ( C , равнина )
+           ВЫШЕ_ГЕО ( C , низменность )
+============
+TITLE        = 176952
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( вокзальный )
+           ПРИЛ ( привокзальный )
+SF      = 1  SPAC
+             ARTEF
+             STAT
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : приезжать
+           Func1 : уезжать
+           Labor : встречать
+           Loc : на+П
+============
+TITLE        = 176954
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( впадинный )
+SF      = 1  SPAC
+             SOLIDUS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Loc : в+П
+           Magn : глубокая
+ENC     =  ВЫШЕ_ГЕО ( дно , C )
+           BELNG ( C , море )
+============
+TITLE        = 176956
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( вулканический )
+           АББР ( вулк. )
+SF      = 1  SPAC
+             SOLIDUS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func : извергаться
+           Culm : извержение
+           Loc : в+П
+ENC     =  ВЫШЕ_ГЕО ( C , холм )
+============
+TITLE        = 176958
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( деревенский )
+           АББР ( дер. )
+SF      = 1  SPAC
+             COLLEC
+             STAT
+             ARTEF
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : жить
+           IncepCaus : строить
+           IncepCaus : возводить
+           Loc : в+П
+ENC     =  BELNG ( улица , C )
+           BELNG ( C , район )
+           БОЛ_РАЗ ( город , C )
+============
+TITLE        = 176960
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( долинный )
+           ПРИЛ ( долинно-балочный )
+SF      = 1  SPAC
+             EXTENS
+             SOLIDUS
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Magn : широкая
+           Loc : в+П
+ENC     =  ВЫШЕ_ГЕО ( горы , C )
+============
+TITLE        = 176962
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+SF      = 1  SPAC
+             FLUI
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+GF2     = 1  с_опр : ПРИЛ
+LF      =  Func : находиться
+           Func : располагаться
+           Func : вдаваться
+           Loc : в+П
+ENC     =  BELNG ( C , A1 )
+============
+TITLE        = 176964
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( заповедный )
+           АББР ( зап. )
+SF      = 1  SPAC
+             STAT
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : жить
+           Func1 : организовать
+           Func : охраняться
+           Loc : в+П
+============
+TITLE        = 176968
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( кладбищенский )
+SF      = 1  SPAC
+             STAT
+             SOLIDUS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+GF2     = 1  с_опр : ПРИЛ
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : хоронить
+           Loc : на+П
+ENC     =  SING ( могила )
+============
+TITLE        = 176970
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( континентальный )
+SF      = 1  SPAC
+             SOLIDUS
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  STAT
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : открывать
+           Func : омываться
+           Loc : на+П
+ENC     =  BELNG ( C , суша )
+============
+TITLE        = 176974
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( маршрутный )
+SF      = 1  SPAC
+             ARTEF
+             EXTENS
+VAL     =  SRC-PNT , A1 , C
+           TRG-PNT , A2 , C
+           NAME , A3 , C
+GF1     = 1  к_доп : от+Р
+          2  к_доп : из+Р
+GF2     = 1  к_доп : до+Р
+          2  к_доп : в+П
+SF2     = 1  STAT
+GF3     = 1  с_опр : ПРИЛ
+LF      =  Func : находиться
+           Func : располагаться
+           Func : приводить
+           Func : соединять
+           Func : проходить
+           Magn : длинный
+           Loc : на+П
+           Loc : по+Д
+============
+TITLE        = 176978
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( мостовой )
+SF      = 1  SPAC
+             ARTEF
+             EXTENS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : через+В
+          2  к_доп : над+Т
+SF1     = 1  FLUI
+GF2     = 1  с_опр : ПРИЛ
+LF      =  Func : находиться
+           Func : располагаться
+           Func : соединять
+           Magn : длинный
+           Loc : на+П
+           MoveLoc : по+Д
+ENC     =  SRC-PNT ( берег , C )
+           TRG-PNT ( берег , C )
+============
+TITLE        = 176980
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+SF      = 1  SPAC
+             SOLIDUS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : на+П
+GF2     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func : возвышаться
+           CausLoc : восходить
+           Loc : на+П
+ENC     =  ВЫШЕ_ГЕО ( C , склон )
+           BELNG ( C , гора )
+============
+TITLE        = 176982
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( полевой )
+SF      = 1  SPAC
+             SOLIDUS
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  STAT
+GF2     = 1  с_опр : ПРИЛ
+LF      =  Func : находиться
+           Func : располагаться
+           Func : раскинуться
+           Magn : широкое
+           Loc : в+П
+ENC     =  BELNG ( C , равнина )
+============
+TITLE        = 176987
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+EXM     =  поселок Донское Ивановского района
+           поселок поморов
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( поселочный )
+           ПРИЛ ( поселковый )
+           СОКР ( пос. )
+SF      = 1  SPAC
+             COLLEC
+             ARTEF
+VAL     =  PART , C , A1
+           NAME , A2 , C
+           BELNG , C , A3
+GF1     = 1  к_доп : Р
+SF3     = 1  PROF
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : жить
+           CausMagn : застраивать
+           IncepCaus : строить
+           IncepCaus : возводить
+           Loc : в+П
+============
+TITLE        = 176993
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( приточный )
+SF      = 1  SPAC
+             FLUI
+             EXTENS
+             PART
+VAL     =  TRG-PNT , A1 , C
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+GF2     = 1  нс_опр : ИГ
+LF      =  Func : протекать
+           Func : впадать
+           Magn : полноводный
+           Loc : на+П
+ENC     =  BELNG ( C , бассейн )
+           TRG-PNT ( река , C )
+============
+TITLE        = 176995
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  АББР ( просп. )
+SF      = 1  SPAC
+             ARTEF
+             SOLIDUS
+             EXTENS
+VAL     =  SRC-PNT , A1 , C
+           TRG-PNT , A2 , C
+           NAME , A3 , C
+GF1     = 1  к_доп : от+Р
+SF1     = 1  STAT
+GF2     = 1  к_доп : до+Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func : вести
+           Func : соединять
+           Func : идти
+           Magn : широкий
+           Loc : на+П
+ENC     =  BELNG ( C , город )
+           БОЛ_РАЗ ( C , улица )
+============
+TITLE        = 176997
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( сельский )
+           АББР ( с. )
+           АББР ( сел. )
+SF      = 1  SPAC
+             COLLEC
+             STAT
+             ARTEF
+VAL     =  PART , C , A1
+           NAME , A2 , C
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Func1 : жить
+           IncepCaus : строить
+           IncepCaus : возводить
+           Loc : в+П
+           Loc : на+П
+ENC     =  ЖИТЕЛЬ ( селянин )
+           ЖИТЕЛЬ ( селянка )
+           ЖИТЕЛЬ ( селяне )
+           БОЛ_РАЗ ( город , C )
+           БОЛ_РАЗ ( C , деревня )
+           BELNG ( улица , C )
+           CAP ( сельсовет , C )
+           CAP ( староста , C )
+============
+TITLE        = 176998
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  GEO
+GF      = 1  СУЩ:ИГ
+DERIV   =  ПРИЛ ( устьевый )
+           ПРИЛ ( устьевой )
+SF      = 1  SPAC
+             FLUI
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+LF      =  Func : находиться
+           Func : располагаться
+           Loc : в+П
+ENC     =  BELNG ( C , река )
+           TRG-PNT ( C , река )
+============
+TITLE        = 177003
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177005
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = 177007
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           SRC-PNT , A2 , C
+GF1     = 1  X! : ГГ
+GF2     = 1  к_доп : от+Р
+          2  к_доп : за+Т
+============
+TITLE        = 177025
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177028
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177030
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177032
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = 177036
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = 177037
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  ADV
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : VERB
+============
+TITLE        = 177038
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+EXM     =  ехать домой
+           пойти домой к кому-либо
+           путь домой
+           поездки домой
+           попасть домой
+CAT     = 1  LABL.PROPERT
+GF      = 1  НАР:ОБСТ_ГР
+          2  НАР:нар_опр
+SF      = 1  TRG-PNT
+             Adv0 ( дом 2 )
+VAL     =  TRG-PNT , C , A1
+           SUB , A2 , C
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+SF1     = 1  MOV
+          2  EXTENS
+          3  AKTIO
+          4  SITUAT
+GF2     = 1  к_доп : к+Д
+SF2     = 1  ANIM
+          2  PRON
+============
+TITLE        = 177042
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  TRG-PNT
+VAL     =  TRG-PNT , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177044
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177045
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  TRG-PNT
+VAL     =  TRG-PNT , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = 177046
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  TRG-PNT
+VAL     =  TRG-PNT , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177047
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  TRG-PNT
+VAL     =  TRG-PNT , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177048
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177055
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177057
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177059
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  TRG-PNT , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = 177063
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177067
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177068
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177070
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177072
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+EXM     =  снизу дома
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  SRC-PNT
+VAL     =  SRC-PNT , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = 177082
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 | западный
+============
+TITLE        = 177086
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+DERIV   =  СОКР ( в. )
+LF      =  A0 | восточный
+============
+TITLE        = 177088
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 | северный
+============
+TITLE        = 177090
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : северо-западный
+============
+TITLE        = 177092
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 | южный
+============
+TITLE        = 177110
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+EXM     =  Волхонка,  дом 1
+           дом Пашкова в Москве
+           новые дома
+           кирпичные дома
+           дом лесника
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  CONTNR
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : ЧИСЛ
+          2  прим_опр : ЦК
+          3  с_опр : ПРИЛ
+GF2     = 1  к_доп : Р
+SF2     = 1  ANIM
+ENC     =  БОЛ_РАЗ ( домина )
+           ВЫШЕ_ГЕО ( улица )
+           ВЫШЕ_ГЕО ( поселок )
+           ВЫШЕ_ГЕО ( город )
+           ВЫШЕ_ГЕО ( деревня )
+           СОСТОИТ ( комната )
+           СОСТОИТ ( этаж )
+           СОСТОИТ ( квартира )
+============
+TITLE        = 177111
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  CONTNR
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP_attr
+GF2     = 1  of+NP
+SF2     = 1  ANIM
+============
+TITLE        = 177113
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+GF      = 1  СУЩ:ИГ
+SF      = 1  CONTNR
+          2  SPAC
+============
+TITLE        = 177119
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  LOK
+VAL     =  IDENT , A1 , C
+GF1     = 1  с_опр : ПРИЛ
+          2  прим_опр : И
+SF1     = 1  NAME
+============
+TITLE        = 177120
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP_attr
+SF1     = 1  NAME
+============
+TITLE        = 177129
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : АВСТРИЙСКИЙ
+============
+TITLE        = 177130
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : южноамериканский
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 177139
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : АССИРИЙСКИЙ
+============
+TITLE        = 177140
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ASSYRIAN
+============
+TITLE        = 177141
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БАЛТИЙСКИЙ
+============
+TITLE        = 177142
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : BALTIC
+============
+TITLE        = 177143
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БРЮССЕЛЬСКИЙ
+============
+TITLE        = 177144
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : арктический
+============
+TITLE        = 177145
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : arctic
+============
+TITLE        = 177146
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ГИМАЛАЙСКИЙ
+============
+TITLE        = 177147
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : himalayan
+============
+TITLE        = 177148
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ГОЛЛАНДСКИЙ
+============
+TITLE        = 177149
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ГРУЗИНСКИЙ
+============
+TITLE        = 177150
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : GEORGIAN
+============
+TITLE        = 177151
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : КОСТРОМСКОЙ
+============
+TITLE        = 177152
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : kostromskoy
+============
+TITLE        = 177153
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : КРАСНОДАРСКИЙ
+============
+TITLE        = 177154
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : krasnodaeski
+============
+TITLE        = 177155
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : МОНГОЛЬСКИЙ
+============
+TITLE        = 177156
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : mongolian
+============
+TITLE        = 177157
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ОМСКИЙ
+============
+TITLE        = 177158
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : OF OMSK
+============
+TITLE        = 177159
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ПАРИЖСКИЙ
+============
+TITLE        = 177160
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : PARISIAN
+============
+TITLE        = 177161
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ПЕРУАНСКИЙ
+============
+TITLE        = 177162
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : peruvian
+============
+TITLE        = 177163
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : ПОРТУГАЛЬСКИЙ
+============
+TITLE        = 177164
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : portuguese
+============
+TITLE        = 177165
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : СОФИЙСКИЙ
+============
+TITLE        = 177166
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : sofiiski
+============
+TITLE        = 177167
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : УРАЛЬСКИЙ
+============
+TITLE        = 177168
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : uralian
+============
+TITLE        = 177169
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : НИДЕРЛАНДСКИЙ
+============
+TITLE        = 177170
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : БЕЛЬГИЙСКИЙ
+============
+TITLE        = 177171
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : Belgian
+============
+TITLE        = 177172
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : соловецкий
+============
+TITLE        = 177173
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : solovetski
+============
+TITLE        = 177174
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           SRC-PNT , A2 , C
+GF1     = 1  X! : VERB
+============
+TITLE        = 177177
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : austrian
+============
+TITLE        = 177180
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+DETERM  =  the
+EXM     =  north of the equator -
+           к северу от экватора
+============
+TITLE        = 177183
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  CONTNR
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : ЧИСЛ
+          2  прим_опр : ЦК
+          3  с_опр : ПРИЛ
+GF2     = 1  к_доп : Р
+SF2     = 1  ANIM
+============
+TITLE        = 177184
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  CONTNR
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP_attr
+GF2     = 1  of+NP
+SF2     = 1  ANIM
+============
+TITLE        = 177209
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : юго-западный
+============
+TITLE        = 177211
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : юго-восточный
+============
+TITLE        = 177213
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:40:21
+LF      =  A0 : северо-восточный
+============
+TITLE        = @Модель1
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:40:21
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = @Модель3
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  BELNG , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  LOK
+============
+TITLE        = @Модель4
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:40:21
+CAT     = 1  LABL.PROPERT
+GF      = 1  ПРИЛ:с_опр
+VAL     =  PROPERT , C , A1
+GF1     = 1  X! : ИГ
+SF1     = 1  SITUAT
+          2  THINGN
+          3  ANIM

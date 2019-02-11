@@ -1,0 +1,4272 @@
+============
+TITLE        = 100715
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+             COLLEC
+VAL     =  BELNG , A1 , C
+           IDENT , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+GF3     = 1  с_опр : ПРИЛ
+SF3     = 1  EMPL
+          2  SITUAT
+          3  INF
+============
+TITLE        = 102191
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+LF      =  A0 | компьютерный
+           Magn : мощный
+============
+TITLE        = 102192
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 102201
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 104416
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  AIM ( C1 , C2 )
+============
+TITLE        = 105123
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 105922
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 105924
+SENSE       = 1
+REDACT       = user
+TIME_CREATE       = 19/3/3 14:9:9
+AUX     =  MEANS ( C1 , C2 )
+============
+TITLE        = 106189
+SENSE       = 1
+REDACT       = user
+TIME_CREATE       = 19/3/3 14:9:17
+AUX     =  MEANS ( C1 , C2 )
+============
+TITLE        = 106224
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+LF      =  A0 | компьютерный
+============
+TITLE        = 108831
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+============
+TITLE        = 109874
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C3 , C1 )
+============
+TITLE        = 109883
+SENSE       = 1
+REDACT       = user
+TIME_CREATE       = 19/3/3 14:9:20
+AUX     =  MEANS ( C1 , C2 )
+============
+TITLE        = 109885
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 110217
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  процессор IPPII-400MHz
+GF      = 1  ИГ
+SF      = 1  P-DEV
+          2  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF2     = 1  ANIM
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+LF      =  A0 : процессорный
+           Bon : мощный
+============
+TITLE        = 110671
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  текстовый редактор Elm
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  OBJ , A1 , C
+           IDENT , A2 , C
+           BELNG , C , A3
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИЛ
+SF1     = 1  MEDINF
+          2  INF
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF3     = 1  ANIM
+GF3     = 1  с_опр : ПРИТ_МЕСТ
+LF      =  Bon : мощный
+============
+TITLE        = 114097
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 114434
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+LF      =  A0 | компьютерный
+============
+TITLE        = 114635
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+LF      =  A0 | компьютерный
+============
+TITLE        = 114638
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 114643
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+LF      =  A0 | компьютерный
+============
+TITLE        = 118178
+SENSE       = 1
+REDACT       = user
+TIME_CREATE       = 19/3/3 14:9:25
+AUX     =  MEANS ( C1 , C2 )
+============
+TITLE        = 118273
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C2 , C1 )
+============
+TITLE        = 119918
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 120973
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 121488
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+LF      =  A0 | компьютерный
+============
+TITLE        = 121616
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 149732
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+          2  SOFTW
+VAL     =  AUTHOR , A1 , C
+           PURP , A2 , C
+           CONTEN , A3 , C
+           IDENT , A4 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+GF2     = 1  с_опр : ПРИЛ
+          2  к_доп : для+Р
+SF2     = 1  PREDIC
+SF3     = 1  INTEL
+          2  LEGISL
+GF4     = 1  прим_опр : И
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+LF      =  Oper1 : разрабатывать
+           A0 | программный
+ENG     =  program
+EXM     =  антивирусная программа Касперского
+           программа format
+============
+TITLE        = 165632
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  текстовый процессор Elm
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF2     = 1  ANIM
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+LF      =  Bon : мощный
+============
+TITLE        = 173824
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+============
+TITLE        = 173831
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+============
+TITLE        = 173840
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 173841
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 173842
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 173843
+SENSE       = 1
+REDACT       = user
+TIME_CREATE       = 19/3/3 14:9:31
+AUX     =  MEANS ( C1 , C2 )
+============
+TITLE        = 173844
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( A2 , C )
+============
+TITLE        = 173845
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 173846
+SENSE       = 1
+REDACT       = user
+TIME_CREATE       = 19/3/3 14:9:34
+AUX     =  MEANS ( C1 , C2 )
+============
+TITLE        = 173847
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 173859
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+           OBJ , A3 , C
+GF1     = 1  NP_attr : ЦБК
+          2  NP_attr : NOUN
+          3  ADJ
+          4  -
+SF3     = 1  DEV
+          2  APP
+============
+TITLE        = 173862
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 173864
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+             COLLEC
+VAL     =  BELNG , A1 , C
+           IDENT , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  of+NP
+          2  NP_attr
+          3  NP
+GF2     = 1  ЦБК
+============
+TITLE        = 173878
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 173897
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  the Net and your computer are hardier than you think , so relax .
+           - Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+LF      =  A0 : computer
+============
+TITLE        = 173920
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 173923
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Linux can turn any 386 or 486 PC into a workstation
+           - Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+============
+TITLE        = 173924
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Linux can turn any 386 or 486 PC into a workstation
+           - Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+============
+TITLE        = 173937
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  processor IPPII-400MHz - процессор IPPII-400MHz
+GF      = 1  NOUN
+SF      = 1  P-DEV
+          2  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 173939
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  text editor Elm - текстовый редактор Elm
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  OBJ , A1 , C
+           IDENT , A2 , C
+           BELNG , C , A3
+GF1     = 1  of+NP
+          2  NP
+          3  -
+GF2     = 1  ЦБК
+GF3     = 1  NP_attr
+============
+TITLE        = 173945
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 173951
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 173954
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 173957
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  E-MAIL SYSTEM - система электронноы почты
+CAT     = 1  LABL
+GF      = 1  NP
+SF      = 1  COMMUNIC
+          2  COLLEC
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+GF1     = 1  of+NP
+          2  from+NP
+          3  -
+GF2     = 1  to+NP
+          2  NP_attr
+LF      =  Oper1 : send
+           Oper2 : receive
+============
+TITLE        = 173958
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 173961
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+           OBJ , A3 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  с_опр : ПРИЛ
+GF2     = 1  прим_опр : ИГ
+GF3     = 1  к_доп : Р
+SF3     = 1  DEV
+          2  APP
+============
+TITLE        = 173962
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  LOK ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 173981
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+LF      =  A0 | компьютерный
+============
+TITLE        = 173994
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИГ
+SF2     = 1  ANIM
+          2  ORG
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+============
+TITLE        = 173997
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ИЛЕ
+          2  ЦБК
+          3  ИГ
+============
+TITLE        = 174003
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  текстовый редактор Elm
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  OBJ , A1 , C
+           IDENT , A2 , C
+           BELNG , C , A3
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИЛ
+SF1     = 1  MEDINF
+          2  INF
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF3     = 1  ANIM
+GF3     = 1  с_опр : ПРИТ_МЕСТ
+LF      =  Bon : мощный
+============
+TITLE        = 174010
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 174013
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  откройте файл readme.txt и закройте его
+           системный файл
+           архивный файл
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           CONTEN , A2 , C
+           PURP , A3 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+          3  с_опр : ПРИЛ
+SF2     = 1  INF
+          2  SOFTW
+          3  ARTEF
+SF3     = 1  SITUAT
+LF      =  A0 : файловый
+           CausFunc0 : создавать
+           LiquFunc0 : стирать
+           LiquFunc0 : удалять
+============
+TITLE        = 174015
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 174016
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 174017
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  the Net and your computer are hardier than you think , so relax .
+           - Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+============
+TITLE        = 174018
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  the Net and your computer are hardier than you think , so relax .
+           - Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+============
+TITLE        = 174019
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  the Net and your computer are hardier than you think , so relax .
+           - Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+============
+TITLE        = 174088
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           PART , C , A2
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИГ
+SF2     = 1  SOFTW
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИЛ
+          3  с_опр : ПРИТ_МЕСТ
+LEX2    =  операционная система
+============
+TITLE        = 174089
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           PART , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 174090
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 174091
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C2 , C1 )
+============
+TITLE        = 174093
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174094
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174095
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174096
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174097
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174098
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174099
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174119
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  E-MAIL SYSTEM - система электронноы почты
+CAT     = 1  LABL
+GF      = 1  NP
+SF      = 1  COMMUNIC
+          2  COLLEC
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+GF1     = 1  of+NP
+          2  from+NP
+          3  -
+GF2     = 1  to+NP
+          2  NP_attr
+LF      =  Oper1 : send
+           Oper2 : receive
+============
+TITLE        = 174140
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 174143
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 174144
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  адрес в сети
+           адрес электронной почты
+           мой адрес не дом и не улица
+           сетевой адрес
+           почтовый адрес
+           в этом случае ваш IP адрес будет тот же самый
+GF      = 1  СУЩ:ИГ
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           IDENT , A2 , C
+           RESTR , A3 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+          3  DEV
+          4  P-DEV
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF3     = 1  в+П
+          2  с_опр : ПРИЛ
+          3  ИЛЕ
+SF3     = 1  GEOGR
+          2  MULTI
+          3  MEDINF
+LEX3    =  память
+           сеть
+           интернет
+LF      =  A0 | адресный
+============
+TITLE        = 174146
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+           LOK ( C3 , C2 )
+============
+TITLE        = 174147
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 174148
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 174149
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 174204
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 174205
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 174215
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 174233
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 174234
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 174235
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  видеоадаптер svga
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИГ
+============
+TITLE        = 174236
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  видеокарта svga
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИГ
+============
+TITLE        = 174237
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  videoadapter svga
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ЦБК
+          2  NP
+          3  -
+============
+TITLE        = 174238
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  videocard svga
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+GF1     = 1  ЦБК
+          2  NP
+          3  -
+============
+TITLE        = 174242
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C3 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 174247
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174248
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174249
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174251
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174255
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174256
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174259
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 174262
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 174263
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 174265
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+DOMAIN  =  информ
+GF      = 1  NOUN
+SF      = 1  PART
+             SOFTW
+VAL     =  PART , C , A1
+           IDENT , A2 , C
+GF1     = 1  NP_attr
+          2  ADJ
+          3  -
+GF2     = 1  прим_опр : ЦБК
+EXM     =  Linux kernel -
+           ядро Линукса
+============
+TITLE        = 174267
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  PART
+             SOFTW
+VAL     =  PART , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  MEDINF
+GF2     = 1  прим_опр : ЦБК
+EXM     =  ядро Линукса
+============
+TITLE        = 174278
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  open file readme.txt & than close it - откройте файл readme.txt и закройте его
+           system file - системный файл
+           archive file - архивный файл
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           CONTEN , A2 , C
+           PURP , A3 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+LF      =  CausFunc0 : create
+           LiquFunc0 : delete
+============
+TITLE        = 174290
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174291
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C2 , C3 )
+           PROPERT ( C1 , C3 )
+============
+TITLE        = 174296
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИГ
+SF2     = 1  ANIM
+          2  ORG
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+============
+TITLE        = 174297
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 174298
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 174303
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174306
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 174310
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174311
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174312
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 174313
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 174317
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174318
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  of+NP
+          2  NP
+          3  -
+============
+TITLE        = 174319
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  ESTIM ( C2 , C3 )
+           ADR ( C1 , C2 )
+============
+TITLE        = 174320
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  ESTIM ( C1 , C2 )
+============
+TITLE        = 174321
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  SOFTW
+          2  P-DEV
+VAL     =  PART , C , A1
+           IDENT , A2 , C
+GF1     = 1  of+NP
+          2  NP
+          3  -
+GF2     = 1  ЦБК
+EXM     =  scsi interface - интерфейс scsi
+============
+TITLE        = 174322
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174323
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  ESTIM ( C1 , C2 )
+============
+TITLE        = 174324
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+          2  P-DEV
+VAL     =  PART , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр
+SF1     = 1  DEV
+GF2     = 1  ИЛЕ
+          2  ЦБК
+LF      =  A0 : интерфейсный
+EXM     =  интерфейс scsi
+============
+TITLE        = 174328
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174330
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  of+NP
+          2  NP
+          3  -
+============
+TITLE        = 174338
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 174339
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 174343
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174350
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174352
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174353
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174369
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  of+NP
+          2  NP
+          3  -
+============
+TITLE        = 174375
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+GF1     = 1  NP
+          2  ADJ
+          3  -
+LF      =  Incep : open
+EXM     =  the user can have multiple terminal windows on the screen at once -
+           пользователь может одновременно иметь на экране несколько окон
+============
+TITLE        = 174396
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  клавиша Esc
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           PURP , A2 , C
+GF1     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF1     = 1  KEY
+          2  SITUAT
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИЛ
+LF      =  Oper : нажимать
+           Oper : удерживать
+============
+TITLE        = 174397
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  Esc key - клавиша Esc
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           PURP , A2 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  ADJ
+LF      =  Oper : press
+           Oper : srtike
+           Oper : hit
+EXM     =  m key  -
+           клавиша m
+           D key -
+           символ D
+============
+TITLE        = 174403
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174404
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 174405
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  of+NP
+          2  NP
+          3  -
+============
+TITLE        = 174433
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 174434
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+             COLLEC
+VAL     =  BELNG , A1 , C
+           IDENT , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  of+NP
+          2  NP_attr
+          3  NP
+GF2     = 1  ЦБК
+============
+TITLE        = 174435
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174437
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C3 , C2 )
+           IDENT ( C1 , C2 )
+           OBJ ( C4 , C3 )
+============
+TITLE        = 174438
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C3 , C2 )
+           IDENT ( C1 , C2 )
+           OBJ ( C4 , C3 )
+============
+TITLE        = 174439
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 174441
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174445
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C2 , C1 )
+============
+TITLE        = 174446
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C2 , C1 )
+============
+TITLE        = 174448
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 174479
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C2 , C3 )
+           PROPERT ( C1 , C3 )
+============
+TITLE        = 174514
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+          3  MEDINF
+GF2     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИГ
+AUX     =  BELNG ( C2 , C1 )
+============
+TITLE        = 174515
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           IDENT , A2 , C
+GF1     = 1  of+NP
+          2  NP
+          3  -
+GF2     = 1  ЦБК
+============
+TITLE        = 174520
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C2 , C1 )
+============
+TITLE        = 174522
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  text processor Elm - текстовый процессор Elm
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 174528
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  AUTHOR , A1 , C
+           ADR , A2 , C
+GF1     = 1  from+NP
+          2  NP_poss
+          3  PN_poss
+          4  -
+GF2     = 1  to+NP
+LF      =  Oper1 : send 1
+           Oper2 : receive 1
+============
+TITLE        = 174538
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 174541
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 174542
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 174544
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  в каталоге /pub/Linux/system/Mail
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  COLLEC
+             MEDINF
+VAL     =  IDENT , A1 , C
+           CONTEN , A2 , C
+           BELNG , A3 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF1     = 1  NAME
+GF2     = 1  с_опр : ПРИЛ
+          2  к_доп : Р
+          3  с+Т
+SF2     = 1  INF
+          2  ORG
+GF3     = 1  с_опр : ПРИТ_МЕСТ
+SF3     = 1  ANIM
+LF      =  Func2 : содержать
+============
+TITLE        = 174545
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  in the directory /pub/Linux/system/Mail - в каталоге /pub/Linux/system/Mail
+GF      = 1  NOUN
+SF      = 1  COLLEC
+             MEDINF
+VAL     =  IDENT , A1 , C
+           CONTEN , A2 , C
+           BELNG , A3 , C
+GF1     = 1  NP_attr
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_poss
+GF3     = 1  PN_poss
+LF      =  Func2 : contain
+============
+TITLE        = 174551
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  in the directory /pub/Linux/system/Mail - в каталоге /pub/Linux/system/Mail
+GF      = 1  NOUN
+SF      = 1  COLLEC
+             MEDINF
+VAL     =  IDENT , A1 , C
+           CONTEN , A2 , C
+           BELNG , A3 , C
+GF1     = 1  NP_attr
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_poss
+GF3     = 1  PN_poss
+LF      =  Func2 : contain
+============
+TITLE        = 174552
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  в каталоге /pub/Linux/system/Mail
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  COLLEC
+             MEDINF
+VAL     =  IDENT , A1 , C
+           CONTEN , A2 , C
+           BELNG , A3 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF1     = 1  NAME
+GF2     = 1  с_опр : ПРИЛ
+          2  к_доп : Р
+          3  с+Т
+SF2     = 1  INF
+          2  ORG
+GF3     = 1  с_опр : ПРИТ_МЕСТ
+SF3     = 1  ANIM
+LF      =  Func2 : содержать
+============
+TITLE        = 174643
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C2 , C1 )
+============
+TITLE        = 174646
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  AGENT , A1 , C
+           OBJ , A2 , C
+GF1     = 1  к_доп : Т
+SF1     = 1  ANIM
+GF2     = 1  к_доп : Р
+          2  к_доп : ИЛЕ
+          3  к_доп : ЦБК
+          4  к_доп : квч
+SF2     = 1  P-DEV
+          2  KEY
+LEX2    =  клавиша
+============
+TITLE        = 174651
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  комбинация клавиш control-c
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           PURP , A2 , C
+GF1     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF1     = 1  KEY
+          2  SITUAT
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИЛ
+============
+TITLE        = 174652
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  комбинация клавиш control-c - control-c keystroke
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           PURP , A2 , C
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  ADJ
+============
+TITLE        = 174656
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+VAL     =  AGENT , A1 , C
+           OBJ , A2 , C
+GF1     = 1  к_доп : Т
+SF1     = 1  ANIM
+GF2     = 1  к_доп : Р
+          2  к_доп : ИЛЕ
+          3  к_доп : ЦБК
+          4  к_доп : квч
+SF2     = 1  P-DEV
+          2  KEY
+LEX2    =  клавиша
+============
+TITLE        = 174681
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174682
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C1 , C2 )
+============
+TITLE        = 174683
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C2 , C1 )
+============
+TITLE        = 174689
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  AIM ( C1 , C2 )
+============
+TITLE        = 174705
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 174878
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+           OBJ ( C4 , C3 )
+============
+TITLE        = 174890
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 174904
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+GF2     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+============
+TITLE        = 174919
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174920
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  E-MAIL SYSTEM - система электронноы почты
+CAT     = 1  LABL
+GF      = 1  NP
+SF      = 1  COMMUNIC
+          2  COLLEC
+VAL     =  SUB , A1 , C
+           ADR , A2 , C
+GF1     = 1  of+NP
+          2  from+NP
+          3  -
+GF2     = 1  to+NP
+          2  NP_attr
+LF      =  Oper1 : send
+           Oper2 : receive
+============
+TITLE        = 174921
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174922
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C2 , C3 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 174923
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174924
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C2 , C1 )
+           OBJ ( C4 , C2 )
+           PROPERT ( C3 , C2 )
+============
+TITLE        = 174926
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174927
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  LOK ( C4 , C2 )
+           PROPERT ( C1 , C2 )
+           PROPERT ( C3 , C4 )
+============
+TITLE        = 174928
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  LOK ( C2 , C1 )
+============
+TITLE        = 174930
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174931
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174940
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174941
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174942
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 174949
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+GF2     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+============
+TITLE        = 174952
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           PURP ( C2 , C1 )
+============
+TITLE        = 174953
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174954
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 174955
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 174956
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           PURP ( C2 , C3 )
+============
+TITLE        = 174957
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           PURP ( C2 , C1 )
+============
+TITLE        = 174958
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174960
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174978
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C2 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 174981
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+           IDENT ( C3 , C2 )
+============
+TITLE        = 174982
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 174983
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C2 , C3 )
+           IDENT ( C1 , C3 )
+============
+TITLE        = 174986
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 174987
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+============
+TITLE        = 174988
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 174989
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 174990
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+============
+TITLE        = 174991
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+============
+TITLE        = 174992
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+============
+TITLE        = 174993
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+           IDENT ( C3 , C2 )
+============
+TITLE        = 174994
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+           IDENT ( C3 , C2 )
+============
+TITLE        = 174995
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+           IDENT ( C3 , C4 )
+============
+TITLE        = 174996
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+============
+TITLE        = 174997
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 174998
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C3 , C1 )
+============
+TITLE        = 175006
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 175007
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 175013
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 175022
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 175023
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 175024
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  текстовый процессор Elm
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF2     = 1  ANIM
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+LF      =  Bon : мощный
+============
+TITLE        = 175026
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175027
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175028
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175029
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+============
+TITLE        = 175034
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175035
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175036
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175044
+SENSE       = 1
+REDACT       = user
+TIME_CREATE       = 19/3/3 14:9:38
+AUX     =  MEANS ( C2 , C3 )
+           PROPERT ( C1 , C3 )
+============
+TITLE        = 175049
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175053
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175067
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175068
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175076
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175078
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 175079
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  ANIM
+VAL     =  OBJ , A1 , C
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИЛ
+SF1     = 1  DEV
+          2  APP
+          3  MULTI
+GF2     = 1  прим_опр : ИГ
+SF2     = 1  NAME
+LF      =  A0 : административный
+============
+TITLE        = 175081
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  SOFTW
+             CONTNR
+          2  P-DEV
+VAL     =  BELNG , C , A1
+           CONTEN , A2 , C
+GF1     = 1  к_доп : Р
+          2  к_доп : в+П
+          3  с_опр : ПРИТ_МЕСТ
+LF      =  Func2 : содержать
+============
+TITLE        = 175083
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  SOFTW
+             CONTNR
+          2  P-DEV
+VAL     =  BELNG , C , A1
+           CONTEN , A2 , C
+GF1     = 1  к_доп : Р
+          2  к_доп : в+П
+          3  с_опр : ПРИТ_МЕСТ
+LF      =  Func2 : содержать
+============
+TITLE        = 175097
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+           PROPERT ( C4 , C1 )
+           PROPERT ( C3 , C4 )
+============
+TITLE        = 175098
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C3 )
+           PROPERT ( C1 , C3 )
+============
+TITLE        = 175102
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175103
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175104
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           PURP ( C2 , C1 )
+============
+TITLE        = 175105
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175110
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 175111
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C3 , C2 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 175112
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+           PROPERT ( C4 , C1 )
+           PROPERT ( C3 , C4 )
+============
+TITLE        = 175113
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 175114
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C3 )
+           PROPERT ( C1 , C3 )
+============
+TITLE        = 175125
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175173
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 175174
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175192
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 175213
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  processor IPPII-400MHz - процессор IPPII-400MHz
+GF      = 1  NOUN
+SF      = 1  P-DEV
+          2  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 175214
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  processor IPPII-400MHz - процессор IPPII-400MHz
+GF      = 1  NOUN
+SF      = 1  P-DEV
+          2  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 175231
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 175232
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 175233
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 175253
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  процессор IPPII-400MHz
+GF      = 1  ИГ
+SF      = 1  P-DEV
+          2  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF2     = 1  ANIM
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+LF      =  A0 : процессорный
+           Bon : мощный
+============
+TITLE        = 175271
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 175286
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+           PURP ( C3 , C2 )
+============
+TITLE        = 175287
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PURP ( C2 , C3 )
+============
+TITLE        = 175288
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 175290
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+           PURP ( C3 , C2 )
+============
+TITLE        = 175291
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+============
+TITLE        = 175292
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PURP ( C2 , C3 )
+============
+TITLE        = 175293
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 175300
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 175306
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 175308
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175334
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( A2 , C )
+============
+TITLE        = 175338
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  COLLEC
+             MEDINF
+             SOFTW
+VAL     =  CONTEN , A1 , C
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+LF      =  Func1 : иметь
+           A0 | библиотечный
+EXM     =  библиотека файлов формата GIF
+============
+TITLE        = 175339
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  COLLEC
+             MEDINF
+          2  SOFTW
+VAL     =  CONTEN , A1 , C
+GF1     = 1  NP_attr
+          2  of+NP
+          3  -
+LF      =  Func1 : have
+EXM     =  a large file library of GIF - format -
+           библиотеку файлов формата GIF
+           libraries of documents  -
+           библиотеки документов
+           library to install -
+           инсталлируемая библиотека
+============
+TITLE        = 175340
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C2 , C1 )
+============
+TITLE        = 175343
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175344
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           PURP ( C2 , C3 )
+============
+TITLE        = 175345
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175346
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           PURP ( C2 , C1 )
+============
+TITLE        = 175347
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           PURP ( C2 , C1 )
+============
+TITLE        = 175348
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175350
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+           PURP ( C3 , C2 )
+============
+TITLE        = 175351
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 175352
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PURP ( C2 , C3 )
+============
+TITLE        = 175353
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = 175396
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+             SOFTW
+VAL     =  PART , C , A1
+           AUTHOR , A2 , C
+GF1     = 1  of+NP
+          2  for+NP
+          3  NP_poss
+          4  PN_poss
+          5  -
+LF      =  Oper1 : contain
+           V0 : code
+EXM     =  The important thing is / usr / src / linux ,
+           which contains the source code for the Linux kernel -
+           важная вещь , это / usr / src / linux ,
+           содержащий исходные коды ядра Linux
+COMM    =  code2  - код-индекс с VAL IDENT
+============
+TITLE        = 175419
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 175420
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175424
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 175426
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 175465
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 175466
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  file in GIF format - файл в формате GIF
+CAT     = 1  ASP
+GF      = 1  NOUN
+SF      = 1  LEGISL
+VAL     =  PARAM , C , A1
+           IDENT , A2 , C
+GF1     = 1  of+NP
+          2  NP
+GF2     = 1  ЦБК
+          2  -
+============
+TITLE        = 175467
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175469
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175492
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175494
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TYPE-OF ( C1 , C2 )
+============
+TITLE        = 175497
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175500
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175502
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175506
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TYPE-OF ( C1 , C2 )
+============
+TITLE        = 175508
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+             COLLEC
+VAL     =  BELNG , A1 , C
+           IDENT , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  of+NP
+          2  NP_attr
+          3  NP
+GF2     = 1  ЦБК
+============
+TITLE        = 175509
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+             COLLEC
+VAL     =  BELNG , A1 , C
+           IDENT , A2 , C
+           CONTEN , A3 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+GF3     = 1  с_опр : ПРИЛ
+SF3     = 1  EMPL
+          2  SITUAT
+          3  INF
+============
+TITLE        = 175532
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 175533
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 175534
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175535
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 175538
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175551
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175552
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175554
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175568
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  text processor Elm - текстовый процессор Elm
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 175597
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           OBJ ( C2 , C3 )
+============
+TITLE        = 175598
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           OBJ ( C2 , C3 )
+============
+TITLE        = 175600
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 175601
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 175602
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           OBJ ( C2 , C3 )
+============
+TITLE        = 175603
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           OBJ ( C2 , C3 )
+============
+TITLE        = 175605
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 175606
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 175608
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           OBJ ( C2 , C3 )
+============
+TITLE        = 175609
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C3 )
+           OBJ ( C2 , C3 )
+============
+TITLE        = 175612
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 175613
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 175642
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+DOMAIN  =  разг
+============
+TITLE        = 175652
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр
+GF4     = 1  прим_опр : ЦБК
+          2  прим_опр : ИЛЕ
+LF      =  A0 | шинный
+EXM     =  адресная шина
+           системная шина
+           шина ISA
+============
+TITLE        = 175654
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+GF1     = 1  NP
+          2  -
+GF4     = 1  ЦБК
+EXM     =  address bus - адресная шина
+           system bus - системная шина
+           ISA bus - шина ISA
+============
+TITLE        = 175655
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+GF1     = 1  NP
+          2  -
+GF4     = 1  ЦБК
+EXM     =  address bus - адресная шина
+           system bus - системная шина
+           ISA bus - шина ISA
+============
+TITLE        = 175665
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PART ( C2 , C1 )
+============
+TITLE        = 175666
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PART ( C2 , C1 )
+============
+TITLE        = 175667
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  контроллер ide
+           контроллер дисков
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           OBJ , A2 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИГ
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИЛ
+SF3     = 1  DEV
+          2  APP
+============
+TITLE        = 175668
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  ide controller
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           OBJ , A2 , C
+GF1     = 1  ЦБК
+          2  NP
+          3  -
+GF2     = 1  of+NP
+============
+TITLE        = 175670
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 175673
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+============
+TITLE        = 175674
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+SF      = 1  SOFTW
+VAL     =  PART , C , A1
+GF1     = 1  of+NP
+          2  NP
+          3  -
+============
+TITLE        = 175732
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175734
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C3 , C4 )
+           PROPERT ( C2 , C4 )
+           PART ( C1 , C4 )
+============
+TITLE        = 175736
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C2 , C3 )
+           PROPERT ( C1 , C3 )
+           PART ( C4 , C3 )
+============
+TITLE        = 175737
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+LF      =  A0 : аппаратный
+============
+TITLE        = 175741
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 175742
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C2 , C1 )
+============
+TITLE        = 175744
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 175750
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PART ( C1 , C2 )
+============
+TITLE        = 175753
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PART ( C1 , C2 )
+============
+TITLE        = 175769
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  в каталоге /pub/Linux/system/Mail
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  COLLEC
+             MEDINF
+VAL     =  IDENT , A1 , C
+           CONTEN , A2 , C
+           BELNG , A3 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF1     = 1  NAME
+GF2     = 1  с_опр : ПРИЛ
+          2  к_доп : Р
+          3  с+Т
+SF2     = 1  INF
+          2  ORG
+GF3     = 1  с_опр : ПРИТ_МЕСТ
+SF3     = 1  ANIM
+LF      =  Func2 : содержать
+============
+TITLE        = 175798
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 175799
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 175822
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 175823
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 175824
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 175825
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C3 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 175831
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  network address - адрес в сети
+           e-mail address - адрес электронной почты
+GF      = 1  СУЩ:ИГ
+SF      = 1  LOK
+VAL     =  LOK , C , A1
+           IDENT , A2 , C
+           RESTR , A3 , C
+GF1     = 1  of+NP
+          2  NP_attr
+GF2     = 1  NP
+          2  ЦБК
+LEX3    =  memory
+           network
+           internet
+           e-mail
+============
+TITLE        = 175836
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  LOK ( C2 , C1 )
+============
+TITLE        = 175851
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175852
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175853
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175856
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175857
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175858
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175859
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175860
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175861
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175866
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175867
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175868
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175869
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  SOFTW
+============
+TITLE        = 175884
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  ARTEF
+============
+TITLE        = 175885
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 175887
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 175895
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+============
+TITLE        = 175896
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TRG-PNT ( C2 , C1 )
+============
+TITLE        = 175897
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175898
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C3 , C1 )
+============
+TITLE        = 175910
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 175911
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 175912
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 175915
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175916
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175918
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C3 , C1 )
+============
+TITLE        = 175920
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 175921
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 175922
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 175924
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 175931
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 175932
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 175982
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 175987
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 175988
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C2 , C1 )
+============
+TITLE        = 175989
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C2 , C1 )
+============
+TITLE        = 176008
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176016
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C2 , C1 )
+============
+TITLE        = 176024
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 176042
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 176044
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 176047
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C1 , C2 )
+============
+TITLE        = 176048
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C2 , C1 )
+============
+TITLE        = 176053
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+          2  SOFTW
+VAL     =  AUTHOR , A1 , C
+           PURP , A2 , C
+           CONTEN , A3 , C
+           IDENT , A4 , C
+GF1     = 1  of+NP
+          2  NP_attr
+          3  NP
+          4  by+NP
+          5  -
+GF2     = 1  ADJ
+GF4     = 1  ЦБК
+LF      =  Oper1 : develop
+           A0 : program
+EXM     =  Anti-viral program by Kaspersky
+           - антивирусная программа Касперского
+           format program
+           - программа format
+============
+TITLE        = 176054
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176056
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176079
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176080
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176081
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176082
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C2 , C1 )
+============
+TITLE        = 176083
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C2 , C1 )
+============
+TITLE        = 176086
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176087
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176088
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176093
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  имя директории
+           имя диска
+GF      = 1  СУЩ:ИГ
+SF      = 1  IDENT
+VAL     =  BELNG , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+LF      =  Oper1 : носить
+           Oper1 : иметь
+           A0 : именной
+============
+TITLE        = 176094
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  folder nam - имя директории
+           Drive name - имя диска
+GF      = 1  NOUN
+SF      = 1  IDENT
+VAL     =  BELNG , C , A1
+           IDENT , A2 , C
+GF1     = 1  of+NP
+          2  NP_attr
+GF2     = 1  NP
+          2  ЦБК
+============
+TITLE        = 176123
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 176124
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 176146
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176167
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 176168
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176169
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C3 )
+           OBJ ( C1 , C2 )
+============
+TITLE        = 176174
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 176175
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C3 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 176177
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 176178
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+           IDENT ( C3 , C1 )
+============
+TITLE        = 176185
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  MEDINF
+VAL     =  TYPE-OF , A1 , C
+           IDENT , A2 , C
+GF1     = 1  с_опр
+GF2     = 1  ИЛЕ
+          2  ЦБК
+============
+TITLE        = 176186
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  TYPE-OF , A1 , C
+           IDENT , A2 , C
+GF1     = 1  NP
+          2  ADJ
+          3  -
+GF2     = 1  ЦБК
+============
+TITLE        = 176193
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TYPE-OF ( C1 , C2 )
+============
+TITLE        = 176196
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TYPE-OF ( C1 , C2 )
+============
+TITLE        = 176197
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TYPE-OF ( C1 , C2 )
+============
+TITLE        = 176198
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  TYPE-OF ( C1 , C2 )
+============
+TITLE        = 176200
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 176201
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 176233
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 176234
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176235
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C2 , C1 )
+============
+TITLE        = 176236
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C2 , C1 )
+============
+TITLE        = 176237
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C1 , C2 )
+============
+TITLE        = 176238
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 176239
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176240
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  PARAM
+VAL     =  PARAM , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  SOFTW
+          2  MEDINF
+LF      =  Oper1 : использовать
+============
+TITLE        = 176241
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  PARAM
+VAL     =  PARAM , C , A1
+GF1     = 1  к_доп : Р
+SF1     = 1  SOFTW
+          2  MEDINF
+LF      =  Oper1 : использовать
+============
+TITLE        = 176242
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NP
+SF      = 1  PARAM
+VAL     =  PARAM , C , A1
+GF1     = 1  NP_attr
+          2  -
+LF      =  Oper1 : use
+============
+TITLE        = 176294
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 176295
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176336
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 176337
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 176338
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 176339
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C1 , C2 )
+============
+TITLE        = 176344
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+GF      = 1  ИГ
+============
+TITLE        = 176345
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+GF      = 1  ИГ
+============
+TITLE        = 176346
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+GF      = 1  ИГ
+============
+TITLE        = 176347
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+SF      = 1  P-DEV
+GF      = 1  ИГ
+============
+TITLE        = 176379
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+          2  SOFTW
+VAL     =  AUTHOR , A1 , C
+           PURP , A2 , C
+           CONTEN , A3 , C
+           IDENT , A4 , C
+GF1     = 1  of+NP
+          2  NP_attr
+          3  NP
+          4  by+NP
+          5  -
+GF2     = 1  ADJ
+GF4     = 1  ЦБК
+LF      =  Oper1 : develop
+           A0 : program
+EXM     =  Anti-viral program by Kaspersky
+           - антивирусная программа Касперского
+           format program
+           - программа format
+============
+TITLE        = 176424
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 176425
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  LOK ( C2 , C1 )
+============
+TITLE        = 176429
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  LOK ( C2 , C1 )
+============
+TITLE        = 176449
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 176450
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = 176453
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176454
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  hard disk 126.4Gb - жесткий диск 126.4Gb
+           disk a: - диск a:
+GF      = 1  NOUN
+SF      = 1  DEV
+          2  MEDINF
+VAL     =  IDENT , A1 , C
+           RESTR , A2 , C
+GF1     = 1  NP_attr
+          2  CHAR
+GF2     = 1  NP
+============
+TITLE        = 176458
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  жесткий диск 126.4Gb
+           диск a:
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  DEV
+          2  MEDINF
+VAL     =  IDENT , A1 , C
+           RESTR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ЦБК
+SF1     = 1  NAME
+SF2     = 1  QUANTIT
+LF      =  A0 : дисковый
+============
+TITLE        = 176461
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176462
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C2 , C1 )
+============
+TITLE        = 176465
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+VAL     =  OBJ , A1 , C
+GF1     = 1  к_доп : Р
+SF1     = 1  SOFTW
+          2  DEV
+          3  P-DEV
+LF      =  V0 | специфицировать
+EXM     =  спецификация протокола
+============
+TITLE        = 176469
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176470
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176471
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176472
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176473
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C1 , C2 )
+============
+TITLE        = 176502
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  ИГ
+SF      = 1  P-DEV
+VAL     =  PART , C , A1
+GF1     = 1  к_доп : Р
+          2  с_опр
+LEX1    =  процессор
+           микропроцессор
+EXM     =  адресное пространство процессора 80386
+============
+TITLE        = 176503
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  PART , A1 , C
+GF1     = 1  of+NP
+          2  NP
+          3  -
+LEX1    =  processor
+           microprocessor
+EXM     =  8086 processor address space - адресное пространство процессора 8086
+============
+TITLE        = 176508
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PURP ( C2 , C1 )
+============
+TITLE        = 176510
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 176511
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 176512
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  IDENT , A1 , C
+           AUTHOR , A2 , C
+GF1     = 1  прим_опр : И
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ЦБК
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF2     = 1  ORG
+          2  ANIM
+============
+TITLE        = 176514
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  СУЩ:ИГ
+SF      = 1  SITUAT
+VAL     =  SUB , A1 , C
+           OBJ , A2 , C
+GF1     = 1  к_доп : Т
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  ANIM
+          2  ORG
+GF2     = 1  к_доп : Р
+SF2     = 1  DEV
+          2  MULTI
+LF      =  V0 : администрировать
+============
+TITLE        = 176515
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C3 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 176517
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C3 , C2 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 176518
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C3 , C1 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = 176519
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C3 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 176567
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  ИГ
+SF      = 1  PARAM
+VAL     =  PARAM , C , A1
+GF1     = 1  к_доп : Р
+          2  к_доп : Т
+SF1     = 1  SOFTW
+          2  MEDINF
+============
+TITLE        = 176577
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  имя директории
+           имя диска
+GF      = 1  СУЩ:ИГ
+SF      = 1  IDENT
+VAL     =  BELNG , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+LF      =  Oper1 : иметь
+============
+TITLE        = 176578
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176579
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176580
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176581
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176582
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  BELNG ( C1 , C2 )
+============
+TITLE        = 176584
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 176585
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 176586
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C3 , C1 )
+           OBJ ( C2 , C1 )
+============
+TITLE        = 176587
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  архитектура процессора
+GF      = 1  СУЩ:ИГ
+SF      = 1  LEGISL
+VAL     =  OBJ , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр
+SF1     = 1  DEV
+          2  P-DEV
+          3  SOFTW
+GF2     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+          4  с_опр : ПРИЛ
+LF      =  A0 : архитектурный
+============
+TITLE        = 176588
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  processoer architecture - архитектура процессора
+GF      = 1  NOUN
+SF      = 1  LEGISL
+VAL     =  OBJ , C , A1
+           IDENT , A2 , C
+GF1     = 1  of+NP
+          2  NP
+          3  -
+GF2     = 1  ЦБК
+          2  ADJ
+============
+TITLE        = 176589
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C2 , C1 )
+============
+TITLE        = 176590
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 176596
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  текстовый процессор Elm
+GF      = 1  ИГ
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  прим_опр : ИГ
+          2  прим_опр : ЦБК
+          3  прим_опр : ИЛЕ
+SF2     = 1  ANIM
+GF2     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+LF      =  Bon : мощный
+============
+TITLE        = 176597
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  text processor Elm - текстовый процессор Elm
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 176598
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  text processor Elm - текстовый процессор Elm
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 176599
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  text processor Elm - текстовый процессор Elm
+GF      = 1  NOUN
+SF      = 1  SOFTW
+VAL     =  IDENT , A1 , C
+           BELNG , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 176603
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  файл в формате GIF
+CAT     = 1  ASP
+GF      = 1  СУЩ:ИГ
+SF      = 1  LEGISL
+VAL     =  PARAM , C , A1
+           IDENT , A2 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+SF1     = 1  INF
+          2  MEDINF
+GF2     = 1  прим_опр : ЦБК
+          2  прим_опр : ИЛЕ
+          3  прим_опр : ИГ
+LF      =  A0 : форматный
+============
+TITLE        = 176604
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  OBJ ( C1 , C2 )
+============
+TITLE        = 176605
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+GF      = 1  NOUN
+SF      = 1  MEDINF
+VAL     =  IDENT , A1 , C
+           PART , C , A2
+GF1     = 1  NP
+          2  ЦБК
+          3  -
+GF2     = 1  of+NP
+          2  NP_attr
+============
+TITLE        = 176606
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  карта vga
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+           OBJ , A3 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  с_опр : ПРИЛ
+GF2     = 1  прим_опр : ИГ
+GF3     = 1  к_доп : Р
+SF3     = 1  DEV
+          2  APP
+============
+TITLE        = 176607
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  карта vga
+GF      = 1  СУЩ:ИГ
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+           OBJ , A3 , C
+GF1     = 1  прим_опр : ИЛЕ
+          2  прим_опр : ЦБК
+          3  с_опр : ПРИЛ
+GF2     = 1  прим_опр : ИГ
+GF3     = 1  к_доп : Р
+SF3     = 1  DEV
+          2  APP
+============
+TITLE        = 176608
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+EXM     =  vga card
+GF      = 1  NOUN
+SF      = 1  P-DEV
+VAL     =  RESTR , A1 , C
+           IDENT , A2 , C
+           OBJ , A3 , C
+GF1     = 1  ЦБК
+          2  NP
+          3  ADJ
+          4  -
+GF3     = 1  of+NP
+============
+TITLE        = 176609
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176610
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176623
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+RESTR   =  ед !
+SF      = 1  PARAM
+VAL     =  PARAM , C , A1
+           VALUE , A2 , C
+GF1     = 1  к_доп : Р
+GF2     = 1  прим_опр : И
+          2  прим_опр : ЦБК
+SF2     = 1  QUANTIT
+============
+TITLE        = 176624
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL
+GF      = 1  NOUN
+RESTR   =  ед !
+SF      = 1  PARAM
+VAL     =  PARAM , C , A1
+           VALUE , A2 , C
+GF1     = 1  NP
+GF2     = 1  ЦБК
+          2  -
+============
+TITLE        = 176633
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+VAL     =  RESTR , A1 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+          3  ИЛЕ
+============
+TITLE        = 176634
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  СУЩ:ИГ
+SF      = 1  MEDINF
+VAL     =  RESTR , A1 , C
+GF1     = 1  к_доп : Р
+          2  с_опр : ПРИТ_МЕСТ
+          3  ИЛЕ
+============
+TITLE        = 176635
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+CAT     = 1  LABL.OBJ
+GF      = 1  NOUN
+SF      = 1  MEDINF
+          2  SOFTW
+VAL     =  RESTR , A1 , C
+GF1     = 1  of+NP
+          2  NP
+          3  -
+============
+TITLE        = 176636
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 176637
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 176638
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176639
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176640
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176641
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+           PARAM ( C2 , C3 )
+============
+TITLE        = 176642
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PARAM ( C2 , C1 )
+============
+TITLE        = 176650
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  ACT ( C2 , C1 )
+============
+TITLE        = 176660
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C2 , C1 )
+============
+TITLE        = 176661
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C2 , C1 )
+============
+TITLE        = 176662
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  SUB ( C1 , C2 )
+============
+TITLE        = 176663
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PACIEN ( C3 , C2 )
+           PROPERT ( A1 , A2 )
+============
+TITLE        = 176664
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C4 , C5 )
+           PROPERT ( C1 , C2 )
+           TRG-PNT ( C3 , C2 )
+============
+TITLE        = 176665
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PACIEN ( C2 , C1 )
+============
+TITLE        = 176683
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176684
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176685
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176686
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176690
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 176691
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176692
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176693
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176694
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C3 , C2 )
+           PROPERT ( C1 , C2 )
+============
+TITLE        = 176695
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176696
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176699
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = 176703
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C2 , C1 )
+============
+TITLE        = 176704
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176705
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  RESTR ( C1 , C2 )
+============
+TITLE        = 176714
+SENSE       = 1
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  CONTEN ( C2 , C1 )
+============
+TITLE        = @Модель1
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C2 )
+============
+TITLE        = @Модель141
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = @Модель16
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:15:55
+COMM    =  модель для одиночного существительного
+GF      = 1  СУЩ:ИГ
+============
+TITLE        = @Модель174
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C1 , C2 )
+============
+TITLE        = @Модель175
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  IDENT ( C2 , C1 )
+============
+TITLE        = @Модель4
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:15:55
+AUX     =  PROPERT ( C1 , C3 )
+           PROPERT ( C2 , C3 )
+============
+TITLE        = @Модель83
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 18/3/3 16:15:55
+COMM    =  модель для одиночного английского существительного
+GF      = 1  NOUN

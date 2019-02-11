@@ -1,0 +1,33 @@
+====================== Introduction ====================
+
+This is a RML package (RML is Russian acronym, stands for Linguistic Environment).
+
+This program is distributed under the Library GNU Public Licence, which is in the file
+COPYING.  
+
+This program was  written by Alexey Sokirko, Igor Nozhov, Lev Gershenzon, Andrey Putrin 
+and many other people.
+
+The project started in Moscow in Dialing 
+Company (Russian and English language). The German part was created  
+at Berlin-Brandenburg Academy of Sciences and Humanities in  Berlin (the project DWDS). 
+
+Russian website (Russian documents) is www.aot.ru.
+More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
+
+
+
+=================   Compilation =======================
+  Install cmake (at least 3.5) from https://cmake.org/download/
+  Install g++(at least 4.6) or clang 
+               
+  export RML=/home/sokirko/RML
+  export CXX=/usr/bin/g++-4.7
+  export CC=/usr/bin/gcc-4.9
+  cd $RML
+  mkdir build
+  cd build
+  cmake ..
+  make
+
+

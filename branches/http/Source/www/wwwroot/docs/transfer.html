@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>АОТ :: Технологии :: Трансфер</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<link href="../aot.css" rel="stylesheet" type="text/css">
+</head>
+
+<body bgcolor="#F3F3F3" text="#000000" link="#000000" vlink="#999999" alink="#000000">
+<a name="top"></a>
+<table border="0" align="center" cellpadding="1" cellspacing="0">
+  <tr>
+    <td bgcolor="#666666"><table width="760" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          <td><table border="0" cellspacing="0" cellpadding="5">
+              <tr>
+                <td width="30">&nbsp;</td>
+                <td><font size="+7" face="Arial, Helvetica, sans-serif"><b>АОТ</b></font></td>
+                <td width="40">&nbsp;</td>
+                <td valign="baseline"><font size="+1" face="Arial, Helvetica, sans-serif"> Автоматическая  Обработка  Текста</font></td>
+              </tr>
+            </table>
+            <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+              <tr>
+                <td height="4"><img src="../images/transparent.gif" width="1" height="4"></td>
+              </tr>
+            </table>
+            <table width="760" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td valign="top"><table border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                      <td class="text">
+                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.php">скачать</a> <a href="/onlinedemo.html">&nbsp;демо</a> <a href="/technology.html"><b>технологии</b></a>  &nbsp; <a href="#top" title="наверх">^</a></font></p>
+                        <table width="720" border="0" cellpadding="3" cellspacing="0" bgcolor="#CCCCCC">
+                          <tr>
+                            <td class="titleblack">Трансфер</td>
+                          </tr>
+                        </table>
+                        <table width="720" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td height="7"><img src="../images/transparent.gif" width="1" height="7"></td>
+                          </tr>
+                          <tr>
+                            <td height="2" bgcolor="#000000"><img src="../images/transparent.gif" width="1" height="2"></td>
+                          </tr>
+                          <tr>
+                            <td height="7"><img src="../images/transparent.gif" width="1" height="7"></td>
+                          </tr>
+                        </table>
+                        <p><a href="#0">0. Вводные замечания</a></p>
+                        <p><a href="#1">1. Алгоритм AL_it</a></p>
+                        <p><a href="#2">2. Алгоритмы AL_compl_obj_to и AL_compl_obj</a></p>
+                        <p><a href="#3">3. Алгоритм AL1</a></p>
+                        <p><a href="#4">4. ApplyBeRule</a></p>
+                        <p><a href="#5">5. ApplyTwoNegationsRule (двойное отрицание)</a></p>
+                        <p><a href="#6">6. ApplyModalVerbTenseRule</a></p>
+                        <p><a href="#7">7. ApplyPredicativeRule</a></p>
+                        <p><a href="#8">8. ApplyModalCopulRule</a></p>
+                        <p><a href="#9">9. ApplyKeepRule</a></p>
+                        <p><a href="#10">10. ApplyNoRule</a></p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="0" id="0"></a>0. Вводные замечания</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Все алгоритмы принадлежат к этапу трансфера.</p>
+                        <p>Алгоритмы делятся на две группы. Для
+работы алгоритмов первой группы требуется заполненное поле АЛГОРИТМ в статье
+АОССа, а алгоритмы второй группы, которые иначе называются правилами (Rule), требуют
+лишь определенной комбинации других полей.</p>
+                        <p>Условные обозначения: </p>
+                        <blockquote>
+                          <p>&gt;&gt; контактное (непосредственное)
+следование,</p>
+                          <p>&gt; следование. необязательно
+контактное,</p>
+                          <p>&lt;&lt; контактное предшествование,</p>
+                          <p>&lt; предшествование, не обязательно
+контактное,</p>
+                          <p><b>-&gt; </b>связь между узлами</p>
+                        </blockquote>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="1" id="1"></a>1. Алгоритм AL_it</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Данный алгоритм определен на
+английских словах, у которых есть помета АЛГОРИТМ = AL_it. (Предполагается, что это все глаголы, с ГХ=VERB). Сначала проверяется, стоит ли
+английский глагол в личной форме, и если нет, алгоритм завершает работу. Если
+глагол стоит в личной форме, то программа проверяет, есть ли у глагола
+подлежащее; если подлежащего нет, то 
+доставляется в качестве подлежащего местоимение it и создается связь ГЛАГОЛ <b>-&gt;</b>
+<b>it</b>, помеченная IsSubj. </p>
+                        <p>Порядок  слов: it &gt;&gt; ГЛАГОЛ. </p>
+                        <p>Число глагола: ставится единственное число.</p>
+                        <p>Примеры:</p>
+                        <p><i>Кажется, что он ушел.</i></p>
+                        <p><i>Мне больно ходить.</i></p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr align="center">
+                            <td>Семантика</td>
+                            <td>Трансфер</td>
+                          </tr>    
+                          <tr>
+                            <td><img width=88 height=125  src="images/transfer-001.gif"></td>
+                            <td><img width=144 height=118  src="images/transfer-002.gif"></td>
+                          </tr>
+                          <tr>
+                            <td><img width=199 height=96 src="images/transfer-003.gif"></td>
+                            <td><img width=155 height=128 src="images/transfer-004.gif"></td>
+                          </tr>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="2" id="2"></a>2. Алгоритмы AL_compl_obj_to и AL_compl_obj</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>(бывшие AL6 и AL5)</p>
+                        <p>Данные алгоритмы определены на
+английских словах, у которых есть помета АЛГОРИТМ = AL_compl_obj_to или АЛГОРИТМ = AL_compl_obj. Примеры:
+ask, cause, expect, prefer 2, prove, require, want, wish.</p>
+                        <p>Алгоритм применяется при наличии выходящей из главного
+глагола связи &quot;ЦЕЛЬ&quot;|&quot;СОДЕРЖ&quot; к глаголу, от которого есть
+выходящая связь к субъекту (СУБ).</p>
+                        <p>Глагол переводится в инфинитив и переносится (вместе со
+своим поддеревом) в ту же клаузу, что и узел алгоритма.</p>
+                        <p>Далее рассматриваются все глаголы, связанные с
+обрабатываемым союзом И. Они все также переводятся в инфинитив и переносятся в
+ту же клаузу, пока в цепочке не встретится либо глагол с СХ&nbsp;= МОДЛ, либо
+глагол с частицей НЕ.</p>
+                        <p>В случае AL_compl_obj_to связь &quot;главный
+глагол – подчиненный глагол&quot; помечается частицей &quot;to&quot;, в случае AL_compl_obj
+– ничем не помечаются.</p>
+                        <p>Субъект глагола перевешивается на глагол, породивший
+алгоритм:</p>
+                        <p>глагол&gt;&gt;субъект.</p>
+                        <p>Примеры:</p>
+                        <p><i>Мы хотим, чтобы она ответила на все вопросы – We want her to answer all the
+questions.</i></p>
+                        <p><i>Мы видели, что она бежит – We saw her run.</i></p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr align="center">
+                            <td>семантика</td>
+                            <td>трансфер</td>
+                          </tr>
+                          <tr>
+                            <td><img width=251 height=162 src="images/transfer-005.gif"></td>
+                            <td><img width=232 height=164 src="images/transfer-006.gif"></td>
+                          </tr>
+                          <tr>
+                            <td><img width=192 height=125 src="images/transfer-007.gif"></td>
+                            <td><img width=279 height=83 src="images/transfer-008.gif"></td>
+                          </tr>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="3" id="3"></a>3. Алгоритм AL1</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>(see l:\durnovo\залог.doc)</p>
+                        <p>Этот алгоритм преобразует статью переходного глагола в его
+непереходную пару.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="4" id="4"></a>4. ApplyBeRule</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Этот
+алгоритм применим к глаголу be 4, который имеет значение &quot;находиться где-либо; существовать&quot;. После того как Трансфер
+заменил &quot;быть 2&quot; на &quot;be
+4&quot;, программа<b> </b>ставит в вершину клаузы глагол be, от него стрелку П-АКТ
+ведет к слову there,
+стрелку В-АКТ ведет к слову, занимавшему позицию В-АКТ глагола быть 2 в русском графе.</p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr>
+                            <td><img width=202 height=123 src="images/transfer-009.gif"></td>
+                            <td align="center"><table cellpadding=0 cellspacing=0>
+                                <tr>
+                                  <td align="center">Трансфер</td>
+                                </tr>
+                                <tr>
+                                  <td align="center"><img src="/docs/images/transfer-015.gif" width="99" height="14"></td>
+                                </tr>
+        
+      </table></td>
+                            <td><img src="/docs/images/transfer-010.gif" width="245" height="125"></td>
+                          </tr>
+                        </table>
+                        <p>На синтезе устанавливается порядок слов: there &gt;&gt; BE &gt; TR(В-АКТ).</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="5" id="5"></a>5. ApplyTwoNegationsRule (двойное отрицание)</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Пусть дан узел X, которому был приписан оператор
+отношения &quot;не&quot;. Пусть M
+– множество узлов, зависящих от Х (существует путь из Х в эти узлы), и каждому
+С&Icirc;М
+в АОССе приписано ГХ =  * : Neg (nobody, never, no one и  т.д).  
+</p>
+                        <p>Если  множество М  пусто,
+выходим из процедуры. В противном случае делаем следующее. Стираем у X  оператор &quot;не&quot;. Все узлы  С&Icirc;М,  кроме самого первого С по линейному порядку
+русской фразы, превращаем  в их
+отрицания. Отрицания берутся из поля ЛФ (лексическая функция Anti). Например,  Anti
+(nobody) = anybody,  
+Anti (nothing) =anything.</p>
+                        <p>Ниже приведены иллюстрации работы этого правила:</p>
+                        <p><i>не жить =&gt; </i><i>not </i><i>to </i><i>live </i>(множество
+М - пусто)</p>
+                        <p><i>никто не живет =&gt; </i><i>nobody </i><i>lives </i>(самый
+первый *:Neg  не нужно конвертировать)</p>
+                        <p><i>никто ничего не хочет =&gt; </i><i>nobody </i><i>wants </i><i>anything</i></p>
+                        <p><i>я</i><i> не</i><i> хочу</i><i> не</i><i> жить</i><i> =&gt; I don&quot;t want not to live.</i></p>
+                        <p>В случае, если в числе узлов в М имеется имя
+существительное, его отрицание получается простым убиранием частицы &quot;ни&quot; и
+приписыванем  артикля &quot;a&quot; (если слово вообще может
+употребляться с артиклем).</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="6" id="6"></a>6. ApplyModalVerbTenseRule</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Этот алгоритм работает после функции согласования времен в
+сложном английском предложении. Делает он следующее. Пусть Х  - глагольный узел c леммой &quot;can&quot;(&quot;must&quot;). Если Х стоит не в настоящем
+времени (present_smp_tn, present_cnt_tn, present_prf_tn, present_prf_cnt_tn), тогда нужно конвертировать этот глагол в &quot;be able to&quot; (have to). Еще нужно преобразовать
+валентную структуру, поскольку can(must) подчиняет инфинитив без
+to, а &quot;be able to&quot; (have to) с to.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="7" id="7"></a>7. ApplyPredicativeRule</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Данный алгоритм определен на тех
+английских узлах, которые произошли от русских узлов c характеристикой ПРЕДК:ГГ, кроме
+следующих случаев:</p>
+                        <ol type="a">
+                          <li>
+    
+    Узел имеет характеристику VERB_MODL</li>
+                          <li>
+    
+    Узел имеет лемму can (мне видно реку)</li>
+                          <li>
+    
+    Узел имеет лемму have (мне нужно идти)</li>
+                          <li>
+    
+    Узел имеет &quot;АЛГОРИТМ = AL_it&quot;  (мне больно ходить) – см. выше</li>
+                        </ol>
+                        <p>Производится добавление узла &quot;<b>be</b> <b>1</b>&quot;,
+и устанавливается п<i>орядок  слов: </i> be &gt; предикатив.</p>
+                        <p><i>Время </i>берется от узла предикатива. <i>Входящие и
+выходящие межклаузные связи</i> перевешиваются на новый узел <b>be</b></p>
+                        <p>1. Есть связь с субъектом (СУБ и все, что ниже по иерархии)
+и узел имеет &quot;ОГРН=subj!&quot;
+или  &quot;ОГРН=predic!&quot;, то связь с субъектом<i> </i>перевешивается
+на новый узел <b>be</b>
+и помечается IsSubj, а
+число глагола берется от узла субъекта с учетом возможности МНА</p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr align="center">
+                            <td>семантика</td>
+                            <td>трансфер</td>
+                          </tr>
+                          <tr>
+                            <td><img border=0 width=185 height=79 src="images/transfer-011.gif"></td>
+                            <td><img border=0 width=178 height=122 src="images/transfer-012.gif"></td>
+                          </tr>
+                          <tr>
+                            <td><img border=0 width=198 height=81 src="images/transfer-013.gif"></td>
+                            <td><img border=0 width=235 height=122 src="images/transfer-014.gif"></td>
+                          </tr>
+                        </table>
+                        <p>2. Иначе</p>
+                        <p>Производится добавление узла &quot;<b>it</b> <b>1</b>&quot;
+в позицию подлежащего. Создается связь <b>be -&gt; </b><b>it,
+</b>стрелка помечается &quot;П-АКТ&quot;, связь помечается  IsSubj.</p>
+                        <p>Порядок слов: it&gt;&gt;be.<i>Число
+глагола: </i>ставится единственное число</p>
+                        <p>Если есть связь с субъектом, то эта связь оформляется
+предлогом <b>for, </b>и
+устанавливается порядок слов TR(глагол)
+&gt; субъект.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="8" id="8"></a>8. ApplyModalCopulRule</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Данный алгоритм определен на
+словах c ПРЕДК:ОТР, по
+которым семантика строит ModalCopul.
+В английской статье для таких слов имеется ГХ= * : Neg.</p>
+                        <p>Вначале ищется связь &quot;СОДЕРЖ&quot; от ModalCopul к глаголу. Если
+такой связи нет, то сделать ничего нельзя, и узел ModalCopul просто удаляется (e.g. &quot;некуда&quot;, &quot;мне некуда&quot;). Далее
+программа определяет, заполнена ли валентность СУБ в русском графе.</p>
+                        <p>Если
+валентность СУБ в русском графе заполнена, то производится замена узла ModalCopul  на узел &quot;<b>have</b> <b>1</b>&quot;.
+Устанавливается порядок слов have
+&gt; TR(глагол). <i>Число
+глагола </i>берется от узла субъекта с учетом возможности МНА.</p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr>
+                            <td><img border=0 width=195 height=124 src="images/transfer-016.gif"></td>
+                            <td><img border=0 width=178 height=125 src="images/transfer-017.gif"></td>
+                          </tr>
+                        </table>
+                        <p>Если нет связи с субъектом, то
+производится добавление узлов &quot;<b>be</b> <b>1</b>&quot; и &quot;<b>there 1</b>&quot;. Устанавливается порядок
+слов<i> </i>there
+&gt;&gt; be &gt; TR(глагол). Глагол<i> </i>ставится
+в единственное число.</p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr>
+                            <td><img border=0 width=81 height=127 src="/docs/images/transfer-018.gif"></td>
+                            <td><img border=0 width=191 height=123 src="images/transfer-019.gif"></td>
+                          </tr>
+                        </table>
+                        <p>Далее: связь<i> </i>&quot;have/be <b>-&gt;</b>
+глагол&quot; помечается &quot;В-АКТ&quot;, и устанавливается порядок слов have/be &gt;&gt;&nbsp;TR(глагол). На связи &quot;глагол <b>-&gt;
+</b>слово, породившее ModalCopul&quot;
+устанавливается порядок:&nbsp;TR(глагол)
+&gt; TR(это&nbsp;слово).
+<i>Время глагола </i>берется от узла, породившего ModalCopul</p>
+                        <p>Примечание: этот алгоритм
+появился вместо убитого AL_neg.</p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="9" id="9"></a>9. ApplyKeepRule</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Этот правило определено только на
+слове __vse - это слово введено в АОСС в качестве
+технического решения следующей ситуации: в русском языке есть наречие &quot;все&quot;, которое, предваряя глаголы определенного
+класса, образует с ними конструкцию, обозначающую многократное повторение
+действия. В английском языке такую конструкцию можно переводить конструкцией &quot;keep+gerund(VERB)&quot;. </p>
+                        <p>Если управляющий глагол имеет
+частицу НЕ, то правило не применяется, а узел __vse заменяется
+на узел <b>still</b>, предшествующий
+глаголу (still&gt;&gt;глагол).</p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr>
+                            <td><img border=0 width=252 height=126 src="images/transfer-020.gif"></td>
+                            <td><img border=0 width=282 height=140 src="images/transfer-021.gif"></td>
+                          </tr>
+                        </table>
+                        <p>Узел &quot;все&quot; (__vse) заменяется на узел &quot;<b>keep 1</b>&quot;.</p>
+                        <p>Связь ГЛАГОЛ -&gt; &quot;все&quot;: keep&gt;&gt;глагол (узел глагола переводится в герундий).</p>
+                        <p>Далее рассматриваются все глаголы, связанные с обрабатываемым
+союзом И. Они все также переводятся в герундий, пока в цепочке не встретится
+либо глагол с СХ&nbsp;= МОДЛ, либо глагол с частицей НЕ.</p>
+                        <p><b>Время: </b>берется от узла глагола.</p>
+                        <p><b>Число: </b>берется от узла субъекта с учетом возможности
+МНА</p>
+                        <p><b>Входящие связи: </b>перевешиваются на новый узел <b>keep.</b></p>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td class="titleblack"><a name="10" id="10"></a>10. ApplyNoRule</td>
+                            <td align="right"><a href="#top" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <p>Правило применяется к слову &quot;no1&quot;, если среди выходящих из него
+связей есть  СУБ|П-АКТ и/или ОБ|В-АКТ.</p>
+                        <p>1. если есть связь с субъектом (&quot;СУБ&quot; |
+&quot;П-АКТ&quot;), то производится добавление узла &quot;<b>have</b> <b>1</b>&quot;</p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+                          <tr align="center">
+                            <td>семантика</td>
+                            <td>трансфер</td>
+                          </tr>
+                          <tr>
+                            <td><img border=0 width=200 height=78 src="images/transfer-022.gif"></td>
+                            <td><img border=0 width=165 height=122 src="images/transfer-023.gif"></td>
+                          </tr>
+                        </table>
+                        <p><b>Порядок  слов: </b>&quot;Subj&quot;<i> -&gt; </i>have -&gt; no</p>
+                        <p><b>Число: </b>берется от узла субъекта с учетом возможности
+МНА</p>
+                        <p><b>Время: </b>берется от узла &quot;<b>нет</b>&quot;</p>
+                        <p><b>Связь с субъектом: </b>перевешивается на новый узел <b>have</b>, помечается IsSubj и все предлоги
+стираются, создается связь <b>have
+-&gt; </b><b>no</b> c
+описанием &quot;В-АКТ&quot; (have&gt;&gt;no).</p>
+                        <p><b>Входящие связи: </b>перевешиваются на новый узел <b>have</b></p>
+                        <p><b>Выходящие межклаузные связи: </b>перевешиваются на новый
+узел <b>have</b></p>
+                        <p>2. если нет связи с субъектом, то производится добавление узла
+&quot;<b>be</b> <b>1</b>&quot; и узла &quot;<b>there</b> <b>1</b>&quot;</p>
+                        <table border=0 cellspacing=0 cellpadding=5>
+    
+ 
+    
+                          <tr align="center">
+      
+                            <td>
+  семантика</td>
+                            <td>
+  трансфер       </td>
+                          </tr>
+    
+                          <tr>
+      
+                            <td>
+  
+          
+          
+          <img border=0 width=87 height=80
+  src="images/transfer-024.gif">
+          
+          
+        </td>
+                            <td> <img border=0 width=182 height=126
+  src="images/transfer-025.gif"> </td>
+                          </tr>
+  
+                        </table>
+                        <p><b>Число: </b>берется от узла объекта с учетом возможности
+МНА (в случае МНА число ставится множественное). При наличии у объекта &quot;ОГРН =
+ед !&quot; ставится единственное число</p>
+                        <p><b>Время: </b>берется от узла &quot;<b>нет</b>&quot;</p>
+                        <p>Создается связь <b>be -&gt; </b><b>there</b> c
+описанием &quot;П-АКТ&quot; (there&gt;&gt;be), помеченная  IsSubj.</p>
+                        <p>Создается связь <b>be -&gt; </b><b>no</b> c
+описанием &quot;В-АКТ&quot; (be&gt;&gt;no).</p>
+                        <p><b>Входящие связи: </b>перевешиваются на новый узел <b>be</b></p>
+                        <p><b>Выходящие межклаузные связи: </b>перевешиваются на новый
+узел <b>be</b></p>
+                        <p><b>Дополнительная обработка:</b></p>
+                        <p>Если среди выходящих связей (с учетом МНА) имеется слово с
+отрицанием (ГХ = *:Neg),
+то узел <b>no</b>
+удаляется.</p>
+<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+                          <tr>
+                            <td height="2"><img src="../images/transparent.gif" width="1" height="2"></td>
+                          </tr>
+                        </table>
+                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.php">скачать</a> <a href="/onlinedemo.html">&nbsp;демо</a> <a href="/technology.html"><b>технологии</b></a> &nbsp; <a href="#top" title="наверх">^</a></font></p></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td valign="bottom"><table width="750" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td align="right"><table border="0" cellspacing="5" cellpadding="0">
+                          <tr> 
+                            <td align="right"><font color="#999999" size="1">Разработка 
+                              <a href="mailto:simple@mosk.ru"><font color="#999999">DiP</font></a>.<br>
+                              &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">АОТ</font></a>. 
+                              Все права защищены.</font></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+    <td bgcolor="#CCCCCC"><img src="../images/transparent.gif" width="1" height="1"></td>
+  </tr>
+  <tr>
+    <td bgcolor="#CCCCCC"><img src="../images/transparent.gif" width="1" height="1"></td>
+    <td bgcolor="#CCCCCC"><img src="../images/transparent.gif" width="1" height="1"></td>
+  </tr>
+</table>
+</body>
+</html>

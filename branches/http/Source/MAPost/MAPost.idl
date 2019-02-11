@@ -1,0 +1,49 @@
+// MAPost.idl : IDL source for MAPost.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MAPost.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+	[
+		object,
+		uuid(6AD16946-1802-11D3-8C31-00105A68ADF3),
+		dual,
+		helpstring("IMAPost Interface"),
+		pointer_default(unique)
+	]
+	interface IMAPost : IDispatch
+	{		
+		[id(1), helpstring("method ProcessData")] HRESULT ProcessData([in]IUnknown *piInputTextItems, [out, retval]IUnknown** piOutputTextItems);
+		[id(2), helpstring("method Init")] HRESULT Init([in] int Language, [in] IUnknown* Lemmatizer,[in] IUnknown* GramTab);
+		/** true, if the process can insert or delete words in the input text*/
+		[propget, id(3), helpstring("property bCanChangeInputText")] HRESULT bCanChangeInputText([out, retval] BOOL *pVal);
+		[propput, id(3), helpstring("property bCanChangeInputText")] HRESULT bCanChangeInputText([in] BOOL pVal);
+		[propget, id(4), helpstring("property bHumanFriendlyOutput")] HRESULT bHumanFriendlyOutput([out, retval] BOOL *pVal);
+		[propput, id(4), helpstring("property bHumanFriendlyOutput")] HRESULT bHumanFriendlyOutput([in] BOOL pVal);
+
+	};
+
+[
+	uuid(5AAB9713-1406-11D3-8C2B-00105A68ADF3),
+	version(1.0),
+	helpstring("MAPost 1.0 Type Library")
+]
+library MAPOSTLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(6AD16947-1802-11D3-8C31-00105A68ADF3),
+		helpstring("MAPost Class")
+	]
+	coclass MAPost
+	{
+		[default] interface IMAPost;
+	};
+
+};

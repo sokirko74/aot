@@ -1,0 +1,40 @@
+%% == format_for_preps ==
+
+%%	В коридоре , узком и темноватом - собрать нормально СУЩ_ОБС_ПРИЛ
+%%	на пакеты , каждый из которых имел свой адрес назначения - относительное предложение
+%%	с точки зрения автора - ?? "точки зрения автора" нету
+%%	над двумя женскими головами , откинутыми назад - ПРИЧ_СУЩ "женскими головами , откинутыми назад"
+%%	На лежащем под ним ковре - НСО!
+%%	из бронированной машины Коммерческого банка , которая приписывается ее отцу . - относительное предложение
+%%	Перед началом , в котором участвует специалист  - относительное предложение
+%%	К ожидающему неприятностей мальчику - НСО!
+%%	на столе , над которым висела лампа - относительное предложение
+%%	в его сердце больном - ПРИЛ_ПОСТПОС - добавила
+%%	до конца встречи , который принес - относительное предложение
+%%	на столе , покрытом скатертью - в ПРИЧ_СУЩ добавить ИНСТР_ДОП
+%%	от газов и пыли - разобраться почему
+%%	от покупателей , благодаривших Гун за стиль - в ПРИЧ_СУЩ исправить
+
+[PREP-NOM] -> [TOKEN filename="dct_prep_nom.txt"];
+[PREP-ACC] -> [TOKEN filename="dct_prep_acc.txt"];
+[PREP-GEN] -> [TOKEN filename="dct_prep_gen.txt"];
+[PREP-INSTR] -> [TOKEN filename="dct_prep_instr.txt"];
+[PREP-DAT] ->  [TOKEN filename="dct_prep_dat.txt"];
+[PREP-PREP] ->  [TOKEN filename="dct_prep_prep.txt"];
+
+%% +ПРИДАТ_ОПР
+[PP-NOM] -> [PREP-NOM grm="ПРЕДЛ"] ([PRO-ADJ root grm="им"] | [NOUN root grm="им"] | [ЧИСЛ_СУЩ root grm="им"] | [ПРИЛ_СУЩ root grm="им"] | [PRO root grm="им"] | [СУЩ_ОБС_ПРИЛ root grm="им"] | [ГЕНИТ_ИГ root grm="им"] | [КОЛИЧ root grm="им"] | [СУЩ_ЧИСЛ root grm="им"] | [ADJ root grm="им"] | [ОДНОР_ПРИЛ root grm="им"] | [ПРИЧ_СУЩ root grm="им"] | [ПРИЛ_ПОСТПОС root grm="им"]);
+
+[PP-ACC] -> [PREP-ACC grm="ПРЕДЛ"] ([PRO-ADJ root grm="вн"] | [NOUN root grm="вн"] | [ЧИСЛ_СУЩ root grm="вн"] | [ПРИЛ_СУЩ root grm="вн"] | [PRO root grm="вн"] | [СУЩ_ОБС_ПРИЛ root grm="вн"] | [ГЕНИТ_ИГ root grm="вн"] | [КОЛИЧ root grm="вн"] | [СУЩ_ЧИСЛ root grm="вн"] | [ADJ root grm="вн"] | [ОДНОР_ПРИЛ root grm="вн"] | [ПРИЧ_СУЩ root grm="вн"] | [ПРИЛ_ПОСТПОС root grm="вн"]);
+
+[PP-GEN] -> [PREP-GEN grm="ПРЕДЛ"] ([PRO-ADJ root grm="рд"] | [NOUN root grm="рд"] | [ЧИСЛ_СУЩ root grm="рд"] | [ПРИЛ_СУЩ root grm="рд"] | [PRO root grm="рд"] | [СУЩ_ОБС_ПРИЛ root grm="рд"] | [ГЕНИТ_ИГ root grm="рд"] | [КОЛИЧ root grm="рд"] | [СУЩ_ЧИСЛ root grm="рд"] | [ADJ root grm="рд"] | [ОДНОР_ПРИЛ root grm="рд"] | [ПРИЧ_СУЩ root grm="рд"] | [ПРИЛ_ПОСТПОС root grm="рд"]);
+
+[PP-INSTR] -> [PREP-INSTR grm="ПРЕДЛ"] ([PRO-ADJ root grm="тв"] | [NOUN root grm="тв"] | [ЧИСЛ_СУЩ root grm="тв"] | [ПРИЛ_СУЩ root grm="тв"] | [PRO root grm="тв"] | [СУЩ_ОБС_ПРИЛ root grm="тв"] | [ГЕНИТ_ИГ root grm="тв"] | [КОЛИЧ root grm="тв"] | [СУЩ_ЧИСЛ root grm="тв"] | [ADJ root grm="тв"] | [ОДНОР_ПРИЛ root grm="тв"] | [ПРИЧ_СУЩ root grm="тв"] | [ПРИЛ_ПОСТПОС root grm="тв"]);
+
+[PP-DAT] -> [PREP-DAT grm="ПРЕДЛ"] ([PRO-ADJ root grm="дт"] | [NOUN root grm="дт"] | [ЧИСЛ_СУЩ root grm="дт"] | [ПРИЛ_СУЩ root grm="дт"] | [PRO root grm="дт"] | [СУЩ_ОБС_ПРИЛ root grm="дт"] | [ГЕНИТ_ИГ root grm="дт"] | [КОЛИЧ root grm="дт"] | [СУЩ_ЧИСЛ root grm="дт"] | [ADJ root grm="дт"] | [ОДНОР_ПРИЛ root grm="дт"] | [ПРИЧ_СУЩ root grm="дт"] | [ПРИЛ_ПОСТПОС root grm="дт"]);
+
+[PP-PREP] -> [PREP-PREP grm="ПРЕДЛ"] ([PRO-ADJ root grm="пр"] | [NOUN root grm="пр"] | [ЧИСЛ_СУЩ root grm="пр"] | [ПРИЛ_СУЩ root grm="пр"] | [PRO root grm="пр"] | [СУЩ_ОБС_ПРИЛ root grm="пр"] | [ГЕНИТ_ИГ root grm="пр"] | [КОЛИЧ root grm="пр"] | [СУЩ_ЧИСЛ root grm="пр"] | [ADJ root grm="пр"] | [ОДНОР_ПРИЛ root grm="пр"] | [ПРИЧ_СУЩ root grm="пр"] | [ПРИЛ_ПОСТПОС root grm="пр"]);
+
+[ПГ] -> [PP-NOM] | [PP-ACC] | [PP-GEN] | [PP-DAT] | [PP-INSTR] | [PP-PREP];
+
+[ROOT] -> [ПГ];

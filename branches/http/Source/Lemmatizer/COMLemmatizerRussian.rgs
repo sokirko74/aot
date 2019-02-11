@@ -1,0 +1,26 @@
+HKCR
+{
+	Lemmatizer.LemmatizerRussian.1 = s 'LemmatizerRussian Class'
+	{
+		CLSID = s '{6B23250F-1816-11D3-9CC6-00105A68BAF2}'
+	}
+	Lemmatizer.LemmatizerRussian = s 'LemmatizerRussian Class'
+	{
+		CLSID = s '{6B23250F-1816-11D3-9CC6-00105A68BAF2}'
+		CurVer = s 'Lemmatizer.LemmatizerRussian.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6B23250F-1816-11D3-9CC6-00105A68BAF2} = s 'LemmatizerRussian Class'
+		{
+			ProgID = s 'Lemmatizer.LemmatizerRussian.1'
+			VersionIndependentProgID = s 'Lemmatizer.LemmatizerRussian'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{CA8CF90E-FBB6-11D2-9C98-00105A68BAF2}'
+		}
+	}
+}

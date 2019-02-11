@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>АОТ :: Технологии :: Описание программы конкорданса</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<link href="../aot.css" rel="stylesheet" type="text/css">
+</head>
+<body bgcolor="#F3F3F3" text="#000000" link="#000000" vlink="#999999" alink="#000000">
+<a name="top"></a> 
+<table border="0" align="center" cellpadding="1" cellspacing="0">
+  <tr> 
+    <td bgcolor="#666666"><table width="760" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr> 
+          <td><table border="0" cellspacing="0" cellpadding="5">
+              <tr> 
+                <td width="30">&nbsp;</td>
+                <td><font size="+7" face="Arial, Helvetica, sans-serif"><b>АОТ</b></font></td>
+                <td width="40">&nbsp;</td>
+                <td valign="baseline"><font size="+1" face="Arial, Helvetica, sans-serif"> Автоматическая Обработка Текста</font></td>
+              </tr>
+            </table>
+            <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+              <tr> 
+                <td height="4"><img src="../images/transparent.gif" width="1" height="4"></td>
+              </tr>
+            </table>
+            <table width="760" border="0" cellpadding="0" cellspacing="0">
+              <tr> 
+                <td valign="top"><table border="0" cellspacing="0" cellpadding="20">
+                    <tr> 
+                      <td class="text"> <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.php">скачать</a> 
+                          <a href="/onlinedemo.html">&nbsp;демо</a> <a href="/technology.html">технологии</a>  &nbsp; 
+                          <a href="#top" title="наверх">^</a></font></p>
+                        <table width="720" border="0" cellpadding="3" cellspacing="0" bgcolor="#CCCCCC">
+                          <tr> 
+                            <td class="titleblack">Описание программы конкорданса</td>
+                          </tr>
+                        </table>
+                        <table width="720" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr> 
+                            <td height="7"><img src="../images/transparent.gif" width="1" height="7"></td>
+                          </tr>
+                          <tr> 
+                            <td height="2" bgcolor="#000000"><img src="../images/transparent.gif" width="1" height="2"></td>
+                          </tr>
+                          <tr> 
+                            <td height="7"><img src="../images/transparent.gif" width="1" height="7"></td>
+                          </tr>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" cellspacing="0" cellpadding="0">
+                          <tr> 
+                            <td class="titleblack"><a name="1"></a>Язык запросов</td>
+                            <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
+                          </tr>
+                        </table>
+                        <br> <br> <table width="720" border=1 cellpadding=3 cellspacing=0 bordercolor="#CCCCCC">
+                          <tr align="center" bgcolor="#CCCCCC"> 
+                            <td width="140" valign=top class="Normal"> <b>Тип запроса</b></td>
+                            <td width="210" valign=top class="Normal"> <b>Назначение</b></td>
+                            <td width="100" valign=top class="Normal"> <b>Пример</b></td>
+                            <td valign=top class="Normal"> <b>Результат</b></td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> <i>Word</i></td>
+                            <td width="210" valign=top class="Normal"> описание слова</td>
+                            <td width="100" valign=top class="Normal"> дом</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть морфол. вариант слова &quot;дом&quot;</td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> Word*</td>
+                            <td width="210" valign=top class="Normal"> описание слова</td>
+                            <td width="100" valign=top class="Normal"> до*</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть слово, имеющее префикс &quot;до&quot;</td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal">&nbsp; </td>
+                            <td width="210" valign=top class="Normal">&nbsp; </td>
+                            <td width="100" valign=top class="Normal">&nbsp; </td>
+                            <td valign=top class="Normal">&nbsp; </td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> [PartOfSpeech {Features}]</td>
+                            <td width="210" valign=top class="Normal"> описание слова</td>
+                            <td width="100" valign=top class="Normal"> [C ед][Г пвл]</td>
+                            <td valign=top class="Normal"> &quot;PartOfSpeech&quot; - часть речи, &quot;Features&quot; - граммемы (см. ниже полный список граммем и частей речи).</td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> @<i>Word</i></td>
+                            <td width="210" valign=top class="Normal"> описание слова</td>
+                            <td width="100" valign=top class="Normal"> @дом</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть словоформа &quot;дом&quot; (точное соответствие)</td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> &quot;X1 X2 … XN&quot;</td>
+                            <td width="210" valign=top class="Normal"> последовательность слов</td>
+                            <td width="100" valign=top class="Normal"> &quot;мой новый дом&quot;&quot;дом [Г]&quot;</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть &quot;мой новый дом&quot;все предложения, в которых есть &quot;мой&quot;, за которым сразу идет какой-нибудь глагол </td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> <i>Q</i><i>1</i> &amp;&amp; <i>Q</i><i>2</i></td>
+                            <td width="210" valign=top class="Normal"> конъюнкция описаний слов </td>
+                            <td width="100" valign=top class="Normal"> дом &amp;&amp; [С ед]</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть &quot;дом&quot; и существительное в единственном числе </td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> <i>Q</i><i>1</i> || <i>Q</i><i>2</i></td>
+                            <td width="210" valign=top class="Normal"> дизъюнкция описаний слов</td>
+                            <td width="100" valign=top class="Normal"> [Г 2л] || [С мн]</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть глагол во втором лице или существительное во множественном числе </td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> <i>near(Q1;Q2;n)</i></td>
+                            <td width="210" valign=top class="Normal"> два слова рядом друг с другом0&lt;= n &lt;= 10</td>
+                            <td width="100" valign=top class="Normal"> NEAR (дом ; [С]; 2)</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть &quot;дом&quot; и какое-нибудь существительное, и между ними стоит не больше двух слов. </td>
+                          </tr>
+                          <tr> 
+                            <td width="140" valign=top class="Normal"> &quot;X1 #D1 X2 #D2 … XN&quot;</td>
+                            <td width="210" valign=top class="Normal"> последовательность слов с максимальными дистанциями</td>
+                            <td width="100" valign=top class="Normal"> &quot;мой #1 дом&quot;</td>
+                            <td valign=top class="Normal"> все предложения, в которых есть &quot;мой&quot;, за которым следует &quot;дом&quot;, и между ним не больше одного слова </td>
+                          </tr>
+                        </table>
+                        <p>Части речи:</p>
+                        <p></p>
+                        <blockquote> 
+                          <p>С - существительное,</p>
+                          <p>П - прилагательное,</p>
+                          <p>Г – личная форма глагола,</p>
+                          <p>МС - местоимение-существительное,</p>
+                          <p>МС-П - местоименное прилагательное,</p>
+                          <p>МС-ПРЕДК - местоимение-предикатив,</p>
+                          <p>ЧИСЛ - числительное (количественное),</p>
+                          <p>ЧИСЛ-П - порядковое числительное,</p>
+                          <p>Н - наречие,</p>
+                          <p>ПРЕДК - предикатив,</p>
+                          <p>ПРЕДЛ - предлог,</p>
+                          <p>ПОСЛ - послелог,</p>
+                          <p>СОЮЗ - союз,</p>
+                          <p>МЕЖД - междометие,</p>
+                          <p>ЧАСТ - частица,</p>
+                          <p>ВВОДН - вводное,</p>
+                          <p>ИНФИНИТИВ - инфинитив</p>
+                          <p>ПРИЧАСТИЕ - причастие;</p>
+                          <p>ДЕЕПРИЧАСТИЕ - деепричастие;</p>
+                        </blockquote>
+                        <p> 
+                        <p>Граммемы:</p>
+                        <p></p>
+                        <blockquote> 
+                          <p>мр, жр, ср - мужской, женский, средний род;</p>
+                          <p>од, но - одушевленность, неодушевленность;</p>
+                          <p>ед, мн - единственное, множественное число;</p>
+                          <p>им, рд, дт, вн, тв, пр - падежи: именительный, родительный, дательный,</p>
+                          <p> винительный, творительный, предложный;</p>
+                          <p>св, нс - совершенный, несовершенный вид;</p>
+                          <p>пе, нп - переходный, непереходный глагол;</p>
+                          <p>дст, стр - действительный, страдательный залог;</p>
+                          <p>нст, прш, буд - настоящее, прошедшее, будущее время;</p>
+                          <p>пвл - повелительная форма глагола;</p>
+                          <p>1л, 2л, 3л - первое, второе, третье лицо;</p>
+                          <p>кр - краткая форма (прилагательного или причастия);</p>
+                        </blockquote>
+                        <p>&nbsp;</p>
+                        <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+                          <tr> 
+                            <td height="2"><img src="../images/transparent.gif" width="1" height="2"></td>
+                          </tr>
+                        </table>
+                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.php">скачать</a> <a href="/onlinedemo.html">&nbsp;демо</a> 
+                          <a href="/technology.html">технологии</a>   &nbsp; <a href="#top" title="наверх">^</a></font></p></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr> 
+                <td valign="bottom"><table width="750" border="0" cellspacing="0" cellpadding="0">
+                    <tr> 
+                      <td>&nbsp;</td>
+                      <td align="right"><table border="0" cellspacing="5" cellpadding="0">
+                          <tr> 
+                            <td align="right"><font color="#999999" size="1">Разработка 
+                              <a href="mailto:simple@mosk.ru"><font color="#999999">DiP</font></a>.<br>
+                              &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">АОТ</font></a>. 
+                              Все права защищены.</font></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+    <td bgcolor="#CCCCCC"><img src="../images/transparent.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#CCCCCC"><img src="../images/transparent.gif" width="1" height="1"></td>
+    <td bgcolor="#CCCCCC"><img src="../images/transparent.gif" width="1" height="1"></td>
+  </tr>
+</table>
+</body>
+</html>

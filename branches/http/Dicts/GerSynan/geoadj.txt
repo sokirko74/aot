@@ -1,0 +1,286 @@
+Afghanistan: Afghanisch 
+Afrika: Afrikanisch 
+Ägypten : Ägyptisch 
+Albanien: Albanisch 
+Algerien: Algerisch 
+Amerika: Amerikanisch 
+Andorra: Andorranisch
+Angola: Angolanisch 
+Antigua: Antiguanisch
+Griechenland: Alt-Griechisch Altgriechisch
+Arabien: Arabisch
+Argentinien: Argentinisch 
+Armenien: Armenisch 
+Aserbaidschan: Aserbaidschanisch 
+Aserbeidschan: Aserbeidschanisch 
+Asien: Asiatisch 
+Assam: Assamesisch 
+Äthiopien: Äthiopisch 
+Australien: Australisch
+Bahamas: Bahamesisch 
+Bahrein : Bahreinisch 
+Bangladesch: Bangladeschisch 
+Barbados: Barbadosisch 
+Baschkiren: Baschkirisch 
+Basken: Baskisch 
+Belgien: Belgisch 
+Belize: Belizisch 
+Bengalen: Bengalisch
+Benin: Beninisch
+Bhutan: Bhutanisch
+Bihar: Biharisch
+Birma: Birmanisch
+Burma: Burmanisch
+Bolivien: Bolivisch
+Bosnien-Herzegowina: Bosnisch 
+Botswana: Botswanisch
+Brasilien: Brasilianisch
+Bretagne: Bretonisch 
+Brunei: Bruneiisch 
+Bulgarien: Bulgarisch 
+Burkina : Burkinisch 
+Burundi : Burundisch 
+Chile: Chilenisch 
+China: Chinesisch 
+Costa Rica : Costa-Ricanisch 
+Dänemark: Dänisch 
+Deutschland: Deutsche Deutschen Deutsch 
+Djibouti: Djibutisch 
+Dominikanische Republik : Dominicanisch
+Dschibuti: Dschibutisch 
+Ecuador: Ecuadorianisch 
+El Salvador : Salvadorianisch
+England: Englisch
+Eritrea: Eritreisch
+Eskimo: Eskimoisch
+Estland: Estnisch
+Europa: Europäisch
+Fidschi-Inseln: Fidschianisch 
+Finnland: Finnisch 
+Frankreich: Französisch 
+Frankreich : Kreolisch 
+Friesland: Friesisch 
+Gabun: Gabunisch 
+Gambia: Gambisch 
+Georgien: Georgisch 
+Ghana: Ghanisch 
+Grenada: Grenadisch 
+Griechenland: Griechisch
+Griechenland: NeuGriechisch 
+Großbritannien: Großbritannisch 
+Groß-Britannien: Groß-Britannisch 
+Guatemala: Guatemalesisch 
+Guinea: Guineanisch 
+Guinea-Bissau: Guinea-Bissauisch 
+Guyana: Guyanisch 
+Haiti: Haitisch 
+Hawaii-Inseln: Hawaiianisch 
+Holland: Holländisch 
+Honduras : Honduranisch 
+Indien: Hindisch 
+Indien: Indisch 
+Indien : Sanskritisch 
+Indonesien: Indonesisch 
+Irak: Irakisch 
+Iran: Iranisch 
+Irland: Irisch 
+Irland : Gaelisch 
+Island: Isländisch 
+Israel: Israelisch 
+Hebräer: Hebräisch 
+Italien: Italienisch 
+Jamaika: Jamaikanisch 
+Japan: Japanisch 
+Java: Javanisch 
+Jemen : Jemenitisch 
+Jordanien: Jordanisch 
+Juden: Jiddisch 
+Jugoslawien: Jugoslawisch 
+Kambodscha: Kambodschanisch
+Kamerun: Kamerunisch 
+Kanada: Kanadisch 
+Kap Verde : Kap-Verdisch 
+Kasachstan: Kasachisch
+Kaschmir : Kaschmirisch
+Kashmir : Kashmirisch 
+Katalonien: Katalanisch 
+Katar: Katarisch 
+Kenia: Kenianisch 
+Kirgisien: Kirgisisch
+Kirgisistan: Kirgisisch 
+Kiribati: Kiribatisch 
+Kolumbien: Kolumbianisch 
+Komoren: Komorisch 
+Kongo: Kongolesisch 
+Korea: Koreanisch 
+Korsika: Korsisch 
+Kroatien : Kroatisch 
+Kuba: Kubanisch 
+Kurdistan: Kurdisch 
+Kuweit : Kuweitisch 
+Laos: Laotisch 
+Lesotho: Lesothisch 
+Lettland: Lettisch 
+Libanon : Libanonisch 
+Liberia: Liberianisch
+Libyen: Libysch 
+Liechtenstein: Liechtensteinisch 
+Litauen : Litauisch 
+Luxemburg: Luxemburgisch 
+Madagaskar: Madagassisch 
+Malaisia: Malaiisch 
+Malawi: Malawisch 
+Malaysia: Malayisch 
+Malaysia: Malaysisch 
+Malediven: Maledivisch 
+Mali: Malisch 
+Malta: Maltesisch 
+Marathen: Marathisch 
+Marokko: Marokkanisch 
+Mauretanien: Mauretanisch 
+Mauritius: Mauritisch 
+Mazedonien: Mazedonisch 
+Mexiko: Mexikanisch 
+Mikronesien : Mikronesianisch 
+Moldau: Moldauisch 
+Moldawien: Moldawisch
+Monaco: Monegassisch 
+Mongolei: Mongolisch 
+Mosambik: Mosambikisch 
+Myanmar: Myanmarisch 
+Namibia: Namibisch 
+Nauru: Nauruisch 
+Nepal: Nepalesisch 
+Neuseeland: Neuseeländisch
+Nicaragua: Nicaraguanisch 
+Niederlande: Niederländisch 
+Niger: Nigerisch 
+Nigeria: Nigerianisch 
+NordAfrika : NordAfrikanisch 
+Nord-Afrika :Nord-Afrikanisch 
+NordAmerika: NordAmerikanisch 
+Nord-Amerika: Nord-Amerikanisch
+NordAsien: NordAsiatisch 
+Nord-Asien: Nord-Asiatisch 
+NordAustralien : NordAustralisch 
+Nord-Australien: Nord-Australisch 
+NordEuropa: NordEuropäisch 
+Nord-Europa: Nord-Europäisch 
+NordKorea: NordKoreanisch 
+Nord-Korea: Nord-Koreanisch 
+Norwegen: Norwegisch 
+Oman: Omanisch 
+OstAfrika: OstAfrikanisch 
+Ost-Afrika: Ost-Afrikanisch 
+OstAmerika: OstAmerikanisch 
+Ost-Amerika: Ost-Amerikanisch
+OstAsien: OstAsiatisch 
+Ost-Asien: Ost-Asiatisch 
+OstAustralien:  OstAustralisch 
+Ost-Australien :Ost-Australisch 
+Österreich: Österreichisch 
+OstEuropa: OstEuropäisch 
+Ost-Europa: Ost-Europäisch 
+Osttimor: Osttimorisch 
+Pakistan: Parkistanisch 
+Palästina: Palästinisch 
+Palau : Palauisch 
+Panama: Panamesisch 
+Pandschab: Pandschabisch
+Papua-Neuguinea :Papua-Neuguineanisch 
+Paraguay : Paraguayisch 
+Persien: Persisch 
+Peru: Peruanisch 
+Philippinen: Philippinisch
+Polen: Polnisch
+Portugal: Portugiesisch 
+Romanen: Romanisch 
+Altes Rom : Latein 
+Ruanda: Ruandisch 
+Rumänien: Rumänisch 
+Russland: Russisch 
+Rußland: Russisch 
+Salomonen: Salomonisch 
+Sambia: Sambisch 
+Samoa: Samoanisch 
+San Marino : San Marinitsch 
+Saudi-Arabien : Saudi-Arabisch
+Schottland : Schottisch Gälisch 
+Schweden: Schwedisch 
+Schweiz : Schweizerisch 
+Senegal: Senegalesisch
+Serbien: Serbisch
+Serbien :Kroatien Serbokroatisch 
+Seychellen: Seychellisch 
+Sierra Leone : Sierra Leonisch 
+Simbabwe: Simbabwisch 
+Singapur: Singapurianisch
+Sizilien: Sizilianisch 
+Tatarstan : Tatarisch 
+Slowakei: Slowakisch 
+Slowenien: Slowenisch 
+Somalia: Somalisch 
+Spanien: Galizisch 
+Spanien: Spanisch 
+Sri Lanka :Sri Lankisch 
+Sri-Lanka  : Sri-Lankisch 
+Suaheli: Suahelisch 
+SüdAfrika: SüdAfrikanisch
+Süd-Afrika : Süd-Afrikanisch 
+SüdAmerika : SüdAmerikanisch 
+Süd-Amerika  : Süd-Amerikanisch
+Sudan: Sudanisc
+SüdAsien: SüdAsiatisch 
+Süd-Asien :Süd-Asiatisch 
+SüdAustralien: SüdAustralisch 
+Süd-Australien : Süd-Australisch 
+SüdEuropa: SüdEuropäisch 
+Süd-Europa : Süd-Europäisch 
+SüdKorea : SüdKoreanisch 
+Süd-Korea :Süd-Koreanisch 
+Süd-Ost-Asien : Süd-Ost-Asiatisch 
+Sundainseln: Sundanesisch 
+Surinam: Surinamisch
+Swasiland: Swasiländisch 
+Syrien: Syrisch 
+Tadschikistan: Tadschikisch 
+Tamil: Tamilisch 
+Tansania: Tansanisch 
+Thailand: Thailändisch 
+Tibet: Tibetisch 
+Tobago: Tobagonisch 
+Togo: Togoisch 
+Tonga: Tongaisch 
+Trinidad : Trinidadisch 
+Tschad: Tschadisch 
+Tschechisch  Republik :  Tschechisch 
+Tunesien: Tunesisch 
+Türkei: Türkisch  
+Turkmenistan: Turkmenisch
+Tuvalu: Tuvaluisch
+Uganda: Ugandisch 
+Uiguren: Uigurisch
+Ukraine: Ukrainisch
+Ungarn: Ungarisch 
+Uruguay: Uruguayanisch 
+Usbekistan: Usbekisch
+Vanuatu: Vanuatuisch
+Vatikanstadt: Latein 
+Venezuela   : Venezuelanisch 
+Vietnam: Vietnamesisch 
+Walis: Walisisch 
+Weißrussland: Weißrussisch 
+Weissrussland: Weissrussisch
+Weißrußland: Weißrußisch 
+WestAfrika: WestAfrikanisch
+West-Afrika: West-Afrikanisch
+WestAmerika: WestAmerikanisch
+West-Amerika:  West-Amerikanisch
+WestAsien: WestAsiatisch 
+West-Asien: West-Asiatisch
+WestAustralien:  WestAustralisch
+West-Australien:  West-Australisch
+WestEuropa: WestEuropäisch
+West-Europa:  West-Europäisch 
+Zypern: Zyprisch
+

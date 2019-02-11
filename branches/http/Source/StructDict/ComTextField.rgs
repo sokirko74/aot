@@ -1,0 +1,26 @@
+HKCR
+{
+	StructDict.TextField.1 = s 'TextField Class'
+	{
+		CLSID = s '{B3C7D667-2C57-11D3-A7A1-80F9E5000000}'
+	}
+	StructDict.TextField = s 'TextField Class'
+	{
+		CLSID = s '{B3C7D667-2C57-11D3-A7A1-80F9E5000000}'
+		CurVer = s 'StructDict.TextField.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B3C7D667-2C57-11D3-A7A1-80F9E5000000} = s 'TextField Class'
+		{
+			ProgID = s 'StructDict.TextField.1'
+			VersionIndependentProgID = s 'StructDict.TextField'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{FCD15161-23C4-11D3-A78B-0EEA0E000000}'
+		}
+	}
+}

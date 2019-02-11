@@ -1,0 +1,26 @@
+HKCR
+{
+	Agramtab.RusGramTab.1 = s 'RusGramTab Class'
+	{
+		CLSID = s '{ECD62F7E-19B6-11D3-A77A-2679A7000000}'
+	}
+	Agramtab.RusGramTab = s 'RusGramTab Class'
+	{
+		CLSID = s '{ECD62F7E-19B6-11D3-A77A-2679A7000000}'
+		CurVer = s 'Agramtab.RusGramTab.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {ECD62F7E-19B6-11D3-A77A-2679A7000000} = s 'RusGramTab Class'
+		{
+			ProgID = s 'Agramtab.RusGramTab.1'
+			VersionIndependentProgID = s 'Agramtab.RusGramTab'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{ECD62F71-19B6-11D3-A77A-2679A7000000}'
+		}
+	}
+}

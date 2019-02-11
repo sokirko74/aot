@@ -1,0 +1,335 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./morphexam_cpp.files/filelist.xml">
+<title>//================================================================ </title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>sokirko</o:Author>
+  <o:LastAuthor>sokirko</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>1</o:TotalTime>
+  <o:Created>2005-04-25T09:34:00Z</o:Created>
+  <o:LastSaved>2005-04-25T09:35:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>230</o:Words>
+  <o:Characters>1313</o:Characters>
+  <o:Company>Integrum-Techno</o:Company>
+  <o:Lines>10</o:Lines>
+  <o:Paragraphs>2</o:Paragraphs>
+  <o:CharactersWithSpaces>1612</o:CharactersWithSpaces>
+  <o:Version>9.4402</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=RU style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:green;mso-ansi-language:
+EN-US'>//================================================================ </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:green;mso-ansi-language:
+EN-US'>// ===== COM Test Example for Dialing Lemmatizer (www.aot.ru) == </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:green;mso-ansi-language:
+EN-US'>// ===== Author: Alexey Sokirko, sokirko@yandex.ru, 2003 ======= </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:green;mso-ansi-language:
+EN-US'>//================================================================ </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:green;mso-ansi-language:
+EN-US'>&nbsp;</span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue;mso-ansi-language:
+EN-US'>#include</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'> &lt;stdio.h&gt;</span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue;mso-ansi-language:
+EN-US'>#include</span><span lang=EN-US style='font-size:10.0pt;font-family:
+"Courier New";mso-ansi-language:EN-US'> &lt;comdef.h&gt;</span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue;mso-ansi-language:
+EN-US'>#import</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+mso-ansi-language:EN-US'> &quot;../../bin/Lemmatizer.tlb&quot; </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue;mso-ansi-language:
+EN-US'>int</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+mso-ansi-language:EN-US'> main(<span style='color:blue'>int</span> argc, <span
+style='color:blue'>char</span> *argv[])&nbsp; </span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>{ </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+::CoInitialize(NULL); </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:green'>//&nbsp; creating and loading Russian dictionary </span></span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+</span><span lang=DE style='font-size:10.0pt;font-family:"Courier New";
+mso-ansi-language:DE'>LEMMATIZERLib::ILemmatizerPtr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+piLemmatizer; </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=DE style='font-size:
+10.0pt;font-family:"Courier New";mso-ansi-language:DE'>&nbsp;&nbsp; HRESULT hr
+= &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; piLemmatizer.CreateInstance(<span
+style='color:blue'>__uuidof</span>(LEMMATIZERLib::LemmatizerRussian)); </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=DE style='font-size:
+10.0pt;font-family:"Courier New";mso-ansi-language:DE'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=DE style='font-size:
+10.0pt;font-family:"Courier New";mso-ansi-language:DE'>&nbsp;&nbsp; </span><span
+lang=EN-US style='font-size:10.0pt;font-family:"Courier New";color:blue;
+mso-ansi-language:EN-US'>if</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";mso-ansi-language:EN-US'> (FAILED(hr)) </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+{ </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+fprintf(stderr, &quot;Fatal Error: Lemmatizer creation failed&quot;); </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:blue'>return</span> 1; </span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+} </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+<span style='color:green'>// loading dictionary into the memory </span></span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+hr = piLemmatizer-&gt;LoadDictionariesRegistry(); </span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+<span style='color:blue'>if</span> (FAILED(hr)) </span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+{ </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+printf(&quot;Fatal Error: Lemmatizer loading failed&quot;); </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style='color:blue'>return</span> <span style='color:blue'>1</span>; </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+} </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+<span style='color:green'>//&nbsp; switch off Prediction </span></span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;
+&nbsp;<span style='color:green'>// lemmatizing a word </span></span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+LEMMATIZERLib::IParadigmCollectionPtr piParadigmCollection = </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;piLemmatizer-&gt;CreateParadigmCollectionFromForm(&quot;</span><span
+lang=DE style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:
+DE'>мыла</span><span lang=EN-US style='font-size:10.0pt;font-family:"Courier New";
+mso-ansi-language:EN-US'>&quot;, FALSE, FALSE); </span><span lang=DE style='mso-ansi-language:
+DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+<span style='color:green'>//&nbsp; print possible lemmas </span></span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+<span style='color:blue'>for</span> (<span style='color:blue'>int</span> j=0; j
+&lt; piParadigmCollection-&gt;Count; j++) </span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+{ </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;
+_bstr_t Lemma = _bstr_t(piParadigmCollection-&gt;Item[j]-&gt;Norm); </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+printf (&quot;Lemma %i = \&quot;%s\&quot;\n&quot;, j+1, (<span
+style='color:blue'>const</span> <span style='color:blue'>char</span>*)Lemma); </span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+}; </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;<span
+style="mso-spacerun: yes">  </span>piParadigmCollection = 0;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+<span style='color:green'>// destroy the dictionary </span></span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+piLemmatizer = 0; </span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:EN-US'>&nbsp;&nbsp;
+</span><span lang=DE style='font-size:10.0pt;font-family:"Courier New";
+mso-ansi-language:DE'>::CoUninitialize(); </span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=DE style='font-size:
+10.0pt;font-family:"Courier New";mso-ansi-language:DE'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=EN-US
+style='font-size:10.0pt;font-family:"Courier New";color:blue;mso-ansi-language:
+EN-US'>&nbsp;&nbsp; return</span><span lang=EN-US style='font-size:10.0pt;
+font-family:"Courier New";mso-ansi-language:EN-US'> <span style='color:blue'>0</span>;
+</span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=DE style='font-size:
+10.0pt;font-family:"Courier New";mso-ansi-language:DE'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=DE style='font-size:
+10.0pt;font-family:"Courier New";mso-ansi-language:DE'>&nbsp;</span><span
+lang=DE style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span lang=DE style='font-size:
+10.0pt;font-family:"Courier New";mso-ansi-language:DE'>} </span><span lang=DE
+style='mso-ansi-language:DE'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=DE style='mso-ansi-language:DE'>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

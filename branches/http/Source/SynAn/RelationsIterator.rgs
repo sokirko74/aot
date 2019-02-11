@@ -1,0 +1,26 @@
+HKCR
+{
+	SynAn.RelationsIterator.1 = s 'RelationsIterator Class'
+	{
+		CLSID = s '{23D97178-087F-11D4-8DE4-00105A68ADF3}'
+	}
+	SynAn.RelationsIterator = s 'RelationsIterator Class'
+	{
+		CLSID = s '{23D97178-087F-11D4-8DE4-00105A68ADF3}'
+		CurVer = s 'SynAn.RelationsIterator.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {23D97178-087F-11D4-8DE4-00105A68ADF3} = s 'RelationsIterator Class'
+		{
+			ProgID = s 'SynAn.RelationsIterator.1'
+			VersionIndependentProgID = s 'SynAn.RelationsIterator'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{79995331-E12C-11D2-8BE2-00105A68ADF3}'
+		}
+	}
+}

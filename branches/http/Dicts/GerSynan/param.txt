@@ -1,0 +1,8 @@
+Prozent
+Drittel
+Viertel
+Dollar
+Franc
+Rubel
+Euro
+Uhr

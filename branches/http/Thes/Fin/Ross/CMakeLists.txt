@@ -1,0 +1,3 @@
+project(FinRoss)
+ConvertStructDict(FinRoss)
+

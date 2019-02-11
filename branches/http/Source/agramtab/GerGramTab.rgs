@@ -1,0 +1,26 @@
+HKCR
+{
+	Agramtab.GerGramTab.1 = s 'GerGramTab Class'
+	{
+		CLSID = s '{2B33F700-3899-4FB3-9EF6-C714926BC700}'
+	}
+	Agramtab.GerGramTab = s 'GerGramTab Class'
+	{
+		CLSID = s '{2B33F700-3899-4FB3-9EF6-C714926BC700}'
+		CurVer = s 'Agramtab.GerGramTab.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {2B33F700-3899-4FB3-9EF6-C714926BC700} = s 'GerGramTab Class'
+		{
+			ProgID = s 'Agramtab.GerGramTab.1'
+			VersionIndependentProgID = s 'Agramtab.GerGramTab'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{ECD62F71-19B6-11D3-A77A-2679A7000000}'
+		}
+	}
+}
