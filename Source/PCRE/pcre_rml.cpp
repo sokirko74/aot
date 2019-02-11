@@ -50,20 +50,20 @@ void RmlPcreMakeTables(vector<BYTE>& table, MorphLanguageEnum Langua)
 	table.resize(tables_length);
 	int start  = 0;
 	/* First comes the lower casing table */
-	for (BYTE i = 0; i <= 255; i++) 
-		if (is_upper_alpha(i, Langua))
+	for (int i = 0; i < 256; i++) 
+		if (is_upper_alpha((BYTE)i, Langua))
 			table[start + i] = ReverseChar(i, Langua);
 
 	start = 256;
 	/* Next the case-flipping table */
-	for (BYTE i = 0; i <= 255; i++)
-		table[start + i] = ReverseChar(i, Langua);
+	for (BYTE i = 0; i < 256; i++)
+		table[start + i] = ReverseChar((BYTE)i, Langua);
 
 	start += 256;
-	for (BYTE i=0; i < cbit_length; i++)
+	for (int i=0; i < cbit_length; i++)
 		table[start + i] = 0;
 	
-	for (BYTE i = 0; i <= 255; i++)
+	for (int i = 0; i < 256; i++)
 	{
 		if (isdigit(i))
 		{
