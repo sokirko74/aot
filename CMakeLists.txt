@@ -12,7 +12,9 @@ endif()
 
 
 set (RML $ENV{RML})
-set (INSTALL_BIN_FOLDER $ENV{RML}/Bin)
+#set (INSTALL_BIN_FOLDER $ENV{RML}/Bin)
+
+set (INSTALL_BIN_FOLDER /Bin) # not "Bin", but "/Bin"
 
 if (NOT RML)
     message (FATAL_ERROR "environment variable RML is not set")
