@@ -112,7 +112,7 @@ bool  CMorphDictBuilder::GenerateUnitedFlexModels(const MorphoWizard& Wizard)
 
 		if ( p.m_Flexia.size() >=  MaxNumberFormsInOneParadigm)
 		{
-			fprintf (stderr, "Error: flexia No %i contains more than %i forms. !\n", MaxNumberFormsInOneParadigm); 
+			fprintf (stderr, "Error: flexia No %ul contains more than %i forms. !\n", ModelNo, MaxNumberFormsInOneParadigm); 
 			return false;
 		};
 

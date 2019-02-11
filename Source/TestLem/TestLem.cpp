@@ -180,15 +180,9 @@ int main(int argc, const char **argv) {
         if (s.empty()) break;
         string Result;
 
-        if (args.Exists("morphan")) {
-            int LemmasCount;
-            Result = Lemmatize(s.c_str(), &Holder, LemmasCount);
-            if (bPrintForms)
-                for (int i = 0; i < LemmasCount; i++) {
-                    Result += "\n";
-                    Result += GetParadigm(s, i, &Holder);
-                };
-        } else
+        if (args.Exists("morphan")) 
+            Result = LemmatizeJson(s.c_str(), &Holder, bPrintForms);
+        else
             Result = GetMorphInfo(s);
 
         if (bEchoInput)  {

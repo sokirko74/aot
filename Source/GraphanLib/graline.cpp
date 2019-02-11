@@ -60,8 +60,8 @@ void CGraLine :: MakeSpaces(size_t SpacesLength)
 {
 	m_Descriptors = _QM(ODel) | _QM(OSpc);
 	m_Status = stSpace;
-	ulen = SpacesLength;
-	slen = SpacesLength;
+	ulen = (BYTE)SpacesLength;
+	slen = (BYTE)SpacesLength;
 	memset(const_cast<char*>(unit), ' ', SpacesLength);
 };
 
@@ -604,7 +604,7 @@ size_t CGraLine::ReadWord (size_t Offset, const CGraphmatFile* G, DWORD& PageNum
 		if (s!=NULL)
 		{
 			// spaced words
-			ulen = strlen(s);
+			ulen = (BYTE)strlen(s);
 			strncpy(Out,s,ulen);
 			Offset += WordLength;
 		}

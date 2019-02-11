@@ -425,7 +425,7 @@ void MapCorrectMinSpace (const CGraphmatFile& G, size_t LB, size_t HB, WORD& Fuz
 	for (k=0; k<MaxLeftMargin; k++)
 	if (LeftMargins[k] > (NumOfFilledLines/100))
 			{
-				FuzzyMinSpace = k;	 
+				FuzzyMinSpace = (WORD)k;	 
 				break;
 			};
 
@@ -761,7 +761,7 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 	{
 		const char* s = GetUppercaseToken(LastTokenNo);
 		const char* extension =  strstr(s, ".");
-		if (!extension || !m_pDicts->IsExtension(extension+1, strlen(extension)-1))
+		if (!extension || !m_pDicts->IsExtension(extension+1, (BYTE)strlen(extension)-1))
 			return;
 		StartToken = LB;
 	}

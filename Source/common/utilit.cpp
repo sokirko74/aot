@@ -4,6 +4,8 @@
 #include <time.h>
 #include <errno.h>
 #include <limits>
+#include <codecvt>
+#include <locale>
 
 //  for mkdir
 #ifdef WIN32
@@ -2586,4 +2588,54 @@ size_t FindFloatingPoint(const char* str)
 	if (c == string::npos) 
 		c = s.rfind(".");
 	return c == string::npos ? -1 : c;
+}
+
+string utf8_to_string(const char *utf8str, const locale& loc)
+{
+	// UTF-8 to wstring
+	wstring_convert<codecvt_utf8<wchar_t>> wconv;
+	wstring wstr = wconv.from_bytes(utf8str);
+	// wstring to string
+	vector<char> buf(wstr.size());
+	use_facet<ctype<wchar_t>>(loc).narrow(wstr.data(), wstr.data() + wstr.size(), '?', buf.data());
+	return string(buf.data(), buf.size());
+}
+
+string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
+	if (langua == morphRussian) {
+		return utf8_to_string(utf8str, locale(".1251"));
+	}
+	if (langua == morphGerman) {
+		return utf8_to_string(utf8str, locale(".1252"));
+	}
+	return utf8_to_string(utf8str, locale(".1252"));;
+}
+
+//#ifdef WIN32
+	std::string to_utf8(const std::string& str, const std::locale& loc = std::locale{}) {
+		// to wide
+		std::wstring wstr(str.size(), U'\0');
+		std::use_facet<std::ctype<wchar_t>>(loc).widen(str.data(), str.data() + str.size(), &wstr[0]);
+		// to utf8
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
+		return cvt.to_bytes(wstr);
+	}
+/*#else
+string to_utf8(const std::string& str, const locale& loc) {
+	using wcvt = std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t>;
+	using wcvt = std::wstring_convert<std::codecvt_utf8<int32_t>, int32_t>;
+	std::u32string wstr(str.size(), U'\0');
+	std::use_facet<std::ctype<char32_t>>(loc).widen(str.data(), str.data() + str.size(), &wstr[0]);
+	return wcvt{}.to_bytes(wstr.data(), wstr.data() + wstr.size());
+}
+#endif*/
+
+string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua) {
+	if (langua == morphRussian) {
+		return to_utf8(str, locale(".1251"));
+	}
+	if (langua == morphGerman) {
+		return to_utf8(str, locale(".1252"));
+	}
+	return str;
 }

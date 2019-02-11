@@ -1,45 +1,20 @@
+#include "SynanDmn.h"
 
 #include "../common/utilit.h"
-#include "../common/string_socket.cpp"
-#include <syslog.h>
-#include <sys/wait.h>
+#include "../common/argparse.h"
 
-void PrintUsage()
-{
-	printf ("A daemon for working Dialing-DWDS Shallow Syntax\n");
-	printf ("Usage: ConcordDaemon [start|stop|start_cli]  [--no-query-dump]\n");	
-	printf ("Where start - starts daemon\n");	
-	printf ("      stop - stops  daemon\n");	
-	printf ("      start_cli - starts the program not as a daemon bat as a simple console program\n");	
-	exit(1);
-};
-
-
-
-extern bool LoadSynan();
-extern bool UnloadSynan();
-extern void synan_daemon_log(const string&);
-
-
-
-void UnloadData()
-{
+void UnloadData() {
 	UnloadSynan();
-	SocketDeinitialize();
-	closelog();
 };
 
 
-void  termination_handler(int signum)
-{
+void  termination_handler(int signum) {
+	synan_daemon_log("termination_handler synan daemon");
 	UnloadData();
-	syslog(LOG_ALERT, "Exiting from concordance ");
 	exit(1);
 };
 
-
-bool GetLockName(string& Result)
-{
+bool GetLockName(string& Result) {
 	try {
 		Result = GetRmlVariable() +"/SynanDaemon.lck";
 		return true;
@@ -51,141 +26,75 @@ bool GetLockName(string& Result)
 	}
 };
 
+void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
+	parser.AddArgument("--logmode", "log mode (quiet, normal or debug)", true);
+	parser.AddOption("--quiet");
+	parser.Parse(argc, argv);
+}
 
 
-int	main(int argc, char	**argv)
-{
-	bool bAllQueriesDump = true;
-	if (argc < 2) 
-		PrintUsage();
-	else
-		if (argc ==	2)
-		{
-			if (	 !strcmp (argv[0], "-h")
-				|| !strcmp (argv[0], "-help")
-				|| !strcmp (argv[0], "/h")
-				|| !strcmp (argv[0], "/help")
-				)
-				PrintUsage();
-		}
-		else
-		{
-			if (!strcmp(argv [2], "--no-query-dump"))
-			{
-				bAllQueriesDump	= false;
-				fprintf(stderr, "no dump of all queries \n");
-			}
-			else
-				PrintUsage();
-		};
-
-
-	string LockFileName;
-	if (!GetLockName(LockFileName))
-	{
-		return 1;
-	};
-
-	string Action =	argv[1];
-	if (		(Action	!= "start")
-		&&	(Action	!= "start_cli")
-		&&	(Action	!= "stop")
-		)
-		PrintUsage();
-
-	if (Action == "stop")
-	{					
-		if (access(LockFileName.c_str(), 04) !=	0)
-		{
-			printf("Concordance	was	not	started!\n");
-			return 1;
-		};
-		FILE* fp = fopen (LockFileName.c_str(),	"r");
-		if (!fp)
-		{
-			printf("Cannot open	file %s!\n", LockFileName.c_str());
-			return 1;
-		};
-		pid_t pid;
-		fscanf(fp, "%i", &pid);
-		fclose (fp);
-
-		if (kill (pid, SIGTERM)	== 0)
-		{
-			printf ("Synan Daemon was stopped\n");
-			remove (LockFileName.c_str());
-		}
-		else
-			printf ("Cannot	send a SIGTERM to the process\n");
-		return 1;
-	};
-
-
-
-	synan_daemon_log	("Entering Synan Daemon");
-	if (Action == "start_cli")
-	{
-		fprintf	(stderr, "removing %s\n",LockFileName.c_str());
-		remove(LockFileName.c_str());
-	};
-	if (access(LockFileName.c_str(), 04) ==	0)
-	{
-		printf("Daemon already	started!\n");
-		return 1;
-	};
-
-	if (Action == "start")
-	{		
-        start_as_daemon ("Synan Server");
+int	main(int argc, const char	**argv) {
+	ArgumentParser args;
+	initArgParser(argc, argv, args);
+	DaemonLogModeEnum logMode = dlmNormal;
+	if (args.Exists("logmode")) {
+		logMode = ParseDaemonLogMode(args.Retrieve("logmode"));
 	}
 
-	try{
+	string LockFileName;
+	if (!GetLockName(LockFileName))	{
+		return 1;
+	};
+	synan_daemon_log ("Entering Synan Daemon");
+	
+	if (FileExists(LockFileName.c_str())) {
+		std::cerr << "removing " << LockFileName << "\n";
+		remove(LockFileName.c_str());
+	}
 
-		syslog(LOG_ALERT, "Open	a lock file	%s\n", LockFileName.c_str());
+	try {
 		FILE* fp = fopen (LockFileName.c_str(),	"w");
-		if (!fp)
-		{
-			syslog(LOG_ALERT, "Cannot open file	%s!\n",	LockFileName.c_str());
+		if (!fp) {
+			std::cerr << "Cannot open file	" << LockFileName << "\n";
 			return 1;
 		};
-		fprintf(fp,	"%i", getpid());
+		fprintf(fp,	"%i", GetPID());
 		fclose (fp);
 
 		synan_daemon_log ("SocketInitialize");
-    	SocketInitialize(false);
+		InitSockets();
 
-		if (!LoadSynan ())
-		{
+		if (!LoadSynan ()) {
 			synan_daemon_log ("Cannot load Syntax");			
-			SocketDeinitialize();
 			return 1;
-
 		};
-	
 
+		SetSigTermHandler(termination_handler);
+		
+		const char* portKey = "Software\\Dialing\\Synan\\HttpPort";
 
-		if (signal (SIGTERM, termination_handler) == SIG_IGN)
-			signal (SIGTERM, SIG_IGN);
+		if (!CanGetRegistryString(portKey)) {
+			synan_daemon_log(Format("  Cannot find the registry key %s\n", portKey));
+			return 1;
+		};
 
-		if (Action == "start_cli")
-			fprintf	(stderr, "\nWaiting	for	accept ... \n");
+		int port = atoi(GetRegistryString(portKey).c_str());
+		synan_daemon_log(Format("  try using port %i  to start synan daemon \n", port));
 
-		while (1)
-		{
-			sleep(40);
+		TSynanHttpServer Server(port, synan_daemon_log, logMode);
+		std::cerr << "Start listen socket\n";
+		if (!Server.Start()) {
+			return 1;
 		}
 	}
 	catch(...)
 	{
-		syslog(LOG_ALERT, "An exception	occured! ");
-		UnloadData();
-		SocketDeinitialize();
-		return -1;
+		std::cerr << "General exception\n";
+		return 1;
 	};
 
-	SocketDeinitialize();	
-
-	return 1;
+	UnloadData();
+	return 0;
 }
 
 

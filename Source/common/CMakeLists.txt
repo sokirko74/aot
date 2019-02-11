@@ -14,4 +14,9 @@ string_socket.cpp
 utilit.cpp
 )
 
+if (COMPILE_WITH_HTTP)
+    set(my_SOURCES ${my_SOURCES} http_server.cpp)
+endif()
+
+
 add_library(aot_common  ${my_SOURCES})

@@ -698,10 +698,6 @@ void   CHost::RunThread()
 {
 	CHost* pHost = (CHost* )pParam;
 
-	#ifdef WIN32
-		CoInitialize(NULL);
-	#endif
-
 	if ( SocketInitialize(false) )
 	{
 		pHost->RunThread();	
@@ -712,7 +708,6 @@ void   CHost::RunThread()
 	
 
 	#ifdef WIN32 
-		CoUninitialize();
 		_endthread(); 
 		return;	
 	#else 
