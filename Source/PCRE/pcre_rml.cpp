@@ -97,20 +97,20 @@ void RmlPcreMakeTables(vector<BYTE>& table, MorphLanguageEnum Langua)
 space chars, because Perl doesn't recognize it as such for \s and for comments
 within regexes. */
 
-	for (BYTE i = 0; i <= 255; i++) {
+	for (int i = 0; i < 256; i++) {
 		int x = 0;
-		if (i != 0x0b && isspace(i)) x += ctype_space;
-		if (isalpha(i)) x += ctype_letter;
-		if (isdigit(i)) x += ctype_digit;
-		if (isxdigit(i)) x += ctype_xdigit;
-		if (isalnum(i) || i == '_') x += ctype_word;
+		if (i != 0x0b && isspace((BYTE)i)) x += ctype_space;
+		if (isalpha((BYTE)i)) x += ctype_letter;
+		if (isdigit((BYTE)i)) x += ctype_digit;
+		if (isxdigit((BYTE)i)) x += ctype_xdigit;
+		if (isalnum((BYTE)i) || (BYTE)i == '_') x += ctype_word;
 
 		/* Note: strchr includes the terminating zero in the characters it considers.
 		In this instance, that is ok because we want binary zero to be flagged as a
 		meta-character, which in this sense is any character that terminates a run
 		of data characters. */
 
-		if (strchr("*+?{^.$|()[", i) != 0) 
+		if (strchr("*+?{^.$|()[", (BYTE)i) != 0)
 			x += ctype_meta; 
 
 		table[start+i] = x; 
