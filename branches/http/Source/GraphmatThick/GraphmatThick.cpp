@@ -174,7 +174,7 @@ int main(int argc, char* argv[])
 				if (!Graphan.GetUnit(i).IsSoft())
 					fprintf (sents,"%s ",s.c_str());
 				if (Graphan.HasDescr(i,OSentEnd))
-					fprintf (sents, "\n",s.c_str());
+					fprintf (sents, "\n");
 
 			};
 			fclose (sents);

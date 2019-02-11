@@ -1,13 +1,9 @@
 // ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
-
-#ifndef utilit_h
- #define utilit_h
-
+#pragma once
 #include  <stdio.h>
 
-//#define BOOST
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
@@ -33,12 +29,12 @@
 #include  <algorithm>
 #include  <stdexcept>
 #include  <vector>
+#include  <iostream>
 #include  "set"
 #include  "stack"
 #include  "map"
 #include  "time.h"
 #include  <string.h>
-
 
 #pragma warning (disable : 4018)
 #pragma warning (disable : 4244)
@@ -321,6 +317,9 @@ extern string& RmlMakeLower (string& word, MorphLanguageEnum langua);
 extern string&  EngRusMakeUpper (string& word);
 // конвертирует из строчной кириллицы в прописные 
 extern char*  EngRusMakeUpper (char* word);
+string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua);
+string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua);
+
 
 
 // check languaage 
@@ -381,8 +380,6 @@ typedef  DWORD poses_mask_t;
 
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
-
-#endif
 
 #define IsPowerOfTwo(x) (((x) != 0) && (((x) & ((x) - 1)) == 0))
 

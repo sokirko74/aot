@@ -50,20 +50,20 @@ void RmlPcreMakeTables(vector<BYTE>& table, MorphLanguageEnum Langua)
 	table.resize(tables_length);
 	int start  = 0;
 	/* First comes the lower casing table */
-	for (size_t i = 0; i < 256; i++) 
+	for (BYTE i = 0; i <= 255; i++) 
 		if (is_upper_alpha(i, Langua))
-			table[i+start] = ReverseChar(i, Langua);
+			table[start + i] = ReverseChar(i, Langua);
 
 	start = 256;
 	/* Next the case-flipping table */
-	for (size_t i = 0; i < 256; i++) 
-		table[i+start] = ReverseChar(i, Langua);
+	for (BYTE i = 0; i <= 255; i++)
+		table[start + i] = ReverseChar(i, Langua);
 
 	start += 256;
-	for (size_t i=0; i < cbit_length; i++)
-		table[i+start] = 0;
+	for (BYTE i=0; i < cbit_length; i++)
+		table[start + i] = 0;
 	
-	for (size_t i = 0; i < 256; i++)
+	for (BYTE i = 0; i <= 255; i++)
 	{
 		if (isdigit(i))
 		{
@@ -97,8 +97,7 @@ void RmlPcreMakeTables(vector<BYTE>& table, MorphLanguageEnum Langua)
 space chars, because Perl doesn't recognize it as such for \s and for comments
 within regexes. */
 
-	for (size_t i = 0; i < 256; i++)
-	{
+	for (BYTE i = 0; i <= 255; i++) {
 		int x = 0;
 		if (i != 0x0b && isspace(i)) x += ctype_space;
 		if (isalpha(i)) x += ctype_letter;

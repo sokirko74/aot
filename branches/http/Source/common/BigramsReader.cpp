@@ -1,5 +1,8 @@
 #include  "BigramsReader.h"
-#include  "../common/bserialize.h"
+
+#include <common/bserialize.h>
+#include <common/json.h>
+
 #include  <climits>
 
 struct CBigramsWordInfo
@@ -103,17 +106,19 @@ bool CBigrams::Initialize(string BigramsFileName)
 			return false;
 		}
 		I.m_Word = word;
-		if (lower_bound(m_Word2Infos.begin(),  m_Word2Infos.end(), word, IsLessBigramsWordInfo()) != m_Word2Infos.end() )
-		{
-			fprintf (stderr,"A dublicate \"%s\" is found", word);
-			fclose(fp);
-			return false;
-		}
+
+		// comment it to make loading faster
+		//if (lower_bound(m_Word2Infos.begin(),  m_Word2Infos.end(), word, IsLessBigramsWordInfo()) != m_Word2Infos.end() )
+		//{
+		//	fprintf (stderr,"A dublicate \"%s\" is found", word);
+		//	fclose(fp);
+		//	return false;
+		//}
+
 		m_Word2Infos.push_back( I );
 		m_CorpusSize += I.m_Freq;
 	}
 	fclose(fp);
-	fprintf (stderr,"  open %s \n", BigramsFileName.c_str()  );
 	if (m_Bigrams) fclose (m_Bigrams);
 
 	string Bin1File = MakeFName(BigramsFileName, "bin1");
@@ -138,8 +143,6 @@ bool CBigrams::Initialize(string BigramsFileName)
 
 	return true;
 }
-
-
 
 vector<CBigramAndFreq> CBigrams::GetBigrams(string Word, int MinBigramsFreq, bool bDirectFile, size_t& WordFreq)
 {
@@ -202,36 +205,72 @@ vector<CBigramAndFreq> CBigrams::GetBigrams(string Word, int MinBigramsFreq, boo
 	return  Result;
 }
 
-string GetConnectedWords(string Word, int MinBigramsFreq, bool bDirectFile)
+struct CBigramLine
 {
-	size_t WordFreq;
-	vector<CBigramAndFreq> R = GlobalBigrams.GetBigrams(Word,  MinBigramsFreq, bDirectFile, WordFreq);
-	// dumping bigrams
+	string m_Word1;
+	string m_Word2;
+	size_t m_WordFreq1;
+	size_t m_WordFreq2;
+	size_t m_BigramsFreq;
+	double m_MutualInformation;
+};
 
-	string Result = Format("%u %u %s\n", GlobalBigrams.m_CorpusSize, WordFreq, Word.c_str());
-	for (size_t  i =0; i < R.size(); i++)
-	{
-		Result +=  Format("%s %u %u\n", R[i].m_Word.c_str(), R[i].m_WordFreq, R[i].m_BigramsFreq);
-	};
-	return Result;
+bool GreaterByMutualInformaton(const CBigramLine& _X1, const CBigramLine& _X2) {
+	return _X1.m_MutualInformation > _X2.m_MutualInformation;
 }
 
-string GetBigramsAsString(string Word, int MinBigramsFreq, bool bDirectFile)
-{
-	size_t WordFreq;
-	vector<CBigramAndFreq> R = GlobalBigrams.GetBigrams(Word,  MinBigramsFreq, bDirectFile, WordFreq);
-	// dumping bigrams
-
-	string Result;
-	for (size_t  i =0; i < R.size(); i++)
-	{
-		Result +=  Format("%s\t%s\t%u\n", Word.c_str(), R[i].m_Word.c_str(),  R[i].m_BigramsFreq);
-	};
-	return Result;
+bool GreaterByWordFreq2(const CBigramLine& _X1, const CBigramLine& _X2) {
+	return _X1.m_WordFreq2 > _X2.m_WordFreq2;
 }
 
-bool InitializeBigrams(string FileName)
-{
+bool GreaterByBigramsFreq(const CBigramLine& _X1, const CBigramLine& _X2) {
+	return _X1.m_BigramsFreq > _X2.m_BigramsFreq;
+}
+
+string GetConnectedWords(string Word, int MinBigramsFreq, bool bDirectFile, string sortMode, MorphLanguageEnum langua) {
+	size_t WordFreq;
+	vector <CBigramLine> table;
+	for (auto& b : GlobalBigrams.GetBigrams(Word, MinBigramsFreq, bDirectFile, WordFreq)) {
+		CBigramLine l;
+		l.m_Word1 = convert_to_utf8(Word, langua);
+		l.m_WordFreq1 = WordFreq;
+		l.m_Word2 = convert_to_utf8(b.m_Word, langua);
+		l.m_WordFreq2 = b.m_WordFreq;
+		if (!bDirectFile) {
+			l.m_Word1.swap(l.m_Word2);
+			std::swap(l.m_WordFreq1, l.m_WordFreq2);
+		}
+		l.m_BigramsFreq = b.m_BigramsFreq;
+		double p_x_y = ((double)l.m_BigramsFreq / (double)GlobalBigrams.m_CorpusSize);
+		double p_x_p_y = ((double)l.m_WordFreq1 / (double)GlobalBigrams.m_CorpusSize)*((double)l.m_WordFreq2 / (double)GlobalBigrams.m_CorpusSize);
+		l.m_MutualInformation = log(p_x_y / p_x_p_y) / log((double)2);
+		table.push_back(l);
+	}
+
+	if (sortMode == "SortByMutualInformation")
+		sort(table.begin(), table.end(), GreaterByMutualInformaton);
+	else
+		if (sortMode == "SortByWordFreq2")
+			sort(table.begin(), table.end(), GreaterByWordFreq2);
+		else
+			if (sortMode == "SortByBigramsFreq")
+				sort(table.begin(), table.end(), GreaterByBigramsFreq);
+
+	auto result = nlohmann::json::array();
+	for (auto& a : table) {
+		nlohmann::json b = {
+			{"word1", a.m_Word1},
+			{"word2", a.m_Word2},
+			{"wordFreq1", a.m_WordFreq1},
+			{"wordFreq2", a.m_WordFreq2},
+			{"bigramsFreq", a.m_BigramsFreq},
+			{"mi", a.m_MutualInformation}
+		};
+		result.push_back(b);
+	}
+	return result.dump();
+}
+
+bool InitializeBigrams(string FileName) {
 	return GlobalBigrams.Initialize(FileName);
-
 }

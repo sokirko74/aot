@@ -289,7 +289,7 @@ bool BuildAuxSimpleGroups(CSentence &S) {
                 // so for the largest group G.first==0  and G.last is the lenght of the largest group.
                 // G.m_MainWordNo is in coordinates of the group G, that's why we should add G.m_iFirstWord to
                 // G.m_MainWordNo in order to get it in the  coordinates of the largest group.
-                if (sscanf(g_descr + i + 8, "%s %i %i %i", name, &G.m_iFirstWord, &G.m_iLastWord, &G.m_MainWordNo) !=
+                if (sscanf(g_descr + i + 8, "%s %i %i %hi", name, &G.m_iFirstWord, &G.m_iLastWord, &G.m_MainWordNo) !=
                     4) {
                     ErrorMessage(Format("General format error between Simple grammar Module and Syntax! (%s)",
                                         g_descr + i + 8));

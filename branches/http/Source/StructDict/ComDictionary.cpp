@@ -18,7 +18,7 @@ STDMETHODIMP CComDictionary::LoadWithoutComments(BSTR Path)
 
 STDMETHODIMP CComDictionary::GetUnitsSize(WORD *result)
 {
-	*result = m_Units.size();
+	*result = (WORD)m_Units.size();
 	return S_OK;
 }
 
@@ -267,7 +267,7 @@ STDMETHODIMP CComDictionary::DelDomItem(LONG ItemNo)
 
 STDMETHODIMP CComDictionary::GetFieldsSize(BYTE* result)
 {
-	*result = Fields.size();
+	*result = (Fields.size();
     return S_OK;
 
 };

@@ -5,7 +5,7 @@ set (CMAKE_CXX_STANDARD 11)
 
 IF (WIN32)
     # download from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
-    SET (WIN_FLEX_FOLDER C:/Users/sokirko/Downloads/winflex)
+    SET (WIN_FLEX_FOLDER ${RML}/external/winflex)
     SET (FLEX_TOOL ${WIN_FLEX_FOLDER}/win_flex) 
     SET (BISON_TOOL ${WIN_FLEX_FOLDER}/win_bison) 
 ELSE (WIN32)
@@ -13,6 +13,15 @@ ELSE (WIN32)
     SET (FLEX_TOOL flex) 
     SET (BISON_TOOL bison) 
 ENDIF()
+
+#http server 
+include_directories(${RML}/Source)
+include_directories(${RML}/Source/contrib/libevent/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/contrib/libevent/include)
+message ("add to include path " ${CMAKE_CURRENT_BINARY_DIR}/contrib/libevent/include)
+
+#json
+include_directories(${RML}/Source/contrib/nlohmann)
 
 
 message ("CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
@@ -24,9 +33,11 @@ elseif(CMAKE_BUILD_TYPE MATCHES "Debug")
      enable_testing()
 endif(CMAKE_BUILD_TYPE MATCHES "Release")
 
+
 add_subdirectory (tinyxml)
 add_subdirectory (common)
 add_subdirectory (PCRE)
+add_subdirectory (contrib/libevent)
 
 add_subdirectory (StructDictLib)
 add_subdirectory (StructDictLoader)
@@ -77,9 +88,9 @@ add_subdirectory (SemanLib)
 add_subdirectory (TestSeman)
 add_subdirectory (Transfer)
 
+add_subdirectory (SynanDaemon)
 
 IF (MSVC)
-    message ("compile COM-objects for Microsoft Windows")
     macro(CompileIDL Project)
         file (WRITE dummy.cpp "") # creat empty file it no lib is produced
 
@@ -126,25 +137,28 @@ IF (MSVC)
 
     endmacro()
 
-    add_subdirectory (agramtab)
-    add_subdirectory (graphan)
-    add_subdirectory (MAPost)
-    add_subdirectory (SynAn)
-    add_subdirectory (StructDict)
-    add_subdirectory (Lemmatizer)
-    add_subdirectory (Demo)
-    add_subdirectory (Seman)
-    add_subdirectory (TestCOMGraphan)
-    add_subdirectory (TestLemmatizerCOM)
-    add_subdirectory (TestSemanCOM)
-    add_subdirectory (TestSynanCOM)
-    add_subdirectory (VisualSynan)
+    if (BUILD_COM)
+        message ("compile COM-objects for Microsoft Windows")
+        add_subdirectory (agramtab)
+        add_subdirectory (graphan)
+        add_subdirectory (MAPost)
+        add_subdirectory (SynAn)
+        add_subdirectory (StructDict)
+        add_subdirectory (Lemmatizer)
+        add_subdirectory (Seman)
+        add_subdirectory (TestCOMGraphan)
+        add_subdirectory (TestLemmatizerCOM)
+        add_subdirectory (TestSemanCOM)
+        add_subdirectory (TestSynanCOM)
+        add_subdirectory (VisualSynan)
+        add_subdirectory (Demo)
+    endif()
+
     add_subdirectory (RossDev)
+
 ELSE(WIN32)
     add_subdirectory (SemanDaemon)
     add_subdirectory (SemanDmnLib)
-    add_subdirectory (SynanDaemon)
-    add_subdirectory (SynanDmnLib)
     add_subdirectory (BigramsCGI)
 ENDIF()
 

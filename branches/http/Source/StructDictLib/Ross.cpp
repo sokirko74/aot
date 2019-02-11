@@ -475,7 +475,7 @@ static void   EstablishOneToOneCorrespondenceBetweenEntriesAndComments(TRoss& R)
 	for (size_t i = 0; i < R.m_Units.size(); i++)
 	{
 		R.m_Units[i].m_EntryId = i;
-		R.InsertUnitComment(i);
+		R.InsertUnitComment((WORD)i);
 	} ;
 };
 
@@ -589,7 +589,7 @@ WORD    TRoss::InsertUnitComment (WORD EntryId)
 		TUnitComment C;
   		C.m_EntryId = EntryId;
 		vector<TUnitComment>::iterator Ic = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), C);
-		size_t No = Ic - m_UnitComments.begin();
+		WORD No = Ic - m_UnitComments.begin();
 		m_UnitComments.insert(Ic, C); 
 		return No;
 	  }
@@ -829,7 +829,7 @@ void TRoss::WriteToStr (const int* Items, const char* Frmt, char* OutBuffer) con
    *OutBuffer = 0;
    BYTE BufferLen = 0;
    if (Frmt == 0) return;
-   BYTE len = strlen(Frmt);
+   BYTE len = (BYTE)strlen(Frmt);
 
 
    for (BYTE i=0; i < len; i++)
@@ -906,7 +906,7 @@ bool   TRoss::InsertDomItem (const char* ItemStr, BYTE DomNo, int& ItemNo)
 
 	TDomItem D;
 	D.SetDomNo (DomNo);
-	D.SetItemStrLen ( strlen(ItemStr) );
+	D.SetItemStrLen ( (BYTE)strlen(ItemStr) );
 	D.SetItemStrNo  ( m_Domens[D.GetDomNo() ].AddItem(ItemStr, D.GetItemStrLen() ) );
 	vector<TDomItem>::iterator It = lower_bound (m_DomItems.begin(), m_DomItems.end(), D, IsLessByItemStrNew(this));
 	ItemNo =  (int)(It-m_DomItems.begin());
