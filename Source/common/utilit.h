@@ -135,6 +135,7 @@ class CExpc
 
 // working with files
 extern bool			FileExists (const char *FName);
+extern bool         DirExists(const char *path);
 extern file_off_t	FileSize (const char *filename);
 extern bool			FSeek(FILE* fp, file_off_t pos, int origin);
 extern file_off_t	FTell(FILE* fp);

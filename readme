@@ -16,32 +16,30 @@ Russian website (Russian documents) is www.aot.ru.
 More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 ==============  Prerequisites    ========================
+0.   Install cmake (at least 3.5) from https://cmake.org/download/
 
 1.  g++ 8.0 or higher or 
 
 2. You need flex and bison to build projects after Morphology (Synan and Seman)
     For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
 
-3. To compile http daemons you need libevent-2.1.8 or higher/
-
-
-4. To build lemmatizer_python(switched off by default) you need swig and python-dev,
+3. To build lemmatizer_python(switched off by default) you need swig and python-dev,
     for windows I used 
     https://sourceforge.net/projects/swig/files/swigwin/swigwin-3.0.12/swigwin-3.0.12.zip/download
     https://www.python.org/downloads/release/python-2715/
 
 =================   Compilation =======================
-  Install cmake (at least 3.5) from https://cmake.org/download/
-  Install g++(at least 4.6) or clang 
                
-  export RML=/home/sokirko/RML
-  export CXX=/usr/bin/g++-4.7
-  export CC=/usr/bin/gcc-4.9
-  cd $RML
-  mkdir build
-  cd build
-  cmake ..
-  make
-  make DESTDIR=/home/sokirko/RML install
+export RML=/home/sokirko/RML
+export CC=/usr/local/bin/gcc
+export CXX=/usr/local/bin/g++
+cd $RML
+mkdir build
+cd build
+cmake ..
+   // or with debug 
+   // cmake .. -DCMAKE_BUILD_TYPE=Debug 
+make
+make DESTDIR=$RML install
 
 

@@ -242,14 +242,15 @@ nlohmann::json  GetParadigmFromDictionary(const CFormInfo* piParadigm, const CMo
 		prdPart["formsGroups"] = nlohmann::json::array();
 		for (auto fg : FormGroups)	{
 			auto subg = nlohmann::json::object();
-			subg["grm"] = TrimCommaRight(pGramtab->GrammemsToStr(fg.m_IntersectGrammems & ~commonGrammems));
+            string grm = pGramtab->GrammemsToStr(fg.m_IntersectGrammems & ~commonGrammems);
+			subg["grm"] = TrimCommaRight(grm);
 			subg["forms"] = nlohmann::json::array();
 			for (auto formNo : fg.m_FormNos) {
 				auto& f = FormAndGrammems[formNo + saveFormNo];
-				auto grm = TrimCommaRight(pGramtab->GrammemsToStr(f.m_Grammems & ~(fg.m_IntersectGrammems | commonGrammems)));
+                string grm = pGramtab->GrammemsToStr(f.m_Grammems & ~(fg.m_IntersectGrammems | commonGrammems));
 				subg["forms"].push_back(
 					{ {"f", f.m_Form},
-					{"grm", grm} });
+					{"grm", TrimCommaRight(grm)} });
 			};
 			prdPart["formsGroups"].push_back(subg);
 		};

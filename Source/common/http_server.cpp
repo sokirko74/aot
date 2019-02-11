@@ -1,14 +1,16 @@
 #include "http_server.h"
-#include <process.h>
 
 #ifdef WIN32
+#include <process.h>
 #include <signal.h>
 #pragma comment(lib, "Ws2_32.lib")
 #else
 #include <sys/signal.h>	
 #endif
 
+#ifdef WIN32
 void InitSocketsWindows() {
+
 	WORD wVersionRequested;
 	WSADATA wsaData;
 	int err;
@@ -24,13 +26,25 @@ void InitSocketsWindows() {
 		exit(1);
 	}
 }
+#endif
 
 bool InitSockets() {
+
+#ifdef WIN32
 	InitSocketsWindows();
+#endif
+
 	if (!event_init()) {
 		std::cerr << "Failed to init libevent." << std::endl;
 		return false;
 	}
+
+    string log_path = GetRegistryString("Software\\Dialing\\Logs\\Main");
+    if (!DirExists(log_path.c_str())) {
+        fprintf (stderr, "log dir \"%s\" does not exist; http-server must write logs to some folder\n");
+        exit(1);
+    }
+
 	return true;
 }
 
@@ -41,7 +55,7 @@ DaemonLogModeEnum ParseDaemonLogMode(string strMode) {
 		return dlmNormal;
 	if (strMode == "debug")
 		return dlmDebug;
-	throw std::exception("bad daemon log mode, could be quiet, normal or debug");
+	throw CExpc("bad daemon log mode, could be quiet, normal or debug");
 }
 
 
@@ -134,7 +148,11 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 };
 
 int GetPID() {
-	return _getpid();
+    #ifdef WIN32
+	   return _getpid();
+    #else
+	   return getpid();
+    #endif
 }
 
 void SetSigTermHandler(void(*termination_handler)(int)) {

@@ -13,6 +13,7 @@ target_link_libraries(SynanDaemon
     event
 )
 
+message ("install to " ${INSTALL_BIN_FOLDER})
 install (TARGETS SynanDaemon
         RUNTIME DESTINATION ${INSTALL_BIN_FOLDER})
 

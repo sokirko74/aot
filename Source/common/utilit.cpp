@@ -295,6 +295,18 @@ bool FileExists (const char *FName)
 	return (access(FName, 0) == 0);
 }
 
+bool DirExists(const char *path)
+{
+    struct stat info;
+
+    if(stat( path, &info ) != 0)
+        return false;
+    else if(info.st_mode & S_IFDIR)
+        return true;
+    else
+        return false;
+}
+
 file_off_t FileSize (const char *filename)
 {
 	FILE * fp = fopen (filename,"rb");
