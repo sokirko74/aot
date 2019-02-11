@@ -56,7 +56,7 @@ void RmlPcreMakeTables(vector<BYTE>& table, MorphLanguageEnum Langua)
 
 	start = 256;
 	/* Next the case-flipping table */
-	for (BYTE i = 0; i < 256; i++)
+	for (int i = 0; i < 256; i++)
 		table[start + i] = ReverseChar((BYTE)i, Langua);
 
 	start += 256;
