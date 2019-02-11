@@ -54,7 +54,7 @@ class JVisualSynAnParamBuilder
 	void MultTwoVariants(SSynVariant2Groups& var1, SSynVariant2Groups& var2, SSynVariant2Groups& res);
 	void AddHomonym(vector<SSynVariant2Groups>& synVariants, const CSynUnit& Unit);
 	void AddGroup(vector<SSynVariant2Groups>& synVariants, const CGroup& piGroup);
-	nlohmann::json JVisualSynAnParamBuilder::WriteVariant(const SSynVariant2Groups& var);
+	nlohmann::json WriteVariant(const SSynVariant2Groups& var);
 
 public:
 	const CSyntaxHolder* m_pSyntaxHolder;

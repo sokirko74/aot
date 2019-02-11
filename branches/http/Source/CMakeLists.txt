@@ -24,14 +24,15 @@ message ("add to include path " ${CMAKE_CURRENT_BINARY_DIR}/contrib/libevent/inc
 include_directories(${RML}/Source/contrib/nlohmann)
 
 
-message ("CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
-if(CMAKE_BUILD_TYPE MATCHES "Release")
-     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} -O2")
-elseif(CMAKE_BUILD_TYPE MATCHES "Debug")
-     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
-     message ("enable_testing")
-     enable_testing()
-endif(CMAKE_BUILD_TYPE MATCHES "Release")
+if(CMAKE_BUILD_TYPE MATCHES "Debug")
+    message ("compile debug")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
+    message ("enable_testing")
+    enable_testing()
+else()
+    message ("compile release")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} -O2")
+endif()
 
 
 add_subdirectory (tinyxml)
@@ -159,7 +160,6 @@ IF (MSVC)
 ELSE(WIN32)
     add_subdirectory (SemanDaemon)
     add_subdirectory (SemanDmnLib)
-    add_subdirectory (BigramsCGI)
 ENDIF()
 
 

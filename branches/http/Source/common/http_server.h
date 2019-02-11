@@ -1,6 +1,8 @@
-#include <contrib/libevent/include/evhttp.h>
-//#include <contrib/libevent/include/event2/http.h>
 #include "utilit.h"
+
+#include <contrib/libevent/include/evhttp.h>
+
+#include <memory>
 
 typedef void (*TLogFunction)(const string&);
 
