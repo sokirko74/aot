@@ -292,7 +292,7 @@ bool   TItemContainer::BuildDomens (char* LastReadLine)
 	size_t DomensCount;
 	strcpy (LastReadLine, "<no_line>");
 	char buffer[255];
-	FILE* domens = fopen(DomensFile,"rb");
+	FILE* domens = fopen(DomensFile.c_str(),"rb");
 
 	if (!domens) 
 	{
@@ -371,7 +371,7 @@ bool   TItemContainer::BuildDomItems ()
 	
 	//  reading domen items
 	{
-		FILE* fp = fopen(DomItemsTextFile,"rb");
+		FILE* fp = fopen(DomItemsTextFile.c_str(),"rb");
 		if (!fp)  return false;
 		int i1, i2;
 		while (fscanf(fp,"%i %i\n",&i1, &i2) == 2)
@@ -388,7 +388,7 @@ bool   TItemContainer::BuildDomItems ()
 
 	//  reading domens
 	{
-		FILE* fp = fopen(ItemsFile,"r");
+		FILE* fp = fopen(ItemsFile.c_str(), "r");
 		if (!fp)  return false;
 
 		for (size_t k=0; k < m_Domens.size(); k ++)
@@ -455,7 +455,7 @@ bool   TItemContainer::BuildDomItems ()
 
 bool TItemContainer::WriteDomItems() const  
 {
-	FILE* fp = fopen(DomItemsTextFile,"wb");
+	FILE* fp = fopen(DomItemsTextFile.c_str(), "wb");
 	for (size_t i=0; i < m_DomItems.size(); i++)
 	{
 		fprintf (fp, "%i %i\n", m_DomItems[i].m_Data, m_DomItems[i].m_DomNo);
@@ -464,7 +464,7 @@ bool TItemContainer::WriteDomItems() const
 	
 	
 
-	fp = fopen(ItemsFile,"w");
+	fp = fopen(ItemsFile.c_str(), "w");
 	for (size_t k=0; k < m_Domens.size(); k ++)
 	{
 		fprintf (fp, "%s;%i\n",
@@ -615,7 +615,7 @@ bool  TItemContainer::ClearFields ()
 bool    TItemContainer::BuildFields(BYTE MaxNumDom)
 {
 	ClearFields();
-	FILE* fp = fopen(FieldsFile,"rb");
+	FILE* fp = fopen(FieldsFile.c_str(), "rb");
 	int FieldsCount;
 	fscanf  (fp, "%u\r\n",&FieldsCount);
 	Fields.resize(FieldsCount);	
@@ -700,7 +700,7 @@ bool    TItemContainer::BuildFields(BYTE MaxNumDom)
 
 bool    TItemContainer::WriteFields() const 
 {
-  FILE* fp = fopen(FieldsFile,"wb");
+  FILE* fp = fopen(FieldsFile.c_str(), "wb");
   fprintf (fp, "%i\r\n",Fields.size());
   for (size_t i=0; i<Fields.size(); i++)
   {
@@ -836,7 +836,7 @@ bool TItemContainer::BuildOneFieldFormat (CSignat& Sgn, char* Frmt, char* Name, 
 
 bool   TItemContainer::WriteDomens () const
 {
-	FILE* domens = fopen(DomensFile,"wb");
+	FILE* domens = fopen(DomensFile.c_str(), "wb");
 	fprintf  (domens, "%u\r\n",m_Domens.size());
 	for (size_t k=0; k < m_Domens.size(); k ++)
 		fprintf (domens, "%i;%i;%i;%s;%c;%i;%i;%i;%s\r\n",

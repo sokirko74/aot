@@ -295,8 +295,7 @@ bool FileExists (const char *FName)
 	return (access(FName, 0) == 0);
 }
 
-bool DirExists(const char *path)
-{
+bool DirExists(const char *path) {
     struct stat info;
 
     if(stat( path, &info ) != 0)
@@ -382,34 +381,30 @@ string MakeFName ( const string& InpitFileName,  const string& Ext)
 }
 
 
-
-
-
-
-
-bool MakePath (const char* RossPath, const char* FileName, char* FullPath)
-{ 
-	if (!RossPath || !FileName || !FullPath) return false;
-
-	strcpy(FullPath,RossPath);
-
-	#ifdef WIN32
-
-		if (		 (FullPath[strlen(FullPath) - 1] != '\\') 
-				&&	(FullPath[strlen(FullPath) - 1] != '/') 
+string MakePath (const string path, const string fileName) { 
+	string result = path;
+	
+	if (!result.empty()) {
+#ifdef WIN32
+		if ((result.back() != '\\')
+			&& (result.back() != '/')
 			)
-			strcat (FullPath,"\\");
-	#else
+			result += "\\";
+#else
 
-		if (FullPath[strlen(FullPath) - 1] != '/')
-			strcat (FullPath,"/");
+		if (result.back() != '/')
+			result += "/";
 
-	#endif
+#endif
+	}
 
-	strcat (FullPath, FileName);	  
-
-	return  FileExists(FullPath);
+	return result + fileName;	  
 };
+
+bool MakePathAndCheck(const string path, const string fileName, string& fullPath) {
+	fullPath = MakePath(path, fileName);
+	return FileExists(fullPath.c_str());
+}
 
 string GetPathByFile (string FileName)
 { 
@@ -430,13 +425,6 @@ string GetPathByFile (string FileName)
 			return FileName.substr(0, max(i,j)+1); 
 };
 
-
-bool IsBinFile (const char* FileName)
-{
-	return      FileName 
-		    &&  (strlen (FileName) > 3)
-		    &&  !strncmp (FileName+strlen(FileName) - 3, "bin", 3);
-};
 
 string	CreateTempFileName()
 {
@@ -2623,24 +2611,14 @@ string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
 	return utf8_to_string(utf8str, locale(".1252"));;
 }
 
-//#ifdef WIN32
-	std::string to_utf8(const std::string& str, const std::locale& loc = std::locale{}) {
-		// to wide
-		std::wstring wstr(str.size(), U'\0');
-		std::use_facet<std::ctype<wchar_t>>(loc).widen(str.data(), str.data() + str.size(), &wstr[0]);
-		// to utf8
-		std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
-		return cvt.to_bytes(wstr);
-	}
-/*#else
-string to_utf8(const std::string& str, const locale& loc) {
-	using wcvt = std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t>;
-	using wcvt = std::wstring_convert<std::codecvt_utf8<int32_t>, int32_t>;
-	std::u32string wstr(str.size(), U'\0');
-	std::use_facet<std::ctype<char32_t>>(loc).widen(str.data(), str.data() + str.size(), &wstr[0]);
-	return wcvt{}.to_bytes(wstr.data(), wstr.data() + wstr.size());
+std::string to_utf8(const std::string& str, const std::locale& loc = std::locale{}) {
+	// to wide
+	std::wstring wstr(str.size(), U'\0');
+	std::use_facet<std::ctype<wchar_t>>(loc).widen(str.data(), str.data() + str.size(), &wstr[0]);
+	// to utf8
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
+	return cvt.to_bytes(wstr);
 }
-#endif*/
 
 string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {

@@ -61,15 +61,15 @@ class TItemContainer
 {
 public :
 	MorphLanguageEnum	m_Language;
-    char RossPath[_MAX_PATH];
+    string RossPath;
 	vector<TDomItem>  m_DomItems;
-	char DomItemsFile[_MAX_PATH];
-	char DomItemsTextFile[_MAX_PATH];
-	char ItemsFile[_MAX_PATH];
+	string DomItemsFile;
+	string DomItemsTextFile;
+	string ItemsFile;
 	vector <CDomen> m_Domens;
-	char DomensFile[_MAX_PATH];
+	string DomensFile;
 	vector<CField> Fields;
-    char FieldsFile[_MAX_PATH];
+	string FieldsFile;
 	bool	m_bDontLoadExamples;
 	bool	m_bRussianFields;
 	map<string,string>	m_Russian2EnglishFields;
