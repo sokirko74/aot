@@ -2601,6 +2601,16 @@ string utf8_to_string(const char *utf8str, const locale& loc)
 	return string(buf.data(), buf.size());
 }
 
+#ifdef WIN32
+    const char* RmlLocaleRussian = ".1251";
+    const char* RmlLocaleGerman = ".1252";
+    const char* RmlLocaleOther = ".1252";
+#else
+    const char* RmlLocaleRussian = "ru_RU.cp1251";
+    const char* RmlLocaleGerman = ".1252";
+    const char* RmlLocaleOther = ".1252";
+
+#endif
 string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {
 		return utf8_to_string(utf8str, locale(".1251"));

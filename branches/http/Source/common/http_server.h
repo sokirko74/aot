@@ -26,6 +26,7 @@ class TRMLHttpServer {
 	TInnerServer Server;
 	static DaemonLogModeEnum LogMode;
 	static string LogFileName;
+    int SrvPort;
 public:
 	TRMLHttpServer();
 	virtual ~TRMLHttpServer() {};

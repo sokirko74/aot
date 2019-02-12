@@ -100,6 +100,8 @@ TRMLHttpServer::TRMLHttpServer() : Server(nullptr, nullptr) {
 
 void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode, const string logFile) {
 	LogMode = logMode;
+    SrvPort = srvPort;
+
 	string logPath = GetRegistryString("Software\\Dialing\\Logs\\Main");
 	if (!DirExists(logPath.c_str())) {
 		throw CExpc(Format("log dir \"%s\" does not exist; http-server must write logs to some folder\n", logPath.c_str()));
@@ -108,10 +110,10 @@ void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode
 	if (!CheckFileAppendRights(LogFileName.c_str())) {
 		throw CExpc(Format("Cannot write to log file \"%s\" \n", LogFileName.c_str()));
 	}
-	LogMessage(Format("initialize daemon at port %i", srvPort));
+	LogMessage(Format("initialize daemon at port %i", SrvPort));
 
 	InitSockets();
-	Server = TInnerServer(evhttp_start("127.0.0.1", srvPort), &evhttp_free);
+	Server = TInnerServer(evhttp_start("127.0.0.1", SrvPort), &evhttp_free);
 	if (!Server) {
 		throw CExpc("Failed to create http server.");
 	}
@@ -128,7 +130,7 @@ static void OnHttpRequestStatic(evhttp_request *req, void* httpServer) {
 
 void TRMLHttpServer::Start() {
 	LogMessage("run message loop for daemon, start listen socket");
-	std::cerr << "start listen socket\n";
+	std::cerr << "start listen socket at port " << SrvPort << "\n";
 	evhttp_set_gencb(Server.get(), OnHttpRequestStatic, this);
 	if (event_dispatch() == -1)	{
 		throw CExpc ("Failed to run message loop.");
@@ -193,6 +195,12 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;
 	}
+	catch (std::exception e) {
+		string error = Format("Error: %s, Request: %s\n", e.what(), uri);
+		TRMLHttpServer::LogMessage(error.c_str());
+		SendReply(req, HTTP_BADREQUEST, nullptr);
+		return;
+	}
 
 };
 
@@ -200,7 +208,7 @@ void DealWithLockFile(const string fileName) {
 	string LockFileName = MakePath(GetRmlVariable(), fileName);
 
 	if (FileExists(LockFileName.c_str())) {
-		std::cerr << "removing " << LockFileName << "\n; possible port conflicts...";
+		std::cerr << "possible port conflicts..., removing " << LockFileName << "\n";
 		remove(LockFileName.c_str());
 	}
 	FILE* fp = fopen(LockFileName.c_str(), "w");
