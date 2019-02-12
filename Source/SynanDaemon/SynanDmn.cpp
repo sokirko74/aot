@@ -3,7 +3,6 @@
 
 #include "../SynanLib/SyntaxHolder.h"
 #include "../LemmatizerLib/Morphan.h"
-//#include <thread>
 #include "../common/string_socket.h"
 #include <common/BigramsReader.h>
 #include <common/json.h>
@@ -14,24 +13,6 @@ CSyntaxHolder GermanSyntaxHolder;
 CMorphologyHolder EnglishMorphHolder;
 
 
-void synan_daemon_log(const string &t) {
-
-    try {
-
-        string log_path = GetRegistryString("Software\\Dialing\\Logs\\Main");
-        struct tm today = RmlGetCurrentTime();
-        char tmpbuf[255];
-        string FileName = log_path + "synan_dmn.log";
-
-        FILE *fp = fopen(FileName.c_str(), "a");
-        strftime(tmpbuf, 255, "%d%B%Y %H:%M:%S", &today);
-        fprintf(fp, "%s > %s\n", tmpbuf, t.c_str());
-        fclose(fp);
-
-    }
-    catch (...) {
-    };
-}
 
 string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest& request) {
 	auto str = evhttp_find_header(&request.headers, "minBigramsFreq");
@@ -73,63 +54,29 @@ string TSynanHttpServer::ProcessSyntax(TDaemonParsedRequest& request) {
 };
 
 
-extern void (*GlobalErrorMessage)(const string &);
-
-bool LoadSynan() {
-	GlobalErrorMessage = synan_daemon_log;
-    synan_daemon_log("Loading Russian Syntax\n");
+void TSynanHttpServer::LoadSynan(bool loadBigrams) {
+    TRMLHttpServer::LogMessage("Loading Russian Syntax\n");
     if (!RussianSyntaxHolder.LoadSyntax(morphRussian)) {
-        synan_daemon_log("  cannot load Russian Syntax\n");
-        return false;
+        throw CExpc("cannot load Russian Syntax");
     };
 
-    try {
-        synan_daemon_log("Loading German Syntax\n");
-        if (!GermanSyntaxHolder.LoadSyntax(morphGerman)) {
-            synan_daemon_log("  cannot load German Syntax\n");
-            return false;
-        };
-    }
-    catch (...) {
-        synan_daemon_log("  an exception occurred!\n");
-        return false;
+    TRMLHttpServer::LogMessage("Loading German Syntax\n");
+    if (!GermanSyntaxHolder.LoadSyntax(morphGerman)) {
+		throw CExpc("cannot load German Syntax");
     };
 
-    try {
-        synan_daemon_log("Loading English Morphology\n");
-        if (!EnglishMorphHolder.LoadGraphanAndLemmatizer(morphEnglish)) {
-            synan_daemon_log("  cannot load English Morphology\n");
-            return false;
-        };
-    }
-    catch (...) {
-        synan_daemon_log("  an exception occurred!\n");
-        return false;
+    TRMLHttpServer::LogMessage("Loading English Morphology\n");
+    if (!EnglishMorphHolder.LoadGraphanAndLemmatizer(morphEnglish)) {
+		throw CExpc("cannot load English Morphology\n");
     };
-
-    try {
-        string FileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";
-        if (access(FileName.c_str(), 04) == 0)
-            if (!InitializeBigrams(FileName))
-                return false;
-    }
-    catch (CExpc c) {
-        synan_daemon_log(c.m_strCause);
-        return false;
-    }
-    catch (...) {
-        synan_daemon_log("  an exception occurred!\n");
-        return false;
-    };
-
-
-    return true;
-
-};
-
-bool UnloadSynan() {
-    synan_daemon_log("Unloading syntax...\n");
-    return true;
+	
+	if (loadBigrams) {
+		string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";
+		if (!FileExists(fileName.c_str()))
+			throw CExpc(Format("cannot find bigrams file: %s", fileName));
+		if (!InitializeBigrams(fileName))
+			throw CExpc(Format("cannot init bigrams"));
+	}
 };
 
 string TSynanHttpServer::OnParsedRequest(TDaemonParsedRequest& req) {

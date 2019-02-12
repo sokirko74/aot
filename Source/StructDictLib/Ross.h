@@ -120,10 +120,10 @@ public :
 
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
-	char UnitsFile[_MAX_PATH];
-	char CortegeFile[_MAX_PATH];
-	char UnitCommentsFile[_MAX_PATH];
-	char ConfigFile[_MAX_PATH];
+	string UnitsFile;
+	string CortegeFile;
+	string UnitCommentsFile;
+	string ConfigFile;
 	
 
 public:

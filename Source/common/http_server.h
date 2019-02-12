@@ -22,19 +22,21 @@ struct TDaemonParsedRequest {
 };
 
 class TRMLHttpServer {
-	std::unique_ptr<evhttp, decltype(&evhttp_free)> Server;
-protected:
-	TLogFunction LogFunction;
-	DaemonLogModeEnum LogMode;
+	using TInnerServer = std::unique_ptr<evhttp, decltype(&evhttp_free)>;
+	TInnerServer Server;
+	static DaemonLogModeEnum LogMode;
+	static string LogFileName;
 public:
-	TRMLHttpServer(std::uint16_t srvPort, TLogFunction logFunction, DaemonLogModeEnum dlm);
-	bool Start();
+	TRMLHttpServer();
+	virtual ~TRMLHttpServer() {};
+	void Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode, const string logFile);
+	void Start();
 	void OnHttpRequest(evhttp_request *req);
 	virtual string OnParsedRequest(TDaemonParsedRequest& request) = 0;
+
+	static void LogMessage(const string &t);
 };
 
 
-bool InitSockets();
 DaemonLogModeEnum ParseDaemonLogMode(string strMode);
-int GetPID();
-void SetSigTermHandler(void(*termination_handler)(int));
+void DealWithLockFile(const string fileName);

@@ -1,15 +1,13 @@
-#include "../common/http_server.h"
+#include <common/http_server.h>
 
 class TSynanHttpServer : public TRMLHttpServer {
 	string ProcessMorphology(TDaemonParsedRequest& request);
 	string ProcessBigrams(TDaemonParsedRequest& request);
 	string ProcessSyntax(TDaemonParsedRequest& request);
 public:
-	TSynanHttpServer(std::uint16_t srvPort, TLogFunction logFunction, DaemonLogModeEnum logMode) :
-		TRMLHttpServer(srvPort, logFunction, logMode) {};
+	TSynanHttpServer() : TRMLHttpServer() {};
+	virtual ~TSynanHttpServer() {};
 	string OnParsedRequest(TDaemonParsedRequest&) override;
+	static void LoadSynan(bool loadBigrams);
 };
 
-bool LoadSynan();
-bool UnloadSynan();
-void synan_daemon_log(const string&);

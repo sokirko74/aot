@@ -166,32 +166,32 @@ TRoss::~TRoss ()
 
 bool TRoss::LoadOnlyConstants(const char* _RossPath)
 {
-	strcpy  (RossPath, _RossPath);
-	if(!MakePath (RossPath, "config.txt", ConfigFile) )		
+	RossPath = _RossPath;
+	if(!MakePathAndCheck (RossPath, "config.txt", ConfigFile) )		
 	{
 		 m_LastError = "cannot find config.txt";
 		 return false; 
 	};
 
-	if(!MakePath (RossPath, "domitems.txt", DomItemsTextFile) )		
+	if(!MakePathAndCheck(RossPath, "domitems.txt", DomItemsTextFile) )
 	{
 		 m_LastError = "cannot find domitems.txt";
 		 return false; 
 	};
 	
-	if(!MakePath (RossPath, "items.txt", ItemsFile) )		
+	if(!MakePathAndCheck(RossPath, "items.txt", ItemsFile) )
 	{
 		 m_LastError = "cannot find items.txt";
 		 return false; 
 	};
 	
 
-	if(!MakePath (RossPath, "domens.txt", DomensFile) )
+	if(!MakePathAndCheck(RossPath, "domens.txt", DomensFile) )
 	{
 		 m_LastError = "cannot find domens.txt";
 		 return false; 
 	};
-	if(!MakePath (RossPath, "fields.txt", FieldsFile))
+	if(!MakePathAndCheck(RossPath, "fields.txt", FieldsFile))
 	{
 		 m_LastError = "cannot find fields.txt";
 		 return false; 
@@ -222,9 +222,9 @@ bool TRoss::LoadOnlyConstants(const char* _RossPath)
 	{
         return false; 
 	};
-	MakePath (RossPath, "cortege.bin", CortegeFile);
-	MakePath (RossPath, "units.bin", UnitsFile);
- 	MakePath (RossPath, "comments.bin", UnitCommentsFile);
+	CortegeFile = MakePath(RossPath, "cortege.bin");
+	UnitsFile = MakePath(RossPath, "units.bin");
+	UnitCommentsFile = MakePath (RossPath, "comments.bin");
 
 	return true;
 };
@@ -234,12 +234,12 @@ bool TRoss::FullLoad(const char* _RossPath)
 	if (!LoadOnlyConstants(_RossPath))
 		return false;
 
-	if(!MakePath (RossPath, "cortege.bin", CortegeFile))
+	if(!MakePathAndCheck (RossPath, "cortege.bin", CortegeFile))
 	{
 		 m_LastError = "cannot find cortege.bin";
 		 return false; 
 	};
-	if(!MakePath (RossPath, "units.bin", UnitsFile) )
+	if(!MakePathAndCheck(RossPath, "units.bin", UnitsFile) )
 	{
 		 m_LastError = "cannot find units.bin";
 		 return false; 
@@ -261,7 +261,7 @@ bool  TRoss::Save ()
 	if (m_bShouldSaveComments)
 		WriteVector<TUnitComment>(UnitCommentsFile, m_UnitComments);
 
-	WriteCorteges(CortegeFile);
+	WriteCorteges(CortegeFile.c_str());
 	WriteVector<CStructEntry>(UnitsFile, m_Units);
 	WriteDomItems();
 	WriteFields();
@@ -274,7 +274,7 @@ bool	TRoss::ReadConfig()
 {
 	string Config;
 	{
-		FILE* fp = fopen (ConfigFile, "rb");
+		FILE* fp = fopen (ConfigFile.c_str(), "rb");
 		if (!fp) return false;
 		char buffer[1024];
 		while (fgets(buffer,1024, fp))
@@ -379,8 +379,12 @@ const char* TRoss::GetRedactFieldName() const
 
 };
 
-void   TRoss::BuildUnits()
- {
+bool IsBinFile(const string FileName) {
+	return     (FileName.length() > 3)
+			&& FileName.substr(FileName.length() - 3) ==  string("bin");
+};
+
+void   TRoss::BuildUnits()  {
    ClearUnits();
 
    if (IsBinFile (UnitsFile))
@@ -560,7 +564,7 @@ bool   TRoss::ReadUnitComments()
 	
 	UnitCommentsFile[0] = 0;
 
- 	if (!MakePath (RossPath, "comments.bin", UnitCommentsFile))
+ 	if (!MakePathAndCheck(RossPath, "comments.bin", UnitCommentsFile))
 	{
 		ErrorMessage ("Cannot find comments.bin or comments.txt");
 		return false;
@@ -624,7 +628,7 @@ bool   TRoss::BuildCorteges()
    ClearCorteges();
 
    if (IsBinFile(CortegeFile))
-	   ReadCorteges (CortegeFile);
+	   ReadCorteges (CortegeFile.c_str());
 
    return true;
 }
@@ -1013,13 +1017,18 @@ void TRoss::DelDomItem	(int ItemNo)
 
 bool CDictionary::Load(const char* Path)
 {
-		if (!FullLoad(Path))
-		{
-			TItemContainer::ErrorMessage(m_LastError);
-			return  false;
-		}
-		else
-			return   true;
+	if (!Path) {
+		m_LastError = "cannot load ross by empty path";
+		TItemContainer::ErrorMessage(m_LastError);
+		return false;
+	}
+	if (!FullLoad(Path))
+	{
+		TItemContainer::ErrorMessage(m_LastError);
+		return  false;
+	}
+	else
+		return   true;
 
 };
 
