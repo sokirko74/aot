@@ -1,7 +1,7 @@
 #include "SynanDmn.h"
 
-#include "../common/utilit.h"
-#include "../common/argparse.h"
+#include <common/utilit.h>
+#include <common/argparse.h>
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 	parser.AddArgument("--logmode", "log mode (quiet, normal or debug)", true);
@@ -9,7 +9,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 	parser.Parse(argc, argv);
 }
 
-int	main(int argc, const char	**argv) {
+int	main(int argc, const char **argv) {
 	ArgumentParser args;
 	initArgParser(argc, argv, args);
 	DaemonLogModeEnum logMode = dlmNormal;
@@ -37,7 +37,6 @@ int	main(int argc, const char	**argv) {
 	catch (CExpc c)
 	{
 		std::cerr << c.m_strCause << "\n";
-		TRMLHttpServer::LogMessage(c.m_strCause); // try if log file can be written
 		return 1;
 	}
 	catch(...)

@@ -128,6 +128,7 @@ static void OnHttpRequestStatic(evhttp_request *req, void* httpServer) {
 
 void TRMLHttpServer::Start() {
 	LogMessage("run message loop for daemon, start listen socket");
+	std::cerr << "start listen socket\n";
 	evhttp_set_gencb(Server.get(), OnHttpRequestStatic, this);
 	if (event_dispatch() == -1)	{
 		throw CExpc ("Failed to run message loop.");
