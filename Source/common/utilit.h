@@ -186,8 +186,6 @@ extern string&	Trim (string& str);
 extern void		rml_TRACE( const char* format, ... );
 extern bool		LoadFileToString(string FileName, string& Result);
 extern void		SqueezeSpacesAndDeleteEoln(string& s);
-extern void		KOI8ToWin (string& s);
-extern void		WinToKOI8 (string& s);
 extern DWORD	StringCrc32(const char* szString);
 
 extern FILE* log_fp;

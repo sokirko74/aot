@@ -28,18 +28,21 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
     https://sourceforge.net/projects/swig/files/swigwin/swigwin-3.0.12/swigwin-3.0.12.zip/download
     https://www.python.org/downloads/release/python-2715/
 
+5. You need locale CP1251 and ISO-8859-1 under unix. 
+On POSIX systems you can type "locale -a" to list the names of supported locales. 
+
+See https://askubuntu.com/questions/76013/how-do-i-add-locale-to-ubuntu-server
+
+
 =================   Compilation =======================
-               
-export RML=/home/sokirko/RML
-export CC=/usr/local/bin/gcc
-export CXX=/usr/local/bin/g++
-cd $RML
-mkdir build
-cd build
-cmake ..
+  export RML=/home/sokirko/RML
+  export CXX=/usr/bin/g++
+  export CC=/usr/bin/gcc
+  cd $RML
+  mkdir build
+  cd build
+  cmake ..
    // or with debug 
    // cmake .. -DCMAKE_BUILD_TYPE=Debug 
-make
-make DESTDIR=$RML install
-
-
+  make
+  make DESTDIR=$RML install

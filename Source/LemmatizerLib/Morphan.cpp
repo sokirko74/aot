@@ -326,7 +326,7 @@ bool GetParadigmCollection(string WordForm, vector<CFormInfo>&	Paradigms, const 
 
 };
 
-string LemmatizeJson(string WordForm, const CMorphologyHolder* Holder, bool withParadigm) {
+string LemmatizeJson(string WordForm, const CMorphologyHolder* Holder, bool withParadigm, bool prettyJson) {
 	vector<CFormInfo>	Paradigms;
 	if (!GetParadigmCollection(WordForm, Paradigms, Holder)) {
 		return "[]";
@@ -338,7 +338,7 @@ string LemmatizeJson(string WordForm, const CMorphologyHolder* Holder, bool with
 		result.push_back ( GetStringByParadigmJson(&(Paradigms[i]), Holder, withParadigm) );
 	};
 	ConvertToUtfRecursive(result, Holder->m_CurrentLanguage);
-	return result.dump();
+	return result.dump(prettyJson?1:-1);
 }
 
 
