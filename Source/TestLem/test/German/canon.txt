@@ -1,2 +1,4 @@
-Mutter	+ MUTTER SUB  nom,sin,fem;gen,sin,fem;dat,sin,fem;akk,sin,fem MUTTER,MUTTER,MUTTER,MUTTER,M�TTER,M�TTER,M�TTERN,M�TTER
+Mutter	+ MUTTER SUB  nom,sin,fem;gen,sin,fem;dat,sin,fem;akk,sin,fem MUTTER,MUTTER,MUTTER,MUTTER,MÜTTER,MÜTTER,MÜTTERN,MÜTTER
+
+VÖGEL	+ VOGEL SUB  nom,plu,mas;gen,plu,mas;akk,plu,mas VOGEL,VOGELS,VOGEL,VOGEL,VÖGEL,VÖGEL,VÖGELN,VÖGEL
 
