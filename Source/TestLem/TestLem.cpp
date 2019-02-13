@@ -184,7 +184,7 @@ int main(int argc, const char **argv) {
 		string result;
 
 		if (args.Exists("morphan")) {
-			result = LemmatizeJson(s.c_str(), &Holder, bPrintForms, true);
+			result = LemmatizeJson(s.c_str(), &Holder, bPrintForms, true, true);
 		}
 		else {
 			result = GetMorphInfo(s);

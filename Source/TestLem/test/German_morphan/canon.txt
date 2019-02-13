@@ -10,11 +10,7 @@ Mutter	[
       "forms": [
        {
         "f": "MUTTER",
-        "grm": "nom,sin"
-       },
-       {
-        "f": "MUTTER",
-        "grm": "gen,sin"
+        "grm": "akk,sin"
        },
        {
         "f": "MUTTER",
@@ -22,23 +18,27 @@ Mutter	[
        },
        {
         "f": "MUTTER",
-        "grm": "akk,sin"
+        "grm": "gen,sin"
+       },
+       {
+        "f": "MUTTER",
+        "grm": "nom,sin"
        },
        {
         "f": "MÜTTER",
-        "grm": "nom,plu"
+        "grm": "akk,plu"
        },
        {
         "f": "MÜTTER",
         "grm": "gen,plu"
        },
        {
-        "f": "MÜTTERN",
-        "grm": "dat,plu"
+        "f": "MÜTTER",
+        "grm": "nom,plu"
        },
        {
-        "f": "MÜTTER",
-        "grm": "akk,plu"
+        "f": "MÜTTERN",
+        "grm": "dat,plu"
        }
       ],
       "grm": ""
@@ -62,11 +62,7 @@ VÖGEL	[
       "forms": [
        {
         "f": "VOGEL",
-        "grm": "nom,sin"
-       },
-       {
-        "f": "VOGELS",
-        "grm": "gen,sin"
+        "grm": "akk,sin"
        },
        {
         "f": "VOGEL",
@@ -74,23 +70,27 @@ VÖGEL	[
        },
        {
         "f": "VOGEL",
-        "grm": "akk,sin"
+        "grm": "nom,sin"
+       },
+       {
+        "f": "VOGELS",
+        "grm": "gen,sin"
        },
        {
         "f": "VÖGEL",
-        "grm": "nom,plu"
+        "grm": "akk,plu"
        },
        {
         "f": "VÖGEL",
         "grm": "gen,plu"
        },
        {
-        "f": "VÖGELN",
-        "grm": "dat,plu"
+        "f": "VÖGEL",
+        "grm": "nom,plu"
        },
        {
-        "f": "VÖGEL",
-        "grm": "akk,plu"
+        "f": "VÖGELN",
+        "grm": "dat,plu"
        }
       ],
       "grm": ""

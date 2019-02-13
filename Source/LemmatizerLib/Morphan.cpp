@@ -223,7 +223,7 @@ static string GetInterfacePOS(string POS)
 	return POS;
 };
 
-nlohmann::json  GetParadigmFromDictionary(const CFormInfo* piParadigm, const CMorphologyHolder* Holder) {
+nlohmann::json  GetParadigmFromDictionary(const CFormInfo* piParadigm, const CMorphologyHolder* Holder, bool sortForms) {
 	const CAgramtab* pGramtab = Holder->m_pGramTab;
 	const vector<CFormAndGrammems> FormAndGrammems = BuildFormAndGrammems(Holder, piParadigm);
 	nlohmann::json result = nlohmann::json::array();
@@ -252,6 +252,9 @@ nlohmann::json  GetParadigmFromDictionary(const CFormInfo* piParadigm, const CMo
 					{ {"f", f.m_Form},
 					{"grm", TrimCommaRight(grm)} });
 			};
+			if (sortForms) {
+				sort(subg["forms"].begin(), subg["forms"].end());
+			}
 			prdPart["formsGroups"].push_back(subg);
 		};
 		result.push_back(prdPart);
@@ -260,7 +263,7 @@ nlohmann::json  GetParadigmFromDictionary(const CFormInfo* piParadigm, const CMo
 };
 
 
-nlohmann::json GetStringByParadigmJson(const CFormInfo*  piParadigm, const CMorphologyHolder* Holder, bool withParadigm)
+nlohmann::json GetStringByParadigmJson(const CFormInfo*  piParadigm, const CMorphologyHolder* Holder, bool withParadigm, bool sortForms)
 {
 	auto result = nlohmann::json::object();
 	result["found"] = piParadigm->m_bFound;
@@ -293,7 +296,7 @@ nlohmann::json GetStringByParadigmJson(const CFormInfo*  piParadigm, const CMorp
 	result["morphInfo"] = GetGramInfoStr(GramInfo, Holder);
 
 	if (withParadigm) {
-		result["paradigm"] = GetParadigmFromDictionary(piParadigm, Holder);
+		result["paradigm"] = GetParadigmFromDictionary(piParadigm, Holder, sortForms);
 	}
 	return result;
 }
@@ -326,7 +329,7 @@ bool GetParadigmCollection(string WordForm, vector<CFormInfo>&	Paradigms, const 
 
 };
 
-string LemmatizeJson(string WordForm, const CMorphologyHolder* Holder, bool withParadigm, bool prettyJson) {
+string LemmatizeJson(string WordForm, const CMorphologyHolder* Holder, bool withParadigm, bool prettyJson, bool sortForms) {
 	vector<CFormInfo>	Paradigms;
 	if (!GetParadigmCollection(WordForm, Paradigms, Holder)) {
 		return "[]";
@@ -335,7 +338,7 @@ string LemmatizeJson(string WordForm, const CMorphologyHolder* Holder, bool with
 	nlohmann::json result = nlohmann::json::array();
 	string strResult = "[";
 	for (long i = 0; i < Paradigms.size(); i++) {
-		result.push_back ( GetStringByParadigmJson(&(Paradigms[i]), Holder, withParadigm) );
+		result.push_back ( GetStringByParadigmJson(&(Paradigms[i]), Holder, withParadigm, sortForms) );
 	};
 	ConvertToUtfRecursive(result, Holder->m_CurrentLanguage);
 	return result.dump(prettyJson?1:-1);
