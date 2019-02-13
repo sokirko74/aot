@@ -2,25 +2,24 @@
 // ==========   Dialing Lemmatizer (www.aot.ru)
 //================================
 
+#include <common/utilit.h>
+#include <common/argparse.h>
+#include <AgramtabLib/RusGramTab.h>
+#include <AgramtabLib/EngGramTab.h>
+#include <AgramtabLib/GerGramTab.h>
+#include <LemmatizerLib/Lemmatizers.h>
+#include <LemmatizerLib/Paradigm.h>
+#include <LemmatizerLib/Morphan.h>
+#include <LemmatizerLib/MorphologyHolder.h>
+
+#include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <locale.h>
-
-#include "../common/utilit.h"
-#include "../common/argparse.h"
-#include "../AgramtabLib/RusGramTab.h"
-#include "../AgramtabLib/EngGramTab.h"
-#include "../AgramtabLib/GerGramTab.h"
-#include "../LemmatizerLib/Lemmatizers.h"
-#include "../LemmatizerLib/Paradigm.h"
-#include "../LemmatizerLib/Morphan.h"
-#include "../LemmatizerLib/MorphologyHolder.h"
-#include <iostream>
-#include <fstream>
 
 bool bPrintIds = true;
 bool bPrintForms = false;
@@ -140,14 +139,14 @@ void CheckSpeed(std::istream& inputStream, std::ostream& output) {
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
-    parser.AddArgument("--input", "input file");
+    parser.AddArgument("--input", "input file in utf8");
     parser.AddArgument("--output", "output file");
     parser.AddArgument("--language", "language");
     parser.AddOption("--no-ids");
     parser.AddOption("--sort");
     parser.AddOption("--forms");
     parser.AddOption("--morphan");
-    parser.AddOption("--speed-test");
+    parser.AddOption("--speed-test", "attention, input file must be in a single-byte encoding");
     parser.AddOption("--echo");
     parser.Parse(argc, argv);
 }
@@ -155,15 +154,15 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
-    MorphLanguageEnum  Language = args.GetLanguage();
+    MorphLanguageEnum  language = args.GetLanguage();
 
     bPrintIds = !args.Exists("no-ids");
     bPrintForms = args.Exists("forms");
     bSortParadigms = args.Exists("sort");
     bool bEchoInput = args.Exists("echo");
-
-    std::cerr << "Loading..\n";
-    if (!Holder.LoadLemmatizer(Language)) {
+    
+	std::cerr << "Loading..\n";
+    if (!Holder.LoadLemmatizer(language)) {
         std::cerr << "Cannot load %s morphology\n";
         return 1;
     }
@@ -178,19 +177,20 @@ int main(int argc, const char **argv) {
     while (getline(args.GetInputStream(), s)) {
         Trim(s);
         if (s.empty()) break;
-        string Result;
+		if (bEchoInput) {
+			args.GetOutputStream() << s << "\t";
+		}
+		s = convert_from_utf(s.c_str(), language);
+		string result;
 
-        if (args.Exists("morphan")) 
-            Result = LemmatizeJson(s.c_str(), &Holder, bPrintForms);
-        else
-            Result = GetMorphInfo(s);
-
-        if (bEchoInput)  {
-            args.GetOutputStream() << s << "\t";
-        }
-
-        args.GetOutputStream() << Result << "\n";
-
-    };
+		if (args.Exists("morphan")) {
+			result = LemmatizeJson(s.c_str(), &Holder, bPrintForms, true);
+		}
+		else {
+			result = GetMorphInfo(s);
+			result = convert_to_utf8(result, language);
+		}
+		args.GetOutputStream() << result << "\n";
+	};
     return 0;
 }

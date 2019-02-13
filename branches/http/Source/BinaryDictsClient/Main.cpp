@@ -60,26 +60,6 @@ void string_to_id(const char *str, DwordVector &ids, const CMorphologyHolder& Ho
 	}
 }
 
-void RussianConvertToDictionary (std::string& S)
-{
-	#ifdef WIN32
-		OemToCharBuff((char*)S.c_str(), (char*)S.c_str(), S.length());		 
-	#else
-		KOI8ToWin(S);
-	#endif
-
-};
-
-void RussianConvertToScreen (std::string& S)
-{
-	#ifdef WIN32
-		CharToOemBuff((char*)S.c_str(), (char*)S.c_str(), S.length());		 
-	#else
-		WinToKOI8(S);
-	#endif
-
-};
-
 
 int main()
 {
@@ -152,7 +132,7 @@ int main()
 		else
 			Direct = false;
 		if (!Direct) 	
-			RussianConvertToDictionary(alt);
+			alt = convert_from_utf(alt, morphRusian);
 
 
 		{
@@ -194,7 +174,7 @@ int main()
 				code += " ";
 				code += FormInfo.GetAncode(0);
 				if (!Direct) 	
-						RussianConvertToScreen(code);
+					code = convert_to_utf8(code, morphRussian);
 				std::cout << code << std::endl;
 
 			}

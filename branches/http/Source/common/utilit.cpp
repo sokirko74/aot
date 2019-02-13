@@ -1,6 +1,6 @@
 #include "utilit.h"
 #include "util_classes.h"
-#include "../common/bserialize.h"
+#include "bserialize.h"
 #include <time.h>
 #include <errno.h>
 #include <limits>
@@ -2207,64 +2207,6 @@ bool  ReadTimeOutFromRegistry (bool bReadFromLocalFile, int& TimeOut)
 };
 
 
-//==================================================================
-//=========================== KOI8 <==> WIN ========================
-//==================================================================
-
-BYTE kw[] = {128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,
-144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,
-160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,
-176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,
-254,224,225,246,228,229,244,227,245,232,233,234,235,236,237,238,
-239,255,240,241,242,243,230,226,252,251,231,248,253,249,247,250,
-222,192,193,214,196,197,212,195,213,200,201,202,203,204,205,206,
-207,223,208,209,210,211,198,194,220,219,199,216,221,217,215,218};
-
-
-BYTE wk[] = {128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,
-144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,
-160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,
-176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,
-225,226,247,231,228,229,246,250,233,234,235,236,237,238,239,240,
-242,243,244,245,230,232,227,254,251,253,255,249,248,252,224,241,
-193,194,215,199,196,197,214,218,201,202,203,204,205,206,207,208,
-210,211,212,213,198,200,195,222,219,221,223,217,216,220,192,209};
-
-
-
-char wtk(char c)
-{
-	
-	c&= 0377;
-	if(c & 0200)
-		c	= wk[c & 0177];
-	return c;
-}
-char ktw(char c)
-{
-	c&= 0377;
-	if(c & 0200)
-		c	= kw[c & 0177];
-	return c;
-}
-
-
-void WinToKOI8 (string& s)
-{
-	 size_t count = s.length();
-	 for (int i=0; i< count; i++)
-		 s[i] = wtk(s[i]);
-};
-
-void KOI8ToWin (string& s)
-{
-	 size_t count = s.length();
-	 for (int i=0; i< count; i++)
-		 s[i] = ktw(s[i]);
-};
-
-
-
 
 static const DWORD arrdwCrc32Table[256] =
 {
@@ -2601,24 +2543,36 @@ string utf8_to_string(const char *utf8str, const locale& loc)
 	return string(buf.data(), buf.size());
 }
 
-#ifdef WIN32
-    const char* RmlLocaleRussian = ".1251";
-    const char* RmlLocaleGerman = ".1252";
-    const char* RmlLocaleOther = ".1252";
-#else
-    const char* RmlLocaleRussian = "ru_RU.cp1251";
-    const char* RmlLocaleGerman = ".1252";
-    const char* RmlLocaleOther = ".1252";
+// use Construct On First Use Idiom because static std::locales  crush under Visual Studio
+// see  https://isocpp.org/wiki/faq/ctors#static-init-order
+struct TRmlLocales {
+	static const std::locale& Russian() {
+		#ifdef WIN32
+			const char* enc = ".1251";
+		#else
+			const char* enc = "ru_RU.cp1251";
+		#endif
+		static std::locale* loc = new std::locale(enc);
+		return *loc;
+	}
+		static const std::locale& Latin() {
+			#ifdef WIN32
+				const char* enc = ".1252";
+			#else
+				const char* enc = "ISO-8859-1";
+			#endif
+			static std::locale* loc = new std::locale(enc);
+			return *loc;
+		}
+};
 
-#endif
+static TRmlLocales RmlLocales;
+
 string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {
-		return utf8_to_string(utf8str, locale(".1251"));
+		return utf8_to_string(utf8str, RmlLocales.Russian());
 	}
-	if (langua == morphGerman) {
-		return utf8_to_string(utf8str, locale(".1252"));
-	}
-	return utf8_to_string(utf8str, locale(".1252"));;
+	return utf8_to_string(utf8str, RmlLocales.Latin());
 }
 
 std::string to_utf8(const std::string& str, const std::locale& loc = std::locale{}) {
@@ -2632,10 +2586,7 @@ std::string to_utf8(const std::string& str, const std::locale& loc = std::locale
 
 string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {
-		return to_utf8(str, locale(".1251"));
+		return to_utf8(str, RmlLocales.Russian());
 	}
-	if (langua == morphGerman) {
-		return to_utf8(str, locale(".1252"));
-	}
-	return str;
+	return to_utf8(str, RmlLocales.Latin());
 }
