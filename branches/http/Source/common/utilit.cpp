@@ -2559,7 +2559,7 @@ struct TRmlLocales {
 			#ifdef WIN32
 				const char* enc = ".1252";
 			#else
-				const char* enc = "ISO-8859-1";
+				const char* enc = "de_DE.iso88591";
 			#endif
 			static std::locale* loc = new std::locale(enc);
 			return *loc;
