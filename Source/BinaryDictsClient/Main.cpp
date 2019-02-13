@@ -132,7 +132,7 @@ int main()
 		else
 			Direct = false;
 		if (!Direct) 	
-			alt = convert_from_utf(alt, morphRusian);
+			alt = convert_from_utf(alt.c_str(), morphRussian);
 
 
 		{
@@ -195,14 +195,14 @@ int main()
 				id_to_string(to_id, to, TransHolder);
 
 				if (Direct) 	
-						RussianConvertToScreen(to);
+					to = convert_to_utf8(to.c_str(), morphRussian);
 
 				CFormInfo TransFormInfo;
 				if (TransHolder.m_pLemmatizer->CreateParadigmFromID(to_id, TransFormInfo))
 				{
 					std::string code = TransFormInfo.GetAncode(0);
 					if (Direct) 	
-						RussianConvertToScreen(code);
+						code = convert_to_utf8(code.c_str(), morphRussian);
 					std::cout << (j+1) << ") " << to << " " << code << " ";;
 				}
 
@@ -224,8 +224,7 @@ int main()
 					//!!! получаем флаг
 					std::string fl_str;
 					DWORD flag = pairs.GetFlag(j, fl, fl_str);
-					RussianConvertToScreen(fl_str);
-					std::cout << " " << fl_str ;
+					std::cout << " " << convert_to_utf8(fl_str.c_str(), morphRussian) ;
 				}
 				std::cout << std::endl;				
 			}
