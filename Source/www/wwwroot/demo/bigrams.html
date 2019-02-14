@@ -1,10 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+п»ї<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>АОТ :: Онлайн демо :: Синтаксис</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>РђРћРў :: РћРЅР»Р°Р№РЅ РґРµРјРѕ :: Р‘РёРіСЂР°РјРјС‹</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="../aot.css" rel="stylesheet" type="text/css">
 </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="module" src="bigrams.js"> </script>
+
 <body bgcolor="#F3F3F3" text="#000000" link="#000000" vlink="#999999" alink="#000000">
 <a name="top"></a> 
 <table border="0" align="center" cellpadding="1" cellspacing="0">
@@ -14,10 +18,10 @@
 		  <td><table border="0" cellspacing="0" cellpadding="5">
 			  <tr> 
 				<td width="30">&nbsp;</td>
-				<td><font size="+7" face="Arial, Helvetica, sans-serif"><b>АОТ</b></font></td>
+				<td><font size="+7" face="Arial, Helvetica, sans-serif"><b>РђРћРў</b></font></td>
 				<td width="40">&nbsp;</td>
 				<td valign="baseline"><font size="+1" face="Arial, Helvetica, sans-serif"> 
-				  Автоматическая Обработка Текста</font></td>
+				  РђРІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ РћР±СЂР°Р±РѕС‚РєР° РўРµРєСЃС‚Р°</font></td>
 			  </tr>
 			</table>
 			<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
@@ -29,14 +33,14 @@
 			  <tr> 
 				<td valign="top"><table border="0" cellspacing="0" cellpadding="20">
 					<tr> 
-					  <td> <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> 
-						  <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> 
-						  <a href="/download.php">скачать</a> <a href="/onlinedemo.html">&nbsp;<b>демо</b></a> 
-						  <a href="/technology.html">технологии</a>  
-						  ^&nbsp; <a href="#top" title="наверх">^</a></font></p>
+					  <td> <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">РіР»Р°РІРЅР°СЏ</a> 
+						  <a href="/history.html">Рѕ&nbsp;РЅР°СЃ</a> <a href="/product.html">РїСЂРѕРґСѓРєС‚С‹</a> 
+						  <a href="/download.php">СЃРєР°С‡Р°С‚СЊ</a> <a href="/onlinedemo.html">&nbsp;<b>РґРµРјРѕ</b></a> 
+						  <a href="/technology.html">С‚РµС…РЅРѕР»РѕРіРёРё</a>  
+						  ^&nbsp; <a href="#top" title="РЅР°РІРµСЂС…">^</a></font></p>
 						<table width="720" border="0" cellpadding="3" cellspacing="0" bgcolor="#CCCCCC">
 						  <tr> 
-							<td class="titleblack">Поиск биграмм</td>
+							<td class="titleblack">РџРѕРёСЃРє Р±РёРіСЂР°РјРј</td>
 						  </tr>
 						</table>
 						<table width="720" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -54,41 +58,35 @@
 						<table border="0" align="center" cellpadding="5" cellspacing="0">
 
 
-						  <form method="post" action="/cgi-bin/bigrams.cgi">
-							<input type="hidden" name="CorporaName" value = "Moschkov" >
-							<input type="hidden" name="HeaderFormat" value="<br>Предложения: %i-%i из %i<br>" >
-							<input type="hidden" name="TemplateFile" value = "../htdocs/search1.html">
-							<input type="hidden" name="MoreButton" value = "еще" >
-							<input type="hidden" name="Timeout" value = "100" >
-							<input type="hidden" name="SearchText" value = "Поиск" >
-                	                                <input type="hidden" name="BigramsTemplateFile" value = "../wwwroot/demo/bigrams.html" >
 							<tr> 
-
-							  <td class="text">Слово: <input type="text" name=InputText value="" >
-							  &nbsp;&nbsp;&nbsp;Сортировка:
-							  <SELECT NAME="SortOperator">
-							   	<OPTION VALUE = SortByMutualInformation selected >по объему взаимной информации </OPTION>
-							  	<OPTION VALUE = SortByWordFreq2 >по частоте второго слова  </OPTION>
-								<OPTION VALUE = SortByBigramsFreq >по частоте биграммы </OPTION>
+							  <td class="text">РЎР»РѕРІРѕ: <input type="text" id=InputText value="" >
+							  &nbsp;&nbsp;&nbsp;РЎРѕСЂС‚РёСЂРѕРІРєР°:
+							  <SELECT id="SortOperator">
+							   	<OPTION VALUE = SortByMutualInformation selected >РїРѕ РѕР±СЉРµРјСѓ РІР·Р°РёРјРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё </OPTION>
+							  	<OPTION VALUE = SortByWordFreq2 >РїРѕ С‡Р°СЃС‚РѕС‚Рµ РІС‚РѕСЂРѕРіРѕ СЃР»РѕРІР°  </OPTION>
+								<OPTION VALUE = SortByBigramsFreq >РїРѕ С‡Р°СЃС‚РѕС‚Рµ Р±РёРіСЂР°РјРјС‹ </OPTION>
 							  </SELECT> 
 							  
 							  </td>
 							  <td>
-							  <input name="submit1" type="submit" value=" Find " >
+							  <input name="submit1" type="submit" value="Find" onclick="window.bigrams_request()" >
 							  </td>
 							</tr>
 							<tr >
                                                         <td align="right">
-							<input type="radio" name="BigramElement" checked value= FirstWord > правый контекст
-							<input type="radio" name="BigramElement" value= SecondWord > левый контекст
+							<input type="radio" name="BigramElement" checked value= FirstWord > РїСЂР°РІС‹Р№ РєРѕРЅС‚РµРєСЃС‚
+							<input type="radio" name="BigramElement" value= SecondWord > Р»РµРІС‹Р№ РєРѕРЅС‚РµРєСЃС‚
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Мин. частота биграммы: <input type="text" name=MinBigramFreq value="2" size=3>
+								РњРёРЅ. С‡Р°СЃС‚РѕС‚Р° Р±РёРіСЂР°РјРјС‹: <input type="text" id=MinBigramFreq value="2" size=3>
 							</td> 
 							<td> </td>
 
 							</tr>
 							<tr> <td>
-								<!--ResultText-->
+
+                            <div id="bigramsholder">
+                            </div>
+
 							</td> </tr>
 						  </form>
 						 
@@ -101,11 +99,11 @@
 							<td height="2"><img src="../images/transparent.gif" width="1" height="2"></td>
 						  </tr>
 						</table>
-						<p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> 
-						  <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> 
-						  <a href="/download.php">скачать</a> <a href="/onlinedemo.html">&nbsp;<b>демо</b></a> 
-						  <a href="/technology.html">технологии</a>  
-						  &nbsp; <a href="#top" title="наверх">^</a></font></p></td>
+						<p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">РіР»Р°РІРЅР°СЏ</a> 
+						  <a href="/history.html">Рѕ&nbsp;РЅР°СЃ</a> <a href="/product.html">РїСЂРѕРґСѓРєС‚С‹</a> 
+						  <a href="/download.php">СЃРєР°С‡Р°С‚СЊ</a> <a href="/onlinedemo.html">&nbsp;<b>РґРµРјРѕ</b></a> 
+						  <a href="/technology.html">С‚РµС…РЅРѕР»РѕРіРёРё</a>  
+						  &nbsp; <a href="#top" title="РЅР°РІРµСЂС…">^</a></font></p></td>
 					</tr>
 				  </table></td>
 			  </tr>
@@ -115,10 +113,10 @@
 					  <td>&nbsp;</td>
 					  <td align="right"><table border="0" cellspacing="5" cellpadding="0">
 						  <tr> 
-							<td align="right"><font color="#999999" size="1">Разработка 
+							<td align="right"><font color="#999999" size="1">Р Р°Р·СЂР°Р±РѕС‚РєР° 
 							  <a href="mailto:simple@mosk.ru"><font color="#999999">DiP</font></a>.<br>
-							  &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">АОТ</font></a>. 
-							  Все права защищены.</font></td>
+							  &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">РђРћРў</font></a>. 
+							  Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹.</font></td>
 						  </tr>
 						</table></td>
 					</tr>

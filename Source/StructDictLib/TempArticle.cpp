@@ -523,7 +523,6 @@ inline bool SplitFldName (string& FldName, BYTE& LeafId, BYTE& BracketLeafId)
 	if (FldName[FldName.length() - 1] == ')')
 		ProcessBracketLeafId(FldName, BracketLeafId);
 
-	BYTE debug = FldName.length();
 	LeafId = FldName[FldName.length() - 1] - '0';
 
 	if (     (    (LeafId > 9) 

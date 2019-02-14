@@ -60,26 +60,6 @@ void string_to_id(const char *str, DwordVector &ids, const CMorphologyHolder& Ho
 	}
 }
 
-void RussianConvertToDictionary (std::string& S)
-{
-	#ifdef WIN32
-		OemToCharBuff((char*)S.c_str(), (char*)S.c_str(), S.length());		 
-	#else
-		KOI8ToWin(S);
-	#endif
-
-};
-
-void RussianConvertToScreen (std::string& S)
-{
-	#ifdef WIN32
-		CharToOemBuff((char*)S.c_str(), (char*)S.c_str(), S.length());		 
-	#else
-		WinToKOI8(S);
-	#endif
-
-};
-
 
 int main()
 {
@@ -152,7 +132,7 @@ int main()
 		else
 			Direct = false;
 		if (!Direct) 	
-			RussianConvertToDictionary(alt);
+			alt = convert_from_utf(alt.c_str(), morphRussian);
 
 
 		{
@@ -194,7 +174,7 @@ int main()
 				code += " ";
 				code += FormInfo.GetAncode(0);
 				if (!Direct) 	
-						RussianConvertToScreen(code);
+					code = convert_to_utf8(code, morphRussian);
 				std::cout << code << std::endl;
 
 			}
@@ -215,14 +195,14 @@ int main()
 				id_to_string(to_id, to, TransHolder);
 
 				if (Direct) 	
-						RussianConvertToScreen(to);
+					to = convert_to_utf8(to.c_str(), morphRussian);
 
 				CFormInfo TransFormInfo;
 				if (TransHolder.m_pLemmatizer->CreateParadigmFromID(to_id, TransFormInfo))
 				{
 					std::string code = TransFormInfo.GetAncode(0);
 					if (Direct) 	
-						RussianConvertToScreen(code);
+						code = convert_to_utf8(code.c_str(), morphRussian);
 					std::cout << (j+1) << ") " << to << " " << code << " ";;
 				}
 
@@ -244,8 +224,7 @@ int main()
 					//!!! получаем флаг
 					std::string fl_str;
 					DWORD flag = pairs.GetFlag(j, fl, fl_str);
-					RussianConvertToScreen(fl_str);
-					std::cout << " " << fl_str ;
+					std::cout << " " << convert_to_utf8(fl_str.c_str(), morphRussian) ;
 				}
 				std::cout << std::endl;				
 			}

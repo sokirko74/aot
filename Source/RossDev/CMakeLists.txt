@@ -61,9 +61,9 @@ picture.cpp
 rowcursor.cpp
 )
 
-add_dependencies(${PROJECT_NAME} 
-    Seman
-)
+#add_dependencies(${PROJECT_NAME} 
+#    Seman
+#)
 
 target_link_libraries(${PROJECT_NAME}
     aot_common

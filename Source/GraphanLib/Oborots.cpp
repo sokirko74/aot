@@ -222,7 +222,7 @@ void BuildOborottosIndex (CGraphanDicts& C)
 			C.m_Oborottos[OborotNo].m_TokenIds[k] = T[ C.m_Oborottos[OborotNo].m_TokenIds[k] ];
 
 		assert (!C.m_Oborottos[OborotNo].m_TokenIds.empty());
-		C.m_OborottosFirstWordIndex[ C.m_Oborottos[OborotNo].m_TokenIds[0] ].push_back(OborotNo);
+		C.m_OborottosFirstWordIndex[ C.m_Oborottos[OborotNo].m_TokenIds[0] ].push_back((WORD)OborotNo);
 	};
 
 };

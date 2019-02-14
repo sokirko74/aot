@@ -8,6 +8,10 @@ target_link_libraries(SimpleGrammarPrecompiled
     SimpleGrammarLib
 )
 
+if (BUILD_DICTS)
+    add_dependencies (SimpleGrammarPrecompiled MorphDicts)
+endif()
+
 add_test(
     NAME GermanGLRTest 
     COMMAND SimpleGrammarPrecompiled --language German --input ${PROJECT_SOURCE_DIR}/tests/test.grm --output tests/out.txt

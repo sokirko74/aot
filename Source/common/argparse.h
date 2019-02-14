@@ -126,7 +126,8 @@ private:
             }
             if (a.Name == "output") {
                 if (Retrieve("output") != "-") {
-                    OutputStreamFile.open(Retrieve("output"));
+					// to write unix eoln under windows open files in binary mode
+                    OutputStreamFile.open(Retrieve("output"), std::ifstream::out| std::ifstream::binary);
                     if (!OutputStreamFile.is_open()) {
                         ArgumentError("cannot open file " + Retrieve("output"));
                     }
