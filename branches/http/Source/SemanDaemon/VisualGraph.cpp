@@ -43,6 +43,7 @@ vector<int> CVisualSemGraph::GetChildren(int NodeNo) const
 	for (const auto& r : m_Relations) {
 		if (r.m_SourceNodeNo == NodeNo)
 			Nodes.push_back(r.m_TargetNodeNo);
+    }
 	return Nodes;
 }
 
@@ -52,7 +53,8 @@ vector<int> CVisualSemGraph::GetParents(int NodeNo) const
 	for (const auto& r : m_Relations) {
 		if (r.m_TargetNodeNo == NodeNo)
 			Nodes.push_back(r.m_SourceNodeNo);
-	return Nodes;
+	}
+    return Nodes;
 }
 
 string CVisualSemGraph::GetResultStr() const
