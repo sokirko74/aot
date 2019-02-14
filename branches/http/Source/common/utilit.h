@@ -8,14 +8,6 @@
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 #ifdef WIN32
-
-	// it is used to find memory leaks
-	#ifdef DETECT_MEMORY_LEAK
-		extern void* operator new(size_t nSize, const char* lpszFileName, int nLine);
-		extern void  operator delete(void* p, const char* lpszFileName, int nLine);
-		#define DEBUG_NEW new(THIS_FILE, __LINE__)
-	#endif
-	
 	#define NOMINMAX 
 	#include "windows.h"
 	#include "winuser.h"
@@ -43,22 +35,7 @@
 #pragma warning  (disable : 4251)
 #pragma warning  (disable : 4996)
 		
-
-#ifdef STLPORT
-	using namespace stlport;
-#else
-	using namespace std;
-#endif
-
-
-
-
-
-//#if !defined (STLPORT) || defined(__STL_USE_NAMESPACES)
-//using namespace std;
-//#endif
-
-
+using namespace std;
 
 typedef unsigned char BYTE;
 
@@ -188,8 +165,6 @@ extern bool		LoadFileToString(string FileName, string& Result);
 extern void		SqueezeSpacesAndDeleteEoln(string& s);
 extern DWORD	StringCrc32(const char* szString);
 
-extern FILE* log_fp;
-
 extern void QPEncodeString(string& s);
 extern void QPDecodeString(string& s);
 #ifndef WIN32
@@ -211,15 +186,10 @@ extern string GetStringByLanguage (MorphLanguageEnum Langua);
 
 
 
-/*
-clears also capacity
-*/
 template <class T> 
 void ClearVector(vector<T>& V)
 {
 	V.clear();
-//	vector<T> dummy (V);
-//	V.swap (dummy);
 };
 
 
@@ -367,9 +337,6 @@ T& GerEngRusMakeUpperTemplate (T& word, MorphLanguageEnum Langua, size_t Len )
 
 	return word;
 };	
-
-
-
 
 
 //  QWORD mask

@@ -40,18 +40,18 @@ void CVisualSemGraph::InitFromSemantics (const CSemStructureBuilder& SemBuilder)
 vector<int> CVisualSemGraph::GetChildren(int NodeNo) const 
 {
 	vector<int> Nodes;
-	for (size_t i=0;  i <m_Relations.size(); i++)
-		if (m_Relations[i].m_SourceNodeNo == NodeNo)
-			Nodes.push_back(m_Relations[i].m_TargetNodeNo);
+	for (const auto& r : m_Relations) {
+		if (r.m_SourceNodeNo == NodeNo)
+			Nodes.push_back(r.m_TargetNodeNo);
 	return Nodes;
 }
 
 vector<int> CVisualSemGraph::GetParents(int NodeNo) const 
 {
 	vector<int> Nodes;
-	for (size_t i=0;  i <m_Relations.size(); i++)
-		if (m_Relations[i].m_TargetNodeNo == NodeNo)
-			Nodes.push_back(m_Relations[i].m_SourceNodeNo);
+	for (const auto& r : m_Relations) {
+		if (r.m_TargetNodeNo == NodeNo)
+			Nodes.push_back(r.m_SourceNodeNo);
 	return Nodes;
 }
 
@@ -85,6 +85,7 @@ string CVisualSemGraph::GetResultStr() const
 	ConvertToUtfRecursive(result, morphRussian);
 	return result.dump();
 }
+
 int CVisualSemGraph::GetLeavesCount (int Root) const
 {
 	vector<int> Children = GetChildren(Root);

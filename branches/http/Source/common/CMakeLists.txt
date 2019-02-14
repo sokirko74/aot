@@ -7,11 +7,9 @@ Homonym.cpp
 LemWord.cpp
 MorphXmlToken.cpp
 PlmLine.cpp
-cgic.cpp
 gra_descr.cpp
-http_server.cpp
+#http_server.cpp
 rus_numerals.cpp
-string_socket.cpp
 utilit.cpp
 )
 

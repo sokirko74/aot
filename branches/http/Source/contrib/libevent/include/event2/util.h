@@ -113,6 +113,14 @@ extern "C" {
  *
  * @{
  */
+
+// compile only under C++11
+#define EVENT__HAVE_UINT64_T 1
+#define EVENT__HAVE_UINT32_T 1
+#define EVENT__HAVE_UINT16_T 1
+#define EVENT__HAVE_UINT8_T  1
+#define EVENT__HAVE_UINTPTR_T 1
+
 #ifdef EVENT__HAVE_UINT64_T
 #define ev_uint64_t uint64_t
 #define ev_int64_t int64_t

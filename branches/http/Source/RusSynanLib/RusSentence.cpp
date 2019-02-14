@@ -507,10 +507,6 @@ bool CRusSentence::IsProfession(const CSynHomonym &H) const {
 };
 
 bool CRusSentence::BuildClauses() {
-    //запись в log файл отключена
-    //FILE* log_fp = 0;//есть общий лог в rml_TRACE
-    // log_fp = fopen("current_sentence.log", "w");
-
     ProcessFio1Fio2();
 
     SolveAmbiguityUsingRuleForShortAdj();
@@ -526,10 +522,7 @@ bool CRusSentence::BuildClauses() {
     TryWithoutTwoPotentialRule:
     bool bRes = true;
 
-    if (log_fp) {
-        fprintf(log_fp, "%s....", GetSentenceBeginStr().c_str());;
-
-    };
+    rml_TRACE("%s....", GetSentenceBeginStr().c_str())
 
     assert (GetClausesCount() == 0);
 
