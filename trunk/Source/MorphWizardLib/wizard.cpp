@@ -801,13 +801,20 @@ void MorphoWizard::load_mrd(bool guest, bool bCreatePrediction)
 	if (!mrdFile.is_open())
 		throw CExpc("Wrong mrd file : " + m_MrdPath);
 
+	fprintf(stderr, ".");
 	ReadFlexiaModels(mrdFile, m_FlexiaModels);
+	fprintf(stderr, ".");
 	ReadAccentModels(mrdFile, m_AccentModels);
+	fprintf(stderr, ".");
 	ReadSessions(mrdFile);
+	fprintf(stderr, ".");
 	ReadPrefixSets(mrdFile);
+	fprintf(stderr, ".");
 	ReadLemmas(mrdFile, *this);
+	fprintf(stderr, ".");
 	if (bCreatePrediction)
 		CreatePredictIndex();
+	fprintf(stderr, ".\n");
 }
 
 string &MorphoWizard::get_value(const string &key)

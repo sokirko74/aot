@@ -1,11 +1,11 @@
-// Morphan.cpp : Implementation of CMorphan
-#include "../common/string_socket.h"
 #include "Morphan.h"
 #include "MorphologyHolder.h"
 
+#include <common/json.h>
+
 
 const int ParagigmGroupsCount = 45;
-const string  ParagigmGroups [ParagigmGroupsCount] = {
+const string  ParagigmGroups[ParagigmGroupsCount] = {
 	"П ед,мр",
 	"П ед,жр",
 	"П ед,ср",
@@ -53,103 +53,6 @@ const string  ParagigmGroups [ParagigmGroupsCount] = {
 	"VBE pl"
 };
 
-/////////////////////////////////////////////////////////////////////////////
-// CMorphan
-
-string GetGramInfoStr (string GramInfo, const CMorphologyHolder* Holder)
-{
-	const CAgramtab* pGramtab = Holder->m_pGramTab;
-	assert (!GramInfo.empty());
-	int POS = pGramtab->GetPartOfSpeech(GramInfo.c_str());
-	string Result;
-	Result += pGramtab->GetPartOfSpeechStr(POS);
-	Result += " ";
-	QWORD grammems = pGramtab->GetAllGrammems(GramInfo.c_str());
-	Result += pGramtab->GrammemsToStr(grammems);
-	Result += " ";
-	return Result;
-
-};
-
-string GetStringByParadigm (const CFormInfo*  piParadigm, const CMorphologyHolder* Holder)
-{
-	string Result = "<TR> <TD>";	
-	Result +=  piParadigm->m_bFound ? "+" : "-";
-	Result += "</TD><TD>";	
-
-	string TypeAncode = piParadigm->GetCommonAncode();
-	if (TypeAncode.empty())
-	{
-		Result += " Main ";
-	}
-	else
-	{
-		const CAgramtab* pGramtab = Holder->m_pGramTab;
-		try {
-			QWORD grammems = pGramtab->GetAllGrammems(TypeAncode.c_str());
-			Result += " "+pGramtab->GrammemsToStr(grammems)+ " ";
-		}
-		catch (...)
-		{
-			Result += " an exception occurred while getting Common Ancode";
-		};
-
-	};
-
-	Result += "</TD><TD>";	
-	Result +=  piParadigm->GetWordForm(0);
-	Result += "</TD><TD>";	
-	string GramInfo;
-	try
-	{
-		GramInfo = piParadigm->GetSrcAncode();
-	} catch(...)
-	{
-		GramInfo = piParadigm->GetAncode(0);
-	}
-
-	 if (!GramInfo.empty())
-		Result += GetGramInfoStr(GramInfo, Holder);
-
-	Result += "</TD><TD>";	
-
-	if (!piParadigm->m_bFound)
-	{
-		Result += piParadigm->GetSrcNorm();
-	}
-	Result += "</TD></TR>";	
-	return Result;
-}
-
-
-inline  bool IsUpper(int x, MorphLanguageEnum Langua)     
-{
-	return is_upper_alpha(x, Langua);
-};
-
-
-
-bool GetParadigmCollection(string WordForm, vector<CFormInfo>&	Paradigms, const CMorphologyHolder* Holder)
-{
-	if (WordForm.length() == 0) 
-	{
-		return false;
-	};
-
-	try 
-	{
-		if (Holder->m_pLemmatizer == 0) return false;
-		Holder->m_pLemmatizer->CreateParadigmCollection(false, WordForm, IsUpper((unsigned char)WordForm[0], Holder->m_CurrentLanguage), true, Paradigms);
-	}
-	catch (...)
-	{
-		return false;;
-	};
-	return true;
-
-
-};
-
 struct CFormAndGrammems {
 	string m_Form;
 	string m_POS;
@@ -168,70 +71,137 @@ struct CFormGroup {
 	vector<int>    m_FormNos;
 };
 
-int GetWidePOS (BYTE POS, QWORD Grammems, MorphLanguageEnum Langua)
+int GetWidePOS(BYTE POS, QWORD Grammems, MorphLanguageEnum Langua)
 {
-	 return POS;
+	return POS;
 
 };
 
+string&  TrimCommaRight(string& str)
+{
+	if (str.size() == 0) return str;
+	size_t i = str.find_last_not_of(",");
+	str.erase(i + 1);
+	return str;
+};
 
-vector<CFormGroup> GetParadigmByGroups (const vector<CFormAndGrammems>& Forms, const CMorphologyHolder* Holder, QWORD& CommonGrammems)
+
+string GetGramInfoStr(string GramInfo, const CMorphologyHolder* Holder)
 {
 	const CAgramtab* pGramtab = Holder->m_pGramTab;
+	assert(!GramInfo.empty());
+	int POS = pGramtab->GetPartOfSpeech(GramInfo.c_str());
+	string Result;
+	Result += pGramtab->GetPartOfSpeechStr(POS);
+	Result += " ";
+	QWORD grammems = pGramtab->GetAllGrammems(GramInfo.c_str());
+	Result += pGramtab->GrammemsToStr(grammems);
+	TrimCommaRight(Result);
+	return Result;
+
+};
+
+vector<CFormGroup> GetParadigmByGroups(const vector<CFormAndGrammems>& Forms, const CMorphologyHolder* Holder, QWORD& CommonGrammems)
+{
 	vector<CFormGroup> Results;
 	vector<bool> IncludedVector;
-	int i=0;
+	int i = 0;
+	const CAgramtab* pGramtab = Holder->m_pGramTab;
 
 	for (; i < Forms.size(); i++) IncludedVector.push_back(false);
 
-	for (long GroupNo=0; GroupNo < ParagigmGroupsCount; GroupNo++)
+	for (long GroupNo = 0; GroupNo < ParagigmGroupsCount; GroupNo++)
 	{
 		BYTE POS;
 		QWORD Grammems = 0;
 		if (!pGramtab->ProcessPOSAndGrammems(ParagigmGroups[GroupNo].c_str(), POS, Grammems)) continue;;
-		string strPOS  = pGramtab->GetPartOfSpeechStr(GetWidePOS(POS, Grammems, Holder->m_CurrentLanguage));
+		string strPOS = pGramtab->GetPartOfSpeechStr(GetWidePOS(POS, Grammems, Holder->m_CurrentLanguage));
 		CFormGroup F;
-		F.m_IntersectGrammems =   GetMaxQWORD();
-		for (long i=0; i < Forms.size(); i++)
-		  if (!IncludedVector[i])
-			if (Forms[i].m_POS == strPOS)
-				if ( (Grammems & Forms[i].m_Grammems) == Grammems)
-				{
-					int k =0;
-					for (; k < F.m_FormNos.size(); k++)
-						if (Forms[F.m_FormNos[k]].m_Grammems >= Forms[i].m_Grammems)
-							break;
-					F.m_FormNos.insert(F.m_FormNos.begin() + k, i);
-					IncludedVector[i] = true;
-					F.m_IntersectGrammems &=  Forms[i].m_Grammems;
-				};
+		F.m_IntersectGrammems = GetMaxQWORD();
+		for (long i = 0; i < Forms.size(); i++)
+			if (!IncludedVector[i])
+				if (Forms[i].m_POS == strPOS)
+					if ((Grammems & Forms[i].m_Grammems) == Grammems)
+					{
+						int k = 0;
+						for (; k < F.m_FormNos.size(); k++)
+							if (Forms[F.m_FormNos[k]].m_Grammems >= Forms[i].m_Grammems)
+								break;
+						F.m_FormNos.insert(F.m_FormNos.begin() + k, i);
+						IncludedVector[i] = true;
+						F.m_IntersectGrammems &= Forms[i].m_Grammems;
+					};
 
 		if (F.m_FormNos.size() > 0)
-	  	 Results.push_back(F);
+			Results.push_back(F);
 
 	};
 
-	 CFormGroup LastGroup;
-	 LastGroup.m_IntersectGrammems = 0;
-	 for (i = 0; i < Forms.size(); i++)
-		if(!IncludedVector[i])
+	CFormGroup LastGroup;
+	LastGroup.m_IntersectGrammems = 0;
+	for (i = 0; i < Forms.size(); i++)
+		if (!IncludedVector[i])
 			LastGroup.m_FormNos.push_back(i);
 
-	 if (LastGroup.m_FormNos.size() > 0)
+	if (LastGroup.m_FormNos.size() > 0)
 		Results.push_back(LastGroup);
 
 	CommonGrammems = GetMaxQWORD();
-	for (i=0; i < Forms.size(); i++)
+	for (i = 0; i < Forms.size(); i++)
 
-		CommonGrammems &=  Forms[i].m_Grammems;
+		CommonGrammems &= Forms[i].m_Grammems;
 
-	
 
-	return Results;	
+
+	return Results;
 
 };
 
-string GetInterfacePOS (string POS)
+
+vector<CFormGroup>  BuildInterfaceParadigmPart(const CMorphologyHolder* Holder, const vector<CFormAndGrammems> FormAndGrammems, int& FormNo, QWORD& commonGrammems) {
+	int EndFormNo = FormNo + 1;
+	for (; EndFormNo < FormAndGrammems.size(); EndFormNo++)
+		if (FormAndGrammems[FormNo].m_POS != FormAndGrammems[EndFormNo].m_POS)
+			break;
+	vector<CFormAndGrammems> FormAndGrammemsPart;
+	FormAndGrammemsPart.insert(FormAndGrammemsPart.begin(), FormAndGrammems.begin() + FormNo, FormAndGrammems.begin() + EndFormNo);
+	FormNo = EndFormNo;
+	return GetParadigmByGroups(FormAndGrammemsPart, Holder, commonGrammems);
+};
+
+
+vector<CFormAndGrammems> BuildFormAndGrammems(const CMorphologyHolder* Holder, const CFormInfo* piParadigm) {
+	const CAgramtab* pGramtab = Holder->m_pGramTab;
+	// получаем все формы и граммемы в массив FormAndGrammems
+	vector<CFormAndGrammems> FormAndGrammems;
+	for (int j = 0; j < piParadigm->GetCount(); j++)
+	{
+		string GramInfo = piParadigm->GetAncode(j);
+		for (long i = 0; i < GramInfo.length(); i += 2)
+		{
+			CFormAndGrammems F;
+			F.m_Form = piParadigm->GetWordForm(j);
+			BYTE AccentedCharNo = piParadigm->GetAccentedVowel(j);
+			if (AccentedCharNo != 255)
+				F.m_Form.insert(AccentedCharNo + 1, "'");
+			F.m_Grammems = pGramtab->GetAllGrammems(GramInfo.substr(i, 2).c_str());
+			BYTE POS = pGramtab->GetPartOfSpeech(GramInfo.substr(i, 2).c_str());
+			F.m_POS = pGramtab->GetPartOfSpeechStr(GetWidePOS(POS, F.m_Grammems, Holder->m_CurrentLanguage));
+
+			// для сортировки
+			if (F.m_POS == "ИНФИНИТИВ")
+				F.m_POS.insert(0, " ");
+
+
+			FormAndGrammems.push_back(F);
+		};
+	};
+	sort(FormAndGrammems.begin(), FormAndGrammems.end());
+	return FormAndGrammems;
+}
+
+
+static string GetInterfacePOS(string POS)
 {
 	Trim(POS);
 	if (POS == "Г") return "ЛИЧНАЯ ФОРМА";
@@ -253,132 +223,125 @@ string GetInterfacePOS (string POS)
 	return POS;
 };
 
-
-string GetParadigmFromDictionary (CFormInfo* piParadigm, const CMorphologyHolder* Holder)
-{
-	// получаем часть речи
-	string Result;
+nlohmann::json  GetParadigmFromDictionary(const CFormInfo* piParadigm, const CMorphologyHolder* Holder, bool sortForms) {
 	const CAgramtab* pGramtab = Holder->m_pGramTab;
+	const vector<CFormAndGrammems> FormAndGrammems = BuildFormAndGrammems(Holder, piParadigm);
+	nlohmann::json result = nlohmann::json::array();
+	int FormNo = 0;
+	while (FormNo < FormAndGrammems.size()) {
+		int saveFormNo = FormNo;
+		QWORD commonGrammems;
+		const vector<CFormGroup> FormGroups = BuildInterfaceParadigmPart(Holder, FormAndGrammems, FormNo, commonGrammems);
+		assert(FormNo > saveFormNo);
+		auto prdPart = nlohmann::json::object();
+		string pos = GetInterfacePOS(FormAndGrammems[saveFormNo].m_POS);
+		if (commonGrammems > 0)
+			pos += string(" ") + pGramtab->GrammemsToStr(commonGrammems);
+		prdPart["pos"] = TrimCommaRight(pos);
 
-
-	
-	// получаем все формы и граммемы в массив FormAndGrammems
-	vector<CFormAndGrammems> FormAndGrammems;
-	for (int j = 0; j < piParadigm->GetCount(); j++)
-	{
-		string GramInfo = piParadigm->GetAncode(j);
-		for (long i=0; i < GramInfo.length(); i+=2)
-		{
-			CFormAndGrammems F;
-			F.m_Form = piParadigm->GetWordForm(j);
-   			BYTE AccentedCharNo = piParadigm->GetAccentedVowel(j);
-			if (AccentedCharNo != 255)
-                F.m_Form.insert(AccentedCharNo+1, "'");
-            F.m_Grammems = pGramtab->GetAllGrammems(GramInfo.substr(i,2).c_str());
-			BYTE POS = pGramtab->GetPartOfSpeech(GramInfo.substr(i,2).c_str());
-			F.m_POS  = pGramtab->GetPartOfSpeechStr(GetWidePOS(POS, F.m_Grammems, Holder->m_CurrentLanguage));
-
-			// для сортировки
-			if  (F.m_POS == "ИНФИНИТИВ")
-				F.m_POS.insert(0, " ");
-			  
-
-			FormAndGrammems.push_back(F);
-		};
-	};
-	sort (FormAndGrammems.begin(), FormAndGrammems.end());
-	for (int FormNo=0; FormNo < FormAndGrammems.size(); )
-	{
-		int EndFormNo = FormNo+1;
-		for (; EndFormNo< FormAndGrammems.size(); EndFormNo++)
-			if (FormAndGrammems[FormNo].m_POS != FormAndGrammems[EndFormNo].m_POS)
-				break;
-		vector<CFormAndGrammems> FormAndGrammemsPart;
-		FormAndGrammemsPart.insert (FormAndGrammemsPart.begin(), FormAndGrammems.begin()+FormNo, FormAndGrammems.begin()+EndFormNo);
-		QWORD CommonGrammems;
-		vector<CFormGroup> FormGroups = GetParadigmByGroups(FormAndGrammemsPart, Holder, CommonGrammems);
-
-		Result += "<TABLE BORDER=5>";
-		Result +=  "<TR><TD><B>";
-		// печатаем Часть речи
-		Result += GetInterfacePOS(FormAndGrammems[FormNo].m_POS);
-		// печатаем общие граммемы
-		Result += " ";
-		if (CommonGrammems > 0)
-			Result += pGramtab->GrammemsToStr( CommonGrammems );
-		Result += "</TD></TR></B>";
-
-		
-
-		// распечатываем
-		for (int j = 0; j < FormGroups.size(); j++)
-		{
-			Result += "<TR><TD><B>";
-			Result += pGramtab->GrammemsToStr(FormGroups[j].m_IntersectGrammems & ~CommonGrammems);
-			if (Result[Result.length() - 1] == ',') Result[Result.length() - 1] = ' ';
-			Result += "</B></TD></TR>\n";
-			for (long i=0; i < FormGroups[j].m_FormNos.size(); i++)
-			{
-				const CFormAndGrammems& F = FormAndGrammems[FormGroups[j].m_FormNos[i] + FormNo];
-				Result += "<TR><TD>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-				Result += F.m_Form;
-				Result += "</TD><TD><B>";
-				// печатаем только те граммемы, которые не вошли в общее  пересечение
-				Result += pGramtab->GrammemsToStr( F.m_Grammems & (~(FormGroups[j].m_IntersectGrammems)) & ~CommonGrammems );
-				if (Result[Result.length() - 1] == ',') Result[Result.length() - 1] = ' ';
-				Result += "\n";
-				Result += "</B></TD></TR>";
+		prdPart["formsGroups"] = nlohmann::json::array();
+		for (auto fg : FormGroups)	{
+			auto subg = nlohmann::json::object();
+            string grm = pGramtab->GrammemsToStr(fg.m_IntersectGrammems & ~commonGrammems);
+			subg["grm"] = TrimCommaRight(grm);
+			subg["forms"] = nlohmann::json::array();
+			for (auto formNo : fg.m_FormNos) {
+				auto& f = FormAndGrammems[formNo + saveFormNo];
+                string grm = pGramtab->GrammemsToStr(f.m_Grammems & ~(fg.m_IntersectGrammems | commonGrammems));
+				subg["forms"].push_back(
+					{ {"f", f.m_Form},
+					{"grm", TrimCommaRight(grm)} });
 			};
+			if (sortForms) {
+				sort(subg["forms"].begin(), subg["forms"].end());
+			}
+			prdPart["formsGroups"].push_back(subg);
 		};
-		Result += "\n";
-		Result += "</TABLE>";
-		FormNo = EndFormNo;
+		result.push_back(prdPart);
 	};
-
-	return Result;
+	return result;
 };
 
 
-string Lemmatize(string WordForm, const CMorphologyHolder* Holder, int& LemmasCount)
+nlohmann::json GetStringByParadigmJson(const CFormInfo*  piParadigm, const CMorphologyHolder* Holder, bool withParadigm, bool sortForms)
 {
-	vector<CFormInfo>	Paradigms;
-	if (!GetParadigmCollection(WordForm, Paradigms, Holder))
-	{
-		return "Not found";
-	};
-
-	LemmasCount = Paradigms.size();
-
-	if (!Paradigms.empty())
-	{
-		string strResult = "<TABLE BORDER=1 CELLPADDING=10 CELLSPACING=0>";
-		strResult += "<TR><TD>Found</TD><TD>Dict ID</TD><TD>Lemma</TD><TD>Grammems</TD></TR>";
-		for (long i=0; i < Paradigms.size(); i++)
-		{
-			strResult += GetStringByParadigm(& (Paradigms[i]), Holder);
-		};
-		strResult += "</TABLE>";
-		return strResult;
-	}
-	else
-	{
-		return " <br> not found! <br>";
-	}
-
+	auto result = nlohmann::json::object();
+	result["found"] = piParadigm->m_bFound;
 	
+	string typeAncode = piParadigm->GetCommonAncode();
+	string commonGrammems;
+	if (!typeAncode.empty()) {
+		const CAgramtab* pGramtab = Holder->m_pGramTab;
+		try {
+			commonGrammems = pGramtab->GrammemsToStr(pGramtab->GetAllGrammems(typeAncode.c_str()));
+		}
+		catch (...)	{
+			throw CExpc (" an exception occurred while getting Common Ancode");
+		};
+
+	};
+	result["commonGrammems"] = TrimCommaRight(commonGrammems);
+	result["wordForm"] = piParadigm->GetWordForm(0);
+	if (!piParadigm->m_bFound)	{
+		result["srcNorm"] = piParadigm->GetSrcNorm();
+
+	}
+	string GramInfo;
+	try	{
+		GramInfo = piParadigm->GetSrcAncode();
+	}
+	catch (...)	{
+		GramInfo = piParadigm->GetAncode(0);
+	}
+	result["morphInfo"] = GetGramInfoStr(GramInfo, Holder);
+
+	if (withParadigm) {
+		result["paradigm"] = GetParadigmFromDictionary(piParadigm, Holder, sortForms);
+	}
+	return result;
 }
 
 
-string GetParadigm(string WordForm, int LemmaNo, const CMorphologyHolder* Holder)
+inline  bool IsUpper(int x, MorphLanguageEnum Langua)
 {
-	vector<CFormInfo>	piParadigmCollection;
-	if (   (!GetParadigmCollection(WordForm, piParadigmCollection, Holder))
-		|| (LemmaNo >= piParadigmCollection.size())
-	   )
-	{
-		return "Not found";
+	return is_upper_alpha(x, Langua);
+};
+
+
+
+bool GetParadigmCollection(string WordForm, vector<CFormInfo>&	Paradigms, const CMorphologyHolder* Holder)
+{
+	if (WordForm.length() == 0)	{
+		return false;
 	};
-	return  GetParadigmFromDictionary(&piParadigmCollection[LemmaNo], Holder);
+
+	try
+	{
+		if (Holder->m_pLemmatizer == 0) return false;
+		Holder->m_pLemmatizer->CreateParadigmCollection(false, WordForm, IsUpper((unsigned char)WordForm[0], Holder->m_CurrentLanguage), true, Paradigms);
+	}
+	catch (...)
+	{
+		return false;;
+	};
+	return true;
+
+
+};
+
+string LemmatizeJson(string WordForm, const CMorphologyHolder* Holder, bool withParadigm, bool prettyJson, bool sortForms) {
+	vector<CFormInfo>	Paradigms;
+	if (!GetParadigmCollection(WordForm, Paradigms, Holder)) {
+		return "[]";
+	};
+
+	nlohmann::json result = nlohmann::json::array();
+	string strResult = "[";
+	for (long i = 0; i < Paradigms.size(); i++) {
+		result.push_back ( GetStringByParadigmJson(&(Paradigms[i]), Holder, withParadigm, sortForms) );
+	};
+	ConvertToUtfRecursive(result, Holder->m_CurrentLanguage);
+	return result.dump(prettyJson?1:-1);
 }
 
 

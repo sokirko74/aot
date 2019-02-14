@@ -8,7 +8,7 @@
 
 static int  InitAlphabet(MorphLanguageEnum Language, int* pCode2Alphabet, int *pAlphabet2Code, size_t AnnotChar)
 {
-	assert (!is_upper_alpha(AnnotChar, Language));
+	assert (!is_upper_alpha((BYTE)AnnotChar, Language));
 	string AdditionalEnglishChars = "'1234567890";
 	string AdditionalGermanChars = "";
 	int AlphabetSize = 0;

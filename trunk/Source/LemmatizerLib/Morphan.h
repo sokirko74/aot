@@ -1,3 +1,3 @@
+#include "../common/utilit.h"
 class CMorphologyHolder;
-extern string GetParadigm(string WordForm, int LemmaNo, const CMorphologyHolder* Holder);
-extern string Lemmatize(string WordForm, const CMorphologyHolder* Holder, int& LemmasCount);
+extern std::string LemmatizeJson(std::string WordForm, const CMorphologyHolder* Holder, bool withParadigms, bool prettyJson=false, bool sortForms=false);

@@ -507,10 +507,6 @@ bool CRusSentence::IsProfession(const CSynHomonym &H) const {
 };
 
 bool CRusSentence::BuildClauses() {
-    //запись в log файл отключена
-    //FILE* log_fp = 0;//есть общий лог в rml_TRACE
-    // log_fp = fopen("current_sentence.log", "w");
-
     ProcessFio1Fio2();
 
     SolveAmbiguityUsingRuleForShortAdj();
@@ -526,10 +522,6 @@ bool CRusSentence::BuildClauses() {
     TryWithoutTwoPotentialRule:
     bool bRes = true;
 
-    if (log_fp) {
-        fprintf(log_fp, "%s....", GetSentenceBeginStr().c_str());;
-
-    };
 
     assert (GetClausesCount() == 0);
 
@@ -567,7 +559,6 @@ bool CRusSentence::BuildClauses() {
     TraceClauses();
 
     if (!BuildInitialClauses()) {
-        //fclose(log_fp);
         return false;
 
     };
@@ -579,70 +570,70 @@ bool CRusSentence::BuildClauses() {
 
     TraceClauses();
 
-    if (log_fp) fprintf(log_fp, "BuildAnalyticalVerbForms\n");
+    rml_TRACE("BuildAnalyticalVerbForms");
     BuildAnalyticalVerbForms();
 
 
-    if (log_fp) fprintf(log_fp, "TryToAddComparativeTypeToClause\n");
+    rml_TRACE("TryToAddComparativeTypeToClause");
     TryToAddComparativeTypeToClause();
 
-    if (log_fp) fprintf(log_fp, "TryToRebuildDashInClause\n");
+    rml_TRACE("TryToRebuildDashInClause");
     TraceClauses();
     TryToRebuildDashInClause();
     TraceClauses();
 
-    if (log_fp) fprintf(log_fp, "RunSyntaxInClause(RulesBeforeSimClauses)\n");
+    rml_TRACE("RunSyntaxInClause(RulesBeforeSimClauses)");
     RunSyntaxInClauses(RulesBeforeSimClauses);
 
     // после первого вызова RunSyntaxInClause нужно удалить омонимы, которые противоречат найденным терминам
-    if (log_fp) fprintf(log_fp, "DeleteMarkedHomonymsWithClauses\n");
+    rml_TRACE("DeleteMarkedHomonymsWithClauses");
     DeleteMarkedHomonymsWithClauses(CPeriod(0, (int) m_Words.size() - 1));
 
-    if (log_fp) fprintf(log_fp, "InitWordsInTermins\n");
+    rml_TRACE("InitWordsInTermins");
     InitWordsInTermins();
 
 
     assert (IsValid());
 
     if (!m_bPanicMode) {
-        if (log_fp) fprintf(log_fp, "OneRunOfClauseRules(m_vectorPrimitiveRules)\n");
+        rml_TRACE("OneRunOfClauseRules(m_vectorPrimitiveRules)\n");
         OneRunOfClauseRules(m_vectorPrimitiveRules);
         assert (IsValid());
 
-        if (log_fp) fprintf(log_fp, "RunSyntaxInClause(RulesAfterSimClauses)\n");
+        rml_TRACE("RunSyntaxInClause(RulesAfterSimClauses)\n");
         RunSyntaxInClauses(RulesAfterSimClauses);
 
 
-        if (log_fp) fprintf(log_fp, "OneRunOfClauseRules(m_vectorMainEncloseRules)\n");
+        rml_TRACE("OneRunOfClauseRules(m_vectorMainEncloseRules)\n");
         OneRunOfClauseRules(m_vectorMainEncloseRules);
         assert (IsValid());
 
-        if (log_fp) fprintf(log_fp, "RunSyntaxInClause(GroupRulesForClause)\n");
+        rml_TRACE("RunSyntaxInClause(GroupRulesForClause)\n");
         RunSyntaxInClauses(GroupRulesForClause);
 
-        if (log_fp) fprintf(log_fp, "OneRunOfClauseRules(m_vectorDisruptRules)\n");
+        rml_TRACE("OneRunOfClauseRules(m_vectorDisruptRules)\n");
         OneRunOfClauseRules(m_vectorDisruptRules);
         assert (IsValid());
     };
 
-    if (log_fp) fprintf(log_fp, "RunSyntaxInClause(AllRules)\n");
+    rml_TRACE("RunSyntaxInClause(AllRules)\n");
     RunSyntaxInClauses(AllRules);
 
     // чтобы  собиралась группа ПРИДАТ_ОПР в примере "баба, которая много пьет" нужно еще раз запустить
     // GroupRulesForClause, поскольку OneRunOfClauseRules(m_vectorDisruptRules), в котором эта клауза  вложилась, только что отработало.
-    if (log_fp) fprintf(log_fp, "RunSyntaxInClause(GroupRulesForClause)\n");
+    rml_TRACE("RunSyntaxInClause(GroupRulesForClause)\n");
     RunSyntaxInClauses(GroupRulesForClause);
 
-    if (log_fp) fprintf(log_fp, "BuildClauseRelations()\n");
+    rml_TRACE("BuildClauseRelations()\n");
     BuildClauseRelations();
     assert (IsValid());
 
-    if (log_fp) fprintf(log_fp, "RecalculateRelationsCoordinates()\n");
+    rml_TRACE("RecalculateRelationsCoordinates()\n");
     RecalculateRelationsCoordinates();
     AssignClauseNoToWords();
     assert (IsValid());
 
-    if (log_fp) fprintf(log_fp, "AddWeightForSynVariantsInClauses()\n");
+    rml_TRACE("AddWeightForSynVariantsInClauses()\n");
     AddWeightForSynVariantsInClauses();
     assert (IsValid());
 
@@ -664,7 +655,7 @@ bool CRusSentence::BuildClauses() {
                 if (m_bShouldUseTwoPotentialRule) {
                     *this = SavedSentence;
                     m_bShouldUseTwoPotentialRule = false;
-                    if (log_fp) fprintf(log_fp, "goto TryWithoutTwoPotentialRule\n");
+                    rml_TRACE("goto TryWithoutTwoPotentialRule\n");
                     goto TryWithoutTwoPotentialRule;
                 }
 
@@ -673,7 +664,7 @@ bool CRusSentence::BuildClauses() {
 
             //	если  были удалены омонимы и программа организует еще один проход  (только один!)
 
-            if (log_fp) fprintf(log_fp, "KillHomonymsInAllSentence\n");
+            rml_TRACE("KillHomonymsInAllSentence\n");
             if (KillHomonymsInAllSentence()
                 && !SecondTryOfCoverageKillHomonyms
                     ) {
@@ -713,7 +704,7 @@ bool CRusSentence::BuildClauses() {
                         };
                         m_Words = p;
                         m_vectorTermins = SaveFoundTermins;
-                        if (log_fp) fprintf(log_fp, "goto  BuildInitialClausesLabel\n");
+                        rml_TRACE("goto  BuildInitialClausesLabel\n");
                         goto BuildInitialClausesLabel;
                     };
                 };
@@ -726,8 +717,6 @@ bool CRusSentence::BuildClauses() {
 
     assert (IsValid());
 
-    if (log_fp) fprintf(log_fp, "fclose(log_fp)\n");
-    //if (log_fp)  fclose(log_fp);
 
     return true;
 

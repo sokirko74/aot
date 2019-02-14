@@ -1,25 +1,13 @@
 // ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
-
-#ifndef utilit_h
- #define utilit_h
-
+#pragma once
 #include  <stdio.h>
 
-//#define BOOST
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 #ifdef WIN32
-
-	// it is used to find memory leaks
-	#ifdef DETECT_MEMORY_LEAK
-		extern void* operator new(size_t nSize, const char* lpszFileName, int nLine);
-		extern void  operator delete(void* p, const char* lpszFileName, int nLine);
-		#define DEBUG_NEW new(THIS_FILE, __LINE__)
-	#endif
-	
 	#define NOMINMAX 
 	#include "windows.h"
 	#include "winuser.h"
@@ -33,12 +21,12 @@
 #include  <algorithm>
 #include  <stdexcept>
 #include  <vector>
+#include  <iostream>
 #include  "set"
 #include  "stack"
 #include  "map"
 #include  "time.h"
 #include  <string.h>
-
 
 #pragma warning (disable : 4018)
 #pragma warning (disable : 4244)
@@ -47,22 +35,7 @@
 #pragma warning  (disable : 4251)
 #pragma warning  (disable : 4996)
 		
-
-#ifdef STLPORT
-	using namespace stlport;
-#else
-	using namespace std;
-#endif
-
-
-
-
-
-//#if !defined (STLPORT) || defined(__STL_USE_NAMESPACES)
-//using namespace std;
-//#endif
-
-
+using namespace std;
 
 typedef unsigned char BYTE;
 
@@ -139,6 +112,7 @@ class CExpc
 
 // working with files
 extern bool			FileExists (const char *FName);
+extern bool         DirExists(const char *path);
 extern file_off_t	FileSize (const char *filename);
 extern bool			FSeek(FILE* fp, file_off_t pos, int origin);
 extern file_off_t	FTell(FILE* fp);
@@ -148,9 +122,9 @@ extern file_off_t	FTell(FILE* fp);
 extern void		ErrorMessage (const string& Titul, const string& Message);
 extern void		ErrorMessage (const string& Message);
 extern string	MakeFName ( const string& InpitFileName,  const string& Ext);
-extern bool		MakePath (const char* RossPath, const char* FileName, char* FullPath);
+extern string   MakePath(const string path, const string fileName);
+extern bool     MakePathAndCheck(const string path, const string fileName, string& fullPath);
 extern string	GetPathByFile (string FileName);
-extern bool		IsBinFile (const char* FileName);
 extern bool		IsEmptyLine ( const char *t);
 extern bool		IsHtmlFile (const string& FileName);
 extern void		AddFile(const char* MainFile, const char* ToAdd);
@@ -189,11 +163,7 @@ extern string&	Trim (string& str);
 extern void		rml_TRACE( const char* format, ... );
 extern bool		LoadFileToString(string FileName, string& Result);
 extern void		SqueezeSpacesAndDeleteEoln(string& s);
-extern void		KOI8ToWin (string& s);
-extern void		WinToKOI8 (string& s);
 extern DWORD	StringCrc32(const char* szString);
-
-extern FILE* log_fp;
 
 extern void QPEncodeString(string& s);
 extern void QPDecodeString(string& s);
@@ -216,15 +186,10 @@ extern string GetStringByLanguage (MorphLanguageEnum Langua);
 
 
 
-/*
-clears also capacity
-*/
 template <class T> 
 void ClearVector(vector<T>& V)
 {
 	V.clear();
-//	vector<T> dummy (V);
-//	V.swap (dummy);
 };
 
 
@@ -321,6 +286,9 @@ extern string& RmlMakeLower (string& word, MorphLanguageEnum langua);
 extern string&  EngRusMakeUpper (string& word);
 // конвертирует из строчной кириллицы в прописные 
 extern char*  EngRusMakeUpper (char* word);
+string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua);
+string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua);
+
 
 
 // check languaage 
@@ -371,9 +339,6 @@ T& GerEngRusMakeUpperTemplate (T& word, MorphLanguageEnum Langua, size_t Len )
 };	
 
 
-
-
-
 //  QWORD mask
 #define _QM(X) (((QWORD)1)<<(X))
 
@@ -381,8 +346,6 @@ typedef  DWORD poses_mask_t;
 
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
-
-#endif
 
 #define IsPowerOfTwo(x) (((x) != 0) && (((x) & ((x) - 1)) == 0))
 

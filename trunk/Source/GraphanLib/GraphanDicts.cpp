@@ -117,7 +117,7 @@ bool CGraphanDicts:: FindInIdents (const char* s, BYTE& len) const
 	for (size_t i=0; i  < Idents.size(); i++)
 		if (CompareWithoutRegister ((const char*)s+1, Idents[i].c_str()+1, Idents[i].length()-1, morphEnglish) == 0)
 		{
-			len = Idents[i].length();
+			len = (BYTE)Idents[i].length();
 			return true;
 		};
 
