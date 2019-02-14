@@ -213,7 +213,7 @@ void DealWithLockFile(const string fileName) {
 	}
 	FILE* fp = fopen(LockFileName.c_str(), "w");
 	if (!fp) {
-		throw CExpc(Format("Cannot create file %s", LockFileName));
+		throw CExpc(Format("Cannot create file %s", LockFileName.c_str()));
 	};
 	fprintf(fp, "%i", GetPID());
 	fclose(fp);

@@ -1,7 +1,7 @@
 #include  "BigramsReader.h"
 
 #include <common/bserialize.h>
-#include <common/json.h>
+#include "json.h"
 
 #include  <climits>
 
