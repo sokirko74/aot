@@ -65,7 +65,7 @@ function bigrams_request() {
     var minFreq = document.getElementById("MinBigramFreq").value;
     var direct = document.querySelector('input[name="BigramElement"]:checked').value == "FirstWord";
 
-    var url = SynanDaemonUrl + "?action=bigrams&langua=Russian&sortMode=" + sortMode;
+    var url = SynanDaemonUrl + "&action=bigrams&langua=Russian&sortMode=" + sortMode;
     url +=  "&query=" + query + "&minBigramsFreq=" + minFreq;
     if (direct) {
         url += "&direct=1";

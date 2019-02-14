@@ -51,7 +51,7 @@ function morph_request() {
     var query = document.getElementById("SearchText").value;
     var withParadigms = document.getElementById("WithParadigms").checked;
 
-    var url = SynanDaemonUrl + "?action=morph&langua=" + langua + "&query=" + query;
+    var url = SynanDaemonUrl + "&action=morph&langua=" + langua + "&query=" + query;
     if (withParadigms) {
         url += "&withparadigms=1";
     }

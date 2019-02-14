@@ -498,9 +498,9 @@ function drawAll() {
 
 function syntax_request() {
     var langua = document.getElementById("Language").value;
-    var query = document.getElementById("InputText").value;
+    var query = document.getElementById("InputText").value.trim();
 
-    var url = SynanDaemonUrl + "?action=syntax&langua=" + langua;
+    var url = SynanDaemonUrl + "&action=syntax&langua=" + langua;
     url +=  "&query=" + query;
 
     fetch(url)
