@@ -461,7 +461,7 @@ string	CreateTempFileName()
 
 };
 
-FILE* log_fp = 0;
+static FILE* log_fp = 0;
 
 void rml_TRACE( const char* format, ... )
 {
