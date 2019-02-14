@@ -3,7 +3,6 @@
 
 #include "../SynanLib/SyntaxHolder.h"
 #include "../LemmatizerLib/Morphan.h"
-#include "../common/string_socket.h"
 #include <common/BigramsReader.h>
 #include <common/json.h>
 

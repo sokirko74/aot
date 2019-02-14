@@ -2,10 +2,15 @@ cmake_minimum_required(VERSION 3.5)
 
 project(SemanDaemon)
 
-add_executable (SemanDaemon Main.cpp)
+add_executable (SemanDaemon 
+Main.cpp
+VisualGraph.cpp
+translate.cpp
+)
 
-target_link_libraries(SemanDaemon 
-    SemanDmnLib
+target_link_libraries(SemanDaemon
+    SemanLib
+    event
 )
 
 install (TARGETS SemanDaemon

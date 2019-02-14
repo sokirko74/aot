@@ -90,6 +90,7 @@ add_subdirectory (TestSeman)
 add_subdirectory (Transfer)
 
 add_subdirectory (SynanDaemon)
+add_subdirectory (SemanDaemon)
 
 IF (MSVC)
     macro(CompileIDL Project)
@@ -157,9 +158,6 @@ IF (MSVC)
 
     add_subdirectory (RossDev)
 
-ELSE(WIN32)
-    add_subdirectory (SemanDaemon)
-    add_subdirectory (SemanDmnLib)
 ENDIF()
 
 

@@ -1,12 +1,13 @@
 #include "VisualGraph.h"
+#include <common/json.h>
 #include <assert.h>
 
 const size_t NodeHeight = 60;
 const size_t NodeWidth = 100;
+const size_t NodeSpan = 5;
 
 
-CVisualSemGraph::CVisualSemGraph()
-{
+CVisualSemGraph::CVisualSemGraph() {
 
 }
 
@@ -54,57 +55,35 @@ vector<int> CVisualSemGraph::GetParents(int NodeNo) const
 	return Nodes;
 }
 
-
-
-
 string CVisualSemGraph::GetResultStr() const
 {
-	/*
-	set Result "nodes"
- set i 0
- foreach node [$graph nodes] {
-   set x [$graph get $node -x]
-   set y [$graph get $node -y]
-   set label [$graph get $node -label]
-   set morph [$graph get $node .morphology]
-   set Result "$Result#(#x $x#y $y#label $label#Morphology $morph#)"
-   $graph set $node  .node_id $i
-   incr i 1
- };
-
- set Result "$Result#edges"
- foreach edge [$graph edges] {
- 	    set source [$graph get $edge -source]
-	    set target [$graph get $edge -target]
-	    set source_id [$graph get $source .node_id]
-        set target_id [$graph get $target .node_id]
-		set label [$graph get $edge -label]
-		set Result "$Result#(#source_id $source_id#target_id $target_id#label $label#)"
-
- }
- set Result "$Result#"
- */
-
-	string Result = "nodes";
-	for(int i=0; i < m_Nodes.size(); i++)
-	{
-		const CVisualNode& N =  m_Nodes[i];
-		Result += Format("#(#x %i#y %i#label %s#Morphology %s#)",N.m_x+20, N.m_y, N.m_Label.c_str(), N.m_Morphology.c_str());
+	auto result = nlohmann::json::object();
+	result["nodes"] = nlohmann::json::array();
+	for(const auto& n : m_Nodes) {
+		result["nodes"].push_back({
+			{"x", n.m_x + 20},
+			{"y", n.m_y + 20},
+			{"label", n.m_Label},
+			{"morph", n.m_Morphology}
+			}); 
 	}
-	Result += "#edges";
-	for(int i=0; i < m_Relations.size(); i++)
-	{
-		const CVisualRelation& R =  m_Relations[i];
-		Result += Format("#(#source_id %i#target_id %i#label %s#)",R.m_SourceNodeNo, R.m_TargetNodeNo, R.m_RelationStr.c_str());
+	result["edges"] = nlohmann::json::array();
+	for (const auto& r : m_Relations) {
+		result["edges"].push_back({
+			{"source", r.m_SourceNodeNo},
+			{"target", r.m_TargetNodeNo},
+			{"label", r.m_RelationStr}
+			});
 	}
-	for(int i=0; i < m_DopRelations.size(); i++)
-	{
-		const CVisualRelation& R =  m_DopRelations[i];
-		Result += Format("#(#source_id %i#target_id %i#label %s#)",R.m_SourceNodeNo, R.m_TargetNodeNo, R.m_RelationStr.c_str());
+	for (const auto& r : m_DopRelations) {
+		result["edges"].push_back({
+			{"source", r.m_SourceNodeNo},
+			{"target", r.m_TargetNodeNo},
+			{"label", r.m_RelationStr}
+			});
 	}
-
-	Result += "#";
-	return Result;
+	ConvertToUtfRecursive(result, morphRussian);
+	return result.dump();
 }
 int CVisualSemGraph::GetLeavesCount (int Root) const
 {
@@ -147,35 +126,28 @@ int CVisualSemGraph::SetTreeLayout (int Root, int Left, int Top)
 {
 	int LeavesCount = GetLeavesCount(Root);
 
-	size_t  TreeWidth = LeavesCount*NodeWidth;
+	size_t  TreeWidth = LeavesCount*(NodeWidth + NodeSpan);
 	m_Nodes[Root].m_y = Top;
 	m_Nodes[Root].m_x = Left+TreeWidth/2;
 	vector<int> Children = GetChildren(Root);
 	int Bottom = Top+NodeHeight;
 	int CurrLeavesCount = 0;
-	for (size_t i=0; i <Children.size(); i++)
-	{
-		int c = SetTreeLayout(Children[i], Left+CurrLeavesCount*NodeWidth,Top+NodeHeight);
-		CurrLeavesCount += GetLeavesCount(Children[i]);
-		if (c > Bottom)
-			Bottom = c;
+	for (const auto& c : Children){
+		int b = SetTreeLayout(c, Left+CurrLeavesCount*(NodeWidth + NodeSpan),Top+NodeHeight);
+		CurrLeavesCount += GetLeavesCount(c);
+		if (b > Bottom)
+			Bottom = b;
 	}
 	return Bottom;
 }
 
-void CVisualSemGraph::SetGraphLayout()   
-{
-	{
-		vector<int> Roots = FindTreeRoots();
-		if (!Roots.empty())
-		{
-			int Bottom = NodeHeight;
-			for (size_t i=0;  i < Roots.size(); i++)
-			{
-				Bottom = SetTreeLayout(Roots[i], NodeWidth, Bottom);
-			}
+void CVisualSemGraph::SetGraphLayout() {
+	vector<int> Roots = FindTreeRoots();
+	if (!Roots.empty())	{
+		int Bottom = NodeHeight;
+		for (const auto& r : Roots) {
+			Bottom = SetTreeLayout(r, NodeWidth, Bottom);
 		}
 	}
-
 }
 
