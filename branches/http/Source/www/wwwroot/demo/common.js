@@ -1,4 +1,8 @@
-﻿export var SynanDaemonUrl = 'http://127.0.0.1:17017';
+﻿//var host = "www.aot.ru";
+var host = "localhost";
+export var SynanDaemonUrl = 'http://' + host + '/cgi-bin/redirectd.py?port=17017';
+export var SemanDaemonUrl = 'http://' + host + '/cgi-bin/redirectd.py?port=17018';
+
 
 export const TableBorderStyle  = '1px solid black';
 
@@ -17,3 +21,4 @@ export function CreateTable() {
     tbl.style.borderCollapse = "collapse";
     return tbl;
 }
+                                               

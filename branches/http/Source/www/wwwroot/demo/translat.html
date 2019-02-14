@@ -1,20 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>АОТ :: Онлайн демо :: Перевод</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>РђРћРў :: РћРЅР»Р°Р№РЅ РґРµРјРѕ :: РџРµСЂРµРІРѕРґ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="../aot.css" rel="stylesheet" type="text/css">
 
-<script language="JavaScript">
-<!--
-var count=150;
-function text1Change()
-{
- a=document.formText.russian.value.length;
- if((a)>count)document.formText.russian.value=document.formText.russian.value.substring(0,count);
-}
-//-->
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="module" src="translate.js"> </script>
 
 </head>
 
@@ -27,9 +19,9 @@ function text1Change()
           <td><table border="0" cellspacing="0" cellpadding="5">
               <tr>
                 <td width="30">&nbsp;</td>
-                <td><font size="+7" face="Arial, Helvetica, sans-serif"><b>АОТ</b></font></td>
+                <td><font size="+7" face="Arial, Helvetica, sans-serif"><b>РђРћРў</b></font></td>
                 <td width="40">&nbsp;</td>
-                <td valign="baseline"><font size="+1" face="Arial, Helvetica, sans-serif"> Автоматическая  Обработка  Текста</font></td>
+                <td valign="baseline"><font size="+1" face="Arial, Helvetica, sans-serif"> РђРІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ  РћР±СЂР°Р±РѕС‚РєР°  РўРµРєСЃС‚Р°</font></td>
               </tr>
             </table>
             <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
@@ -42,7 +34,7 @@ function text1Change()
                 <td valign="top"><table border="0" cellspacing="0" cellpadding="20">
                     <tr>
                       <td>
-                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.php">скачать</a> <a href="/onlinedemo.html">&nbsp;<b>демо</b></a> <a href="/technology.html">технологии</a>  &nbsp; <a href="#top" title="наверх">^</a></font></p>
+                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">РіР»Р°РІРЅР°СЏ</a> <a href="/history.html">Рѕ&nbsp;РЅР°СЃ</a> <a href="/product.html">РїСЂРѕРґСѓРєС‚С‹</a> <a href="/download.php">СЃРєР°С‡Р°С‚СЊ</a> <a href="/onlinedemo.html">&nbsp;<b>РґРµРјРѕ</b></a> <a href="/technology.html">С‚РµС…РЅРѕР»РѕРіРёРё</a>  &nbsp; <a href="#top" title="РЅР°РІРµСЂС…">^</a></font></p>
                         <table width="720" border="0" cellpadding="3" cellspacing="0" bgcolor="#CCCCCC">
                           <tr>
                             <td class="titleblack">Dialing Translator</td>
@@ -62,48 +54,36 @@ function text1Change()
                         <p>&nbsp;</p>
                         <table border="0" align="center" cellpadding="5" cellspacing="0">
 
-
-
-
-						  <form name="formText" method="post" action="/cgi-bin/translate.py">
-
 							<tr> 
 							  <td colspan="2" class="text">Input Your text in Russian (no more than 150 chars):</td>
 							</tr>
 							<tr> 
 							  <td colspan="2">
-								<input type="hidden" name="TemplateFile" value = "../wwwroot/demo/translat.html" >
-							 <TEXTAREA onkeyup="text1Change()" cols=55 name=russian rows=10 rus_text>
+							 <TEXTAREA cols=55 name=russian rows=10 id=InputText>
 							 </TEXTAREA> 
 							  </td>
 							</tr>
 							<tr> 
 							  <td colspan="2" class="text">Topic 
-								<SELECT NAME="PO">
-								  <OPTION VALUE="общ" selected>общий-common 
-								  <OPTION VALUE="комп">компьютерный-computing 
-								  <OPTION VALUE="фин">финансовый-finance</OPTION>
+								<SELECT id=TextTopic>
+								  <OPTION VALUE="РѕР±С‰" selected>РѕР±С‰РёР№-common 
+								  <OPTION VALUE="РєРѕРјРї">РєРѕРјРїСЊСЋС‚РµСЂРЅС‹Р№-computing 
+								  <OPTION VALUE="С„РёРЅ">С„РёРЅР°РЅСЃРѕРІС‹Р№-finance</OPTION>
 								</SELECT> </td>
 							</tr>
 							<tr> 
-							  <td colspan="2" class="text"><TEXTAREA cols=55 name=textarea rows=10 eng_text>
-</TEXTAREA></td>
+							  <td colspan="2" class="text"><TEXTAREA cols=55 name=textarea rows=10 id=OutputText> </TEXTAREA></td>
 							</tr>
 							<tr> 
 
 							  <td align="center">
-								<input name="submit1" type="submit" value="Submit Request" 
-								onSubmit="if (russian.value.length > 10) {alert("Очень длинное сообщение"); }">
+							   <input name="submit1" type="submit" value="Submit" onclick="window.translate_request()" >
+
 							</td>
 
 							  <td class="textsmall">Last updated: 18.04.2001<br>
-								Переводчик сделан наполовину.<br>
-								Мы будем рады новым инвестициям.</td>
+								</td>
 							</tr>
-						  </form>
-
-
-
 
 
 						</table>
@@ -113,7 +93,7 @@ function text1Change()
                             <td height="2"><img src="../images/transparent.gif" width="1" height="2"></td>
                           </tr>
                         </table>
-                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">главная</a> <a href="/history.html">о&nbsp;нас</a> <a href="/product.html">продукты</a> <a href="/download.php">скачать</a> <a href="/onlinedemo.html">&nbsp;<b>демо</b></a> <a href="/technology.html">технологии</a>  &nbsp; <a href="#top" title="наверх">^</a></font></p></td>
+                        <p align="center"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="/index.html">РіР»Р°РІРЅР°СЏ</a> <a href="/history.html">Рѕ&nbsp;РЅР°СЃ</a> <a href="/product.html">РїСЂРѕРґСѓРєС‚С‹</a> <a href="/download.php">СЃРєР°С‡Р°С‚СЊ</a> <a href="/onlinedemo.html">&nbsp;<b>РґРµРјРѕ</b></a> <a href="/technology.html">С‚РµС…РЅРѕР»РѕРіРёРё</a>  &nbsp; <a href="#top" title="РЅР°РІРµСЂС…">^</a></font></p></td>
                     </tr>
                   </table></td>
               </tr>
@@ -123,10 +103,10 @@ function text1Change()
                       <td>&nbsp;</td>
                       <td align="right"><table border="0" cellspacing="5" cellpadding="0">
                           <tr> 
-                            <td align="right"><font color="#999999" size="1">Разработка 
+                            <td align="right"><font color="#999999" size="1">Р Р°Р·СЂР°Р±РѕС‚РєР° 
                               <a href="mailto:simple@mosk.ru"><font color="#999999">DiP</font></a>.<br>
-                              &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">АОТ</font></a>. 
-                              Все права защищены.</font></td>
+                              &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">РђРћРў</font></a>. 
+                              Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹.</font></td>
                           </tr>
                         </table></td>
                     </tr>
