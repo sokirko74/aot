@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 
 set(BUILD_DICTS 1)  # build dicts by default, disable it in CMakeLists.my if you want
 set(BUILD_COM 0)    # do not build COM-objects by default
-set(COMPILE_WITH_HTTP 0)
+set(COMPILE_WITH_HTTP 1)
 
 if (EXISTS  ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.my)
     message ("use " ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.my)
@@ -19,6 +19,7 @@ set (INSTALL_BIN_FOLDER /Bin) # not "Bin", but "/Bin"
 if (NOT RML)
     message (FATAL_ERROR "environment variable RML is not set")
 endif (NOT RML)
+message ("use environment variable RML = " ${RML} )
 
 macro (ConvertStructDict name)
     add_custom_target(
