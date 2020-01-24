@@ -519,8 +519,31 @@ char* rtrim (char* s)
 
 }
 
-
-
+BYTE convert_latin_char_similar_russian_lower_char(BYTE ch) {
+    switch  (ch) {
+        case 'a' : return RussianLowerA;
+        case 'A' : return RussianLowerA;
+        case 'e' : return RussianLowerE;
+        case 'E' : return RussianLowerE;
+        case 'k' : return RussianLowerK;
+        case 'K' : return RussianLowerK;
+        case 'M' : return RussianLowerM;
+        //case 'm' : return RussianLowerM; //latin lower m  looks different
+        case 'H' : return RussianLowerN;
+        case 'o' : return RussianLowerO;
+        case 'O' : return RussianLowerO;
+        case '0' : return RussianLowerO;
+        case 'p' : return RussianLowerR;
+        case 'P' : return RussianLowerR;
+        case 'C' : return RussianLowerS;
+        case 'c' : return RussianLowerS;
+        case 'y' : return RussianLowerU;
+        case 'Y' : return RussianLowerU;
+        case 'X' : return RussianLowerX;
+        case 'x' : return RussianLowerX;
+        default: return ch;
+    }
+}
 
 
 // ================== IsSuperEqualChar проверяет, что символы равны с точностью до регистра
@@ -532,20 +555,8 @@ bool IsSuperEqualChar (BYTE ch1, BYTE ch2, MorphLanguageEnum langua)
 		) 
 	return true;
 
-	const size_t LenEF    = 53;
-	//  первая буква - прописная  кириллическая буква, что необходимо,
-	// чтобы установить порядок на полях эквивалентности букв
-	char const EF[LenEF+1] = "\0аАaA\0еЕEe\0зЗ3\0кКKk\0мМM\0нНH\0оОOo0\0рРpP\0сСCc\0уУy\0хХXx";
-
-	size_t i = 0, k=0;
-	for (i=0; i<LenEF; i++)
-		if (!EF[i]) 
-			k = i+1;
-		else
-		{
-			if (ch1 == (BYTE)EF[i]) ch1 = (BYTE)EF[k];
-			if (ch2 == (BYTE)EF[i]) ch2 = (BYTE)EF[k];
-		}
+	ch1 = convert_latin_char_similar_russian_lower_char(ch1);
+    ch2 = convert_latin_char_similar_russian_lower_char(ch2);
 
 	if (is_russian_upper(ch1))
 		ch1 = rtolower(ch1);
@@ -1079,23 +1090,6 @@ bool is_spc_fill (BYTE x)
 //============= ENGLISH                   ============
 //====================================================
 
-const BYTE  Ccedille = 199;
-const BYTE  Egravis = 200;
-const BYTE  Ezirkun = 202;
-const BYTE  Azirkun = 194;
-const BYTE  Ozirkun = 212;
-const BYTE  Ntilda = 209;
-const BYTE  Eakut = 201;
-const BYTE  Uzirkun = 219;
-
-const BYTE  ccedille = 231;
-const BYTE  egravis = 232;
-const BYTE  ezirkun = 234;
-const BYTE  azirkun = 226;
-const BYTE  ozirkun = 244;
-const BYTE  ntilda = 241;
-const BYTE  eakut = 233;
-const BYTE  uzirkun = 251;
 
 bool is_generic_upper(BYTE x)     
 {
@@ -1154,14 +1148,14 @@ BYTE etoupper (BYTE ch)
 	else
 	switch (ch) {
 		case ccedille : return Ccedille; // C with cedille
-		case egravis : return Egravis;  // E with gravis
+		case egrave : return Egravis;  // E with gravis
 		case ezirkun : return Ezirkun;  // E with zirkun
 		case azirkun : return Azirkun;  // A with zirkun
 		case ozirkun : return Ozirkun;  // O with zirkun
 		case ouml : return Ouml;  // O umlaut
 		case ntilda : return Ntilda;  // N with tilda
 		case uzirkun : return Uzirkun;  // U with zirkun
-		case eakut : return Eakut;  // E acut
+		case eacute : return Eakut;  // E acut
 		default : return ch;
 	};
 };
@@ -1174,14 +1168,14 @@ BYTE etolower (BYTE ch)
 	else
 	switch (ch) {
 		case Ccedille : return ccedille; // C with cedille
-		case Egravis : return egravis;  // E with gravis
+		case Egravis : return egrave;  // E with gravis
 		case Ezirkun : return ezirkun;  // E with zirkun
 		case Azirkun : return azirkun;  // A with zirkun
 		case Ozirkun : return ozirkun;  // O with zirkun
 		case Ouml : return ouml;  // O umlaut
 		case Ntilda : return ntilda;  // N with tilda
 		case Uzirkun : return uzirkun;  // U with zirkun
-		case Eakut : return eakut;  // E acut
+		case Eakut : return eacute;  // E acut
 		default : return ch;
 	};
 };
@@ -1200,9 +1194,6 @@ bool is_german_lower(BYTE x)
 {
 	return		(ASCII[x]&GerLower) > 0;
 }; 
-
-
-
 
 bool is_german_lower_vowel(BYTE x)     
 {
@@ -1235,7 +1226,8 @@ BYTE gtoupper (BYTE ch)
 			default : return ch;
 		 };
 };
-BYTE gtolower (BYTE ch) 
+
+BYTE gtolower (BYTE ch)
 { 
 	if (is_english_upper (ch)) 
 		return etolower (ch);
@@ -1300,7 +1292,7 @@ BYTE rtoupper (BYTE ch)
 	if (ch == Apostrophe ) return Apostrophe;
 
 	if ( is_russian_lower(ch) )
-		return  ch -= 'а'-'А';
+		return  ch - (RussianLowerA - RussianUpperA);
 	else
 		return ch;
 };
@@ -1311,7 +1303,7 @@ BYTE rtolower (BYTE ch)
 	if (ch == Apostrophe ) return Apostrophe;
 
 	if ( is_russian_upper(ch) )
-		return ch += 'а'-'А';
+		return ch + RussianLowerA - RussianUpperA;
 	else
 		return ch;
 };
@@ -1343,12 +1335,6 @@ bool is_upper_vowel(BYTE x, MorphLanguageEnum Langua)
 	};
 	assert (false);
 	return false;
-};
-
-bool is_lower_consonant(BYTE x, MorphLanguageEnum Langua)
-{
-	if (!is_lower_alpha(x, Langua)) return false;
-	return !is_lower_vowel(x,Langua);
 };
 
 bool is_upper_consonant(BYTE x, MorphLanguageEnum Langua)
@@ -1659,11 +1645,10 @@ void ConvertJO2JeTemplate(T& src, size_t Length)
 	for (size_t i = 0; i < Length; i++)
 	{
 		if ( ((BYTE)src[i]) == LowerJO)
-			src[i] = (BYTE)'е';
+			src[i] = RussianLowerE;
 		else
-		
 			if ( ( (BYTE)src[i]) == UpperJO)
-			src[i] = (BYTE)'Е';
+			    src[i] = RussianUpperE;
 	}
 
 };
@@ -2123,21 +2108,6 @@ bool is_pseudo_graph(BYTE x)
 };
 
 
-bool is_word_delim (BYTE x)
-{
-	return 	isbracket(x)
-		||	ispunct(x)
-		||	(x <= 32)
-		||	is_pseudo_graph (x)
-		||	(x == cCompanyChar)
-		||	(x == cIonChar)
-		||	(x == cNumberChar)
-		||	(x == cPiChar)
-		||	(x == cEllipseChar);
-}
-
-
-
 // ======================== CExcp ================
 CExpc::CExpc(const string& Cause) 
 {
@@ -2555,14 +2525,28 @@ struct TRmlLocales {
 		static std::locale* loc = new std::locale(enc);
 		return *loc;
 	}
-		static const std::locale& Latin() {
+	static const std::locale& Latin() {
 			#ifdef WIN32
-				const char* enc = ".1252";
-			#else
-				const char* enc = "de_DE.iso88591";
-			#endif
-			static std::locale* loc = new std::locale(enc);
-			return *loc;
+                static std::locale* loc = new std::locale(".1252");
+                return *loc;
+            #else
+				try {
+				    /*
+				     * https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables
+				     * Variables declared at block scope with the specifier static or thread_local (since C++11) have
+				     * static or thread (since C++11) storage duration but are initialized the first time control
+				     * passes through their declaration (unless their initialization is zero- or constant-initialization,
+				     * which can be performed before the block is first entered). On all further calls
+				     * , the declaration is skipped.
+				     */
+
+                    static std::locale* loc = new std::locale("de_DE.iso88591");
+                    return *loc;
+                } catch (runtime_error r) {
+				    fprintf (stderr, "cannot find German single byte encoding de_DE.ISO-8859-1, try run \"sudo locale-gen de_DE\" exception %s", r.what());
+				    throw;
+				}
+            #endif
 		}
 };
 

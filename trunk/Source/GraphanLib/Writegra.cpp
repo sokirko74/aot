@@ -25,7 +25,7 @@ void CGraphmatFile :: GetGraphematicalLine (char* line, size_t LineNo) const
 				)
 					strncpy(line,L.GetToken(),L.GetTokenLength());
 			else
-					line[0] = SSpace;
+					line[0] = GraphematicalSPACE;
 
 			l =  L.GetTokenLength();
 		} // write current graphema 
@@ -36,9 +36,9 @@ void CGraphmatFile :: GetGraphematicalLine (char* line, size_t LineNo) const
 			for (size_t k=0; k<L.GetTokenLength(); k++)
 				switch ((unsigned char)L.GetToken()[k]) 
 				{
-					case ' '  : line[l++] = SSpace; break;
-					case '\t' : line[l++] = STab; break;
-					case '\n' : line[l++] = SEOLN; break;
+					case ' '  : line[l++] = GraphematicalSPACE; break;
+					case '\t' : line[l++] = GraphematicalTAB; break;
+					case '\n' : line[l++] = GraphematicalEOLN; break;
 					case '\r' :  break;
 					default   : assert (false); break;
 				};
