@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <json.hpp>
+#include "../contrib/nlohmann/json.hpp"
 #include "utilit.h"
 
 inline void ConvertToUtfRecursive(nlohmann::json& r, MorphLanguageEnum langua) {
