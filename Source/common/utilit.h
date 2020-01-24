@@ -13,19 +13,20 @@
 	#include "winuser.h"
 #endif
 
+#include  "single_byte_encoding.h"
+
 #include  <assert.h>
 #include  <stdarg.h>
-
 #include  <ctype.h>
 #include  <string>
 #include  <algorithm>
 #include  <stdexcept>
 #include  <vector>
 #include  <iostream>
-#include  "set"
-#include  "stack"
-#include  "map"
-#include  "time.h"
+#include  <set>
+#include  <stack>
+#include  <map>
+#include  <time.h>
 #include  <string.h>
 
 #pragma warning (disable : 4018)
@@ -68,21 +69,6 @@ inline QWORD GetMaxQWORD ()
 	#endif
 };
 
-const BYTE   cHyphenChar   = (BYTE) '-';
-const BYTE   cPeriodChar   = (BYTE) '.';
-const BYTE   cEofChar      = (BYTE) 0x1a;
-const BYTE   cPtrChar      = (BYTE) 0x13;
-const BYTE   cSpaceChar    = (BYTE) 32;
-const BYTE   cBackChar     = (BYTE) 'Ђ';
-const BYTE   cFullChar    = (BYTE) '«';
-const BYTE   cNumChar      = (BYTE) 'N';
-const BYTE   cAmpChar      = (BYTE) '&';
-const BYTE   cParagraph    = (BYTE) 21;
-const BYTE   cCompanyChar  = (BYTE) 176;
-const BYTE   cIonChar      = (BYTE) 183;
-const BYTE   cNumberChar   = (BYTE) 0xB9;
-const BYTE   cPiChar       = (BYTE) 182;
-const BYTE   cEllipseChar  = (BYTE) 133;
 
 // morphology&syntax
 typedef enum {	morphUnknown = 0, morphRussian = 1, morphEnglish = 2, morphGerman = 3, morphGeneric = 4, morphURL=5, morphDigits=6} MorphLanguageEnum;
@@ -209,43 +195,16 @@ extern bool is_upper_roman_digit (BYTE ch);
 extern bool is_lower_roman_digit (BYTE ch);
 extern bool is_roman_number ( const char *s, size_t len);
 extern bool is_pseudo_graph(BYTE x);
-extern bool is_word_delim (BYTE x);
 //  =============  Punctuation Letters ======================
 
 extern	bool is_spc_fill (BYTE x);
-
-
-
-
 extern  bool is_english_upper(BYTE x);
 extern  bool is_english_lower(BYTE x);
-
-const BYTE Auml  = 196; // "Д"
-const BYTE auml  = 228; // "д"
-const BYTE Uuml  = 220; // "Ь"
-const BYTE uuml  = 252; // "ь"
-const BYTE Ouml  = 214; // "Ц"
-const BYTE ouml  = 246; // "ц"
-const BYTE szlig  = 223; //"Я"
-const BYTE Nu  = 181;   // "ч"
-const BYTE agrave  = 224; //"р"
-const BYTE egrave  = 232; //"ш"
-const BYTE eacute  = 233; //"щ"
-
-
-const BYTE LowerJO  = (BYTE)'ё';
-const BYTE UpperJO  = (BYTE)'Ё';
-const BYTE Apostrophe  = 39;
-
-
-
- 
-extern  bool is_german_upper(BYTE x); 
+extern  bool is_german_upper(BYTE x);
 extern  bool is_german_lower(BYTE x);
 extern  bool is_russian_upper(BYTE x);     
 extern  bool is_russian_lower(BYTE x);
 
-extern  bool is_lower_consonant(BYTE x, MorphLanguageEnum Langua);
 extern  bool is_upper_consonant(BYTE x, MorphLanguageEnum Langua);
 extern  bool is_lower_vowel(BYTE x, MorphLanguageEnum Langua);
 extern  bool is_upper_vowel(BYTE x, MorphLanguageEnum Langua);
@@ -282,9 +241,7 @@ extern char* RmlMakeUpper (char *word, MorphLanguageEnum langua);
 extern string& RmlMakeUpper (string& word, MorphLanguageEnum langua);
 extern string& RmlMakeLower (string& word, MorphLanguageEnum langua);
 
-// конвертирует из строчной кириллицы в прописные 
 extern string&  EngRusMakeUpper (string& word);
-// конвертирует из строчной кириллицы в прописные 
 extern char*  EngRusMakeUpper (char* word);
 string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua);
 string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua);
@@ -346,8 +303,6 @@ typedef  DWORD poses_mask_t;
 
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
-
-#define IsPowerOfTwo(x) (((x) != 0) && (((x) & ((x) - 1)) == 0))
 
 extern QWORD pow(QWORD x,int y);
 

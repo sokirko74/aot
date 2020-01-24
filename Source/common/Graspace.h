@@ -8,12 +8,9 @@
 
    #include "utilit.h"
 
-   #define   SEOLN        (unsigned char) '´'
-   #define   SSpace       (unsigned char) 'Å'
-   #define   STab         '\x10'
-
-   inline bool is_gra_space (int c)
-    { return c==SEOLN || c == SSpace || c == STab;}
+   inline bool is_gra_space (int c){
+        return c==GraphematicalEOLN || c == GraphematicalSPACE || c == GraphematicalTAB;
+    }
 
    // max length of the token
    const size_t CriticalTokenLength = 255;
