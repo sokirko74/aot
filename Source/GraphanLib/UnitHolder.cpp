@@ -134,7 +134,7 @@ bool CUnitHolder::IsOneCloseQuotationMark (size_t i) const
 	BYTE z = (BYTE)m_Units[i].GetToken()[0];
 	return	(m_Units[i].GetTokenLength() == 1)
 		&&	(	( z == (BYTE)'"')
-			||	( z == (BYTE)'�')
+			||	( z == CloseQuoteMark1251)
 		); 
 };
 
@@ -144,7 +144,7 @@ bool CUnitHolder::IsOneOpenQuotationMark (size_t i) const
 	BYTE z = (BYTE)m_Units[i].GetToken()[0];
 	return     (m_Units[i].GetTokenLength() == 1)
 		&& (     (z == (BYTE)'"')
-			|| (z == (BYTE)'�')
+			|| (z ==OpenQuoteMark1251)
 			); 
 };
 
