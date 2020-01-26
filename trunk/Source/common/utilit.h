@@ -168,20 +168,6 @@ typedef enum { EClause = 0, EWord, EGroup, ENoneType } EUnitType;
 extern int GetPredictionPartOfSpeech(const string& PartOfSpeech, MorphLanguageEnum langua);
 extern bool GetLanguageByString (string s, MorphLanguageEnum& Result);
 extern string GetStringByLanguage (MorphLanguageEnum Langua);
-
-
-
-
-template <class T> 
-void ClearVector(vector<T>& V)
-{
-	V.clear();
-};
-
-
-
-
-
 // ============     Brackets =========================
 
 

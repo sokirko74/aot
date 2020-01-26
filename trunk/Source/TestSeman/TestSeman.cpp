@@ -15,7 +15,7 @@ Relations:
 */
 #include "../SemanLib/SemStructureBuilder.h"
 #include "../common/argparse.h"
-static CSemStructureBuilder SemBuilder;
+#include "SemanLib/VisualGraph.h"
 
 extern void (*GlobalErrorMessage)(const string &);
 
@@ -36,14 +36,14 @@ const char *byte_to_binary(int x) {
     return b;
 }
 
-string GetGramInfo(poses_mask_t Poses, QWORD Grammems) {
+string GetGramInfo(const CRusSemStructure& SS, poses_mask_t Poses, QWORD Grammems) {
     string Result;
     for (size_t i = 0; i < sizeof(Poses) * 8; i++)
         if ((1 << i) & Poses) {
-            Result += (const char *) SemBuilder.m_RusStr.m_pData->GetRusGramTab()->GetPartOfSpeechStr(i);
+            Result += (const char *) SS.m_pData->GetRusGramTab()->GetPartOfSpeechStr(i);
             Result += " ";
         }
-    Result += SemBuilder.m_RusStr.m_pData->GetRusGramTab()->GrammemsToStr(Grammems);
+    Result += SS.m_pData->GetRusGramTab()->GrammemsToStr(Grammems);
     return Result;
 }
 
@@ -76,16 +76,16 @@ string GetWordStrOfNode(const CRusSemStructure& SS, int ssi, bool bOnlyWords = f
             NodeStr += ")";
 
     } else {
-        if (Node.m_Words.size() == 0 || Node.m_Words[0].m_Word != SemBuilder.m_RusStr.GetNodeStr1(ssi))
-            NodeStr += SemBuilder.m_RusStr.GetNodeStr1(ssi) + ": ";
+        if (Node.m_Words.size() == 0 || Node.m_Words[0].m_Word != SS.GetNodeStr1(ssi))
+            NodeStr += SS.GetNodeStr1(ssi) + ": ";
         for (int i = 0; i < Node.m_Words.size(); i++) {
             const CRusSemWord &Word = Node.m_Words[i];
-            if (!(i == 0 && Word.m_Word != SemBuilder.m_RusStr.GetNodeStr1(ssi)))
+            if (!(i == 0 && Word.m_Word != SS.GetNodeStr1(ssi)))
                 NodeStr += Word.m_Word + ": ";
 
             NodeStr += Word.m_Lemma;
             NodeStr += " ";
-            NodeStr += GetGramInfo(Word.m_Poses, Word.GetAllGrammems());
+            NodeStr += GetGramInfo(SS, Word.m_Poses, Word.GetAllGrammems());
         }
         if (Node.m_PrepWordNo >= 0) {
             NodeStr = SS.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord + " " + NodeStr;
@@ -93,7 +93,7 @@ string GetWordStrOfNode(const CRusSemStructure& SS, int ssi, bool bOnlyWords = f
         }
         if (!NodeStr.empty())
             NodeStr += " -> "; // Отредакт. морф. информация:
-        NodeStr += GetGramInfo(Node.GetNodePoses(), Node.GetGrammems());
+        NodeStr += GetGramInfo(SS, Node.GetNodePoses(), Node.GetGrammems());
         if (!Node.m_AntecedentStr.empty()) {
             NodeStr += " anteced=" + Node.m_AntecedentStr;
         }
@@ -103,19 +103,7 @@ string GetWordStrOfNode(const CRusSemStructure& SS, int ssi, bool bOnlyWords = f
 };
 
 
-
-/*Use in .NET to import dll:
-[DllImport(dll)]
-static extern int InitDicts();
-[DllImport(dll)]
-static extern string FindSituations(string s);*/
-
-
-#ifdef WIN32
-extern "C" __declspec(dllexport) int __stdcall InitDicts()
-#else
-int InitDicts()
-#endif
+int InitDicts(CSemStructureBuilder& SemBuilder)
 {
     try {
         std::cerr << "initialize presemantic dictionaries...\n";
@@ -138,62 +126,70 @@ int InitDicts()
     return 0;
 }
 
-void outputRelation(const CRusSemRelation& R, std::ostream& result) {
+void outputRelation(const CRusSemStructure& SS, const CRusSemRelation& R, std::ostream& result) {
     long targetNodeNo = R.m_Valency.m_Direction == C_A && !R.m_bReverseRel ? R.m_SourceNodeNo : R.m_TargetNodeNo;
     long sourceNodeNo = !(R.m_Valency.m_Direction == C_A && !R.m_bReverseRel) ? R.m_SourceNodeNo
                                                                                 : R.m_TargetNodeNo;
     //"  %s (%s, %s) = %s (%i, %i)\n",
     result << "  " << R.m_Valency.m_RelationStr << " (";
-    result << SemBuilder.m_RusStr.GetNodeStr1(targetNodeNo) << ", ";
-    result << SemBuilder.m_RusStr.GetNodeStr1(sourceNodeNo) << ") = ";
+    result << SS.GetNodeStr1(targetNodeNo) << ", ";
+    result << SS.GetNodeStr1(sourceNodeNo) << ") = ";
     result << R.m_SyntacticRelation << " (";
     result << targetNodeNo << ", ";
     result << sourceNodeNo << ")\n";
 }
 
-void FindSituations(const char *Source, ostream& result) {
+void PrintRelationsToText(const CRusSemStructure& SS, ostream& result) {
     string r;
-    string ResGraph;
-    SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
-    SemBuilder.FindSituations(Source, 0, "общ", 20000, -1, "", ResGraph);
-    words.resize(SemBuilder.m_RusStr.m_piSent->m_Words.size());
-    for (int i = 0; i < SemBuilder.m_RusStr.m_piSent->m_Words.size(); i++)
-        words[i] = SemBuilder.m_RusStr.m_piSent->m_Words[i].m_strWord;
+
+    words.resize(SS.m_piSent->m_Words.size());
+    for (int i = 0; i < SS.m_piSent->m_Words.size(); i++)
+        words[i] = SS.m_piSent->m_Words[i].m_strWord;
     result << "Nodes:\n";
-    for (int i = 0; i < SemBuilder.m_RusStr.m_Nodes.size(); i++) {
-        string Nstr = GetWordStrOfNode(SemBuilder.m_RusStr, i);
+    for (int i = 0; i < SS.m_Nodes.size(); i++) {
+        string Nstr = GetWordStrOfNode(SS, i);
         result << "  Node " << i << " ";
-        result << (Nstr.empty() ? SemBuilder.m_RusStr.GetNodeStr1(i) : Nstr);
+        result << (Nstr.empty() ? SS.GetNodeStr1(i) : Nstr);
         result << "\n";
     }
     result << "Relations:\n";
 
-    for (auto r : SemBuilder.m_RusStr.m_Relations) {
-        outputRelation (r, result);
+    for (auto r : SS.m_Relations) {
+        outputRelation (SS, r, result);
 
     };
-    if (!SemBuilder.m_RusStr.m_DopRelations.empty()) {
+    if (!SS.m_DopRelations.empty()) {
         result << "Aux Relations:\n";
-        for (auto r : SemBuilder.m_RusStr.m_DopRelations) {
-            outputRelation (r, result);
+        for (auto r : SS.m_DopRelations) {
+            outputRelation (SS, r, result);
         }
     }
 }
 
+void PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuilder, ostream& result) {
+    string r;
+    CVisualSemGraph graph;
+    graph.InitFromSemantics(SemBuilder);
+    graph.SetGraphLayout();
+    result << graph.GetResultStr() << "\n";
+}
+
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
-    parser.AddArgument("--input", "input file");
+    parser.AddArgument("--input", "input file in windows-1251");
+    parser.AddOption("--visual", "print visual graph");
     parser.AddArgument("--output", "output file");
     parser.Parse(argc, argv);
 }
 
 int main(int argc, const char *argv[]) {
+    static CSemStructureBuilder SemBuilder;
     ArgumentParser args;
     initArgParser(argc, argv, args);
 
     GlobalErrorMessage = MyGlobalErrorMessage;
     std::cerr << "init dicts ... (wait one minute)\n";
-    if (InitDicts() != 0) {
+    if (InitDicts(SemBuilder) != 0) {
         return 1;
     }
 
@@ -218,7 +214,14 @@ int main(int argc, const char *argv[]) {
         }
         try {
             args.GetOutputStream() << s << "\n";
-            FindSituations(s.c_str(), args.GetOutputStream());
+            SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
+            string dummy;
+            SemBuilder.FindSituations(s, 0, "общ", 20000, -1, "", dummy);
+            if (args.Exists("visual")) {
+                PrintRelationsAsToJavascript(SemBuilder, args.GetOutputStream());
+            } else {
+                PrintRelationsToText(SemBuilder.m_RusStr, args.GetOutputStream());
+            }
         }
         catch (...) {
             std::cerr << "an exception occurred: " << lineCount << "\n";

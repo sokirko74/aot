@@ -1,7 +1,7 @@
 #ifndef _INCL_VISUALGRAPH_H_
 #define _INCL_VISUALGRAPH_H_
 
-#include "../SemanLib/SemStructureBuilder.h"
+#include "SemStructureBuilder.h"
 
 struct CVisualNode 
 {
@@ -28,7 +28,6 @@ struct CVisualSemGraph {
 	void InitFromSemantics (const CSemStructureBuilder& SemBuilder);
 	vector<int> GetChildren(int NodeNo) const ;
 	vector<int> GetParents(int NodeNo) const ;
-	vector<int> FindTreeRoots() const;
 	int SetTreeLayout (int Root, int Left, int Top);
 	int GetLeavesCount (int Root) const;
 	void  SetGraphLayout();

@@ -37,7 +37,7 @@ void CSentencesCollection::ClearSentences() {
     for (int i = 0; i < m_vectorSents.size(); i++)
         delete m_vectorSents[i];
 
-    ClearVector(m_vectorSents);
+    m_vectorSents.clear();
 };
 
 

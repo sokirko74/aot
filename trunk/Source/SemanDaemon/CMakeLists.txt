@@ -4,7 +4,6 @@ project(SemanDaemon)
 
 add_executable (SemanDaemon 
 Main.cpp
-VisualGraph.cpp
 translate.cpp
 )
 
