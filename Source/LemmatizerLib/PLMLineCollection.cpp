@@ -29,7 +29,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 		if (!m_pLemmatizer)
 			return false;
 
-		ClearVector(m_Items);
+		m_Items.clear();
 
         vector<CFormInfo> results;
 		results.reserve(5);

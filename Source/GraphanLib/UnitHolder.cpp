@@ -134,7 +134,7 @@ bool CUnitHolder::IsOneCloseQuotationMark (size_t i) const
 	BYTE z = (BYTE)m_Units[i].GetToken()[0];
 	return	(m_Units[i].GetTokenLength() == 1)
 		&&	(	( z == (BYTE)'"')
-			||	( z == (BYTE)'»')
+			||	( z == (BYTE)'пїЅ')
 		); 
 };
 
@@ -144,7 +144,7 @@ bool CUnitHolder::IsOneOpenQuotationMark (size_t i) const
 	BYTE z = (BYTE)m_Units[i].GetToken()[0];
 	return     (m_Units[i].GetTokenLength() == 1)
 		&& (     (z == (BYTE)'"')
-			|| (z == (BYTE)'«')
+			|| (z == (BYTE)'пїЅ')
 			); 
 };
 
@@ -224,9 +224,9 @@ bool CUnitHolder::IsOneFullStop (size_t i) const
 };
 
 
-//  i - индекс графемы в самом начале  строки.
-// Смещаемся  до начала строки и смотрим, стоит ли перед этой строкой
-// пустая строка. 
+//  i - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅ.
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. 
 
 bool  CUnitHolder::EmptyLineBeforeGraph (size_t i, size_t HB) const
 {
@@ -247,8 +247,8 @@ bool  CUnitHolder::EmptyLineBeforeGraph (size_t i, size_t HB) const
 
 void CUnitHolder::FreeTable()
 {
-	ClearVector(m_Units);
-	ClearVector(m_TokenBuf);
+	m_Units.clear();
+	m_TokenBuf.clear();
 	m_FoundOborots.clear();
 	m_FoundPageBreaks.clear();
 }
@@ -354,7 +354,7 @@ bool	CUnitHolder::InitInputBuffer(const string& S)
 
 void	CUnitHolder::ClearInputBuffer()
 {
-	ClearVector(m_InputBuffer);
+	m_InputBuffer.clear();
 }
 
 void	CUnitHolder::DeleteDescr(size_t LineNo, Descriptors d)

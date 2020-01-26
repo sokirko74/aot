@@ -1,4 +1,4 @@
-#include "VisualGraph.h"
+#include "SemanLib/VisualGraph.h"
 #include "translate.h"
 
 #include <common/json.h>

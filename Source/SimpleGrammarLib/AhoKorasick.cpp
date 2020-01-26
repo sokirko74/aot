@@ -175,7 +175,7 @@ void CTrieHolder::ConvertAuxChildrenToNormal()
 			};	
 	};
 
-	ClearVector(m_ChildrenAux);
+	m_ChildrenAux.clear();
 };
 
 void CTrieHolder::CreateTrie(const set< CWorkRule >& Patterns)

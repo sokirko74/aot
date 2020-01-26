@@ -194,7 +194,7 @@ bool CMAPost::ProcessData(const CPlmLineCollection *piInTextItems)
 
 		RunRules();
 
-		ClearVector(m_ResultLemWords);
+		m_ResultLemWords.clear();
         for (list<CPostLemWord>::const_iterator it = m_Words.begin(); it !=  m_Words.end(); it++)
             for (size_t i=0; i < it->GetHomonymsCount(); i++)
             {

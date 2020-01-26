@@ -72,7 +72,7 @@ bool CSyntaxHolder::GetSentencesFromSynAn(string str, bool bFile)
 	
 	try {
 		m_Synan.ClearSentences();
-		ClearVector(m_PlmLines.m_Items);
+		m_PlmLines.m_Items.clear();
 
 		if (!GetMorphology(str, bFile, CountOfWords))
 			return false;;

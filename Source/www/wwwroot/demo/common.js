@@ -1,5 +1,5 @@
-﻿var host = "www.aot.ru";
-///var host = "localhost";
+﻿///var host = "www.aot.ru";
+var host = "localhost";
 export var SynanDaemonUrl = 'http://' + host + '/cgi-bin/redirectd.py?port=17017';
 export var SemanDaemonUrl = 'http://' + host + '/cgi-bin/redirectd.py?port=17018';
 

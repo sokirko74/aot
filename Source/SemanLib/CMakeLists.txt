@@ -38,6 +38,7 @@ TransferSyntaxRelationToSemantics.cpp
 TranslatorHolder.cpp
 Valency.cpp
 stdafx.cpp
+VisualGraph.cpp
 )
 
 target_link_libraries(SemanLib
