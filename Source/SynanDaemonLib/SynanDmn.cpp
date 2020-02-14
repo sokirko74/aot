@@ -1,8 +1,8 @@
-#include "JVisualSynAnParamBuilder.h"
+#include "SynanDaemonLib/JVisualSynAnParamBuilder.h"
 #include "SynanDmn.h"
 
-#include "../SynanLib/SyntaxHolder.h"
-#include "../LemmatizerLib/Morphan.h"
+#include "SynanLib/SyntaxHolder.h"
+#include "LemmatizerLib/Morphan.h"
 #include <common/BigramsReader.h>
 #include <common/json.h>
 

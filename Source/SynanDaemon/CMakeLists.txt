@@ -2,14 +2,12 @@ cmake_minimum_required(VERSION 3.5)
 
 project(SynanDaemon)
 
-add_executable (SynanDaemon 
-    JVisualSynAnParamBuilder.cpp
+add_executable (SynanDaemon
     Main.cpp
-    SynanDmn.cpp
 )
 
 target_link_libraries(SynanDaemon 
-    SynanLib
+    SynanDaemonLib
     event
 )
 
