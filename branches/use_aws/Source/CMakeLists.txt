@@ -89,8 +89,12 @@ add_subdirectory (SemanLib)
 add_subdirectory (TestSeman)
 add_subdirectory (Transfer)
 
+add_subdirectory (SynanDaemonLib)
 add_subdirectory (SynanDaemon)
 add_subdirectory (SemanDaemon)
+
+add_subdirectory (SynanDaemonAWS)
+
 
 IF (MSVC)
     macro(CompileIDL Project)

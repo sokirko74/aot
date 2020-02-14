@@ -1,4 +1,4 @@
-#include "SynanDmn.h"
+#include "SynanDaemonLib/SynanDmn.h"
 
 #include <common/utilit.h>
 #include <common/argparse.h>
