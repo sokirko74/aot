@@ -1,0 +1,6 @@
+                                0 0 BEG DOC
+Мама                            0 4 RLE Aa NAM?
+мыла                            5 4 RLE aa
+раму                            10 4 RLE aa
+.                               14 1 PUN CS? SENT_END
+«                               15 1 DEL EOLN

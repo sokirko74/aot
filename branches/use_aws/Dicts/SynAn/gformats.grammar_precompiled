@@ -1,0 +1,2838 @@
+1
+405
+[
+1 NOUN null 6
+NOUN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 1 3 я
+0 0 1 0 0
+;
+]
+[
+1 ADJ null 6
+ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 2 3 о
+0 0 1 0 0
+;
+]
+[
+1 SH-ADJ null 6
+SH-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 131072 3 йп_опхк
+0 0 1 0 0
+;
+]
+[
+1 PART null 6
+PART
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 262144 3 опхвюярхе
+0 0 1 0 0
+;
+]
+[
+1 SH-PART null 6
+SH-PART
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 1048576 3 йп_опхвюярхе
+0 0 1 0 0
+;
+]
+[
+1 DEEPR null 6
+DEEPR
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 524288 3 дееопхвюярхе
+0 0 1 0 0
+;
+]
+[
+1 V null 6
+V
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 4 3 ц
+0 0 1 0 0
+;
+]
+[
+1 ADV null 6
+ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 256 3 м
+0 0 1 0 0
+;
+]
+[
+1 INF null 6
+INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 2097152 3 хмтхмхрхб
+0 0 1 0 0
+;
+]
+[
+1 PRO null 6
+PRO
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 8 3 ля
+0 0 1 0 0
+;
+]
+[
+1 PRO-ADJ null 6
+PRO-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 16 3 ля-о
+0 0 1 0 0
+;
+]
+[
+1 PRED null 6
+PRED
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 512 3 опедй
+0 0 1 0 0
+;
+]
+[
+1 PRED-PRO null 6
+PRED-PRO
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 32 3 ля-опедй
+0 0 1 0 0
+;
+]
+[
+1 NUM null 6
+NUM
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 64 3 вхяк
+0 0 1 0 0
+;
+]
+[
+1 DIG null 6
+DIG
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 2
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;type DC;
+]
+[
+1 PARTICLE null 6
+PARTICLE
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 кх кх 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+0 фе фе 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+0 аш аш 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+0 сф сф 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+0 рнкэйн рнкэйн 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+0 ф ф 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+0 а а 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+0 кэ кэ 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+1 COMMA null 6
+COMMA
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 , , 4
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 DOT null 6
+DOT
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 . . 4
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 CONJ null 6
+CONJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 Х х 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ХКХ хкх 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 PREP null 6
+PREP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 1024 3 опедк
+0 0 1 0 0
+;
+]
+[
+1 PREP_SIMPLE null 6
+PREP_SIMPLE
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 1024 3 опедк
+0 0 0 0 0
+;
+]
+[
+1 UZH null 6
+UZH
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 СФ сф 0
+TOKEN
+0 65536 3 вюяр
+0 0 1 0 0
+;
+]
+[
+1 ROOT null 6
+ROOT
+0 0 3 null
+1 0 1 0 0
+;
+]
+[
+1 1-NE-NP null 6
+1-NE-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 МЕ ме 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхк_ясы null 6
+опхк_ясы
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TOLKO-NP null 6
+1-NE-TOLKO-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РНКЭЙН рнкэйн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-KAK-NP null 6
+1-KAK-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЙЮЙ йюй 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-NP null 6
+1-HOTJA-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 УНРЪ унръ 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-PUST-NP null 6
+1-PUST-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ОСЯРЭ осярэ 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-I-NP null 6
+1-HOTJA-I-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTO-NP null 6
+1-NE-TO-CHTO-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РН рн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ВРН врн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTOBY-NP null 6
+1-NE-TO-CHTOBY-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ВРНАШ врнаш 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-NP null 6
+1-ESLI-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЕЯКХ еякх 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-NE-NP null 6
+1-ESLI-NE-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-NP null 6
+2-A-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 Ю ю 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-NP null 6
+2-NO-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 МН мн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-I-NP null 6
+2-NO-I-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-I-NP null 6
+2-TAK-I-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РЮЙ рюй 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-ZATO-NP null 6
+2-ZATO-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ГЮРН гюрн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-DA-NP null 6
+2-DA-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ДЮ дю 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TO-NP null 6
+2-TO-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-NP null 6
+2-TAK-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-TOLKO-NP null 6
+2-A-TOLKO-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NE-A-NO null 6
+NE-A-NO
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NE-TOLKO-NO-I null 6
+NE-TOLKO-NO-I
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 KAK-TAK-I null 6
+KAK-TAK-I
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 HOTJA-ZATO null 6
+HOTJA-ZATO
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 PUST-NO null 6
+PUST-NO
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 HOTJA-I-NO-A-DA null 6
+HOTJA-I-NO-A-DA
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NE-TO-CHTOBY-NO-A null 6
+NE-TO-CHTOBY-NO-A
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ESLI-NE-TO-TAK null 6
+ESLI-NE-TO-TAK
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NE-A-TOLKO null 6
+NE-A-TOLKO
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-ADJ null 6
+1-NE-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TOLKO-ADJ null 6
+1-NE-TOLKO-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-KAK-ADJ null 6
+1-KAK-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-ADJ null 6
+1-HOTJA-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-PUST-ADJ null 6
+1-PUST-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-I-ADJ null 6
+1-HOTJA-I-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTO-ADJ null 6
+1-NE-TO-CHTO-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTOBY-ADJ null 6
+1-NE-TO-CHTOBY-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-ADJ null 6
+1-ESLI-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-NE-ADJ null 6
+1-ESLI-NE-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-ADJ null 6
+2-A-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-ADJ null 6
+2-NO-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-I-ADJ null 6
+2-NO-I-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-I-ADJ null 6
+2-TAK-I-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-ZATO-ADJ null 6
+2-ZATO-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-DA-ADJ null 6
+2-DA-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TO-ADJ null 6
+2-TO-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-ADJ null 6
+2-TAK-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-TOLKO-ADJ null 6
+2-A-TOLKO-ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-ADV null 6
+1-NE-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TOLKO-ADV null 6
+1-NE-TOLKO-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-KAK-ADV null 6
+1-KAK-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-ADV null 6
+1-HOTJA-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-PUST-ADV null 6
+1-PUST-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-I-ADV null 6
+1-HOTJA-I-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTO-ADV null 6
+1-NE-TO-CHTO-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTOBY-ADV null 6
+1-NE-TO-CHTOBY-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-ADV null 6
+1-ESLI-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-NE-ADV null 6
+1-ESLI-NE-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-ADV null 6
+2-A-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-ADV null 6
+2-NO-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-I-ADV null 6
+2-NO-I-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-I-ADV null 6
+2-TAK-I-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-ZATO-ADV null 6
+2-ZATO-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-DA-ADV null 6
+2-DA-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TO-ADV null 6
+2-TO-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-ADV null 6
+2-TAK-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-TOLKO-ADV null 6
+2-A-TOLKO-ADV
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-INF null 6
+1-NE-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опъл_дно null 0
+опъл_дно
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TOLKO-INF null 6
+1-NE-TOLKO-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-KAK-INF null 6
+1-KAK-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-INF null 6
+1-HOTJA-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-PUST-INF null 6
+1-PUST-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-I-INF null 6
+1-HOTJA-I-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTO-INF null 6
+1-NE-TO-CHTO-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTOBY-INF null 6
+1-NE-TO-CHTOBY-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-INF null 6
+1-ESLI-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-NE-INF null 6
+1-ESLI-NE-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-INF null 6
+2-A-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-INF null 6
+2-NO-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-I-INF null 6
+2-NO-I-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-I-INF null 6
+2-TAK-I-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-ZATO-INF null 6
+2-ZATO-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-DA-INF null 6
+2-DA-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TO-INF null 6
+2-TO-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-INF null 6
+2-TAK-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-TOLKO-INF null 6
+2-A-TOLKO-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-PP null 6
+1-NE-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 оц null 6
+оц
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TOLKO-PP null 6
+1-NE-TOLKO-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-KAK-PP null 6
+1-KAK-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-PP null 6
+1-HOTJA-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-PUST-PP null 6
+1-PUST-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-HOTJA-I-PP null 6
+1-HOTJA-I-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTO-PP null 6
+1-NE-TO-CHTO-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-NE-TO-CHTOBY-PP null 6
+1-NE-TO-CHTOBY-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-PP null 6
+1-ESLI-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 1-ESLI-NE-PP null 6
+1-ESLI-NE-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-PP null 6
+2-A-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-PP null 6
+2-NO-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-NO-I-PP null 6
+2-NO-I-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-I-PP null 6
+2-TAK-I-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-ZATO-PP null 6
+2-ZATO-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-DA-PP null 6
+2-DA-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TO-PP null 6
+2-TO-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-TAK-PP null 6
+2-TAK-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 2-A-TOLKO-PP null 6
+2-A-TOLKO-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-NP null 6
+I-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-I-NP null 6
+I-I-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-ADJP null 6
+I-ADJP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-I-ADJP null 6
+I-I-ADJP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-ADVP null 6
+I-ADVP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-I-ADVP null 6
+I-I-ADVP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-INF null 6
+I-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-I-INF null 6
+I-I-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-PP null 6
+I-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-I-PP null 6
+I-I-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 I-I null 6
+I-I
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-NP null 6
+TOLI-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 КХ кх 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-TOLI-NP null 6
+TOLI-TOLI-NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-ADJP null 6
+TOLI-ADJP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-TOLI-ADJP null 6
+TOLI-TOLI-ADJP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-ADVP null 6
+TOLI-ADVP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-TOLI-ADVP null 6
+TOLI-TOLI-ADVP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-INF null 6
+TOLI-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-TOLI-INF null 6
+TOLI-TOLI-INF
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-PP null 6
+TOLI-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-TOLI-PP null 6
+TOLI-TOLI-PP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 TOLI-TOLI null 6
+TOLI-TOLI
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 пюгпшб_янчг null 6
+пюгпшб_янчг
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_мюп1 null 6
+ндмнп_мюп1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 мюп_мюп null 6
+мюп_мюп
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_мюп null 6
+ндмнп_мюп
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 япюбм_яреоемэ null 6
+япюбм_яреоемэ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename comp_adv.dat;
+]
+[
+1 мюп_опедхй1 null 6
+мюп_опедхй1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 мюп_опедхй null 6
+мюп_опедхй
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 мюп_мюп_вхяк1 null 6
+мюп_мюп_вхяк1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename num_pr.dat;
+]
+[
+1 мюп_мюп_вхяк null 6
+мюп_мюп_вхяк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ADVP null 6
+ADVP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NUMCARD null 6
+NUMCARD
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NUMORD null 6
+NUMORD
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 128 3 вхяк-о
+0 0 1 0 0
+;
+]
+[
+1 BIG-NUM null 6
+BIG-NUM
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РШЯЪВЮ ршяъвю 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЛХККХНМ лхккхнм 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЛХККХЮПД лхккхюпд 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РПХККХНМ рпхккхнм 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ABBR null 6
+ABBR
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+1073741824 0 3 ЮААП
+0 0 1 0 0
+;
+]
+[
+1 йнкхв1 null 6
+йнкхв1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 йнкхв2 null 6
+йнкхв2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 йнкхв null 6
+йнкхв
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 SMALL-DIG null 6
+SMALL-DIG
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 2 2 2
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 3 3 2
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 4 4 2
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 *2 *2 4
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 *3 *3 4
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 *4 *4 4
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 SMALL-NUM null 6
+SMALL-NUM
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ДБЮ дбю 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РПХ рпх 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ВЕРШПЕ вершпе 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 якнф_вхяк null 6
+якнф_вхяк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_вхяк1 null 6
+ндмнп_вхяк1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_вхяк null 6
+ндмнп_вхяк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ADJ_MOD null 6
+ADJ_MOD
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РЮЙНИ рюйни 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЯЮЛШИ яюлши 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 лндхт_опхк1 null 6
+лндхт_опхк1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 лндхт_опхк null 6
+лндхт_опхк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ADV_ADJ null 6
+ADV_ADJ
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename adv_adj.txt;
+]
+[
+1 мюп_опхк1 null 6
+мюп_опхк1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 юмюр_япюбм null 6
+юмюр_япюбм
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_опхк null 6
+ндмнп_опхк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 мюп_опхк null 6
+мюп_опхк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_опхк1 null 6
+ндмнп_опхк1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_опхк2 null 6
+ндмнп_опхк2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_опхк3 null 6
+ндмнп_опхк3
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_опхк4 null 6
+ндмнп_опхк4
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+4194304 0 3 ЯПЮБМ
+0 0 1 0 0
+;
+]
+[
+1 COMP null 6
+COMP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 АНКЕЕ анкее 0
+TOKEN
+0 256 3 м
+0 0 1 0 0
+;
+]
+[
+0 ЛЕМЕЕ лемее 0
+TOKEN
+0 256 3 м
+0 0 1 0 0
+;
+]
+[
+1 юмюр_япюбм1 null 6
+юмюр_япюбм1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ясы_вхяк1 null 6
+ясы_вхяк1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ясы_вхяк null 6
+ясы_вхяк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename noun_num.dat;
+]
+[
+1 SUBST_NUM null 6
+SUBST_NUM
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ДБНЕ дбне 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 РПНЕ рпне 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ВЕРБЕПН вербепн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ОЪРЕПН оърепн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЬЕЯРЕПН ьеярепн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЯЕЛЕПН яелепн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 БНЯЭЛЕПН бняэлепн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ДЕБЪРЕПН дебърепн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ДЕЯЪРЕПН деяърепн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 НАЮ наю 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ELECT_1PART null 6
+ELECT_1PART
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЙЮЙНИ йюйни 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 НДХМ ндхм 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 КЧАНИ кчани 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ЙЮФДШИ йюфдши 0
+TOKEN
+2 0 3 ЕД
+0 0 1 0 0
+;
+]
+[
+0 ЛМНЦХИ лмнцхи 0
+TOKEN
+1 0 3 ЛМ
+0 0 1 0 0
+;
+]
+[
+0 МЕЙНРНПШИ мейнрнпши 0
+TOKEN
+1 0 3 ЛМ
+0 0 1 0 0
+;
+]
+[
+1 щкейр_хц1 null 6
+щкейр_хц1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 щкейр_хц null 6
+щкейр_хц
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ХГ хг 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхк_ясы0 null 6
+опхк_ясы0
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхк_ясы1 null 6
+опхк_ясы1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхк_ясы2 null 6
+опхк_ясы2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 цемхр_хц null 6
+цемхр_хц
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 вхяк_ясы null 6
+вхяк_ясы
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NOUN-COORD-SPECIAL null 6
+NOUN-COORD-SPECIAL
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NOUN-COORD-SPECIAL1 null 6
+NOUN-COORD-SPECIAL1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 цемхр_хц1 null 6
+цемхр_хц1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 тхн null 6
+тхн
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 цемхр_хц2 null 6
+цемхр_хц2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_хц null 6
+ндмнп_хц
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхв_ясы null 6
+опхв_ясы
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 вхяк_ясы1 null 6
+вхяк_ясы1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 вхяк_ясы2 null 6
+вхяк_ясы2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 наю наю 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 MSR null 6
+MSR
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 йц йц 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 йл йл 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ял ял 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 лк лк 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ла ла 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 йа йа 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 лцж лцж 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 йб йб 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 1 1 2
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ндхм ндхм 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 юоопнйя_оц null 6
+юоопнйя_оц
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NUM_PR null 6
+NUM_PR
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 мюп_вхяк_ясы1 null 6
+мюп_вхяк_ясы1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 мюп_вхяк_ясы null 6
+мюп_вхяк_ясы
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 COORD-NP-COMMA null 6
+COORD-NP-COMMA
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхк_оняроня1 null 6
+опхк_оняроня1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхк_оняроня2 null 6
+опхк_оняроня2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхк_оняроня null 6
+опхк_оняроня
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ясы_ная_опхк1 null 6
+ясы_ная_опхк1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ясы_ная_опхк2 null 6
+ясы_ная_опхк2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ясы_ная_опхк null 6
+ясы_ная_опхк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхкнфемхе null 6
+опхкнфемхе
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхв_ясы1 null 6
+опхв_ясы1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхв_ясы2 null 6
+опхв_ясы2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхдюр_ноп1 null 6
+опхдюр_ноп1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхдюр_ноп2 null 6
+опхдюр_ноп2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 мюпев_цкюцнк null 6
+мюпев_цкюцнк
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 оеп_цкюц_хмт null 6
+оеп_цкюц_хмт
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 хмярп_дно null 6
+хмярп_дно
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 нрп_тнплю null 6
+нрп_тнплю
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опхдюр_ноп null 6
+опхдюр_ноп
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 нряпюбм null 6
+нряпюбм
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 6
+TOKEN
+0 0 3 null
+0 0 1 0 137438953472
+;
+]
+[
+0 TOKEN null 6
+TOKEN
+0 0 3 null
+0 0 1 0 274877906944
+;
+]
+[
+0 TOKEN null 6
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;atomic ;
+]
+[
+1 щк_юдпея null 6
+щк_юдпея
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 6
+TOKEN
+0 0 3 null
+0 0 1 0 128
+;
+]
+[
+1 днкф_тхн null 6
+днкф_тхн
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename profes.txt;
+]
+[
+0 TOKEN null 6
+TOKEN
+0 0 3 null
+0 0 1 0 131072
+;
+]
+[
+1 йкб null 6
+йкб
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 6
+TOKEN
+0 0 3 null
+0 0 1 0 35184372088832
+;
+]
+[
+0 TOKEN null 6
+TOKEN
+0 0 3 null
+0 0 1 0 70368744177664
+;
+]
+[
+1 хмнярп_кейя null 6
+хмнярп_кейя
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 1
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;type LLE;
+]
+[
+1 PREP-NOM null 6
+PREP-NOM
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename dct_prep_nom.txt;
+]
+[
+1 PREP-ACC null 6
+PREP-ACC
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename dct_prep_acc.txt;
+]
+[
+1 PREP-GEN null 6
+PREP-GEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename dct_prep_gen.txt;
+]
+[
+1 PREP-INSTR null 6
+PREP-INSTR
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename dct_prep_instr.txt;
+]
+[
+1 PREP-DAT null 6
+PREP-DAT
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename dct_prep_dat.txt;
+]
+[
+1 PREP-PREP null 6
+PREP-PREP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename dct_prep_prep.txt;
+]
+[
+1 PP-NOM null 6
+PP-NOM
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 PP-ACC null 6
+PP-ACC
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 PP-GEN null 6
+PP-GEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 PP-INSTR null 6
+PP-INSTR
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 PP-DAT null 6
+PP-DAT
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 PP-PREP null 6
+PP-PREP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 NP null 6
+NP
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 ндмнп_хмт null 6
+ндмнп_хмт
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 оеп_цкюц_хмт1 null 6
+оеп_цкюц_хмт1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename verbs_with_inf.txt;
+]
+[
+1 оеп_цкюц_хмт2 null 6
+оеп_цкюц_хмт2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 хмярп_дно1 null 6
+хмярп_дно1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;filename instr_obj.txt;
+]
+[
+1 хмярп_дно1 null 0
+хмярп_дно1
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 нрп_тнплю1 null 6
+нрп_тнплю1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опъл_дно1 null 6
+опъл_дно1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+201326592 0 3 ОЕ, ДЯР
+0 0 1 0 0
+;
+]
+[
+1 опъл_дно_пеб1 null 6
+опъл_дно_пеб1
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 лемъ лемъ 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 реаъ реаъ 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ецн ецн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ее ее 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 мюя мюя 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 бюя бюя 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 ху ху 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 бяеу бяеу 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 мхвецн мхвецн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 мхйнцн мхйнцн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 врн-рн врн-рн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+0 йнцн-рн йнцн-рн 0
+TOKEN
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опъл_дно_пеб2 null 6
+опъл_дно_пеб2
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опъл_дно_пеб null 6
+опъл_дно_пеб
+0 0 3 null
+0 0 1 0 0
+;
+]
+[
+1 опъл_дно null 0
+опъл_дно
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 мюпев_цкюцнк null 6
+мюпев_цкюцнк
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 нрп_тнплю null 6
+нрп_тнплю
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 0 3 null
+0 0 0 0 0
+;filename instr_obj.txt;
+]
+[
+1 опъл_дно1 null 6
+опъл_дно1
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 PART null 6
+PART
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 SH-PART null 6
+SH-PART
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 V null 6
+V
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 INF null 6
+INF
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 ндмнп_хмт null 6
+ндмнп_хмт
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+1 нрп_тнплю1 null 6
+нрп_тнплю1
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+201326592 0 3 ОЕ, ДЯР
+0 0 0 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 262144 3 опхвюярхе
+0 0 0 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 1048576 3 йп_опхвюярхе
+0 0 0 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 4 3 ц
+0 0 0 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 2097152 3 хмтхмхрхб
+0 0 0 0 0
+;
+]
+[
+1 DEEPR null 6
+DEEPR
+0 0 3 null
+0 0 0 0 0
+;
+]
+[
+0 TOKEN null 0
+TOKEN
+0 524288 3 дееопхвюярхе
+0 0 0 0 0
+;
+]
+[
+0 $ $ 6
+<empty>
+0 0 3 null
+1 0 1 0 0
+;
+]
+[
+1 NewRoot $ 6
+<empty>
+0 0 3 null
+1 0 1 0 0
+;
+]
+0

@@ -1,0 +1,48 @@
+====================== Introduction ====================
+
+This is a RML package (RML is Russian acronym, stands for Linguistic Environment).
+
+This program is distributed under the Library GNU Public Licence, which is in the file
+COPYING.  
+
+This program was  written by Alexey Sokirko, Igor Nozhov, Lev Gershenzon, Andrey Putrin 
+and many other people.
+
+The project started in Moscow in Dialing 
+Company (Russian and English language). The German part was created  
+at Berlin-Brandenburg Academy of Sciences and Humanities in  Berlin (the project DWDS). 
+
+Russian website (Russian documents) is www.aot.ru.
+More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
+
+==============  Prerequisites    ========================
+0.   Install cmake (at least 3.5) from https://cmake.org/download/
+
+1.  g++ 8.0 or higher or 
+
+2. You need flex and bison to build projects after Morphology (Synan and Seman)
+    For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
+
+3. To build lemmatizer_python(switched off by default) you need swig and python-dev,
+    for windows I used 
+    https://sourceforge.net/projects/swig/files/swigwin/swigwin-3.0.12/swigwin-3.0.12.zip/download
+    https://www.python.org/downloads/release/python-2715/
+
+5. You need locale CP1251 and ISO-8859-1 under unix. 
+On POSIX systems you can type "locale -a" to list the names of supported locales. 
+
+See https://askubuntu.com/questions/76013/how-do-i-add-locale-to-ubuntu-server
+
+
+=================   Compilation =======================
+  export RML=/home/sokirko/RML
+  export CXX=/usr/bin/g++
+  export CC=/usr/bin/gcc
+  cd $RML
+  mkdir build
+  cd build
+  cmake ..
+   // or with debug 
+   // cmake .. -DCMAKE_BUILD_TYPE=Debug 
+  make
+  make DESTDIR=$RML install

@@ -1,0 +1,2664 @@
+============
+TITLE        = $ENT
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+RESTR   =  свобод
+============
+TITLE        = $perf
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ETENSE  =  * - > Perf
+============
+TITLE        = 01.02.95
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 4/6/1 19:15:25
+EXM     =  Данные нормативы действовали до 01.02.95.
+ENG     = 1  PR[2] [2] NOSP . NOSP [4] NOSP . NOSP [6]
+COMM    =  надо бы дописать статью CONTENT  =  _ _ . _ . _
+GF(2)   = 1  ЦК_порядк
+PREP1(2)= 1  до+Р
+PR(2)   = 1  before
+============
+TITLE        = 1960_годы
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ год
+EXM     =  в середине 1960 годов
+ENG     = 1  PR[3] [2] NOSP s
+SYNREP  =  ПР_УПР ( 1 , 3 )
+GF(2)   = 1  ЦК_порядк
+GF(3)   = 1  мн
+PREP1(3)= 1  в_середине+Р
+          2  к_концу+Р
+          3  в+П
+PR(3)   = 1  in the middle of the
+          2  by the end of the
+          3  in the
+============
+TITLE        = 1999_год
+SENSE       = 1
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ год
+EXM     =  в течение 1999 года - in 1999
+SYNREP  =  ПР_УПР ( 1 , 3 )
+GF(2)   = 1  ЦК_порядк
+GF(3)   = 1  ед
+PREP1(3)= 1  в_течение+Р
+          2  за+В
+          3  на+В
+          4  вплоть_до+Р
+          5  до_конца+Р
+          6  в+П
+          7  к+Д
+          8  к_концу+Р
+          9  с+Р
+          10  в_конце+Р
+          11  в_начале+Р
+          12  не_ранее+Р
+PR(3)   = 1  in
+          2  in
+          3  for
+          4  until
+          5  till the end of
+          6  in
+          7  by the year
+          8  by the end of
+          9  since
+          10  at the end of
+          11  in the begining of
+          12  till
+ENG     = 1  PR[3] SR[2]
+============
+TITLE        = 19_век
+SENSE       = 1
+AUTHOR       = maya
+REDACT       = alex
+TIME_CREATE       = 4/6/1 20:40:40
+RESTR   =  свобод
+ROOT    =  3
+CONTENT =  _ _ век
+EXM     =  Разве цивилизация нисколько не продвинулась
+           вперёд с 19 века?
+GF(2)   = 1  ЦК_порядк
+GF(3)   = 1  ед
+PREP1(3)= 1  в+В
+          2  с+Р
+          3  до+Р
+PR(3)   = 1  in
+          2  since
+          3  until
+ENG     = 1  PR[3] the [2] century
+COMM    =  Это сл-ние свободное из-за фразы "начинается с 19 века"
+============
+TITLE        = 24_часа_в_сутки
+SENSE       = 1
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  2
+CONTENT =  24 час в сутки
+EXM     =  24 часа в сутки
+SYNREP  =  ЧИСЛ_СУЩ ( 2 , 1 )
+           ПГ ( 3 , 4 )
+GF(2)   = 1  ед , рд
+GF(4)   = 1  мн , вн
+ENG     = 1  24 hours <a> day
+============
+TITLE        = 25_января
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  Занятия в школе начинаются первого сентября.
+GF(1)   = 1  ЧИСЛ-П мр , ед , рд
+          2  ЦК_порядк
+GF(2)   = 1  С ед , рд
+LEX(2)  = 1  #MONTH
+AUX     =  IDENT ( C1 , C2 )
+ENG     = 1  on the SR[1] of SR[2]
+          2  on the [1] NOSP th of SR[2]
+EGF1(1) =  ЧИСЛ-П
+EGF1(2) =  ЦК_порядк
+RESTR   =  свобод
+============
+TITLE        = 25_января_2000_года
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 26/6/1 10:18:47
+RESTR   =  свобод
+ROOT    =  2
+CONTENT =  _ _ _ год
+EXM     =  19 декабря 1999 года состоятся выборы.
+           Торги акциями АО "Связьинформ" были
+           приостановлены 11 февраля 1998 года.
+GF(1)   = 1  ЦК_порядк
+GF(2)   = 1  С ед , рд
+GF(3)   = 1  ЦК_порядк
+GF(4)   = 1  ед , рд
+LEX(2)  = 1  #MONTH
+ENG     = 1  on SR[2] [1] NOSP , [3]
+============
+TITLE        = 25_января_в_пятницу
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  2
+CONTENT =  _ _ _ _
+EXM     =  3 июля в пятницу Дума утвердила этот закон.
+SYNREP  =  ПГ ( 3 , 4 )
+GF(1)   = 1  ЦК_порядк
+GF(2)   = 1  ед , рд
+GF(4)   = 1  ед , вн
+LEX(2)  = 1  #MONTH
+LEX(4)  = 1  #DAY-OF-WEEK
+PREP3(4)= 1  в+В
+ENG     = 1  on SR[4] SR[2] [1]
+============
+TITLE        = 27_июня
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ _
+EXM     =  Мы работаем до 27 июня.
+GF(2)   = 1  ЦК_порядк
+GF(3)   = 1  ед , рд
+PREP1(3)= 1  к+Д
+          2  до+Р
+          3  вплоть_до+Р
+          4  с+Р
+LEX(3)  = 1  #MONTH
+PR(3)   = 1  by
+          2  until
+          3  until
+          4  since
+ENG     = 1  PR[3] SR[3] SR[2]
+RESTR   =  свобод
+============
+TITLE        = 27_июня_1999_года
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ _ _ год
+EXM     =  Мы работаем до 27 июня 1999 года.
+GF(2)   = 1  ЦК_порядк
+GF(3)   = 1  ед , рд
+GF(4)   = 1  ЦК_порядк
+GF(5)   = 1  ед , рд
+LEX(3)  = 1  #MONTH
+PREP1(2)= 1  к+Д
+          2  до+Р
+          3  вплоть_до+Р
+          4  с+Р
+PR(2)   = 1  by
+          2  until
+          3  until
+          4  since
+ENG     = 1  PR[2] SR[3] SR[2] NOSP , [4]
+============
+TITLE        = 27_июня_текущего_года
+SENSE       = 1
+AUTHOR       = maya
+REDACT       = alex
+TIME_CREATE       = 26/6/1 10:43:0
+ROOT    =  3
+CONTENT =  _ _ _ _ год
+EXM     =  Мы работаем до 27 июня прошлого года.
+SYNREP  =  ПРИЛ_СУЩ ( 5 , 4 )
+GF(2)   = 1  ЦК_порядк
+GF(3)   = 1  ед , рд
+GF(5)   = 1  ед , рд
+PREP1(3)= 1  к+Д
+          2  до+Р
+          3  вплоть_до+Р
+          4  с+Р
+LEX(3)  = 1  #MONTH
+LEX(4)  = 1  текущий
+          2  прошлый
+          3  будущий
+          4  этот
+PR(3)   = 1  by
+          2  until
+          3  since
+ENG     = 1  PR[3] SR[3] [2] of TR[4] year
+TR(4)   = 1  this
+          2  the last
+          3  the next
+============
+TITLE        = 48_часов
+SENSE       = 1
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ _
+EXM     =  в течение 48 часов
+SYNREP  =  ЧИСЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+GF(2)   = 1  ЦК
+GF(3)   = 1  С
+SF(3)   = 1  TIME
+             PERIO
+PREP1(3)= 1  в_течение+Р
+          2  за+В
+          3  через+В
+          4  на+В
+          5  сроком_на+В
+PR(3)   = 1  within
+          2  in
+          3  in
+          4  for
+          5  for
+          6  for_the_first_time_in
+ENG     = 1  PR[3] SR[2] SR[3](pl)
+============
+TITLE        = ближайшие_три_года
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 10/4/6 13:39:58
+RESTR   =  свобод
+ROOT    =  4
+CONTENT =  _ близкий _ _
+EXM     =  в течение ближайших трех лет
+SYNREP  =  ЧИСЛ_СУЩ ( 4 , 3 )
+           ПРИЛ_СУЩ ( 4 , 2 )
+           ПГ ( 1 , 4 )
+GF(2)   = 1  мн,прев
+GF(3)   = 1  ЦК
+SF(4)   = 1  TIME
+             PERIO
+PREP1(4)= 1  в_течение+Р
+          2  в_конце+Р
+          3  за+В
+          4  к_концу+Р
+          5  на+В
+          6  через+В
+PR(4)   = 1  in the
+          2  at the end of the
+          3  by the end of the
+          4  for the
+ENG     = 1  PR[4] next SR[3] SR[4](pl)
+============
+TITLE        = в_ближайшее_время
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 10/4/6 13:38:16
+ROOT    =  3
+CONTENT =  _ близкий время
+EXM     =  в ближайшее время
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+GF(2)   = 1  ед,прев
+GF(3)   = 1  С ед
+PREP1(3)= 1  в+В
+ENG     = 1  soon 1
+============
+TITLE        = в_ближайшие_годы
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 10/4/6 13:39:9
+ROOT    =  3
+CONTENT =  _ близкий год
+EXM     =  в ближайшие годы
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+GF(3)   = 1  мн , вн
+GF(2)   = 1  прев
+PREP1(3)= 1  в+В
+PR(3)   = 1  in
+ENG     = 1  PR[3] coming years
+============
+TITLE        = в_будущем
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  Мы в будущем сможем строить гораздо более сложные и совершенные летательные
+           аппараты.
+           Мы мечтали о том, чтобы в будущем строить гораздо более сложные и совершенные
+           летательные аппараты.
+           В будущем мы могли бы строить гораздо более сложные и совершенные летательные
+           in the past - в прошлом
+SYNREP  =  ПГ ( 1 , 2 )
+ENG     = 1  TR[2]
+GF(2)   = 1  ед , пр
+PREP1(2)= 1  в+П
+LEX(2)  = 1  будущее
+          2  прошлое
+TR(2)   = 1  in future
+          2  in the past
+============
+TITLE        = в_дальнейшем
+SENSE       = 1
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  2
+CONTENT =  _ дальнейший
+EXM     =  В дальнейшем нам еще не раз пришлось прибегать к услугам этого ветеринара.
+GF(2)   = 1  П ед, пр
+PREP1(2)= 1  в+П
+ENG     = 1  later_on
+============
+TITLE        = в_настоящее_время
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 8/12/1 10:53:43
+ROOT    =  3
+CONTENT =  _ настоящий _
+EXM     =  В настоящее время трудно найти какое-нибудь живое
+           свидетельство тех событий.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  С ед
+PREP1(3)= 1  в+В
+LEX(3)  = 1  время
+          2  момент
+ENG     = 1  at TR[3]
+TR(3)   = 1  present
+          2  the moment
+============
+TITLE        = в_начале_прошлого_года
+SENSE       = 1
+AUTHOR       = alex
+TIME_CREATE       = 4/6/1 19:15:29
+RUSETENSE=  прш - > Simple
+           буд - > Simple
+ROOT    =  2
+CONTENT =  _ _ _ _
+EXM     =  В начале прошлого года я не праздновал свой день рождения.
+SYNREP  =  ПРИЛ_СУЩ ( 4 , 3 )
+           ПР_УПР ( 1 , 2 )
+GF(2)   = 1  ед
+LEX(2)  = 1  начало
+          2  конец
+          3  середина
+TR(2)   = 1  begining
+          2  end
+          3  middle
+GF(4)   = 1  ед
+SF(4)   = 1  TIME
+             PERIO
+PREP1(2)= 1  не_ранее+Р
+PR(2)   = 1  till
+LEX(3)  = 1  прошлый
+          2  этот
+          3  следующий
+          4  нынешний
+ENG     = 1  PR[2] the TR[2] of TR[3] SR[3]
+TR(3)   = 1  last
+          2  this
+          3  next
+          4  this
+============
+TITLE        = в_наше_время
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ наш _
+EXM     =  В наше время трудно найти какое-нибудь живое
+           свидетельство тех событий.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+PREP1(3)= 1  в+В
+LEX(3)  = 1  время
+          2  день
+PR(1)   = 1  in
+RUSETENSE=  * - > Simple
+ENG     = 1  PR[3] SR[2] SR[3]
+============
+TITLE        = в_первое_время
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ время
+EXM     =  в первое время я часто ходил в кино
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+ENG     = 1  at first
+GF(2)   = 1  ЧИСЛ-П
+GF(3)   = 1  С ед
+PREP1(3)= 1  в+В
+LEX(3)  = 1  время
+          2  момент
+============
+TITLE        = в_первый_раз
+SENSE       = 1
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ раз
+EXM     =  С ней это случается в первый раз.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(2)   = 1  ЧИСЛ-П
+GF(3)   = 1  С ед
+PREP1(3)= 1  в+В
+PR(3)   = 1  for
+ENG     = 1  PR[3] the SR[2] time
+============
+TITLE        = в_период_с_1999_по_2000_год
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  2
+CONTENT =  _ период _ _ _ _ год
+EXM     =  В период с 1988 по 1996 год Петр Иванович трижды
+           побывал за границей.
+SYNREP  =  ПГ ( 1 , 2 )
+ENG     = 1  between [4] and [6]
+GF(2)   = 1  ед
+PREP1(2)= 1  в+В
+GF(4)   = 1  ЦК_порядк
+PREP3(4)= 1  с+Р
+GF(6)   = 1  ЦК_порядк
+GF(7)   = 1  вн
+PREP5(7)= 1  по+В
+          2  до+Р
+============
+TITLE        = в_полпервого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 4/6/1 19:15:29
+CONTENT =  _ _
+SF      = 1  TIME
+LEX(2)  = 1  полпервого
+          2  полвторого
+          3  полтретьего
+          4  полчетвертого
+          5  полпятого
+          6  полшестого
+          7  полседьмого
+          8  полвосьмого
+          9  полдевятого
+          10  полдесятого
+          11  пол-одиннадцатого
+          12  полдвенадцатого
+ROOT    =  2
+PREP1(2)= 1  в+В
+          2  к+Д
+          3  с+Р
+SYNREP  =  ПГ ( 1 , 2 )
+PR(2)   = 1  at
+          2  by
+          3  since
+ENG     = 1  PR[2] SR[2]
+============
+TITLE        = в_последнее_время
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:15:29
+ROOT    =  3
+CONTENT =  _ _ время
+EXM     =  в последее время он почти не приходит в гости
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+PREP1(3)= 1  в+В
+LEX(2)  = 1  последний
+LEX(3)  = 1  время
+RUSETENSE=  * - > Perf
+ENG     = 1  recently 1
+          2  lately 1
+============
+TITLE        = в_прошлом_году
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 4/6/1 19:16:16
+RUSETENSE=  прш - > Simple
+           буд - > Simple
+ROOT    =  3
+CONTENT =  _ _ _
+EXM     =  В прошлом году я не праздновал свой день рождения.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+GF(3)   = 1  ед
+SF(3)   = 1  TIME
+             PERIO
+PREP1(3)= 1  в+П
+          2  в+В
+LEX(2)  = 1  прошлый
+          2  этот
+          3  следующий
+          4  нынешний
+ENG     = 1  TR[2] SR[3]
+TR(2)   = 1  last
+          2  this
+          3  next
+          4  this
+============
+TITLE        = в_пятницу
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  В пятницу работа кончается раньше.
+SYNREP  =  ПГ ( 1 , 2 )
+PREP1(2)= 1  в+В
+          2  не_ранее+Р
+LEX(2)  = 1  #DAY-OF-WEEK
+PR(2)   = 1  on
+          2  till
+ENG     = 1  PR[2] SR[2]
+============
+TITLE        = в_редких_случаях
+SENSE       = 1
+TIME_CREATE       = 9/6/1 21:4:56
+CONTENT =  _ редкий случай
+ROOT    =  3
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+PREP1(3)= 1  в+П
+PR(3)   = 1  on
+GF(3)   = 1  С мн
+EXM     =  Начальник всегда причесывался, а брился он в редких
+           случаях.
+ENG     = 1  PR[3] rare occasions
+============
+TITLE        = в_это_время
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  3
+CONTENT =  _ _ _
+EXM     =  В настоящее время трудно найти какое-нибудь живое
+           свидетельство тех событий.
+           a particularly strong virus is going around at the moment -
+           в настоящее время бушует особенно суровый вирус
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  С ед
+PREP1(3)= 1  в+В
+LEX(2)  = 1  этот
+          2  тот
+LEX(3)  = 1  время
+          2  момент
+PR(3)   = 1  at
+RUSETENSE=  нсв - > Cont
+           св - > Simple
+ENG     = 1  PR[3] TR[2] TR[3]
+TR(2)   = 1  this
+          2  that
+TR(3)   = 1  time
+          2  moment
+============
+TITLE        = в_январе
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  в ноябре уже лежит снег
+SYNREP  =  ПГ ( 1 , 2 )
+PREP1(2)= 1  в+П
+          2  не_ранее+Р
+LEX(2)  = 1  #MONTH
+PR(2)   = 1  in
+          2  till
+ENG     = 1  PR[2] SR[2]
+============
+TITLE        = век
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  сеntury 1
+RESTR   =  свобод
+============
+TITLE        = весь_день
+SENSE       = 1
+TIME_CREATE       = 9/6/1 21:4:56
+RUSETENSE=  * - > Simple
+           нст - > Cont
+           нст - > PerfCont
+           прш - > Perf
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  весь день
+SYNREP  =  ПРИЛ_СУЩ ( 2 , 1 )
+GF(2)   = 1  С ед , вн
+SF(2)   = 1  TIME
+             PERIO
+LEX(1)  = 1  весь
+          2  целый
+ENG     = 1  TR[1] SR[2](sg)
+TR(1)   = 1  all
+          2  the whole
+RESTR   =  свобод
+============
+TITLE        = весь_тот_вечер
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+RUSETENSE=  * - > Simple
+           нст - > Cont
+           нст - > PerfCont
+           прш - > Perf
+ROOT    =  3
+CONTENT =  весь _ _
+EXM     =  весь тот день
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПРИЛ_СУЩ ( 3 , 1 )
+GF(3)   = 1  С ед , вн
+SF(3)   = 1  TIME
+             PERIO
+LEX(2)  = 1  тот
+          2  этот
+ENG     = 1  all TR[2] SR[3](sg)
+TR(2)   = 1  that
+          2  this
+============
+TITLE        = вечер
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+ENG     = 1  evening 1
+RESTR   =  свобод
+============
+TITLE        = вечером
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+GF      = 1  НАР:ОБСТ_ГР
+ENG     = 1  in the evening
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = восемь_часов
+SENSE       = 1
+AUTHOR       = maya
+REDACT       = alex
+TIME_CREATE       = 2/4/4 13:7:53
+ROOT    =  3
+CONTENT =  _ _ час
+EXM     =  Я приду завтра на работу к восьми часам.
+GF(2)   = 1  ЦК
+PREP1(3)= 1  к+Д
+          2  в+В
+          3  до+Р
+          4  через+В
+PR(3)   = 1  by
+          2  at
+          3  until
+          4  in
+ENG     = 1  PR[3] SR[2] o'clock
+============
+TITLE        = восемь_часов_утра
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  3
+CONTENT =  _ _ час _
+EXM     =  Я приду завтра на работу к восьми часам утра.
+SYNREP  =  ЧИСЛ_СУЩ ( 3 , 2 )
+GF(2)   = 1  ЦК
+GF(4)   = 1  ед , рд
+PREP1(3)= 1  к+Д
+          2  в+В
+          3  около+Р
+LEX(4)  = 1  утро
+          2  день
+          3  вечер
+          4  ночь
+PR(3)   = 1  by
+          2  at
+          3  about
+ENG     = 1  PR[3] SR[2] o'clock TR[4]
+TR(4)   = 1  in the morning
+          2  in the afternoon
+          3  in the evening
+          4  at night
+============
+TITLE        = впервые_за_четыре_года
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 9/6/1 21:4:56
+============
+TITLE        = все_еще
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:54
+RUSETENSE=  * - > Cont
+ROOT    =  2
+CONTENT =  все еще
+EXM     =  он все еще дышал
+ENG     = 1  still 1
+============
+TITLE        = вчера
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  yesterday 1
+RESTR   =  свобод
+============
+TITLE        = год
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+DERIV   =  СОКР ( г. )
+           СОКР_мн ( гг. )
+SF      = 1  TIME
+             PERIO
+             UNIT
+LF      =  Func0 : идти
+           IncepFunc0 : приходить
+           IncepFunc0 : наступать
+           IncepFunc0 : начинаться
+ENG     = 1  year 1
+COMM    =  високосный год
+           круглый год
+           учебный год
+           финансовый год
+           академический год
+           сельскохозяйственный год
+RESTR   =  свобод
+============
+TITLE        = год_назад
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  1
+CONTENT =  _ назад
+EXM     =  Год назад у нас появилась собака.
+GF(1)   = 1  С ед , вн
+SF(1)   = 1  TIME
+             PERIO
+ENG     = 1  <а> SR[1](sg) ago
+============
+TITLE        = годы_и_годы
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  3
+CONTENT =  год и год
+EXM     =  годы и годы
+SYNREP  =  ОДНОР_ИГ ( 2 , 3 )
+           ОДНОР_ИГ ( 2 , 1 )
+GF(1)   = 1  мн , вн
+RUSETENSE=  нст - > PerfCont
+           прш - > Simple
+           прш - > Perf
+           буд - > Simple
+ENG     = 1  for years
+============
+TITLE        = давно
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+EXM     =  он давно уже доктор наук
+           он давно закончил работу
+           он давно не ел ананасов
+           он давно седой
+CAT     = 1  ASP
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  Magn
+             TIME
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+SF1     = 1  SITUAT
+          2  PROPERT
+          3  PROF
+LF      =  A0 : давний
+           A0 : давнишний
+ENG     = 1  long_ago
+          2  for <a> long time
+COMM    =  убрал из GF1 Х!:ИГ (Сокирко)
+============
+TITLE        = два_года_назад
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  2
+CONTENT =  _ _ назад
+EXM     =  десять лет назад
+SYNREP  =  ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  ЧИСЛ вн
+GF(2)   = 1  С мн , рд
+SF(2)   = 1  TIME
+             PERIO
+ENG     = 1  SR[1] SR[2](pl) ago
+============
+TITLE        = два_дня_спустя
+SENSE       = 1
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  2
+CONTENT =  _ _ спустя
+EXM     =  два дня спустя
+SYNREP  =  ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  вн
+GF(2)   = 1  рд
+SF(2)   = 1  TIME
+ENG     = 1  SR[1] SR[2](pl) later
+============
+TITLE        = два_раза_в_году
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  2
+CONTENT =  _ раз _ _
+EXM     =  два раза в неделю к Пантелеймонову заскакивала
+           его соседка Зинаида Петровна.
+SYNREP  =  ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  ЦК
+GF(2)   = 1  С рд, ед
+GF(4)   = 1  С вн
+          2  С пр
+SF(4)   = 1  TIME
+             PERIO
+PREP3(4)= 1  в+В
+          2  в+П
+ENG     = 1  SR[1] times <a> SR[4]
+COMM    =  в GF(3) не ограничено число ради слова "сутки", и
+           из-за этого "раза два в месяцЫ", например, тоже
+           подпадает под эту статью.
+============
+TITLE        = два_часа_тридцать_минут
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 9/6/1 21:4:56
+CONTENT =  _ _ _ _
+ROOT    =  2
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  PERIO
+VAL     =  TIME , C , A1
+GF(1)   = 1  вн
+SF(1)   = 1  QUANTIT
+GF(2)   = 1  рд
+SF(2)   = 1  TIME
+          2  PERIO
+             UNIT
+GF(3)   = 1  вн
+SF(3)   = 1  QUANTIT
+GF(4)   = 1  рд
+SF(5)   = 1  TIME
+          2  PERIO
+             UNIT
+GF1     = 1  X! : ГГ
+ENG     = 1  for SR[1] SR[2] SR[3] SR[4]
+============
+TITLE        = девятнадцатый_век
+SENSE       = 2
+AUTHOR       = maya
+REDACT       = alex
+TIME_CREATE       = 9/6/1 21:4:58
+RESTR   =  свобод
+ROOT    =  3
+CONTENT =  _ _ век
+EXM     =  Разве цивилизация нисколько не продвинулась
+           вперёд с девятнадцатого века?
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+GF(2)   = 1  ЧИСЛ-П ед , рд
+GF(3)   = 1  ед
+PREP1(3)= 1  в+В
+          2  с+Р
+          3  до+Р
+PR(3)   = 1  in
+          2  since
+          3  until
+ENG     = 1  PR[3] the SR[2] century
+COMM    =  Это сл-ние свободное из-за фразы "начинается с 19 века"
+============
+TITLE        = день
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+EXM     =  день гнева
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+VAL     =  PROPERT , A1 , C
+GF1     = 1  рд
+LF      =  IncepFunc0 : наставать
+           IncepFunc0 : наступать
+           A0 | дневной
+ENG     = 1  day 1
+COMM    =  выходной день
+           рабочий день
+           праздничный день
+RESTR   =  свобод
+============
+TITLE        = день_недели
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  1
+CONTENT =  день неделя
+ENG     = 1  day of the week
+RESTR   =  свобод
+============
+TITLE        = десятилетие
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  decade 1
+RESTR   =  свобод
+============
+TITLE        = десять_лет_назад
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 9/6/1 21:4:56
+ROOT    =  2
+CONTENT =  _ _ назад
+EXM     =  много лет назад
+SYNREP  =  ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  ЧИСЛ вн
+GF(2)   = 1  С мн , рд
+SF(2)   = 1  TIME
+             PERIO
+RUSETENSE=  прш - > Simple
+ENG     = 1  SR[1] SR[2](pl) ago
+============
+TITLE        = десять_лет_тому_назад
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _ тот назад
+EXM     =  много лет тому назад
+SYNREP  =  ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  ЧИСЛ вн
+GF(2)   = 1  С рд
+GF(3)   = 1  ср , дт , ед
+SF(2)   = 1  TIME
+             PERIO
+RUSETENSE=  * - > Simple
+ENG     = 1  SR[1] SR[2](pl) ago
+============
+TITLE        = днем
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  НАР:ОБСТ_ГР
+ENG     = 1  in the afternoon
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = до_настоящего_времени
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  _ настоящий время
+EXM     =  До настоящего времени эта страна относилась к числу
+           развитых.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  ед
+PREP1(3)= 1  до+Р
+RUSETENSE=  прш - > Perf
+ENG     = 1  up to the present day
+============
+TITLE        = до_сих_пор
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+RUSETENSE=  нст - > Cont
+CONTENT =  _ сей пора
+ROOT    =  3
+EXM     =  До сих пор о любви была сказана только одна
+           неоспоримая правда, а именно, что "тайна
+           сия велика есть".
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  мн
+PREP1(3)= 1  до+Р
+ENG     = 1  still 2
+============
+TITLE        = до_этого
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  До этого он успел поработать на трех предприятиях.
+GF(2)   = 1  ед
+PREP1(2)= 1  до+Р
+LEX(2)  = 1  этот
+ENG     = 1  before 1
+============
+TITLE        = долго
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+RUSETENSE=  нст - > PerfCont
+           прш - > Simple
+           прш - > Perf
+           буд - > Simple
+EXM     =  долго
+           I haven't touched the piano for a long time -
+           я долго не играл на пианино
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  for <a> long time
+============
+TITLE        = долгое_время
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  долгий время
+EXM     =  Я долгое время не мог себе такого представить.
+SYNREP  =  ПРИЛ_СУЩ ( 2 , 1 )
+GF(2)   = 1  С ед, вн
+ENG     = 1  for <a> long while
+============
+TITLE        = ежегодно
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 7/12/1 21:52:5
+EXM     =  В Нижнем Новгороде ежегодно проводится ярмарка
+CAT     = 1  LABL.PROPERT
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  TIME
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+SF1     = 1  SITUAT
+ENG     = 1  annually 1
+============
+TITLE        = за_5_месяцев_текущего_года
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  _ _ _ текущий год
+EXM     =  УАЗ за 5 месяцев текущего года увеличил производство
+           примерно на 30%.
+SYNREP  =  ЧИСЛ_СУЩ ( 3 , 2 )
+           ПРИЛ_СУЩ ( 5 , 4 )
+GF(2)   = 1  ЦК
+GF(3)   = 1  С рд
+GF(5)   = 1  ед , рд
+SF(3)   = 1  TIME
+             PERIO
+PREP1(3)= 1  за+В
+LEX(4)  = 1  текущий
+          2  прошлый
+          3  будущий
+ENG     = 1  over the [2] SR[3](pl) of TR[4] SR[5]
+TR(4)   = 1  this
+          2  the last
+          3  the next
+============
+TITLE        = за_7_дней_до_заседания
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+CONTENT =  _ _ _ _ _
+ROOT    =  3
+EXM     =  Члены Совета извещаются о заседании Совета не
+           менее чем за 7 дней до заседания.
+SYNREP  =  ЧИСЛ_СУЩ ( 3 , 2 )
+GF(2)   = 1  ЦК
+          2  ЧИСЛ вн
+GF(4)   = 1  рд
+SF(3)   = 1  TIME
+             PERIO
+SF(4)   = 1  SITUAT
+PREP1(3)= 1  за+В
+PREP4(5)= 1  до+Р
+ENG     = 1  SR[2] SR[3](pl) before SR[5]
+============
+TITLE        = за_день_до_того
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+CONTENT =  _ день _ тот
+ROOT    =  2
+EXM     =  За день до того были подсчитаны результаты голосования.
+PREP1(2)= 1  за+В
+PREP3(4)= 1  до+Р
+GF(2)   = 1  С ед
+GF(4)   = 1  ед
+ENG     = 1  the day before
+SYN     =  накануне
+============
+TITLE        = за_полгода_до_тот
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+CONTENT =  _ полгода _ тот
+EXM     =  за полгода до того
+GF(2)   = 1  ед
+PREP1(2)= 1  за+В
+PREP3(4)= 1  до+Р
+PR(4)   = 1  before
+ENG     = 1  six months PR[4]
+ROOT    =  2
+============
+TITLE        = завтра
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  Мы считали, что вы завтра уедете.
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  tomorrow 1
+============
+TITLE        = завтра_утром
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  завтра утром
+           вчера вечером
+CONTENT =  _ _
+ROOT    =  1
+LEX(1)  = 1  завтра
+          2  вчера
+TR(1)   = 1  tomorrow
+          2  yesterday
+ENG     = 1  TR[1] TR[2]
+TR(2)   = 1  morning
+          2  afternoon
+          3  evening
+GF(1)   = 1  Н
+LEX(2)  = 1  утром
+          2  днем
+          3  вечером
+============
+TITLE        = зимой
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  зимой будет холодно
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+ENG     = 1  in winter
+============
+TITLE        = изо_дня_в_день
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  Изо дня в день повторялось одно и то же.
+CONTENT =  _ день _ день
+ROOT    =  2
+PREP1(2)= 1  из+Р
+PREP3(4)= 1  в+В
+ENG     = 1  from day to day
+GF(2)   = 1  ед
+============
+TITLE        = к_настоящему_моменту
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+RUSETENSE=  прш - > Perf
+ROOT    =  3
+CONTENT =  _ настоящий момент
+EXM     =  К настоящему моменту эта страна относится к числу
+           развитых.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  ед
+PREP1(3)= 1  к+Д
+ENG     = 1  by this time
+============
+TITLE        = к_тому_времени
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  тот время
+EXM     =  К тому времени я уже вполне сносно играл на рояле.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  С ед
+PREP1(3)= 1  к+Д
+RUSETENSE=  * - > Perf
+ENG     = 1  by then
+============
+TITLE        = каждую_зиму
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  каждый _
+EXM     =  Каждую зиму выключают горячую воду!
+SYNREP  =  ПРИЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  МС-П вн , ед
+GF(2)   = 1  С вн , ед
+SF(2)   = 1  TIME
+             PERIO
+RUSETENSE=  нст - > Simple
+ENG     = 1  every SR[2](sg)
+============
+TITLE        = каждые_две_недели
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  каждый _ _
+EXM     =  каждые два дня
+           каждые три недели
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 1 )
+           ЧИСЛ_СУЩ ( 3 , 2 )
+GF(1)   = 1  МС-П вн , мн
+GF(2)   = 1  ЦК
+SF(3)   = 1  TIME
+             PERIO
+RUSETENSE=  нст - > Simple
+ENG     = 1  every [2] SR[3](pl)
+============
+TITLE        = каждый_день
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+RUSETENSE=  нст - > Simple
+ROOT    =  2
+CONTENT =  каждый _
+EXM     =  Он каждый день ходит на работу пешком
+           каждую неделю
+SYNREP  =  ПРИЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  МС-П вн , ед
+GF(2)   = 1  С вн , ед
+SF(2)   = 1  TIME
+             PERIO
+ENG     = 1  every SR[2](sg)
+RESTR   =  свобод
+============
+TITLE        = квартал
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 7/12/1 23:59:18
+RESTR   =  свобод
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+DERIV   =  СОКР ( кв. )
+SF      = 1  PERIO
+             TIME
+             UNIT
+ENG     = 1  quarter 1
+SYN     =  четверть года
+============
+TITLE        = когда
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  НАР:ВОПР
+SF      = 1  TIME
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+LF      =  Relat : тогда
+ENG     = 1  when
+============
+TITLE        = когда-то
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  когда-то
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  once 1
+============
+TITLE        = летом
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  летом рано светает
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+ENG     = 1  in summer
+============
+TITLE        = март_1999_года
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _ _ год
+EXM     =  Госбанк ежемесячно вплоть до марта 1999 года
+           направлял на эти цели значительную часть своей
+           коммерческой прибыли.
+SYNREP  =  ПГ ( 1 , 2 )
+GF(3)   = 1  ЦК_порядк
+GF(4)   = 1  ед , рд
+LEX(2)  = 1  #MONTH
+PREP1(2)= 1  в+П
+          2  к+Д
+          3  вплоть_до+Р
+          4  до_конца+Р
+          5  до+Р
+PR(2)   = 1  in
+          2  by
+          3  until
+          4  till the end of
+          5  until
+ENG     = 1  PR[2] SR[2] [3]
+============
+TITLE        = март_текущего_года
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _ _ год
+EXM     =  Госбанк ежемесячно вплоть до марта текущего года
+           направлял на эти цели значительную часть своей
+           коммерческой прибыли.
+SYNREP  =  ПГ ( 1 , 2 )
+GF(4)   = 1  ед , рд
+PREP1(2)= 1  в+П
+          2  к+Д
+          3  вплоть_до+Р
+          4  до_конца+Р
+LEX(2)  = 1  #MONTH
+LEX(3)  = 1  текущий
+          2  прошлый
+          3  будущий
+          4  этот
+PR(2)   = 1  in
+          2  by
+          3  until
+          4  till the end of
+ENG     = 1  PR[2] TR[3] SR[2]
+TR(3)   = 1  this
+          2  the last
+          3  the next
+============
+TITLE        = месяц
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  month
+RESTR   =  свобод
+============
+TITLE        = месяцы
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  в течение месяцев
+SYNREP  =  ПГ ( 1 , 2 )
+GF(2)   = 1  С мн
+SF(2)   = 1  TIME
+             PERIO
+PREP1(2)= 1  в_течение+Р
+          2  в_конце+Р
+          3  за+В
+          4  к_концу+Р
+          5  на+В
+          6  сроком_на+В
+          7  через+В
+PR(2)   = 1  within
+          2  at the end of the
+          3  in
+          4  by the end of the
+          5  for
+ENG     = 1  PR[2] SR[2](pl)
+============
+TITLE        = мигом
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  Она мигом приготовила ужин, и мы сели за стол.
+GF      = 1  НАР:ОБСТ_ГР
+ENG     = 1  in no time
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = минута
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  minute 1
+RESTR   =  свобод
+============
+TITLE        = много_времени
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ время
+SYNREP  =  НАР_ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  Н
+          2  ЧИСЛ вн
+GF(2)   = 1  С ед, рд
+SF(1)   = 1  QUANTIT
+LEX(1)  = 1  много
+          2  мало
+          3  сколько
+ENG     = 1  SR[1] time
+RESTR   =  свобод
+============
+TITLE        = много_лет_назад
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _ назад
+EXM     =  много лет назад
+SYNREP  =  НАР_ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  ЧИСЛ вн
+          2  ПРЕДК
+          3  Н
+GF(2)   = 1  С мн , рд
+SF(2)   = 1  TIME
+             PERIO
+LEX(1)  = 1  много
+          2  несколько
+ENG     = 1  TR[1] SR[2](pl) ago
+COMM    =  надо будет исправить SYNREP и GF(1), т. к. "много"
+           на самом деле числительное
+TR(1)   = 1  many
+          2  a few
+============
+TITLE        = много_лет_тому_назад
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _ тот назад
+EXM     =  много лет тому назад
+SYNREP  =  НАР_ЧИСЛ_СУЩ ( 2 , 1 )
+GF(1)   = 1  ЧИСЛ вн
+          2  Н
+          3  ПРЕДК
+GF(2)   = 1  С мн , рд
+GF(3)   = 1  ср , дт , ед
+GF(4)   = 1  Н
+SF(2)   = 1  TIME
+             PERIO
+LEX(1)  = 1  много
+          2  несколько
+ENG     = 1  TR[1] SR[2](pl) ago
+COMM    =  надо будет исправить SYNREP и GF(1), т. к. "много"
+           на самом деле числительное
+TR(1)   = 1  many
+          2  a few
+============
+TITLE        = момент
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 8/12/1 10:48:18
+RESTR   =  свобод
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  moment 1
+============
+TITLE        = на_другой_день
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+CONTENT =  _ _ день
+ROOT    =  3
+EXM     =  на следующий день
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+ENG     = 1  next day
+LEX(2)  = 1  следующий
+          2  другой
+PREP1(3)= 1  на+В
+GF(3)   = 1  ед , вн
+============
+TITLE        = на_поздней_стадии
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  _ _ _
+EXM     =  На поздней стадии вечеринки случались взрывы
+           более разгульного веселья.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(2)   = 1  П ед , пр
+          2  МС-П ед , пр
+          3  ЧИСЛ-П ед , пр
+GF(3)   = 1  ед , пр
+PREP1(3)= 1  на+П
+LEX(3)  = 1  стадия
+          2  этап
+ENG     = 1  at the SR[2] stage
+ALG     =  8
+============
+TITLE        = на_последующие_годы
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  Аналогичные ориентиры будут определены и на последующие годы.
+CONTENT =  _ последующий год
+ROOT    =  3
+PREP1(3)= 1  на+В
+PR(3)   = 1  for
+SYNREP  =  ПРИЛ_СУЩ ( 1 , 2 )
+ENG     = 1  PR[3] the years to come
+GF(3)   = 1  мн , вн
+============
+TITLE        = на_сегодняшний_день
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+CONTENT =  _ сегодняшний _
+ROOT    =  3
+LEX(3)  = 1  день
+          2  вечер
+TR(3)   = 1  today
+          2  tonight
+PREP1(3)= 1  на+В
+PR(3)   = 1  for
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+ENG     = 1  PR[3] TR[3]
+============
+TITLE        = на_третий_день
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  _ _ день
+EXM     =  на третий день
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(2)   = 1  ЧИСЛ-П ед , вн
+GF(3)   = 1  ед , вн
+PREP1(3)= 1  на+В
+ENG     = 1  on the SR[2] day
+ALG     =  9
+============
+TITLE        = на_этой_неделе
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  на прошлой неделе
+CONTENT =  _ неделя
+ROOT    =  3
+PREP1(3)= 1  на+П
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+ENG     = 1  TR[2] week
+TR(2)   = 1  last
+          2  this
+          3  next
+GF(2)   = 1  жр , ед , пр
+LEX(2)  = 1  прошлый
+          2  этот
+          3  следующий
+          4  будущий
+          5  предстоящий
+          6  наступающий
+GF(3)   = 1  ед , пр
+============
+TITLE        = назавтра
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  Назавтра,   по  алфавиту  разложив  уродливые  тетради,
+           я погрузился  в  хаос  почерков
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  next day
+============
+TITLE        = накануне
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  the day before
+============
+TITLE        = не_раз
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  не раз
+ENG     = 1  not once
+GF(2)   = 1  С ед, вн
+============
+TITLE        = неделя
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+CAT     = 1  LABL
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+LF      =  IncepFunc0 : наставать
+           IncepFunc0 : наступать
+           A0 | дневной
+ENG     = 1  week 1
+COMM    =  выходной день
+           рабочий день
+           праздничный день
+RESTR   =  свобод
+============
+TITLE        = неделя
+SENSE       = 2
+AUTHOR       = boris
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  в течение недели
+GF(2)   = 1  С ед
+SF(2)   = 1  TIME
+             PERIO
+PREP1(2)= 1  в_течение+Р
+          2  в_конце+Р
+          3  за+В
+          4  к_концу+Р
+          5  на+В
+          6  сроком_на+В
+          7  через+В
+          8  к+Д
+PR(2)   = 1  within a
+          2  at the end of the
+          3  in a
+          4  by the end of the
+          5  for a
+          6  by
+ENG     = 1  PR[2]  SR[2](sg)
+============
+TITLE        = некоторое_время
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ время
+SYNREP  =  ПРИЛ_СУЩ ( 1 , 2 )
+GF(1)   = 1  П
+          2  МС-П
+GF(2)   = 1  С ед, вн
+LEX(1)  = 1  какое-то
+          2  некоторое
+ENG     = 1  some time
+============
+TITLE        = немедленно
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  немедленно
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  immediately 1
+============
+TITLE        = немедля
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  немедля
+GF      = 1  НАР:ОБСТ_ГР
+ENG     = 1  at once
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = немного_погодя
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  немного погодя
+EXM     =  Было решено, что в конце августа мы проводим Анну Алексеевну
+           в Крым, куда посылали ее доктора,  а  немного  погодя  уедет  Луганович  с
+           детьми в свою западную губернию.
+GF(1)   = 1  НАР:ОБСТ_ГР
+ENG     = 1  <a> little later
+============
+TITLE        = неожиданно
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  Ему неожиданно было сделано очень интересное деловое предложение.
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  suddenly 1
+COMM    =  это не ВГ в случаях типа "Он оказался прав, но как
+           неожиданно и страшно было то, что мы увидели!" или
+           "Ответ оказался неожиданно резким".
+============
+TITLE        = несколько_дней_спустя
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  несколько _ спустя
+EXM     =  Несколько дней спустя я встретил ее в библиотеке.
+SYNREP  =  НАР_ЧИСЛ_СУЩ ( 2 , 1 )
+GF(2)   = 1  С мн , рд
+SF(2)   = 1  TIME
+             PERIO
+ENG     = 1  <a> few SR[2](pl) later
+============
+TITLE        = ночь
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+ENG     = 1  night 1
+RESTR   =  свобод
+============
+TITLE        = ночью
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  ночью
+GF      = 1  НАР:ОБСТ_ГР
+ENG     = 1  at night
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = один_час
+SENSE       = 2
+AUTHOR       = maya
+REDACT       = alex
+TIME_CREATE       = 13/6/1 9:28:42
+ROOT    =  3
+CONTENT =  _ _ _
+EXM     =  в течение 1 часа / в течение одного часа
+           на один день
+SYNREP  =  ЧИСЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+GF(3)   = 1  С ед
+SF(3)   = 1  TIME
+             PERIO
+PREP1(3)= 1  в_течение+Р
+          2  за+В
+          3  на+В
+          4  сроком_на+В
+          5  через+В
+LEX(2)  = 1  один
+          2  1
+PR(3)   = 1  within a
+          2  in a
+          3  for a
+          4  for a
+          5  in a
+ENG     = 1  PR[3] SR[3](sg)
+============
+TITLE        = однажды_вечером
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 12/7/1 9:28:28
+ROOT    =  2
+CONTENT =  однажды _
+EXM     =  Однажды вечером он ушел от нас
+GF(2)   = 1  Н
+LEX(2)  = 1  утром
+          2  вечером
+          3  ночью
+          4  днем
+TR(2)   = 1  morning
+          2  evening
+          3  night
+          4  day
+ENG     = 1  one TR[2]
+============
+TITLE        = осенью
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  осенью
+GF      = 1  НАР:ОБСТ_ГР
+ENG     = 1  in autumn
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+============
+TITLE        = от_случая_к_случаю
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  Книги он покупал от случая к случаю.
+CONTENT =  _ случай _ случай
+ROOT    =  2
+PREP1(2)= 1  от+Р
+PREP3(4)= 1  к+Д
+ENG     = 1  from time to time
+GF(2)   = 1  ед , рд
+GF(4)   = 1  ед , дт
+============
+TITLE        = от_шести_утра_до_шести_вечера
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  _ _ утро _ _ вечера
+EXM     =  Часы работы завода - от 6 утра и до 6 вечера.
+           Мой отец работает от шести утра и до шести вечера.
+GF(2)   = 1  ЦК
+GF(3)   = 1  рд
+PREP1(3)= 1  с+Р
+          2  от+Р
+PREP4(6)= 1  до+Р
+PR(3)   = 1  from 1
+PR(6)   = 1  to 1
+ENG     = 1  PR[3] [2] a.m. PR[6] [5] p.m. \ DOMAIN=инф
+             комп
+          2  from [2] in the morning till [5] in the evening \ DOMAIN=худ
+============
+TITLE        = от_шести_утра_и_до_шести_вечера
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  _ _ утро и _ _ вечер
+EXM     =  Часы работы завода - от 6 утра и до 6 вечера.
+           Мой отец работает от шести утра и до шести вечера.
+GF(2)   = 1  ЦК
+GF(3)   = 1  рд
+PREP1(3)= 1  с+Р
+          2  от+Р
+PR(3)   = 1  from 1
+PR(7)   = 1  to 1
+PREP5(7)= 1  до+Р
+ENG     = 1  PR[3] [2] a.m. PR[7] [6] p.m. \ DOMAIN=инф
+             комп
+          2  from [2] in the morning till [6] in the evening \ DOMAIN=худ
+============
+TITLE        = пара_дней
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  3
+CONTENT =  _ пара _
+EXM     =  через пару дней
+GF(2)   = 1  С ед
+GF(3)   = 1  С мн , рд
+SF(3)   = 1  TIME
+             PERIO
+PREP1(2)= 1  на+В
+          2  через+В
+PR(2)   = 1  for
+          2  in
+ENG     = 1  PR[2] <a> couple of SR[3](pl)
+ALG     =  4
+============
+TITLE        = первоначально
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+EXM     =  первоначально
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+ENG     = 1  originally 1
+============
+TITLE        = по_ночам
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  Человек и кошка по ночам летают
+GF(2)   = 1  мн , дт
+PREP1(2)= 1  по+Д
+LEX(2)  = 1  ночь
+          2  утро
+          3  вечер
+ETENSE  =  нст - > Simple
+ENG     = 1  TR[2]
+TR(2)   = 1  at night
+          2  in the morning
+============
+TITLE        = по_понедельникам
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  По средам я езжу в институт
+GF(2)   = 1  мн , дт
+LEX(2)  = 1  #DAY-OF-WEEK
+PREP1(2)= 1  по+Д
+ETENSE  =  нст - > Simple
+ENG     = 1  SR[2](pl)
+============
+TITLE        = пока_что
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:43
+CONTENT =  пока что
+ROOT    =  1
+EXM     =  Пока что отвечайте n.
+ENG     = 1  so far
+============
+TITLE        = пол-одиннадцатого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past ten
+============
+TITLE        = полвосьмого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past seven
+============
+TITLE        = полвторого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past one
+============
+TITLE        = полдвенадцатого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past eleven
+============
+TITLE        = полдевятого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past eight
+============
+TITLE        = полдесятого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past nine
+============
+TITLE        = полночь
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  Мы приехали в Москву около полудня.
+SYNREP  =  ПГ ( 1 , 2 )
+PREP1(2)= 1  к+Д
+          2  в+В
+          3  около+Р
+LEX(2)  = 1  полдень
+          2  полночь
+PR(2)   = 1  by
+          2  at
+          3  about
+ENG     = 1  PR[2] TR[2]
+TR(2)   = 1  noon
+          2  midnight
+RESTR   =  свобод
+============
+TITLE        = полпервого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past twelve
+============
+TITLE        = полпервого_ночи
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+ROOT    =  2
+CONTENT =  _ _ _
+EXM     =  Вчера Петя пришел домой в полпервого ночи.
+SF      = 1  TIME
+SYNREP  =  ПГ ( 1 , 2 )
+GF(3)   = 1  ед , рд
+PREP1(2)= 1  в+В
+          2  к+Д
+LEX(2)  = 1  полпервого
+          2  полвторого
+          3  полтретьего
+          4  полчетвертого
+          5  полпятого
+          6  полшестого
+          7  полседьмого
+          8  полвосьмого
+          9  полдевятого
+          10  полдесятого
+          11  пол-одиннадцатого
+          12  полдвенадцатого
+LEX(3)  = 1  день
+          2  ночь
+          3  утро
+          4  вечер
+PR(2)   = 1  at
+          2  by
+ENG     = 1  PR[2] SR[2] TR[3]
+TR(3)   = 1  in the afternoon
+          2  at night
+          3  in the morning
+          4  in the evening
+============
+TITLE        = полпятого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past four
+============
+TITLE        = полседьмого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past six
+============
+TITLE        = полтретьего
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past two
+============
+TITLE        = полчетвертого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:43
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past three
+============
+TITLE        = полшестого
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  СУЩ:ИГ
+ENG     = 1  half past five
+============
+TITLE        = порой
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+EXM     =  Порой он сам не понимает, чего хочет.
+           Порой такие посмертные знамения и вмешательства отзывались пародией.
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+ENG     = 1  sometimes 1
+============
+TITLE        = последнее_время
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+CONTENT =  последний время
+EXM     =  Последее время он почти не приходит в гости.
+SYNREP  =  ПРИЛ_СУЩ ( 2 , 1 )
+ETENSE  =  * - > Perf
+ENG     = 1  recently 1
+ROOT    =  2
+============
+TITLE        = постоянно
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+ETENSE  =  * - > Cont
+ENG     = 1  constantly 1
+============
+TITLE        = потом
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ENG     = 1  then 1
+          2  afterwards 1
+============
+TITLE        = прямо_сейчас
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+CONTENT =  прямо сейчас
+ROOT    =  2
+EXM     =  Необходимо сделать это как можно скорее, лучше
+           прямо сейчас.
+           Вполне в духе Цинтии было б затеять прямо сейчас
+           дешевое представление на манер полтергейста.
+ENG     = 1  right now
+          2  right then
+ALG     =  4
+============
+TITLE        = пять_минут
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:44
+RESTR   =  свобод
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  стоял здесь пять минут
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  PERIO
+VAL     =  TIME , C , A1
+GF(1)   = 1  ЦК
+GF(2)   = 1  рд
+SF(2)   = 1  TIME
+          2  PERIO
+             UNIT
+GF1     = 1  X! : ГГ
+ENG     = 1  for [1] SR[2](pl)
+============
+TITLE        = раз_в_году
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:44
+CONTENT =  раз _ _
+ROOT    =  1
+EXM     =  Оживал Пантелеймонов только раз в году - 9 мая,
+           на праздник победы.
+GF(3)   = 1  С вн
+          2  С пр
+SF(3)   = 1  TIME
+             PERIO
+PREP2(3)= 1  в+П
+          2  в+В
+ENG     = 1  once <a> SR[3]
+============
+TITLE        = раз_пять_в_неделю
+SENSE       = 1
+AUTHOR       = boris
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  1
+CONTENT =  раз _ _ _
+EXM     =  Раза два в неделю заходила Зинаида Петровна.
+SYNREP  =  АППРОКС_ИГ ( 1 , 2 )
+GF(2)   = 1  ЧИСЛ вн
+GF(4)   = 1  С вн
+SF(4)   = 1  TIME
+             PERIO
+PREP3(4)= 1  в+В
+ENG     = 1  SR[2] times in <a> SR[4]
+COMM    =  в GF(4) не ограничено число ради слова "сутки", и
+           из-за этого "раза четыре в день", например, тоже
+           подпадает под эту статью.
+============
+TITLE        = раз_пять_за_неделю
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  1
+CONTENT =  раз _ _ _
+EXM     =  Раз двадцать за день он сбегал к соседу узнать время.
+SYNREP  =  АППРОКС_ИГ ( 1 , 2 )
+GF(2)   = 1  ЧИСЛ вн
+GF(4)   = 1  С вн
+SF(4)   = 1  TIME
+             PERIO
+PREP3(4)= 1  за+В
+ENG     = 1  SR[2] times in <a> SR[4]
+COMM    =  в GF(4) не ограничено число ради слова "сутки", и
+           из-за этого "раз двадцать за дни", например, тоже
+           подпадает под эту статью.
+============
+TITLE        = разом
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+EXM     =  Они разом обернулись
+GF      = 1  НАР:ОБСТ_ГР
+ENG     = 1  at once
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+============
+TITLE        = раннее_утро
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  3
+CONTENT =  _ ранний утро
+EXM     =  с раннего утра
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+ENG     = 1  PR[3] early morning
+GF(3)   = 1  ед
+PREP1(3)= 1  с+Р
+PR(3)   = 1  from
+============
+TITLE        = рано_или_поздно
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+CONTENT =  рано или поздно
+ROOT    =  1
+ENG     = 1  sooner or later
+============
+TITLE        = рано_утром
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+EXM     =  рано утром
+CONTENT =  _ _
+ENG     = 1  TR[1] TR[2]
+GF      = 1  НАР:ОБСТ_ГР
+LEX(1)  = 1  рано
+          2  поздно
+LEX(2)  = 1  утром
+          2  вечером
+          3  ночью
+TR(1)   = 1  early
+          2  late
+TR(2)   = 1  in the morning
+          2  at night
+============
+TITLE        = с_1999_по_2000_год
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  5
+CONTENT =  _ _ _ _ год
+EXM     =  С 1977 по 1999 год Петя жил в одном и том же доме на Арбате.
+           С 1977 по 1999 годы Петя жил в одном и том же доме на Арбате.
+ENG     = 1  PR[2] [2] PR[5] [4]
+SYNREP  =  ПР_УПР ( 3 , 5 )
+GF(4)   = 1  ЦК_порядк
+PREP1(2)= 1  с+Р
+PR(2)   = 1  from
+PREP3(5)= 1  по+В
+          2  до+Р
+PR(5)   = 1  till
+============
+TITLE        = с_29_октября_до_3_ноября
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  3
+CONTENT =  _ _ _ _ _ _
+EXM     =  Я буду в командировке с 29 октября до 3 ноября/
+           с 29 октября по 3 ноября.
+GF(2)   = 1  ЦК_порядк
+GF(3)   = 1  ед , рд
+GF(5)   = 1  ЦК_порядк
+GF(6)   = 1  ед , рд
+LEX(3)  = 1  #MONTH
+LEX(6)  = 1  #MONTH
+PREP1(3)= 1  с+Р
+PREP4(6)= 1  до+Р
+          2  по+В
+PR(3)   = 1  from
+PR(6)   = 1  to
+ENG     = 1  PR[3] SR[3] SR[2]  PR[6] SR[6] SR[5]
+============
+TITLE        = с_октября_до_января
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  2
+CONTENT =  _ _ _ _
+EXM     =  В этих местах дожди идут с октября до января.
+SYNREP  =  ПГ ( 1 , 2 )
+           ПГ ( 3 , 4 )
+GF(2)   = 1  ед
+GF(4)   = 1  ед
+LEX(2)  = 1  #MONTH
+LEX(4)  = 1  #MONTH
+PREP1(2)= 1  с+Р
+PREP3(4)= 1  до+Р
+          2  по+В
+PR(2)   = 1  from
+PR(4)   = 1  to
+ENG     = 1  PR[2]  SR[2] PR[4] SR[4]
+============
+TITLE        = с_пятницы
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  2
+CONTENT =  с _
+GF(2)   = 1  С ед, рд
+SF(2)   = 1  DAY-OF-WEEK
+          2  MONTH
+PREP1(2)= 1  с+Р
+LEX(2)  = 1  утро
+          2  день
+          3  вечер
+          4  ночь
+ENG     = 1  since SR[2]
+============
+TITLE        = с_тех_пор
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 12/12/1 9:36:4
+ROOT    =  3
+CONTENT =  _ тот пора
+EXM     =  С тех пор я испытываю угрызения совести.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  С
+PREP1(3)= 1  с+Р
+ENG     = 1  ever since
+============
+TITLE        = с_тех_самых_пор
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  3
+CONTENT =  _ тот самый пора
+EXM     =  С тех пор я испытываю угрызения совести.
+SYNREP  =  ПРИЛ_СУЩ ( 4 , 2 )
+GF(4)   = 1  С мн
+PREP1(4)= 1  с+Р
+ENG     = 1  ever_since
+============
+TITLE        = с_того_времени
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 12/12/1 9:36:45
+ROOT    =  3
+CONTENT =  _ тот время
+EXM     =  С тех пор я испытываю угрызения совести.
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+GF(3)   = 1  С
+PREP1(3)= 1  с+Р
+ENG     = 1  ever since
+============
+TITLE        = сегодня
+SENSE       = 1
+AUTHOR       = user
+REDACT       = alex
+TIME_CREATE       = 12/12/1 12:16:37
+EXM     =  сегодня, 6 декабря, стало известно ...
+           сегодня утром прошли переговоры ...
+           Индия: вчера, сегодня, завтра
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+ETENSE  =  нст - > PerfCont
+           * - > Simple
+ENG     = 1  today 1
+============
+TITLE        = сегодня_утром
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+CONTENT =  сегодня _
+ROOT    =  1
+EXM     =  сегодня вечером/ночью
+ENG     = 1  TR[2]
+GF(2)   = 1  Н
+LEX(2)  = 1  вечером
+          2  ночью
+          3  утром
+          4  днем
+TR(2)   = 1  tonight
+          2  this morning
+          3  this afternoon
+============
+TITLE        = сезон
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  season 2
+============
+TITLE        = секунда
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  second 1
+RESTR   =  свобод
+============
+TITLE        = следующие_несколько_лет
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  4
+CONTENT =  _ следующий несколько _
+EXM     =  в течение следующих нескольких лет
+SYNREP  =  НАР_ЧИСЛ_СУЩ ( 4 , 3 )
+           ПРИЛ_СУЩ ( 4 , 2 )
+           ПГ ( 1 , 4 )
+GF(4)   = 1  рд
+SF(4)   = 1  TIME
+             PERIO
+PREP1(4)= 1  в_течение+Р
+          2  на+В
+          3  за+В
+PR(4)   = 1  in
+          2  for
+          3  in
+ENG     = 1  PR[4] several SR[4]
+============
+TITLE        = сутки
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  day 1
+============
+TITLE        = текущий_год
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  3
+CONTENT =  _ _ год
+EXM     =  в течение текущего года - in 1999
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+ENG     = 1  PR[3] TR[2] year
+LEX(2)  = 1  текущий
+          2  следующий
+          3  будущий
+          4  наступающий
+          5  этот
+          6  тот
+TR(2)   = 1  this
+          2  the next
+          3  the incoming
+          4  that
+GF(3)   = 1  ед
+PREP1(3)= 1  в_течение+Р
+          2  за+В
+          3  на+В
+          4  вплоть_до+Р
+          5  до_конца+Р
+          6  с+Р
+PR(3)   = 1  in
+          2  for
+          3  until
+          4  till the end of
+          5  since
+============
+TITLE        = теперь
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+EXM     =  теперь
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+             X! : ИГ
+ENG     = 1  now 1
+============
+TITLE        = тогда
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  1
+GF      = 1  НАР:ОБСТ_ГР
+SF      = 1  TIME
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+             X! : ИГ
+ENG     = 1  then 1
+============
+TITLE        = той_весной
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  2
+CONTENT =  _ _
+EXM     =  Чета привычных тополей погибла той весной.
+SYNREP  =  ПРИЛ_СУЩ ( 2 , 1 )
+GF(2)   = 1  ед , тв
+SF(2)   = 1  TIME
+             PERIO
+LEX(1)  = 1  тот
+          2  этот
+ENG     = 1  TR[1] SR[2](sg)
+TR(1)   = 1  that
+          2  this
+============
+TITLE        = только_тогда
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+EXM     =  Только тогда Иван понял, какую ошибку он совершил.
+CONTENT =  только тогда
+ROOT    =  2
+GF(2)   = 1  НАР:ОБСТ_ГР
+ENG     = 1  only then
+============
+TITLE        = только_что
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  1
+CONTENT =  только что
+EXM     =  Я только что видел самый красивый сон в моей жизни.
+ETENSE  =  * - > Perf
+ENG     = 1  just 1
+COMM    =  проблемы со случаями типа ""Первый фрагмент отправляется
+           на дальнейшую обработку, а второй повторно подвергается
+           только что рассмотренной процедуре" или "записанный адрес
+           маршрута замещает только что использованный адрес отправителя"
+           или "Эта старая человекообезьяна, по-видимому, вожак племени,
+           оказалась точной копией Челленджера, только что масть
+           другая - рыжая."
+============
+TITLE        = тут_же
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+EXM     =  Услышав о предстоящем повышении цен, я тут же пошел
+           и купил на все деньги продуктов.
+CONTENT =  тут же
+ROOT    =  1
+ENG     = 1  at once
+GF(1)   = 1  НАР:ОБСТ_ГР
+============
+TITLE        = тысячелетие
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  millennium 1
+============
+TITLE        = уже
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+EXM     =  Я уже сделал эту работу.
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  > X! : ИГ
+ETENSE  =  * - > Perf
+ENG     = 1  already 1
+============
+TITLE        = утро
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  СУЩ:ИГ
+SF      = 1  TIME
+             PERIO
+ENG     = 1  morning 1
+RESTR   =  свобод
+============
+TITLE        = утром
+SENSE       = 1
+AUTHOR       = masha
+TIME_CREATE       = 11/6/1 10:47:44
+POS     =  begin
+GF      = 1  НАР:ОБСТ_ГР
+VAL     =  TIME , C , A1
+GF1     = 1  X! : ГГ
+          2  X! : ИГ
+ENG     = 1  in the morning
+============
+TITLE        = час
+SENSE       = 1
+AUTHOR       = user
+TIME_CREATE       = 11/6/1 10:47:44
+GF      = 1  СУЩ:ИГ
+DERIV   =  СОКР ( ч. )
+SF      = 1  TIME
+             PERIO
+             UNIT
+ENG     = 1  hour 1
+RESTR   =  свобод
+============
+TITLE        = час_ночи
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  2
+CONTENT =  _ час _
+EXM     =  Вчера Петя пришел домой в час ночи.
+SYNREP  =  ПГ ( 1 , 2 )
+GF(2)   = 1  ед
+GF(3)   = 1  ед , рд
+PREP1(2)= 1  в+В
+          2  к+Д
+LEX(3)  = 1  день
+          2  ночь
+PR(2)   = 1  at
+          2  by
+ENG     = 1  PR[2] one o'clock TR[3]
+TR(3)   = 1  in the afternoon
+          2  at night
+============
+TITLE        = чуть_позже
+SENSE       = 1
+TIME_CREATE       = 11/6/1 10:47:44
+CONTENT =  чуть позже
+EXM     =  чуть позже мы поговорим о тех командах, которые
+ENG     = 1  later on
+============
+TITLE        = шестидесятые_годы
+SENSE       = 1
+AUTHOR       = maya
+TIME_CREATE       = 11/6/1 10:47:44
+ROOT    =  3
+CONTENT =  _ _ год
+EXM     =  в середине шестидесятых годов
+SYNREP  =  ПРИЛ_СУЩ ( 3 , 2 )
+           ПГ ( 1 , 3 )
+GF(3)   = 1  мн
+PREP1(3)= 1  в_середине+Р
+          2  к_концу+Р
+          3  в+В
+LEX(2)  = 1  двадцатый
+          2  тридцатый
+          3  сороковой
+          4  пятидесятый
+          5  шестидесятый
+          6  семидесятый
+          7  восьмидесятый
+          8  девяностый
+PR(3)   = 1  in the middle of the
+          2  by the end of the
+          3  in the
+ENG     = 1  PR[3] TR[2]
+TR(2)   = 1  twenties
+          2  thirties
+          3  forties
+          4  fifties
+          5  sixties
+          6  seventies
+          7  eighties
+          8  nineties
+RESTR   =  свобод

@@ -1,0 +1,1888 @@
+============
+TITLE        = ab+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  ab
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = aber
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 14/4/3 14:20:34
+CONTENT =  aber
+GF      = 1  KON_neb
+VAL     =  AND , À2 , À1
+============
+TITLE        = abseits+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  abseits
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = abzüglich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  abzüglich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = als
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:5:7
+CONTENT =  als
+EXM     =  Nunmehr wurde ein Dekret unterzeichnet als Staatsgebiet erklart wird.
+           Als ich noch zur Schule ging, hatte ich viel mehr Freizeit.
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = am+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  am
+DERIV   =  an dem
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = an+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  an
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = angesichts+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  angesichts
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = anhand+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  anhand
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = anläßlich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  anläßlich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = ans+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  ans
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+DERIV   =  an das
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = anstatt
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:4:59
+CONTENT =  anstatt
+EXM     =  Anstatt sich zu bedanken, beleidigte er den Helfer
+GF      = 1  KON_unt
+VAL     =  INSTEAD , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  VP : inf
+============
+TITLE        = anstatt+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  anstatt
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = anstelle+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  anstelle
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = antwortlich+G
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 10/4/3 12:26:48
+CONTENT =  antwortlich
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = auf+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  auf
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = aufgrund+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  aufgrund
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = aufs+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  aufs
+DERIV   =  auf das
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = aufseiten+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  aufseiten
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = aus+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  aus
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = ausgangs+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  ausgangs
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = außer+D
+SENSE       = 2
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  außer
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = außer+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  außer
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = außerhalb+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  außerhalb
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = bei+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  bei
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = beiderseits+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  beiderseits
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = beim+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  beim
+DERIV   =  bei dem
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = bevor
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:4:46
+CONTENT =  bevor
+EXM     =  Sie mussen, bevor sie zum Verkauf gelangen, einer amtlichen Prufung unterzogen werden
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = bezüglich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  bezüglich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = binnen+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  binnen
+GF      = 1  PRP
+SF      = 1  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = bis
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:4:36
+CONTENT =  bis
+EXM     =  die Bank vorlaufig geschlossen zu bleiben habe, bis die Aufstellung des Status vollendet ist.
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = bis+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  bis
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = bis_zu+D
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 25/8/3 15:34:43
+CONTENT =  bis zu
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+EXM     =  wenn ein Teil bis zu den Zaehnen bewaffnet ist und ein anderer wehrlos
+============
+TITLE        = da
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:4:19
+CONTENT =  da
+EXM     =  Ich habe die Prufung bestanden, da ich gut vorbereitet war.
+GF      = 1  KON_unt
+VAL     =  CAUSE , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = damit
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:4:2
+CONTENT =  damit
+EXM     =  Ich lerne die Vokabeln, damit ich den morgigen Test bestehe.
+GF      = 1  KON_unt
+VAL     =  AIM , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = dank+D/G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  dank
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> G
+============
+TITLE        = dass
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 23/8/3 16:48:51
+CONTENT =  (dass | daß)
+EXM     =  Ich weiß, dass du klug bist
+GF      = 1  KON_unt
+VAL     =  CONTEN , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = diesseits+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  diesseits
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = durch+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  durch
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = durchs+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  durchs
+DERIV   =  durch das
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = ehe
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:16:53
+CONTENT =  ehe
+EXM     =  es vergingen drei Stunden, ehe wir landen konnten
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = ein bißchen
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 8/4/3 16:42:50
+CONTENT =  ein bißchen
+           ein wenig
+EXM     =  sich ein wenig oeffnen
+RESTR   =  fixed !
+GF      = 1  ADV
+VAL     =  QUANTIT , Ñ , À1
+GF1     = 1  VP
+============
+TITLE        = ein paar
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 22/4/3 13:12:8
+CONTENT =  ein paar
+EXM     =  ein paar Gefechte
+GF      = 1  ZAL
+RESTR   =  fixed !
+VAL     =  QUANTIT , Ñ , À1
+GF1     = 1  VP
+============
+TITLE        = eingangs+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  eingangs
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = einschließlich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  einschließlich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = entgegen+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  entgegen
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = entlang+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  entlang
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+          2  >> D
+============
+TITLE        = entsprechend+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  entsprechend
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = entweder...oder
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 15/4/3 14:34:17
+CONTENT =  entweder  ... oder
+EXM     =  Er kauft entweder ein Auto oder ein Fahrrad.
+GF      = 1  DISKONT_KON
+============
+TITLE        = exklusive+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  exklusive
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = falls
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:16:46
+CONTENT =  falls
+EXM     =  du kannst mitkommen, falls du Lust hast
+GF      = 1  KON_unt
+VAL     =  COND , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = fern+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  fern
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = für+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  für
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = fürs+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  fürs
+DERIV   =  FÜR das
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = gegen+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  gegen
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = gegenüber+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  gegenüber
+GF      = 1  PRP
+SF      = 1  MODL
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = gemäß+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  gemäß
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = gen+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  gen
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = gleich+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  gleich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = hinsichtlich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  hinsichtlich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = hinter+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  hinter
+GF      = 1  PRP
+SF      = 1  LOK
+          2  TIME
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = hinterm+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  hinterm
+DERIV   =  hinter dem
+GF      = 1  PRP
+SF      = 1  LOK
+          2  TIME
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = hinters+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  hintera
+DERIV   =  hinter das
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = im+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  im
+DERIV   =  in dem
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = in+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  in
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = indem
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:20:22
+CONTENT =  indem
+EXM     =  er hat viel Geld sparen können, indem er einen Teil der Arbeit selbst gemacht hat
+GF      = 1  KON_unt
+VAL     =  METHOD , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = indes
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:22:12
+CONTENT =  indes | indessen
+EXM     =  indes er seine Arbeit fertig machte, gingen die anderen spazieren
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = infolge+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  infolge
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = inklusive+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  inklusive
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = inmitten+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  inmitten
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = innerhalb+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  innerhalb
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = ins+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  ins
+DERIV   =  in das
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = insofern
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:26:32
+CONTENT =  insofern
+EXM     =  er studiert Mathematik, insofern  es fur seine Arbeit notwendig ist
+GF      = 1  KON_unt
+VAL     =  CAUSE , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = insoweit
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:28:26
+CONTENT =  insoweit(|als)
+EXM     =  i. das zutrifft, werden wir intervenieren
+GF      = 1  KON_unt
+VAL     =  SCALE , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = je+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  je
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> N
+          2  >> A
+============
+TITLE        = jenseits+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  jenseits
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = kontra+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  kontra
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = kraft+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  kraft
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = kurz_nach+D
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 29/8/3 12:24:48
+CONTENT =  kurz nach
+GF      = 1  PRP
+SF      = 1  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = kurz_vor+D
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 29/8/3 12:23:35
+CONTENT =  kurz vor
+GF      = 1  PRP
+SF      = 1  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = laut+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  laut
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+          2  >> D
+============
+TITLE        = längs+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  längs
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+          2  >> D
+============
+TITLE        = längsseits+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  längsseits
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = mangels+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  mangels
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = mit+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  mit
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = mitsamt+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  mitsamt
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = mittels+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  mittels
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = nach+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  nach
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = nachdem
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:30:29
+CONTENT =  nachdem
+EXM     =  n. ich gegessen hatte, legte ich mich eine Weile hin
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = nahe+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  nahe
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = neben+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  neben
+GF      = 1  PRP
+SF      = 1  MODL
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = nebst+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  nebst
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = nächst+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  nächst
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = ob
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:32:7
+CONTENT =  ob
+EXM     =  er fragte sie, ob sie noch käme
+GF      = 1  KON_unt
+VAL     =  CONTEN , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = oberhalb+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  oberhalb
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = obwohl
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 15:12:6
+CONTENT =  obwohl | obgleich | obschon | obzwar | wenngleich | wennschon
+EXM     =  er hat das Paket nicht mitgenommen, o. ich ihn darum gebeten hatte
+GF      = 1  KON_unt
+VAL     =  COND , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = oder
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 14/4/3 14:20:16
+CONTENT =  oder
+GF      = 1  KON_neb
+VAL     =  AND , À2 , À1
+============
+TITLE        = offenbar
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 16/4/3 11:27:34
+CONTENT =  offenbar
+GF      = 1  SCHALTWORT
+EXM     =  sie ist o. sehr begabt
+============
+TITLE        = ohne
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:38:36
+CONTENT =  ohne
+EXM     =  sie nahm Platz, o. gefragt zu haben
+GF      = 1  KON_unt
+VAL     =  COND , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  VP : inf
+============
+TITLE        = ohne+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  ohne
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = per+N
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  per
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> N
+============
+TITLE        = plus+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  plus
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = pro+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  pro
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = samt+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  samt
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = seit
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:38:58
+CONTENT =  seit | seitdem
+EXM     =  s. er die Firma leitet, sind alle zufrieden
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = seit+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  seit
+GF      = 1  PRP
+SF      = 1  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = seitens+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  seitens
+GF      = 1  PRP
+SF      = 1  MODL
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = seitlich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  seitlich
+GF      = 1  PRP
+SF      = 1  MODL
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = seitwärts+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  seitwärts
+GF      = 1  PRP
+SF      = 1  MODL
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = so
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:40:59
+CONTENT =  so
+EXM     =  so Gott will, sehen wir uns bald wieder
+GF      = 1  KON_unt
+VAL     =  COND , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = sobald
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:42:48
+CONTENT =  sobald | sowie
+EXM     =  ich rufe an, s. ich zu Hause bin
+GF      = 1  KON_unt
+VAL     =  SIMULT , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = sofern
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:44:38
+CONTENT =  sofern
+EXM     =  wir kommen morgen, s. es euch passt
+GF      = 1  KON_unt
+VAL     =  COND , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = solange
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:46:40
+CONTENT =  solange
+EXM     =  du kannst bleiben, s. du willst
+           s. du Fieber hast, musst du im Bett liegen
+GF      = 1  KON_unt
+VAL     =  SIMULT , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = sooft
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:48:56
+CONTENT =  sooft
+EXM     =  s. er kam, brachte er Blumen mit
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = soweit
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 14:50:38
+CONTENT =  soweit | soviel
+EXM     =  er ist wieder gesund, s. mir bekannt ist
+GF      = 1  KON_unt
+VAL     =  SCALE , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = statt+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  statt
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = teils...teils
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 15/4/3 14:46:26
+CONTENT =  teils  ... teils
+EXM     =  Er kauft teils Autos, teils Fahrräder.
+GF      = 1  DISKONT_KON
+============
+TITLE        = trotz+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  trotz
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = um
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 22/4/3 18:31:25
+CONTENT =  um
+EXM     =  Ich mache das, um dich zu besuchen.
+GF      = 1  KON_unt
+VAL     =  COMP , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = um+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  um
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = ums+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  ums
+DERIV   =  um das
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = und
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 14/4/3 14:18:14
+CONTENT =  und
+GF      = 1  KON_neb
+VAL     =  AND , À2 , À1
+============
+TITLE        = ungeachtet+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  ungeachtet
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = unter+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  unter
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = unterhalb+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  unterhalb
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = unterm+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  unterm
+DERIV   =  unter dem
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = unters+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  unters
+DERIV   =  unter das
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = unweit+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  unweit
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = versus+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  versus
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = via+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  via
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = vom+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  vom
+DERIV   =  von dem
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = von+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  von
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = vor+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  vor
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = vorbehaltlich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  vorbehaltlich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = vorm+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  vorm
+DERIV   =  vor dem
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = vors+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  vors
+DERIV   =  vor das
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = wegen+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  wegen
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = weil
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 15:10:22
+CONTENT =  weil
+EXM     =  sie ist so traurig, w. ihr Vater gestorben ist
+GF      = 1  KON_unt
+VAL     =  CAUSE , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = wenn
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 15:35:1
+CONTENT =  wenn
+EXM     =  wenn es dir recht ist, trete ich sofort zurück
+GF      = 1  KON_unt
+VAL     =  COND , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = wenn_nicht_sogar
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 4/9/3 16:12:17
+CONTENT =  , wenn nicht sogar
+GF      = 1  KON_neb
+VAL     =  OR , À2 , À1
+============
+TITLE        = wider+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  wider
+GF      = 1  PRP
+SF      = 1  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A
+============
+TITLE        = wie
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 15:15:9
+CONTENT =  wie
+EXM     =  es kam, w. ich es erwartet hatte
+GF      = 1  KON_unt
+VAL     =  COMP , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = wohingegen
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 15:16:26
+CONTENT =  wohingegen
+EXM     =  er hat blondes Haar, w. seine Geschwister alle dunkelhaarig sind
+GF      = 1  KON_unt
+VAL     =  COMP , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = während
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 15:17:56
+CONTENT =  während
+EXM     =  w. sie verreist waren, hat man bei ihnen eingebrochen.
+GF      = 1  KON_unt
+VAL     =  TIME , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = während+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  während
+GF      = 1  PRP
+SF      = 1  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = zeit+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zeit
+GF      = 1  PRP
+SF      = 1  TIME
+VAL     =  TIME , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = zu+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zu
+GF      = 1  PRP
+SF      = 1  MODL
+          2  TIME
+          3  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = zufolge+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zufolge
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+          2  >> D
+============
+TITLE        = zugunsten+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zugunsten
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+          2  >> D
+============
+TITLE        = zuliebe+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zuliebe
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = zum+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zum
+DERIV   =  zu dem
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = zumal
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 20/3/3 15:19:26
+CONTENT =  zumal
+EXM     =  sie nimmt die Einladung gern an, z. sie allein ist
+GF      = 1  KON_unt
+VAL     =  CAUSE , À1 , À2
+GF1     = 1  SENT
+GF2     = 1  SUBCLAUSE
+============
+TITLE        = zur+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zur
+DERIV   =  zu der
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = zuungunsten+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zuungunsten
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+          2  >> D
+============
+TITLE        = zuwider+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zuwider
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = zuzüglich+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zuzüglich
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = zwar...aber
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 15/4/3 11:11:17
+CONTENT =  zwar  ... aber
+GF      = 1  DISKONT_KON
+EXM     =  Es gab zwar ein paar Gefechte, aber keinen nennenswerten Widerstand.
+============
+TITLE        = zwecks+G
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zwecks
+GF      = 1  PRP
+SF      = 1  MODL
+VAL     =  MODL , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> G
+============
+TITLE        = zwischen+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  zwischen
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = über+D/A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  über
+GF      = 1  PRP
+SF      = 1  TIME
+          2  LOK
+VAL     =  LOK , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+          2  >> A
+============
+TITLE        = überm+D
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  überm
+DERIV   =  ÜBER dem
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> D
+============
+TITLE        = übers+A
+SENSE       = 1
+TIME_CREATE       = 9/3/3 11:55:44
+CONTENT =  übers
+DERIV   =  ÜBER das
+GF      = 1  PRP
+VAL     =  CAUSE , À2 , À1
+GF1     = 1  VP
+          2  < NP
+GF2     = 1  >> A

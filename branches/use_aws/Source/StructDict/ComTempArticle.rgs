@@ -1,0 +1,26 @@
+HKCR
+{
+	StructDict.TempArticle.1 = s 'TempArticle Class'
+	{
+		CLSID = s '{B3C7D665-2C57-11D3-A7A1-80F9E5000000}'
+	}
+	StructDict.TempArticle = s 'TempArticle Class'
+	{
+		CLSID = s '{B3C7D665-2C57-11D3-A7A1-80F9E5000000}'
+		CurVer = s 'StructDict.TempArticle.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B3C7D665-2C57-11D3-A7A1-80F9E5000000} = s 'TempArticle Class'
+		{
+			ProgID = s 'StructDict.TempArticle.1'
+			VersionIndependentProgID = s 'StructDict.TempArticle'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{FCD15161-23C4-11D3-A78B-0EEA0E000000}'
+		}
+	}
+}

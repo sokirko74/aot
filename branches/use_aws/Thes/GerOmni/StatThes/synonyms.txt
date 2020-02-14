@@ -1,0 +1,2 @@
+ConceptId;TextEntryId;TextEntryCutStr;
+100001#100000#"die Vereinten Nationen"#

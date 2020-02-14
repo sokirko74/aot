@@ -1,0 +1,2 @@
+TextEntryId;TextEntryStr;FreqCollocTypeId;AbbrForm;SynonymsCount;
+100000#"die Vereinten Nationen"#1#""#1#

@@ -1,0 +1,82 @@
+============
+TITLE        = при_этом
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 11/7/6 18:44:59
+//MachineName =  
+//Date = Tuesday, July 11, 2006 
+//Time = 18 : 44
+//UserName = sokirko 
+CONTENT =  при этом
+EXM     =  Никто из присутствующих при этом не пострадал.
+           При этом остается открытым вопрос о том, кто будет осуществлять на предприятии
+           контролирующие функции.
+           В мою комнату неожиданно вошла молоденькая девушка, (и) при этом
+           прехорошенькая.
+CAT     = 1  ASP
+GF      = 1  НАР
+SF      = 1  SIMULT
+VAL     =  SIMULT , C , A1
+           REFERENT , A2 , C
+SYNR    =  уточн ( с , а1 )
+GF1     = 1  X! : ПРОП
+SF1     = 1  PREDIC
+GF2     = 1  < ТЕКСТ
+SF2     = 1  SITUAT
+ENG     =  with this
+COMM    =  Как быть?
+============
+TITLE        = при_этом
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 11/7/6 18:46:1
+//MachineName =  
+//Date = Tuesday, July 11, 2006 
+//Time = 18 : 46
+//UserName = sokirko 
+CONTENT =  при этом
+EXM     =  Никто из присутствующих при этом не пострадал.
+           При этом остается открытым вопрос о том, кто будет осуществлять на предприятии
+           контролирующие функции.
+           В мою комнату неожиданно вошла молоденькая девушка, (и) при этом
+           прехорошенькая.
+CAT     = 1  ASP
+GF      = 1  НАР
+SF      = 1  SIMULT
+VAL     =  SIMULT , C , A1
+           REFERENT , A2 , C
+SYNR    =  уточн ( с , а1 )
+GF1     = 1  X! : ПРОП
+SF1     = 1  PREDIC
+GF2     = 1  < ТЕКСТ
+SF2     = 1  SITUAT
+ENG     =  with_this 1
+COMM    =  Как быть?
+============
+TITLE        = не
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 30/3/7 11:19:27
+//MachineName =  
+//Date = Friday, March 30, 2007 
+//Time = 11 : 19
+//UserName = sokirko 
+CONTENT =  не
+EXM     =  не, я этого знаю
+GF      = 1  ЧАСТ
+ENG     =  no 1
+============
+TITLE        = не
+SENSE       = 1
+AUTHOR       = alex
+REDACT       = alex
+TIME_CREATE       = 30/3/7 11:25:43
+//MachineName =  
+//Date = Friday, March 30, 2007 
+//Time = 11 : 25
+//UserName = sokirko 
+CONTENT =  (не|нет)
+EXM     =  не, я этого знаю
+GF      = 1  ЧАСТ
+ENG     =  no 1

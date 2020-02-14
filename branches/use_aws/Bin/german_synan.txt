@@ -1,0 +1,214 @@
+die schwache Resolution
+ein junger Boxer
+des jungen Boxers
+der bunte Stoff
+die alte Burg
+die kleinen Kinder
+dem bunten Stoff
+der kleinen Kinder
+dieselbe schwache Resolution
+kein neues Problem
+meine schwache Resolution
+diese armen Leute
+wegen meines alten Buches 
+zu meinen alten Büchern 
+sehr interessant
+ganz interessant
+besonders strenge
+die sehr interessante Diskussion
+die sehr interessante und lange  Diskussion
+für mich
+für die sehr interessante und lange  Diskussion
+die neue, schwache oder  sehr starke  Resolution
+ich trete  sofort zurück, wenn es dir recht ist
+ich hatte viel mehr Freizeit, als ich noch zur Schule ging. 
+Ich habe die Prüfung bestanden, da ich gut vorbereitet war.
+Das alte Haus, das neulich ausgebrannt ist, wird abgerissen .
+Der Mann, der jeden Tag Sport treibt, ist sehr fit.
+Ich lehne das ab
+Ich lehne das Gesetz, das du eingebracht hast, ab
+Ich habe gefahren
+Ich habe das Auto, das sehr schmutzig war, gefahren.
+ich bin gefragt worden
+ich kann  gefragt worden sein
+Den Tisch habe ich gebrochen.
+Kommunismus muß man für ein Ideal halten
+bei gutem Wetter
+kleiner guter Junge
+zu konkreten Zielen
+einer wird das kaum erfreulich finden
+das ist der Rat eines, der die Lage kennt
+Die US-Regierung bereitet nach einem britischen Zeitungsbericht in Kuwait eine neue US-Verwaltung in Irak für die Zeit nach dem Fall von Saddam Hussein vor.
+der angedrohten Gewerkschaftsproteste
+Die Bundesregierung hält ungeachtet der angedrohten Gewerkschaftsproteste an ihren Reformplänen fest.
+Kanzler Gerhard Schröder
+Bundeskanzler Alexey Sokirko
+A-Techniker Gerhard Schroder
+Bundeskanzler Gerhard Schröder hat einen Plan
+Bundeskanzler Gerhard Schröder (SPD) hat einen vier Punkte umfassenden Plan für eine demokratische Neuordnung im Irak und der gesamten Region vorgelegt.
+Das laut um Hilfe schreiende Kind konnte  rasch gerettet werden.
+Peter ist ein Verbrecher
+Die im Krieg durch Bomben zerstörte Stadt war ein schrecklicher Anblick.
+Unser  altes, schon ein wenig verfallenes Fachwerkhaus muß renoviert werden.
+Im alten Haus
+fürs kleine Baby
+Im im Krieg durch Bomben zerstörten Haus
+In das im Krieg durch Bomben zerstörte Haus
+Der meinen Antrag bearbeitende Beamte nimmt sich viel Zeit.
+Der gut versteckte Schatz wird gefunden
+die Eroberung Bagdads
+der Norden des Irak
+Einen Tag nach der Eroberung Bagdads haben die Alliierten nun den Norden des Irak ins Visier genommen.
+Ohne größeren Widerstand haben amerikanische Soldaten und kurdische Kömpfer die Stadt eingenommen.
+Das 5. Corps des irakischen Heers ergab sich und stimmte einem Waffenstillstand zu, wie das US-Oberkommando Mitte in Katar mitteilte. 
+Marine-Infanteristen sind in Tikrit, der Heimatstadt Saddam Husseins, einmarschiert. 
+zwar ein paar Gefechte, aber keinen nennenswerten Widerstand
+Er kauft entweder ein Auto oder ein Fahrrad
+Er kauft teils Autos, teils FahrrÄder, teils Panzer.
+entweder zu Hause  oder dort
+Es gab zwar ein paar Gefechte, aber offenbar keinen nennenswerten Widerstand. 
+In der geplünderten Ruine des Geheimdienstgebaudes in Basra suchen die Menschen nach Spuren verschleppter Angehöriger. 
+ein Deutscher
+in den ersten sieben Monaten 
+zwei Gefechte
+zwei rote Gefechte
+zwei roten Gefechten
+in den drei höchsten Rangsklassen
+ein paar Gefechte
+Ich mache das, um dich zu besuchen.
+Ich mache das um dich zu besuchen. // we have switched off this rule
+Nach Jahrzehnten des Verbots sind erstmals wieder Millionen Schiiten nach Kerbela gereist, um ihren heiligsten Feiertag zu begehen.
+Alexey Sokirko; Helmut Kohl; Kai Sokirko; Gräfin Tita von Hardenberg; Dr. Alexey Sokirko;  // basic tests for simple person grammars (1)
+Elisabeth II.; Herzog von Hohenlohe; Claudio Aly // basic tests for simple person grammars (2)
+Präsident Schwewadnadse 
+Der ehemalige Präsident Gorbatschow
+Parmas Torhüter Buffon
+Dr. Alexey Sokirko (Berlin)
+Dr. Alexey Sokirko , 198,
+Dr. Aloys Berg, Leiter der Uni-Klinik Freiburg,
+Aloys Berg, Leiter des Anti-Doping Labors in Köln,
+Ich habe das zu erhalten
+die krankheiterregenden Spaltpilze und andere
+Kruse ist der Ansicht, daß die Rekrutierungsstatistik der europäischen Staaten, insbesondere auch diejenigen des deutschen Reiches  keineswegs geeignet ist, der Lehre eine Stütze zu verleihen. 	
+Im indischen Bombay sind am Morgen vier Bomben gleichzeitig explodiert. 
+am Morgen des Tages 
+die ersten 2 Jahre
+Mindestens 43 Menschen
+ungefähr 2 Franken
+höchstens zwei
+bis zu 7 Jahren
+Mindestens 43 Menschen sind bei vier Detonationen in der indischen Hafenstadt Bombay ums Leben gekommen
+Klassenlehrerin Susi Agethen
+Er hat für sein Konzept geworben.
+Kurz vor der offiziellen Präsentation seiner Reformvorschläge zur Rentenversicherung hat Kommissionspräsident Bert Rürup um Zustimmung für sein Konzept geworben.
+des Vaters Novelle
+des geistigen Vaters Verliebtheit
+des Vaters alte Jacke
+von Großbritanniens Premier Tony Blair
+Alastair Campbell, der wichtigste Berater von Großbritanniens Premier Tony Blair, hat seinen Rücktritt eingereicht.
+Schwedens Regierungschef Persson hat Frankreich, Deutschland und andere große EU-Länder wegen ihrer Haushaltspolitik scharf angegriffen
+Die EU-Kommission geht davon aus, dass die Gesamtverschuldung in der Eurozone dieses Jahr über drei Prozent liegen wird. 
+Johannes  Rau erklärte gestern zwar seinen Verzicht auf eine zweite Amtszeit, zu den Gründen hatte sich der Bundesprasident aber nicht geaußert
+In Anerkennung der großen Dienste, die das Feldjägerkorps geleistet hat, bleiben die Feldjägerbereitschaften
+Ich gehe, wohin ich will.
+Paul und Peter  gehen nach Hause.
+Paul und Peter, die immer dabei sind, gehen nach Hause.
+leistet die gleiche Dienste // "Dienste" cannot be a subject here (imperative problem)
+aller im Inland befindlichen Stücke //  adjectives can form a participle construction
+Der Dienst aller im Inland befindlichen Stücke, also auch der nicht zertifizierten wird zurzeit nur in Reichsmark geleistet.
+des von der Wiener errechneten Goldpreises zu leisten //  reference error in CSentence::CreateEnclosedNotStrongClause
+Auf Grund einer weiteren Verordnung (Goldschuldenerleichterungsverordnung) ist der Dienst // no single bracket between a subject and a predicate
+Der Dienst ist, unter Zugrundelegung zu leisten.  // enclosing infinitive clause into the main 
+Österreich habe dem deutschen Volk, zu dem es sich bekenne, Dienste geleistet. // solving clause border ambiguity for German complete nested clauses
+weder dem sudetendeutschen Volk noch der Kultur //  weder...noch
+mit oder ohne Waffe
+mit oder ohne Waffe herangezogen werden können  // using information about infinitive construction in CGerSentence::GetCountOfStrongRoots while building initial clauses
+in welchem Falle  // welcher as an adjective
+welche die relative Mehrheit // a determiner + a determined NP cannot build a new NP
+Hingegen erhält die Liste , welche die relative Mehrheit im ganzen Lande erhält, zwei Drittel aller Mandate. // "welcher" as  a relative pronoun
+Für auf Goldschillinge lautende Hypothekarschulden //  two prepositions as a participle construction starter
+Hingegen erhält die Liste (welche die relative Mehrheit im ganzen Lande erhält) zwei Drittel aller Mandate. // parenthesis for relative clauses
+es gebe keinen Platz für ein Organ, das entgegentreten wolle. // one should choose first a variant without infinitive ambiguity for a clause root
+bis zum Ende // a PP
+in bezug auf den Nachrichtenaustausch // a PP
+Wir haben  Dienst zu leisten // correct predicate in clauses with zu-infinitives
+für jene Schriftleiter // a PP
+Sie werden gewogen nach den Diensten, die sie dem Zwecke leisten. // analytical forms should prefer close connections
+Wer mithilft //  Wer as a subject
+Wer mithilft, die Armee zu einem vollendeten Schwert und Schild zu machen, leistet Dienst //  second pass of the syntax, after deleting finite homonym of "vollendeten"
+Beamter, Angestellter oder Arbeiter // PA2 can work as a noun
+Staatsangehörige können //  Noun (declined as adjectives) in an unpreceded plural nominative form
+an den Dienstort // a PP
+geleistet und sich bewährt haben. //  a simple case of coordinating members in a verb analytical form
+gehen oder kommen werden //  a simple case of coordinating members in a verb analytical form
+Um dem Ziele näherzukommen, die Angehörigen zu verschmelzen // a relative clause cannot be an infinitive clause
+jene, welche zur Gewalt schreiten, leisten den schlechtesten Dienst // "jene" un "welcher" as a noun (a relative antecedent and a subject)
+zusammen mit den übrigen //  an NP
+in den Vereinigten Staaten (5343 A) //  one NP
+Die RAF. hat, abgesehen von dem Zusammenwirken bei diesen Angriffen, der Armee besondere Dienste geleistet. // cannot enclose an empty relative clause at the end
+Ich bin der Mann, den das Parlament  zu tadeln hat für die allgemeine Art und Weise //  after predicate in a relative clause can be a PP
+die , mit einem guten Herzen // do not create here a Participlesatz
+die Besten // an NP 
+von einem oder zwei Kriegsgefangenen // a PP
+zwei , vier oder drei Kriegsgefangenen //  a NP 
+bis heute // a PP
+Die Erfindung leistet  , wie die Pfahlmuschelzüchter im Fachjargon heißen , bis heute ausgezeichnete Dienste . //  a clause conjunction  should have an appropriate part of speech (gKON) and not gPRP
+von 7175 Mill. Dollar // a PP
+1760 Mill. Dollar entfielen auf geleistete Dienste. //  "1760 Mill. Dollar" should be agreed with a predicate in plural
+die Staaten  und anderen Nationen  // "die"  is related to the all similar members, that's why  "anderen" is in weak declination 
+die dem deutschen Volke geleisteten großen Dienste // an adjective follows a participle construction
+Tito habe den Alliierten große Dienste geleistet, die abwartende Inaktivität von Mihailowitsch aber habe dem Feinde geholfen. // we should check word order in a relative sentence
+Jeder Mensch, ob Mann oder Frau, // an NP
+jeder würde eine Summe ausgezahlt geben. //  a Right Analytical Part should be at the end of a clause
+er konnte  sich endlich leisten, den Dienst zu quittieren // an enclosed infinitive sentence
+Zwar haben die Programme Fortschritte gemacht und können gute Dienste leisten .	  // after a clause can be conjunction ("haben-gemacht" should be united in the context)
+um 5 Uhr // a PP
+zu 40 % ( bisher 50 % , s . 479 O ) in Devisen geleistet-wird .  //  should be one clause here
+laut welchem // a PP
+auf die während des Krieges durch die holländische Handelsmarine geleisteten Dienste  // do not build a participle construction if it is "deep" in groups ("holländische")
+Diese Dienste sollen geleistet werden.  // "sollen" should be the predicate
+in jeder Weise // a PP
+dem auswärtigen Dienst aus // no trennbare Praefix  here
+für tatsächlich geleistete Dienste // a PP: a VP can be inside of a NP 
+Dienst du? // heuristic disambiguation using word Register (the verb interpretaion should not be deleted)
+Sie werden für die technischen Dienste, die jetzt geleistet werden. // here we cannot create an analytical form "werden-werden-geleistet"
+Ich kann zu Hause oder im Office bleiben // Clause rule for modal verbs
+Ich werde  zu Hause oder im Office bleiben können. // Clause rule for modal verbs
+Westberliner Senat fordert Rotes Kreuz auf, gute Dienste zur Erleichterung des Verkehrs zwischen Ost- und Westberlin zu leisten // do not divide clause by German divided compounds
+Anzahl von Bürgern // both substantive homonyms of "Bürgern" satisfy the group condition
+Ihr Vorschlag leistete der Sache der sozialistischen Länder, der internationalen kommunistischen und Arbeiterparteien einen guten Dienst... // uniting a false relaative clause, if it is ath the end of the sentence
+Dienste, wie Ersatzteile, // a NP
+Er lief, weil er den Mann gesehen hatte, den er so   sehr fürchtete. // a relative sentence whose antecedent is across the clause predicate
+Die israelische Regierung beschließt, die durch die israelische Militärverwaltung geleisteten öffentlichen Dienste auf die gleiche Stufe zu stellen // we should not delete homonyms from a relative word for the second pass, since the second pass can change clause structure
+Dadurch werde dem echten Anliegen ein Dienst geleistet, Rassismus und Neokolonialismus zu verbannen. //  we should not build here build a coordination NP  "ein Dienst, Rassismus und Neokolonialismus"
+Dienste, die wichtig sind, die aber nicht unbedingt vom Staat geleistet werden müssen,  // coordinated relative clauses
+Da Marge bleibe, um diese Dienste leisten zu können // delete all clause roots except infinitive if teh clause is included as "um-zu"
+weniger Dienste  // an NP with numeral adverb
+mehr oder weniger unabhängige Regierungen  // an NP with numeral adverb
+mit  viel Geduld // an NP with numeral adverb
+für eine mehr oder weniger große Gruppe // an NP with numeral adverb
+weniger intelligente Nation // an NP with numeral adverb
+für die Briten Dienste // no Einwohner NP here (Einwohner  should be with "er" postfix)
+der denkbar größte Dienst // a NP 
+Personal, das in Ägypten Dienst leistet // gap in morphology 
+uns und unserem sozialistischen Staat // an NP_SIMIL
+wäre,  angehe, habe geleistet // the closer right analyytical part to an auxiliary verb , the better
+Der _ Vertreter // ignore "_"
+Eltern , Lehrer , der große Bruder // NP_SIMIL without conjunction but with at least three members
+Österreich kann 'als Mittler und ehrlicher Makler' wenn unabhangig erhalten, Deutschland unschatzbare Dienste leisten //  one clause ("'" is not a clause delimeter)
+und die die dringend benötigten Dienste  leisten könnten // no participle construction here
+der sich verspätende Zug // a participle construction
+Die weiteren  , hier genannten Fragmente //  no participle construction here
+Das 1780 von Robert Adams erbaute Gebäude // a participle construction
+auf die wertvollen Dienste , welche die regionalen Kommissionen leisten können .  //  two possible clauses in the relative subclause
+für die großen Dienste und die uneigennützige Hilfe aus, die ihnen das vietnamesische Korps geleistet habe. //  "das Korps" can be a subject in the subclause
+der denkbar größte Dienst wird  geleistet werden. //  Passiv Futurum I
+Die Welt muß anerkennen, daß ihr Österreich einen großen Dienst geleistet und ungeheure Opfer auf sich genommen hat. // common auxiliary verb "hat"
+die bezüglichen Zahlungen //  bezüglich is an adjective
+Der Dienst ist , sofern die bezüglichen Zahlungen fällig werden, zu leisten. // in rule RuleForInfinitive we prefer previous clauses with "sein" as a  predicate
+Dienste leisten // do not build here a subject, since "leisten" is a transitive verb
+Haus und Mutter , Vater // no NP_SIMIL here
+Ich weiß, daß du kommst. // building a subject if the object is a subclause
+Es gebe eine Reihe von Kunden , die AOL nur wegen der fehlenden Möglichkeit, Bankgeschäfte zu tätigen , nicht abonniert hatten // Infinitive sentence can be enclosed into an empty clause, but it should be separated by a comma from this empty clause
+Ich mache das, es ist  zu leisten. // no enclosement here
+Bei den Banken trete die langfristige Kreditgeschäfte, falls solide Grundsätze beachtet wurden, zurück. // "zurück" should be in the main clause

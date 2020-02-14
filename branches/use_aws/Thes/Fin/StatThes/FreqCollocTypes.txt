@@ -1,0 +1,159 @@
+FreqCollocTypeId;Length;AtomGroups;Relations;Examples;Enabled;LoadTextForm;LanguageId;Groups;
+1#2#"П;С"#"с_опр(2,1)"#"каменный мост"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);"#
+2#2#"ПРИЧАСТИЕ; С"#"с_опр(2,1)"#"авансированный ресурс"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);"#
+3#2#"С; С рд"#"упр(1,2)"#"Дом Художника"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,2);"#
+4#3#"П;П;С"#"с_опр(3,1);с_опр(3,2)"#"новый большой дом"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,3);"#
+5#3#"С;ПРЕДЛ;С"#"упр(1,2); упр(2,3)"#"налог с оборота"#TRUE#FALSE#1#"ПГ(2,3);ИГ(1,3);"#
+6#2#"С;С тв"#"упр(1,2)"#"аванс наличными"#TRUE#FALSE#1#"ИГ(1,2);"#
+8#4#"С;ПРЕДЛ;П пр;С пр"#"упр(1,2); упр(2,4); с_опр(4,3)"#"авуары в иностранной валюте"#TRUE#FALSE#1#"ИГ(1,4);ПГ(2,4);ПРИЛ_СУЩ(3,4);"#
+9#4#"С; С рд; СОЮЗ; С рд"#"упр(1,2); упр(1,4); упр (3,2); упр(3,4)"#"анализ доходов и расходов"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,4);ОДНОР_ИГ(2,4);"#
+10#3#"С;П рд;С рд"#"упр(1,3); с_опр(3,2)"#"система международных расчетов"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,3);ПРИЛ_СУЩ(2,3);"#
+11#3#"Н;ПРИЧАСТИЕ;С"#"упр(2,1); с_опр(3,2)"#"автоматически возобновляемый аккредитив"#TRUE#FALSE#1#"НАРЕЧ_ГЛАГОЛ(1,2);ПРИЛ_СУЩ(1,3);"#
+12#6#"С;ПРЕДЛ;С дт;П рд;С рд;С рд"#"упр(1,2);упр(2,3); упр(3,5); упр(5,6); с_опр(5,4)"#"агент по заключению новых договоров страхования"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ГЕНИТ_ИГ(4, 6);ГЕНИТ_ИГ(3,6);ИГ(1,6);ПГ(2,6);"#
+13#4#"С;С рд;ПРЕДЛ;С рд"#"упр(1,2); упр(1,3); упр(3,4)"#"акцептование тратты без оговорок"#TRUE#FALSE#1#"ПГ(3,4);ГЕНИТ_ИГ(1,2);ИГ(1,4);"#
+15#5#"П;С;С рд;П рд;С рд"#"с_опр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"амортизационное списание стоимости основного капитала"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ПРИЛ_СУЩ(4,5);ГЕНИТ_ИГ(3,5);ГЕНИТ_ИГ(1,5)"#
+16#1#"С"#""#"абандон"#TRUE#FALSE#1#""#
+17#4#"С;ПРЕДЛ;С пр;С рд"#"упр(1,2); упр(2,3); упр(3,4)"#"авизо об открытии аккредитива"#TRUE#FALSE#1#"ГЕНИТ_ИГ(3,4);ПГ(2,4);ИГ(1,4)"#
+18#3#"С;С рд;С дт"#"упр(1,2); упр(1,3)"#"авизование аккредитива бенефициару"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,2);ИГ(1,3)"#
+19#7#"С;ПРЕДЛ;С дт;СОЮЗ;С дт;П рд;С рд"#"упр(1,2); упр(2,3); упр(2,5); упр(4,3); упр(4,5); упр(3,7); упр(3,7); с_опр(6,7)"#"агент по покупке и продаже иностранной валюты"#TRUE#FALSE#1#"ОДНОР_ИГ(3,5);ПРИЛ_СУЩ(6,7);ГЕНИТ_ИГ(3,7);ПГ(2,7);ИГ(1,7)"#
+21#4#"С;ПРЕДЛ;С дт;С рд"#"упр(1,2); упр(2,3); упр(3,4)"#"агентство по изучению рынка"#TRUE#FALSE#1#"ГЕНИТ_ИГ(3,4);ПГ(2,4);ИГ(1,4);"#
+22#5#"С;ПРЕДЛ;П тв;С тв;С рд"#"упр(1,2); упр(2,4); с_опр(4,3); упр(4,5)"#"агентство с полным циклом цслуг"#TRUE#FALSE#1#"ГЕНИТ_ИГ(4,5);ПРИЛ_СУЩ(3,5);ПГ(2,5);ИГ(1,5);"#
+23#4#"С;ПРЕДЛ;С тв;С рд"#"упр(1,2); упр(2,3); упр(3,4)"#"аккредитив с гарантией оплаты"#TRUE#FALSE#1#"ГЕНИТ_ИГ(3,4);ПГ(2,4);ИГ(1,4);"#
+25#5#"С;ПРИЧАСТИЕ;С рд;ЧИСЛ-П тв;С тв"#"упр(1,3); упр(1,5); с_опр(3,2); с_опр(5,4)"#"акцептование опротестованной тратты третьим лицом"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5); ИГ(1,5);ПРИЛ_СУЩ(2,3);ГЕНИТ_ИГ(1,3);"#
+26#4#"С;С рд;ПРЕДЛ;С тв"#"упр(1,2); упр(2,3); упр(3,4)"#"акцептование тратты с оговорками"#TRUE#FALSE#1#"ПГ(3,4);ГЕНИТ_ИГ(1,2);ИГ(1,4);"#
+27#4#"ПРИЧАСТИЕ;С;ПРЕДЛ;С рд"#"с_опр(2,1); упр(2,3); упр(3,4)"#"акцептованный вексель без покрытия"#TRUE#FALSE#1#"ПГ(3,4);ПРИЛ_СУЩ(1,2);ИГ(1,4);"#
+30#4#"П;С;П рд;С рд"#"с_опр(2,1); упр(2,4); с_опр(4,3)"#"акционерное общество открытого типа"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ИГ(1,4);ПРИЛ_СУЩ(3,4);"#
+31#4#"С;ПРЕДЛ;П;С тв"#"упр(1,2); упр(2,4); с_опр(4,3)"#"агент с исключительными правами"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,4);ПГ(2,4);ИГ(1,4);"#
+33#5#"ПРИЧАСТИЕ;С;ПРЕДЛ;П пр;С пр"#"с_опр(2,1); упр(2,3); упр(2,5); с_опр(5,4)"#"акцептованный вексель во внутреннем обороте"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ПГ(3,5);ИГ(1,5);ПРИЛ_СУЩ(4,5);"#
+34#3#"ПРИЧАСТИЕ;П;С"#"с_опр(3,1); с_опр(3,2)"#"акцептованный торговый вексель"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,3);"#
+35#4#"С;ПРЕДЛ;П рд;С рд"#"упр(1,2); упр(2,4); с_опр(4,3)"#"акция без нарицательной цены"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,4);ПГ(2,4);ИГ(1,4);"#
+36#4#"С;П рд;С рд;С рд"#"упр(1,3); с_опр(3,2); упр(3,4)"#"анализ денежного оборота компании"#TRUE#FALSE#1#"ПРИЛ_СУЩ(2,3);ГЕНИТ_ИГ(2,4);ГЕНИТ_ИГ(1,4);"#
+37#4#"С;С рд;П рд;С рд"#"упр(1,2); упр(2,4); с_опр(4,3)"#"анализ исполнения финансового плана"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,4);ГЕНИТ_ИГ(2,4);ГЕНИТ_ИГ(1,4);"#
+38#4#"П;С;ПРЕДЛ;С тв"#"с_опр(2,1); упр(2,3); упр(3,4)"#"арбитражные операции с акциями"#TRUE#FALSE#1#"ПГ(3,4);ПРИЛ_СУЩ(1,2);ИГ(1,4);"#
+39#5#"П;С;ПРЕДЛ;П тв;С тв"#"с_опр(2,1); упр(2,3); упр(2,5); с_опр(5,4)"#"арбитражные операции с ценными бумагами"#TRUE#FALSE#1#"ПГ(3,5);ПРИЛ_СУЩ(1,2);ИГ(1,5);ПРИЛ_СУЩ(4,5);"#
+40#5#"С;ПРЕДЛ;С вн;СОЮЗ;С вн"#"упр(1,2); упр(2,3); упр(2,5)"#"ассигнования на закупки и услуги"#TRUE#FALSE#1#"ОДНОР_ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+41#4#"С;ПРЕДЛ;С вн;С рд"#"упр(1,2); упр(2,3); упр(3,4);"#"ассигнования на статьи расходов"#TRUE#FALSE#1#"ГЕНИТ_ИГ(3,4);ПГ(2,4);ИГ(1,4);"#
+42#5#"С;С рд;С рд;СОЮЗ;С рд"#"упр(1,2); упр(2,3); упр(4,3); упр(4,5); упр(2,5)"#"баланс движения капиталов и средств"#TRUE#FALSE#1#"ОДНОР_ИГ(3,5);ГЕНИТ_ИГ(2,5);ГЕНИТ_ИГ(1,5);"#
+43#3#"П;С;С рд"#"с_опр(2,1); упр(2,3)"#"балансовая стоимость активов"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ГЕНИТ_ИГ(1,3);"#
+45#5#"С;ПРЕДЛ;ПРИЧАСТИЕ тв; С тв;С рд"#"упр(1,2); упр(2,4); с_опр(4,3); упр(4,5)"#"банк с разветвленной системой филиалов"#TRUE#FALSE#1#"ГЕНИТ_ИГ(4,5);ПРИЛ_СУЩ(3,5);ПГ(2,5);ИГ(1,5);"#
+48#5#"П;С;ПРЕДЛ;С пр;С рд"#"с_опр(2,1); упр(2,3); упр(3,4); упр(4,5)"#"банковский счет в системе жиросчетов"#TRUE#FALSE#1#"ГЕНИТ_ИГ(4,5);ПГ(3,5);ПРИЛ_СУЩ(1,2);ИГ(1,5);"#
+49#5#"С;ПРЕДЛ;С рд;П рд;С рд"#"упр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"бланк для сверки депозитного счета"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ГЕНИТ_ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+50#5#"С;ПРЕДЛ;П дт;П дт;С дт"#"упр(1,2); упр(2,5); с_опр(5,3); с_опр(5,4)"#"брокер по инвестиционным ценным бумагам"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,5);ПГ(2,5);ИГ(1,5);"#
+51#5#"С;ПРЕДЛ;С дт;ПРЕДЛ;С тв"#"упр(1,2); упр(2,3); упр(3,4); упр(4,5)"#"брокер по операциям с облигациями"#TRUE#FALSE#1#"ПГ(2,3);ПГ(4,5);ИГ(1,5);"#
+53#4#"С;ПРЕДЛ;П дт;С дт"#"упр(1,2); упр(2,4); с_опр(4,3)"#"брокер по фьючерсным сделкам"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,4);ПГ(2,4);ИГ(1,4);"#
+55#5#"С;ПРЕДЛ;С дт;С рд;С рд"#"упр(1,2); упр(2,3); упр(3,4); упр(4,5)"#"бухгалтер по учету издержек производства"#TRUE#FALSE#1#"ГЕНИТ_ИГ(4,5);ГЕНИТ_ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+60#2#"С;С дт"#"упр(1,2)"#"вознаграждение аукционисту"#TRUE#FALSE#1#"ИГ(1,2);"#
+62#4#"С;ПРЕДЛ;П вн;С вн"#"упр(1,2); упр(2,4); с_опр(4,3)"#"выплата за сверхурочную работу"#TRUE#FALSE#1#"ПГ(2,4);ПРИЛ_СУЩ(3,4);ИГ(1,4);"#
+63#4#"П;С;ПРЕДЛ;С дт"#"с_опр(2,1); упр(2,3); упр(3,4)"#"гербовый сбор по векселям"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ПГ(3,4);ИГ(1,4);"#
+64#5#"П;С;ПРЕДЛ;П дт;С дт"#"с_опр(2,1); упр(2,3); упр(3,5); с_опр(5,4)"#"гербовый сбор по ценным бумагам"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ПРИЛ_СУЩ(4,5);ПГ(3,5);ИГ(1,5);"#
+68#6#"С;ПРЕДЛ;С пр;ПРЕДЛ;С тв;С рд"#"упр(1,2); упр(2,3); упр(3,4); упр(4,5); упр(5,6)"#"договор о продаже с рассрочкой платежа"#TRUE#FALSE#1#"ГЕНИТ_ИГ(5,6);ПГ(4,6);ПГ(2,3);ИГ(1,3);ИГ(1,6);"#
+70#6#"С;ПРЕДЛ;С дт;ПРЕДЛ;С тв; С рд"#"упр(1,2); упр(2,3); упр(1,4); упр(4,5); упр(5,6)"#"задолженность по ссудам с рассрочкой платежа"#TRUE#FALSE#1#"ГЕНИТ_ИГ(5,6);ПГ(4,6);ПГ(2,3);ИГ(1,3);ИГ(1,6);"#
+71#3#"NOUN;PREP;NOUN"#"subord(1,2); subord(2,3)"#"Ministry of Finance"#TRUE#FALSE#2#"NP_right(1,3);PP(1,2);"#
+72#2#"NOUN;NOUN"#"parat(2,1)"#"advance bill"#TRUE#FALSE#2#"NP_left(1,2);"#
+73#2#"VERB pp;NOUN"#"parat(2,1)"#"advanced capital"#TRUE#FALSE#2#"ADJ_NOUN(1,2);"#
+75#3#"ADJECTIVE;NOUN;NOUN"#"parat(2,1); parat(3,2)"#"foreign exchange holdings"#TRUE#FALSE#2#"ADJ_NOUN(1,2);NP_left(1,3);"#
+76#3#"NOUN;NOUN;NOUN"#"parat(3,1); parat(3,2)"#"income-expenditure analysis"#TRUE#FALSE#2#"NP_left(1,2);NP_left(1,3);"#
+77#3#"ADJECTIVE;ADJECTIVE;NOUN"#"parat(3,1); parat(3,2)"#"social financing backing"#TRUE#FALSE#2#"ADJ_NOUN(1,3);"#
+78#4#"NOUN;PREP;ADJECTIVE;NOUN"#"subord(1,2); subord(2,4); parat(4,3)"#"system of international payments"#TRUE#FALSE#2#"ADJ_NOUN(3,4);PP(2,4);NP_right(1,4);"#
+79#2#"VERB ing;NOUN"#"parat(2,1)"#"revolving credit"#TRUE#FALSE#2#"ADJ_NOUN(1,2);"#
+80#3#"NOUN;ADJECTIVE;NOUN"#"parat(3,1); parat(3,2)"#"state financing backing"#TRUE#FALSE#2#"ADJ_NOUN(2,3);NP_left(1,3);"#
+81#2#"ADJECTIVE;NOUN"#"parat(2,1)"#"domestic acceptance"#TRUE#FALSE#2#"ADJ_NOUN(1,2);"#
+83#1#"NOUN"#""#"abandonment"#TRUE#FALSE#2#""#
+85#4#"VERB pp;ADJECTIVE;NOUN;NOUN"#"parat(4,1); parat(4,2); parat(4,3)"#"closed joint stock company"#TRUE#FALSE#2#"ADJ_NOUN(1,3);NP_left(1,4);"#
+86#5#"NOUN;PREP;ADJECTIVE;NOUN;NOUN"#"subord(1,2); subord(2,5); parat(5,3); parat(5,4)"#"analysis of corporate cash flows"#TRUE#FALSE#2#"ADJ_NOUN(3,4);PP(2,4);NP_right(1,4);NP_left(1,5);"#
+87#4#"NOUN;CONJ;NOUN;NOUN"#"subord(2,1); subord(2,3); parat(4,1); parat(4,3)"#"capital and credit balance"#TRUE#FALSE#2#"SIMIL_NP(1,3);NP_left(1,4);"#
+88#4#"ADJECTIVE;NOUN;PREP;NOUN"#"parat(2,1); subord(2,3); subord(3,4)"#"mutual non-payment of enterprises"#TRUE#FALSE#2#"ADJ_NOUN(1,2);PP(3,4);NP_right(1,4);"#
+92#8#"П;С;С рд;С рд;СОЮЗ;С рд;ПРЕДЛ;С пр"#"с_опр(2,1); упр(2,3); упр(3,4); упр(3,6); упр(4,7); упр(6,7); упр(7,8)"#"кассовый метод учета доходов и издержек на счетах"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ГЕНИТ_ИГ(3,6);ИГ(3,8);ОДНОР_ИГ(4,6); ПГ(7,8);ГЕНИТ_ИГ(1,8);"#
+93#6#"С;ПРЕДЛ;С вн;ПРЕДЛ;П тв;С тв"#"упр(1,2); упр(2,3); упр(3,4); упр(4,6); с_опр(6,5)"#"комиссия за операции с иностранной валютой"#TRUE#FALSE#1#"ПРИЛ_СУЩ(5,6);ПГ(4,6);ИГ(3,6);ПГ(2,6);ИГ(1,6);"#
+94#5#"С;ПРЕДЛ;С тв;ПРЕДЛ;С вн"#"упр(1,2); упр(2,3); упр(3,4); упр(4,5)"#"кредит с погашением в рассрочку"#TRUE#FALSE#1#"ПГ(4,5);ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+95#5#"П;С;ПРЕДЛ;П вн;С вн"#"с_опр(2,1); упр(2,3); упр(3,5); с_опр(5,4)"#"крупный заемщик на длительные сроки"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ПРИЛ_СУЩ(4,5);ПГ(3,5);ИГ(1,5);"#
+96#4#"С;П рд;П рд;С рд"#"упр(1,4); с_опр(4,2); с_опр(4,3)"#"Министерство внешних экономических связей"#TRUE#FALSE#1#"ПРИЛ_СУЩ(2,4);ГЕНИТ_ИГ(1,4);"#
+98#5#"С;ПРЕДЛ;П вн;П вн; С вн"#"упр(1,2); упр(2,5); с_опр(5,3); с_опр(5,4)"#"налог на наследственное недвижимое имущество"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,5);ПГ(2,5);ИГ(1,5);"#
+99#5#"С;ПРЕДЛ;С дт;СОЮЗ;С дт"#"упр(1,2); упр(2,3); упр(2,5)"#"пособие по беременности и родам"#TRUE#FALSE#1#"ОДНОР_ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+100#4#"С;С рд;ПРЕДЛ;С вн"#"упр(1,2); упр(1,3); упр(3,4)"#"продажа товара в кредит"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,2);ПГ(3,4);ИГ(1,4);"#
+101#4#"П;С;С рд;С рд"#"с_опр(2,1); упр(2,3); упр(3,4)"#"сдельная форма оплаты труда"#TRUE#FALSE#1#"ГЕНИТ_ИГ(3,4);ГЕНИТ_ИГ(2,4);ПРИЛ_СУЩ(1,4);"#
+102#4#"С;ПРЕДЛ;С вн;С тв"#"упр(1,2); упр(2,3); упр(3,4)"#"скидка за платеж наличными"#TRUE#FALSE#1#"ИГ(3,4);ПГ(2,4);ИГ(1,4);"#
+103#4#"С;ПРЕДЛ;ПРИЧАСТИЕ;С вн"#"упр(1,2); упр(2,4); с_опр(4,3)"#"скидка на непредвиденные расходы"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,4);ПГ(2,4);ИГ(1,4);"#
+104#3#"С;П дт;С дт"#"упр(1,3); с_опр(3,2)"#"скидка розничным торговцам"#TRUE#FALSE#1#"ПРИЛ_СУЩ(2,3);ИГ(1,3);"#
+105#5#"С;ПРЕДЛ;С пр;ПРЕДЛ;С вн"#"упр(1,2); упр(2,3); упр(3,4); упр(4,5)"#"соглашение о продаже в кредит"#TRUE#FALSE#1#"ПГ(4,5);ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+107#5#"С;П рд;С рд;СОЮЗ;С рд"#"упр(1,3); упр(1,5); упр(4,3); упр(4,5); с_опр(3,2); с_опр(5,2)"#"счет государственных доходов и расходов"#TRUE#FALSE#1#"ОДНОР_ИГ(3,5);ПРИЛ_СУЩ(2,5);ГЕНИТ_ИГ(1,5);"#
+109#4#"С;С рд;С рд;С рд"#"упр(1,2); упр(2,3); упр(3,4)"#"член совета директоров банка"#TRUE#FALSE#1#"ГЕНИТ_ИГ(3,4);ГЕНИТ_ИГ(2,4);ГЕНИТ_ИГ(1,4);"#
+110#4#"С;ПРЕДЛ;С рд;С рд"#"упр(1,2); упр(2,3); упр(3,4)"#"доходы до вычета налогов"#TRUE#FALSE#1#"ПГ(2,4);ИГ(1,4);ГЕНИТ_ИГ(3,4);"#
+111#4#"П;С;ПРЕДЛ;С"#"с_опр(2,1); упр(2,3); упр(3,4)"#"комиссионный сбор за продажу"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,2);ПГ(1,4);ИГ(1,4);"#
+112#4#"NOUN;ADJECTIVE;PREP;NOUN"#"subord(1,2); subord(2,3); subord(3,4)"#"advance free of interest"#TRUE#FALSE#2#"ADJ_NOUN(1,2);PP(3,4);NP_right(1,4);"#
+113#3#"NOUN;VERB pp;NOUN"#"subord(1,2); parat(3,2)"#"budget-financed organization"#TRUE#FALSE#2#"NP_left(1,3);"#
+114#6#"NOUN;NOUN;PREP;NOUN;PREP;NOUN"#"parat(2,1); subord(2,3); subord(3,4); subord(4,5); subord(4,5)"#"stamp duty on bills of exchange"#TRUE#FALSE#2#"NP_left(1,2);PP(5,6);NP_right(4,6);PP(3,6);NP_right(1,6);"#
+115#4#"NOUN;NOUN;PREP;NOUN"#"parat(2,1); subord(2,3); subord(3,4)"#"stamp duty on securities"#TRUE#FALSE#2#"NP_left(1,2);PP(3,4);NP_right(1,4);"#
+116#4#"ADJECTIVE;NOUN;NOUN;NOUN"#"parat(4,1); parat(4,2); parat(4,3)"#"domestic government bond issue"#TRUE#FALSE#2#"ADJ_NOUN(1,4);NP_left(2,3);NP_left(2,4);"#
+117#5#"NOUN;PREP;NOUN;CONJ;NOUN"#"subord(1,2); subord(2,3); subord(2,5)"#"turnover of money and goods"#TRUE#FALSE#2#"NP_right(1,5);PP(2,5);SIMIL_NP(3,5);"#
+118#5#"ADJECTIVE;CONJ;ADJECTIVE;NOUN;NOUN;"#"subord(2,1); subord(2,3); parat(5,1); subord(3,4); parat(5,4)"#"gold and foreign exchange reserve"#TRUE#FALSE#2#"SIMIL_ADJ(1,3);NP_left(4,5);ADJ_NOUN(1,5);"#
+119#4#"VERB ing;NOUN;PREP;NOUN"#"parat(2,1); subord(2,3); subord(3,4)"#"controlling block of shares"#TRUE#FALSE#2#"ADJ_NOUN(1,2);PP(3,4);NP_right(1,4);"#
+121#4#"NOUN;PREP;NOUN;NOUN"#"subord(1,2); subord(2,4); parat(4,3)"#"rise in exchange rate"#TRUE#FALSE#2#"NP_right(1,4);PP(2,4);NP_left(3,4);"#
+123#4#"VERB ing;PREP;NOUN;NOUN"#"subord(1,2); subord(2,4); parat(4,3)"#"checking of cash amount"#TRUE#FALSE#2#"NP_right(1,4);PP(2,4);NP_left(3,4);"#
+124#3#"ADVERB;ADJECTIVE;NOUN"#"subord(1,2); parat(3,2)"#"freely convertible currency"#TRUE#FALSE#2#"MODIF_ADJ(1,2);ADJ_NOUN(1,3);"#
+125#4#"NOUN;NOUN;NOUN;NOUN"#"parat(2,1); parat(3,2); parat(4,3)"#"personal income tax allowance"#TRUE#FALSE#2#"NP_left(1,2);NP_left(1,3);NP_left(1,4);"#
+126#5#"NOUN;NOUN;CONJ;NOUN;NOUN"#"parat(2,1); parat(5,4)"#"government receipts and expenditure account"#TRUE#FALSE#2#"NP_left(1,2);NP_left(4,5);SIMIL_NP(1,5);"#
+127#6#"ADJECTIVE;NOUN;NOUN;PREP;NOUN;NOUN"#"parat(3,1); parat(3,2); subord(3,4); subord(4,6); parat(6,5)"#"Federal Council Chamber of budget management"#TRUE#FALSE#2#"ADJ_NOUN(1,2);NP_left(1,3);PP(4,6);NP_left(5,6);"#
+128#4#"VERB pp;NOUN;ADJECTIVE;NOUN"#"parat(2,1); parat(4,2); parat(4,3)"#"fixed interest financial asset"#TRUE#FALSE#2#"ADJ_NOUN(1,2);ADJ_NOUN(3,4);NP_left(1,4);"#
+130#2#"NOUN poss;NOUN;"#"parat(2,1); parat(3,2)"#"agent's commission"#TRUE#FALSE#2#"NP_left(1,2);"#
+131#1#"VERB ing"#""#"advancing"#TRUE#FALSE#2#""#
+132#3#"VERB ing;NOUN;NOUN"#"parat(3,1); parat(3,2)"#"costing record chart"#TRUE#FALSE#2#"ADJ_NOUN(1,2);NP_left(1,3);"#
+133#2#"ADJECTIVE;VERB ing"#"parat(2,1)"#"commercial discounting"#TRUE#FALSE#2#"ADJ_NOUN(1,2);"#
+134#3#"NOUN poss;NOUN;NOUN;"#"parat(2,1); parat(4,2); parat(4,3)"#"worksmen's compensation benefit"#TRUE#FALSE#2#"NP_left(1,2);NP_left(1,3);"#
+135#2#"NOUN;VERB ing"#"parat(2,1)"#"program budgeting"#TRUE#FALSE#2#"NP_left(1,2);"#
+136#6#"С;ПРЕДЛ;С пр;С рд;ПРЕДЛ;С вн"#"упр(1,2); упр(2,3); упр(3,4), упр(3,5); упр(5,6)"#"заявка о допуске акций на биржу"#TRUE#FALSE#1#"ПГ(2,6);ГЕНИТ_ИГ(3,4);ПГ(5,6);ИГ(1,6);ИГ(3,6);"#
+137#2#"С;П дт"#"упр(1,2)"#"пособие престарелым"#TRUE#FALSE#1#"ИГ(1,2);"#
+138#5#"П;С;С рд;СОЮЗ;С рд"#"с_опр(2,1); упр(2,3); упр(4,3); упр(4,5); упр(2,5)"#"текущие статьи доходов и расходов"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,5);ПРИЛ_СУЩ(1,2);ОДНОР_ИГ(3,5);"#
+139#5#"NOUN;PREP;ADJECTIVE;ADJECTIVE;NOUN"#"subord(1,2); subord(2,5); parat(5,3); parat(5,4)"#"Ministry of Foreign Economical Relations"#TRUE#FALSE#2#"NP_right(1,5);PP(2,5);ADJ_NOUN(3,5);"#
+140#3#"PREP;NOUN;NOUN"#"parat(2,1); parat(3,2)"#"per capita income"#TRUE#FALSE#2#"NP_left(2,3);PP(1,3);"#
+141#4#"П;П;П;С"#"с_опр(4,1); с_опр(4,2); с_опр(4,3)"#"срочные правительственные процентные бумаги"#TRUE#FALSE#1#"ПРИЛ_СУЩ(1,4);"#
+142#3#"С;П тв;С тв"#"упр(1,3); с_опр(3,2)"#"управление инвестиционными портфелями"#TRUE#FALSE#1#"ПРИЛ_СУЩ(2,3);ИГ(1,3);"#
+143#5#"С;ПРЕДЛ;С вн;П рд;С рд"#"упр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"лицензия на совершение банковских операций"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ГЕНИТ_ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+144#5#"С;СОЮЗ;С;П рд;С рд"#"упр(2,1); упр(2,3); упр(1,5); упр(3,5); с_опр(5,4)"#"правила и стандарты бухгалтерского учета"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,5);ОДНОР_ИГ(1,3);ПРИЛ_СУЩ(4,5);"#
+145#3#"С;С рд;С рд"#"упр(1,2); упр(2,3)"#"угроза девальвации рубля"#TRUE#FALSE#1#"ГЕНИТ_ИГ(1,3);"#
+147#3#"С;ПРИЧАСТИЕ рд;С рд"#"упр(1,3); с_опр(3,2)"#"введение вмененного налога"#TRUE#FALSE#1#"ПРИЛ_СУЩ(2,3);ГЕНИТ_ИГ(1,3);"#
+148#5#"С;С рд;ПРЕДЛ;П дт;С дт"#"упр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"погашение долга по заработной плате"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ПГ(3,5);ГЕНИТ_ИГ(1,5);"#
+150#5#"С;ПРЕДЛ;С пр;П рд;С рд"#"упр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"указание о лицензировании банковской деятельности"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ГЕНИТ_ИГ(3,5);ПГ(2,5);ИГ(1,5);"#
+151#7#"С;П рд;С рд;ПРЕДЛ;С пр;П рд;С рд"#"упр(1,3); с_опр(3,2); упр(3,4); упр(4,5); упр(5,7); с_опр(7,6)"#"система валютных расчетов в режиме реального времени"#TRUE#FALSE#1#"ПРИЛ_СУЩ(6,7);ПГ(4,7);ГЕНИТ_ИГ(5,7);ПРИЛ_СУЩ(2,3);ИГ(2,7);ГЕНИТ_ИГ(1,7);"#
+152#6#"С;П рд;С рд;ПРЕДЛ;П пр;С пр"#"упр(1,3); с_опр(3,2); упр(1,4); упр(4,6); с_опр(6,5)"#"размещение ценных бумаг на международном рынке"#TRUE#FALSE#1#"ПРИЛ_СУЩ(5,6);ПГ(4,6);ПРИЛ_СУЩ(2,3);ГЕНИТ_ИГ(1,3);ИГ(1,6);"#
+153#6#"С;С рд;ПРЕДЛ;С рд;ПРЕДЛ;С пр"#"упр(1,2); упр(2,3); упр(3,4); упр(4,5); упр(5,6)"#"сумма задатка для участия в конкурсе"#TRUE#FALSE#1#"ПГ(5,6);ИГ(4,6);ПГ(3,6);ИГ(2,6);ГЕНИТ_ИГ(1,6);"#
+154#5#"С;ПРЕДЛ;П пр;П пр;С пр"#"упр(1,2); упр(2,5); с_опр(5,3); с_опр(5,4)"#"операции на внутреннем валютном рынке"#TRUE#FALSE#1#"ПРИЛ_СУЩ(3,5);ПГ(2,5);ИГ(1,5);"#
+156#5#"С;С рд;С рд;П рд;С рд"#"упр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"индекс цен производителей промышленной продукции"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ГЕНИТ_ИГ(1,5);"#
+157#5#"С;С рд;ПРЕДЛ;П вн;С вн"#"упр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"обращение взыскания на денежные средства"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ПГ(3,5);ГЕНИТ_ИГ(1,5);"#
+159#6#"П;С;ПРЕДЛ;С дт;ПРЕДЛ;С пр"#"с_опр(2,1); упр(2,3); упр(3,4); упр(4,5); упр(5,6)"#"федеральная служба по делам о несостоятельности"#TRUE#FALSE#1#"ПГ(5,6);ИГ(4,6);ПГ(3,6);ПРИЛ_СУЩ(1,2);ИГ(1,6);"#
+160#5#"NOUN;PREP;NOUN;VERB ing;NOUN"#"subord(1,2); subord(2,5); parat(5,3); parat(5,4)"#"loan against interest-bearing securities"#TRUE#FALSE#2#"NP_right(1,5);PP(2,5);ADJ_NOUN(3,5);"#
+161#4#"NOUN poss;ADJECTIVE;ADJECTIVE;NOUN;"#"parat(2,1); parat(5,3); parat(5,4)"#"government's uniform monetary policy"#TRUE#FALSE#2#"ADJ_NOUN(2,4);NP_left(1,4);"#
+162#4#"VERB pp;NOUN;NOUN;NOUN"#"parat(4,1); parat(4,2); parat(4,3)"#"organised government securities market"#TRUE#FALSE#2#"NP_left(3,4);NP_left(2,4);ADJ_NOUN(1,4);"#
+164#4#"NOUN;NOUN;CONJ;NOUN"#"parat(2,1); subord(3,2); subord(3,4); parat(4,1)"#"accounting rules and standards"#TRUE#FALSE#2#"SIMIL_NP(2,4);NP_left(1,4);"#
+165#5#"NOUN;PREP;NOUN;PREP;NOUN"#"subord(1,2); subord(2,3); subord(3,4); subord(4,5)"#"tender for stake of company"#TRUE#FALSE#2#"PP(4,5);NP_right(3,5);PP(2,5);NP_right(1,5);"#
+166#5#"ADJECTIVE;NOUN;PREP;ADJECTIVE;NOUN"#"parat(2,1); subord(2,3); subord(3,5); parat(5,4)"#"Russian Fund of Federal Property"#TRUE#FALSE#2#"ADJ_NOUN(1,2);ADJ_NOUN(4,5);PP(3,5);NP_right(1,5);"#
+168#4#"ADJECTIVE;ADJECTIVE;NOUN;NOUN"#"parat(4,1); parat(4,2); parat(4,3)"#"international financial information system"#TRUE#FALSE#2#"ADJ_NOUN(1,4);NP_left(3,4);"#
+169#4#"NOUN;PREP;VERB pp;NOUN"#"subord(1,2); subord(2,4); parat(4,3)"#"introduction of imputed tax"#TRUE#FALSE#2#"NP_right(1,4);PP(2,4);ADJ_NOUN(3,4);"#
+170#5#"NOUN;PREP;VERB ing;ADJECTIVE;NOUN"#"subord(1,2); subord(2,3); subord(3,5); parat(5,4)"#"tax on purchasing foreign currency"#TRUE#FALSE#2#"NP_right(1,5);PP(2,5);DIRECT_OBJ(3,5);ADJ_NOUN(4,5);"#
+171#5#"ADJECTIVE;NOUN;CONJ;NOUN;NOUN"#"parat(2,1); parat (5,2); subord(3,2); subord(3,4);  parat(5,4)"#"foreign exchange and gold reserve"#TRUE#FALSE#2#"ADJ_NOUN(1,2);NP_left(4,5);DET_NP_right(1,5);"#
+173#5#"NOUN;PREP;NOUN poss;ADJECTIVE;NOUN;"#"subord(1,2); subord(2,3); parat(4,3); parat(6,4); parat(6,5)"#"bank of Russia's regional institution"#TRUE#FALSE#2#"NP_right(1,5);PP(2,5);NP_left(3,5);ADJ_NOUN(4,5);"#
+176#6#"ADJECTIVE;NOUN;PREP;NOUN;PREP;NOUN"#"parat(2,1); subord(2,3); subord(3,4); subord(4,5); subord(5,6)"#"structural division of Bank of Russia"#TRUE#FALSE#2#"ADJ_NOUN(1,2);PP(3,6);NP_right(4,6);PP(5,6);"#
+178#3#"VERB pp;NOUN;NOUN"#"parat(3,1); parat(3,2)"#"organised securities market"#TRUE#FALSE#2#"ADJ_NOUN(1,3);NP_left(2,3);"#
+179#4#"ADJECTIVE;NOUN;ADJECTIVE;NOUN"#"parat(2,1); parat(4,2); parat(4,3)"#"long term financial resources"#TRUE#FALSE#2#"ADJ_NOUN(3,4);ADJ_NOUN(1,4);NP_left(1,4);"#
+180#5#"ADJECTIVE;NOUN;ADJECTIVE;NOUN;NOUN"#"parat(2,1); parat(5,2); parat(4,3); parat(5,4)"#"long term foreign currency rating"#TRUE#FALSE#2#"ADJ_NOUN(1,2);ADJ_NOUN(3,4);NP_left(1,4);NP_left(1,5);"#
+184#5#"VERB ing; PREP;ADJECTIVE;NOUN;NOUN"#"subord(1,2); subord(2,5); parat(5,3); parat(5,4)"#"lowering of personal income tax"#TRUE#FALSE#2#"NP_right(1,5);PP(2,5);ADJ_NOUN(3,5);NP_left(4,5);"#
+186#5#"NOUN;PREP;NOUN;NOUN;NOUN"#"subord(1,2); subord(2,3); parat(5,4)"#"Bank of Russia settlements system"#TRUE#FALSE#2#"NP_right(1,3);PP(2,3);NP_left(1,4);NP_left(1,5);"#
+187#3#"ADJECTIVE;ADVERB;ADJECTIVE;NOUN"#"parat(3,1); parat(4,2); parat(4,3)"#"state extra-budgetary fund"#TRUE#FALSE#2#"ADJ_NOUN(1,4);MODIF_ADJ(2,3);"#
+189#5#"NOUN;NOUN;NOUN;PREP;NOUN"#"subord(1,2); subord(2,3); subord(3,4); subord(4,5)"#"payment capacity criteria for banknotes"#TRUE#FALSE#2#"NP_left(1,2);NP_left(1,3);PP(4,5);NP_right(1,5);"#
+191#4#"ADJECTIVE;CONJ;ADJECTIVE;NOUN"#"parat(4,1); subord(2,1); subord(2,3); parat(4,3)"#"financial and economic support"#TRUE#FALSE#2#"SIMIL_ADJ(1,3);DET_ADJ_NOUN(1,4);"#
+192#4#"VERB ing;NOUN poss;NOUN;NOUN;"#"subord(1,5); parat(3,2); parat(5,3); parat(5,4)"#"bolstering rouble's exchange rate"#TRUE#FALSE#2#"DIRECT_OBJ(1,4);NP_left(2,3);NP_left(2,4);"#
+193#5#"ADJECTIVE;NOUN;PREP;NOUN;NOUN"#"parat(2,1); subord(2,3); subord(3,5); parat(5,4)"#"sharp fluctuation of exchange rate"#TRUE#FALSE#2#"ADJ_NOUN(1,2);NP_left(4,5);PP(3,5);NP_right(1,5);"#
+194#4#"ADJECTIVE;CONJ;NOUN;NOUN"#"parat(4,1); subord(2,1); subord(2,3); parat(4,3)"#"monetary and credit instrument"#TRUE#FALSE#2#"SIMIL_ADJ(1,3);ADJ_NOUN(1,4);"#
+195#6#"NOUN;PREP;ADJECTIVE;ADJECTIVE;NOUN;NOUN"#"subord(1,2); subord(2,6); parat(6,3); parat(5,4); parat(6,5)"#"limit on open currency position"#TRUE#FALSE#2#"NP_right(1,6);PP(2,6);ADJ_NOUN(3,5);NP_left(3,6);"#
+196#4#"ADJECTIVE;VERB ing;PREP;NOUN"#"parat(2,1); subord(2,3); subord(3,4)"#"inflationary overheating of economy"#TRUE#FALSE#2#"ADJ_NOUN(1,2);PP(3,4);NP_right(1,4);"#
+197#5#"NOUN;NOUN;PREP;ADJECTIVE;NOUN"#"parat(2,1);subord(2,3); subord(3,5); parat(5,4)"#"yield curve of financial instrument"#TRUE#FALSE#2#"NP_left(1,2);PP(3,5);ADJ_NOUN(4,5);"#
+198#4#"ADJECTIVE;NOUN;VERB pp;NOUN"#"parat(2,1); subord(2,3); parat(4,2)"#"hard currency based income"#TRUE#FALSE#2#"ADJ_NOUN(1,2);PARTIC_CONSTR(1,3);ADJ_NOUN(1,4);"#
+199#5#"ADVERB;VERB pp;NOUN;PREP;NOUN"#"subord(1,2); parat(3,2); subord(3,4); subord(4,5)"#"specially advised letter of credit"#TRUE#FALSE#2#"MODIF_ADJ(1,2);ADJ_NOUN(1,3);PP(4,5);NP_right(1,5);"#
+200#5#"С;С рд;ПРЕДЛ;П пр;С пр"#"упр(1,2); упр(2,3); упр(3,5); с_опр(5,4)"#"департамент операций на открытом рынке"#TRUE#FALSE#1#"ПРИЛ_СУЩ(4,5);ПГ(3,5);ИГ(2,5);ГЕНИТ_ИГ(1,5);"#
+201#3#"NOUN;CONJ;NOUN"#"subord(2,1); subord(2,3)"#"bargain and sale"#TRUE#FALSE#2#"SIMIL_NP(1,3);"#
+202#6#"ADJECTIVE;NOUN;PREP;NOUN;CONJ;NOUN"#"parat(2,1); subord(2,3); subord(3,4); subord(3,6)"#"European Bank for Reconstruction and Development"#TRUE#FALSE#2#"ADJ_NOUN(1,2);SIMIL_NP(4,6);PP(3,6);NP_right(1,6);"#
+203#3#"П;С;С дт"#"с_опр(2,1); упр(2,3)"#"комиссионное вознаграждение брокеру"#TRUE#FALSE#1#"ИГ(1,3);ПРИЛ_СУЩ(1,2)"#
+204#4#"NOUN;ADJECTIVE;NOUN;NOUN"#"parat(4,1); parat(4,2); parat(4,3)"#"interbank electronic settlements document"#TRUE#FALSE#2#"NP_left(1,3);ADJ_NOUN(2,3);NP_left(1,4);"#
+205#4#"С;ПРИЧАСТИЕ рд;П рд;С рд"#"упр(1,4); с_опр(4,2); с_опр(4,3)"#"политика плавающего валютного курса"#TRUE#FALSE#1#"ПРИЛ_СУЩ(2,4);ГЕНИТ_ИГ(1,4)"#
+206#1#"С;DSC"#""#""#TRUE#FALSE#1#"ИГ(1,2)"#
+207#4#"PART;NOUN;NOUN;NOUN"#"parat(1,2);subord(4,3);subord(3,2)"#"no par value share"#TRUE#FALSE#2#"FOREIGN_GROUP(1,2);NP_left(1,3);NP_left(1,4);"#

@@ -1,0 +1,26 @@
+HKCR
+{
+	SynAn.SyntaxUnit.1 = s 'SyntaxUnit Class'
+	{
+		CLSID = s '{7794ED66-F74F-11D3-8DC5-00105A68ADF3}'
+	}
+	SynAn.SyntaxUnit = s 'SyntaxUnit Class'
+	{
+		CLSID = s '{7794ED66-F74F-11D3-8DC5-00105A68ADF3}'
+		CurVer = s 'SynAn.SyntaxUnit.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7794ED66-F74F-11D3-8DC5-00105A68ADF3} = s 'SyntaxUnit Class'
+		{
+			ProgID = s 'SynAn.SyntaxUnit.1'
+			VersionIndependentProgID = s 'SynAn.SyntaxUnit'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{79995331-E12C-11D2-8BE2-00105A68ADF3}'
+		}
+	}
+}

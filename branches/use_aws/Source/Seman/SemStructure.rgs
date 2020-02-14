@@ -1,0 +1,26 @@
+HKCR
+{
+	Seman.SemStructure.1 = s 'SemStructure Class'
+	{
+		CLSID = s '{DE070989-F926-404D-B5EC-5790E28E12F3}'
+	}
+	Seman.SemStructure = s 'SemStructure Class'
+	{
+		CLSID = s '{DE070989-F926-404D-B5EC-5790E28E12F3}'
+		CurVer = s 'Seman.SemStructure.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {DE070989-F926-404D-B5EC-5790E28E12F3} = s 'SemStructure Class'
+		{
+			ProgID = s 'Seman.SemStructure.1'
+			VersionIndependentProgID = s 'Seman.SemStructure'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{BD87FBF9-4917-4C26-A85C-1B4E86D39066}'
+		}
+	}
+}

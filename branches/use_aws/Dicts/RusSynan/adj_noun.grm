@@ -1,0 +1,10 @@
+#include "adj_group.grm"
+
+[NOUN] -> [MORPH grm="‘"]; 
+
+[ˆ‹_‘“™] -> [AP] [NOUN root]
+				: $0.grm := case_number_gender($1.grm, $2.type_grm, $2.grm);
+
+[ˆ‹_‘“™] -> [AP] [ˆ‹_‘“™ root]
+				: $0.grm := case_number_gender($1.grm, $2.type_grm, $2.grm);
+

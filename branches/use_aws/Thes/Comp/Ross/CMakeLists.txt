@@ -1,0 +1,3 @@
+project(CompRoss)
+ConvertStructDict(CompRoss)
+

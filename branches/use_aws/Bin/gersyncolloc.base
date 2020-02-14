@@ -1,0 +1,32 @@
+[001] 	Active, Finite: Sit=DIENST(3), FuncVerb=LEISTEN(1)
+[002] 	Passive, Finite: Sit=DIENST(1), FuncVerb=LEISTEN(3)
+[003] 	Nominalized: Sit=DIENST(3), FuncVerb=LEISTEN(2)
+[004] 	Nominalized: Sit=DIENST(4), FuncVerb=LEISTEN(1)
+[005] 	Active, Finite: Sit=DIENST(2), FuncVerb=LEISTEN(3)
+[006] 	Active, Finite: Sit=DIENST(2), FuncVerb=LEISTEN(3)
+[007] 	Active, Finite: Sit=DIENST(2), FuncVerb=LEISTEN(3)
+[008] 	Active, Finite: Sit=DIENST(3), FuncVerb=LEISTEN(4)
+[009] 	With modal infinitive: Sit=DIENST(1), FuncVerb=LEISTEN(4)
+[010] 	With infinitive: Sit=DIENST(4), FuncVerb=LEISTEN(6)
+[011] 	With modal infinitive: Sit=DIENST(1), FuncVerb=LEISTEN(3)
+[012] 	Passive, Finite: Sit=DIENST(1), FuncVerb=LEISTEN(3)
+[013] 	With infinitive: Sit=DIENST(5), FuncVerb=LEISTEN(7)
+[014] 	Nominalized: Sit=DIENST(6), FuncVerb=LEISTEN(2)
+[015] 	No_FVG
+[016] 	No_FVG
+[017] 	Active, Finite: Sit=DER(6), FuncVerb=LEISTEN(9)
+[018] 	Active, Finite: Sit=DER(8), FuncVerb=LEISTEN(13)
+[018] 	Active, Finite: Sit=DIENST(6), FuncVerb=LEISTEN(13)
+[019] 	Passive, Finite: Sit=DIENST(4), FuncVerb=LEISTEN(6)
+[020] 	Active, Finite: Sit=DIENST(6), FuncVerb=LEISTEN(7)
+[021] 	Active, Finite: Sit=WELCHER(8), FuncVerb=LEISTEN(15)
+[022] 	Active, Finite: Sit=DIENST(12), FuncVerb=LEISTEN(13)
+[023] 	Passive, Finite: Sit=DIENST(11), FuncVerb=LEISTEN(12)
+[024] 	With infinitive: Sit=DIENST(14), FuncVerb=LEISTEN(16)
+[025] 	Active, Finite: Sit=DIENST(18), FuncVerb=LEISTEN(19)
+[026] 	Active, Finite: Sit=DIENST(4), FuncVerb=LEISTEN(5)
+[027] 	Active, Finite: Sit=DIENST(13), FuncVerb=LEISTEN(14)
+[028] 	Active, Finite: Sit=DIENST(6), FuncVerb=LEISTEN(7)
+[029] 	Active, Finite: Sit=DIENST(19), FuncVerb=LEISTEN(20)
+[030] 	No_FVG
+[031] 	No_FVG

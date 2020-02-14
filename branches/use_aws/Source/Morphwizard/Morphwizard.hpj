@@ -1,0 +1,17 @@
+; This file is maintained by HCW. Do not modify this file directly.
+
+[OPTIONS]
+LCID=0x419 0x0 0x0 ; Russisch
+REPORT=Yes
+CHARSET=204
+DEFFONT=Courier New Cyr,8,204
+HLP=../../Bin/Morphwizard.hlp
+
+[FILES]
+..\..\Docs\MorphWizard.rtf
+
+[MAP]
+#include HELPIDS.H
+
+[FONTS]
+Courier New=Courier New CYR,,204

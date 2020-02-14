@@ -1,0 +1,9 @@
+; Lemmatizer.def : Declares the module parameters.
+
+LIBRARY      "Lemmatizer.DLL"
+
+EXPORTS
+	DllCanUnloadNow      PRIVATE
+	DllGetClassObject    PRIVATE
+	DllRegisterServer    PRIVATE
+	DllUnregisterServer	 PRIVATE

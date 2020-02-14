@@ -1,0 +1,3 @@
+project(LocRoss)
+ConvertStructDict(LocRoss)
+

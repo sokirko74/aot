@@ -1,0 +1,26 @@
+HKCR
+{
+	ClauseBuilder.Homonym.1 = s 'Homonym Class'
+	{
+		CLSID = s '{CB81A1ED-F8C1-11D2-8C0E-00105A68ADF3}'
+	}
+	ClauseBuilder.Homonym = s 'Homonym Class'
+	{
+		CLSID = s '{CB81A1ED-F8C1-11D2-8C0E-00105A68ADF3}'
+		CurVer = s 'ClauseBuilder.Homonym.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {CB81A1ED-F8C1-11D2-8C0E-00105A68ADF3} = s 'Homonym Class'
+		{
+			ProgID = s 'ClauseBuilder.Homonym.1'
+			VersionIndependentProgID = s 'ClauseBuilder.Homonym'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{79995331-E12C-11D2-8BE2-00105A68ADF3}'
+		}
+	}
+}
