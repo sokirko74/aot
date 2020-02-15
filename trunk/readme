@@ -31,6 +31,12 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 5. You need locale CP1251 and ISO-8859-1 under unix. 
 On POSIX systems you can type "locale -a" to list the names of supported locales. 
 
+ubuntu:
+sudo locale-gen ru_RU.UTF-8
+sudo locale-gen ru_RU.iso88595
+sudo locale-gen de_DE
+dpkg-reconfigure locales
+
 See https://askubuntu.com/questions/76013/how-do-i-add-locale-to-ubuntu-server
 
 

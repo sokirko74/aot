@@ -103,6 +103,7 @@ void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode
     SrvPort = srvPort;
 
 	string logPath = GetRegistryString("Software\\Dialing\\Logs\\Main");
+    string myIP = GetRegistryString("Software\\Dialing\\HttpServerIP");
 	if (!DirExists(logPath.c_str())) {
 		throw CExpc(Format("log dir \"%s\" does not exist; http-server must write logs to some folder\n", logPath.c_str()));
 	};
@@ -110,10 +111,10 @@ void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode
 	if (!CheckFileAppendRights(LogFileName.c_str())) {
 		throw CExpc(Format("Cannot write to log file \"%s\" \n", LogFileName.c_str()));
 	}
-	LogMessage(Format("initialize daemon at port %i", SrvPort));
+	LogMessage(Format("initialize daemon at port %s:%i", myIP.c_str(), SrvPort));
 
 	InitSockets();
-	Server = TInnerServer(evhttp_start("127.0.0.1", SrvPort), &evhttp_free);
+	Server = TInnerServer(evhttp_start(myIP.c_str(), SrvPort), &evhttp_free);
 	if (!Server) {
 		throw CExpc("Failed to create http server.");
 	}
