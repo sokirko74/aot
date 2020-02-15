@@ -1,7 +1,5 @@
 import { SemanDaemonUrl } from './common.js';
 
-//test
-
 var TheInputJson = null;
 var TheJointGraph = new joint.dia.Graph;
 var TheJointPaper = new joint.dia.Paper({
@@ -37,7 +35,6 @@ $(document).ready(function(){
 function drawAll(inputJson, graph) {
 
     var graphCells = [];
-
 
     for (var i in inputJson.nodes) {
         var n = inputJson.nodes[i];
