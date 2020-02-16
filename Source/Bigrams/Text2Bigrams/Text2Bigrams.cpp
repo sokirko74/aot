@@ -1,9 +1,9 @@
 // GraphmatThick.cpp : Defines the entry point for the console application.
 //
 
-#include "../common/util_classes.h"
-#include "../GraphanLib/GraphmatFile.h"
-#include "../TrigramLib/TrigramModel.h"
+#include "common/util_classes.h"
+#include "GraphanLib/GraphmatFile.h"
+#include "TrigramLib/TrigramModel.h"
 
 #ifndef WIN32
 	#include <syslog.h>
@@ -15,7 +15,7 @@
 void PrintUsageAndExit()
 {
 	fprintf (stderr,"Bigrams Builder,  created by Alexey Sokirko 2003 (www.dwds.de)\n");
-	fprintf (stderr,"Usage: Bigrams  <language> <file-list> <options>\n");
+	fprintf (stderr,"Usage: Text2Bigrams  <language> <file-list> <options>\n");
 	fprintf (stderr,"\t <language> can be Russian, English, or German\n");
 	fprintf (stderr,"\t <file-list> is a file with file names (one per line)\n");
 	fprintf (stderr,"\t options can be:\n");
@@ -57,7 +57,7 @@ bool WriteBigramsAndClear(BigramsType& Bigrams, string FileName)
 		};
 		for(BigramsType::const_iterator it = Bigrams.begin();it != Bigrams.end(); it++)
 		{
-			fprintf(big_fp, "%s\t%s\t%i\n", it->first.first.c_str(), it->first.second.c_str(), it->second);
+			fprintf(big_fp, "%s\t%s\t%zu\n", it->first.first.c_str(), it->first.second.c_str(), it->second);
 		};
 		fclose (big_fp);
 	}
@@ -285,10 +285,10 @@ try
 		#endif
 
 		BigramsType Bigrams;
-		for (int FileNo=0;FileNo < Files.size(); FileNo++)
+		for (size_t FileNo=0;FileNo < Files.size(); FileNo++)
 		{
 			string InputFileName = Files[FileNo];
-			fprintf (stderr,"===== [%i/%i] %s ===== \n",FileNo+1, Files.size(), InputFileName.c_str());
+			fprintf (stderr,"===== [%zu/%zu] %s ===== \n",FileNo+1, Files.size(), InputFileName.c_str());
 			AllFileSize += FileSize(InputFileName.c_str());
 			if (!Graphan.LoadFileToGraphan(InputFileName))
 			{
@@ -309,6 +309,7 @@ try
 				for (size_t LineNo = 0; LineNo < SentSize; LineNo++)
 				{
 					string  s1 = (*it)[LineNo];
+					EngRusMakeUpper(s1);
 					map<string,size_t>::iterator freq_it  = WordFreqs.find(s1);
 					if (freq_it == WordFreqs.end())
 						WordFreqs[s1] = 1;
@@ -322,7 +323,7 @@ try
 					for (size_t k=LineNo+1; k < WindowEnd; k++)
 					{
 							string  s2 = (*it)[k];
-
+							EngRusMakeUpper(s2);
 							pair<string,string> p = make_pair(s1, s2);
 							BigramsType::iterator it = Bigrams.find(p);
 							if (it != Bigrams.end())
@@ -349,7 +350,7 @@ try
 			return 1;
 		AllTempFilesStr += " "+TempFile;
 		
-		fprintf (stderr,"AllFilesSize = %i\n", AllFileSize);
+		fprintf (stderr,"AllFilesSize = %zu\n", AllFileSize);
 
 		fprintf (stderr,"writing bigrams to %s\n", OutputFile.c_str());
 		string  UniteCommand;

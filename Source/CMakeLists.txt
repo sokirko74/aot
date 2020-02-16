@@ -58,7 +58,6 @@ if ($JAVA_INCLUDES)  # not tested under cmake
 endif()
 
 add_subdirectory (Bigrams)
-add_subdirectory (BigramsIndex)
 add_subdirectory (BinaryDictsClient)
 add_subdirectory (BinaryDictsLib)
 add_subdirectory (AprDictGen)

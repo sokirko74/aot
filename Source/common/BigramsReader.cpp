@@ -29,7 +29,6 @@ class CBigrams {
     vector<CBigramsWordInfo> m_Word2Infos;
     FILE *m_Bigrams;
     FILE *m_BigramsRev;
-    FILE *m_BigramsRev;
     // пока вычисляем только контактные биграммы,
     // m_CorpusSize вычисляются суммированием всех биграмм минус кол-во предложений
     // (кол-во предложений можно опустить), а потом длину корпуса
@@ -138,6 +137,7 @@ vector<CBigramAndFreq> CBigrams::GetBigrams(string Word, int MinBigramsFreq, boo
     vector<CBigramsWordInfo>::const_iterator it = lower_bound(m_Word2Infos.begin(), m_Word2Infos.end(), Word,
                                                               IsLessBigramsWordInfo());
     if (it == m_Word2Infos.end()) return Result;
+    if (it->m_Word != Word) return Result;
 
     const CBigramsWordInfo &WordInfo = *it;
 
@@ -150,36 +150,35 @@ vector<CBigramAndFreq> CBigrams::GetBigrams(string Word, int MinBigramsFreq, boo
     size_t size = bDirectFile ? WordInfo.m_FileLen1 : WordInfo.m_FileLen2;
     FILE *big_fp = bDirectFile ? m_Bigrams : m_BigramsRev;
 
-    if (fseek(big_fp, fpos * sizeof(pair<int, int>), SEEK_SET)) {
+    if (fseek(big_fp, fpos, SEEK_SET)) {
         return Result;
     }
-    vector<pair<int, int> > Bigrams;
+    vector<CBigramInfo > Bigrams;
     ReadVectorInner(big_fp, Bigrams, size);
 
 
-    // swaping bigram frequence and the second element in order to sort by frequence
-    for (int i = size - 1; i >= 0; i--)
-        if (Bigrams[i].second < MinBigramsFreq)
+    for (int i = size - 1; i >= 0; i--) {
+        if (Bigrams[i].BigramsFreq < MinBigramsFreq)
             Bigrams.erase(Bigrams.begin() + i);
-        else
-            swap(Bigrams[i].second, Bigrams[i].first);
+    }
 
     // triming bigrams if there are to many of them
     WordFreq = WordInfo.m_Freq;
     if (Bigrams.size() > 250) {
-        sort(Bigrams.begin(), Bigrams.end());
-        Bigrams.erase(Bigrams.begin(), Bigrams.begin() + Bigrams.size() - 250);
+        sort(Bigrams.begin(), Bigrams.end(),  [](const CBigramInfo & a, const CBigramInfo & b) -> bool
+        {
+            return a.BigramsFreq > b.BigramsFreq;
+        });
+        Bigrams.erase(Bigrams.begin(), Bigrams.begin() + 250);
     }
 
 
-    for (size_t i = 0; i < Bigrams.size(); i++) {
-        const CBigramsWordInfo &ConvWord = m_Word2Infos[Bigrams[i].second];
-        // writing word, word frequence,  bigram frequence
+    for (auto b : Bigrams) {
+        const CBigramsWordInfo &ConvWord = m_Word2Infos[b.WordIndex];
         CBigramAndFreq B;
         B.m_Word = ConvWord.m_Word;
-        B.m_BigramsFreq = Bigrams[i].first;
+        B.m_BigramsFreq = b.BigramsFreq;
         B.m_WordFreq = ConvWord.m_Freq;
-
         Result.push_back(B);
     };
     return Result;
