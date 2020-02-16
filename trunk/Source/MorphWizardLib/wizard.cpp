@@ -241,9 +241,9 @@ bool CParadigmInfo::IsAnyEqual(const CParadigmInfo& X) const
 
 
 //==============================================================================
-//	Данный класс предназначен для обработки морфологического словаря.
-//	Умееет загрузить словарь, найти/отредактировать/удалить/добавить словоформу,
-//	сохранить изменения в словаре.
+//	Р”Р°РЅРЅС‹Р№ РєР»Р°СЃСЃ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ СЃР»РѕРІР°СЂСЏ.
+//	РЈРјРµРµРµС‚ Р·Р°РіСЂСѓР·РёС‚СЊ СЃР»РѕРІР°СЂСЊ, РЅР°Р№С‚Рё/РѕС‚СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ/СѓРґР°Р»РёС‚СЊ/РґРѕР±Р°РІРёС‚СЊ СЃР»РѕРІРѕС„РѕСЂРјСѓ,
+//	СЃРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ РІ СЃР»РѕРІР°СЂРµ.
 
 
 MorphoWizard::MorphoWizard()
@@ -317,10 +317,10 @@ void MorphoWizard::load_string_vector(const string &name, StringVector &res)
 }
 
 
-//	загружает *.mwz файл.
-//	Пример файла:
+//	Р·Р°РіСЂСѓР¶Р°РµС‚ *.mwz С„Р°Р№Р».
+//	РџСЂРёРјРµСЂ С„Р°Р№Р»Р°:
 
-//# русская морфология
+//# СЂСѓСЃСЃРєР°СЏ РјРѕСЂС„РѕР»РѕРіРёСЏ
 //MRD_FILE 	L:\MORPH.COM\SOURCE\RUS_SRC\morphs.mrd
 //LANG	        RUSSIAN
 //USERS       user1, user2, user3
@@ -752,9 +752,9 @@ static void ReadLemmas(std::ifstream& mrdFile, MorphoWizard& W)
 }
 
 
-//	Загружает *.mrd file.
+//	Р—Р°РіСЂСѓР¶Р°РµС‚ *.mrd file.
 //---------------------------------------------------
-//	Описание формата *.mrd.
+//	РћРїРёСЃР°РЅРёРµ С„РѕСЂРјР°С‚Р° *.mrd.
 
 //	file: paradigm_number
 //		paradigm |
@@ -765,27 +765,27 @@ static void ReadLemmas(std::ifstream& mrdFile, MorphoWizard& W)
 //		...	  } base_number times
 //		base PNUM |
 //	paradigm: DICT_TYPE DEPR form ...
-//	base: неизменяемая часть слова, или # если неизменяемая часть пустая
-//	DICT_TYPE: тип словаря, одна буква
-//	DEPR: одна буква (не используется, всегда '#')
+//	base: РЅРµРёР·РјРµРЅСЏРµРјР°СЏ С‡Р°СЃС‚СЊ СЃР»РѕРІР°, РёР»Рё # РµСЃР»Рё РЅРµРёР·РјРµРЅСЏРµРјР°СЏ С‡Р°СЃС‚СЊ РїСѓСЃС‚Р°СЏ
+//	DICT_TYPE: С‚РёРї СЃР»РѕРІР°СЂСЏ, РѕРґРЅР° Р±СѓРєРІР°
+//	DEPR: РѕРґРЅР° Р±СѓРєРІР° (РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РІСЃРµРіРґР° '#')
 //	form: % FLEX * ancode ...
 //
-//	PNUM - номер парадигиы, начиная с 0
+//	PNUM - РЅРѕРјРµСЂ РїР°СЂР°РґРёРіРёС‹, РЅР°С‡РёРЅР°СЏ СЃ 0
 //	
-//	FLEX: окончание.
+//	FLEX: РѕРєРѕРЅС‡Р°РЅРёРµ.
 //
-//	Первое окончание - окончание нормальной формы.
-//	Остальные окончания отсортированы по алфавиту.
-//	Внутри одной формы анкоды отсортированы по алфавиту
-//	(сначала маленькие буквы, потом большие)
+//	РџРµСЂРІРѕРµ РѕРєРѕРЅС‡Р°РЅРёРµ - РѕРєРѕРЅС‡Р°РЅРёРµ РЅРѕСЂРјР°Р»СЊРЅРѕР№ С„РѕСЂРјС‹.
+//	РћСЃС‚Р°Р»СЊРЅС‹Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅС‹ РїРѕ Р°Р»С„Р°РІРёС‚Сѓ.
+//	Р’РЅСѓС‚СЂРё РѕРґРЅРѕР№ С„РѕСЂРјС‹ Р°РЅРєРѕРґС‹ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅС‹ РїРѕ Р°Р»С„Р°РІРёС‚Сѓ
+//	(СЃРЅР°С‡Р°Р»Р° РјР°Р»РµРЅСЊРєРёРµ Р±СѓРєРІС‹, РїРѕС‚РѕРј Р±РѕР»СЊС€РёРµ)
 
-//	Пробела внутри парадигмы нет.
+//	РџСЂРѕР±РµР»Р° РІРЅСѓС‚СЂРё РїР°СЂР°РґРёРіРјС‹ РЅРµС‚.
 //---------------------------------------------------
 void MorphoWizard::load_mrd(bool guest, bool bCreatePrediction)
 {
 	m_ReadOnly = guest || (access(get_lock_file_name().c_str(), 0) != -1);
 
-	// лочим файл
+	// Р»РѕС‡РёРј С„Р°Р№Р»
 	if (!m_ReadOnly)
 		CreateLockFile(get_lock_file_name());
 
@@ -831,7 +831,7 @@ string &MorphoWizard::get_value(const string &key)
 
 
 
-//	Сохраняет изменения в mrd file.
+//	РЎРѕС…СЂР°РЅСЏРµС‚ РёР·РјРµРЅРµРЅРёСЏ РІ mrd file.
 void MorphoWizard::save_mrd()
 {
 	assert(m_bLoaded);
@@ -845,8 +845,8 @@ void MorphoWizard::save_mrd()
 	EndSession();
 
 
-	// здесь раньше сохраняли с помощью stream, я заменил на FILE, стало работать
-	// в  3 раз быстрее
+	// Р·РґРµСЃСЊ СЂР°РЅСЊС€Рµ СЃРѕС…СЂР°РЅСЏР»Рё СЃ РїРѕРјРѕС‰СЊСЋ stream, СЏ Р·Р°РјРµРЅРёР» РЅР° FILE, СЃС‚Р°Р»Рѕ СЂР°Р±РѕС‚Р°С‚СЊ
+	// РІ  3 СЂР°Р· Р±С‹СЃС‚СЂРµРµ
 
 	FILE * out_fp = fopen(Path.c_str(), "w");
 	if (!out_fp) throw CExpc("Error while saving to file. It may be corrupted");
@@ -942,7 +942,7 @@ void MorphoWizard::find_lemm(string lemm, bool bCheckLemmaPrefix, vector<lemma_i
 
 		for (lemma_iterator_t it = range.first; it != range.second; ++it)
 		{
-			if (pos_acc == string::npos || GetLemmaAccent(it) == pos_acc)  // проверка ударения [17/Dec/2003]
+			if (pos_acc == string::npos || GetLemmaAccent(it) == pos_acc)  // РїСЂРѕРІРµСЂРєР° СѓРґР°СЂРµРЅРёСЏ [17/Dec/2003]
 				if ((!Prefix.empty()
 					&& (it->second.m_PrefixSetNo != UnknownPrefixSetNo)
 					&& (m_PrefixSets[it->second.m_PrefixSetNo].find(Prefix) != m_PrefixSets[it->second.m_PrefixSetNo].end())
@@ -1165,7 +1165,7 @@ void MorphoWizard::find_lemm_by_grammem(const string &pos_and_grammems, vector<l
 {
 	BYTE pos;
 	QWORD gra;
-	/*{	// processing type grammems for example "С лок | од,
+	/*{	// processing type grammems for example "РЎ Р»РѕРє | РѕРґ,
 		int u = pos_and_grammems.find("|");
 		if (u != string::npos)
 		{
@@ -1525,10 +1525,10 @@ struct CSlfLineByAncode
 
 
 //----------------------------------------------------------------------------
-// при добавлении парадигмы производится сортировка сначала по граммемам, 
-//		при совпадающих граммемах - по формам,
-//		при совпадающих формах - по ударениям
-// изменено Кецарисом [12/Apr/2004]
+// РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё РїР°СЂР°РґРёРіРјС‹ РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ СЃРѕСЂС‚РёСЂРѕРІРєР° СЃРЅР°С‡Р°Р»Р° РїРѕ РіСЂР°РјРјРµРјР°Рј, 
+//		РїСЂРё СЃРѕРІРїР°РґР°СЋС‰РёС… РіСЂР°РјРјРµРјР°С… - РїРѕ С„РѕСЂРјР°Рј,
+//		РїСЂРё СЃРѕРІРїР°РґР°СЋС‰РёС… С„РѕСЂРјР°С… - РїРѕ СѓРґР°СЂРµРЅРёСЏРј
+// РёР·РјРµРЅРµРЅРѕ РљРµС†Р°СЂРёСЃРѕРј [12/Apr/2004]
 //----------------------------------------------------------------------------
 struct CSlfLineByAncodeLess
 {
@@ -2514,15 +2514,15 @@ bool MorphoWizard::attach_form_prefixes_to_bases()
 
 
 //----------------------------------------------------------------------------
-// эта функция приводит русскую морфологию к виду, который она должна  иметь в Диалинге:
-// 1. удаление "ё"
+// СЌС‚Р° С„СѓРЅРєС†РёСЏ РїСЂРёРІРѕРґРёС‚ СЂСѓСЃСЃРєСѓСЋ РјРѕСЂС„РѕР»РѕРіРёСЋ Рє РІРёРґСѓ, РєРѕС‚РѕСЂС‹Р№ РѕРЅР° РґРѕР»Р¶РЅР°  РёРјРµС‚СЊ РІ Р”РёР°Р»РёРЅРіРµ:
+// 1. СѓРґР°Р»РµРЅРёРµ "С‘"
 // 2. ...
 //----------------------------------------------------------------------------
 bool	MorphoWizard::prepare_for_RML()
 {
 	if (m_Language != morphRussian) return true;
 
-	// перевод "ё"  в "е"
+	// РїРµСЂРµРІРѕРґ "С‘"  РІ "Рµ"
 	for (int ModelNo = 0; ModelNo < m_FlexiaModels.size(); ModelNo++)
 		for (size_t k = 0; k < m_FlexiaModels[ModelNo].m_Flexia.size(); k++)
 		{
@@ -2556,7 +2556,7 @@ bool	MorphoWizard::prepare_for_RML()
 	return true;
 }
 
-//вариант е+ё
+//РІР°СЂРёР°РЅС‚ Рµ+С‘
 bool	MorphoWizard::prepare_for_RML2()
 {
 	if (m_Language != morphRussian) return true;
@@ -2577,7 +2577,7 @@ bool	MorphoWizard::prepare_for_RML2()
 					joFlex.insert(Int_Pair(ModelNo, m_FlexiaModels.size() - 1));
 				}
 				hasjo = true;
-				ConvertJO2Je(m_FlexiaModels[ModelNo].m_Flexia[k].m_PrefixStr); // перевод "ё"  в "е"
+				ConvertJO2Je(m_FlexiaModels[ModelNo].m_Flexia[k].m_PrefixStr); // РїРµСЂРµРІРѕРґ "С‘"  РІ "Рµ"
 				ConvertJO2Je(m_FlexiaModels[ModelNo].m_Flexia[k].m_FlexiaStr);
 			};
 
