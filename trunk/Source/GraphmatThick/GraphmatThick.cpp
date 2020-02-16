@@ -219,7 +219,7 @@ int main(int argc, char* argv[])
 			assert (s1 == s2);
 		};
 
-		printf ("Found Units %u\n", Count);
+		printf ("Found Units %zu\n", Count);
 
 		return 0;
 	}

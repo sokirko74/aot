@@ -86,7 +86,7 @@ void CGraphmatFile :: GetGraphematicalLine (char* line, size_t LineNo) const
 	if (L.IsPageBreak())
 	{
 		strcat(line," PGBR");
-		sprintf (line+strlen(line), "%u", GetPageNumber(LineNo));
+		sprintf (line+strlen(line), "%zu", GetPageNumber(LineNo));
 	}
 
 	if (L.IsParagraphTag())
