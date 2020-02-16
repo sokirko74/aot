@@ -12,16 +12,19 @@ CSyntaxHolder GermanSyntaxHolder;
 CMorphologyHolder EnglishMorphHolder;
 
 
+string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
+    auto str = evhttp_find_header(&request.headers, "minBigramsFreq");
+    if (!str) {
+        throw CExpc("minBigramsFreq is not specified");
+    }
+    int minBigramsFreq = std::stoi(str);
+    bool directBigrams = evhttp_find_header(&request.headers, "direct") != nullptr;
+    auto sortMode = evhttp_find_header(&request.headers, "sortMode");
+    if (!sortMode) {
+        throw CExpc("sortMode is not specified");
+    }
 
-string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest& request) {
-	auto str = evhttp_find_header(&request.headers, "minBigramsFreq");
-	if (!str) {
-		throw CExpc("minBigramsFreq is not specified");
-	}
-	int minBigramsFreq = std::stoi(str);
-	bool directBigrams = evhttp_find_header(&request.headers, "direct") != nullptr;
-	auto sortMode = evhttp_find_header(&request.headers, "sortMode");
-	return GetConnectedWords(request.Query, minBigramsFreq, directBigrams, sortMode, request.Langua);
+    return GetConnectedWords(request.Query, minBigramsFreq, directBigrams, sortMode, request.Langua);
 }
 
 const CMorphologyHolder *GetMorphHolder(MorphLanguageEnum l) {
@@ -37,19 +40,19 @@ const CMorphologyHolder *GetMorphHolder(MorphLanguageEnum l) {
     }
 }
 
-string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest& request) {
-	bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
+string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
+    bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
     const CMorphologyHolder *Holder = GetMorphHolder(request.Langua);
     return LemmatizeJson(request.Query, Holder, withParadigms);
 };
 
 
-string TSynanHttpServer::ProcessSyntax(TDaemonParsedRequest& request) {
-	if (request.Langua == morphEnglish) {
-		throw CExpc("unsupported language");
-	}
+string TSynanHttpServer::ProcessSyntax(TDaemonParsedRequest &request) {
+    if (request.Langua == morphEnglish) {
+        throw CExpc("unsupported language");
+    }
     CSyntaxHolder *P = (request.Langua == morphRussian) ? &RussianSyntaxHolder : &GermanSyntaxHolder;
-	return BuildJson(P, request.Query);
+    return BuildJson(P, request.Query);
 };
 
 
@@ -61,42 +64,39 @@ void TSynanHttpServer::LoadSynan(bool loadBigrams) {
 
     TRMLHttpServer::LogMessage("Loading German Syntax\n");
     if (!GermanSyntaxHolder.LoadSyntax(morphGerman)) {
-		throw CExpc("cannot load German Syntax");
+        throw CExpc("cannot load German Syntax");
     };
 
     TRMLHttpServer::LogMessage("Loading English Morphology\n");
     if (!EnglishMorphHolder.LoadGraphanAndLemmatizer(morphEnglish)) {
-		throw CExpc("cannot load English Morphology\n");
+        throw CExpc("cannot load English Morphology\n");
     };
-	
-	if (loadBigrams) {
-		string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";
-		if (!FileExists(fileName.c_str()))
-			throw CExpc(Format("cannot find bigrams file: %s", fileName));
-		if (!InitializeBigrams(fileName))
-			throw CExpc(Format("cannot init bigrams"));
-	}
+
+    if (loadBigrams) {
+        string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";
+        if (!FileExists(fileName.c_str()))
+            throw CExpc(Format("cannot find bigrams file: %s", fileName));
+        if (!InitializeBigrams(fileName))
+            throw CExpc(Format("cannot init bigrams"));
+    }
 };
 
-string TSynanHttpServer::OnParsedRequest(TDaemonParsedRequest& req) {
-	try {
-		if (req.Action == "morph") {
-			return ProcessMorphology(req);
-		}
-		else if (req.Action == "bigrams") {
-			return ProcessBigrams(req);
-		}
-		else if (req.Action == "syntax") {
-			return ProcessSyntax(req);
-		}
-		else {
-			throw CExpc("unknown action");
-		}
-	}
-	catch (nlohmann::json::exception& e)	{
-		throw CExpc(e.what());
-	}
-	
+string TSynanHttpServer::OnParsedRequest(TDaemonParsedRequest &req) {
+    try {
+        if (req.Action == "morph") {
+            return ProcessMorphology(req);
+        } else if (req.Action == "bigrams") {
+            return ProcessBigrams(req);
+        } else if (req.Action == "syntax") {
+            return ProcessSyntax(req);
+        } else {
+            throw CExpc("unknown action");
+        }
+    }
+    catch (nlohmann::json::exception &e) {
+        throw CExpc(e.what());
+    }
+
 }
 
 

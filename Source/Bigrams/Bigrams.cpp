@@ -383,7 +383,7 @@ try
 		{
 			for (map<string,size_t>::iterator freq_it = WordFreqs.begin(); freq_it != WordFreqs.end(); freq_it++)
 			{
-				fprintf (wfp,"%s %u\n", freq_it->first.c_str(), freq_it->second);
+				fprintf (wfp,"%s %zu\n", freq_it->first.c_str(), freq_it->second);
 			}
 			fclose(wfp);
 		}

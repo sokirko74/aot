@@ -88,7 +88,7 @@ BOOL CFieldEditor::OnInitDialog()
 	// TODO: Add extra initialization here
 	m_FieldStr = GetRoss()->Fields[m_FieldNo].FieldStr;;
 	m_bApplicToActant = GetRoss()->Fields[m_FieldNo].IsApplicToActant;
-	m_OrderIdStr.Format("%u", GetRoss()->Fields[m_FieldNo].OrderId);
+	m_OrderIdStr.Format("%zu", GetRoss()->Fields[m_FieldNo].OrderId);
 	m_Signats.InsertColumn(IdColumn,"Id",LVCFMT_LEFT, 40);
 	m_Signats.InsertColumn(OrdinalColumn,"Ordinal",LVCFMT_LEFT, 50);
 	m_Signats.InsertColumn(SignatureColumn,"Signature",LVCFMT_LEFT, 250);
