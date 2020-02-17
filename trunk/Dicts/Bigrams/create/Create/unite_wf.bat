@@ -1,0 +1,1 @@
+gsort -m C:\Moshkow\01.src\bigrams.wrd_freq C:\Moshkow\01a.src\bigrams.wrd_freq C:\Moshkow\02.src\bigrams.wrd_freq C:\Moshkow\03.src\bigrams.wrd_freq   | tr -d "\r" | gawk -f C:/Sokirko/awk/unite_wf.awk  | grep -v  "OPEN_TAG" >bigrams.wrd_freq
