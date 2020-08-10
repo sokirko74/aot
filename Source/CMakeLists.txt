@@ -108,11 +108,11 @@ IF (MSVC)
         add_custom_command(
             TARGET ${Project}_TLB
             POST_BUILD        
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(IntDir)${Project}.tlb ${CMAKE_SOURCE_DIR}/Bin
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(IntDir)${Project}.tlb ${PROJECT_SOURCE_DIR}
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(IntDir)${Project}.h ${PROJECT_SOURCE_DIR}
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(IntDir)${Project}_i.c ${PROJECT_SOURCE_DIR}
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(IntDir)${Project}_p.c ${PROJECT_SOURCE_DIR}
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}.tlb ${CMAKE_SOURCE_DIR}/Bin
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}.tlb ${PROJECT_SOURCE_DIR}
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}.h ${PROJECT_SOURCE_DIR}
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}_i.c ${PROJECT_SOURCE_DIR}
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}_p.c ${PROJECT_SOURCE_DIR}
             VERBATIM
         )
 
@@ -122,7 +122,7 @@ IF (MSVC)
         add_custom_command(
             TARGET ${Project}
             POST_BUILD        
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(OutDir)${Project}.dll ${CMAKE_SOURCE_DIR}/Bin
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${OutDir}${Project}.dll ${CMAKE_SOURCE_DIR}/Bin
             COMMAND echo "regsvr32 /s ${CMAKE_SOURCE_DIR}/Bin/${Project}.dll (need admin rights))"
             COMMAND regsvr32 /s ${CMAKE_SOURCE_DIR}/Bin/${Project}.dll
             VERBATIM
@@ -133,7 +133,7 @@ IF (MSVC)
         add_custom_command(
             TARGET ${Project}
             POST_BUILD        
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different $(OutDir)${Project}.exe ${CMAKE_SOURCE_DIR}/Bin
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${OutDir}${Project}.exe ${CMAKE_SOURCE_DIR}/Bin
             VERBATIM
         )
 
