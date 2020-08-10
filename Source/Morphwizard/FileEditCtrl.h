@@ -75,7 +75,7 @@ protected:
 // FEC_FILE               - the control is used to find a file, can not be used with FEC_FOLDER
 // FEC_MULTIPLE           - used with FEC_FILE, the control is used to find multiple files (same as OFN_ALLOWMULTISELECT)
 // FEC_FOLDER             - the control is used to find folders, can not be used with FEC_FILE
-// FEC_TRAILINGSLASH      - used with FEC_FOLDER, adds a slash to the end of the folder string
+// FEC_TRAILINGSLASH      - used with FEC_FOLDER, adds a slash to the end of the folder std::string
 // FEC_BUTTONLEFT         - places the button on the left side of the control
 // FEC_BUTTONTIP          - enables the tooltip for the browse button
 // FEC_CLIENTTIP          - enables the tooltip for the client area

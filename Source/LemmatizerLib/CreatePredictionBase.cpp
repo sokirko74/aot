@@ -28,9 +28,9 @@ struct CPredictWord
 
 struct CModelPostfix 
 {
-	string m_Postfix;
+	std::string m_Postfix;
 	size_t m_ModelNo;
-	CModelPostfix(string Postfix, size_t ModelNo)
+	CModelPostfix(std::string Postfix, size_t ModelNo)
 	{
 		m_Postfix = Postfix;
 		m_ModelNo = ModelNo;
@@ -47,7 +47,7 @@ struct CModelPostfix
 };
 
 
-typedef map<string, vector<CPredictWord> > Flex2WordMap;
+typedef map<std::string, vector<CPredictWord> > Flex2WordMap;
 typedef map<CModelPostfix, size_t > Postfix2FreqMap;
 
 
@@ -57,7 +57,7 @@ typedef map<CModelPostfix, size_t > Postfix2FreqMap;
  
 */
 void AddElem(	Flex2WordMap& svMapRaw, 
-				const string &Postfix, 
+				const std::string &Postfix, 
 				int LemmaInfoNo, 
 				const WORD nps,
 				const WORD ItemNo,
@@ -114,7 +114,7 @@ void AddElem(	Flex2WordMap& svMapRaw,
 
 
 
-void log (string s)
+void log (std::string s)
 {
 	printf ("%s", s.c_str());
 }
@@ -123,7 +123,7 @@ void log (string s)
 //////////////////////////////////////////////////////////////////////////////
 
 
-string GetPlugLemmabyLanguage (MorphLanguageEnum Langua)
+std::string GetPlugLemmabyLanguage (MorphLanguageEnum Langua)
 {
 	switch (Langua) {
 		case morphRussian: return  "НЕУБИВАЙМЕНЯ";
@@ -152,7 +152,7 @@ struct IsLessByModelNoAndBase
 
 const size_t MinimalFlexiaModelFrequence = 10;
 
-bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLength, int MinFreq, string path)
+bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLength, int MinFreq, std::string path)
 {
 	fprintf (stderr, "CMorphDictBuilder::GenPredictIdx\n");
 	DwordVector ModelFreq(wizard.m_FlexiaModels.size(), 0);
@@ -179,13 +179,13 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 		const CLemmaInfo& LemmaInfo = m_LemmaInfos[lin].m_LemmaInfo;
 		size_t ModelNo = LemmaInfo.m_FlexiaModelNo;
 		const CFlexiaModel& paradigm = m_FlexiaModels[ModelNo];
-		string	base = m_Bases[m_LemmaInfos[lin].m_LemmaStrNo].GetString();
+		std::string	base = m_Bases[m_LemmaInfos[lin].m_LemmaStrNo].GetString();
 		const vector <bool>& Infos = m_ModelInfo[ModelNo];
 		for (size_t i=0; i<paradigm.m_Flexia.size(); i++)
 			if (Infos[i])
 			{
-				string flexia = paradigm.m_Flexia[i].m_FlexiaStr;
-				string wordform = base + flexia;
+				std::string flexia = paradigm.m_Flexia[i].m_FlexiaStr;
+				std::string wordform = base + flexia;
 				if (wordform.length() < PostfixLength) continue;
 				CModelPostfix p(wordform.substr(wordform.length() - PostfixLength), ModelNo);
 				Postfix2FreqMap::iterator it = Postfix2Freq.find(p);
@@ -209,7 +209,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 
 
 
-	string PlugLemma = GetPlugLemmabyLanguage(wizard.m_Language);
+	std::string PlugLemma = GetPlugLemmabyLanguage(wizard.m_Language);
 	int PlugLemmaInfoNo = -1;
 
 	Flex2WordMap svMapRaw;
@@ -223,7 +223,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 		const CLemmaInfo& LemmaInfo = m_LemmaInfos[lin].m_LemmaInfo;
 		size_t ModelNo = LemmaInfo.m_FlexiaModelNo;
 		const CFlexiaModel& paradigm = m_FlexiaModels[ModelNo];
-		string	base = m_Bases[m_LemmaInfos[lin].m_LemmaStrNo].GetString();
+		std::string	base = m_Bases[m_LemmaInfos[lin].m_LemmaStrNo].GetString();
 
 		if (base+paradigm.get_first_flex() == PlugLemma)
 		{
@@ -235,7 +235,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 			if (ModelFreq[ModelNo] < MinimalFlexiaModelFrequence)
 				continue;
 
-		string pos = wizard.get_pos_string(paradigm.get_first_code());
+		std::string pos = wizard.get_pos_string(paradigm.get_first_code());
 		WORD nps =  GetPredictionPartOfSpeech(pos, wizard.m_Language);
 		if (nps == UnknownPartOfSpeech)
 			continue;
@@ -245,10 +245,10 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 		for (size_t i=0; i<paradigm.m_Flexia.size(); i++)
 		if (Infos[i])
 		{
-			string flexia = paradigm.m_Flexia[i].m_FlexiaStr;
-			string wordform = base + flexia;
+			std::string flexia = paradigm.m_Flexia[i].m_FlexiaStr;
+			std::string wordform = base + flexia;
 			if (wordform.length() < PostfixLength) continue;
-			string Postfix = wordform.substr(wordform.length() - PostfixLength);
+			std::string Postfix = wordform.substr(wordform.length() - PostfixLength);
 			AddElem(svMapRaw, Postfix, lin, nps, (WORD)i, Postfix2Freq, m_LemmaInfos);
 		}
 		
@@ -268,7 +268,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 
 	// adding crtitical noun
 	{
-		string s = R.GetCriticalNounLetterPack();
+		std::string s = R.GetCriticalNounLetterPack();
 		s += R.m_AnnotChar;
 		s += R.EncodeIntToAlphabet(0); // noun
 		s += R.m_AnnotChar;
@@ -287,7 +287,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 
 			if (W.m_Freq < MinFreq) continue;
 			
-			string s = it->first;
+			std::string s = it->first;
 			reverse(s.begin(), s.end());
 			s += R.m_AnnotChar;
 			s += R.EncodeIntToAlphabet(W.m_nps);

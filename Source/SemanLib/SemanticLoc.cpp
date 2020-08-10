@@ -19,7 +19,7 @@ EXM	= 1 поле СинАн
 */
 
 
-bool IsLocSemRel (const string& S)
+bool IsLocSemRel (const std::string& S)
 {
 	return (S=="LOK") ||  (S=="TRG-PNT") || (S=="SRC-PNT");
 };
@@ -62,7 +62,7 @@ bool CRusSemStructure :: IsLocNode(size_t NodeNo) const
 
 
 
-bool CRusSemStructure :: GetLocSemRel(long NodeNo, string& RelationStr, long& PrepNo) const 
+bool CRusSemStructure :: GetLocSemRel(long NodeNo, std::string& RelationStr, long& PrepNo) const 
 {
 
 	const CSemNode& N = m_Nodes[NodeNo];
@@ -109,7 +109,7 @@ ENG (1) = in
 
 
 
-string    GetPO (const CDictionary* Ross, WORD UnitNo, long POFieldNo)
+std::string    GetPO (const CDictionary* Ross, WORD UnitNo, long POFieldNo)
 {
   if (UnitNo != ErrUnitNo)
   for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= Ross->GetUnitEndPos(UnitNo); i++)
@@ -117,7 +117,7 @@ string    GetPO (const CDictionary* Ross, WORD UnitNo, long POFieldNo)
 		 )
 			return (const char*)Ross->GetDomItemStr(GetCortege(Ross,i).m_DomItemNos[0]);
 
-   return string("общ");
+   return std::string("общ");
 };
 
 struct  CLocHostHypot {
@@ -171,10 +171,10 @@ long CRusSemStructure::FindLocHost (long NodeNo, long ClauseNo)
 
 	for (size_t i = 0; i < HypotNodes.size(); i++)   
 	{
-		string Q = Format ("Loc Host Weight %i \n", HypotNodes[i].GetWeightOfLocHypot());
+		std::string Q = Format ("Loc Host Weight %i \n", HypotNodes[i].GetWeightOfLocHypot());
 
 		size_t SaveRelSize = m_Relations.size();
-		CValency V (string("test_loc"), A_C);
+		CValency V (std::string("test_loc"), A_C);
 		AddRelation(CRusSemRelation(V, HypotNodes[i].m_NodeNo, NodeNo, ""));
 
 		if (m_Clauses[ClauseNo].m_ClauseSyntaxTop != -1)
@@ -215,7 +215,7 @@ void    CRusSemStructure :: PutLocRelations(long ClauseNo)
 			&& IsLocNode(NodeNo-1)
 			)
 		{
-			string RelationStr;
+			std::string RelationStr;
 			long PrepNo;
 			GetLocSemRel(NodeNo-1, RelationStr, PrepNo);
 			CValency V (RelationStr, A_C);
@@ -234,7 +234,7 @@ void    CRusSemStructure :: PutLocRelations(long ClauseNo)
 
 };
 
-long  CRusSemStructure :: GetLocInterp(string UnitStr, bool& NegativeForm) const
+long  CRusSemStructure :: GetLocInterp(std::string UnitStr, bool& NegativeForm) const
 {
   NegativeForm = false;
   WORD UnitNo = GetRossHolder(LocRoss)->LocateUnit(UnitStr.c_str(), 1);
@@ -245,7 +245,7 @@ long  CRusSemStructure :: GetLocInterp(string UnitStr, bool& NegativeForm) const
 			 if (UnitNo != ErrUnitNo)
 				 NegativeForm = true;
 		 };
-  string PO = GetPO(GetRoss(LocRoss), UnitNo, GetRossHolder(LocRoss)->POFieldNo);
+  std::string PO = GetPO(GetRoss(LocRoss), UnitNo, GetRossHolder(LocRoss)->POFieldNo);
   if (UnitNo != ErrUnitNo)
 	   if (   (PO == "общ") 
 		   || (m_PO == PO) 

@@ -8,7 +8,7 @@
 
 // ==============================   класс CSemPattern ==========================
   
-bool CCollocItem::InitCollocItem (string S) 
+bool CCollocItem::InitCollocItem (std::string S) 
 {
       Item = S;
 	  Trim(Item);
@@ -25,7 +25,7 @@ bool CCollocItem::InitCollocItem (string S)
 
 	  if (i != -1)
 	  {
-          string Q = Item.substr(i+1);
+          std::string Q = Item.substr(i+1);
 		  long k = Q.find('[');
 		  if (k != -1)
 		  {
@@ -87,10 +87,10 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 		 for (size_t i = GetRoss(type)->GetUnitStartPos(UnitNo); i<= GetRoss(type)->GetUnitEndPos(UnitNo); i++)
 		 {
 			TCortege C = GetCortege(GetRoss(type), i);
-			string FieldStr = (const char*)GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
+			std::string FieldStr = (const char*)GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
 			if  ( FieldStr == "TYP" ) 
 			{
-				string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+				std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 				Trim(S);
 				if (S == "ДОБАВЛЕНИЕ")
 					A.m_Type = atAdditionArticle;
@@ -110,14 +110,14 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 				if  (FieldStr == "GF" ) 
 				{
 				  CGramInfo I;
-				  string GramFet = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+				  std::string GramFet = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 				  GetCustomGrammems(GramFet, I.m_Grammems, I.m_PartOfSpeechMask);
 				  A.m_GramInfos.push_back(I);
 				};
 				
 				if  ( FieldStr == "CLAUSE") 
 				{
-					string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 					Trim(S);
 					long  Type =  GetRusGramTab()->GetClauseTypeByName(S.c_str());
 					A.m_ClauseTypes.push_back (Type);
@@ -125,20 +125,20 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 
 				if  ( FieldStr == "CAT" ) 
 				{
-					string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 					Trim(S);
 					A.m_SemTypes.push_back(S);
 				};
 				if  ( FieldStr == "SF" ) 
 				{
-					string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 					Trim(S);
 					A.m_SemFets.push_back(S);
 				};
 
 				if  ( FieldStr == "LEX" ) 
 				{
-					string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 					Trim(S);
 					A.m_LexFets.push_back(S);
 				};
@@ -164,7 +164,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 
 
 
-void CSemanticsHolder::GetCustomGrammems (string GramFet, QWORD& Grammems, DWORD& Pose)
+void CSemanticsHolder::GetCustomGrammems (std::string GramFet, QWORD& Grammems, DWORD& Pose)
 {
 	assert(GetRusGramTab() != 0);
 	Trim(GramFet);
@@ -195,7 +195,7 @@ void CSemanticsHolder::GetCustomGrammems (string GramFet, QWORD& Grammems, DWORD
 	};
 };
 
-string CSemanticsHolder::GetContentsOborStr(long UnitNo, vector<CUnitContent> & Contents)
+std::string CSemanticsHolder::GetContentsOborStr(long UnitNo, vector<CUnitContent> & Contents)
 {
 	CUnitContent T;
 	T.m_UnitNo = UnitNo;
@@ -213,7 +213,7 @@ string CSemanticsHolder::GetContentsOborStr(long UnitNo, vector<CUnitContent> & 
 
 
 
-bool GetLemmaFromTitle (string S, long PlaceNo, string& Lemma)
+bool GetLemmaFromTitle (std::string S, long PlaceNo, std::string& Lemma)
 {
 	EngRusMakeUpper(S);
 	for (size_t i=0; i< PlaceNo + 1; i++)
@@ -230,7 +230,7 @@ bool GetLemmaFromTitle (string S, long PlaceNo, string& Lemma)
 
 
 
-void InitThesList (const CThesaurus* Thes, string ConceptStr,	StringVector& Vec)
+void InitThesList (const CThesaurus* Thes, std::string ConceptStr,	StringVector& Vec)
 {
 	Vec.clear();
 	vector<int> LowerTermins;
@@ -239,7 +239,7 @@ void InitThesList (const CThesaurus* Thes, string ConceptStr,	StringVector& Vec)
 	for (long i=0; i <Count; i++)
 	{
 			const CInnerTermin& T = Thes->m_Termins[LowerTermins[i]];
-			string TerminStr =  T.m_TerminStr;
+			std::string TerminStr =  T.m_TerminStr;
 			EngRusMakeUpper(TerminStr);
 			Vec.push_back(TerminStr);
 	};
@@ -279,14 +279,14 @@ bool CSemanticsHolder::InitTimeUnits()
 	  //незаполненное поле?
 	  if (C.m_DomItemNos[0] == -1) continue;
 	  // строю массив U.m_Places по полю CONTENT
-	  string FieldStr = (const char*)GetRoss(TimeRoss)->Fields[C.m_FieldNo].FieldStr;
+	  std::string FieldStr = (const char*)GetRoss(TimeRoss)->Fields[C.m_FieldNo].FieldStr;
       if (    (FieldStr == "CONTENT") 
 	       && (C.m_LeafId == 0) 
 		   && (C.m_BracketLeafId == 0) 
 		 )
 	  {
-		 string Lemma;
-		 string Contents = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
+		 std::string Lemma;
+		 std::string Contents = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
  	     for (BYTE PlaceNo =0; GetLemmaFromTitle(Contents, PlaceNo, Lemma);  PlaceNo++)
 	       U.m_Places.push_back(Lemma);
 	  };
@@ -296,7 +296,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		   && (C.m_BracketLeafId == 0) 
 		 )
 	  {
-		 string Contents = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
+		 std::string Contents = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
 		 if (Contents == "свобод")
 			 U.m_bCanFillNotTimeValency = true;
 	  };
@@ -310,7 +310,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		  long PlaceNo1 = atoi(GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[1]));
 		  long PlaceNo2 = atoi(GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[2]));
 		  if (!PlaceNo1 || !PlaceNo2) continue;
-		  string SynGrp = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
+		  std::string SynGrp = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
 		  rml_TRACE  (SynGrp.c_str());
 	      U.m_Rels.push_back(CSynRelation(PlaceNo1-1, PlaceNo2-1, SynGrp));
 	  };
@@ -329,9 +329,9 @@ bool CSemanticsHolder::InitTimeUnits()
 			   && (C.m_DomItemNos[0] != AbbrFunctName)
 			 ) 
 		  continue;
-		  string FullForm = GetRoss(TimeRoss)->GetEntryStr(UnitNo);
+		  std::string FullForm = GetRoss(TimeRoss)->GetEntryStr(UnitNo);
 		  EngRusMakeUpper(FullForm);
-		  string AbbrForm = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[1]);
+		  std::string AbbrForm = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[1]);
 		  EngRusMakeUpper(AbbrForm);
 		  m_TimeAbbrPairs.push_back(CAbbrFunct(AbbrForm, FullForm, GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0])));
 	  };
@@ -341,19 +341,19 @@ bool CSemanticsHolder::InitTimeUnits()
 
 	   if   (FieldStr == "LEX")
 		 {
-		    string S =   GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
+		    std::string S =   GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
 			EngRusMakeUpper(S);
 			long LexFillingNoNo = U.GetLexicalFillingNo(CTimeLexicalFilling(C.m_LeafId, C.m_BracketLeafId));
-			U.m_LexicalFillings[LexFillingNoNo].m_LexFets.push_back(stringLong(S,C.m_LevelId));
+			U.m_LexicalFillings[LexFillingNoNo].m_LexFets.push_back(StringLong(S,C.m_LevelId));
 		 }
 		 else
 		 if (FieldStr == "PREP")
 		 {
-             string Prep = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
+             std::string Prep = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
 		     WORD PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
              if (PrepNo == ErrUnitNo) 
 			 {
-				 string Q =Format ("Предлог %s в статье %s не найден в словаре оборотов", Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
+				 std::string Q =Format ("Предлог %s в статье %s не найден в словаре оборотов", Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
 				 ErrorMessage (Q);
 				 continue;
 			 };
@@ -376,15 +376,15 @@ bool CSemanticsHolder::InitTimeUnits()
 	return true;
 };
 
-bool CSemanticsHolder::PrintRusEquivs(string strFileName, DictTypeEnum type)
+bool CSemanticsHolder::PrintRusEquivs(std::string strFileName, DictTypeEnum type)
 {
 	/*ofstream file;
 	file.open(strFileName.c_str());
 	vector<CEngUnitNoToRusUnit>& equivs = GetRusEquivIndexes(type);
 	for(int i = 0 ; i < equivs.size() ; i++ )
 	{
-		string str = "<" + equivs[i].m_RusUnitStr + ">";
-		string ss = Format("%d", equivs[i].m_RusMeanNum);
+		std::string str = "<" + equivs[i].m_RusUnitStr + ">";
+		std::string ss = Format("%d", equivs[i].m_RusMeanNum);
 		str = str + " " + ss;
 		ss = GetRoss(type)->GetEntryStr(equivs[i].m_EngUnitNo);
 		str = ss + " :" + str;
@@ -434,7 +434,7 @@ bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, vector<CEngUnitNoTo
 
 				if(C.m_DomItemNos[1] != -1)
 				{					
-					string buf = GetRossHolder(type)->GetDomItemStrInner(C.m_DomItemNos[1]);
+					std::string buf = GetRossHolder(type)->GetDomItemStrInner(C.m_DomItemNos[1]);
 					assert(buf.length() == 1);
 					Item.m_RusMeanNum = buf[0] - '0';
 					
@@ -494,14 +494,14 @@ bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, vector<SLex
 					itemLexFunValue = pRoss->GetCortegeItem(i,1);
 					if(itemLexFunValue != -1)
 					{
-						string strRusVerb = (const char*)pRoss->GetDomItemStr(itemLexFunValue);							
+						std::string strRusVerb = (const char*)pRoss->GetDomItemStr(itemLexFunValue);							
 						SLexFunIndexes LexFunIndex;
 						LexFunIndex.m_LexFun = (const char*)pRoss->GetDomItemStr(itemLF);
 						LexFunIndex.m_LexFunArg.m_UnitStr = strRusVerb;
 						long item = pRoss->GetCortegeItem(i,2);
 						if( item == DigDomNo )
 						{
-							LexFunIndex.m_LexFunArg.m_MeanNum = string((const char*)pRoss->GetDomItemStr(item))[0] - '0';
+							LexFunIndex.m_LexFunArg.m_MeanNum = std::string((const char*)pRoss->GetDomItemStr(item))[0] - '0';
 						}
 						LexFunIndex.m_LexFunValue.m_UnitStr = pRoss->GetEntryStr(j);
 						LexFunIndex.m_LexFunValue.m_MeanNum = pRoss->GetUnitMeanNum(j);
@@ -517,14 +517,14 @@ bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, vector<SLex
 					long itemLexFunValue = pRoss->GetCortegeItem(i,1);
 					if(itemLexFunValue != -1)
 					{
-						string strRusVerb = (const char*)pRoss->GetDomItemStr(itemLexFunValue);							
+						std::string strRusVerb = (const char*)pRoss->GetDomItemStr(itemLexFunValue);							
 						SLexFunIndexes LexFunIndex;
 						LexFunIndex.m_LexFun = (const char*)pRoss->GetDomItemStr(itemLF);
 						LexFunIndex.m_LexFunValue.m_UnitStr = strRusVerb;
 						long item = pRoss->GetCortegeItem(i,2);
 						if( item == DigDomNo )
 						{
-							LexFunIndex.m_LexFunValue.m_MeanNum = string((const char*)pRoss->GetDomItemStr(item))[0] - '0';
+							LexFunIndex.m_LexFunValue.m_MeanNum = std::string((const char*)pRoss->GetDomItemStr(item))[0] - '0';
 						}
 						LexFunIndex.m_LexFunArg.m_UnitStr = pRoss->GetEntryStr(j);
 						LexFunIndex.m_LexFunArg.m_MeanNum = pRoss->GetUnitMeanNum(j);
@@ -540,7 +540,7 @@ bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, vector<SLex
 }
 
 
-bool WordInList(const char* word_list, int count, string word)
+bool WordInList(const char* word_list, int count, std::string word)
 {
 	for(int i = 0 ; i < count ; i++ )
 		if( !strcmp(word.c_str() , (word_list + (i * MaxWordLen)))  )
@@ -576,7 +576,7 @@ bool LexFunValueComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2)
 
 const char OborotDels[] = " \t";
 
-bool BuildByFieldContents(string s, WORD UnitNo, vector<CUnitContent>& Vect)
+bool BuildByFieldContents(std::string s, WORD UnitNo, vector<CUnitContent>& Vect)
 {
 	size_t i = s.find("(");
 	if (i == s.npos) 
@@ -609,7 +609,7 @@ bool BuildByFieldContents(string s, WORD UnitNo, vector<CUnitContent>& Vect)
           if  (    (j == k) 
 			    || (s[j] == '|')) 
 		  {
-             string q;
+             std::string q;
 			 if (i >0) q += s.substr(0,i);
 			 q += " ";
 			 q += s.substr(last_j+1, j-last_j-1);
@@ -633,7 +633,7 @@ bool BuildContensField(const CDictionary* Dict, vector<CUnitContent>& Vect)
 {
 	Vect.clear();
 	long size = Dict->GetUnitsSize();
-	string strField = "CONTENT";
+	std::string strField = "CONTENT";
 	for(long j = 0 ; j < size ; j++ )
 	{	
 		
@@ -645,7 +645,7 @@ bool BuildContensField(const CDictionary* Dict, vector<CUnitContent>& Vect)
 			{
 				TCortege cortege;
 				cortege = GetCortege(Dict, i);
-				string s = (const char*)Dict->GetDomItemStr(cortege.m_DomItemNos[0]); 
+				std::string s = (const char*)Dict->GetDomItemStr(cortege.m_DomItemNos[0]); 
 				if (!BuildByFieldContents(s, j, Vect) )
 					return false;
 			}
@@ -667,7 +667,7 @@ bool CSemanticsHolder::TokenizeDoubleConj()
  {
    try 
    {
-		string Contents = vectorOborStr[_UnitNo].m_UnitStr;
+		std::string Contents = vectorOborStr[_UnitNo].m_UnitStr;
 		if (Contents.find("...") == -1) continue;
 		StringTokenizer token(Contents.c_str(), " ");
 		CDoubleConj DoubleConj;
@@ -675,7 +675,7 @@ bool CSemanticsHolder::TokenizeDoubleConj()
 		bool InFirstPart = true;
 		while( word = token() )
 		{
-			string s = word;
+			std::string s = word;
 			EngRusMakeUpper(s);
 			
 			if( !strcmp(word, "..." ) )
@@ -790,7 +790,7 @@ void CSemanticsHolder::GetPrepsFromArticle (const CDictionary* Ross, long UnitNo
 			&& (Ross->GetCortegeBracketLeafId(i) == BracketLeafId) 
 		 )
 	  {
-         string Prep = (const char*)Ross->GetDomItemStr(Ross->GetCortegeItem(i,0));
+         std::string Prep = (const char*)Ross->GetDomItemStr(Ross->GetCortegeItem(i,0));
 		 WORD PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
          if (PrepNo != ErrUnitNo) 
 			 Preps.push_back (CDictUnitInterp(OborRoss, PrepNo));
@@ -807,9 +807,9 @@ void CSemanticsHolder::GetPrepsFromArticle (const CDictionary* Ross, long UnitNo
 	"красивый" (ПРИЛ) -> "красиво" (НАР)
 	"лучше" (ПРИЛ) -> "хорошо" (НАР)
 */
-UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string AdjWordForm)
+UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, std::string AdjWordForm)
 {
-	string AdvLemma;	
+	std::string AdvLemma;	
 
 	CFormInfo Paradigm;
 	try {
@@ -825,8 +825,8 @@ UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string A
 	long k=0;
 	for (; k < Paradigm.GetCount(); k++)
 	{
-		string Form = Paradigm.GetWordForm(k);
-		string AnCode = Paradigm.GetAncode(k);
+		std::string Form = Paradigm.GetWordForm(k);
+		std::string AnCode = Paradigm.GetAncode(k);
 		QWORD Grammems;
         BYTE POS;
         GetRusGramTab()->ProcessPOSAndGrammems(AnCode.c_str(), POS, Grammems );
@@ -850,7 +850,7 @@ UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string A
 // построение словосочетаний 
 //================================
 
-bool FindField (const CDictionary* Ross, long UnitNo, string FieldStr)
+bool FindField (const CDictionary* Ross, long UnitNo, std::string FieldStr)
 {
 	BYTE FieldNo = Ross->GetFieldNoByFieldStr(FieldStr.c_str());
 
@@ -877,7 +877,7 @@ bool IsConditional (const CRossHolder& RossDoc, long UnitNo)
 			if (RossDoc.GetRoss()->GetCortegeFieldNo(i) == FieldNo) 
 				if (RossDoc.GetRoss()->GetCortegeItem(i,0) != -1) 
 				{
-					string s =  RossDoc.GetDomItemStrInner(RossDoc.GetRoss()->GetCortegeItem(i,0));
+					std::string s =  RossDoc.GetDomItemStrInner(RossDoc.GetRoss()->GetCortegeItem(i,0));
 					if (s == "УСЛ") return true;			
 					assert (s == "БЕЗУСЛ");
 					return false;
@@ -889,7 +889,7 @@ bool IsConditional (const CRossHolder& RossDoc, long UnitNo)
 
 
 
-bool CSemanticsHolder::BuildColloc (string ContentFieldStr, int CollocUnitNo)
+bool CSemanticsHolder::BuildColloc (std::string ContentFieldStr, int CollocUnitNo)
 {
 	size_t i = ContentFieldStr.find("(");
 	if (i == -1) 
@@ -901,17 +901,17 @@ bool CSemanticsHolder::BuildColloc (string ContentFieldStr, int CollocUnitNo)
         C.m_SemMainWord =  GetRossHolder(CollocRoss)->GetSemMainWordFromArticle(CollocUnitNo);
 		
 		// Build items
-		string ItemStr = ContentFieldStr;
+		std::string ItemStr = ContentFieldStr;
 		TrimLeft(ContentFieldStr);
 		while (!ContentFieldStr.empty())
 		{
 		  int j = ContentFieldStr.find_first_of(" \t");
-		  string Q = ContentFieldStr.substr (0, j);
+		  std::string Q = ContentFieldStr.substr (0, j);
 		  ContentFieldStr.erase(0, j);
 		  CCollocItem CollocItem;
 		  if (!CollocItem.InitCollocItem(Q))
 		  {
-			  string mess = "Unbound reloperator in ";
+			  std::string mess = "Unbound reloperator in ";
 			  mess += GetRoss(CollocRoss)->GetEntryStr(C.UnitNo);
 			  ErrorMessage(mess);
 		  };
@@ -927,7 +927,7 @@ bool CSemanticsHolder::BuildColloc (string ContentFieldStr, int CollocUnitNo)
 		  //незаполненное поле?
 		  if (Cort.m_DomItemNos[0] == -1) continue;
 		  // строю массив U.m_Places по полю CONTENT
-		  string FieldStr = (const char*)GetRoss(CollocRoss)->Fields[Cort.m_FieldNo].FieldStr;
+		  std::string FieldStr = (const char*)GetRoss(CollocRoss)->Fields[Cort.m_FieldNo].FieldStr;
 
 		  // инициализирую перечень всех необходимых синтаксических отношений их поля SYNREP
 		  if (    (FieldStr == "SYNR") 
@@ -935,17 +935,17 @@ bool CSemanticsHolder::BuildColloc (string ContentFieldStr, int CollocUnitNo)
 			   && (Cort.m_BracketLeafId == 0) 
 			 )
 		  {
-			  string F = GetRossHolder(CollocRoss)->GetDomItemStrInner(Cort.m_DomItemNos[1]);
+			  std::string F = GetRossHolder(CollocRoss)->GetDomItemStrInner(Cort.m_DomItemNos[1]);
 			  long PlaceNo1 = F[1] - '0' - 1;
 			  F = GetRossHolder(CollocRoss)->GetDomItemStrInner(Cort.m_DomItemNos[2]);
 			  long PlaceNo2 = F[1] - '0' - 1;
-			  string SynGrp = GetRossHolder(CollocRoss)->GetDomItemStrInner(Cort.m_DomItemNos[0]);
+			  std::string SynGrp = GetRossHolder(CollocRoss)->GetDomItemStrInner(Cort.m_DomItemNos[0]);
 			  rml_TRACE  (SynGrp.c_str());
 			  if  (    (PlaceNo1 >= C.Items.size())
 				    ||  (PlaceNo2 >= C.Items.size())
 				  )
 			  {
-				  string mess = "Error in SYNREP  in ";
+				  std::string mess = "Error in SYNREP  in ";
 				  mess += GetRoss(CollocRoss)->GetEntryStr(C.UnitNo);
 				  ErrorMessage(mess);
 				  return false;
@@ -972,12 +972,12 @@ bool CSemanticsHolder::BuildColloc (string ContentFieldStr, int CollocUnitNo)
           if  (    (j == k) 
 			    || (ContentFieldStr[j] == '|')) 
 		  {
-             string q;
+             std::string q;
 			 if (i >0) 
 				 q += ContentFieldStr.substr(0, i-1);
-			 q += string(" "); 
+			 q += std::string(" "); 
 			 q += ContentFieldStr.substr(last_j+1, j-last_j-1);
-			 q += string(" ");
+			 q += std::string(" ");
 		     if ( k-1 < ContentFieldStr.length() ) 
 				 q += ContentFieldStr.substr(k+1);
 
@@ -994,7 +994,7 @@ bool CSemanticsHolder::BuildColloc (string ContentFieldStr, int CollocUnitNo)
 };
 
 
-CCollocItemRefCollect* CSemanticsHolder::InsertRusCollocItemRef(string S)
+CCollocItemRefCollect* CSemanticsHolder::InsertRusCollocItemRef(std::string S)
 {
 	EngRusMakeUpper(S);
 	vector<CCollocItemRefCollect>::iterator It = lower_bound(m_RusCollocItemRefs.begin(), m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
@@ -1035,7 +1035,7 @@ bool CSemanticsHolder::BuildCollocs()
 	if (!m_RusCollocs[i].Items[k].IsHole())
 	{
 
-		string S =  m_RusCollocs[i].Items[k].Item;
+		std::string S =  m_RusCollocs[i].Items[k].Item;
 		EngRusMakeUpper(S);
 		CCollocItemRefCollect* It = InsertRusCollocItemRef(S);
 		It->Refs.push_back(CCollocItemRef(i,k));

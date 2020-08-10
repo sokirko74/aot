@@ -37,7 +37,7 @@ class CMorphwizardView : public CSizeFormView
 	int		GetPredictOrderId(const CPredictSuffix& S)  const;
 	void	LoadHistory();
 	void	SaveHistory();
-	void	ChangeHistory(string query);
+	void	ChangeHistory(std::string query);
 
 protected: // create from serialization only
 	CMorphwizardView();

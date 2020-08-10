@@ -147,9 +147,9 @@ struct TreeVariantValue {
 
     bool operator == ( const TreeVariantValue& X ) const;
 	bool operator < ( const TreeVariantValue& X ) const;
-	string	GetStr() const;
-	string	GetStrOfNotNull() const;
-	string	GetDifference(const TreeVariantValue& X) const;
+	std::string	GetStr() const;
+	std::string	GetStrOfNotNull() const;
+	std::string	GetDifference(const TreeVariantValue& X) const;
 	
 };
 

@@ -98,7 +98,7 @@ void CArticleDoc::Serialize(CArchive& ar)
 			fprintf (fp,"============\r\n");
 			fprintf (fp,"%s",GetRoss()->GetUnitTextHeader(m_UnitNo).c_str());
 		    try {
-				string strPath = GetRegistryString("SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName\\ComputerName");
+				std::string strPath = GetRegistryString("SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName\\ComputerName");
 				fprintf (fp, "//MachineName = %s \r\n", strPath.c_str());
 				fprintf (fp,"//Date = %s\r\n", (const char*)CTime::GetCurrentTime().Format( "%A, %B %d, %Y ") ); 
 				fprintf (fp,"//Time = %s\r\n", (const char*)CTime::GetCurrentTime().Format( "%H : %M" ));
@@ -211,7 +211,7 @@ BOOL CArticleDoc::OpenArticle (WORD  UnitNo, CRossDoc* pRossDoc)
 	m_Article.m_pRoss = GetRoss();
 	m_Article.ReadFromDictionary(UnitNo, true, false);
 
-	string Article  = m_Article.GetArticleStr();
+	std::string Article  = m_Article.GetArticleStr();
 	if (Article.length() > 0 )
 		View->SetText(Article.c_str());
 
@@ -230,9 +230,9 @@ BOOL CArticleDoc::OpenArticle (WORD  UnitNo, CRossDoc* pRossDoc)
 };
 
 
-string CArticleDoc::GetArticleErrorStr() const
+std::string CArticleDoc::GetArticleErrorStr() const
 {
-	string  s =  m_Article.m_LastError;
+	std::string  s =  m_Article.m_LastError;
 	if ( s.empty() ) return s;
 	int ErrorLine = m_Article.m_ErrorLine;
 	if (ErrorLine != -1)
@@ -317,7 +317,7 @@ bool CArticleDoc :: Markout ()
 		CString SaveArticleStr = GetArticleView()->GetText();
 		if (m_Article.SetArticleStr(GetArticleView()->GetText()))
 		{
-			string  A = m_Article.GetArticleStr();
+			std::string  A = m_Article.GetArticleStr();
 			GetArticleView()->SetText(A.c_str());
 
 			GetArticleView()->m_FldScroll.SetScrollRange (0, (m_Article.m_Fields.empty() ? 0 : m_Article.m_Fields.size() - 1));

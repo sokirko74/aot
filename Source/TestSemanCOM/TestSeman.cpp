@@ -14,7 +14,7 @@ Relations:
 	OBJ (2, 1)
 */
 
-#include "string"
+#include "std::string"
 #import "../../bin/seman.tlb"
 #import "../../bin/agramtab.tlb"
 using namespace SEMANLib;
@@ -23,9 +23,9 @@ AGRAMTABLib::IGramTabPtr piRusGramTab;
 using namespace std;
 
 
-string GetGramInfo (long Poses, __int64 Grammems )
+std::string GetGramInfo (long Poses, __int64 Grammems )
 {
-	string Result;
+	std::string Result;
 	for (size_t i =0; i < sizeof(Poses)*8; i++)
 	if ( (1<<i) &  Poses)
 	{
@@ -37,19 +37,19 @@ string GetGramInfo (long Poses, __int64 Grammems )
 	return  Result;
 }
 
-string GetRelOperatorsOfNode (IComSemNodePtr Node)
+std::string GetRelOperatorsOfNode (IComSemNodePtr Node)
 {
-	string R;
+	std::string R;
 	for(int i=0; i < Node->RelOperatorsCount; i++)
 	{
-		R += string("(")+(const char*)Node->RelOperators[i]+")";
+		R += std::string("(")+(const char*)Node->RelOperators[i]+")";
 
 	}
 	return R;
 
 }
 
-string GetWordRealizationOfIncominRelation (ISemStructurePtr piSeman, int NodeNo)
+std::string GetWordRealizationOfIncominRelation (ISemStructurePtr piSeman, int NodeNo)
 {
 	for (int i = 0; i < piSeman->RelationsCount; i++)
 	{
@@ -63,12 +63,12 @@ string GetWordRealizationOfIncominRelation (ISemStructurePtr piSeman, int NodeNo
 }
 
 
-string GetWordStrOfNode (ISemStructurePtr piSeman, int NodeNo)
+std::string GetWordStrOfNode (ISemStructurePtr piSeman, int NodeNo)
 {
 	IComSemNodePtr Node = piSeman->Nodes[NodeNo];
-	string NodeStr;
+	std::string NodeStr;
 
-	string PrepOrConj = 
+	std::string PrepOrConj = 
 		GetWordRealizationOfIncominRelation(piSeman, NodeNo);
 
 	if (PrepOrConj.empty())

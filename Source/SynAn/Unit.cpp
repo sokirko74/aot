@@ -136,7 +136,7 @@ STDMETHODIMP CCOMUnit::get_GrammemsStr(BSTR *pVal)
 			return E_FAIL;
 
 
-		string GrammemsStr = m_pUnit->GetGrammemsByAncodes();
+		std::string GrammemsStr = m_pUnit->GetGrammemsByAncodes();
 
 		if (m_pUnit->m_Type == EWord)
 		{

@@ -69,13 +69,13 @@ public:
 	void	FreeTable();
 	void	BuildUnitBufferUpper ();
 	void	InitTokenBuffer();
-	bool	InitInputBuffer(const string& S);	
+	bool	InitInputBuffer(const std::string& S);	
 	void	ClearInputBuffer();
 	void	AddUnit(const CGraLine& NewLine);
 	const char*	GetUnitBufferStart() const;
 	const char*	GetUnitUpperBufferStart() const;
 	const char*	GetUppercaseToken(DWORD LineNo) const;
-	string		GetToken(DWORD LineNo) const;
+	std::string		GetToken(DWORD LineNo) const;
 	size_t		GetTokensCount() const;
 	DWORD		GetTokenInputOffset(DWORD LineNo) const;
 	BYTE		GetTokenLength(DWORD LineNo) const;

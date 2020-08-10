@@ -51,7 +51,7 @@ CTagSet::~CTagSet(void)
 // m_Pos and m_Grammems- Dialing description 
 // 
 /*
-bool CTagSet::ReadMyStemTagSet(string FileName, const CAgramtab* pAgramtab)
+bool CTagSet::ReadMyStemTagSet(std::string FileName, const CAgramtab* pAgramtab)
 {
 	FILE * fp = fopen(FileName.c_str(), "r");
 	if (!fp)
@@ -63,17 +63,17 @@ bool CTagSet::ReadMyStemTagSet(string FileName, const CAgramtab* pAgramtab)
 	char buffer[1000];
 	while (fgets(buffer, 1000, fp))
 	{
-		string line = buffer;
+		std::string line = buffer;
 		Trim(line);
 		if (line.empty()) continue;
 		
 		StringTokenizer tok(line.c_str(), "_");
-		string Pos;
-		string Grammems;
+		std::string Pos;
+		std::string Grammems;
 		while (tok())
 		{
-			string s = tok.val();
-			string pos = POS_MyStem2Dialing(s);
+			std::string s = tok.val();
+			std::string pos = POS_MyStem2Dialing(s);
 			if (!pos.empty())
 			{
 				Pos  = pos;
@@ -82,14 +82,14 @@ bool CTagSet::ReadMyStemTagSet(string FileName, const CAgramtab* pAgramtab)
 			{
 				if (!IsMyStemSpecificGrammem(s))
 				{
-					string g = Grammem_MyStem2Dialing(s);
+					std::string g = Grammem_MyStem2Dialing(s);
 					if (!g.empty())
 						Grammems += g + ",";
 				}
 			}
 
 		}
-		string pattern = Pos + " " + Grammems;
+		std::string pattern = Pos + " " + Grammems;
 		CTag T;
 		T.m_Name = line;
 		if (!pAgramtab->ProcessPOSAndGrammems(pattern.c_str(), T.m_Pos, T.m_Grammems))
@@ -125,13 +125,13 @@ bool CTagSet::ReadMyStemTagSet(string FileName, const CAgramtab* pAgramtab)
 */
 
 
-bool CTagSet::ReadTagSet(string FileName, const CAgramtab* pAgramtab)
+bool CTagSet::ReadTagSet(std::string FileName, const CAgramtab* pAgramtab)
 {
 	m_Tags.clear();
 	FILE * fp = fopen(FileName.c_str(), "r");
 	if (!fp)
 	{
-		string RmlFileName = GetRmlVariable();
+		std::string RmlFileName = GetRmlVariable();
 		if (		!RmlFileName.empty()  )
 		{
 				if (		( RmlFileName[RmlFileName.length() - 1] != '/')
@@ -155,7 +155,7 @@ bool CTagSet::ReadTagSet(string FileName, const CAgramtab* pAgramtab)
     // tag2  КР_ПРИЧАСТИЕ мр
 	while (fgets(buffer, 1000, fp))
 	{
-		string s = buffer;
+		std::string s = buffer;
 		Trim(s);
 		if (s.empty()) continue;
 		CTag T;
@@ -166,17 +166,17 @@ bool CTagSet::ReadTagSet(string FileName, const CAgramtab* pAgramtab)
 		if (s[0] == '/')
 		{
 			int i = (int)s.find('/',1);
-			if (i == string::npos)
+			if (i == std::string::npos)
 			{
 				fprintf (stderr, "cannot find the second '/' in  %s\n", s.c_str());
 				return false;
 			};
-			string q = s.substr(1, i-1);
+			std::string q = s.substr(1, i-1);
 			s.erase(0, i+1);
 			StringTokenizer tok(q.c_str(), ", ");
 			while (tok())
 			{
-				string lemma  = tok.val();
+				std::string lemma  = tok.val();
 				EngRusMakeLower(lemma);
 				T.m_Lemmas.push_back(lemma);
 			};
@@ -250,7 +250,7 @@ CTag CTagSet::GetBestSuitedTag (const CTag& T) const
 {
 	CTag Best;
 	size_t  MaxSize = 0;
-	for (map<string, CTag>::const_iterator it = m_Tags.begin(); it != m_Tags.end(); it++)
+	for (map<std::string, CTag>::const_iterator it = m_Tags.begin(); it != m_Tags.end(); it++)
 	{ 
 		const CTag&  P = it->second;
 		bool bCheckLemma =  !T.m_Lemmas.empty() && find(P.m_Lemmas.begin(), P.m_Lemmas.end(), *T.m_Lemmas.begin()) != P.m_Lemmas.end();
@@ -279,9 +279,9 @@ CTag CTagSet::GetBestSuitedTag (const CTag& T) const
 
 
 
-vector<CTag> CTagSet::DecipherTagStr (string TagStr, const CAgramtab* pAgramtab) const 
+vector<CTag> CTagSet::DecipherTagStr (std::string TagStr, const CAgramtab* pAgramtab) const 
 {
-	map<string, CTag>::const_iterator tag_set_it = m_Tags.find(TagStr);
+	map<std::string, CTag>::const_iterator tag_set_it = m_Tags.find(TagStr);
 	vector<CTag> Tags;
 	if (tag_set_it != m_Tags.end())
 	{
@@ -312,7 +312,7 @@ vector<CTag> CTagSet::DecipherTagStr (string TagStr, const CAgramtab* pAgramtab)
 
 
 
- CTag CTagSet::GetTagFromAncode(const CAgramtab* pAgramtab, const char* Ancode, QWORD CommonGrammems, const string& Lemma) const
+ CTag CTagSet::GetTagFromAncode(const CAgramtab* pAgramtab, const char* Ancode, QWORD CommonGrammems, const std::string& Lemma) const
 {
 	CTag T;
 	pAgramtab->GetGrammems(Ancode, T.m_Grammems);

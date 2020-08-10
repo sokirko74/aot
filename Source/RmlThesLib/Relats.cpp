@@ -6,7 +6,7 @@
 #include "Thesaurus.h"
 
 
-bool CThesaurus::LoadRelats(string FileName)
+bool CThesaurus::LoadRelats(std::string FileName)
 {
 	m_Relats.clear();
 	FILE* fp = fopen (FileName.c_str(), "r");
@@ -17,7 +17,7 @@ bool CThesaurus::LoadRelats(string FileName)
 		fclose(fp);
 		return false;
 	};
-	string Header = buff;
+	std::string Header = buff;
 	Trim(Header);
 	if (Header != "Concept1Id;Concept2Id;RelationId;Concept2CutStr;")
 	{

@@ -22,7 +22,7 @@
 struct CBase
 {
 	int    num;
-	string txt;
+	std::string txt;
 
 	CBase() : num(0),txt("") {}
 
@@ -42,8 +42,8 @@ struct CBase
 
 struct CSourceExample
 {
-	string	m_Text;
-	string	m_Comments;
+	std::string	m_Text;
+	std::string	m_Comments;
 
 };
 /////////////////////////////////////////////////////////////////////////////
@@ -77,9 +77,9 @@ public:
 
 protected:
 	HICON m_hIcon;
-	string m_CommandLine;
-	string m_ExternalOutFile;
-	string m_ExternalCatalog;
+	std::string m_CommandLine;
+	std::string m_ExternalOutFile;
+	std::string m_ExternalCatalog;
 // Data
 public:
 	MorphLanguageEnum				m_Language;
@@ -108,7 +108,7 @@ public:
 	void Proceed();
 
 	BOOL SaveBase();
-	string GetBaseFileName() const;
+	std::string GetBaseFileName() const;
 	bool PerformExternalExeFileCheck(vector<string>& Result);
 	int		GetNumberOfExamplesToCheck() const;
 	void	ChangeHistory(const CString& query);

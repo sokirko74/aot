@@ -125,15 +125,15 @@ bool CConSent :: InitBasicInformation ()
 
 
 
-string  CConSent :: GetString() const
+std::string  CConSent :: GetString() const
 {
-	string Result;
+	std::string Result;
 	int LastLength  = 0;
 	bool bHasHard = false; 
 	Result = "<sent>";
 	for (int  i= m_StartNo; i <= m_EndNo; i++)
 	{
-		string s (m_GraFile->GetUnits()[i].GetToken(), m_GraFile->GetUnits()[i].GetTokenLength());
+		std::string s (m_GraFile->GetUnits()[i].GetToken(), m_GraFile->GetUnits()[i].GetTokenLength());
 		Result += ConvertASCIIToHtmlSymbols(s);
 		if (m_GraFile->HasDescr(i, OSentEnd))
 		{

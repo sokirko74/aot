@@ -4,25 +4,25 @@
 
 #include "../common/argparse.h"
 
-void GetAnanlytForms(const CSentence &Sentence, string &Res) {
+void GetAnanlytForms(const CSentence &Sentence, std::string &Res) {
     for (int WordNo = 0; WordNo < Sentence.m_Words.size(); WordNo++) {
         const CSynWord &W = Sentence.m_Words[WordNo];
         if (!W.m_MainVerbs.empty()) {
-            Res += string("\t<analyt> ") + W.m_strWord.c_str();
+            Res += std::string("\t<analyt> ") + W.m_strWord.c_str();
             for (size_t i = 0; i < W.m_MainVerbs.size(); i++) {
-                Res += string(" ") + Sentence.m_Words[W.m_MainVerbs[i]].m_strWord;
+                Res += std::string(" ") + Sentence.m_Words[W.m_MainVerbs[i]].m_strWord;
 
                 const CSynWord &W_1 = Sentence.m_Words[W.m_MainVerbs[i]];
                 for (size_t j = 0; j < W_1.m_MainVerbs.size(); j++)
-                    Res += string(" ") + Sentence.m_Words[W_1.m_MainVerbs[j]].m_strWord;
+                    Res += std::string(" ") + Sentence.m_Words[W_1.m_MainVerbs[j]].m_strWord;
             };
             Res += "</analyt>\n";
         }
     }
 }
 
-string GetWords(const CSentence &Sentence, const CPeriod &P) {
-    string S;
+std::string GetWords(const CSentence &Sentence, const CPeriod &P) {
+    std::string S;
     for (int WordNo = P.m_iFirstWord; WordNo <= P.m_iLastWord; WordNo++) {
         S += Sentence.m_Words[WordNo].m_strWord;
         if (WordNo < P.m_iLastWord)
@@ -31,7 +31,7 @@ string GetWords(const CSentence &Sentence, const CPeriod &P) {
     return S;
 }
 
-void GetGroups(const CSentence &Sentence, const CAgramtab &A, string &Res) {
+void GetGroups(const CSentence &Sentence, const CAgramtab &A, std::string &Res) {
     int nClausesCount = Sentence.GetClausesCount();
 
     for (int ClauseNo = 0; ClauseNo < nClausesCount; ClauseNo++) {
@@ -51,7 +51,7 @@ void GetGroups(const CSentence &Sentence, const CAgramtab &A, string &Res) {
             {
                 int ClauseType = (V.m_ClauseTypeNo == -1) ? UnknownSyntaxElement
                                                           : Clause.m_vectorTypes[V.m_ClauseTypeNo].m_Type;;
-                string Type;
+                std::string Type;
                 if (ClauseType != UnknownSyntaxElement)
                     Type = (const char *) A.GetClauseNameByType(ClauseType);
                 else
@@ -74,15 +74,15 @@ void GetGroups(const CSentence &Sentence, const CAgramtab &A, string &Res) {
 
 }
 
-string GetNodeStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo) {
+std::string GetNodeStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo) {
     if (GroupNo != -1)
         return GetWords(Sentence, RelIt.GetFirmGroups()[GroupNo]);
     else
         return Sentence.m_Words[WordNo].m_strWord;
 }
 
-string
-GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo, string &Lemma) {
+std::string
+GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo, std::string &Lemma) {
     Lemma = "";
     if (GroupNo != -1)
         return "";
@@ -97,7 +97,7 @@ GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int Gr
     }
 }
 
-void GetRelations(const CSentence &Sentence, string &Result) {
+void GetRelations(const CSentence &Sentence, std::string &Result) {
     CRelationsIterator RelIt;
     RelIt.SetSentence(&Sentence);
     for (int i = 0; i < Sentence.m_vectorPrClauseNo.size(); i++)
@@ -105,13 +105,13 @@ void GetRelations(const CSentence &Sentence, string &Result) {
     RelIt.BuildRelations();
     for (long RelNo = 0; RelNo < RelIt.GetRelations().size(); RelNo++) {
         const CSynOutputRelation &piRel = RelIt.GetRelations()[RelNo];
-        string RelName = Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
-        string Src = GetNodeStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord);
-        string Trg = GetNodeStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord);
-        string SrcLemma, TrgLemma;
-        string SrcGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord, SrcLemma);
-        string TrgGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord, TrgLemma);
-        string GramRel = Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems);
+        std::string RelName = Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
+        std::string Src = GetNodeStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord);
+        std::string Trg = GetNodeStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord);
+        std::string SrcLemma, TrgLemma;
+        std::string SrcGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord, SrcLemma);
+        std::string TrgGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord, TrgLemma);
+        std::string GramRel = Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems);
 
         Result += Format(
                 "\t<rel name=\"%s\" gramrel=\"%s\" lemmprnt=\"%s\" grmprnt=\"%s\" lemmchld=\"%s\" grmchld=\"%s\" > %s -> %s </rel>\n",
@@ -120,8 +120,8 @@ void GetRelations(const CSentence &Sentence, string &Result) {
     }
 }
 
-string GetStringBySyntax(const CSentencesCollection &SC, const CAgramtab &A, string input) {
-    string Result;
+std::string GetStringBySyntax(const CSentencesCollection &SC, const CAgramtab &A, std::string input) {
+    std::string Result;
     Result += Format("<chunk>\n");
     Result += Format("<input>%s</input>\n", input.c_str());
     for (size_t nSent = 0; nSent < SC.m_vectorSents.size(); nSent++) {
@@ -155,7 +155,7 @@ void checkSpeed(ArgumentParser& args, CSyntaxHolder& H) {
         std::cerr << "File " <<  f << "\n";
         H.m_bTimeStatis = true;
         H.GetSentencesFromSynAn(f, true);
-        string s = GetStringBySyntax(H.m_Synan, *H.m_pGramTab, f.c_str());
+        std::string s = GetStringBySyntax(H.m_Synan, *H.m_pGramTab, f.c_str());
         args.GetOutputStream() << s << "\n\n";
     }
 }
@@ -177,7 +177,7 @@ int main(int argc, const char **argv) {
     }
 
     try {
-        string s;
+        std::string s;
         while (getline(args.GetInputStream(), s)) {
             Trim(s);
             if (s.empty()) continue;

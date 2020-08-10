@@ -22,13 +22,13 @@ int main(int argc, char **argv)
 			||  !strcmp (argv[1],  "/help")
 	)
 		PrintUsage();
-	string Action = argv[1];
+	std::string Action = argv[1];
 	if	(		(Action != "ToTxt")  
 			&&	(Action != "FromTxt")  
 		)
 		PrintUsage();
 
-	string FileName = argv[2];
+	std::string FileName = argv[2];
 	CDictionary Dict;
 	if (Action == "FromTxt")
 	{
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 		};
 		Dict.m_bShouldSaveComments = true;
 
-		string Messages;
+		std::string Messages;
 		bool bResult = Dict.ImportFromText(FileName,false, iceSkip,1, Messages);
 		fprintf (stderr, "%s", Messages.c_str() );
 		if (bResult)

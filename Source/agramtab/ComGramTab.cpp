@@ -173,7 +173,7 @@ STDMETHODIMP CComGramTab::GetClauseNameByType(long type, BSTR *bstrName)
 
 STDMETHODIMP CComGramTab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, BSTR *gramcodes, BOOL* bRes)
 {
-	string str;
+	std::string str;
 	*bRes = m_pAgramtab->GetGramCodeByGrammemsAndPartofSpeechIfCan(Pos, grammems, str);
 	*gramcodes = _bstr_t(str.c_str()).copy();
 

@@ -161,6 +161,6 @@ bool CEngGramTab::is_morph_article(poses_mask_t poses)  const
 
 void TestMem1() 
 {
-	string Result;
+	std::string Result;
 	Result.append("test",2);
 }

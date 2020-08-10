@@ -291,7 +291,7 @@ void CArticleView::EditOneValue(CRossDevTextField& F)
 		return;
 	};
 
-	string Q = WriteToString(GetRoss(), GetRoss()->Fields[NewValue.m_FieldNo].m_Signats[NewValue.GetSignatNo()].sFrmt, NewValue);
+	std::string Q = WriteToString(GetRoss(), GetRoss()->Fields[NewValue.m_FieldNo].m_Signats[NewValue.GetSignatNo()].sFrmt, NewValue);
 	CString S;
 	S.Format ( NewValue.GetFieldFormat(), ConstructFldName(GetRoss(), F.FieldNo, F.LeafId, F.BracketLeafId), Q.c_str());
 	m_RichEdit.ReplaceSel(S);
@@ -322,11 +322,11 @@ void CArticleView::WriteToEdit (vector<TCortege10>& L, size_t nPos)
 	// сначала записываем первую строку, т.к. она сильно отличается от всех
 	if (L.size() > 0)
 	{
-		string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[0].m_FieldNo].m_Signats[L[0].GetSignatNo()].sFrmt, L[0]);
+		std::string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[0].m_FieldNo].m_Signats[L[0].GetSignatNo()].sFrmt, L[0]);
 		LevelId = L[0].m_LevelId;
 		if ( LevelId == 1 )  
 		{
-			string t = "1 ";
+			std::string t = "1 ";
 			t +=  Q;
 			Q = t.c_str();
 		};
@@ -342,7 +342,7 @@ void CArticleView::WriteToEdit (vector<TCortege10>& L, size_t nPos)
 
 	for (size_t i=1; i<L.size(); i++)
 	{
-		string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[i].m_FieldNo].m_Signats[L[i].GetSignatNo()].sFrmt, L[i]);
+		std::string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[i].m_FieldNo].m_Signats[L[i].GetSignatNo()].sFrmt, L[i]);
 		// cмотри выше Положение о выравнивании
 		if (L[i].m_LevelId > LevelId)
 		{
@@ -463,10 +463,10 @@ void Lemmatize(char* OutBuf, char* InBuf)
 
 		
 		vector<CFormInfo> ParadigmCollection;
-		string WordForm = InBuf;
+		std::string WordForm = InBuf;
 		P->CreateParadigmCollection(false, WordForm, false,false, ParadigmCollection);
 		if (ParadigmCollection.empty()) return;
-		string t = ParadigmCollection[0].GetWordForm(0);
+		std::string t = ParadigmCollection[0].GetWordForm(0);
 		strcpy(OutBuf, t.c_str());
 		RusMakeLower(OutBuf);
 	}

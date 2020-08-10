@@ -1,18 +1,16 @@
-#ifndef __rus_numerals
-#define __rus_numerals
-
+#pragma once
 #include  "utilit.h"
 
 struct CNumeralToNumber
 {
-	char				m_Cardinal[25]; // "два"
-	char				m_Ordinal[25]; // "второй"
-	char				m_Adverb[25]; // "ВДВОЕМ"
-	char				m_CoollectiveNumber[25]; //  "ДВОЕ"
-	char				m_RomanNumber[25]; // II
-	double				m_Number; // 2
-    bool                m_bNoun; // false
-	char				m_GenitForm[25]; // "двух" (двухламповый)
+	const char*	m_Cardinal; // "два"
+	const char* m_Ordinal; // "второй"
+	const char* m_Adverb; // "ВДВОЕМ"
+	const char* m_CoollectiveNumber; //  "ДВОЕ"
+	const char* m_RomanNumber; // II
+	double		m_Number; // 2
+    bool        m_bNoun; // false
+	const char* m_GenitForm; // "двух" (двухламповый)
 };
 
 const size_t NumeralToNumberCount = 42;
@@ -66,14 +64,11 @@ const CNumeralToNumber NumeralToNumber[NumeralToNumberCount+1] =
 
 extern const CNumeralToNumber NumeralToNumber[];
 
-extern string IntToStr (double i);
-extern string FindByNumber(QWORD Number);
-extern int IsAdverbRule(const string& Lemma);
-extern double GetCardinalNumeral(const string& word);
-extern QWORD GetOrdinalNumeral(const string& word);
-extern QWORD GetNounNumeral(const string& word);
-extern string spellout_number_ru(QWORD x, BYTE IsOrdinal); // 0 - no , 1 - yes, 10 - yes, for thousands
-
-#endif
-
+extern std::string IntToStr (double i);
+extern std::string FindByNumber(QWORD Number);
+extern int IsAdverbRule(const std::string& Lemma);
+extern double GetCardinalNumeral(const std::string& word);
+extern QWORD GetOrdinalNumeral(const std::string& word);
+extern QWORD GetNounNumeral(const std::string& word);
+extern std::string spellout_number_ru(QWORD x, BYTE IsOrdinal); // 0 - no , 1 - yes, 10 - yes, for thousands
 

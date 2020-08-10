@@ -81,9 +81,9 @@ bool CClause::HasType (EClauseType Type)  const
 
 
 
-string  CClause::GetTraceStr() const
+std::string  CClause::GetTraceStr() const
 {
-	string T;
+	std::string T;
 	for (int i = 0; i < m_vectorTypes.size(); i++)
 	{
 		T += GetOpt()->GetGramTab()->GetClauseNameByType(m_vectorTypes[i].m_Type);

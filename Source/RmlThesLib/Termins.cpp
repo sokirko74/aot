@@ -45,7 +45,7 @@ int  CThesaurus::GetTerminNoByTextEntryId(long TextEntryId) const
 
 
 
-bool CThesaurus::LoadTermins(string FileName)
+bool CThesaurus::LoadTermins(std::string FileName)
 {
 	m_Termins.clear();
 	FILE* fp = fopen (FileName.c_str(), "r");
@@ -56,7 +56,7 @@ bool CThesaurus::LoadTermins(string FileName)
 		fclose(fp);
 		return false;
 	};
-	string Header = buff;
+	std::string Header = buff;
 	Trim(Header);
 	if (Header != "TextEntryId;TextEntryStr;FreqCollocTypeId;AbbrForm;SynonymsCount;")
 	{
@@ -109,7 +109,7 @@ bool CThesaurus::LoadTermins(string FileName)
 
 	for (long i=0; i < m_Termins.size(); i++)
 		if (m_Termins[i].m_AbbrForm[0] != 0)
-			m_AbbrForms2TerminNo[string(m_Termins[i].m_AbbrForm)] = i;
+			m_AbbrForms2TerminNo[std::string(m_Termins[i].m_AbbrForm)] = i;
 
     fclose(fp);
 

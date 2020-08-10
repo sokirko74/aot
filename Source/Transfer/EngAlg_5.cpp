@@ -71,7 +71,7 @@ void  CEngSemStructure::MoveMeaningRelsToNewNode(int iOldNode,int iNewNode)
 /////////////////////////////////////////////////////////////////////////////
 // MakeBeNodeForEngNode()
 
-int CEngSemStructure::MakeBeNodeForEngNode(int iEngNode,string sTenseHistory,bool bCheckOtherVerb)
+int CEngSemStructure::MakeBeNodeForEngNode(int iEngNode,std::string sTenseHistory,bool bCheckOtherVerb)
 {
 	if( m_Nodes[iEngNode].m_MainWordNo==-1 )
 		return -1;
@@ -253,8 +253,8 @@ void CEngSemStructure::ApplyInvitatoryRule(int iEngNode)
 	if( m_Nodes[iEngNode].m_MainWordNo==-1 )
 		return;
 
-	string strSoft = "_мягк_пригласит_наклонение";
-	string strHard = "_пригласит_наклонение";
+	std::string strSoft = "_мягк_пригласит_наклонение";
+	std::string strHard = "_пригласит_наклонение";
 	
 	bool bSoft = m_Nodes[iEngNode].HasRelOperator(strSoft);
 	bool bHard = m_Nodes[iEngNode].HasRelOperator(strHard);
@@ -320,7 +320,7 @@ void CEngSemStructure::ApplyInvitatoryRule(int iEngNode)
 /////////////////////////////////////////////////////////////////////////////
 // RefineByNumeralMarks()
 
-string fix_case(const CEngSemWord& EngWord);
+std::string fix_case(const CEngSemWord& EngWord);
 
 void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 {
@@ -346,7 +346,7 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 	vector< SEngEquiv > vectorEngEquivs;
 	GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),iRusNode);
 
-	string StrNumeral = "";
+	std::string StrNumeral = "";
 	for( int i=0; i<vectorEngEquivs.size(); i++ )
 	{
 		if( vectorEngEquivs[i].m_StrNumeral.empty() )
@@ -376,9 +376,9 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 	for( int k=0; k<piPC.size(); k++ )
 	{
 		const CFormInfo& piPagadigm = piPC[k];
-		string anc = piPagadigm.GetAncode(0);
+		std::string anc = piPagadigm.GetAncode(0);
 		anc = anc.substr(0,2);
-		string pos = helper.GetEngGramTab()->GetPartOfSpeechStr(helper.GetEngGramTab()->GetPartOfSpeech(anc.c_str()));
+		std::string pos = helper.GetEngGramTab()->GetPartOfSpeechStr(helper.GetEngGramTab()->GetPartOfSpeech(anc.c_str()));
 		if( pos != "VERB" )
 			continue;
 		pid = piPagadigm.GetParadigmId();

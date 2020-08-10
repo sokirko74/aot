@@ -105,7 +105,7 @@ BOOL CTranslations::OnSetActive()
 				CString Q = Prd.GetWordForm(0).c_str();
 
 				//!!! получаем флаг
-				string t;
+				std::string t;
 				int POS = Pairs.GetFlag(k, 0, t);
 				if (   ((P->PartOfSpeech == NOUN) &&  (POS != 0 ))
 					|| ((P->PartOfSpeech == INFINITIVE) &&  (POS != 1 ))

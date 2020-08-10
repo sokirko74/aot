@@ -37,8 +37,8 @@ bool  CheckTreeRecursive(const CRusSemStructure& AnswerStruct, int AnswerRoot, c
 		if (QuestRel.m_bDopRelation) continue;
 		bool bQuestionWord = QuestionStruct.m_Nodes[QuestRel.m_TargetNodeNo].m_bQuestionWord;
 
-		string QuestRelName( QuestRel.m_Valency.m_RelationStr.c_str() );
-		vector<string> PossibleRels(1,  QuestRelName);
+		std::string QuestRelName( QuestRel.m_Valency.m_RelationStr.c_str() );
+		vector<std::string> PossibleRels(1,  QuestRelName);
 		if (bQuestionWord)
 		{
 			IncludeLowerInHierarchy (&QuestionStruct.m_pData->m_HierarchySemRelDoc, PossibleRels);
@@ -49,7 +49,7 @@ bool  CheckTreeRecursive(const CRusSemStructure& AnswerStruct, int AnswerRoot, c
 		
 		for (int AnsRelNo=0;  AnsRelNo < AnswerRels.size(); AnsRelNo++)
 		{
-			string AnswRel(AnswerStruct.m_Relations[AnswerRels[AnsRelNo]].m_Valency.m_RelationStr.c_str());
+			std::string AnswRel(AnswerStruct.m_Relations[AnswerRels[AnsRelNo]].m_Valency.m_RelationStr.c_str());
 			// if QuestRelName is equal to AnswRel, then it the best case
 			if (QuestRelName == AnswRel)
 			{
@@ -92,7 +92,7 @@ int	FindAnswer(const CRusSemStructure& AnswerStr, const CRusSemStructure& Questi
 	if (N.m_MainWordNo == -1)
 		return -1;
 
-	string RootLemma = N.m_Words[N.m_MainWordNo].m_Lemma;
+	std::string RootLemma = N.m_Words[N.m_MainWordNo].m_Lemma;
 	int AnswerNodeNo = -1;
 	for (size_t i=0; i < AnswerStr.m_Nodes.size(); i++)
 		if (CheckTreeRecursive(AnswerStr, i, QuestionStr, roots[0], AnswerNodeNo))
@@ -106,7 +106,7 @@ int	FindAnswer(const CRusSemStructure& AnswerStr, const CRusSemStructure& Questi
 	return -1;
 };
 
-bool	CRusSemStructure::SemanticAnswer(string& Result, const vector<CRusSemStructure>&	SavedSentences) const
+bool	CRusSemStructure::SemanticAnswer(std::string& Result, const vector<CRusSemStructure>&	SavedSentences) const
 {
 	try {
 		for (size_t i=0; i < SavedSentences.size(); i++)

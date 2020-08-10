@@ -34,7 +34,7 @@ struct SLemma
 	}
 	SLemma() {};
 
-	string m_sLemma;
+	std::string m_sLemma;
 	BYTE m_POS;
 	bool operator<(const SLemma& lem) const
 	{
@@ -49,11 +49,11 @@ class CSemanticMarkup
 public:
 	CSemanticMarkup();
 	virtual ~CSemanticMarkup();
-	bool Open(string strName);
-	string GetSemFeaturesString(string& lemma, BYTE POS);
+	bool Open(std::string strName);
+	std::string GetSemFeaturesString(std::string& lemma, BYTE POS);
 
 protected:
-	BYTE GetPOS(string s);
+	BYTE GetPOS(std::string s);
 	void ReadHeadLine(const char *ss);
 	void ReadItems(const char *ss);
 	vector<string> m_Titles;

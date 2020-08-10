@@ -34,7 +34,7 @@ void PrintCookedSentence (const vector<CXmlToken>& Tokens, bool bPrintLemmas)
                     printf ("UNK");
                 else
                 {
-                    string T = W.m_Annots[0].BuildRusCorpAnnot();
+                    std::string T = W.m_Annots[0].BuildRusCorpAnnot();
                     if (T.empty())
                         printf ("UNK");
                     else

@@ -28,7 +28,7 @@ void PrintUsage()
 		exit(1);
 }; 
 
-string GetPrefixPartOfSpeech (MorphLanguageEnum Langua)
+std::string GetPrefixPartOfSpeech (MorphLanguageEnum Langua)
 {
 	switch (Langua) {
 		case morphRussian: return  "ПРИСТ";
@@ -158,7 +158,7 @@ int main(int argc, const char* argv[])
 
 		
 		{ // generating options file
-			string OptFileName = OutputPath+OPTIONS_FILE;
+			std::string OptFileName = OutputPath+OPTIONS_FILE;
 			fprintf(stderr, "writing options file %s\n", OptFileName.c_str());
 			FILE * opt_fp = fopen(OptFileName.c_str(),"w");
 			if (!opt_fp)

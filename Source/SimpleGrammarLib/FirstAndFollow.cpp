@@ -60,7 +60,7 @@ void CWorkGrammar::Build_FIRST_Set()
 
 /*
 	this procedure builds map First_k.  First_k[i] contains all possible sequence of terminals
-	which can be a prefix of length PrefixLength or less of a string which is  derived from meta symbol i.
+	which can be a prefix of length PrefixLength or less of a std::string which is  derived from meta symbol i.
 	The process of computing First_k() is described in many sources about Parsing and is similar
 	to function CWorkGrammar::Build_FIRST_Set.
 */
@@ -75,7 +75,7 @@ void CWorkGrammar::Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, map<size_t
 		for (CWRI it = m_EncodedRules.begin(); it!= m_EncodedRules.end(); it++)
 		{
 			const CWorkRule& R = (*it);
-			string DumpRule = GetRuleStr(R);
+			std::string DumpRule = GetRuleStr(R);
 			CPrefixSet ThisRuleResult;
 			//  we should add an empty prefix
 			ThisRuleResult.insert(CPrefix());

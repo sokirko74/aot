@@ -98,7 +98,7 @@ STDMETHODIMP CComSemNode::get_Prep(BSTR* pVal)
 {
 	
 	const CSynRealization& R = m_pNode->m_SynReal;
-	string s = m_pRusStr->GetPrepOrConjFromSynReal(R);
+	std::string s = m_pRusStr->GetPrepOrConjFromSynReal(R);
 	*pVal = _bstr_t(s.c_str()).copy();
 	
 

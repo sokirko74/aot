@@ -94,7 +94,7 @@ STDMETHODIMP CComDomen::GetItemsCount(LONG *result)
 
 STDMETHODIMP CComDomen::FindItem(BSTR ItemStr, LONG *index)
 {
-	string t = (const char*)_bstr_t(ItemStr);
+	std::string t = (const char*)_bstr_t(ItemStr);
 	int GlobalIndex = m_pDomen->m_pParent->GetItemNoByItemStr(t.c_str(), m_pDomen->m_DomNo);
 
 	if (GlobalIndex == -1) 

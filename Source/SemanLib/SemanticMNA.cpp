@@ -259,7 +259,7 @@ void CRusSemStructure::InterpretSimilarNounGroups (long ClauseNo)
 
 			{
 				long Target = m_SynRelations[i].m_TargetNodeNo;
-				AddRelation(CRusSemRelation (CValency(), MNANodeNo, Target, string("") ));
+				AddRelation(CRusSemRelation (CValency(), MNANodeNo, Target, std::string("") ));
 				m_Relations.back().m_CannotHaveOnlyCommaBetween = ( m_SynRelations[i].m_SynRelName != "РАЗРЫВ_СОЮЗ");
 				
 			}
@@ -303,7 +303,7 @@ void CRusSemStructure::ConvertFreeCoordConjToMNA (long ClauseNo)
 };
 
 long RepeatConjCount = 2;
-const string RepeatConj[2]  =
+const std::string RepeatConj[2]  =
 {
 	"ТО", "ЛИБО"
 };
@@ -314,8 +314,8 @@ long CRusSemStructure::GetRepeatConj (long NodeNo)
 	for (size_t i=0; i <RepeatConjCount; i++)
 	{
 
-		string WordStr = m_Nodes[NodeNo].m_Words[0].m_Word;
-	 	if (WordStr == string(RepeatConj[i]))
+		std::string WordStr = m_Nodes[NodeNo].m_Words[0].m_Word;
+	 	if (WordStr == std::string(RepeatConj[i]))
 			return i;
 	};
    return -1;

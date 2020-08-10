@@ -11,7 +11,7 @@ class CSynDictionary
 public:
 	CSynDictionary();
 
-	bool Load(string FileName);
+	bool Load(std::string FileName);
 	DWORD GetId(UINT Index) const;
 	size_t FindSynonyms(DWORD  ParadigmId) const;
 	

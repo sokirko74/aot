@@ -376,7 +376,7 @@ long CBinaryDictionary::GetFlagCount() const
 	return 8;
 }
 //---------------------------------------------------------------------------
-bool CBinaryDictionary::GetFlag(long pair_index, long flag_index, string& text, bool is_direct, DWORD& flag) const
+bool CBinaryDictionary::GetFlag(long pair_index, long flag_index, std::string& text, bool is_direct, DWORD& flag) const
 {
 	// TODO: Add your implementation code here
 	const WordPair& wp = (is_direct) ? eng_vec[pair_index] : rus_vec[pair_index];

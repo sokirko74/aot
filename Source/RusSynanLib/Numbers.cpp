@@ -113,8 +113,8 @@ bool CRusFormatCaller::format_for_numbers (CGroup& G)
 	const CGroup& MainGroup = get_maximal_group(LastWordExceptFullStop);
 	G.m_MainGroup = MainGroup;
 	G.SetGrammems( MainGroup.GetGrammems() );
-	string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
-	G.m_GramCodes = string(sent[G.m_iFirstWord].GetGramcodes());
+	std::string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
+	G.m_GramCodes = std::string(sent[G.m_iFirstWord].GetGramcodes());
 		
 	for (i = G.m_iFirstWord; i < G.m_iLastWord; i++)
 		create_syn_rel (G, i+1,i, NUMERALS);
@@ -498,10 +498,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 		const CRusGramTab *R = (CRusGramTab*)GetGramTab();
 		CGroup& Gi = ((CGroup&)get_maximal_group(i_number));
 		bool has_point = !small_number && FindFloatingPoint(sent[Gi.m_iLastWord].get_word()) != -1 && Gi.m_GroupType != NUMERALS; //float point кроме КОЛИЧ
-		string new_grc = R->UniqueGramCodes(R->FilterGramCodes(string(sent[i_first_noun].GetGramcodes()), 
+		std::string new_grc = R->UniqueGramCodes(R->FilterGramCodes(std::string(sent[i_first_noun].GetGramcodes()), 
 			small_number ? ~rAllCases | _QM(rGenitiv) : 0, has_point ? ~(rAllCases|rAllNumbers) | _QM(rGenitiv)  | _QM(rSingular) : //для small_number rGenitiv во всех числах
 			~(rAllCases|rAllNumbers) | rAllCases & ~_QM(rNominativ) & ~_QM(rAccusativ)  | _QM(rPlural)));
-		string new_grc2 = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(), 
+		std::string new_grc2 = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(), 
 			(R->GetGramCodes(NOUN, has_point ?  _QM(rGenitiv)  | _QM(rSingular) :
 			rAllCases & ~_QM(rNominativ) & ~_QM(rAccusativ)  | _QM(rPlural), CaseNumber)).c_str())); 
 		if(new_grc=="" || ((noun_grammems & rAllNumbers) == _QM(rSingular) && sent[i_noun].is_month()))
@@ -509,8 +509,8 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 
 		bAdjShouldBeInGenitivOrNominativ = (noun_grammems & _QM(rGenitiv)) > 0;
 			
-		string num_grc = "эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"; //ЧИСЛ мр..ср им("два");рд;..пр
-		string noun_pair = "абазаиабакалгбгзгигбгкглебезеиебекел"; //С мр..ср рд,ед("2 дома");рд,мн;..;пр,мн
+		std::string num_grc = "эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"; //ЧИСЛ мр..ср им("два");рд;..пр
+		std::string noun_pair = "абазаиабакалгбгзгигбгкглебезеиебекел"; //С мр..ср рд,ед("2 дома");рд,мн;..;пр,мн
 		if(!small_number)
 			noun_pair = "азазаиазакалгзгзгигзгкглезезеиезекел"; //С мр..ср рд,мн("5 домов");рд,мн;..;ср,пр,мн
 		if(has_point) 
@@ -840,15 +840,15 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 		return false;
 
 	const CRusGramTab *R = (CRusGramTab*)GetGramTab();
-	string new_grc = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(), 
+	std::string new_grc = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(), 
 		(R->GetGramCodes(NOUN, rAllCases | _QM(rSingular), CaseNumber)).c_str())); 
 	if(new_grc=="" || sent[i_number].HasFlag(fl_digit) && sent[i_noun].is_month()) 
 		return false;
 
 	if( sent[i_number].HasFlag(fl_digit) ) // до 81 унции
 	{
-		string num_grc = R->GetGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender); //"эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэчасЙш"; //ЧИСЛ мр..ср им("один");рд;..пр
-		string noun_pair =  "ааабавагадаегагбгвгггдгееаебевегедее"; //С мр..ср им,ед("дом");рд,ед;..;пр,ед
+		std::string num_grc = R->GetGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender); //"эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэчасЙш"; //ЧИСЛ мр..ср им("один");рд;..пр
+		std::string noun_pair =  "ааабавагадаегагбгвгггдгееаебевегедее"; //С мр..ср им,ед("дом");рд,ед;..;пр,ед
 		R->GleicheAncode1(CaseNumberGender0, noun_pair.c_str(), new_grc.c_str(), num_grc);
 		num_grc = R->UniqueGramCodes(R->GleicheAncode1(CaseNumberGender0, num_grc.c_str(), R->UniqueGramCodes(sent[i_number].GetGramcodes())));
 		if(num_grc=="")

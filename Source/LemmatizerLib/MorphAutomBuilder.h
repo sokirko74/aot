@@ -5,7 +5,7 @@
 
 //   The main function of this header is CMorphAutomatBuilder::AddStringDaciuk 
 //  This function is an implementation of algorithm for constructing minimal,
-// deterministic, acyclic FSM from unordered set of strings, which was described 
+// deterministic, acyclic FSM from unordered set of std::strings, which was described 
 // in  "Jan Daciuk, Stoyan Mihov, Bruce Watson, and Richard Watson, 
 //      Incremental Construction of Minimal Acyclic Finite State Automata, 
 //		Computational Linguistics, 26(1), March 2000."
@@ -76,7 +76,7 @@ class CMorphAutomatBuilder : public CMorphAutomat
 	void				DeleteNode(CTrieNodeBuild* pNode);
 	CTrieNodeBuild*		CloneNode(const CTrieNodeBuild* pPrototype);
 
-	void				UpdateCommonPrefix(const string& WordForm);
+	void				UpdateCommonPrefix(const std::string& WordForm);
 	CTrieNodeBuild*		AddSuffix(CTrieNodeBuild* pParentNodeNo, const char* WordForm);
 	CTrieNodeBuild*		ReplaceOrRegister(CTrieNodeBuild* pNode);
 	void				DeleteFromRegister(CTrieNodeBuild* pNode);
@@ -95,7 +95,7 @@ public:
 	~CMorphAutomatBuilder();
 
 	void	InitTrie();
-	bool	AddStringDaciuk(const string& WordForm);
+	bool	AddStringDaciuk(const std::string& WordForm);
 	void	ClearRegister();
 	void	ConvertBuildRelationsToRelations();
 };

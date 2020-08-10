@@ -52,7 +52,7 @@ inline DictTypeEnum GetRossIdByThesId(int ThesId)
 		};
 };
 
-inline string GetRmlThesNameThesId(int ThesId) 
+inline std::string GetRmlThesNameThesId(int ThesId) 
 { 
   switch (ThesId) {
 	 case LocThes  : return  "RML_THES_LOC"; 
@@ -95,7 +95,7 @@ public:
 	bool                    m_AspDictEnabled;
 	long					m_LastUpdateTime;
 	bool					m_bSilentMode;
-	string					m_LastError;
+	std::string					m_LastError;
 
 	
 
@@ -108,7 +108,7 @@ public:
 	const CAgramtab* GetGramTab (MorphLanguageEnum langua) const;
 	CSentencesCollection*	GetSynan ();
 	const CThesaurus*       GetThes(int ThesId)  const;
-	string					GetThesStr (int ThesId) const ;
+	std::string					GetThesStr (int ThesId) const ;
 	
 	void InitThesaurus(int ThesId);
 	bool Init();
@@ -118,12 +118,12 @@ public:
 	
 
 	StringVector GetAspVerb (long ParadigmId, bool IsPerfective);
-    StringVector GetAspVerb (string Verb, bool IsPerfective);
-	void ErrorMessage (string Mess);
+    StringVector GetAspVerb (std::string Verb, bool IsPerfective);
+	void ErrorMessage (std::string Mess);
 	bool MakeSyntaxStr(const char* text, CMyTimeSpanHolder& GlobalSpan);
-	DWORD GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, string WordForm, poses_mask_t Poses, string& ResultLemma) const;
-	DWORD  GetFirstParadigmId (const MorphLanguageEnum langua, string WordForm,  poses_mask_t Poses) const;
-	string GetThesPath(int ThesId) const;
+	DWORD GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, std::string WordForm, poses_mask_t Poses, std::string& ResultLemma) const;
+	DWORD  GetFirstParadigmId (const MorphLanguageEnum langua, std::string WordForm,  poses_mask_t Poses) const;
+	std::string GetThesPath(int ThesId) const;
 	const CDictionary* GetRusOborots() const;
 
 };

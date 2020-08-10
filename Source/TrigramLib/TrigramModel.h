@@ -58,7 +58,7 @@ struct CLexProb
 
 struct CTrigramWord
 {
-    string m_WordStr; 
+    std::string m_WordStr; 
     size_t m_StartOffset;
     size_t m_Length;
     bool operator == (const CTrigramWord& X) const 
@@ -165,7 +165,7 @@ class CTrigramModel
 									m_TokenCounts[1] - число биграмм во входном массиве (NB! деление на предложения )
 									m_TokenCounts[2] - число триграмм во входном массиве (NB! деление на предложения )
 								*/
-    mutable map<string, const vector<CXmlMorphAnnot>*> m_CurrentSentenceWords2Annots;
+    mutable map<std::string, const vector<CXmlMorphAnnot>*> m_CurrentSentenceWords2Annots;
     vector<CLexProb >   m_LexProbs;
     vector<CTrigramWord> m_Dictionary; 
     // ... 
@@ -191,24 +191,24 @@ class CTrigramModel
 	int ngram_index(WORD t1, WORD t2) const;
 	trigram_integer_t ngram_index(WORD t1, WORD t2, WORD t3) const;
 
-	WORD find_tag(const string &t) const; 
-	WORD register_tag(const string& t);
-	bool CheckLemma(string Word, string TagStr1, string TagStr2) const;
+	WORD find_tag(const std::string &t) const; 
+	WORD register_tag(const std::string& t);
+	bool CheckLemma(std::string Word, std::string TagStr1, std::string TagStr2) const;
 	int				compute_bucket_denominator(WORD i, WORD j, int& TrigramsCount);
 	CLambdas		compute_lambdas_for_one_bucket(PMap::const_iterator start_it, PMap::const_iterator end_it);
 	prob_t			GetSmoothedProb(WORD PrevPrevTag, WORD PrevTag, WORD CurrTag) const;
 	void			ViterbiForward(const vector<string>& words, vector<CViterbiInfo>& Triplet, const vector<CViterbiInfo>& RevTriplet) const;
 	void			ViterbiBackward(const vector<string>& words, const vector<CViterbiInfo>& Triplet, vector<CWordIntepretation>& tags) const;
 	size_t			GetTrigram(WORD t1, WORD t2, WORD t3)  const;
-	void			get_tags_from_lemmatizer_but_not_preps(const string& WordStr, set<WORD>& tags) const;
-	CDictionarySearch		find_word(const string& WordStr) const;
+	void			get_tags_from_lemmatizer_but_not_preps(const std::string& WordStr, set<WORD>& tags) const;
+	CDictionarySearch		find_word(const std::string& WordStr) const;
 	prob_t					GetSmoothedLexProb(const CDictionarySearch& DS, WORD PrevTag, WORD CurrTag) const;
 	bool					LoadSynanForThisSentence(const vector<string>& words) const;
-	set<string>				GetLemmaSetByTagAndWordStr(string Word, string TagStr, bool bOnlyWithMaxWeight) const;
+	set<string>				GetLemmaSetByTagAndWordStr(std::string Word, std::string TagStr, bool bOnlyWithMaxWeight) const;
 	
 	prob_t					BuildSmoothedProb(WORD PrevPrevTag, WORD PrevTag, WORD CurrTag) const;
-	bool					TagRawTexts(string FileName);
-	bool					TagRawText(string FileName);
+	bool					TagRawTexts(std::string FileName);
+	bool					TagRawText(std::string FileName);
 	
     
 public:
@@ -236,8 +236,8 @@ public:
 	bool				m_bCheckOnlyAmbiguosWords;
 	
 	bool				m_bRawTexts;
-    string              m_DictionaryFile;
-    string              m_NgramFile;
+    std::string              m_DictionaryFile;
+    std::string              m_NgramFile;
 	
 
 	CTrigramModel ();
@@ -249,42 +249,42 @@ public:
 	void compute_counts_for_boundary();
 	void enter_rare_word_tag_counts(void *key, CTrigramWord& wd,  void *d2);
 	void compute_lambdas();
-	void load_lambdas(string FileName);
+	void load_lambdas(std::string FileName);
 	
 	bool compute_bucketed_lambdas();
 	void compute_transition_probs();
-    bool read_dictionary_text_file(map<string,  vector<CLexProb> >& Dictionary) const;
+    bool read_dictionary_text_file(map<std::string,  vector<CLexProb> >& Dictionary) const;
 	
 	void dump_transition_probs();
 	bool tag_sentence(char* SentenceStr) const;
-	bool tagging(string FileName)  ;
-	bool testing(string FileName)  const;
-	bool read_1test_lexicon(string FileName);
-	bool adjusting_homonyms_coef(string FileName)  const;
+	bool tagging(std::string FileName)  ;
+	bool testing(std::string FileName)  const;
+	bool read_1test_lexicon(std::string FileName);
+	bool adjusting_homonyms_coef(std::string FileName)  const;
 	void print_tag_set() const;
-	bool save_lambdas(string FileName) const;
+	bool save_lambdas(std::string FileName) const;
 	bool lemmatize_sentence(vector<string> words, vector<string>& lemmas) const;
-    void InitModelFromConfigAndBuildTagset(string FileName, const CLemmatizer* Lemmatizer=0, const CAgramtab* GramTab=0,  bool LoadReverseModel=true);
+    void InitModelFromConfigAndBuildTagset(std::string FileName, const CLemmatizer* Lemmatizer=0, const CAgramtab* GramTab=0,  bool LoadReverseModel=true);
 
 #ifdef  USE_TRIGRAM_LEMMATIZER
-	bool tagging_string_with_end_of_sents(string InputStr, string& Result) ;
-	vector<string> get_tokens_from_graphan(string InputStr);
-	size_t GetLemmasCount(string Word) const;
+	bool tagging_string_with_end_of_sents(std::string InputStr, std::string& Result) ;
+	vector<string> get_tokens_from_graphan(std::string InputStr);
+	size_t GetLemmasCount(std::string Word) const;
 	bool print_disamb_lemmas(vector<string> words) const;
-	bool lemmatize_file(string FileName) ;
+	bool lemmatize_file(std::string FileName) ;
 	bool CheckTagsForFormInfo(const vector<CTag>& Tags, const CFormInfo& F) const;
-	string GetParticipleLemma(const CFormInfo& F) const;
+	std::string GetParticipleLemma(const CFormInfo& F) const;
     bool FindGramTabLineInTags(const vector<CTag>& Tags, poses_mask_t Poses, QWORD AllGrammems) const;
 #endif
 
-	bool write_dictionary_binary(const map<string, vector<CLexProb> >& Dictionary) const;
+	bool write_dictionary_binary(const map<std::string, vector<CLexProb> >& Dictionary) const;
     bool read_dictionary_binary();
     bool convert_to_lex_binary() ;
-    const CTrigramWord* lookup_word(const string& s) const;
+    const CTrigramWord* lookup_word(const std::string& s) const;
     bool SaveBinary();
     bool ReadBinary();
     bool DisambiguateRusCorpXml(vector<CXmlToken>& Words) const;
-    void get_tags_from_annots(const vector<CXmlMorphAnnot>& Annots, set<WORD>& tags, const string& WordStr) const;
+    void get_tags_from_annots(const vector<CXmlMorphAnnot>& Annots, set<WORD>& tags, const std::string& WordStr) const;
     
 	bool viterbi(const vector<string>& words, vector<CWordIntepretation>& tags) const;
     void BuildReverseLexProb(const vector<string>& words, vector<map<WORD,prob_t> >& RevLexProbs) const;

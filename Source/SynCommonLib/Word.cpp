@@ -46,7 +46,7 @@ bool CSynHomonym::CompareWithPredefinedWords(const SDatItems& DatItems) const
 	if (!(DatItems.m_Poses & m_iPoses)) 
 		return false;
 
-	string  T = m_strLemma;
+	std::string  T = m_strLemma;
 	RmlMakeLower(T, GetOpt()->m_Language);
 	return binary_search(DatItems.m_vectorDatItems.begin(), DatItems.m_vectorDatItems.end(), T);
 	
@@ -295,7 +295,7 @@ bool CSynWord::IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I)
 				)
 			{
 				int hyphen = L.m_strLemma.find('-'); // check the postfix after the last hyphen, if there is a hyphen 
-				if	(		(hyphen == string::npos)
+				if	(		(hyphen == std::string::npos)
 						|| ( PossibleLemmas.find(L.m_strLemma.substr(hyphen+1)) == PossibleLemmas.end() )
 					)
 				return false;

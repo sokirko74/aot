@@ -7,7 +7,7 @@
 #include "ger_consts.h"       
 
 
-extern string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const string& s1, const string& s2);
+extern std::string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const std::string& s1, const std::string& s2);
 
 CGerGramTab :: CGerGramTab()
 {
@@ -265,13 +265,13 @@ bool WeakGleiche (const CAgramtabLine* noun, const CAgramtabLine* adj)
 };
 
 
-string WeakDeclAssignFunction2(const CAgramtab* pGramTab,  const string& det, const string& noun)
+std::string WeakDeclAssignFunction2(const CAgramtab* pGramTab,  const std::string& det, const std::string& noun)
 {
 	return pGramTab->GleicheAncode1(WeakGleiche, noun.c_str(), det.c_str());
 };
 
 
-string WeakDeclAssignFunction3(const CAgramtab* pGramTab,  const string& det, const string& adj, const string& noun )
+std::string WeakDeclAssignFunction3(const CAgramtab* pGramTab,  const std::string& det, const std::string& adj, const std::string& noun )
 {
 	return		CommonAncodeAssignFunction(pGramTab,
 					pGramTab->GleicheAncode1(WeakGleiche, noun.c_str(), det.c_str()),
@@ -288,13 +288,13 @@ bool MixedGleiche (const CAgramtabLine* noun, const CAgramtabLine* adj)
 	return     GenderNumberCaseGerman(noun, adj);
 };
 
-string MixedDeclAssignFunction2(const CAgramtab* pGramTab,  const string& det, const string& noun)
+std::string MixedDeclAssignFunction2(const CAgramtab* pGramTab,  const std::string& det, const std::string& noun)
 {
 	return pGramTab->GleicheAncode1(MixedGleiche, noun.c_str(), det.c_str());
 };
 
 
-string MixedDeclAssignFunction3(const CAgramtab* pGramTab,  const string& det, const string& adj, const string& noun )
+std::string MixedDeclAssignFunction3(const CAgramtab* pGramTab,  const std::string& det, const std::string& adj, const std::string& noun )
 {
 	return		CommonAncodeAssignFunction(pGramTab,
 					pGramTab->GleicheAncode1(MixedGleiche, noun.c_str(), det.c_str()),
@@ -310,21 +310,21 @@ bool SoloGleiche (const CAgramtabLine* noun, const CAgramtabLine* adj)
 	return     GenderNumberCaseGerman(noun, adj);
 };
 
-string StrongDeclAssignFunction(const CAgramtab* pGramTab,  const string& det, const string& noun)
+std::string StrongDeclAssignFunction(const CAgramtab* pGramTab,  const std::string& det, const std::string& noun)
 {
 	return pGramTab->GleicheAncode1(SoloGleiche, noun.c_str(), det.c_str());
 };
 
 
 
-string CommonCase(const CAgramtab* pGramTab, const string& noun1, const string& noun2)
+std::string CommonCase(const CAgramtab* pGramTab, const std::string& noun1, const std::string& noun2)
 {
 	// right now only for German
 	return pGramTab->GleicheAncode1(GleicheCasesGerman, noun1.c_str(), noun2.c_str());
 };
 
 
-bool HasOnlyOneCase(const CAgramtab* pGramTab,  const string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
+bool HasOnlyOneCase(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
 {
 	poses_mask_t oPoses;
 	QWORD  oGrammems;
@@ -332,7 +332,7 @@ bool HasOnlyOneCase(const CAgramtab* pGramTab,  const string& Ancodes, const pos
 	return  (oGrammems & gAllCases) == Grammems;
 };
 
-bool HasGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
+bool HasGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
 {
 	poses_mask_t oPoses;
 	QWORD  oGrammems;
@@ -341,7 +341,7 @@ bool HasGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const poses_m
 		&&		((oPoses & poses) == poses);
 };
 
-bool HasOneGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
+bool HasOneGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
 {
 	poses_mask_t oPoses;
 	QWORD  oGrammems;
@@ -350,17 +350,17 @@ bool HasOneGrammem(const CAgramtab* pGramTab,  const string& Ancodes, const pose
 };
 
 
-string CommonCaseNumberGender(const CAgramtab* pGramTab,  const string& adj1, const string& adj2)
+std::string CommonCaseNumberGender(const CAgramtab* pGramTab,  const std::string& adj1, const std::string& adj2)
 {
 	return pGramTab->GleicheAncode1(GenderNumberCaseGerman, adj1.c_str(), adj2.c_str());
 };
 
 
 
-string ConvertToPlural(const CAgramtab* pGramTab,  const string& s)
+std::string ConvertToPlural(const CAgramtab* pGramTab,  const std::string& s)
 {
 	assert ((s.length() % 2) == 0);
-	string Result;
+	std::string Result;
 	for (size_t i=0; i < s.length();i+=2)
 	{
 		const CAgramtabLine* L =   pGramTab->GetLine(pGramTab->s2i(s.c_str()+i));

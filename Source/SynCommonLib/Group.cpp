@@ -90,12 +90,12 @@ void CGroup::SetGrammems(QWORD Grammems)
 void CGroup::SetGrammems(QWORD Grammems, const char * GramCodes)
 {
 	grammems = Grammems;
-	m_GramCodes = string(GramCodes);
+	m_GramCodes = std::string(GramCodes);
 }
 void CGroup::SetGrammems(CSynPlmLine W)
 {
 	grammems = W.GetGrammems();
-	m_GramCodes = string(W.GetGramcodes());
+	m_GramCodes = std::string(W.GetGramcodes());
 }
 
 QWORD CGroup::GetGrammems() const
@@ -281,11 +281,11 @@ CGroups :: CGroups(const CGroups& G)
 };
 
 
-void   CGroups :: get_full_sentence(string& str_sent) const 
+void   CGroups :: get_full_sentence(std::string& str_sent) const 
 {
 	for(int i = 0 ; i < sent.size(); i++)
 		if (sent[i].get_word())
-		str_sent += sent[i].get_word()+string(" ");
+		str_sent += sent[i].get_word()+std::string(" ");
 }
 
 
@@ -359,8 +359,8 @@ void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD gramm
 			if( Gi.m_MainWordNo == i && Gi.m_bRussianNounNumeralGroup ) //имеют зависимые грамкоды
 			{
 				Gi.SetGrammems(Gi.GetGrammems() & (grammems | ~breaks));
-				string gcNoun = string(sent[i].GetGramcodes());
-				string gcNum = string(sent[Gi.m_OtherGroup.m_iFirstWord].GetGramcodes());
+				std::string gcNoun = std::string(sent[i].GetGramcodes());
+				std::string gcNum = std::string(sent[Gi.m_OtherGroup.m_iFirstWord].GetGramcodes());
 				if (GetOpt()->GetGramTab()->FilterNounNumeral(gcNoun, gcNum,  grammems)) {
 				    sent[i].SetGramcodes(gcNoun);
                 }
@@ -379,14 +379,14 @@ bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const char
 	bool isok = true;
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
 	{
-        string groupGramCodes = string(gramcodes);
-        QWORD grammems = R->ChangeGleicheAncode1(CompareFunc, string(sent[i].GetGramcodes()),  groupGramCodes, sent[i].GetGrammems()); 
+        std::string groupGramCodes = std::string(gramcodes);
+        QWORD grammems = R->ChangeGleicheAncode1(CompareFunc, std::string(sent[i].GetGramcodes()),  groupGramCodes, sent[i].GetGrammems()); 
 		if (groupGramCodes=="") { 
             isok = false; 
             continue; 
         }
 		sent[i].SetGramcodes(groupGramCodes); 
-		m_AtomicGroups[i].m_GramCodes = groupGramCodes;//-> synVariant.m_SynUnits[UnitNo].m_GramCodes = string(W.GetGramcodes());
+		m_AtomicGroups[i].m_GramCodes = groupGramCodes;//-> synVariant.m_SynUnits[UnitNo].m_GramCodes = std::string(W.GetGramcodes());
 		sent[i].SetGrammems(grammems);
 		m_AtomicGroups[i].SetGrammems(grammems);
 	};

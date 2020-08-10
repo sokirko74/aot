@@ -11,7 +11,7 @@ const char g_strSynDictionary[] = "Software\\Dialing\\Synonyms\\DictPath";
 const char g_strAdjNounDualFreqPath[] = "Software\\Dialing\\DualFreq\\linkA";
 
 
-string CTranslatorHolder::GetThesPath(int ThesId) const {
+std::string CTranslatorHolder::GetThesPath(int ThesId) const {
     switch (ThesId) {
         case LocThes  :
             return GetRegistryString("Software\\Dialing\\EngRusFreqDict\\Loc");
@@ -87,7 +87,7 @@ const CThesaurus *CTranslatorHolder::GetThes(int ThesId) const {
     return m_RusHolder.m_Synan.GetOpt()->GetThesByThesId(ThesId);
 };
 
-string CTranslatorHolder::GetThesStr(int ThesId) const {
+std::string CTranslatorHolder::GetThesStr(int ThesId) const {
     switch (ThesId) {
         case LocThes  :
             return "LocThes";
@@ -222,7 +222,7 @@ StringVector CTranslatorHolder::GetAspVerb(long ParadigmId, bool IsPerfective) {
     return Res;
 };
 
-StringVector CTranslatorHolder::GetAspVerb(string Verb, bool IsPerfective) {
+StringVector CTranslatorHolder::GetAspVerb(std::string Verb, bool IsPerfective) {
     StringVector Empty;
     try {
 
@@ -251,7 +251,7 @@ StringVector CTranslatorHolder::GetAspVerb(string Verb, bool IsPerfective) {
 };
 
 
-void CTranslatorHolder::ErrorMessage(string Mess) {
+void CTranslatorHolder::ErrorMessage(std::string Mess) {
     if (m_bSilentMode)
         m_LastError = Mess;
     else
@@ -259,8 +259,8 @@ void CTranslatorHolder::ErrorMessage(string Mess) {
 };
 
 
-DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum langua, string WordForm, poses_mask_t Poses,
-                                                    string &ResultLemma) const {
+DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum langua, std::string WordForm, poses_mask_t Poses,
+                                                    std::string &ResultLemma) const {
     const CLemmatizer *L = GetLemmatizer(langua);
     const CAgramtab *G = GetGramTab(langua);
     try {
@@ -276,7 +276,7 @@ DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum lang
         };
 
         for (long k = 0; k < ParadigmCollection.size(); k++) {
-            string AnCode = ParadigmCollection[k].GetAncode(0);
+            std::string AnCode = ParadigmCollection[k].GetAncode(0);
             long POS = G->GetPartOfSpeech(AnCode.c_str());
             if ((1 << POS) & Poses) {
                 ResultLemma = ParadigmCollection[k].GetWordForm(0);
@@ -292,7 +292,7 @@ DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum lang
 };
 
 
-DWORD CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, string Lemma, poses_mask_t Poses) const {
+DWORD CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, std::string Lemma, poses_mask_t Poses) const {
     const CLemmatizer *L = GetLemmatizer(langua);
     const CAgramtab *G = GetGramTab(langua);
 
@@ -307,7 +307,7 @@ DWORD CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, stri
                 return ParadigmCollection[0].GetParadigmId();
         };
         for (long k = 0; k < ParadigmCollection.size(); k++) {
-            string AnCode = ParadigmCollection[k].GetAncode(0);
+            std::string AnCode = ParadigmCollection[k].GetAncode(0);
 
             long POS = G->GetPartOfSpeech(AnCode.c_str());
 

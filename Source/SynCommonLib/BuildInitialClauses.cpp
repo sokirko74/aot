@@ -9,9 +9,9 @@
 
 class CWord_eq : public unary_function<CSynWord,bool>
 {
-	string s;
+	std::string s;
 public:
-	CWord_eq(string ss) : s(ss) {}
+	CWord_eq(std::string ss) : s(ss) {}
 	bool operator() (CSynWord& el)  
 	{ return el.m_strWord ==  s; }
 };
@@ -371,7 +371,7 @@ int CSentence::IsClauseBorder(int WordNo, int& iStartSearch,int& iPunctsCount, i
 		}
 
 		//ignore these punctuation marks as clause borders 
-		if( pWord.m_strWord.find_first_of ("%\\$#|*^")  != string::npos) 
+		if( pWord.m_strWord.find_first_of ("%\\$#|*^")  != std::string::npos) 
 		{
 			iStartSearch = WordNo + 1;
 			return -1;		

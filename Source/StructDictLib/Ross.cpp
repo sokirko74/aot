@@ -272,7 +272,7 @@ bool  TRoss::Save()
 
 bool	TRoss::ReadConfig()
 {
-	string Config;
+	std::string Config;
 	{
 		FILE* fp = fopen(ConfigFile.c_str(), "rb");
 		if (!fp) return false;
@@ -285,13 +285,13 @@ bool	TRoss::ReadConfig()
 	StringTokenizer lines(Config.c_str(), "\n\r");
 	while (lines())
 	{
-		string Line = lines.val();
+		std::string Line = lines.val();
 		Trim(Line);
 		if (Line.empty()) continue;
 		StringTokenizer Items(Line.c_str(), " \t\n\r");
 
-		string Field = Items.next_token();
-		string Value = Items.next_token();
+		std::string Field = Items.next_token();
+		std::string Value = Items.next_token();
 		if (Field.empty() || Value.empty()) return  false;
 		if (Field == "MaxNumDom")
 		{
@@ -379,9 +379,9 @@ const char* TRoss::GetRedactFieldName() const
 
 };
 
-bool IsBinFile(const string FileName) {
+bool IsBinFile(const std::string FileName) {
 	return     (FileName.length() > 3)
-		&& FileName.substr(FileName.length() - 3) == string("bin");
+		&& FileName.substr(FileName.length() - 3) == std::string("bin");
 };
 
 void   TRoss::BuildUnits() {
@@ -1052,7 +1052,7 @@ void TRoss::SetUnitAuthor(WORD UnitNo, const char* Author)
 	m_Units[UnitNo].m_AuthorStr[l] = 0;
 }
 
-tm Str2Tm(string TimeStr)
+tm Str2Tm(std::string TimeStr)
 {
 	tm output;
 	sscanf(TimeStr.c_str(), "%i/%i/%i %i:%i:%i", &output.tm_mday, &output.tm_mon, &output.tm_year, &output.tm_hour, &output.tm_min, &output.tm_sec);
@@ -1086,7 +1086,7 @@ void TRoss::SetUnitEditor(WORD UnitNo, const char* Editor)
 	};
 }
 
-string TRoss::GetUnitModifTimeStr(WORD UnitNo) const
+std::string TRoss::GetUnitModifTimeStr(WORD UnitNo) const
 {
 	try {
 		char tmpbuf[128];
@@ -1105,9 +1105,9 @@ string TRoss::GetUnitModifTimeStr(WORD UnitNo) const
 	};
 }
 
-string TRoss::GetUnitTextHeader(WORD UnitNo) const
+std::string TRoss::GetUnitTextHeader(WORD UnitNo) const
 {
-	string R;
+	std::string R;
 	const CStructEntry& U = m_Units[UnitNo];
 	const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
 
@@ -1125,7 +1125,7 @@ string TRoss::GetUnitTextHeader(WORD UnitNo) const
 	if (C && strlen(C->Editor))
 		R += Format("%s       = %s\r\n", GetRedactFieldName(), C->Editor);
 
-	string t = TRoss::GetUnitModifTimeStr(UnitNo);
+	std::string t = TRoss::GetUnitModifTimeStr(UnitNo);
 	if (!t.empty())
 		R += Format("%s       = %s\r\n", GetTimeCreatFieldName(), t.c_str());
 
@@ -1221,7 +1221,7 @@ const char* CDictionary::GetDomItemStr(int ItemNo) const
 {
 	return  (ItemNo == -1) ? NULL : GetDomItemStrInner(ItemNo);
 }
-string	CDictionary::GetEntryStr(WORD EntryNo) const
+std::string	CDictionary::GetEntryStr(WORD EntryNo) const
 {
 	return m_Units[EntryNo].m_EntryStr;
 };
@@ -1231,7 +1231,7 @@ BYTE		CDictionary::GetUnitMeanNum(WORD EntryNo) const
 	return m_Units[EntryNo].m_MeanNum;
 };
 
-bool CDictionary::IncludeArticle(WORD UnitNo, string Article) const
+bool CDictionary::IncludeArticle(WORD UnitNo, std::string Article) const
 {
 	CTempArticle A1;
 	A1.m_pRoss = const_cast<CDictionary*>(this);
@@ -1249,9 +1249,9 @@ bool CDictionary::IncludeArticle(WORD UnitNo, string Article) const
 //=============    Import from Text file   ==========================
 
 
-bool IsRubicon(const string& S)
+bool IsRubicon(const std::string& S)
 {
-	return S.find("====") != string::npos;
+	return S.find("====") != std::string::npos;
 }
 
 
@@ -1289,7 +1289,7 @@ int NumArt(vector<CSourceLine>& L)
 };
 
 
-bool GetValue(string Pair, string FldName, string& Value)
+bool GetValue(std::string Pair, std::string FldName, std::string& Value)
 {
 	StringTokenizer tok(Pair.c_str(), " \t");
 	if (tok.next_token() != FldName) return false;
@@ -1305,14 +1305,14 @@ void CutComments(vector<CSourceLine>& L)
 	for (size_t i = 0; i < L.size(); i++)
 	{
 		int k = L[i].m_Line.find("//");
-		if (k != string::npos)
+		if (k != std::string::npos)
 			L[i].m_Line.erase(k);
 	}
 }
 
 
 
-void AddMessage(string Message, int LineNo, string& Messages)
+void AddMessage(std::string Message, int LineNo, std::string& Messages)
 {
 	Trim(Message);
 	if (LineNo != -1)
@@ -1322,7 +1322,7 @@ void AddMessage(string Message, int LineNo, string& Messages)
 };
 
 
-bool CDictionary::ImportFromText(string FileName, bool bSimulating, ImportConflictEnum ConflictSolver, int StartEntry, string& Messages)
+bool CDictionary::ImportFromText(std::string FileName, bool bSimulating, ImportConflictEnum ConflictSolver, int StartEntry, std::string& Messages)
 {
 	Messages = "";
 
@@ -1338,7 +1338,7 @@ bool CDictionary::ImportFromText(string FileName, bool bSimulating, ImportConfli
 		int CurrentLineNo = 0;
 		while (fgets(buffer, 1000, fp))
 		{
-			string S = buffer;
+			std::string S = buffer;
 			Trim(S);
 			L.push_back(CSourceLine(S, CurrentLineNo));
 			CurrentLineNo++;
@@ -1379,16 +1379,16 @@ bool CDictionary::ImportFromText(string FileName, bool bSimulating, ImportConfli
 }
 
 
-bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last, bool bSimulating, ImportConflictEnum ConflictSolver, string& Messages)
+bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last, bool bSimulating, ImportConflictEnum ConflictSolver, std::string& Messages)
 {
 	size_t RealStart = start;
 	if (L.size() == 1) return false;
-	string S;
+	std::string S;
 	if (GetValue(L[RealStart].m_Line, "Дескриптор", S)) {
 		RealStart++;
 	}
 
-	string Lemma;
+	std::string Lemma;
 	const char* Field = GetTitleFieldName();
 	if (!GetValue(L[RealStart].m_Line, Field, Lemma))
 	{
@@ -1416,7 +1416,7 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 		return false;
 	}
 
-	string Comments = "";
+	std::string Comments = "";
 	Field = GetCommFieldName();
 	if (RealStart + 1 < L.size())
 		if (GetValue(L[RealStart + 1].m_Line, Field, S))
@@ -1425,7 +1425,7 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 			RealStart++;
 		};
 
-	string Author = "";
+	std::string Author = "";
 	Field = GetAuthorFieldName();
 	if (RealStart + 1 < L.size()) {
 		if (GetValue(L[RealStart + 1].m_Line, Field, S))
@@ -1434,7 +1434,7 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 			RealStart++;
 		};
 	}
-	string ModifTime = "";
+	std::string ModifTime = "";
 	Field = GetTimeCreatFieldName();
 	if (RealStart + 1 < L.size()) {
 		if (GetValue(L[RealStart + 1].m_Line, Field, S))
@@ -1444,7 +1444,7 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 		};
 	}
 
-	string UnitEditor = "";
+	std::string UnitEditor = "";
 	Field = GetRedactFieldName();
 	if (RealStart + 1 < L.size())
 		if (GetValue(L[RealStart + 1].m_Line, Field, S))
@@ -1485,9 +1485,9 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 	if (UnitNo != ErrUnitNo)
 		A1.ReadFromDictionary(UnitNo, false, false);
 
-	string NewArticle;
+	std::string NewArticle;
 	for (int i = RealStart + 1; i < last; i++)
-		NewArticle += L[i].m_Line + string("\n");
+		NewArticle += L[i].m_Line + std::string("\n");
 
 	CTempArticle A2;
 
@@ -1561,7 +1561,7 @@ void CDictionary::SetUnitCurrentTime(WORD UnitNo)
 }
 
 
-bool CDictionary::AddField(string FieldStr)
+bool CDictionary::AddField(std::string FieldStr)
 {
 	if (FieldStr.empty())
 		FieldStr = "_";
@@ -1585,7 +1585,7 @@ bool CDictionary::AddField(string FieldStr)
 }
 
 
-string CDictionary::GetUnitEditor(WORD UnitNo) const
+std::string CDictionary::GetUnitEditor(WORD UnitNo) const
 {
 	try
 	{

@@ -7,7 +7,7 @@
 #include "../common/bserialize.h"
 
 
-void	CStatistic::Load(const string& path)
+void	CStatistic::Load(const std::string& path)
 {
 	ReadVector(path + HOMOWEIGHT_BIN_PATH, m_HomoWeights);
 	ReadVector(path + WORDWEIGHT_BIN_PATH, m_WordWeights);

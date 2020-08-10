@@ -172,7 +172,7 @@ public:
 	
 	int FillRelNodeByClauseUnit(const CMorphVariant& V, int iUnit,  CClauseRelation& rel);
 	void ChangeClauseTypeForParticiples();
-	string  GetTraceStr() const;
+	std::string  GetTraceStr() const;
 	void	BuildSynVariants();
 	void	BuildSubjAndPredMember(CMorphVariant& synVariant); 		
 	void	DeleteClauseType(int ClauseTypeNo);

@@ -376,7 +376,7 @@ int event_base_dispatch(struct event_base *);
  Get the kernel event notification mechanism used by Libevent.
 
  @param eb the event_base structure returned by event_base_new()
- @return a string identifying the kernel event mechanism (kqueue, epoll, etc.)
+ @return a std::string identifying the kernel event mechanism (kqueue, epoll, etc.)
  */
 EVENT2_EXPORT_SYMBOL
 const char *event_base_get_method(const struct event_base *);
@@ -726,7 +726,7 @@ typedef void (*event_log_cb)(int severity, const char *msg);
   Redirect Libevent's log messages.
 
   @param cb a function taking two arguments: an integer severity between
-     EVENT_LOG_DEBUG and EVENT_LOG_ERR, and a string.  If cb is NULL,
+     EVENT_LOG_DEBUG and EVENT_LOG_ERR, and a std::string.  If cb is NULL,
 	 then the default log is used.
 
   NOTE: The function you provide *must not* call any other libevent
@@ -1430,7 +1430,7 @@ size_t event_get_struct_event_size(void);
    currently linked against, not the version of the headers that you've
    compiled against.
 
-   @return a string containing the version number of Libevent
+   @return a std::string containing the version number of Libevent
 */
 EVENT2_EXPORT_SYMBOL
 const char *event_get_version(void);

@@ -109,7 +109,7 @@ bool CRusSentence::RunSyntaxInClauses(ESynRulesSet type) {
 
 
 void TryBuildVerbLemmaWithKa(CSynWord &W) {
-    if (W.m_strWord.find("-ка") == string::npos) return;
+    if (W.m_strWord.find("-ка") == std::string::npos) return;
 
     for (int i = 0; i < W.m_Homonyms.size(); i++) {
         if (W.m_Homonyms[i].HasPos(VERB))
@@ -178,8 +178,8 @@ void CRusSentence::AddWeightForSynVariantsInClauses() {
 }
 
 
-void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, string psAncode, long plOldGrammems) {
-    string s;
+void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, std::string psAncode, long plOldGrammems) {
+    std::string s;
     H.m_lPradigmID = plPardigmID;
 
     H.m_lFreqHom = 1;
@@ -233,11 +233,11 @@ void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, string psAncode,
     }
 
     for (int i = 0; i < v_gramm.size(); i++) {
-        string strPos = H.GetPartOfSpeechStr();
-        string strHelpGr;
+        std::string strPos = H.GetPartOfSpeechStr();
+        std::string strHelpGr;
         strHelpGr = Agramtab->GrammemsToStr(v_gramm[i]);
 
-        string n_code;
+        std::string n_code;
         BYTE iPos;
         QWORD iGrm;
         strPos += " ";
@@ -282,10 +282,10 @@ void CRusSentence::DisruptPronounPredik() {
 
 
 const long CommonNounPrefixesCount = 2;
-const string CommonNounPrefixes[CommonNounPrefixesCount] = {"ВИЦЕ-", "ЭКС-"};
+const std::string CommonNounPrefixes[CommonNounPrefixesCount] = {"ВИЦЕ-", "ЭКС-"};
 
 
-void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, string psAncode, string sLem, string TypeAncode) {
+void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, std::string psAncode, std::string sLem, std::string TypeAncode) {
     const CAgramtab *Agramtab = H.GetOpt()->GetGramTab();
     H.m_lPradigmID = plPardigmID;
     H.SetGramCodes(psAncode);
@@ -302,7 +302,7 @@ void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, string psAncode,
 void CRusSentence::CutPrefixEksAndVize() {
 
     for (int ii = 0; ii < m_Words.size(); ii++) {
-        string Word = m_Words[ii].m_strUpperWord;
+        std::string Word = m_Words[ii].m_strUpperWord;
         vector<int> Prefixes;
         for (long i = 0; i < CommonNounPrefixesCount; i++)
             if (CommonNounPrefixes[i] == Word.substr(0, CommonNounPrefixes[i].length())) {
@@ -322,9 +322,9 @@ void CRusSentence::CutPrefixEksAndVize() {
         vector<CSynHomonym> vec_Homonyms;
         for (long k = 0; k < Paradigms.size(); k++) {
             long lParadigm = Paradigms[k].GetParadigmId();
-            string TypeAncode = Paradigms[k].GetCommonAncode();
-            string sGramatCode = Paradigms[k].GetSrcAncode();
-            string sLemma = Paradigms[k].GetWordForm(0);
+            std::string TypeAncode = Paradigms[k].GetCommonAncode();
+            std::string sGramatCode = Paradigms[k].GetSrcAncode();
+            std::string sLemma = Paradigms[k].GetWordForm(0);
             if (!binary_search(GetOpt()->m_pProfessions->m_vectorDatItems.begin(),
                                GetOpt()->m_pProfessions->m_vectorDatItems.end(), sLemma))
                 continue;
@@ -377,7 +377,7 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause &C, SVI pSynVar) {
     else
         isubj_gram = GrpWithSubj->GetGrammems();
 
-    string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(isubj_gram);
+    std::string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(isubj_gram);
     debug = C.GetOpt()->GetGramTab()->GrammemsToStr(ipredk_gram);
     //if( isubj_gram & rAllGenders & ipredk_gram == 0) return; //разный род
     QWORD new_subj_grammems = (ipredk_gram & isubj_gram & rAllNumbers) | _QM(rNominativ);
@@ -429,7 +429,7 @@ bool CRusSentence::IsRelativSentencePronoun(int ClauseStartWordNo, int WordNo, i
     HomonymNo = 0;
 
     // "кое-чьи" не является релативным словом, а морфология  его не знает, поэтому возникает омоним "чей"
-    if (m_Words[WordNo].m_strWord.find('-') != string::npos) return false;
+    if (m_Words[WordNo].m_strWord.find('-') != std::string::npos) return false;
 
 
     if (m_Words[WordNo].m_Homonyms.empty()) return false;
@@ -736,12 +736,12 @@ void CRusSentence::CloneHomonymsForOborots() {
             // многословные обороты
             for (int j = i; j < m_Words.size(); j++) {
                 //"судя по многочисленным фак
-                string title = GetOpt()->GetOborDic()->m_Entries[m_Words[j].m_Homonyms[0].m_OborotNo].m_OborotEntryStr;
+                std::string title = GetOpt()->GetOborDic()->m_Entries[m_Words[j].m_Homonyms[0].m_OborotNo].m_OborotEntryStr;
                 EngRusMakeUpper(title);
                 int b = title.find(m_Words[j].m_strUpperWord + "(");
                 if (b != -1) {
                     b += m_Words[j].m_strUpperWord.length();
-                    string GramFet = title.substr(b + 1, title.find(")") - b - 1);
+                    std::string GramFet = title.substr(b + 1, title.find(")") - b - 1);
                     DWORD Pose;
                     QWORD Grammems;
                     {

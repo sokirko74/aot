@@ -3,32 +3,32 @@
 
 #include "../common/utilit.h"
 
-const string XmlPunctType = "pun";
-const string XmlWordType = "w";
+const std::string XmlPunctType = "pun";
+const std::string XmlWordType = "w";
 //! CXmlMorphAnnot holds one morphological interpretation, which is read from xml under CConcIndexator::m_IndexType == MorphXML_Index
 struct  CXmlMorphAnnot
 {
 	//! lemma
-	string				m_Lemma;
+	std::string				m_Lemma;
 	//! other morphological features
-	string				m_GrammemsStr;
+	std::string				m_GrammemsStr;
     //! reference to xml node
     void*               m_XmlRef;
 	//! return the structure as a set of token properties
 	void	GetAsSetOfProperties(vector<string>& Result)  const;
-    //! return string annotation for words from Russian corpus
-    string  BuildRusCorpAnnot() const;
+    //! return std::string annotation for words from Russian corpus
+    std::string  BuildRusCorpAnnot() const;
 };
 
 //! CXmlToken holds a word and all ist  morphological interpretations (used under CConcIndexator::m_IndexType == MorphXML_Index)
 struct CXmlToken 
 {
 	//! type of token (a word, a punctuation mark)
-	string						m_Type;
-	//! the string itself
-	string						m_WordStr;
-	//! original  string itself 
-	string						m_OrigWordStr;
+	std::string						m_Type;
+	//! the std::string itself
+	std::string						m_WordStr;
+	//! original  std::string itself 
+	std::string						m_OrigWordStr;
 	//! all morphological annotations
 	vector<CXmlMorphAnnot>		m_Annots;
 	//! true if the token is last in the sentence
@@ -38,12 +38,12 @@ struct CXmlToken
 	CXmlToken();
 };
 
-extern string POS_Dialing2MyStem(string pos);
-extern string Grammem_Dialing2MyStem(string pos);
-extern string POS_MyStem2Dialing(string pos);
-extern string Grammem_MyStem2Dialing(string pos);
-extern bool	  IsMyStemSpecificGrammem(string g);
-extern bool IsImportantRusCorpFeature(const string& s);
+extern std::string POS_Dialing2MyStem(std::string pos);
+extern std::string Grammem_Dialing2MyStem(std::string pos);
+extern std::string POS_MyStem2Dialing(std::string pos);
+extern std::string Grammem_MyStem2Dialing(std::string pos);
+extern bool	  IsMyStemSpecificGrammem(std::string g);
+extern bool IsImportantRusCorpFeature(const std::string& s);
 
 #endif
 

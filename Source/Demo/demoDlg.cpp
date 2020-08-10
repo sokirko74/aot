@@ -85,7 +85,7 @@ END_MESSAGE_MAP()
 BOOL CDemoDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	string strCause;
+	std::string strCause;
 	if (!IsRmlRegistered(strCause))
 	{
 		ErrorMessage(strCause);

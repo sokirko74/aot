@@ -196,7 +196,7 @@ extern "C" {
  * - ttl is the number of seconds the resolution may be cached for.
  * - addresses needs to be cast according to type.  It will be an array of
  *   4-byte sequences for ipv4, or an array of 16-byte sequences for ipv6,
- *   or a nul-terminated string for PTR.
+ *   or a nul-terminated std::string for PTR.
  */
 typedef void (*evdns_callback_type) (int result, char type, int count, int ttl, void *addresses, void *arg);
 
@@ -251,10 +251,10 @@ EVENT2_EXPORT_SYMBOL
 void evdns_base_clear_host_addresses(struct evdns_base *base);
 
 /**
-  Convert a DNS error code to a string.
+  Convert a DNS error code to a std::string.
 
   @param err the DNS error code
-  @return a string containing an explanation of the error code
+  @return a std::string containing an explanation of the error code
 */
 EVENT2_EXPORT_SYMBOL
 const char *evdns_err_to_string(int err);
@@ -317,9 +317,9 @@ EVENT2_EXPORT_SYMBOL
 int evdns_base_resume(struct evdns_base *base);
 
 /**
-  Add a nameserver by string address.
+  Add a nameserver by std::string address.
 
-  This function parses a n IPv4 or IPv6 address from a string and adds it as a
+  This function parses a n IPv4 or IPv6 address from a std::string and adds it as a
   nameserver.  It supports the following formats:
   - [IPv6Address]:port
   - [IPv6Address]

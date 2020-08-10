@@ -191,7 +191,7 @@ void CRusSentence::TryToRebuildDashInClause()
 			
 			if (0 == Adj_Nom.size() && 0 == Noun_Nom.size()
 				&& isdigit((BYTE)m_Words[j].m_strWord[0]) // Ему 33.
-				&& m_Words[j].m_strWord.find("-") == string::npos && j >= m_Words.size()-2 
+				&& m_Words[j].m_strWord.find("-") == std::string::npos && j >= m_Words.size()-2 
 				&& !m_Words[m_Words.size()-1].m_Homonyms[0].m_bMonth && !m_Words[m_Words.size()-2].m_Homonyms[0].m_bMonth) 
 			{
 				Vozrast = true;

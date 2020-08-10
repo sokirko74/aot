@@ -4,7 +4,7 @@
 */
 
 #include <stdio.h>
-#include "string.h"
+#include "std::string.h"
 #include <string>
 #import "../graphan/graphan.tlb"
 
@@ -70,8 +70,8 @@ int main(int argc, char* argv[])
 
 /*
 #include "stdio.h"
-#include "string.h"
-#include "string"
+#include "std::string.h"
+#include "std::string"
 #import "../../bin/graphan.tlb"//  импортируембиблиотеку
  
 // String Example

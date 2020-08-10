@@ -27,7 +27,7 @@ bool CSemStructureBuilder::FindSituationsForNextSentence()
 	return true;
 }
 
-bool  CSemStructureBuilder::FindSituations(string text, long UserTreeVariantNo, string PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, string AllowableLexVars, string& Graph)
+bool  CSemStructureBuilder::FindSituations(std::string text, long UserTreeVariantNo, std::string PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, std::string AllowableLexVars, std::string& Graph)
 {
 	try {
 		
@@ -88,7 +88,7 @@ bool  CSemStructureBuilder::FindSituations(string text, long UserTreeVariantNo, 
 
 
 
-bool CSemStructureBuilder::TranslateToEnglish(string& Graph)
+bool CSemStructureBuilder::TranslateToEnglish(std::string& Graph)
 {
 	try 
 	{
@@ -114,7 +114,7 @@ bool CSemStructureBuilder::TranslateToEnglish(string& Graph)
 	};
 }
 
-bool  CSemStructureBuilder::BuildSentence(string& Sentence)
+bool  CSemStructureBuilder::BuildSentence(std::string& Sentence)
 {
 	m_GlobalSpan.StartTimer("Синтез",0);	
 	m_RusStr.m_pData->InitializeIndices();
@@ -123,7 +123,7 @@ bool  CSemStructureBuilder::BuildSentence(string& Sentence)
 	return true;
 }
 
-bool CSemStructureBuilder::SyntRusSentence(string& Sentence)
+bool CSemStructureBuilder::SyntRusSentence(std::string& Sentence)
 {
 	m_GlobalSpan.StartTimer("Русский Синтез",0);	
 	m_RusStr.m_pData->InitializeIndices();
@@ -142,9 +142,9 @@ void  CSemStructureBuilder::ClearSavedSentences(void)
 	m_SavedSentences.clear();
 }
 
-string  CSemStructureBuilder::Answer()
+std::string  CSemStructureBuilder::Answer()
 {
-	string Result;
+	std::string Result;
 
 	if (!m_RusStr.SemanticAnswer(Result, m_SavedSentences))
 		Result = "Я не знаю";

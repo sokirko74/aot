@@ -34,7 +34,7 @@ CImportForm::CImportForm(CRossDoc* pRossDoc,
 	m_NumberOfArticle = _T("1");
 	//}}AFX_DATA_INIT
 	try { 
-       string strPath = GetRegistryString( g_strRegLastFile );
+       std::string strPath = GetRegistryString( g_strRegLastFile );
 	   m_FileName = _T(strPath.c_str());
 	  }
 	catch (...)
@@ -171,7 +171,7 @@ void CImportForm::OnRun()
        m_pRossDoc->SetModifiedFlag(TRUE);
 
 
-	string Messages;
+	std::string Messages;
 	GetRoss()->ImportFromText(
 		(const char*)m_FileName, 
 		m_SimulatingMode==TRUE, 

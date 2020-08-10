@@ -14,25 +14,25 @@ typedef CSmallVector<CLineIter,5> SmallWordsVec;
 enum FioItemTypeEnum {fiName, fiSurname, fiMiddle,fiAbbr,fiStop,fiRoman,fiProbName, fiString, fiOrdinal};
 struct CFIOItem {
 	FioItemTypeEnum m_fiType;
-	string			m_ItemStr;
+	std::string			m_ItemStr;
 };
 
 
 struct CFIOFormat 
 {
-	string m_FormatStr;
+	std::string m_FormatStr;
 	bool   m_GleicheCase;
 	vector<CFIOItem> m_Items;
 	CFIOFormat () {};
 
-	CFIOFormat (string  FormatStr, bool GleicheCase) 
+	CFIOFormat (std::string  FormatStr, bool GleicheCase) 
 	{
 		m_FormatStr = FormatStr;
 		m_GleicheCase = GleicheCase;
 		StringTokenizer tok(FormatStr.c_str(), " ");
 		while (tok()) 
 		{
-			string s = tok.val();
+			std::string s = tok.val();
 			FioItemTypeEnum t;
 		    if  (s == "ИМЯ")
 				t = fiName;

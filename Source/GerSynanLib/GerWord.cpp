@@ -64,7 +64,7 @@ bool is_article_for_mixed_declination(const CSynHomonym& H)
 
 
 const size_t PrepArticlesCount = 16;
-string PrepArticles[PrepArticlesCount] = { "AM","ANS","AUFS","BEIM","DURCHS",
+std::string PrepArticles[PrepArticlesCount] = { "AM","ANS","AUFS","BEIM","DURCHS",
 "FЬRS", "HINTERM","HINTERS","IM","INS","UMS","VOM","VORM","VORS","ZUM","ZUR" };
 
 
@@ -81,7 +81,7 @@ bool IsPrepositionArticle(const char* WordUpper, QWORD& Grammems)
 			Grammems |= _QM(gDativ);
 		else
 			return false;
-	return binary_search(PrepArticles, PrepArticles + PrepArticlesCount,string(WordUpper));
+	return binary_search(PrepArticles, PrepArticles + PrepArticlesCount,std::string(WordUpper));
 };
 
 

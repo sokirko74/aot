@@ -7,7 +7,7 @@
 #include "ChunkParser.h"
 
 
-bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLanguageEnum Language, CGrammarItem& I, string& ErrorStr, const string& SourceFileName )
+bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLanguageEnum Language, CGrammarItem& I, std::string& ErrorStr, const std::string& SourceFileName )
 {
 	I.InitGrammarItem();
 	I.m_bMeta = (pNode->m_AtomicName != "TOKEN");
@@ -32,7 +32,7 @@ bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLa
 	return true;	
 };
 
-bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo, CGrammarItem& I, vector<CRuleFeature>& Features, string& ErrorStr)
+bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo, CGrammarItem& I, vector<CRuleFeature>& Features, std::string& ErrorStr)
 {
 	// convert attribute "grm" to a feature "has_grammem"
 	if (		(I.m_bMeta)  
@@ -77,7 +77,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 			F.m_RightItems.push_back(A);
 		}
 		F.m_Type = foeCheck;
-		map<string, string>::iterator it  = I.m_Attributes.find("det");
+		map<std::string, std::string>::iterator it  = I.m_Attributes.find("det");
 		assert (it != I.m_Attributes.end());
 		bool b = F.InitFuncName(it->second);
 		if (!b)
@@ -96,7 +96,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 			&&	(I.m_Attributes.find("has_one_grm") != I.m_Attributes.end())
 		)
 	{
-		map<string, string>::iterator it  = I.m_Attributes.find("has_one_grm");
+		map<std::string, std::string>::iterator it  = I.m_Attributes.find("has_one_grm");
 		assert (it != I.m_Attributes.end());
 		CRuleFeature F;
 		{
@@ -131,7 +131,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 			&&	(I.m_Attributes.find("atomic") != I.m_Attributes.end())
 		)
 	{
-		map<string, string>::iterator it  = I.m_Attributes.find("atomic");
+		map<std::string, std::string>::iterator it  = I.m_Attributes.find("atomic");
 		CRuleFeature F;
 		{
 			CAttribAndId A;
@@ -159,7 +159,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 
 
 
-bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGrammar, CWorkRule& NewRule, string& ErrorStr, const string& SourceFileName )
+bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGrammar, CWorkRule& NewRule, std::string& ErrorStr, const std::string& SourceFileName )
 {
 	const vector<CChunkNode*>& V = pNode->GetChildren();	
 
@@ -212,7 +212,7 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 		
 		const CChunkRule* Rule = *it;
 		CGrammarItem I;
-		string ErrorStr;
+		std::string ErrorStr;
 		
 		if (!BuildGrammarItem(Rule->m_pLeftHand, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, Rule->m_SourceFileName))
 		{
@@ -276,7 +276,7 @@ bool BuildWorkGrammar(CWorkGrammar& WorkGrammar, bool bPrintRules)
 	if (bPrintRules)
 		WorkGrammar.Print();
 
-	string ErrorStr;
+	std::string ErrorStr;
 	WorkGrammar.LogStream <<  "creating all variants of nodes from nodes with work attributes\n";
 	if (!WorkGrammar.CreateNodesForNodesWithWorkAttributes(ErrorStr))
 	{

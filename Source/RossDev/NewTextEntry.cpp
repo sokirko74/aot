@@ -96,7 +96,7 @@ LRESULT CNewTextEntry::OnWizardNext()
    if (P)
    {
 		
-		P->CreateParadigmCollection(true, string((const char*)m_UnitStr), false, false, ParadigmCollection);
+		P->CreateParadigmCollection(true, std::string((const char*)m_UnitStr), false, false, ParadigmCollection);
  		((CTranslations*)Wzd->GetPage(2))->m_ParadigmCollection = ParadigmCollection;
 	};
 

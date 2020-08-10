@@ -1,25 +1,25 @@
 #include  "BigramsReader.h"
 
-#include <common/bserialize.h>
+#include "bserialize.h"
 #include "json.h"
 
 #include  <climits>
 
 struct CBigramsWordInfo {
-    string m_Word;
+    std::string m_Word;
     size_t m_Freq;
     size_t m_FileOffset1;
     size_t m_FileLen1;
     size_t m_FileOffset2;
     size_t m_FileLen2;
 
-    bool operator==(const string &Word) const {
+    bool operator==(const std::string &Word) const {
         return m_Word == Word;
     }
 };
 
 struct CBigramAndFreq {
-    string m_Word;
+    std::string m_Word;
     int m_WordFreq;
     int m_BigramsFreq;
 };
@@ -42,19 +42,19 @@ public:
 
     ~CBigrams();
 
-    bool Initialize(string BigramsFileName);
+    bool Initialize(std::string BigramsFileName);
 
-    vector<CBigramAndFreq> GetBigrams(string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq);
+    vector<CBigramAndFreq> GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq);
 };
 
 static CBigrams GlobalBigrams;
 
 struct IsLessBigramsWordInfo {
-    bool operator()(const CBigramsWordInfo &X1, const string &Word) const {
+    bool operator()(const CBigramsWordInfo &X1, const std::string &Word) const {
         return X1.m_Word < Word;
     };
 
-    bool operator()(const string &Word, const CBigramsWordInfo &X2) const {
+    bool operator()(const std::string &Word, const CBigramsWordInfo &X2) const {
         return Word < X2.m_Word;
     };
 
@@ -75,11 +75,11 @@ CBigrams::~CBigrams() {
 }
 
 
-bool CBigrams::Initialize(string BigramsFileName) {
+bool CBigrams::Initialize(std::string BigramsFileName) {
     m_Word2Infos.clear();
     m_CorpusSize = 0;
 
-    string IndexFile = MakeFName(BigramsFileName, "wrd_idx");
+    std::string IndexFile = MakeFName(BigramsFileName, "wrd_idx");
     fprintf(stderr, "load %s into memory\n", IndexFile.c_str());
     FILE *fp = fopen(IndexFile.c_str(), "r");
     if (!fp) {
@@ -106,7 +106,7 @@ bool CBigrams::Initialize(string BigramsFileName) {
     fclose(fp);
     if (m_Bigrams) fclose(m_Bigrams);
 
-    string Bin1File = MakeFName(BigramsFileName, "bin1");
+    std::string Bin1File = MakeFName(BigramsFileName, "bin1");
     fprintf(stderr, "  open %s \n", Bin1File.c_str());
     m_Bigrams = fopen(Bin1File.c_str(), "rb");
     if (!m_Bigrams) {
@@ -116,7 +116,7 @@ bool CBigrams::Initialize(string BigramsFileName) {
 
 
     if (m_BigramsRev) fclose(m_BigramsRev);
-    string Bin2File = MakeFName(BigramsFileName, "bin2");
+    std::string Bin2File = MakeFName(BigramsFileName, "bin2");
     fprintf(stderr, "  open %s \n", Bin2File.c_str());
     m_BigramsRev = fopen(Bin2File.c_str(), "rb");
     if (!m_BigramsRev) {
@@ -127,7 +127,7 @@ bool CBigrams::Initialize(string BigramsFileName) {
     return true;
 }
 
-vector<CBigramAndFreq> CBigrams::GetBigrams(string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq) {
+vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq) {
     WordFreq = 0;
     vector<CBigramAndFreq> Result;
     if (!m_Bigrams) return Result;
@@ -185,8 +185,8 @@ vector<CBigramAndFreq> CBigrams::GetBigrams(string Word, int MinBigramsFreq, boo
 }
 
 struct CBigramLine {
-    string m_Word1;
-    string m_Word2;
+    std::string m_Word1;
+    std::string m_Word2;
     size_t m_WordFreq1;
     size_t m_WordFreq2;
     size_t m_BigramsFreq;
@@ -205,7 +205,7 @@ bool GreaterByBigramsFreq(const CBigramLine &_X1, const CBigramLine &_X2) {
     return _X1.m_BigramsFreq > _X2.m_BigramsFreq;
 }
 
-string GetConnectedWords(string Word, int MinBigramsFreq, bool bDirectFile, string sortMode, MorphLanguageEnum langua) {
+std::string GetConnectedWords(std::string Word, int MinBigramsFreq, bool bDirectFile, std::string sortMode, MorphLanguageEnum langua) {
     size_t WordFreq;
     vector<CBigramLine> table;
     for (auto &b : GlobalBigrams.GetBigrams(Word, MinBigramsFreq, bDirectFile, WordFreq)) {
@@ -248,6 +248,6 @@ string GetConnectedWords(string Word, int MinBigramsFreq, bool bDirectFile, stri
     return result.dump();
 }
 
-bool InitializeBigrams(string FileName) {
+bool InitializeBigrams(std::string FileName) {
     return GlobalBigrams.Initialize(FileName);
 }

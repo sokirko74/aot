@@ -27,7 +27,7 @@ STDMETHODIMP CCOMClauseType::get_Description(BSTR *pVal)
 {
 	try
 	{
-		string  str;
+		std::string  str;
 		if (m_pType->m_Type == UnknownSyntaxElement) 
 			if (m_pOptions->m_Language == morphRussian)
 				str = "ПУСТЫХА";

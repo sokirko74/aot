@@ -15,7 +15,7 @@ CRossHolder::~CRossHolder()
 
 };
 
-bool CRossHolder::OpenRossHolder (const string strPathName, bool bDontLoadExamples) 
+bool CRossHolder::OpenRossHolder (const std::string strPathName, bool bDontLoadExamples) 
 {
 	m_LastUpdateTime = 1;
 	char RossDir[_MAX_PATH];
@@ -112,7 +112,7 @@ bool CRossHolder::InitConsts()
 	return true;
 };
 
-bool CRossHolder::HasCX (WORD UnitNo, const string CX, const string DomStr) const 
+bool CRossHolder::HasCX (WORD UnitNo, const std::string CX, const std::string DomStr) const 
 {
 	return HasItem (UnitNo, "SF", CX, DomStr,0,0);
 };
@@ -127,10 +127,10 @@ const char* CRossHolder::GetDomItemStrInner (long ItemNo) const
 
 
 
-string WriteToString (const CDictionary* Ross, const char* Frmt, const TCortege10& C)
+std::string WriteToString (const CDictionary* Ross, const char* Frmt, const TCortege10& C)
 {
 	BYTE	Counter	 = 0 ;
-	string Result  =	"";
+	std::string Result  =	"";
 	BYTE	BufferLen =	0;
 	if (Frmt	== 0) return Result;
 	BYTE	len	= strlen(Frmt);
@@ -238,7 +238,7 @@ bool CRossHolder::InitDomainsConsts()
 
 
 // По полю выдает набор	кортежей, которые ему приписано
-void CRossHolder::GetFieldValues(string	strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE LeafId, BYTE BracketLeafId) const	
+void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE LeafId, BYTE BracketLeafId) const	
 {
 	if (UnitNo == ErrUnitNo)	return;
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
@@ -255,7 +255,7 @@ void CRossHolder::GetFieldValues(string	strFieldName, long UnitNo, vector<TCorte
 
 
 // Проверяет, стоит	ли на первом месте одного из кортежей поля strFieldName	константа strValue
-bool CRossHolder::HasFieldValue(string strFieldName, string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
+bool CRossHolder::HasFieldValue(std::string strFieldName, std::string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
 	vector<TCortege> corteges;
 	GetFieldValues(strFieldName, UnitNo, corteges, LeafId);
@@ -270,7 +270,7 @@ bool CRossHolder::HasFieldValue(string strFieldName, string	strValue, long UnitN
 }
 
 // Проверяет, является ли одним	из значений	поля strFieldName константа	strValue
-bool CRossHolder::HasFullFieldValue(string strFieldName, string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
+bool CRossHolder::HasFullFieldValue(std::string strFieldName, std::string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
 	vector<TCortege> corteges;
 	GetFieldValues(strFieldName, UnitNo, corteges, LeafId);
@@ -278,7 +278,7 @@ bool CRossHolder::HasFullFieldValue(string strFieldName, string	strValue, long U
 	for(int	i =	0 ;	i <	corteges.size()	; i++ )
 	{
 		TCortege& C	= corteges[i];
-		string FullFieldValue =	WriteToString(GetRoss(), (char*)(GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		std::string FullFieldValue =	WriteToString(GetRoss(), (char*)(GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		Trim(FullFieldValue);
 		if (FullFieldValue == strValue)	return true;
 	}
@@ -288,7 +288,7 @@ bool CRossHolder::HasFullFieldValue(string strFieldName, string	strValue, long U
 
 
 // По полю выдает набор	значений, которые приписаны	этому полю
-void CRossHolder::GetFullFieldItemsFromArticle (long UnitNo, string	FieldStr, BYTE LeafId, BYTE	BracketLeafId, StringVector& Items) const
+void CRossHolder::GetFullFieldItemsFromArticle (long UnitNo, std::string	FieldStr, BYTE LeafId, BYTE	BracketLeafId, StringVector& Items) const
 {
  Items.clear();
  BYTE FieldNo =	GetRoss()->GetFieldNoByFieldStr(FieldStr.c_str());
@@ -302,14 +302,14 @@ void CRossHolder::GetFullFieldItemsFromArticle (long UnitNo, string	FieldStr, BY
 		 )
 	  {
 		 const TCortege& C = GetCortege(GetRoss(), i);
-		 string	FullFieldValue = WriteToString(GetRoss(), (char*)(GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		 std::string	FullFieldValue = WriteToString(GetRoss(), (char*)(GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		 Items.push_back (FullFieldValue);
 	  };
 };
 
 
 // По полю выдает набор	строковых констант,	которые	стоят на первом	месте кортежей,	которые	приписаны этому	полю
-void CRossHolder::GetSimpleFieldItemsFromArticle (long UnitNo, string FieldStr,	BYTE LeafId, BYTE BracketLeafId, StringVector& Items)	const
+void CRossHolder::GetSimpleFieldItemsFromArticle (long UnitNo, std::string FieldStr,	BYTE LeafId, BYTE BracketLeafId, StringVector& Items)	const
 {
  Items.clear();
  BYTE FieldNo =	GetRoss()->GetFieldNoByFieldStr(FieldStr.c_str());
@@ -322,7 +322,7 @@ void CRossHolder::GetSimpleFieldItemsFromArticle (long UnitNo, string FieldStr,	
 			&& (GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId)	
 		 )
 	  {
-		 string	Item = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,0));
+		 std::string	Item = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,0));
 		 Items.push_back (Item);
 	  };
 };
@@ -331,7 +331,7 @@ void CRossHolder::GetSimpleFieldItemsFromArticle (long UnitNo, string FieldStr,	
 // имя домена, в котором сначала ищется	константа ItemStr. 
 // Работает	немного	быстрее	CRossHolder::HasFieldValue,	поскольку вся работа со	строками 
 // вынесена	за пределы основного цикла
-bool CRossHolder::HasItem (WORD	UnitNo,	const string FieldStr, const string	ItemStr, const string DomStr, BYTE LeafId, BYTE	BracketLeafId) const
+bool CRossHolder::HasItem (WORD	UnitNo,	const std::string FieldStr, const std::string	ItemStr, const std::string DomStr, BYTE LeafId, BYTE	BracketLeafId) const
 {
 	if (UnitNo == ErrUnitNo)  return false;
 	BYTE DomNo = GetRoss()->GetDomenNoByDomStr(DomStr.c_str());
@@ -374,7 +374,7 @@ long  CRossHolder::GetDopFields(long UnitNo, vector<CDopField>&	DopFields) const
 			)
 		 continue;
 		 CDopField Field;
-		 string	S =	 GetDomItemStrInner(GetRoss()->GetCortegeItem(k,1));
+		 std::string	S =	 GetDomItemStrInner(GetRoss()->GetCortegeItem(k,1));
 		 //	 Word1 - зависимое слово
 		 Field.m_IsActant1 = (S[0] == 'A');
 		 Field.m_Word1 = S[1] -	'0';
@@ -420,15 +420,15 @@ void CRossHolder::GetLexFuncts (size_t UnitNo,  vector<CLexicalFunctionField>& O
   for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i<= GetRoss()->GetUnitEndPos(UnitNo); i++)
  	  if  (GetRoss()->GetCortegeFieldNo(i) == LexFunctFieldNo) 
 	  {
-       string Lemma = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,1));
+       std::string Lemma = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,1));
 	   EngRusMakeUpper(Lemma);
 	   //Lemma = Lemma.SpanExcluding(" ");
-	   string LexFunct = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,0));
+	   std::string LexFunct = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,0));
 	   long MeanNum = -1;
 	   CDictUnitInterp interp;
 	    if (GetRoss()->GetCortegeItem(i,2) != -1)
 		{
-			string S  = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,2));
+			std::string S  = GetDomItemStrInner(GetRoss()->GetCortegeItem(i,2));
 			
 			if (S.length() > 0)
 			  if ( isdigit((unsigned char)S[0]) )
@@ -504,7 +504,7 @@ long CRossHolder::GetSemMainWordFromArticle (long UnitNo) const
 			if (    (GetRoss()->GetCortegeFieldNo(i) == FieldNo) 
 				)
 			{
-				string S = (const char*)GetRoss()->GetDomItemStr(GetRoss()->GetCortegeItem(i,0));
+				std::string S = (const char*)GetRoss()->GetDomItemStr(GetRoss()->GetCortegeItem(i,0));
 				return S[0] - '0';
 			};
 	return -1;
@@ -568,7 +568,7 @@ long	CRossHolder::IsCompAdjCortege(const  TCortege& C) const
 {
    long ItemNo = GetSynFet(C);
    return  (ItemNo != -1) 
-	   &&  (string( GetDomItemStrInner(ItemNo)) == "сравн");
+	   &&  (std::string( GetDomItemStrInner(ItemNo)) == "сравн");
 };
 
 

@@ -311,12 +311,12 @@ void CGerSentence::ParticipleAndVerbInOneForm()
 			if (H.GetGramCodes() == "??") continue;
 			if (!H.HasPos(gPA2) || !H.HasPos(gVER)) continue;
 
-			string VerbGramCodes;
-			string PartGramCodes;
+			std::string VerbGramCodes;
+			std::string PartGramCodes;
 			
 			for (long i=0; i < H.GetGramCodes().length(); i+=2)
 			{
-				string gram = H.GetGramCodes().substr(i, 2);
+				std::string gram = H.GetGramCodes().substr(i, 2);
 				BYTE POS = GetOpt()->GetGramTab()->GetPartOfSpeech(gram.c_str());
 				if (POS == gPA2)
 					PartGramCodes += gram;
@@ -356,7 +356,7 @@ void CGerSentence::FindReflexivePronomen()
 		CClause& C = m_Clauses[ClauseNo];
 
 		
-		//  collecting all subjects in set<string> Subjects
+		//  collecting all subjects in set<std::string> Subjects
 		for (SVI it = C.m_SynVariants.begin(); it != C.m_SynVariants.end(); it++)
 		{
 			CMorphVariant& V = *it;
@@ -393,7 +393,7 @@ void CGerSentence::FindReflexivePronomen()
 				};
 			};
 
-			set<string> Subjects;
+			set<std::string> Subjects;
 
 			
 			for (size_t i=0; i< V.m_Subjects.size(); i++)
@@ -403,7 +403,7 @@ void CGerSentence::FindReflexivePronomen()
 			for (int i  = V.m_vectorGroups.get_main_word(0);i < V.m_SynUnits.size(); i  = V.m_vectorGroups.get_next_main_word(i))
 			{
 				if (V.m_SynUnits[i].m_Type != EWord) continue;
-				const string& Pronoun = m_Words[V.GetUnitFirstWord(i)].m_strUpperWord;
+				const std::string& Pronoun = m_Words[V.GetUnitFirstWord(i)].m_strUpperWord;
 				
 				if (!V.m_SynUnits[i].HasGrammem(gReflexiv)) continue;
 				// checking subject and reflexive pronoun

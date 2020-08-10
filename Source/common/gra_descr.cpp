@@ -60,7 +60,7 @@ Descriptors GetFirstMemberByTheSecond(Descriptors d)
 	return (Descriptors)(d-1);
 };
 
-bool GetDescriptorStr(int DescriptorNo, string& Result)
+bool GetDescriptorStr(int DescriptorNo, std::string& Result)
 {
 	if (DescriptorNo >= NumberOfGraphematicalDescriptors)
 		return false;
@@ -93,7 +93,7 @@ bool IsEndTextPeriodDescriptor (Descriptors d)
 
 
 
-QWORD parse_gra_descriptors ( const char * s, string& unparsed)
+QWORD parse_gra_descriptors ( const char * s, std::string& unparsed)
 {
     unparsed = "";
     StringTokenizer tok (s, "\t\r\n ");

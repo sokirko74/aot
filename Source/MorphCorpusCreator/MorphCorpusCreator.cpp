@@ -19,9 +19,9 @@ CMorphCorpusCreator::CMorphCorpusCreator()
 }
 
 
-string GetSentenceStr (SYNANLib::ISentencePtr piSent)
+std::string GetSentenceStr (SYNANLib::ISentencePtr piSent)
 {
-	string Result;
+	std::string Result;
 	for (size_t  i=0; i < piSent->WordsNum; i++)
 	{
 		Result += piSent->Word[i]->WordStr;
@@ -31,7 +31,7 @@ string GetSentenceStr (SYNANLib::ISentencePtr piSent)
 
 };
 
-string CMorphCorpusCreator::get_xml_result(const CCOMSyntaxHolder& Holder)
+std::string CMorphCorpusCreator::get_xml_result(const CCOMSyntaxHolder& Holder)
 {
 	m_CurrentLanguage = Holder.m_CurrentLanguage;
 	m_piLemmatizer = Holder.m_piLemmatizer;
@@ -40,7 +40,7 @@ string CMorphCorpusCreator::get_xml_result(const CCOMSyntaxHolder& Holder)
 	int i;
 	try
 	{
-		string processed_text = "<?xml version=\"1.0\" encoding=\"windows-1251\" ?>\n<text>\n";
+		std::string processed_text = "<?xml version=\"1.0\" encoding=\"windows-1251\" ?>\n<text>\n";
 
 		for(i = 0 ; i < Holder.m_piSentCollection->SentencesCount ; i++ )
 		{
@@ -55,7 +55,7 @@ string CMorphCorpusCreator::get_xml_result(const CCOMSyntaxHolder& Holder)
 	}
 	catch(...)
 	{
-		string sent_str = GetSentenceStr(Holder.m_piSentCollection->GetSentence(i));
+		std::string sent_str = GetSentenceStr(Holder.m_piSentCollection->GetSentence(i));
 		ErrorMessage( Format("Error while processing sentnce \"%s\"\n", sent_str.c_str()));
 		throw ;
 	}
@@ -82,12 +82,12 @@ void CMorphCorpusCreator::get_top_clauses(SYNANLib::ISentencePtr piSent, vector<
 
 
 
-void CMorphCorpusCreator::process_sent(SYNANLib::ISentencePtr piSent, string& result)
+void CMorphCorpusCreator::process_sent(SYNANLib::ISentencePtr piSent, std::string& result)
 {
 	vector<long> topClauses;
 	get_top_clauses(piSent, topClauses);
 
-	string SentenceStr  ="<s>\n";
+	std::string SentenceStr  ="<s>\n";
 	
 	for(long i = 0 ; i < topClauses.size() ; i++ )
 	{
@@ -100,7 +100,7 @@ void CMorphCorpusCreator::process_sent(SYNANLib::ISentencePtr piSent, string& re
 	result += SentenceStr;
 }
 
-void CMorphCorpusCreator::add_close_clause_tag(string& result)
+void CMorphCorpusCreator::add_close_clause_tag(std::string& result)
 {
 	if( !m_b_show_clause )
 		return;
@@ -108,7 +108,7 @@ void CMorphCorpusCreator::add_close_clause_tag(string& result)
 	result += "</cl>";
 }
 
-void CMorphCorpusCreator::add_open_clause_tag(string& result, string clause_type)
+void CMorphCorpusCreator::add_open_clause_tag(std::string& result, std::string clause_type)
 {
 	if( !m_b_show_clause )
 		return;
@@ -121,7 +121,7 @@ void CMorphCorpusCreator::add_open_clause_tag(string& result, string clause_type
 
 
 
-void CMorphCorpusCreator::process_clause(SYNANLib::ISentencePtr piSent, SYNANLib::IClausePtr piClause, string& result)
+void CMorphCorpusCreator::process_clause(SYNANLib::ISentencePtr piSent, SYNANLib::IClausePtr piClause, std::string& result)
 {
 	if( piClause->VariantsCount == 0 )
 	{
@@ -132,7 +132,7 @@ void CMorphCorpusCreator::process_clause(SYNANLib::ISentencePtr piSent, SYNANLib
 
 	{
 		int ClauseRootNo = piVar->ClauseRootNo;
-		string ClauseRootStr;
+		std::string ClauseRootStr;
 		if (ClauseRootNo != -1)
 			ClauseRootStr = (const char*)piClause->ClauseRoots[ClauseRootNo]->Description;
 		add_open_clause_tag(result, ClauseRootStr);
@@ -166,7 +166,7 @@ void CMorphCorpusCreator::process_clause(SYNANLib::ISentencePtr piSent, SYNANLib
 }
 
 
-string& tabify(string& s)
+std::string& tabify(std::string& s)
 {
 	s = "\t"+s;
 	for (size_t i=0; i+1 < s.length(); i++)
@@ -178,7 +178,7 @@ string& tabify(string& s)
 
 };
 
-long  CMorphCorpusCreator::process_oborot(SYNANLib::ISentencePtr piSent, SYNANLib::IClausePtr piClause, long iUnit, SYNANLib::IClauseVariantPtr piVar, string& result)
+long  CMorphCorpusCreator::process_oborot(SYNANLib::ISentencePtr piSent, SYNANLib::IClausePtr piClause, long iUnit, SYNANLib::IClauseVariantPtr piVar, std::string& result)
 {
 
 	SYNANLib::IWordPtr piWord = piSent->GetWord(piVar->Unit[iUnit]->WordNum);
@@ -195,9 +195,9 @@ long  CMorphCorpusCreator::process_oborot(SYNANLib::ISentencePtr piSent, SYNANLi
 
 	long iUnit1 = iUnit;
 
-	string oborot_from_text;
-	string oborot_lemma;
-	string oborot_as_single_words;
+	std::string oborot_from_text;
+	std::string oborot_lemma;
+	std::string oborot_as_single_words;
 
 	while(true)
 	{
@@ -214,7 +214,7 @@ long  CMorphCorpusCreator::process_oborot(SYNANLib::ISentencePtr piSent, SYNANLi
 		oborot_from_text += piWord->WordStr;
 		oborot_lemma += piWord->WordStr;
 		{
-			string WordInterp;
+			std::string WordInterp;
 			process_word(piSent,iUnit,piClause, WordInterp, false);
 			oborot_as_single_words += WordInterp;
 		};
@@ -280,19 +280,19 @@ DP>То есть для слова слово1-слово2-слово3 , стр�
 
 SA> Лучше я мапост буду исправлять....
 
-bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, string& sRes) 
+bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, std::string& sRes) 
 {
 
-	string wrd = piWord->WordStr;
-	if( wrd.find("-") == string::npos )
+	std::string wrd = piWord->WordStr;
+	if( wrd.find("-") == std::string::npos )
 		return false;
 
 	
 	
 	for(int i = 0 ; i < piWord->HomonymsCount ; i++ )
 	{
-		string Lemma = piWord->Homonym[i]->Lemma;
-		if( Lemma.find("-") != string::npos)
+		std::string Lemma = piWord->Homonym[i]->Lemma;
+		if( Lemma.find("-") != std::string::npos)
 			return false;
 	}
 
@@ -307,7 +307,7 @@ bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, 
 		const char* t = tokenizer(); 
 		if( !t )
 			return bRes;
-		string str(t) ;
+		std::string str(t) ;
 		piParadigmCollection = m_piLemmatizer->CreateParadigmCollectionFromForm(str.c_str(), piWord->Register == UpLow || piWord->Register == UpUp );
 
 		sRes +=str;
@@ -315,12 +315,12 @@ bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, 
 		for(int i = 0 ; i < piParadigmCollection->Count ; i++ )
 		{
 			piParadigm = piParadigmCollection->Item[i];
-			string lemma = piParadigm->GetNorm();
-			string str_ancodes = piParadigm->SrcAncode;
+			std::string lemma = piParadigm->GetNorm();
+			std::string str_ancodes = piParadigm->SrcAncode;
 			long iParadigm = piParadigm->ParadigmID;
 			long POS = m_pGramTab->GetPartOfSpeech(str_ancodes.c_str());
 			long POSes = 1 << POS; 
-			string POSstr = m_pGramTab->GetPartOfSpeechStr(POS);
+			std::string POSstr = m_pGramTab->GetPartOfSpeechStr(POS);
 			
 
 			if( str_ancodes.length() == 0)
@@ -334,7 +334,7 @@ bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, 
 				{
 					if( j + 1 >= str_ancodes.size() )
 						break;
-					string ancode = str_ancodes.substr(j, 2);
+					std::string ancode = str_ancodes.substr(j, 2);
 					if( i > 0 )
 						sRes += "|";
 					process_gram_homonym(lemma, POSes, iParadigm, POSstr,  ancode,  sRes, piWord);
@@ -355,7 +355,7 @@ bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, 
 
 */
 
-long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit, SYNANLib::IClausePtr piClause, string& result, bool bCheckOborot)
+long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit, SYNANLib::IClausePtr piClause, std::string& result, bool bCheckOborot)
 {
 	SYNANLib::IClauseVariantPtr piVar = piClause->GetClauseVariant(0);	
 
@@ -379,7 +379,7 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 		if( piHom->IsInOb  )
 		{
 			long iUnitRet;
-			string str_res;
+			std::string str_res;
 			iUnitRet = process_oborot(piSent, piClause, iUnit, piVar, str_res);
 			if( iUnitRet != -1 )
 			{
@@ -388,7 +388,7 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 			}		
 		}
 	
-	string sRes;
+	std::string sRes;
 	/*if( try_to_process_hyphen_word(piWord, sRes) )
 	{
 		result += sRes;
@@ -398,7 +398,7 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 	
 	if( piWord->Register == AnyRegister )
 	{	
-		result += string("\t<pun> ")+ (const char*)piWord->WordStr + string(" </pun>\n");	
+		result += std::string("\t<pun> ")+ (const char*)piWord->WordStr + std::string(" </pun>\n");	
 		return iUnit;
 	}
 
@@ -406,7 +406,7 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 
 	// process homonyms
 	set<long> processed_homonyms;
-	set<string> good_morph_interps;
+	set<std::string> good_morph_interps;
 	for (size_t i=0; i < piClause->GetVariantsCount(); i++)
 	{
 		SYNANLib::IClauseVariantPtr piVar = piClause->GetClauseVariant(i);	
@@ -417,19 +417,19 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 		process_homonym(piWord->Homonym[iHom], piUnit, piWord, good_morph_interps);	
 	};
 
-	for (set<string>::const_iterator it =  good_morph_interps.begin(); it !=  good_morph_interps.end(); it++)
+	for (set<std::string>::const_iterator it =  good_morph_interps.begin(); it !=  good_morph_interps.end(); it++)
 	{
 		result +=  "\t\t<ana " + *it + " />\n";
 	};
-	string WordStr = (const char*)piWord->WordStr;
+	std::string WordStr = (const char*)piWord->WordStr;
 	if (is_alpha(WordStr[0], m_CurrentLanguage))
 	{
-		set<string> all_morph_interps;
+		set<std::string> all_morph_interps;
 		get_all_morph_interps(piWord, all_morph_interps);
-		vector<string> Result(all_morph_interps.size());
-		vector<string>::iterator end = set_difference( all_morph_interps.begin(), all_morph_interps.end(),
+		vector<std::string> Result(all_morph_interps.size());
+		vector<std::string>::iterator end = set_difference( all_morph_interps.begin(), all_morph_interps.end(),
 			good_morph_interps.begin(), good_morph_interps.end(), Result.begin());	
-		for (vector<string>::iterator it = Result.begin(); it != end; it++)
+		for (vector<std::string>::iterator it = Result.begin(); it != end; it++)
 		{
 			result +=  "\t\t<ana_del " + *it + " />\n";
 		};
@@ -444,11 +444,11 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 }
 
 
-void CMorphCorpusCreator::get_all_morph_interps(SYNANLib::IWordPtr piWord , set<string>& all_morph_interps)
+void CMorphCorpusCreator::get_all_morph_interps(SYNANLib::IWordPtr piWord , set<std::string>& all_morph_interps)
 {
 try {
 		all_morph_interps.clear();
-		string WordStr = piWord->WordStr;
+		std::string WordStr = piWord->WordStr;
 
 		LEMMATIZERLib::IParadigmCollectionPtr piParadigmCollection = m_piLemmatizer->CreateParadigmCollectionFromForm(
 			WordStr.c_str(), 
@@ -458,12 +458,12 @@ try {
 		for(int i = 0 ; i < piParadigmCollection->Count ; i++ )
 		{
 			LEMMATIZERLib::IParadigmPtr piParadigm = piParadigmCollection->Item[i];
-			string lemma = piParadigm->GetNorm();
-			string str_ancodes = piParadigm->SrcAncode;
+			std::string lemma = piParadigm->GetNorm();
+			std::string str_ancodes = piParadigm->SrcAncode;
 			long iParadigm = piParadigm->ParadigmID;
 			for( int i = 0 ; i < str_ancodes.size() ; i+=2)
 			{
-				string interp = process_gram_homonym(lemma, iParadigm, str_ancodes.substr(i, 2), piWord);
+				std::string interp = process_gram_homonym(lemma, iParadigm, str_ancodes.substr(i, 2), piWord);
 				all_morph_interps.insert(interp);
 			};
 		};
@@ -479,19 +479,19 @@ catch(...)
 
 };
 
-void CMorphCorpusCreator::AddAccent(string& lemma, int ParadigmID)
+void CMorphCorpusCreator::AddAccent(std::string& lemma, int ParadigmID)
 {
 	LEMMATIZERLib::IParadigmPtr piParad = m_piLemmatizer->CreateParadigmFromID(ParadigmID);
 	int iPos = piParad->GetAccent(0);
 	if( (iPos < 0) || (iPos >= lemma.length()) )
 		return;
-	string lemma_save = lemma;
+	std::string lemma_save = lemma;
 	lemma = lemma_save.substr(0, iPos);
 	lemma += '`';
 	lemma += lemma_save.substr(iPos);		
 }
 
-string CMorphCorpusCreator::GetLemma(string lemma, BYTE Pos, long ParadigmID, SYNANLib::IWordPtr piWord, QWORD lexema_grammems, string ancode)
+std::string CMorphCorpusCreator::GetLemma(std::string lemma, BYTE Pos, long ParadigmID, SYNANLib::IWordPtr piWord, QWORD lexema_grammems, std::string ancode)
 {	
 	RmlMakeLower(lemma, m_CurrentLanguage);
 
@@ -511,8 +511,8 @@ string CMorphCorpusCreator::GetLemma(string lemma, BYTE Pos, long ParadigmID, SY
 	if( bProperNoun)
 	{
 		// making  the first word uppercase
-		string c(lemma, 0, 1);
-		string save_lemma = lemma;
+		std::string c(lemma, 0, 1);
+		std::string save_lemma = lemma;
 		RmlMakeUpper(c, m_CurrentLanguage);
 		lemma = c;
 		lemma += save_lemma.substr(1, save_lemma.size() - 1);
@@ -526,26 +526,26 @@ string CMorphCorpusCreator::GetLemma(string lemma, BYTE Pos, long ParadigmID, SY
 	if( ParadigmID == -1 )
 		lemma += "?";
 
-	string graph_descr = (const char*)piWord->GraphDescrs;
+	std::string graph_descr = (const char*)piWord->GraphDescrs;
 	
-	if( graph_descr.find("#ПОЛУ") != string::npos )
+	if( graph_descr.find("#ПОЛУ") != std::string::npos )
 	{
-		string wrd = (const char*)piWord->WordStr;
+		std::string wrd = (const char*)piWord->WordStr;
 		RmlMakeLower(wrd, m_CurrentLanguage);
 		if( wrd.find("полу") == 0)
-			lemma = string("полу") + lemma;
+			lemma = std::string("полу") + lemma;
 		else 
 			if( wrd.find("пол-") == 0)
-				lemma = string("пол-") + lemma;
+				lemma = std::string("пол-") + lemma;
 			else
-				lemma = string("пол") + lemma;		
+				lemma = std::string("пол") + lemma;		
 		lemma += "?";
 	}
 
 	return lemma;
 }
 
-bool CMorphCorpusCreator::hasSecondCase(long paradigm_id, string strForm, BYTE eCase)
+bool CMorphCorpusCreator::hasSecondCase(long paradigm_id, std::string strForm, BYTE eCase)
 {
 	if( paradigm_id == -1)
 		return false;
@@ -557,14 +557,14 @@ bool CMorphCorpusCreator::hasSecondCase(long paradigm_id, string strForm, BYTE e
 	bool bFoundDativ = false;
 	for( int i = 0 ; i < piParadigm->GetCount() ; i++ )
 	{
-		string strFormFromParadigm = (const char*)piParadigm->GetForm(i) ;
+		std::string strFormFromParadigm = (const char*)piParadigm->GetForm(i) ;
 		RmlMakeLower(strFormFromParadigm, m_CurrentLanguage);
 		
 
-		string strAncode = (const char*)piParadigm->GetAncode(i);
+		std::string strAncode = (const char*)piParadigm->GetAncode(i);
 		for(int j = 0 ; j < strAncode.size() ; j+=2 )
 		{
-			string strOneAncode = strAncode.substr(j, 2);
+			std::string strOneAncode = strAncode.substr(j, 2);
 			unsigned int grammems = m_pGramTab->GetGrammems(strOneAncode.c_str());
 			if( grammems & _QM(AGRAMTABLib::rPlural) )
 				continue;
@@ -594,32 +594,32 @@ bool CMorphCorpusCreator::hasSecondCase(long paradigm_id, string strForm, BYTE e
 	return false;
 }	
 
-int CMorphCorpusCreator::get_index_in_paradigm(SYNANLib::IWordPtr piWord, LEMMATIZERLib::IParadigmPtr piPard, const string& str_ancode)
+int CMorphCorpusCreator::get_index_in_paradigm(SYNANLib::IWordPtr piWord, LEMMATIZERLib::IParadigmPtr piPard, const std::string& str_ancode)
 {
 	assert (str_ancode.length() == 2 );
-	string word;
+	std::string word;
 	word = piWord->WordStr;
 	RmlMakeLower(word, m_CurrentLanguage);
 
 	for( int i = 0 ; i < piPard->Count ; i++ )
 	{
-		string str = (const char*)piPard->GetForm(i);
+		std::string str = (const char*)piPard->GetForm(i);
 		RmlMakeLower(str, m_CurrentLanguage);
 		if( word != str )
 			continue;
 
-		string ancode = piPard->GetAncode(i);
+		std::string ancode = piPard->GetAncode(i);
 		if(  ancode == str_ancode )
 			return i;
 	}
 	return -1;
 }
 
-string CMorphCorpusCreator::process_gram_homonym(string lemma, long paradigm_id, const string& ancode, SYNANLib::IWordPtr piWord)
+std::string CMorphCorpusCreator::process_gram_homonym(std::string lemma, long paradigm_id, const std::string& ancode, SYNANLib::IWordPtr piWord)
 {
 	BYTE pos = m_pGramTab->GetPartOfSpeech(ancode.c_str());
-	string strPos = m_pGramTab->GetPartOfSpeechStr(pos);
-	string str_word = (const char*)piWord->WordStr;
+	std::string strPos = m_pGramTab->GetPartOfSpeechStr(pos);
+	std::string str_word = (const char*)piWord->WordStr;
 	QWORD grammems = 0;
 
 	if( !ancode.empty() )
@@ -629,9 +629,9 @@ string CMorphCorpusCreator::process_gram_homonym(string lemma, long paradigm_id,
 	if (paradigm_id != -1)
 		piParadigm = m_piLemmatizer->CreateParadigmFromID(paradigm_id);		
 
-	string type_grammems;
+	std::string type_grammems;
 	{ // add common grammems
-		string TypeAncode;
+		std::string TypeAncode;
 		if (paradigm_id != -1)
 			TypeAncode = piParadigm->TypeAncode;
 		if (!TypeAncode.empty())
@@ -644,7 +644,7 @@ string CMorphCorpusCreator::process_gram_homonym(string lemma, long paradigm_id,
 	if (paradigm_id != -1)
 		FormNo = get_index_in_paradigm(piWord,  piParadigm, ancode);
 
-	string str_gramems = m_pGramTab->GrammemsToStr(grammems);
+	std::string str_gramems = m_pGramTab->GrammemsToStr(grammems);
 
 	if (m_bArtificialCases)
 	{
@@ -670,7 +670,7 @@ string CMorphCorpusCreator::process_gram_homonym(string lemma, long paradigm_id,
 				}
 		}
 	}
-	string result;
+	std::string result;
 	result += "lemma=\"";
 	result += GetLemma(lemma, pos, paradigm_id, piWord, grammems, ancode);
 	result += "\" pos=\"";
@@ -683,20 +683,20 @@ string CMorphCorpusCreator::process_gram_homonym(string lemma, long paradigm_id,
 
 
 
-void CMorphCorpusCreator::process_homonym(SYNANLib::IHomonymPtr piHom, SYNANLib::ISyntaxUnitPtr piUnit, SYNANLib::IWordPtr piWord, set<string>& result_inters)
+void CMorphCorpusCreator::process_homonym(SYNANLib::IHomonymPtr piHom, SYNANLib::ISyntaxUnitPtr piUnit, SYNANLib::IWordPtr piWord, set<std::string>& result_inters)
 {
 try
 {
-	string GramCodes = (const char*)piHom->GetGramcodes();
+	std::string GramCodes = (const char*)piHom->GetGramcodes();
 	if( GramCodes.empty() || GramCodes[0] == '?' )
 		return;
 
-	string str_word = piWord->WordStr;
+	std::string str_word = piWord->WordStr;
 
 	if( piHom->IsInOb && !(piHom->IsOb1 && piHom->IsOb2 ) )
 		return;
 
-	string str_ancodes;
+	std::string str_ancodes;
 
 	if( piUnit != NULL )			
 		str_ancodes = piUnit->Gramcodes;	
@@ -704,17 +704,17 @@ try
 	if (str_ancodes.empty())
 		str_ancodes = piHom->Gramcodes;
 
-	string result;
+	std::string result;
 
 	for( int i = 0 ; i < str_ancodes.size() ; i+=2)
 	{
-		string ancode = str_ancodes.substr(i, 2);
+		std::string ancode = str_ancodes.substr(i, 2);
 
 		BYTE pos = m_pGramTab->GetPartOfSpeech(ancode.c_str());
-		string str_lemma =  piHom->Lemma;
+		std::string str_lemma =  piHom->Lemma;
 		if( str_lemma.empty()  )
 			str_lemma = str_word ;
-		string interp = process_gram_homonym(str_lemma, piHom->ParadigmID, ancode, piWord);
+		std::string interp = process_gram_homonym(str_lemma, piHom->ParadigmID, ancode, piWord);
 		result_inters.insert(interp);
 	}
 	

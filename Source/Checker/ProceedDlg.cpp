@@ -89,7 +89,7 @@ BOOL CProceedDlg::OnInitDialog()
 }
 
 
-string ConvertEOLN (string s)
+std::string ConvertEOLN (std::string s)
 {
 	for (int i =0; i < s.length(); i++)
 		if (s[i] == 1)
@@ -148,7 +148,7 @@ void CProceedDlg::OnAdd()
 
 /////////////////////////////////////////////////////////////////////////////
 
-StringVector ConvertToVector(string s)
+StringVector ConvertToVector(std::string s)
 {
 	size_t  start = 0;
 	StringVector r;
@@ -185,10 +185,10 @@ void CProceedDlg::ShowDifferences()
 		// showing differences with "!!!"
 		StringVector t1 = ConvertToVector(new_base);
 		StringVector t2 = ConvertToVector(old_base);
-		string tran  = "";
+		std::string tran  = "";
 		for (int i = 0; i < t1.size(); i++)
 		{
-			string s;
+			std::string s;
 			if (find(t2.begin(),t2.end(), t1[i]) == t2.end())
 				s = " !!! ";
 			s += t1[i];
@@ -201,7 +201,7 @@ void CProceedDlg::ShowDifferences()
 		tran = "";
 		for (int i = 0; i < t2.size(); i++)
 		{
-			string s;
+			std::string s;
 			if (find(t1.begin(),t1.end(), t2[i]) == t1.end())
 				s = " !!! ";
 			s += t2[i];
@@ -219,7 +219,7 @@ void CProceedDlg::ShowDifferences()
 		if (j < MinEqual)
 				MinEqual = j;
 
-		string tran = new_base;
+		std::string tran = new_base;
 		if  (   (MinEqual > 0) 
 			 && (MinEqual <  tran.length()) 
 			)
@@ -234,7 +234,7 @@ void CProceedDlg::UpdateOldBaseOnTheScreen()
 {
 	CCheckerDlg *pDlg = (CCheckerDlg *)AfxGetMainWnd();
 
-	string old_base;
+	std::string old_base;
 	if (m_BaseStartNo != -1)
 		old_base = ConvertEOLN(pDlg->m_base[m_BaseCurrentNo].txt);
 	SetDlgItemText(IDC_TEXT3,old_base.c_str());		

@@ -3,7 +3,7 @@
 #include "LexFuncts.h"
 
 
-bool			IsOper1 (const string& LexFunct) 
+bool			IsOper1 (const std::string& LexFunct) 
 {
 		return		 (LexFunct == "Oper1")
 			      || (LexFunct == "Real1")
@@ -14,7 +14,7 @@ bool			IsOper1 (const string& LexFunct)
 				  || (LexFunct == "Liqu1Func0")
 				  ;
 };
-bool			IsOper2 (const string& LexFunct) 
+bool			IsOper2 (const std::string& LexFunct) 
 {
 		return			(LexFunct == "Oper2") 
 					||	(LexFunct == "Real2")
@@ -24,7 +24,7 @@ bool			IsOper2 (const string& LexFunct)
 					||  (LexFunct == "Liqu2Func0")
 					;
 };
-bool			IsOper3 (const string& LexFunct) 
+bool			IsOper3 (const std::string& LexFunct) 
 {
 		return			(LexFunct == "Oper3") 
 					||	(LexFunct == "Real3")
@@ -36,7 +36,7 @@ bool			IsOper3 (const string& LexFunct)
 
 };
 
-bool			IsOper (const string& LexFunct) 
+bool			IsOper (const std::string& LexFunct) 
 {
       return		  IsOper1(LexFunct)
 		    	  ||  IsOper2(LexFunct)
@@ -51,7 +51,7 @@ bool			IsOper (const string& LexFunct)
 				  ;
 };
 
-bool			IsFunc0 (const string& LexFunct)
+bool			IsFunc0 (const std::string& LexFunct)
 {
 	return	      (LexFunct == "Func0") 
 			   || (LexFunct == "PermFunc0")
@@ -59,7 +59,7 @@ bool			IsFunc0 (const string& LexFunct)
 			   || (LexFunct == "FinFunc0");
 };
 
-bool			IsFunc1 (const string& LexFunct)
+bool			IsFunc1 (const std::string& LexFunct)
 {
      return	       (LexFunct == "Func1")
 				|| (LexFunct == "PermFunc1")
@@ -68,18 +68,18 @@ bool			IsFunc1 (const string& LexFunct)
 ;
 };
 
-bool			IsFunc2 (const string& LexFunct)
+bool			IsFunc2 (const std::string& LexFunct)
 {
      return	    (LexFunct == "Func2");
 };
 
-bool			IsFunc3 (const string& LexFunct)
+bool			IsFunc3 (const std::string& LexFunct)
 {
      return	    (LexFunct == "Func3");
 };
 
 	
-bool			IsFunc (const string& LexFunct) 
+bool			IsFunc (const std::string& LexFunct) 
 {
      return	    IsFunc3(LexFunct) ||
 				IsFunc2(LexFunct) ||
@@ -88,7 +88,7 @@ bool			IsFunc (const string& LexFunct)
 				;
 };
 
-bool IsOper(const string& lexFun, int& OperNum) 
+bool IsOper(const std::string& lexFun, int& OperNum) 
 {
 	if( IsOper1(lexFun) )
 	{
@@ -109,7 +109,7 @@ bool IsOper(const string& lexFun, int& OperNum)
 	return false;
 }
 
-bool IsFunc(const string& lexFun, int& FuncNum) 
+bool IsFunc(const std::string& lexFun, int& FuncNum) 
 {
 
 	bool bRet = false; 
@@ -126,13 +126,13 @@ bool IsFunc(const string& lexFun, int& FuncNum)
 }
 
 
-bool			IsParameterOfVerb (const string& LexFunct) 
+bool			IsParameterOfVerb (const std::string& LexFunct) 
 {
 	  return	    IsOper(LexFunct) 
 				|| IsFunc(LexFunct);
 };
 
-bool			IsParameterOfAdjOrAdv (const string& LexFunct) 
+bool			IsParameterOfAdjOrAdv (const std::string& LexFunct) 
 {
       return	    (LexFunct == "Magn")
 			      ||(LexFunct == "AntiMagn")
@@ -157,7 +157,7 @@ size_t CRusSemStructure::CountLexFunctsInOneClause(long ClauseNo)
 
 
 
-void AddByLemma(const vector<SLexFunIndexes>& base, string Lemma, vector<CDictReference>& result) 
+void AddByLemma(const vector<SLexFunIndexes>& base, std::string Lemma, vector<CDictReference>& result) 
 {
 	SLexFunIndexes LexFunIndexes;
 	LexFunIndexes.m_LexFunValue.m_UnitStr = Lemma;
@@ -243,7 +243,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 		if (ParamNode.GetType() == CollocRoss)
 		{
 			// берем TITLЕ	  
-			string UnitStr = GetRoss(CollocRoss)->GetEntryStr(ParamNode.GetInterp()->m_UnitNo);
+			std::string UnitStr = GetRoss(CollocRoss)->GetEntryStr(ParamNode.GetInterp()->m_UnitNo);
 			EngRusMakeUpper(UnitStr);
 			It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), UnitStr);
 		};
@@ -306,7 +306,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 					CSemPattern P;
 					if (ParamNode.m_NotProhibitedValSets[j].size() < 2) continue;
 					GetActantPattern (ParamNodeNo, ParamNode.m_NotProhibitedValSets[j][1],  P);
-					string  SyntacticRelation;
+					std::string  SyntacticRelation;
 					CSynRealization SyntacticRealization;
 					if (IsPattern (P, SitNodeNo, SyntacticRelation, SyntacticRealization) )
 						break;
@@ -322,7 +322,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 
 
 	//ведем стрелку от слова ситуации в присвязочный глагол
-	string LexFunctName = It->m_LexFunct;
+	std::string LexFunctName = It->m_LexFunct;
 	if (bS0) LexFunctName = "S0."+LexFunctName;
 	m_LexFuncts.push_back (CLexFunctRel(SitNodeNo, ParamNodeNo, LexFunctName));
 };

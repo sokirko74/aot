@@ -17,7 +17,7 @@ int yylex (void* valp, CChunkParser* _prs)
 
 void yyerror(CChunkParser* _prs, const char *a)
 {
-	string error;
+	std::string error;
 	if (a && strlen(a))
 		error = a;
 	else
@@ -46,8 +46,8 @@ bool CChunkParser::ParseGrammar(const char* src)
 	m_CurrentSourceLineNo = 1;
 	if (src == NULL) return false;
 
-	string  Query = src;
-	istringstream 			QueryStream (Query.c_str());
+	std::string  Query = src;
+	istd::stringstream 			QueryStream (Query.c_str());
 	switch_streams((istream*)(&QueryStream), 0);
 	int m_line_num = 1;
 	if (yyparse(this) != 0)
@@ -60,9 +60,9 @@ bool CChunkParser::ParseGrammar(const char* src)
 	return true;
 
 }
-bool CChunkParser::ParseGrammarInFile(string FileName, string RefererFile)
+bool CChunkParser::ParseGrammarInFile(std::string FileName, std::string RefererFile)
 {	
-	string Grammar;
+	std::string Grammar;
 	if (!LoadFileToString(FileName, Grammar))
 	{
 		bool bResult = false;
@@ -107,7 +107,7 @@ int CChunkParser::yylex(void* valp)
 		char buff[1000];
 		strncpy (buff, YYText(), YYLeng());
 		buff[YYLeng()] = 0;
-		string s = buff;
+		std::string s = buff;
 		m_Labels.push_back(s);
 		((YYSTYPE *)valp)->m_LabelPtr = & (m_Labels.back());
 	}

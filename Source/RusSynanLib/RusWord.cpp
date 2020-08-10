@@ -16,7 +16,7 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 	if (!H.IsMorphNoun()) return false;
 	if (H.m_strLemma.length() < 3)  return false;
 	if (H.m_lPradigmID == -1) return false;
-	string suffix = H.m_strLemma.substr(H.m_strLemma.length()-2);
+	std::string suffix = H.m_strLemma.substr(H.m_strLemma.length()-2);
 	bool bMasc = (suffix == "ИЙ") ||  (suffix == "ЫЙ");
 	bool bFem = (suffix == "АЯ") ||  (suffix == "ЯЯ");
 	if (!bMasc && !bFem) return false;
@@ -25,12 +25,12 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 	GetOpt()->GetLemmatizer()->CreateParadigmFromID(H.m_lPradigmID, Info);
 	for (long k=0; k < Info.GetCount(); k++)
 	{
-		string Ancode = Info.GetAncode(k);
+		std::string Ancode = Info.GetAncode(k);
 		QWORD  g = GetRusGramTab()->GetAllGrammems(Ancode.c_str());
 		if (  g & _QM(rSingular) )
 			if ( g & _QM(rGenitiv) )
 			{
-				string Form = Info.GetWordForm(k);
+				std::string Form = Info.GetWordForm(k);
 				int l = Form.length();
 				if (l < 3) return false;
 				if (bMasc)
@@ -98,7 +98,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 	{
 		for (long  i=0; i<SmallNumbersCount; i++)
 		  if (	H.IsLemma(SmallNumbers[i]) // m_strLemma может быть равна "один-два",
-			  || (   (H.m_strLemma.find('-') != string::npos) // например, "один-два дня", тогда надо сравнивать с последним числительным
+			  || (   (H.m_strLemma.find('-') != std::string::npos) // например, "один-два дня", тогда надо сравнивать с последним числительным
 				  && (strlen(SmallNumbers[i]) < H.m_strLemma.length())
 				  && (SmallNumbers[i] == H.m_strLemma.substr(H.m_strLemma.find('-') + 1))
 				 )

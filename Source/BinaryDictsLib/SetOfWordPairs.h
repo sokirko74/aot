@@ -23,7 +23,7 @@ public:
 
 // ISetOfWordPairs
 public:
-	long GetFlag(long pair_index, long flag_index, string& text) const;
+	long GetFlag(long pair_index, long flag_index, std::string& text) const;
 	long GetId(long index) const;
 	long get_Count() const;
 };

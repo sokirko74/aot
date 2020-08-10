@@ -281,7 +281,7 @@ BOOL CRossDevApp::InitInstance()
 
 
 	// Change the registry key under which our settings are stored.
-	// TODO: You should modify this string to be something appropriate
+	// TODO: You should modify this std::string to be something appropriate
 	// such as the name of your company or organization.
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
@@ -379,7 +379,7 @@ BOOL CRossDevApp::InitInstance()
 	{
 			LOGFONT lf;                        // Used to create the CFont.
 			memset(&lf, 0, sizeof(LOGFONT));   // Clear out structure.
-			string strFontSize = GetRegistryString( g_strFontSizeRegPath);
+			std::string strFontSize = GetRegistryString( g_strFontSizeRegPath);
 			lf.lfHeight = atoi(strFontSize.c_str());                  // Request a 20-pixel-high font
 			strcpy(lf.lfFaceName, GetRegistryString( g_strFontNameRegPath ).c_str());    //    with face name "Arial".
 			m_TextFont.CreateFontIndirect(&lf);    // Create the font.

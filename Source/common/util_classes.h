@@ -131,8 +131,8 @@ class CShortStringHolder : public vector<CShortString>
 	template<class T>
 		bool CreateFromSequence(T begin, T end);
 public:	
-	void	ReadShortStringHolder(string filename);
-	bool	WriteShortStringHolder(const string& FileName) const;
+	void	ReadShortStringHolder(std::string filename);
+	bool	WriteShortStringHolder(const std::string& FileName) const;
 	bool	CreateFromVector(const StringVector& in);
 	bool	CreateFromSet(const StringSet& in);
 };
@@ -153,19 +153,19 @@ struct CMyTimeSpan
 
 class CMyTimeSpanHolder 
 {
-	map<string, CMyTimeSpan>	m_TimeSpans;
+	map<std::string, CMyTimeSpan>	m_TimeSpans;
 	long						m_SequenceId;
 	
 public:
 	bool						m_bTimeSpanHolderEnabled;
 
-	typedef map<string, CMyTimeSpan>::const_iterator	ConstIterator;
-	typedef map<string, CMyTimeSpan>::iterator			Iterator;
+	typedef map<std::string, CMyTimeSpan>::const_iterator	ConstIterator;
+	typedef map<std::string, CMyTimeSpan>::iterator			Iterator;
 
 	CMyTimeSpanHolder();
-	void StartTimer(const string& Name, long NestId);
-	double EndTimer(const string& Name);
-	string GetStrRepresentation (double AllClocksCount = 0) const;
+	void StartTimer(const std::string& Name, long NestId);
+	double EndTimer(const std::string& Name);
+	std::string GetStrRepresentation (double AllClocksCount = 0) const;
 	void ClearTimers();
 };
 
@@ -189,7 +189,7 @@ class StringTokenizer{
 	char *text_ptr;
 	char *text;
 	int i;
-	string delims;
+	std::string delims;
 	char *_val;
 
 	bool is_delim(char ch) const;
@@ -199,7 +199,7 @@ public:
 	StringTokenizer(const char *_text, const char *_delims);
 	~StringTokenizer();
 	const char * operator ()();
-	string next_token ();
+	std::string next_token ();
 
 	const char * get_rest () const;
 	const char *val() const;

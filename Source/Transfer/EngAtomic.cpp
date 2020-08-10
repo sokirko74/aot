@@ -12,7 +12,7 @@ BYTE GetOnePOS(long poses)
 }
 
 
-void CEngSemWord::SetTense(EngVerbTenseEnum	NewTense, string Maker)
+void CEngSemWord::SetTense(EngVerbTenseEnum	NewTense, std::string Maker)
 {
 	m_Tense = NewTense;
 	m_TenseHistory.push_back(CTenseHistory (NewTense, Maker));
@@ -92,7 +92,7 @@ BYTE CEngSemNode::GetPos() const
 		return UnknownPOS;
 };
 
-bool CEngSemNode::IsLemma(string Lemma) const 
+bool CEngSemNode::IsLemma(std::string Lemma) const 
 {
 	return IsPrimitive() && (m_Words[0].m_Lemma == Lemma);
 };
@@ -158,7 +158,7 @@ void CEngSemRelation::Init()
 CEngSemRelation::CEngSemRelation (CValency Valency, 
 	            long SourceNodeNo, 
 				long TargetNodeNo, 
-				string SyntacticRelation): CSemRelation(Valency,SourceNodeNo,TargetNodeNo,SyntacticRelation)
+				std::string SyntacticRelation): CSemRelation(Valency,SourceNodeNo,TargetNodeNo,SyntacticRelation)
 {
 	Init();
 };

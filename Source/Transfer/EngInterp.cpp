@@ -49,7 +49,7 @@ void CEngSemStructure::InitEngVals(CEngSemNode& Node)
 
 /////////////////////////////////////////////////////////////////////////////
 
-int CEngSemStructure::FindEngVal(string strRusVal,CEngSemNode& engNode,vector<long>& iBadVals,bool bUseHierarchy)
+int CEngSemStructure::FindEngVal(std::string strRusVal,CEngSemNode& engNode,vector<long>& iBadVals,bool bUseHierarchy)
 {
 	for( int i=0; i<engNode.m_Vals.size(); i++ )
 	{
@@ -71,7 +71,7 @@ int CEngSemStructure::FindEngVal(string strRusVal,CEngSemNode& engNode,vector<lo
 
 /////////////////////////////////////////////////////////////////////////////
 
-bool CEngSemStructure::ValencyEq(string strRusVal,string strEngVal)
+bool CEngSemStructure::ValencyEq(std::string strRusVal,std::string strEngVal)
 {
 
 	if( strRusVal == strEngVal )
@@ -80,8 +80,8 @@ bool CEngSemStructure::ValencyEq(string strRusVal,string strEngVal)
 
 	for( int i=0; i<m_pData->m_HierarchySemRelDoc.m_TransitiveRels.size(); i++ )
 	{
-		string strVal1 = m_pData->m_HierarchySemRelDoc.m_TransitiveRels[i].m_Source;
-		string strVal2 = m_pData->m_HierarchySemRelDoc.m_TransitiveRels[i].m_Target;
+		std::string strVal1 = m_pData->m_HierarchySemRelDoc.m_TransitiveRels[i].m_Source;
+		std::string strVal2 = m_pData->m_HierarchySemRelDoc.m_TransitiveRels[i].m_Target;
 
 		if( (strVal1==strEngVal ) && (strVal2==strRusVal) )
 			return true;
@@ -145,7 +145,7 @@ int CEngSemStructure::GetEnglishNodeBadWeight(int iRusNode, CEngInterp& UnitInte
 			continue;
 		}
 
-		string strRusVal = rusRel.m_Valency.m_RelationStr;
+		std::string strRusVal = rusRel.m_Valency.m_RelationStr;
 
 		if( RusStr.GetNode(rusRel.m_TargetNodeNo).m_NodeType == Copul )
 			if( !HasCopul(engNode.m_Vals, strRusVal) )
@@ -176,8 +176,8 @@ int CEngSemStructure::GetEnglishNodeBadWeight(int iRusNode, CEngInterp& UnitInte
 		int j=0;
 		for( ; j<vectorTargetRelationsNum.size(); j++ )
 		{
-			string strRusVal = RusStr.GetRelation(vectorTargetRelationsNum[j])->m_Valency.m_RelationStr;
-			string strEngVal = engNode.m_Vals[i].m_RelationStr;
+			std::string strRusVal = RusStr.GetRelation(vectorTargetRelationsNum[j])->m_Valency.m_RelationStr;
+			std::string strEngVal = engNode.m_Vals[i].m_RelationStr;
 			if( ValencyEq(strRusVal,strEngVal) )
 				break;
 		}
@@ -207,7 +207,7 @@ int CEngSemStructure::GetReverseRelValNo(const CSemRelation& rusRel,CEngSemNode&
 	//if( !IsValFromRossArticle(rusRel) )
 	//	return( -1 );
 
-	string strRusVal = rusRel.m_Valency.m_RelationStr;
+	std::string strRusVal = rusRel.m_Valency.m_RelationStr;
 
 	for( int i=0; i<reverseNode.m_Vals.size(); i++ )
 	{
@@ -286,7 +286,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 	CEnglishEquivMap::iterator res = mapRNodeToENode.find(iRusNode);
 	CEngSemNode engNode;
 	engNode.m_SynReal = TranslateRelization(RusStr.GetNode(iRusNode).m_SynReal, RusStr.GetNode(iRusNode));
-	string synRelAlg = engNode.m_SynReal.m_AlgStr;
+	std::string synRelAlg = engNode.m_SynReal.m_AlgStr;
 	engNode.m_SynGroupTypeStr = RusStr.GetNode(iRusNode).m_SynGroupTypeStr;
 	
 	
@@ -300,7 +300,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 		InitEngVals(engNode);
 				
 		if(    (UnitInterp.m_DictType != NoneRoss)
-			&& GetRossHolder(UnitInterp.m_DictType)->HasFieldValue(  string("RESTR") , string("pass"),  UnitInterp.m_UnitNo ) 
+			&& GetRossHolder(UnitInterp.m_DictType)->HasFieldValue(  std::string("RESTR") , std::string("pass"),  UnitInterp.m_UnitNo ) 
 		  )
 		if( engNode.m_MainWordNo>=0 )
 			engNode.m_Words[engNode.m_MainWordNo].m_bMorphologicalPassiveForm = true;
@@ -310,7 +310,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 		engNode.m_ClauseNo = RusStr.GetNode(iRusNode).m_ClauseNo;		
 		bool bInfinitive = engNode.HasGrammemRich(eInfinitive);
 		TransferGrammems (RusStr.GetNode(iRusNode), engNode, "InterpretOneNode");
-		string debug =  m_pData->GetEngGramTab()->GrammemsToStr(engNode.GetGrammems());
+		std::string debug =  m_pData->GetEngGramTab()->GrammemsToStr(engNode.GetGrammems());
 		
 
 		if (bInfinitive)
@@ -599,15 +599,15 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 	for( int i=0; i<RusSynReal.m_Preps.size(); i++ )
 	{
 		const CRossInterp& prep_int = RusSynReal.m_Preps[i];
-		string debug;
+		std::string debug;
 		if (RusNode.IsWordContainer()) debug = RusNode.GetWord(0).m_Word;
 		assert(prep_int.m_DictType == OborRoss);
 		vector<SEngEquiv> vectorEngEquivs;
 		
 		vector<TCortege> vectorACX;
 		
-		string strACX;
-		vector<string> SemFets;
+		std::string strACX;
+		vector<std::string> SemFets;
 		vector<int> goodIds;
 		
 		GetEngEquivsFromRusArticle(vectorEngEquivs,prep_int.m_UnitNo,prep_int.m_DictType);

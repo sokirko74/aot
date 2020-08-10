@@ -130,7 +130,7 @@ void CRusSyntaxOpt::DestroyOptions ()
 
 
 
-void BuildArticle(CDictionary* piRossDict, string s, CTempArticle& A1)
+void BuildArticle(CDictionary* piRossDict, std::string s, CTempArticle& A1)
 {
 	A1.m_pRoss =  piRossDict;
 	A1.SetArticleStr( s.c_str() );
@@ -168,23 +168,23 @@ void CRusSyntaxOpt :: LoadFromRoss(CDictionary* piRossDict)
 		{
 			A.ReadFromDictionary (i, false, true);
 			
-			const string& DebugWord = piRossDict->m_Units[i].m_EntryStr;
+			const std::string& DebugWord = piRossDict->m_Units[i].m_EntryStr;
 
 			if (A1.IsPartOf(&A, true))
 			{
-				string dat_item = piRossDict->m_Units[i].m_EntryStr;
+				std::string dat_item = piRossDict->m_Units[i].m_EntryStr;
 				AdvAdj->m_vectorDatItems.push_back(dat_item);
 			}
 
 			if (A2.IsPartOf(&A, true))
 			{
-				string  dat_item = piRossDict->m_Units[i].m_EntryStr;
+				std::string  dat_item = piRossDict->m_Units[i].m_EntryStr;
 				SynDependOnAdv->m_vectorDatItems.push_back(dat_item);
 			}
 
 			if (A3.IsPartOf(&A, true))
 			{
-				string  dat_item = piRossDict->m_Units[i].m_EntryStr;
+				std::string  dat_item = piRossDict->m_Units[i].m_EntryStr;
 				SynDependOnAdj->m_vectorDatItems.push_back(dat_item);
 			}
 		}
@@ -207,7 +207,7 @@ void CRusSyntaxOpt :: LoadFromRoss(CDictionary* piRossDict)
 
 const char g_strRegRossDicPath[] = "Software\\Dialing\\Ross\\DictPath"; 
 
-static string GetSyntaxFilePath()
+static std::string GetSyntaxFilePath()
 {
 	return GetRmlVariable()+"/Dicts/SynAn/";
 };
@@ -220,7 +220,7 @@ bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 	try
 	{			
 		CDictionary piRossDict;	
-		string strPath = GetRegistryString( g_strRegRossDicPath );
+		std::string strPath = GetRegistryString( g_strRegRossDicPath );
 		if (!piRossDict.Load(strPath.c_str())) return false;
 		LoadFromRoss(&piRossDict);
 	
@@ -241,7 +241,7 @@ bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 	
 
 	
-	string Path = GetSyntaxFilePath();
+	std::string Path = GetSyntaxFilePath();
   	
 
 	m_pCompAdvList = new StringVector;
@@ -280,12 +280,12 @@ bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 	try
 	{
 		vector<CFormInfo> Paradigms;
-		string h = "нечего";
+		std::string h = "нечего";
 		GetLemmatizer()->CreateParadigmCollection(true, h, false, false, Paradigms);
 
 		for (long k=0; k < Paradigms.size(); k++)
 		{
-		  string AnCode = Paradigms[k].GetAncode(0);
+		  std::string AnCode = Paradigms[k].GetAncode(0);
 		  BYTE POS = GetGramTab()->GetPartOfSpeech(AnCode.c_str() );
 		  if  (POS == PRONOUN_PREDK)
 		  {

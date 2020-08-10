@@ -102,11 +102,11 @@ public:
 struct SEngEquiv
 {
 	SEngEquiv() : m_iMeanNum(10), m_RusPoses(-1) {};
-	string  m_StrEngWord;
+	std::string  m_StrEngWord;
 	int		m_iMeanNum;
 	long	m_RusPoses;
-	string  m_StrLexFunc;
-	string  m_StrNumeral;
+	std::string  m_StrLexFunc;
+	std::string  m_StrNumeral;
 };
 
 // класс грамматического и семантического выражения i-го актанта (формируется из полей VAL, GFi, LEXi, MANLEXi, SFi словарной статьи)
@@ -118,7 +118,7 @@ struct SEngEquiv
 // класс оборота - соответствует одной словарной статтье из русского словаря оборотов
 struct  CObor {
 	// поле TITLЕ	
-	string	m_UnitStr;
+	std::string	m_UnitStr;
 	// номер слованой статьи
 	WORD    m_UnitNo;
  	
@@ -177,9 +177,9 @@ struct CSimpleBinaryRelation {
 // класс синтаксического отношения
 struct CSynRelation : public CSimpleBinaryRelation
 {
-	string			   m_SynRelName;
+	std::string			   m_SynRelName;
 	bool			   m_bPragmaticallyStrong; 			
-	CSynRelation (long SourceNodeNo,	long    TargetNodeNo, 	string SynRelName) :
+	CSynRelation (long SourceNodeNo,	long    TargetNodeNo, 	std::string SynRelName) :
 		CSimpleBinaryRelation(SourceNodeNo,	TargetNodeNo)
 	{
 			m_SynRelName = SynRelName;
@@ -203,8 +203,8 @@ struct CSynRelation : public CSimpleBinaryRelation
 // класс синтаксического отношения
 struct CSemThesRelation : public CSimpleBinaryRelation
 {
-	string			   m_SemRelName;
-	CSemThesRelation (long SourceNodeNo,	long    TargetNodeNo, 	string SemRelName) :
+	std::string			   m_SemRelName;
+	CSemThesRelation (long SourceNodeNo,	long    TargetNodeNo, 	std::string SemRelName) :
 		CSimpleBinaryRelation(SourceNodeNo,	TargetNodeNo)
 	{
 			m_SemRelName = SemRelName;
@@ -228,12 +228,12 @@ struct CSemThesRelation : public CSimpleBinaryRelation
 struct CLexFunctRel : public CSimpleBinaryRelation
 {
 	// название отношения
-	string			m_LexFunctName;
+	std::string			m_LexFunctName;
 	CDictUnitInterp m_Prep;
-	string			m_LexFunParamLemma;
+	std::string			m_LexFunParamLemma;
 
 
-	CLexFunctRel (long SourceNodeNo,	long    TargetNodeNo, 	string LexFunctName) :
+	CLexFunctRel (long SourceNodeNo,	long    TargetNodeNo, 	std::string LexFunctName) :
 		CSimpleBinaryRelation(SourceNodeNo,	TargetNodeNo)
 	{
 			m_LexFunctName = LexFunctName;
@@ -260,10 +260,10 @@ struct CLexFunctRel : public CSimpleBinaryRelation
 
 struct CDictReference 
 {
-	string			m_UnitStr;
+	std::string			m_UnitStr;
 	BYTE			m_MeanNum;
 	
-	CDictReference(string UnitStr, BYTE   MeanNum)
+	CDictReference(std::string UnitStr, BYTE   MeanNum)
 	{
 		m_UnitStr = UnitStr;
 		m_MeanNum = MeanNum;
@@ -292,7 +292,7 @@ struct SLexFunIndexes
 
 
 	// лексическая  функция  (S0, Oper1...)
-	string			  m_LexFun;
+	std::string			  m_LexFun;
 	// аргумент (стоит в скобках)
 	CDictReference    m_LexFunArg;
 	// значение  (стоит  после знака равно)
@@ -307,7 +307,7 @@ struct SLexFunIndexes
 
 
 
-bool WordInList(const char* word_list, int count, string word);
+bool WordInList(const char* word_list, int count, std::string word);
 bool LexFunArgComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2);
 bool LexFunValueComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2);
 
@@ -316,7 +316,7 @@ bool LexFunValueComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2);
 struct CEngUnitNoToRusUnit
 {
 	// заголовок русской словарной статьи
-    string  m_RusUnitStr;
+    std::string  m_RusUnitStr;
 	// номер значения русской словарной статьи
 	BYTE    m_RusMeanNum;
 	// номер словарной статьи в АОССе
@@ -363,9 +363,9 @@ class CHierarchyHolder;
 
 
 struct LocPrep {
-	string  m_RusPrepAndCase;
-    string  m_RelationStr;
-	string  m_EngPrep;
+	std::string  m_RusPrepAndCase;
+    std::string  m_RelationStr;
+	std::string  m_EngPrep;
 };
 
 class CCollocItem;
@@ -382,9 +382,9 @@ struct CCollocItemRef {
 
 struct CCollocItemRefCollect
 {
-  string                Item;
+  std::string                Item;
   vector<CCollocItemRef> Refs;	 
-  CCollocItemRefCollect(const string S) 
+  CCollocItemRefCollect(const std::string S) 
   {
 	  Item = S;
   };
@@ -393,11 +393,11 @@ struct CCollocItemRefCollect
 
 struct LessCollocItemRefCollect 
 {
-	inline bool  operator ()( const CCollocItemRefCollect& _Y, const string& X ) const
+	inline bool  operator ()( const CCollocItemRefCollect& _Y, const std::string& X ) const
 	{
 		return  _Y.Item < X;
 	};
-	inline bool  operator () ( const string& X, const CCollocItemRefCollect& _Y  ) const
+	inline bool  operator () ( const std::string& X, const CCollocItemRefCollect& _Y  ) const
 	{
 		return  X < _Y.Item;
 	};
@@ -409,12 +409,12 @@ struct LessCollocItemRefCollect
 
 
 
-//pedef pair<string, string> stringPair;
+//pedef pair<std::string, std::string> std::stringPair;
 struct CAbbrFunct {
-	string m_AbbrForm;
-	string m_FullForm;
-	string m_FunctName;
-	CAbbrFunct (string AbbrForm,string FullForm,	string FunctName)
+	std::string m_AbbrForm;
+	std::string m_FullForm;
+	std::string m_FunctName;
+	CAbbrFunct (std::string AbbrForm,std::string FullForm,	std::string FunctName)
 	{
 	   m_AbbrForm= AbbrForm;
 	   m_FullForm = FullForm ;
@@ -428,7 +428,7 @@ enum AbstractArticleEnum  {  atEmptyType, atArticlePlug, atAdditionArticle };
 
 struct CAbstractArticle {
    long               m_UnitNo;
-   string            m_UnitStr;
+   std::string            m_UnitStr;
    vector<TCortege10> m_Article;
    vector<CGramInfo>  m_GramInfos;
    vector<long>       m_ClauseTypes;
@@ -442,11 +442,11 @@ struct CAbstractArticle {
 
 class CCollocItem {
 public:
-  string Item;
-  string RelOperator1;
-  string RelOperator2;
+  std::string Item;
+  std::string RelOperator1;
+  std::string RelOperator2;
   
-  bool InitCollocItem (string S);
+  bool InitCollocItem (std::string S);
   bool IsHole() const;  
   
 };
@@ -465,7 +465,7 @@ public:
 
 
 const int MaxLeafId  = 10;
-typedef pair<string, long>  stringLong;
+typedef pair<std::string, long>  StringLong;
 typedef pair<long, long>     LongLong;
 
 // класс, в котором содержится лексический материал, с помощью которого заполняется
@@ -473,7 +473,7 @@ typedef pair<long, long>     LongLong;
 struct CTimeLexicalFilling { 
 	BYTE m_LeafId;
 	BYTE m_BracketLeafId;
-	vector<stringLong> m_LexFets;
+	vector<StringLong> m_LexFets;
 	vector<LongLong>    m_Preps;
 
 	CTimeLexicalFilling  (BYTE LeafId, BYTE BracketLeafId)
@@ -517,7 +517,7 @@ struct CTimeUnit {
 
 struct CUnitContent 
 {
-	string m_UnitStr;
+	std::string m_UnitStr;
 	WORD   m_UnitNo;
 	bool operator == (const CUnitContent& X ) const
 	{
@@ -532,9 +532,9 @@ struct CUnitContent
 
 //Например, "больше->много", "позже->поздно"
 struct CComparAdverb {
-	string m_Adverb;
-	string m_ComparAdverb;
-	CComparAdverb  (string Adverb,string ComparAdverb)
+	std::string m_Adverb;
+	std::string m_ComparAdverb;
+	CComparAdverb  (std::string Adverb,std::string ComparAdverb)
 	{
 		m_Adverb = Adverb;
 		m_ComparAdverb = ComparAdverb;
@@ -595,12 +595,12 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 	bool BuildEngOborStr();
 	bool BuildEngCollocsStr();
-	string GetContentsOborStr(long UnitNo, vector<CUnitContent> & Contents);
-	string GetEngOborStr(long UnitNo)
+	std::string GetContentsOborStr(long UnitNo, vector<CUnitContent> & Contents);
+	std::string GetEngOborStr(long UnitNo)
 	{
 		return GetContentsOborStr(UnitNo, m_vectorEngOborStr);
 	}
-	string GetEngCollocStr(long UnitNo)
+	std::string GetEngCollocStr(long UnitNo)
 	{
 		return GetContentsOborStr(UnitNo, m_vectorEngCollocStr);
 	}
@@ -628,32 +628,32 @@ class CSemanticsHolder  : public CAllRossesHolder
 	bool CreateEngCollocsROSSIndex();	  
 	bool CreateEngDictIndex(DictTypeEnum type, vector<CEngUnitNoToRusUnit>& RusEquivs);
 	bool CreateLexFunIndexes(const CDictionary* pRoss, vector<SLexFunIndexes>& LexFunIndexes);
-	bool PrintRusEquivs(string strFileName, DictTypeEnum type);
+	bool PrintRusEquivs(std::string strFileName, DictTypeEnum type);
 
 
 
 	bool	        ReadAbstractArticles(DictTypeEnum type);
 	bool            BuildOborottos ();
-	void            GetCustomGrammems (string GramFet, QWORD& Grammems, DWORD& Pose);
+	void            GetCustomGrammems (std::string GramFet, QWORD& Grammems, DWORD& Pose);
 
 	bool			InitializeIndices();
 
 
 	void			GetPrepsFromArticle (const CDictionary* pRoss, long UnitNo, BYTE LeafId, BYTE BracketLeafId, vector<CRossInterp>& Preps);
-	UINT			GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string AdjWordForm);
+	UINT			GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, std::string AdjWordForm);
 
 	// =========  словосочетания
 // добавляет отдельный элемент поля CONTENT в глобальный перечень всех отдельных элементов поля CONTENT	
-	CCollocItemRefCollect* InsertRusCollocItemRef(string S);
+	CCollocItemRefCollect* InsertRusCollocItemRef(std::string S);
 	// читает поле CONTENT словосочетания CollocUnitNo и создает по нему множество словосочетаний
-	bool			BuildColloc (string ContentFieldStr, int CollocUnitNo);
+	bool			BuildColloc (std::string ContentFieldStr, int CollocUnitNo);
 	// запускаем BuildColloc  для всех словосочетаний
 	bool			BuildCollocs();
 	bool			TokenizeDoubleConj();
 	
 
-	DictTypeEnum	IsRegisteredRoss(string FileName) const;
-	string			GetRossPath(DictTypeEnum RossId)  const;
+	DictTypeEnum	IsRegisteredRoss(std::string FileName) const;
+	std::string			GetRossPath(DictTypeEnum RossId)  const;
 
 };
 

@@ -61,18 +61,18 @@ class TItemContainer
 {
 public :
 	MorphLanguageEnum	m_Language;
-    string RossPath;
+    std::string RossPath;
 	vector<TDomItem>  m_DomItems;
-	string DomItemsFile;
-	string DomItemsTextFile;
-	string ItemsFile;
+	std::string DomItemsFile;
+	std::string DomItemsTextFile;
+	std::string ItemsFile;
 	vector <CDomen> m_Domens;
-	string DomensFile;
+	std::string DomensFile;
 	vector<CField> Fields;
-	string FieldsFile;
+	std::string FieldsFile;
 	bool	m_bDontLoadExamples;
 	bool	m_bRussianFields;
-	map<string,string>	m_Russian2EnglishFields;
+	map<std::string,std::string>	m_Russian2EnglishFields;
 	
 
 	//константы доменов
@@ -87,7 +87,7 @@ public :
 	BYTE IllDomNo;
 	BYTE IntegerDomNo;
 	int WildCardDomItemNo;
-	string m_LastError;
+	std::string m_LastError;
 
 
 	TItemContainer();
@@ -98,7 +98,7 @@ public :
 		 return m_Domens[Item.GetDomNo()].m_Items+Item.GetItemStrNo();
 	};
 
-	void 			ErrorMessage (string s ) const;
+	void 			ErrorMessage (std::string s ) const;
 	bool			InitDomensConsts();
 	int				GetItemNoByItemStr (const char*  ItemStr, BYTE DomNo) const;
 	int				GetItemNoByItemStr (const char*  ItemStr, const char* DomStr) const;

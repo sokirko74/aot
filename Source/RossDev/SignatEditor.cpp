@@ -90,7 +90,7 @@ BOOL CSignatEditor::OnInitDialog()
 		const CDomen&  D = GetRoss()->m_Domens[i];
 		if (D.Source != dsSystem)
 		{
-			string DomStr =  D.DomStr;
+			std::string DomStr =  D.DomStr;
 			if (DomStr == "D_") continue;
 			int nPos;
 			if (!D.IsDelim)

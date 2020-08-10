@@ -132,7 +132,7 @@ CGroup CSentence::ConvertFromTomitaNodeToCGroup(const CGLRParser& Parser, const 
 	CGroup G;
 	G.m_iFirstWord = Node.m_InputStart;
 	G.m_iLastWord  = Node.m_InputEnd-1;
-	string Symbol = Grammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
+	std::string Symbol = Grammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
 	G.m_GroupType = m_pSyntaxOptions->GetSyntaxGroupOrRegister(Symbol.c_str());
 	G.SetGrammems(GetOpt()->GetGramTab()->GetAllGrammems(Node.m_Symbol.m_GramCodes.c_str()));
 	G.m_GramCodes = Node.m_Symbol.m_GramCodes;
@@ -163,7 +163,7 @@ void CSentence::BuildGroupByGLR(const CGLRParser& Parser, const COccurrence& C, 
 		int SymbolNo = ParseTree[j];
 		const CSymbolNode& Node = Parser.m_SymbolNodes[SymbolNo];
         //{
-        //    string SymbolStr = GetOpt()->m_FormatsGrammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
+        //    std::string SymbolStr = GetOpt()->m_FormatsGrammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
         //    if (SymbolStr == "WEAK_NP")
         //    {
         //        int yy = 0;

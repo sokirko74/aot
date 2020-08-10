@@ -173,7 +173,7 @@ struct CConSent {
 
 	bool	SetUsualLawDocumentDivision ();
 	bool	InitBasicInformation ();
-	string  GetString() const;
+	std::string  GetString() const;
 
   
 };

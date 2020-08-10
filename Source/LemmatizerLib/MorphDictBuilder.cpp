@@ -144,7 +144,7 @@ bool  CMorphDictBuilder::GeneratePrefixes(const MorphoWizard& Wizard)
 		
 		for (set<string>::const_iterator it =  Wizard.m_PrefixSets[i].begin();  it != Wizard.m_PrefixSets[i].end(); it++)
 		{
-			string prefix = *it;
+			std::string prefix = *it;
 			StringVector::iterator it_c = find(m_Prefixes.begin(), m_Prefixes.end(), prefix);
 			if (it_c == m_Prefixes.end())
 				it_c = m_Prefixes.insert(m_Prefixes.end(), prefix);
@@ -226,12 +226,12 @@ bool  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 		
 		for (size_t PrefixNo = 0; PrefixNo < pPrefixVector->size();PrefixNo++)
 		{
-			string base  = Wizard.get_base_string(it);
+			std::string base  = Wizard.get_base_string(it);
 			
 			for (size_t ItemNo=0; ItemNo <p.m_Flexia.size(); ItemNo++)
 			if (Infos[ItemNo])
 			{
-				string WordForm = m_Prefixes[(*pPrefixVector)[PrefixNo]];
+				std::string WordForm = m_Prefixes[(*pPrefixVector)[PrefixNo]];
 				WordForm += p.m_Flexia[ItemNo].m_PrefixStr;
 				WordForm += base;
 				WordForm += p.m_Flexia[ItemNo].m_FlexiaStr;

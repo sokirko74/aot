@@ -154,9 +154,9 @@ void CColorRichEditView::SetAccentFromThisLineToTheEndofParadigm()
 			StringTokenizer tk(tok.val(), " \t\r\n");
 			if (tk())
 			{
-				string wrd = tk.val();
+				std::string wrd = tk.val();
 				int ind = wrd.find("'");
-				if (ind != string::npos)
+				if (ind != std::string::npos)
 					wrd.erase(ind,1);
 				wrd.insert(acc-lineInd, "'");
 				NewParadigm += CString(wrd.c_str())+CString(" ")+CString(tk.get_rest())+CString("\r\n");

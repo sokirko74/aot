@@ -48,7 +48,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 			// take a line from Graphematics
 			char buffer[CriticalGraphemLineLength];
 			Gr->GetGraphematicalLine(buffer, LineNo);
-		 	string strProcess = buffer;
+		 	std::string strProcess = buffer;
 
 			//=====   do not lemmatize oborots with EXPR=Fixed!
 			if (Gr->StartsFixedOborot(LineNo))
@@ -69,7 +69,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 
 			if (m_pLemmatizer->GetLanguage() == Gr->GetTokenLanguage(LineNo))
 			{
-				string InputWordStr = Gr->GetToken(LineNo);
+				std::string InputWordStr = Gr->GetToken(LineNo);
 
                 m_pLemmatizer->CreateParadigmCollection(false, InputWordStr, !Gr->HasDescr(LineNo, OLw), true, results);
 
@@ -78,7 +78,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 				else
 					for( int i=0; i<results.size(); i++ )
 					{
-						string Line;
+						std::string Line;
 						if (i > 0) Line = 	"  ";
                         Line +=  strProcess+" "+results[i].FormatAsInPlmLine();
 						m_Items.push_back(Line);
@@ -101,7 +101,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 
 
 
-bool CPlmLineCollection::SaveToFile(string filename) const
+bool CPlmLineCollection::SaveToFile(std::string filename) const
 {
 	try
 	{

@@ -34,7 +34,7 @@ STDMETHODIMP CComSemRelation::get_Name(BSTR *pVal)
 
 STDMETHODIMP CComSemRelation::get_WordRealization(BSTR* pVal)
 {
-	string s = m_pRusStr->GetPrepOrConjFromSynReal(m_pRelation->m_SynReal);
+	std::string s = m_pRusStr->GetPrepOrConjFromSynReal(m_pRelation->m_SynReal);
 	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }

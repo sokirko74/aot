@@ -36,7 +36,7 @@ bool CEngSemStructure::FindEnglishEquivHelper(vector<CEngInterp>& engEquivs,cons
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::FindEnglishEquiv(vector<CEngInterp>& engEquivs, const string& rus_lemma, BYTE MeanNum /* = 10*/, DictTypeEnum   EngDictType /* = Aoss*/)
+void CEngSemStructure::FindEnglishEquiv(vector<CEngInterp>& engEquivs, const std::string& rus_lemma, BYTE MeanNum /* = 10*/, DictTypeEnum   EngDictType /* = Aoss*/)
 {
 	CEngUnitNoToRusUnit RusEquivToEngArticleNo;
 	RusEquivToEngArticleNo.m_RusUnitStr = rus_lemma;
@@ -71,7 +71,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 		if( IsThesRoss(RusNode.GetType()) )
 		{
 			long ThesId = GetThesIdByRossId(RusNode.GetType());
-			string rus_num = GetRoss(RusNode.GetType())->GetEntryStr(RusNode.GetUnitNo());
+			std::string rus_num = GetRoss(RusNode.GetType())->GetEntryStr(RusNode.GetUnitNo());
 			long TermId = RusNode.GetInterp()->m_TerminId;
 
 			vector<int> CurrentEnglishTermins;
@@ -81,7 +81,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 			{
 				long num = CurrentEnglishTermins[0];
 				const CInnerTermin& TermPtr = helper.GetThes(ThesId)->m_Termins[num];
-				string eng_num = Format("%i", TermPtr.m_TerminId);
+				std::string eng_num = Format("%i", TermPtr.m_TerminId);
 
 				CEngInterp interp;
 				interp.m_DictType = RusNode.GetType();
@@ -133,7 +133,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 			EngDictTypes.push_back(EngCollocRoss);
 			for( int k=0; k<vectorEngEquivs.size(); k++ )
 			{
-				if( vectorEngEquivs[k].m_StrEngWord.find("_") == string::npos )
+				if( vectorEngEquivs[k].m_StrEngWord.find("_") == std::string::npos )
 				{
 					EngDictTypes.push_back(Aoss);
 					break;
@@ -145,7 +145,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 			EngDictTypes.push_back(Aoss);
 			for( int k=0; k<vectorEngEquivs.size(); k++ )
 			{
-				if( vectorEngEquivs[k].m_StrEngWord.find("_") != string::npos )
+				if( vectorEngEquivs[k].m_StrEngWord.find("_") != std::string::npos )
 				{
 					EngDictTypes.push_back(EngCollocRoss);
 					EngDictTypes.push_back(EngObor);
@@ -241,7 +241,7 @@ void CEngSemStructure::FindEngEquivForRusArticle(CEngInterp rusUnit, vector<CEng
 	FindEngWords(vectorEngEquivsFromDict, vectorEngEquivs, dicts);
 	if( !vectorEngEquivsFromDict.size() )
 	{
-		string RusWord = GetRoss(rusUnit.m_DictType)->GetEntryStr(rusUnit.m_UnitNo);
+		std::string RusWord = GetRoss(rusUnit.m_DictType)->GetEntryStr(rusUnit.m_UnitNo);
 		FindEnglishEquiv(vectorEngEquivsFromDict, RusWord , GetRoss(rusUnit.m_DictType)->GetUnitMeanNum(rusUnit.m_UnitNo), EngDictType);
 		IntersectEngEquivs( vectorEngEquivs, vectorEngEquivsFromDict);
 	}
@@ -258,7 +258,7 @@ void CEngSemStructure::IntersectEngEquivs(vector<SEngEquiv >& vectorEngEquivsFro
 	for( int i = 0 ; i < vectorEngEquivsFromAoss.size() ; i++ )
 	{
 		CRossInterp& UnitInterp = vectorEngEquivsFromAoss[i];
-		string strEngWord = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
+		std::string strEngWord = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
 		int meanNo = GetRoss(UnitInterp.m_DictType)->GetUnitMeanNum(UnitInterp.m_UnitNo);
 		int j=0;
 		for( ; j<vectorEngEquivsFromRusArticle.size(); j++ )
@@ -285,7 +285,7 @@ void CEngSemStructure::IntersectEngEquivs(vector<SEngEquiv >& vectorEngEquivsFro
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::GetAFieldVector(string FieldStr, DictTypeEnum type, vector<TCortege>& vectorAgx, long UnitNo) const
+void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, vector<TCortege>& vectorAgx, long UnitNo) const
 {
 	if( type == NoneRoss)
 		return;
@@ -319,23 +319,23 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		return;
 //
 	vector<TCortege> corteges;
-	GetRossHolder(DictType)->GetFieldValues(string("ENG"),RusUnitNo,corteges);
+	GetRossHolder(DictType)->GetFieldValues(std::string("ENG"),RusUnitNo,corteges);
 
 	for( int i=0; i<corteges.size(); i++ )
 	{
 		SEngEquiv engEquiv;		
 		if( corteges[i].m_DomItemNos[0] == -1 )
 			continue;
-		string strEngWord = (const char*)GetRoss(DictType)->GetDomItemStr(corteges[i].m_DomItemNos[0]);
+		std::string strEngWord = (const char*)GetRoss(DictType)->GetDomItemStr(corteges[i].m_DomItemNos[0]);
 //
 		int pos = strEngWord.find("#delete_numeral_prefix");
-		if( pos!=string::npos )
+		if( pos!=std::string::npos )
 		{
 			engEquiv.m_StrNumeral = strEngWord.substr(pos);
 			strEngWord.erase(pos);
 		}
 		pos = strEngWord.find("#ed");
-		if( pos!=string::npos && pos>0 )
+		if( pos!=std::string::npos && pos>0 )
 		{
 			engEquiv.m_StrNumeral = strEngWord.substr(pos);
 			strEngWord.erase(pos);
@@ -346,7 +346,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	
 		if( corteges[i].m_DomItemNos[1] != -1 )
 		{
-			string meanNum = (const char*)GetRoss(DictType)->GetDomItemStr(corteges[i].m_DomItemNos[1]);
+			std::string meanNum = (const char*)GetRoss(DictType)->GetDomItemStr(corteges[i].m_DomItemNos[1]);
 			engEquiv.m_iMeanNum = meanNum[0] - '0';
 		}
 
@@ -382,7 +382,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		vecListByAnm.push_back(theId);
 
 		int i1 = atoi(rusWord.m_NumeralPrefix.c_str());
-		string strANM = GetCortegeStr(rusNode.GetType(),vectorAnm[i]);
+		std::string strANM = GetCortegeStr(rusNode.GetType(),vectorAnm[i]);
 		int i2 = atoi(strANM.c_str());
 		if( i1!=i2 )
 			continue;
@@ -415,7 +415,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	vector<TCortege> vectorApo;
 	GetAFieldVector("EDOMAIN", DictType,vectorApo,RusUnitNo);
 	long ClauseNo = RusStr.GetNode(iRusNode).m_ClauseNo;
-	string tema = RusStr.GetClausePO(ClauseNo);
+	std::string tema = RusStr.GetClausePO(ClauseNo);
 
 // возьмем все связи (но дополнительные отношения брать не будем!)
 	vector<long> inRelsRus;
@@ -460,7 +460,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			assert( false );
 		}
 
-		string strALX = GetCortegeStr(rusNode.GetType(),vectorAlx[i]);
+		std::string strALX = GetCortegeStr(rusNode.GetType(),vectorAlx[i]);
 		EngRusMakeUpper(strALX);
 
 		for( int k=0; k<usingRels.size(); k++ )
@@ -478,7 +478,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			int iSemMainWord = rusNode.m_MainWordNo;
 			if( iSemMainWord == -1 )
 				continue;
-			string strVAL = rusNode.GetWord(iSemMainWord).m_Lemma;
+			std::string strVAL = rusNode.GetWord(iSemMainWord).m_Lemma;
 			
 			// если это указание вышестоящего концепта
 			if (strALX[0] == '#')
@@ -492,7 +492,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			  long j=0;
 			  for (; j < rusNode.GetWord(iSemMainWord).m_WordEquals.size(); j++)
 			  {
-			    string strAspVerb = rusNode.GetWord(iSemMainWord).m_WordEquals[j];
+			    std::string strAspVerb = rusNode.GetWord(iSemMainWord).m_WordEquals[j];
 				if (strAspVerb == strALX) break;
 			  }
 			  /*
@@ -535,7 +535,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			continue;
 		long theId = vectorAop[i].m_BracketLeafId - 1;
 
-		string strAOP = GetCortegeStr(rusNode.GetType(),vectorAop[i]);
+		std::string strAOP = GetCortegeStr(rusNode.GetType(),vectorAop[i]);
 		if( vectorAop[i].m_LeafId == 0 ) //если это EOPERATOR без индекса
 		{
 			if (strAOP == "БЫ")
@@ -593,7 +593,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		if( vectorAPredlog[i].m_LeafId != 0 ) continue;//EPREP должен быть без индекса
 		long theId = vectorAPredlog[i].m_BracketLeafId - 1;
 		if( theId >= vectorEngEquivs.size() ) continue;
-		string strAOP = GetCortegeStr(rusNode.GetType(),vectorAPredlog[i]);
+		std::string strAOP = GetCortegeStr(rusNode.GetType(),vectorAPredlog[i]);
 		WORD UnitNo = GetRoss(OborRoss)->LocateUnit(strAOP.c_str(), 1);
 		if ( !rusNode.HasThePrep(UnitNo)) continue;
 		vecGoodByAPredlog.push_back(theId);
@@ -619,8 +619,8 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		if( vectorAlf[i].m_LeafId != 0 ) continue;//ELF должен быть без индекса
 		long theId = vectorAlf[i].m_BracketLeafId - 1;
 		if( theId >= vectorEngEquivs.size() ) continue;
-		string strAOP = GetCortegeStr(rusNode.GetType(),vectorAlf[i]);
-		string LF;
+		std::string strAOP = GetCortegeStr(rusNode.GetType(),vectorAlf[i]);
+		std::string LF;
 		long RelNo = -1;
 		if (strAOP.substr(0,3) == "out")
 		{
@@ -631,7 +631,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		else
 		  if (strAOP.substr(0,2) == "in")
 			{
-				string op = strAOP.substr(2);
+				std::string op = strAOP.substr(2);
 				LF = Trim(op);
 				RelNo = RusStr.FindLexFunctByParameterNodeNo(iRusNode);
 		  }
@@ -673,7 +673,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			if( !CheckDomensForCortege(domens,vectorAgx[i],DictType) )
 				continue;
 
-			string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
+			std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
 			QWORD Grammems;
 			DWORD Pose;
 
@@ -698,7 +698,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		else //если это EGFi
 		{
 			bool bFoundAGX = false;
-			string strAGX = GetCortegeStr(rusNode.GetType(),vectorAgx[i]);
+			std::string strAGX = GetCortegeStr(rusNode.GetType(),vectorAgx[i]);
 
 			for( int k=0; k<usingRels.size(); k++ )
 			{
@@ -723,7 +723,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 					if( semMainWord == -1 )
 						continue;
 
-					string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0], DictType);
+					std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0], DictType);
 					DWORD Pose;
 					QWORD Grammems;
 					m_pData->GetCustomGrammems(strGrammems,Grammems,Pose);
@@ -742,7 +742,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 				}
 				else
 				{
-					string dbg_str = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
+					std::string dbg_str = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
 
 					//проверяем на эквивалентность с тем кортежем, по которому Леша собрал
 
@@ -785,10 +785,10 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 		if( vectorAcx[i].m_LeafId == 0 ) // если это АCХ без индекса
 		{
-			string strACX = GetCortegeStr(rusNode.GetType(),vectorAcx[i]);
+			std::string strACX = GetCortegeStr(rusNode.GetType(),vectorAcx[i]);
 			
 
-			vector<string> SemFets;
+			vector<std::string> SemFets;
 			SemFets.push_back(strACX.c_str());
 			IncludeLowerInHierarchy(&m_pData->m_HierarchySemFetDoc,SemFets);
 			int k=0;
@@ -810,7 +810,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		else //если это АCХi
 		{
 			bool bFoundACX = false;
-			string strACX = GetCortegeStr(rusNode.GetType(),vectorAcx[i]);
+			std::string strACX = GetCortegeStr(rusNode.GetType(),vectorAcx[i]);
 
 			for( int k=0; k<usingRels.size(); k++ )
 			{
@@ -825,7 +825,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 				else
 					iRusActant = RusStr.GetRelation(usingRels[k])->m_TargetNodeNo;
 
-				vector<string> SemFets;
+				vector<std::string> SemFets;
 				SemFets.push_back(strACX.c_str());
 				IncludeLowerInHierarchy(&m_pData->m_HierarchySemFetDoc,SemFets);
 				int kk=0;

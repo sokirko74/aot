@@ -18,7 +18,7 @@ class CHomonym : public CAncodePattern
     
 public:
 	// morphology
-	string	m_strLemma;
+	std::string	m_strLemma;
 
 	// corpus frequence information
 	long m_lFreqHom; 
@@ -63,8 +63,8 @@ public:
 	void	DeleteOborotMarks();
 
 	bool	ProcessLemmaAndGrammems(const char* strLemma);
-	void	SetLemma(string Lemma);
-	string	GetGrammemsStr() const;
+	void	SetLemma(std::string Lemma);
+	std::string	GetGrammemsStr() const;
 	
     void    SetMorphUnknown();
     void    SetHomonym(const CFormInfo* F);

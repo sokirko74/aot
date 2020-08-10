@@ -19,7 +19,7 @@ class CRusSyntaxOpt :  public CSyntaxOpt
 {
 public:
 	long m_lPradigmID_NECHEGO;
-	string m_Gramcode_NECHEGO;
+	std::string m_Gramcode_NECHEGO;
 	
 	SDatItems* AdvAdj;
 	SDatItems* SynDependOnAdj;

@@ -111,7 +111,7 @@ bool CheckGermanSentenceBreak(CGraphmatFile& G, size_t WordNo)
 {
 
 	const size_t ArticlesCount = 6;
-	const string Articles[ArticlesCount] =  {"DAS", "DEM","DEN","DER","DES","DIE" };
+	const std::string Articles[ArticlesCount] =  {"DAS", "DEM","DEN","DER","DES","DIE" };
 
 	if	(		(G.IsOneFullStop(WordNo))
 			&&	(WordNo> 2)
@@ -124,7 +124,7 @@ bool CheckGermanSentenceBreak(CGraphmatFile& G, size_t WordNo)
 			// This full stop is not considered a sentence break.
 			int i  = G.BSoft(WordNo-2);
 			if (i > 0) 
-				if (binary_search(Articles,Articles+ArticlesCount, string(G.GetUppercaseToken(i))) )
+				if (binary_search(Articles,Articles+ArticlesCount, std::string(G.GetUppercaseToken(i))) )
 					return false;
 		};
 

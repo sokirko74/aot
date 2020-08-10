@@ -63,7 +63,7 @@ void PrintItemSet(const CWorkGrammar* pWorkGrammar, const set<CLRItem>& ItemSet)
 {
 	for (set<CLRItem>::const_iterator it = ItemSet.begin(); it != ItemSet.end(); it++)
 	{
-		string s = pWorkGrammar->GetRuleStr(*it->m_pRule, it->m_DotSymbolNo);
+		std::string s = pWorkGrammar->GetRuleStr(*it->m_pRule, it->m_DotSymbolNo);
 		printf ("%s\n", s.c_str() ); 
 	};
 

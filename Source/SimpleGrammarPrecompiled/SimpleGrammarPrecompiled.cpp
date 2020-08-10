@@ -30,7 +30,7 @@ int main(int argc, const char **argv) {
     if (!Holder.LoadGraphanAndLemmatizer(WorkGrammar.m_Language))
         return 1;
 
-    string GrammarFileName = args.Retrieve("input");
+    std::string GrammarFileName = args.Retrieve("input");
 
     char currdir[256];
 #ifdef WIN32

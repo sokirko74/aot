@@ -1,4 +1,4 @@
-п»ї#pragma once
+#pragma once
 
 #include <string>
 #include <vector>
@@ -215,7 +215,7 @@ public:
     }
 
     String Usage() const {
-        std::ostringstream help;
+        std::stringstream help;
         help << "Usage: " << escape(AppName);
         String indent = "  ";
 
@@ -242,7 +242,7 @@ public:
     StringVector GetInputFiles() const {
         vector<string> files;
         if (Exists("input-is-list-file")) {
-            string s;
+            std::string s;
             while (getline(GetInputStream(), s)) {
                 Trim(s);
                 if (!FileExists(s.c_str())) {

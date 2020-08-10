@@ -1689,7 +1689,7 @@ void CGridCtrl::EmptyCell(CGridCell* pCell, int nRow, int nCol)
     // will remove the cell from the selected list.
     SetItemState(nRow, nCol, 0);
 
-    // Empty strings
+    // Empty std::strings
     pCell->szText.Empty();
 }
 

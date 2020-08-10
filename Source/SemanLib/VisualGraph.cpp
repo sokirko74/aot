@@ -53,7 +53,7 @@ vector<int> CVisualSemGraph::GetParents(int NodeNo) const {
     return Nodes;
 }
 
-string CVisualSemGraph::GetResultStr() const {
+std::string CVisualSemGraph::GetResultStr() const {
     auto result = nlohmann::json::object();
     result["nodes"] = nlohmann::json::array();
     for (const auto &n : m_Nodes) {

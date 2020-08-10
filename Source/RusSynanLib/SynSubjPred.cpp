@@ -14,7 +14,7 @@
 //  3. либо предложение вопросительное 
 //  при этом подл. не должно быть выражено  леммой "что"
 
-bool	CRusSentence::IsGoodSubject(const CMorphVariant& synVariant, const string& LastSentenceChar) const
+bool	CRusSentence::IsGoodSubject(const CMorphVariant& synVariant, const std::string& LastSentenceChar) const
 {
 	// попробуем такой вариант
 	if (synVariant.m_Subjects.size() != 1) return false;
@@ -153,7 +153,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
     if ( SubjWord.HasDes(OPun)  ) return false;
 
 	const CSynHomonym& SubjHom = SubjWord.m_Homonyms[SubjUnit.m_iHomonymNum];
-	const string& strWord = SubjWord.m_strUpperWord;
+	const std::string& strWord = SubjWord.m_strUpperWord;
 
 	if( gr_num != -1 )
 		if( synVariant.m_vectorGroups.GetGroups()[gr_num].m_GroupType == PREP_NOUN )

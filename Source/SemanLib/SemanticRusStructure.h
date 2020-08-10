@@ -19,16 +19,16 @@ public:
   // графематическая помета ИЛЕ
   bool           m_ILE;
   // знаки препинаия, которые стоят в тексте после этого слова 
-  string         m_PostPuncts;
-  string		 m_GraphDescrs;
+  std::string         m_PostPuncts;
+  std::string		 m_GraphDescrs;
   //  лемма прилагательного превосходной степени, которая была заменена на положительную степень
-  string		 m_SupAdjLemma;
+  std::string		 m_SupAdjLemma;
   bool			 m_bRomanNumber;
   long			 m_SynWordNo;
 
   void			Init();
   CRusSemWord();
-  CRusSemWord   ( long WordNo, string Lemma );
+  CRusSemWord   ( long WordNo, std::string Lemma );
 
   // словоформа - глагольная форма, которая заканчивается на "ся", "сь" 
   bool IsReflexiveVerb () const;
@@ -120,7 +120,7 @@ public:
 	UINT			m_RichPoses;
 
 	bool			m_bQuestionWord;
-	string			m_AntecedentStr;
+	std::string			m_AntecedentStr;
 
 
 	CRusSemNode();
@@ -145,12 +145,12 @@ public:
     bool operator < (const CRusSemNode& Node) const;
 	bool IsAnaphoricPronoun () const;
 	QWORD GetInnerGrammems() const;
-	bool IsLemma(string Lemma) const;
-	bool IsWordForm(string WordForm) const;
+	bool IsLemma(std::string Lemma) const;
+	bool IsWordForm(std::string WordForm) const;
 	bool IsLemmaList( const char*  FirstLemma, ... ) const;
 	bool IsEqualMorph (const CRusSemNode& N) 	const;
 	void SetMainWordNo (long WordNo);
-	void ModifyGramCodes(string GramCodes, int mode, const CRusGramTab *R);
+	void ModifyGramCodes(std::string GramCodes, int mode, const CRusGramTab *R);
 
 };
 
@@ -196,7 +196,7 @@ public:
     CRusSemRelation (const CValency& Valency, 
 	             long SourceNodeNo, 
 				 long TargetNodeNo, 
-				 string SyntacticRelation) : CSemRelation(Valency,SourceNodeNo,TargetNodeNo,SyntacticRelation)
+				 std::string SyntacticRelation) : CSemRelation(Valency,SourceNodeNo,TargetNodeNo,SyntacticRelation)
 	{
  	  m_CannotHaveOnlyCommaBetween = false;
 	  m_bSemFetAgree = false;
@@ -312,7 +312,7 @@ enum DirectEnum {
 	Indifferent
 };
 struct CRossInterpAndLemma : public CRossInterp {
-	string m_Lemma;
+	std::string m_Lemma;
 
 	CRossInterpAndLemma() {
 		m_DictType = NoneRoss;
@@ -339,13 +339,13 @@ struct CSemanClauseRule {
 	// направление применения этого правила
 	DirectEnum		m_Direction;
 	// имя правила
-	string			m_Name;
+	std::string			m_Name;
 
 	CSemanClauseRule()
 	{
 		m_Rule = 0;
 	}
-	CSemanClauseRule (TClauseRule Rule, DirectEnum Direction, string Name)
+	CSemanClauseRule (TClauseRule Rule, DirectEnum Direction, std::string Name)
 	{
 		m_Rule = Rule;
 		m_Direction = Direction;
@@ -525,7 +525,7 @@ struct  CSemClauseVariantResult : public CSyntaxClauseVariant {
 			   && (X.m_ClauseVariantNo == m_ClauseVariantNo)
 			   && (X.m_AddedClauses == m_AddedClauses);
 	};
-	string  GetStr();
+	std::string  GetStr();
 
 
 };
@@ -641,13 +641,13 @@ public:
 	long						m_AllClausesVariants;
 
 	//  информация для синтеза о том, какие леммы надо заменить на другие
-	map<string,string>			m_SynthLemmaToReplace;
+	map<std::string,std::string>			m_SynthLemmaToReplace;
 
 	// перечень всех СемУ
     const CSemNode&		GetNode(int NodeNo) const;
 	CSemNode*			GetNodePtr(int NodeNo);
 	int					GetNodesSize() const;
-	string				GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const;
+	std::string				GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const;
 	void				EraseNode(int NodeNo);
 	
 
@@ -657,7 +657,7 @@ public:
 	int					GetRelationsSize() const;
 	void				EraseRelation(int RelNo);
 	void				AddRelation(const CRusSemRelation& R);
-	void				GetColorAndWidthOfRelation(int RelNo, float& Width, string& Color);
+	void				GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color);
 	// перечень всех дополнительных отношений, найденных в предложении
     const CSemRelation*	GetDopRelation(int RelNo) const;
 	CSemRelation*		GetDopRelation(int RelNo);
@@ -740,7 +740,7 @@ public:
 	// удаляет синтаксические отношения
 	void			DeleteSynRelations(vector<long>& Rels);
 	// удаляет входящие и выходящие отношения узла, имющие название rName
-	void			DeleteSynRelationsByName(long NodeNo, string Name);
+	void			DeleteSynRelationsByName(long NodeNo, std::string Name);
 	// переносит входящие синтаксические отношения от FromNode к ToNode
 	void			MoveIncomingSynRelations(long FromNode, long ToNode);
 	// переносит все синтаксические отношения от FromNode к ToNode
@@ -751,9 +751,9 @@ public:
 	// отношений.
 	long			GetDefiniteRightHostByNotWeakSynRelation (long NodeNo) const;
 	// проверяет, что  у узла NodeNo есть входящее или исходящее отношение RelationStr
-	bool			HasSynRelation(long NodeNo, string RelationStr) const; 
+	bool			HasSynRelation(long NodeNo, std::string RelationStr) const; 
 	// проверяет, что  у узла NodeNo есть исходящее отношение RelationStr
-	bool			HasOutcomingSynRelation(long NodeNo, string RelationStr, long NodeNo2 = -1) const; 
+	bool			HasOutcomingSynRelation(long NodeNo, std::string RelationStr, long NodeNo2 = -1) const; 
 	// свободная локативная валентность
 	void			HeuristicsLocative(long ClauseNo); 
 	void			DeleteSynRelationsOfClause(long ClauseNo);
@@ -795,7 +795,7 @@ public:
 
 
 
-	CRusSemNode					CreatePronounByLemma(string Lemma);
+	CRusSemNode					CreatePronounByLemma(std::string Lemma);
     CRusSemNode					CreateAnaphoricPronoun (long PrototypeNode); 
 	CRusSemNode					CreateCopulNode(long ClauseNo);
     CRusSemNode					CreateModalCopulNode(long ClauseNo);
@@ -813,7 +813,7 @@ public:
 	// проверяет, что в начале клаузы стоит простой сочинительный узел и выдыает его
 	long            GetCoordSimpleConj (long ClauseNo) const;
 	// проверяет, что у узла есть незаполненная валентность с указанными характеристиками 
-	bool            GetFreeActantPattern (long NodeNo, CSemPattern& P, CSynRealization& SynReal, string SynRel, bool CheckSynRel,  string SynFet, bool CheckSynFet);
+	bool            GetFreeActantPattern (long NodeNo, CSemPattern& P, CSynRealization& SynReal, std::string SynRel, bool CheckSynRel,  std::string SynFet, bool CheckSynFet);
 
 	// собственно, межклаузные правила (см. примеры в конструкторе)
 	bool			TryClauseCHTOBY_GG (long ClauseRuleNo, long ClauseNo1, long ClauseNo2);
@@ -887,11 +887,11 @@ public:
 
 	// ===========     Локативные узлы
 
-	long			GetLocInterp(string UnitStr, bool& NegativeForm) const;
+	long			GetLocInterp(std::string UnitStr, bool& NegativeForm) const;
 	void			BuildParataxNodes(long ClauseNo);
 	void			PrintAllLocNodes(); 
 	bool			ReadLocProperNames();
-	bool			GetLocSemRel(long NodeNo, string& RelationStr, long& PrepNo) const;
+	bool			GetLocSemRel(long NodeNo, std::string& RelationStr, long& PrepNo) const;
 	long			FindLocHost (long NodeNo, long ClauseNo);
 	void			PutLocRelations(long ClauseNo);
 	
@@ -945,13 +945,13 @@ public:
 	// находит, узел, который может подчинять подч. союз "когда"
 	long            FindTimeHost (long NodeNo, long ClauseNo);
 	// проверяет SF по ТАймроссу
-	bool            HasTimeSemFet(const CSemNode& W, string SemFet) const;
+	bool            HasTimeSemFet(const CSemNode& W, std::string SemFet) const;
 	// проверяет лекс. совп. DictLemma со словом W (с учетом Abbr)
-	bool            IsEqualTimeWord(string DictLemma, CRusSemNode& N, long& AbbrFunctNo);
+	bool            IsEqualTimeWord(std::string DictLemma, CRusSemNode& N, long& AbbrFunctNo);
 	// строит словарные интерпретации для слова Lemma
-    void			GetTimeInterps(string Lemma, string WordStr,  string PostPuncts, CRusSemNode& N) const;
+    void			GetTimeInterps(std::string Lemma, std::string WordStr,  std::string PostPuncts, CRusSemNode& N) const;
 	// проверяет, что узел NodeNo может заполнять GFi = ЦК_x
-	bool			CheckTimeNumeral(long NodeNo, string GramFet) const;
+	bool			CheckTimeNumeral(long NodeNo, std::string GramFet) const;
 
 	// ===== Интерпретация синтаксиса и некоторый досемантические триггеры 
 	// инициализация параметров одного слова
@@ -983,7 +983,7 @@ public:
 	// получение всех словарных интерпретаций 
 	void			InitInterps (CRusSemWord& W, bool PassiveForm, long ClauseNo, CRusSemNode& N, bool UsePlugArticle = true) const;
 	// получение словарных интерпретаций из тезауруса
-    void			GetThesInterps(string UnitStr, const CRusSemWord& W, const CThesaurus* Thes, DictTypeEnum	 DictType, CRusSemNode& N) const;
+    void			GetThesInterps(std::string UnitStr, const CRusSemWord& W, const CThesaurus* Thes, DictTypeEnum	 DictType, CRusSemNode& N) const;
 	// выдает номер статьи в тезауруссном РОССе по  номеру термина
 	WORD			GetArticleByModel (long TerminId, int ThesaurusId) const;
 	// выдает словарные интерпретации в РОССе без приставок
@@ -1010,7 +1010,7 @@ public:
 	// построение всех гипот. отношений от узла NodeNo по модели P
 	void			TryPatternOnNodes(size_t NodeNo, size_t ClauseNo, CSemPattern& P);
 	// проверка того, что предлог интепретируется отношением RelationStr
-	bool			CheckSemanOfPrep(string RelationStr, bool IsAdditionValency, long NodeNo, long& PrepNo);
+	bool			CheckSemanOfPrep(std::string RelationStr, bool IsAdditionValency, long NodeNo, long& PrepNo);
 	// проверка того, что узел NodeNo соответствует одному значению поля GF
 	bool			CheckPatternGramFetLine (CSemPattern& P,  CSynRealization& SynRealization, size_t NodeNo);
 	// проверка того, что узел NodeNo соответствует одному значению поля GF, причем ГХi = X!:*
@@ -1018,7 +1018,7 @@ public:
 	// проверка того, что между двумя узлами есть хотя бы одно существительное
 	bool			HaveNounNodeBetweenInOneClause (size_t NodeNo1, size_t NodeNo2) const;
 	// проходит по всем значениям GFi и запускает CheckPatternGramFetLine
-	bool			IsPattern (CSemPattern& P, size_t NodeNo, string& SyntacticRelation, CSynRealization& SynRealization);
+	bool			IsPattern (CSemPattern& P, size_t NodeNo, std::string& SyntacticRelation, CSynRealization& SynRealization);
 	// загружаем пассивную валентность слова (с учетом только помет ("стр"))
 	bool          LoadFromDictForPassive(WORD UnitNo, BYTE LeafId, BYTE BracketLeafId, CSemPattern& P);
 	// удаление длинных связей 
@@ -1081,7 +1081,7 @@ public:
 	// проверяет некоторое семантическое согласование
 	long			GetMiscSemAgreeCount(long Tag) const;
 	// удаляет запрещенные пользователем лексический интерпретации
-	void			DelProhibitedInterps (string UnitStr, CRusSemNode& N) const;
+	void			DelProhibitedInterps (std::string UnitStr, CRusSemNode& N) const;
 
 	
 	
@@ -1131,13 +1131,13 @@ public:
 	long			GetRelationsLength(long Tag) const;
 
 
-		bool			CheckAllIncomingRelations(long NodeNo, const string& RelationStr)  const;
+		bool			CheckAllIncomingRelations(long NodeNo, const std::string& RelationStr)  const;
         void          FreeWordNo (long WordNo); 		
 		void          InitLexVariant(size_t ClauseNo);
 		bool		  SetLexVariant(size_t ClauseNo, size_t& LexVariantInCurrSetCollocNo, size_t& CurrSetCollocHypNo);
 		void          FindParticleBY(long ClauseNo);
 		void          GetClauseVariantCombinations(vector<VectorLong>& Variants) const;
-		void          ApplyTerminSemStrForOneRel (string SemRel, long Word1, long Word2, const CRossHolder* RossHolder);
+		void          ApplyTerminSemStrForOneRel (std::string SemRel, long Word1, long Word2, const CRossHolder* RossHolder);
 		bool          GetClauseVariantCombination();
    		
 		
@@ -1146,7 +1146,7 @@ public:
 		void          ReadThesInterps(long ClauseNo);
 		void          ApplyTerminSemStr(long ClauseNo);
 		void          IndexRelations ();
-		bool		  TryTestTree(string Graph);
+		bool		  TryTestTree(std::string Graph);
 	  long FindAlreadyBuiltClauseVariant(long ClauseNo) const 
 	  {
 		  vector<CSemClauseVariantResult>::const_iterator It = find(m_AlreadyBuiltClauseVariants.begin(), m_AlreadyBuiltClauseVariants.end() ,CSemClauseVariantResult (m_Clauses[ClauseNo].m_SyntaxClauseNo, m_Clauses[ClauseNo].m_ClauseVariantNo, m_Clauses[ClauseNo].m_AddedClauses));
@@ -1175,7 +1175,7 @@ public:
 		void          AddTreeVariant (const CTreeVariant& Variant);
 		long            GetSimpleConj (long NodeNo, const CConj* Conj, long ConjCount) const;
 		void          SetTreeVariant (const CTreeVariant& Variant);
-		string       GetClauseComplexitiesStr();
+		std::string       GetClauseComplexitiesStr();
 		void          GetValencyMisses(long NodeNo, vector<CValency>& ValencyMisses)  const;
 		// lexical varinats
 		bool          IsInLexVariant(long ClauseNo, long NodeNo);
@@ -1217,13 +1217,13 @@ public:
 		// выдает число межклаузных отношений
 		long			GetClauseRelationCount ();
 		// проверяет, что узлы NodeNo1 и NodeNo2 находятся в указанном расположении (<,<<,>>,>,^)
-		bool			CheckDirection (long NodeNo1, long NodeNo2, string Direction) const;
+		bool			CheckDirection (long NodeNo1, long NodeNo2, std::string Direction) const;
 	
 		
 		bool			IsProjectedNew(long Tag) const;	
 		// конвертирует все руские числительные в арабскую запись
 		void			ConvertRusNumeralsToArabic();
-		string			ConvertArabictoRusNumeral(const CRusSemNode& Node); //и обратно
+		std::string			ConvertArabictoRusNumeral(const CRusSemNode& Node); //и обратно
 		// обработка клауз типа "давай пойдем в лес"
 		void			DealInvitatoryMoodBeforeTree (long ClauseNo);
 		void			DealInvitatoryMoodAfterTree ();
@@ -1234,7 +1234,7 @@ public:
 		void			MarkUniqueRelations();
 		// проверяет, что между узлами входящими в это отношение нет другой связи, кроме RelNo
 		bool			dfs_to_test_unique_relation (size_t NodeNo, size_t RelNo);
-		string			GetClauseTreeForTcl();
+		std::string			GetClauseTreeForTcl();
 		// получает SF1 узла NodeNo		
 		vector<QWORD> GetSemFetsOfFirstValency(long NodeNo);
 		// проверяет, что чразу перед узлм стоит запятая
@@ -1245,7 +1245,7 @@ public:
 		// в предложную группу не входит ни одного отношения
 		void			FindReverseActantForPreps(size_t ClauseNo);
 	   // выдает морфологическое представление узла (лемма и граммема)
-	    string	GetMorphologyOfNode(long NodeNo) const ;
+	    std::string	GetMorphologyOfNode(long NodeNo) const ;
 		// удаление Copul, которые совсем не имеют детей
 		void			DelChildlessCopul();
 		// копирует все  дополнительные отношения, кроме анафор, в нормальные отношения
@@ -1257,7 +1257,7 @@ public:
 		//  входит ли данный узел в концепт, обозначенный LEX.
 		void			FindConceptFetsFromArticles(long ClauseNo);
 		//  проверяет, что глагольная лемма входит в словарь без частицы суффикса СЯ 
-		bool			VerbCanBeWithoutReflexiveSuffix(string Lemma) const;
+		bool			VerbCanBeWithoutReflexiveSuffix(std::string Lemma) const;
 		// уничтожает все "пробелы"  в порядке нумерации слов,
 		void			DeleteWordNoGaps();
 		// узел является  ПГ или наречием
@@ -1274,7 +1274,7 @@ public:
 		};
 		// читает вспомогательные статьи _коеф и _weak_syn_rel	
 		bool			ReadAuxiliaryArticles();
-		bool		    IsWeakSynRel (const string& S) const
+		bool		    IsWeakSynRel (const std::string& S) const
 		{
 			return binary_search (m_WeakSynRels.begin(),m_WeakSynRels.end(),S);
 		};
@@ -1285,7 +1285,7 @@ public:
 		// находит все вопросительные клаузы  в вопросительном предложении
 		void		    FindQuestionClauses ();
 		// возвращает  свойства клаузы 
-		string			GetClauseProperiesStr(long ClauseNo) const;
+		std::string			GetClauseProperiesStr(long ClauseNo) const;
 		// находит      термины, элементы которых стоят неконтактно
 		void			FindDividedTermins();
 		// вызывает функцию GetDopFields, строит по результатпм m_ThesSemRelations
@@ -1308,7 +1308,7 @@ public:
 		void			FindVerbsOfS0(long NodeNo);
 		// проверяет, что клаузы имеют хотя бы одну общую ситуацию (клаузу предсталяет вершина клаузы)
 		bool			ClausesHaveCommonSituation (long ClauseNo1, long ClauseNo2) const;
-		string	GetClausePO(long ClauseNo) const  {return m_Clauses[ClauseNo].m_BestPO;};
+		std::string	GetClausePO(long ClauseNo) const  {return m_Clauses[ClauseNo].m_BestPO;};
 		// привязывает "нечего" к ModalCopul, если в "нечего" не входит ни одной связи
 		void			DealUnboundModalCopul(long ClauseNo);
 		// создает подлежащее для клаузы быз подлежащего по пред. клаузе
@@ -1345,7 +1345,7 @@ public:
 		void			ProcessSAM_SEBJA();
 		void			ConvertVSE2_toOperator();
 
-		void			ProcessAllowableLexVars (string LexVarsStr);
+		void			ProcessAllowableLexVars (std::string LexVarsStr);
 		// ищет такой же клаузный вариант,что уже был
 		bool			FindEqualClauseVariant();
 		void			ZaplataCompar1(long ClauseNo);
@@ -1374,7 +1374,7 @@ public:
 		// удаляет отношения Rels
 		void			DeleteRelSet(CRelSet& R);
 		// проверяет, что в одном из значений GF-главного после двоеточия стоит константа ItemStr (син. роль)
-		bool			HasGramFetAfterColon (long NodeNo, string ItemStr)  const;
+		bool			HasGramFetAfterColon (long NodeNo, std::string ItemStr)  const;
 		//выдает узлы, которые заполнили валентности узла  NodeNo в порядке, заданном в валентной структуре
 		CRelSet         GetValencyPlaces(long NodeNo, CRelSet& OutRelations)  const;
 		//является ли этот узел локатинвым
@@ -1384,7 +1384,7 @@ public:
 		void			DelNode(long NodeNo);
 		void			PrintMemRelations() const;
 		// выдает нормальную форму причастия (мр, ед)
-		string			GetNormOfParticiple (const CRusSemWord& W) const;
+		std::string			GetNormOfParticiple (const CRusSemWord& W) const;
 
 		// превращает причастие и все его зависимые в отдельную клаузу, если они еще являются отдельной клаузой 
 		void			ConvertParticipleTreeToClause();
@@ -1394,25 +1394,25 @@ public:
 		// строит отношения между лок(темпор) узлами, которые идут друг за другом
 		void			BuildCircumsChains(long ClauseNo);
 		// строит       учительница -> учитель
-		bool			BuildWordWithoutFemineSuffix (string& Word) const;
+		bool			BuildWordWithoutFemineSuffix (std::string& Word) const;
 
-		bool			RussianSynthesis(string& Result) const;
-		string			RussianSynthesisOfNode(int NodeNo);
-		string			GetPrepOrConjOfNode (const CRusSemNode&  Node) const;
-		bool			SemanticAnswer(string& Result, const vector<CRusSemStructure>&	SavedSentences) const;
+		bool			RussianSynthesis(std::string& Result) const;
+		std::string			RussianSynthesisOfNode(int NodeNo);
+		std::string			GetPrepOrConjOfNode (const CRusSemNode&  Node) const;
+		bool			SemanticAnswer(std::string& Result, const vector<CRusSemStructure>&	SavedSentences) const;
 
 		bool			ContainsSemCopul(long NodeNo) const;
-		void			GetMaxWordWeightByLemma(string Lemma, CRusSemWord& SemWord) const;
-		bool			HasAuxiliaryPOS(string Lemma) const;
+		void			GetMaxWordWeightByLemma(std::string Lemma, CRusSemWord& SemWord) const;
+		bool			HasAuxiliaryPOS(std::string Lemma) const;
 
-		bool			GetSyntaxTreeByText(string text, int ClauseVarNo, string& Graph);
-		bool			SetLemmasToReplace(string LemmasToReplace);
-		string			GetPrepOrConjFromSynReal (const CSynRealization&  SynReal) const ;
+		bool			GetSyntaxTreeByText(std::string text, int ClauseVarNo, std::string& Graph);
+		bool			SetLemmasToReplace(std::string LemmasToReplace);
+		std::string			GetPrepOrConjFromSynReal (const CSynRealization&  SynReal) const ;
 		bool			CanBeDeleted(long NodeNo) const;
 
 };
 
-extern bool HasReflexiveSuffix (const string& s);
+extern bool HasReflexiveSuffix (const std::string& s);
 extern bool IsPossesivePronoun(const CSemNode& N);
 extern void GetCommonVariants(const vector<VectorLong>&  Parents, 
 									   VectorLong&   V,

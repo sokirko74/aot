@@ -17,9 +17,9 @@ Relations:
 #include "../common/argparse.h"
 #include "SemanLib/VisualGraph.h"
 
-extern void (*GlobalErrorMessage)(const string &);
+extern void (*GlobalErrorMessage)(const std::string &);
 
-void MyGlobalErrorMessage(const string &s) {
+void MyGlobalErrorMessage(const std::string &s) {
     throw CExpc(s);
 
 }
@@ -36,8 +36,8 @@ const char *byte_to_binary(int x) {
     return b;
 }
 
-string GetGramInfo(const CRusSemStructure& SS, poses_mask_t Poses, QWORD Grammems) {
-    string Result;
+std::string GetGramInfo(const CRusSemStructure& SS, poses_mask_t Poses, QWORD Grammems) {
+    std::string Result;
     for (size_t i = 0; i < sizeof(Poses) * 8; i++)
         if ((1 << i) & Poses) {
             Result += (const char *) SS.m_pData->GetRusGramTab()->GetPartOfSpeechStr(i);
@@ -47,7 +47,7 @@ string GetGramInfo(const CRusSemStructure& SS, poses_mask_t Poses, QWORD Grammem
     return Result;
 }
 
-void show_register(string &s, RegisterEnum Register) {
+void show_register(std::string &s, RegisterEnum Register) {
 
     EngRusMakeLower(s);
     if (!s.empty())
@@ -57,16 +57,16 @@ void show_register(string &s, RegisterEnum Register) {
             EngRusMakeUpper(s);
 }
 
-vector<string> words;
+vector<std::string> words;
 
-string GetWordStrOfNode(const CRusSemStructure& SS, int ssi, bool bOnlyWords = false) {
+std::string GetWordStrOfNode(const CRusSemStructure& SS, int ssi, bool bOnlyWords = false) {
     const CRusSemNode &Node = SS.m_Nodes[ssi];
-    string NodeStr;
+    std::string NodeStr;
     if (bOnlyWords) {
         if (Node.m_Words.size() > 1)
             NodeStr += "(";
         for (int i = 0; i < Node.m_Words.size(); i++) {
-            string w = Node.m_Words[i].m_Word;
+            std::string w = Node.m_Words[i].m_Word;
             show_register(w, Node.m_Words[i].m_CharCase);
             NodeStr += w;
             if (i + 1 < Node.m_Words.size())
@@ -140,14 +140,14 @@ void outputRelation(const CRusSemStructure& SS, const CRusSemRelation& R, std::o
 }
 
 void PrintRelationsToText(const CRusSemStructure& SS, ostream& result) {
-    string r;
+    std::string r;
 
     words.resize(SS.m_piSent->m_Words.size());
     for (int i = 0; i < SS.m_piSent->m_Words.size(); i++)
         words[i] = SS.m_piSent->m_Words[i].m_strWord;
     result << "Nodes:\n";
     for (int i = 0; i < SS.m_Nodes.size(); i++) {
-        string Nstr = GetWordStrOfNode(SS, i);
+        std::string Nstr = GetWordStrOfNode(SS, i);
         result << "  Node " << i << " ";
         result << (Nstr.empty() ? SS.GetNodeStr1(i) : Nstr);
         result << "\n";
@@ -167,7 +167,7 @@ void PrintRelationsToText(const CRusSemStructure& SS, ostream& result) {
 }
 
 void PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuilder, ostream& result) {
-    string r;
+    std::string r;
     CVisualSemGraph graph;
     graph.InitFromSemantics(SemBuilder);
     graph.SetGraphLayout();
@@ -194,13 +194,13 @@ int main(int argc, const char *argv[]) {
     }
 
     std::cerr << "parsing sentences:\n";
-    string s;
+    std::string s;
     size_t lineCount = 0;
     while (getline(args.GetInputStream(), s)) {
         lineCount ++;
         std::cerr << lineCount << ") " << s << "\n";
         int comment = 0;
-        if ((comment = s.find("//")) != string::npos) {
+        if ((comment = s.find("//")) != std::string::npos) {
             s = s.substr(0, comment);
         }
         Trim(s);
@@ -215,7 +215,7 @@ int main(int argc, const char *argv[]) {
         try {
             args.GetOutputStream() << s << "\n";
             SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
-            string dummy;
+            std::string dummy;
             SemBuilder.FindSituations(s, 0, "общ", 20000, -1, "", dummy);
             if (args.Exists("visual")) {
                 PrintRelationsAsToJavascript(SemBuilder, args.GetOutputStream());

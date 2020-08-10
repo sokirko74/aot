@@ -1,9 +1,10 @@
 // BigramsIndex.cpp : Defines the entry point for the console application.
 //
 
-#include "common/utilit.h"
 #include <climits>
-#include <common/BigramsReader.h>
+
+#include "../../common/utilit.h"
+#include "../../common/BigramsReader.h"
 
 void PrintUsageAndExit() {
     fprintf(stderr, "BigramsIndex,  creates word-index for bigrams file\n");
@@ -13,7 +14,7 @@ void PrintUsageAndExit() {
 };
 
 struct CWordInfo {
-    string m_WordStr;
+    std::string m_WordStr;
     size_t m_Freq;
 
     size_t m_FileOffset1 = UINT_MAX;
@@ -30,17 +31,17 @@ struct CWordInfo {
         return m_WordStr == W.m_WordStr;
     }
 
-    bool operator<(const string &s) const {
+    bool operator<(const std::string &s) const {
         return m_WordStr < s;
     }
 
-    bool operator==(const string &s) const {
+    bool operator==(const std::string &s) const {
         return m_WordStr == s;
     }
 
 };
 
-vector<CWordInfo> ReadWordFreqs(string WordFreqFileName) {
+vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
     fprintf(stderr, "open file %s\n", WordFreqFileName.c_str());
     FILE *freq_fp = fopen(WordFreqFileName.c_str(), "rb");
     if (!freq_fp) {
@@ -69,7 +70,7 @@ vector<CWordInfo> ReadWordFreqs(string WordFreqFileName) {
     return wordInfos;
 }
 
-void ReadBigrams(string BigramsFileName, vector<CWordInfo> &wordInfos) {
+void ReadBigrams(std::string BigramsFileName, vector<CWordInfo> &wordInfos) {
     fprintf(stderr, "open file %s\n", BigramsFileName.c_str());
     FILE *in_fp = fopen(BigramsFileName.c_str(), "rb");
     if (!in_fp) {
@@ -109,7 +110,7 @@ void ReadBigrams(string BigramsFileName, vector<CWordInfo> &wordInfos) {
     fprintf(stderr, "read %zu bigrams\n", linesCount);
 }
 
-void WriteBigramsBin(bool bFirstOffset1, vector<CWordInfo>& WordInfos, string BinName ) {
+void WriteBigramsBin(bool bFirstOffset1, vector<CWordInfo>& WordInfos, std::string BinName ) {
     fprintf(stderr, "write  to  file %s\n", BinName.c_str());
     FILE *out_fp = fopen(BinName.c_str(), "wb");
     if (!out_fp) {
@@ -138,8 +139,8 @@ int main(int argc, char *argv[]) {
         PrintUsageAndExit();
 
 
-    string BigramsFileName = argv[1];
-    string WordFreqFileName = MakeFName(BigramsFileName, "wrd_freq");
+    std::string BigramsFileName = argv[1];
+    std::string WordFreqFileName = MakeFName(BigramsFileName, "wrd_freq");
 
     try {
         vector<CWordInfo> wordInfos = ReadWordFreqs(WordFreqFileName);
@@ -147,7 +148,7 @@ int main(int argc, char *argv[]) {
         WriteBigramsBin(true, wordInfos, MakeFName(BigramsFileName, "bin1"));
         WriteBigramsBin( false, wordInfos, MakeFName(BigramsFileName, "bin2"));
 
-        string OutIndexFile = MakeFName(BigramsFileName, "wrd_idx");
+        std::string OutIndexFile = MakeFName(BigramsFileName, "wrd_idx");
         fprintf(stderr, "create file %s\n", OutIndexFile.c_str());
         FILE *fp = fopen(OutIndexFile.c_str(), "w");
         if (!fp) {

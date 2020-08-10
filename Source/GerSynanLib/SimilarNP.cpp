@@ -36,7 +36,7 @@ bool CGerFormatCaller::format_for_similar_NP (CGroup& G)
 	};
 
 	// check common grammem 
-	string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
+	std::string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
 	if ((G.GetGrammems() & gAllCases) == 0) return false;
 	G.SetGrammems (G.GetGrammems() | _QM(gPlural) );
 

@@ -4,7 +4,7 @@
 
 
 // получение по типу EngVerbTenseEnum строкового представления
-string CEngSemStructure::GetTenseString(EngVerbTenseEnum Tense) const
+std::string CEngSemStructure::GetTenseString(EngVerbTenseEnum Tense) const
 {
 	switch (Tense) {
 		case zero_tn : return "zero";
@@ -301,11 +301,11 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 /////////////////////////////////////////////////////////////////////////////
 
 struct CAuxVerbInfo {
-	string				m_AuxLemma;
+	std::string				m_AuxLemma;
 	EngVerbTenseEnum	m_AuxTense;
 	long				m_AuxEngPOS;
 	EngVerbTenseEnum	m_MainTense;
-	CAuxVerbInfo (string AuxLemma,	EngVerbTenseEnum AuxTense,	long engPOS, EngVerbTenseEnum MainTense)
+	CAuxVerbInfo (std::string AuxLemma,	EngVerbTenseEnum AuxTense,	long engPOS, EngVerbTenseEnum MainTense)
 	{
 		m_AuxLemma = AuxLemma;
 		m_AuxTense = AuxTense;
@@ -505,7 +505,7 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 
 EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngStr,long TimNodeNo) const
 {
-	typedef pair<string,string> PairOfString; 
+	typedef pair<std::string,std::string> PairOfString; 
 	vector<PairOfString> AVREM_values;
 
 	const CSemanticStructure &Rus = RusStr;
@@ -542,8 +542,8 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 			   continue; 
 		   if(vec[j].m_DomItemNos[2] == -1) 
 			   continue; 
-		   string s0 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[0]);
-		   string s2 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[2]);
+		   std::string s0 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[0]);
+		   std::string s2 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[2]);
 		   AVREM_values.push_back(make_pair(s0,s2));
 		}
 	}
@@ -562,8 +562,8 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 				return zero_tn;
 			for( int j=0; j<AVREM_values.size(); j++ )
 			{
-				string s1 = AVREM_values[j].first;
-				string s2 = AVREM_values[j].second;
+				std::string s1 = AVREM_values[j].first;
+				std::string s2 = AVREM_values[j].second;
 				if( s1=="прш" && s2=="Simple" )
 					return gerund_prf_tn;
 			}
@@ -572,14 +572,14 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 	}
 //
 
-	string past, present, future;
-	string sv, nsv;
+	std::string past, present, future;
+	std::string sv, nsv;
 	
-    string DefaultTense;
+    std::string DefaultTense;
 	for( int j=0; j<AVREM_values.size(); j++ )
 	{
-		string s0 = AVREM_values[j].first;
-		string s2 = AVREM_values[j].second;
+		std::string s0 = AVREM_values[j].first;
+		std::string s2 = AVREM_values[j].second;
 		if(s0 == "*") 
 		{
 			DefaultTense = s2;
@@ -620,11 +620,11 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 		if(future.empty())	future = DefaultTense;
 	}
 
-	string perfective;
+	std::string perfective;
 	if(sv.size()  &&  RusStr.GetNode(TimNodeNo).HasOneGrammem(rPerfective) )	perfective = sv;
 	if(nsv.size() && !RusStr.GetNode(TimNodeNo).HasOneGrammem(rPerfective) )	perfective = nsv;
 
-	string str;// = present;
+	std::string str;// = present;
 	if( RusStr.GetNode(TimNodeNo).HasOneGrammem (rPresentTense) )
 	{
 		str = present;

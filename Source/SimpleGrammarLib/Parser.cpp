@@ -48,14 +48,14 @@ struct CInputWord
 		UpdateAfterDelete();
 	};
 
-	void AddDescriptor(const string& Descriptor)
+	void AddDescriptor(const std::string& Descriptor)
 	{
 		for (size_t j=0; j<m_Homonyms.size(); j++)
 		{
 			m_Homonyms[j].m_GraphDescr += " " + Descriptor;
 		};
 	};
-	string GetWord() const
+	std::string GetWord() const
 	{
 		assert (!m_Homonyms.empty());
 		return m_Homonyms[0].GetWord();
@@ -73,7 +73,7 @@ struct CInputSentence
 	};
 
 	size_t	ReadSentence (const CPlmLineCollection&	PlmLines, size_t StartLineNo);
-	void	AddToResultPlmLinesCollection(vector<string>& Result) const;
+	void	AddToResultPlmLinesCollection(vector<std::string>& Result) const;
 	size_t	GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo) const;
 
 };
@@ -159,7 +159,7 @@ bool AreEqual(const CPlmLine& L, const CGrammarItem& I)
 	if (I.m_pListFile != 0)
 	{
 		const StringSet& PossibleLemmas = I.m_pListFile->m_PossibleLemmas;
-		string debug = *(PossibleLemmas.begin());
+		std::string debug = *(PossibleLemmas.begin());
 		if	(		( PossibleLemmas.find(L.m_Lemma) == PossibleLemmas.end() ) // if we cannot find lemma
 				&&	(		( L.m_Lemma == L.GetUpperWord()) // and if we cannot find the token itself
 						||	L.IsFoundInMorphology()
@@ -167,8 +167,8 @@ bool AreEqual(const CPlmLine& L, const CGrammarItem& I)
 					)
 			)
 		{
-				size_t hyphen = L.m_Lemma.rfind("-"); // and if we cannot find the token substring  after the last hyphen
-				if	(		(hyphen == string::npos)
+				size_t hyphen = L.m_Lemma.rfind("-"); // and if we cannot find the token substd::string  after the last hyphen
+				if	(		(hyphen == std::string::npos)
 						||	( PossibleLemmas.find(L.m_Lemma.substr(hyphen+1)) == PossibleLemmas.end() )
 					)
 					return false;
@@ -227,7 +227,7 @@ size_t CInputSentence::GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo
 	return StartWordNo+Result;
 };
 
-void CInputSentence::AddToResultPlmLinesCollection(vector<string>& Result) const
+void CInputSentence::AddToResultPlmLinesCollection(vector<std::string>& Result) const
 {
 	for (size_t i=0; i<m_Words.size(); i++)
 		for (size_t j=0; j < m_Words[i].m_Homonyms.size(); j++)
@@ -357,7 +357,7 @@ void CInputSentenceGLR::FindOccurrencesWithTrie (const CWorkGrammar& G, vector< 
 
 void CInputSentenceGLR::AddDescriptors (const vector< COccurrence>& Occurrences, const CWorkGrammar& Grammar, bool bDumpOccurs)
 {
-	string DumpString;
+	std::string DumpString;
 	size_t OccurNo = 0;
 	assert (Grammar.GetCountOfRoots() == 3);
 	int RootNo = Grammar.GetFirstRoot();
@@ -378,7 +378,7 @@ void CInputSentenceGLR::AddDescriptors (const vector< COccurrence>& Occurrences,
 			for (size_t i=0; i<Nodes.size();i++)
 			{
 				const CSymbolNode&  Node = Output[ Nodes[i] ];
-				string GroupName = Grammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
+				std::string GroupName = Grammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
 					
 				if ( bDumpOccurs )
 				{ 
@@ -396,9 +396,9 @@ void CInputSentenceGLR::AddDescriptors (const vector< COccurrence>& Occurrences,
 
 				if (Node.m_InputEnd - Node.m_InputStart <= 1) 
 				{
-					string MainDescr = Format(" #_%s",GroupName.c_str());
+					std::string MainDescr = Format(" #_%s",GroupName.c_str());
 					m_Words[StartWordNo+Node.m_InputStart].AddDescriptor(MainDescr);
-					string WordStr = m_Words[StartWordNo+Node.m_InputStart].GetWord();
+					std::string WordStr = m_Words[StartWordNo+Node.m_InputStart].GetWord();
 					if (Grammar.m_SecondPassSymbols.find(GroupName) != Grammar.m_SecondPassSymbols.end())
 						m_AbrigedReferences.insert(WordStr);
 					continue;
@@ -406,7 +406,7 @@ void CInputSentenceGLR::AddDescriptors (const vector< COccurrence>& Occurrences,
 
 				
 				size_t MainWordNo = C.m_pParser->GetMainWordRecursive(Nodes[i]);
-				string Descr = Format(" #SimGrm %s %i %i %i",
+				std::string Descr = Format(" #SimGrm %s %i %i %i",
 					GroupName.c_str(), Node.m_InputStart, 
 					Node.m_InputEnd-1, MainWordNo);
 				
@@ -421,12 +421,12 @@ void CInputSentenceGLR::AddDescriptors (const vector< COccurrence>& Occurrences,
 		}
 		else
 		{
-			string WordStr = m_Words[WordNo].GetWord();
+			std::string WordStr = m_Words[WordNo].GetWord();
 			if (m_AbrigedReferences.find(WordStr) != m_AbrigedReferences.end())
 			{
 				if ( bDumpOccurs )
 				{ 
-					string GroupName = Grammar.m_UniqueGrammarItems[RootNo].m_ItemStrId;
+					std::string GroupName = Grammar.m_UniqueGrammarItems[RootNo].m_ItemStrId;
 					DumpString += Format("%s : %s\n",GroupName.c_str(), WordStr.c_str());
 				};
 
@@ -601,7 +601,7 @@ void CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 			for (size_t i=0; i< Nodes.size();i++)
 			{
 				const CSymbolNode&  Node = C.m_pParser->m_SymbolNodes[ Nodes[i] ];
-				string GroupName = G.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;		
+				std::string GroupName = G.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;		
 				fprintf (fp, "%s[%i,%i); ", GroupName.c_str(), Node.m_InputStart, Node.m_InputEnd);
 			};
 			fprintf (fp, "\n");
@@ -616,7 +616,7 @@ void CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 
 
 
-bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection& PlmLines, const CAgramtab*	pGramTab, vector<string>& Result, bool bDumpOccurrences) const
+bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection& PlmLines, const CAgramtab*	pGramTab, vector<std::string>& Result, bool bDumpOccurrences) const
 {
 	//printf ("Parsing  file.... \n");
 	remove ("occurrs.txt");

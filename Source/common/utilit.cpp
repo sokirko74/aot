@@ -175,7 +175,7 @@ const WORD ASCII[256] = {
 /*reverse line feed (ri) '_'*/                     fWordDelim,
 /*single-shift two (ss2) '_'*/                     fWordDelim,
 /*single-shift three (ss3) '_'*/                   fWordDelim,
-/*device control string (dcs) '_'*/                fWordDelim,
+/*device control std::string (dcs) '_'*/                fWordDelim,
 /*private use one (pu1) '''*/                      fWordDelim,
 /*private use two (pu2) '''*/                      fWordDelim,
 /*set transmit state (sts) '"'*/                   fWordDelim,
@@ -183,11 +183,11 @@ const WORD ASCII[256] = {
 /*message waiting (mw) ''*/                       fWordDelim,
 /*start of guarded area (spa) '-'*/                fWordDelim,
 /*end of guarded area (epa) '-'*/                  fWordDelim,
-/*start of string (sos) '_'*/                      fWordDelim,
+/*start of std::string (sos) '_'*/                      fWordDelim,
 /*single graphic character introducer (sgci) 'T'*/ fWordDelim,
 /*single character introducer (sci) '_'*/          fWordDelim,
 /*control sequence introducer (csi) '>'*/          fWordDelim,
-/*string terminator (st) '_'*/                     fWordDelim,
+/*std::string terminator (st) '_'*/                     fWordDelim,
 /*operating system command (osc) '_'*/             fWordDelim,
 /*privacy message (pm) '_'*/                       fWordDelim,
 /*application program command (apc) '_'*/          fWordDelim,
@@ -339,13 +339,13 @@ file_off_t FTell(FILE* fp)
 }
 
 
-void(*GlobalErrorMessage)(const string&) = 0;
+void(*GlobalErrorMessage)(const std::string&) = 0;
 
-void ErrorMessage (const string& Titul, const string& Message)
+void ErrorMessage (const std::string& Titul, const std::string& Message)
 {
 	if (GlobalErrorMessage)
 	{
-		string q = Titul + ":"+Message;
+		std::string q = Titul + ":"+Message;
 		if (q.empty()|| (q[q.length() -1]!='\n'))	q+='\n';
 		GlobalErrorMessage(q);
 		return;
@@ -358,31 +358,31 @@ void ErrorMessage (const string& Titul, const string& Message)
 		#endif
 	#endif
 
-	string q = Message;
+	std::string q = Message;
 	if (q.empty()|| (q[q.length() -1]!='\n'))	q+='\n';
 	fprintf(stderr, "%s: %s", Titul.c_str(), q.c_str());
 	
 };
 
-void ErrorMessage (const string& Message)
+void ErrorMessage (const std::string& Message)
 {
 	ErrorMessage("error", Message);
 };
 
-string MakeFName ( const string& InpitFileName,  const string& Ext)
+std::string MakeFName ( const std::string& InpitFileName,  const std::string& Ext)
 {
-	string Result = InpitFileName;
+	std::string Result = InpitFileName;
 	size_t i = Result.find_last_of('.'); // найти последнее расширение
-	if ( i  != string::npos) 
+	if ( i  != std::string::npos) 
 		Result.erase(i);	
-	Result += string(".") ;
+	Result += std::string(".") ;
 	Result += Ext;
 	return Result;
 }
 
 
-string MakePath (const string path, const string fileName) { 
-	string result = path;
+std::string MakePath (const std::string path, const std::string fileName) { 
+	std::string result = path;
 	
 	if (!result.empty()) {
 #ifdef WIN32
@@ -401,32 +401,32 @@ string MakePath (const string path, const string fileName) {
 	return result + fileName;	  
 };
 
-bool MakePathAndCheck(const string path, const string fileName, string& fullPath) {
+bool MakePathAndCheck(const std::string path, const std::string fileName, std::string& fullPath) {
 	fullPath = MakePath(path, fileName);
 	return FileExists(fullPath.c_str());
 }
 
-string GetPathByFile (string FileName)
+std::string GetPathByFile (std::string FileName)
 { 
   size_t i = FileName.rfind("\\");	  
   size_t j = FileName.rfind("/");	  
 
-  if (			(i == string::npos) 
-		&&		(j == string::npos)
+  if (			(i == std::string::npos) 
+		&&		(j == std::string::npos)
 	  )
 	  return "";
   else
-	  if (i == string::npos) 
+	  if (i == std::string::npos) 
 		  return FileName.substr(0, j+1);
 	  else
-		if (j == string::npos) 
+		if (j == std::string::npos) 
 			return FileName.substr(0, i+1);
 		else
 			return FileName.substr(0, max(i,j)+1); 
 };
 
 
-string	CreateTempFileName()
+std::string	CreateTempFileName()
 {
 	char tmpfilename[_MAX_PATH];
     const char * sTempPath = getenv("TMP");
@@ -659,7 +659,7 @@ char* IntToStr (int Value, char* Buffer)
 	return Buffer;
 };
 
-string& IntToStr (int Value, string& oBuffer)
+std::string& IntToStr (int Value, std::string& oBuffer)
 {
 	char Buffer[256];
 	sprintf (Buffer, "%i", Value);
@@ -682,10 +682,10 @@ void strrev(char* s)
 
 
 
-bool IsHtmlFile (const string& FileName)
+bool IsHtmlFile (const std::string& FileName)
 {
 	size_t len = FileName.length();
-	string R = FileName;
+	std::string R = FileName;
 	EngMakeLower(R);
 
 	return (   (len > 4)
@@ -711,7 +711,7 @@ void AddFile(const char* MainFile, const char* ToAdd)
 
 #ifdef WIN32
     #include <windows.h>
-	string TryReadRMLFromRegistry()
+	std::string TryReadRMLFromRegistry()
 	{
 		HKEY hKeyResult; 
 		LONG res; 
@@ -730,10 +730,10 @@ void AddFile(const char* MainFile, const char* ToAdd)
 	} 
 #endif
 
-string GetRmlVariable()
+std::string GetRmlVariable()
 {
 	const char* rml = getenv("RML");
-	string s;
+	std::string s;
 	if (rml)
 		s = rml;
 	else
@@ -765,9 +765,9 @@ string GetRmlVariable()
 const char RML_REGISTRY_FILENAME[] = "rml.ini";
 
 
-static string GetStringInnerFromTheFile (string RegistryPath, string MainPath, string RmlPath) 
+static std::string GetStringInnerFromTheFile (std::string RegistryPath, std::string MainPath, std::string RmlPath) 
 {
-	string FileName = 	MainPath +  "/" + RML_REGISTRY_FILENAME;
+	std::string FileName = 	MainPath +  "/" + RML_REGISTRY_FILENAME;
 	if (access  (FileName.c_str(),04) != 0)
 	{
 		//fprintf (stderr, "Cannot read %s\n", FileName.c_str());
@@ -787,7 +787,7 @@ static string GetStringInnerFromTheFile (string RegistryPath, string MainPath, s
 	char buffer[2048];
 	while (fgets(buffer,2048,fp))
 	{
-		string s = buffer;
+		std::string s = buffer;
 		Trim(s);
 		if (s.empty()) continue;
 		size_t end_field_name = strcspn(s.c_str(), " \t");
@@ -796,10 +796,10 @@ static string GetStringInnerFromTheFile (string RegistryPath, string MainPath, s
 			fclose(fp);
 			throw CExpc ("Cannot parse line "+s);
 		};
-		string Key = s.substr(0,end_field_name);
+		std::string Key = s.substr(0,end_field_name);
 		if (RegistryPath == Key)
 		{
-			string Value = s.substr(end_field_name);
+			std::string Value = s.substr(end_field_name);
 			Trim(Value);
 			if (Value.substr(0, 4) == "$RML")
 				Value.replace(0,4, RmlPath);
@@ -813,28 +813,28 @@ static string GetStringInnerFromTheFile (string RegistryPath, string MainPath, s
 	return "";
 };
 
-string GetIniFilePath()
+std::string GetIniFilePath()
 {
 	return GetRmlVariable()+"/Bin";
 };
 
-string GetRegistryString (string RegistryPath)
+std::string GetRegistryString (std::string RegistryPath)
 {
-	string Result = GetStringInnerFromTheFile(RegistryPath, GetIniFilePath(), GetRmlVariable().c_str());
+	std::string Result = GetStringInnerFromTheFile(RegistryPath, GetIniFilePath(), GetRmlVariable().c_str());
 	return Result;
 	
 };
 
-string GetRegistryStringFromLocalIniFile (string RegistryPath)
+std::string GetRegistryStringFromLocalIniFile (std::string RegistryPath)
 {
-	string  Result = GetStringInnerFromTheFile(RegistryPath, ".", "$RML");
+	std::string  Result = GetStringInnerFromTheFile(RegistryPath, ".", "$RML");
 	return Result;
 };
 
-bool CanGetRegistryString (string RegistryPath)  
+bool CanGetRegistryString (std::string RegistryPath)  
 {
 	try {
-		string s = GetRegistryString(RegistryPath);
+		std::string s = GetRegistryString(RegistryPath);
 		return  s != "";
 	}
 	catch (...)
@@ -844,17 +844,17 @@ bool CanGetRegistryString (string RegistryPath)
 }
 
 
-void SetRegistryString (string RegistryPath, string Value)
+void SetRegistryString (std::string RegistryPath, std::string Value)
 {  
 	if (RegistryPath.find(' ') != -1) 
 		throw CExpc ("A registry path cannot contain spaces");
 
-	string FileName = GetIniFilePath() + "/" + RML_REGISTRY_FILENAME;
+	std::string FileName = GetIniFilePath() + "/" + RML_REGISTRY_FILENAME;
 
 	FILE* fp = fopen (FileName.c_str(), "r");
 	if (fp == 0)
 		throw CExpc ("Cannot open "+FileName);
-	string TempFileName = CreateTempFileName();
+	std::string TempFileName = CreateTempFileName();
 	FILE* outfp = fopen (TempFileName.c_str(), "w");
 	if (!outfp) 
 		throw CExpc ("Cannot open temporary file for setting variables in Registry");
@@ -863,7 +863,7 @@ void SetRegistryString (string RegistryPath, string Value)
 
 	while (fgets(buffer,2048,fp))
 	{
-		string s = buffer;
+		std::string s = buffer;
 		Trim(s);
 		if (s.empty()) continue;
 		size_t end_field_name = strcspn(s.c_str(), " \t");
@@ -893,11 +893,11 @@ void SetRegistryString (string RegistryPath, string Value)
 };
 
 
-bool	IsRmlRegistered(string& Error)
+bool	IsRmlRegistered(std::string& Error)
 {
 	try 
 	{
-		string IniFile = GetIniFilePath() +  "/" + RML_REGISTRY_FILENAME;
+		std::string IniFile = GetIniFilePath() +  "/" + RML_REGISTRY_FILENAME;
 	
 		if (!FileExists(IniFile.c_str() ))
 		{
@@ -950,7 +950,7 @@ bool CheckEvaluationTime ()
 
 const int predict_poses_size = 4;
 
-//  we cannot use here class string, because VC7 shows in this case memory leaks
+//  we cannot use here class std::string, because VC7 shows in this case memory leaks
 struct CPredictPartOfSpeech {
 	char m_pos_str[100];
 };
@@ -978,7 +978,7 @@ const CPredictPartOfSpeech predict_ger_pos[predict_poses_size] =
 };
 
 
-int GetPredictionPartOfSpeech(const string& PartOfSpeech, MorphLanguageEnum langua)
+int GetPredictionPartOfSpeech(const std::string& PartOfSpeech, MorphLanguageEnum langua)
 {
 	const CPredictPartOfSpeech* PossiblePoses;
 	switch (langua)
@@ -1004,7 +1004,7 @@ int GetPredictionPartOfSpeech(const string& PartOfSpeech, MorphLanguageEnum lang
 };
 
 
-bool GetLanguageByString (string s, MorphLanguageEnum& Result)
+bool GetLanguageByString (std::string s, MorphLanguageEnum& Result)
 {
 	
 	EngRusMakeUpper(s);
@@ -1032,7 +1032,7 @@ bool GetLanguageByString (string s, MorphLanguageEnum& Result)
 	
 };
 
-string GetStringByLanguage (MorphLanguageEnum Langua)
+std::string GetStringByLanguage (MorphLanguageEnum Langua)
 {
 	switch (Langua) {
 		case morphRussian: return "Russian";
@@ -1455,12 +1455,12 @@ char* EngMakeUpper (char *word)
 	return RegisterConverter(word, strlen(word), is_english_lower, etoupper);
 }
 
-string& EngMakeUpper (string& word)
+std::string& EngMakeUpper (std::string& word)
 {
 	return RegisterConverter(word, word.length(), is_english_lower, etoupper);
 }
 
-string& EngMakeLower (string& word)
+std::string& EngMakeLower (std::string& word)
 {
 	return RegisterConverter(word, word.length(), is_english_upper, etolower);
 }
@@ -1471,7 +1471,7 @@ char* GerMakeUpper (char *word)
 	return RegisterConverter(word, strlen(word), is_german_lower, gtoupper);
 }
 
-string& GerMakeUpper (string& word)
+std::string& GerMakeUpper (std::string& word)
 {
 	return RegisterConverter(word, word.length(), is_german_lower, gtoupper);
 }
@@ -1514,7 +1514,7 @@ bool IsRussian (const char *word)
 {
 	return CheckLanguage(word, strlen(word), morphRussian);
 }
-bool IsRussian (const string& word)
+bool IsRussian (const std::string& word)
 {
 	return CheckLanguage(word, word.length(), morphRussian);
 }
@@ -1524,7 +1524,7 @@ bool IsEnglish (const char *word)
 	return CheckLanguage(word, strlen(word), morphEnglish);
 }
 
-bool IsEnglish (const string& word)
+bool IsEnglish (const std::string& word)
 {
 	return CheckLanguage(word, word.length(), morphEnglish);
 }
@@ -1533,7 +1533,7 @@ bool IsGerman (const char *word)
 {
 	return CheckLanguage(word, strlen(word), morphGerman);
 }
-bool IsGerman (const string& word)
+bool IsGerman (const std::string& word)
 {
 	return CheckLanguage(word, word.length(), morphGerman);
 }
@@ -1543,7 +1543,7 @@ bool CheckLanguage (const char *word, MorphLanguageEnum langua)
 	return CheckLanguage(word, strlen(word), langua);
 };
 
-bool CheckLanguage (const string& word, MorphLanguageEnum langua)
+bool CheckLanguage (const std::string& word, MorphLanguageEnum langua)
 {
 	return CheckLanguage(word, word.length(), langua);
 };
@@ -1552,7 +1552,7 @@ bool CheckLanguage (const string& word, MorphLanguageEnum langua)
 
 
 // конвертирует из прописные  кириллицы в строчную
-string& EngRusMakeLower (string& word)
+std::string& EngRusMakeLower (std::string& word)
 {
 	size_t len = word.length();
 
@@ -1588,13 +1588,13 @@ char* RmlMakeUpper (char *word, MorphLanguageEnum langua)
 	return GerEngRusMakeUpperTemplate(word, langua, strlen(word));
 };	
 
-string& RmlMakeUpper (string& word, MorphLanguageEnum langua)
+std::string& RmlMakeUpper (std::string& word, MorphLanguageEnum langua)
 {
 	GerEngRusMakeUpperTemplate(word, langua, word.length());
 	return word;
 };	
 
-string& RmlMakeLower (string& word, MorphLanguageEnum langua)
+std::string& RmlMakeLower (std::string& word, MorphLanguageEnum langua)
 {
 	if (word.length() == 0) return word;
 
@@ -1606,7 +1606,7 @@ string& RmlMakeLower (string& word, MorphLanguageEnum langua)
 
 
 // конвертирует из строчной кириллицы в прописные 
-string&  EngRusMakeUpper (string& word)
+std::string&  EngRusMakeUpper (std::string& word)
 {
 	size_t len = word.length();
 	for( size_t i = 0 ; i < len; i++ )
@@ -1658,7 +1658,7 @@ void ConvertJO2Je(char* src, size_t Length)
 	ConvertJO2JeTemplate(src, Length);
 };
 
-bool HasJO(string src) 
+bool HasJO(std::string src) 
 {
 	for (size_t i = 0; i < src.length(); i++)
 	{
@@ -1671,7 +1671,7 @@ bool HasJO(string src)
 	return false;
 }
 
-void ConvertJO2Je(string& src) 
+void ConvertJO2Je(std::string& src) 
 {
 
 	ConvertJO2JeTemplate(src, src.length());
@@ -1685,7 +1685,7 @@ void ConvertJO2Je(char* src)
 
 
 
-string Format( const char* format, ... )
+std::string Format( const char* format, ... )
 {
 	va_list arglst;
 	const size_t  SmallBufferSize = 15000;
@@ -1713,7 +1713,7 @@ string Format( const char* format, ... )
 	va_start( arglst, format );
 	vsnprintf( pBuffer, OutputLength+1, format, arglst);
 	va_end( arglst );
-	string Res = pBuffer;
+	std::string Res = pBuffer;
 	delete pBuffer;
 	return Res;
 
@@ -1721,7 +1721,7 @@ string Format( const char* format, ... )
 
 
 
-string&  TrimLeft (string& str)
+std::string&  TrimLeft (std::string& str)
 {
 	if (str.size() == 0) return str;
 	size_t i = str.find_first_not_of(" \t\n\r");
@@ -1729,7 +1729,7 @@ string&  TrimLeft (string& str)
 	return str;
 };
 
-string&  TrimRight (string& str)
+std::string&  TrimRight (std::string& str)
 {
 	if (str.size() == 0) return str;
 	size_t i = str.find_last_not_of(" \t\n\r");
@@ -1737,7 +1737,7 @@ string&  TrimRight (string& str)
 	return str;
 };
 
-string& Trim (string& str)
+std::string& Trim (std::string& str)
 {
 	TrimLeft(str);
 	TrimRight(str);
@@ -1746,15 +1746,15 @@ string& Trim (string& str)
 
 
 
-const string open_brackets = "{[(<";
-const string close_brackets = "}])>";
-const string all_brackets = open_brackets+close_brackets;
+const std::string open_brackets = "{[(<";
+const std::string close_brackets = "}])>";
+const std::string all_brackets = open_brackets+close_brackets;
 
 
 int isbracket  (BYTE x)
 {
-	if (open_brackets.find(x) != string::npos)	return 1; //открывающие скобки
-	if (close_brackets.find(x) != string::npos)	return 2; // закрывающие
+	if (open_brackets.find(x) != std::string::npos)	return 1; //открывающие скобки
+	if (close_brackets.find(x) != std::string::npos)	return 2; // закрывающие
 	return 0; 
 }
 
@@ -1762,7 +1762,7 @@ int isbracket  (BYTE x)
 size_t dual_bracket (BYTE x)
 {
 	size_t i = all_brackets.find(x);
-	if (i == string::npos) return x;
+	if (i == std::string::npos) return x;
 	size_t s = open_brackets.length();
 	if (i >= s)
 		return all_brackets[i-s];
@@ -1814,7 +1814,7 @@ bool  IsLessShortString::operator ()(const CShortString& Item1,	const CShortStri
 
 
 
-void CShortStringHolder::ReadShortStringHolder(string filename)
+void CShortStringHolder::ReadShortStringHolder(std::string filename)
 {
 	clear();
 	file_off_t BufferSize = (int)FileSize(filename.c_str()) - sizeof(size_t);
@@ -1859,8 +1859,8 @@ bool CShortStringHolder::CreateFromSequence(T begin, T end)
 		size_t length = begin->length();
 		if (length > 254)
 		{
-			string s = *begin + " - too long";
-			ErrorMessage(s.c_str(), "Short string convertor");
+			std::string s = *begin + " - too long";
+			ErrorMessage(s.c_str(), "Short std::string convertor");
 			return false;
 		};
 
@@ -1895,7 +1895,7 @@ bool CShortStringHolder::CreateFromSet(const StringSet& in)
 	return CreateFromSequence<StringSet::const_iterator>(in.begin(), in.end());
 }
 
-bool CShortStringHolder::WriteShortStringHolder(const string& FileName) const
+bool CShortStringHolder::WriteShortStringHolder(const std::string& FileName) const
 {
 	FILE* fp = fopen (FileName.c_str(), "wb");
 	if (!fp)	return false;
@@ -1967,7 +1967,7 @@ CMyTimeSpanHolder::CMyTimeSpanHolder()
 	m_bTimeSpanHolderEnabled = true;
 };
 
-void CMyTimeSpanHolder::StartTimer(const string& Name, long NestId)
+void CMyTimeSpanHolder::StartTimer(const std::string& Name, long NestId)
 {
 	if (!m_bTimeSpanHolderEnabled)  return ;
 	Iterator it = m_TimeSpans.find(Name);
@@ -1976,7 +1976,7 @@ void CMyTimeSpanHolder::StartTimer(const string& Name, long NestId)
 	{
 		CMyTimeSpan X (m_SequenceId, NestId);
 
-		pair<Iterator, bool> p = m_TimeSpans.insert(pair<string, CMyTimeSpan>(Name, X));
+		pair<Iterator, bool> p = m_TimeSpans.insert(pair<std::string, CMyTimeSpan>(Name, X));
 
 		it = p.first;
 	};
@@ -1988,7 +1988,7 @@ void CMyTimeSpanHolder::StartTimer(const string& Name, long NestId)
 };
 
 //  finish timer "Name" and returns the elapsed time in ticks
-double CMyTimeSpanHolder::EndTimer(const string& Name)
+double CMyTimeSpanHolder::EndTimer(const std::string& Name)
 {
 	if (!m_bTimeSpanHolderEnabled)  return 0;
 
@@ -2007,9 +2007,9 @@ double CMyTimeSpanHolder::EndTimer(const string& Name)
 };
 
 
-string CMyTimeSpanHolder::GetStrRepresentation (double AllClocksCount) const
+std::string CMyTimeSpanHolder::GetStrRepresentation (double AllClocksCount) const
 {
-	string Result;
+	std::string Result;
 
 	if (!m_bTimeSpanHolderEnabled)  return "profiler is disabled\n";
 
@@ -2039,18 +2039,18 @@ void CMyTimeSpanHolder::ClearTimers()
 
 
 
-void QPEncodeString(string& s)
+void QPEncodeString(std::string& s)
 {
-	string z;
+	std::string z;
 	for (size_t i=0; i<s.length(); i++)
 		z+= Format("%2x",(BYTE)s[i]);
 	s = z;
 }
 
 
-void QPDecodeString(string& s)
+void QPDecodeString(std::string& s)
 {
-	string z;
+	std::string z;
 	char b[3];
 	b[2] = 0;
 	for (size_t i=0; i<s.length(); i+=2)
@@ -2066,20 +2066,20 @@ void QPDecodeString(string& s)
 
 
 
-bool LoadFileToString(string FileName, string& Result)
+bool LoadFileToString(std::string FileName, std::string& Result)
 {
 	if ( access(FileName.c_str(), 4) != 0) return false;
 
 
 	vector<char> V;
 	ReadVector(FileName,V);
-	Result = string (V.begin(), V.end());
+	Result = std::string (V.begin(), V.end());
 	return true;
 };
 
-void		SqueezeSpacesAndDeleteEoln(string& s)
+void		SqueezeSpacesAndDeleteEoln(std::string& s)
 {
-	string result;
+	std::string result;
 	for (size_t i=0; i< s.length(); i++)
 		if ( isspace((BYTE) s[i]) )
 		{
@@ -2109,13 +2109,13 @@ bool is_pseudo_graph(BYTE x)
 
 
 // ======================== CExcp ================
-CExpc::CExpc(const string& Cause) 
+CExpc::CExpc(const std::string& Cause) 
 {
     m_strCause = Cause;
 	m_ErrorCode = 0;
 };
 
-CExpc::CExpc(int ErrorCode, const string& Cause) 
+CExpc::CExpc(int ErrorCode, const std::string& Cause) 
 {
     m_strCause = Cause;
 	m_ErrorCode = ErrorCode;
@@ -2151,7 +2151,7 @@ CExpc& CExpc::operator= (const CExpc& from)
 
 bool  ReadTimeOutFromRegistry (bool bReadFromLocalFile, int& TimeOut)
 {
-	string NetworkTimeOutStr;
+	std::string NetworkTimeOutStr;
 	try {
 		if (bReadFromLocalFile)
 			NetworkTimeOutStr  = GetRegistryStringFromLocalIniFile( "NetworkTimeOut" );
@@ -2303,7 +2303,7 @@ bool StringTokenizer::has_next() const
 }
 bool StringTokenizer::is_delim(char ch) const
 {
-		return delims.find_first_of(ch) != string::npos;
+		return delims.find_first_of(ch) != std::string::npos;
 }
 
 
@@ -2333,21 +2333,21 @@ const char * StringTokenizer::operator ()()
 		throw CExpc ("Exception in StringTokenizer::operator ()");
 	return ret_val;
 }
-string StringTokenizer::next_token ()
+std::string StringTokenizer::next_token ()
 {
 	const char* s = operator()();
 	if (s) 
 		return s;
 	else 
-		return string();
+		return std::string();
 }
 
 
 
 
-string ConvertASCIIToHtmlSymbols(const string& txt)
+std::string ConvertASCIIToHtmlSymbols(const std::string& txt)
 {
-	string out;
+	std::string out;
 	char asciiCode[2];
 	asciiCode[1] = 0;
 	for( int i=0; i<txt.length(); i++ )
@@ -2381,7 +2381,7 @@ string ConvertASCIIToHtmlSymbols(const string& txt)
 }
 
 
-bool  MakeDir(const string& txt)
+bool  MakeDir(const std::string& txt)
 {
 	#ifdef WIN32
 		return _mkdir(txt.c_str()) != -1;
@@ -2395,7 +2395,7 @@ bool  MakeDir(const string& txt)
 
 
 
-bool RemoveWithPrint (const string& FileName)
+bool RemoveWithPrint (const std::string& FileName)
 {
     if (FileExists(FileName.c_str()))
 		if (remove(FileName.c_str()))
@@ -2468,11 +2468,11 @@ bool RmlMoveFile(const char *oldpath, const char *newpath)
   return true;
 }
 
-string BuildRMLPath (const char* s)
+std::string BuildRMLPath (const char* s)
 {
-    string path = s;
+    std::string path = s;
     size_t i = path.find("$RML");
-    if (i != string::npos)
+    if (i != std::string::npos)
         path.replace(i, 4, GetRmlVariable());
     return path;
 }
@@ -2495,22 +2495,22 @@ int CountBits(QWORD value)
 size_t FindFloatingPoint(const char* str)
 {
 	if(!str || sizeof(str)<3) return -1;
-	string s(str);
+	std::string s(str);
 	size_t c = s.rfind(",");
-	if (c == string::npos) 
+	if (c == std::string::npos) 
 		c = s.rfind(".");
-	return c == string::npos ? -1 : c;
+	return c == std::string::npos ? -1 : c;
 }
 
-string utf8_to_string(const char *utf8str, const locale& loc)
+std::string utf8_to_string(const char *utf8str, const locale& loc)
 {
 	// UTF-8 to wstring
 	wstring_convert<codecvt_utf8<wchar_t>> wconv;
 	wstring wstr = wconv.from_bytes(utf8str);
-	// wstring to string
+	// wstd::string to std::string
 	vector<char> buf(wstr.size());
 	use_facet<ctype<wchar_t>>(loc).narrow(wstr.data(), wstr.data() + wstr.size(), '?', buf.data());
-	return string(buf.data(), buf.size());
+	return std::string(buf.data(), buf.size());
 }
 
 // use Construct On First Use Idiom because static std::locales  crush under Visual Studio
@@ -2552,7 +2552,7 @@ struct TRmlLocales {
 
 static TRmlLocales RmlLocales;
 
-string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
+std::string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {
 		return utf8_to_string(utf8str, RmlLocales.Russian());
 	}
@@ -2568,7 +2568,7 @@ std::string to_utf8(const std::string& str, const std::locale& loc = std::locale
 	return cvt.to_bytes(wstr);
 }
 
-string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua) {
+std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {
 		return to_utf8(str, RmlLocales.Russian());
 	}

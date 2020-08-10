@@ -35,7 +35,7 @@ bool CTrigramModel::register_tags_from_ngram_file()
 	while (fgets(buffer, 1024, fp))
 	{
 		if (buffer[0]=='\t') { continue; }
-		string q = strtok(buffer,"\t ");;
+		std::string q = strtok(buffer,"\t ");;
 		register_tag(q);
         if (m_RegisteredTags.size() > MaxTagsCount)
         {

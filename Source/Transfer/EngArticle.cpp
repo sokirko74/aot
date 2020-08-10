@@ -12,7 +12,7 @@ void update_article(const CSemPattern& P, CEngSemNode& N)
 		for (long i=0; i < P.m_ArticleCorteges.size(); i++)
 		{
 			const TCortege& C = P.m_ArticleCorteges[i];
-			string ArticleStr = (const char*)P.m_pRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
+			std::string ArticleStr = (const char*)P.m_pRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
 		    if (ArticleStr != "")
 			{
               if (ArticleStr == "the|NOUN")
@@ -69,7 +69,7 @@ void CEngSemStructure::GetOutcomingInClauseRelations (long NodeNo, vector<long>&
 
 
 
-bool CEngSemStructure::HasOutRelationByName (long NodeNo, string RelationStr) const
+bool CEngSemStructure::HasOutRelationByName (long NodeNo, std::string RelationStr) const
 {
 	vector<long> Rels;
 	GetOutcomingInClauseRelations(NodeNo, Rels);
@@ -81,7 +81,7 @@ bool CEngSemStructure::HasOutRelationByName (long NodeNo, string RelationStr) co
 };
 
 
-bool CEngSemStructure::CheckAllOutcomingRelationsIfAnyExists (long NodeNo, string RelationStr) const
+bool CEngSemStructure::CheckAllOutcomingRelationsIfAnyExists (long NodeNo, std::string RelationStr) const
 {
 	vector<long> Rels;
 	GetOutcomingInClauseRelations(NodeNo, Rels);
@@ -107,7 +107,7 @@ bool CEngSemStructure::HasOutRelationByGrammems(long NodeNo, QWORD Grammems) con
 	return false;
 }
 
-int CEngSemStructure::GetOutRelationByWord(long NodeNo, string Word) const
+int CEngSemStructure::GetOutRelationByWord(long NodeNo, std::string Word) const
 {
 	vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);

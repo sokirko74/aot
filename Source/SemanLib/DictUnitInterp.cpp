@@ -86,8 +86,8 @@ WORD CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
 		{
 			if (C.m_DomItemNos[0] == RossDoc->A0LexFunctNo)
 			{
-				string Word = RossDoc->GetDomItemStrInner(C.m_DomItemNos[1]);
-				string S =  (C.m_DomItemNos[2] != -1)  ? RossDoc->GetDomItemStrInner(C.m_DomItemNos[2]) : "0";
+				std::string Word = RossDoc->GetDomItemStrInner(C.m_DomItemNos[1]);
+				std::string S =  (C.m_DomItemNos[2] != -1)  ? RossDoc->GetDomItemStrInner(C.m_DomItemNos[2]) : "0";
 				long MeanNum = atoi(S.c_str());
 				if (MeanNum == 0) MeanNum = 1;
 				long un = RossDoc->LocateUnit(Word.c_str(), MeanNum);

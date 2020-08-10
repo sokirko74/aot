@@ -16,7 +16,7 @@ int CThesaurus::GetConceptNoByConceptId (long ConceptId) const
 	return -1;
 
 };
-int CThesaurus::GetConceptNoByConceptStr (string ConceptStr) const
+int CThesaurus::GetConceptNoByConceptStr (std::string ConceptStr) const
 {
  for (int i=0; i < m_Concepts.size(); i++)
   if (m_Concepts[i].m_ConceptStr == ConceptStr)
@@ -25,7 +25,7 @@ int CThesaurus::GetConceptNoByConceptStr (string ConceptStr) const
   return -1;
 };
 
-bool CThesaurus::LoadConcepts(string FileName)
+bool CThesaurus::LoadConcepts(std::string FileName)
 {
 	m_Concepts.clear();
 	FILE* fp = fopen (FileName.c_str(), "r");
@@ -36,7 +36,7 @@ bool CThesaurus::LoadConcepts(string FileName)
 		fclose(fp);
 		return false;
 	}	
-	string Header = buff;
+	std::string Header = buff;
 	Trim(Header);
 	if (Header != "ConceptId;ConceptStr;ShortComments;")
 	{

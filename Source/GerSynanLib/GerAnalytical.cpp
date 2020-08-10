@@ -3,7 +3,7 @@
 #include  "GerSentence.h"
 
 const size_t TrennbarePraefixeCount = 31;
-const string TrennbarePraefixe[TrennbarePraefixeCount] = {
+const std::string TrennbarePraefixe[TrennbarePraefixeCount] = {
 "AB",		"AN",		"AUF",		"AUS",		"BEI",		"DAR",		"DURCH",	"EIN",		
 "FEHL",		"FEST",		"HEIM",		"HINZU",	"IRRE",		"LOS",		"MIT",		"NACH",			
 "PREIS",	"STAND",	"STATT",	"TEIL",		"UEBER",	"UM",		"UNTER",	"VOR",		
@@ -58,7 +58,7 @@ void CGerSentence::BuildTrennbarePraefixe()
 					)
 			)
 		{
-			string Praefix = m_Words[PrefixWordNo].m_strWord;
+			std::string Praefix = m_Words[PrefixWordNo].m_strWord;
 
 			// going to the left, searching for the main verb
 			
@@ -69,7 +69,7 @@ void CGerSentence::BuildTrennbarePraefixe()
 				for (int j = 0;  j < MainWord.m_Homonyms.size(); j++)
 					if (	MainWord.m_Homonyms[j].HasPos(gVER)	)
 					{
-						string  NewWord = Praefix+MainWord.m_strWord;
+						std::string  NewWord = Praefix+MainWord.m_strWord;
 						// checking, if morphology has such a verb
 						vector<CFormInfo> Paradigms;
 						GetOpt()->GetLemmatizer()->CreateParadigmCollection(false,NewWord, true, false, Paradigms);
@@ -101,7 +101,7 @@ void CGerSentence::BuildTrennbarePraefixe()
 		const CTrennbarPrefixHyp& H = Hypots[i];
 		CSynWord& MainWord = m_Words[H.m_MainWord.m_WordNo];
 
-		string Praefix = m_Words[H.m_PrefixWordNo].m_strWord;
+		std::string Praefix = m_Words[H.m_PrefixWordNo].m_strWord;
 		MainWord.m_TrennbarePraefixWordNo = H.m_PrefixWordNo;
 		MainWord.m_Homonyms[H.m_MainWord.m_HomonymNo].SetLemma(Praefix+MainWord.m_Homonyms[H.m_MainWord.m_HomonymNo].m_strLemma);
         MainWord.SetWordStr(Praefix + "-" +MainWord.m_strWord, GetOpt()->m_Language);
@@ -332,7 +332,7 @@ bool UniteLeftAndRightPart(CGerSentence& C, const CDividedUnionInfo Info)
 	W.DeleteMarkedHomonymsBeforeClauses();
 	W.m_Homonyms[0].m_bPassive = Info.m_bPassive;
 
-	string dump = AuxWord.m_strWord + " " +W.m_strWord;
+	std::string dump = AuxWord.m_strWord + " " +W.m_strWord;
 	if (Info.m_RAP.size() == 2)
 		dump += " "+C.m_Words[Info.m_RAP.m_iLastWord].m_strWord;
 	rml_TRACE("divided analytical form \"%s\" was created\n", dump.c_str());
@@ -627,7 +627,7 @@ void UnitNormalCompactAnalyticalForms(CGerSentence &C, int StartWordNo, int Last
 	assert(C.m_Words[LastWordNo].m_Homonyms.size() == 1);
 
 	// setting m_MainVerbNo
-	string dump = C.m_Words[LastWordNo].m_strWord;
+	std::string dump = C.m_Words[LastWordNo].m_strWord;
 	for (int i = LastWordNo; i>StartWordNo;i--)
 	{
 		C.m_Words[i].m_MainVerbs.push_back(i-1);
@@ -765,10 +765,10 @@ void BuildZuForms(CGerSentence &C)
 		W.m_strWord =  "zu-"+W.m_strWord;
 
 		QWORD g = (gAllVerbClasses & W.m_Homonyms[0].m_iGrammems) |  _QM(gZuVerbForm);
-        string NewGramCodes;
+        std::string NewGramCodes;
 		if (!C.GetGerGramTab()->GetGramCodeByGrammemsAndPartofSpeechIfCan(gVER, g, NewGramCodes))
 		{
-			string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(g);
+			std::string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(g);
 			ErrorMessage("Cannot find Gramtab line  for "+ debug);
 		}
         else  {

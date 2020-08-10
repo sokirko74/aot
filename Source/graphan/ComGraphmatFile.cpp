@@ -29,7 +29,7 @@ STDMETHODIMP CComGraphmatFile::GetLineCount(UINT *Count)
 STDMETHODIMP CComGraphmatFile::GetWord(UINT LineNo, BSTR* s)
 {
     try {
-		string buf(GetUnits()[LineNo].GetToken(), GetUnits()[LineNo].GetTokenLength());
+		std::string buf(GetUnits()[LineNo].GetToken(), GetUnits()[LineNo].GetTokenLength());
 		*s =  _bstr_t(buf.c_str()).copy();
 		return S_OK;
 	}
@@ -41,11 +41,11 @@ STDMETHODIMP CComGraphmatFile::GetWord(UINT LineNo, BSTR* s)
 
 
 
-extern bool GetDescriptorStr(int DescriptorNo, string& Result);
+extern bool GetDescriptorStr(int DescriptorNo, std::string& Result);
 
 STDMETHODIMP CComGraphmatFile::GetDescriptorStr(UINT DescriptorNo, BSTR *result)
 {
-	string S;
+	std::string S;
 	if (!::GetDescriptorStr(DescriptorNo,S))
 		return E_FAIL;
 	*result =  _bstr_t(S.c_str()).copy();

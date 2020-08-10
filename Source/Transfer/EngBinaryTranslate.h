@@ -9,14 +9,14 @@ class CEngSemNode;
 
 struct translate_option_t{
 private:
-	string	force_lemm;
+	std::string	force_lemm;
 	int	force_pos;
 	UINT	force_grammems;
 	bool	has_grammems;
 public:
 	void	set_force_lemm(const char *str) {force_lemm = str;}
 	bool	has_force_lemm()		{return !force_lemm.empty();}
-	string&	get_force_lemm()		{return force_lemm;}
+	std::string&	get_force_lemm()		{return force_lemm;}
 
 	void	set_force_pos(int pos)		{force_pos = pos;}
 	bool	has_force_pos()			{return force_pos != -1;}
@@ -41,8 +41,8 @@ public:
 //===========================================================================
 
 struct  translate_result_t{
-	string str;
-	string prefix, postfix;
+	std::string str;
+	std::string prefix, postfix;
 };
 
 
@@ -79,12 +79,12 @@ public:
 	
 	void SetData(const CSemanticsHolder* pData);
 	
-	string create_form_by_id(long EngId, QWORD eng_grammems) const;
-	string create_norm_by_id(long RusId) const;
+	std::string create_form_by_id(long EngId, QWORD eng_grammems) const;
+	std::string create_norm_by_id(long RusId) const;
 	
 
 	// поставить артикль a или an и пробел. Первый символ s не должен быть пробелом
-	string an_article_before(const string &s) const;
+	std::string an_article_before(const std::string &s) const;
 
 	void synthesize(CEngSemWord& EngWord) const;
 	void synthesize_by_node(CEngSemNode& Node) const;
@@ -93,8 +93,8 @@ public:
 
 	void transliterate(CEngSemWord& EngWord);
 	
-	long GetParadigmIdByLemma(MorphLanguageEnum langua,  string str, UINT pos = -1, bool bProper=false) const;
-	QWORD GetFixedGrammemsByLemma(MorphLanguageEnum langua, string str, UINT pos, bool bProper) const;
+	long GetParadigmIdByLemma(MorphLanguageEnum langua,  std::string str, UINT pos = -1, bool bProper=false) const;
+	QWORD GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, UINT pos, bool bProper) const;
 
 	const CRossHolder* GetRossHolder (DictTypeEnum type) const;
 	const CLemmatizer* GetRusLemmatizer () const;
@@ -117,9 +117,9 @@ private:
 	bool has_not_english_comparative(long Id) const;
 
 
-	bool starts_with(const string &s, const StringVector &starts) const;
+	bool starts_with(const std::string &s, const StringVector &starts) const;
 
-	void init_list_from_ross(const CRossHolder* RossHolder, const string &list_name, StringVector &res);
+	void init_list_from_ross(const CRossHolder* RossHolder, const std::string &list_name, StringVector &res);
 
 private:
 	vector<translate_result_t> result_vec;

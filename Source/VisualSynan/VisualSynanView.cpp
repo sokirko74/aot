@@ -622,7 +622,7 @@ int CVisualSynanView::OnNeedText( UINT id, NMHDR * pNMHDR, LRESULT * pResult )
 			BOOL bRes = GetDocument()->GetActiveHomDescr(m_iActiveSentenceTT,m_iActiveWordTT,strLemma,strGramChar);
 			if(bRes)
 			{
-				string s = string((const char*)strLemma) + string(" ") + string((const char*)strGramChar);
+				std::string s = std::string((const char*)strLemma) + std::string(" ") + std::string((const char*)strGramChar);
 				if (s.length() > 80)
 				{
 					s.erase(76); 

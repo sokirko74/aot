@@ -352,7 +352,7 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 		AssertValidGraph();
 		//*	 
-		string Q = Format 
+		std::string Q = Format 
 			("===== Clause %i ==== \n LexVariantCount = %i\n %s \n Weight = %i, %s \n", 
 			ClauseNo, 
 			I.m_BestLexVariants.size(),
@@ -500,7 +500,7 @@ void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
 			W.m_ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, W.m_Lemma,  0);
 			R.m_Nodes[i].DelAllInterps();
 
-			string UnitStr = W.m_Lemma;
+			std::string UnitStr = W.m_Lemma;
 			EngRusMakeLower(UnitStr);
 			WORD UnitNo  = R.GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 			if (UnitNo != ErrUnitNo)
@@ -948,14 +948,14 @@ struct CClauseComplexity
 	  m_ClauseNo = ClauseNo;
 	  m_Complexity = Complexity;
 	};
-	string GetStr()
+	std::string GetStr()
 	{
 	   return Format ("Клауза=%i, Сложность=%.2f",
 		   m_ClauseNo, m_Complexity );
 	};
 };
 
-string CRusSemStructure::GetClauseComplexitiesStr()
+std::string CRusSemStructure::GetClauseComplexitiesStr()
 {
    vector<CClauseComplexity> ComplexClauses;
    for (long j=0;j <m_AlreadyBuiltClauseVariants.size(); j++)
@@ -983,9 +983,9 @@ string CRusSemStructure::GetClauseComplexitiesStr()
 	   };
 
    };
-   string Result;
+   std::string Result;
    for (long j=0;j < ComplexClauses.size();j++)
-	   Result += ComplexClauses[j].GetStr() + string("\n");
+	   Result += ComplexClauses[j].GetStr() + std::string("\n");
    return Result;
 
 };
@@ -1004,11 +1004,11 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 	  for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i<= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
 	  {
 		TCortege C = GetCortege(GetRoss(Ross), i);
-		string S = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		std::string S = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		Trim(S);
 		if (!m_SemCoefs.ReadOneCoef (S.c_str()))
 		  {
-			  ErrorMessage (string(S) + string(" is not recognized as a semantic coefficient"));
+			  ErrorMessage (std::string(S) + std::string(" is not recognized as a semantic coefficient"));
 		  };
 	  };
 
@@ -1022,7 +1022,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
    		long ItemNo = GetCortege(GetRoss(Ross),i).m_DomItemNos[0];
 		if (ItemNo != -1)
 		{
-          string OneSynRel =  GetRossHolder(Ross)->GetDomItemStrInner(ItemNo);
+          std::string OneSynRel =  GetRossHolder(Ross)->GetDomItemStrInner(ItemNo);
 		  m_WeakSynRels.push_back(OneSynRel);
 		};
 	  };
@@ -1212,16 +1212,16 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 		ConvertParticipleTreeToClause();
 
-		string S = Format("Число слов в предложении %i\n Число запросов к словарю: %i\n Лучший вариант клауз : %i (из %i)\n",
+		std::string S = Format("Число слов в предложении %i\n Число запросов к словарю: %i\n Лучший вариант клауз : %i (из %i)\n",
 			m_piSent->m_Words.size(), Queries.size(), BestClauseVariantsCombinationNo+1, m_ClauseCombinationVariantsCount);
 
 		EndTimer("Общее время работы");
 
 
 
-		m_TimeStatictics =    string(GetStrRepresentation().c_str()) + S;
+		m_TimeStatictics =    std::string(GetStrRepresentation().c_str()) + S;
 
-		m_TimeStatictics += GetClauseComplexitiesStr()+string("\n");
+		m_TimeStatictics += GetClauseComplexitiesStr()+std::string("\n");
 
 		S = Format("==========\n Вес предложения: %i\n", BestClauseVariantsCombinationWeight);
 		m_ClausePropertiesProtocol +=  S;
@@ -1241,7 +1241,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 		m_ClauseVariantsStatistics = "";
 		for (long j=0;j <m_AlreadyBuiltClauseVariants.size(); j++)
-			m_ClauseVariantsStatistics += m_AlreadyBuiltClauseVariants[j].GetStr() + string ("\n");
+			m_ClauseVariantsStatistics += m_AlreadyBuiltClauseVariants[j].GetStr() + std::string ("\n");
 
 		return  BestClauseVariantsCombinationWeight;
 	}
@@ -1254,7 +1254,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 
 
-bool CRusSemStructure::GetSyntaxTreeByText(string text, int ClauseVarNo, string& Graph)
+bool CRusSemStructure::GetSyntaxTreeByText(std::string text, int ClauseVarNo, std::string& Graph)
 {
 	try 
 	{
@@ -1281,7 +1281,7 @@ bool CRusSemStructure::GetSyntaxTreeByText(string text, int ClauseVarNo, string&
 	};
 }
 
-bool CRusSemStructure::SetLemmasToReplace(string LemmasToReplace)
+bool CRusSemStructure::SetLemmasToReplace(std::string LemmasToReplace)
 {
 	m_SynthLemmaToReplace.clear();
 	
@@ -1291,13 +1291,13 @@ bool CRusSemStructure::SetLemmasToReplace(string LemmasToReplace)
 	{
 		char lemma1[255];
 		char lemma2[255];
-		string OnePair = tok.val();
+		std::string OnePair = tok.val();
 		if (sscanf(OnePair.c_str(), "%[^/]/%[^/]", lemma1, lemma2) != 2)
 			return false;
-		string lem1=lemma1;
+		std::string lem1=lemma1;
 		Trim(lem1);
 		if (lem1.empty()) return false;
-		string lem2=lemma2;
+		std::string lem2=lemma2;
 		Trim(lem2);
 		if (lem2.empty()) return false;
 		m_SynthLemmaToReplace[lem1] = lem2;

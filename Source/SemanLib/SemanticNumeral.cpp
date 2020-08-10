@@ -54,13 +54,13 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 			continue;
 		};
 		vector<CFormInfo> ParadigmCollection;
-		string WordForm = NumeralToNumber[i].m_Cardinal;
+		std::string WordForm = NumeralToNumber[i].m_Cardinal;
 		piRusLemmatizer->CreateParadigmCollection(true, WordForm, false, false, ParadigmCollection);
 		// ищем числительное
 		long k=0;
 		for (; k < ParadigmCollection.size(); k++)
 		{
-			string AnCode = ParadigmCollection[k].GetAncode(0);
+			std::string AnCode = ParadigmCollection[k].GetAncode(0);
 			BYTE POS = Agramtab->GetPartOfSpeech(AnCode.c_str());
             if (NumeralToNumber[i].m_bNoun)
             {
@@ -76,7 +76,7 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 		// ищем родительный падеж
 		for (k=0; k < P.GetCount(); k++)
 		{
-			string AnCode = P.GetAncode(k);
+			std::string AnCode = P.GetAncode(k);
 			QWORD Grammems;
 			if (!Agramtab->GetGrammems(AnCode.c_str(), Grammems))
 				throw CExpc ("Bad ancode in  BuildGenitFormOfCardinal");
@@ -91,7 +91,7 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 
 
 
-double GetGenitFormNumeral(string word)
+double GetGenitFormNumeral(std::string word)
 {
 	for(int i = 0 ; i < GenitFormsOfCardinal.size() ; i++ )
 		if( word == GenitFormsOfCardinal[i] )
@@ -104,7 +104,7 @@ double GetGenitFormNumeral(string word)
 // генитивных вариантов числительного.
 // Если такого генитивного  варианта не было обнаружено, то 
 // проверяются некоторые фонетические  варианты  этих префиксов.
-int GetNumeralPrefixGenitForm(string word, int& PrefixLength)
+int GetNumeralPrefixGenitForm(std::string word, int& PrefixLength)
 {
 	PrefixLength = -1;
 	long NumLine = -1;
@@ -171,7 +171,7 @@ int GetNumeralPrefixGenitForm(string word, int& PrefixLength)
 	return NumLine;
 };
 
-double FindInTable(string word)
+double FindInTable(std::string word)
 {
 	double Result = GetOrdinalNumeral(word);
 	if (Result == -1)
@@ -221,12 +221,12 @@ double ConvertNumeralByTable (vector<CRusSemWord>::const_iterator Start, vector<
 };
 
 
-string ConvertOneWordOrdinalNumeral (const string&  InputOrdinal)
+std::string ConvertOneWordOrdinalNumeral (const std::string&  InputOrdinal)
 {
-  string Result = IntToStr(GetOrdinalNumeral(InputOrdinal));
+  std::string Result = IntToStr(GetOrdinalNumeral(InputOrdinal));
   if (Result == "-1") 
   {
-    string Word = InputOrdinal;
+    std::string Word = InputOrdinal;
 	long PrefixNumber = 0;
 
     for (;;)
@@ -252,10 +252,10 @@ string ConvertOneWordOrdinalNumeral (const string&  InputOrdinal)
 };
 
 
-string ConvertHugeNumeral  (vector<CRusSemWord>::const_iterator Start, vector<CRusSemWord>::const_iterator End, QWORD Order)
+std::string ConvertHugeNumeral  (vector<CRusSemWord>::const_iterator Start, vector<CRusSemWord>::const_iterator End, QWORD Order)
 {
-  string OrderStr = FindByNumber(Order);
-  string Result;
+  std::string OrderStr = FindByNumber(Order);
+  std::string Result;
   if (Order == 1)
   {
        Result = IntToStr(ConvertNumeralByTable (Start, End));
@@ -288,7 +288,7 @@ bool FullAdjWithNumeralPrefix (const CRusSemNode& Node)
 	  if ( GetNumeralPrefixGenitForm(Node.m_Words[0].m_Word, dummy) == -1) return false;
 	  if (Node.m_Words[0].m_Word.substr (0, 3) == "СТО")
 	  {
-		  string Word = Node.m_Words[0].m_Word.substr(3);
+		  std::string Word = Node.m_Words[0].m_Word.substr(3);
 		  if (GetNumeralPrefixGenitForm(Word, dummy) != -1) return true;
 	  };
 	  if  (   (Node.m_Words[0].m_Word.substr (0, 3) == "СТО")
@@ -298,9 +298,9 @@ bool FullAdjWithNumeralPrefix (const CRusSemNode& Node)
 	  return true;
 };
 
-string ConvertRusNumeral(const CRusSemNode& Node)
+std::string ConvertRusNumeral(const CRusSemNode& Node)
 {
-  string Result;
+  std::string Result;
   if ( Node.m_Words.size() == 1 && ( FindFloatingPoint(Node.m_Words[0].m_Word.c_str()) != -1 ||  Node.m_Words[0].HasOneGrammem(rComparative)) )
 	  Result = Node.m_Words[0].m_Word;
   else
@@ -322,7 +322,7 @@ void InterpretAdjectivesWithNumeral(CRusSemStructure& R, long NodeNo)
    };
 
 };
-string CRusSemStructure::ConvertArabictoRusNumeral(const CRusSemNode& Node)
+std::string CRusSemStructure::ConvertArabictoRusNumeral(const CRusSemNode& Node)
 {
 return ConvertRusNumeral(Node);
 }
@@ -354,7 +354,7 @@ void CRusSemStructure::ConvertRusNumeralsToArabic()
 	      ||   FullAdjWithNumeralPrefix(m_Nodes[NodeNo])
 		)
 	{
-		string LemmaAfterHyphen;
+		std::string LemmaAfterHyphen;
 		int pos =  m_Nodes[NodeNo].m_Words[0].m_Lemma.find ("-");
 		
 		if (pos != -1)
@@ -363,7 +363,7 @@ void CRusSemStructure::ConvertRusNumeralsToArabic()
 			m_Nodes[NodeNo].m_Words[0].m_Lemma = m_Nodes[NodeNo].m_Words[0].m_Lemma.substr(0,pos);
 		};
 
-	  string  ConvertedWord;
+	  std::string  ConvertedWord;
 	  int dummy;
 	  if (     (m_Nodes[NodeNo].IsPrimitive())
 	      &&  (    m_Nodes[NodeNo].m_Words[0].HasPOS(NUMERAL_P)
@@ -390,7 +390,7 @@ void CRusSemStructure::ConvertRusNumeralsToArabic()
        else
 		 ConvertedWord = ConvertRusNumeral(m_Nodes[NodeNo]);
 
-		string  ConvertedWordHyphen = "-1";
+		std::string  ConvertedWordHyphen = "-1";
 		
 		if (ConvertedWord == "-1") 
 		{
@@ -474,7 +474,7 @@ void CRusSemStructure::NumeralAdverbRule()
 	for (long NumNodeNo=0; NumNodeNo < m_Nodes.size();NumNodeNo++)
 		if (m_Nodes[NumNodeNo].IsPrimitive())
 		{
-			string Word = m_Nodes[NumNodeNo].m_Words[0].m_Word;
+			std::string Word = m_Nodes[NumNodeNo].m_Words[0].m_Word;
 			EngRusMakeUpper(Word);
 			long NumeralValue = IsAdverbRule(Word);
 			if  (NumeralValue == -1)  continue;

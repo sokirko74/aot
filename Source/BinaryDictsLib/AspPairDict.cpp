@@ -56,7 +56,7 @@ bool CAspPairDict::Load()
 {
 	
 	try {
-		string Path = GetRegistryString("Software\\Dialing\\RUSSIAN_ASPECT_DICT\\DictPath");
+		std::string Path = GetRegistryString("Software\\Dialing\\RUSSIAN_ASPECT_DICT\\DictPath");
 
 		ReadVector(Path, pair_vec1);
 		if (pair_vec1.size() == 0) return false;

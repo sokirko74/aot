@@ -18,7 +18,7 @@ int get_id(std::string str, DwordVector &res, bool is_left)
 	
     vector<CFormInfo> ParadigmCollection;
 
-	string s = str;
+	std::string s = str;
 	if (!MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(false, s, false, false,  ParadigmCollection))
 		throw CExpc(Format("Cannot lemmatize %s by Russian lemmatizer" , str.c_str()));
 

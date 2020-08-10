@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 		if (argc  < 3) 
 			PrintUsageAndExit();
 
-		string strErr;
+		std::string strErr;
 		if (!IsRmlRegistered(strErr))
 		{
 			printf ("Error: %s!", strErr.c_str());
@@ -48,16 +48,16 @@ int main(int argc, char* argv[])
 			printf ("False language - \"%s\"\n",argv[1]);
 			return 1;
 		};
-		string InputFile = argv[2];
+		std::string InputFile = argv[2];
 
-		string XmlFile,GraFile,SentsFile,AbbrsFile;
+		std::string XmlFile,GraFile,SentsFile,AbbrsFile;
 		bool bEnableSentenceBreaker = true;
 		bool bWriteNonPrintable = false;
 		bool bUseParagraphTagToDivide = false;
-		string FileName;
+		std::string FileName;
 		for (size_t i=3; i<argc; i++)
 		{
-			string s = argv[i];
+			std::string s = argv[i];
 			EngMakeLower(s);
 			if (		(s == "-help") 
 					||	(s == "--help") 
@@ -170,7 +170,7 @@ int main(int argc, char* argv[])
 			};
 			for (size_t i=1; i < Count; i++)
 			{
-				string s = Graphan.GetToken(i);
+				std::string s = Graphan.GetToken(i);
 				if (!Graphan.GetUnit(i).IsSoft())
 					fprintf (sents,"%s ",s.c_str());
 				if (Graphan.HasDescr(i,OSentEnd))
@@ -196,7 +196,7 @@ int main(int argc, char* argv[])
 
 				if (bAbbrStart)
 				{
-					string s = Graphan.GetToken(i);
+					std::string s = Graphan.GetToken(i);
 					if (!Graphan.GetUnit(i).IsSoft())
 						fprintf (abbrs,"%s ",s.c_str());
 					
@@ -213,8 +213,8 @@ int main(int argc, char* argv[])
 				
 		for (size_t i=1; i < Count; i++)
 		{
-			string s1 = Graphan.GetUppercaseToken(i);
-			string s2 = Graphan.GetToken(i);
+			std::string s1 = Graphan.GetUppercaseToken(i);
+			std::string s2 = Graphan.GetToken(i);
 			RmlMakeUpper(s2, Graphan.m_Language);
 			assert (s1 == s2);
 		};

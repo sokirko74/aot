@@ -7,7 +7,7 @@
 //=========  CStringRelation ================
 //===========================================
 
-CStringRelation::CStringRelation (const string& Source, const string& Target)
+CStringRelation::CStringRelation (const std::string& Source, const std::string& Target)
 {
 	m_Source = Source;
 	m_Target = Target;
@@ -32,16 +32,16 @@ bool CStringRelation::operator < (const CStringRelation& X) const
 //=========  CHierarchyNode ================
 //===========================================
 
-CHierarchyNode::CHierarchyNode (const string& Name, const CNodePlace& p)
+CHierarchyNode::CHierarchyNode (const std::string& Name, const CNodePlace& p)
 {
 	m_Name = Name;
 	m_Point = p;
 };
-CHierarchyNode::CHierarchyNode (const string& Name)
+CHierarchyNode::CHierarchyNode (const std::string& Name)
 {
 	m_Name = Name;
 };
-const string& CHierarchyNode::GetName() const 
+const std::string& CHierarchyNode::GetName() const 
 {
 	return m_Name;
 };
@@ -55,7 +55,7 @@ CHierarchyRelation::CHierarchyRelation ()
 
 };
 
-CHierarchyRelation::CHierarchyRelation (size_t _node1,size_t _node2, string _name, bool _bWork)
+CHierarchyRelation::CHierarchyRelation (size_t _node1,size_t _node2, std::string _name, bool _bWork)
 {
 	node1 = _node1;
 	node2 = _node2;
@@ -84,10 +84,10 @@ CHierarchyHolder::~CHierarchyHolder()
 	rml_TRACE ("destructor HierarchyHolder");
 };
 
-void CHierarchyHolder::WriteToRoss(string Entry)
+void CHierarchyHolder::WriteToRoss(std::string Entry)
 {
 
-	string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
+	std::string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
 	WORD UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo != ErrUnitNo)
 		GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
@@ -106,18 +106,18 @@ void CHierarchyHolder::MySerialize(bool IsStoring, bool WithoutView )
 	if (IsStoring)
 	{
         assert (!WithoutView);
-		string NodesStr;
+		std::string NodesStr;
 
 		for (int i=0; i< Nodes.size(); i++)
 		{
-			string S = Format("%s %i %i\r\n", Nodes[i].GetName().c_str(), Nodes[i].m_Point.y, Nodes[i].m_Point.x);
+			std::string S = Format("%s %i %i\r\n", Nodes[i].GetName().c_str(), Nodes[i].m_Point.y, Nodes[i].m_Point.x);
 			NodesStr += "NODE = "+S;
 		};
 
-		string RelationsStr;
+		std::string RelationsStr;
 		for (int i=0; i< Relations.size(); i++)
 		{
-			string S = Format("%s %s\r\n",Nodes[Relations[i].node1].GetName().c_str(), Nodes[Relations[i].node2].GetName().c_str());
+			std::string S = Format("%s %s\r\n",Nodes[Relations[i].node1].GetName().c_str(), Nodes[Relations[i].node2].GetName().c_str());
 			RelationsStr += "ISA = " + S;
 		};
 
@@ -141,7 +141,7 @@ void CHierarchyHolder::ReadFromRoss( bool WithoutView )
 	// TODO: add loading code here
 	Nodes.clear();
 	Relations.clear();
-	string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
+	std::string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
 	WORD UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo == ErrUnitNo) return;
 	{
@@ -272,11 +272,11 @@ void CHierarchyHolder::CreateRelation(int node1, int node2, bool bWork, bool Wit
 //==========================================
 struct LessStringRelation{
 
-	bool  operator () (const CStringRelation& X, const string& Source) const
+	bool  operator () (const CStringRelation& X, const std::string& Source) const
 	{
 		return X.m_Source < Source;
 	};
-	bool  operator () (const string& Source, const CStringRelation& X ) const
+	bool  operator () (const std::string& Source, const CStringRelation& X ) const
 	{
 		return Source < X.m_Source;
 	};
@@ -288,8 +288,8 @@ struct LessStringRelation{
 
 bool IsEqualOrHigherInHierarchy (CRossHolder* HostRoss, long HostItemNo,  CRossHolder* SlaveRoss, long SlaveItemNo, CHierarchyHolder* pHierarchyDoc)
 {
-   string Host = HostRoss->GetDomItemStrInner(HostItemNo);
-   string Slave = SlaveRoss->GetDomItemStrInner(SlaveItemNo);
+   std::string Host = HostRoss->GetDomItemStrInner(HostItemNo);
+   std::string Slave = SlaveRoss->GetDomItemStrInner(SlaveItemNo);
 
    if (Host == Slave) return true;
 
@@ -302,7 +302,7 @@ bool IsEqualOrHigherInHierarchy (CRossHolder* HostRoss, long HostItemNo,  CRossH
     return false; 
 };
 
-void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<string>& SemFets)
+void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<std::string>& SemFets)
 {
   for (int i=0; i < SemFets.size(); i++)
    for (int k=0; k < pHierarchyDoc->m_TransitiveRels.size(); k++)
@@ -312,7 +312,7 @@ void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<string>& 
 		 SemFets.push_back (pHierarchyDoc->m_TransitiveRels[k].m_Target);
 };
 
-void  IncludeHigherInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<string>& SemFets)
+void  IncludeHigherInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<std::string>& SemFets)
 {
   for (int i=0; i < SemFets.size(); i++)
    for (int k=0; k < pHierarchyDoc->m_TransitiveRels.size(); k++)
@@ -328,7 +328,7 @@ const int MaxLevelId = 30;
 
 // проверяет что все SF актанта с номером LeafId равны  ItemStr или 
 // ниже по иерархии
-bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const string& ItemStr, CHierarchyHolder* pHierarchyDoc)
+bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc)
 {
 	long ItemNo = Ross->GetRoss()->GetItemNoByItemStr (ItemStr.c_str(), Ross->SemFetDomNo);
 	assert (ItemNo != -1);

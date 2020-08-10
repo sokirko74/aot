@@ -47,14 +47,14 @@ void HTML::addOffset(unsigned long off)
 /***************************************************************************
  * Very simple parser
  */
-string HTML::GetTextFromHTMLBuffer(const char* Buffer, size_t BufferLen)
+std::string HTML::GetTextFromHTMLBuffer(const char* Buffer, size_t BufferLen)
 {
 	offsets.clear();
 
 	size_t cur_offset = 0, old_offset = 0;
-	string result;
+	std::string result;
 
-	string cur_tag, cur_amp;
+	std::string cur_tag, cur_amp;
 
 	bool next_read = true;
 
@@ -68,7 +68,7 @@ string HTML::GetTextFromHTMLBuffer(const char* Buffer, size_t BufferLen)
 	} state = normal;
 
 
-	stack<string> NotTextTags;
+	stack<std::string> NotTextTags;
 	BYTE ch;
 
 	while (cur_offset < BufferLen)
@@ -236,11 +236,11 @@ string HTML::GetTextFromHTMLBuffer(const char* Buffer, size_t BufferLen)
 }
 
 /*
-* Check tag in the string
+* Check tag in the std::string
 */
-bool HTML::checkTag(const string& str, const char* tag)
+bool HTML::checkTag(const std::string& str, const char* tag)
 {
-	string::const_iterator i = str.begin();
+	std::string::const_iterator i = str.begin();
 	const char* j;
 
 	for( ; i != str.end(); i++) if(!isspace(*i)) break;
@@ -259,9 +259,9 @@ bool HTML::checkTag(const string& str, const char* tag)
 /***************************************************************************
 * Very simple parser
 */
-string HTML::GetTextFromHtmlFile(string FileName)
+std::string HTML::GetTextFromHtmlFile(std::string FileName)
 {
-	string result;
+	std::string result;
 
 	FILE* fp = fopen(FileName.c_str(), "rb");
 	vector<char> buffer;

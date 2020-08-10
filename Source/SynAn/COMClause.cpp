@@ -155,7 +155,7 @@ STDMETHODIMP CCOMClause::get_Description(BSTR *pVal)
 	try
 	{
 
-		string S = " ";
+		std::string S = " ";
 		for(int i = 0 ; i < m_pClause->m_vectorConjs.size(); i++)		
 		{
 			int iConjIndex = m_pClause->m_vectorConjs[i].m_index;

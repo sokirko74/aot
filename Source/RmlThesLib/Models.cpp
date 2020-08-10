@@ -5,13 +5,13 @@
 #include "StdRmlThes.h"
 #include "Thesaurus.h"
 
-bool CThesaurus::LoadModelRelations(string Buff, CInnerModel &M) {
+bool CThesaurus::LoadModelRelations(std::string Buff, CInnerModel &M) {
     StringTokenizer Line(Buff.c_str(), ";");
 
     while (true) {
         const char *q = Line();
         if (q == 0) break;
-        string Rel = q;
+        std::string Rel = q;
 
         char s[200];
         CThesSynRelation R;
@@ -19,7 +19,7 @@ bool CThesaurus::LoadModelRelations(string Buff, CInnerModel &M) {
         if (sscanf(Rel.c_str(), "%[^(](%i,%i)", s, &R.m_Word1, &R.m_Word2) != 3)
             return false;
 
-        string Name = s;
+        std::string Name = s;
         Trim(Name);
         if (Name == "с_опр")
             R.m_Name = Coord;
@@ -42,13 +42,13 @@ bool CThesaurus::LoadModelRelations(string Buff, CInnerModel &M) {
 };
 
 
-bool CThesaurus::LoadAtomicGroups(string Buff, CInnerModel &M) {
+bool CThesaurus::LoadAtomicGroups(std::string Buff, CInnerModel &M) {
     StringTokenizer Line(Buff.c_str(), ";");
 
     while (true) {
         const char *q = Line();
         if (q == 0) break;
-        string SynGroup = q;
+        std::string SynGroup = q;
         Trim(SynGroup);
         CAtomGroup G;
         QWORD dummy = 0;
@@ -70,13 +70,13 @@ bool CThesaurus::LoadAtomicGroups(string Buff, CInnerModel &M) {
     return true;
 };
 
-bool CThesaurus::LoadGroups(string Buff, CInnerModel &M) {
+bool CThesaurus::LoadGroups(std::string Buff, CInnerModel &M) {
     StringTokenizer Line(Buff.c_str(), ";");
     assert (M.m_SynGroups.empty());
     while (true) {
         const char *q = Line();
         if (q == 0) break;
-        string SynGroup = q;
+        std::string SynGroup = q;
         Trim(SynGroup);
         CThesSynGroup G;
         char s[200];
@@ -96,14 +96,14 @@ bool CThesaurus::LoadGroups(string Buff, CInnerModel &M) {
     return true;
 };
 
-bool CThesaurus::LoadModels(string FileName) {
+bool CThesaurus::LoadModels(std::string FileName) {
     m_Models.clear();
     FILE *fp = fopen(FileName.c_str(), "r");
     if (!fp) return false;
     char buff[2000];
     if (!fgets(buff, 2000, fp))
         return false;
-    string Header = buff;
+    std::string Header = buff;
     Trim(Header);
     if (Header != "FreqCollocTypeId;Length;AtomGroups;Relations;Examples;Enabled;LoadTextForm;LanguageId;Groups;")
         return false;
@@ -114,7 +114,7 @@ bool CThesaurus::LoadModels(string FileName) {
         while (true) {
             const char *s = Line();
             if (s == 0) break;
-            string Field = s;
+            std::string Field = s;
             if (Field[0] == '"') {
                 if (Field[Field.length() - 1] != '"')
                     return false;

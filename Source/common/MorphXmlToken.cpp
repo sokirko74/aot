@@ -35,7 +35,7 @@ bool CXmlToken::IsImportantPunct() const
 
 class CRusCorpFeatures {
 public:
-    std::set<std::string> m_RusCorpFeatures;
+    std::set<string> m_RusCorpFeatures;
     CRusCorpFeatures()
     {
         m_RusCorpFeatures.insert("adv");
@@ -103,24 +103,24 @@ public:
 
 static CRusCorpFeatures  RusCorpFeatures;
 
-bool IsImportantRusCorpFeature(const string& s)
+bool IsImportantRusCorpFeature(const std::string& s)
 {
     return RusCorpFeatures.m_RusCorpFeatures.find(s) !=  RusCorpFeatures.m_RusCorpFeatures.end();
 }
 
-string CXmlMorphAnnot::BuildRusCorpAnnot() const
+std::string CXmlMorphAnnot::BuildRusCorpAnnot() const
 {
     StringTokenizer tok (m_GrammemsStr.c_str(), ", ");
     set<string> gs;
     while ( tok() )
     {
-        string s = tok.val();
+        std::string s = tok.val();
         EngRusMakeLower(s);
         if (IsImportantRusCorpFeature (s))
             gs.insert(s);
     }
 
-    string res;
+    std::string res;
     for (set<string>::const_iterator it = gs.begin(); it != gs.end(); it++)
         res += *it + "_";
     if (!res.empty())
@@ -128,7 +128,7 @@ string CXmlMorphAnnot::BuildRusCorpAnnot() const
     return res;
 }
 
-string POS_Dialing2MyStem(string pos)
+std::string POS_Dialing2MyStem(std::string pos)
 {
 	if (pos == "П") return "a"; else
 	if (pos == "С") return "s"; else
@@ -152,7 +152,7 @@ string POS_Dialing2MyStem(string pos)
 };
 
 
-string Grammem_Dialing2MyStem(string pos)
+std::string Grammem_Dialing2MyStem(std::string pos)
 {
 	if (pos == "ед") return "sg"; else
 	if (pos == "мн") return "pl"; else
@@ -204,7 +204,7 @@ string Grammem_Dialing2MyStem(string pos)
 
 };
 
-string POS_MyStem2Dialing(string pos)
+std::string POS_MyStem2Dialing(std::string pos)
 {
 	if (pos == "a") return "П"; else
 	if (pos == "s") return "С"; else
@@ -235,7 +235,7 @@ string POS_MyStem2Dialing(string pos)
 };
 
 
-bool IsMyStemSpecificGrammem(string g)
+bool IsMyStemSpecificGrammem(std::string g)
 {
 return 		(g == "indic") 
 		||	(g == "ash") 
@@ -252,7 +252,7 @@ return 		(g == "indic")
 		;
 }
 
-string Grammem_MyStem2Dialing(string pos)
+std::string Grammem_MyStem2Dialing(std::string pos)
 {
 	if (pos == "sg") return "ед"; else
 	if (pos == "pl") return "мн"; else

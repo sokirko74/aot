@@ -14,7 +14,7 @@ COborDic* NewOborDicRussian (CSyntaxOpt* Opt)
 };
 
 static const int SubConjsCount = 21;
-static const string strSubConjs[SubConjsCount] = {"ЧТО","ЧТОБЫ","ГДЕ","КОГДА","ЕСЛИ","ЗАЧЕМ","ОТЧЕГО",
+static const std::string strSubConjs[SubConjsCount] = {"ЧТО","ЧТОБЫ","ГДЕ","КОГДА","ЕСЛИ","ЗАЧЕМ","ОТЧЕГО",
 														 "ПОЧЕМУ","СКОЛЬКО","НАСКОЛЬКО","ЧЕМ",
 														 "ХОТЯ","КТО","ПОСКОЛЬКУ","ПОКА","КАК", "ОТКУДА","КУДА","КОТОРЫЙ","ЧЕЙ", "ДАБЫ"};
 

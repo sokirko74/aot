@@ -132,7 +132,7 @@ BOOL CChildFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 		{
 			LOGFONT lf;                        // Used to create the CFont.
 			memset(&lf, 0, sizeof(LOGFONT));   // Clear out structure.
-			string strFontSize = GetRegistryString( g_strFontSizeRegPath);
+			std::string strFontSize = GetRegistryString( g_strFontSizeRegPath);
 			lf.lfHeight = atoi(strFontSize.c_str());                  // Request a 20-pixel-high font
 			strcpy(lf.lfFaceName, GetRegistryString( g_strFontNameRegPath ).c_str());    //    with face name "Arial".
 			m_Font.CreateFontIndirect(&lf);    // Create the font.
@@ -164,7 +164,7 @@ void CChildFrame::OnRunSyntax()
 	ASSERT(m_pSynView && m_pEditView);
 	m_pSynView->Reset();
 
-	string str = m_pEditView->LockBuffer();
+	std::string str = m_pEditView->LockBuffer();
 	m_pEditView->UnlockBuffer();
 
 	int nBeg,nEnd;
@@ -243,19 +243,19 @@ void CChildFrame::OnFileShowgraphematicsresults()
 	GlobalOpenReport(report, "Graphan");
 }
 
-void ShowPlmLines (string  Name, LEMMATIZERLib::IPLMLineCollectionPtr piMorphPlmLines)
+void ShowPlmLines (std::string  Name, LEMMATIZERLib::IPLMLineCollectionPtr piMorphPlmLines)
 {
 	CString report;
 	for (size_t  k = 0; k < piMorphPlmLines->Count; k++)
 	{
-		string q = (const char*)piMorphPlmLines->Item[k]; 
+		std::string q = (const char*)piMorphPlmLines->Item[k]; 
 		//  delete some unuseful spaces...
 		int ii  = q.find_first_not_of(' ');
-		if (ii != string::npos)
+		if (ii != std::string::npos)
 		{
 			ii  = q.find_first_of(' ', ii);
 			int end = 0;
-			if (ii != string::npos)
+			if (ii != std::string::npos)
 				end  = q.find_first_not_of(' ', ii);
 			q.erase(ii+1, end-ii-1);
 

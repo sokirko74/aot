@@ -96,12 +96,12 @@ void evbuffer_setcb(struct evbuffer *buffer, evbuffer_cb cb, void *cbarg);
 
 
 /**
-  Find a string within an evbuffer.
+  Find a std::string within an evbuffer.
 
   @param buffer the evbuffer to be searched
-  @param what the string to be searched for
-  @param len the length of the search string
-  @return a pointer to the beginning of the search string, or NULL if the search failed.
+  @param what the std::string to be searched for
+  @param len the length of the search std::string
+  @return a pointer to the beginning of the search std::string, or NULL if the search failed.
  */
 EVENT2_EXPORT_SYMBOL
 unsigned char *evbuffer_find(struct evbuffer *buffer, const unsigned char *what, size_t len);

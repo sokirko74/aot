@@ -297,12 +297,12 @@ void CSemanticStrView::OnActivateView(BOOL bActivate, CView* pActivateView, CVie
 
 
 
-static void log(string  s)
+static void log(std::string  s)
 {
-	string FileName = "rossdev.log";
+	std::string FileName = "rossdev.log";
 
 	try {
-		string log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
+		std::string log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
 		FileName = log_path + FileName;
 	}
 	catch (...) {
@@ -314,12 +314,12 @@ static void log(string  s)
 }
 void CSemanticStrView::BuildTclGraph(CString S)
 {  
-   log (string("\nBuildTclGraphn"));
+   log (std::string("\nBuildTclGraphn"));
    if (S.IsEmpty()) return;
 
    char* str = new char[S.GetLength()+1]; 
    assert (str);
-   string CurrCommand;
+   std::string CurrCommand;
 
    try {
 	 strcpy  (str, S);
@@ -372,7 +372,7 @@ int CreateSynStr (ClientData clienData,
 	if (Doc->m_bBusy) return TCL_OK;
 	Doc->m_bBusy = true;
 	CSemanticStrView& SemStr = *((CSemanticStrView*)Doc->GetView());
-	string Graph;
+	std::string Graph;
 	if (!GetSemBuilder().m_RusStr.GetSyntaxTreeByText((const char*)text, atoi(argv[3]), Graph))
 	{
 		return TCL_ERROR;
@@ -418,7 +418,7 @@ bool bAnswer = false;
 UINT FindSituationsInThread    ( LPVOID pParam )
 {
 	bAnswer = false; 
-	log (string("\nFindSituationsInThread"));
+	log (std::string("\nFindSituationsInThread"));
 	int argc = fc_argc; 
 	char** argv = fc_argv;
 
@@ -429,7 +429,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 			AfxMessageBox ("Graphan is busy (получение минус перечня)");
 			return TCL_OK;
 		};
-		string text = "";
+		std::string text = "";
 		if (argv[2] != 0) text = argv[2];
 		Trim(text);
 		if (text.empty()) 
@@ -447,17 +447,17 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		
 		{
 			int index = text.find("##");
-			if (index != string::npos)
+			if (index != std::string::npos)
 			{
-				string LemmasToReplace = text.substr(index+2);
+				std::string LemmasToReplace = text.substr(index+2);
 				text.erase(index);
 				GetSemBuilder().m_RusStr.SetLemmasToReplace(LemmasToReplace.c_str());
 			};
 		}
-		string Question;
+		std::string Question;
 		{
 			int index = text.find("#mem");
-			if (index != string::npos)
+			if (index != std::string::npos)
 			{
 				Question = text.substr(index+4);
 				text.erase(index);
@@ -467,7 +467,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		}
 
         
-        string Result;
+        std::string Result;
 		bool bRes = 
 			GetSemBuilder().FindSituations(text,
 				atoi(argv[5]), 
@@ -525,7 +525,7 @@ int AnswerBySavedSentences (ClientData clienData,
 	  
 	  CSemanticStrView& SemStrView = *((CSemanticStrView*)Doc->GetView());
 
-	  string Sent = GetSemBuilder().Answer();
+	  std::string Sent = GetSemBuilder().Answer();
 
 	  ::GlobalOpenReport(Sent.c_str(), "Ответ:");
 	  Doc->m_bBusy = false;
@@ -540,7 +540,7 @@ int FindSituations    (ClientData clienData,
 			   int argc, char* argv[])
 
 {
-	log (string("\nFindSituations"));
+	log (std::string("\nFindSituations"));
 	fc_argc = argc;
 	fc_argv = argv;
 	ThreadFinish = false;
@@ -589,7 +589,7 @@ int TranslateToEnglish    (ClientData clienData,
 	  Doc->m_bBusy = true;
 	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
 	  Doc->GetView()->OpenAllRosses();
-	  string Graph;
+	  std::string Graph;
 	  if (GetSemBuilder().TranslateToEnglish(Graph))
 	  {
 		Doc->GetView()->BuildTclGraph (Graph.c_str());
@@ -612,7 +612,7 @@ int BuildSentence (ClientData clienData,
 	  
 	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
 
-	  string Sent;
+	  std::string Sent;
 	  if (GetSemBuilder().BuildSentence(Sent))
 	  {
 		::GlobalOpenReport(Sent.c_str(), "Перевод:");
@@ -633,7 +633,7 @@ int SyntRusSentence (ClientData clienData,
 	  
 	  CSemanticStrView& RusStr = *((CSemanticStrView*)Doc->GetView());
 
-	  string Sent;
+	  std::string Sent;
 	  if (GetSemBuilder().SyntRusSentence(Sent))
 	  {
 		  ::GlobalOpenReport(Sent.c_str(), "Русский синтез:");
@@ -779,6 +779,6 @@ void  CSemanticStrView::OpenAllRosses()
 void  CSemanticStrView::GetJavaGraph()
 {
 	int retcode = Tcl_Eval(theInterp,"GetJavaGraph");
-	string s = theInterp->result;
+	std::string s = theInterp->result;
 	TRACE (s.c_str());
 };

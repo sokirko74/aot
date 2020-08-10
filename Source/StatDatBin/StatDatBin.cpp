@@ -98,7 +98,7 @@ static bool loadDat(istream &ifs) {
         grm += sgrm;
         BYTE pos;
         QWORD gra;
-        string def;
+        std::string def;
         if (!MorphHolder.m_pGramTab->ProcessPOSAndGrammemsIfCan(grm.c_str(), &pos, &gra)
             || !MorphHolder.m_pGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(pos, gra, def)) {
             std::cout << "Error in line: " << lin << " skipped" << std::endl;
@@ -118,7 +118,7 @@ static bool loadDat(istream &ifs) {
 
         vector<CFormInfo> ParadigmCollection;
 
-        string s = str;
+        std::string s = str;
         if (!MorphHolder.m_pLemmatizer->CreateParadigmCollection(true, spid, true, false, ParadigmCollection))
             throw CExpc(Format("Cannot lemmatize \"%s\"", spid.c_str()));
 

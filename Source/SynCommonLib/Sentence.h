@@ -73,8 +73,8 @@ typedef bool (CSentence::*FirstGrRoule)(int CluauseNo);
 
 struct CClauseRule {
 	FirstGrRoule	m_Rule;
-	string			m_Description;  
-	CClauseRule (FirstGrRoule Rule, 	string	Description )
+	std::string			m_Description;  
+	CClauseRule (FirstGrRoule Rule, 	std::string	Description )
 	{
 		m_Description = Description;
 		m_Rule =  Rule;
@@ -91,7 +91,7 @@ protected:
 	CGroups		m_GroupsUnion;
 	// working with  thesaurus 
 	virtual bool	WordSchemeEqForThesaurus(const CSynHomonym& Homonym, const CSynPlmLine& word_scheme) const = 0;
-	bool	EqToTermin(const CSynWord& Word,   const string& termin, const CSynPlmLine& word_scheme, int iHom) const;
+	bool	EqToTermin(const CSynWord& Word,   const std::string& termin, const CSynPlmLine& word_scheme, int iHom) const;
 	void	FindTermins();
 	void	FindAllTermins();
 
@@ -189,8 +189,8 @@ public:
 	void RecalculateRelationsCoordinates();
 	bool IsInNonAtomicOborPairs(int iW) const;
 	void MarkWordAsDeleted(int iDelWrd);
-	string	GetSentenceBeginStr() const;
-	void	OutputErrorString(string Message) const;
+	std::string	GetSentenceBeginStr() const;
+	void	OutputErrorString(std::string Message) const;
 	bool ProcessGrammarModels();
 
 
@@ -250,7 +250,7 @@ public:
 
 	bool		CheckSubclausePredicatePositionForAllRoots(const CClause& C);
 
-	int			FindAuxVerbByLemma(int MainWordNo, const string& Lemma) const;
+	int			FindAuxVerbByLemma(int MainWordNo, const std::string& Lemma) const;
 	int			FindFirstAuxVerb(int MainWordNo) const;
 
 	size_t			GetPrimitiveClausesCount() const;

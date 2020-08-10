@@ -915,7 +915,7 @@ long CRusSemStructure::GetInstrAgentRelsCount (long Tag) const
 
 
 
-long IndexRelationStr (StringVector&  Rels, string RelationStr)
+long IndexRelationStr (StringVector&  Rels, std::string RelationStr)
 {
 // считаем, что отношение TIME и LOK могут  встречаться сколько угодно раз,	// поэтому считаем RelationId=-1. Значение "-1"  используется для того, чтобы
 // два разных отношения TIME, идущих их одного узла. считались совместными.	  
@@ -1174,7 +1174,7 @@ void CRusSemStructure::BuildAnaphoricRels()
 				sort (Hypots.begin(), Hypots.end());
 				if (Hypots.size()  > 1)
 				{
-					string s = Hypots[0].m_Variant.m_BestValue.GetDifference(Hypots[1].m_Variant.m_BestValue);
+					std::string s = Hypots[0].m_Variant.m_BestValue.GetDifference(Hypots[1].m_Variant.m_BestValue);
 					int u = 0;
 				}
 				//printf ("Node:%s\n", GetNodeStr(NodeNo).c_str());
@@ -1230,7 +1230,7 @@ CRusSemNode CreateDummyNode(long WordNo, const CSemanticsHolder* pData)
 //  здесь через точку с запятой перечислены  отношения
 // на первом месте стоит название  отношения, на втором 
 // откуда идет, на втором куда. 
-bool CRusSemStructure::TryTestTree(string s)
+bool CRusSemStructure::TryTestTree(std::string s)
 {
 	m_Nodes.clear();
 	vector<CRusSemRelation> Relations;
@@ -1243,10 +1243,10 @@ bool CRusSemStructure::TryTestTree(string s)
 		StringTokenizer tok (s.c_str(), ";");
 		long CountRels = 0;
 		while (tok ()) {
-			string OneRel = tok.val();
+			std::string OneRel = tok.val();
 			StringTokenizer tok1 (OneRel.c_str(), ",");
 			if (!tok1()) return false;
-			string RelStr = tok1.val();
+			std::string RelStr = tok1.val();
 			if (!tok1()) return false;
 			const char* s = tok1.val();
 			if (!isdigit((unsigned char)s[0]) ) return false;

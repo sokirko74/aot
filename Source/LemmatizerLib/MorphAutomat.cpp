@@ -9,8 +9,8 @@
 static int  InitAlphabet(MorphLanguageEnum Language, int* pCode2Alphabet, int *pAlphabet2Code, size_t AnnotChar)
 {
 	assert (!is_upper_alpha((BYTE)AnnotChar, Language));
-	string AdditionalEnglishChars = "'1234567890";
-	string AdditionalGermanChars = "";
+	std::string AdditionalEnglishChars = "'1234567890";
+	std::string AdditionalGermanChars = "";
 	int AlphabetSize = 0;
 	for (size_t i=0; i < 256; i++)
 	{
@@ -18,10 +18,10 @@ static int  InitAlphabet(MorphLanguageEnum Language, int* pCode2Alphabet, int *p
 				||	(i == '-') 
 				||	(i == AnnotChar)
 				||	(		(Language == morphEnglish) 
-						&&	(AdditionalEnglishChars.find(i) != string::npos)
+						&&	(AdditionalEnglishChars.find(i) != std::string::npos)
 					)
 				||	(		(Language == morphGerman) 
-						&&	(AdditionalGermanChars.find(i) != string::npos)
+						&&	(AdditionalGermanChars.find(i) != std::string::npos)
 					)
 				||	(		(Language == morphURL) 
 					  &&	is_alpha(i, morphURL)
@@ -39,21 +39,21 @@ static int  InitAlphabet(MorphLanguageEnum Language, int* pCode2Alphabet, int *p
 
 	if (AlphabetSize > MaxAlphabetSize)
 	{
-		string Error = "Error! The  ABC is too large";
+		std::string Error = "Error! The  ABC is too large";
 		ErrorMessage (Error);
 		throw CExpc(Error);
 	};
 
 	return AlphabetSize;
 };
-string CABCEncoder::GetCriticalNounLetterPack() const
+std::string CABCEncoder::GetCriticalNounLetterPack() const
 {
-	return string(MinimalPredictionSuffix, m_AnnotChar);
+	return std::string(MinimalPredictionSuffix, m_AnnotChar);
 }
 
-string CABCEncoder::EncodeIntToAlphabet(DWORD v) const
+std::string CABCEncoder::EncodeIntToAlphabet(DWORD v) const
 {
-	string Result;
+	std::string Result;
 	if (v == 0)
 	{
 		Result.push_back(m_Code2AlphabetWithoutAnnotator[0]);
@@ -69,7 +69,7 @@ string CABCEncoder::EncodeIntToAlphabet(DWORD v) const
 	return Result;
 };
 
-DWORD CABCEncoder::DecodeFromAlphabet(const string& v) const
+DWORD CABCEncoder::DecodeFromAlphabet(const std::string& v) const
 {
 	size_t len = v.length();
 	int c = 1;
@@ -82,7 +82,7 @@ DWORD CABCEncoder::DecodeFromAlphabet(const string& v) const
 	return Result;
 };
 
-bool  CABCEncoder::CheckABCWithAnnotator(const string& WordForm) const
+bool  CABCEncoder::CheckABCWithAnnotator(const std::string& WordForm) const
 {
 	size_t Length = WordForm.length();
 	for (size_t i=0; i < Length; i++)
@@ -90,7 +90,7 @@ bool  CABCEncoder::CheckABCWithAnnotator(const string& WordForm) const
 			return false;
 	return true;
 };
-bool  CABCEncoder::CheckABCWithoutAnnotator(const string& WordForm) const
+bool  CABCEncoder::CheckABCWithoutAnnotator(const std::string& WordForm) const
 {
 	size_t Length = WordForm.length();
 	for (size_t i=0; i < Length; i++)
@@ -204,7 +204,7 @@ void CMorphAutomat::BuildChildrenCache()
 
 
 
-bool CMorphAutomat::Load(string AutomatFileName)
+bool CMorphAutomat::Load(std::string AutomatFileName)
 {
 	Clear();
 	
@@ -242,7 +242,7 @@ bool CMorphAutomat::Load(string AutomatFileName)
 		fread(Alphabet2Code,sizeof(int),256,fp);
 		if (memcmp(Alphabet2Code,m_Alphabet2Code, 256*sizeof(int)) )
 		{
-			string err = Format("%s alphabet has changed; cannot load morph automat", GetStringByLanguage(m_Language).c_str());
+			std::string err = Format("%s alphabet has changed; cannot load morph automat", GetStringByLanguage(m_Language).c_str());
 			ErrorMessage(err);
 			return false;
 		};
@@ -258,7 +258,7 @@ bool CMorphAutomat::Load(string AutomatFileName)
 	return true;
 };
 
-bool CMorphAutomat::Save(string AutomatFileName) const
+bool CMorphAutomat::Save(std::string AutomatFileName) const
 {
 	try {
 		FILE * fp = fopen(AutomatFileName.c_str(), "wb");
@@ -315,7 +315,7 @@ const CMorphAutomRelation*  CMorphAutomat::GetChildren(size_t NodeNo) const
 
 
 
-void CMorphAutomat::DumpAllStringsRecursive(FILE* fp, int NodeNo, string CurrPath) const 
+void CMorphAutomat::DumpAllStringsRecursive(FILE* fp, int NodeNo, std::string CurrPath) const 
 {
 	if (m_pNodes[NodeNo].IsFinal())
 	{
@@ -325,14 +325,14 @@ void CMorphAutomat::DumpAllStringsRecursive(FILE* fp, int NodeNo, string CurrPat
 	for (size_t i=0; i<Count; i++)
 	{
 		const CMorphAutomRelation& p = GetChildren(NodeNo)[i];
-		string q = CurrPath;
+		std::string q = CurrPath;
 		q.push_back(p.GetRelationalChar());
 		DumpAllStringsRecursive(fp, p.GetChildNo(), q);
 	};
 
 };
 
-bool CMorphAutomat::DumpAllStrings(string FileName) const 
+bool CMorphAutomat::DumpAllStrings(std::string FileName) const 
 {
 	FILE *fp  = fopen (FileName.c_str(), "w");
 	if (!fp) return false;
@@ -369,11 +369,11 @@ int CMorphAutomat::NextNode(int NodeNo, BYTE RelationChar) const
 };
 
 
-string	CMorphAutomat::GetFirstResult (const string& Text) const 
+std::string	CMorphAutomat::GetFirstResult (const std::string& Text) const 
 {
 	int NodeNo = FindStringAndPassAnnotChar(Text, 0);
 	if ( NodeNo == -1) return "";
-	string res = "";
+	std::string res = "";
 	while (!m_pNodes[NodeNo].IsFinal())
 	{
 		const CMorphAutomRelation& p = GetChildren(NodeNo)[0];
@@ -383,7 +383,7 @@ string	CMorphAutomat::GetFirstResult (const string& Text) const
 	return res;
 };
 
-void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, string& curr_path, vector<CAutomAnnotationInner>& Infos) const 
+void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_path, vector<CAutomAnnotationInner>& Infos) const 
 {
 	const CMorphAutomNode& N = m_pNodes[NodeNo];
 	if (N.IsFinal())
@@ -412,7 +412,7 @@ void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, string& curr_path, 
 	curr_path.resize(CurrPathSize);
 };
 
-int	CMorphAutomat::FindStringAndPassAnnotChar (const string& Text, size_t TextPos) const 
+int	CMorphAutomat::FindStringAndPassAnnotChar (const std::string& Text, size_t TextPos) const 
 {
 	size_t TextLength = Text.length();
 	int r = 0;
@@ -432,14 +432,14 @@ int	CMorphAutomat::FindStringAndPassAnnotChar (const string& Text, size_t TextPo
 	return NextNode(r,m_AnnotChar);
 };
 
-void	CMorphAutomat::GetInnerMorphInfos (const string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const 
+void	CMorphAutomat::GetInnerMorphInfos (const std::string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const 
 {
 	Infos.clear();
 	int r = FindStringAndPassAnnotChar(Text, TextPos);
 	if ( r == -1) return;
 
 	// getting all interpretations
-	string curr_path;
+	std::string curr_path;
 	GetAllMorphInterpsRecursive(r, curr_path, Infos);
 
 	//assert (!Infos.empty());

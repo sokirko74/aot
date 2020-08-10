@@ -9,7 +9,7 @@
 #include "../TrigramLib/TrigramModel.h"
 #include "../AgramtabLib/RusGramTab.h"
 
-void CMAPost::log(string s)
+void CMAPost::log(std::string s)
 {
 	if (m_LogFileName == "")  return;
 	try {
@@ -314,7 +314,7 @@ void CMAPost::ILeDefLe()
         CPostLemWord& W = *it;
         if (W.m_strWord.length() < 3) continue;
         int hyp = W.m_strWord.find("-");
-        if (hyp == string::npos) continue;
+        if (hyp == std::string::npos) continue;
         // первая часть - латиница, второая - русская
         if (    !is_english_alpha((BYTE)W.m_strWord[0]) 
             ||  is_russian_alpha((BYTE)W.m_strWord[0]) //   is_english_alpha и is_russian_alpha пересекаются
@@ -334,18 +334,18 @@ void CMAPost::ILeDefLe()
 	}
 }
 
-string CMAPost::GetSimilarNumAncode (const string&  Lemma, const string&  Flexia, bool IsNoun) 
+std::string CMAPost::GetSimilarNumAncode (const std::string&  Lemma, const std::string&  Flexia, bool IsNoun) 
 {
 	if (Lemma.length() == 0) return "";
 	vector<CFormInfo> Paradigms;
-	string h = Lemma;
+	std::string h = Lemma;
 	m_pRusLemmatizer->CreateParadigmCollection(false, h, false, false, Paradigms);
 	if ( Paradigms.size() == 0 ) return ""; // например, нету в Ё-словаре слова ЧЕТВЕРТЫЙ
 	// ищем числительное
 	long k=0;
 	for (; k < Paradigms.size(); k++)
 	{
-	  string AnCode = Paradigms[k].GetAncode(0);
+	  std::string AnCode = Paradigms[k].GetAncode(0);
 	  BYTE POS = m_pRusGramTab->GetPartOfSpeech(AnCode.c_str() );
     if (IsNoun)
     {
@@ -359,12 +359,12 @@ string CMAPost::GetSimilarNumAncode (const string&  Lemma, const string&  Flexia
 	const CFormInfo& P = Paradigms[k];
 
 	// ищем максимальное совпадение с конца 
-	string AnCodes;
+	std::string AnCodes;
   	for (k=0; k < P.GetCount(); k++)
 	{
-		  string Form = P.GetWordForm(k);
+		  std::string Form = P.GetWordForm(k);
 		  EngRusMakeLower(Form);
-		  if ( IsNoun && Form != h && string("ао,ап,ат,ау,ац,ач,аъ").find(P.GetAncode(k)) != string::npos ) // 1000 - не аббр, "свыше 1000 человек"
+		  if ( IsNoun && Form != h && std::string("ао,ап,ат,ау,ац,ач,аъ").find(P.GetAncode(k)) != std::string::npos ) // 1000 - не аббр, "свыше 1000 человек"
 			  continue;
 		  if (Form.length() > Flexia.length())
 			  if (Flexia == "" || Flexia == Form.substr (Form.length()-Flexia.length()))
@@ -395,7 +395,7 @@ void CMAPost::Cifrdef()
 		if ( it !=  m_Words.begin() ) prev_it--;
         //if (W.m_strWord.length() < 3) continue;
         int hyp = W.m_strWord.find("-");
-        //if (hyp == string::npos) continue;
+        //if (hyp == std::string::npos) continue;
         if (W.IsInOborot()) continue;	
 		
         // Доллары
@@ -409,7 +409,7 @@ void CMAPost::Cifrdef()
 			for (long k=0; k < Paradigms.size(); k++)
 				//if (m_pRusGramTab->GetPartOfSpeech(Paradigms[k].GetAncode(0).c_str()) == NOUN)
 				{
-					string Form = Paradigms[k].GetWordForm(0);
+					std::string Form = Paradigms[k].GetWordForm(0);
 					for(int i = NumeralToNumberCount; i >= 0;  i--)
 						if ( NumeralToNumber[i].m_Cardinal == Form || NumeralToNumber[i].m_Ordinal == Form )
 						{
@@ -430,7 +430,7 @@ void CMAPost::Cifrdef()
 				W.DeleteAllHomonyms();
 				CHomonym* pNew = W.AddNewHomonym();
 				vector<CFormInfo> Paradigms;
-                string TmpStr = W.m_strWord.substr(0,hyp);
+                std::string TmpStr = W.m_strWord.substr(0,hyp);
 				m_pRusLemmatizer->CreateParadigmCollection(false, TmpStr, false, false, Paradigms);
 				if(Paradigms.size() > 0) // плутония-238
 				{
@@ -452,8 +452,8 @@ void CMAPost::Cifrdef()
 			else
 			continue; 
 		// первая часть - цифры, второая - русская, если есть окончание
-        string NumWordForm = hyp < 0 ? it->m_strWord : it->m_strWord.substr(0, hyp); 
-		string Flexia = hyp < 0 ? "" : it->m_strWord.substr(hyp+1); 
+        std::string NumWordForm = hyp < 0 ? it->m_strWord : it->m_strWord.substr(0, hyp); 
+		std::string Flexia = hyp < 0 ? "" : it->m_strWord.substr(hyp+1); 
 
 		if( Flexia == "" && next_it !=  m_Words.end() && isdigit((BYTE)next_it->m_strWord[0]) && next_it->m_strWord.length()==3) // "в 1 300 световых годах" -> 1300
 		{
@@ -464,12 +464,12 @@ void CMAPost::Cifrdef()
 		}
 		//  Идем с  конца ищем числительное, которое максимально совпадает с конца с числительным во входном тексте.
 		int i = NumeralToNumberCount + (NumWordForm == "0" ? 0 : - 1); //включая ноль
-		string NumWordForm2 = NumWordForm;
+		std::string NumWordForm2 = NumWordForm;
 		while(atoi(NumWordForm2.c_str())>=1000 && NumWordForm2.substr(NumWordForm2.length()-3) == "000" )
 			NumWordForm2 = NumWordForm2.substr(0, NumWordForm2.length() - 3 );
 		for(; i >= 0;  i--)
 		{
-			string NumValue;
+			std::string NumValue;
             if (W.HasDes(ORoman) )
 				NumValue = NumeralToNumber[i].m_RomanNumber;
 			else
@@ -483,11 +483,11 @@ void CMAPost::Cifrdef()
 		if (i < 0)  continue;
         
 	    EngRusMakeLower(Flexia);
-        string AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Cardinal, Flexia, NumeralToNumber[i].m_bNoun);
+        std::string AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Cardinal, Flexia, NumeralToNumber[i].m_bNoun);
 		if  ( AnCodes.empty() && Flexia != "" )
 			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun);
 		if( !strcmp(NumeralToNumber[i].m_Cardinal, "ОДИН")) AnCodes = "эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"; //все грамкоды с родом
-		string AnCodes0 = AnCodes; //числ
+		std::string AnCodes0 = AnCodes; //числ
         if  (NumWordForm != "0")
 			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
 		if ( Flexia == "" )
@@ -615,13 +615,13 @@ void CMAPost::ParticipleAndVerbInOneForm()
         for (int HomNo=0; HomNo < W.GetHomonymsCount(); HomNo++)
         {
             CHomonym* pH = W.GetHomonym(HomNo);
-            const string& GramCodes = pH->GetGramCodes();
-            string VerbGramCodes;
-            string PartGramCodes;
+            const std::string& GramCodes = pH->GetGramCodes();
+            std::string VerbGramCodes;
+            std::string PartGramCodes;
             if (GramCodes == "??") continue;
             for (long i=0; i < GramCodes.length(); i+=2)
             {
-                string gram = GramCodes.substr(i, 2);
+                std::string gram = GramCodes.substr(i, 2);
                 BYTE POS = m_pRusGramTab->GetPartOfSpeech(gram.c_str());
                 if (POS == PARTICIPLE_SHORT)
                     PartGramCodes += gram;
@@ -693,14 +693,14 @@ void CMAPost::PronounP_Pronoun_Homonymy()
 };
 
 // выдает по форме и части речи парадигму
-bool CMAPost::HasParadigmOfFormAndPoses(string WordForm, poses_mask_t Poses) const
+bool CMAPost::HasParadigmOfFormAndPoses(std::string WordForm, poses_mask_t Poses) const
 {
 	vector<CFormInfo> Paradigms;
 	m_pRusLemmatizer->CreateParadigmCollection(false, WordForm, false, false, Paradigms);
 	
 	for (long k=0; k < Paradigms.size(); k++)
 	{
-	  string AnCode = Paradigms[k].GetSrcAncode();
+	  std::string AnCode = Paradigms[k].GetSrcAncode();
 	  BYTE POS = m_pRusGramTab->GetPartOfSpeech(AnCode.c_str() );
 	  QWORD Grams;
 	  m_pRusGramTab->GetGrammems(AnCode.c_str(), Grams);
@@ -938,7 +938,7 @@ void CMAPost::SemiNouns()
 
         BYTE POS = NOUN;
         {
-            string WordForm = it->m_strUpperWord;
+            std::string WordForm = it->m_strUpperWord;
             WordForm.erase(0, PrefixLen);
             if (WordForm.length() <= 3) continue;
             if (!HasParadigmOfFormAndPoses(WordForm, 1<<POS) )
@@ -959,7 +959,7 @@ void CMAPost::SemiNouns()
         {
             CHomonym* pH = W.GetHomonym(HomNo);
             QWORD Grammems;
-            string GramCodes;
+            std::string GramCodes;
             
             bool SingularGenitivFound = false;
             for (int i=0; i < pH->GetGramCodes().length(); i+=2) 
@@ -972,7 +972,7 @@ void CMAPost::SemiNouns()
                         Grammems &= (~ _QM(rSingular));
                         Grammems |= _QM (rPlural);
 
-                        string NewGramCode;
+                        std::string NewGramCode;
                         if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (POS, Grammems, NewGramCode))
                             GramCodes += NewGramCode;
 
@@ -1079,7 +1079,7 @@ void CMAPost::Rule_Ideclinable()
         CPostLemWord& W = *it;
         if ( !W.HasDes(ORLE) ) continue;
         if ( !W.HasPos(NOUN) ) continue;
-		const string& WordForm = W.m_strUpperWord;
+		const std::string& WordForm = W.m_strUpperWord;
         if (WordForm.empty()) continue;
 		if ((BYTE)WordForm[WordForm.length() - 1] != (BYTE)'О') continue;
         for (int i=0; i < W.GetHomonymsCount(); i++)
@@ -1088,13 +1088,13 @@ void CMAPost::Rule_Ideclinable()
             if ( (pH->m_iGrammems & rAllCases) != rAllCases) continue; 
 		    if ( (pH->m_iGrammems & rAllNumbers) != rAllNumbers) continue;
 
-		    string GramCodes = pH->GetGramCodes();
+		    std::string GramCodes = pH->GetGramCodes();
 		    // анкод должен быть только один, поскольк это неизменяемое существительное
 		    if (GramCodes.length() != 2) continue;
 		    if (!NounHasObviousPluralContext(it))
 		    {
 			    // отрубаем множественное число
-			    string NewGramCode;
+			    std::string NewGramCode;
 			    if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (NOUN, pH->m_iGrammems & ~_QM(rPlural), NewGramCode))
                 {
                     pH->SetGramCodes( NewGramCode );
@@ -1321,7 +1321,7 @@ void CMAPost::Rule_KAK_MOZHNO()
 
 bool CMAPost::CanBeDubleDelimiter(CLineIter it)   
 {
-		const string& WordForm = it->m_strUpperWord;
+		const std::string& WordForm = it->m_strUpperWord;
 
 		return (   (WordForm == "ДА") 
 			 || (WordForm == ",")
@@ -1438,12 +1438,12 @@ void CMAPost::Rule_CHTO_ZA()
         
         
         vector<CFormInfo> Kakoi;
-		string a = "какой";
+		std::string a = "какой";
         m_pRusLemmatizer->CreateParadigmCollection(true,a ,false,false,Kakoi);
         if (Kakoi.empty()) return;
 
-        string GramCodes;
-        string WordForm;
+        std::string GramCodes;
+        std::string WordForm;
         for (int j=0; j<Kakoi[0].GetCount(); j++)
             for (int k=0; k<noun_it->GetHomonymsCount(); k++)
             {
@@ -1624,12 +1624,12 @@ void CMAPost::Rule_Abbreviation()
 					CHomonym* pH = W.GetHomonym(HomNo);
 					vector<CFormInfo> Paradigms;
 					CFormInfo P;
-					string AnCodes;
+					std::string AnCodes;
 					m_pRusLemmatizer->CreateParadigmFromID(pH->m_lPradigmID,  P);
 					pH->m_CommonGramCode += pH->GetGramCodes();
 					AnCodes = pH->GetGramCodes();
 					pH->SetGramCodes( "" );
-					string xx = P.GetAncode(0);
+					std::string xx = P.GetAncode(0);
 					for (long k=0; k < P.GetCount(); k++)
 						if( m_pRusGramTab->GleicheAncode1(0, pH->m_CommonGramCode + pH->GetGramCodes(), P.GetAncode(k)) == ""
 							&& (m_pRusGramTab->GetAllGrammems(P.GetAncode(k).c_str()) & m_pRusGramTab->GetAllGrammems(AnCodes.c_str())) == m_pRusGramTab->GetAllGrammems(P.GetAncode(k).c_str())
@@ -1663,7 +1663,7 @@ void CMAPost::Rule_AdverbFromAdjectives()
         CHomonym* pNew = W.AddNewHomonym();
 		pNew->m_strLemma = it->m_strUpperWord;
         pNew->SetMorphUnknown();
-        string NewGramCode;
+        std::string NewGramCode;
         m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (ADV, 0, NewGramCode);
         pNew->SetGramCodes( NewGramCode );
         pNew->InitAncodePattern();
@@ -1673,7 +1673,7 @@ void CMAPost::Rule_AdverbFromAdjectives()
 
 
 
-void CMAPost::SaveToFile(string s)
+void CMAPost::SaveToFile(std::string s)
 {
 	/*FILE * fp = fopen (s.c_str(), "w");
 	assert (fp);
@@ -1722,7 +1722,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
         CHomonym* pH = W.GetHomonym(HomNo);
 
 		vector<CFormInfo> Paradigms;
-		string Word = W.m_strWord;
+		std::string Word = W.m_strWord;
 		m_pRusLemmatizer->CreateParadigmCollection(false, Word, true, true, Paradigms);
 		for (long k=0; k < Paradigms.size(); k++)
             if (Paradigms[k].GetSrcAncode() == pH->GetGramCodes())
@@ -1829,7 +1829,7 @@ bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) co
         Tags.insert(Tags.end(), Tags2.begin(), Tags2.end());
     }
 
-    set<string> Lemmas;
+    set<std::string> Lemmas;
     for (int i =0; i < W.GetHomonymsCount(); i++)
     {
         CHomonym* pH = W.GetHomonym(i);
@@ -1848,7 +1848,7 @@ bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) co
 
 bool CMAPost::FilterPostMorphWords() 
 {
-	vector<string> tokens;
+	vector<std::string> tokens;
 	vector<CWordIntepretation> tags;
     list<CPostLemWord>::iterator sent_start = m_Words.begin();
     for (list<CPostLemWord>::iterator it=m_Words.begin(); it !=  m_Words.end(); )	

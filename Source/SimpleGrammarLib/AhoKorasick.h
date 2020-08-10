@@ -10,7 +10,7 @@ typedef int TerminalSymbolType;
 typedef vector<TerminalSymbolType> TerminalString;
 typedef  TerminalString::const_iterator CTSI;
 typedef  TerminalString::iterator TPI;
-typedef	 map<TerminalSymbolType, string> SymbolInformationType;  
+typedef	 map<TerminalSymbolType, std::string> SymbolInformationType;  
 
 struct	CTrieNode;
 struct	CWorkRule;
@@ -72,10 +72,10 @@ public:
 	//  creating
 	void	InitFailureFunction();
 	void	Create(const set< CWorkRule >& Patterns, const SymbolInformationType* Info);
-	bool	Save(string GrammarFileName) const;
+	bool	Save(std::string GrammarFileName) const;
 
 	//  loading 
-	bool	Load(const SymbolInformationType* Info, string GrammarFileName);
+	bool	Load(const SymbolInformationType* Info, std::string GrammarFileName);
 	
 
 	//  access members

@@ -39,7 +39,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 	vector< SEngEquiv > vectorEngEquivs;
 	GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),iRusNode);
 
-	string StrLexFunc = "";
+	std::string StrLexFunc = "";
 	for( int i=0; i<vectorEngEquivs.size(); i++ )
 	{
 		if( vectorEngEquivs[i].m_StrLexFunc.empty() )
@@ -54,24 +54,24 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 		return;
 
 // достаем из статьи значение лексической функции
-	string EngWord = "";
+	std::string EngWord = "";
 	int    MeanNum = -1;
 	TCortege cortege;
 	for( int i=GetRoss(Etype)->GetUnitStartPos(Eunit); i<=GetRoss(Etype)->GetUnitEndPos(Eunit); i++ )
 	{
 		long FieldNo = GetRoss(Etype)->GetCortegeFieldNo(i);
-		if(	string("LF") != GetRoss(Etype)->Fields[FieldNo].FieldStr )
+		if(	std::string("LF") != GetRoss(Etype)->Fields[FieldNo].FieldStr )
 			continue;
 		cortege = GetCortege(GetRoss(Etype),i);
 		if( cortege.m_DomItemNos[0]==-1 )
 			continue;
-		string ident = GetRoss(Etype)->GetDomItemStr(cortege.m_DomItemNos[0]);
+		std::string ident = GetRoss(Etype)->GetDomItemStr(cortege.m_DomItemNos[0]);
 		if( ident != StrLexFunc )
 			continue;
 		if( cortege.m_DomItemNos[1]==-1 || cortege.m_DomItemNos[2]==-1 )
 			continue;
 		EngWord = (const char*)GetRoss(Etype)->GetDomItemStr(cortege.m_DomItemNos[1]);
-		string strMean = (const char*)GetRoss(Etype)->GetDomItemStr(cortege.m_DomItemNos[2]);
+		std::string strMean = (const char*)GetRoss(Etype)->GetDomItemStr(cortege.m_DomItemNos[2]);
 		MeanNum = strMean[0] - '0';
 		break;
 	}
@@ -185,7 +185,7 @@ bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,vector<TCortege>& v
 	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitEndPos(UnitNo); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
-		if(	string("SYNR") == GetRoss(type)->Fields[FieldNo].FieldStr )
+		if(	std::string("SYNR") == GetRoss(type)->Fields[FieldNo].FieldStr )
 			vecSINO.push_back(GetCortege(GetRoss(type),i));
 	}
 
@@ -200,7 +200,7 @@ void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,vector<TCortege>& v
 	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitEndPos(UnitNo); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
-		if(	string("PREP") == GetRoss(type)->Fields[FieldNo].FieldStr )
+		if(	std::string("PREP") == GetRoss(type)->Fields[FieldNo].FieldStr )
 			vecSPrp.push_back(GetCortege(GetRoss(type),i));
 	}
 }
@@ -213,7 +213,7 @@ void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,vector<TCortege>& v
 	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitEndPos(UnitNo); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
-		if(	string("DETERM") == GetRoss(type)->Fields[FieldNo].FieldStr )
+		if(	std::string("DETERM") == GetRoss(type)->Fields[FieldNo].FieldStr )
 			vecSArt.push_back(GetCortege(GetRoss(type),i));
 	}
 }
@@ -239,8 +239,8 @@ void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,vector<TCortege>& vec
 	for( int i=GetRoss(type)->GetUnitStartPos(unit); i<=GetRoss(type)->GetUnitEndPos(unit); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
-		string tmp = GetRoss(type)->Fields[FieldNo].FieldStr;
-		if(	string("GF") == GetRoss(type)->Fields[FieldNo].FieldStr )
+		std::string tmp = GetRoss(type)->Fields[FieldNo].FieldStr;
+		if(	std::string("GF") == GetRoss(type)->Fields[FieldNo].FieldStr )
 			vecSGxi.push_back(GetCortege(GetRoss(type),i));
 	}
 }
@@ -306,7 +306,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			if( no<0 || no>=nWords )
 				continue;
 			int t = 0;
-			string res = "";
+			std::string res = "";
 			while( vecSGxi[k].m_DomItemNos[t] != -1 )
 			{
 				if( t==1 )
@@ -434,23 +434,23 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		for( int k=0; k<vecSINO.size(); k++ )
 		{
 			assert( vecSINO[k].m_DomItemNos[0]!=-1 );
-			string ident = GetRoss(type)->GetDomItemStr(vecSINO[k].m_DomItemNos[0]);
-			string value = GetCortegeStr(type,vecSINO[k]);
+			std::string ident = GetRoss(type)->GetDomItemStr(vecSINO[k].m_DomItemNos[0]);
+			std::string value = GetCortegeStr(type,vecSINO[k]);
 			bool bAuxRelation  = ident == "numeral_transfer";
 		//
 			assert( vecSINO[k].m_DomItemNos[1]!=-1 );
-			string e1 = GetRoss(type)->GetDomItemStr(vecSINO[k].m_DomItemNos[1]);
-			string e1lt = e1.substr(0,1);
+			std::string e1 = GetRoss(type)->GetDomItemStr(vecSINO[k].m_DomItemNos[1]);
+			std::string e1lt = e1.substr(0,1);
 			assert(e1lt=="A" || e1lt=="C");
-			string e1ns = e1.substr(1,2);
+			std::string e1ns = e1.substr(1,2);
 			int    e1no = atoi(e1ns.c_str());
 			assert(e1no>0 && (e1lt=="A" || e1no<=nWords) );
 		//
 			assert( vecSINO[k].m_DomItemNos[2]!=-1 );
-			string e2 = GetRoss(type)->GetDomItemStr(vecSINO[k].m_DomItemNos[2]);
-			string e2lt = e2.substr(0,1);
+			std::string e2 = GetRoss(type)->GetDomItemStr(vecSINO[k].m_DomItemNos[2]);
+			std::string e2lt = e2.substr(0,1);
 			assert(e2lt=="A" || e2lt=="C");
-			string e2ns = e2.substr(1,2);
+			std::string e2ns = e2.substr(1,2);
 			int    e2no = atoi(e2ns.c_str());
 			assert(e2no>0 && (e2lt=="A" || e2no<=nWords) );
 			
@@ -640,7 +640,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 			const CSemNode& rusNode = RusStr.GetNode(engNode.RusNode);
 			if( rusNode.m_MainWordNo!=-1 )
 			{
-				string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
+				std::string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
 				if( (qwrd=="КТО" || qwrd=="ЧТО") )
 					return true;
 			}
@@ -657,7 +657,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 			const CSemNode& rusNode = RusStr.GetNode(engNode.RusNode);
 			if( rusNode.m_MainWordNo!=-1 )
 			{
-				string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
+				std::string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
 				if( qwrd=="КАКОЙ" || qwrd=="ЧЕЙ" )
 					return true;
 			}
@@ -838,7 +838,7 @@ bool CEngSemStructure::HandleQuestionNode()
 			continue;
 		if( m_Nodes[iEngNode].GetType() != Aoss )
 			continue;
-		string dbg_str = GetRoss(Aoss)->GetEntryStr(m_Nodes[iEngNode].GetUnitNo());
+		std::string dbg_str = GetRoss(Aoss)->GetEntryStr(m_Nodes[iEngNode].GetUnitNo());
 		int    dbg_num = GetRoss(Aoss)->GetUnitMeanNum(m_Nodes[iEngNode].GetUnitNo());
 		if( dbg_str != "__quest" || dbg_num != 1 )
 			continue;
@@ -887,7 +887,7 @@ void CEngSemStructure::AddFixedGrammemsToNode()
 		if (engNode.RusNode != -1)
 			bProper = RusStr.GetNode(engNode.RusNode).m_bProper;
 
-		string lemma = engWord.m_Lemma;
+		std::string lemma = engWord.m_Lemma;
 		BYTE pos = GetOnePOS(engWord.m_Poses);
 		if (lemma.length() == 0) continue;
 		QWORD grammems = helper.GetFixedGrammemsByLemma(morphEnglish, lemma, pos,bProper);

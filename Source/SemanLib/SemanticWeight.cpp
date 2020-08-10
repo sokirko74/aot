@@ -250,17 +250,17 @@ long TreeVariantValue::GetTreeWeight()  const
 
 };
 
-string TreeVariantValue::GetStr()  const
+std::string TreeVariantValue::GetStr()  const
 {
-    string Q = Format ("ValencyDisorder=%i;\nDirectDisagree=%i;\nSemFetDisagree=%i;\nConnectedComponents=%i;\nProjectnessCoef=%i;\nLexFetAgree=%i;\nAgreeWithSyntaxTop=%i;\nTopAgreeWithSyntaxCriteria=%i\nSemRelPOSViolations=%i;\nMNAViolations=%i;\nOnlyCommaBetweenViolations=%i;\nRelationsLength=%i;\nSubjectPredicateViolations=%i;\nOptionalValencyCount=%i;\nCopulViolations=%i;\nInstrAgentRels=%i;\nLexFuncts=%i;\nGramRestrViolations=%i;\nCollocs=%i\n OborotAdverbial=%i\nObligatoryValencyViolation=%i\nColloquialInterps=%i\nCorporaGleicheCount=%i\nPassiveValencyCount=%i\nSemFetAgreeMNACount=%i WordWeightCount=%i MiscSemAgreeCount=%i",
+    std::string Q = Format ("ValencyDisorder=%i;\nDirectDisagree=%i;\nSemFetDisagree=%i;\nConnectedComponents=%i;\nProjectnessCoef=%i;\nLexFetAgree=%i;\nAgreeWithSyntaxTop=%i;\nTopAgreeWithSyntaxCriteria=%i\nSemRelPOSViolations=%i;\nMNAViolations=%i;\nOnlyCommaBetweenViolations=%i;\nRelationsLength=%i;\nSubjectPredicateViolations=%i;\nOptionalValencyCount=%i;\nCopulViolations=%i;\nInstrAgentRels=%i;\nLexFuncts=%i;\nGramRestrViolations=%i;\nCollocs=%i\n OborotAdverbial=%i\nObligatoryValencyViolation=%i\nColloquialInterps=%i\nCorporaGleicheCount=%i\nPassiveValencyCount=%i\nSemFetAgreeMNACount=%i WordWeightCount=%i MiscSemAgreeCount=%i",
 		ValencyDisorder,  DirectDisagree,   SemFetDisagree,     ConnectedComponentsCount,   ProjectnessCoef,   LexFetAgreeCount,   AgreeWithSyntaxTopCoef, TopAgreeWithSyntaxCriteria, SemRelPOSViolationsCount, MNAViolationsCount, OnlyCommaBetweenViolationsCount, RelationsLength, SubjectPredicateViolationsCount,	OptionalValencyCount, CopulViolationsCount, InstrAgentRelsCount, LexFunctsCount, GramRestrViolationsCount, CollocsCount, OborotAdverbialCount, ObligatoryValencyViolationCount, ColloquialInterpsCount, CorporaGleicheCount,	PassiveValencyCount,         SemFetAgreeMNACount,	WordWeightCount, MiscSemAgreeCount);
 	return Q;
 };
 
 
-string TreeVariantValue::GetStrOfNotNull()  const
+std::string TreeVariantValue::GetStrOfNotNull()  const
 {
-	string Result;
+	std::string Result;
 	if (ValencyDisorder >0)  Result += Format("ValencyDisorder=%i\n",ValencyDisorder);
 	if (DirectDisagree >0)  Result += Format("DirectDisagree=%i\n",DirectDisagree);
 	if (SemFetDisagree >0)  Result += Format("SemFetDisagree=%i\n",SemFetDisagree);
@@ -308,9 +308,9 @@ string TreeVariantValue::GetStrOfNotNull()  const
 };
 
 
-string TreeVariantValue::GetDifference(const TreeVariantValue& X)  const
+std::string TreeVariantValue::GetDifference(const TreeVariantValue& X)  const
 {
-	string Result;
+	std::string Result;
 	if (X.ValencyDisorder != ValencyDisorder)  Result += Format("ValencyDisorder=%i (%i)\n",ValencyDisorder, X.ValencyDisorder);
 	if (X.DirectDisagree != DirectDisagree)  Result += Format("DirectDisagree=%i (%i)\n",DirectDisagree, X.DirectDisagree);
 	if (X.SemFetDisagree != SemFetDisagree)  Result += Format("SemFetDisagree=%i (%i)\n",SemFetDisagree, X.SemFetDisagree);
@@ -363,7 +363,7 @@ string TreeVariantValue::GetDifference(const TreeVariantValue& X)  const
 //========================================================
 //========================================================
 const int NounSemRelCount = 11;
-string NounSemRel[NounSemRelCount] = { "SUB","OBJ", "ADR", "PACIEN","AUTHOR", "AGENT", "SRC-PNT", "C-AGENT", "TRG-PNT", "LOK","MEANS" };
+std::string NounSemRel[NounSemRelCount] = { "SUB","OBJ", "ADR", "PACIEN","AUTHOR", "AGENT", "SRC-PNT", "C-AGENT", "TRG-PNT", "LOK","MEANS" };
 
 void CRusSemStructure::MarkSemRelPOSViolations()
 {
@@ -1010,7 +1010,7 @@ void CRusSemStructure::FindSemFetDisagree(long Tag)
 						continue;
 					};
 
-					string LocSemRel[2] = {"SRC-PNT","TRG-PNT"};	  
+					std::string LocSemRel[2] = {"SRC-PNT","TRG-PNT"};	  
 					size_t j=0;
 					for (; j < 2; j++)
 						if  (		 (m_Relations[i].m_Valency.m_RelationStr == LocSemRel[j] ) 
@@ -1138,7 +1138,7 @@ bool CRusSemStructure::TopAgreeWithSyntaxCriteria (long Tag)
 
 
 //=======================================
-typedef short_string<40> string40;
+typedef short_std::string<40> std::string40;
 long CRusSemStructure::IsLexFetAgree(long NodeNo) const 
 {
 	long ParentNodeNo = NodeNo;
@@ -1164,12 +1164,12 @@ long CRusSemStructure::IsLexFetAgree(long NodeNo) const
 
 	// ищем как простую лемму 
 	if (m_Nodes[NodeNo].m_MainWordNo ==  -1) return false;
-	string40 Lemmas[10];
+	std::string40 Lemmas[10];
 	int LemmasCount = 0;
 	Lemmas[LemmasCount++] = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma;
 	if (m_Nodes[NodeNo].GetType() == CollocRoss)
 	{
-		Lemmas[LemmasCount++] = string40( GetRoss(CollocRoss)->GetEntryStr(m_Nodes[NodeNo].GetUnitNo()).c_str()  );
+		Lemmas[LemmasCount++] = std::string40( GetRoss(CollocRoss)->GetEntryStr(m_Nodes[NodeNo].GetUnitNo()).c_str()  );
 		EngRusMakeUpper((char *)Lemmas[LemmasCount - 1]);
 	};
 
@@ -1182,7 +1182,7 @@ long CRusSemStructure::IsLexFetAgree(long NodeNo) const
 
 	for (long i=0; i < LemmasCount;i++)
 	{
-		string lem ((const char*)Lemmas[i]);
+		std::string lem ((const char*)Lemmas[i]);
 		if (    _find(m_Relations[R1.m_Rels[0]].m_LexFets, lem) 
 			||  (   (R2.m_RelsCount== 1) 
 			&& _find(m_Relations[R2.m_Rels[0]].m_LexFets, lem)

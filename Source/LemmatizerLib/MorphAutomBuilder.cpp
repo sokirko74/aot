@@ -5,7 +5,7 @@
 
 // The main function of this file is CMorphAutomatBuilder::AddStringDaciuk 
 // This function is an implementation of algorithm for constructing minimal,
-// deterministic, acyclic FSM from unordered set of strings, which was described 
+// deterministic, acyclic FSM from unordered set of std::strings, which was described 
 // in  "Jan Daciuk, Stoyan Mihov, Bruce Watson, and Richard Watson, 
 //      Incremental Construction of Minimal Acyclic Finite State Automata, 
 //		Computational Linguistics, 26(1), March 2000."
@@ -285,7 +285,7 @@ void CMorphAutomatBuilder::InitTrie()
 	
 };
 
-void CMorphAutomatBuilder::UpdateCommonPrefix(const string& WordForm)
+void CMorphAutomatBuilder::UpdateCommonPrefix(const std::string& WordForm)
 {
 	m_Prefix.resize(1);
 	m_Prefix[0] = m_pRoot;
@@ -461,7 +461,7 @@ CTrieNodeBuild* CMorphAutomatBuilder::AddSuffix(CTrieNodeBuild* pParentNodeNo, c
 
 
 
-bool CMorphAutomatBuilder::AddStringDaciuk(const string& WordForm)
+bool CMorphAutomatBuilder::AddStringDaciuk(const std::string& WordForm)
 {
 	if (!CheckABCWithAnnotator(WordForm))
 	{
@@ -483,7 +483,7 @@ bool CMorphAutomatBuilder::AddStringDaciuk(const string& WordForm)
 			&&	m_Prefix.back()->m_bFinal
 		)
 	{
-		// an equal string is already in the dictionary 
+		// an equal std::string is already in the dictionary 
 		return true;
 	};
 

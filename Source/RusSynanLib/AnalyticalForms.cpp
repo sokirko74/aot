@@ -173,7 +173,7 @@ void CRusSentence::BuildAnalyticalVerbForms()
 				&&	(FindFirstAuxVerb(WordNo) == -1)
 			)
 		{
-			string s_lem = m_Words[WordNo].GetSynHomonym(0).m_strLemma;
+			std::string s_lem = m_Words[WordNo].GetSynHomonym(0).m_strLemma;
 			if (m_Words[WordNo].IsInOborot()) continue;
 			//ищем гл. "быть" или "стать"
 			if (m_Words[WordNo].HasAnalyticalBe() && iBe == -1)
@@ -266,7 +266,7 @@ void CRusSentence::BuildAnalyticalVerbForms()
 				{
 					m_Words[iBe].m_MainVerbs.push_back( v_AnalyticalFormVars[k].iWordNum );
 					{
-						string dump =  m_Words[iBe].m_strWord  + " " + m_Words[v_AnalyticalFormVars[k].iWordNum].m_strWord;
+						std::string dump =  m_Words[iBe].m_strWord  + " " + m_Words[v_AnalyticalFormVars[k].iWordNum].m_strWord;
 						rml_TRACE("analytical form \"%s\" was created\n", dump.c_str());
 					};
 

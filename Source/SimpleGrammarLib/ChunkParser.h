@@ -24,7 +24,7 @@ public:
 	const CAgramtab*		m_pGramTab;
 	int						m_line_num;
 	int                     m_CurrentSourceLineNo;
-    string                  m_CurrentSourceFileName;
+    std::string                  m_CurrentSourceFileName;
 
 	void	CleanParser();
 	int yylex (void* valp);
@@ -36,7 +36,7 @@ public:
 
 	CChunkParser();
 	bool	ParseGrammar(const char* src);
-	bool	ParseGrammarInFile(string FileName, string RefererFile="");
+	bool	ParseGrammarInFile(std::string FileName, std::string RefererFile="");
 	virtual ~CChunkParser();
 	void yyerror(const char *a);
 };

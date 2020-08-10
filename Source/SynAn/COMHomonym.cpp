@@ -12,7 +12,7 @@ STDMETHODIMP CCOMHomonym::get_LemSign(BSTR *pVal)
 {
 	try
 	{
-		string s;
+		std::string s;
 		if (m_pHomonym->m_LemSign)
 			s += m_pHomonym->m_LemSign;
 		s += m_pHomonym->m_CommonGramCode;
@@ -74,7 +74,7 @@ STDMETHODIMP CCOMHomonym::get_Grammems(hyper *pVal)
 
 STDMETHODIMP CCOMHomonym::get_GramDescriptionStr(BSTR *pVal)
 {
-	string s = m_pHomonym->GetGrammemsStr();
+	std::string s = m_pHomonym->GetGrammemsStr();
 
 	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
@@ -199,7 +199,7 @@ STDMETHODIMP CCOMHomonym::GetOborotGF(BSTR* GF)
 STDMETHODIMP CCOMHomonym::get_CommonGrammemsStr(BSTR* pVal)
 {
 
-	string s = m_pHomonym->GetOpt()->GetGramTab()->GrammemsToStr(m_pHomonym->m_TypeGrammems);
+	std::string s = m_pHomonym->GetOpt()->GetGramTab()->GrammemsToStr(m_pHomonym->m_TypeGrammems);
 	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }

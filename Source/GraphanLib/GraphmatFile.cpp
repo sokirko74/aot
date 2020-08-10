@@ -94,7 +94,7 @@ bool CGraphmatFile::LoadDicts ()
 		{
 
 			pDicts->m_pOborDictionary.SetPointer(new CDictionary, true);
-			string Path;
+			std::string Path;
 			if (m_Language != morphGerman) 
 				Path = GetRegistryString("Software\\Dialing\\Obor\\DictPath").c_str();
 			else
@@ -268,7 +268,7 @@ bool CGraphmatFile :: GraphmatMain ()
 };
 
 
-bool CGraphmatFile::LoadStringToGraphan(const string& szBuffer)
+bool CGraphmatFile::LoadStringToGraphan(const std::string& szBuffer)
 {
 	try {
 		m_GraOutputFile = "";
@@ -334,7 +334,7 @@ bool IsOlder (const char* FileName1, const char* FileName2)
 
 
 
-bool CGraphmatFile :: LoadFileToGraphan (const string&  CommandLine)
+bool CGraphmatFile :: LoadFileToGraphan (const std::string&  CommandLine)
 {
 	try 
 	{
@@ -343,7 +343,7 @@ bool CGraphmatFile :: LoadFileToGraphan (const string&  CommandLine)
 		if (IsHtmlFile(m_SourceFileName))
 		{
 			HTML Convert;
-			string Text = Convert.GetTextFromHtmlFile(m_SourceFileName);
+			std::string Text = Convert.GetTextFromHtmlFile(m_SourceFileName);
 			
 			if (!InitInputBuffer(Text)) 
 			{	
@@ -355,7 +355,7 @@ bool CGraphmatFile :: LoadFileToGraphan (const string&  CommandLine)
 		else
 		{
 			if (access(m_SourceFileName.c_str(), 04) != 0) return  false;
-			string Text;
+			std::string Text;
 			LoadFileToString(m_SourceFileName, Text);
 			if (!InitInputBuffer(Text)) 
 			{
@@ -382,7 +382,7 @@ bool CGraphmatFile :: LoadFileToGraphan (const string&  CommandLine)
 	};
 };
 
-const string&	CGraphmatFile::GetLastError() const
+const std::string&	CGraphmatFile::GetLastError() const
 {
 	return m_LastError;
 };

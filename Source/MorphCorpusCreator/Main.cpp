@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 
 		}
 
-		string in_file(argv[2]);		
+		std::string in_file(argv[2]);		
 		Holder.m_piSentCollection->EnableProgressBar = TRUE;
 
 		if (!Holder.GetSentencesFromSynAn(in_file, TRUE, FALSE, FALSE))
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 		cerr << iSentCount << " sentences processed by SynAn" << endl;		
 
 
-		string result = pr.get_xml_result(Holder);
+		std::string result = pr.get_xml_result(Holder);
 
 		ofstream file;
 		file.clear();

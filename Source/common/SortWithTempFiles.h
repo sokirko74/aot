@@ -26,9 +26,9 @@ bool CopyRestOfBinaryFiles (FILE* in_fp, FILE* out_fp, size_t i, size_t Max_i, T
 
 // produces not-unique sequence 
 template <class T>
-string UnionBinaryFiles (string InputFileName1, string InputFileName2)
+std::string UnionBinaryFiles (std::string InputFileName1, std::string InputFileName2)
 {
-    string OutputFileName = CreateTempFileName();
+    std::string OutputFileName = CreateTempFileName();
     FILE* fp1 = 0;
     FILE* fp2 = 0;
     FILE* out_fp = 0;
@@ -66,7 +66,7 @@ string UnionBinaryFiles (string InputFileName1, string InputFileName2)
 
         size_t i1 = 0;
         size_t i2 = 0;
-        string Error; 
+        std::string Error; 
         out_fp = fopen (OutputFileName.c_str(), "wb");
 
  	    for (; i1 != Count1 && i2 != Count2; )
@@ -130,7 +130,7 @@ string UnionBinaryFiles (string InputFileName1, string InputFileName2)
 }
 
 template <class T>
-bool SortWithFiles (string InputFileName, string OutputFileName)
+bool SortWithFiles (std::string InputFileName, std::string OutputFileName)
 {
     file_off_t sz = FileSize(InputFileName.c_str());
     T dummy;
@@ -165,7 +165,7 @@ bool SortWithFiles (string InputFileName, string OutputFileName)
                 NewPortionNames.insert(NewPortionNames.begin(), PortionNames.back()); // insert to the beginning
             else
             {
-                string UnitedFile = UnionBinaryFiles<T>(PortionNames[i], PortionNames[i+1]);
+                std::string UnitedFile = UnionBinaryFiles<T>(PortionNames[i], PortionNames[i+1]);
                 if (UnitedFile.empty())
                     return false;
                 
@@ -195,9 +195,9 @@ bool SortWithFiles (string InputFileName, string OutputFileName)
 }
 
 template <class T>
-bool SortWithFiles (string InputFileName)
+bool SortWithFiles (std::string InputFileName)
 {
-    string TmpName = CreateTempFileName();
+    std::string TmpName = CreateTempFileName();
     if (!SortWithFiles<T>(InputFileName, TmpName))
                return false;
 

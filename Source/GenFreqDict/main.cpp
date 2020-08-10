@@ -133,7 +133,7 @@ int  mymain(int argc, char **argv)
 
 	std::cerr << "Parsing aligned sentences\t\t\t\r";
 	const char *in_str = argv[1];
-	string mainFolder = GetPathByFile(in_str);
+	std::string mainFolder = GetPathByFile(in_str);
 	const char *out_str = argv[2];
 	std::ifstream file_list(in_str);
 	out.open(out_str, std::ios::binary);
@@ -168,7 +168,7 @@ int  mymain(int argc, char **argv)
 			while((word = r_tok()))
 			{
 				std::vector<CFormInfo> p;
-				string w = word;
+				std::string w = word;
 				if (MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(false,w, false, false, p))
 					r_id.insert(r_id.end(), p.begin(), p.end());
 
@@ -176,7 +176,7 @@ int  mymain(int argc, char **argv)
 			while((word = e_tok()))
 			{
 				std::vector<CFormInfo> p;
-				string w = word;
+				std::string w = word;
 				if (MorphHolderEng.m_pLemmatizer->CreateParadigmCollection(false,w, false, false, p))
 					e_id.insert(e_id.end(), p.begin(), p.end());
 			}

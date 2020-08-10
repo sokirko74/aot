@@ -20,7 +20,7 @@ public:
   // DETERMi для этого актанита
   vector<TCortege10>	m_ArticleCorteges;
   // направление, в котором следует искать этот актант (см. домен D_POSITION)
-  string				m_Direction;
+  std::string				m_Direction;
   // SFi для этого актанита
   vector< vector<string> >		m_ActantSemFets;
   // словарь, из которого было взято это грамматическое выражение
@@ -33,9 +33,9 @@ public:
   long		GetSynRel(long CortegeNo) const;
   long		GetSynFet(long CortegeNo) const;
   // то же, что и предыдущие две функции, но выдаются строки
-  string	GetSynFetStr(long CortegeNo) const;
-  string	GetSynRelStr(long CortegeNo) const;
-  bool      HasSemFet (const string& SemFet) const;
+  std::string	GetSynFetStr(long CortegeNo) const;
+  std::string	GetSynRelStr(long CortegeNo) const;
+  bool      HasSemFet (const std::string& SemFet) const;
   void		SetEmpty();
   bool		IsEmpty() const;
   void		InsertReverseSynOToTheBegining();

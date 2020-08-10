@@ -24,8 +24,8 @@ void TSemanHttpServer::Load() {
 }
 
 
-string TSemanHttpServer::Translate(const string& russian, const string &po) {
-	string graphStr;
+std::string TSemanHttpServer::Translate(const std::string& russian, const std::string &po) {
+	std::string graphStr;
 	try {
 		LogMessage(Format("  FindSituations (po=%s) %s\n", po.c_str(), russian.c_str()));
 		SemBuilder.FindSituations(russian.c_str(), 0, po.c_str(), 20000, -1, "", graphStr);
@@ -35,14 +35,14 @@ string TSemanHttpServer::Translate(const string& russian, const string &po) {
 	}
 	catch (...)
 	{
-		string s = SemBuilder.m_RusStr.m_pData->m_LastError;
+		std::string s = SemBuilder.m_RusStr.m_pData->m_LastError;
 		if (s.empty())
 			s = "unknown error";
 		throw CExpc(s);
 	}
 
 	try {
-		string res;
+		std::string res;
 		for(;;) {
 			LogMessage("  TranslateToEnglish\n");
 			if (!SemBuilder.TranslateToEnglish(graphStr)) {
@@ -51,7 +51,7 @@ string TSemanHttpServer::Translate(const string& russian, const string &po) {
 			}
 
 			LogMessage("  BuildSentence\n");
-			string TranslatedSent;
+			std::string TranslatedSent;
 			if (!SemBuilder.BuildSentence(TranslatedSent))
 			{
 				LogMessage("Error in Synthesis\n");
@@ -74,13 +74,13 @@ string TSemanHttpServer::Translate(const string& russian, const string &po) {
 	}
 }
 
-string TSemanHttpServer::BuildRusGraph(const string& russian, const string &po)
+std::string TSemanHttpServer::BuildRusGraph(const std::string& russian, const std::string &po)
 {
 	try {
 		LogMessage("Build Graph: " + russian);
 		
-		string res;
-		string graphStr;
+		std::string res;
+		std::string graphStr;
 		if (!SemBuilder.FindSituations(russian.c_str(), 0, po.c_str(), 20000, -1, "", graphStr)) {
 			throw CExpc("Error in SemBuilder\n");
 		}
@@ -98,7 +98,7 @@ string TSemanHttpServer::BuildRusGraph(const string& russian, const string &po)
 
 };
 
-string TSemanHttpServer::OnParsedRequest(TDaemonParsedRequest& req) {
+std::string TSemanHttpServer::OnParsedRequest(TDaemonParsedRequest& req) {
 	try {
 		auto topic = evhttp_find_header(&req.headers, "topic");
 		if (topic == nullptr) {

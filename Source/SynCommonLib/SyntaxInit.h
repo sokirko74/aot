@@ -105,11 +105,11 @@ public:
 
     bool IsValid() const;
 
-    bool ReadListFile(const string &FileName, StringVector &C);
+    bool ReadListFile(const std::string &FileName, StringVector &C);
 
     const CThesaurus *GetThesByThesId(UINT ThesId) const;
 
-    void OutputErrorString(string strMsg) const;
+    void OutputErrorString(std::string strMsg) const;
 
     bool LoadTermins(const CDictionary *piOborDic);
 
@@ -155,6 +155,6 @@ public:
 };
 
 
-bool GetRegString(string key, string &value);
+bool GetRegString(std::string key, std::string &value);
 
 extern bool has_item(const StringVector *C, const char *item);

@@ -400,11 +400,11 @@ inline size_t restore_from_bytes(CTrieRelation& t, const BYTE* buf)
 	return get_size_in_bytes(t);
 };
 
-bool CTrieHolder::Load(const SymbolInformationType* Info, string GrammarFileName)
+bool CTrieHolder::Load(const SymbolInformationType* Info, std::string GrammarFileName)
 {
 	m_pSymbolInformation = Info;
 	m_AlphabetSize = m_pSymbolInformation->size();
-	string PrecompiledFile = MakeFName(GrammarFileName,"automat");
+	std::string PrecompiledFile = MakeFName(GrammarFileName,"automat");
 	FILE * fp = fopen(PrecompiledFile.c_str(), "rb");
 	if (!fp)
 	{
@@ -432,9 +432,9 @@ bool CTrieHolder::Load(const SymbolInformationType* Info, string GrammarFileName
 	return true;
 };
 
-bool CTrieHolder::Save(string GrammarFileName) const
+bool CTrieHolder::Save(std::string GrammarFileName) const
 {
-	string PrecompiledFile = MakeFName(GrammarFileName,"automat");
+	std::string PrecompiledFile = MakeFName(GrammarFileName,"automat");
 	FILE * fp = fopen(PrecompiledFile.c_str(), "wb");
 	if (!fp)
 	{

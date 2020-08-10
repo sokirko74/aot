@@ -24,7 +24,7 @@ protected:
 	int			m_nPrevItem;			// item over which the mouse cursor was
 	BOOL		m_bMouseOver;
 
-	void SetToolTipText(LPCTSTR string, CPoint point);
+	void SetToolTipText(LPCTSTR std::string, CPoint point);
 	int ItemFromPoint(CPoint point);
 	LRESULT OnMouseHover (WPARAM wParam, LPARAM lParam);
 	LRESULT OnMouseLeave(WPARAM wParam, LPARAM lParam);

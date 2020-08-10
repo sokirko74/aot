@@ -55,7 +55,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	if (!is_left_noun_modifier (Wi)) return false;
 	if( Wi.is_lemma("КОТОРЫЙ") )
 	  		return false;
-	string debug_str;
+	std::string debug_str;
 	bool bFound_VSE = false; //слово "всe" начинает группу
 	bool bFoundParticiple = false; //нашли дст., пе, причастие
 	bool bAdjShouldBeInNominativOrGenitiv = false; //чтобы собрать "две красивых девочки"

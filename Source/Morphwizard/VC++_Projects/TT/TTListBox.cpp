@@ -80,9 +80,9 @@ void CTTListBox::ShowToolTip()
 
 }
 
-void CTTListBox::SetToolTipText(LPCTSTR string)
+void CTTListBox::SetToolTipText(LPCTSTR std::string)
 {
-	m_strToolTipText = string;
+	m_strToolTipText = std::string;
 
 	ShowToolTip();
 }

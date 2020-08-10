@@ -64,17 +64,17 @@ struct SPosleLog
 	};
 
 	CRossInterp   m_PosleLogPrep;
-	string        m_PosleLog;
+	std::string        m_PosleLog;
 	// домен D_POSITION (<,<<,>>,>,^, "dir_obj _")
-	string	      m_Position;
+	std::string	      m_Position;
 
 };
 
 
 struct CTenseHistory {
 	EngVerbTenseEnum	m_Tense;
-	string				m_Maker;
-	CTenseHistory(EngVerbTenseEnum	Tense, 	string Maker)
+	std::string				m_Maker;
+	CTenseHistory(EngVerbTenseEnum	Tense, 	std::string Maker)
 	{
 		m_Tense = Tense;
 		m_Maker = Maker;
@@ -105,13 +105,13 @@ public:
 	 // вспомогательный  глагол будет добавлен функцией BuildAuxiliaryVerbs
 	 bool			 m_bMorphologicalPassiveForm;
 	 bool			 m_bImperative;
-	 string			 m_OneselfStr;
+	 std::string			 m_OneselfStr;
 
 
 	 
      vector<CTenseHistory>  m_TenseHistory;
 	 
-	 void SetTense(EngVerbTenseEnum	NewTense, string Maker);
+	 void SetTense(EngVerbTenseEnum	NewTense, std::string Maker);
 	 EngVerbTenseEnum GetTense() const;
 	 void Init();
 	 CEngSemWord();
@@ -126,7 +126,7 @@ enum ArticleCauseEnum {	ArticleFromDict, ArticleFromOrdNum, ZeroArticleForProper
 						NoIndefArticleForMassNouns, IndefArticleAfterAs, DefArticleBecauseDefiniteClause, 
 						DefArticleForSingleRanks, OverwriteArticleForTimeNodes, OverwriteArticleForTerminNodes};
 
-extern string GetArticleCauseHistory (const vector<ArticleCauseEnum>& t);
+extern std::string GetArticleCauseHistory (const vector<ArticleCauseEnum>& t);
 extern BYTE GetOnePOS(long poses);
 
 
@@ -144,7 +144,7 @@ public:
 	
 
 	bool				m_bNotUseTo;
-	string				m_ArticleStr;
+	std::string				m_ArticleStr;
 	vector<ArticleCauseEnum>	m_ArticleCauseHistory;
 
 	void SetGrammemsRich(QWORD g);
@@ -161,7 +161,7 @@ public:
 
 	EngVerbTenseEnum GetTense() const;
 	BYTE GetPos() const;
-	bool IsLemma(string Lemma) const;
+	bool IsLemma(std::string Lemma) const;
 };
 
 
@@ -175,7 +175,7 @@ public:
 	CSemPattern  m_Pattern; 
 	int	m_PatternNoInArticle;
 
-	string m_engPrep;
+	std::string m_engPrep;
 	bool m_bSourceClauseIsMain;
 	EGramCortegeType m_GramType; //по какому типу перевелось
 
@@ -183,7 +183,7 @@ public:
 	bool m_bAuxFlag;
 
 	
-	CEngSemRelation (CValency Valency,long SourceNodeNo,long TargetNodeNo, string SyntacticRelation);
+	CEngSemRelation (CValency Valency,long SourceNodeNo,long TargetNodeNo, std::string SyntacticRelation);
     CEngSemRelation (const CSemRelation& X);
 	void Init();
 
@@ -270,7 +270,7 @@ public:
     virtual const CSemNode&	GetNode(int NodeNo) const {return m_Nodes[NodeNo];}
 	virtual		  CSemNode*	GetNodePtr(int NodeNo)  {return &(m_Nodes[NodeNo]);}
 	virtual int				GetNodesSize() const {return m_Nodes.size();};
-	virtual string GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const;
+	virtual std::string GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const;
 	    // перечень всех СемО
 	vector<CEngSemRelation>	m_Relations;
     virtual const CSemRelation*	GetRelation(int RelNo) const {return &(m_Relations[RelNo]);}
@@ -278,7 +278,7 @@ public:
 	virtual int					GetRelationsSize() const {return m_Relations.size();};
 	virtual void				EraseRelation(int RelNo) {m_Relations.erase(m_Relations.begin() +RelNo);};
 
-	virtual void GetColorAndWidthOfRelation(int RelNo,float& Width,string& Color);
+	virtual void GetColorAndWidthOfRelation(int RelNo,float& Width,std::string& Color);
 
 	//===========    работа с дополнительными семантическими отношениями 
 	vector<CEngSemRelation>		m_DopRelations;
@@ -304,23 +304,23 @@ public:
 	
 
 	 void CreateSimpleEnglNodeWithInterp(CRossInterp UnitInterp, CEngSemNode& engNode);
-  	 void CreateSimpleEnglNode(string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm, DictTypeEnum DictType= Aoss, int iMean = 1 );
-	 void CreateSimpleEnglNodeByOldNode(string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm , CEngSemNode& oldNode);
+  	 void CreateSimpleEnglNode(std::string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm, DictTypeEnum DictType= Aoss, int iMean = 1 );
+	 void CreateSimpleEnglNodeByOldNode(std::string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm , CEngSemNode& oldNode);
 
-	int FindEngVal(string strRusVal, CEngSemNode& engNode,  vector<long>& iBadVals, bool bUseHierarchy = true);
-	bool ValencyEq(string strRusVal,string strEngVal);
+	int FindEngVal(std::string strRusVal, CEngSemNode& engNode,  vector<long>& iBadVals, bool bUseHierarchy = true);
+	bool ValencyEq(std::string strRusVal,std::string strEngVal);
 
 	CEngInterp FindBestEnglishNodes( int iRusNode , vector<CEngInterp>& vectorEngEquivs, vector<long>& bestRels, int& iSubjRel);
-	bool HasThisLexFunc(string LexFunctName,  CRossInterp  UnitInterp, CLexicalFunctionField& LexicalFunct);
+	bool HasThisLexFunc(std::string LexFunctName,  CRossInterp  UnitInterp, CLexicalFunctionField& LexicalFunct);
 	int GetEnglishNodeBadWeight( int iRusNode, CEngInterp& UnitInterp, vector<long>& goodRels, int& iSubjRels);
 	int GetReverseRelValNo(const CSemRelation& rusRel,CEngSemNode& reverseNode);
 	void CreateEnglNode(CEngInterp UnitInterp, CEngSemNode& engNode, const CSemNode& rusNode);
 	void CreateEnglNodeForEngColloc(long UnitNo, CEngSemNode& engNode) const;
-	string GetItemStr(long lItemNo, DictTypeEnum type /*= Aoss*/) const ;
+	std::string GetItemStr(long lItemNo, DictTypeEnum type /*= Aoss*/) const ;
 	void TranslateOneActant( int iRel,  int iEngNode);
 	void TranslateActants( int iEngNode, int iClause);
-	string GetPrep(const TCortege& cortege, DictTypeEnum type);
-	string HasParticularPrepInField( CRossHolder* pLocRossDoc,int  iRusActant,CEngSemNode&  engActantm);
+	std::string GetPrep(const TCortege& cortege, DictTypeEnum type);
+	std::string HasParticularPrepInField( CRossHolder* pLocRossDoc,int  iRusActant,CEngSemNode&  engActantm);
 	
 
 	bool Rule_TranslatePoss( int iRusActant, long RelationNo, const vector<TCortege>& GramCorteges, int iEngNode);
@@ -331,18 +331,18 @@ public:
 
 	int  NumPrepPhr(const vector<TCortege>& GramCorteges, DictTypeEnum type);
 	void ReadMorphFromMainGF(WORD UnitNo, DictTypeEnum type, CSemWord& Word) const;
-	void InitEngWordAndLemma(CEngSemWord& semWord, string strEngLemma) const;
+	void InitEngWordAndLemma(CEngSemWord& semWord, std::string strEngLemma) const;
 
-	typedef map< string,vector<SGramCortegesAndType> > SemRelToGramCortegeMap_t;
+	typedef map< std::string,vector<SGramCortegesAndType> > SemRelToGramCortegeMap_t;
 	EGramCortegeType GetGramCortegeType(TCortege& cortege, DictTypeEnum type);
 	
 	SemRelToGramCortegeMap_t m_SemRelToGramCortegeMap;
 	void FillSemRelToGramCortegeMap();
-	typedef pair<string, string> StringPair;
+	typedef pair<std::string, std::string> StringPair;
 	void FillVectorOfGramCortegeAndType(vector<SGramCortegesAndType>& GramCortegesAndTypeV,vector<TCortege>& GramCortegesm, DictTypeEnum type );
-	string BuildSentence();
+	std::string BuildSentence();
 
-	vector< pair<string, string> > m_SemRelEquivs;
+	vector< pair<std::string, std::string> > m_SemRelEquivs;
 	void FillSemRelEquivs();
 
 	bool Rule_TranslateInfinitive( int iRusActant, long RelationNo, const vector<TCortege>& GramCorteges, int iEngNode);
@@ -350,9 +350,9 @@ public:
 	bool HasGerund(const vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type );
 	bool HasToPlusInf(const vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type );
 	bool HasInf(const vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type );
-	bool HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, string strItem);
-	bool HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type, string strItem);
-	string GetGerundPrep(const TCortege& cortege, DictTypeEnum type );
+	bool HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, std::string strItem);
+	bool HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type, std::string strItem);
+	std::string GetGerundPrep(const TCortege& cortege, DictTypeEnum type );
 
 
 	bool IsSubj (const CEngSemRelation& Rel) const ;
@@ -362,12 +362,12 @@ public:
 	void InitEngVals(CEngSemNode& Node);
 
 	bool AddGXiFromLexFunOperWord(long LexFunctWordUnitNo, CSemPattern& semPattern1, int iValNum, int iOperNum);
-	UINT EngPOSByRusPOS(UINT rus_pos, string lemma);
+	UINT EngPOSByRusPOS(UINT rus_pos, std::string lemma);
 	int InterpretRusNodeAndItsChildren( CEnglishEquivMap& mapRNodeToENode, int iRusNode);
 	int InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int iRusNode, vector<long>& RusRelsToEngRels, int& iSubjRel);
 
     void FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode );	 	 
-	void FindEnglishEquiv(vector<CEngInterp>& engEquivs, const string& rus_lemma, BYTE MeanNo, DictTypeEnum   EngDictType);
+	void FindEnglishEquiv(vector<CEngInterp>& engEquivs, const std::string& rus_lemma, BYTE MeanNo, DictTypeEnum   EngDictType);
 	bool FindEnglishEquivHelper(vector<CEngInterp>& engEquivs, const CEngUnitNoToRusUnit RusEquivToEngArticleNo, DictTypeEnum type );
     bool InterpretWithPlugArticles (long RusNodeNo, CEnglishEquivMap& mapRNodeToENode);
 
@@ -376,18 +376,18 @@ public:
 	bool AddGXiFromLexFunFuncWord(long LexFunctWordUnitNo, CSemPattern& semPattern1, int iValNum, int iFuncNum );
 	void CreateEngLexFunDummyRel(CLexicalFunctionField& LexicalFunct, int iLexFunNodeDummy, int iEngNode);
 	enum ELexFunType { Oper, Func, Magn, NoneFun};
-	bool HasCopul(vector<CValency>& Vals, string strRusVal);
+	bool HasCopul(vector<CValency>& Vals, std::string strRusVal);
 	int InterpretCopulNodeAndChildren( CEnglishEquivMap& mapRNodeToENode, int iRusCopulNode, int iEngCopulParentNode, int iValNum);	
-	void BuildCopulNodeSentence(int iEngNode,bool& bSubjFound, string& sent1, string& sent2 );
+	void BuildCopulNodeSentence(int iEngNode,bool& bSubjFound, std::string& sent1, std::string& sent2 );
 	void IndexSemFets();
 
 
 	translate_helper helper;
 	bool init_helper();
 	void CreateEngClauses();
-	TCortege CreateCortege(string strGX, string strDomen);	
-	void AddSemRelToGramCortege(string semRel, TCortege cortege);
-	EGramCortegeType GetGramCortegeType(string& gram_str);
+	TCortege CreateCortege(std::string strGX, std::string strDomen);	
+	void AddSemRelToGramCortege(std::string semRel, TCortege cortege);
+	EGramCortegeType GetGramCortegeType(std::string& gram_str);
 	void GetGramCortegesAndTypeFromRel(vector<SGramCortegesAndType>& GramCortegesAndTypeV, CEngSemRelation& semRel);
 	void GetIncomingRelationsInThisClause(int iNode, vector<long>& IncomeRels) const;
 	
@@ -405,7 +405,7 @@ public:
 	void GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEngEquivs, int RusUnitNo, DictTypeEnum   DictType  = Ross, int iRusNode = -1) const; 
 	void GetEngEquivsFromRusArticle_test(vector< SEngEquiv >& vectorEngEquivs, int RusUnitNo, DictTypeEnum   DictType) const; 
 	void IntersectEngEquivs(vector< SEngEquiv >& vectorEngEquivsFromRusArticle, vector<CEngInterp>& vectorEngEquivsFromAoss );
-	bool HasThisGX(const vector<TCortege>& gramCorteges, string value, DictTypeEnum type) const;
+	bool HasThisGX(const vector<TCortege>& gramCorteges, std::string value, DictTypeEnum type) const;
 	void ChangeClauseNo(int oldClauseNo, int newClauseNo);
 
 	bool Init();
@@ -421,7 +421,7 @@ public:
 	void ChangeGrammemsForDirObj(int iNode);
 
 	void MoveMeaningRelsToNewNode(int iOldNode,int iNewNode);
-	int  MakeBeNodeForEngNode(int iEngNode,string sTenseHistory,bool bCheckOtherVerb = true);
+	int  MakeBeNodeForEngNode(int iEngNode,std::string sTenseHistory,bool bCheckOtherVerb = true);
 	
 	void RefineEngCollocPreps();
 	void RefineComparativeMNAwithPreps();
@@ -432,7 +432,7 @@ public:
 	bool CompareCortegeItems(const CRossHolder* RossHolder,
 		const TCortege &X,const TCortege &Y) const;
 
-	bool HasALG(DictTypeEnum type, long UnitNo, string strAlg);
+	bool HasALG(DictTypeEnum type, long UnitNo, std::string strAlg);
 	
 	void ApplyModalCopulRule(int iEngNode);
 	void ApplyNoRule(int iEngNode);
@@ -482,19 +482,19 @@ public:
 	BYTE GetPosFromPosBit(size_t Pos) const;
 	bool IsSubjPattern(const CEngSemRelation& Rel ) const ;
 	void CreateEnglNodeForEngObor(long UnitNo, CEngSemNode& engNode) const;
-	bool GetDictUnitInterpForObor(string oborStr, CRossInterp& interp);	
+	bool GetDictUnitInterpForObor(std::string oborStr, CRossInterp& interp);	
 	bool IsSubConj(CRossInterp interp);
-	bool SetSimpleEngPrep(string prep, int iNode, int iRel);
+	bool SetSimpleEngPrep(std::string prep, int iNode, int iRel);
 
-	void GetAFieldVector(string FieldStr, DictTypeEnum type, vector<TCortege>& vectorAGX, long UnitNo) const;
+	void GetAFieldVector(std::string FieldStr, DictTypeEnum type, vector<TCortege>& vectorAGX, long UnitNo) const;
 	
 	
 	
-	string GetCortegeStr(DictTypeEnum type, const TCortege& cortege) const;
-	bool IsGramFet(const CEngSemRelation& Rel , const string strPattern) const;
-	bool HasGramFet(const CEngSemRelation& Rel, const string strPattern) const;
+	std::string GetCortegeStr(DictTypeEnum type, const TCortege& cortege) const;
+	bool IsGramFet(const CEngSemRelation& Rel , const std::string strPattern) const;
+	bool HasGramFet(const CEngSemRelation& Rel, const std::string strPattern) const;
 	bool IsObjPattern(const CEngSemRelation& Rel ) const;
-	string GetConj(const vector<TCortege>& GramCorteges, DictTypeEnum type);
+	std::string GetConj(const vector<TCortege>& GramCorteges, DictTypeEnum type);
 	void HideCopul();
 	void FindEngWords(vector<CEngInterp>& resEngUnits, vector< SEngEquiv >& vectorEngEquivs, vector<DictTypeEnum> EngDictTypes);
 	void CreateHaveSemNode(CEngSemNode& newNode, int& iSubjPattern , int& iObjPattern, int iMeanNum=1 );
@@ -520,7 +520,7 @@ public:
     // переводит тайм-группу (на вход подается главный узел группы)
     bool					translate_time_node ( int MainTimeNodeNo);
 	// переводит элемент тайм-группы с помощью функции SR
-	string					time_tr_by_ross(long RusNodeNo, string &brack);
+	std::string					time_tr_by_ross(long RusNodeNo, std::string &brack);
     // перевод терминов. На вход подается главное слово термина
 	bool					translate_termin_node(int MainNodeNo);
 	// перевод бинарным словарем 
@@ -538,7 +538,7 @@ public:
 	void			FreeWordNo(long WordNo);	
 
      // выдает морфологическое представление узла (лемма и граммема)
-	virtual string	GetMorphologyOfNode(long NodeNo) const;
+	virtual std::string	GetMorphologyOfNode(long NodeNo) const;
 
 	// проходит по сыновьям узла указанной структуры
 	// и смотрит, есть ли у сыновей поле RUSETENSE, в котором 
@@ -548,7 +548,7 @@ public:
 	//  правило согласования времен
 	void			ApplySequenceOfTenseRule();
 	// получение по типу EngVerbTenseEnum строкового представления
-	string			GetTenseString(EngVerbTenseEnum Tense) const;
+	std::string			GetTenseString(EngVerbTenseEnum Tense) const;
 	// выделение вспомогательного глагола
 	void			BuildAuxiliaryVerbs();
 	// является ли данный узел вспомогательным  глаголом
@@ -589,15 +589,15 @@ public:
 	// инициализирует поле CEngSemNode::m_Article по словарной статье
 	void			InitArticleField();
 	// провереят, что у  узла есть выходящая валентность RelationStr 
-	bool			HasOutRelationByName(long NodeNo, string RelationStr) const;
+	bool			HasOutRelationByName(long NodeNo, std::string RelationStr) const;
 	// выдает выходящие из узла NodeNo внутриклаущные отношения. 
 	void			GetOutcomingInClauseRelations (long NodeNo, vector<long>& Relations) const;
 	// проверяет, что  все выходящие отношения имеют название RelationStr
-	bool			CheckAllOutcomingRelationsIfAnyExists (long NodeNo, string RelationStr) const;
+	bool			CheckAllOutcomingRelationsIfAnyExists (long NodeNo, std::string RelationStr) const;
 	// провереят, что у  узла есть выходящая валентность в узел с валентностями Grammems
 	bool			HasOutRelationByGrammems(long NodeNo, QWORD Grammems) const;
 	// проверяет, что у  узла есть выходящее отношение, идущее в примитивный узел, который содержит слово  Word
-	int				GetOutRelationByWord(long NodeNo, string Word) const;
+	int				GetOutRelationByWord(long NodeNo, std::string Word) const;
 	// проверяет, что у  узла есть выходящее отношение, идущее в узел, которому приписана  часть речи POS
 	bool			HasOutRelationByPoses(long NodeNo, poses_mask_t Pos) const;
 
@@ -617,14 +617,14 @@ public:
 	"the sooner, the better". Здесь используются поля POSi, которые 
 	устанавливают позиции актантов i-го актанта.
 	*/
-	void				SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, string Position);
+	void				SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, std::string Position);
 	void				SetPositionsFromConj ();
 	void				SetSelectiveRelations();
 	long				FindNodeByLeafId (long NodeNo, int LeafId) const;
 	/*
 		проверяет, что в русской морфологии Lemma может быть глаголом
 	*/
-	bool				CanBeRusVerb(const string& Lemma)  const;
+	bool				CanBeRusVerb(const std::string& Lemma)  const;
 
 	/*
 	устанавливает позицию для дополнений, которые осложнены определительными придаточными

@@ -53,7 +53,7 @@ void CGraphanDicts ::FreeData()
 	m_Abbrevs.clear();
 };
 
-bool CGraphanDicts:: ReadENames (string FileName)
+bool CGraphanDicts:: ReadENames (std::string FileName)
 {
 	assert (m_Language != morphUnknown);
    FILE* EnamesFp = MOpen (FileName.c_str(),RD_MODE);
@@ -85,7 +85,7 @@ bool CGraphanDicts:: ReadENames (string FileName)
 
 
 
-bool CGraphanDicts:: ReadIdents (string FileName)
+bool CGraphanDicts:: ReadIdents (std::string FileName)
 {
 	assert (m_Language != morphUnknown);
 
@@ -97,7 +97,7 @@ bool CGraphanDicts:: ReadIdents (string FileName)
 
 	while (fgets (s, MaxNameSize, EnamesFp))
 	{
-		string q = s;
+		std::string q = s;
 		Trim(q);
 		if (q.empty()) continue;
 		m_Idents[(unsigned char)q[0]].push_back(q);
@@ -124,7 +124,7 @@ bool CGraphanDicts:: FindInIdents (const char* s, BYTE& len) const
 	return false;
 };
 
-bool CGraphanDicts:: ReadSpaces (string FileName)
+bool CGraphanDicts:: ReadSpaces (std::string FileName)
 {
 	assert (m_Language != morphUnknown);
 

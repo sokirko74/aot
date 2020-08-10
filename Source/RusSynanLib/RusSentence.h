@@ -29,10 +29,10 @@ struct SAnalyticalFormVariant
 	//часть речи омонима, являющегося потенциальным предикатом
 	eAnalyticType ePos;
 	//лемма глагола
-	string s_Lemma;
+	std::string s_Lemma;
 	//все омонимы слова предикаты;
 	bool bAllHomPredik;
-	SAnalyticalFormVariant(int iWrd, int iCount, eAnalyticType iPos, string s_lem, bool bAllPredik)
+	SAnalyticalFormVariant(int iWrd, int iCount, eAnalyticType iPos, std::string s_lem, bool bAllPredik)
 	{
 		iWordNum = iWrd;
 		iHomCount = iCount;
@@ -195,7 +195,7 @@ public:
 	bool	gleiche_subj_pred_for_numerals_as_nouns(const CMorphVariant& synVariant,int i_predk, int i_subj) const;
 	bool	check_verb_subj_coordination(const CMorphVariant& synVariant, int predk, int SubjGroupFirstWordNo, int& SubjWordNo) const;
 	bool	check_adj_subj_coordination(const CMorphVariant& synVariant,int predk, int SubjGroupFirstWordNo, int& SubjWordNo) const;
-	bool	IsGoodSubject(const CMorphVariant& synVariant, const string& LastSentenceChar) const;
+	bool	IsGoodSubject(const CMorphVariant& synVariant, const std::string& LastSentenceChar) const;
 
 	int		GetCountOfStrongRoots(const CClause& C, const CMorphVariant& synVar) const;
 	bool	WordSchemeEqForThesaurus(const CSynHomonym& Homonym, const CSynPlmLine& word_scheme) const;

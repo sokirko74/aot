@@ -4,7 +4,7 @@
 
 #include <memory>
 
-typedef void (*TLogFunction)(const string&);
+typedef void (*TLogFunction)(const std::string&);
 
 enum DaemonLogModeEnum {
 	dlmQuiet = 0,
@@ -25,19 +25,19 @@ class TRMLHttpServer {
 	using TInnerServer = std::unique_ptr<evhttp, decltype(&evhttp_free)>;
 	TInnerServer Server;
 	static DaemonLogModeEnum LogMode;
-	static string LogFileName;
+	static std::string LogFileName;
     int SrvPort;
 public:
 	TRMLHttpServer();
 	virtual ~TRMLHttpServer() {};
-	void Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode, const string logFile);
+	void Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode, const std::string logFile);
 	void Start();
 	void OnHttpRequest(evhttp_request *req);
-	virtual string OnParsedRequest(TDaemonParsedRequest& request) = 0;
+	virtual std::string OnParsedRequest(TDaemonParsedRequest& request) = 0;
 
-	static void LogMessage(const string &t);
+	static void LogMessage(const std::string &t);
 };
 
 
-DaemonLogModeEnum ParseDaemonLogMode(string strMode);
-void DealWithLockFile(const string fileName);
+DaemonLogModeEnum ParseDaemonLogMode(std::string strMode);
+void DealWithLockFile(const std::string fileName);

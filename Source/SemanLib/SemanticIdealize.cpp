@@ -273,7 +273,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 
 				if (RossHolder->IsLemGroupBegining(RossHolder->GetSynFet(C))) 
 				{
-					string s =  RossHolder->GetDomItemStrInner(RossHolder->GetSynFet(C)); 
+					std::string s =  RossHolder->GetDomItemStrInner(RossHolder->GetSynFet(C)); 
 					int j = s.find("+");
 					if (j==-1) continue;
 					s.erase(0, j+1);
@@ -321,8 +321,8 @@ void CRusSemStructure::ApplySubordinationCases ()
 			const CRusGramTab *R = (CRusGramTab*)m_piSent->GetOpt()->GetGramTab();
 			CRusSemNode& NounN = m_Nodes[m_Relations[i].m_SourceNodeNo];
 			CRusSemNode& NumN = m_Nodes[m_Relations[i].m_TargetNodeNo];
-			string gcNoun = NounN.m_Words[NounN.m_MainWordNo].m_GramCodes;
-			string gc4 = NumN.m_GramCodes;
+			std::string gcNoun = NounN.m_Words[NounN.m_MainWordNo].m_GramCodes;
+			std::string gc4 = NumN.m_GramCodes;
 			if(gc4.length() == 2 && gcNoun.length() == 2) continue;
 			gc4 = R->GleicheAncode1(CaseNumberGender0, gc4, 
 				R->GetGramCodes(NUMERAL, NounN.GetGrammems() & (rAllCases|rAllGenders), CaseGender),

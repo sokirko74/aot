@@ -142,8 +142,8 @@ February 18, 2002  - replaced SetReadOnly() with OnSetReadOnly(), the control no
 #include <atlconv.h>   // for T2COLE() macro in DereferenceLinks() function
 #endif // __ATLCONV_H__
 
-// resource.h is only needed for the string table resources. If you do not put the FEC_IDS_*
-// strings in a string table, you do not need to include resource.h
+// resource.h is only needed for the std::string table resources. If you do not put the FEC_IDS_*
+// std::strings in a std::string table, you do not need to include resource.h
 #include "resource.h"
 
 #ifdef DETECT_MEMORY_LEAK
@@ -153,11 +153,11 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// These strings should be entered into a string table resource with the 
+// These std::strings should be entered into a std::string table resource with the 
 // FEC_IDS_* identifiers defined here, although this class will work
 // properly if they are not.
 //
-// string usage:
+// std::string usage:
 //
 // FEC_IDS_ALLFILES         - default file filter for CFileDialog
 // FEC_IDS_BUTTONTIP        - Text for the browse button tooltip
@@ -170,10 +170,10 @@ static char THIS_FILE[] = __FILE__;
 // FEC_IDS_OKBUTTON         - Text for the 'OK' (Open) button on CFileDialog
 //
 
-// FEC_IDS_ALLFILES will be defined in resource.h if these strings
-// are in a string table resource
+// FEC_IDS_ALLFILES will be defined in resource.h if these std::strings
+// are in a std::string table resource
 #if !defined FEC_IDS_ALLFILES
-#define FEC_NORESOURCESTRINGS /* so this class knows how to handle these strings */
+#define FEC_NORESOURCESTRINGS /* so this class knows how to handle these std::strings */
 #define FEC_IDS_ALLFILES        _T("All Files (*.*)|*.*||")
 #define FEC_IDS_BUTTONTIP       _T("Browse")
 #define FEC_IDS_FILEDIALOGTITLE _T("Browse for File")
@@ -811,7 +811,7 @@ BOOL CFileEditCtrl::FECBrowseForFolder()
     if (idl)
     {
         TCHAR lpstrBuffer[_MAX_PATH] = _T("");
-        if (SHGetPathFromIDList(idl, lpstrBuffer))  // get path string from ITEMIDLIST
+        if (SHGetPathFromIDList(idl, lpstrBuffer))  // get path std::string from ITEMIDLIST
         {
             if (GetFlags() & FEC_TRAILINGSLASH) // add a trailing slash if it is not already there
             {
@@ -1012,9 +1012,9 @@ void CFileEditCtrl::FillBuffers()
     }
     lpstrEnd = _tcschr(lpstrStart, chSeparator);// find separator character
     if (lpstrEnd)
-        *lpstrEnd = 0;                          // mark end of string
+        *lpstrEnd = 0;                          // mark end of std::string
     LPTSTR temp = lpstrStart + _tcslen(lpstrStart) - 1;
-    while (_istspace(*temp))                    // remove trailing white spaces from string
+    while (_istspace(*temp))                    // remove trailing white spaces from std::string
     {
         *temp = 0;
         temp--;
@@ -1050,7 +1050,7 @@ void CFileEditCtrl::FillBuffers()
     ExpandWildCards(File);
     if (dwFlags & FEC_MULTIPLE)
     {
-        lpstrStart = lpstrEnd + 1;              // reset to the start of the next string
+        lpstrStart = lpstrEnd + 1;              // reset to the start of the next std::string
         while (lpstrEnd)
         {   // add the rest of the files as they have been typed (include any path information)
             while (*lpstrStart == chSeparator || _istspace(*lpstrStart))
@@ -1059,16 +1059,16 @@ void CFileEditCtrl::FillBuffers()
                 break;                          // there are no more files entered
             lpstrEnd = _tcschr(lpstrStart, chSeparator); // find next separator character
             if (lpstrEnd)
-                *lpstrEnd = 0;                  // mark end of string
+                *lpstrEnd = 0;                  // mark end of std::string
             temp = lpstrStart + _tcslen(lpstrStart) - 1;
-            while (_istspace(*temp))            // remove trailing white spaces from string
+            while (_istspace(*temp))            // remove trailing white spaces from std::string
             {
                 *temp = 0;
                 temp--;
             }
             ExpandWildCards(lpstrStart);
             if (lpstrEnd)
-                lpstrStart = lpstrEnd + 1;      // reset to the start of the next string
+                lpstrStart = lpstrEnd + 1;      // reset to the start of the next std::string
         }
     }
     delete lpstrWindow;                         // delete working buffer
@@ -1259,7 +1259,7 @@ POSITION CFileEditCtrl::GetStartPosition()
 //
 //  CFileEditCtrl::GetValidFolder  (protected member function)
 //    Removes all files and nonexistant folders from the given path
-//    Adds a slash to the end of the path string if it is not already there
+//    Adds a slash to the end of the path std::string if it is not already there
 //
 //  Parameters :
 //    Path [in]  - The path to check
@@ -1301,7 +1301,7 @@ BOOL CFileEditCtrl::GetValidFolder(LPTSTR Path)
         }
     } while (pos > 0);
 
-    // no valid folder, set 'Path' to empty string
+    // no valid folder, set 'Path' to empty std::string
     Path[0] = 0;
     return valid;
 }
@@ -2423,11 +2423,11 @@ void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CString& rStr, DWORD dwFlags
 {
     CWnd *pWnd = pDX->m_pDlgWnd->GetDlgItem(nIDC);
     ASSERT(pWnd);
-    if (pDX->m_bSaveAndValidate)                // update string with text from control
+    if (pDX->m_bSaveAndValidate)                // update std::string with text from control
     {
         // ensure the control is a CFileEditCtrl control
         ASSERT(pWnd->IsKindOf(RUNTIME_CLASS(CFileEditCtrl)));
-        // copy the first file listed in the control to the string
+        // copy the first file listed in the control to the std::string
         rStr.Empty();
         CFileEditCtrl *pFEC = (CFileEditCtrl *)pWnd;
         POSITION pos = pFEC->GetStartPosition();
@@ -2435,7 +2435,7 @@ void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CString& rStr, DWORD dwFlags
             rStr = pFEC->GetNextPathName(pos);
     }
     else                                        // create the control if it is not already created
-    {                                           // set the control text to the text in string
+    {                                           // set the control text to the text in std::string
         CFileEditCtrl *pFEC = NULL;
         if (!pWnd->IsKindOf(RUNTIME_CLASS(CFileEditCtrl)))    // not subclassed yet
         {

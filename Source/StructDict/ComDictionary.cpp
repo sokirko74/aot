@@ -248,9 +248,9 @@ STDMETHODIMP CComDictionary::InsertDomItem(BSTR ItemStr, BYTE DomNo, int *result
 
 
 
-STDMETHODIMP CComDictionary::BuildSignat(ISignat* Signat, BSTR Domainstring, BSTR Name)
+STDMETHODIMP CComDictionary::BuildSignat(ISignat* Signat, BSTR Domainstd::string, BSTR Name)
 {
-	_bstr_t t1 = Domainstring;
+	_bstr_t t1 = Domainstd::string;
 	_bstr_t t2 = Name;
     CComObject<CComSignat>* It = reinterpret_cast<CComObject<CComSignat>*>(Signat); 
 	if (!CDictionary::BuildOneFieldFormat (*It->m_pSignat, (char*)t1, (char*)t2, m_MaxNumDom))
@@ -528,7 +528,7 @@ STDMETHODIMP CComDictionary::SetUnitModifTimeStr(WORD UnitNo, BSTR TimeStr)
 
 STDMETHODIMP CComDictionary::get_UnitEditor(WORD UnitNo, BSTR *pVal)
 {
-	string Editor =  GetUnitEditor(UnitNo);
+	std::string Editor =  GetUnitEditor(UnitNo);
 	_bstr_t t = Editor.c_str();
 	*pVal = t.copy();
 	return S_OK;	
@@ -581,7 +581,7 @@ STDMETHODIMP CComDictionary::put_RussianFields(BOOL newVal)
 
 STDMETHODIMP CComDictionary::ImportFromText(BSTR FileName, BOOL Simulating, int ConflictSolver, int StartEntry, BSTR* Messages)
 {
-	string sMessages;
+	std::string sMessages;
 	CDictionary::ImportFromText((const char*)_bstr_t(FileName),
 		Simulating==TRUE,
 		(ImportConflictEnum)ConflictSolver,

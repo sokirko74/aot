@@ -30,7 +30,7 @@ CGermanPostMorph::~CGermanPostMorph()
 
 bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
 {
-	string FileName = GetRegistryString("SimpleGrammar") +"/"+"person.grm";
+	std::string FileName = GetRegistryString("SimpleGrammar") +"/"+"person.grm";
 	if (access(FileName.c_str(), 04) != 0)
 		FileName = GetRegistryString("SimpleGrammar") +"/"+"example.grm";
 
@@ -54,7 +54,7 @@ bool	CGermanPostMorph::ProcessData(const CPlmLineCollection *piInTextItems)
 	//	return false;
 
 	// call CreateTokenList to refresh file lists from the disk (only modified files will be refreshed)
-	string ErrorMsg;
+	std::string ErrorMsg;
 	if (!m_PersonGrammar.CreateTokenList(ErrorMsg))
 	{
 		ErrorMessage (ErrorMsg);

@@ -13,13 +13,13 @@ struct CMorphPattern
 	MorphSearchStatus	m_SearchStatus;				
 	QWORD				m_Grammems;
 	size_t				m_Poses;
-	string				m_GrmAttribute;
+	std::string				m_GrmAttribute;
 
-	bool				Init(const CAgramtab* GramTab, string& ErrorMsg);
+	bool				Init(const CAgramtab* GramTab, std::string& ErrorMsg);
 	void				CopyFrom(const CMorphPattern& P);
 	void				SetNull();
-	string				ToString() const;
-	bool				FromString(const string& line);
+	std::string				ToString() const;
+	bool				FromString(const std::string& line);
 	bool				operator < (const CMorphPattern& _X1) const;
 	bool				operator ==(const CMorphPattern& _X1) const;
 
@@ -40,12 +40,12 @@ struct CGrammarItem
 {
 	bool				m_bMeta;
 	MainTokenTypeEnum   m_TokenType;
-	string				m_ItemStrId;
-	string				m_Token;
+	std::string				m_ItemStrId;
+	std::string				m_Token;
 	CMorphPattern		m_MorphPattern;
 	
-	map<string, string> m_Attributes;
-	string				m_Source; 
+	map<std::string, std::string> m_Attributes;
+	std::string				m_Source; 
 
 	//  an index in CWorkGrammar m_TokenListFiles
 	//  by deafult is -1
@@ -74,16 +74,16 @@ struct CGrammarItem
 	bool RuleItemPartialEqual (const CGrammarItem& _X1)  const;
 	
 
-	string	GetDumpString() const;
-	bool	ReadFromSourceString(string Source, string& ErrorStr,  MorphLanguageEnum Language);
+	std::string	GetDumpString() const;
+	bool	ReadFromSourceString(std::string Source, std::string& ErrorStr,  MorphLanguageEnum Language);
 
 
-	bool	AddAttribute(string Name, string Value, MorphLanguageEnum Language, string& ErrorStr, const string& SourceFileName);
+	bool	AddAttribute(std::string Name, std::string Value, MorphLanguageEnum Language, std::string& ErrorStr, const std::string& SourceFileName);
 	void	CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item);
-	string	toString() const;
-	bool	fromString(string& Result);
+	std::string	toString() const;
+	bool	fromString(std::string& Result);
 	bool	HasAnyOfWorkingAttributes() const;
-	string	GetFullFileName(const string& GrammarFileName) const;
+	std::string	GetFullFileName(const std::string& GrammarFileName) const;
 	
 };
 

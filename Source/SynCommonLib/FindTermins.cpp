@@ -6,12 +6,12 @@
 
 
 
-bool CSentence::EqToTermin(const CSynWord& Word,   const string& termin, const CSynPlmLine& word_scheme, int iHom) const
+bool CSentence::EqToTermin(const CSynWord& Word,   const std::string& termin, const CSynPlmLine& word_scheme, int iHom) const
 {
 	
 	assert(iHom < Word.m_Homonyms.size());
 	const CSynHomonym& hom = Word.m_Homonyms[iHom];
-	const string& strLemma = hom.m_strLemma;
+	const std::string& strLemma = hom.m_strLemma;
 	if( !strLemma.size() || !Word.m_strUpperWord[0] )
 		return false;
 
@@ -93,7 +93,7 @@ bool CSentence::FindTerminsHelper(	CWordVector::iterator words,
 	}
 
 	bool bWordEq = false;
-	string str_word =  words->m_strUpperWord;
+	std::string str_word =  words->m_strUpperWord;
 	
 	// раньше считалось, что в оборотоах нет лемм ( а теперь они есть),
 	// поэтому я добавил следующий if (Сокирко)
@@ -243,7 +243,7 @@ void CSentence::FindTermins()
 				for(int k = 0 ; k < word.m_Homonyms.size() ; k++ )
 				{
 					CSynHomonym& hom = word.m_Homonyms[k];					
-					string strLemma = hom.m_strLemma;
+					std::string strLemma = hom.m_strLemma;
 					
 					if( !strLemma.size() )
 						continue;

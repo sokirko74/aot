@@ -12,7 +12,7 @@ CSyntaxHolder GermanSyntaxHolder;
 CMorphologyHolder EnglishMorphHolder;
 
 
-string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
+std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
     auto str = evhttp_find_header(&request.headers, "minBigramsFreq");
     if (!str) {
         throw CExpc("minBigramsFreq is not specified");
@@ -40,14 +40,14 @@ const CMorphologyHolder *GetMorphHolder(MorphLanguageEnum l) {
     }
 }
 
-string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
+std::string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
     bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
     const CMorphologyHolder *Holder = GetMorphHolder(request.Langua);
     return LemmatizeJson(request.Query, Holder, withParadigms);
 };
 
 
-string TSynanHttpServer::ProcessSyntax(TDaemonParsedRequest &request) {
+std::string TSynanHttpServer::ProcessSyntax(TDaemonParsedRequest &request) {
     if (request.Langua == morphEnglish) {
         throw CExpc("unsupported language");
     }
@@ -73,7 +73,7 @@ void TSynanHttpServer::LoadSynan(bool loadBigrams) {
     };
 
     if (loadBigrams) {
-        string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";
+        std::string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";
         if (!FileExists(fileName.c_str()))
             throw CExpc(Format("cannot find bigrams file: %s", fileName));
         if (!InitializeBigrams(fileName))
@@ -81,7 +81,7 @@ void TSynanHttpServer::LoadSynan(bool loadBigrams) {
     }
 };
 
-string TSynanHttpServer::OnParsedRequest(TDaemonParsedRequest &req) {
+std::string TSynanHttpServer::OnParsedRequest(TDaemonParsedRequest &req) {
     try {
         if (req.Action == "morph") {
             return ProcessMorphology(req);

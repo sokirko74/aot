@@ -55,7 +55,7 @@ struct CClauseRelation
 struct CRelation : public CPeriod 
 {
 		QWORD		m_iGrammems;
-		string		m_GramCodes;
+		std::string		m_GramCodes;
 		EUnitType	m_SourceType;
 		EUnitType	m_TargetType;
 		ERelType	type; 
@@ -128,7 +128,7 @@ public:
     bool            m_bAlreadyBuiltRelations;    
 
 	//  used only for GLR Grammar
-	string			m_GramCodes;
+	std::string			m_GramCodes;
 	CPeriod			m_OtherGroup;
     
 	CGroup();
@@ -214,7 +214,7 @@ public:
 	const CGroup&		get_atomic_group(size_t WordNo)  const;
 	bool				has_sub_clauses(size_t GroupNo)  const;
 	QWORD				get_group_grammems(size_t WordNo) const;
-	void				get_full_sentence(string& str_sent) const;
+	void				get_full_sentence(std::string& str_sent) const;
 	bool				is_noun_group (const CGroup& G) const;
 
 	

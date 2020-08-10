@@ -23,9 +23,9 @@
 
 struct CRossDevTermin {
 	WORD   m_UnitNo;
-	string m_TerminStr;
+	std::string m_TerminStr;
 
-	CRossDevTermin(WORD UnitNo, string TerminStr) {
+	CRossDevTermin(WORD UnitNo, std::string TerminStr) {
 		m_TerminStr = TerminStr;
 		m_UnitNo = UnitNo;
 	};
@@ -146,7 +146,7 @@ class CIndex {
 
 
 struct CWordAndFreq {
-	string m_Word;
+	std::string m_Word;
 	int    m_Freq; 
 	CWordAndFreq ()
 	{
@@ -190,7 +190,7 @@ public:
 		else
 			return m_Termins[i].m_UnitNo;
 	};
-	string GetEntryStr(WORD UnitNo) const;
+	std::string GetEntryStr(WORD UnitNo) const;
 	WORD GetUnitsSize () const
 	{
 	    return IsFiltered() ? GetRoss()->GetSelectedUnitsSize() : GetRoss()->GetUnitsSize();

@@ -221,7 +221,7 @@ inline size_t restore_from_bytes(CSLRCellWork& t, const BYTE* buf)
 
 
 
-bool CGLRTable::ConvertAndSaveGLRTable(string FileName)
+bool CGLRTable::ConvertAndSaveGLRTable(std::string FileName)
 {
 	ConvertBuildCellsToWordCells();
 
@@ -260,7 +260,7 @@ DWORD CGLRTable::GetReduceRuleEnd(size_t  StateNo, size_t SymbolNo)  const
 };
 
 
-bool CGLRTable::LoadGLRTable(string FileName) 
+bool CGLRTable::LoadGLRTable(std::string FileName) 
 {
 	if (!m_pWorkGrammar)
 		return false;
@@ -322,7 +322,7 @@ void CGLRTable::PrintGLRTable(FILE* fp) const
 		
 		for (size_t SymbolNo=0; SymbolNo < m_BuildTable[i].size(); SymbolNo++)
 		{
-			string s = " ";
+			std::string s = " ";
 			const CSLRCellBuild& I = m_BuildTable[i][SymbolNo];
 			if (I.m_bShift )
 				s += "sh,";
@@ -349,7 +349,7 @@ void CGLRTable::PrintGLRTable(FILE* fp) const
 };
 
 /*
-bool CGLRTable::SaveOldGLRTable(string FileName) const
+bool CGLRTable::SaveOldGLRTable(std::string FileName) const
 {
 	FILE* fp = fopen (FileName.c_str(), "wb");
 	if (!fp) 

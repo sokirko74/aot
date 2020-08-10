@@ -59,8 +59,8 @@ CString CSLFDocument::GetLemma() const
 
 	if (t())
 	{
-		string s = t.val();
-		string Lemma;
+		std::string s = t.val();
+		std::string Lemma;
 		for (size_t i=0; i<s.length(); i++)
 			if ((BYTE)s[i] != '\'')
 				Lemma += s[i];
@@ -72,9 +72,9 @@ CString CSLFDocument::GetLemma() const
 	return "";
 }
 
-string CSLFDocument::GetBase()  const 
+std::string CSLFDocument::GetBase()  const 
 {
-	string Lemma = (const char*)GetLemma();
+	std::string Lemma = (const char*)GetLemma();
 	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
 	{
 		const CFlexiaModel &old_par = GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo];

@@ -26,7 +26,7 @@ inline size_t restore_from_bytes(CLexProb& t, const BYTE* buf)
 
 
 
-bool CTrigramModel::read_dictionary_text_file(map<string,  vector<CLexProb> >& Dictionary) const
+bool CTrigramModel::read_dictionary_text_file(map<std::string,  vector<CLexProb> >& Dictionary) const
 {
 	FILE* fp = fopen(m_DictionaryFile.c_str(), "r");
 	if (!fp) 
@@ -47,7 +47,7 @@ bool CTrigramModel::read_dictionary_text_file(map<string,  vector<CLexProb> >& D
 			 fprintf(stderr, "empty line found in %s\n", m_DictionaryFile.c_str()); 
 			 return false;
 		};
-        string WordStr = tok.val();
+        std::string WordStr = tok.val();
 		vector<CLexProb> wd;
 		if (!m_TestLexicon.empty())
 		{
@@ -62,7 +62,7 @@ bool CTrigramModel::read_dictionary_text_file(map<string,  vector<CLexProb> >& D
 		
 		while ( tok () )
 		{
-			string tag1 = tok.val();
+			std::string tag1 = tok.val();
 			WORD PrevTag = find_tag(tag1 );
 			if (PrevTag == UnknownTag)
 			{	
@@ -74,7 +74,7 @@ bool CTrigramModel::read_dictionary_text_file(map<string,  vector<CLexProb> >& D
 				fprintf(stderr, "can't find the second tag (%s:%i)\n", m_DictionaryFile.c_str(), line_no);
 				return false;
 			};
-			string tag2 = tok.val();
+			std::string tag2 = tok.val();
 			WORD CurrTag = find_tag(tag2 );
 			if (CurrTag == UnknownTag)
 			{	
@@ -100,31 +100,31 @@ bool CTrigramModel::read_dictionary_text_file(map<string,  vector<CLexProb> >& D
 	return true;
 }
 
-bool CTrigramModel::write_dictionary_binary(const map<string, vector<CLexProb> >& Dictionary) const
+bool CTrigramModel::write_dictionary_binary(const map<std::string, vector<CLexProb> >& Dictionary) const
 {
-    string WordsFile = m_DictionaryFile + ".words";
+    std::string WordsFile = m_DictionaryFile + ".words";
     {
         FILE* fp = fopen (WordsFile.c_str(), "w");
         if (!fp) return false;
-        for (map<string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
+        for (map<std::string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
             fprintf (fp, "%s\n", it->first.c_str());
         fclose (fp);
     }
 
-    string SizesFile = m_DictionaryFile + ".sizes";
+    std::string SizesFile = m_DictionaryFile + ".sizes";
     {
         vector<DWORD> v;
-        for (map<string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
+        for (map<std::string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
             v.push_back( (DWORD)it->second.size() );
         if (!WriteVector(SizesFile, v))
             return false;
     }
 
-    string IntersFile = m_DictionaryFile + ".interps";
+    std::string IntersFile = m_DictionaryFile + ".interps";
     {
         FILE* fp = fopen (IntersFile.c_str(), "wb");
         if (!fp) return false;
-        for (map<string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
+        for (map<std::string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
             if (!WriteVectorInner(fp, it->second))
                 return false;
         fclose (fp);
@@ -138,7 +138,7 @@ bool CTrigramModel::read_dictionary_binary()
     ReadVector(m_DictionaryFile + ".sizes", sizes);
     ReadVector(m_DictionaryFile + ".interps", m_LexProbs);
 
-    string WordsFile = m_DictionaryFile + ".words";
+    std::string WordsFile = m_DictionaryFile + ".words";
     {
         FILE* fp = fopen (WordsFile.c_str(), "r");
         if (!fp) return false;
@@ -173,7 +173,7 @@ bool CTrigramModel::read_dictionary_binary()
 bool CTrigramModel::convert_to_lex_binary() 
 {
 
-    map<string,  vector<CLexProb> > Dictionary;
+    map<std::string,  vector<CLexProb> > Dictionary;
     if (!read_dictionary_text_file( Dictionary))
         throw CExpc ("canot read dictionary");
 

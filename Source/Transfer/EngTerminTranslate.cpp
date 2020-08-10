@@ -45,7 +45,7 @@ void CEngSemStructure::translate_abbr_termin_node(int MainNodeNo)
 	long eng_num = EnglishTranslations[0];
 	
 	const CInnerTermin& Term = helper.GetThes(ThesId)->m_Termins[eng_num];
-	string  Form = Term.m_AbbrForm;
+	std::string  Form = Term.m_AbbrForm;
 	if (Form == "")
 		Form = Term.m_TerminStr;
 	m_Nodes[MainNodeNo].m_Words[0].m_Word = Form;
@@ -65,15 +65,15 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 	long word_count = eng_termin->m_Items.size();
 
 	// здесь будет накоплена результирующая строка
-	string result;
-	string AllLemmas;
+	std::string result;
+	std::string AllLemmas;
 
 	// переводим по атомарным группам
 	for(int i=0; i<word_count; i++ )
 	{
 		const CInnerSynItem&  SynItem = helper.GetThes(ThesId)->m_SynItems[eng_termin->m_Items[i]];
 
-		string lemma = SynItem.m_ItemStr;
+		std::string lemma = SynItem.m_ItemStr;
 		AllLemmas += " ";
 		AllLemmas +=  lemma;
 		const CAtomGroup& atom = piModel.m_AtomGroups[i];
@@ -109,7 +109,7 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 			}
 		};
 
-		string form = lemma;
+		std::string form = lemma;
 		try	{ // get  word form by thesaurus entry in the proper form
 				vector<CFormInfo>  ParadigmCollection;
 				m_pData->GetEngLemmatizer()->CreateParadigmCollection(true, lemma, true, false, ParadigmCollection);
@@ -118,7 +118,7 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 					const CFormInfo& piParadigm = ParadigmCollection[i];
 
 
-					string Ancode = piParadigm.GetAncode(0);
+					std::string Ancode = piParadigm.GetAncode(0);
 					if  (		(pos != 255) 
 							&&	( m_pData->GetEngGramTab()->GetPartOfSpeech(Ancode.c_str()) != pos)
 						)

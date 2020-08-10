@@ -42,7 +42,7 @@ public:
      	POSITION pos = GetFirstViewPosition();
 		return (CArticleView*)GetNextView( pos );
 	};
-   string GetArticleErrorStr() const;
+   std::string GetArticleErrorStr() const;
 
 
    BOOL    OpenArticle (WORD UnitNo, CRossDoc* pRossDoc);

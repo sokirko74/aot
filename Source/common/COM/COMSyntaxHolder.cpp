@@ -145,7 +145,7 @@ BOOL CCOMSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 	return TRUE;
 };
 
-BOOL CCOMSyntaxHolder::BuildBeforeSyntax(string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults)
+BOOL CCOMSyntaxHolder::BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults)
 {
 	m_piBeforeSyntaxPlmLines = 0;	
 	m_piAfterMorphPlmLines = 0;
@@ -153,8 +153,8 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(string str, BOOL bFile, BOOL bWriteInte
 	m_piAfterMorphPlmLines->AttachLemmatizer(m_piLemmatizer);
 
 	m_piSentCollection->ClearSentences();
-	string log_path;
-	string FileName = "rossdev.log";
+	std::string log_path;
+	std::string FileName = "rossdev.log";
 	try {
 		
 		log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
@@ -192,7 +192,7 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(string str, BOOL bFile, BOOL bWriteInte
 
 		m_piAfterMorphPlmLines->ProcessPlmLines(m_piGraphan);				
 		if (bWriteIntermFiles)
-			m_piAfterMorphPlmLines->SaveToFile(string(log_path+"before.lem").c_str()); 
+			m_piAfterMorphPlmLines->SaveToFile(std::string(log_path+"before.lem").c_str()); 
 
 		if (!bSaveIntermResults)
 			m_piGraphan->FreeTable();
@@ -213,7 +213,7 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(string str, BOOL bFile, BOOL bWriteInte
         }
 
         if (bWriteIntermFiles)
-			m_piBeforeSyntaxPlmLines->SaveToFile(string(log_path+"after.lem").c_str()); 
+			m_piBeforeSyntaxPlmLines->SaveToFile(std::string(log_path+"after.lem").c_str()); 
 
 	COM_CATCH( "PostMorphology has crushed.");
 	
@@ -245,7 +245,7 @@ BOOL CCOMSyntaxHolder::BuildSyntax(BOOL bSaveIntermResults)
 	return TRUE;
 };
 
-BOOL CCOMSyntaxHolder::GetSentencesFromSynAn(string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults)
+BOOL CCOMSyntaxHolder::GetSentencesFromSynAn(std::string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults)
 {
 	if (!BuildBeforeSyntax(str, bFile, bWriteIntermFiles, bSaveIntermResults)) 
 			return FALSE;
@@ -265,7 +265,7 @@ void CCOMSyntaxHolder::DeleteProcessors()
 };
 
 
-string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo) 
+std::string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo) 
 {
 	if (ClauseRootNo == -1)
 	{

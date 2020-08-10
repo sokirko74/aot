@@ -214,7 +214,7 @@ void CMorphwizardView::SaveHistory()
 	}
 }
 
-void CMorphwizardView::ChangeHistory(string query)
+void CMorphwizardView::ChangeHistory(std::string query)
 {
 	if (!m_LastQueries.empty())
 		if (m_LastQueries.front() == query)
@@ -376,7 +376,7 @@ void CMorphwizardView::ShowFoundParadigms()
 
 		m_FoundList.InsertItem(i, s.c_str() );
 
-		std::string Lemma = GetWizard()->get_lemm_string_with_accents(found_paradigms[i]);
+		std::string Lemma = GetWizard()->get_lemm_std::string_with_accents(found_paradigms[i]);
 		std::string PrefixSet = GetWizard()->get_prefix_set( found_paradigms[i] );
 		if (!PrefixSet.empty())
 			Lemma = PrefixSet+'|'+Lemma;
@@ -386,7 +386,7 @@ void CMorphwizardView::ShowFoundParadigms()
 		s = GetWizard()->get_pos_string(found_paradigms[i]) + " " + GetWizard()->get_grammem_string(found_paradigms[i]);
 		m_FoundList.SetItemText(i, FindGrammemsColumn, s.c_str());
 			
-		s = GetWizard()->get_common_grammems_string(found_paradigms[i]);
+		s = GetWizard()->get_common_grammems_std::string(found_paradigms[i]);
 		m_FoundList.SetItemText(i, FindTypeGrammemsColumn, s.c_str());
 
 		m_FoundList.m_ToolTips.push_back(GetWizard()->m_FlexiaModels[FlexiaModelNo].m_Comments);
@@ -463,7 +463,7 @@ void CMorphwizardView::OnFind()
 		};
 		
 
-	// proceed filter string
+	// proceed filter std::string
 		FilterFoundParadigms();
 		ShowFoundParadigms();
 	}
@@ -519,24 +519,24 @@ public:
 		{
 			case PredictGrammemsColumn: 
 				{
-					string s1 = W->get_pos_string_and_grammems(S1.m_SourceLemmaAncode);
-					string s2 = W->get_pos_string_and_grammems(S2.m_SourceLemmaAncode);
+					std::string s1 = W->get_pos_std::string_and_grammems(S1.m_SourceLemmaAncode);
+					std::string s2 = W->get_pos_std::string_and_grammems(S2.m_SourceLemmaAncode);
 					if ( s1 == s2) return S1.m_Frequence > S2.m_Frequence;
 					else
 						return s1 < s2;
 				};
 			case PredictTypeDictColumn: 
 				{
-					string s1 = W->get_grammem_string(S1.m_SourceCommonAncode);
-					string s2 = W->get_grammem_string(S2.m_SourceCommonAncode);
+					std::string s1 = W->get_grammem_string(S1.m_SourceCommonAncode);
+					std::string s2 = W->get_grammem_string(S2.m_SourceCommonAncode);
 					if ( s1 == s2) return S1.m_Frequence > S2.m_Frequence;
 					else
 						return s1 < s2;
 				};
 			case PredictLemmaColumn: 
 				{
-					string s1 = S1.m_SourceLemma;
-					string s2 = S2.m_SourceLemma;
+					std::string s1 = S1.m_SourceLemma;
+					std::string s2 = S2.m_SourceLemma;
 					if ( s1 == s2) return S1.m_Frequence > S2.m_Frequence;
 					else
 						return s1 < s2;
@@ -545,8 +545,8 @@ public:
 			case PredictParadigmColumnNo: return S1.m_FlexiaModelNo < S2.m_FlexiaModelNo;
 			case PredictLemmaPrefixColumnNo: 
 				{
-					string s1 = S1.m_PrefixSetStr;
-					string s2 = S2.m_PrefixSetStr;
+					std::string s1 = S1.m_PrefixSetStr;
+					std::string s2 = S2.m_PrefixSetStr;
 					if ( s1 == s2) return S1.m_Frequence > S2.m_Frequence;
 					else
 						return s1 < s2;
@@ -602,7 +602,7 @@ void CMorphwizardView::OnPredict()
 			const CPredictSuffix& S = *GetWizard()->m_CurrentPredictedParadigms[ind];
 			const CFlexiaModel& P = GetWizard()->m_FlexiaModels[S.m_FlexiaModelNo];
 
-			m_PredictedList.InsertItem(i, GetWizard()->get_pos_string_and_grammems(S.m_SourceLemmaAncode).c_str() );
+			m_PredictedList.InsertItem(i, GetWizard()->get_pos_std::string_and_grammems(S.m_SourceLemmaAncode).c_str() );
 			m_PredictedList.SetItemText(i, PredictTypeDictColumn, GetWizard()->get_grammem_string(S.m_SourceCommonAncode).c_str());
 			m_PredictedList.SetItemText(i, PredictLemmaColumn, S.m_SourceLemma.c_str());
 			m_PredictedList.SetItemText(i, PredictFreqColumnNo, Format("%i", S.m_Frequence).c_str());
@@ -675,7 +675,7 @@ bool CMorphwizardView::OpenExistingParadigm( lemma_iterator_t it, bool bRunAccen
 			return false;
 
 		std::string save_common_grammems, save_slf, save_prefixes;
-		save_slf = GetWizard()->get_slf_string(it, save_common_grammems, save_prefixes, 50);
+		save_slf = GetWizard()->get_slf_std::string(it, save_common_grammems, save_prefixes, 50);
 
 		CSLFDocument* pDocument = NewSLFDocument();
 		pDocument->m_Paradigm = it->second;
@@ -722,7 +722,7 @@ void CMorphwizardView::OnToolsSaveListFile()
 
 	for( int i=0; i<found_paradigms.size(); i++ )
 	{
-		std::string lemma = GetWizard()->get_lemm_string_with_accents(found_paradigms[i]);
+		std::string lemma = GetWizard()->get_lemm_std::string_with_accents(found_paradigms[i]);
 		std::string PrefixSet = GetWizard()->get_prefix_set( found_paradigms[i] );
 		if (!PrefixSet.empty())
 			lemma = PrefixSet+'|'+lemma;
@@ -806,7 +806,7 @@ void CMorphwizardView::OnToolsExport()
 		for  (long i=0;  i <found_paradigms.size(); i++) 
 		{
 			CDumpParadigm P;
-			P.m_SlfStr = GetWizard()->get_slf_string(found_paradigms[i], P.m_TypeGrammemsStr, P.m_PrefixesStr, 50);
+			P.m_SlfStr = GetWizard()->get_slf_std::string(found_paradigms[i], P.m_TypeGrammemsStr, P.m_PrefixesStr, 50);
 			
 			if (found_paradigms[i]->second.m_PrefixSetNo != UnknownPrefixSetNo)
 				P.m_PrefixesStr = GetWizard()->get_prefix_set(found_paradigms[i]);
@@ -874,7 +874,7 @@ try {
 		meter.SetInfo(info);
 				
 		int ParadigmCount = 0;
-		string Errors;
+		std::string Errors;
 		line_no = 0;
 		bool bError;
 		CDumpParadigm P;
@@ -917,7 +917,7 @@ try {
 		if (!Errors.empty())
 		{
 			try {
-				string ErrorFile = MakeFName((const char*)PathName, "err");
+				std::string ErrorFile = MakeFName((const char*)PathName, "err");
 				FILE * fp = fopen (ErrorFile.c_str(), "w");
 				fprintf (fp, "%s",Errors.c_str());
 				fclose(fp);
@@ -1150,7 +1150,7 @@ void CMorphwizardView::OnNMDblclkFoundList2(NMHDR *pNMHDR, LRESULT *pResult)
 }
 
 //----------------------------------------------------------------------------
-extern bool InputBox (const char* Caption, string& OutBuffer);		
+extern bool InputBox (const char* Caption, std::string& OutBuffer);		
 
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnToolsSetParaNo()
@@ -1168,7 +1168,7 @@ void CMorphwizardView::OnToolsSetParaNo()
 		assert(index < found_paradigms.size());
 		ParadigmNo = found_paradigms[index]->second.m_FlexiaModelNo;
 	}
-	string s = Format("%i",ParadigmNo);
+	std::string s = Format("%i",ParadigmNo);
 	if ( !InputBox("Input paradigm No:", s) ) return;
 	ParadigmNo = atoi(s.c_str());
 	if (ParadigmNo >= GetWizard()->m_FlexiaModels.size())
@@ -1191,7 +1191,7 @@ void CMorphwizardView::OnToolsSetParaNo()
 
 		
 		std::string new_flexia = new_par.get_first_flex();
-		std::string lemma = GetWizard()->get_lemm_string(found_paradigms[i]);
+		std::string lemma = GetWizard()->get_lemm_std::string(found_paradigms[i]);
 		std::string lemma_suffix = lemma.substr(lemma.length() - new_flexia.length());
 
 		if (new_flexia == lemma_suffix)
@@ -1411,6 +1411,6 @@ void CMorphwizardView::OnBnClickedSetPrdComments()
 	};
 	size_t index = m_FoundList.GetNextSelectedItem(pos);
 	int ModelNo = found_paradigms[index]->second.m_FlexiaModelNo;
-	string Caption = Format("Input comments to paradigm No:%i", ModelNo);
+	std::string Caption = Format("Input comments to paradigm No:%i", ModelNo);
 	InputBox(Caption.c_str(), GetWizard()->m_FlexiaModels[ModelNo].m_Comments);
 }

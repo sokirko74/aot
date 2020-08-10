@@ -34,17 +34,17 @@ int mymain(int argc, char **argv)
         PrintUsageAndExit();
 
 	CTrigramModel M;
-    string ConfigFile = argv[2];
+    std::string ConfigFile = argv[2];
     M.m_Language = morphRussian;
     bool bReadBinary = false;
     fprintf (stderr, "initialize Russian morphology\n");
 	if (!M.InitDicts())
 		return 1;
-    string Action = argv[1];
-    string InputFile;
+    std::string Action = argv[1];
+    std::string InputFile;
    	for (size_t i=3; i <  argc; i++)
 	{
-		string s = argv[i];
+		std::string s = argv[i];
 		if (s == "--raw-texts")
 		{
 			M.m_bRawTexts = true;

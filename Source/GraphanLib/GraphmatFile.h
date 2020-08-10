@@ -11,8 +11,8 @@ class CGraphanDicts;
 class CDictionary;
 
 class CGraphmatFile : public CUnitHolder {
-    string m_SourceFileName;
-    string m_LastError;
+    std::string m_SourceFileName;
+    std::string m_LastError;
 
 
     // Analyzing
@@ -83,9 +83,9 @@ public:
     // максимальное число  строк в одном условно предложении
     size_t m_MaxUpLen;
     // file for graphematical table
-    string m_GraOutputFile;
+    std::string m_GraOutputFile;
     // file for macro-syntax
-    string m_XmlMacSynOutputFile;
+    std::string m_XmlMacSynOutputFile;
     // Нужно ли запускать делилку на предложения.
     bool m_bSentBreaker;
     // нужжно и строить иерархию
@@ -123,13 +123,13 @@ public:
     // processing
     bool LoadDicts();
 
-    bool LoadStringToGraphan(const string &szBuffer);
+    bool LoadStringToGraphan(const std::string &szBuffer);
 
-    bool LoadFileToGraphan(const string &CommandLine);
+    bool LoadFileToGraphan(const std::string &CommandLine);
 
     void FreeDicts();
 
-    const string &GetLastError() const;
+    const std::string &GetLastError() const;
 
     //  browsing results
 

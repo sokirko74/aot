@@ -12,14 +12,14 @@ CSynDictionary::CSynDictionary()
 {
 }
 
-bool CSynDictionary::Load(string FileName)
+bool CSynDictionary::Load(std::string FileName)
 {
 	// TODO: Add your implementation code here
 	long pos=0;
 	long  all_synsets_count;
 	try {
 
-		string fname = FileName;
+		std::string fname = FileName;
 		if ( ! FileExists (FileName.c_str()) ) {
 			fprintf (stderr, "Cannot find  file  %s\n", FileName.c_str());
 			return false;

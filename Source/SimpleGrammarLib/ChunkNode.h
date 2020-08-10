@@ -13,10 +13,10 @@
 
 struct CNodeAttribute 
 {
-	string m_Name;
-	string m_Value;
-	CNodeAttribute(string Name,	string Value);
-	string			GetStr() const;
+	std::string m_Name;
+	std::string m_Value;
+	CNodeAttribute(std::string Name,	std::string Value);
+	std::string			GetStr() const;
 };
 
 
@@ -34,7 +34,7 @@ class CChunkNode
 {
 public:
 	
-	string					m_AtomicName;
+	std::string					m_AtomicName;
 
 	CNodeAttributes*		m_pAttributes;
 
@@ -44,8 +44,8 @@ public:
 
 	virtual ~CChunkNode();
 	
-	void			CreateAtomic(string AtomicName, CNodeAttributes* Attributes);
-	virtual string			GetStr() const;
+	void			CreateAtomic(std::string AtomicName, CNodeAttributes* Attributes);
+	virtual std::string			GetStr() const;
 
 };
 
@@ -62,7 +62,7 @@ public:
 	void					DeleteLastChild();
 	CChunkSequenceNode*		Clone() const;
 	const vector<CChunkNode*>&	GetChildren() const;
-	virtual string						GetStr() const;
+	virtual std::string						GetStr() const;
 	
 };
 
@@ -75,7 +75,7 @@ public:
 	list<CChunkSequenceNode*>	m_pRightHand;
 	vector<CRuleFeature>		m_FeatureExprs;
 	int							m_SourceLineNo;
-	string						m_SourceFileName;
+	std::string						m_SourceFileName;
 
 	CChunkRule();
 	CChunkRule(const CChunkRule& X);
@@ -86,7 +86,7 @@ public:
 	bool	AddRightHandMultipleNode(CChunkRule* pRule, ChunkOperationEnum Type);
 	bool	MakeLastNodeFacultative();
 	void	SetLeftHandNode(CChunkNode* child1);
-	string	GetStr() const;
+	std::string	GetStr() const;
 	bool	EncloseNodes();
 	void	AddRuleFeatute(CRuleFeature* pFeature);
 };
@@ -97,7 +97,7 @@ class CChunkGrammar {
 	list<CChunkRule*>	m_Rules;
 
 	~CChunkGrammar();
-	string		GetStr() const;
+	std::string		GetStr() const;
 	void		AddRules(const CChunkGrammar& R);
 };
 

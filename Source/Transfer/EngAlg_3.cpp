@@ -391,8 +391,8 @@ void CEngSemStructure::ApplyPredicativeRule(int iEngNode)
 
 	if( RusStr.GetNode(iRusNode).GetType() != Ross )
 		return;
-	if(		!GetRossHolder(Ross)->HasFieldValue(string("GF"),string("ПРЕДК:ГГ"),RusStr.GetNode(iRusNode).GetUnitNo())
-		&&	!GetRossHolder(Ross)->HasFieldValue(string("GF"),string("ГЛ:ГГ_безл"),RusStr.GetNode(iRusNode).GetUnitNo())
+	if(		!GetRossHolder(Ross)->HasFieldValue(std::string("GF"),std::string("ПРЕДК:ГГ"),RusStr.GetNode(iRusNode).GetUnitNo())
+		&&	!GetRossHolder(Ross)->HasFieldValue(std::string("GF"),std::string("ГЛ:ГГ_безл"),RusStr.GetNode(iRusNode).GetUnitNo())
 		)
 		return;
 
@@ -865,7 +865,7 @@ void CEngSemStructure::InfinitiveAndIf(int iEngNode)
 // такие конструкции возможны только с глаголом, у которого SF1 = 1 ANIM	
 	if( rusNode.GetType()==NoneRoss || rusNode.GetUnitNo()==ErrUnitNo )
 		return;
-if( !GetRossHolder(rusNode.GetType())->HasFieldValue(string("SF"),string("ANIM"),rusNode.GetUnitNo(),1) )		return;
+if( !GetRossHolder(rusNode.GetType())->HasFieldValue(std::string("SF"),std::string("ANIM"),rusNode.GetUnitNo(),1) )		return;
 
 // проверим, что есть межклаузная связь с "если"
 	vector<long> inRels;
@@ -881,7 +881,7 @@ if( !GetRossHolder(rusNode.GetType())->HasFieldValue(string("SF"),string("ANIM")
 		return;
 	if( rusRel.m_SynReal.m_Conj.m_UnitNo == ErrUnitNo )
 		return;
-	string strOb = GetRoss(OborRoss)->GetEntryStr(rusRel.m_SynReal.m_Conj.m_UnitNo);
+	std::string strOb = GetRoss(OborRoss)->GetEntryStr(rusRel.m_SynReal.m_Conj.m_UnitNo);
 	if( strOb.find("если") == -1)
 		return;
 

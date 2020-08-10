@@ -136,7 +136,7 @@ void CValueDlg::DrawControls ()
 	  m_Edits[i].m_hWnd = 0;
 
 	  // рисуем название
-	  string LabelStr = GetRoss()->m_Domens[DomNo].DomStr;
+	  std::string LabelStr = GetRoss()->m_Domens[DomNo].DomStr;
 	  if (LabelStr.substr(0,2) == "D_")
 		  LabelStr.erase(0,2);
 

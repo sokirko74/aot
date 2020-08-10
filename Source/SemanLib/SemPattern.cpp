@@ -47,21 +47,21 @@ long CSemPattern::GetSynFet(long CortegeNo) const
 	return m_pRossDoc->GetSynFet(m_GramCorteges[CortegeNo]); 
 };
 
-string  CSemPattern::GetSynFetStr(long CortegeNo) const
+std::string  CSemPattern::GetSynFetStr(long CortegeNo) const
 {
 	const char* s =  m_pRossDoc->GetDomItemStrInner(GetSynFet(CortegeNo));
 	if (s) return s;
 	return "";
 };
 
-string  CSemPattern::GetSynRelStr(long CortegeNo) const
+std::string  CSemPattern::GetSynRelStr(long CortegeNo) const
 {
 	const char* s =  m_pRossDoc->GetDomItemStrInner(GetSynRel(CortegeNo));
 	if (s) return s;
 	return "";
 };
 
-bool  CSemPattern::HasSemFet(const string& SemFet) const
+bool  CSemPattern::HasSemFet(const std::string& SemFet) const
 {
 	for (long i=0; i < m_ActantSemFets.size(); i++)
 		for (long k=0; k < m_ActantSemFets[i].size(); k++)
@@ -85,7 +85,7 @@ void  CSemPattern::InsertReverseSynOToTheBegining()
 
 void CSemPattern::TracePattern () const
 {
-	string Q = Format ("%s\n",m_PatternValency.m_RelationStr.c_str());
+	std::string Q = Format ("%s\n",m_PatternValency.m_RelationStr.c_str());
 	rml_TRACE (Q.c_str());
 	for (size_t i=0; i< m_GramCorteges.size(); i++)
 	{
@@ -93,10 +93,10 @@ void CSemPattern::TracePattern () const
 		for (size_t k=0; k<3; k++)
 			if (m_GramCorteges[i].m_DomItemNos[k] != -1)
 			{
-				string S (m_pRossDoc->GetDomItemStrInner(m_GramCorteges[i].m_DomItemNos[k]));;
-				Q += string (" ") + S;
+				std::string S (m_pRossDoc->GetDomItemStrInner(m_GramCorteges[i].m_DomItemNos[k]));;
+				Q += std::string (" ") + S;
 			};
-	     Q += string ("\n");
+	     Q += std::string ("\n");
 		 rml_TRACE (Q.c_str());
 	};
 };
@@ -129,12 +129,12 @@ bool CSemPattern::LoadSemFromDict()
 			)
 		{
 			if (C.m_LevelId  > m_ActantSemFets.size())   
-				m_ActantSemFets.push_back(vector<string>());
+				m_ActantSemFets.push_back(vector<std::string>());
 
-			string s = m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
+			std::string s = m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
 			if (C.m_LevelId - 1 >= m_ActantSemFets.size())
 			{
-				string mess = "Ошибка нумерации SF в статье ";
+				std::string mess = "Ошибка нумерации SF в статье ";
 				mess += Ross->GetEntryStr(UnitNo);
 				ErrorMessage (mess);
 			}
@@ -187,7 +187,7 @@ bool CSemPattern::LoadGramFromDict()
 		else
 		if (C.m_FieldNo == m_PatternValency.m_RossHolder->LexFetFieldNo) 
 		{
-			string S =   m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
+			std::string S =   m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
 			EngRusMakeUpper(S);
 			m_LexFets.push_back(S);
 			IsFound = true;
@@ -195,7 +195,7 @@ bool CSemPattern::LoadGramFromDict()
 		else
 		if (C.m_FieldNo == m_PatternValency.m_RossHolder->ObligLexFetFieldNo) 
 		{
-			string S =   m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
+			std::string S =   m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
 			EngRusMakeUpper(S);
 			m_ObligLexFets.push_back(S);
 			IsFound = true;

@@ -74,12 +74,12 @@ CRossHolder* CAllRossesHolder:: GetRossHolder (DictTypeEnum Type)
 };
 
 
-string  GetThesRossPath  (DictTypeEnum Type)
+std::string  GetThesRossPath  (DictTypeEnum Type)
 {
 	int ThesId = GetThesIdByRossId(Type);
-	string Name = GetRmlThesNameThesId( ThesId );
-	string  R = Format("Software\\Dialing\\%s\\DictPath",Name.c_str());
-	string  strPath = GetRegistryString( R.c_str());;
+	std::string Name = GetRmlThesNameThesId( ThesId );
+	std::string  R = Format("Software\\Dialing\\%s\\DictPath",Name.c_str());
+	std::string  strPath = GetRegistryString( R.c_str());;
 	DictTypeEnum RossId =  GetRossIdByThesId(ThesId);
 	strPath += "/Ross/ross.rcf";
 	return strPath;
@@ -105,20 +105,20 @@ const CRossHolder* CAllRossesHolder::GetRossHolder (DictTypeEnum Type)  const
 	throw CExpc ("Unknown Ross");
 };
 
-void setbackslash(string& s)
+void setbackslash(std::string& s)
 {
 	for (size_t i=0; i < s.length(); i++)
 		if (s[i] == '\\')
 			s[i] = '/';
 }
 
-DictTypeEnum  CAllRossesHolder::GetRegisteredRossId(string FileName)  const
+DictTypeEnum  CAllRossesHolder::GetRegisteredRossId(std::string FileName)  const
 {
 	setbackslash(FileName);
 	EngRusMakeLower(FileName);
 	for (int i=0; i < NoneRoss; i++)
 	{
-		string path = GetRossPath((DictTypeEnum)i);
+		std::string path = GetRossPath((DictTypeEnum)i);
 		setbackslash(path);
 		EngRusMakeLower(path);
 		if ( path == FileName)
@@ -129,7 +129,7 @@ DictTypeEnum  CAllRossesHolder::GetRegisteredRossId(string FileName)  const
 
 
 
-string  CAllRossesHolder::GetRossPath(DictTypeEnum RossId)  const
+std::string  CAllRossesHolder::GetRossPath(DictTypeEnum RossId)  const
 {
 	if (IsThesRoss(RossId))
 		return  GetThesRossPath(RossId);
@@ -192,7 +192,7 @@ DictTypeEnum CAllRossesHolder::GetTypeByRossHolder (const CRossHolder* pHolder) 
 };
 
 
-DictTypeEnum CAllRossesHolder::GetTypeByStr (string DictName)
+DictTypeEnum CAllRossesHolder::GetTypeByStr (std::string DictName)
 {
 	if (DictName == m_RossDoc.m_DictName)
 		return Ross;

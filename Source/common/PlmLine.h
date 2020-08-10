@@ -10,26 +10,26 @@
 
 enum MainTokenTypeEnum {RLE=0, LLE=1, NUM=2, NUM_CHAR=3, PUNCTUAT=4, ROMAN_NUM=5, OTHER_TOKEN_TYPE=6};
 
-extern string TokenTypeToString(const MainTokenTypeEnum & t);
-extern MainTokenTypeEnum StringToTokenType(const  string& t);
+extern std::string TokenTypeToString(const MainTokenTypeEnum & t);
+extern MainTokenTypeEnum StringToTokenType(const  std::string& t);
 
 class CPlmLine {
-	string	m_GramCodes;
-	string	m_Word;
-	string	m_UpperWord;
+	std::string	m_GramCodes;
+	std::string	m_Word;
+	std::string	m_UpperWord;
 	char	m_MorphSign;
-	string	m_CommonGramCode;
+	std::string	m_CommonGramCode;
 
 public:
 	int		m_FilePosition;
 	int		m_TokenLengthInFile;
-	string m_GraphDescr;
+	std::string m_GraphDescr;
 	bool   m_bHomonym;
 	
-	string m_Lemma;
+	std::string m_Lemma;
 	
-	string m_ParadigmId;
-	string m_HomoWeight;
+	std::string m_ParadigmId;
+	std::string m_HomoWeight;
 	MainTokenTypeEnum   m_TokenType;
 	RegisterEnum	   m_Register;	
 	bool	m_bToDelete;
@@ -51,22 +51,22 @@ public:
 
 	CPlmLine ();
 
-	bool    LoadPlmLineFromString (string Buffer, bool bStartLine, const CAgramtab* pRusGramTab);
-	string  GetStr() const;
+	bool    LoadPlmLineFromString (std::string Buffer, bool bStartLine, const CAgramtab* pRusGramTab);
+	std::string  GetStr() const;
 	void	DeleteDescr(const char* Descr);
 	void	DeleteOb1();
 	void	DeleteOb2();
 	bool	HasGraDescr(const char* GraphDescr) const;
-	void	SetGramCodes(const string& NewGramCodes, const CAgramtab* pRusGramTab);
-	const string&	GetGramCodes() const { return m_GramCodes;};
+	void	SetGramCodes(const std::string& NewGramCodes, const CAgramtab* pRusGramTab);
+	const std::string&	GetGramCodes() const { return m_GramCodes;};
 	bool	IsPartOfNonSingleOborot() const;
 	bool	IsFoundInMorphology() const;
-	void	SetWord(string s);
-	const string&  GetWord() const;
-	const string&  GetUpperWord() const;
-	const string&   GetCommonGramCode() const;
+	void	SetWord(std::string s);
+	const std::string&  GetWord() const;
+	const std::string&  GetUpperWord() const;
+	const std::string&   GetCommonGramCode() const;
 	void			SetMorphUnknown();
-	void			SetMorph(char MorphSign, const string& CommonAncode, const DWORD& ParadigmId);
+	void			SetMorph(char MorphSign, const std::string& CommonAncode, const DWORD& ParadigmId);
 	
 };
 

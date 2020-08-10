@@ -154,7 +154,7 @@ tm Str2Tm (CString TimeStr)
 };
 
 
-string CWordList::GetEntryStr(WORD UnitNo) const
+std::string CWordList::GetEntryStr(WORD UnitNo) const
 {
 	if (!GetDocument()->IsThesRoss())
 		return GetRoss()->GetEntryStr(UnitNo);            
@@ -688,7 +688,7 @@ void CWordList::SaveRossToTxt(CString FileName) const
 		for (size_t i = 0;  i < GetUnitsSize(); i++)
 		{ 
 			fprintf (fp,"============\r\n");
-			string  s = GetRoss()->GetUnitTextHeader(GetUnitNo(i));
+			std::string  s = GetRoss()->GetUnitTextHeader(GetUnitNo(i));
 			fprintf (fp,"%s", s.c_str());
 
 			try 
@@ -1232,7 +1232,7 @@ void CWordList::OnImport()
 };
 
 
-void UpdateWordAndFreq (vector <CWordAndFreq>& Unfound, const string& Word)  
+void UpdateWordAndFreq (vector <CWordAndFreq>& Unfound, const std::string& Word)  
 {
 	  CWordAndFreq W;
 	  W.m_Word = Word;
@@ -1864,7 +1864,7 @@ void CWordList::OnDelTextDomains()
 
 
 struct CDictInterp {
-	string					m_UnitStr;
+	std::string					m_UnitStr;
 	BYTE					m_MeanNum;
 	const CWordList*		m_Owner;
 	bool operator <  (const CDictInterp& X) const 
@@ -1949,7 +1949,7 @@ void CWordList::OnAllDictEntries()
 
 		};
 
-		string Result;
+		std::string Result;
 		for (long i=0; i < AllEntries.size(); i++)
 		{
 		   Result += Format ("%-40s %s %i\n",AllEntries[i].m_UnitStr.c_str(), 

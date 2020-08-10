@@ -15,7 +15,7 @@ const int MaxWordLen = 32;
 
 // значени поля AUX, например, SUB (С1, С2)
 struct CDopField {
-	string  m_RelationStr;
+	std::string  m_RelationStr;
 	bool	m_IsActant1; // A or C
 	BYTE	m_Word1;
 	bool	m_IsActant2; // A or C
@@ -28,9 +28,9 @@ struct CDopField {
 // LF = Oper1 : сдавать 1
 struct CLexicalFunctionField {
 	// название лексической функции
-	string			m_LexFunct;
+	std::string			m_LexFunct;
 	// значение лексической функции
-	string			m_Lemma;
+	std::string			m_Lemma;
 	// номер значения для m_Lemma
 	char			m_MeanNum;
 	// номер словарной статьи в словаре для <m_Lemma,m_MeanNum>
@@ -39,7 +39,7 @@ struct CLexicalFunctionField {
 	CRossInterp		m_Prep;
 
 
-	CLexicalFunctionField (string LexFunct, string Lemma, char MeanNum = -1)
+	CLexicalFunctionField (std::string LexFunct, std::string Lemma, char MeanNum = -1)
 	{
 		m_LexFunct = LexFunct;
 		m_Lemma = Lemma;
@@ -47,7 +47,7 @@ struct CLexicalFunctionField {
 		m_LexFunctWordUnitNo = ErrUnitNo;
 	};
 
-    bool operator == ( const string& X ) const
+    bool operator == ( const std::string& X ) const
     {
 		return (X == m_Lemma);
 	};
@@ -194,8 +194,8 @@ public:
    int                 S_And_InstrNo;
    int					RightDirectionNo;
 
-   string               m_DictName;
-   string               m_DictPath;
+   std::string               m_DictName;
+   std::string               m_DictPath;
    long                 m_LastUpdateTime;
 
 
@@ -205,28 +205,28 @@ public:
    
    CDictionary* GetRoss () {return &m_Ross;}
    const CDictionary* GetRoss () const {return &m_Ross;}
-   bool			OpenRossHolder (const string strPathName, bool bDontLoadExamples);
+   bool			OpenRossHolder (const std::string strPathName, bool bDontLoadExamples);
    long         GetItemNoByItemStr(const char* ItemStr, const char* DomStr) const ;
    bool         InitDomainsConsts();
    
 
 	
    bool InitConsts();
-   void GetSimpleFieldItemsFromArticle (long UnitNo, string FieldStr, BYTE LeafId, BYTE BracketLeafId, StringVector& Items) const;
-   void GetFullFieldItemsFromArticle (long UnitNo, string FieldStr, BYTE LeafId, BYTE BracketLeafId, StringVector& Items) const;
+   void GetSimpleFieldItemsFromArticle (long UnitNo, std::string FieldStr, BYTE LeafId, BYTE BracketLeafId, StringVector& Items) const;
+   void GetFullFieldItemsFromArticle (long UnitNo, std::string FieldStr, BYTE LeafId, BYTE BracketLeafId, StringVector& Items) const;
    CRossHolder(CTranslatorHolder* TranslatorHolder);
    ~CRossHolder();
    bool HasBeenModified(const long T);
    // проверят только первый элемент кортежа
-   bool					HasFieldValue(string strFieldName, string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0  ) const;
+   bool					HasFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0  ) const;
    // проверят все значения поля
-   bool					HasFullFieldValue(string strFieldName, string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0) const;
-   void					GetFieldValues(string strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
-   bool					HasItem (WORD UnitNo, const string FieldStr, const string ItemStr, const string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
+   bool					HasFullFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0) const;
+   void					GetFieldValues(std::string strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
+   bool					HasItem (WORD UnitNo, const std::string FieldStr, const std::string ItemStr, const std::string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
    
 
 
-	bool				HasCX (WORD UnitNo, const string CX, const string DomStr) const;
+	bool				HasCX (WORD UnitNo, const std::string CX, const std::string DomStr) const;
 	WORD				LocateUnit (const char* UnitStr, BYTE MeanNum) const;
 	const char*			GetDomItemStrInner (long ItemNo) const;
 	// читает поле AUX, возвращает номер главного слова
@@ -279,7 +279,7 @@ inline TCortege GetCortege (const CDictionary* Ross, size_t CortegeNo)
 };
 
 
-extern string WriteToString  (const CDictionary* Ross, const char* Frmt, const TCortege10& C);
+extern std::string WriteToString  (const CDictionary* Ross, const char* Frmt, const TCortege10& C);
 
 
 template <int size>
@@ -305,13 +305,13 @@ public:
 		return m_buffer;
 	};
 
-	operator string () 
+	operator std::string () 
 	{
-		return string(m_buffer);
+		return std::string(m_buffer);
 	};
-	operator const string () 
+	operator const std::string () 
 	{
-		return string(m_buffer);
+		return std::string(m_buffer);
 	};
 	bool operator == (const short_string& X)  const
 	{
@@ -327,7 +327,7 @@ public:
 		strcpy (m_buffer, X.m_buffer);
 		return *this;
 	};
-	short_string operator = (const string& X) 
+	short_string operator = (const std::string& X) 
 	{
 		assert (X.length() < size);
 		strcpy (m_buffer, X.c_str());

@@ -94,7 +94,7 @@ void CRusSemStructure::DeleteSynRelations(vector<long>& Rels)
 		m_SynRelations.erase (m_SynRelations.begin() + Rels[i] );
 };
 
-void CRusSemStructure::DeleteSynRelationsByName(long NodeNo, string Name)
+void CRusSemStructure::DeleteSynRelationsByName(long NodeNo, std::string Name)
 {
 	for (size_t i = 0; i<m_SynRelations.size(); i++)
 	 if  (   (m_SynRelations[i].m_SourceNodeNo == NodeNo)
@@ -139,7 +139,7 @@ void CRusSemStructure::MoveIncomingSynRelations(long FromNode, long ToNode)
     
 };
 
-bool CRusSemStructure::HasSynRelation(long NodeNo, string RelationStr) const
+bool CRusSemStructure::HasSynRelation(long NodeNo, std::string RelationStr) const
 {
 	for (long i=0; i<m_SynRelations.size(); i++)
     if (m_SynRelations[i].m_TargetNodeNo == NodeNo)
@@ -150,7 +150,7 @@ bool CRusSemStructure::HasSynRelation(long NodeNo, string RelationStr) const
 
 	return false;
 };
-bool CRusSemStructure::HasOutcomingSynRelation(long NodeNo, string RelationStr, long NodeNo2) const
+bool CRusSemStructure::HasOutcomingSynRelation(long NodeNo, std::string RelationStr, long NodeNo2) const
 {
 	for (long i=0; i<m_SynRelations.size(); i++)
     if (m_SynRelations[i].m_SourceNodeNo == NodeNo && (NodeNo2 == -1 || m_SynRelations[i].m_TargetNodeNo == NodeNo2))

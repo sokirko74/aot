@@ -25,15 +25,15 @@ const char g_strAgramTabRegPath[] = "Software\\Dialing\\Lemmatizer\\Russian\\Agr
 
 struct CFixedColloc
 {
-	string		   m_LemmaStr;
+	std::string		   m_LemmaStr;
 	struct CLemmaAndPOS {
-		string m_Lemma;
+		std::string m_Lemma;
 		BYTE   m_POS;
 	};
 	vector<CLemmaAndPOS> m_Lemmas;
 	long		   m_MainWordNo;
-	string		   m_InterfaceString;
-	CFixedColloc(string LemmaStr,	long MainWordNo,	string InterfaceString,  const CAgramtab* m_piRusGramTab);
+	std::string		   m_InterfaceString;
+	CFixedColloc(std::string LemmaStr,	long MainWordNo,	std::string InterfaceString,  const CAgramtab* m_piRusGramTab);
 	CFixedColloc()
 	{
 		m_MainWordNo = -1;
@@ -43,14 +43,14 @@ struct CFixedColloc
 
 
 struct CSurnameSuffix {
-	string m_Suffix;
-	string m_GramCode;
+	std::string m_Suffix;
+	std::string m_GramCode;
 	int    m_ParadigmNo;
 };
 
 struct CLemmaAndCodes {
-	string m_Lemma;
-	string m_GramCodes;
+	std::string m_Lemma;
+	std::string m_GramCodes;
 };
 
 
@@ -66,7 +66,7 @@ struct CFIOFormat;
 class CMAPost  : public CPostMorphInteface
 {
 	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
-	string          m_DURNOVOGramCode;
+	std::string          m_DURNOVOGramCode;
 	list<CPostLemWord>	m_Words;
     
 
@@ -94,15 +94,15 @@ protected:
 
 	
 
-	string			m_LogFileName;
+	std::string			m_LogFileName;
 
 	
 
 	void RunRules();
 	int Count() const	{ return m_Words.size(); };
 
-	string		GetSimilarNumAncode (const string&  Lemma, const string&  Flexia, bool IsNoun);
-	bool		HasParadigmOfFormAndPoses(string WordForm, poses_mask_t Poses) const;
+	std::string		GetSimilarNumAncode (const std::string&  Lemma, const std::string&  Flexia, bool IsNoun);
+	bool		HasParadigmOfFormAndPoses(std::string WordForm, poses_mask_t Poses) const;
 	bool		NounHasObviousPluralContext(CLineIter it);
     
 
@@ -127,7 +127,7 @@ protected:
 	void Rule_RelationalAdjective();
 	void OtherRules();
 	
-	string GetNormSurnameSuffix(long ParadigmNo) const;
+	std::string GetNormSurnameSuffix(long ParadigmNo) const;
 	void Rule_QuoteMarks();
 	void Rule_ILE();
 	void Rule_KAK_MOZHNO();
@@ -143,8 +143,8 @@ protected:
 	void Rule_Abbreviation();
 	// по-восточному
 	void Rule_AdverbFromAdjectives();
-	void log(string s);
-	void SaveToFile(string s);
+	void log(std::string s);
+	void SaveToFile(std::string s);
 	CLineIter AddCollocation(CLineIter start_it, CLineIter end_it, CLineIter main_it, bool HasEndtSent,  int CollocNo);
 	void Rule_FilterProperName();
 	void Rule_ChangePatronymicLemmas();

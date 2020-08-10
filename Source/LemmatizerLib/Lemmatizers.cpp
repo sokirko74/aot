@@ -21,11 +21,11 @@ CLemmatizer::~CLemmatizer()
 };
 
 
-string CLemmatizer::GetPath()  const
+std::string CLemmatizer::GetPath()  const
 {
-	string RegStr = GetRegistryString();
+	std::string RegStr = GetRegistryString();
 	//fprintf (stderr,"1");
-	string load_path = ::GetRegistryString( RegStr );
+	std::string load_path = ::GetRegistryString( RegStr );
 	//fprintf (stderr,"2");
 	if (	(load_path.length() > 0)	
 		&&	(load_path[load_path.length() - 1] != '\\')
@@ -37,7 +37,7 @@ string CLemmatizer::GetPath()  const
 };;
 
 
-bool CLemmatizer::CheckABC(const string& WordForm) const
+bool CLemmatizer::CheckABC(const std::string& WordForm) const
 {
 	return m_pFormAutomat->CheckABCWithoutAnnotator(WordForm);
 };
@@ -48,12 +48,12 @@ bool CLemmatizer::CreateParadigmFromID(DWORD id, CFormInfo& Result) const
 	return Result.SetParadigmId(id);
 }
 
-bool CLemmatizer::IsHyphenPostfix(const string& Postfix) const
+bool CLemmatizer::IsHyphenPostfix(const std::string& Postfix) const
 {
 	return m_HyphenPostfixes.find(Postfix) != m_HyphenPostfixes.end();
 };
 
-bool CLemmatizer::IsHyphenPrefix(const string& Prefix) const
+bool CLemmatizer::IsHyphenPrefix(const std::string& Prefix) const
 {
 	return m_HyphenPrefixes.find(Prefix) != m_HyphenPrefixes.end();
 };
@@ -66,7 +66,7 @@ const CStatistic& CLemmatizer::GetStatistic() const
 
 
 
-bool CLemmatizer::IsPrefix(const string& Prefix) const
+bool CLemmatizer::IsPrefix(const std::string& Prefix) const
 {
 	return m_PrefixesSet.find(Prefix) != m_PrefixesSet.end();
 
@@ -74,7 +74,7 @@ bool CLemmatizer::IsPrefix(const string& Prefix) const
 
 //   CLemmatizer::LemmatizeWord should return true if 
 // the word was found in the dictionary, if it was predicted, then it returns false
-bool CLemmatizer::LemmatizeWord(string& InputWordStr, const bool cap, const bool predict, vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const
+bool CLemmatizer::LemmatizeWord(std::string& InputWordStr, const bool cap, const bool predict, vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const
 {
 	
 	RmlMakeUpper (InputWordStr, GetLanguage());
@@ -163,7 +163,7 @@ void CLemmatizer::AssignWeightIfNeed(vector<CAutomAnnotationInner>& FindResults)
 void CLemmatizer::GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* OutBuffer, bool bUsePrediction) const
 {
 	*OutBuffer = 0;
-	string InputWordStr = (const char*)WordForm;
+	std::string InputWordStr = (const char*)WordForm;
 	FilterSrc(InputWordStr);
 	vector<CAutomAnnotationInner>	FindResults;
 	LemmatizeWord(InputWordStr, capital, bUsePrediction, FindResults, true);
@@ -192,7 +192,7 @@ void CLemmatizer::GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* O
 }
 
 
-bool CLemmatizer::GetAllAncodesAndLemmasQuick(string& InputWordStr, bool capital, char* OutBuffer, size_t MaxBufferSize, bool bUsePrediction) const
+bool CLemmatizer::GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital, char* OutBuffer, size_t MaxBufferSize, bool bUsePrediction) const
 {
 	FilterSrc(InputWordStr);
 
@@ -241,14 +241,14 @@ bool CLemmatizer::GetAllAncodesAndLemmasQuick(string& InputWordStr, bool capital
 
 //////////////////////////////////////////////////////////////////////////////
 
-void CLemmatizer::ReadOptions(string FileName)
+void CLemmatizer::ReadOptions(std::string FileName)
 {
-	string Options;
+	std::string Options;
 	LoadFileToString(FileName, Options);
 	StringTokenizer lines(Options.c_str(), "\r\n");
 	while (lines())
 	{
-		string line = lines.val();
+		std::string line = lines.val();
 		Trim(line);
 		if (line.empty()) continue;
 		if (line == "AllowRussianJo")
@@ -257,9 +257,9 @@ void CLemmatizer::ReadOptions(string FileName)
 };
 
 
-bool CLemmatizer::LoadDictionariesRegistry(string& strError)
+bool CLemmatizer::LoadDictionariesRegistry(std::string& strError)
 {
-	string load_path;
+	std::string load_path;
 	try
 	{
 		load_path = GetPath();
@@ -331,7 +331,7 @@ void CreateDecartProduction (const vector<CFormInfo>& results1, const vector<CFo
 
 
 
-bool CLemmatizer::CreateParadigmCollection(bool bNorm, string& InputWordStr, bool capital, bool bUsePrediction, vector<CFormInfo>& Result) const
+bool CLemmatizer::CreateParadigmCollection(bool bNorm, std::string& InputWordStr, bool capital, bool bUsePrediction, vector<CFormInfo>& Result) const
 {
     Result.clear();
 	FilterSrc(InputWordStr);
@@ -362,15 +362,15 @@ bool CLemmatizer::CreateParadigmCollection(bool bNorm, string& InputWordStr, boo
 		int hyph = InputWordStr.find("-");
 		bool gennum = false;
 		int pos = -1;
-		if( GetLanguage() == morphRussian && InputWordStr.length() > 12 && hyph == string::npos)
+		if( GetLanguage() == morphRussian && InputWordStr.length() > 12 && hyph == std::string::npos)
 		for(int n = 0; n < NumeralToNumberCount; n++)
 		{
 			if( !NumeralToNumber[n].m_bNoun ) continue;
 			int len = strlen(NumeralToNumber[n].m_Ordinal);
 			if(NumeralToNumber[n].m_Ordinal[0]!=0 && InputWordStr.length()>len+1
-				&& (pos = InputWordStr.substr(InputWordStr.length() - len - 1).rfind(string(NumeralToNumber[n].m_Ordinal).substr(0, len - 2))) != string::npos)
+				&& (pos = InputWordStr.substr(InputWordStr.length() - len - 1).rfind(std::string(NumeralToNumber[n].m_Ordinal).substr(0, len - 2))) != std::string::npos)
 			{
-				string s = InputWordStr.substr(InputWordStr.length() - len - 1 + pos);
+				std::string s = InputWordStr.substr(InputWordStr.length() - len - 1 + pos);
 				CreateParadigmCollection(false, s, capital, false, results1 );
 				if ( results1.size()>0 )
 				{
@@ -382,11 +382,11 @@ bool CLemmatizer::CreateParadigmCollection(bool bNorm, string& InputWordStr, boo
 				break;
 			}
 		}
-		if (hyph != string::npos)
+		if (hyph != std::string::npos)
 		{
 			// try to lemmatize each parts without predictions
-			string first_part = InputWordStr.substr(0, hyph);
-			string second_part = InputWordStr.substr(gennum ? hyph : hyph+1);
+			std::string first_part = InputWordStr.substr(0, hyph);
+			std::string second_part = InputWordStr.substr(gennum ? hyph : hyph+1);
 			CreateParadigmCollection(false, first_part, capital, false, results1 );
 
 			/*
@@ -441,8 +441,8 @@ bool CLemmatizer::LoadStatisticRegistry(SubjectEnum subj)
 {
 	try
 	{
-		string load_path = GetPath();
-		string prefix;
+		std::string load_path = GetPath();
+		std::string prefix;
 		switch (subj)
 		{
 		case subjFinance:
@@ -478,7 +478,7 @@ CAutomAnnotationInner  CLemmatizer::ConvertPredictTupleToAnnot(const CPredictTup
 };
 
 
-bool CLemmatizer::CheckAbbreviation(string InputWordStr,vector<CAutomAnnotationInner>& FindResults, bool is_cap) const
+bool CLemmatizer::CheckAbbreviation(std::string InputWordStr,vector<CAutomAnnotationInner>& FindResults, bool is_cap) const
 {
 	for(size_t i=0; i <InputWordStr.length(); i++)
 		if (!is_upper_consonant((BYTE)InputWordStr[i], GetLanguage()))
@@ -490,7 +490,7 @@ bool CLemmatizer::CheckAbbreviation(string InputWordStr,vector<CAutomAnnotationI
 	return true;
 };
 
-void CLemmatizer::PredictByDataBase(string InputWordStr,  vector<CAutomAnnotationInner>& FindResults,bool is_cap) const  
+void CLemmatizer::PredictByDataBase(std::string InputWordStr,  vector<CAutomAnnotationInner>& FindResults,bool is_cap) const  
 {
 
 	vector<CPredictTuple> res;
@@ -569,7 +569,7 @@ bool CLemmatizer::ProcessHyphenWords(CGraphmatFile* piGraphmatFile) const
 				if (piGraphmatFile->StartsFixedOborot(NextWord)) continue;
 				
 				if (GetLanguage() != piGraphmatFile->GetTokenLanguage(NextWord)) continue;
-				string HyphenWord = piGraphmatFile->GetToken(LineNo-1)+"-"+piGraphmatFile->GetToken(NextWord);
+				std::string HyphenWord = piGraphmatFile->GetToken(LineNo-1)+"-"+piGraphmatFile->GetToken(NextWord);
 
 
 				vector<CAutomAnnotationInner>	FindResults;
@@ -611,7 +611,7 @@ CLemmatizerRussian::CLemmatizerRussian() : CLemmatizer(morphRussian)
 };
 
 
-void CLemmatizerRussian::FilterSrc(string& src) const	
+void CLemmatizerRussian::FilterSrc(std::string& src) const	
 {
 	if (!m_bAllowRussianJo)
 		ConvertJO2Je(src); 
@@ -628,7 +628,7 @@ CLemmatizerEnglish:: CLemmatizerEnglish() : CLemmatizer(morphEnglish)
 	m_Registry = "Software\\Dialing\\Lemmatizer\\English\\DictPath";
 };
 
-void CLemmatizerEnglish:: FilterSrc(string& src) const
+void CLemmatizerEnglish:: FilterSrc(std::string& src) const
 {
 };
 
@@ -637,7 +637,7 @@ CLemmatizerGerman:: CLemmatizerGerman() : CLemmatizer(morphGerman)
 	m_Registry = "Software\\Dialing\\Lemmatizer\\German\\DictPath";
 };
 
-void CLemmatizerGerman:: FilterSrc(string& src) const
+void CLemmatizerGerman:: FilterSrc(std::string& src) const
 {
 };
 

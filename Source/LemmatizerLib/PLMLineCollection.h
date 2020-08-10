@@ -23,7 +23,7 @@ public:
 	CPlmLineCollection();
 	~CPlmLineCollection();
 
-	bool SaveToFile(string filename) const;
+	bool SaveToFile(std::string filename) const;
 	bool ProcessPlmLines(const CGraphmatFile* piGraphmatFile);
 	
 };

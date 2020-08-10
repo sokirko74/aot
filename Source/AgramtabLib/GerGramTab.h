@@ -124,7 +124,7 @@ public:
 	const CAgramtabLine* GetLine(size_t LineNo) const {return Lines[LineNo];}
 	size_t s2i(const char * s ) const { return  (unsigned char) s[0]*0x100+(unsigned char) s[1] - gStartUp;};
 
-	string i2s(WORD i) const
+	std::string i2s(WORD i) const
 	{ 
 		i += gStartUp;
 		char res[3];

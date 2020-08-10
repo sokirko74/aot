@@ -22,7 +22,7 @@ typedef enum {	subjFinance = 1, subjComputer = 2, subjLiterature = 4	} SubjectEn
 class CLemmatizer  : public CMorphDict
 {
 protected:
-	string				m_Registry;
+	std::string				m_Registry;
 	
     // Postfixes-particles, that do not change the meaning 
 	set<string>     	m_HyphenPostfixes;
@@ -34,21 +34,21 @@ protected:
 	set<string>			m_PrefixesSet;
 
 
-	virtual void			FilterSrc(string& src) const = 0;
+	virtual void			FilterSrc(std::string& src) const = 0;
 
-	string					GetRegistryString()  const	{return m_Registry;	};
-	string					GetPath()  const;
-	void					ReadOptions(string FileName);
+	std::string					GetRegistryString()  const	{return m_Registry;	};
+	std::string					GetPath()  const;
+	void					ReadOptions(std::string FileName);
 		
 	
-	bool					LemmatizeWord(string& InputWordStr, const bool cap, const bool predict, vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const;
+	bool					LemmatizeWord(std::string& InputWordStr, const bool cap, const bool predict, vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const;
 	void					AssignWeightIfNeed(vector<CAutomAnnotationInner>& FindResults) const;
 
 	// prediction by suffix
-	bool					CheckAbbreviation(string InputWordStr,vector<CAutomAnnotationInner>& FindResults, bool is_cap) const;
+	bool					CheckAbbreviation(std::string InputWordStr,vector<CAutomAnnotationInner>& FindResults, bool is_cap) const;
 	CAutomAnnotationInner	ConvertPredictTupleToAnnot(const CPredictTuple& input) const;
-	void					PredictByDataBase(string InputWordStr,  vector<CAutomAnnotationInner>&  results,bool is_cap) const;
-	bool					IsPrefix(const string& Prefix) const;
+	void					PredictByDataBase(std::string InputWordStr,  vector<CAutomAnnotationInner>&  results,bool is_cap) const;
+	bool					IsPrefix(const std::string& Prefix) const;
 	
 
 public:
@@ -66,20 +66,20 @@ public:
 	//  basic methods
 	MorphLanguageEnum GetLanguage()  const {return m_pFormAutomat->m_Language; };
 	const CStatistic& GetStatistic() const;
-	bool	CheckABC(const string& WordForm) const;
-	bool	IsHyphenPostfix(const string& Postfix) const;
-    bool    IsHyphenPrefix(const string& Prefix) const;
+	bool	CheckABC(const std::string& WordForm) const;
+	bool	IsHyphenPostfix(const std::string& Postfix) const;
+    bool    IsHyphenPrefix(const std::string& Prefix) const;
 
 	
 	//  loading
-	bool	LoadDictionariesRegistry(string& strError) ;
+	bool	LoadDictionariesRegistry(std::string& strError) ;
 	bool	LoadStatisticRegistry(SubjectEnum subj);
 
 	//  main interfaces
-	bool	CreateParadigmCollection(bool bNorm, string& WordStr, bool capital, bool bUsePrediction, vector<CFormInfo>& Result) const;
+	bool	CreateParadigmCollection(bool bNorm, std::string& WordStr, bool capital, bool bUsePrediction, vector<CFormInfo>& Result) const;
 	void	GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* OutBuffer, bool bUsePrediction) const;
-	//string	GetAllAncodesAndLemmasQuick(string& InputWordStr, bool capital) const;
-	bool	GetAllAncodesAndLemmasQuick(string& InputWordStr, bool capital, char* OutBuffer, size_t MaxBufferSize, bool bUsePrediction) const;
+	//std::string	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital) const;
+	bool	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital, char* OutBuffer, size_t MaxBufferSize, bool bUsePrediction) const;
 	bool	CreateParadigmFromID(DWORD id, CFormInfo& Result) const;
 	bool	ProcessHyphenWords(CGraphmatFile* piGraphmatFile) const;
 
@@ -97,13 +97,13 @@ class CLemmatizerRussian : public CLemmatizer
 public:
 	CLemmatizerRussian();
 	virtual ~CLemmatizerRussian() {};
-	void FilterSrc(string& src) const;
+	void FilterSrc(std::string& src) const;
 };
 
 
 class  CLemmatizerEnglish : public CLemmatizer
 {
-	void FilterSrc(string& src) const;
+	void FilterSrc(std::string& src) const;
 public:
 	CLemmatizerEnglish();
 	virtual ~CLemmatizerEnglish() {};
@@ -116,7 +116,7 @@ public:
 
 class  CLemmatizerGerman: public CLemmatizer
 {
-	void FilterSrc(string& src) const;
+	void FilterSrc(std::string& src) const;
 public:
 	CLemmatizerGerman();
 	virtual ~CLemmatizerGerman() {};

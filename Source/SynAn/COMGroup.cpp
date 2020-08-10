@@ -10,7 +10,7 @@ STDMETHODIMP CCOMGroup::get_TypeStr(BSTR* pVal)
 {
 	try
 	{
-		string s = m_pOptions->GetGroupNameByIndex(m_pGroup->m_GroupType);
+		std::string s = m_pOptions->GetGroupNameByIndex(m_pGroup->m_GroupType);
 		*pVal = _bstr_t(s.c_str()).copy();
 	}
 	catch(...)

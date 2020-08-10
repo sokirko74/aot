@@ -7,15 +7,15 @@ struct CVisualNode
 {
 	int		m_x;
 	int		m_y;
-	string	m_Label;
-	string	m_Morphology;
+	std::string	m_Label;
+	std::string	m_Morphology;
 };
 
 struct CVisualRelation 
 {
 	size_t	m_SourceNodeNo;
 	size_t	m_TargetNodeNo;
-	string	m_RelationStr;
+	std::string	m_RelationStr;
 };
 
 struct CVisualSemGraph {
@@ -31,7 +31,7 @@ struct CVisualSemGraph {
 	int SetTreeLayout (int Root, int Left, int Top);
 	int GetLeavesCount (int Root) const;
 	void  SetGraphLayout();
-	string GetResultStr() const;
+	std::string GetResultStr() const;
 };
 
 #endif

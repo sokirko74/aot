@@ -1,9 +1,10 @@
 // GraphmatThick.cpp : Defines the entry point for the console application.
 //
 
-#include "common/util_classes.h"
-#include "GraphanLib/GraphmatFile.h"
-#include "TrigramLib/TrigramModel.h"
+#include "../../common/util_classes.h"
+#include "../../GraphanLib/GraphmatFile.h"
+#include "../../TrigramLib/TrigramModel.h"
+#include <string>
 
 #ifndef WIN32
 	#include <syslog.h>
@@ -34,9 +35,9 @@ void PrintUsageAndExit()
 	
 };
 
-map<string, size_t> WordFreqs;
+map<std::string, size_t> WordFreqs;
 
-typedef map<pair<string,string>, size_t> BigramsType;
+typedef map<pair<std::string,std::string>, size_t> BigramsType;
 
 
 /*
@@ -45,7 +46,7 @@ typedef map<pair<string,string>, size_t> BigramsType;
  if the input file is more than 2 Gb, the program starts writing another file
 */
 
-bool WriteBigramsAndClear(BigramsType& Bigrams, string FileName)
+bool WriteBigramsAndClear(BigramsType& Bigrams, std::string FileName)
 {
 	FILE* big_fp = fopen (FileName.c_str(), "a");
 	try {	
@@ -70,7 +71,7 @@ bool WriteBigramsAndClear(BigramsType& Bigrams, string FileName)
 	return true;
 };
 
-void RemoveTempFiles(string AllTempFilesStr)
+void RemoveTempFiles(std::string AllTempFilesStr)
 {
 	fprintf (stderr,"remove temporary files \n");
 	StringTokenizer  tok (AllTempFilesStr.c_str()," ");
@@ -99,7 +100,7 @@ interp_t GetTokensBySentences(CGraphmatFile& Graphan)
 		{
 			if (IsBigramToken(Graphan.GetUnit(LineNoEnd)) )
 			{
-				string TokenStr = Graphan.GetToken(LineNoEnd);
+				std::string TokenStr = Graphan.GetToken(LineNoEnd);
 				assert (!TokenStr.empty());
 				tokens.push_back( TokenStr  );
 			}
@@ -137,7 +138,7 @@ interp_t DeletePunctuationMarks(const interp_t& Tokens)
 		int SentSize = (*it).size();
 		for (size_t LineNo = 0; LineNo < SentSize; LineNo++)
 		{
-			string  Word = (*it)[LineNo];
+			std::string  Word = (*it)[LineNo];
 			if (ispunct((BYTE)Word[0]))
 				continue;
 			else
@@ -150,7 +151,7 @@ interp_t DeletePunctuationMarks(const interp_t& Tokens)
 
 
 
-string AllTempFilesStr;
+std::string AllTempFilesStr;
 
 void  termination_handler(int signum)
 {
@@ -174,13 +175,13 @@ int BuildBigrams(int argc, char* argv[])
 	};
 
 	int MaxWindowSize=1;	
-	string OutputFile = "bigrams.txt", HmmConfigFile;
+	std::string OutputFile = "bigrams.txt", HmmConfigFile;
 	bool bUseHMM = false;
 	size_t AllFileSize = 0;
 	int MaxBigramsInMemory = 1000000;
 	for (size_t i=3; i<argc; i++)
 	{
-		string s = argv[i];
+		std::string s = argv[i];
 		EngMakeLower(s);
 		if (		(s == "-help") 
 				||	(s == "--help") 
@@ -287,7 +288,7 @@ try
 		BigramsType Bigrams;
 		for (size_t FileNo=0;FileNo < Files.size(); FileNo++)
 		{
-			string InputFileName = Files[FileNo];
+			std::string InputFileName = Files[FileNo];
 			fprintf (stderr,"===== [%zu/%zu] %s ===== \n",FileNo+1, Files.size(), InputFileName.c_str());
 			AllFileSize += FileSize(InputFileName.c_str());
 			if (!Graphan.LoadFileToGraphan(InputFileName))
@@ -308,9 +309,9 @@ try
 				int SentSize = (*it).size();
 				for (size_t LineNo = 0; LineNo < SentSize; LineNo++)
 				{
-					string  s1 = (*it)[LineNo];
+					std::string  s1 = (*it)[LineNo];
 					EngRusMakeUpper(s1);
-					map<string,size_t>::iterator freq_it  = WordFreqs.find(s1);
+					map<std::string,size_t>::iterator freq_it  = WordFreqs.find(s1);
 					if (freq_it == WordFreqs.end())
 						WordFreqs[s1] = 1;
 					else
@@ -322,9 +323,9 @@ try
 					int WindowEnd = std::min(SentSize, (int)(MaxWindowSize + LineNo + 1));
 					for (size_t k=LineNo+1; k < WindowEnd; k++)
 					{
-							string  s2 = (*it)[k];
+							std::string  s2 = (*it)[k];
 							EngRusMakeUpper(s2);
-							pair<string,string> p = make_pair(s1, s2);
+							auto p = make_pair(s1, s2);
 							BigramsType::iterator it = Bigrams.find(p);
 							if (it != Bigrams.end())
 								it->second++;
@@ -337,7 +338,7 @@ try
 			// spooling bigrams
 			if (Bigrams.size() > MaxBigramsInMemory)
 			{
-				string TempFile = CreateTempFileName();
+				std::string TempFile = CreateTempFileName();
 				fprintf (stderr,"write to temporary file %s\n", TempFile.c_str());
 				if (!WriteBigramsAndClear(Bigrams, TempFile))
 					return 1;
@@ -345,7 +346,7 @@ try
 				
 			};
 		};
-		string TempFile = CreateTempFileName();
+		std::string TempFile = CreateTempFileName();
 		if (!WriteBigramsAndClear(Bigrams, TempFile))
 			return 1;
 		AllTempFilesStr += " "+TempFile;
@@ -353,7 +354,7 @@ try
 		fprintf (stderr,"AllFilesSize = %zu\n", AllFileSize);
 
 		fprintf (stderr,"writing bigrams to %s\n", OutputFile.c_str());
-		string  UniteCommand;
+		std::string  UniteCommand;
 		#ifdef WIN32
 			UniteCommand = Format ("gsort -m %s > %s", AllTempFilesStr.c_str(), OutputFile.c_str());
 		#else
@@ -373,7 +374,7 @@ try
 			signal(SIGINT, oldHandler);
 		#endif
 
-		string WFFileName = MakeFName(OutputFile, "wrd_freq");
+		std::string WFFileName = MakeFName(OutputFile, "wrd_freq");
 		fprintf (stderr,"Writing word frequences %s\n", WFFileName.c_str());
 		FILE* wfp =  fopen (WFFileName.c_str(), "w");
 		if (!wfp)
@@ -382,9 +383,9 @@ try
 		}
 		else
 		{
-			for (map<string,size_t>::iterator freq_it = WordFreqs.begin(); freq_it != WordFreqs.end(); freq_it++)
+			for (const auto a : WordFreqs)
 			{
-				fprintf (wfp,"%s %zu\n", freq_it->first.c_str(), freq_it->second);
+				fprintf (wfp,"%s %zu\n", a.first.c_str(), a.second);
 			}
 			fclose(wfp);
 		}
@@ -408,7 +409,7 @@ try
 int main(int argc, char* argv[])
 {
 
-	string Error;
+	std::string Error;
 	if (!IsRmlRegistered(Error)) 
 	{
 		fprintf (stderr,"%s", Error.c_str()  );

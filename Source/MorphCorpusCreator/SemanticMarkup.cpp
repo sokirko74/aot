@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "SemanticMarkup.h"
-#include "string_tokenizer.h"
+#include "std::string_tokenizer.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -20,7 +20,7 @@ CSemanticMarkup::~CSemanticMarkup()
 
 }
 
-bool CSemanticMarkup::Open(string strName)
+bool CSemanticMarkup::Open(std::string strName)
 {
 	FILE* fp = fopen(strName.c_str(), "r");
 	if( fp == NULL )
@@ -71,7 +71,7 @@ void CSemanticMarkup::ReadHeadLine(const char *ss)
 			break;
 		}
 		else
-			m_Titles.push_back(string(ss+iPos, len));
+			m_Titles.push_back(std::string(ss+iPos, len));
 		i++;
 		iPos += (len+1);
 	}
@@ -79,11 +79,11 @@ void CSemanticMarkup::ReadHeadLine(const char *ss)
 	{
 		int len = strlen(ss) - iPos - 1;
 		if( len > 0 )
-			m_Titles.push_back(string(ss+iPos, len));
+			m_Titles.push_back(std::string(ss+iPos, len));
 	}
 }
 
-BYTE CSemanticMarkup::GetPOS(string s)
+BYTE CSemanticMarkup::GetPOS(std::string s)
 {
 	if( s == "П")
 		return AGRAMTABLib::ADJ_FULL;
@@ -119,18 +119,18 @@ void CSemanticMarkup::ReadItems(const char *ss)
 		int len = word - (ss + iPos);
 		if( i == 0  )
 		{
-			lemma.m_POS = GetPOS(string(ss+iPos, len));
+			lemma.m_POS = GetPOS(std::string(ss+iPos, len));
 		}
 		else if( i == 1 )
 		{			
-			lemma.m_sLemma = string(ss+iPos, len);
+			lemma.m_sLemma = std::string(ss+iPos, len);
 			::strupr((char*)lemma.m_sLemma.c_str());
 		}
 		else
 			if( len == 0 )
 				semMeaning.m_values.push_back("");	
 			else
-				semMeaning.m_values.push_back(string(ss+iPos, len));
+				semMeaning.m_values.push_back(std::string(ss+iPos, len));
 		i++;
 		if( i - 2 >= (int)(m_Titles.size()) )
 		{
@@ -143,7 +143,7 @@ void CSemanticMarkup::ReadItems(const char *ss)
 	{
 		int len = strlen(ss) - iPos - 1;
 		if( len > 0 )
-			semMeaning.m_values.push_back(string(ss+iPos, len));
+			semMeaning.m_values.push_back(std::string(ss+iPos, len));
 		else
 			semMeaning.m_values.push_back("");	
 	}
@@ -155,9 +155,9 @@ void CSemanticMarkup::ReadItems(const char *ss)
 		it->second.m_Meanings.push_back(semMeaning);
 }
 
-string CSemanticMarkup::GetSemFeaturesString(string& lemma, BYTE POS)
+std::string CSemanticMarkup::GetSemFeaturesString(std::string& lemma, BYTE POS)
 {
-	string res;
+	std::string res;
 	map<SLemma,SSemInfo>::iterator it = m_Entries.find(SLemma(lemma.c_str(),POS));
 	if( it == m_Entries.end() )
 		return "";

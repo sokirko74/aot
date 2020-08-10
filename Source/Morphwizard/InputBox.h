@@ -44,7 +44,7 @@ protected:
 };
 
 
-extern bool InputBox (const char* Caption, string& OutBuffer);
+extern bool InputBox (const char* Caption, std::string& OutBuffer);
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

@@ -42,7 +42,7 @@ void string_to_id(const char *str, DwordVector &ids, DwordVector &pos_vec)
 		
 	vector<CFormInfo > ParadigmCollection;
 	
-	string Word = str;
+	std::string Word = str;
 	if (!MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(false, Word, is_capital, ParadigmCollection))
 	{
 		fprintf (stderr,"cannot lemmatize %s\n", str);

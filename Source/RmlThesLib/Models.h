@@ -27,7 +27,7 @@ struct CAtomGroup {
 	};
 };
 struct CThesSynGroup {
-	string m_TypeStr;
+	std::string m_TypeStr;
 	long m_First;
 	long m_Last;
 };

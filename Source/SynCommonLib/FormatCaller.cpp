@@ -197,14 +197,14 @@ int CFormatCaller::main_analyse()
 	}
 	catch(...)
 	{
-		string strMsg;
+		std::string strMsg;
 		strMsg += " Failed main_analyse: \n";
 		strMsg += "word: ";
 		if (sent[WordNo].get_word())
 			strMsg += sent[WordNo].get_word();
 
 		strMsg += " \n clause: ";
-		string strMsg1;
+		std::string strMsg1;
 		get_full_sentence(strMsg1);
 		strMsg += strMsg1;	 	 
 		strMsg += "\n Syntax rule ";
@@ -535,7 +535,7 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 	{		
 		const SDoubleConj& vConj = *it;
 		long CurrWordNo  = G.m_iFirstWord;
-        if ((string(vConj.m_FirstPart[0].m_item) == "КАК") && !sent[G.m_iFirstWord].HasPOS(GetOpt()->m_Conjunction))
+        if ((std::string(vConj.m_FirstPart[0].m_item) == "КАК") && !sent[G.m_iFirstWord].HasPOS(GetOpt()->m_Conjunction))
             break;
 
 		/*

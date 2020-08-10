@@ -253,7 +253,7 @@ void CFieldEditor::OnButton2()
 	m_Signats.SetItem(Count-1,  0, LVIF_STATE, 0,0, LVIS_SELECTED|LVIS_FOCUSED,LVIS_SELECTED, 0, 0 );
 	OnEditSignat();
 	const CSignat& S = GetRoss()->Fields[m_FieldNo].m_Signats.back();
-	string s = S.FormatStr;
+	std::string s = S.FormatStr;
 	if (s.empty())
 	{
 		ErrorMessage("No domens in signature");

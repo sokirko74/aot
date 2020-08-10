@@ -19,7 +19,7 @@ poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD U
 	long ret_poses = 0;
 	for (long i=0; i < GramFets.size(); i++)
 	{
-     string S = GramFets[i].substr(0, GramFets[i].find_first_of(":"));
+     std::string S = GramFets[i].substr(0, GramFets[i].find_first_of(":"));
 	 
 	 if (S == "СУЩ")	 
 		 ret_poses |=  (1 << NOUN);
@@ -58,9 +58,9 @@ poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD U
 		ret_poses |= ((1<<NUMERAL_P) | (1<<NUMERAL) );		
 	 else
 	 {
-		 ErrorMessage (string("Unknown POS ")+string(GramFets[i])
-			 + string(" in article ") 
-			 + string(Ross.GetRoss()->GetEntryStr(UnitNo)));
+		 ErrorMessage (std::string("Unknown POS ")+std::string(GramFets[i])
+			 + std::string(" in article ") 
+			 + std::string(Ross.GetRoss()->GetEntryStr(UnitNo)));
 
 		 #ifdef  DEBUG
 		  throw CExpc ("Unknown POS ");
@@ -72,7 +72,7 @@ poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD U
 	return ret_poses;
 }
 
-bool CRusSemStructure::VerbCanBeWithoutReflexiveSuffix(string Lemma) const
+bool CRusSemStructure::VerbCanBeWithoutReflexiveSuffix(std::string Lemma) const
 {
    if (!HasReflexiveSuffix(Lemma)) return false;
    Lemma.erase(Lemma.length() - 2);
@@ -84,14 +84,14 @@ bool CRusSemStructure::VerbCanBeWithoutReflexiveSuffix(string Lemma) const
 
    for (int i =0; i < ParadigmCollection.size(); i++)
    {
-	   string GramCodes = ParadigmCollection[i].GetAncode(0);
+	   std::string GramCodes = ParadigmCollection[i].GetAncode(0);
 	   long POS = m_pData->GetRusGramTab()->GetPartOfSpeech(GramCodes.c_str());
 	   if (POS == INFINITIVE) return true;
    };
    return false;
 
 };
-string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const 
+std::string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const 
 {
 	QWORD Grammems = _QM(rMasculinum) | _QM(rSingular) | _QM(rNominativ);
 	if (W.HasOneGrammem(rActiveVoice))
@@ -113,7 +113,7 @@ string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const
 	long k=0;
 	for (; k < Paradigm.GetCount(); k++)
 	{
-		string  AnCode = Paradigm.GetAncode(k);
+		std::string  AnCode = Paradigm.GetAncode(k);
 		QWORD currGrammems;
 		m_pData->GetRusGramTab()->GetGrammems(AnCode.c_str(), currGrammems);
 		if ( (Grammems & currGrammems) == Grammems)
@@ -132,7 +132,7 @@ WORD CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
 	for (long i=0; i < PrefixesCount; i++)
 	  if  (W.m_Lemma.substr(0, strlen(Prefixes[i].m_Prefix)) == Prefixes[i].m_Prefix) 
 	  {
-		 string UnitStr=  W.m_Lemma.substr(strlen(Prefixes[i].m_Prefix));
+		 std::string UnitStr=  W.m_Lemma.substr(strlen(Prefixes[i].m_Prefix));
 		 EngRusMakeLower(UnitStr);
 		 WORD UnitNo  = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 		 if (UnitNo == ErrUnitNo)  continue;
@@ -140,7 +140,7 @@ WORD CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
 		 DWORD ParadigmId = m_pData->GetFirstParadigmId(morphRussian, UnitStr,  W.m_Poses);
 		 if (ParadigmId == UnknownParadigmId) continue;
  		 W.m_Lemma =  UnitStr;
-		 W.m_GraphDescrs += " "+string(Prefixes[i].m_GraDescr);
+		 W.m_GraphDescrs += " "+std::string(Prefixes[i].m_GraDescr);
 		 W.m_ParadigmId = ParadigmId;
 		 W.m_Word.erase(0, strlen(Prefixes[i].m_Prefix));
 		 return UnitNo; 
@@ -155,9 +155,9 @@ WORD CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
   наездница -> наездник
   велосипедистка -> велосипедист
 */
-bool CRusSemStructure::BuildWordWithoutFemineSuffix (string& Word) const
+bool CRusSemStructure::BuildWordWithoutFemineSuffix (std::string& Word) const
 {
-	string NewWord;
+	std::string NewWord;
 	if (  (Word.length() > 8)
 	    &&(Word.substr(Word.length()-8) == "тельница")
 	   )
@@ -201,7 +201,7 @@ void CRusSemStructure::InitInterps (CRusSemWord&	W, bool	PassiveForm, long Claus
 
 		// ищем	словарную статью в РОССе по	лемме
 		// Например, обеспокоенный
-		string UnitStr;
+		std::string UnitStr;
 		WORD UnitNo	= ErrUnitNo;
 		if (   //( W.m_Poses & (1	<< PARTICIPLE) ) 
 			 ( W.m_Poses & (1	<< PARTICIPLE_SHORT) ) 
@@ -265,11 +265,11 @@ TryWithoutFeminSuffix:
 					if ( GetRoss(Ross)->GetCortegeFieldNo(i) ==	 GetRossHolder(Ross)->RefFieldNo )
 					{
 						TCortege C = GetCortege(GetRoss(Ross), i);
-						string S =	 GetRossHolder(Ross)->GetDomItemStrInner(C.m_DomItemNos[0]);
+						std::string S =	 GetRossHolder(Ross)->GetDomItemStrInner(C.m_DomItemNos[0]);
 						long MeanNum =	-1;
 						if (C.m_DomItemNos[1] !=  -1) 
 						{
-							string Q = GetRossHolder(Ross)->GetDomItemStrInner(C.m_DomItemNos[1]);
+							std::string Q = GetRossHolder(Ross)->GetDomItemStrInner(C.m_DomItemNos[1]);
 							if (Q.length() == 1)
 							{
 								MeanNum	= Q[0] - '0';
@@ -303,7 +303,7 @@ TryWithoutFeminSuffix:
 			)
 		{ 
 			// сохраняем суффикс -СЯ, чтобы	можно было его добавить
-			string suffix =	W.m_Lemma.substr(W.m_Lemma.length()	- 2);
+			std::string suffix =	W.m_Lemma.substr(W.m_Lemma.length()	- 2);
 			W.m_Lemma =	W.m_Lemma.substr(0,	W.m_Lemma.length() - 2);
 			// подключаем транзитивность вместо	нетранзитивности
 			W.SetTypeGrammems((W.GetTypeGrammems() & ~_QM(rNonTransitive)) | _QM(rTransitive));
@@ -404,7 +404,7 @@ void CRusSemStructure::InitWordFeatures(long WordNo, CRusSemWord& SemWord)
         SemWord.m_GraphDescrs = " "+W.BuildGraphemDescr()+ " ";
 
 		SemWord.m_IsPunct = !SemWord.m_Word.empty() && ispunct((BYTE)SemWord.m_Word[0]);
-		SemWord.m_ILE = SemWord.m_GraphDescrs.find(" LLE " ) != string::npos;
+		SemWord.m_ILE = SemWord.m_GraphDescrs.find(" LLE " ) != std::string::npos;
 		if (SemWord.m_ILE) SemWord.SetFormGrammems (rAllCases);
 		SemWord.m_CharCase = W.m_Register;
 
@@ -420,7 +420,7 @@ void CRusSemStructure::InitWordFeatures(long WordNo, CRusSemWord& SemWord)
 		SemWord.m_PostPuncts = "";
 		for (long i=WordNo+1; i < m_piSent->m_Words.size(); i++)
 		{
-			string w = m_piSent->m_Words[i].m_strWord;
+			std::string w = m_piSent->m_Words[i].m_strWord;
 			if (!w.empty() && ispunct((BYTE)w[0]))
   			   SemWord.m_PostPuncts += w;
 			else
@@ -465,14 +465,14 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 	GetHomonym(ClauseNo, WordNo, H);
 		
 
-	string  S = H.m_strLemma;
+	std::string  S = H.m_strLemma;
 	
 	EngRusMakeLower(S);
 	unsigned short UnitNo = ErrUnitNo;
 	CRusSemWord SemWord(WordNo, H.m_strLemma);
 	SemWord.m_SynWordNo = WordNo;
 	SemWord.m_ParadigmId = H.m_lPradigmID; 
-	string TypeAncode;
+	std::string TypeAncode;
 	SemWord.SetFormGrammems (H.m_iGrammems);
 	{
 		//  reading grammems from "type ancode"
@@ -486,7 +486,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 
 	}
 	SemWord.m_Poses = H.m_iPoses;
-	string GramCodes = H.GetGramCodes();
+	std::string GramCodes = H.GetGramCodes();
 	SemWord.m_pData =  m_pData;
 	SemWord.m_GramCodes = GramCodes;
 
@@ -496,7 +496,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 	if	(		SemWord.HasPOS(PARTICIPLE_SHORT) 
 			&&	SemWord.HasOneGrammem(rPerfective) 
 			&&  SemWord.HasOneGrammem(rPastTense) 
-			&&  (SemWord.m_Word.find("-") == string::npos)
+			&&  (SemWord.m_Word.find("-") == std::string::npos)
 		)
 	{
 		//  будем считать, что формы кратких причастий "св,стр,прш" настояшим временем
@@ -681,7 +681,7 @@ long CRusSemStructure::FindNodeBySyntaxGroupNo (long SyntaxGroupNo) const
 };
 
 
-void CRusSemStructure:: DelProhibitedInterps (string UnitStr, CRusSemNode& N) const
+void CRusSemStructure:: DelProhibitedInterps (std::string UnitStr, CRusSemNode& N) const
 {
   EngRusMakeUpper(UnitStr);
   for (long  i=0;i < N.GetInterps().size(); i++)
@@ -698,7 +698,7 @@ void CRusSemStructure:: DelProhibitedInterps (string UnitStr, CRusSemNode& N) co
   };
 };
 
-bool CRusSemStructure::HasAuxiliaryPOS(string Lemma) const 
+bool CRusSemStructure::HasAuxiliaryPOS(std::string Lemma) const 
 {
 	
 
@@ -709,7 +709,7 @@ bool CRusSemStructure::HasAuxiliaryPOS(string Lemma) const
 	for (int i =0; i < ParadigmCollection.size(); i++)
 	{
 		const CFormInfo& Paradigm = ParadigmCollection[i];
-		string ancode = Paradigm.GetSrcAncode();
+		std::string ancode = Paradigm.GetSrcAncode();
 		BYTE POS = m_pData->GetRusGramTab()->GetPartOfSpeech(ancode.c_str());
 		if (		(POS == PRONOUN) 
 				||	(POS == PRONOUN_P) 
@@ -723,7 +723,7 @@ bool CRusSemStructure::HasAuxiliaryPOS(string Lemma) const
 	return false;
 }
 
-void CRusSemStructure::GetMaxWordWeightByLemma(string Lemma, CRusSemWord& SemWord) const
+void CRusSemStructure::GetMaxWordWeightByLemma(std::string Lemma, CRusSemWord& SemWord) const
 {
 	
 
@@ -749,7 +749,7 @@ CRusSemNode CRusSemStructure::CreateNode(const CRelationsIterator* RelIt, long G
 	for (size_t j = G.m_iFirstWord; j <= G.m_iLastWord; j++)
 	{
 	   const CSynWord& W = m_piSent->m_Words[j];
-	   string  Lemma;
+	   std::string  Lemma;
 	   
 	   CSynHomonym H(const_cast<CSentence*> (m_piSent));
 	   GetHomonym(ClauseNo, j, H);
@@ -766,7 +766,7 @@ CRusSemNode CRusSemStructure::CreateNode(const CRelationsIterator* RelIt, long G
 			//  reading grammems from "type ancode"
 			if ( (H.m_CommonGramCode.length() > 1) && (H.m_CommonGramCode != "??") )
 			{
-				string TypeAncode = H.m_CommonGramCode;	
+				std::string TypeAncode = H.m_CommonGramCode;	
 				SemWord.SetTypeGrammems (  H.m_CommonGramCode.length() > 2 ? H.m_TypeGrammems :
 					m_pData->GetRusGramTab()->GetAllGrammems(TypeAncode.c_str()));
 			};
@@ -1045,7 +1045,7 @@ void CRusSemStructure::BuildPustychaWithETO (long ClauseNo)
  if (m_Nodes[i].m_ClauseNo == ClauseNo)
  if (m_Nodes[i].m_MainWordNo != -1)
  {
-	 string Q = m_Nodes[i].m_Words[m_Nodes[i].m_MainWordNo].m_Word;
+	 std::string Q = m_Nodes[i].m_Words[m_Nodes[i].m_MainWordNo].m_Word;
 	 if ((Q == "ЭТО") || (Q == "ТАМ")) break;
  };
 
@@ -1162,7 +1162,7 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree (long ClauseNo)
 			&&	!m_Nodes[RootNodeNo].HasGrammems ( _QM(rPlural) | _QM(rPastTense) )
 			)
 			break;
-		string word = m_Nodes[RootNodeNo].m_Words[0].m_Word;
+		std::string word = m_Nodes[RootNodeNo].m_Words[0].m_Word;
 		if (word.length() < 3) break; 
 		if (    (word.substr (word.length() - 3, 3) != "-КА") 
 			&& (word.substr (word.length() - 2, 2) != "ТЕ") 
@@ -1268,7 +1268,7 @@ CRusSemNode Create_EST_Node(CRusSemStructure& R, long ClauseNo)
    const CLemmatizer* P = R.m_pData->GetRusLemmatizer(); 
    
    vector<CFormInfo> ParadigmCollection;
-   string Est ="есть";
+   std::string Est ="есть";
    P->CreateParadigmCollection(false,Est,false, false, ParadigmCollection);
 
    
@@ -1279,7 +1279,7 @@ CRusSemNode Create_EST_Node(CRusSemStructure& R, long ClauseNo)
 		   break;
    assert ( i < ParadigmCollection.size() );
 
-   string GramCodes = ParadigmCollection[i].GetSrcAncode();
+   std::string GramCodes = ParadigmCollection[i].GetSrcAncode();
    CRusSemWord SemWord(-1, "БЫТЬ");
    QWORD dummy = R.m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
    SemWord.SetFormGrammems( dummy );
@@ -1348,7 +1348,7 @@ void CRusSemStructure::ProcessDashClauses()
 		  // пустыха, которая начинается с "чем", будем считать частью сравн. оборота
 	      if (    m_Nodes[NodeNo].IsPrimitive()   )
 		  {
-			  string Word = m_Nodes[NodeNo].m_Words[0].m_Word;
+			  std::string Word = m_Nodes[NodeNo].m_Words[0].m_Word;
 			  EngRusMakeUpper(Word);
               if (Word == "ЧЕМ") continue;
 		  };
@@ -1477,7 +1477,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 	};
 
 
-	string GramCodes;
+	std::string GramCodes;
 	QWORD Grammems = 0;
 	long Poses = 0;
 	
@@ -1487,7 +1487,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 	for (int j = 0; j < m_Nodes[MainVerbNodeNo].m_GramCodes.length(); j += 2)
 		for (int i = 0; i < AuxVerb->m_GramCodes.length(); i += 2)
 		{
-			string strPos;
+			std::string strPos;
 
 			//  Граммемы вспомогательного глагола
 			QWORD VerbGrammems;
@@ -1627,7 +1627,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 			strPos += piRusGramTab->GrammemsToStr(CurrentGrammems);
 			piRusGramTab->ProcessPOSAndGrammems(strPos.c_str(), iPos, iGrm); 
 
-			string buffer;
+			std::string buffer;
 			if (!piRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(iPos, iGrm, buffer))
 			{
 				//ErrorMessage(Format("Cannot get gramcode  by %s",strPos.c_str(), Word->m_Lemma.c_str()));
@@ -1717,7 +1717,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 
 
 
-	string Sentence = "Find Situations :"; 
+	std::string Sentence = "Find Situations :"; 
 	// создаем примитивные узлы 
 	for (size_t j = 0; j < m_piSent->m_Words.size(); j++)
 	{
@@ -1733,7 +1733,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 	for(long RelNo = 0 ; RelNo < RelIt.GetRelations().size() ; RelNo++ )
 	{
 		const CSynOutputRelation& piRel = RelIt.GetRelations()[RelNo];
-		string RelName = m_piSent->GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
+		std::string RelName = m_piSent->GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
 		long SourceNodeNo = (piRel.m_iSourceGroup == -1) ? FindNodeByWordNo(piRel.m_Relation.m_iFirstWord) :  FindNodeBySyntaxGroupNo(piRel.m_iSourceGroup);
 		if (SourceNodeNo == -1) 
 			continue; // пример: было не из чего , а уже не запрыгивал
@@ -1758,7 +1758,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 					)
 					m_Nodes[m_SynRelations.back().m_SourceNodeNo].AddOneGrammem (rGenitiv);
 			//случай ЧИСЛ_СУЩ
-			if( m_SynRelations.back().m_SynRelName.find("ЧИСЛ_СУЩ")!=string::npos
+			if( m_SynRelations.back().m_SynRelName.find("ЧИСЛ_СУЩ")!=std::string::npos
 				|| piRel.m_Relation.type == 25) //NOUN_NUMERAL_APPROX
 			{
 				const CRusGramTab *R = (CRusGramTab*)piRel.GetOpt()->GetGramTab();
@@ -1856,7 +1856,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 
 	if (!m_piSent->m_Words.empty())
 	{
-		string t = m_piSent->m_Words.back().m_strWord;
+		std::string t = m_piSent->m_Words.back().m_strWord;
 		if (t == "?")
 			m_SentenceMood = Interrogative;
 		else

@@ -41,7 +41,7 @@ public:
 	CSLFView* GetSLFView();
 	CString GetSavedLemma();
 	CString GetLemma() const;
-	string	GetBase()  const;
+	std::string	GetBase()  const;
 	BOOL	OpenDiffDialog ();
 	BOOL	OpenParadigm( bool runAccentWizard=false );
 #ifdef _DEBUG

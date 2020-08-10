@@ -18,13 +18,13 @@ public:
 	~CSemStructureBuilder(void);
 
 	bool	FindSituationsForNextSentence();
-	bool	FindSituations(string text, long UserTreeVariantNo, string PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, string AllowableLexVars, string& Graph);
-	bool	TranslateToEnglish(string& Graph);
-	bool	BuildSentence(string& Sentence);
-	bool	SyntRusSentence(string& Sentence);
+	bool	FindSituations(std::string text, long UserTreeVariantNo, std::string PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, std::string AllowableLexVars, std::string& Graph);
+	bool	TranslateToEnglish(std::string& Graph);
+	bool	BuildSentence(std::string& Sentence);
+	bool	SyntRusSentence(std::string& Sentence);
 	void	SaveThisSentence(void);
 	void	ClearSavedSentences(void);
-	string  Answer();
+	std::string  Answer();
 	long	GetScrollMax() const;
 	long	GetScrollCurrent() const;
 

@@ -26,7 +26,7 @@ void CSemWord::Init()
 
 CSemWord::CSemWord()  { Init(); }
 
-CSemWord::CSemWord (long WordNo, string Lemma )
+CSemWord::CSemWord (long WordNo, std::string Lemma )
 {
 	Init();
 	m_WordNo = WordNo;
@@ -115,7 +115,7 @@ CSemNode::CSemNode()
 };
 
 // удаляет из оператор из  m_RelOperators
-void CSemNode::DelRelOperator(const string& oper)
+void CSemNode::DelRelOperator(const std::string& oper)
 {
 	for(int i = 0 ; i < m_RelOperators.size() ; i++ )
 		if( m_RelOperators[i] == oper)
@@ -263,7 +263,7 @@ long CSemNode::GetMinWordNo () const
 
 
 // проверяет наличие оператора среди  RelOperators
-bool CSemNode::HasRelOperator (string oper) const
+bool CSemNode::HasRelOperator (std::string oper) const
 {
 	return  find(m_RelOperators.begin(),m_RelOperators.end(), oper) != m_RelOperators.end();
 };
@@ -321,7 +321,7 @@ bool   CSemNode::IsComma() const
 	  		&& GetWord(0).m_Word[0] == ',';
 };
 
-bool CSemNode::IsLemma(string Lemma) const 
+bool CSemNode::IsLemma(std::string Lemma) const 
 {
 	return IsPrimitive() && (GetWord(0).m_Lemma == Lemma);
 };
@@ -388,7 +388,7 @@ CSemRelation::CSemRelation ()
 CSemRelation::CSemRelation (const CValency& Valency, 
 	             long SourceNodeNo, 
 				 long TargetNodeNo, 
-				 string SyntacticRelation)
+				 std::string SyntacticRelation)
 {
 		Init();
 		m_Valency    = Valency;
@@ -470,7 +470,7 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 
 
 
-inline long ConvertGramRestrToGrammems(string t)
+inline long ConvertGramRestrToGrammems(std::string t)
 {
 	if ( t  == "ед" )
 			  return _QM(rSingular);
@@ -497,7 +497,7 @@ vector<QWORD> CSemanticStructure::GetGramRestr(const CSemNode& W)
 	   if (GetRoss(W.GetType())->GetCortegeFieldNo(i) == GetRossHolder(W.GetType())->GramRestrFieldNo) 
 		  {
 			const TCortege& C = GetCortege (GetRoss(W.GetType()), i);
-			string GramFet = WriteToString(GetRoss(W.GetType()), (char*)(GetRoss(W.GetType())->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+			std::string GramFet = WriteToString(GetRoss(W.GetType()), (char*)(GetRoss(W.GetType())->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
             Trim(GramFet);
 	        DWORD Pose;
 			QWORD Grammems;
@@ -511,9 +511,9 @@ vector<QWORD> CSemanticStructure::GetGramRestr(const CSemNode& W)
 
 
 
-string GetStringVectorInOneStr(const StringVector& Vec, string Delimiter) 
+std::string GetStringVectorInOneStr(const StringVector& Vec, std::string Delimiter) 
 {
-	string Result;
+	std::string Result;
 	for (long i=0; i < Vec.size(); i++)
 	{
 		Result += Vec[i];
@@ -526,11 +526,11 @@ string GetStringVectorInOneStr(const StringVector& Vec, string Delimiter)
 
 
 
-string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
+std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 {
  try { 
 	// уничтожение графа 
-	string Res ="";
+	std::string Res ="";
 	Res += "$GT($main,graph) delete nodes\1";
 
     Res += Format("$main.switches.resultText configure -text \"%s\"\1",m_ClausePropertiesProtocol.c_str());
@@ -549,7 +549,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 
 		if (GetNode(i).m_SynGroupTypeStr != KEYB)
 		{
-			string Q =  GetMorphologyOfNode(i);
+			std::string Q =  GetMorphologyOfNode(i);
 			if (GetNode(i).IsWordContainer())
 				Q += Format("\nMinWordNo = %i", GetNode(i).GetMinWordNo());
 
@@ -570,7 +570,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 			Res += Format("$GT($main,graph) set $nds(%i)  .morphology \"%s\"\1",i, Q.c_str());
 		};
 
-		string ss = SynRealToStr(GetNode(i).m_SynReal, "\n");
+		std::string ss = SynRealToStr(GetNode(i).m_SynReal, "\n");
 		if( !ss.empty())
 			Res += Format( "$GT($main,graph) set $nds(%i)  .preps \"%s\"\1",i, ss.c_str());
 
@@ -607,7 +607,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 
 
 
-		string AllInterps;
+		std::string AllInterps;
 
 		if  ( GetNode(i).m_Colloc.m_Type != NoneType  )
 		{
@@ -634,7 +634,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 			Res += Format ("$GT($main,graph) set $nds(%i)  .lemma \"%s\"\1",i,GetNode(i).GetWord(0).m_Lemma.c_str());
 		};
 
-		string SemFets = string("CAT = ") + GetStrByCategory(GetNode(i).m_SemCategory) + string("\n");
+		std::string SemFets = std::string("CAT = ") + GetStrByCategory(GetNode(i).m_SemCategory) + std::string("\n");
 		SemFets += "SF = " + GetSemFetsInOneStr(GetNode(i).m_NodeSemFets);
 		if (GetNode(i).m_POs.size() > 0)
 		{
@@ -647,7 +647,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 		;
 		Res += Format ("$GT($main,graph) set $nds(%i)  .sem_fets \"%s\"\1",i,SemFets.c_str());
 
-		string Props;
+		std::string Props;
 		if (GetNode(i).m_bQuoteMarks)
 			Props += "Quote marks\n";
 		if (GetNode(i).m_ConnectedSits.size() > 0)
@@ -661,7 +661,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 		Res += Format ("$GT($main,graph) set $nds(%i)  .unit_no \"%i\"\1",i,GetNode(i).GetUnitNo());
 		Res += Format ("$GT($main,graph) set $nds(%i)  .higher_concepts \"%s\"\1",i,GetStringVectorInOneStr(GetNode(i).m_HigherConcepts, "\n").c_str());
 
-		string AllVals;
+		std::string AllVals;
 		for (size_t k=0; k < GetNode(i).m_Vals.size(); k++)
 		{
 			if (GetNode(i).m_Vals[k].m_bObligatory)
@@ -701,7 +701,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 		Res += Format("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", FirstNodeNo, SecondNodeNo);
 
 
-		string Label;
+		std::string Label;
 		for (size_t k=0; k < Rels.size(); k++)
 		{	
 			Label += GetRelation(Rels[k])->m_Valency.m_RelationStr;
@@ -710,13 +710,13 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 			Label += SynRealToStr(GetRelation(Rels[k])->m_SynReal, "\n");
 			long g = FindLexFunctBySemRel(Rels[k]);
 			if (g != -1)
-				Label += string ("(") + GetLexFuncts()[g].m_LexFunctName + string (")");
+				Label += std::string ("(") + GetLexFuncts()[g].m_LexFunctName + std::string (")");
 		};
 
 		//
 		Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", Label.c_str());
 
-		string Props; 
+		std::string Props; 
 		if (GetRelation(i)->m_Valency.IsFromDict())
 			if (GetRelation(i)->m_Valency.m_UnitNo != ErrUnitNo)
 			{
@@ -725,7 +725,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 				Props += "\n";
 			};
 
-		string LeafIdStr;
+		std::string LeafIdStr;
 		BYTE LeafId = GetRelation(i)->m_Valency.m_LeafId;
 		if (LeafId < 32)
 			LeafIdStr = Format("%i", LeafId);
@@ -742,7 +742,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 			{
 				TCortege C = GetRelation(i)->m_SynReal.m_Cortege;
 				const CRossHolder* RossHolder = GetRelation(i)->m_Valency.m_RossHolder;
-				string GramFet = WriteToString(RossHolder->GetRoss(), (char*)(RossHolder->GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+				std::string GramFet = WriteToString(RossHolder->GetRoss(), (char*)(RossHolder->GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 				Props += "GF";
 				Props += LeafIdStr;
 				Props += " = ";
@@ -792,7 +792,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 
 
 		//
-		string Color;
+		std::string Color;
 		float width;
 		GetColorAndWidthOfRelation(i, width, Color);
 		Res += Format("$GT($main,graph) configure $edge graphics -fill %s -width %f\1", Color.c_str(), width);
@@ -812,10 +812,10 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 
 
 
-string CSemanticStructure::GetTclSyntaxGraph()
+std::string CSemanticStructure::GetTclSyntaxGraph()
 {
 	// уничтожение графа 
-	string Res ="";
+	std::string Res ="";
 	Res += "$GT($main,graph) delete nodes\1";
 
     Res += Format("$main.switches.resultText configure -text \"%s\"\1",m_ClausePropertiesProtocol.c_str());
@@ -828,7 +828,7 @@ string CSemanticStructure::GetTclSyntaxGraph()
    	{
     	Res += Format ("set nds(%i) [$GT($main,graph) create node]\1", i);
 	    Res += Format("$GT($main,graph) set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i,  GetNodeStr(i, 30).c_str());
-		string Grammems = m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems());
+		std::string Grammems = m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems());
 		Res += Format("$GT($main,graph) set $nds(%i)  .grammems \"%s\"\1",i, Grammems.c_str());
 		Res += Format("$GT($main,graph) set $nds(%i)  .lemmas \"%s\"\1",i, GetNodeLemStr(i).c_str());
 	};
@@ -838,7 +838,7 @@ string CSemanticStructure::GetTclSyntaxGraph()
 	  Res += Format ("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", GetSynRels()[i].m_SourceNodeNo, GetSynRels()[i].m_TargetNodeNo);
 	  Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", GetSynRels()[i].m_SynRelName.c_str());
 
-  	  string Color = !GetSynRels()[i].m_SynRelName.empty() ? "blue" : "darkgreen";
+  	  std::string Color = !GetSynRels()[i].m_SynRelName.empty() ? "blue" : "darkgreen";
 	  Res += Format("$GT($main,graph) configure $edge graphics -fill %s \1", Color.c_str());
 	};
 
@@ -866,11 +866,11 @@ void GetCommonVariants(const vector<VectorLong>&  Parents,
 	};
 
 
-string   CSemanticStructure::InterpToStr(vector<CDictUnitInterp>::const_iterator I)  const
+std::string   CSemanticStructure::InterpToStr(vector<CDictUnitInterp>::const_iterator I)  const
 {
 	 const CDictionary* Ross = GetRoss(I->m_DictType);
 
-     string Result =  Format( "%s: %s %i", 
+     std::string Result =  Format( "%s: %s %i", 
 			Ross->m_DictName.c_str(),
 			Ross->GetEntryStr(I->m_UnitNo).c_str(),
 			Ross->GetUnitMeanNum(I->m_UnitNo));
@@ -881,10 +881,10 @@ string   CSemanticStructure::InterpToStr(vector<CDictUnitInterp>::const_iterator
 	 return Result;
 };
 
-string   CSemanticStructure::OpenCollocInterpToStr(const COpenCollocInterp& I)  const
+std::string   CSemanticStructure::OpenCollocInterpToStr(const COpenCollocInterp& I)  const
 {
 	assert (I.m_Type != NoneType );
-	string S;
+	std::string S;
 
 	if (I.m_Type == RossType)
 	{
@@ -913,9 +913,9 @@ string   CSemanticStructure::OpenCollocInterpToStr(const COpenCollocInterp& I)  
 };
 
 
-string CSemanticStructure::GetTxtGraph()
+std::string CSemanticStructure::GetTxtGraph()
 {
-	string Res; 
+	std::string Res; 
 	Res += "Nodes\n";
     for (size_t i = 0;  i < GetNodesSize(); i++)
     if (GetNode(i).IsWordContainer())
@@ -928,7 +928,7 @@ string CSemanticStructure::GetTxtGraph()
 		}
 		else
 		{
-			string RossName = m_pData->GetRoss(GetNode(i).GetType())->m_DictName;
+			std::string RossName = m_pData->GetRoss(GetNode(i).GetType())->m_DictName;
 			int MeanNum= -1;
 
 			if (GetNode(i).GetUnitNo() != ErrUnitNo)
@@ -944,7 +944,7 @@ string CSemanticStructure::GetTxtGraph()
 
     for (size_t i = 0;  i < GetRelationsSize(); i++)
 	 {
-	  string SynReal = SynRealToStr(GetRelation(i)->m_SynReal, "\n");
+	  std::string SynReal = SynRealToStr(GetRelation(i)->m_SynReal, "\n");
 	  TrimRight(SynReal);
 	  Res += Format("%-10s %-3i %-3i %s\n", 
 		  GetRelation(i)->m_Valency.m_RelationStr.c_str(),
@@ -965,10 +965,10 @@ string CSemanticStructure::GetTxtGraph()
 
 
 
-QWORD	CSemanticStructure::GetOneIndexedSemFet (const vector<string>& _SemFets, bool bInlcudeLowerHierarcy, bool	bInlcudeHigherHierarcy)
+QWORD	CSemanticStructure::GetOneIndexedSemFet (const vector<std::string>& _SemFets, bool bInlcudeLowerHierarcy, bool	bInlcudeHigherHierarcy)
 {
   QWORD Result = 0;
-  vector<string> SemFets = _SemFets;
+  vector<std::string> SemFets = _SemFets;
   
   if (bInlcudeLowerHierarcy)
 	 IncludeLowerInHierarchy (&m_pData->m_HierarchySemFetDoc, SemFets);
@@ -980,7 +980,7 @@ QWORD	CSemanticStructure::GetOneIndexedSemFet (const vector<string>& _SemFets, b
 
   for (int k=0; k < SemFets.size(); k++)
   {
-		vector<string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFets[k]);
+		vector<std::string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFets[k]);
 		QWORD Num = It - m_IndexedSemFets.begin();
 		assert (Num < 64);
 		if (It == m_IndexedSemFets.end())
@@ -1031,8 +1031,8 @@ bool CSemanticStructure::GleicheSemFet(const vector<QWORD>& SemFets1, const vect
 
 	if (SemFets1.empty() || SemFets2.empty()) return true;
 
-	string debug1 = GetSemFetsInOneStr(SemFets1);
-	string debug2 = GetSemFetsInOneStr(SemFets2);
+	std::string debug1 = GetSemFetsInOneStr(SemFets1);
+	std::string debug2 = GetSemFetsInOneStr(SemFets2);
 
 	for (long i=0; i < SemFets1.size(); i++)
 		for (long k=0; k < SemFets2.size(); k++)
@@ -1052,9 +1052,9 @@ bool CSemanticStructure::GleicheSemFet(const vector<QWORD>& SemFets1, const vect
 
 
 
-vector<string> CSemanticStructure::GetSemFetStr(QWORD SemFet) const 
+vector<std::string> CSemanticStructure::GetSemFetStr(QWORD SemFet) const 
 {
-	vector<string> Res;
+	vector<std::string> Res;
 	for (long k=0;k < 64; k++)
 	{
 			QWORD Value = _QM(k);
@@ -1067,16 +1067,16 @@ vector<string> CSemanticStructure::GetSemFetStr(QWORD SemFet) const
 };
 
 
-string CSemanticStructure::GetSemFetsInOneStr(const vector<QWORD>& SemFets) const 
+std::string CSemanticStructure::GetSemFetsInOneStr(const vector<QWORD>& SemFets) const 
 {
-	string Result;
+	std::string Result;
 	for (long i=0; i < SemFets.size(); i++)
 	{
-		vector<string> SemFetStr = GetSemFetStr (SemFets[i]);
+		vector<std::string> SemFetStr = GetSemFetStr (SemFets[i]);
 		assert (SemFetStr.size() <= m_IndexedSemFets.size());
-		string Res = Format ("%i ", i+1);
+		std::string Res = Format ("%i ", i+1);
 		for (long k=0; k < SemFetStr.size(); k++)
-				Res += string(SemFetStr[k]) + string (",");
+				Res += std::string(SemFetStr[k]) + std::string (",");
 		if (Res.length() > 0) Res.erase(Res.length() - 1);
 		Result += Res;
 		Result += "; ";
@@ -1087,9 +1087,9 @@ string CSemanticStructure::GetSemFetsInOneStr(const vector<QWORD>& SemFets) cons
 
 
 
-bool  CSemanticStructure::HasSemFet (const CSemNode& Node, const string& SemFet) const
+bool  CSemanticStructure::HasSemFet (const CSemNode& Node, const std::string& SemFet) const
 {
-	vector<string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
+	vector<std::string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
 
 	if (It == m_IndexedSemFets.end()) return false;
 
@@ -1106,9 +1106,9 @@ bool  CSemanticStructure::HasSemFet (const CSemNode& Node, const string& SemFet)
 };
 
 
-bool  CSemanticStructure::HasSemFetPro (const vector<QWORD>& SemFets, const string& SemFet) const
+bool  CSemanticStructure::HasSemFetPro (const vector<QWORD>& SemFets, const std::string& SemFet) const
 {
-	vector<string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
+	vector<std::string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
 
 	if (It == m_IndexedSemFets.end()) return false;
 
@@ -1125,17 +1125,17 @@ bool  CSemanticStructure::HasSemFetPro (const vector<QWORD>& SemFets, const stri
 };
 // проходит по всем дизъюнктам, если в дизъюнкте отстутствует CAUS и NEG,
 // и присутствует SemFet, тогда выдает истину
-bool  CSemanticStructure::HasSemFetPro (const CSemNode& Node, const string& SemFet) const
+bool  CSemanticStructure::HasSemFetPro (const CSemNode& Node, const std::string& SemFet) const
 {
 	return HasSemFetPro(Node.m_NodeSemFets, SemFet);
 };
 
 // проверяет, принадлежит ли узлу данная SF или какая-нибудь SF ниже по иерархии
-bool  CSemanticStructure::HasSemFetOrLower (const CSemNode& Node, const string& SemFet) const
+bool  CSemanticStructure::HasSemFetOrLower (const CSemNode& Node, const std::string& SemFet) const
 {
      for (long i=0; i < Node.m_NodeSemFets.size(); i++)
 	 {
-		vector<string> SemFetStr = GetSemFetStr (Node.m_NodeSemFets[i]);
+		vector<std::string> SemFetStr = GetSemFetStr (Node.m_NodeSemFets[i]);
 		IncludeHigherInHierarchy (&m_pData->m_HierarchySemFetDoc, SemFetStr);
 		for (long j =0; j < SemFetStr.size(); j++)
 			if (SemFetStr[j] == SemFet)
@@ -1220,7 +1220,7 @@ bool CSemanticStructure::IsNounOrMNANoun(int iNode) const
 
 
   
-bool CSemanticStructure::CheckGroupBeginAndCase(string ItemStr, size_t NodeNo, long& PrepNo) const 
+bool CSemanticStructure::CheckGroupBeginAndCase(std::string ItemStr, size_t NodeNo, long& PrepNo) const 
 {
    const CSemNode&  N = GetNode(NodeNo);
    if (ItemStr.length() > 3)
@@ -1281,14 +1281,14 @@ SEngEquiv CSemanticStructure::GetAL1Value(int UnitNo) const
 		return res;
 	
 	vector<TCortege> corteges;
-	GetRossHolder(Ross)->GetFieldValues(string("SF"), UnitNo, corteges);
+	GetRossHolder(Ross)->GetFieldValues(std::string("SF"), UnitNo, corteges);
 
 	for(int i = 0 ; i < corteges.size() ; i++ )
 	{
 		int j = 0;
 		if( corteges[i].m_DomItemNos[0] != -1 )
 		{
-			string str1 =  GetRossHolder(Ross)->GetDomItemStrInner( corteges[i].m_DomItemNos[0]); 
+			std::string str1 =  GetRossHolder(Ross)->GetDomItemStrInner( corteges[i].m_DomItemNos[0]); 
 			if( str1 == "AL1" )
 				if( corteges[i].m_DomItemNos[1] != -1 ) 
 				{
@@ -1296,7 +1296,7 @@ SEngEquiv CSemanticStructure::GetAL1Value(int UnitNo) const
 					res.m_StrEngWord = str1;				
 					if( corteges[i].m_DomItemNos[2] != -1)
 					{
-						string meanNum = GetRossHolder(Ross)->GetDomItemStrInner(corteges[i].m_DomItemNos[2]);
+						std::string meanNum = GetRossHolder(Ross)->GetDomItemStrInner(corteges[i].m_DomItemNos[2]);
 						res.m_iMeanNum = meanNum[0] - '0';
 					}
 				}
@@ -1327,9 +1327,9 @@ void CSemanticStructure::AssertValidGraph()
 }
 
 
-string CSemanticStructure::SynRealToStr(const CSynRealization&  SynReal, string Delimiter) const
+std::string CSemanticStructure::SynRealToStr(const CSynRealization&  SynReal, std::string Delimiter) const
 {
-	string Preps;
+	std::string Preps;
     for (long l=0; l < SynReal.m_Preps.size(); l++)
 	{		
 		Preps += GetRoss(SynReal.m_Preps[l].m_DictType)->GetEntryStr(SynReal.m_Preps[l].m_UnitNo) + Delimiter;		
@@ -1376,9 +1376,9 @@ void CSemanticStructure::DelRelsToDelete()
 };
 
 
-string CSemanticStructure::GetOtherRelations()
+std::string CSemanticStructure::GetOtherRelations()
 {  
-   string Res = "";
+   std::string Res = "";
    for (long i=0; i < GetLexFuncts().size(); i++)
     if (GetLexFuncts()[i].m_SourceNodeNo != GetLexFuncts()[i].m_TargetNodeNo)
 	if (    (FindFirstRelation(GetLexFuncts()[i].m_SourceNodeNo, GetLexFuncts()[i].m_TargetNodeNo) == -1)
@@ -1570,9 +1570,9 @@ long CSemanticStructure::FindLeftClosestNode(size_t NodeNo) const
 };
 
 
-void  CSemanticStructure::AddSemFet (CSemNode& Node, const string& SemFet) 
+void  CSemanticStructure::AddSemFet (CSemNode& Node, const std::string& SemFet) 
 {
-	vector<string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
+	vector<std::string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
     QWORD Num = It - m_IndexedSemFets.begin();
 	assert (Num < 64);
 	if (It == m_IndexedSemFets.end())
@@ -1599,7 +1599,7 @@ void CSemanticStructure::InitThesSemFet (CSemNode& OutNode, const CSemNode& InNo
   long Count = TopConcepts.size();
   for (long k=0; k < Count; k++)
   {
-		string ConceptStr = Thes->m_Concepts[TopConcepts[k]].m_ConceptStr;
+		std::string ConceptStr = Thes->m_Concepts[TopConcepts[k]].m_ConceptStr;
 		Trim(ConceptStr);
 		if (  ( GetRossHolder(Ross)->GetItemNoByItemStr (ConceptStr.c_str(), "D_SF") != -1)
 			|| ( GetRossHolder(Ross)->GetItemNoByItemStr (ConceptStr.c_str(), "D_SEM_REL") != -1)
@@ -1770,7 +1770,7 @@ void CSemanticStructure::AddAbstractAdditionVals (DictTypeEnum type, CSemNode& N
 
 };
 
-bool CSemanticStructure::HasItem (DictTypeEnum DictTy,  WORD UnitNo, const string& FieldStr, const string& ItemStr, const string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const
+bool CSemanticStructure::HasItem (DictTypeEnum DictTy,  WORD UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const
 {
 		CRossQuery Q(DictTy, UnitNo, FieldStr, ItemStr, DomStr, LeafId, BracketLeafId);
 		vector<CRossQuery>::const_iterator It = find (Queries.begin(),Queries.end(),Q);
@@ -1801,7 +1801,7 @@ bool CSemanticStructure::IsVerbForm(const CSemNode& Node) const
 			);
 };
 
-void CSemanticStructure::SetLastSentencePunctuationMark(string& str) const
+void CSemanticStructure::SetLastSentencePunctuationMark(std::string& str) const
 {
 	switch (m_SentenceMood) {
 		case Interrogative	: str += "?"; break;
@@ -1827,9 +1827,9 @@ const char* GetStrByCategory (SemCategoryEnum t)
 
 CRossQuery::CRossQuery (DictTypeEnum  TypeEnum,
 		WORD UnitNo,	
-		string FieldStr,
-		string ItemStr,
-		string DomStr,
+		std::string FieldStr,
+		std::string ItemStr,
+		std::string DomStr,
 		BYTE  LeafId,
 		BYTE BracketLeafId
 		)
@@ -1879,7 +1879,7 @@ bool CSynRealization::HasThePrep (WORD UnitNo) const
 
 //==============================
 
-void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua) 
+void SetSpacesAndRegisterInSentence (std::string& str, MorphLanguageEnum Langua) 
 {
 	/*
 	 При выставлении запятых для вводных слов некоторые запятые могут оказать в самом 
@@ -1944,7 +1944,7 @@ void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua)
 	int tok_count = 0;
 	while(tok())
 	{
-		string word = tok.val();
+		std::string word = tok.val();
 		bool is_punct =    (word.size() == 1) 
 						&& ispunct((unsigned char)word[0]) != 0
 						&& !strchr("(){}<>\"",word[0]);
@@ -1994,7 +1994,7 @@ bool			CSemanticStructure::IsInClause (size_t NodeNo, size_t ClauseNo) const
 	return GetNode(NodeNo).m_ClauseNo == ClauseNo; 
 };
 
-bool			CSemanticStructure::HasSemType (const CSemNode& Node, string Type) const
+bool			CSemanticStructure::HasSemType (const CSemNode& Node, std::string Type) const
 {
        return (Node.GetType() != NoneRoss) && HasItem (Node.GetType(), Node.GetUnitNo(), "CAT", Type, "D_CAT", 0, 0);
 };

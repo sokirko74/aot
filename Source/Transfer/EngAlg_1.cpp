@@ -79,7 +79,7 @@ bool CEngSemStructure::HasNeg(long UnitNo, DictTypeEnum type )
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
 	vector<TCortege> corteges;
-	GetRossHolder(type)->GetFieldValues(string("GF"),UnitNo,corteges);
+	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	bool bFound = false;
 
 	if( corteges.size() == 0)
@@ -88,8 +88,8 @@ bool CEngSemStructure::HasNeg(long UnitNo, DictTypeEnum type )
 	int i = 0;
 	while( corteges[0].m_DomItemNos[i] != -1 )
 	{
-		string strVal = GetItemStr(corteges[0].m_DomItemNos[i],type);
-		if( strVal.find("Neg") != string::npos )
+		std::string strVal = GetItemStr(corteges[0].m_DomItemNos[i],type);
+		if( strVal.find("Neg") != std::string::npos )
 			return true;
 		i++;
 	}
@@ -105,7 +105,7 @@ bool CEngSemStructure::HasQuest(long UnitNo, DictTypeEnum type )
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
 	vector<TCortege> corteges;
-	GetRossHolder(type)->GetFieldValues(string("GF"),UnitNo,corteges);
+	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	bool bFound = false;
 
 	if( corteges.size() == 0)
@@ -114,8 +114,8 @@ bool CEngSemStructure::HasQuest(long UnitNo, DictTypeEnum type )
 	int i = 0;
 	while( corteges[0].m_DomItemNos[i] != -1 )
 	{
-		string strVal = GetItemStr(corteges[0].m_DomItemNos[i],type);
-		if( strVal.find("Quest") != string::npos )
+		std::string strVal = GetItemStr(corteges[0].m_DomItemNos[i],type);
+		if( strVal.find("Quest") != std::string::npos )
 			return true;
 		i++;
 	}
@@ -138,7 +138,7 @@ void CEngSemStructure::ChangeNegWord(int iEngNode)
 	{
 		if( LexFuncts[i].m_LexFunct == "Anti" )
 		{
-			  string UnitStr = LexFuncts[i].m_Lemma;
+			  std::string UnitStr = LexFuncts[i].m_Lemma;
 			  EngRusMakeLower(UnitStr);
 			  BYTE MeanNum = ( LexFuncts[i].m_MeanNum != -1)  ? LexFuncts[i].m_MeanNum : 1;
 			  WORD UnitNo = GetRoss(m_Nodes[iEngNode].GetType())->LocateUnit(UnitStr.c_str(),MeanNum);
@@ -293,7 +293,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 			TCortege C = GetCortege(GetRoss(type),j);
 			if (C.m_BracketLeafId > 0) continue;
 			if (C.m_LeafId > 0) continue;
-			string field = (const char*)GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
+			std::string field = (const char*)GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
 			if(	field == "PREP" )
 			{
 				vec.push_back(C);
@@ -302,7 +302,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 		}
 		if( vec.size()<1 )
 			continue;
-		string value = GetCortegeStr(type,vec[0]);
+		std::string value = GetCortegeStr(type,vec[0]);
 		if (value == "-")
 			m_Nodes[i].m_SynReal.m_Preps.clear();
 		else

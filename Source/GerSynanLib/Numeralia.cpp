@@ -14,7 +14,7 @@
 
 
 const size_t NumeralModifCount = 9;
-const string NumeralModif[NumeralModifCount] = 
+const std::string NumeralModif[NumeralModifCount] = 
 {
 	"UNGEFДHR", "HЦCHSTENS", "ETWA",	"WENIGSTENS",
 	"ZIRKA", "FRЬHESTENS", "SPДTESTENS", "MINDESTENS",

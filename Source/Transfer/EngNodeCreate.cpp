@@ -3,11 +3,11 @@
 
 
 
-void CEngSemStructure::InitEngWordAndLemma(CEngSemWord& semWord, string strEngLemma) const
+void CEngSemStructure::InitEngWordAndLemma(CEngSemWord& semWord, std::string strEngLemma) const
 {
 	int ii;
-	string strPosleLog;
-	string strLemma;
+	std::string strPosleLog;
+	std::string strLemma;
 	if (strEngLemma != "#oneself")
 	if (( ii = strEngLemma.find("#oneself")) != -1)
 	{
@@ -55,7 +55,7 @@ void CEngSemStructure::CreateEnglNodeForEngObor(long UnitNo, CEngSemNode& engNod
 
 void CEngSemStructure::CreateEnglNodeForEngColloc(long UnitNo, CEngSemNode& engNode) const
 {
-	string strUnitStr = m_pData->GetEngCollocStr(UnitNo);
+	std::string strUnitStr = m_pData->GetEngCollocStr(UnitNo);
 
 	StringTokenizer	strTok(strUnitStr.c_str(), " ()");
 
@@ -160,7 +160,7 @@ void CEngSemStructure::CreateEnglNode(CEngInterp UnitInterp, CEngSemNode& engNod
 	}
 
 	CEngSemWord semWord;
-	string strEngLemma = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
+	std::string strEngLemma = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
     // если узел пришел из словосочетаний или оборотов, но не является английским словосочетанием 
 	// или английским оборотом, тогда он был переведен словарной статьей из АОССа, значит 
 	// такой узел должен стать примитивным, а  в русской структуре он им не был.
@@ -221,7 +221,7 @@ void CEngSemStructure::CreateEnglNode(CEngInterp UnitInterp, CEngSemNode& engNod
 
 
 
-void CEngSemStructure::CreateSimpleEnglNodeByOldNode(string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm , CEngSemNode& oldNode)
+void CEngSemStructure::CreateSimpleEnglNodeByOldNode(std::string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm , CEngSemNode& oldNode)
 {
 	CreateSimpleEnglNode(lemma, engNode, POS, bDontChangeForm );
 	engNode.m_ClauseNo = oldNode.m_ClauseNo;
@@ -230,7 +230,7 @@ void CEngSemStructure::CreateSimpleEnglNodeByOldNode(string lemma, CEngSemNode& 
 	engNode.m_Words[0].m_WordNo = oldNode.GetMinWordNo();
 }
 
-void CEngSemStructure::CreateSimpleEnglNode(string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm, DictTypeEnum DictType/*= Aoss*/, int iMean/*= 1*/ )
+void CEngSemStructure::CreateSimpleEnglNode(std::string lemma, CEngSemNode& engNode, int POS, bool bDontChangeForm, DictTypeEnum DictType/*= Aoss*/, int iMean/*= 1*/ )
 {
 
 	long UnitNo = GetRoss(DictType)->LocateUnit(lemma.c_str(), iMean);
@@ -265,7 +265,7 @@ void CEngSemStructure::CreateSimpleEnglNodeWithInterp(CRossInterp UnitInterp, CE
 
 	engNode.m_Words.clear();
 	CEngSemWord semWord;
-	string strEngLemma = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
+	std::string strEngLemma = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
 	semWord.m_Lemma = strEngLemma.c_str();
 	semWord.m_Word = strEngLemma.c_str();	
 	ReadMorphFromMainGF( UnitInterp.m_UnitNo, UnitInterp.m_DictType, semWord);

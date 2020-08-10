@@ -30,7 +30,7 @@ bool CRusSemStructure::IsIntervalNode(const CSemNode& N) const
 };
 
 
-bool CRusSemStructure::HasTimeSemFet(const CSemNode& N, string SemFet) const
+bool CRusSemStructure::HasTimeSemFet(const CSemNode& N, std::string SemFet) const
 {
 	for (long i=0; i < N.GetInterps().size(); i++)
 		if ( N.GetInterps()[i].m_DictType == TimeRoss )
@@ -42,7 +42,7 @@ bool CRusSemStructure::HasTimeSemFet(const CSemNode& N, string SemFet) const
 
 
 
-long GetFullForm (vector<CAbbrFunct> TimeAbbrPairs, string AbbrForm)
+long GetFullForm (vector<CAbbrFunct> TimeAbbrPairs, std::string AbbrForm)
 {
 	for (long i=0; i < TimeAbbrPairs.size(); i++)
 		if (AbbrForm == TimeAbbrPairs[i].m_AbbrForm)
@@ -51,7 +51,7 @@ long GetFullForm (vector<CAbbrFunct> TimeAbbrPairs, string AbbrForm)
 };
 
 
-long HasAbbrFunct (vector<CAbbrFunct> TimeAbbrPairs, string FullForm, string FunctName)
+long HasAbbrFunct (vector<CAbbrFunct> TimeAbbrPairs, std::string FullForm, std::string FunctName)
 {
 	for (long i=0; i < TimeAbbrPairs.size(); i++)
 		if  (    (FullForm == TimeAbbrPairs[i].m_FullForm)
@@ -63,9 +63,9 @@ long HasAbbrFunct (vector<CAbbrFunct> TimeAbbrPairs, string FullForm, string Fun
 
 
 
-extern bool IsEqualWithPhonetics (const string& TextItem,  const string& FormatItem);
+extern bool IsEqualWithPhonetics (const std::string& TextItem,  const std::string& FormatItem);
 
-bool CRusSemStructure::IsEqualTimeWord(string DictLemma, CRusSemNode& N, long& AbbrFunctNo)
+bool CRusSemStructure::IsEqualTimeWord(std::string DictLemma, CRusSemNode& N, long& AbbrFunctNo)
 {
 	if (DictLemma == "#MONTH")	  return IsMonth(N);
 	if (DictLemma == "#DAY-OF-WEEK")	  return IsWeekDay(N);
@@ -95,7 +95,7 @@ bool CRusSemStructure::CheckOneTimeWord(CTimeUnit& TimeUnit,  CNodeHypotVector& 
 {
 	long NodeNo = Hypots[PlaceNo].m_NodeNo;
 	Hypots[PlaceNo].m_LexFetNo = -1;
-	string& Lemma =  TimeUnit.m_Places[PlaceNo];
+	std::string& Lemma =  TimeUnit.m_Places[PlaceNo];
 	AbbrFunctNo = -1;
 
 	if (Lemma[0] != '_')
@@ -144,7 +144,7 @@ bool CRusSemStructure::CheckOneTimeWord(CTimeUnit& TimeUnit,  CNodeHypotVector& 
 
 
 
-bool CRusSemStructure::CheckTimeNumeral(long NodeNo, string GramFet) const 
+bool CRusSemStructure::CheckTimeNumeral(long NodeNo, std::string GramFet) const 
 {
 	 assert ( GramFet.substr(0, 2) == "ЦК");
 	 
@@ -175,7 +175,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot&  Hypot, CTimeUnit& TimeUnit,
 	for (Hypot.m_GramCortegeNo=0; Hypot.m_GramCortegeNo< P.m_GramCorteges.size(); Hypot.m_GramCortegeNo++)
 	{
 		TCortege& C = P.m_GramCorteges[Hypot.m_GramCortegeNo];
-		string GramFet = WriteToString(GetRoss(TimeRoss), (char*)(GetRoss(TimeRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		std::string GramFet = WriteToString(GetRoss(TimeRoss), (char*)(GetRoss(TimeRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		Trim(GramFet);
 
 		if ( GramFet.substr(0, 2) == "ЦК")   
@@ -287,7 +287,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
 	  long PrepNo = V[U.m_Rels[i].m_TargetNodeNo].m_PrepNo;
 	  if (PrepNo == -1)
 		  return false;
-	  string S = GetRoss(OborRoss)->GetEntryStr(PrepNo);
+	  std::string S = GetRoss(OborRoss)->GetEntryStr(PrepNo);
 	  long j = S.find("+");
 	  if (j==-1) return false;
 	  S = S.substr(j+1, S.length() -  j);
@@ -329,12 +329,12 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
 
 
 // инициализация словарных статей TimeRoss
-void CRusSemStructure::GetTimeInterps(string Lemma, string WordStr,  string PostPuncts, CRusSemNode& N) const
+void CRusSemStructure::GetTimeInterps(std::string Lemma, std::string WordStr,  std::string PostPuncts, CRusSemNode& N) const
 {
    EngRusMakeLower(Lemma);
    if (PostPuncts.find('.') != -1)
    {
-	  string WordUpper = WordStr;
+	  std::string WordUpper = WordStr;
 	  EngRusMakeUpper(WordUpper);
 	  long AbbrFunctNo  = GetFullForm(m_pData->m_TimeAbbrPairs, WordUpper+".");
 	  if ( AbbrFunctNo != -1) 

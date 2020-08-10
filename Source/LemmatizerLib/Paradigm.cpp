@@ -35,7 +35,7 @@ size_t  CFormInfo::GetLemmaPrefixLength() const
 	return m_pParent->m_Prefixes[m_InnerAnnot.m_PrefixNo].length();
 };
 
-void	CFormInfo::Create(const CLemmatizer*	pParent, const CAutomAnnotationInner& A, const string& InputWordForm, bool bFound)
+void	CFormInfo::Create(const CLemmatizer*	pParent, const CAutomAnnotationInner& A, const std::string& InputWordForm, bool bFound)
 {
 	m_InnerAnnot = A;
 	m_pParent = pParent;
@@ -63,7 +63,7 @@ void	CFormInfo::Create(const CLemmatizer*	pParent, const CAutomAnnotationInner& 
 
 		
 
-	const string& LemmPrefix = m_pParent->m_Prefixes[m_InnerAnnot.m_PrefixNo];
+	const std::string& LemmPrefix = m_pParent->m_Prefixes[m_InnerAnnot.m_PrefixNo];
 	if	(		m_bFound
 			||	(		(m_InputWordBase.substr(0, LemmPrefix.length()) == LemmPrefix)
 					&&	(m_InputWordBase.substr(LemmPrefix.length(), M.m_PrefixStr.length()) == M.m_PrefixStr)
@@ -103,11 +103,11 @@ DWORD CFormInfo::GetParadigmId() const
 };
 
 
-string CFormInfo::GetCommonAncode() const 
+std::string CFormInfo::GetCommonAncode() const 
 {
 	assert (IsValid());
 	if (!IsValid()) return "??";
-    string c = GetLemmaInfo().m_LemmaInfo.GetCommonAncodeIfCan();
+    std::string c = GetLemmaInfo().m_LemmaInfo.GetCommonAncodeIfCan();
     if (!c.empty()) 
         return c;
     else
@@ -154,14 +154,14 @@ DWORD  CFormInfo::GetCount () const
 }
 
 
-string CFormInfo::GetSrcNorm() const 
+std::string CFormInfo::GetSrcNorm() const 
 {
 	assert (IsValid());
 	if (!IsValid()) return "";
 
-	//string result = m_pParent->m_Prefixes[m_InnerAnnot.m_PrefixNo];
+	//std::string result = m_pParent->m_Prefixes[m_InnerAnnot.m_PrefixNo];
 	//result += m_pParent->m_Bases[GetLemmaInfo().m_LemmaStrNo].GetString();
-	string result = m_pParent->m_Bases[GetLemmaInfo().m_LemmaStrNo].GetString();
+	std::string result = m_pParent->m_Bases[GetLemmaInfo().m_LemmaStrNo].GetString();
 	result += GetFlexiaModel().get_first_flex();
 	return result;
 }
@@ -192,7 +192,7 @@ bool  CFormInfo::IsValid() const
 			&&	(m_InnerAnnot.m_LemmaInfoNo != -1);
 };
 
-string  CFormInfo::GetSrcAncode() const
+std::string  CFormInfo::GetSrcAncode() const
 {
 	assert (IsValid());
 	if (!IsValid()) return "";
@@ -202,7 +202,7 @@ string  CFormInfo::GetSrcAncode() const
 	return GetFlexiaModel().m_Flexia[m_InnerAnnot.m_ItemNo].m_Gramcode;
 }
 
-string CFormInfo::GetAncode(WORD pos) const 
+std::string CFormInfo::GetAncode(WORD pos) const 
 {
 	assert (IsValid());
 	if (!IsValid()) return "";
@@ -212,14 +212,14 @@ string CFormInfo::GetAncode(WORD pos) const
 
 
 
-string CFormInfo::GetWordForm (WORD pos) const 
+std::string CFormInfo::GetWordForm (WORD pos) const 
 {
 	assert (IsValid());
 	if (!IsValid()) return "";
 
 	const CMorphForm& F = GetFlexiaModel().m_Flexia[pos];
 	
-	string Result;
+	std::string Result;
     
     if (!m_UserPrefix.empty())
         Result += m_UserPrefix;
@@ -262,7 +262,7 @@ BYTE	CFormInfo::GetAccentedVowel(WORD pos) const
 		return UnknownAccent;
 
 	BYTE BackVowelNo = m_pParent->m_AccentModels[I.m_LemmaInfo.m_AccentModelNo].m_Accents[pos];
-	string s = GetWordForm(pos);	
+	std::string s = GetWordForm(pos);	
 	RmlMakeLower(s, m_pParent->GetLanguage());
 	return TransferReverseVowelNoToCharNo(s, BackVowelNo, m_pParent->GetLanguage());
 };
@@ -272,7 +272,7 @@ BYTE	CFormInfo::GetSrcAccentedVowel() const
 	return GetAccentedVowel(m_InnerAnnot.m_ItemNo);
 };
 
-void CFormInfo::SetUserPrefix(const string& UserPrefix)
+void CFormInfo::SetUserPrefix(const std::string& UserPrefix)
 {
     m_UserPrefix = UserPrefix;
 }
@@ -282,9 +282,9 @@ void CFormInfo::SetUserUnknown()
     m_bFound = false;
 }
 
-string CFormInfo::FormatAsInPlmLine() const
+std::string CFormInfo::FormatAsInPlmLine() const
 {
-    string Result;
+    std::string Result;
     Result += GetLemSign() + GetCommonAncode() + " ";
     Result += GetWordForm(0) +  " ";
     Result += GetSrcAncode();

@@ -43,7 +43,7 @@ END_MESSAGE_MAP()
 // CInputBox message handlers
 
 
-bool InputBox (const char* Caption, string& OutBuffer)
+bool InputBox (const char* Caption, std::string& OutBuffer)
 {
 	CInputBox* C =  new CInputBox(0);
 	C->m_Caption = Caption; 

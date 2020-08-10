@@ -44,7 +44,7 @@ void string_to_id(const char *str, DwordVector &ids, const CMorphologyHolder& Ho
 		fprintf (stderr,"First char is uppercase\n");
 	}
 	vector<CFormInfo> ParadigmCollection;
-	string input = str;
+	std::string input = str;
 	if (!Holder.m_pLemmatizer->CreateParadigmCollection(false, input, is_capital, false, ParadigmCollection))
 	{
 		std::cerr << "Catch " << str<< std::endl;

@@ -269,7 +269,7 @@ static bool DealSimpleEnglishNames (CGraphmatFile& C, size_t StartPos, size_t En
 void CGraphmatFile::DealOborotto(size_t  HB)
 {
 
-	string s;
+	std::string s;
 	vector<WORD> OborotIds;
 	OborotIds.resize(HB);
 

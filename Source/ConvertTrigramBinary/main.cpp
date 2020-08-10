@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     {
         PrintUsageAndExit();
     }
-    string ConfigFile = argv[1];
+    std::string ConfigFile = argv[1];
     CTrigramModel M;
     try {
         

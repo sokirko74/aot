@@ -13,7 +13,7 @@ CRusCorpXmlFile::~CRusCorpXmlFile() {
     delete m_CurrSentXml;
 }
 
-bool is_postfix(const string &Body, const string &Postfix) {
+bool is_postfix(const std::string &Body, const std::string &Postfix) {
     return Body.length() >= Postfix.length()
            && Body.substr(Body.length() - Postfix.length()) == Postfix;
 }
@@ -22,8 +22,8 @@ bool CRusCorpXmlFile::ReadNextSentence(std::istream &inputStream) {
     char ch;
     int len = 0;
     m_SentenceStr.clear();
-    const string SentenceStart = "<se>";
-    const string SentenceEnd = "</se>";
+    const std::string SentenceStart = "<se>";
+    const std::string SentenceEnd = "</se>";
     bool bHasSentStart = false;
     while (inputStream.get(ch)) {
         m_SentenceStr += ch;
@@ -47,8 +47,8 @@ bool CRusCorpXmlFile::ReadNextSentence(std::istream &inputStream) {
 }
 
 
-string DeleteSingleQuotesAndAsterisks(string &s) {
-    string R;
+std::string DeleteSingleQuotesAndAsterisks(std::string &s) {
+    std::string R;
     for (size_t i = 0; i < s.length(); i++)
         if (((BYTE) s[i] != '\'') && ((BYTE) s[i] != '`') && ((BYTE) s[i] != '*'))
             R += s[i];
@@ -63,12 +63,12 @@ bool CRusCorpXmlFile::CreateGraTable() {
     if (!m_CurrSentXml)
         throw CExpc("m_CurrSentXml is null");
     m_CurrSentXml->Clear();
-    //if (m_CurrSentXml->Parse(string("<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n" + m_SentenceStr).c_str()))
+    //if (m_CurrSentXml->Parse(std::string("<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n" + m_SentenceStr).c_str()))
     if (m_CurrSentXml->Parse(m_SentenceStr.c_str()))
         throw CExpc(m_CurrSentXml->ErrorDesc());
 
     size_t CountOfWord = 0;
-    string LastReadWord;
+    std::string LastReadWord;
     for (TiXmlElement *xml_sent = m_CurrSentXml->FirstChildElement(
             "se"); xml_sent; xml_sent = xml_sent->NextSiblingElement("se")) {
         for (TiXmlNode *xml_word = xml_sent->FirstChild(); xml_word; xml_word = xml_word->NextSibling()) {

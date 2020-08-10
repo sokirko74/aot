@@ -7,7 +7,7 @@
 
 class CLemWord  
 {
-	// graphematical descriptors in one string (without some binary flags that could be restored by CLemWord::BuildGraphemDescr() )
+	// graphematical descriptors in one std::string (without some binary flags that could be restored by CLemWord::BuildGraphemDescr() )
 	
 
     QWORD   m_GraDescrs;
@@ -15,13 +15,13 @@ class CLemWord
 public:
 
 	// ======= Graphematics ======================	
-    string  m_UnparsedGraphemDescriptorsStr;
+    std::string  m_UnparsedGraphemDescriptorsStr;
 
 	// input word form
-	string m_strWord;
+	std::string m_strWord;
 
 	// input word uppercase form 
-	string m_strUpperWord;
+	std::string m_strUpperWord;
 
 	// is graphematical space 
 	bool m_bSpace;
@@ -67,9 +67,9 @@ public:
 	
 	
 	
-	void	SetWordStr (string NewValue, MorphLanguageEnum langua);
+	void	SetWordStr (std::string NewValue, MorphLanguageEnum langua);
 
-	bool	FindLemma(string strLemma) const;	
+	bool	FindLemma(std::string strLemma) const;	
 	int		GetHomonymByPOS(BYTE POS) const;
     bool    HasPos(BYTE POS) const;
     bool    HasGrammem(BYTE Grammem) const;
@@ -105,9 +105,9 @@ public:
 	bool	CanBeSynNoun() const;
 	void	KillHomonymOfPartOfSpeech(int iPartOfSpeech);
     virtual void InitLevelSpecific(CHomonym* ) {};
-    string  GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const;
-    string  GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const;
-    string BuildGraphemDescr ()  const;
+    std::string  GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const;
+    std::string  GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const;
+    std::string BuildGraphemDescr ()  const;
     poses_mask_t GetPoses() const;
     QWORD   GetGrammems() const;
     bool    HasAnalyticalBe() const;

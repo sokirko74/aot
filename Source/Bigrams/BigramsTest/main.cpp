@@ -1,6 +1,6 @@
-#include <common/util_classes.h>
-#include <common/argparse.h>
-#include <common/BigramsReader.h>
+#include "../../common/util_classes.h"
+#include "../../common/argparse.h"
+#include "../../common/BigramsReader.h"
 
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
@@ -17,7 +17,7 @@ int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
 
-    string fileName = args.Retrieve("bigrams");
+    std::string fileName = args.Retrieve("bigrams");
     if (!FileExists(fileName.c_str()))
         throw CExpc(Format("cannot find bigrams file: %s", fileName));
     if (!InitializeBigrams(fileName))
@@ -25,9 +25,9 @@ int main(int argc, const char **argv) {
 
     MorphLanguageEnum  language = args.GetLanguage();
     bool direct  = ! args.Exists("indirect");
-    string word = convert_from_utf(args.Retrieve("input-word").c_str(), language);
+    std::string word = convert_from_utf(args.Retrieve("input-word").c_str(), language);
     EngRusMakeUpper(word);
-    string result = GetConnectedWords(word, 0, direct, "SortByBigramsFreq", language );
+    std::string result = GetConnectedWords(word, 0, direct, "SortByBigramsFreq", language );
     args.GetOutputStream() << result << "\n";
     return 0;
 }

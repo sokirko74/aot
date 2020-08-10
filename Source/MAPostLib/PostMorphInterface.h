@@ -15,7 +15,7 @@ public:
 	bool			m_bHumanFriendlyOutput;
 	virtual bool	ProcessData(const CPlmLineCollection *piInTextItems) = 0;
 	virtual ~CPostMorphInteface() {};
-    const string&    GetResultLemWord(size_t i) const { return m_ResultLemWords[i];};
+    const std::string&    GetResultLemWord(size_t i) const { return m_ResultLemWords[i];};
     size_t    GetResultLemWordCount() const {return m_ResultLemWords.size(); }
     void SwapResults(vector<string>& v) {v.swap(m_ResultLemWords);};
 };

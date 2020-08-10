@@ -6,7 +6,7 @@
 
 #include  "stdafx.h"
 #include  <stdio.h>
-#include  <string.h>
+#include  <std::string.h>
 #include  <stdlib.h>
 #include  <assert.h>
 
@@ -34,7 +34,7 @@ void CSyntaxOpt::DestroyOptions() {
     m_pProfessions.reset(nullptr);
 };
 
-bool CSyntaxOpt::ReadListFile(const string &FileName, StringVector &C) {
+bool CSyntaxOpt::ReadListFile(const std::string &FileName, StringVector &C) {
 
     FILE *fp = fopen(FileName.c_str(), "r");
     if (!fp) {
@@ -47,9 +47,9 @@ bool CSyntaxOpt::ReadListFile(const string &FileName, StringVector &C) {
     char buffer[500];
 
     while (fgets(buffer, 500, fp)) {
-        string s = buffer;
+        std::string s = buffer;
         int i = s.find("//");
-        if (i != string::npos)
+        if (i != std::string::npos)
             s.erase(i);
         Trim(s);
 
@@ -65,13 +65,13 @@ bool CSyntaxOpt::ReadListFile(const string &FileName, StringVector &C) {
 
 };
 
-void CSyntaxOpt::OutputErrorString(string strMsg) const {
+void CSyntaxOpt::OutputErrorString(std::string strMsg) const {
     if (!m_bSilentMode)
         ErrorMessage("Synan", strMsg);
 }
 
 
-bool GetRegString(string key, string &value) {
+bool GetRegString(std::string key, std::string &value) {
     try {
         value = GetRegistryString(key);
         if (value.empty())
@@ -174,7 +174,7 @@ bool CSyntaxOpt::InitializeOptions() {
 
     if (GetLemmatizer() == nullptr) {
         auto pLem = NewLemmatizer();
-        string strError;
+        std::string strError;
         if (!pLem->LoadDictionariesRegistry(strError)) return false;
         m_piLemmatizer.reset(pLem);
         SetLemmatizerWeak(pLem);
@@ -186,7 +186,7 @@ bool CSyntaxOpt::InitializeOptions() {
         m_pOborDic.reset(NewOborDic(this));
 
         if (GetOborDictionary() == nullptr) {
-            string strPath;
+            std::string strPath;
             auto pOborDictionary = new CDictionary;
             if (!pOborDictionary) {
                 OutputErrorString("Failed to load \"StructDict.dll\"");
@@ -231,7 +231,7 @@ bool CSyntaxOpt::InitializeOptions() {
 
 bool has_item(const StringVector *C, const char *item) {
     if (!item) return false;
-    return binary_search(C->begin(), C->end(), string(item));
+    return binary_search(C->begin(), C->end(), std::string(item));
 };
 
 

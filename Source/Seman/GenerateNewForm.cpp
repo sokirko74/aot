@@ -24,15 +24,15 @@ static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word,
 	// finding word form, whose grammems has the maximal intersection with R.m_Nodes[NodeNo].GetGrammems()
 	size_t MaxSizeOfIntersection = 0;
 	IGramTabPtr A = R.m_pData->m_Agramtab;
-	string debug_old = A->GrammemsToStr(OldGrammems);
+	std::string debug_old = A->GrammemsToStr(OldGrammems);
 	
 
 	for (long k=0; k < piParadigm->Count; k++)
 	{
-		string  AnCode = (const char*)piParadigm->Ancode[k];
+		std::string  AnCode = (const char*)piParadigm->Ancode[k];
 		QWORD currGrammems = A->GetGrammems(AnCode.c_str());
 		QWORD Intersection = currGrammems & OldGrammems;
- 		string debug = A->GrammemsToStr(Intersection);
+ 		std::string debug = A->GrammemsToStr(Intersection);
 		size_t SizeOfIntersection = 0;
 
 		{
@@ -175,7 +175,7 @@ void GenerateRecursive(CRusSemStructure& R, int NodeNo)
 	for (size_t i=0; i < Node.m_Words.size(); i++)
 	{
 		
-		map<string,string>::const_iterator it = R.m_SynthLemmaToReplace.find(Node.m_Words[i].m_Lemma);
+		map<std::string,std::string>::const_iterator it = R.m_SynthLemmaToReplace.find(Node.m_Words[i].m_Lemma);
 		if (it == R.m_SynthLemmaToReplace.end()) continue;
 		Node.m_Words[i].m_Lemma = it->second;
 		GenerateNewWordFormAndAdjustCoordination(R, NodeNo, i);

@@ -11,7 +11,7 @@
 #endif
 
 DaemonLogModeEnum TRMLHttpServer::LogMode;
-string TRMLHttpServer::LogFileName;
+std::string TRMLHttpServer::LogFileName;
 
 #ifdef WIN32
 void InitSocketsWindows() {
@@ -47,7 +47,7 @@ bool InitSockets() {
 	return true;
 }
 
-DaemonLogModeEnum ParseDaemonLogMode(string strMode) {
+DaemonLogModeEnum ParseDaemonLogMode(std::string strMode) {
 	if (strMode == "quiet")
 		return dlmQuiet;
 	if (strMode == "normal")
@@ -76,7 +76,7 @@ bool CheckFileAppendRights(const char* fileName) {
 	}
 }
 
-void TRMLHttpServer::LogMessage(const string &t) {
+void TRMLHttpServer::LogMessage(const std::string &t) {
 	try {
 		struct tm today = RmlGetCurrentTime();
 		char tmpbuf[255];
@@ -98,12 +98,12 @@ void  termination_handler(int signum) {
 TRMLHttpServer::TRMLHttpServer() : Server(nullptr, nullptr) {
 };
 
-void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode, const string logFile) {
+void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode, const std::string logFile) {
 	LogMode = logMode;
     SrvPort = srvPort;
 
-	string logPath = GetRegistryString("Software\\Dialing\\Logs\\Main");
-    string myIP = GetRegistryString("Software\\Dialing\\HttpServerIP");
+	std::string logPath = GetRegistryString("Software\\Dialing\\Logs\\Main");
+    std::string myIP = GetRegistryString("Software\\Dialing\\HttpServerIP");
 	if (!DirExists(logPath.c_str())) {
 		throw CExpc(Format("log dir \"%s\" does not exist; http-server must write logs to some folder\n", logPath.c_str()));
 	};
@@ -185,19 +185,19 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		SendReply(req, HTTP_OK, outBuf);
 	}
 	catch (CExpc e) {
-		string error = Format("Error: %s, Request: %s\n", e.m_strCause.c_str(), uri);
+		std::string error = Format("Error: %s, Request: %s\n", e.m_strCause.c_str(), uri);
 		TRMLHttpServer::LogMessage(error.c_str());
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;
 	}
 	catch (std::invalid_argument e) {
-		string error = Format("Error: string to number conversion failed, Request: %s\n", uri);
+		std::string error = Format("Error: std::string to number conversion failed, Request: %s\n", uri);
 		TRMLHttpServer::LogMessage(error.c_str());
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;
 	}
 	catch (std::exception e) {
-		string error = Format("Error: %s, Request: %s\n", e.what(), uri);
+		std::string error = Format("Error: %s, Request: %s\n", e.what(), uri);
 		TRMLHttpServer::LogMessage(error.c_str());
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;
@@ -205,8 +205,8 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 
 };
 
-void DealWithLockFile(const string fileName) {
-	string LockFileName = MakePath(GetRmlVariable(), fileName);
+void DealWithLockFile(const std::string fileName) {
+	std::string LockFileName = MakePath(GetRmlVariable(), fileName);
 
 	if (FileExists(LockFileName.c_str())) {
 		std::cerr << "possible port conflicts..., removing " << LockFileName << "\n";

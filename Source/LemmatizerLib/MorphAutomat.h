@@ -106,11 +106,11 @@ public:
 	int							m_Alphabet2CodeWithoutAnnotator[256];					
 	int							m_Code2AlphabetWithoutAnnotator[MaxAlphabetSize];
 
-	bool	CheckABCWithAnnotator(const string& WordForm) const;
-	bool	CheckABCWithoutAnnotator(const string& WordForm) const;
-	string	EncodeIntToAlphabet(DWORD v) const;
-	DWORD	DecodeFromAlphabet(const string& v) const;
-	string	GetCriticalNounLetterPack() const;
+	bool	CheckABCWithAnnotator(const std::string& WordForm) const;
+	bool	CheckABCWithoutAnnotator(const std::string& WordForm) const;
+	std::string	EncodeIntToAlphabet(DWORD v) const;
+	DWORD	DecodeFromAlphabet(const std::string& v) const;
+	std::string	GetCriticalNounLetterPack() const;
 	CABCEncoder(MorphLanguageEnum Language, BYTE AnnotChar);
 
 
@@ -131,27 +131,27 @@ protected:
 	
 
 	
-	void	DumpAllStringsRecursive(FILE* fp, int NodeNo, string CurrPath) const;
+	void	DumpAllStringsRecursive(FILE* fp, int NodeNo, std::string CurrPath) const;
 	void	BuildChildrenCache();
-	void	GetAllMorphInterpsRecursive (int NodeNo, string& curr_path, vector<CAutomAnnotationInner>& Infos) const;
-	int		FindStringAndPassAnnotChar (const string& Text, size_t TextPos) const;
+	void	GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_path, vector<CAutomAnnotationInner>& Infos) const;
+	int		FindStringAndPassAnnotChar (const std::string& Text, size_t TextPos) const;
 	void	Clear();
 
 public:
 	
 	CMorphAutomat(MorphLanguageEnum Language, BYTE AnnotChar);
 	~CMorphAutomat();
-	bool	Load(string GrammarFileName);
-	bool	Save(string GrammarFileName) const;
-	bool	DumpAllStrings(string FileName) const;
-	void	GetInnerMorphInfos (const string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const;
+	bool	Load(std::string GrammarFileName);
+	bool	Save(std::string GrammarFileName) const;
+	bool	DumpAllStrings(std::string FileName) const;
+	void	GetInnerMorphInfos (const std::string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const;
 	const CMorphAutomRelation*  GetChildren(size_t NodeNo) const;
 	int		NextNode(int NodeNo, BYTE Child) const;
 	size_t	GetChildrenCount(size_t NodeNo)  const;
 	const CMorphAutomNode& GetNode(int NodeNo) const { return m_pNodes[NodeNo];} ;
 	DWORD	EncodeMorphAutomatInfo (size_t ModelNo, size_t ItemNo, size_t PrefixNo) const;
 	void	DecodeMorphAutomatInfo (DWORD Info, size_t& ModelNo, size_t& ItemNo, size_t& PrefixNo) const;
-	string	GetFirstResult (const string& Text) const;
+	std::string	GetFirstResult (const std::string& Text) const;
 	
 };
 

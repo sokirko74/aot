@@ -18,10 +18,10 @@ int		CRusSemStructure::GetNodesSize() const
 	return m_Nodes.size();
 };
 
-string	CRusSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const  
+std::string	CRusSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const  
 { 
 	const CRusSemNode& Node = *(CRusSemNode*)pNode;
-	string L = Node.m_Words[WordNo].m_Word;
+	std::string L = Node.m_Words[WordNo].m_Word;
 	if (Node.m_Words[WordNo].m_NumeralPrefix != "")
 		L = Node.m_Words[WordNo].m_NumeralPrefix + "-" + L;
 	return L; 
@@ -50,7 +50,7 @@ int		CRusSemStructure::GetRelationsSize() const
 void	CRusSemStructure::EraseRelation(int RelNo) 	 
 {
 	m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_IncomRelsCount--;
-	string Label = m_Relations[RelNo].m_Valency.m_RelationStr;
+	std::string Label = m_Relations[RelNo].m_Valency.m_RelationStr;
 	rml_TRACE("%s", Format ("Delete relation %s %s %s\n",  GetNodeStr1(GetRelation(RelNo)->m_SourceNodeNo).c_str(), Label.c_str(), GetNodeStr1(GetRelation(RelNo)->m_TargetNodeNo).c_str()).c_str());
 	m_Relations.erase(m_Relations.begin()+RelNo);
 
@@ -62,7 +62,7 @@ void	CRusSemStructure::AddRelation(const CRusSemRelation& R)
 	m_Nodes[R.m_TargetNodeNo].m_IncomRelsCount++;
 };
 
-void	CRusSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, string& Color) 
+void	CRusSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color) 
 {
 	Width = 1;
 	Color  = m_Relations[RelNo].m_bSemFetAgree ? "blue" : "darkgreen";
@@ -128,7 +128,7 @@ bool  CRusSemStructure::IsOptional(long RelNo) const
   return  m_Relations[RelNo].m_Valency.m_bOptional;
 };
 
-string CSemClauseVariantResult :: GetStr()
+std::string CSemClauseVariantResult :: GetStr()
 {
 	 return Format ("SyntaxClauseNo=%i ClauseVariant=%i AllPanicRelationsCount=%i AllTopNodesCount=%i ",
 		    m_SyntaxClauseNo+1, m_ClauseVariantNo+1, m_PanicRelationsCount, m_NodesCount);
@@ -509,9 +509,9 @@ long CRusSemStructure::FindRightClosestNode(size_t NodeNo) const
 
 
 
-string CRusSemStructure::GetMorphologyOfNode(long NodeNo) const 
+std::string CRusSemStructure::GetMorphologyOfNode(long NodeNo) const 
 {
-  string Result =  Format ("%s = %s %s", 
+  std::string Result =  Format ("%s = %s %s", 
 	  GetNodeLemStr (NodeNo).c_str(),  
 	  GetNodePosesStr(NodeNo).c_str(), 
 	  m_pData->GetRusGramTab()->GrammemsToStr(GetNode(NodeNo).GetGrammems()).c_str()
@@ -565,7 +565,7 @@ void CRusSemStructure::CopyDopRelationsExceptAnaphor()
 	1)  статья из РОССа дом 1 
 	2)  статья из РОССа дом 2 
 */
-void  CRusSemStructure::ProcessAllowableLexVars (string LexVarsStr)
+void  CRusSemStructure::ProcessAllowableLexVars (std::string LexVarsStr)
 {
 	m_UserProhibitedLexVars.clear();
 	if (LexVarsStr.length() == 0) return;
@@ -581,7 +581,7 @@ void  CRusSemStructure::ProcessAllowableLexVars (string LexVarsStr)
 		if ( (OpenBracketCount == 2) && (CloseBracketCount == 2))
 		{
 		   while  ((start < LexVarsStr.length()) && (LexVarsStr[start] == ' ')) start++;
-		   string s = LexVarsStr.substr(start+1, i - start - 1);
+		   std::string s = LexVarsStr.substr(start+1, i - start - 1);
 		   Trim(s);	
            InterpsAndValue.push_back(s);
 		   start = i+1;
@@ -603,7 +603,7 @@ void  CRusSemStructure::ProcessAllowableLexVars (string LexVarsStr)
 		if (pos == -1) continue;
 		long State = atoi ( InterpsAndValue[i].substr(pos).c_str());
 		if (State != 0) continue;
-		string s = InterpsAndValue[i].substr(0, pos);
+		std::string s = InterpsAndValue[i].substr(0, pos);
 		Trim(s);
 		if (s.length() == 0) continue;
 		if (s[0] == '{') s.erase(0,1);
@@ -612,12 +612,12 @@ void  CRusSemStructure::ProcessAllowableLexVars (string LexVarsStr)
 
 		pos = s.find (":");
 		if (pos == -1) continue;
-		string DictStr = s.substr (0, pos);
+		std::string DictStr = s.substr (0, pos);
 		
 		I.m_DictType = m_pData->GetTypeByStr(DictStr);
 		if (I.m_DictType == NoneRoss) continue;
 
-		string UnitStr = s.substr (pos+1);
+		std::string UnitStr = s.substr (pos+1);
 		Trim(UnitStr);
 		if ( !isdigit((unsigned char)UnitStr[UnitStr.length() - 1])) continue;
 		int MeanNum =  UnitStr[UnitStr.length() - 1] - '0';
@@ -659,7 +659,7 @@ void CRusSemStructure::DeleteRelSet(CRelSet& R)
 
 // проверяет, стоит ли после двоеточия в GF-главном ItemStr
 // например, для GF = НАР:ВОПР  => HasGramFetAfterColon(i, "ВОПР")== true
-bool CRusSemStructure::HasGramFetAfterColon (long NodeNo, string ItemStr)  const
+bool CRusSemStructure::HasGramFetAfterColon (long NodeNo, std::string ItemStr)  const
 {
   if (m_Nodes[NodeNo].GetType() == NoneRoss)  return false;
   StringVector GramFets;
@@ -668,7 +668,7 @@ bool CRusSemStructure::HasGramFetAfterColon (long NodeNo, string ItemStr)  const
   for (long i=0; i < GramFets.size(); i++)
   {
      int c = GramFets[i].find_first_of(":");
-	 string q = GramFets[i].substr(c+1);
+	 std::string q = GramFets[i].substr(c+1);
 	 Trim(q);
      if ((c != -1) && (q == ItemStr)) return true;
   };
@@ -749,7 +749,7 @@ void CRusSemStructure::DelNode(long NodeNo)
 };
 
 
-bool CRusSemStructure::CheckAllIncomingRelations(long NodeNo, const string& RelationStr)  const
+bool CRusSemStructure::CheckAllIncomingRelations(long NodeNo, const std::string& RelationStr)  const
 {
 	CRelSet R = GetIncomingRelations(NodeNo,false);
 	if (R.m_RelsCount == 0) return false;
@@ -1023,12 +1023,12 @@ QWORD CRusSemNode::GetInnerGrammems() const
 		return m_Words[m_MainWordNo].GetAllGrammems();
 };
 
-bool CRusSemNode::IsLemma(string Lemma) const 
+bool CRusSemNode::IsLemma(std::string Lemma) const 
 {
 	return IsPrimitive() && (m_Words[0].m_Lemma == Lemma);
 };
 
-bool CRusSemNode::IsWordForm(string WordForm) const 
+bool CRusSemNode::IsWordForm(std::string WordForm) const 
 {
 	return IsPrimitive() && (m_Words[0].m_Word == WordForm);
 };
@@ -1038,7 +1038,7 @@ bool CRusSemNode::IsLemmaList( const char*  FirstLemma, ... ) const
 		if (!IsPrimitive()) return false; 
 		if (m_Words[0].m_Lemma.empty()) return false;
 	    va_list arglst;
-		string CurrLemma = FirstLemma;
+		std::string CurrLemma = FirstLemma;
 		va_start( arglst, FirstLemma);
 		while( CurrLemma != "" )
 		{
@@ -1068,7 +1068,7 @@ void  CRusSemNode::SetMainWordNo (long WordNo)
 		m_RichPoses = 0;
 };
 
-void CRusSemNode::ModifyGramCodes(string GramCodes, int mode, const CRusGramTab *R)
+void CRusSemNode::ModifyGramCodes(std::string GramCodes, int mode, const CRusGramTab *R)
 {
 	//if( GramCodes == "" ) return;
 	if( mode & 1 )
@@ -1097,7 +1097,7 @@ CRusSemWord::CRusSemWord() : CSemWord()
 {
 	Init();
 };
-CRusSemWord::CRusSemWord   ( long WordNo, string Lemma ) : CSemWord(WordNo, Lemma)
+CRusSemWord::CRusSemWord   ( long WordNo, std::string Lemma ) : CSemWord(WordNo, Lemma)
 {
 	Init();
 };
@@ -1161,7 +1161,7 @@ CRusMorphHomonym::CRusMorphHomonym(const CRusSemWord& X)
 
 
 //=========================
-const string PossPronoun [] = {"НАШ", "ВАШ", "МОЙ", "ТВОЙ", "ЕЕ", "ЕГО", "ИХ"};
+const std::string PossPronoun [] = {"НАШ", "ВАШ", "МОЙ", "ТВОЙ", "ЕЕ", "ЕГО", "ИХ"};
 bool IsPossesivePronoun(const CSemNode& N)
 {
 	if (!N.IsPrimitive() ) return false;
@@ -1169,10 +1169,10 @@ bool IsPossesivePronoun(const CSemNode& N)
 };
 
 
-bool HasReflexiveSuffix (const string& s) 
+bool HasReflexiveSuffix (const std::string& s) 
 {
 	if ( s.length () <  3)   return false;
-	string suffix  = s.substr (s.length() - 2);
+	std::string suffix  = s.substr (s.length() - 2);
 	EngRusMakeUpper(suffix);
 	return   (    ( suffix == "СЯ")
 				|| ( suffix == "СЬ")

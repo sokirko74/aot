@@ -259,7 +259,7 @@ EVENT2_EXPORT_SYMBOL
 char EVUTIL_TOLOWER_(char c);
 
 /** Remove all trailing horizontal whitespace (space or tab) from the end of a
- * string */
+ * std::string */
 EVENT2_EXPORT_SYMBOL
 void evutil_rtrim_lws_(char *);
 
@@ -431,7 +431,7 @@ int evutil_sockaddr_is_loopback_(const struct sockaddr *sa);
 
 
 /**
-    Formats a sockaddr sa into a string buffer of size outlen stored in out.
+    Formats a sockaddr sa into a std::string buffer of size outlen stored in out.
     Returns a pointer to out.  Always writes something into out, so it's safe
     to use the output of this function without checking it for NULL.
  */

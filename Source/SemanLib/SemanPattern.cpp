@@ -62,8 +62,8 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 		Q.LoadGramFromDict();
 		for (long i=0; i < Q.m_GramCorteges.size(); i++)
 		{
-			string SynRel = Q.GetSynRelStr(i);
-			string SynFet = Q.GetSynFetStr(i);
+			std::string SynRel = Q.GetSynRelStr(i);
+			std::string SynFet = Q.GetSynFetStr(i);
 			if (  (SynRel ==  "ПРИД_ПР")
 				||(    (SynFet.length() > 4)
 				&& (    (SynFet.substr(SynFet.length()-3) ==  "+ГГ")
@@ -199,7 +199,7 @@ void  CRusSemStructure::GetActantPattern(size_t NodeNo, BYTE ValencyNo, CSemPatt
 
 
 
-bool IsEqualWithPhonetics (const string& TextItem,  const string& FormatItem)
+bool IsEqualWithPhonetics (const std::string& TextItem,  const std::string& FormatItem)
 {
 	return         (TextItem ==  FormatItem)
 		        || (FormatItem == "*")
@@ -219,7 +219,7 @@ bool IsEqualWithPhonetics (const string& TextItem,  const string& FormatItem)
 
 
 
-bool CRusSemStructure::CheckSemanOfPrep(string RelationStr, bool IsAdditionValency, long NodeNo, long&  PrepNo)
+bool CRusSemStructure::CheckSemanOfPrep(std::string RelationStr, bool IsAdditionValency, long NodeNo, long&  PrepNo)
 {
    assert (m_Nodes[NodeNo].HasSomePrep());
 
@@ -229,7 +229,7 @@ bool CRusSemStructure::CheckSemanOfPrep(string RelationStr, bool IsAdditionValen
    {
    	   if (IsAdditionValency && !IsLocNode(NodeNo)) return false;
 
-	   string    RelStr;
+	   std::string    RelStr;
 		// приравниваем IN-DIRECT и TRG-PNT
 	   if (RelationStr == "IN-DIRECT") RelationStr = "TRG-PNT";	   
 	   for (long i=0; i <m_Nodes[NodeNo].m_SynReal.m_Preps.size(); i++)
@@ -257,7 +257,7 @@ bool CRusSemStructure::CheckSemanOfPrep(string RelationStr, bool IsAdditionValen
 		return true;
 };
 
-bool CRusSemStructure::CheckDirection (long NodeNo1, long NodeNo2, string Direction)  const 
+bool CRusSemStructure::CheckDirection (long NodeNo1, long NodeNo2, std::string Direction)  const 
 {
   if (   Direction == ">>" )
   {
@@ -296,7 +296,7 @@ bool CRusSemStructure::CheckDirection (long NodeNo1, long NodeNo2, string Direct
 bool CRusSemStructure::CheckPatternReverseGramFetLine (CSemPattern& P,  CSynRealization& SynRealization, size_t NodeNo) 
 {
 	 long SynFet = P.GetSynFet(SynRealization.m_CortegeNo);
-	 string SynFetStr  = P.GetSynFetStr(SynRealization.m_CortegeNo);
+	 std::string SynFetStr  = P.GetSynFetStr(SynRealization.m_CortegeNo);
 	 TCortege& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
 
 	 if  (   m_Nodes[P.m_SourceNo].m_bFullGleiche
@@ -582,9 +582,9 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 	//  син_отн:уточнение 
 	//  син_отн:MUA:уточнение  //  позиция син_отн:уточнение
 	long SynRelNo = P.GetSynRel(SynRealization.m_CortegeNo);
-	string SynRelStr  = P.m_pRossDoc->GetDomItemStrInner(SynRelNo);
+	std::string SynRelStr  = P.m_pRossDoc->GetDomItemStrInner(SynRelNo);
 	long SynFet = P.GetSynFet(SynRealization.m_CortegeNo);
-	string SynFetStr  = P.GetSynFetStr(SynRealization.m_CortegeNo);
+	std::string SynFetStr  = P.GetSynFetStr(SynRealization.m_CortegeNo);
 	const CRusSemClause& Clause = m_Clauses[m_Nodes[NodeNo].m_ClauseNo];
 	if (P.m_pRossDoc->ReverseSynONo == SynRelNo)
 		return CheckPatternReverseGramFetLine (P,  SynRealization, NodeNo);
@@ -1218,7 +1218,7 @@ void CRusSemStructure::InitGrammarMatrix2 (long ClauseNo)
 
 
 
-bool CRusSemStructure::IsPattern (CSemPattern& P, size_t NodeNo, string& SyntacticRelation, CSynRealization& SynRealization)
+bool CRusSemStructure::IsPattern (CSemPattern& P, size_t NodeNo, std::string& SyntacticRelation, CSynRealization& SynRealization)
 {
 	SynRealization.SetEmpty();
 	SyntacticRelation = "";
@@ -1295,7 +1295,7 @@ bool CRusSemStructure::AreOldNodesOfTheSameCase (long NodeNo1, long NodeNo2) con
 */
 void CRusSemStructure::TryPatternOnNodes(size_t NodeNo, size_t ClauseNo, CSemPattern& P)
 {
-	string  SyntacticRelation;
+	std::string  SyntacticRelation;
 	CSynRealization SyntacticRealization;
 	const CRusSemClause& C = m_Clauses[ClauseNo];
 

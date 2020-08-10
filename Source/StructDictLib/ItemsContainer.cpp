@@ -369,8 +369,8 @@ bool TItemContainer::BuildDomItems() {
 
             StringTokenizer tok(q, ";");
             if (!tok()) return false;
-            assert (tok.val() == string(m_Domens[k].DomStr));
-            if (tok.val() != string(m_Domens[k].DomStr))
+            assert (tok.val() == std::string(m_Domens[k].DomStr));
+            if (tok.val() != std::string(m_Domens[k].DomStr))
                 return false;
 
             m_Domens[k].m_ItemsLength = tok() ? atoi(tok.val()) : 0;
@@ -581,7 +581,7 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
                        q,
                        &Fields[FieldNo].OrderId) != 6) {
                 fclose(fp);
-                m_LastError = string("Cannot read lineError") + string(s);
+                m_LastError = std::string("Cannot read lineError") + std::string(s);
                 //printf ("Error!");
                 return false;
             };
@@ -624,7 +624,7 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
     }
     catch (...) {
         //printf ("errror!!!\n");
-        m_LastError = string("Error in field ") + string(Fields[FieldNo].FieldStr);
+        m_LastError = std::string("Error in field ") + std::string(Fields[FieldNo].FieldStr);
         return false;
     };
 
@@ -781,6 +781,6 @@ bool TItemContainer::WriteDomens() const {
 }
 
 
-void TItemContainer::ErrorMessage(string s) const {
+void TItemContainer::ErrorMessage(std::string s) const {
     ::ErrorMessage(RossPath, s);
 };

@@ -85,11 +85,11 @@ typedef QWORD file_off_t;
 class CExpc
 {
  public:
-	string	m_strCause;
+	std::string	m_strCause;
 	int		m_ErrorCode;
 
-    CExpc(int ErrorCode, const string& Cause);
-	CExpc(const string& Cause);
+    CExpc(int ErrorCode, const std::string& Cause);
+	CExpc(const std::string& Cause);
 	CExpc(const CExpc& from);
     CExpc(const char* format, ... );
 	CExpc& operator= (const CExpc& from);
@@ -105,35 +105,35 @@ extern file_off_t	FTell(FILE* fp);
 
 
 
-extern void		ErrorMessage (const string& Titul, const string& Message);
-extern void		ErrorMessage (const string& Message);
-extern string	MakeFName ( const string& InpitFileName,  const string& Ext);
-extern string   MakePath(const string path, const string fileName);
-extern bool     MakePathAndCheck(const string path, const string fileName, string& fullPath);
-extern string	GetPathByFile (string FileName);
+extern void		ErrorMessage (const std::string& Titul, const std::string& Message);
+extern void		ErrorMessage (const std::string& Message);
+extern std::string	MakeFName ( const std::string& InpitFileName,  const std::string& Ext);
+extern std::string   MakePath(const std::string path, const std::string fileName);
+extern bool     MakePathAndCheck(const std::string path, const std::string fileName, std::string& fullPath);
+extern std::string	GetPathByFile (std::string FileName);
 extern bool		IsEmptyLine ( const char *t);
-extern bool		IsHtmlFile (const string& FileName);
+extern bool		IsHtmlFile (const std::string& FileName);
 extern void		AddFile(const char* MainFile, const char* ToAdd);
 extern bool     RmlMoveFile(const char *oldpath, const char *newpath);
 extern bool     RmlCopyFile(const char *oldpath, const char *newpath);
-extern string	CreateTempFileName();
-extern bool		MakeDir(const string& txt);
-extern bool     RemoveWithPrint (const string& FileName);
+extern std::string	CreateTempFileName();
+extern bool		MakeDir(const std::string& txt);
+extern bool     RemoveWithPrint (const std::string& FileName);
 
 // working with registry 
-extern string	GetRegistryString (string RegistryPath);
-extern string	GetRegistryStringFromLocalIniFile (string RegistryPath);
-extern bool		CanGetRegistryString (string RegistryPath);
-extern void		SetRegistryString (string RegistryPath, string Value);
-extern bool		IsRmlRegistered(string& Error);
+extern std::string	GetRegistryString (std::string RegistryPath);
+extern std::string	GetRegistryStringFromLocalIniFile (std::string RegistryPath);
+extern bool		CanGetRegistryString (std::string RegistryPath);
+extern void		SetRegistryString (std::string RegistryPath, std::string Value);
+extern bool		IsRmlRegistered(std::string& Error);
 extern bool		CheckEvaluationTime();
 extern struct tm  RmlGetCurrentTime ();
 extern bool		ReadTimeOutFromRegistry(bool bReadFromLocalFile, int& TimeOut);
-extern string	GetIniFilePath();
-extern string	GetRmlVariable();
-extern string   BuildRMLPath (const char* s);
+extern std::string	GetIniFilePath();
+extern std::string	GetRmlVariable();
+extern std::string   BuildRMLPath (const char* s);
 
-// working with strings
+// working with std::strings
 extern char*	rtrim (char* s);
 extern bool		IsSuperEqualChar (BYTE ch1, BYTE ch2, MorphLanguageEnum langua);
 extern bool		strscmp ( const char *s1, const char *s2, size_t l, MorphLanguageEnum langua);
@@ -141,18 +141,18 @@ extern int		CompareWithoutRegister ( const char *s1, const char *s2, size_t l, M
 extern BYTE		force_rus_char (BYTE ch);
 extern bool		force_to_rus (char* dest, const char* sour, size_t len);
 extern char*	IntToStr (int Value, char* Buffer);
-extern string&	IntToStr (int Value, string& oBuffer);
-extern string	Format( const char* format, ... );
-extern string&  TrimLeft (string& str);
-extern string&  TrimRight (string& str);
-extern string&	Trim (string& str);
+extern std::string&	IntToStr (int Value, std::string& oBuffer);
+extern std::string	Format( const char* format, ... );
+extern std::string&  TrimLeft (std::string& str);
+extern std::string&  TrimRight (std::string& str);
+extern std::string&	Trim (std::string& str);
 extern void		rml_TRACE( const char* format, ... );
-extern bool		LoadFileToString(string FileName, string& Result);
-extern void		SqueezeSpacesAndDeleteEoln(string& s);
+extern bool		LoadFileToString(std::string FileName, std::string& Result);
+extern void		SqueezeSpacesAndDeleteEoln(std::string& s);
 extern DWORD	StringCrc32(const char* szString);
 
-extern void QPEncodeString(string& s);
-extern void QPDecodeString(string& s);
+extern void QPEncodeString(std::string& s);
+extern void QPDecodeString(std::string& s);
 #ifndef WIN32
 	extern void strrev(char* s);
 #endif
@@ -165,9 +165,9 @@ typedef enum { LocThes = 0, FinThes, CompThes, OmniThes, NoneThes } EThesType;
 typedef enum { EClause = 0, EWord, EGroup, ENoneType } EUnitType;
 
 
-extern int GetPredictionPartOfSpeech(const string& PartOfSpeech, MorphLanguageEnum langua);
-extern bool GetLanguageByString (string s, MorphLanguageEnum& Result);
-extern string GetStringByLanguage (MorphLanguageEnum Langua);
+extern int GetPredictionPartOfSpeech(const std::string& PartOfSpeech, MorphLanguageEnum langua);
+extern bool GetLanguageByString (std::string s, MorphLanguageEnum& Result);
+extern std::string GetStringByLanguage (MorphLanguageEnum Langua);
 // ============     Brackets =========================
 
 
@@ -216,40 +216,40 @@ extern  BYTE gtolower (BYTE ch);
 extern  BYTE ReverseChar (BYTE ch, MorphLanguageEnum langua);
 extern char* RusMakeUpper (char *word);
 extern char* EngMakeUpper (char *word);
-extern string& EngMakeUpper (string& word);
-extern string& EngMakeLower (string& word);
+extern std::string& EngMakeUpper (std::string& word);
+extern std::string& EngMakeLower (std::string& word);
 extern char* GerMakeUpper (char *word);
-extern string& GerMakeUpper (string& word);
+extern std::string& GerMakeUpper (std::string& word);
 extern char* RusMakeLower (char *word);
-extern string& EngRusMakeLower (string& word);
+extern std::string& EngRusMakeLower (std::string& word);
 extern char* EngRusMakeLower (char* word);
 extern char* RmlMakeUpper (char *word, MorphLanguageEnum langua);
-extern string& RmlMakeUpper (string& word, MorphLanguageEnum langua);
-extern string& RmlMakeLower (string& word, MorphLanguageEnum langua);
+extern std::string& RmlMakeUpper (std::string& word, MorphLanguageEnum langua);
+extern std::string& RmlMakeLower (std::string& word, MorphLanguageEnum langua);
 
-extern string&  EngRusMakeUpper (string& word);
+extern std::string&  EngRusMakeUpper (std::string& word);
 extern char*  EngRusMakeUpper (char* word);
-string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua);
-string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua);
+std::string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua);
+std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua);
 
 
 
 // check languaage 
 extern bool IsRussian (const char *word); 
-extern bool IsRussian (const string& word);
+extern bool IsRussian (const std::string& word);
 extern bool IsEnglish (const char *word);
-extern bool IsEnglish (const string& word);
+extern bool IsEnglish (const std::string& word);
 extern bool IsGerman (const char *word);
-extern bool IsGerman (const string& word);
+extern bool IsGerman (const std::string& word);
 extern bool CheckLanguage (const char *word, MorphLanguageEnum langua);
-extern bool CheckLanguage (const string& word, MorphLanguageEnum langua);
+extern bool CheckLanguage (const std::string& word, MorphLanguageEnum langua);
 
 
-extern bool HasJO(string src);
-extern void ConvertJO2Je(string& src);
+extern bool HasJO(std::string src);
+extern void ConvertJO2Je(std::string& src);
 extern void ConvertJO2Je(char* src);
 extern void ConvertJO2Je(char* src, size_t Length);
-extern string ConvertASCIIToHtmlSymbols(const string& txt);
+extern std::string ConvertASCIIToHtmlSymbols(const std::string& txt);
 
 
 template <class T, class Pred, class Conv>

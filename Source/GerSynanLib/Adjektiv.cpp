@@ -2,7 +2,7 @@
 #include "GerFormatCaller.h"
 
 const size_t AdjModifCount = 4;
-const string AdjModif[AdjModifCount] = 
+const std::string AdjModif[AdjModifCount] = 
 {
 	"GANZ", "BESONDERS", "SEHR",	"ZU"
 };
@@ -101,7 +101,7 @@ bool CGerFormatCaller::format_for_similar_adjektive (CGroup& G)
 	};
 
 	// check common grammem 
-	string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
+	std::string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
 	if (!check_noun_or_adj_group_grammems(G.GetGrammems()) ) return false;
 
 	// creating group

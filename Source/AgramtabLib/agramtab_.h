@@ -2,12 +2,10 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
-#ifndef agramtab_h
- #define agramtab_h
+#pragma once
 
 
 #include "../common/utilit.h"
-
 
 
 struct CAgramtabLine 
@@ -41,7 +39,7 @@ class CAgramtab {
 	virtual size_t GetGrammemsCount()  const = 0;
 	virtual const char*   GetGrammemStr(size_t i) const = 0;
 	virtual size_t s2i(const char * s ) const = 0;
-	virtual string i2s(WORD i) const = 0;
+	virtual std::string i2s(WORD i) const = 0;
 	virtual const char* GetRegistryString() const = 0;
 	virtual long GetClauseTypeByName(const char* TypeName) const = 0;
 	virtual const char* GetClauseNameByType(long type) const  = 0;
@@ -88,10 +86,10 @@ class CAgramtab {
 	bool	ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  QWORD* grammems) const;
 	char*	grammems_to_str (QWORD grammems, char* out_buf) const;
 	bool	FindGrammems (const char* gram_codes, QWORD grammems) const;
-	bool	GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, string& gramcodes)  const;
+	bool	GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, std::string& gramcodes)  const;
 	bool	GetPartOfSpeechAndGrammems(const BYTE* AnCodes, DWORD& Poses, QWORD& Grammems) const;
-	string  GrammemsToStr(QWORD grammems) const;
-	string  GetTabStringByGramCode(const char* gram_code) const;
+	std::string  GrammemsToStr(QWORD grammems) const;
+	std::string  GetTabStringByGramCode(const char* gram_code) const;
 	BYTE	GetPartOfSpeech(const char* gram_code) const;
 	
 	QWORD	GetAllGrammems(const char *gram_code) const;
@@ -100,20 +98,17 @@ class CAgramtab {
 	bool	GetGrammems(const char* gram_code, QWORD& grammems)  const;
 	BYTE	GetFirstPartOfSpeech(const poses_mask_t poses) const;
 	
-	string	GetAllPossibleAncodes(BYTE pos, QWORD grammems) const;
-	string	GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const;
+	std::string	GetAllPossibleAncodes(BYTE pos, QWORD grammems) const;
+	std::string	GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const;
     QWORD Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
-	string GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
-	string GleicheAncode1 (GrammemCompare CompareFunc, string gram_codes1, string gram_codes2) const;
-	string GleicheAncode1 (GrammemCompare CompareFunc, string GramCodes1, string GramCodes2, string& GramCodes1pair) const;
-	string UniqueGramCodes(string gram_codes) const;
-	string FilterGramCodes(string gram_codes, QWORD grammems1, QWORD grammems2) const;
-    string FilterGramCodes(QWORD breaks, string gram_codes, QWORD g1) const;
+	std::string GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
+	std::string GleicheAncode1 (GrammemCompare CompareFunc, std::string gram_codes1, std::string gram_codes2) const;
+	std::string GleicheAncode1 (GrammemCompare CompareFunc, std::string GramCodes1, std::string GramCodes2, std::string& GramCodes1pair) const;
+	std::string UniqueGramCodes(std::string gram_codes) const;
+	std::string FilterGramCodes(std::string gram_codes, QWORD grammems1, QWORD grammems2) const;
+    std::string FilterGramCodes(QWORD breaks, std::string gram_codes, QWORD g1) const;
     bool CheckGramCode(const char* gram_code) const;
-    virtual bool FilterNounNumeral(string& gcNoun, const string& gcNum, QWORD& grammems) const {assert(false); return false;};
-    virtual QWORD ChangeGleicheAncode1(GrammemCompare, const string& ,  string&, const QWORD ) const {assert(false); return 0;};
+    virtual bool FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, QWORD& grammems) const {assert(false); return false;};
+    virtual QWORD ChangeGleicheAncode1(GrammemCompare, const std::string& ,  std::string&, const QWORD ) const {assert(false); return 0;};
 };
 
-
-
-#endif

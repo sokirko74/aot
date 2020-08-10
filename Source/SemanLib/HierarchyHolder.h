@@ -7,10 +7,10 @@ enum CHierarchyEnum {SemRel, SemFet};
 
 class CStringRelation {
 public:
-	string	m_Source;
-	string	m_Target;
+	std::string	m_Source;
+	std::string	m_Target;
 
-	CStringRelation (const string& Source, const string& Target);
+	CStringRelation (const std::string& Source, const std::string& Target);
 	bool operator == (const CStringRelation& X) const;
 	bool operator < (const CStringRelation& X) const;
 };
@@ -21,14 +21,14 @@ struct CNodePlace {
 
 struct CHierarchyNode 
 {
-	string			m_Name;	  
+	std::string			m_Name;	  
 	CNodePlace		m_Point;
 	long ItemNo;
 
 
-	CHierarchyNode (const string& Name, const CNodePlace& p);
-	CHierarchyNode (const string& Name);
-	const string& GetName() const;
+	CHierarchyNode (const std::string& Name, const CNodePlace& p);
+	CHierarchyNode (const std::string& Name);
+	const std::string& GetName() const;
 };
 
 
@@ -37,10 +37,10 @@ struct CHierarchyRelation
 	size_t node1;
 	size_t node2;
 	bool bWork;
-	string name;
+	std::string name;
 
 	CHierarchyRelation ();
-	CHierarchyRelation (size_t _node1,size_t _node2, string _name, bool _bWork);
+	CHierarchyRelation (size_t _node1,size_t _node2, std::string _name, bool _bWork);
 	bool operator ==  (const CHierarchyRelation& X ) const;
 };
 
@@ -72,7 +72,7 @@ public:
 	int     IncomingEdgesCount(int NodeNo) const;
 	void     SetHierarchyTransitiveClosure();
 	void     ReadFromRoss(bool WithoutView );
-	void     WriteToRoss(string Entry);
+	void     WriteToRoss(std::string Entry);
 
 
 	CHierarchyHolder(CRossHolder* pRossDoc = 0);
@@ -85,7 +85,7 @@ public:
 
 
 
-extern bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const string& ItemStr, CHierarchyHolder* pHierarchyDoc);
+extern bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc);
 // добавляет в SemFets все SF, которые стоят ниже по иерархии 
 extern void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<string>& SemFets);
 // добавляет в SemFets все SF, которые стоят выше по иерархии 

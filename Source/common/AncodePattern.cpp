@@ -14,11 +14,11 @@ const	CAgramtab* CAncodePattern::GetGramTab() const
     return m_pGramTab;
 }
 
-const string& CAncodePattern::GetGramCodes() const {
+const std::string& CAncodePattern::GetGramCodes() const {
     return m_GramCodes;
 }
 
-void  CAncodePattern::SetGramCodes(const string& s) {
+void  CAncodePattern::SetGramCodes(const std::string& s) {
     assert (s.length() % 2 == 0);
     for (size_t i = 0; i < s.length(); i += 2)
         assert (m_pGramTab->CheckGramCode (s.c_str() + i) );
@@ -26,7 +26,7 @@ void  CAncodePattern::SetGramCodes(const string& s) {
 }
 
 void  CAncodePattern::SetGramCodes(const char* s) {
-    SetGramCodes (string(s));
+    SetGramCodes (std::string(s));
 }
 
 
@@ -65,9 +65,9 @@ bool CAncodePattern::HasPos(BYTE pos) const
 };
 
 
-string CAncodePattern::GetGrammemsByAncodes() const
+std::string CAncodePattern::GetGrammemsByAncodes() const
 {
-	string Result;
+	std::string Result;
 	for (int i = 0; i < m_GramCodes.length(); i += 2)
 	{
 		QWORD g;
@@ -85,14 +85,14 @@ string CAncodePattern::GetGrammemsByAncodes() const
 
 bool CAncodePattern::DeleteAncodesByGrammemIfCan(BYTE Grammem)
 {
-    string GramCodes;
+    std::string GramCodes;
     for (int j=0; j < m_GramCodes.length(); j+=2) 
 	    if (m_GramCodes[j] != '?')
 	    {
 		    QWORD Grammems;
 		    GetGramTab()->GetGrammems ( m_GramCodes.c_str() + j, Grammems);
 		    if (   (Grammems & _QM(Grammem)) == 0 )
-			      GramCodes += string(m_GramCodes.c_str() + j, 2);
+			      GramCodes += std::string(m_GramCodes.c_str() + j, 2);
 	    }
     if (GramCodes.empty())
         return false;
@@ -103,7 +103,7 @@ bool CAncodePattern::DeleteAncodesByGrammemIfCan(BYTE Grammem)
 
 bool CAncodePattern::ModifyGrammems(QWORD Grammems, poses_mask_t Poses)
 {
-	string strOldGramcodes = m_GramCodes;	
+	std::string strOldGramcodes = m_GramCodes;	
 	QWORD  savegrammems = m_iGrammems;	
 	poses_mask_t saveposes = m_iPoses;
 	m_iGrammems = 0;
@@ -227,7 +227,7 @@ void  CAncodePattern::SetMorphUnknown()
     InitAncodePattern();
 };
 
-string	CAncodePattern::GetPartOfSpeechStr() const
+std::string	CAncodePattern::GetPartOfSpeechStr() const
 {
 	for (BYTE i=0; i< 32; i++)  
         if (HasPos(i))

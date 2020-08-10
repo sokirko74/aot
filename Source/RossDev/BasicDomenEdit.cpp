@@ -110,7 +110,7 @@ void CBasicDomainEdit::AddItem(CString Item)
 	int i = GetRoss()->GetItemNoByItemStr((const char*)Item, m_DomNo);
 	if (i != -1)
 	{
-		AfxMessageBox ("Cannot add a dublicate string!");
+		AfxMessageBox ("Cannot add a dublicate std::string!");
 		return;
 	};
 

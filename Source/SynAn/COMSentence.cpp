@@ -171,7 +171,7 @@ STDMETHODIMP CCOMSentence::GetOborotStrByOborotId(long OborotId, BSTR *pVal)
 {
 	try
 	{
-		string Descr = m_pSentence->GetOpt()->GetOborDic()->m_Entries[OborotId].m_OborotEntryStr;
+		std::string Descr = m_pSentence->GetOpt()->GetOborDic()->m_Entries[OborotId].m_OborotEntryStr;
 		*pVal = _bstr_t(Descr.c_str()).copy();
 		return S_OK;
 	}

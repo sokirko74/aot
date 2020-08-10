@@ -15,7 +15,7 @@ class CStatistic
 	vector<_statnode_t>			m_WordWeights;
 	vector<_homonode_t>			m_HomoWeights;
 public:
-	void	Load(const string& path);
+	void	Load(const std::string& path);
 	int		get_HomoWeight(int paradigmid, int form) const;
 	int		get_WordWeight(int paradigmid) const;
 };

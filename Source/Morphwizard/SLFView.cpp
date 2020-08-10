@@ -68,13 +68,13 @@ void CSLFView::DoDataExchangeTypeGrammems(bool bSaveAndValidate)
 	{
 		CString grams = GetDocument()->m_CommonGrammems;
 		int nIndex = m_TypeGrammemsList.FindStringExact(0, grams);
-		if (grams.IsEmpty()) // FindStringExact cannot find an empty string, why?
+		if (grams.IsEmpty()) // FindStringExact cannot find an empty std::string, why?
 			nIndex = 0;
 
 		if (nIndex == CB_ERR)
 		{
 			if (m_TypeGrammemsList.GetCount() != 0)
-				ErrorMessage (string("Bad type grammems: ")+(const char*)GetDocument()->m_CommonGrammems);
+				ErrorMessage (std::string("Bad type grammems: ")+(const char*)GetDocument()->m_CommonGrammems);
 		}
 		else
 		{
@@ -184,7 +184,7 @@ bool IsKeyWord (const CString& word, COLORREF& C, void* Data)
 
 void SetComboBoxWidth(CComboBox* pmyComboBox)
 {
-	// Find the longest string in the combo box.
+	// Find the longest std::string in the combo box.
 	CString      str;
 	CSize      sz;
 	int      dx = 0;
@@ -468,12 +468,12 @@ BOOL CSLFView::OnHelpInfo(HELPINFO* pHelpInfo)
 }
 
 
-extern bool InputBox (const char* Caption, string& OutBuffer);
+extern bool InputBox (const char* Caption, std::string& OutBuffer);
 
 void CSLFView::OnBnClickedAddPrefix()
 {
 	UpdateData();
-	string prefix;
+	std::string prefix;
 	if ( !InputBox("Input prefix:", prefix) )
 		return;
 
@@ -498,7 +498,7 @@ void CSLFView::OnBnClickedAddPrefix()
 void CSLFView::OnBnClickedChangeParadigm()
 {
 	UpdateData();
-	string s;
+	std::string s;
 	if ( !InputBox("Input prototype lemma or paradigm number: ", s) )
 		return;
 	
@@ -528,7 +528,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 			return;
 	}
 
-	string Lemma = (const char*)GetDocument()->GetLemma();
+	std::string Lemma = (const char*)GetDocument()->GetLemma();
 
 	const CFlexiaModel &new_par = GetWizard()->m_FlexiaModels[ParadigmNo];
 	if (GetDocument()->m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
@@ -656,7 +656,7 @@ void CSLFView::OnBnClickedChangeAll()
 				const CFlexiaModel &old_par = GetWizard()->m_FlexiaModels[found_paradigms[i]->second.m_FlexiaModelNo];
 
 				std::string new_flexia = new_par.get_first_flex();
-				std::string lemma = GetWizard()->get_lemm_string(found_paradigms[i]);
+				std::string lemma = GetWizard()->get_lemm_std::string(found_paradigms[i]);
 				std::string lemma_suffix = lemma.substr(lemma.length() - new_flexia.length());
 
 				if (new_flexia == lemma_suffix)

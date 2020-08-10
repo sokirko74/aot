@@ -70,7 +70,7 @@ try{
 		  {
 			TCortege C = GetCortege(m_pActiveRossDoc->GetRoss(), k);
 			if (C.m_FieldNo != EngFieldNo) continue;
-			string Q = WriteToString(m_pActiveRossDoc->GetRoss(), m_pActiveRossDoc->GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt, C);
+			std::string Q = WriteToString(m_pActiveRossDoc->GetRoss(), m_pActiveRossDoc->GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt, C);
 			if (   (Q.find("TR")!=-1) 
 				|| (Q.find("PR")!=-1) 
 				|| (Q.find("SR")!=-1)
@@ -78,15 +78,15 @@ try{
 			   ) continue;
 			if (C.m_DomItemNos[0] != -1)
 			{
-				string UnitStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
+				std::string UnitStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
 				if (UnitStr.find(" ") != -1) continue;
 			};
 
 			if ( (C.m_DomItemNos[0] == -1) ||  (C.m_DomItemNos[1] == -1)) break;
-			string MeanNumStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[1]);
+			std::string MeanNumStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[1]);
 			if (MeanNumStr.length() != 1)  break;
 			BYTE MeanNum = MeanNumStr[0] - '0';
-			string UnitStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
+			std::string UnitStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
 			int RossDocNo=0;
 			for (; RossDocNo<RossDocs.size();  RossDocNo++)
 			  if (RossDocs[RossDocNo]->GetRoss()->LocateUnit(UnitStr.c_str(), MeanNum)) 

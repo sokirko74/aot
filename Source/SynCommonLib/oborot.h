@@ -29,9 +29,9 @@ enum EConjType {sub_conj, comp_conj, disrupt_conj,  no_type};
 
 struct  COborotForSyntax 
 {
-	string		m_GrammarFeature;
+	std::string		m_GrammarFeature;
 	// dictionary entry 
-    string		m_OborotEntryStr;
+    std::string		m_OborotEntryStr;
 
 	// part of speech from GF 
 	int			m_Poses;
@@ -102,12 +102,12 @@ struct SDoubleConj
 
 
 
-typedef map<string, vector<int>	> CSimplePrepToArticles;
+typedef map<std::string, vector<int>	> CSimplePrepToArticles;
 
 class COborDic;
 class CSyntaxOpt;
 
-typedef void(COborDic::*WriteOborFuncType)(string s, int OborotNo); 
+typedef void(COborDic::*WriteOborFuncType)(std::string s, int OborotNo); 
 
 
 
@@ -134,12 +134,12 @@ public:
 	const StringVector&			GetSubConjs() const {return m_SimpleSubConj;};
 	int								FindSubConj(const char* word_upper) const;
 
-	int						FindSimplePrep(string strPrep) const;
-	vector<int>				FindAllArticlesForSimplePrep(string strPrep) const;
+	int						FindSimplePrep(std::string strPrep) const;
+	vector<int>				FindAllArticlesForSimplePrep(std::string strPrep) const;
 	
-	void					WriteSimplePrep(string s, int OborotNo); 
-	void					TokenizeDoubleConj(string s, int OborotNo);
-	void					WriteSimpleSubConj(string s, int OborotNo);
+	void					WriteSimplePrep(std::string s, int OborotNo); 
+	void					TokenizeDoubleConj(std::string s, int OborotNo);
+	void					WriteSimpleSubConj(std::string s, int OborotNo);
 	
 	
 protected:
@@ -160,7 +160,7 @@ protected:
 
 
 	void	BuildOborots(int iUnit, const CDictionary* piOborDic, WriteOborFuncType WriteOborFunc);
-	void	BuildOborot(string s, int OborotNo, WriteOborFuncType WriteOborFunc);
+	void	BuildOborot(std::string s, int OborotNo, WriteOborFuncType WriteOborFunc);
 	void	MergeCasesOfSimililarSimplePreps();
 
 	

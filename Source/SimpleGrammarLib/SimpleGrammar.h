@@ -48,22 +48,22 @@ enum FeatureFuncEnum {
 
 typedef bool AssignType0();
 
-typedef string AssignType1(const CAgramtab *, const string &);
+typedef std::string AssignType1(const CAgramtab *, const std::string &);
 
-typedef string AssignType2(const CAgramtab *, const string &, const string &);
+typedef std::string AssignType2(const CAgramtab *, const std::string &, const std::string &);
 
-typedef string AssignType3(const CAgramtab *, const string &, const string &, const string &);
+typedef std::string AssignType3(const CAgramtab *, const std::string &, const std::string &, const std::string &);
 
 typedef bool CheckType1(const bool);
 
-typedef bool CheckType3(const CAgramtab *, const string &, const size_t &, const QWORD &);
+typedef bool CheckType3(const CAgramtab *, const std::string &, const size_t &, const QWORD &);
 
 struct CAttribAndId {
     CMorphPattern m_MorphPattern;
     size_t m_Id;
-    string m_AttribName;
+    std::string m_AttribName;
 
-    string GetStr() const {
+    std::string GetStr() const {
         if (!m_MorphPattern.m_GrmAttribute.empty())
             return "\"" + m_MorphPattern.m_GrmAttribute + "\"";
         else
@@ -79,7 +79,7 @@ struct CRuleFeature {
 
     FeatureOperatorEnum m_Type;
     FeatureFuncEnum m_FuncType;
-    string m_FuncNameStr;
+    std::string m_FuncNameStr;
 
     CheckType1 *m_pCheck1;
     CheckType3 *m_pCheck3;
@@ -89,15 +89,15 @@ struct CRuleFeature {
     AssignType3 *m_pAssign3;
 
 
-    bool AddFeatureArgument(string s);
+    bool AddFeatureArgument(std::string s);
 
-    bool AddFeatureValue(const CAgramtab *pGramTab, string s);
+    bool AddFeatureValue(const CAgramtab *pGramTab, std::string s);
 
-    string InitAssignement(string s, string func_name);
+    std::string InitAssignement(std::string s, std::string func_name);
 
-    string InitCheck(string func_name);
+    std::string InitCheck(std::string func_name);
 
-    bool InitFuncName(string s);
+    bool InitFuncName(std::string s);
 
 };
 
@@ -135,7 +135,7 @@ struct CPrecompiledWorkRule {
 
 
 struct CTokenItem {
-    string m_TokenStr;
+    std::string m_TokenStr;
     bool m_bPunctuation;
     size_t m_UniqueRuleItemId;
 
@@ -190,7 +190,7 @@ public:
     CGLRTable m_GLRTable;
 
     bool m_bEnableRootPrefix;
-    string m_SourceGrammarFile;
+    std::string m_SourceGrammarFile;
     std::ostream &LogStream;
 
 
@@ -198,7 +198,7 @@ public:
 
     ~CWorkGrammar();
 
-    bool CreateTokenList(string &ErrorStr);
+    bool CreateTokenList(std::string &ErrorStr);
 
     size_t GetItemId(const CGrammarItem &I);
 
@@ -214,13 +214,13 @@ public:
 
     size_t GetCountOfSymbolOnTheRight(CWRI it, size_t ItemNo) const;
 
-    string GetLeftPartStr(CWRI it) const;
+    std::string GetLeftPartStr(CWRI it) const;
 
-    string GetRuleStr(CWRI it) const;
+    std::string GetRuleStr(CWRI it) const;
 
-    string GetRuleStr(const CWorkRule &R) const;
+    std::string GetRuleStr(const CWorkRule &R) const;
 
-    string GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bPrintFeatures = true) const;
+    std::string GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bPrintFeatures = true) const;
 
     bool GetPossibleTerminalStrings(size_t NonTerminalSymbolNo,
                                     map<size_t, vector<CWorkRightRulePart> > &MetaSymbolToTerminalRules) const;
@@ -234,7 +234,7 @@ public:
 
     bool IsValid() const;
 
-    bool SavePrecompiled(string GrammarFileName) const;
+    bool SavePrecompiled(std::string GrammarFileName) const;
 
     bool LoadFromPrecompiled();
 
@@ -261,7 +261,7 @@ public:
 
     int GetFirstRoot() const;
 
-    bool CreateNodesForNodesWithWorkAttributes(string &ErrorStr);
+    bool CreateNodesForNodesWithWorkAttributes(std::string &ErrorStr);
 
     bool CheckCoherence() const;
 
@@ -272,12 +272,12 @@ protected:
 
     void Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, map<size_t, CPrefixSet> &First_k) const;
 
-    int FindTokenListByFileName(const string &FileName, size_t EndItemNo);
+    int FindTokenListByFileName(const std::string &FileName, size_t EndItemNo);
 
 
 };
 
-extern bool ProcessFile(string GrammarFileName, string TextFileName);
+extern bool ProcessFile(std::string GrammarFileName, std::string TextFileName);
 
 extern bool BuildWorkGrammar(CWorkGrammar &WorkGrammar, bool bPrintRules);
 

@@ -2,15 +2,15 @@
 // ==========   Dialing Lemmatizer (www.aot.ru)
 //================================
 
-#include <common/utilit.h>
-#include <common/argparse.h>
-#include <AgramtabLib/RusGramTab.h>
-#include <AgramtabLib/EngGramTab.h>
-#include <AgramtabLib/GerGramTab.h>
-#include <LemmatizerLib/Lemmatizers.h>
-#include <LemmatizerLib/Paradigm.h>
-#include <LemmatizerLib/Morphan.h>
-#include <LemmatizerLib/MorphologyHolder.h>
+#include "../common/utilit.h"
+#include "../common/argparse.h"
+#include "../AgramtabLib/RusGramTab.h"
+#include "../AgramtabLib/EngGramTab.h"
+#include "../AgramtabLib/GerGramTab.h"
+#include "../LemmatizerLib/Lemmatizers.h"
+#include "../LemmatizerLib/Paradigm.h"
+#include "../LemmatizerLib/Morphan.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 
 #include <iostream>
 #include <fstream>
@@ -27,10 +27,10 @@ bool bSortParadigms = false;
 CMorphologyHolder Holder;
 
 
-string GetGrammems(const char *tab_str) {
+std::string GetGrammems(const char *tab_str) {
     QWORD G;
     Holder.m_pGramTab->GetGrammems(tab_str, G);
-    string s = Holder.m_pGramTab->GrammemsToStr(G);
+    std::string s = Holder.m_pGramTab->GrammemsToStr(G);
     if (!s.empty() && (s[s.length() - 1] == ','))
         s.erase(s.length() - 1);
     return s;
@@ -44,7 +44,7 @@ std::string GetMorphInfo(std::string Form) {
     std::vector<CFormInfo> Paradigms;
     Holder.m_pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
 
-    std::vector<std::string> Results;
+    std::vector<string> Results;
     for (int i = 0; i < Paradigms.size(); i++) {
         std::string Result;
         const CFormInfo &F = Paradigms[i];
@@ -53,11 +53,11 @@ std::string GetMorphInfo(std::string Form) {
         Result += F.GetWordForm(0) + " ";
 
         {
-            string GramCodes = F.GetSrcAncode();
+            std::string GramCodes = F.GetSrcAncode();
             BYTE PartOfSpeech = Holder.m_pGramTab->GetPartOfSpeech(GramCodes.c_str());
             Result += Holder.m_pGramTab->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ");
 
-            string CommonAncode = F.GetCommonAncode();
+            std::string CommonAncode = F.GetCommonAncode();
             Result += Format("%s ", (CommonAncode.empty()) ? "" : GetGrammems(CommonAncode.c_str()).c_str());
 
             for (long i = 0; i < GramCodes.length(); i += 2) {
@@ -113,7 +113,7 @@ void CheckSpeed(std::istream& inputStream, std::ostream& output) {
     size_t Count = Forms.size();
 
     StringVector Results;
-    Results.resize(Count, string(255, ' '));
+    Results.resize(Count, std::string(255, ' '));
     clock_t start = clock();
     const size_t OutBufferSize = 2000;
     char OutBuffer[OutBufferSize];
@@ -181,7 +181,7 @@ int main(int argc, const char **argv) {
 			args.GetOutputStream() << s << "\t";
 		}
 		s = convert_from_utf(s.c_str(), language);
-		string result;
+		std::string result;
 
 		if (args.Exists("morphan")) {
 			result = LemmatizeJson(s.c_str(), &Holder, bPrintForms, true, true);

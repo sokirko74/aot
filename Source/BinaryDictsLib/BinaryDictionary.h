@@ -39,7 +39,7 @@ public:
 	long GetDirectId(long index) const;
 	long GetIndirectId(long index) const;
 
-	bool GetFlag(long pair_index, long flag_index, string& text, bool is_direct, DWORD& flag) const;
+	bool GetFlag(long pair_index, long flag_index, std::string& text, bool is_direct, DWORD& flag) const;
 	
 
 	CBinaryDictionary();

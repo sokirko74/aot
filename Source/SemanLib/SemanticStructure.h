@@ -23,23 +23,23 @@ struct CRossQuery {
 	// из какой статьи
     WORD			m_UnitNo;
 	// про какое поле
-	string			m_FieldStr;
+	std::string			m_FieldStr;
 	// для какого номер актанта
 	BYTE			m_LeafId;
 	// для какого номер подактанта
 	BYTE			m_BracketLeafId;
 	// какую константу
-	string			m_ItemStr;
+	std::string			m_ItemStr;
 	// из домена
-	string			m_DomStr;
+	std::string			m_DomStr;
 	// результат, содержится ли константа m_ItemStr в поле m_FieldStr и т.д.
 	bool			m_Result; 
 
 	CRossQuery (DictTypeEnum  TypeEnum,
 		    WORD UnitNo,	
-			string FieldStr,
-			string ItemStr,
-			string DomStr,
+			std::string FieldStr,
+			std::string ItemStr,
+			std::string DomStr,
 			BYTE  LeafId,
 			BYTE BracketLeafId
 			);
@@ -60,10 +60,10 @@ public:
 	// прописная или строчная буква
 	RegisterEnum   m_CharCase;
 	// входное слово прописными буквами
-	string        m_Word;
+	std::string        m_Word;
 	// лемма
-	string        m_Lemma;
-	string        m_GramCodes;
+	std::string        m_Lemma;
+	std::string        m_GramCodes;
 	// номер парадигмы в морф. словаре 
 	long           m_ParadigmId;
 	// добавочный номер парадигмы в морф. словаре (для приложений типа "муж-алкоголик")
@@ -76,7 +76,7 @@ public:
 	// аспектный вариант глагола (совершенный, несовершенный виды)
 	StringVector m_WordEquals; 
 	// используется в словах типа "трехоконный", которые переводятся в "3-fenestral"	
-	string		m_NumeralPrefix;
+	std::string		m_NumeralPrefix;
 
 	long			m_WordWeight;
 	// является ли это слово наречием "по-английски", "по-хорошему"...
@@ -91,7 +91,7 @@ public:
 	
 
 	CSemWord();
-	CSemWord (long WordNo, string Lemma );
+	CSemWord (long WordNo, std::string Lemma );
 
 	void Init();
 	// является ли данное слово кавычкой
@@ -111,7 +111,7 @@ public:
 };
 
 
-typedef pair<string,string> PairOfString;
+typedef pair<std::string,std::string> PairOfString;
 
 
 
@@ -127,7 +127,7 @@ struct CSynRealization
 
 	// предлог или союз, который не был найден в оборотах, но он был прописан в статье.
 	//  Такой предлог или союз пишется прямо в строку.
-	string					m_Other;
+	std::string					m_Other;
 
 	// номер используемого кортежа в векторе CSemPattern::m_GramCorteges 
 	long                    m_CortegeNo;
@@ -136,7 +136,7 @@ struct CSynRealization
 	TCortege                m_Cortege;
 
 	// добавлено для статьи "не ранее", в которой используется специальная константа А1(НЕ)
-	string                  m_AlgStr; 
+	std::string                  m_AlgStr; 
 
 	void SetEmpty();
     // проверяет, приписан ли узлу предлог PrepNo
@@ -219,12 +219,12 @@ public:
 	long			m_MainWordNo;
 
 	// если узел был образован из группы, то здесь хранится тип группы 
-	string			m_SynGroupTypeStr;
+	std::string			m_SynGroupTypeStr;
 
     // аношкинские коды группы
-    string			m_GramCodes;
+    std::string			m_GramCodes;
     // type ancode 
-    string			m_TypeAncode;
+    std::string			m_TypeAncode;
 	// номер клаузы, к которой приписан данный  узел
 	long			m_ClauseNo;
     // номер клаузы, к которой приписан данный  узел
@@ -288,9 +288,9 @@ public:
 	// выдает номер самого правого слова данного узла
 	long	GetMinWordNo () const;
 	// проверяет наличие оператора среди  RelOperators
-	bool	HasRelOperator (string oper) const;
+	bool	HasRelOperator (std::string oper) const;
 	// удаляет из оператор из  m_RelOperators
-	void	DelRelOperator(const string& oper);
+	void	DelRelOperator(const std::string& oper);
     // проверяет, приписан ли узлу хотя бы один предлог
 	bool	HasSomePrep () const;
     // проверяет, приписан ли узлу предлог PrepNo
@@ -302,7 +302,7 @@ public:
 	bool	IsTrueLocNode() const;
 	bool	HasPOS (size_t POS) const;
 	bool	IsComma() const;
-	bool	IsLemma(string Lemma) const;
+	bool	IsLemma(std::string Lemma) const;
 	// проверяет, что данный узел является пассивным глаголом
 	bool	IsPassiveVerb () const;
 
@@ -326,7 +326,7 @@ public:
     WORD	GetUnitNo() const;
 	QWORD	GetGrammems() const;
 	void	SetGrammems(QWORD g);
-	void	ModifyGramCodes(string GramCodes, bool andwords, const CRusGramTab *R);
+	void	ModifyGramCodes(std::string GramCodes, bool andwords, const CRusGramTab *R);
 	void	AddOneGrammem(int g);
 	bool	HasOneGrammem(int g) const;
 	bool	HasGrammems(QWORD g) const;
@@ -350,7 +350,7 @@ struct CSemRelation : public CSimpleBinaryRelation{
 	// синтаксическое отношение, которое лежит в основе этого семантического отношения
 	// если данное СемО пришло из жесктих синтаксических отношений, то здесь лежит СинО, 
 	// взятое непосредственно из синтаксиса, иначе здесь лежит отношение, которое записано в поле GFi
-	string			m_SyntacticRelation;
+	std::string			m_SyntacticRelation;
     //технический слот: помечает те отношения, которые нужно будет удалить
 	bool			m_bToDelete;
 	//здесь записывается информация о том, как реализуется лексически и грамматически это отношение
@@ -369,7 +369,7 @@ struct CSemRelation : public CSimpleBinaryRelation{
 	bool			m_bDopRelation;
 
 	// позиция, которая указывается для синтеза 
-	string				m_Position;
+	std::string				m_Position;
 	PositionTypeEnum    m_PosType; 
 
 // отношение, которое на этапе идеализации должно подвеситься к узлу SIT , а пока подвешивается	// к вершине клаузы
@@ -380,7 +380,7 @@ struct CSemRelation : public CSimpleBinaryRelation{
     CSemRelation (const CValency& Valency, 
 	             long SourceNodeNo, 
 				 long TargetNodeNo, 
-				 string SyntacticRelation);
+				 std::string SyntacticRelation);
 	
     // истина, если отношению приписаны предлоги
 	bool  HasSomePrep() const;
@@ -399,7 +399,7 @@ struct CSemClause
 	// есть ли в клаузе частица "БЫ"
 	bool						m_HasParticleBY;
 	// предметная область клаузы
-	string						m_BestPO;
+	std::string						m_BestPO;
 		// является ли клауза вопросительной 
 	bool						m_bQuestion;
 	// содержит ли клаузы союз, используемый как частица
@@ -433,7 +433,7 @@ public:
 	virtual const long						GetSemClausesCount() const = 0;
 
 	// предметная область, которая задана извне
-	string						m_PO;
+	std::string						m_PO;
 
 
 	// наклонение предложения
@@ -442,13 +442,13 @@ public:
 
 	// всякие сообщения, о статистические семантического процесса
 	// элементарная информация о клаузах 
-	string                 m_ClausePropertiesProtocol;
+	std::string                 m_ClausePropertiesProtocol;
 	// значения всех коэффициентов(весов) для всех клауз 
-	string                 m_WeightProtocol;
+	std::string                 m_WeightProtocol;
 	// сколько времени занял та или иная подпрограмма
-	string                 m_TimeStatictics;
+	std::string                 m_TimeStatictics;
 	//какие вараинты клауз были выбраны 
-	string                 m_ClauseVariantsStatistics;
+	std::string                 m_ClauseVariantsStatistics;
 	// начинается ли все предложение со слова "но"
 	bool					m_bHasConjBut;
 
@@ -483,7 +483,7 @@ public:
 	virtual int					GetRelationsSize()		const = 0;
 	void				ReverseRelation(int iRel)   { swap(GetRelation(iRel)->m_TargetNodeNo, GetRelation(iRel)->m_SourceNodeNo); }
 	virtual void				EraseRelation(int RelNo)		=0; 
-	virtual void				GetColorAndWidthOfRelation(int RelNo, float& Width, string& Color) = 0;
+	virtual void				GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color) = 0;
 
 	
 	// выдает все узлы из клаузы ClauseNo, в которые не входит ни одного СемО из другого узла этой же клаузы
@@ -548,22 +548,22 @@ public:
     virtual const CSemNode&		GetNode(int NodeNo)							const = 0;
 	virtual		  CSemNode*		GetNodePtr(int NodeNo)							  = 0;
 	virtual int					GetNodesSize()								const = 0;
-	virtual string				GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const = 0; 
+	virtual std::string				GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const = 0; 
     virtual void				EraseNode(int NodeNo) = 0;
 
 	// проверяет, что узлу NodeNo  приписан Tag 
 	bool			HasTag (long NodeNo, long Tag) const {return GetNode(NodeNo).m_Tag == Tag;};
 	// выдает строковое представление СемУ
-	string			GetNodeStr(size_t NodeNo, size_t MaxLength = 65000) const;
-	string			GetNodeStr(const CSemNode& N, size_t MaxLength = 65000) const;
+	std::string			GetNodeStr(size_t NodeNo, size_t MaxLength = 65000) const;
+	std::string			GetNodeStr(const CSemNode& N, size_t MaxLength = 65000) const;
 	// выдает строковое представление СемУ, уникально нумеруя абстрактные узлы
-	string			GetNodeStr1(size_t NodeNo, size_t MaxLength = 65000) const;
+	std::string			GetNodeStr1(size_t NodeNo, size_t MaxLength = 65000) const;
 	// выдает части речи, которые приписаны узлу
-	string			GetNodePosesStr(long NodeNo) const;
+	std::string			GetNodePosesStr(long NodeNo) const;
 	// выдает морфологическое представление узла (лемма и граммема)
-	virtual string	GetMorphologyOfNode(long NodeNo) const = 0;
+	virtual std::string	GetMorphologyOfNode(long NodeNo) const = 0;
 	// выдает лемматическое представление узла
-	string			GetNodeLemStr(size_t NodeNo) const;
+	std::string			GetNodeLemStr(size_t NodeNo) const;
 	// печатает узлы в Debug
 	void			PrintNodes() const;
 	// печатает лемматическое  представление узлов  в Debug
@@ -600,21 +600,21 @@ public:
 	// проверяет согласование словарной статьи UnitNo со словом W по частям речи 
 	bool			GramFetAgreeWithPoses (CRossHolder& Ross,WORD UnitNo, const CSemWord& W ) const;
 	// проверяет, что в одном из значений поля CAT стоит константа Type		(семантическая категория)
-	bool			HasSemType (const CSemNode& Node, string Type) const;
+	bool			HasSemType (const CSemNode& Node, std::string Type) const;
 	// проверяет, что в одном из значений поля SF-главное стоит константа SemFet (семантическая х-ка)
-	bool			HasSemFet (const CSemNode& Node, const string& SemFet) const;
+	bool			HasSemFet (const CSemNode& Node, const std::string& SemFet) const;
 	// проверяет, принадлежит ли узлу данная SF или какая-нибудь SF ниже по иерархии	
-	bool			HasSemFetOrLower (const CSemNode& Node, const string& SemFet) const;
+	bool			HasSemFetOrLower (const CSemNode& Node, const std::string& SemFet) const;
 	// проходит по всем дизъюнктам, если в дизъюнкте отстутствует CAUS и NEG,    
 	// и присутствует SemFet, тогда выдает истину
-	bool			HasSemFetPro (const vector<QWORD>& SemFets, const string& SemFet) const;
-    bool			HasSemFetPro (const CSemNode& Node, const string& SemFet) const;
+	bool			HasSemFetPro (const vector<QWORD>& SemFets, const std::string& SemFet) const;
+    bool			HasSemFetPro (const CSemNode& Node, const std::string& SemFet) const;
 	// проверяет, что в одном из значений поля FieldStr стоит константа ItemStr из домена DomStr
-	bool HasItem (DictTypeEnum DictTy,  WORD UnitNo, const string& FieldStr, const string& ItemStr, const string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
+	bool HasItem (DictTypeEnum DictTy,  WORD UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
 	// перевод  словарную интерпретацию в строковое представление
-	string			InterpToStr(vector<CDictUnitInterp>::const_iterator I)  const;
+	std::string			InterpToStr(vector<CDictUnitInterp>::const_iterator I)  const;
 	// перевод  интерпретацию открытого словосочетания в строковое представление
-	string			OpenCollocInterpToStr(const COpenCollocInterp& I)  const;
+	std::string			OpenCollocInterpToStr(const COpenCollocInterp& I)  const;
 	//выдает граммемы, полученные из поля RESTR для текущей словарной интерпретации
 	vector<QWORD>	GetGramRestr(const CSemNode& W);
 	// проверяет согласование по SF
@@ -626,7 +626,7 @@ public:
 	// выдает представление SF как вектор строк
 	vector<string>	GetSemFetStr (QWORD SemFet) const;
 	// выдает строковое представление SF
-	string			GetSemFetsInOneStr (const vector<QWORD>& SemFets) const;
+	std::string			GetSemFetsInOneStr (const vector<QWORD>& SemFets) const;
 	// проверяет, есть ли в статье AL1, если есть, то выдает его 
 	SEngEquiv		GetAL1Value(int NodeNo) const;
    // по словарной статье предлога или союза выдает семантическое отношение, которое они выражает
@@ -641,7 +641,7 @@ public:
 	bool			IsInClause (size_t NodeNo, size_t ClauseNo) const;
 	virtual long	GetClauseFirstWordNo(long ClauseNo) const = 0;
 	virtual long	GetClauseLastWordNo(long ClauseNo) const = 0;
-	virtual string			GetClausePO(long ClauseNo) const  {return "";};
+	virtual std::string			GetClausePO(long ClauseNo) const  {return "";};
 	
 	
 
@@ -657,17 +657,17 @@ public:
 
 	// ====================   общие функции инициализации 
 	// перевод синтаксической реализации в строку
-	string			SynRealToStr(const CSynRealization&  SynReal, string Delimiter) const;
+	std::string			SynRealToStr(const CSynRealization&  SynReal, std::string Delimiter) const;
 	// перевод графа в текстовое представление
-	string			GetTxtGraph();
+	std::string			GetTxtGraph();
 	// перевод графа в TCL-представление
-	string			GetTclGraph(bool ShowUnusedValencies, bool UseIsTop);
+	std::string			GetTclGraph(bool ShowUnusedValencies, bool UseIsTop);
 	// выдает отношения, которые не нужно упорядочивать в дерево (они не являются основными)
-	string	GetOtherRelations();
+	std::string	GetOtherRelations();
 	// выдает TCL-представление для синтаксических отношений
-	string			GetTclSyntaxGraph();
+	std::string			GetTclSyntaxGraph();
 	// выдает ошибку 
-	void			ErrorMessage (string Mess) const { m_pData->ErrorMessage(Mess); };
+	void			ErrorMessage (std::string Mess) const { m_pData->ErrorMessage(Mess); };
 	// проверка валидности всех индексов
 	void			AssertValidGraph();
 	
@@ -675,11 +675,11 @@ public:
         
 	// ====================   работа с досемантической информацией
 	// проверка того, что узлу припиcан предлог
-	bool			CheckGroupBeginAndCase(string ItemStr, size_t NodeNo, long& PrepNo) const;
+	bool			CheckGroupBeginAndCase(std::string ItemStr, size_t NodeNo, long& PrepNo) const;
 	// чтение SF из тезауруса по корневым концептам
     void			InitThesSemFet (CSemNode& OutNode, const CSemNode& InNode);
 	// добавляет SF к узлу
-	void			AddSemFet (CSemNode& Node, const string& SemFet);
+	void			AddSemFet (CSemNode& Node, const std::string& SemFet);
 
 
 		
@@ -709,7 +709,7 @@ public:
 	bool			IsConnected();
 
 	//  ставит последний знак препинания предложения  при синтезе
-	void SetLastSentencePunctuationMark(string& str) const;
+	void SetLastSentencePunctuationMark(std::string& str) const;
 
 	bool IsRelBetweenClauses(const CSemRelation& rel) const;
 };
@@ -771,20 +771,20 @@ void MoveDopRelationsBack(T& SemStr)
 		}		
 	
 }
-extern bool IsLocSemRel (const string& S);
-extern void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua);
+extern bool IsLocSemRel (const std::string& S);
+extern void SetSpacesAndRegisterInSentence (std::string& str, MorphLanguageEnum Langua);
 
-const  string SIMILAR_NUMERALS = "ОДНОР_ЧИСЛ";
-const  string NUMERALS = "КОЛИЧ";
-const  string C_NUMERALS = "СЛОЖ_ЧИСЛ";
-const  string KEYB = "КЛВ";
-const  string WEB_ADDR = "ЭЛ_АДРЕС";
-const  string NAMES = "ФИО";
-const  string NUMERAL_NOUN = "ЧИСЛ_СУЩ";
-const  string NOUN_ADJ = "ПРИЛ_СУЩ";
-const  string NOUN_NUMERAL = "СУЩ_ЧИСЛ";
-const  string NUMERAL_ADVERB = "НАР_ЧИСЛ_СУЩ";
-const  string SELECTIVE_GR = "ЭЛЕКТ_ИГ";
+const  std::string SIMILAR_NUMERALS = "ОДНОР_ЧИСЛ";
+const  std::string NUMERALS = "КОЛИЧ";
+const  std::string C_NUMERALS = "СЛОЖ_ЧИСЛ";
+const  std::string KEYB = "КЛВ";
+const  std::string WEB_ADDR = "ЭЛ_АДРЕС";
+const  std::string NAMES = "ФИО";
+const  std::string NUMERAL_NOUN = "ЧИСЛ_СУЩ";
+const  std::string NOUN_ADJ = "ПРИЛ_СУЩ";
+const  std::string NOUN_NUMERAL = "СУЩ_ЧИСЛ";
+const  std::string NUMERAL_ADVERB = "НАР_ЧИСЛ_СУЩ";
+const  std::string SELECTIVE_GR = "ЭЛЕКТ_ИГ";
 const size_t MaxValsCount = 15;
 
 

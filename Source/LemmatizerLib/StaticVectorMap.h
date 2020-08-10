@@ -65,7 +65,7 @@ public:
 	}
 
 
-	bool LoadVectorMap(string filename)
+	bool LoadVectorMap(std::string filename)
 	{
 		FILE* fp;
 		try
@@ -94,7 +94,7 @@ public:
 		return true;
 	}
 
-	bool SaveVectorMap(string filename)
+	bool SaveVectorMap(std::string filename)
 	{
 		try
 		{

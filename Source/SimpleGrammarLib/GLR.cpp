@@ -523,25 +523,25 @@ void CGLRParser::Shifter(const set<CInputSymbol>& Symbols)
 
 
 
-string CGLRParser::GetDotStringOfSymbolNode(size_t SymbolNodeNo) const
+std::string CGLRParser::GetDotStringOfSymbolNode(size_t SymbolNodeNo) const
 {
-	string Result;
+	std::string Result;
 	const CSymbolNode& C = m_SymbolNodes[SymbolNodeNo];
 	if (C.m_Symbol.m_GrammarSymbolNo == m_pTable->m_pWorkGrammar->GetEndOfStreamSymbol()) return "";
 	const CGrammarItem& I = 	m_pTable->m_pWorkGrammar->m_UniqueGrammarItems[C.m_Symbol.m_GrammarSymbolNo];
-	string Label = I.m_ItemStrId.c_str();
+	std::string Label = I.m_ItemStrId.c_str();
 	if  (!I.m_MorphPattern.m_GrmAttribute.empty())
 		Label += " "+I.m_MorphPattern.m_GrmAttribute;
 	Label += Format("[%i,%i) N=%i", C.m_InputStart, C.m_InputEnd, SymbolNodeNo);
 
-	string Subsets;
+	std::string Subsets;
 	int NumberOfSubset = 0;
 
 	for (size_t i=0; i<C.m_ParseChildren.size(); i++)
 	{
 		const vector<size_t>& v = C.m_ParseChildren[i].m_Items;
 		bool bFound = false;		
-		string CurrentResult;
+		std::string CurrentResult;
 		for (size_t j=0; j < v.size(); j++)
 		{
 			// we should ignore all children sets, where a end of symbol is found 
@@ -585,9 +585,9 @@ size_t CGLRParser::GetNumberOfClosureSet(size_t StateNodeNo) const
 	return m_InputLevels.size();
 };
 
-string CGLRParser::GetDotStringOfStack(bool bShowStates) const
+std::string CGLRParser::GetDotStringOfStack(bool bShowStates) const
 {
-	string Result = "digraph G {\n";
+	std::string Result = "digraph G {\n";
 	int size = max(m_SymbolNodes.size(), (size_t)10);
 	Result += Format("size = \"%i.0,%i.0\";\n", size, size);
 
@@ -607,7 +607,7 @@ string CGLRParser::GetDotStringOfStack(bool bShowStates) const
 	for (size_t i=0; i< m_StateNodes.size();i++)
 	{
 		const CStateNode& C = m_StateNodes[i];
-		string Label = Format("State=%i [U=%i; N=%i]",C.m_StateNo, GetNumberOfClosureSet(i), i );
+		std::string Label = Format("State=%i [U=%i; N=%i]",C.m_StateNo, GetNumberOfClosureSet(i), i );
 		Result += Format("n%i [label=\"%s\"];\n", i, Label.c_str() );
 		for (size_t j=0; j< C.m_SymbolChildren.size(); j++)
 		{
@@ -622,7 +622,7 @@ string CGLRParser::GetDotStringOfStack(bool bShowStates) const
 void CGLRParser::DumpParser(bool bShowStates) const
 {
 	FILE* fp = fopen ("stack.dot","w");
-	string s = GetDotStringOfStack(bShowStates);
+	std::string s = GetDotStringOfStack(bShowStates);
 	fprintf (fp,"%s", s.c_str());
 	fclose(fp);
 	system ("dot.exe stack.dot -o stack.jpg -Tjpg");

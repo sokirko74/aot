@@ -4,13 +4,13 @@
 struct CInputSymbol 
 {
 	size_t	m_GrammarSymbolNo;
-	string	m_GramCodes;
-	string	m_TypeGramCodes;
+	std::string	m_GramCodes;
+	std::string	m_TypeGramCodes;
 	bool	m_bDeterm;	
 	bool	m_bClause;	
 
 	CInputSymbol() {	};
-	CInputSymbol(size_t GrammarSymbolNo, string GramCodes, string TypeGramCodes)
+	CInputSymbol(size_t GrammarSymbolNo, std::string GramCodes, std::string TypeGramCodes)
 	{
 		m_GrammarSymbolNo = GrammarSymbolNo;
 		m_GramCodes = GramCodes;
@@ -53,7 +53,7 @@ struct CInputSymbol
 		m_bClause = X.m_bClause;
 	};
 
-	const string& GetGrmInfoByAttributeName (const string& AttributeName) const
+	const std::string& GetGrmInfoByAttributeName (const std::string& AttributeName) const
 	{
 		if (AttributeName == "grm")
 			return m_GramCodes;

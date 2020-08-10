@@ -139,7 +139,7 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 		TCortege& C = P.m_GramCorteges[GramCortegeNo];
 		DWORD Pose;
 		QWORD Grammems;
-		string GramFet = WriteToString(GetRoss(CollocRoss), (char*)(GetRoss(CollocRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		std::string GramFet = WriteToString(GetRoss(CollocRoss), (char*)(GetRoss(CollocRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		Trim(GramFet);
 		m_pData->GetCustomGrammems(GramFet, Grammems, Pose);
 		if (   m_Nodes[NodeNo].HasGrammems (Grammems) 
@@ -215,7 +215,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	{
 		// мы предполагем, что в поле CONTENT входят только примитивные узлы
 		if (!m_Nodes[i].IsPrimitive()) continue;
-		string S  =  m_Nodes[i].m_Words[0].m_Lemma;
+		std::string S  =  m_Nodes[i].m_Words[0].m_Lemma;
 		if (S == "") S = m_Nodes[i].m_Words[0].m_Word;
 
 		vector<CCollocItemRefCollect>::const_iterator It = lower_bound(m_pData->m_RusCollocItemRefs.begin(), m_pData->m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
@@ -366,7 +366,7 @@ void CRusSemStructure::BuildBlackBoxCollocs(long ClauseNo, size_t SetNo)
 				CRusSemWord W = m_Nodes[NodeNo].m_Words[0];
 
 				//  adding prepositon for the synthesis and for a better format
-				string Prep = GetPrepOrConjOfNode(m_Nodes[NodeNo]);
+				std::string Prep = GetPrepOrConjOfNode(m_Nodes[NodeNo]);
 				if (!Prep.empty() && !bMainItem  )
 					W.m_Word =  Prep+" "+W.m_Word;
 				N.m_Words.push_back(W);
@@ -377,7 +377,7 @@ void CRusSemStructure::BuildBlackBoxCollocs(long ClauseNo, size_t SetNo)
 			{
 				N.SetMainWordNo(k);
 				N.SetGrammems ( m_Nodes[NodeNo].m_Words[0].GetAllGrammems() );
-				string debug =  m_pData->GetRusGramTab()->GrammemsToStr( m_Nodes[NodeNo].m_Words[0].GetAllGrammems() );
+				std::string debug =  m_pData->GetRusGramTab()->GrammemsToStr( m_Nodes[NodeNo].m_Words[0].GetAllGrammems() );
 				N.m_GramCodes =  m_Nodes[NodeNo].m_GramCodes;
 				N.m_SynReal.m_Preps = m_Nodes[NodeNo].m_SynReal.m_Preps;
 				m_pData->GetPrepsFromArticle (GetRoss(CollocRoss), m_pData->m_RusCollocs[H.m_CollocNo].UnitNo, 0, k, N.m_SynReal.m_Preps);

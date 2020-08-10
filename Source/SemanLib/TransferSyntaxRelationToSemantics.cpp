@@ -87,7 +87,7 @@ void CRusSemStructure::ApplySynStr (long ClauseNo)
 					if	(!IsPragmaticallyStrongSynRel(SynRels[l]) )	
 						continue;
 
-					string	 SynRelStr = m_SynRelations[SynRels[l]].m_SynRelName; 
+					std::string	 SynRelStr = m_SynRelations[SynRels[l]].m_SynRelName; 
 					CRelSet R = GetIncomingRelations(i,  false);
 					bool RelFound = false;
 					for (long j=0;	j <	R.m_RelsCount; j++)
@@ -106,7 +106,7 @@ void CRusSemStructure::ApplySynStr (long ClauseNo)
 						if (!m_Nodes[m_SynRelations[SynRels[l]].m_SourceNodeNo].IsWordContainer())
 							continue;
 
-						string  SemRelStr;
+						std::string  SemRelStr;
 						if (SynRelStr ==	"ЧИСЛ_СУЩ")
 							SemRelStr =	"QUANTIT";		   
 

@@ -11,7 +11,7 @@
 
 
 
-string get_field(CRossHolder*  RossHolder, WORD UnitNo, string Field, BYTE LeafId, BYTE BracketLeafId, BYTE LevelId)
+std::string get_field(CRossHolder*  RossHolder, WORD UnitNo, std::string Field, BYTE LeafId, BYTE BracketLeafId, BYTE LevelId)
 {
  if (UnitNo ==  ErrUnitNo) return "";
  BYTE FieldNo = RossHolder->GetRoss()->GetFieldNoByFieldStr(Field.c_str());
@@ -32,7 +32,7 @@ string get_field(CRossHolder*  RossHolder, WORD UnitNo, string Field, BYTE LeafI
 };
 
 
-string tr_by_ross_simple(CRossHolder*  RossHolder, string UnitStr)
+std::string tr_by_ross_simple(CRossHolder*  RossHolder, std::string UnitStr)
 {
 	EngRusMakeLower(UnitStr);
 	WORD UnitNo = RossHolder->GetRoss()->LocateUnit(UnitStr.c_str(), 1);
@@ -40,11 +40,11 @@ string tr_by_ross_simple(CRossHolder*  RossHolder, string UnitStr)
 	return get_field(RossHolder,UnitNo, "ENG", 0, 0, ErrUChar);
 }
 
-string in_delimiters(const string &word, int delim1, int delim2)
+std::string in_delimiters(const std::string &word, int delim1, int delim2)
 {
 	int start = word.find(delim1);
 	int stop = word.find(delim2);
-	if(start == string::npos || stop == string::npos || stop < start) return "";
+	if(start == std::string::npos || stop == std::string::npos || stop < start) return "";
 	return word.substr(start + 1, stop - start - 1);
 }
 
@@ -52,7 +52,7 @@ string in_delimiters(const string &word, int delim1, int delim2)
  в таймгруппу могут входить только однословные термины типа дни недели, месяцы
 */
 
-string tr_by_thesaurus(const CThesaurus* Thes, string TextEntryStr)
+std::string tr_by_thesaurus(const CThesaurus* Thes, std::string TextEntryStr)
 {	   
 	long TerminId = Thes->GetTerminIdBySingleWord(TextEntryStr.c_str());
 	if (TerminId ==-1) return "";
@@ -66,13 +66,13 @@ string tr_by_thesaurus(const CThesaurus* Thes, string TextEntryStr)
 
 
 
-string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
+std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack)
 {
 	const CSemNode& RusNode  = RusStr.GetNode(RusNodeNo);
 	bool is_pl = brack == "pl";
-	string pl_str = brack == "pl" ? "s" : "";
+	std::string pl_str = brack == "pl" ? "s" : "";
 
-	string res;
+	std::string res;
 	// если у узла нет частей речи, то его надо переводить просто так
 	if ( RusNode.IsWordContainer() && RusNode.GetWord(0).m_Poses == 0)
 	{
@@ -92,7 +92,7 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 			m_Nodes[GetEngNodeByRusNode(Nodes[i])].m_bToDelete = true;
 			// W - одно числительное. По-русски оно могло быть написано буквами или цифрами,
 			// но семанттика преобразует числа прописью в арабскую запись
-			string one_numeral;
+			std::string one_numeral;
 			if (W.m_Poses != 0)
 			   one_numeral = spellout_number (W.m_Word, W.m_Poses & (1 < NUMERAL));
 			else
@@ -108,7 +108,7 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 	}
 	else
 	if(RusNode.IsPrimitive()){
-		string word = RusNode.GetWord(0).m_Lemma;
+		std::string word = RusNode.GetWord(0).m_Lemma;
 		EngRusMakeLower(word);
 
 		/*
@@ -200,7 +200,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 				)
 		)
 	{
-		string EngField = get_field(GetRossHolder(TimeRoss), RusStr.GetNode(MainNode.RusNode).GetUnitNo(), "ENG", 0, 0, ErrUChar);
+		std::string EngField = get_field(GetRossHolder(TimeRoss), RusStr.GetNode(MainNode.RusNode).GetUnitNo(), "ENG", 0, 0, ErrUChar);
 		if (EngField == "") return false;
 		MainNode.m_Words.resize(1);
 		MainNode.m_Words[0].m_Word = EngField;  
@@ -242,22 +242,22 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 	}
 	
     // получаем поле "ENG"  статьи сл-ния и токенизируем его по пробелу
-	string EngField = get_field(GetRossHolder(MainArticle.m_DictType), MainArticle.m_UnitNo, "ENG", 0, 0, ErrUChar);
+	std::string EngField = get_field(GetRossHolder(MainArticle.m_DictType), MainArticle.m_UnitNo, "ENG", 0, 0, ErrUChar);
 	StringTokenizer eng_item_tok (EngField.c_str(), " ");
 
 	// в переменную res положим результаты перевода 
 
-	string res;
+	std::string res;
 	while( true ) {
 		const char* s = eng_item_tok();
 		if (s == 0) break;
-		string eng_item = s;
+		std::string eng_item = s;
 		if (eng_item == "")  break;
 		//  в квадратных скабках стоит номер в поле состав
-	    string PlaceNoStr = in_delimiters(eng_item, '[', ']');
+	    std::string PlaceNoStr = in_delimiters(eng_item, '[', ']');
 		//  в  круглых скобках стоят граммемы
-	    string GrammemsStr = in_delimiters(eng_item, '(', ')');
-		string tr;
+	    std::string GrammemsStr = in_delimiters(eng_item, '(', ')');
+		std::string tr;
 
 		if (PlaceNoStr == "")
 		{
@@ -275,8 +275,8 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 			BYTE PlaceNo = atoi (PlaceNoStr.c_str());
 			if (nodes[PlaceNo] == 0)
 			{
-				string UnitStr =  GetRoss(TimeRoss)->GetEntryStr(MainArticle.m_UnitNo);
-				string Mess = "При переводе \""+UnitStr +"\" не найдено  соответствия для " +eng_item;
+				std::string UnitStr =  GetRoss(TimeRoss)->GetEntryStr(MainArticle.m_UnitNo);
+				std::string Mess = "При переводе \""+UnitStr +"\" не найдено  соответствия для " +eng_item;
 				MainNode.m_bReached = true;  
 				ErrorMessage (Mess);
 				return true;
@@ -345,7 +345,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		for (long i=0; i<V.size(); i++)
 			if (    (V[i].m_DictType == EngObor) 
 				 && (V[i].m_UnitNo != ErrUnitNo)  
-				 && (string(GetRoss(EngObor)->GetEntryStr(V[i].m_UnitNo)) == "than")
+				 && (std::string(GetRoss(EngObor)->GetEntryStr(V[i].m_UnitNo)) == "than")
 			   )
 			   continue;
 			else

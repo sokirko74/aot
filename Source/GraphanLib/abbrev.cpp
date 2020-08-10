@@ -73,7 +73,7 @@ bool AbbrevIsGreaterThanString (const CAbbrevItem& X, const CStrToCompare& Str)
 
 const char* NumberPlace = "/:D";
 
-static bool ReadAbbrevationsFromOneFile(string FileName, vector<CAbbrev>& V, MorphLanguageEnum langua)
+static bool ReadAbbrevationsFromOneFile(std::string FileName, vector<CAbbrev>& V, MorphLanguageEnum langua)
 {
     FILE* fp = fopen(FileName.c_str(), "rb");
 	if (!fp) return false;
@@ -81,11 +81,11 @@ static bool ReadAbbrevationsFromOneFile(string FileName, vector<CAbbrev>& V, Mor
     char buffer[AbbrevSize];
 	while (fgets (buffer, AbbrevSize, fp))
     {   
-		string s = buffer;	
+		std::string s = buffer;	
         
 		{
 			int index = s.find("//");
-			if (index != string::npos)
+			if (index != std::string::npos)
 				s.erase(index);
 		};
 		Trim(s);
@@ -124,7 +124,7 @@ static bool ReadAbbrevationsFromOneFile(string FileName, vector<CAbbrev>& V, Mor
 
 bool CGraphanDicts::ReadAbbrevations()
 {
-	string FileName = GetRegistryString("Software\\Dialing\\Graphan\\AbbrFile");
+	std::string FileName = GetRegistryString("Software\\Dialing\\Graphan\\AbbrFile");
 
 	m_Abbrevs.clear();
 
@@ -172,7 +172,7 @@ bool CGraphanDicts::ReadAbbrevations()
 };
 
 
-bool CGraphanDicts::ReadKeyboard(string FileName)
+bool CGraphanDicts::ReadKeyboard(std::string FileName)
 {
   m_Keys.clear();
   m_KeyModifiers.clear();
@@ -215,7 +215,7 @@ bool CGraphanDicts::ReadKeyboard(string FileName)
 };
 
 
-bool CGraphanDicts::ReadExtensions(string FileName)
+bool CGraphanDicts::ReadExtensions(std::string FileName)
 {
   m_Extensions.clear();
   FILE* fp = fopen((const char*)FileName.c_str(), "r");
@@ -274,7 +274,7 @@ bool CGraphmatFile::DealAbbrev (size_t  StartPos, size_t EndPos)
 	
 	if (HasDescr(StartPos, ODigits))
 	{
-		// only numbers and strings  can be at the beginning of an abbreviations
+		// only numbers and std::strings  can be at the beginning of an abbreviations
 		FirstLine.m_Str  = NumberPlace;
 		FirstLine.m_StrLen = strlen(NumberPlace);
 	};

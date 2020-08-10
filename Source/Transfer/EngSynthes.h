@@ -20,18 +20,18 @@ struct SynthesResult  : public CGrammemsAnalyzer{
 	// слова, которые нужно  распечатать  в  той последовательности, в которой они здесь указаны
 	StringVector m_WordForms;
     // слова, которые  нужно поставить перед всей и после всей группой слов
-	string prefix, postfix;
+	std::string prefix, postfix;
     // слово, которое  нужно поставить перед всей группой слов
-	string before_prep;
+	std::string before_prep;
     // артикль, которые нужно выставить перед все группой слов
 	ArticleEnum   m_Article;
 
     // место в предложении
 	int		pos_order;
-	string	m_Position;
+	std::string	m_Position;
 	bool    m_bParenth;
 
-	void order(string Position, int pos){
+	void order(std::string Position, int pos){
 		m_Position = Position;
 		pos_order = pos;
 	}
@@ -44,11 +44,11 @@ struct SynthesResult  : public CGrammemsAnalyzer{
 
 	
 	// предлог, который нужно поставить перед словом
-	string			m_prep;
+	std::string			m_prep;
 	bool			has_prep() const  {return m_prep.length() > 0; }; 
 
     // реляционный оператор
-	string			rel_operator;
+	std::string			rel_operator;
 
     // ссылка на узел  подлежащего
 	int				subject_node;
@@ -120,11 +120,11 @@ struct NodeHelper{
  
    // проверяет, что у поля  field есть значение  value
 	bool FieldContainsValue(const CRossHolder* RossHolder, WORD UnitNo, 
-		const string &field, const string &value, int leaf = 0, int leaf2 = 0) const;
+		const std::string &field, const std::string &value, int leaf = 0, int leaf2 = 0) const;
 	// проверяет, что у словарной интерпретации узла в поле  field есть значение  value
-	bool FieldContainsValue(const CEngSemNode& node, const string &field, const string &value, int leaf = 0, int leaf2 = 0) const;
+	bool FieldContainsValue(const CEngSemNode& node, const std::string &field, const std::string &value, int leaf = 0, int leaf2 = 0) const;
     // две предыдущих функции вызывают GetFieldValues
-	void GetFieldValues(DictTypeEnum StructDict, WORD UnitNo, const string &field, 
+	void GetFieldValues(DictTypeEnum StructDict, WORD UnitNo, const std::string &field, 
 		StringVector &res, int max_items = 10000) const;
 
 
@@ -166,10 +166,10 @@ struct CClauseRootToConjWord {
 
 struct CClauseConj
 {
-	string m_WordStr;
-	string m_UnitStr;
+	std::string m_WordStr;
+	std::string m_UnitStr;
 	CClauseConj () {};
-	CClauseConj (string WordStr, 	string UnitStr)
+	CClauseConj (std::string WordStr, 	std::string UnitStr)
 	{
 		m_WordStr = WordStr;
 		m_UnitStr = UnitStr;
@@ -179,7 +179,7 @@ struct CClauseConj
 class CEngSynthes: public NodeHelper{
 public:
 	CEngSynthes(CEngSemStructure& EngStr);
-	string BuildSentence();
+	std::string BuildSentence();
 private:
 
 
@@ -234,7 +234,7 @@ private:
 	int rus_node(int node){return Node(node).RusNode;}
 
 
-	string collect_results(int node);
+	std::string collect_results(int node);
 
 	// подчиненная клауза - это клауза, в один из узлов которой входит межклаузная  стрелка
 	bool		IsSlaveClause(long ClauseNo) const;
@@ -244,7 +244,7 @@ private:
 
 	
 
-	bool		lemma_is_demonstrative_pronoun (string Lemma) const;
+	bool		lemma_is_demonstrative_pronoun (std::string Lemma) const;
 
 
 
@@ -265,7 +265,7 @@ private:
 	bool dir_obj_is_long(int node_no);
 	bool dir_obj_has_prep(int node_no);
 	
-	string translate_son(int node_no);	
+	std::string translate_son(int node_no);	
 	
 
 	void handle_rel_operators(int node, bool with_no = true);
@@ -306,8 +306,8 @@ public:
 		bool operator ()(int r1, int r2)const;
 	};
 
-extern long ValuePosition (string Position);
-extern string  GetDualPosition (string Position);
+extern long ValuePosition (std::string Position);
+extern std::string  GetDualPosition (std::string Position);
 
 #endif // INCL_ENGSYNTHES_H
 

@@ -37,11 +37,11 @@ bool CMorphPattern::operator ==(const CMorphPattern& _X1) const
 			&&	m_SearchStatus == _X1.m_SearchStatus;
 };
 
-bool  CMorphPattern::Init(const CAgramtab* GramTab, string& ErrorMsg)
+bool  CMorphPattern::Init(const CAgramtab* GramTab, std::string& ErrorMsg)
 {
 	Trim (m_GrmAttribute);
 	if (m_GrmAttribute.empty())	return true;
-	string s = m_GrmAttribute;
+	std::string s = m_GrmAttribute;
 	if (m_GrmAttribute[0] == '-')
 	{
 		m_SearchStatus = NotFoundInDictionary;
@@ -57,7 +57,7 @@ bool  CMorphPattern::Init(const CAgramtab* GramTab, string& ErrorMsg)
 	BYTE PartOfSpeech;
 	if (GramTab)
 		if (		!GramTab->ProcessPOSAndGrammems(s.c_str(), PartOfSpeech, m_Grammems)
-				&&	!GramTab->ProcessPOSAndGrammems(string("* "+s).c_str(), PartOfSpeech, m_Grammems)
+				&&	!GramTab->ProcessPOSAndGrammems(std::string("* "+s).c_str(), PartOfSpeech, m_Grammems)
 			)
 		{
 			ErrorMsg = "Bad morphologiucal description " + m_GrmAttribute;
@@ -73,9 +73,9 @@ bool  CMorphPattern::Init(const CAgramtab* GramTab, string& ErrorMsg)
 };
 
 
-string  CMorphPattern::ToString() const
+std::string  CMorphPattern::ToString() const
 {
-	string Result;
+	std::string Result;
 	#ifdef WIN32
 		Result = Format("%I64i", m_Grammems);
 	#else
@@ -87,7 +87,7 @@ string  CMorphPattern::ToString() const
 
 };
 
-bool CMorphPattern::FromString(const string& line)
+bool CMorphPattern::FromString(const std::string& line)
 {
 	char buff1[1024];
 	int iStatus;
@@ -198,14 +198,14 @@ void CGrammarItem::CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item)
 
 
 
-string CGrammarItem::GetDumpString() const 
+std::string CGrammarItem::GetDumpString() const 
 {
 
 	if (!m_bMeta && !m_Token.empty() && m_Attributes.empty() &&  m_MorphPattern.m_GrmAttribute.empty() ) 
 		return Format("'%s'",m_ItemStrId.c_str());
 
-	string Attributes;
-	for (map<string, string>::const_iterator it = m_Attributes.begin(); it != m_Attributes.end(); it++)
+	std::string Attributes;
+	for (map<std::string, std::string>::const_iterator it = m_Attributes.begin(); it != m_Attributes.end(); it++)
 		Attributes += Format ("%s=%s ",it->first.c_str(),it->second.c_str());
 
 	if (!m_MorphPattern.m_GrmAttribute.empty())
@@ -232,7 +232,7 @@ string CGrammarItem::GetDumpString() const
 
 	Trim(Attributes);
 
-	string Meta;
+	std::string Meta;
 	if (m_bMeta)
 		Meta = m_ItemStrId;
 	else
@@ -243,7 +243,7 @@ string CGrammarItem::GetDumpString() const
 };
 
 
-bool	CGrammarItem::AddAttribute(string Name, string Value, MorphLanguageEnum Language, string& ErrorStr, const string& SourceFileName)
+bool	CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLanguageEnum Language, std::string& ErrorStr, const std::string& SourceFileName)
 {
     if (Value.length() > 0) 
 	    if (Value[0] == '"')
@@ -364,9 +364,9 @@ bool	CGrammarItem::AddAttribute(string Name, string Value, MorphLanguageEnum Lan
 
 
 
-string	CGrammarItem::toString() const
+std::string	CGrammarItem::toString() const
 {
-	string Result = "[\n";
+	std::string Result = "[\n";
 	Result += Format("%i %s %s %i\n", 
 			(int) m_bMeta, 
 			m_ItemStrId.c_str(), 
@@ -378,7 +378,7 @@ string	CGrammarItem::toString() const
 	Result += m_MorphPattern.ToString();
 	Result += Format("%i %i %i %i\n", m_bGrammarRoot?1:0, m_bSynMain?1:0, m_bCanHaveManyHomonyms?1:0, (int)m_Register);
 
-	for (map<string, string>::const_iterator i =m_Attributes.begin();  i != m_Attributes.end(); i++)
+	for (map<std::string, std::string>::const_iterator i =m_Attributes.begin();  i != m_Attributes.end(); i++)
 		Result += Format(";%s %s", i->first.c_str(),i->second.c_str());
 	Result += ";\n";
 	Result += "]\n";
@@ -387,14 +387,14 @@ string	CGrammarItem::toString() const
 }
 
 
-bool	CGrammarItem::fromString(string& Result) 
+bool	CGrammarItem::fromString(std::string& Result) 
 {
 	StringTokenizer lines (Result.c_str(), "\r\n");
 	int LineNo = 0;
 	while (lines())
 	{
 		LineNo++;
-		string line = lines.val();
+		std::string line = lines.val();
 		if (LineNo == 1)
 			continue;
 
@@ -447,7 +447,7 @@ bool	CGrammarItem::fromString(string& Result)
 			{
 				char buff1[1024];
 				char buff2[1024];
-				string _pair = pairs.val();
+				std::string _pair = pairs.val();
 				sscanf (_pair.c_str(), "%s %s", buff1, buff2);
 				m_Attributes[buff1] = buff2;
 			};
@@ -469,9 +469,9 @@ bool	CGrammarItem::HasAnyOfWorkingAttributes() const
 			);
 };
 
-string CGrammarItem::GetFullFileName(const string& GrammarFileName) const
+std::string CGrammarItem::GetFullFileName(const std::string& GrammarFileName) const
 {
-	map<string,string>::const_iterator it = m_Attributes.find("filename");
+	map<std::string,std::string>::const_iterator it = m_Attributes.find("filename");
 	if (it == m_Attributes.end())  return "";
 	return GetPathByFile(GrammarFileName)+it->second;
 };

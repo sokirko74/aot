@@ -120,15 +120,15 @@ public :
 
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
-	string UnitsFile;
-	string CortegeFile;
-	string UnitCommentsFile;
-	string ConfigFile;
+	std::string UnitsFile;
+	std::string CortegeFile;
+	std::string UnitCommentsFile;
+	std::string ConfigFile;
 	
 
 public:
 	BYTE					m_MaxMeanNum;
-	string					m_DictName;
+	std::string					m_DictName;
 	
 	vector<CStructEntry>	m_Units;
 	vector<TUnitComment>	m_UnitComments;
@@ -209,8 +209,8 @@ public:
 	void SetUnitAuthor(WORD UnitNo, const char* Author);
 	void SetUnitModifTimeStr(WORD UnitNo, const char* TimeStr);
 	void SetUnitEditor(WORD UnitNo, const char* Editor);
-	string GetUnitModifTimeStr(WORD UnitNo) const;
-	string GetUnitTextHeader(WORD UnitNo) const;
+	std::string GetUnitModifTimeStr(WORD UnitNo) const;
+	std::string GetUnitTextHeader(WORD UnitNo) const;
 
 	bool	ReadConfig();
 
@@ -221,9 +221,9 @@ typedef enum {	iceOverwrite = 0, iceSkip = 1, iceAppend = 2} ImportConflictEnum;
 
 struct CSourceLine 
 {
-	string m_Line;
+	std::string m_Line;
 	int m_SourceLineNo;
-	CSourceLine (string Line,  int  SourceLineNo)
+	CSourceLine (std::string Line,  int  SourceLineNo)
 	{
 		m_Line = Line;
 	    m_SourceLineNo = SourceLineNo;
@@ -255,16 +255,16 @@ public:
 	BYTE		GetDomItemDomNo (int ItemNo) const;
 	int			GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const;
 	const char*	GetDomItemStr(int ItemNo) const;
-	string		GetEntryStr (WORD EntryNo) const;
+	std::string		GetEntryStr (WORD EntryNo) const;
 	BYTE		GetUnitMeanNum(WORD EntryNo) const;
-	bool		IncludeArticle(WORD UnitNo, string Article) const;
+	bool		IncludeArticle(WORD UnitNo, std::string Article) const;
 
 	bool		Load(const char* Path);
-	bool		ProcessOneArticle ( vector<CSourceLine>& L, int start, int last, bool bSimulating, ImportConflictEnum ConflictSolver, string& Messages);
-	bool		ImportFromText(string FileName, bool bSimulating, ImportConflictEnum ConflictSolver, int StartEntry,string& Messages);
+	bool		ProcessOneArticle ( vector<CSourceLine>& L, int start, int last, bool bSimulating, ImportConflictEnum ConflictSolver, std::string& Messages);
+	bool		ImportFromText(std::string FileName, bool bSimulating, ImportConflictEnum ConflictSolver, int StartEntry,std::string& Messages);
 	void		SetUnitCurrentTime(WORD UnitNo);
-	bool		AddField(string FieldStr);
-	string		GetUnitEditor(WORD UnitNo) const;
+	bool		AddField(std::string FieldStr);
+	std::string		GetUnitEditor(WORD UnitNo) const;
 	void		SetUnitStr(WORD UnitNo, const char*  UnitStr);
 	
 

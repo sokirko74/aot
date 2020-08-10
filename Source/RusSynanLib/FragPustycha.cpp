@@ -158,7 +158,7 @@ bool CRusSentence::HasStrictBorderLeft(int iClauseNum)
 bool CRusSentence::CanBeMainClauseOfTheLeftGoodEmptyClause(const CClause* pAbstClause1, bool bStrictPrevClauseBorder) const 
 {
 	bool bGoodClause;
-	const string& strPunct = GetWords()[pAbstClause1->m_iFirstWord].m_strWord;
+	const std::string& strPunct = GetWords()[pAbstClause1->m_iFirstWord].m_strWord;
 	bGoodClause =     
 					  //  Иван и Петр пришли 
 				      ( strPunct[0] != ',') 

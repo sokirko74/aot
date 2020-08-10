@@ -3,7 +3,7 @@
 
 
 const size_t CitiesCount = 4;
-const string Cities[CitiesCount] = 
+const std::string Cities[CitiesCount] = 
 {
 	"STADT", "HAUPTSTADT", "HAFENSTADT","KЬSTENSTADT"
 };

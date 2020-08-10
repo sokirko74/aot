@@ -3,13 +3,13 @@
 
 
 
-string GetStringByNode (const CRusSemStructure& R, int NodeNo)
+std::string GetStringByNode (const CRusSemStructure& R, int NodeNo)
 {
 	const CRusSemNode& Node = R.m_Nodes[NodeNo];
-	string Result;
+	std::string Result;
 	for (size_t i=0; i < Node.m_Words.size(); i++)
 	{
-		string W = Node.m_Words[i].m_Word;
+		std::string W = Node.m_Words[i].m_Word;
 		RmlMakeLower(W, morphRussian);
 		if (Node.m_Words[i].m_CharCase != LowLow)
 			W[0] = ReverseChar(W[0], morphRussian);
@@ -27,19 +27,19 @@ bool IsSynthesLess(const CRusSemStructure& R, size_t NodeNo1, size_t NodeNo2)
 	return R.m_Nodes[NodeNo1].GetMinWordNo() < R.m_Nodes[NodeNo2].GetMinWordNo();
 };
 
-string CRusSemStructure::GetPrepOrConjFromSynReal (const CSynRealization&  SynReal) const
+std::string CRusSemStructure::GetPrepOrConjFromSynReal (const CSynRealization&  SynReal) const
 {
-	string Result;
+	std::string Result;
     if (!SynReal.m_Preps.empty())
 	{
-		string PrepAndCase = GetRoss(SynReal.m_Preps[0].m_DictType)->GetEntryStr(SynReal.m_Preps[0].m_UnitNo);
-		if (PrepAndCase.find("+") != string::npos)
+		std::string PrepAndCase = GetRoss(SynReal.m_Preps[0].m_DictType)->GetEntryStr(SynReal.m_Preps[0].m_UnitNo);
+		if (PrepAndCase.find("+") != std::string::npos)
 			PrepAndCase.erase(PrepAndCase.find("+"));
 		Result += PrepAndCase;		
 	};
 
     if (SynReal.m_Conj.m_UnitNo != ErrUnitNo)
-	     Result += string(" ")+GetRoss(SynReal.m_Conj.m_DictType)->GetEntryStr(SynReal.m_Conj.m_UnitNo);
+	     Result += std::string(" ")+GetRoss(SynReal.m_Conj.m_DictType)->GetEntryStr(SynReal.m_Conj.m_UnitNo);
 
 	//  change '_' to ' ' in compound prepositions an conjunctions
 	for (size_t i =0; i<Result.size(); i++)
@@ -49,27 +49,27 @@ string CRusSemStructure::GetPrepOrConjFromSynReal (const CSynRealization&  SynRe
 	return Result;
 };
 
-string CRusSemStructure::GetPrepOrConjOfNode (const CRusSemNode&  Node) const
+std::string CRusSemStructure::GetPrepOrConjOfNode (const CRusSemNode&  Node) const
 {
-	string Result  = GetPrepOrConjFromSynReal(Node.m_SynReal);
+	std::string Result  = GetPrepOrConjFromSynReal(Node.m_SynReal);
 
 
 
 	return Result;
 };
 
-void AddRelOperators (const CRusSemNode& Node, string& Result)
+void AddRelOperators (const CRusSemNode& Node, std::string& Result)
 {
 	// Добавляем частицы ("не", "ни", "даже")
 	for (size_t i=0; i < Node.m_RelOperators.size(); i++)
 	{
-			string s = Node.m_RelOperators[i];
+			std::string s = Node.m_RelOperators[i];
 			RmlMakeLower(s,morphRussian);
 			Result = s+" "+Result;
 	};
 };
 
-string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
+std::string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 {
 	const CRusSemNode& Node = R.m_Nodes[NodeNo];
 
@@ -77,13 +77,13 @@ string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 	R.GetOutcomingRelations(NodeNo, Rels, false);
 	
 
-	string left,right;
+	std::string left,right;
 	for (size_t  i=0; i < Rels.size(); i++)
 	{
 		const CRusSemRelation& Rel = R.m_Relations[Rels[i]];
 		if (Rel.m_bDopRelation) continue;
 		int SubNodeNo =  Rel.m_TargetNodeNo;
-		string Word = SynthRecursive(R, SubNodeNo, false);
+		std::string Word = SynthRecursive(R, SubNodeNo, false);
 		Word = R.GetPrepOrConjFromSynReal(Rel.m_SynReal) + " "+ Word;
 
 		if (Node.m_ClauseNo !=  R.m_Nodes[SubNodeNo].m_ClauseNo)
@@ -103,7 +103,7 @@ string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 	if (Node.GetType() == CollocRoss || bRoot)
 		left = R.GetPrepOrConjOfNode(Node) + " "+ left;
 	
-	string NodeItself = 	GetStringByNode(R, NodeNo);
+	std::string NodeItself = 	GetStringByNode(R, NodeNo);
 
 	//  relational operators goes before all subordinates, if the node  is a noun
 	if (R.IsNounOrMNANoun(NodeNo))
@@ -111,19 +111,19 @@ string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 	else
 		AddRelOperators(Node, NodeItself);
 
-	string Result = left +" "+ NodeItself + right;
+	std::string Result = left +" "+ NodeItself + right;
 
 	//  специальная обработка разрывных союзов
 	if	(		(Node.m_MNAType == RepeatMNA)
 			&&	(Node.GetType() == OborRoss)
 		)
 	{
-		string UnitStr = R.GetRoss(OborRoss)->GetEntryStr(Node.GetInterp()->m_UnitNo);
-		string Delim = "...";
+		std::string UnitStr = R.GetRoss(OborRoss)->GetEntryStr(Node.GetInterp()->m_UnitNo);
+		std::string Delim = "...";
 		int index = UnitStr.find(Delim);
 		RmlMakeLower(UnitStr,morphRussian);
-		if (index != string::npos)
-			Result = UnitStr.substr(0, index) +string(" ")+ left + string(" , ") + UnitStr.substr(index+Delim.length()) +" "+ right;
+		if (index != std::string::npos)
+			Result = UnitStr.substr(0, index) +std::string(" ")+ left + std::string(" , ") + UnitStr.substr(index+Delim.length()) +" "+ right;
 	};
 	return Result;
 	
@@ -132,10 +132,10 @@ string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 
 extern void GenerateRecursive(CRusSemStructure& R, int NodeNo);
 
-string	CRusSemStructure::RussianSynthesisOfNode(int NodeNo)
+std::string	CRusSemStructure::RussianSynthesisOfNode(int NodeNo)
 {
 	GenerateRecursive(*this, NodeNo);
-	string Result = SynthRecursive(*this, NodeNo, true);
+	std::string Result = SynthRecursive(*this, NodeNo, true);
 	{
 		//  if  it is a clause root then we should add the clause conjunction to the beginning
 		// if it exists
@@ -151,9 +151,9 @@ string	CRusSemStructure::RussianSynthesisOfNode(int NodeNo)
 	return Result;
 };
 
-bool	CRusSemStructure::RussianSynthesis(string& Result) const
+bool	CRusSemStructure::RussianSynthesis(std::string& Result) const
 {
-	string str;
+	std::string str;
 	CRusSemStructure NewStructure = *this;
     // берем все вершины клаузы
 	vector<long> roots;	

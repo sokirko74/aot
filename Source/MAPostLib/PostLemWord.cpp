@@ -38,7 +38,7 @@ CHomonym* CPostLemWord::AddNewHomonym()
 void CPostLemWord::InitLevelSpecific(CHomonym* pHom)
 {
     m_bFirstUpperAlpha =  (m_Register == UpUp) || (m_Register == UpLow);
-    m_bQuoteMark = HasDes(OPun) && m_strWord.find("\"") != string::npos;
+    m_bQuoteMark = HasDes(OPun) && m_strWord.find("\"") != std::string::npos;
     pHom->InitAncodePattern();
 }
 
@@ -58,10 +58,10 @@ void CPostLemWord::SafeDeleteMarkedHomonyms()
 
 
 
-bool CPostLemWord::LemmatizeForm(const string& s, const CLemmatizer* pLemmatizer )
+bool CPostLemWord::LemmatizeForm(const std::string& s, const CLemmatizer* pLemmatizer )
 {
     vector<CFormInfo> Paradigms;
-    string Word = s;
+    std::string Word = s;
 	if (!pLemmatizer->CreateParadigmCollection(false, Word, false, false, Paradigms)) return false;
     if (Paradigms.empty()) return false;
     DeleteAllHomonyms();

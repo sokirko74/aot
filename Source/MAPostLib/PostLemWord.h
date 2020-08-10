@@ -21,7 +21,7 @@ public:
     void InitLevelSpecific(CHomonym* pHom);
     void DeleteAllHomonyms();
     void SafeDeleteMarkedHomonyms();
-    bool LemmatizeForm(const string& s, const CLemmatizer* pLemmatizer );
+    bool LemmatizeForm(const std::string& s, const CLemmatizer* pLemmatizer );
 };
 
 

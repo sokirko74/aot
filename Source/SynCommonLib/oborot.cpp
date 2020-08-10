@@ -72,7 +72,7 @@ bool COborDic::ReadOborots(const CDictionary* piOborDic)
 };
 
 
-vector<int> COborDic::FindAllArticlesForSimplePrep(string strPrep) const
+vector<int> COborDic::FindAllArticlesForSimplePrep(std::string strPrep) const
 {
 	vector<int> v;
 	if (strPrep.empty()) return v;
@@ -92,7 +92,7 @@ vector<int> COborDic::FindAllArticlesForSimplePrep(string strPrep) const
 }
 
 
-int COborDic::FindSimplePrep(string strPrep) const
+int COborDic::FindSimplePrep(std::string strPrep) const
 {
 	RmlMakeLower(strPrep, GetOpt()->m_Language);
 
@@ -108,9 +108,9 @@ int COborDic::FindSimplePrep(string strPrep) const
 }
 
 
-void  COborDic::WriteSimplePrep(string s, int OborotNo)
+void  COborDic::WriteSimplePrep(std::string s, int OborotNo)
 {
-	string strPrep = s;
+	std::string strPrep = s;
 	size_t ii = strPrep.find_first_of(" ");
 
 	StringTokenizer token(strPrep.c_str(), " ");	
@@ -134,7 +134,7 @@ void  COborDic::WriteSimplePrep(string s, int OborotNo)
 	}
 	else
 	{
-		const string&  debug  = it->first;
+		const std::string&  debug  = it->first;
 		if( find(it->second.begin() , it->second.end(), OborotNo) == it->second.end())
 			it->second.push_back(OborotNo);
 	}
@@ -153,7 +153,7 @@ void  COborDic::MergeCasesOfSimililarSimplePreps()
 	for(it = m_mapSimplePrep.begin() ; it != m_mapSimplePrep.end() ; it++ )
 
 	{
-		//const string&  debug  = it->first;
+		//const std::string&  debug  = it->first;
 		vector<int>& article_nums = it->second;
 		QWORD _cases = 0;
 		
@@ -171,13 +171,13 @@ void COborDic::BuildOborots(int iUnit, const CDictionary* piOborDic, WriteOborFu
 	for (size_t k = piOborDic->GetUnitStartPos(iUnit); k <= piOborDic->GetUnitEndPos(iUnit); k++)
 		  if (piOborDic->GetCortegeFieldNo(k) == piOborDic->GetFieldNoByFieldStr("CONTENT"))
 		  {
-			  string q = piOborDic->GetDomItemStr(piOborDic->GetCortegeItem(k,0));			  
+			  std::string q = piOborDic->GetDomItemStr(piOborDic->GetCortegeItem(k,0));			  
 			  BuildOborot(q, iUnit, WriteOborFunc);
 		  };
 }
 
 
-void COborDic::TokenizeDoubleConj(string s, int OborotNo)
+void COborDic::TokenizeDoubleConj(std::string s, int OborotNo)
 {
 	StringTokenizer token(s.c_str(), " ");
 	SDoubleConj DoubleConj;
@@ -207,14 +207,14 @@ void COborDic::TokenizeDoubleConj(string s, int OborotNo)
 
 }
 
-void  COborDic::WriteSimpleSubConj(string s, int OborotNo)
+void  COborDic::WriteSimpleSubConj(std::string s, int OborotNo)
 {
 	RmlMakeUpper (s, GetOpt()->m_Language);
 	m_SimpleSubConj.push_back(s);
 }
 
 
-void COborDic::BuildOborot(string s, int OborotNo, WriteOborFuncType WriteOborFunc)
+void COborDic::BuildOborot(std::string s, int OborotNo, WriteOborFuncType WriteOborFunc)
 {
 	size_t i = s.find("(");
 	if (i == s.npos) 
@@ -241,7 +241,7 @@ void COborDic::BuildOborot(string s, int OborotNo, WriteOborFuncType WriteOborFu
           		if  (  	  	(j == k)
 				    ||		(s[j] == '|'))
 		  {
-	            string q;
+	            std::string q;
 			if (i >0) q += s.substr(0,i-1);
 			q += " ";
 			q += s.substr(last_j+1, j-last_j-1);

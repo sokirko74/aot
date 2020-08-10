@@ -20,7 +20,7 @@ typedef bool(CFormatCaller::*CFormatFunc)(CGroup& G);
 
 struct CFormatCall   
 {
-		string		m_name;
+		std::string		m_name;
 		int			m_direction;       
         CFormatFunc	m_format;
 

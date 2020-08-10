@@ -69,7 +69,7 @@ protected:
 
 	};
 	IsLessMorphInterp m_SearchInfoLess;
-	void	GetLemmaInfos (const string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const;
+	void	GetLemmaInfos (const std::string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const;
 	void	CreateModelsIndex();
 
 public:
@@ -85,12 +85,12 @@ public:
 	void	InitAutomat(CMorphAutomat*	pFormAutomat);
 
 	//  loading & saving
-	bool	Load(string GrammarFileName);
-	bool	Save(string GrammarFileName) const;
+	bool	Load(std::string GrammarFileName);
+	bool	Save(std::string GrammarFileName) const;
 	
 	
-	void	PredictBySuffix (const string& Text, size_t& TextOffset, size_t MinimalPredictSuffixlen, vector<CAutomAnnotationInner>& Infos) const;
-	string	GetAllMorphInterpsStr (const string& Text,const size_t TextPos, bool bFullInterp) const;
+	void	PredictBySuffix (const std::string& Text, size_t& TextOffset, size_t MinimalPredictSuffixlen, vector<CAutomAnnotationInner>& Infos) const;
+	std::string	GetAllMorphInterpsStr (const std::string& Text,const size_t TextPos, bool bFullInterp) const;
 };
 
 

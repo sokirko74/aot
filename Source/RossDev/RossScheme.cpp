@@ -95,7 +95,7 @@ void CRossScheme::OnBnClickedSaveToFiles()
 {
 	CFileDialog  D (FALSE, 0,"D_", OFN_NOVALIDATE);
 	if (!D.DoModal()) return;
-	string Path = GetPathByFile((const char*)D.GetPathName());
+	std::string Path = GetPathByFile((const char*)D.GetPathName());
 	
 	size_t i=0;
 
@@ -104,7 +104,7 @@ void CRossScheme::OnBnClickedSaveToFiles()
 		const CDomen& D = GetRoss()->m_Domens[i];
 		if (D.IsFree) continue;
 		
-		string FileName = Path + (const char*)D.DomStr + string(".txt");
+		std::string FileName = Path + (const char*)D.DomStr + std::string(".txt");
 		FILE* fp = fopen (FileName.c_str(), "w");
 		for (size_t k = 0; k < D.m_ItemsLength; k++)
 			fprintf (fp, "%s\n", (const char*)D.m_Items[k]);
@@ -128,20 +128,20 @@ void CRossScheme::OnBnClickedLoadConstFromFiles()
 {
 	CFileDialog  D (TRUE, 0,"D_", OFN_NOVALIDATE);
 	if (!D.DoModal()) return;
-	string Path = GetPathByFile((const char*)D.GetPathName());
+	std::string Path = GetPathByFile((const char*)D.GetPathName());
 	if  (Path.empty()) return;
 	for (size_t i=0; i<GetRoss()->m_Domens.size(); i++)
 	{
 		const CDomen& D = GetRoss()->m_Domens[i];
 		if (D.IsFree) continue;
 		
-		string FileName = Path + (const char*)D.DomStr + string(".txt");
+		std::string FileName = Path + (const char*)D.DomStr + std::string(".txt");
 		FILE* fp = fopen (FileName.c_str(), "r");
 		if (!fp) continue;
 		char buffer[100];
 		while (fgets(buffer, 100, fp))
 		{
-			string q = buffer;
+			std::string q = buffer;
 			Trim(q);
 			int dummy;
 			if (!GetRoss()->InsertDomItem(q.c_str(), i, dummy))

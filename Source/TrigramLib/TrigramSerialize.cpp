@@ -46,9 +46,9 @@ inline size_t restore_from_bytes(CLambdas& t, const BYTE* buf)
 
 bool CTrigramModel::SaveBinary()
 {
-    string Path = GetPathByFile(m_DictionaryFile);
+    std::string Path = GetPathByFile(m_DictionaryFile);
     {
-        string filename = Path + "/regtags.txt";
+        std::string filename = Path + "/regtags.txt";
         FILE* fp = fopen(filename.c_str(),"w");
         if (!fp) throw CExpc("cannot write %s", filename.c_str());
         for (size_t i=0; i< m_RegisteredTags.size(); i++)
@@ -113,9 +113,9 @@ bool CTrigramModel::ReadBinary()
 {
     time_t start;
     time(&start);
-    string Path = GetPathByFile(m_DictionaryFile);
+    std::string Path = GetPathByFile(m_DictionaryFile);
     {
-        string filename = Path + "/regtags.txt";
+        std::string filename = Path + "/regtags.txt";
         FILE* fp = fopen(filename.c_str(),"r");
         if (!fp) throw CExpc("cannot read %s", filename.c_str());
         char buffer[10000];
@@ -130,26 +130,26 @@ bool CTrigramModel::ReadBinary()
         m_TagsCount  = (WORD)m_RegisteredTags.size();
     }
     {
-        string filename = Path + "/unigrams.bin";
+        std::string filename = Path + "/unigrams.bin";
         ReadVector(filename, m_Unigrams);
         if (m_Unigrams.empty())
             throw CExpc("cannot read %s", filename.c_str());
     }
     {
-        string filename = Path + "/ord_tags.bin";
+        std::string filename = Path + "/ord_tags.bin";
         ReadVector(filename, m_TagsOrderedByUnigrams);
         if (m_TagsOrderedByUnigrams.empty())
             throw CExpc("cannot read %s", filename.c_str());
     }
     {
-        string filename = Path + "/bigrams.bin";
+        std::string filename = Path + "/bigrams.bin";
         ReadVector(filename, m_Bigrams);
         if (m_Bigrams.empty())
             throw CExpc("cannot read %s", filename.c_str());
     }
 
     {
-        string filename = Path + "/counts.bin";
+        std::string filename = Path + "/counts.bin";
         vector<int> counts;
         ReadVector(filename, counts);
         if (counts.size() != 6)
@@ -162,7 +162,7 @@ bool CTrigramModel::ReadBinary()
     }
 
     {
-        string filename = Path + "/trigrams.bin";
+        std::string filename = Path + "/trigrams.bin";
         vector<pair<trigram_integer_t,int> > pairs;
         ReadVector(filename, pairs);
         if (pairs.empty() )
@@ -174,13 +174,13 @@ bool CTrigramModel::ReadBinary()
     }
 
     {
-        string filename = Path + "/buckets.bin";
+        std::string filename = Path + "/buckets.bin";
         ReadVector(filename, m_Buckets);
         if (m_Buckets.empty())
             throw CExpc("cannot read %s", filename.c_str());
     }
     {
-        string filename = Path + "/lambdas.bin";
+        std::string filename = Path + "/lambdas.bin";
         ReadVector(filename, m_BucketsLambdas);
         if (m_BucketsLambdas.empty())
             throw CExpc("cannot read %s", filename.c_str());

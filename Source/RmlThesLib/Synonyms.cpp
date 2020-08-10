@@ -50,7 +50,7 @@ void  CThesaurus::GetTextEntriesByConcept(long ConceptId, vector<long>& TextEntr
 
 
 
-bool CThesaurus::LoadSynonyms(string FileName)
+bool CThesaurus::LoadSynonyms(std::string FileName)
 {
 	m_SynonymsByConcept.clear();
 	m_SynonymsByTextEntry.clear();
@@ -62,7 +62,7 @@ bool CThesaurus::LoadSynonyms(string FileName)
 		fclose(fp);
 		return false;
 	};
-	string Header = buff;
+	std::string Header = buff;
 	Trim(Header);
 	if (Header != "ConceptId;TextEntryId;TextEntryCutStr;")
 	{

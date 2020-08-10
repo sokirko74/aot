@@ -14,7 +14,7 @@ bool InitMorphologySystem(CTrigramModel& M)
 	std::string langua_str = GetStringByLanguage(M.m_Language);
 	M.m_pLemmatizerPrivate = new T;
     
-	string strError;
+	std::string strError;
 	if (!M.m_pLemmatizerPrivate->LoadDictionariesRegistry(strError))
 	{
    		fprintf (stderr, "Cannot load %s  morphological dictionary\n", langua_str.c_str());
@@ -37,7 +37,7 @@ bool CTrigramModel::CheckTagsForFormInfo(const vector<CTag>& Tags, const CFormIn
 {
 	QWORD CommonGrammems = 0;
 	m_pAgramtab->GetGrammems(F.GetCommonAncode().c_str(), CommonGrammems);
-	string SrcAncode = F.GetSrcAncode();
+	std::string SrcAncode = F.GetSrcAncode();
     BYTE SrcPoS = m_pAgramtab->GetPartOfSpeech(SrcAncode.c_str());
     QWORD Grammems = m_pAgramtab->GetAllGrammems(SrcAncode.c_str());
     return    FindGramTabLineInTags(Tags, 1<<SrcPoS, Grammems | CommonGrammems);
@@ -63,7 +63,7 @@ bool CTrigramModel::FindGramTabLineInTags(const vector<CTag>& Tags, poses_mask_t
     return false;
 }
 
-size_t CTrigramModel::GetLemmasCount(string Word) const
+size_t CTrigramModel::GetLemmasCount(std::string Word) const
 {
 	try 
 	{
@@ -81,9 +81,9 @@ size_t CTrigramModel::GetLemmasCount(string Word) const
 
 }
 
-string CTrigramModel::GetParticipleLemma(const CFormInfo& F) const 
+std::string CTrigramModel::GetParticipleLemma(const CFormInfo& F) const 
 {
-	string SrcAncode = F.GetSrcAncode();
+	std::string SrcAncode = F.GetSrcAncode();
 	BYTE SrcPoS = m_pAgramtab->GetPartOfSpeech(SrcAncode.c_str());
 	if (SrcPoS != PARTICIPLE) return "";
 
@@ -112,7 +112,7 @@ string CTrigramModel::GetParticipleLemma(const CFormInfo& F) const
 }
 
 
-set<string> CTrigramModel::GetLemmaSetByTagAndWordStr(string Word, string TagStr, bool bOnlyWithMaxWeight) const
+set<string> CTrigramModel::GetLemmaSetByTagAndWordStr(std::string Word, std::string TagStr, bool bOnlyWithMaxWeight) const
 {
 try {
 	set<string> Lemmas;
@@ -122,7 +122,7 @@ try {
 	m_pLemmatizer->CreateParadigmCollection(false, Word, is_upper_alpha((BYTE)Word[0], m_Language), true, Paradigms);
 	int MaxWeight = 0;
 	int MaxWeightForAnyLemma = 0;
-	string MostHeavyLemma;
+	std::string MostHeavyLemma;
 
 	for (int i=0; i < Paradigms.size(); i++)
 	{
@@ -149,7 +149,7 @@ try {
 			else
 			{
 				Lemmas.insert(F.GetWordForm(0));
-				string  ParticipleLemma = GetParticipleLemma(F);
+				std::string  ParticipleLemma = GetParticipleLemma(F);
 				if (!ParticipleLemma.empty())
 					Lemmas.insert(ParticipleLemma);
 			}
@@ -172,7 +172,7 @@ try {
 					&& ((BYTE)Word[0] != '-')
 				)
 				fprintf (stderr, "\tword form %s is not recognized by the lemmatizer with tag %s (probably different tag sets!)\n",  Word.c_str(), TagStr.c_str());
-			string s = Word;
+			std::string s = Word;
 			RmlMakeUpper(s, m_Language);
 			Lemmas.insert(s);
 		}
@@ -189,7 +189,7 @@ catch (...)
 
 }
 
-bool CTrigramModel::CheckLemma(string Word, string TagStr1, string TagStr2) const
+bool CTrigramModel::CheckLemma(std::string Word, std::string TagStr1, std::string TagStr2) const
 {
 try {
 	if (TagStr1 == TagStr2) return true;
@@ -244,11 +244,11 @@ bool CTrigramModel::InitDicts ()
 };
 
 
-void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const string& WordStr, set<WORD>& tags) const
+void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const std::string& WordStr, set<WORD>& tags) const
 {
 	if (!CheckLanguage(WordStr,m_Language)) return; 
 	vector<CFormInfo> FormInfos;
-	string  _WordStr = WordStr;
+	std::string  _WordStr = WordStr;
 	if (!m_pLemmatizer->CreateParadigmCollection(false, _WordStr, is_upper_alpha(WordStr[0],m_Language), true, FormInfos) ) return;
 	
 	for (size_t i=0; i < FormInfos.size(); i++)
@@ -259,8 +259,8 @@ void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const string& WordSt
 			continue;
 		QWORD CommonGrammems = 0;
         m_pAgramtab->GetGrammems(FormInfos[i].GetCommonAncode().c_str(), CommonGrammems);
-		string  Ancodes = FormInfos[i].GetSrcAncode();
-		string Lemma = FormInfos[i].GetWordForm(0);
+		std::string  Ancodes = FormInfos[i].GetSrcAncode();
+		std::string Lemma = FormInfos[i].GetWordForm(0);
 		for (size_t j=0; j < Ancodes.size(); j+=2)
 		{
 			// игнорируем предлоги 
@@ -270,7 +270,7 @@ void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const string& WordSt
 			const CTag& tag  = m_TagSet.GetTagFromAncode(m_pAgramtab, Ancodes.c_str()+j, CommonGrammems, Lemma);
             if (!tag.IsEmptyTag())
             {
-			    string TagStr = tag.m_Name;
+			    std::string TagStr = tag.m_Name;
 			    int TagNo = find_tag(TagStr);
 			    if (TagNo != UnknownTag)
 			    {
@@ -298,8 +298,8 @@ bool CTrigramModel::tag_sentence(char* SentenceStr) const
 	StringTokenizer tok(SentenceStr, " \t\r\n");
 	while (tok())
 	{
-		string Token = tok.val();
-		string Lemma = "";
+		std::string Token = tok.val();
+		std::string Lemma = "";
 		size_t index = Token.find('{');
 		if (index > 0)
 		{
@@ -371,7 +371,7 @@ bool CTrigramModel::lemmatize_sentence(vector<string> words, vector<string>& lem
 		{
 			if (!m_bQuiet)
 				fprintf(stderr, "Empty lemma set for \"%s\" \n", words[i].c_str());
-			string UpperWord = words[i];
+			std::string UpperWord = words[i];
 			RmlMakeUpper(UpperWord, morphRussian);
 			lemmas.push_back(words[i]);
 		}
@@ -397,7 +397,7 @@ bool CheckWhetherUkranian(const vector<string>& tokens)
 	return false;
 }
 
-bool CTrigramModel::TagRawText(string FileName) 
+bool CTrigramModel::TagRawText(std::string FileName) 
 {
 	if (!m_Graphan.LoadFileToGraphan(FileName))
 	{
@@ -420,7 +420,7 @@ bool CTrigramModel::TagRawText(string FileName)
 		{
 			if (IsToken(m_Graphan.GetUnit(LineNoEnd)) )
 			{
-				string TokenStr = m_Graphan.GetToken(LineNoEnd);
+				std::string TokenStr = m_Graphan.GetToken(LineNoEnd);
 				assert (!TokenStr.empty());
 				tokens.push_back( TokenStr  );
 			}
@@ -456,7 +456,7 @@ bool CTrigramModel::TagRawText(string FileName)
 }
 
 
-bool CTrigramModel::TagRawTexts(string FileName) 
+bool CTrigramModel::TagRawTexts(std::string FileName) 
 {
 	if (	(FileName.length() > 3)
 				&&	(			(FileName.substr(FileName.length()-3) == "con")
@@ -489,8 +489,8 @@ bool CTrigramModel::TagRawTexts(string FileName)
 /*
 bool CTrigramModel::ConvertTagToMyStem(const CTag& tag, set<string>& Grammems, CMorphInterpretation& NewInterp) const
 {
-	string pos =  m_pAgramtab->GetPartOfSpeechStr(tag.m_Pos);
-	string mystem_pos  = POS_Dialing2MyStem(pos);
+	std::string pos =  m_pAgramtab->GetPartOfSpeechStr(tag.m_Pos);
+	std::string mystem_pos  = POS_Dialing2MyStem(pos);
 	if (mystem_pos.empty())
 	{
 		if (!m_bQuiet)
@@ -501,7 +501,7 @@ bool CTrigramModel::ConvertTagToMyStem(const CTag& tag, set<string>& Grammems, C
 	{
 		if (_QM(i) & tag.m_Grammems)
 		{
-			string gr = Grammem_Dialing2MyStem(m_pAgramtab->GetGrammemStr(i));
+			std::string gr = Grammem_Dialing2MyStem(m_pAgramtab->GetGrammemStr(i));
 			if (gr.empty())
 			{
 				if (!m_bQuiet)
@@ -530,7 +530,7 @@ set<string> GetMystemSpecificGrammem(const vector<CMorphInterpretation>& v)
 		vector<string> s;
 		while (tok())
 		{
-			string g = tok.val();
+			std::string g = tok.val();
 			if (IsMyStemSpecificGrammem(g))
 				s.push_back(g);
 		}
@@ -553,7 +553,7 @@ set<string> GetMystemSpecificGrammem(const vector<CMorphInterpretation>& v)
 
 //#pragma optimize( "", on)
 
-vector<string> CTrigramModel::get_tokens_from_graphan(string InputStr)
+vector<string> CTrigramModel::get_tokens_from_graphan(std::string InputStr)
 {
 	vector<string> tokens;
 	if (!m_Graphan.LoadStringToGraphan(InputStr))
@@ -569,19 +569,19 @@ vector<string> CTrigramModel::get_tokens_from_graphan(string InputStr)
 	{
 		if (IsToken(m_Graphan.GetUnit(LineNo)) )
 		{
-			string TokenStr = m_Graphan.GetToken(LineNo);
+			std::string TokenStr = m_Graphan.GetToken(LineNo);
 			tokens.push_back( TokenStr  );
 		}
 	}
 	return tokens;
 }
 
-bool CTrigramModel::tagging_string_with_end_of_sents(string InputStr, string& Result) 
+bool CTrigramModel::tagging_string_with_end_of_sents(std::string InputStr, std::string& Result) 
 {
 	Result = "";
 	if (!m_Graphan.LoadStringToGraphan(InputStr))
 	{
-		Result = "Cannot load string into graphan\n";
+		Result = "Cannot load std::string into graphan\n";
 		return false;
 	};
 	
@@ -598,7 +598,7 @@ bool CTrigramModel::tagging_string_with_end_of_sents(string InputStr, string& Re
 		{
 			if (IsToken(m_Graphan.GetUnit(LineNoEnd)) )
 			{
-				string TokenStr = m_Graphan.GetToken(LineNoEnd);
+				std::string TokenStr = m_Graphan.GetToken(LineNoEnd);
 				assert (!TokenStr.empty());
 				tokens.push_back( TokenStr  );
 			}
@@ -623,7 +623,7 @@ bool CTrigramModel::tagging_string_with_end_of_sents(string InputStr, string& Re
 }
 
 //  ------------------------------------------------------------ 
-bool CTrigramModel::tagging(string FileName) 
+bool CTrigramModel::tagging(std::string FileName) 
 {
 	if (m_bRawTexts)
 		return TagRawTexts(FileName);
@@ -659,7 +659,7 @@ bool CTrigramModel::print_disamb_lemmas(vector<string> words) const
 		if (is_russian_alpha(words[i][0]))
 		{			
 			set<string> Lemmas = GetLemmaSetByTagAndWordStr(words[i], m_RegisteredTags[tags[i].m_TagId1], true);			
-			string lemm = words[i];			
+			std::string lemm = words[i];			
 			if (!Lemmas.empty())			  
 				lemm  = *Lemmas.begin();			
 			EngRusMakeLower(lemm);			
@@ -671,7 +671,7 @@ bool CTrigramModel::print_disamb_lemmas(vector<string> words) const
 	return true;
 }
 
-bool CTrigramModel::lemmatize_file(string FileName) 
+bool CTrigramModel::lemmatize_file(std::string FileName) 
 {
 	FILE* fp = fopen(FileName.c_str(), "r");  
 	if (!fp) 

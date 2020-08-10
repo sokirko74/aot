@@ -210,7 +210,7 @@ void CEngSemStructure::TranslateOneActant(int iRel,int iEngNode)
 
 /////////////////////////////////////////////////////////////////////////////
 
-EGramCortegeType CEngSemStructure::GetGramCortegeType(string& gram_str)
+EGramCortegeType CEngSemStructure::GetGramCortegeType(std::string& gram_str)
 {
 	if( gram_str == "subj")
 		return Subj;
@@ -218,12 +218,12 @@ EGramCortegeType CEngSemStructure::GetGramCortegeType(string& gram_str)
 	if( gram_str == "obj" )
 		return Obj;
 
-	if(    ( gram_str.find("+NP") != string::npos ) 
+	if(    ( gram_str.find("+NP") != std::string::npos ) 
 		|| (gram_str == "PREP_PHR") 
 	  )
 		return PrepNp;
 
-	if( (gram_str.find("gerund") != string::npos) || (gram_str.find("+inf") != string::npos ) )
+	if( (gram_str.find("gerund") != std::string::npos) || (gram_str.find("+inf") != std::string::npos ) )
 		return InfinitiveOrGerundGram;
 
 	if( (gram_str == "NP_poss") || (gram_str == "PN_poss" ) || (gram_str == "of+NP") )
@@ -248,7 +248,7 @@ EGramCortegeType CEngSemStructure::GetGramCortegeType(TCortege& cortege, DictTyp
 {
 	if( cortege.m_DomItemNos[0] == -1 )
 		return UnknownGram;
-	string gram_str = GetItemStr(cortege.m_DomItemNos[0], type);
+	std::string gram_str = GetItemStr(cortege.m_DomItemNos[0], type);
 	EGramCortegeType CortegeType = GetGramCortegeType(gram_str);
 	if( CortegeType == UnknownGram)
 	{
@@ -276,7 +276,7 @@ AddSemRelToGramCortege("MULTI", CreateCortege("of+NP", "D_1"));
 
 /////////////////////////////////////////////////////////////////////////////
 
-TCortege CEngSemStructure::CreateCortege(string strGX, string strDomen)
+TCortege CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen)
 {
 	TCortege cortege;
 	cortege.m_DomItemNos[0] = GetRoss(Aoss)->GetItemNoByItemStr(strGX.c_str(),GetRoss(Aoss)->GetDomenNoByDomStr(strDomen.c_str()));
@@ -287,7 +287,7 @@ TCortege CEngSemStructure::CreateCortege(string strGX, string strDomen)
 /////////////////////////////////////////////////////////////////////////////
 
 
-void CEngSemStructure::AddSemRelToGramCortege(string semRel, TCortege cortege)
+void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege cortege)
 {
 	if( cortege.m_DomItemNos[0] == -1 )
 		return;

@@ -37,13 +37,13 @@ size_t CWorkGrammar::GetItemId(const CGrammarItem &I) {
 };
 
 
-string CWorkGrammar::GetLeftPartStr(set<CWorkRule>::const_iterator it) const {
+std::string CWorkGrammar::GetLeftPartStr(set<CWorkRule>::const_iterator it) const {
     return m_UniqueGrammarItems[it->m_LeftPart].GetDumpString();
 };
 
 
-string CWorkGrammar::GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bPrintFeatures) const {
-    string Result = m_UniqueGrammarItems[R.m_LeftPart].GetDumpString() + "->";
+std::string CWorkGrammar::GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bPrintFeatures) const {
+    std::string Result = m_UniqueGrammarItems[R.m_LeftPart].GetDumpString() + "->";
     size_t l = 0;
     for (; l < R.m_RightPart.m_Items.size(); l++) {
         if (AsteriskNo == l)
@@ -83,11 +83,11 @@ string CWorkGrammar::GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bPrintF
 };
 
 
-string CWorkGrammar::GetRuleStr(const CWorkRule &R) const {
+std::string CWorkGrammar::GetRuleStr(const CWorkRule &R) const {
     return GetRuleStr(R, R.m_RightPart.m_SynMainItemNo);
 };
 
-string CWorkGrammar::GetRuleStr(CWRI it) const {
+std::string CWorkGrammar::GetRuleStr(CWRI it) const {
     return GetRuleStr(*it);
 
 };
@@ -140,9 +140,9 @@ size_t GetFileModifTime(const char *FileName) {
 #endif
 
 
-int CWorkGrammar::FindTokenListByFileName(const string &FileName, size_t EndItemNo) {
+int CWorkGrammar::FindTokenListByFileName(const std::string &FileName, size_t EndItemNo) {
     for (int i = 0; i < EndItemNo; i++) {
-        string CurrFileName = m_UniqueGrammarItems[i].GetFullFileName(m_SourceGrammarFile);
+        std::string CurrFileName = m_UniqueGrammarItems[i].GetFullFileName(m_SourceGrammarFile);
         if (CurrFileName == FileName)
             return i;
     };
@@ -152,7 +152,7 @@ int CWorkGrammar::FindTokenListByFileName(const string &FileName, size_t EndItem
 
 bool CWorkGrammar::LoadOptions() {
     m_SecondPassSymbols.clear();
-    string FileName = MakeFName(m_SourceGrammarFile, "opt");
+    std::string FileName = MakeFName(m_SourceGrammarFile, "opt");
     LogStream << "loading " << FileName.c_str() << "\n";
     FILE *fp = fopen(FileName.c_str(), "r");
     if (!fp) {
@@ -162,15 +162,15 @@ bool CWorkGrammar::LoadOptions() {
 
     char buffer[1000];
     while (fgets(buffer, 1000, fp)) {
-        string Line = buffer;
+        std::string Line = buffer;
         size_t i = Line.find("%%");
-        if (i != string::npos)
+        if (i != std::string::npos)
             Line.erase(i);
         Trim(Line);
         if (Line.empty()) continue;
         StringTokenizer tok(Line.c_str(), "\t ");
         tok();
-        string OptName = tok.val();
+        std::string OptName = tok.val();
         if (OptName == "SecondPass")
             while (tok())
                 m_SecondPassSymbols.insert(tok.val());
@@ -189,12 +189,12 @@ bool CWorkGrammar::LoadOptions() {
     return true;
 };
 
-bool CWorkGrammar::CreateTokenList(string &ErrorStr) {
+bool CWorkGrammar::CreateTokenList(std::string &ErrorStr) {
 
     //FILE * tokens = fopen ("tokens_dump.txt", "w");
     for (size_t i = 0; i < m_UniqueGrammarItems.size(); i++) {
         CGrammarItem &I = m_UniqueGrammarItems[i];
-        string FileName = I.GetFullFileName(m_SourceGrammarFile);
+        std::string FileName = I.GetFullFileName(m_SourceGrammarFile);
         if (!FileName.empty()) {
             if (!FileExists(FileName.c_str())) {
                 ErrorMessage(Format("cannot access %s\n", FileName.c_str()));
@@ -236,7 +236,7 @@ bool CWorkGrammar::CreateTokenList(string &ErrorStr) {
 
             char buffer[1000];
             while (fgets(buffer, 1000, fp)) {
-                string s = buffer;
+                std::string s = buffer;
                 Trim(s);
                 if (s.empty()) continue;
                 RmlMakeUpper(s, m_Language);
@@ -272,7 +272,7 @@ size_t CWorkGrammar::GetCountOfSymbolOnTheRight(CWRI it, size_t ItemNo) const {
 
 size_t CWorkGrammar::GetCountOfRoots() const {
     size_t Result = 0;
-    string Dump;
+    std::string Dump;
     for (size_t i = 0; i < m_UniqueGrammarItems.size(); i++)
         if (m_UniqueGrammarItems[i].m_bGrammarRoot) {
             Result++;
@@ -413,7 +413,7 @@ For example,
 */
 
 
-bool SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item, string &ErrorStr) {
+bool SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item, std::string &ErrorStr) {
     vector<CWorkRule> NewRules;
 
     for (WRI it = Grammar.m_EncodedRules.begin(); it != Grammar.m_EncodedRules.end(); it++) {
@@ -451,7 +451,7 @@ bool SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item
 };
 
 
-bool CWorkGrammar::CreateNodesForNodesWithWorkAttributes(string &ErrorStr) {
+bool CWorkGrammar::CreateNodesForNodesWithWorkAttributes(std::string &ErrorStr) {
 
     for (size_t i = 0; i < m_UniqueGrammarItems.size(); i++) {
         CGrammarItem I = m_UniqueGrammarItems[i];
@@ -516,9 +516,9 @@ inline size_t restore_from_bytes(CPrecompiledWorkRule &t, const BYTE *buf) {
 };
 
 
-bool CWorkGrammar::SavePrecompiled(string GrammarFileName) const {
+bool CWorkGrammar::SavePrecompiled(std::string GrammarFileName) const {
 
-    string PrecompiledFile = MakeFName(GrammarFileName, "grammar_precompiled");
+    std::string PrecompiledFile = MakeFName(GrammarFileName, "grammar_precompiled");
 
     FILE *fp = fopen(PrecompiledFile.c_str(), "wb");
     if (!fp) {
@@ -531,7 +531,7 @@ bool CWorkGrammar::SavePrecompiled(string GrammarFileName) const {
     for (size_t SymbolNo = 0; SymbolNo < m_UniqueGrammarItems.size(); SymbolNo++) {
         {
             // checking
-            string q = m_UniqueGrammarItems[SymbolNo].toString().c_str();
+            std::string q = m_UniqueGrammarItems[SymbolNo].toString().c_str();
             CGrammarItem I;
             bool b = I.fromString(q);
             assert (b);
@@ -554,7 +554,7 @@ bool CWorkGrammar::SavePrecompiled(string GrammarFileName) const {
 bool CWorkGrammar::LoadFromPrecompiled() {
     time_t t1;
     time(&t1);
-    string PrecompiledFile = MakeFName(m_SourceGrammarFile, "grammar_precompiled");
+    std::string PrecompiledFile = MakeFName(m_SourceGrammarFile, "grammar_precompiled");
     LogStream << "loading from precompiled grammar " << PrecompiledFile << "\n";
     FILE *fp = fopen(PrecompiledFile.c_str(), "rb");
     if (!fp) {
@@ -572,7 +572,7 @@ bool CWorkGrammar::LoadFromPrecompiled() {
 
     m_UniqueGrammarItems.clear();
     for (size_t i = 0; i < Count; i++) {
-        string OneRecord;
+        std::string OneRecord;
         for (size_t LineNo = 0; LineNo < 7; LineNo++) {
             char buffer[1024];
             if (!fgets(buffer, 1024, fp)) {
@@ -745,7 +745,7 @@ bool LoadGrammarForGLR(CWorkGrammar &WorkGrammar, bool bUsePrecompiledAutomat, b
 
     {
         WorkGrammar.LogStream << "create token list for each node\n";
-        string ErrorStr;
+        std::string ErrorStr;
         time_t t1, t2;
         time(&t1);
 

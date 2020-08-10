@@ -45,7 +45,7 @@ bool CAgramtab::GetGrammems(const char* gram_code, QWORD& grammems)  const
 	return  true;
 };
 
-string   CAgramtab::GrammemsToStr(QWORD grammems) const 
+std::string   CAgramtab::GrammemsToStr(QWORD grammems) const 
 {
 	char szGrammems[64*5];
 	grammems_to_str(grammems, szGrammems);
@@ -297,7 +297,7 @@ bool CAgramtab :: FindGrammems (const char* gram_codes, QWORD grammems) const
 
 
 
-bool CAgramtab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, string& gramcodes) const
+bool CAgramtab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, std::string& gramcodes) const
 {
 
 
@@ -414,9 +414,9 @@ BYTE CAgramtab::GetFirstPartOfSpeech(const poses_mask_t poses) const
 
 
 
-string	CAgramtab::GetAllPossibleAncodes(BYTE pos, QWORD grammems)const
+std::string	CAgramtab::GetAllPossibleAncodes(BYTE pos, QWORD grammems)const
 {
-	string Result;
+	std::string Result;
 	for (WORD i=0; i<GetMaxGrmCount(); i++) 
 		if (GetLine(i) != 0)
 		{
@@ -430,9 +430,9 @@ string	CAgramtab::GetAllPossibleAncodes(BYTE pos, QWORD grammems)const
 };
 
 //Generate GramCodes for grammems with CompareFunc
-string	CAgramtab::GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const
+std::string	CAgramtab::GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const
 {
-	string Result;
+	std::string Result;
 	CAgramtabLine L0(0);
 	L0.m_PartOfSpeech = pos;
 	L0.m_Grammems = grammems;
@@ -474,22 +474,22 @@ QWORD CAgramtab::Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, c
 
 //  uses gleiche to compare ancodes from gram_codes1 with  ancodes gram_codes2
 //  returns all ancodes from gram_codes1, which satisfy CompareFunc
-string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
+std::string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
 {
-    string EmptyString;
-	return GleicheAncode1(CompareFunc, string(gram_codes1), string(gram_codes2), EmptyString);
+    std::string EmptyString;
+	return GleicheAncode1(CompareFunc, std::string(gram_codes1), std::string(gram_codes2), EmptyString);
 }
-string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, string gram_codes1, string gram_codes2) const
+std::string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, std::string gram_codes1, std::string gram_codes2) const
 {
-    string EmptyString;
+    std::string EmptyString;
 	return GleicheAncode1(CompareFunc, gram_codes1, gram_codes2, EmptyString);
 }
 //changes GramCodes1pair according to satisfied GramCodes1 
 //(if gramcode number N is good(bad) in GramCodes1 it must be good(bad) in GramCodes1pair)
-string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, string GramCodes1, string GramCodes2, string& GramCodes1pair) const
+std::string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, std::string GramCodes1, std::string GramCodes2, std::string& GramCodes1pair) const
 {
-	string Result;
-	string pair;
+	std::string Result;
+	std::string pair;
 	const char* gram_codes1 = GramCodes1.c_str();
 	const char* gram_codes2 = GramCodes2.c_str();
 	if (!gram_codes1) return "";
@@ -531,19 +531,19 @@ string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, string GramCodes1,
 	if(has_pair) GramCodes1pair = pair;
  	return Result;
 };
-string CAgramtab::UniqueGramCodes(string gram_codes) const
+std::string CAgramtab::UniqueGramCodes(std::string gram_codes) const
 {
-	string Result;
+	std::string Result;
 	for (size_t m=0; m<gram_codes.length(); m+=2)
-		if(Result.find(gram_codes.substr(m,2)) == string::npos)
+		if(Result.find(gram_codes.substr(m,2)) == std::string::npos)
 			Result.append(gram_codes.substr(m,2));
 	return Result;
 }
-string CAgramtab::FilterGramCodes(string gram_codes, QWORD grammems1, QWORD grammems2) const
+std::string CAgramtab::FilterGramCodes(std::string gram_codes, QWORD grammems1, QWORD grammems2) const
 {
-	string Result;
+	std::string Result;
 	const char * gram_codes1 = gram_codes.c_str();
-	//string pair;
+	//std::string pair;
 	if (!strcmp(gram_codes1, "??")) return gram_codes1;
 	size_t len1 = strlen(gram_codes1);
 	//bool has_pair = gram_codes1pair.length() == len1;
@@ -556,9 +556,9 @@ string CAgramtab::FilterGramCodes(string gram_codes, QWORD grammems1, QWORD gram
 	//if(has_pair) gram_codes1pair = pair;
  	return Result;
 }	
-string CAgramtab::FilterGramCodes(QWORD breaks, string gram_codes, QWORD g1) const
+std::string CAgramtab::FilterGramCodes(QWORD breaks, std::string gram_codes, QWORD g1) const
 {
-	string Result;
+	std::string Result;
 	QWORD BR [] = {rAllCases, rAllNumbers, rAllGenders, rAllAnimative, rAllPersons, rAllTimes};
 	const char * gram_codes1 = gram_codes.c_str();
 	if (!strcmp(gram_codes1, "??")) return gram_codes1;
@@ -580,9 +580,9 @@ string CAgramtab::FilterGramCodes(QWORD breaks, string gram_codes, QWORD g1) con
  	return Result;
 }	
 
-string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const string& s1, const string& s2)
+std::string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const std::string& s1, const std::string& s2)
 {
-	string Result;
+	std::string Result;
 	size_t len1 = s1.length();
 	size_t len2 = s2.length();
 	for (size_t i=0; i<len1; i+=2)
@@ -602,7 +602,7 @@ string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const string& s1, c
 	return Result.c_str();
 }
 
-string  CAgramtab::GetTabStringByGramCode(const char* gram_code) const
+std::string  CAgramtab::GetTabStringByGramCode(const char* gram_code) const
 {
     if (!gram_code || gram_code[0] == '?')
         return "";
@@ -611,8 +611,8 @@ string  CAgramtab::GetTabStringByGramCode(const char* gram_code) const
 	GetGrammems(gram_code, Grammems);
 	char buffer[256];
 	grammems_to_str(Grammems, buffer);
-	string POSstr = (POS == UnknownPartOfSpeech ) ? "*" :  GetPartOfSpeechStr(POS);
-	return POSstr + string(" ") + buffer;
+	std::string POSstr = (POS == UnknownPartOfSpeech ) ? "*" :  GetPartOfSpeechStr(POS);
+	return POSstr + std::string(" ") + buffer;
 }
 
 

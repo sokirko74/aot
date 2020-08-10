@@ -87,7 +87,7 @@ const CAgramtab* translate_helper::GetGramTab (MorphLanguageEnum langua) const
 
 
 // создаем форму по ParadigmId и eng_grammems, если eng_grammems == 0, возвращает лемму
-string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) const
+std::string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) const
 {
 	int j;
 	CFormInfo Paradigm;
@@ -103,7 +103,7 @@ string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) const
 			break;
 	}
 	if(j == count) j = 0;
-	string res = Paradigm.GetWordForm(j);
+	std::string res = Paradigm.GetWordForm(j);
 	EngRusMakeLower(res);
 
 	return res;
@@ -112,7 +112,7 @@ string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) const
 
 
 // создаем возвращает лемму по RusId
-string translate_helper::create_norm_by_id(long EngId) const
+std::string translate_helper::create_norm_by_id(long EngId) const
 {
 	if (EngId ==-1) return "";
 	CFormInfo p;
@@ -127,9 +127,9 @@ string translate_helper::create_norm_by_id(long EngId) const
 
 
 // устанавливает  нужный регистр
-string fix_case(const CEngSemWord& EngWord)
+std::string fix_case(const CEngSemWord& EngWord)
 {
-	string s = EngWord.m_Word;
+	std::string s = EngWord.m_Word;
 	if(s.empty()) return s;
 	if (!EngWord.m_bDoNotChangeForm)
 	{
@@ -182,7 +182,7 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 
 
 	QWORD eng_grammems = EngWord.GetAllGrammems();
-	string prefix;
+	std::string prefix;
 
 	if (!EngWord.m_bDoNotChangeForm)
 	if(    (EngWord.m_Poses == _QM(eADJ) )
@@ -288,7 +288,7 @@ void add_rel_operators(CEngSemNode& Node)
 			  && ( Node.HasGrammemRich(eComparativ) )
 			 )
 		  {
-			  string s = Node.m_Words[WordNo].m_Word;
+			  std::string s = Node.m_Words[WordNo].m_Word;
 			  EngRusMakeLower(s);
 			  Trim(s);
 			  Node.m_Words[WordNo].m_Word += " and  " + s + " ";
@@ -455,7 +455,7 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 		for(i = 0; i < count; i++)
 		{
 			bool ok = true;
-			string b;
+			std::string b;
 			// если найден флаг, который считается  "плохим", то 
 			// пропускаем этот перевод
 			for(int j = 4; j <= 7 && j < m_pData->m_BinaryDict.GetFlagCount(); j++)
@@ -528,7 +528,7 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 //--------------------------------------------------------------------------------
 // выдает по строке все леммы из морфологического словаря нужной части речи
 // если pos=-1, тогда часть речи не проверяется
-long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, string norm, UINT pos, bool bProper) const
+long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::string norm, UINT pos, bool bProper) const
 {
 
 	vector<CFormInfo> ParadigmCollection;
@@ -576,7 +576,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, string no
 //--------------------------------------------------------------------------------
 // выдает независимые от формы граммемы для слова
 
-QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  string norm,  UINT pos, bool bProper) const
+QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  std::string norm,  UINT pos, bool bProper) const
 {
 	long ParadigmID = GetParadigmIdByLemma(langua, norm, pos, bProper);
 
@@ -588,14 +588,14 @@ QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  stri
 	if (!bRes)
 		throw CExpc ("Cannot create paradigm from Id");
 
-	string ancode = Paradigm.GetAncode(0);
+	std::string ancode = Paradigm.GetAncode(0);
 	const CAgramtab* pGramTab = GetGramTab(langua);
 
 	QWORD grammems = pGramTab->GetAllGrammems(ancode.c_str());
 
 	for( int i=1; i<Paradigm.GetCount(); i++ )
 	{
-		string ancode = Paradigm.GetAncode(i);
+		std::string ancode = Paradigm.GetAncode(i);
 		grammems &= pGramTab->GetAllGrammems(ancode.c_str());
 	}
 
@@ -604,9 +604,9 @@ QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  stri
 
 
 // выдает артикль a/an в зависимотси, с чего начинается  слово  _str
-string translate_helper::an_article_before(const string &_str) const
+std::string translate_helper::an_article_before(const std::string &_str) const
 {
-	string str(_str);
+	std::string str(_str);
 
 	while(str.size() && str[0] == ' ') str = str.substr(1);
 
@@ -626,9 +626,9 @@ string translate_helper::an_article_before(const string &_str) const
 }
 
 // проверяет, что строка s начинается с одного из префиксов starts
-bool translate_helper::starts_with(const string &s,const StringVector &starts) const 
+bool translate_helper::starts_with(const std::string &s,const StringVector &starts) const 
 {
-	string lower_s = s;
+	std::string lower_s = s;
 	EngRusMakeLower(lower_s);
 	for(int i = 0; i < starts.size(); i++)
 	{
@@ -642,13 +642,13 @@ bool translate_helper::starts_with(const string &s,const StringVector &starts) c
 // транслитериует русскую строку _str
 void translate_helper::transliterate(CEngSemWord& W ) 
 {
-	string str;
+	std::string str;
 	if (!W.m_Lemma.empty()) 
 		str = W.m_Lemma;
 	else
 		str = W.m_Word;
 	EngRusMakeUpper(str);
-	string res;
+	std::string res;
 	StringVector vec;
 	vec = StringVector(256);
 	for(int i = 0; i < 256; i++) vec[i] = (char)(unsigned char)i;
@@ -710,7 +710,7 @@ void translate_helper::transliterate(CEngSemWord& W )
 
 
 // загружает перечень слов из РОСС
-void translate_helper::init_list_from_ross(const CRossHolder* RossHolder, const string &list_name, StringVector &res)
+void translate_helper::init_list_from_ross(const CRossHolder* RossHolder, const std::string &list_name, StringVector &res)
 {
 	WORD UnitNo = RossHolder->GetRoss()->LocateUnit(list_name.c_str(), 1);
 
@@ -723,7 +723,7 @@ void translate_helper::init_list_from_ross(const CRossHolder* RossHolder, const 
 	  if (     (RossHolder->GetRoss()->GetCortegeFieldNo(i) == RossHolder->LexFetFieldNo) 
 		 )
 	  {
-         string Item = (const char*)RossHolder->GetRoss()->GetDomItemStr(RossHolder->GetRoss()->GetCortegeItem(i,0));
+         std::string Item = (const char*)RossHolder->GetRoss()->GetDomItemStr(RossHolder->GetRoss()->GetCortegeItem(i,0));
 		 EngRusMakeLower(Item);
 		 res.push_back (Item);
 	  };
@@ -776,7 +776,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 
 	else
 	{
-		string Lemma = helper.create_norm_by_id (EngIds[0]);
+		std::string Lemma = helper.create_norm_by_id (EngIds[0]);
 		m_Nodes[NodeNo].m_Words[0].m_Lemma = Lemma;
 		m_Nodes[NodeNo].m_Words[0].m_Word = Lemma;
 		m_Nodes[NodeNo].m_Words[0].m_ParadigmId = EngIds[0];
@@ -785,7 +785,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 			helper.translate_id(W.m_AdditParadigmId, EngIds, W.m_Poses);
 			if (EngIds.size() > 0)
 			{
-				string Lemma = helper.create_norm_by_id (EngIds[0]);
+				std::string Lemma = helper.create_norm_by_id (EngIds[0]);
 				m_Nodes[NodeNo].m_Words[0].m_Lemma += "-"+Lemma;
 				m_Nodes[NodeNo].m_Words[0].m_Word += "-"+Lemma;
 				m_Nodes[NodeNo].m_Words[0].m_AdditParadigmId = EngIds[0];

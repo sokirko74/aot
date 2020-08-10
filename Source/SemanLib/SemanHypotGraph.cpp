@@ -154,7 +154,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo)
 					{
 						TCortege C  = GetCortege(pRoss,i);
 						if (C.m_DomItemNos[0] == -1) continue;
-						string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
+						std::string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
 						if (S.length() != 2) continue;
 						if (S[0] != 'A') continue;
 						long ValNo1 = S[1] - '0';
@@ -193,8 +193,8 @@ bool CRusSemStructure::InitValsRussian(long NodeNo)
 			// удаляем все LF из значений поля SF, кроме Copul и  ЛФ-прилагательных
 			for (int i=0; i < P.m_ActantSemFets.size(); i++)
 				for (int k=0; k < P.m_ActantSemFets[i].size(); k++)
-					if	(		(		(string(P.m_ActantSemFets[i][k]) != "Copul")
-									&&	!IsParameterOfAdjOrAdv(string(P.m_ActantSemFets[i][k]))
+					if	(		(		(std::string(P.m_ActantSemFets[i][k]) != "Copul")
+									&&	!IsParameterOfAdjOrAdv(std::string(P.m_ActantSemFets[i][k]))
 									&&	(GetRossHolder(Ross)->GetItemNoByItemStr (P.m_ActantSemFets[i][k].c_str(), "D_LF") != -1)
 								)
 							||	(P.m_ActantSemFets[i][k] == "REL") // SF=REL только мешает			 
@@ -323,7 +323,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo)
 	удаляем SF IDENT из всех кортежей. Поскольку это SF обозначает лишь то, что	слово является именем собственным.
 	Например, SF (Microsoft) = IDENT, ORGSF (Сокирко) = IDENT, ANIMПо существу IDENT ничего не обозначает. Для того чтоыбы пометить имена собственные	есть слот m_bProper.
 	*/
-	vector<string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), string("IDENT"));   
+	vector<std::string>::const_iterator It = find (m_IndexedSemFets.begin(), m_IndexedSemFets.end(), std::string("IDENT"));   
 	if (It != m_IndexedSemFets.end())
 	{
 		QWORD Num = It - m_IndexedSemFets.begin();
@@ -356,11 +356,11 @@ void CRusSemStructure::InitPOs(long ClauseNo)
     if (UnitNo != ErrUnitNo) 
      if (!pRoss->IsEmptyArticle(UnitNo))
       for (size_t i = pRoss->GetUnitStartPos(UnitNo); i<= pRoss->GetUnitEndPos(UnitNo); i++)
-	  if ( (const char*)pRoss->Fields[pRoss->GetCortegeFieldNo(i)].FieldStr ==  string("DOMAIN") )
+	  if ( (const char*)pRoss->Fields[pRoss->GetCortegeFieldNo(i)].FieldStr ==  std::string("DOMAIN") )
 	  {
   		  TCortege C  = GetCortege(pRoss,i);
 		  if (C.m_DomItemNos[0] == -1) continue;
-		  string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
+		  std::string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
 		  if (S != "общ")
 			  m_Nodes[NodeNo].m_POs.push_back(S);
 	  };
@@ -389,7 +389,7 @@ void CRusSemStructure::DeleteAllGramCodesWithoutTheGrammems (CRusSemNode& N, QWO
   N.SetGrammems(0 );
   for (long l=0; l <N.m_GramCodes.length(); l+=2)
 	  {
-		string S = N.m_GramCodes.substr(l, 2);
+		std::string S = N.m_GramCodes.substr(l, 2);
 		QWORD grams;
 		m_pData->GetRusGramTab()->GetGrammems(S.c_str(), grams);
 		if ( (grams & Grammems) == 0 )  
@@ -479,14 +479,14 @@ bool CRusSemStructure::BuildAnalyticalSupelative()
 void CRusSemStructure::CalculateBestCorporaLabel(size_t ClauseNo)
 {
   // все предметные области, которые упомянуты в узлах СемП
-  typedef pair<string,int> StringIntPair;
+  typedef pair<std::string,int> StringIntPair;
   vector<StringIntPair>	 POs;
   /*
     если  пользователь выбрал  предметную область (=/= "общ"), тогда это приравниваем
 	тому  случаю, когда одно слово с этой предметной областью вошли в предложение
   */
   if (m_PO != "общ")
-	  POs.push_back(pair<string,int>(m_PO, 1));
+	  POs.push_back(pair<std::string,int>(m_PO, 1));
 
   for (size_t NodeNo = 0;  NodeNo < m_Nodes.size(); NodeNo++)
 	if (IsInClause(NodeNo, ClauseNo))
@@ -768,13 +768,13 @@ void CRusSemStructure::PrintMemRelations() const
 
  for (size_t i=0; i<m_MemRelations.size(); i++)
  {
-	 string Label = m_MemRelations[i].m_Valency.m_RelationStr;
-	 string Q = Format ("%i %s ",  m_MemRelations[i].m_SourceNodeNo, Label.c_str());
+	 std::string Label = m_MemRelations[i].m_Valency.m_RelationStr;
+	 std::string Q = Format ("%i %s ",  m_MemRelations[i].m_SourceNodeNo, Label.c_str());
 	 {
-		 string  W = Format(" %i ", m_MemRelations[i].m_TargetNodeNo);
+		 std::string  W = Format(" %i ", m_MemRelations[i].m_TargetNodeNo);
 		 Q += W;
 	 };
-	 Q += string("\n");
+	 Q += std::string("\n");
 
 	 rml_TRACE (Q.c_str());
  };
@@ -808,7 +808,7 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 		}
 		catch (...)
 		{
-			string Mess = Format ("InitValsRussian  Failed. ClauseNo = %i ClauseVariantsCombinationNo=%i", ClauseNo, m_ClauseVariantsCombinationNo);
+			std::string Mess = Format ("InitValsRussian  Failed. ClauseNo = %i ClauseVariantsCombinationNo=%i", ClauseNo, m_ClauseVariantsCombinationNo);
 			ErrorMessage (Mess);
 			throw;
 		};

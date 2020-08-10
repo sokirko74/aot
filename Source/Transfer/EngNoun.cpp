@@ -136,7 +136,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 
 	
 
-	string article = E.m_Nodes[node_no].m_ArticleStr;
+	std::string article = E.m_Nodes[node_no].m_ArticleStr;
 	if(article == "-")
 		Res(node_no).m_Article = ZeroArticle;
 	else if(article == "a")
@@ -210,7 +210,7 @@ bool CEngSynthes::try_adj_node(int node_no)
 
 // "this", "that", "one"
 // Эти местоимения имеют множественную форму ("these", "those", "ones")
-bool CEngSynthes::lemma_is_demonstrative_pronoun (string Lemma) const
+bool CEngSynthes::lemma_is_demonstrative_pronoun (std::string Lemma) const
 {
   try
   {
@@ -219,7 +219,7 @@ bool CEngSynthes::lemma_is_demonstrative_pronoun (string Lemma) const
 
 	for(int i = 0; i < ParadigmCollection.size(); i++)
 	{
-		string AnCode = ParadigmCollection[i].GetAncode(0);
+		std::string AnCode = ParadigmCollection[i].GetAncode(0);
 
 		if( E.m_pData->GetEngGramTab()->GetPartOfSpeech(AnCode.c_str()) == ePN_ADJ) 
 		{

@@ -57,7 +57,7 @@ bool  IsHomonym(const char* str)
 }
 
 
-string GetWordForm(const string& LineStr)
+std::string GetWordForm(const std::string& LineStr)
 {
 	int ii = 0;
 	if( IsHomonym(LineStr.c_str()) )
@@ -131,12 +131,12 @@ void CPlmLine :: DeleteOb2()
 };
 
 
-bool init_flag(string& GraphDescr, const char* flag_str)
+bool init_flag(std::string& GraphDescr, const char* flag_str)
 {
 
   int i =  GraphDescr.find(flag_str);
 
-  if ( i == string::npos) return false;
+  if ( i == std::string::npos) return false;
 
   if (   (i != 0)  
 	  && ((unsigned char)GraphDescr[i-1] != ' ')
@@ -153,7 +153,7 @@ bool init_flag(string& GraphDescr, const char* flag_str)
   return true;
 };
 
-bool CPlmLine :: LoadPlmLineFromString (string LineStr, bool bStartLine, const CAgramtab* pRusGramTab) 
+bool CPlmLine :: LoadPlmLineFromString (std::string LineStr, bool bStartLine, const CAgramtab* pRusGramTab) 
 {
 	m_bToDelete = false;
 	m_bQuoteMarks = false;
@@ -205,7 +205,7 @@ bool CPlmLine :: LoadPlmLineFromString (string LineStr, bool bStartLine, const C
 		StringTokenizer tok(LineStr.c_str()+MorphSignPos," ");
 
 		if (!tok() ) return false;
-		string MorphSign  = tok.val();
+		std::string MorphSign  = tok.val();
 		if (MorphSign.length() != 3) return false;
 		m_MorphSign = MorphSign[0];
 		m_CommonGramCode = MorphSign.substr(1);
@@ -252,13 +252,13 @@ bool CPlmLine :: LoadPlmLineFromString (string LineStr, bool bStartLine, const C
 	m_bName = init_flag (m_GraphDescr, "NAM?");
 	m_bSent2 = init_flag (m_GraphDescr, "SENT_END");
 	int hyphen_occur = m_Word.find("-");
-	m_bHyphenWord = (hyphen_occur != string::npos) && ( (m_TokenType == RLE) ||(m_TokenType == LLE));
+	m_bHyphenWord = (hyphen_occur != std::string::npos) && ( (m_TokenType == RLE) ||(m_TokenType == LLE));
 
-	m_bOborot1 = (m_GraphDescr.find("EXPR1") != string::npos);
-	m_bOborot2 = (m_GraphDescr.find("EXPR2") != string::npos);
+	m_bOborot1 = (m_GraphDescr.find("EXPR1") != std::string::npos);
+	m_bOborot2 = (m_GraphDescr.find("EXPR2") != std::string::npos);
 	bool bRomanNumber = is_roman_number(m_Word.c_str(), m_Word.length());
 	
-	if ((hyphen_occur != string::npos) && (hyphen_occur!=0))
+	if ((hyphen_occur != std::string::npos) && (hyphen_occur!=0))
 	{
 		// "Павла I-го" 
 		// "I-го" - одно слово
@@ -278,10 +278,10 @@ bool CPlmLine :: LoadPlmLineFromString (string LineStr, bool bStartLine, const C
 
 
 
-string CPlmLine :: GetStr ()  const
+std::string CPlmLine :: GetStr ()  const
 {
 
-	string Result = m_Word;
+	std::string Result = m_Word;
 	if (m_bHomonym) Result = "  "+Result;
 	Result += " ";
     Result += Format (" %i %i ", m_FilePosition, m_TokenLengthInFile);
@@ -335,7 +335,7 @@ string CPlmLine :: GetStr ()  const
 	return  Result;
 };
 
-void	CPlmLine :: SetGramCodes(const string& NewGramCodes, const CAgramtab* pRusGramTab)
+void	CPlmLine :: SetGramCodes(const std::string& NewGramCodes, const CAgramtab* pRusGramTab)
 {
 	m_GramCodes = NewGramCodes;
 
@@ -376,23 +376,23 @@ bool	CPlmLine::IsFoundInMorphology() const
 };
 
 
-void	CPlmLine::SetWord(string s)
+void	CPlmLine::SetWord(std::string s)
 {
 	m_Word = s;
 	m_UpperWord = s;
 	EngRusMakeUpper(m_UpperWord);
 };
 
-const string&  CPlmLine::GetWord() const
+const std::string&  CPlmLine::GetWord() const
 {
 	return m_Word;
 };
-const string&  CPlmLine::GetUpperWord() const
+const std::string&  CPlmLine::GetUpperWord() const
 {
 	return m_UpperWord;
 };
 
-const string&  CPlmLine::GetCommonGramCode() const
+const std::string&  CPlmLine::GetCommonGramCode() const
 {
 	return m_CommonGramCode;
 };
@@ -404,14 +404,14 @@ void  CPlmLine::SetMorphUnknown()
 	m_ParadigmId = "-1";
 };
 
-void  CPlmLine::SetMorph(char MorphSign, const string& CommonAncode, const DWORD& ParadigmId)
+void  CPlmLine::SetMorph(char MorphSign, const std::string& CommonAncode, const DWORD& ParadigmId)
 {
 	m_CommonGramCode = CommonAncode.empty() ? "??" : CommonAncode;
 	m_MorphSign = MorphSign;
 	m_ParadigmId = Format("%i",ParadigmId);
 };
 
-string TokenTypeToString(const MainTokenTypeEnum & t)
+std::string TokenTypeToString(const MainTokenTypeEnum & t)
 {
 	switch (t){
 		case RLE : return "RLE";
@@ -424,7 +424,7 @@ string TokenTypeToString(const MainTokenTypeEnum & t)
 		default: assert (false);  return "";
 	};
 };
-MainTokenTypeEnum StringToTokenType(const  string& t)
+MainTokenTypeEnum StringToTokenType(const  std::string& t)
 {
 	if (t == "RLE")	return RLE;
 	if (t == "LLE")	return LLE;

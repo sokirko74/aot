@@ -270,7 +270,7 @@ size_t GetSizeInBytes() {
 }
 
 template<class T>
-inline void ReadVector(const string &FileName, vector<T> &V) {
+inline void ReadVector(const std::string &FileName, vector<T> &V) {
     V.clear();
     file_off_t sz = FileSize(FileName.c_str());
 
@@ -328,7 +328,7 @@ bool WriteVectorInner(FILE *fp, const vector<T> &V) {
 
 
 template<class T>
-inline bool WriteVector(const string &FileName, const vector<T> &V) {
+inline bool WriteVector(const std::string &FileName, const vector<T> &V) {
     FILE *fp = fopen(FileName.c_str(), "wb");
     if (!fp) {
         ErrorMessage("Cannot write vector to " + FileName);

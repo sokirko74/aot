@@ -157,14 +157,14 @@ bool CGerFormatCaller::format_for_det_adj_nomen (CGroup& G)
 
 			G.SetGrammems(G.GetGrammems() & CurrGleiche);
 		}
-		string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
+		std::string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
 	};
 		
 
 	if (bPrepositionArticle)
 		G.SetGrammems(G.GetGrammems() & PrepositionGrammems);
 
-	string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
+	std::string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
 
 	if (!check_noun_or_adj_group_grammems(G.GetGrammems()) ) return false;
 	
@@ -255,7 +255,7 @@ bool CGerFormatCaller::format_for_adj_nomen (CGroup& G)
 		G.SetGrammems(  sent[noun].GetGrammems() );
 	};
 
-	string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
+	std::string debug = GetGramTab()->GrammemsToStr(G.GetGrammems());
 
 	if (!check_noun_or_adj_group_grammems(G.GetGrammems()) ) return false;
 

@@ -25,7 +25,7 @@ const CEngPronounParadigm g_OnePronounParadigm[] =
 };
 
 
-string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form)
+std::string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form)
 {
 	for (long i=0; i < sizeof(g_OnePronounParadigm) / sizeof (CEngPronounParadigm); i++)
 		if  (   (Grammems & g_OnePronounParadigm[i].m_EngGrammems)  == g_OnePronounParadigm[i].m_EngGrammems)
@@ -38,12 +38,12 @@ string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form)
 
 
 // строит по русским граммемам набор английских граммем, содержащий только граммемы времени
-void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const string& CallingFunc)
+void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const std::string& CallingFunc)
 {
 	if (EngNode.m_MainWordNo == -1) return;
 	CEngSemWord& EngWord = EngNode.m_Words[EngNode.m_MainWordNo];
 	EngWord.SetFormGrammems( EngWord.GetFormGrammems() & ~eAllVerbForms);
-	string name = "TransferTimeGrammems called by "+ CallingFunc;
+	std::string name = "TransferTimeGrammems called by "+ CallingFunc;
 
 	if (RusNode.HasPOS (PARTICIPLE))
 	   if (RusNode.HasOneGrammem(rActiveVoice) ) // сделавший
@@ -141,7 +141,7 @@ void TransferPersonGrammems (const CSemNode& RusNode,  CEngSemWord& EngWord)
 };
 
 
-void TransferGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, string CallingFunc)
+void TransferGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, std::string CallingFunc)
 {
 	TransferTimeGrammems(RusNode, EngNode, CallingFunc);
 	if (EngNode.m_MainWordNo != -1)
@@ -203,7 +203,7 @@ void TransferGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, string Cal
 };
 
 
-long ValuePosition (string Position)
+long ValuePosition (std::string Position)
 {
 	if (Position == "begin")
 		return -4;
@@ -237,7 +237,7 @@ long ValuePosition (string Position)
 };
 
 
-string  GetDualPosition (string Position)
+std::string  GetDualPosition (std::string Position)
 {
 
 	if (Position == "begin") // это абсолютное положенние

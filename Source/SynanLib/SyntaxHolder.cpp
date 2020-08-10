@@ -64,7 +64,7 @@ bool CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 
 
 
-bool CSyntaxHolder::GetSentencesFromSynAn(string str, bool bFile)
+bool CSyntaxHolder::GetSentencesFromSynAn(std::string str, bool bFile)
 {
 	clock_t t1,t2;
 	int CountOfWords;
@@ -131,7 +131,7 @@ bool CSyntaxHolder::GetSentencesFromSynAn(string str, bool bFile)
 }
 
 
-string  CSyntaxHolder::GetClauseTypeDescr(const CClause& C, int ClauseTypeNo) const
+std::string  CSyntaxHolder::GetClauseTypeDescr(const CClause& C, int ClauseTypeNo) const
 {
 	if (ClauseTypeNo == -1)
 		return " ";

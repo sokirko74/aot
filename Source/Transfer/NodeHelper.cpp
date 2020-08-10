@@ -111,7 +111,7 @@ bool NodeHelper::node_is_adj(int node_no) const
 
 }
 
-bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const string &field, const string &value, int leaf, int leaf2) const
+bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &field, const std::string &value, int leaf, int leaf2) const
 {
 	DictTypeEnum dict_kind = (node).GetType();
 	if (dict_kind == NoneRoss) return false;
@@ -129,7 +129,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const string &field
 		if(EnglishTranslations.empty()) return false;
 		eng_termin = EnglishTranslations[0];
 		const CInnerTermin& piTermPtr = 	Thes->m_Termins[eng_termin];
-		string S;
+		std::string S;
 		long eng_termin_id = piTermPtr.m_TerminId;
 		S = Format("%i",eng_termin_id);
 		unit_no = Dict->GetRoss()->LocateUnit(S.c_str(), 1);
@@ -146,7 +146,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const string &field
 
 
 bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, WORD unit_no, 
-	const string &field, const string &value, int leaf, int leaf2) const
+	const std::string &field, const std::string &value, int leaf, int leaf2) const
 {
 	if(unit_no == ErrUnitNo) return false;
 	if (RossHolder == 0) return false;
@@ -179,13 +179,13 @@ bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, WORD unit_no,
 
 
 
-void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, WORD unit_no, const string &field, 
+void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, WORD unit_no, const std::string &field, 
 				 StringVector &res, int max_items) const
 {
 	vector<TCortege> vec;
 	E.GetRossHolder(dict_kind)->GetFieldValues(field.c_str(), unit_no, vec);
 	for(int i = 0; i < vec.size(); i++){
-		string value;
+		std::string value;
 		for(int j = 0; vec[i].m_DomItemNos[j] != -1; j++){
 			if(j || j > max_items) break;
 			value += (const char*)E.GetRoss(dict_kind)->GetDomItemStr(vec[i].m_DomItemNos[j]);

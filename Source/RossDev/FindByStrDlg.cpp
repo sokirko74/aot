@@ -98,7 +98,7 @@ try{
 		}
 		catch (...)
 		{
-			string Mess = string ("Errors in article ") + pRossDoc->GetRoss()->GetEntryStr(UnitNo) ;
+			std::string Mess = std::string ("Errors in article ") + pRossDoc->GetRoss()->GetEntryStr(UnitNo) ;
 			AfxMessageBox (Mess.c_str());
 		};
 

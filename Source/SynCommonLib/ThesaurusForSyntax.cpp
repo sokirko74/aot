@@ -59,12 +59,12 @@ bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const C
 		{
 			try 
 			{
-				string s_accost = "PROF";
+				std::string s_accost = "PROF";
 				vector<int> Res;
 				Thes->QueryLowerTermins(s_accost.c_str(), morphRussian, Res);
 				for (int i=0; i <Res.size(); i++)
 				{
-					string TerminStr =  Thes->m_Termins[Res[i]].m_TerminStr;
+					std::string TerminStr =  Thes->m_Termins[Res[i]].m_TerminStr;
 					RmlMakeLower(	TerminStr, GetOpt()->m_Language);                    
 					p_vectorAccost.push_back(TerminStr);
 				};
@@ -229,7 +229,7 @@ bool CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType
 	
 
 	size_t ModelNo = 0;
-	string Name = Thes.m_Name;
+	std::string Name = Thes.m_Name;
 	try {
 		vector<CGroups>& Models = m_AllThesModels[eThesType];
 

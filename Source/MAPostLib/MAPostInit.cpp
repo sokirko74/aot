@@ -24,7 +24,7 @@ CMAPost::CMAPost()
 	m_LogFileName = "";
 	/*try {
 		
-		string log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
+		std::string log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
 		m_LogFileName = log_path + "mapost.log";
 	}
 	catch (...) {
@@ -48,7 +48,7 @@ CMAPost::~CMAPost()
 
 
 
-CFixedColloc::CFixedColloc(string LemmaStr,	long MainWordNo,	string InterfaceString, const CAgramtab* m_piRusGramTab)
+CFixedColloc::CFixedColloc(std::string LemmaStr,	long MainWordNo,	std::string InterfaceString, const CAgramtab* m_piRusGramTab)
 {
 		m_LemmaStr = LemmaStr;
 		m_MainWordNo = MainWordNo;
@@ -57,12 +57,12 @@ CFixedColloc::CFixedColloc(string LemmaStr,	long MainWordNo,	string InterfaceStr
 		while (tok()) 
 		{
 		    CLemmaAndPOS L;
-			string Item = tok.val();
+			std::string Item = tok.val();
 			int i = Item.find("[");
-			if (i != string::npos )
+			if (i != std::string::npos )
 			{
 				int k = Item.find("]");
-				string POS = Item.substr(i+1, k - i - 1);
+				std::string POS = Item.substr(i+1, k - i - 1);
 				QWORD dummy;
 				m_piRusGramTab->ProcessPOSAndGrammems(POS.c_str(),L.m_POS, dummy);
 				L.m_Lemma = Item.substr(0, i);
@@ -83,7 +83,7 @@ bool CMAPost::ReadCollocs()
 	try
 		{
 		
-			string FileName =  GetRegistryString("Software\\Dialing\\Mapost\\Collocs");
+			std::string FileName =  GetRegistryString("Software\\Dialing\\Mapost\\Collocs");
 			FILE* fp = fopen(FileName.c_str(), "rb");
 			if (!fp)
 			{
@@ -93,14 +93,14 @@ bool CMAPost::ReadCollocs()
 			char s[1000];
 			while(fgets(s, 1000, fp))
 			{
-				string		   LemmaStr;;
+				std::string		   LemmaStr;;
 				int			   MainWordNo;
-				string		   InterfaceString;
+				std::string		   InterfaceString;
 				StringTokenizer tok(s,"#");
 				int i =0;
 				while (tok())
 				{
-					string q = tok.val();
+					std::string q = tok.val();
 					Trim(q);
 					if ( i ==0)
 						LemmaStr = q;
@@ -144,11 +144,11 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 			 || !m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (POS, Grammems, m_DURNOVOGramCode)
 		   )
 		{
-			ErrorMessage ("MAPOST", "Cannot parse string for НЕУБИВАЙМЕНЯ");
+			ErrorMessage ("MAPOST", "Cannot parse std::string for НЕУБИВАЙМЕНЯ");
 			return false;
 		};
 	    
-        string TrigramConfig = GetRegistryString("TrigramConfig");
+        std::string TrigramConfig = GetRegistryString("TrigramConfig");
         if (!TrigramConfig.empty())
         {
             m_bUseTrigrams = true;    

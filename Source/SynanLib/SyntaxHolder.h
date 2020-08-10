@@ -17,7 +17,7 @@ public:
 	~CSyntaxHolder();
 
 	bool LoadSyntax(MorphLanguageEnum langua);
-	bool GetSentencesFromSynAn(string str, bool bFile);
+	bool GetSentencesFromSynAn(std::string str, bool bFile);
 	
-	string  GetClauseTypeDescr(const CClause& C, int ClauseTypeNo) const;
+	std::string  GetClauseTypeDescr(const CClause& C, int ClauseTypeNo) const;
 };

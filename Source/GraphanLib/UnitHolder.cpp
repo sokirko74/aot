@@ -298,12 +298,12 @@ const char*	CUnitHolder::GetUppercaseToken(DWORD LineNo) const
 	return GetUnitUpperBufferStart() + Offset; 
 };
 
-string  CUnitHolder::GetToken(DWORD LineNo) const 
+std::string  CUnitHolder::GetToken(DWORD LineNo) const 
 {
 	char s[CriticalTokenLength+1];
 	strncpy (s,GetUnits()[LineNo].GetToken(), GetUnits()[LineNo].GetTokenLength());
 	s[GetUnits()[LineNo].GetTokenLength()] = 0;
-	return string(s);
+	return std::string(s);
 };
 
 	
@@ -342,7 +342,7 @@ void	CUnitHolder::InitTokenBuffer()
 
 
 
-bool	CUnitHolder::InitInputBuffer(const string& S)
+bool	CUnitHolder::InitInputBuffer(const std::string& S)
 {
 	m_InputBuffer.clear();
 	// copy with terminated null 
@@ -500,7 +500,7 @@ void	CUnitHolder::MakeOneWord(size_t StartLineNo, size_t EndLineNo)
 	if (StartLineNo+2 < m_Units.size())
 	{
 		const char* check = GetUppercaseToken(StartLineNo+2);
-		string s = GetToken(StartLineNo+2);
+		std::string s = GetToken(StartLineNo+2);
 		RmlMakeUpper(s, m_Language);
 		assert(check == s);
 	};

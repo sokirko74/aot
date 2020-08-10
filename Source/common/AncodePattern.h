@@ -9,13 +9,13 @@ class CAncodePattern
 {
     const	CAgramtab* m_pGramTab;
     void    ResetFlags();
-	string			m_GramCodes;
+	std::string			m_GramCodes;
 
 public:
 	QWORD			m_TypeGrammems;
 	QWORD			m_iGrammems;
 	char			m_LemSign;
-	string			m_CommonGramCode;
+	std::string			m_CommonGramCode;
 	poses_mask_t    m_iPoses;
     bool            m_bUnkGramcodes;
 			
@@ -27,14 +27,14 @@ public:
 	void	CopyAncodePattern(const CAncodePattern& X);
 	bool	HasGrammem(BYTE gram) const;
 	bool	HasPos(BYTE pos) const;
-	string	GetGrammemsByAncodes() const;
+	std::string	GetGrammemsByAncodes() const;
 	bool	ModifyGrammems(QWORD Grammems, poses_mask_t Poses=0xffffffff);
 	bool	InitAncodePattern();
     void    SetMorphUnknown();
     bool    DeleteAncodesByGrammemIfCan(BYTE Grammem);
-    string	GetPartOfSpeechStr() const;
-    const string& GetGramCodes() const;
-    void  SetGramCodes(const string&);
+    std::string	GetPartOfSpeechStr() const;
+    const std::string& GetGramCodes() const;
+    void  SetGramCodes(const std::string&);
     void  SetGramCodes(const char*);
 
 };

@@ -133,11 +133,11 @@ public:
 	void CopyFrom(const CGLRParser& C);
 	//bool ParseSymbol(size_t SymbolNo);
 	bool ParseSymbol(const set<CInputSymbol>& Symbols);
-	string GetDotStringOfStack(bool bShowStates) const;
+	std::string GetDotStringOfStack(bool bShowStates) const;
 	void DumpParser(bool bShowStates) const;
 	bool	HasGrammarRootAtStart() const;
-	string GetDotStringOfSymbolNode(size_t SymbolNodeNo) const;  
-	string GetDotStringOfStackRecursive(size_t SymbolNodeNo) const;
+	std::string GetDotStringOfSymbolNode(size_t SymbolNodeNo) const;  
+	std::string GetDotStringOfStackRecursive(size_t SymbolNodeNo) const;
 	void	GetParseNodesRecursiveWithoutSyntaxAmbiguity(size_t SymbolNodeNo, vector<size_t>& Nodes, bool bShouldBeLeaf) const;
 	void	GetParseNodesRecursive(size_t SymbolNodeNo, vector< set<size_t> >& Nodes, bool bShouldBeLeaf, size_t  RootInputStart) const;
 	size_t	GetMainWordRecursive(size_t SymbolNodeNo)  const;

@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	if (argc != 2)
 		PrintUsage();
 		
-	string Lng = argv[1];
+	std::string Lng = argv[1];
 
 	if (Lng == "Russian")
 	{

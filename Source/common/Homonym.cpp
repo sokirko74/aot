@@ -21,7 +21,7 @@ CHomonym::CHomonym(const	CAgramtab* pGramTab):CAncodePattern(pGramTab)
 }
 
 
-void	CHomonym::SetLemma(string Lemma)
+void	CHomonym::SetLemma(std::string Lemma)
 {
 	GerMakeUpper(Lemma);
 	m_strLemma = Lemma;
@@ -87,7 +87,7 @@ bool	CHomonym::IsLeftNounModifier() const
 };
 
 
-string	CHomonym::GetGrammemsStr() const
+std::string	CHomonym::GetGrammemsStr() const
 {
 	return GetGrammemsByAncodes();
 };

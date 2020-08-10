@@ -44,7 +44,7 @@ bool CThesaurus::ReadThesaurusFromDisk()
 		return false;
 	};
 	
-	string OborotsFileName = (m_MainLanguage == morphGerman) ?  
+	std::string OborotsFileName = (m_MainLanguage == morphGerman) ?  
 				m_Directory+"/StatThes/GerOborots.txt" : m_Directory+"/StatThes/RusOborots.txt";
 	if (!LoadOborots (OborotsFileName))
 	{
@@ -101,11 +101,11 @@ bool CThesaurus::ReadRelationsFromDisk()
 	return true;
 }
 
-bool CThesaurus::SetDatabase(string DatabaseName)
+bool CThesaurus::SetDatabase(std::string DatabaseName)
 {
 	m_bDontLoad = false;
 	m_Name = DatabaseName;
-	string KeyName = "Software\\Dialing\\"+m_Name+"\\DictPath";
+	std::string KeyName = "Software\\Dialing\\"+m_Name+"\\DictPath";
 	try {
 	  m_Directory = GetRegistryString(KeyName);
 	}
@@ -116,10 +116,10 @@ bool CThesaurus::SetDatabase(string DatabaseName)
 	};
 
 	try {
-	  string KeyName = "Software\\Dialing\\Thesauri\\IgnoreThesauri";
+	  std::string KeyName = "Software\\Dialing\\Thesauri\\IgnoreThesauri";
 	  if (CanGetRegistryString(KeyName))
 	  {
-		  string Value =  GetRegistryString(KeyName);
+		  std::string Value =  GetRegistryString(KeyName);
 		  m_bDontLoad =   (Value == "yes");
 	  }
 	}
@@ -189,7 +189,7 @@ bool CThesaurus::GetTree(int ConceptNo, vector<long>& TreeConcepts,  vector<long
 };
 
 
-bool CThesaurus::IsA(DWORD TextEntryId, string ConceptStr) const
+bool CThesaurus::IsA(DWORD TextEntryId, std::string ConceptStr) const
 {
 	long ConceptNo = GetConceptNoByConceptStr(ConceptStr.c_str());	
 	if (ConceptNo == -1) return   false;
@@ -255,7 +255,7 @@ void CThesaurus::QueryEnglishTranslations(DWORD TextEntryId, vector<int>& Curren
 				if (IsEnglishModel(m_Models[m_Termins[k].m_ModelNo]))
 				CurrentEnglishTermins.push_back(k);
 
-				string s = m_Termins[k].m_TerminStr;	
+				std::string s = m_Termins[k].m_TerminStr;	
 				long j=0;
 				for (; j < s.length(); j++)
 					if (		!is_english_alpha((BYTE)s[j])
@@ -277,7 +277,7 @@ void CThesaurus::QueryEnglishTranslations(DWORD TextEntryId, vector<int>& Curren
 
 
 
-int CThesaurus::GetTerminIdBySingleWord(string WordStr) const
+int CThesaurus::GetTerminIdBySingleWord(std::string WordStr) const
 {
 	CInnerSynItem I;
     I.m_ItemStr = WordStr;
@@ -375,7 +375,7 @@ void  CThesaurus::QueryHigherTermins(UINT TextEntryId, vector<int>& CurrentHighe
 }
 
 
-DWORD CThesaurus::QueryTerminItem(const string& ItemStr, vector<int>& CurrentTerminItems) const
+DWORD CThesaurus::QueryTerminItem(const std::string& ItemStr, vector<int>& CurrentTerminItems) const
 {
 	CurrentTerminItems.clear();
 	CInnerSynItem I;
@@ -390,7 +390,7 @@ DWORD CThesaurus::QueryTerminItem(const string& ItemStr, vector<int>& CurrentTer
 
 
 
-void CThesaurus::QueryLowerTermins(const string& ConceptStr, UINT Language, vector<int>& CurrentLowerTermins) const
+void CThesaurus::QueryLowerTermins(const std::string& ConceptStr, UINT Language, vector<int>& CurrentLowerTermins) const
 {
 	CurrentLowerTermins.clear();
 	long ConceptNo = GetConceptNoByConceptStr(ConceptStr);	
@@ -418,7 +418,7 @@ void CThesaurus::QueryLowerTermins(const string& ConceptStr, UINT Language, vect
 }
 
 
-int CThesaurus::FindAbbr(const string& str) const
+int CThesaurus::FindAbbr(const std::string& str) const
 {
 	String2Int::const_iterator It = m_AbbrForms2TerminNo.find(str);
 	if (It != m_AbbrForms2TerminNo.end())
@@ -428,7 +428,7 @@ int CThesaurus::FindAbbr(const string& str) const
 }
 
 
-bool CThesaurus::LoadSynItems(string FileName)
+bool CThesaurus::LoadSynItems(std::string FileName)
 {
 	m_SynItems.clear();
 	FILE* fp = fopen (FileName.c_str(), "r");
@@ -436,7 +436,7 @@ bool CThesaurus::LoadSynItems(string FileName)
 	char buff[2000];
 	if ( !fgets (buff, 2000, fp) )
 		return false;
-	string Header = buff;
+	std::string Header = buff;
 	Trim(Header);
 	if (Header != "TextEntryId;LemmaPos;LemmaStr;IsLemma;IsOb1;IsOb2;OborotId;UpLw;UpUp;IsPlural;")
 	{
@@ -467,7 +467,7 @@ bool CThesaurus::LoadSynItems(string FileName)
 			   s++;
 			   
 			};
-			string Field =  s;
+			std::string Field =  s;
 			if (i==0)
 				TerminId = atoi(Field.c_str());
 	            else

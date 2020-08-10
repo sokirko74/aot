@@ -1,6 +1,6 @@
 #include "rus_numerals.h"
 
-string IntToStr (double i) 
+std::string IntToStr (double i) 
 {
 	if (i == 1.5) return "1.5";
 	char s[55];
@@ -14,7 +14,7 @@ string IntToStr (double i)
 	return s;
 };
 
-string FindByNumber(QWORD Number)
+std::string FindByNumber(QWORD Number)
 {
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
 		if( Number == NumeralToNumber[i].m_Number)
@@ -22,7 +22,7 @@ string FindByNumber(QWORD Number)
 	return "";
 };
 
-string FindByNumber(QWORD Number, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
+std::string FindByNumber(QWORD Number, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
 {
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
 		if( Number == NumeralToNumber[i].m_Number)
@@ -31,7 +31,7 @@ string FindByNumber(QWORD Number, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes,
 	return "";
 };
 
-int IsAdverbRule(const string& Lemma)
+int IsAdverbRule(const std::string& Lemma)
 {
 	
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
@@ -42,7 +42,7 @@ int IsAdverbRule(const string& Lemma)
 };
 
 
-double GetCardinalNumeral(const string& word)
+double GetCardinalNumeral(const std::string& word)
 {
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
 		if( word == NumeralToNumber[i].m_Cardinal )
@@ -50,7 +50,7 @@ double GetCardinalNumeral(const string& word)
 	return -1;
 };
 
-QWORD GetOrdinalNumeral(const string& word)
+QWORD GetOrdinalNumeral(const std::string& word)
 {
 	for(int i = 0 ; i < NumeralToNumberCount; i++ )
 		if( word == NumeralToNumber[i].m_Ordinal )
@@ -58,7 +58,7 @@ QWORD GetOrdinalNumeral(const string& word)
 	return -1;
 };
 
-QWORD GetNounNumeral(const string& word)
+QWORD GetNounNumeral(const std::string& word)
 {
 	for(int i = 0 ; i < NumeralToNumberCount; i++ )
         if( word == NumeralToNumber[i].m_CoollectiveNumber )
@@ -66,7 +66,7 @@ QWORD GetNounNumeral(const string& word)
 	return -1;
 };
 
-string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
+std::string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
 {	 
 	if (x == 0) return IsOrdinal ? "НУЛЕВОЙ" : "НОЛЬ";
 	if (x < 20)
@@ -102,7 +102,7 @@ string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes
 	for(int p=2; p<6; p++)
 	if (x < 1000*pow(1000,p)) {
 		QWORD Q = pow(1000,p);
-		string m = FindByNumber(Q);
+		std::string m = FindByNumber(Q);
 		if (x % Q == 0)
 			if ( x % (10*Q) == Q ) return spellout_number_ru(x / Q , IsOrdinal*10) + 
 				(IsOrdinal==0 ? " " + m : m + "НЫЙ");

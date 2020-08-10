@@ -55,7 +55,7 @@ void CSynPlmLine :: SetGrammems (QWORD value)
 	m_Grammems = value;
 };
 
-void CSynPlmLine :: SetGramcodes (string str) 
+void CSynPlmLine :: SetGramcodes (std::string str) 
 {
 	m_gramcodes =  str;
 };

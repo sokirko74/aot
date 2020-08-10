@@ -1,11 +1,11 @@
 #if !defined(eng_primitives)
 	#define eng_primitives
 
-string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form);
-void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const string& CallingFunc);
+std::string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form);
+void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const std::string& CallingFunc);
 void TransferNumberGrammems (const CSemNode& RusNode, CEngSemWord& EngWord);
 void TransferPersonGrammems (const CSemNode& RusNode,  CEngSemWord& EngWord);
-void TransferGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, string CallingFunc);
+void TransferGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, std::string CallingFunc);
 bool is_past(EngVerbTenseEnum t);
 bool is_future(EngVerbTenseEnum t);
 bool is_present(EngVerbTenseEnum t);

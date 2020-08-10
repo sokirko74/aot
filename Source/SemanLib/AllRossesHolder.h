@@ -36,10 +36,10 @@ protected:
  	 CRossHolder*		GetRossHolder (DictTypeEnum Type);
   	 const CRossHolder*	GetRossHolder (DictTypeEnum Type)  const;
   	 DictTypeEnum		GetTypeByRossHolder (const CRossHolder* pHolder)  const;
-	 DictTypeEnum		GetTypeByStr (string DictName);
+	 DictTypeEnum		GetTypeByStr (std::string DictName);
 	 CDictionary*		GetRoss (DictTypeEnum Type);
-	 string				GetRossPath(DictTypeEnum RossId)  const;
-	 DictTypeEnum		GetRegisteredRossId(string FileName)  const;
+	 std::string				GetRossPath(DictTypeEnum RossId)  const;
+	 DictTypeEnum		GetRegisteredRossId(std::string FileName)  const;
 
 	 bool				InitHierarchies();
 	 virtual void		Initialize();

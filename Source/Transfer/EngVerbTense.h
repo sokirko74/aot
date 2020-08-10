@@ -26,10 +26,10 @@ class CEngVerbTense : public CGrammemsAnalyzer{
 	int			  m_DirObjNodeNo;
 
 
-	string rel_operators;
+	std::string rel_operators;
 
 
-	string	post_verb_advs,
+	std::string	post_verb_advs,
 		dir_obj_postfix;
 
 	SynthesResult result;
@@ -62,7 +62,7 @@ public:
 
 private:
 	void make_string();
-	void CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, string& AuxVerbs, UINT& MainVerbGrammems) const;
+	void CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, std::string& AuxVerbs, UINT& MainVerbGrammems) const;
 
 	bool		is_be_verb() const;
 	bool		has_not();

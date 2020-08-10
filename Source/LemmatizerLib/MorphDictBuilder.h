@@ -43,7 +43,7 @@ public:
 	bool	CreateAutomat(const MorphoWizard& Wizard);
 	bool	GenerateLemmas(const MorphoWizard& Wizard);
 	bool	GenerateUnitedFlexModels(const MorphoWizard& Wizard);
-	bool	GenPredictIdx(const MorphoWizard& wizard, int PostfixLength, int MinFreq, string path);
+	bool	GenPredictIdx(const MorphoWizard& wizard, int PostfixLength, int MinFreq, std::string path);
 };
 
 

@@ -14,7 +14,7 @@ void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const 
         const CXmlToken &W = Tokens[i];
         if (!W.m_Annots.empty() && !W.m_Annots[0].m_Lemma.empty()) {
             CTag T;
-            string gr = W.m_Annots[0].m_GrammemsStr;
+            std::string gr = W.m_Annots[0].m_GrammemsStr;
             for (size_t i = 0; i < gr.size(); i++)
                 if (gr[i] == '|')
                     gr[i] = ' ';
@@ -22,7 +22,7 @@ void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const 
             gramTab->ProcessPOSAndGrammems(gr.c_str(), T.m_Pos, T.m_Grammems);
             T.m_Lemmas.push_back(W.m_Annots[0].m_Lemma);
             T = tagSet.GetBestSuitedTag(T);
-            string TagStr;
+            std::string TagStr;
             if (T.IsEmptyTag()) {
 
                 if (T.m_Pos == gramTab->GetPartOfSpeechesCount())
@@ -40,7 +40,7 @@ void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const 
 
             outputStream << W.m_WordStr << " " << TagStr << " ";
         } else if (W.m_Annots.empty() || W.m_Annots[0].m_Lemma.empty()) {
-            string pos = "UNK";
+            std::string pos = "UNK";
 
             if (isdigit((BYTE) pos[0]))
                 pos = "пїЅпїЅ";
@@ -77,7 +77,7 @@ bool CookSentence(const CTrigramModel& M, istream& inputStream, ostream& outputS
 
 bool Disambiguate(const CTrigramModel &M, istream& inputStream, ostream& outputStream) {
     size_t TokensCount = 0;
-    string Sent;
+    std::string Sent;
     try {
         CRusCorpXmlFile XmlFile;
         size_t SentNo = 0;
@@ -116,7 +116,7 @@ int main(int argc, const char *argv[]) {
     initArgParser(argc, argv, args);
 
     CTrigramModel M;
-    string Action = args.Retrieve("action");
+    std::string Action = args.Retrieve("action");
     if (Action != "cook" && Action != "disamb") {
         std::cerr << "action  can be cook disamb\n";
         return 1;
@@ -137,7 +137,7 @@ int main(int argc, const char *argv[]) {
         }
     }
     bool bRes = true;
-    vector<string> inputFiles = args.GetInputFiles();
+    vector<std::string> inputFiles = args.GetInputFiles();
 
     for (size_t i = 0; bRes && i < inputFiles.size(); i++) {
         if (inputFiles.size() > 1)

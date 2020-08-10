@@ -38,9 +38,9 @@ public:
 		return strcmp((*this)[0], term[0]) < 0;
 	}
 
-	string GetTerminStr() const
+	std::string GetTerminStr() const
 	{
-		string res;
+		std::string res;
 		for(int i = 0 ; i < size() ; i++)
 		{
 			res += (*this)[i];
@@ -92,7 +92,7 @@ protected:
 
 
 
-inline EThesType GetThesTypeByStr(const string& strDBName)
+inline EThesType GetThesTypeByStr(const std::string& strDBName)
 {
 	if (strDBName == "RML_THES_LOC") return LocThes;
 	if (strDBName == "RML_THES_FIN") return FinThes;
@@ -115,7 +115,7 @@ public:
 	virtual ~CThesaurusForSyntax();
 
 	CThesaurus* LoadThesaurus(const char* ThesName) const;
-	bool LoadThesaurus_mt(string tn, vector<CThesaurus*>* ts);
+	bool LoadThesaurus_mt(std::string tn, vector<CThesaurus*>* ts);
 
 	bool ReadThesaurusForSyntax(const char* ThesName, const CThesaurus* Thes, StringVector& p_vectorAccost);
 	bool ReadTermins(const CThesaurus* piThes, EThesType eThesType);

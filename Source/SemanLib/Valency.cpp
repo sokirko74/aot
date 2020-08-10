@@ -24,7 +24,7 @@ CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossH
 {
 	m_Direction  =  (C.m_DomItemNos[1] ==	MainWordVarNo) ? C_A : A_C;
 	m_RelationStr	= Ross->GetDomItemStrInner(C.m_DomItemNos[0]);
-	string S = Ross->GetDomItemStrInner(C.m_DomItemNos[(m_Direction == A_C) ?	1 :	2]);
+	std::string S = Ross->GetDomItemStrInner(C.m_DomItemNos[(m_Direction == A_C) ?	1 :	2]);
 	assert ( S.length() >	1 );
 	assert(isdigit ((unsigned	char)S[1]) );
 	m_LeafId = S[1] -	'0';
@@ -43,7 +43,7 @@ CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossH
 	m_RelationId = -1;
 };
 
-CValency::CValency  (string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross, BYTE LeafId, BYTE BracketLeafId, WORD UnitNo)
+CValency::CValency  (std::string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross, BYTE LeafId, BYTE BracketLeafId, WORD UnitNo)
 {
 	m_RelationStr = RelationStr;
 	m_Direction = Direction;

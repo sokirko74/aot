@@ -12,7 +12,7 @@
 
 class CTempArticle 
 {
-	string					m_ArticleStr;
+	std::string					m_ArticleStr;
 public:
 	char					m_EntryStr[EntryStrSize];
 	BYTE					m_MeanNum;
@@ -22,7 +22,7 @@ public:
 	CDictionary*				m_pRoss;
 	
 	vector<TCortege10>		m_Corteges;
-	string				m_LastError;
+	std::string				m_LastError;
 	int						m_ErrorLine;
 	CTempArticle();
 	
@@ -31,7 +31,7 @@ public:
 	const TCortege10&	GetRossCortege (size_t i) const;
 	size_t				GetCortegesSize () const;
 	const TCortege10&	GetCortege (size_t i)  const;
-	string		ConstructFldName (BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
+	std::string		ConstructFldName (BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
 	bool		IsPartOf(const CTempArticle *Article, bool UseWildCards) const;
 	int			IntersectByFields(const CTempArticle *Article) const;
 	bool		AddArticle(const CTempArticle *Article);
@@ -45,7 +45,7 @@ public:
 	bool		WriteToDictionary();
 	bool		IsModified() const;
 	void		ReadFromDictionary(WORD UnitNo, bool VisualOrder, bool ReadOnly);
-	const string& GetArticleStr();
+	const std::string& GetArticleStr();
 	
 };
 

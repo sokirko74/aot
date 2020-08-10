@@ -44,7 +44,7 @@ struct CParadigmInfo : public CLemmaInfo
 };
 
 
-typedef multimap<string, CParadigmInfo>		LemmaMap;
+typedef multimap<std::string, CParadigmInfo>		LemmaMap;
 typedef LemmaMap::iterator lemma_iterator_t;
 typedef LemmaMap::const_iterator const_lemma_iterator_t;
 
@@ -54,17 +54,17 @@ typedef LemmaMap::const_iterator const_lemma_iterator_t;
 struct CPredictSuffix
 {
 	WORD	m_FlexiaModelNo;
-	string	m_Suffix;
+	std::string	m_Suffix;
 
 	//  grammatical code of the lemma
-	string	m_SourceLemmaAncode;
+	std::string	m_SourceLemmaAncode;
 
 	//  common gramcode of the lemma
-	string	m_SourceCommonAncode;
+	std::string	m_SourceCommonAncode;
 
-	string	m_SourceLemma;
+	std::string	m_SourceLemma;
 	mutable size_t	m_Frequence;	
-	string  m_PrefixSetStr;
+	std::string  m_PrefixSetStr;
 
 	bool operator  < (const  CPredictSuffix& X) const 
 	{
@@ -87,13 +87,13 @@ struct CPredictSuffix
 //----------------------------------------------------------------------------
 struct CMorphSession
 {
-	string		m_UserName;
-	string		m_SessionStart;
-	string		m_LastSessionSave;
+	std::string		m_UserName;
+	std::string		m_SessionStart;
+	std::string		m_LastSessionSave;
 
 	bool operator  == (const  CMorphSession& X) const;
-	bool		ReadFromString(const string& s);
-	string		ToString() const;
+	bool		ReadFromString(const std::string& s);
+	std::string		ToString() const;
 	void		SetEmpty();
 	bool		IsEmpty() const;
 };
@@ -108,16 +108,16 @@ typedef set<CPredictSuffix> predict_container_t;
 
 struct CDumpParadigm 
 {
-	string			m_TypeGrammemsStr;
-	string			m_PrefixesStr;
-	string			m_SlfStr;
-	string			m_AuthorStr;
+	std::string			m_TypeGrammemsStr;
+	std::string			m_PrefixesStr;
+	std::string			m_SlfStr;
+	std::string			m_AuthorStr;
 	CMorphSession	m_Session;
 	int				m_FirstSlfLineNo;
 
 
 	void	SetEmpty();
-	bool	ReadFromFile(FILE* fp, int& line_no, bool& bError, string& Errors);
+	bool	ReadFromFile(FILE* fp, int& line_no, bool& bError, std::string& Errors);
 	bool	SaveToFile(FILE* fp) const;
 	bool	SaveHeaderToFile(FILE* fp) const;
 };
@@ -150,7 +150,7 @@ public:
 	{
 		const CAgramtab*			m_pGramTab;
 		void init(const CAgramtab*			pGramTab);
-		bool operator()(const string &s1, const string &s2)const ;
+		bool operator()(const std::string &s1, const std::string &s2)const ;
 	};
 	AncodeLess ancode_less;
 
@@ -169,9 +169,9 @@ public:
 
 
 	// the keys from .mwz file (project file)
-	map<string, string>		m_ProjectFileKeys;
+	map<std::string, std::string>		m_ProjectFileKeys;
 
-	string											m_CurrentNewLemma;
+	std::string											m_CurrentNewLemma;
 	vector< predict_container_t::const_iterator>				m_CurrentPredictedParadigms;
 
 	
@@ -184,8 +184,8 @@ public:
 
 	const CAgramtab*			m_pGramTab;
 	bool						m_ReadOnly;
-	string						m_LanguageStr;
-	string						m_MrdPath;
+	std::string						m_LanguageStr;
+	std::string						m_MrdPath;
 	bool						m_bFullTrace;
 	
 	MorphoWizard();
@@ -195,15 +195,15 @@ public:
 	bool	load_wizard(const char *path,const char *user_name, bool bCreatePrediction= true);
 	void	load_mrd(bool guest, bool bCreatePrediction);
 	bool	load_static(MorphLanguageEnum langua);
-	void	load_string_vector(const string &name, StringVector &res);
-	string&	get_value(const string &key);
-	void	log(const string &messg);
-	void	log(const string &lemm, const CFlexiaModel &p, bool is_added);
+	void	load_string_vector(const std::string &name, StringVector &res);
+	std::string&	get_value(const std::string &key);
+	void	log(const std::string &messg);
+	void	log(const std::string &lemm, const CFlexiaModel &p, bool is_added);
 	bool	is_changed(){return m_bWasChanged;}
 	void	save_mrd();
-	string	get_lock_file_name()   const;
-	string	get_log_file_name()   const;
-	string	get_predict_src_file_path(int mode) const;
+	std::string	get_lock_file_name()   const;
+	std::string	get_log_file_name()   const;
+	std::string	get_predict_src_file_path(int mode) const;
 	void	MakeReadOnly();
 	void	CreatePredictIndex();
 	void	pack();
@@ -211,17 +211,17 @@ public:
 	size_t	del_dup_lemm();
 
 	//===============  simple  primitives for ancode  and lemma iterator =========
-	string					get_pos_string	(const lemma_iterator_t it) const ;
-	string					get_pos_string	(const string &code) const;
-	string					get_lemm_string	(const_lemma_iterator_t it)   const;
-	string					get_lemm_string_with_accents	(const_lemma_iterator_t it)   const;
-	string					get_base_string	(const_lemma_iterator_t it)   const;
-	string					get_grammem_string  (const string &code) const;
-	string					get_grammem_string  (lemma_iterator_t it)  const;
+	std::string					get_pos_string	(const lemma_iterator_t it) const ;
+	std::string					get_pos_string	(const std::string &code) const;
+	std::string					get_lemm_string	(const_lemma_iterator_t it)   const;
+	std::string					get_lemm_string_with_accents	(const_lemma_iterator_t it)   const;
+	std::string					get_base_string	(const_lemma_iterator_t it)   const;
+	std::string					get_grammem_string  (const std::string &code) const;
+	std::string					get_grammem_string  (lemma_iterator_t it)  const;
 	QWORD					get_all_lemma_grammems	(const_lemma_iterator_t it) const;
-	string					get_common_grammems_string(const_lemma_iterator_t it) const;
-	string					get_prefix_set(const_lemma_iterator_t it) const;
-	string					get_pos_string_and_grammems	(const string &code) const;
+	std::string					get_common_grammems_string(const_lemma_iterator_t it) const;
+	std::string					get_prefix_set(const_lemma_iterator_t it) const;
+	std::string					get_pos_string_and_grammems	(const std::string &code) const;
 	const CMorphSession&	get_session	(int SessionNo) const;
 	bool					IsGerman () const  { return m_Language == morphGerman;};
 	const StringVector&	get_poses(){return m_PosesList;}
@@ -229,11 +229,11 @@ public:
 	const StringVector&	get_type_grammems(){return m_TypeGrammemsList;}
 
 	//  ===========   find procedures ================
-	void find_lemm_by_grammem(const string &pos_and_grammems, vector<lemma_iterator_t> &res);
-	void find_lemm(string lemm, bool bCheckLemmaPrefix, vector<lemma_iterator_t> &res);
-	void find_lemm_by_user(string username, vector<lemma_iterator_t> &res);
-	void find_wordforms(string lemm, vector<lemma_iterator_t> &res);
-	void find_ancodes(const string &ancode, vector<lemma_iterator_t> &res);
+	void find_lemm_by_grammem(const std::string &pos_and_grammems, vector<lemma_iterator_t> &res);
+	void find_lemm(std::string lemm, bool bCheckLemmaPrefix, vector<lemma_iterator_t> &res);
+	void find_lemm_by_user(std::string username, vector<lemma_iterator_t> &res);
+	void find_wordforms(std::string lemm, vector<lemma_iterator_t> &res);
+	void find_ancodes(const std::string &ancode, vector<lemma_iterator_t> &res);
 	void find_lemm_by_prdno(WORD no, vector<lemma_iterator_t> &res);
 	void find_lemm_by_accent_model(int no, vector<lemma_iterator_t> &res);
 	
@@ -241,25 +241,25 @@ public:
 
 	//============ Main functions for editing dictionary ====================
 	// Mrd -> Slf (Converting from dictionary to text representation)
-	string	mrd_to_slf(const string &lemm, const CFlexiaModel&p, WORD AccentModelNo, BYTE AuxAccent, int line_size) const;
+	std::string	mrd_to_slf(const std::string &lemm, const CFlexiaModel&p, WORD AccentModelNo, BYTE AuxAccent, int line_size) const;
 	// Slf -> Mrd (Converting from text to dictionary representation)
-	void	slf_to_mrd(const string &s, string &lemm, CFlexiaModel& FlexiaModel, CAccentModel& AccentModel, BYTE& AuxAccent, int& line_no_err) const;
+	void	slf_to_mrd(const std::string &s, std::string &lemm, CFlexiaModel& FlexiaModel, CAccentModel& AccentModel, BYTE& AuxAccent, int& line_no_err) const;
 	void	check_paradigm(long line_no);
 	void	remove_lemm(lemma_iterator_t it);
-	void	predict_lemm(const string &lemm, const int preffer_suf_len, int minimal_frequence, bool bOnlyMainPartOfSpeeches);
-	string	get_slf_string	(lemma_iterator_t it, string &dict, string& Prefixes, int line_size = 79);
+	void	predict_lemm(const std::string &lemm, const int preffer_suf_len, int minimal_frequence, bool bOnlyMainPartOfSpeeches);
+	std::string	get_slf_string	(lemma_iterator_t it, std::string &dict, std::string& Prefixes, int line_size = 79);
 	void	get_wordforms(const_lemma_iterator_t it, StringVector& forms) const;
-	string	create_slf_from_predicted(int PredictParadigmNo,  string &dict, int line_size = 79) const;
-	CParadigmInfo	add_lemma(const string &slf, string common_grammems, const string& prefixes, int& line_no_err, WORD SessionNo = UnknownSessionNo); 
+	std::string	create_slf_from_predicted(int PredictParadigmNo,  std::string &dict, int line_size = 79) const;
+	CParadigmInfo	add_lemma(const std::string &slf, std::string common_grammems, const std::string& prefixes, int& line_no_err, WORD SessionNo = UnknownSessionNo); 
 	void	set_to_delete_false();
 	void	delete_checked_lemms();
 	void	clear_predicted_paradigms();
-	bool	change_prd_info(CParadigmInfo& I, const string& Lemma, WORD NewParadigmNo, WORD newAccentModelNo, bool keepOldAccents );
-	string	show_differences_in_two_paradigms(WORD FlexiaModelNo1, WORD FlexiaModelNo2) const;
+	bool	change_prd_info(CParadigmInfo& I, const std::string& Lemma, WORD NewParadigmNo, WORD newAccentModelNo, bool keepOldAccents );
+	std::string	show_differences_in_two_paradigms(WORD FlexiaModelNo1, WORD FlexiaModelNo2) const;
 	
-	bool	slf2ancode(const string slf_line, string& gramcode) const;
-	bool	check_common_grammems(string common_grammems) const;
-	bool	check_prefixes(string prefixes) const;
+	bool	slf2ancode(const std::string slf_line, std::string& gramcode) const;
+	bool	check_common_grammems(std::string common_grammems) const;
+	bool	check_prefixes(std::string prefixes) const;
 	bool	attach_form_prefixes_to_bases();
 	bool	prepare_for_RML();
 	bool	prepare_for_RML2();
@@ -269,20 +269,20 @@ public:
 	bool	HasUnknownAccents( lemma_iterator_t it ) const;
 	bool	IsPartialAccented( lemma_iterator_t it ) const;
 	BYTE	GetLemmaAccent( const_lemma_iterator_t it ) const;
-	bool	ReadNextParadigmFromFile(FILE* fp, CDumpParadigm& P, int& line_no, bool& bError, string& Errors) const;
-	bool	StartSession(string user_name);
+	bool	ReadNextParadigmFromFile(FILE* fp, CDumpParadigm& P, int& line_no, bool& bError, std::string& Errors) const;
+	bool	StartSession(std::string user_name);
 	void	EndSession();
-	string  GetUserName() const;
-	void	StartLastSessionOfUser(string user_name);
+	std::string  GetUserName() const;
+	void	StartLastSessionOfUser(std::string user_name);
 	WORD	RegisterSession(const CMorphSession& S);
-    bool    Filter(string flt_str, std::vector<lemma_iterator_t>& found_paradigms) const;
+    bool    Filter(std::string flt_str, std::vector<lemma_iterator_t>& found_paradigms) const;
 private:
-	BYTE	_GetReverseVowelNo( const string& form, WORD accentModelNo, WORD formInd ) const;
-	void	SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, string& form) const;
-	string	get_prefix_set_str(WORD PrefixSetNo) const;
-	void	ReadOnePrefixSet(string PrefixSet, set<string>& Result) const;
+	BYTE	_GetReverseVowelNo( const std::string& form, WORD accentModelNo, WORD formInd ) const;
+	void	SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, std::string& form) const;
+	std::string	get_prefix_set_str(WORD PrefixSetNo) const;
+	void	ReadOnePrefixSet(std::string PrefixSet, set<string>& Result) const;
 	void	ReadPrefixSets (std::ifstream& mrdFile);
-	WORD	AddPrefixSet(string PrefixSetStr);
+	WORD	AddPrefixSet(std::string PrefixSetStr);
 
 	
 	
@@ -301,6 +301,6 @@ private:
 
 
 
-extern BYTE  TransferReverseVowelNoToCharNo( const string& form, BYTE AccentCharNo, MorphLanguageEnum Language);
+extern BYTE  TransferReverseVowelNoToCharNo( const std::string& form, BYTE AccentCharNo, MorphLanguageEnum Language);
 
 #endif // _INCL_WIZARD_H

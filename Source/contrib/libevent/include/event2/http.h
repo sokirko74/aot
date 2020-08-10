@@ -92,7 +92,7 @@ struct evhttp *evhttp_new(struct event_base *base);
  * to multiple different ports.
  *
  * @param http a pointer to an evhttp object
- * @param address a string containing the IP address to listen(2) on
+ * @param address a std::string containing the IP address to listen(2) on
  * @param port the port number to listen on
  * @return 0 on success, -1 on failure.
  * @see evhttp_accept_socket()
@@ -106,7 +106,7 @@ int evhttp_bind_socket(struct evhttp *http, const char *address, ev_uint16_t por
  * The returned pointer is not valid after \a http is freed.
  *
  * @param http a pointer to an evhttp object
- * @param address a string containing the IP address to listen(2) on
+ * @param address a std::string containing the IP address to listen(2) on
  * @param port the port number to listen on
  * @return Handle for the socket on success, NULL on failure.
  * @see evhttp_bind_socket(), evhttp_del_accept_socket()
@@ -224,7 +224,7 @@ void evhttp_set_max_body_size(struct evhttp* http, ev_ssize_t max_body_size);
 
 /**
   Set the value to use for the Content-Type header when none was provided. If
-  the content type string is NULL, the Content-Type header will not be
+  the content type std::string is NULL, the Content-Type header will not be
   automatically added.
 
   @param http the http server on which to set the default content type
@@ -916,43 +916,43 @@ void evhttp_clear_headers(struct evkeyvalq *headers);
 
 
 /**
-   Helper function to encode a string for inclusion in a URI.  All
+   Helper function to encode a std::string for inclusion in a URI.  All
    characters are replaced by their hex-escaped (%22) equivalents,
    except for characters explicitly unreserved by RFC3986 -- that is,
    ASCII alphanumeric characters, hyphen, dot, underscore, and tilde.
 
-   The returned string must be freed by the caller.
+   The returned std::string must be freed by the caller.
 
-   @param str an unencoded string
-   @return a newly allocated URI-encoded string or NULL on failure
+   @param str an unencoded std::string
+   @return a newly allocated URI-encoded std::string or NULL on failure
  */
 EVENT2_EXPORT_SYMBOL
 char *evhttp_encode_uri(const char *str);
 
 /**
-   As evhttp_encode_uri, but if 'size' is nonnegative, treat the string
-   as being 'size' bytes long.  This allows you to encode strings that
+   As evhttp_encode_uri, but if 'size' is nonnegative, treat the std::string
+   as being 'size' bytes long.  This allows you to encode std::strings that
    may contain 0-valued bytes.
 
-   The returned string must be freed by the caller.
+   The returned std::string must be freed by the caller.
 
-   @param str an unencoded string
-   @param size the length of the string to encode, or -1 if the string
+   @param str an unencoded std::string
+   @param size the length of the std::string to encode, or -1 if the std::string
       is NUL-terminated
    @param space_to_plus if true, space characters in 'str' are encoded
       as +, not %20.
-   @return a newly allocate URI-encoded string, or NULL on failure.
+   @return a newly allocate URI-encoded std::string, or NULL on failure.
  */
 EVENT2_EXPORT_SYMBOL
 char *evhttp_uriencode(const char *str, ev_ssize_t size, int space_to_plus);
 
 /**
-  Helper function to sort of decode a URI-encoded string.  Unlike
+  Helper function to sort of decode a URI-encoded std::string.  Unlike
   evhttp_uridecode, it decodes all plus characters that appear
   _after_ the first question mark character, but no plusses that occur
   before.  This is not a good way to decode URIs in whole or in part.
 
-  The returned string must be freed by the caller
+  The returned std::string must be freed by the caller
 
   @deprecated  This function is deprecated; you probably want to use
      evhttp_uridecode instead.
@@ -964,18 +964,18 @@ EVENT2_EXPORT_SYMBOL
 char *evhttp_decode_uri(const char *uri);
 
 /**
-  Helper function to decode a URI-escaped string or HTTP parameter.
+  Helper function to decode a URI-escaped std::string or HTTP parameter.
 
-  If 'decode_plus' is 1, then we decode the string as an HTTP parameter
+  If 'decode_plus' is 1, then we decode the std::string as an HTTP parameter
   value, and convert all plus ('+') characters to spaces.  If
   'decode_plus' is 0, we leave all plus characters unchanged.
 
-  The returned string must be freed by the caller.
+  The returned std::string must be freed by the caller.
 
   @param uri a URI-encode encoded URI
   @param decode_plus determines whether we convert '+' to space.
   @param size_out if size_out is not NULL, *size_out is set to the size of the
-     returned string
+     returned std::string
   @return a newly allocated unencoded URI or NULL on failure
  */
 EVENT2_EXPORT_SYMBOL
@@ -1035,7 +1035,7 @@ int evhttp_parse_query_str(const char *uri, struct evkeyvalq *headers);
    Helper function to parse out arguments from the query portion of an
    HTTP URI.
 
-   Parsing a query string like
+   Parsing a query std::string like
 
      q=test&s=some+thing
 
@@ -1053,15 +1053,15 @@ EVENT2_EXPORT_SYMBOL
 int evhttp_parse_query_str_flags(const char *uri, struct evkeyvalq *headers, unsigned flags);
 
 /**
- * Escape HTML character entities in a string.
+ * Escape HTML character entities in a std::string.
  *
  * Replaces <, >, ", ' and & with &lt;, &gt;, &quot;,
  * &#039; and &amp; correspondingly.
  *
- * The returned string needs to be freed by the caller.
+ * The returned std::string needs to be freed by the caller.
  *
- * @param html an unescaped HTML string
- * @return an escaped HTML string or NULL on error
+ * @param html an unescaped HTML std::string
+ * @return an escaped HTML std::string or NULL on error
  */
 EVENT2_EXPORT_SYMBOL
 char *evhttp_htmlescape(const char *html);
@@ -1092,11 +1092,11 @@ const char *evhttp_uri_get_userinfo(const struct evhttp_uri *uri);
 /**
  * Return the host part of an evhttp_uri, or NULL if it has no host set.
  * The host may either be a regular hostname (conforming to the RFC 3986
- * "regname" production), or an IPv4 address, or the empty string, or a
+ * "regname" production), or an IPv4 address, or the empty std::string, or a
  * bracketed IPv6 address, or a bracketed 'IP-Future' address.
  *
  * Note that having a NULL host means that the URI has no authority
- * section, but having an empty-string host means that the URI has an
+ * section, but having an empty-std::string host means that the URI has an
  * authority section with no host part.  For example,
  * "mailto:user@example.com" has a host of NULL, but "file:///etc/motd"
  * has a host of "".
@@ -1166,7 +1166,7 @@ int evhttp_uri_set_fragment(struct evhttp_uri *uri, const char *fragment);
  * specified, the port is set to -1.
  *
  * Note that no decoding is performed on percent-escaped characters in
- * the string; if you want to parse them, use evhttp_uridecode or
+ * the std::string; if you want to parse them, use evhttp_uridecode or
  * evhttp_parse_query_str as appropriate.
  *
  * Note also that most URI schemes will have additional constraints that
@@ -1219,13 +1219,13 @@ void evhttp_uri_free(struct evhttp_uri *uri);
  * Join together the uri parts from parsed data to form a URI-Reference.
  *
  * Note that no escaping of reserved characters is done on the members
- * of the evhttp_uri, so the generated string might not be a valid URI
+ * of the evhttp_uri, so the generated std::string might not be a valid URI
  * unless the members of evhttp_uri are themselves valid.
  *
  * @param uri container with parsed data
  * @param buf destination buffer
  * @param limit destination buffer size
- * @return an joined uri as string or NULL on error
+ * @return an joined uri as std::string or NULL on error
  * @see evhttp_uri_parse()
  */
 EVENT2_EXPORT_SYMBOL

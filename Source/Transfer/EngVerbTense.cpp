@@ -65,7 +65,7 @@ void CEngVerbTense::make_verb_form()
 
 	dir_obj_postfix = post_verb_advs = " ";
 
-	string posle_log_str;
+	std::string posle_log_str;
 	if(!m_pVerbMainWord->m_PosleLog.m_PosleLog.empty())
 		posle_log_str = m_pVerbMainWord->m_PosleLog.m_PosleLog;
 	else if(m_pVerbMainWord->m_PosleLog.m_PosleLogPrep.m_DictType != NoneRoss){
@@ -211,7 +211,7 @@ void CEngVerbTense::make_string()
 						|| is_gerund(m_Tense));
 	
 	// здесь будут копиться результирующая строка
-	string res;
+	std::string res;
 
 	S.handle_rel_operators(m_VerbNodeNo, false);
 	rel_operators = S.Res(m_VerbNodeNo).rel_operator;
@@ -251,7 +251,7 @@ void CEngVerbTense::make_string()
 	{
 			// слово "трехногий" переходит в слово "3-legged" (pp)
 			// "3-legged" обязательно должно быть помечено m_bDoNotChangeForm
-			string Word = m_pVerbMainWord->m_Word;
+			std::string Word = m_pVerbMainWord->m_Word;
 			if (m_pVerbMainWord->m_NumeralPrefix != "")
 				Word =   m_pVerbMainWord->m_NumeralPrefix+"-"+ Word;
 			res += Word;
@@ -299,7 +299,7 @@ void CEngVerbTense::make_string()
 // функция по времени Tense, выдает набор вспомогательных глаглов, которые должны 
 // стоять до основного глагола. Еще функция вылдает граммемы, в которые нужно поставить
 // основной глагол.
-void CEngVerbTense::CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, string& AuxVerbs, UINT& MainVerbGrammems) const
+void CEngVerbTense::CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, std::string& AuxVerbs, UINT& MainVerbGrammems) const
 {
 	MainVerbGrammems = 0;
 

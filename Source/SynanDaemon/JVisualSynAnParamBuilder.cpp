@@ -11,7 +11,7 @@ public:
 	int m_W2;
 	bool m_IsGroup;
 	bool m_IsSubj;
-	string m_strDescr;
+	std::string m_strDescr;
 	bool operator < (const SGroup& gr) const {
 		if ((m_W1 <= gr.m_W1) && (m_W2 >= gr.m_W2))
 			return true;
@@ -239,7 +239,7 @@ nlohmann::json JVisualSynAnParamBuilder::WriteVariant(const SSynVariant2Groups& 
 	for(auto& u : var.m_SynUnits) {
 		auto unit = nlohmann::json::object();
 		unit["homNo"] = u.m_iHomonymNum;
-		string  grammems = u.GetGrammemsByAncodes();
+		std::string  grammems = u.GetGrammemsByAncodes();
 		if (grammems.empty())
 			grammems = m_pSyntaxHolder->m_pGramTab->GrammemsToStr(u.m_iGrammems);
 		unit["grm"] += u.GetPartOfSpeechStr() + " " + grammems;
@@ -288,7 +288,7 @@ nlohmann::json JVisualSynAnParamBuilder::BuildJson(const CSentence& piSent) {
 	
 }
 
-string BuildJson(CSyntaxHolder* pSyntaxHolder, const string& query) {
+std::string BuildJson(CSyntaxHolder* pSyntaxHolder, const std::string& query) {
 	if (!pSyntaxHolder->GetSentencesFromSynAn(query, false)) {
 		throw CExpc("Synan has crushed\n");
 	};

@@ -19,7 +19,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <std::string.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -149,7 +149,7 @@ char* str_compose(const char *fmt, ...){
 	  va_start(ap, fmt);
 	  n = vsnprintf (p, size, fmt, ap);
 	  va_end(ap);
-	  /* If that worked, return the string. */
+	  /* If that worked, return the std::string. */
 	  if (n > -1 && n < size){
 		 //return p;
 		  break;
@@ -162,7 +162,7 @@ char* str_compose(const char *fmt, ...){
 	  if ((np = (char*)realloc (p, size)) == NULL) {
 		 //out_of_memory();
 		 //free(p);
-		 return p;//partial string
+		 return p;//partial std::string
 	  } else {
 		 p = np;
 	  }
@@ -177,11 +177,11 @@ bool GetGrammems (jni_dictionary& dic, const char* tab_str, QWORD& grammems){
 	return dic.pAgramtab->GetGrammems(tab_str, grammems);
 }
 
-/* cp1251 charset on input string - for Russian */
-jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, string& Form){
+/* cp1251 charset on input std::string - for Russian */
+jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, std::string& Form){
 	jobject paradigmset=NULL;
 	jobject grammemset=NULL;
-	jstring jbaseForm=NULL;
+	jstd::string jbaseForm=NULL;
 	jobject wordresult=NULL;
 	jbyteArray baseFormBytes=NULL;
 //	try{
@@ -197,7 +197,7 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, string& For
 	for(int i=0; i < Paradigms.size(); i++){
 		const CFormInfo& F = Paradigms[i];
 		bool found=F.m_bFound;
-		string baseForm=F.GetWordForm(0);
+		std::string baseForm=F.GetWordForm(0);
 		const char* chars=baseForm.c_str();
 		jsize length=(jsize)strlen(chars);
 		baseFormBytes=env->NewByteArray(length);
@@ -217,7 +217,7 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, string& For
 			return NULL;
 		}
 		//for Russian bytes
-		jbaseForm=(jstring)env->CallStaticObjectMethod(clazz, method_convertFromCharsetCp1251ToJavaString, baseFormBytes);
+		jbaseForm=(jstd::string)env->CallStaticObjectMethod(clazz, method_convertFromCharsetCp1251ToJavaString, baseFormBytes);
 		if(env->ExceptionOccurred()){
 			//paradigmset is a local ref, no need to release.
 			//baseFormBytes is a local ref, no need to release.
@@ -230,12 +230,12 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, string& For
 			return NULL;
 		}
 		//baseFormBytes is a local ref, no need to release.
-		string GramCodes=F.GetSrcAncode();
+		std::string GramCodes=F.GetSrcAncode();
 		BYTE  PartOfSpeech = dic.pAgramtab->GetPartOfSpeech(GramCodes.c_str());
 		//assert(dic.lang==Russian);
 		rus_pos pos=(rus_pos)PartOfSpeech;
 
-		string CommonAncode=F.GetCommonAncode();
+		std::string CommonAncode=F.GetCommonAncode();
 		QWORD grammems=0;
 		QWORD grammems1;
 		bool ok=GetGrammems(dic, CommonAncode.c_str(), grammems1);
@@ -297,7 +297,7 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, string& For
 		//grammemset is a local ref, no need to release.
 		//wordresult is a local ref, no need to release.
 //	}catch(int e){
-//		string errstr("C++ exception: int: ");
+//		std::string errstr("C++ exception: int: ");
 //		errstr+=e;
 //		errstr+=".";
 //		throwEx(env, strdup(errstr.c_str()));
@@ -328,9 +328,9 @@ bool InitMorphologySystem(JNIEnv *env, jni_dictionary &dic){
 			return false;
 	}
 
-	string langua_str = GetStringByLanguage(dic.Language);
+	std::string langua_str = GetStringByLanguage(dic.Language);
 	dic.pLemmatizer = new T;
-	string strError;
+	std::string strError;
 	if (!dic.pLemmatizer->LoadDictionariesRegistry(strError)){
    		char* err=str_compose("Cannot load %s morphological dictionary. Error details: %s", langua_str.c_str(), strError.c_str());
 		throwEx(env, err);
@@ -385,13 +385,13 @@ JNIEXPORT jobject JNICALL Java_ru_aot_morph_JavaMorphAPI_lookupWordImpl
 		}
 		for(jsize i=0;i<len;i++){chars[i]=(char)bytes[i];}
 		chars[len]=(char)0;
-		string s = chars;
+		std::string s = chars;
 		free(chars);chars=0;
 		env->ReleaseByteArrayElements(word,bytes,JNI_ABORT);
 		bytes=NULL;
 		Trim(s);
 		if (s.empty()){
-			throwEx(env, strdup("Empty or whitespace-only string instead of a word."));
+			throwEx(env, strdup("Empty or whitespace-only std::string instead of a word."));
 			return NULL;
 		}
 		return GetMorphInfo(env, clazz, dic, s);
@@ -401,7 +401,7 @@ JNIEXPORT jobject JNICALL Java_ru_aot_morph_JavaMorphAPI_lookupWordImpl
 		if(chars!=0){free(chars);chars=0;}
 		if(bytes!=NULL){env->ReleaseByteArrayElements(word,bytes,JNI_ABORT);bytes=NULL;}
 	}catch(int e){
-		string errstr("C++ exception: int: ");
+		std::string errstr("C++ exception: int: ");
 		errstr+=e;
 		errstr+=".";
 		throwEx(env, strdup(errstr.c_str()));
@@ -490,7 +490,7 @@ JNIEXPORT void JNICALL Java_ru_aot_morph_JavaMorphAPI_initImpl
 		Java_ru_aot_morph_JavaMorphAPI_closeImpl(env,clazz);
 		return;
 	}catch(int e){
-		string errstr("C++ exception: int: ");
+		std::string errstr("C++ exception: int: ");
 		errstr+=e;
 		errstr+=".";
 		throwEx(env, strdup(errstr.c_str()));
@@ -530,7 +530,7 @@ JNIEXPORT void JNICALL Java_ru_aot_morph_JavaMorphAPI_closeImpl
 		throwEx(env, err);
 		return;
 	}catch(int e){
-		string errstr("C++ exception: int: ");
+		std::string errstr("C++ exception: int: ");
 		errstr+=e;
 		errstr+=".";
 		throwEx(env, strdup(errstr.c_str()));

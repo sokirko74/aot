@@ -15,7 +15,7 @@ class CFreqDict
 	std::vector<CParadigmPairAndFreq> word_vec;
 public:
 	CFreqDict();
-	bool Load(string  path);
+	bool Load(std::string  path);
 	WORD GetFreq(DWORD EngParadigmId, DWORD RusParadigmId) const;
 	
 };

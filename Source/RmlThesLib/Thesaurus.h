@@ -43,7 +43,7 @@ const int siPlural = 32;
 
 struct CInnerSynItem {
  WORD   m_TerminNo;
- string m_ItemStr;
+ std::string m_ItemStr;
  int    m_Flags : 8;
  WORD   m_OborotId;
  WORD   m_OborotNo;
@@ -62,7 +62,7 @@ struct CInnerSynItem {
 
 
 struct CInnerTermin {
-	string m_TerminStr;
+	std::string m_TerminStr;
 	char   m_AbbrForm[12];
 	int	   m_TerminId;
 	short  m_ModelNo;
@@ -71,7 +71,7 @@ struct CInnerTermin {
 
 
 struct CConcept {
-	string m_ConceptStr;
+	std::string m_ConceptStr;
 	int	   m_ConceptId;
 	CConcept ()	{};
 	CConcept (int ConceptId)
@@ -108,15 +108,15 @@ struct CRelat {
 };
 
 
-typedef map<string, int> String2Int;
+typedef map<std::string, int> String2Int;
 
 class CThesaurus 
 {
 public:
-	string			m_TestDebug;
+	std::string			m_TestDebug;
 	bool			m_bDontLoad;
-	string			m_Name;
-	string			m_Directory;
+	std::string			m_Name;
+	std::string			m_Directory;
 	MorphLanguageEnum m_MainLanguage;
     vector<CInnerModel>	m_Models;
 	const CAgramtab*	m_pEngGramTab;
@@ -136,44 +136,44 @@ public:
 
 	CThesaurus();
 	~CThesaurus();
-	bool LoadModels (string FileName);
-	bool LoadAtomicGroups (string Buff, CInnerModel& M);
-	bool LoadModelRelations (string Buff, CInnerModel& M);
-	bool LoadGroups (string Buff, CInnerModel& M);
+	bool LoadModels (std::string FileName);
+	bool LoadAtomicGroups (std::string Buff, CInnerModel& M);
+	bool LoadModelRelations (std::string Buff, CInnerModel& M);
+	bool LoadGroups (std::string Buff, CInnerModel& M);
 
-	bool LoadOborots (string FileName);
+	bool LoadOborots (std::string FileName);
 
 	int	 GetModelNoByModelId (long ModelId) const;
-	bool LoadTermins (string FileName);
+	bool LoadTermins (std::string FileName);
 
 	void GetConceptsByTextEntryId(long TextEntryId, vector<long>& Concepts) const;
 	void GetTextEntriesByConcept(long ConceptId, vector<long>& TextEntries) const;
 	bool GetTree(int ConceptNo, vector<long>& TreeConcepts,  vector<long> CurrPath, RelationEnum RelationType) const;
-	bool LoadSynonyms (string FileName);
+	bool LoadSynonyms (std::string FileName);
 
 	
 	int	 GetConceptNoByConceptId (long ConceptId) const;
-	int	 GetConceptNoByConceptStr (string ConceptStr) const;
-	bool LoadConcepts (string FileName);
+	int	 GetConceptNoByConceptStr (std::string ConceptStr) const;
+	bool LoadConcepts (std::string FileName);
 
-	bool LoadRelats (string FileName);
+	bool LoadRelats (std::string FileName);
 	
 	int  GetTerminNoByTextEntryId(long TextEntryId) const;
 
-	bool LoadSynItems(string FileName);
+	bool LoadSynItems(std::string FileName);
 
 	// main methods
 	bool	ReadThesaurusFromDisk();
 	bool	ReadRelationsFromDisk();
-	bool	SetDatabase(string DatabaseName);
-	bool	IsA(DWORD TextEntryId, string ConceptStr) const;
+	bool	SetDatabase(std::string DatabaseName);
+	bool	IsA(DWORD TextEntryId, std::string ConceptStr) const;
 	void	QueryEnglishTranslations(DWORD TextEntryId, vector<int>& CurrentEnglishTermins) const;
-	int		GetTerminIdBySingleWord(string WordStr) const;
+	int		GetTerminIdBySingleWord(std::string WordStr) const;
 	int		QueryTopConcepts(UINT TextEntryId, vector<int>& CurrentTopConcepts) const;
 	void	QueryHigherTermins(UINT TextEntryId, vector<int>& CurrentHigherTermins) const;
-	DWORD	QueryTerminItem(const string& ItemStr, vector<int>& CurrentTerminItems) const;
-	void	QueryLowerTermins(const string& ConceptStr, UINT Language, vector<int>& CurrentLowerTermins) const;
-	int		FindAbbr(const string& str) const;
+	DWORD	QueryTerminItem(const std::string& ItemStr, vector<int>& CurrentTerminItems) const;
+	void	QueryLowerTermins(const std::string& ConceptStr, UINT Language, vector<int>& CurrentLowerTermins) const;
+	int		FindAbbr(const std::string& str) const;
 	void	SetDicts(MorphLanguageEnum MainLanguage, const CDictionary* OborDic, const CAgramtab* MainGramtab, const CAgramtab* EngGramtab);
 };
 

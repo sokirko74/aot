@@ -11,7 +11,7 @@ bool	CGerSentence::IsInitialClauseType(EClauseType ClauseType) const
 
 bool	CGerSentence::IsRelativSentencePronoun(int ClauseStartWordNo, int WordNo, int& HomonymNo) const
 {
-	string W = m_Words[WordNo].m_strUpperWord;
+	std::string W = m_Words[WordNo].m_strUpperWord;
 
 	for (HomonymNo =0; HomonymNo<m_Words[WordNo].m_Homonyms.size(); HomonymNo++)
 	{

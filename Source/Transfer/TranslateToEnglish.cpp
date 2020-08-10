@@ -98,9 +98,9 @@ void CEngSemStructure::TranslateActants(int iEngNode, int iClause)
 
 
 
-string CEngSemStructure::BuildSentence()
+std::string CEngSemStructure::BuildSentence()
 {	
-	string sent;
+	std::string sent;
 	try
 	{
 		CEngSynthes EngSynthes(*this);
@@ -109,7 +109,7 @@ string CEngSemStructure::BuildSentence()
 	}
 	catch(exception &e)
 	{
-		return string(e.what());
+		return std::string(e.what());
 	}
 	catch(...)
 	{
@@ -181,7 +181,7 @@ long CEngSemStructure::GetClauseLastWordNo(long ClauseNo) const
 
 
 
-string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const 
+std::string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const 
 {
   if  (m_Nodes[NodeNo].m_MainWordNo == -1) 
 	  return GetNodeLemStr (NodeNo);
@@ -189,15 +189,15 @@ string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const
   const CEngSemWord& W = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo];
 
 
-  string POS = "  ";
+  std::string POS = "  ";
   if (W.m_Poses != 0)
   {
     long pos =  GetOnePOS(W.m_Poses);
 	if (pos != -1)
-      POS = string(m_pData->GetEngGramTab()->GetPartOfSpeechStr(pos));
+      POS = std::string(m_pData->GetEngGramTab()->GetPartOfSpeechStr(pos));
   };
 
-  string Result =   Format ("%s = %s %s", 
+  std::string Result =   Format ("%s = %s %s", 
 	  GetNodeLemStr (NodeNo).c_str(),  
 	  POS.c_str(), 
 	  m_pData->GetEngGramTab()->GrammemsToStr(W.GetAllGrammems()).c_str()
@@ -205,8 +205,8 @@ string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const
 
   if (W.GetTense() != zero_tn)
   {
-	  Result +=  string ("\nTense = ")+ string(W.m_bMorphologicalPassiveForm?"PassiveForm ": "Active ") +
-		  GetTenseString(W.GetTense()) +string("\n");
+	  Result +=  std::string ("\nTense = ")+ std::string(W.m_bMorphologicalPassiveForm?"PassiveForm ": "Active ") +
+		  GetTenseString(W.GetTense()) +std::string("\n");
   };
 
   if (W.m_TenseHistory.size() > 1)
@@ -233,7 +233,7 @@ string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const
 	
   };
 
-  Result += "\nNotUseTo  = " + string(m_Nodes[NodeNo].m_bNotUseTo?"yes":"no")+ "\n"; 
+  Result += "\nNotUseTo  = " + std::string(m_Nodes[NodeNo].m_bNotUseTo?"yes":"no")+ "\n"; 
 
 	
   return Result;
@@ -273,7 +273,7 @@ void  CEngSemStructure::InitSyntaxRelations ()
 			m_Relations[i].m_SyntacticRelation = "obj";
 };
 
-void  CEngSemStructure::SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, string Position)
+void  CEngSemStructure::SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, std::string Position)
 {
 	vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);	
@@ -314,13 +314,13 @@ void  CEngSemStructure::SetPositionsFromConj ()
 						)
 						continue;
 						
-					string GrammemsStr = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[0]);
+					std::string GrammemsStr = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[0]);
 					GrammemsStr = "NOUN " + GrammemsStr;
 					BYTE POS;
 					QWORD Grammems;
 					bool b = m_pData->GetEngGramTab()->ProcessPOSAndGrammemsIfCan(GrammemsStr.c_str(), &POS, &Grammems);
 					if (!b) continue;
-					string Position = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[1]);
+					std::string Position = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[1]);
 					long NodeNo = (LeafId ==0) ? m_Relations[i].m_SourceNodeNo : m_Relations[i].m_TargetNodeNo;
 					SetPositionOfChildrenByGrammems (NodeNo, Grammems, Position);
 				};
@@ -432,10 +432,10 @@ bool CEngSemStructure::TranslateCasesIfNeed (long NodeNo)
 
 
 
-string CEngSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const 
+std::string CEngSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const 
 {
 	CEngSemNode& Node = *(CEngSemNode*) pNode;
-	string L = Node.m_Words[WordNo].m_Word;
+	std::string L = Node.m_Words[WordNo].m_Word;
 	if (Node.m_Words[WordNo].m_NumeralPrefix != "")
 		L = Node.m_Words[WordNo].m_NumeralPrefix + "-" + L;
 
@@ -456,7 +456,7 @@ string CEngSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) 
     return L;
 };
 
-void CEngSemStructure::GetColorAndWidthOfRelation(int RelNo,float& Width,string& Color) 
+void CEngSemStructure::GetColorAndWidthOfRelation(int RelNo,float& Width,std::string& Color) 
 {
 	if( m_Nodes[m_Relations[RelNo].m_SourceNodeNo].m_ClauseNo != 
 		m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_ClauseNo )

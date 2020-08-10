@@ -70,9 +70,9 @@ public:
 	bool BuildGLRTable();
 	void PrintGLRTable(FILE* fp) const;
 	
-	bool ConvertAndSaveGLRTable(string FileName);
-	bool LoadGLRTable(string FileName);
-	bool SaveOldGLRTable(string FileName) const;
+	bool ConvertAndSaveGLRTable(std::string FileName);
+	bool LoadGLRTable(std::string FileName);
+	bool SaveOldGLRTable(std::string FileName) const;
 
 	const CSLRCellWork& GetCell(size_t  StateNo, size_t SymbolNo) const;
 	DWORD GetReduceRuleEnd(size_t  StateNo, size_t SymbolNo)  const;

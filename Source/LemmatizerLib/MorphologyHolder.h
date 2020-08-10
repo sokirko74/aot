@@ -21,7 +21,7 @@ public:
 	CMorphologyHolder();
 	~CMorphologyHolder();
 
-	bool GetMorphology(string str, bool bFile, int& CountOfWords);
+	bool GetMorphology(std::string str, bool bFile, int& CountOfWords);
     bool LoadLemmatizer(MorphLanguageEnum langua);
 	bool LoadGraphanAndLemmatizer(MorphLanguageEnum langua);
 	void DeleteProcessors();

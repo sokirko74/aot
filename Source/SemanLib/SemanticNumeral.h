@@ -8,6 +8,6 @@
 
 
 
-extern string ConvertRusNumeral(const CRusSemNode& Node)
+extern std::string ConvertRusNumeral(const CRusSemNode& Node)
 
 #endif

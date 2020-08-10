@@ -178,7 +178,7 @@ BOOL CToolTip2::GetLine(CString sSource, CString *sDest, int nLineNumber)
 
 
 	// go from the offset, to the next \n or end of
-	// string
+	// std::string
 	int nEnd = sSource.Find('\n', nStart);
 	if(nEnd == -1)
 		nEnd = sSource.GetLength();

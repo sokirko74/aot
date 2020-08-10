@@ -6,13 +6,13 @@
 
 class TSemanHttpServer : public TRMLHttpServer {
 	CSemStructureBuilder SemBuilder;
-	string Translate(const string& russian, const string &po);
-	string BuildRusGraph(const string& russian, const string &po);
+	std::string Translate(const std::string& russian, const std::string &po);
+	std::string BuildRusGraph(const std::string& russian, const std::string &po);
 
 public:
 	TSemanHttpServer() : TRMLHttpServer() {};
 	virtual ~TSemanHttpServer() {};
-	string OnParsedRequest(TDaemonParsedRequest&) override;
+	std::string OnParsedRequest(TDaemonParsedRequest&) override;
 	void Load();
 };
 

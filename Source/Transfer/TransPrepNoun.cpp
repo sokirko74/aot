@@ -4,16 +4,16 @@
 
 
 
-string CEngSemStructure::GetPrep(const TCortege& cortege, DictTypeEnum type)
+std::string CEngSemStructure::GetPrep(const TCortege& cortege, DictTypeEnum type)
 {
 	int iNum = 0;
-	string strPrep;
+	std::string strPrep;
 	strPrep.erase();
 
 	if( cortege.m_DomItemNos[0] == -1 )
 		return strPrep;
 
-	string str = GetItemStr(cortege.m_DomItemNos[0], type);
+	std::string str = GetItemStr(cortege.m_DomItemNos[0], type);
 	
 
 	if( (iNum = str.find("+")) != -1 )
@@ -32,11 +32,11 @@ string CEngSemStructure::GetPrep(const TCortege& cortege, DictTypeEnum type)
 }
 
 //переводит русский предлог с помощью поля PREP
-string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,int  iRusActant,CEngSemNode&  engActantm)
+std::string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,int  iRusActant,CEngSemNode&  engActantm)
 {
 	assert( iRusActant != -1 );
 	const CSemNode& rusActant = RusStr.GetNode(iRusActant);
-	string strPrep;
+	std::string strPrep;
 	strPrep.erase();
 	if( rusActant.m_MainWordNo == -1 )
 		return strPrep;
@@ -54,9 +54,9 @@ string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,int  iR
 			return strPrep;
 
 		long DomNo = Signat.Doms[0];
-		if( string(pRossDoc->GetRoss()->m_Domens[DomNo].DomStr) == "D_1" )
+		if( std::string(pRossDoc->GetRoss()->m_Domens[DomNo].DomStr) == "D_1" )
 		{
-			string strPattern = (const char*)pRossDoc->GetRoss()->GetDomItemStr(vectorCortege[i].m_DomItemNos[0]);
+			std::string strPattern = (const char*)pRossDoc->GetRoss()->GetDomItemStr(vectorCortege[i].m_DomItemNos[0]);
 			long PrepNo;
 			if( RusStr.CheckGroupBeginAndCase(strPattern, iRusActant, PrepNo) )
 			{
@@ -88,7 +88,7 @@ bool CEngSemStructure::Rule_TranslateRelWithPrepField( int iRusActant, long Rela
 	const CSemRelation& semRusRel = *RusStr.GetRelation(semEngRel.m_RusRel);	
 
 	//если статье описан особый случай перевода этого предлога
-	string strPrep = HasParticularPrepInField(pRossDoc, iRusActant, engActant);
+	std::string strPrep = HasParticularPrepInField(pRossDoc, iRusActant, engActant);
 	if( !strPrep.empty())
 	{
 		SetSimpleEngPrep(strPrep, -1, RelationNo);
@@ -137,7 +137,7 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 	//тот предлого, который тот вернет( если ок один из тех, что в АОССе))
 	if( iPrepPhr==-1 )
 	{
-		string strPrep = GetPrep(GramCorteges[0], engNode.GetType());
+		std::string strPrep = GetPrep(GramCorteges[0], engNode.GetType());
 
 		if( !strPrep.empty())
 		{

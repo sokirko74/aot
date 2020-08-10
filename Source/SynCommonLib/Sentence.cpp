@@ -18,8 +18,8 @@ void CSentence::Reset() {
     CClauseCollection::Clear();
 }
 
-string CSentence::GetSentenceBeginStr() const {
-    string ss;
+std::string CSentence::GetSentenceBeginStr() const {
+    std::string ss;
     int count = m_Words.size();
     if (count > 10) count = 10;
     for (int i = 0; i < count; i++)
@@ -29,7 +29,7 @@ string CSentence::GetSentenceBeginStr() const {
 
 };
 
-void CSentence::OutputErrorString(string s) const {
+void CSentence::OutputErrorString(std::string s) const {
     m_pSyntaxOptions->OutputErrorString(s + GetSentenceBeginStr());
 };
 
@@ -1368,7 +1368,7 @@ bool CSentence::IsStrictLeftClauseBorder(CPeriod P) const {
 }
 
 
-int CSentence::FindAuxVerbByLemma(int MainWordNo, const string &Lemma) const {
+int CSentence::FindAuxVerbByLemma(int MainWordNo, const std::string &Lemma) const {
     for (size_t WordNo = 0; WordNo < m_Words.size(); WordNo++)
         for (size_t i = 0; i < m_Words[WordNo].m_MainVerbs.size(); i++)
             if (m_Words[WordNo].m_MainVerbs[i] == MainWordNo)

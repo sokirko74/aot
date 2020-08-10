@@ -6,7 +6,7 @@
 #include "Thesaurus.h"
 
 
-bool CThesaurus::LoadOborots (string FileName)
+bool CThesaurus::LoadOborots (std::string FileName)
 {
 	m_Oborots.clear();
 	FILE* fp = fopen (FileName.c_str(), "r");
@@ -14,7 +14,7 @@ bool CThesaurus::LoadOborots (string FileName)
 	char buff[2000];
 	if ( !fgets (buff, 2000, fp) )
 		return false;
-	string Header = buff;
+	std::string Header = buff;
 	Trim(Header);
 	if (Header != "OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;")
 		return false;
@@ -25,10 +25,10 @@ bool CThesaurus::LoadOborots (string FileName)
 	{
 		COborot O;
 		int i = 0;
-		string OborotStr;
+		std::string OborotStr;
    		for (const char* s = strtok(buff,FieldDelimiter); s; s = strtok(0, FieldDelimiter))
 		{
-			string Field =  s;
+			std::string Field =  s;
 			if (Field[0] == '"')
 			{
 			   if (Field[Field.length() - 1] != '"')

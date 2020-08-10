@@ -2,13 +2,7 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko, Dmitry Pankratov
 
-#ifndef __SYNANLib_LIBRARY_DEFINED__
-#ifndef __AGRAMTABLib_LIBRARY_DEFINED__
-
-#ifndef rus_consts_h
- #define rus_consts_h
-
-
+#pragma once
 
 enum rPartOfSpeeches 
 {
@@ -134,9 +128,3 @@ typedef enum {
 	COPUL_T=11//КОПУЛ
 } rClauseTypeEnum ;
 
-
-#endif
-
-
-#endif
-#endif

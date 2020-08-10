@@ -19,7 +19,7 @@ const int AntecWordsCount = 8;
 const char g_strAntecWords[AntecWordsCount][MaxWordLen] = {"ВСЕ", "КТО-НИБУДЬ", "КТО-ТО", "ОДИН", "КАЖДЫЙ", "ТОТ", "ТО", "ЧТО-НИБУДЬ"};
 
 
-#define _SWITCH(X) string __switch_val = X;
+#define _SWITCH(X) std::string __switch_val = X;
 #define _CASE(Y) if (__switch_val == Y)
 
 /////////////////////////////////////////////////////////////////////////////
@@ -29,8 +29,8 @@ bool CEngSemStructure::IsSubConj(CRossInterp interp)
 {
 	if( interp.m_DictType != OborRoss)
 		return false;
-	bool bIf     = GetRossHolder(interp.m_DictType)->HasFieldValue(string("GF"),string("ПОДЧ_СОЮЗ"),interp.m_UnitNo);
-	bool bIfThen = GetRossHolder(interp.m_DictType)->HasFieldValue(string("GF"),string("ПОДЧ_РАЗРЫВ_СОЮЗ"),interp.m_UnitNo);
+	bool bIf     = GetRossHolder(interp.m_DictType)->HasFieldValue(std::string("GF"),std::string("ПОДЧ_СОЮЗ"),interp.m_UnitNo);
+	bool bIfThen = GetRossHolder(interp.m_DictType)->HasFieldValue(std::string("GF"),std::string("ПОДЧ_РАЗРЫВ_СОЮЗ"),interp.m_UnitNo);
 	return( bIf || bIfThen );
 }
 
@@ -86,7 +86,7 @@ EClauseRelsType CEngSemStructure::GetClauseRelType(int iRel)
 	if( IsChtoOrKto(semRel.m_TargetNodeNo) || IsChtoOrKto(semRel.m_SourceNodeNo) )
 		return ChtoKtoAsConjWords;
 
-	string strAntecWord;
+	std::string strAntecWord;
 	if( m_Nodes[semRel.m_TargetNodeNo].RusNode != -1 )
 	{
 		int iRusNode = m_Nodes[semRel.m_TargetNodeNo].RusNode;
@@ -278,8 +278,8 @@ void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 		if( iRusNode == -1 )
 			return;
 		const CSemNode& rusNode = RusStr.GetNode(iRusNode);
-		string rus_str = GetCortegeStr(rusNode.GetType(),rusSemRel.m_SynReal.m_Cortege);
-		bool bRusInf = (rus_str.find("инф")!=string::npos );
+		std::string rus_str = GetCortegeStr(rusNode.GetType(),rusSemRel.m_SynReal.m_Cortege);
+		bool bRusInf = (rus_str.find("инф")!=std::string::npos );
 
 		vector<SGramCortegesAndType> GramCortegesAndTypeV;	
 		GetGramCortegesAndTypeFromRel(GramCortegesAndTypeV, engSemRel);
@@ -315,7 +315,7 @@ void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 		{
 			engSemRel.m_SynReal.m_Cortege = GramCortegesAndTypeV[iEngSub].m_WeightGramCorteges[0].m_GramCortege;
 			CDictUnitInterp prep;
-			string strConj = GetConj(GramCortegesAndTypeV[iEngSub].GetCorteges(),engNode.GetType());
+			std::string strConj = GetConj(GramCortegesAndTypeV[iEngSub].GetCorteges(),engNode.GetType());
 			bool bRes = GetDictUnitInterpForObor(strConj,prep);
 			assert(bRes);
 			if( !bRes )
@@ -405,7 +405,7 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 			( rusNode.GetWord(0).m_Lemma == "КТО") ))
 	{
 		const CSemNode& rusAntecNode = RusStr.GetNode(iAntecRusNode);
-		string strAntecWord = rusAntecNode.GetWord(0).m_Lemma;
+		std::string strAntecWord = rusAntecNode.GetWord(0).m_Lemma;
 		if( rusNode.GetWord(0).m_Lemma == "ЧТО") 
 		{
 			if( strAntecWord == "ТОТ" )

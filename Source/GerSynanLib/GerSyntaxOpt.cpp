@@ -87,7 +87,7 @@ void CGerSyntaxOpt::DestroyOptions ()
 	};
 };
 
-static string GetSyntaxFilePath()
+static std::string GetSyntaxFilePath()
 {
 	return GetRmlVariable()+"/Dicts/GerSynan/";
 };
@@ -97,19 +97,19 @@ static string GetSyntaxFilePath()
 bool CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 {
 	//  reading adjektives
-	string strFileName = GetSyntaxFilePath()+"adj_prp.txt";
+	std::string strFileName = GetSyntaxFilePath()+"adj_prp.txt";
 	{
 		if (!ReadListFile (strFileName.c_str(),(*m_pAdjPrp)))
 			return false;
 		// deleting valency information
 		for (size_t i=0; i  < m_pAdjPrp->size(); i++)
 		{
-			string&  s = (*m_pAdjPrp)[i];
+			std::string&  s = (*m_pAdjPrp)[i];
 			int q = s.find("+");
-			if (q != string::npos)
+			if (q != std::string::npos)
 				s.erase(q);
 			q = s.find(" ");
-			if (q != string::npos)
+			if (q != std::string::npos)
 				s.erase(q);
 			RmlMakeUpper(s, morphGerman);
 		};

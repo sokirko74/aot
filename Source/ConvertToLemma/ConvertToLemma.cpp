@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
 		bool bHasSuchLemma = false;
 		if (ColumnNo < Line.size()+1)
 		{
-			string InputWordForm = Line[ColumnNo-1];
+			std::string InputWordForm = Line[ColumnNo-1];
 			RmlMakeUpper(InputWordForm, langua);
 			vector<CFormInfo>  ParadigmCollection; 
 			Holder.m_pLemmatizer->CreateParadigmCollection(!bProcessWordForms, InputWordForm, true, false, ParadigmCollection);
@@ -175,12 +175,12 @@ int main(int argc, char *argv[])
 			{
 				const CFormInfo& Paradigm = ParadigmCollection[j];
 				poses_mask_t Poses = 0;
-				string Ancodes = Paradigm.GetSrcAncode();
+				std::string Ancodes = Paradigm.GetSrcAncode();
 				for (size_t uu=0; uu < Ancodes.size(); uu += 2)
 					Poses |= 1 << Holder.m_pGramTab->GetPartOfSpeech(Ancodes.c_str() + uu);
 
 				QWORD Grams = Holder.m_pGramTab->GetAllGrammems(Ancodes.c_str());
-				string CommonAncode = Paradigm.GetCommonAncode();
+				std::string CommonAncode = Paradigm.GetCommonAncode();
 				if (!CommonAncode.empty())
 					Grams |= Holder.m_pGramTab->GetAllGrammems(CommonAncode.c_str());
 

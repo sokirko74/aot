@@ -252,7 +252,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 		return;
 	if( !HasALG(m_Nodes[iEngNode].GetType(),m_Nodes[iEngNode].GetUnitNo(),"AL_there") )
 		return;
-	string dbg_str = GetRoss(Aoss)->GetEntryStr(m_Nodes[iEngNode].GetUnitNo());
+	std::string dbg_str = GetRoss(Aoss)->GetEntryStr(m_Nodes[iEngNode].GetUnitNo());
 	int    dbg_num = GetRoss(Aoss)->GetUnitMeanNum(m_Nodes[iEngNode].GetUnitNo());
 //
 	int iRusNode = m_Nodes[iEngNode].RusNode;
@@ -488,7 +488,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 		return;
 	if( m_Nodes[iEngNode].GetType() != Aoss )
 		return;
-	string dbg_str = GetRoss(Aoss)->GetEntryStr(m_Nodes[iEngNode].GetUnitNo());
+	std::string dbg_str = GetRoss(Aoss)->GetEntryStr(m_Nodes[iEngNode].GetUnitNo());
 	int    dbg_num = GetRoss(Aoss)->GetUnitMeanNum(m_Nodes[iEngNode].GetUnitNo());
 	if( dbg_str != "be" || dbg_num != 4 )
 		return;

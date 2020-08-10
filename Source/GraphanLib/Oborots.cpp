@@ -56,16 +56,16 @@ size_t  CGraphmatFile :: FindOborotto (size_t FirstGraLineNo, size_t HB, short& 
 	return MaxEndLineNo;
 };
 
-void NormalizeOborotStr (const CGraphanDicts& C, string& S)
+void NormalizeOborotStr (const CGraphanDicts& C, std::string& S)
 {
 	
 	RmlMakeUpper( S, C.m_Language );
 	int len = S.length();
 	int i = 0;
-	string Norm;
+	std::string Norm;
 	while (i < len )
 	{
-		string token;
+		std::string token;
 		while	(	
 						(i < len)
 					&&	(		is_alpha((BYTE)S[i])
@@ -105,7 +105,7 @@ void NormalizeOborotStr (const CGraphanDicts& C, string& S)
 	S = Norm;
 };
 
-void  CGraphanDicts:: BuildOborot (const string& s, int OborotNo, bool bFixedFet)
+void  CGraphanDicts:: BuildOborot (const std::string& s, int OborotNo, bool bFixedFet)
 {
 	size_t i = s.find("(");
 	if (i == s.npos) 
@@ -122,7 +122,7 @@ void  CGraphanDicts:: BuildOborot (const string& s, int OborotNo, bool bFixedFet
 
 
 			// приравниваем "в контакте с" и "в контакте со"
-			string q = " " +  O.m_UnitStr;
+			std::string q = " " +  O.m_UnitStr;
 			q = q.substr(q.length() - 2, 2);
 			// если заканчивается на предлог "с", "в" или "к"
 			if ( (q ==  " К") || (q ==  " С") || (q ==  " В") )
@@ -148,7 +148,7 @@ void  CGraphanDicts:: BuildOborot (const string& s, int OborotNo, bool bFixedFet
           if  (    (j == k) 
 			    || (s[j] == '|')) 
 		  {
-             string q;
+             std::string q;
 			 if (i >0) q += s.substr(0,i);
 			 q += " ";
 			 q += s.substr(last_j+1, j-last_j-1);
@@ -192,7 +192,7 @@ void BuildOborottosIndex (CGraphanDicts& C)
 		StringTokenizer  tok (C.m_Oborottos[OborotNo].m_UnitStr.c_str(), " ");
 		while (tok())
 		{
-			string token = tok.val();
+			std::string token = tok.val();
 			StringVector::iterator it = find (AllUnsortedTokens.begin(),AllUnsortedTokens.end(), token);
 			if	(		(it == AllUnsortedTokens.end())
 					|| (*it == token)
@@ -230,7 +230,7 @@ void BuildOborottosIndex (CGraphanDicts& C)
 
 void  CGraphanDicts :: BuildOborottos ()
 {
-	string OborotStr;
+	std::string OborotStr;
 
 	try { 
 
@@ -246,7 +246,7 @@ void  CGraphanDicts :: BuildOborottos ()
 					if (GetOborDic()->GetCortegeFieldNo(k) == GetOborDic()->GetFieldNoByFieldStr("RESTR"))
 						if (GetOborDic()->GetCortegeItem(k,0) != -1)
 					{
-						string G = (const char*)GetOborDic()->GetDomItemStr(GetOborDic()->GetCortegeItem(k,0));
+						std::string G = (const char*)GetOborDic()->GetDomItemStr(GetOborDic()->GetCortegeItem(k,0));
 						if (strcmp(G.c_str(),"fixed") == 0)
 						HasFixedFet = true;
 					};
@@ -254,7 +254,7 @@ void  CGraphanDicts :: BuildOborottos ()
 				for (k=GetOborDic()->GetUnitStartPos(i); k <= GetOborDic()->GetUnitEndPos(i); k++)
 					if (GetOborDic()->GetCortegeFieldNo(k) == GetOborDic()->GetFieldNoByFieldStr("CONTENT"))
 					{
-						string q = GetOborDic()->GetDomItemStr(GetOborDic()->GetCortegeItem(k,0));
+						std::string q = GetOborDic()->GetDomItemStr(GetOborDic()->GetCortegeItem(k,0));
 						BuildOborot(q, i, HasFixedFet);
 					}
 			};

@@ -56,7 +56,7 @@ inline prob_t  mod(const prob_t& x)
 
 
 
-void CTrigramModel::BuildReverseLexProb(const vector<string>& words, vector<map<WORD,prob_t> >& RevLexProbs) const 
+void CTrigramModel::BuildReverseLexProb(const vector<std::string>& words, vector<map<WORD,prob_t> >& RevLexProbs) const 
 {
     RevLexProbs.resize(words.size(), map<WORD,prob_t>() );
     if (!m_pReverseModel) return;
@@ -95,7 +95,7 @@ void CTrigramModel::BuildReverseLexProb(const vector<string>& words, vector<map<
         distr.swap(new_distr);
     }
 }
-void CTrigramModel::ViterbiForward(const vector<string>& words, vector<CViterbiInfo>& Triplet, const vector<CViterbiInfo>& RevTriplet) const 
+void CTrigramModel::ViterbiForward(const vector<std::string>& words, vector<CViterbiInfo>& Triplet, const vector<CViterbiInfo>& RevTriplet) const 
 {
 	if (m_bDebugViterbi)
 	{
@@ -185,7 +185,7 @@ void CTrigramModel::ViterbiForward(const vector<string>& words, vector<CViterbiI
 }
 
 
-void CTrigramModel::ViterbiBackward(const vector<string>& words, const vector<CViterbiInfo>& Triplet, vector<CWordIntepretation>& tags) const 
+void CTrigramModel::ViterbiBackward(const vector<std::string>& words, const vector<CViterbiInfo>& Triplet, vector<CWordIntepretation>& tags) const 
 {
 	if (m_bDebugViterbi)
 	{
@@ -256,13 +256,13 @@ void CTrigramModel::ViterbiBackward(const vector<string>& words, const vector<CV
 };
 
 
-bool CTrigramModel::viterbi(const vector<string>& words, vector<CWordIntepretation>& tags) const 
+bool CTrigramModel::viterbi(const vector<std::string>& words, vector<CWordIntepretation>& tags) const 
 {
     assert (m_TagsCount != UnknownTag );
     if (m_bReverseModel)
     {
         
-        vector<string> words_r = words;
+        vector<std::string> words_r = words;
         reverse(words_r.begin(), words_r.end());
         vector<CViterbiInfo> Triplet(words.size()+1);
         ViterbiForward(words_r, Triplet, vector<CViterbiInfo>());
@@ -276,7 +276,7 @@ bool CTrigramModel::viterbi(const vector<string>& words, vector<CWordIntepretati
         /*if (m_pReverseModel)
         {
             vector<CViterbiInfo> RevTriplets(words.size()+1);
-            vector<string> words_r = words;
+            vector<std::string> words_r = words;
             reverse(words_r.begin(), words_r.end());
             m_pReverseModel->ViterbiForward(words_r, RevTriplets, vector<CViterbiInfo>());
            	ViterbiForward(words, Triplet, RevTriplets);
@@ -291,7 +291,7 @@ bool CTrigramModel::viterbi(const vector<string>& words, vector<CWordIntepretati
 
 #ifdef  USE_TRIGRAM_LEMMATIZER
 
-bool CTrigramModel::testing(string FileName) const
+bool CTrigramModel::testing(std::string FileName) const
 {
 	clock_t start = clock();
 	FILE* fp = fopen(FileName.c_str(), "r");  
@@ -308,14 +308,14 @@ bool CTrigramModel::testing(string FileName) const
 	while (fgets(buffer, 10000, fp))
 	{ 
 		SentNo++;
-		vector<string> words;
+		vector<std::string> words;
 		vector<CWordIntepretation> tags;
 		vector<size_t> refs;
 
 		StringTokenizer tok(buffer, " \t\r\n");
 		for (size_t i=0; tok(); i++)
 		{
-			string t = tok.val();
+			std::string t = tok.val();
 
 			if (i%2==0) 
 			{ 
@@ -353,9 +353,9 @@ bool CTrigramModel::testing(string FileName) const
 				// если  указана опция --check-only-amb-words,
 				// тогда берем в расчет только слова, у которых больше одной леммы
 				vector<CFormInfo> Paradigms;
-				string WordStr = words[i];
+				std::string WordStr = words[i];
 				m_pLemmatizer->CreateParadigmCollection(false, WordStr, is_upper_alpha((BYTE)WordStr[0], m_Language), true, Paradigms);
-				set<string> UniqueLemmas;
+				set<std::string> UniqueLemmas;
 				for (int h=0; h < Paradigms.size(); h++)
 					UniqueLemmas.insert(Paradigms[h].GetWordForm(0));
 				if (UniqueLemmas.size() <= 1)
@@ -376,7 +376,7 @@ bool CTrigramModel::testing(string FileName) const
 			else
 			{
 
-				string rs = (ref == UnknownTag) ? "unk_tag" : m_RegisteredTags[ref];
+				std::string rs = (ref == UnknownTag) ? "unk_tag" : m_RegisteredTags[ref];
 				bool bLemmaDiff =		!(		CheckLemma(words[i], m_RegisteredTags[tags[i].m_TagId1], rs)
 											||	(		(tags[i].m_TagId2 != UnknownTag)
 													&&	CheckLemma(words[i], m_RegisteredTags[tags[i].m_TagId2], rs)
@@ -387,7 +387,7 @@ bool CTrigramModel::testing(string FileName) const
 				else
 					neg_lemma ++;
 				
-				string debug_tag = m_RegisteredTags[tags[i].m_TagId1];
+				std::string debug_tag = m_RegisteredTags[tags[i].m_TagId1];
 				if (tags[i].m_TagId2 != UnknownTag)
 					debug_tag += "["+m_RegisteredTags[tags[i].m_TagId2]+"]";
 				for (int j=(int)i-5; j<(int)min(i+5, words.size()); j++)

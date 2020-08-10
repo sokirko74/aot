@@ -2,11 +2,11 @@
 
 struct CMorphForm 
 {
-	string m_Gramcode;
-	string m_FlexiaStr;
-	string m_PrefixStr;
+	std::string m_Gramcode;
+	std::string m_FlexiaStr;
+	std::string m_PrefixStr;
 
-	CMorphForm (string Gramcode, string FlexiaStr, string PrefixStr)
+	CMorphForm (std::string Gramcode, std::string FlexiaStr, std::string PrefixStr)
 	{
 		m_Gramcode = Gramcode;
 		m_FlexiaStr = FlexiaStr;
@@ -26,19 +26,19 @@ struct CMorphForm
 //----------------------------------------------------------------------------
 struct  CFlexiaModel
 {
-	string				m_Comments;
+	std::string				m_Comments;
 	vector<CMorphForm>	m_Flexia;
 
 	bool		operator == (const CFlexiaModel& X) const 
 	{
 		return	m_Flexia == X.m_Flexia;
 	};
-	bool		ReadFromString(string& s);
-	string		ToString() const;
+	bool		ReadFromString(std::string& s);
+	std::string		ToString() const;
 
-	string		get_first_flex() const;
-	string		get_first_code() const;
-	bool		has_ancode(const string& search_ancode) const;
+	std::string		get_first_flex() const;
+	std::string		get_first_code() const;
+	bool		has_ancode(const std::string& search_ancode) const;
 	
 };
 
@@ -54,8 +54,8 @@ struct CAccentModel
 		return m_Accents == X.m_Accents;
 
 	};
-	bool		ReadFromString(const string& s);
-	string		ToString() const;
+	bool		ReadFromString(const std::string& s);
+	std::string		ToString() const;
 };
 
 
@@ -98,10 +98,10 @@ struct CLemmaInfo
 		return m_AccentModelNo < obj.m_AccentModelNo;
 	}
 
-	string GetCommonAncodeIfCan()  const 
+	std::string GetCommonAncodeIfCan()  const 
 	{
 		if (m_CommonAncode[0] == 0) return "";
-		return string(m_CommonAncode,2);	
+		return std::string(m_CommonAncode,2);	
 	}
 
 };

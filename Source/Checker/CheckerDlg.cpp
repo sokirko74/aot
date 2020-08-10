@@ -343,7 +343,7 @@ BOOL CCheckerDlg::LoadData()
 	
 	while( fgets(tmp,8196,fi)!=NULL )
 	{
-		string s = tmp;
+		std::string s = tmp;
 		Trim(s);
 		if (s.empty())
 		{
@@ -357,11 +357,11 @@ BOOL CCheckerDlg::LoadData()
 			if (s.substr(i,2) == "\\n")
 				s.replace(i,2,"\r\n");
 
-		string Comments;
+		std::string Comments;
 
 		{
 			int k = s.find("//");
-			if (k != string::npos)
+			if (k != std::string::npos)
 			{
 				Comments = s.substr(k+2);
 				s.erase(k);
@@ -471,7 +471,7 @@ BOOL CCheckerDlg::LoadData()
 	return TRUE;
 }
 
-string CCheckerDlg::GetBaseFileName() const
+std::string CCheckerDlg::GetBaseFileName() const
 {
 	return MakeFName((const char*)GetCurrFileName(), "base");
 };
@@ -497,7 +497,7 @@ BOOL CCheckerDlg::LoadBase()
 	while( fgets(tmp,40000,fb)!=NULL )
 	{
 		LineNo++;
-		string line  = tmp;
+		std::string line  = tmp;
 		if (line.empty()) continue;
 		if( line[0] != '[')
 		{
@@ -506,7 +506,7 @@ BOOL CCheckerDlg::LoadBase()
 			return FALSE;
 		}
 		int index = line.find("] ");
-		if( index == string::npos)
+		if( index == std::string::npos)
 		{
 			ErrorMessage (Format("Cannot read base at line %i (no close bracket)",LineNo));
 			fclose(fb);
@@ -583,12 +583,12 @@ void CCheckerDlg::OnOK()
 /////////////////////////////////////////////////////////////////////////////
 
 
-string GetGramInfo (IGramTabPtr  A, IParadigmPtr& F)
+std::string GetGramInfo (IGramTabPtr  A, IParadigmPtr& F)
 {
-	string tab_str = (const char*)F->SrcAncode;
+	std::string tab_str = (const char*)F->SrcAncode;
 	short   PartOfSpeech = A->GetPartOfSpeech (tab_str.c_str());
-	string  Result	= (const char*)A->GetPartOfSpeechStr(PartOfSpeech) + string(" ") ;	
-	string  CommonAncode = (const char*)F->TypeAncode;
+	std::string  Result	= (const char*)A->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ") ;	
+	std::string  CommonAncode = (const char*)F->TypeAncode;
 	if (!CommonAncode.empty() && CommonAncode[0] != '?')
 	{
 		Result +=  (const char*)A->GrammemsToStr (A->GetGrammems(_bstr_t(CommonAncode.c_str())));
@@ -599,14 +599,14 @@ string GetGramInfo (IGramTabPtr  A, IParadigmPtr& F)
 	{
 		
 		QWORD G = A->GetGrammems(_bstr_t(tab_str.c_str()+i));
-		Result += (const char*)A->GrammemsToStr (G) + string(";");
+		Result += (const char*)A->GrammemsToStr (G) + std::string(";");
 	};
 	return Result;
 }
 
-string GetStringByMorph(MorphLanguageEnum	Language, IParadigmCollectionPtr P, IGramTabPtr GramTab)
+std::string GetStringByMorph(MorphLanguageEnum	Language, IParadigmCollectionPtr P, IGramTabPtr GramTab)
 {
-	string Result;
+	std::string Result;
 	for (size_t i=0; i< P->Count; i++)
 	{
 		IParadigmPtr F =  P->Item[i];
@@ -621,7 +621,7 @@ string GetStringByMorph(MorphLanguageEnum	Language, IParadigmCollectionPtr P, IG
 };
 
 
-string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr GramTab)
+std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr GramTab)
 {
 	ISentencesCollectionPtr Synan = P;
 	
@@ -647,14 +647,14 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 
 				if (W->MainVerbsCount > 0)
 				{
-					string S = string("AnalytForm\t=\t")+  (const char*)W->GetWordStr();
+					std::string S = std::string("AnalytForm\t=\t")+  (const char*)W->GetWordStr();
 					for (size_t i=0; i< W->MainVerbsCount; i++)
 					{
-						S += string(" ") + (const char*)piSentence->Word[W->MainVerbs[i]]->GetWordStr();
+						S += std::string(" ") + (const char*)piSentence->Word[W->MainVerbs[i]]->GetWordStr();
 
 						IWordPtr W1 = piSentence->Word[W->MainVerbs[i]];
 						for (size_t j=0; j< W1->MainVerbsCount; j++)
-							S += string(" ") + (const char*)piSentence->Word[W1->MainVerbs[j]]->GetWordStr();
+							S += std::string(" ") + (const char*)piSentence->Word[W1->MainVerbs[j]]->GetWordStr();
 
 					};
 					Groups.insert(S);
@@ -667,12 +667,12 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 					for (size_t i=0; i< W->HomonymsCount; i++)
 					{
 						IHomonymPtr H = W->Homonym[i];
-						Homonyms.push_back(string((const char*)H->Lemma) + string("[")+(const char*)H->POSStr+string("]"));
+						Homonyms.push_back(std::string((const char*)H->Lemma) + std::string("[")+(const char*)H->POSStr+std::string("]"));
 					};
 					sort (Homonyms.begin(), Homonyms.end());
-					string S = string("Homonyms\t=\t")+  (const char*)W->GetWordStr();
+					std::string S = std::string("Homonyms\t=\t")+  (const char*)W->GetWordStr();
 					for (size_t i=0; i< Homonyms.size(); i++)
-						S += string(" ") + Homonyms[i];
+						S += std::string(" ") + Homonyms[i];
 					Groups.insert(S);
 				};
 				
@@ -691,12 +691,12 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 				int nVmax = piClause->ClauseVariant[0]->VariantWeight;
 				if (piClause->RelativeWord != -1)
 				{
-						string S = string("RelativeWord\t=\t")+  (const char*)piSentence->Word[piClause->RelativeWord]->GetWordStr();
+						std::string S = std::string("RelativeWord\t=\t")+  (const char*)piSentence->Word[piClause->RelativeWord]->GetWordStr();
 						Groups.insert(S);
 				};
 				if (piClause->AntecedentWord != -1)
 				{
-						string S = string("AntecedentWord\t=\t")+  (const char*)piSentence->Word[piClause->AntecedentWord]->GetWordStr();
+						std::string S = std::string("AntecedentWord\t=\t")+  (const char*)piSentence->Word[piClause->AntecedentWord]->GetWordStr();
 						Groups.insert(S);
 				};
 				
@@ -709,7 +709,7 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 					{
 						int WordNo  = V->Unit[V->Subjects[i] ]->WordNum;
 						IWordPtr piSubjWord = piSentence->Word[WordNo];
-						string S = string("SUBJ\t=\t")+  (const char*)piSubjWord->GetWordStr();
+						std::string S = std::string("SUBJ\t=\t")+  (const char*)piSubjWord->GetWordStr();
 						Groups.insert(S);
 					};
 
@@ -717,17 +717,17 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 					{
 						int  WordNo  = V->Unit[V->Predicate]->WordNum;
 						IWordPtr piPredWord = piSentence->Word[WordNo];
-						string S = string("PREDICATE\t=\t")+  (const char*)piPredWord->GetWordStr();
+						std::string S = std::string("PREDICATE\t=\t")+  (const char*)piPredWord->GetWordStr();
 						for (size_t i=0; i< piPredWord->MainVerbsCount; i++)
 						{
-							S+= string("-") + (const char*)piSentence->Word[piPredWord->MainVerbs[i]]->GetWordStr();
+							S+= std::string("-") + (const char*)piSentence->Word[piPredWord->MainVerbs[i]]->GetWordStr();
 						};
 
 						Groups.insert(S);
 					};
 					// распечатываем клаузу
 
-					string S = GetClauseTypeDescr(Language, piClause, V->ClauseRootNo);
+					std::string S = GetClauseTypeDescr(Language, piClause, V->ClauseRootNo);
 					S += "\t=\t";
 					for (int WordNo = piClause->FirstWord; WordNo <= piClause->LastWord; WordNo++)
 					{
@@ -770,7 +770,7 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 			return "an exception occured";
 		}
 	}; //  cycle for sentences
-	string Result;
+	std::string Result;
 	for (StringSet::const_iterator it = Groups.begin(); !(it == Groups.end()); it++)
 	{
 		Result += *it;
@@ -782,10 +782,10 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 };
 
 
-string GetStringBySentenceBreaker (GRAPHANLib::IGraphmatFilePtr piGraphan)
+std::string GetStringBySentenceBreaker (GRAPHANLib::IGraphmatFilePtr piGraphan)
 {
 	int CountOfSentences = 1;
-	string Result, Line;
+	std::string Result, Line;
 
 	for (int i=1; i<piGraphan->GetLineCount(); i++)
 	{
@@ -820,7 +820,7 @@ std::string  MakePostMorphCheck (CCOMSyntaxHolder& SyntaxHolder, std::string Inp
     SyntaxHolder.m_piMAPost->bHumanFriendlyOutput = TRUE; 
     SyntaxHolder.BuildBeforeSyntax(Input.c_str(), FALSE, FALSE, FALSE);
     SyntaxHolder.m_piMAPost->bHumanFriendlyOutput = FALSE;
-    string Result;
+    std::string Result;
     for (size_t i=0; i < SyntaxHolder.m_piBeforeSyntaxPlmLines->Count; i++)
     {
         Result += (const char*)SyntaxHolder.m_piBeforeSyntaxPlmLines->Item[i];
@@ -829,7 +829,7 @@ std::string  MakePostMorphCheck (CCOMSyntaxHolder& SyntaxHolder, std::string Inp
 	return Result;
 }
 
-string  MakeMorphCorpusCheck (CCOMSyntaxHolder& SyntaxHolder, std::string Input)
+std::string  MakeMorphCorpusCheck (CCOMSyntaxHolder& SyntaxHolder, std::string Input)
 {
 	CMorphCorpusCreator C;
 	SyntaxHolder.GetSentencesFromSynAn(Input.c_str(), FALSE, FALSE, FALSE);
@@ -867,7 +867,7 @@ static UINT MakeProc(LPVOID pArg)
 	
 	for( int i=0; i<size; i++ )
 	{
-		string Result;
+		std::string Result;
 		int SentenceNo = i+pDlg->m_from-1;
         if (SentenceNo >= pDlg->m_CheckExamples.size())
         {
@@ -932,7 +932,7 @@ static UINT MakeProc(LPVOID pArg)
 			case  PredictionCheck:
 						{
 							IParadigmCollectionPtr P;
-							string WordForm  = pDlg->m_CheckExamples[SentenceNo].m_Text;
+							std::string WordForm  = pDlg->m_CheckExamples[SentenceNo].m_Text;
 							Trim(WordForm);
 							if (pDlg->m_Language == morphGerman)
 							{
@@ -959,27 +959,27 @@ static UINT MakeProc(LPVOID pArg)
 						}
 			case TranslatorCheck:
 						{
-							string SemGraph = (const char*)pDlg->piSeman->FindSituations(pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),0,"общ",20000,-1,"");
-							string SynGraph = (const char*)pDlg->piSeman->TranslateToEnglish();
+							std::string SemGraph = (const char*)pDlg->piSeman->FindSituations(pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),0,"общ",20000,-1,"");
+							std::string SynGraph = (const char*)pDlg->piSeman->TranslateToEnglish();
 							Result  = (const char*)pDlg->piSeman->BuildSentence();
 							break;
 						};
 			case RusSynthesisCheck:
 						{
-							string SourceText = pDlg->m_CheckExamples[SentenceNo].m_Text;
-							string LemmasToReplace;
+							std::string SourceText = pDlg->m_CheckExamples[SentenceNo].m_Text;
+							std::string LemmasToReplace;
 							{
 								int index = SourceText.find("##");
-								if (index != string::npos)
+								if (index != std::string::npos)
 								{
 									LemmasToReplace = SourceText.substr(index+2);
 									SourceText.erase(index);
 								}
 							}
-							string Question;
+							std::string Question;
 							{
 								int index = SourceText.find("#mem");
-								if (index != string::npos)
+								if (index != std::string::npos)
 								{
 									Question = SourceText.substr(index+4);
 									SourceText.erase(index);
@@ -1024,7 +1024,7 @@ static UINT MakeProc(LPVOID pArg)
 			// ignoring homonims order for PostMorphCheck
 			int k = 0;
 			for	(; pDlg->m_base[SentenceNo+k].num != b.num; k++);
-			string s = pDlg->m_base[SentenceNo+k].txt;
+			std::string s = pDlg->m_base[SentenceNo+k].txt;
 			if ( pDlg->m_CheckerType == PostMorphCheck && s.length() ==  Result.length())
 			{
 				
@@ -1067,9 +1067,9 @@ int CCheckerDlg::GetNumberOfExamplesToCheck() const
 	return  min(m_CheckExamples.size()-m_from+1,m_numb);
 };
 
-string change_x1_to_cr(string s)
+std::string change_x1_to_cr(std::string s)
 {
-	string b;
+	std::string b;
 	for (size_t i=0; i < s.length(); i++)
 		if (s[i] == 1)
 			b += "\r\n";
@@ -1107,9 +1107,9 @@ bool CCheckerDlg::PerformExternalExeFileCheck(vector<string>& Result)
 
 	for(int FileNo=0; FileNo < InputFiles.size();FileNo++)
 	{
-		string InputFile = InputFiles[FileNo];
+		std::string InputFile = InputFiles[FileNo];
 
-		string CommandLine = Format(m_CommandLine.c_str(), InputFile.c_str());
+		std::string CommandLine = Format(m_CommandLine.c_str(), InputFile.c_str());
 		system (CommandLine.c_str());
 		FILE * fp = fopen(m_ExternalOutFile.c_str(), "r");
 		if (!fp)
@@ -1138,12 +1138,12 @@ bool CCheckerDlg::PerformExternalExeFileCheck(vector<string>& Result)
 				if (!bFirstResultIsFound)
 				{
 
-					m_CheckExamples.back().m_Text += string(" ") + change_x1_to_cr(buffer);
+					m_CheckExamples.back().m_Text += std::string(" ") + change_x1_to_cr(buffer);
 				}
 			}
 			else
 			{
-				Result.back() += buffer + string("\x1");
+				Result.back() += buffer + std::string("\x1");
 				bFirstResultIsFound = true;
 			}
 		};

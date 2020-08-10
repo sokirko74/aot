@@ -3,7 +3,7 @@
 // via COM-interfaces. The main methods of the class are the following:
 // 1. 	BOOL LoadSyntax(MorphLanguageEnum langua) - loading all dictionaries 
 // of the syntax system into the memory for the  given language
-// 2. 	BOOL GetSentencesFromSynAn(string str)  - building a syntax structure for 
+// 2. 	BOOL GetSentencesFromSynAn(std::string str)  - building a syntax structure for 
 //    the given text ("str")
 
  
@@ -39,12 +39,12 @@ public:
 	void DeleteProcessors();
 	BOOL LoadSyntaxModule(MorphLanguageEnum langua);
 
-	BOOL BuildBeforeSyntax(string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults);
+	BOOL BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults);
 	BOOL BuildSyntax(BOOL bSaveIntermResults);
-	BOOL GetSentencesFromSynAn(string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults);
+	BOOL GetSentencesFromSynAn(std::string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults);
 	
 	
 	
 };
-extern string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo);
+extern std::string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo);
 #endif

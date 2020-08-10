@@ -25,7 +25,7 @@ void CRusSemStructure::InterpretOrganisations (long ClauseNo)
 
 // все термины были разделены на отдельные слова 
 // создаем отношение из Nd2 в Nd1  (нумерация берется из R (Nd1, Nd2))) 
-void CRusSemStructure::ApplyTerminSemStrForOneRel (string RelationStr, long Nd1, long Nd2, const CRossHolder* RossHolder)
+void CRusSemStructure::ApplyTerminSemStrForOneRel (std::string RelationStr, long Nd1, long Nd2, const CRossHolder* RossHolder)
 {
 	vector<long> Rels;
 
@@ -99,7 +99,7 @@ bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CRoss
 	if (MainNodeNo == -1)
 		return false;
 	const CThesaurus* Thes = m_pData->GetThes(m_Nodes[StartNodeNo].m_ThesaurusId);
-	string ErrorMess = "Ошибка в поле AUX термина ";  
+	std::string ErrorMess = "Ошибка в поле AUX термина ";  
 	ErrorMess += Thes->m_Termins[Thes->GetTerminNoByTextEntryId(m_Nodes[StartNodeNo].m_TerminId)].m_TerminStr;
 
 	for (size_t k=SaveDopRelationsCount; k < m_ThesSemRelations.size(); k++)
@@ -134,7 +134,7 @@ WORD CRusSemStructure::GetArticleByModel (long TerminId, int ThesaurusId) const
 	long ModelNo = Termin.m_ModelNo;
 	const CInnerModel& Model =	Thes->m_Models[ModelNo];
 	long ModelId = Model.m_ModelId;
-	string S = Format("@Модель%i",ModelId);
+	std::string S = Format("@Модель%i",ModelId);
 	return  GetRoss(GetRossIdByThesId(ThesaurusId))->LocateUnit(S.c_str(), 1);
 };
 
@@ -156,7 +156,7 @@ void CRusSemStructure::ReadDopFieldForClause(long ClauseNo)
 			const CRossHolder* Dict = GetRossHolder(GetRossIdByThesId(ThesaurusId));
 
 			if (Dict == 0) continue;
-			string UnitStr = Format("%i",m_Nodes[StartNodeNo].m_TerminId);
+			std::string UnitStr = Format("%i",m_Nodes[StartNodeNo].m_TerminId);
 
 			assert (m_Nodes[StartNodeNo].m_Words.size() > 0);
 			long CollocId = m_Nodes[StartNodeNo].m_Words[0].m_WordNo;
@@ -191,7 +191,7 @@ void CRusSemStructure::ReadThesInterps(long ClauseNo)
 		{
 			const CRossHolder* Dict = GetRossHolder(GetRossIdByThesId(m_Nodes[StartNodeNo].m_ThesaurusId));
 			if (Dict == 0) continue;
-			string UnitStr = Format("%i",m_Nodes[StartNodeNo].m_TerminId);
+			std::string UnitStr = Format("%i",m_Nodes[StartNodeNo].m_TerminId);
 			long UnitNo = Dict->LocateUnit(UnitStr.c_str(), 1);
 			if  (     (UnitNo != ErrUnitNo) 
 				&&  !Dict->GetRoss()->IsEmptyArticle(UnitNo)
@@ -255,7 +255,7 @@ WORD CRusSemStructure::GetUnitNoByTerminId(DictTypeEnum   DictType,	long TerminI
 {
      const CRossHolder* Dict = GetRossHolder(DictType);
      if (Dict == 0) return ErrUnitNo;
-     string S = Format("%i",TerminId);
+     std::string S = Format("%i",TerminId);
      long UnitNo = Dict->LocateUnit(S.c_str(), 1);
  
      if (UnitNo == ErrUnitNo)  
@@ -266,7 +266,7 @@ WORD CRusSemStructure::GetUnitNoByTerminId(DictTypeEnum   DictType,	long TerminI
 };
 
 
-void CRusSemStructure::GetThesInterps(string UnitStr, const CRusSemWord& W, const CThesaurus* Thes, DictTypeEnum   DictType,	CRusSemNode& N) const
+void CRusSemStructure::GetThesInterps(std::string UnitStr, const CRusSemWord& W, const CThesaurus* Thes, DictTypeEnum   DictType,	CRusSemNode& N) const
 {
 	try 
 	{
@@ -345,7 +345,7 @@ void CRusSemStructure::AscribeFindConceptFets(long ClauseNo, const StringVector&
 	  const CThesaurus* Thes = m_pData->GetThes(GetThesIdByRossId(m_Nodes[i].GetType()));
 	  for (long  k=0; k < ConceptStrs.size(); k++)
 	  {
-		 string S = ConceptStrs[k].substr(1, ConceptStrs[k].length() - 1).c_str();
+		 std::string S = ConceptStrs[k].substr(1, ConceptStrs[k].length() - 1).c_str();
 		 Trim(S);
 		 bool Result = Thes->IsA(TerminId, S.c_str());
 		 if (Result )
@@ -392,13 +392,13 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 					for (size_t j = Ross->GetUnitStartPos(UnitNo); j<= Ross->GetUnitEndPos(UnitNo); j++)
 					{
 						TCortege C = GetCortege(Ross,j);
-						string FieldStr = Ross->Fields[C.m_FieldNo].FieldStr;
+						std::string FieldStr = Ross->Fields[C.m_FieldNo].FieldStr;
 						if (   (FieldStr == "LEX") 
 							|| (FieldStr == "MANLEX")
 							|| (FieldStr == "ELEX")
 							)
 						{
-							string S =   RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
+							std::string S =   RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
 							EngRusMakeUpper(S);
 							if  (    (S.length() > 0) 
 								&& (S[0] == '#')
@@ -666,7 +666,7 @@ try {
 		 && m_Nodes[i].m_Words[0].m_CharCase == UpUp
 		)
 	 {
-		 string WordStr =  m_Nodes[i].m_Words[0].m_Word;
+		 std::string WordStr =  m_Nodes[i].m_Words[0].m_Word;
 		 long TerminNo =  -1;
 		 long ThesId = 0;
 		 if (TerminNo == -1)

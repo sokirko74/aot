@@ -73,7 +73,7 @@ const CRossHolder*	CRossDoc::GetRossHolder() const
 		return &m_ExternalRossHolder;
 }
 
-string CRossDoc::GetLockFileName()  const
+std::string CRossDoc::GetLockFileName()  const
 {
 	return MakeFName(GetRossHolder()->m_DictPath,"lck").c_str();
 }
@@ -84,7 +84,7 @@ void CRossDoc::RemoveLock() const
 {
    try 
    {
-		string FileName = GetLockFileName();
+		std::string FileName = GetLockFileName();
 		if (access(FileName.c_str(), 0) != -1)
 			CFile::Remove(FileName.c_str());
 	}
@@ -233,7 +233,7 @@ void CreateLockFile(CString FileName)
 {
 	FILE* fp = fopen (FileName, "wb");
 	try {
-        string strPath = GetRegistryString("SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName\\ComputerName");
+        std::string strPath = GetRegistryString("SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName\\ComputerName");
         fprintf (fp, "MachineName = %s \r\n", strPath.c_str());
 		fprintf (fp,"Date = %s\r\n", CTime::GetCurrentTime().Format( "%A, %B %d, %Y " )); 
 		fprintf (fp,"Time = %s\r\n", CTime::GetCurrentTime().Format( "%H : %M" )); 
@@ -263,7 +263,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 
 	try {
 		File = ar.GetFile();
-		string FilePath = (const char*)File->GetFilePath();
+		std::string FilePath = (const char*)File->GetFilePath();
 		m_ReadOnly  =  (access(GetLockFileName().c_str(), 0) != -1) || m_FirstLoadReadonly;
 
 
@@ -302,7 +302,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 	}
 	catch (...)
 	{
-		string Mess = "Cannot read user zone "+File->GetFileName();
+		std::string Mess = "Cannot read user zone "+File->GetFileName();
 		AfxMessageBox (Mess.c_str());
 	};
 
@@ -371,7 +371,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 		}
 		catch (...)
 		{
-			string Mess = "Cannot read options zone "+File->GetFileName();
+			std::string Mess = "Cannot read options zone "+File->GetFileName();
 			AfxMessageBox (Mess.c_str());
 		};
 	delete Buffer;
@@ -451,7 +451,7 @@ CString CRossDoc::SerializeInner(CArchive& ar)
 		m_bSerialized = true;
 
 		CString Login;
-		string DictFileName = (const char*)ar.GetFile()->GetFilePath();  
+		std::string DictFileName = (const char*)ar.GetFile()->GetFilePath();  
 		ReadConfig(ar, Login);
 		CAllRossesHolder* Trans = GetSemBuilder().m_RusStr.m_pData;
 		Trans->m_LastUpdateTime++;
@@ -467,7 +467,7 @@ CString CRossDoc::SerializeInner(CArchive& ar)
 		}
 		catch(...)
 		{
-			string error  = "Cannot load "+DictFileName+":"+GetRoss()->m_LastError;
+			std::string error  = "Cannot load "+DictFileName+":"+GetRoss()->m_LastError;
 			TRACE (error.c_str());
 			throw CExpc( error );
 			return "";

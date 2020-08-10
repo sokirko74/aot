@@ -40,8 +40,8 @@ STDMETHODIMP CSemStructure::InitSemanDicts()
 STDMETHODIMP CSemStructure::GetSyntaxTreeByText(BSTR text, int ClauseVarNo, BSTR* Graph)
 {
 	try {
-		string t = text ? (const char*)_bstr_t(text) : "";
-		string ResultGraph;
+		std::string t = text ? (const char*)_bstr_t(text) : "";
+		std::string ResultGraph;
 		if (!m_RusStr.GetSyntaxTreeByText(t, ClauseVarNo, ResultGraph))
 			return S_FALSE;
 		*Graph = _bstr_t(ResultGraph.c_str()).copy();
@@ -79,11 +79,11 @@ STDMETHODIMP CSemStructure::FindSituationsForNextSentence(BOOL* Result)
 
 STDMETHODIMP CSemStructure::FindSituations(BSTR text, long UserTreeVariantNo, BSTR PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, BSTR AllowableLexVars, BSTR* Graph)
 {
-	string ResultGraph;
+	std::string ResultGraph;
 
-	string sText				= text ? (const char*)_bstr_t(text) : "";
-	string sPO					= PO ? (const char*)_bstr_t(PO) : "";
-	string sAllowableLexVars	= AllowableLexVars? (const char*)_bstr_t(AllowableLexVars) : "";
+	std::string sText				= text ? (const char*)_bstr_t(text) : "";
+	std::string sPO					= PO ? (const char*)_bstr_t(PO) : "";
+	std::string sAllowableLexVars	= AllowableLexVars? (const char*)_bstr_t(AllowableLexVars) : "";
 	
 	bool bRes = CSemStructureBuilder::FindSituations
 		(
@@ -106,7 +106,7 @@ STDMETHODIMP CSemStructure::FindSituations(BSTR text, long UserTreeVariantNo, BS
 
 STDMETHODIMP CSemStructure::TranslateToEnglish(BSTR* Graph)
 {
-	string ResultGraph;
+	std::string ResultGraph;
 	bool bRes = CSemStructureBuilder::TranslateToEnglish(ResultGraph);
 	if (!bRes)
 		return E_FAIL;
@@ -117,7 +117,7 @@ STDMETHODIMP CSemStructure::TranslateToEnglish(BSTR* Graph)
 
 STDMETHODIMP CSemStructure::BuildSentence(BSTR* Sentence)
 {
-	string ResultSentence;
+	std::string ResultSentence;
 	bool bRes = CSemStructureBuilder::BuildSentence(ResultSentence);
 	if (!bRes)
 		return E_FAIL;
@@ -127,7 +127,7 @@ STDMETHODIMP CSemStructure::BuildSentence(BSTR* Sentence)
 
 STDMETHODIMP CSemStructure::SyntRusSentence(BSTR* Sentence)
 {
-	string ResultSentence;
+	std::string ResultSentence;
 	bool bRes = CSemStructureBuilder::SyntRusSentence(ResultSentence);
 	if (!bRes)
 		return E_FAIL;
@@ -243,7 +243,7 @@ STDMETHODIMP CSemStructure::put_SilentMode(BOOL newVal)
 
 STDMETHODIMP CSemStructure::SetLemmasToReplace(BSTR LemmasToReplace)
 {
-	string s = LemmasToReplace ? (const char*)_bstr_t(LemmasToReplace) : "";
+	std::string s = LemmasToReplace ? (const char*)_bstr_t(LemmasToReplace) : "";
 
 	if (!m_RusStr.SetLemmasToReplace(s))
 		return E_FAIL;
@@ -265,7 +265,7 @@ STDMETHODIMP CSemStructure::ClearSavedSentences(void)
 
 STDMETHODIMP CSemStructure::Answer(BSTR* sAnswer)
 {
-	string Result = CSemStructureBuilder::Answer();
+	std::string Result = CSemStructureBuilder::Answer();
 	*sAnswer = _bstr_t(Result.c_str()).copy();
 	return S_OK;
 }

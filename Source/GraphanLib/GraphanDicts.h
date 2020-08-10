@@ -70,7 +70,7 @@ public:
 	   int  m_SpacedWordLen; 
 	};
 	vector<CSpacedWord> m_Spaces;
-	bool   ReadSpaces (string FileName);
+	bool   ReadSpaces (std::string FileName);
 	const char*  SearchSpace (const char *In ,int *len ) const;
 
 
@@ -79,12 +79,12 @@ public:
 	// типа C++, TCP/IP.
 	StringVector			m_Idents[256];
 	bool FindInIdents (const char* s, BYTE& ResultLen) const;
-	bool ReadIdents (string FileName);
+	bool ReadIdents (std::string FileName);
 
 
 	// John, Bill
 	vector<CEnglishName>	m_EnglishNames;
-	bool		ReadENames (string FileName);
+	bool		ReadENames (std::string FileName);
 	
 
 	mutable _share_pointer_t<CDictionary*>	m_pOborDictionary;
@@ -106,7 +106,7 @@ public:
 
 	
 	
-	void		BuildOborot (const string& s, int OborotNo,bool bFixedFet);
+	void		BuildOborot (const std::string& s, int OborotNo,bool bFixedFet);
 	void		BuildOborottos ();
     
 	vector<CAbbrev>		m_Abbrevs;
@@ -118,12 +118,12 @@ public:
 	bool		IsRegisteredKeyModifier(const char* Str, size_t Len) const;
 
 	StringVector m_Keys;
-	bool		ReadKeyboard(string FileName);
+	bool		ReadKeyboard(std::string FileName);
 	
 
 	StringVector m_Extensions;
 	bool			IsExtension(const char * UpperStr, BYTE Len) const;
-	bool		  ReadExtensions(string FileName);
+	bool		  ReadExtensions(std::string FileName);
 	
 
 

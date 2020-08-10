@@ -38,7 +38,7 @@ int CLemWord::ProcessGraphematicalDescriptors(const char* LineStr)
 	if (MorphSignPos == -1)
 		MorphSignPos = strlen(LineStr);
 
-    m_GraDescrs = parse_gra_descriptors(string (LineStr, MorphSignPos).c_str(), m_UnparsedGraphemDescriptorsStr);
+    m_GraDescrs = parse_gra_descriptors(std::string (LineStr, MorphSignPos).c_str(), m_UnparsedGraphemDescriptorsStr);
 
 	m_bSpace =			HasDes(OSpc) 
 					||	HasDes(OEOLN) 
@@ -63,7 +63,7 @@ int CLemWord::ProcessGraphematicalDescriptors(const char* LineStr)
 
 	bool bRomanNumber = is_roman_number(m_strWord.c_str(), m_strWord.length() );
 	size_t hyphen_occur = m_strWord.find("-");
-	if ((hyphen_occur != string::npos) && (hyphen_occur!=0))
+	if ((hyphen_occur != std::string::npos) && (hyphen_occur!=0))
 	{
 		// "Павла I-го" 
 		// "I-го" - одно слово
@@ -129,7 +129,7 @@ bool CLemWord::AddNextHomonym(const char* sPlmLine)
 }
 
 
-int ParseOborotNo(const string& Descriptors)
+int ParseOborotNo(const std::string& Descriptors)
 {
 	const char* strObor = strstr(Descriptors.c_str(),"EXPR_NO");
 	if( strObor )
@@ -311,7 +311,7 @@ void CLemWord::DeleteOborotMarks()
     DelDes(OEXPR2);
 
     size_t i = m_UnparsedGraphemDescriptorsStr.find("EXPR_NO");
-    if (i != string::npos)
+    if (i != std::string::npos)
 	{
 		m_UnparsedGraphemDescriptorsStr.erase(i,strlen ("EXPR_NO"));
 
@@ -404,7 +404,7 @@ void CLemWord::DeleteMarkedHomonymsBeforeClauses()
 
 }
 
-void	CLemWord::SetWordStr (string NewValue, MorphLanguageEnum langua)
+void	CLemWord::SetWordStr (std::string NewValue, MorphLanguageEnum langua)
 {
 	m_strWord = NewValue;
 	m_strUpperWord =  NewValue;
@@ -413,7 +413,7 @@ void	CLemWord::SetWordStr (string NewValue, MorphLanguageEnum langua)
 
 
 
-bool CLemWord::FindLemma(string strLemma)  const
+bool CLemWord::FindLemma(std::string strLemma)  const
 {
 
 	for(int i = 0 ; i < GetHomonymsCount(); i++)
@@ -493,9 +493,9 @@ int CLemWord::GetHomonymByPosesandGrammem(poses_mask_t Poses, BYTE grammem) cons
 
 
 
-string CLemWord :: BuildGraphemDescr ()  const
+std::string CLemWord :: BuildGraphemDescr ()  const
 {
-    string Result;
+    std::string Result;
     for (int l=0;l<63;l++)     // write descriptors 
         if ( HasDes(((Descriptors)l) )) 
 		{  
@@ -507,9 +507,9 @@ string CLemWord :: BuildGraphemDescr ()  const
 }
 
 
-string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const
+std::string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const
 {
-    string Result;
+    std::string Result;
     if (!bFirstHomonym) Result = "  ";
 	if(!pHomonym) pHomonym = GetHomonym(0);
 	Result += m_strWord;
@@ -531,10 +531,10 @@ string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  c
 	return  Result;
 }
 
-string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const
+std::string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const
 {
 
-    string Result;
+    std::string Result;
 
     if (!bFirstHomonym) Result = "  ";
 

@@ -11,7 +11,7 @@
 
 STDMETHODIMP CCOMLemmatizer::LoadDictionariesRegistry() 
 {	
-	string strError;
+	std::string strError;
 	m_pLemmatizer->LoadDictionariesRegistry(strError);
 	if (	m_pLemmatizer->m_bLoaded )
 	{
@@ -52,7 +52,7 @@ STDMETHODIMP CCOMLemmatizer::put_UseStatistic(/*[in]*/ BOOL newVal)
 	
 STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionInner(bool bNorm, /*[in]*/ BSTR form, /*[in]*/ BOOL capital, BOOL use_prediction, /*[out, retval]*/ IParadigmCollection* *pVal)
 {
-	string WordStr = (const char*) _bstr_t (form);
+	std::string WordStr = (const char*) _bstr_t (form);
 	vector<CFormInfo> Vec;
     m_pLemmatizer->CreateParadigmCollection(bNorm, WordStr, (capital?true:false), (use_prediction?true:false), Vec);
 	CComObject<CCOMParadigmCollection>* res_collection = NULL;
@@ -85,7 +85,7 @@ STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionFromForm(/*[in]*/ BSTR form
 
 STDMETHODIMP CCOMLemmatizer::CheckABC(BSTR Word, BOOL* Result) 
 {
-	string s = (const char*)_bstr_t(Word);
+	std::string s = (const char*)_bstr_t(Word);
 	RmlMakeUpper(s,m_pLemmatizer->GetLanguage());
 	*Result =  m_pLemmatizer->CheckABC(s) ?  TRUE : FALSE;
 	return S_OK;

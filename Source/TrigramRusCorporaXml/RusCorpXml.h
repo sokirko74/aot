@@ -3,7 +3,7 @@
 class TiXmlDocument;
 class CRusCorpXmlFile{
 public:
-    string              m_SentenceStr;
+    std::string              m_SentenceStr;
     TiXmlDocument*      m_CurrSentXml;
     vector<CXmlToken>   m_CurrSentTokens;
     

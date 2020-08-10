@@ -44,9 +44,9 @@ const TCortege10& CTempArticle::GetCortege (size_t i)  const
 };
 
 
-string CTempArticle::ConstructFldName (BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId)
+std::string CTempArticle::ConstructFldName (BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId)
 {	
-	string s(m_pRoss->Fields[FieldNo].FieldStr);
+	std::string s(m_pRoss->Fields[FieldNo].FieldStr);
 	
 	if (LeafId > 0)
 		s += (LeafId == ErrUChar) ? '*':('0'+LeafId);
@@ -168,10 +168,10 @@ bool CTempArticle::ArticleToText ()
    BYTE CurrLeafId = ErrUChar;
    BYTE CurrBracketLeafId = ErrUChar;
    BYTE CurrFieldNo = ErrUChar;
-   string LeftPart;
+   std::string LeftPart;
    char RightPart[2000];
    char Line[2000];
-   string S; 
+   std::string S; 
    m_ArticleStr = "";
    
    
@@ -228,7 +228,7 @@ bool CTempArticle::ArticleToText ()
   return true;
 };
 
-void DeleteEmptyLines(string& s)
+void DeleteEmptyLines(std::string& s)
 {
 	for (int i = 0; i < s.length(); i++)
 	  while (     (s[i] == '\n') 
@@ -252,7 +252,7 @@ void DeleteEmptyLines(string& s)
 };
 
 
-string GetLine(string s, size_t LineNo)
+std::string GetLine(std::string s, size_t LineNo)
 {
 	size_t  start = 0;
 	for (size_t i =0; i < LineNo; i++)
@@ -280,7 +280,7 @@ m_ErrorLine = -1;
 
 for (size_t i= F.StartLine; i <= F.EndLine; i++)
 {
-	string s = GetLine(m_ArticleStr, i);
+	std::string s = GetLine(m_ArticleStr, i);
 	int  j = s.length() - 1;
 	for (  ;
 	      (j >= 0)  && isspace((unsigned char)s[j]);
@@ -313,7 +313,7 @@ for (size_t i= F.StartLine; i <= F.EndLine; i++)
 
 
 
-	string FieldStr = ConstructFldName (F.FieldNo, F.LeafId, F.BracketLeafId);
+	std::string FieldStr = ConstructFldName (F.FieldNo, F.LeafId, F.BracketLeafId);
 		
 	if   (     (m_pRoss->Fields[F.FieldNo].TypeRes == frFormula)
 	    &&  !s.empty())
@@ -325,7 +325,7 @@ for (size_t i= F.StartLine; i <= F.EndLine; i++)
 		{
 			LevelId = (s[0] == '*') ? ErrUChar : j;
 			int k = s.find(' ');
-			if (k == string::npos)
+			if (k == std::string::npos)
 			{
 				s = "";
 			}
@@ -407,7 +407,7 @@ bool CTempArticle::CheckCortegeVector ()
 				return false;
 			}
 
-			string FldName = ConstructFldName(GetCortege(i).m_FieldNo, GetCortege(i).m_LeafId, GetCortege(i).m_BracketLeafId);
+			std::string FldName = ConstructFldName(GetCortege(i).m_FieldNo, GetCortege(i).m_LeafId, GetCortege(i).m_BracketLeafId);
 
 			bool FoundPrevLevelId = !(GetCortege(i).m_LevelId > 1 && (GetCortege(i).m_LevelId != ErrUChar));
 			for (k=0; k<GetCortegesSize(); k++)
@@ -479,7 +479,7 @@ bool CTempArticle::CheckCortegeVector ()
 }
 
 
-inline bool ProcessBracketLeafId(string& FldName, BYTE& BracketLeafId)
+inline bool ProcessBracketLeafId(std::string& FldName, BYTE& BracketLeafId)
 {
 	int i = FldName.length() - 2;
 
@@ -516,7 +516,7 @@ inline bool ProcessBracketLeafId(string& FldName, BYTE& BracketLeafId)
 
 
 
-inline bool SplitFldName (string& FldName, BYTE& LeafId, BYTE& BracketLeafId)
+inline bool SplitFldName (std::string& FldName, BYTE& LeafId, BYTE& BracketLeafId)
 {
 	BracketLeafId = 0;
 
@@ -620,7 +620,7 @@ bool  CTempArticle::MarkUp()
 	if ((_eoln == Size) ||  (m_ArticleStr[_eoln] == '\n'))
 	{
 		if ( (_eoln == Size)  && (old_eoln+1 ==  _eoln)) continue;
-		string Line,FldName,Delim;
+		std::string Line,FldName,Delim;
 		Line = m_ArticleStr.substr(old_eoln+1, _eoln-old_eoln-1);
 		StringTokenizer tok (Line.c_str(), " \t");
 		if (tok())
@@ -778,7 +778,7 @@ bool CTempArticle::IsModified() const
 
 }
 
-const string& CTempArticle::GetArticleStr()
+const std::string& CTempArticle::GetArticleStr()
 {
     ArticleToText();
 	return m_ArticleStr;

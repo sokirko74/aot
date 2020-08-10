@@ -6,18 +6,18 @@
 
 
 
-extern string ConvertToPlural(const CAgramtab*,  const string&);
-extern string CommonCaseNumberGender(const CAgramtab*,  const string&, const string&);
-extern string WeakDeclAssignFunction2(const CAgramtab*,  const string&, const string&);
-extern string WeakDeclAssignFunction3(const CAgramtab*,  const string&, const string&, const string&);
-extern string MixedDeclAssignFunction2(const CAgramtab*,  const string&, const string&);
-extern string MixedDeclAssignFunction3(const CAgramtab*,  const string&, const string&, const string&);
-extern string StrongDeclAssignFunction(const CAgramtab*,  const string&, const string&);
-extern string RussianCaseNumberGender(const CAgramtab* pGramTab,  const string& adj, const string& common_noun_grm, const string& noun);
-extern bool	 HasOnlyOneCase(const CAgramtab*,  const string&, const poses_mask_t&, const QWORD&);
-extern bool	 HasGrammem(const CAgramtab*,  const string&, const poses_mask_t&, const QWORD& );
-extern bool	 HasOneGrammem(const CAgramtab*,  const string&, const poses_mask_t&, const QWORD& );
-extern string CommonCase(const CAgramtab*,  const string&, const string&);
+extern std::string ConvertToPlural(const CAgramtab*,  const std::string&);
+extern std::string CommonCaseNumberGender(const CAgramtab*,  const std::string&, const std::string&);
+extern std::string WeakDeclAssignFunction2(const CAgramtab*,  const std::string&, const std::string&);
+extern std::string WeakDeclAssignFunction3(const CAgramtab*,  const std::string&, const std::string&, const std::string&);
+extern std::string MixedDeclAssignFunction2(const CAgramtab*,  const std::string&, const std::string&);
+extern std::string MixedDeclAssignFunction3(const CAgramtab*,  const std::string&, const std::string&, const std::string&);
+extern std::string StrongDeclAssignFunction(const CAgramtab*,  const std::string&, const std::string&);
+extern std::string RussianCaseNumberGender(const CAgramtab* pGramTab,  const std::string& adj, const std::string& common_noun_grm, const std::string& noun);
+extern bool	 HasOnlyOneCase(const CAgramtab*,  const std::string&, const poses_mask_t&, const QWORD&);
+extern bool	 HasGrammem(const CAgramtab*,  const std::string&, const poses_mask_t&, const QWORD& );
+extern bool	 HasOneGrammem(const CAgramtab*,  const std::string&, const poses_mask_t&, const QWORD& );
+extern std::string CommonCase(const CAgramtab*,  const std::string&, const std::string&);
 
 
 bool set_true() {	return true; };
@@ -31,46 +31,46 @@ bool is_false(const bool b) {	return !b; };
 
 
 const size_t PossibleAssignFunc0Count = 2;
-pair<string, AssignType0*> PossibleAssignFunc0[PossibleAssignFunc0Count] = {
-	make_pair(string("true"), (AssignType0*)set_true),
-	make_pair(string("false"), (AssignType0*)set_false)
+pair<std::string, AssignType0*> PossibleAssignFunc0[PossibleAssignFunc0Count] = {
+	make_pair(std::string("true"), (AssignType0*)set_true),
+	make_pair(std::string("false"), (AssignType0*)set_false)
 };
 
 
 const size_t PossibleCheckFunc1Count = 3;
-pair<string, CheckType1*> PossibleCheckFunc1[PossibleCheckFunc1Count] = {
-	make_pair(string("true"), (CheckType1*)is_true),
-	make_pair(string("false"), (CheckType1*)is_false),
-	make_pair(string("is_atomic"), (CheckType1*)is_true)
+pair<std::string, CheckType1*> PossibleCheckFunc1[PossibleCheckFunc1Count] = {
+	make_pair(std::string("true"), (CheckType1*)is_true),
+	make_pair(std::string("false"), (CheckType1*)is_false),
+	make_pair(std::string("is_atomic"), (CheckType1*)is_true)
 };
 
 const size_t PossibleCheckFunc3Count = 3;
-pair<string, CheckType3*> PossibleCheckFunc3[PossibleCheckFunc3Count] = {
-	make_pair(string("has_only_case"), (CheckType3*)HasOnlyOneCase),
-	make_pair(string("has_grammem"), (CheckType3*)HasGrammem),
-	make_pair(string("has_one_grm"), (CheckType3*)HasOneGrammem)
+pair<std::string, CheckType3*> PossibleCheckFunc3[PossibleCheckFunc3Count] = {
+	make_pair(std::string("has_only_case"), (CheckType3*)HasOnlyOneCase),
+	make_pair(std::string("has_grammem"), (CheckType3*)HasGrammem),
+	make_pair(std::string("has_one_grm"), (CheckType3*)HasOneGrammem)
 };
 
 const size_t PossibleFunc1Count = 1;
-pair<string, AssignType1*> PossibleFunc1[PossibleFunc1Count] = {
-	make_pair(string("convert_to_plural"), (AssignType1*)ConvertToPlural)
+pair<std::string, AssignType1*> PossibleFunc1[PossibleFunc1Count] = {
+	make_pair(std::string("convert_to_plural"), (AssignType1*)ConvertToPlural)
 };
 
 const size_t PossibleFunc2Count = 5;
-pair<string, AssignType2*> PossibleFunc2[PossibleFunc2Count] = {
-	make_pair(string("common_case_number_gender"), (AssignType2*)CommonCaseNumberGender),
-	make_pair(string("weak_decl"), (AssignType2*)WeakDeclAssignFunction2),
-	make_pair(string("mixed_decl"), (AssignType2*)MixedDeclAssignFunction2),
-	make_pair(string("strong_decl"), (AssignType2*)StrongDeclAssignFunction),
-	make_pair(string("common_case"), (AssignType2*)CommonCase)
+pair<std::string, AssignType2*> PossibleFunc2[PossibleFunc2Count] = {
+	make_pair(std::string("common_case_number_gender"), (AssignType2*)CommonCaseNumberGender),
+	make_pair(std::string("weak_decl"), (AssignType2*)WeakDeclAssignFunction2),
+	make_pair(std::string("mixed_decl"), (AssignType2*)MixedDeclAssignFunction2),
+	make_pair(std::string("strong_decl"), (AssignType2*)StrongDeclAssignFunction),
+	make_pair(std::string("common_case"), (AssignType2*)CommonCase)
 };
 
 const size_t PossibleFunc3Count = 3;
-pair<string, AssignType3*> PossibleFunc3[PossibleFunc3Count] = 
+pair<std::string, AssignType3*> PossibleFunc3[PossibleFunc3Count] = 
 {
-		make_pair(string("weak_decl"), (AssignType3*)WeakDeclAssignFunction3 ), 
-		make_pair(string("mixed_decl"), (AssignType3*)MixedDeclAssignFunction3),
-		make_pair(string("case_number_gender"), (AssignType3*)RussianCaseNumberGender)
+		make_pair(std::string("weak_decl"), (AssignType3*)WeakDeclAssignFunction3 ), 
+		make_pair(std::string("mixed_decl"), (AssignType3*)MixedDeclAssignFunction3),
+		make_pair(std::string("case_number_gender"), (AssignType3*)RussianCaseNumberGender)
 };
 
 
@@ -78,7 +78,7 @@ pair<string, AssignType3*> PossibleFunc3[PossibleFunc3Count] =
 
 
 
-bool CRuleFeature::InitFuncName(string s)
+bool CRuleFeature::InitFuncName(std::string s)
 {
 	m_FuncNameStr = s;
 	if (m_Type == foeAssignement)
@@ -159,7 +159,7 @@ bool CRuleFeature::InitFuncName(string s)
 };
 
 //===========   CRuleFeature =========================
-static bool FeatureToId(string s, CAttribAndId& Result)
+static bool FeatureToId(std::string s, CAttribAndId& Result)
 {
 	if (s.length() < 3) return false;
 	if (s[0] != '$') return false;
@@ -171,17 +171,17 @@ static bool FeatureToId(string s, CAttribAndId& Result)
 	
 };
 
-static bool InitAttribValue(const CAgramtab* pGramTab, string s, CAttribAndId& Result)
+static bool InitAttribValue(const CAgramtab* pGramTab, std::string s, CAttribAndId& Result)
 {
 	Result.m_MorphPattern.m_GrmAttribute = s;
-	string ErrorStr;
+	std::string ErrorStr;
 	if (!Result.m_MorphPattern.Init(pGramTab, ErrorStr))
 		return false;
 	return true;
 	
 };
 
-bool CRuleFeature::AddFeatureValue(const CAgramtab* pGramTab, string s)
+bool CRuleFeature::AddFeatureValue(const CAgramtab* pGramTab, std::string s)
 {
 	CAttribAndId A;
 	if (! InitAttribValue(pGramTab, s, A) ) return false;
@@ -189,7 +189,7 @@ bool CRuleFeature::AddFeatureValue(const CAgramtab* pGramTab, string s)
 	return true;
 };
 
-bool CRuleFeature::AddFeatureArgument(string s)
+bool CRuleFeature::AddFeatureArgument(std::string s)
 {
 	CAttribAndId A;
 	if (! FeatureToId( s, A) ) return false;
@@ -198,7 +198,7 @@ bool CRuleFeature::AddFeatureArgument(string s)
 	return true;
 };
 
-string CRuleFeature::InitAssignement(string s, string func_name)
+std::string CRuleFeature::InitAssignement(std::string s, std::string func_name)
 {
 	CAttribAndId A;
 	if (! FeatureToId(s, A) ) "Bad item id:"+s;
@@ -212,7 +212,7 @@ string CRuleFeature::InitAssignement(string s, string func_name)
 	return "";
 };
 
-string CRuleFeature::InitCheck(string func_name)
+std::string CRuleFeature::InitCheck(std::string func_name)
 {
 	m_Type = foeCheck;
 	if (!InitFuncName(func_name))
@@ -223,13 +223,13 @@ string CRuleFeature::InitCheck(string func_name)
 };
 
 //===========   CNodeAttribute =========================
-CNodeAttribute::CNodeAttribute(string Name,	string Value)
+CNodeAttribute::CNodeAttribute(std::string Name,	std::string Value)
 {
 	m_Name = Name;
 	m_Value = Value;
 };
 
-string CNodeAttribute::GetStr() const
+std::string CNodeAttribute::GetStr() const
 {
 	return Format("%s=\"%s\"", m_Name.c_str(), m_Value.c_str());
 };
@@ -257,15 +257,15 @@ CChunkNode::~CChunkNode()
 		delete m_pAttributes;
 };
 
-void CChunkNode::CreateAtomic(string AtomicName, CNodeAttributes* pAttributes)
+void CChunkNode::CreateAtomic(std::string AtomicName, CNodeAttributes* pAttributes)
 {
 	m_AtomicName = AtomicName;
 	m_pAttributes = pAttributes;
 };
 
-string CChunkNode::GetStr() const
+std::string CChunkNode::GetStr() const
 {
-	string Result = m_AtomicName;
+	std::string Result = m_AtomicName;
 	Result += " ";
 	if (m_pAttributes)
 		for (list<CNodeAttribute*>::iterator it = m_pAttributes->m_Items.begin(); it != m_pAttributes->m_Items.end(); it++)
@@ -274,7 +274,7 @@ string CChunkNode::GetStr() const
 			Result += " ";
 		};
 	Trim(Result);
-	return string("[")+Result+string("]");
+	return std::string("[")+Result+std::string("]");
 };
 
 //===========   CChunkSequenceNode =========================
@@ -338,9 +338,9 @@ CChunkSequenceNode::~CChunkSequenceNode()
 	
 };
 
-string CChunkSequenceNode::GetStr() const
+std::string CChunkSequenceNode::GetStr() const
 {
-	string Result;
+	std::string Result;
 	for (int i = 0; i < m_Children.size(); i++)
 	{
 		Result += m_Children[i]->GetStr();
@@ -348,7 +348,7 @@ string CChunkSequenceNode::GetStr() const
 	};
 	Trim(Result);
 	if (m_Children.size() > 1)
-		Result = string("(")+Result+string(")");
+		Result = std::string("(")+Result+std::string(")");
 	return Result;
 };
 
@@ -499,9 +499,9 @@ bool CChunkRule::EncloseNodes()
 	return true;
 };
 
-string CChunkRule::GetStr() const
+std::string CChunkRule::GetStr() const
 {
-	string Result = m_pLeftHand->GetStr();
+	std::string Result = m_pLeftHand->GetStr();
 	Result += " -> ";
 	
 	for (list<CChunkSequenceNode*>::const_iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)
@@ -533,9 +533,9 @@ CChunkGrammar::~CChunkGrammar()
 	};
 };
 
-string CChunkGrammar::GetStr() const
+std::string CChunkGrammar::GetStr() const
 {
-	string Result = "";
+	std::string Result = "";
 	for (list<CChunkRule*>::const_iterator it = m_Rules.begin(); it != m_Rules.end(); it++)
 	{
 		Result += (*it)->GetStr();

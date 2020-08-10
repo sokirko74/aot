@@ -123,7 +123,7 @@ void CEngSynthes::find_position_for_slave_clause_components()
 
 };
 
-void SetIndefiniteArticle(string& str, const translate_helper& helper)
+void SetIndefiniteArticle(std::string& str, const translate_helper& helper)
 {
 	/*
 		артикли всегда надо ставить перед именной группой, кроме случаев
@@ -137,12 +137,12 @@ void SetIndefiniteArticle(string& str, const translate_helper& helper)
 	StringTokenizer tok1(str.c_str(), " ");
 	StringTokenizer next_tok1(str.c_str(), " ");
 	str.erase();
-	string prev_word;
+	std::string prev_word;
 	next_tok1();
 	while(tok1())
 	{
 		
-		string word = tok1.val();
+		std::string word = tok1.val();
 		if (    (  (prev_word == "<a>") && (word == "such"))
 			 || (  (prev_word == "the") && (word == "all"))
 		   )
@@ -150,7 +150,7 @@ void SetIndefiniteArticle(string& str, const translate_helper& helper)
 
 		if (next_tok1())
 		{
-			string next_word = next_tok1.val();
+			std::string next_word = next_tok1.val();
 			if (next_word != "of")
 			 if (    (  (prev_word == "<a>") && (word == "half"))
 				  || (  (prev_word == "the") && (word == "half"))
@@ -173,7 +173,7 @@ void SetIndefiniteArticle(string& str, const translate_helper& helper)
 	prev_word = "";
 	while(tok2())
 	{
-		string word = tok2.val();
+		std::string word = tok2.val();
 		if (prev_word == "<a>")
 		{
 			prev_word = helper.an_article_before(word);
@@ -186,7 +186,7 @@ void SetIndefiniteArticle(string& str, const translate_helper& helper)
 
 };
 
-string CEngSynthes::BuildSentence()
+std::string CEngSynthes::BuildSentence()
 {
 
 	m_bConnected = E.IsConnected();
@@ -239,7 +239,7 @@ string CEngSynthes::BuildSentence()
 
 	   
     // проходим по всем абсолютнын вершинам и берем от них построенные строки
-	string str;
+	std::string str;
 	for(long i = 0; i < final_roots.size(); i++)
 	{
 		str += collect_results(final_roots[i]);
@@ -419,7 +419,7 @@ bool CEngSynthes::try_mna_node(int node_no)
 {
 	const CEngSemNode &node = Node(node_no);
 	if(!node.m_NodeType == MNA) return false;
-	string tr;
+	std::string tr;
 	if(node.GetType() == EngObor){
 		// трансфер для оборотов создает примитивныу узел, у которого в слове записан сам оборот
 		assert ( node.IsPrimitive() );
@@ -473,7 +473,7 @@ bool CEngSynthes::try_mna_node(int node_no)
 
 bool CEngSynthes::try_simple_group(int node_no)
 {
-	string str;
+	std::string str;
 	CEngSemNode &node = Node(node_no);
 
 	if(node.m_SynGroupTypeStr == WEB_ADDR)
@@ -612,13 +612,13 @@ struct ordered_rel_pos_less_by_word_no
 	};
 };
 
-string CEngSynthes::collect_results(int node)
+std::string CEngSynthes::collect_results(int node)
 {
 	if(Res(node).do_not_put) return "";
 	
-	string res;
+	std::string res;
 	SynthesResult &result = result_vec[node];
-	string MainNodeStr;
+	std::string MainNodeStr;
 	int i;
 
 	// 
@@ -711,7 +711,7 @@ string CEngSynthes::collect_results(int node)
 	
 	for(i = 0; i < out_rels.size(); i++)
 	{
-		string Position = Rel(out_rels[i]).m_Position;
+		std::string Position = Rel(out_rels[i]).m_Position;
 
 		if (Rel(out_rels[i]).m_bReverseRel)
 			Position = GetDualPosition(Rel(out_rels[i]).m_Position);
@@ -915,8 +915,8 @@ string CEngSynthes::collect_results(int node)
 			if (E.m_Nodes[Rel(in_rel).m_SourceNodeNo].m_bQuoteMarks)
 				bQuoted = true;
 	};
-	string QuoteStart = (bQuoted) ? "<Quote>" :"";
-	string QuoteEnd = (bQuoted) ? "</Quote>" :"";
+	std::string QuoteStart = (bQuoted) ? "<Quote>" :"";
+	std::string QuoteEnd = (bQuoted) ? "</Quote>" :"";
 
 	if (result.m_Article == IndefArticle)	res = QuoteStart+" <a>  "+QuoteEnd+ res;
 		else if (result.m_Article == DefArticle) res = QuoteStart+"  the " +QuoteEnd+ res;
@@ -960,7 +960,7 @@ string CEngSynthes::collect_results(int node)
 		for(iter it = range.first; it != range.second; ++it){
 			bool put_after = it->second.second;
 			int sub = it->second.first;
-			string sub_str = collect_results(sub);
+			std::string sub_str = collect_results(sub);
 		
 
 			if(put_after)
@@ -1030,13 +1030,13 @@ bool CEngSynthes::is_clause_opener(int ClauseNo, int OpenerNodeNo)
 
 
 
-string CEngSynthes::translate_son(int node_no)
+std::string CEngSynthes::translate_son(int node_no)
 {
 	translate_node(node_no);
 	return collect_results(node_no);
 }
 
-bool IsWh_NounWord(string Lemma)
+bool IsWh_NounWord(std::string Lemma)
 {
 	EngRusMakeUpper(Lemma);
 	return    (Lemma == "WHO") 
@@ -1171,9 +1171,9 @@ void CEngSynthes::find_all_clause_connectors()
 		*/
 		const CSynRealization &syn = Rel(i).m_SynReal;
 		const CRossInterp &conj = syn.m_Conj;
-		string conj_for_slave; // if
-		string conj_for_slave_unit_str; // if
-		string conj_for_master; // then
+		std::string conj_for_slave; // if
+		std::string conj_for_slave_unit_str; // if
+		std::string conj_for_master; // then
 		
 		if(conj.m_DictType == EngObor){
 			conj_for_slave = E.m_pData->GetEngOborStr(conj.m_UnitNo);
@@ -1290,7 +1290,7 @@ bool CEngSynthes::try_oneself_node(int node_no)
 		};
 	};
 
-	string debug_str = E.m_pData->GetEngGramTab()->GrammemsToStr(Grammems);
+	std::string debug_str = E.m_pData->GetEngGramTab()->GrammemsToStr(Grammems);
 
 	Res(node_no).m_WordForms.push_back(GetPronounEnglishFormByGrammems(Grammems,oneself));
 
@@ -1417,9 +1417,9 @@ bool CEngSynthes::try_conj_disrupt(int node_no)
 	const CEngSemNode &node = Node(node_no);
 	if(!FieldContainsValue(node, "GF", "CONJ:DISRUPT")) return false; 
 	assert(node.GetType() == EngObor);
-	string tr = E.m_pData->GetEngOborStr(node.GetUnitNo());
+	std::string tr = E.m_pData->GetEngOborStr(node.GetUnitNo());
 	size_t elpsis = tr.find("...");
-	assert(elpsis != string::npos);
+	assert(elpsis != std::string::npos);
 	vector<long>  rels;
 	get_out_rels(node_no, rels);
 	assert(rels.size() == 2);

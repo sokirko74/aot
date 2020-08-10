@@ -22,7 +22,7 @@ CMorphologyHolder MorphHolderRus;
 static std::vector<std::pair<DWORD, DWORD> > ww;
 
 struct CStatInfo {
-    string m_Lemma;
+    std::string m_Lemma;
     BYTE m_Pos;
     QWORD m_Grammems;
     DWORD m_Freq;
@@ -36,8 +36,8 @@ struct CStatInfo {
             return m_Grammems < s.m_Grammems;
     }
 
-    string DumpToString() const {
-        string Result = m_Lemma + ";";
+    std::string DumpToString() const {
+        std::string Result = m_Lemma + ";";
         Result += MorphHolderRus.m_pGramTab->GetPartOfSpeechStr(m_Pos);
         Result += " ";
         if (m_Grammems != 0)
@@ -91,13 +91,13 @@ void DealWithUniqueLemmas(set<CStatInfo> &Infos) {
         CStatInfo I = *it;
         vector<CFormInfo> ParadigmCollection;
 
-        string s = I.m_Lemma;
+        std::string s = I.m_Lemma;
         if (!MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(true, s, true, false, ParadigmCollection)) {
             it++;
             continue;
         }
 
-        string CommonAncode;
+        std::string CommonAncode;
         int CountWithTheSamePOS = 0;
         for (int k = 0; k < ParadigmCollection.size(); k++) {
             const CFormInfo &Pagadigm = ParadigmCollection[k];
@@ -142,7 +142,7 @@ static bool loadDat(istream &ifs) {
         const CStatInfo &I = *it;
         bool bFound = false;
         vector<CFormInfo> ParadigmCollection;
-        string s = I.m_Lemma;
+        std::string s = I.m_Lemma;
         if (!MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(true, s, true, false, ParadigmCollection)) {
             std::cout << "Exception in Lemmatizer (probably wrong ABC: " << I.m_Lemma << " skipped" << std::endl;
             continue;

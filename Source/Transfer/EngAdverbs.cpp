@@ -53,7 +53,7 @@ CAdvPosType get_adv_pos_kind(const CEngSemNode& Node)
 
 	assert(!Node.IsAbstract());
 	assert(Node.m_Words.size() >= 1);
-	string foo;
+	std::string foo;
 	const CEngSemWord &word = Node.m_Words[0];
 	if(unit_no == ErrUnitNo) return adv_other;
 

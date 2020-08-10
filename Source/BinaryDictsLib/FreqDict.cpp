@@ -35,7 +35,7 @@ CFreqDict::CFreqDict()
 {
 }
 
-bool CFreqDict::Load(string _path)
+bool CFreqDict::Load(std::string _path)
 {
 	// TODO: Add your implementation code here
 	ReadVector(_path, word_vec);

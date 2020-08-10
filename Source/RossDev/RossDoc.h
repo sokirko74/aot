@@ -127,7 +127,7 @@ public:
 	const char* GetEnglishFieldName() const;
 	bool		IsThesRoss() const;
 	int			GetThesId() const;
-	string		GetLockFileName()  const;
+	std::string		GetLockFileName()  const;
 	void		RemoveLock() const;
 	
 	

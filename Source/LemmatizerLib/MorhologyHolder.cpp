@@ -57,7 +57,7 @@ bool CMorphologyHolder::LoadLemmatizer(MorphLanguageEnum langua)
 				ErrorMessage ("unsupported language");
 				return false;
 			};
-		string strError;
+		std::string strError;
 		if (!m_pLemmatizer->LoadDictionariesRegistry(strError))
 		{
 			ErrorMessage(strError);
@@ -107,7 +107,7 @@ bool CMorphologyHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua)
 };
 
 
-bool CMorphologyHolder::GetMorphology(string str, bool bFile, int& CountOfWords)
+bool CMorphologyHolder::GetMorphology(std::string str, bool bFile, int& CountOfWords)
 {
 	clock_t t1,t2;
 	CountOfWords = 0;
@@ -196,7 +196,7 @@ void CMorphologyHolder::string_to_ids(const char *str, DwordVector &ids, bool bN
 	
 	vector<CFormInfo > ParadigmCollection;
 	
-	string Word = str;
+	std::string Word = str;
 	if (!m_pLemmatizer->CreateParadigmCollection(bNorm, Word, true, false, ParadigmCollection))
 	{
 		fprintf (stderr,"cannot lemmatize %s\n", str);

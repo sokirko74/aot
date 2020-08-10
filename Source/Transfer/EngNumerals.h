@@ -7,7 +7,7 @@
 	#define eng_numerals
 
 		
-inline string spellout_ordinal_number(double y) 
+inline std::string spellout_ordinal_number(double y) 
 {
 	const char ones[][10] = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 	const char teens[][10] ={ "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen","sixteen", "seventeen", "eighteen", "nineteen" };
@@ -25,18 +25,18 @@ inline string spellout_ordinal_number(double y)
 		if (x % 10 == 0)
 			return tens[(x / 10)  - 1];
 		else
-			return string(tens[((x / 10)) - 1]) + string("-") + string(ones[x % 10]);
+			return std::string(tens[((x / 10)) - 1]) + std::string("-") + std::string(ones[x % 10]);
 	}
 	if (x < 1000) {
 		if (x % 100 == 0)
-			return string(ones[x / 100]) + string(hundred);
+			return std::string(ones[x / 100]) + std::string(hundred);
 		else
-			return string(ones[x / 100]) + string(hundred) + string(" ") +
+			return std::string(ones[x / 100]) + std::string(hundred) + std::string(" ") +
 						spellout_ordinal_number(x % 100);
 	}
 	if (x < 1000000) {
 		if (x % 1000 == 0)
-			return spellout_ordinal_number(x / 1000) + string(thousands[0]);
+			return spellout_ordinal_number(x / 1000) + std::string(thousands[0]);
 		else
 			return spellout_ordinal_number(x / 1000) + thousands[0] + " " +
 						spellout_ordinal_number(x % 1000);
@@ -70,7 +70,7 @@ inline string spellout_ordinal_number(double y)
 
 
 
-inline string spellout_number(string NumberStr, bool IsCardinal) 
+inline std::string spellout_number(std::string NumberStr, bool IsCardinal) 
 {
 	if (NumberStr.length() ==0 ) return "";
 
@@ -79,7 +79,7 @@ inline string spellout_number(string NumberStr, bool IsCardinal)
 	 	 && (NumberStr[NumberStr.length() - 1] == ')')
 	   )
 	{
-		string Result = spellout_number(NumberStr.substr(0, pos), IsCardinal);
+		std::string Result = spellout_number(NumberStr.substr(0, pos), IsCardinal);
 		Result += " or ";
 		Result += spellout_number(NumberStr.substr(pos+1, NumberStr.length() - 2 - pos), IsCardinal);
 		return Result;
@@ -96,7 +96,7 @@ inline string spellout_number(string NumberStr, bool IsCardinal)
 		return  ordinal_ones [int(x)-1];
 
 
-	string  result =  spellout_ordinal_number (x);
+	std::string  result =  spellout_ordinal_number (x);
 
 	if ( (result.length() > 0) && !IsCardinal)
 		if ( result[result.length() - 1] == 'y' )

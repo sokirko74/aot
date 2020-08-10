@@ -281,7 +281,7 @@ bool CRusSemStructure::TryClauseSubordConj(long ClauseRuleNo, long ClauseNo1, lo
 	long l=0;
 	for (; l < P.m_GramCorteges.size();l++)
 	{
-		string SynRel = P.GetSynRelStr(l);
+		std::string SynRel = P.GetSynRelStr(l);
 
 		if  (    (SynRel == "инф") 
 			&& IsInfinitiveOrMNAInfinitive(Nodes2[1])
@@ -554,18 +554,18 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 	if (Conj.m_DictType == OborRoss) return false;
 
 	CValency V = GetSemRelOfPrepOrConj(Conj);
-	typedef pair<int, string> PosLemmaPair;
+	typedef pair<int, std::string> PosLemmaPair;
 
 	vector<PosLemmaPair> Relats;
 	for (long l=0; l < m_Nodes[ConjNodeNo].m_LexFunctFields.size(); l++)
 		if (m_Nodes[ConjNodeNo].m_LexFunctFields[l].m_LexFunct == "Relat")
 		{
-			string Lemma = m_Nodes[ConjNodeNo].m_LexFunctFields[l].m_Lemma;
+			std::string Lemma = m_Nodes[ConjNodeNo].m_LexFunctFields[l].m_Lemma;
 			int i = Lemma.find ("(");
 			DWORD Poses = 0;
 			if (i != -1)
 			{
-				string q = Lemma.substr(i+1,Lemma.find (")")-i-1);
+				std::string q = Lemma.substr(i+1,Lemma.find (")")-i-1);
 				Lemma.erase(i);
 				Trim(Lemma);
 				QWORD dummy;
@@ -717,7 +717,7 @@ bool CRusSemStructure::TryClauseCHTOBY_GG (long ClauseRuleNo, long ClauseNo1, lo
   
   const CDictUnitInterp* Conj =  m_Nodes[ConjNodeNo].GetInterp();
   if (Conj == 0) Conj = &EmptyInterp;
-  string ConjStr =  m_Nodes[ConjNodeNo].m_Words[0].m_Word;
+  std::string ConjStr =  m_Nodes[ConjNodeNo].m_Words[0].m_Word;
 
   // если союз заполнил валентность в прид.пред, то это не союз, а союзное слово
   if (ConjStr == "ЧТО") 
@@ -743,9 +743,9 @@ bool CRusSemStructure::TryClauseCHTOBY_GG (long ClauseRuleNo, long ClauseNo1, lo
 	  long RootNodeNo2 = Nodes2[Nodes2.size()-1];
 
 	  EngRusMakeLower(ConjStr);
-	  string SynFet1 = string(ConjStr)+string("+ГГ");
-	  string SynFet2 = string(ConjStr)+string("+инф");
-	  string SynFet3 = string(ConjStr)+string("+ГГ_прш");
+	  std::string SynFet1 = std::string(ConjStr)+std::string("+ГГ");
+	  std::string SynFet2 = std::string(ConjStr)+std::string("+инф");
+	  std::string SynFet3 = std::string(ConjStr)+std::string("+ГГ_прш");
       long MinDistance = 1000;
       long NodeNo  = -1;
 	  CValency V;
@@ -909,7 +909,7 @@ bool CRusSemStructure::TryClauseCoordSimpleConj (long ClauseRuleNo, long ClauseN
 
 
 
-bool CRusSemStructure :: GetFreeActantPattern (long NodeNo, CSemPattern& P, CSynRealization& SynReal, string SynRel, bool CheckSynRel,  string SynFet, bool CheckSynFet)
+bool CRusSemStructure :: GetFreeActantPattern (long NodeNo, CSemPattern& P, CSynRealization& SynReal, std::string SynRel, bool CheckSynRel,  std::string SynFet, bool CheckSynFet)
 {
 
 	SynReal.SetEmpty();
@@ -1099,13 +1099,13 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
 9) провести стрелку THESAME от анаф. мест к подлежащему второй клаузы;
 */
 
-CRusSemNode  CRusSemStructure::CreatePronounByLemma(string Lemma)
+CRusSemNode  CRusSemStructure::CreatePronounByLemma(std::string Lemma)
 {
 	const CLemmatizer* P = m_pData->GetRusLemmatizer(); 
 	vector<CFormInfo> ParadigmCollection;
 	P->CreateParadigmCollection(true, Lemma,false, false, ParadigmCollection);
 	assert (!ParadigmCollection.empty());
-	string GramCodes = ParadigmCollection[0].GetSrcAncode();
+	std::string GramCodes = ParadigmCollection[0].GetSrcAncode();
 	QWORD Grammems = m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
 
 
@@ -1139,7 +1139,7 @@ CRusSemNode  CRusSemStructure::CreateAnaphoricPronoun (long PrototypeNode)
     if (HasRichPOS (m_Nodes[PrototypeNode], PRONOUN))
 	 return  m_Nodes[PrototypeNode];
 
-    string Lemma;
+    std::string Lemma;
 	if (m_Nodes[PrototypeNode].HasOneGrammem (rPlural) )
 		Lemma = "ОНИ";
 	else
@@ -1171,7 +1171,7 @@ bool CRusSemStructure::TryClauseCHTO_WITH_ANIMAT (long ClauseRuleNo, long Clause
   if ( (ConjNodeNo ==-1) || !m_Nodes[ConjNodeNo].IsPrimitive() ) return false;
   
   CDictUnitInterp* Conj =  m_Nodes[ConjNodeNo].GetInterp();
-  string ConjStr =  m_Nodes[ConjNodeNo].m_Words[0].m_Word;
+  std::string ConjStr =  m_Nodes[ConjNodeNo].m_Words[0].m_Word;
 
   if (ConjStr != "ЧТО")   return false;
   if (Conj == 0) return false;
@@ -1323,7 +1323,7 @@ bool CRusSemStructure::TryClauseSubordDoubleConj (long ClauseRuleNo, long Clause
 	{
 		if (!m_Nodes[NodeNo].IsPrimitive()) break;
 		if (ItemNo == C.m_FirstPart.size()) break;
-		string Word =  m_Nodes[NodeNo].m_Words[0].m_Word;
+		std::string Word =  m_Nodes[NodeNo].m_Words[0].m_Word;
 		EngRusMakeUpper(Word);
 		if (Word != C.m_FirstPart[ItemNo]) break;
 		ConjNodes.push_back(NodeNo);
@@ -1360,7 +1360,7 @@ bool CRusSemStructure::TryClauseSubordDoubleConj (long ClauseRuleNo, long Clause
   long l=0;
   for (; l < P.m_GramCorteges.size();l++)
   {
-	 string SynRel = P.GetSynRelStr(l);
+	 std::string SynRel = P.GetSynRelStr(l);
 	 if  (    (SynRel == "инф") 
 		   && IsInfinitiveOrMNAInfinitive(Nodes2[0])
 		 ) 
@@ -1767,7 +1767,7 @@ struct CMotherLandHyp {
 };
 
 
-bool IsSubordConj(string S)
+bool IsSubordConj(std::string S)
 { 
 	return    ( S == "ЧТО")
 		  ||  ( S == "ГДЕ")
@@ -2393,9 +2393,9 @@ CRusSemStructure::CRusSemStructure()
 
 
 
-string    CRusSemStructure::GetClauseProperiesStr(long ClauseNo) const
+std::string    CRusSemStructure::GetClauseProperiesStr(long ClauseNo) const
 {
-	string Res = "Свойства:\n";
+	std::string Res = "Свойства:\n";
 	if (m_Clauses[ClauseNo].m_bQuestion)
 	{
 		Res += "Вопросительная клауза\n";
@@ -2403,15 +2403,15 @@ string    CRusSemStructure::GetClauseProperiesStr(long ClauseNo) const
 	return Res;
 };
 
-string    CRusSemStructure::GetClauseTreeForTcl() 
+std::string    CRusSemStructure::GetClauseTreeForTcl() 
 { 
 	   //установка дерева клауз
-   string Res = "$GT($main,clause_graph) delete nodes\1";
+   std::string Res = "$GT($main,clause_graph) delete nodes\1";
 
    for (long i=0; i<m_Clauses.size(); i++)
    {
     	Res += Format ("set clause_nds(%i) [$GT($main,clause_graph) create node]\1", i);
-		string name;
+		std::string name;
 		if ( IsEmptyClause (i) )
 			name = "_empty_";
 		else
@@ -2446,7 +2446,7 @@ string    CRusSemStructure::GetClauseTreeForTcl()
 
 	   if ( m_Clauses[i].m_ClauseRuleNo != -1)
 	   {
-         string name =   m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name;
+         std::string name =   m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name;
 	     Res += Format("$GT($main,clause_graph) set $edge -label \"%s\"\1", name.c_str());
 	   };
    };
@@ -2542,7 +2542,7 @@ long CRusSemStructure::CreateDefaultSubjectFromPreviousClause()
 			  && !m_Nodes[Roots[0]].HasRelOperator("_пригласит_наклонение")
 			)
 		 {
-			 string Lemma;
+			 std::string Lemma;
 			 if (m_Nodes[Roots[0]].HasOneGrammem (rFirstPerson)) 
 			 {
 				 if (m_Nodes[Roots[0]].HasOneGrammem (rSingular) )

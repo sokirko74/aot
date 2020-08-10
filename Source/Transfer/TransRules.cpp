@@ -14,15 +14,15 @@ int CEngSemStructure::GetEngRelByRusRel(int iRusRel)
 }
 
 
-bool CEngSemStructure::CanBeRusVerb(const string& Lemma)  const
+bool CEngSemStructure::CanBeRusVerb(const std::string& Lemma)  const
 {
-	string l = Lemma;
+	std::string l = Lemma;
 	const CLemmatizer* P = m_pData->GetRusLemmatizer(); 
 	vector<CFormInfo> ParadigmCollection;
 	P->CreateParadigmCollection(true, l, false, false, ParadigmCollection);
 	for (int i=0; i < ParadigmCollection.size(); i++)
 	{
-		string GramCodes = ParadigmCollection[i].GetSrcAncode();
+		std::string GramCodes = ParadigmCollection[i].GetSrcAncode();
 		if (m_pData->GetRusGramTab()->GetPartOfSpeech(GramCodes.c_str()) == INFINITIVE)
 			return true;
 	};
@@ -158,13 +158,13 @@ bool CEngSemStructure::MakeDeverbative( int iRusActant, int iEngActant, CEngSemN
 }
 
 
-bool CEngSemStructure::HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type, string strItem)
+bool CEngSemStructure::HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type, std::string strItem)
 {
 	int ItemNo;
 	return HasItem(GramCorteges, CortegeNo, ItemNo, type, strItem);
 }
 
-bool CEngSemStructure::HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, string strItem)
+bool CEngSemStructure::HasItem(const vector<TCortege>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, std::string strItem)
 {
 	for( int i = 0 ; i < GramCorteges.size() ; i++ )
 	{
@@ -194,14 +194,14 @@ bool CEngSemStructure::HasGerund(const vector<TCortege>& GramCorteges, long& Cor
 	return HasItem(GramCorteges, CortegeNo, type, "gerund");
 }
 
-string CEngSemStructure::GetConj(const vector<TCortege>& GramCorteges, DictTypeEnum type)
+std::string CEngSemStructure::GetConj(const vector<TCortege>& GramCorteges, DictTypeEnum type)
 {
 	long iCortege;
 	int iItem;
 	if( HasItem(GramCorteges, iCortege, iItem, type, "+sent") || HasItem(GramCorteges, iCortege, iItem, type, "+subj_clause"))
 	{
 		const TCortege& cortege = GramCorteges[iCortege];
-		string strItem = GetItemStr(cortege.m_DomItemNos[iItem], type);
+		std::string strItem = GetItemStr(cortege.m_DomItemNos[iItem], type);
 
 		int ii = strItem.find("+sent"); 		
 
@@ -229,9 +229,9 @@ bool CEngSemStructure::HasInf(const vector<TCortege>& GramCorteges, long& Corteg
 	return HasItem(GramCorteges, CortegeNo, type, "+inf");
 }
 
-string CEngSemStructure::GetGerundPrep(const TCortege& cortege, DictTypeEnum type)
+std::string CEngSemStructure::GetGerundPrep(const TCortege& cortege, DictTypeEnum type)
 {
-	string item = GetItemStr(cortege.m_DomItemNos[0], type);
+	std::string item = GetItemStr(cortege.m_DomItemNos[0], type);
 	int i = item.find("+gerund");
 	if( i == -1 )
 	{
@@ -310,12 +310,12 @@ bool CEngSemStructure::Rule_TranslateInfinitive( int iRusActant, long RelationNo
 
 		engWord = engActant.m_Words[engActant.m_MainWordNo];
 		
-		string verb = engWord.m_Lemma;
+		std::string verb = engWord.m_Lemma;
 		engWord.SetTense(gerund_tn,"Rule_TranslateInfinitive");
 	
 		engActant.m_Words[engActant.m_MainWordNo] = engWord;
 
-		string prep = GetGerundPrep(GramCorteges[GerundCortegeNo], engNode.GetType());
+		std::string prep = GetGerundPrep(GramCorteges[GerundCortegeNo], engNode.GetType());
 		// герундий может быть без предлога 
 		// например, "стоит поместить" ->  "worth placing"
 		if (prep != "")
@@ -337,7 +337,7 @@ bool CEngSemStructure::Rule_TranslateInfinitive( int iRusActant, long RelationNo
 
 	if( HasGerund(GramCorteges, GerundCortegeNo, engNode.GetType()) )
 	{
-		string prep = GetGerundPrep(GramCorteges[GerundCortegeNo], engNode.GetType());
+		std::string prep = GetGerundPrep(GramCorteges[GerundCortegeNo], engNode.GetType());
 		SetSimpleEngPrep(prep, iEngActant, -1);
 		SetSimpleEngPrep(prep, -1, RelationNo);
 		semEngRel.m_SynReal.m_Cortege =  GramCorteges[GerundCortegeNo];
@@ -391,7 +391,7 @@ bool CEngSemStructure::Rule_TranslatePoss(int iRusActant,long RelationNo, const 
 	  )
 		return false;
 
-	string lemma = GetPronounEnglishFormByGrammems(engNode.GetGrammemsRich(),false);
+	std::string lemma = GetPronounEnglishFormByGrammems(engNode.GetGrammemsRich(),false);
 	if( lemma.empty() )
 		return false;
 
@@ -478,7 +478,7 @@ bool CEngSemStructure::Rule_TranslateSubj(int iRusActant,long EngRelNo, const ve
 	if(     m_Nodes[semEngRel.m_SourceNodeNo].IsPassiveVerb()
 	    && (semEngRel.m_Valency.m_LeafId == 1)
 		&& (		!semEngRel.m_bInterpreted
-				||  !semEngRel.m_Valency.m_RossHolder->HasFieldValue(  string("RESTR") , string("pass"),  semEngRel.m_Valency.m_UnitNo ) 
+				||  !semEngRel.m_Valency.m_RossHolder->HasFieldValue(  std::string("RESTR") , std::string("pass"),  semEngRel.m_Valency.m_UnitNo ) 
 		   )
 	  )
 	{

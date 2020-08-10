@@ -64,18 +64,18 @@ CTrigramModel::~CTrigramModel ()
 };
 
 
-WORD CTrigramModel::find_tag(const string &t) const 
+WORD CTrigramModel::find_tag(const std::string &t) const 
 { 
 	assert (!t.empty());
 	size_t debug = m_RegisteredTags.size();
-	vector<string>::const_iterator it = find(m_RegisteredTags.begin(), m_RegisteredTags.end(), t);
+	vector<std::string>::const_iterator it = find(m_RegisteredTags.begin(), m_RegisteredTags.end(), t);
 	if (it == m_RegisteredTags.end())
 		return UnknownTag;
 	else
 		return  it - m_RegisteredTags.begin(); 
 }
 
-WORD CTrigramModel::register_tag(const string& t)
+WORD CTrigramModel::register_tag(const std::string& t)
 {
 	WORD i = find_tag(t);
 
@@ -299,8 +299,8 @@ int CTrigramModel::compute_bucket_denominator(WORD i, WORD j, int& TrigramsCount
 	int denom = sum/size;
 	if (denom == 0)
 	{
-		string TagStr1  = m_RegisteredTags[i];
-		string TagStr2  = m_RegisteredTags[j];
+		std::string TagStr1  = m_RegisteredTags[i];
+		std::string TagStr2  = m_RegisteredTags[j];
 		int u = 0;
 		assert (false);
 	};
@@ -399,12 +399,12 @@ bool CTrigramModel::compute_bucketed_lambdas()
 
 
 //#pragma optimize( "", off )
-void  CTrigramModel::get_tags_from_annots(const vector<CXmlMorphAnnot>& Annots, set<WORD>& tags, const string& WordStr) const
+void  CTrigramModel::get_tags_from_annots(const vector<CXmlMorphAnnot>& Annots, set<WORD>& tags, const std::string& WordStr) const
 {
     size_t good_annots_count = 0;
     for (size_t i=0; i < Annots.size(); i++)
     {
-        string TagStr = Annots[i].BuildRusCorpAnnot();
+        std::string TagStr = Annots[i].BuildRusCorpAnnot();
         if (!TagStr.empty())
         {   
             WORD Tag = find_tag(TagStr);
@@ -423,7 +423,7 @@ void  CTrigramModel::get_tags_from_annots(const vector<CXmlMorphAnnot>& Annots, 
             fprintf (stderr, "word %s no valid intpretations\n", WordStr.c_str());
             for (size_t i=0; i < Annots.size(); i++)
             {
-                string TagStr = Annots[i].BuildRusCorpAnnot();
+                std::string TagStr = Annots[i].BuildRusCorpAnnot();
                 fprintf (stderr, "\tgr=%s; tag_str=%s\n", Annots[i].m_GrammemsStr.c_str(), TagStr.c_str());
             }
 
@@ -437,7 +437,7 @@ void  CTrigramModel::get_tags_from_annots(const vector<CXmlMorphAnnot>& Annots, 
 
 
 struct LessByWordStr {
-	bool  operator() (const CTrigramWord& X, const string& WordStr)  const
+	bool  operator() (const CTrigramWord& X, const std::string& WordStr)  const
     {
         return X.m_WordStr < WordStr;
     }
@@ -445,7 +445,7 @@ struct LessByWordStr {
     {
         return X1.m_WordStr < X2.m_WordStr;
     }
-	bool  operator() (const string& WordStr, const CTrigramWord& X)  const
+	bool  operator() (const std::string& WordStr, const CTrigramWord& X)  const
     {
         return WordStr < X.m_WordStr;
     }
@@ -453,7 +453,7 @@ struct LessByWordStr {
 };
 
 
-const CTrigramWord* CTrigramModel::lookup_word(const string& s) const
+const CTrigramWord* CTrigramModel::lookup_word(const std::string& s) const
 {
     vector<CTrigramWord>::const_iterator it = lower_bound(m_Dictionary.begin(), m_Dictionary.end(), s, LessByWordStr());
     if (it == m_Dictionary.end()) return nullptr;
@@ -461,7 +461,7 @@ const CTrigramWord* CTrigramModel::lookup_word(const string& s) const
     return &(*it);
 }
 
-CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
+CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 {
 	CDictionarySearch R;
 	assert (!WordStr.empty());
@@ -480,7 +480,7 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 	if (! R.m_pFoundWord ) 
 	{
 		// если слова нет в словаре, тогда попробуем его поискать в нижнем регистре
-		string  lower = WordStr;
+		std::string  lower = WordStr;
 		RmlMakeLower(lower, m_Language);
         R.m_pFoundWord =  lookup_word(lower);
 	}
@@ -496,7 +496,7 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 	}
 
 	// получаем все возможные тэги из морф. словаря
-    map<string, const vector<CXmlMorphAnnot>* >::iterator it = m_CurrentSentenceWords2Annots.find(WordStr);
+    map<std::string, const vector<CXmlMorphAnnot>* >::iterator it = m_CurrentSentenceWords2Annots.find(WordStr);
     if (it != m_CurrentSentenceWords2Annots.end())
         get_tags_from_annots(*it->second,R.m_PossibleWordTags, WordStr);
 
@@ -536,7 +536,7 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 			for (size_t i=0; i < min((size_t)200, m_TagsOrderedByUnigrams.size()); i++)
 			{
 				WORD tagno = m_TagsOrderedByUnigrams[i];
-				string tag = m_RegisteredTags[tagno];
+				std::string tag = m_RegisteredTags[tagno];
 				if (tag.length()> 1 || !ispunct((unsigned char)tag[0]))
 					R.m_PossibleWordTags.insert(tagno);
 			}
@@ -658,7 +658,7 @@ void CTrigramModel::dump_transition_probs()
 // немного исправили эту процедуру для чтения фалов из Яндекса  (лемма пишется в фигурных скобках)
 
 
-bool CTrigramModel::adjusting_homonyms_coef(string FileName) const
+bool CTrigramModel::adjusting_homonyms_coef(std::string FileName) const
 {
 	FILE* fp = fopen(FileName.c_str(), "r");  
 	if (!fp) 
@@ -673,14 +673,14 @@ bool CTrigramModel::adjusting_homonyms_coef(string FileName) const
 	while (fgets(buffer, 10000, fp))
 	{ 
 		SentNo++;
-		vector<string> words;
+		vector<std::string> words;
 		vector<CWordIntepretation> tags;
 		vector<WORD> refs;
 
 		StringTokenizer tok(buffer, " \t\r\n");
 		for (size_t i=0; tok(); i++)
 		{
-			string t = tok.val();
+			std::string t = tok.val();
 
 			if (i%2==0) 
 			{ 
@@ -719,10 +719,10 @@ bool CTrigramModel::adjusting_homonyms_coef(string FileName) const
 				pos++; 
 			else
 			{
-				string gs = m_RegisteredTags[tags[i].m_TagId1];
+				std::string gs = m_RegisteredTags[tags[i].m_TagId1];
 				if (tags[i].m_TagId2 != UnknownTag)
 					gs += "["+m_RegisteredTags[tags[i].m_TagId2]+"]";
-				string rs = m_RegisteredTags[ref];
+				std::string rs = m_RegisteredTags[ref];
 				
 				
 				for (int j=(int)i-5; j<(int)min(i+5, words.size()); j++)
@@ -765,13 +765,13 @@ void CTrigramModel::print_tag_set() const
 
 
 
-void CTrigramModel::InitModelFromConfigAndBuildTagset(string FileName, const CLemmatizer* Lemmatizer, const CAgramtab* GramTab, bool bLoadReverseModel) 
+void CTrigramModel::InitModelFromConfigAndBuildTagset(std::string FileName, const CLemmatizer* Lemmatizer, const CAgramtab* GramTab, bool bLoadReverseModel) 
 {
 	FILE * fp = fopen (FileName.c_str(), "r");
 	if (!fp)
 		throw CExpc ("cannot read file %s\n", FileName.c_str());
-	string TagsetFile;
-    string ReverseModelConfig;
+	std::string TagsetFile;
+    std::string ReverseModelConfig;
     char buffer[1000]; 
 	while (fgets(buffer, 1000, fp))
 	{
@@ -781,8 +781,8 @@ void CTrigramModel::InitModelFromConfigAndBuildTagset(string FileName, const CLe
 		StringTokenizer tok(buffer, "\r\n\t ");
 		if (!tok())
 			 continue;
-		string Field = tok.val();
-        string Value;
+		std::string Field = tok.val();
+        std::string Value;
 		if (tok())
 		    Value = tok.val();
 		if (Field == "NgramFile")
@@ -896,7 +896,7 @@ void CTrigramModel::InitModelFromConfigAndBuildTagset(string FileName, const CLe
 
 bool CTrigramModel::DisambiguateRusCorpXml(vector<CXmlToken>& Words)  const
 {
-	vector<string> tokens;
+	vector<std::string> tokens;
 	vector<CWordIntepretation> tags;
     m_CurrentSentenceWords2Annots.clear();    
     for (size_t WordNo=0; WordNo < Words.size(); WordNo++)	
@@ -916,7 +916,7 @@ bool CTrigramModel::DisambiguateRusCorpXml(vector<CXmlToken>& Words)  const
         vector<CXmlMorphAnnot> NewAnnots;
         for (;  i <W.m_Annots.size(); i++)
         {
-            string TagStr = W.m_Annots[i].BuildRusCorpAnnot();
+            std::string TagStr = W.m_Annots[i].BuildRusCorpAnnot();
             if (!TagStr.empty())
             {
                 WORD tag = find_tag(TagStr);
