@@ -112,13 +112,13 @@ BOOL CFormulaEditor::OnInitDialog()
 
      if (m_ColumnsCount < k) m_ColumnsCount = k;
 
-     //для номеров строк
+     //РґР»СЏ РЅРѕРјРµСЂРѕРІ СЃС‚СЂРѕРє
 	 m_ColumnsCount++;
 
-	 // установка ширины формулы
+	 // СѓСЃС‚Р°РЅРѕРІРєР° С€РёСЂРёРЅС‹ С„РѕСЂРјСѓР»С‹
 	 SetRowNumbers();
 
-	 // запись значений полей в таблицу 
+	 // Р·Р°РїРёСЃСЊ Р·РЅР°С‡РµРЅРёР№ РїРѕР»РµР№ РІ С‚Р°Р±Р»РёС†Сѓ 
 	 for (size_t i=0; i<m_OldValue.size(); i++)
 	 {
 			CString Q = WriteToString(GetRoss(), GetRoss()->Fields[m_OldValue[i].m_FieldNo].m_Signats[m_OldValue[i].GetSignatNo()].sFrmt, m_OldValue[i]).c_str();
@@ -209,14 +209,14 @@ void CFormulaEditor::OnButton2()
 }
 
 
-// добавить один столбец 
+// РґРѕР±Р°РІРёС‚СЊ РѕРґРёРЅ СЃС‚РѕР»Р±РµС† 
 void CFormulaEditor::OnButton3() 
 {
 	m_ColumnsCount++;
     SetRowNumbers();
 }
 
-// удалить один столбец 
+// СѓРґР°Р»РёС‚СЊ РѕРґРёРЅ СЃС‚РѕР»Р±РµС† 
 void CFormulaEditor::OnButton4() 
 {
 	int nRow, nCol;
@@ -230,7 +230,7 @@ void CFormulaEditor::OnButton4()
 	UpdateData(FALSE);
 }
 
-// редактировать один кортеж
+// СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РѕРґРёРЅ РєРѕСЂС‚РµР¶
 void CFormulaEditor::OnFormulaEditorValue() 
 {
 	

@@ -65,8 +65,8 @@ int CLemWord::ProcessGraphematicalDescriptors(const char* LineStr)
 	size_t hyphen_occur = m_strWord.find("-");
 	if ((hyphen_occur != string::npos) && (hyphen_occur!=0))
 	{
-		// "Павла I-го" 
-		// "I-го" - одно слово
+		// "РџР°РІР»Р° I-РіРѕ" 
+		// "I-РіРѕ" - РѕРґРЅРѕ СЃР»РѕРІРѕ
 		bRomanNumber = is_roman_number(m_strWord.c_str(), hyphen_occur);
 	};
 	if (bRomanNumber)
@@ -80,7 +80,7 @@ int CLemWord::ProcessGraphematicalDescriptors(const char* LineStr)
 
 void rtrim (char* s, size_t* len)
  {
-     // откусываю признаки конца строки, если они появились
+     // РѕС‚РєСѓСЃС‹РІР°СЋ РїСЂРёР·РЅР°РєРё РєРѕРЅС†Р° СЃС‚СЂРѕРєРё, РµСЃР»Рё РѕРЅРё РїРѕСЏРІРёР»РёСЃСЊ
    while (*len > 0 && isspace((unsigned char)s[*len-1]))
 	s[--(*len)] = 0;
  }
@@ -147,7 +147,7 @@ bool CLemWord::ProcessPlmLineForTheFirstHomonym(const char* sPlmLine, MorphLangu
     char* strPlmLine = buffer;
 
 
-    // откусываю признаки конца строки, если они появились
+    // РѕС‚РєСѓСЃС‹РІР°СЋ РїСЂРёР·РЅР°РєРё РєРѕРЅС†Р° СЃС‚СЂРѕРєРё, РµСЃР»Рё РѕРЅРё РїРѕСЏРІРёР»РёСЃСЊ
     size_t iPlmLineLen = strlen(strPlmLine);
     rtrim(strPlmLine,&iPlmLineLen);
 
@@ -559,15 +559,15 @@ string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  con
 
 bool CLemWord::HasAnalyticalBe() const
 {
-	// если мы попали на оборот(например, "может быть"), тогда не будем строить здесь анал. форму.
+	// РµСЃР»Рё РјС‹ РїРѕРїР°Р»Рё РЅР° РѕР±РѕСЂРѕС‚(РЅР°РїСЂРёРјРµСЂ, "РјРѕР¶РµС‚ Р±С‹С‚СЊ"), С‚РѕРіРґР° РЅРµ Р±СѓРґРµРј СЃС‚СЂРѕРёС‚СЊ Р·РґРµСЃСЊ Р°РЅР°Р». С„РѕСЂРјСѓ.
 	if (IsInOborot()) return false;
 
-	// "быто" предсказывается как "быть"
+	// "Р±С‹С‚Рѕ" РїСЂРµРґСЃРєР°Р·С‹РІР°РµС‚СЃСЏ РєР°Рє "Р±С‹С‚СЊ"
 	if (m_bPredicted) return false;
 
     for (int i = 0; i < GetHomonymsCount(); i++)
 		if	(		(GetHomonym(i)->HasPos(VERB) || GetHomonym(i)->HasPos(INFINITIVE)) 
-				&& 	( GetHomonym(i)->IsLemma("БЫТЬ") || GetHomonym(i)->IsLemma("СТАТЬ"))
+				&& 	( GetHomonym(i)->IsLemma("Р‘Р«РўР¬") || GetHomonym(i)->IsLemma("РЎРўРђРўР¬"))
 			)
 			return true;
 		

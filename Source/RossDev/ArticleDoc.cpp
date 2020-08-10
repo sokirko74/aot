@@ -205,7 +205,7 @@ BOOL CArticleDoc::OpenArticle (WORD  UnitNo, CRossDoc* pRossDoc)
 
     
 
-	// Инициализация  CArticleView
+	// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ  CArticleView
     CArticleView* View = GetArticleView ();
 	
 	m_Article.m_pRoss = GetRoss();
@@ -252,7 +252,7 @@ BOOL CArticleDoc::SaveModified()
 	}
 	catch (...)
 	{
-        prompt.Format("Статья \"%s\" содержит ошибки (%s) . Выйти без сохранения?", name, GetArticleErrorStr().c_str());
+        prompt.Format("РЎС‚Р°С‚СЊСЏ \"%s\" СЃРѕРґРµСЂР¶РёС‚ РѕС€РёР±РєРё (%s) . Р’С‹Р№С‚Рё Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ?", name, GetArticleErrorStr().c_str());
 		
 		switch (AfxMessageBox (prompt, MB_OKCANCEL))
 		{

@@ -1,6 +1,6 @@
 // =====================================================
-// Перевод тайм-групп. Файл создан Алексеем Сокирко 17  ноября 2000 года.
-// Документация - в "l:\documents\Описание TimeRoss.lnk"
+// РџРµСЂРµРІРѕРґ С‚Р°Р№Рј-РіСЂСѓРїРї. Р¤Р°Р№Р» СЃРѕР·РґР°РЅ РђР»РµРєСЃРµРµРј РЎРѕРєРёСЂРєРѕ 17  РЅРѕСЏР±СЂСЏ 2000 РіРѕРґР°.
+// Р”РѕРєСѓРјРµРЅС‚Р°С†РёСЏ - РІ "l:\documents\РћРїРёСЃР°РЅРёРµ TimeRoss.lnk"
 #pragma warning(disable:4786)
 #pragma warning(disable:4503)
 #include "StdAfx.h"
@@ -49,7 +49,7 @@ string in_delimiters(const string &word, int delim1, int delim2)
 }
 
 /*
- в таймгруппу могут входить только однословные термины типа дни недели, месяцы
+ РІ С‚Р°Р№РјРіСЂСѓРїРїСѓ РјРѕРіСѓС‚ РІС…РѕРґРёС‚СЊ С‚РѕР»СЊРєРѕ РѕРґРЅРѕСЃР»РѕРІРЅС‹Рµ С‚РµСЂРјРёРЅС‹ С‚РёРїР° РґРЅРё РЅРµРґРµР»Рё, РјРµСЃСЏС†С‹
 */
 
 string tr_by_thesaurus(const CThesaurus* Thes, string TextEntryStr)
@@ -73,14 +73,14 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 	string pl_str = brack == "pl" ? "s" : "";
 
 	string res;
-	// если у узла нет частей речи, то его надо переводить просто так
+	// РµСЃР»Рё Сѓ СѓР·Р»Р° РЅРµС‚ С‡Р°СЃС‚РµР№ СЂРµС‡Рё, С‚Рѕ РµРіРѕ РЅР°РґРѕ РїРµСЂРµРІРѕРґРёС‚СЊ РїСЂРѕСЃС‚Рѕ С‚Р°Рє
 	if ( RusNode.IsWordContainer() && RusNode.GetWord(0).m_Poses == 0)
 	{
 		for (long i=0; i < RusNode.GetWordsSize(); i++)
 			res +=  RusNode.GetWord(i).m_Word + " ";
 	}
 	else 
-	// переводим группу однородных числительных, которые заполняют одно место в поле CONTENT
+	// РїРµСЂРµРІРѕРґРёРј РіСЂСѓРїРїСѓ РѕРґРЅРѕСЂРѕРґРЅС‹С… С‡РёСЃР»РёС‚РµР»СЊРЅС‹С…, РєРѕС‚РѕСЂС‹Рµ Р·Р°РїРѕР»РЅСЏСЋС‚ РѕРґРЅРѕ РјРµСЃС‚Рѕ РІ РїРѕР»Рµ CONTENT
 	if(RusNode.m_NodeType == MNA && RusNode.IsWordContainer())
 	{
 		vector<long> Nodes;
@@ -90,14 +90,14 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 			if (!RusStr.GetNode(Nodes[i]).IsPrimitive()) continue;
 			const CSemWord&  W = RusStr.GetNode(Nodes[i]).GetWord(0);
 			m_Nodes[GetEngNodeByRusNode(Nodes[i])].m_bToDelete = true;
-			// W - одно числительное. По-русски оно могло быть написано буквами или цифрами,
-			// но семанттика преобразует числа прописью в арабскую запись
+			// W - РѕРґРЅРѕ С‡РёСЃР»РёС‚РµР»СЊРЅРѕРµ. РџРѕ-СЂСѓСЃСЃРєРё РѕРЅРѕ РјРѕРіР»Рѕ Р±С‹С‚СЊ РЅР°РїРёСЃР°РЅРѕ Р±СѓРєРІР°РјРё РёР»Рё С†РёС„СЂР°РјРё,
+			// РЅРѕ СЃРµРјР°РЅС‚С‚РёРєР° РїСЂРµРѕР±СЂР°Р·СѓРµС‚ С‡РёСЃР»Р° РїСЂРѕРїРёСЃСЊСЋ РІ Р°СЂР°Р±СЃРєСѓСЋ Р·Р°РїРёСЃСЊ
 			string one_numeral;
 			if (W.m_Poses != 0)
 			   one_numeral = spellout_number (W.m_Word, W.m_Poses & (1 < NUMERAL));
 			else
 			   one_numeral = W.m_Word.c_str();
-			if (i == Nodes.size() - 1)  // вставка союза, который должен стоять на предпоследнем месте
+			if (i == Nodes.size() - 1)  // РІСЃС‚Р°РІРєР° СЃРѕСЋР·Р°, РєРѕС‚РѕСЂС‹Р№ РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ РЅР° РїСЂРµРґРїРѕСЃР»РµРґРЅРµРј РјРµСЃС‚Рµ
 			{
 			    res += tr_by_ross_simple(GetRossHolder(OborRoss), RusNode.GetWord(0).m_Lemma);			
 				res += " ";
@@ -112,16 +112,16 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 		EngRusMakeLower(word);
 
 		/*
-		 если есть числительное полу, тогда слово должно быть в единственном
+		 РµСЃР»Рё РµСЃС‚СЊ С‡РёСЃР»РёС‚РµР»СЊРЅРѕРµ РїРѕР»Сѓ, С‚РѕРіРґР° СЃР»РѕРІРѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РІ РµРґРёРЅСЃС‚РІРµРЅРЅРѕРј
 		*/
-	    if (RusNode.HasRelOperator("ПОЛУ"))
+	    if (RusNode.HasRelOperator("РџРћР›РЈ"))
 			  pl_str ="";
 
 
 		res = tr_by_ross_simple(GetRossHolder(TimeRoss), word);
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator("РџРћР›РЈ"))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -129,7 +129,7 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 		res = tr_by_thesaurus(m_pData->GetThes(OmniThes), word);
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator("РџРћР›РЈ"))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -137,7 +137,7 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 
 		res = tr_by_ross_simple(GetRossHolder(Ross), word);
 
-		// сколько времени => how_much time
+		// СЃРєРѕР»СЊРєРѕ РІСЂРµРјРµРЅРё => how_much time
 		if (res.size())
 		 if (res.find("_") != -1)
 		 {
@@ -149,7 +149,7 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 		 };
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator("РџРћР›РЈ"))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -171,7 +171,7 @@ string CEngSemStructure::time_tr_by_ross(long RusNodeNo, string &brack)
 
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator("РџРћР›РЈ"))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -184,10 +184,10 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 {
 	CEngSemNode &MainNode = m_Nodes[MainNodeNo];
 
-    /* если однословная тайм-группа  была переведена с помощью АОСС в заглушечную статью,
-	 и в самой статье приписан перевод, то нужно взять этот перевод
-	 Например, слово "век".
-	 Но обязательно надо проверить, что перед нами не часть большой тайм группы (последнее условие)
+    /* РµСЃР»Рё РѕРґРЅРѕСЃР»РѕРІРЅР°СЏ С‚Р°Р№Рј-РіСЂСѓРїРїР°  Р±С‹Р»Р° РїРµСЂРµРІРµРґРµРЅР° СЃ РїРѕРјРѕС‰СЊСЋ РђРћРЎРЎ РІ Р·Р°РіР»СѓС€РµС‡РЅСѓСЋ СЃС‚Р°С‚СЊСЋ,
+	 Рё РІ СЃР°РјРѕР№ СЃС‚Р°С‚СЊРµ РїСЂРёРїРёСЃР°РЅ РїРµСЂРµРІРѕРґ, С‚Рѕ РЅСѓР¶РЅРѕ РІР·СЏС‚СЊ СЌС‚РѕС‚ РїРµСЂРµРІРѕРґ
+	 РќР°РїСЂРёРјРµСЂ, СЃР»РѕРІРѕ "РІРµРє".
+	 РќРѕ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РЅР°РґРѕ РїСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ РїРµСЂРµРґ РЅР°РјРё РЅРµ С‡Р°СЃС‚СЊ Р±РѕР»СЊС€РѕР№ С‚Р°Р№Рј РіСЂСѓРїРїС‹ (РїРѕСЃР»РµРґРЅРµРµ СѓСЃР»РѕРІРёРµ)
 	*/
 
 	if  (    (MainNode.RusNode != -1)
@@ -211,7 +211,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		return true;
 	}
 
-	// далее только про многословные тайм-группы
+	// РґР°Р»РµРµ С‚РѕР»СЊРєРѕ РїСЂРѕ РјРЅРѕРіРѕСЃР»РѕРІРЅС‹Рµ С‚Р°Р№Рј-РіСЂСѓРїРїС‹
     if		(    !MainNode.IsWordContainer()
 			  ||  MainNode.m_bReached
 			  || !MainNode.IsMainTimeRossNode()
@@ -222,13 +222,13 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		  
 	SetNodeToDeleteFalse();
 
-	// артикль, если нужно, будет прописан в словарной статье таймросса, а то получается
-	// в прошлом году -> the last year
-	// удаляем артикль, который был выставлен внешними процедурами
+	// Р°СЂС‚РёРєР»СЊ, РµСЃР»Рё РЅСѓР¶РЅРѕ, Р±СѓРґРµС‚ РїСЂРѕРїРёСЃР°РЅ РІ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµ С‚Р°Р№РјСЂРѕСЃСЃР°, Р° С‚Рѕ РїРѕР»СѓС‡Р°РµС‚СЃСЏ
+	// РІ РїСЂРѕС€Р»РѕРј РіРѕРґСѓ -> the last year
+	// СѓРґР°Р»СЏРµРј Р°СЂС‚РёРєР»СЊ, РєРѕС‚РѕСЂС‹Р№ Р±С‹Р» РІС‹СЃС‚Р°РІР»РµРЅ РІРЅРµС€РЅРёРјРё РїСЂРѕС†РµРґСѓСЂР°РјРё
 	MainNode.m_ArticleStr = "";
 	MainNode.m_ArticleCauseHistory.push_back(OverwriteArticleForTimeNodes);
 
-	// собираем все узлы словосочетания в один Map 
+	// СЃРѕР±РёСЂР°РµРј РІСЃРµ СѓР·Р»С‹ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ РІ РѕРґРёРЅ Map 
 	map<int , CEngSemNode *> nodes;
 
 	for(int i = 0; i < m_Nodes.size(); i++)
@@ -241,11 +241,11 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		};
 	}
 	
-    // получаем поле "ENG"  статьи сл-ния и токенизируем его по пробелу
+    // РїРѕР»СѓС‡Р°РµРј РїРѕР»Рµ "ENG"  СЃС‚Р°С‚СЊРё СЃР»-РЅРёСЏ Рё С‚РѕРєРµРЅРёР·РёСЂСѓРµРј РµРіРѕ РїРѕ РїСЂРѕР±РµР»Сѓ
 	string EngField = get_field(GetRossHolder(MainArticle.m_DictType), MainArticle.m_UnitNo, "ENG", 0, 0, ErrUChar);
 	StringTokenizer eng_item_tok (EngField.c_str(), " ");
 
-	// в переменную res положим результаты перевода 
+	// РІ РїРµСЂРµРјРµРЅРЅСѓСЋ res РїРѕР»РѕР¶РёРј СЂРµР·СѓР»СЊС‚Р°С‚С‹ РїРµСЂРµРІРѕРґР° 
 
 	string res;
 	while( true ) {
@@ -253,9 +253,9 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		if (s == 0) break;
 		string eng_item = s;
 		if (eng_item == "")  break;
-		//  в квадратных скабках стоит номер в поле состав
+		//  РІ РєРІР°РґСЂР°С‚РЅС‹С… СЃРєР°Р±РєР°С… СЃС‚РѕРёС‚ РЅРѕРјРµСЂ РІ РїРѕР»Рµ СЃРѕСЃС‚Р°РІ
 	    string PlaceNoStr = in_delimiters(eng_item, '[', ']');
-		//  в  круглых скобках стоят граммемы
+		//  РІ  РєСЂСѓРіР»С‹С… СЃРєРѕР±РєР°С… СЃС‚РѕСЏС‚ РіСЂР°РјРјРµРјС‹
 	    string GrammemsStr = in_delimiters(eng_item, '(', ')');
 		string tr;
 
@@ -276,7 +276,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 			if (nodes[PlaceNo] == 0)
 			{
 				string UnitStr =  GetRoss(TimeRoss)->GetEntryStr(MainArticle.m_UnitNo);
-				string Mess = "При переводе \""+UnitStr +"\" не найдено  соответствия для " +eng_item;
+				string Mess = "РџСЂРё РїРµСЂРµРІРѕРґРµ \""+UnitStr +"\" РЅРµ РЅР°Р№РґРµРЅРѕ  СЃРѕРѕС‚РІРµС‚СЃС‚РІРёСЏ РґР»СЏ " +eng_item;
 				MainNode.m_bReached = true;  
 				ErrorMessage (Mess);
 				return true;
@@ -294,9 +294,9 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 			else if(eng_item[0] == '[')
 			{
 				/*
-				 если элемент поля ENG равен "[i]", а в русском тексте было число,
-				 тогда надо взять русский текст как есть. Например,
-				 "в 1960-х годах" -> "in 1960s"
+				 РµСЃР»Рё СЌР»РµРјРµРЅС‚ РїРѕР»СЏ ENG СЂР°РІРµРЅ "[i]", Р° РІ СЂСѓСЃСЃРєРѕРј С‚РµРєСЃС‚Рµ Р±С‹Р»Рѕ С‡РёСЃР»Рѕ,
+				 С‚РѕРіРґР° РЅР°РґРѕ РІР·СЏС‚СЊ СЂСѓСЃСЃРєРёР№ С‚РµРєСЃС‚ РєР°Рє РµСЃС‚СЊ. РќР°РїСЂРёРјРµСЂ,
+				 "РІ 1960-С… РіРѕРґР°С…" -> "in 1960s"
 				*/
 				if (isdigit(N.GetWord(0).m_Word[0]))
 					tr = N.GetWord(0).m_Lemma;
@@ -333,9 +333,9 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 	MainNode.m_Words[0].m_bDoNotChangeForm = true;  
 
 	/*
-	 если на отношении, которое  идет в главный узел есть предлог, тогда стираем  его
-	 чтобы синтез не написал его два раза,
-	 кроме прелдлога "than", который ставит ApplyComparativeRule
+	 РµСЃР»Рё РЅР° РѕС‚РЅРѕС€РµРЅРёРё, РєРѕС‚РѕСЂРѕРµ  РёРґРµС‚ РІ РіР»Р°РІРЅС‹Р№ СѓР·РµР» РµСЃС‚СЊ РїСЂРµРґР»РѕРі, С‚РѕРіРґР° СЃС‚РёСЂР°РµРј  РµРіРѕ
+	 С‡С‚РѕР±С‹ СЃРёРЅС‚РµР· РЅРµ РЅР°РїРёСЃР°Р» РµРіРѕ РґРІР° СЂР°Р·Р°,
+	 РєСЂРѕРјРµ РїСЂРµР»РґР»РѕРіР° "than", РєРѕС‚РѕСЂС‹Р№ СЃС‚Р°РІРёС‚ ApplyComparativeRule
 	*/
 	vector <long> Rels;
 	GetIncomingRelations(MainNodeNo,Rels);
@@ -358,10 +358,10 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 
 
 
-	// все отношения, идущие к узлам, не вошедшим в эту таум-группу 
-	// подвешиваем к главному узлу (узлы вошедшие в группу  помечены m_bToDelete),
-	// потому что они потом будут удалены. 
-	// Попутно вычисляем самый минимальный WordNo
+	// РІСЃРµ РѕС‚РЅРѕС€РµРЅРёСЏ, РёРґСѓС‰РёРµ Рє СѓР·Р»Р°Рј, РЅРµ РІРѕС€РµРґС€РёРј РІ СЌС‚Сѓ С‚Р°СѓРј-РіСЂСѓРїРїСѓ 
+	// РїРѕРґРІРµС€РёРІР°РµРј Рє РіР»Р°РІРЅРѕРјСѓ СѓР·Р»Сѓ (СѓР·Р»С‹ РІРѕС€РµРґС€РёРµ РІ РіСЂСѓРїРїСѓ  РїРѕРјРµС‡РµРЅС‹ m_bToDelete),
+	// РїРѕС‚РѕРјСѓ С‡С‚Рѕ РѕРЅРё РїРѕС‚РѕРј Р±СѓРґСѓС‚ СѓРґР°Р»РµРЅС‹. 
+	// РџРѕРїСѓС‚РЅРѕ РІС‹С‡РёСЃР»СЏРµРј СЃР°РјС‹Р№ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ WordNo
 	PrintNodes();
 	long MinWordNo = 10000;
 	for (int i=0; i < m_Nodes.size(); i++)
@@ -380,7 +380,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 			 m_Relations[Rels[k]].m_SourceNodeNo = MainNodeNo;
 	};
 	MainNode.m_Words[0].m_WordNo  = MinWordNo;
-    //удаляем все узлы, вошедшие в группу
+    //СѓРґР°Р»СЏРµРј РІСЃРµ СѓР·Р»С‹, РІРѕС€РµРґС€РёРµ РІ РіСЂСѓРїРїСѓ
 	DelNodesToDelete();
 	return true;
 }

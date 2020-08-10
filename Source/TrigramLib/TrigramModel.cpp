@@ -122,8 +122,8 @@ void CTrigramModel::set_ngram(size_t n, WORD t1, WORD t2, WORD t3, int value)
 
 size_t CTrigramModel::GetTrigram(WORD t1, WORD t2, WORD t3)  const
 {
-	// для скорости проверим сначала биграммы, если биграммы пусты, тогда
-	// и триграмма пуста
+	// РґР»СЏ СЃРєРѕСЂРѕСЃС‚Рё РїСЂРѕРІРµСЂРёРј СЃРЅР°С‡Р°Р»Р° Р±РёРіСЂР°РјРјС‹, РµСЃР»Рё Р±РёРіСЂР°РјРјС‹ РїСѓСЃС‚С‹, С‚РѕРіРґР°
+	// Рё С‚СЂРёРіСЂР°РјРјР° РїСѓСЃС‚Р°
 	if ( (m_Bigrams[ngram_index(t1, t2)] == 0) || (m_Bigrams[ngram_index(t2, t3)] == 0)) return 0;
 
 	map<trigram_integer_t,int>::const_iterator it = m_Trigrams.find(ngram_index(t1,t2,t3));
@@ -234,7 +234,7 @@ CLambdas CTrigramModel::compute_lambdas_for_one_bucket(PMap::const_iterator star
 				if (f123<0)  continue; 
 
 				int f23, f3;
-				if (m_TokenCounts[0]>1) // если массив состоит хотя бы из двух слов
+				if (m_TokenCounts[0]>1) // РµСЃР»Рё РјР°СЃСЃРёРІ СЃРѕСЃС‚РѕРёС‚ С…РѕС‚СЏ Р±С‹ РёР· РґРІСѓС… СЃР»РѕРІ
 				{
 					f3 = m_Unigrams[ngram_index(k)]-1;
 					q[2]=(prob_t)f3/(prob_t)(m_TokenCounts[0]-1);
@@ -275,7 +275,7 @@ CLambdas CTrigramModel::compute_lambdas_for_one_bucket(PMap::const_iterator star
 }
 
 
-// вычисляет знаменатель в формуле v(h) = c(h) / |{w : c(h,w) > 0}|
+// РІС‹С‡РёСЃР»СЏРµС‚ Р·РЅР°РјРµРЅР°С‚РµР»СЊ РІ С„РѕСЂРјСѓР»Рµ v(h) = c(h) / |{w : c(h,w) > 0}|
 // That is we take the average count over non-zero counts for trigrams.
 int CTrigramModel::compute_bucket_denominator(WORD i, WORD j, int& TrigramsCount)
 {
@@ -479,7 +479,7 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 
 	if (! R.m_pFoundWord ) 
 	{
-		// если слова нет в словаре, тогда попробуем его поискать в нижнем регистре
+		// РµСЃР»Рё СЃР»РѕРІР° РЅРµС‚ РІ СЃР»РѕРІР°СЂРµ, С‚РѕРіРґР° РїРѕРїСЂРѕР±СѓРµРј РµРіРѕ РїРѕРёСЃРєР°С‚СЊ РІ РЅРёР¶РЅРµРј СЂРµРіРёСЃС‚СЂРµ
 		string  lower = WordStr;
 		RmlMakeLower(lower, m_Language);
         R.m_pFoundWord =  lookup_word(lower);
@@ -487,7 +487,7 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 
 	if ( R.m_pFoundWord ) 
 	{
-		// приписываем все тэги, которые были в корпусе 
+		// РїСЂРёРїРёСЃС‹РІР°РµРј РІСЃРµ С‚СЌРіРё, РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»Рё РІ РєРѕСЂРїСѓСЃРµ 
         for (size_t i=0; i < R.m_pFoundWord->m_Length; i++)
 		{
             int Tag = m_LexProbs[R.m_pFoundWord->m_StartOffset + i].m_Tag;
@@ -495,7 +495,7 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 		}
 	}
 
-	// получаем все возможные тэги из морф. словаря
+	// РїРѕР»СѓС‡Р°РµРј РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ С‚СЌРіРё РёР· РјРѕСЂС„. СЃР»РѕРІР°СЂСЏ
     map<string, const vector<CXmlMorphAnnot>* >::iterator it = m_CurrentSentenceWords2Annots.find(WordStr);
     if (it != m_CurrentSentenceWords2Annots.end())
         get_tags_from_annots(*it->second,R.m_PossibleWordTags, WordStr);
@@ -511,11 +511,11 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 		)
 		{
             for (size_t  i=0; i < m_RegisteredTags.size();i++)
-                if (m_RegisteredTags[i].length() > 3 && m_RegisteredTags[i].substr(0,4) == "ЧИСЛ")
+                if (m_RegisteredTags[i].length() > 3 && m_RegisteredTags[i].substr(0,4) == "Р§РРЎР›")
                     R.m_PossibleWordTags.insert(i);
 
             if (R.m_PossibleWordTags.empty())
-				throw CExpc ("Cannot find ЧИСЛ tag");
+				throw CExpc ("Cannot find Р§РРЎР› tag");
 		}
 		else
 		if (		ispunct((BYTE)WordStr[0])
@@ -530,7 +530,7 @@ CDictionarySearch CTrigramModel::find_word(const string& WordStr) const
 		else
 		{
 			
-			// приписываем все тэги
+			// РїСЂРёРїРёСЃС‹РІР°РµРј РІСЃРµ С‚СЌРіРё
 			if (!m_bQuiet)
 				fprintf (stderr, "No information for word %s\n",WordStr.c_str());
 			for (size_t i=0; i < min((size_t)200, m_TagsOrderedByUnigrams.size()); i++)
@@ -605,8 +605,8 @@ prob_t CTrigramModel::GetSmoothedLexProb(const CDictionarySearch& DS, WORD PrevT
 		// best solution
 		prob_t PosN3 = log (N3 + 1);
 		res = ((PosN3+1)/(PosN3+2))*(N3/C2) +  (1/(PosN3+2)) * (N2/C1);
-		// умножаем на длину слова, чем длинне слово - тем меньше оно зависит от контекста
-		// надо проверить на полных тэгах
+		// СѓРјРЅРѕР¶Р°РµРј РЅР° РґР»РёРЅСѓ СЃР»РѕРІР°, С‡РµРј РґР»РёРЅРЅРµ СЃР»РѕРІРѕ - С‚РµРј РјРµРЅСЊС€Рµ РѕРЅРѕ Р·Р°РІРёСЃРёС‚ РѕС‚ РєРѕРЅС‚РµРєСЃС‚Р°
+		// РЅР°РґРѕ РїСЂРѕРІРµСЂРёС‚СЊ РЅР° РїРѕР»РЅС‹С… С‚СЌРіР°С…
         return log(res* ((prob_t)DS.m_pFoundWord->m_WordStr.length() ));
 	}
 	
@@ -655,7 +655,7 @@ void CTrigramModel::dump_transition_probs()
 }
 
 // ------------------------------------------------------------ 
-// немного исправили эту процедуру для чтения фалов из Яндекса  (лемма пишется в фигурных скобках)
+// РЅРµРјРЅРѕРіРѕ РёСЃРїСЂР°РІРёР»Рё СЌС‚Сѓ РїСЂРѕС†РµРґСѓСЂСѓ РґР»СЏ С‡С‚РµРЅРёСЏ С„Р°Р»РѕРІ РёР· РЇРЅРґРµРєСЃР°  (Р»РµРјРјР° РїРёС€РµС‚СЃСЏ РІ С„РёРіСѓСЂРЅС‹С… СЃРєРѕР±РєР°С…)
 
 
 bool CTrigramModel::adjusting_homonyms_coef(string FileName) const

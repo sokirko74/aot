@@ -34,8 +34,8 @@ CPlmLine::CPlmLine ()
 
 
 
-// выдает смещение, начиная с которого стоит знак морфологического  словаря
-// если такого знака нет, то выдается -1
+// РІС‹РґР°РµС‚ СЃРјРµС‰РµРЅРёРµ, РЅР°С‡РёРЅР°СЏ СЃ РєРѕС‚РѕСЂРѕРіРѕ СЃС‚РѕРёС‚ Р·РЅР°Рє РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ  СЃР»РѕРІР°СЂСЏ
+// РµСЃР»Рё С‚Р°РєРѕРіРѕ Р·РЅР°РєР° РЅРµС‚, С‚Рѕ РІС‹РґР°РµС‚СЃСЏ -1
 // [-+][:alpha:\?][:alpha:\?]
 int GetMorphSignPosition(const char* LineStr) 
 {
@@ -196,8 +196,8 @@ bool CPlmLine :: LoadPlmLineFromString (string LineStr, bool bStartLine, const C
 		MorphSignPos += i; // make MorphSignPos an absolute offset in LineStr
 
 	m_GraphDescr = LineStr.substr (i, MorphSignPos - i);
-	/* вставим пробел в начало, потому что часто ищут графету с пробелом в начале,
-	например, " ЛЕ"*/
+	/* РІСЃС‚Р°РІРёРј РїСЂРѕР±РµР» РІ РЅР°С‡Р°Р»Рѕ, РїРѕС‚РѕРјСѓ С‡С‚Рѕ С‡Р°СЃС‚Рѕ РёС‰СѓС‚ РіСЂР°С„РµС‚Сѓ СЃ РїСЂРѕР±РµР»РѕРј РІ РЅР°С‡Р°Р»Рµ,
+	РЅР°РїСЂРёРјРµСЂ, " Р›Р•"*/
 	m_GraphDescr = " " + m_GraphDescr;
 
 	if (MorphSignPos != LineStr.length())
@@ -260,8 +260,8 @@ bool CPlmLine :: LoadPlmLineFromString (string LineStr, bool bStartLine, const C
 	
 	if ((hyphen_occur != string::npos) && (hyphen_occur!=0))
 	{
-		// "Павла I-го" 
-		// "I-го" - одно слово
+		// "РџР°РІР»Р° I-РіРѕ" 
+		// "I-РіРѕ" - РѕРґРЅРѕ СЃР»РѕРІРѕ
 		bRomanNumber = is_roman_number(m_Word.c_str(), hyphen_occur);
 	};
 	if (bRomanNumber)

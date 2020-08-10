@@ -64,7 +64,7 @@ CEngSynthes::CEngSynthes(CEngSemStructure& EngStr)
 }
 
 
-// подчиненная клауза - это клауза, в один из узлов которой входит межклаузная  стрелка
+// РїРѕРґС‡РёРЅРµРЅРЅР°СЏ РєР»Р°СѓР·Р° - СЌС‚Рѕ РєР»Р°СѓР·Р°, РІ РѕРґРёРЅ РёР· СѓР·Р»РѕРІ РєРѕС‚РѕСЂРѕР№ РІС…РѕРґРёС‚ РјРµР¶РєР»Р°СѓР·РЅР°СЏ  СЃС‚СЂРµР»РєР°
 bool CEngSynthes::IsSlaveClause(long ClauseNo) const
 {
 	for (long i=0; i <E.m_Relations.size();i++)
@@ -79,18 +79,18 @@ bool CEngSynthes::IsSlaveClause(long ClauseNo) const
 
 void CEngSynthes::find_position_for_slave_clause_components()
 {
-    // идем по всем главным клаузам 
+    // РёРґРµРј РїРѕ РІСЃРµРј РіР»Р°РІРЅС‹Рј РєР»Р°СѓР·Р°Рј 
 	for(long ClauseNo=0; ClauseNo< E.m_Clauses.size(); ClauseNo++)
 	{
-        // берем вершины клаузы
+        // Р±РµСЂРµРј РІРµСЂС€РёРЅС‹ РєР»Р°СѓР·С‹
 		vector<long> roots;	
 		E.GetClauseRoots(ClauseNo, roots);
 		long MainClauseRoot = E.GetMainClauseRoot(ClauseNo);
 
-		// пустая клауза?
+		// РїСѓСЃС‚Р°СЏ РєР»Р°СѓР·Р°?
 		if (MainClauseRoot == -1) continue;
 
-		// находим самый левый узел главной компоненты связностей.
+		// РЅР°С…РѕРґРёРј СЃР°РјС‹Р№ Р»РµРІС‹Р№ СѓР·РµР» РіР»Р°РІРЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚С‹ СЃРІСЏР·РЅРѕСЃС‚РµР№.
 	    vector<long> Nodes;
 		E.dfs_out(MainClauseRoot, Nodes);
 		sort(Nodes.begin(),Nodes.end(),IsLessByMinWordNo(&E));
@@ -106,7 +106,7 @@ void CEngSynthes::find_position_for_slave_clause_components()
 		   sort(Nodes.begin(),Nodes.end(),IsLessByMinWordNo(&E));
 		   assert(Nodes.size() > 0);
 		   long WordMo = E.m_Nodes[Nodes[0]].GetMinWordNo();
-		   // считаем, что неглавные компоненты связностей, как бы, подчиненные клаузы
+		   // СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РЅРµРіР»Р°РІРЅС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹ СЃРІСЏР·РЅРѕСЃС‚РµР№, РєР°Рє Р±С‹, РїРѕРґС‡РёРЅРµРЅРЅС‹Рµ РєР»Р°СѓР·С‹
 		   if (E.IsTheVeryLeftNodeOfClause(Nodes[0]))
 		   {
 				node_sub_clause_put_after.insert(make_pair(MainLeftNodeNo, make_pair(roots[i], false)));
@@ -126,12 +126,12 @@ void CEngSynthes::find_position_for_slave_clause_components()
 void SetIndefiniteArticle(string& str, const translate_helper& helper)
 {
 	/*
-		артикли всегда надо ставить перед именной группой, кроме случаев
+		Р°СЂС‚РёРєР»Рё РІСЃРµРіРґР° РЅР°РґРѕ СЃС‚Р°РІРёС‚СЊ РїРµСЂРµРґ РёРјРµРЅРЅРѕР№ РіСЂСѓРїРїРѕР№, РєСЂРѕРјРµ СЃР»СѓС‡Р°РµРІ
 		such a boy
 		all the day
 		half a day
 		half the day
-		но:
+		РЅРѕ:
 		the half of day
 	*/
 	StringTokenizer tok1(str.c_str(), " ");
@@ -166,7 +166,7 @@ void SetIndefiniteArticle(string& str, const translate_helper& helper)
 	str += prev_word;
 
 	/*
-	  установка правильной формы неопределенного артикля (а/an)
+	  СѓСЃС‚Р°РЅРѕРІРєР° РїСЂР°РІРёР»СЊРЅРѕР№ С„РѕСЂРјС‹ РЅРµРѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ Р°СЂС‚РёРєР»СЏ (Р°/an)
 	*/
 	StringTokenizer tok2(str.c_str(), " ");
 	str.erase();
@@ -191,7 +191,7 @@ string CEngSynthes::BuildSentence()
 
 	m_bConnected = E.IsConnected();
 	/*
-	  если граф не собран, отключаем межклаузные связи
+	  РµСЃР»Рё РіСЂР°С„ РЅРµ СЃРѕР±СЂР°РЅ, РѕС‚РєР»СЋС‡Р°РµРј РјРµР¶РєР»Р°СѓР·РЅС‹Рµ СЃРІСЏР·Рё
 	*/
 	if (!m_bConnected)
 	{
@@ -204,8 +204,8 @@ string CEngSynthes::BuildSentence()
 
 	};
 
-    // порождаем SynthesResult для каждого узла, в который будем складывать  синтезированные
-	// словоформы
+    // РїРѕСЂРѕР¶РґР°РµРј SynthesResult РґР»СЏ РєР°Р¶РґРѕРіРѕ СѓР·Р»Р°, РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµРј СЃРєР»Р°РґС‹РІР°С‚СЊ  СЃРёРЅС‚РµР·РёСЂРѕРІР°РЅРЅС‹Рµ
+	// СЃР»РѕРІРѕС„РѕСЂРјС‹
 	result_vec.clear();
 	result_vec.resize(E.m_Nodes.size());
 	clause_conj.clear();
@@ -215,20 +215,20 @@ string CEngSynthes::BuildSentence()
 	find_all_clause_connectors();
 	detect_clause_openers();
 	find_position_for_slave_clause_components();
-	// инициализируем слот m_bParenth, который обозначает, что "узел есть вводный оборот"
+	// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃР»РѕС‚ m_bParenth, РєРѕС‚РѕСЂС‹Р№ РѕР±РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ "СѓР·РµР» РµСЃС‚СЊ РІРІРѕРґРЅС‹Р№ РѕР±РѕСЂРѕС‚"
 	for (long i=0; i < E.m_Nodes.size(); i++)
 	  Res(i).m_bParenth  = FieldContainsValue(E.m_Nodes[i], "GF", "PARENTH");
 
 
-	// абсолютные вершины - те, в которые не  входит ни одной стрелки (даже межклаузных),
-	// то есть вершины главных клауз ( в норамальном случае в  предложении  есть это ровно одна 
-	// абсолютная вершина
+	// Р°Р±СЃРѕР»СЋС‚РЅС‹Рµ РІРµСЂС€РёРЅС‹ - С‚Рµ, РІ РєРѕС‚РѕСЂС‹Рµ РЅРµ  РІС…РѕРґРёС‚ РЅРё РѕРґРЅРѕР№ СЃС‚СЂРµР»РєРё (РґР°Р¶Рµ РјРµР¶РєР»Р°СѓР·РЅС‹С…),
+	// С‚Рѕ РµСЃС‚СЊ РІРµСЂС€РёРЅС‹ РіР»Р°РІРЅС‹С… РєР»Р°СѓР· ( РІ РЅРѕСЂР°РјР°Р»СЊРЅРѕРј СЃР»СѓС‡Р°Рµ РІ  РїСЂРµРґР»РѕР¶РµРЅРёРё  РµСЃС‚СЊ СЌС‚Рѕ СЂРѕРІРЅРѕ РѕРґРЅР° 
+	// Р°Р±СЃРѕР»СЋС‚РЅР°СЏ РІРµСЂС€РёРЅР°
 	vector<long> final_roots;
 
-    // идем по всем клаузам 
+    // РёРґРµРј РїРѕ РІСЃРµРј РєР»Р°СѓР·Р°Рј 
 	for(long ClauseNo=0; ClauseNo< E.m_Clauses.size(); ClauseNo++)
 	{
-        // берем вершины клаузы
+        // Р±РµСЂРµРј РІРµСЂС€РёРЅС‹ РєР»Р°СѓР·С‹
 		long MainClauseRoot = E.GetMainClauseRoot(ClauseNo);
 		if (!IsSlaveClause(ClauseNo)) final_roots.push_back(MainClauseRoot);
 		vector<long> roots;	
@@ -238,13 +238,13 @@ string CEngSynthes::BuildSentence()
 	}
 
 	   
-    // проходим по всем абсолютнын вершинам и берем от них построенные строки
+    // РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј Р°Р±СЃРѕР»СЋС‚РЅС‹РЅ РІРµСЂС€РёРЅР°Рј Рё Р±РµСЂРµРј РѕС‚ РЅРёС… РїРѕСЃС‚СЂРѕРµРЅРЅС‹Рµ СЃС‚СЂРѕРєРё
 	string str;
 	for(long i = 0; i < final_roots.size(); i++)
 	{
 		str += collect_results(final_roots[i]);
-		// ставим запятую в бессоюзном предложении (которое не собирается на Семане)
-		// например, "Иван ушел, Петр пришел"
+		// СЃС‚Р°РІРёРј Р·Р°РїСЏС‚СѓСЋ РІ Р±РµСЃСЃРѕСЋР·РЅРѕРј РїСЂРµРґР»РѕР¶РµРЅРёРё (РєРѕС‚РѕСЂРѕРµ РЅРµ СЃРѕР±РёСЂР°РµС‚СЃСЏ РЅР° РЎРµРјР°РЅРµ)
+		// РЅР°РїСЂРёРјРµСЂ, "РРІР°РЅ СѓС€РµР», РџРµС‚СЂ РїСЂРёС€РµР»"
 
 		if ( i+1 < final_roots.size())
 		  if (E.m_Nodes[final_roots[i]].m_ClauseNo != E.m_Nodes[final_roots[i+1]].m_ClauseNo)
@@ -301,10 +301,10 @@ bool CEngSynthes::try_numeral_node(int node_no)
 
 	const CEngSemWord& W = Node(node_no).m_Words[0];
 
-	//  "вшестером"
+	//  "РІС€РµСЃС‚РµСЂРѕРј"
 	if (   (W.m_Poses == 1<<eADV) 
 		&& (W.m_Lemma == "") 
-		&& ( atoi (W.m_Word.c_str()) >= 2) //  в "однером"  не бывает
+		&& ( atoi (W.m_Word.c_str()) >= 2) //  РІ "РѕРґРЅРµСЂРѕРј"  РЅРµ Р±С‹РІР°РµС‚
 	   )
 	{
 		Res(node_no).m_WordForms.push_back(spellout_number(W.m_Word, true));
@@ -313,15 +313,15 @@ bool CEngSynthes::try_numeral_node(int node_no)
 		return true;
 	}
 
-	// слово "оба" должно переводится по словарю
+	// СЃР»РѕРІРѕ "РѕР±Р°" РґРѕР»Р¶РЅРѕ РїРµСЂРµРІРѕРґРёС‚СЃСЏ РїРѕ СЃР»РѕРІР°СЂСЋ
 	if (Node(node_no).GetType() != NoneRoss) return  false;
 
 	if ( (W.m_Poses != 1<<eNUMERAL) && (W.m_Poses != 1<<eORDNUM))  return false;
 	Res(node_no).m_WordForms.push_back(spellout_number(W.m_Word, W.HasPOS(eNUMERAL) ));
 
 	/*
-	 выставляем артикль у порядковых числительных, которые выполняю роль существительных
-	 например "Первый пришел, второй ушел."
+	 РІС‹СЃС‚Р°РІР»СЏРµРј Р°СЂС‚РёРєР»СЊ Сѓ РїРѕСЂСЏРґРєРѕРІС‹С… С‡РёСЃР»РёС‚РµР»СЊРЅС‹С…, РєРѕС‚РѕСЂС‹Рµ РІС‹РїРѕР»РЅСЏСЋ СЂРѕР»СЊ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹С…
+	 РЅР°РїСЂРёРјРµСЂ "РџРµСЂРІС‹Р№ РїСЂРёС€РµР», РІС‚РѕСЂРѕР№ СѓС€РµР»."
 	*/
 	if ( W.HasPOS(eORDNUM) )
 	{
@@ -333,16 +333,16 @@ bool CEngSynthes::try_numeral_node(int node_no)
 
 		if	(  (InRelNo == -1)
 			|| (   (E.m_Relations[InRelNo].m_Valency.m_RelationStr != "PROPERT")
-				// либо признак			     
+				// Р»РёР±Рѕ РїСЂРёР·РЅР°Рє			     
 
 				&& (E.m_Relations[InRelNo].m_Valency.m_RelationStr != "") 
-				// либо тайм группа
+				// Р»РёР±Рѕ С‚Р°Р№Рј РіСЂСѓРїРїР°
 			    ) 
 			)
 			Res(node_no).m_Article = DefArticle;
 	};
 
-    // переводим сыновей числительного (для ЭЛЕКТ_ИГ)
+    // РїРµСЂРµРІРѕРґРёРј СЃС‹РЅРѕРІРµР№ С‡РёСЃР»РёС‚РµР»СЊРЅРѕРіРѕ (РґР»СЏ Р­Р›Р•РљРў_РР“)
 	vector<long> rels;
 	get_out_rels(node_no, rels);
 	for(long i = 0; i < rels.size(); i++)
@@ -355,7 +355,7 @@ bool CEngSynthes::try_numeral_node(int node_no)
 bool CEngSynthes::try_verb_node(int node_no)
 {
 
-	// ищем подлежащее 
+	// РёС‰РµРј РїРѕРґР»РµР¶Р°С‰РµРµ 
 	vector<long> rels;
 	get_out_rels(node_no, rels);
 	int i = 0;
@@ -363,18 +363,18 @@ bool CEngSynthes::try_verb_node(int node_no)
 	  if(is_subj_rel(rels[i])) break;
 	int subj = i == rels.size() ? -1 : Rel(rels[i]).m_TargetNodeNo;
 	
-	// если нет подлежщего и это не глагольная форма, то выходим
+	// РµСЃР»Рё РЅРµС‚ РїРѕРґР»РµР¶С‰РµРіРѕ Рё СЌС‚Рѕ РЅРµ РіР»Р°РіРѕР»СЊРЅР°СЏ С„РѕСЂРјР°, С‚Рѕ РІС‹С…РѕРґРёРј
 	if(    (subj == -1) 
 		&& !node_has_poses(node_no, (1 << eVERB) | (1 << eVBE) | (1 << eMOD))
 	  ) return false;
 
-	// передаем информацию классу CEngVerbTense и запускаем его основную функцию make_verb_form
+	// РїРµСЂРµРґР°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ РєР»Р°СЃСЃСѓ CEngVerbTense Рё Р·Р°РїСѓСЃРєР°РµРј РµРіРѕ РѕСЃРЅРѕРІРЅСѓСЋ С„СѓРЅРєС†РёСЋ make_verb_form
 	CEngVerbTense EngVerbTense(*this, node_no);
 	Res(node_no).subject_node = subj;
 	EngVerbTense.make_verb_form();
 
 
-    // переводим сыновей глагола 
+    // РїРµСЂРµРІРѕРґРёРј СЃС‹РЅРѕРІРµР№ РіР»Р°РіРѕР»Р° 
 	for(int i = 0; i < rels.size(); i++)
 	{
 		int sub = Rel(rels[i]).m_TargetNodeNo;
@@ -383,7 +383,7 @@ bool CEngSynthes::try_verb_node(int node_no)
 		
 		if (Rel(rels[i]).m_Position == "") 
 		  if(is_subj_rel(rels[i]))
-			Res(sub).order("<", 0); // подлежащее в начало.
+			Res(sub).order("<", 0); // РїРѕРґР»РµР¶Р°С‰РµРµ РІ РЅР°С‡Р°Р»Рѕ.
 	}
 
 	return true;
@@ -421,7 +421,7 @@ bool CEngSynthes::try_mna_node(int node_no)
 	if(!node.m_NodeType == MNA) return false;
 	string tr;
 	if(node.GetType() == EngObor){
-		// трансфер для оборотов создает примитивныу узел, у которого в слове записан сам оборот
+		// С‚СЂР°РЅСЃС„РµСЂ РґР»СЏ РѕР±РѕСЂРѕС‚РѕРІ СЃРѕР·РґР°РµС‚ РїСЂРёРјРёС‚РёРІРЅС‹Сѓ СѓР·РµР», Сѓ РєРѕС‚РѕСЂРѕРіРѕ РІ СЃР»РѕРІРµ Р·Р°РїРёСЃР°РЅ СЃР°Рј РѕР±РѕСЂРѕС‚
 		assert ( node.IsPrimitive() );
 		tr = node.m_Words[0].m_Word;
 	};
@@ -490,7 +490,7 @@ bool CEngSynthes::try_simple_group(int node_no)
 			
 			helper.transliterate(node.m_Words[i]);
 
-			// хочу, чтобы "Джефферсон Томс" не транслитериловалось!
+			// С…РѕС‡Сѓ, С‡С‚РѕР±С‹ "Р”Р¶РµС„С„РµСЂСЃРѕРЅ РўРѕРјСЃ" РЅРµ С‚СЂР°РЅСЃР»РёС‚РµСЂРёР»РѕРІР°Р»РѕСЃСЊ!
 			if	(		(node.RusNode != -1) 
 					&&	(i < E.RusStr.GetNode(node.RusNode).GetWordsSize())
 				)
@@ -552,8 +552,8 @@ bool ordered_rel_pos_less::operator ()(int r1, int r2)const
 			if (value1  != value2)
 				return value1 < value2;
 			/*
-			   прилагательные  с модификаторами so, such 
-			   должны стоять перед прилагательными без таких модификаторов
+			   РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рµ  СЃ РјРѕРґРёС„РёРєР°С‚РѕСЂР°РјРё so, such 
+			   РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ РїРµСЂРµРґ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹РјРё Р±РµР· С‚Р°РєРёС… РјРѕРґРёС„РёРєР°С‚РѕСЂРѕРІ
 			*/
 
 			if (   S.node_is_adj(S.E.m_Relations[r1].m_TargetNodeNo)
@@ -564,14 +564,14 @@ bool b1 =  !S.E.HasOutRelationByName(S.E.m_Relations[r1].m_TargetNodeNo, "PROPER
 					return b1 < b2;
 			};
 
-			// правое валентное отношение должно  стоять раньше правого невалентного, например,
-			// "В каждой четвертой российской семье женщина подвергается насилию."
+			// РїСЂР°РІРѕРµ РІР°Р»РµРЅС‚РЅРѕРµ РѕС‚РЅРѕС€РµРЅРёРµ РґРѕР»Р¶РЅРѕ  СЃС‚РѕСЏС‚СЊ СЂР°РЅСЊС€Рµ РїСЂР°РІРѕРіРѕ РЅРµРІР°Р»РµРЅС‚РЅРѕРіРѕ, РЅР°РїСЂРёРјРµСЂ,
+			// "Р’ РєР°Р¶РґРѕР№ С‡РµС‚РІРµСЂС‚РѕР№ СЂРѕСЃСЃРёР№СЃРєРѕР№ СЃРµРјСЊРµ Р¶РµРЅС‰РёРЅР° РїРѕРґРІРµСЂРіР°РµС‚СЃСЏ РЅР°СЃРёР»РёСЋ."
 			if (value1 > 0)
 			  if (S.rel_is_valency(r1) !=  S.rel_is_valency(r2))
 				return S.rel_is_valency(r1) > S.rel_is_valency(r2);
 		   /*
-		     если  один актант является инфинитивом (или у него в потомках есть инфинитив),
-			 а в другом нет, тогда первый должен стоять после второго
+		     РµСЃР»Рё  РѕРґРёРЅ Р°РєС‚Р°РЅС‚ СЏРІР»СЏРµС‚СЃСЏ РёРЅС„РёРЅРёС‚РёРІРѕРј (РёР»Рё Сѓ РЅРµРіРѕ РІ РїРѕС‚РѕРјРєР°С… РµСЃС‚СЊ РёРЅС„РёРЅРёС‚РёРІ),
+			 Р° РІ РґСЂСѓРіРѕРј РЅРµС‚, С‚РѕРіРґР° РїРµСЂРІС‹Р№ РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ РїРѕСЃР»Рµ РІС‚РѕСЂРѕРіРѕ
 		   */
 			if (   S.rel_is_valency(r1) 
 				&& S.rel_is_valency(r2))
@@ -583,7 +583,7 @@ bool b1 =  !S.E.HasOutRelationByName(S.E.m_Relations[r1].m_TargetNodeNo, "PROPER
 			};
 
 		   /*
-		     валентность, выраженная  предлогом of, должна стоять сразу после хозяина
+		     РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ, РІС‹СЂР°Р¶РµРЅРЅР°СЏ  РїСЂРµРґР»РѕРіРѕРј of, РґРѕР»Р¶РЅР° СЃС‚РѕСЏС‚СЊ СЃСЂР°Р·Сѓ РїРѕСЃР»Рµ С…РѕР·СЏРёРЅР°
 		   */
 			if (		S.node_is_noun(S.E.m_Relations[r1].m_SourceNodeNo)   )
 			{
@@ -639,7 +639,7 @@ string CEngSynthes::collect_results(int node)
     if  (IsClauseTop )
       if (clause_conj.find(E.m_Nodes[node].m_ClauseNo) != clause_conj.end())
 	  {
-		  // Перд союзом "but" или "or" нужно поставить запятую
+		  // РџРµСЂРґ СЃРѕСЋР·РѕРј "but" РёР»Рё "or" РЅСѓР¶РЅРѕ РїРѕСЃС‚Р°РІРёС‚СЊ Р·Р°РїСЏС‚СѓСЋ
 		  if (  (clause_conj[E.m_Nodes[node].m_ClauseNo].m_WordStr == "but")
 			  ||(clause_conj[E.m_Nodes[node].m_ClauseNo].m_WordStr == "or")
 			 )
@@ -656,25 +656,25 @@ string CEngSynthes::collect_results(int node)
 				||(clause_conj[E.m_Nodes[node].m_ClauseNo].m_UnitStr == "before") 
 				||(clause_conj[E.m_Nodes[node].m_ClauseNo].m_UnitStr == "in_order_to") 
 				||(clause_conj[E.m_Nodes[node].m_ClauseNo].m_UnitStr == "when") 
-				// без unlike, поскольку это предлог
+				// Р±РµР· unlike, РїРѕСЃРєРѕР»СЊРєСѓ СЌС‚Рѕ РїСЂРµРґР»РѕРі
 				)
 				ShouldPutCommaAfterClause = true;
 	  };
 	
-	// обрабатываем opener, пока считаем, что он может быть только один
-	// opener должны стоять после межклаузных союзов и союзных слов, 
+	// РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј opener, РїРѕРєР° СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РѕРЅ РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ РѕРґРёРЅ
+	// opener РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ РїРѕСЃР»Рµ РјРµР¶РєР»Р°СѓР·РЅС‹С… СЃРѕСЋР·РѕРІ Рё СЃРѕСЋР·РЅС‹С… СЃР»РѕРІ, 
 	if (E.GetMainClauseRoot(E.m_Nodes[node].m_ClauseNo) == node)
 	if(clause_openers.count(E.m_Nodes[node].m_ClauseNo))
 	{
 			int OpenerNodeNo = clause_openers[E.m_Nodes[node].m_ClauseNo];
-			// выставляем do_not_put и times_visited, иначе translate_node не пройдет
+			// РІС‹СЃС‚Р°РІР»СЏРµРј do_not_put Рё times_visited, РёРЅР°С‡Рµ translate_node РЅРµ РїСЂРѕР№РґРµС‚
 			Res(OpenerNodeNo).do_not_put = false;
 			Res(OpenerNodeNo).times_visited = 0;
 			Res(OpenerNodeNo).m_WordForms.clear();
 			translate_node(OpenerNodeNo);
 			res  +=  " " +collect_results(OpenerNodeNo);	
 
-			// 2 марта была хорошая погода -> On 2 of March, he laughed
+			// 2 РјР°СЂС‚Р° Р±С‹Р»Р° С…РѕСЂРѕС€Р°СЏ РїРѕРіРѕРґР° -> On 2 of March, he laughed
 			if (E.m_Nodes[node].m_ClauseNo == 0)			res += ",";
 
 			Res(OpenerNodeNo).do_not_put = true;
@@ -683,7 +683,7 @@ string CEngSynthes::collect_results(int node)
 
 
 /*
-   синтез главного узла
+   СЃРёРЅС‚РµР· РіР»Р°РІРЅРѕРіРѕ СѓР·Р»Р°
 */
 
 	if (E.m_Nodes[node].m_bQuoteMarks)
@@ -727,15 +727,15 @@ string CEngSynthes::collect_results(int node)
 			)
 			Res(sub_node).m_Position = Position;
 
-		// может быть, какой-нибуль алгоритм в translte_node уже проставил 
-		// позицию (например позицию подлежащего), поэтому забираем 
-		// позицию, если она не была прописана 
+		// РјРѕР¶РµС‚ Р±С‹С‚СЊ, РєР°РєРѕР№-РЅРёР±СѓР»СЊ Р°Р»РіРѕСЂРёС‚Рј РІ translte_node СѓР¶Рµ РїСЂРѕСЃС‚Р°РІРёР» 
+		// РїРѕР·РёС†РёСЋ (РЅР°РїСЂРёРјРµСЂ РїРѕР·РёС†РёСЋ РїРѕРґР»РµР¶Р°С‰РµРіРѕ), РїРѕСЌС‚РѕРјСѓ Р·Р°Р±РёСЂР°РµРј 
+		// РїРѕР·РёС†РёСЋ, РµСЃР»Рё РѕРЅР° РЅРµ Р±С‹Р»Р° РїСЂРѕРїРёСЃР°РЅР° 
 		if (Position == "")
 			Position = Res(sub_node).m_Position;
 
 
 		/*
-		  если граф не собран, тогда нужно высчитывать только  позиции, которые пришли из Трансфера
+		  РµСЃР»Рё РіСЂР°С„ РЅРµ СЃРѕР±СЂР°РЅ, С‚РѕРіРґР° РЅСѓР¶РЅРѕ РІС‹СЃС‡РёС‚С‹РІР°С‚СЊ С‚РѕР»СЊРєРѕ  РїРѕР·РёС†РёРё, РєРѕС‚РѕСЂС‹Рµ РїСЂРёС€Р»Рё РёР· РўСЂР°РЅСЃС„РµСЂР°
 		*/
 		if (!m_bConnected)
 		{
@@ -746,7 +746,7 @@ string CEngSynthes::collect_results(int node)
 			continue;
 		};
 
-		// Непрямой объект стоит дальше прямого
+		// РќРµРїСЂСЏРјРѕР№ РѕР±СЉРµРєС‚ СЃС‚РѕРёС‚ РґР°Р»СЊС€Рµ РїСЂСЏРјРѕРіРѕ
 		if (Position == "")
 		   if (Rel(out_rels[i]).m_SyntacticRelation == "indir_obj")
 			 Position = ">!";
@@ -757,14 +757,14 @@ string CEngSynthes::collect_results(int node)
 				)
 			 {
 				/*
-				если объект выражен инфинитивом, то его, наверно, не надо ставит раньше 
-				непрямого объекта ("indir_obj"), поскольку иначе может 
-				возникнуть желание отнести непрямой объект к инфинитиву 
-				Например:
+				РµСЃР»Рё РѕР±СЉРµРєС‚ РІС‹СЂР°Р¶РµРЅ РёРЅС„РёРЅРёС‚РёРІРѕРј, С‚Рѕ РµРіРѕ, РЅР°РІРµСЂРЅРѕ, РЅРµ РЅР°РґРѕ СЃС‚Р°РІРёС‚ СЂР°РЅСЊС€Рµ 
+				РЅРµРїСЂСЏРјРѕРіРѕ РѕР±СЉРµРєС‚Р° ("indir_obj"), РїРѕСЃРєРѕР»СЊРєСѓ РёРЅР°С‡Рµ РјРѕР¶РµС‚ 
+				РІРѕР·РЅРёРєРЅСѓС‚СЊ Р¶РµР»Р°РЅРёРµ РѕС‚РЅРµСЃС‚Рё РЅРµРїСЂСЏРјРѕР№ РѕР±СЉРµРєС‚ Рє РёРЅС„РёРЅРёС‚РёРІСѓ 
+				РќР°РїСЂРёРјРµСЂ:
 					This technology promised (A1:chance to work on the same line) (A2:to several users)
-					Здесь A1 - инфинитивный объект;
-					      A2 - именной косвенный объект.
-				   Наверно, они должны стоять наоборот, чем указано в примере, а именно:
+					Р—РґРµСЃСЊ A1 - РёРЅС„РёРЅРёС‚РёРІРЅС‹Р№ РѕР±СЉРµРєС‚;
+					      A2 - РёРјРµРЅРЅРѕР№ РєРѕСЃРІРµРЅРЅС‹Р№ РѕР±СЉРµРєС‚.
+				   РќР°РІРµСЂРЅРѕ, РѕРЅРё РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ РЅР°РѕР±РѕСЂРѕС‚, С‡РµРј СѓРєР°Р·Р°РЅРѕ РІ РїСЂРёРјРµСЂРµ, Р° РёРјРµРЅРЅРѕ:
 				   This technology promised  (A2:to several users) (A1:chance to work on the same line)
 				*/
 			   if (HasInfinitiveInTree(Rel(out_rels[i]).m_TargetNodeNo))
@@ -772,22 +772,22 @@ string CEngSynthes::collect_results(int node)
 			   else
 				   Position = ">>";
                /*
-			    объектов может быть два, например: "I consider him a teacher"
-				Два объекта нужно упорядочивать  по номеру валентности в статье.
+			    РѕР±СЉРµРєС‚РѕРІ РјРѕР¶РµС‚ Р±С‹С‚СЊ РґРІР°, РЅР°РїСЂРёРјРµСЂ: "I consider him a teacher"
+				Р”РІР° РѕР±СЉРµРєС‚Р° РЅСѓР¶РЅРѕ СѓРїРѕСЂСЏРґРѕС‡РёРІР°С‚СЊ  РїРѕ РЅРѕРјРµСЂСѓ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё РІ СЃС‚Р°С‚СЊРµ.
 			   */
 			   if ( rel_is_valency(out_rels[i]) )
 					Res(sub_node).pos_order = E.m_Relations[out_rels[i]].m_Valency.m_LeafId*10 + E.m_Relations[out_rels[i]].m_Valency.m_BracketLeafId;
 			 };
 
 
-	    // еще раз
+	    // РµС‰Рµ СЂР°Р·
 		if  (  ValuePosition(Position) != 0  )
 			Res(sub_node).m_Position = Position;
 		else
 		/*
-		  наречия, которые подчинены герундию должны стоят в постпозиции, (??)
-		  например   "Going quickly is dangerous" 
-				или  "Going faster is dangerous" 
+		  РЅР°СЂРµС‡РёСЏ, РєРѕС‚РѕСЂС‹Рµ РїРѕРґС‡РёРЅРµРЅС‹ РіРµСЂСѓРЅРґРёСЋ РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚ РІ РїРѕСЃС‚РїРѕР·РёС†РёРё, (??)
+		  РЅР°РїСЂРёРјРµСЂ   "Going quickly is dangerous" 
+				РёР»Рё  "Going faster is dangerous" 
 		*/
 		if (    is_gerund(E.m_Nodes[node].GetTense()) 
 			&& (   node_is_adv(E.m_Nodes[sub_node])
@@ -801,8 +801,8 @@ string CEngSynthes::collect_results(int node)
 
 		}
 		else
-		// прилагательные, которые подчинены существительному 
-		// должны стоять перед своим хозяином
+		// РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рµ, РєРѕС‚РѕСЂС‹Рµ РїРѕРґС‡РёРЅРµРЅС‹ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРјСѓ 
+		// РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ РїРµСЂРµРґ СЃРІРѕРёРј С…РѕР·СЏРёРЅРѕРј
 		if (    _node_is_adj(E.m_Nodes[sub_node]) 
 			&&  node_is_noun(node)
 		   )
@@ -810,8 +810,8 @@ string CEngSynthes::collect_results(int node)
 			Res(sub_node).m_Position = "<<";
 		}
 		else
-		// наречия, которые подчинены другому наречию или прилагательному
-		// должны стоять перед своим хозяином
+		// РЅР°СЂРµС‡РёСЏ, РєРѕС‚РѕСЂС‹Рµ РїРѕРґС‡РёРЅРµРЅС‹ РґСЂСѓРіРѕРјСѓ РЅР°СЂРµС‡РёСЋ РёР»Рё РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРјСѓ
+		// РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ РїРµСЂРµРґ СЃРІРѕРёРј С…РѕР·СЏРёРЅРѕРј
 		if (    node_is_adv(E.m_Nodes[sub_node]) 
 			&& (   node_is_adv(E.m_Nodes[node])
 			    || _node_is_adj(E.m_Nodes[node])
@@ -831,8 +831,8 @@ string CEngSynthes::collect_results(int node)
 		}
 		else
 			/*
-			  Общее правило: интерпретированный несубъектный актант должен стоять
-			  после своего хозяина, если хозяин - глагол
+			  РћР±С‰РµРµ РїСЂР°РІРёР»Рѕ: РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°РЅРЅС‹Р№ РЅРµСЃСѓР±СЉРµРєС‚РЅС‹Р№ Р°РєС‚Р°РЅС‚ РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ
+			  РїРѕСЃР»Рµ СЃРІРѕРµРіРѕ С…РѕР·СЏРёРЅР°, РµСЃР»Рё С…РѕР·СЏРёРЅ - РіР»Р°РіРѕР»
 			*/
 		if ( 
 			     node_is_verb(node)
@@ -844,7 +844,7 @@ string CEngSynthes::collect_results(int node)
 			Res(sub_node).m_Position = ">";
 		}
 		else
-		// если Position не задан, учитываем порядок, заданный номерами слов
+		// РµСЃР»Рё Position РЅРµ Р·Р°РґР°РЅ, СѓС‡РёС‚С‹РІР°РµРј РїРѕСЂСЏРґРѕРє, Р·Р°РґР°РЅРЅС‹Р№ РЅРѕРјРµСЂР°РјРё СЃР»РѕРІ
 		 if (Position == "")
 		{
 			 if (E.m_Nodes[sub_node].GetMinWordNo() < E.m_Nodes[node].GetMinWordNo())
@@ -866,20 +866,20 @@ string CEngSynthes::collect_results(int node)
 	
 
 
-	//  потом те, которые помечены "<" "!<" "<<"
+	//  РїРѕС‚РѕРј С‚Рµ, РєРѕС‚РѕСЂС‹Рµ РїРѕРјРµС‡РµРЅС‹ "<" "!<" "<<"
 	for(i = 0; i < out_rels.size() && ValuePosition(Res(Rel(out_rels[i]).m_TargetNodeNo).m_Position) < 0; i++)
 	{
 		int sub_node = Rel(out_rels[i]).m_TargetNodeNo;
 		if(Res(sub_node).do_not_put) continue;
 		res += collect_results(sub_node) + " ";
 
-		// на этот раз он  засмеялся -> for once, he laughed
+		// РЅР° СЌС‚РѕС‚ СЂР°Р· РѕРЅ  Р·Р°СЃРјРµСЏР»СЃСЏ -> for once, he laughed
 		if  (    ( Rel(out_rels[i]).m_Position == "begin")
 			  && ( Rel(out_rels[i]).m_PosType ==   FromArticlePosType)
 			)
 		res += ",";
 
-		// дети  узла MUA должны быть разделены запятыми		
+		// РґРµС‚Рё  СѓР·Р»Р° MUA РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СЂР°Р·РґРµР»РµРЅС‹ Р·Р°РїСЏС‚С‹РјРё		
 		if (     (E.m_Nodes[node].m_NodeType == MNA)  )
 		if (	Rel(out_rels[i]).m_Valency.m_RelationStr.empty() ) 
 		if (   (
@@ -894,7 +894,7 @@ string CEngSynthes::collect_results(int node)
 
 	res += MainNodeStr + " ";
 
-	//  потом те, которые помечены ">" ">!" ">>"
+	//  РїРѕС‚РѕРј С‚Рµ, РєРѕС‚РѕСЂС‹Рµ РїРѕРјРµС‡РµРЅС‹ ">" ">!" ">>"
 	for(; i < out_rels.size(); i++)
 	{
 		int sub_node = Rel(out_rels[i]).m_TargetNodeNo;
@@ -904,8 +904,8 @@ string CEngSynthes::collect_results(int node)
 	}	
 
 	/*
-	  будем квотировать предлоги и  артикли, если само слов
-	  закавычено и его непосредственный хозяин закавычен
+	  Р±СѓРґРµРј РєРІРѕС‚РёСЂРѕРІР°С‚СЊ РїСЂРµРґР»РѕРіРё Рё  Р°СЂС‚РёРєР»Рё, РµСЃР»Рё СЃР°РјРѕ СЃР»РѕРІ
+	  Р·Р°РєР°РІС‹С‡РµРЅРѕ Рё РµРіРѕ РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅС‹Р№ С…РѕР·СЏРёРЅ Р·Р°РєР°РІС‹С‡РµРЅ
 	*/
 	bool bQuoted = E.m_Clauses[E.m_Nodes[node].m_ClauseNo].m_bQuoted;
 	if (E.m_Nodes[node].m_bQuoteMarks)
@@ -935,7 +935,7 @@ string CEngSynthes::collect_results(int node)
     if (Res(node).m_bParenth)
 		res = " , " + res + " , ";
 
-    if (Node(node).HasRelOperator("КАК_МОЖНО"))
+    if (Node(node).HasRelOperator("РљРђРљ_РњРћР–РќРћ"))
 	{
 		res  = " as "+ res + " as possible ";
 	};
@@ -976,11 +976,11 @@ string CEngSynthes::collect_results(int node)
 
 
 
-// процедура проходит по словам узла и кладет в вектор tmp  все слова, которые стоят до главного слова,
-// а слова, которые стоят после главного слова, кладет в вектор res.
-// Затем, если tmp не пуст, тогда вектор tmp вставляется в начало вектора res
-// Интересно, что само главное слово нигде не вставляется. Предполагается, что
-// что оно уже было вставлено до вызова этой процедуры.
+// РїСЂРѕС†РµРґСѓСЂР° РїСЂРѕС…РѕРґРёС‚ РїРѕ СЃР»РѕРІР°Рј СѓР·Р»Р° Рё РєР»Р°РґРµС‚ РІ РІРµРєС‚РѕСЂ tmp  РІСЃРµ СЃР»РѕРІР°, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏС‚ РґРѕ РіР»Р°РІРЅРѕРіРѕ СЃР»РѕРІР°,
+// Р° СЃР»РѕРІР°, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏС‚ РїРѕСЃР»Рµ РіР»Р°РІРЅРѕРіРѕ СЃР»РѕРІР°, РєР»Р°РґРµС‚ РІ РІРµРєС‚РѕСЂ res.
+// Р—Р°С‚РµРј, РµСЃР»Рё tmp РЅРµ РїСѓСЃС‚, С‚РѕРіРґР° РІРµРєС‚РѕСЂ tmp РІСЃС‚Р°РІР»СЏРµС‚СЃСЏ РІ РЅР°С‡Р°Р»Рѕ РІРµРєС‚РѕСЂР° res
+// РРЅС‚РµСЂРµСЃРЅРѕ, С‡С‚Рѕ СЃР°РјРѕ РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ РЅРёРіРґРµ РЅРµ РІСЃС‚Р°РІР»СЏРµС‚СЃСЏ. РџСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ
+// С‡С‚Рѕ РѕРЅРѕ СѓР¶Рµ Р±С‹Р»Рѕ РІСЃС‚Р°РІР»РµРЅРѕ РґРѕ РІС‹Р·РѕРІР° СЌС‚РѕР№ РїСЂРѕС†РµРґСѓСЂС‹.
 
 void CEngSynthes::handle_colloc_words(int node_no, SynthesResult &res)
 {
@@ -1059,30 +1059,30 @@ void CEngSynthes::find_all_clause_connectors()
 		int slave = Rel(i).m_TargetNodeNo;
 
 		/*
-		   У нас есть межклаузная стрелка, которая входит не в вершину клаузы.
-		   Значит, мы имеем дело с союзнам словом.
+		   РЈ РЅР°СЃ РµСЃС‚СЊ РјРµР¶РєР»Р°СѓР·РЅР°СЏ СЃС‚СЂРµР»РєР°, РєРѕС‚РѕСЂР°СЏ РІС…РѕРґРёС‚ РЅРµ РІ РІРµСЂС€РёРЅСѓ РєР»Р°СѓР·С‹.
+		   Р—РЅР°С‡РёС‚, РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ СЃРѕСЋР·РЅР°Рј СЃР»РѕРІРѕРј.
 		   
-			 "Я знаю, кто пришел."
-			 "Я знаю, в каком доме он живет"
-		   Внутри клаузы союзное слово, в конечном счете, зависит от вершины клаузы.
-		   Но между ним и вершиной могут быть промежуточные узлы. Союзно слово
-		   должно  встать в начало клаузы. Но мы не можем иногда оторвать его одно
-		   и поставить в начало.
-		   Например, нельзя сказать
-			"I know which you live in house" ("Я знаю, в каком доме он живет")
-			Здесь в начало надо переносить всю группы "в каком доме", чтобы
-			получилось "I know in which house you live".
-			Таким образом, считаем, что если союзное слово является прилагательным,
-			которое подчинено существительному, 
-			тогда вперед надо выносить всю именную группу, которая включает это прилагательное 
+			 "РЇ Р·РЅР°СЋ, РєС‚Рѕ РїСЂРёС€РµР»."
+			 "РЇ Р·РЅР°СЋ, РІ РєР°РєРѕРј РґРѕРјРµ РѕРЅ Р¶РёРІРµС‚"
+		   Р’РЅСѓС‚СЂРё РєР»Р°СѓР·С‹ СЃРѕСЋР·РЅРѕРµ СЃР»РѕРІРѕ, РІ РєРѕРЅРµС‡РЅРѕРј СЃС‡РµС‚Рµ, Р·Р°РІРёСЃРёС‚ РѕС‚ РІРµСЂС€РёРЅС‹ РєР»Р°СѓР·С‹.
+		   РќРѕ РјРµР¶РґСѓ РЅРёРј Рё РІРµСЂС€РёРЅРѕР№ РјРѕРіСѓС‚ Р±С‹С‚СЊ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ СѓР·Р»С‹. РЎРѕСЋР·РЅРѕ СЃР»РѕРІРѕ
+		   РґРѕР»Р¶РЅРѕ  РІСЃС‚Р°С‚СЊ РІ РЅР°С‡Р°Р»Рѕ РєР»Р°СѓР·С‹. РќРѕ РјС‹ РЅРµ РјРѕР¶РµРј РёРЅРѕРіРґР° РѕС‚РѕСЂРІР°С‚СЊ РµРіРѕ РѕРґРЅРѕ
+		   Рё РїРѕСЃС‚Р°РІРёС‚СЊ РІ РЅР°С‡Р°Р»Рѕ.
+		   РќР°РїСЂРёРјРµСЂ, РЅРµР»СЊР·СЏ СЃРєР°Р·Р°С‚СЊ
+			"I know which you live in house" ("РЇ Р·РЅР°СЋ, РІ РєР°РєРѕРј РґРѕРјРµ РѕРЅ Р¶РёРІРµС‚")
+			Р—РґРµСЃСЊ РІ РЅР°С‡Р°Р»Рѕ РЅР°РґРѕ РїРµСЂРµРЅРѕСЃРёС‚СЊ РІСЃСЋ РіСЂСѓРїРїС‹ "РІ РєР°РєРѕРј РґРѕРјРµ", С‡С‚РѕР±С‹
+			РїРѕР»СѓС‡РёР»РѕСЃСЊ "I know in which house you live".
+			РўР°РєРёРј РѕР±СЂР°Р·РѕРј, СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РµСЃР»Рё СЃРѕСЋР·РЅРѕРµ СЃР»РѕРІРѕ СЏРІР»СЏРµС‚СЃСЏ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рј,
+			РєРѕС‚РѕСЂРѕРµ РїРѕРґС‡РёРЅРµРЅРѕ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРјСѓ, 
+			С‚РѕРіРґР° РІРїРµСЂРµРґ РЅР°РґРѕ РІС‹РЅРѕСЃРёС‚СЊ РІСЃСЋ РёРјРµРЅРЅСѓСЋ РіСЂСѓРїРїСѓ, РєРѕС‚РѕСЂР°СЏ РІРєР»СЋС‡Р°РµС‚ СЌС‚Рѕ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ 
 		*/
 		int ConjWordNodeNo = slave;
 		long in_rel = get_in_rel(slave);
 		int slave_root = E.GetMainClauseRoot(E.m_Nodes[slave].m_ClauseNo);			
 		/*
-		  возможны случаи, когда фраза не собралась и союзное слово стоит в 
-		  отдельной компоненте связностей, тогда  союзное  слово само себе хозяин,
-		  и должно сакмо встать в начало.
+		  РІРѕР·РјРѕР¶РЅС‹ СЃР»СѓС‡Р°Рё, РєРѕРіРґР° С„СЂР°Р·Р° РЅРµ СЃРѕР±СЂР°Р»Р°СЃСЊ Рё СЃРѕСЋР·РЅРѕРµ СЃР»РѕРІРѕ СЃС‚РѕРёС‚ РІ 
+		  РѕС‚РґРµР»СЊРЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ СЃРІСЏР·РЅРѕСЃС‚РµР№, С‚РѕРіРґР°  СЃРѕСЋР·РЅРѕРµ  СЃР»РѕРІРѕ СЃР°РјРѕ СЃРµР±Рµ С…РѕР·СЏРёРЅ,
+		  Рё РґРѕР»Р¶РЅРѕ СЃР°РєРјРѕ РІСЃС‚Р°С‚СЊ РІ РЅР°С‡Р°Р»Рѕ.
 		*/
 		if (in_rel != -1)
 		{
@@ -1102,19 +1102,19 @@ void CEngSynthes::find_all_clause_connectors()
 
 		
 		
-		// вычисляем узел, после которого нужно поместить подчиненную клаузу
+		// РІС‹С‡РёСЃР»СЏРµРј СѓР·РµР», РїРѕСЃР»Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅСѓР¶РЅРѕ РїРѕРјРµСЃС‚РёС‚СЊ РїРѕРґС‡РёРЅРµРЅРЅСѓСЋ РєР»Р°СѓР·Сѓ
 		/*
-		 Раньше я думал, что только прид. предложения с who, which нужно ставить сразу после опред. слова,
-		 и поэтому написал такое условие, 
+		 Р Р°РЅСЊС€Рµ СЏ РґСѓРјР°Р», С‡С‚Рѕ С‚РѕР»СЊРєРѕ РїСЂРёРґ. РїСЂРµРґР»РѕР¶РµРЅРёСЏ СЃ who, which РЅСѓР¶РЅРѕ СЃС‚Р°РІРёС‚СЊ СЃСЂР°Р·Сѓ РїРѕСЃР»Рµ РѕРїСЂРµРґ. СЃР»РѕРІР°,
+		 Рё РїРѕСЌС‚РѕРјСѓ РЅР°РїРёСЃР°Р» С‚Р°РєРѕРµ СѓСЃР»РѕРІРёРµ, 
 			 "if (!IsWh_NounWord(E.m_Nodes[slave].m_Words[E.m_Nodes[slave].m_MainWordNo].m_Lemma) )"
-		 теперь попробую добавить условие, если определяемое слово - существительное, например:
-		  "Ощущение, что за нами пристально следят, преследовало меня весь день"
-		  Конечно перед подч. клаузой должны идти нормальные актанты (NP). Например,
+		 С‚РµРїРµСЂСЊ РїРѕРїСЂРѕР±СѓСЋ РґРѕР±Р°РІРёС‚СЊ СѓСЃР»РѕРІРёРµ, РµСЃР»Рё РѕРїСЂРµРґРµР»СЏРµРјРѕРµ СЃР»РѕРІРѕ - СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ, РЅР°РїСЂРёРјРµСЂ:
+		  "РћС‰СѓС‰РµРЅРёРµ, С‡С‚Рѕ Р·Р° РЅР°РјРё РїСЂРёСЃС‚Р°Р»СЊРЅРѕ СЃР»РµРґСЏС‚, РїСЂРµСЃР»РµРґРѕРІР°Р»Рѕ РјРµРЅСЏ РІРµСЃСЊ РґРµРЅСЊ"
+		  РљРѕРЅРµС‡РЅРѕ РїРµСЂРµРґ РїРѕРґС‡. РєР»Р°СѓР·РѕР№ РґРѕР»Р¶РЅС‹ РёРґС‚Рё РЅРѕСЂРјР°Р»СЊРЅС‹Рµ Р°РєС‚Р°РЅС‚С‹ (NP). РќР°РїСЂРёРјРµСЂ,
 		     "he assures me that I am mistaken"
 
-		  А в примере
-		  "Мы были слишком взволнованы, чтобы возвращаться в лагерь."
-		  межклаузная связь  идет от наречия, поэтому клауза встанет после всей главной 
+		  Рђ РІ РїСЂРёРјРµСЂРµ
+		  "РњС‹ Р±С‹Р»Рё СЃР»РёС€РєРѕРј РІР·РІРѕР»РЅРѕРІР°РЅС‹, С‡С‚РѕР±С‹ РІРѕР·РІСЂР°С‰Р°С‚СЊСЃСЏ РІ Р»Р°РіРµСЂСЊ."
+		  РјРµР¶РєР»Р°СѓР·РЅР°СЏ СЃРІСЏР·СЊ  РёРґРµС‚ РѕС‚ РЅР°СЂРµС‡РёСЏ, РїРѕСЌС‚РѕРјСѓ РєР»Р°СѓР·Р° РІСЃС‚Р°РЅРµС‚ РїРѕСЃР»Рµ РІСЃРµР№ РіР»Р°РІРЅРѕР№ 
 		*/
 	    int node_to_put_after = master;		
 		vector<long> roots;	
@@ -1127,9 +1127,9 @@ void CEngSynthes::find_all_clause_connectors()
 		  node_to_put_after = roots[0];		
 
 		  if  (   IsWh_NounWord(E.m_Nodes[slave].m_Words[E.m_Nodes[slave].m_MainWordNo].m_Lemma) 
-				// во фразе "он была такая красивая, что они улыбнулись" связь МОДИФ_ПРИЛ
-				// не является межклаузной
-				|| (Rel(i).m_Valency.m_RelationStr == "PROPERT") // НСО: приостановить разорительную для людей реформу			  
+				// РІРѕ С„СЂР°Р·Рµ "РѕРЅ Р±С‹Р»Р° С‚Р°РєР°СЏ РєСЂР°СЃРёРІР°СЏ, С‡С‚Рѕ РѕРЅРё СѓР»С‹Р±РЅСѓР»РёСЃСЊ" СЃРІСЏР·СЊ РњРћР”РР¤_РџР РР›
+				// РЅРµ СЏРІР»СЏРµС‚СЃСЏ РјРµР¶РєР»Р°СѓР·РЅРѕР№
+				|| (Rel(i).m_Valency.m_RelationStr == "PROPERT") // РќРЎРћ: РїСЂРёРѕСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РѕСЂРёС‚РµР»СЊРЅСѓСЋ РґР»СЏ Р»СЋРґРµР№ СЂРµС„РѕСЂРјСѓ			  
 			  )
 		  {
 			  if(   (E.m_Nodes[master].GetPos() == eNOUN )
@@ -1138,10 +1138,10 @@ void CEngSynthes::find_all_clause_connectors()
 				node_to_put_after = master;
 			  else
 				/*
-					если  связь входит в мест. прилагательное, тогда
-					нужно подняться до существительного, которое управляет этим прилагательным
-					и поставить клаузу после этого существительного
-					"Его ударил тот мужчина, который был в красной куртке, а полицейский их разнял.	"
+					РµСЃР»Рё  СЃРІСЏР·СЊ РІС…РѕРґРёС‚ РІ РјРµСЃС‚. РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ, С‚РѕРіРґР°
+					РЅСѓР¶РЅРѕ РїРѕРґРЅСЏС‚СЊСЃСЏ РґРѕ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ, РєРѕС‚РѕСЂРѕРµ СѓРїСЂР°РІР»СЏРµС‚ СЌС‚РёРј РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рј
+					Рё РїРѕСЃС‚Р°РІРёС‚СЊ РєР»Р°СѓР·Сѓ РїРѕСЃР»Рµ СЌС‚РѕРіРѕ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ
+					"Р•РіРѕ СѓРґР°СЂРёР» С‚РѕС‚ РјСѓР¶С‡РёРЅР°, РєРѕС‚РѕСЂС‹Р№ Р±С‹Р» РІ РєСЂР°СЃРЅРѕР№ РєСѓСЂС‚РєРµ, Р° РїРѕР»РёС†РµР№СЃРєРёР№ РёС… СЂР°Р·РЅСЏР».	"
 
 				*/
 				if(E.m_Nodes[master].GetPos() == ePN_ADJ ) 
@@ -1156,7 +1156,7 @@ void CEngSynthes::find_all_clause_connectors()
 		     
 		 };
 
-		// на клаузах остается тот же, порядок, что и в русском предложегнии
+		// РЅР° РєР»Р°СѓР·Р°С… РѕСЃС‚Р°РµС‚СЃСЏ С‚РѕС‚ Р¶Рµ, РїРѕСЂСЏРґРѕРє, С‡С‚Рѕ Рё РІ СЂСѓСЃСЃРєРѕРј РїСЂРµРґР»РѕР¶РµРіРЅРёРё
 		bool put_after = E.GetClauseFirstWordNo(Node(master).m_ClauseNo) < E.GetClauseFirstWordNo(Node(slave).m_ClauseNo);
 		
 
@@ -1167,7 +1167,7 @@ void CEngSynthes::find_all_clause_connectors()
 
 
 		/*
-		   Разрывные союзы
+		   Р Р°Р·СЂС‹РІРЅС‹Рµ СЃРѕСЋР·С‹
 		*/
 		const CSynRealization &syn = Rel(i).m_SynReal;
 		const CRossInterp &conj = syn.m_Conj;
@@ -1178,9 +1178,9 @@ void CEngSynthes::find_all_clause_connectors()
 		if(conj.m_DictType == EngObor){
 			conj_for_slave = E.m_pData->GetEngOborStr(conj.m_UnitNo);
 			conj_for_slave_unit_str = E.m_pData->GetRoss(EngObor)->GetEntryStr(conj.m_UnitNo);
-			// проверяем, если союз является разрывным, тогда
-			// нужно выделить вторую часть (после "...") и добавить ее
-			// к главной клаузе
+			// РїСЂРѕРІРµСЂСЏРµРј, РµСЃР»Рё СЃРѕСЋР· СЏРІР»СЏРµС‚СЃСЏ СЂР°Р·СЂС‹РІРЅС‹Рј, С‚РѕРіРґР°
+			// РЅСѓР¶РЅРѕ РІС‹РґРµР»РёС‚СЊ РІС‚РѕСЂСѓСЋ С‡Р°СЃС‚СЊ (РїРѕСЃР»Рµ "...") Рё РґРѕР±Р°РІРёС‚СЊ РµРµ
+			// Рє РіР»Р°РІРЅРѕР№ РєР»Р°СѓР·Рµ
 			if (conj_for_slave.find ("...") != -1)
 			{
 				int j = conj_for_slave.find ("...");
@@ -1203,7 +1203,7 @@ void CEngSynthes::find_all_clause_connectors()
 			clause_conj[E.m_Nodes[master].m_ClauseNo] = CClauseConj(conj_for_master,"");
 		}
 
-		// вставка запятой в бессоюзном предложении 
+		// РІСЃС‚Р°РІРєР° Р·Р°РїСЏС‚РѕР№ РІ Р±РµСЃСЃРѕСЋР·РЅРѕРј РїСЂРµРґР»РѕР¶РµРЅРёРё 
 		if (    (E.m_Relations[i].m_Valency.m_RelationStr == "AND")
 			 &&  syn.m_Conj.m_UnitNo == ErrUnitNo
 		  )
@@ -1240,7 +1240,7 @@ bool CEngSynthes::try_oneself_node(int node_no)
 	    else
 		      Grammems &= ~_QM(eAnimative);
 
-		// для местоимений
+		// РґР»СЏ РјРµСЃС‚РѕРёРјРµРЅРёР№
 	    if ( (Grammems & ( _QM(eFirstPerson) |  _QM(eSecondPerson) | _QM(eThirdPerson) ) )  == 0)
 		{
 		   if (AntecedentNode->GetGrammemsRich() & _QM(eFirstPerson))
@@ -1252,7 +1252,7 @@ bool CEngSynthes::try_oneself_node(int node_no)
 			   Grammems |= _QM(eThirdPerson);
 		}
 		else
-		  // для существительных
+		  // РґР»СЏ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹С…
 			Grammems |= _QM(eThirdPerson);
 
 	    if ((Grammems & eAllGenders) == 0)
@@ -1270,9 +1270,9 @@ bool CEngSynthes::try_oneself_node(int node_no)
 
 
 		/*
-			Если глагол с #oneself употреблен в императиве ед.ч, то нужно
-				переводить его ... yourself, а если в императиве мн.ч., то
-			...yourselves: ознакомься с книгой - acquaint yourself with the
+			Р•СЃР»Рё РіР»Р°РіРѕР» СЃ #oneself СѓРїРѕС‚СЂРµР±Р»РµРЅ РІ РёРјРїРµСЂР°С‚РёРІРµ РµРґ.С‡, С‚Рѕ РЅСѓР¶РЅРѕ
+				РїРµСЂРµРІРѕРґРёС‚СЊ РµРіРѕ ... yourself, Р° РµСЃР»Рё РІ РёРјРїРµСЂР°С‚РёРІРµ РјРЅ.С‡., С‚Рѕ
+			...yourselves: РѕР·РЅР°РєРѕРјСЊСЃСЏ СЃ РєРЅРёРіРѕР№ - acquaint yourself with the
 			book.
 		*/
 		vector<long> Rels;
@@ -1294,10 +1294,10 @@ bool CEngSynthes::try_oneself_node(int node_no)
 
 	Res(node_no).m_WordForms.push_back(GetPronounEnglishFormByGrammems(Grammems,oneself));
 
-	/* если oneself зависит от существительного, 
-	тогда нужно считать, что oneself стоит далеко слева
-	Например, Lord John himself.
-	здесь himself зависит от Lord.
+	/* РµСЃР»Рё oneself Р·Р°РІРёСЃРёС‚ РѕС‚ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ, 
+	С‚РѕРіРґР° РЅСѓР¶РЅРѕ СЃС‡РёС‚Р°С‚СЊ, С‡С‚Рѕ oneself СЃС‚РѕРёС‚ РґР°Р»РµРєРѕ СЃР»РµРІР°
+	РќР°РїСЂРёРјРµСЂ, Lord John himself.
+	Р·РґРµСЃСЊ himself Р·Р°РІРёСЃРёС‚ РѕС‚ Lord.
 	*/
 	if (oneself)
 	{
@@ -1338,21 +1338,21 @@ bool CEngSynthes::is_some_conj_word(int conj_word)
 
 void CEngSynthes::detect_clause_openers()
 {
-    // находим все тайм-узлы, которые стояли на первом месте в русском предложении
+    // РЅР°С…РѕРґРёРј РІСЃРµ С‚Р°Р№Рј-СѓР·Р»С‹, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏР»Рё РЅР° РїРµСЂРІРѕРј РјРµСЃС‚Рµ РІ СЂСѓСЃСЃРєРѕРј РїСЂРµРґР»РѕР¶РµРЅРёРё
 	for(int i = 0; i < E.m_Nodes.size(); i++)
       if (    E.m_Nodes[i].IsWordContainer()
 		  && is_time_or_loc_node_and_first_in_clause(i)
 		  && !E.m_Nodes[i].IsLemma("when")
-			// слово "когда" может выступать в роли opener и в роли союзного  слова
-			// поэтому из opener  мы его выключаем
+			// СЃР»РѕРІРѕ "РєРѕРіРґР°" РјРѕР¶РµС‚ РІС‹СЃС‚СѓРїР°С‚СЊ РІ СЂРѕР»Рё opener Рё РІ СЂРѕР»Рё СЃРѕСЋР·РЅРѕРіРѕ  СЃР»РѕРІР°
+			// РїРѕСЌС‚РѕРјСѓ РёР· opener  РјС‹ РµРіРѕ РІС‹РєР»СЋС‡Р°РµРј
 		  && !E.IsLeftClauseTop(i)
-		  	// если клауза состоит только из  одного opener, 
-			// тогда такой opener нужно не считать openerom
+		  	// РµСЃР»Рё РєР»Р°СѓР·Р° СЃРѕСЃС‚РѕРёС‚ С‚РѕР»СЊРєРѕ РёР·  РѕРґРЅРѕРіРѕ opener, 
+			// С‚РѕРіРґР° С‚Р°РєРѕР№ opener РЅСѓР¶РЅРѕ РЅРµ СЃС‡РёС‚Р°С‚СЊ openerom
 		 )
 	  {
 		  /*
-		   если узлу проставлена позиция, тогда не будем считать это opener, например:
-		   "все так же он поет" -> "He is still singing"
+		   РµСЃР»Рё СѓР·Р»Сѓ РїСЂРѕСЃС‚Р°РІР»РµРЅР° РїРѕР·РёС†РёСЏ, С‚РѕРіРґР° РЅРµ Р±СѓРґРµРј СЃС‡РёС‚Р°С‚СЊ СЌС‚Рѕ opener, РЅР°РїСЂРёРјРµСЂ:
+		   "РІСЃРµ С‚Р°Рє Р¶Рµ РѕРЅ РїРѕРµС‚" -> "He is still singing"
 		  */
 		  vector<long> Rels;
 		  E.GetIncomingRelations(i, Rels);
@@ -1379,10 +1379,10 @@ void CEngSynthes::handle_rel_operators(int node, bool with_no)
 		res_node = Rel(in_rel).m_SourceNodeNo;
 
 	if(with_no)
-	if(HasRelOperator(node, "НЕ"))		Res(res_node).rel_operator += "not ";
+	if(HasRelOperator(node, "РќР•"))		Res(res_node).rel_operator += "not ";
 
-	if(HasRelOperator(node, "ДАЖЕ"))	Res(res_node).rel_operator += "even ";
-	if(HasRelOperator(node, "ТОЛЬКО"))
+	if(HasRelOperator(node, "Р”РђР–Р•"))	Res(res_node).rel_operator += "even ";
+	if(HasRelOperator(node, "РўРћР›Р¬РљРћ"))
 		Res(res_node).rel_operator += "only ";
 }
 
@@ -1399,7 +1399,7 @@ void CEngSynthes::handle_other_relations(int node)
 		
 		if(res.do_not_put) continue;
 if(   ValencyIs(rel, "IDENT")||ValencyIs(rel, "NAME")		  )
-		res.order(">>", 0);// сразу после
+		res.order(">>", 0);// СЃСЂР°Р·Сѓ РїРѕСЃР»Рµ
 	}
 
 }
@@ -1427,7 +1427,7 @@ bool CEngSynthes::try_conj_disrupt(int node_no)
 	int rel1 = rels[0];
 	int rel2 = rels[1];
 	Res(node_no).before_prep = tr.substr(0, elpsis);
-	// перед второй частью двойного союза всегда ставится запятая
+	// РїРµСЂРµРґ РІС‚РѕСЂРѕР№ С‡Р°СЃС‚СЊСЋ РґРІРѕР№РЅРѕРіРѕ СЃРѕСЋР·Р° РІСЃРµРіРґР° СЃС‚Р°РІРёС‚СЃСЏ Р·Р°РїСЏС‚Р°СЏ
 	Res(Rel(rel2).m_TargetNodeNo).before_prep = ","+tr.substr(elpsis + strlen("..."));
 
 	get_out_rels(node_no, rels);

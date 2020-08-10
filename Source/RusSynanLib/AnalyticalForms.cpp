@@ -83,13 +83,13 @@ bool HasShortParticipleOrAdj(const CSynWord& W)
 
 
 /*
-разбираем случай "они должны были быть потрачены",
-когда словоформа "были" должна  будет подсоединиться к форме "должны", 
-а сначала "быть" должна подсоединиться к форме "потрачены", чтобы "потрачены"
-не считалось предикатом, а стало инфинитивом. Последнее действие совершается
-в ниженстоящей процедуре.  Здесь ищется инфинитив "быть", за которым сразу же или через несколько
-слов должно стоять краткое прилагательное, например:
-"они должны были быть быстро потрачены"
+СЂР°Р·Р±РёСЂР°РµРј СЃР»СѓС‡Р°Р№ "РѕРЅРё РґРѕР»Р¶РЅС‹ Р±С‹Р»Рё Р±С‹С‚СЊ РїРѕС‚СЂР°С‡РµРЅС‹",
+РєРѕРіРґР° СЃР»РѕРІРѕС„РѕСЂРјР° "Р±С‹Р»Рё" РґРѕР»Р¶РЅР°  Р±СѓРґРµС‚ РїРѕРґСЃРѕРµРґРёРЅРёС‚СЊСЃСЏ Рє С„РѕСЂРјРµ "РґРѕР»Р¶РЅС‹", 
+Р° СЃРЅР°С‡Р°Р»Р° "Р±С‹С‚СЊ" РґРѕР»Р¶РЅР° РїРѕРґСЃРѕРµРґРёРЅРёС‚СЊСЃСЏ Рє С„РѕСЂРјРµ "РїРѕС‚СЂР°С‡РµРЅС‹", С‡С‚РѕР±С‹ "РїРѕС‚СЂР°С‡РµРЅС‹"
+РЅРµ СЃС‡РёС‚Р°Р»РѕСЃСЊ РїСЂРµРґРёРєР°С‚РѕРј, Р° СЃС‚Р°Р»Рѕ РёРЅС„РёРЅРёС‚РёРІРѕРј. РџРѕСЃР»РµРґРЅРµРµ РґРµР№СЃС‚РІРёРµ СЃРѕРІРµСЂС€Р°РµС‚СЃСЏ
+РІ РЅРёР¶РµРЅСЃС‚РѕСЏС‰РµР№ РїСЂРѕС†РµРґСѓСЂРµ.  Р—РґРµСЃСЊ РёС‰РµС‚СЃСЏ РёРЅС„РёРЅРёС‚РёРІ "Р±С‹С‚СЊ", Р·Р° РєРѕС‚РѕСЂС‹Рј СЃСЂР°Р·Сѓ Р¶Рµ РёР»Рё С‡РµСЂРµР· РЅРµСЃРєРѕР»СЊРєРѕ
+СЃР»РѕРІ РґРѕР»Р¶РЅРѕ СЃС‚РѕСЏС‚СЊ РєСЂР°С‚РєРѕРµ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ, РЅР°РїСЂРёРјРµСЂ:
+"РѕРЅРё РґРѕР»Р¶РЅС‹ Р±С‹Р»Рё Р±С‹С‚СЊ Р±С‹СЃС‚СЂРѕ РїРѕС‚СЂР°С‡РµРЅС‹"
 
 */
 void BuildAnalyticalVerbFormsZaplata2(CRusSentence& S, int ClauseNo)
@@ -99,7 +99,7 @@ void BuildAnalyticalVerbFormsZaplata2(CRusSentence& S, int ClauseNo)
 	int iBe = -1;
 	for (int WordNo = PrCl.m_iFirstWord; WordNo <= PrCl.m_iLastWord; WordNo++)
 	{
-		if (S.m_Words[WordNo].m_strUpperWord =="БЫТЬ")
+		if (S.m_Words[WordNo].m_strUpperWord =="Р‘Р«РўР¬")
 		{
 			iBe = WordNo;
 			continue;
@@ -110,9 +110,9 @@ void BuildAnalyticalVerbFormsZaplata2(CRusSentence& S, int ClauseNo)
 				{
 
 					/*
-					"быть" с краткой формой
-					не может быть вершиной клаузы, например, нельзя
-					сказать "*Чтобы быть красив, ты должен уйти"
+					"Р±С‹С‚СЊ" СЃ РєСЂР°С‚РєРѕР№ С„РѕСЂРјРѕР№
+					РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІРµСЂС€РёРЅРѕР№ РєР»Р°СѓР·С‹, РЅР°РїСЂРёРјРµСЂ, РЅРµР»СЊР·СЏ
+					СЃРєР°Р·Р°С‚СЊ "*Р§С‚РѕР±С‹ Р±С‹С‚СЊ РєСЂР°СЃРёРІ, С‚С‹ РґРѕР»Р¶РµРЅ СѓР№С‚Рё"
 					*/
 					S.m_Words[iBe].m_MainVerbs.push_back( WordNo );
 
@@ -134,7 +134,7 @@ bool HasCompar(const CSynWord& W)
 bool HasPredik(const CSynWord& W)
 {
 	for (int i = 0; i < W.m_Homonyms.size(); i++)
-		if (!W.m_Homonyms[i].HasGrammem(rIndeclinable)) //  "бух","спасибо" не строятся с анал. формами
+		if (!W.m_Homonyms[i].HasGrammem(rIndeclinable)) //  "Р±СѓС…","СЃРїР°СЃРёР±Рѕ" РЅРµ СЃС‚СЂРѕСЏС‚СЃСЏ СЃ Р°РЅР°Р». С„РѕСЂРјР°РјРё
 			if (W.m_Homonyms[i].HasPos(PREDK) || W.m_Homonyms[i].HasPos(PRONOUN_PREDK))
 				return true;
 		
@@ -154,16 +154,16 @@ bool HasInfinitive(const CSynWord& W)
 
 
 /*
-  построение аналитических форм глагола; 
-  вспомогательным гл. может быть "быть" или "стать"
+  РїРѕСЃС‚СЂРѕРµРЅРёРµ Р°РЅР°Р»РёС‚РёС‡РµСЃРєРёС… С„РѕСЂРј РіР»Р°РіРѕР»Р°; 
+  РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рј РіР». РјРѕР¶РµС‚ Р±С‹С‚СЊ "Р±С‹С‚СЊ" РёР»Рё "СЃС‚Р°С‚СЊ"
 */
 void CRusSentence::BuildAnalyticalVerbForms()
 {
 	for (int  ClauseNo = 0; ClauseNo < GetClausesCount(); ClauseNo++)
 	{
-		//номер вспомогательного глагола в цепочке словоформ - первая компонента ан.ф. 
+		//РЅРѕРјРµСЂ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРіРѕ РіР»Р°РіРѕР»Р° РІ С†РµРїРѕС‡РєРµ СЃР»РѕРІРѕС„РѕСЂРј - РїРµСЂРІР°СЏ РєРѕРјРїРѕРЅРµРЅС‚Р° Р°РЅ.С„. 
 		int iBe = -1;
-		//вектор потенциальных предикатов на заполнение второй компоненты  
+		//РІРµРєС‚РѕСЂ РїРѕС‚РµРЅС†РёР°Р»СЊРЅС‹С… РїСЂРµРґРёРєР°С‚РѕРІ РЅР° Р·Р°РїРѕР»РЅРµРЅРёРµ РІС‚РѕСЂРѕР№ РєРѕРјРїРѕРЅРµРЅС‚С‹  
 		CAnalyticalFormVars v_AnalyticalFormVars;
 		BuildAnalyticalVerbFormsZaplata2(*this, ClauseNo);
 		const CClause&  PrCl = GetClause(ClauseNo);
@@ -175,7 +175,7 @@ void CRusSentence::BuildAnalyticalVerbForms()
 		{
 			string s_lem = m_Words[WordNo].GetSynHomonym(0).m_strLemma;
 			if (m_Words[WordNo].IsInOborot()) continue;
-			//ищем гл. "быть" или "стать"
+			//РёС‰РµРј РіР». "Р±С‹С‚СЊ" РёР»Рё "СЃС‚Р°С‚СЊ"
 			if (m_Words[WordNo].HasAnalyticalBe() && iBe == -1)
 			{
 				iBe = WordNo;
@@ -199,7 +199,7 @@ void CRusSentence::BuildAnalyticalVerbForms()
 				v_AnalyticalFormVars.push_back( SAnalyticalFormVariant(WordNo, m_Words[WordNo].GetHomonymsCount(), SAnalyticalFormVariant::Short_Form, s_lem, AllHomonymsArePredicates(m_Words[WordNo])) );
 				continue;
 			}
-			//поиск сравнительной степени
+			//РїРѕРёСЃРє СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕР№ СЃС‚РµРїРµРЅРё
 			if ( HasCompar(m_Words[WordNo]) ) 		 
 				v_AnalyticalFormVars.push_back( SAnalyticalFormVariant(WordNo, m_Words[WordNo].GetHomonymsCount(), SAnalyticalFormVariant::Comp_Adj, s_lem, AllHomonymsArePredicates(m_Words[WordNo])) );
 		}
@@ -207,8 +207,8 @@ void CRusSentence::BuildAnalyticalVerbForms()
 		if (iBe != -1 && v_AnalyticalFormVars.size() > 0)
 		{
 			{
-				//правило для цепочки {"быть"(буд.), предикатив (омонимичный), инфинитив (нс)}, тогда строим ан.ф. с инфинитивом
-				//"Мальчик будет горько плакать"
+				//РїСЂР°РІРёР»Рѕ РґР»СЏ С†РµРїРѕС‡РєРё {"Р±С‹С‚СЊ"(Р±СѓРґ.), РїСЂРµРґРёРєР°С‚РёРІ (РѕРјРѕРЅРёРјРёС‡РЅС‹Р№), РёРЅС„РёРЅРёС‚РёРІ (РЅСЃ)}, С‚РѕРіРґР° СЃС‚СЂРѕРёРј Р°РЅ.С„. СЃ РёРЅС„РёРЅРёС‚РёРІРѕРј
+				//"РњР°Р»СЊС‡РёРє Р±СѓРґРµС‚ РіРѕСЂСЊРєРѕ РїР»Р°РєР°С‚СЊ"
 				int DummyHomNo;
 				CIntVector dummyVector;
 				if	(		(2 == v_AnalyticalFormVars.size() )
@@ -228,29 +228,29 @@ void CRusSentence::BuildAnalyticalVerbForms()
 									bFoundChain = false;	
 
 						if (bFoundChain)
-							// удаляем вариант омонимичного предикатива, если есть вариант будущего времени
+							// СѓРґР°Р»СЏРµРј РІР°СЂРёР°РЅС‚ РѕРјРѕРЅРёРјРёС‡РЅРѕРіРѕ РїСЂРµРґРёРєР°С‚РёРІР°, РµСЃР»Рё РµСЃС‚СЊ РІР°СЂРёР°РЅС‚ Р±СѓРґСѓС‰РµРіРѕ РІСЂРµРјРµРЅРё
 						{
 							v_AnalyticalFormVars.erase( v_AnalyticalFormVars.begin() );
 
 						};
 					}
 
-				//  конец  подслучая "Мальчик будет горько плакать"
+				//  РєРѕРЅРµС†  РїРѕРґСЃР»СѓС‡Р°СЏ "РњР°Р»СЊС‡РёРє Р±СѓРґРµС‚ РіРѕСЂСЊРєРѕ РїР»Р°РєР°С‚СЊ"
 			};
 
-			//проверить на возможное вхождение компоненты аналитической формы в синтаксическую группу:
-			//"был о нем"
+			//РїСЂРѕРІРµСЂРёС‚СЊ РЅР° РІРѕР·РјРѕР¶РЅРѕРµ РІС…РѕР¶РґРµРЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚С‹ Р°РЅР°Р»РёС‚РёС‡РµСЃРєРѕР№ С„РѕСЂРјС‹ РІ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєСѓСЋ РіСЂСѓРїРїСѓ:
+			//"Р±С‹Р» Рѕ РЅРµРј"
 			CheckGroupsForAnalyticalVerbForms(v_AnalyticalFormVars, PrCl);
 
 			if ( 0 == v_AnalyticalFormVars.size() ) continue;
 
-			/*разбираем случай "он был больше учителем, чем шофером", где не надо строить
-			  аналитическую форму со сравн. степенью, хотя, в принципе, ей ничего не мешает.
+			/*СЂР°Р·Р±РёСЂР°РµРј СЃР»СѓС‡Р°Р№ "РѕРЅ Р±С‹Р» Р±РѕР»СЊС€Рµ СѓС‡РёС‚РµР»РµРј, С‡РµРј С€РѕС„РµСЂРѕРј", РіРґРµ РЅРµ РЅР°РґРѕ СЃС‚СЂРѕРёС‚СЊ
+			  Р°РЅР°Р»РёС‚РёС‡РµСЃРєСѓСЋ С„РѕСЂРјСѓ СЃРѕ СЃСЂР°РІРЅ. СЃС‚РµРїРµРЅСЊСЋ, С…РѕС‚СЏ, РІ РїСЂРёРЅС†РёРїРµ, РµР№ РЅРёС‡РµРіРѕ РЅРµ РјРµС€Р°РµС‚.
 
-			  Формально:
-			  Если у нас только одна гипотеза ("сравн. степени"), если после нее стоит существительное
-			  в творительном падеже, тогда  анал. форму строит не надо.
-			   Сокирко. 3 мая 2001
+			  Р¤РѕСЂРјР°Р»СЊРЅРѕ:
+			  Р•СЃР»Рё Сѓ РЅР°СЃ С‚РѕР»СЊРєРѕ РѕРґРЅР° РіРёРїРѕС‚РµР·Р° ("СЃСЂР°РІРЅ. СЃС‚РµРїРµРЅРё"), РµСЃР»Рё РїРѕСЃР»Рµ РЅРµРµ СЃС‚РѕРёС‚ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ
+			  РІ С‚РІРѕСЂРёС‚РµР»СЊРЅРѕРј РїР°РґРµР¶Рµ, С‚РѕРіРґР°  Р°РЅР°Р». С„РѕСЂРјСѓ СЃС‚СЂРѕРёС‚ РЅРµ РЅР°РґРѕ.
+			   РЎРѕРєРёСЂРєРѕ. 3 РјР°СЏ 2001
 			*/
 			if (v_AnalyticalFormVars.size() == 1)
 				if (SAnalyticalFormVariant::Comp_Adj == v_AnalyticalFormVars[0].ePos)
@@ -258,7 +258,7 @@ void CRusSentence::BuildAnalyticalVerbForms()
 						continue;
 
 
-			//установить порядок на гипотезах (см. operator<);
+			//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїРѕСЂСЏРґРѕРє РЅР° РіРёРїРѕС‚РµР·Р°С… (СЃРј. operator<);
 			sort(v_AnalyticalFormVars.begin(), v_AnalyticalFormVars.end());
 
 			for ( int k = 0; k < v_AnalyticalFormVars.size(); k++ )
@@ -270,7 +270,7 @@ void CRusSentence::BuildAnalyticalVerbForms()
 						rml_TRACE("analytical form \"%s\" was created\n", dump.c_str());
 					};
 
-					{ // удалить все омонимы, кроме глагола
+					{ // СѓРґР°Р»РёС‚СЊ РІСЃРµ РѕРјРѕРЅРёРјС‹, РєСЂРѕРјРµ РіР»Р°РіРѕР»Р°
 						m_Words[iBe].SetHomonymsDel(false);
 
 						for (size_t HomNo=0; HomNo < m_Words[iBe].m_Homonyms.size(); HomNo++)
@@ -312,13 +312,13 @@ bool CRusSentence::CheckAnalyticalVerbForm(int iVWrd, int iSWrd)
 	return true;
 }
 
-//проверяет согласование вспомогательных глаголов и предикатов в ан.ф. 
+//РїСЂРѕРІРµСЂСЏРµС‚ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹С… РіР»Р°РіРѕР»РѕРІ Рё РїСЂРµРґРёРєР°С‚РѕРІ РІ Р°РЅ.С„. 
 bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo, CIntVector& AnalyticHom)
 {
 	AnalyticHom.clear();
 
-	//с предикативными значениями "много" и "мало" анал. форм не строить 
-	if ( ( m_Words[iSWrd].FindLemma("МНОГО") || m_Words[iSWrd].FindLemma("МАЛО") ) &&
+	//СЃ РїСЂРµРґРёРєР°С‚РёРІРЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё "РјРЅРѕРіРѕ" Рё "РјР°Р»Рѕ" Р°РЅР°Р». С„РѕСЂРј РЅРµ СЃС‚СЂРѕРёС‚СЊ 
+	if ( ( m_Words[iSWrd].FindLemma("РњРќРћР“Рћ") || m_Words[iSWrd].FindLemma("РњРђР›Рћ") ) &&
 		 -1 != m_Words[iSWrd].GetHomonymByPOS(PREDK) )	
 		return false;
 
@@ -326,8 +326,8 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 	{
 		const CSynHomonym& VerbHom = m_Words[iVerbWrd].GetSynHomonym(VerbHomNo);
 
-		if (		VerbHom.IsLemma("БЫТЬ")
-			||	(		VerbHom.IsLemma("СТАТЬ")
+		if (		VerbHom.IsLemma("Р‘Р«РўР¬")
+			||	(		VerbHom.IsLemma("РЎРўРђРўР¬")
 					&&	(		VerbHom.HasPos(VERB) 
 							||	VerbHom.HasPos(INFINITIVE)
 						) 
@@ -339,7 +339,7 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 
 				CSynHomonym ShortFormHom = m_Words[iSWrd].GetSynHomonym(j);
 				if (ShortFormHom.HasPos(INFINITIVE) && ShortFormHom.HasGrammem(rNonPerfective))
-					if (VerbHom.HasGrammem(rFutureTense) || VerbHom.IsLemma("СТАТЬ"))
+					if (VerbHom.HasGrammem(rFutureTense) || VerbHom.IsLemma("РЎРўРђРўР¬"))
 						AnalyticHom.push_back(j);
 
 				if (        (      ShortFormHom.HasPos(PREDK) 
@@ -347,7 +347,7 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
                             ) 
                         && 
 					        (      VerbHom.HasGrammem(rNeutrum) 
-                                ||  VerbHom.HasPos(INFINITIVE)  // "вам должно стать скучно"
+                                ||  VerbHom.HasPos(INFINITIVE)  // "РІР°Рј РґРѕР»Р¶РЅРѕ СЃС‚Р°С‚СЊ СЃРєСѓС‡РЅРѕ"
                                 || (        VerbHom.HasGrammem(rFutureTense) 
                                         &&  VerbHom.HasGrammem(rThirdPerson) 
                                         &&  VerbHom.HasGrammem(rSingular) 
@@ -361,7 +361,7 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 				
 				if (ShortFormHom.HasPos(PARTICIPLE_SHORT) || ShortFormHom.HasPos(ADJ_SHORT) )
 				{
-					// "была", "стал", "был", "было" ...
+					// "Р±С‹Р»Р°", "СЃС‚Р°Р»", "Р±С‹Р»", "Р±С‹Р»Рѕ" ...
 					if	(		VerbHom.HasGrammem(rSingular) 
 							&&	VerbHom.HasGrammem(rPastTense)
 							&&	ShortFormHom.HasGrammem(rSingular) 
@@ -389,8 +389,8 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 					if	(	(		VerbHom.HasPos(INFINITIVE) 
 								||	VerbHom.HasPos(ADVERB_PARTICIPLE)
 							)
-							&&	(iVerbWrd < iSWrd) // последним условием мы запрещаем строиться 
-											// анал. форме в  предложении "они должны уже быть".
+							&&	(iVerbWrd < iSWrd) // РїРѕСЃР»РµРґРЅРёРј СѓСЃР»РѕРІРёРµРј РјС‹ Р·Р°РїСЂРµС‰Р°РµРј СЃС‚СЂРѕРёС‚СЊСЃСЏ 
+											// Р°РЅР°Р». С„РѕСЂРјРµ РІ  РїСЂРµРґР»РѕР¶РµРЅРёРё "РѕРЅРё РґРѕР»Р¶РЅС‹ СѓР¶Рµ Р±С‹С‚СЊ".
 						)
 					{
 						AnalyticHom.push_back(j); 	

@@ -60,9 +60,9 @@ struct SGraPair
 
 
 /*
-  с помощью  этих констант определяется, от какой клаузы из двух клауз будут 
-  взяты параметры для объединенной клаузы: от левой или от правой 
-  Это тип используется только при работе  с функцией UniteClauses 
+  СЃ РїРѕРјРѕС‰СЊСЋ  СЌС‚РёС… РєРѕРЅСЃС‚Р°РЅС‚ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ, РѕС‚ РєР°РєРѕР№ РєР»Р°СѓР·С‹ РёР· РґРІСѓС… РєР»Р°СѓР· Р±СѓРґСѓС‚ 
+  РІР·СЏС‚С‹ РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ РѕР±СЉРµРґРёРЅРµРЅРЅРѕР№ РєР»Р°СѓР·С‹: РѕС‚ Р»РµРІРѕР№ РёР»Рё РѕС‚ РїСЂР°РІРѕР№ 
+  Р­С‚Рѕ С‚РёРї РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїСЂРё СЂР°Р±РѕС‚Рµ  СЃ С„СѓРЅРєС†РёРµР№ UniteClauses 
 */
 enum ParametersSourceEnum {
 	LeftClauseParams,
@@ -109,23 +109,23 @@ public:
 	vector<CClauseRule> m_vectorPrimitiveRules;
 	vector<CClauseRule> m_vectorMainEncloseRules;
 	vector<CClauseRule> m_vectorDisruptRules;
-    // используется только в фукции CheckPairDelimiters
+    // РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ С„СѓРєС†РёРё CheckPairDelimiters
 	bool m_bFirstInPairFound;	
-	// вектор всех найденных терминов
+	// РІРµРєС‚РѕСЂ РІСЃРµС… РЅР°Р№РґРµРЅРЅС‹С… С‚РµСЂРјРёРЅРѕРІ
 	vector<SFoundTermin>	m_vectorTermins;	
-	// вектор всех графематических вилок (типа EXPR1-EXPR2)
+	// РІРµРєС‚РѕСЂ РІСЃРµС… РіСЂР°С„РµРјР°С‚РёС‡РµСЃРєРёС… РІРёР»РѕРє (С‚РёРїР° EXPR1-EXPR2)
 	vector<SGraPair>		m_vectorGraPairs;
 
 
 	//  list of models which were built upon grammars
 	// should  be a list since we use a pointer to its member
 	list<CGroups>			m_GrammarModels;
-	// вектор всех найденных терминов
+	// РІРµРєС‚РѕСЂ РІСЃРµС… РЅР°Р№РґРµРЅРЅС‹С… С‚РµСЂРјРёРЅРѕРІ
 	vector<SFoundTermin>	m_GrammarItems;	
 
 	bool m_bShouldUseTwoPotentialRule;
 	
-	// ссылки на словари и опции
+	// СЃСЃС‹Р»РєРё РЅР° СЃР»РѕРІР°СЂРё Рё РѕРїС†РёРё
 	const CSyntaxOpt* m_pSyntaxOptions;
 
 	CSentence(const CSyntaxOpt* m_pSyntaxOptions);
@@ -166,7 +166,7 @@ public:
 
 	bool DeleteMarkedHomonymsWithClauses(int iWord);
 	/*
-	 вызывает DeleteMarkedHomonymsWithClauses для всех слов периода
+	 РІС‹Р·С‹РІР°РµС‚ DeleteMarkedHomonymsWithClauses РґР»СЏ РІСЃРµС… СЃР»РѕРІ РїРµСЂРёРѕРґР°
 	*/
 	bool DeleteMarkedHomonymsWithClauses(const CPeriod& P);
     void DontDeleteExpr2ifExpr1Exists(const CPeriod& P);

@@ -298,7 +298,7 @@ bool	CGerSentence::IsProfession(const CSynHomonym& H) const
 // go through  the sentence
 // if a wordform occurs, which is  simultaneously a finite verb and a participle then split 
 // the word into two homonyms: a participle and a verb 
-// For example, "zerstцrte" can be PA2 and VER sft,prt,1,sin,
+// For example, "zerstС†rte" can be PA2 and VER sft,prt,1,sin,
 
 void CGerSentence::ParticipleAndVerbInOneForm() 
 {
@@ -446,7 +446,7 @@ void CGerSentence::FindReflexivePronomen()
 				}
 				else
 				// imperative + possibly reflexive verb:
-				// "Schдme dich!"
+				// "SchРґme dich!"
 				if (		V.m_SynUnits[ReflVerb].HasGrammem(gImperativ)
 						&&	(		V.m_SynUnits[ReflVerb].HasGrammem(gSichAcc)
 								||	V.m_SynUnits[ReflVerb].HasGrammem(gSichDat)		
@@ -537,7 +537,7 @@ BuildInitialClausesLabel:
 	TraceClauses();
 
 	
-	// после первого вызова RunSyntaxInClause нужно удалить омонимы, которые противоречат найденным терминам
+	// РїРѕСЃР»Рµ РїРµСЂРІРѕРіРѕ РІС‹Р·РѕРІР° RunSyntaxInClause РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ РѕРјРѕРЅРёРјС‹, РєРѕС‚РѕСЂС‹Рµ РїСЂРѕС‚РёРІРѕСЂРµС‡Р°С‚ РЅР°Р№РґРµРЅРЅС‹Рј С‚РµСЂРјРёРЅР°Рј
 	
 	DeleteMarkedHomonymsWithClauses(CPeriod(0,(int)m_Words.size()-1));
 
@@ -621,7 +621,7 @@ BuildInitialClausesLabel:
 									&&	(RelativeWords.find(WordNo) == RelativeWords.end())
 											// we should not delete homonyms from a relative word for the second pass,
 											// since the second pass can change clause structure, and a clause will change its status
-											// "Die israelische Regierung beschlieЯt, die durch die israelische Militдrverwaltung geleisteten цffentlichen Dienste auf die gleiche Stufe zu stellen "
+											// "Die israelische Regierung beschlieРЇt, die durch die israelische MilitРґrverwaltung geleisteten С†ffentlichen Dienste auf die gleiche Stufe zu stellen "
 
 								)
 								p.push_back(m_Words[WordNo]);

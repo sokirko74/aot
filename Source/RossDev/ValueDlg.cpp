@@ -114,7 +114,7 @@ const int FontHeight =  130;
 
 void CValueDlg::DrawControls ()
 {
-  // считаем арность поля
+  // СЃС‡РёС‚Р°РµРј Р°СЂРЅРѕСЃС‚СЊ РїРѕР»СЏ
    m_CurrFunDimen = GetSignatDomsCount();
 
    RECT LabelRect;
@@ -128,14 +128,14 @@ void CValueDlg::DrawControls ()
    ControlRect.bottom = ControlRect.top + Control_Height;
    ControlRect.right = ControlRect.left +170;
 
-  // создаем компоненты на каждый аргумент CWnd
+  // СЃРѕР·РґР°РµРј РєРѕРјРїРѕРЅРµРЅС‚С‹ РЅР° РєР°Р¶РґС‹Р№ Р°СЂРіСѓРјРµРЅС‚ CWnd
    for (size_t i=0; i < m_CurrFunDimen; i++)
    {
 	  BYTE DomNo = GetSignatDomNo(i);
 	  m_Lists[i].m_hWnd = 0;
 	  m_Edits[i].m_hWnd = 0;
 
-	  // рисуем название
+	  // СЂРёСЃСѓРµРј РЅР°Р·РІР°РЅРёРµ
 	  string LabelStr = GetRoss()->m_Domens[DomNo].DomStr;
 	  if (LabelStr.substr(0,2) == "D_")
 		  LabelStr.erase(0,2);
@@ -149,7 +149,7 @@ void CValueDlg::DrawControls ()
 	  
 	  if (    (! GetRoss()->m_Domens[DomNo].IsFree)  
 			&& (DomNo != GetRoss()->LexPlusDomNo)
-	 	 )  // константный
+	 	 )  // РєРѕРЅСЃС‚Р°РЅС‚РЅС‹Р№
 	  {
 		  int DropDownCount = (m_pRossDoc->m_DomParamsPtr[DomNo] != ErrUChar) ? m_pRossDoc->m_DomainParams[m_pRossDoc->m_DomParamsPtr[DomNo]].DropDownCount : 20;
 		  ControlRect.bottom += Control_Height* DropDownCount; 
@@ -176,7 +176,7 @@ void CValueDlg::DrawControls ()
 	  }
 	  else
 	  {
-        // создается окошечко ввода
+        // СЃРѕР·РґР°РµС‚СЃСЏ РѕРєРѕС€РµС‡РєРѕ РІРІРѕРґР°
 		  m_Edits[i].Create (ES_AUTOHSCROLL|WS_BORDER|WS_TABSTOP, ControlRect, this, i);
 		  m_Edits[i].SetFont (&(((CRossDevApp*)AfxGetApp())->m_TextFont));
 		  m_Edits[i].ShowWindow(SW_SHOW);
@@ -211,7 +211,7 @@ BOOL CValueDlg::OnInitDialog()
 	if (!m_bOneFormat)
 	SetWindowText(CString("One field value ") + ConstructFldName(GetRoss(), m_OldValue.m_FieldNo, m_OldValue.m_LeafId, m_OldValue.m_BracketLeafId));
 
-    // Установка Сигнатур, если их больше одной
+    // РЈСЃС‚Р°РЅРѕРІРєР° РЎРёРіРЅР°С‚СѓСЂ, РµСЃР»Рё РёС… Р±РѕР»СЊС€Рµ РѕРґРЅРѕР№
 	m_pSignatGroup = GetDlgItem (IDC_VALUEDLG_SIGNATGROUP);
 	ASSERT (m_pSignatGroup);
     
@@ -274,7 +274,7 @@ bool CValueDlg::SetNewValue()
 		  int nPos = m_Lists[i].GetCurSel();
 		  if (nPos == LB_ERR) 
 		  {
-			  AfxMessageBox("Остались пустые места!");
+			  AfxMessageBox("РћСЃС‚Р°Р»РёСЃСЊ РїСѓСЃС‚С‹Рµ РјРµСЃС‚Р°!");
 			  return false;
 		  }
 		  BYTE DomNo = GetSignatDomNo(i);
@@ -323,8 +323,8 @@ void CValueDlg::OnOK()
 {
 	if (  !SetNewValue() ) return;
 
-	// Это не ошибка. SetNewValue нужно вызывать дважды из-за InsertDomItem, которая не может вставить две новых константы 
-	// одновременно
+	// Р­С‚Рѕ РЅРµ РѕС€РёР±РєР°. SetNewValue РЅСѓР¶РЅРѕ РІС‹Р·С‹РІР°С‚СЊ РґРІР°Р¶РґС‹ РёР·-Р·Р° InsertDomItem, РєРѕС‚РѕСЂР°СЏ РЅРµ РјРѕР¶РµС‚ РІСЃС‚Р°РІРёС‚СЊ РґРІРµ РЅРѕРІС‹С… РєРѕРЅСЃС‚Р°РЅС‚С‹ 
+	// РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ
 	SetNewValue();
 	
 	CDialog::OnOK();

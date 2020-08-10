@@ -21,7 +21,7 @@ const char g_strAgramTabRegPath[]      = "Software\\Dialing\\Lemmatizer\\Russian
 const long UnknownParadigmId = -1;
 const BYTE UnknownPOS = 0xff;
 
-/*анадлогичное перечисление в seman.idl*/
+/*Р°РЅР°РґР»РѕРіРёС‡РЅРѕРµ РїРµСЂРµС‡РёСЃР»РµРЅРёРµ РІ seman.idl*/
 enum DictTypeEnum   { Ross=0, LocRoss=1, CollocRoss=2, TimeRoss=3, OborRoss=4, Aoss=5, EngCollocRoss=6, EngObor=7, FinRoss=8, CompRoss=9, OmniRoss=10, NoneRoss=11 };
 
 inline bool IsThesRoss(DictTypeEnum RossId)  

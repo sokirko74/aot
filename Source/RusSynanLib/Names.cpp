@@ -33,7 +33,7 @@ bool CRusFormatCaller :: format_for_rank_surname (CGroup& G)
 	G.SetGrammems( Wi.GetGrammems() );
 	G.m_MainGroup = main_gr;
     G.m_GroupType = RANK_NAMES;
-	G.m_Cause = "Ïğàâèëà ñáîğêè Äîëæíîñòü+ÔÈÎ";   
+	G.m_Cause = "ĞŸÑ€Ğ°Ğ²Ğ¸Ğ»Ğ° ÑĞ±Ğ¾Ñ€ĞºĞ¸ Ğ”Ğ¾Ğ»Ğ¶Ğ½Ğ¾ÑÑ‚ÑŒ+Ğ¤Ğ˜Ğ";   
 	create_syn_rel(G,i,j,RANK_NAMES);
 	
 	return true;
@@ -77,7 +77,7 @@ bool CRusFormatCaller :: format_for_adj_in_commas_preposition(CGroup& G)
 	return false;
 };
 
-// Ïğàâèëà äëÿ "÷åğíàÿ è áåëàÿ ğàêåòêè; ÷åğíûå øêàô è ñòóë"
+// ĞŸÑ€Ğ°Ğ²Ğ¸Ğ»Ğ° Ğ´Ğ»Ñ "Ñ‡ĞµÑ€Ğ½Ğ°Ñ Ğ¸ Ğ±ĞµĞ»Ğ°Ñ Ñ€Ğ°ĞºĞµÑ‚ĞºĞ¸; Ñ‡ĞµÑ€Ğ½Ñ‹Ğµ ÑˆĞºĞ°Ñ„ Ğ¸ ÑÑ‚ÑƒĞ»"
 bool CRusFormatCaller::format_for_plural_noun_adj(CGroup& G)
 {
 	const CGroup& AdjMaxGrp = get_maximal_group(G.m_iFirstWord);
@@ -125,7 +125,7 @@ bool CRusFormatCaller::format_for_plural_noun_adj(CGroup& G)
 	return false;		
 };
 
-// Ïğàâèëà äëÿ \\×åëîâåê ıòîò, íåîæèäàííî óâèäåâ íå÷òî âïå÷àòëÿşùåå, îòïğÿíóë, íî íè÷åãî ñòğàøíîãî íå ïğîèçîøëî\\.
+// ĞŸÑ€Ğ°Ğ²Ğ¸Ğ»Ğ° Ğ´Ğ»Ñ \\Ğ§ĞµĞ»Ğ¾Ğ²ĞµĞº ÑÑ‚Ğ¾Ñ‚, Ğ½ĞµĞ¾Ğ¶Ğ¸Ğ´Ğ°Ğ½Ğ½Ğ¾ ÑƒĞ²Ğ¸Ğ´ĞµĞ² Ğ½ĞµÑ‡Ñ‚Ğ¾ Ğ²Ğ¿ĞµÑ‡Ğ°Ñ‚Ğ»ÑÑÑ‰ĞµĞµ, Ğ¾Ñ‚Ğ¿Ñ€ÑĞ½ÑƒĞ», Ğ½Ğ¾ Ğ½Ğ¸Ñ‡ĞµĞ³Ğ¾ ÑÑ‚Ñ€Ğ°ÑˆĞ½Ğ¾Ğ³Ğ¾ Ğ½Ğµ Ğ¿Ñ€Ğ¾Ğ¸Ğ·Ğ¾ÑˆĞ»Ğ¾\\.
 bool CRusFormatCaller::format_for_noun_adj_postposition(CGroup& G)
 {
 	int i = get_main_word (G.m_iFirstWord);
@@ -147,7 +147,7 @@ bool CRusFormatCaller::format_for_noun_adj_postposition(CGroup& G)
 	return true;		
 };
 
-// Ïğàâèëà äëÿ îáîñîá. ïğèë. â ïîñòïîçèöèè\\İòèì âîïğîñîì, äàâíî è íàäîëãî çàáûòûì, \\.
+// ĞŸÑ€Ğ°Ğ²Ğ¸Ğ»Ğ° Ğ´Ğ»Ñ Ğ¾Ğ±Ğ¾ÑĞ¾Ğ±. Ğ¿Ñ€Ğ¸Ğ». Ğ² Ğ¿Ğ¾ÑÑ‚Ğ¿Ğ¾Ğ·Ğ¸Ñ†Ğ¸Ğ¸\\Ğ­Ñ‚Ğ¸Ğ¼ Ğ²Ğ¾Ğ¿Ñ€Ğ¾ÑĞ¾Ğ¼, Ğ´Ğ°Ğ²Ğ½Ğ¾ Ğ¸ Ğ½Ğ°Ğ´Ğ¾Ğ»Ğ³Ğ¾ Ğ·Ğ°Ğ±Ñ‹Ñ‚Ñ‹Ğ¼, \\.
 bool CRusFormatCaller::format_for_noun_detached_adj_postposition(CGroup& G)
 {
 	size_t i, j;
@@ -199,16 +199,16 @@ bool CRusFormatCaller::format_for_noun_detached_adj_postposition(CGroup& G)
 	return false;
 };
 
-// Ïğàâèëà äëÿ ÁÎËÅÅ èëè ÌÅÍÅÅ + ïğèë èëè êğ.ïğèë
+// ĞŸÑ€Ğ°Ğ²Ğ¸Ğ»Ğ° Ğ´Ğ»Ñ Ğ‘ĞĞ›Ğ•Ğ• Ğ¸Ğ»Ğ¸ ĞœĞ•ĞĞ•Ğ• + Ğ¿Ñ€Ğ¸Ğ» Ğ¸Ğ»Ğ¸ ĞºÑ€.Ğ¿Ñ€Ğ¸Ğ»
 bool CRusFormatCaller::format_for_anat_compar(CGroup& G)
 {
-	//áîëåå  èçâğàùåííàÿ  ëşáèòåëüíèöà
+	//Ğ±Ğ¾Ğ»ĞµĞµ  Ğ¸Ğ·Ğ²Ñ€Ğ°Ñ‰ĞµĞ½Ğ½Ğ°Ñ  Ğ»ÑĞ±Ğ¸Ñ‚ĞµĞ»ÑŒĞ½Ğ¸Ñ†Ğ°
 	size_t i = G.m_iFirstWord;
 	const CGroup& MaxGrp = get_maximal_group(i);
 	if (MaxGrp.m_iFirstWord != MaxGrp.m_iLastWord) return false;
 
-    if (   !Wi.is_word_upper("ÁÎËÅÅ") 
-		&& !Wi.is_word_upper("ÌÅÍÅÅ") 
+    if (   !Wi.is_word_upper("Ğ‘ĞĞ›Ğ•Ğ•") 
+		&& !Wi.is_word_upper("ĞœĞ•ĞĞ•Ğ•") 
 	   ) return false;
 	size_t j = i + 1;
 	if (j >= sent.size()) return false;

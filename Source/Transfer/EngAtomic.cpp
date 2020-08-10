@@ -43,7 +43,7 @@ CEngSemWord::CEngSemWord (const CSemWord& X)
 	Init();
 };
     
-  // принадлежит ли данная часть речи набору частей речи, который приписан слову?
+  // РїСЂРёРЅР°РґР»РµР¶РёС‚ Р»Рё РґР°РЅРЅР°СЏ С‡Р°СЃС‚СЊ СЂРµС‡Рё РЅР°Р±РѕСЂСѓ С‡Р°СЃС‚РµР№ СЂРµС‡Рё, РєРѕС‚РѕСЂС‹Р№ РїСЂРёРїРёСЃР°РЅ СЃР»РѕРІСѓ?
 bool   CEngSemWord::HasPOS (size_t POS) const 
 {
 	return (m_Poses & (1<<POS)) > 0;
@@ -88,7 +88,7 @@ BYTE CEngSemNode::GetPos() const
 {
 	if (m_MainWordNo != -1)
 		return GetOnePOS(m_Words[m_MainWordNo].m_Poses);
-	else // надеемся, что частей речи в англйискои грамтабе меньше 31
+	else // РЅР°РґРµРµРјСЃСЏ, С‡С‚Рѕ С‡Р°СЃС‚РµР№ СЂРµС‡Рё РІ Р°РЅРіР»Р№РёСЃРєРѕРё РіСЂР°РјС‚Р°Р±Рµ РјРµРЅСЊС€Рµ 31
 		return UnknownPOS;
 };
 

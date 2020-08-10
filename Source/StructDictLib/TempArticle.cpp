@@ -134,8 +134,8 @@ inline int  VisualFieldOrder (BYTE LeafId, BYTE BracketLeafId, int OrderId)
 
 bool   CTempArticle::PutCortegeOnTheRigthPosition (const TCortege10& C)
 {
-	  // Номер места получим в переменной i. Вначале переменная i равна нулю.
-	// Проходим все поля, у которых порядок меньше порядка текущего поля
+	  // РќРѕРјРµСЂ РјРµСЃС‚Р° РїРѕР»СѓС‡РёРј РІ РїРµСЂРµРјРµРЅРЅРѕР№ i. Р’РЅР°С‡Р°Р»Рµ РїРµСЂРµРјРµРЅРЅР°СЏ i СЂР°РІРЅР° РЅСѓР»СЋ.
+	// РџСЂРѕС…РѕРґРёРј РІСЃРµ РїРѕР»СЏ, Сѓ РєРѕС‚РѕСЂС‹С… РїРѕСЂСЏРґРѕРє РјРµРЅСЊС€Рµ РїРѕСЂСЏРґРєР° С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЏ
 	size_t i = 0;
 	for  (;
                  (i < GetCortegesSize()) 
@@ -143,9 +143,9 @@ bool   CTempArticle::PutCortegeOnTheRigthPosition (const TCortege10& C)
                  VisualFieldOrder(GetCortege(i).m_LeafId, GetCortege(i).m_BracketLeafId, m_pRoss->Fields[GetCortege(i).m_FieldNo].OrderId));
            i++);
 
-      //  Проходим записи, которые относятся к данному полю, чтобы дописать текущую запись
-      //  после последней.
-      //  Опираемся на то, что OrderId - уникален
+      //  РџСЂРѕС…РѕРґРёРј Р·Р°РїРёСЃРё, РєРѕС‚РѕСЂС‹Рµ РѕС‚РЅРѕСЃСЏС‚СЃСЏ Рє РґР°РЅРЅРѕРјСѓ РїРѕР»СЋ, С‡С‚РѕР±С‹ РґРѕРїРёСЃР°С‚СЊ С‚РµРєСѓС‰СѓСЋ Р·Р°РїРёСЃСЊ
+      //  РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµР№.
+      //  РћРїРёСЂР°РµРјСЃСЏ РЅР° С‚Рѕ, С‡С‚Рѕ OrderId - СѓРЅРёРєР°Р»РµРЅ
     for  (;
                   (i < GetCortegesSize()) 
                && (C.m_LeafId   == GetCortege(i).m_LeafId) 
@@ -155,7 +155,7 @@ bool   CTempArticle::PutCortegeOnTheRigthPosition (const TCortege10& C)
            i++);
 
        
-    // Добавление  к списку значений
+    // Р”РѕР±Р°РІР»РµРЅРёРµ  Рє СЃРїРёСЃРєСѓ Р·РЅР°С‡РµРЅРёР№
 	m_Corteges.insert(m_Corteges.begin()+i, C);
 
 	return true;
@@ -180,7 +180,7 @@ bool CTempArticle::ArticleToText ()
 	 TCortege10 C =  GetCortege(i);
 	 RightPart[0] = 0;
      
-     // смена текущей функции - значит, смена уровня
+     // СЃРјРµРЅР° С‚РµРєСѓС‰РµР№ С„СѓРЅРєС†РёРё - Р·РЅР°С‡РёС‚, СЃРјРµРЅР° СѓСЂРѕРІРЅСЏ
      if (    (CurrLeafId != C.m_LeafId) 
 		  || (CurrBracketLeafId != C.m_BracketLeafId) 
 		  || (C.m_FieldNo != CurrFieldNo) 
@@ -204,7 +204,7 @@ bool CTempArticle::ArticleToText ()
 
 	   m_pRoss->CortegeToStr(C, RightPart + strlen(RightPart));
 
-      // пошло новое поле
+      // РїРѕС€Р»Рѕ РЅРѕРІРѕРµ РїРѕР»Рµ
        if (    (CurrFieldNo != C.m_FieldNo)
 	 	    || (CurrLeafId != C.m_LeafId)
 			|| (CurrBracketLeafId != C.m_BracketLeafId)
@@ -219,7 +219,7 @@ bool CTempArticle::ArticleToText ()
 		 CurrFieldNo =  C.m_FieldNo;
 	   } 
        else
-       // продолжается запись значения старого поля
+       // РїСЂРѕРґРѕР»Р¶Р°РµС‚СЃСЏ Р·Р°РїРёСЃСЊ Р·РЅР°С‡РµРЅРёСЏ СЃС‚Р°СЂРѕРіРѕ РїРѕР»СЏ
         sprintf (Line, "%10s%s"," ", RightPart);
 
         m_ArticleStr += Line;
@@ -701,8 +701,8 @@ bool CTempArticle::BuildCortegeList()
 	};
 
 	/*
-		если в процессе парсинга были добавлены новые константы, тогда
-		нужно пропарсить еще раз, поскольку все ссылки в векторе Corteges сбились
+		РµСЃР»Рё РІ РїСЂРѕС†РµСЃСЃРµ РїР°СЂСЃРёРЅРіР° Р±С‹Р»Рё РґРѕР±Р°РІР»РµРЅС‹ РЅРѕРІС‹Рµ РєРѕРЅСЃС‚Р°РЅС‚С‹, С‚РѕРіРґР°
+		РЅСѓР¶РЅРѕ РїСЂРѕРїР°СЂСЃРёС‚СЊ РµС‰Рµ СЂР°Р·, РїРѕСЃРєРѕР»СЊРєСѓ РІСЃРµ СЃСЃС‹Р»РєРё РІ РІРµРєС‚РѕСЂРµ Corteges СЃР±РёР»РёСЃСЊ
 	*/
 	if (DomItemCount != m_pRoss->m_DomItems.size() )
 	{

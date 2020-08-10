@@ -9,7 +9,7 @@
 
 
 /*
-	возвращает истину, если был удален хотя бы один синтаксический вариант
+	РІРѕР·РІСЂР°С‰Р°РµС‚ РёСЃС‚РёРЅСѓ, РµСЃР»Рё Р±С‹Р» СѓРґР°Р»РµРЅ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёР№ РІР°СЂРёР°РЅС‚
 */
 bool CClause::KillHomonymsCoverage( )
 {
@@ -21,13 +21,13 @@ bool CClause::KillHomonymsCoverage( )
 	bool HasPredk = m_SynVariants.begin()->HasPredk();
 
 	
-	//удаляем все варианты, у которых вес меньше самого лучшего
+	//СѓРґР°Р»СЏРµРј РІСЃРµ РІР°СЂРёР°РЅС‚С‹, Сѓ РєРѕС‚РѕСЂС‹С… РІРµСЃ РјРµРЅСЊС€Рµ СЃР°РјРѕРіРѕ Р»СѓС‡С€РµРіРѕ
 	int VarsCount  = m_SynVariants.size();
 	for (SVI pSynVar = m_SynVariants.begin(); pSynVar != m_SynVariants.end(); )
 	{
 		const CMorphVariant& V = *pSynVar;
 		if (pSynVar->m_iWeight < BestWeight
-			&& !(!HasPredk && pSynVar->HasPredk()) ) //"я сама жила в среде" - сохраняем глагол
+			&& !(!HasPredk && pSynVar->HasPredk()) ) //"СЏ СЃР°РјР° Р¶РёР»Р° РІ СЃСЂРµРґРµ" - СЃРѕС…СЂР°РЅСЏРµРј РіР»Р°РіРѕР»
 		{
 			pSynVar = EraseMorphVariant(pSynVar );
 		}
@@ -38,7 +38,7 @@ bool CClause::KillHomonymsCoverage( )
 	rml_TRACE ("KillHomonymsCoverage left only %i from %i synvariants in %s\n", m_SynVariants.size(), VarsCount, GetTraceStr().c_str());
 
 	
-	//  удаляем все омонимы, который не входят в оставшиеся варианты
+	//  СѓРґР°Р»СЏРµРј РІСЃРµ РѕРјРѕРЅРёРјС‹, РєРѕС‚РѕСЂС‹Р№ РЅРµ РІС…РѕРґСЏС‚ РІ РѕСЃС‚Р°РІС€РёРµСЃСЏ РІР°СЂРёР°РЅС‚С‹
 	for(int WordNo = m_iFirstWord ; WordNo <= m_iLastWord ; WordNo++ )
 	{
 		WordNo = PassSubClause(WordNo);

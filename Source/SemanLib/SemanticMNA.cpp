@@ -3,7 +3,7 @@
 
 const int  MaxMNANodesCount = 100;
 
-// узел является  ПГ или наречием
+// СѓР·РµР» СЏРІР»СЏРµС‚СЃСЏ  РџР“ РёР»Рё РЅР°СЂРµС‡РёРµРј
 bool CRusSemStructure::IsAdverbial (long NodeNo) const
 {
 	return m_Nodes[NodeNo].HasSomePrep() || HasRichPOS (NodeNo, ADV);
@@ -27,23 +27,23 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 
 	if (SubordNodesCount !=	2) 
 	{
-		// рассмотрим	случаи,	когда сравнительная	степень
-		// может управлять узлами, число которых не равно	2 
+		// СЂР°СЃСЃРјРѕС‚СЂРёРј	СЃР»СѓС‡Р°Рё,	РєРѕРіРґР° СЃСЂР°РІРЅРёС‚РµР»СЊРЅР°СЏ	СЃС‚РµРїРµРЅСЊ
+		// РјРѕР¶РµС‚ СѓРїСЂР°РІР»СЏС‚СЊ СѓР·Р»Р°РјРё, С‡РёСЃР»Рѕ РєРѕС‚РѕСЂС‹С… РЅРµ СЂР°РІРЅРѕ	2 
 
-		// Первый дизъюнкт "я буду умнее"
+		// РџРµСЂРІС‹Р№ РґРёР·СЉСЋРЅРєС‚ "СЏ Р±СѓРґСѓ СѓРјРЅРµРµ"
 		if	(	(		(R.m_Clauses[R.m_Nodes[NodeNo].m_ClauseNo].m_ClauseType	== COMPARATIVE_T)
 					&& !R.m_Clauses[R.m_Nodes[NodeNo].m_ClauseNo].m_bHasCHEM							
 					&& (SubordNodesCount == 1)
 					&& IncomRelsCount  == 0	
 				) 
-			// Второй дизъюнкт, пример: "я мечтал	побыстрее его женить"
-			//							 "У меня нет больше надежды."
+			// Р’С‚РѕСЂРѕР№ РґРёР·СЉСЋРЅРєС‚, РїСЂРёРјРµСЂ: "СЏ РјРµС‡С‚Р°Р»	РїРѕР±С‹СЃС‚СЂРµРµ РµРіРѕ Р¶РµРЅРёС‚СЊ"
+			//							 "РЈ РјРµРЅСЏ РЅРµС‚ Р±РѕР»СЊС€Рµ РЅР°РґРµР¶РґС‹."
 			||
 				(		(SubordNodesCount	== 0)
 					&&	!R.m_Clauses[R.m_Nodes[NodeNo].m_ClauseNo].m_bHasCHEM
 					&&	(IncomRelsCount	 ==	1)
-					&&	(			( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== "чистое_обстоятельство")
-							||		( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== "НАР_ЧИСЛ_СУЩ")
+					&&	(			( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== "С‡РёСЃС‚РѕРµ_РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРѕ")
+							||		( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== "РќРђР _Р§РРЎР›_РЎРЈР©")
 						)
 				)
 			)
@@ -59,8 +59,8 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 				Result +=20;
 		};
 
-	// во	фразе типа "я буду больше, чем ты",	нужно проверить,
-	// что узел,который втыкается	в "больше" имеет граммему имен.	падежа
+	// РІРѕ	С„СЂР°Р·Рµ С‚РёРїР° "СЏ Р±СѓРґСѓ Р±РѕР»СЊС€Рµ, С‡РµРј С‚С‹",	РЅСѓР¶РЅРѕ РїСЂРѕРІРµСЂРёС‚СЊ,
+	// С‡С‚Рѕ СѓР·РµР»,РєРѕС‚РѕСЂС‹Р№ РІС‚С‹РєР°РµС‚СЃСЏ	РІ "Р±РѕР»СЊС€Рµ" РёРјРµРµС‚ РіСЂР°РјРјРµРјСѓ РёРјРµРЅ.	РїР°РґРµР¶Р°
 	if (IncomRelsCount ==	1)
 		if (R.m_Clauses[R.m_Nodes[NodeNo].m_ClauseNo].m_ClauseType ==	COMPARATIVE_T)
 		{
@@ -69,58 +69,58 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 				Result +=	20;
 		};
 
-	// последний член CHEMOborot доожен	стоять после  сравнительной	степени
-	// таким образолм, "ты меди	дороже"	- ошибка
+	// РїРѕСЃР»РµРґРЅРёР№ С‡Р»РµРЅ CHEMOborot РґРѕРѕР¶РµРЅ	СЃС‚РѕСЏС‚СЊ РїРѕСЃР»Рµ  СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕР№	СЃС‚РµРїРµРЅРё
+	// С‚Р°РєРёРј РѕР±СЂР°Р·РѕР»Рј, "С‚С‹ РјРµРґРё	РґРѕСЂРѕР¶Рµ"	- РѕС€РёР±РєР°
 	if	(SubordNodesCount	> 0)
 		if	(SubordNodes[SubordNodesCount -	1] < NodeNo)
 			Result	+= 20;
 
 	/*
-	только ограниченный класс	сравнительных наречий может	
-	быть связна с	модельными словами,	например
-	Например,	"я	хотел побыстрее	его	женить", здесь 
-	"побыстрее" нельзя связать с модальным глалом	"хотеть"
+	С‚РѕР»СЊРєРѕ РѕРіСЂР°РЅРёС‡РµРЅРЅС‹Р№ РєР»Р°СЃСЃ	СЃСЂР°РІРЅРёС‚РµР»СЊРЅС‹С… РЅР°СЂРµС‡РёР№ РјРѕР¶РµС‚	
+	Р±С‹С‚СЊ СЃРІСЏР·РЅР° СЃ	РјРѕРґРµР»СЊРЅС‹РјРё СЃР»РѕРІР°РјРё,	РЅР°РїСЂРёРјРµСЂ
+	РќР°РїСЂРёРјРµСЂ,	"СЏ	С…РѕС‚РµР» РїРѕР±С‹СЃС‚СЂРµРµ	РµРіРѕ	Р¶РµРЅРёС‚СЊ", Р·РґРµСЃСЊ 
+	"РїРѕР±С‹СЃС‚СЂРµРµ" РЅРµР»СЊР·СЏ СЃРІСЏР·Р°С‚СЊ СЃ РјРѕРґР°Р»СЊРЅС‹Рј РіР»Р°Р»РѕРј	"С…РѕС‚РµС‚СЊ"
 	*/
 	if (IncomRelsCount == 1)
 		if	(		R.HasSemFetPro(R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].m_NodeSemFets, "MODL")
-				||	R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].IsLemma("БЫТЬ")
+				||	R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].IsLemma("Р‘Р«РўР¬")
 			)
-			if ( !R.m_Nodes[NodeNo].IsLemmaList ("МНОГО",	"МАЛО",	"ОСТРЫЙ", "СКОРЫЙ",	"СИЛЬНЫЙ", "РАННИЙ", "ОХОТНЫЙ",	 "") )
+			if ( !R.m_Nodes[NodeNo].IsLemmaList ("РњРќРћР“Рћ",	"РњРђР›Рћ",	"РћРЎРўР Р«Р™", "РЎРљРћР Р«Р™",	"РЎРР›Р¬РќР«Р™", "Р РђРќРќРР™", "РћРҐРћРўРќР«Р™",	 "") )
 				Result += 20;
 	/*
-	Примеры на	модальные  глаголы со сравнительными степенями:
-	Я больше/меньше/сильнее	хочу этого,	чем	ты
-	Я острее нуждаюсь в	этом, чем ты
-	Ты скорее мечтаешь обо мне,	чем	о нем
-	Он разрешил	тебе это раньше	меня.
-	Я охотнее разрешу ему уехать, чем уйти.
-	он был больше учителем,	чем	сторожем.
+	РџСЂРёРјРµСЂС‹ РЅР°	РјРѕРґР°Р»СЊРЅС‹Рµ  РіР»Р°РіРѕР»С‹ СЃРѕ СЃСЂР°РІРЅРёС‚РµР»СЊРЅС‹РјРё СЃС‚РµРїРµРЅСЏРјРё:
+	РЇ Р±РѕР»СЊС€Рµ/РјРµРЅСЊС€Рµ/СЃРёР»СЊРЅРµРµ	С…РѕС‡Сѓ СЌС‚РѕРіРѕ,	С‡РµРј	С‚С‹
+	РЇ РѕСЃС‚СЂРµРµ РЅСѓР¶РґР°СЋСЃСЊ РІ	СЌС‚РѕРј, С‡РµРј С‚С‹
+	РўС‹ СЃРєРѕСЂРµРµ РјРµС‡С‚Р°РµС€СЊ РѕР±Рѕ РјРЅРµ,	С‡РµРј	Рѕ РЅРµРј
+	РћРЅ СЂР°Р·СЂРµС€РёР»	С‚РµР±Рµ СЌС‚Рѕ СЂР°РЅСЊС€Рµ	РјРµРЅСЏ.
+	РЇ РѕС…РѕС‚РЅРµРµ СЂР°Р·СЂРµС€Сѓ РµРјСѓ СѓРµС…Р°С‚СЊ, С‡РµРј СѓР№С‚Рё.
+	РѕРЅ Р±С‹Р» Р±РѕР»СЊС€Рµ СѓС‡РёС‚РµР»РµРј,	С‡РµРј	СЃС‚РѕСЂРѕР¶РµРј.
 
 	*/
 	if	(IncomRelsCount	== 1)
-		if ( R.m_Relations[IncomRels[0]].m_SyntacticRelation ==	"чистое_обстоятельство")
+		if ( R.m_Relations[IncomRels[0]].m_SyntacticRelation ==	"С‡РёСЃС‚РѕРµ_РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРѕ")
 			if (SubordNodesCount > 0) 
 				Result +=	20;
 
 
-	// если	один членов	сравнительного оборота - тайм-группа, то другой	также 
-	// должен быть тайм-группой
+	// РµСЃР»Рё	РѕРґРёРЅ С‡Р»РµРЅРѕРІ	СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕРіРѕ РѕР±РѕСЂРѕС‚Р° - С‚Р°Р№Рј-РіСЂСѓРїРїР°, С‚Рѕ РґСЂСѓРіРѕР№	С‚Р°РєР¶Рµ 
+	// РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ С‚Р°Р№Рј-РіСЂСѓРїРїРѕР№
 	if	(SubordNodesCount	== 2) 
 		if	( R.IsTimeAdverbial(SubordNodes[0])	!= R.IsTimeAdverbial(SubordNodes[1]))
 			Result	+=20;
 
 	/*
-	Алексей, нужно,	чтобы в	Сравнительных конструкциях "его" не	могло бы
-	заполнять субъектную валентность. Например:	Побыстрее его повесить.	-
-	Здесь "его"	не субъект.
-	Олег.
+	РђР»РµРєСЃРµР№, РЅСѓР¶РЅРѕ,	С‡С‚РѕР±С‹ РІ	РЎСЂР°РІРЅРёС‚РµР»СЊРЅС‹С… РєРѕРЅСЃС‚СЂСѓРєС†РёСЏС… "РµРіРѕ" РЅРµ	РјРѕРіР»Рѕ Р±С‹
+	Р·Р°РїРѕР»РЅСЏС‚СЊ СЃСѓР±СЉРµРєС‚РЅСѓСЋ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ. РќР°РїСЂРёРјРµСЂ:	РџРѕР±С‹СЃС‚СЂРµРµ РµРіРѕ РїРѕРІРµСЃРёС‚СЊ.	-
+	Р—РґРµСЃСЊ "РµРіРѕ"	РЅРµ СЃСѓР±СЉРµРєС‚.
+	РћР»РµРі.
 	*/
 	if	(SubordNodesCount	== 2) 
 		if	(  (   R.m_Nodes[SubordNodes[0]].IsPrimitive() 
-				&& (R.m_Nodes[SubordNodes[0]].m_Words[0].m_Word	== "ЕГО")
+				&& (R.m_Nodes[SubordNodes[0]].m_Words[0].m_Word	== "Р•Р“Рћ")
 				)
 			||	(		R.m_Nodes[SubordNodes[1]].IsPrimitive() 
-					&&	(R.m_Nodes[SubordNodes[1]].m_Words[0].m_Word	== "ЕГО")
+					&&	(R.m_Nodes[SubordNodes[1]].m_Words[0].m_Word	== "Р•Р“Рћ")
 				)
 			)
 			if (	(IncomRelsCount == 1) 
@@ -132,9 +132,9 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 
 };
 
-// используется при нахождении лучшего дерева клаузы.
-// проверяет, что число членов MUA больше или равно двум,
-// так же проверяет, что между двумя членами MUA  стоит запятая или союз.
+// РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё Р»СѓС‡С€РµРіРѕ РґРµСЂРµРІР° РєР»Р°СѓР·С‹.
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ С‡РёСЃР»Рѕ С‡Р»РµРЅРѕРІ MUA Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅРѕ РґРІСѓРј,
+// С‚Р°Рє Р¶Рµ РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РјРµР¶РґСѓ РґРІСѓРјСЏ С‡Р»РµРЅР°РјРё MUA  СЃС‚РѕРёС‚ Р·Р°РїСЏС‚Р°СЏ РёР»Рё СЃРѕСЋР·.
 
 long CRusSemStructure::GetMNAViolationsCount(long Tag)
 {
@@ -165,8 +165,8 @@ long CRusSemStructure::GetMNAViolationsCount(long Tag)
 				};
 			};
 			/*
-				в однородном ряде не могут	быть одновременно сравнительные	прил.  и что-то
-				от	них	отличное
+				РІ РѕРґРЅРѕСЂРѕРґРЅРѕРј СЂСЏРґРµ РЅРµ РјРѕРіСѓС‚	Р±С‹С‚СЊ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ СЃСЂР°РІРЅРёС‚РµР»СЊРЅС‹Рµ	РїСЂРёР».  Рё С‡С‚Рѕ-С‚Рѕ
+				РѕС‚	РЅРёС…	РѕС‚Р»РёС‡РЅРѕРµ
 			*/
 			if (HasCompAdj)
 				if (HasNotCompAdj)
@@ -190,9 +190,9 @@ long CRusSemStructure::GetMNAViolationsCount(long Tag)
 
 			const CRusSemClause& C = m_Clauses[m_Nodes[NodeNo].m_ClauseNo];
 
-			// если	это	простой	однородный ряд,	то проверими наличие запятых между 
-			// составляющими однородного ряда, кроме последнего
-			// (последний разделитель должен быть союз)
+			// РµСЃР»Рё	СЌС‚Рѕ	РїСЂРѕСЃС‚РѕР№	РѕРґРЅРѕСЂРѕРґРЅС‹Р№ СЂСЏРґ,	С‚Рѕ РїСЂРѕРІРµСЂРёРјРё РЅР°Р»РёС‡РёРµ Р·Р°РїСЏС‚С‹С… РјРµР¶РґСѓ 
+			// СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёРјРё РѕРґРЅРѕСЂРѕРґРЅРѕРіРѕ СЂСЏРґР°, РєСЂРѕРјРµ РїРѕСЃР»РµРґРЅРµРіРѕ
+			// (РїРѕСЃР»РµРґРЅРёР№ СЂР°Р·РґРµР»РёС‚РµР»СЊ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СЃРѕСЋР·)
 			for	(long k=0; k <SubordNodesCount-2;	k++)
 				if  (!(C.GetGramMatrix(SubordNodes[k],SubordNodes[k+1]) & HaveCommaBetween))	
 					Result++;
@@ -202,8 +202,8 @@ long CRusSemStructure::GetMNAViolationsCount(long Tag)
 	return Result;
 };
 
-// используется при нахождении лучшего дерева клаузы.
-// выдает число операторов однородностей (MUA), у которых все члены имеют хотя бы одну// общую  SF
+// РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё Р»СѓС‡С€РµРіРѕ РґРµСЂРµРІР° РєР»Р°СѓР·С‹.
+// РІС‹РґР°РµС‚ С‡РёСЃР»Рѕ РѕРїРµСЂР°С‚РѕСЂРѕРІ РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚РµР№ (MUA), Сѓ РєРѕС‚РѕСЂС‹С… РІСЃРµ С‡Р»РµРЅС‹ РёРјРµСЋС‚ С…РѕС‚СЏ Р±С‹ РѕРґРЅСѓ// РѕР±С‰СѓСЋ  SF
 long CRusSemStructure::GetSemFetAgreeMNACount(long Tag)
 {
   long Result = 0;
@@ -234,22 +234,22 @@ long CRusSemStructure::GetSemFetAgreeMNACount(long Tag)
 };
 
 
-// создает узел с MUA по синтаксической структуре// Петр и Василий
+// СЃРѕР·РґР°РµС‚ СѓР·РµР» СЃ MUA РїРѕ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ// РџРµС‚СЂ Рё Р’Р°СЃРёР»РёР№
 void CRusSemStructure::InterpretSimilarNounGroups (long ClauseNo)
 {
 	for (size_t i = 0;  i<m_SynRelations.size(); i++)
-		if (  (     ( m_SynRelations[i].m_SynRelName == "ОДНОР_ИГ" ) 
-				||	( m_SynRelations[i].m_SynRelName == "ОДНОР_ИНФ" ) 
-				||	( m_SynRelations[i].m_SynRelName == "ОДНОР_ЧИСЛ" ) 
-				||  ( m_SynRelations[i].m_SynRelName == "РАЗРЫВ_СОЮЗ" ) 
-				||	( m_SynRelations[i].m_SynRelName == "ОДНОР" ) 
+		if (  (     ( m_SynRelations[i].m_SynRelName == "РћР”РќРћР _РР“" ) 
+				||	( m_SynRelations[i].m_SynRelName == "РћР”РќРћР _РРќР¤" ) 
+				||	( m_SynRelations[i].m_SynRelName == "РћР”РќРћР _Р§РРЎР›" ) 
+				||  ( m_SynRelations[i].m_SynRelName == "Р РђР—Р Р«Р’_РЎРћР®Р—" ) 
+				||	( m_SynRelations[i].m_SynRelName == "РћР”РќРћР " ) 
 			)
 			&& IsInClause(m_SynRelations[i].m_SourceNodeNo,  ClauseNo)
 			)
 		{
 			long MNANodeNo = m_SynRelations[i].m_SourceNodeNo;
-			// не устанавливаем тип SimpleMNA для разрыв. союзов, которые были уже 
-			// обработаны в CRusSemStructure::InterpretRepeatConj
+			// РЅРµ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РёРї SimpleMNA РґР»СЏ СЂР°Р·СЂС‹РІ. СЃРѕСЋР·РѕРІ, РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»Рё СѓР¶Рµ 
+			// РѕР±СЂР°Р±РѕС‚Р°РЅС‹ РІ CRusSemStructure::InterpretRepeatConj
 			if (m_Nodes[MNANodeNo].m_NodeType != MNA)
 			{
 				m_Nodes[MNANodeNo].m_NodeType = MNA;
@@ -260,15 +260,15 @@ void CRusSemStructure::InterpretSimilarNounGroups (long ClauseNo)
 			{
 				long Target = m_SynRelations[i].m_TargetNodeNo;
 				AddRelation(CRusSemRelation (CValency(), MNANodeNo, Target, string("") ));
-				m_Relations.back().m_CannotHaveOnlyCommaBetween = ( m_SynRelations[i].m_SynRelName != "РАЗРЫВ_СОЮЗ");
+				m_Relations.back().m_CannotHaveOnlyCommaBetween = ( m_SynRelations[i].m_SynRelName != "Р РђР—Р Р«Р’_РЎРћР®Р—");
 				
 			}
 
 		};
 };
 
-// создает узел с MUA по сочинительному союзу и предложной группе
-// или по сочинительному союзу  и беспредложной группе,  если этого не сделал синтаксис
+// СЃРѕР·РґР°РµС‚ СѓР·РµР» СЃ MUA РїРѕ СЃРѕС‡РёРЅРёС‚РµР»СЊРЅРѕРјСѓ СЃРѕСЋР·Сѓ Рё РїСЂРµРґР»РѕР¶РЅРѕР№ РіСЂСѓРїРїРµ
+// РёР»Рё РїРѕ СЃРѕС‡РёРЅРёС‚РµР»СЊРЅРѕРјСѓ СЃРѕСЋР·Сѓ  Рё Р±РµСЃРїСЂРµРґР»РѕР¶РЅРѕР№ РіСЂСѓРїРїРµ,  РµСЃР»Рё СЌС‚РѕРіРѕ РЅРµ СЃРґРµР»Р°Р» СЃРёРЅС‚Р°РєСЃРёСЃ
 
 void CRusSemStructure::ConvertFreeCoordConjToMNA (long ClauseNo)
 {
@@ -305,7 +305,7 @@ void CRusSemStructure::ConvertFreeCoordConjToMNA (long ClauseNo)
 long RepeatConjCount = 2;
 const string RepeatConj[2]  =
 {
-	"ТО", "ЛИБО"
+	"РўРћ", "Р›РР‘Рћ"
 };
 
 long CRusSemStructure::GetRepeatConj (long NodeNo)
@@ -327,7 +327,7 @@ void CRusSemStructure::GetMNARelations(long NodeNo, vector<long>& Rels, bool Use
 {
  	GetOutcomingRelations(NodeNo, Rels, UseUse);
 
-	//  удаляем все отношения, которые имеют названия
+	//  СѓРґР°Р»СЏРµРј РІСЃРµ РѕС‚РЅРѕС€РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РЅР°Р·РІР°РЅРёСЏ
 	for (size_t i=0; i < Rels.size(); i++)
 		if (!m_Relations[Rels[i]].m_Valency.m_RelationStr.empty())
 			{
@@ -363,7 +363,7 @@ long CRusSemStructure::GetFirstMNAMemberIfHas(long NodeNo) const
 };
 
 
-// предлог "c"
+// РїСЂРµРґР»РѕРі "c"
 bool CRusSemStructure::DealWithNodePrepS(long NodeNo)
 {
 	long  nd = NodeNo;
@@ -371,7 +371,7 @@ bool CRusSemStructure::DealWithNodePrepS(long NodeNo)
 		nd = GetFirstMNAMemberIfHas(NodeNo);
 
 	long PrepNo;
-	if (!CheckGroupBeginAndCase("с+Т",nd, PrepNo)) return false;
+	if (!CheckGroupBeginAndCase("СЃ+Рў",nd, PrepNo)) return false;
 	long SourceNodeNo = FindLeftClosestNode(nd);
 	if (SourceNodeNo == -1) return false;
 	if (!IsInClause (SourceNodeNo, m_Nodes[nd].m_ClauseNo)) return false;
@@ -385,8 +385,8 @@ bool CRusSemStructure::DealWithNodePrepS(long NodeNo)
 }
 
 
-// функция, которая дает ограничения на валентность для однородного ряда
-// именных групп.
+// С„СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ РґР°РµС‚ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РЅР° РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ РґР»СЏ РѕРґРЅРѕСЂРѕРґРЅРѕРіРѕ СЂСЏРґР°
+// РёРјРµРЅРЅС‹С… РіСЂСѓРїРї.
 void CRusSemStructure::GetMNAPattern(size_t NodeNo, long& Poses, QWORD& Grammems) const
 {
 	Grammems = 0;
@@ -400,7 +400,7 @@ void CRusSemStructure::GetMNAPattern(size_t NodeNo, long& Poses, QWORD& Grammems
 
     if ( HasRichPOS  (LastNodeNo, ADV) || m_Nodes[LastNodeNo].HasSomePrep() )
 	{
-		// нужно, чтобы собрать "раз в году, по вечерам"
+		// РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ СЃРѕР±СЂР°С‚СЊ "СЂР°Р· РІ РіРѕРґСѓ, РїРѕ РІРµС‡РµСЂР°Рј"
 		Grammems = 0;
 		Poses = (1<<ADV);
 	}
@@ -416,7 +416,7 @@ void CRusSemStructure::GetMNAPattern(size_t NodeNo, long& Poses, QWORD& Grammems
 		else
 		  Poses = (1<<NOUN);
 
-	// нужно, чтобы собрать "раз в году, 9 мая"
+	// РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ СЃРѕР±СЂР°С‚СЊ "СЂР°Р· РІ РіРѕРґСѓ, 9 РјР°СЏ"
 	if ( m_Nodes[LastNodeNo].IsTimeRossNode() )
 		Poses |= (1<<ADV);
 };
@@ -425,19 +425,19 @@ void CRusSemStructure::GetMNAPattern(size_t NodeNo, long& Poses, QWORD& Grammems
 void CRusSemStructure::BuildMNA_KAK(long ClauseNo)
 {
 	try {
-		//  Все "как" без запятой перед ним объявляем узлами MUA 
-		// Например, "Протокол обрабатывает датаграмму как независимую единицу"
-		// например, "Она, как последняя дура, заплакала."	
+		//  Р’СЃРµ "РєР°Рє" Р±РµР· Р·Р°РїСЏС‚РѕР№ РїРµСЂРµРґ РЅРёРј РѕР±СЉСЏРІР»СЏРµРј СѓР·Р»Р°РјРё MUA 
+		// РќР°РїСЂРёРјРµСЂ, "РџСЂРѕС‚РѕРєРѕР» РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ РґР°С‚Р°РіСЂР°РјРјСѓ РєР°Рє РЅРµР·Р°РІРёСЃРёРјСѓСЋ РµРґРёРЅРёС†Сѓ"
+		// РЅР°РїСЂРёРјРµСЂ, "РћРЅР°, РєР°Рє РїРѕСЃР»РµРґРЅСЏСЏ РґСѓСЂР°, Р·Р°РїР»Р°РєР°Р»Р°."	
 		for (long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo < m_Clauses[ClauseNo].m_EndNodeNo; NodeNo++)
 			if (    
 				m_Nodes[NodeNo].IsPrimitive()
-				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == "КАК") 
+				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == "РљРђРљ") 
 				&& (m_Nodes[NodeNo].GetType() == OborRoss) 
 				&& (m_Nodes[NodeNo].m_MNAType != RepeatMNA)
 				)
 			{
 
-				// проходим все прилагательные и другие жестко синтаксические зависимые
+				// РїСЂРѕС…РѕРґРёРј РІСЃРµ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рµ Рё РґСЂСѓРіРёРµ Р¶РµСЃС‚РєРѕ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ Р·Р°РІРёСЃРёРјС‹Рµ
 				long l=NodeNo+1;
 				for (; l < m_Clauses[ClauseNo].m_EndNodeNo; l++)
 						if ( !HasIncomingNotWeakSynRelation (l))
@@ -451,9 +451,9 @@ void CRusSemStructure::BuildMNA_KAK(long ClauseNo)
 				if (HasCommaBefore (NodeNo))
 				{
 					/* 
-					здесь  нужно перевести интерпретацию на как3, чтобы "как" переводился в "like"
+					Р·РґРµСЃСЊ  РЅСѓР¶РЅРѕ РїРµСЂРµРІРµСЃС‚Рё РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ РЅР° РєР°Рє3, С‡С‚РѕР±С‹ "РєР°Рє" РїРµСЂРµРІРѕРґРёР»СЃСЏ РІ "like"
 					*/
-					m_Nodes[NodeNo].GetInterp()->m_UnitNo = GetRossHolder(OborRoss)->LocateUnit("как",3);
+					m_Nodes[NodeNo].GetInterp()->m_UnitNo = GetRossHolder(OborRoss)->LocateUnit("РєР°Рє",3);
 					assert (m_Nodes[NodeNo].GetInterp()->m_UnitNo != ErrUnitNo);
 				};
 
@@ -484,13 +484,13 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 		long  PatternPoses;
 		QWORD Grammems;
 		GetMNAPattern(NodeNo, PatternPoses, Grammems);
-		bool bAdjMNA = HasOutcomingSynRelation(NodeNo,"ОДНОР_ПРИЛ");
+		bool bAdjMNA = HasOutcomingSynRelation(NodeNo,"РћР”РќРћР _РџР РР›");
 		
-        // мы начинаем поиск левых потомков от оператора однородности 
-		// (единственный правый потомок уже был присоединен в процедуре, которая ищет оператор однородности )
+        // РјС‹ РЅР°С‡РёРЅР°РµРј РїРѕРёСЃРє Р»РµРІС‹С… РїРѕС‚РѕРјРєРѕРІ РѕС‚ РѕРїРµСЂР°С‚РѕСЂР° РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё 
+		// (РµРґРёРЅСЃС‚РІРµРЅРЅС‹Р№ РїСЂР°РІС‹Р№ РїРѕС‚РѕРјРѕРє СѓР¶Рµ Р±С‹Р» РїСЂРёСЃРѕРµРґРёРЅРµРЅ РІ РїСЂРѕС†РµРґСѓСЂРµ, РєРѕС‚РѕСЂР°СЏ РёС‰РµС‚ РѕРїРµСЂР°С‚РѕСЂ РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё )
 	    for (long LeftChildNo=NodeNo; LeftChildNo >= m_Clauses[ClauseNo].m_BeginNodeNo; LeftChildNo--)
 		{
-			// ищем запятую, союз  или какой другой  оператор однородности
+			// РёС‰РµРј Р·Р°РїСЏС‚СѓСЋ, СЃРѕСЋР·  РёР»Рё РєР°РєРѕР№ РґСЂСѓРіРѕР№  РѕРїРµСЂР°С‚РѕСЂ РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё
 			for (; LeftChildNo >= m_Clauses[ClauseNo].m_BeginNodeNo; LeftChildNo--)
 				if (IsFiniteVerb(LeftChildNo))
 					  goto NoMoreLeftChilds;
@@ -500,10 +500,10 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 						|| (m_Nodes[LeftChildNo].m_NodeType == MNA)
 						)
 					break;
-			if (LeftChildNo <  m_Clauses[ClauseNo].m_BeginNodeNo) break; // не нашли
+			if (LeftChildNo <  m_Clauses[ClauseNo].m_BeginNodeNo) break; // РЅРµ РЅР°С€Р»Рё
 
-			// ищем слово, которое согласовано со словом, которое стоит сразу же  за оператором однородности, по падежу
-			// или вообще не имеет граммем (ИЛЕ)
+			// РёС‰РµРј СЃР»РѕРІРѕ, РєРѕС‚РѕСЂРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРѕ СЃРѕ СЃР»РѕРІРѕРј, РєРѕС‚РѕСЂРѕРµ СЃС‚РѕРёС‚ СЃСЂР°Р·Сѓ Р¶Рµ  Р·Р° РѕРїРµСЂР°С‚РѕСЂРѕРј РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё, РїРѕ РїР°РґРµР¶Сѓ
+			// РёР»Рё РІРѕРѕР±С‰Рµ РЅРµ РёРјРµРµС‚ РіСЂР°РјРјРµРј (РР›Р•)
 			for (; LeftChildNo >= m_Clauses[ClauseNo].m_BeginNodeNo; LeftChildNo--)
 				if (IsFiniteVerb(LeftChildNo))
 					goto NoMoreLeftChilds;
@@ -514,8 +514,8 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 					   )
 					&& (    ((m_Nodes[LeftChildNo].m_Words[m_Nodes[LeftChildNo].m_MainWordNo].m_Poses & PatternPoses) > 0)
 					    ||  (     ( ( PatternPoses & (1<<ADV) ) > 0)
-							  &&  (    m_Nodes[LeftChildNo].HasSomePrep() //  в лесу
-								    || m_Nodes[LeftChildNo].IsMainTimeRossNode() // 9 мая	
+							  &&  (    m_Nodes[LeftChildNo].HasSomePrep() //  РІ Р»РµСЃСѓ
+								    || m_Nodes[LeftChildNo].IsMainTimeRossNode() // 9 РјР°СЏ	
 								  )
 							  &&  !HasIncomingNotWeakSynRelation(LeftChildNo)
 						    )
@@ -524,7 +524,7 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 						|| (Grammems == 0)
 						|| (( PatternPoses & (1<<ADV) ) > 0)
 						|| ( m_Nodes[LeftChildNo].GetGrammems() & Grammems & _QM(rComparative)) 
-						|| ( HasSynRelation (LeftChildNo, "АНАТ_СРАВН") && (Grammems & _QM(rComparative)))
+						|| ( HasSynRelation (LeftChildNo, "РђРќРђРў_РЎР РђР’Рќ") && (Grammems & _QM(rComparative)))
 						)
 					&& (!bAdjMNA || ( m_Nodes[LeftChildNo].HasPOS(ADJ_FULL) || m_Nodes[LeftChildNo].HasPOS(ADJ_SHORT)) )	
 				   )
@@ -559,7 +559,7 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 
 vector<QWORD> CRusSemStructure::GetSemFetsOfFirstValency(long NodeNo)
 {
-	//получаем SF1 из РОСС  	 
+	//РїРѕР»СѓС‡Р°РµРј SF1 РёР· Р РћРЎРЎ  	 
 	
 	vector<QWORD> SemFets;
 	if (   (m_Nodes[NodeNo].m_Vals.size() > 0)
@@ -590,10 +590,10 @@ void CRusSemStructure::BuildMNAIncoming(long ClauseNo)
 			 {
 				long Count = 0;
 				/*
-				   считаем кол-во отношений с одинаковым названием (это варианты заполнения одной валентности)
-				   идущих из узла i (потенциальный хозяин однородного ряда) в
-				   в члены однородного ряда.
-				   Норамально, когда все члены однородного ряда подчиняются узлу i.
+				   СЃС‡РёС‚Р°РµРј РєРѕР»-РІРѕ РѕС‚РЅРѕС€РµРЅРёР№ СЃ РѕРґРёРЅР°РєРѕРІС‹Рј РЅР°Р·РІР°РЅРёРµРј (СЌС‚Рѕ РІР°СЂРёР°РЅС‚С‹ Р·Р°РїРѕР»РЅРµРЅРёСЏ РѕРґРЅРѕР№ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё)
+				   РёРґСѓС‰РёС… РёР· СѓР·Р»Р° i (РїРѕС‚РµРЅС†РёР°Р»СЊРЅС‹Р№ С…РѕР·СЏРёРЅ РѕРґРЅРѕСЂРѕРґРЅРѕРіРѕ СЂСЏРґР°) РІ
+				   РІ С‡Р»РµРЅС‹ РѕРґРЅРѕСЂРѕРґРЅРѕРіРѕ СЂСЏРґР°.
+				   РќРѕСЂР°РјР°Р»СЊРЅРѕ, РєРѕРіРґР° РІСЃРµ С‡Р»РµРЅС‹ РѕРґРЅРѕСЂРѕРґРЅРѕРіРѕ СЂСЏРґР° РїРѕРґС‡РёРЅСЏСЋС‚СЃСЏ СѓР·Р»Сѓ i.
 				   		
 				*/
 			    for (size_t l=j; l < m_Nodes[i].m_OutRels.size();l++)
@@ -608,15 +608,15 @@ void CRusSemStructure::BuildMNAIncoming(long ClauseNo)
 						Count++;
 				  };
 
-				// Для простых операторов однородности нужно, чтобы хотя бы один узел входил  
-				// в член однородного ряда,чтобы подчинить весь однородный ряд. Это сделано из-за случая:
-				// 'я жил в Америке и России'. Здесь пропущен прдлог 'в' после союза, поэтому
-				// 'России'не подсоединится к 'жить'.
-				// Для сравнительного оборота такой эллипсис не возможен, например:
-				// Я жил в Америке дольше, чем в России.
-				// но возможны обороты:
-				// Я не знаю человека, больше чем Вася (здесь "Вася" не стоит в рд.  или  вн.) 
-				// Я не отдаю тебе охотнее его (здесь "его" стоит в рд.) 
+				// Р”Р»СЏ РїСЂРѕСЃС‚С‹С… РѕРїРµСЂР°С‚РѕСЂРѕРІ РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ СѓР·РµР» РІС…РѕРґРёР»  
+				// РІ С‡Р»РµРЅ РѕРґРЅРѕСЂРѕРґРЅРѕРіРѕ СЂСЏРґР°,С‡С‚РѕР±С‹ РїРѕРґС‡РёРЅРёС‚СЊ РІРµСЃСЊ РѕРґРЅРѕСЂРѕРґРЅС‹Р№ СЂСЏРґ. Р­С‚Рѕ СЃРґРµР»Р°РЅРѕ РёР·-Р·Р° СЃР»СѓС‡Р°СЏ:
+				// 'СЏ Р¶РёР» РІ РђРјРµСЂРёРєРµ Рё Р РѕСЃСЃРёРё'. Р—РґРµСЃСЊ РїСЂРѕРїСѓС‰РµРЅ РїСЂРґР»РѕРі 'РІ' РїРѕСЃР»Рµ СЃРѕСЋР·Р°, РїРѕСЌС‚РѕРјСѓ
+				// 'Р РѕСЃСЃРёРё'РЅРµ РїРѕРґСЃРѕРµРґРёРЅРёС‚СЃСЏ Рє 'Р¶РёС‚СЊ'.
+				// Р”Р»СЏ СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕРіРѕ РѕР±РѕСЂРѕС‚Р° С‚Р°РєРѕР№ СЌР»Р»РёРїСЃРёСЃ РЅРµ РІРѕР·РјРѕР¶РµРЅ, РЅР°РїСЂРёРјРµСЂ:
+				// РЇ Р¶РёР» РІ РђРјРµСЂРёРєРµ РґРѕР»СЊС€Рµ, С‡РµРј РІ Р РѕСЃСЃРёРё.
+				// РЅРѕ РІРѕР·РјРѕР¶РЅС‹ РѕР±РѕСЂРѕС‚С‹:
+				// РЇ РЅРµ Р·РЅР°СЋ С‡РµР»РѕРІРµРєР°, Р±РѕР»СЊС€Рµ С‡РµРј Р’Р°СЃСЏ (Р·РґРµСЃСЊ "Р’Р°СЃСЏ" РЅРµ СЃС‚РѕРёС‚ РІ СЂРґ.  РёР»Рё  РІРЅ.) 
+				// РЇ РЅРµ РѕС‚РґР°СЋ С‚РµР±Рµ РѕС…РѕС‚РЅРµРµ РµРіРѕ (Р·РґРµСЃСЊ "РµРіРѕ" СЃС‚РѕРёС‚ РІ СЂРґ.) 
 				if (    (   (Count > 0)
 					//	&& (m_Nodes[NodeNo].m_MNAType != CHEMOborot)
 					   )
@@ -625,9 +625,9 @@ void CRusSemStructure::BuildMNAIncoming(long ClauseNo)
 					   )*/
 				   )
 				{
-				  // если валентность слова А - непредложная, а оператору однородности приписан предлог
-				  // (такой предлог может придти из синтаксиса), тогда считаем, что слово А
-				  // не может управлят этим однородным рядом
+				  // РµСЃР»Рё РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ СЃР»РѕРІР° Рђ - РЅРµРїСЂРµРґР»РѕР¶РЅР°СЏ, Р° РѕРїРµСЂР°С‚РѕСЂСѓ РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё РїСЂРёРїРёСЃР°РЅ РїСЂРµРґР»РѕРі
+				  // (С‚Р°РєРѕР№ РїСЂРµРґР»РѕРі РјРѕР¶РµС‚ РїСЂРёРґС‚Рё РёР· СЃРёРЅС‚Р°РєСЃРёСЃР°), С‚РѕРіРґР° СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ СЃР»РѕРІРѕ Рђ
+				  // РЅРµ РјРѕР¶РµС‚ СѓРїСЂР°РІР»СЏС‚ СЌС‚РёРј РѕРґРЅРѕСЂРѕРґРЅС‹Рј СЂСЏРґРѕРј
 				   if (m_Relations[m_Nodes[i].m_OutRels[j]].m_Valency.IsFromDict())
 				   {
 					  const CRossHolder* RossHolder =  m_Relations[m_Nodes[i].m_OutRels[j]].m_Valency.m_RossHolder;
@@ -671,7 +671,7 @@ void CRusSemStructure::DeleteMNAWithOneChild(long ClauseNo)
 		vector<long> Rels;
 		GetOutcomingRelations(NodeNo, Rels, false);
 		if (Rels.size() == 1)
-			// я буду умнее
+			// СЏ Р±СѓРґСѓ СѓРјРЅРµРµ
 		  if (	  (m_Clauses[ClauseNo].m_ClauseType != COMPARATIVE_T) 
 			   || (m_Nodes[NodeNo].m_MNAType != CHEMOborot) 
 			 )

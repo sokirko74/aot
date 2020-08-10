@@ -1,34 +1,34 @@
 %% == format_for_disrupt_conj ==
 
-%% ой да ваще все не разбирается, переделываю
+%% РѕР№ РґР° РІР°С‰Рµ РІСЃРµ РЅРµ СЂР°Р·Р±РёСЂР°РµС‚СЃСЏ, РїРµСЂРµРґРµР»С‹РІР°СЋ
 
-%% согласование по части речи
-%% не..., а\но; не только..., но (и); как..., так и; хотя..., зато; пусть..., но; хотя (и)..., но\а\да; не то что\чтобы..., но\а; если (не)..., то\так
+%% СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РїРѕ С‡Р°СЃС‚Рё СЂРµС‡Рё
+%% РЅРµ..., Р°\РЅРѕ; РЅРµ С‚РѕР»СЊРєРѕ..., РЅРѕ (Рё); РєР°Рє..., С‚Р°Рє Рё; С…РѕС‚СЏ..., Р·Р°С‚Рѕ; РїСѓСЃС‚СЊ..., РЅРѕ; С…РѕС‚СЏ (Рё)..., РЅРѕ\Р°\РґР°; РЅРµ С‚Рѕ С‡С‚Рѕ\С‡С‚РѕР±С‹..., РЅРѕ\Р°; РµСЃР»Рё (РЅРµ)..., С‚Рѕ\С‚Р°Рє
 
-%% первые части
-[1-NE-NP] -> 'не' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-NE-TOLKO-NP] -> 'не' 'только' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-KAK-NP] -> 'как' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-HOTJA-NP] -> 'хотя' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-PUST-NP] -> 'пусть' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-HOTJA-I-NP] -> 'хотя' 'и' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-NE-TO-CHTO-NP] -> 'не' 'то' 'что' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-NE-TO-CHTOBY-NP] -> 'не' 'то' 'чтобы' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-ESLI-NP] -> 'если' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
-[1-ESLI-NE-NP] -> 'если' 'не' ([NOUN root] | [ПРИЛ_СУЩ root]) [COMMA];
+%% РїРµСЂРІС‹Рµ С‡Р°СЃС‚Рё
+[1-NE-NP] -> 'РЅРµ' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-NE-TOLKO-NP] -> 'РЅРµ' 'С‚РѕР»СЊРєРѕ' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-KAK-NP] -> 'РєР°Рє' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-HOTJA-NP] -> 'С…РѕС‚СЏ' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-PUST-NP] -> 'РїСѓСЃС‚СЊ' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-HOTJA-I-NP] -> 'С…РѕС‚СЏ' 'Рё' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-NE-TO-CHTO-NP] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚Рѕ' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-NE-TO-CHTOBY-NP] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚РѕР±С‹' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-ESLI-NP] -> 'РµСЃР»Рё' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
+[1-ESLI-NE-NP] -> 'РµСЃР»Рё' 'РЅРµ' ([NOUN root] | [РџР РР›_РЎРЈР© root]) [COMMA];
 
-%% вторые части
-[2-A-NP] -> 'а' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-NO-NP] -> 'но' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-NO-I-NP] -> 'но' 'и' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-TAK-I-NP] -> 'так' 'и' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-ZATO-NP] -> 'зато' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-DA-NP] ->  'да' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-TO-NP] ->  'то' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-TAK-NP] ->  'так' ([NOUN root] | [ПРИЛ_СУЩ root]);
-[2-A-TOLKO-NP] -> 'а' 'только' ([NOUN root] | [ПРИЛ_СУЩ root]);
+%% РІС‚РѕСЂС‹Рµ С‡Р°СЃС‚Рё
+[2-A-NP] -> 'Р°' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-NO-NP] -> 'РЅРѕ' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-NO-I-NP] -> 'РЅРѕ' 'Рё' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-TAK-I-NP] -> 'С‚Р°Рє' 'Рё' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-ZATO-NP] -> 'Р·Р°С‚Рѕ' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-DA-NP] ->  'РґР°' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-TO-NP] ->  'С‚Рѕ' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-TAK-NP] ->  'С‚Р°Рє' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
+[2-A-TOLKO-NP] -> 'Р°' 'С‚РѕР»СЊРєРѕ' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
 
-%%все вместе
+%%РІСЃРµ РІРјРµСЃС‚Рµ
 [NE-A-NO] -> [1-NE-NP] ([2-A-NP root] | [2-NO-NP root]);
 [NE-TOLKO-NO-I] -> [1-NE-TOLKO-NP] ([2-NO-NP root] | [2-NO-I-NP root]);
 [KAK-TAK-I] -> [1-KAK-NP] [2-TAK-I-NP root];
@@ -39,30 +39,30 @@
 [ESLI-NE-TO-TAK] -> ([1-ESLI-NP] | [1-ESLI-NE-NP]) ([2-TO-NP root] | [2-TAK-NP root]);
 [NE-A-TOLKO] -> [1-NE-NP] [2-A-TOLKO-NP];
 
-%% первые части
-[1-NE-ADJ] -> 'не' [ADJ root] [COMMA];
-[1-NE-TOLKO-ADJ] -> 'не' 'только' [ADJ root] [COMMA];
-[1-KAK-ADJ] -> 'как' [ADJ root] [COMMA];
-[1-HOTJA-ADJ] -> 'хотя' [ADJ root] [COMMA];
-[1-PUST-ADJ] -> 'пусть' [ADJ root] [COMMA];
-[1-HOTJA-I-ADJ] -> 'хотя' 'и' [ADJ root] [COMMA];
-[1-NE-TO-CHTO-ADJ] -> 'не' 'то' 'что' [ADJ root] [COMMA];
-[1-NE-TO-CHTOBY-ADJ] -> 'не' 'то' 'чтобы' [ADJ root] [COMMA];
-[1-ESLI-ADJ] -> 'если' [ADJ root] [COMMA];
-[1-ESLI-NE-ADJ] -> 'если' 'не' [ADJ root] [COMMA];
+%% РїРµСЂРІС‹Рµ С‡Р°СЃС‚Рё
+[1-NE-ADJ] -> 'РЅРµ' [ADJ root] [COMMA];
+[1-NE-TOLKO-ADJ] -> 'РЅРµ' 'С‚РѕР»СЊРєРѕ' [ADJ root] [COMMA];
+[1-KAK-ADJ] -> 'РєР°Рє' [ADJ root] [COMMA];
+[1-HOTJA-ADJ] -> 'С…РѕС‚СЏ' [ADJ root] [COMMA];
+[1-PUST-ADJ] -> 'РїСѓСЃС‚СЊ' [ADJ root] [COMMA];
+[1-HOTJA-I-ADJ] -> 'С…РѕС‚СЏ' 'Рё' [ADJ root] [COMMA];
+[1-NE-TO-CHTO-ADJ] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚Рѕ' [ADJ root] [COMMA];
+[1-NE-TO-CHTOBY-ADJ] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚РѕР±С‹' [ADJ root] [COMMA];
+[1-ESLI-ADJ] -> 'РµСЃР»Рё' [ADJ root] [COMMA];
+[1-ESLI-NE-ADJ] -> 'РµСЃР»Рё' 'РЅРµ' [ADJ root] [COMMA];
 
-%% вторые части
-[2-A-ADJ] -> 'а' [ADJ root];
-[2-NO-ADJ] -> 'но' [ADJ root];
-[2-NO-I-ADJ] -> 'но' 'и' [ADJ root];
-[2-TAK-I-ADJ] -> 'так' 'и' [ADJ root];
-[2-ZATO-ADJ] -> 'зато' [ADJ root];
-[2-DA-ADJ] ->  'да' [ADJ root];
-[2-TO-ADJ] ->  'то' [ADJ root];
-[2-TAK-ADJ] ->  'так' [ADJ root];
-[2-A-TOLKO-ADJ] -> 'а' 'только' [ADJ root];
+%% РІС‚РѕСЂС‹Рµ С‡Р°СЃС‚Рё
+[2-A-ADJ] -> 'Р°' [ADJ root];
+[2-NO-ADJ] -> 'РЅРѕ' [ADJ root];
+[2-NO-I-ADJ] -> 'РЅРѕ' 'Рё' [ADJ root];
+[2-TAK-I-ADJ] -> 'С‚Р°Рє' 'Рё' [ADJ root];
+[2-ZATO-ADJ] -> 'Р·Р°С‚Рѕ' [ADJ root];
+[2-DA-ADJ] ->  'РґР°' [ADJ root];
+[2-TO-ADJ] ->  'С‚Рѕ' [ADJ root];
+[2-TAK-ADJ] ->  'С‚Р°Рє' [ADJ root];
+[2-A-TOLKO-ADJ] -> 'Р°' 'С‚РѕР»СЊРєРѕ' [ADJ root];
 
-%%все вместе
+%%РІСЃРµ РІРјРµСЃС‚Рµ
 [NE-A-NO] -> [1-NE-ADJ] ([2-A-ADJ root] | [2-NO-ADJ root]);
 [NE-TOLKO-NO-I] -> [1-NE-TOLKO-ADJ] ([2-NO-ADJ root] | [2-NO-I-ADJ root]);
 [KAK-TAK-I] -> [1-KAK-ADJ] [2-TAK-I-ADJ root];
@@ -73,30 +73,30 @@
 [ESLI-NE-TO-TAK] -> ([1-ESLI-ADJ] | [1-ESLI-NE-ADJ]) ([2-TO-ADJ root] | [2-TAK-ADJ root]);
 [NE-A-TOLKO] -> [1-NE-ADJ] [2-A-TOLKO-ADJ];
 
-%% первые части
-[1-NE-ADV] -> 'не' [ADV root] [COMMA];
-[1-NE-TOLKO-ADV] -> 'не' 'только' [ADV root] [COMMA];
-[1-KAK-ADV] -> 'как' [ADV root] [COMMA];
-[1-HOTJA-ADV] -> 'хотя' [ADV root] [COMMA];
-[1-PUST-ADV] -> 'пусть' [ADV root] [COMMA];
-[1-HOTJA-I-ADV] -> 'хотя' 'и' [ADV root] [COMMA];
-[1-NE-TO-CHTO-ADV] -> 'не' 'то' 'что' [ADV root] [COMMA];
-[1-NE-TO-CHTOBY-ADV] -> 'не' 'то' 'чтобы' [ADV root] [COMMA];
-[1-ESLI-ADV] -> 'если' [ADV root] [COMMA];
-[1-ESLI-NE-ADV] -> 'если' 'не' [ADV root] [COMMA];
+%% РїРµСЂРІС‹Рµ С‡Р°СЃС‚Рё
+[1-NE-ADV] -> 'РЅРµ' [ADV root] [COMMA];
+[1-NE-TOLKO-ADV] -> 'РЅРµ' 'С‚РѕР»СЊРєРѕ' [ADV root] [COMMA];
+[1-KAK-ADV] -> 'РєР°Рє' [ADV root] [COMMA];
+[1-HOTJA-ADV] -> 'С…РѕС‚СЏ' [ADV root] [COMMA];
+[1-PUST-ADV] -> 'РїСѓСЃС‚СЊ' [ADV root] [COMMA];
+[1-HOTJA-I-ADV] -> 'С…РѕС‚СЏ' 'Рё' [ADV root] [COMMA];
+[1-NE-TO-CHTO-ADV] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚Рѕ' [ADV root] [COMMA];
+[1-NE-TO-CHTOBY-ADV] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚РѕР±С‹' [ADV root] [COMMA];
+[1-ESLI-ADV] -> 'РµСЃР»Рё' [ADV root] [COMMA];
+[1-ESLI-NE-ADV] -> 'РµСЃР»Рё' 'РЅРµ' [ADV root] [COMMA];
 
-%% вторые части
-[2-A-ADV] -> 'а' [ADV root];
-[2-NO-ADV] -> 'но' [ADV root];
-[2-NO-I-ADV] -> 'но' 'и' [ADV root];
-[2-TAK-I-ADV] -> 'так' 'и' [ADV root];
-[2-ZATO-ADV] -> 'зато' [ADV root];
-[2-DA-ADV] ->  'да' [ADV root];
-[2-TO-ADV] ->  'то' [ADV root];
-[2-TAK-ADV] ->  'так' [ADV root];
-[2-A-TOLKO-ADV] -> 'а' 'только' [ADV root];
+%% РІС‚РѕСЂС‹Рµ С‡Р°СЃС‚Рё
+[2-A-ADV] -> 'Р°' [ADV root];
+[2-NO-ADV] -> 'РЅРѕ' [ADV root];
+[2-NO-I-ADV] -> 'РЅРѕ' 'Рё' [ADV root];
+[2-TAK-I-ADV] -> 'С‚Р°Рє' 'Рё' [ADV root];
+[2-ZATO-ADV] -> 'Р·Р°С‚Рѕ' [ADV root];
+[2-DA-ADV] ->  'РґР°' [ADV root];
+[2-TO-ADV] ->  'С‚Рѕ' [ADV root];
+[2-TAK-ADV] ->  'С‚Р°Рє' [ADV root];
+[2-A-TOLKO-ADV] -> 'Р°' 'С‚РѕР»СЊРєРѕ' [ADV root];
 
-%%все вместе
+%%РІСЃРµ РІРјРµСЃС‚Рµ
 [NE-A-NO] -> [1-NE-ADV] ([2-A-ADV root] | [2-NO-ADV root]);
 [NE-TOLKO-NO-I] -> [1-NE-TOLKO-ADV] ([2-NO-ADV root] | [2-NO-I-ADV root]);
 [KAK-TAK-I] -> [1-KAK-ADV] [2-TAK-I-ADV root];
@@ -107,30 +107,30 @@
 [ESLI-NE-TO-TAK] -> ([1-ESLI-ADV] | [1-ESLI-NE-ADV]) ([2-TO-ADV root] | [2-TAK-ADV root]);
 [NE-A-TOLKO] -> [1-NE-ADV] [2-A-TOLKO-ADV];
 
-%% первые части
-[1-NE-INF] -> 'не' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-NE-TOLKO-INF] -> 'не' 'только' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-KAK-INF] -> 'как' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-HOTJA-INF] -> 'хотя' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-PUST-INF] -> 'пусть' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-HOTJA-I-INF] -> 'хотя' 'и' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-NE-TO-CHTO-INF] -> 'не' 'то' 'что' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-NE-TO-CHTOBY-INF] -> 'не' 'то' 'чтобы' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-ESLI-INF] -> 'если' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
-[1-ESLI-NE-INF] -> 'если' 'не' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]) [COMMA];
+%% РїРµСЂРІС‹Рµ С‡Р°СЃС‚Рё
+[1-NE-INF] -> 'РЅРµ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-NE-TOLKO-INF] -> 'РЅРµ' 'С‚РѕР»СЊРєРѕ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-KAK-INF] -> 'РєР°Рє' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-HOTJA-INF] -> 'С…РѕС‚СЏ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-PUST-INF] -> 'РїСѓСЃС‚СЊ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-HOTJA-I-INF] -> 'С…РѕС‚СЏ' 'Рё' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-NE-TO-CHTO-INF] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚Рѕ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-NE-TO-CHTOBY-INF] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚РѕР±С‹' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-ESLI-INF] -> 'РµСЃР»Рё' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
+[1-ESLI-NE-INF] -> 'РµСЃР»Рё' 'РЅРµ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]) [COMMA];
 
-%% вторые части
-[2-A-INF] -> 'а' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-NO-INF] -> 'но' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-NO-I-INF] -> 'но' 'и' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-TAK-I-INF] -> 'так' 'и' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-ZATO-INF] -> 'зато' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-DA-INF] ->  'да' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-TO-INF] ->  'то' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-TAK-INF] ->  'так' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
-[2-A-TOLKO-INF] -> 'а' 'только' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
+%% РІС‚РѕСЂС‹Рµ С‡Р°СЃС‚Рё
+[2-A-INF] -> 'Р°' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-NO-INF] -> 'РЅРѕ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-NO-I-INF] -> 'РЅРѕ' 'Рё' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-TAK-I-INF] -> 'С‚Р°Рє' 'Рё' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-ZATO-INF] -> 'Р·Р°С‚Рѕ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-DA-INF] ->  'РґР°' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-TO-INF] ->  'С‚Рѕ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-TAK-INF] ->  'С‚Р°Рє' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
+[2-A-TOLKO-INF] -> 'Р°' 'С‚РѕР»СЊРєРѕ' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
 
-%%все вместе
+%%РІСЃРµ РІРјРµСЃС‚Рµ
 [NE-A-NO] -> [1-NE-INF] ([2-A-INF root] | [2-NO-INF root]);
 [NE-TOLKO-NO-I] -> [1-NE-TOLKO-INF] ([2-NO-INF root] | [2-NO-I-INF root]);
 [KAK-TAK-I] -> [1-KAK-INF] [2-TAK-I-INF root];
@@ -141,30 +141,30 @@
 [ESLI-NE-TO-TAK] -> ([1-ESLI-INF] | [1-ESLI-NE-INF]) ([2-TO-INF root] | [2-TAK-INF root]);
 [NE-A-TOLKO] -> [1-NE-INF] [2-A-TOLKO-INF];
 
-%% первые части
-[1-NE-PP] -> 'не' [ПГ] [COMMA];
-[1-NE-TOLKO-PP] -> 'не' 'только' [ПГ] [COMMA];
-[1-KAK-PP] -> 'как' [ПГ] [COMMA];
-[1-HOTJA-PP] -> 'хотя' [ПГ] [COMMA];
-[1-PUST-PP] -> 'пусть' [ПГ] [COMMA];
-[1-HOTJA-I-PP] -> 'хотя' 'и' [ПГ] [COMMA];
-[1-NE-TO-CHTO-PP] -> 'не' 'то' 'что' [ПГ] [COMMA];
-[1-NE-TO-CHTOBY-PP] -> 'не' 'то' 'чтобы' [ПГ] [COMMA];
-[1-ESLI-PP] -> 'если' [ПГ] [COMMA];
-[1-ESLI-NE-PP] -> 'если' 'не' [ПГ] [COMMA];
+%% РїРµСЂРІС‹Рµ С‡Р°СЃС‚Рё
+[1-NE-PP] -> 'РЅРµ' [РџР“] [COMMA];
+[1-NE-TOLKO-PP] -> 'РЅРµ' 'С‚РѕР»СЊРєРѕ' [РџР“] [COMMA];
+[1-KAK-PP] -> 'РєР°Рє' [РџР“] [COMMA];
+[1-HOTJA-PP] -> 'С…РѕС‚СЏ' [РџР“] [COMMA];
+[1-PUST-PP] -> 'РїСѓСЃС‚СЊ' [РџР“] [COMMA];
+[1-HOTJA-I-PP] -> 'С…РѕС‚СЏ' 'Рё' [РџР“] [COMMA];
+[1-NE-TO-CHTO-PP] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚Рѕ' [РџР“] [COMMA];
+[1-NE-TO-CHTOBY-PP] -> 'РЅРµ' 'С‚Рѕ' 'С‡С‚РѕР±С‹' [РџР“] [COMMA];
+[1-ESLI-PP] -> 'РµСЃР»Рё' [РџР“] [COMMA];
+[1-ESLI-NE-PP] -> 'РµСЃР»Рё' 'РЅРµ' [РџР“] [COMMA];
 
-%% вторые части
-[2-A-PP] -> 'а' [ПГ];
-[2-NO-PP] -> 'но' [ПГ];
-[2-NO-I-PP] -> 'но' 'и' [ПГ];
-[2-TAK-I-PP] -> 'так' 'и' [ПГ];
-[2-ZATO-PP] -> 'зато' [ПГ];
-[2-DA-PP] ->  'да' [ПГ];
-[2-TO-PP] ->  'то' [ПГ];
-[2-TAK-PP] ->  'так' [ПГ];
-[2-A-TOLKO-PP] -> 'а' 'только' [ПГ];
+%% РІС‚РѕСЂС‹Рµ С‡Р°СЃС‚Рё
+[2-A-PP] -> 'Р°' [РџР“];
+[2-NO-PP] -> 'РЅРѕ' [РџР“];
+[2-NO-I-PP] -> 'РЅРѕ' 'Рё' [РџР“];
+[2-TAK-I-PP] -> 'С‚Р°Рє' 'Рё' [РџР“];
+[2-ZATO-PP] -> 'Р·Р°С‚Рѕ' [РџР“];
+[2-DA-PP] ->  'РґР°' [РџР“];
+[2-TO-PP] ->  'С‚Рѕ' [РџР“];
+[2-TAK-PP] ->  'С‚Р°Рє' [РџР“];
+[2-A-TOLKO-PP] -> 'Р°' 'С‚РѕР»СЊРєРѕ' [РџР“];
 
-%%все вместе
+%%РІСЃРµ РІРјРµСЃС‚Рµ
 [NE-A-NO] -> [1-NE-PP] ([2-A-PP root] | [2-NO-PP root]);
 [NE-TOLKO-NO-I] -> [1-NE-TOLKO-PP] ([2-NO-PP root] | [2-NO-I-PP root]);
 [KAK-TAK-I] -> [1-KAK-PP] [2-TAK-I-PP root];
@@ -175,56 +175,56 @@
 [ESLI-NE-TO-TAK] -> ([1-ESLI-PP] | [1-ESLI-NE-PP]) ([2-TO-PP root] | [2-TAK-PP root]);
 [NE-A-TOLKO] -> [1-NE-PP] [2-A-TOLKO-PP];
 
-%% и сад, и огород
-%% И красивая, и желтая
-%% и пить , и курить
+%% Рё СЃР°Рґ, Рё РѕРіРѕСЂРѕРґ
+%% Р РєСЂР°СЃРёРІР°СЏ, Рё Р¶РµР»С‚Р°СЏ
+%% Рё РїРёС‚СЊ , Рё РєСѓСЂРёС‚СЊ
 
-[I-NP] -> 'и' ([NOUN root] | [ПРИЛ_СУЩ root]);
+[I-NP] -> 'Рё' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
 [I-I-NP] -> [I-NP] [COMMA] [I-NP root];
 [I-I-NP] -> [I-I-NP] [COMMA] [I-NP];
 
-[I-ADJP] -> 'и' [ADJ root];
+[I-ADJP] -> 'Рё' [ADJ root];
 [I-I-ADJP] -> [I-ADJP] [COMMA] [I-ADJP root];
 [I-I-ADJP] -> [I-I-ADJP] [COMMA] [I-ADJP root];
 
-[I-ADVP] -> 'и' [ADV root];
+[I-ADVP] -> 'Рё' [ADV root];
 [I-I-ADVP] -> [I-ADVP] [COMMA] [I-ADVP root];
 [I-I-ADVP] -> [I-I-ADVP] [COMMA] [I-ADVP root];
 
-[I-INF] -> 'и' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
+[I-INF] -> 'Рё' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
 [I-I-INF] -> [I-INF] [COMMA] [I-INF root];
 [I-I-INF] -> [I-I-INF] [COMMA] [I-INF root];
 
-[I-PP] -> 'и' [ПГ];
+[I-PP] -> 'Рё' [РџР“];
 [I-I-PP] -> [I-PP] [COMMA] [I-PP root];
 [I-I-PP] -> [I-I-PP] [COMMA] [I-PP root];
 
 [I-I] -> [I-I-NP] | [I-I-ADJP] | [I-I-ADVP] | [I-I-INF] | [I-I-PP];
 
-%%	то ли то ли
+%%	С‚Рѕ Р»Рё С‚Рѕ Р»Рё
 
-[TOLI-NP] -> 'то' 'ли' ([NOUN root] | [ПРИЛ_СУЩ root]);
+[TOLI-NP] -> 'С‚Рѕ' 'Р»Рё' ([NOUN root] | [РџР РР›_РЎРЈР© root]);
 [TOLI-TOLI-NP] -> [TOLI-NP] [COMMA] [TOLI-NP root];
 [TOLI-TOLI-NP] -> [TOLI-TOLI-NP] [COMMA] [TOLI-NP];
 
-[TOLI-ADJP] -> 'то' 'ли' [ADJ root];
+[TOLI-ADJP] -> 'С‚Рѕ' 'Р»Рё' [ADJ root];
 [TOLI-TOLI-ADJP] -> [TOLI-ADJP] [COMMA] [TOLI-ADJP root];
 [TOLI-TOLI-ADJP] -> [TOLI-TOLI-ADJP] [COMMA] [TOLI-ADJP root];
 
-[TOLI-ADVP] -> 'то' 'ли' [ADV root];
+[TOLI-ADVP] -> 'С‚Рѕ' 'Р»Рё' [ADV root];
 [TOLI-TOLI-ADVP] -> [TOLI-ADVP] [COMMA] [TOLI-ADVP root];
 [TOLI-TOLI-ADVP] -> [TOLI-TOLI-ADVP] [COMMA] [TOLI-ADVP root];
 
-[TOLI-INF] -> 'то' 'ли' ([INF root] | [ПРЯМ_ДОП root grm="ИНФИНИТИВ"]);
+[TOLI-INF] -> 'С‚Рѕ' 'Р»Рё' ([INF root] | [РџР РЇРњ_Р”РћРџ root grm="РРќР¤РРќРРўРР’"]);
 [TOLI-TOLI-INF] -> [TOLI-INF] [COMMA] [TOLI-INF root];
 [TOLI-TOLI-INF] -> [TOLI-TOLI-INF] [COMMA] [TOLI-INF root];
 
-[TOLI-PP] -> 'то' 'ли' [ПГ];
+[TOLI-PP] -> 'С‚Рѕ' 'Р»Рё' [РџР“];
 [TOLI-TOLI-PP] -> [TOLI-PP] [COMMA] [TOLI-PP root];
 [TOLI-TOLI-PP] -> [TOLI-TOLI-PP] [COMMA] [TOLI-PP root];
 
 [TOLI-TOLI] -> [TOLI-TOLI-NP] | [TOLI-TOLI-ADJP] | [TOLI-TOLI-ADVP] | [TOLI-TOLI-INF] | [TOLI-TOLI-PP];
 
-[РАЗРЫВ_СОЮЗ] -> ([NE-A-NO] | [NE-TOLKO-NO-I] | [KAK-TAK-I] | [HOTJA-ZATO] | [PUST-NO] | [HOTJA-I-NO-A-DA] | [NE-TO-CHTOBY-NO-A] | [ESLI-NE-TO-TAK] | [NE-A-TOLKO] | [I-I] | [TOLI-TOLI]);
+[Р РђР—Р Р«Р’_РЎРћР®Р—] -> ([NE-A-NO] | [NE-TOLKO-NO-I] | [KAK-TAK-I] | [HOTJA-ZATO] | [PUST-NO] | [HOTJA-I-NO-A-DA] | [NE-TO-CHTOBY-NO-A] | [ESLI-NE-TO-TAK] | [NE-A-TOLKO] | [I-I] | [TOLI-TOLI]);
 
-[ROOT] -> [РАЗРЫВ_СОЮЗ];
+[ROOT] -> [Р РђР—Р Р«Р’_РЎРћР®Р—];

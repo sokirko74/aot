@@ -55,7 +55,7 @@ void CRusSentence::InitClauseVectorRules()
 		//
 		Abbr RuleForCommaDashClause, "RuleForCommaDashClause"));
 
-		//  еще раз вызываем RuleForUnitingClausesBySubject
+		//  РµС‰Рµ СЂР°Р· РІС‹Р·С‹РІР°РµРј RuleForUnitingClausesBySubject
 		Abbr RuleForUnitingClausesBySubjectStrong, "RuleForUnitingClausesBySubjectStrong"));
 	#undef Abbr
     
@@ -78,28 +78,28 @@ struct CAntecedent {
 const int KTO_AntecedentCount = 12;
 
 const CAntecedent KTO_Antecedents[KTO_AntecedentCount] =  {
-	{"ТОТ",    1<<PRONOUN_P },
-	{"КАЖДЫЙ", 1<<PRONOUN_P},
-	{"ВСЯКИЙ", 1<<PRONOUN},
-	{"ВСЯКАЯ", 1<<PRONOUN},
-	{"ЛЮБОЙ", 1<<PRONOUN},
-	{"ЛЮБАЯ", 1<<PRONOUN},
-	{"ВСЕ", 1<<PRONOUN},
-	{"НИКТО", 1<<PRONOUN},
-	{"КТО-НИБУДЬ", 1<<PRONOUN},
-	{"КТО-ТО", 1<<PRONOUN},
-	{"КОЕ-КТО", 1<<PRONOUN},
-	{"ПРОЧИЙ", 1<<PRONOUN}
+	{"РўРћРў",    1<<PRONOUN_P },
+	{"РљРђР–Р”Р«Р™", 1<<PRONOUN_P},
+	{"Р’РЎРЇРљРР™", 1<<PRONOUN},
+	{"Р’РЎРЇРљРђРЇ", 1<<PRONOUN},
+	{"Р›Р®Р‘РћР™", 1<<PRONOUN},
+	{"Р›Р®Р‘РђРЇ", 1<<PRONOUN},
+	{"Р’РЎР•", 1<<PRONOUN},
+	{"РќРРљРўРћ", 1<<PRONOUN},
+	{"РљРўРћ-РќРР‘РЈР”Р¬", 1<<PRONOUN},
+	{"РљРўРћ-РўРћ", 1<<PRONOUN},
+	{"РљРћР•-РљРўРћ", 1<<PRONOUN},
+	{"РџР РћР§РР™", 1<<PRONOUN}
 };
 
 /*
-Примеры:
-Тот, кто пришел на это митинг, получит футболку.
-Пресс-секретарь министерства внутренних дел Англии заявил, что каждый, кто пожелает в переписи населения записаться джедаем, будет считаться исповедующим "другие религии". 
+РџСЂРёРјРµСЂС‹:
+РўРѕС‚, РєС‚Рѕ РїСЂРёС€РµР» РЅР° СЌС‚Рѕ РјРёС‚РёРЅРі, РїРѕР»СѓС‡РёС‚ С„СѓС‚Р±РѕР»РєСѓ.
+РџСЂРµСЃСЃ-СЃРµРєСЂРµС‚Р°СЂСЊ РјРёРЅРёСЃС‚РµСЂСЃС‚РІР° РІРЅСѓС‚СЂРµРЅРЅРёС… РґРµР» РђРЅРіР»РёРё Р·Р°СЏРІРёР», С‡С‚Рѕ РєР°Р¶РґС‹Р№, РєС‚Рѕ РїРѕР¶РµР»Р°РµС‚ РІ РїРµСЂРµРїРёСЃРё РЅР°СЃРµР»РµРЅРёСЏ Р·Р°РїРёСЃР°С‚СЊСЃСЏ РґР¶РµРґР°РµРј, Р±СѓРґРµС‚ СЃС‡РёС‚Р°С‚СЊСЃСЏ РёСЃРїРѕРІРµРґСѓСЋС‰РёРј "РґСЂСѓРіРёРµ СЂРµР»РёРіРёРё". 
 
-Эта функция рассматрвиать только случаи с антецедентом, а такие случаи 
-не берутся:
-"Я знаю, кто пришел."
+Р­С‚Р° С„СѓРЅРєС†РёСЏ СЂР°СЃСЃРјР°С‚СЂРІРёР°С‚СЊ С‚РѕР»СЊРєРѕ СЃР»СѓС‡Р°Рё СЃ Р°РЅС‚РµС†РµРґРµРЅС‚РѕРј, Р° С‚Р°РєРёРµ СЃР»СѓС‡Р°Рё 
+РЅРµ Р±РµСЂСѓС‚СЃСЏ:
+"РЇ Р·РЅР°СЋ, РєС‚Рѕ РїСЂРёС€РµР»."
 
 */
 bool CRusSentence::RuleForKTO(int iClauseNum)
@@ -115,7 +115,7 @@ bool CRusSentence::RuleForKTO(int iClauseNum)
 		return false;
 
 	/*
-		Ищем союзное слово "КТО".
+		РС‰РµРј СЃРѕСЋР·РЅРѕРµ СЃР»РѕРІРѕ "РљРўРћ".
 	*/
 
 	int i = 0;
@@ -123,12 +123,12 @@ bool CRusSentence::RuleForKTO(int iClauseNum)
 	{
 		const SConjIndex& conj = pAbstClause->m_vectorConjs[i];
 		if(		(conj.m_FromWhere == FROM_SUB_CONJ)
-			&&	(GetOpt()->GetOborDic()->GetSubConjs()[conj.m_index] == "КТО")
+			&&	(GetOpt()->GetOborDic()->GetSubConjs()[conj.m_index] == "РљРўРћ")
 		  )
 		break;
 	}
 	/*
-		Не нашли - выходим 
+		РќРµ РЅР°С€Р»Рё - РІС‹С…РѕРґРёРј 
 	*/
 
 	if( i == pAbstClause->m_vectorConjs.size() )
@@ -142,7 +142,7 @@ bool CRusSentence::RuleForKTO(int iClauseNum)
 
 	CClause* pPrevClause = &GetClause(PrevClauseNo);
 
-	//пытаемся найти слева от КТО антецедент
+	//РїС‹С‚Р°РµРјСЃСЏ РЅР°Р№С‚Рё СЃР»РµРІР° РѕС‚ РљРўРћ Р°РЅС‚РµС†РµРґРµРЅС‚
 	for(i = pPrevClause->m_iLastWord ; i >= pPrevClause->m_iFirstWord ; i-- )
 	{
 		const CSynWord& pWord = GetWords()[i];
@@ -184,7 +184,7 @@ bool CRusSentence::RuleForSubClause(int iClauseNum)
 	if ( IsEnclosedClause (iClauseNum) )  return false;
 
 
-	//  проверка на неодн. границы
+	//  РїСЂРѕРІРµСЂРєР° РЅР° РЅРµРѕРґРЅ. РіСЂР°РЅРёС†С‹
 	if(GetMinClauseByLastWord(m_Clauses[iClauseNum].m_iLastWord) !=  iClauseNum)
 		return false;
 
@@ -201,7 +201,7 @@ bool CRusSentence::RuleForSubClause(int iClauseNum)
 	  )
 		return false;
 
-	if( pAbstClause1->HasType(INFINITIVE_T) && !pAbstClause1->HasSubConj("ЧТОБЫ"))
+	if( pAbstClause1->HasType(INFINITIVE_T) && !pAbstClause1->HasSubConj("Р§РўРћР‘Р«"))
 		return false;
 
 	
@@ -229,17 +229,17 @@ bool CRusSentence::RuleForAdverbPart(int iClauseNum)
 	if (AdvPartType == -1) 
 		return false;
 
-	// если деепричастие  вошло в состав оборота, тогда не будем вкладывать его 
-	// куда-либо 
-	// Например, "принимая во внимание"
+	// РµСЃР»Рё РґРµРµРїСЂРёС‡Р°СЃС‚РёРµ  РІРѕС€Р»Рѕ РІ СЃРѕСЃС‚Р°РІ РѕР±РѕСЂРѕС‚Р°, С‚РѕРіРґР° РЅРµ Р±СѓРґРµРј РІРєР»Р°РґС‹РІР°С‚СЊ РµРіРѕ 
+	// РєСѓРґР°-Р»РёР±Рѕ 
+	// РќР°РїСЂРёРјРµСЂ, "РїСЂРёРЅРёРјР°СЏ РІРѕ РІРЅРёРјР°РЅРёРµ"
 	int RootWordNo = pAbstClause->m_vectorTypes[AdvPartType].m_Root.m_WordNo;
 	assert (RootWordNo != -1);
 	if (m_Words[RootWordNo].IsInOborot())
 		return false;
 
 
-	// Деепричастный  оборот должен быть отделен запятой, если он не стоит в самом начале.
-	//  В конструкции "Он шел, свистя и напевая" "напевая" должно вложиться в "свистя".
+	// Р”РµРµРїСЂРёС‡Р°СЃС‚РЅС‹Р№  РѕР±РѕСЂРѕС‚ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РѕС‚РґРµР»РµРЅ Р·Р°РїСЏС‚РѕР№, РµСЃР»Рё РѕРЅ РЅРµ СЃС‚РѕРёС‚ РІ СЃР°РјРѕРј РЅР°С‡Р°Р»Рµ.
+	//  Р’ РєРѕРЅСЃС‚СЂСѓРєС†РёРё "РћРЅ С€РµР», СЃРІРёСЃС‚СЏ Рё РЅР°РїРµРІР°СЏ" "РЅР°РїРµРІР°СЏ" РґРѕР»Р¶РЅРѕ РІР»РѕР¶РёС‚СЊСЃСЏ РІ "СЃРІРёСЃС‚СЏ".
 	if (pAbstClause->m_iFirstWord != 0)
 		if (!m_Words[pAbstClause->m_iFirstWord].m_bComma)
 			return false;
@@ -286,7 +286,7 @@ bool CRusSentence::RuleForAdverbPart(int iClauseNum)
 
 
 
-//новое правило для тире работает по алгоритму "Функции Copul" [Шалимов] - Правило1  
+//РЅРѕРІРѕРµ РїСЂР°РІРёР»Рѕ РґР»СЏ С‚РёСЂРµ СЂР°Р±РѕС‚Р°РµС‚ РїРѕ Р°Р»РіРѕСЂРёС‚РјСѓ "Р¤СѓРЅРєС†РёРё Copul" [РЁР°Р»РёРјРѕРІ] - РџСЂР°РІРёР»Рѕ1  
 bool CRusSentence::RuleForDashClause(int iClauseNum)
 {
 	CClause* pClause1  = &GetClause(iClauseNum);
@@ -399,10 +399,10 @@ bool CRusSentence::RuleForClauseDisruptWithSubordinateClauses(int iClauseNum)
 
 
 
-//правило для запятая+тире работает по алгоритму "Функции Copul" [Шалимов] - Правило2 
-//примеры: Дом, построенный на холме, - большой.
-//         Дом, который построен на холме, - большой.
-//         Дом,видимо, - большой.
+//РїСЂР°РІРёР»Рѕ РґР»СЏ Р·Р°РїСЏС‚Р°СЏ+С‚РёСЂРµ СЂР°Р±РѕС‚Р°РµС‚ РїРѕ Р°Р»РіРѕСЂРёС‚РјСѓ "Р¤СѓРЅРєС†РёРё Copul" [РЁР°Р»РёРјРѕРІ] - РџСЂР°РІРёР»Рѕ2 
+//РїСЂРёРјРµСЂС‹: Р”РѕРј, РїРѕСЃС‚СЂРѕРµРЅРЅС‹Р№ РЅР° С…РѕР»РјРµ, - Р±РѕР»СЊС€РѕР№.
+//         Р”РѕРј, РєРѕС‚РѕСЂС‹Р№ РїРѕСЃС‚СЂРѕРµРЅ РЅР° С…РѕР»РјРµ, - Р±РѕР»СЊС€РѕР№.
+//         Р”РѕРј,РІРёРґРёРјРѕ, - Р±РѕР»СЊС€РѕР№.
 bool CRusSentence::RuleForCommaDashClause(int iClauseNum)
 {
 	const CClause& pClause1 = GetClause(iClauseNum);
@@ -453,8 +453,8 @@ bool CRusSentence::ClauseHasSubjPredik(const CClause& Clause) const
 	return false;
 };
 
-//правило для клауз с вводными словами и оборотами
-//работает по алгоритму "Алгоритм Вкладывания Вводных" [Шалимов]
+//РїСЂР°РІРёР»Рѕ РґР»СЏ РєР»Р°СѓР· СЃ РІРІРѕРґРЅС‹РјРё СЃР»РѕРІР°РјРё Рё РѕР±РѕСЂРѕС‚Р°РјРё
+//СЂР°Р±РѕС‚Р°РµС‚ РїРѕ Р°Р»РіРѕСЂРёС‚РјСѓ "РђР»РіРѕСЂРёС‚Рј Р’РєР»Р°РґС‹РІР°РЅРёСЏ Р’РІРѕРґРЅС‹С…" [РЁР°Р»РёРјРѕРІ]
 bool CRusSentence::RuleForParenthesis(int iClauseNum)
 {
 	CClause& pClauseParenthesis = GetClause(iClauseNum);
@@ -472,7 +472,7 @@ bool CRusSentence::RuleForParenthesis(int iClauseNum)
 
 	
 
-	// если нет правой  клаузы, или это прид. предложение, тогда вкладываем влево
+	// РµСЃР»Рё РЅРµС‚ РїСЂР°РІРѕР№  РєР»Р°СѓР·С‹, РёР»Рё СЌС‚Рѕ РїСЂРёРґ. РїСЂРµРґР»РѕР¶РµРЅРёРµ, С‚РѕРіРґР° РІРєР»Р°РґС‹РІР°РµРј РІР»РµРІРѕ
 	if	(		(		( -1 == iNxt ) 
 					||	!GetClause(iNxt).CanHaveEncloseClauseFromTheLeft()
 				)
@@ -492,7 +492,7 @@ bool CRusSentence::RuleForParenthesis(int iClauseNum)
 	}
 
 
-	// далее рассматривается случай, только  когда можно вложить в обе клаузы
+	// РґР°Р»РµРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµС‚СЃСЏ СЃР»СѓС‡Р°Р№, С‚РѕР»СЊРєРѕ  РєРѕРіРґР° РјРѕР¶РЅРѕ РІР»РѕР¶РёС‚СЊ РІ РѕР±Рµ РєР»Р°СѓР·С‹
 	if ( -1 == iNxt || -1 == iPrev ) return false;
 
 	assert (iPrev != -1);
@@ -639,13 +639,13 @@ bool CRusSentence::RuleForParenthesis(int iClauseNum)
 
 
 /*
- Функция  заполняет слот  m_ClausesRelations
- Узнавать приходится следующее:
-	1.  Вложена клауза или нет.
-	2.  Тип клаузы (все варианты типа по большей части должны быть удалены, поскольку  клауза
-	вложилась).
-	3. Вошла ли клауза в син. группу (если вошла, тогда отношение строить
-	не надо).
+ Р¤СѓРЅРєС†РёСЏ  Р·Р°РїРѕР»РЅСЏРµС‚ СЃР»РѕС‚  m_ClausesRelations
+ РЈР·РЅР°РІР°С‚СЊ РїСЂРёС…РѕРґРёС‚СЃСЏ СЃР»РµРґСѓСЋС‰РµРµ:
+	1.  Р’Р»РѕР¶РµРЅР° РєР»Р°СѓР·Р° РёР»Рё РЅРµС‚.
+	2.  РўРёРї РєР»Р°СѓР·С‹ (РІСЃРµ РІР°СЂРёР°РЅС‚С‹ С‚РёРїР° РїРѕ Р±РѕР»СЊС€РµР№ С‡Р°СЃС‚Рё РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓРґР°Р»РµРЅС‹, РїРѕСЃРєРѕР»СЊРєСѓ  РєР»Р°СѓР·Р°
+	РІР»РѕР¶РёР»Р°СЃСЊ).
+	3. Р’РѕС€Р»Р° Р»Рё РєР»Р°СѓР·Р° РІ СЃРёРЅ. РіСЂСѓРїРїСѓ (РµСЃР»Рё РІРѕС€Р»Р°, С‚РѕРіРґР° РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРёС‚СЊ
+	РЅРµ РЅР°РґРѕ).
 */
 
 void CRusSentence::BuildClauseRelations()
@@ -657,7 +657,7 @@ void CRusSentence::BuildClauseRelations()
 		int FirstHostNum = GetMininalParentByClauseNo( ClauseNo );
 		if (FirstHostNum == -1) continue;
 
-		// если клауза  вошла в группы, тогда  отношения  будут проведены в соотв. с синтакс. группой
+		// РµСЃР»Рё РєР»Р°СѓР·Р°  РІРѕС€Р»Р° РІ РіСЂСѓРїРїС‹, С‚РѕРіРґР°  РѕС‚РЅРѕС€РµРЅРёСЏ  Р±СѓРґСѓС‚ РїСЂРѕРІРµРґРµРЅС‹ РІ СЃРѕРѕС‚РІ. СЃ СЃРёРЅС‚Р°РєСЃ. РіСЂСѓРїРїРѕР№
 
 		if (m_Clauses[FirstHostNum].m_SynVariants.empty()) continue;
 		if (m_Clauses[ClauseNo].m_SynVariants.empty()) continue;
@@ -673,14 +673,14 @@ void CRusSentence::BuildClauseRelations()
 		
 
 
-		//  отношение  между вводным и главной  клаузой
+		//  РѕС‚РЅРѕС€РµРЅРёРµ  РјРµР¶РґСѓ РІРІРѕРґРЅС‹Рј Рё РіР»Р°РІРЅРѕР№  РєР»Р°СѓР·РѕР№
 		if (m_Clauses[ClauseNo].HasType(INP_T))
 		{
 			newRel.m_TargetClause.m_ClauseTypes.push_back(INP_T);
 			newRel.type = PARENTHESIS_CLAUSE;
 		}
 		else
-		//  отношение  между неомонимичным причастным оборотом
+		//  РѕС‚РЅРѕС€РµРЅРёРµ  РјРµР¶РґСѓ РЅРµРѕРјРѕРЅРёРјРёС‡РЅС‹Рј РїСЂРёС‡Р°СЃС‚РЅС‹Рј РѕР±РѕСЂРѕС‚РѕРј
 		if (		m_Clauses[ClauseNo].HasType(PARTICIPLE_T) 
 				&&  (		!m_Clauses[ClauseNo].HasLeftStarter() 
 						||  (m_Clauses[ClauseNo].m_vectorTypes.size() == 1)
@@ -691,7 +691,7 @@ void CRusSentence::BuildClauseRelations()
 			newRel.type = SUB_CLAUSE;
 		}
 		else
-		//  отношение  между неомонимичным деепричастным оборотом и главным предложением
+		//  РѕС‚РЅРѕС€РµРЅРёРµ  РјРµР¶РґСѓ РЅРµРѕРјРѕРЅРёРјРёС‡РЅС‹Рј РґРµРµРїСЂРёС‡Р°СЃС‚РЅС‹Рј РѕР±РѕСЂРѕС‚РѕРј Рё РіР»Р°РІРЅС‹Рј РїСЂРµРґР»РѕР¶РµРЅРёРµРј
 		if (		m_Clauses[ClauseNo].HasType(ADVERB_PARTICIPLE_T) 
 				&&  (		!m_Clauses[ClauseNo].HasLeftStarter() 
 						||  (m_Clauses[ClauseNo].m_vectorTypes.size() == 1)
@@ -702,7 +702,7 @@ void CRusSentence::BuildClauseRelations()
 			newRel.type = SUB_CLAUSE;
 		}
 		else
-		//  вложение с помощью  подчинительного или сочинительного союза
+		//  РІР»РѕР¶РµРЅРёРµ СЃ РїРѕРјРѕС‰СЊСЋ  РїРѕРґС‡РёРЅРёС‚РµР»СЊРЅРѕРіРѕ РёР»Рё СЃРѕС‡РёРЅРёС‚РµР»СЊРЅРѕРіРѕ СЃРѕСЋР·Р°
 		if (    m_Clauses[ClauseNo].HasType(VERB_PERS_T) 
 			 || m_Clauses[ClauseNo].HasType(PARTICIPLE_SHORT_T)
 			 || m_Clauses[ClauseNo].HasType(ADJ_SHORT_T)
@@ -712,7 +712,7 @@ void CRusSentence::BuildClauseRelations()
 			 
 		   ) 
 		{
-			// COMPARATIVE_T добавлен из-за примера "я знаю, что золото дороже бронзы"
+			// COMPARATIVE_T РґРѕР±Р°РІР»РµРЅ РёР·-Р·Р° РїСЂРёРјРµСЂР° "СЏ Р·РЅР°СЋ, С‡С‚Рѕ Р·РѕР»РѕС‚Рѕ РґРѕСЂРѕР¶Рµ Р±СЂРѕРЅР·С‹"
 			const EClauseType Predicative[6] =  {VERB_PERS_T, PARTICIPLE_SHORT_T, ADJ_SHORT_T, PREDK_T, INFINITIVE_T, COMPARATIVE_T };		
 			newRel.m_TargetClause.m_ClauseTypes.insert(newRel.m_TargetClause.m_ClauseTypes.begin(), Predicative, Predicative+6);
 			newRel.m_SourceClause.m_ClauseTypes.insert(newRel.m_SourceClause.m_ClauseTypes.begin(), Predicative, Predicative+6);

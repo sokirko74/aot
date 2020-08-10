@@ -66,13 +66,13 @@ LRESULT CPosChoicer::OnWizardNext()
 		|| (m_List.GetCount() == 0)
 		|| (pos == 0)
 		)
-	{ //::MessageBox(0, "В списке не выделено ни одного словарного входа", "Message Box", MB_OK);
+	{ //::MessageBox(0, "Р’ СЃРїРёСЃРєРµ РЅРµ РІС‹РґРµР»РµРЅРѕ РЅРё РѕРґРЅРѕРіРѕ СЃР»РѕРІР°СЂРЅРѕРіРѕ РІС…РѕРґР°", "Message Box", MB_OK);
 		return 0;};
 
 
 		m_List.GetText( pos, m_ResultString );
 		if (m_ResultString.IsEmpty())
-		{ //::MessageBox(0, "В списке не выделено ни одного словарного входа", "Message Box", MB_OK);
+		{ //::MessageBox(0, "Р’ СЃРїРёСЃРєРµ РЅРµ РІС‹РґРµР»РµРЅРѕ РЅРё РѕРґРЅРѕРіРѕ СЃР»РѕРІР°СЂРЅРѕРіРѕ РІС…РѕРґР°", "Message Box", MB_OK);
 			return 0;};
 
 			m_ResultString = m_ResultString + CString ('\n');
@@ -81,8 +81,8 @@ LRESULT CPosChoicer::OnWizardNext()
 
 			CRossDevApp* A = ((CRossDevApp*)AfxGetApp());
 
-			// проверка вида глагола. Если  глагол несовершенного вида, то нужно поискать его видовой вариант
-			// совершенного вида и создать для выбранных из них отсылочные статьи.
+			// РїСЂРѕРІРµСЂРєР° РІРёРґР° РіР»Р°РіРѕР»Р°. Р•СЃР»Рё  РіР»Р°РіРѕР» РЅРµСЃРѕРІРµСЂС€РµРЅРЅРѕРіРѕ РІРёРґР°, С‚Рѕ РЅСѓР¶РЅРѕ РїРѕРёСЃРєР°С‚СЊ РµРіРѕ РІРёРґРѕРІРѕР№ РІР°СЂРёР°РЅС‚
+			// СЃРѕРІРµСЂС€РµРЅРЅРѕРіРѕ РІРёРґР° Рё СЃРѕР·РґР°С‚СЊ РґР»СЏ РІС‹Р±СЂР°РЅРЅС‹С… РёР· РЅРёС… РѕС‚СЃС‹Р»РѕС‡РЅС‹Рµ СЃС‚Р°С‚СЊРё.
 			if (P->GetPageCount() == 4) 
 			{
 				delete P->GetPage(3);
@@ -106,7 +106,7 @@ LRESULT CPosChoicer::OnWizardNext()
 							CNewRefArticles* p;
 							if (P->GetPageCount() < 4)
 							{
-								p = new  CNewRefArticles("Создание отсылочных статей для глаголов несов. вида");
+								p = new  CNewRefArticles("РЎРѕР·РґР°РЅРёРµ РѕС‚СЃС‹Р»РѕС‡РЅС‹С… СЃС‚Р°С‚РµР№ РґР»СЏ РіР»Р°РіРѕР»РѕРІ РЅРµСЃРѕРІ. РІРёРґР°");
 								P->AddPage(p);
 							}
 							else
@@ -140,11 +140,11 @@ BOOL CPosChoicer::OnSetActive()
 		switch  (PartOfSpeech) 
 		{
 
-		case NOUN:			LineToAdd = "СУЩ:ИГ"; break;
-		case INFINITIVE:	LineToAdd = "ГЛ:ГГ"; break;
-		case ADJ_FULL:		LineToAdd = "ПРИЛ:с_опр"; break;
-		case ADV:			LineToAdd = "НАР:ОБСТ_ГР"; break;
-		case PREDK:			LineToAdd = "НАР:нар_опр"; break;
+		case NOUN:			LineToAdd = "РЎРЈР©:РР“"; break;
+		case INFINITIVE:	LineToAdd = "Р“Р›:Р“Р“"; break;
+		case ADJ_FULL:		LineToAdd = "РџР РР›:СЃ_РѕРїСЂ"; break;
+		case ADV:			LineToAdd = "РќРђР :РћР‘РЎРў_Р“Р "; break;
+		case PREDK:			LineToAdd = "РќРђР :РЅР°СЂ_РѕРїСЂ"; break;
 		};
 
 

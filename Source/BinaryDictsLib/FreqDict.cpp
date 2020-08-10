@@ -48,7 +48,7 @@ bool CFreqDict::Load(string _path)
 }
 
 
-// выдает частоту перевода русской леммы RusParadigmId в английскую лемму EngParadigmId
+// РІС‹РґР°РµС‚ С‡Р°СЃС‚РѕС‚Сѓ РїРµСЂРµРІРѕРґР° СЂСѓСЃСЃРєРѕР№ Р»РµРјРјС‹ RusParadigmId РІ Р°РЅРіР»РёР№СЃРєСѓСЋ Р»РµРјРјСѓ EngParadigmId
 WORD CFreqDict::GetFreq(DWORD EngParadigmId, DWORD RusParadigmId) const
 {
 	// TODO: Add your implementation code here

@@ -2,8 +2,8 @@
 // ==========  Dialing Graphematical Module (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (1996-2001)
 
-//  Здесь собраны функции, которые находят вилочные дескрипторы. Например, обороты.
-//	Сборка таких групп возможна только потсроения графематической таблицы.
+//  Р—РґРµСЃСЊ СЃРѕР±СЂР°РЅС‹ С„СѓРЅРєС†РёРё, РєРѕС‚РѕСЂС‹Рµ РЅР°С…РѕРґСЏС‚ РІРёР»РѕС‡РЅС‹Рµ РґРµСЃРєСЂРёРїС‚РѕСЂС‹. РќР°РїСЂРёРјРµСЂ, РѕР±РѕСЂРѕС‚С‹.
+//	РЎР±РѕСЂРєР° С‚Р°РєРёС… РіСЂСѓРїРї РІРѕР·РјРѕР¶РЅР° С‚РѕР»СЊРєРѕ РїРѕС‚СЃСЂРѕРµРЅРёСЏ РіСЂР°С„РµРјР°С‚РёС‡РµСЃРєРѕР№ С‚Р°Р±Р»РёС†С‹.
 
 #include "StdGraph.h"
 #include "GraphmatFile.h"
@@ -15,30 +15,30 @@
 const size_t BigTextLengthInFilledLines  = 100;
 
 
-// пункты перечисления
+// РїСѓРЅРєС‚С‹ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ
 bool CGraphmatFile::DealBullet (size_t i, size_t HB)
 {
 	if (i == 0)    return false;
 	if (i  >= HB )  return false;
 
-	// проверяем, является ли данная графема перечислителем
+	// РїСЂРѕРІРµСЂСЏРµРј, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅР°СЏ РіСЂР°С„РµРјР° РїРµСЂРµС‡РёСЃР»РёС‚РµР»РµРј
 	if (!IsBulletWord (i))  return false;
 
 	if (HasDescr(i,OBullet)) return false;
 	size_t nt = PassSpace(i+1,HB);
 	size_t nh = BSpace(i-1);
-	// перед перечислителя должен стоять конец строки 
+	// РїРµСЂРµРґ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ РєРѕРЅРµС† СЃС‚СЂРѕРєРё 
 	if ((nh > 0) && !GetUnits()[nh].IsEOLN()) return false;
 
-	// удостоверяемся, что данная графема  не вошла  в графематические группы.
+	// СѓРґРѕСЃС‚РѕРІРµСЂСЏРµРјСЃСЏ, С‡С‚Рѕ РґР°РЅРЅР°СЏ РіСЂР°С„РµРјР°  РЅРµ РІРѕС€Р»Р°  РІ РіСЂР°С„РµРјР°С‚РёС‡РµСЃРєРёРµ РіСЂСѓРїРїС‹.
 	if (GetUnits()[nh].IsGrouped()) return false;
 
-	// после перечислителя должно стоять либо закрывающая скобка, либо точка
+	// РїРѕСЃР»Рµ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ РґРѕР»Р¶РЅРѕ СЃС‚РѕСЏС‚СЊ Р»РёР±Рѕ Р·Р°РєСЂС‹РІР°СЋС‰Р°СЏ СЃРєРѕР±РєР°, Р»РёР±Рѕ С‚РѕС‡РєР°
 	if (nt == HB) return false;
 	if (!HasDescr(nt,OCls) && !IsOneFullStop(nt)) return false;
 
-	// проверяем, относится ли закрывающая скобка к пункту перечисления,
-	// или спереди есть открывающая скобка, в таком случае, это не пункт перечисления  
+	// РїСЂРѕРІРµСЂСЏРµРј, РѕС‚РЅРѕСЃРёС‚СЃСЏ Р»Рё Р·Р°РєСЂС‹РІР°СЋС‰Р°СЏ СЃРєРѕР±РєР° Рє РїСѓРЅРєС‚Сѓ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ,
+	// РёР»Рё СЃРїРµСЂРµРґРё РµСЃС‚СЊ РѕС‚РєСЂС‹РІР°СЋС‰Р°СЏ СЃРєРѕР±РєР°, РІ С‚Р°РєРѕРј СЃР»СѓС‡Р°Рµ, СЌС‚Рѕ РЅРµ РїСѓРЅРєС‚ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ  
 	size_t TempLowBorder = 0;
 
 	if (i > 100)
@@ -46,16 +46,16 @@ bool CGraphmatFile::DealBullet (size_t i, size_t HB)
 
 	if  (HasDescr(nt,OCls))
 		for (size_t k=i; k > TempLowBorder; k--)
-			if (HasDescr (k,OCls)) // встретилась другая закрывающая  скобка 
+			if (HasDescr (k,OCls)) // РІСЃС‚СЂРµС‚РёР»Р°СЃСЊ РґСЂСѓРіР°СЏ Р·Р°РєСЂС‹РІР°СЋС‰Р°СЏ  СЃРєРѕР±РєР° 
 				break;
 			else
-				if  (HasDescr (k,OOpn)) // встретилась открывающая скобка 
+				if  (HasDescr (k,OOpn)) // РІСЃС‚СЂРµС‚РёР»Р°СЃСЊ РѕС‚РєСЂС‹РІР°СЋС‰Р°СЏ СЃРєРѕР±РєР° 
 					return false;
 
 
 
-	// проверяем, стоит ли после перечислителя знак препинания, если
-	// стоит, то это не пункт перечисления
+	// РїСЂРѕРІРµСЂСЏРµРј, СЃС‚РѕРёС‚ Р»Рё РїРѕСЃР»Рµ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ, РµСЃР»Рё
+	// СЃС‚РѕРёС‚, С‚Рѕ СЌС‚Рѕ РЅРµ РїСѓРЅРєС‚ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ
 	nt++;
 	if (nt == HB) return false;
 
@@ -76,7 +76,7 @@ bool CGraphmatFile::DealBullet (size_t i, size_t HB)
 }
 
 
-// пункты перечисления, которые начинаются со '*'
+// РїСѓРЅРєС‚С‹ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃРѕ '*'
 struct CAsteriskHyp{
 	size_t UnitNo;
 	size_t LineNo;
@@ -94,21 +94,21 @@ bool CGraphmatFile::DealAsteriskBullet (size_t LB, size_t HB)
 	{
 		if (GetUnits()[i].IsEOLN()) LineNo++;
 	
-		// проверяем, является ли данная графема звездочкой
+		// РїСЂРѕРІРµСЂСЏРµРј, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅР°СЏ РіСЂР°С„РµРјР° Р·РІРµР·РґРѕС‡РєРѕР№
 		if (!GetUnits()[i].IsAsterisk()) continue;
 
-		// удостоверяемся, что данная графема  не вошла  в графематические группы
+		// СѓРґРѕСЃС‚РѕРІРµСЂСЏРµРјСЃСЏ, С‡С‚Рѕ РґР°РЅРЅР°СЏ РіСЂР°С„РµРјР°  РЅРµ РІРѕС€Р»Р°  РІ РіСЂР°С„РµРјР°С‚РёС‡РµСЃРєРёРµ РіСЂСѓРїРїС‹
 		if (GetUnits()[i].IsGrouped() || HasDescr(i,OBullet)) continue;
 
 		size_t nh = BSpace(i-1);
 
 		size_t nt = PassSpace(i+1,HB);
 
-		// перед перечислителя должен стоять конец строки 
+		// РїРµСЂРµРґ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ РєРѕРЅРµС† СЃС‚СЂРѕРєРё 
 		if ((nh > 0) && !GetUnits()[nh].IsEOLN()) continue;
 
-		// проверяем, стоит ли после перечислителя знак препинания, если
-		// стоит, то это не пункт перечисления
+		// РїСЂРѕРІРµСЂСЏРµРј, СЃС‚РѕРёС‚ Р»Рё РїРѕСЃР»Рµ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ, РµСЃР»Рё
+		// СЃС‚РѕРёС‚, С‚Рѕ СЌС‚Рѕ РЅРµ РїСѓРЅРєС‚ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ
 		if (nt == HB) continue; 
 		if (HasDescr (nt,OPun)) continue;
 
@@ -166,7 +166,7 @@ bool DealIndention  (CGraphmatFile& G, size_t i, size_t Offset, const vector<WOR
 
 
 
-// пункты перечисления типа (1) или [1]
+// РїСѓРЅРєС‚С‹ РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ С‚РёРїР° (1) РёР»Рё [1]
 int  CGraphmatFile::DealBulletsWithTwoBrackets (size_t StartPos, size_t EndPos)
 {
   size_t i = StartPos;
@@ -179,22 +179,22 @@ int  CGraphmatFile::DealBulletsWithTwoBrackets (size_t StartPos, size_t EndPos)
 
   if (nt == EndPos) return false;
     
-   // проверяем, является ли данная графема перечислителем
+   // РїСЂРѕРІРµСЂСЏРµРј, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅР°СЏ РіСЂР°С„РµРјР° РїРµСЂРµС‡РёСЃР»РёС‚РµР»РµРј
   if (!IsBulletWord(nt) )  return false;
 
   size_t BulletWordNo = nt;
 
-  // удостоверяемся, что данная графема  не вошла  в графематические группы
+  // СѓРґРѕСЃС‚РѕРІРµСЂСЏРµРјСЃСЏ, С‡С‚Рѕ РґР°РЅРЅР°СЏ РіСЂР°С„РµРјР°  РЅРµ РІРѕС€Р»Р°  РІ РіСЂР°С„РµРјР°С‚РёС‡РµСЃРєРёРµ РіСЂСѓРїРїС‹
   size_t  nh = (i>0) ? BSpace(i-1) : 0;
 
-  // перед перечислителем должен стоять конец строки 
+  // РїРµСЂРµРґ РїРµСЂРµС‡РёСЃР»РёС‚РµР»РµРј РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ РєРѕРЅРµС† СЃС‚СЂРѕРєРё 
   if (   !GetUnits()[nh].IsEOLN()
 	  && (nh > 0)) return false;
 
   if (nt + 1 >= EndPos) return false;
   nt = PassSpace(nt+1,EndPos);
 
-  // после перечислителя должно стоять либо закрывающая скобка, либо точка
+  // РїРѕСЃР»Рµ РїРµСЂРµС‡РёСЃР»РёС‚РµР»СЏ РґРѕР»Р¶РЅРѕ СЃС‚РѕСЏС‚СЊ Р»РёР±Рѕ Р·Р°РєСЂС‹РІР°СЋС‰Р°СЏ СЃРєРѕР±РєР°, Р»РёР±Рѕ С‚РѕС‡РєР°
   if (nt == EndPos) return false;
 
   if   (   !HasDescr(nt, OCls) )  return false;
@@ -306,15 +306,15 @@ void CGraphmatFile::DealOborotto(size_t  HB)
 
 
 
-// РЕ1 - РЕ2
+// Р Р•1 - Р Р•2
 int CGraphmatFile::DealReferences (size_t i,size_t HB)
  {
-   // ч. 1 ст. 2
-   // п. 1 ст. 2 
-   // п. 1.1 ст. 2
+   // С‡. 1 СЃС‚. 2
+   // Рї. 1 СЃС‚. 2 
+   // Рї. 1.1 СЃС‚. 2
 
-   bool is_part_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == 'ч');
-   bool is_bullet_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == 'п');
+   bool is_part_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == 'С‡');
+   bool is_bullet_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == 'Рї');
 
    if (!is_part_string && !is_bullet_string) return false;
 
@@ -344,7 +344,7 @@ int CGraphmatFile::DealReferences (size_t i,size_t HB)
    if ( (nt == HB) || ((nt -k) > 20)) return false;
 
    if	(		(GetUnits()[nt].GetTokenLength() != 2) 
-			||	strncmp (GetUppercaseToken(nt), "СТ",2)
+			||	strncmp (GetUppercaseToken(nt), "РЎРў",2)
 		) 
 	  return false;
 
@@ -381,14 +381,14 @@ int CGraphmatFile::DealReferences (size_t i,size_t HB)
 
 
 
-// Здесь вычисляется среднее значение левого отступа (MinSpace) в отрезке [LB,HB].
-// Значение MinSpace будет использовавано для обнаружения красных строк.
+// Р—РґРµСЃСЊ РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ Р»РµРІРѕРіРѕ РѕС‚СЃС‚СѓРїР° (MinSpace) РІ РѕС‚СЂРµР·РєРµ [LB,HB].
+// Р—РЅР°С‡РµРЅРёРµ MinSpace Р±СѓРґРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°РІР°РЅРѕ РґР»СЏ РѕР±РЅР°СЂСѓР¶РµРЅРёСЏ РєСЂР°СЃРЅС‹С… СЃС‚СЂРѕРє.
 
-// LeftMargins[5] - число строк в тексте с отсупом 5
-// LeftMargins[10] - число строк в тексте с отсупом 10
+// LeftMargins[5] - С‡РёСЃР»Рѕ СЃС‚СЂРѕРє РІ С‚РµРєСЃС‚Рµ СЃ РѕС‚СЃСѓРїРѕРј 5
+// LeftMargins[10] - С‡РёСЃР»Рѕ СЃС‚СЂРѕРє РІ С‚РµРєСЃС‚Рµ СЃ РѕС‚СЃСѓРїРѕРј 10
 
 
-// Используется для fuzzy определeния минимального левого отступа 
+// РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ fuzzy РѕРїСЂРµРґРµР»eРЅРёСЏ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р»РµРІРѕРіРѕ РѕС‚СЃС‚СѓРїР° 
 const size_t MaxLeftMargin = 300;
 
 
@@ -398,12 +398,12 @@ void MapCorrectMinSpace (const CGraphmatFile& G, size_t LB, size_t HB, WORD& Fuz
 
 	MinSpace = 100;
 
-	//инициализция  частотоного массива  левых отступов
+	//РёРЅРёС†РёР°Р»РёР·С†РёСЏ  С‡Р°СЃС‚РѕС‚РѕРЅРѕРіРѕ РјР°СЃСЃРёРІР°  Р»РµРІС‹С… РѕС‚СЃС‚СѓРїРѕРІ
 	size_t k;
 	for ( k=0; k<MaxLeftMargin; k++)
 		LeftMargins[k] = 0;
 
-	//вычисление частотного массива левых отступов и минимального левого отступа
+	//РІС‹С‡РёСЃР»РµРЅРёРµ С‡Р°СЃС‚РѕС‚РЅРѕРіРѕ РјР°СЃСЃРёРІР° Р»РµРІС‹С… РѕС‚СЃС‚СѓРїРѕРІ Рё РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р»РµРІРѕРіРѕ РѕС‚СЃС‚СѓРїР°
 	for (size_t i=LB; i<HB; i++)
 	if ((i==1) || G.GetUnits()[i].IsEOLN())
 	{
@@ -471,30 +471,30 @@ bool  CanBeRussianInitial(const CGraphmatFile&C, size_t LineNo)
 
 int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
 {
-	// Сохранение начала проверяемой части предложения
+	// РЎРѕС…СЂР°РЅРµРЅРёРµ РЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂСЏРµРјРѕР№ С‡Р°СЃС‚Рё РїСЂРµРґР»РѕР¶РµРЅРёСЏ
 	size_t nh = i,nt;
 		
-	// Первая строка не может быть началом ФИО
+	// РџРµСЂРІР°СЏ СЃС‚СЂРѕРєР° РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅР°С‡Р°Р»РѕРј Р¤РРћ
 	if (nh == 0) return nh+1;
 
-	// Выделение первой буквы в инициалах
+	// Р’С‹РґРµР»РµРЅРёРµ РїРµСЂРІРѕР№ Р±СѓРєРІС‹ РІ РёРЅРёС†РёР°Р»Р°С…
 	if ((i == HB) || !CanBeRussianInitial(*this, nh)) 
 		return nh+1;
 
 	if (HasDescr(i,OEXPR1) != HasDescr(i,OEXPR2))  
 		return nh+1;
 
-	// Получение указателя на следующее непустое слово
+	// РџРѕР»СѓС‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РЅРµРїСѓСЃС‚РѕРµ СЃР»РѕРІРѕ
 	i = PSoft(i+1,HB);
 
-	// Проверка на наличие точки
+	// РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ С‚РѕС‡РєРё
 	if ((i == HB) || (!IsOneFullStop(i))) 
 		return nh+1;
 
-	// Получение указателя на третье непустое слово
+	// РџРѕР»СѓС‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° С‚СЂРµС‚СЊРµ РЅРµРїСѓСЃС‚РѕРµ СЃР»РѕРІРѕ
 	size_t l = PSoft(i+1,HB);
 
-	// Определение положения предшествующего выражения
+	// РћРїСЂРµРґРµР»РµРЅРёРµ РїРѕР»РѕР¶РµРЅРёСЏ РїСЂРµРґС€РµСЃС‚РІСѓСЋС‰РµРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ
 	size_t k = BSoft(nh-1);
 
 	bool flag_surname_is_after = 
@@ -503,7 +503,7 @@ int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
 		&& !HasIndention(nh,l)
 		&& (GetUnits()[l].GetTokenLength() > 1)
 
-		//// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
+		//// РёРЅР°С‡Рµ "Рў.Р•. РћРўРљРђР—РђРўР¬РЎРЇ" Р±СѓРґРµС‚ Р¤РРћ
 		&& (HasDescr(l,OEXPR1) == HasDescr(l,OEXPR2));
 
 	bool flag_surname_is_before = 
@@ -511,7 +511,7 @@ int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
 		&& !HasIndention(k,i) 
 		&& (GetUnits()[k].GetTokenLength() > 1)
 
-		//// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
+		//// РёРЅР°С‡Рµ "Рў.Р•. РћРўРљРђР—РђРўР¬РЎРЇ" Р±СѓРґРµС‚ Р¤РРћ
 		&& (HasDescr(k,OEXPR1) == HasDescr(k,OEXPR2));
 
 	if (!flag_surname_is_before && !flag_surname_is_after)
@@ -519,10 +519,10 @@ int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
 
 	if (flag_surname_is_after && flag_surname_is_after)
 	{
-		// берем число линий в первой последовательности
+		// Р±РµСЂРµРј С‡РёСЃР»Рѕ Р»РёРЅРёР№ РІ РїРµСЂРІРѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё
 		int num1 = CountEndL (nh,l);
 		int num2 = CountEndL (k,i);
-		// считаем число строк, разделяющих фамилию и инициалы 
+		// СЃС‡РёС‚Р°РµРј С‡РёСЃР»Рѕ СЃС‚СЂРѕРє, СЂР°Р·РґРµР»СЏСЋС‰РёС… С„Р°РјРёР»РёСЋ Рё РёРЅРёС†РёР°Р»С‹ 
 		if (num1 < num2)
 			flag_surname_is_before = 0;
 		else
@@ -539,7 +539,7 @@ int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
 			}
 	}
 
-	// остался только один вариант
+	// РѕСЃС‚Р°Р»СЃСЏ С‚РѕР»СЊРєРѕ РѕРґРёРЅ РІР°СЂРёР°РЅС‚
 	if (flag_surname_is_before)
 	{ 
 		nh = k;
@@ -550,7 +550,7 @@ int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
 		nt = l;
 	}
 
-	// Установка начала и конца ФИО
+	// РЈСЃС‚Р°РЅРѕРІРєР° РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р¤РРћ
 	SetDes(nh,OFAM1);
 	SetDes(nt,OFAM2);
 	SetState(nh,nt+1,stGrouped);
@@ -560,40 +560,40 @@ int CGraphmatFile::DealShortFIO(size_t i, size_t HB)
 
 int CGraphmatFile::DealFIO (size_t i,size_t HB)
 {
-	// Сохранение начала проверяемой части предложения
+	// РЎРѕС…СЂР°РЅРµРЅРёРµ РЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂСЏРµРјРѕР№ С‡Р°СЃС‚Рё РїСЂРµРґР»РѕР¶РµРЅРёСЏ
 	size_t nh = i,nt;
 
-	// Первое слово в первой строке не может быть началом фамилии
+	// РџРµСЂРІРѕРµ СЃР»РѕРІРѕ РІ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРµ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅР°С‡Р°Р»РѕРј С„Р°РјРёР»РёРё
 	if  (nh == 0) return nh+1;
 
-	// Проверка на наличие одиночной заглавной буквы 
+	// РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РѕРґРёРЅРѕС‡РЅРѕР№ Р·Р°РіР»Р°РІРЅРѕР№ Р±СѓРєРІС‹ 
 	if ((i == HB) || !CanBeRussianInitial(*this, nh)) return nh+1;
 	if (HasDescr(i,OEXPR1) != HasDescr(i,OEXPR2))  return nh+1;
 		
-	// Получение указателя на следующее непустое слово
+	// РџРѕР»СѓС‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РЅРµРїСѓСЃС‚РѕРµ СЃР»РѕРІРѕ
 	i = PSoft(i+1,HB);
 	
-	// Проверка на наличие точки
+	// РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ С‚РѕС‡РєРё
 	if ((i == HB) || (!IsOneFullStop(i))) return nh+1;
 
-	// Получение указателя на следующее непустое слово
+	// РџРѕР»СѓС‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РЅРµРїСѓСЃС‚РѕРµ СЃР»РѕРІРѕ
 	i = PSoft(i+1,HB);
 
-	// Проверка на наличие на наличие одиночной заглавной буквы
+	// РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РЅР° РЅР°Р»РёС‡РёРµ РѕРґРёРЅРѕС‡РЅРѕР№ Р·Р°РіР»Р°РІРЅРѕР№ Р±СѓРєРІС‹
 	if ((i == HB) || !CanBeRussianInitial(*this, i) )return nh+1;
 	if (HasDescr(i,OEXPR1) != HasDescr(i,OEXPR2))  return nh+1;
 
-	// Получение указателя на следующее непустое слово
+	// РџРѕР»СѓС‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РЅРµРїСѓСЃС‚РѕРµ СЃР»РѕРІРѕ
 	i = PSoft(i+1,HB);
 
-	// Проверка на наличие точки
+	// РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ С‚РѕС‡РєРё
 	if ( (i == HB) || (!IsOneFullStop(i)))
 		return nh+1;
 
-	// Получение указателя на следующее непустое слово
+	// РџРѕР»СѓС‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РЅРµРїСѓСЃС‚РѕРµ СЃР»РѕРІРѕ
 	size_t l = PSoft(i+1,HB);
 
-	// Определение положения предшествующего выражения
+	// РћРїСЂРµРґРµР»РµРЅРёРµ РїРѕР»РѕР¶РµРЅРёСЏ РїСЂРµРґС€РµСЃС‚РІСѓСЋС‰РµРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ
 	size_t k = BSoft(nh-1);
 
 	bool flag_surname_is_after = 
@@ -602,7 +602,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 					&& !HasIndention(nh,l)
 					&& (GetUnits()[l].GetTokenLength() > 1)
 
-					//// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
+					//// РёРЅР°С‡Рµ "Рў.Р•. РћРўРљРђР—РђРўР¬РЎРЇ" Р±СѓРґРµС‚ Р¤РРћ
 					&& (HasDescr(l,OEXPR1) == HasDescr(l,OEXPR2));
 
 	bool flag_surname_is_before = 
@@ -610,7 +610,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 				&& !HasIndention(k,i) 
 				&& (GetUnits()[k].GetTokenLength() > 1)
 
-				//// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
+				//// РёРЅР°С‡Рµ "Рў.Р•. РћРўРљРђР—РђРўР¬РЎРЇ" Р±СѓРґРµС‚ Р¤РРћ
 				&& (HasDescr(k,OEXPR1) == HasDescr(k,OEXPR2));
 
 	if (!flag_surname_is_before && !flag_surname_is_after)
@@ -618,10 +618,10 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 
 	if (flag_surname_is_after && flag_surname_is_after)
 	{
-		// берем число линий в первой последовательности
+		// Р±РµСЂРµРј С‡РёСЃР»Рѕ Р»РёРЅРёР№ РІ РїРµСЂРІРѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё
 		int num1 = CountEndL (nh,l);
 		int num2 = CountEndL (k,i);
-		// считаем число строк, разделяющих фамилию и инициалы 
+		// СЃС‡РёС‚Р°РµРј С‡РёСЃР»Рѕ СЃС‚СЂРѕРє, СЂР°Р·РґРµР»СЏСЋС‰РёС… С„Р°РјРёР»РёСЋ Рё РёРЅРёС†РёР°Р»С‹ 
 		if (num1 < num2)
 		flag_surname_is_before = 0;
 		else
@@ -638,7 +638,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 		}
 	}
 
-	 // остался только один вариант
+	 // РѕСЃС‚Р°Р»СЃСЏ С‚РѕР»СЊРєРѕ РѕРґРёРЅ РІР°СЂРёР°РЅС‚
     if (flag_surname_is_before)
     { 
 		nh = k;
@@ -649,7 +649,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 		nt = l;
     }
 
-	// Установка начала и конца ФИО
+	// РЈСЃС‚Р°РЅРѕРІРєР° РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р¤РРћ
 	SetDes(nh,OFAM1);
 	SetDes(nt,OFAM2);
 	SetState(nh,nt+1,stGrouped);
@@ -698,15 +698,15 @@ void CGraphmatFile::DealNames (size_t LB, size_t  HB)
 
 /*
   readme.txt - > FILE1 - FILE2
-  мама.txt - > FILE1 - FILE2
+  РјР°РјР°.txt - > FILE1 - FILE2
 */
 
 /*
-истина, если строка может быть названием файла (до расширения), например:
+РёСЃС‚РёРЅР°, РµСЃР»Рё СЃС‚СЂРѕРєР° РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅР°Р·РІР°РЅРёРµРј С„Р°Р№Р»Р° (РґРѕ СЂР°СЃС€РёСЂРµРЅРёСЏ), РЅР°РїСЂРёРјРµСЂ:
 1.txt
 1a.txt
 a.txt
-мама.txt
+РјР°РјР°.txt
 *.txt
 ..\t.txt
 */
@@ -745,7 +745,7 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 		if (LB == 0 || !CanBeFileName(*this, LB-1))
 		{
 			/*
-			Пример "рассмотрим файлы .txt"
+			РџСЂРёРјРµСЂ "СЂР°СЃСЃРјРѕС‚СЂРёРј С„Р°Р№Р»С‹ .txt"
 			*/
 			if ( !GetUnits()[LB-1].IsSoft() && (LB != 1)) 
 				return;
@@ -769,11 +769,11 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 
 	
 	/*
-	рассмотрим случай "c:\drivers\text.txt" 
-	и "\drivers\text.txt" 
-	и "..\drivers\text.txt" 
-	и "..\drivers\*.txt" 
-	и "drivers\*.txt" 
+	СЂР°СЃСЃРјРѕС‚СЂРёРј СЃР»СѓС‡Р°Р№ "c:\drivers\text.txt" 
+	Рё "\drivers\text.txt" 
+	Рё "..\drivers\text.txt" 
+	Рё "..\drivers\*.txt" 
+	Рё "drivers\*.txt" 
 
 	*/
 	while (StartToken > 1)
@@ -821,7 +821,7 @@ void CGraphmatFile::DealExtensionsAndLocalFileNames(size_t LB, size_t  HB)
 				&&	is_english_alpha((BYTE)s[0])
 			)
 		{
-			/* найдена цепочка c:\test.txt  к - может указывать на первую строку файла*/
+			/* РЅР°Р№РґРµРЅР° С†РµРїРѕС‡РєР° c:\test.txt  Рє - РјРѕР¶РµС‚ СѓРєР°Р·С‹РІР°С‚СЊ РЅР° РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ С„Р°Р№Р»Р°*/
 			StartToken --;
 		};
 	}
@@ -940,7 +940,7 @@ void CGraphmatFile::DealModifierKey(size_t StartLowerBound, size_t  HB)
 		};
 		if (LB == SaveStart) continue;
 
-		// ищем в клавишах
+		// РёС‰РµРј РІ РєР»Р°РІРёС€Р°С…
 		size_t GraEnd;
 		if (!IsKey(LB, HB, GraEnd)) continue;
 
@@ -958,7 +958,7 @@ void CGraphmatFile::DealModifierKey(size_t StartLowerBound, size_t  HB)
 // F1-z
 void CGraphmatFile::DealSimpleKey(size_t LB, size_t  HB)
 {
-	// ищем в клавишах
+	// РёС‰РµРј РІ РєР»Р°РІРёС€Р°С…
   size_t GraLast;
   if (    !IsKey(LB, HB, GraLast)
 	 ) return;
@@ -1118,7 +1118,7 @@ static void InitEnglishNameSlot (CGraphmatFile& C)
 int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 {
 
-	int NumOfFilledLines = 0;   //  число непустых строк
+	int NumOfFilledLines = 0;   //  С‡РёСЃР»Рѕ РЅРµРїСѓСЃС‚С‹С… СЃС‚СЂРѕРє
 
 	WORD		FuzzyMinSpace;  /* This variable is the fuzzy min left margin.
 	It is used to determine indentions  of the text
@@ -1143,7 +1143,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	};
 
 
-	//  === Смещение от левого края =====
+	//  === РЎРјРµС‰РµРЅРёРµ РѕС‚ Р»РµРІРѕРіРѕ РєСЂР°СЏ =====
 	vector<WORD> gLeftMargins;
 	try{
 		CalculateLMarg(*this, gLeftMargins);
@@ -1155,7 +1155,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	};
 
 
-	//  === Обороты =====
+	//  === РћР±РѕСЂРѕС‚С‹ =====
 	try {
 		DealOborotto (HB);
 	}
@@ -1165,7 +1165,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 		throw;
 	};
 
-	//  === Имена собственные (Им?) =====
+	//  === РРјРµРЅР° СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ (РРј?) =====
 	try {
 		DealNames (LB,HB);
 	}
@@ -1196,7 +1196,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	};
 
 	try{
-		//  === Минимальный левый отступ =====
+		//  === РњРёРЅРёРјР°Р»СЊРЅС‹Р№ Р»РµРІС‹Р№ РѕС‚СЃС‚СѓРї =====
 			MapCorrectMinSpace (*this, LB+1,HB, FuzzyMinSpace,MinSpace, NumOfFilledLines, gLeftMargins);
 	}
 	catch (...)
@@ -1227,7 +1227,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	};
 
 
-	//  === Реф-отрезки =====
+	//  === Р РµС„-РѕС‚СЂРµР·РєРё =====
 	try {
 		for (size_t  i=LB; i<HB; i++)
 			DealReferences(i,HB);
@@ -1239,7 +1239,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	};
 
 
-	// ============  расширения файлов
+	// ============  СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»РѕРІ
 	try {
 		for (size_t i=HB-1; i>0; i--)
 			DealExtensionsAndLocalFileNames(i,HB);
@@ -1287,7 +1287,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 
 
 
-	//  === ФИО  =====
+	//  === Р¤РРћ  =====
 	try {
 		for (size_t i=LB; i<HB;)
 				i = DealFIO (i,HB);
@@ -1298,7 +1298,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 		throw;
 	};
 
-	// ==== Короткая форма ФИО ====
+	// ==== РљРѕСЂРѕС‚РєР°СЏ С„РѕСЂРјР° Р¤РРћ ====
 	if (m_bRecognizeShortFIOs)
 	{
 		try {
@@ -1324,7 +1324,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 	};
 
 
-	//  === Все остальное =====
+	//  === Р’СЃРµ РѕСЃС‚Р°Р»СЊРЅРѕРµ =====
 	try
 	{
 		size_t LastAsteriskNo = 0;

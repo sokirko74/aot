@@ -5,17 +5,17 @@
 
 
 /*
-TITLЕ	= _ _CAT	= GEOSF 	= МЕСТО
-SF ( Г (1)) = МЕСТО
-GF (1) = С
-GF (2)	= 1 Бб
-	   2 ИЛЕ
-	   3 ЭА
-	   4 квч
-EXM	= 1 поле СинАн
-	   2 сети Usenet
-	   3 адрес www.91.ru
-4 газета "Нью Йорк Таймс"   	
+TITLР•	= _ _CAT	= GEOSF 	= РњР•РЎРўРћ
+SF ( Р“ (1)) = РњР•РЎРўРћ
+GF (1) = РЎ
+GF (2)	= 1 Р‘Р±
+	   2 РР›Р•
+	   3 Р­Рђ
+	   4 РєРІС‡
+EXM	= 1 РїРѕР»Рµ РЎРёРЅРђРЅ
+	   2 СЃРµС‚Рё Usenet
+	   3 Р°РґСЂРµСЃ www.91.ru
+4 РіР°Р·РµС‚Р° "РќСЊСЋ Р™РѕСЂРє РўР°Р№РјСЃ"   	
 */
 
 
@@ -38,7 +38,7 @@ bool CRusSemStructure :: IsLocNode(size_t NodeNo) const
 ;
   if (     Result
 	    && (N.GetType() == LocRoss) 
-	    && GetRossHolder(LocRoss)->HasCX(N.GetUnitNo(),  "ЧАСТЬ_ТЕЛА", "D_SF")
+	    && GetRossHolder(LocRoss)->HasCX(N.GetUnitNo(),  "Р§РђРЎРўР¬_РўР•Р›Рђ", "D_SF")
 		&& !N.HasSomePrep()
      )
   return false; 
@@ -50,7 +50,7 @@ bool CRusSemStructure :: IsLocNode(size_t NodeNo) const
 	 )
 	 return true;
 
-  if (     N.HasPOS(ADV) // где, далеко
+  if (     N.HasPOS(ADV) // РіРґРµ, РґР°Р»РµРєРѕ
 	    && (N.GetType()   != NoneRoss)
 	)
 		if ( GetRossHolder(N.GetType())->HasCX(N.GetUnitNo(),  "LOK", "D_SEM_REL") )	 
@@ -88,23 +88,23 @@ RelationStr = "SRC-PNT";			 return  true;
 
 /*
 
-  1. Правило объединения геогрупп с предлогами "в" и "на"
-  рус	П	В
-   в	in	to
-  на	on	to
+  1. РџСЂР°РІРёР»Рѕ РѕР±СЉРµРґРёРЅРµРЅРёСЏ РіРµРѕРіСЂСѓРїРї СЃ РїСЂРµРґР»РѕРіР°РјРё "РІ" Рё "РЅР°"
+  СЂСѓСЃ	Рџ	Р’
+   РІ	in	to
+  РЅР°	on	to
 
-TITLЕ	= рус  _CAT	= GEO GF	= ОБСТ
- SF (2) = МЕСТО
- GF (2) = 1 П
-                  2 В
+TITLР•	= СЂСѓСЃ  _CAT	= GEO GF	= РћР‘РЎРў
+ SF (2) = РњР•РЎРўРћ
+ GF (2) = 1 Рџ
+                  2 Р’
 ENG (1) = in 
-// TITLЕ (1) = в 
-//GF (2) = Пon 
-// TITLЕ (1) = на
-// GF (2) = П	      to 
-// GF (2)= В
- EXM 	= в поле Linux
-	    на адрес www.ru.91 
+// TITLР• (1) = РІ 
+//GF (2) = Рџon 
+// TITLР• (1) = РЅР°
+// GF (2) = Рџ	      to 
+// GF (2)= Р’
+ EXM 	= РІ РїРѕР»Рµ Linux
+	    РЅР° Р°РґСЂРµСЃ www.ru.91 
 */
 
 
@@ -117,7 +117,7 @@ string    GetPO (const CDictionary* Ross, WORD UnitNo, long POFieldNo)
 		 )
 			return (const char*)Ross->GetDomItemStr(GetCortege(Ross,i).m_DomItemNos[0]);
 
-   return string("общ");
+   return string("РѕР±С‰");
 };
 
 struct  CLocHostHypot {
@@ -201,11 +201,11 @@ long CRusSemStructure::FindLocHost (long NodeNo, long ClauseNo)
 };
 
 /*
-  1. Если слева от Иг1 (SF (Иг1 = МЕСТО) стоит Иг2 без локативного предлога так, 
-что SF (Г (Иг2)) = МЕСТО, то Иг1 обьединяется с  Иг2 в одну GEO, а составляющимприписывается отношение LOK (Иг1, Иг2).  EXM = Снохомишская публичная библиотека в штате Вашингтон
+  1. Р•СЃР»Рё СЃР»РµРІР° РѕС‚ РРі1 (SF (РРі1 = РњР•РЎРўРћ) СЃС‚РѕРёС‚ РРі2 Р±РµР· Р»РѕРєР°С‚РёРІРЅРѕРіРѕ РїСЂРµРґР»РѕРіР° С‚Р°Рє, 
+С‡С‚Рѕ SF (Р“ (РРі2)) = РњР•РЎРўРћ, С‚Рѕ РРі1 РѕР±СЊРµРґРёРЅСЏРµС‚СЃСЏ СЃ  РРі2 РІ РѕРґРЅСѓ GEO, Р° СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёРјРїСЂРёРїРёСЃС‹РІР°РµС‚СЃСЏ РѕС‚РЅРѕС€РµРЅРёРµ LOK (РРі1, РРі2).  EXM = РЎРЅРѕС…РѕРјРёС€СЃРєР°СЏ РїСѓР±Р»РёС‡РЅР°СЏ Р±РёР±Р»РёРѕС‚РµРєР° РІ С€С‚Р°С‚Рµ Р’Р°С€РёРЅРіС‚РѕРЅ
 
-  2. Если слева от Иг1 (SF (Иг1) = МЕСТО) стоит Иг2 с локативным предлогом так, 
-что SF (Г (Иг2)) = МЕСТО, то Иг1 обьединяется с  Иг2 в одну GEO, а составляющимприписывается отношение LOK (Иг2, Иг1).  EXM = в доме на компьютере    
+  2. Р•СЃР»Рё СЃР»РµРІР° РѕС‚ РРі1 (SF (РРі1) = РњР•РЎРўРћ) СЃС‚РѕРёС‚ РРі2 СЃ Р»РѕРєР°С‚РёРІРЅС‹Рј РїСЂРµРґР»РѕРіРѕРј С‚Р°Рє, 
+С‡С‚Рѕ SF (Р“ (РРі2)) = РњР•РЎРўРћ, С‚Рѕ РРі1 РѕР±СЊРµРґРёРЅСЏРµС‚СЃСЏ СЃ  РРі2 РІ РѕРґРЅСѓ GEO, Р° СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёРјРїСЂРёРїРёСЃС‹РІР°РµС‚СЃСЏ РѕС‚РЅРѕС€РµРЅРёРµ LOK (РРі2, РРі1).  EXM = РІ РґРѕРјРµ РЅР° РєРѕРјРїСЊСЋС‚РµСЂРµ    
 */
 void    CRusSemStructure :: PutLocRelations(long ClauseNo)
 {
@@ -239,7 +239,7 @@ long  CRusSemStructure :: GetLocInterp(string UnitStr, bool& NegativeForm) const
   NegativeForm = false;
   WORD UnitNo = GetRossHolder(LocRoss)->LocateUnit(UnitStr.c_str(), 1);
   if (UnitNo == ErrUnitNo)
-	 if (UnitStr.substr(0,2) == "не")
+	 if (UnitStr.substr(0,2) == "РЅРµ")
 		 {
 			 UnitNo = GetRossHolder(LocRoss)->LocateUnit(UnitStr.substr(0, UnitStr.length() - 2).c_str(), 1);
 			 if (UnitNo != ErrUnitNo)
@@ -247,7 +247,7 @@ long  CRusSemStructure :: GetLocInterp(string UnitStr, bool& NegativeForm) const
 		 };
   string PO = GetPO(GetRoss(LocRoss), UnitNo, GetRossHolder(LocRoss)->POFieldNo);
   if (UnitNo != ErrUnitNo)
-	   if (   (PO == "общ") 
+	   if (   (PO == "РѕР±С‰") 
 		   || (m_PO == PO) 
 		  ) 
 		 return UnitNo;

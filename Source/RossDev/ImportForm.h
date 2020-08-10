@@ -65,7 +65,7 @@ public:
 
 
 // Dialog Data
-	//{{AFX_DATA(ÑImportForm)
+	//{{AFX_DATA(Ð¡ImportForm)
 	enum { IDD = IDD_IMPORT_DLG };
 	CHotKeyCtrl	m_HotKeys;
 	int		m_OverWrite;
@@ -80,7 +80,7 @@ public:
 
 // Overrides
 	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(ÑImportForm)
+	//{{AFX_VIRTUAL(Ð¡ImportForm)
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
@@ -89,7 +89,7 @@ public:
 protected:
 
 	// Generated message  functions
-	//{{AFX_MSG(ÑImportForm)
+	//{{AFX_MSG(Ð¡ImportForm)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnRadio1();
 	afx_msg void OnRadio2();

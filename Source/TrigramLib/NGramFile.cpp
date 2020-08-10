@@ -79,7 +79,7 @@ bool CTrigramModel::read_ngram_file()
 		
 		char *s = buffer;
 		int i=0;
-		for (; *s=='\t'; i++, s++) { /* nadо */ }
+		for (; *s=='\t'; i++, s++) { /* nadРѕ */ }
 
 		if (i>2) 
 		{
@@ -153,7 +153,7 @@ void CTrigramModel::compute_counts_for_boundary()
 			xb-= m_Bigrams[ ngram_index(i, j) ];
 
 			bxy = xyb = m_Bigrams[ ngram_index(i, j) ];
-			if (bxy > 0) // если bxy = 0, тогда следующий цикл не будет осмысленным
+			if (bxy > 0) // РµСЃР»Рё bxy = 0, С‚РѕРіРґР° СЃР»РµРґСѓСЋС‰РёР№ С†РёРєР» РЅРµ Р±СѓРґРµС‚ РѕСЃРјС‹СЃР»РµРЅРЅС‹Рј
 			for (WORD k=1; k<m_TagsCount; k++)
 			{
 				bxy-= (int)GetTrigram( k, i, j );

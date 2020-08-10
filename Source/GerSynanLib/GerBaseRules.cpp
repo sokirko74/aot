@@ -222,7 +222,7 @@ bool CGerSentence::RuleForPartzipialKonstruktion(int iClauseNum)
 // enclose an infinitive clause to the previous one, preferring the clauses, which have
 // the predicate "sein",  for example:
 // (1) "Der Dienst ist, sofern ich verstehe, zu leisten."
-// (2) "Es gebe eine Reihe von Kunden , die AOL nur wegen der fehlenden Möglichkeit, Bankgeschäfte zu tätigen , nicht abonniert hatten"
+// (2) "Es gebe eine Reihe von Kunden , die AOL nur wegen der fehlenden MÑ†glichkeit, BankgeschÐ´fte zu tÐ´tigen , nicht abonniert hatten"
 // For Example (1) we should include "zu leisten" to the main clause, because of "ist".
 bool CGerSentence::RuleForInfinitive(int iClauseNum)
 {
@@ -276,10 +276,10 @@ bool CGerSentence::RuleForModalVerb(int iClauseNum)
 		const SClauseType&  type = pMainClause->m_vectorTypes[0];
 		if (type.m_Root.IsEmpty()) return false;
 		const CSynHomonym& H = m_Words[type.m_Root.m_WordNo].m_Homonyms[type.m_Root.m_HomonymNo];
-		if	(		!H.IsLemma("MÜSSEN")
-				&&	!H.IsLemma("KÖNNEN")
-				&&	!H.IsLemma("DÜRFEN")
-				&&	!H.IsLemma("MÖGEN")
+		if	(		!H.IsLemma("MÐ¬SSEN")
+				&&	!H.IsLemma("KÐ¦NNEN")
+				&&	!H.IsLemma("DÐ¬RFEN")
+				&&	!H.IsLemma("MÐ¦GEN")
 				&&	!H.IsLemma("WOLLEN")
 				&&	!H.IsLemma("SOLLEN")
 				&&	!H.IsLemma("LASSEN")
@@ -420,7 +420,7 @@ bool CGerSentence::RuleForEmptyClauses(int iClauseNum)
 	// if the previous clause is enclosed and has a predicate at the end, then it cannot be 
 	// extended to the right, then we can take the maximal clause, and try it
 	//  for example
-	// Österreich habe dem deutschen Volk, zu dem es sich bekenne, Dienste geleistet.
+	// Ð¦sterreich habe dem deutschen Volk, zu dem es sich bekenne, Dienste geleistet.
 	if (iPrev != -1)
 	{
 		int MaxPrevClause = GetMaxClauseByLastWord(Clause.m_iFirstWord-1);

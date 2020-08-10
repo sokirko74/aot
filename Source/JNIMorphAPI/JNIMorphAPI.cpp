@@ -86,7 +86,7 @@ enum rus_grammems{
 	plural, singular,
 	// 2..8
 	padejImen, padejRodit, padejDatel, padejVinit, padejTvor, padejPredl, padejZvateln,
-	// род 9-12
+	// СЂРѕРґ 9-12
 	rodMuj, rodJen, rodSred, rodMujJen,
 	// 13..15
 	present, future, past,
@@ -110,7 +110,7 @@ enum rus_grammems{
 	lokativnost, organizaciya,
 	// 34-35
 	kachestv, neImeetMnojestvChisla,
-	// 36-37 (наречия)
+	// 36-37 (РЅР°СЂРµС‡РёСЏ)
 	voprositNarech, ukazat,
 	// 38..39
 	firstName, lastName,
@@ -120,7 +120,7 @@ enum rus_grammems{
 	jargon, opechatka,
 	// 43,44,45
 	razgovorn, posessive, archaic,
-	// для второго родительного и второго предложного
+	// РґР»СЏ РІС‚РѕСЂРѕРіРѕ СЂРѕРґРёС‚РµР»СЊРЅРѕРіРѕ Рё РІС‚РѕСЂРѕРіРѕ РїСЂРµРґР»РѕР¶РЅРѕРіРѕ
 	padej2,
 	poet, professionalizm,
 	prev, poloj

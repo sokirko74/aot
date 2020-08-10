@@ -94,7 +94,7 @@ int CMorphVariant::GetHomNum(int iMemb) const
 }
 
 /*
- сравнение CMorphVariant-ов по номерам омонимов и по номерам вершин вложенных клауз
+ СЃСЂР°РІРЅРµРЅРёРµ CMorphVariant-РѕРІ РїРѕ РЅРѕРјРµСЂР°Рј РѕРјРѕРЅРёРјРѕРІ Рё РїРѕ РЅРѕРјРµСЂР°Рј РІРµСЂС€РёРЅ РІР»РѕР¶РµРЅРЅС‹С… РєР»Р°СѓР·
 */
 bool CMorphVariant::EqualTo(const CMorphVariant& variant) const
 {

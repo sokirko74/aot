@@ -164,7 +164,7 @@ bool CGraphmatFile::DealSentBreaker ()
 		As soon we have found an open bracket inside the sentence  we should find a matching close bracket for it.
 		We pass all possible  "end of sentence" marks until we find a match. Only if we find 
 		a paragraph break then we set an end of sentence.
-		According to this  rule, in the example "Test (test. test)  Ã‡Ï‡." the procedure finds only  two sentences.
+		According to this  rule, in the example "Test (test. test)  –ú–∞–º–∞." the procedure finds only  two sentences.
 	*/
 	BYTE InnerOpenBracket = 0;
 
@@ -321,7 +321,7 @@ bool CGraphmatFile::DealSentBreaker ()
 			if	(       StartSent<EndPos 
 					&& (  (HasDescr (StartSent, ORLE) || HasDescr (StartSent, OLLE))
 					&&  !(HasDescr (StartSent, OUp) || HasDescr (StartSent, OUpLw))
-					|| StartSent > 1 && HasDescr (StartSent, ODigits) && GetUnits()[StartSent - 2].IsWordOrNumberOrAbbr()) //Number after Abbr: "ÒÚ. 129 ”  –‘"
+					|| StartSent > 1 && HasDescr (StartSent, ODigits) && GetUnits()[StartSent - 2].IsWordOrNumberOrAbbr()) //Number after Abbr: "—Å—Ç. 129 –£–ö –†–§"
 				)
 				continue;
 

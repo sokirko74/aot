@@ -72,16 +72,16 @@ int main(int argc, char* argv[])
 #include "stdio.h"
 #include "string.h"
 #include "string"
-#import "../../bin/graphan.tlb"//  импортируембиблиотеку
+#import "../../bin/graphan.tlb"//  РёРјРїРѕСЂС‚РёСЂСѓРµРјР±РёР±Р»РёРѕС‚РµРєСѓ
  
 // String Example
 int main (int argc, char* argv[])
 {
   try
   {
-      // инициализируем библиотеку COM
+      // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Р±РёР±Р»РёРѕС‚РµРєСѓ COM
       CoInitialize(NULL);
-      // инициализируем переменную класса IGraphmatFilePtr
+      // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРµСЂРµРјРµРЅРЅСѓСЋ РєР»Р°СЃСЃР° IGraphmatFilePtr
       GRAPHANLib::IGraphmatFilePtr piGraphan;
       HRESULT hr = piGraphan.CreateInstance(__uuidof(GRAPHANLib::GraphmatFile));
       if (FAILED (hr))
@@ -95,12 +95,12 @@ int main (int argc, char* argv[])
  
       piGraphan->LoadDicts();
  
-      // загружаем строчку в графематику 
-      piGraphan->LoadStringToGraphan("мама мыла раму");
+      // Р·Р°РіСЂСѓР¶Р°РµРј СЃС‚СЂРѕС‡РєСѓ РІ РіСЂР°С„РµРјР°С‚РёРєСѓ 
+      piGraphan->LoadStringToGraphan("РјР°РјР° РјС‹Р»Р° СЂР°РјСѓ");
  
       _bstr_t t = piGraphan->GetWord(3);
  
-      assert (t == _bstr_t("раму"));
+      assert (t == _bstr_t("СЂР°РјСѓ"));
   }
   catch(...)
   {

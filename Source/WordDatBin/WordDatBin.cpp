@@ -1,5 +1,5 @@
-// ���������� ������ �� ����� <DataFile> (��. StatTxtDat)
-// ���������� ���� <pid,weight> � ���� "r*wordweight.bin"
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ <DataFile> (пїЅпїЅ. StatTxtDat)
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ <pid,weight> пїЅ пїЅпїЅпїЅпїЅ "r*wordweight.bin"
 
 
 #include "../common/util_classes.h"

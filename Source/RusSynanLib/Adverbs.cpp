@@ -5,9 +5,9 @@
 #include "StdSynan.h"
 #include "RusFormatCaller.h"
 
-// Примеры:
-//    гораздо умнее
-//    значительно круче и сильнее 
+// РџСЂРёРјРµСЂС‹:
+//    РіРѕСЂР°Р·РґРѕ СѓРјРЅРµРµ
+//    Р·РЅР°С‡РёС‚РµР»СЊРЅРѕ РєСЂСѓС‡Рµ Рё СЃРёР»СЊРЅРµРµ 
 
 bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 {
@@ -28,7 +28,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 	            G.m_MainGroup = G.m_iLastWord;
 				G.SetGrammems(sent[G.m_iLastWord]);
 				create_syn_rel(G, G.m_iFirstWord, G.m_iLastWord, COMP_ADV);				
-			    G.m_Cause = " Аналитическая форма сравнительной степени прил. или наречия.";}
+			    G.m_Cause = " РђРЅР°Р»РёС‚РёС‡РµСЃРєР°СЏ С„РѕСЂРјР° СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕР№ СЃС‚РµРїРµРЅРё РїСЂРёР». РёР»Рё РЅР°СЂРµС‡РёСЏ.";}
 	   else;
     else
       if  (    (GetGroups()[I].m_GroupType == SIMILAR_ADJS)
@@ -38,7 +38,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 	      G.m_MainGroup = GetGroups()[I].m_MainGroup.m_iFirstWord;
 		  G.SetGrammems(sent[GetGroups()[I].m_MainGroup.m_iFirstWord]);
 		  create_syn_rel(G, G.m_iFirstWord,get_main_word_in_group(GetGroups()[I]), COMP_ADV);
-		  G.m_Cause = " Аналитическая форма сравнительной степени соч. группы прил.";
+		  G.m_Cause = " РђРЅР°Р»РёС‚РёС‡РµСЃРєР°СЏ С„РѕСЂРјР° СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕР№ СЃС‚РµРїРµРЅРё СЃРѕС‡. РіСЂСѓРїРїС‹ РїСЂРёР».";
 	  }
 
 
@@ -49,16 +49,16 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 
 bool IsUZH_Particle (const CSynPlmLine& W)
 {
-    return W.is_lemma("УЖ") && W.HasPOS(PARTICLE);
+    return W.is_lemma("РЈР–") && W.HasPOS(PARTICLE);
 };
 
 
-// Примеры:
-//     очень хороший
-//	 весьма близкий и родной (ПРИЛАГАТЕЛЬНОЕ)
-//     абсолютно и относительно непознаваемый (ПРИЧАСТИЕ)
-//     весьма далеко  (НАРЕЧИЕ)
-//     особенно интересно (ПРЕДИКАТИВ)
+// РџСЂРёРјРµСЂС‹:
+//     РѕС‡РµРЅСЊ С…РѕСЂРѕС€РёР№
+//	 РІРµСЃСЊРјР° Р±Р»РёР·РєРёР№ Рё СЂРѕРґРЅРѕР№ (РџР РР›РђР“РђРўР•Р›Р¬РќРћР•)
+//     Р°Р±СЃРѕР»СЋС‚РЅРѕ Рё РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅРµРїРѕР·РЅР°РІР°РµРјС‹Р№ (РџР РР§РђРЎРўРР•)
+//     РІРµСЃСЊРјР° РґР°Р»РµРєРѕ  (РќРђР Р•Р§РР•)
+//     РѕСЃРѕР±РµРЅРЅРѕ РёРЅС‚РµСЂРµСЃРЅРѕ (РџР Р•Р”РРљРђРўРР’)
 
 bool CRusFormatCaller::format_for_adv_adj(CGroup& G)
 {
@@ -76,7 +76,7 @@ bool CRusFormatCaller::format_for_adv_adj(CGroup& G)
 		int j = get_next_main_word (i);
 		if (j == sent.size()) return false;
 
-		//  проходим частицу, если она встретилась
+		//  РїСЂРѕС…РѕРґРёРј С‡Р°СЃС‚РёС†Сѓ, РµСЃР»Рё РѕРЅР° РІСЃС‚СЂРµС‚РёР»Р°СЃСЊ
 		if (GetGramTab()->IsSimpleParticle(Wj.get_lemma(), Wj.GetPoses()))
 			j = get_next_main_word (j);
 		if (j == sent.size()) return false;
@@ -87,7 +87,7 @@ bool CRusFormatCaller::format_for_adv_adj(CGroup& G)
 			return false;
 
 
-		G.m_Cause = "Слова степени (типа \"очень\") с группой прилагательных или причастий";
+		G.m_Cause = "РЎР»РѕРІР° СЃС‚РµРїРµРЅРё (С‚РёРїР° \"РѕС‡РµРЅСЊ\") СЃ РіСЂСѓРїРїРѕР№ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹С… РёР»Рё РїСЂРёС‡Р°СЃС‚РёР№";
 		G.m_GroupType = ADV_ADJ;
 
 		G.m_MainGroup = get_maximal_group(j);
@@ -103,11 +103,11 @@ bool CRusFormatCaller::format_for_adv_adj(CGroup& G)
 	};
 };
 
-//примеры
-//очень много
-//очень многие
-//уж очень многие
-//очень же многие
+//РїСЂРёРјРµСЂС‹
+//РѕС‡РµРЅСЊ РјРЅРѕРіРѕ
+//РѕС‡РµРЅСЊ РјРЅРѕРіРёРµ
+//СѓР¶ РѕС‡РµРЅСЊ РјРЅРѕРіРёРµ
+//РѕС‡РµРЅСЊ Р¶Рµ РјРЅРѕРіРёРµ
 bool CRusFormatCaller::format_for_adv_number_adverb (CGroup& G)
 {
 	int i = get_main_word (G.m_iFirstWord);
@@ -125,7 +125,7 @@ bool CRusFormatCaller::format_for_adv_number_adverb (CGroup& G)
 
 	int j = get_next_main_word (i);
 	if (j == sent.size()) return false;
-	//  проходим частицу, если она встретилась
+	//  РїСЂРѕС…РѕРґРёРј С‡Р°СЃС‚РёС†Сѓ, РµСЃР»Рё РѕРЅР° РІСЃС‚СЂРµС‚РёР»Р°СЃСЊ
 	if (GetGramTab()->IsSimpleParticle(Wj.get_lemma(), Wj.GetPoses()))
 		j = get_next_main_word (j);
 	if (j == sent.size()) return false;
@@ -145,9 +145,9 @@ bool CRusFormatCaller::format_for_adv_number_adverb (CGroup& G)
 }
 
 
-//Примеры:
-//	очень хорошо, весьма сносно, "уж очень хорошо", "очень уж  хорошо"
-//  но не надо строить группу НАР_НАР в "Слишком уж"
+//РџСЂРёРјРµСЂС‹:
+//	РѕС‡РµРЅСЊ С…РѕСЂРѕС€Рѕ, РІРµСЃСЊРјР° СЃРЅРѕСЃРЅРѕ, "СѓР¶ РѕС‡РµРЅСЊ С…РѕСЂРѕС€Рѕ", "РѕС‡РµРЅСЊ СѓР¶  С…РѕСЂРѕС€Рѕ"
+//  РЅРѕ РЅРµ РЅР°РґРѕ СЃС‚СЂРѕРёС‚СЊ РіСЂСѓРїРїСѓ РќРђР _РќРђР  РІ "РЎР»РёС€РєРѕРј СѓР¶"
 bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 {
 	int i = get_main_word (G.m_iFirstWord);
@@ -160,14 +160,14 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 	if( !is_morph_adv(Wi) )
 		return false;
 
-    if( Wi.has_grammem(rInterrogative))   //*is_word_upper("КАК") )
+    if( Wi.has_grammem(rInterrogative))   //*is_word_upper("РљРђРљ") )
 		return false;
 
 	if( !Wi.can_syn_depend_on_adv() )
 		return false;
 	int j = get_next_main_word (i);
 	if (j == sent.size()) return false;
-	//  проходим частицу, если она встретилась
+	//  РїСЂРѕС…РѕРґРёРј С‡Р°СЃС‚РёС†Сѓ, РµСЃР»Рё РѕРЅР° РІСЃС‚СЂРµС‚РёР»Р°СЃСЊ
 	if (GetGramTab()->IsSimpleParticle(Wj.get_lemma(), Wj.GetPoses()))
 		j = get_next_main_word (j);
 	if (j == sent.size()) return false;
@@ -175,7 +175,7 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 	if( !is_morph_adv(Wj) )
 		return false;
 
-	if (Wj.is_lemma("УЖ"))
+	if (Wj.is_lemma("РЈР–"))
 		return false;
 
      if( Wj.has_grammem(rInterrogative))   
@@ -190,7 +190,7 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 	return true;
 }
 
-//правило для наречия с предикативом: "очень интересно";
+//РїСЂР°РІРёР»Рѕ РґР»СЏ РЅР°СЂРµС‡РёСЏ СЃ РїСЂРµРґРёРєР°С‚РёРІРѕРј: "РѕС‡РµРЅСЊ РёРЅС‚РµСЂРµСЃРЅРѕ";
 bool CRusFormatCaller::format_for_adv_predik(CGroup& G)
 {
 	int i = get_main_word (G.m_iFirstWord);
@@ -206,7 +206,7 @@ bool CRusFormatCaller::format_for_adv_predik(CGroup& G)
 	int j = get_next_main_word (i);
 	if (j == sent.size()) return false;
 
-	//  проходим частицу, если она встретилась
+	//  РїСЂРѕС…РѕРґРёРј С‡Р°СЃС‚РёС†Сѓ, РµСЃР»Рё РѕРЅР° РІСЃС‚СЂРµС‚РёР»Р°СЃСЊ
 	if (GetGramTab()->IsSimpleParticle(Wj.get_lemma(), Wj.GetPoses()))
 		j = get_next_main_word (j);
 	if (j == sent.size()) return false;
@@ -224,11 +224,11 @@ bool CRusFormatCaller::format_for_adv_predik(CGroup& G)
 }
 
 
-// Примеры:
-//		хорошо жить
-//		хорошо или плохо жить
-//		хорошо петь и плясать
-//		хорошо или плохо жить и плясать
+// РџСЂРёРјРµСЂС‹:
+//		С…РѕСЂРѕС€Рѕ Р¶РёС‚СЊ
+//		С…РѕСЂРѕС€Рѕ РёР»Рё РїР»РѕС…Рѕ Р¶РёС‚СЊ
+//		С…РѕСЂРѕС€Рѕ РїРµС‚СЊ Рё РїР»СЏСЃР°С‚СЊ
+//		С…РѕСЂРѕС€Рѕ РёР»Рё РїР»РѕС…Рѕ Р¶РёС‚СЊ Рё РїР»СЏСЃР°С‚СЊ
 
 bool CRusFormatCaller::format_for_adv_verb(CGroup& G)
 {

@@ -91,11 +91,11 @@ void CSyntaxColorizer::Colorize( CRichEditCtrl *pCtrl, int lineIndex, bool bModi
 	{
 		int lineEnd = SourceText.Find("\n",wordStart);
 		if( lineEnd==-1 || lineEnd>nEndChar ) lineEnd=nEndChar;
-		// пропускаем пробелы в начале строки
+		// РїСЂРѕРїСѓСЃРєР°РµРј РїСЂРѕР±РµР»С‹ РІ РЅР°С‡Р°Р»Рµ СЃС‚СЂРѕРєРё
 		for( ; wordStart<lineEnd && SourceText[wordStart]==' '; ++wordStart );
 		if( wordStart<lineEnd ) 
 		{
-			// ищем ударение
+			// РёС‰РµРј СѓРґР°СЂРµРЅРёРµ
 			bool hasAccent=false;
 			int i=wordStart;
 			for( ; i<lineEnd && SourceText[i]!=' '; ++i )

@@ -85,21 +85,21 @@ void CSemanticMarkup::ReadHeadLine(const char *ss)
 
 BYTE CSemanticMarkup::GetPOS(string s)
 {
-	if( s == "œ")
+	if( s == "–ü")
 		return AGRAMTABLib::ADJ_FULL;
-	if( s == "—")
+	if( s == "–°")
 		return AGRAMTABLib::NOUN;
-	if( s == "√")
+	if( s == "–ì")
 		return AGRAMTABLib::VERB;
-	if( s == "Õ")
+	if( s == "–ù")
 		return AGRAMTABLib::ADV;
-	if( s == "Ã—")
+	if( s == "–ú–°")
 		return AGRAMTABLib::PRONOUN;
-	if( s == "Ã—-œ")
+	if( s == "–ú–°-–ü")
 		return AGRAMTABLib::PRONOUN_P;
-	if( s == "Ã—-œ–≈ƒ ")
+	if( s == "–ú–°-–ü–†–ï–î–ö")
 		return AGRAMTABLib::PRONOUN_PREDK;
-	if( s == "◊»—À-œ")
+	if( s == "–ß–ò–°–õ-–ü")
 		return AGRAMTABLib::NUMERAL_P;
 	return UnknownPartOfSpeech;
 }

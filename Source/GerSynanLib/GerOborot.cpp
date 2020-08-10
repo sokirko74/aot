@@ -48,7 +48,7 @@ bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 		m_SimpleSubConj.push_back("WOHIN");
 		m_SimpleSubConj.push_back("WOHER");
 		m_SimpleSubConj.push_back("WODURCH");
-		m_SimpleSubConj.push_back("WOFÜR");
+		m_SimpleSubConj.push_back("WOFÐ¬R");
 		m_SimpleSubConj.push_back("WOHINTER");
 		m_SimpleSubConj.push_back("WOMIT");
 		m_SimpleSubConj.push_back("WONACH");
@@ -59,7 +59,7 @@ bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 		m_SimpleSubConj.push_back("WORIN");
 		m_SimpleSubConj.push_back("WORUM");
 		m_SimpleSubConj.push_back("WORUNTER");
-		m_SimpleSubConj.push_back("WORÜBER");
+		m_SimpleSubConj.push_back("WORÐ¬BER");
 		m_SimpleSubConj.push_back("WOVON");
 		m_SimpleSubConj.push_back("WOVOR");
 		m_SimpleSubConj.push_back("WOZU");

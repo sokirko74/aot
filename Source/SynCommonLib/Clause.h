@@ -208,7 +208,7 @@ public:
 	{ return m_Clauses[i]; };
 
 
-	// вставляет новую клаузу,  сохраняя порядок на клаузах
+	// РІСЃС‚Р°РІР»СЏРµС‚ РЅРѕРІСѓСЋ РєР»Р°СѓР·Сѓ,  СЃРѕС…СЂР°РЅСЏСЏ РїРѕСЂСЏРґРѕРє РЅР° РєР»Р°СѓР·Р°С…
 	CClause& AddClause(CClause& clause);
 
 
@@ -217,35 +217,35 @@ public:
 
 
 	/*
-	 Изменяет правую границу фрагмента.
+	 РР·РјРµРЅСЏРµС‚ РїСЂР°РІСѓСЋ РіСЂР°РЅРёС†Сѓ С„СЂР°РіРјРµРЅС‚Р°.
 	*/
 	void ChangeRightBorderPr(int i, int iNewBorder);
 
 
 	/*
-	  находит ближашую клаузу слева, которая не вкладывается в 
-	  клаузу ClauseNo
+	  РЅР°С…РѕРґРёС‚ Р±Р»РёР¶Р°С€СѓСЋ РєР»Р°СѓР·Сѓ СЃР»РµРІР°, РєРѕС‚РѕСЂР°СЏ РЅРµ РІРєР»Р°РґС‹РІР°РµС‚СЃСЏ РІ 
+	  РєР»Р°СѓР·Сѓ ClauseNo
 	*/
 	int FindPreviousClauseIndex(int ClauseNo) const;
 
 	/*
-	  выдает минимальную клаузу, которая включает данную клаузу
+	  РІС‹РґР°РµС‚ РјРёРЅРёРјР°Р»СЊРЅСѓСЋ РєР»Р°СѓР·Сѓ, РєРѕС‚РѕСЂР°СЏ РІРєР»СЋС‡Р°РµС‚ РґР°РЅРЅСѓСЋ РєР»Р°СѓР·Сѓ
 	*/
 	int GetMininalParentByClauseNo(int ClauseNo) const;
 
 	/*
-	  выдает минимальную клаузу, которая включает данное слово
+	  РІС‹РґР°РµС‚ РјРёРЅРёРјР°Р»СЊРЅСѓСЋ РєР»Р°СѓР·Сѓ, РєРѕС‚РѕСЂР°СЏ РІРєР»СЋС‡Р°РµС‚ РґР°РЅРЅРѕРµ СЃР»РѕРІРѕ
 	*/
 	int GetMinClauseByWordNo(int WordNo) const;
 	
 	/*
-	  проверяет, что клауза уже куда-т вложена
+	  РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РєР»Р°СѓР·Р° СѓР¶Рµ РєСѓРґР°-С‚ РІР»РѕР¶РµРЅР°
 	*/
 	bool IsEnclosedClause (int iClauseNum) const ;
 
 
 /*
-	  ищем  клаузу по началу и концу 
+	  РёС‰РµРј  РєР»Р°СѓР·Сѓ РїРѕ РЅР°С‡Р°Р»Сѓ Рё РєРѕРЅС†Сѓ 
 	*/
 	int FindClauseIndexByPeriod(const CPeriod& period) const;
 	const CClause* FindClauseByPeriod(const CPeriod&  period) const;
@@ -253,30 +253,30 @@ public:
 
 
 	/*
-	  обнуление клауз
+	  РѕР±РЅСѓР»РµРЅРёРµ РєР»Р°СѓР·
 	*/
 	void Clear();
 
 	/*
-	 уничтожает 
+	 СѓРЅРёС‡С‚РѕР¶Р°РµС‚ 
 	*/
 	void DeleteClause(int iClauseNum);
 	/*
-	 функция выдает клаузы, которые включают  pLeftPeriod и у которых  конец совпадает с концом pLeftPeriod
+	 С„СѓРЅРєС†РёСЏ РІС‹РґР°РµС‚ РєР»Р°СѓР·С‹, РєРѕС‚РѕСЂС‹Рµ РІРєР»СЋС‡Р°СЋС‚  pLeftPeriod Рё Сѓ РєРѕС‚РѕСЂС‹С…  РєРѕРЅРµС† СЃРѕРІРїР°РґР°РµС‚ СЃ РєРѕРЅС†РѕРј pLeftPeriod
 	*/
 	void GetClausesByLastWord(vector<int>& EncloseClauseVector, const CPeriod* pLeftPeriod) const;
 	/*
-	 функция выдает клаузы, которые включают  pRightPeriod и у которых  начало совпадает с началом  pRightPeriod
+	 С„СѓРЅРєС†РёСЏ РІС‹РґР°РµС‚ РєР»Р°СѓР·С‹, РєРѕС‚РѕСЂС‹Рµ РІРєР»СЋС‡Р°СЋС‚  pRightPeriod Рё Сѓ РєРѕС‚РѕСЂС‹С…  РЅР°С‡Р°Р»Рѕ СЃРѕРІРїР°РґР°РµС‚ СЃ РЅР°С‡Р°Р»РѕРј  pRightPeriod
 	*/
 	void GetClausesByFirstWord(vector<int>& EncloseClauseVector, const CPeriod* pRightPeriod) const;
 
 	/*
-	 выдает максимальную клаузу, которая начинается с iFWrd
+	 РІС‹РґР°РµС‚ РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ РєР»Р°СѓР·Сѓ, РєРѕС‚РѕСЂР°СЏ РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ iFWrd
 	*/
 	int GetMaxClauseByFirstWord(int iFWrd) const;
 
 	/*
-	 выдает максимальную клаузу, которая заканчивается на iFWrd
+	 РІС‹РґР°РµС‚ РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ РєР»Р°СѓР·Сѓ, РєРѕС‚РѕСЂР°СЏ Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РЅР° iFWrd
 	*/
 	int GetMaxClauseByLastWord(int iFWrd) const ;
 
@@ -284,21 +284,21 @@ public:
 	int GetMaxChildByFirstWord(CPeriod ParentClause, int FirstWordNo) const;
 
 	/*
-	  выдает примитивную клаузу с минимальным номером, у которой 
-	  номер первого слова равен FirstWordNo
+	  РІС‹РґР°РµС‚ РїСЂРёРјРёС‚РёРІРЅСѓСЋ РєР»Р°СѓР·Сѓ СЃ РјРёРЅРёРјР°Р»СЊРЅС‹Рј РЅРѕРјРµСЂРѕРј, Сѓ РєРѕС‚РѕСЂРѕР№ 
+	  РЅРѕРјРµСЂ РїРµСЂРІРѕРіРѕ СЃР»РѕРІР° СЂР°РІРµРЅ FirstWordNo
 	*/
 	int GetMinClauseByFirstWord(int FirstWordNo) const ;
 
 	/*
-	  выдает примитивную клаузу с минимальным номером, у которой 
-	  номер последнего слова равен LastWordNo
+	  РІС‹РґР°РµС‚ РїСЂРёРјРёС‚РёРІРЅСѓСЋ РєР»Р°СѓР·Сѓ СЃ РјРёРЅРёРјР°Р»СЊРЅС‹Рј РЅРѕРјРµСЂРѕРј, Сѓ РєРѕС‚РѕСЂРѕР№ 
+	  РЅРѕРјРµСЂ РїРѕСЃР»РµРґРЅРµРіРѕ СЃР»РѕРІР° СЂР°РІРµРЅ LastWordNo
 	*/
 	int GetMinClauseByLastWord(int LastWordNo) const ;
 
-	// Инициализирует CClause::m_SelfClauseNo
+	// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ CClause::m_SelfClauseNo
 	void Renumerate();
 
-	//  сортирует клаузы
+	//  СЃРѕСЂС‚РёСЂСѓРµС‚ РєР»Р°СѓР·С‹
 	void SortClauses();
 
 	int PassSubClauses(CPeriod ParentClause, int WordNo) const;

@@ -64,8 +64,8 @@ void CClauseCollection::ChangeRightBorderPr(int i, int iNewBorder)
 	CClause& pPrClause = m_Clauses[i];
 	pPrClause.m_iLastWord = iNewBorder;
 	/*
-	  пройдемся по вершинам фрагмента, если какая-та вершина 
-	  теперь находится за пределами фрагмента, тогда ее нужно удалить
+	  РїСЂРѕР№РґРµРјСЃСЏ РїРѕ РІРµСЂС€РёРЅР°Рј С„СЂР°РіРјРµРЅС‚Р°, РµСЃР»Рё РєР°РєР°СЏ-С‚Р° РІРµСЂС€РёРЅР° 
+	  С‚РµРїРµСЂСЊ РЅР°С…РѕРґРёС‚СЃСЏ Р·Р° РїСЂРµРґРµР»Р°РјРё С„СЂР°РіРјРµРЅС‚Р°, С‚РѕРіРґР° РµРµ РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ
 	*/
 	for (int j = 0; j < pPrClause.m_vectorTypes.size(); j++)
 		if (pPrClause.m_vectorTypes[j].m_Root.m_WordNo > iNewBorder)

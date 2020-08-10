@@ -134,7 +134,7 @@ bool CSemPattern::LoadSemFromDict()
 			string s = m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
 			if (C.m_LevelId - 1 >= m_ActantSemFets.size())
 			{
-				string mess = "Îøèáêà íóìåðàöèè SF â ñòàòüå ";
+				string mess = "ÐžÑˆÐ¸Ð±ÐºÐ° Ð½ÑƒÐ¼ÐµÑ€Ð°Ñ†Ð¸Ð¸ SF Ð² ÑÑ‚Ð°Ñ‚ÑŒÐµ ";
 				mess += Ross->GetEntryStr(UnitNo);
 				ErrorMessage (mess);
 			}

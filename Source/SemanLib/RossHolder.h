@@ -13,7 +13,7 @@ const int MaxWordLen = 32;
 
 
 
-// значени поля AUX, например, SUB (С1, С2)
+// Р·РЅР°С‡РµРЅРё РїРѕР»СЏ AUX, РЅР°РїСЂРёРјРµСЂ, SUB (РЎ1, РЎ2)
 struct CDopField {
 	string  m_RelationStr;
 	bool	m_IsActant1; // A or C
@@ -24,18 +24,18 @@ struct CDopField {
 
 
 
-// класс поля лексической функции, который содержит значения поля LF (см. формат поля)
-// LF = Oper1 : сдавать 1
+// РєР»Р°СЃСЃ РїРѕР»СЏ Р»РµРєСЃРёС‡РµСЃРєРѕР№ С„СѓРЅРєС†РёРё, РєРѕС‚РѕСЂС‹Р№ СЃРѕРґРµСЂР¶РёС‚ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ LF (СЃРј. С„РѕСЂРјР°С‚ РїРѕР»СЏ)
+// LF = Oper1 : СЃРґР°РІР°С‚СЊ 1
 struct CLexicalFunctionField {
-	// название лексической функции
+	// РЅР°Р·РІР°РЅРёРµ Р»РµРєСЃРёС‡РµСЃРєРѕР№ С„СѓРЅРєС†РёРё
 	string			m_LexFunct;
-	// значение лексической функции
+	// Р·РЅР°С‡РµРЅРёРµ Р»РµРєСЃРёС‡РµСЃРєРѕР№ С„СѓРЅРєС†РёРё
 	string			m_Lemma;
-	// номер значения для m_Lemma
+	// РЅРѕРјРµСЂ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ m_Lemma
 	char			m_MeanNum;
-	// номер словарной статьи в словаре для <m_Lemma,m_MeanNum>
+	// РЅРѕРјРµСЂ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё РІ СЃР»РѕРІР°СЂРµ РґР»СЏ <m_Lemma,m_MeanNum>
 	WORD			m_LexFunctWordUnitNo;
-	// предлог, с помощью которого слово-параметр управляет словом-ситуацией 
+	// РїСЂРµРґР»РѕРі, СЃ РїРѕРјРѕС‰СЊСЋ РєРѕС‚РѕСЂРѕРіРѕ СЃР»РѕРІРѕ-РїР°СЂР°РјРµС‚СЂ СѓРїСЂР°РІР»СЏРµС‚ СЃР»РѕРІРѕРј-СЃРёС‚СѓР°С†РёРµР№ 
 	CRossInterp		m_Prep;
 
 
@@ -73,38 +73,38 @@ public:
    BYTE                 SemFetFieldNo;
    BYTE                 NESOVMFieldNo;
 
-   // лексические функции 
+   // Р»РµРєСЃРёС‡РµСЃРєРёРµ С„СѓРЅРєС†РёРё 
    BYTE                 A0LexFunctNo;
    BYTE                 S0LexFunctNo;
 
 
-   // синтаксические отношения 
-   int IndirObjSynONo; //к_доп
-   int ReverseSynONo; //X! // пассивная валентность на именную группу
-   int UncoordAttrSynONo; //нс_опр
-   int CoordAttrSynONo; //с_опр
-   int DirectObjSynONo; //п_доп
-   int SubjSynONo; //подл
+   // СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС‚РЅРѕС€РµРЅРёСЏ 
+   int IndirObjSynONo; //Рє_РґРѕРї
+   int ReverseSynONo; //X! // РїР°СЃСЃРёРІРЅР°СЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ РЅР° РёРјРµРЅРЅСѓСЋ РіСЂСѓРїРїСѓ
+   int UncoordAttrSynONo; //РЅСЃ_РѕРїСЂ
+   int CoordAttrSynONo; //СЃ_РѕРїСЂ
+   int DirectObjSynONo; //Рї_РґРѕРї
+   int SubjSynONo; //РїРѕРґР»
    int EnglSubjSynONo; //subj
-   int ParatAttrSynONo; //прим_опр
-   int FromPredicSynONo; //отпредик
-   int PostSpecifSynONo; //уточн
+   int ParatAttrSynONo; //РїСЂРёРј_РѕРїСЂ
+   int FromPredicSynONo; //РѕС‚РїСЂРµРґРёРє
+   int PostSpecifSynONo; //СѓС‚РѕС‡РЅ
 
 
-   // уточнения групп 
+   // СѓС‚РѕС‡РЅРµРЅРёСЏ РіСЂСѓРїРї 
 	  int QuoteMarkNo;
 	  int ILENo;
 	  int InfinitiveNo;
 	  int NegativeNo;
 	  int PassiveNo;
 
-	  // части речи 
+	  // С‡Р°СЃС‚Рё СЂРµС‡Рё 
 	  int AdjNo;
 	  int AdvNo;
 	  int PossPronNo;
 	  int NumeralNo;
 
-	  // константы полей
+	  // РєРѕРЅСЃС‚Р°РЅС‚С‹ РїРѕР»РµР№
 	  BYTE SemFeatureNo; 
 	  BYTE LexDerivationNo;  
 	  BYTE LemmaVariantsNo;  
@@ -112,7 +112,7 @@ public:
 	  BYTE GramFeatureNo;
 	  BYTE LinkNo;
 
-	  //константы доменов
+	  //РєРѕРЅСЃС‚Р°РЅС‚С‹ РґРѕРјРµРЅРѕРІ
 	  BYTE ActantsDomNo;
 	  BYTE LexDomNo;
 	  BYTE LexPlusDomNo;
@@ -125,7 +125,7 @@ public:
 	  BYTE LexFunctDomNo;
       
 
-	  // константы main GF 
+	  // РєРѕРЅСЃС‚Р°РЅС‚С‹ main GF 
 	  int AdvAdjMainNo;
 	  int NounMainNo;
 	  int VerbMainNo;
@@ -133,7 +133,7 @@ public:
 	  int PronMainNo;
 
 
-	  // синтаксичесикие  группы 
+	  // СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРёРєРёРµ  РіСЂСѓРїРїС‹ 
 	  int ClauseGrpNo;
 	  int NounGrpNo;
 	  int AdverbialGrpNo;
@@ -142,13 +142,13 @@ public:
 	  int 	ModalCopulNo;
 
 
-	  // графеты
+	  // РіСЂР°С„РµС‚С‹
 	  int NumerComplexNo;
 	  int NumerSymbComplexNo;
 	  int HyphenNo;
 	  
   	  
-	  // падежи
+	  // РїР°РґРµР¶Рё
 	  int NominativeNo;
 	  int InstrumentalisNo;
 	  int InstrumentalisAdjNo;
@@ -217,9 +217,9 @@ public:
    CRossHolder(CTranslatorHolder* TranslatorHolder);
    ~CRossHolder();
    bool HasBeenModified(const long T);
-   // проверят только первый элемент кортежа
+   // РїСЂРѕРІРµСЂСЏС‚ С‚РѕР»СЊРєРѕ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РєРѕСЂС‚РµР¶Р°
    bool					HasFieldValue(string strFieldName, string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0  ) const;
-   // проверят все значения поля
+   // РїСЂРѕРІРµСЂСЏС‚ РІСЃРµ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ
    bool					HasFullFieldValue(string strFieldName, string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0) const;
    void					GetFieldValues(string strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
    bool					HasItem (WORD UnitNo, const string FieldStr, const string ItemStr, const string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
@@ -229,29 +229,29 @@ public:
 	bool				HasCX (WORD UnitNo, const string CX, const string DomStr) const;
 	WORD				LocateUnit (const char* UnitStr, BYTE MeanNum) const;
 	const char*			GetDomItemStrInner (long ItemNo) const;
-	// читает поле AUX, возвращает номер главного слова
+	// С‡РёС‚Р°РµС‚ РїРѕР»Рµ AUX, РІРѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРјРµСЂ РіР»Р°РІРЅРѕРіРѕ СЃР»РѕРІР°
 	long				GetDopFields(long UnitNo, vector<CDopField>& DopFields) const;
 	bool				GetVal(long UnitNo, CValency& V) const;
 	void				GetLexFuncts (size_t UnitNo,  vector<CLexicalFunctionField>& OutVector, DictTypeEnum type = NoneRoss, const CRossHolder* pRossHolderObor = NULL) const;
-	// по словарной статье предлога или союза выдает семантическое отношение, которое они выражает
+	// РїРѕ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµ РїСЂРµРґР»РѕРіР° РёР»Рё СЃРѕСЋР·Р° РІС‹РґР°РµС‚ СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕРµ РѕС‚РЅРѕС€РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РѕРЅРё РІС‹СЂР°Р¶Р°РµС‚
 	CValency			GetSemRelOfPrepOrConj(WORD UnitNo) const;
 	long				GetSemMainWordFromArticle (long UnitNo) const;
 
-	// проверяет, что ItemNo принадлежит домену Д_ГГ_уточн
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ Р”_Р“Р“_СѓС‚РѕС‡РЅ
 	bool				IsVerbFet (DWORD ItemNo) const;
-	// проверяет, что ItemNo принадлежит домену D_SYN_REL
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_SYN_REL
 	bool				IsSynRel (DWORD ItemNo) const;
-	// проверяет, что ItemNo принадлежит домену D_1
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_1
 	bool				IsLemGroupBegining (DWORD ItemNo) const;
-	// проверяет, что ItemNo принадлежит домену D_GROUPS
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_GROUPS
 	bool				IsSynGroup (DWORD ItemNo) const;
-	// проверяет, что ItemNo принадлежит домену D_POSITION
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_POSITION
 	bool				IsPosition (DWORD ItemNo) const;
-	// выдает номер первой константы, из CortegeNo-го кортежа массиве m_GramCorteges 
-	// (Значение до запятой)
+	// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ РїРµСЂРІРѕР№ РєРѕРЅСЃС‚Р°РЅС‚С‹, РёР· CortegeNo-РіРѕ РєРѕСЂС‚РµР¶Р° РјР°СЃСЃРёРІРµ m_GramCorteges 
+	// (Р—РЅР°С‡РµРЅРёРµ РґРѕ Р·Р°РїСЏС‚РѕР№)
 	long				GetSynRel(const  TCortege& C) const;
-	// выдает номер второй константы, из CortegeNo-го кортежа массиве m_GramCorteges 
-	// (Значение после запятой)1
+	// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ РІС‚РѕСЂРѕР№ РєРѕРЅСЃС‚Р°РЅС‚С‹, РёР· CortegeNo-РіРѕ РєРѕСЂС‚РµР¶Р° РјР°СЃСЃРёРІРµ m_GramCorteges 
+	// (Р—РЅР°С‡РµРЅРёРµ РїРѕСЃР»Рµ Р·Р°РїСЏС‚РѕР№)1
 	long				GetSynFet(const  TCortege& C) const;
 	long				IsCompAdjCortege(const  TCortege& C) const;
 

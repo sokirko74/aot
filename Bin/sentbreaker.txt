@@ -10,7 +10,7 @@ Ich gehe. "Du gehst".  Ich gehe.
 Ich gehe. Du "gehst."  Ich gehe. // quotations
 Ich gng., Peter macht den Korb. // commas are prohibited between sentences
 auf den 8. Mai. Das 5.  Corps // ordinal German numerals with a full stop
-Dr. Geyken grüsst Mr. Bush. // abkuerzung
+Dr. Geyken grÑŒsst Mr. Bush. // abkuerzung
 sf .html // conflict between normal abbreviation ("SW. /:a") and file extension ".html"
 Am 21 . Juni 1931  // simple German dates
 Von Dr . L . Fleck und Dr . J . Hescheles // abbreviations

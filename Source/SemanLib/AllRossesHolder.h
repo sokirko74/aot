@@ -7,7 +7,7 @@
 
 
 
-// абстрактный  класс.  Функция Initialize() pure methood. 
+// Р°Р±СЃС‚СЂР°РєС‚РЅС‹Р№  РєР»Р°СЃСЃ.  Р¤СѓРЅРєС†РёСЏ Initialize() pure methood. 
 class CAllRossesHolder : public CTranslatorHolder 	
 { 
 protected:

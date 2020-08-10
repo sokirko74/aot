@@ -2,7 +2,7 @@
 
 
 //================================================================
-// Вычисление местоимения oneself по граммемам числа, лица и одушевленности
+// Р’С‹С‡РёСЃР»РµРЅРёРµ РјРµСЃС‚РѕРёРјРµРЅРёСЏ oneself РїРѕ РіСЂР°РјРјРµРјР°Рј С‡РёСЃР»Р°, Р»РёС†Р° Рё РѕРґСѓС€РµРІР»РµРЅРЅРѕСЃС‚Рё
 //================================================================
 struct CEngPronounParadigm {
 	long m_EngGrammems;
@@ -37,7 +37,7 @@ string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form)
 };
 
 
-// строит по русским граммемам набор английских граммем, содержащий только граммемы времени
+// СЃС‚СЂРѕРёС‚ РїРѕ СЂСѓСЃСЃРєРёРј РіСЂР°РјРјРµРјР°Рј РЅР°Р±РѕСЂ Р°РЅРіР»РёР№СЃРєРёС… РіСЂР°РјРјРµРј, СЃРѕРґРµСЂР¶Р°С‰РёР№ С‚РѕР»СЊРєРѕ РіСЂР°РјРјРµРјС‹ РІСЂРµРјРµРЅРё
 void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const string& CallingFunc)
 {
 	if (EngNode.m_MainWordNo == -1) return;
@@ -46,25 +46,25 @@ void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const 
 	string name = "TransferTimeGrammems called by "+ CallingFunc;
 
 	if (RusNode.HasPOS (PARTICIPLE))
-	   if (RusNode.HasOneGrammem(rActiveVoice) ) // сделавший
+	   if (RusNode.HasOneGrammem(rActiveVoice) ) // СЃРґРµР»Р°РІС€РёР№
 		   EngWord.SetTense(gerund_tn, name);
        else
-		   EngWord.SetTense(pp_tn, name);  // сделанный
+		   EngWord.SetTense(pp_tn, name);  // СЃРґРµР»Р°РЅРЅС‹Р№
     else
 	
 	if( RusNode.HasPOS (PARTICIPLE_SHORT) )
 	{
-	  if (RusNode.HasOneGrammem(rPastTense) )  // прошедшее время
+	  if (RusNode.HasOneGrammem(rPastTense) )  // РїСЂРѕС€РµРґС€РµРµ РІСЂРµРјСЏ
 	  {
 			EngWord.SetTense(past_smp_tn, name);
 			EngWord.m_bMorphologicalPassiveForm = true;
 	  }
-	  if (RusNode.HasOneGrammem(rFutureTense) )  // будущее время
+	  if (RusNode.HasOneGrammem(rFutureTense) )  // Р±СѓРґСѓС‰РµРµ РІСЂРµРјСЏ
 	  {
 			EngWord.SetTense(future_smp_tn, name);
 			EngWord.m_bMorphologicalPassiveForm = true;
 	  }
-  	  if (RusNode.HasOneGrammem(rPresentTense) )  // настоящее время
+  	  if (RusNode.HasOneGrammem(rPresentTense) )  // РЅР°СЃС‚РѕСЏС‰РµРµ РІСЂРµРјСЏ
 	  {
 			EngWord.SetTense(present_smp_tn, name);
 			EngWord.m_bMorphologicalPassiveForm = true;
@@ -74,10 +74,10 @@ void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const 
 	
 	else
 	if (RusNode.HasPOS (ADVERB_PARTICIPLE))
-	  if (RusNode.HasOneGrammem(rNonPerfective))  // несовершенный вид
-		  // будущего времени у деепричастий  нет
+	  if (RusNode.HasOneGrammem(rNonPerfective))  // РЅРµСЃРѕРІРµСЂС€РµРЅРЅС‹Р№ РІРёРґ
+		  // Р±СѓРґСѓС‰РµРіРѕ РІСЂРµРјРµРЅРё Сѓ РґРµРµРїСЂРёС‡Р°СЃС‚РёР№  РЅРµС‚
 				EngWord.SetTense(gerund_tn, name);
-       else // совершенный вид
+       else // СЃРѕРІРµСЂС€РµРЅРЅС‹Р№ РІРёРґ
 			{	
 			    EngWord.SetTense(gerund_prf_tn, name);
 			}
@@ -103,12 +103,12 @@ void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const 
 
 };
 
-// строит по русским граммемам набор английских граммем, содержащий только граммемы числа
+// СЃС‚СЂРѕРёС‚ РїРѕ СЂСѓСЃСЃРєРёРј РіСЂР°РјРјРµРјР°Рј РЅР°Р±РѕСЂ Р°РЅРіР»РёР№СЃРєРёС… РіСЂР°РјРјРµРј, СЃРѕРґРµСЂР¶Р°С‰РёР№ С‚РѕР»СЊРєРѕ РіСЂР°РјРјРµРјС‹ С‡РёСЃР»Р°
 void TransferNumberGrammems (const CSemNode& RusNode, CEngSemWord& EngWord)
 {
 	EngWord.SetFormGrammems(EngWord.GetFormGrammems() & ~eAllNumbers);
 
-	// к английским прилагательным категория числа не применима
+	// Рє Р°РЅРіР»РёР№СЃРєРёРј РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рј РєР°С‚РµРіРѕСЂРёСЏ С‡РёСЃР»Р° РЅРµ РїСЂРёРјРµРЅРёРјР°
 	if (   RusNode.HasPOS(ADJ_FULL) 
 		|| RusNode.HasPOS(ADJ_SHORT)
 	   ) 
@@ -125,7 +125,7 @@ void TransferNumberGrammems (const CSemNode& RusNode, CEngSemWord& EngWord)
 
 
 
-// строит по русским граммемам набор английских граммем, содержащий только граммемы числа
+// СЃС‚СЂРѕРёС‚ РїРѕ СЂСѓСЃСЃРєРёРј РіСЂР°РјРјРµРјР°Рј РЅР°Р±РѕСЂ Р°РЅРіР»РёР№СЃРєРёС… РіСЂР°РјРјРµРј, СЃРѕРґРµСЂР¶Р°С‰РёР№ С‚РѕР»СЊРєРѕ РіСЂР°РјРјРµРјС‹ С‡РёСЃР»Р°
 void TransferPersonGrammems (const CSemNode& RusNode,  CEngSemWord& EngWord)
 {
 	EngWord.SetFormGrammems(EngWord.GetFormGrammems() & ~eAllPersons);
@@ -150,15 +150,15 @@ void TransferGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, string Cal
 	  TransferPersonGrammems (RusNode, EngNode.m_Words[EngNode.m_MainWordNo]);
   
 	};
-	// установка сравнительной  степени
+	// СѓСЃС‚Р°РЅРѕРІРєР° СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕР№  СЃС‚РµРїРµРЅРё
 	if(RusNode.GetGrammems() & _QM( rComparative))
 		EngNode.AddOneGrammemRich(eComparativ);
 
-	// установка превосходной степени
+	// СѓСЃС‚Р°РЅРѕРІРєР° РїСЂРµРІРѕСЃС…РѕРґРЅРѕР№ СЃС‚РµРїРµРЅРё
 	if(RusNode.GetGrammems() & _QM( rSuperlative))
 		EngNode.AddOneGrammemRich(eSupremum);
 
-   // установка одушевленности 
+   // СѓСЃС‚Р°РЅРѕРІРєР° РѕРґСѓС€РµРІР»РµРЅРЅРѕСЃС‚Рё 
 	if (RusNode.HasOneGrammem( rAnimative)  && !RusNode.HasOneGrammem( rNonAnimative))
 			EngNode.AddOneGrammemRich( eAnimative);
 	else
@@ -188,10 +188,10 @@ void TransferGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, string Cal
 
 
 	
-   if ( RusNode.HasPOS(PRONOUN) )// если это русское местоимение
+   if ( RusNode.HasPOS(PRONOUN) )// РµСЃР»Рё СЌС‚Рѕ СЂСѓСЃСЃРєРѕРµ РјРµСЃС‚РѕРёРјРµРЅРёРµ
 	  {
 
-		// установка падежа 
+		// СѓСЃС‚Р°РЅРѕРІРєР° РїР°РґРµР¶Р° 
 		  EngNode.DeleteGrammemsRich(  _QM(eNominative) |  _QM(eObjectCase) );
 		if (RusNode.HasOneGrammem(rNominativ) )
 			EngNode.AddOneGrammemRich( eNominative);
@@ -240,7 +240,7 @@ long ValuePosition (string Position)
 string  GetDualPosition (string Position)
 {
 
-	if (Position == "begin") // это абсолютное положенние
+	if (Position == "begin") // СЌС‚Рѕ Р°Р±СЃРѕР»СЋС‚РЅРѕРµ РїРѕР»РѕР¶РµРЅРЅРёРµ
 		return "begin";
 	else
 	if (Position == "<")
@@ -261,7 +261,7 @@ string  GetDualPosition (string Position)
 	if (Position == ">")
 		return "<";
 	else
-	if (Position == "end") // Это абсолютное положение 
+	if (Position == "end") // Р­С‚Рѕ Р°Р±СЃРѕР»СЋС‚РЅРѕРµ РїРѕР»РѕР¶РµРЅРёРµ 
 		return "end";
 	else 
 		return Position;

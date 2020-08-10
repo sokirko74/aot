@@ -143,7 +143,7 @@ void CSynWord::CloneHomonymForOborot(int HNum)
 	
 	if( HasOborot1() )
 	{
-		//nim : добавить ч.р. = ВВОДН для оборота с одноименной GF 
+		//nim : РґРѕР±Р°РІРёС‚СЊ С‡.СЂ. = Р’Р’РћР”Рќ РґР»СЏ РѕР±РѕСЂРѕС‚Р° СЃ РѕРґРЅРѕРёРјРµРЅРЅРѕР№ GF 
 		if (!m_bBadParenthesis)
 			if ( GetOborotPtr()->HasPartOfSpeech(GetOpt()->m_RusParenthesis) )
             {
@@ -154,10 +154,10 @@ void CSynWord::CloneHomonymForOborot(int HNum)
 	if(HNum == -1 && m_Homonyms.size()>1)
 		H.m_lPradigmID = -1;
 
-	// у всех остальных омонимов помуты оборота стоять не будет
+	// Сѓ РІСЃРµС… РѕСЃС‚Р°Р»СЊРЅС‹С… РѕРјРѕРЅРёРјРѕРІ РїРѕРјСѓС‚С‹ РѕР±РѕСЂРѕС‚Р° СЃС‚РѕСЏС‚СЊ РЅРµ Р±СѓРґРµС‚
 	DeleteOborotMarks();
 	
-	//  вставляем  омоним в начало списка , чтобы   работала функция  CSynWord::GetOborotNo()
+	//  РІСЃС‚Р°РІР»СЏРµРј  РѕРјРѕРЅРёРј РІ РЅР°С‡Р°Р»Рѕ СЃРїРёСЃРєР° , С‡С‚РѕР±С‹   СЂР°Р±РѕС‚Р°Р»Р° С„СѓРЅРєС†РёСЏ  CSynWord::GetOborotNo()
 	m_Homonyms.insert(m_Homonyms.begin(), H);
 }
 

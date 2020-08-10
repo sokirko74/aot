@@ -17,16 +17,16 @@ struct CGrammemsAnalyzer {
 
 enum ArticleEnum { ZeroArticle, DefArticle, IndefArticle};
 struct SynthesResult  : public CGrammemsAnalyzer{
-	// слова, которые нужно  распечатать  в  той последовательности, в которой они здесь указаны
+	// СЃР»РѕРІР°, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ  СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ  РІ  С‚РѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё, РІ РєРѕС‚РѕСЂРѕР№ РѕРЅРё Р·РґРµСЃСЊ СѓРєР°Р·Р°РЅС‹
 	StringVector m_WordForms;
-    // слова, которые  нужно поставить перед всей и после всей группой слов
+    // СЃР»РѕРІР°, РєРѕС‚РѕСЂС‹Рµ  РЅСѓР¶РЅРѕ РїРѕСЃС‚Р°РІРёС‚СЊ РїРµСЂРµРґ РІСЃРµР№ Рё РїРѕСЃР»Рµ РІСЃРµР№ РіСЂСѓРїРїРѕР№ СЃР»РѕРІ
 	string prefix, postfix;
-    // слово, которое  нужно поставить перед всей группой слов
+    // СЃР»РѕРІРѕ, РєРѕС‚РѕСЂРѕРµ  РЅСѓР¶РЅРѕ РїРѕСЃС‚Р°РІРёС‚СЊ РїРµСЂРµРґ РІСЃРµР№ РіСЂСѓРїРїРѕР№ СЃР»РѕРІ
 	string before_prep;
-    // артикль, которые нужно выставить перед все группой слов
+    // Р°СЂС‚РёРєР»СЊ, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ РІС‹СЃС‚Р°РІРёС‚СЊ РїРµСЂРµРґ РІСЃРµ РіСЂСѓРїРїРѕР№ СЃР»РѕРІ
 	ArticleEnum   m_Article;
 
-    // место в предложении
+    // РјРµСЃС‚Рѕ РІ РїСЂРµРґР»РѕР¶РµРЅРёРё
 	int		pos_order;
 	string	m_Position;
 	bool    m_bParenth;
@@ -37,20 +37,20 @@ struct SynthesResult  : public CGrammemsAnalyzer{
 	}
 
 
-	// истина, если  этот узел не надо класть в выходню строку
+	// РёСЃС‚РёРЅР°, РµСЃР»Рё  СЌС‚РѕС‚ СѓР·РµР» РЅРµ РЅР°РґРѕ РєР»Р°СЃС‚СЊ РІ РІС‹С…РѕРґРЅСЋ СЃС‚СЂРѕРєСѓ
 	bool			do_not_put; 
-	// ParadigmId того слова, которое содержится в m_WordForms (assert (m_WordForms.sizE() == 1) )
+	// ParadigmId С‚РѕРіРѕ СЃР»РѕРІР°, РєРѕС‚РѕСЂРѕРµ СЃРѕРґРµСЂР¶РёС‚СЃСЏ РІ m_WordForms (assert (m_WordForms.sizE() == 1) )
 	long			m_EngParadigmId;
 
 	
-	// предлог, который нужно поставить перед словом
+	// РїСЂРµРґР»РѕРі, РєРѕС‚РѕСЂС‹Р№ РЅСѓР¶РЅРѕ РїРѕСЃС‚Р°РІРёС‚СЊ РїРµСЂРµРґ СЃР»РѕРІРѕРј
 	string			m_prep;
 	bool			has_prep() const  {return m_prep.length() > 0; }; 
 
-    // реляционный оператор
+    // СЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РѕРїРµСЂР°С‚РѕСЂ
 	string			rel_operator;
 
-    // ссылка на узел  подлежащего
+    // СЃСЃС‹Р»РєР° РЅР° СѓР·РµР»  РїРѕРґР»РµР¶Р°С‰РµРіРѕ
 	int				subject_node;
 
 	bool is_passive_verb;
@@ -94,21 +94,21 @@ struct NodeHelper{
 	NodeHelper(CEngSemStructure& EngStr)
 		:E(EngStr){}
 
-	// выдает выходящие отношения без межклаузных,  добавляя туда additional_rels
+	// РІС‹РґР°РµС‚ РІС‹С…РѕРґСЏС‰РёРµ РѕС‚РЅРѕС€РµРЅРёСЏ Р±РµР· РјРµР¶РєР»Р°СѓР·РЅС‹С…,  РґРѕР±Р°РІР»СЏСЏ С‚СѓРґР° additional_rels
 	void	get_out_rels(int node, vector<long> &res) const;
-    // выдает входящеt отношения без межклаузных 
+    // РІС‹РґР°РµС‚ РІС…РѕРґСЏС‰Рµt РѕС‚РЅРѕС€РµРЅРёСЏ Р±РµР· РјРµР¶РєР»Р°СѓР·РЅС‹С… 
 	int		get_in_rel(int node);
-    // выдает все выходящее клаузные отношения
+    // РІС‹РґР°РµС‚ РІСЃРµ РІС‹С…РѕРґСЏС‰РµРµ РєР»Р°СѓР·РЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ
 	void	get_out_clause_rel(int node, vector<long> &res);
-	// выдает входящее клаузное отношение
+	// РІС‹РґР°РµС‚ РІС…РѕРґСЏС‰РµРµ РєР»Р°СѓР·РЅРѕРµ РѕС‚РЅРѕС€РµРЅРёРµ
 	int     get_in_clause_rel(int node);
 	
 	CEngSemNode&         Node(int node)				{return E.m_Nodes[node];}
 	CEngSemRelation&     Rel(int rel)				{return E.m_Relations[rel];}
 	const CEngSemNode&         Node(int node) const				{return E.m_Nodes[node];}
 	const CEngSemRelation&     Rel(int rel)	const		{return E.m_Relations[rel];}
-    // проверяет, что у узла есть указанные eng_poses,  и у его
-	// русского исходника есть rus_poses
+    // РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ Сѓ СѓР·Р»Р° РµСЃС‚СЊ СѓРєР°Р·Р°РЅРЅС‹Рµ eng_poses,  Рё Сѓ РµРіРѕ
+	// СЂСѓСЃСЃРєРѕРіРѕ РёСЃС…РѕРґРЅРёРєР° РµСЃС‚СЊ rus_poses
 	bool node_has_poses(int node, UINT eng_poses) const;
 	bool node_is_verb(int node_no) const;
 	bool node_is_noun(int node_no) const;
@@ -118,17 +118,17 @@ struct NodeHelper{
 
 	bool is_subj_rel(int rel) const	{return E.IsSubj(E.m_Relations[rel]);}
  
-   // проверяет, что у поля  field есть значение  value
+   // РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ Сѓ РїРѕР»СЏ  field РµСЃС‚СЊ Р·РЅР°С‡РµРЅРёРµ  value
 	bool FieldContainsValue(const CRossHolder* RossHolder, WORD UnitNo, 
 		const string &field, const string &value, int leaf = 0, int leaf2 = 0) const;
-	// проверяет, что у словарной интерпретации узла в поле  field есть значение  value
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ Сѓ СЃР»РѕРІР°СЂРЅРѕР№ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё СѓР·Р»Р° РІ РїРѕР»Рµ  field РµСЃС‚СЊ Р·РЅР°С‡РµРЅРёРµ  value
 	bool FieldContainsValue(const CEngSemNode& node, const string &field, const string &value, int leaf = 0, int leaf2 = 0) const;
-    // две предыдущих функции вызывают GetFieldValues
+    // РґРІРµ РїСЂРµРґС‹РґСѓС‰РёС… С„СѓРЅРєС†РёРё РІС‹Р·С‹РІР°СЋС‚ GetFieldValues
 	void GetFieldValues(DictTypeEnum StructDict, WORD UnitNo, const string &field, 
 		StringVector &res, int max_items = 10000) const;
 
 
-	// истина, если отношение не было переведено
+	// РёСЃС‚РёРЅР°, РµСЃР»Рё РѕС‚РЅРѕС€РµРЅРёРµ РЅРµ Р±С‹Р»Рѕ РїРµСЂРµРІРµРґРµРЅРѕ
 	bool rel_is_valency(int rel) const;
 	bool ValencyIs(int rel, const char *str)	{return Rel(rel).m_Valency.m_RelationStr == str;}
 	bool SyntaxRelIs(int rel, const char *str)	{return Rel(rel).m_SyntacticRelation == str;}
@@ -183,16 +183,16 @@ public:
 private:
 
 
-	// ссылка от главного узла клаузы к союзному слову клаузы
-	// Например, I know where to live (clause_conj_words(live)==where )
-	// союзные слова отличаются от союзов тем, что последние не являются отдельным узлом  в структуру
+	// СЃСЃС‹Р»РєР° РѕС‚ РіР»Р°РІРЅРѕРіРѕ СѓР·Р»Р° РєР»Р°СѓР·С‹ Рє СЃРѕСЋР·РЅРѕРјСѓ СЃР»РѕРІСѓ РєР»Р°СѓР·С‹
+	// РќР°РїСЂРёРјРµСЂ, I know where to live (clause_conj_words(live)==where )
+	// СЃРѕСЋР·РЅС‹Рµ СЃР»РѕРІР° РѕС‚Р»РёС‡Р°СЋС‚СЃСЏ РѕС‚ СЃРѕСЋР·РѕРІ С‚РµРј, С‡С‚Рѕ РїРѕСЃР»РµРґРЅРёРµ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ РѕС‚РґРµР»СЊРЅС‹Рј СѓР·Р»РѕРј  РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ
 	vector<CClauseRootToConjWord> clause_conj_words; 
-	// по номеру клаузы получаем номер узла, который является openerом в этой клаузе
+	// РїРѕ РЅРѕРјРµСЂСѓ РєР»Р°СѓР·С‹ РїРѕР»СѓС‡Р°РµРј РЅРѕРјРµСЂ СѓР·Р»Р°, РєРѕС‚РѕСЂС‹Р№ СЏРІР»СЏРµС‚СЃСЏ openerРѕРј РІ СЌС‚РѕР№ РєР»Р°СѓР·Рµ
 	map<int, int> clause_openers;
-	// по номеру клаузы получаем номер узла, который является союзом в этой клаузе
+	// РїРѕ РЅРѕРјРµСЂСѓ РєР»Р°СѓР·С‹ РїРѕР»СѓС‡Р°РµРј РЅРѕРјРµСЂ СѓР·Р»Р°, РєРѕС‚РѕСЂС‹Р№ СЏРІР»СЏРµС‚СЃСЏ СЃРѕСЋР·РѕРј РІ СЌС‚РѕР№ РєР»Р°СѓР·Рµ
 	map<int, CClauseConj> clause_conj;
-	// по узлу Х получаем номера узлов, которые принадлежат уже другой клаузе, но
-	// должны стоять после узла Х
+	// РїРѕ СѓР·Р»Сѓ РҐ РїРѕР»СѓС‡Р°РµРј РЅРѕРјРµСЂР° СѓР·Р»РѕРІ, РєРѕС‚РѕСЂС‹Рµ РїСЂРёРЅР°РґР»РµР¶Р°С‚ СѓР¶Рµ РґСЂСѓРіРѕР№ РєР»Р°СѓР·Рµ, РЅРѕ
+	// РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ РїРѕСЃР»Рµ СѓР·Р»Р° РҐ
 	multimap<int, pair<int, bool> > node_sub_clause_put_after;
 	
 
@@ -236,9 +236,9 @@ private:
 
 	string collect_results(int node);
 
-	// подчиненная клауза - это клауза, в один из узлов которой входит межклаузная  стрелка
+	// РїРѕРґС‡РёРЅРµРЅРЅР°СЏ РєР»Р°СѓР·Р° - СЌС‚Рѕ РєР»Р°СѓР·Р°, РІ РѕРґРёРЅ РёР· СѓР·Р»РѕРІ РєРѕС‚РѕСЂРѕР№ РІС…РѕРґРёС‚ РјРµР¶РєР»Р°СѓР·РЅР°СЏ  СЃС‚СЂРµР»РєР°
 	bool		IsSlaveClause(long ClauseNo) const;
-	// находит позицию для неглавнх компонент клаузы
+	// РЅР°С…РѕРґРёС‚ РїРѕР·РёС†РёСЋ РґР»СЏ РЅРµРіР»Р°РІРЅС… РєРѕРјРїРѕРЅРµРЅС‚ РєР»Р°СѓР·С‹
 	void		find_position_for_slave_clause_components();
 	
 

@@ -67,9 +67,9 @@ bool CEngSynthes::try_noun_node(int node_no)
 	int curent_pos = 0;
 	bool no_animative_gen_noun = false;
 
-	// "âñå ïÿòü ñîáàê" -> "all five dogs"
-	// "âñå ìîè  ñîáàêè" -> "all my dogs"
-	// "ìîè âñå  ñîáàêè" -> "all my dogs"
+	// "Ð²ÑÐµ Ð¿ÑÑ‚ÑŒ ÑÐ¾Ð±Ð°Ðº" -> "all five dogs"
+	// "Ð²ÑÐµ Ð¼Ð¾Ð¸  ÑÐ¾Ð±Ð°ÐºÐ¸" -> "all my dogs"
+	// "Ð¼Ð¾Ð¸ Ð²ÑÐµ  ÑÐ¾Ð±Ð°ÐºÐ¸" -> "all my dogs"
 
 	//  first put articles-stubs ("no", "all")
 	for(i = 0; i < rels.size(); i++)
@@ -83,7 +83,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 
 	// then put numerals
 	for(i = 0; i < rels.size(); i++){
-		if(SyntaxRelIs(rels[i], "×ÈÑË_ÑÓÙ") || SyntaxRelIs(rels[i], "ÍÀÐ_×ÈÑË_ÑÓÙ")){
+		if(SyntaxRelIs(rels[i], "Ð§Ð˜Ð¡Ð›_Ð¡Ð£Ð©") || SyntaxRelIs(rels[i], "ÐÐÐ _Ð§Ð˜Ð¡Ð›_Ð¡Ð£Ð©")){
 			ordered_rels[i] = true;
 			int sub = Rel(rels[i]).m_TargetNodeNo;
 			Res(sub).order("<<", curent_pos++);
@@ -96,7 +96,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 	
 	// then put pronouns
 	for(i = 0; i < rels.size(); i++)
-	if (!ordered_rels[i]) // "all" - ÿâëÿåòñÿ PN_ADJ
+	if (!ordered_rels[i]) // "all" - ÑÐ²Ð»ÑÐµÑ‚ÑÑ PN_ADJ
 	{
 		if(E.m_Nodes[E.m_Relations[rels[i]].m_TargetNodeNo].GetPos() == ePN_ADJ)
 		{
@@ -115,7 +115,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 		// GEN_NOUN
 		int rel = rels[i];
 		int sub_node = Rel(rel).m_TargetNodeNo;
-		if(SyntaxRelIs(rel, "ÏÐÈË_ÑÓÙ")){
+		if(SyntaxRelIs(rel, "ÐŸÐ Ð˜Ð›_Ð¡Ð£Ð©")){
 
 			Res(sub_node).order("<<", curent_pos++);
 
@@ -149,7 +149,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 
 
 	/*
-	  äëÿ ãåðóíäèÿ ôóíêöèÿ handle_rel_operators óæå áûëà âûçâàíà 
+	  Ð´Ð»Ñ Ð³ÐµÑ€ÑƒÐ½Ð´Ð¸Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ handle_rel_operators ÑƒÐ¶Ðµ Ð±Ñ‹Ð»Ð° Ð²Ñ‹Ð·Ð²Ð°Ð½Ð° 
 	*/
     if (E.m_Nodes[node_no].GetTense() != gerund_tn)
 	handle_rel_operators(node_no);
@@ -209,7 +209,7 @@ bool CEngSynthes::try_adj_node(int node_no)
 }
 
 // "this", "that", "one"
-// Ýòè ìåñòîèìåíèÿ èìåþò ìíîæåñòâåííóþ ôîðìó ("these", "those", "ones")
+// Ð­Ñ‚Ð¸ Ð¼ÐµÑÑ‚Ð¾Ð¸Ð¼ÐµÐ½Ð¸Ñ Ð¸Ð¼ÐµÑŽÑ‚ Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²ÐµÐ½Ð½ÑƒÑŽ Ñ„Ð¾Ñ€Ð¼Ñƒ ("these", "those", "ones")
 bool CEngSynthes::lemma_is_demonstrative_pronoun (string Lemma) const
 {
   try
@@ -251,8 +251,8 @@ bool CEngSynthes::try_pronoun_node(int node_no)
 	  if (E.m_Nodes[E.m_Relations[rel].m_SourceNodeNo].m_NodeType == MNA)
 		rel = get_in_rel(E.m_Relations[rel].m_SourceNodeNo);
 
-	//  åñëè ìåñòîèìåíèå - ïîäëåæàùåå èëè ñòîèò â èìåíèòåëüíîì ïàäåæå, òî ýòî íîìèíàòèâ,
-	// èíà÷å åãî íóæíî ïðåîáðàçîâàòü â îáúåêòíóþ ôîðìó.
+	//  ÐµÑÐ»Ð¸ Ð¼ÐµÑÑ‚Ð¾Ð¸Ð¼ÐµÐ½Ð¸Ðµ - Ð¿Ð¾Ð´Ð»ÐµÐ¶Ð°Ñ‰ÐµÐµ Ð¸Ð»Ð¸ ÑÑ‚Ð¾Ð¸Ñ‚ Ð² Ð¸Ð¼ÐµÐ½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ð¼ Ð¿Ð°Ð´ÐµÐ¶Ðµ, Ñ‚Ð¾ ÑÑ‚Ð¾ Ð½Ð¾Ð¼Ð¸Ð½Ð°Ñ‚Ð¸Ð²,
+	// Ð¸Ð½Ð°Ñ‡Ðµ ÐµÐ³Ð¾ Ð½ÑƒÐ¶Ð½Ð¾ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÑŒ Ð² Ð¾Ð±ÑŠÐµÐºÑ‚Ð½ÑƒÑŽ Ñ„Ð¾Ñ€Ð¼Ñƒ.
 	if (rel != -1 && is_subj_rel(rel))	is_norm = true;
 	if (EngWord.HasOneGrammem(eNominative))	is_norm = true;
 	
@@ -260,7 +260,7 @@ bool CEngSynthes::try_pronoun_node(int node_no)
 	if (lemma_is_demonstrative_pronoun (EngWord.m_Lemma))
 	{
 		long ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma,  ePN_ADJ);
-		// ñîçäàåì ìíîæåñòâåííîå ÷èñëî 
+		// ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾ 
 		if (ParadigmId != -1)
 			if  (E.m_Nodes[node_no].GetGrammemsRich() & _QM(eSingular) )
 		     EngWord.m_Word = helper.create_form_by_id(ParadigmId, _QM(eSingular));
@@ -271,7 +271,7 @@ bool CEngSynthes::try_pronoun_node(int node_no)
 	if (!is_norm)
 	{
 		long ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma, ePN);
-		// íå ó âñåõ ìåñòîèìåíèé åñòü îáúåêòíàÿ ôîðìà
+		// Ð½Ðµ Ñƒ Ð²ÑÐµÑ… Ð¼ÐµÑÑ‚Ð¾Ð¸Ð¼ÐµÐ½Ð¸Ð¹ ÐµÑÑ‚ÑŒ Ð¾Ð±ÑŠÐµÐºÑ‚Ð½Ð°Ñ Ñ„Ð¾Ñ€Ð¼Ð°
 		if (ParadigmId != -1)
 		 EngWord.m_Word = helper.create_form_by_id(ParadigmId, _QM(eObjectCase));
 	};

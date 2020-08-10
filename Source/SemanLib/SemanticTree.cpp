@@ -32,11 +32,11 @@ long CRusSemStructure::GetUseRelationsCount() const
 
 };
 
-// выдает объем семантической структуры 
-// количество отношений + v(1)+...+v(n)
-// где v(i) = (кол-во слов в узле) - 1, если i-й узел - словосочетание
-// и v(i)=0, в противном случае.
-// считается, что словосоечетание - это маленьнкое дерево
+// РІС‹РґР°РµС‚ РѕР±СЉРµРј СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ 
+// РєРѕР»РёС‡РµСЃС‚РІРѕ РѕС‚РЅРѕС€РµРЅРёР№ + v(1)+...+v(n)
+// РіРґРµ v(i) = (РєРѕР»-РІРѕ СЃР»РѕРІ РІ СѓР·Р»Рµ) - 1, РµСЃР»Рё i-Р№ СѓР·РµР» - СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРµ
+// Рё v(i)=0, РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ.
+// СЃС‡РёС‚Р°РµС‚СЃСЏ, С‡С‚Рѕ СЃР»РѕРІРѕСЃРѕРµС‡РµС‚Р°РЅРёРµ - СЌС‚Рѕ РјР°Р»РµРЅСЊРЅРєРѕРµ РґРµСЂРµРІРѕ
 long CRusSemStructure::GetSemanticVolume(long Tag) const 
 {
 	long Result = GetUseRelationsCount();
@@ -293,8 +293,8 @@ void CRusSemStructure::MarkUniqueRelations()
 
 
 
-// ===========    Поиск циклов в графе Шалимова  =================
-// предполагается, что это процедура запускается только на граф Шалимова
+// ===========    РџРѕРёСЃРє С†РёРєР»РѕРІ РІ РіСЂР°С„Рµ РЁР°Р»РёРјРѕРІР°  =================
+// РїСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ СЌС‚Рѕ РїСЂРѕС†РµРґСѓСЂР° Р·Р°РїСѓСЃРєР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РЅР° РіСЂР°С„ РЁР°Р»РёРјРѕРІР°
 bool CRusSemStructure::dfs_for_cycle_search (size_t NodeNo, size_t GoalNodeNo)
 {
   long Count = m_Nodes[NodeNo].m_OutRels.size();
@@ -327,11 +327,11 @@ bool CRusSemStructure::FindCycle (long Tag)
 	  m_Nodes[k].m_bInCycle = false;
   };
 /*
- эта функция  опирается на то, что в вершины цикла 
- входит только одна стрелка (часть цикла), а больше стрелок
- входить не может, поскольку мы уже имеем дело с графом Шалимова,
- где в каждый узел входит не более одной стрелки.
- Например, конструкция типа (1,2) (2,3) (3,2) запрещена.
+ СЌС‚Р° С„СѓРЅРєС†РёСЏ  РѕРїРёСЂР°РµС‚СЃСЏ РЅР° С‚Рѕ, С‡С‚Рѕ РІ РІРµСЂС€РёРЅС‹ С†РёРєР»Р° 
+ РІС…РѕРґРёС‚ С‚РѕР»СЊРєРѕ РѕРґРЅР° СЃС‚СЂРµР»РєР° (С‡Р°СЃС‚СЊ С†РёРєР»Р°), Р° Р±РѕР»СЊС€Рµ СЃС‚СЂРµР»РѕРє
+ РІС…РѕРґРёС‚СЊ РЅРµ РјРѕР¶РµС‚, РїРѕСЃРєРѕР»СЊРєСѓ РјС‹ СѓР¶Рµ РёРјРµРµРј РґРµР»Рѕ СЃ РіСЂР°С„РѕРј РЁР°Р»РёРјРѕРІР°,
+ РіРґРµ РІ РєР°Р¶РґС‹Р№ СѓР·РµР» РІС…РѕРґРёС‚ РЅРµ Р±РѕР»РµРµ РѕРґРЅРѕР№ СЃС‚СЂРµР»РєРё.
+ РќР°РїСЂРёРјРµСЂ, РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ С‚РёРїР° (1,2) (2,3) (3,2) Р·Р°РїСЂРµС‰РµРЅР°.
 */
   for (size_t i = 0;  i < Count; i++)
    if (    HasTag(i, Tag) 
@@ -398,7 +398,7 @@ bool CRusSemStructure::SplitVariantWithRepeats(size_t  VarNo,
 			if ( k == Variants[VarNo].GetRelsCount()) k = i;
 
 			Variants.push_back(Variants[VarNo]);
-			// заново надо вычислить ссылку, поскольку после push_back она сбивается
+			// Р·Р°РЅРѕРІРѕ РЅР°РґРѕ РІС‹С‡РёСЃР»РёС‚СЊ СЃСЃС‹Р»РєСѓ, РїРѕСЃРєРѕР»СЊРєСѓ РїРѕСЃР»Рµ push_back РѕРЅР° СЃР±РёРІР°РµС‚СЃСЏ
 			Variants[Variants.size() - 1].SetRel(k, Unhosted);
 
 
@@ -416,33 +416,33 @@ bool CRusSemStructure::SplitVariantWithRepeats(size_t  VarNo,
 
 // 
 /*
- Функция делит все отношения на классы эквивалентности.
- Номер класс эквивалентности - это слот CRusSemRelation::m_EqualFieldId
- Функция идет по всем отношениям с помощью итератора i .Если текущий
- номер класса равен -1, тогда этому отношению ставится 
- номер класса, совпадающий с номером отношения.
- Проставив номер, функция идет по последющим отношениям с помощью итератора k
- Если 
- 1. Отношение k выбрано в текущем множестве ((V.Rels[k]  != Unhosted))
- 2. Отношение k и отношение i исходят из одного узла
+ Р¤СѓРЅРєС†РёСЏ РґРµР»РёС‚ РІСЃРµ РѕС‚РЅРѕС€РµРЅРёСЏ РЅР° РєР»Р°СЃСЃС‹ СЌРєРІРёРІР°Р»РµРЅС‚РЅРѕСЃС‚Рё.
+ РќРѕРјРµСЂ РєР»Р°СЃСЃ СЌРєРІРёРІР°Р»РµРЅС‚РЅРѕСЃС‚Рё - СЌС‚Рѕ СЃР»РѕС‚ CRusSemRelation::m_EqualFieldId
+ Р¤СѓРЅРєС†РёСЏ РёРґРµС‚ РїРѕ РІСЃРµРј РѕС‚РЅРѕС€РµРЅРёСЏРј СЃ РїРѕРјРѕС‰СЊСЋ РёС‚РµСЂР°С‚РѕСЂР° i .Р•СЃР»Рё С‚РµРєСѓС‰РёР№
+ РЅРѕРјРµСЂ РєР»Р°СЃСЃР° СЂР°РІРµРЅ -1, С‚РѕРіРґР° СЌС‚РѕРјСѓ РѕС‚РЅРѕС€РµРЅРёСЋ СЃС‚Р°РІРёС‚СЃСЏ 
+ РЅРѕРјРµСЂ РєР»Р°СЃСЃР°, СЃРѕРІРїР°РґР°СЋС‰РёР№ СЃ РЅРѕРјРµСЂРѕРј РѕС‚РЅРѕС€РµРЅРёСЏ.
+ РџСЂРѕСЃС‚Р°РІРёРІ РЅРѕРјРµСЂ, С„СѓРЅРєС†РёСЏ РёРґРµС‚ РїРѕ РїРѕСЃР»РµРґСЋС‰РёРј РѕС‚РЅРѕС€РµРЅРёСЏРј СЃ РїРѕРјРѕС‰СЊСЋ РёС‚РµСЂР°С‚РѕСЂР° k
+ Р•СЃР»Рё 
+ 1. РћС‚РЅРѕС€РµРЅРёРµ k РІС‹Р±СЂР°РЅРѕ РІ С‚РµРєСѓС‰РµРј РјРЅРѕР¶РµСЃС‚РІРµ ((V.Rels[k]  != Unhosted))
+ 2. РћС‚РЅРѕС€РµРЅРёРµ k Рё РѕС‚РЅРѕС€РµРЅРёРµ i РёСЃС…РѕРґСЏС‚ РёР· РѕРґРЅРѕРіРѕ СѓР·Р»Р°
    (m_Relations[V.Rels[k]].m_SourceNodeNo  == m_Relations[V.Rels[i]].m_SourceNodeNo)
-   (поскольку несовместные отношения бывают только те, которые
-   выходят из одного узла)
- 3. Отношение k проиндексировано (например, отношения,
-которые идут из MUA (без названия) не индексируются, поскольку их может много выходить из одного узла)
- 4. Отношение k не идет в КОПУЛ, поскольку оно не может 
- быть ни с чем несовместно;
- 5.Отношение k не является реверсивным (поскольку, например,
-реверсивные PROPERT могут с большом кол-ве у одного узла) 6. и неверно, что отношения k и i совместны.
- Тогда  отношения k помечается тем же номером класса 
- эквивалентности, что и отношение i.
+   (РїРѕСЃРєРѕР»СЊРєСѓ РЅРµСЃРѕРІРјРµСЃС‚РЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ Р±С‹РІР°СЋС‚ С‚РѕР»СЊРєРѕ С‚Рµ, РєРѕС‚РѕСЂС‹Рµ
+   РІС‹С…РѕРґСЏС‚ РёР· РѕРґРЅРѕРіРѕ СѓР·Р»Р°)
+ 3. РћС‚РЅРѕС€РµРЅРёРµ k РїСЂРѕРёРЅРґРµРєСЃРёСЂРѕРІР°РЅРѕ (РЅР°РїСЂРёРјРµСЂ, РѕС‚РЅРѕС€РµРЅРёСЏ,
+РєРѕС‚РѕСЂС‹Рµ РёРґСѓС‚ РёР· MUA (Р±РµР· РЅР°Р·РІР°РЅРёСЏ) РЅРµ РёРЅРґРµРєСЃРёСЂСѓСЋС‚СЃСЏ, РїРѕСЃРєРѕР»СЊРєСѓ РёС… РјРѕР¶РµС‚ РјРЅРѕРіРѕ РІС‹С…РѕРґРёС‚СЊ РёР· РѕРґРЅРѕРіРѕ СѓР·Р»Р°)
+ 4. РћС‚РЅРѕС€РµРЅРёРµ k РЅРµ РёРґРµС‚ РІ РљРћРџРЈР›, РїРѕСЃРєРѕР»СЊРєСѓ РѕРЅРѕ РЅРµ РјРѕР¶РµС‚ 
+ Р±С‹С‚СЊ РЅРё СЃ С‡РµРј РЅРµСЃРѕРІРјРµСЃС‚РЅРѕ;
+ 5.РћС‚РЅРѕС€РµРЅРёРµ k РЅРµ СЏРІР»СЏРµС‚СЃСЏ СЂРµРІРµСЂСЃРёРІРЅС‹Рј (РїРѕСЃРєРѕР»СЊРєСѓ, РЅР°РїСЂРёРјРµСЂ,
+СЂРµРІРµСЂСЃРёРІРЅС‹Рµ PROPERT РјРѕРіСѓС‚ СЃ Р±РѕР»СЊС€РѕРј РєРѕР»-РІРµ Сѓ РѕРґРЅРѕРіРѕ СѓР·Р»Р°) 6. Рё РЅРµРІРµСЂРЅРѕ, С‡С‚Рѕ РѕС‚РЅРѕС€РµРЅРёСЏ k Рё i СЃРѕРІРјРµСЃС‚РЅС‹.
+ РўРѕРіРґР°  РѕС‚РЅРѕС€РµРЅРёСЏ k РїРѕРјРµС‡Р°РµС‚СЃСЏ С‚РµРј Р¶Рµ РЅРѕРјРµСЂРѕРј РєР»Р°СЃСЃР° 
+ СЌРєРІРёРІР°Р»РµРЅС‚РЅРѕСЃС‚Рё, С‡С‚Рѕ Рё РѕС‚РЅРѕС€РµРЅРёРµ i.
 
- Таким образом,  функция  выделяет классы отношений, внутри которых
- отношения не являются совместными.
+ РўР°РєРёРј РѕР±СЂР°Р·РѕРј,  С„СѓРЅРєС†РёСЏ  РІС‹РґРµР»СЏРµС‚ РєР»Р°СЃСЃС‹ РѕС‚РЅРѕС€РµРЅРёР№, РІРЅСѓС‚СЂРё РєРѕС‚РѕСЂС‹С…
+ РѕС‚РЅРѕС€РµРЅРёСЏ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ СЃРѕРІРјРµСЃС‚РЅС‹РјРё.
 
- Функция выдает  число отношений, которые вошли в классы,
- состоящие  более, чем из одного отношения минус количество
- таких классов.
+ Р¤СѓРЅРєС†РёСЏ РІС‹РґР°РµС‚  С‡РёСЃР»Рѕ РѕС‚РЅРѕС€РµРЅРёР№, РєРѕС‚РѕСЂС‹Рµ РІРѕС€Р»Рё РІ РєР»Р°СЃСЃС‹,
+ СЃРѕСЃС‚РѕСЏС‰РёРµ  Р±РѕР»РµРµ, С‡РµРј РёР· РѕРґРЅРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ РјРёРЅСѓСЃ РєРѕР»РёС‡РµСЃС‚РІРѕ
+ С‚Р°РєРёС… РєР»Р°СЃСЃРѕРІ.
 */
 long CRusSemStructure::SetEqualFieldId(const CTreeVariant& V)
 {
@@ -541,7 +541,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 {
 	if (m_Relations.size() >  250) 
 	{
-		ErrorMessage ("PanicRelationsCount для одной клаузы больше 250. Это очень сложный граф.");
+		ErrorMessage ("PanicRelationsCount РґР»СЏ РѕРґРЅРѕР№ РєР»Р°СѓР·С‹ Р±РѕР»СЊС€Рµ 250. Р­С‚Рѕ РѕС‡РµРЅСЊ СЃР»РѕР¶РЅС‹Р№ РіСЂР°С„.");
 		VarAndVals.resize(1);
 		VarAndVals[0].second.Panic = true;
 		throw;
@@ -551,7 +551,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 	vector<CTreeVariant> Parents;
 	long HypotVariantCount = 1;
-	StartTimer("Граф Шалимова",1);
+	StartTimer("Р“СЂР°С„ РЁР°Р»РёРјРѕРІР°",1);
 
 	for (size_t i = 0;  i < m_Nodes.size(); i++)
 		if (HasTag(i, Tag))
@@ -574,7 +574,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 			 return;
 		 };
 
-			// добавляем уникальные выходящие отношения
+			// РґРѕР±Р°РІР»СЏРµРј СѓРЅРёРєР°Р»СЊРЅС‹Рµ РІС‹С…РѕРґСЏС‰РёРµ РѕС‚РЅРѕС€РµРЅРёСЏ
 			Count = m_Nodes[i].m_OutRels.size();
 			for (size_t k = 0;  k < Count; k++)
 				if (m_Relations[m_Nodes[i].m_OutRels[k]].m_bUniqueRelation )
@@ -594,10 +594,10 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 	vector<CTreeVariant>  Variants;
 	Variants.reserve(HypotVariantCount*2);
-	CTreeVariant V; // текущий вариант 
+	CTreeVariant V; // С‚РµРєСѓС‰РёР№ РІР°СЂРёР°РЅС‚ 
 	GetTreeVariants(Parents, V, Variants, 0);
 	size_t VariantCount = Variants.size();
-	EndTimer("Граф Шалимова");
+	EndTimer("Р“СЂР°С„ РЁР°Р»РёРјРѕРІР°");
 
 	if (Variants.size() > m_PanicTreeVariantCount*100) 
 	{
@@ -606,7 +606,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		return;
 	};
 
-	StartTimer("Расцикливание",1);
+	StartTimer("Р Р°СЃС†РёРєР»РёРІР°РЅРёРµ",1);
 
 	long CycledMinComponentNum = Parents.size();
 
@@ -622,8 +622,8 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 		};
 	};
-	EndTimer("Расцикливание");
-	StartTimer("Удаление повторов для неуник. отношений",1);
+	EndTimer("Р Р°СЃС†РёРєР»РёРІР°РЅРёРµ");
+	StartTimer("РЈРґР°Р»РµРЅРёРµ РїРѕРІС‚РѕСЂРѕРІ РґР»СЏ РЅРµСѓРЅРёРє. РѕС‚РЅРѕС€РµРЅРёР№",1);
 
 	long MinComponentNum = Parents.size();
 
@@ -637,8 +637,8 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		else
 		{
 			SplitVariantWithRepeats(VarNo, Variants);
-			// после отработки SplitVariantWithRepeats повторы могут остаться, если
-			// стрелки уникальны. 
+			// РїРѕСЃР»Рµ РѕС‚СЂР°Р±РѕС‚РєРё SplitVariantWithRepeats РїРѕРІС‚РѕСЂС‹ РјРѕРіСѓС‚ РѕСЃС‚Р°С‚СЊСЃСЏ, РµСЃР»Рё
+			// СЃС‚СЂРµР»РєРё СѓРЅРёРєР°Р»СЊРЅС‹. 
 			//assert (SetEqualFieldId(Variants[VarNo]) == 0);
 			long CurrComp =  GetComponentNum(Variants[VarNo]);
 			if (CurrComp < MinComponentNum)
@@ -647,11 +647,11 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 
 	};
-	EndTimer("Удаление повторов для неуник. отношений");
+	EndTimer("РЈРґР°Р»РµРЅРёРµ РїРѕРІС‚РѕСЂРѕРІ РґР»СЏ РЅРµСѓРЅРёРє. РѕС‚РЅРѕС€РµРЅРёР№");
 
-	StartTimer("Удаление малосвязных вариантов",1);
-	// уничтожаем все варианты, у которых число компонент связности меньше минимального значения 
-	// для всех вариантов
+	StartTimer("РЈРґР°Р»РµРЅРёРµ РјР°Р»РѕСЃРІСЏР·РЅС‹С… РІР°СЂРёР°РЅС‚РѕРІ",1);
+	// СѓРЅРёС‡С‚РѕР¶Р°РµРј РІСЃРµ РІР°СЂРёР°РЅС‚С‹, Сѓ РєРѕС‚РѕСЂС‹С… С‡РёСЃР»Рѕ РєРѕРјРїРѕРЅРµРЅС‚ СЃРІСЏР·РЅРѕСЃС‚Рё РјРµРЅСЊС€Рµ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ 
+	// РґР»СЏ РІСЃРµС… РІР°СЂРёР°РЅС‚РѕРІ
 
 	vector<PairOfLong> CompCountAndNumber;
 	CompCountAndNumber.reserve(Variants.size());
@@ -680,8 +680,8 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		return;
 	};
 
-	EndTimer("Удаление малосвязных вариантов");
-	StartTimer("Оценка деревьев",1);
+	EndTimer("РЈРґР°Р»РµРЅРёРµ РјР°Р»РѕСЃРІСЏР·РЅС‹С… РІР°СЂРёР°РЅС‚РѕРІ");
+	StartTimer("РћС†РµРЅРєР° РґРµСЂРµРІСЊРµРІ",1);
 
 
 	long l=0;
@@ -695,7 +695,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 			l++;
 		};
 
-	EndTimer("Оценка деревьев");
+	EndTimer("РћС†РµРЅРєР° РґРµСЂРµРІСЊРµРІ");
 
 };
 
@@ -729,33 +729,33 @@ void QuickGetIndexedVariants(const vector<TreeAndValueVector>&  Parents,
 long CRusSemStructure::GetTreeByConnectedComponents (size_t ClauseNo,  TreeVariantValue& ResultValue)
 {
 	bool TryWithoutLongRelations = true;
-	//  эта метка используется всего один раз - когда возникает панический граф, 
-	//  мы удаляем все длинные отношения, идущие от существительного, и пробуем собрать дерево заново. Если и на этот раз
-	//  не удалось, тогда выходим...
+	//  СЌС‚Р° РјРµС‚РєР° РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІСЃРµРіРѕ РѕРґРёРЅ СЂР°Р· - РєРѕРіРґР° РІРѕР·РЅРёРєР°РµС‚ РїР°РЅРёС‡РµСЃРєРёР№ РіСЂР°С„, 
+	//  РјС‹ СѓРґР°Р»СЏРµРј РІСЃРµ РґР»РёРЅРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ, РёРґСѓС‰РёРµ РѕС‚ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ, Рё РїСЂРѕР±СѓРµРј СЃРѕР±СЂР°С‚СЊ РґРµСЂРµРІРѕ Р·Р°РЅРѕРІРѕ. Р•СЃР»Рё Рё РЅР° СЌС‚РѕС‚ СЂР°Р·
+	//  РЅРµ СѓРґР°Р»РѕСЃСЊ, С‚РѕРіРґР° РІС‹С…РѕРґРёРј...
 
 
 	bool LongRelationsOfAnyKind = true;
-	//  эта метка используется всего один раз - когда возникает панический граф, 
-	//  мы удаляем все длинные отношения, идущие от любых вершин, и пробуем собрать дерево заново. Если и на этот раз
-	//  не удалось, тогда выходим...
+	//  СЌС‚Р° РјРµС‚РєР° РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІСЃРµРіРѕ РѕРґРёРЅ СЂР°Р· - РєРѕРіРґР° РІРѕР·РЅРёРєР°РµС‚ РїР°РЅРёС‡РµСЃРєРёР№ РіСЂР°С„, 
+	//  РјС‹ СѓРґР°Р»СЏРµРј РІСЃРµ РґР»РёРЅРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ, РёРґСѓС‰РёРµ РѕС‚ Р»СЋР±С‹С… РІРµСЂС€РёРЅ, Рё РїСЂРѕР±СѓРµРј СЃРѕР±СЂР°С‚СЊ РґРµСЂРµРІРѕ Р·Р°РЅРѕРІРѕ. Р•СЃР»Рё Рё РЅР° СЌС‚РѕС‚ СЂР°Р·
+	//  РЅРµ СѓРґР°Р»РѕСЃСЊ, С‚РѕРіРґР° РІС‹С…РѕРґРёРј...
 
 
 TryWithoutLongRelationsLabel:
 
-	StartTimer("Общее время построения дерева",0);
+	StartTimer("РћР±С‰РµРµ РІСЂРµРјСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РґРµСЂРµРІР°",0);
 
-	// узел, содежащий союз, который стоит в начале клаузы, удаленные на время построения дерева
+	// СѓР·РµР», СЃРѕРґРµР¶Р°С‰РёР№ СЃРѕСЋР·, РєРѕС‚РѕСЂС‹Р№ СЃС‚РѕРёС‚ РІ РЅР°С‡Р°Р»Рµ РєР»Р°СѓР·С‹, СѓРґР°Р»РµРЅРЅС‹Рµ РЅР° РІСЂРµРјСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РґРµСЂРµРІР°
 	CRusSemNode  FirstConjNode;
 	DeleteConjInTheBegining (ClauseNo, FirstConjNode);
 
-	// сохраняем текущий состав отношений, для того чтобы  запустить MarkUniqueRelations
+	// СЃРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰РёР№ СЃРѕСЃС‚Р°РІ РѕС‚РЅРѕС€РµРЅРёР№, РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹  Р·Р°РїСѓСЃС‚РёС‚СЊ MarkUniqueRelations
 	UpdateBlockedRelations();
 	IndexRelations();
 	InitGrammarMatrix1(ClauseNo);
 
 	PrintRelations();
 
-	// помечаем безусловные отношения 
+	// РїРѕРјРµС‡Р°РµРј Р±РµР·СѓСЃР»РѕРІРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ 
 	MarkUniqueRelations(); 
 
 	long  TopConnectedComponentsCount = MarkConnectedComponentsWithoutUniqueRelations(ClauseNo);
@@ -764,17 +764,17 @@ TryWithoutLongRelationsLabel:
 
 
 
-	if (TopConnectedComponentsCount == 0)  // это возможно, если ввести одно слова "сам" или "один", которое удаляется при некоторых значениях
+	if (TopConnectedComponentsCount == 0)  // СЌС‚Рѕ РІРѕР·РјРѕР¶РЅРѕ, РµСЃР»Рё РІРІРµСЃС‚Рё РѕРґРЅРѕ СЃР»РѕРІР° "СЃР°Рј" РёР»Рё "РѕРґРёРЅ", РєРѕС‚РѕСЂРѕРµ СѓРґР°Р»СЏРµС‚СЃСЏ РїСЂРё РЅРµРєРѕС‚РѕСЂС‹С… Р·РЅР°С‡РµРЅРёСЏС…
 	{
 		ResultValue.Panic = true;
 		if (FirstConjNode.m_Words.size() > 0)
 			InsertNode (FirstConjNode);
-		EndTimer("Общее время построения дерева");
+		EndTimer("РћР±С‰РµРµ РІСЂРµРјСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РґРµСЂРµРІР°");
 		return 0;
 	};
 
 
-	//  i-й элемент вектора хранит варианты дерева и его оценку для i-й компоненты связности 
+	//  i-Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° С…СЂР°РЅРёС‚ РІР°СЂРёР°РЅС‚С‹ РґРµСЂРµРІР° Рё РµРіРѕ РѕС†РµРЅРєСѓ РґР»СЏ i-Р№ РєРѕРјРїРѕРЅРµРЅС‚С‹ СЃРІСЏР·РЅРѕСЃС‚Рё 
 	vector<TreeAndValueVector> VarAndVals;
 
 	VarAndVals.resize(TopConnectedComponentsCount);
@@ -788,14 +788,14 @@ TryWithoutLongRelationsLabel:
 		if (VarAndVals[i][0].second.Panic)
 		{
 			ResultValue.Panic = true;
-			EndTimer("Общее время построения дерева");
+			EndTimer("РћР±С‰РµРµ РІСЂРµРјСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РґРµСЂРµРІР°");
 			if (FirstConjNode.m_Words.size() > 0)
 				InsertNode (FirstConjNode);
 			if (TryWithoutLongRelations)
 		 {
 			 TryWithoutLongRelations = false;
-			 // уничтожаем длинные отношения, у которых (MaxRelationLeapsCount > 0)  
-			 // попробуем  собрать так (ведь это лучше, чем ничего!)
+			 // СѓРЅРёС‡С‚РѕР¶Р°РµРј РґР»РёРЅРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ, Сѓ РєРѕС‚РѕСЂС‹С… (MaxRelationLeapsCount > 0)  
+			 // РїРѕРїСЂРѕР±СѓРµРј  СЃРѕР±СЂР°С‚СЊ С‚Р°Рє (РІРµРґСЊ СЌС‚Рѕ Р»СѓС‡С€Рµ, С‡РµРј РЅРёС‡РµРіРѕ!)
 			 DeleteLongRelations(ClauseNo, 0, true);
 			 VarAndVals.clear();
 			 goto TryWithoutLongRelationsLabel;
@@ -804,8 +804,8 @@ TryWithoutLongRelationsLabel:
 			if (LongRelationsOfAnyKind)
 		 {
 			 LongRelationsOfAnyKind = false;
-			 // уничтожаем длинные отношения идущие от глаголов, у которых (MaxRelationLeapsCount > 2)  
-			 // попробуем  собрать так (ведь это лучше, чем ничего!)
+			 // СѓРЅРёС‡С‚РѕР¶Р°РµРј РґР»РёРЅРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ РёРґСѓС‰РёРµ РѕС‚ РіР»Р°РіРѕР»РѕРІ, Сѓ РєРѕС‚РѕСЂС‹С… (MaxRelationLeapsCount > 2)  
+			 // РїРѕРїСЂРѕР±СѓРµРј  СЃРѕР±СЂР°С‚СЊ С‚Р°Рє (РІРµРґСЊ СЌС‚Рѕ Р»СѓС‡С€Рµ, С‡РµРј РЅРёС‡РµРіРѕ!)
 			 DeleteLongRelations(ClauseNo, 2, false);
 			 VarAndVals.clear();
 			 goto TryWithoutLongRelationsLabel;
@@ -813,16 +813,16 @@ TryWithoutLongRelationsLabel:
 
 
 			/*
-			раньше мы выдавали панический граф, если он возникал,  а теперь
-			будем давать синтаксис 
+			СЂР°РЅСЊС€Рµ РјС‹ РІС‹РґР°РІР°Р»Рё РїР°РЅРёС‡РµСЃРєРёР№ РіСЂР°С„, РµСЃР»Рё РѕРЅ РІРѕР·РЅРёРєР°Р»,  Р° С‚РµРїРµСЂСЊ
+			Р±СѓРґРµРј РґР°РІР°С‚СЊ СЃРёРЅС‚Р°РєСЃРёСЃ 
 			*/
 			m_Relations.clear();
 			ApplySynStr (ClauseNo);
 
-			EndTimer("Общее время построения дерева");
+			EndTimer("РћР±С‰РµРµ РІСЂРµРјСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РґРµСЂРµРІР°");
 			return VarAndVals[i].size();
 		};
-		// может быть ни одно 
+		// РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРё РѕРґРЅРѕ 
 		HypotCount *= VarAndVals[i].size();
 	};
 
@@ -879,13 +879,13 @@ TryWithoutLongRelationsLabel:
 
 	ResultValue.ConnectedComponentsCount = GetConnectedComponentsCount(TagClause);
 
-	// вставляет союз в начало клаузы, если таковый был удален перед этим
+	// РІСЃС‚Р°РІР»СЏРµС‚ СЃРѕСЋР· РІ РЅР°С‡Р°Р»Рѕ РєР»Р°СѓР·С‹, РµСЃР»Рё С‚Р°РєРѕРІС‹Р№ Р±С‹Р» СѓРґР°Р»РµРЅ РїРµСЂРµРґ СЌС‚РёРј
 	if (FirstConjNode.m_Words.size() > 0)
 		InsertNode (FirstConjNode);
 
 
 
-	EndTimer("Общее время построения дерева");
+	EndTimer("РћР±С‰РµРµ РІСЂРµРјСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РґРµСЂРµРІР°");
 
 	return WeightAndPositions.size();
 };
@@ -894,10 +894,10 @@ TryWithoutLongRelationsLabel:
 
 
 
-// число отношений, которые проведены из пассивного глагола в ИГ с творительным падежом,
-// который был получен из залоговой трансоформации
-// Например, "дом строился рабочими"
-// Здесь  SUB (рабочими, строился) -   то самое отношение.
+// С‡РёСЃР»Рѕ РѕС‚РЅРѕС€РµРЅРёР№, РєРѕС‚РѕСЂС‹Рµ РїСЂРѕРІРµРґРµРЅС‹ РёР· РїР°СЃСЃРёРІРЅРѕРіРѕ РіР»Р°РіРѕР»Р° РІ РР“ СЃ С‚РІРѕСЂРёС‚РµР»СЊРЅС‹Рј РїР°РґРµР¶РѕРј,
+// РєРѕС‚РѕСЂС‹Р№ Р±С‹Р» РїРѕР»СѓС‡РµРЅ РёР· Р·Р°Р»РѕРіРѕРІРѕР№ С‚СЂР°РЅСЃРѕС„РѕСЂРјР°С†РёРё
+// РќР°РїСЂРёРјРµСЂ, "РґРѕРј СЃС‚СЂРѕРёР»СЃСЏ СЂР°Р±РѕС‡РёРјРё"
+// Р—РґРµСЃСЊ  SUB (СЂР°Р±РѕС‡РёРјРё, СЃС‚СЂРѕРёР»СЃСЏ) -   С‚Рѕ СЃР°РјРѕРµ РѕС‚РЅРѕС€РµРЅРёРµ.
 long CRusSemStructure::GetInstrAgentRelsCount (long Tag) const
 {
  long Result =0;
@@ -917,8 +917,8 @@ long CRusSemStructure::GetInstrAgentRelsCount (long Tag) const
 
 long IndexRelationStr (StringVector&  Rels, string RelationStr)
 {
-// считаем, что отношение TIME и LOK могут  встречаться сколько угодно раз,	// поэтому считаем RelationId=-1. Значение "-1"  используется для того, чтобы
-// два разных отношения TIME, идущих их одного узла. считались совместными.	  
+// СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РѕС‚РЅРѕС€РµРЅРёРµ TIME Рё LOK РјРѕРіСѓС‚  РІСЃС‚СЂРµС‡Р°С‚СЊСЃСЏ СЃРєРѕР»СЊРєРѕ СѓРіРѕРґРЅРѕ СЂР°Р·,	// РїРѕСЌС‚РѕРјСѓ СЃС‡РёС‚Р°РµРј RelationId=-1. Р—РЅР°С‡РµРЅРёРµ "-1"  РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹
+// РґРІР° СЂР°Р·РЅС‹С… РѕС‚РЅРѕС€РµРЅРёСЏ TIME, РёРґСѓС‰РёС… РёС… РѕРґРЅРѕРіРѕ СѓР·Р»Р°. СЃС‡РёС‚Р°Р»РёСЃСЊ СЃРѕРІРјРµСЃС‚РЅС‹РјРё.	  
 	if (		RelationStr.empty() 
 			||	(RelationStr == "TIME")|| (RelationStr == "LOK")		  
 		)
@@ -957,24 +957,24 @@ void CRusSemStructure::ValueTreeVariant (TreeVariantValue& Value, long Tag)
 
   Value.ValencyDisorder = GetValencyDisorderCount(Tag);
 
-  //  оценка отношений 
-  StartTimer("Проверка по SF",2);
+  //  РѕС†РµРЅРєР° РѕС‚РЅРѕС€РµРЅРёР№ 
+  StartTimer("РџСЂРѕРІРµСЂРєР° РїРѕ SF",2);
   Value.SemFetDisagree = RelsCount ? GetSemFetDisagreeCount(Tag)*1000 / RelsCount : 0;
-  EndTimer("Проверка по SF");
-  // должно идти после GetSemFetDisagreeCount
-  // другие оценки
-  StartTimer("Оценка деревьев_1",2);
+  EndTimer("РџСЂРѕРІРµСЂРєР° РїРѕ SF");
+  // РґРѕР»Р¶РЅРѕ РёРґС‚Рё РїРѕСЃР»Рµ GetSemFetDisagreeCount
+  // РґСЂСѓРіРёРµ РѕС†РµРЅРєРё
+  StartTimer("РћС†РµРЅРєР° РґРµСЂРµРІСЊРµРІ_1",2);
   Value.OptionalValencyCount = GetOptionalValenciesCount(Tag);
   Value.LexFetAgreeCount = RelsCount ? GetLexFetAgreeCount(Tag)*1000  / RelsCount : 0;
   Value.RelationsLength = SemanticVolume ? GetRelationsLength(Tag)*1000  / SemanticVolume : 0;
   Value.InstrAgentRelsCount =  SemanticVolume ? GetInstrAgentRelsCount(Tag)*1000  / SemanticVolume: 0;
-  EndTimer("Оценка деревьев_1");
-  // другие оценки
-  StartTimer("Проверка проективности",2);
+  EndTimer("РћС†РµРЅРєР° РґРµСЂРµРІСЊРµРІ_1");
+  // РґСЂСѓРіРёРµ РѕС†РµРЅРєРё
+  StartTimer("РџСЂРѕРІРµСЂРєР° РїСЂРѕРµРєС‚РёРІРЅРѕСЃС‚Рё",2);
   Value.ProjectnessCoef = IsProjectedNew(Tag) ? 0 : 1;
-  EndTimer("Проверка проективности");
+  EndTimer("РџСЂРѕРІРµСЂРєР° РїСЂРѕРµРєС‚РёРІРЅРѕСЃС‚Рё");
 
-  StartTimer("Оценка деревьев_2",2);
+  StartTimer("РћС†РµРЅРєР° РґРµСЂРµРІСЊРµРІ_2",2);
   Value.AgreeWithSyntaxTopCoef = AgreeWithSyntaxTop(Tag) ? 1 : 0;
   Value.TopAgreeWithSyntaxCriteria = TopAgreeWithSyntaxCriteria(Tag) ? 1 : 0;
   Value.MNAViolationsCount = GetMNAViolationsCount(Tag);
@@ -990,7 +990,7 @@ void CRusSemStructure::ValueTreeVariant (TreeVariantValue& Value, long Tag)
   Value.PrichastieWithoutActantsCount = GetPrichastieWithoutActants(Tag);
 
   Value.PassiveValencyCount = GetPassiveValencyCount(Tag);
-  EndTimer("Оценка деревьев_2");
+  EndTimer("РћС†РµРЅРєР° РґРµСЂРµРІСЊРµРІ_2");
   
 };
 
@@ -1071,8 +1071,8 @@ void CRusSemStructure::FindPossibleAntecedents()
 //#pragma optimize( "", off ) 
 void CRusSemStructure::BuildAnaphoricRels()
 {
-	// необходимо получить пересечение SF уже сейчас, иначе личные местоимения
-	// окажутся без SF
+	// РЅРµРѕР±С…РѕРґРёРјРѕ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµСЃРµС‡РµРЅРёРµ SF СѓР¶Рµ СЃРµР№С‡Р°СЃ, РёРЅР°С‡Рµ Р»РёС‡РЅС‹Рµ РјРµСЃС‚РѕРёРјРµРЅРёСЏ
+	// РѕРєР°Р¶СѓС‚СЃСЏ Р±РµР· SF
 	PrintRelations();
 	ApplyDopInfinitive ();
 
@@ -1091,7 +1091,7 @@ void CRusSemStructure::BuildAnaphoricRels()
 			GetBrothers(NodeNo, BrotherNodes, false);
 			long ClauseNo = m_Nodes[NodeNo].m_ClauseNo;
 
-			// получение всех гипотез
+			// РїРѕР»СѓС‡РµРЅРёРµ РІСЃРµС… РіРёРїРѕС‚РµР·
 			for (long i=0; i<m_Nodes.size(); i++)
 				if (     m_Nodes[i].IsWordContainer()
 					&& (i !=NodeNo)
@@ -1100,8 +1100,8 @@ void CRusSemStructure::BuildAnaphoricRels()
 					&& ((m_Nodes[i].GetGrammems() & Grammems) == Grammems)
 					&& ( HasRichPOS (i, NOUN) || m_Nodes[i].IsAnaphoricPronoun() )
 					&& !_find(BrotherNodes, i)
-					//  не идет ни одного отношения напрямую из этого слова в местоимение
-					// например, "бронирование его", здесь "его"(лемма "ОНО") не может обоозначать "бронирование" 
+					//  РЅРµ РёРґРµС‚ РЅРё РѕРґРЅРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ РЅР°РїСЂСЏРјСѓСЋ РёР· СЌС‚РѕРіРѕ СЃР»РѕРІР° РІ РјРµСЃС‚РѕРёРјРµРЅРёРµ
+					// РЅР°РїСЂРёРјРµСЂ, "Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ РµРіРѕ", Р·РґРµСЃСЊ "РµРіРѕ"(Р»РµРјРјР° "РћРќРћ") РЅРµ РјРѕР¶РµС‚ РѕР±РѕРѕР·РЅР°С‡Р°С‚СЊ "Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ" 
 					&& (FindFirstRelation(i, NodeNo) == -1)
 					)
 					Hypots.push_back(CAntecedentHypot(m_Nodes[i], GetDistance(i, NodeNo), i));
@@ -1141,8 +1141,8 @@ void CRusSemStructure::BuildAnaphoricRels()
 
 					m_Nodes[NodeNo] =  N;
 					/*
-					Удалим все абстрактные узлы, поскольку они будут простоены 
-					функцией BuildTheVariant (а то они два раза строятся)
+					РЈРґР°Р»РёРј РІСЃРµ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рµ СѓР·Р»С‹, РїРѕСЃРєРѕР»СЊРєСѓ РѕРЅРё Р±СѓРґСѓС‚ РїСЂРѕСЃС‚РѕРµРЅС‹ 
+					С„СѓРЅРєС†РёРµР№ BuildTheVariant (Р° С‚Рѕ РѕРЅРё РґРІР° СЂР°Р·Р° СЃС‚СЂРѕСЏС‚СЃСЏ)
 					*/
 					for (long i=0; i < m_Nodes.size(); i++)
 						if (   IsInClause(i,ClauseNo)
@@ -1155,8 +1155,8 @@ void CRusSemStructure::BuildAnaphoricRels()
 						};
 
 					AssertValidGraph();
-					// на самом деле, здесь нужны только оценка,
-					// а отношения не нужны 
+					// РЅР° СЃР°РјРѕРј РґРµР»Рµ, Р·РґРµСЃСЊ РЅСѓР¶РЅС‹ С‚РѕР»СЊРєРѕ РѕС†РµРЅРєР°,
+					// Р° РѕС‚РЅРѕС€РµРЅРёСЏ РЅРµ РЅСѓР¶РЅС‹ 
 					Hypots[HypotNo].m_Variant = (CTreeOfLexVariantWeight)BuildTheVariant(ClauseNo);
 
 
@@ -1170,7 +1170,7 @@ void CRusSemStructure::BuildAnaphoricRels()
 				};
 
 
-				// оценка гипотез
+				// РѕС†РµРЅРєР° РіРёРїРѕС‚РµР·
 				sort (Hypots.begin(), Hypots.end());
 				if (Hypots.size()  > 1)
 				{
@@ -1192,17 +1192,17 @@ void CRusSemStructure::BuildAnaphoricRels()
 
 				if (Hypots[0].m_NodeNo != -1)
 				{
-					// построение отношения
-					CRusSemRelation R(CValency("THESAME", A_C, GetRossHolder(Ross)),  NodeNo,  Hypots[0].m_NodeNo,  "анафора");
+					// РїРѕСЃС‚СЂРѕРµРЅРёРµ РѕС‚РЅРѕС€РµРЅРёСЏ
+					CRusSemRelation R(CValency("THESAME", A_C, GetRossHolder(Ross)),  NodeNo,  Hypots[0].m_NodeNo,  "Р°РЅР°С„РѕСЂР°");
 					m_DopRelations.push_back(R);
 
 
 				}
-				// копируем SF
+				// РєРѕРїРёСЂСѓРµРј SF
 				m_Nodes[NodeNo].m_NodeSemFets = Hypots[0].m_Node.m_NodeSemFets;
 
 
-				// копируем оценку лучшего варианта 
+				// РєРѕРїРёСЂСѓРµРј РѕС†РµРЅРєСѓ Р»СѓС‡С€РµРіРѕ РІР°СЂРёР°РЅС‚Р° 
 				CRusSemClause& C = m_Clauses[ClauseNo];
 				m_AlreadyBuiltClauseVariants[C.m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[C.m_CurrLexVariantNo].m_BestValue  =  Hypots[0].m_Variant.m_BestValue;
 
@@ -1226,10 +1226,10 @@ CRusSemNode CreateDummyNode(long WordNo, const CSemanticsHolder* pData)
 	  return N;
 };
 
-// разбирает строку, например: п1,1,2;п2,2,1
-//  здесь через точку с запятой перечислены  отношения
-// на первом месте стоит название  отношения, на втором 
-// откуда идет, на втором куда. 
+// СЂР°Р·Р±РёСЂР°РµС‚ СЃС‚СЂРѕРєСѓ, РЅР°РїСЂРёРјРµСЂ: Рї1,1,2;Рї2,2,1
+//  Р·РґРµСЃСЊ С‡РµСЂРµР· С‚РѕС‡РєСѓ СЃ Р·Р°РїСЏС‚РѕР№ РїРµСЂРµС‡РёСЃР»РµРЅС‹  РѕС‚РЅРѕС€РµРЅРёСЏ
+// РЅР° РїРµСЂРІРѕРј РјРµСЃС‚Рµ СЃС‚РѕРёС‚ РЅР°Р·РІР°РЅРёРµ  РѕС‚РЅРѕС€РµРЅРёСЏ, РЅР° РІС‚РѕСЂРѕРј 
+// РѕС‚РєСѓРґР° РёРґРµС‚, РЅР° РІС‚РѕСЂРѕРј РєСѓРґР°. 
 bool CRusSemStructure::TryTestTree(string s)
 {
 	m_Nodes.clear();
@@ -1297,7 +1297,7 @@ long CRusSemStructure::GetColloquialInterpsCount(long Tag) const
 
   for (size_t i = 0;  i < m_Nodes.size(); i++)
    if (HasTag(i, Tag))
-	  if (find (m_Nodes[i].m_POs.begin(), m_Nodes[i].m_POs.end(), "разг") != m_Nodes[i].m_POs.end())
+	  if (find (m_Nodes[i].m_POs.begin(), m_Nodes[i].m_POs.end(), "СЂР°Р·Рі") != m_Nodes[i].m_POs.end())
 	    Result++;
 
   return Result; 

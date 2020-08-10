@@ -270,15 +270,15 @@ long  CMorphCorpusCreator::process_oborot(SYNANLib::ISentencePtr piSent, SYNANLi
 
 
 /*
-SA> Слушай, а в двух словах, зачем нужна процедура
+SA> РЎР»СѓС€Р°Р№, Р° РІ РґРІСѓС… СЃР»РѕРІР°С…, Р·Р°С‡РµРј РЅСѓР¶РЅР° РїСЂРѕС†РµРґСѓСЂР°
 SA> try_to_process_dash_word?
 
-DP>Дело в том, что если дефисное слово хреново обработано на Maposte
-DP>(такое бывает в некоторых случаях), то я пытаюсь отдельно обработать
-DP>каждую часть, приписав каждой части свою лемму и граммемы.
-DP>То есть для слова слово1-слово2-слово3 , строится
+DP>Р”РµР»Рѕ РІ С‚РѕРј, С‡С‚Рѕ РµСЃР»Рё РґРµС„РёСЃРЅРѕРµ СЃР»РѕРІРѕ С…СЂРµРЅРѕРІРѕ РѕР±СЂР°Р±РѕС‚Р°РЅРѕ РЅР° Maposte
+DP>(С‚Р°РєРѕРµ Р±С‹РІР°РµС‚ РІ РЅРµРєРѕС‚РѕСЂС‹С… СЃР»СѓС‡Р°СЏС…), С‚Рѕ СЏ РїС‹С‚Р°СЋСЃСЊ РѕС‚РґРµР»СЊРЅРѕ РѕР±СЂР°Р±РѕС‚Р°С‚СЊ
+DP>РєР°Р¶РґСѓСЋ С‡Р°СЃС‚СЊ, РїСЂРёРїРёСЃР°РІ РєР°Р¶РґРѕР№ С‡Р°СЃС‚Рё СЃРІРѕСЋ Р»РµРјРјСѓ Рё РіСЂР°РјРјРµРјС‹.
+DP>РўРѕ РµСЃС‚СЊ РґР»СЏ СЃР»РѕРІР° СЃР»РѕРІРѕ1-СЃР»РѕРІРѕ2-СЃР»РѕРІРѕ3 , СЃС‚СЂРѕРёС‚СЃСЏ
 
-SA> Лучше я мапост буду исправлять....
+SA> Р›СѓС‡С€Рµ СЏ РјР°РїРѕСЃС‚ Р±СѓРґСѓ РёСЃРїСЂР°РІР»СЏС‚СЊ....
 
 bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, string& sRes) 
 {
@@ -528,17 +528,17 @@ string CMorphCorpusCreator::GetLemma(string lemma, BYTE Pos, long ParadigmID, SY
 
 	string graph_descr = (const char*)piWord->GraphDescrs;
 	
-	if( graph_descr.find("#ПОЛУ") != string::npos )
+	if( graph_descr.find("#РџРћР›РЈ") != string::npos )
 	{
 		string wrd = (const char*)piWord->WordStr;
 		RmlMakeLower(wrd, m_CurrentLanguage);
-		if( wrd.find("полу") == 0)
-			lemma = string("полу") + lemma;
+		if( wrd.find("РїРѕР»Сѓ") == 0)
+			lemma = string("РїРѕР»Сѓ") + lemma;
 		else 
-			if( wrd.find("пол-") == 0)
-				lemma = string("пол-") + lemma;
+			if( wrd.find("РїРѕР»-") == 0)
+				lemma = string("РїРѕР»-") + lemma;
 			else
-				lemma = string("пол") + lemma;		
+				lemma = string("РїРѕР»") + lemma;		
 		lemma += "?";
 	}
 
@@ -653,10 +653,10 @@ string CMorphCorpusCreator::process_gram_homonym(string lemma, long paradigm_id,
 			if( grammems & _QM(AGRAMTABLib::rGenitiv) )
 				if( hasSecondCase(paradigm_id, str_word, AGRAMTABLib::rGenitiv) )
 				{
-					int iPos = str_gramems.find("рд");
+					int iPos = str_gramems.find("СЂРґ");
 					if( iPos != -1 ) 
 					{
-						str_gramems.replace(iPos, 2, "рд2");
+						str_gramems.replace(iPos, 2, "СЂРґ2");
 					}
 				}
 				
@@ -664,9 +664,9 @@ string CMorphCorpusCreator::process_gram_homonym(string lemma, long paradigm_id,
 			if( grammems & _QM(AGRAMTABLib::rLocativ) )
 				if( hasSecondCase(paradigm_id, str_word, AGRAMTABLib::rLocativ) )
 				{	
-					int iPos = str_gramems.find("пр");
+					int iPos = str_gramems.find("РїСЂ");
 					if( iPos != -1 ) 
-						str_gramems.replace(iPos, 2, "пр2");
+						str_gramems.replace(iPos, 2, "РїСЂ2");
 				}
 		}
 	}

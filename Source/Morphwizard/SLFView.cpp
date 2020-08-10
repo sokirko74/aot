@@ -331,9 +331,9 @@ void CSLFView::ChangeSize(UINT nType, int cx, int cy)
 	if( m_pRichView && cx > 0 && cy > 0 && m_pRichView->m_hWnd )
 	{
 //		TRACE("CSLFView::ChangeSize: %d,%d,%d\n",nType, cx, cy);
-		int wr = 230,	// ширина панели справа от RichEdit
-			d=8,		// расстояние между контролами
-			h = 25;		// высота строк ввода
+		int wr = 230,	// С€РёСЂРёРЅР° РїР°РЅРµР»Рё СЃРїСЂР°РІР° РѕС‚ RichEdit
+			d=8,		// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РєРѕРЅС‚СЂРѕР»Р°РјРё
+			h = 25;		// РІС‹СЃРѕС‚Р° СЃС‚СЂРѕРє РІРІРѕРґР°
 
 		/*if( GetWizard()->m_ReadOnly ) 
 			wr = d;*/
@@ -620,7 +620,7 @@ void CSLFView::OnBnClickedChangeAll()
 	std::vector<lemma_iterator_t> found_paradigms;
 	GetWizard()->find_lemm_by_prdno(paraOld.m_FlexiaModelNo,found_paradigms);
 
-	// удаляем из списка парадигму-шаблон (исправлялись только ударения)
+	// СѓРґР°Р»СЏРµРј РёР· СЃРїРёСЃРєР° РїР°СЂР°РґРёРіРјСѓ-С€Р°Р±Р»РѕРЅ (РёСЃРїСЂР°РІР»СЏР»РёСЃСЊ С‚РѕР»СЊРєРѕ СѓРґР°СЂРµРЅРёСЏ)
 	if( paraOld.m_FlexiaModelNo==ParadigmNo ) 
 	{
 		for( int i=0; i<found_paradigms.size(); ++i ) 

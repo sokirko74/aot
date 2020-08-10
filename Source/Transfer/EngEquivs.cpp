@@ -1,13 +1,13 @@
 /////////////////////////////////////////////////////////////////////////////
-// Заполнение слота "CEnglishEquivMap& mapRNodeToENode"
-// Поиск английских эквивалентов.
-// Описание лежит в "l:\documents\Алгоритм перевода русского слова в английское на трансфере.lnk"
+// Р—Р°РїРѕР»РЅРµРЅРёРµ СЃР»РѕС‚Р° "CEnglishEquivMap& mapRNodeToENode"
+// РџРѕРёСЃРє Р°РЅРіР»РёР№СЃРєРёС… СЌРєРІРёРІР°Р»РµРЅС‚РѕРІ.
+// РћРїРёСЃР°РЅРёРµ Р»РµР¶РёС‚ РІ "l:\documents\РђР»РіРѕСЂРёС‚Рј РїРµСЂРµРІРѕРґР° СЂСѓСЃСЃРєРѕРіРѕ СЃР»РѕРІР° РІ Р°РЅРіР»РёР№СЃРєРѕРµ РЅР° С‚СЂР°РЅСЃС„РµСЂРµ.lnk"
 
 #include "StdAfx.h"
 #include "../SemanLib/LexFuncts.h"
 #include "../SemanLib/HierarchyHolder.h"
 /////////////////////////////////////////////////////////////////////////////
-// ищет  в значениях поля  RUS словаря  type русский вход RusEquivToEngArticleNo,// все словарные статьи, которые содержат такое значение, помещаются в engEquivs
+// РёС‰РµС‚  РІ Р·РЅР°С‡РµРЅРёСЏС… РїРѕР»СЏ  RUS СЃР»РѕРІР°СЂСЏ  type СЂСѓСЃСЃРєРёР№ РІС…РѕРґ RusEquivToEngArticleNo,// РІСЃРµ СЃР»РѕРІР°СЂРЅС‹Рµ СЃС‚Р°С‚СЊРё, РєРѕС‚РѕСЂС‹Рµ СЃРѕРґРµСЂР¶Р°С‚ С‚Р°РєРѕРµ Р·РЅР°С‡РµРЅРёРµ, РїРѕРјРµС‰Р°СЋС‚СЃСЏ РІ engEquivs
 
 bool CEngSemStructure::FindEnglishEquivHelper(vector<CEngInterp>& engEquivs,const CEngUnitNoToRusUnit RusEquivToEngArticleNo,DictTypeEnum type)
 {
@@ -41,10 +41,10 @@ void CEngSemStructure::FindEnglishEquiv(vector<CEngInterp>& engEquivs, const str
 	CEngUnitNoToRusUnit RusEquivToEngArticleNo;
 	RusEquivToEngArticleNo.m_RusUnitStr = rus_lemma;
 	RusEquivToEngArticleNo.m_RusMeanNum = MeanNum;
-	// сначала ищем с указанным номером значения
+	// СЃРЅР°С‡Р°Р»Р° РёС‰РµРј СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РЅРѕРјРµСЂРѕРј Р·РЅР°С‡РµРЅРёСЏ
 	if( !FindEnglishEquivHelper(engEquivs, RusEquivToEngArticleNo, EngDictType) )
 	{
-		// потом, если не  нашли, то - с любым номером значения.
+		// РїРѕС‚РѕРј, РµСЃР»Рё РЅРµ  РЅР°С€Р»Рё, С‚Рѕ - СЃ Р»СЋР±С‹Рј РЅРѕРјРµСЂРѕРј Р·РЅР°С‡РµРЅРёСЏ.
 		if( MeanNum < 10)
 		{
 			RusEquivToEngArticleNo.m_RusMeanNum = 10;
@@ -56,7 +56,7 @@ void CEngSemStructure::FindEnglishEquiv(vector<CEngInterp>& engEquivs, const str
 
 
 /////////////////////////////////////////////////////////////////////////////
-// основная функция  нахождения эквивалентов
+// РѕСЃРЅРѕРІРЅР°СЏ С„СѓРЅРєС†РёСЏ  РЅР°С…РѕР¶РґРµРЅРёСЏ СЌРєРІРёРІР°Р»РµРЅС‚РѕРІ
 
 void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 {
@@ -67,7 +67,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 
 		const CSemNode& RusNode = RusStr.GetNode(NodeNo);
 
-// если это Тезаурус
+// РµСЃР»Рё СЌС‚Рѕ РўРµР·Р°СѓСЂСѓСЃ
 		if( IsThesRoss(RusNode.GetType()) )
 		{
 			long ThesId = GetThesIdByRossId(RusNode.GetType());
@@ -116,11 +116,11 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 		}
 
 
-// берем англ. эквиваленты из русской статьи		
+// Р±РµСЂРµРј Р°РЅРіР». СЌРєРІРёРІР°Р»РµРЅС‚С‹ РёР· СЂСѓСЃСЃРєРѕР№ СЃС‚Р°С‚СЊРё		
 		vector< SEngEquiv > vectorEngEquivs;
 		GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),NodeNo);
 
-// устанавливаем соотвествие русских словарей английским
+// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃРѕРѕС‚РІРµСЃС‚РІРёРµ СЂСѓСЃСЃРєРёС… СЃР»РѕРІР°СЂРµР№ Р°РЅРіР»РёР№СЃРєРёРј
 		vector<DictTypeEnum> EngDictTypes;
 		if( RusNode.GetType() == OborRoss )	
 		{
@@ -154,16 +154,16 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 			}
 		}
 
-// ищем в английиских словарях те англ. эквиваленты, к-рые указаны в поле ENG
+// РёС‰РµРј РІ Р°РЅРіР»РёР№РёСЃРєРёС… СЃР»РѕРІР°СЂСЏС… С‚Рµ Р°РЅРіР». СЌРєРІРёРІР°Р»РµРЅС‚С‹, Рє-СЂС‹Рµ СѓРєР°Р·Р°РЅС‹ РІ РїРѕР»Рµ ENG
 		GetEngEquivsFromVector(mapRNodeToENode,NodeNo,vectorEngEquivs,EngDictTypes);
 
 		CEnglishEquivMap::iterator it = mapRNodeToENode.find(NodeNo);
-// в англйиских словарях удалось найти словарные статьи, указанные в поле ENG
+// РІ Р°РЅРіР»Р№РёСЃРєРёС… СЃР»РѕРІР°СЂСЏС… СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё СЃР»РѕРІР°СЂРЅС‹Рµ СЃС‚Р°С‚СЊРё, СѓРєР°Р·Р°РЅРЅС‹Рµ РІ РїРѕР»Рµ ENG
 		if( it != mapRNodeToENode.end() )
 			continue;
 
 			
-// в крайнем случае интерпретируем заглушкой
+// РІ РєСЂР°Р№РЅРµРј СЃР»СѓС‡Р°Рµ РёРЅС‚РµСЂРїСЂРµС‚РёСЂСѓРµРј Р·Р°РіР»СѓС€РєРѕР№
 		InterpretWithPlugArticles(NodeNo,mapRNodeToENode);
 	}
 
@@ -301,14 +301,14 @@ void CEngSemStructure::GetAFieldVector(string FieldStr, DictTypeEnum type, vecto
 
 
 /////////////////////////////////////////////////////////////////////////////
-// эта функция берет все эквиваленты из поля ENG 
-//  если есть ENUMBER рабртает ТОЛЬКО по нему
-//  пробует EDOMAIN (пока пустая, т.к. RusStr.GetClausePO() все равно не работает)
-//  пробует ELEX
-//  пробует EOPERATOR
-//  пробует EPREP
-//  пробует ELF
-//  затем смотрит на EGF и ESF
+// СЌС‚Р° С„СѓРЅРєС†РёСЏ Р±РµСЂРµС‚ РІСЃРµ СЌРєРІРёРІР°Р»РµРЅС‚С‹ РёР· РїРѕР»СЏ ENG 
+//  РµСЃР»Рё РµСЃС‚СЊ ENUMBER СЂР°Р±СЂС‚Р°РµС‚ РўРћР›Р¬РљРћ РїРѕ РЅРµРјСѓ
+//  РїСЂРѕР±СѓРµС‚ EDOMAIN (РїРѕРєР° РїСѓСЃС‚Р°СЏ, С‚.Рє. RusStr.GetClausePO() РІСЃРµ СЂР°РІРЅРѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚)
+//  РїСЂРѕР±СѓРµС‚ ELEX
+//  РїСЂРѕР±СѓРµС‚ EOPERATOR
+//  РїСЂРѕР±СѓРµС‚ EPREP
+//  РїСЂРѕР±СѓРµС‚ ELF
+//  Р·Р°С‚РµРј СЃРјРѕС‚СЂРёС‚ РЅР° EGF Рё ESF
 
 void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEngEquivs,
 	int RusUnitNo,DictTypeEnum DictType /* = Ross*/,int iRusNode /* = -1*/) const
@@ -357,7 +357,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 		if( DictType == Ross)
 			engEquiv.m_RusPoses = RusStr.GetPosesFromRusArticle(*GetRossHolder(DictType),RusUnitNo);
-		vectorEngEquivs.push_back(engEquiv); // здесь поля ENG
+		vectorEngEquivs.push_back(engEquiv); // Р·РґРµСЃСЊ РїРѕР»СЏ ENG
 	}
 //
 	if( iRusNode == -1 )
@@ -369,7 +369,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 	vector<SEngEquiv> tempEngEquivs;
 	
-// обработка ENUMBER
+// РѕР±СЂР°Р±РѕС‚РєР° ENUMBER
 	vector<TCortege> vectorAnm;
 	GetAFieldVector("ENUMBER", DictType,vectorAnm,RusUnitNo);
 
@@ -395,7 +395,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		}
 	} // vectorAnm.size()
 
-// берем те эквиваленты, на которые не ссылается никакое ENUMBER
+// Р±РµСЂРµРј С‚Рµ СЌРєРІРёРІР°Р»РµРЅС‚С‹, РЅР° РєРѕС‚РѕСЂС‹Рµ РЅРµ СЃСЃС‹Р»Р°РµС‚СЃСЏ РЅРёРєР°РєРѕРµ ENUMBER
 	if( vecListByAnm.size()>0 )
 	{
 		for( int i=0; i<vectorEngEquivs.size(); i++ )
@@ -411,13 +411,13 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		return;
 	}
 
-// обработка EDOMAIN
+// РѕР±СЂР°Р±РѕС‚РєР° EDOMAIN
 	vector<TCortege> vectorApo;
 	GetAFieldVector("EDOMAIN", DictType,vectorApo,RusUnitNo);
 	long ClauseNo = RusStr.GetNode(iRusNode).m_ClauseNo;
 	string tema = RusStr.GetClausePO(ClauseNo);
 
-// возьмем все связи (но дополнительные отношения брать не будем!)
+// РІРѕР·СЊРјРµРј РІСЃРµ СЃРІСЏР·Рё (РЅРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ Р±СЂР°С‚СЊ РЅРµ Р±СѓРґРµРј!)
 	vector<long> inRelsRus;
 	RusStr.GetIncomingRelations(iRusNode,inRelsRus,false);
 	vector<long> outRelsRus;
@@ -436,14 +436,14 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			usingRels.push_back(outRelsRus[i]);
 	}
 
-// !!! если это место раскомментировать, "она" перейдет в "she", а не в "it"
+// !!! РµСЃР»Рё СЌС‚Рѕ РјРµСЃС‚Рѕ СЂР°СЃРєРѕРјРјРµРЅС‚РёСЂРѕРІР°С‚СЊ, "РѕРЅР°" РїРµСЂРµР№РґРµС‚ РІ "she", Р° РЅРµ РІ "it"
 //	if( usingRels.size()==0 )
 //		return;
 //
 
 
 
-// обработка ELEX
+// РѕР±СЂР°Р±РѕС‚РєР° ELEX
 	vector<TCortege> vectorAlx;
 	GetAFieldVector("ELEX", DictType,vectorAlx,RusUnitNo);
 
@@ -454,9 +454,9 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			continue;
 		long theId = vectorAlx[i].m_BracketLeafId - 1;
 
-		if( vectorAlx[i].m_LeafId == 0 ) //если это ELEX без индекса
+		if( vectorAlx[i].m_LeafId == 0 ) //РµСЃР»Рё СЌС‚Рѕ ELEX Р±РµР· РёРЅРґРµРєСЃР°
 		{
-			// не может быть ELEX без индекса
+			// РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ ELEX Р±РµР· РёРЅРґРµРєСЃР°
 			assert( false );
 		}
 
@@ -480,7 +480,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 				continue;
 			string strVAL = rusNode.GetWord(iSemMainWord).m_Lemma;
 			
-			// если это указание вышестоящего концепта
+			// РµСЃР»Рё СЌС‚Рѕ СѓРєР°Р·Р°РЅРёРµ РІС‹С€РµСЃС‚РѕСЏС‰РµРіРѕ РєРѕРЅС†РµРїС‚Р°
 			if (strALX[0] == '#')
 			{
 				if (!_find(rusNode.m_HigherConcepts, strALX)) continue;
@@ -488,7 +488,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			else
 			if(	strVAL != strALX )
 			{
-			  // проверяем еще эквиваленты слова
+			  // РїСЂРѕРІРµСЂСЏРµРј РµС‰Рµ СЌРєРІРёРІР°Р»РµРЅС‚С‹ СЃР»РѕРІР°
 			  long j=0;
 			  for (; j < rusNode.GetWord(iSemMainWord).m_WordEquals.size(); j++)
 			  {
@@ -496,8 +496,8 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 				if (strAspVerb == strALX) break;
 			  }
 			  /*
-			  если и в аспектных парах нет, тогда попробуем найти
-			  с помощью анафорических связей
+			  РµСЃР»Рё Рё РІ Р°СЃРїРµРєС‚РЅС‹С… РїР°СЂР°С… РЅРµС‚, С‚РѕРіРґР° РїРѕРїСЂРѕР±СѓРµРј РЅР°Р№С‚Рё
+			  СЃ РїРѕРјРѕС‰СЊСЋ Р°РЅР°С„РѕСЂРёС‡РµСЃРєРёС… СЃРІСЏР·РµР№
 			  */
   			  if (j == rusNode.GetWord(iSemMainWord).m_WordEquals.size())
 			  {
@@ -524,7 +524,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	}
 
 	
-// обработка EOPERATOR
+// РѕР±СЂР°Р±РѕС‚РєР° EOPERATOR
 	vector<TCortege> vectorAop;
 	GetAFieldVector("EOPERATOR", DictType,vectorAop,RusUnitNo);
 
@@ -536,9 +536,9 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		long theId = vectorAop[i].m_BracketLeafId - 1;
 
 		string strAOP = GetCortegeStr(rusNode.GetType(),vectorAop[i]);
-		if( vectorAop[i].m_LeafId == 0 ) //если это EOPERATOR без индекса
+		if( vectorAop[i].m_LeafId == 0 ) //РµСЃР»Рё СЌС‚Рѕ EOPERATOR Р±РµР· РёРЅРґРµРєСЃР°
 		{
-			if (strAOP == "БЫ")
+			if (strAOP == "Р‘Р«")
 			{
 			  if ( !RusStr.GetSemClause(rusNode.m_ClauseNo).m_HasParticleBY )
 				  continue;
@@ -581,7 +581,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 
 
-	// обработка EPREP
+	// РѕР±СЂР°Р±РѕС‚РєР° EPREP
 	vector<TCortege> vectorAPredlog;
 	GetAFieldVector("EPREP",DictType,vectorAPredlog,RusUnitNo);
 
@@ -590,7 +590,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	{
 		if( vectorAPredlog[i].m_DomItemNos[0] == -1 )
 			continue;
-		if( vectorAPredlog[i].m_LeafId != 0 ) continue;//EPREP должен быть без индекса
+		if( vectorAPredlog[i].m_LeafId != 0 ) continue;//EPREP РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р±РµР· РёРЅРґРµРєСЃР°
 		long theId = vectorAPredlog[i].m_BracketLeafId - 1;
 		if( theId >= vectorEngEquivs.size() ) continue;
 		string strAOP = GetCortegeStr(rusNode.GetType(),vectorAPredlog[i]);
@@ -607,7 +607,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		return;
 	}
 
-	// обработка ELF
+	// РѕР±СЂР°Р±РѕС‚РєР° ELF
 	vector<TCortege> vectorAlf;
 	GetAFieldVector("ELF", DictType,vectorAlf,RusUnitNo);
 
@@ -616,7 +616,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	{
 		if( vectorAlf[i].m_DomItemNos[0] == -1 )
 			continue;
-		if( vectorAlf[i].m_LeafId != 0 ) continue;//ELF должен быть без индекса
+		if( vectorAlf[i].m_LeafId != 0 ) continue;//ELF РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р±РµР· РёРЅРґРµРєСЃР°
 		long theId = vectorAlf[i].m_BracketLeafId - 1;
 		if( theId >= vectorEngEquivs.size() ) continue;
 		string strAOP = GetCortegeStr(rusNode.GetType(),vectorAlf[i]);
@@ -652,7 +652,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 
 
-// обработка EGF
+// РѕР±СЂР°Р±РѕС‚РєР° EGF
 	StringVector domens;
 	domens.push_back("D_GRAMMEMS");
 
@@ -668,7 +668,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		long theId = vectorAgx[i].m_BracketLeafId - 1;
 		vecListByAgx.push_back(theId);
 
-		if( vectorAgx[i].m_LeafId == 0 ) //если это EGF без индекса
+		if( vectorAgx[i].m_LeafId == 0 ) //РµСЃР»Рё СЌС‚Рѕ EGF Р±РµР· РёРЅРґРµРєСЃР°
 		{
 			if( !CheckDomensForCortege(domens,vectorAgx[i],DictType) )
 				continue;
@@ -695,7 +695,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			}
 		}
 		
-		else //если это EGFi
+		else //РµСЃР»Рё СЌС‚Рѕ EGFi
 		{
 			bool bFoundAGX = false;
 			string strAGX = GetCortegeStr(rusNode.GetType(),vectorAgx[i]);
@@ -718,7 +718,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 				if(    CheckDomensForCortege(domens,vectorAgx[i],DictType) 
 				  )
 				{
-					//если это не формат, взятый из GF а просто часть речи и граммемы
+					//РµСЃР»Рё СЌС‚Рѕ РЅРµ С„РѕСЂРјР°С‚, РІР·СЏС‚С‹Р№ РёР· GF Р° РїСЂРѕСЃС‚Рѕ С‡Р°СЃС‚СЊ СЂРµС‡Рё Рё РіСЂР°РјРјРµРјС‹
 					int semMainWord = RusStr.GetNode(iRusActant).m_MainWordNo;
 					if( semMainWord == -1 )
 						continue;
@@ -744,7 +744,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 				{
 					string dbg_str = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
 
-					//проверяем на эквивалентность с тем кортежем, по которому Леша собрал
+					//РїСЂРѕРІРµСЂСЏРµРј РЅР° СЌРєРІРёРІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ СЃ С‚РµРј РєРѕСЂС‚РµР¶РµРј, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ Р›РµС€Р° СЃРѕР±СЂР°Р»
 
 					const CSemRelation& rusRel = *RusStr.GetRelation(usingRels[k]);
 					if(    !CompareCortegeItems(GetRossHolder(DictType),vectorAgx[i],rusRel.m_SynReal.m_Cortege) 
@@ -770,7 +770,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		}
 	} // vectorAgx.size()
 
-// обработка ESF
+// РѕР±СЂР°Р±РѕС‚РєР° ESF
 	vector<TCortege> vectorAcx;
 	GetAFieldVector("ESF", DictType,vectorAcx,RusUnitNo);
 
@@ -783,7 +783,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		long theId = vectorAcx[i].m_BracketLeafId - 1;
 		vecListByAcx.push_back(theId);
 
-		if( vectorAcx[i].m_LeafId == 0 ) // если это АCХ без индекса
+		if( vectorAcx[i].m_LeafId == 0 ) // РµСЃР»Рё СЌС‚Рѕ РђCРҐ Р±РµР· РёРЅРґРµРєСЃР°
 		{
 			string strACX = GetCortegeStr(rusNode.GetType(),vectorAcx[i]);
 			
@@ -807,7 +807,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			}
 		}
 
-		else //если это АCХi
+		else //РµСЃР»Рё СЌС‚Рѕ РђCРҐi
 		{
 			bool bFoundACX = false;
 			string strACX = GetCortegeStr(rusNode.GetType(),vectorAcx[i]);
@@ -847,7 +847,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		}
 	} // vectorAcx.size()
 
-// формируем результат
+// С„РѕСЂРјРёСЂСѓРµРј СЂРµР·СѓР»СЊС‚Р°С‚
 	if( vecGoodByAgx.size()>0 && vecGoodByAcx.size()>0 )
 	{
 		for( int i=0; i<vecGoodByAgx.size(); i++ )
@@ -879,9 +879,9 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		return;
 	}
 
-// раз мы здесь, то либо нет ни EGF ни ESF, либо они противоречивы
+// СЂР°Р· РјС‹ Р·РґРµСЃСЊ, С‚Рѕ Р»РёР±Рѕ РЅРµС‚ РЅРё EGF РЅРё ESF, Р»РёР±Рѕ РѕРЅРё РїСЂРѕС‚РёРІРѕСЂРµС‡РёРІС‹
 
-// берем те эквиваленты, на которые не ссылается никакая EGF
+// Р±РµСЂРµРј С‚Рµ СЌРєРІРёРІР°Р»РµРЅС‚С‹, РЅР° РєРѕС‚РѕСЂС‹Рµ РЅРµ СЃСЃС‹Р»Р°РµС‚СЃСЏ РЅРёРєР°РєР°СЏ EGF
 	if( vecListByAgx.size()>0 )
 	{
 		for( int i=0; i<vectorEngEquivs.size(); i++ )
@@ -897,7 +897,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		return;
 	}
 
-// берем те эквиваленты, на которые не ссылается никакая ESF
+// Р±РµСЂРµРј С‚Рµ СЌРєРІРёРІР°Р»РµРЅС‚С‹, РЅР° РєРѕС‚РѕСЂС‹Рµ РЅРµ СЃСЃС‹Р»Р°РµС‚СЃСЏ РЅРёРєР°РєР°СЏ ESF
 	if( vecListByAcx.size()>0 )
 	{
 		for( int i=0; i<vectorEngEquivs.size(); i++ )
@@ -935,7 +935,7 @@ void CEngSemStructure::FindEngWords(vector<CEngInterp>& resEngUnits, vector< SEn
 					ReadMorphFromMainGF(UnitNo, EngDictTypes[j], Dummy);
 					BYTE engPos = GetOnePOS(Dummy.m_Poses);
 //Gri !!!!!
-// это место где need переходит в have
+// СЌС‚Рѕ РјРµСЃС‚Рѕ РіРґРµ need РїРµСЂРµС…РѕРґРёС‚ РІ have
 					if( engPos == UnknownPOS )
 						continue;
 					if( !( (1 << engPos) & (EngPOSByRusPOS(GetOnePOS(vectorEngEquivs[i].m_RusPoses),"") )) )
@@ -978,10 +978,10 @@ bool CEngSemStructure::InterpretWithPlugArticles(long RusNodeNo,CEnglishEquivMap
 	if (RusStr.GetNode(RusNodeNo).m_SynGroupTypeStr == NAMES) return false;
 	if (RusStr.GetNode(RusNodeNo).m_SynGroupTypeStr == KEYB) return false;
 
-	// числительные
+	// С‡РёСЃР»РёС‚РµР»СЊРЅС‹Рµ
 	if (		RusStr.GetNode(RusNodeNo).IsPrimitive() 
 			&&	isdigit((unsigned char)RusStr.GetNode(RusNodeNo).GetWord(0).m_Word[0])
-			&&	!RusStr.HasPOS (RusNodeNo,ADV)  // "вдвоем"
+			&&	!RusStr.HasPOS (RusNodeNo,ADV)  // "РІРґРІРѕРµРј"
 	   ) return false;
 
 	if( RusStr.IsVerbForm(RusStr.GetNode(RusNodeNo)) )

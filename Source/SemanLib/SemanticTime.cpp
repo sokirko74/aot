@@ -108,7 +108,7 @@ bool CRusSemStructure::CheckOneTimeWord(CTimeUnit& TimeUnit,  CNodeHypotVector& 
 	  {
          BYTE LeafId = TimeUnit.m_LexicalFillings[i].m_LeafId;
 		 BYTE BracketLeafId = TimeUnit.m_LexicalFillings[i].m_BracketLeafId;
-		 // заполнение поля LEXi
+		 // Р·Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»СЏ LEXi
 	     if ( (LeafId == 0)  && (BracketLeafId == PlaceNo+1) )
             for  (long j=0; j < TimeUnit.m_LexicalFillings[i].m_LexFets.size(); j++)
 			{
@@ -120,7 +120,7 @@ bool CRusSemStructure::CheckOneTimeWord(CTimeUnit& TimeUnit,  CNodeHypotVector& 
 			  LexRestrIsFound = true;
 			}
 
-		 // заполнение поля PREPi(j)
+		 // Р·Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»СЏ PREPi(j)
 		 if ( (LeafId == PlaceNo+1)  && (BracketLeafId >  0) )
 		   for  (long j=0; j < TimeUnit.m_LexicalFillings[i].m_Preps.size(); j++)
 		   {
@@ -146,7 +146,7 @@ bool CRusSemStructure::CheckOneTimeWord(CTimeUnit& TimeUnit,  CNodeHypotVector& 
 
 bool CRusSemStructure::CheckTimeNumeral(long NodeNo, string GramFet) const 
 {
-	 assert ( GramFet.substr(0, 2) == "ЦК");
+	 assert ( GramFet.substr(0, 2) == "Р¦Рљ");
 	 
 	 BYTE Length = 100;
 
@@ -155,7 +155,7 @@ bool CRusSemStructure::CheckTimeNumeral(long NodeNo, string GramFet) const
 
 	 return   (		 (m_Nodes[NodeNo].m_SynGroupTypeStr == SIMILAR_NUMERALS)
 				  || (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERALS)
-				  || (m_Nodes[NodeNo].m_SynGroupTypeStr == C_NUMERALS) // например, "через 2,5 месяца"
+				  || (m_Nodes[NodeNo].m_SynGroupTypeStr == C_NUMERALS) // РЅР°РїСЂРёРјРµСЂ, "С‡РµСЂРµР· 2,5 РјРµСЃСЏС†Р°"
 				  || (m_Nodes[NodeNo].IsPrimitive() && isdigit((unsigned char)m_Nodes[NodeNo].m_Words[0].m_Word[0]))
 				  || (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS (NodeNo, NUMERAL))
 				  || (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS (NodeNo, NUMERAL_P))
@@ -178,11 +178,11 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot&  Hypot, CTimeUnit& TimeUnit,
 		string GramFet = WriteToString(GetRoss(TimeRoss), (char*)(GetRoss(TimeRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		Trim(GramFet);
 
-		if ( GramFet.substr(0, 2) == "ЦК")   
+		if ( GramFet.substr(0, 2) == "Р¦Рљ")   
 		{
 			if (CheckTimeNumeral(Hypot.m_NodeNo, GramFet))
 			{
-				if (GramFet == "ЦК_порядк")
+				if (GramFet == "Р¦Рљ_РїРѕСЂСЏРґРє")
 					Hypot.m_bShouldBeNumeral_P = true;
 				return true;
 			};
@@ -193,7 +193,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot&  Hypot, CTimeUnit& TimeUnit,
 			QWORD  Grammems;
 			m_pData->GetCustomGrammems(GramFet, Grammems,Pose);;
 
-			// если это сокращенная форма, то нужно вернуть истину, если согласовано по числу
+			// РµСЃР»Рё СЌС‚Рѕ СЃРѕРєСЂР°С‰РµРЅРЅР°СЏ С„РѕСЂРјР°, С‚Рѕ РЅСѓР¶РЅРѕ РІРµСЂРЅСѓС‚СЊ РёСЃС‚РёРЅСѓ, РµСЃР»Рё СЃРѕРіР»Р°СЃРѕРІР°РЅРѕ РїРѕ С‡РёСЃР»Сѓ
 			if  (     m_Nodes[Hypot.m_NodeNo].IsPrimitive()
 				&& (m_Nodes[Hypot.m_NodeNo].m_Words[0].m_PostPuncts.find(".") != -1)
 				&& ( (Grammems & rAllNumbers) > 0)
@@ -203,7 +203,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot&  Hypot, CTimeUnit& TimeUnit,
 				}
 				else
 					return true;
-			else  // здесь нельзя использовать GramCodes, поскольку Grammems имеют более правильную информацию
+			else  // Р·РґРµСЃСЊ РЅРµР»СЊР·СЏ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ GramCodes, РїРѕСЃРєРѕР»СЊРєСѓ Grammems РёРјРµСЋС‚ Р±РѕР»РµРµ РїСЂР°РІРёР»СЊРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ
 				if  (    (m_Nodes[Hypot.m_NodeNo].m_MainWordNo != -1) 
 					&& ((m_Nodes[Hypot.m_NodeNo].m_Words[m_Nodes[Hypot.m_NodeNo].m_MainWordNo].GetAllGrammems() & Grammems) ==  Grammems)
 					&& ((m_Nodes[Hypot.m_NodeNo].m_Words[m_Nodes[Hypot.m_NodeNo].m_MainWordNo].m_Poses & Pose) >  0)
@@ -253,7 +253,7 @@ struct CTimeNodeHypot {
 
 	long GetWeightOfTimeNode() const 
 	{ 
-      // длина в тексте + (число недырок) + (кол-во элементов в заголовке)
+      // РґР»РёРЅР° РІ С‚РµРєСЃС‚Рµ + (С‡РёСЃР»Рѕ РЅРµРґС‹СЂРѕРє) + (РєРѕР»-РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ Р·Р°РіРѕР»РѕРІРєРµ)
 	  return  m_LengthInText*1000 + (m_LengthInTitle - (m_CountOfHoles-m_CountOfLexFet))*100 + m_LengthInTitle;
 	};
 
@@ -279,10 +279,10 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
   if (U.m_Rels[i].m_TargetNodeNo >= V.size())
 	  return false;
 
-  // Отношение ПР_УПР не входит  перечень синтаксических отношений, поэтому мы не проверяем,
-  // построено или нет это отношение синтаксисом. Для отношения ПР_УПР мы только проверяем,
-  // что ИГ, в которое это отношение входит, стоит в правильном падеже.
-  if (U.m_Rels[i].m_SynRelName == "ПР_УПР")
+  // РћС‚РЅРѕС€РµРЅРёРµ РџР _РЈРџР  РЅРµ РІС…РѕРґРёС‚  РїРµСЂРµС‡РµРЅСЊ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёС… РѕС‚РЅРѕС€РµРЅРёР№, РїРѕСЌС‚РѕРјСѓ РјС‹ РЅРµ РїСЂРѕРІРµСЂСЏРµРј,
+  // РїРѕСЃС‚СЂРѕРµРЅРѕ РёР»Рё РЅРµС‚ СЌС‚Рѕ РѕС‚РЅРѕС€РµРЅРёРµ СЃРёРЅС‚Р°РєСЃРёСЃРѕРј. Р”Р»СЏ РѕС‚РЅРѕС€РµРЅРёСЏ РџР _РЈРџР  РјС‹ С‚РѕР»СЊРєРѕ РїСЂРѕРІРµСЂСЏРµРј,
+  // С‡С‚Рѕ РР“, РІ РєРѕС‚РѕСЂРѕРµ СЌС‚Рѕ РѕС‚РЅРѕС€РµРЅРёРµ РІС…РѕРґРёС‚, СЃС‚РѕРёС‚ РІ РїСЂР°РІРёР»СЊРЅРѕРј РїР°РґРµР¶Рµ.
+  if (U.m_Rels[i].m_SynRelName == "РџР _РЈРџР ")
   {
 	  long PrepNo = V[U.m_Rels[i].m_TargetNodeNo].m_PrepNo;
 	  if (PrepNo == -1)
@@ -301,7 +301,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
 			  return false;
 
 	  /*
-	   для сокращений проверку на ПР_УПР проводить не нужно
+	   РґР»СЏ СЃРѕРєСЂР°С‰РµРЅРёР№ РїСЂРѕРІРµСЂРєСѓ РЅР° РџР _РЈРџР  РїСЂРѕРІРѕРґРёС‚СЊ РЅРµ РЅСѓР¶РЅРѕ
 	  */
 	  if  (m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].m_Words[0].m_PostPuncts.find('.') == -1)
 	    if ((Grm & Grammems)  != Grammems)
@@ -328,7 +328,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
 };
 
 
-// инициализация словарных статей TimeRoss
+// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃР»РѕРІР°СЂРЅС‹С… СЃС‚Р°С‚РµР№ TimeRoss
 void CRusSemStructure::GetTimeInterps(string Lemma, string WordStr,  string PostPuncts, CRusSemNode& N) const
 {
    EngRusMakeLower(Lemma);
@@ -352,22 +352,22 @@ void CRusSemStructure::GetTimeInterps(string Lemma, string WordStr,  string Post
 
 void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 {
-  StartTimer("Построение групп времени",0); 
+  StartTimer("РџРѕСЃС‚СЂРѕРµРЅРёРµ РіСЂСѓРїРї РІСЂРµРјРµРЅРё",0); 
 
- //поиск Time-групп
+ //РїРѕРёСЃРє Time-РіСЂСѓРїРї
  for (long NodeNo=m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo < m_Clauses[ClauseNo].m_EndNodeNo; )
  {
-	 // здесь будут лежать гипотезы групп времени 
+	 // Р·РґРµСЃСЊ Р±СѓРґСѓС‚ Р»РµР¶Р°С‚СЊ РіРёРїРѕС‚РµР·С‹ РіСЂСѓРїРї РІСЂРµРјРµРЅРё 
 	 vector<CTimeNodeHypot> Hypots;
 
-	 // идем по всем статьям  словаря групп времени 
+	 // РёРґРµРј РїРѕ РІСЃРµРј СЃС‚Р°С‚СЊСЏРј  СЃР»РѕРІР°СЂСЏ РіСЂСѓРїРї РІСЂРµРјРµРЅРё 
 	 for (long TimeUnitNo =0; TimeUnitNo < m_pData->m_TimeUnits.size(); TimeUnitNo++)
 	 {
 		 long UnitNo = m_pData->m_TimeUnits[TimeUnitNo].m_UnitNo;
 		 long PlacesCount = m_pData->m_TimeUnits[TimeUnitNo].m_Places.size();
 
 		 /*
-		  в таймроссе есть обычные слова, т.е. статьи без поля CONTENT
+		  РІ С‚Р°Р№РјСЂРѕСЃСЃРµ РµСЃС‚СЊ РѕР±С‹С‡РЅС‹Рµ СЃР»РѕРІР°, С‚.Рµ. СЃС‚Р°С‚СЊРё Р±РµР· РїРѕР»СЏ CONTENT
 		 */
 		 if (PlacesCount == 0) continue;
 
@@ -392,10 +392,10 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 			if (AbbrFunctNo == -1)
 				Numbers = rAllNumbers;
 			else
-				 if (m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FunctName  == "СОКР_мн")
+				 if (m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FunctName  == "РЎРћРљР _РјРЅ")
 					 Numbers = _QM(rPlural);
 				 else
-					if (HasAbbrFunct (m_pData->m_TimeAbbrPairs, m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm, "СОКР_мн"))
+					if (HasAbbrFunct (m_pData->m_TimeAbbrPairs, m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm, "РЎРћРљР _РјРЅ"))
 						Numbers = _QM(rSingular);
 					else
 						Numbers = rAllNumbers;
@@ -412,7 +412,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 			 if ( !CheckTimeSemFet(Period[PlaceNo].m_NodeNo, UnitNo, PlaceNo) )
 				  break;
 
- 			 if (HasSynRelation (Period[PlaceNo].m_NodeNo, "ОДНОР_ЧИСЛ"))
+ 			 if (HasSynRelation (Period[PlaceNo].m_NodeNo, "РћР”РќРћР _Р§РРЎР›"))
 			 {
 				 SimilarNumeralLength += GetOutcomingSynRelationsCount(GetSynHost(Period[PlaceNo].m_NodeNo));
 			 };
@@ -420,8 +420,8 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 
 		 };
 
-          // берем только те гипотеза, которые собрались до конца и удовлетворяют
-		 // синтаксическому представлению
+          // Р±РµСЂРµРј С‚РѕР»СЊРєРѕ С‚Рµ РіРёРїРѕС‚РµР·Р°, РєРѕС‚РѕСЂС‹Рµ СЃРѕР±СЂР°Р»РёСЃСЊ РґРѕ РєРѕРЅС†Р° Рё СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‚
+		 // СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕРјСѓ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЋ
 		 if  (    (PlaceNo == PlacesCount)
 			   && TimeHypotIsSyntaxAgree(Period, m_pData->m_TimeUnits[TimeUnitNo])
 			  )
@@ -454,10 +454,10 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 		 for (long PeriodNo=0; PeriodNo < BestHypot.m_Periods.size(); PeriodNo++)
 		 {
 			 long nd = BestHypot.m_Periods[PeriodNo].m_NodeNo;
-			 if (HasSynRelation (nd, "ОДНОР_ЧИСЛ"))
+			 if (HasSynRelation (nd, "РћР”РќРћР _Р§РРЎР›"))
 				 nd = GetSynHost(nd);
-			 if ( m_pData->m_TimeUnits[BestHypot.m_UnitNo].m_Rels.size() == 0 //не работал TimeHypotIsSyntaxAgree
-				 && (!BestHypot.m_Periods[PeriodNo].m_bShouldBeNumeral_P && !HasSynRelation (nd, "ЧИСЛ_СУЩ")) 
+			 if ( m_pData->m_TimeUnits[BestHypot.m_UnitNo].m_Rels.size() == 0 //РЅРµ СЂР°Р±РѕС‚Р°Р» TimeHypotIsSyntaxAgree
+				 && (!BestHypot.m_Periods[PeriodNo].m_bShouldBeNumeral_P && !HasSynRelation (nd, "Р§РРЎР›_РЎРЈР©")) 
 				 )
 				 continue;
 			 m_Nodes[nd].m_Colloc.m_Type = RossType;
@@ -474,10 +474,10 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 					 m_Nodes[nd].m_RichPoses = (1<<NUMERAL_P);
 					 m_Nodes[nd].m_Words[0].m_Poses = (1<<NUMERAL_P);
 					 /*
-					  Синтаксис ошибочно считал эти ЦК числительными, а это порядковые числительные.
-					  Нужно удалить син. связи, построенные от него как от существительного
+					  РЎРёРЅС‚Р°РєСЃРёСЃ РѕС€РёР±РѕС‡РЅРѕ СЃС‡РёС‚Р°Р» СЌС‚Рё Р¦Рљ С‡РёСЃР»РёС‚РµР»СЊРЅС‹РјРё, Р° СЌС‚Рѕ РїРѕСЂСЏРґРєРѕРІС‹Рµ С‡РёСЃР»РёС‚РµР»СЊРЅС‹Рµ.
+					  РќСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ СЃРёРЅ. СЃРІСЏР·Рё, РїРѕСЃС‚СЂРѕРµРЅРЅС‹Рµ РѕС‚ РЅРµРіРѕ РєР°Рє РѕС‚ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ
 					 */
-					 DeleteSynRelationsByName(nd, "ЧИСЛ_СУЩ");
+					 DeleteSynRelationsByName(nd, "Р§РРЎР›_РЎРЈР©");
 				 };
 
 				
@@ -501,7 +501,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 				   break;
 
 			  if (l == Rels.size())
-				  m_SynRelations.push_back(CSynRelation(BestHypot.m_Periods[MainWordNo].m_NodeNo, nd, "врем_группа"));
+				  m_SynRelations.push_back(CSynRelation(BestHypot.m_Periods[MainWordNo].m_NodeNo, nd, "РІСЂРµРј_РіСЂСѓРїРїР°"));
 
 			 };
 		 };
@@ -509,7 +509,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 	 };
  };
 
- EndTimer("Построение групп времени");  
+ EndTimer("РџРѕСЃС‚СЂРѕРµРЅРёРµ РіСЂСѓРїРї РІСЂРµРјРµРЅРё");  
 };
 
 long CRusSemStructure::FindTimeHost (long NodeNo, long ClauseNo)
@@ -541,7 +541,7 @@ long CRusSemStructure::FindTimeHost (long NodeNo, long ClauseNo)
 
 /*
 	=====================================
-	Идеализации для таймгрупп
+	РРґРµР°Р»РёР·Р°С†РёРё РґР»СЏ С‚Р°Р№РјРіСЂСѓРїРї
 	======================================
 */
 
@@ -550,8 +550,8 @@ long CRusSemStructure::FindTimeHost (long NodeNo, long ClauseNo)
 
 
 /*
-  1. стирает интерпретацию таймгруппы, если таймгруппа заполнила 
-  не временную валентность и это свободная тайм-группа
+  1. СЃС‚РёСЂР°РµС‚ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ С‚Р°Р№РјРіСЂСѓРїРїС‹, РµСЃР»Рё С‚Р°Р№РјРіСЂСѓРїРїР° Р·Р°РїРѕР»РЅРёР»Р° 
+  РЅРµ РІСЂРµРјРµРЅРЅСѓСЋ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ Рё СЌС‚Рѕ СЃРІРѕР±РѕРґРЅР°СЏ С‚Р°Р№Рј-РіСЂСѓРїРїР°
 */
 
 void CRusSemStructure::ClearInterpsForFreeTimeGroups()
@@ -581,12 +581,12 @@ void CRusSemStructure::ClearInterpsForFreeTimeGroups()
 };
 
 /*
-  если от главного  слова тайм-группы зависит узел, который является предлогом, 
-  тогда, если в главный узел идет отношение, нужно прописать этот предлог в отношение,
-  а предложный узел  в любом случае удалить. Нужно это для перевода конструкции 
-  "не ранее вторника", где предлог "не ранее" должен оказаться на стрелке, поскольку
-  его перевод равен "till + A1(НЕ)", т.е. при переводе "не ранее" у его отца
-  должно будет появиться отрицание, а сам предлог должен будет перевестись в "till".
+  РµСЃР»Рё РѕС‚ РіР»Р°РІРЅРѕРіРѕ  СЃР»РѕРІР° С‚Р°Р№Рј-РіСЂСѓРїРїС‹ Р·Р°РІРёСЃРёС‚ СѓР·РµР», РєРѕС‚РѕСЂС‹Р№ СЏРІР»СЏРµС‚СЃСЏ РїСЂРµРґР»РѕРіРѕРј, 
+  С‚РѕРіРґР°, РµСЃР»Рё РІ РіР»Р°РІРЅС‹Р№ СѓР·РµР» РёРґРµС‚ РѕС‚РЅРѕС€РµРЅРёРµ, РЅСѓР¶РЅРѕ РїСЂРѕРїРёСЃР°С‚СЊ СЌС‚РѕС‚ РїСЂРµРґР»РѕРі РІ РѕС‚РЅРѕС€РµРЅРёРµ,
+  Р° РїСЂРµРґР»РѕР¶РЅС‹Р№ СѓР·РµР»  РІ Р»СЋР±РѕРј СЃР»СѓС‡Р°Рµ СѓРґР°Р»РёС‚СЊ. РќСѓР¶РЅРѕ СЌС‚Рѕ РґР»СЏ РїРµСЂРµРІРѕРґР° РєРѕРЅСЃС‚СЂСѓРєС†РёРё 
+  "РЅРµ СЂР°РЅРµРµ РІС‚РѕСЂРЅРёРєР°", РіРґРµ РїСЂРµРґР»РѕРі "РЅРµ СЂР°РЅРµРµ" РґРѕР»Р¶РµРЅ РѕРєР°Р·Р°С‚СЊСЃСЏ РЅР° СЃС‚СЂРµР»РєРµ, РїРѕСЃРєРѕР»СЊРєСѓ
+  РµРіРѕ РїРµСЂРµРІРѕРґ СЂР°РІРµРЅ "till + A1(РќР•)", С‚.Рµ. РїСЂРё РїРµСЂРµРІРѕРґРµ "РЅРµ СЂР°РЅРµРµ" Сѓ РµРіРѕ РѕС‚С†Р°
+  РґРѕР»Р¶РЅРѕ Р±СѓРґРµС‚ РїРѕСЏРІРёС‚СЊСЃСЏ РѕС‚СЂРёС†Р°РЅРёРµ, Р° СЃР°Рј РїСЂРµРґР»РѕРі РґРѕР»Р¶РµРЅ Р±СѓРґРµС‚ РїРµСЂРµРІРµСЃС‚РёСЃСЊ РІ "till".
 */
 long CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
 {
@@ -615,11 +615,11 @@ long CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
 			 m_Relations[R.m_Rels[0]].m_SynReal.m_Preps.push_back(*m_Nodes[PrepNodeNo].GetInterp());
 		 }
 		 else 
-			 if ( HasSynRelation(NodeNo, "врем_группа"))
+			 if ( HasSynRelation(NodeNo, "РІСЂРµРј_РіСЂСѓРїРїР°"))
 			 {
-				 //res +=300; //штраф за удаленный узел и связи, "В конце 2 года"
-				 //удаляем не состоявшуюся группу и пересчитываем лучший вариант
-				 DeleteSynRelationsByName(NodeNo, "врем_группа");
+				 //res +=300; //С€С‚СЂР°С„ Р·Р° СѓРґР°Р»РµРЅРЅС‹Р№ СѓР·РµР» Рё СЃРІСЏР·Рё, "Р’ РєРѕРЅС†Рµ 2 РіРѕРґР°"
+				 //СѓРґР°Р»СЏРµРј РЅРµ СЃРѕСЃС‚РѕСЏРІС€СѓСЋСЃСЏ РіСЂСѓРїРїСѓ Рё РїРµСЂРµСЃС‡РёС‚С‹РІР°РµРј Р»СѓС‡С€РёР№ РІР°СЂРёР°РЅС‚
+				 DeleteSynRelationsByName(NodeNo, "РІСЂРµРј_РіСЂСѓРїРїР°");
 				 m_Nodes[PrepNodeNo].DelAllInterps(); 
 				 for (long ClauseNo=0; ClauseNo <m_Clauses.size(); ClauseNo++)
 				 {
@@ -649,7 +649,7 @@ long CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
 
 		 DelNode(PrepNodeNo);
 		 
-		 /*предлог стоял перед главным словом*/
+		 /*РїСЂРµРґР»РѕРі СЃС‚РѕСЏР» РїРµСЂРµРґ РіР»Р°РІРЅС‹Рј СЃР»РѕРІРѕРј*/
 		 NodeNo--;
    };
    return res;

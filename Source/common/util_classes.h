@@ -20,7 +20,7 @@ struct CSmallVector	{
 	void Add (Type	Item)
 	{
 		//assert(m_ItemsCount < Size-1);
-		//	в Release просто не	будем добавлять	отношения, если	их слишком много
+		//	РІ Release РїСЂРѕСЃС‚Рѕ РЅРµ	Р±СѓРґРµРј РґРѕР±Р°РІР»СЏС‚СЊ	РѕС‚РЅРѕС€РµРЅРёСЏ, РµСЃР»Рё	РёС… СЃР»РёС€РєРѕРј РјРЅРѕРіРѕ
 		if	(m_ItemsCount >= Size-1)
 			return;
 		m_Items[m_ItemsCount++] = Item;
@@ -28,7 +28,7 @@ struct CSmallVector	{
 	void Insert (int No, Type Item)
 	{
 		//assert(m_RelsCount <	MaxRelSet-1);
-		//	в Release просто не	будем добавлять	отношения, если	их слишком много
+		//	РІ Release РїСЂРѕСЃС‚Рѕ РЅРµ	Р±СѓРґРµРј РґРѕР±Р°РІР»СЏС‚СЊ	РѕС‚РЅРѕС€РµРЅРёСЏ, РµСЃР»Рё	РёС… СЃР»РёС€РєРѕРј РјРЅРѕРіРѕ
 		if	(m_ItemsCount >= Size-1)
 			return;
 

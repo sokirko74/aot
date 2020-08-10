@@ -6,7 +6,7 @@ CONTENT =  ab
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -19,7 +19,7 @@ REDACT       = alex
 TIME_CREATE       = 14/4/3 14:20:34
 CONTENT =  aber
 GF      = 1  KON_neb
-VAL     =  AND , ¿2 , ¿1
+VAL     =  AND , –ê2 , –ê1
 ============
 TITLE        = abseits+G
 SENSE       = 1
@@ -27,18 +27,18 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  abseits
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = abz¸glich+G
+TITLE        = abz—åglich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  abz¸glich
+CONTENT =  abz—åglich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -52,7 +52,7 @@ CONTENT =  als
 EXM     =  Nunmehr wurde ein Dekret unterzeichnet als Staatsgebiet erklart wird.
            Als ich noch zur Schule ging, hatte ich viel mehr Freizeit.
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -64,7 +64,7 @@ DERIV   =  an dem
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -77,7 +77,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -89,7 +89,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  angesichts
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -99,18 +99,18 @@ SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  anhand
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = anl‰ﬂlich+G
+TITLE        = anl–¥–Ølich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  anl‰ﬂlich
+CONTENT =  anl–¥–Ølich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -121,7 +121,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  ans
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 DERIV   =  an das
 GF1     = 1  VP
           2  < NP
@@ -135,7 +135,7 @@ TIME_CREATE       = 20/3/3 14:4:59
 CONTENT =  anstatt
 EXM     =  Anstatt sich zu bedanken, beleidigte er den Helfer
 GF      = 1  KON_unt
-VAL     =  INSTEAD , ¿1 , ¿2
+VAL     =  INSTEAD , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  VP : inf
 ============
@@ -145,7 +145,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  anstatt
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -156,7 +156,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  anstelle
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -169,7 +169,7 @@ TIME_CREATE       = 10/4/3 12:26:48
 CONTENT =  antwortlich
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -182,7 +182,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -193,7 +193,7 @@ SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  aufgrund
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -205,7 +205,7 @@ CONTENT =  aufs
 DERIV   =  auf das
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -216,7 +216,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  aufseiten
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -229,7 +229,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -240,40 +240,40 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  ausgangs
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = auﬂer+D
+TITLE        = au–Øer+D
 SENSE       = 2
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  auﬂer
+CONTENT =  au–Øer
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = auﬂer+G
+TITLE        = au–Øer+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  auﬂer
+CONTENT =  au–Øer
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = auﬂerhalb+G
+TITLE        = au–Øerhalb+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  auﬂerhalb
+CONTENT =  au–Øerhalb
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -286,7 +286,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -297,7 +297,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  beiderseits
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -309,7 +309,7 @@ CONTENT =  beim
 DERIV   =  bei dem
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -322,17 +322,17 @@ TIME_CREATE       = 20/3/3 14:4:46
 CONTENT =  bevor
 EXM     =  Sie mussen, bevor sie zum Verkauf gelangen, einer amtlichen Prufung unterzogen werden
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = bez¸glich+G
+TITLE        = bez—åglich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  bez¸glich
+CONTENT =  bez—åglich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -343,7 +343,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  binnen
 GF      = 1  PRP
 SF      = 1  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -356,7 +356,7 @@ TIME_CREATE       = 20/3/3 14:4:36
 CONTENT =  bis
 EXM     =  die Bank vorlaufig geschlossen zu bleiben habe, bis die Aufstellung des Status vollendet ist.
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -368,7 +368,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -383,7 +383,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -397,7 +397,7 @@ TIME_CREATE       = 20/3/3 14:4:19
 CONTENT =  da
 EXM     =  Ich habe die Prufung bestanden, da ich gut vorbereitet war.
 GF      = 1  KON_unt
-VAL     =  CAUSE , ¿1 , ¿2
+VAL     =  CAUSE , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -409,7 +409,7 @@ TIME_CREATE       = 20/3/3 14:4:2
 CONTENT =  damit
 EXM     =  Ich lerne die Vokabeln, damit ich den morgigen Test bestehe.
 GF      = 1  KON_unt
-VAL     =  AIM , ¿1 , ¿2
+VAL     =  AIM , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -419,7 +419,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  dank
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -430,10 +430,10 @@ SENSE       = 1
 AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 23/8/3 16:48:51
-CONTENT =  (dass | daﬂ)
-EXM     =  Ich weiﬂ, dass du klug bist
+CONTENT =  (dass | da–Ø)
+EXM     =  Ich wei–Ø, dass du klug bist
 GF      = 1  KON_unt
-VAL     =  CONTEN , ¿1 , ¿2
+VAL     =  CONTEN , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -443,7 +443,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  diesseits
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -454,7 +454,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  durch
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -466,7 +466,7 @@ CONTENT =  durchs
 DERIV   =  durch das
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -479,21 +479,21 @@ TIME_CREATE       = 20/3/3 14:16:53
 CONTENT =  ehe
 EXM     =  es vergingen drei Stunden, ehe wir landen konnten
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = ein biﬂchen
+TITLE        = ein bi–Øchen
 SENSE       = 1
 AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 8/4/3 16:42:50
-CONTENT =  ein biﬂchen
+CONTENT =  ein bi–Øchen
            ein wenig
 EXM     =  sich ein wenig oeffnen
 RESTR   =  fixed !
 GF      = 1  ADV
-VAL     =  QUANTIT , — , ¿1
+VAL     =  QUANTIT , –° , –ê1
 GF1     = 1  VP
 ============
 TITLE        = ein paar
@@ -505,7 +505,7 @@ CONTENT =  ein paar
 EXM     =  ein paar Gefechte
 GF      = 1  ZAL
 RESTR   =  fixed !
-VAL     =  QUANTIT , — , ¿1
+VAL     =  QUANTIT , –° , –ê1
 GF1     = 1  VP
 ============
 TITLE        = eingangs+G
@@ -514,18 +514,18 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  eingangs
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = einschlieﬂlich+G
+TITLE        = einschlie–Ølich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  einschlieﬂlich
+CONTENT =  einschlie–Ølich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -536,7 +536,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  entgegen
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -547,7 +547,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  entlang
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -559,7 +559,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  entsprechend
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -579,7 +579,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  exklusive
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -592,7 +592,7 @@ TIME_CREATE       = 20/3/3 14:16:46
 CONTENT =  falls
 EXM     =  du kannst mitkommen, falls du Lust hast
 GF      = 1  KON_unt
-VAL     =  COND , ¿1 , ¿2
+VAL     =  COND , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -602,31 +602,31 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  fern
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = f¸r+A
+TITLE        = f—år+A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  f¸r
+CONTENT =  f—år
 GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
 ============
-TITLE        = f¸rs+A
+TITLE        = f—års+A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  f¸rs
-DERIV   =  F‹R das
+CONTENT =  f—års
+DERIV   =  F–¨R das
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -639,30 +639,30 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
 ============
-TITLE        = gegen¸ber+D
+TITLE        = gegen—åber+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  gegen¸ber
+CONTENT =  gegen—åber
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = gem‰ﬂ+D
+TITLE        = gem–¥–Ø+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  gem‰ﬂ
+CONTENT =  gem–¥–Ø
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -673,7 +673,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  gen
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -684,7 +684,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  gleich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -695,7 +695,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  hinsichtlich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -707,7 +707,7 @@ CONTENT =  hinter
 GF      = 1  PRP
 SF      = 1  LOK
           2  TIME
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -721,7 +721,7 @@ DERIV   =  hinter dem
 GF      = 1  PRP
 SF      = 1  LOK
           2  TIME
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -733,7 +733,7 @@ CONTENT =  hintera
 DERIV   =  hinter das
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -745,7 +745,7 @@ CONTENT =  im
 DERIV   =  in dem
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -758,7 +758,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -770,9 +770,9 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 14:20:22
 CONTENT =  indem
-EXM     =  er hat viel Geld sparen kˆnnen, indem er einen Teil der Arbeit selbst gemacht hat
+EXM     =  er hat viel Geld sparen k—Ünnen, indem er einen Teil der Arbeit selbst gemacht hat
 GF      = 1  KON_unt
-VAL     =  METHOD , ¿1 , ¿2
+VAL     =  METHOD , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -784,7 +784,7 @@ TIME_CREATE       = 20/3/3 14:22:12
 CONTENT =  indes | indessen
 EXM     =  indes er seine Arbeit fertig machte, gingen die anderen spazieren
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -794,7 +794,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  infolge
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -805,7 +805,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  inklusive
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -817,7 +817,7 @@ CONTENT =  inmitten
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -829,7 +829,7 @@ CONTENT =  innerhalb
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -841,7 +841,7 @@ CONTENT =  ins
 DERIV   =  in das
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -854,7 +854,7 @@ TIME_CREATE       = 20/3/3 14:26:32
 CONTENT =  insofern
 EXM     =  er studiert Mathematik, insofern  es fur seine Arbeit notwendig ist
 GF      = 1  KON_unt
-VAL     =  CAUSE , ¿1 , ¿2
+VAL     =  CAUSE , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -866,7 +866,7 @@ TIME_CREATE       = 20/3/3 14:28:26
 CONTENT =  insoweit(|als)
 EXM     =  i. das zutrifft, werden wir intervenieren
 GF      = 1  KON_unt
-VAL     =  SCALE , ¿1 , ¿2
+VAL     =  SCALE , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -875,7 +875,7 @@ SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  je
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> N
@@ -888,7 +888,7 @@ CONTENT =  jenseits
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -899,7 +899,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  kontra
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -910,7 +910,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  kraft
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -923,7 +923,7 @@ TIME_CREATE       = 29/8/3 12:24:48
 CONTENT =  kurz nach
 GF      = 1  PRP
 SF      = 1  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -936,7 +936,7 @@ TIME_CREATE       = 29/8/3 12:23:35
 CONTENT =  kurz vor
 GF      = 1  PRP
 SF      = 1  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -947,31 +947,31 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  laut
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
           2  >> D
 ============
-TITLE        = l‰ngs+G
+TITLE        = l–¥ngs+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  l‰ngs
+CONTENT =  l–¥ngs
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
           2  >> D
 ============
-TITLE        = l‰ngsseits+G
+TITLE        = l–¥ngsseits+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  l‰ngsseits
+CONTENT =  l–¥ngsseits
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -982,7 +982,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  mangels
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -994,7 +994,7 @@ CONTENT =  mit
 GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1005,7 +1005,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  mitsamt
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1016,7 +1016,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  mittels
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1028,7 +1028,7 @@ CONTENT =  nach
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1041,7 +1041,7 @@ TIME_CREATE       = 20/3/3 14:30:29
 CONTENT =  nachdem
 EXM     =  n. ich gegessen hatte, legte ich mich eine Weile hin
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1051,7 +1051,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  nahe
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1063,7 +1063,7 @@ CONTENT =  neben
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1075,18 +1075,18 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  nebst
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = n‰chst+D
+TITLE        = n–¥chst+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  n‰chst
+CONTENT =  n–¥chst
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1097,9 +1097,9 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 14:32:7
 CONTENT =  ob
-EXM     =  er fragte sie, ob sie noch k‰me
+EXM     =  er fragte sie, ob sie noch k–¥me
 GF      = 1  KON_unt
-VAL     =  CONTEN , ¿1 , ¿2
+VAL     =  CONTEN , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1110,7 +1110,7 @@ CONTENT =  oberhalb
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1123,7 +1123,7 @@ TIME_CREATE       = 20/3/3 15:12:6
 CONTENT =  obwohl | obgleich | obschon | obzwar | wenngleich | wennschon
 EXM     =  er hat das Paket nicht mitgenommen, o. ich ihn darum gebeten hatte
 GF      = 1  KON_unt
-VAL     =  COND , ¿1 , ¿2
+VAL     =  COND , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1134,7 +1134,7 @@ REDACT       = alex
 TIME_CREATE       = 14/4/3 14:20:16
 CONTENT =  oder
 GF      = 1  KON_neb
-VAL     =  AND , ¿2 , ¿1
+VAL     =  AND , –ê2 , –ê1
 ============
 TITLE        = offenbar
 SENSE       = 1
@@ -1153,7 +1153,7 @@ TIME_CREATE       = 20/3/3 14:38:36
 CONTENT =  ohne
 EXM     =  sie nahm Platz, o. gefragt zu haben
 GF      = 1  KON_unt
-VAL     =  COND , ¿1 , ¿2
+VAL     =  COND , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  VP : inf
 ============
@@ -1163,7 +1163,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  ohne
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1174,7 +1174,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  per
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> N
@@ -1185,7 +1185,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  plus
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1196,7 +1196,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  pro
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1207,7 +1207,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  samt
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1220,7 +1220,7 @@ TIME_CREATE       = 20/3/3 14:38:58
 CONTENT =  seit | seitdem
 EXM     =  s. er die Firma leitet, sind alle zufrieden
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1230,7 +1230,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  seit
 GF      = 1  PRP
 SF      = 1  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1242,7 +1242,7 @@ CONTENT =  seitens
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1254,19 +1254,19 @@ CONTENT =  seitlich
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = seitw‰rts+G
+TITLE        = seitw–¥rts+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  seitw‰rts
+CONTENT =  seitw–¥rts
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1279,7 +1279,7 @@ TIME_CREATE       = 20/3/3 14:40:59
 CONTENT =  so
 EXM     =  so Gott will, sehen wir uns bald wieder
 GF      = 1  KON_unt
-VAL     =  COND , ¿1 , ¿2
+VAL     =  COND , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1291,7 +1291,7 @@ TIME_CREATE       = 20/3/3 14:42:48
 CONTENT =  sobald | sowie
 EXM     =  ich rufe an, s. ich zu Hause bin
 GF      = 1  KON_unt
-VAL     =  SIMULT , ¿1 , ¿2
+VAL     =  SIMULT , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1303,7 +1303,7 @@ TIME_CREATE       = 20/3/3 14:44:38
 CONTENT =  sofern
 EXM     =  wir kommen morgen, s. es euch passt
 GF      = 1  KON_unt
-VAL     =  COND , ¿1 , ¿2
+VAL     =  COND , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1316,7 +1316,7 @@ CONTENT =  solange
 EXM     =  du kannst bleiben, s. du willst
            s. du Fieber hast, musst du im Bett liegen
 GF      = 1  KON_unt
-VAL     =  SIMULT , ¿1 , ¿2
+VAL     =  SIMULT , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1328,7 +1328,7 @@ TIME_CREATE       = 20/3/3 14:48:56
 CONTENT =  sooft
 EXM     =  s. er kam, brachte er Blumen mit
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1340,7 +1340,7 @@ TIME_CREATE       = 20/3/3 14:50:38
 CONTENT =  soweit | soviel
 EXM     =  er ist wieder gesund, s. mir bekannt ist
 GF      = 1  KON_unt
-VAL     =  SCALE , ¿1 , ¿2
+VAL     =  SCALE , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1350,7 +1350,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  statt
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1361,7 +1361,7 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 15/4/3 14:46:26
 CONTENT =  teils  ... teils
-EXM     =  Er kauft teils Autos, teils Fahrr‰der.
+EXM     =  Er kauft teils Autos, teils Fahrr–¥der.
 GF      = 1  DISKONT_KON
 ============
 TITLE        = trotz+G
@@ -1369,7 +1369,7 @@ SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  trotz
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1382,7 +1382,7 @@ TIME_CREATE       = 22/4/3 18:31:25
 CONTENT =  um
 EXM     =  Ich mache das, um dich zu besuchen.
 GF      = 1  KON_unt
-VAL     =  COMP , ¿1 , ¿2
+VAL     =  COMP , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1393,7 +1393,7 @@ CONTENT =  um
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1405,7 +1405,7 @@ CONTENT =  ums
 DERIV   =  um das
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1417,7 +1417,7 @@ REDACT       = alex
 TIME_CREATE       = 14/4/3 14:18:14
 CONTENT =  und
 GF      = 1  KON_neb
-VAL     =  AND , ¿2 , ¿1
+VAL     =  AND , –ê2 , –ê1
 ============
 TITLE        = ungeachtet+G
 SENSE       = 1
@@ -1425,7 +1425,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  ungeachtet
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1438,7 +1438,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1451,7 +1451,7 @@ CONTENT =  unterhalb
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1462,7 +1462,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  unterm
 DERIV   =  unter dem
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1473,7 +1473,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  unters
 DERIV   =  unter das
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1484,7 +1484,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  unweit
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1495,7 +1495,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  versus
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1506,7 +1506,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  via
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1520,7 +1520,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1533,7 +1533,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1545,7 +1545,7 @@ CONTENT =  vor
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1557,7 +1557,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  vorbehaltlich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1570,7 +1570,7 @@ DERIV   =  vor dem
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1583,7 +1583,7 @@ DERIV   =  vor das
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1593,7 +1593,7 @@ SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  wegen
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1606,7 +1606,7 @@ TIME_CREATE       = 20/3/3 15:10:22
 CONTENT =  weil
 EXM     =  sie ist so traurig, w. ihr Vater gestorben ist
 GF      = 1  KON_unt
-VAL     =  CAUSE , ¿1 , ¿2
+VAL     =  CAUSE , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1616,9 +1616,9 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 15:35:1
 CONTENT =  wenn
-EXM     =  wenn es dir recht ist, trete ich sofort zur¸ck
+EXM     =  wenn es dir recht ist, trete ich sofort zur—åck
 GF      = 1  KON_unt
-VAL     =  COND , ¿1 , ¿2
+VAL     =  COND , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1629,7 +1629,7 @@ REDACT       = alex
 TIME_CREATE       = 4/9/3 16:12:17
 CONTENT =  , wenn nicht sogar
 GF      = 1  KON_neb
-VAL     =  OR , ¿2 , ¿1
+VAL     =  OR , –ê2 , –ê1
 ============
 TITLE        = wider+A
 SENSE       = 1
@@ -1637,7 +1637,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  wider
 GF      = 1  PRP
 SF      = 1  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
@@ -1650,7 +1650,7 @@ TIME_CREATE       = 20/3/3 15:15:9
 CONTENT =  wie
 EXM     =  es kam, w. ich es erwartet hatte
 GF      = 1  KON_unt
-VAL     =  COMP , ¿1 , ¿2
+VAL     =  COMP , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1662,29 +1662,29 @@ TIME_CREATE       = 20/3/3 15:16:26
 CONTENT =  wohingegen
 EXM     =  er hat blondes Haar, w. seine Geschwister alle dunkelhaarig sind
 GF      = 1  KON_unt
-VAL     =  COMP , ¿1 , ¿2
+VAL     =  COMP , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = w‰hrend
+TITLE        = w–¥hrend
 SENSE       = 1
 AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 15:17:56
-CONTENT =  w‰hrend
+CONTENT =  w–¥hrend
 EXM     =  w. sie verreist waren, hat man bei ihnen eingebrochen.
 GF      = 1  KON_unt
-VAL     =  TIME , ¿1 , ¿2
+VAL     =  TIME , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = w‰hrend+G
+TITLE        = w–¥hrend+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  w‰hrend
+CONTENT =  w–¥hrend
 GF      = 1  PRP
 SF      = 1  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1695,7 +1695,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  zeit
 GF      = 1  PRP
 SF      = 1  TIME
-VAL     =  TIME , ¿2 , ¿1
+VAL     =  TIME , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1708,7 +1708,7 @@ GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
           3  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1719,7 +1719,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  zufolge
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1731,7 +1731,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  zugunsten
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1742,7 +1742,7 @@ SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  zuliebe
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1755,7 +1755,7 @@ DERIV   =  zu dem
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1768,7 +1768,7 @@ TIME_CREATE       = 20/3/3 15:19:26
 CONTENT =  zumal
 EXM     =  sie nimmt die Einladung gern an, z. sie allein ist
 GF      = 1  KON_unt
-VAL     =  CAUSE , ¿1 , ¿2
+VAL     =  CAUSE , –ê1 , –ê2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
@@ -1780,7 +1780,7 @@ DERIV   =  zu der
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
@@ -1791,7 +1791,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  zuungunsten
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1803,18 +1803,18 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  zuwider
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = zuz¸glich+G
+TITLE        = zuz—åglich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  zuz¸glich
+CONTENT =  zuz—åglich
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1834,7 +1834,7 @@ TIME_CREATE       = 9/3/3 11:55:44
 CONTENT =  zwecks
 GF      = 1  PRP
 SF      = 1  MODL
-VAL     =  MODL , ¿2 , ¿1
+VAL     =  MODL , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
@@ -1846,43 +1846,43 @@ CONTENT =  zwischen
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
           2  >> A
 ============
-TITLE        = ¸ber+D/A
+TITLE        = —åber+D/A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  ¸ber
+CONTENT =  —åber
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
-VAL     =  LOK , ¿2 , ¿1
+VAL     =  LOK , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
           2  >> A
 ============
-TITLE        = ¸berm+D
+TITLE        = —åberm+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  ¸berm
-DERIV   =  ‹BER dem
+CONTENT =  —åberm
+DERIV   =  –¨BER dem
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = ¸bers+A
+TITLE        = —åbers+A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  ¸bers
-DERIV   =  ‹BER das
+CONTENT =  —åbers
+DERIV   =  –¨BER das
 GF      = 1  PRP
-VAL     =  CAUSE , ¿2 , ¿1
+VAL     =  CAUSE , –ê2 , –ê1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A

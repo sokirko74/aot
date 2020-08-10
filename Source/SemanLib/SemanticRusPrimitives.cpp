@@ -31,7 +31,7 @@ string	CRusSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) 
 
 
 
-// перечень всех СемО
+// РїРµСЂРµС‡РµРЅСЊ РІСЃРµС… РЎРµРјРћ
 const CSemRelation*	CRusSemStructure::GetRelation(int RelNo) const 
 {
 	return &(m_Relations[RelNo]);
@@ -67,7 +67,7 @@ void	CRusSemStructure::GetColorAndWidthOfRelation(int RelNo, float& Width, strin
 	Width = 1;
 	Color  = m_Relations[RelNo].m_bSemFetAgree ? "blue" : "darkgreen";
 }
-// перечень всех дополнительных отношений, найденных в предложении
+// РїРµСЂРµС‡РµРЅСЊ РІСЃРµС… РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№, РЅР°Р№РґРµРЅРЅС‹С… РІ РїСЂРµРґР»РѕР¶РµРЅРёРё
 const CSemRelation*	CRusSemStructure::GetDopRelation(int RelNo) const 
 {
 	return &(m_DopRelations[RelNo]);
@@ -86,7 +86,7 @@ void	CRusSemStructure::EraseDopRelation(int RelNo)
 };
 
 
-// проверяет, что узлы, которые связывает отношение не являются абстрактными
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ СѓР·Р»С‹, РєРѕС‚РѕСЂС‹Рµ СЃРІСЏР·С‹РІР°РµС‚ РѕС‚РЅРѕС€РµРЅРёРµ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ Р°Р±СЃС‚СЂР°РєС‚РЅС‹РјРё
 bool			CRusSemStructure::IsWordContainerRel(int iRel)  const
 {
 	return  m_Nodes[m_Relations[iRel].m_SourceNodeNo].IsWordContainer() 
@@ -123,7 +123,7 @@ const long			CRusSemStructure::GetSemClausesCount() const
 
 bool  CRusSemStructure::IsOptional(long RelNo) const 
 {
-  if (m_Relations[RelNo].m_SyntacticRelation == "врем_группа") return false;
+  if (m_Relations[RelNo].m_SyntacticRelation == "РІСЂРµРј_РіСЂСѓРїРїР°") return false;
 
   return  m_Relations[RelNo].m_Valency.m_bOptional;
 };
@@ -137,17 +137,17 @@ string CSemClauseVariantResult :: GetStr()
 bool CRusSemStructure::CanBePrefixRelationOperator (long NodeNo) const
 {
 	return     m_Nodes[NodeNo].IsPrimitive()
-		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "НЕ")
-                || (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ТОЛЬКО")
-				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ДАЖЕ")
-				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "НИ")
+		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "РќР•")
+                || (m_Nodes[NodeNo].m_Words[0].m_Lemma == "РўРћР›Р¬РљРћ")
+				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "Р”РђР–Р•")
+				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "РќР")
 			   );
 }
 
 bool CRusSemStructure::CanBePostfixRelationOperator (long NodeNo) const
 {
 	return     m_Nodes[NodeNo].IsPrimitive()
-		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЖЕ")
+		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "Р–Р•")
 			   );
 }
 
@@ -190,7 +190,7 @@ long CRusSemStructure::GetRusSubj(int NodeNo)
   		  break;
 		else
 			/*
-			   считаем, что копул прозрачен! 
+			   СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РєРѕРїСѓР» РїСЂРѕР·СЂР°С‡РµРЅ! 
 			*/
 			if (m_Nodes[m_Relations[Rels[i]].m_TargetNodeNo].m_NodeType == Copul)
 			{
@@ -235,7 +235,7 @@ bool CRusSemStructure::IsPostSpecifAdjNode(long NodeNo) const
 {
 	CRelSet R = GetIncomingRelations(NodeNo, false);
 	if (R.m_RelsCount != 1) return false;
-return    (GetRelation(R.m_Rels[0])->m_Valency.m_RelationStr == "PROPERT")		   && (GetRelation(R.m_Rels[0])->m_SyntacticRelation == "уточн");
+return    (GetRelation(R.m_Rels[0])->m_Valency.m_RelationStr == "PROPERT")		   && (GetRelation(R.m_Rels[0])->m_SyntacticRelation == "СѓС‚РѕС‡РЅ");
 };
 
 
@@ -324,7 +324,7 @@ void CRusSemStructure::AssertValidGraph()
 		const CRusSemNode& N = m_Nodes[i];
 		assert (N.m_ClauseNo != -1);
 
-		// проверка, что индекс диатезы не выходит за пределы числа валентностей
+		// РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РёРЅРґРµРєСЃ РґРёР°С‚РµР·С‹ РЅРµ РІС‹С…РѕРґРёС‚ Р·Р° РїСЂРµРґРµР»С‹ С‡РёСЃР»Р° РІР°Р»РµРЅС‚РЅРѕСЃС‚РµР№
 		for (int j=0; j < N.m_Vals.size(); j++)
 		{
 			if (N.m_ValsLayout[j] >=  N.m_Vals.size() )
@@ -537,9 +537,9 @@ string CRusSemStructure::GetMorphologyOfNode(long NodeNo) const
 bool	CRusSemStructure::IsParenthesis (long NodeNo) const
 {
 	  return          (m_Nodes[NodeNo].GetType() != NoneRoss) 
-			   && (   HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","ВВОДН", "D_PART_OF_SPEECH",0,0)
-				   || HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","ВВОДН", "D_GROUPS",0,0)
-				   || HasGramFetAfterColon (NodeNo, "ВВОДН")
+			   && (   HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","Р’Р’РћР”Рќ", "D_PART_OF_SPEECH",0,0)
+				   || HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","Р’Р’РћР”Рќ", "D_GROUPS",0,0)
+				   || HasGramFetAfterColon (NodeNo, "Р’Р’РћР”Рќ")
 				  );
 };
 
@@ -547,7 +547,7 @@ void CRusSemStructure::CopyDopRelationsExceptAnaphor()
 {
 
 	for(int i = 0 ; i < m_DopRelations.size() ; i++ )
-		if (    (m_DopRelations[i].m_SyntacticRelation != "анафора") 
+		if (    (m_DopRelations[i].m_SyntacticRelation != "Р°РЅР°С„РѕСЂР°") 
 			 && (m_DopRelations[i].m_SyntacticRelation != "ModalCopul") 
 		   )
 		{
@@ -558,12 +558,12 @@ void CRusSemStructure::CopyDopRelationsExceptAnaphor()
 }
 
 /*
-   функция разбирает строчку, в которой записан список разрешенных лексических
-   вариантов, напрмер
-	(1) { {"Росс:дом 1" 0} {"Росс:дом 2" 1}}
-   В этом списке стоят две интерпретации 
-	1)  статья из РОССа дом 1 
-	2)  статья из РОССа дом 2 
+   С„СѓРЅРєС†РёСЏ СЂР°Р·Р±РёСЂР°РµС‚ СЃС‚СЂРѕС‡РєСѓ, РІ РєРѕС‚РѕСЂРѕР№ Р·Р°РїРёСЃР°РЅ СЃРїРёСЃРѕРє СЂР°Р·СЂРµС€РµРЅРЅС‹С… Р»РµРєСЃРёС‡РµСЃРєРёС…
+   РІР°СЂРёР°РЅС‚РѕРІ, РЅР°РїСЂРјРµСЂ
+	(1) { {"Р РѕСЃСЃ:РґРѕРј 1" 0} {"Р РѕСЃСЃ:РґРѕРј 2" 1}}
+   Р’ СЌС‚РѕРј СЃРїРёСЃРєРµ СЃС‚РѕСЏС‚ РґРІРµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё 
+	1)  СЃС‚Р°С‚СЊСЏ РёР· Р РћРЎРЎР° РґРѕРј 1 
+	2)  СЃС‚Р°С‚СЊСЏ РёР· Р РћРЎРЎР° РґРѕРј 2 
 */
 void  CRusSemStructure::ProcessAllowableLexVars (string LexVarsStr)
 {
@@ -657,8 +657,8 @@ void CRusSemStructure::DeleteRelSet(CRelSet& R)
 
 
 
-// проверяет, стоит ли после двоеточия в GF-главном ItemStr
-// например, для GF = НАР:ВОПР  => HasGramFetAfterColon(i, "ВОПР")== true
+// РїСЂРѕРІРµСЂСЏРµС‚, СЃС‚РѕРёС‚ Р»Рё РїРѕСЃР»Рµ РґРІРѕРµС‚РѕС‡РёСЏ РІ GF-РіР»Р°РІРЅРѕРј ItemStr
+// РЅР°РїСЂРёРјРµСЂ, РґР»СЏ GF = РќРђР :Р’РћРџР   => HasGramFetAfterColon(i, "Р’РћРџР ")== true
 bool CRusSemStructure::HasGramFetAfterColon (long NodeNo, string ItemStr)  const
 {
   if (m_Nodes[NodeNo].GetType() == NoneRoss)  return false;
@@ -678,12 +678,12 @@ bool CRusSemStructure::HasGramFetAfterColon (long NodeNo, string ItemStr)  const
 
 
 
-// возращает вектор номеров валентностей в том порядке, как они идут в тексте
-// CRelSet& OutRelations - выходящие отношения, упорядоченные  по возрастанию  m_TargetNodeNo
-// возвращаемый CRelSet содержит номера валентностей, которые выражают OutRelations  в том же порядке
+// РІРѕР·СЂР°С‰Р°РµС‚ РІРµРєС‚РѕСЂ РЅРѕРјРµСЂРѕРІ РІР°Р»РµРЅС‚РЅРѕСЃС‚РµР№ РІ С‚РѕРј РїРѕСЂСЏРґРєРµ, РєР°Рє РѕРЅРё РёРґСѓС‚ РІ С‚РµРєСЃС‚Рµ
+// CRelSet& OutRelations - РІС‹С…РѕРґСЏС‰РёРµ РѕС‚РЅРѕС€РµРЅРёСЏ, СѓРїРѕСЂСЏРґРѕС‡РµРЅРЅС‹Рµ  РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ  m_TargetNodeNo
+// РІРѕР·РІСЂР°С‰Р°РµРјС‹Р№ CRelSet СЃРѕРґРµСЂР¶РёС‚ РЅРѕРјРµСЂР° РІР°Р»РµРЅС‚РЅРѕСЃС‚РµР№, РєРѕС‚РѕСЂС‹Рµ РІС‹СЂР°Р¶Р°СЋС‚ OutRelations  РІ С‚РѕРј Р¶Рµ РїРѕСЂСЏРґРєРµ
 CRelSet CRusSemStructure::GetValencyPlaces(long NodeNo, CRelSet& OutRelations) const 
 {
-	//валентности
+	//РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё
 	CRelSet Result;
 	OutRelations.m_RelsCount = 0;
 	const vector<CValency>& Vals = m_Nodes[NodeNo].m_Vals;
@@ -700,13 +700,13 @@ CRelSet CRusSemStructure::GetValencyPlaces(long NodeNo, CRelSet& OutRelations) c
 			vector<CValency>::const_iterator It = find(Vals.begin(),Vals.end(), m_Relations[i].m_Valency); 
 			if (It != Vals.end())
 			{
-				// устанавливаем узел в последовательность Nodes
+				// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СѓР·РµР» РІ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ Nodes
 				long j =0;
 				for (;j < OutRelations.m_RelsCount; j++)
 					if (m_Relations[OutRelations.m_Rels[j]].m_TargetNodeNo >= m_Relations[i].m_TargetNodeNo)
 						break;
 				OutRelations.Insert(j, i);
-				// добавляем валентность на то же место, что и узел
+				// РґРѕР±Р°РІР»СЏРµРј РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ РЅР° С‚Рѕ Р¶Рµ РјРµСЃС‚Рѕ, С‡С‚Рѕ Рё СѓР·РµР»
 				Result.Insert(j, It - Vals.begin());
 			};
 		};
@@ -714,7 +714,7 @@ CRelSet CRusSemStructure::GetValencyPlaces(long NodeNo, CRelSet& OutRelations) c
 	return Result;
 };
 
-// выдаем все пропущенные валентности
+// РІС‹РґР°РµРј РІСЃРµ РїСЂРѕРїСѓС‰РµРЅРЅС‹Рµ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё
 void CRusSemStructure::GetValencyMisses(long NodeNo, vector<CValency>& ValencyMisses) const 
 {
 	CRelSet OutRels;
@@ -772,7 +772,7 @@ void  CRusSemStructure::FindIf(long ClauseNo,
 					Nodes.push_back(i);
 };
 
-// выдает омоним слова  WordNo для текущей морфологической интерпретации клаузы ClauseNo
+// РІС‹РґР°РµС‚ РѕРјРѕРЅРёРј СЃР»РѕРІР°  WordNo РґР»СЏ С‚РµРєСѓС‰РµР№ РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРѕР№ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё РєР»Р°СѓР·С‹ ClauseNo
 bool   CRusSemStructure::GetHomonym (long ClauseNo, long WordNo, CSynHomonym& H) const
 {
 	long AbstrClauseNo = m_piSent->m_vectorPrClauseNo[ClauseNo];
@@ -785,7 +785,7 @@ bool   CRusSemStructure::GetHomonym (long ClauseNo, long WordNo, CSynHomonym& H)
 };
 
 
-// проверяет часть речи узла
+// РїСЂРѕРІРµСЂСЏРµС‚ С‡Р°СЃС‚СЊ СЂРµС‡Рё СѓР·Р»Р°
 bool   CRusSemStructure::HasRichPOS (const CRusSemNode& N, size_t POS) const
 {
 	return (N.m_RichPoses & (1<<POS)) > 0;
@@ -847,8 +847,8 @@ bool CRusSemStructure::IsCompAdj (long NodeNo) const
 					||  HasRichPOS (NodeNo, NUMERAL)
 				);
 	/*
-	Нам нужно считать сравнительные числительные  MUA, для того чтобы				фраза "Я хочу больше тебя" переводилась бы "I want more than you",
-				а  не "I want bigger than you"
+	РќР°Рј РЅСѓР¶РЅРѕ СЃС‡РёС‚Р°С‚СЊ СЃСЂР°РІРЅРёС‚РµР»СЊРЅС‹Рµ С‡РёСЃР»РёС‚РµР»СЊРЅС‹Рµ  MUA, РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹				С„СЂР°Р·Р° "РЇ С…РѕС‡Сѓ Р±РѕР»СЊС€Рµ С‚РµР±СЏ" РїРµСЂРµРІРѕРґРёР»Р°СЃСЊ Р±С‹ "I want more than you",
+				Р°  РЅРµ "I want bigger than you"
 		*/
 };
 bool CRusSemStructure::IsPrep(long NodeNo) const 
@@ -871,7 +871,7 @@ bool CRusSemStructure::IsSimpleNounGroupUnderPrep(long NodeNo) const
 							m_Nodes[NodeNo].m_Words[0].HasPOS(NOUN) 
 						|| m_Nodes[NodeNo].m_Words[0].HasPOS(PRONOUN) 
 						|| m_Nodes[NodeNo].m_Words[0].m_ILE
-						|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "КОТОРЫЙ")
+						|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "РљРћРўРћР Р«Р™")
 						)
 				)
 					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_ADJ)
@@ -938,24 +938,24 @@ bool	CRusSemNode::IsILENode() const
 	return (m_MainWordNo != -1) &&  m_Words[m_MainWordNo].m_ILE; 
 };
 
-// проверяет, стоит ли после последнего слова узла знак препинания
+// РїСЂРѕРІРµСЂСЏРµС‚, СЃС‚РѕРёС‚ Р»Рё РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµРіРѕ СЃР»РѕРІР° СѓР·Р»Р° Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ
 bool CRusSemNode::HasPostPunct(BYTE punct_char) const 
 {
 	return (m_Words.size() > 0) && (m_Words[m_Words.size() - 1].m_PostPuncts.find(punct_char) != -1);
 };
-// проверяет, стоит ли сразу же после последнего слова узла запятая
+// РїСЂРѕРІРµСЂСЏРµС‚, СЃС‚РѕРёС‚ Р»Рё СЃСЂР°Р·Сѓ Р¶Рµ РїРѕСЃР»Рµ РїРѕСЃР»РµРґРЅРµРіРѕ СЃР»РѕРІР° СѓР·Р»Р° Р·Р°РїСЏС‚Р°СЏ
 bool CRusSemNode::HaveCommaAfter() const { return HasPostPunct(',');	};
 
 
-// дает  номер статьи для текущей интерпреции для проверки SF
+// РґР°РµС‚  РЅРѕРјРµСЂ СЃС‚Р°С‚СЊРё РґР»СЏ С‚РµРєСѓС‰РµР№ РёРЅС‚РµСЂРїСЂРµС†РёРё РґР»СЏ РїСЂРѕРІРµСЂРєРё SF
 WORD         CRusSemNode::GetSemCorrectUnitNo() const 
 { 
 	return (m_CurrInterp == -1)  ? ErrUnitNo : m_Interps[m_CurrInterp].GetSemCorrectUnitNo();
 };
 
-// проверяет, что валентности не являются несовместными
-// (здесь используется слот m_RelationId, в котором хранится уникальный номер валентности
-// в графе, который строит функция СRusSemStructure::IndexRelations)
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё РЅРµ СЏРІР»СЏСЋС‚СЃСЏ РЅРµСЃРѕРІРјРµСЃС‚РЅС‹РјРё
+// (Р·РґРµСЃСЊ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ СЃР»РѕС‚ m_RelationId, РІ РєРѕС‚РѕСЂРѕРј С…СЂР°РЅРёС‚СЃСЏ СѓРЅРёРєР°Р»СЊРЅС‹Р№ РЅРѕРјРµСЂ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё
+// РІ РіСЂР°С„Рµ, РєРѕС‚РѕСЂС‹Р№ СЃС‚СЂРѕРёС‚ С„СѓРЅРєС†РёСЏ РЎRusSemStructure::IndexRelations)
 bool CRusSemNode::RelsCanBeTogether(const long RelationId1,  const long RelationId2) const
 {
 	if (RelationId1 == RelationId2) return false;
@@ -970,13 +970,13 @@ bool CRusSemNode::RelsCanBeTogether(const long RelationId1,  const long Relation
 			return false;
 	return true;
 };
-// является ли данный узел кавычкой
+// СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» РєР°РІС‹С‡РєРѕР№
 bool   CRusSemNode::IsOneQuoteMark () const 
 {
 	return IsPrimitive() && GetWord(0).IsQuoteMark();
 };
 
-// является ли данный узел тире
+// СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» С‚РёСЂРµ
 bool   CRusSemNode::IsOneDash () const 
 {
 	return IsPrimitive() && (GetWord(0).m_Word == "-");
@@ -986,7 +986,7 @@ bool CRusSemNode::IsMNA_ButNotCHEM () const
 {
 		return (m_NodeType == MNA) && (m_MNAType != CHEMOborot) ;
 };
-// сначала лежат IsWordContainer(),потом IsAbstract(), и для каждой клаузы отдельно
+// СЃРЅР°С‡Р°Р»Р° Р»РµР¶Р°С‚ IsWordContainer(),РїРѕС‚РѕРј IsAbstract(), Рё РґР»СЏ РєР°Р¶РґРѕР№ РєР»Р°СѓР·С‹ РѕС‚РґРµР»СЊРЅРѕ
 bool CRusSemNode::operator < (const CRusSemNode& Node) const
 {
     if (m_ClauseNo  !=  Node.m_ClauseNo)
@@ -1007,10 +1007,10 @@ bool CRusSemNode::operator < (const CRusSemNode& Node) const
 bool CRusSemNode::IsAnaphoricPronoun () const
 {
 	return (     IsPrimitive() 
-		&& (    (m_Words[0].m_Lemma == "ОН")
-		    || (m_Words[0].m_Lemma == "ОНА")
-            || (m_Words[0].m_Lemma == "ОНО")
-			|| (m_Words[0].m_Lemma == "ОНИ")
+		&& (    (m_Words[0].m_Lemma == "РћРќ")
+		    || (m_Words[0].m_Lemma == "РћРќРђ")
+            || (m_Words[0].m_Lemma == "РћРќРћ")
+			|| (m_Words[0].m_Lemma == "РћРќР")
 			)
 		);
 };
@@ -1117,13 +1117,13 @@ UINT CRusSemWord::GetRusRichPoses () const
 {
     UINT Poses = m_Poses;
 
-	if (m_Lemma == "ЛИ")
+	if (m_Lemma == "Р›Р")
 		Poses &= ~(1 << CONJ);
 
-	if (    (m_Lemma == "ПЕРВОЕ")
-		|| (m_Lemma == "ВТОРОЕ")
-		|| (m_Lemma == "ТРЕТЬЕ")
-		|| (m_Lemma == "ЧЕТВЕРТОЕ")
+	if (    (m_Lemma == "РџР•Р Р’РћР•")
+		|| (m_Lemma == "Р’РўРћР РћР•")
+		|| (m_Lemma == "РўР Р•РўР¬Р•")
+		|| (m_Lemma == "Р§Р•РўР’Р•Р РўРћР•")
 		)
 		Poses |= (1 << NUMERAL_P);
 
@@ -1161,7 +1161,7 @@ CRusMorphHomonym::CRusMorphHomonym(const CRusSemWord& X)
 
 
 //=========================
-const string PossPronoun [] = {"НАШ", "ВАШ", "МОЙ", "ТВОЙ", "ЕЕ", "ЕГО", "ИХ"};
+const string PossPronoun [] = {"РќРђРЁ", "Р’РђРЁ", "РњРћР™", "РўР’РћР™", "Р•Р•", "Р•Р“Рћ", "РРҐ"};
 bool IsPossesivePronoun(const CSemNode& N)
 {
 	if (!N.IsPrimitive() ) return false;
@@ -1174,8 +1174,8 @@ bool HasReflexiveSuffix (const string& s)
 	if ( s.length () <  3)   return false;
 	string suffix  = s.substr (s.length() - 2);
 	EngRusMakeUpper(suffix);
-	return   (    ( suffix == "СЯ")
-				|| ( suffix == "СЬ")
+	return   (    ( suffix == "РЎРЇ")
+				|| ( suffix == "РЎР¬")
 				);
 };
 
@@ -1211,7 +1211,7 @@ TCortege GetInstrObj (const CRossHolder* RossDoc)
 
 
 // =====================  CRusSemClause
-// освобождает номер слова WordNo (на это место будет поставлено новое слово)
+// РѕСЃРІРѕР±РѕР¶РґР°РµС‚ РЅРѕРјРµСЂ СЃР»РѕРІР° WordNo (РЅР° СЌС‚Рѕ РјРµСЃС‚Рѕ Р±СѓРґРµС‚ РїРѕСЃС‚Р°РІР»РµРЅРѕ РЅРѕРІРѕРµ СЃР»РѕРІРѕ)
 void CRusSemClause::FreeWordNo (long WordNo)
 {
 	if (m_SubjectWordNo >= WordNo) m_SubjectWordNo++;
@@ -1236,7 +1236,7 @@ CRusSemClause::CRusSemClause() : CSemClause()
 	m_BestPONodesCount = 0;
 	m_bSaveClauseHasNegationInVerb = false;
 };
-// выдает число узлов клаузы
+// РІС‹РґР°РµС‚ С‡РёСЃР»Рѕ СѓР·Р»РѕРІ РєР»Р°СѓР·С‹
 long CRusSemClause::GetNodesCount() const 
 { 
 	return  m_EndNodeNo - m_BeginNodeNo;
@@ -1275,7 +1275,7 @@ void CRusSemClause::AddFlagToGramMatrix (long NodeNo1, long NodeNo2, BYTE Value)
 	m_GrammarMatrix[nd2][nd1] |= Value;
 };
 
-// выдает значение позиционных оценок для пары узлов 
+// РІС‹РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїРѕР·РёС†РёРѕРЅРЅС‹С… РѕС†РµРЅРѕРє РґР»СЏ РїР°СЂС‹ СѓР·Р»РѕРІ 
 const BYTE CRusSemClause::GetGramMatrix (long NodeNo1, long NodeNo2) const 
 {
 	int nd1 = NodeNo1 - m_BeginNodeNo;
@@ -1285,7 +1285,7 @@ const BYTE CRusSemClause::GetGramMatrix (long NodeNo1, long NodeNo2) const
 	return m_GrammarMatrix[nd1][nd2];
 };
 
-// сохраняет и восстанавливает ссылки на узлы 
+// СЃРѕС…СЂР°РЅСЏРµС‚ Рё РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЃСЃС‹Р»РєРё РЅР° СѓР·Р»С‹ 
 void CRusSemClause::SaveNodesReferences() 
 {
 	m_NodeRef.push(m_BeginNodeNo);

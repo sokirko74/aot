@@ -6,9 +6,9 @@
 #include "RusFormatCaller.h"
 
 
-// Примеры:
-// самая красивая
-// такая большая
+// РџСЂРёРјРµСЂС‹:
+// СЃР°РјР°СЏ РєСЂР°СЃРёРІР°СЏ
+// С‚Р°РєР°СЏ Р±РѕР»СЊС€Р°СЏ
 
 bool CRusFormatCaller::format_for_modif_adj_groups (CGroup& G)
 {
@@ -38,14 +38,14 @@ bool CRusFormatCaller::format_for_modif_adj_groups (CGroup& G)
 }
 
 
-// Примеры:
-//    новый стол // род, число, падеж
-//    красная кровать // род, число, падеж
-//    большие дома // число, падеж
-//    очень красивый стол
-//    большой и очень красивый стол
-//    новые и совсем ненужные столы и стулья
-//    моя вторая мама
+// РџСЂРёРјРµСЂС‹:
+//    РЅРѕРІС‹Р№ СЃС‚РѕР» // СЂРѕРґ, С‡РёСЃР»Рѕ, РїР°РґРµР¶
+//    РєСЂР°СЃРЅР°СЏ РєСЂРѕРІР°С‚СЊ // СЂРѕРґ, С‡РёСЃР»Рѕ, РїР°РґРµР¶
+//    Р±РѕР»СЊС€РёРµ РґРѕРјР° // С‡РёСЃР»Рѕ, РїР°РґРµР¶
+//    РѕС‡РµРЅСЊ РєСЂР°СЃРёРІС‹Р№ СЃС‚РѕР»
+//    Р±РѕР»СЊС€РѕР№ Рё РѕС‡РµРЅСЊ РєСЂР°СЃРёРІС‹Р№ СЃС‚РѕР»
+//    РЅРѕРІС‹Рµ Рё СЃРѕРІСЃРµРј РЅРµРЅСѓР¶РЅС‹Рµ СЃС‚РѕР»С‹ Рё СЃС‚СѓР»СЊСЏ
+//    РјРѕСЏ РІС‚РѕСЂР°СЏ РјР°РјР°
 
 bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 {
@@ -53,18 +53,18 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	if (FirstChild.m_iFirstWord != G.m_iFirstWord) return false;
 	int i =  get_main_word_in_group(FirstChild);
 	if (!is_left_noun_modifier (Wi)) return false;
-	if( Wi.is_lemma("КОТОРЫЙ") )
+	if( Wi.is_lemma("РљРћРўРћР Р«Р™") )
 	  		return false;
 	string debug_str;
-	bool bFound_VSE = false; //слово "всe" начинает группу
-	bool bFoundParticiple = false; //нашли дст., пе, причастие
-	bool bAdjShouldBeInNominativOrGenitiv = false; //чтобы собрать "две красивых девочки"
+	bool bFound_VSE = false; //СЃР»РѕРІРѕ "РІСЃe" РЅР°С‡РёРЅР°РµС‚ РіСЂСѓРїРїСѓ
+	bool bFoundParticiple = false; //РЅР°С€Р»Рё РґСЃС‚., РїРµ, РїСЂРёС‡Р°СЃС‚РёРµ
+	bool bAdjShouldBeInNominativOrGenitiv = false; //С‡С‚РѕР±С‹ СЃРѕР±СЂР°С‚СЊ "РґРІРµ РєСЂР°СЃРёРІС‹С… РґРµРІРѕС‡РєРё"
 	//gleiche_for_small_numbers
 	int NounGroupNo;
 
 	if(		Wi.get_upper_word()
-		&&	!strcmp(Wi.get_upper_word(), "ВСЕ")
-		&&    Wi.is_lemma("ВЕСЬ")
+		&&	!strcmp(Wi.get_upper_word(), "Р’РЎР•")
+		&&    Wi.is_lemma("Р’Р•РЎР¬")
 		&&	(get_maximal_group_size(i) == 1)
 		)
 	bFound_VSE = true;
@@ -80,19 +80,19 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
   
 	if ((G.m_iFirstWord+1) >= sent.size()) return false;
 
-	// собираем группу "сам себя"
+	// СЃРѕР±РёСЂР°РµРј РіСЂСѓРїРїСѓ "СЃР°Рј СЃРµР±СЏ"
 	int j;
-	if (    Wi.is_lemma( "САМ") )
+	if (    Wi.is_lemma( "РЎРђРњ") )
 	{
 		G.m_iLastWord = get_maximal_group(G.m_iFirstWord).m_iLastWord + 1; 
 		if (G.m_iLastWord < sent.size())
 		{
 			NounGroupNo = get_maximal_group_no(G.m_iLastWord);		
             j = (NounGroupNo == -1 ) ? G.m_iLastWord : GetGroups()[NounGroupNo].m_MainWordNo;
-			if (   Wj.is_lemma("СЕБЯ") 
-				|| Wj.is_lemma("ТЫ") 
-				|| Wj.is_lemma("Я") 
-				|| Wj.is_lemma("МЫ")  // "сами мы не местные"
+			if (   Wj.is_lemma("РЎР•Р‘РЇ") 
+				|| Wj.is_lemma("РўР«") 
+				|| Wj.is_lemma("РЇ") 
+				|| Wj.is_lemma("РњР«")  // "СЃР°РјРё РјС‹ РЅРµ РјРµСЃС‚РЅС‹Рµ"
 				)
 				if ((Wi.GetGrammems() & Wj.GetGrammems() & rAllCases) > 0)
 				{
@@ -104,9 +104,9 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	};
 	   
 
-	// нахождение последовательности П1 ... Пn С, где Пi - прилагательное или группа прилагательных,
-	// а С - ИГ.
-	// Согласование по падежу, числу и роду будет проверяться в другом цикле.
+	// РЅР°С…РѕР¶РґРµРЅРёРµ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё Рџ1 ... Рџn РЎ, РіРґРµ Рџi - РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ РёР»Рё РіСЂСѓРїРїР° РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹С…,
+	// Р° РЎ - РР“.
+	// РЎРѕРіР»Р°СЃРѕРІР°РЅРёРµ РїРѕ РїР°РґРµР¶Сѓ, С‡РёСЃР»Сѓ Рё СЂРѕРґСѓ Р±СѓРґРµС‚ РїСЂРѕРІРµСЂСЏС‚СЊСЃСЏ РІ РґСЂСѓРіРѕРј С†РёРєР»Рµ.
 	G.SetGrammems ( Wi.GetGrammems() );
 	for (	G.m_iLastWord = get_maximal_group(G.m_iFirstWord).m_iLastWord + 1; 
 			G.m_iLastWord < sent.size(); 
@@ -117,7 +117,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 			int i_gr = get_maximal_group_no(G.m_iLastWord);		
             i = (i_gr == -1) ? G.m_iLastWord:GetGroups()[i_gr].m_MainWordNo;
 
-			if( Wi.is_lemma("КОТОРЫЙ") )
+			if( Wi.is_lemma("РљРћРўРћР Р«Р™") )
 	  			return false;
 
 			if( i_gr != -1 ) 
@@ -147,16 +147,16 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 		G.m_iLastWord = get_maximal_group(G.m_iLastWord).m_iLastWord;
 
 	/*
-		если дошли до конца или в конце не стоит существительного 
-		тогда пробуем собрать группу "все это" ("это" - не является синтаксическим cуществительным)
-			или группу "все лишнее"
+		РµСЃР»Рё РґРѕС€Р»Рё РґРѕ РєРѕРЅС†Р° РёР»Рё РІ РєРѕРЅС†Рµ РЅРµ СЃС‚РѕРёС‚ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ 
+		С‚РѕРіРґР° РїСЂРѕР±СѓРµРј СЃРѕР±СЂР°С‚СЊ РіСЂСѓРїРїСѓ "РІСЃРµ СЌС‚Рѕ" ("СЌС‚Рѕ" - РЅРµ СЏРІР»СЏРµС‚СЃСЏ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРј cСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рј)
+			РёР»Рё РіСЂСѓРїРїСѓ "РІСЃРµ Р»РёС€РЅРµРµ"
 	*/
 	if (G.m_iLastWord >= sent.size() || !Wi.is_syn_noun())
 	{
-		//  если самое первое слово ИГ было "всe"
+		//  РµСЃР»Рё СЃР°РјРѕРµ РїРµСЂРІРѕРµ СЃР»РѕРІРѕ РР“ Р±С‹Р»Рѕ "РІСЃe"
 		if( bFound_VSE )
 		{
-			// возвращаемся на одно слово назад
+			// РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ РЅР° РѕРґРЅРѕ СЃР»РѕРІРѕ РЅР°Р·Р°Рґ
 			G.m_iLastWord--;	
 			if( G.size() != 2 )
 				return false;
@@ -191,8 +191,8 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 			return false;
   
 
-	// Берем группу, которая могла быть построена на найденном существительном,
-	// группа может прийти из тезауруса или ЧИСЛ-СУЩ, например: "первые пять человек",
+	// Р‘РµСЂРµРј РіСЂСѓРїРїСѓ, РєРѕС‚РѕСЂР°СЏ РјРѕРіР»Р° Р±С‹С‚СЊ РїРѕСЃС‚СЂРѕРµРЅР° РЅР° РЅР°Р№РґРµРЅРЅРѕРј СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРј,
+	// РіСЂСѓРїРїР° РјРѕР¶РµС‚ РїСЂРёР№С‚Рё РёР· С‚РµР·Р°СѓСЂСѓСЃР° РёР»Рё Р§РРЎР›-РЎРЈР©, РЅР°РїСЂРёРјРµСЂ: "РїРµСЂРІС‹Рµ РїСЏС‚СЊ С‡РµР»РѕРІРµРє",
 
 	size_t FirstWordOfNounGroup;  
 	NounGroupNo = get_maximal_group_no(i);
@@ -207,10 +207,10 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 		G.SetGrammems( Wi.GetGrammems() );
 	};
 
-	if ( sent[G.m_iFirstWord].HasFlag(fl_digit) && sent[G.m_iFirstWord].HasPOS(NUMERAL_P) && sent[FirstWordOfNounGroup].HasFlag(fl_ile) ) // "вызвать 5 API"
+	if ( sent[G.m_iFirstWord].HasFlag(fl_digit) && sent[G.m_iFirstWord].HasPOS(NUMERAL_P) && sent[FirstWordOfNounGroup].HasFlag(fl_ile) ) // "РІС‹Р·РІР°С‚СЊ 5 API"
 		return false;
 
-	// Согласование по падежу, числу и роду проверяться здесь.
+	// РЎРѕРіР»Р°СЃРѕРІР°РЅРёРµ РїРѕ РїР°РґРµР¶Сѓ, С‡РёСЃР»Сѓ Рё СЂРѕРґСѓ РїСЂРѕРІРµСЂСЏС‚СЊСЃСЏ Р·РґРµСЃСЊ.
 	for (j = G.m_iFirstWord; j <  FirstWordOfNounGroup; j = get_maximal_group(j).m_iLastWord + 1)
 	{
 		const CGroup& LastHost = get_maximal_group(j);
@@ -223,7 +223,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 
 		if ( !bAdjShouldBeInNominativOrGenitiv )
 		{
-			//  проверяем согласование между прилагательным и существительным
+			//  РїСЂРѕРІРµСЂСЏРµРј СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рј Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рј
 			QWORD CommonGrams = GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(), sent[MainWordNo].GetGramcodes()); 
 			if (!CommonGrams)
 				if	(		NounGroupNo != -1 
@@ -237,9 +237,9 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 				
 
 
-			//  если главный элемент в ПРИЛ_СУЩ является однородным рядом, тогда нужно проверить, что
-			//  данное прилагательное согласовано со всеми членами однородного ряда по падежу (по числу и роду может быть не согласовано)
-			//  иначе вся фразы "Советской гавани, он" покрывается одним ПРИЛ_СУЩ 
+			//  РµСЃР»Рё РіР»Р°РІРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІ РџР РР›_РЎРЈР© СЏРІР»СЏРµС‚СЃСЏ РѕРґРЅРѕСЂРѕРґРЅС‹Рј СЂСЏРґРѕРј, С‚РѕРіРґР° РЅСѓР¶РЅРѕ РїСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ
+			//  РґР°РЅРЅРѕРµ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРѕ СЃРѕ РІСЃРµРјРё С‡Р»РµРЅР°РјРё РѕРґРЅРѕСЂРѕРґРЅРѕРіРѕ СЂСЏРґР° РїРѕ РїР°РґРµР¶Сѓ (РїРѕ С‡РёСЃР»Сѓ Рё СЂРѕРґСѓ РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРѕ)
+			//  РёРЅР°С‡Рµ РІСЃСЏ С„СЂР°Р·С‹ "РЎРѕРІРµС‚СЃРєРѕР№ РіР°РІР°РЅРё, РѕРЅ" РїРѕРєСЂС‹РІР°РµС‚СЃСЏ РѕРґРЅРёРј РџР РР›_РЎРЈР© 
 			if (NounGroupNo != -1)
 				if (GetGroups()[NounGroupNo].m_GroupType == SIMILAR_NOUN_GROUPS)
 					if ( (Wi.GetGrammems() & GetGroups()[NounGroupNo].GetGrammems() & rAllCases) == 0)
@@ -273,7 +273,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	debug_str = GetGramTab()->GrammemsToStr(G.GetGrammems());
 	debug_str = GetGramTab()->GrammemsToStr(W2.GetGrammems());
 
-	G.m_Cause = "ИГ, согласованная по роду, числу и падежу";
+	G.m_Cause = "РР“, СЃРѕРіР»Р°СЃРѕРІР°РЅРЅР°СЏ РїРѕ СЂРѕРґСѓ, С‡РёСЃР»Сѓ Рё РїР°РґРµР¶Сѓ";
 
 	if (is_morph_pronoun(Wi)) return false; 
 
@@ -389,7 +389,7 @@ bool  CRusFormatCaller::format_for_partic_clause(CGroup& G)
 	return false;	
 };
 
-bool  CRusFormatCaller::format_for_whose_clause(CGroup& G) //правило построения группы с придаточным определительным;	
+bool  CRusFormatCaller::format_for_whose_clause(CGroup& G) //РїСЂР°РІРёР»Рѕ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂСѓРїРїС‹ СЃ РїСЂРёРґР°С‚РѕС‡РЅС‹Рј РѕРїСЂРµРґРµР»РёС‚РµР»СЊРЅС‹Рј;	
 {
 	int j;
 	int i = get_main_word (G.m_iFirstWord);

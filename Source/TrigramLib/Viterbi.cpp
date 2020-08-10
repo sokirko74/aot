@@ -113,7 +113,7 @@ void CTrigramModel::ViterbiForward(const vector<string>& words, vector<CViterbiI
 	for (size_t WordNo=0; WordNo<WordsCount; WordNo++)
 	{
 		CViterbiInfo& I = Triplet[WordNo];
-		// можно сделать кеш по 10000 самых частотных слов
+		// РјРѕР¶РЅРѕ СЃРґРµР»Р°С‚СЊ РєРµС€ РїРѕ 10000 СЃР°РјС‹С… С‡Р°СЃС‚РѕС‚РЅС‹С… СЃР»РѕРІ
 		CDictionarySearch DS = find_word(words[WordNo]);
 			
 		I.m_LexicalProbs = DS.m_PossibleWordTags;
@@ -167,7 +167,7 @@ void CTrigramModel::ViterbiForward(const vector<string>& words, vector<CViterbiI
 						Triplet[WordNo+1].SetProb(PrevTag,CurrTag, new_value);
 					}
 
-					// сохраняем локальные максимумы
+					// СЃРѕС…СЂР°РЅСЏРµРј Р»РѕРєР°Р»СЊРЅС‹Рµ РјР°РєСЃРёРјСѓРјС‹
 					if (m_bUseSecondLocalMax)
                     {
 						if (WordNo >= 2)
@@ -344,14 +344,14 @@ bool CTrigramModel::testing(string FileName) const
 			
 			WORD ref = (WORD)refs[i];
 
-			// не берем в расчет знаки препинания и слова, записанные латиницей					
+			// РЅРµ Р±РµСЂРµРј РІ СЂР°СЃС‡РµС‚ Р·РЅР°РєРё РїСЂРµРїРёРЅР°РЅРёСЏ Рё СЃР»РѕРІР°, Р·Р°РїРёСЃР°РЅРЅС‹Рµ Р»Р°С‚РёРЅРёС†РµР№					
 			if (!CheckLanguage(words[i], m_Language))
 				continue;
 
 			if (m_bCheckOnlyAmbiguosWords)
 			{
-				// если  указана опция --check-only-amb-words,
-				// тогда берем в расчет только слова, у которых больше одной леммы
+				// РµСЃР»Рё  СѓРєР°Р·Р°РЅР° РѕРїС†РёСЏ --check-only-amb-words,
+				// С‚РѕРіРґР° Р±РµСЂРµРј РІ СЂР°СЃС‡РµС‚ С‚РѕР»СЊРєРѕ СЃР»РѕРІР°, Сѓ РєРѕС‚РѕСЂС‹С… Р±РѕР»СЊС€Рµ РѕРґРЅРѕР№ Р»РµРјРјС‹
 				vector<CFormInfo> Paradigms;
 				string WordStr = words[i];
 				m_pLemmatizer->CreateParadigmCollection(false, WordStr, is_upper_alpha((BYTE)WordStr[0], m_Language), true, Paradigms);

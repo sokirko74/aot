@@ -161,10 +161,10 @@ void CEngSemStructure::CreateEnglNode(CEngInterp UnitInterp, CEngSemNode& engNod
 
 	CEngSemWord semWord;
 	string strEngLemma = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
-    // если узел пришел из словосочетаний или оборотов, но не является английским словосочетанием 
-	// или английским оборотом, тогда он был переведен словарной статьей из АОССа, значит 
-	// такой узел должен стать примитивным, а  в русской структуре он им не был.
-	// Например, русское словосочетание "сам себя" переводится в примитивный узел "#oneself"
+    // РµСЃР»Рё СѓР·РµР» РїСЂРёС€РµР» РёР· СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№ РёР»Рё РѕР±РѕСЂРѕС‚РѕРІ, РЅРѕ РЅРµ СЏРІР»СЏРµС‚СЃСЏ Р°РЅРіР»РёР№СЃРєРёРј СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРµРј 
+	// РёР»Рё Р°РЅРіР»РёР№СЃРєРёРј РѕР±РѕСЂРѕС‚РѕРј, С‚РѕРіРґР° РѕРЅ Р±С‹Р» РїРµСЂРµРІРµРґРµРЅ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµР№ РёР· РђРћРЎРЎР°, Р·РЅР°С‡РёС‚ 
+	// С‚Р°РєРѕР№ СѓР·РµР» РґРѕР»Р¶РµРЅ СЃС‚Р°С‚СЊ РїСЂРёРјРёС‚РёРІРЅС‹Рј, Р°  РІ СЂСѓСЃСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ РѕРЅ РёРј РЅРµ Р±С‹Р».
+	// РќР°РїСЂРёРјРµСЂ, СЂСѓСЃСЃРєРѕРµ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРµ "СЃР°Рј СЃРµР±СЏ" РїРµСЂРµРІРѕРґРёС‚СЃСЏ РІ РїСЂРёРјРёС‚РёРІРЅС‹Р№ СѓР·РµР» "#oneself"
 	bool bRusWasCoplex = (rusNode.GetType() == CollocRoss) ||  (rusNode.GetType() == OborRoss);
 			    
 	for(int i = 0 ; i < rusNode.GetWordsSize() ; i++ )
@@ -184,7 +184,7 @@ void CEngSemStructure::CreateEnglNode(CEngInterp UnitInterp, CEngSemNode& engNod
 				
 			}
 
-			// копируем значение слота пассивной интерпретации
+			// РєРѕРїРёСЂСѓРµРј Р·РЅР°С‡РµРЅРёРµ СЃР»РѕС‚Р° РїР°СЃСЃРёРІРЅРѕР№ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё
 			CDictUnitInterp I(UnitInterp);
 			if (rusNode.IsPassiveVerb())
 					I.m_bPassiveForm = true;
@@ -346,7 +346,7 @@ void CEngSemStructure::CreateHaveSemNode(CEngSemNode& newNode, int& iSubjPattern
 
 
 
-// Функция SetPositionOfActantInColloc устанавливает позицию актанта словосочетания.
+// Р¤СѓРЅРєС†РёСЏ SetPositionOfActantInColloc СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїРѕР·РёС†РёСЋ Р°РєС‚Р°РЅС‚Р° СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ.
 void CEngSemStructure::SetPositionOfActantInColloc(CEngSemRelation& engRel, CSemPattern& semPattern, int iEngNode)
 {
 	CEngSemNode& engNode = m_Nodes[iEngNode];

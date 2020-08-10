@@ -21,22 +21,22 @@ struct CSelectiveWord
 const int g_iSelectiveWordsCount = 6;
 const CSelectiveWord g_strSelectiveWords[g_iSelectiveWordsCount] =
 {
-	CSelectiveWord("КАКОЙ", rAllNumbers ),
-	CSelectiveWord("МНОГИЕ",(1<<rPlural) ),
-	CSelectiveWord("НЕКОТОРЫЕ", (1<<rPlural)),  // ?*"некоторый  из нас"
-	CSelectiveWord("КАЖДЫЙ",(1<<rSingular)),  // "???каждые из нас"
-	CSelectiveWord("ОДИН", rAllNumbers),   
-	CSelectiveWord("ЛЮБОЙ", rAllNumbers)   
+	CSelectiveWord("РљРђРљРћР™", rAllNumbers ),
+	CSelectiveWord("РњРќРћР“РР•",(1<<rPlural) ),
+	CSelectiveWord("РќР•РљРћРўРћР Р«Р•", (1<<rPlural)),  // ?*"РЅРµРєРѕС‚РѕСЂС‹Р№  РёР· РЅР°СЃ"
+	CSelectiveWord("РљРђР–Р”Р«Р™",(1<<rSingular)),  // "???РєР°Р¶РґС‹Рµ РёР· РЅР°СЃ"
+	CSelectiveWord("РћР”РРќ", rAllNumbers),   
+	CSelectiveWord("Р›Р®Р‘РћР™", rAllNumbers)   
 };
 
 /*
- Например:
-  многие из этих людей
-  одной из великих реформ
-  второй из нас 
-  какую из вас он выберет 
-  самый красивый из нас
-  красивейший из нас 
+ РќР°РїСЂРёРјРµСЂ:
+  РјРЅРѕРіРёРµ РёР· СЌС‚РёС… Р»СЋРґРµР№
+  РѕРґРЅРѕР№ РёР· РІРµР»РёРєРёС… СЂРµС„РѕСЂРј
+  РІС‚РѕСЂРѕР№ РёР· РЅР°СЃ 
+  РєР°РєСѓСЋ РёР· РІР°СЃ РѕРЅ РІС‹Р±РµСЂРµС‚ 
+  СЃР°РјС‹Р№ РєСЂР°СЃРёРІС‹Р№ РёР· РЅР°СЃ
+  РєСЂР°СЃРёРІРµР№С€РёР№ РёР· РЅР°СЃ 
 */
 bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 {
@@ -53,11 +53,11 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 			if( first_word_plm.is_lemma(g_strSelectiveWords[i].m_Lemma) )
 				break;
 
-		//  если совпало с одним словом из перечня
+		//  РµСЃР»Рё СЃРѕРІРїР°Р»Рѕ СЃ РѕРґРЅРёРј СЃР»РѕРІРѕРј РёР· РїРµСЂРµС‡РЅСЏ
 		if( i < g_iSelectiveWordsCount)
 		{	
 			/*
-			 проверяем число 
+			 РїСЂРѕРІРµСЂСЏРµРј С‡РёСЃР»Рѕ 
 			*/
 			if ( (first_word_plm.GetGrammems() & g_strSelectiveWords[i].m_Numder) == 0)
 				return false;
@@ -66,8 +66,8 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 		}
 		else
 			/*
-			 если это прилагательное, которые заканчивается на "ШИЙ" 
-			 (синтетическая превосходная степень)
+			 РµСЃР»Рё СЌС‚Рѕ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ, РєРѕС‚РѕСЂС‹Рµ Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РЅР° "РЁРР™" 
+			 (СЃРёРЅС‚РµС‚РёС‡РµСЃРєР°СЏ РїСЂРµРІРѕСЃС…РѕРґРЅР°СЏ СЃС‚РµРїРµРЅСЊ)
 			*/
         if (first_word_plm.HasPOS(ADJ_FULL) )
 		{
@@ -76,20 +76,20 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 				if( strlen(lemma) < 4)
 					return false;
 				lemma = lemma + ( strlen(lemma) - 3);
-				if( strcmp(lemma,"ШИЙ") )
+				if( strcmp(lemma,"РЁРР™") )
 					return false;
 				next_word = G.m_iFirstWord + 1;
 		}
 		else
 			/*
-			 если это порядковое чилительное 
+			 РµСЃР»Рё СЌС‚Рѕ РїРѕСЂСЏРґРєРѕРІРѕРµ С‡РёР»РёС‚РµР»СЊРЅРѕРµ 
 			*/
-		if  (first_word_plm.HasPOS(NUMERAL_P) || (first_word_plm.HasPOS(NUMERAL) ) )//42 из наиболее важных стран
+		if  (first_word_plm.HasPOS(NUMERAL_P) || (first_word_plm.HasPOS(NUMERAL) ) )//42 РёР· РЅР°РёР±РѕР»РµРµ РІР°Р¶РЅС‹С… СЃС‚СЂР°РЅ
 		{
 	  		next_word = G.m_iFirstWord + 1;
 		}
 		else
-			// "Двое  из нас"
+			// "Р”РІРѕРµ  РёР· РЅР°СЃ"
 			if (CanNumeralBeNoun (first_word_plm.get_lemma()))
 				{
 	  				next_word = G.m_iFirstWord + 1;
@@ -98,14 +98,14 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 				next_word = sent.size();
 	}
 	 /*
-	  если это случаи "самый красивый из нас"
+	  РµСЃР»Рё СЌС‚Рѕ СЃР»СѓС‡Р°Рё "СЃР°РјС‹Р№ РєСЂР°СЃРёРІС‹Р№ РёР· РЅР°СЃ"
 	 */ 
 	else
 	{
 		if( GetGroups()[gr_num].m_GroupType != MODIF_ADJ )
 			return false;
 
-		if( !first_word_plm.is_lemma("САМЫЙ") )
+		if( !first_word_plm.is_lemma("РЎРђРњР«Р™") )
 			return false;
 		next_word = GetGroups()[gr_num].m_iLastWord + 1;
 	}
@@ -114,7 +114,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 			return false;
 
 	/*
-	 дальше должна идти предложная группы с предлогом из+Р
+	 РґР°Р»СЊС€Рµ РґРѕР»Р¶РЅР° РёРґС‚Рё РїСЂРµРґР»РѕР¶РЅР°СЏ РіСЂСѓРїРїС‹ СЃ РїСЂРµРґР»РѕРіРѕРј РёР·+Р 
 	*/
 	int next_gr_num = get_maximal_group_no(next_word);
 	if( next_gr_num == -1 )
@@ -123,13 +123,13 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 	
 	const CGroup& prep_gr = GetGroups()[next_gr_num];
 	if(		(prep_gr.m_GroupType != PREP_NOUN)
-		||	!sent[prep_gr.m_iFirstWord].is_lemma("ИЗ")
+		||	!sent[prep_gr.m_iFirstWord].is_lemma("РР—")
 	  )
 		return false;
 
 	G.m_iLastWord = prep_gr.m_iLastWord;
 	G.m_GroupType = SELECTIVE_GR;
-	//проверяем род и удаляем лишние граммемы
+	//РїСЂРѕРІРµСЂСЏРµРј СЂРѕРґ Рё СѓРґР°Р»СЏРµРј Р»РёС€РЅРёРµ РіСЂР°РјРјРµРјС‹
 	QWORD LWGen = sent[G.m_iLastWord].GetGrammems() & rAllGenders;
 	if( (sent[G.m_iFirstWord].GetGrammems() & rAllGenders)>0 && LWGen>0 &&
 		((sent[G.m_iFirstWord].GetGrammems() & rAllGenders & LWGen) == 0) )

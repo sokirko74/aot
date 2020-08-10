@@ -65,7 +65,7 @@ struct CFIOFormat;
 
 class CMAPost  : public CPostMorphInteface
 {
-	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
+	//РіСЂР°РјРјР°С‚РёС‡РµСЃРєРёР№ РєРѕРґ Р”РЈР РќРћР’Рћ (РЅРµРёР·РјРµРЅСЏРµРјРјРѕРµ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ РІСЃРµС… СЂРѕРґРѕРІ)
 	string          m_DURNOVOGramCode;
 	list<CPostLemWord>	m_Words;
     
@@ -141,7 +141,7 @@ protected:
 	void Rule_UnknownNames();
 	void Rule_SOROK();
 	void Rule_Abbreviation();
-	// по-восточному
+	// РїРѕ-РІРѕСЃС‚РѕС‡РЅРѕРјСѓ
 	void Rule_AdverbFromAdjectives();
 	void log(string s);
 	void SaveToFile(string s);

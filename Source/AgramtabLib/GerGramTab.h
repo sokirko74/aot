@@ -12,9 +12,9 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CEngGramTab
-const unsigned int gStartUp =  0x4141; //AA 
+const unsigned int gStartUp =  0x4141; //AAÂ 
 const unsigned int gEndUp =  0x7A7B;  //zz + 1
-const unsigned int gMaxGrmCount  = gEndUp -gStartUp; // // 5911  (5 Êá) 
+const unsigned int gMaxGrmCount  = gEndUp -gStartUp; // // 5911  (5 ÐšÐ±) 
 
 const BYTE gPartOfSpeechesCount = 17;
 

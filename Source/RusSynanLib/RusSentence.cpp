@@ -19,8 +19,8 @@ CFormatCaller *CRusSentence::GetNewFormatCaller() const {
 CRusSentence::CRusSentence(const CSyntaxOpt *pSyntaxOptions) : CSentence(pSyntaxOptions) {
     InitClauseVectorRules();
 
-    m_KOTORYI_INDEX = GetOpt()->GetOborDic()->FindSubConj("КОТОРЫЙ");
-    m_CHEI_INDEX = GetOpt()->GetOborDic()->FindSubConj("ЧЕЙ");
+    m_KOTORYI_INDEX = GetOpt()->GetOborDic()->FindSubConj("РљРћРўРћР Р«Р™");
+    m_CHEI_INDEX = GetOpt()->GetOborDic()->FindSubConj("Р§Р•Р™");
 
 }
 
@@ -91,7 +91,7 @@ bool CRusSentence::RunSyntaxInClauses(ESynRulesSet type) {
         }
 
 
-        //я бы с удовольствием здесь for_each запустил, да, блин, передавать надо 4 параметра
+        //СЏ Р±С‹ СЃ СѓРґРѕРІРѕР»СЊСЃС‚РІРёРµРј Р·РґРµСЃСЊ for_each Р·Р°РїСѓСЃС‚РёР», РґР°, Р±Р»РёРЅ, РїРµСЂРµРґР°РІР°С‚СЊ РЅР°РґРѕ 4 РїР°СЂР°РјРµС‚СЂР°
         for (int i = 0; i < GetClausesCount(); i++) {
 
             GetClause(i).BuildGroups(FormatCaller, bRebuildAllGroups);
@@ -109,7 +109,7 @@ bool CRusSentence::RunSyntaxInClauses(ESynRulesSet type) {
 
 
 void TryBuildVerbLemmaWithKa(CSynWord &W) {
-    if (W.m_strWord.find("-ка") == string::npos) return;
+    if (W.m_strWord.find("-РєР°") == string::npos) return;
 
     for (int i = 0; i < W.m_Homonyms.size(); i++) {
         if (W.m_Homonyms[i].HasPos(VERB))
@@ -139,7 +139,7 @@ void CRusSentence::TryToAddComparativeTypeToClause() {
         for (j = GetClause(i).m_iFirstWord; j <= GetClause(i).m_iLastWord; j++)
             for (k = 0; k < m_Words[j].GetHomonymsCount(); k++)
                 if (((m_Words[j].GetSynHomonym(k).HasPos(ADJ_FULL))
-                     || (m_Words[j].GetSynHomonym(k).HasPos(NUMERAL)) // больше, меньше
+                     || (m_Words[j].GetSynHomonym(k).HasPos(NUMERAL)) // Р±РѕР»СЊС€Рµ, РјРµРЅСЊС€Рµ
                     )
                     &&
                     (m_Words[j].GetSynHomonym(k).HasGrammem(rComparative))
@@ -183,7 +183,7 @@ void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, string psAncode,
     H.m_lPradigmID = plPardigmID;
 
     H.m_lFreqHom = 1;
-    s = "НЕЧЕГО";
+    s = "РќР•Р§Р•Р“Рћ";
     H.SetLemma(s);
     H.m_iCmpnLen = 6;
     H.m_LemSign = '+';
@@ -261,9 +261,9 @@ void CRusSentence::DisruptPronounPredik() {
         if (m_Words[i + 2].HasOborot1() != m_Words[i + 2].HasOborot2()) continue;
 
         int ihom = m_Words[i + 2].GetHomonymByPOS(PRONOUN);
-        if (m_Words[i].FindLemma("НЕ")
+        if (m_Words[i].FindLemma("РќР•")
             && m_Words[i + 1].GetHomonymByPOS(PREP) != -1
-            && m_Words[i + 2].FindLemma("ЧТО")
+            && m_Words[i + 2].FindLemma("Р§РўРћ")
             && ihom != -1
                 ) {
             QWORD lOldGrammems = m_Words[i + 2].m_Homonyms[ihom].m_iGrammems;
@@ -282,7 +282,7 @@ void CRusSentence::DisruptPronounPredik() {
 
 
 const long CommonNounPrefixesCount = 2;
-const string CommonNounPrefixes[CommonNounPrefixesCount] = {"ВИЦЕ-", "ЭКС-"};
+const string CommonNounPrefixes[CommonNounPrefixesCount] = {"Р’РР¦Р•-", "Р­РљРЎ-"};
 
 
 void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, string psAncode, string sLem, string TypeAncode) {
@@ -346,13 +346,13 @@ void CRusSentence::CutPrefixEksAndVize() {
     }
 }
 
-//менять граммемы подлежащего и группы, в которую он входит только после того,
-//как все клаузы уже построены (после операций объединения и вложения клауз), т.е.
-//когда отработают все правила фрагментации.
-//раньше чистка граммем происходила в ф-ции CFormatCaller::find_subj_for_verb
-//пример: "Стол, что за нами пристально следит, преследовал меня весь день"
-//при первоначальной фрагментации подлежащим становился "день", а после объединения клауз "стол",
-//поэтому терялся вн. у "день".    
+//РјРµРЅСЏС‚СЊ РіСЂР°РјРјРµРјС‹ РїРѕРґР»РµР¶Р°С‰РµРіРѕ Рё РіСЂСѓРїРїС‹, РІ РєРѕС‚РѕСЂСѓСЋ РѕРЅ РІС…РѕРґРёС‚ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ С‚РѕРіРѕ,
+//РєР°Рє РІСЃРµ РєР»Р°СѓР·С‹ СѓР¶Рµ РїРѕСЃС‚СЂРѕРµРЅС‹ (РїРѕСЃР»Рµ РѕРїРµСЂР°С†РёР№ РѕР±СЉРµРґРёРЅРµРЅРёСЏ Рё РІР»РѕР¶РµРЅРёСЏ РєР»Р°СѓР·), С‚.Рµ.
+//РєРѕРіРґР° РѕС‚СЂР°Р±РѕС‚Р°СЋС‚ РІСЃРµ РїСЂР°РІРёР»Р° С„СЂР°РіРјРµРЅС‚Р°С†РёРё.
+//СЂР°РЅСЊС€Рµ С‡РёСЃС‚РєР° РіСЂР°РјРјРµРј РїСЂРѕРёСЃС…РѕРґРёР»Р° РІ С„-С†РёРё CFormatCaller::find_subj_for_verb
+//РїСЂРёРјРµСЂ: "РЎС‚РѕР», С‡С‚Рѕ Р·Р° РЅР°РјРё РїСЂРёСЃС‚Р°Р»СЊРЅРѕ СЃР»РµРґРёС‚, РїСЂРµСЃР»РµРґРѕРІР°Р» РјРµРЅСЏ РІРµСЃСЊ РґРµРЅСЊ"
+//РїСЂРё РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕР№ С„СЂР°РіРјРµРЅС‚Р°С†РёРё РїРѕРґР»РµР¶Р°С‰РёРј СЃС‚Р°РЅРѕРІРёР»СЃСЏ "РґРµРЅСЊ", Р° РїРѕСЃР»Рµ РѕР±СЉРµРґРёРЅРµРЅРёСЏ РєР»Р°СѓР· "СЃС‚РѕР»",
+//РїРѕСЌС‚РѕРјСѓ С‚РµСЂСЏР»СЃСЏ РІРЅ. Сѓ "РґРµРЅСЊ".    
 void ChangeSubjAndItsGroupGrammemsInClause(CClause &C, SVI pSynVar) {
     if (pSynVar->m_Subjects.size() != 1) return;
 
@@ -379,7 +379,7 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause &C, SVI pSynVar) {
 
     string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(isubj_gram);
     debug = C.GetOpt()->GetGramTab()->GrammemsToStr(ipredk_gram);
-    //if( isubj_gram & rAllGenders & ipredk_gram == 0) return; //разный род
+    //if( isubj_gram & rAllGenders & ipredk_gram == 0) return; //СЂР°Р·РЅС‹Р№ СЂРѕРґ
     QWORD new_subj_grammems = (ipredk_gram & isubj_gram & rAllNumbers) | _QM(rNominativ);
     debug = C.GetOpt()->GetGramTab()->GrammemsToStr(new_subj_grammems);
     if (!(new_subj_grammems & rAllNumbers)) new_subj_grammems |= rAllNumbers;
@@ -388,9 +388,9 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause &C, SVI pSynVar) {
                     GT == NOUN_NUMERAL_APPROX);
     if (numeral)
         isubj_gram |=
-                _QM(rSingular) | _QM(rNeutrum); //группа, вводимая количественным наречием: В углу стояло 5 стульев
+                _QM(rSingular) | _QM(rNeutrum); //РіСЂСѓРїРїР°, РІРІРѕРґРёРјР°СЏ РєРѕР»РёС‡РµСЃС‚РІРµРЅРЅС‹Рј РЅР°СЂРµС‡РёРµРј: Р’ СѓРіР»Сѓ СЃС‚РѕСЏР»Рѕ 5 СЃС‚СѓР»СЊРµРІ
     if (((CRusGramTab *) C.GetOpt()->GetGramTab())->ConflictGrammems(isubj_gram, ipredk_gram,
-                                                                     rAllGenders | rAllNumbers))  //разный род или число
+                                                                     rAllGenders | rAllNumbers))  //СЂР°Р·РЅС‹Р№ СЂРѕРґ РёР»Рё С‡РёСЃР»Рѕ
         return;
 
     // setting grammems  for group and relation
@@ -428,7 +428,7 @@ bool CRusSentence::IsRelativSentencePronoun(int ClauseStartWordNo, int WordNo, i
     int SubordConjNo = m_Words[WordNo].m_SubordinateConjNo;
     HomonymNo = 0;
 
-    // "кое-чьи" не является релативным словом, а морфология  его не знает, поэтому возникает омоним "чей"
+    // "РєРѕРµ-С‡СЊРё" РЅРµ СЏРІР»СЏРµС‚СЃСЏ СЂРµР»Р°С‚РёРІРЅС‹Рј СЃР»РѕРІРѕРј, Р° РјРѕСЂС„РѕР»РѕРіРёСЏ  РµРіРѕ РЅРµ Р·РЅР°РµС‚, РїРѕСЌС‚РѕРјСѓ РІРѕР·РЅРёРєР°РµС‚ РѕРјРѕРЅРёРј "С‡РµР№"
     if (m_Words[WordNo].m_strWord.find('-') != string::npos) return false;
 
 
@@ -459,15 +459,15 @@ EClauseType CRusSentence::GetClauseTypeByAncodePattern(const CAncodePattern &Pat
     else if ((Pattern.HasPos(ADJ_FULL) || Pattern.HasPos(NUMERAL)) && Pattern.HasGrammem(rComparative))
         return COMPARATIVE_T;
 
-    //возвращаем  несуществующую часть речи
+    //РІРѕР·РІСЂР°С‰Р°РµРј  РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰СѓСЋ С‡Р°СЃС‚СЊ СЂРµС‡Рё
     return UnknownPartOfSpeech;
 };
 
 
 
-//функция  идет по всем словам предложение, если слово вошло в графематическую вилку  ФИ1-ФИ2,
-//тогда это слово не считается  союзом
-//Например, "И" в "И.А.Кирилловой"  не будет союзом.
+//С„СѓРЅРєС†РёСЏ  РёРґРµС‚ РїРѕ РІСЃРµРј СЃР»РѕРІР°Рј РїСЂРµРґР»РѕР¶РµРЅРёРµ, РµСЃР»Рё СЃР»РѕРІРѕ РІРѕС€Р»Рѕ РІ РіСЂР°С„РµРјР°С‚РёС‡РµСЃРєСѓСЋ РІРёР»РєСѓ  Р¤Р1-Р¤Р2,
+//С‚РѕРіРґР° СЌС‚Рѕ СЃР»РѕРІРѕ РЅРµ СЃС‡РёС‚Р°РµС‚СЃСЏ  СЃРѕСЋР·РѕРј
+//РќР°РїСЂРёРјРµСЂ, "Р" РІ "Р.Рђ.РљРёСЂРёР»Р»РѕРІРѕР№"  РЅРµ Р±СѓРґРµС‚ СЃРѕСЋР·РѕРј.
 
 void CRusSentence::ProcessFio1Fio2() {
     bool bInFIO = false;
@@ -487,7 +487,7 @@ void CRusSentence::ProcessFio1Fio2() {
 };
 
 
-// если в клаузе нашлись "который" или "чeй", тогда  омонимы вершины  на причастие или на деепричастие надо удалить
+// РµСЃР»Рё РІ РєР»Р°СѓР·Рµ РЅР°С€Р»РёСЃСЊ "РєРѕС‚РѕСЂС‹Р№" РёР»Рё "С‡eР№", С‚РѕРіРґР°  РѕРјРѕРЅРёРјС‹ РІРµСЂС€РёРЅС‹  РЅР° РїСЂРёС‡Р°СЃС‚РёРµ РёР»Рё РЅР° РґРµРµРїСЂРёС‡Р°СЃС‚РёРµ РЅР°РґРѕ СѓРґР°Р»РёС‚СЊ
 void CRusSentence::DeleteSomeTypesInRelativeClauses() {
     for (size_t ClauseNo = 0; ClauseNo < m_Clauses.size(); ClauseNo++) {
         CClause &C = m_Clauses[ClauseNo];
@@ -525,19 +525,19 @@ bool CRusSentence::BuildClauses() {
 
     assert (GetClausesCount() == 0);
 
-    // соединение предикатива нечего: "Вам не о чем волноваться"
+    // СЃРѕРµРґРёРЅРµРЅРёРµ РїСЂРµРґРёРєР°С‚РёРІР° РЅРµС‡РµРіРѕ: "Р’Р°Рј РЅРµ Рѕ С‡РµРј РІРѕР»РЅРѕРІР°С‚СЊСЃСЏ"
     DisruptPronounPredik();
 
 
-    // удаление префиксов ВИЦЕ- и ЭКС-
+    // СѓРґР°Р»РµРЅРёРµ РїСЂРµС„РёРєСЃРѕРІ Р’РР¦Р•- Рё Р­РљРЎ-
     CutPrefixEksAndVize();
 
 
-    //	удаление омонимов вводных слов, если эти слова не выделены запятыми и пр.
+    //	СѓРґР°Р»РµРЅРёРµ РѕРјРѕРЅРёРјРѕРІ РІРІРѕРґРЅС‹С… СЃР»РѕРІ, РµСЃР»Рё СЌС‚Рё СЃР»РѕРІР° РЅРµ РІС‹РґРµР»РµРЅС‹ Р·Р°РїСЏС‚С‹РјРё Рё РїСЂ.
 
     DetermineParenthesis();
 
-    //	удаление омонимов, частоты которых соотносятся 1/1000
+    //	СѓРґР°Р»РµРЅРёРµ РѕРјРѕРЅРёРјРѕРІ, С‡Р°СЃС‚РѕС‚С‹ РєРѕС‚РѕСЂС‹С… СЃРѕРѕС‚РЅРѕСЃСЏС‚СЃСЏ 1/1000
 
     DeleteHomOneToThousand();
 
@@ -585,7 +585,7 @@ bool CRusSentence::BuildClauses() {
     rml_TRACE("RunSyntaxInClause(RulesBeforeSimClauses)");
     RunSyntaxInClauses(RulesBeforeSimClauses);
 
-    // после первого вызова RunSyntaxInClause нужно удалить омонимы, которые противоречат найденным терминам
+    // РїРѕСЃР»Рµ РїРµСЂРІРѕРіРѕ РІС‹Р·РѕРІР° RunSyntaxInClause РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ РѕРјРѕРЅРёРјС‹, РєРѕС‚РѕСЂС‹Рµ РїСЂРѕС‚РёРІРѕСЂРµС‡Р°С‚ РЅР°Р№РґРµРЅРЅС‹Рј С‚РµСЂРјРёРЅР°Рј
     rml_TRACE("DeleteMarkedHomonymsWithClauses");
     DeleteMarkedHomonymsWithClauses(CPeriod(0, (int) m_Words.size() - 1));
 
@@ -619,8 +619,8 @@ bool CRusSentence::BuildClauses() {
     rml_TRACE("RunSyntaxInClause(AllRules)\n");
     RunSyntaxInClauses(AllRules);
 
-    // чтобы  собиралась группа ПРИДАТ_ОПР в примере "баба, которая много пьет" нужно еще раз запустить
-    // GroupRulesForClause, поскольку OneRunOfClauseRules(m_vectorDisruptRules), в котором эта клауза  вложилась, только что отработало.
+    // С‡С‚РѕР±С‹  СЃРѕР±РёСЂР°Р»Р°СЃСЊ РіСЂСѓРїРїР° РџР РР”РђРў_РћРџР  РІ РїСЂРёРјРµСЂРµ "Р±Р°Р±Р°, РєРѕС‚РѕСЂР°СЏ РјРЅРѕРіРѕ РїСЊРµС‚" РЅСѓР¶РЅРѕ РµС‰Рµ СЂР°Р· Р·Р°РїСѓСЃС‚РёС‚СЊ
+    // GroupRulesForClause, РїРѕСЃРєРѕР»СЊРєСѓ OneRunOfClauseRules(m_vectorDisruptRules), РІ РєРѕС‚РѕСЂРѕРј СЌС‚Р° РєР»Р°СѓР·Р°  РІР»РѕР¶РёР»Р°СЃСЊ, С‚РѕР»СЊРєРѕ С‡С‚Рѕ РѕС‚СЂР°Р±РѕС‚Р°Р»Рѕ.
     rml_TRACE("RunSyntaxInClause(GroupRulesForClause)\n");
     RunSyntaxInClauses(GroupRulesForClause);
 
@@ -639,13 +639,13 @@ bool CRusSentence::BuildClauses() {
 
 
 
-    //менять граммемы подлежащего и группы, в которую оно входит, нужно  только после того,
-    //как все клаузы уже построены (после операций объединения и вложения клауз), т.е.
-    //когда отработают все правила фрагментации.
-    //Раньше чистка граммем происходила в ф-ции CFormatCaller::find_subj_for_verb
-    //пример: "Стол, что за нами пристально следит, преследовал меня весь день"
-    //при первоначальной фрагментации подлежащим становился "день", а после объединения клауз "стол",
-    //поэтому терялся вн. у "день".
+    //РјРµРЅСЏС‚СЊ РіСЂР°РјРјРµРјС‹ РїРѕРґР»РµР¶Р°С‰РµРіРѕ Рё РіСЂСѓРїРїС‹, РІ РєРѕС‚РѕСЂСѓСЋ РѕРЅРѕ РІС…РѕРґРёС‚, РЅСѓР¶РЅРѕ  С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ С‚РѕРіРѕ,
+    //РєР°Рє РІСЃРµ РєР»Р°СѓР·С‹ СѓР¶Рµ РїРѕСЃС‚СЂРѕРµРЅС‹ (РїРѕСЃР»Рµ РѕРїРµСЂР°С†РёР№ РѕР±СЉРµРґРёРЅРµРЅРёСЏ Рё РІР»РѕР¶РµРЅРёСЏ РєР»Р°СѓР·), С‚.Рµ.
+    //РєРѕРіРґР° РѕС‚СЂР°Р±РѕС‚Р°СЋС‚ РІСЃРµ РїСЂР°РІРёР»Р° С„СЂР°РіРјРµРЅС‚Р°С†РёРё.
+    //Р Р°РЅСЊС€Рµ С‡РёСЃС‚РєР° РіСЂР°РјРјРµРј РїСЂРѕРёСЃС…РѕРґРёР»Р° РІ С„-С†РёРё CFormatCaller::find_subj_for_verb
+    //РїСЂРёРјРµСЂ: "РЎС‚РѕР», С‡С‚Рѕ Р·Р° РЅР°РјРё РїСЂРёСЃС‚Р°Р»СЊРЅРѕ СЃР»РµРґРёС‚, РїСЂРµСЃР»РµРґРѕРІР°Р» РјРµРЅСЏ РІРµСЃСЊ РґРµРЅСЊ"
+    //РїСЂРё РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕР№ С„СЂР°РіРјРµРЅС‚Р°С†РёРё РїРѕРґР»РµР¶Р°С‰РёРј СЃС‚Р°РЅРѕРІРёР»СЃСЏ "РґРµРЅСЊ", Р° РїРѕСЃР»Рµ РѕР±СЉРµРґРёРЅРµРЅРёСЏ РєР»Р°СѓР· "СЃС‚РѕР»",
+    //РїРѕСЌС‚РѕРјСѓ С‚РµСЂСЏР»СЃСЏ РІРЅ. Сѓ "РґРµРЅСЊ".
     ChangeSubjAndItsGroupGrammems();
 
 
@@ -662,7 +662,7 @@ bool CRusSentence::BuildClauses() {
 
         if (m_pSyntaxOptions->m_KillHomonymsMode == CoverageKillHomonyms) {
 
-            //	если  были удалены омонимы и программа организует еще один проход  (только один!)
+            //	РµСЃР»Рё  Р±С‹Р»Рё СѓРґР°Р»РµРЅС‹ РѕРјРѕРЅРёРјС‹ Рё РїСЂРѕРіСЂР°РјРјР° РѕСЂРіР°РЅРёР·СѓРµС‚ РµС‰Рµ РѕРґРёРЅ РїСЂРѕС…РѕРґ  (С‚РѕР»СЊРєРѕ РѕРґРёРЅ!)
 
             rml_TRACE("KillHomonymsInAllSentence\n");
             if (KillHomonymsInAllSentence()
@@ -672,19 +672,19 @@ bool CRusSentence::BuildClauses() {
                 for (int ClauseNo = 0; ClauseNo < GetClausesCount(); ClauseNo++) {
                     const CClause &Clause = GetClause(ClauseNo);
 
-                    //	если остались ПУСТЫХи или клаузы  c пустым кол-вом вариантов
+                    //	РµСЃР»Рё РѕСЃС‚Р°Р»РёСЃСЊ РџРЈРЎРўР«РҐРё РёР»Рё РєР»Р°СѓР·С‹  c РїСѓСЃС‚С‹Рј РєРѕР»-РІРѕРј РІР°СЂРёР°РЅС‚РѕРІ
 
                     if (Clause.m_vectorTypes.empty()
                         //||		Clause.m_SynVariants.empty()
                             ) {
                         SecondTryOfCoverageKillHomonyms = true;
 
-                        //Мы не можем здесь оставить вектор слов(m_Words) так, как он есть,
-                        //поскольку будем заново вызывать функцию BuildAnalyticalVerbForms, которая  будет строить
-                        //анал. формы,т.е. удалять и менять  сами слова.
-                        //Мы так же не можем  сделать m_Words = SaveWords,
-                        //поскольку тогда  восстановятся все омонимы,которые были удалены KillHomonymsInAllSentence.
-                        //Поэтому мы делаем следующее.
+                        //РњС‹ РЅРµ РјРѕР¶РµРј Р·РґРµСЃСЊ РѕСЃС‚Р°РІРёС‚СЊ РІРµРєС‚РѕСЂ СЃР»РѕРІ(m_Words) С‚Р°Рє, РєР°Рє РѕРЅ РµСЃС‚СЊ,
+                        //РїРѕСЃРєРѕР»СЊРєСѓ Р±СѓРґРµРј Р·Р°РЅРѕРІРѕ РІС‹Р·С‹РІР°С‚СЊ С„СѓРЅРєС†РёСЋ BuildAnalyticalVerbForms, РєРѕС‚РѕСЂР°СЏ  Р±СѓРґРµС‚ СЃС‚СЂРѕРёС‚СЊ
+                        //Р°РЅР°Р». С„РѕСЂРјС‹,С‚.Рµ. СѓРґР°Р»СЏС‚СЊ Рё РјРµРЅСЏС‚СЊ  СЃР°РјРё СЃР»РѕРІР°.
+                        //РњС‹ С‚Р°Рє Р¶Рµ РЅРµ РјРѕР¶РµРј  СЃРґРµР»Р°С‚СЊ m_Words = SaveWords,
+                        //РїРѕСЃРєРѕР»СЊРєСѓ С‚РѕРіРґР°  РІРѕСЃСЃС‚Р°РЅРѕРІСЏС‚СЃСЏ РІСЃРµ РѕРјРѕРЅРёРјС‹,РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»Рё СѓРґР°Р»РµРЅС‹ KillHomonymsInAllSentence.
+                        //РџРѕСЌС‚РѕРјСѓ РјС‹ РґРµР»Р°РµРј СЃР»РµРґСѓСЋС‰РµРµ.
 
                         vector<CSynWord> p;
                         for (int i = 0; i < SaveWords.size(); i++) {
@@ -722,20 +722,20 @@ bool CRusSentence::BuildClauses() {
 
 }
 
-//клонирование  оборотов сделано для того, чтобы  возникла омонимия между  оборотом и не оборотом.
-//Например, на отрезке "то есть" найден оборот(союз). На этом же отрезке моежт быть построено подлежащее
-//и сказуемое. В итоге,  мы должны получить два равноправных варианта: с оборотом и c  подлежащим и сказуемым.
+//РєР»РѕРЅРёСЂРѕРІР°РЅРёРµ  РѕР±РѕСЂРѕС‚РѕРІ СЃРґРµР»Р°РЅРѕ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹  РІРѕР·РЅРёРєР»Р° РѕРјРѕРЅРёРјРёСЏ РјРµР¶РґСѓ  РѕР±РѕСЂРѕС‚РѕРј Рё РЅРµ РѕР±РѕСЂРѕС‚РѕРј.
+//РќР°РїСЂРёРјРµСЂ, РЅР° РѕС‚СЂРµР·РєРµ "С‚Рѕ РµСЃС‚СЊ" РЅР°Р№РґРµРЅ РѕР±РѕСЂРѕС‚(СЃРѕСЋР·). РќР° СЌС‚РѕРј Р¶Рµ РѕС‚СЂРµР·РєРµ РјРѕРµР¶С‚ Р±С‹С‚СЊ РїРѕСЃС‚СЂРѕРµРЅРѕ РїРѕРґР»РµР¶Р°С‰РµРµ
+//Рё СЃРєР°Р·СѓРµРјРѕРµ. Р’ РёС‚РѕРіРµ,  РјС‹ РґРѕР»Р¶РЅС‹ РїРѕР»СѓС‡РёС‚СЊ РґРІР° СЂР°РІРЅРѕРїСЂР°РІРЅС‹С… РІР°СЂРёР°РЅС‚Р°: СЃ РѕР±РѕСЂРѕС‚РѕРј Рё c  РїРѕРґР»РµР¶Р°С‰РёРј Рё СЃРєР°Р·СѓРµРјС‹Рј.
 
 void CRusSentence::CloneHomonymsForOborots() {
-    //  идем по всем графематическим вилкам,
+    //  РёРґРµРј РїРѕ РІСЃРµРј РіСЂР°С„РµРјР°С‚РёС‡РµСЃРєРёРј РІРёР»РєР°Рј,
     for (int i = 0; i < m_Words.size(); i++) {
         CSynWord &FirstWord = m_Words[i];
         if (!FirstWord.HasOborot1()) continue;
 
         if (!FirstWord.HasOborot2()) {
-            // многословные обороты
+            // РјРЅРѕРіРѕСЃР»РѕРІРЅС‹Рµ РѕР±РѕСЂРѕС‚С‹
             for (int j = i; j < m_Words.size(); j++) {
-                //"судя по многочисленным фак
+                //"СЃСѓРґСЏ РїРѕ РјРЅРѕРіРѕС‡РёСЃР»РµРЅРЅС‹Рј С„Р°Рє
                 string title = GetOpt()->GetOborDic()->m_Entries[m_Words[j].m_Homonyms[0].m_OborotNo].m_OborotEntryStr;
                 EngRusMakeUpper(title);
                 int b = title.find(m_Words[j].m_strUpperWord + "(");
@@ -757,7 +757,7 @@ void CRusSentence::CloneHomonymsForOborots() {
                             else
                                 Pose = (1 << (size_t) Pos);
                         } else {
-                            GramFet = "С " + GramFet;
+                            GramFet = "РЎ " + GramFet;
                             if (R->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G)) {
                                 Grammems = G;
                                 Pose = 0xffffffff;
@@ -783,15 +783,15 @@ void CRusSentence::CloneHomonymsForOborots() {
                 if (m_Words[j].HasOborot2()) break;
             }
         } else {
-            // однословные обороты
+            // РѕРґРЅРѕСЃР»РѕРІРЅС‹Рµ РѕР±РѕСЂРѕС‚С‹
             for (int k = 0; k < FirstWord.GetHomonymsCount(); k++) {
                 CSynHomonym &H = FirstWord.GetSynHomonym(k);
                 if (H.m_OborotNo != -1) {
                     const COborotForSyntax &O = GetOpt()->GetOborDic()->m_Entries[H.m_OborotNo];
-                    //Проверяем соответствие найденных  графематикой   оборотов и морфологии.
-                    //Для омонимов, которые не являются союзом, предлогом, вводным словом или наречием ("GF      = 1  НАР")
-                    //интерпретация  в словаре оборотов удаляется. Так, например, для омонима "ПОСОЛ" слова "после"
-                    //оборотная интерпретация будет удалена, хотя во входном файле EXPR_NO стоял на всех омонимах.
+                    //РџСЂРѕРІРµСЂСЏРµРј СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ РЅР°Р№РґРµРЅРЅС‹С…  РіСЂР°С„РµРјР°С‚РёРєРѕР№   РѕР±РѕСЂРѕС‚РѕРІ Рё РјРѕСЂС„РѕР»РѕРіРёРё.
+                    //Р”Р»СЏ РѕРјРѕРЅРёРјРѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ СЃРѕСЋР·РѕРј, РїСЂРµРґР»РѕРіРѕРј, РІРІРѕРґРЅС‹Рј СЃР»РѕРІРѕРј РёР»Рё РЅР°СЂРµС‡РёРµРј ("GF      = 1  РќРђР ")
+                    //РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ  РІ СЃР»РѕРІР°СЂРµ РѕР±РѕСЂРѕС‚РѕРІ СѓРґР°Р»СЏРµС‚СЃСЏ. РўР°Рє, РЅР°РїСЂРёРјРµСЂ, РґР»СЏ РѕРјРѕРЅРёРјР° "РџРћРЎРћР›" СЃР»РѕРІР° "РїРѕСЃР»Рµ"
+                    //РѕР±РѕСЂРѕС‚РЅР°СЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ Р±СѓРґРµС‚ СѓРґР°Р»РµРЅР°, С…РѕС‚СЏ РІРѕ РІС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ EXPR_NO СЃС‚РѕСЏР» РЅР° РІСЃРµС… РѕРјРѕРЅРёРјР°С….
                     if (!(H.m_iPoses & O.m_Poses))
                         H.DeleteOborotMarks();
                 }

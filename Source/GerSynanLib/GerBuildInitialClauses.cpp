@@ -24,7 +24,7 @@ bool	CGerSentence::IsRelativSentencePronoun(int ClauseStartWordNo, int WordNo, i
 				) return true;
 		}
 		else
-			// der europäischen Staaten, insbesondere auch diejenigen des deutschen Reiches  keineswegs geeignet ist, 
+			// der europÐ´ischen Staaten, insbesondere auch diejenigen des deutschen Reiches  keineswegs geeignet ist, 
 			if (		H.IsLemma("DERJENIGE") 
 					||	H.IsLemma("WELCHER") 
 				)
@@ -41,7 +41,7 @@ bool	CGerSentence::IsRelativSentencePronoun(int ClauseStartWordNo, int WordNo, i
 		for (; i>=ClauseStartWordNo; i--)
 			if	(		!m_Words[i].m_bComma 
                     &&	!m_Words[i].HasDes(OOpn)
-					// "der europäischen Staaten, insbesondere auch diejenigen des deutschen Reiches  keineswegs geeignet ist, "
+					// "der europÐ´ischen Staaten, insbesondere auch diejenigen des deutschen Reiches  keineswegs geeignet ist, "
 					// : "auch", "sozusagen", "inbesondere"...
 					&&	!m_Words[i].FindLemma("AUCH")
 					&&	!m_Words[i].FindLemma("SOZUSAGEN")
@@ -51,7 +51,7 @@ bool	CGerSentence::IsRelativSentencePronoun(int ClauseStartWordNo, int WordNo, i
 				int Prp = m_Words[i].GetHomonymByPOS(gPRP);
 				if (Prp == -1)
 					break;
-				// "zu den Gründen"
+				// "zu den GrÑŒnden"
 				if  (!( m_Words[i].m_Homonyms[Prp].m_iGrammems & H.m_iGrammems & gAllCases))
 					break;
 

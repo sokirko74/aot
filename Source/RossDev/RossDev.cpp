@@ -348,7 +348,7 @@ BOOL CRossDevApp::InitInstance()
 	ParseCommandLine(cmdInfo);
     m_OnlyRoss = cmdInfo.bOnlyRoss;
 
-	// èíèöèàëèçàöèÿ äîñåìàíòè÷åñêèõ ñëîâàðåé 
+	// Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð´Ð¾ÑÐµÐ¼Ð°Ð½Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… ÑÐ»Ð¾Ð²Ð°Ñ€ÐµÐ¹ 
 	m_SemBuilder.m_RusStr.m_pData->Init();
 	//	m_pMainWnd->GetMenu( )->EnableMenuItem( ID_RUN_PROCEDURE_TO_BUILD_RUSSIAN_SEMANTIC_STRUCTURE, MF_BYCOMMAND|MF_DISABLED|MF_GRAYED);
 	
@@ -374,7 +374,7 @@ BOOL CRossDevApp::InitInstance()
 
 
 	//============================
-	// îïðåäåëèòü êëàññ îêíà äëÿ èåðàðõèè
+	// Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚ÑŒ ÐºÐ»Ð°ÑÑ Ð¾ÐºÐ½Ð° Ð´Ð»Ñ Ð¸ÐµÑ€Ð°Ñ€Ñ…Ð¸Ð¸
     try 
 	{
 			LOGFONT lf;                        // Used to create the CFont.
@@ -586,7 +586,7 @@ BOOL CRossDevApp::OnIdle(LONG lCount)
 	{
       ResetEvent(m_hEventMinusListReport); 
 	  ((CFrameWnd*)((CRossDevApp*)AfxGetApp())->m_pMainWnd)->SetMessageText("");
-	  GlobalOpenReport (m_strMinusListReport, "Ïåðå÷åíü âñåõ ëåìì, êîòîðûå íå áûëè íàéäåíû â ñëîâàðíûõ âõîäàõ");
+	  GlobalOpenReport (m_strMinusListReport, "ÐŸÐµÑ€ÐµÑ‡ÐµÐ½ÑŒ Ð²ÑÐµÑ… Ð»ÐµÐ¼Ð¼, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð½Ðµ Ð±Ñ‹Ð»Ð¸ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹ Ð² ÑÐ»Ð¾Ð²Ð°Ñ€Ð½Ñ‹Ñ… Ð²Ñ…Ð¾Ð´Ð°Ñ…");
 
 	};
 	
@@ -633,7 +633,7 @@ try
 		CSemanticStrView* View =  pDocument->GetView();
 		
 
-		// îòêðûâàåò âñå ðîññû	
+		// Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ Ð²ÑÐµ Ñ€Ð¾ÑÑÑ‹	
 		View->OpenAllRosses();
 	}
 	catch (CExpc& C)

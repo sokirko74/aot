@@ -978,7 +978,7 @@ bartholemy
 bartholomeo
 bartholomeus
 bartholomew
-bartholomäus
+bartholomĞ´us
 bartie
 bartlet
 bartlett
@@ -1198,7 +1198,7 @@ bjarne
 bjoern
 bjorn
 bjorne
-björn
+bjÑ†rn
 blackie
 blaine
 blair
@@ -1425,7 +1425,7 @@ butros
 byram
 byrne
 byron
-bärbel
+bĞ´rbel
 cabrina
 cacia
 cacie
@@ -3721,8 +3721,8 @@ glynda
 glynis
 glynn
 glynnis
-günter
-günther
+gÑŒnter
+gÑŒnther
 godard
 godart
 goddard
@@ -3872,7 +3872,7 @@ gwyneth
 gwynne
 gyles
 gypsy
-götz
+gÑ†tz
 haber
 haddi
 hadleigh
@@ -4739,7 +4739,7 @@ jinny
 jishni
 jishnu
 jnan
-jürgen
+jÑŒrgen
 jo
 joab
 joachim
@@ -4959,8 +4959,8 @@ jutta
 juventino
 juwan
 jyoti
-jörg
-jörn
+jÑ†rg
+jÑ†rn
 kaalya
 kaari
 kacey
@@ -5463,7 +5463,7 @@ kynthia
 kyra
 kyree
 kyrstin
-käthe
+kĞ´the
 la
 lacee
 lacey
@@ -6380,7 +6380,7 @@ matthias
 matthieu
 matthiew
 matthus
-matthäus
+matthĞ´us
 matti
 mattias
 mattie
@@ -7832,7 +7832,7 @@ river
 rivi
 rivkah
 rivy
-rüdiger
+rÑŒdiger
 roald
 roana
 roanna

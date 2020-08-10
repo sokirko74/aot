@@ -7,7 +7,7 @@ const string TrennbarePraefixe[TrennbarePraefixeCount] = {
 "AB",		"AN",		"AUF",		"AUS",		"BEI",		"DAR",		"DURCH",	"EIN",		
 "FEHL",		"FEST",		"HEIM",		"HINZU",	"IRRE",		"LOS",		"MIT",		"NACH",			
 "PREIS",	"STAND",	"STATT",	"TEIL",		"UEBER",	"UM",		"UNTER",	"VOR",		
-"WETT",		"WIDER",	"WUNDER",	"ZU",		"ZURECHT",	"ZURÜCK",	"ZUSAMMEN"};
+"WETT",		"WIDER",	"WUNDER",	"ZU",		"ZURECHT",	"ZURÐ¬CK",	"ZUSAMMEN"};
 
 
 
@@ -191,7 +191,7 @@ void FindAllRAPs(const CGerSentence& C, vector< CPeriod >&  RAPs)
 		if (!C.CheckLastPredicatePosition(C.m_Words.size() - 1, last_word))
 		{
 			// A RAP should be at the end of a clause
-			// "jeder würde eine Summe ausgezahlt erhalten."
+			// "jeder wÑŒrde eine Summe ausgezahlt erhalten."
 			continue;
 		};
 
@@ -289,7 +289,7 @@ bool CheckLeftAndRightPart(const CGerSentence& C, CDividedUnionInfo& Info)
 				{
 					//  we should not connect wordform "sein" to PA2
 					// since otherwise there are too many errors:
-					// "er hat für sein Konzept geworben."
+					// "er hat fÑŒr sein Konzept geworben."
 					return false;
 				};
 
@@ -572,7 +572,7 @@ bool CheckNormalCompactAnalyticalForm(CGerSentence &C,  int WordNo, int& MainVer
 
 /*
  processing simple cases of coordinating cases like 
-  "geleistet und sich bewährt haben."
+  "geleistet und sich bewÐ´hrt haben."
   "gehen oder kommen werden"
   We go the  left, pass a reflexive pronoun, pass a coordinating conjunction,
   build a new sentence from the first verb and the auxiliary verb sequence,
@@ -749,7 +749,7 @@ void BuildZuForms(CGerSentence &C)
 			 In ambigious cases  an infinitive should be at the end of the sentence, or it must be followed by
 			 a comma, a similar conjunction or an auxiliary verb.
 			 Otherwise we cannot safely convert it to  "compound" infinitive. For example,
-				"zu meinen alten Büchern"
+				"zu meinen alten BÑŒchern"
 			 Here  "meinen" can be an infinitive, but the program pass it.
 			*/
 			if	(		(WordNo+2 < C.m_Words.size())

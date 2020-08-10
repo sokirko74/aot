@@ -8,7 +8,7 @@
 #include "Sentence.h"
 
 /*
- сравнение CMorphVariant-ов по весу
+ СЃСЂР°РІРЅРµРЅРёРµ CMorphVariant-РѕРІ РїРѕ РІРµСЃСѓ
 */
 inline bool GreaterByWeight (const CMorphVariant& variant1, const CMorphVariant& variant2 )  
 {
@@ -206,11 +206,11 @@ vector<CMorphVariant*> CClause::GetSynVariantIndexesByTypeNum(int i_type)
 
 
 
-//	если слово iWord входит в клаузу, тогда выдается номер слова, которое стоит 
-//	сразу после этой клаузы.
-//	иначе выдается  iWord.
-//	Выдаваемый iWord может снова указывать на клаузу, если клаузы стоят контактно, а
-//	входной iWord указывал на первую клаузу.
+//	РµСЃР»Рё СЃР»РѕРІРѕ iWord РІС…РѕРґРёС‚ РІ РєР»Р°СѓР·Сѓ, С‚РѕРіРґР° РІС‹РґР°РµС‚СЃСЏ РЅРѕРјРµСЂ СЃР»РѕРІР°, РєРѕС‚РѕСЂРѕРµ СЃС‚РѕРёС‚ 
+//	СЃСЂР°Р·Сѓ РїРѕСЃР»Рµ СЌС‚РѕР№ РєР»Р°СѓР·С‹.
+//	РёРЅР°С‡Рµ РІС‹РґР°РµС‚СЃСЏ  iWord.
+//	Р’С‹РґР°РІР°РµРјС‹Р№ iWord РјРѕР¶РµС‚ СЃРЅРѕРІР° СѓРєР°Р·С‹РІР°С‚СЊ РЅР° РєР»Р°СѓР·Сѓ, РµСЃР»Рё РєР»Р°СѓР·С‹ СЃС‚РѕСЏС‚ РєРѕРЅС‚Р°РєС‚РЅРѕ, Р°
+//	РІС…РѕРґРЅРѕР№ iWord СѓРєР°Р·С‹РІР°Р» РЅР° РїРµСЂРІСѓСЋ РєР»Р°СѓР·Сѓ.
 
 int CClause::PassSubClause(int iWord) const
 {
@@ -439,8 +439,8 @@ void CClause::GetBuildingUnits(vector<CBuildingUnit>& BuildingUnits)
 		{
 			const CClause& Child = m_pSent->m_Clauses[U.m_ChildClauseNo];
 			U.m_HomonymsCount =  Child.m_vectorTypes.size();
-			// если была вложена пустыха или клауза, у который есть синвариант без вершины,
-			// тогда  в качестве варианта нужно добавить омоним пустой вершины клаузы
+			// РµСЃР»Рё Р±С‹Р»Р° РІР»РѕР¶РµРЅР° РїСѓСЃС‚С‹С…Р° РёР»Рё РєР»Р°СѓР·Р°, Сѓ РєРѕС‚РѕСЂС‹Р№ РµСЃС‚СЊ СЃРёРЅРІР°СЂРёР°РЅС‚ Р±РµР· РІРµСЂС€РёРЅС‹,
+			// С‚РѕРіРґР°  РІ РєР°С‡РµСЃС‚РІРµ РІР°СЂРёР°РЅС‚Р° РЅСѓР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ РѕРјРѕРЅРёРј РїСѓСЃС‚РѕР№ РІРµСЂС€РёРЅС‹ РєР»Р°СѓР·С‹
 			if (		(U.m_HomonymsCount == 0) 
 					||	!Child.HasUnambiguousStrongRootWithoutWeakHomonyms()
 				)
@@ -479,7 +479,7 @@ int AddUnitAsWord (vector<CBuildingUnit>::const_iterator pUnit, int CurrentHomon
 	return pUnit->m_WordNo+1;
 };
 
-// максимальное количество вариантов в одной  клаузе (все остальные игнорируются)
+// РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІР°СЂРёР°РЅС‚РѕРІ РІ РѕРґРЅРѕР№  РєР»Р°СѓР·Рµ (РІСЃРµ РѕСЃС‚Р°Р»СЊРЅС‹Рµ РёРіРЅРѕСЂРёСЂСѓСЋС‚СЃСЏ)
 const int MorphVarMaxCount = 1600;
 
 void CClause::BuildSynVariantsRecursive(vector<CBuildingUnit>::iterator pUnit, CMorphVariant& synVariant)
@@ -521,9 +521,9 @@ void CClause::BuildSynVariantsRecursive(vector<CBuildingUnit>::iterator pUnit, C
 
 
 
-//	Нам нужно, чтобы  все омонимы были представлены во множестве синвариантов, иначе при удалении омонимов
-//	могут быть удалены все синваоринты клаузы.
-//Функция AddSynVariantsWithUnusedHomonyms запукается  только тогда, когда число вариантов превысило допутимый предел.
+//	РќР°Рј РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹  РІСЃРµ РѕРјРѕРЅРёРјС‹ Р±С‹Р»Рё РїСЂРµРґСЃС‚Р°РІР»РµРЅС‹ РІРѕ РјРЅРѕР¶РµСЃС‚РІРµ СЃРёРЅРІР°СЂРёР°РЅС‚РѕРІ, РёРЅР°С‡Рµ РїСЂРё СѓРґР°Р»РµРЅРёРё РѕРјРѕРЅРёРјРѕРІ
+//	РјРѕРіСѓС‚ Р±С‹С‚СЊ СѓРґР°Р»РµРЅС‹ РІСЃРµ СЃРёРЅРІР°РѕСЂРёРЅС‚С‹ РєР»Р°СѓР·С‹.
+//Р¤СѓРЅРєС†РёСЏ AddSynVariantsWithUnusedHomonyms Р·Р°РїСѓРєР°РµС‚СЃСЏ  С‚РѕР»СЊРєРѕ С‚РѕРіРґР°, РєРѕРіРґР° С‡РёСЃР»Рѕ РІР°СЂРёР°РЅС‚РѕРІ РїСЂРµРІС‹СЃРёР»Рѕ РґРѕРїСѓС‚РёРјС‹Р№ РїСЂРµРґРµР».
 	
 
 void AddSynVariantsWithUnusedHomonyms(CClause& C, vector<CBuildingUnit>& BuildingUnits) 
@@ -625,7 +625,7 @@ void CreateGroupsForTermins(CClause& C, CFormatCaller& FormatCaller, CMorphVaria
 		T.m_iFirstWord = C.UnitNoByWordNo(T.m_iFirstWord);
 		T.m_iLastWord = C.UnitNoByWordNo(T.m_iLastWord);
 
-        // вставлено из-за примера "печатной информации,  фильмов, компьютерных банков данных, ничего. "
+        // РІСЃС‚Р°РІР»РµРЅРѕ РёР·-Р·Р° РїСЂРёРјРµСЂР° "РїРµС‡Р°С‚РЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё,  С„РёР»СЊРјРѕРІ, РєРѕРјРїСЊСЋС‚РµСЂРЅС‹С… Р±Р°РЅРєРѕРІ РґР°РЅРЅС‹С…, РЅРёС‡РµРіРѕ. "
        /* bool bSubClause = false;
         for (size_t i=T.m_iFirstWord; i <= T.m_iLastWord; i++)
             if (FormatCaller.sent[i].m_UnitType == EClause)
@@ -654,13 +654,13 @@ void CreateGroupsForTermins(CClause& C, CFormatCaller& FormatCaller, CMorphVaria
 
 
 
-//вызывается, когда еще syn-варианты еще не построены(т.е. в первый раз)
+//РІС‹Р·С‹РІР°РµС‚СЃСЏ, РєРѕРіРґР° РµС‰Рµ syn-РІР°СЂРёР°РЅС‚С‹ РµС‰Рµ РЅРµ РїРѕСЃС‚СЂРѕРµРЅС‹(С‚.Рµ. РІ РїРµСЂРІС‹Р№ СЂР°Р·)
 bool CClause::BuildGroupsAndSynVariants(CFormatCaller& FormatCaller)
 {
 	try
 	{		
-		//строим декартово произведение омонимов и
-		//заполняем очередным набором омонимов FormatCaller.sent
+		//СЃС‚СЂРѕРёРј РґРµРєР°СЂС‚РѕРІРѕ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РѕРјРѕРЅРёРјРѕРІ Рё
+		//Р·Р°РїРѕР»РЅСЏРµРј РѕС‡РµСЂРµРґРЅС‹Рј РЅР°Р±РѕСЂРѕРј РѕРјРѕРЅРёРјРѕРІ FormatCaller.sent
 		BuildSynVariants();
 
 
@@ -714,7 +714,7 @@ bool CClause::BuildGroupsAndSynVariants(CFormatCaller& FormatCaller)
 
 
 /*
- сравнение CMorphVariant-ов по номерам омонимов
+ СЃСЂР°РІРЅРµРЅРёРµ CMorphVariant-РѕРІ РїРѕ РЅРѕРјРµСЂР°Рј РѕРјРѕРЅРёРјРѕРІ
 */
 inline bool LessByHomonyms (const CMorphVariant& variant1, const CMorphVariant& variant2) 
 {
@@ -745,7 +745,7 @@ bool CClause::BuildGroupsForExistingSynVariants(CFormatCaller& FormatCaller, boo
 		{
 			CMorphVariant& synVariant = *pVar;
 
-			//пересчитать границы групп 
+			//РїРµСЂРµСЃС‡РёС‚Р°С‚СЊ РіСЂР°РЅРёС†С‹ РіСЂСѓРїРї 
 			for (size_t i=0; i < synVariant.m_vectorGroups.GetGroups().size(); i++)
 				InterpretGroupBounds( *synVariant.m_vectorGroups.GetGroupPtr(i) );
 
@@ -931,7 +931,7 @@ const CGroup* CClause::GetLastFirmHost(int iWord, CSVI pSynVar) const
 const CGroup* CClause::GetLastHost(CPeriod P, CSVI pSynVar) const 
 {
 	const CMorphVariant& pVar = *pSynVar;
-	// идем с конца, поэтому первая объемлющая группа будет  максимальной
+	// РёРґРµРј СЃ РєРѕРЅС†Р°, РїРѕСЌС‚РѕРјСѓ РїРµСЂРІР°СЏ РѕР±СЉРµРјР»СЋС‰Р°СЏ РіСЂСѓРїРїР° Р±СѓРґРµС‚  РјР°РєСЃРёРјР°Р»СЊРЅРѕР№
 	
 	for(int i = pVar.m_vectorGroups.GetGroups().size() - 1 ; i >= 0 ; i--)
 	{		
@@ -944,9 +944,9 @@ const CGroup* CClause::GetLastHost(CPeriod P, CSVI pSynVar) const
 }
 
 
-//	функция AssignSynVariantsGrammems копирует морфологические характеристики слов из FormatCaller в синвариант.
-//	Предполагается, что  в FormatCaller были потстроены новын группы, которые изменили 
-//	морф. характеристики слов.
+//	С„СѓРЅРєС†РёСЏ AssignSynVariantsGrammems РєРѕРїРёСЂСѓРµС‚ РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРёРµ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё СЃР»РѕРІ РёР· FormatCaller РІ СЃРёРЅРІР°СЂРёР°РЅС‚.
+//	РџСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ  РІ FormatCaller Р±С‹Р»Рё РїРѕС‚СЃС‚СЂРѕРµРЅС‹ РЅРѕРІС‹РЅ РіСЂСѓРїРїС‹, РєРѕС‚РѕСЂС‹Рµ РёР·РјРµРЅРёР»Рё 
+//	РјРѕСЂС„. С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё СЃР»РѕРІ.
 
 void CClause::AssignSynVariantsGrammems(CMorphVariant&  synVariant, const CFormatCaller& FormatCaller)
 {
@@ -976,9 +976,9 @@ void CClause::AssignSynVariantsGrammems(CMorphVariant&  synVariant, const CForma
 
 
 	
-	//	берем все простые  предлоги омонима, на которых была построена предложная 
-	//	группа. Если предложная группа была  построена, тогда m_FoundPrepDependCases
-	//	содержит  падежи, которые  были найдены у зависимого от предлого слова.
+	//	Р±РµСЂРµРј РІСЃРµ РїСЂРѕСЃС‚С‹Рµ  РїСЂРµРґР»РѕРіРё РѕРјРѕРЅРёРјР°, РЅР° РєРѕС‚РѕСЂС‹С… Р±С‹Р»Р° РїРѕСЃС‚СЂРѕРµРЅР° РїСЂРµРґР»РѕР¶РЅР°СЏ 
+	//	РіСЂСѓРїРїР°. Р•СЃР»Рё РїСЂРµРґР»РѕР¶РЅР°СЏ РіСЂСѓРїРїР° Р±С‹Р»Р°  РїРѕСЃС‚СЂРѕРµРЅР°, С‚РѕРіРґР° m_FoundPrepDependCases
+	//	СЃРѕРґРµСЂР¶РёС‚  РїР°РґРµР¶Рё, РєРѕС‚РѕСЂС‹Рµ  Р±С‹Р»Рё РЅР°Р№РґРµРЅС‹ Сѓ Р·Р°РІРёСЃРёРјРѕРіРѕ РѕС‚ РїСЂРµРґР»РѕРіРѕ СЃР»РѕРІР°.
 	
 	for(int UnitNo = 0 ; UnitNo < FormatCaller.sent.size() ; UnitNo++ )
 	{
@@ -1095,7 +1095,7 @@ void CClause::DeleteHomonym(int iW,int  iH)
 	int SynVarWordNo = UnitNoByWordNo(iW);
 
     
-	//	уничтожаем синварианты и группы с этим омонимом 
+	//	СѓРЅРёС‡С‚РѕР¶Р°РµРј СЃРёРЅРІР°СЂРёР°РЅС‚С‹ Рё РіСЂСѓРїРїС‹ СЃ СЌС‚РёРј РѕРјРѕРЅРёРјРѕРј 
 	SVI pSynVar = m_SynVariants.begin();
 
 	while(pSynVar !=  m_SynVariants.end())
@@ -1109,11 +1109,11 @@ void CClause::DeleteHomonym(int iW,int  iH)
 
     
 	
-	//	удаляем омоним у слова  
+	//	СѓРґР°Р»СЏРµРј РѕРјРѕРЅРёРј Сѓ СЃР»РѕРІР°  
 	word.EraseHomonym( iH );
 
 
-	//	вершина клаузы могла указывать на этот омоним, такие вершины нао удалить 
+	//	РІРµСЂС€РёРЅР° РєР»Р°СѓР·С‹ РјРѕРіР»Р° СѓРєР°Р·С‹РІР°С‚СЊ РЅР° СЌС‚РѕС‚ РѕРјРѕРЅРёРј, С‚Р°РєРёРµ РІРµСЂС€РёРЅС‹ РЅР°Рѕ СѓРґР°Р»РёС‚СЊ 
 	for(int TypeNo = 0 ; TypeNo < m_vectorTypes.size() ; TypeNo++ )
 		if( m_vectorTypes[TypeNo].m_Root.m_WordNo == iW) 
 			if(m_vectorTypes[TypeNo].m_Root.m_HomonymNo == iH) 
@@ -1129,9 +1129,9 @@ void CClause::DeleteHomonym(int iW,int  iH)
 		m_RelativeWord.m_WordNo = -1;
 
 		
-	// уменьшить номер омонимов во всех морфологических вариантах
-	// и заново определить СSynVariant::m_ClauseTypeNo, поскольку
-	// вектор типов был изменен
+	// СѓРјРµРЅСЊС€РёС‚СЊ РЅРѕРјРµСЂ РѕРјРѕРЅРёРјРѕРІ РІРѕ РІСЃРµС… РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРёС… РІР°СЂРёР°РЅС‚Р°С…
+	// Рё Р·Р°РЅРѕРІРѕ РѕРїСЂРµРґРµР»РёС‚СЊ РЎSynVariant::m_ClauseTypeNo, РїРѕСЃРєРѕР»СЊРєСѓ
+	// РІРµРєС‚РѕСЂ С‚РёРїРѕРІ Р±С‹Р» РёР·РјРµРЅРµРЅ
 	for(pSynVar = m_SynVariants.begin(); pSynVar !=  m_SynVariants.end() ; pSynVar++)
 	{
 		CMorphVariant& synVar = *pSynVar;
@@ -1262,7 +1262,7 @@ void CClause::RecalculateRelationsCoordinates(int iClause)
 
 void CClause::AssignOborotMarksToDisruptConj(const CFormatCaller& FormatCaller, CMorphVariant&  synVariant)
 {
-	// удаляем интерпретацию оборота у омонимов, которые вошли в разрывный  союз 
+	// СѓРґР°Р»СЏРµРј РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ РѕР±РѕСЂРѕС‚Р° Сѓ РѕРјРѕРЅРёРјРѕРІ, РєРѕС‚РѕСЂС‹Рµ РІРѕС€Р»Рё РІ СЂР°Р·СЂС‹РІРЅС‹Р№  СЃРѕСЋР· 
 	int i = 0;
 	for ( ; i < FormatCaller.sent.size(); i++ )
 		if (FormatCaller.sent[i].m_DisruptOborotId != UnknownSyntaxElement)
@@ -1272,7 +1272,7 @@ void CClause::AssignOborotMarksToDisruptConj(const CFormatCaller& FormatCaller, 
 				m_pSent->DeleteOborotThatContains(iW);
 		};
 
-	// простовляем новую интерпретацию оборота у омонимов, которые вошли в разрывный  союз 
+	// РїСЂРѕСЃС‚РѕРІР»СЏРµРј РЅРѕРІСѓСЋ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ РѕР±РѕСЂРѕС‚Р° Сѓ РѕРјРѕРЅРёРјРѕРІ, РєРѕС‚РѕСЂС‹Рµ РІРѕС€Р»Рё РІ СЂР°Р·СЂС‹РІРЅС‹Р№  СЃРѕСЋР· 
 	for (i = 0; i < FormatCaller.sent.size(); i++ )
 		if (FormatCaller.sent[i].m_DisruptOborotId != UnknownSyntaxElement)
 		{
@@ -1291,7 +1291,7 @@ void CClause::AssignOborotMarksToDisruptConj(const CFormatCaller& FormatCaller, 
 
 
 
-//если в synVariant фрагмента (клаузы) существует два предиката
+//РµСЃР»Рё РІ synVariant С„СЂР°РіРјРµРЅС‚Р° (РєР»Р°СѓР·С‹) СЃСѓС‰РµСЃС‚РІСѓРµС‚ РґРІР° РїСЂРµРґРёРєР°С‚Р°
 bool CClause::IsTwoPotentialPredikatesInOneClause(const CMorphVariant& synVar) const
 {
 	if (!m_pSent->m_bShouldUseTwoPotentialRule) return false;
@@ -1410,7 +1410,7 @@ void CClause::DeleteClauseTypeInHostClause(CClause* FirstHost,  int TypeNo)
 void CClause::DeleteClauseType(int ClauseTypeNo)
 {
 	m_vectorTypes.erase(m_vectorTypes.begin() + ClauseTypeNo);
-	// во всех синвариантах нужно уменьшить номера типов, которые стояли после ClauseTypeNo
+	// РІРѕ РІСЃРµС… СЃРёРЅРІР°СЂРёР°РЅС‚Р°С… РЅСѓР¶РЅРѕ СѓРјРµРЅСЊС€РёС‚СЊ РЅРѕРјРµСЂР° С‚РёРїРѕРІ, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏР»Рё РїРѕСЃР»Рµ ClauseTypeNo
 	for (SVI k=m_SynVariants.begin(); k != m_SynVariants.end(); k++)
 		if (k->m_ClauseTypeNo > ClauseTypeNo)
 			k->m_ClauseTypeNo--;
@@ -1451,8 +1451,8 @@ void CClause::ChangeAllClauseTypesToOneType(SClauseType Type)
 
 void CClause::DeleteClauseTypeWhichAreNotUsedInAnyOfSynVars()
 {
-	// если не построилось ни одного варианта надо выйти без разговора
-	// Ноль вариантов - это уже ошибка.
+	// РµСЃР»Рё РЅРµ РїРѕСЃС‚СЂРѕРёР»РѕСЃСЊ РЅРё РѕРґРЅРѕРіРѕ РІР°СЂРёР°РЅС‚Р° РЅР°РґРѕ РІС‹Р№С‚Рё Р±РµР· СЂР°Р·РіРѕРІРѕСЂР°
+	// РќРѕР»СЊ РІР°СЂРёР°РЅС‚РѕРІ - СЌС‚Рѕ СѓР¶Рµ РѕС€РёР±РєР°.
 	if ( m_SynVariants.empty() ) return;
 
 	for (int i = 0; i < m_vectorTypes.size(); i++)
@@ -1478,7 +1478,7 @@ bool	CClause::HasUnambiguousStrongRootWithoutWeakHomonyms() const
 	try {
 		for (int i = 0; i < m_vectorTypes.size(); i++)
 		{
-			// Пустыхи и копулы пропускаем
+			// РџСѓСЃС‚С‹С…Рё Рё РєРѕРїСѓР»С‹ РїСЂРѕРїСѓСЃРєР°РµРј
 			if (m_vectorTypes[i].m_Root.IsEmpty()) continue;;
 			const CSynWord& word  = GetWords()[m_vectorTypes[i].m_Root.m_WordNo];
 

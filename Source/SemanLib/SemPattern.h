@@ -7,23 +7,23 @@ class CRossHolder;
 
 class CSemPattern {
 public:	 
-  // узел, чьим актантом он является
+  // СѓР·РµР», С‡СЊРёРј Р°РєС‚Р°РЅС‚РѕРј РѕРЅ СЏРІР»СЏРµС‚СЃСЏ
   long					m_SourceNo; 	 
-  // валентность, для этого актанта, взятая из поля VAL
+  // РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ, РґР»СЏ СЌС‚РѕРіРѕ Р°РєС‚Р°РЅС‚Р°, РІР·СЏС‚Р°СЏ РёР· РїРѕР»СЏ VAL
   CValency				m_PatternValency;
-  // GFi для этого актанита
+  // GFi РґР»СЏ СЌС‚РѕРіРѕ Р°РєС‚Р°РЅРёС‚Р°
   vector<TCortege10>	m_GramCorteges;
-  // LEXi для этого актанита
+  // LEXi РґР»СЏ СЌС‚РѕРіРѕ Р°РєС‚Р°РЅРёС‚Р°
   StringVector		m_LexFets;
-  // MANLEXi для этого актанита
+  // MANLEXi РґР»СЏ СЌС‚РѕРіРѕ Р°РєС‚Р°РЅРёС‚Р°
   StringVector		m_ObligLexFets;
-  // DETERMi для этого актанита
+  // DETERMi РґР»СЏ СЌС‚РѕРіРѕ Р°РєС‚Р°РЅРёС‚Р°
   vector<TCortege10>	m_ArticleCorteges;
-  // направление, в котором следует искать этот актант (см. домен D_POSITION)
+  // РЅР°РїСЂР°РІР»РµРЅРёРµ, РІ РєРѕС‚РѕСЂРѕРј СЃР»РµРґСѓРµС‚ РёСЃРєР°С‚СЊ СЌС‚РѕС‚ Р°РєС‚Р°РЅС‚ (СЃРј. РґРѕРјРµРЅ D_POSITION)
   string				m_Direction;
-  // SFi для этого актанита
+  // SFi РґР»СЏ СЌС‚РѕРіРѕ Р°РєС‚Р°РЅРёС‚Р°
   vector< vector<string> >		m_ActantSemFets;
-  // словарь, из которого было взято это грамматическое выражение
+  // СЃР»РѕРІР°СЂСЊ, РёР· РєРѕС‚РѕСЂРѕРіРѕ Р±С‹Р»Рѕ РІР·СЏС‚Рѕ СЌС‚Рѕ РіСЂР°РјРјР°С‚РёС‡РµСЃРєРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ
   const CRossHolder*			m_pRossDoc;
   const CRossHolder*			GetRossHolder() const;
 
@@ -32,7 +32,7 @@ public:
   void		InitSemPattern(const CRossHolder* pRossDoc, WORD UnitNo, BYTE LeafId, BYTE BracketLeafId);
   long		GetSynRel(long CortegeNo) const;
   long		GetSynFet(long CortegeNo) const;
-  // то же, что и предыдущие две функции, но выдаются строки
+  // С‚Рѕ Р¶Рµ, С‡С‚Рѕ Рё РїСЂРµРґС‹РґСѓС‰РёРµ РґРІРµ С„СѓРЅРєС†РёРё, РЅРѕ РІС‹РґР°СЋС‚СЃСЏ СЃС‚СЂРѕРєРё
   string	GetSynFetStr(long CortegeNo) const;
   string	GetSynRelStr(long CortegeNo) const;
   bool      HasSemFet (const string& SemFet) const;

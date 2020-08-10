@@ -39,7 +39,7 @@ arthur
 astrid
 axel
 barbara
-bartholomäus
+bartholomĞ´us
 bastian
 beate
 ben
@@ -55,7 +55,7 @@ bertold
 bettina
 bill
 birgit
-björn
+bjÑ†rn
 bob
 bobby
 bodo
@@ -66,7 +66,7 @@ brigitte
 bruno
 burkhard
 butros
-bärbel
+bĞ´rbel
 carina
 carl
 carlos
@@ -157,9 +157,9 @@ gregor
 gudrun
 guido
 gustav
-götz
-günter
-günther
+gÑ†tz
+gÑŒnter
+gÑŒnther
 hanna
 hannelore
 hannes
@@ -224,9 +224,9 @@ joseph
 juan
 julia
 jutta
-jörg
-jörn
-jürgen
+jÑ†rg
+jÑ†rn
+jÑŒrgen
 kai
 karin
 karina
@@ -246,7 +246,7 @@ kirsten
 klaus
 konrad
 kurt
-käthe
+kĞ´the
 lars
 lech
 lee
@@ -282,7 +282,7 @@ martin
 mary
 mathias
 matthias
-matthäus
+matthĞ´us
 maurice
 max
 mechthild
@@ -336,7 +336,7 @@ roy
 rudi
 rudolf
 ruth
-rüdiger
+rÑŒdiger
 sabine
 saddam
 salman

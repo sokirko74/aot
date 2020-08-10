@@ -60,9 +60,9 @@ BOOL CSetEditor::OnInitDialog()
 	CDialog::OnInitDialog();
 
 
-    SetWindowText(CString("Çíà÷åíèÿ ïîëÿ ") + ConstructFldName(GetRoss(), m_Field.FieldNo, m_Field.LeafId, m_Field.BracketLeafId));
+    SetWindowText(CString("Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð¿Ð¾Ð»Ñ ") + ConstructFldName(GetRoss(), m_Field.FieldNo, m_Field.LeafId, m_Field.BracketLeafId));
 
-	// óñòàíîâêà øðèôòà
+	// ÑƒÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° ÑˆÑ€Ð¸Ñ„Ñ‚Ð°
 	CFont* F = m_ListBox.GetFont();
 	LOGFONT LogFont;
 	F->GetLogFont(&LogFont);

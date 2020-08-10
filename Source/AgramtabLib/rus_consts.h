@@ -47,9 +47,9 @@ enum rGrammems {
 		 rGenitiv    = 3,
 		 rDativ      = 4,
 		 rAccusativ  = 5,
-		 rInstrumentalis = 6,//òâ,
-		 rLocativ    = 7,	//ïð,
-		 rVocativ    = 8,	//çâ,
+		 rInstrumentalis = 6,//Ñ‚Ð²,
+		 rLocativ    = 7,	//Ð¿Ñ€,
+		 rVocativ    = 8,	//Ð·Ð²,
 		 rAllCases   = ((1<<rNominativ) | (1<<rGenitiv) | (1<<rDativ) | (1<<rAccusativ) | (1<<rInstrumentalis) | (1<<rVocativ) | (1<<rLocativ)),
 
 		 rMasculinum = 9,
@@ -77,61 +77,61 @@ enum rGrammems {
 
 		 rComparative = 22,
 
-		 rPerfective = 23,//ñâ
-		 rNonPerfective = 24,//íñ
+		 rPerfective = 23,//ÑÐ²
+		 rNonPerfective = 24,//Ð½Ñ
 
-		 rNonTransitive = 25,//íï
-		 rTransitive = 26,//ïå
+		 rNonTransitive = 25,//Ð½Ð¿
+		 rTransitive = 26,//Ð¿Ðµ
 
-		 rActiveVoice = 27,//äñò
-		 rPassiveVoice = 28,//ñòð
+		 rActiveVoice = 27,//Ð´ÑÑ‚
+		 rPassiveVoice = 28,//ÑÑ‚Ñ€
 
 
 		 rIndeclinable = 29, //"0"
-	     rInitialism = 30,	//"àááð"
+	     rInitialism = 30,	//"Ð°Ð±Ð±Ñ€"
 
-		 rPatronymic = 31, // "îò÷"
+		 rPatronymic = 31, // "Ð¾Ñ‚Ñ‡"
 
-		 rToponym = 32,//ëîê
-		 rOrganisation = 33,//îðã
+		 rToponym = 32,//Ð»Ð¾Ðº
+		 rOrganisation = 33,//Ð¾Ñ€Ð³
 
-		 rQualitative = 34,//êà÷
-		 rDeFactoSingTantum = 35,//äôñò
+		 rQualitative = 34,//ÐºÐ°Ñ‡
+		 rDeFactoSingTantum = 35,//Ð´Ñ„ÑÑ‚
 
-		 rInterrogative = 36,//âîïð
-		 rDemonstrative = 37,//óêàçàò
+		 rInterrogative = 36,//Ð²Ð¾Ð¿Ñ€
+		 rDemonstrative = 37,//ÑƒÐºÐ°Ð·Ð°Ñ‚
 
 		 rName	    = 38,
 		 rSurName	= 39,
-		 rImpersonal = 40,//áåçë
-		 rSlang	= 41,//æàðã
-		 rMisprint = 42,//îï÷
-		 rColloquial = 43,//ðàçã
-		 rPossessive = 44,//ïðèòÿæ
-		 rArchaism = 45,//àðõ
+		 rImpersonal = 40,//Ð±ÐµÐ·Ð»
+		 rSlang	= 41,//Ð¶Ð°Ñ€Ð³
+		 rMisprint = 42,//Ð¾Ð¿Ñ‡
+		 rColloquial = 43,//Ñ€Ð°Ð·Ð³
+		 rPossessive = 44,//Ð¿Ñ€Ð¸Ñ‚ÑÐ¶
+		 rArchaism = 45,//Ð°Ñ€Ñ…
 		 rSecondCase = 46,
 		 rPoetry = 47,
 		 rProfession = 48,
-		 rSuperlative = 49,//ïðåâ
-		 rPositive = 50//ïîëîæ
+		 rSuperlative = 49,//Ð¿Ñ€ÐµÐ²
+		 rPositive = 50//Ð¿Ð¾Ð»Ð¾Ð¶
     };
 
 
 
 
 typedef enum {
-	VERB_PERS_T=0,//ÃË_ËÈ×Í
-	ADVERB_PARTICIPLE_T=1, //ÄÏÐ
-	PARTICIPLE_SHORT_T=2,	//ÊÐ_ÏÐ×
-	ADJ_SHORT_T=3,//ÊÐ_ÏÐÈË
-	PREDK_T=4, //ÏÐÅÄÊ
-	PARTICIPLE_T=5,	//ÏÐ×
-	INFINITIVE_T=6,	//ÈÍÔ
-	INP_T=7, //ÂÂÎÄ
-	DASH_T=8,//ÒÈÐÅ
-	UNDETACHED_ADJ_PATIC=9,//ÍÑÎ
-	COMPARATIVE_T=10,//ÑÐÀÂÍ
-	COPUL_T=11//ÊÎÏÓË
+	VERB_PERS_T=0,//Ð“Ð›_Ð›Ð˜Ð§Ð
+	ADVERB_PARTICIPLE_T=1, //Ð”ÐŸÐ 
+	PARTICIPLE_SHORT_T=2,	//ÐšÐ _ÐŸÐ Ð§
+	ADJ_SHORT_T=3,//ÐšÐ _ÐŸÐ Ð˜Ð›
+	PREDK_T=4, //ÐŸÐ Ð•Ð”Ðš
+	PARTICIPLE_T=5,	//ÐŸÐ Ð§
+	INFINITIVE_T=6,	//Ð˜ÐÐ¤
+	INP_T=7, //Ð’Ð’ÐžÐ”
+	DASH_T=8,//Ð¢Ð˜Ð Ð•
+	UNDETACHED_ADJ_PATIC=9,//ÐÐ¡Ðž
+	COMPARATIVE_T=10,//Ð¡Ð ÐÐ’Ð
+	COPUL_T=11//ÐšÐžÐŸÐ£Ð›
 } rClauseTypeEnum ;
 
 

@@ -17,17 +17,17 @@
 
 enum  PlmLineFlagEnum {
 	fl_punct=1<<1,
-	fl_russian_odin=1<<2, // for Russian //  ìîæåò çàêàí÷èâàòüñÿ íà 01, 21,31,41,51,61,71,81,91, íî íå íà 11
+	fl_russian_odin=1<<2, // for Russian //  Ð¼Ð¾Ð¶ÐµÑ‚ Ð·Ð°ÐºÐ°Ð½Ñ‡Ð¸Ð²Ð°Ñ‚ÑŒÑÑ Ð½Ð° 01, 21,31,41,51,61,71,81,91, Ð½Ð¾ Ð½Ðµ Ð½Ð° 11
 	fl_oborot1=1<<3,
 	fl_oborot2=1<<4,
 	fl_in_oborot=1<<5,
-	fl_le=1<<6, //ëåêñåìà // for Russian
-	fl_ile=1<<7, //èíîñòðàííàÿ ëåêñåìà
+	fl_le=1<<6, //Ð»ÐµÐºÑÐµÐ¼Ð° // for Russian
+	fl_ile=1<<7, //Ð¸Ð½Ð¾ÑÑ‚Ñ€Ð°Ð½Ð½Ð°Ñ Ð»ÐµÐºÑÐµÐ¼Ð°
 	fl_ranknoun=1<<8,
 	fl_digit=1<<9,
 	fl_ambiguous  =1<<10, 
 	fl_comma=1<<11,
-	fl_small_number=1<<12, // for Russian //  ìîæåò çàêàí÷èâàòüñÿ íà 2, 3 èëè 4
+	fl_small_number=1<<12, // for Russian //  Ð¼Ð¾Ð¶ÐµÑ‚ Ð·Ð°ÐºÐ°Ð½Ñ‡Ð¸Ð²Ð°Ñ‚ÑŒÑÑ Ð½Ð° 2, 3 Ð¸Ð»Ð¸ 4
 	fl_dg_ch=1<<13,
 	fl_standard_param_abbr=1<<14,
 	fl_fullstop=1<<15,
@@ -65,7 +65,7 @@ public:
 	// an ID of oborot for disruptive conjunction which should be inited by CFormatCaller::create_disrupt_conj_group
 	WORD					m_DisruptOborotId;
 
-	// âñå ïàäåæè èç âîçìîæíûõ, êîòîðûìè óïðàâëÿåò ïðåäëîã, âîøåäøèé  â ïðåäëîæíóþ ãðóïïó
+	// Ð²ÑÐµ Ð¿Ð°Ð´ÐµÐ¶Ð¸ Ð¸Ð· Ð²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ñ‹Ñ…, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¼Ð¸ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð³, Ð²Ð¾ÑˆÐµÐ´ÑˆÐ¸Ð¹  Ð² Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶Ð½ÑƒÑŽ Ð³Ñ€ÑƒÐ¿Ð¿Ñƒ
 	QWORD					m_FoundPrepDependCases;
 
 	

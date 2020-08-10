@@ -51,11 +51,11 @@ public:
 		m_vectorClauseArc.clear();
 	};
 
-	//номера слов на этой строчке
+	//РЅРѕРјРµСЂР° СЃР»РѕРІ РЅР° СЌС‚РѕР№ СЃС‚СЂРѕС‡РєРµ
 	CIntVector m_vectorWordsNum;
 
-	//номера и номера частей всяких дуг и арок на этой строчке
-	//(часть - кусок фигуры)
+	//РЅРѕРјРµСЂР° Рё РЅРѕРјРµСЂР° С‡Р°СЃС‚РµР№ РІСЃСЏРєРёС… РґСѓРі Рё Р°СЂРѕРє РЅР° СЌС‚РѕР№ СЃС‚СЂРѕС‡РєРµ
+	//(С‡Р°СЃС‚СЊ - РєСѓСЃРѕРє С„РёРіСѓСЂС‹)
 	CFigureInClauseVector	m_vectorGrArc;
 	CFigureInClauseVector	m_vectorRelArc;
 	CFigureVector			m_vectorClauseArc;

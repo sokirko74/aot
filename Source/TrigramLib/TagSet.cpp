@@ -150,9 +150,9 @@ bool CTagSet::ReadTagSet(string FileName, const CAgramtab* pAgramtab)
 	
 	char buffer[1000];
     // <tagname>  /lemma1,lemma2.../? <morphological featutes>
-    // ÔËÏÂ:
-    // tag1  /Í‡ÒË‚˚È,ÌÓ‚˚È/  –_œ–»◊¿—“»≈ Ï
-    // tag2   –_œ–»◊¿—“»≈ Ï
+    // –ø—Ä–∏–º–µ—Ä:
+    // tag1  /–∫—Ä–∞—Å–∏–≤—ã–π,–Ω–æ–≤—ã–π/ –ö–†_–ü–†–ò–ß–ê–°–¢–ò–ï –º—Ä
+    // tag2  –ö–†_–ü–†–ò–ß–ê–°–¢–ò–ï –º—Ä
 	while (fgets(buffer, 1000, fp))
 	{
 		string s = buffer;
@@ -255,7 +255,7 @@ CTag CTagSet::GetBestSuitedTag (const CTag& T) const
 		const CTag&  P = it->second;
 		bool bCheckLemma =  !T.m_Lemmas.empty() && find(P.m_Lemmas.begin(), P.m_Lemmas.end(), *T.m_Lemmas.begin()) != P.m_Lemmas.end();
 		
-		// Ë„ÌÓËÛÂÏ Ú˝„Ë, ÍÓÚÓ˚Â ÌÂ ÒÓ‚Ô‡ÎË ÔÓ ˜‡ÒÚˇÏ Â˜Ë
+		// –∏–≥–Ω–æ—Ä–∏—Ä—É–µ–º —Ç—ç–≥–∏, –∫–æ—Ç–æ—Ä—ã–µ –Ω–µ —Å–æ–≤–ø–∞–ª–∏ –ø–æ —á–∞—Å—Ç—è–º —Ä–µ—á–∏
 		if (bCheckLemma || P.m_Lemmas.empty())
 		if  (		(P.m_Pos == T.m_Pos) 
 				||	(		(P.m_Pos == rPartOfSpeechCount)
@@ -265,7 +265,7 @@ CTag CTagSet::GetBestSuitedTag (const CTag& T) const
 			if ( (P.m_Grammems & T.m_Grammems) == P.m_Grammems)
 			{
 				BYTE curr_size = GetUnionSize(T.m_Grammems, P.m_Grammems);
-				if (!P.m_Lemmas.empty()) // ÂÒÎË ÒÓ‚Ô‡ÎÓ ÒÓ ÒÎÓ‚ÓÙÓÏÓÈ, ÚÓ„‰‡ Û‚ÂÎË˜ËÚ¸ ‚ÂÒ
+				if (!P.m_Lemmas.empty()) // –µ—Å–ª–∏ —Å–æ–≤–ø–∞–ª–æ —Å–æ —Å–ª–æ–≤–æ—Ñ–æ—Ä–º–æ–π, —Ç–æ–≥–¥–∞ —É–≤–µ–ª–∏—á–∏—Ç—å –≤–µ—Å
 					curr_size += 100;
 				if (curr_size >= MaxSize) 
 				{
@@ -293,11 +293,11 @@ vector<CTag> CTagSet::DecipherTagStr (string TagStr, const CAgramtab* pAgramtab)
 		
 		CTag T;
 		if (pAgramtab->ProcessPOSAndGrammems(TagStr.c_str(), T.m_Pos, T.m_Grammems))
-			// "— ËÏ,‚Ì"
+			// "–° –∏–º,–≤–Ω"
 			Tags.push_back( T );
 		else
 		{
-			// "Ã≈∆ƒ,—"
+			// "–ú–ï–ñ–î,–°"
 			StringTokenizer tok(TagStr.c_str(), " ;,");
 			while (tok())
 			{

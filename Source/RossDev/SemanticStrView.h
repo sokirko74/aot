@@ -26,7 +26,7 @@ protected: // create from serialization only
 private: 
 	CString					m_Title;
 	CMenu					m_Menu;	
-	// слоты для рисования графов
+	// СЃР»РѕС‚С‹ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ РіСЂР°С„РѕРІ
 	
 	Tk_Window            m_tkwin;
 	HWND                 m_tkhwnd;

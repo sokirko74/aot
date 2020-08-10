@@ -85,7 +85,7 @@ LRESULT CNewTextEntry::OnWizardNext()
    };
    m_MeanNum.Format("%i", MeanNum);
    UpdateData(FALSE);
-      //èùåì ñëîâî â ìîðôîëîãèè
+      //Ð¸Ñ‰ÐµÐ¼ ÑÐ»Ð¾Ð²Ð¾ Ð² Ð¼Ð¾Ñ€Ñ„Ð¾Ð»Ð¾Ð³Ð¸Ð¸
    CRossDevApp* A = ((CRossDevApp*)AfxGetApp());
    ((CPosChoicer*)Wzd->GetPage(1))->m_ParadigmCollection.clear();
    ((CTranslations*)Wzd->GetPage(2))->m_ParadigmCollection.clear();

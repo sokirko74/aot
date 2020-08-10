@@ -51,7 +51,7 @@ public:
 	vector<CHierarchyNode>     Nodes;
 	vector<CHierarchyRelation> Relations;
 
-	// строковый вариант транзитивного замыкания иерархии
+	// СЃС‚СЂРѕРєРѕРІС‹Р№ РІР°СЂРёР°РЅС‚ С‚СЂР°РЅР·РёС‚РёРІРЅРѕРіРѕ Р·Р°РјС‹РєР°РЅРёСЏ РёРµСЂР°СЂС…РёРё
 	vector<CStringRelation>   m_TransitiveRels;
 	CRossHolder*              m_pRossDoc;
 	CDictionary*  GetRoss () {return m_pRossDoc->GetRoss();}
@@ -86,9 +86,9 @@ public:
 
 
 extern bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const string& ItemStr, CHierarchyHolder* pHierarchyDoc);
-// добавляет в SemFets все SF, которые стоят ниже по иерархии 
+// РґРѕР±Р°РІР»СЏРµС‚ РІ SemFets РІСЃРµ SF, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏС‚ РЅРёР¶Рµ РїРѕ РёРµСЂР°СЂС…РёРё 
 extern void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<string>& SemFets);
-// добавляет в SemFets все SF, которые стоят выше по иерархии 
+// РґРѕР±Р°РІР»СЏРµС‚ РІ SemFets РІСЃРµ SF, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏС‚ РІС‹С€Рµ РїРѕ РёРµСЂР°СЂС…РёРё 
 extern void  IncludeHigherInHierarchy(CHierarchyHolder* pHierarchyDoc, vector<string>& SemFets);
 
 

@@ -101,7 +101,7 @@ void CSemanticStructure::GetBrothers (long NodeNo, vector<long>& Nodes, bool Use
 
   };
   /*
-  придется повторить это же для дополнительных отношений
+  РїСЂРёРґРµС‚СЃСЏ РїРѕРІС‚РѕСЂРёС‚СЊ СЌС‚Рѕ Р¶Рµ РґР»СЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№
   */
   GetIncomingDopRelations (NodeNo, Rels);
   for (long i=0; i < Rels.size(); i++)
@@ -278,7 +278,7 @@ string  CSemanticStructure::GetNodeStr(const CSemNode& N, size_t MaxLength) cons
 	string S;
 	if (N.m_NodeType == Copul) return "Copul";
 	if (N.m_NodeType == ModalCopul) return "ModalCopul";
-	if (N.m_NodeType == SJA) return "СЯ";
+	if (N.m_NodeType == SJA) return "РЎРЇ";
 	if (N.m_NodeType == Situat) return "SIT";	
 	int WordsCount = N.GetWordsSize();
 
@@ -631,7 +631,7 @@ long  CSemanticStructure::FindLexFunctByParameterNodeNo(long NodeNo) const
 
 
 
-// получает все вершины  предложения
+// РїРѕР»СѓС‡Р°РµС‚ РІСЃРµ РІРµСЂС€РёРЅС‹  РїСЂРµРґР»РѕР¶РµРЅРёСЏ
 void CSemanticStructure::GetRoots(vector<long>& Roots) const
 {
 	long count = GetNodesSize();
@@ -642,9 +642,9 @@ void CSemanticStructure::GetRoots(vector<long>& Roots) const
 	  vector <long> IncomRels;
 	  GetIncomingRelations(i, IncomRels, false);
 	  /*
-	    дополнительные отношения, которые на время интерпретации русской структуры были скопированы
-        в основные игнорируем.
-		Иначе во фразе "люди, живущие" - нет ни одного root
+	    РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РЅР° РІСЂРµРјСЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё СЂСѓСЃСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ Р±С‹Р»Рё СЃРєРѕРїРёСЂРѕРІР°РЅС‹
+        РІ РѕСЃРЅРѕРІРЅС‹Рµ РёРіРЅРѕСЂРёСЂСѓРµРј.
+		РРЅР°С‡Рµ РІРѕ С„СЂР°Р·Рµ "Р»СЋРґРё, Р¶РёРІСѓС‰РёРµ" - РЅРµС‚ РЅРё РѕРґРЅРѕРіРѕ root
 	  */
 	  long NotDopRelationsCount = 0;
 	  for (long j=0; j < IncomRels.size(); j++)
@@ -698,7 +698,7 @@ long CSemanticStructure::GetAnaphoraTarget(long NodeNo) const
 {
   for (size_t i = 0; i<GetDopRelationsSize(); i++)
      if (GetDopRelation(i)->m_SourceNodeNo == NodeNo)
-		 if (GetDopRelation(i)->m_SyntacticRelation == "анафора") 
+		 if (GetDopRelation(i)->m_SyntacticRelation == "Р°РЅР°С„РѕСЂР°") 
 		   return GetDopRelation(i)->m_TargetNodeNo;
   return -1;	
 };

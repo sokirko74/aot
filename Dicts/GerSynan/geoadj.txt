@@ -1,6 +1,6 @@
 Afghanistan: Afghanisch 
 Afrika: Afrikanisch 
-Ägypten : Ägyptisch 
+Ð”gypten : Ð”gyptisch 
 Albanien: Albanisch 
 Algerien: Algerisch 
 Amerika: Amerikanisch 
@@ -15,7 +15,7 @@ Aserbaidschan: Aserbaidschanisch
 Aserbeidschan: Aserbeidschanisch 
 Asien: Asiatisch 
 Assam: Assamesisch 
-Äthiopien: Äthiopisch 
+Ð”thiopien: Ð”thiopisch 
 Australien: Australisch
 Bahamas: Bahamesisch 
 Bahrein : Bahreinisch 
@@ -43,7 +43,7 @@ Burundi : Burundisch
 Chile: Chilenisch 
 China: Chinesisch 
 Costa Rica : Costa-Ricanisch 
-Dänemark: Dänisch 
+DÐ´nemark: DÐ´nisch 
 Deutschland: Deutsche Deutschen Deutsch 
 Djibouti: Djibutisch 
 Dominikanische Republik : Dominicanisch
@@ -54,10 +54,10 @@ England: Englisch
 Eritrea: Eritreisch
 Eskimo: Eskimoisch
 Estland: Estnisch
-Europa: Europäisch
+Europa: EuropÐ´isch
 Fidschi-Inseln: Fidschianisch 
 Finnland: Finnisch 
-Frankreich: Französisch 
+Frankreich: FranzÑ†sisch 
 Frankreich : Kreolisch 
 Friesland: Friesisch 
 Gabun: Gabunisch 
@@ -67,15 +67,15 @@ Ghana: Ghanisch
 Grenada: Grenadisch 
 Griechenland: Griechisch
 Griechenland: NeuGriechisch 
-Großbritannien: Großbritannisch 
-Groß-Britannien: Groß-Britannisch 
+GroÐ¯britannien: GroÐ¯britannisch 
+GroÐ¯-Britannien: GroÐ¯-Britannisch 
 Guatemala: Guatemalesisch 
 Guinea: Guineanisch 
 Guinea-Bissau: Guinea-Bissauisch 
 Guyana: Guyanisch 
 Haiti: Haitisch 
 Hawaii-Inseln: Hawaiianisch 
-Holland: Holländisch 
+Holland: HollÐ´ndisch 
 Honduras : Honduranisch 
 Indien: Hindisch 
 Indien: Indisch 
@@ -85,9 +85,9 @@ Irak: Irakisch
 Iran: Iranisch 
 Irland: Irisch 
 Irland : Gaelisch 
-Island: Isländisch 
+Island: IslÐ´ndisch 
 Israel: Israelisch 
-Hebräer: Hebräisch 
+HebrÐ´er: HebrÐ´isch 
 Italien: Italienisch 
 Jamaika: Jamaikanisch 
 Japan: Japanisch 
@@ -151,9 +151,9 @@ Myanmar: Myanmarisch
 Namibia: Namibisch 
 Nauru: Nauruisch 
 Nepal: Nepalesisch 
-Neuseeland: Neuseeländisch
+Neuseeland: NeuseelÐ´ndisch
 Nicaragua: Nicaraguanisch 
-Niederlande: Niederländisch 
+Niederlande: NiederlÐ´ndisch 
 Niger: Nigerisch 
 Nigeria: Nigerianisch 
 NordAfrika : NordAfrikanisch 
@@ -164,8 +164,8 @@ NordAsien: NordAsiatisch
 Nord-Asien: Nord-Asiatisch 
 NordAustralien : NordAustralisch 
 Nord-Australien: Nord-Australisch 
-NordEuropa: NordEuropäisch 
-Nord-Europa: Nord-Europäisch 
+NordEuropa: NordEuropÐ´isch 
+Nord-Europa: Nord-EuropÐ´isch 
 NordKorea: NordKoreanisch 
 Nord-Korea: Nord-Koreanisch 
 Norwegen: Norwegisch 
@@ -178,12 +178,12 @@ OstAsien: OstAsiatisch
 Ost-Asien: Ost-Asiatisch 
 OstAustralien:  OstAustralisch 
 Ost-Australien :Ost-Australisch 
-Österreich: Österreichisch 
-OstEuropa: OstEuropäisch 
-Ost-Europa: Ost-Europäisch 
+Ð¦sterreich: Ð¦sterreichisch 
+OstEuropa: OstEuropÐ´isch 
+Ost-Europa: Ost-EuropÐ´isch 
 Osttimor: Osttimorisch 
 Pakistan: Parkistanisch 
-Palästina: Palästinisch 
+PalÐ´stina: PalÐ´stinisch 
 Palau : Palauisch 
 Panama: Panamesisch 
 Pandschab: Pandschabisch
@@ -197,15 +197,15 @@ Portugal: Portugiesisch
 Romanen: Romanisch 
 Altes Rom : Latein 
 Ruanda: Ruandisch 
-Rumänien: Rumänisch 
+RumÐ´nien: RumÐ´nisch 
 Russland: Russisch 
-Rußland: Russisch 
+RuÐ¯land: Russisch 
 Salomonen: Salomonisch 
 Sambia: Sambisch 
 Samoa: Samoanisch 
 San Marino : San Marinitsch 
 Saudi-Arabien : Saudi-Arabisch
-Schottland : Schottisch Gälisch 
+Schottland : Schottisch GÐ´lisch 
 Schweden: Schwedisch 
 Schweiz : Schweizerisch 
 Senegal: Senegalesisch
@@ -225,28 +225,28 @@ Spanien: Spanisch
 Sri Lanka :Sri Lankisch 
 Sri-Lanka  : Sri-Lankisch 
 Suaheli: Suahelisch 
-SüdAfrika: SüdAfrikanisch
-Süd-Afrika : Süd-Afrikanisch 
-SüdAmerika : SüdAmerikanisch 
-Süd-Amerika  : Süd-Amerikanisch
+SÑŒdAfrika: SÑŒdAfrikanisch
+SÑŒd-Afrika : SÑŒd-Afrikanisch 
+SÑŒdAmerika : SÑŒdAmerikanisch 
+SÑŒd-Amerika  : SÑŒd-Amerikanisch
 Sudan: Sudanisc
-SüdAsien: SüdAsiatisch 
-Süd-Asien :Süd-Asiatisch 
-SüdAustralien: SüdAustralisch 
-Süd-Australien : Süd-Australisch 
-SüdEuropa: SüdEuropäisch 
-Süd-Europa : Süd-Europäisch 
-SüdKorea : SüdKoreanisch 
-Süd-Korea :Süd-Koreanisch 
-Süd-Ost-Asien : Süd-Ost-Asiatisch 
+SÑŒdAsien: SÑŒdAsiatisch 
+SÑŒd-Asien :SÑŒd-Asiatisch 
+SÑŒdAustralien: SÑŒdAustralisch 
+SÑŒd-Australien : SÑŒd-Australisch 
+SÑŒdEuropa: SÑŒdEuropÐ´isch 
+SÑŒd-Europa : SÑŒd-EuropÐ´isch 
+SÑŒdKorea : SÑŒdKoreanisch 
+SÑŒd-Korea :SÑŒd-Koreanisch 
+SÑŒd-Ost-Asien : SÑŒd-Ost-Asiatisch 
 Sundainseln: Sundanesisch 
 Surinam: Surinamisch
-Swasiland: Swasiländisch 
+Swasiland: SwasilÐ´ndisch 
 Syrien: Syrisch 
 Tadschikistan: Tadschikisch 
 Tamil: Tamilisch 
 Tansania: Tansanisch 
-Thailand: Thailändisch 
+Thailand: ThailÐ´ndisch 
 Tibet: Tibetisch 
 Tobago: Tobagonisch 
 Togo: Togoisch 
@@ -255,7 +255,7 @@ Trinidad : Trinidadisch
 Tschad: Tschadisch 
 Tschechisch  Republik :  Tschechisch 
 Tunesien: Tunesisch 
-Türkei: Türkisch  
+TÑŒrkei: TÑŒrkisch  
 Turkmenistan: Turkmenisch
 Tuvalu: Tuvaluisch
 Uganda: Ugandisch 
@@ -269,9 +269,9 @@ Vatikanstadt: Latein
 Venezuela   : Venezuelanisch 
 Vietnam: Vietnamesisch 
 Walis: Walisisch 
-Weißrussland: Weißrussisch 
+WeiÐ¯russland: WeiÐ¯russisch 
 Weissrussland: Weissrussisch
-Weißrußland: Weißrußisch 
+WeiÐ¯ruÐ¯land: WeiÐ¯ruÐ¯isch 
 WestAfrika: WestAfrikanisch
 West-Afrika: West-Afrikanisch
 WestAmerika: WestAmerikanisch
@@ -280,7 +280,7 @@ WestAsien: WestAsiatisch
 West-Asien: West-Asiatisch
 WestAustralien:  WestAustralisch
 West-Australien:  West-Australisch
-WestEuropa: WestEuropäisch
-West-Europa:  West-Europäisch 
+WestEuropa: WestEuropÐ´isch
+West-Europa:  West-EuropÐ´isch 
 Zypern: Zyprisch
 

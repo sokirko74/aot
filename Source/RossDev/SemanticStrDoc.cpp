@@ -79,5 +79,5 @@ void CSemanticStrDoc::Dump(CDumpContext& dc) const
 void CSemanticStrDoc::SetTitle(LPCTSTR lpszTitle) 
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CDocument::SetTitle("Семантический анализ");
+	CDocument::SetTitle("РЎРµРјР°РЅС‚РёС‡РµСЃРєРёР№ Р°РЅР°Р»РёР·");
 }

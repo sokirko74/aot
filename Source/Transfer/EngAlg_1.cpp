@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
-// Английские алгоритмы 1
-// общие утилиты
+// РђРЅРіР»РёР№СЃРєРёРµ Р°Р»РіРѕСЂРёС‚РјС‹ 1
+// РѕР±С‰РёРµ СѓС‚РёР»РёС‚С‹
 // GetChildNodes()
 // GetAlgNodes()
 // HasNeg()
@@ -21,7 +21,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////
-// Выдает вектор дочерних нод с отслеживанием уникальности
+// Р’С‹РґР°РµС‚ РІРµРєС‚РѕСЂ РґРѕС‡РµСЂРЅРёС… РЅРѕРґ СЃ РѕС‚СЃР»РµР¶РёРІР°РЅРёРµРј СѓРЅРёРєР°Р»СЊРЅРѕСЃС‚Рё
 
 void CEngSemStructure::GetChildNodes(int iNode,vector<long> &nodes) const
 {
@@ -45,7 +45,7 @@ void CEngSemStructure::GetChildNodes(int iNode,vector<long> &nodes) const
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// Выдает вектор узлов для корневых алгоритмов
+// Р’С‹РґР°РµС‚ РІРµРєС‚РѕСЂ СѓР·Р»РѕРІ РґР»СЏ РєРѕСЂРЅРµРІС‹С… Р°Р»РіРѕСЂРёС‚РјРѕРІ
 
 void CEngSemStructure::GetAlgNodes(vector<long> &nodes) const
 {
@@ -72,7 +72,7 @@ void CEngSemStructure::GetAlgNodes(vector<long> &nodes) const
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// HasNeg() определяет наличие 'Neg'
+// HasNeg() РѕРїСЂРµРґРµР»СЏРµС‚ РЅР°Р»РёС‡РёРµ 'Neg'
 
 bool CEngSemStructure::HasNeg(long UnitNo, DictTypeEnum type )
 {
@@ -98,7 +98,7 @@ bool CEngSemStructure::HasNeg(long UnitNo, DictTypeEnum type )
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// HasQuest() определяет наличие 'Quest'
+// HasQuest() РѕРїСЂРµРґРµР»СЏРµС‚ РЅР°Р»РёС‡РёРµ 'Quest'
 
 bool CEngSemStructure::HasQuest(long UnitNo, DictTypeEnum type )
 {
@@ -124,7 +124,7 @@ bool CEngSemStructure::HasQuest(long UnitNo, DictTypeEnum type )
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// ChangeNegWord() меняет отрицательное слово на положительное по LF
+// ChangeNegWord() РјРµРЅСЏРµС‚ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅРѕРµ СЃР»РѕРІРѕ РЅР° РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРµ РїРѕ LF
 
 void CEngSemStructure::ChangeNegWord(int iEngNode)
 {
@@ -165,12 +165,12 @@ void CEngSemStructure::ChangeClauseNo(int oldClauseNo,int newClauseNo)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// создает #oneself - "он написал себе письмо"
-// см. "l:\documents\one's и oneself"
+// СЃРѕР·РґР°РµС‚ #oneself - "РѕРЅ РЅР°РїРёСЃР°Р» СЃРµР±Рµ РїРёСЃСЊРјРѕ"
+// СЃРј. "l:\documents\one's Рё oneself"
 
 void CEngSemStructure::CreateOneselfNodes()
 {
-// создание
+// СЃРѕР·РґР°РЅРёРµ
 	for( int i=0; i<m_Nodes.size(); i++ )
 	{
 		for( int k=0; k<m_Nodes[i].m_Words.size(); k++ )
@@ -196,7 +196,7 @@ void CEngSemStructure::CreateOneselfNodes()
 		}
 	}
 
-	// проведение доп. связи THESAME	
+	// РїСЂРѕРІРµРґРµРЅРёРµ РґРѕРї. СЃРІСЏР·Рё THESAME	
 	for( int NodeNo=0; NodeNo<m_Nodes.size(); NodeNo++ )
 	{
 		if( !( m_Nodes[NodeNo].IsPrimitive() )
@@ -206,9 +206,9 @@ void CEngSemStructure::CreateOneselfNodes()
 		  )
 			continue;
 
-		// если в русской структуре в отношениях были прописана стрелка DEGREE ( пассивная валентность "сам"),		
-		// тогда нужно взять эту стрелку и успокоиться
-		// например,  "сам он этого не сделает"
+		// РµСЃР»Рё РІ СЂСѓСЃСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ РІ РѕС‚РЅРѕС€РµРЅРёСЏС… Р±С‹Р»Рё РїСЂРѕРїРёСЃР°РЅР° СЃС‚СЂРµР»РєР° DEGREE ( РїР°СЃСЃРёРІРЅР°СЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ "СЃР°Рј"),		
+		// С‚РѕРіРґР° РЅСѓР¶РЅРѕ РІР·СЏС‚СЊ СЌС‚Сѓ СЃС‚СЂРµР»РєСѓ Рё СѓСЃРїРѕРєРѕРёС‚СЊСЃСЏ
+		// РЅР°РїСЂРёРјРµСЂ,  "СЃР°Рј РѕРЅ СЌС‚РѕРіРѕ РЅРµ СЃРґРµР»Р°РµС‚"
 		if( m_Nodes[NodeNo].RusNode != -1 )
 		{
 			vector<long> Rels;
@@ -230,9 +230,9 @@ void CEngSemStructure::CreateOneselfNodes()
 		};
 
 		if (GetEquNode(NodeNo) != -1) continue;
-		// в противном случае, нужно  искать узел, у которого  есть субъектная стрелка
+		// РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ, РЅСѓР¶РЅРѕ  РёСЃРєР°С‚СЊ СѓР·РµР», Сѓ РєРѕС‚РѕСЂРѕРіРѕ  РµСЃС‚СЊ СЃСѓР±СЉРµРєС‚РЅР°СЏ СЃС‚СЂРµР»РєР°
 	    int parent = NodeNo;
-		// есть ли среди хозяев узла хотя бы один инфинитив
+		// РµСЃС‚СЊ Р»Рё СЃСЂРµРґРё С…РѕР·СЏРµРІ СѓР·Р»Р° С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ РёРЅС„РёРЅРёС‚РёРІ
 		bool bHasParentInfinitive = false;
 		while(true)
 		{
@@ -243,7 +243,7 @@ void CEngSemStructure::CreateOneselfNodes()
 			parent = m_Relations[rel].m_SourceNodeNo;
 			bHasParentInfinitive |= is_infinitive(m_Nodes[parent].GetTense());
 
-			// ищем первый узел, у которго есть субъектная стрелка доходим до первого не инфинитива
+			// РёС‰РµРј РїРµСЂРІС‹Р№ СѓР·РµР», Сѓ РєРѕС‚РѕСЂРіРѕ РµСЃС‚СЊ СЃСѓР±СЉРµРєС‚РЅР°СЏ СЃС‚СЂРµР»РєР° РґРѕС…РѕРґРёРј РґРѕ РїРµСЂРІРѕРіРѕ РЅРµ РёРЅС„РёРЅРёС‚РёРІР°
 		    if( GetSubj(parent) != -1 )
 				break;
 		}
@@ -274,9 +274,9 @@ void CEngSemStructure::CreateOneselfNodes()
 
 /*
  RefineEngCollocPreps()
- при наличии PREP = устанавливает этот предлог а все иное стирает
- PREP(i) игнорируются.
- Предполагается, что словосочетания еще не были разделены на разные узлы.
+ РїСЂРё РЅР°Р»РёС‡РёРё PREP = СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЌС‚РѕС‚ РїСЂРµРґР»РѕРі Р° РІСЃРµ РёРЅРѕРµ СЃС‚РёСЂР°РµС‚
+ PREP(i) РёРіРЅРѕСЂРёСЂСѓСЋС‚СЃСЏ.
+ РџСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ РµС‰Рµ РЅРµ Р±С‹Р»Рё СЂР°Р·РґРµР»РµРЅС‹ РЅР° СЂР°Р·РЅС‹Рµ СѓР·Р»С‹.
 */
 
 void  CEngSemStructure::RefineEngCollocPreps()
@@ -325,7 +325,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 
 /////////////////////////////////////////////////////////////////////////////
 // RefineComparativeMNAwithPreps()
-// разрешает ситуацию с ComparativeMNA и добавляет than
+// СЂР°Р·СЂРµС€Р°РµС‚ СЃРёС‚СѓР°С†РёСЋ СЃ ComparativeMNA Рё РґРѕР±Р°РІР»СЏРµС‚ than
 
 void  CEngSemStructure::RefineComparativeMNAwithPreps()
 {
@@ -432,7 +432,7 @@ void CEngSemStructure::CorrectNodeNumByRelNum()
 		CEngSemNode& Node2 = m_Nodes[iNode2];
 
 		if( Node2.GetType()!=NoneRoss && Node2.GetUnitNo()!=ErrUnitNo &&
-			GetRossHolder(Node2.GetType())->HasFieldValue("RESTR","ед",Node2.GetUnitNo()) )
+			GetRossHolder(Node2.GetType())->HasFieldValue("RESTR","РµРґ",Node2.GetUnitNo()) )
 		{
 			if( Node1.m_MainWordNo!=-1 && Node1.m_Words[Node1.m_MainWordNo].m_Lemma=="many" )
 			{
@@ -463,7 +463,7 @@ void CEngSemStructure::CorrectNodeNumByRelNum()
 
 /////////////////////////////////////////////////////////////////////////////
 // ApplyALG_AL1()
-// обработка пассивных глаголов
+// РѕР±СЂР°Р±РѕС‚РєР° РїР°СЃСЃРёРІРЅС‹С… РіР»Р°РіРѕР»РѕРІ
 
 void CEngSemStructure::ApplyALG_AL1(int iEngNode)
 {
@@ -475,8 +475,8 @@ void CEngSemStructure::ApplyALG_AL1(int iEngNode)
 	if( !RusStr.GetNode(iRusNode).IsPassiveVerb() )
 		return;
 
-	// если слову приписан алгоритм AL1, тогда пассивизацию  делать не надо 
-	// Дверь открылась -> The door opened 
+	// РµСЃР»Рё СЃР»РѕРІСѓ РїСЂРёРїРёСЃР°РЅ Р°Р»РіРѕСЂРёС‚Рј AL1, С‚РѕРіРґР° РїР°СЃСЃРёРІРёР·Р°С†РёСЋ  РґРµР»Р°С‚СЊ РЅРµ РЅР°РґРѕ 
+	// Р”РІРµСЂСЊ РѕС‚РєСЂС‹Р»Р°СЃСЊ -> The door opened 
 	if( HasALG(m_Nodes[iEngNode].GetType(),m_Nodes[iEngNode].GetUnitNo(),"AL1") )
 		return;
 
@@ -489,7 +489,7 @@ void CEngSemStructure::ApplyALG_AL1(int iEngNode)
 
 /////////////////////////////////////////////////////////////////////////////
 // CompareCortegeItems()
-// это появилось из-за ">> Х! : ИГ"
+// СЌС‚Рѕ РїРѕСЏРІРёР»РѕСЃСЊ РёР·-Р·Р° ">> РҐ! : РР“"
 
 bool CEngSemStructure::CompareCortegeItems(const CRossHolder* RossHolder,
 										   const TCortege &X,const TCortege &Y) const

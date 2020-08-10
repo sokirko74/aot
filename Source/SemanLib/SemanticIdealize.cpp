@@ -5,8 +5,8 @@
 void CRusSemStructure::DelChildlessCopul ()
 {
   // =============================
-  // если у  Copul нет ни одного актанта, то удаляем этот узел
-  // он представлялся мне великим учителем 	
+  // РµСЃР»Рё Сѓ  Copul РЅРµС‚ РЅРё РѕРґРЅРѕРіРѕ Р°РєС‚Р°РЅС‚Р°, С‚Рѕ СѓРґР°Р»СЏРµРј СЌС‚РѕС‚ СѓР·РµР»
+  // РѕРЅ РїСЂРµРґСЃС‚Р°РІР»СЏР»СЃСЏ РјРЅРµ РІРµР»РёРєРёРј СѓС‡РёС‚РµР»РµРј 	
   for (long NodeNo=0; NodeNo<m_Nodes.size(); NodeNo++)
 	 if (m_Nodes[NodeNo].m_NodeType == Copul)
 	   if ( GetOutcomingRelationsCount(NodeNo,  false) == 0)
@@ -22,23 +22,23 @@ long CRusSemStructure::Idealize ()
 	long Bonus = 0;
 	try {
 		// =============================
-		// дом строился рабочими => пассив
-		// мы строились  => возвратная форма (коллективность)
-		// ALG:  // нужно взять глаголы найденные в РОССе, которые заканчиваются на "ся" ("cь"). 
-		// Причем в РОССе были найдены невозвратные формы.
-		// Нужно проверить, заполнилась ли первая валентность этого глагола (АГЕНТА). Если нет,
-		// то нужно создать новый узел с пометой (СЯ) и провести стрелку с первой валентностью 
-		// к этому узлу.
+		// РґРѕРј СЃС‚СЂРѕРёР»СЃСЏ СЂР°Р±РѕС‡РёРјРё => РїР°СЃСЃРёРІ
+		// РјС‹ СЃС‚СЂРѕРёР»РёСЃСЊ  => РІРѕР·РІСЂР°С‚РЅР°СЏ С„РѕСЂРјР° (РєРѕР»Р»РµРєС‚РёРІРЅРѕСЃС‚СЊ)
+		// ALG:  // РЅСѓР¶РЅРѕ РІР·СЏС‚СЊ РіР»Р°РіРѕР»С‹ РЅР°Р№РґРµРЅРЅС‹Рµ РІ Р РћРЎРЎРµ, РєРѕС‚РѕСЂС‹Рµ Р·Р°РєР°РЅС‡РёРІР°СЋС‚СЃСЏ РЅР° "СЃСЏ" ("cСЊ"). 
+		// РџСЂРёС‡РµРј РІ Р РћРЎРЎРµ Р±С‹Р»Рё РЅР°Р№РґРµРЅС‹ РЅРµРІРѕР·РІСЂР°С‚РЅС‹Рµ С„РѕСЂРјС‹.
+		// РќСѓР¶РЅРѕ РїСЂРѕРІРµСЂРёС‚СЊ, Р·Р°РїРѕР»РЅРёР»Р°СЃСЊ Р»Рё РїРµСЂРІР°СЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ СЌС‚РѕРіРѕ РіР»Р°РіРѕР»Р° (РђР“Р•РќРўРђ). Р•СЃР»Рё РЅРµС‚,
+		// С‚Рѕ РЅСѓР¶РЅРѕ СЃРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ СѓР·РµР» СЃ РїРѕРјРµС‚РѕР№ (РЎРЇ) Рё РїСЂРѕРІРµСЃС‚Рё СЃС‚СЂРµР»РєСѓ СЃ РїРµСЂРІРѕР№ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊСЋ 
+		// Рє СЌС‚РѕРјСѓ СѓР·Р»Сѓ.
 
 		for (long NodeNo=0; NodeNo<m_Nodes.size(); NodeNo++)
 			if (   
 				m_Nodes[NodeNo].IsPassiveVerb()
-				&& m_Nodes[NodeNo].IsWordContainer() // могут быть глагольные словосочетания
+				&& m_Nodes[NodeNo].IsWordContainer() // РјРѕРіСѓС‚ Р±С‹С‚СЊ РіР»Р°РіРѕР»СЊРЅС‹Рµ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
 				&& (m_Nodes[NodeNo].m_Vals.size() > 0)
 				)
 			{
 				vector<long> Rels;
-				// ищем сначала в обычных отношениях, а потом  в дополнительных
+				// РёС‰РµРј СЃРЅР°С‡Р°Р»Р° РІ РѕР±С‹С‡РЅС‹С… РѕС‚РЅРѕС€РµРЅРёСЏС…, Р° РїРѕС‚РѕРј  РІ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С…
 				GetOutcomingRelations(NodeNo, Rels, false);
 				long i=0;
 				for (; i < Rels.size(); i++)
@@ -63,7 +63,7 @@ long CRusSemStructure::Idealize ()
 				long nd = InsertNode(N);
 				AddRelation(CRusSemRelation(m_Nodes[NodeNo].m_Vals[0], NodeNo, nd,  ""));
 
-				// удаляем "СЯ" из леммы и слова
+				// СѓРґР°Р»СЏРµРј "РЎРЇ" РёР· Р»РµРјРјС‹ Рё СЃР»РѕРІР°
 
 				CRusSemWord& W = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo];
 				if (HasReflexiveSuffix(W.m_Lemma))
@@ -75,9 +75,9 @@ long CRusSemStructure::Idealize ()
 
 
 
-			// если SF  "ОН" или "ОНА" равна ANIM, то нужно  
-			// прставить грамматическую одушевленность у местоимения, в противном случае будем ставить 
-			// неоудушевленнсть
+			// РµСЃР»Рё SF  "РћРќ" РёР»Рё "РћРќРђ" СЂР°РІРЅР° ANIM, С‚Рѕ РЅСѓР¶РЅРѕ  
+			// РїСЂСЃС‚Р°РІРёС‚СЊ РіСЂР°РјРјР°С‚РёС‡РµСЃРєСѓСЋ РѕРґСѓС€РµРІР»РµРЅРЅРѕСЃС‚СЊ Сѓ РјРµСЃС‚РѕРёРјРµРЅРёСЏ, РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ Р±СѓРґРµРј СЃС‚Р°РІРёС‚СЊ 
+			// РЅРµРѕСѓРґСѓС€РµРІР»РµРЅРЅСЃС‚СЊ
 			for (long i=0;  i < m_Relations.size(); i++)
 				if (m_Relations[i].m_Valency.IsFromDict())
 					if (m_Relations[i].m_Valency.m_UnitNo != ErrUnitNo)
@@ -85,8 +85,8 @@ long CRusSemStructure::Idealize ()
 						CRusSemNode& N =  m_Nodes[m_Relations[i].m_TargetNodeNo];
 						if    (     !N.IsPrimitive()  ) 
 							continue;
-						if    (     !(N.m_Words[0].m_Lemma == "ОН")
-							&& !(N.m_Words[0].m_Lemma == "ОНА")
+						if    (     !(N.m_Words[0].m_Lemma == "РћРќ")
+							&& !(N.m_Words[0].m_Lemma == "РћРќРђ")
 							&& !(N.HasOneGrammem(rAnimative) &&  N.HasOneGrammem(rNonAnimative))
 				   )
 				   continue;
@@ -98,28 +98,28 @@ long CRusSemStructure::Idealize ()
 
 					};
 
-			// ====  достройка синтаксиса
-			// Напиши на стрелке, идущей в узел КАК, во фразах типа  "они думали , как она красива" с "как1 из РОСС" 
-			// соответствующее синтаксическое отношение НАР-НАР, НАР-ПРИЛ или НАР_ПРЕДИК
-			// синтаксис не мог потсроить этого отношения, поскольку тогда получилась бы разрывная группа,
-			// поэтому достраиваем синтаксис
+			// ====  РґРѕСЃС‚СЂРѕР№РєР° СЃРёРЅС‚Р°РєСЃРёСЃР°
+			// РќР°РїРёС€Рё РЅР° СЃС‚СЂРµР»РєРµ, РёРґСѓС‰РµР№ РІ СѓР·РµР» РљРђРљ, РІРѕ С„СЂР°Р·Р°С… С‚РёРїР°  "РѕРЅРё РґСѓРјР°Р»Рё , РєР°Рє РѕРЅР° РєСЂР°СЃРёРІР°" СЃ "РєР°Рє1 РёР· Р РћРЎРЎ" 
+			// СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРµ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕРµ РѕС‚РЅРѕС€РµРЅРёРµ РќРђР -РќРђР , РќРђР -РџР РР› РёР»Рё РќРђР _РџР Р•Р”РРљ
+			// СЃРёРЅС‚Р°РєСЃРёСЃ РЅРµ РјРѕРі РїРѕС‚СЃСЂРѕРёС‚СЊ СЌС‚РѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ, РїРѕСЃРєРѕР»СЊРєСѓ С‚РѕРіРґР° РїРѕР»СѓС‡РёР»Р°СЃСЊ Р±С‹ СЂР°Р·СЂС‹РІРЅР°СЏ РіСЂСѓРїРїР°,
+			// РїРѕСЌС‚РѕРјСѓ РґРѕСЃС‚СЂР°РёРІР°РµРј СЃРёРЅС‚Р°РєСЃРёСЃ
 			for (long i=0;  i < m_Relations.size(); i++)
 				if (m_Nodes[m_Relations[i].m_TargetNodeNo].IsPrimitive())
-					if (m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Lemma == "КАК")
+					if (m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Lemma == "РљРђРљ")
 					{
 						if (HasRichPOS(m_Relations[i].m_SourceNodeNo, ADJ_SHORT))
-							m_Relations[i].m_SyntacticRelation = "НАР_ПРИЛ";
+							m_Relations[i].m_SyntacticRelation = "РќРђР _РџР РР›";
 						if (HasRichPOS(m_Relations[i].m_SourceNodeNo,PREDK))
-							m_Relations[i].m_SyntacticRelation = "НАР_ПРЕДИК";
+							m_Relations[i].m_SyntacticRelation = "РќРђР _РџР Р•Р”РРљ";
 						if (HasRichPOS (m_Relations[i].m_SourceNodeNo, ADV))
-							m_Relations[i].m_SyntacticRelation = "НАР_НАР";
+							m_Relations[i].m_SyntacticRelation = "РќРђР _РќРђР ";
 					};
 
 
 			// MUA[','](x1, ... ,MUA[z](y1, ..., yn), .. xn)  => MUA[z] (x1,...,xn, y1...,yk)  
-			// если в оператор однородности A входит оператор однородности B, и  оператор A - запятая,
-			// а оператор B - союз, тогда операторы А и B нужно слить
-			// В арифметике это правило соответствует следующему преобразованию:
+			// РµСЃР»Рё РІ РѕРїРµСЂР°С‚РѕСЂ РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё A РІС…РѕРґРёС‚ РѕРїРµСЂР°С‚РѕСЂ РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё B, Рё  РѕРїРµСЂР°С‚РѕСЂ A - Р·Р°РїСЏС‚Р°СЏ,
+			// Р° РѕРїРµСЂР°С‚РѕСЂ B - СЃРѕСЋР·, С‚РѕРіРґР° РѕРїРµСЂР°С‚РѕСЂС‹ Рђ Рё B РЅСѓР¶РЅРѕ СЃР»РёС‚СЊ
+			// Р’ Р°СЂРёС„РјРµС‚РёРєРµ СЌС‚Рѕ РїСЂР°РІРёР»Рѕ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ СЃР»РµРґСѓСЋС‰РµРјСѓ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЋ:
 			// a+(b+c) = a+b+c
 			for (long NodeNo=0; NodeNo<m_Nodes.size(); NodeNo++)
 				if (    (m_Nodes[NodeNo].m_NodeType == MNA)
@@ -147,7 +147,7 @@ long CRusSemStructure::Idealize ()
 				};
 
 
-			// другие функции идеализации
+			// РґСЂСѓРіРёРµ С„СѓРЅРєС†РёРё РёРґРµР°Р»РёР·Р°С†РёРё
 			InterpretAdjNounGroupsAfter ();
 			ApplySubordinationCases ();
 			//   ProcessIsolatedParticipleAnd();
@@ -174,10 +174,10 @@ long CRusSemStructure::Idealize ()
 };
 
 /*
- эта функция конвертирует  узел, в  котором записан все2, в оператор ПРОДОЛЖ,
- если этот узел зависит от глагола
- Пример: "он все уходил взглянуть"
- На оператор ПРОДЛЖ  реагирует английский алгоритм ApplyKeepNode
+ СЌС‚Р° С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚  СѓР·РµР», РІ  РєРѕС‚РѕСЂРѕРј Р·Р°РїРёСЃР°РЅ РІСЃРµ2, РІ РѕРїРµСЂР°С‚РѕСЂ РџР РћР”РћР›Р–,
+ РµСЃР»Рё СЌС‚РѕС‚ СѓР·РµР» Р·Р°РІРёСЃРёС‚ РѕС‚ РіР»Р°РіРѕР»Р°
+ РџСЂРёРјРµСЂ: "РѕРЅ РІСЃРµ СѓС…РѕРґРёР» РІР·РіР»СЏРЅСѓС‚СЊ"
+ РќР° РѕРїРµСЂР°С‚РѕСЂ РџР РћР”Р›Р–  СЂРµР°РіРёСЂСѓРµС‚ Р°РЅРіР»РёР№СЃРєРёР№ Р°Р»РіРѕСЂРёС‚Рј ApplyKeepNode
 */
 
 void CRusSemStructure::ConvertVSE2_toOperator()
@@ -185,13 +185,13 @@ void CRusSemStructure::ConvertVSE2_toOperator()
 	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++) 
 	{
 		if (m_Nodes[NodeNo].GetType() != Ross) continue;
-		if (!m_Nodes[NodeNo].IsLemma("ВСЕ"))  continue;
+		if (!m_Nodes[NodeNo].IsLemma("Р’РЎР•"))  continue;
 		if (GetRoss(Ross)->GetUnitMeanNum(m_Nodes[NodeNo].GetUnitNo()) != 2)  continue;
 		CRelSet R = GetIncomingRelations(NodeNo, false);
 		if (R.m_RelsCount  != 1) continue;
 		long nd = m_Relations[R.m_Rels[0]].m_SourceNodeNo;
 		if (!IsVerbForm (m_Nodes[nd])) continue;
-		m_Nodes[nd].m_RelOperators.push_back("ПРОДОЛЖ");
+		m_Nodes[nd].m_RelOperators.push_back("РџР РћР”РћР›Р–");
 		if (CanBeDeleted(NodeNo))
 		{
 			DelNode(NodeNo);
@@ -203,11 +203,11 @@ void CRusSemStructure::ConvertVSE2_toOperator()
 
 void CRusSemStructure::InterpretAdjNounGroupsAfter ()
 {
-  // меняем направление стрелки для отношений ЧИСЛ_СУЩ, ПРИЛ_СУЩ
+  // РјРµРЅСЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ СЃС‚СЂРµР»РєРё РґР»СЏ РѕС‚РЅРѕС€РµРЅРёР№ Р§РРЎР›_РЎРЈР©, РџР РР›_РЎРЈР©
   for (long i=0; i < m_Relations.size(); i++) 
-   if  (    ( m_Relations[i].m_SyntacticRelation == "ЧИСЛ_СУЩ" )
-	     || ( m_Relations[i].m_SyntacticRelation == "АППРОКС_ИГ" )
-		 || ( m_Relations[i].m_SyntacticRelation == "НАР_ЧИСЛ_СУЩ" )
+   if  (    ( m_Relations[i].m_SyntacticRelation == "Р§РРЎР›_РЎРЈР©" )
+	     || ( m_Relations[i].m_SyntacticRelation == "РђРџРџР РћРљРЎ_РР“" )
+		 || ( m_Relations[i].m_SyntacticRelation == "РќРђР _Р§РРЎР›_РЎРЈР©" )
 	   )
    {
 	  // swap(m_Relations[i].m_SourceNodeNo, m_Relations[i].m_TargetNodeNo);
@@ -216,9 +216,9 @@ void CRusSemStructure::InterpretAdjNounGroupsAfter ()
 			m_Relations[i].m_Valency.m_RelationStr = "QUANTIT";   
    }
    else
-   if  (    ( m_Relations[i].m_SyntacticRelation == "ПРИЛ_СУЩ" )
-	    ||  ( m_Relations[i].m_SyntacticRelation == "НАР_ПРИЛ" )
-		||  ( m_Relations[i].m_SyntacticRelation == "МОДИФ_ПРИЛ" )
+   if  (    ( m_Relations[i].m_SyntacticRelation == "РџР РР›_РЎРЈР©" )
+	    ||  ( m_Relations[i].m_SyntacticRelation == "РќРђР _РџР РР›" )
+		||  ( m_Relations[i].m_SyntacticRelation == "РњРћР”РР¤_РџР РР›" )
 	   )
    {
 	   //swap(m_Relations[i].m_SourceNodeNo, m_Relations[i].m_TargetNodeNo);
@@ -227,14 +227,14 @@ void CRusSemStructure::InterpretAdjNounGroupsAfter ()
 			m_Relations[i].m_Valency.m_RelationStr = "PROPERT";
    }
    else
-   if  (    ( m_Relations[i].m_SyntacticRelation == "ОДНОР_ПРИЛ" ) )
+   if  (    ( m_Relations[i].m_SyntacticRelation == "РћР”РќРћР _РџР РР›" ) )
    {
 	   m_Nodes[m_Relations[i].m_SourceNodeNo].m_NodeType  = MNA;
 	   m_Nodes[m_Relations[i].m_SourceNodeNo].m_MNAType  = SimpleMNA;
 
    }
    else
-   if  ( m_Relations[i].m_SyntacticRelation == "НАРЕЧ_ГЛАГОЛ" )
+   if  ( m_Relations[i].m_SyntacticRelation == "РќРђР Р•Р§_Р“Р›РђР“РћР›" )
    {
 	   	   if (m_Relations[i].m_Valency.m_RelationStr.empty())
 				m_Relations[i].m_Valency.m_RelationStr = "ASPECT";
@@ -248,8 +248,8 @@ void CRusSemStructure::InterpretAdjNounGroupsAfter ()
 
 void CRusSemStructure::ApplySubordinationCases ()
 {
-	// если в отношении прописан конкретный падеж, то нужно удалить граммемы и грам-коды, которые 
-	// противоречат этому падежу 
+	// РµСЃР»Рё РІ РѕС‚РЅРѕС€РµРЅРёРё РїСЂРѕРїРёСЃР°РЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ РїР°РґРµР¶, С‚Рѕ РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ РіСЂР°РјРјРµРјС‹ Рё РіСЂР°Рј-РєРѕРґС‹, РєРѕС‚РѕСЂС‹Рµ 
+	// РїСЂРѕС‚РёРІРѕСЂРµС‡Р°С‚ СЌС‚РѕРјСѓ РїР°РґРµР¶Сѓ 
 	for (long i=0;  i < m_Relations.size(); i++)
 	{
 		long MainRelNo = i;
@@ -259,7 +259,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 			if (R.m_RelsCount > 0) MainRelNo = R.m_Rels[0];
 		};
 
-		// на сравнительную степень не будем проецировать падежи
+		// РЅР° СЃСЂР°РІРЅРёС‚РµР»СЊРЅСѓСЋ СЃС‚РµРїРµРЅСЊ РЅРµ Р±СѓРґРµРј РїСЂРѕРµС†РёСЂРѕРІР°С‚СЊ РїР°РґРµР¶Рё
 		if (m_Nodes[m_Relations[MainRelNo].m_TargetNodeNo].HasOneGrammem(rComparative)) continue;
 
 		if (m_Relations[MainRelNo].m_Valency.IsFromDict())
@@ -287,14 +287,14 @@ void CRusSemStructure::ApplySubordinationCases ()
 
 			QWORD Grammems = GetCaseGrammem(RossHolder, CaseItemNo);
 
-			// если у глагола есть отрицание, и он  валентен на п_доп, тогда 
-			// он может управлять как номинативом, так и генитивом
-			if (m_Nodes[m_Relations[MainRelNo].m_SourceNodeNo].HasRelOperator("НЕ"))
+			// РµСЃР»Рё Сѓ РіР»Р°РіРѕР»Р° РµСЃС‚СЊ РѕС‚СЂРёС†Р°РЅРёРµ, Рё РѕРЅ  РІР°Р»РµРЅС‚РµРЅ РЅР° Рї_РґРѕРї, С‚РѕРіРґР° 
+			// РѕРЅ РјРѕР¶РµС‚ СѓРїСЂР°РІР»СЏС‚СЊ РєР°Рє РЅРѕРјРёРЅР°С‚РёРІРѕРј, С‚Р°Рє Рё РіРµРЅРёС‚РёРІРѕРј
+			if (m_Nodes[m_Relations[MainRelNo].m_SourceNodeNo].HasRelOperator("РќР•"))
 			 if (RossHolder->GetSynRel( C) ==  RossHolder->DirectObjSynONo)
 				Grammems = _QM(rAccusativ) | _QM(rGenitiv);
-			 // запускаем удаление анкодов, только если  внешние и внутренние граммемы равны,
-			 // а в случае "много домов сгорело" эту функцию запускать не нужно, поскольку
-			 // анкоды и граммемы не совпадают.
+			 // Р·Р°РїСѓСЃРєР°РµРј СѓРґР°Р»РµРЅРёРµ Р°РЅРєРѕРґРѕРІ, С‚РѕР»СЊРєРѕ РµСЃР»Рё  РІРЅРµС€РЅРёРµ Рё РІРЅСѓС‚СЂРµРЅРЅРёРµ РіСЂР°РјРјРµРјС‹ СЂР°РІРЅС‹,
+			 // Р° РІ СЃР»СѓС‡Р°Рµ "РјРЅРѕРіРѕ РґРѕРјРѕРІ СЃРіРѕСЂРµР»Рѕ" СЌС‚Сѓ С„СѓРЅРєС†РёСЋ Р·Р°РїСѓСЃРєР°С‚СЊ РЅРµ РЅСѓР¶РЅРѕ, РїРѕСЃРєРѕР»СЊРєСѓ
+			 // Р°РЅРєРѕРґС‹ Рё РіСЂР°РјРјРµРјС‹ РЅРµ СЃРѕРІРїР°РґР°СЋС‚.
 			if (    (m_Nodes[m_Relations[i].m_TargetNodeNo].m_MainWordNo != -1)
 				 && (m_Nodes[m_Relations[i].m_TargetNodeNo].GetGrammems() == m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[m_Nodes[m_Relations[i].m_TargetNodeNo].m_MainWordNo].GetAllGrammems())
 			   )
@@ -304,7 +304,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 		};
 	};
 
-	// полтора рубля - здесь нужно изменить мн. на ед.
+	// РїРѕР»С‚РѕСЂР° СЂСѓР±Р»СЏ - Р·РґРµСЃСЊ РЅСѓР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ РјРЅ. РЅР° РµРґ.
 	for (long i=0;  i < m_Relations.size(); i++)
 		if	(		(m_Relations[i].m_Valency.m_RelationStr == "QUANTIT")		  
 				&&	m_Nodes[m_Relations[i].m_TargetNodeNo].IsPrimitive()
@@ -314,7 +314,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 			m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllNumbers);
 			m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rSingular);
 		};
-	// число, падеж числительных
+	// С‡РёСЃР»Рѕ, РїР°РґРµР¶ С‡РёСЃР»РёС‚РµР»СЊРЅС‹С…
 	for (long i=0;  i < m_Relations.size(); i++)
 		if	(		(m_Relations[i].m_Valency.m_RelationStr == "QUANTIT") )
 		{
@@ -331,11 +331,11 @@ void CRusSemStructure::ApplySubordinationCases ()
 			NounN.ModifyGramCodes(gcNoun , 2, R);
 		};
 	
-   // если русское подлежащее было неизменяемым, а в него идет стрелка  от сказуемого, 
-   // которое стоит строго либо в мн., либо  ед., тогда нужно удалить граммему, 
-   // противоречающую сказуемому
-   // Например, "пальто порвалось"
-   //			"плато было красным"
+   // РµСЃР»Рё СЂСѓСЃСЃРєРѕРµ РїРѕРґР»РµР¶Р°С‰РµРµ Р±С‹Р»Рѕ РЅРµРёР·РјРµРЅСЏРµРјС‹Рј, Р° РІ РЅРµРіРѕ РёРґРµС‚ СЃС‚СЂРµР»РєР°  РѕС‚ СЃРєР°Р·СѓРµРјРѕРіРѕ, 
+   // РєРѕС‚РѕСЂРѕРµ СЃС‚РѕРёС‚ СЃС‚СЂРѕРіРѕ Р»РёР±Рѕ РІ РјРЅ., Р»РёР±Рѕ  РµРґ., С‚РѕРіРґР° РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ РіСЂР°РјРјРµРјСѓ, 
+   // РїСЂРѕС‚РёРІРѕСЂРµС‡Р°СЋС‰СѓСЋ СЃРєР°Р·СѓРµРјРѕРјСѓ
+   // РќР°РїСЂРёРјРµСЂ, "РїР°Р»СЊС‚Рѕ РїРѕСЂРІР°Р»РѕСЃСЊ"
+   //			"РїР»Р°С‚Рѕ Р±С‹Р»Рѕ РєСЂР°СЃРЅС‹Рј"
    for (long i=0;  i < m_Relations.size(); i++)
 	  if ( IsRusSubj (i) )
 	  {
@@ -346,8 +346,8 @@ void CRusSemStructure::ApplySubordinationCases ()
 		  bool b_sg = Source.HasOneGrammem (rSingular);
 		  if (b_pl && b_sg) continue;
 
-		  // проверяем на неизменяемость
-		  // иностранная лексема всгда неизменяема
+		  // РїСЂРѕРІРµСЂСЏРµРј РЅР° РЅРµРёР·РјРµРЅСЏРµРјРѕСЃС‚СЊ
+		  // РёРЅРѕСЃС‚СЂР°РЅРЅР°СЏ Р»РµРєСЃРµРјР° РІСЃРіРґР° РЅРµРёР·РјРµРЅСЏРµРјР°
 		  if (!Target.IsILENode())
 		  {
 			  if (!Target.IsPrimitive()) continue;
@@ -356,7 +356,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 			  CFormInfo P;
 			  if (! m_pData->GetRusLemmatizer()->CreateParadigmFromID(ParadigmId, P) ) continue;
 			  if (P.GetCount() != 1) continue;
-			//проверка не неизменяемость закончена
+			//РїСЂРѕРІРµСЂРєР° РЅРµ РЅРµРёР·РјРµРЅСЏРµРјРѕСЃС‚СЊ Р·Р°РєРѕРЅС‡РµРЅР°
 		  };
 
 		  Target.DeleteGrammems( rAllNumbers );
@@ -367,9 +367,9 @@ void CRusSemStructure::ApplySubordinationCases ()
 	  };
 
    /*  
-     если отношении стоял падеж с числом (например "Р_ед"),
-	 тогда нужно спрецировать это число на выходной узел 
-     Например, "чашечка кофе " Р_ед
+     РµСЃР»Рё РѕС‚РЅРѕС€РµРЅРёРё СЃС‚РѕСЏР» РїР°РґРµР¶ СЃ С‡РёСЃР»РѕРј (РЅР°РїСЂРёРјРµСЂ "Р _РµРґ"),
+	 С‚РѕРіРґР° РЅСѓР¶РЅРѕ СЃРїСЂРµС†РёСЂРѕРІР°С‚СЊ СЌС‚Рѕ С‡РёСЃР»Рѕ РЅР° РІС‹С…РѕРґРЅРѕР№ СѓР·РµР» 
+     РќР°РїСЂРёРјРµСЂ, "С‡Р°С€РµС‡РєР° РєРѕС„Рµ " Р _РµРґ
    */
    for (long i=0;  i < m_Relations.size(); i++)
    if (m_Relations[i].m_Valency.IsFromDict())
@@ -396,17 +396,17 @@ void CRusSemStructure::ApplySubordinationCases ()
 };
 
 
-//  без контектса SF(газета) = 1. ORG 2. MEDINF, а в словосочетании
-// "абзац газеты" -  должно остаться только SF(газета) = 1 MEDINF
-// должен  исчезнуть, так как "вопрос" валентен на MEDINF.
-// Наоборот, в словосочетании "акция газеты" должно остаться 
-// SF(газета) = 1 ORG, поскольку "акция" валентна на ORG.
+//  Р±РµР· РєРѕРЅС‚РµРєС‚СЃР° SF(РіР°Р·РµС‚Р°) = 1. ORG 2. MEDINF, Р° РІ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРё
+// "Р°Р±Р·Р°С† РіР°Р·РµС‚С‹" -  РґРѕР»Р¶РЅРѕ РѕСЃС‚Р°С‚СЊСЃСЏ С‚РѕР»СЊРєРѕ SF(РіР°Р·РµС‚Р°) = 1 MEDINF
+// РґРѕР»Р¶РµРЅ  РёСЃС‡РµР·РЅСѓС‚СЊ, С‚Р°Рє РєР°Рє "РІРѕРїСЂРѕСЃ" РІР°Р»РµРЅС‚РµРЅ РЅР° MEDINF.
+// РќР°РѕР±РѕСЂРѕС‚, РІ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРё "Р°РєС†РёСЏ РіР°Р·РµС‚С‹" РґРѕР»Р¶РЅРѕ РѕСЃС‚Р°С‚СЊСЃСЏ 
+// SF(РіР°Р·РµС‚Р°) = 1 ORG, РїРѕСЃРєРѕР»СЊРєСѓ "Р°РєС†РёСЏ" РІР°Р»РµРЅС‚РЅР° РЅР° ORG.
 void CRusSemStructure::ApplySubordinationSemfets ()
 {
 
-	// если в отношении прописан конкретный набор SF, то нужно перечечь его  
-	// с SF узла, в который входит это отношение и результат пересечения записать
-	// в SF узла
+	// РµСЃР»Рё РІ РѕС‚РЅРѕС€РµРЅРёРё РїСЂРѕРїРёСЃР°РЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ РЅР°Р±РѕСЂ SF, С‚Рѕ РЅСѓР¶РЅРѕ РїРµСЂРµС‡РµС‡СЊ РµРіРѕ  
+	// СЃ SF СѓР·Р»Р°, РІ РєРѕС‚РѕСЂС‹Р№ РІС…РѕРґРёС‚ СЌС‚Рѕ РѕС‚РЅРѕС€РµРЅРёРµ Рё СЂРµР·СѓР»СЊС‚Р°С‚ РїРµСЂРµСЃРµС‡РµРЅРёСЏ Р·Р°РїРёСЃР°С‚СЊ
+	// РІ SF СѓР·Р»Р°
 	for (long RelNo=0;  RelNo< m_Relations.size(); RelNo++)
 	{
 		long MainRelNo = RelNo;
@@ -431,10 +431,10 @@ void CRusSemStructure::ApplySubordinationSemfets ()
 					continue;
 				};
 
-            // идем по всем дизъюнктам SF узла
+            // РёРґРµРј РїРѕ РІСЃРµРј РґРёР·СЉСЋРЅРєС‚Р°Рј SF СѓР·Р»Р°
 			for (long i=0; i <SemFetsNode.size(); i++)
 			{
-				// идем по всем дизъюнктам SF отношения
+				// РёРґРµРј РїРѕ РІСЃРµРј РґРёР·СЉСЋРЅРєС‚Р°Рј SF РѕС‚РЅРѕС€РµРЅРёСЏ
 				long k=0;
 				for (; k < SemFetsRel.size(); k++)
 					if  (SemFetsRel[k] & SemFetsNode[i]) break;
@@ -463,28 +463,28 @@ void CRusSemStructure::ApplySubordinationSemfets ()
 
 
 /*
-Если есть глагол или краткая форма, управляющая инфинитивом, например:
- попробовал представить
- дай посмотреть
- удалось послать
- пытался вспомнить
- собирался доказать
- начал читать
- мог закрыть
- хочу начать
- успел уйти
- мешать говорить
- любит выпить
- не собиралался возвращаться
- продолжала вращаться
- просить уехать 
- должен ознакомиться 
+Р•СЃР»Рё РµСЃС‚СЊ РіР»Р°РіРѕР» РёР»Рё РєСЂР°С‚РєР°СЏ С„РѕСЂРјР°, СѓРїСЂР°РІР»СЏСЋС‰Р°СЏ РёРЅС„РёРЅРёС‚РёРІРѕРј, РЅР°РїСЂРёРјРµСЂ:
+ РїРѕРїСЂРѕР±РѕРІР°Р» РїСЂРµРґСЃС‚Р°РІРёС‚СЊ
+ РґР°Р№ РїРѕСЃРјРѕС‚СЂРµС‚СЊ
+ СѓРґР°Р»РѕСЃСЊ РїРѕСЃР»Р°С‚СЊ
+ РїС‹С‚Р°Р»СЃСЏ РІСЃРїРѕРјРЅРёС‚СЊ
+ СЃРѕР±РёСЂР°Р»СЃСЏ РґРѕРєР°Р·Р°С‚СЊ
+ РЅР°С‡Р°Р» С‡РёС‚Р°С‚СЊ
+ РјРѕРі Р·Р°РєСЂС‹С‚СЊ
+ С…РѕС‡Сѓ РЅР°С‡Р°С‚СЊ
+ СѓСЃРїРµР» СѓР№С‚Рё
+ РјРµС€Р°С‚СЊ РіРѕРІРѕСЂРёС‚СЊ
+ Р»СЋР±РёС‚ РІС‹РїРёС‚СЊ
+ РЅРµ СЃРѕР±РёСЂР°Р»Р°Р»СЃСЏ РІРѕР·РІСЂР°С‰Р°С‚СЊСЃСЏ
+ РїСЂРѕРґРѕР»Р¶Р°Р»Р° РІСЂР°С‰Р°С‚СЊСЃСЏ
+ РїСЂРѕСЃРёС‚СЊ СѓРµС…Р°С‚СЊ 
+ РґРѕР»Р¶РµРЅ РѕР·РЅР°РєРѕРјРёС‚СЊСЃСЏ 
 
- Если у этого глагола  есть управление дательным падежом, которое является не 
- первой валентностью,тогда считаем, что субъект главного глагола совпадает 
- с субъектом инфинитива. В противном случае, субъект, скорее всего, совпадает, с 
- валентностью, которая выражена дательным падежом, например:
-мешать мне уйти -> SUB(я,уйти)я дам тебе посмотреть -> SUB(ты,посмотреть)он просил тебя уехать -> SUB(ты,уехать)
+ Р•СЃР»Рё Сѓ СЌС‚РѕРіРѕ РіР»Р°РіРѕР»Р°  РµСЃС‚СЊ СѓРїСЂР°РІР»РµРЅРёРµ РґР°С‚РµР»СЊРЅС‹Рј РїР°РґРµР¶РѕРј, РєРѕС‚РѕСЂРѕРµ СЏРІР»СЏРµС‚СЃСЏ РЅРµ 
+ РїРµСЂРІРѕР№ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊСЋ,С‚РѕРіРґР° СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ СЃСѓР±СЉРµРєС‚ РіР»Р°РІРЅРѕРіРѕ РіР»Р°РіРѕР»Р° СЃРѕРІРїР°РґР°РµС‚ 
+ СЃ СЃСѓР±СЉРµРєС‚РѕРј РёРЅС„РёРЅРёС‚РёРІР°. Р’ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ, СЃСѓР±СЉРµРєС‚, СЃРєРѕСЂРµРµ РІСЃРµРіРѕ, СЃРѕРІРїР°РґР°РµС‚, СЃ 
+ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊСЋ, РєРѕС‚РѕСЂР°СЏ РІС‹СЂР°Р¶РµРЅР° РґР°С‚РµР»СЊРЅС‹Рј РїР°РґРµР¶РѕРј, РЅР°РїСЂРёРјРµСЂ:
+РјРµС€Р°С‚СЊ РјРЅРµ СѓР№С‚Рё -> SUB(СЏ,СѓР№С‚Рё)СЏ РґР°Рј С‚РµР±Рµ РїРѕСЃРјРѕС‚СЂРµС‚СЊ -> SUB(С‚С‹,РїРѕСЃРјРѕС‚СЂРµС‚СЊ)РѕРЅ РїСЂРѕСЃРёР» С‚РµР±СЏ СѓРµС…Р°С‚СЊ -> SUB(С‚С‹,СѓРµС…Р°С‚СЊ)
 */
 
 bool HasSynFet (const CSemPattern& P, long ItemNo)
@@ -554,8 +554,8 @@ void CRusSemStructure::ApplyDopInfinitive ()
             if (m_Nodes[NodeNo].m_Vals.size() == 0) continue;
             vector<CValency> ValencyMisses;
             GetValencyMisses (NodeNo, ValencyMisses);
-            // у инфинитва обычно не заполненна первая валентность, но если вдруг 
-            // заполнена, то это не наш случай
+            // Сѓ РёРЅС„РёРЅРёС‚РІР° РѕР±С‹С‡РЅРѕ РЅРµ Р·Р°РїРѕР»РЅРµРЅРЅР° РїРµСЂРІР°СЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ, РЅРѕ РµСЃР»Рё РІРґСЂСѓРі 
+            // Р·Р°РїРѕР»РЅРµРЅР°, С‚Рѕ СЌС‚Рѕ РЅРµ РЅР°С€ СЃР»СѓС‡Р°Р№
             if (!_find (ValencyMisses, m_Nodes[NodeNo].m_Vals[0]) ) continue;
             m_DopRelations.push_back(CRusSemRelation(m_Nodes[NodeNo].m_Vals[0],  NodeNo,  InfSubNodeNo,  ""));     
             CSemPattern P;
@@ -571,7 +571,7 @@ long CRusSemStructure::GetValencyNoWithouProhibited (long NodeNo, long ValencyNo
   vector<long> Rels;
   GetOutcomingRelations(NodeNo, Rels);
 
-  long Curr =	0; // текущий номер совместной валентности
+  long Curr =	0; // С‚РµРєСѓС‰РёР№ РЅРѕРјРµСЂ СЃРѕРІРјРµСЃС‚РЅРѕР№ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё
   for (long i=0;i < m_Nodes[NodeNo].m_Vals.size(); i++)
   {
 	  long j=0;
@@ -622,7 +622,7 @@ void CRusSemStructure::ApplyDopLexFuncts ()
 void CRusSemStructure::FindQuestionClauses ()
 {
    /*
-    ищем первую клаузу предложения "кто бы ни пришел, я уйду"
+    РёС‰РµРј РїРµСЂРІСѓСЋ РєР»Р°СѓР·Сѓ РїСЂРµРґР»РѕР¶РµРЅРёСЏ "РєС‚Рѕ Р±С‹ РЅРё РїСЂРёС€РµР», СЏ СѓР№РґСѓ"
    */
    for (long i=0; i< m_Clauses.size(); i++)
 	if (m_Clauses[i].m_HasParticleBY)
@@ -631,14 +631,14 @@ void CRusSemStructure::FindQuestionClauses ()
 		 vector<long> Nodes;
 		 GetClauseRootsWithoutDeleted(i,Nodes);
 		 if (Nodes.size() != 1)  continue;
-		 if (!m_Nodes[Nodes[0]].HasRelOperator("НИ")) continue;
+		 if (!m_Nodes[Nodes[0]].HasRelOperator("РќР")) continue;
 		 m_Clauses[i].m_bQuestion = true;
 		 m_Nodes[Nodes[0]].m_RelOperators.push_back("no_matter"); 
 		 m_Clauses[i].m_HasParticleBY = false;
 	 };
 
 	/*
-	дальше рассматриваются только предложения с вопросительным знаком в конце
+	РґР°Р»СЊС€Рµ СЂР°СЃСЃРјР°С‚СЂРёРІР°СЋС‚СЃСЏ С‚РѕР»СЊРєРѕ РїСЂРµРґР»РѕР¶РµРЅРёСЏ СЃ РІРѕРїСЂРѕСЃРёС‚РµР»СЊРЅС‹Рј Р·РЅР°РєРѕРј РІ РєРѕРЅС†Рµ
 	 */
    if (m_SentenceMood != Interrogative) return;
 
@@ -651,7 +651,7 @@ void CRusSemStructure::FindQuestionClauses ()
    for (long i=0; i< HostClauses.size(); i++)
     if (HostClauses.size() > 1)
 	   for (long j=m_Clauses[HostClauses[i]].m_BeginNodeNo; (j < m_Clauses[HostClauses[i]].m_EndNodeNo) && ((j - m_Clauses[HostClauses[i]].m_BeginNodeNo) < ConjWordDistance); j++)
-			if (m_Nodes[j].IsLemmaList("ЧТОБЫ",  "ЕСЛИ",  "ХОТЯ", "ПОСКОЛЬКУ", "ПОКА", "КОТОРЫЙ", ""))
+			if (m_Nodes[j].IsLemmaList("Р§РўРћР‘Р«",  "Р•РЎР›Р",  "РҐРћРўРЇ", "РџРћРЎРљРћР›Р¬РљРЈ", "РџРћРљРђ", "РљРћРўРћР Р«Р™", ""))
 			{
 				HostClauses.erase(HostClauses.begin() +i);
 			   i--;
@@ -665,7 +665,7 @@ void CRusSemStructure::FindQuestionClauses ()
 
 	   for (long i=0; i< m_Clauses.size(); i++)
 		 if (    (m_Clauses[i].m_ClauseRuleNo != -1)
-			  && (m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name == "сочинение")
+			  && (m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name == "СЃРѕС‡РёРЅРµРЅРёРµ")
 			)
 		   for (long j=0; j< SimilClauses.size(); j++)
 			   if (m_Clauses[i].m_HostClause  == SimilClauses[j])
@@ -681,9 +681,9 @@ void CRusSemStructure::FindQuestionClauses ()
 
 
 /*
- функция решает омонимию между повелительным и 
- изъявительным наклонением
- Проверяется наличие подлежащего.
+ С„СѓРЅРєС†РёСЏ СЂРµС€Р°РµС‚ РѕРјРѕРЅРёРјРёСЋ РјРµР¶РґСѓ РїРѕРІРµР»РёС‚РµР»СЊРЅС‹Рј Рё 
+ РёР·СЉСЏРІРёС‚РµР»СЊРЅС‹Рј РЅР°РєР»РѕРЅРµРЅРёРµРј
+ РџСЂРѕРІРµСЂСЏРµС‚СЃСЏ РЅР°Р»РёС‡РёРµ РїРѕРґР»РµР¶Р°С‰РµРіРѕ.
 */
 void CRusSemStructure::SolveImperativeHomonymy()
 {
@@ -722,7 +722,7 @@ void CRusSemStructure::ConvertParticipleTreeToClause()
 			if ( m_Nodes[NodeNo].HasPOS(PARTICIPLE) )
 			{
 				  /*
-				    причастия без зависимых слов будем пропускать
+				    РїСЂРёС‡Р°СЃС‚РёСЏ Р±РµР· Р·Р°РІРёСЃРёРјС‹С… СЃР»РѕРІ Р±СѓРґРµРј РїСЂРѕРїСѓСЃРєР°С‚СЊ
 				  */
 				  vector<long> Rels;
 				  GetOutcomingRelations(NodeNo, Rels, false);
@@ -737,7 +737,7 @@ void CRusSemStructure::ConvertParticipleTreeToClause()
 				  vector<long> Roots;
 				  GetClauseRootsWithoutDeleted(ClauseNo,Roots);
 				  if (Roots.size() != 1) continue;
-				  // если причастие уже стоит во главе клаузы, тогда надо выйти
+				  // РµСЃР»Рё РїСЂРёС‡Р°СЃС‚РёРµ СѓР¶Рµ СЃС‚РѕРёС‚ РІРѕ РіР»Р°РІРµ РєР»Р°СѓР·С‹, С‚РѕРіРґР° РЅР°РґРѕ РІС‹Р№С‚Рё
 				  if (Roots[0] == NodeNo) continue;
 				  vector<long> iNodes;
 				  dfs_in_clause (NodeNo, iNodes);
@@ -768,7 +768,7 @@ void CRusSemStructure::ConvertParticipleTreeToClause()
 				  };
 				  m_Clauses.back().m_HostClause = ClauseNo;
 				  for (i=0; i < m_ClauseRules.size(); i++)
-					  if (m_ClauseRules[i].m_Name == "причастный оборот")
+					  if (m_ClauseRules[i].m_Name == "РїСЂРёС‡Р°СЃС‚РЅС‹Р№ РѕР±РѕСЂРѕС‚")
 					  {
 						  m_Clauses.back().m_ClauseRuleNo = i;
 						  break;

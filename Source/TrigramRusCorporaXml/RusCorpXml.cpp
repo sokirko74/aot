@@ -133,7 +133,7 @@ bool CRusCorpXmlFile::CreateGraTable() {
                 DeleteSingleQuotesAndAsterisks(Word.m_WordStr);
                 ConvertJO2Je(Word.m_WordStr);
                 if (
-                        !CheckLanguage(Word.m_WordStr, morphRussian)  // ни то ни се
+                        !CheckLanguage(Word.m_WordStr, morphRussian)  // РЅРё С‚Рѕ РЅРё СЃРµ
                         && !CheckLanguage(Word.m_WordStr, morphEnglish)
                         && !CheckLanguage(Word.m_WordStr, morphDigits)
                         && Word.m_WordStr.length() < 255

@@ -114,18 +114,18 @@ void CGraphmatFile :: InitNonContextDescriptors (CGraLine& L)
 		)
 	{
 
-		if (fl_ra&&fl_la&& !is_russian_alpha((BYTE)Token[sizeof(Token) - 1]))  // встретились русские и латинские буквы, "IP-адрес"
-			if (!m_bForceToRus) // если не надо приводить к русскому алфавиту
-				L.SetDes(OUnk); // установить дескриптор "вопрос"
-			else // попробовать привести слово к русскому алфав.
+		if (fl_ra&&fl_la&& !is_russian_alpha((BYTE)Token[sizeof(Token) - 1]))  // РІСЃС‚СЂРµС‚РёР»РёСЃСЊ СЂСѓСЃСЃРєРёРµ Рё Р»Р°С‚РёРЅСЃРєРёРµ Р±СѓРєРІС‹, "IP-Р°РґСЂРµСЃ"
+			if (!m_bForceToRus) // РµСЃР»Рё РЅРµ РЅР°РґРѕ РїСЂРёРІРѕРґРёС‚СЊ Рє СЂСѓСЃСЃРєРѕРјСѓ Р°Р»С„Р°РІРёС‚Сѓ
+				L.SetDes(OUnk); // СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РґРµСЃРєСЂРёРїС‚РѕСЂ "РІРѕРїСЂРѕСЃ"
+			else // РїРѕРїСЂРѕР±РѕРІР°С‚СЊ РїСЂРёРІРµСЃС‚Рё СЃР»РѕРІРѕ Рє СЂСѓСЃСЃРєРѕРјСѓ Р°Р»С„Р°РІ.
 			{
 				char s[255];
-				if (!force_to_rus(s, Token, TokenLength)) // если не удалось привести
+				if (!force_to_rus(s, Token, TokenLength)) // РµСЃР»Рё РЅРµ СѓРґР°Р»РѕСЃСЊ РїСЂРёРІРµСЃС‚Рё
 					L.SetDes(OUnk);
 				else
 				{
-					memcpy (const_cast<char*>(Token),s, TokenLength); // приводим
-					L.SetDes(ORLE);  // говорим, что это русская лексема
+					memcpy (const_cast<char*>(Token),s, TokenLength); // РїСЂРёРІРѕРґРёРј
+					L.SetDes(ORLE);  // РіРѕРІРѕСЂРёРј, С‡С‚Рѕ СЌС‚Рѕ СЂСѓСЃСЃРєР°СЏ Р»РµРєСЃРµРјР°
 				}
 			}
 		else

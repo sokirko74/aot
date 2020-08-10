@@ -16,8 +16,8 @@
 const size_t NumeralModifCount = 9;
 const string NumeralModif[NumeralModifCount] = 
 {
-	"UNGEFÄHR", "HÖCHSTENS", "ETWA",	"WENIGSTENS",
-	"ZIRKA", "FRÜHESTENS", "SPÄTESTENS", "MINDESTENS",
+	"UNGEFÐ”HR", "HÐ¦CHSTENS", "ETWA",	"WENIGSTENS",
+	"ZIRKA", "FRÐ¬HESTENS", "SPÐ”TESTENS", "MINDESTENS",
 	"RUND"
 };
 

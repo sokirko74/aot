@@ -56,16 +56,16 @@ bool CRossHolder::InitConsts()
 	SynGroupDomNo =	GetRoss()->GetDomenNoByDomStr("D_GROUPS");
 	LemGroupBeginingDomNo =	GetRoss()->GetDomenNoByDomStr("D_1");
 
-	IndirObjSynONo =  GetRoss()->GetItemNoByItemStr	("к_доп", SynRelDomNo);
+	IndirObjSynONo =  GetRoss()->GetItemNoByItemStr	("Рє_РґРѕРї", SynRelDomNo);
 	ReverseSynONo =	 GetRoss()->GetItemNoByItemStr ("X!", SynRelDomNo);
-	UncoordAttrSynONo =	 GetRoss()->GetItemNoByItemStr ("нс_опр", SynRelDomNo);
-	CoordAttrSynONo	=  GetRoss()->GetItemNoByItemStr ("с_опр", SynRelDomNo);
-	DirectObjSynONo	=  GetRoss()->GetItemNoByItemStr ("п_доп", SynRelDomNo);
-	SubjSynONo =  GetRoss()->GetItemNoByItemStr	("подл", SynRelDomNo);
+	UncoordAttrSynONo =	 GetRoss()->GetItemNoByItemStr ("РЅСЃ_РѕРїСЂ", SynRelDomNo);
+	CoordAttrSynONo	=  GetRoss()->GetItemNoByItemStr ("СЃ_РѕРїСЂ", SynRelDomNo);
+	DirectObjSynONo	=  GetRoss()->GetItemNoByItemStr ("Рї_РґРѕРї", SynRelDomNo);
+	SubjSynONo =  GetRoss()->GetItemNoByItemStr	("РїРѕРґР»", SynRelDomNo);
 	EnglSubjSynONo =  GetRoss()->GetItemNoByItemStr	("subj", SynRelDomNo);
-	ParatAttrSynONo	=  GetRoss()->GetItemNoByItemStr ("прим_опр", SynRelDomNo);
-	FromPredicSynONo =	GetRoss()->GetItemNoByItemStr ("отпредик", SynRelDomNo);
-	PostSpecifSynONo =	GetRoss()->GetItemNoByItemStr ("уточн",	SynRelDomNo);
+	ParatAttrSynONo	=  GetRoss()->GetItemNoByItemStr ("РїСЂРёРј_РѕРїСЂ", SynRelDomNo);
+	FromPredicSynONo =	GetRoss()->GetItemNoByItemStr ("РѕС‚РїСЂРµРґРёРє", SynRelDomNo);
+	PostSpecifSynONo =	GetRoss()->GetItemNoByItemStr ("СѓС‚РѕС‡РЅ",	SynRelDomNo);
 
 
 	
@@ -108,7 +108,7 @@ bool CRossHolder::InitConsts()
 
 	S_And_InstrNo =	-1;
 	if (LemGroupBeginingDomNo != ErrUChar)
-		S_And_InstrNo =	GetRoss()->GetItemNoByItemStr("с+Т",LemGroupBeginingDomNo);
+		S_And_InstrNo =	GetRoss()->GetItemNoByItemStr("СЃ+Рў",LemGroupBeginingDomNo);
 	return true;
 };
 
@@ -175,51 +175,51 @@ long CRossHolder::GetItemNoByItemStr(const char* ItemStr, const	char* DomStr) co
 
 bool CRossHolder::InitDomainsConsts()
 {
-	AdvAdjMainNo = GetItemNoByItemStr ("НАР:нар_опр", "D_GF_MAIN");
-	NounMainNo = GetItemNoByItemStr	("СУЩ:ИГ", "D_GF_MAIN");
-	VerbMainNo = GetItemNoByItemStr	("ГЛ:ГГ", "D_GF_MAIN");
-	AdjMainNo =	GetItemNoByItemStr ("ПРИЛ:с_опр", "D_GF_MAIN");
-	PronMainNo = GetItemNoByItemStr	("МЕСТОИМ:с_опр", "D_GF_MAIN");
-	ClauseGrpNo	=  GetItemNoByItemStr ("ПРИД_ПР", "D_GROUPS");
-	NounGrpNo =	 GetItemNoByItemStr	("ИГ", "D_GROUPS");
-	AdverbialGrpNo =  GetItemNoByItemStr ("ОБСТ_ГР", "D_GROUPS");
-	VerbGrpNo =	 GetItemNoByItemStr	("ГГ", "D_GROUPS");
+	AdvAdjMainNo = GetItemNoByItemStr ("РќРђР :РЅР°СЂ_РѕРїСЂ", "D_GF_MAIN");
+	NounMainNo = GetItemNoByItemStr	("РЎРЈР©:РР“", "D_GF_MAIN");
+	VerbMainNo = GetItemNoByItemStr	("Р“Р›:Р“Р“", "D_GF_MAIN");
+	AdjMainNo =	GetItemNoByItemStr ("РџР РР›:СЃ_РѕРїСЂ", "D_GF_MAIN");
+	PronMainNo = GetItemNoByItemStr	("РњР•РЎРўРћРРњ:СЃ_РѕРїСЂ", "D_GF_MAIN");
+	ClauseGrpNo	=  GetItemNoByItemStr ("РџР РР”_РџР ", "D_GROUPS");
+	NounGrpNo =	 GetItemNoByItemStr	("РР“", "D_GROUPS");
+	AdverbialGrpNo =  GetItemNoByItemStr ("РћР‘РЎРў_Р“Р ", "D_GROUPS");
+	VerbGrpNo =	 GetItemNoByItemStr	("Р“Р“", "D_GROUPS");
 	CopulNo	=  GetItemNoByItemStr ("Copul",	"D_GROUPS");
 	ModalCopulNo =	GetItemNoByItemStr ("ModalCopul", "D_GROUPS");
-	NumerComplexNo =  GetItemNoByItemStr ("ЦК",	"D_GRAFEM_DESC");
-	NumerSymbComplexNo =  GetItemNoByItemStr ("ЦБК", "D_GRAFEM_DESC");
-	HyphenNo =	GetItemNoByItemStr ("ДЕФ", "D_GRAFEM_DESC");
-	AdvNo =	 GetItemNoByItemStr	("НАР",	"D_PART_OF_SPEECH");
-	AdjNo =	 GetItemNoByItemStr	("ПРИЛ", "D_PART_OF_SPEECH");
-	NumeralNo =	 GetItemNoByItemStr	("ЧИСЛ", "D_PART_OF_SPEECH");
-	PossPronNo =  GetItemNoByItemStr ("ПРИТ_МЕСТМ",	"D_PART_OF_SPEECH");
-	NominativeNo =	GetItemNoByItemStr ("И", "D_CASE");
-	InstrumentalisNo =	GetItemNoByItemStr ("Т", "D_CASE");
-	GenitivNo =	 GetItemNoByItemStr	("Р", "D_CASE");
-	DativNo	=  GetItemNoByItemStr ("Д",	"D_CASE");
-	VocativNo =	 GetItemNoByItemStr	("П", "D_CASE");
-	AccusativNo	=  GetItemNoByItemStr ("В",	"D_CASE");
-	NominativePluralisNo =	GetItemNoByItemStr ("И_мн",	"D_CASE_NUMBER");
-	InstrumentalisPluralisNo =	GetItemNoByItemStr ("Т_мн",	"D_CASE_NUMBER");
-	GenitivPluralisNo =	 GetItemNoByItemStr	("Р_мн", "D_CASE_NUMBER");
-	DativPluralisNo	=  GetItemNoByItemStr ("Д_мн", "D_CASE_NUMBER");
-	VocativPluralisNo =	 GetItemNoByItemStr	("П_мн", "D_CASE_NUMBER");
+	NumerComplexNo =  GetItemNoByItemStr ("Р¦Рљ",	"D_GRAFEM_DESC");
+	NumerSymbComplexNo =  GetItemNoByItemStr ("Р¦Р‘Рљ", "D_GRAFEM_DESC");
+	HyphenNo =	GetItemNoByItemStr ("Р”Р•Р¤", "D_GRAFEM_DESC");
+	AdvNo =	 GetItemNoByItemStr	("РќРђР ",	"D_PART_OF_SPEECH");
+	AdjNo =	 GetItemNoByItemStr	("РџР РР›", "D_PART_OF_SPEECH");
+	NumeralNo =	 GetItemNoByItemStr	("Р§РРЎР›", "D_PART_OF_SPEECH");
+	PossPronNo =  GetItemNoByItemStr ("РџР РРў_РњР•РЎРўРњ",	"D_PART_OF_SPEECH");
+	NominativeNo =	GetItemNoByItemStr ("Р", "D_CASE");
+	InstrumentalisNo =	GetItemNoByItemStr ("Рў", "D_CASE");
+	GenitivNo =	 GetItemNoByItemStr	("Р ", "D_CASE");
+	DativNo	=  GetItemNoByItemStr ("Р”",	"D_CASE");
+	VocativNo =	 GetItemNoByItemStr	("Рџ", "D_CASE");
+	AccusativNo	=  GetItemNoByItemStr ("Р’",	"D_CASE");
+	NominativePluralisNo =	GetItemNoByItemStr ("Р_РјРЅ",	"D_CASE_NUMBER");
+	InstrumentalisPluralisNo =	GetItemNoByItemStr ("Рў_РјРЅ",	"D_CASE_NUMBER");
+	GenitivPluralisNo =	 GetItemNoByItemStr	("Р _РјРЅ", "D_CASE_NUMBER");
+	DativPluralisNo	=  GetItemNoByItemStr ("Р”_РјРЅ", "D_CASE_NUMBER");
+	VocativPluralisNo =	 GetItemNoByItemStr	("Рџ_РјРЅ", "D_CASE_NUMBER");
 
-	NominativeSingularNo =	GetItemNoByItemStr ("И_ед",	"D_CASE_NUMBER");
-	InstrumentalisSingularNo =	GetItemNoByItemStr ("Т_ед",	"D_CASE_NUMBER");
-	GenitivSingularNo =	 GetItemNoByItemStr	("Р_ед", "D_CASE_NUMBER");
-	DativSingularNo	=  GetItemNoByItemStr ("Д_ед", "D_CASE_NUMBER");
-	VocativSingularNo =	 GetItemNoByItemStr	("П_ед", "D_CASE_NUMBER");
-	AccusativSingularNo	=  GetItemNoByItemStr ("В_ед", "D_CASE_NUMBER");
+	NominativeSingularNo =	GetItemNoByItemStr ("Р_РµРґ",	"D_CASE_NUMBER");
+	InstrumentalisSingularNo =	GetItemNoByItemStr ("Рў_РµРґ",	"D_CASE_NUMBER");
+	GenitivSingularNo =	 GetItemNoByItemStr	("Р _РµРґ", "D_CASE_NUMBER");
+	DativSingularNo	=  GetItemNoByItemStr ("Р”_РµРґ", "D_CASE_NUMBER");
+	VocativSingularNo =	 GetItemNoByItemStr	("Рџ_РµРґ", "D_CASE_NUMBER");
+	AccusativSingularNo	=  GetItemNoByItemStr ("Р’_РµРґ", "D_CASE_NUMBER");
 	
 
-	AccusativPluralisNo	=  GetItemNoByItemStr ("В_мн", "D_CASE_NUMBER");
-	InstrumentalisAdjNo	=  GetItemNoByItemStr ("Т_ПРИЛ", "D_CASE_POS");
-	InfinitiveNo =	GetItemNoByItemStr ("инф", "D_VP_SPECIF");
-	NegativeNo =  GetItemNoByItemStr ("отр", "D_VP_SPECIF");
-	PassiveNo =	 GetItemNoByItemStr	("стр",	"D_VP_SPECIF");
-	QuoteMarkNo	=  GetItemNoByItemStr ("квч", "D_GRAFEM_DESC");
-	ILENo =	 GetItemNoByItemStr	("ИЛЕ",	"D_GRAFEM_DESC");
+	AccusativPluralisNo	=  GetItemNoByItemStr ("Р’_РјРЅ", "D_CASE_NUMBER");
+	InstrumentalisAdjNo	=  GetItemNoByItemStr ("Рў_РџР РР›", "D_CASE_POS");
+	InfinitiveNo =	GetItemNoByItemStr ("РёРЅС„", "D_VP_SPECIF");
+	NegativeNo =  GetItemNoByItemStr ("РѕС‚СЂ", "D_VP_SPECIF");
+	PassiveNo =	 GetItemNoByItemStr	("СЃС‚СЂ",	"D_VP_SPECIF");
+	QuoteMarkNo	=  GetItemNoByItemStr ("РєРІС‡", "D_GRAFEM_DESC");
+	ILENo =	 GetItemNoByItemStr	("РР›Р•",	"D_GRAFEM_DESC");
 	A0LexFunctNo = GetRoss()->GetItemNoByItemStr ("A0",	LexFunctDomNo);
 	S0LexFunctNo = GetRoss()->GetItemNoByItemStr ("S0",	LexFunctDomNo);
 	RightDirectionNo = GetItemNoByItemStr (">",	"D_POSITION");
@@ -228,16 +228,16 @@ bool CRossHolder::InitDomainsConsts()
 	return true;
 };
 
-// ================	 функции для проверки извлечения и проверки	значений полей.
-// поле	всегда адресуется следующими параметрами
-//	FieldStr - имя поля
-//	UnitNo - номер словарной статьи
-//	LeafId - номер актанта
-//	BracketLeafId -	номер подактанта
+// ================	 С„СѓРЅРєС†РёРё РґР»СЏ РїСЂРѕРІРµСЂРєРё РёР·РІР»РµС‡РµРЅРёСЏ Рё РїСЂРѕРІРµСЂРєРё	Р·РЅР°С‡РµРЅРёР№ РїРѕР»РµР№.
+// РїРѕР»Рµ	РІСЃРµРіРґР° Р°РґСЂРµСЃСѓРµС‚СЃСЏ СЃР»РµРґСѓСЋС‰РёРјРё РїР°СЂР°РјРµС‚СЂР°РјРё
+//	FieldStr - РёРјСЏ РїРѕР»СЏ
+//	UnitNo - РЅРѕРјРµСЂ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё
+//	LeafId - РЅРѕРјРµСЂ Р°РєС‚Р°РЅС‚Р°
+//	BracketLeafId -	РЅРѕРјРµСЂ РїРѕРґР°РєС‚Р°РЅС‚Р°
 
 
 
-// По полю выдает набор	кортежей, которые ему приписано
+// РџРѕ РїРѕР»СЋ РІС‹РґР°РµС‚ РЅР°Р±РѕСЂ	РєРѕСЂС‚РµР¶РµР№, РєРѕС‚РѕСЂС‹Рµ РµРјСѓ РїСЂРёРїРёСЃР°РЅРѕ
 void CRossHolder::GetFieldValues(string	strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE LeafId, BYTE BracketLeafId) const	
 {
 	if (UnitNo == ErrUnitNo)	return;
@@ -254,7 +254,7 @@ void CRossHolder::GetFieldValues(string	strFieldName, long UnitNo, vector<TCorte
 
 
 
-// Проверяет, стоит	ли на первом месте одного из кортежей поля strFieldName	константа strValue
+// РџСЂРѕРІРµСЂСЏРµС‚, СЃС‚РѕРёС‚	Р»Рё РЅР° РїРµСЂРІРѕРј РјРµСЃС‚Рµ РѕРґРЅРѕРіРѕ РёР· РєРѕСЂС‚РµР¶РµР№ РїРѕР»СЏ strFieldName	РєРѕРЅСЃС‚Р°РЅС‚Р° strValue
 bool CRossHolder::HasFieldValue(string strFieldName, string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
 	vector<TCortege> corteges;
@@ -269,7 +269,7 @@ bool CRossHolder::HasFieldValue(string strFieldName, string	strValue, long UnitN
 	return false;
 }
 
-// Проверяет, является ли одним	из значений	поля strFieldName константа	strValue
+// РџСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РѕРґРЅРёРј	РёР· Р·РЅР°С‡РµРЅРёР№	РїРѕР»СЏ strFieldName РєРѕРЅСЃС‚Р°РЅС‚Р°	strValue
 bool CRossHolder::HasFullFieldValue(string strFieldName, string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
 	vector<TCortege> corteges;
@@ -287,7 +287,7 @@ bool CRossHolder::HasFullFieldValue(string strFieldName, string	strValue, long U
 }
 
 
-// По полю выдает набор	значений, которые приписаны	этому полю
+// РџРѕ РїРѕР»СЋ РІС‹РґР°РµС‚ РЅР°Р±РѕСЂ	Р·РЅР°С‡РµРЅРёР№, РєРѕС‚РѕСЂС‹Рµ РїСЂРёРїРёСЃР°РЅС‹	СЌС‚РѕРјСѓ РїРѕР»СЋ
 void CRossHolder::GetFullFieldItemsFromArticle (long UnitNo, string	FieldStr, BYTE LeafId, BYTE	BracketLeafId, StringVector& Items) const
 {
  Items.clear();
@@ -308,7 +308,7 @@ void CRossHolder::GetFullFieldItemsFromArticle (long UnitNo, string	FieldStr, BY
 };
 
 
-// По полю выдает набор	строковых констант,	которые	стоят на первом	месте кортежей,	которые	приписаны этому	полю
+// РџРѕ РїРѕР»СЋ РІС‹РґР°РµС‚ РЅР°Р±РѕСЂ	СЃС‚СЂРѕРєРѕРІС‹С… РєРѕРЅСЃС‚Р°РЅС‚,	РєРѕС‚РѕСЂС‹Рµ	СЃС‚РѕСЏС‚ РЅР° РїРµСЂРІРѕРј	РјРµСЃС‚Рµ РєРѕСЂС‚РµР¶РµР№,	РєРѕС‚РѕСЂС‹Рµ	РїСЂРёРїРёСЃР°РЅС‹ СЌС‚РѕРјСѓ	РїРѕР»СЋ
 void CRossHolder::GetSimpleFieldItemsFromArticle (long UnitNo, string FieldStr,	BYTE LeafId, BYTE BracketLeafId, StringVector& Items)	const
 {
  Items.clear();
@@ -327,10 +327,10 @@ void CRossHolder::GetSimpleFieldItemsFromArticle (long UnitNo, string FieldStr,	
 	  };
 };
 
-// функционально выполняет то же, что и	CRossHolder::HasFieldValue,	за исключением того, что на	вход подается
-// имя домена, в котором сначала ищется	константа ItemStr. 
-// Работает	немного	быстрее	CRossHolder::HasFieldValue,	поскольку вся работа со	строками 
-// вынесена	за пределы основного цикла
+// С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕ РІС‹РїРѕР»РЅСЏРµС‚ С‚Рѕ Р¶Рµ, С‡С‚Рѕ Рё	CRossHolder::HasFieldValue,	Р·Р° РёСЃРєР»СЋС‡РµРЅРёРµРј С‚РѕРіРѕ, С‡С‚Рѕ РЅР°	РІС…РѕРґ РїРѕРґР°РµС‚СЃСЏ
+// РёРјСЏ РґРѕРјРµРЅР°, РІ РєРѕС‚РѕСЂРѕРј СЃРЅР°С‡Р°Р»Р° РёС‰РµС‚СЃСЏ	РєРѕРЅСЃС‚Р°РЅС‚Р° ItemStr. 
+// Р Р°Р±РѕС‚Р°РµС‚	РЅРµРјРЅРѕРіРѕ	Р±С‹СЃС‚СЂРµРµ	CRossHolder::HasFieldValue,	РїРѕСЃРєРѕР»СЊРєСѓ РІСЃСЏ СЂР°Р±РѕС‚Р° СЃРѕ	СЃС‚СЂРѕРєР°РјРё 
+// РІС‹РЅРµСЃРµРЅР°	Р·Р° РїСЂРµРґРµР»С‹ РѕСЃРЅРѕРІРЅРѕРіРѕ С†РёРєР»Р°
 bool CRossHolder::HasItem (WORD	UnitNo,	const string FieldStr, const string	ItemStr, const string DomStr, BYTE LeafId, BYTE	BracketLeafId) const
 {
 	if (UnitNo == ErrUnitNo)  return false;
@@ -358,9 +358,9 @@ WORD CRossHolder::LocateUnit (const	char* UnitStr, BYTE	MeanNum) const
 
 long  CRossHolder::GetDopFields(long UnitNo, vector<CDopField>&	DopFields) const
 {
-  // в этом	векторе	все	узлы термина
+  // РІ СЌС‚РѕРј	РІРµРєС‚РѕСЂРµ	РІСЃРµ	СѓР·Р»С‹ С‚РµСЂРјРёРЅР°
   vector<long> AllItems;
-   // в	этом векторе лежат узлы	термина, в которые вошло хотя бы одно отношение
+   // РІ	СЌС‚РѕРј РІРµРєС‚РѕСЂРµ Р»РµР¶Р°С‚ СѓР·Р»С‹	С‚РµСЂРјРёРЅР°, РІ РєРѕС‚РѕСЂС‹Рµ РІРѕС€Р»Рѕ С…РѕС‚СЏ Р±С‹ РѕРґРЅРѕ РѕС‚РЅРѕС€РµРЅРёРµ
   vector<long> SubItems;
   BYTE DopFldName =	GetRoss()->GetFieldNoByFieldStr("AUX");
   if (!GetRoss()->IsEmptyArticle(UnitNo)) 
@@ -375,11 +375,11 @@ long  CRossHolder::GetDopFields(long UnitNo, vector<CDopField>&	DopFields) const
 		 continue;
 		 CDopField Field;
 		 string	S =	 GetDomItemStrInner(GetRoss()->GetCortegeItem(k,1));
-		 //	 Word1 - зависимое слово
+		 //	 Word1 - Р·Р°РІРёСЃРёРјРѕРµ СЃР»РѕРІРѕ
 		 Field.m_IsActant1 = (S[0] == 'A');
 		 Field.m_Word1 = S[1] -	'0';
 		 S =  GetDomItemStrInner(GetRoss()->GetCortegeItem(k,2));
-		 //	 Word1 - главное слово
+		 //	 Word1 - РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ
 		 Field.m_IsActant2 = (S[0] == 'A');
 		 Field.m_Word2 = S[1] -	'0';
 		 Field.m_RelationStr = GetDomItemStrInner(GetRoss()->GetCortegeItem(k,0));
@@ -390,7 +390,7 @@ long  CRossHolder::GetDopFields(long UnitNo, vector<CDopField>&	DopFields) const
 	 };
 
   long	Result = -1;
-  // устанавливаем флаг	для	главного узла (узел, в который не вошло	ни одного отношения)
+  // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„Р»Р°Рі	РґР»СЏ	РіР»Р°РІРЅРѕРіРѕ СѓР·Р»Р° (СѓР·РµР», РІ РєРѕС‚РѕСЂС‹Р№ РЅРµ РІРѕС€Р»Рѕ	РЅРё РѕРґРЅРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ)
   for (long	i=0; i < AllItems.size();i++)
 	  if (!_find (SubItems,	AllItems[i]))
 	  {
@@ -413,7 +413,7 @@ bool CRossHolder::GetVal(long UnitNo, CValency& V) const
  return false; 
 };
 
-// эта функция не обнуляет  вектор OutVector!!!
+// СЌС‚Р° С„СѓРЅРєС†РёСЏ РЅРµ РѕР±РЅСѓР»СЏРµС‚  РІРµРєС‚РѕСЂ OutVector!!!
 void CRossHolder::GetLexFuncts (size_t UnitNo,  vector<CLexicalFunctionField>& OutVector, DictTypeEnum type /*NoneRoss*/, const CRossHolder* pRossHolderObor /*= NULL*/)  const
 {
   if (!GetRoss()->IsEmptyArticle(UnitNo))
@@ -442,8 +442,8 @@ void CRossHolder::GetLexFuncts (size_t UnitNo,  vector<CLexicalFunctionField>& O
 					if ( ii != -1 ) 
 					{
 						/*
-						   отрезать все, что стоит после "+" нужно только, если
-						   мы имеем дело с английским словарем 	 
+						   РѕС‚СЂРµР·Р°С‚СЊ РІСЃРµ, С‡С‚Рѕ СЃС‚РѕРёС‚ РїРѕСЃР»Рµ "+" РЅСѓР¶РЅРѕ С‚РѕР»СЊРєРѕ, РµСЃР»Рё
+						   РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ Р°РЅРіР»РёР№СЃРєРёРј СЃР»РѕРІР°СЂРµРј 	 
 						*/
 						if (is_alpha((BYTE)S[0], morphEnglish))
 						  S = S.substr(0, ii);
@@ -511,35 +511,35 @@ long CRossHolder::GetSemMainWordFromArticle (long UnitNo) const
 };
 
 
-// проверяет, что ItemNo принадлежит домену Д_ГГ_уточн
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ Р”_Р“Р“_СѓС‚РѕС‡РЅ
 bool CRossHolder::IsVerbFet (DWORD ItemNo) const
 {
 	if ( VerbFetDomNo == ErrUChar) return false;
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == VerbFetDomNo ? true : false;
 };
-// проверяет, что ItemNo принадлежит домену D_SYN_REL
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_SYN_REL
 bool CRossHolder::IsSynRel (DWORD ItemNo) const
 {
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == SynRelDomNo ? true : false;
 };
 
-// проверяет, что ItemNo принадлежит домену D_1
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_1
 bool CRossHolder::IsLemGroupBegining (DWORD ItemNo) const
 {
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == LemGroupBeginingDomNo ? true : false;
 };
 
-// проверяет, что ItemNo принадлежит домену D_GROUPS
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_GROUPS
 bool CRossHolder::IsSynGroup (DWORD ItemNo) const
 {
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == SynGroupDomNo ? true : false;
 };
 
-// проверяет, что ItemNo принадлежит домену D_POSITION
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ItemNo РїСЂРёРЅР°РґР»РµР¶РёС‚ РґРѕРјРµРЅСѓ D_POSITION
 bool CRossHolder::IsPosition (DWORD ItemNo) const
 {
 	if ( PositionDomNo == ErrUChar) return false;
@@ -547,16 +547,16 @@ bool CRossHolder::IsPosition (DWORD ItemNo) const
 	return (GetRoss()->GetDomItemDomNo(ItemNo) == PositionDomNo) ? true : false;
 };
 
-// выдает номер первой константы, из CortegeNo-го кортежа массиве m_GramCorteges 
-// (Значение до запятой)
+// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ РїРµСЂРІРѕР№ РєРѕРЅСЃС‚Р°РЅС‚С‹, РёР· CortegeNo-РіРѕ РєРѕСЂС‚РµР¶Р° РјР°СЃСЃРёРІРµ m_GramCorteges 
+// (Р—РЅР°С‡РµРЅРёРµ РґРѕ Р·Р°РїСЏС‚РѕР№)
 long	CRossHolder::GetSynRel(const  TCortege& C) const
 {
 	return (IsPosition(C.m_DomItemNos[0]) || IsVerbFet(C.m_DomItemNos[0]))
 		? C.m_DomItemNos[1] : C.m_DomItemNos[0];
 };
 
-// выдает номер второй константы, из CortegeNo-го кортежа массиве m_GramCorteges 
-// (Значение после запятой)1
+// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ РІС‚РѕСЂРѕР№ РєРѕРЅСЃС‚Р°РЅС‚С‹, РёР· CortegeNo-РіРѕ РєРѕСЂС‚РµР¶Р° РјР°СЃСЃРёРІРµ m_GramCorteges 
+// (Р—РЅР°С‡РµРЅРёРµ РїРѕСЃР»Рµ Р·Р°РїСЏС‚РѕР№)1
 long CRossHolder::GetSynFet(const  TCortege& C) const 
 {
    return IsPosition(C.m_DomItemNos[0]) || IsVerbFet(C.m_DomItemNos[0]) 
@@ -568,7 +568,7 @@ long	CRossHolder::IsCompAdjCortege(const  TCortege& C) const
 {
    long ItemNo = GetSynFet(C);
    return  (ItemNo != -1) 
-	   &&  (string( GetDomItemStrInner(ItemNo)) == "сравн");
+	   &&  (string( GetDomItemStrInner(ItemNo)) == "СЃСЂР°РІРЅ");
 };
 
 

@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Английские алгоритмы 4 
+// РђРЅРіР»РёР№СЃРєРёРµ Р°Р»РіРѕСЂРёС‚РјС‹ 4 
 
 // AddLexFuncNode()
 // ConvertClosedCollocToOpen()
@@ -14,7 +14,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // AddLexFuncNode()
-// мне грустно
+// РјРЅРµ РіСЂСѓСЃС‚РЅРѕ
 
 void CEngSemStructure::AddLexFuncNode(int iEngNode)
 {
@@ -35,7 +35,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 	if( IsThesRoss(RusNode.GetType()) )
 		return;
 
-// смотрим, было ли указание на лексическую функцию
+// СЃРјРѕС‚СЂРёРј, Р±С‹Р»Рѕ Р»Рё СѓРєР°Р·Р°РЅРёРµ РЅР° Р»РµРєСЃРёС‡РµСЃРєСѓСЋ С„СѓРЅРєС†РёСЋ
 	vector< SEngEquiv > vectorEngEquivs;
 	GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),iRusNode);
 
@@ -53,7 +53,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 	if( StrLexFunc.empty() )
 		return;
 
-// достаем из статьи значение лексической функции
+// РґРѕСЃС‚Р°РµРј РёР· СЃС‚Р°С‚СЊРё Р·РЅР°С‡РµРЅРёРµ Р»РµРєСЃРёС‡РµСЃРєРѕР№ С„СѓРЅРєС†РёРё
 	string EngWord = "";
 	int    MeanNum = -1;
 	TCortege cortege;
@@ -97,7 +97,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 	m_Nodes.push_back(newNode);
 	int iNewNode = m_Nodes.size()-1;
 
-// типа AntiBon
+// С‚РёРїР° AntiBon
 	if( IsParameterOfAdjOrAdv(StrLexFunc) )
 	{
 		CEngSemRelation newRel(CValency(StrLexFunc.c_str(),A_C),iEngNode,iNewNode,"");
@@ -105,7 +105,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 		return;
 	}
 
-// типа PermFunc0
+// С‚РёРїР° PermFunc0
 	assert( IsParameterOfVerb(StrLexFunc) );
 
 	CEngSemRelation newRel(CValency(StrLexFunc.c_str(),A_C),iNewNode,iEngNode,"");
@@ -128,7 +128,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 	else
 		m_Nodes[iEngNode].m_Words[0].SetTense(zero_tn,"AddLexFuncNode");
 
-// обработка Subj + число
+// РѕР±СЂР°Р±РѕС‚РєР° Subj + С‡РёСЃР»Рѕ
 	bool bHasSub = false;
 	vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
@@ -170,12 +170,12 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 		m_Nodes[iNewNode].m_Words[0].AddFormGrammem(eThirdPerson);
 	}
 
-// связи
+// СЃРІСЏР·Рё
 	MoveMeaningRelsToNewNode(iEngNode,iNewNode);
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// служебные функции для ConvertClosedCollocToOpen()
+// СЃР»СѓР¶РµР±РЅС‹Рµ С„СѓРЅРєС†РёРё РґР»СЏ ConvertClosedCollocToOpen()
 
 bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,vector<TCortege>& vecSINO) const
 {
@@ -247,7 +247,7 @@ void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,vector<TCortege>& vec
 
 /////////////////////////////////////////////////////////////////////////////
 // ConvertClosedCollocToOpen()
-// у него часто бывает плохо на душе
+// Сѓ РЅРµРіРѕ С‡Р°СЃС‚Рѕ Р±С‹РІР°РµС‚ РїР»РѕС…Рѕ РЅР° РґСѓС€Рµ
 
 void CEngSemStructure::ConvertClosedCollocToOpen()
 {	
@@ -256,7 +256,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		int iMainWord = m_Nodes[iEngNode].m_MainWordNo;
 		if( iMainWord == -1 ) 
 			continue;
-		// Ищем закрытые словосочетания
+		// РС‰РµРј Р·Р°РєСЂС‹С‚С‹Рµ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
 		if( m_Nodes[iEngNode].GetType()!=EngCollocRoss )
 			continue;
 			
@@ -273,12 +273,12 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		if( !GetSINO(type,UnitNo,vecSINO) )
 			continue;
 
-// сразу зачистим WordNo		
+// СЃСЂР°Р·Сѓ Р·Р°С‡РёСЃС‚РёРј WordNo		
 		int curWNo = engNode.GetMinWordNo();
 		for( int j=1; j<nWords; j++ )
 			FreeWordNo(curWNo+j);
 
-// загрузим артикли
+// Р·Р°РіСЂСѓР·РёРј Р°СЂС‚РёРєР»Рё
 		vector<TCortege> vecSArt;
 		GetSArt(type,UnitNo,vecSArt);
 		StringVector articles;
@@ -292,7 +292,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 				articles[no] = GetCortegeStr(type,vecSArt[k]);
 		}
 
-// загрузим части речи
+// Р·Р°РіСЂСѓР·РёРј С‡Р°СЃС‚Рё СЂРµС‡Рё
 		vector<TCortege> vecSGxi;
 		GetSGxi(type,UnitNo,vecSGxi);
 		StringVector poses;
@@ -319,7 +319,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			poses[no] = res;
 		}
 
-// создадим новые узлы
+// СЃРѕР·РґР°РґРёРј РЅРѕРІС‹Рµ СѓР·Р»С‹
 		vector<CEngSemNode> newNodes;
 		for( int j=0; j<nWords; j++ )
 		{
@@ -366,9 +366,9 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			newNodes.push_back(newNode);
 		}
 
-		// выделим связи и сразу их зачистим
+		// РІС‹РґРµР»РёРј СЃРІСЏР·Рё Рё СЃСЂР°Р·Сѓ РёС… Р·Р°С‡РёСЃС‚РёРј
 		vector<long> outRelsRaw;
-		// в outRels загрузим все нереверсивные связи
+		// РІ outRels Р·Р°РіСЂСѓР·РёРј РІСЃРµ РЅРµСЂРµРІРµСЂСЃРёРІРЅС‹Рµ СЃРІСЏР·Рё
 		vector<long> outRels;
 		GetOutcomingRelations(iEngNode,outRelsRaw);
 		for( int m=0; m<outRelsRaw.size(); m++ )
@@ -382,7 +382,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			if( m_Relations[outRels[m]].m_Valency.m_LeafId == 1 )
 			{
 				/*
-					Закомментировано Сокиркой. Не понимаю, зачем это здесь
+					Р—Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРѕ РЎРѕРєРёСЂРєРѕР№. РќРµ РїРѕРЅРёРјР°СЋ, Р·Р°С‡РµРј СЌС‚Рѕ Р·РґРµСЃСЊ
 				*/
 				//m_Relations[outRels[m]].m_bIsSubj = true;
 
@@ -397,7 +397,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			m_Relations[outRels[m]].m_bInterpreted = false;
 		}
 
-// просчитаем их будущие места в m_Nodes[]
+// РїСЂРѕСЃС‡РёС‚Р°РµРј РёС… Р±СѓРґСѓС‰РёРµ РјРµСЃС‚Р° РІ m_Nodes[]
 		vector<int> index;
 		index.resize(newNodes.size());
 		int curval = m_Nodes.size();
@@ -414,7 +414,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			}
 		}
 
-// загрузим предлоги
+// Р·Р°РіСЂСѓР·РёРј РїСЂРµРґР»РѕРіРё
 		vector<TCortege> vecSPrp;
 		GetSPrp(type,UnitNo,vecSPrp);
 		StringVector preps;
@@ -428,7 +428,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 
-// создадим новые связи
+// СЃРѕР·РґР°РґРёРј РЅРѕРІС‹Рµ СЃРІСЏР·Рё
 		SetRelsToDeleteFalse();
 		vector<CEngSemRelation> newRels;
 		for( int k=0; k<vecSINO.size(); k++ )
@@ -454,7 +454,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			int    e2no = atoi(e2ns.c_str());
 			assert(e2no>0 && (e2lt=="A" || e2no<=nWords) );
 			
-		// C-C связь
+		// C-C СЃРІСЏР·СЊ
 			if( e1lt=="C" && e2lt=="C" )
 			{
 				CEngSemRelation newRel(CValency(ident.c_str(),A_C),index[e1no-1],index[e2no-1],ident.c_str());
@@ -470,7 +470,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 				newRels.push_back(newRel);
 			}
 		
-		// C-A связь
+		// C-A СЃРІСЏР·СЊ
 			else if( e1lt=="C" && e2lt=="A" )
 			{
 				vector<long> outRelsRaw;
@@ -499,7 +499,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 				}
 			}
 		
-		// A-C связь
+		// A-C СЃРІСЏР·СЊ
 			else if( e1lt=="A" && e2lt=="C" )
 			{
 				vector<long> outRelsRaw;
@@ -528,7 +528,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 
 	   DelRelsToDelete();
 
-	// вставим узлы 
+	// РІСЃС‚Р°РІРёРј СѓР·Р»С‹ 
 	    CEngSemNode OldCollocNode = m_Nodes[iEngNode];
 		for( int j=0; j<newNodes.size(); j++ )
 		{
@@ -537,7 +537,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			else
 				m_Nodes.push_back(newNodes[j]);
 		}
-	// вставим отношения
+	// РІСЃС‚Р°РІРёРј РѕС‚РЅРѕС€РµРЅРёСЏ
 		for( int k=0; k<newRels.size(); k++ )
 		{
 			if (newRels[k].m_SyntacticRelation == "poss")
@@ -578,7 +578,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			
 		}
 
-		// вставим дополнительные отношения (только для THESAME)	    
+		// РІСЃС‚Р°РІРёРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ (С‚РѕР»СЊРєРѕ РґР»СЏ THESAME)	    
 		vector<CDopField> DopFields;
 		long MainItemNo = GetRossHolder(type)->GetDopFields(UnitNo, DopFields);
 		for (int i=0;  i < DopFields.size(); i++)
@@ -599,7 +599,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 
 bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRel)
 {
-// ищем ВС
+// РёС‰РµРј Р’РЎ
 	iQueRel = -1;
 	vector<long> outChilds;
 	GetChildNodes(iEngRoot,outChilds);
@@ -618,7 +618,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 		}
 	}
 	
-// ищем subj
+// РёС‰РµРј subj
 	iSubRel = -1;
 	vector<long> outRels;
 	GetOutcomingRelations(iEngRoot,outRels);
@@ -631,7 +631,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 		}
 	}
 
-// если ВС "кто" или "что" (являющееся подлежащим)
+// РµСЃР»Рё Р’РЎ "РєС‚Рѕ" РёР»Рё "С‡С‚Рѕ" (СЏРІР»СЏСЋС‰РµРµСЃСЏ РїРѕРґР»РµР¶Р°С‰РёРј)
 	if( iQueRel!=-1 && iSubRel!=-1 && iQueRel==iSubRel )
 	{
 		CEngSemNode& engNode = m_Nodes[m_Relations[iQueRel].m_TargetNodeNo];
@@ -641,13 +641,13 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 			if( rusNode.m_MainWordNo!=-1 )
 			{
 				string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
-				if( (qwrd=="КТО" || qwrd=="ЧТО") )
+				if( (qwrd=="РљРўРћ" || qwrd=="Р§РўРћ") )
 					return true;
 			}
 		}
 	}
 
-// если ВС "какой" или "чей" (отнсящееся к подлежащему)
+// РµСЃР»Рё Р’РЎ "РєР°РєРѕР№" РёР»Рё "С‡РµР№" (РѕС‚РЅСЃСЏС‰РµРµСЃСЏ Рє РїРѕРґР»РµР¶Р°С‰РµРјСѓ)
 	if( iQueRel!=-1 && iSubRel!=-1 &&
 		m_Relations[iQueRel].m_SourceNodeNo==m_Relations[iSubRel].m_TargetNodeNo )
 	{
@@ -658,7 +658,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 			if( rusNode.m_MainWordNo!=-1 )
 			{
 				string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
-				if( qwrd=="КАКОЙ" || qwrd=="ЧЕЙ" )
+				if( qwrd=="РљРђРљРћР™" || qwrd=="Р§Р•Р™" )
 					return true;
 			}
 		}
@@ -712,15 +712,15 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 	}
 	
 
-// если существует ВС 
+// РµСЃР»Рё СЃСѓС‰РµСЃС‚РІСѓРµС‚ Р’РЎ 
 	if( iQueGrp!=-1 )
 	{
-// "кто", "что", "какой", "чей"
+// "РєС‚Рѕ", "С‡С‚Рѕ", "РєР°РєРѕР№", "С‡РµР№"
 		if( bRet )
 		{
 		}
 
-// если английский глагол-сказуемое - 'be'
+// РµСЃР»Рё Р°РЅРіР»РёР№СЃРєРёР№ РіР»Р°РіРѕР»-СЃРєР°Р·СѓРµРјРѕРµ - 'be'
 		else if( m_Nodes[iEngRoot].m_Words[0].m_Lemma == "be" )
 		{
 			m_Relations[iQueGrp].m_Position = "begin";
@@ -731,7 +731,7 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 				m_Relations[iSubRel].m_PosType = FromAlgorithmPosType;
 			}
 		}
-// если английский глагол-сказуемое - не 'be' 
+// РµСЃР»Рё Р°РЅРіР»РёР№СЃРєРёР№ РіР»Р°РіРѕР»-СЃРєР°Р·СѓРµРјРѕРµ - РЅРµ 'be' 
 		else
 		{
 			m_Relations[iQueGrp].m_Position = "begin";
@@ -744,10 +744,10 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 		}
 	}
 
-// если вопросительного слова нет
+// РµСЃР»Рё РІРѕРїСЂРѕСЃРёС‚РµР»СЊРЅРѕРіРѕ СЃР»РѕРІР° РЅРµС‚
 	else
 	{
-// если английский глагол-сказуемое - 'be'
+// РµСЃР»Рё Р°РЅРіР»РёР№СЃРєРёР№ РіР»Р°РіРѕР»-СЃРєР°Р·СѓРµРјРѕРµ - 'be'
 		if( m_Nodes[iEngRoot].m_Words[0].m_Lemma == "be" )
 		{
 			if( iSubRel!=-1 )
@@ -756,7 +756,7 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 				m_Relations[iSubRel].m_PosType = FromAlgorithmPosType;
 			}
 		}
-// если английский глагол-сказуемое - не 'be' 
+// РµСЃР»Рё Р°РЅРіР»РёР№СЃРєРёР№ РіР»Р°РіРѕР»-СЃРєР°Р·СѓРµРјРѕРµ - РЅРµ 'be' 
 		else
 		{
 			if( iSubRel!=-1 )
@@ -767,8 +767,8 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 		}
 	}
 
-// Если в клаузе после вопросительного слова (кроме "how") идет инфинитив,
-//  его нужно переводить без to
+// Р•СЃР»Рё РІ РєР»Р°СѓР·Рµ РїРѕСЃР»Рµ РІРѕРїСЂРѕСЃРёС‚РµР»СЊРЅРѕРіРѕ СЃР»РѕРІР° (РєСЂРѕРјРµ "how") РёРґРµС‚ РёРЅС„РёРЅРёС‚РёРІ,
+//  РµРіРѕ РЅСѓР¶РЅРѕ РїРµСЂРµРІРѕРґРёС‚СЊ Р±РµР· to
 	int iSemMainWord = RusStr.GetNode(iRusRoot).m_MainWordNo;
 	if( iSemMainWord!=-1 &&
 		RusStr.GetNode(iRusRoot).GetWord(iSemMainWord).HasPOS(INFINITIVE) &&
@@ -778,7 +778,7 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 		m_Nodes[iEngRoot].m_bNotUseTo = true;
 	}
 
-// "ли" и "же" игнорируются
+// "Р»Рё" Рё "Р¶Рµ" РёРіРЅРѕСЂРёСЂСѓСЋС‚СЃСЏ
 NEXTSTEP:;
 	vector<long> outChilds;
 	GetChildNodes(iEngRoot,outChilds);
@@ -790,8 +790,8 @@ NEXTSTEP:;
 		const CSemNode& rusNode = RusStr.GetNode(engNode.RusNode);
 		if( rusNode.m_MainWordNo==-1 )
 			continue;
-		if( (rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == "ЛИ" ||
-			 rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == "ЖЕ") )
+		if( (rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == "Р›Р" ||
+			 rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == "Р–Р•") )
 		{
 			DelNode(outChilds[i]);
 			goto NEXTSTEP;
@@ -872,7 +872,7 @@ bool CEngSemStructure::HandleQuestionNode()
 	
 /////////////////////////////////////////////////////////////////////////////
 // AddFixedGrammemsToNode()
-// добавление словообразовательных граммем
+// РґРѕР±Р°РІР»РµРЅРёРµ СЃР»РѕРІРѕРѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅС‹С… РіСЂР°РјРјРµРј
 
 void CEngSemStructure::AddFixedGrammemsToNode()
 {
@@ -893,7 +893,7 @@ void CEngSemStructure::AddFixedGrammemsToNode()
 		QWORD grammems = helper.GetFixedGrammemsByLemma(morphEnglish, lemma, pos,bProper);
 
 		/*
-		  число не может быть словообразовательной граммемой
+		  С‡РёСЃР»Рѕ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ СЃР»РѕРІРѕРѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅРѕР№ РіСЂР°РјРјРµРјРѕР№
 		*/
 		grammems &= ~eAllNumbers;
 

@@ -270,16 +270,16 @@ bool CEngSemStructure::Rule_TranslateInfinitive( int iRusActant, long RelationNo
 
 	CEngSemNode newEngNode;
 
-	//если есть что-нибудь типа in+gerund
+	//РµСЃР»Рё РµСЃС‚СЊ С‡С‚Рѕ-РЅРёР±СѓРґСЊ С‚РёРїР° in+gerund
 	bool NewNodeWasCreated = false;
 	if(		(bGerund || bToPlusInf) 
 		&& (iRusMainWord != -1) 
 		&&  rusActant.GetWord(iRusMainWord).HasPOS(NOUN) 
 	  )
 	{	
-		//если нашли такой глагол, от которого отглагольное существительное будет равно 
-		//главному слову рассматриваемого узла		
-		// например, "механизация" -> "механизировать"
+		//РµСЃР»Рё РЅР°С€Р»Рё С‚Р°РєРѕР№ РіР»Р°РіРѕР», РѕС‚ РєРѕС‚РѕСЂРѕРіРѕ РѕС‚РіР»Р°РіРѕР»СЊРЅРѕРµ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ Р±СѓРґРµС‚ СЂР°РІРЅРѕ 
+		//РіР»Р°РІРЅРѕРјСѓ СЃР»РѕРІСѓ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ СѓР·Р»Р°		
+		// РЅР°РїСЂРёРјРµСЂ, "РјРµС…Р°РЅРёР·Р°С†РёСЏ" -> "РјРµС…Р°РЅРёР·РёСЂРѕРІР°С‚СЊ"
 		if( !MakeDeverbative(iRusActant,iEngActant,newEngNode) )
 			return false;
 
@@ -316,8 +316,8 @@ bool CEngSemStructure::Rule_TranslateInfinitive( int iRusActant, long RelationNo
 		engActant.m_Words[engActant.m_MainWordNo] = engWord;
 
 		string prep = GetGerundPrep(GramCorteges[GerundCortegeNo], engNode.GetType());
-		// герундий может быть без предлога 
-		// например, "стоит поместить" ->  "worth placing"
+		// РіРµСЂСѓРЅРґРёР№ РјРѕР¶РµС‚ Р±С‹С‚СЊ Р±РµР· РїСЂРµРґР»РѕРіР° 
+		// РЅР°РїСЂРёРјРµСЂ, "СЃС‚РѕРёС‚ РїРѕРјРµСЃС‚РёС‚СЊ" ->  "worth placing"
 		if (prep != "")
 		{
 			SetSimpleEngPrep(prep, iEngActant, -1);
@@ -368,8 +368,8 @@ bool CEngSemStructure::Rule_TranslatePoss(int iRusActant,long RelationNo, const 
 		semEngRel.m_SynReal.m_Cortege = GramCorteges[0];
 		if	(		HasSemFetOrLower(engNode, "ANIM")			
 				&& ( (engNode.GetGrammemsRich() & _QM(eGeographics)) == 0)
-				// если существительное управляет "тяжелыми" актантами, тогда его нельзя
-				// трансформировать в притяжательную форму (Сокирко)
+				// РµСЃР»Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ СѓРїСЂР°РІР»СЏРµС‚ "С‚СЏР¶РµР»С‹РјРё" Р°РєС‚Р°РЅС‚Р°РјРё, С‚РѕРіРґР° РµРіРѕ РЅРµР»СЊР·СЏ
+				// С‚СЂР°РЅСЃС„РѕСЂРјРёСЂРѕРІР°С‚СЊ РІ РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅСѓСЋ С„РѕСЂРјСѓ (РЎРѕРєРёСЂРєРѕ)
 				&& !HasOutRelationByPoses(semEngRel.m_TargetNodeNo, (1<<eNOUN)|(1<<ePN)|(1<<eVERB)|(1<<eMOD)|(1<<eVBE))
 			)
 		{
@@ -469,10 +469,10 @@ bool CEngSemStructure::Rule_TranslateSubj(int iRusActant,long EngRelNo, const ve
 		semEngRel.m_SynReal.m_Cortege = semEngRel.m_Pattern.m_GramCorteges[0];
 	}
 
-	// первую валентность пассивной итнтерпретации надо отконвертировать в by+NP
-	//  (например, Я был съеден тобой -> I was eaten by you),
-	// но фразу "я интересовался вопросом" нужно переводить "I was interested in the question",
-	// a не "I was interested by the question", поскольку у interested стоит помета GF - pass !
+	// РїРµСЂРІСѓСЋ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ РїР°СЃСЃРёРІРЅРѕР№ РёС‚РЅС‚РµСЂРїСЂРµС‚Р°С†РёРё РЅР°РґРѕ РѕС‚РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ РІ by+NP
+	//  (РЅР°РїСЂРёРјРµСЂ, РЇ Р±С‹Р» СЃСЉРµРґРµРЅ С‚РѕР±РѕР№ -> I was eaten by you),
+	// РЅРѕ С„СЂР°Р·Сѓ "СЏ РёРЅС‚РµСЂРµСЃРѕРІР°Р»СЃСЏ РІРѕРїСЂРѕСЃРѕРј" РЅСѓР¶РЅРѕ РїРµСЂРµРІРѕРґРёС‚СЊ "I was interested in the question",
+	// a РЅРµ "I was interested by the question", РїРѕСЃРєРѕР»СЊРєСѓ Сѓ interested СЃС‚РѕРёС‚ РїРѕРјРµС‚Р° GF - pass !
 	PrintNodes();
 	PrintRelations();
 	if(     m_Nodes[semEngRel.m_SourceNodeNo].IsPassiveVerb()

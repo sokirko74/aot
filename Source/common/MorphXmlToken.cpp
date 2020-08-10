@@ -130,22 +130,22 @@ string CXmlMorphAnnot::BuildRusCorpAnnot() const
 
 string POS_Dialing2MyStem(string pos)
 {
-	if (pos == "Ï") return "a"; else
-	if (pos == "Ñ") return "s"; else
-	if (pos == "Ã") return "v"; else
-	if (pos == "ÌÑ") return "s-pro"; else
-	if (pos == "ÌÑ-Ï") return "a-pro"; else
-	if (pos == "ÌÑ-ÏĞÅÄÊ") return "praedicpro"; else
-	if (pos == "×ÈÑË") return "num"; else
-	if (pos == "×ÈÑË-Ï") return "a-num"; else
-	if (pos == "Í") return "adv"; else
-	if (pos == "ÏĞÅÄÊ") return "praedic"; else
-	if (pos == "ÏĞÅÄË") return "pr"; else
-	if (pos == "ÑÎŞÇ") return "conj"; else
-	if (pos == "ÌÅÆÄ") return "intj"; else
-	if (pos == "ÂÂÎÄÍ") return "parenth"; else
-	if (pos == "×ÀÑÒ") return "part"; else
-	if (pos == "ĞÀÇĞÛÂ_ÑÎŞÇ") return "conj"; else
+	if (pos == "ĞŸ") return "a"; else
+	if (pos == "Ğ¡") return "s"; else
+	if (pos == "Ğ“") return "v"; else
+	if (pos == "ĞœĞ¡") return "s-pro"; else
+	if (pos == "ĞœĞ¡-ĞŸ") return "a-pro"; else
+	if (pos == "ĞœĞ¡-ĞŸĞ Ğ•Ğ”Ğš") return "praedicpro"; else
+	if (pos == "Ğ§Ğ˜Ğ¡Ğ›") return "num"; else
+	if (pos == "Ğ§Ğ˜Ğ¡Ğ›-ĞŸ") return "a-num"; else
+	if (pos == "Ğ") return "adv"; else
+	if (pos == "ĞŸĞ Ğ•Ğ”Ğš") return "praedic"; else
+	if (pos == "ĞŸĞ Ğ•Ğ”Ğ›") return "pr"; else
+	if (pos == "Ğ¡ĞĞ®Ğ—") return "conj"; else
+	if (pos == "ĞœĞ•Ğ–Ğ”") return "intj"; else
+	if (pos == "Ğ’Ğ’ĞĞ”Ğ") return "parenth"; else
+	if (pos == "Ğ§ĞĞ¡Ğ¢") return "part"; else
+	if (pos == "Ğ ĞĞ—Ğ Ğ«Ğ’_Ğ¡ĞĞ®Ğ—") return "conj"; else
 	{
 		return "";
 	}
@@ -154,48 +154,48 @@ string POS_Dialing2MyStem(string pos)
 
 string Grammem_Dialing2MyStem(string pos)
 {
-	if (pos == "åä") return "sg"; else
-	if (pos == "ìí") return "pl"; else
-	if (pos == "èì") return "nom";  else
-	if (pos == "ğä") return "gen";  else
-	if (pos == "äò") return "dat";  else
-	if (pos == "âí") return "acc";  else
-	if (pos == "òâ") return "ins";  else
-	if (pos == "ïğ") return "loc";  else
-	if (pos == "çâ") return "voc";  else
-	if (pos == "ìğ") return "m";  else
-	if (pos == "æğ") return "f";  else
-	if (pos == "ñğ") return "n";  else
-	if (pos == "ôàì") return "famn";  else
-	if (pos == "èìÿ") return "persn";  else
-	if (pos == "îò÷") return "patrn";  else
-	if (pos == "ïâë") return "imper";  else
-	if (pos == "èíô") return "inf";  else
-	if (pos == "ïğ÷") return "partcp";  else
-	if (pos == "äïğ") return "ger";  else
-	if (pos == "1ë") return "1p";  else
-	if (pos == "2ë") return "2p";  else
-	if (pos == "3ë") return "3p";  else
-	if (pos == "ñğàâí") return "comp";  else
-	if (pos == "êğ") return "brev";  else
-	if (pos == "íñò") return "praes";  else
-	if (pos == "áóä") return "fut";  else
-	if (pos == "ïğø") return "praet";  else
-	if (pos == "äñò") return "act";  else
-	if (pos == "ñòğ") return "pass";  else
-	if (pos == "îä") return "anim";  else
-	if (pos == "íî") return "inan";  else
-	if (pos == "ñâ") return "pf";  else
-	if (pos == "íñ") return "ipf";  else
-	if (pos == "ïå") return "tran";  else
-	if (pos == "íï") return "intr";  else
-	if (pos == "ìğ-æğ") return "m-f";  else
-	if (pos == "æàğã") return "anom";  else
-	if (pos == "ğàçã") return "anom";  else
-	if (pos == "ïğåâ") return "supr";  else
+	if (pos == "ĞµĞ´") return "sg"; else
+	if (pos == "Ğ¼Ğ½") return "pl"; else
+	if (pos == "Ğ¸Ğ¼") return "nom";  else
+	if (pos == "Ñ€Ğ´") return "gen";  else
+	if (pos == "Ğ´Ñ‚") return "dat";  else
+	if (pos == "Ğ²Ğ½") return "acc";  else
+	if (pos == "Ñ‚Ğ²") return "ins";  else
+	if (pos == "Ğ¿Ñ€") return "loc";  else
+	if (pos == "Ğ·Ğ²") return "voc";  else
+	if (pos == "Ğ¼Ñ€") return "m";  else
+	if (pos == "Ğ¶Ñ€") return "f";  else
+	if (pos == "ÑÑ€") return "n";  else
+	if (pos == "Ñ„Ğ°Ğ¼") return "famn";  else
+	if (pos == "Ğ¸Ğ¼Ñ") return "persn";  else
+	if (pos == "Ğ¾Ñ‚Ñ‡") return "patrn";  else
+	if (pos == "Ğ¿Ğ²Ğ»") return "imper";  else
+	if (pos == "Ğ¸Ğ½Ñ„") return "inf";  else
+	if (pos == "Ğ¿Ñ€Ñ‡") return "partcp";  else
+	if (pos == "Ğ´Ğ¿Ñ€") return "ger";  else
+	if (pos == "1Ğ»") return "1p";  else
+	if (pos == "2Ğ»") return "2p";  else
+	if (pos == "3Ğ»") return "3p";  else
+	if (pos == "ÑÑ€Ğ°Ğ²Ğ½") return "comp";  else
+	if (pos == "ĞºÑ€") return "brev";  else
+	if (pos == "Ğ½ÑÑ‚") return "praes";  else
+	if (pos == "Ğ±ÑƒĞ´") return "fut";  else
+	if (pos == "Ğ¿Ñ€Ñˆ") return "praet";  else
+	if (pos == "Ğ´ÑÑ‚") return "act";  else
+	if (pos == "ÑÑ‚Ñ€") return "pass";  else
+	if (pos == "Ğ¾Ğ´") return "anim";  else
+	if (pos == "Ğ½Ğ¾") return "inan";  else
+	if (pos == "ÑĞ²") return "pf";  else
+	if (pos == "Ğ½Ñ") return "ipf";  else
+	if (pos == "Ğ¿Ğµ") return "tran";  else
+	if (pos == "Ğ½Ğ¿") return "intr";  else
+	if (pos == "Ğ¼Ñ€-Ğ¶Ñ€") return "m-f";  else
+	if (pos == "Ğ¶Ğ°Ñ€Ğ³") return "anom";  else
+	if (pos == "Ñ€Ğ°Ğ·Ğ³") return "anom";  else
+	if (pos == "Ğ¿Ñ€ĞµĞ²") return "supr";  else
 	if (pos == "0") return "0";  else
-    if (pos == "ìğ-æğ") return "mf";  else
-	if (pos == "àááğ") return "abbr";  else
+    if (pos == "Ğ¼Ñ€-Ğ¶Ñ€") return "mf";  else
+	if (pos == "Ğ°Ğ±Ğ±Ñ€") return "abbr";  else
 	{
 		return "";
 	}
@@ -206,31 +206,31 @@ string Grammem_Dialing2MyStem(string pos)
 
 string POS_MyStem2Dialing(string pos)
 {
-	if (pos == "a") return "Ï"; else
-	if (pos == "s") return "Ñ"; else
-	if (pos == "v") return "Ã"; else
-	if (pos == "spro") return "ÌÑ"; else
-	if (pos == "s-pro") return "ÌÑ"; else
-	if (pos == "apro") return "ÌÑ-Ï"; else
-	if (pos == "a-pro") return "ÌÑ-Ï"; else
-	if (pos == "advpro") return "Í"; else
-	if (pos == "praedicpro") return "ÌÑ-ÏĞÅÄÊ"; else
-	if (pos == "num") return "×ÈÑË"; else
-	if (pos == "anum") return "×ÈÑË-Ï"; else
-	if (pos == "a-num") return "×ÈÑË-Ï"; else
-	if (pos == "adv") return "Í"; else
-	if (pos == "praedic") return "ÏĞÅÄÊ"; else
-	if (pos == "pr") return "ÏĞÅÄË"; else
-	if (pos == "conj") return "ÑÎŞÇ"; else
-	if (pos == "intj") return "ÌÅÆÄ"; else
-	if (pos == "parenth") return "ÂÂÎÄÍ"; else
-	if (pos == "part") return "×ÀÑÒ"; else
-	if (pos == "í") return "H"; else
-	if (pos == "Ï") return "Ï"; else
-	if (pos == "×ÀÑÒ") return "×ÀÑÒ"; else
-	if (pos == "ÌÅÆÄ") return "ÌÅÆÄ"; else
-	if (pos == "Ì-ÏĞÅÄÊ") return "ÌC-ÏĞÅÄÊ"; else
-	if (pos == "ĞÀÇĞÛÂ_ÑÎŞÇ") return "ÑÎŞÇ"; else
+	if (pos == "a") return "ĞŸ"; else
+	if (pos == "s") return "Ğ¡"; else
+	if (pos == "v") return "Ğ“"; else
+	if (pos == "spro") return "ĞœĞ¡"; else
+	if (pos == "s-pro") return "ĞœĞ¡"; else
+	if (pos == "apro") return "ĞœĞ¡-ĞŸ"; else
+	if (pos == "a-pro") return "ĞœĞ¡-ĞŸ"; else
+	if (pos == "advpro") return "Ğ"; else
+	if (pos == "praedicpro") return "ĞœĞ¡-ĞŸĞ Ğ•Ğ”Ğš"; else
+	if (pos == "num") return "Ğ§Ğ˜Ğ¡Ğ›"; else
+	if (pos == "anum") return "Ğ§Ğ˜Ğ¡Ğ›-ĞŸ"; else
+	if (pos == "a-num") return "Ğ§Ğ˜Ğ¡Ğ›-ĞŸ"; else
+	if (pos == "adv") return "Ğ"; else
+	if (pos == "praedic") return "ĞŸĞ Ğ•Ğ”Ğš"; else
+	if (pos == "pr") return "ĞŸĞ Ğ•Ğ”Ğ›"; else
+	if (pos == "conj") return "Ğ¡ĞĞ®Ğ—"; else
+	if (pos == "intj") return "ĞœĞ•Ğ–Ğ”"; else
+	if (pos == "parenth") return "Ğ’Ğ’ĞĞ”Ğ"; else
+	if (pos == "part") return "Ğ§ĞĞ¡Ğ¢"; else
+	if (pos == "Ğ½") return "H"; else
+	if (pos == "ĞŸ") return "ĞŸ"; else
+	if (pos == "Ğ§ĞĞ¡Ğ¢") return "Ğ§ĞĞ¡Ğ¢"; else
+	if (pos == "ĞœĞ•Ğ–Ğ”") return "ĞœĞ•Ğ–Ğ”"; else
+	if (pos == "Ğœ-ĞŸĞ Ğ•Ğ”Ğš") return "ĞœC-ĞŸĞ Ğ•Ğ”Ğš"; else
+	if (pos == "Ğ ĞĞ—Ğ Ğ«Ğ’_Ğ¡ĞĞ®Ğ—") return "Ğ¡ĞĞ®Ğ—"; else
 	return "";
 };
 
@@ -254,76 +254,76 @@ return 		(g == "indic")
 
 string Grammem_MyStem2Dialing(string pos)
 {
-	if (pos == "sg") return "åä"; else
-	if (pos == "pl") return "ìí"; else
-	if (pos == "nom") return "èì";  else
-	if (pos == "gen") return "ğä";  else
-	if (pos == "gen2") return "ğä,2";  else
-	if (pos == "dat") return "äò";  else
-	if (pos == "acc") return "âí";  else
-	if (pos == "acc2") return "èì";  else // "ïîøåë â ñîëäàòû"
-	if (pos == "ins") return "òâ";  else
-	if (pos == "loc") return "ïğ";  else
-	if (pos == "loc2") return "ïğ,2";  else
-	if (pos == "m") return "ìğ";  else
-	if (pos == "f") return "æğ";  else
-    if (pos == "mf") return "ìğ-æğ";  else
-	if (pos == "n") return "ñğ";  else
+	if (pos == "sg") return "ĞµĞ´"; else
+	if (pos == "pl") return "Ğ¼Ğ½"; else
+	if (pos == "nom") return "Ğ¸Ğ¼";  else
+	if (pos == "gen") return "Ñ€Ğ´";  else
+	if (pos == "gen2") return "Ñ€Ğ´,2";  else
+	if (pos == "dat") return "Ğ´Ñ‚";  else
+	if (pos == "acc") return "Ğ²Ğ½";  else
+	if (pos == "acc2") return "Ğ¸Ğ¼";  else // "Ğ¿Ğ¾ÑˆĞµĞ» Ğ² ÑĞ¾Ğ»Ğ´Ğ°Ñ‚Ñ‹"
+	if (pos == "ins") return "Ñ‚Ğ²";  else
+	if (pos == "loc") return "Ğ¿Ñ€";  else
+	if (pos == "loc2") return "Ğ¿Ñ€,2";  else
+	if (pos == "m") return "Ğ¼Ñ€";  else
+	if (pos == "f") return "Ğ¶Ñ€";  else
+    if (pos == "mf") return "Ğ¼Ñ€-Ğ¶Ñ€";  else
+	if (pos == "n") return "ÑÑ€";  else
 
-	if (pos == "famn") return "ôàì";  else
-	if (pos == "persn") return "èìÿ";  else
-	if (pos == "patrn") return "îò÷";  else
-	if (pos == "imper") return "ïâë";  else
-	if (pos == "imper2") return "ïâë";  else
-	if (pos == "inf") return "èíô";  else
-	if (pos == "partcp") return "ïğ÷";  else
-	if (pos == "ger") return "äïğ";  else
-	if (pos == "1p") return "1ë";  else
-	if (pos == "1-ë") return "1ë";  else
-	if (pos == "2p") return "2ë";  else
-	if (pos == "3p") return "3ë";  else
-	if (pos == "comp") return "ñğàâí";  else
-	if (pos == "comp2") return "ñğàâí,2";  else
-	if (pos == "supr") return "ïğåâ";  else
-	if (pos == "ïğåâ") return "ïğåâ";  else
-	if (pos == "brev") return "êğ";  else
-	if (pos == "sh") return "êğ";  else
-	if (pos == "praes") return "íñò";  else
-	if (pos == "abbr") return "àááğ";  else
-	if (pos == "íàñò*") return "íñò";  else
-	if (pos == "fut") return "áóä";  else
-	if (pos == "praet") return "ïğø";  else
-	if (pos == "act") return "äñò";  else
-	if (pos == "pass") return "ñòğ";  else
-	if (pos == "anim") return "îä";  else
-	if (pos == "inan") return "íî";  else
-	if (pos == "pf") return "ñâ";  else
-	if (pos == "ipf") return "íñ";  else
-	if (pos == "tran") return "ïå";  else
-	if (pos == "intr") return "íï";  else
-	if (pos == "m-f") return "ìğ-æğ";  else
-	if (pos == "ìí") return "ìí";  else
-	if (pos == "ğä") return "ğä";  else
-	if (pos == "åä") return "åä";  else
-	if (pos == "íî") return "íî";  else
-	if (pos == "äñò") return "äñò";  else
-	if (pos == "êğ") return "êğ";  else
-	if (pos == "âí") return "âí";  else
-	if (pos == "òâ") return "òâ";  else
-	if (pos == "ïğ") return "ïğ";  else
-	if (pos == "îä") return "îä";  else
-	if (pos == "è") return "èì";  else
+	if (pos == "famn") return "Ñ„Ğ°Ğ¼";  else
+	if (pos == "persn") return "Ğ¸Ğ¼Ñ";  else
+	if (pos == "patrn") return "Ğ¾Ñ‚Ñ‡";  else
+	if (pos == "imper") return "Ğ¿Ğ²Ğ»";  else
+	if (pos == "imper2") return "Ğ¿Ğ²Ğ»";  else
+	if (pos == "inf") return "Ğ¸Ğ½Ñ„";  else
+	if (pos == "partcp") return "Ğ¿Ñ€Ñ‡";  else
+	if (pos == "ger") return "Ğ´Ğ¿Ñ€";  else
+	if (pos == "1p") return "1Ğ»";  else
+	if (pos == "1-Ğ»") return "1Ğ»";  else
+	if (pos == "2p") return "2Ğ»";  else
+	if (pos == "3p") return "3Ğ»";  else
+	if (pos == "comp") return "ÑÑ€Ğ°Ğ²Ğ½";  else
+	if (pos == "comp2") return "ÑÑ€Ğ°Ğ²Ğ½,2";  else
+	if (pos == "supr") return "Ğ¿Ñ€ĞµĞ²";  else
+	if (pos == "Ğ¿Ñ€ĞµĞ²") return "Ğ¿Ñ€ĞµĞ²";  else
+	if (pos == "brev") return "ĞºÑ€";  else
+	if (pos == "sh") return "ĞºÑ€";  else
+	if (pos == "praes") return "Ğ½ÑÑ‚";  else
+	if (pos == "abbr") return "Ğ°Ğ±Ğ±Ñ€";  else
+	if (pos == "Ğ½Ğ°ÑÑ‚*") return "Ğ½ÑÑ‚";  else
+	if (pos == "fut") return "Ğ±ÑƒĞ´";  else
+	if (pos == "praet") return "Ğ¿Ñ€Ñˆ";  else
+	if (pos == "act") return "Ğ´ÑÑ‚";  else
+	if (pos == "pass") return "ÑÑ‚Ñ€";  else
+	if (pos == "anim") return "Ğ¾Ğ´";  else
+	if (pos == "inan") return "Ğ½Ğ¾";  else
+	if (pos == "pf") return "ÑĞ²";  else
+	if (pos == "ipf") return "Ğ½Ñ";  else
+	if (pos == "tran") return "Ğ¿Ğµ";  else
+	if (pos == "intr") return "Ğ½Ğ¿";  else
+	if (pos == "m-f") return "Ğ¼Ñ€-Ğ¶Ñ€";  else
+	if (pos == "Ğ¼Ğ½") return "Ğ¼Ğ½";  else
+	if (pos == "Ñ€Ğ´") return "Ñ€Ğ´";  else
+	if (pos == "ĞµĞ´") return "ĞµĞ´";  else
+	if (pos == "Ğ½Ğ¾") return "Ğ½Ğ¾";  else
+	if (pos == "Ğ´ÑÑ‚") return "Ğ´ÑÑ‚";  else
+	if (pos == "ĞºÑ€") return "ĞºÑ€";  else
+	if (pos == "Ğ²Ğ½") return "Ğ²Ğ½";  else
+	if (pos == "Ñ‚Ğ²") return "Ñ‚Ğ²";  else
+	if (pos == "Ğ¿Ñ€") return "Ğ¿Ñ€";  else
+	if (pos == "Ğ¾Ğ´") return "Ğ¾Ğ´";  else
+	if (pos == "Ğ¸") return "Ğ¸Ğ¼";  else
 
-	if (pos == "ïâë") return "ïâë";  else
+	if (pos == "Ğ¿Ğ²Ğ»") return "Ğ¿Ğ²Ğ»";  else
 	
-	if (pos == "ìğ") return "ìğ";  else
-	if (pos == "æğ") return "æğ";  else
-	if (pos == "ñğ") return "ñğ";  else
-	if (pos == "ñòğ") return "ñòğ";  else
-	if (pos == "ïå") return "ïå";  else
-	if (pos == "èì") return "èì";  else
-	if (pos == "ñğ") return "ñğ";  else
-	if (pos == "voc") return "çâ";  else
+	if (pos == "Ğ¼Ñ€") return "Ğ¼Ñ€";  else
+	if (pos == "Ğ¶Ñ€") return "Ğ¶Ñ€";  else
+	if (pos == "ÑÑ€") return "ÑÑ€";  else
+	if (pos == "ÑÑ‚Ñ€") return "ÑÑ‚Ñ€";  else
+	if (pos == "Ğ¿Ğµ") return "Ğ¿Ğµ";  else
+	if (pos == "Ğ¸Ğ¼") return "Ğ¸Ğ¼";  else
+	if (pos == "ÑÑ€") return "ÑÑ€";  else
+	if (pos == "voc") return "Ğ·Ğ²";  else
 	if (pos == "0") return "0";  else
 	if (IsMyStemSpecificGrammem(pos)) return pos;  else
 	

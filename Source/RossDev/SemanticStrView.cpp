@@ -358,7 +358,7 @@ int CreateSynStr (ClientData clienData,
 	CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 	if  (App->m_bGraphanIsBusy)
 	{
-			AfxMessageBox ("Graphan is busy (получение минус перечня)");
+			AfxMessageBox ("Graphan is busy (РїРѕР»СѓС‡РµРЅРёРµ РјРёРЅСѓСЃ РїРµСЂРµС‡РЅСЏ)");
 			return TCL_OK;
 	};
 
@@ -426,7 +426,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 		if  (App->m_bGraphanIsBusy)
 		{
-			AfxMessageBox ("Graphan is busy (получение минус перечня)");
+			AfxMessageBox ("Graphan is busy (РїРѕР»СѓС‡РµРЅРёРµ РјРёРЅСѓСЃ РїРµСЂРµС‡РЅСЏ)");
 			return TCL_OK;
 		};
 		string text = "";
@@ -527,7 +527,7 @@ int AnswerBySavedSentences (ClientData clienData,
 
 	  string Sent = GetSemBuilder().Answer();
 
-	  ::GlobalOpenReport(Sent.c_str(), "Ответ:");
+	  ::GlobalOpenReport(Sent.c_str(), "РћС‚РІРµС‚:");
 	  Doc->m_bBusy = false;
 
 	  return TCL_OK;
@@ -615,7 +615,7 @@ int BuildSentence (ClientData clienData,
 	  string Sent;
 	  if (GetSemBuilder().BuildSentence(Sent))
 	  {
-		::GlobalOpenReport(Sent.c_str(), "Перевод:");
+		::GlobalOpenReport(Sent.c_str(), "РџРµСЂРµРІРѕРґ:");
 	  }
 	  Doc->m_bBusy = false;
 
@@ -636,7 +636,7 @@ int SyntRusSentence (ClientData clienData,
 	  string Sent;
 	  if (GetSemBuilder().SyntRusSentence(Sent))
 	  {
-		  ::GlobalOpenReport(Sent.c_str(), "Русский синтез:");
+		  ::GlobalOpenReport(Sent.c_str(), "Р СѓСЃСЃРєРёР№ СЃРёРЅС‚РµР·:");
 	  }
 	  Doc->m_bBusy = false;
 
@@ -772,7 +772,7 @@ void  CSemanticStrView::OpenAllRosses()
 	};
 };
 
-	// семантических словарей 
+	// СЃРµРјР°РЅС‚РёС‡РµСЃРєРёС… СЃР»РѕРІР°СЂРµР№ 
 
 
 

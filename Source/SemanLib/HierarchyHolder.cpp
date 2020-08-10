@@ -87,7 +87,7 @@ CHierarchyHolder::~CHierarchyHolder()
 void CHierarchyHolder::WriteToRoss(string Entry)
 {
 
-	string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
+	string EntryName = (m_Type == SemFet) ? "_РёРµСЂР°СЂС…РЎРҐ" : "_РёРµСЂР°СЂС…РЎРћ";
 	WORD UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo != ErrUnitNo)
 		GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
@@ -121,7 +121,7 @@ void CHierarchyHolder::MySerialize(bool IsStoring, bool WithoutView )
 			RelationsStr += "ISA = " + S;
 		};
 
-		// запись в РОСС
+		// Р·Р°РїРёСЃСЊ РІ Р РћРЎРЎ
 		WriteToRoss(NodesStr + RelationsStr);
 	}
 	else
@@ -141,7 +141,7 @@ void CHierarchyHolder::ReadFromRoss( bool WithoutView )
 	// TODO: add loading code here
 	Nodes.clear();
 	Relations.clear();
-	string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
+	string EntryName = (m_Type == SemFet) ? "_РёРµСЂР°СЂС…РЎРҐ" : "_РёРµСЂР°СЂС…РЎРћ";
 	WORD UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo == ErrUnitNo) return;
 	{
@@ -217,7 +217,7 @@ void CHierarchyHolder::SetHierarchyTransitiveClosure()
       m_TransitiveRels.push_back(CStringRelation(Nodes[Relations[i].node1].GetName(),Nodes[Relations[i].node2].GetName()));
 
 
-	// установка транзитивного замыкания
+	// СѓСЃС‚Р°РЅРѕРІРєР° С‚СЂР°РЅР·РёС‚РёРІРЅРѕРіРѕ Р·Р°РјС‹РєР°РЅРёСЏ
 	size_t PrevCount =0;
 	while (PrevCount < m_TransitiveRels.size())
 	{
@@ -326,8 +326,8 @@ void  IncludeHigherInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<string>&
 
 const int MaxLevelId = 30;
 
-// проверяет что все SF актанта с номером LeafId равны  ItemStr или 
-// ниже по иерархии
+// РїСЂРѕРІРµСЂСЏРµС‚ С‡С‚Рѕ РІСЃРµ SF Р°РєС‚Р°РЅС‚Р° СЃ РЅРѕРјРµСЂРѕРј LeafId СЂР°РІРЅС‹  ItemStr РёР»Рё 
+// РЅРёР¶Рµ РїРѕ РёРµСЂР°СЂС…РёРё
 bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const string& ItemStr, CHierarchyHolder* pHierarchyDoc)
 {
 	long ItemNo = Ross->GetRoss()->GetItemNoByItemStr (ItemStr.c_str(), Ross->SemFetDomNo);

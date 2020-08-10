@@ -3,7 +3,7 @@
 
 
 
-// получение по типу EngVerbTenseEnum строкового представления
+// РїРѕР»СѓС‡РµРЅРёРµ РїРѕ С‚РёРїСѓ EngVerbTenseEnum СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ
 string CEngSemStructure::GetTenseString(EngVerbTenseEnum Tense) const
 {
 	switch (Tense) {
@@ -39,23 +39,23 @@ string CEngSemStructure::GetTenseString(EngVerbTenseEnum Tense) const
 
 
 /*
-   Неинлайновская функция is_past_tense только лишь
-   вызывает функцию инлайновскую is_past. 
-   Функция is_past_tense используется только в функции ApplySequenceOfTenseRule.
-   Если в ApplySequenceOfTenseRule использовать 
-   напрямую is_past или сделать is_past_tense инлайновской 
-   (это одно и то же), тогда в оптимизированной релизной
-   версии ApplySequenceOfTenseRule будет падать на 
-   фразе 
-   "Если вы нажмете return , nn  спросит вас , тема какой статьи вам надоела"
-   Я не знаю почему. Думаю, проблема в оптимизации VС 6.0.
-   В MSDN сказано
+   РќРµРёРЅР»Р°Р№РЅРѕРІСЃРєР°СЏ С„СѓРЅРєС†РёСЏ is_past_tense С‚РѕР»СЊРєРѕ Р»РёС€СЊ
+   РІС‹Р·С‹РІР°РµС‚ С„СѓРЅРєС†РёСЋ РёРЅР»Р°Р№РЅРѕРІСЃРєСѓСЋ is_past. 
+   Р¤СѓРЅРєС†РёСЏ is_past_tense РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ С„СѓРЅРєС†РёРё ApplySequenceOfTenseRule.
+   Р•СЃР»Рё РІ ApplySequenceOfTenseRule РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ 
+   РЅР°РїСЂСЏРјСѓСЋ is_past РёР»Рё СЃРґРµР»Р°С‚СЊ is_past_tense РёРЅР»Р°Р№РЅРѕРІСЃРєРѕР№ 
+   (СЌС‚Рѕ РѕРґРЅРѕ Рё С‚Рѕ Р¶Рµ), С‚РѕРіРґР° РІ РѕРїС‚РёРјРёР·РёСЂРѕРІР°РЅРЅРѕР№ СЂРµР»РёР·РЅРѕР№
+   РІРµСЂСЃРёРё ApplySequenceOfTenseRule Р±СѓРґРµС‚ РїР°РґР°С‚СЊ РЅР° 
+   С„СЂР°Р·Рµ 
+   "Р•СЃР»Рё РІС‹ РЅР°Р¶РјРµС‚Рµ return , nn  СЃРїСЂРѕСЃРёС‚ РІР°СЃ , С‚РµРјР° РєР°РєРѕР№ СЃС‚Р°С‚СЊРё РІР°Рј РЅР°РґРѕРµР»Р°"
+   РЇ РЅРµ Р·РЅР°СЋ РїРѕС‡РµРјСѓ. Р”СѓРјР°СЋ, РїСЂРѕР±Р»РµРјР° РІ РѕРїС‚РёРјРёР·Р°С†РёРё VРЎ 6.0.
+   Р’ MSDN СЃРєР°Р·Р°РЅРѕ
    Optimizing compilers can sometimes change your code to 
    something you wouldn't expect. If you find that the application 
    works when you build for release without optimizations, 
    but not when you build for release with optimizations, 
    this might be the case.
-   Сокирко 26 мая 2001 
+   РЎРѕРєРёСЂРєРѕ 26 РјР°СЏ 2001 
 */
 bool is_past_tense(EngVerbTenseEnum t)
 {
@@ -63,18 +63,18 @@ bool is_past_tense(EngVerbTenseEnum t)
 }
 
 
-//  Согласование времен в английском сложном предложении
+//  РЎРѕРіР»Р°СЃРѕРІР°РЅРёРµ РІСЂРµРјРµРЅ РІ Р°РЅРіР»РёР№СЃРєРѕРј СЃР»РѕР¶РЅРѕРј РїСЂРµРґР»РѕР¶РµРЅРёРё
 void CEngSemStructure::ApplySequenceOfTenseRule()
 {
-	//  идем по все узлам 
+	//  РёРґРµРј РїРѕ РІСЃРµ СѓР·Р»Р°Рј 
 	for( long NodeNo=0; NodeNo<m_Nodes.size(); NodeNo++ )
 	{
 		if( m_Nodes[NodeNo].m_MainWordNo == -1 )
 			continue;
-		// берем время узла
+		// Р±РµСЂРµРј РІСЂРµРјСЏ СѓР·Р»Р°
 		CEngSemWord& MainWord = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo];
 		EngVerbTenseEnum NewTense;
-		// конвертируем это время по правилам
+		// РєРѕРЅРІРµСЂС‚РёСЂСѓРµРј СЌС‚Рѕ РІСЂРµРјСЏ РїРѕ РїСЂР°РІРёР»Р°Рј
 		switch( MainWord.GetTense() )
 		{
 			case would_smp_tn:		NewTense = would_prf_tn;	break;
@@ -87,11 +87,11 @@ void CEngSemStructure::ApplySequenceOfTenseRule()
 			default : NewTense = zero_tn; break;
 		}
 
-		// если не удалось отконвертировать,
+		// РµСЃР»Рё РЅРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ,
 		if (NewTense == zero_tn) 
-			continue; // мы имеем дело не с тем глаголом
+			continue; // РјС‹ РёРјРµРµРј РґРµР»Рѕ РЅРµ СЃ С‚РµРј РіР»Р°РіРѕР»РѕРј
 
-		// проверка, что ни у одного подчиненного нет пометы RESTR=not_seq_tn
+		// РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РЅРё Сѓ РѕРґРЅРѕРіРѕ РїРѕРґС‡РёРЅРµРЅРЅРѕРіРѕ РЅРµС‚ РїРѕРјРµС‚С‹ RESTR=not_seq_tn
 		vector<long> OutRels;
 		GetOutcomingRelations(NodeNo,OutRels);
 		int i=0;
@@ -103,22 +103,22 @@ void CEngSemStructure::ApplySequenceOfTenseRule()
 			if( GetRossHolder(EngNode.GetType())->HasFieldValue ("RESTR", "not_seq_tn", EngNode.GetUnitNo() ) )
 				break;
 		}
-		// если нашли подчиненное с  RESTR=not_seq_tn, то согласование не будем проводить
+		// РµСЃР»Рё РЅР°С€Р»Рё РїРѕРґС‡РёРЅРµРЅРЅРѕРµ СЃ  RESTR=not_seq_tn, С‚Рѕ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РЅРµ Р±СѓРґРµРј РїСЂРѕРІРѕРґРёС‚СЊ
 		if( i<OutRels.size() ) 
 			continue;
 
-// берем все входящие и ищем среди них межклаузные отношения
+// Р±РµСЂРµРј РІСЃРµ РІС…РѕРґСЏС‰РёРµ Рё РёС‰РµРј СЃСЂРµРґРё РЅРёС… РјРµР¶РєР»Р°СѓР·РЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ
 
-// придется перебрать все связи "я сказал, где они находятся"
+// РїСЂРёРґРµС‚СЃСЏ РїРµСЂРµР±СЂР°С‚СЊ РІСЃРµ СЃРІСЏР·Рё "СЏ СЃРєР°Р·Р°Р», РіРґРµ РѕРЅРё РЅР°С…РѕРґСЏС‚СЃСЏ"
 		for( i=0; i<m_Relations.size(); i++ )
 		{
 			const CEngSemRelation& Rel = m_Relations[i];
 			if( m_Nodes[Rel.m_TargetNodeNo].m_ClauseNo != m_Nodes[NodeNo].m_ClauseNo )
 				continue;
-			// должны быть из разных клауз
+			// РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РёР· СЂР°Р·РЅС‹С… РєР»Р°СѓР·
 			if( m_Nodes[Rel.m_SourceNodeNo].m_ClauseNo == m_Nodes[NodeNo].m_ClauseNo) 
 				continue;
-			// отношение должно быть подчинительным
+			// РѕС‚РЅРѕС€РµРЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїРѕРґС‡РёРЅРёС‚РµР»СЊРЅС‹Рј
 			if	(		(Rel.m_Type != Kotoryj) && (Rel.m_Type != ChtoKtoAsConjWords)
 					&&	(Rel.m_Type != SubConj) && (Rel.m_Type != Kak)
 					&&	(Rel.m_Valency.m_RelationStr!="CONTEN")			  
@@ -128,7 +128,7 @@ void CEngSemStructure::ApplySequenceOfTenseRule()
 			if( m_Nodes[Rel.m_SourceNodeNo].RusNode == -1 ) 
 				continue;
 
-			// берем русский узел
+			// Р±РµСЂРµРј СЂСѓСЃСЃРєРёР№ СѓР·РµР»
 			const CSemNode& RusNode = RusStr.GetNode(m_Nodes[Rel.m_SourceNodeNo].RusNode);
 
 			if	(		!RusStr.HasSemFet(RusNode, "COMMUNIC")
@@ -143,7 +143,7 @@ void CEngSemStructure::ApplySequenceOfTenseRule()
 			bool bRes = is_past_tense(t); 
 			if( bRes )
 			{
-				// все, нашли правильного хозяина
+				// РІСЃРµ, РЅР°С€Р»Рё РїСЂР°РІРёР»СЊРЅРѕРіРѕ С…РѕР·СЏРёРЅР°
 				MainWord.SetTense(NewTense, "ApplySequenceOfTenseRule");
 				break;
 			}
@@ -171,7 +171,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 		if( m_Nodes[iEngNode].m_Words[iMainWord].m_Lemma == "cannot" )
 		{
 			m_Nodes[iEngNode].m_RelOperators.clear();
-			m_Nodes[iEngNode].m_RelOperators.push_back("НЕ");
+			m_Nodes[iEngNode].m_RelOperators.push_back("РќР•");
 			m_Nodes[iEngNode].m_Words[iMainWord].m_Lemma = "can";
 		}
 		
@@ -180,8 +180,8 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 		if( !bCan && !bMust )
 			continue;
 
-// если это не так, то во первых что-то неладно в идеологии,
-// а во вторых результат все равно будет неверным - Gri
+// РµСЃР»Рё СЌС‚Рѕ РЅРµ С‚Р°Рє, С‚Рѕ РІРѕ РїРµСЂРІС‹С… С‡С‚Рѕ-С‚Рѕ РЅРµР»Р°РґРЅРѕ РІ РёРґРµРѕР»РѕРіРёРё,
+// Р° РІРѕ РІС‚РѕСЂС‹С… СЂРµР·СѓР»СЊС‚Р°С‚ РІСЃРµ СЂР°РІРЅРѕ Р±СѓРґРµС‚ РЅРµРІРµСЂРЅС‹Рј - Gri
 		assert( m_Nodes[iEngNode].m_Words.size()==1 );
 
 		CEngSemNode newNode;
@@ -234,7 +234,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 			newRel.m_PosType = FromAlgorithmPosType;
 			m_Relations.push_back(newRel); // be->can(able)
 
-// связи
+// СЃРІСЏР·Рё
 			MoveMeaningRelsToNewNode(iEngNode,iBeNode);
 
 			CreateSimpleEnglNode("able",newNode,0,true); // node "able"
@@ -280,8 +280,8 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 
 
 		/*
-			ищем вторую валентность слова и интерпретируем ее по новой словарной статье
-			(чтобы поставить to перед глаголом)
+			РёС‰РµРј РІС‚РѕСЂСѓСЋ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ СЃР»РѕРІР° Рё РёРЅС‚РµСЂРїСЂРµС‚РёСЂСѓРµРј РµРµ РїРѕ РЅРѕРІРѕР№ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµ
+			(С‡С‚РѕР±С‹ РїРѕСЃС‚Р°РІРёС‚СЊ to РїРµСЂРµРґ РіР»Р°РіРѕР»РѕРј)
 		*/
 		vector<long> rels;
 		GetOutcomingRelations(iEngNode,rels);
@@ -339,7 +339,7 @@ CAuxVerbInfo GetAuxVerbLemmaAndTense(EngVerbTenseEnum Tense)
 };
 
 
-// является ли данный узел вспомогательным  глаголом
+// СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рј  РіР»Р°РіРѕР»РѕРј
 bool	CEngSemStructure::IsAuxVerb(long NodeNo) const
 {
 	vector<long> outRels;
@@ -351,7 +351,7 @@ bool	CEngSemStructure::IsAuxVerb(long NodeNo) const
 };
 
 
-// имеет  ли данный узел вспомогательный  глагол
+// РёРјРµРµС‚  Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№  РіР»Р°РіРѕР»
 bool	CEngSemStructure::HasBeVerb(long NodeNo) const
 {
 	vector<long> outRels;
@@ -367,10 +367,10 @@ bool	CEngSemStructure::HasBeVerb(long NodeNo) const
 };
 
 
-// выделение вспомогательного глагола
+// РІС‹РґРµР»РµРЅРёРµ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРіРѕ РіР»Р°РіРѕР»Р°
 void	CEngSemStructure::BuildAuxiliaryVerbs()
 {
-// идем по все узлам 
+// РёРґРµРј РїРѕ РІСЃРµ СѓР·Р»Р°Рј 
 	for( int NodeNo=0; NodeNo<m_Nodes.size(); NodeNo++ )
 	{
 		if( IsAuxVerb(NodeNo) )
@@ -382,37 +382,37 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 		if( m_Nodes[NodeNo].m_MainWordNo == -1 )
 			continue;
 
-		// берем время узла
+		// Р±РµСЂРµРј РІСЂРµРјСЏ СѓР·Р»Р°
         CEngSemWord& MainWord = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo];
         if( MainWord.GetTense() == zero_tn ||  
 			MainWord.GetTense() == present_inf_tn )
 			continue;
 
-		// у модальных глаголов не бывает вспомогательных глаголов
+		// Сѓ РјРѕРґР°Р»СЊРЅС‹С… РіР»Р°РіРѕР»РѕРІ РЅРµ Р±С‹РІР°РµС‚ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹С… РіР»Р°РіРѕР»РѕРІ
 		if( m_Nodes[NodeNo].GetType()!=NoneRoss && 
 			GetRossHolder(m_Nodes[NodeNo].GetType())->HasFieldValue("GF","VERB_MODL",m_Nodes[NodeNo].GetUnitNo()) )
 			continue;
 
-		// одно из правил синтеза. потом, наверно, оно должно уйти, когла
-		// начнем обрабатывать условные конструкции
+		// РѕРґРЅРѕ РёР· РїСЂР°РІРёР» СЃРёРЅС‚РµР·Р°. РїРѕС‚РѕРј, РЅР°РІРµСЂРЅРѕ, РѕРЅРѕ РґРѕР»Р¶РЅРѕ СѓР№С‚Рё, РєРѕРіР»Р°
+		// РЅР°С‡РЅРµРј РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ СѓСЃР»РѕРІРЅС‹Рµ РєРѕРЅСЃС‚СЂСѓРєС†РёРё
 		if( m_Clauses[m_Nodes[NodeNo].m_ClauseNo].m_HasParticleBY )
-			  MainWord.SetTense(would_smp_tn, "Частица \'БЫ\'");
+			  MainWord.SetTense(would_smp_tn, "Р§Р°СЃС‚РёС†Р° \'Р‘Р«\'");
 
 
-		// у глагола to be нет вспомогательных глаголов в настоящем и прошедшем временах
+		// Сѓ РіР»Р°РіРѕР»Р° to be РЅРµС‚ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹С… РіР»Р°РіРѕР»РѕРІ РІ РЅР°СЃС‚РѕСЏС‰РµРј Рё РїСЂРѕС€РµРґС€РµРј РІСЂРµРјРµРЅР°С…
         if( (MainWord.GetTense()==past_smp_tn || MainWord.GetTense() == present_smp_tn) 
 			&& m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma ==  "be" )
 			continue;
 
-		// в не вопросительном предложении во временах past_smp_tn и present_smp_tn
-		// вспомогательный глагол не нужен
+		// РІ РЅРµ РІРѕРїСЂРѕСЃРёС‚РµР»СЊРЅРѕРј РїСЂРµРґР»РѕР¶РµРЅРёРё РІРѕ РІСЂРµРјРµРЅР°С… past_smp_tn Рё present_smp_tn
+		// РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РіР»Р°РіРѕР» РЅРµ РЅСѓР¶РµРЅ
         if( (MainWord.GetTense()==past_smp_tn || MainWord.GetTense() == present_smp_tn) 
 			&& !MainWord.m_bMorphologicalPassiveForm  
-			&& !m_Nodes[NodeNo].HasRelOperator("НЕ") )
+			&& !m_Nodes[NodeNo].HasRelOperator("РќР•") )
 		{
 			if( !RusStr.IsQuestionClause(RusStr.GetNode(m_Nodes[NodeNo].RusNode).m_ClauseNo) )
 				continue;
-			else // это все из-за Маши
+			else // СЌС‚Рѕ РІСЃРµ РёР·-Р·Р° РњР°С€Рё
 			{
 				int iQueRel,iSubRel;
 				if( CheckQuestionClause(NodeNo,iQueRel,iSubRel)	)
@@ -420,10 +420,10 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 			}
 		}
 
-		// получаем лемму и время вспомогательного узла
+		// РїРѕР»СѓС‡Р°РµРј Р»РµРјРјСѓ Рё РІСЂРµРјСЏ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРіРѕ СѓР·Р»Р°
 		CAuxVerbInfo AuxVerb = GetAuxVerbLemmaAndTense(MainWord.GetTense());
 
-		// строим пассив для простых времен
+		// СЃС‚СЂРѕРёРј РїР°СЃСЃРёРІ РґР»СЏ РїСЂРѕСЃС‚С‹С… РІСЂРµРјРµРЅ
         if( (MainWord.GetTense()==past_smp_tn || MainWord.GetTense() == present_smp_tn) 
 			&& MainWord.m_bMorphologicalPassiveForm )
 		{
@@ -434,44 +434,44 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 			 MainWord.m_bMorphologicalPassiveForm = false;
 		}
 		
-		// например, герундий не нуждается во вспомог. глаголе
+		// РЅР°РїСЂРёРјРµСЂ, РіРµСЂСѓРЅРґРёР№ РЅРµ РЅСѓР¶РґР°РµС‚СЃСЏ РІРѕ РІСЃРїРѕРјРѕРі. РіР»Р°РіРѕР»Рµ
 		if (AuxVerb.m_AuxLemma == "")
 			continue;
 
-		// создаем узел
+		// СЃРѕР·РґР°РµРј СѓР·РµР»
 		CEngSemNode newNode;
 		newNode.m_ClauseNo = m_Nodes[NodeNo].m_ClauseNo;
 		CreateSimpleEnglNode(AuxVerb.m_AuxLemma, newNode, AuxVerb.m_AuxEngPOS, false);
 		newNode.m_Words[0].SetTense(AuxVerb.m_AuxTense, "BuildAuxiliaryVerbs");
-		// переносим информацию о числе и лице во вспомогательный глагол
+		// РїРµСЂРµРЅРѕСЃРёРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С‡РёСЃР»Рµ Рё Р»РёС†Рµ РІРѕ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РіР»Р°РіРѕР»
 		newNode.SetGrammemsRich( m_Nodes[NodeNo].GetGrammemsRich() & (eAllPersons | eAllNumbers) );
-		// удаляем  эту информацию  в главном
+		// СѓРґР°Р»СЏРµРј  СЌС‚Сѓ РёРЅС„РѕСЂРјР°С†РёСЋ  РІ РіР»Р°РІРЅРѕРј
 		m_Nodes[NodeNo].DeleteGrammemsRich( eAllPersons | eAllNumbers);
 
-		// переносим инофрмаицю об операторах на вспомогательный глагол
+		// РїРµСЂРµРЅРѕСЃРёРј РёРЅРѕС„СЂРјР°РёС†СЋ РѕР± РѕРїРµСЂР°С‚РѕСЂР°С… РЅР° РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РіР»Р°РіРѕР»
 		newNode.m_RelOperators = m_Nodes[NodeNo].m_RelOperators;
 		m_Nodes[NodeNo].m_RelOperators.clear();
 
 		MainWord.SetTense(AuxVerb.m_MainTense, "BuildAuxiliaryVerbs");
 		m_Nodes[NodeNo].m_bNotUseTo = true;
 
-		// ставим узел перед главным словом
+		// СЃС‚Р°РІРёРј СѓР·РµР» РїРµСЂРµРґ РіР»Р°РІРЅС‹Рј СЃР»РѕРІРѕРј
 		newNode.m_Words[0].m_WordNo = m_Nodes[NodeNo].GetMinWordNo();
 		FreeWordNo(newNode.m_Words[0].m_WordNo);
 		m_Nodes.push_back(newNode);
 		long AuxNodeNo = m_Nodes.size() - 1;
 
-		// связи
+		// СЃРІСЏР·Рё
 		MoveMeaningRelsToNewNode(NodeNo,AuxNodeNo);
 		PrintNodes();
 
-		//  перевешиваем все наречия, которые должны стоять после вспомогательного глагола
-		//  и до основного, на  вспомогательный глагол
+		//  РїРµСЂРµРІРµС€РёРІР°РµРј РІСЃРµ РЅР°СЂРµС‡РёСЏ, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ РїРѕСЃР»Рµ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРіРѕ РіР»Р°РіРѕР»Р°
+		//  Рё РґРѕ РѕСЃРЅРѕРІРЅРѕРіРѕ, РЅР°  РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РіР»Р°РіРѕР»
 
-		// проходим по всем отношениям графа,а не только по 
-		// выходящим из главного глагола, поскольку
-		// главный глагол может возникуть из правил (например, ApplyPredicativeRule)
-		// и тогда группы времени будут зависеть от предикатива, а не от главного глагола (to be)
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РѕС‚РЅРѕС€РµРЅРёСЏРј РіСЂР°С„Р°,Р° РЅРµ С‚РѕР»СЊРєРѕ РїРѕ 
+		// РІС‹С…РѕРґСЏС‰РёРј РёР· РіР»Р°РІРЅРѕРіРѕ РіР»Р°РіРѕР»Р°, РїРѕСЃРєРѕР»СЊРєСѓ
+		// РіР»Р°РІРЅС‹Р№ РіР»Р°РіРѕР» РјРѕР¶РµС‚ РІРѕР·РЅРёРєСѓС‚СЊ РёР· РїСЂР°РІРёР» (РЅР°РїСЂРёРјРµСЂ, ApplyPredicativeRule)
+		// Рё С‚РѕРіРґР° РіСЂСѓРїРїС‹ РІСЂРµРјРµРЅРё Р±СѓРґСѓС‚ Р·Р°РІРёСЃРµС‚СЊ РѕС‚ РїСЂРµРґРёРєР°С‚РёРІР°, Р° РЅРµ РѕС‚ РіР»Р°РІРЅРѕРіРѕ РіР»Р°РіРѕР»Р° (to be)
 		for( int i=0; i<m_Relations.size(); i++ )
 		{
 			const CEngSemNode& node = m_Nodes[m_Relations[i].m_TargetNodeNo];
@@ -484,13 +484,13 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 			if (_find(Positions, "HAV"))
 			{
 				m_Relations[i].m_SourceNodeNo = AuxNodeNo;
-				// указываем противоположное направление 
-				// поскольку связь явялется реверсивной
+				// СѓРєР°Р·С‹РІР°РµРј РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ 
+				// РїРѕСЃРєРѕР»СЊРєСѓ СЃРІСЏР·СЊ СЏРІСЏР»РµС‚СЃСЏ СЂРµРІРµСЂСЃРёРІРЅРѕР№
 				m_Relations[i].m_Position = "<<";
 			}
 		}
 
-		// создаем отношение от вспомогательного глагола к главному
+		// СЃРѕР·РґР°РµРј РѕС‚РЅРѕС€РµРЅРёРµ РѕС‚ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРіРѕ РіР»Р°РіРѕР»Р° Рє РіР»Р°РІРЅРѕРјСѓ
 		CEngSemRelation newRel(CValency("AUX_VERB",A_C),AuxNodeNo,NodeNo,"");
 		newRel.m_Position = ">>";
 		newRel.m_PosType = FromAlgorithmPosType;
@@ -551,7 +551,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 	if( AVREM_values.empty() ) 
 		return zero_tn;
 
-// врезка для деепричастий
+// РІСЂРµР·РєР° РґР»СЏ РґРµРµРїСЂРёС‡Р°СЃС‚РёР№
 	if( bEngStr )
 	{
 		int iRusNode = m_Nodes[RelNodeNo].RusNode;
@@ -564,7 +564,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 			{
 				string s1 = AVREM_values[j].first;
 				string s2 = AVREM_values[j].second;
-				if( s1=="прш" && s2=="Simple" )
+				if( s1=="РїСЂС€" && s2=="Simple" )
 					return gerund_prf_tn;
 			}
 			return zero_tn;
@@ -584,26 +584,26 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 		{
 			DefaultTense = s2;
 		}
-		else if(s0 == "нст")
+		else if(s0 == "РЅСЃС‚")
 		{
 			if( present.empty() )
 				present = s2;
 		}
-		else if(s0 == "прш")
+		else if(s0 == "РїСЂС€")
 		{
 			if( past.empty() )
 				past = s2;
 		}
-		else if(s0 == "буд")
+		else if(s0 == "Р±СѓРґ")
 		{
 			if(future.empty())
 				future = s2;
 		}
-		else if(s0 == "нсв")
+		else if(s0 == "РЅСЃРІ")
 		{
 			nsv = s2;		
 		}
-		else if(s0 == "св")
+		else if(s0 == "СЃРІ")
 		{
 			sv = s2;
 		}
@@ -768,7 +768,7 @@ bool CEngSemStructure::CorrectTenseByDictConjFeatures(int iNode,CDictUnitInterp 
 		else if(is_past(NewTense))		NewTense = past_cnt_tn;
 		else if(is_would(NewTense))		NewTense = would_cnt_tn;
 	
-	if(ConjHasRestr("RUSETENSE", "буд - > present"))
+	if(ConjHasRestr("RUSETENSE", "Р±СѓРґ - > present"))
 		switch(NewTense){
 			case future_smp_tn: NewTense = present_smp_tn; break;
 			case future_prf_tn: NewTense = present_prf_tn; break;
@@ -776,7 +776,7 @@ bool CEngSemStructure::CorrectTenseByDictConjFeatures(int iNode,CDictUnitInterp 
 			case future_prf_cnt_tn: NewTense = present_prf_cnt_tn; break;
 		}
 
-	if(ConjHasRestr("RUSETENSE", "прш - > past_prf"))
+	if(ConjHasRestr("RUSETENSE", "РїСЂС€ - > past_prf"))
 		if(is_past(NewTense))	NewTense = past_prf_tn;
 
 	if (GetRossHolder(ConjInterp.m_DictType)->HasFullFieldValue("GF", ">> gerund",  ConjInterp.m_UnitNo, 2))

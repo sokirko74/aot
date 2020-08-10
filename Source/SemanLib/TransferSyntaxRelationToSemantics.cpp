@@ -9,15 +9,15 @@ void CRusSemStructure::FindPragmaticallyStrongSynRel ()
 	for (long RelNo=0; RelNo< m_SynRelations.size(); RelNo++)
 	{
 
-		// если из узла выходит более двух стрелок с однородным отношением,
-		// тогда таким отношениям можно доверять
-		if (m_SynRelations[RelNo].m_SynRelName.substr(0,5) == "ОДНОР")
+		// РµСЃР»Рё РёР· СѓР·Р»Р° РІС‹С…РѕРґРёС‚ Р±РѕР»РµРµ РґРІСѓС… СЃС‚СЂРµР»РѕРє СЃ РѕРґРЅРѕСЂРѕРґРЅС‹Рј РѕС‚РЅРѕС€РµРЅРёРµРј,
+		// С‚РѕРіРґР° С‚Р°РєРёРј РѕС‚РЅРѕС€РµРЅРёСЏРј РјРѕР¶РЅРѕ РґРѕРІРµСЂСЏС‚СЊ
+		if (m_SynRelations[RelNo].m_SynRelName.substr(0,5) == "РћР”РќРћР ")
 		{
 			vector<long> Rels;
 			GetOutcomingSynRelations(m_SynRelations[RelNo].m_SourceNodeNo, Rels);
 			long Count =0;
 			for (long i=0;i < Rels.size(); i++) 
-				if(m_SynRelations[Rels[i]].m_SynRelName.substr(0,5) == "ОДНОР")
+				if(m_SynRelations[Rels[i]].m_SynRelName.substr(0,5) == "РћР”РќРћР ")
 					Count++;
 			if (Count > 2)
 				m_SynRelations[RelNo].m_bPragmaticallyStrong = true;
@@ -29,20 +29,20 @@ void CRusSemStructure::FindPragmaticallyStrongSynRel ()
 
 bool CRusSemStructure::IsPragmaticallyStrongSynRel (long RelNo) const
 {
-	// синтаксис включает частицу ЛИ в группы и проводит к ней стрелку,  чтобы 
-	// собрать другие группы, как бы игнорируя частицы, например:
-	// "Я не знаю, эту ли книгу ты дал мне."
-	// но нам нужно выделить "ли" из ПРИЛ_СУЩ, чтобы соединились клаузы.
-	if (m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsLemma("ЛИ"))
+	// СЃРёРЅС‚Р°РєСЃРёСЃ РІРєР»СЋС‡Р°РµС‚ С‡Р°СЃС‚РёС†Сѓ Р›Р РІ РіСЂСѓРїРїС‹ Рё РїСЂРѕРІРѕРґРёС‚ Рє РЅРµР№ СЃС‚СЂРµР»РєСѓ,  С‡С‚РѕР±С‹ 
+	// СЃРѕР±СЂР°С‚СЊ РґСЂСѓРіРёРµ РіСЂСѓРїРїС‹, РєР°Рє Р±С‹ РёРіРЅРѕСЂРёСЂСѓСЏ С‡Р°СЃС‚РёС†С‹, РЅР°РїСЂРёРјРµСЂ:
+	// "РЇ РЅРµ Р·РЅР°СЋ, СЌС‚Сѓ Р»Рё РєРЅРёРіСѓ С‚С‹ РґР°Р» РјРЅРµ."
+	// РЅРѕ РЅР°Рј РЅСѓР¶РЅРѕ РІС‹РґРµР»РёС‚СЊ "Р»Рё" РёР· РџР РР›_РЎРЈР©, С‡С‚РѕР±С‹ СЃРѕРµРґРёРЅРёР»РёСЃСЊ РєР»Р°СѓР·С‹.
+	if (m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsLemma("Р›Р"))
 		return false;
 
 	/*
-	сравнитлеьное числитлеьное "больше" может выполнять роль MUA, а не только заполнять  валентсноть QUANTIT	
+	СЃСЂР°РІРЅРёС‚Р»РµСЊРЅРѕРµ С‡РёСЃР»РёС‚Р»РµСЊРЅРѕРµ "Р±РѕР»СЊС€Рµ" РјРѕР¶РµС‚ РІС‹РїРѕР»РЅСЏС‚СЊ СЂРѕР»СЊ MUA, Р° РЅРµ С‚РѕР»СЊРєРѕ Р·Р°РїРѕР»РЅСЏС‚СЊ  РІР°Р»РµРЅС‚СЃРЅРѕС‚СЊ QUANTIT	
 	*/
-	if  (m_SynRelations[RelNo].m_SynRelName == "НАР_ЧИСЛ_СУЩ")
+	if  (m_SynRelations[RelNo].m_SynRelName == "РќРђР _Р§РРЎР›_РЎРЈР©")
 	{
-		if (   m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm("БОЛЬШЕ")			
-			|| m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm("МЕНЬШЕ")  
+		if (   m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm("Р‘РћР›Р¬РЁР•")			
+			|| m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm("РњР•РќР¬РЁР•")  
 			)
 		{
 			return false;
@@ -107,14 +107,14 @@ void CRusSemStructure::ApplySynStr (long ClauseNo)
 							continue;
 
 						string  SemRelStr;
-						if (SynRelStr ==	"ЧИСЛ_СУЩ")
+						if (SynRelStr ==	"Р§РРЎР›_РЎРЈР©")
 							SemRelStr =	"QUANTIT";		   
 
 						CRusSemRelation NewRelation(CValency(SemRelStr,	A_C), m_SynRelations[SynRels[l]].m_SourceNodeNo, i,	m_SynRelations[SynRels[l]].m_SynRelName);
 
-						if	(			SynRelStr == "ПРИЛ_СУЩ" 
-								||		SynRelStr == "ЧИСЛ_СУЩ" 
-								||		SynRelStr == "ПРИЧ_СУЩ" // можно что-нибудь еще добавить... 	
+						if	(			SynRelStr == "РџР РР›_РЎРЈР©" 
+								||		SynRelStr == "Р§РРЎР›_РЎРЈР©" 
+								||		SynRelStr == "РџР РР§_РЎРЈР©" // РјРѕР¶РЅРѕ С‡С‚Рѕ-РЅРёР±СѓРґСЊ РµС‰Рµ РґРѕР±Р°РІРёС‚СЊ... 	
 							)
 						{
 							NewRelation.m_bReverseRel = true;

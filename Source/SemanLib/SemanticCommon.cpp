@@ -32,12 +32,12 @@ CSemWord::CSemWord (long WordNo, string Lemma )
 	m_WordNo = WordNo;
 	m_Lemma = Lemma;
 };
-// является ли данное слово кавычкой
+// СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅРѕРµ СЃР»РѕРІРѕ РєР°РІС‹С‡РєРѕР№
 bool CSemWord::IsQuoteMark () const
 {
 	return (m_Word.length() == 1) && (m_Word[0] == '"');
 };
-// принадлежит ли граммема слову 
+// РїСЂРёРЅР°РґР»РµР¶РёС‚ Р»Рё РіСЂР°РјРјРµРјР° СЃР»РѕРІСѓ 
 bool CSemWord::HasOneGrammem(int grammem) const
 {
 	return		((m_FormGrammems & _QM(grammem)) != 0)
@@ -54,12 +54,12 @@ bool CSemWord::IsRusSubstPronounP () const
 {
 	if (m_Poses	 != (1<< PRONOUN_P)) return false;
 
-	return     (m_Lemma == "КАЖДЫЙ" )
-			||  (m_Lemma == "ЛЮБОЙ")			   
-			||  (m_Lemma == "ТОТ")
-			||  (m_Lemma == "КОТОРЫЙ")
-			||  (m_Lemma == "ДРУГОЙ")
-			||  (m_Lemma == "ОДИН");
+	return     (m_Lemma == "РљРђР–Р”Р«Р™" )
+			||  (m_Lemma == "Р›Р®Р‘РћР™")			   
+			||  (m_Lemma == "РўРћРў")
+			||  (m_Lemma == "РљРћРўРћР Р«Р™")
+			||  (m_Lemma == "Р”Р РЈР“РћР™")
+			||  (m_Lemma == "РћР”РРќ");
 };
 
 QWORD		CSemWord::GetAllGrammems() const
@@ -114,7 +114,7 @@ CSemNode::CSemNode()
 	m_SemCategory = scLabel;
 };
 
-// удаляет из оператор из  m_RelOperators
+// СѓРґР°Р»СЏРµС‚ РёР· РѕРїРµСЂР°С‚РѕСЂ РёР·  m_RelOperators
 void CSemNode::DelRelOperator(const string& oper)
 {
 	for(int i = 0 ; i < m_RelOperators.size() ; i++ )
@@ -142,13 +142,13 @@ void      CSemRelation::Init()
 };
 
 
- // дает тип словаря для текущей интерпретации
+ // РґР°РµС‚ С‚РёРї СЃР»РѕРІР°СЂСЏ РґР»СЏ С‚РµРєСѓС‰РµР№ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё
 DictTypeEnum CSemNode::GetType()   const 
 {
 	return (m_CurrInterp == -1) ? NoneRoss : m_Interps[m_CurrInterp].m_DictType;
 };
 
-// дает  текущую интерпрецию
+// РґР°РµС‚  С‚РµРєСѓС‰СѓСЋ РёРЅС‚РµСЂРїСЂРµС†РёСЋ
 CDictUnitInterp*  CSemNode::GetInterp() 	
 {
 	return (m_CurrInterp == -1) ?  0 :&(m_Interps[m_CurrInterp]);	
@@ -203,13 +203,13 @@ void  CSemNode::DeleteInterp (size_t i)
 	ResetCurrInterp();
 };
 
-// дает  константную текущую интерпрецию
+// РґР°РµС‚  РєРѕРЅСЃС‚Р°РЅС‚РЅСѓСЋ С‚РµРєСѓС‰СѓСЋ РёРЅС‚РµСЂРїСЂРµС†РёСЋ
 const CDictUnitInterp*  CSemNode::GetInterp() const 	
 {
 	return (m_CurrInterp == -1) ?  0 :&(m_Interps[m_CurrInterp]);	
 };
 
-// дает  номер статьи для текущей интерпреции
+// РґР°РµС‚  РЅРѕРјРµСЂ СЃС‚Р°С‚СЊРё РґР»СЏ С‚РµРєСѓС‰РµР№ РёРЅС‚РµСЂРїСЂРµС†РёРё
 WORD   CSemNode::GetUnitNo() const 
 {
 	return (m_CurrInterp == -1) ? ErrUnitNo : m_Interps[m_CurrInterp].m_UnitNo;
@@ -221,13 +221,13 @@ long  CSemNode::GetCurrInterpNo() const
 };
 
 
-// примитивный узел - это такой узел, который состоит только из одного слова
+// РїСЂРёРјРёС‚РёРІРЅС‹Р№ СѓР·РµР» - СЌС‚Рѕ С‚Р°РєРѕР№ СѓР·РµР», РєРѕС‚РѕСЂС‹Р№ СЃРѕСЃС‚РѕРёС‚ С‚РѕР»СЊРєРѕ РёР· РѕРґРЅРѕРіРѕ СЃР»РѕРІР°
 bool   CSemNode::IsPrimitive() const 
 {
 	return GetWordsSize() == 1;
 };
 
-// является ли данный узел абстрактным (не содержащий слов)
+// СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» Р°Р±СЃС‚СЂР°РєС‚РЅС‹Рј (РЅРµ СЃРѕРґРµСЂР¶Р°С‰РёР№ СЃР»РѕРІ)
 bool CSemNode::IsAbstract () const 	
 { 
 	return    (m_NodeType == Copul) 
@@ -236,24 +236,24 @@ bool CSemNode::IsAbstract () const
 			|| (m_NodeType == Situat)
 			;
 };
-// IsWordContainer = "содержит ли данный узел слова"
-// версия функции IsWordContainer с GetWordsSize() 
-// очень наглядна, но очень медленна,
-// поэтому лучше использовать тип узла
+// IsWordContainer = "СЃРѕРґРµСЂР¶РёС‚ Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» СЃР»РѕРІР°"
+// РІРµСЂСЃРёСЏ С„СѓРЅРєС†РёРё IsWordContainer СЃ GetWordsSize() 
+// РѕС‡РµРЅСЊ РЅР°РіР»СЏРґРЅР°, РЅРѕ РѕС‡РµРЅСЊ РјРµРґР»РµРЅРЅР°,
+// РїРѕСЌС‚РѕРјСѓ Р»СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚РёРї СѓР·Р»Р°
 bool CSemNode::IsWordContainer () const 		
 { 
 	return (m_NodeType == SimpleNode) || (m_NodeType == MNA);
 };
 
 
-// выдает номер самого левого слова данного узла
+// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ СЃР°РјРѕРіРѕ Р»РµРІРѕРіРѕ СЃР»РѕРІР° РґР°РЅРЅРѕРіРѕ СѓР·Р»Р°
 long CSemNode::GetMaxWordNo () const 
 {
 	assert (IsWordContainer());
 	return GetWord(GetWordsSize() - 1).m_WordNo;
 };
 
-// выдает номер самого правого слова данного узла
+// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ СЃР°РјРѕРіРѕ РїСЂР°РІРѕРіРѕ СЃР»РѕРІР° РґР°РЅРЅРѕРіРѕ СѓР·Р»Р°
 long CSemNode::GetMinWordNo () const 
 {
 	assert (IsWordContainer());
@@ -262,20 +262,20 @@ long CSemNode::GetMinWordNo () const
 
 
 
-// проверяет наличие оператора среди  RelOperators
+// РїСЂРѕРІРµСЂСЏРµС‚ РЅР°Р»РёС‡РёРµ РѕРїРµСЂР°С‚РѕСЂР° СЃСЂРµРґРё  RelOperators
 bool CSemNode::HasRelOperator (string oper) const
 {
 	return  find(m_RelOperators.begin(),m_RelOperators.end(), oper) != m_RelOperators.end();
 };
 
 
-// проверяет, приписан ли узлу хотя бы один предлог
+// РїСЂРѕРІРµСЂСЏРµС‚, РїСЂРёРїРёСЃР°РЅ Р»Рё СѓР·Р»Сѓ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ РїСЂРµРґР»РѕРі
 bool CSemNode::HasSomePrep () const 
 {
 	return m_SynReal.m_Preps.size() > 0; 
 };
 
-// проверяет, приписан ли узлу предлог PrepNo
+// РїСЂРѕРІРµСЂСЏРµС‚, РїСЂРёРїРёСЃР°РЅ Р»Рё СѓР·Р»Сѓ РїСЂРµРґР»РѕРі PrepNo
 bool CSemNode::HasThePrep (WORD UnitNo) const 
 { 
 	return m_SynReal.HasThePrep(UnitNo);
@@ -326,7 +326,7 @@ bool CSemNode::IsLemma(string Lemma) const
 	return IsPrimitive() && (GetWord(0).m_Lemma == Lemma);
 };
 
-// проверяет, что данный узел является пассивным глаголом
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РґР°РЅРЅС‹Р№ СѓР·РµР» СЏРІР»СЏРµС‚СЃСЏ РїР°СЃСЃРёРІРЅС‹Рј РіР»Р°РіРѕР»РѕРј
 bool	CSemNode::IsPassiveVerb () const
 {	
 	const CDictUnitInterp* I = GetInterp();
@@ -441,7 +441,7 @@ const CDictionary* CSemanticStructure::GetRoss (DictTypeEnum Type) const
 };
 
 
-// инициализация валентностей узла
+// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚РµР№ СѓР·Р»Р°
 void  CSemanticStructure::InitVals(CSemNode& Node)
 {
 	Node.m_Vals.clear();
@@ -472,21 +472,21 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 
 inline long ConvertGramRestrToGrammems(string t)
 {
-	if ( t  == "ед" )
+	if ( t  == "РµРґ" )
 			  return _QM(rSingular);
-    if ( t == "мн" )
+    if ( t == "РјРЅ" )
 			  return _QM(rPlural);
-	if ( t == "1л" )
+	if ( t == "1Р»" )
 	          return _QM(rFirstPerson);
-    if ( t == "2л" )
+    if ( t == "2Р»" )
 			  return _QM(rSecondPerson);
-	if ( t == "3л" )
+	if ( t == "3Р»" )
 			  return _QM(rThirdPerson);
 	return 0;
 };
 
 
-// возвращает множество наборов граммем, которые разрешено иметь данному узлу
+// РІРѕР·РІСЂР°С‰Р°РµС‚ РјРЅРѕР¶РµСЃС‚РІРѕ РЅР°Р±РѕСЂРѕРІ РіСЂР°РјРјРµРј, РєРѕС‚РѕСЂС‹Рµ СЂР°Р·СЂРµС€РµРЅРѕ РёРјРµС‚СЊ РґР°РЅРЅРѕРјСѓ СѓР·Р»Сѓ
 vector<QWORD> CSemanticStructure::GetGramRestr(const CSemNode& W)
 {
 	vector<QWORD> GrammemsSet;
@@ -529,7 +529,7 @@ string GetStringVectorInOneStr(const StringVector& Vec, string Delimiter)
 string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 {
  try { 
-	// уничтожение графа 
+	// СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РіСЂР°С„Р° 
 	string Res ="";
 	Res += "$GT($main,graph) delete nodes\1";
 
@@ -556,7 +556,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 			if (GetNode(i).IsPrimitive())
 				if (!GetNode(i).GetWord(0).m_WordEquals.empty())
 				{
-					Q+= "\n Полные эквиваленты:";
+					Q+= "\n РџРѕР»РЅС‹Рµ СЌРєРІРёРІР°Р»РµРЅС‚С‹:";
 					for (long j=0; j < GetNode(i).GetWord(0).m_WordEquals.size(); j++)
 						Q+= Format("\n%s", GetNode(i).GetWord(0).m_WordEquals[j].c_str());
 
@@ -564,7 +564,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 
 			if (GetNode(i).m_SynGroupTypeStr != "")
 			{
-				Q += Format("\nЖесткая группа  = %s", GetNode(i).m_SynGroupTypeStr.c_str());
+				Q += Format("\nР–РµСЃС‚РєР°СЏ РіСЂСѓРїРїР°  = %s", GetNode(i).m_SynGroupTypeStr.c_str());
 			};
 			;
 			Res += Format("$GT($main,graph) set $nds(%i)  .morphology \"%s\"\1",i, Q.c_str());
@@ -720,7 +720,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 		if (GetRelation(i)->m_Valency.IsFromDict())
 			if (GetRelation(i)->m_Valency.m_UnitNo != ErrUnitNo)
 			{
-				Props += "Статья = ";
+				Props += "РЎС‚Р°С‚СЊСЏ = ";
 				Props += GetRelation(i)->m_Valency.m_RossHolder->GetRoss()->GetEntryStr(GetRelation(i)->m_Valency.m_UnitNo);
 				Props += "\n";
 			};
@@ -732,7 +732,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 		else
 			LeafIdStr = Format("%i(%i)", LeafId&31, LeafId >> 5);
 
-		Props += "Актант = ";
+		Props += "РђРєС‚Р°РЅС‚ = ";
 		Props += "A";
 		Props += LeafIdStr;
 		Props += "\n";
@@ -751,23 +751,23 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 			};
 		if (!GetRelation(i)->m_SyntacticRelation.empty())
 		{
-			Props += " СинО = "+ GetRelation(i)->m_SyntacticRelation;
+			Props += " РЎРёРЅРћ = "+ GetRelation(i)->m_SyntacticRelation;
 			Props += "\n";
 		};
 		//
 			
 		if (GetRelation(i)->m_Position != "")
 		{
-			Props += " Позиция = "+ GetRelation(i)->m_Position;
+			Props += " РџРѕР·РёС†РёСЏ = "+ GetRelation(i)->m_Position;
 			Props += "\n";
 
-			Props += " Тип Позиции = ";
+			Props += " РўРёРї РџРѕР·РёС†РёРё = ";
 
 			if (GetRelation(i)->m_PosType ==  FromAlgorithmPosType)
-				Props += "Алгоритм";
+				Props += "РђР»РіРѕСЂРёС‚Рј";
 			else
 				if (GetRelation(i)->m_PosType ==  FromArticlePosType)
-					Props += "Статья";
+					Props += "РЎС‚Р°С‚СЊСЏ";
 
 			Props += "\n";
 		};
@@ -814,7 +814,7 @@ string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIsTop)
 
 string CSemanticStructure::GetTclSyntaxGraph()
 {
-	// уничтожение графа 
+	// СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РіСЂР°С„Р° 
 	string Res ="";
 	Res += "$GT($main,graph) delete nodes\1";
 
@@ -996,7 +996,7 @@ vector<QWORD> CSemanticStructure::GetIndexedSemFets (const CSemPattern& P, bool 
 {
 	QWORD DomensSemFet = 0;
 	/*
-	в DomensSemFet находятся все SF, которые обозначают предметные области FIN, SOC  (пока их только две)
+	РІ DomensSemFet РЅР°С…РѕРґСЏС‚СЃСЏ РІСЃРµ SF, РєРѕС‚РѕСЂС‹Рµ РѕР±РѕР·РЅР°С‡Р°СЋС‚ РїСЂРµРґРјРµС‚РЅС‹Рµ РѕР±Р»Р°СЃС‚Рё FIN, SOC  (РїРѕРєР° РёС… С‚РѕР»СЊРєРѕ РґРІРµ)
 	*/
 	//assert (m_IndexedSemFets[2] == "FIN");//assert (m_IndexedSemFets[3] == "SOC");  
 	for (QWORD j=2; j < 4; j++)
@@ -1010,8 +1010,8 @@ vector<QWORD> CSemanticStructure::GetIndexedSemFets (const CSemPattern& P, bool 
 		QWORD OneSemFetsSet =   GetOneIndexedSemFet(P.m_ActantSemFets[i], bInlcudeLowerHierarcy,bInlcudeHigherHierarcy);
 
 		/*
-		надо добавить SF FIN,SOC (предметных областей), если предметных областей в SF не указано      Например, если SF=SITUAT и bInlcudeLowerHierarcy=true, тогда
-		SF=SITUAT,FIN - разновидность  SF=SITUAT	*/
+		РЅР°РґРѕ РґРѕР±Р°РІРёС‚СЊ SF FIN,SOC (РїСЂРµРґРјРµС‚РЅС‹С… РѕР±Р»Р°СЃС‚РµР№), РµСЃР»Рё РїСЂРµРґРјРµС‚РЅС‹С… РѕР±Р»Р°СЃС‚РµР№ РІ SF РЅРµ СѓРєР°Р·Р°РЅРѕ      РќР°РїСЂРёРјРµСЂ, РµСЃР»Рё SF=SITUAT Рё bInlcudeLowerHierarcy=true, С‚РѕРіРґР°
+		SF=SITUAT,FIN - СЂР°Р·РЅРѕРІРёРґРЅРѕСЃС‚СЊ  SF=SITUAT	*/
 		if (bInlcudeLowerHierarcy)
 			if ((OneSemFetsSet & DomensSemFet) == 0)
 				OneSemFetsSet |= DomensSemFet;
@@ -1026,8 +1026,8 @@ vector<QWORD> CSemanticStructure::GetIndexedSemFets (const CSemPattern& P, bool 
 
 bool CSemanticStructure::GleicheSemFet(const vector<QWORD>& SemFets1, const vector<QWORD>& SemFets2, bool bInclusion) const
 {
-	// если не приписана SF, то считаем, что у слова может быть любая SF
-	// например, слову "большой"  SF1 не приписана	
+	// РµСЃР»Рё РЅРµ РїСЂРёРїРёСЃР°РЅР° SF, С‚Рѕ СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ Сѓ СЃР»РѕРІР° РјРѕР¶РµС‚ Р±С‹С‚СЊ Р»СЋР±Р°СЏ SF
+	// РЅР°РїСЂРёРјРµСЂ, СЃР»РѕРІСѓ "Р±РѕР»СЊС€РѕР№"  SF1 РЅРµ РїСЂРёРїРёСЃР°РЅР°	
 
 	if (SemFets1.empty() || SemFets2.empty()) return true;
 
@@ -1123,14 +1123,14 @@ bool  CSemanticStructure::HasSemFetPro (const vector<QWORD>& SemFets, const stri
    return false;
 
 };
-// проходит по всем дизъюнктам, если в дизъюнкте отстутствует CAUS и NEG,
-// и присутствует SemFet, тогда выдает истину
+// РїСЂРѕС…РѕРґРёС‚ РїРѕ РІСЃРµРј РґРёР·СЉСЋРЅРєС‚Р°Рј, РµСЃР»Рё РІ РґРёР·СЉСЋРЅРєС‚Рµ РѕС‚СЃС‚СѓС‚СЃС‚РІСѓРµС‚ CAUS Рё NEG,
+// Рё РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ SemFet, С‚РѕРіРґР° РІС‹РґР°РµС‚ РёСЃС‚РёРЅСѓ
 bool  CSemanticStructure::HasSemFetPro (const CSemNode& Node, const string& SemFet) const
 {
 	return HasSemFetPro(Node.m_NodeSemFets, SemFet);
 };
 
-// проверяет, принадлежит ли узлу данная SF или какая-нибудь SF ниже по иерархии
+// РїСЂРѕРІРµСЂСЏРµС‚, РїСЂРёРЅР°РґР»РµР¶РёС‚ Р»Рё СѓР·Р»Сѓ РґР°РЅРЅР°СЏ SF РёР»Рё РєР°РєР°СЏ-РЅРёР±СѓРґСЊ SF РЅРёР¶Рµ РїРѕ РёРµСЂР°СЂС…РёРё
 bool  CSemanticStructure::HasSemFetOrLower (const CSemNode& Node, const string& SemFet) const
 {
      for (long i=0; i < Node.m_NodeSemFets.size(); i++)
@@ -1224,7 +1224,7 @@ bool CSemanticStructure::CheckGroupBeginAndCase(string ItemStr, size_t NodeNo, l
 {
    const CSemNode&  N = GetNode(NodeNo);
    if (ItemStr.length() > 3)
-   if (ItemStr.substr (ItemStr.length() - 3) == "_мн")
+   if (ItemStr.substr (ItemStr.length() - 3) == "_РјРЅ")
    {
 	   if (       !N.HasOneGrammem (rPlural)
 		      && (N.m_NodeType != MNA)
@@ -1263,11 +1263,11 @@ bool    CSemanticStructure  :: HasLocPrepInBegining (size_t NodeNo) const
 bool CSemanticStructure::IsRusSubj(int iRel) const
 {
 	if( GetRelation(iRel)->
-		 m_SyntacticRelation == "подл")
+		 m_SyntacticRelation == "РїРѕРґР»")
 		return true;
 	long iRusSynRel = GetSynRelBySemRel(iRel);
 	if( iRusSynRel != -1 )
-		if( GetSynRels()[iRusSynRel].m_SynRelName == "ПОДЛ" )
+		if( GetSynRels()[iRusSynRel].m_SynRelName == "РџРћР”Р›" )
 			return true;
 	return false;
 }
@@ -1417,7 +1417,7 @@ extern bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const C
 
 bool CSemanticsHolder::InitializeIndices()
 {
-	// проверка того, что хотя бы один словарь был изменен
+	// РїСЂРѕРІРµСЂРєР° С‚РѕРіРѕ, С‡С‚Рѕ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ СЃР»РѕРІР°СЂСЊ Р±С‹Р» РёР·РјРµРЅРµРЅ
 	     if (   !GetRossHolder(Ross)->HasBeenModified(m_LastIndicesUpdateTime)
 			 && !GetRossHolder(TimeRoss)->HasBeenModified(m_LastIndicesUpdateTime)
 			 && !GetRossHolder(OborRoss)->HasBeenModified(m_LastIndicesUpdateTime)
@@ -1585,7 +1585,7 @@ void  CSemanticStructure::AddSemFet (CSemNode& Node, const string& SemFet)
 };
 
 
-// SF из тезауруса нужно получить до чтения добавочных статей
+// SF РёР· С‚РµР·Р°СѓСЂСѓСЃР° РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РґРѕ С‡С‚РµРЅРёСЏ РґРѕР±Р°РІРѕС‡РЅС‹С… СЃС‚Р°С‚РµР№
 void CSemanticStructure::InitThesSemFet (CSemNode& OutNode, const CSemNode& InNode)
 {
   if ( !IsThesRoss(InNode.GetType()) ) return;
@@ -1679,7 +1679,7 @@ void CSemanticStructure::FindAbstractAdditionArticle (DictTypeEnum type, const C
 		{
 			const CAbstractArticle& A = AbstractArticles[i];
 
-			// проверка GF
+			// РїСЂРѕРІРµСЂРєР° GF
 			long k=0;
 			for (; k < A.m_GramInfos.size(); k++)
 				if (		((W.m_Poses & A.m_GramInfos[k].m_PartOfSpeechMask) > 0)
@@ -1693,15 +1693,15 @@ void CSemanticStructure::FindAbstractAdditionArticle (DictTypeEnum type, const C
 				)
 				continue;
 
-			// проверка КЛАУЗЫ
+			// РїСЂРѕРІРµСЂРєР° РљР›РђРЈР—Р«
 			if (A.m_ClauseTypes.size() > 0)
 				if (!_find(A.m_ClauseTypes, ClauseType))
 					continue;
 
-			// Проверка CAT
+			// РџСЂРѕРІРµСЂРєР° CAT
 			for (k=0; k < A.m_SemTypes.size(); k++)
 			{
-				// если узел был синтаксической вершиной, тогда  считаем, что это LABL.SIT		   
+				// РµСЃР»Рё СѓР·РµР» Р±С‹Р» СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕР№ РІРµСЂС€РёРЅРѕР№, С‚РѕРіРґР°  СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ СЌС‚Рѕ LABL.SIT		   
 				if	(		IsClauseSyntaxRoot 
 					&&	(A.m_SemTypes[k] == "LABL.SIT")			  
 					)
@@ -1717,7 +1717,7 @@ void CSemanticStructure::FindAbstractAdditionArticle (DictTypeEnum type, const C
 				continue;
 
 
-			// Проверка LEX
+			// РџСЂРѕРІРµСЂРєР° LEX
 			for (k=0; k < A.m_LexFets.size(); k++)
 			{
 				if (_find(Node.m_HigherConcepts, A.m_LexFets[k]))
@@ -1729,10 +1729,10 @@ void CSemanticStructure::FindAbstractAdditionArticle (DictTypeEnum type, const C
 				)
 				continue;
 
-			// Проверка SF
+			// РџСЂРѕРІРµСЂРєР° SF
 			for (k=0; k < A.m_SemFets.size(); k++)
 				if	(    !HasSemFetPro(Node, A.m_SemFets[k].c_str()) 
-					&& !HasSemFetOrLower(Node, A.m_SemFets[k].c_str() ) // чтобы +MEDINF добавлялся к тем, которые имеют SET-DEMAN			 
+					&& !HasSemFetOrLower(Node, A.m_SemFets[k].c_str() ) // С‡С‚РѕР±С‹ +MEDINF РґРѕР±Р°РІР»СЏР»СЃСЏ Рє С‚РµРј, РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ SET-DEMAN			 
 					)
 					break;
 
@@ -1764,7 +1764,7 @@ void CSemanticStructure::AddAbstractAdditionVals (DictTypeEnum type, CSemNode& N
 		Node.m_Vals.push_back(V);
 	  };
 
-  	  // добавляем лексичексие фукнции	из добавочных словарных статей
+  	  // РґРѕР±Р°РІР»СЏРµРј Р»РµРєСЃРёС‡РµРєСЃРёРµ С„СѓРєРЅС†РёРё	РёР· РґРѕР±Р°РІРѕС‡РЅС‹С… СЃР»РѕРІР°СЂРЅС‹С… СЃС‚Р°С‚РµР№
       GetRossHolder(type)->GetLexFuncts(AbstractArticles[ArtNo].m_UnitNo, Node.m_LexFunctFields);
 	};
 
@@ -1781,7 +1781,7 @@ bool CSemanticStructure::HasItem (DictTypeEnum DictTy,  WORD UnitNo, const strin
 		return Q.m_Result;
 };
 
-// проверяет часть речи узла
+// РїСЂРѕРІРµСЂСЏРµС‚ С‡Р°СЃС‚СЊ СЂРµС‡Рё СѓР·Р»Р°
 bool   CSemanticStructure::HasPOS (const CSemNode& N, size_t POS) const
 {
 	return (N.m_MainWordNo != -1) && N.GetWord(N.m_MainWordNo).HasPOS(POS);
@@ -1866,7 +1866,7 @@ void CSynRealization::SetEmpty()
 	m_Cortege = TCortege();
 };
 
-// проверяет, приписан ли узлу предлог PrepNo
+// РїСЂРѕРІРµСЂСЏРµС‚, РїСЂРёРїРёСЃР°РЅ Р»Рё СѓР·Р»Сѓ РїСЂРµРґР»РѕРі PrepNo
 bool CSynRealization::HasThePrep (WORD UnitNo) const 
 { 
 	for (long i=0; i < m_Preps.size(); i++)
@@ -1882,23 +1882,23 @@ bool CSynRealization::HasThePrep (WORD UnitNo) const
 void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua) 
 {
 	/*
-	 При выставлении запятых для вводных слов некоторые запятые могут оказать в самом 
-	 конце или самом начале предложения. Их нужно удалить.
+	 РџСЂРё РІС‹СЃС‚Р°РІР»РµРЅРёРё Р·Р°РїСЏС‚С‹С… РґР»СЏ РІРІРѕРґРЅС‹С… СЃР»РѕРІ РЅРµРєРѕС‚РѕСЂС‹Рµ Р·Р°РїСЏС‚С‹Рµ РјРѕРіСѓС‚ РѕРєР°Р·Р°С‚СЊ РІ СЃР°РјРѕРј 
+	 РєРѕРЅС†Рµ РёР»Рё СЃР°РјРѕРј РЅР°С‡Р°Р»Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ. РС… РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ.
 	*/
 	Trim(str);
-	// в начале 
+	// РІ РЅР°С‡Р°Р»Рµ 
 	if (str.length() == 0) return;
 	if (str[0] == ',') str.erase(0,1);
-	// в конце 
+	// РІ РєРѕРЅС†Рµ 
 	if (str.length() == 0) return;
 	if (str[str.length()-1] == ',') str.erase(str.length()-1,1);
 
 
-	// если два соседних слова стоят в кавычках, то нужно объединить эти кавычки
+	// РµСЃР»Рё РґРІР° СЃРѕСЃРµРґРЅРёС… СЃР»РѕРІР° СЃС‚РѕСЏС‚ РІ РєР°РІС‹С‡РєР°С…, С‚Рѕ РЅСѓР¶РЅРѕ РѕР±СЉРµРґРёРЅРёС‚СЊ СЌС‚Рё РєР°РІС‹С‡РєРё
 	// <Quote> X </Quote> <Quote> Y </Quote> -> <Quote> X Y </Quote>
 	for (size_t i=0; i< str.size(); i++)
 	{
-		// открывающую кавычку пишм слитно с  текстом
+		// РѕС‚РєСЂС‹РІР°СЋС‰СѓСЋ РєР°РІС‹С‡РєСѓ РїРёС€Рј СЃР»РёС‚РЅРѕ СЃ  С‚РµРєСЃС‚РѕРј
 		if (str.substr(i, 8) == "</Quote>")
 		{
 			long k=i+8;
@@ -1911,10 +1911,10 @@ void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua)
 
 	};
 
-	// выставлем кавычки 
+	// РІС‹СЃС‚Р°РІР»РµРј РєР°РІС‹С‡РєРё 
 	for (size_t i=0; i< str.size(); i++)
 	{
-		// открывающую кавычку пишм слитно с  текстом
+		// РѕС‚РєСЂС‹РІР°СЋС‰СѓСЋ РєР°РІС‹С‡РєСѓ РїРёС€Рј СЃР»РёС‚РЅРѕ СЃ  С‚РµРєСЃС‚РѕРј
 		if (str.substr(i, 7) == "<Quote>")
 		{
 			for (int k = i+7; k < str.size();)
@@ -1924,7 +1924,7 @@ void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua)
 					str.erase(k,1);
 			str.replace	(i, 7, "\"");
 		};
-		// закрывающую  кавычку пишем слитно с  текстом
+		// Р·Р°РєСЂС‹РІР°СЋС‰СѓСЋ  РєР°РІС‹С‡РєСѓ РїРёС€РµРј СЃР»РёС‚РЅРѕ СЃ  С‚РµРєСЃС‚РѕРј
 		if (str.substr(i, 8) == "</Quote>")
 		{
 			for (int k = i-1; k>=0;i--)
@@ -1937,7 +1937,7 @@ void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua)
 	};
 
 
-	// проходим по предложению и удаляем пробелы перед знаками препинания
+	// РїСЂРѕС…РѕРґРёРј РїРѕ РїСЂРµРґР»РѕР¶РµРЅРёСЋ Рё СѓРґР°Р»СЏРµРј РїСЂРѕР±РµР»С‹ РїРµСЂРµРґ Р·РЅР°РєР°РјРё РїСЂРµРїРёРЅР°РЅРёСЏ
 	StringTokenizer tok(str.c_str(), " ");
 	str.erase();
 	bool last_is_punct = true;
@@ -1950,18 +1950,18 @@ void SetSpacesAndRegisterInSentence (string& str, MorphLanguageEnum Langua)
 						&& !strchr("(){}<>\"",word[0]);
 		if(is_punct && last_is_punct) continue;
 		last_is_punct = is_punct;
-		// последний знак препинания не печатаем
+		// РїРѕСЃР»РµРґРЅРёР№ Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ РЅРµ РїРµС‡Р°С‚Р°РµРј
 		if(is_punct && !tok.has_next()) continue;
-		// если слово, то перед словом должен быть пробел, а если знак 
-		// препинания, то его нужно писать слитно с предыдущим словом, поэтому
-		// пробел не добавляем.
+		// РµСЃР»Рё СЃР»РѕРІРѕ, С‚Рѕ РїРµСЂРµРґ СЃР»РѕРІРѕРј РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РїСЂРѕР±РµР», Р° РµСЃР»Рё Р·РЅР°Рє 
+		// РїСЂРµРїРёРЅР°РЅРёСЏ, С‚Рѕ РµРіРѕ РЅСѓР¶РЅРѕ РїРёСЃР°С‚СЊ СЃР»РёС‚РЅРѕ СЃ РїСЂРµРґС‹РґСѓС‰РёРј СЃР»РѕРІРѕРј, РїРѕСЌС‚РѕРјСѓ
+		// РїСЂРѕР±РµР» РЅРµ РґРѕР±Р°РІР»СЏРµРј.
 		if(!is_punct && tok_count) str += " ";
 		str += word;
 		tok_count++;
 	}
 
-		// Первая буква предложения всегда должна быть прописной
-	// (проходим начальные знаки препинания (типа кавычки)
+		// РџРµСЂРІР°СЏ Р±СѓРєРІР° РїСЂРµРґР»РѕР¶РµРЅРёСЏ РІСЃРµРіРґР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РїСЂРѕРїРёСЃРЅРѕР№
+	// (РїСЂРѕС…РѕРґРёРј РЅР°С‡Р°Р»СЊРЅС‹Рµ Р·РЅР°РєРё РїСЂРµРїРёРЅР°РЅРёСЏ (С‚РёРїР° РєР°РІС‹С‡РєРё)
 	size_t k=0;
 	for (; k < str.size(); k++)
 		if (!ispunct ((BYTE)str[k]))

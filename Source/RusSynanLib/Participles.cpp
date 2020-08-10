@@ -12,18 +12,18 @@ bool CRusSentence::CheckCoordinationOfNounAndParticiple(const CSynHomonym& Parti
 {
 	const CSynHomonym& Noun  = m_Words[NounWordNo].GetSynHomonym(NounHomonymNo);
 	
-	// мальчик, ушедший домой, пришел
+	// РјР°Р»СЊС‡РёРє, СѓС€РµРґС€РёР№ РґРѕРјРѕР№, РїСЂРёС€РµР»
 	if(	 GetRusGramTab()->GleicheGenderNumberCase(Noun.m_CommonGramCode.c_str(), Noun.GetGramCodes().c_str(), Participle.GetGramCodes().c_str()) )
 		return true;
 
-	// мальчик и девочка, ушедшие домой, пришли
+	// РјР°Р»СЊС‡РёРє Рё РґРµРІРѕС‡РєР°, СѓС€РµРґС€РёРµ РґРѕРјРѕР№, РїСЂРёС€Р»Рё
 	CSVI Dummy;
 	if (	(pClause->IsInThisGroup(NounWordNo, SIMILAR_NOUN_GROUPS, Dummy) != NULL)
 		&&  GetRusGramTab()->GleicheCase(Participle.GetGramCodes().c_str(), Noun.GetGramCodes().c_str())
 	   )
 	   return true;
 
-	//Два дома ,построенных на холме, постепенно разрушались.
+	//Р”РІР° РґРѕРјР° ,РїРѕСЃС‚СЂРѕРµРЅРЅС‹С… РЅР° С…РѕР»РјРµ, РїРѕСЃС‚РµРїРµРЅРЅРѕ СЂР°Р·СЂСѓС€Р°Р»РёСЃСЊ.
 	const CGroup*  pNumerNounGroup =  pClause->IsInThisGroup(NounWordNo, NUMERAL_NOUN, Dummy);
 	if (	( pNumerNounGroup != NULL) 
 		&&  ( pNumerNounGroup->GetGrammems() & _QM(rNominativ) )
@@ -40,12 +40,12 @@ bool CRusSentence::FindNounFromTheRightOfParticiple(const CClause* pClause, cons
 	int iType = pClause->FindType(PARTICIPLE_T);
 	assert ( -1 != iType );
 
-	// начинаем идти от причастия вправо
+	// РЅР°С‡РёРЅР°РµРј РёРґС‚Рё РѕС‚ РїСЂРёС‡Р°СЃС‚РёСЏ РІРїСЂР°РІРѕ
 	for(int WordNo = pClause->m_vectorTypes[iType].m_Root.m_WordNo + 1 ; WordNo <= pClause->m_iLastWord ; WordNo++ )
 	{
 		const CSynWord& pWord = m_Words[WordNo];
 
-		// проверка на вложенную клаузу, нужно увеличить индекс WordNo на длину вложенной клаузы
+		// РїСЂРѕРІРµСЂРєР° РЅР° РІР»РѕР¶РµРЅРЅСѓСЋ РєР»Р°СѓР·Сѓ, РЅСѓР¶РЅРѕ СѓРІРµР»РёС‡РёС‚СЊ РёРЅРґРµРєСЃ WordNo РЅР° РґР»РёРЅСѓ РІР»РѕР¶РµРЅРЅРѕР№ РєР»Р°СѓР·С‹
 		int iEncloseCl = GetMinClauseByFirstWord(WordNo);
 		if ( iEncloseCl != -1 )
 		{
@@ -76,10 +76,10 @@ bool CRusSentence::FindNounFromTheRightOfParticiple(const CClause* pClause, cons
 int CRusSentence::FindNounFromTheLeftOfParticiple(const CClause* pClauseWithParticiple, const CSynHomonym& Participle) const
 {
 	
-	// (причастный оборот должен быть отделен запятой)
+	// (РїСЂРёС‡Р°СЃС‚РЅС‹Р№ РѕР±РѕСЂРѕС‚ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РѕС‚РґРµР»РµРЅ Р·Р°РїСЏС‚РѕР№)
 	bool bFoundComma = m_Words[pClauseWithParticiple->m_iFirstWord].m_bComma;
 
-	// начинаем идти по клаузе налево
+	// РЅР°С‡РёРЅР°РµРј РёРґС‚Рё РїРѕ РєР»Р°СѓР·Рµ РЅР°Р»РµРІРѕ
 	for(int WordNo = pClauseWithParticiple->m_iFirstWord ; WordNo >= 0; WordNo-- )
 	{
 		const CSynWord& pWord = m_Words[WordNo];
@@ -90,7 +90,7 @@ int CRusSentence::FindNounFromTheLeftOfParticiple(const CClause* pClauseWithPart
 		assert (CurrentClauseNum != -1);
 		if (m_Clauses[CurrentClauseNum].m_iLastWord + 1 !=  pClauseWithParticiple->m_iFirstWord) continue;
 
-		// должны пройти хотя бы одну запятую ()
+		// РґРѕР»Р¶РЅС‹ РїСЂРѕР№С‚Рё С…РѕС‚СЏ Р±С‹ РѕРґРЅСѓ Р·Р°РїСЏС‚СѓСЋ ()
 		if (bFoundComma)
 			for(int j = 0 ; j < pWord.m_Homonyms.size() ; j++ )
 			{
@@ -131,10 +131,10 @@ bool CRusSentence::RuleForParticiples(int iClauseNum)
 	if( iPart == -1 )
 		return false;
 
-	//пытаемся найти слева
+	//РїС‹С‚Р°РµРјСЃСЏ РЅР°Р№С‚Рё СЃР»РµРІР°
 	int iPrev = FindNounFromTheLeftOfParticiple(pAbstClause, pParticiple.GetSynHomonym(iPart));
 
-	//пытаемся найти слева подходящее сущ.(тогда причастие после определяемого слова)
+	//РїС‹С‚Р°РµРјСЃСЏ РЅР°Р№С‚Рё СЃР»РµРІР° РїРѕРґС…РѕРґСЏС‰РµРµ СЃСѓС‰.(С‚РѕРіРґР° РїСЂРёС‡Р°СЃС‚РёРµ РїРѕСЃР»Рµ РѕРїСЂРµРґРµР»СЏРµРјРѕРіРѕ СЃР»РѕРІР°)
 	if	(			
 					( m_Words[iWord].m_SubordinateConjNo == -1 )
 			&&		(		(pAbstClause->m_iFirstWord != pAbstClause->m_iLastWord ) 
@@ -143,17 +143,17 @@ bool CRusSentence::RuleForParticiples(int iClauseNum)
 							)
 					)
 			&&		(iPrev != -1)
-            &&      (       pAbstClause->m_iLastWord+1 == m_Words.size()  // проверка правой границы  (должен быть знак препинания)
+            &&      (       pAbstClause->m_iLastWord+1 == m_Words.size()  // РїСЂРѕРІРµСЂРєР° РїСЂР°РІРѕР№ РіСЂР°РЅРёС†С‹  (РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ)
                         ||  m_Words[pAbstClause->m_iLastWord+1].HasDes(OPun)
                      )
 		)
 	{
 
 		/*
-			Поскольку мы собираемся вкладывать клаузу, нам приходится удалять
-			все вершины клаузы, кроме найденного причастия и все омонимы причастия
+			РџРѕСЃРєРѕР»СЊРєСѓ РјС‹ СЃРѕР±РёСЂР°РµРјСЃСЏ РІРєР»Р°РґС‹РІР°С‚СЊ РєР»Р°СѓР·Сѓ, РЅР°Рј РїСЂРёС…РѕРґРёС‚СЃСЏ СѓРґР°Р»СЏС‚СЊ
+			РІСЃРµ РІРµСЂС€РёРЅС‹ РєР»Р°СѓР·С‹, РєСЂРѕРјРµ РЅР°Р№РґРµРЅРЅРѕРіРѕ РїСЂРёС‡Р°СЃС‚РёСЏ Рё РІСЃРµ РѕРјРѕРЅРёРјС‹ РїСЂРёС‡Р°СЃС‚РёСЏ
 		*/
-		// уничтожаем другие вершины клаузы
+		// СѓРЅРёС‡С‚РѕР¶Р°РµРј РґСЂСѓРіРёРµ РІРµСЂС€РёРЅС‹ РєР»Р°СѓР·С‹
 		int k = 0;
 		for( ; k < pAbstClause->m_vectorTypes.size() ; k++)
 		{
@@ -164,7 +164,7 @@ bool CRusSentence::RuleForParticiples(int iClauseNum)
 
 			int WordNo = pAbstClause->m_vectorTypes[k].m_Root.m_WordNo;
 
-			//	не будем удалять омоним, если он единственный у слова
+			//	РЅРµ Р±СѓРґРµРј СѓРґР°Р»СЏС‚СЊ РѕРјРѕРЅРёРј, РµСЃР»Рё РѕРЅ РµРґРёРЅСЃС‚РІРµРЅРЅС‹Р№ Сѓ СЃР»РѕРІР°
 			if (pAbstClause->GetWords()[WordNo].GetHomonymsCount() > 1)
 				pAbstClause->DeleteHomonym(pAbstClause->m_vectorTypes[k].m_Root.m_WordNo, pAbstClause->m_vectorTypes[k].m_Root.m_HomonymNo);
 			else
@@ -172,10 +172,10 @@ bool CRusSentence::RuleForParticiples(int iClauseNum)
 			k--;
 		}
 
-		// заново надо найти омоними причастия, поскольку мы в предыдущем цикле удалили некоторые омонимы
+		// Р·Р°РЅРѕРІРѕ РЅР°РґРѕ РЅР°Р№С‚Рё РѕРјРѕРЅРёРјРё РїСЂРёС‡Р°СЃС‚РёСЏ, РїРѕСЃРєРѕР»СЊРєСѓ РјС‹ РІ РїСЂРµРґС‹РґСѓС‰РµРј С†РёРєР»Рµ СѓРґР°Р»РёР»Рё РЅРµРєРѕС‚РѕСЂС‹Рµ РѕРјРѕРЅРёРјС‹
 		iPart = pParticiple.GetHomonymByPOS(PARTICIPLE);
 		int PartWordNo = pAbstClause->m_vectorTypes[iParticipleType].m_Root.m_WordNo;
-		// уничтожаем омонимы причастия (прилагательное или существительное),
+		// СѓРЅРёС‡С‚РѕР¶Р°РµРј РѕРјРѕРЅРёРјС‹ РїСЂРёС‡Р°СЃС‚РёСЏ (РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ РёР»Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ),
 		for(k = 0 ; k < pParticiple.GetHomonymsCount() ; k++)
 		{
 			if(iPart == k) continue;
@@ -188,11 +188,11 @@ bool CRusSentence::RuleForParticiples(int iClauseNum)
 		return EncloseClauseAsWord(iClauseNum, iPrev);
 	}
 	else
-		// пытаемся найти справа (причастие не отделено запятой)
+		// РїС‹С‚Р°РµРјСЃСЏ РЅР°Р№С‚Рё СЃРїСЂР°РІР° (РїСЂРёС‡Р°СЃС‚РёРµ РЅРµ РѕС‚РґРµР»РµРЅРѕ Р·Р°РїСЏС‚РѕР№)
 		if( FindNounFromTheRightOfParticiple(pAbstClause, pParticiple.GetSynHomonym(iPart)  ) )
 		{
-			// тогда нужно удалить клаузный вариант причастия, а если вариант только один, тогда
-			// нужно его отконвертировать в пустыху
+			// С‚РѕРіРґР° РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ РєР»Р°СѓР·РЅС‹Р№ РІР°СЂРёР°РЅС‚ РїСЂРёС‡Р°СЃС‚РёСЏ, Р° РµСЃР»Рё РІР°СЂРёР°РЅС‚ С‚РѕР»СЊРєРѕ РѕРґРёРЅ, С‚РѕРіРґР°
+			// РЅСѓР¶РЅРѕ РµРіРѕ РѕС‚РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ РІ РїСѓСЃС‚С‹С…Сѓ
 			if(pAbstClause->m_vectorTypes.size() == 1)
 			{
 				assert (pAbstClause->m_vectorTypes[0].m_Type == PARTICIPLE_T);

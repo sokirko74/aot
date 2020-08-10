@@ -2,7 +2,7 @@
 #include "GerFormatCaller.h"
 
 
-// Kanzler Gerhard Schröder
+// Kanzler Gerhard SchrÑ†der
 // Bundeskanzler Alexey Sokirko
 // A-Techniker Gerhard Schroder
 bool CGerFormatCaller :: format_for_rank_fam (CGroup& G)

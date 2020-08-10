@@ -6,7 +6,7 @@
 
 
 
-// ==============================   класс CSemPattern ==========================
+// ==============================   РєР»Р°СЃСЃ CSemPattern ==========================
   
 bool CCollocItem::InitCollocItem (string S) 
 {
@@ -50,7 +50,7 @@ bool CCollocItem::IsHole() const
 
 
 
-// ==============================   класс CSemanticsHolder ==========================
+// ==============================   РєР»Р°СЃСЃ CSemanticsHolder ==========================
 
 
 CSemanticsHolder::CSemanticsHolder() 
@@ -92,10 +92,10 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 			{
 				string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 				Trim(S);
-				if (S == "ДОБАВЛЕНИЕ")
+				if (S == "Р”РћР‘РђР’Р›Р•РќРР•")
 					A.m_Type = atAdditionArticle;
 				else
-				   if (S == "ЗАГЛУШКА")
+				   if (S == "Р—РђР“Р›РЈРЁРљРђ")
 					 A.m_Type = atArticlePlug;
 				   else
 					   A.m_Type = atEmptyType;
@@ -180,7 +180,7 @@ void CSemanticsHolder::GetCustomGrammems (string GramFet, QWORD& Grammems, DWORD
 	}
 	else
 	{
-		GramFet = "С "+ GramFet;
+		GramFet = "РЎ "+ GramFet;
 		if (GetRusGramTab()->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G) )
 		{
 			Grammems = G;
@@ -253,17 +253,17 @@ bool CSemanticsHolder::InitTimeThesLists()
 	return true;
 };
 
-// преобразование словаря групп времени в удобный для поиска вид
+// РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СЃР»РѕРІР°СЂСЏ РіСЂСѓРїРї РІСЂРµРјРµРЅРё РІ СѓРґРѕР±РЅС‹Р№ РґР»СЏ РїРѕРёСЃРєР° РІРёРґ
 bool CSemanticsHolder::InitTimeUnits()
 {
- // инициализация констант 
+ // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРЅСЃС‚Р°РЅС‚ 
  BYTE GramFunctDomNo = GetRoss(TimeRoss)->GetDomenNoByDomStr("D_GRAM_FUNCT");
- int AbbrFunctName = GetRoss(TimeRoss)->GetItemNoByItemStr("СОКР", GramFunctDomNo);
- int AbbrFunctPluralName = GetRoss(TimeRoss)->GetItemNoByItemStr("СОКР_мн", GramFunctDomNo);
+ int AbbrFunctName = GetRoss(TimeRoss)->GetItemNoByItemStr("РЎРћРљР ", GramFunctDomNo);
+ int AbbrFunctPluralName = GetRoss(TimeRoss)->GetItemNoByItemStr("РЎРћРљР _РјРЅ", GramFunctDomNo);
  m_TimeAbbrPairs.clear();
  m_TimeUnits.clear();
  
- // идем по всем статьям словаря групп времени 
+ // РёРґРµРј РїРѕ РІСЃРµРј СЃС‚Р°С‚СЊСЏРј СЃР»РѕРІР°СЂСЏ РіСЂСѓРїРї РІСЂРµРјРµРЅРё 
  for (size_t UnitNo =0; UnitNo < GetRoss(TimeRoss)->GetUnitsSize(); UnitNo++)
  {
    try {
@@ -272,13 +272,13 @@ bool CSemanticsHolder::InitTimeUnits()
     U.m_UnitNo = UnitNo;
 	
 	if (!GetRoss(TimeRoss)->IsEmptyArticle(UnitNo))
-		// по словарной статье 
+		// РїРѕ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµ 
 	for (size_t i = GetRoss(TimeRoss)->GetUnitStartPos(UnitNo); i<= GetRoss(TimeRoss)->GetUnitEndPos(UnitNo); i++)
 	{
 	  TCortege C = GetCortege(GetRoss(TimeRoss), i);
-	  //незаполненное поле?
+	  //РЅРµР·Р°РїРѕР»РЅРµРЅРЅРѕРµ РїРѕР»Рµ?
 	  if (C.m_DomItemNos[0] == -1) continue;
-	  // строю массив U.m_Places по полю CONTENT
+	  // СЃС‚СЂРѕСЋ РјР°СЃСЃРёРІ U.m_Places РїРѕ РїРѕР»СЋ CONTENT
 	  string FieldStr = (const char*)GetRoss(TimeRoss)->Fields[C.m_FieldNo].FieldStr;
       if (    (FieldStr == "CONTENT") 
 	       && (C.m_LeafId == 0) 
@@ -297,11 +297,11 @@ bool CSemanticsHolder::InitTimeUnits()
 		 )
 	  {
 		 string Contents = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
-		 if (Contents == "свобод")
+		 if (Contents == "СЃРІРѕР±РѕРґ")
 			 U.m_bCanFillNotTimeValency = true;
 	  };
 
-	  // инициализирую перечень всех необходимых синтаксических отношений их поля SYNREP
+	  // РёРЅРёС†РёР°Р»РёР·РёСЂСѓСЋ РїРµСЂРµС‡РµРЅСЊ РІСЃРµС… РЅРµРѕР±С…РѕРґРёРјС‹С… СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёС… РѕС‚РЅРѕС€РµРЅРёР№ РёС… РїРѕР»СЏ SYNREP
 	  if (    (FieldStr == "SYNREP") 
 	       && (C.m_LeafId == 0) 
 		   && (C.m_BracketLeafId == 0) 
@@ -315,11 +315,11 @@ bool CSemanticsHolder::InitTimeUnits()
 	      U.m_Rels.push_back(CSynRelation(PlaceNo1-1, PlaceNo2-1, SynGrp));
 	  };
 
-	  // инициализирую глобальный перечень наборов (полное временное слово, аббревиатура, аббревиатурная функция),
-	  // который называется m_TimeAbbrPairs
-	  // аббревиатурная функция = АББР_мн, АББР, АББР_ед
-	  // например:(год, гг.,АББР_мн)
-	  //          (год, г., АББР_ед)
+	  // РёРЅРёС†РёР°Р»РёР·РёСЂСѓСЋ РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїРµСЂРµС‡РµРЅСЊ РЅР°Р±РѕСЂРѕРІ (РїРѕР»РЅРѕРµ РІСЂРµРјРµРЅРЅРѕРµ СЃР»РѕРІРѕ, Р°Р±Р±СЂРµРІРёР°С‚СѓСЂР°, Р°Р±Р±СЂРµРІРёР°С‚СѓСЂРЅР°СЏ С„СѓРЅРєС†РёСЏ),
+	  // РєРѕС‚РѕСЂС‹Р№ РЅР°Р·С‹РІР°РµС‚СЃСЏ m_TimeAbbrPairs
+	  // Р°Р±Р±СЂРµРІРёР°С‚СѓСЂРЅР°СЏ С„СѓРЅРєС†РёСЏ = РђР‘Р‘Р _РјРЅ, РђР‘Р‘Р , РђР‘Р‘Р _РµРґ
+	  // РЅР°РїСЂРёРјРµСЂ:(РіРѕРґ, РіРі.,РђР‘Р‘Р _РјРЅ)
+	  //          (РіРѕРґ, Рі., РђР‘Р‘Р _РµРґ)
   	  if (    (FieldStr == "DERIV") 
 	       && (C.m_LeafId == 0) 
 		   && (C.m_BracketLeafId == 0) 
@@ -336,8 +336,8 @@ bool CSemanticsHolder::InitTimeUnits()
 		  m_TimeAbbrPairs.push_back(CAbbrFunct(AbbrForm, FullForm, GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0])));
 	  };
 
-	   // инициализирую перечень лексического заполнения дырок, который берется из 
-	   // полей LEX и PREP
+	   // РёРЅРёС†РёР°Р»РёР·РёСЂСѓСЋ РїРµСЂРµС‡РµРЅСЊ Р»РµРєСЃРёС‡РµСЃРєРѕРіРѕ Р·Р°РїРѕР»РЅРµРЅРёСЏ РґС‹СЂРѕРє, РєРѕС‚РѕСЂС‹Р№ Р±РµСЂРµС‚СЃСЏ РёР· 
+	   // РїРѕР»РµР№ LEX Рё PREP
 
 	   if   (FieldStr == "LEX")
 		 {
@@ -353,7 +353,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		     WORD PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
              if (PrepNo == ErrUnitNo) 
 			 {
-				 string Q =Format ("Предлог %s в статье %s не найден в словаре оборотов", Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
+				 string Q =Format ("РџСЂРµРґР»РѕРі %s РІ СЃС‚Р°С‚СЊРµ %s РЅРµ РЅР°Р№РґРµРЅ РІ СЃР»РѕРІР°СЂРµ РѕР±РѕСЂРѕС‚РѕРІ", Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
 				 ErrorMessage (Q);
 				 continue;
 			 };
@@ -412,7 +412,7 @@ bool CSemanticsHolder::CreateEngCollocsROSSIndex()
 
 
 
-// создает индекс RusEquivs по словарю type
+// СЃРѕР·РґР°РµС‚ РёРЅРґРµРєСЃ RusEquivs РїРѕ СЃР»РѕРІР°СЂСЋ type
 bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, vector<CEngUnitNoToRusUnit>& RusEquivs)
 {
 	RusEquivs.clear();
@@ -662,7 +662,7 @@ bool CSemanticsHolder::TokenizeDoubleConj()
  if (!BuildContensField(GetRoss(OborRoss), vectorOborStr) )
 	 return false;
 
- // идем по всем статьям словаря групп времени 
+ // РёРґРµРј РїРѕ РІСЃРµРј СЃС‚Р°С‚СЊСЏРј СЃР»РѕРІР°СЂСЏ РіСЂСѓРїРї РІСЂРµРјРµРЅРё 
  for (size_t _UnitNo =0; _UnitNo < vectorOborStr.size(); _UnitNo++)
  {
    try 
@@ -689,7 +689,7 @@ bool CSemanticsHolder::TokenizeDoubleConj()
 
 		DoubleConj.m_UnitNo = vectorOborStr[_UnitNo].m_UnitNo;
 		DoubleConj.m_bRepeating = (DoubleConj.m_FirstPart == DoubleConj.m_SecondPart);
-		// проверка на повторы
+		// РїСЂРѕРІРµСЂРєР° РЅР° РїРѕРІС‚РѕСЂС‹
 		long i=0;
 		for (; i < m_DisruptConj.size(); i++)
 			if  (   (m_DisruptConj[i].m_FirstPart == DoubleConj.m_FirstPart)
@@ -720,31 +720,31 @@ bool  CSemanticsHolder::BuildOborottos ()
 		{
 			CObor O;
 			O.m_UnitStr =  GetRoss(OborRoss)->GetEntryStr(UnitNo);
-			if (GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","ПОДЧ_СОЮЗ","D_PART_OF_SPEECH",0,0))
+			if (GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","РџРћР”Р§_РЎРћР®Р—","D_PART_OF_SPEECH",0,0))
 				O.m_bRusSubConj = true;
 
-			if (GetRossHolder(OborRoss)->HasItem (UnitNo, "RESTR","подл","D_VP_SPECIF",0,0))
+			if (GetRossHolder(OborRoss)->HasItem (UnitNo, "RESTR","РїРѕРґР»","D_VP_SPECIF",0,0))
 				O.m_bRusSubConjCanBeAfterSubject = true;
 
-			if (GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","СОЧ_СОЮЗ","D_PART_OF_SPEECH",0,0))
+			if (GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","РЎРћР§_РЎРћР®Р—","D_PART_OF_SPEECH",0,0))
 				O.m_bRusCoordConj = true;
 
-			if	(		GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","ПРЕДЛ","D_PART_OF_SPEECH",0,0) 
-					|| GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","ПРОСТ_ПРЕДЛ","D_PART_OF_SPEECH",0,0) 
+			if	(		GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","РџР Р•Р”Р›","D_PART_OF_SPEECH",0,0) 
+					|| GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","РџР РћРЎРў_РџР Р•Р”Р›","D_PART_OF_SPEECH",0,0) 
 				)
 				O.m_bRusOborPrep = true;
 
-			if (		GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","НАР","D_PART_OF_SPEECH",0,0)
+			if (		GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","РќРђР ","D_PART_OF_SPEECH",0,0)
 &&	GetRossHolder(OborRoss)->HasItem (UnitNo, "SF","MODL","D_SEM_REL",0,0)				)
 				O.m_bRusModalOborAdverbial = true;
 
-			if (	GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","ВВОДН","D_PART_OF_SPEECH",0,0) )
+			if (	GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","Р’Р’РћР”Рќ","D_PART_OF_SPEECH",0,0) )
 				O.m_bRusIntrExpr = true;
 
-			if ( GetRoss(OborRoss)->IncludeArticle(UnitNo, "GF = * НАР : УСИЛ" ) )
+			if ( GetRoss(OborRoss)->IncludeArticle(UnitNo, "GF = * РќРђР  : РЈРЎРР›" ) )
 				O.m_bRusNegOborAdverbial = true;
 
-			if ( GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","НАР","D_PART_OF_SPEECH",0,0) )
+			if ( GetRossHolder(OborRoss)->HasItem (UnitNo, "GF","РќРђР ","D_PART_OF_SPEECH",0,0) )
 				O.m_bRusOborAdverbial = true;
 
 			Oborottos.push_back(O);
@@ -802,10 +802,10 @@ void CSemanticsHolder::GetPrepsFromArticle (const CDictionary* Ross, long UnitNo
 
 
 /*
-Выдает по парадигме прилагательного наречие, которое совпадает с краткой формой среднего рода
-этого прилагательного, например: 
-	"красивый" (ПРИЛ) -> "красиво" (НАР)
-	"лучше" (ПРИЛ) -> "хорошо" (НАР)
+Р’С‹РґР°РµС‚ РїРѕ РїР°СЂР°РґРёРіРјРµ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРіРѕ РЅР°СЂРµС‡РёРµ, РєРѕС‚РѕСЂРѕРµ СЃРѕРІРїР°РґР°РµС‚ СЃ РєСЂР°С‚РєРѕР№ С„РѕСЂРјРѕР№ СЃСЂРµРґРЅРµРіРѕ СЂРѕРґР°
+СЌС‚РѕРіРѕ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРіРѕ, РЅР°РїСЂРёРјРµСЂ: 
+	"РєСЂР°СЃРёРІС‹Р№" (РџР РР›) -> "РєСЂР°СЃРёРІРѕ" (РќРђР )
+	"Р»СѓС‡С€Рµ" (РџР РР›) -> "С…РѕСЂРѕС€Рѕ" (РќРђР )
 */
 UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string AdjWordForm)
 {
@@ -821,7 +821,7 @@ UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string A
 	};
 
 
-	// ищем краткое прилагательное среднего рода
+	// РёС‰РµРј РєСЂР°С‚РєРѕРµ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ СЃСЂРµРґРЅРµРіРѕ СЂРѕРґР°
 	long k=0;
 	for (; k < Paradigm.GetCount(); k++)
 	{
@@ -847,7 +847,7 @@ UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string A
 
 
 // ============================= 
-// построение словосочетаний 
+// РїРѕСЃС‚СЂРѕРµРЅРёРµ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№ 
 //================================
 
 bool FindField (const CDictionary* Ross, long UnitNo, string FieldStr)
@@ -878,8 +878,8 @@ bool IsConditional (const CRossHolder& RossDoc, long UnitNo)
 				if (RossDoc.GetRoss()->GetCortegeItem(i,0) != -1) 
 				{
 					string s =  RossDoc.GetDomItemStrInner(RossDoc.GetRoss()->GetCortegeItem(i,0));
-					if (s == "УСЛ") return true;			
-					assert (s == "БЕЗУСЛ");
+					if (s == "РЈРЎР›") return true;			
+					assert (s == "Р‘Р•Р—РЈРЎР›");
 					return false;
 				};
 
@@ -920,16 +920,16 @@ bool CSemanticsHolder::BuildColloc (string ContentFieldStr, int CollocUnitNo)
 		  TrimLeft(ContentFieldStr);
 		}
 		if (!GetRoss(CollocRoss)->IsEmptyArticle(CollocUnitNo))
-		// по словарной статье 
+		// РїРѕ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµ 
 		for (size_t j = GetRoss(CollocRoss)->GetUnitStartPos(CollocUnitNo); j <= GetRoss(CollocRoss)->GetUnitEndPos(CollocUnitNo); j++)
 		{
 		  TCortege Cort = GetCortege(GetRoss(CollocRoss), j);
-		  //незаполненное поле?
+		  //РЅРµР·Р°РїРѕР»РЅРµРЅРЅРѕРµ РїРѕР»Рµ?
 		  if (Cort.m_DomItemNos[0] == -1) continue;
-		  // строю массив U.m_Places по полю CONTENT
+		  // СЃС‚СЂРѕСЋ РјР°СЃСЃРёРІ U.m_Places РїРѕ РїРѕР»СЋ CONTENT
 		  string FieldStr = (const char*)GetRoss(CollocRoss)->Fields[Cort.m_FieldNo].FieldStr;
 
-		  // инициализирую перечень всех необходимых синтаксических отношений их поля SYNREP
+		  // РёРЅРёС†РёР°Р»РёР·РёСЂСѓСЋ РїРµСЂРµС‡РµРЅСЊ РІСЃРµС… РЅРµРѕР±С…РѕРґРёРјС‹С… СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёС… РѕС‚РЅРѕС€РµРЅРёР№ РёС… РїРѕР»СЏ SYNREP
 		  if (    (FieldStr == "SYNR") 
 			   && (Cort.m_LeafId == 0) 
 			   && (Cort.m_BracketLeafId == 0) 
@@ -1040,10 +1040,10 @@ bool CSemanticsHolder::BuildCollocs()
 		CCollocItemRefCollect* It = InsertRusCollocItemRef(S);
 		It->Refs.push_back(CCollocItemRef(i,k));
 
-		// Добавление совершенного вида
+		// Р”РѕР±Р°РІР»РµРЅРёРµ СЃРѕРІРµСЂС€РµРЅРЅРѕРіРѕ РІРёРґР°
 		StringVector Vec =  GetAspVerb(m_RusCollocs[i].Items[k].Item, false);
 		for (long j=0; j <Vec.size(); j++)
-			if (Vec[j]  !=  S) // почему-то такое бывает? (двувидовые?)
+			if (Vec[j]  !=  S) // РїРѕС‡РµРјСѓ-С‚Рѕ С‚Р°РєРѕРµ Р±С‹РІР°РµС‚? (РґРІСѓРІРёРґРѕРІС‹Рµ?)
 			{
 				CCollocItemRefCollect* It = InsertRusCollocItemRef(Vec[j]);
 				It->Refs.push_back(CCollocItemRef(i,k));

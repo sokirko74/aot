@@ -3,7 +3,7 @@
 #include "../SemanLib/LexFuncts.h"
 
 const int g_PersPronounsCount = 5;
-const char g_PersPronouns[g_PersPronounsCount][MaxWordLen] = {"Я","ТЫ","ОН","ОНА", "ОНО"};
+const char g_PersPronouns[g_PersPronounsCount][MaxWordLen] = {"РЇ","РўР«","РћРќ","РћРќРђ", "РћРќРћ"};
 
 
 bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const
@@ -39,7 +39,7 @@ void CEngSemStructure::ReadMorphFromMainGF(WORD UnitNo, DictTypeEnum type, CSemW
     string UnitStr = GetRoss(type)->GetEntryStr(UnitNo);
 	assert (UnitStr.length() > 0);
 	
-	if( UnitStr[0] == '+' )// Добавочная статья
+	if( UnitStr[0] == '+' )// Р”РѕР±Р°РІРѕС‡РЅР°СЏ СЃС‚Р°С‚СЊСЏ
 	{
 		UnitStr.erase(0,1);
 		if( m_pData->GetEngGramTab()->ProcessPOSAndGrammemsIfCan(UnitStr.c_str(),&pos,&Grammems) )
@@ -203,8 +203,8 @@ bool CEngSemStructure::IsChtoOrKto(int iNode)
 	if(	rusNode.GetWordsSize() != 1)		
 		return false;
 
-	if( (rusNode.GetWord(0).m_Lemma == "КТО") ||
-		(rusNode.GetWord(0).m_Lemma == "ЧТО") )
+	if( (rusNode.GetWord(0).m_Lemma == "РљРўРћ") ||
+		(rusNode.GetWord(0).m_Lemma == "Р§РўРћ") )
 		return true;
 	
 	return false;
@@ -273,7 +273,7 @@ bool CEngSemStructure::IsObjPattern(const CEngSemRelation& Rel ) const
 
 
 /*
-	проверяет,  что один из кортежей в Rel.m_Pattern.m_GramCorteges содержит константу strPattern
+	РїСЂРѕРІРµСЂСЏРµС‚,  С‡С‚Рѕ РѕРґРёРЅ РёР· РєРѕСЂС‚РµР¶РµР№ РІ Rel.m_Pattern.m_GramCorteges СЃРѕРґРµСЂР¶РёС‚ РєРѕРЅСЃС‚Р°РЅС‚Сѓ strPattern
 */
 bool CEngSemStructure::HasGramFet(const CEngSemRelation& Rel, const string strPattern) const
 {
@@ -297,7 +297,7 @@ bool CEngSemStructure::HasGramFet(const CEngSemRelation& Rel, const string strPa
 };
 
 /*
-	проверяет,  что Rel.m_SynReal.m_Cortege содержит константу strPattern
+	РїСЂРѕРІРµСЂСЏРµС‚,  С‡С‚Рѕ Rel.m_SynReal.m_Cortege СЃРѕРґРµСЂР¶РёС‚ РєРѕРЅСЃС‚Р°РЅС‚Сѓ strPattern
 */
 bool CEngSemStructure::IsGramFet(const CEngSemRelation& Rel, const string strPattern) const
 {
@@ -337,7 +337,7 @@ bool CEngSemStructure::IsSubj(const CEngSemRelation& Rel) const
 	if( Rel.m_RusRel != -1 && RusStr.IsRusSubj(Rel.m_RusRel) )
 		return true;
 
-	// копул прозрачен для подлежащего
+	// РєРѕРїСѓР» РїСЂРѕР·СЂР°С‡РµРЅ РґР»СЏ РїРѕРґР»РµР¶Р°С‰РµРіРѕ
 	if( m_Nodes[Rel.m_TargetNodeNo].m_NodeType == Copul )
 	{
 		vector<long> rels;
@@ -411,8 +411,8 @@ bool CEngSemStructure::HasSubjAsFirstValency(const CEngSemNode& N)
 };
 
 /*
-	В некоторых глаголах subj приписан не самой первой  валнтности, например, "seem", 
-	поэтому приходится  его искать
+	Р’ РЅРµРєРѕС‚РѕСЂС‹С… РіР»Р°РіРѕР»Р°С… subj РїСЂРёРїРёСЃР°РЅ РЅРµ СЃР°РјРѕР№ РїРµСЂРІРѕР№  РІР°Р»РЅС‚РЅРѕСЃС‚Рё, РЅР°РїСЂРёРјРµСЂ, "seem", 
+	РїРѕСЌС‚РѕРјСѓ РїСЂРёС…РѕРґРёС‚СЃСЏ  РµРіРѕ РёСЃРєР°С‚СЊ
 */
 bool CEngSemStructure::FindSubjPattern(const CEngSemNode& N, CSemPattern& Result)
 {
@@ -494,8 +494,8 @@ void CEngSemStructure::HideCopul()
 			}
 			else
 			{
-				// Иначе просто удалим Copul (хотя мы этот случай не понимаем, 
-				// но он был)
+				// РРЅР°С‡Рµ РїСЂРѕСЃС‚Рѕ СѓРґР°Р»РёРј Copul (С…РѕС‚СЏ РјС‹ СЌС‚РѕС‚ СЃР»СѓС‡Р°Р№ РЅРµ РїРѕРЅРёРјР°РµРј, 
+				// РЅРѕ РѕРЅ Р±С‹Р»)
 				DelNode(i);
 				i--;
 
@@ -506,8 +506,8 @@ void CEngSemStructure::HideCopul()
 
 
 
-// опираясь на слот m_bSourceClauseMain, переворачиваем межклаузные стрелки,
-//  так чтобы они всегда втыкались в подчинемую клаузу
+// РѕРїРёСЂР°СЏСЃСЊ РЅР° СЃР»РѕС‚ m_bSourceClauseMain, РїРµСЂРµРІРѕСЂР°С‡РёРІР°РµРј РјРµР¶РєР»Р°СѓР·РЅС‹Рµ СЃС‚СЂРµР»РєРё,
+//  С‚Р°Рє С‡С‚РѕР±С‹ РѕРЅРё РІСЃРµРіРґР° РІС‚С‹РєР°Р»РёСЃСЊ РІ РїРѕРґС‡РёРЅРµРјСѓСЋ РєР»Р°СѓР·Сѓ
 void CEngSemStructure::ReverseClauseRel()
 {
 	for(int i = 0 ; i < m_Relations.size() ; i++ )
@@ -567,7 +567,7 @@ bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, WORD UnitNo
 	for(int i = 0 ; i < corteges.size() ; i++ )
 	{
 			if( corteges[i].m_DomItemNos[0] != -1 )
-				if( string("ЗАГЛУШКА") == (const char*)RossHolder->GetRoss()->GetDomItemStr(corteges[i].m_DomItemNos[0])  )
+				if( string("Р—РђР“Р›РЈРЁРљРђ") == (const char*)RossHolder->GetRoss()->GetDomItemStr(corteges[i].m_DomItemNos[0])  )
 					return true;
 	}
 	return false;
@@ -634,14 +634,14 @@ void CEngSemStructure::FreeWordNo(long WordNo)
 }
 
 
-// узел является самой левой вершиной клаузы	
+// СѓР·РµР» СЏРІР»СЏРµС‚СЃСЏ СЃР°РјРѕР№ Р»РµРІРѕР№ РІРµСЂС€РёРЅРѕР№ РєР»Р°СѓР·С‹	
 bool CEngSemStructure::IsLeftClauseTop(long NodeNo) const
 {
    return GetLeftClauseTop(m_Nodes[NodeNo].m_ClauseNo) == NodeNo;
 }
 
 
-// самая левая вершина клаузы	
+// СЃР°РјР°СЏ Р»РµРІР°СЏ РІРµСЂС€РёРЅР° РєР»Р°СѓР·С‹	
 long  CEngSemStructure::GetLeftClauseTop(long ClauseNo) const
 {
    vector<long> roots;	
@@ -684,7 +684,7 @@ struct CClauseRootProps {
 		if (m_NodesCount != X.m_NodesCount)
 			return m_NodesCount < X.m_NodesCount;
 
-		// вернем что-нибудь, чтобы не зациклив.
+		// РІРµСЂРЅРµРј С‡С‚Рѕ-РЅРёР±СѓРґСЊ, С‡С‚РѕР±С‹ РЅРµ Р·Р°С†РёРєР»РёРІ.
 		return m_RootNodeNo < X.m_RootNodeNo;
 	};
 
@@ -697,8 +697,8 @@ bool  CEngSemStructure::IsTheVeryLeftNodeOfClause(long NodeNo) const
 	long w_pos =  RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetMinWordNo();
 	long cl_no =  RusStr.GetNode(m_Nodes[NodeNo].RusNode).m_ClauseNo;
 
-	// если найдется узел, который стоял раньше узла node, то э
-	// то не opener
+	// РµСЃР»Рё РЅР°Р№РґРµС‚СЃСЏ СѓР·РµР», РєРѕС‚РѕСЂС‹Р№ СЃС‚РѕСЏР» СЂР°РЅСЊС€Рµ СѓР·Р»Р° node, С‚Рѕ СЌ
+	// С‚Рѕ РЅРµ opener
 	for (long i=0; i < m_Nodes.size();i++)
 	  if( m_Nodes[i].RusNode != -1)
 	  	 if (RusStr.GetNode(m_Nodes[i].RusNode).m_ClauseNo == cl_no) 
@@ -768,7 +768,7 @@ bool CEngSemStructure::has_plural_rel(long NodeNo) const
 	for(int i = 0; i < rels.size(); i++){
 if(m_Relations[rels[i]].m_Valency.m_RelationStr == "QUANTIT"){			const CEngSemNode& node = m_Nodes[m_Relations[rels[i]].m_TargetNodeNo];
 
-			// случай how_much и how_many, для которых написан специальный алгоритм
+			// СЃР»СѓС‡Р°Р№ how_much Рё how_many, РґР»СЏ РєРѕС‚РѕСЂС‹С… РЅР°РїРёСЃР°РЅ СЃРїРµС†РёР°Р»СЊРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј
 			if(node.m_Words.size() != 1) return false;
 
 			float Number = atof (node.m_Words[0].m_Word.c_str());
@@ -779,7 +779,7 @@ if(m_Relations[rels[i]].m_Valency.m_RelationStr == "QUANTIT"){			const CEngSemNo
 // gri
 
 			if(    ! ( (Number != 0) && (Number <2))
-				&&   node.m_Words[0].m_Lemma != "ОДИН"
+				&&   node.m_Words[0].m_Lemma != "РћР”РРќ"
 			  )
 			return true;
 

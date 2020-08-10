@@ -148,8 +148,8 @@ public:
 	bool  format_for_dir_obj_rev(CGroup& G);
 	bool  format_for_verb_inf(CGroup& G);
 
-	bool  format_for_partic_clause(CGroup& G); //правило построения группы с причастным оборотом в постпозиции;
-	bool  format_for_whose_clause(CGroup& G); //правило построения группы с придаточным определительным;	
+	bool  format_for_partic_clause(CGroup& G); //РїСЂР°РІРёР»Рѕ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂСѓРїРїС‹ СЃ РїСЂРёС‡Р°СЃС‚РЅС‹Рј РѕР±РѕСЂРѕС‚РѕРј РІ РїРѕСЃС‚РїРѕР·РёС†РёРё;
+	bool  format_for_whose_clause(CGroup& G); //РїСЂР°РІРёР»Рѕ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂСѓРїРїС‹ СЃ РїСЂРёРґР°С‚РѕС‡РЅС‹Рј РѕРїСЂРµРґРµР»РёС‚РµР»СЊРЅС‹Рј;	
 	bool  format_for_adj_in_commas_preposition(CGroup& G);
 	bool  format_for_plural_noun_adj(CGroup& G);
 
@@ -181,16 +181,16 @@ protected:
 
 inline bool CanNumeralBeNoun(const char* s)
 {
-	return !strcmp(s, "ДВОЕ") 
-		|| !strcmp(s, "ТРОЕ") 
-		|| !strcmp(s, "ЧЕТВЕРО") 
-		|| !strcmp(s, "ПЯТЕРО") 
-		|| !strcmp(s, "ШЕСТЕРО")
-		|| !strcmp(s, "СЕМЕРО") 
-		|| !strcmp(s, "ВОСЬМЕРО") 
-		|| !strcmp(s, "ДЕВЯТЕРО")
-		|| !strcmp(s, "ДЕСЯТЕРО")
-		|| !strcmp(s, "ОБА");
+	return !strcmp(s, "Р”Р’РћР•") 
+		|| !strcmp(s, "РўР РћР•") 
+		|| !strcmp(s, "Р§Р•РўР’Р•Р Рћ") 
+		|| !strcmp(s, "РџРЇРўР•Р Рћ") 
+		|| !strcmp(s, "РЁР•РЎРўР•Р Рћ")
+		|| !strcmp(s, "РЎР•РњР•Р Рћ") 
+		|| !strcmp(s, "Р’РћРЎР¬РњР•Р Рћ") 
+		|| !strcmp(s, "Р”Р•Р’РЇРўР•Р Рћ")
+		|| !strcmp(s, "Р”Р•РЎРЇРўР•Р Рћ")
+		|| !strcmp(s, "РћР‘Рђ");
 };
 
 

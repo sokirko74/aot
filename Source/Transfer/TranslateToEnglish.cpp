@@ -42,7 +42,7 @@ void CEngSemStructure::IndexSemFets()
 	{
 		CSemPattern P;
 		m_Nodes[NodeNo].m_NodeSemFets.clear();
-		// загружаем SF из словарной статьи 
+		// Р·Р°РіСЂСѓР¶Р°РµРј SF РёР· СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё 
 		if (m_Nodes[NodeNo].GetUnitNo() != ErrUnitNo)
 		{
 			P.InitSemPattern(GetRossHolder(m_Nodes[NodeNo].GetType()), m_Nodes[NodeNo].GetUnitNo(),0, 0);
@@ -50,14 +50,14 @@ void CEngSemStructure::IndexSemFets()
 				m_Nodes[NodeNo].m_NodeSemFets = GetIndexedSemFets(P, false, true);
 		};
 
-		// если в словарной статье нет SF, тогда
-		// загружаем SF их тезауруса
+		// РµСЃР»Рё РІ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµ РЅРµС‚ SF, С‚РѕРіРґР°
+		// Р·Р°РіСЂСѓР¶Р°РµРј SF РёС… С‚РµР·Р°СѓСЂСѓСЃР°
 		if (m_Nodes[NodeNo].m_NodeSemFets.size() == 0)
 			if (m_Nodes[NodeNo].RusNode != -1)
 				InitThesSemFet(m_Nodes[NodeNo], RusStr.GetNode(m_Nodes[NodeNo].RusNode));
 
-		// если в тезаурусе  нет SF, тогда
-		// загружаем SF из русского узла
+		// РµСЃР»Рё РІ С‚РµР·Р°СѓСЂСѓСЃРµ  РЅРµС‚ SF, С‚РѕРіРґР°
+		// Р·Р°РіСЂСѓР¶Р°РµРј SF РёР· СЂСѓСЃСЃРєРѕРіРѕ СѓР·Р»Р°
 		if	(		m_Nodes[NodeNo].m_NodeSemFets.empty()
 				&&	(m_Nodes[NodeNo].RusNode != -1)
 			)
@@ -68,7 +68,7 @@ void CEngSemStructure::IndexSemFets()
 			 m_Nodes[NodeNo].m_NodeSemFets = GetIndexedSemFets(P, false, true);
 		 };
 
-		// добавочные статьи можно смело игнорировать
+		// РґРѕР±Р°РІРѕС‡РЅС‹Рµ СЃС‚Р°С‚СЊРё РјРѕР¶РЅРѕ СЃРјРµР»Рѕ РёРіРЅРѕСЂРёСЂРѕРІР°С‚СЊ
 
 	};
 
@@ -244,7 +244,7 @@ void CEngSemStructure::AssertValidGraph()
 {
   CSemanticStructure::AssertValidGraph();
 
- // проверка правильности всех WordNo
+ // РїСЂРѕРІРµСЂРєР° РїСЂР°РІРёР»СЊРЅРѕСЃС‚Рё РІСЃРµС… WordNo
  for( int i=0; i<m_Nodes.size(); i++)
  {
 		int iMainWordNo = m_Nodes[i].m_MainWordNo;
@@ -254,7 +254,7 @@ void CEngSemStructure::AssertValidGraph()
 		assert ( iWordNo !=-1 );
  }
 
-  // проверка всех ClauseNo
+  // РїСЂРѕРІРµСЂРєР° РІСЃРµС… ClauseNo
  for(int i=0; i<m_Nodes.size(); i++)
  {
 	 assert ((m_Nodes[i].m_ClauseNo  != -1) && (m_Nodes[i].m_ClauseNo  < m_Clauses.size()) );
@@ -289,10 +289,10 @@ void  CEngSemStructure::SetPositionOfChildrenByGrammems (long NodeNo, QWORD Gram
 };
 
 /*
-  пример: статья "the...the"
-  Ищем межклаузные стрелки с союзом, идем в статью, если там есть поле вида 
-  POSi = g : p, где i=1,2, g - анг. граммемы, p - позиция. Берем i-ый актант
-  союза, ищем все его актанты, у которых есть граммемы g, проставляем им позицию p.
+  РїСЂРёРјРµСЂ: СЃС‚Р°С‚СЊСЏ "the...the"
+  РС‰РµРј РјРµР¶РєР»Р°СѓР·РЅС‹Рµ СЃС‚СЂРµР»РєРё СЃ СЃРѕСЋР·РѕРј, РёРґРµРј РІ СЃС‚Р°С‚СЊСЋ, РµСЃР»Рё С‚Р°Рј РµСЃС‚СЊ РїРѕР»Рµ РІРёРґР° 
+  POSi = g : p, РіРґРµ i=1,2, g - Р°РЅРі. РіСЂР°РјРјРµРјС‹, p - РїРѕР·РёС†РёСЏ. Р‘РµСЂРµРј i-С‹Р№ Р°РєС‚Р°РЅС‚
+  СЃРѕСЋР·Р°, РёС‰РµРј РІСЃРµ РµРіРѕ Р°РєС‚Р°РЅС‚С‹, Сѓ РєРѕС‚РѕСЂС‹С… РµСЃС‚СЊ РіСЂР°РјРјРµРјС‹ g, РїСЂРѕСЃС‚Р°РІР»СЏРµРј РёРј РїРѕР·РёС†РёСЋ p.
 */
 void  CEngSemStructure::SetPositionsFromConj ()
 {
@@ -331,13 +331,13 @@ void  CEngSemStructure::SetPositionsFromConj ()
 }
 
 /*
-Ищем отношение ЭЛЕКТ_ИГ типа ЭЛЕКТ(one, boy) и переводим его в английскую конструкцию 
-one of the boy. Для этого надо числительное сделать хозяином именной группы.
+РС‰РµРј РѕС‚РЅРѕС€РµРЅРёРµ Р­Р›Р•РљРў_РР“ С‚РёРїР° Р­Р›Р•РљРў(one, boy) Рё РїРµСЂРµРІРѕРґРёРј РµРіРѕ РІ Р°РЅРіР»РёР№СЃРєСѓСЋ РєРѕРЅСЃС‚СЂСѓРєС†РёСЋ 
+one of the boy. Р”Р»СЏ СЌС‚РѕРіРѕ РЅР°РґРѕ С‡РёСЃР»РёС‚РµР»СЊРЅРѕРµ СЃРґРµР»Р°С‚СЊ С…РѕР·СЏРёРЅРѕРј РёРјРµРЅРЅРѕР№ РіСЂСѓРїРїС‹.
 */
 void  CEngSemStructure::SetSelectiveRelations()
 {
 	for (long RelNo=0; RelNo< m_Relations.size(); RelNo++)
-	if ( m_Relations[RelNo].m_SyntacticRelation == "ЭЛЕКТ_ИГ" )
+	if ( m_Relations[RelNo].m_SyntacticRelation == "Р­Р›Р•РљРў_РР“" )
 	{
 		MoveIncomingRelations(m_Relations[RelNo].m_SourceNodeNo,m_Relations[RelNo].m_TargetNodeNo);
 		MoveIncomingDopRelations(m_Relations[RelNo].m_SourceNodeNo,m_Relations[RelNo].m_TargetNodeNo);
@@ -350,11 +350,11 @@ void  CEngSemStructure::SetSelectiveRelations()
 
 
 /*
-Если у глагола выражено более двух валентностей (суб, об и еще что-то)
-и у одной валентности есть придаточное определительное, а у другой нет, тогда
-валентность без определительного должна идти до валнтности с определительной.
-Например, I give the box which you like to you - плохо
-		а лучше 	I give to you the box which you like 
+Р•СЃР»Рё Сѓ РіР»Р°РіРѕР»Р° РІС‹СЂР°Р¶РµРЅРѕ Р±РѕР»РµРµ РґРІСѓС… РІР°Р»РµРЅС‚РЅРѕСЃС‚РµР№ (СЃСѓР±, РѕР± Рё РµС‰Рµ С‡С‚Рѕ-С‚Рѕ)
+Рё Сѓ РѕРґРЅРѕР№ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё РµСЃС‚СЊ РїСЂРёРґР°С‚РѕС‡РЅРѕРµ РѕРїСЂРµРґРµР»РёС‚РµР»СЊРЅРѕРµ, Р° Сѓ РґСЂСѓРіРѕР№ РЅРµС‚, С‚РѕРіРґР°
+РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ Р±РµР· РѕРїСЂРµРґРµР»РёС‚РµР»СЊРЅРѕРіРѕ РґРѕР»Р¶РЅР° РёРґС‚Рё РґРѕ РІР°Р»РЅС‚РЅРѕСЃС‚Рё СЃ РѕРїСЂРµРґРµР»РёС‚РµР»СЊРЅРѕР№.
+РќР°РїСЂРёРјРµСЂ, I give the box which you like to you - РїР»РѕС…Рѕ
+		Р° Р»СѓС‡С€Рµ 	I give to you the box which you like 
 */
 void  CEngSemStructure::SetLongRelations()
 {
@@ -414,7 +414,7 @@ void  CEngSemStructure::SetLongRelations()
 
 
 
-// непроинтерпретированный дательный падеж переводим предлогом to
+// РЅРµРїСЂРѕРёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°РЅРЅС‹Р№ РґР°С‚РµР»СЊРЅС‹Р№ РїР°РґРµР¶ РїРµСЂРµРІРѕРґРёРј РїСЂРµРґР»РѕРіРѕРј to
 bool CEngSemStructure::TranslateCasesIfNeed (long NodeNo)
 {
 	vector<long> Rels;
@@ -497,7 +497,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 		m_InterpretedRusNodes.clear();
 
 		
-// находим все английские эквиваленты
+// РЅР°С…РѕРґРёРј РІСЃРµ Р°РЅРіР»РёР№СЃРєРёРµ СЌРєРІРёРІР°Р»РµРЅС‚С‹
 		FindEnglishEquivMain(mapRNodeToENode);
 		ResetAllReachedFlags<CEngSemStructure>(*this);
 
@@ -517,11 +517,11 @@ bool CEngSemStructure::TranslateToEnglish( )
 		
 
 		
-		 //создаю строку для терминов, которые в русской структуре  были
-		 //один словом. Такие термины интерпретируются либо полными аннглийским словарными статьями
-		 //из тезауруса, либо статьями-заглушками  из АОСС.
-		 //В любом случае, у них должен не равен -1 СSemNode::m_TerminId.
-		 //Да.. аббревиатуры обрабатываются отдельно (translate_abbr_termin_node)
+		 //СЃРѕР·РґР°СЋ СЃС‚СЂРѕРєСѓ РґР»СЏ С‚РµСЂРјРёРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ РІ СЂСѓСЃСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ  Р±С‹Р»Рё
+		 //РѕРґРёРЅ СЃР»РѕРІРѕРј. РўР°РєРёРµ С‚РµСЂРјРёРЅС‹ РёРЅС‚РµСЂРїСЂРµС‚РёСЂСѓСЋС‚СЃСЏ Р»РёР±Рѕ РїРѕР»РЅС‹РјРё Р°РЅРЅРіР»РёР№СЃРєРёРј СЃР»РѕРІР°СЂРЅС‹РјРё СЃС‚Р°С‚СЊСЏРјРё
+		 //РёР· С‚РµР·Р°СѓСЂСѓСЃР°, Р»РёР±Рѕ СЃС‚Р°С‚СЊСЏРјРё-Р·Р°РіР»СѓС€РєР°РјРё  РёР· РђРћРЎРЎ.
+		 //Р’ Р»СЋР±РѕРј СЃР»СѓС‡Р°Рµ, Сѓ РЅРёС… РґРѕР»Р¶РµРЅ РЅРµ СЂР°РІРµРЅ -1 РЎSemNode::m_TerminId.
+		 //Р”Р°.. Р°Р±Р±СЂРµРІРёР°С‚СѓСЂС‹ РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‚СЃСЏ РѕС‚РґРµР»СЊРЅРѕ (translate_abbr_termin_node)
 		
 		for (int i=0; i< m_Nodes.size(); i++)
 		if (    ( m_Nodes[i].m_TerminId != -1)
@@ -543,10 +543,10 @@ bool CEngSemStructure::TranslateToEnglish( )
 //*	
 	try {
 
-		// Инициализируем перечень SF 
+		// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРµСЂРµС‡РµРЅСЊ SF 
 		IndexSemFets();
 
-// переводим актанты
+// РїРµСЂРµРІРѕРґРёРј Р°РєС‚Р°РЅС‚С‹
 		ResetAllReachedFlags<CEngSemStructure>(*this);
 		m_InterpretedRusNodes.clear();
 		
@@ -574,7 +574,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 
 	try 
 	{
-// добавляем общие алгоритмы
+// РґРѕР±Р°РІР»СЏРµРј РѕР±С‰РёРµ Р°Р»РіРѕСЂРёС‚РјС‹
 		vector<long> algNodes;
 	
 		for( int i=0; i<m_Nodes.size(); i++ )
@@ -608,7 +608,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 		for( int j=0; j<algNodes.size(); j++ )
 			ApplyALG_it(algNodes[j]);
 
-		//добавление словообразовательных граммем,
+		//РґРѕР±Р°РІР»РµРЅРёРµ СЃР»РѕРІРѕРѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅС‹С… РіСЂР°РјРјРµРј,
 		AddFixedGrammemsToNode();
 		InitArticleField();
 
@@ -657,15 +657,15 @@ bool CEngSemStructure::TranslateToEnglish( )
 
 ////
 
-// добавляем межклаузные алгоритмы
+// РґРѕР±Р°РІР»СЏРµРј РјРµР¶РєР»Р°СѓР·РЅС‹Рµ Р°Р»РіРѕСЂРёС‚РјС‹
 		GetAlgNodes(algNodes);
 		for( int j=0; j<algNodes.size(); j++ )
 			ApplyALG_compl_obj(algNodes[j]);
 
 		TranslateClauseRels();
 
-		// после TranslateClauseRels приходится снова запускть InitArticleField из-за того, что
-		// в TranslateClauseRels причастия обращаются в which-клаузу, которая  влияет на артикль
+		// РїРѕСЃР»Рµ TranslateClauseRels РїСЂРёС…РѕРґРёС‚СЃСЏ СЃРЅРѕРІР° Р·Р°РїСѓСЃРєС‚СЊ InitArticleField РёР·-Р·Р° С‚РѕРіРѕ, С‡С‚Рѕ
+		// РІ TranslateClauseRels РїСЂРёС‡Р°СЃС‚РёСЏ РѕР±СЂР°С‰Р°СЋС‚СЃСЏ РІ which-РєР»Р°СѓР·Сѓ, РєРѕС‚РѕСЂР°СЏ  РІР»РёСЏРµС‚ РЅР° Р°СЂС‚РёРєР»СЊ
 		InitArticleField();
 
 		RefineEngCollocPreps();
@@ -687,12 +687,12 @@ bool CEngSemStructure::TranslateToEnglish( )
 			EngVerbTenseEnum AVREM_Tense = handle_AVREM_field(algNodes[j],true,engNode.RusNode);
 			if( AVREM_Tense != zero_tn )
 			{
-				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,"по полю RUSETENSE");
+				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,"РїРѕ РїРѕР»СЋ RUSETENSE");
 				CorrectTenseByDictVerbFeatures(engNode); // "RESTR" "not_cont"
 			}
 		}
 
-// вопросительные предложения
+// РІРѕРїСЂРѕСЃРёС‚РµР»СЊРЅС‹Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ
 		if( !HandleQuestionNode() )
 		{
 			for( long ClauseNo=0; ClauseNo<m_Clauses.size(); ClauseNo++ )
@@ -717,10 +717,10 @@ bool CEngSemStructure::TranslateToEnglish( )
 	};
 
 	try{
-		// ==============	перводим тайм-группы
+		// ==============	РїРµСЂРІРѕРґРёРј С‚Р°Р№Рј-РіСЂСѓРїРїС‹
 		ResetAllReachedFlags<CEngSemStructure>(*this);
 		for( long i=0; i<m_Nodes.size(); i++ )
-			// процедура удаляет узлы, поэтому нужно начать сначала
+			// РїСЂРѕС†РµРґСѓСЂР° СѓРґР°Р»СЏРµС‚ СѓР·Р»С‹, РїРѕСЌС‚РѕРјСѓ РЅСѓР¶РЅРѕ РЅР°С‡Р°С‚СЊ СЃРЅР°С‡Р°Р»Р°
 			if (translate_time_node(i)) i = -1;
 	}
 	catch (...)
@@ -731,10 +731,10 @@ bool CEngSemStructure::TranslateToEnglish( )
 	};		
 	
 	//*
-		// ==============	переводим термины
+		// ==============	РїРµСЂРµРІРѕРґРёРј С‚РµСЂРјРёРЅС‹
 	try {
 		for ( long i=0; i<m_Nodes.size(); i++ )
-			// процедура удаляет узлы, поэтому нужно начать сначала
+			// РїСЂРѕС†РµРґСѓСЂР° СѓРґР°Р»СЏРµС‚ СѓР·Р»С‹, РїРѕСЌС‚РѕРјСѓ РЅСѓР¶РЅРѕ РЅР°С‡Р°С‚СЊ СЃРЅР°С‡Р°Р»Р°
 			if (translate_termin_node(i)) i = -1;
 
 		for ( int i=0; i<m_Nodes.size(); i++ )
@@ -747,7 +747,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 		return false;
 
 	};		
-		// ==============	переводим бинарным словарем примитивные узлы
+		// ==============	РїРµСЂРµРІРѕРґРёРј Р±РёРЅР°СЂРЅС‹Рј СЃР»РѕРІР°СЂРµРј РїСЂРёРјРёС‚РёРІРЅС‹Рµ СѓР·Р»С‹
 	try{
 		for( long i=0; i<m_Nodes.size(); i++ )
 			translate_binary(i);
@@ -761,8 +761,8 @@ bool CEngSemStructure::TranslateToEnglish( )
 	//*
 	try {
 		
-		 //добавление словообразовательных граммем, для всех узлов (хотя 
-		 //можно только для тех, которые недавно созданы)
+		 //РґРѕР±Р°РІР»РµРЅРёРµ СЃР»РѕРІРѕРѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅС‹С… РіСЂР°РјРјРµРј, РґР»СЏ РІСЃРµС… СѓР·Р»РѕРІ (С…РѕС‚СЏ 
+		 //РјРѕР¶РЅРѕ С‚РѕР»СЊРєРѕ РґР»СЏ С‚РµС…, РєРѕС‚РѕСЂС‹Рµ РЅРµРґР°РІРЅРѕ СЃРѕР·РґР°РЅС‹)
 		
 		AddFixedGrammemsToNode();
 
@@ -785,7 +785,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 		ApplyModalVerbTenseRule(); // "can" | "must" -> "be able"+(to) | "have"+(to)
 		BuildAuxiliaryVerbs();
 
-//Gri - удалим все позиции на связях, в которых я не уверен		
+//Gri - СѓРґР°Р»РёРј РІСЃРµ РїРѕР·РёС†РёРё РЅР° СЃРІСЏР·СЏС…, РІ РєРѕС‚РѕСЂС‹С… СЏ РЅРµ СѓРІРµСЂРµРЅ		
 		if( !IsConnected() )
 		{
 			for( int i=0; i<m_Relations.size(); i++ )

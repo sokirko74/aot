@@ -231,8 +231,8 @@ void CVisualSentences::BuildRels(CString& report)
 		for(int i = 0 ; i < piSentCollection->SentencesCount ; i++ )
 		{
 			
-			//file << "Sentence ¹ " << i << endl;
-			report += "Sentence ¹ ";
+			//file << "Sentence â„– " << i << endl;
+			report += "Sentence â„– ";
 			CString ss;
 			ss.Format("%d ", i);
 			report += ss;

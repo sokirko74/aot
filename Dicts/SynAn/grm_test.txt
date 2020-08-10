@@ -1,5 +1,5 @@
-[NP] -> [TOKEN grm="ั" root];
+[NP] -> [TOKEN grm="ะก" root];
 [NP] -> [NP root] [TOKEN atomic];
 [NP] -> [NP root] ',' [TOKEN relative];
-[NP] -> [TOKEN grm="ฯ"] [NP root];
+[NP] -> [TOKEN grm="ะ"] [NP root];
 [ROOT] -> [NP];

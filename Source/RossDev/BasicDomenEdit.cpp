@@ -127,7 +127,7 @@ void CBasicDomainEdit::AddItem(CString Item)
 	m_pRossDoc->SetModifiedFlag(TRUE);
 
 };
-// добавление
+// РґРѕР±Р°РІР»РµРЅРёРµ
 void CBasicDomainEdit::OnAddButton() 
 {
 	// TODO: Add your control notification handler code here
@@ -137,7 +137,7 @@ void CBasicDomainEdit::OnAddButton()
   OutBuffer[0] =0;
   if (GetRoss()->m_Domens[m_DomNo].Source == dsUnion)
   {
-      if (!InputBox ("Новый домен", OutBuffer, 100))
+      if (!InputBox ("РќРѕРІС‹Р№ РґРѕРјРµРЅ", OutBuffer, 100))
 		  return;
 
 	  if (GetRoss()->GetDomenNoByDomStr(OutBuffer) == ErrUChar)
@@ -176,7 +176,7 @@ void CBasicDomainEdit::OnAddButton()
 	strcpy (OutBuffer, Q);
   }
   else
-    if (!InputBox ("Новое значение", OutBuffer, 100))
+    if (!InputBox ("РќРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ", OutBuffer, 100))
 		return;
     AddItem(CString (OutBuffer));
 
@@ -187,7 +187,7 @@ void CBasicDomainEdit::OnAddButton()
   };
 }
 
-// удалить 
+// СѓРґР°Р»РёС‚СЊ 
 void CBasicDomainEdit::OnDeleteBtn() 
 {
 	size_t Pos = GetSelectedItemPos ();
@@ -207,7 +207,7 @@ void CBasicDomainEdit::OnDeleteBtn()
 				if (Refs.size() > 0)
 				{
 					CString prompt;
-					prompt.Format("Константа \"%s\" упоминается в словаре %i раз. Придется удалить все эти упоминания. Продолжить?", (const char*)GetRoss()->GetDomItemStr(ItemNo), Refs.size());
+					prompt.Format("РљРѕРЅСЃС‚Р°РЅС‚Р° \"%s\" СѓРїРѕРјРёРЅР°РµС‚СЃСЏ РІ СЃР»РѕРІР°СЂРµ %i СЂР°Р·. РџСЂРёРґРµС‚СЃСЏ СѓРґР°Р»РёС‚СЊ РІСЃРµ СЌС‚Рё СѓРїРѕРјРёРЅР°РЅРёСЏ. РџСЂРѕРґРѕР»Р¶РёС‚СЊ?", (const char*)GetRoss()->GetDomItemStr(ItemNo), Refs.size());
 					if (AfxMessageBox (prompt, MB_OKCANCEL) == IDCANCEL)
 						break;
 				}
@@ -257,7 +257,7 @@ void CBasicDomainEdit::OnButton1()
 	fclose(fp);
 }
 
-// прочитать из файла
+// РїСЂРѕС‡РёС‚Р°С‚СЊ РёР· С„Р°Р№Р»Р°
 void CBasicDomainEdit::OnButton3() 
 {
 	// TODO: Add your control notification handler code here

@@ -267,7 +267,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 		m_ReadOnly  =  (access(GetLockFileName().c_str(), 0) != -1) || m_FirstLoadReadonly;
 
 
-		//  чтение зоны авторов 
+		//  С‡С‚РµРЅРёРµ Р·РѕРЅС‹ Р°РІС‚РѕСЂРѕРІ 
 		m_IsDefault  = false;
 
 		Login = "";
@@ -275,7 +275,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 		m_Authors.clear();
 		while (GetLine(Buffer, CurrByte, FileLength,  S))
 		{
-			// начинается новая зона 
+			// РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅРѕРІР°СЏ Р·РѕРЅР° 
 			if (S[0] == '[')
 				break;
 
@@ -307,7 +307,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 	};
 
 
-		// чтение зоны настроек доменов
+		// С‡С‚РµРЅРёРµ Р·РѕРЅС‹ РЅР°СЃС‚СЂРѕРµРє РґРѕРјРµРЅРѕРІ
 	try
 	{
 		m_DomainParams.clear();
@@ -315,7 +315,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 		if (S == "[DomensParams]")
 			while (GetLine(Buffer, CurrByte, FileLength,  S))
 			{
-				// начинается новая зона 
+				// РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅРѕРІР°СЏ Р·РѕРЅР° 
 				if (S[0] == '[')
 					break;
 				CDomainParam C;
@@ -327,7 +327,7 @@ void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
 		if (S == "[Options]")
 			while (GetLine(Buffer, CurrByte, FileLength,  S))
 			{
-				// начинается новая зона 
+				// РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅРѕРІР°СЏ Р·РѕРЅР° 
 				if (S[0] == '[')
 					break;
 				size_t i = 0;
@@ -654,7 +654,7 @@ const char* CRossDoc::GetGramFetFieldName() const
 {
 
 	if (GetRoss()->m_bRussianFields)
-		return "ГХ";
+		return "Р“РҐ";
 	else
 		return "GF";
 
@@ -664,7 +664,7 @@ const char* CRossDoc::GetReferenceFieldName() const
 {
 
 	if (GetRoss()->m_bRussianFields)
-		return "ОТС";
+		return "РћРўРЎ";
 	else
 		return "REF";
 
@@ -675,7 +675,7 @@ const char* CRossDoc::GetEnglishFieldName() const
 {
 
 	if (GetRoss()->m_bRussianFields)
-		return "АНГ";
+		return "РђРќР“";
 	else
 		return "ENG";
 

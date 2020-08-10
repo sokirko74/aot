@@ -34,28 +34,28 @@ struct CFIOFormat
 		{
 			string s = tok.val();
 			FioItemTypeEnum t;
-		    if  (s == "ИМЯ")
+		    if  (s == "РРњРЇ")
 				t = fiName;
 			else
-			if (s == "ФАМИЛИЯ")
+			if (s == "Р¤РђРњРР›РРЇ")
 				t = fiSurname;
 			else
-			if (s == "ОТЧЕСТВО")
+			if (s == "РћРўР§Р•РЎРўР’Рћ")
 				t = fiMiddle;
 		    else
-			if (s == "ИНИЦИАЛ")
+			if (s == "РРќРР¦РРђР›")
 				t = fiAbbr;	
 			else
-			if (s == "ТОЧКА")
+			if (s == "РўРћР§РљРђ")
 				t = fiStop;
 		    else
-			if (s == "РИМСК_ЦК")
+			if (s == "Р РРњРЎРљ_Р¦Рљ")
 				t = fiRoman;
 			else
-		 	if (s == "ИМ?")
+		 	if (s == "РРњ?")
 				t = fiProbName;
 			else
-		 	if (s == "ПОРЯД_ЧИСЛ")
+		 	if (s == "РџРћР РЇР”_Р§РРЎР›")
 				t = fiOrdinal;
 		    else
 			{
@@ -97,10 +97,10 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
     {
         case fiName     :  return pH->HasGrammem(rName);
         case fiSurname  :  return pH->HasGrammem(rSurName) || (Word.m_bFirstUpperAlpha 
-							   && (pH->m_strLemma.rfind("ИЙ")==pH->m_strLemma.size()-2
-							    || pH->m_strLemma.rfind("АЯ")==pH->m_strLemma.size()-2
-							    || pH->m_strLemma.rfind("ОВ")==pH->m_strLemma.size()-2
-								|| pH->m_strLemma.rfind("ОВА")==pH->m_strLemma.size()-3
+							   && (pH->m_strLemma.rfind("РР™")==pH->m_strLemma.size()-2
+							    || pH->m_strLemma.rfind("РђРЇ")==pH->m_strLemma.size()-2
+							    || pH->m_strLemma.rfind("РћР’")==pH->m_strLemma.size()-2
+								|| pH->m_strLemma.rfind("РћР’Рђ")==pH->m_strLemma.size()-3
 								));
         case fiMiddle   :  return pH->HasGrammem(rPatronymic);
 
@@ -111,7 +111,7 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
         case fiStop     :  return Word.m_strWord == ".";
         case fiRoman    :  return Word.HasDes(ORoman);
 		case fiOrdinal  :  return pH->HasPos(NUMERAL_P) 
-							   && (unsigned char)Word.m_strWord[0]<224 //отбрасываем "Петр первый" вместо "Петр Первый"
+							   && (unsigned char)Word.m_strWord[0]<224 //РѕС‚Р±СЂР°СЃС‹РІР°РµРј "РџРµС‚СЂ РїРµСЂРІС‹Р№" РІРјРµСЃС‚Рѕ "РџРµС‚СЂ РџРµСЂРІС‹Р№"
 							   && !isdigit((BYTE)Word.m_strWord[0]);
         case fiProbName :  return Word.HasDes(ONam);
         default         :  return pH->m_strLemma == I.m_ItemStr;
@@ -142,7 +142,7 @@ bool CMAPost::SetFioFormat (const CFIOFormat* Format, CLineIter it)
         for (int HomNo=0; HomNo < W.GetHomonymsCount();  HomNo++)
 		{
             CHomonym* pH = W.GetHomonym(HomNo);
-			// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
+			// РёРЅР°С‡Рµ "Рў.Р•. РћРўРљРђР—РђРўР¬РЎРЇ" Р±СѓРґРµС‚ Р¤РРћ
             if (IsPartOfNonSingleOborot(pH)) return false;
 
 			if (IsPartFio(*this, Format->m_Items[ItemNo], W, pH))
@@ -152,9 +152,9 @@ bool CMAPost::SetFioFormat (const CFIOFormat* Format, CLineIter it)
 		CountOfVariants *= Hypots[ItemNo].size();
    };
 
-   if (FioWords.size() != Format->m_Items.size()) return false; // не достроилось
+   if (FioWords.size() != Format->m_Items.size()) return false; // РЅРµ РґРѕСЃС‚СЂРѕРёР»РѕСЃСЊ
 
-   SmallHomonymsVec V; // текущий вариант 
+   SmallHomonymsVec V; // С‚РµРєСѓС‰РёР№ РІР°СЂРёР°РЅС‚ 
    vector<SmallHomonymsVec> Variants;
    Variants.reserve(CountOfVariants);
    V.m_ItemsCount = Hypots.size();
@@ -184,13 +184,13 @@ bool CMAPost::SetFioFormat (const CFIOFormat* Format, CLineIter it)
        CHomonym* pH = Variants[0].m_Items[i];
        W.SetHomonymsDel(true);
        pH->m_bDelete = false;
-       pH->DeleteOborotMarks(); // удаляем однословные оборотыб (многословных там быть не может)
+       pH->DeleteOborotMarks(); // СѓРґР°Р»СЏРµРј РѕРґРЅРѕСЃР»РѕРІРЅС‹Рµ РѕР±РѕСЂРѕС‚С‹Р± (РјРЅРѕРіРѕСЃР»РѕРІРЅС‹С… С‚Р°Рј Р±С‹С‚СЊ РЅРµ РјРѕР¶РµС‚)
        W.DeleteMarkedHomonymsBeforeClauses();
 	   if (W.HasDes(OSentEnd))
        {
            /*
-             если ФИО содержало конец предложения, а после ФИО нет ни одной пометы 
-	         конца предложения, тогда надо поставить SENT_END на последнюю строчку ФИО.
+             РµСЃР»Рё Р¤РРћ СЃРѕРґРµСЂР¶Р°Р»Рѕ РєРѕРЅРµС† РїСЂРµРґР»РѕР¶РµРЅРёСЏ, Р° РїРѕСЃР»Рµ Р¤РРћ РЅРµС‚ РЅРё РѕРґРЅРѕР№ РїРѕРјРµС‚С‹ 
+	         РєРѕРЅС†Р° РїСЂРµРґР»РѕР¶РµРЅРёСЏ, С‚РѕРіРґР° РЅР°РґРѕ РїРѕСЃС‚Р°РІРёС‚СЊ SENT_END РЅР° РїРѕСЃР»РµРґРЅСЋСЋ СЃС‚СЂРѕС‡РєСѓ Р¤РРћ.
            */
            W.DelDes(OSentEnd);
 		   if ( W.m_strWord!="." )
@@ -198,7 +198,7 @@ bool CMAPost::SetFioFormat (const CFIOFormat* Format, CLineIter it)
        }
    }
 
-   // ставим графем. пометы
+   // СЃС‚Р°РІРёРј РіСЂР°С„РµРј. РїРѕРјРµС‚С‹
    FioWords[0]->AddDes(OFAM1);
    FioWords.back()->AddDes(OFAM2);
 
@@ -208,32 +208,32 @@ bool CMAPost::SetFioFormat (const CFIOFormat* Format, CLineIter it)
 
 
 /*
-Петр Владимирович Иванов,
-Иванов Петр Владимирович,
-Петр Иванов,
-Иванов Петр,
-Петр Владимирович,
-Райнер Мария Рильке,
-Иоанн Павел II
-М.Горбачев
+РџРµС‚СЂ Р’Р»Р°РґРёРјРёСЂРѕРІРёС‡ РРІР°РЅРѕРІ,
+РРІР°РЅРѕРІ РџРµС‚СЂ Р’Р»Р°РґРёРјРёСЂРѕРІРёС‡,
+РџРµС‚СЂ РРІР°РЅРѕРІ,
+РРІР°РЅРѕРІ РџРµС‚СЂ,
+РџРµС‚СЂ Р’Р»Р°РґРёРјРёСЂРѕРІРёС‡,
+Р Р°Р№РЅРµСЂ РњР°СЂРёСЏ Р РёР»СЊРєРµ,
+РРѕР°РЅРЅ РџР°РІРµР» II
+Рњ.Р“РѕСЂР±Р°С‡РµРІ
 */
 
 void CMAPost::Rule_Fio() 
 {
     vector<CFIOFormat> FioFormats;
-    FioFormats.push_back(CFIOFormat("ИМЯ ОТЧЕСТВО ФАМИЛИЯ", true));
-    FioFormats.push_back(CFIOFormat("ФАМИЛИЯ ИМЯ ОТЧЕСТВО", true));
-    FioFormats.push_back(CFIOFormat("ИМЯ ФАМИЛИЯ", true));
-    FioFormats.push_back(CFIOFormat("ФАМИЛИЯ ИМЯ", true));
-    FioFormats.push_back(CFIOFormat("ИМЯ ОТЧЕСТВО", true));
-    FioFormats.push_back(CFIOFormat("ИМЯ ИМЯ ИМ?", false)); // Эрих Мария Ремарк
-    FioFormats.push_back(CFIOFormat("ИНИЦИАЛ ТОЧКА ИНИЦИАЛ ТОЧКА ФАМИЛИЯ", false)); // М.Горбачев
-    FioFormats.push_back(CFIOFormat("ИНИЦИАЛ ТОЧКА ФАМИЛИЯ", false)); // М.Горбачев
-    FioFormats.push_back(CFIOFormat("ИМЯ ИМЯ РИМСК_ЦК", false)); // Иоанн Павел II
-    FioFormats.push_back(CFIOFormat("ИМЯ РИМСК_ЦК", false)); // Александр II
-    FioFormats.push_back(CFIOFormat("ИМЯ ПОРЯД_ЧИСЛ", true)); // Александр Второй
-    FioFormats.push_back(CFIOFormat("ИМЯ ИМЯ ПОРЯД_ЧИСЛ", false)); // Иоанн Павел Второй
-    FioFormats.push_back(CFIOFormat("ДОН ЖУАН", false)); // Дон Жуан
+    FioFormats.push_back(CFIOFormat("РРњРЇ РћРўР§Р•РЎРўР’Рћ Р¤РђРњРР›РРЇ", true));
+    FioFormats.push_back(CFIOFormat("Р¤РђРњРР›РРЇ РРњРЇ РћРўР§Р•РЎРўР’Рћ", true));
+    FioFormats.push_back(CFIOFormat("РРњРЇ Р¤РђРњРР›РРЇ", true));
+    FioFormats.push_back(CFIOFormat("Р¤РђРњРР›РРЇ РРњРЇ", true));
+    FioFormats.push_back(CFIOFormat("РРњРЇ РћРўР§Р•РЎРўР’Рћ", true));
+    FioFormats.push_back(CFIOFormat("РРњРЇ РРњРЇ РРњ?", false)); // Р­СЂРёС… РњР°СЂРёСЏ Р РµРјР°СЂРє
+    FioFormats.push_back(CFIOFormat("РРќРР¦РРђР› РўРћР§РљРђ РРќРР¦РРђР› РўРћР§РљРђ Р¤РђРњРР›РРЇ", false)); // Рњ.Р“РѕСЂР±Р°С‡РµРІ
+    FioFormats.push_back(CFIOFormat("РРќРР¦РРђР› РўРћР§РљРђ Р¤РђРњРР›РРЇ", false)); // Рњ.Р“РѕСЂР±Р°С‡РµРІ
+    FioFormats.push_back(CFIOFormat("РРњРЇ РРњРЇ Р РРњРЎРљ_Р¦Рљ", false)); // РРѕР°РЅРЅ РџР°РІРµР» II
+    FioFormats.push_back(CFIOFormat("РРњРЇ Р РРњРЎРљ_Р¦Рљ", false)); // РђР»РµРєСЃР°РЅРґСЂ II
+    FioFormats.push_back(CFIOFormat("РРњРЇ РџРћР РЇР”_Р§РРЎР›", true)); // РђР»РµРєСЃР°РЅРґСЂ Р’С‚РѕСЂРѕР№
+    FioFormats.push_back(CFIOFormat("РРњРЇ РРњРЇ РџРћР РЇР”_Р§РРЎР›", false)); // РРѕР°РЅРЅ РџР°РІРµР» Р’С‚РѕСЂРѕР№
+    FioFormats.push_back(CFIOFormat("Р”РћРќ Р–РЈРђРќ", false)); // Р”РѕРЅ Р–СѓР°РЅ
 
     
     for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)

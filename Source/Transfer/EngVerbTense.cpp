@@ -18,13 +18,13 @@ long CEngVerbTense::GetPersonGrammemsIfCan(CEngSemNode& EngNode)
 		)
 		return _QM(eThirdPerson);
 
-	// синтезировать можно сколько угодно раз, здесь   мы синтезируем 
-	// для того, чтобы вытащить граммемы  лица
+	// СЃРёРЅС‚РµР·РёСЂРѕРІР°С‚СЊ РјРѕР¶РЅРѕ СЃРєРѕР»СЊРєРѕ СѓРіРѕРґРЅРѕ СЂР°Р·, Р·РґРµСЃСЊ   РјС‹ СЃРёРЅС‚РµР·РёСЂСѓРµРј 
+	// РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РІС‹С‚Р°С‰РёС‚СЊ РіСЂР°РјРјРµРјС‹  Р»РёС†Р°
     S.helper.synthesize(EngWord);
 	if (EngWord.m_ParadigmId == -1) 
 	{
-		// для имен, которых нет в английской морфологии (например, "МАША") будем возвращать
-		// третье лицо
+		// РґР»СЏ РёРјРµРЅ, РєРѕС‚РѕСЂС‹С… РЅРµС‚ РІ Р°РЅРіР»РёР№СЃРєРѕР№ РјРѕСЂС„РѕР»РѕРіРёРё (РЅР°РїСЂРёРјРµСЂ, "РњРђРЁРђ") Р±СѓРґРµРј РІРѕР·РІСЂР°С‰Р°С‚СЊ
+		// С‚СЂРµС‚СЊРµ Р»РёС†Рѕ
 		if (EngNode.GetGrammemsRich() & _QM(eProper)) 
 			return _QM(eThirdPerson);
 
@@ -90,7 +90,7 @@ void CEngVerbTense::make_verb_form()
 	m_Grammems = m_pVerbNode->GetGrammemsRich();
 	m_Tense = m_pVerbMainWord->GetTense();
 
-	// берем число от подлежащего, если есть подлежащее и число у него 
+	// Р±РµСЂРµРј С‡РёСЃР»Рѕ РѕС‚ РїРѕРґР»РµР¶Р°С‰РµРіРѕ, РµСЃР»Рё РµСЃС‚СЊ РїРѕРґР»РµР¶Р°С‰РµРµ Рё С‡РёСЃР»Рѕ Сѓ РЅРµРіРѕ 
 	if(m_SubjNodeNo != -1) 
 	  if (E.m_Nodes[m_SubjNodeNo].IsLemma ("both") )
 	  {
@@ -104,7 +104,7 @@ void CEngVerbTense::make_verb_form()
 			m_Grammems |= (eAllNumbers & E.m_Nodes[m_SubjNodeNo].GetGrammemsRich());
 		};
 
-   // берeм лицо от подлежащего, если сейчас обрабатывается глагол to be
+   // Р±РµСЂeРј Р»РёС†Рѕ РѕС‚ РїРѕРґР»РµР¶Р°С‰РµРіРѕ, РµСЃР»Рё СЃРµР№С‡Р°СЃ РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚СЃСЏ РіР»Р°РіРѕР» to be
 	if(    
 		   (m_SubjNodeNo != -1) 
 		&& is_be_verb() 
@@ -120,8 +120,8 @@ void CEngVerbTense::make_verb_form()
 	if(GetNumber() == 1 && m_SubjNodeNo != -1 && S.E.has_plural_rel(m_SubjNodeNo))
 		SetNumber(2);
 
-	// если подлежащее выражено однородным рядом, то нужно поставить глагол во множественное
-	// число
+	// РµСЃР»Рё РїРѕРґР»РµР¶Р°С‰РµРµ РІС‹СЂР°Р¶РµРЅРѕ РѕРґРЅРѕСЂРѕРґРЅС‹Рј СЂСЏРґРѕРј, С‚Рѕ РЅСѓР¶РЅРѕ РїРѕСЃС‚Р°РІРёС‚СЊ РіР»Р°РіРѕР» РІРѕ РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ
+	// С‡РёСЃР»Рѕ
 	if(    (GetNumber() == 1) 
 		&& (m_SubjNodeNo != -1) 
 		&& (E.m_Nodes[m_SubjNodeNo].m_NodeType == MNA)
@@ -129,12 +129,12 @@ void CEngVerbTense::make_verb_form()
 		SetNumber(2);
 
 
-	if(GetNumber() == 1 && S.FieldContainsValue(E.m_Nodes[m_VerbNodeNo], "RESTR", "ед !"))
+	if(GetNumber() == 1 && S.FieldContainsValue(E.m_Nodes[m_VerbNodeNo], "RESTR", "РµРґ !"))
 	  SetNumber(1);
 
-	// если подлежащее - местоимение ед. ч., у которого прописано лицо =/= 3л.
-	// тогда нужно убрать вообще упоминания числа и лица   из граммем,
-	// поскольку в противном случае выбирается 3л, sg, что неверно
+	// РµСЃР»Рё РїРѕРґР»РµР¶Р°С‰РµРµ - РјРµСЃС‚РѕРёРјРµРЅРёРµ РµРґ. С‡., Сѓ РєРѕС‚РѕСЂРѕРіРѕ РїСЂРѕРїРёСЃР°РЅРѕ Р»РёС†Рѕ =/= 3Р».
+	// С‚РѕРіРґР° РЅСѓР¶РЅРѕ СѓР±СЂР°С‚СЊ РІРѕРѕР±С‰Рµ СѓРїРѕРјРёРЅР°РЅРёСЏ С‡РёСЃР»Р° Рё Р»РёС†Р°   РёР· РіСЂР°РјРјРµРј,
+	// РїРѕСЃРєРѕР»СЊРєСѓ РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ РІС‹Р±РёСЂР°РµС‚СЃСЏ 3Р», sg, С‡С‚Рѕ РЅРµРІРµСЂРЅРѕ
 	if (    (GetNumber() == 1) 
 		&&  (m_SubjNodeNo != -1)
 	   )
@@ -145,7 +145,7 @@ void CEngVerbTense::make_verb_form()
 		 m_Grammems &= ~eAllPersons;
 	  }
 	  else 
-		 // если подлежащее - местоимение ед. ч. 3л. или вообще не прописано лицо, то нужно поставить 3л 
+		 // РµСЃР»Рё РїРѕРґР»РµР¶Р°С‰РµРµ - РјРµСЃС‚РѕРёРјРµРЅРёРµ РµРґ. С‡. 3Р». РёР»Рё РІРѕРѕР±С‰Рµ РЅРµ РїСЂРѕРїРёСЃР°РЅРѕ Р»РёС†Рѕ, С‚Рѕ РЅСѓР¶РЅРѕ РїРѕСЃС‚Р°РІРёС‚СЊ 3Р» 
 		 m_Grammems |= _QM(eThirdPerson);
 
 
@@ -158,8 +158,8 @@ void CEngVerbTense::make_verb_form()
 
 
 
-// проверяет, что есть одна входящая стрелка, которая соответствует i-й валентности
-// и GFi=inf (инфинитив без to)
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РµСЃС‚СЊ РѕРґРЅР° РІС…РѕРґСЏС‰Р°СЏ СЃС‚СЂРµР»РєР°, РєРѕС‚РѕСЂР°СЏ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ i-Р№ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё
+// Рё GFi=inf (РёРЅС„РёРЅРёС‚РёРІ Р±РµР· to)
 
 bool CEngSynthes::IsInfinitivePatternWithoutTo (long NodeNo) const
 {
@@ -176,7 +176,7 @@ bool CEngSynthes::IsInfinitivePatternWithoutTo (long NodeNo) const
 		if (E.IsGramFet(E.m_Relations[Rels[i]],"inf"))
 			return true;
 
-	// поиск межклаузных союзов, которые требуют инфинитива, например "in_order_to"
+	// РїРѕРёСЃРє РјРµР¶РєР»Р°СѓР·РЅС‹С… СЃРѕСЋР·РѕРІ, РєРѕС‚РѕСЂС‹Рµ С‚СЂРµР±СѓСЋС‚ РёРЅС„РёРЅРёС‚РёРІР°, РЅР°РїСЂРёРјРµСЂ "in_order_to"
 	for (int i=0; i <Rels.size(); i++)
 	{
 		if( E.m_Relations[Rels[i]].m_SynReal.m_Conj.m_DictType != EngObor )
@@ -186,7 +186,7 @@ bool CEngSynthes::IsInfinitivePatternWithoutTo (long NodeNo) const
 			continue;
 
 		CSemPattern P;
-		// загружаем GFi из словаря оборотов
+		// Р·Р°РіСЂСѓР¶Р°РµРј GFi РёР· СЃР»РѕРІР°СЂСЏ РѕР±РѕСЂРѕС‚РѕРІ
 		P.InitSemPattern(E.GetRossHolder(EngObor),E.m_Relations[Rels[i]].m_SynReal.m_Conj.m_UnitNo, 2, 0);
 		P.LoadGramFromDict();
 		if (!P.m_GramCorteges.empty() )
@@ -203,14 +203,14 @@ bool CEngSynthes::IsInfinitivePatternWithoutTo (long NodeNo) const
 void CEngVerbTense::make_string()
 {
 	
-	// отрицание стоит до инфинитива, но после вспомогатльного глагола
-	// Например: "not to go", но "we do not go".
+	// РѕС‚СЂРёС†Р°РЅРёРµ СЃС‚РѕРёС‚ РґРѕ РёРЅС„РёРЅРёС‚РёРІР°, РЅРѕ РїРѕСЃР»Рµ РІСЃРїРѕРјРѕРіР°С‚Р»СЊРЅРѕРіРѕ РіР»Р°РіРѕР»Р°
+	// РќР°РїСЂРёРјРµСЂ: "not to go", РЅРѕ "we do not go".
 
 	bool has_not_before = has_not() 
 					&& (   is_infinitive (m_Tense) 
 						|| is_gerund(m_Tense));
 	
-	// здесь будут копиться результирующая строка
+	// Р·РґРµСЃСЊ Р±СѓРґСѓС‚ РєРѕРїРёС‚СЊСЃСЏ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰Р°СЏ СЃС‚СЂРѕРєР°
 	string res;
 
 	S.handle_rel_operators(m_VerbNodeNo, false);
@@ -227,16 +227,16 @@ void CEngVerbTense::make_string()
 	else
 			grammems = m_Grammems;
 
-	// сначала должны идти операторы
+	// СЃРЅР°С‡Р°Р»Р° РґРѕР»Р¶РЅС‹ РёРґС‚Рё РѕРїРµСЂР°С‚РѕСЂС‹
 	// "even not to think"
 	res += rel_operators + " ";
 
-	// потом отрицание, если инфинитив или герундий 
+	// РїРѕС‚РѕРј РѕС‚СЂРёС†Р°РЅРёРµ, РµСЃР»Рё РёРЅС„РёРЅРёС‚РёРІ РёР»Рё РіРµСЂСѓРЅРґРёР№ 
 	
 	if (has_not_before)
 		res += " not  ";
 	/*
-	 потом  должна идти частица to, если она нужна
+	 РїРѕС‚РѕРј  РґРѕР»Р¶РЅР° РёРґС‚Рё С‡Р°СЃС‚РёС†Р° to, РµСЃР»Рё РѕРЅР° РЅСѓР¶РЅР°
 	*/
 	if (     is_infinitive(m_pVerbNode->GetTense())
 		 && !S.IsInfinitivePatternWithoutTo(m_VerbNodeNo)
@@ -245,12 +245,12 @@ void CEngVerbTense::make_string()
 	res  += " to ";
 
 	/*
-	 потом идет сам глагол
+	 РїРѕС‚РѕРј РёРґРµС‚ СЃР°Рј РіР»Р°РіРѕР»
 	*/
 	if(m_pVerbMainWord->m_bDoNotChangeForm)
 	{
-			// слово "трехногий" переходит в слово "3-legged" (pp)
-			// "3-legged" обязательно должно быть помечено m_bDoNotChangeForm
+			// СЃР»РѕРІРѕ "С‚СЂРµС…РЅРѕРіРёР№" РїРµСЂРµС…РѕРґРёС‚ РІ СЃР»РѕРІРѕ "3-legged" (pp)
+			// "3-legged" РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїРѕРјРµС‡РµРЅРѕ m_bDoNotChangeForm
 			string Word = m_pVerbMainWord->m_Word;
 			if (m_pVerbMainWord->m_NumeralPrefix != "")
 				Word =   m_pVerbMainWord->m_NumeralPrefix+"-"+ Word;
@@ -262,19 +262,19 @@ void CEngVerbTense::make_string()
 			  res += S.helper.create_form_by_id(m_pVerbMainWord->m_ParadigmId, grammems);
 			else
 			{
-			  // для пассива сначала порождаем глагол to be	
+			  // РґР»СЏ РїР°СЃСЃРёРІР° СЃРЅР°С‡Р°Р»Р° РїРѕСЂРѕР¶РґР°РµРј РіР»Р°РіРѕР» to be	
 			  long BeParadigmId = 	helper.GetParadigmIdByLemma(morphEnglish, "be", eVBE);
 			  res += S.helper.create_form_by_id(BeParadigmId, grammems);
 			  res += " ";
-			  // а потом сам глагол 
+			  // Р° РїРѕС‚РѕРј СЃР°Рј РіР»Р°РіРѕР» 
 			  res += S.helper.create_form_by_id(m_pVerbMainWord->m_ParadigmId, _QM(ePastParticiple));
 			}
 		else 
 			res += m_pVerbMainWord->m_Word;
 
 
-	// ставим отрицание после вспомогатльного глагола
-	// Например: "we do not go".
+	// СЃС‚Р°РІРёРј РѕС‚СЂРёС†Р°РЅРёРµ РїРѕСЃР»Рµ РІСЃРїРѕРјРѕРіР°С‚Р»СЊРЅРѕРіРѕ РіР»Р°РіРѕР»Р°
+	// РќР°РїСЂРёРјРµСЂ: "we do not go".
   	if (has_not() && !has_not_before)
 		 res +=  " not";
 
@@ -296,9 +296,9 @@ void CEngVerbTense::make_string()
 }
 
 //------------------------------------------------------------------------
-// функция по времени Tense, выдает набор вспомогательных глаглов, которые должны 
-// стоять до основного глагола. Еще функция вылдает граммемы, в которые нужно поставить
-// основной глагол.
+// С„СѓРЅРєС†РёСЏ РїРѕ РІСЂРµРјРµРЅРё Tense, РІС‹РґР°РµС‚ РЅР°Р±РѕСЂ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹С… РіР»Р°РіР»РѕРІ, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ 
+// СЃС‚РѕСЏС‚СЊ РґРѕ РѕСЃРЅРѕРІРЅРѕРіРѕ РіР»Р°РіРѕР»Р°. Р•С‰Рµ С„СѓРЅРєС†РёСЏ РІС‹Р»РґР°РµС‚ РіСЂР°РјРјРµРјС‹, РІ РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ РїРѕСЃС‚Р°РІРёС‚СЊ
+// РѕСЃРЅРѕРІРЅРѕР№ РіР»Р°РіРѕР».
 void CEngVerbTense::CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, string& AuxVerbs, UINT& MainVerbGrammems) const
 {
 	MainVerbGrammems = 0;
@@ -320,13 +320,13 @@ void CEngVerbTense::CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, st
 	case past_smp_tn: //pasa 
 		MainVerbGrammems |= _QM(ePastIndef);
 		if (is_be_verb()) // was =/= were
-			if (GetPerson() == 2) // если подлежащее - уou, тогда нужно ставить were
+			if (GetPerson() == 2) // РµСЃР»Рё РїРѕРґР»РµР¶Р°С‰РµРµ - Сѓou, С‚РѕРіРґР° РЅСѓР¶РЅРѕ СЃС‚Р°РІРёС‚СЊ were
 				MainVerbGrammems |= _QM(ePlural);
 			else
 			    MainVerbGrammems |= eAllNumbers & m_Grammems;
 		break;
 	case future_smp_tn: 
-		MainVerbGrammems = _QM(eFuturum); // future бывает только у to be
+		MainVerbGrammems = _QM(eFuturum); // future Р±С‹РІР°РµС‚ С‚РѕР»СЊРєРѕ Сѓ to be
 		MainVerbGrammems |= eAllNumbers & m_Grammems; // shall != will
 		break;
 	case prf_inf_tn: //have + pp,
@@ -374,7 +374,7 @@ bool		CEngVerbTense::is_be_verb() const
 
 bool		CEngVerbTense::has_not()
 {
-	return S.E.m_Nodes[m_VerbNodeNo].HasRelOperator("НЕ");
+	return S.E.m_Nodes[m_VerbNodeNo].HasRelOperator("РќР•");
 }
 
 

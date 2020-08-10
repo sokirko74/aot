@@ -23,19 +23,19 @@ translate_helper::translate_helper()
 void translate_helper::init_private_lists()
 {
 	m_bad_flags_arr.clear();
-	m_bad_flags_arr.push_back(find_label("сл"));
-	m_bad_flags_arr.push_back(find_label("бран"));
-	m_bad_flags_arr.push_back(find_label("вульг"));
-	m_bad_flags_arr.push_back(find_label("груб"));
-	m_bad_flags_arr.push_back(find_label("жарг"));
-	m_bad_flags_arr.push_back(find_label("ирон"));
-	m_bad_flags_arr.push_back(find_label("неприст"));
-	m_bad_flags_arr.push_back(find_label("презр"));
-	m_bad_flags_arr.push_back(find_label("прост"));
-	m_bad_flags_arr.push_back(find_label("редк"));
-	m_bad_flags_arr.push_back(find_label("разг"));
-	m_bad_flags_arr.push_back(find_label("уст"));
-	m_bad_flags_arr.push_back(find_label("фольк"));
+	m_bad_flags_arr.push_back(find_label("СЃР»"));
+	m_bad_flags_arr.push_back(find_label("Р±СЂР°РЅ"));
+	m_bad_flags_arr.push_back(find_label("РІСѓР»СЊРі"));
+	m_bad_flags_arr.push_back(find_label("РіСЂСѓР±"));
+	m_bad_flags_arr.push_back(find_label("Р¶Р°СЂРі"));
+	m_bad_flags_arr.push_back(find_label("РёСЂРѕРЅ"));
+	m_bad_flags_arr.push_back(find_label("РЅРµРїСЂРёСЃС‚"));
+	m_bad_flags_arr.push_back(find_label("РїСЂРµР·СЂ"));
+	m_bad_flags_arr.push_back(find_label("РїСЂРѕСЃС‚"));
+	m_bad_flags_arr.push_back(find_label("СЂРµРґРє"));
+	m_bad_flags_arr.push_back(find_label("СЂР°Р·Рі"));
+	m_bad_flags_arr.push_back(find_label("СѓСЃС‚"));
+	m_bad_flags_arr.push_back(find_label("С„РѕР»СЊРє"));
     sort(m_bad_flags_arr.begin(), m_bad_flags_arr.end());
 
 	init_list_from_ross(GetRossHolder(Aoss), "_an_article_exception" , except_vec);
@@ -86,7 +86,7 @@ const CAgramtab* translate_helper::GetGramTab (MorphLanguageEnum langua) const
 
 
 
-// создаем форму по ParadigmId и eng_grammems, если eng_grammems == 0, возвращает лемму
+// СЃРѕР·РґР°РµРј С„РѕСЂРјСѓ РїРѕ ParadigmId Рё eng_grammems, РµСЃР»Рё eng_grammems == 0, РІРѕР·РІСЂР°С‰Р°РµС‚ Р»РµРјРјСѓ
 string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) const
 {
 	int j;
@@ -111,7 +111,7 @@ string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) const
 
 
 
-// создаем возвращает лемму по RusId
+// СЃРѕР·РґР°РµРј РІРѕР·РІСЂР°С‰Р°РµС‚ Р»РµРјРјСѓ РїРѕ RusId
 string translate_helper::create_norm_by_id(long EngId) const
 {
 	if (EngId ==-1) return "";
@@ -126,7 +126,7 @@ string translate_helper::create_norm_by_id(long EngId) const
 
 
 
-// устанавливает  нужный регистр
+// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚  РЅСѓР¶РЅС‹Р№ СЂРµРіРёСЃС‚СЂ
 string fix_case(const CEngSemWord& EngWord)
 {
 	string s = EngWord.m_Word;
@@ -152,25 +152,25 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 	{  
 	  EngWord.m_Word =  fix_case(EngWord);
 
-	  // получаем притяжательную форму
+	  // РїРѕР»СѓС‡Р°РµРј РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅСѓСЋ С„РѕСЂРјСѓ
 	  if ( EngWord.HasOneGrammem(ePossessive) )
 		set_possessive(EngWord);
 
-  	// слово "трехоконный" переходит в слово "3-fenestral"
+  	// СЃР»РѕРІРѕ "С‚СЂРµС…РѕРєРѕРЅРЅС‹Р№" РїРµСЂРµС…РѕРґРёС‚ РІ СЃР»РѕРІРѕ "3-fenestral"
 	  if (EngWord.m_NumeralPrefix != "")
 		EngWord.m_Word =   EngWord.m_NumeralPrefix+"-"+ EngWord.m_Word;
 
 
-   	 // добавим окончание "-s" или "-es" к существительному 
+   	 // РґРѕР±Р°РІРёРј РѕРєРѕРЅС‡Р°РЅРёРµ "-s" РёР»Рё "-es" Рє СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРјСѓ 
 	  if (   EngWord.m_Poses == _QM(eNOUN) )
-		  if (		EngWord.HasOneGrammem(ePlural) // есть множественное
-				&&	!EngWord.HasOneGrammem(eSingular) // но нет единственного
+		  if (		EngWord.HasOneGrammem(ePlural) // РµСЃС‚СЊ РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ
+				&&	!EngWord.HasOneGrammem(eSingular) // РЅРѕ РЅРµС‚ РµРґРёРЅСЃС‚РІРµРЅРЅРѕРіРѕ
 				&&  !EngWord.m_Word.empty()
 		 )
 	  {
 		if (   (EngWord.m_Word[EngWord.m_Word.size() - 1] == 'S')
 			|| (EngWord.m_Word[EngWord.m_Word.size() - 1] == 's')
-		   )// если заканчивается на "s", тогда добавим "es"
+		   )// РµСЃР»Рё Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РЅР° "s", С‚РѕРіРґР° РґРѕР±Р°РІРёРј "es"
 		   EngWord.m_Word += "es";
 		else
 		  EngWord.m_Word += "s";
@@ -191,44 +191,44 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 		if (eng_grammems & _QM( eSupremum))
 		{
 			prefix = "most ";
-			// отрубаем граммемы comp и  sup
+			// РѕС‚СЂСѓР±Р°РµРј РіСЂР°РјРјРµРјС‹ comp Рё  sup
 			eng_grammems &= ~( _QM( eSupremum) |  _QM( eComparativ)) ;
 		}
 		else
 		if (eng_grammems & _QM( eComparativ))
 		{
 			prefix = "more ";
-			// отрубаем граммемы comp и  sup
+			// РѕС‚СЂСѓР±Р°РµРј РіСЂР°РјРјРµРјС‹ comp Рё  sup
 			eng_grammems &= ~( _QM( eSupremum) |  _QM( eComparativ)) ;
 		};
 
 
 
-	// отключение лица и числа у местоимений, поскольку в англ морф. лицо и число не припсано
+	// РѕС‚РєР»СЋС‡РµРЅРёРµ Р»РёС†Р° Рё С‡РёСЃР»Р° Сѓ РјРµСЃС‚РѕРёРјРµРЅРёР№, РїРѕСЃРєРѕР»СЊРєСѓ РІ Р°РЅРіР» РјРѕСЂС„. Р»РёС†Рѕ Рё С‡РёСЃР»Рѕ РЅРµ РїСЂРёРїСЃР°РЅРѕ
 	if (EngWord.m_Poses == _QM(ePRON) )
 			eng_grammems &= ~(eAllPersons|eAllNumbers);
 
-	// отключаем род (это словообразовательная граммема)
+	// РѕС‚РєР»СЋС‡Р°РµРј СЂРѕРґ (СЌС‚Рѕ СЃР»РѕРІРѕРѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅР°СЏ РіСЂР°РјРјРµРјР°)
 	eng_grammems &= ~eAllGenders;
 
-	// отключение объектного падежа у всего, кроме местоимений
+	// РѕС‚РєР»СЋС‡РµРЅРёРµ РѕР±СЉРµРєС‚РЅРѕРіРѕ РїР°РґРµР¶Р° Сѓ РІСЃРµРіРѕ, РєСЂРѕРјРµ РјРµСЃС‚РѕРёРјРµРЅРёР№
 	if (EngWord.m_Poses != 1<<ePRON)
 			eng_grammems &= ~(_QM(eObjectCase));
 
-	// отключение притяжательность у всего, кроме местоимений
+	// РѕС‚РєР»СЋС‡РµРЅРёРµ РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅРѕСЃС‚СЊ Сѓ РІСЃРµРіРѕ, РєСЂРѕРјРµ РјРµСЃС‚РѕРёРјРµРЅРёР№
 	if (EngWord.m_Poses != _QM(ePRON))
 			eng_grammems &= ~(_QM(ePossessive));
 
 	eng_grammems &= ~(_QM(eGeographics));
 
 
-	// отключаeм у прилагательных и наречий все, кроме степеней сравнения 
+	// РѕС‚РєР»СЋС‡Р°eРј Сѓ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹С… Рё РЅР°СЂРµС‡РёР№ РІСЃРµ, РєСЂРѕРјРµ СЃС‚РµРїРµРЅРµР№ СЃСЂР°РІРЅРµРЅРёСЏ 
 	if  (   (EngWord.m_Poses == 1<<eADJ) 
 		  || (EngWord.m_Poses == 1<<eADV)   
 		)
 		eng_grammems &= eAllDegrees;
 
-	// отключаем у всех одушевленность
+	// РѕС‚РєР»СЋС‡Р°РµРј Сѓ РІСЃРµС… РѕРґСѓС€РµРІР»РµРЅРЅРѕСЃС‚СЊ
 	eng_grammems &= ~(_QM(eAnimative));
 
 
@@ -236,18 +236,18 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 	try{
 		if (!EngWord.m_bDoNotChangeForm)
 		{
-			// получаем форму по Id и  граммемам
+			// РїРѕР»СѓС‡Р°РµРј С„РѕСЂРјСѓ РїРѕ Id Рё  РіСЂР°РјРјРµРјР°Рј
 			EngWord.m_Word = create_form_by_id(EngWord.m_ParadigmId, eng_grammems);
 
-			// получаем притяжательную форму
+			// РїРѕР»СѓС‡Р°РµРј РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅСѓСЋ С„РѕСЂРјСѓ
 			if (EngWord.HasOneGrammem(ePossessive) )     
 				set_possessive(EngWord);
 
-			// слово "трехоконный" переходит в слово "3-fenestral"
+			// СЃР»РѕРІРѕ "С‚СЂРµС…РѕРєРѕРЅРЅС‹Р№" РїРµСЂРµС…РѕРґРёС‚ РІ СЃР»РѕРІРѕ "3-fenestral"
 			if (EngWord.m_NumeralPrefix != "")
 				EngWord.m_Word =   EngWord.m_NumeralPrefix+"-"+ EngWord.m_Word;
 
-			// выправлем регистр слова
+			// РІС‹РїСЂР°РІР»РµРј СЂРµРіРёСЃС‚СЂ СЃР»РѕРІР°
 			EngWord.m_Word = prefix + fix_case(EngWord);
 		};
 	}catch(...){
@@ -263,19 +263,19 @@ void add_rel_operators(CEngSemNode& Node)
 
 	assert (Node.m_MainWordNo != -1);
 	long WordNo =  Node.m_MainWordNo;
-		// добавление стандартных префиксов
+		// РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РїСЂРµС„РёРєСЃРѕРІ
 	if (Node.m_RelOperators.size() > 0)
 	 for (long i=Node.m_RelOperators.size()-1;  i>=0; i--)
- 	  if (Node.m_RelOperators[i] == "АВИА")
+ 	  if (Node.m_RelOperators[i] == "РђР’РРђ")
 		  Node.m_Words[WordNo].m_Word = "aero"+Node.m_Words[WordNo].m_Word;
 	  else
-	  if (Node.m_RelOperators[i] == "ВИЦЕ-")
+	  if (Node.m_RelOperators[i] == "Р’РР¦Р•-")
 		  Node.m_Words[WordNo].m_Word = "vice-"+Node.m_Words[WordNo].m_Word;
 	  else
-  	  if (Node.m_RelOperators[i] == "ЭКС-")
+  	  if (Node.m_RelOperators[i] == "Р­РљРЎ-")
 		  Node.m_Words[WordNo].m_Word = "ex-"+Node.m_Words[WordNo].m_Word;
 	  else
-		  if (Node.m_RelOperators[i] == "ПОЛУ")
+		  if (Node.m_RelOperators[i] == "РџРћР›РЈ")
 		  {
 			if (Node.GetPos () == eADJ)
 		      Node.m_Words[WordNo].m_Word = "semi"+Node.m_Words[WordNo].m_Word;
@@ -283,8 +283,8 @@ void add_rel_operators(CEngSemNode& Node)
 			  Node.m_Words[WordNo].m_Word = "half "+Node.m_Words[WordNo].m_Word;
 		  }
 	  else
-		  /* переводим фразу "все больше людей"-> "more and more people"*/
-		  if (   (Node.m_RelOperators[i] == "ПРОДОЛЖ")
+		  /* РїРµСЂРµРІРѕРґРёРј С„СЂР°Р·Сѓ "РІСЃРµ Р±РѕР»СЊС€Рµ Р»СЋРґРµР№"-> "more and more people"*/
+		  if (   (Node.m_RelOperators[i] == "РџР РћР”РћР›Р–")
 			  && ( Node.HasGrammemRich(eComparativ) )
 			 )
 		  {
@@ -295,7 +295,7 @@ void add_rel_operators(CEngSemNode& Node)
 		  };
 };
 
-// синтезирет главное слово и добавляет  префиксы из перечня m_Reloperators 
+// СЃРёРЅС‚РµР·РёСЂРµС‚ РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ Рё РґРѕР±Р°РІР»СЏРµС‚  РїСЂРµС„РёРєСЃС‹ РёР· РїРµСЂРµС‡РЅСЏ m_Reloperators 
 void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 {
 	assert (Node.m_MainWordNo != -1);
@@ -307,11 +307,11 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 	if (Node.m_Words[WordNo].m_bDoNotChangeForm) 
 	{
 		/*
-		 надо поставить притяжательную форму уже синтезированным узлам 
-		 (m_bDoNotChangeForm),поскольку граммема притяжательности могла возникнуть 
-		 после их синтеза.
-		 Например, термины синтезируются перед всем алгоритмами,
-		 а постановка притяжательности - это один из алгоритмов.
+		 РЅР°РґРѕ РїРѕСЃС‚Р°РІРёС‚СЊ РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅСѓСЋ С„РѕСЂРјСѓ СѓР¶Рµ СЃРёРЅС‚РµР·РёСЂРѕРІР°РЅРЅС‹Рј СѓР·Р»Р°Рј 
+		 (m_bDoNotChangeForm),РїРѕСЃРєРѕР»СЊРєСѓ РіСЂР°РјРјРµРјР° РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅРѕСЃС‚Рё РјРѕРіР»Р° РІРѕР·РЅРёРєРЅСѓС‚СЊ 
+		 РїРѕСЃР»Рµ РёС… СЃРёРЅС‚РµР·Р°.
+		 РќР°РїСЂРёРјРµСЂ, С‚РµСЂРјРёРЅС‹ СЃРёРЅС‚РµР·РёСЂСѓСЋС‚СЃСЏ РїРµСЂРµРґ РІСЃРµРј Р°Р»РіРѕСЂРёС‚РјР°РјРё,
+		 Р° РїРѕСЃС‚Р°РЅРѕРІРєР° РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅРѕСЃС‚Рё - СЌС‚Рѕ РѕРґРёРЅ РёР· Р°Р»РіРѕСЂРёС‚РјРѕРІ.
 		*/
 		if (Node.HasGrammemRich(ePossessive) )
 			set_possessive(Node.m_Words[0]);
@@ -323,10 +323,10 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 
 	if (Node.m_bProper) return;
 
-	// отрубаем множественное число у конструкций типа half an hour, чтобы
-	// не получилось half hours.
+	// РѕС‚СЂСѓР±Р°РµРј РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ С‡РёСЃР»Рѕ Сѓ РєРѕРЅСЃС‚СЂСѓРєС†РёР№ С‚РёРїР° half an hour, С‡С‚РѕР±С‹
+	// РЅРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ half hours.
 	if (Node.GetPos() == eNOUN)
-	 if (Node.HasRelOperator("ПОЛУ"))
+	 if (Node.HasRelOperator("РџРћР›РЈ"))
 	 {
 		Node.AddOneGrammemRich(eSingular);
 		Node.DeleteGrammemsRich( _QM(ePlural) );
@@ -339,7 +339,7 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 
 	add_rel_operators(Node);
 
-	// снова выправляем регистр, поскольку, возможно, были добавлены приставки
+	// СЃРЅРѕРІР° РІС‹РїСЂР°РІР»СЏРµРј СЂРµРіРёСЃС‚СЂ, РїРѕСЃРєРѕР»СЊРєСѓ, РІРѕР·РјРѕР¶РЅРѕ, Р±С‹Р»Рё РґРѕР±Р°РІР»РµРЅС‹ РїСЂРёСЃС‚Р°РІРєРё
 	if (!Node.m_Words[WordNo].m_bDoNotChangeForm)
 	  Node.m_Words[WordNo].m_Word = fix_case(Node.m_Words[WordNo]);
 
@@ -347,7 +347,7 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 
 
 
-// проверяет, что ID - английское сравнительная степень
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ ID - Р°РЅРіР»РёР№СЃРєРѕРµ СЃСЂР°РІРЅРёС‚РµР»СЊРЅР°СЏ СЃС‚РµРїРµРЅСЊ
 bool translate_helper::has_not_english_comparative(long Id) const
 {
 	CFormInfo p;
@@ -375,15 +375,15 @@ void translate_helper::flush()
 
 
 
-// сортировка анлийских слов по частоте перевода русского слова  в данной предметной области (m_TextKind)
-// если в предментной области m_TextKind частоты равны, то используются частоты других
-// предметных областей, иначе сортируем по значению   англ. ParadigmId
+// СЃРѕСЂС‚РёСЂРѕРІРєР° Р°РЅР»РёР№СЃРєРёС… СЃР»РѕРІ РїРѕ С‡Р°СЃС‚РѕС‚Рµ РїРµСЂРµРІРѕРґР° СЂСѓСЃСЃРєРѕРіРѕ СЃР»РѕРІР°  РІ РґР°РЅРЅРѕР№ РїСЂРµРґРјРµС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё (m_TextKind)
+// РµСЃР»Рё РІ РїСЂРµРґРјРµРЅС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё m_TextKind С‡Р°СЃС‚РѕС‚С‹ СЂР°РІРЅС‹, С‚Рѕ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ С‡Р°СЃС‚РѕС‚С‹ РґСЂСѓРіРёС…
+// РїСЂРµРґРјРµС‚РЅС‹С… РѕР±Р»Р°СЃС‚РµР№, РёРЅР°С‡Рµ СЃРѕСЂС‚РёСЂСѓРµРј РїРѕ Р·РЅР°С‡РµРЅРёСЋ   Р°РЅРіР». ParadigmId
 struct FreqDictLess{
-	// русская ParadigmId
+	// СЂСѓСЃСЃРєР°СЏ ParadigmId
 	long						m_RusParadigmId;
-	// частотыне словари для каждой предметной области
+	// С‡Р°СЃС‚РѕС‚С‹РЅРµ СЃР»РѕРІР°СЂРё РґР»СЏ РєР°Р¶РґРѕР№ РїСЂРµРґРјРµС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<const CFreqDict*>&	 m_FreqDicts;
-	// текущая предметная область
+	// С‚РµРєСѓС‰Р°СЏ РїСЂРµРґРјРµС‚РЅР°СЏ РѕР±Р»Р°СЃС‚СЊ
 	int							m_TextKind;
 
 	FreqDictLess(long RusParadigmId, vector<const CFreqDict*> &FreqDicts, int TextKind)
@@ -429,7 +429,7 @@ const CThesaurus*   translate_helper::GetThes(int ThesId)  const
 void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t RusPoses) const
 {
 	
-	// получение всех видовых пар данного слова, если это глагол,
+	// РїРѕР»СѓС‡РµРЅРёРµ РІСЃРµС… РІРёРґРѕРІС‹С… РїР°СЂ РґР°РЅРЅРѕРіРѕ СЃР»РѕРІР°, РµСЃР»Рё СЌС‚Рѕ РіР»Р°РіРѕР»,
 	vector<long> rus_vec;
 	rus_vec.push_back(Id);
 	int i;
@@ -448,16 +448,16 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 	for(int r = 0; r < rus_vec.size(); r++){
 		Id = rus_vec[r];
 
-		// переводим с помощью бинарного словаря
+		// РїРµСЂРµРІРѕРґРёРј СЃ РїРѕРјРѕС‰СЊСЋ Р±РёРЅР°СЂРЅРѕРіРѕ СЃР»РѕРІР°СЂСЏ
 		CSetOfWordPairs p = m_pData->m_BinaryDict.TranslateIndirect(Id);
 		int count = p.get_Count();
-		// идем по всем эквивалентам
+		// РёРґРµРј РїРѕ РІСЃРµРј СЌРєРІРёРІР°Р»РµРЅС‚Р°Рј
 		for(i = 0; i < count; i++)
 		{
 			bool ok = true;
 			string b;
-			// если найден флаг, который считается  "плохим", то 
-			// пропускаем этот перевод
+			// РµСЃР»Рё РЅР°Р№РґРµРЅ С„Р»Р°Рі, РєРѕС‚РѕСЂС‹Р№ СЃС‡РёС‚Р°РµС‚СЃСЏ  "РїР»РѕС…РёРј", С‚Рѕ 
+			// РїСЂРѕРїСѓСЃРєР°РµРј СЌС‚РѕС‚ РїРµСЂРµРІРѕРґ
 			for(int j = 4; j <= 7 && j < m_pData->m_BinaryDict.GetFlagCount(); j++)
 			{
 				int flag = p.GetFlag(i, j, b);
@@ -467,8 +467,8 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 					break;
 				}
 			}
-			// проверяем, что если мы имеем дело с глаголом, то 
-			// перевод должен помечен глагольной пометой (1)
+			// РїСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РµСЃР»Рё РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ РіР»Р°РіРѕР»РѕРј, С‚Рѕ 
+			// РїРµСЂРµРІРѕРґ РґРѕР»Р¶РµРЅ РїРѕРјРµС‡РµРЅ РіР»Р°РіРѕР»СЊРЅРѕР№ РїРѕРјРµС‚РѕР№ (1)
 			bool has_verb_flag = p.GetFlag(i, 0, b) == 1;
 			if(  (    (RusPoses & (1<<VERB))
 			 	   || (RusPoses & (1<<INFINITIVE))
@@ -480,7 +480,7 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 			if(ok)
 				res.push_back(p.GetId(i));
 		}
-        // если все переводы были отвергнуты, то считаем, что все переводы подходят
+        // РµСЃР»Рё РІСЃРµ РїРµСЂРµРІРѕРґС‹ Р±С‹Р»Рё РѕС‚РІРµСЂРіРЅСѓС‚С‹, С‚Рѕ СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РІСЃРµ РїРµСЂРµРІРѕРґС‹ РїРѕРґС…РѕРґСЏС‚
 		if(count > 0 && res.empty()){
 			for(int i = 0; i < count; i++)
 				res.push_back(p.GetId(i));
@@ -489,7 +489,7 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 		if(res.size()) break;
 	}
 
-   // сортируем переводы по частоте биграмм, если словарь биграмм был определен
+   // СЃРѕСЂС‚РёСЂСѓРµРј РїРµСЂРµРІРѕРґС‹ РїРѕ С‡Р°СЃС‚РѕС‚Рµ Р±РёРіСЂР°РјРј, РµСЃР»Рё СЃР»РѕРІР°СЂСЊ Р±РёРіСЂР°РјРј Р±С‹Р» РѕРїСЂРµРґРµР»РµРЅ
    const CFreqDict* dual_freq_dict	= m_option.dual_freq_dict;
 
    int max_dual_freq = 0, max_dual_freq_ind = -1;
@@ -502,8 +502,8 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 		   max_dual_freq_ind = i;
 	   }
    }
-	// если было найдено слово в словаре биграмм, то считаем это иделаьным 
-	// результатом, который даже лучше, чем частоты по предметным областям
+	// РµСЃР»Рё Р±С‹Р»Рѕ РЅР°Р№РґРµРЅРѕ СЃР»РѕРІРѕ РІ СЃР»РѕРІР°СЂРµ Р±РёРіСЂР°РјРј, С‚Рѕ СЃС‡РёС‚Р°РµРј СЌС‚Рѕ РёРґРµР»Р°СЊРЅС‹Рј 
+	// СЂРµР·СѓР»СЊС‚Р°С‚РѕРј, РєРѕС‚РѕСЂС‹Р№ РґР°Р¶Рµ Р»СѓС‡С€Рµ, С‡РµРј С‡Р°СЃС‚РѕС‚С‹ РїРѕ РїСЂРµРґРјРµС‚РЅС‹Рј РѕР±Р»Р°СЃС‚СЏРј
 	if(max_dual_freq_ind >= 0){
 		res[0] = res[max_dual_freq_ind];
 		res.resize(1);
@@ -511,8 +511,8 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 
 	}
 
-	// сортируем по частотам перевода в предметных областях
-	// первое слово в отсортированном массиве - самый вероятный перевод
+	// СЃРѕСЂС‚РёСЂСѓРµРј РїРѕ С‡Р°СЃС‚РѕС‚Р°Рј РїРµСЂРµРІРѕРґР° РІ РїСЂРµРґРјРµС‚РЅС‹С… РѕР±Р»Р°СЃС‚СЏС…
+	// РїРµСЂРІРѕРµ СЃР»РѕРІРѕ РІ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРј РјР°СЃСЃРёРІРµ - СЃР°РјС‹Р№ РІРµСЂРѕСЏС‚РЅС‹Р№ РїРµСЂРµРІРѕРґ
 	vector<const CFreqDict*> freq_vec(3);
 	freq_vec[0] = &m_pData->m_CompFreq;
 	freq_vec[1] = &m_pData->m_FinFreq;
@@ -526,8 +526,8 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 
 
 //--------------------------------------------------------------------------------
-// выдает по строке все леммы из морфологического словаря нужной части речи
-// если pos=-1, тогда часть речи не проверяется
+// РІС‹РґР°РµС‚ РїРѕ СЃС‚СЂРѕРєРµ РІСЃРµ Р»РµРјРјС‹ РёР· РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ СЃР»РѕРІР°СЂСЏ РЅСѓР¶РЅРѕР№ С‡Р°СЃС‚Рё СЂРµС‡Рё
+// РµСЃР»Рё pos=-1, С‚РѕРіРґР° С‡Р°СЃС‚СЊ СЂРµС‡Рё РЅРµ РїСЂРѕРІРµСЂСЏРµС‚СЃСЏ
 long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, string norm, UINT pos, bool bProper) const
 {
 
@@ -574,7 +574,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, string no
 }
 
 //--------------------------------------------------------------------------------
-// выдает независимые от формы граммемы для слова
+// РІС‹РґР°РµС‚ РЅРµР·Р°РІРёСЃРёРјС‹Рµ РѕС‚ С„РѕСЂРјС‹ РіСЂР°РјРјРµРјС‹ РґР»СЏ СЃР»РѕРІР°
 
 QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  string norm,  UINT pos, bool bProper) const
 {
@@ -603,7 +603,7 @@ QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  stri
 }
 
 
-// выдает артикль a/an в зависимотси, с чего начинается  слово  _str
+// РІС‹РґР°РµС‚ Р°СЂС‚РёРєР»СЊ a/an РІ Р·Р°РІРёСЃРёРјРѕС‚СЃРё, СЃ С‡РµРіРѕ РЅР°С‡РёРЅР°РµС‚СЃСЏ  СЃР»РѕРІРѕ  _str
 string translate_helper::an_article_before(const string &_str) const
 {
 	string str(_str);
@@ -625,7 +625,7 @@ string translate_helper::an_article_before(const string &_str) const
 	return "a ";
 }
 
-// проверяет, что строка s начинается с одного из префиксов starts
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ СЃС‚СЂРѕРєР° s РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ РѕРґРЅРѕРіРѕ РёР· РїСЂРµС„РёРєСЃРѕРІ starts
 bool translate_helper::starts_with(const string &s,const StringVector &starts) const 
 {
 	string lower_s = s;
@@ -639,7 +639,7 @@ bool translate_helper::starts_with(const string &s,const StringVector &starts) c
 	return false;
 }
 
-// транслитериует русскую строку _str
+// С‚СЂР°РЅСЃР»РёС‚РµСЂРёСѓРµС‚ СЂСѓСЃСЃРєСѓСЋ СЃС‚СЂРѕРєСѓ _str
 void translate_helper::transliterate(CEngSemWord& W ) 
 {
 	string str;
@@ -653,46 +653,46 @@ void translate_helper::transliterate(CEngSemWord& W )
 	vec = StringVector(256);
 	for(int i = 0; i < 256; i++) vec[i] = (char)(unsigned char)i;
 #define PAIR(ch, s) vec[(int)(unsigned char)ch] = s;
-	PAIR('А', "A");
-	PAIR('Б', "B");
-	PAIR('В', "V");
-	PAIR('Г', "G");
-	PAIR('Д', "D");
-//	PAIR('Е', "");
-	PAIR('Ё', "E");
-	PAIR('Ж', "Zh");
-	PAIR('З', "Z");
-	PAIR('И', "I");
-	PAIR('Й', "Y");
-	PAIR('К', "K");
-	PAIR('Л', "L");
-	PAIR('М', "M");
-	PAIR('Н', "N");
-	PAIR('О', "O");
-	PAIR('П', "P");
-	PAIR('Р', "R");
-	PAIR('С', "S");
-	PAIR('Т', "T");
-	PAIR('У', "U");
-	PAIR('Ф', "F");
-	PAIR('Х', "Kh");
-	PAIR('Ц', "Ts");
-	PAIR('Ч', "Ch");
-	PAIR('Ш', "Sh");
-	PAIR('Щ', "Shch");
-	PAIR('Ъ', "\"");
-	PAIR('Ы', "Y");
-	PAIR('Ь', "'");
-	PAIR('Э', "E");
-	PAIR('Ю', "Yu");
-	PAIR('Я', "Ya");
+	PAIR('Рђ', "A");
+	PAIR('Р‘', "B");
+	PAIR('Р’', "V");
+	PAIR('Р“', "G");
+	PAIR('Р”', "D");
+//	PAIR('Р•', "");
+	PAIR('РЃ', "E");
+	PAIR('Р–', "Zh");
+	PAIR('Р—', "Z");
+	PAIR('Р', "I");
+	PAIR('Р™', "Y");
+	PAIR('Рљ', "K");
+	PAIR('Р›', "L");
+	PAIR('Рњ', "M");
+	PAIR('Рќ', "N");
+	PAIR('Рћ', "O");
+	PAIR('Рџ', "P");
+	PAIR('Р ', "R");
+	PAIR('РЎ', "S");
+	PAIR('Рў', "T");
+	PAIR('РЈ', "U");
+	PAIR('Р¤', "F");
+	PAIR('РҐ', "Kh");
+	PAIR('Р¦', "Ts");
+	PAIR('Р§', "Ch");
+	PAIR('РЁ', "Sh");
+	PAIR('Р©', "Shch");
+	PAIR('РЄ', "\"");
+	PAIR('Р«', "Y");
+	PAIR('Р¬', "'");
+	PAIR('Р­', "E");
+	PAIR('Р®', "Yu");
+	PAIR('РЇ', "Ya");
 #undef PAIR
 
-	unsigned char before_e[] = "УЕЪЫАОЭЯИЬЮ";
+	unsigned char before_e[] = "РЈР•РЄР«РђРћР­РЇРР¬Р®";
 	sort(before_e, before_e + sizeof(before_e));
 
 	for(int i = 0; str[i]; i++)
-		if(str[i] == 'Е')
+		if(str[i] == 'Р•')
 			if(    i == 0 
 				|| binary_search(before_e, before_e + sizeof(before_e), (unsigned char)str[i-1])
 			  )
@@ -709,7 +709,7 @@ void translate_helper::transliterate(CEngSemWord& W )
 
 
 
-// загружает перечень слов из РОСС
+// Р·Р°РіСЂСѓР¶Р°РµС‚ РїРµСЂРµС‡РµРЅСЊ СЃР»РѕРІ РёР· Р РћРЎРЎ
 void translate_helper::init_list_from_ross(const CRossHolder* RossHolder, const string &list_name, StringVector &res)
 {
 	WORD UnitNo = RossHolder->GetRoss()->LocateUnit(list_name.c_str(), 1);
@@ -743,7 +743,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 	   )
 		return false;
 
-// примитивные узлы, которые интерпретированы добавочными статьями
+// РїСЂРёРјРёС‚РёРІРЅС‹Рµ СѓР·Р»С‹, РєРѕС‚РѕСЂС‹Рµ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°РЅС‹ РґРѕР±Р°РІРѕС‡РЅС‹РјРё СЃС‚Р°С‚СЊСЏРјРё
 	const CSemWord& W = RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWord(0);
 	long ParadigmId = W.m_ParadigmId;
 
@@ -754,17 +754,17 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 	{
 		
 		if (	isdigit((unsigned char)W.m_Word[0])
-				&& W.HasPOS(ADV) // "вдвоем", "втроем"
+				&& W.HasPOS(ADV) // "РІРґРІРѕРµРј", "РІС‚СЂРѕРµРј"
 			)
 		{
 			m_Nodes[NodeNo].m_Words[0].m_Lemma = "together";
 			m_Nodes[NodeNo].m_Words[0].m_Word = "together";
 		}
 		else
-		// транслитерируем
+		// С‚СЂР°РЅСЃР»РёС‚РµСЂРёСЂСѓРµРј
 		for (long i=0; i < m_Nodes[NodeNo].m_Words.size(); i++)
 		{
-			// восстанавливаем лемму
+			// РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р»РµРјРјСѓ
 			assert (i < RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWordsSize());
 			if( i < RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWordsSize() )
 				m_Nodes[NodeNo].m_Words[i].m_Lemma = RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWord(i).m_Lemma;

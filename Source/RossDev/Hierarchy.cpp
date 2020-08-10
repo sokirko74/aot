@@ -142,7 +142,7 @@ void CHierarchyView::ShowGraph()
     Tcl_Eval(theInterp,s);
 };
 
-// добавить узел
+// РґРѕР±Р°РІРёС‚СЊ СѓР·РµР»
 void CHierarchyView::OnButton1() 
 {
 	// TODO: Add your control notification handler code here

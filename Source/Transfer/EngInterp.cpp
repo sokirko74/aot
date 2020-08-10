@@ -24,14 +24,14 @@ void CEngSemStructure::InitEngVals(CEngSemNode& Node)
 		semPattern.LoadGramFromDict();
 		if (semPattern.m_GramCorteges.empty())
 		{
-			// Добавляем пустой кортеж, если в статье не было найдено GFi
+			// Р”РѕР±Р°РІР»СЏРµРј РїСѓСЃС‚РѕР№ РєРѕСЂС‚РµР¶, РµСЃР»Рё РІ СЃС‚Р°С‚СЊРµ РЅРµ Р±С‹Р»Рѕ РЅР°Р№РґРµРЅРѕ GFi
 			semPattern.m_GramCorteges.push_back(TCortege());
 		};
 
 		Node.m_Patterns.push_back(semPattern);
 
 		/*
-			добавляем  паттерны копулы в специальный  массив, у копула не может больше двух валентностей
+			РґРѕР±Р°РІР»СЏРµРј  РїР°С‚С‚РµСЂРЅС‹ РєРѕРїСѓР»С‹ РІ СЃРїРµС†РёР°Р»СЊРЅС‹Р№  РјР°СЃСЃРёРІ, Сѓ РєРѕРїСѓР»Р° РЅРµ РјРѕР¶РµС‚ Р±РѕР»СЊС€Рµ РґРІСѓС… РІР°Р»РµРЅС‚РЅРѕСЃС‚РµР№
 		*/
 		if (HasThisGX(semPattern.m_GramCorteges,"Copul", Node.GetType()))
 			for (size_t ValNo=1;  ValNo<=2; ValNo++)
@@ -182,7 +182,7 @@ int CEngSemStructure::GetEnglishNodeBadWeight(int iRusNode, CEngInterp& UnitInte
 				break;
 		}
 
-// если валентность не найдена и нет пометы, что эта валентность может отсутствовать, то это ошибка
+// РµСЃР»Рё РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ РЅРµ РЅР°Р№РґРµРЅР° Рё РЅРµС‚ РїРѕРјРµС‚С‹, С‡С‚Рѕ СЌС‚Р° РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ РјРѕР¶РµС‚ РѕС‚СЃСѓС‚СЃС‚РІРѕРІР°С‚СЊ, С‚Рѕ СЌС‚Рѕ РѕС€РёР±РєР°
 		if( j == vectorTargetRelationsNum.size() )
 		{
 			CSemPattern semPattern;
@@ -200,7 +200,7 @@ int CEngSemStructure::GetEnglishNodeBadWeight(int iRusNode, CEngInterp& UnitInte
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// выдает номер валентности для реверсивной связи
+// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё РґР»СЏ СЂРµРІРµСЂСЃРёРІРЅРѕР№ СЃРІСЏР·Рё
 
 int CEngSemStructure::GetReverseRelValNo(const CSemRelation& rusRel,CEngSemNode& reverseNode)
 {
@@ -229,7 +229,7 @@ int CEngSemStructure::GetReverseRelValNo(const CSemRelation& rusRel,CEngSemNode&
 CEngInterp CEngSemStructure::FindBestEnglishNodes(int iRusNode,vector<CEngInterp>& vectorEngEquivs,vector<long>& RusRelationsToValsOfNode,int& iBestSubjRel)
 {
 	/*
-		если мы сюда поппали, тогда хоть какие-то переводы  должны  быть (хотя бы по заглушкам)
+		РµСЃР»Рё РјС‹ СЃСЋРґР° РїРѕРїРїР°Р»Рё, С‚РѕРіРґР° С…РѕС‚СЊ РєР°РєРёРµ-С‚Рѕ РїРµСЂРµРІРѕРґС‹  РґРѕР»Р¶РЅС‹  Р±С‹С‚СЊ (С…РѕС‚СЏ Р±С‹ РїРѕ Р·Р°РіР»СѓС€РєР°Рј)
 	*/
 	assert ( !vectorEngEquivs.empty() );
 	int iBestEquiv = 0;
@@ -237,7 +237,7 @@ CEngInterp CEngSemStructure::FindBestEnglishNodes(int iRusNode,vector<CEngInterp
 	vector<long> goodRels;		
 	int iMinBadWeight = 0;
 
-	//перебираем найденные по АОССу англ. эквиваленты
+	//РїРµСЂРµР±РёСЂР°РµРј РЅР°Р№РґРµРЅРЅС‹Рµ РїРѕ РђРћРЎРЎСѓ Р°РЅРіР». СЌРєРІРёРІР°Р»РµРЅС‚С‹
 	for( int i=0; i<vectorEngEquivs.size(); i++ )
 	{
 		int iBadWeight = GetEnglishNodeBadWeight(iRusNode, vectorEngEquivs[i], goodRels, iSubjRel);
@@ -321,7 +321,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 		if( engNode.m_MainWordNo >= 0 )
 		{
 			if (AVREM_Tense != zero_tn) 
-				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,"по полю RUSETENSE");
+				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,"РїРѕ РїРѕР»СЋ RUSETENSE");
 			CorrectTenseByDictVerbFeatures(engNode); // "RESTR" "not_cont"
 		}
 	}
@@ -343,7 +343,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 				engNode.SetGrammemsRich( 0 );
 				engNode.RusNode = iRusNode; 
 				TransferGrammems (RusStr.GetNode(iRusNode), engNode, "InterpretOneNode");
-				// инициализируем части речи с помомощью функции EngPOSByRusPOS
+				// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј С‡Р°СЃС‚Рё СЂРµС‡Рё СЃ РїРѕРјРѕРјРѕС‰СЊСЋ С„СѓРЅРєС†РёРё EngPOSByRusPOS
 				for (long i=0; i < engNode.m_Words.size(); i++ )
 				{
 					engNode.m_Words[i].m_Poses = EngPOSByRusPOS(GetOnePOS(RusStr.GetNode(iRusNode).GetWord(i).m_Poses), RusStr.GetNode(iRusNode).GetWord(i).m_Lemma);
@@ -362,7 +362,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 	}
 
 	if( engNode.GetType()!=NoneRoss && engNode.GetUnitNo()!=ErrUnitNo &&
-		GetRossHolder(engNode.GetType())->HasFieldValue("RESTR","ед",engNode.GetUnitNo()) )
+		GetRossHolder(engNode.GetType())->HasFieldValue("RESTR","РµРґ",engNode.GetUnitNo()) )
 	{
 		engNode.DeleteGrammemsRich( eAllNumbers );
 		engNode.AddOneGrammemRich( eSingular );
@@ -425,9 +425,9 @@ int CEngSemStructure::InterpretCopulNodeAndChildren( CEnglishEquivMap& mapRNodeT
 		engRel.m_SynReal = TranslateRelization(rusRel.m_SynReal, RusStr.GetNode(rusRel.m_TargetNodeNo));
 
 		/*
-			предполагается, что копулы не могут быть взяты добавочных статей, поэтому  грузим GF из основной статьи.
-			но лучше как-нибудь это переделать  и грузить GF из engRel.m_Valency.m_UnitNo,
-			а еще предполагется, что копулы есть только в AOCC, хотя зачем такое предположение нужно?
+			РїСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ РєРѕРїСѓР»С‹ РЅРµ РјРѕРіСѓС‚ Р±С‹С‚СЊ РІР·СЏС‚С‹ РґРѕР±Р°РІРѕС‡РЅС‹С… СЃС‚Р°С‚РµР№, РїРѕСЌС‚РѕРјСѓ  РіСЂСѓР·РёРј GF РёР· РѕСЃРЅРѕРІРЅРѕР№ СЃС‚Р°С‚СЊРё.
+			РЅРѕ Р»СѓС‡С€Рµ РєР°Рє-РЅРёР±СѓРґСЊ СЌС‚Рѕ РїРµСЂРµРґРµР»Р°С‚СЊ  Рё РіСЂСѓР·РёС‚СЊ GF РёР· engRel.m_Valency.m_UnitNo,
+			Р° РµС‰Рµ РїСЂРµРґРїРѕР»Р°РіРµС‚СЃСЏ, С‡С‚Рѕ РєРѕРїСѓР»С‹ РµСЃС‚СЊ С‚РѕР»СЊРєРѕ РІ AOCC, С…РѕС‚СЏ Р·Р°С‡РµРј С‚Р°РєРѕРµ РїСЂРµРґРїРѕР»РѕР¶РµРЅРёРµ РЅСѓР¶РЅРѕ?
 		*/
 		vector<CValency>::const_iterator it =  find(m_Nodes[iEngCopulParentNode].m_Vals.begin(), m_Nodes[iEngCopulParentNode].m_Vals.end(), rusRel.m_Valency);
 		if (it == m_Nodes[iEngCopulParentNode].m_Vals.end())
@@ -461,7 +461,7 @@ int CEngSemStructure::InterpretCopulNodeAndChildren( CEnglishEquivMap& mapRNodeT
 			{
 				m_Nodes[iEngCopulNode].m_Patterns.push_back(semPattern);
 				engRel.m_Pattern = semPattern;
-				// Следующий оператор  вставлен Сокиркой для анализа фразы "Индия  считается  космической державой"
+				// РЎР»РµРґСѓСЋС‰РёР№ РѕРїРµСЂР°С‚РѕСЂ  РІСЃС‚Р°РІР»РµРЅ РЎРѕРєРёСЂРєРѕР№ РґР»СЏ Р°РЅР°Р»РёР·Р° С„СЂР°Р·С‹ "РРЅРґРёСЏ  СЃС‡РёС‚Р°РµС‚СЃСЏ  РєРѕСЃРјРёС‡РµСЃРєРѕР№ РґРµСЂР¶Р°РІРѕР№"
 				engRel.m_bInterpreted = true;
 				
 		
@@ -508,8 +508,8 @@ int CEngSemStructure::InterpretRusNodeAndItsChildren( CEnglishEquivMap& mapRNode
 		CEngSemRelation engRel = *RusStr.GetRelation(vectorTargetRelationsNum[i]);
 		engRel.m_SynReal = TranslateRelization(rusRel.m_SynReal, RusStr.GetNode(rusRel.m_TargetNodeNo));
 
-		// если  найдена LF, в которой записан каким предлогом должно управляться слово-ситуация,
-		// то нужно удалить предлог с отношения, чтобы он не переводился по общим законам
+		// РµСЃР»Рё  РЅР°Р№РґРµРЅР° LF, РІ РєРѕС‚РѕСЂРѕР№ Р·Р°РїРёСЃР°РЅ РєР°РєРёРј РїСЂРµРґР»РѕРіРѕРј РґРѕР»Р¶РЅРѕ СѓРїСЂР°РІР»СЏС‚СЊСЃСЏ СЃР»РѕРІРѕ-СЃРёС‚СѓР°С†РёСЏ,
+		// С‚Рѕ РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ РїСЂРµРґР»РѕРі СЃ РѕС‚РЅРѕС€РµРЅРёСЏ, С‡С‚РѕР±С‹ РѕРЅ РЅРµ РїРµСЂРµРІРѕРґРёР»СЃСЏ РїРѕ РѕР±С‰РёРј Р·Р°РєРѕРЅР°Рј
 		if( FindLexFunct(rusRel.m_SourceNodeNo, rusRel.m_TargetNodeNo) != -1 )
 		{
 			if( m_Nodes[iEngNode].m_MainWordNo != -1 )
@@ -524,7 +524,7 @@ int CEngSemStructure::InterpretRusNodeAndItsChildren( CEnglishEquivMap& mapRNode
 		engRel.m_Valency.m_UnitNo = ErrUnitNo;
 		engRel.m_Valency.m_RossHolder = NULL;
 
-		// выясняем, кому принаделжит данная валентность
+		// РІС‹СЏСЃРЅСЏРµРј, РєРѕРјСѓ РїСЂРёРЅР°РґРµР»Р¶РёС‚ РґР°РЅРЅР°СЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ
 		int iValencyOwner = engRel.m_bReverseRel ? iEngActantNode : iEngNode;
 		CEngSemNode& EngValencyOwner = m_Nodes[iValencyOwner];
 
@@ -579,7 +579,7 @@ int CEngSemStructure::InterpretRusNodeAndItsChildren( CEnglishEquivMap& mapRNode
 
 
 /////////////////////////////////////////////////////////////////////////////
-// перевод предлогов на связи
+// РїРµСЂРµРІРѕРґ РїСЂРµРґР»РѕРіРѕРІ РЅР° СЃРІСЏР·Рё
 //#pragma runtime_checks("", off)
 // 
 
@@ -590,8 +590,8 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 	Result= RusSynReal;
 	Result.m_Preps.clear();
 	
-	// надо обнулить кортеж, а то будут считать, что это отношение пришло из англ. словарей,
-	// а кортеж на самом деле пришел из русского словаря 
+	// РЅР°РґРѕ РѕР±РЅСѓР»РёС‚СЊ РєРѕСЂС‚РµР¶, Р° С‚Рѕ Р±СѓРґСѓС‚ СЃС‡РёС‚Р°С‚СЊ, С‡С‚Рѕ СЌС‚Рѕ РѕС‚РЅРѕС€РµРЅРёРµ РїСЂРёС€Р»Рѕ РёР· Р°РЅРіР». СЃР»РѕРІР°СЂРµР№,
+	// Р° РєРѕСЂС‚РµР¶ РЅР° СЃР°РјРѕРј РґРµР»Рµ РїСЂРёС€РµР» РёР· СЂСѓСЃСЃРєРѕРіРѕ СЃР»РѕРІР°СЂСЏ 
 	
 	Result.m_Cortege.m_DomItemNos[0] = -1;
 	
@@ -612,14 +612,14 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 		
 		GetEngEquivsFromRusArticle(vectorEngEquivs,prep_int.m_UnitNo,prep_int.m_DictType);
 
-		// ====== обработка поля ESF2: удаляем все переводы, которые не попали под ESF		  Например:
-		// перед дверью -> in front of the door
-		// перед началом -> before the door
+		// ====== РѕР±СЂР°Р±РѕС‚РєР° РїРѕР»СЏ ESF2: СѓРґР°Р»СЏРµРј РІСЃРµ РїРµСЂРµРІРѕРґС‹, РєРѕС‚РѕСЂС‹Рµ РЅРµ РїРѕРїР°Р»Рё РїРѕРґ ESF		  РќР°РїСЂРёРјРµСЂ:
+		// РїРµСЂРµРґ РґРІРµСЂСЊСЋ -> in front of the door
+		// РїРµСЂРµРґ РЅР°С‡Р°Р»РѕРј -> before the door
 	    GetAFieldVector("ESF", OborRoss, vectorACX, prep_int.m_UnitNo);
 
 		for( int j=0; j<vectorACX.size(); j++ )
 		{
-			if( vectorACX[j].m_LeafId == 2 ) // если это АCХ2
+			if( vectorACX[j].m_LeafId == 2 ) // РµСЃР»Рё СЌС‚Рѕ РђCРҐ2
 			{
 				strACX = GetCortegeStr(OborRoss,vectorACX[j]);
 				SemFets.clear();
@@ -648,7 +648,7 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 			};
 			vectorEngEquivs = tempEngEquivs;
 		};
-// =============  конец обработки ESF2
+// =============  РєРѕРЅРµС† РѕР±СЂР°Р±РѕС‚РєРё ESF2
 		for( int k=0; k<vectorEngEquivs.size(); k++ )
 		{
 			if( vectorEngEquivs[k].m_iMeanNum==10 ) 
@@ -663,9 +663,9 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 		}
 		
 		
-		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc=="А1(НЕ)" )
+		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc=="Рђ1(РќР•)" )
 			Result.m_AlgStr = vectorEngEquivs[0].m_StrLexFunc;
-		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc=="А2(НЕ)" )
+		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc=="Рђ2(РќР•)" )
 			Result.m_AlgStr = vectorEngEquivs[0].m_StrLexFunc;
 			
 	}

@@ -73,7 +73,7 @@ void CSignatEditor::OnDelete()
 BOOL CSignatEditor::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	// инициализирем набор доменов в сигнатуре
+	// РёРЅРёС†РёР°Р»РёР·РёСЂРµРј РЅР°Р±РѕСЂ РґРѕРјРµРЅРѕРІ РІ СЃРёРіРЅР°С‚СѓСЂРµ
 	char buffer[2000];
 	assert (m_DomainString.GetLength() <  2000);
 	strcpy (buffer,m_DomainString);
@@ -84,7 +84,7 @@ BOOL CSignatEditor::OnInitDialog()
 		s = strtok (NULL, " ");
 	};
 
-	// инициализируем общий набор доменов 
+	// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РѕР±С‰РёР№ РЅР°Р±РѕСЂ РґРѕРјРµРЅРѕРІ 
 	for (size_t i=0; i<GetRoss()->m_Domens.size(); i++)
 	{
 		const CDomen&  D = GetRoss()->m_Domens[i];

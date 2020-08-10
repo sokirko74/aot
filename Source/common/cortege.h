@@ -21,8 +21,8 @@ const char _FieldFormatEqual[] = "%-8s== %s";
 template <int MaxNumDom>
 struct TBasicCortege {
 public:
-	BYTE m_FieldNo;      // индекс в массиве Ross :: Fields
-	BYTE m_SignatNo;  // индекс в массиве Ross :: Fields[FunNo].m_Signats
+	BYTE m_FieldNo;      // РёРЅРґРµРєСЃ РІ РјР°СЃСЃРёРІРµ Ross :: Fields
+	BYTE m_SignatNo;  // РёРЅРґРµРєСЃ РІ РјР°СЃСЃРёРІРµ Ross :: Fields[FunNo].m_Signats
 	BYTE m_LevelId;
 	BYTE m_LeafId;
 	BYTE m_BracketLeafId;

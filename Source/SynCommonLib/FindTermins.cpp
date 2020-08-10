@@ -95,8 +95,8 @@ bool CSentence::FindTerminsHelper(	CWordVector::iterator words,
 	bool bWordEq = false;
 	string str_word =  words->m_strUpperWord;
 	
-	// раньше считалось, что в оборотоах нет лемм ( а теперь они есть),
-	// поэтому я добавил следующий if (Сокирко)
+	// СЂР°РЅСЊС€Рµ СЃС‡РёС‚Р°Р»РѕСЃСЊ, С‡С‚Рѕ РІ РѕР±РѕСЂРѕС‚РѕР°С… РЅРµС‚ Р»РµРјРј ( Р° С‚РµРїРµСЂСЊ РѕРЅРё РµСЃС‚СЊ),
+	// РїРѕСЌС‚РѕРјСѓ СЏ РґРѕР±Р°РІРёР» СЃР»РµРґСѓСЋС‰РёР№ if (РЎРѕРєРёСЂРєРѕ)
 	int i = 0;
     if (		!IsInNonAtomicOborPairs(words - m_Words.begin()) ) 
 	for(  ; i < words->GetHomonymsCount() ; i++ )
@@ -114,7 +114,7 @@ bool CSentence::FindTerminsHelper(	CWordVector::iterator words,
 		}
 	}
 	
-	//в термине с оборотом слов может быть меньше , чем в модели
+	//РІ С‚РµСЂРјРёРЅРµ СЃ РѕР±РѕСЂРѕС‚РѕРј СЃР»РѕРІ РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРµРЅСЊС€Рµ , С‡РµРј РІ РјРѕРґРµР»Рё
 	bool bIsInObor = false;	
 	while(	   (termin != end_of_termin)
 		    && (str_word == *termin) 
@@ -137,8 +137,8 @@ bool CSentence::FindTerminsHelper(	CWordVector::iterator words,
 
 
 
-	//если вдруг в термине есть какая-нибудь запятая или что-то, у чего не может быть омонимов, то сравниваем с m_strWord
-	//пустая лемма м.б. у слов из оборотов
+	//РµСЃР»Рё РІРґСЂСѓРі РІ С‚РµСЂРјРёРЅРµ РµСЃС‚СЊ РєР°РєР°СЏ-РЅРёР±СѓРґСЊ Р·Р°РїСЏС‚Р°СЏ РёР»Рё С‡С‚Рѕ-С‚Рѕ, Сѓ С‡РµРіРѕ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕРјРѕРЅРёРјРѕРІ, С‚Рѕ СЃСЂР°РІРЅРёРІР°РµРј СЃ m_strWord
+	//РїСѓСЃС‚Р°СЏ Р»РµРјРјР° Рј.Р±. Сѓ СЃР»РѕРІ РёР· РѕР±РѕСЂРѕС‚РѕРІ
 	int lem_len;
 	const char* lemma;
 	if(i == 1)
@@ -250,10 +250,10 @@ void CSentence::FindTermins()
 					RmlMakeUpper(strLemma, GetOpt()->m_Language);
 					pred.SetStringToCompare(strLemma.c_str());					
 
-					// Ищем термины, которые начинаются со слова strLemma
+					// РС‰РµРј С‚РµСЂРјРёРЅС‹, РєРѕС‚РѕСЂС‹Рµ РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃРѕ СЃР»РѕРІР° strLemma
 					termin_index_iter = lower_bound(TerminsIndexes.begin(), TerminsIndexes.end(), -1, pred);
 
-					//  если не нашлось ни одного термина, который  начинается с этой леммы, переходим к след. омониму
+					//  РµСЃР»Рё РЅРµ РЅР°С€Р»РѕСЃСЊ РЅРё РѕРґРЅРѕРіРѕ С‚РµСЂРјРёРЅР°, РєРѕС‚РѕСЂС‹Р№  РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ СЌС‚РѕР№ Р»РµРјРјС‹, РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґ. РѕРјРѕРЅРёРјСѓ
 					if(termin_index_iter == TerminsIndexes.end()) continue;
 
 					const char* debug_current_termin  = (*pTermins)[*termin_index_iter].m_strTermin;
@@ -261,7 +261,7 @@ void CSentence::FindTermins()
 
 					const CGroups* pModel = (*pTermins)[*termin_index_iter].m_pModel;
 
-					// идем по всем словам, которые начинаются с леммы  "strLemma"
+					// РёРґРµРј РїРѕ РІСЃРµРј СЃР»РѕРІР°Рј, РєРѕС‚РѕСЂС‹Рµ РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃ Р»РµРјРјС‹  "strLemma"
 					while( EqToTermin(word, (*pTermins)[*termin_index_iter][0], pModel->sent[0], k) )
 					{
 						
@@ -278,12 +278,12 @@ void CSentence::FindTermins()
 							SetAllOtherHomsDelIfNotGood(word, k);	
 						}
 						bool bError;
-						if( FindTerminsHelper(m_Words.begin() + j , //начало отрезка слов, где искать
-												m_Words.begin() + WordsSegments[n].second + 1, //его конец
-												(*pTermins)[*termin_index_iter].begin() , // начало цепочки слов, входящих в термин
-												(*pTermins)[*termin_index_iter].end(), // ее конец
-												pModel->sent.begin() , //начало цепочки, в которой хранятся грам. инфо. про слово в термине
-												pModel->sent.end() , // её конец
+						if( FindTerminsHelper(m_Words.begin() + j , //РЅР°С‡Р°Р»Рѕ РѕС‚СЂРµР·РєР° СЃР»РѕРІ, РіРґРµ РёСЃРєР°С‚СЊ
+												m_Words.begin() + WordsSegments[n].second + 1, //РµРіРѕ РєРѕРЅРµС†
+												(*pTermins)[*termin_index_iter].begin() , // РЅР°С‡Р°Р»Рѕ С†РµРїРѕС‡РєРё СЃР»РѕРІ, РІС…РѕРґСЏС‰РёС… РІ С‚РµСЂРјРёРЅ
+												(*pTermins)[*termin_index_iter].end(), // РµРµ РєРѕРЅРµС†
+												pModel->sent.begin() , //РЅР°С‡Р°Р»Рѕ С†РµРїРѕС‡РєРё, РІ РєРѕС‚РѕСЂРѕР№ С…СЂР°РЅСЏС‚СЃСЏ РіСЂР°Рј. РёРЅС„Рѕ. РїСЂРѕ СЃР»РѕРІРѕ РІ С‚РµСЂРјРёРЅРµ
+												pModel->sent.end() , // РµС‘ РєРѕРЅРµС†
 												bError))
 						{
 							bFound = true;
@@ -310,7 +310,7 @@ void CSentence::FindTermins()
 
 					if(bFound)
 						break;
-				} //  цикл по омонимам 
+				} //  С†РёРєР» РїРѕ РѕРјРѕРЅРёРјР°Рј 
 
 				if( bFound )
 				{

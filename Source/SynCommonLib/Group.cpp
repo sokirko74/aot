@@ -141,9 +141,9 @@ int CGroupsVector :: get_maximal_group_no(size_t WordNo)  const
 	return -1;
 };
 
-// 1.Если нет группы, в которую входит WordNo, то функция возращает WordNo.
-// 2.Иначе функция возращает номер первого слова самой минимальной из 
-//   главных групп.
+// 1.Р•СЃР»Рё РЅРµС‚ РіСЂСѓРїРїС‹, РІ РєРѕС‚РѕСЂСѓСЋ РІС…РѕРґРёС‚ WordNo, С‚Рѕ С„СѓРЅРєС†РёСЏ РІРѕР·СЂР°С‰Р°РµС‚ WordNo.
+// 2.РРЅР°С‡Рµ С„СѓРЅРєС†РёСЏ РІРѕР·СЂР°С‰Р°РµС‚ РЅРѕРјРµСЂ РїРµСЂРІРѕРіРѕ СЃР»РѕРІР° СЃР°РјРѕР№ РјРёРЅРёРјР°Р»СЊРЅРѕР№ РёР· 
+//   РіР»Р°РІРЅС‹С… РіСЂСѓРїРї.
   
 int CGroupsVector :: get_main_word(size_t WordNo)  const 
 {
@@ -173,11 +173,11 @@ int CGroupsVector :: get_main_word_in_group(const CPeriodWithMainWord& G) const
 };
 
 
-// Все подгруппы группы G должны стоять слева от G,
-// но не все группы, стоящие слева, являются ее подгруппами.
-// Все подгруппы, которые стоят слева, либо являются ее подгруппами,
-// либо стоят левее по предложению. Таким образом, на множестве
-// groups задан строгий порядок. 
+// Р’СЃРµ РїРѕРґРіСЂСѓРїРїС‹ РіСЂСѓРїРїС‹ G РґРѕР»Р¶РЅС‹ СЃС‚РѕСЏС‚СЊ СЃР»РµРІР° РѕС‚ G,
+// РЅРѕ РЅРµ РІСЃРµ РіСЂСѓРїРїС‹, СЃС‚РѕСЏС‰РёРµ СЃР»РµРІР°, СЏРІР»СЏСЋС‚СЃСЏ РµРµ РїРѕРґРіСЂСѓРїРїР°РјРё.
+// Р’СЃРµ РїРѕРґРіСЂСѓРїРїС‹, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏС‚ СЃР»РµРІР°, Р»РёР±Рѕ СЏРІР»СЏСЋС‚СЃСЏ РµРµ РїРѕРґРіСЂСѓРїРїР°РјРё,
+// Р»РёР±Рѕ СЃС‚РѕСЏС‚ Р»РµРІРµРµ РїРѕ РїСЂРµРґР»РѕР¶РµРЅРёСЋ. РўР°РєРёРј РѕР±СЂР°Р·РѕРј, РЅР° РјРЅРѕР¶РµСЃС‚РІРµ
+// groups Р·Р°РґР°РЅ СЃС‚СЂРѕРіРёР№ РїРѕСЂСЏРґРѕРє. 
  
 int CGroupsVector :: create_group (const CGroup& G)
 {
@@ -304,7 +304,7 @@ bool CGroups :: has_sub_clauses(size_t GroupNo)  const
 };
 
 /*
-	выдает самую большую группу, которая включает WordNo и которая не включает клауз
+	РІС‹РґР°РµС‚ СЃР°РјСѓСЋ Р±РѕР»СЊС€СѓСЋ РіСЂСѓРїРїСѓ, РєРѕС‚РѕСЂР°СЏ РІРєР»СЋС‡Р°РµС‚ WordNo Рё РєРѕС‚РѕСЂР°СЏ РЅРµ РІРєР»СЋС‡Р°РµС‚ РєР»Р°СѓР·
 */
 int CGroups :: get_maximal_group_no_without_clause(size_t WordNo)  const 
 {
@@ -356,7 +356,7 @@ void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD gramm
 		{
 			CGroup& Gi = ((CGroup&)get_maximal_group(i));
 
-			if( Gi.m_MainWordNo == i && Gi.m_bRussianNounNumeralGroup ) //имеют зависимые грамкоды
+			if( Gi.m_MainWordNo == i && Gi.m_bRussianNounNumeralGroup ) //РёРјРµСЋС‚ Р·Р°РІРёСЃРёРјС‹Рµ РіСЂР°РјРєРѕРґС‹
 			{
 				Gi.SetGrammems(Gi.GetGrammems() & (grammems | ~breaks));
 				string gcNoun = string(sent[i].GetGramcodes());
@@ -393,7 +393,7 @@ bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const char
 	return isok;
 }
 
-void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD grammems) //для добавления рода к СЛОЖ_ЧИСЛ
+void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD grammems) //РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ СЂРѕРґР° Рє РЎР›РћР–_Р§РРЎР›
 {
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
 	{
@@ -508,7 +508,7 @@ void CGroups :: BuildSimilarSynRels(CGroup& G, int iGroupNum)
 	else
 		iSource = i;
 
-    if(iSource  == -1) return; // возможна пунктуационная ошибка входного текста
+    if(iSource  == -1) return; // РІРѕР·РјРѕР¶РЅР° РїСѓРЅРєС‚СѓР°С†РёРѕРЅРЅР°СЏ РѕС€РёР±РєР° РІС…РѕРґРЅРѕРіРѕ С‚РµРєСЃС‚Р°
 	
 
 	// connect iSource to all maximal subgroups, except itself

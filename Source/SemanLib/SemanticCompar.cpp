@@ -2,30 +2,30 @@
 #include "SemanticRusStructure.h"
 
 /*
-Правила для третьего класса
-Будем называть существительные SF = 1 SUBST 2 ABSTR 3 PARAM 4 ESTIM 5 INTEL неисчисляемыми. 1) Если мы встречаем  больше/меньше + С рд ед и С не является неисчисялемым, 
-тогда  здесь сравнительная степень образована от прилагательного "большой", а не от числитльного
-"много":
-Например:
-  Это больше меня  
-  Слот больше суслика. 
-2) Если мы встречаем оборот "все(НАР) больше" или "все(НАР) меньше" + С рд  
-(переводить такую конструкцию нужно с помощью оборота "more and more" ("less and less"))
-  +Все больше землян утверждало 
-  + ему приходилось производить все больше и больше обуви (с редупликацией )
-3) Если справа от сравнительного слова идет числительное 
-            +Больше двух тысяч людей  пришло на митинг
+РџСЂР°РІРёР»Р° РґР»СЏ С‚СЂРµС‚СЊРµРіРѕ РєР»Р°СЃСЃР°
+Р‘СѓРґРµРј РЅР°Р·С‹РІР°С‚СЊ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рµ SF = 1 SUBST 2 ABSTR 3 PARAM 4 ESTIM 5 INTEL РЅРµРёСЃС‡РёСЃР»СЏРµРјС‹РјРё. 1) Р•СЃР»Рё РјС‹ РІСЃС‚СЂРµС‡Р°РµРј  Р±РѕР»СЊС€Рµ/РјРµРЅСЊС€Рµ + РЎ СЂРґ РµРґ Рё РЎ РЅРµ СЏРІР»СЏРµС‚СЃСЏ РЅРµРёСЃС‡РёСЃСЏР»РµРјС‹Рј, 
+С‚РѕРіРґР°  Р·РґРµСЃСЊ СЃСЂР°РІРЅРёС‚РµР»СЊРЅР°СЏ СЃС‚РµРїРµРЅСЊ РѕР±СЂР°Р·РѕРІР°РЅР° РѕС‚ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРіРѕ "Р±РѕР»СЊС€РѕР№", Р° РЅРµ РѕС‚ С‡РёСЃР»РёС‚Р»СЊРЅРѕРіРѕ
+"РјРЅРѕРіРѕ":
+РќР°РїСЂРёРјРµСЂ:
+  Р­С‚Рѕ Р±РѕР»СЊС€Рµ РјРµРЅСЏ  
+  РЎР»РѕС‚ Р±РѕР»СЊС€Рµ СЃСѓСЃР»РёРєР°. 
+2) Р•СЃР»Рё РјС‹ РІСЃС‚СЂРµС‡Р°РµРј РѕР±РѕСЂРѕС‚ "РІСЃРµ(РќРђР ) Р±РѕР»СЊС€Рµ" РёР»Рё "РІСЃРµ(РќРђР ) РјРµРЅСЊС€Рµ" + РЎ СЂРґ  
+(РїРµСЂРµРІРѕРґРёС‚СЊ С‚Р°РєСѓСЋ РєРѕРЅСЃС‚СЂСѓРєС†РёСЋ РЅСѓР¶РЅРѕ СЃ РїРѕРјРѕС‰СЊСЋ РѕР±РѕСЂРѕС‚Р° "more and more" ("less and less"))
+  +Р’СЃРµ Р±РѕР»СЊС€Рµ Р·РµРјР»СЏРЅ СѓС‚РІРµСЂР¶РґР°Р»Рѕ 
+  + РµРјСѓ РїСЂРёС…РѕРґРёР»РѕСЃСЊ РїСЂРѕРёР·РІРѕРґРёС‚СЊ РІСЃРµ Р±РѕР»СЊС€Рµ Рё Р±РѕР»СЊС€Рµ РѕР±СѓРІРё (СЃ СЂРµРґСѓРїР»РёРєР°С†РёРµР№ )
+3) Р•СЃР»Рё СЃРїСЂР°РІР° РѕС‚ СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕРіРѕ СЃР»РѕРІР° РёРґРµС‚ С‡РёСЃР»РёС‚РµР»СЊРЅРѕРµ 
+            +Р‘РѕР»СЊС€Рµ РґРІСѓС… С‚С‹СЃСЏС‡ Р»СЋРґРµР№  РїСЂРёС€Р»Рѕ РЅР° РјРёС‚РёРЅРі
 
 */
 
 bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 {
  /*
-  первое правило: после слов "больше" или "меньше" как числительных не может стоять
-  исчисляемое существительное в единственном числе, исчисляемость 
-  определяется  по SF.
-   Таким образом во фразе "Стол больше стула" мы уничтожаем    
-   интерпретацию слова больше как числительного.
+  РїРµСЂРІРѕРµ РїСЂР°РІРёР»Рѕ: РїРѕСЃР»Рµ СЃР»РѕРІ "Р±РѕР»СЊС€Рµ" РёР»Рё "РјРµРЅСЊС€Рµ" РєР°Рє С‡РёСЃР»РёС‚РµР»СЊРЅС‹С… РЅРµ РјРѕР¶РµС‚ СЃС‚РѕСЏС‚СЊ
+  РёСЃС‡РёСЃР»СЏРµРјРѕРµ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ РІ РµРґРёРЅСЃС‚РІРµРЅРЅРѕРј С‡РёСЃР»Рµ, РёСЃС‡РёСЃР»СЏРµРјРѕСЃС‚СЊ 
+  РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ  РїРѕ SF.
+   РўР°РєРёРј РѕР±СЂР°Р·РѕРј РІРѕ С„СЂР°Р·Рµ "РЎС‚РѕР» Р±РѕР»СЊС€Рµ СЃС‚СѓР»Р°" РјС‹ СѓРЅРёС‡С‚РѕР¶Р°РµРј    
+   РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ СЃР»РѕРІР° Р±РѕР»СЊС€Рµ РєР°Рє С‡РёСЃР»РёС‚РµР»СЊРЅРѕРіРѕ.
 
  */
   vector<bool> UncounNodes;
@@ -35,12 +35,12 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 		UncounNodes[i] = 
 				HasRichPOS(i, NOUN)  
 			&& m_Nodes[i].HasOneGrammem (rSingular)
-			&& (   HasSemFetPro(m_Nodes[i].m_NodeSemFets, "SUBST") // "воды"
-				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "ABSTR") // "влюбчивочть"
-				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "PARAM") // "мощность"
-				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "ESTIM") // "красота"
-				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "INTEL") // "ум"
-				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "EMOT") // "надежда"			 
+			&& (   HasSemFetPro(m_Nodes[i].m_NodeSemFets, "SUBST") // "РІРѕРґС‹"
+				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "ABSTR") // "РІР»СЋР±С‡РёРІРѕС‡С‚СЊ"
+				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "PARAM") // "РјРѕС‰РЅРѕСЃС‚СЊ"
+				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "ESTIM") // "РєСЂР°СЃРѕС‚Р°"
+				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "INTEL") // "СѓРј"
+				|| HasSemFetPro(m_Nodes[i].m_NodeSemFets, "EMOT") // "РЅР°РґРµР¶РґР°"			 
 				);
 
 
@@ -54,25 +54,25 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 			  if  (UncounNodes[i+1]) continue;
 
 			  /*
-				он был больше учителем, чем сторожем.
+				РѕРЅ Р±С‹Р» Р±РѕР»СЊС€Рµ СѓС‡РёС‚РµР»РµРј, С‡РµРј СЃС‚РѕСЂРѕР¶РµРј.
 			  */
 			  if  ( !m_Nodes[i+1].HasOneGrammem (rGenitiv)) continue;
 			  return false;
 		  };
  /*
-  конец первого правила
+  РєРѕРЅРµС† РїРµСЂРІРѕРіРѕ РїСЂР°РІРёР»Р°
  */
 
  /* 
- второе  правило: сравнительная степень от прилагательного "большой"- "big"
- ("маленький" - "small") используется только в сравнительных клаузах типа "Слон больше суслика" 
+ РІС‚РѕСЂРѕРµ  РїСЂР°РІРёР»Рѕ: СЃСЂР°РІРЅРёС‚РµР»СЊРЅР°СЏ СЃС‚РµРїРµРЅСЊ РѕС‚ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРіРѕ "Р±РѕР»СЊС€РѕР№"- "big"
+ ("РјР°Р»РµРЅСЊРєРёР№" - "small") РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ СЃСЂР°РІРЅРёС‚РµР»СЊРЅС‹С… РєР»Р°СѓР·Р°С… С‚РёРїР° "РЎР»РѕРЅ Р±РѕР»СЊС€Рµ СЃСѓСЃР»РёРєР°" 
 
- А во фразе "он работает больше тебя" слово "больше" - это наречие "много".
+ Рђ РІРѕ С„СЂР°Р·Рµ "РѕРЅ СЂР°Р±РѕС‚Р°РµС‚ Р±РѕР»СЊС€Рµ С‚РµР±СЏ" СЃР»РѕРІРѕ "Р±РѕР»СЊС€Рµ" - СЌС‚Рѕ РЅР°СЂРµС‡РёРµ "РјРЅРѕРіРѕ".
 */
 
  if (m_Clauses[ClauseNo].m_ClauseType != COMPARATIVE_T)
  	 for (long i = m_Clauses[ClauseNo].m_BeginNodeNo+1;  i < m_Clauses[ClauseNo].m_EndNodeNo ; i++)
-		 if (    m_Nodes[i].IsLemmaList ("БОЛЬШОЙ", "МАЛЕНЬКИЙ", "") 
+		 if (    m_Nodes[i].IsLemmaList ("Р‘РћР›Р¬РЁРћР™", "РњРђР›Р•РќР¬РљРР™", "") 
 		    &&	m_Nodes[i].HasOneGrammem(rComparative)
 		 )
 	  return false;
@@ -80,13 +80,13 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 
 
  /*
-  конец второго правила
+  РєРѕРЅРµС† РІС‚РѕСЂРѕРіРѕ РїСЂР°РІРёР»Р°
  */
 
 
  /*
-  если перед сравнительным числительным стоит "все", нужно приписать 
-  оператор "ПРОДОЛЖ" этому числительному, а само  "все" удалить
+  РµСЃР»Рё РїРµСЂРµРґ СЃСЂР°РІРЅРёС‚РµР»СЊРЅС‹Рј С‡РёСЃР»РёС‚РµР»СЊРЅС‹Рј СЃС‚РѕРёС‚ "РІСЃРµ", РЅСѓР¶РЅРѕ РїСЂРёРїРёСЃР°С‚СЊ 
+  РѕРїРµСЂР°С‚РѕСЂ "РџР РћР”РћР›Р–" СЌС‚РѕРјСѓ С‡РёСЃР»РёС‚РµР»СЊРЅРѕРјСѓ, Р° СЃР°РјРѕ  "РІСЃРµ" СѓРґР°Р»РёС‚СЊ
  */
   for (long i = m_Clauses[ClauseNo].m_BeginNodeNo+1;  i < m_Clauses[ClauseNo].m_EndNodeNo ; i++)
   	  if (			HasRichPOS(i, NUMERAL) 
@@ -94,8 +94,8 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 			  &&	CanBeDeleted(i)
 		 )
 	  {
-			  if ( !m_Nodes[i-1].IsWordForm("ВСЕ") ) continue;
-	  		  m_Nodes[i].m_RelOperators.push_back("ПРОДОЛЖ");
+			  if ( !m_Nodes[i-1].IsWordForm("Р’РЎР•") ) continue;
+	  		  m_Nodes[i].m_RelOperators.push_back("РџР РћР”РћР›Р–");
 			  DelNode(i-1);
 			  i--;
 	  }
@@ -105,10 +105,10 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 
 
 
-// он был больше учителем, чем сторожем.
-// находит слова  больше ...,чем
-// я не знаю  человека добрее, чем Вася
-/// === ОБРАБАТЫВАЕМ ТОЛЬКО ПОСЛНДНИЙ КОМПАРАТИВ В КЛАУЗЕ 
+// РѕРЅ Р±С‹Р» Р±РѕР»СЊС€Рµ СѓС‡РёС‚РµР»РµРј, С‡РµРј СЃС‚РѕСЂРѕР¶РµРј.
+// РЅР°С…РѕРґРёС‚ СЃР»РѕРІР°  Р±РѕР»СЊС€Рµ ...,С‡РµРј
+// СЏ РЅРµ Р·РЅР°СЋ  С‡РµР»РѕРІРµРєР° РґРѕР±СЂРµРµ, С‡РµРј Р’Р°СЃСЏ
+/// === РћР‘Р РђР‘РђРўР«Р’РђР•Рњ РўРћР›Р¬РљРћ РџРћРЎР›РќР”РќРР™ РљРћРњРџРђР РђРўРР’ Р’ РљР›РђРЈР—Р• 
 void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 {
  try {
@@ -123,12 +123,12 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 		long  k=CompNodeNo+1;
 		for (; k < EndNodeNo; k++)
         if  (     m_Nodes[k].IsPrimitive()
-			   && (m_Nodes[k].m_Words[0].m_Lemma == "ЧЕМ")
+			   && (m_Nodes[k].m_Words[0].m_Lemma == "Р§Р•Рњ")
 			 )
 		break;
         if (k == EndNodeNo) continue;
         long ChemNodeNo = k;
-		//получаем SF1 компаратива из РОСС		
+		//РїРѕР»СѓС‡Р°РµРј SF1 РєРѕРјРїР°СЂР°С‚РёРІР° РёР· Р РћРЎРЎ		
 		vector<QWORD> SemFets = GetSemFetsOfFirstValency(CompNodeNo);
 
 		for (k=ChemNodeNo+1; k < EndNodeNo; k++)
@@ -137,7 +137,7 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 			     || HasRichPOS (k, PRONOUN)
 			  )
 		   {
-			 // удаляем отношение, которое было построено по валенностям
+			 // СѓРґР°Р»СЏРµРј РѕС‚РЅРѕС€РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ Р±С‹Р»Рѕ РїРѕСЃС‚СЂРѕРµРЅРѕ РїРѕ РІР°Р»РµРЅРЅРѕСЃС‚СЏРј
 			 long RelNo = FindFirstRelation(CompNodeNo, k);
 			 if (RelNo != -1)
 				 EraseRelation(RelNo);
@@ -174,10 +174,10 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
           
          
 
-		// уничтожаю "чем"
+		// СѓРЅРёС‡С‚РѕР¶Р°СЋ "С‡РµРј"
         m_Nodes[ChemNodeNo].m_bToDelete = true;
 
-		// делаем компаратив оператором однородности
+		// РґРµР»Р°РµРј РєРѕРјРїР°СЂР°С‚РёРІ РѕРїРµСЂР°С‚РѕСЂРѕРј РѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё
 		m_Nodes[CompNodeNo].m_NodeType = MNA;
 		m_Nodes[CompNodeNo].m_MNAType = CHEMOborot;
 		
@@ -186,7 +186,7 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 	};
 
   DelNodesToDelete();
-  // обрабатываем случай "Налоги будут в два раза больше, чем в этом году"
+  // РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј СЃР»СѓС‡Р°Р№ "РќР°Р»РѕРіРё Р±СѓРґСѓС‚ РІ РґРІР° СЂР°Р·Р° Р±РѕР»СЊС€Рµ, С‡РµРј РІ СЌС‚РѕРј РіРѕРґСѓ"
 
   if (m_Clauses[ClauseNo].m_ClauseType == COMPARATIVE_T)
   if (m_Clauses[ClauseNo].m_bHasCHEM)
@@ -218,10 +218,10 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 
 
 /*
-  Клаузы со сравнительным "больше" ("меньше") и с "чем":
- "он был больше учителм, чем сторожем"
- здесь нужно переделать "большой"  в "много", чтобы переводилось в 
-  "he was more a teacher, than a watchman", а не в
+  РљР»Р°СѓР·С‹ СЃРѕ СЃСЂР°РІРЅРёС‚РµР»СЊРЅС‹Рј "Р±РѕР»СЊС€Рµ" ("РјРµРЅСЊС€Рµ") Рё СЃ "С‡РµРј":
+ "РѕРЅ Р±С‹Р» Р±РѕР»СЊС€Рµ СѓС‡РёС‚РµР»Рј, С‡РµРј СЃС‚РѕСЂРѕР¶РµРј"
+ Р·РґРµСЃСЊ РЅСѓР¶РЅРѕ РїРµСЂРµРґРµР»Р°С‚СЊ "Р±РѕР»СЊС€РѕР№"  РІ "РјРЅРѕРіРѕ", С‡С‚РѕР±С‹ РїРµСЂРµРІРѕРґРёР»РѕСЃСЊ РІ 
+  "he was more a teacher, than a watchman", Р° РЅРµ РІ
   "he was bigger a teacher, than a watchman"
 
    
@@ -234,8 +234,8 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 
 	  for (long CompNodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  CompNodeNo <   m_Clauses[ClauseNo].m_EndNodeNo; CompNodeNo++)
 		if (    m_Nodes[CompNodeNo].HasOneGrammem(rComparative)
-			&&  (   m_Nodes[CompNodeNo].IsLemma("БОЛЬШОЙ") 		
-				 || m_Nodes[CompNodeNo].IsLemma("МАЛЕНЬКИЙ") 		
+			&&  (   m_Nodes[CompNodeNo].IsLemma("Р‘РћР›Р¬РЁРћР™") 		
+				 || m_Nodes[CompNodeNo].IsLemma("РњРђР›Р•РќР¬РљРР™") 		
 				)
 		   )
 		{
@@ -249,7 +249,7 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 				 break;
 			if ( k == m_Clauses[ClauseNo].m_EndNodeNo ) return;
 			if (!m_Nodes[k].IsPrimitive()) return;
-			m_Nodes[k].m_Words[0].m_Lemma = "МНОГО";
+			m_Nodes[k].m_Words[0].m_Lemma = "РњРќРћР“Рћ";
 			InitInterps(m_Nodes[k].m_Words[0], false, ClauseNo, m_Nodes[k]);
 		};
 	};
@@ -258,22 +258,22 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 };
 
 /*
-   Клаузы, где в вершине стоит слово с отрицанием или "нет" и где ест слово
-  "больше", например:
-  "он не хочет пить больше вина"
-  "У меня нет больше надежды."
-Здесь  нужно разорвать стрелку QUANTIT, которая идет от "больше"  к следующему  за ним существительному, поскольку "больше" относится к глаголу.
+   РљР»Р°СѓР·С‹, РіРґРµ РІ РІРµСЂС€РёРЅРµ СЃС‚РѕРёС‚ СЃР»РѕРІРѕ СЃ РѕС‚СЂРёС†Р°РЅРёРµРј РёР»Рё "РЅРµС‚" Рё РіРґРµ РµСЃС‚ СЃР»РѕРІРѕ
+  "Р±РѕР»СЊС€Рµ", РЅР°РїСЂРёРјРµСЂ:
+  "РѕРЅ РЅРµ С…РѕС‡РµС‚ РїРёС‚СЊ Р±РѕР»СЊС€Рµ РІРёРЅР°"
+  "РЈ РјРµРЅСЏ РЅРµС‚ Р±РѕР»СЊС€Рµ РЅР°РґРµР¶РґС‹."
+Р—РґРµСЃСЊ  РЅСѓР¶РЅРѕ СЂР°Р·РѕСЂРІР°С‚СЊ СЃС‚СЂРµР»РєСѓ QUANTIT, РєРѕС‚РѕСЂР°СЏ РёРґРµС‚ РѕС‚ "Р±РѕР»СЊС€Рµ"  Рє СЃР»РµРґСѓСЋС‰РµРјСѓ  Р·Р° РЅРёРј СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРјСѓ, РїРѕСЃРєРѕР»СЊРєСѓ "Р±РѕР»СЊС€Рµ" РѕС‚РЅРѕСЃРёС‚СЃСЏ Рє РіР»Р°РіРѕР»Сѓ.
 
 */
 void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 {
    if (m_Clauses[ClauseNo].m_ClauseSyntaxTop != -1)
-   if (    m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].HasRelOperator("НЕ") 
-	    || m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].IsLemma ("НЕТ")
+   if (    m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].HasRelOperator("РќР•") 
+	    || m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].IsLemma ("РќР•Рў")
 	  )
    for (long CompNodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  CompNodeNo <   m_Clauses[ClauseNo].m_EndNodeNo; CompNodeNo++)
 		if (    m_Nodes[CompNodeNo].HasOneGrammem (rComparative)
-			&&  m_Nodes[CompNodeNo].IsLemma("МНОГО") 		
+			&&  m_Nodes[CompNodeNo].IsLemma("РњРќРћР“Рћ") 		
 		   )
 		{
 			vector<long> Rels;
@@ -281,11 +281,11 @@ void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 			if (Rels.size() ==  1)
 			{
 				/*
-				 кроме удаления, нужно еще скопировать внутренние граммемы во внешние,
-например, "больше воды" - здесь, когда есть связь QUANTIT,  у "воды" внешние граммемы "им,вн",а поскольку связь QUANTIT разрывается, внешние граммемы нужно приравнять				 внутренним
+				 РєСЂРѕРјРµ СѓРґР°Р»РµРЅРёСЏ, РЅСѓР¶РЅРѕ РµС‰Рµ СЃРєРѕРїРёСЂРѕРІР°С‚СЊ РІРЅСѓС‚СЂРµРЅРЅРёРµ РіСЂР°РјРјРµРјС‹ РІРѕ РІРЅРµС€РЅРёРµ,
+РЅР°РїСЂРёРјРµСЂ, "Р±РѕР»СЊС€Рµ РІРѕРґС‹" - Р·РґРµСЃСЊ, РєРѕРіРґР° РµСЃС‚СЊ СЃРІСЏР·СЊ QUANTIT,  Сѓ "РІРѕРґС‹" РІРЅРµС€РЅРёРµ РіСЂР°РјРјРµРјС‹ "РёРј,РІРЅ",Р° РїРѕСЃРєРѕР»СЊРєСѓ СЃРІСЏР·СЊ QUANTIT СЂР°Р·СЂС‹РІР°РµС‚СЃСЏ, РІРЅРµС€РЅРёРµ РіСЂР°РјРјРµРјС‹ РЅСѓР¶РЅРѕ РїСЂРёСЂР°РІРЅСЏС‚СЊ				 РІРЅСѓС‚СЂРµРЅРЅРёРј
 				*/
 
-				assert (m_SynRelations[Rels[0]].m_SynRelName == "НАР_ЧИСЛ_СУЩ");
+				assert (m_SynRelations[Rels[0]].m_SynRelName == "РќРђР _Р§РРЎР›_РЎРЈР©");
 				CRusSemNode& NounNode = m_Nodes[m_SynRelations[Rels[0]].m_SourceNodeNo];
 				assert (NounNode.IsWordContainer());
 				assert (NounNode.m_MainWordNo != -1);
@@ -297,33 +297,33 @@ void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 		};
 };
 
-// Я не знаю человека добрее Васи
-// Я пел в два раза дольше тебя
-// сейчас важнее эказамен
-/// === ОБРАБАТЫВАЕМ ТОЛЬКО ПОСЛЕНДНИЙ КОМПАРАТИВ В КЛАУЗЕ 
+// РЇ РЅРµ Р·РЅР°СЋ С‡РµР»РѕРІРµРєР° РґРѕР±СЂРµРµ Р’Р°СЃРё
+// РЇ РїРµР» РІ РґРІР° СЂР°Р·Р° РґРѕР»СЊС€Рµ С‚РµР±СЏ
+// СЃРµР№С‡Р°СЃ РІР°Р¶РЅРµРµ СЌРєР°Р·Р°РјРµРЅ
+/// === РћР‘Р РђР‘РђРўР«Р’РђР•Рњ РўРћР›Р¬РљРћ РџРћРЎР›Р•РќР”РќРР™ РљРћРњРџРђР РђРўРР’ Р’ РљР›РђРЈР—Р• 
 void CRusSemStructure::BuildOutcomingOf_COMP_Obor(long ClauseNo)
 {
 try {
 	int EndNodeNo	= m_Clauses[ClauseNo].m_EndNodeNo;
 
 	/*
-		Чтобы потсроить дерево	для
-		1. "я	мечтал побыстрее его женить", 
-		2. "чем лучше	он видел, тем хуже он шел"
-		нужно,	чтобы была проведена обстоятельственная	стрелка	от всех	глагольных форм
-		клаузы к  компаративу
+		Р§С‚РѕР±С‹ РїРѕС‚СЃСЂРѕРёС‚СЊ РґРµСЂРµРІРѕ	РґР»СЏ
+		1. "СЏ	РјРµС‡С‚Р°Р» РїРѕР±С‹СЃС‚СЂРµРµ РµРіРѕ Р¶РµРЅРёС‚СЊ", 
+		2. "С‡РµРј Р»СѓС‡С€Рµ	РѕРЅ РІРёРґРµР», С‚РµРј С…СѓР¶Рµ РѕРЅ С€РµР»"
+		РЅСѓР¶РЅРѕ,	С‡С‚РѕР±С‹ Р±С‹Р»Р° РїСЂРѕРІРµРґРµРЅР° РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРµРЅРЅР°СЏ	СЃС‚СЂРµР»РєР°	РѕС‚ РІСЃРµС…	РіР»Р°РіРѕР»СЊРЅС‹С… С„РѕСЂРј
+		РєР»Р°СѓР·С‹ Рє  РєРѕРјРїР°СЂР°С‚РёРІСѓ
 	*/
 	for (long	CompNodeNo = EndNodeNo-1;  CompNodeNo >=  m_Clauses[ClauseNo].m_BeginNodeNo; CompNodeNo--)
 		if (	m_Nodes[CompNodeNo].m_bCompAdj		)
 		{
 
-			if (!m_Nodes[CompNodeNo].IsLemma ("БОЛЬШОЙ"))
+			if (!m_Nodes[CompNodeNo].IsLemma ("Р‘РћР›Р¬РЁРћР™"))
 				for	(long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo <	 EndNodeNo;	NodeNo++)
 					if	(		IsVerbForm (m_Nodes[NodeNo])	
-							||	HasRichPOS (NodeNo, PREDK) // "у	меня нет больше	 надежды"
+							||	HasRichPOS (NodeNo, PREDK) // "Сѓ	РјРµРЅСЏ РЅРµС‚ Р±РѕР»СЊС€Рµ	 РЅР°РґРµР¶РґС‹"
 						)
 					{
-						AddRelation(CRusSemRelation(CValency("ACT",A_C), NodeNo, CompNodeNo,  "чистое_обстоятельство"));			
+						AddRelation(CRusSemRelation(CValency("ACT",A_C), NodeNo, CompNodeNo,  "С‡РёСЃС‚РѕРµ_РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРѕ"));			
 					};
 		}
 
@@ -345,20 +345,20 @@ try {
 				};
 
 			if (k == EndNodeNo)	
-				// в клаузе, где	главное	слово -	компаратив,	 может быть	не выражено	
-				//  дополнение компаратива "я	буду умнее"
+				// РІ РєР»Р°СѓР·Рµ, РіРґРµ	РіР»Р°РІРЅРѕРµ	СЃР»РѕРІРѕ -	РєРѕРјРїР°СЂР°С‚РёРІ,	 РјРѕР¶РµС‚ Р±С‹С‚СЊ	РЅРµ РІС‹СЂР°Р¶РµРЅРѕ	
+				//  РґРѕРїРѕР»РЅРµРЅРёРµ РєРѕРјРїР°СЂР°С‚РёРІР° "СЏ	Р±СѓРґСѓ СѓРјРЅРµРµ"
 				if (m_Clauses[ClauseNo].m_ClauseType != COMPARATIVE_T) 
 					continue;
 
 			/*
-			для некоторых узлов было вычислено, что для них не	нужно искать второго актанта
-			например, "прыгайте выше, друзья""
+			РґР»СЏ РЅРµРєРѕС‚РѕСЂС‹С… СѓР·Р»РѕРІ Р±С‹Р»Рѕ РІС‹С‡РёСЃР»РµРЅРѕ, С‡С‚Рѕ РґР»СЏ РЅРёС… РЅРµ	РЅСѓР¶РЅРѕ РёСЃРєР°С‚СЊ РІС‚РѕСЂРѕРіРѕ Р°РєС‚Р°РЅС‚Р°
+			РЅР°РїСЂРёРјРµСЂ, "РїСЂС‹РіР°Р№С‚Рµ РІС‹С€Рµ, РґСЂСѓР·СЊСЏ""
 			*/
 			if (m_Nodes[CompNodeNo].m_bCompWithOneActant)
 				continue;
 
-			// я не	знаю  человека добрее Васи
-			// поищем именную группу до	сравнительного прилагательного
+			// СЏ РЅРµ	Р·РЅР°СЋ  С‡РµР»РѕРІРµРєР° РґРѕР±СЂРµРµ Р’Р°СЃРё
+			// РїРѕРёС‰РµРј РёРјРµРЅРЅСѓСЋ РіСЂСѓРїРїСѓ РґРѕ	СЃСЂР°РІРЅРёС‚РµР»СЊРЅРѕРіРѕ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРіРѕ
 			for	(long l=CompNodeNo-1; l	>= m_Clauses[ClauseNo].m_BeginNodeNo; l--)
 				if (!m_Nodes[l].m_bSaveIsParenthesis)
 					if (HasRichPOS (l, NOUN)	|| HasRichPOS (l, PRONOUN))
@@ -366,8 +366,8 @@ try {
 							ChildNodes.push_back(l);
 
 
-			//	если не	нашлось	ни одной ИГ, то	поищем ИГ в	им.	после компаратива
-			//	"сейчас	важнее эказамен"
+			//	РµСЃР»Рё РЅРµ	РЅР°С€Р»РѕСЃСЊ	РЅРё РѕРґРЅРѕР№ РР“, С‚Рѕ	РїРѕРёС‰РµРј РР“ РІ	РёРј.	РїРѕСЃР»Рµ РєРѕРјРїР°СЂР°С‚РёРІР°
+			//	"СЃРµР№С‡Р°СЃ	РІР°Р¶РЅРµРµ СЌРєР°Р·Р°РјРµРЅ"
 			if	(		(m_Clauses[ClauseNo].m_ClauseType	== COMPARATIVE_T) 
 					&&	(ChildNodes.size() ==	0) 
 				)
@@ -389,15 +389,15 @@ try {
 					continue;
 			};
 
-			//получаем SF1 компаратива из РОСС		
+			//РїРѕР»СѓС‡Р°РµРј SF1 РєРѕРјРїР°СЂР°С‚РёРІР° РёР· Р РћРЎРЎ		
 			vector<QWORD> SemFets =	GetSemFetsOfFirstValency(CompNodeNo);
 
 			for	(long l=0; l	< ChildNodes.size(); l++)
 			{
 				AddRelation(CRusSemRelation(CValency(), CompNodeNo, ChildNodes[l],	 ""));
 				m_Relations[m_Relations.size()	- 1].m_SemFets = SemFets;
-				if	(l == 0) //	группа после компаратива, пишем	на эту стрелку 
-					//	к_доп+Р, взятые	как	будто из РОССа
+				if	(l == 0) //	РіСЂСѓРїРїР° РїРѕСЃР»Рµ РєРѕРјРїР°СЂР°С‚РёРІР°, РїРёС€РµРј	РЅР° СЌС‚Сѓ СЃС‚СЂРµР»РєСѓ 
+					//	Рє_РґРѕРї+Р , РІР·СЏС‚С‹Рµ	РєР°Рє	Р±СѓРґС‚Рѕ РёР· Р РћРЎРЎР°
 				{
 					m_Relations[m_Relations.size() - 1].m_SynReal.m_Cortege.m_DomItemNos[0]	= GetRossHolder(Ross)->IndirObjSynONo;
 					m_Relations[m_Relations.size() - 1].m_SynReal.m_Cortege.m_DomItemNos[1]	= GetRossHolder(Ross)->GenitivNo;

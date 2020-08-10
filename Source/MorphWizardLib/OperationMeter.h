@@ -31,7 +31,7 @@ public:
 		if( pos!=m_maxPos && pos>=0 || m_curPos!=0 ) 
 		{
 			m_maxPos = pos;
-			SetStepCount(count);	// êîððåêöèÿ øàãà
+			SetStepCount(count);	// ÐºÐ¾Ñ€Ñ€ÐµÐºÑ†Ð¸Ñ ÑˆÐ°Ð³Ð°
 			UpdateMaxPos();
 	//		if( m_curPos>m_maxPos ) 
 			{

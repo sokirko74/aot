@@ -9,7 +9,7 @@
 #include "../SynCommonLib/Group.h"
 
 const int  g_AdjModifCount = 2;
-const char g_strAdjModif[g_AdjModifCount][MAX_WORD_LEN] = {"—¿Ã€…","“¿ Œ…"};
+const char g_strAdjModif[g_AdjModifCount][MAX_WORD_LEN] = {"–°–ê–ú–´–ô","–¢–ê–ö–û–ô"};
 
 
 

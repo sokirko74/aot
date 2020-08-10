@@ -256,8 +256,8 @@ void CArticleView::OnArticleViewDelField()
 
 void CArticleView::EditOneValue(CRossDevTextField& F)
 {
-	vector<TCortege> L; //старое значение
-	TCortege NewValue; //новое  значение
+	vector<TCortege> L; //СЃС‚Р°СЂРѕРµ Р·РЅР°С‡РµРЅРёРµ
+	TCortege NewValue; //РЅРѕРІРѕРµ  Р·РЅР°С‡РµРЅРёРµ
 
 	CArticleDoc* D =  (CArticleDoc*)GetDocument();
 	try
@@ -319,7 +319,7 @@ void CArticleView::WriteToEdit (vector<TCortege10>& L, size_t nPos)
 
 	size_t LevelId = 0;
 	CString S;
-	// сначала записываем первую строку, т.к. она сильно отличается от всех
+	// СЃРЅР°С‡Р°Р»Р° Р·Р°РїРёСЃС‹РІР°РµРј РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ, С‚.Рє. РѕРЅР° СЃРёР»СЊРЅРѕ РѕС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ РІСЃРµС…
 	if (L.size() > 0)
 	{
 		string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[0].m_FieldNo].m_Signats[L[0].GetSignatNo()].sFrmt, L[0]);
@@ -343,7 +343,7 @@ void CArticleView::WriteToEdit (vector<TCortege10>& L, size_t nPos)
 	for (size_t i=1; i<L.size(); i++)
 	{
 		string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[i].m_FieldNo].m_Signats[L[i].GetSignatNo()].sFrmt, L[i]);
-		// cмотри выше Положение о выравнивании
+		// cРјРѕС‚СЂРё РІС‹С€Рµ РџРѕР»РѕР¶РµРЅРёРµ Рѕ РІС‹СЂР°РІРЅРёРІР°РЅРёРё
 		if (L[i].m_LevelId > LevelId)
 		{
 			LevelId = L[i].m_LevelId;
@@ -364,13 +364,13 @@ void CArticleView::WriteToEdit (vector<TCortege10>& L, size_t nPos)
 		InsertLine (i+A.m_Fields[nPos].StartLine,R);
 	}
 
-	// StartLine не изменился, а EndLine нужно вычислить заново
+	// StartLine РЅРµ РёР·РјРµРЅРёР»СЃСЏ, Р° EndLine РЅСѓР¶РЅРѕ РІС‹С‡РёСЃР»РёС‚СЊ Р·Р°РЅРѕРІРѕ
 	((CArticleDoc*)GetDocument())->Markout();
 };
 
 void CArticleView::EditFormulaValue (int nPos, char TypeRes)
 {
-	vector<TCortege> OldList; //старое значение
+	vector<TCortege> OldList; //СЃС‚Р°СЂРѕРµ Р·РЅР°С‡РµРЅРёРµ
 	vector<TCortege> NewList;
 	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
 	CRossDevTextField F(	A.m_Fields[nPos].FieldNo, A.m_Fields[nPos].LeafId, A.m_Fields[nPos].BracketLeafId);
@@ -508,7 +508,7 @@ bool IsKeyWordArticle (const CString& word, COLORREF& C, DWORD Data)
 	vector<TBaseDomItem>::const_iterator It = lower_bound (RossDoc->m_BasicDomItems.begin(), RossDoc->m_BasicDomItems.end(), I);
     if (    (It == RossDoc->m_BasicDomItems.end())
 		|| !(*It == I)
-		|| (  CString(RossDoc->GetRoss()->m_Domens[It->DomNo].DomStr) == CString("D_1"))) // если это не элемент метаязыка
+		|| (  CString(RossDoc->GetRoss()->m_Domens[It->DomNo].DomStr) == CString("D_1"))) // РµСЃР»Рё СЌС‚Рѕ РЅРµ СЌР»РµРјРµРЅС‚ РјРµС‚Р°СЏР·С‹РєР°
 	{
 		if (IsRossEntry(word))
 		{

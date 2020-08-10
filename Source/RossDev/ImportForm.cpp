@@ -17,7 +17,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 /////////////////////////////////////////////////////////////////////////////
-// —ImportForm dialog
+// –°ImportForm dialog
 
 
 CImportForm::CImportForm(CRossDoc* pRossDoc,
@@ -26,7 +26,7 @@ CImportForm::CImportForm(CRossDoc* pRossDoc,
 	  m_pRossDoc(pRossDoc)
 	  
 {
-	//{{AFX_DATA_INIT(—ImportForm)
+	//{{AFX_DATA_INIT(–°ImportForm)
 	m_OverWrite = -1;
 	m_Append = -1;
 	m_Skip = 0;
@@ -49,7 +49,7 @@ CImportForm::~CImportForm()
 void CImportForm::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(—ImportForm)
+	//{{AFX_DATA_MAP(–°ImportForm)
 	DDX_Control(pDX, IDC_HOTKEY1, m_HotKeys);
 	DDX_Radio(pDX, IDC_RADIO1, m_OverWrite);
 	DDX_Radio(pDX, IDC_RADIO2, m_Append);
@@ -64,7 +64,7 @@ void CImportForm::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CImportForm, CDialog)
-	//{{AFX_MSG_MAP(—ImportForm)
+	//{{AFX_MSG_MAP(–°ImportForm)
 	ON_BN_CLICKED(IDC_RADIO1, OnRadio1)
 	ON_BN_CLICKED(IDC_BUTTON1, OnRun)
 	ON_BN_CLICKED(IDC_RADIO2, OnRadio2)
@@ -78,7 +78,7 @@ END_MESSAGE_MAP()
 
 
 /////////////////////////////////////////////////////////////////////////////
-// —ImportForm message handlers
+// –°ImportForm message handlers
 
 void CImportForm::OnRadio1() 
 {
@@ -183,7 +183,7 @@ void CImportForm::OnRun()
 	UpdateData(FALSE);
 }
 
-//‚˚·Ó Ù‡ÈÎ‡
+//–≤—ã–±–æ—Ä —Ñ–∞–π–ª–∞
 void CImportForm::OnButton2() 
 {
 	// TODO: Add your control notification handler code here
@@ -206,7 +206,7 @@ BOOL CImportForm::OnInitDialog()
 }
 
 
-//ÒÓı‡ÌÂÌËÂ Ù‡ÈÎ‡ 
+//—Å–æ—Ö—Ä–∞–Ω–µ–Ω–∏–µ —Ñ–∞–π–ª–∞ 
 void CImportForm::OnButton3() 
 {
 	UpdateData(TRUE);
@@ -215,7 +215,7 @@ void CImportForm::OnButton3()
 
 
 
-//ÒÓı‡ÌÂÌËÂ Ù‡ÈÎ‡ 
+//—Å–æ—Ö—Ä–∞–Ω–µ–Ω–∏–µ —Ñ–∞–π–ª–∞ 
 void CImportForm::OnButton4() 
 {
 	// TODO: Add your control notification handler code here

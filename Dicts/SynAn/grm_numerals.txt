@@ -1,26 +1,26 @@
 %% == format_for_numbers ==
-[NUMCARD] -> [TOKEN grm="◊»—À"];
-[NUMORD] -> [TOKEN grm="◊»—À-œ"];
-[BIG-NUM] -> 'Ú˚Òˇ˜‡' | 'ÏËÎÎËÓÌ' | 'ÏËÎÎË‡‰' | 'ÚËÎÎËÓÌ';
-[ABBR] -> [TOKEN grm="‡··" root] [DOT];
-[ ŒÀ»◊1] -> [BIG-NUM] | [DIG] | [NUMCARD]; %% [TOKEN filename!="num_pr.dat"]
-[ ŒÀ»◊2] -> [BIG-NUM] | [DIG] | [NUMCARD] | [NUMORD] | [ABBR];
-[ ŒÀ»◊] -> [ ŒÀ»◊1] [ ŒÀ»◊2 root];
-[ ŒÀ»◊] -> [ ŒÀ»◊] [ ŒÀ»◊2 root];
+[NUMCARD] -> [TOKEN grm="–ß–ò–°–õ"];
+[NUMORD] -> [TOKEN grm="–ß–ò–°–õ-–ü"];
+[BIG-NUM] -> '—Ç—ã—Å—è—á–∞' | '–º–∏–ª–ª–∏–æ–Ω' | '–º–∏–ª–ª–∏–∞—Ä–¥' | '—Ç—Ä–∏–ª–ª–∏–æ–Ω';
+[ABBR] -> [TOKEN grm="–∞–±–±—Ä" root] [DOT];
+[–ö–û–õ–ò–ß1] -> [BIG-NUM] | [DIG] | [NUMCARD]; %% [TOKEN filename!="num_pr.dat"]
+[–ö–û–õ–ò–ß2] -> [BIG-NUM] | [DIG] | [NUMCARD] | [NUMORD] | [ABBR];
+[–ö–û–õ–ò–ß] -> [–ö–û–õ–ò–ß1] [–ö–û–õ–ò–ß2 root];
+[–ö–û–õ–ò–ß] -> [–ö–û–õ–ò–ß] [–ö–û–õ–ò–ß2 root];
 
 [SMALL-DIG] -> '2' | '3' | '4' | '*2' | '*3' | '*4' ;
-[SMALL-NUM] -> '‰‚‡' | 'ÚË' | '˜ÂÚ˚Â' | [SMALL-DIG];
-[ ŒÀ»◊] -> [SMALL-NUM] [BIG-NUM root grm="Â‰, ‰"]; %% : $0.grm := set_nomacc_plural($2.grm);
-[ ŒÀ»◊] -> [NUMCARD] [BIG-NUM root grm="ÏÌ, ‰"]; %% : $0.grm := set_nomacc_plural($2.grm);
+[SMALL-NUM] -> '–¥–≤–∞' | '—Ç—Ä–∏' | '—á–µ—Ç—ã—Ä–µ' | [SMALL-DIG];
+[–ö–û–õ–ò–ß] -> [SMALL-NUM] [BIG-NUM root grm="–µ–¥, —Ä–¥"]; %% : $0.grm := set_nomacc_plural($2.grm);
+[–ö–û–õ–ò–ß] -> [NUMCARD] [BIG-NUM root grm="–º–Ω, —Ä–¥"]; %% : $0.grm := set_nomacc_plural($2.grm);
 				 
 %% == format_for_num_complex ==
-[—ÀŒ∆_◊»—À] -> [DIG] ([COMMA] | [DOT]) [DIG root];
+[–°–õ–û–ñ_–ß–ò–°–õ] -> [DIG] ([COMMA] | [DOT]) [DIG root];
 
 %% == format_for_similar_numerals ==
-%% ÔÓ·ÎÂÏ‡ Ò ‡ÁÎË˜ÂÌËÂÏ "23,7 Ë 5" Ë "23, 7 Ë 5" 
+%% –ø—Ä–æ–±–ª–µ–º–∞ —Å —Ä–∞–∑–ª–∏—á–µ–Ω–∏–µ–º "23,7 –∏ 5" –∏ "23, 7 –∏ 5" 
 
-[ŒƒÕŒ–_◊»—À1] -> [NUMCARD] | [DIG] | [ ŒÀ»◊] | [—ÀŒ∆_◊»—À];
-[ŒƒÕŒ–_◊»—À] -> [ŒƒÕŒ–_◊»—À1] ([CONJ]|[COMMA]) [ŒƒÕŒ–_◊»—À1 root] : $0.grm := agrc($1.grm, $3.grm);
-[ŒƒÕŒ–_◊»—À] -> [ŒƒÕŒ–_◊»—À] ([CONJ]|[COMMA]) [ŒƒÕŒ–_◊»—À1 root];
+[–û–î–ù–û–†_–ß–ò–°–õ1] -> [NUMCARD] | [DIG] | [–ö–û–õ–ò–ß] | [–°–õ–û–ñ_–ß–ò–°–õ];
+[–û–î–ù–û–†_–ß–ò–°–õ] -> [–û–î–ù–û–†_–ß–ò–°–õ1] ([CONJ]|[COMMA]) [–û–î–ù–û–†_–ß–ò–°–õ1 root] : $0.grm := agrc($1.grm, $3.grm);
+[–û–î–ù–û–†_–ß–ò–°–õ] -> [–û–î–ù–û–†_–ß–ò–°–õ] ([CONJ]|[COMMA]) [–û–î–ù–û–†_–ß–ò–°–õ1 root];
 
-[ROOT] -> [ ŒÀ»◊] | [—ÀŒ∆_◊»—À] | [ŒƒÕŒ–_◊»—À];
+[ROOT] -> [–ö–û–õ–ò–ß] | [–°–õ–û–ñ_–ß–ò–°–õ] | [–û–î–ù–û–†_–ß–ò–°–õ];

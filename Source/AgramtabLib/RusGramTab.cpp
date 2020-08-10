@@ -87,7 +87,7 @@ bool CRusGramTab :: ProcessPOSAndGrammems (const char* tab_str, BYTE& PartOfSpee
 
     
     
-   // неизменяемые слова как будто принадлежат всем падежам
+   // РЅРµРёР·РјРµРЅСЏРµРјС‹Рµ СЃР»РѕРІР° РєР°Рє Р±СѓРґС‚Рѕ РїСЂРёРЅР°РґР»РµР¶Р°С‚ РІСЃРµРј РїР°РґРµР¶Р°Рј
    if (			(_QM(rIndeclinable) & grammems)
 		&&		(PartOfSpeech != PREDK )
 	   )
@@ -99,13 +99,13 @@ bool CRusGramTab :: ProcessPOSAndGrammems (const char* tab_str, BYTE& PartOfSpee
    grammems |= rAllGenders | rAllNumbers;
 
 
-    // слова общего рода ('сирота') могут  использованы как 
-	// слова м.р., так и как слова ж.р.
+    // СЃР»РѕРІР° РѕР±С‰РµРіРѕ СЂРѕРґР° ('СЃРёСЂРѕС‚Р°') РјРѕРіСѓС‚  РёСЃРїРѕР»СЊР·РѕРІР°РЅС‹ РєР°Рє 
+	// СЃР»РѕРІР° Рј.СЂ., С‚Р°Рє Рё РєР°Рє СЃР»РѕРІР° Р¶.СЂ.
    if (_QM(rMascFem) & grammems)
 		 grammems |=   _QM(rMasculinum) | _QM(rFeminum);
 		   
-   // слово 'пальто' не изменяется по числам, поэтому может
-   // быть использовано в обоих числах
+   // СЃР»РѕРІРѕ 'РїР°Р»СЊС‚Рѕ' РЅРµ РёР·РјРµРЅСЏРµС‚СЃСЏ РїРѕ С‡РёСЃР»Р°Рј, РїРѕСЌС‚РѕРјСѓ РјРѕР¶РµС‚
+   // Р±С‹С‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРѕ РІ РѕР±РѕРёС… С‡РёСЃР»Р°С…
    if (PartOfSpeech != PREDK )
 	   if ( (_QM(rIndeclinable) & grammems) &&  !(_QM(rSingular) & grammems))
 			grammems |=   _QM(rPlural) | _QM(rSingular);
@@ -120,8 +120,8 @@ bool CRusGramTab :: ProcessPOSAndGrammems (const char* tab_str, BYTE& PartOfSpee
 
 
 
-// Стандартное согласование между двумя именами  по  падежу, причем первый код должен
-// иметь граммему множественного числа 
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ РґРІСѓРјСЏ РёРјРµРЅР°РјРё  РїРѕ  РїР°РґРµР¶Сѓ, РїСЂРёС‡РµРј РїРµСЂРІС‹Р№ РєРѕРґ РґРѕР»Р¶РµРЅ
+// РёРјРµС‚СЊ РіСЂР°РјРјРµРјСѓ РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРіРѕ С‡РёСЃР»Р° 
 inline bool CaseFirstPlural (const CAgramtabLine* l1, const CAgramtabLine* l2) 
   {
       return (     ( (rAllCases  & l1->m_Grammems & l2->m_Grammems) > 0) 
@@ -130,7 +130,7 @@ inline bool CaseFirstPlural (const CAgramtabLine* l1, const CAgramtabLine* l2)
   };
 
 
-// Стандартное согласование между двумя именами  по роду и числу 
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ РґРІСѓРјСЏ РёРјРµРЅР°РјРё  РїРѕ СЂРѕРґСѓ Рё С‡РёСЃР»Сѓ 
 inline bool GenderNumber(const CAgramtabLine* l1, const CAgramtabLine* l2)
 	{
 		 
@@ -140,7 +140,7 @@ inline bool GenderNumber(const CAgramtabLine* l1, const CAgramtabLine* l2)
 				);
 	}
 
-// Стандартное согласование по лицу и числу (для 1 и 2 лица)
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РїРѕ Р»РёС†Сѓ Рё С‡РёСЃР»Сѓ (РґР»СЏ 1 Рё 2 Р»РёС†Р°)
 inline bool PersonNumber(const CAgramtabLine* l1, const CAgramtabLine* l2)
 {
 	size_t t1 = (rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0;
@@ -148,7 +148,7 @@ inline bool PersonNumber(const CAgramtabLine* l1, const CAgramtabLine* l2)
 	return t1 && t2;
 }
 
-// Стандартное согласование между подлежащим и сказуемым
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ РїРѕРґР»РµР¶Р°С‰РёРј Рё СЃРєР°Р·СѓРµРјС‹Рј
 inline bool SubjectPredicate(const CAgramtabLine* subj_l, const CAgramtabLine* verb_l)
 {
     const QWORD& subj =  subj_l->m_Grammems;
@@ -164,32 +164,32 @@ inline bool SubjectPredicate(const CAgramtabLine* subj_l, const CAgramtabLine* v
             ||  ( verb_l->m_PartOfSpeech == PARTICIPLE_SHORT)
         )
 	{
-		// ты вышел 
-		// я вышел
-		// ты был
-		// я красива
-		// мы шли
-		// вы шли
+		// С‚С‹ РІС‹С€РµР» 
+		// СЏ РІС‹С€РµР»
+		// С‚С‹ Р±С‹Р»
+		// СЏ РєСЂР°СЃРёРІР°
+		// РјС‹ С€Р»Рё
+		// РІС‹ С€Р»Рё
 		if(subj & (_QM(rFirstPerson) | _QM(rSecondPerson)))
 			return		(verb & subj & _QM(rPlural) )
 					||	(		(verb & ( _QM(rMasculinum) | _QM(rFeminum) ) )
 						  &&	(verb & subj & _QM(rSingular) )
 						);	
 		else
-			// он вышел
-			// поезд ушел
-			// девочка красива
-			// девочки красивы 	
-			// мальчик красив
+			// РѕРЅ РІС‹С€РµР»
+			// РїРѕРµР·Рґ СѓС€РµР»
+			// РґРµРІРѕС‡РєР° РєСЂР°СЃРёРІР°
+			// РґРµРІРѕС‡РєРё РєСЂР°СЃРёРІС‹ 	
+			// РјР°Р»СЊС‡РёРє РєСЂР°СЃРёРІ
 			return GenderNumber(subj_l, verb_l);
 	}
 	else 
 	if(		( verb & _QM(rPresentTense)) 
 		||	( verb & _QM(rFutureTense )) )
 	{
-		//  я выйду
-		//  ты выедешь
-		//  мы выйдем
+		//  СЏ РІС‹Р№РґСѓ
+		//  С‚С‹ РІС‹РµРґРµС€СЊ
+		//  РјС‹ РІС‹Р№РґРµРј
 		if (	( subj & (_QM(rFirstPerson) | _QM(rSecondPerson)))
 			||	(verb & (_QM(rFirstPerson) | _QM(rSecondPerson))) )
 			return PersonNumber(subj_l, verb_l);
@@ -205,7 +205,7 @@ inline bool SubjectPredicate(const CAgramtabLine* subj_l, const CAgramtabLine* v
 }
 
 
-// Стандартное согласование между двумя именами  по  падежу 
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ РґРІСѓРјСЏ РёРјРµРЅР°РјРё  РїРѕ  РїР°РґРµР¶Сѓ 
 inline bool Case(const CAgramtabLine* l1, const CAgramtabLine* l2)
 {
 	 
@@ -213,8 +213,8 @@ inline bool Case(const CAgramtabLine* l1, const CAgramtabLine* l2)
 }
 
 
-// Стандартное согласование между существительным и прилашательнымпо роду, числу и падежу, если 
-// если существительное одушевленное
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рј Рё РїСЂРёР»Р°С€Р°С‚РµР»СЊРЅС‹РјРїРѕ СЂРѕРґСѓ, С‡РёСЃР»Сѓ Рё РїР°РґРµР¶Сѓ, РµСЃР»Рё 
+// РµСЃР»Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ РѕРґСѓС€РµРІР»РµРЅРЅРѕРµ
 bool GenderNumberCaseAnimRussian (const CAgramtabLine* l1, const CAgramtabLine* l2) 
 {	
     const QWORD& gram_noun = l1->m_Grammems;
@@ -231,8 +231,8 @@ bool GenderNumberCaseAnimRussian (const CAgramtabLine* l1, const CAgramtabLine* 
 					);
 };
 
-// Стандартное согласование между существительным и прилашательнымпо роду, числу и падежу, если 
-// если существительное неодушевленное
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рј Рё РїСЂРёР»Р°С€Р°С‚РµР»СЊРЅС‹РјРїРѕ СЂРѕРґСѓ, С‡РёСЃР»Сѓ Рё РїР°РґРµР¶Сѓ, РµСЃР»Рё 
+// РµСЃР»Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ РЅРµРѕРґСѓС€РµРІР»РµРЅРЅРѕРµ
 bool GenderNumberCaseNotAnimRussian (const CAgramtabLine* l1, const CAgramtabLine* l2) 
 {	
     const QWORD& gram_noun = l1->m_Grammems;
@@ -249,9 +249,9 @@ bool GenderNumberCaseNotAnimRussian (const CAgramtabLine* l1, const CAgramtabLin
 					);
 };
 
-// Стандартное согласование между существительным и прилашательнымпо роду, числу и падежу, если 
-// если существительное не неодушевленное и не одушевленное
-//  (для местоимений, например, "все это было хорошо")
+// РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РјРµР¶РґСѓ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рј Рё РїСЂРёР»Р°С€Р°С‚РµР»СЊРЅС‹РјРїРѕ СЂРѕРґСѓ, С‡РёСЃР»Сѓ Рё РїР°РґРµР¶Сѓ, РµСЃР»Рё 
+// РµСЃР»Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ РЅРµ РЅРµРѕРґСѓС€РµРІР»РµРЅРЅРѕРµ Рё РЅРµ РѕРґСѓС€РµРІР»РµРЅРЅРѕРµ
+//  (РґР»СЏ РјРµСЃС‚РѕРёРјРµРЅРёР№, РЅР°РїСЂРёРјРµСЂ, "РІСЃРµ СЌС‚Рѕ Р±С‹Р»Рѕ С…РѕСЂРѕС€Рѕ")
 bool GenderNumberCaseRussian (const CAgramtabLine* l1, const CAgramtabLine* l2) 
 {	
     const QWORD& gram_noun = l1->m_Grammems;
@@ -270,7 +270,7 @@ bool FiniteFormCoordRussian (const CAgramtabLine* l1, const CAgramtabLine* l2)
     const QWORD& verb1 = l1->m_Grammems;
     const QWORD& verb2 = l2->m_Grammems;
 
-    // жил и был
+    // Р¶РёР» Рё Р±С‹Р»
 	if (verb1 &  verb2 & rAllNumbers)
 	    if (verb1 &  verb2 & _QM(rPastTense))
 	    {
@@ -292,20 +292,20 @@ bool FiniteFormCoordRussian (const CAgramtabLine* l1, const CAgramtabLine* l2)
 
 
 /*
-Примеры работы функции GleicheGenderNumberCase:
-- красивого стол;
-- красивых столы;
-- красивый пирата;
-- красивые пиратов;
-- достойных жизни;
-- достойные матерей;
-- длинные чудовищ
-+ на этот дом;
-+ красивую маму;
-+ в красивый  дом;
-+ в длинное облако;
-+ примерить его цилиндр;
-+ все это 
+РџСЂРёРјРµСЂС‹ СЂР°Р±РѕС‚С‹ С„СѓРЅРєС†РёРё GleicheGenderNumberCase:
+- РєСЂР°СЃРёРІРѕРіРѕ СЃС‚РѕР»;
+- РєСЂР°СЃРёРІС‹С… СЃС‚РѕР»С‹;
+- РєСЂР°СЃРёРІС‹Р№ РїРёСЂР°С‚Р°;
+- РєСЂР°СЃРёРІС‹Рµ РїРёСЂР°С‚РѕРІ;
+- РґРѕСЃС‚РѕР№РЅС‹С… Р¶РёР·РЅРё;
+- РґРѕСЃС‚РѕР№РЅС‹Рµ РјР°С‚РµСЂРµР№;
+- РґР»РёРЅРЅС‹Рµ С‡СѓРґРѕРІРёС‰
++ РЅР° СЌС‚РѕС‚ РґРѕРј;
++ РєСЂР°СЃРёРІСѓСЋ РјР°РјСѓ;
++ РІ РєСЂР°СЃРёРІС‹Р№  РґРѕРј;
++ РІ РґР»РёРЅРЅРѕРµ РѕР±Р»Р°РєРѕ;
++ РїСЂРёРјРµСЂРёС‚СЊ РµРіРѕ С†РёР»РёРЅРґСЂ;
++ РІСЃРµ СЌС‚Рѕ 
 */
 QWORD CRusGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const
 {
@@ -313,18 +313,18 @@ QWORD CRusGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, co
 			||	!strcmp(common_gram_code_noun, "??")
 			||	(strlen (common_gram_code_noun) == 0)
 		)
-			// нет сведений об одушевленности
+			// РЅРµС‚ СЃРІРµРґРµРЅРёР№ РѕР± РѕРґСѓС€РµРІР»РµРЅРЅРѕСЃС‚Рё
 		return Gleiche(GenderNumberCaseRussian, gram_code_noun, gram_code_adj);
 	else
 		if ((GetLine(s2i(common_gram_code_noun))->m_Grammems&_QM(rNonAnimative)) >0)
-				// неодушевленный
+				// РЅРµРѕРґСѓС€РµРІР»РµРЅРЅС‹Р№
 			return Gleiche(GenderNumberCaseNotAnimRussian, gram_code_noun, gram_code_adj);
 		else
 			if ((GetLine(s2i(common_gram_code_noun))->m_Grammems&_QM(rAnimative)) >0)
-				// одушевленный
+				// РѕРґСѓС€РµРІР»РµРЅРЅС‹Р№
 				return Gleiche(GenderNumberCaseAnimRussian, gram_code_noun, gram_code_adj);
 			else
-				// нет сведений об одушевленности
+				// РЅРµС‚ СЃРІРµРґРµРЅРёР№ РѕР± РѕРґСѓС€РµРІР»РµРЅРЅРѕСЃС‚Рё
 				return Gleiche(GenderNumberCaseRussian, gram_code_noun, gram_code_adj);
 
 }
@@ -403,13 +403,13 @@ const char* CRusGramTab::GetClauseNameByType(long type) const
 
 
 /*
-	истина для предикативных типов клауз.
+	РёСЃС‚РёРЅР° РґР»СЏ РїСЂРµРґРёРєР°С‚РёРІРЅС‹С… С‚РёРїРѕРІ РєР»Р°СѓР·.
 */
 bool CRusGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
 {
 	return		(poses & (1<<VERB))
-			||	(poses & (1<<ADVERB_PARTICIPLE)) // субъект деепричастия  совпадлает с субъектом
-												 // главной  клаузы 
+			||	(poses & (1<<ADVERB_PARTICIPLE)) // СЃСѓР±СЉРµРєС‚ РґРµРµРїСЂРёС‡Р°СЃС‚РёСЏ  СЃРѕРІРїР°РґР»Р°РµС‚ СЃ СЃСѓР±СЉРµРєС‚РѕРј
+												 // РіР»Р°РІРЅРѕР№  РєР»Р°СѓР·С‹ 
 			||	(poses & (1<<PARTICIPLE_SHORT))
 			||	(poses & (1<<ADJ_SHORT))
 			||	(poses & (1<<PREDK));
@@ -419,10 +419,10 @@ bool CRusGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
 
 
 
-char months[12][10] = {"ЯНВАРЬ","ФЕВРАЛЬ","МАРТ",
-		       "АПРЕЛЬ","МАЙ","ИЮНЬ",
-		       "ИЮЛЬ","АВГУСТ","СЕНТЯБРЬ"
-		       ,"ОКТЯБРЬ","НОЯБРЬ","ДЕКАБРЬ"};
+char months[12][10] = {"РЇРќР’РђР Р¬","Р¤Р•Р’Р РђР›Р¬","РњРђР Рў",
+		       "РђРџР Р•Р›Р¬","РњРђР™","РР®РќР¬",
+		       "РР®Р›Р¬","РђР’Р“РЈРЎРў","РЎР•РќРўРЇР‘Р Р¬"
+		       ,"РћРљРўРЇР‘Р Р¬","РќРћРЇР‘Р Р¬","Р”Р•РљРђР‘Р Р¬"};
 
 bool CRusGramTab::is_month (const char* lemma) const
 {
@@ -433,7 +433,7 @@ bool CRusGramTab::is_month (const char* lemma) const
    return false;
 }
 
-char SmallNumbers[5][10] = {"ДВА","ТРИ","ЧЕТЫРЕ","ОБА","ПОЛТОРА"};
+char SmallNumbers[5][10] = {"Р”Р’Рђ","РўР Р","Р§Р•РўР«Р Р•","РћР‘Рђ","РџРћР›РўРћР Рђ"};
 
 bool CRusGramTab::is_small_number (const char* lemma) const  
 {
@@ -527,7 +527,7 @@ bool CRusGramTab::is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems)
 
 
 const size_t  ParticleCount = 8;
-const char Particles[ParticleCount][20] = {"ЛИ","ЖЕ","БЫ","УЖ","ТОЛЬКО", "Ж", "Б", "ЛЬ"};
+const char Particles[ParticleCount][20] = {"Р›Р","Р–Р•","Р‘Р«","РЈР–","РўРћР›Р¬РљРћ", "Р–", "Р‘", "Р›Р¬"};
 
 bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 {
@@ -549,39 +549,39 @@ bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 
 
 /*
-	Есть такие  мест. прилагательные, которые могут выступать в роли существительных:
-	"КАЖДЫЙ", "ОДИН", "ДРУГОЙ","ТОТ","КОТОРЫЙ".
-	Для  них не имеет смысла вводит аналогичные местоимения,поскольку  все они могут 
-	быть использованы во всех родах. Эти прилагательные могут вести себя так же, как
-	существительные. Например,
-	Я купил два яблока, в каждом оказалось много червяков
-	Я знаю ту, которая тебя видит
-	Один пришел, другой ушел.
-	Я вижу дом, который разрушился.
-	Вышеуказанные мест. прилагательные отличаются, например, от местоимения "этот" и "всякий", поскольку	
-	трудно себе представить что-то вроде:
-	"эта пришла"
-	"всякая пришла"
-	Но возможно:
-	"всякое бывает"
-	"это бывает"
-	Здесь "всякое" и "это" - простые местоимения ср рода.
+	Р•СЃС‚СЊ С‚Р°РєРёРµ  РјРµСЃС‚. РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рµ, РєРѕС‚РѕСЂС‹Рµ РјРѕРіСѓС‚ РІС‹СЃС‚СѓРїР°С‚СЊ РІ СЂРѕР»Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹С…:
+	"РљРђР–Р”Р«Р™", "РћР”РРќ", "Р”Р РЈР“РћР™","РўРћРў","РљРћРўРћР Р«Р™".
+	Р”Р»СЏ  РЅРёС… РЅРµ РёРјРµРµС‚ СЃРјС‹СЃР»Р° РІРІРѕРґРёС‚ Р°РЅР°Р»РѕРіРёС‡РЅС‹Рµ РјРµСЃС‚РѕРёРјРµРЅРёСЏ,РїРѕСЃРєРѕР»СЊРєСѓ  РІСЃРµ РѕРЅРё РјРѕРіСѓС‚ 
+	Р±С‹С‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅС‹ РІРѕ РІСЃРµС… СЂРѕРґР°С…. Р­С‚Рё РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рµ РјРѕРіСѓС‚ РІРµСЃС‚Рё СЃРµР±СЏ С‚Р°Рє Р¶Рµ, РєР°Рє
+	СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рµ. РќР°РїСЂРёРјРµСЂ,
+	РЇ РєСѓРїРёР» РґРІР° СЏР±Р»РѕРєР°, РІ РєР°Р¶РґРѕРј РѕРєР°Р·Р°Р»РѕСЃСЊ РјРЅРѕРіРѕ С‡РµСЂРІСЏРєРѕРІ
+	РЇ Р·РЅР°СЋ С‚Сѓ, РєРѕС‚РѕСЂР°СЏ С‚РµР±СЏ РІРёРґРёС‚
+	РћРґРёРЅ РїСЂРёС€РµР», РґСЂСѓРіРѕР№ СѓС€РµР».
+	РЇ РІРёР¶Сѓ РґРѕРј, РєРѕС‚РѕСЂС‹Р№ СЂР°Р·СЂСѓС€РёР»СЃСЏ.
+	Р’С‹С€РµСѓРєР°Р·Р°РЅРЅС‹Рµ РјРµСЃС‚. РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рµ РѕС‚Р»РёС‡Р°СЋС‚СЃСЏ, РЅР°РїСЂРёРјРµСЂ, РѕС‚ РјРµСЃС‚РѕРёРјРµРЅРёСЏ "СЌС‚РѕС‚" Рё "РІСЃСЏРєРёР№", РїРѕСЃРєРѕР»СЊРєСѓ	
+	С‚СЂСѓРґРЅРѕ СЃРµР±Рµ РїСЂРµРґСЃС‚Р°РІРёС‚СЊ С‡С‚Рѕ-С‚Рѕ РІСЂРѕРґРµ:
+	"СЌС‚Р° РїСЂРёС€Р»Р°"
+	"РІСЃСЏРєР°СЏ РїСЂРёС€Р»Р°"
+	РќРѕ РІРѕР·РјРѕР¶РЅРѕ:
+	"РІСЃСЏРєРѕРµ Р±С‹РІР°РµС‚"
+	"СЌС‚Рѕ Р±С‹РІР°РµС‚"
+	Р—РґРµСЃСЊ "РІСЃСЏРєРѕРµ" Рё "СЌС‚Рѕ" - РїСЂРѕСЃС‚С‹Рµ РјРµСЃС‚РѕРёРјРµРЅРёСЏ СЃСЂ СЂРѕРґР°.
 
-	!! Таким образом, я не хочу дублировать в морфологии МС-П, если они могут использованы
-	!! во всех родах в качестве существительного.
+	!! РўР°РєРёРј РѕР±СЂР°Р·РѕРј, СЏ РЅРµ С…РѕС‡Сѓ РґСѓР±Р»РёСЂРѕРІР°С‚СЊ РІ РјРѕСЂС„РѕР»РѕРіРёРё РњРЎ-Рџ, РµСЃР»Рё РѕРЅРё РјРѕРіСѓС‚ РёСЃРїРѕР»СЊР·РѕРІР°РЅС‹
+	!! РІРѕ РІСЃРµС… СЂРѕРґР°С… РІ РєР°С‡РµСЃС‚РІРµ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ.
 
-	1 марта 2001 года, Сокирко
+	1 РјР°СЂС‚Р° 2001 РіРѕРґР°, РЎРѕРєРёСЂРєРѕ
 */
 bool CRusGramTab::IsSynNoun(poses_mask_t poses, const char* Lemma) const
 {
 	return   IsMorphNoun (poses) 
 			||( poses & (1 <<PRONOUN ))
 			||(    (poses & (1 <<PRONOUN_P ) )
-				&& (	  !strcmp(Lemma, "КАЖДЫЙ") 
-					||!strcmp(Lemma, "ОДИН") 
-					||!strcmp(Lemma, "ДРУГОЙ") 
-					||!strcmp(Lemma, "ТОТ") 
-					||!strcmp(Lemma, "КОТОРЫЙ") 
+				&& (	  !strcmp(Lemma, "РљРђР–Р”Р«Р™") 
+					||!strcmp(Lemma, "РћР”РРќ") 
+					||!strcmp(Lemma, "Р”Р РЈР“РћР™") 
+					||!strcmp(Lemma, "РўРћРў") 
+					||!strcmp(Lemma, "РљРћРўРћР Р«Р™") 
 					)
 			);
 };
@@ -591,7 +591,7 @@ const int StandardParamAbbrCount = 8;
 const int StandardParamAbbrLength = 4;
 
 const char StandardParamAbbr[StandardParamAbbrCount][StandardParamAbbrLength] =  
-{ "КГ", "КМ", "СМ","МЛ", "МБ","КБ", "МГЦ", "КВ"};
+{ "РљР“", "РљРњ", "РЎРњ","РњР›", "РњР‘","РљР‘", "РњР“Р¦", "РљР’"};
 
 bool CRusGramTab::IsStandardParamAbbr (const char* WordStrUpper) const
 {

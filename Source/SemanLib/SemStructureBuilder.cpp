@@ -55,9 +55,9 @@ bool  CSemStructureBuilder::FindSituations(string text, long UserTreeVariantNo, 
 					ErrorMessage("Syntax has crushed");
 					return false;
 				};
-				m_GlobalSpan.StartTimer("Семантика",0);
+				m_GlobalSpan.StartTimer("РЎРµРјР°РЅС‚РёРєР°",0);
 				m_RusStr.FindSituations(m_CurrentSentence);
-				m_GlobalSpan.EndTimer("Семантика");
+				m_GlobalSpan.EndTimer("РЎРµРјР°РЅС‚РёРєР°");
 				if (m_RusStr.m_bShouldBeStopped) return true;
 			}	
 			else
@@ -93,11 +93,11 @@ bool CSemStructureBuilder::TranslateToEnglish(string& Graph)
 	try 
 	{
 		Graph = "";
-		m_GlobalSpan.StartTimer("Трансфер",0);
+		m_GlobalSpan.StartTimer("РўСЂР°РЅСЃС„РµСЂ",0);
 		m_EngStr.m_pData->InitializeIndices();
 		
 		m_EngStr.TranslateToEnglish();
-		m_GlobalSpan.EndTimer("Трансфер");
+		m_GlobalSpan.EndTimer("РўСЂР°РЅСЃС„РµСЂ");
         if (m_bShouldBuildTclGraph) 
 		{
 			Graph =  m_EngStr.GetTclGraph (false, true);
@@ -116,19 +116,19 @@ bool CSemStructureBuilder::TranslateToEnglish(string& Graph)
 
 bool  CSemStructureBuilder::BuildSentence(string& Sentence)
 {
-	m_GlobalSpan.StartTimer("Синтез",0);	
+	m_GlobalSpan.StartTimer("РЎРёРЅС‚РµР·",0);	
 	m_RusStr.m_pData->InitializeIndices();
 	Sentence =  m_EngStr.BuildSentence();
-	m_GlobalSpan.EndTimer("Синтез");	
+	m_GlobalSpan.EndTimer("РЎРёРЅС‚РµР·");	
 	return true;
 }
 
 bool CSemStructureBuilder::SyntRusSentence(string& Sentence)
 {
-	m_GlobalSpan.StartTimer("Русский Синтез",0);	
+	m_GlobalSpan.StartTimer("Р СѓСЃСЃРєРёР№ РЎРёРЅС‚РµР·",0);	
 	m_RusStr.m_pData->InitializeIndices();
 	if (!m_RusStr.RussianSynthesis(Sentence)) return false;
-	m_GlobalSpan.EndTimer("Русский Синтез");	
+	m_GlobalSpan.EndTimer("Р СѓСЃСЃРєРёР№ РЎРёРЅС‚РµР·");	
 	return true;
 }
 
@@ -147,7 +147,7 @@ string  CSemStructureBuilder::Answer()
 	string Result;
 
 	if (!m_RusStr.SemanticAnswer(Result, m_SavedSentences))
-		Result = "Я не знаю";
+		Result = "РЇ РЅРµ Р·РЅР°СЋ";
 		
 	return Result;
 }

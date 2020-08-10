@@ -1,18 +1,18 @@
-abhängig von+D
+abhĞ´ngig von+D
 angeboren+D
 angemessen+D
-angenehm für+A
+angenehm fÑŒr+A
 angenehm+D
 angewiesen auf+A
-anständig zu+D
-ansässig in+D
+anstĞ´ndig zu+D
+ansĞ´ssig in+D
 arm an+D
 aufgelegt zu+D
-aufgeschlossen für+A
+aufgeschlossen fÑŒr+A
 bar+A
-bedenklich für+A
-bedeutungslos für+A
-bedürftig+A
+bedenklich fÑŒr+A
+bedeutungslos fÑŒr+A
+bedÑŒrftig+A
 befindlich in+D
 befreundet mit+D
 begabt in+D
@@ -21,46 +21,46 @@ begreiflich+D
 behaftet mit+D
 behilflich bei+D
 behilflich+D
-bekannt für+A/mit+D
+bekannt fÑŒr+A/mit+D
 bekannt+D
 beliebt bei+D
-bequem für+A
+bequem fÑŒr+A
 bequem+D
 bereit zu+D
-berühmt für+A
+berÑŒhmt fÑŒr+A
 berufen zu+D
 beschwerlich+D
 besessen von+D
 besorgt um+A
-beständig gegen+A
+bestĞ´ndig gegen+A
 bewandert in+D/auf+A
 bewusst+A
-bezeichnend für+A
-bitter für+A
-blind gegen+A/gegenüber+D/für+A
+bezeichnend fÑŒr+A
+bitter fÑŒr+A
+blind gegen+A/gegenÑŒber+D/fÑŒr+A
 brav zu+D
-böse zu+D/auf+A
-böse+D
-charakteristisch für+A
-dankbar für+A
+bÑ†se zu+D/auf+A
+bÑ†se+D
+charakteristisch fÑŒr+A
+dankbar fÑŒr+A
 dankbar+D
 direkt von+D
 ehrlich zu+D
-eifersüchtig auf+A
+eifersÑŒchtig auf+A
 eigen+D
-eigentümlich+D
+eigentÑŒmlich+D
 eingebildet auf+A
-einig in+D/über+A
+einig in+D/ÑŒber+A
 einverstanden mit+D
 empfindlich gegen+A
-empfänglich für+A
+empfĞ´nglich fÑŒr+A
 entfernt von+D
 entschieden in+D
 erfahren in+D
-erfreulich für+A
+erfreulich fÑŒr+A
 ergeben+D
 ersichtlich aus+D
-erwünscht+D
+erwÑŒnscht+D
 feind+D
 fern von+D
 fern+D
@@ -69,150 +69,150 @@ fest gegen+A
 frech zu+D
 frei von+D
 fremd+D
-froh über+A
+froh ÑŒber+A
 fruchtbar an+D
-fähig zu+D
-fähig+A
-geeignet für+A/zu+D
+fĞ´hig zu+D
+fĞ´hig+A
+geeignet fÑŒr+A/zu+D
 gefasst auf+A
-gefährlich für+A
-gefährlich+D
-gefällig+D
-gegenwärtig+D
-geläufig+D
+gefĞ´hrlich fÑŒr+A
+gefĞ´hrlich+D
+gefĞ´llig+D
+gegenwĞ´rtig+D
+gelĞ´ufig+D
 gemeinsam mit+D
 gemeinsam+D
-gemäß+D
+gemĞ´Ğ¯+D
 genehm+D
 geneigt zu+D
-genug für+A
+genug fÑŒr+A
 gerecht+D
 geschickt in/bei+D
 gespannt auf+A
-gesund für+A
+gesund fÑŒr+A
 gewachsen+D
 gewandt in+D
 gewiss+A
 gewohnt+A
-gewöhnt an+A
-gewärtig+A
+gewÑ†hnt an+A
+gewĞ´rtig+A
 gierig nach+D
 gleich mit+D
 gleich+D
-gleichgültig gegen+A
-gleichgültig+D
+gleichgÑŒltig gegen+A
+gleichgÑŒltig+D
 gleichzeitig mit+D
-glücklich über+A
-günstig+D
+glÑŒcklich ÑŒber+A
+gÑŒnstig+D
 grausam gegen+A
 grob zu+D
-gut für+A/zu+D
-haftbar für+A
+gut fÑŒr+A/zu+D
+haftbar fÑŒr+A
 hart gegen+A
-heilsam für+A
+heilsam fÑŒr+A
 heilsam+D
 heimisch in+D
 herzlich zu+D
 hungrig nach+D
-höflich zu+D
+hÑ†flich zu+D
 immun gegen+A
-interessant für+A
+interessant fÑŒr+A
 interessiert an+D
 klar zu+D
 klar+D
 kombinierbar mit+D
 krank vor+D
-kritisch gegenüber+D
+kritisch gegenÑŒber+D
 kundig+A
 ledig+A
 leid+A
 lieb+D
 los+A
-lästig+D
+lĞ´stig+D
 matt von/vor+D
-müde+A
-möglich+D
-mächtig+A
-nachteilig für+A
+mÑŒde+A
+mÑ†glich+D
+mĞ´chtig+A
+nachteilig fÑŒr+A
 nahe+D
 nahestehend+D
 neidisch auf+A
 nett zu+D
 neu+D
 neugierig auf+A
-nützlich für+A
-nützlich+D
+nÑŒtzlich fÑŒr+A
+nÑŒtzlich+D
 nordwestlich von+D
-nordöstlich von+D
-nördlich von+D
-nötig für+A
-überdrüssig+A
-überlegen+D
-überzeugt von+D
-offen für+A
+nordÑ†stlich von+D
+nÑ†rdlich von+D
+nÑ†tig fÑŒr+A
+ÑŒberdrÑŒssig+A
+ÑŒberlegen+D
+ÑŒberzeugt von+D
+offen fÑŒr+A
 parallel zu+D
-passend für+A
+passend fÑŒr+A
 peinlich+D
 recht+D
 reich an+D
-reif für+A/zu+D
+reif fÑŒr+A/zu+D
 satt+A
 scharf auf+A
-schmerzlich für+A
+schmerzlich fÑŒr+A
 schuld an+D
 schuldig an+D
 schuldig+A
 schuldig+D
-schwach gegenüber+D
-schädlich+D
+schwach gegenÑŒber+D
+schĞ´dlich+D
 sicher vor+D
 sicher+A
-südlich von+D
-südwestlich von+D
-südöstlich von+D
-speziell für+A
+sÑŒdlich von+D
+sÑŒdwestlich von+D
+sÑŒdÑ†stlich von+D
+speziell fÑŒr+A
 starr vor+D
 stolz auf+A
 streng zu+D/gegen+A
 stumm vor+D
 taub gegen+A/auf+A
-teuer für+A
+teuer fÑŒr+A
 treu+D
-typisch für+A
-unabhängig von+D
+typisch fÑŒr+A
+unabhĞ´ngig von+D
 unempfindlich gegen+A
 unmittelbar vor+D
 unschuldig an+D
 unvereinbar mit+D
-verantwortlich für+A
+verantwortlich fÑŒr+A
 vereinbar mit+D
 vergleichbar mit+D
 verhasst bei+D
 verhasst+D
 verliebt in
 verschieden von+D
-verständlich für+A
-verständlich+D
+verstĞ´ndlich fÑŒr+A
+verstĞ´ndlich+D
 vertraut+D
-verträglich mit+D
+vertrĞ´glich mit+D
 verwandt+D
 verwanzt+D
 verwurzelt in+D/mit+D 
 voll von+D/mit+D
 voll+A
-vorteilhaft für+A
+vorteilhaft fÑŒr+A
 weit von+D
 wert+A
 wert+D
 westlich von+D
-wichtig für+A
+wichtig fÑŒr+A
 wichtig+D
 willkommen+D
-würdig+A
-wütend auf+A
+wÑŒrdig+A
+wÑŒtend auf+A
 zornig auf+A
 zufrieden mit+D
-zuständig für+A
-östlich von+D
-ähnlich+D
-ärgerlich über+A
+zustĞ´ndig fÑŒr+A
+Ñ†stlich von+D
+Ğ´hnlich+D
+Ğ´rgerlich ÑŒber+A

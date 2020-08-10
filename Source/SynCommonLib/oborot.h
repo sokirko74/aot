@@ -88,7 +88,7 @@ struct SDoubleConj
 	vector<string30> m_SecondPart;
 	
 	// true, if the second part  is equal to the first, for example
-	// "или ... или" (Russian)
+	// "РёР»Рё ... РёР»Рё" (Russian)
 	// "teils ... teils" (German)
 	bool			m_bRepeating;
 

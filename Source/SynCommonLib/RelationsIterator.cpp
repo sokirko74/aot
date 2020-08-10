@@ -74,7 +74,7 @@ bool CRelationsIterator::BuildRelations()
 {
 	try
 	{
-		// строим отношения внутри клауз
+		// СЃС‚СЂРѕРёРј РѕС‚РЅРѕС€РµРЅРёСЏ РІРЅСѓС‚СЂРё РєР»Р°СѓР·
 		map<int,CSVI>::iterator it ;
 		for( it = m_mapClauseNo2SynVar.begin() ; it != m_mapClauseNo2SynVar.end() ; it++ )
 		{
@@ -82,7 +82,7 @@ bool CRelationsIterator::BuildRelations()
 				return false;			
 		}
 
-		// строим межклаузные отношения
+		// СЃС‚СЂРѕРёРј РјРµР¶РєР»Р°СѓР·РЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ
 		for(int i = 0 ; i < m_pSent->m_ClausesRelations.size() ; i++ )
 		{
 			const CRelation& rel = m_pSent->m_ClausesRelations[i];
@@ -196,7 +196,7 @@ int CRelationsIterator::TryToFindDisruptConjGroup(CSVI pSynVar, const CRelation&
 		return -1;
 
 	for(int i = 0 ; i < m_vectorGroups.size() ; i++ )
-		if( CPeriod(iWord).is_part_of(m_vectorGroups[i])  ) //если уже была до этого построена
+		if( CPeriod(iWord).is_part_of(m_vectorGroups[i])  ) //РµСЃР»Рё СѓР¶Рµ Р±С‹Р»Р° РґРѕ СЌС‚РѕРіРѕ РїРѕСЃС‚СЂРѕРµРЅР°
 			return i;
 
 	int iRBorder = iWord;
@@ -241,7 +241,7 @@ bool CRelationsIterator::BuildRelationsInClause(int iClauseNum, CSVI pSynVar)
 			if( GetOpt()->is_firm_group(G.m_GroupType) )
 			{
 				m_vectorGroups.push_back(G);
-				// оставляем только максимальную группу из всех жестких
+				// РѕСЃС‚Р°РІР»СЏРµРј С‚РѕР»СЊРєРѕ РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ РіСЂСѓРїРїСѓ РёР· РІСЃРµС… Р¶РµСЃС‚РєРёС…
 				for (int k = m_vectorGroups.size()-2; k >=0; k--)
 					if (m_vectorGroups[k].is_part_of(G))
 						m_vectorGroups.erase(m_vectorGroups.begin() + k);

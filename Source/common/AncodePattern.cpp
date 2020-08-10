@@ -198,7 +198,7 @@ bool CAncodePattern::InitAncodePattern()
 			ErrorMessage(Format("Cannot get grammems by type gramcode %s ",m_CommonGramCode.c_str()));
 		};
 
-		//добавляем граммкод аббр в m_TypeGrammems,а все полные формы аббр будут в FormGramCodes
+		//РґРѕР±Р°РІР»СЏРµРј РіСЂР°РјРјРєРѕРґ Р°Р±Р±СЂ РІ m_TypeGrammems,Р° РІСЃРµ РїРѕР»РЅС‹Рµ С„РѕСЂРјС‹ Р°Р±Р±СЂ Р±СѓРґСѓС‚ РІ FormGramCodes
 		for (size_t j=0; j < m_CommonGramCode.length(); j+=2)
 		{
 				QWORD CurrGrammems = 0;		
@@ -210,8 +210,8 @@ bool CAncodePattern::InitAncodePattern()
 				};
 				m_TypeGrammems |= CurrGrammems;				
 		}
-		if(m_CommonGramCode.length()>2) //аббр
-			m_TypeGrammems &= ~(m_iGrammems|256); // rVocativ = 256 = зв падеж, "км  12 2  RLE aa CS? SENT_END +Фаао КИЛОМЕТР абавагадаеажазаиайакал"
+		if(m_CommonGramCode.length()>2) //Р°Р±Р±СЂ
+			m_TypeGrammems &= ~(m_iGrammems|256); // rVocativ = 256 = Р·РІ РїР°РґРµР¶, "РєРј  12 2  RLE aa CS? SENT_END +Р¤Р°Р°Рѕ РљРР›РћРњР•РўР  Р°Р±Р°РІР°РіР°РґР°РµР°Р¶Р°Р·Р°РёР°Р№Р°РєР°Р»"
 	};
 
 

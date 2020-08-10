@@ -70,7 +70,7 @@ const WORD ASCII[256] = {
 /*dollar sign '$'*/                                fWordDelim|URL_CHAR,
 /*percent sign '%'*/                               fWordDelim|URL_CHAR,
 /*ampersand '&'*/                                  fWordDelim|URL_CHAR,
-/*apostrophe '''*/                                 fWordDelim|RusUpper|RusLower, // твердый знак в виде апострофа
+/*apostrophe '''*/                                 fWordDelim|RusUpper|RusLower, // С‚РІРµСЂРґС‹Р№ Р·РЅР°Рє РІ РІРёРґРµ Р°РїРѕСЃС‚СЂРѕС„Р°
 /*left parenthesis '('*/                           fWordDelim|OpnBrck|URL_CHAR,
 /*right parenthesis ')'*/                          fWordDelim|ClsBrck|URL_CHAR,
 /*asterisk '*'*/                                   fWordDelim|URL_CHAR,
@@ -191,102 +191,102 @@ const WORD ASCII[256] = {
 /*operating system command (osc) '_'*/             fWordDelim,
 /*privacy message (pm) '_'*/                       fWordDelim,
 /*application program command (apc) '_'*/          fWordDelim,
-/*no-break space ' '*/                             fWordDelim,
-/*inverted exclamation mark 'Ў'*/                  fWordDelim,
-/*cent sign 'ў'*/                                  fWordDelim,
+/*no-break space 'В '*/                             fWordDelim,
+/*inverted exclamation mark 'РЋ'*/                  fWordDelim,
+/*cent sign 'Сћ'*/                                  fWordDelim,
 /*pound sign '_'*/                                 fWordDelim,
-/*currency sign '¤'*/                              fWordDelim,
+/*currency sign 'В¤'*/                              fWordDelim,
 /*yen sign '_'*/                                   fWordDelim,
-/*broken bar '¦'*/                                 fWordDelim,
-/*section sign '§'*/                               fWordDelim,
-/*diaeresis 'Ё'*/                                  fWordDelim|RusUpper|RussianVowel,
+/*broken bar 'В¦'*/                                 fWordDelim,
+/*section sign 'В§'*/                               fWordDelim,
+/*diaeresis 'РЃ'*/                                  fWordDelim|RusUpper|RussianVowel,
 /*copyright sign 'c'*/                             fWordDelim,
-/*feminine ordinal indicator 'Є'*/                 fWordDelim,
+/*feminine ordinal indicator 'Р„'*/                 fWordDelim,
 /*left pointing double angle quotation mark '<'*/  fWordDelim,
-/*not sign '¬'*/                                   fWordDelim,
+/*not sign 'В¬'*/                                   fWordDelim,
 /*soft hyphen '-'*/                                fWordDelim,
 /*registered sign 'R'*/                            fWordDelim,
-/*macron 'Ї'*/                                     fWordDelim,
-/*degree sign '°'*/                                fWordDelim,
+/*macron 'Р‡'*/                                     fWordDelim,
+/*degree sign 'В°'*/                                fWordDelim,
 /*plus-minus sign '+'*/                            fWordDelim,
 /*superscript two '_'*/                            fWordDelim,
 /*superscript three '_'*/                          fWordDelim,
 /*acute '_'*/                                      fWordDelim,
-/*micro sign 'ч'*/                                 fWordDelim|GerLower|GerUpper,
-/*pilcrow sign '¶'*/                               fWordDelim,
-/*middle dot '·'*/                                 fWordDelim,
-/*cedilla 'ё'*/                                    RusLower|RussianVowel,
-/*superscript one '№'*/                            fWordDelim,
-/*masculine ordinal indicator 'є'*/                fWordDelim,
+/*micro sign 'С‡'*/                                 fWordDelim|GerLower|GerUpper,
+/*pilcrow sign 'В¶'*/                               fWordDelim,
+/*middle dot 'В·'*/                                 fWordDelim,
+/*cedilla 'С‘'*/                                    RusLower|RussianVowel,
+/*superscript one 'в„–'*/                            fWordDelim,
+/*masculine ordinal indicator 'С”'*/                fWordDelim,
 /*right pointing double angle quotation mark '>'*/ fWordDelim,
 /*vulgar fraction one quarter '_'*/                fWordDelim,
 /*vulgar fraction one half '_'*/                   fWordDelim,
 /*vulgar fraction three quarters '_'*/             fWordDelim,
-/*inverted question mark 'ї'*/                     fWordDelim,
-/*latin capital letter a with grave 'А'*/          RusUpper|RussianVowel,
-/*latin capital letter a with acute 'Б'*/          RusUpper,
-/*latin capital letter a with circumflex 'В'*/     RusUpper|GerUpper|EngUpper|LatinVowel,
-/*latin capital letter a with tilde 'Г'*/          RusUpper,
-/*latin capital letter a with diaeresis 'Д'*/      RusUpper|GerUpper|LatinVowel,
-/*latin capital letter a with ring above 'Е'*/     RusUpper|RussianVowel,
-/*latin capital ligature ae 'Ж'*/                  RusUpper,
-/*latin capital letter c with cedilla 'З'*/        RusUpper|GerUpper|EngUpper,
-/*latin capital letter e with grave 'И'*/          RusUpper|GerUpper|EngUpper|LatinVowel|RussianVowel,
-/*latin capital letter e with acute 'Й'*/          RusUpper|GerUpper|EngUpper|LatinVowel,
-/*latin capital letter e with circumflex 'К'*/     RusUpper|GerUpper|EngUpper|LatinVowel,
-/*latin capital letter e with diaeresis 'Л'*/      RusUpper,
-/*latin capital letter i with grave 'М'*/          RusUpper,
-/*latin capital letter i with acute 'Н'*/          RusUpper,
-/*latin capital letter i with circumflex 'О'*/     RusUpper|RussianVowel,
-/*latin capital letter i with diaeresis 'П'*/      RusUpper,
-/*latin capital letter eth (icelandic) 'Р'*/       RusUpper,
-/*latin capital letter n with tilde 'С'*/          RusUpper|GerUpper|EngUpper,
-/*latin capital letter o with grave 'Т'*/          RusUpper,
-/*latin capital letter o with acute 'У'*/          RusUpper|RussianVowel,
-/*latin capital letter o with circumflex 'Ф'*/     RusUpper|GerUpper|EngUpper|LatinVowel,
-/*latin capital letter o with tilde 'Х'*/          RusUpper,
-/*latin capital letter o with diaeresis 'Ц'*/      RusUpper|GerUpper|EngUpper|LatinVowel,
-/*multiplication sign 'Ч'*/                        RusUpper,
-/*latin capital letter o with stroke 'Ш'*/         RusUpper|UpRomDigits,
-/*latin capital letter u with grave 'Щ'*/          RusUpper,
-/*latin capital letter u with acute 'Ъ'*/          RusUpper,
-/*latin capital letter u with circumflex 'Ы'*/     RusUpper|GerUpper|EngUpper|LatinVowel|RussianVowel,
-/*latin capital letter u with diaeresis 'Ь'*/      RusUpper|GerUpper|LatinVowel,
-/*latin capital letter y with acute 'Э'*/          RusUpper|RussianVowel,
-/*latin capital letter thorn (icelandic) 'Ю'*/     RusUpper|RussianVowel,
-/*latin small letter sharp s (german) 'Я'*/        RusUpper|GerLower|GerUpper|RussianVowel,
-/*latin small letter a with grave 'а'*/            RusLower|RussianVowel,
-/*latin small letter a with acute 'б'*/            RusLower,
-/*latin small letter a with circumflex 'в'*/       RusLower|GerLower|EngLower|LatinVowel,
-/*latin small letter a with tilde 'г'*/            RusLower,
-/*latin small letter a with diaeresis 'д'*/        RusLower|GerLower|LatinVowel,
-/*latin small letter a with ring above 'е'*/       RusLower|RussianVowel,
-/*latin small ligature ae 'ж'*/                    RusLower,
-/*latin small letter c with cedilla 'з'*/          RusLower|GerLower|EngLower,
-/*latin small letter e with grave 'и'*/            RusLower|GerLower|EngLower|LatinVowel|RussianVowel,
-/*latin small letter e with acute 'й'*/            RusLower|GerLower|EngLower|LatinVowel,
-/*latin small letter e with circumflex 'к'*/       RusLower|GerLower|EngLower|LatinVowel,
-/*latin small letter e with diaeresis 'л'*/        RusLower,
-/*latin small letter i with grave 'м'*/            RusLower,
-/*latin small letter i with acute 'н'*/            RusLower,
-/*latin small letter i with circumflex 'о'*/       RusLower|RussianVowel,
-/*latin small letter i with diaeresis 'п'*/        RusLower,
-/*latin small letter eth (icelandic) 'р'*/         RusLower,
-/*latin small letter n with tilde 'с'*/            RusLower|GerLower|EngLower,
-/*latin small letter o with grave 'т'*/            RusLower,
-/*latin small letter o with acute 'у'*/            RusLower|RussianVowel,
-/*latin small letter o with circumflex 'ф'*/       RusLower|GerLower|EngLower|LatinVowel,
-/*latin small letter o with tilde 'х'*/            RusLower,
-/*latin small letter o with diaeresis 'ц'*/        RusLower|GerLower|EngLower|LatinVowel,
-/*division sign 'ч'*/                              RusLower,
-/*latin small letter o with stroke 'ш'*/           RusLower,
-/*latin small letter u with grave 'щ'*/            RusLower,
-/*latin small letter u with acute 'ъ'*/            RusLower,
-/*latin small letter u with circumflex 'ы'*/       RusLower|GerLower|EngLower|LatinVowel|RussianVowel,
-/*latin small letter u with diaeresis 'ь'*/        RusLower|GerLower|LatinVowel,
-/*latin small letter y with acute 'э'*/            RusLower|RussianVowel,
-/*latin small letter thorn (icelandic) 'ю'*/       RusLower|RussianVowel,
-/*latin small letter y with diaeresis  'я'*/       RusLower|RussianVowel
+/*inverted question mark 'С—'*/                     fWordDelim,
+/*latin capital letter a with grave 'Рђ'*/          RusUpper|RussianVowel,
+/*latin capital letter a with acute 'Р‘'*/          RusUpper,
+/*latin capital letter a with circumflex 'Р’'*/     RusUpper|GerUpper|EngUpper|LatinVowel,
+/*latin capital letter a with tilde 'Р“'*/          RusUpper,
+/*latin capital letter a with diaeresis 'Р”'*/      RusUpper|GerUpper|LatinVowel,
+/*latin capital letter a with ring above 'Р•'*/     RusUpper|RussianVowel,
+/*latin capital ligature ae 'Р–'*/                  RusUpper,
+/*latin capital letter c with cedilla 'Р—'*/        RusUpper|GerUpper|EngUpper,
+/*latin capital letter e with grave 'Р'*/          RusUpper|GerUpper|EngUpper|LatinVowel|RussianVowel,
+/*latin capital letter e with acute 'Р™'*/          RusUpper|GerUpper|EngUpper|LatinVowel,
+/*latin capital letter e with circumflex 'Рљ'*/     RusUpper|GerUpper|EngUpper|LatinVowel,
+/*latin capital letter e with diaeresis 'Р›'*/      RusUpper,
+/*latin capital letter i with grave 'Рњ'*/          RusUpper,
+/*latin capital letter i with acute 'Рќ'*/          RusUpper,
+/*latin capital letter i with circumflex 'Рћ'*/     RusUpper|RussianVowel,
+/*latin capital letter i with diaeresis 'Рџ'*/      RusUpper,
+/*latin capital letter eth (icelandic) 'Р '*/       RusUpper,
+/*latin capital letter n with tilde 'РЎ'*/          RusUpper|GerUpper|EngUpper,
+/*latin capital letter o with grave 'Рў'*/          RusUpper,
+/*latin capital letter o with acute 'РЈ'*/          RusUpper|RussianVowel,
+/*latin capital letter o with circumflex 'Р¤'*/     RusUpper|GerUpper|EngUpper|LatinVowel,
+/*latin capital letter o with tilde 'РҐ'*/          RusUpper,
+/*latin capital letter o with diaeresis 'Р¦'*/      RusUpper|GerUpper|EngUpper|LatinVowel,
+/*multiplication sign 'Р§'*/                        RusUpper,
+/*latin capital letter o with stroke 'РЁ'*/         RusUpper|UpRomDigits,
+/*latin capital letter u with grave 'Р©'*/          RusUpper,
+/*latin capital letter u with acute 'РЄ'*/          RusUpper,
+/*latin capital letter u with circumflex 'Р«'*/     RusUpper|GerUpper|EngUpper|LatinVowel|RussianVowel,
+/*latin capital letter u with diaeresis 'Р¬'*/      RusUpper|GerUpper|LatinVowel,
+/*latin capital letter y with acute 'Р­'*/          RusUpper|RussianVowel,
+/*latin capital letter thorn (icelandic) 'Р®'*/     RusUpper|RussianVowel,
+/*latin small letter sharp s (german) 'РЇ'*/        RusUpper|GerLower|GerUpper|RussianVowel,
+/*latin small letter a with grave 'Р°'*/            RusLower|RussianVowel,
+/*latin small letter a with acute 'Р±'*/            RusLower,
+/*latin small letter a with circumflex 'РІ'*/       RusLower|GerLower|EngLower|LatinVowel,
+/*latin small letter a with tilde 'Рі'*/            RusLower,
+/*latin small letter a with diaeresis 'Рґ'*/        RusLower|GerLower|LatinVowel,
+/*latin small letter a with ring above 'Рµ'*/       RusLower|RussianVowel,
+/*latin small ligature ae 'Р¶'*/                    RusLower,
+/*latin small letter c with cedilla 'Р·'*/          RusLower|GerLower|EngLower,
+/*latin small letter e with grave 'Рё'*/            RusLower|GerLower|EngLower|LatinVowel|RussianVowel,
+/*latin small letter e with acute 'Р№'*/            RusLower|GerLower|EngLower|LatinVowel,
+/*latin small letter e with circumflex 'Рє'*/       RusLower|GerLower|EngLower|LatinVowel,
+/*latin small letter e with diaeresis 'Р»'*/        RusLower,
+/*latin small letter i with grave 'Рј'*/            RusLower,
+/*latin small letter i with acute 'РЅ'*/            RusLower,
+/*latin small letter i with circumflex 'Рѕ'*/       RusLower|RussianVowel,
+/*latin small letter i with diaeresis 'Рї'*/        RusLower,
+/*latin small letter eth (icelandic) 'СЂ'*/         RusLower,
+/*latin small letter n with tilde 'СЃ'*/            RusLower|GerLower|EngLower,
+/*latin small letter o with grave 'С‚'*/            RusLower,
+/*latin small letter o with acute 'Сѓ'*/            RusLower|RussianVowel,
+/*latin small letter o with circumflex 'С„'*/       RusLower|GerLower|EngLower|LatinVowel,
+/*latin small letter o with tilde 'С…'*/            RusLower,
+/*latin small letter o with diaeresis 'С†'*/        RusLower|GerLower|EngLower|LatinVowel,
+/*division sign 'С‡'*/                              RusLower,
+/*latin small letter o with stroke 'С€'*/           RusLower,
+/*latin small letter u with grave 'С‰'*/            RusLower,
+/*latin small letter u with acute 'СЉ'*/            RusLower,
+/*latin small letter u with circumflex 'С‹'*/       RusLower|GerLower|EngLower|LatinVowel|RussianVowel,
+/*latin small letter u with diaeresis 'СЊ'*/        RusLower|GerLower|LatinVowel,
+/*latin small letter y with acute 'СЌ'*/            RusLower|RussianVowel,
+/*latin small letter thorn (icelandic) 'СЋ'*/       RusLower|RussianVowel,
+/*latin small letter y with diaeresis  'СЏ'*/       RusLower|RussianVowel
 };
 
 
@@ -372,7 +372,7 @@ void ErrorMessage (const string& Message)
 string MakeFName ( const string& InpitFileName,  const string& Ext)
 {
 	string Result = InpitFileName;
-	size_t i = Result.find_last_of('.'); // найти последнее расширение
+	size_t i = Result.find_last_of('.'); // РЅР°Р№С‚Рё РїРѕСЃР»РµРґРЅРµРµ СЂР°СЃС€РёСЂРµРЅРёРµ
 	if ( i  != string::npos) 
 		Result.erase(i);	
 	Result += string(".") ;
@@ -546,8 +546,8 @@ BYTE convert_latin_char_similar_russian_lower_char(BYTE ch) {
 }
 
 
-// ================== IsSuperEqualChar проверяет, что символы равны с точностью до регистра
-//  и с точностью до "языка", m.е. латинское "a" будет равно  русскому "а".
+// ================== IsSuperEqualChar РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ СЃРёРјРІРѕР»С‹ СЂР°РІРЅС‹ СЃ С‚РѕС‡РЅРѕСЃС‚СЊСЋ РґРѕ СЂРµРіРёСЃС‚СЂР°
+//  Рё СЃ С‚РѕС‡РЅРѕСЃС‚СЊСЋ РґРѕ "СЏР·С‹РєР°", m.Рµ. Р»Р°С‚РёРЅСЃРєРѕРµ "a" Р±СѓРґРµС‚ СЂР°РІРЅРѕ  СЂСѓСЃСЃРєРѕРјСѓ "Р°".
 bool IsSuperEqualChar (BYTE ch1, BYTE ch2, MorphLanguageEnum langua)
 {
 	if	(		(ch1 == ch2) 
@@ -576,8 +576,8 @@ bool IsSuperEqualChar (BYTE ch1, BYTE ch2, MorphLanguageEnum langua)
 
 
 
-/* сравнивает строки с помощью предиката IsSuperEqualChar */
-// возращает true, если строки одинаковы
+/* СЃСЂР°РІРЅРёРІР°РµС‚ СЃС‚СЂРѕРєРё СЃ РїРѕРјРѕС‰СЊСЋ РїСЂРµРґРёРєР°С‚Р° IsSuperEqualChar */
+// РІРѕР·СЂР°С‰Р°РµС‚ true, РµСЃР»Рё СЃС‚СЂРѕРєРё РѕРґРёРЅР°РєРѕРІС‹
 bool strscmp ( const char *s1, const char *s2, size_t l, MorphLanguageEnum langua)
 {
 	for	(	;
@@ -588,7 +588,7 @@ bool strscmp ( const char *s1, const char *s2, size_t l, MorphLanguageEnum langu
 			);
 			s1++,s2++,l--
 		);
-	//если обе строки закончились
+	//РµСЃР»Рё РѕР±Рµ СЃС‚СЂРѕРєРё Р·Р°РєРѕРЅС‡РёР»РёСЃСЊ
 	return (!*s1 && !*s2);
 }
 
@@ -623,11 +623,11 @@ int CompareWithoutRegister ( const char *s1, const char *s2, size_t l, MorphLang
 
 BYTE force_rus_char (BYTE ch)
 {
-	// в первой строке находятся латинские буквы, который могут быть заменены на
-	// русские
+	// РІ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРµ РЅР°С…РѕРґСЏС‚СЃСЏ Р»Р°С‚РёРЅСЃРєРёРµ Р±СѓРєРІС‹, РєРѕС‚РѕСЂС‹Р№ РјРѕРіСѓС‚ Р±С‹С‚СЊ Р·Р°РјРµРЅРµРЅС‹ РЅР°
+	// СЂСѓСЃСЃРєРёРµ
 	char search[] = "AaEe3KkMHOoPpCcyXxuT";
-	// во второй строке находятся русские
-	char replace[] = "АаЕеЗКкМНОоРрСсуХхиТ";
+	// РІРѕ РІС‚РѕСЂРѕР№ СЃС‚СЂРѕРєРµ РЅР°С…РѕРґСЏС‚СЃСЏ СЂСѓСЃСЃРєРёРµ
+	char replace[] = "РђР°Р•РµР—РљРєРњРќРћРѕР СЂРЎСЃСѓРҐС…РёРў";
 
 	char *t = strchr (search,ch);
 
@@ -956,10 +956,10 @@ struct CPredictPartOfSpeech {
 };
 const CPredictPartOfSpeech  predict_rus_pos[predict_poses_size] =
 {
-	"С",
-	"ИНФИНИТИВ",
-	"П",
-	"Н",
+	"РЎ",
+	"РРќР¤РРќРРўРР’",
+	"Рџ",
+	"Рќ",
 };
 
 const CPredictPartOfSpeech predict_eng_pos[predict_poses_size] =
@@ -1068,7 +1068,7 @@ bool is_roman_number ( const char *s, size_t len)
 	bool bUpperRoman = true;
 	for(size_t i=0; i<len; i++)
 	{
-		if ( (i>0) && (s[i] == '-') && (i+3>=len)) //  окончания пишутся после дефиса, типа "Павла I-го"
+		if ( (i>0) && (s[i] == '-') && (i+3>=len)) //  РѕРєРѕРЅС‡Р°РЅРёСЏ РїРёС€СѓС‚СЃСЏ РїРѕСЃР»Рµ РґРµС„РёСЃР°, С‚РёРїР° "РџР°РІР»Р° I-РіРѕ"
 		{
 			return bLowRoman || bUpperRoman;
 		};
@@ -1444,12 +1444,12 @@ BYTE ReverseChar (BYTE ch, MorphLanguageEnum langua)
 };
 
 
-// конвертирует из прописной кириллицы в заглавную 
+// РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёР· РїСЂРѕРїРёСЃРЅРѕР№ РєРёСЂРёР»Р»РёС†С‹ РІ Р·Р°РіР»Р°РІРЅСѓСЋ 
 char* RusMakeUpper (char *word)
 {
 	return RegisterConverter(word, strlen(word), is_russian_lower, rtoupper);
 }
-// конвертирует из прописной кириллицы в заглавную 
+// РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёР· РїСЂРѕРїРёСЃРЅРѕР№ РєРёСЂРёР»Р»РёС†С‹ РІ Р·Р°РіР»Р°РІРЅСѓСЋ 
 char* EngMakeUpper (char *word)
 {
 	return RegisterConverter(word, strlen(word), is_english_lower, etoupper);
@@ -1476,7 +1476,7 @@ string& GerMakeUpper (string& word)
 	return RegisterConverter(word, word.length(), is_german_lower, gtoupper);
 }
 
-// конвертирует из заглавной кириллицы в прописную 
+// РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёР· Р·Р°РіР»Р°РІРЅРѕР№ РєРёСЂРёР»Р»РёС†С‹ РІ РїСЂРѕРїРёСЃРЅСѓСЋ 
 char* RusMakeLower (char *word)
 {
 	return RegisterConverter(word, strlen(word), is_russian_upper, rtolower);
@@ -1551,7 +1551,7 @@ bool CheckLanguage (const string& word, MorphLanguageEnum langua)
 
 
 
-// конвертирует из прописные  кириллицы в строчную
+// РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёР· РїСЂРѕРїРёСЃРЅС‹Рµ  РєРёСЂРёР»Р»РёС†С‹ РІ СЃС‚СЂРѕС‡РЅСѓСЋ
 string& EngRusMakeLower (string& word)
 {
 	size_t len = word.length();
@@ -1566,7 +1566,7 @@ string& EngRusMakeLower (string& word)
 }
 
 
-// конвертирует из прописные  кириллицы в строчную
+// РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёР· РїСЂРѕРїРёСЃРЅС‹Рµ  РєРёСЂРёР»Р»РёС†С‹ РІ СЃС‚СЂРѕС‡РЅСѓСЋ
 char* EngRusMakeLower (char* word)
 {
 	if (word == 0) return 0;
@@ -1605,7 +1605,7 @@ string& RmlMakeLower (string& word, MorphLanguageEnum langua)
 };	
 
 
-// конвертирует из строчной кириллицы в прописные 
+// РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёР· СЃС‚СЂРѕС‡РЅРѕР№ РєРёСЂРёР»Р»РёС†С‹ РІ РїСЂРѕРїРёСЃРЅС‹Рµ 
 string&  EngRusMakeUpper (string& word)
 {
 	size_t len = word.length();
@@ -1620,7 +1620,7 @@ string&  EngRusMakeUpper (string& word)
 
 
 
-// конвертирует из строчной кириллицы в прописные 
+// РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёР· СЃС‚СЂРѕС‡РЅРѕР№ РєРёСЂРёР»Р»РёС†С‹ РІ РїСЂРѕРїРёСЃРЅС‹Рµ 
 char*  EngRusMakeUpper (char* word)
 {
 	if (word == 0) return 0;
@@ -1753,12 +1753,12 @@ const string all_brackets = open_brackets+close_brackets;
 
 int isbracket  (BYTE x)
 {
-	if (open_brackets.find(x) != string::npos)	return 1; //открывающие скобки
-	if (close_brackets.find(x) != string::npos)	return 2; // закрывающие
+	if (open_brackets.find(x) != string::npos)	return 1; //РѕС‚РєСЂС‹РІР°СЋС‰РёРµ СЃРєРѕР±РєРё
+	if (close_brackets.find(x) != string::npos)	return 2; // Р·Р°РєСЂС‹РІР°СЋС‰РёРµ
 	return 0; 
 }
 
-// выдает соответствующую скобку 
+// РІС‹РґР°РµС‚ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ СЃРєРѕР±РєСѓ 
 size_t dual_bracket (BYTE x)
 {
 	size_t i = all_brackets.find(x);

@@ -107,7 +107,7 @@ bool CHomonym::ProcessLemmaAndGrammems(const char* CurrStr)
 	// lem-sign
 	{
 		const char* s = tok.val();
-		if	(		(strlen(s) < 3) //"êì  0 2  RLE aa CS? SENT_END +Ôààî ÊÈËÎÌÅÒÐ àáàâàãàäàåàæàçàèàéàêàë 177648 1"
+		if	(		(strlen(s) < 3) //"ÐºÐ¼  0 2  RLE aa CS? SENT_END +Ð¤Ð°Ð°Ð¾ ÐšÐ˜Ð›ÐžÐœÐ•Ð¢Ð  Ð°Ð±Ð°Ð²Ð°Ð³Ð°Ð´Ð°ÐµÐ°Ð¶Ð°Ð·Ð°Ð¸Ð°Ð¹Ð°ÐºÐ°Ð» 177648 1"
 				||	(		(s[0] != '+') 
 						&&	(s[0] != '-') 
 						&&	(s[0] != '?') 

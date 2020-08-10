@@ -80,7 +80,7 @@ public:
 	// the type of thesaurus of the domain collocation (applicable only for the first word of the collocation)
 	EThesType m_ThesType;
 
-	// is between m_bFirstWordInTermin и m_bLastWordInTermin (inside a domain collocation)
+	// is between m_bFirstWordInTermin Рё m_bLastWordInTermin (inside a domain collocation)
 	bool m_bInTermin;
 
 	// the first word of a domain collocation
@@ -89,16 +89,16 @@ public:
 	// the last word of a domain collocation
 	bool m_bLastWordInTermin;
 
-	//  номер термина, который  начинается с этого слова
+	//  РЅРѕРјРµСЂ С‚РµСЂРјРёРЅР°, РєРѕС‚РѕСЂС‹Р№  РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ СЌС‚РѕРіРѕ СЃР»РѕРІР°
 	int	 m_iTerminID;
 
 
 
 	// ========================  Russian Language  ========================
-	// является ли слово мылым числительным  ("два", "три")
+	// СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃР»РѕРІРѕ РјС‹Р»С‹Рј С‡РёСЃР»РёС‚РµР»СЊРЅС‹Рј  ("РґРІР°", "С‚СЂРё")
 	bool m_bSmallNumber;
 
-	// слово является оборотом, у которого есть  GF=ВВОДН, но не выделено в тексте знаками препинания
+	// СЃР»РѕРІРѕ СЏРІР»СЏРµС‚СЃСЏ РѕР±РѕСЂРѕС‚РѕРј, Сѓ РєРѕС‚РѕСЂРѕРіРѕ РµСЃС‚СЊ  GF=Р’Р’РћР”Рќ, РЅРѕ РЅРµ РІС‹РґРµР»РµРЅРѕ РІ С‚РµРєСЃС‚Рµ Р·РЅР°РєР°РјРё РїСЂРµРїРёРЅР°РЅРёСЏ
 	bool m_bBadParenthesis;
 
 

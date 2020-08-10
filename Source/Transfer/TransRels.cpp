@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Интерпретация связей
+// РРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ СЃРІСЏР·РµР№
 // FillVectorOfGramCortegeAndType()
 // GetGramCortegesAndTypeFromRel()
 // GetGramCortegeType()
@@ -268,7 +268,7 @@ void CEngSemStructure::FillSemRelToGramCortegeMap()
 {
 AddSemRelToGramCortege("MULTI", CreateCortege("of+NP", "D_1"));
 	SemRelToGramCortegeMap_t::iterator it;
-	//отсортируем GF по частоте.
+	//РѕС‚СЃРѕСЂС‚РёСЂСѓРµРј GF РїРѕ С‡Р°СЃС‚РѕС‚Рµ.
 	for( it = m_SemRelToGramCortegeMap.begin(); it != m_SemRelToGramCortegeMap.end(); it++ )
 		for( int i=0; i<(*it).second.size(); i++ )
 			sort((*it).second[i].m_WeightGramCorteges.begin(),(*it).second[i].m_WeightGramCorteges.end());

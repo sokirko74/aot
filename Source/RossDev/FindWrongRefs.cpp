@@ -92,7 +92,7 @@ try{
 			  if (RossDocs[RossDocNo]->GetRoss()->LocateUnit(UnitStr.c_str(), MeanNum)) 
 				  break;
 
-            if (RossDocNo ==  RossDocs.size())  break; // не нашлось
+            if (RossDocNo ==  RossDocs.size())  break; // РЅРµ РЅР°С€Р»РѕСЃСЊ
 			// 
 		 };
 

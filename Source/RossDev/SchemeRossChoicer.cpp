@@ -65,7 +65,7 @@ void SchemeRossChoicer::OnButton2()
 	
 }
 
-// удлаение всех констант из текстовых доменов
+// СѓРґР»Р°РµРЅРёРµ РІСЃРµС… РєРѕРЅСЃС‚Р°РЅС‚ РёР· С‚РµРєСЃС‚РѕРІС‹С… РґРѕРјРµРЅРѕРІ
 void SchemeRossChoicer::OnButton3() 
 {
 	CWaitCursor C;

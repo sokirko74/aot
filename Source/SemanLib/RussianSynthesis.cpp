@@ -60,7 +60,7 @@ string CRusSemStructure::GetPrepOrConjOfNode (const CRusSemNode&  Node) const
 
 void AddRelOperators (const CRusSemNode& Node, string& Result)
 {
-	// Добавляем частицы ("не", "ни", "даже")
+	// Р”РѕР±Р°РІР»СЏРµРј С‡Р°СЃС‚РёС†С‹ ("РЅРµ", "РЅРё", "РґР°Р¶Рµ")
 	for (size_t i=0; i < Node.m_RelOperators.size(); i++)
 	{
 			string s = Node.m_RelOperators[i];
@@ -113,7 +113,7 @@ string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 
 	string Result = left +" "+ NodeItself + right;
 
-	//  специальная обработка разрывных союзов
+	//  СЃРїРµС†РёР°Р»СЊРЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР° СЂР°Р·СЂС‹РІРЅС‹С… СЃРѕСЋР·РѕРІ
 	if	(		(Node.m_MNAType == RepeatMNA)
 			&&	(Node.GetType() == OborRoss)
 		)
@@ -155,7 +155,7 @@ bool	CRusSemStructure::RussianSynthesis(string& Result) const
 {
 	string str;
 	CRusSemStructure NewStructure = *this;
-    // берем все вершины клаузы
+    // Р±РµСЂРµРј РІСЃРµ РІРµСЂС€РёРЅС‹ РєР»Р°СѓР·С‹
 	vector<long> roots;	
 	GetRoots(roots);
 	for (size_t RootNo =0;  RootNo <roots.size(); RootNo++)

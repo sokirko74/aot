@@ -70,7 +70,7 @@ public:
 
 inline  CDocTemplate* GetTemplate (CString Name)
 {
-	// получение template документа статьи
+	// РїРѕР»СѓС‡РµРЅРёРµ template РґРѕРєСѓРјРµРЅС‚Р° СЃС‚Р°С‚СЊРё
 	POSITION pos = AfxGetApp()->GetFirstDocTemplatePosition();
 	CDocTemplate* tmpl;
 	CString S;
@@ -154,7 +154,7 @@ inline bool GlobalPocketAndArticleDocTempalteAreEmpty(CRossDoc* RossDoc)
     CArticleDoc* Doc  = (CArticleDoc*)tmpl->GetNextDoc(pos);
 	if (Doc->m_pRossDoc == RossDoc)
 	{
-		AfxMessageBox (" Сначала закройте статьи этого словаря!");
+		AfxMessageBox (" РЎРЅР°С‡Р°Р»Р° Р·Р°РєСЂРѕР№С‚Рµ СЃС‚Р°С‚СЊРё СЌС‚РѕРіРѕ СЃР»РѕРІР°СЂСЏ!");
 		return false;
 	};
   };
@@ -171,7 +171,7 @@ inline bool GlobalPocketAndArticleDocTempalteAreEmpty(CRossDoc* RossDoc)
 	for (long i=0; i < View->m_PocketItems.size(); i++)
 		if (View->m_PocketItems[i].m_pRossDoc == RossDoc)
 		{
-			AfxMessageBox (" Сначала закройте карманы, в которых есть ссылки на этот словарь!");
+			AfxMessageBox (" РЎРЅР°С‡Р°Р»Р° Р·Р°РєСЂРѕР№С‚Рµ РєР°СЂРјР°РЅС‹, РІ РєРѕС‚РѕСЂС‹С… РµСЃС‚СЊ СЃСЃС‹Р»РєРё РЅР° СЌС‚РѕС‚ СЃР»РѕРІР°СЂСЊ!");
 			return false;
 		};
   };

@@ -2,252 +2,252 @@
 TITLE        = 176730
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : вольфрамовый
-RESTR   =  ед !
+LF      =  A0 : РІРѕР»СЊС„СЂР°РјРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176744
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : германиевый
+RESTR   =  РµРґ !
+LF      =  A0 : РіРµСЂРјР°РЅРёРµРІС‹Р№
 ============
 TITLE        = 176746
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : гипсовый
+RESTR   =  РµРґ !
+LF      =  A0 : РіРёРїСЃРѕРІС‹Р№
 ============
 TITLE        = 176753
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176754
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : топливный
-RESTR   =  ед !
+LF      =  A0 : С‚РѕРїР»РёРІРЅС‹Р№
+RESTR   =  РµРґ !
 VAL     =  PURP , A1 , C
            IDENT , A2 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 SF1     = 1  DEV
-GF2     = 1  прим_опр : И
+GF2     = 1  РїСЂРёРј_РѕРїСЂ : Р
 ============
 TITLE        = 176765
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : каменный
+LF      =  A0 : РєР°РјРµРЅРЅС‹Р№
 ============
 TITLE        = 176766
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : йодный
+LF      =  A0 : Р№РѕРґРЅС‹Р№
 ============
 TITLE        = 176770
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : железный
+RESTR   =  РµРґ !
+LF      =  A0 : Р¶РµР»РµР·РЅС‹Р№
 ============
 TITLE        = 176771
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : железобетонный
-RESTR   =  ед !
+LF      =  A0 : Р¶РµР»РµР·РѕР±РµС‚РѕРЅРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176773
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176775
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 | земляной
-RESTR   =  ед !
+LF      =  A0 | Р·РµРјР»СЏРЅРѕР№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176777
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176779
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : золотой
+LF      =  A0 : Р·РѕР»РѕС‚РѕР№
 ============
 TITLE        = 176781
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : известковый
+LF      =  A0 : РёР·РІРµСЃС‚РєРѕРІС‹Р№
 ============
 TITLE        = 176783
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : изотопный
+LF      =  A0 : РёР·РѕС‚РѕРїРЅС‹Р№
 ============
 TITLE        = 176787
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176790
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : иридиевый
-RESTR   =  ед !
+LF      =  A0 : РёСЂРёРґРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176792
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : иттриевый
-RESTR   =  ед !
+LF      =  A0 : РёС‚С‚СЂРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176794
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : йодный
-RESTR   =  ед !
+LF      =  A0 : Р№РѕРґРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176796
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : кадмиевый
-RESTR   =  ед !
+LF      =  A0 : РєР°РґРјРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176798
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : калийный
+RESTR   =  РµРґ !
+LF      =  A0 : РєР°Р»РёР№РЅС‹Р№
 ============
 TITLE        = 176800
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : кальциевый
-RESTR   =  ед !
+LF      =  A0 : РєР°Р»СЊС†РёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176805
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : картонный
-RESTR   =  ед !
+LF      =  A0 : РєР°СЂС‚РѕРЅРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176807
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : керосиновый
-RESTR   =  ед !
+LF      =  A0 : РєРµСЂРѕСЃРёРЅРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176809
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : кислородный
-RESTR   =  ед !
+LF      =  A0 : РєРёСЃР»РѕСЂРѕРґРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176811
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : кобальтовый
-RESTR   =  ед !
+LF      =  A0 : РєРѕР±Р°Р»СЊС‚РѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176813
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176815
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : коксовый
-RESTR   =  ед !
+LF      =  A0 : РєРѕРєСЃРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176817
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : лантановый
+LF      =  A0 : Р»Р°РЅС‚Р°РЅРѕРІС‹Р№
 ============
 TITLE        = 176819
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : латунный
-RESTR   =  ед !
+LF      =  A0 : Р»Р°С‚СѓРЅРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176820
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 | лекарственный
+LF      =  A0 | Р»РµРєР°СЂСЃС‚РІРµРЅРЅС‹Р№
 VAL     =  PURP , A1 , C
-GF1     = 1  к_доп : от+Р
+GF1     = 1  Рє_РґРѕРї : РѕС‚+Р 
 SF1     = 1  PREDIC
 ============
 TITLE        = 176822
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : литиевый
+LF      =  A0 : Р»РёС‚РёРµРІС‹Р№
 ============
 TITLE        = 176824
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : магниевый
-RESTR   =  ед !
+LF      =  A0 : РјР°РіРЅРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176826
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : мазутный
+RESTR   =  РµРґ !
+LF      =  A0 : РјР°Р·СѓС‚РЅС‹Р№
 ============
 TITLE        = 176829
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : марганцевой
-           A0 : марганцевый
-RESTR   =  ед !
+LF      =  A0 : РјР°СЂРіР°РЅС†РµРІРѕР№
+           A0 : РјР°СЂРіР°РЅС†РµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176831
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  мн !
+RESTR   =  РјРЅ !
 ============
 TITLE        = 176834
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : медный
-RESTR   =  ед !
+LF      =  A0 : РјРµРґРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176836
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 | металлический
+LF      =  A0 | РјРµС‚Р°Р»Р»РёС‡РµСЃРєРёР№
 ============
 TITLE        = 176846
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : молибденовый
+LF      =  A0 : РјРѕР»РёР±РґРµРЅРѕРІС‹Р№
 ============
 TITLE        = 176848
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : мраморный
-RESTR   =  ед !
+LF      =  A0 : РјСЂР°РјРѕСЂРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176853
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 | наркотический
+LF      =  A0 | РЅР°СЂРєРѕС‚РёС‡РµСЃРєРёР№
 ============
 TITLE        = 176855
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : натриевый
-RESTR   =  ед !
+LF      =  A0 : РЅР°С‚СЂРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176861
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 | нефтяной
-           CausFunc0 : добыча
+LF      =  A0 | РЅРµС„С‚СЏРЅРѕР№
+           CausFunc0 : РґРѕР±С‹С‡Р°
 ============
 TITLE        = 176862
 SENSE       = 1
@@ -257,270 +257,270 @@ LF      =  CausFunc0 : production 1
 TITLE        = 176863
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176865
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : ниобиевый
-RESTR   =  ед !
+LF      =  A0 : РЅРёРѕР±РёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176867
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : нитратный
+LF      =  A0 : РЅРёС‚СЂР°С‚РЅС‹Р№
 ============
 TITLE        = 176872
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : оловянный
-RESTR   =  ед !
+LF      =  A0 : РѕР»РѕРІСЏРЅРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176874
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176876
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : палладиевый
-RESTR   =  ед !
+LF      =  A0 : РїР°Р»Р»Р°РґРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176878
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : пестицидный
+LF      =  A0 : РїРµСЃС‚РёС†РёРґРЅС‹Р№
 ============
 TITLE        = 176883
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : пластмассовый
+LF      =  A0 : РїР»Р°СЃС‚РјР°СЃСЃРѕРІС‹Р№
 ============
 TITLE        = 176885
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : платиновый
-RESTR   =  ед !
+LF      =  A0 : РїР»Р°С‚РёРЅРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176886
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : плутониевый
-RESTR   =  ед !
+LF      =  A0 : РїР»СѓС‚РѕРЅРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176890
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : поливинилхлоридный
-RESTR   =  ед !
+LF      =  A0 : РїРѕР»РёРІРёРЅРёР»С…Р»РѕСЂРёРґРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176892
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : полимерный
+LF      =  A0 : РїРѕР»РёРјРµСЂРЅС‹Р№
 ============
 TITLE        = 176894
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : полистирольный
-RESTR   =  ед !
+LF      =  A0 : РїРѕР»РёСЃС‚РёСЂРѕР»СЊРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176896
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : полиэтиленовый
-RESTR   =  ед !
+LF      =  A0 : РїРѕР»РёСЌС‚РёР»РµРЅРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176898
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176900
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : радиевый
-RESTR   =  ед !
+LF      =  A0 : СЂР°РґРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176902
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : радиоизотопный
+LF      =  A0 : СЂР°РґРёРѕРёР·РѕС‚РѕРїРЅС‹Р№
 ============
 TITLE        = 176904
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : радоновый
+RESTR   =  РµРґ !
+LF      =  A0 : СЂР°РґРѕРЅРѕРІС‹Р№
 ============
 TITLE        = 176906
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  IDENT , C , A1
            FOR , C , A2
-GF1     = 1  прим_опр : И
-GF2     = 1  к_доп : Р
-          2  к_доп : для+Р
-EXM     =  растворитель  646
-           растворитель краски
+GF1     = 1  РїСЂРёРј_РѕРїСЂ : Р
+GF2     = 1  Рє_РґРѕРї : Р 
+          2  Рє_РґРѕРї : РґР»СЏ+Р 
+EXM     =  СЂР°СЃС‚РІРѕСЂРёС‚РµР»СЊ  646
+           СЂР°СЃС‚РІРѕСЂРёС‚РµР»СЊ РєСЂР°СЃРєРё
 ============
 TITLE        = 176910
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : резиновый
+LF      =  A0 : СЂРµР·РёРЅРѕРІС‹Р№
 ============
 TITLE        = 176913
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : ртутный
+RESTR   =  РµРґ !
+LF      =  A0 : СЂС‚СѓС‚РЅС‹Р№
 ============
 TITLE        = 176917
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : рубиновый
+LF      =  A0 : СЂСѓР±РёРЅРѕРІС‹Р№
 ============
 TITLE        = 176919
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : рудный
+LF      =  A0 : СЂСѓРґРЅС‹Р№
 ============
 TITLE        = 176923
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : сапфировый
+LF      =  A0 : СЃР°РїС„РёСЂРѕРІС‹Р№
 ============
 TITLE        = 176925
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : свинцовый
-RESTR   =  ед !
+LF      =  A0 : СЃРІРёРЅС†РѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176927
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : серебряный
-RESTR   =  ед !
+LF      =  A0 : СЃРµСЂРµР±СЂСЏРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176929
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176935
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : спиртовой
+LF      =  A0 : СЃРїРёСЂС‚РѕРІРѕР№
 ============
 TITLE        = 176938
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : стальной
+LF      =  A0 : СЃС‚Р°Р»СЊРЅРѕР№
 ============
 TITLE        = 176940
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : стеклянный
+LF      =  A0 : СЃС‚РµРєР»СЏРЅРЅС‹Р№
 ============
 TITLE        = 176946
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176948
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  Real : вносить
+LF      =  Real : РІРЅРѕСЃРёС‚СЊ
 VAL     =  IDENT , A1 , C
-GF1     = 1  прим_опр : И
+GF1     = 1  РїСЂРёРј_РѕРїСЂ : Р
 ============
 TITLE        = 176951
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176955
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : твердотопливный
+LF      =  A0 : С‚РІРµСЂРґРѕС‚РѕРїР»РёРІРЅС‹Р№
 ============
 TITLE        = 176959
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : титановый
-RESTR   =  ед !
+LF      =  A0 : С‚РёС‚Р°РЅРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176961
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 176963
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : тротиловый
-RESTR   =  ед !
+LF      =  A0 : С‚СЂРѕС‚РёР»РѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176965
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : углеводородный
+LF      =  A0 : СѓРіР»РµРІРѕРґРѕСЂРѕРґРЅС‹Р№
 ============
 TITLE        = 176967
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : угольный
+LF      =  A0 : СѓРіРѕР»СЊРЅС‹Р№
 ============
 TITLE        = 176975
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : урановый
-RESTR   =  ед !
+LF      =  A0 : СѓСЂР°РЅРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176977
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : фарфоровый
+RESTR   =  РµРґ !
+LF      =  A0 : С„Р°СЂС„РѕСЂРѕРІС‹Р№
 ============
 TITLE        = 176979
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : фаянсовый
-RESTR   =  ед !
+LF      =  A0 : С„Р°СЏРЅСЃРѕРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176981
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : ферросплавный
+LF      =  A0 : С„РµСЂСЂРѕСЃРїР»Р°РІРЅС‹Р№
 ============
 TITLE        = 176983
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : фосфорный
-RESTR   =  ед !
+LF      =  A0 : С„РѕСЃС„РѕСЂРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176985
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : фтористый
-RESTR   =  ед !
+LF      =  A0 : С„С‚РѕСЂРёСЃС‚С‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 176991
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  мн !
+RESTR   =  РјРЅ !
 ============
 TITLE        = 176997
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : хлебный
+RESTR   =  РµРґ !
+LF      =  A0 : С…Р»РµР±РЅС‹Р№
 CAT     = 1  LABL.OBJ
 VAL     =  RESTR , A1 , C
-GF      = 1  СУЩ:ИГ
-GF1     = 1  к_доп : из+Р
+GF      = 1  РЎРЈР©:РР“
+GF1     = 1  Рє_РґРѕРї : РёР·+Р 
 ============
 TITLE        = 176998
 SENSE       = 1
@@ -533,64 +533,64 @@ GF1     = 1  NP_attr
 TITLE        = 177004
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 177006
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
+RESTR   =  РµРґ !
 ============
 TITLE        = 177008
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : целлюлозный
+LF      =  A0 : С†РµР»Р»СЋР»РѕР·РЅС‹Р№
 ============
 TITLE        = 177010
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : цементный
-RESTR   =  ед !
+LF      =  A0 : С†РµРјРµРЅС‚РЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 177012
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : цементобетонный
-RESTR   =  ед !
+LF      =  A0 : С†РµРјРµРЅС‚РѕР±РµС‚РѕРЅРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 177014
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : цинковый
+RESTR   =  РµРґ !
+LF      =  A0 : С†РёРЅРєРѕРІС‹Р№
 ============
 TITLE        = 177015
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : циркониевый
-RESTR   =  ед !
+LF      =  A0 : С†РёСЂРєРѕРЅРёРµРІС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 177017
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : чугунный
+RESTR   =  РµРґ !
+LF      =  A0 : С‡СѓРіСѓРЅРЅС‹Р№
 ============
 TITLE        = 177019
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : шиферный
-RESTR   =  ед !
+LF      =  A0 : С€РёС„РµСЂРЅС‹Р№
+RESTR   =  РµРґ !
 ============
 TITLE        = 177020
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : щелочный
+LF      =  A0 : С‰РµР»РѕС‡РЅС‹Р№
 ============
 TITLE        = 177025
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  ед !
-LF      =  A0 : янтарный
+RESTR   =  РµРґ !
+LF      =  A0 : СЏРЅС‚Р°СЂРЅС‹Р№
 ============
 TITLE        = 177028
 SENSE       = 1
@@ -607,7 +607,7 @@ TITLE        = 177479
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  SPHERE , A1 , C
-GF1     = 1  к_доп : по+Д
+GF1     = 1  Рє_РґРѕРї : РїРѕ+Р”
 ============
 TITLE        = 177480
 SENSE       = 1
@@ -635,7 +635,7 @@ TITLE        = 177816
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  SPHERE , A1 , C
-GF1     = 1  к_доп : по+Д
+GF1     = 1  Рє_РґРѕРї : РїРѕ+Р”
 SF1     = 1  EMPL
           2  ABSTR
 ============
@@ -651,9 +651,9 @@ TITLE        = 177980
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 VAL     =  ! BELNG , C , A1
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 SF1     = 1  COLLEC
              ANIM
           2  MULTI
@@ -662,10 +662,10 @@ TITLE        = 178017
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  CONTNR
 VAL     =  PURP , A1 , C
-GF1     = 1  к_доп : для+Р
+GF1     = 1  Рє_РґРѕРї : РґР»СЏ+Р 
 SF1     = 1  SITUAT
           2  THINGN
 ============
@@ -685,18 +685,18 @@ TITLE        = 178091
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  LOK
              ARTEF
              CONTNR
 VAL     =  BELNG , C , A1
            MATER , A2 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 SF1     = 1  ORG
-GF2     = 1  к_доп : из+Р
+GF2     = 1  Рє_РґРѕРї : РёР·+Р 
 SF2     = 1  SUBST
-LF      =  CausFunc0 : строить
-           CausFunc0 : возводить
+LF      =  CausFunc0 : СЃС‚СЂРѕРёС‚СЊ
+           CausFunc0 : РІРѕР·РІРѕРґРёС‚СЊ
 ============
 TITLE        = 178092
 SENSE       = 1
@@ -717,22 +717,22 @@ TITLE        = 178118
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  CONTNR
 VAL     =  BELNG , C , A1
            PURP , A2 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 SF1     = 1  ORG
-GF2     = 1  к_доп : для+Р
+GF2     = 1  Рє_РґРѕРї : РґР»СЏ+Р 
 SF2     = 1  SITUAT
 ============
 TITLE        = 178133
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 VAL     =  PURP , A1 , C
-GF1     = 1  к_доп : для+Р
+GF1     = 1  Рє_РґРѕРї : РґР»СЏ+Р 
 SF1     = 1  SITUAT
 ============
 TITLE        = 178237
@@ -741,42 +741,42 @@ TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
 SF      = 1  ORG
 VAL     =  IDENT , A1 , C
-GF1     = 1  прим_опр : И
+GF1     = 1  РїСЂРёРј_РѕРїСЂ : Р
 ============
 TITLE        = 178455
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  MULTI , C , A1
            BELNG , C , A2
-GF1     = 1  к_доп : Р_мн
+GF1     = 1  Рє_РґРѕРї : Р _РјРЅ
 SF1     = 1  SPEC
-GF2     = 1  к_доп : Р
+GF2     = 1  Рє_РґРѕРї : Р 
 SF2     = 1  STAT
           2  ORG
-LF      =  Oper1 : входить в+В
-           Oper1 : быть членом
+LF      =  Oper1 : РІС…РѕРґРёС‚СЊ РІ+Р’
+           Oper1 : Р±С‹С‚СЊ С‡Р»РµРЅРѕРј
 ============
 TITLE        = 179015
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  CausFunc0 : включить
-           LiquFunc0 : выключить
+LF      =  CausFunc0 : РІРєР»СЋС‡РёС‚СЊ
+           LiquFunc0 : РІС‹РєР»СЋС‡РёС‚СЊ
 ============
 TITLE        = 179347
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 VAL     =  BELNG , C , A1
            SPEC , A2 , C
            IDENT , A3 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 SF1     = 1  ORG
-GF2     = 1  к_доп : по+Д
+GF2     = 1  Рє_РґРѕРї : РїРѕ+Р”
 SF2     = 1  EMPL
           2  PREDIC
-GF3     = 1  прим_опр : И
-          2  прим_опр : квч
+GF3     = 1  РїСЂРёРј_РѕРїСЂ : Р
+          2  РїСЂРёРј_РѕРїСЂ : РєРІС‡
 SF3     = 1  NAME
 ============
 TITLE        = 179454
@@ -784,7 +784,7 @@ SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
 VAL     =  SPHERE , A1 , C
-GF1     = 1  к_доп : по+Д
+GF1     = 1  Рє_РґРѕРї : РїРѕ+Р”
 SF1     = 1  SITUAT
 ============
 TITLE        = 179455
@@ -798,8 +798,8 @@ SF1     = 1  SITUAT
 TITLE        = 179577
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  A0 : федеративный
-           A0 : федеральный
+LF      =  A0 : С„РµРґРµСЂР°С‚РёРІРЅС‹Р№
+           A0 : С„РµРґРµСЂР°Р»СЊРЅС‹Р№
 ============
 TITLE        = 179578
 SENSE       = 1
@@ -810,16 +810,16 @@ TITLE        = 179583
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  COLLEC
 VAL     =  MULTI , C , A1
            BELNG , C , A2
-GF1     = 1  к_доп : Р_мн
+GF1     = 1  Рє_РґРѕРї : Р _РјРЅ
 SF1     = 1  MEDINF
           2  THINGN
           3  LOK
           4  FIN
-GF2     = 1  к_доп : Р
+GF2     = 1  Рє_РґРѕРї : Р 
 SF2     = 1  STAT
           2  ANIM
 ============
@@ -842,17 +842,17 @@ TITLE        = 179612
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  BELNG , A1 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 ============
 TITLE        = 179628
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL
-GF      = 1  ПРИЛ:с_опр
-SF      = 1  A0 ( дециметр )
+GF      = 1  РџР РР›:СЃ_РѕРїСЂ
+SF      = 1  A0 ( РґРµС†РёРјРµС‚СЂ )
              UNIT
 VAL     =  ESTIM , C , A1
-GF1     = 1  X! : ИГ
+GF1     = 1  X! : РР“
 SF1     = 1  PARAM
           2  THINGN
 ============
@@ -860,8 +860,8 @@ TITLE        = 179647
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  PURP , A1 , C
-GF1     = 1  к_доп : Р
-          2  к_доп : для+Р
+GF1     = 1  Рє_РґРѕРї : Р 
+          2  Рє_РґРѕРї : РґР»СЏ+Р 
 SF1     = 1  ANIM
 ============
 TITLE        = 179648
@@ -876,7 +876,7 @@ TITLE        = 179672
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  DEV
 VAL     =  PURP , A1 , C
 GF1     = 1  for+gerund
@@ -885,31 +885,31 @@ SF1     = 1  SITUAT
 TITLE        = 179674
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  мн !
+RESTR   =  РјРЅ !
 ============
 TITLE        = 179675
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  DEV
 VAL     =  IDENT , A1 , C
-GF1     = 1  к_доп : ИГ
+GF1     = 1  Рє_РґРѕРї : РР“
 ============
 TITLE        = 179689
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  Oper1 : осуществлять
-           Bon : бесперебойный
-           Bon : надежный
+LF      =  Oper1 : РѕСЃСѓС‰РµСЃС‚РІР»СЏС‚СЊ
+           Bon : Р±РµСЃРїРµСЂРµР±РѕР№РЅС‹Р№
+           Bon : РЅР°РґРµР¶РЅС‹Р№
 ============
 TITLE        = 179693
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 VAL     =  BELNG , C , A1
-GF1     = 1  к_доп : Р
-          2  с_опр : ПРИТ_МЕСТМ
+GF1     = 1  Рє_РґРѕРї : Р 
+          2  СЃ_РѕРїСЂ : РџР РРў_РњР•РЎРўРњ
 SF1     = 1  ANIM
 ============
 TITLE        = 179771
@@ -918,24 +918,24 @@ TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  AUTHOR , A1 , C
            SPHERE , A2 , C
            CONTEN , A3 , C
-GF1     = 1  к_доп : Р
-          2  с_опр : ПРИТ_МЕСТМ
+GF1     = 1  Рє_РґРѕРї : Р 
+          2  СЃ_РѕРїСЂ : РџР РРў_РњР•РЎРўРњ
 SF1     = 1  STAT
           2  ANIM
-LEX1    =  суд
-GF2     = 1  к_доп : по+Д
-LEX2    =  дело
-GF3     = 1  к_доп : о+П
-          2  прим_опр : квч
+LEX1    =  СЃСѓРґ
+GF2     = 1  Рє_РґРѕРї : РїРѕ+Р”
+LEX2    =  РґРµР»Рѕ
+GF3     = 1  Рє_РґРѕРї : Рѕ+Рџ
+          2  РїСЂРёРј_РѕРїСЂ : РєРІС‡
 ============
 TITLE        = 179777
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  LEGISL
 VAL     =  BELNG , C , A1
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 SF1     = 1  STAT
           2  LOK
 ============
@@ -957,14 +957,14 @@ TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  AUTHOR , A1 , C
            ADR , A2 , C
            CONTEN , A3 , C
-GF1     = 1  к_доп : Р
-          2  к_доп : от+Р
-          3  с_опр : ПРИТ_МЕСТМ
+GF1     = 1  Рє_РґРѕРї : Р 
+          2  Рє_РґРѕРї : РѕС‚+Р 
+          3  СЃ_РѕРїСЂ : РџР РРў_РњР•РЎРўРњ
 SF1     = 1  ANIM
           2  NAME
-GF2     = 1  к_доп : Д
-          2  к_доп : для+Р
-GF3     = 1  к_доп : о+П
+GF2     = 1  Рє_РґРѕРї : Р”
+          2  Рє_РґРѕРї : РґР»СЏ+Р 
+GF3     = 1  Рє_РґРѕРї : Рѕ+Рџ
 ============
 TITLE        = 179784
 SENSE       = 1
@@ -985,9 +985,9 @@ TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
 VAL     =  IDENT , A1 , C
            BELNG , C , A2
-GF1     = 1  прим_опр : квч
-GF2     = 1  к_доп : Р
-          2  с_опр : ПРИТ_МЕСТМ
+GF1     = 1  РїСЂРёРј_РѕРїСЂ : РєРІС‡
+GF2     = 1  Рє_РґРѕРї : Р 
+          2  СЃ_РѕРїСЂ : РџР РРў_РњР•РЎРўРњ
 ============
 TITLE        = 179796
 SENSE       = 1
@@ -1001,24 +1001,24 @@ GF2     = 1  NP_poss
 TITLE        = 179798
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-EXM     =  его рассказ о путешествии
+EXM     =  РµРіРѕ СЂР°СЃСЃРєР°Р· Рѕ РїСѓС‚РµС€РµСЃС‚РІРёРё
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 VAL     =  AUTHOR , A1 , C
            IDENT , A2 , C
            CONTEN , A3 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 SF1     = 1  ANIM
-GF2     = 1  прим_опр : И
+GF2     = 1  РїСЂРёРј_РѕРїСЂ : Р
 SF2     = 1  NAME
-GF3     = 1  к_доп : о+П
+GF3     = 1  Рє_РґРѕРї : Рѕ+Рџ
 SF3     = 1  ANIM
           2  SITUAT
 ============
 TITLE        = 179799
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-EXM     =  его рассказ о путешествии
+EXM     =  РµРіРѕ СЂР°СЃСЃРєР°Р· Рѕ РїСѓС‚РµС€РµСЃС‚РІРёРё
 CAT     = 1  LABL.OBJ
 GF      = 1  VERB
 VAL     =  AUTHOR , A1 , C
@@ -1039,26 +1039,26 @@ TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  AUTHOR , A1 , C
            CONTEN , A2 , C
            IDENT , A3 , C
-GF1     = 1  к_доп : Р
-          2  с_опр : ПРИТ_МЕСТМ
+GF1     = 1  Рє_РґРѕРї : Р 
+          2  СЃ_РѕРїСЂ : РџР РРў_РњР•РЎРўРњ
 SF1     = 1  ANIM
           2  ORG
-GF2     = 1  к_доп : о+П
-          2  к_доп : по+Д
-GF3     = 1  прим_опр : квч
-          2  прим_опр : ЦБК
+GF2     = 1  Рє_РґРѕРї : Рѕ+Рџ
+          2  Рє_РґРѕРї : РїРѕ+Р”
+GF3     = 1  РїСЂРёРј_РѕРїСЂ : РєРІС‡
+          2  РїСЂРёРј_РѕРїСЂ : Р¦Р‘Рљ
 ============
 TITLE        = 179816
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  PURP , A1 , C
-GF1     = 1  к_доп : для+Р
+GF1     = 1  Рє_РґРѕРї : РґР»СЏ+Р 
 SF1     = 1  THINGN
 ============
 TITLE        = 179818
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  Oper1 : заниматься
+LF      =  Oper1 : Р·Р°РЅРёРјР°С‚СЊСЃСЏ
 ============
 TITLE        = 179846
 SENSE       = 1
@@ -1067,46 +1067,46 @@ SF      = 1  DEV
              COLLEC
 VAL     =  BELNG , C , A1
            PURP , A2 , C
-GF1     = 1  к_доп : Р
-          2  с_опр : ПРИТ_МЕСТМ
+GF1     = 1  Рє_РґРѕРї : Р 
+          2  СЃ_РѕРїСЂ : РџР РРў_РњР•РЎРўРњ
 SF1     = 1  LOK
           2  CONTNR
           3  ORG
-GF2     = 1  к_доп : для+Р
+GF2     = 1  Рє_РґРѕРї : РґР»СЏ+Р 
 SF2     = 1  SITUAT
-LF      =  CausFunc0 : снабжать
-           CausFunc0 : устанавливать
+LF      =  CausFunc0 : СЃРЅР°Р±Р¶Р°С‚СЊ
+           CausFunc0 : СѓСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ
 ============
 TITLE        = 179856
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  мн !
+RESTR   =  РјРЅ !
 ============
 TITLE        = 179857
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-RESTR   =  мн !
+RESTR   =  РјРЅ !
 ============
 TITLE        = 179864
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
-LF      =  Oper1 : приходиться
+LF      =  Oper1 : РїСЂРёС…РѕРґРёС‚СЊСЃСЏ
 ============
 TITLE        = 179931
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL.OBJ
-GF      = 1  СУЩ:ИГ
+GF      = 1  РЎРЈР©:РР“
 SF      = 1  DEV
 VAL     =  PURP , A1 , C
-GF1     = 1  к_доп : для+Р
+GF1     = 1  Рє_РґРѕРї : РґР»СЏ+Р 
 SF1     = 1  SITUAT
 ============
 TITLE        = 179934
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  ! BELNG , A1 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 LEX1    =  #STAT
 AUX     =  ACT ( A3 , A1 )
            PROPERT ( A2 , A3 )
@@ -1129,8 +1129,8 @@ SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 CAT     = 1  LABL
 VAL     =  BELNG , C , A1
-GF1     = 1  к_доп : Р
-LEX1    =  Земля
+GF1     = 1  Рє_РґРѕРї : Р 
+LEX1    =  Р—РµРјР»СЏ
 ============
 TITLE        = 179949
 SENSE       = 1
@@ -1143,7 +1143,7 @@ TITLE        = 179959
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  ! BELNG , A1 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 LEX1    =  #STAT
 AUX     =  SPHERE ( C2 , C1 )
 ============
@@ -1159,7 +1159,7 @@ TITLE        = 179961
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  ! BELNG , A1 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 LEX1    =  #STAT
 AUX     =  ACT ( A3 , A1 )
            PROPERT ( A2 , A3 )
@@ -1176,7 +1176,7 @@ TITLE        = 179963
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  ! BELNG , A1 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 LEX1    =  #STAT
 AUX     =  ACT ( A3 , A1 )
            PROPERT ( A2 , A3 )
@@ -1193,7 +1193,7 @@ TITLE        = 179965
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  ! BELNG , A1 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 LEX1    =  #STAT
 AUX     =  ACT ( A3 , A1 )
            PROPERT ( A2 , A3 )
@@ -1202,7 +1202,7 @@ TITLE        = 179966
 SENSE       = 1
 TIME_CREATE       = 18/3/3 16:34:19
 VAL     =  ! BELNG , A1 , C
-GF1     = 1  к_доп : Р
+GF1     = 1  Рє_РґРѕРї : Р 
 LEX1    =  #STAT
 AUX     =  SPHERE ( C2 , C1 )
 ============
@@ -1234,28 +1234,28 @@ TIME_CREATE       = 18/3/3 16:34:19
 AUX     =  PROPERT ( C1 , C2 )
            IDENT ( C3 , C2 )
 ============
-TITLE        = @Модель1
+TITLE        = @РњРѕРґРµР»СЊ1
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:34:19
 AUX     =  PROPERT ( C1 , C2 )
 ============
-TITLE        = @Модель3
+TITLE        = @РњРѕРґРµР»СЊ3
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:34:19
-COMM    =  словарная статья для существительного
-GF      = 1  СУЩ:ИГ
+COMM    =  СЃР»РѕРІР°СЂРЅР°СЏ СЃС‚Р°С‚СЊСЏ РґР»СЏ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ
+GF      = 1  РЎРЈР©:РР“
 ============
-TITLE        = @Модель4
+TITLE        = @РњРѕРґРµР»СЊ4
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:34:19
-COMM    =  словарная статья для прилагательного
+COMM    =  СЃР»РѕРІР°СЂРЅР°СЏ СЃС‚Р°С‚СЊСЏ РґР»СЏ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРіРѕ
 CAT     = 1  LABL.PROPERT
 VAL     =  PROPERT , C , A1
-GF      = 1  ПРИЛ:с_опр
-GF1     = 1  X! : ИГ
+GF      = 1  РџР РР›:СЃ_РѕРїСЂ
+GF1     = 1  X! : РР“
 SF1     = 1  SITUAT
           2  THINGN
           3  ANIM

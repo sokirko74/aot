@@ -142,8 +142,8 @@ void  COborDic::WriteSimplePrep(string s, int OborotNo)
 
 void  COborDic::MergeCasesOfSimililarSimplePreps()
 {
-	/*	для всех сложных оборотов все возможные падежи равны тем, которые записаны в статье,
-		поскольку  для сложных  оборотов омонимия не предусморена.
+	/*	РґР»СЏ РІСЃРµС… СЃР»РѕР¶РЅС‹С… РѕР±РѕСЂРѕС‚РѕРІ РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ РїР°РґРµР¶Рё СЂР°РІРЅС‹ С‚РµРј, РєРѕС‚РѕСЂС‹Рµ Р·Р°РїРёСЃР°РЅС‹ РІ СЃС‚Р°С‚СЊРµ,
+		РїРѕСЃРєРѕР»СЊРєСѓ  РґР»СЏ СЃР»РѕР¶РЅС‹С…  РѕР±РѕСЂРѕС‚РѕРІ РѕРјРѕРЅРёРјРёСЏ РЅРµ РїСЂРµРґСѓСЃРјРѕСЂРµРЅР°.
 	*/
 	for (int ArtNo=0; ArtNo < m_Entries.size(); ArtNo++)
 		m_Entries[ArtNo].m_AllPossibleDependCases = m_Entries[ArtNo].m_DependCases;

@@ -75,7 +75,7 @@ public :
 	map<string,string>	m_Russian2EnglishFields;
 	
 
-	//константы доменов
+	//РєРѕРЅСЃС‚Р°РЅС‚С‹ РґРѕРјРµРЅРѕРІ
 	BYTE ActantsDomNo;
 	BYTE LexDomNo;
 	BYTE LexPlusDomNo;

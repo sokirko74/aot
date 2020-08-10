@@ -270,7 +270,7 @@ string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePt
 	if (ClauseRootNo == -1)
 	{
 		if (Language == morphRussian)
-			return "осяршую";
+			return "п÷пёп║п╒п╚п╔п░";
 		else
 			return "EMPTY";
 	}

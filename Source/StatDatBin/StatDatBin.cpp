@@ -5,8 +5,8 @@
 #include "../common/argparse.h"
 #include <fstream>
 
-// ���������� ������ �� ����� <DataFile> (��. StatTxtDat)
-// ���������� ������ <pid,form-num,weight> � ���� "r*homoweight.bin"
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ <DataFile> (пїЅпїЅ. StatTxtDat)
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ <pid,form-num,weight> пїЅ пїЅпїЅпїЅпїЅ "r*homoweight.bin"
 
 struct CGroup {
     int pid;

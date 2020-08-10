@@ -158,22 +158,22 @@ int OpenPocket(   const vector<CRossPocketItem>& UnitNos,
 	POSITION pos =  pDocument->GetFirstViewPosition();
 	CPocketForm* V = (CPocketForm*)(pDocument->GetNextView(pos));
 	V->m_PocketItems = UnitNos;
-    V->m_WordList.InsertColumn(1,"Словарный вход", LVCFMT_LEFT, 200);
-	V->m_WordList.InsertColumn(2,"Номер значения", LVCFMT_LEFT, 60);
-	V->m_WordList.InsertColumn(2,"Название словаря", LVCFMT_LEFT, 60);
+    V->m_WordList.InsertColumn(1,"РЎР»РѕРІР°СЂРЅС‹Р№ РІС…РѕРґ", LVCFMT_LEFT, 200);
+	V->m_WordList.InsertColumn(2,"РќРѕРјРµСЂ Р·РЅР°С‡РµРЅРёСЏ", LVCFMT_LEFT, 60);
+	V->m_WordList.InsertColumn(2,"РќР°Р·РІР°РЅРёРµ СЃР»РѕРІР°СЂСЏ", LVCFMT_LEFT, 60);
 	V->m_WordList.SetItemCountEx(UnitNos.size());
-	V->m_UnitsSize.Format ("Число словарных входов : %i",    V->m_WordList.GetItemCount());
+	V->m_UnitsSize.Format ("Р§РёСЃР»Рѕ СЃР»РѕРІР°СЂРЅС‹С… РІС…РѕРґРѕРІ : %i",    V->m_WordList.GetItemCount());
     V->UpdateData(FALSE);
     V->m_WordList.UpdateData(FALSE);
     V->m_WordList.Invalidate();	
 	V->m_Title = Title;
 
-	// установка размеров
+	// СѓСЃС‚Р°РЅРѕРІРєР° СЂР°Р·РјРµСЂРѕРІ
 	V->GetParent()->SetWindowPos(NULL, 0,0, 535 , 500, SWP_SHOWWINDOW|SWP_NOZORDER|SWP_NOMOVE);
 	return true;
 };
 
-// записать
+// Р·Р°РїРёСЃР°С‚СЊ
 void CPocketForm::OnButton2() 
 {
 	// TODO: Add your control notification handler code here
@@ -189,7 +189,7 @@ void CPocketForm::OnButton2()
 }
 
 
-// отобразить в пометы 
+// РѕС‚РѕР±СЂР°Р·РёС‚СЊ РІ РїРѕРјРµС‚С‹ 
 void CPocketForm::OnButton3() 
 {
 	// TODO: Add your control notification handler code here

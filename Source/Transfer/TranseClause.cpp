@@ -1,6 +1,6 @@
 
 /////////////////////////////////////////////////////////////////////////////
-// œÂÂ‚Ó‰ ÍÎ‡ÛÁ˚ + ÌÂÍÓÚÓ˚Â ‡Ì„ÎËÈÒÍËÂ ‡Î„ÓËÚÏ˚
+// –ü–µ—Ä–µ–≤–æ–¥ –∫–ª–∞—É–∑—ã + –Ω–µ–∫–æ—Ç–æ—Ä—ã–µ –∞–Ω–≥–ª–∏–π—Å–∫–∏–µ –∞–ª–≥–æ—Ä–∏—Ç–º—ã
 
 // IsSubConj()
 // GetClauseRelType()
@@ -16,7 +16,7 @@
 #include "StdAfx.h"
 
 const int AntecWordsCount = 8;
-const char g_strAntecWords[AntecWordsCount][MaxWordLen] = {"¬—≈", " “Œ-Õ»¡”ƒ‹", " “Œ-“Œ", "Œƒ»Õ", " ¿∆ƒ€…", "“Œ“", "“Œ", "◊“Œ-Õ»¡”ƒ‹"};
+const char g_strAntecWords[AntecWordsCount][MaxWordLen] = {"–í–°–ï", "–ö–¢–û-–ù–ò–ë–£–î–¨", "–ö–¢–û-–¢–û", "–û–î–ò–ù", "–ö–ê–ñ–î–´–ô", "–¢–û–¢", "–¢–û", "–ß–¢–û-–ù–ò–ë–£–î–¨"};
 
 
 #define _SWITCH(X) string __switch_val = X;
@@ -29,8 +29,8 @@ bool CEngSemStructure::IsSubConj(CRossInterp interp)
 {
 	if( interp.m_DictType != OborRoss)
 		return false;
-	bool bIf     = GetRossHolder(interp.m_DictType)->HasFieldValue(string("GF"),string("œŒƒ◊_—Œﬁ«"),interp.m_UnitNo);
-	bool bIfThen = GetRossHolder(interp.m_DictType)->HasFieldValue(string("GF"),string("œŒƒ◊_–¿«–€¬_—Œﬁ«"),interp.m_UnitNo);
+	bool bIf     = GetRossHolder(interp.m_DictType)->HasFieldValue(string("GF"),string("–ü–û–î–ß_–°–û–Æ–ó"),interp.m_UnitNo);
+	bool bIfThen = GetRossHolder(interp.m_DictType)->HasFieldValue(string("GF"),string("–ü–û–î–ß_–†–ê–ó–†–´–í_–°–û–Æ–ó"),interp.m_UnitNo);
 	return( bIf || bIfThen );
 }
 
@@ -54,15 +54,15 @@ EClauseRelsType CEngSemStructure::GetClauseRelType(int iRel)
 	if (rusSourceNode.m_MainWordNo != -1)
 	{
 
-		if(			rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == " Œ“Œ–€…" 
+		if(			rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == "–ö–û–¢–û–†–´–ô" 
 				&&	semRel.m_Valency.m_RelationStr == "THESAME" )			
 			return Kotoryj;
 
-		if(		rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma  == " ¿ " 
+		if(		rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma  == "–ö–ê–ö" 
 			&& semRel.m_Valency.m_RelationStr == "THESAME" )			
 			return  Kak;
 
-		if( rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == "À»" )
+		if( rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == "–õ–ò" )
 			return Li;
 	};
 
@@ -76,11 +76,11 @@ EClauseRelsType CEngSemStructure::GetClauseRelType(int iRel)
 		return Participle;
 
 	if( rusTargetNode.m_MainWordNo!=-1 &&
-		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma == " ¿ Œ…" )
+		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma == "–ö–ê–ö–û–ô" )
 		return Kakoj;
 
 	if( rusTargetNode.m_MainWordNo!=-1 &&
-		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma  == " ¿ ")
+		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma  == "–ö–ê–ö")
 		return  Kak;
 
 	if( IsChtoOrKto(semRel.m_TargetNodeNo) || IsChtoOrKto(semRel.m_SourceNodeNo) )
@@ -175,7 +175,7 @@ void CEngSemStructure::TranslateClauseRels()
 }
 /////////////////////////////////////////////////////////////////////////////
 // ClauseRelRule_Participle()
-// ¬ÓÁ¸ÏË ‰ÓÍÛÏÂÌÚ, ÎÂÊ‡˘ËÈ Ì‡ ÒÚÓÎÂ
+// –í–æ–∑—å–º–∏ –¥–æ–∫—É–º–µ–Ω—Ç, –ª–µ–∂–∞—â–∏–π –Ω–∞ —Å—Ç–æ–ª–µ
 
 void CEngSemStructure::ClauseRelRule_Participle(int iRel)
 {
@@ -271,7 +271,7 @@ void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 	const CSemRelation& rusSemRel = *RusStr.GetRelation(engSemRel.m_RusRel);
 
 	engSemRel.m_bSourceClauseIsMain = true;
-// ÂÒÎË ÓÚÌÓ¯ÂÌËÂ ˇ‚ÎˇÂÚÒˇ ˜¸ÂÈ-ÚÓ ‚‡ÎÂÚÌÓÒÚ¸˛ 
+// –µ—Å–ª–∏ –æ—Ç–Ω–æ—à–µ–Ω–∏–µ —è–≤–ª—è–µ—Ç—Å—è —á—å–µ–π-—Ç–æ –≤–∞–ª–µ—Ç–Ω–æ—Å—Ç—å—é 
 	if( engSemRel.m_bInterpreted )
 	{
 		int iRusNode = engNode.RusNode;
@@ -279,7 +279,7 @@ void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 			return;
 		const CSemNode& rusNode = RusStr.GetNode(iRusNode);
 		string rus_str = GetCortegeStr(rusNode.GetType(),rusSemRel.m_SynReal.m_Cortege);
-		bool bRusInf = (rus_str.find("ËÌÙ")!=string::npos );
+		bool bRusInf = (rus_str.find("–∏–Ω—Ñ")!=string::npos );
 
 		vector<SGramCortegesAndType> GramCortegesAndTypeV;	
 		GetGramCortegesAndTypeFromRel(GramCortegesAndTypeV, engSemRel);
@@ -401,14 +401,14 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 	bool bDelNode = false;
 	
 	if(	(iAntecRusNode != -1) &&
-		(	( rusNode.GetWord(0).m_Lemma == "◊“Œ") ||
-			( rusNode.GetWord(0).m_Lemma == " “Œ") ))
+		(	( rusNode.GetWord(0).m_Lemma == "–ß–¢–û") ||
+			( rusNode.GetWord(0).m_Lemma == "–ö–¢–û") ))
 	{
 		const CSemNode& rusAntecNode = RusStr.GetNode(iAntecRusNode);
 		string strAntecWord = rusAntecNode.GetWord(0).m_Lemma;
-		if( rusNode.GetWord(0).m_Lemma == "◊“Œ") 
+		if( rusNode.GetWord(0).m_Lemma == "–ß–¢–û") 
 		{
-			if( strAntecWord == "“Œ“" )
+			if( strAntecWord == "–¢–û–¢" )
 			{
 				m_Relations.erase(m_Relations.begin() + iRelNum);
 				vector<long> inRels;
@@ -427,11 +427,11 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 		} 
 		else
 		{
-			if( rusNode.GetWord(0).m_Lemma == " “Œ")
+			if( rusNode.GetWord(0).m_Lemma == "–ö–¢–û")
 			{
 				_SWITCH(strAntecWord)
 				{
-					_CASE("“Œ“")
+					_CASE("–¢–û–¢")
 					{		
 						
 						CEngSemNode newNode;
@@ -445,7 +445,7 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 						m_Nodes[iAntecEngNode] = newNode;
 					}
 
-					_CASE("¬≈—‹")
+					_CASE("–í–ï–°–¨")
 					{
 						CEngSemNode newNode;
 						CreateSimpleEnglNodeByOldNode("everybody", newNode, 0, true, m_Nodes[iAntecEngNode]);					
@@ -454,7 +454,7 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 						m_Nodes[iAntecEngNode] = newNode;
 					}
 
-					_CASE(" ¿∆ƒ€…")
+					_CASE("–ö–ê–ñ–î–´–ô")
 					{
 						CEngSemNode newNode;
 						CreateSimpleEnglNodeByOldNode("everyone", newNode, 0, true, m_Nodes[iAntecEngNode]);					
@@ -474,13 +474,13 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 
 	_SWITCH(rusNode.GetWord(0).m_Lemma)
 	{
-		_CASE("◊“Œ")
+		_CASE("–ß–¢–û")
 		{			
 			engNode.m_Words[0].m_Lemma = "what";
 			engNode.m_Words[0].m_Word = "what";
 		}
 
-		_CASE(" “Œ")
+		_CASE("–ö–¢–û")
 		{
 			engNode.m_Words[0].m_Lemma = "who";
 			engNode.m_Words[0].m_Word = "who";			

@@ -50,7 +50,7 @@ void CSentence::SetIgnoreWhileBuildingSynVariantsToAllClauses(bool Value) {
 };
 
 
-//	удаляет все омонимы предсказанных слов, кроме первого, если  в предложении больше 10 неузнанных слов.
+//	СѓРґР°Р»СЏРµС‚ РІСЃРµ РѕРјРѕРЅРёРјС‹ РїСЂРµРґСЃРєР°Р·Р°РЅРЅС‹С… СЃР»РѕРІ, РєСЂРѕРјРµ РїРµСЂРІРѕРіРѕ, РµСЃР»Рё  РІ РїСЂРµРґР»РѕР¶РµРЅРёРё Р±РѕР»СЊС€Рµ 10 РЅРµСѓР·РЅР°РЅРЅС‹С… СЃР»РѕРІ.
 
 void CSentence::DeleteHomonymsIfTooManyPredictedWords() {
     int CountOfPredicted = 0;
@@ -105,7 +105,7 @@ bool CSentence::IsValid() const {
 
 
 
-    // клаузы должны  покрывать все слова
+    // РєР»Р°СѓР·С‹ РґРѕР»Р¶РЅС‹  РїРѕРєСЂС‹РІР°С‚СЊ РІСЃРµ СЃР»РѕРІР°
 
 
 
@@ -116,7 +116,7 @@ bool CSentence::IsValid() const {
     };
 
 
-    // проверяем синварианты
+    // РїСЂРѕРІРµСЂСЏРµРј СЃРёРЅРІР°СЂРёР°РЅС‚С‹
     for (i = 0; i < m_Clauses.size(); i++) {
         //if (m_Clauses[i].m_SynVariants.empty())
         //{
@@ -229,13 +229,13 @@ bool CSentence::IsBetweenGraphematicalPairDescriptors(int WordNo) const {
 
 
 
-//	функция DeleteOborotThatContains удаляет пометы оборота, который  включает слово WordNo
+//	С„СѓРЅРєС†РёСЏ DeleteOborotThatContains СѓРґР°Р»СЏРµС‚ РїРѕРјРµС‚С‹ РѕР±РѕСЂРѕС‚Р°, РєРѕС‚РѕСЂС‹Р№  РІРєР»СЋС‡Р°РµС‚ СЃР»РѕРІРѕ WordNo
 
 
 void CSentence::DeleteOborotThatContains(int WordNo) {
     if (!m_Words[WordNo].IsInOborot()) return;
 
-    //  идем вперед до конца оборота
+    //  РёРґРµРј РІРїРµСЂРµРґ РґРѕ РєРѕРЅС†Р° РѕР±РѕСЂРѕС‚Р°
     bool bOb1 = m_Words[WordNo].HasOborot1();
     for (int i = WordNo; i < m_Words.size(); i++) {
         bool bOb2 = m_Words[i].HasOborot2();
@@ -246,7 +246,7 @@ void CSentence::DeleteOborotThatContains(int WordNo) {
     };
 
     if (!bOb1) {
-        //  идем назад до начала оборота
+        //  РёРґРµРј РЅР°Р·Р°Рґ РґРѕ РЅР°С‡Р°Р»Р° РѕР±РѕСЂРѕС‚Р°
         assert (WordNo > 0);
         for (int i = WordNo - 1; i >= 0; i--) {
             bool bOb1 = m_Words[i].HasOborot1();
@@ -382,7 +382,7 @@ bool ReadSentence(CSentence &S, const CPlmLineCollection *piPLMLinePtr, size_t &
             S.AddSynWord(Word);
 
         } else {
-            if (!S.m_Words.empty()) // первая строка иногда содержит всякую информацию про документ
+            if (!S.m_Words.empty()) // РїРµСЂРІР°СЏ СЃС‚СЂРѕРєР° РёРЅРѕРіРґР° СЃРѕРґРµСЂР¶РёС‚ РІСЃСЏРєСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РїСЂРѕ РґРѕРєСѓРјРµРЅС‚
                 if (!S.m_Words.back().AddNextHomonym(strPlmLine))
                     return false;
         }
@@ -516,7 +516,7 @@ bool CSentence::DeleteMarkedHomonymsWithClauses(int iWord) {
 
 void CSentence::DontDeleteExpr2ifExpr1Exists(const CPeriod &P) {
     // if homonym with EXPR1 exists then there should be homonym with EXPR2
-    // если в омоним начинает  многословный оборот, надо найти конец оборота и не удалять его 
+    // РµСЃР»Рё РІ РѕРјРѕРЅРёРј РЅР°С‡РёРЅР°РµС‚  РјРЅРѕРіРѕСЃР»РѕРІРЅС‹Р№ РѕР±РѕСЂРѕС‚, РЅР°РґРѕ РЅР°Р№С‚Рё РєРѕРЅРµС† РѕР±РѕСЂРѕС‚Р° Рё РЅРµ СѓРґР°Р»СЏС‚СЊ РµРіРѕ 
     for (int i = P.m_iFirstWord; i <= P.m_iLastWord; i++)
         for (size_t j = 0; j < m_Words[i].GetHomonymsCount(); j++)
             if (m_Words[i].GetHomonym(j)->IsOb1()
@@ -629,8 +629,8 @@ bool CSentence::GetHomonymByClauseVariant(long iWord, CSVI pSynVar, CSynHomonym 
 
 
 
-//	если  число слов в предложении больше 400 или больше половины слов в предложении не русские слова,
-//	тогда  синтаксис входит в "панический"  режим.
+//	РµСЃР»Рё  С‡РёСЃР»Рѕ СЃР»РѕРІ РІ РїСЂРµРґР»РѕР¶РµРЅРёРё Р±РѕР»СЊС€Рµ 400 РёР»Рё Р±РѕР»СЊС€Рµ РїРѕР»РѕРІРёРЅС‹ СЃР»РѕРІ РІ РїСЂРµРґР»РѕР¶РµРЅРёРё РЅРµ СЂСѓСЃСЃРєРёРµ СЃР»РѕРІР°,
+//	С‚РѕРіРґР°  СЃРёРЅС‚Р°РєСЃРёСЃ РІС…РѕРґРёС‚ РІ "РїР°РЅРёС‡РµСЃРєРёР№"  СЂРµР¶РёРј.
 
 
 bool CSentence::IsPanicSentence() {
@@ -718,12 +718,12 @@ bool CSentence::EncloseClauseAsWord(int iWhat, int iWhere) {
     TraceClauses();
 
 
-    // поскольку pPrimWhere могла быть вложена и сейчас она меняет свои границы, нужно перестроить
-    // варианты все надклауз, которые стоят выше  pPrimWhere.
-    // Само собой  разумеется, нужно пересторить варианты  самой  PrimWhere. Если  PrimWhere не была вложена,
-    //  тогда changed_clauses будет содержать только PrimWhere.
-    // В принципе, возможен случай, когда pPrimWhat вложена, но это означает, что у PrimWhere и pPrimWhat одинаковый
-    // непосредственный  хоязин
+    // РїРѕСЃРєРѕР»СЊРєСѓ pPrimWhere РјРѕРіР»Р° Р±С‹С‚СЊ РІР»РѕР¶РµРЅР° Рё СЃРµР№С‡Р°СЃ РѕРЅР° РјРµРЅСЏРµС‚ СЃРІРѕРё РіСЂР°РЅРёС†С‹, РЅСѓР¶РЅРѕ РїРµСЂРµСЃС‚СЂРѕРёС‚СЊ
+    // РІР°СЂРёР°РЅС‚С‹ РІСЃРµ РЅР°РґРєР»Р°СѓР·, РєРѕС‚РѕСЂС‹Рµ СЃС‚РѕСЏС‚ РІС‹С€Рµ  pPrimWhere.
+    // РЎР°РјРѕ СЃРѕР±РѕР№  СЂР°Р·СѓРјРµРµС‚СЃСЏ, РЅСѓР¶РЅРѕ РїРµСЂРµСЃС‚РѕСЂРёС‚СЊ РІР°СЂРёР°РЅС‚С‹  СЃР°РјРѕР№  PrimWhere. Р•СЃР»Рё  PrimWhere РЅРµ Р±С‹Р»Р° РІР»РѕР¶РµРЅР°,
+    //  С‚РѕРіРґР° changed_clauses Р±СѓРґРµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ С‚РѕР»СЊРєРѕ PrimWhere.
+    // Р’ РїСЂРёРЅС†РёРїРµ, РІРѕР·РјРѕР¶РµРЅ СЃР»СѓС‡Р°Р№, РєРѕРіРґР° pPrimWhat РІР»РѕР¶РµРЅР°, РЅРѕ СЌС‚Рѕ РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ Сѓ PrimWhere Рё pPrimWhat РѕРґРёРЅР°РєРѕРІС‹Р№
+    // РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅС‹Р№  С…РѕСЏР·РёРЅ
 
     for (int i = 0; i < m_Clauses.size(); i++)
         if (PeriodPrimWhere.is_part_of(m_Clauses[i])) {
@@ -916,11 +916,11 @@ void CSentence::OneRunOfClauseRules(const vector<CClauseRule> &ListOfRules) {
 
 
 
-// функция копирует
-//типы из правой клаузы;
-//   знаки препинания  из правой клаузы;
-//соч. союзы  из левой клаузы;
-//подч. союзы   из обеих клауз;
+// С„СѓРЅРєС†РёСЏ РєРѕРїРёСЂСѓРµС‚
+//С‚РёРїС‹ РёР· РїСЂР°РІРѕР№ РєР»Р°СѓР·С‹;
+//   Р·РЅР°РєРё РїСЂРµРїРёРЅР°РЅРёСЏ  РёР· РїСЂР°РІРѕР№ РєР»Р°СѓР·С‹;
+//СЃРѕС‡. СЃРѕСЋР·С‹  РёР· Р»РµРІРѕР№ РєР»Р°СѓР·С‹;
+//РїРѕРґС‡. СЃРѕСЋР·С‹   РёР· РѕР±РµРёС… РєР»Р°СѓР·;
 
 void CopyParametersFromRight(CClause &newClause, const CClause *pClause1, const CClause *pClause2) {
     newClause.m_vectorTypes = pClause2->m_vectorTypes;
@@ -958,8 +958,8 @@ static void CopyCharacreristics(CClause &C, const CClause *pFromClause) {
 
 
 
-//После работы функций UniteClauses, CreateEnclosedNotStrongClause,  EncloseClauseAsWord
-//все ссылки на клаузы становятся невалидными
+//РџРѕСЃР»Рµ СЂР°Р±РѕС‚С‹ С„СѓРЅРєС†РёР№ UniteClauses, CreateEnclosedNotStrongClause,  EncloseClauseAsWord
+//РІСЃРµ СЃСЃС‹Р»РєРё РЅР° РєР»Р°СѓР·С‹ СЃС‚Р°РЅРѕРІСЏС‚СЃСЏ РЅРµРІР°Р»РёРґРЅС‹РјРё
 
 CClause &CSentence::UniteClauses(int iLeftClause, int iRightClause, ParametersSourceEnum whose_chars_to_copy) {
     CClause *pOldClauseL = &GetClause(iLeftClause);
@@ -984,14 +984,14 @@ CClause &CSentence::UniteClauses(int iLeftClause, int iRightClause, ParametersSo
 
 
 
-    //это очень хитрый  assert. Нормально мы сливаем две невложенные клаузы, если обе клаузы не вложены, тогда
-    //должно выполняться assert ((LeftParents.size() == 1)  &&  (RightParents.size() == 1));
-    //однако мы рарешаем сливаться  вложенным клаузам, но только тогда, когда
-    // 1. Либо они непосредственно вложены в одну клаузу.
-    // 2. Либо одна из клауз  не является  вложенной.
-    // Выражение assert ((LeftParents.size() == 1)  ||  (RightParents.size() == 1));
-    // как раз обеспечивает проверку  вышеуказанных условий,
-    // поскольку одна правая клауза  идет сразу за левой.
+    //СЌС‚Рѕ РѕС‡РµРЅСЊ С…РёС‚СЂС‹Р№  assert. РќРѕСЂРјР°Р»СЊРЅРѕ РјС‹ СЃР»РёРІР°РµРј РґРІРµ РЅРµРІР»РѕР¶РµРЅРЅС‹Рµ РєР»Р°СѓР·С‹, РµСЃР»Рё РѕР±Рµ РєР»Р°СѓР·С‹ РЅРµ РІР»РѕР¶РµРЅС‹, С‚РѕРіРґР°
+    //РґРѕР»Р¶РЅРѕ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ assert ((LeftParents.size() == 1)  &&  (RightParents.size() == 1));
+    //РѕРґРЅР°РєРѕ РјС‹ СЂР°СЂРµС€Р°РµРј СЃР»РёРІР°С‚СЊСЃСЏ  РІР»РѕР¶РµРЅРЅС‹Рј РєР»Р°СѓР·Р°Рј, РЅРѕ С‚РѕР»СЊРєРѕ С‚РѕРіРґР°, РєРѕРіРґР°
+    // 1. Р›РёР±Рѕ РѕРЅРё РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РІР»РѕР¶РµРЅС‹ РІ РѕРґРЅСѓ РєР»Р°СѓР·Сѓ.
+    // 2. Р›РёР±Рѕ РѕРґРЅР° РёР· РєР»Р°СѓР·  РЅРµ СЏРІР»СЏРµС‚СЃСЏ  РІР»РѕР¶РµРЅРЅРѕР№.
+    // Р’С‹СЂР°Р¶РµРЅРёРµ assert ((LeftParents.size() == 1)  ||  (RightParents.size() == 1));
+    // РєР°Рє СЂР°Р· РѕР±РµСЃРїРµС‡РёРІР°РµС‚ РїСЂРѕРІРµСЂРєСѓ  РІС‹С€РµСѓРєР°Р·Р°РЅРЅС‹С… СѓСЃР»РѕРІРёР№,
+    // РїРѕСЃРєРѕР»СЊРєСѓ РѕРґРЅР° РїСЂР°РІР°СЏ РєР»Р°СѓР·Р°  РёРґРµС‚ СЃСЂР°Р·Сѓ Р·Р° Р»РµРІРѕР№.
     assert ((LeftParents.size() == 1) || (RightParents.size() == 1));
 
     vector<CPeriod> changed_clauses;
@@ -1051,7 +1051,7 @@ CClause &CSentence::UniteClauses(int iLeftClause, int iRightClause, ParametersSo
 }
 
 
-// проверяет стоит ли на месте iWrd вложенная клауза
+// РїСЂРѕРІРµСЂСЏРµС‚ СЃС‚РѕРёС‚ Р»Рё РЅР° РјРµСЃС‚Рµ iWrd РІР»РѕР¶РµРЅРЅР°СЏ РєР»Р°СѓР·Р°
 bool CSentence::IsWordClause(const CClause &rClause, int iWrd) const {
     if (rClause.m_SynVariants.empty()) return false;
 
@@ -1229,7 +1229,7 @@ bool CSentence::RuleForRelativeClause(int iClauseNum) {
             return false;
     };
     //  prohibit relative clauses, whihc has only one type: infinitive
-    // "Um dem Ziele nдherzukommen, die Angehцrigen zu verschmelzen,"
+    // "Um dem Ziele nРґherzukommen, die AngehС†rigen zu verschmelzen,"
     if ((pClause->m_vectorTypes.size() == 1)
         && (pClause->m_vectorTypes[0].m_Type == GetOpt()->m_InfintiveClauseType)
             )
@@ -1261,7 +1261,7 @@ bool CSentence::RuleForRelativeClause(int iClauseNum) {
         return true;
 
     //  cooordination of relative clauses
-    // "Dienste, die wichtig sind, die aber nicht unbedingt vom Staat geleistet werden mьssen,"
+    // "Dienste, die wichtig sind, die aber nicht unbedingt vom Staat geleistet werden mСЊssen,"
     if ((m_Clauses[MainClauseNo].IsRelative())
         && IsEnclosedClause(MainClauseNo)
             ) {
@@ -1357,7 +1357,7 @@ bool CSentence::IsStrictLeftClauseBorder(CPeriod P) const {
 
 
     //multiple punctuation marks are a stict delimiter (Russian direct speech):
-    //"... сказала она, - Петя."
+    //"... СЃРєР°Р·Р°Р»Р° РѕРЅР°, - РџРµС‚СЏ."
     if (m_Words[iWord].HasDes(OPun))
         if (iWord < m_Words.size() - 1)
             if (m_Words[iWord + 1].HasDes(OPun))

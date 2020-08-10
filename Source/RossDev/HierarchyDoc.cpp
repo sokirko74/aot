@@ -58,7 +58,7 @@ int SaveToRossdev (ClientData clienData,
 {
 
 	if (argc > 3) {
-		interp->result = "Íåïðàâèëüíîå èñïîëüçîâàíèå: random ? range";
+		interp->result = "ÐÐµÐ¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ: random ? range";
 		return TCL_ERROR;
 	};
 	int limit = 0;
@@ -108,7 +108,7 @@ CString  CHierarchyDoc::GetNewNode(CString Nodes)
 		 Nodes.TrimLeft();
 	};
 
-	bool  SecondDomain =  (m_Type == SemFet) && (::MessageBox(0, "Âû õîòèòå äîáàâèòü SF (yes - SF; no - SEMR) ", "Message Box", MB_YESNO) == IDNO);
+	bool  SecondDomain =  (m_Type == SemFet) && (::MessageBox(0, "Ð’Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ SF (yes - SF; no - SEMR) ", "Message Box", MB_YESNO) == IDNO);
 
 	LONG ItemNo;
 
@@ -165,8 +165,8 @@ bool CHierarchyDoc::OpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
 
     switch (Type) 
 	{
-	   case SemFet : SetPathName("Èåðàðõèÿ ñåìàíòè÷åñêèõ õàðàêòåðèñòèê"); break;
-	   case SemRel : SetPathName("Èåðàðõèÿ ñåìàíòè÷åñêèõ îòíîøåíèé"); break;
+	   case SemFet : SetPathName("Ð˜ÐµÑ€Ð°Ñ€Ñ…Ð¸Ñ ÑÐµÐ¼Ð°Ð½Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ñ…Ð°Ñ€Ð°ÐºÑ‚ÐµÑ€Ð¸ÑÑ‚Ð¸Ðº"); break;
+	   case SemRel : SetPathName("Ð˜ÐµÑ€Ð°Ñ€Ñ…Ð¸Ñ ÑÐµÐ¼Ð°Ð½Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¾Ñ‚Ð½Ð¾ÑˆÐµÐ½Ð¸Ð¹"); break;
 	};
 
 	GetDocTemplate()->InitialUpdateFrame(pFrame, this, TRUE);

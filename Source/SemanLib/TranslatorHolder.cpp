@@ -120,7 +120,7 @@ bool CTranslatorHolder::InitAspDict() {
     }
     catch (...) {
         m_AspDictEnabled = false;
-        ErrorMessage("Cannot load словарь видовых  пар");
+        ErrorMessage("Cannot load СЃР»РѕРІР°СЂСЊ РІРёРґРѕРІС‹С…  РїР°СЂ");
     };
     return m_AspDictEnabled;
 
@@ -144,13 +144,13 @@ bool CTranslatorHolder::Init() {
 
     try {
         if (!m_pSynonymsDict.Load(GetRegistryString(g_strSynDictionary))) {
-            ErrorMessage("Cannot load словарь синонимов");
+            ErrorMessage("Cannot load СЃР»РѕРІР°СЂСЊ СЃРёРЅРѕРЅРёРјРѕРІ");
             return false;
         }
 
     }
     catch (...) {
-        ErrorMessage("Cannot load словарь синонимов");
+        ErrorMessage("Cannot load СЃР»РѕРІР°СЂСЊ СЃРёРЅРѕРЅРёРјРѕРІ");
         return false;
     };
 
@@ -191,7 +191,7 @@ bool CTranslatorHolder::Init() {
         m_AdjNounDualFreq.Load(GetRegistryString(g_strAdjNounDualFreqPath));
     }
     catch (...) {
-        ErrorMessage("Cannot load словарь частот английских ADJ-NOUN");
+        ErrorMessage("Cannot load СЃР»РѕРІР°СЂСЊ С‡Р°СЃС‚РѕС‚ Р°РЅРіР»РёР№СЃРєРёС… ADJ-NOUN");
         return false;;
     };
 

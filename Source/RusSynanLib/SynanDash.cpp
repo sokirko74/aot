@@ -5,11 +5,11 @@
 void InitCopulList(StringVector& v_CopulList)
 {
 	v_CopulList.clear();
-	v_CopulList.push_back("как");
-	v_CopulList.push_back("словно");
-	v_CopulList.push_back("будто");
-	v_CopulList.push_back("что");
-	v_CopulList.push_back("точно");
+	v_CopulList.push_back("РєР°Рє");
+	v_CopulList.push_back("СЃР»РѕРІРЅРѕ");
+	v_CopulList.push_back("Р±СѓРґС‚Рѕ");
+	v_CopulList.push_back("С‡С‚Рѕ");
+	v_CopulList.push_back("С‚РѕС‡РЅРѕ");
 }
 
 bool HasAdjInNom(const CSynWord& _W)
@@ -131,7 +131,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		int j = pClause.m_iFirstWord;
 		for (; j <= pClause.m_iLastWord; j++)
-			if (	!m_Words[j].GetSynHomonym(0).IsLemma("У")
+			if (	!m_Words[j].GetSynHomonym(0).IsLemma("РЈ")
 				&&	m_Words[j].GetHomonymByPOS(PREP) != -1 
 				)
 				 break;
@@ -144,7 +144,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		for (j = pClause.m_iFirstWord; j <= pClause.m_iLastWord; j++)
 		{
-			if ( m_Words[j].GetSynHomonym(0).IsLemma("ЭТО")	)
+			if ( m_Words[j].GetSynHomonym(0).IsLemma("Р­РўРћ")	)
 			{
 				Eto.push_back(j);
 				continue;
@@ -159,7 +159,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 			if ( m_Words[j].GetHomonymsCount() > 1 && !isdigit((BYTE)m_Words[j].m_strWord[0]) ) continue;
 
-			if ( m_Words[j].GetSynHomonym(0).IsLemma("КОТОРЫЙ") )
+			if ( m_Words[j].GetSynHomonym(0).IsLemma("РљРћРўРћР Р«Р™") )
 				continue;
 
 			if (		HasNounInNom( m_Words[j]) 
@@ -177,7 +177,7 @@ void CRusSentence::TryToRebuildDashInClause()
 				continue;
 			}
 
-			if ( m_Words[j].GetSynHomonym(0).IsLemma("У") )
+			if ( m_Words[j].GetSynHomonym(0).IsLemma("РЈ") )
 			{
 				Prep_U = j;
 				continue;
@@ -190,7 +190,7 @@ void CRusSentence::TryToRebuildDashInClause()
 				Noun_NomSgPl.push_back(j);
 			
 			if (0 == Adj_Nom.size() && 0 == Noun_Nom.size()
-				&& isdigit((BYTE)m_Words[j].m_strWord[0]) // Ему 33.
+				&& isdigit((BYTE)m_Words[j].m_strWord[0]) // Р•РјСѓ 33.
 				&& m_Words[j].m_strWord.find("-") == string::npos && j >= m_Words.size()-2 
 				&& !m_Words[m_Words.size()-1].m_Homonyms[0].m_bMonth && !m_Words[m_Words.size()-2].m_Homonyms[0].m_bMonth) 
 			{
@@ -203,10 +203,10 @@ void CRusSentence::TryToRebuildDashInClause()
 		if (0 == Noun_Nom.size() && 0 == Eto.size() && 
 			0 == Adj_Nom.size() && -1 == Prep_U)
 			continue;
-		if ( Vozrast && 0 < Noun_Nom.size() && m_Words[Noun_Nom[0]].m_strUpperWord == "ГОД" && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) //ему 21 год
+		if ( Vozrast && 0 < Noun_Nom.size() && m_Words[Noun_Nom[0]].m_strUpperWord == "Р“РћР”" && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) //РµРјСѓ 21 РіРѕРґ
 			Noun_Nom.clear();
 
-		if (0 == Noun_Nom.size() && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) // Глаза красивые.
+		if (0 == Noun_Nom.size() && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) // Р“Р»Р°Р·Р° РєСЂР°СЃРёРІС‹Рµ.
 			for (j = pClause.m_iFirstWord; j <= pClause.m_iLastWord; j++)
 			{
 				m_Words[j].SetHomonymsDel(true);
@@ -216,9 +216,9 @@ void CRusSentence::TryToRebuildDashInClause()
 					{
 						if (  (m_Words[j].m_Homonyms[i].HasGrammem(rNominativ)
 							&& (m_Words[j].m_Homonyms[i].m_iGrammems & rAllNumbers & m_Words[Adj_Nom[0]].GetGrammems())
-							&& (m_Words[j].m_Homonyms[i].HasGrammem(rPlural) // согласуем род если ед.ч.
+							&& (m_Words[j].m_Homonyms[i].HasGrammem(rPlural) // СЃРѕРіР»Р°СЃСѓРµРј СЂРѕРґ РµСЃР»Рё РµРґ.С‡.
 								|| (m_Words[j].m_Homonyms[i].m_iGrammems & rAllGenders & m_Words[Adj_Nom[0]].GetGrammems()))) 
-								|| (Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ) )) // Ему 33.
+								|| (Vozrast && m_Words[j].m_Homonyms[i].HasGrammem(rDativ) )) // Р•РјСѓ 33.
 						{
 							m_Words[j].m_Homonyms[i].m_bDelete = false;
 							Noun_Nom.push_back(j);
@@ -255,7 +255,7 @@ void CRusSentence::TryToRebuildDashInClause()
 		{
 			QWORD tormoz = _QM(rNeutrum) |  _QM(rSingular) |  _QM(rNominativ); 
 			for (int k = 0; k < Eto.size() && k < Noun_Nom.size(); k++)
-				//  без "тормоза" во фразе "это облако" восстановится тире
+				//  Р±РµР· "С‚РѕСЂРјРѕР·Р°" РІРѕ С„СЂР°Р·Рµ "СЌС‚Рѕ РѕР±Р»Р°РєРѕ" РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЃСЏ С‚РёСЂРµ
 				if	(!m_Words[Noun_Nom[k]].GetSynHomonym(0).HasSetOfGrammemsExact(tormoz) )
 					if (Noun_Nom[k] > Eto[k])
 					{
@@ -349,7 +349,7 @@ void CRusSentence::TryToRebuildDashInClause()
 			for (int k = 0; k < Noun_Nom.size() && k < Adj_Nom.size(); k++)
 				if (      Noun_Nom[k] < Adj_Nom[k] 
                      &&  (pClause.m_iLastWord == Adj_Nom[k] || !HasGenderNumberCaseNP(m_Words[Adj_Nom[k]], m_Words[Adj_Nom[k]+1]) 
-					 ||  Vozrast) //Ему 33 года
+					 ||  Vozrast) //Р•РјСѓ 33 РіРѕРґР°
                    )
 					 {
 						if(Vozrast) 

@@ -28,7 +28,7 @@ bool CRusSentence::RuleForSimilarNounGroupClauses(int iClauseNum, int MinCountOf
 	if ( IsWordClause(*pClauseFirst, pClauseFirst->m_iLastWord) ) return false;
 
 	if (	! GetWords()[pClauseFirst->m_iLastWord].CanBeSynNoun()
-		 &&  GetWords()[pClauseFirst->m_iLastWord].GetHomonymByPOS(ADV) == -1 //строить однородные наречия
+		 &&  GetWords()[pClauseFirst->m_iLastWord].GetHomonymByPOS(ADV) == -1 //СЃС‚СЂРѕРёС‚СЊ РѕРґРЅРѕСЂРѕРґРЅС‹Рµ РЅР°СЂРµС‡РёСЏ
 		)
 		return false;
 	
@@ -51,8 +51,8 @@ bool CRusSentence::RuleForSimilarNounGroupClauses(int iClauseNum, int MinCountOf
 
 		pClauseThird = &GetClause(iThird);
 		
-		//	приходится  отдельно сохранять координаты клаузы в переменную ClauseThirdPeriod, поскольку 
-		//	ссылка на клаузу (pClauseThird) через некоторое время перестанет работать.
+		//	РїСЂРёС…РѕРґРёС‚СЃСЏ  РѕС‚РґРµР»СЊРЅРѕ СЃРѕС…СЂР°РЅСЏС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР»Р°СѓР·С‹ РІ РїРµСЂРµРјРµРЅРЅСѓСЋ ClauseThirdPeriod, РїРѕСЃРєРѕР»СЊРєСѓ 
+		//	СЃСЃС‹Р»РєР° РЅР° РєР»Р°СѓР·Сѓ (pClauseThird) С‡РµСЂРµР· РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ РїРµСЂРµСЃС‚Р°РЅРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ.
 		
 		ClauseThirdPeriod = (CPeriod)*pClauseThird;
 
@@ -68,7 +68,7 @@ bool CRusSentence::RuleForSimilarNounGroupClauses(int iClauseNum, int MinCountOf
 	     	 
 	}
 		
-	// создаем пробную клаузу
+	// СЃРѕР·РґР°РµРј РїСЂРѕР±РЅСѓСЋ РєР»Р°СѓР·Сѓ
 	CClause prClause(pClauseFirst->m_pSent, pClauseFirst->m_iFirstWord, -1);
 	if (-1 == iThird) 
 		prClause.m_iLastWord = pClauseSecond->m_iLastWord;
@@ -101,13 +101,13 @@ bool CRusSentence::RuleForSimilarNounGroupClauses(int iClauseNum, int MinCountOf
 		{
 			const CGroup& group = it->m_vectorGroups.GetGroups()[i];
 
-			//  it_second будет  указывать на максимальную группу ОДНОР_ИГ, которая была создана  на границе двух клауз
+			//  it_second Р±СѓРґРµС‚  СѓРєР°Р·С‹РІР°С‚СЊ РЅР° РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ РіСЂСѓРїРїСѓ РћР”РќРћР _РР“, РєРѕС‚РѕСЂР°СЏ Р±С‹Р»Р° СЃРѕР·РґР°РЅР°  РЅР° РіСЂР°РЅРёС†Рµ РґРІСѓС… РєР»Р°СѓР·
 			if( (group.m_iFirstWord <= pClauseFirst->m_iLastWord) && (group.m_iLastWord > pClauseSecond->m_iFirstWord))
 				if (group.m_GroupType == SIMILAR_NOUN_GROUPS)
 					it_second = &group;
 
 			
-			// если нашли группу, которая покрывает все три клаузы, надо все три клаузы объединить 
+			// РµСЃР»Рё РЅР°С€Р»Рё РіСЂСѓРїРїСѓ, РєРѕС‚РѕСЂР°СЏ РїРѕРєСЂС‹РІР°РµС‚ РІСЃРµ С‚СЂРё РєР»Р°СѓР·С‹, РЅР°РґРѕ РІСЃРµ С‚СЂРё РєР»Р°СѓР·С‹ РѕР±СЉРµРґРёРЅРёС‚СЊ 
 			if ( -1 != iThird )
 				if	(		(group.m_iFirstWord <= pClauseFirst->m_iLastWord) 
 						&&	(group.m_iLastWord > ClauseThirdPeriod.m_iFirstWord) 
@@ -149,8 +149,8 @@ bool CRusSentence::RuleForSimilarNounGroupClauses(int iClauseNum, int MinCountOf
 
 		        if ( irel_count < MinCountOfSimilarMembers) 
 		        {
-			        // если была собрана группа не по винительному, родительному или им. падежу, тогда  неважно сколько членов она содержит,
-			        // такая  группа - редкость, поэтому  по ней  нужно объединять клаузы
+			        // РµСЃР»Рё Р±С‹Р»Р° СЃРѕР±СЂР°РЅР° РіСЂСѓРїРїР° РЅРµ РїРѕ РІРёРЅРёС‚РµР»СЊРЅРѕРјСѓ, СЂРѕРґРёС‚РµР»СЊРЅРѕРјСѓ РёР»Рё РёРј. РїР°РґРµР¶Сѓ, С‚РѕРіРґР°  РЅРµРІР°Р¶РЅРѕ СЃРєРѕР»СЊРєРѕ С‡Р»РµРЅРѕРІ РѕРЅР° СЃРѕРґРµСЂР¶РёС‚,
+			        // С‚Р°РєР°СЏ  РіСЂСѓРїРїР° - СЂРµРґРєРѕСЃС‚СЊ, РїРѕСЌС‚РѕРјСѓ  РїРѕ РЅРµР№  РЅСѓР¶РЅРѕ РѕР±СЉРµРґРёРЅСЏС‚СЊ РєР»Р°СѓР·С‹
 			        if (		(group.GetGrammems() & (1 << rNominativ))  
 					        ||	(group.GetGrammems() & (1 << rAccusativ))  
 					        ||	(group.GetGrammems() & (1 << rGenitiv))  

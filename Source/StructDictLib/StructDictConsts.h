@@ -12,14 +12,14 @@
 	const	DWORD	AuthorNameSize = 12;
 	
 
-	// максимальное число актантов 
+	// РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ Р°РєС‚Р°РЅС‚РѕРІ 
 	const	BYTE	MaxNumAct = 7;
 
-	// ошибочный номер словарного входа 
+	// РѕС€РёР±РѕС‡РЅС‹Р№ РЅРѕРјРµСЂ СЃР»РѕРІР°СЂРЅРѕРіРѕ РІС…РѕРґР° 
 	const	WORD	ErrUnitNo  = 65000;
 	const	DWORD	EntryStrSize = 40;
 
-	   // Исходный материал доменов
+	   // РСЃС…РѕРґРЅС‹Р№ РјР°С‚РµСЂРёР°Р» РґРѕРјРµРЅРѕРІ
         const	BYTE	dsUnion = 'O';
 	const	BYTE	dsExpres = 'C';
 	const	BYTE	dsSystem = 'S';

@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Английские алгоритмы 5
+// РђРЅРіР»РёР№СЃРєРёРµ Р°Р»РіРѕСЂРёС‚РјС‹ 5
 
 // MoveMeaningRelsToNewNode()
 // MakeBeNodeForEngNode()
@@ -18,7 +18,7 @@
 
 void  CEngSemStructure::MoveMeaningRelsToNewNode(int iOldNode,int iNewNode)
 {
-// перевешиваем подлежащее на вспомогательный глагол
+// РїРµСЂРµРІРµС€РёРІР°РµРј РїРѕРґР»РµР¶Р°С‰РµРµ РЅР° РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РіР»Р°РіРѕР»
 	vector<long> outRels;
 	GetOutcomingRelations(iOldNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
@@ -29,7 +29,7 @@ void  CEngSemStructure::MoveMeaningRelsToNewNode(int iOldNode,int iNewNode)
 		}
 	}
 
-// входящие связи
+// РІС…РѕРґСЏС‰РёРµ СЃРІСЏР·Рё
 	vector<long> inRels;
 	GetIncomingRelations(iOldNode,inRels,false);
 	for( int i=0; i<inRels.size(); i++ )
@@ -38,7 +38,7 @@ void  CEngSemStructure::MoveMeaningRelsToNewNode(int iOldNode,int iNewNode)
 			m_Relations[inRels[i]].m_TargetNodeNo = iNewNode;
 	}
 
-// выходящие межклаузные связи
+// РІС‹С…РѕРґСЏС‰РёРµ РјРµР¶РєР»Р°СѓР·РЅС‹Рµ СЃРІСЏР·Рё
 	outRels.clear();
 	GetOutcomingRelations(iOldNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
@@ -49,7 +49,7 @@ void  CEngSemStructure::MoveMeaningRelsToNewNode(int iOldNode,int iNewNode)
 		m_Relations[outRels[i]].m_SourceNodeNo = iNewNode;
 	}
 
-// позиционные связи
+// РїРѕР·РёС†РёРѕРЅРЅС‹Рµ СЃРІСЏР·Рё
 	outRels.clear();
 	GetOutcomingRelations(iOldNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
@@ -126,7 +126,7 @@ CEngSemRelation newRel(CValency("S-ACT",A_C),m_Nodes.size()-1,iEngNode,"");	newR
 	newRel.m_SynReal.m_Cortege = m_Nodes[iBeNode].m_Patterns[iObjPattern].m_GramCorteges[0];
 	m_Relations.push_back(newRel); // be->Node
 
-// поищем Subj
+// РїРѕРёС‰РµРј Subj
 	vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	int iSubRel = -1;
@@ -164,14 +164,14 @@ CEngSemRelation newRel(CValency("S-ACT",A_C),m_Nodes.size()-1,iEngNode,"");	newR
 	else
 		m_Nodes[iBeNode].AddOneGrammemRich( eSingular);
 
-// связи
+// СЃРІСЏР·Рё
 	MoveMeaningRelsToNewNode(iEngNode,iBeNode);
 	return iBeNode;
 }
 
 /////////////////////////////////////////////////////////////////////////////
 // ApplyVerbToAdjRule()
-// "он отсутствовал"
+// "РѕРЅ РѕС‚СЃСѓС‚СЃС‚РІРѕРІР°Р»"
 
 void CEngSemStructure::ApplyVerbToAdjRule(int iEngNode)
 {
@@ -191,10 +191,10 @@ void CEngSemStructure::ApplyVerbToAdjRule(int iEngNode)
 
 /////////////////////////////////////////////////////////////////////////////
 // ApplyALG_AL3()
-// обработка транзитивных глаголов
-// он дал мне яблоко
-// он дал яблоко мне
-// он дал большому толстому зеленому крокодилу яблоко
+// РѕР±СЂР°Р±РѕС‚РєР° С‚СЂР°РЅР·РёС‚РёРІРЅС‹С… РіР»Р°РіРѕР»РѕРІ
+// РѕРЅ РґР°Р» РјРЅРµ СЏР±Р»РѕРєРѕ
+// РѕРЅ РґР°Р» СЏР±Р»РѕРєРѕ РјРЅРµ
+// РѕРЅ РґР°Р» Р±РѕР»СЊС€РѕРјСѓ С‚РѕР»СЃС‚РѕРјСѓ Р·РµР»РµРЅРѕРјСѓ РєСЂРѕРєРѕРґРёР»Сѓ СЏР±Р»РѕРєРѕ
 
 void CEngSemStructure::ApplyALG_AL3(int iEngNode)
 {
@@ -242,19 +242,19 @@ if( engRel.m_Valency.m_RelationStr == "ADR")		{
 
 /////////////////////////////////////////////////////////////////////////////
 // ApplyInvitatoryRule()
-// Выслушай меня и давай иди на работу
-// Давай пойдем на концерт завтра, потому что сегодня у меня есть срочные дела
-// Пошли домой
-// Давай мы сначала поедим, а потом пойдем гулять
-// Может быть, давайте мы ему не скажем, что случилось?
+// Р’С‹СЃР»СѓС€Р°Р№ РјРµРЅСЏ Рё РґР°РІР°Р№ РёРґРё РЅР° СЂР°Р±РѕС‚Сѓ
+// Р”Р°РІР°Р№ РїРѕР№РґРµРј РЅР° РєРѕРЅС†РµСЂС‚ Р·Р°РІС‚СЂР°, РїРѕС‚РѕРјСѓ С‡С‚Рѕ СЃРµРіРѕРґРЅСЏ Сѓ РјРµРЅСЏ РµСЃС‚СЊ СЃСЂРѕС‡РЅС‹Рµ РґРµР»Р°
+// РџРѕС€Р»Рё РґРѕРјРѕР№
+// Р”Р°РІР°Р№ РјС‹ СЃРЅР°С‡Р°Р»Р° РїРѕРµРґРёРј, Р° РїРѕС‚РѕРј РїРѕР№РґРµРј РіСѓР»СЏС‚СЊ
+// РњРѕР¶РµС‚ Р±С‹С‚СЊ, РґР°РІР°Р№С‚Рµ РјС‹ РµРјСѓ РЅРµ СЃРєР°Р¶РµРј, С‡С‚Рѕ СЃР»СѓС‡РёР»РѕСЃСЊ?
 
 void CEngSemStructure::ApplyInvitatoryRule(int iEngNode)
 {
 	if( m_Nodes[iEngNode].m_MainWordNo==-1 )
 		return;
 
-	string strSoft = "_мягк_пригласит_наклонение";
-	string strHard = "_пригласит_наклонение";
+	string strSoft = "_РјСЏРіРє_РїСЂРёРіР»Р°СЃРёС‚_РЅР°РєР»РѕРЅРµРЅРёРµ";
+	string strHard = "_РїСЂРёРіР»Р°СЃРёС‚_РЅР°РєР»РѕРЅРµРЅРёРµ";
 	
 	bool bSoft = m_Nodes[iEngNode].HasRelOperator(strSoft);
 	bool bHard = m_Nodes[iEngNode].HasRelOperator(strHard);
@@ -342,7 +342,7 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 	if( IsThesRoss(RusNode.GetType()) )
 		return;
 
-// смотрим, было ли указание на эту тему
+// СЃРјРѕС‚СЂРёРј, Р±С‹Р»Рѕ Р»Рё СѓРєР°Р·Р°РЅРёРµ РЅР° СЌС‚Сѓ С‚РµРјСѓ
 	vector< SEngEquiv > vectorEngEquivs;
 	GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),iRusNode);
 
@@ -367,7 +367,7 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 	}
 //
 	if( StrNumeral!="#ed" )
-		return; // неизвестная помета
+		return; // РЅРµРёР·РІРµСЃС‚РЅР°СЏ РїРѕРјРµС‚Р°
 //
 	vector<CFormInfo> piPC;
 	helper.GetEngLemmatizer()->CreateParadigmCollection(true, engWord.m_Lemma, false, false, piPC);
@@ -402,29 +402,29 @@ void CEngSemStructure::RefineSynRealMarks(int iEngNode)
 {
 	CEngSemNode& engNode = m_Nodes[iEngNode];
 
-	if( engNode.m_SynReal.m_AlgStr != "А1(НЕ)" )
+	if( engNode.m_SynReal.m_AlgStr != "Рђ1(РќР•)" )
 		return;
 
 	vector<long> inRels;
 	GetIncomingRelations(iEngNode,inRels,false);
 	for( int i=0; i<inRels.size(); i++ )
 	{
-		m_Nodes[m_Relations[inRels[i]].m_SourceNodeNo].m_RelOperators.push_back("НЕ");
+		m_Nodes[m_Relations[inRels[i]].m_SourceNodeNo].m_RelOperators.push_back("РќР•");
 	}
 }
 
 /////////////////////////////////////////////////////////////////////////////
 /*
-	TranslateAdverbAdjectiveRule ищет русские наречия  типа "по-английски", "по-ковбойски" (CSemWord::m_bAdverbFromAdjective),
-	устанавливает им часть речи прилагательное.
-	далее три случая:
-1. если управляющее слово этого наречия  было COMMUNIC или  INTEL (писать, говорить думать)	и у этого слова не выражена  валентность  содержания, тогда  выходим из обработки.
+	TranslateAdverbAdjectiveRule РёС‰РµС‚ СЂСѓСЃСЃРєРёРµ РЅР°СЂРµС‡РёСЏ  С‚РёРїР° "РїРѕ-Р°РЅРіР»РёР№СЃРєРё", "РїРѕ-РєРѕРІР±РѕР№СЃРєРё" (CSemWord::m_bAdverbFromAdjective),
+	СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РёРј С‡Р°СЃС‚СЊ СЂРµС‡Рё РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ.
+	РґР°Р»РµРµ С‚СЂРё СЃР»СѓС‡Р°СЏ:
+1. РµСЃР»Рё СѓРїСЂР°РІР»СЏСЋС‰РµРµ СЃР»РѕРІРѕ СЌС‚РѕРіРѕ РЅР°СЂРµС‡РёСЏ  Р±С‹Р»Рѕ COMMUNIC РёР»Рё  INTEL (РїРёСЃР°С‚СЊ, РіРѕРІРѕСЂРёС‚СЊ РґСѓРјР°С‚СЊ)	Рё Сѓ СЌС‚РѕРіРѕ СЃР»РѕРІР° РЅРµ РІС‹СЂР°Р¶РµРЅР°  РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ  СЃРѕРґРµСЂР¶Р°РЅРёСЏ, С‚РѕРіРґР°  РІС‹С…РѕРґРёРј РёР· РѕР±СЂР°Р±РѕС‚РєРё.
 	// "I speak English"
 
-2. если управляющее слово этого наречия  было COMMUNIC или  INTEL (писать, говорить думать)	и у этого слова выражена  валентность  содержания, тогда  добавляем предлог "in" к прилагательному.
+2. РµСЃР»Рё СѓРїСЂР°РІР»СЏСЋС‰РµРµ СЃР»РѕРІРѕ СЌС‚РѕРіРѕ РЅР°СЂРµС‡РёСЏ  Р±С‹Р»Рѕ COMMUNIC РёР»Рё  INTEL (РїРёСЃР°С‚СЊ, РіРѕРІРѕСЂРёС‚СЊ РґСѓРјР°С‚СЊ)	Рё Сѓ СЌС‚РѕРіРѕ СЃР»РѕРІР° РІС‹СЂР°Р¶РµРЅР°  РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ  СЃРѕРґРµСЂР¶Р°РЅРёСЏ, С‚РѕРіРґР°  РґРѕР±Р°РІР»СЏРµРј РїСЂРµРґР»РѕРі "in" Рє РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРјСѓ.
 	// "I wrote a letter in English"
 
-	2. иначе добавляем предлог "in" и слово "fashion"
+	2. РёРЅР°С‡Рµ РґРѕР±Р°РІР»СЏРµРј РїСЂРµРґР»РѕРі "in" Рё СЃР»РѕРІРѕ "fashion"
 	// "he was dressed in the Eastern fashion"
 	
 */
@@ -441,7 +441,7 @@ void CEngSemStructure::TranslateAdverbAdjectiveRule(int EngNodeNo)
 	engNode.m_Words[0].m_Poses = _QM(eADJ);
 	vector<long> inRels;
 	GetIncomingRelations(EngNodeNo,inRels,false);
-	// проходим мимо MUA	
+	// РїСЂРѕС…РѕРґРёРј РјРёРјРѕ MUA	
 	if (!inRels.empty())
 		if (m_Nodes[m_Relations[inRels[0]].m_SourceNodeNo].m_NodeType == MNA)
 			GetIncomingRelations(m_Relations[inRels[0]].m_SourceNodeNo, inRels,false);
@@ -458,7 +458,7 @@ void CEngSemStructure::TranslateAdverbAdjectiveRule(int EngNodeNo)
 	int ParentNodeNo = m_Relations[inRels[0]].m_SourceNodeNo;
 	const CEngSemNode& ParentNode = m_Nodes[ParentNodeNo];
 	if	(	(		HasSemFet(ParentNode, "INTEL")||	HasSemFet(ParentNode, "COMMUNIC")			)
-				&&	m_pData->GetThes(OmniThes)->IsA(TerminId, "_ЯЗЫК")
+				&&	m_pData->GetThes(OmniThes)->IsA(TerminId, "_РЇР—Р«Рљ")
 			)
 	{
 			if (		!HasOutRelationByName(ParentNodeNo, "CONTEN")&&	!HasOutRelationByName(ParentNodeNo, "OBJ")				)
@@ -471,7 +471,7 @@ void CEngSemStructure::TranslateAdverbAdjectiveRule(int EngNodeNo)
 	}
 	else
 	{
-		//he was dressed in the Eastern fashion - он был одет по-восточному
+		//he was dressed in the Eastern fashion - РѕРЅ Р±С‹Р» РѕРґРµС‚ РїРѕ-РІРѕСЃС‚РѕС‡РЅРѕРјСѓ
 		CEngSemWord W;
 		W.m_Word = "fashion";
 		W.m_Lemma = "FASHION";

@@ -68,7 +68,7 @@ QWORD GetNounNumeral(const string& word)
 
 string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
 {	 
-	if (x == 0) return IsOrdinal ? "Õ”À≈¬Œ…" : "ÕŒÀ‹";
+	if (x == 0) return IsOrdinal ? "–ù–£–õ–ï–í–û–ô" : "–ù–û–õ–¨";
 	if (x < 20)
 		return FindByNumber(x, IsOrdinal);
 	if (x < 100) {
@@ -87,14 +87,14 @@ string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes
 		if (x % 1000 == 0)
 			if ( x % 10000 == 1000 && (x % 100000)/10000 != 1)
 				return (x % 1000000 != 1000 ? spellout_number_ru((x / 10000)*10, IsOrdinal*10) + " " : "") +
-				+ (IsOrdinal==0 ? "ŒƒÕ¿ “€—ﬂ◊¿" : "ŒƒÕŒ“€—ﬂ◊Õ€…");
+				+ (IsOrdinal==0 ? "–û–î–ù–ê –¢–´–°–Ø–ß–ê" : "–û–î–ù–û–¢–´–°–Ø–ß–ù–´–ô");
 			else
 			if (IsOrdinal==0)
 				if ( x % 10000 != 0 && x % 10000 < 5000 && (x % 100000)/10000 != 1) 
-					return (x % 10000 == 2000 ? (x % 1000000 != 2000 ? spellout_number_ru((x / 10000)*10, IsOrdinal) + " " : "") + "ƒ¬≈" : 
-					spellout_number_ru(x / 1000, IsOrdinal)) + " “€—ﬂ◊»";
-				else return spellout_number_ru(x / 1000, IsOrdinal) + " “€—ﬂ◊";
-			else return spellout_number_ru(x / 1000 , IsOrdinal*10) + "“€—ﬂ◊Õ€…";
+					return (x % 10000 == 2000 ? (x % 1000000 != 2000 ? spellout_number_ru((x / 10000)*10, IsOrdinal) + " " : "") + "–î–í–ï" : 
+					spellout_number_ru(x / 1000, IsOrdinal)) + " –¢–´–°–Ø–ß–ò";
+				else return spellout_number_ru(x / 1000, IsOrdinal) + " –¢–´–°–Ø–ß";
+			else return spellout_number_ru(x / 1000 , IsOrdinal*10) + "–¢–´–°–Ø–ß–ù–´–ô";
 		else
 			return spellout_number_ru((x / 1000) * 1000, 0) + " " +
 						spellout_number_ru(x % 1000, IsOrdinal);
@@ -105,13 +105,13 @@ string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes
 		string m = FindByNumber(Q);
 		if (x % Q == 0)
 			if ( x % (10*Q) == Q ) return spellout_number_ru(x / Q , IsOrdinal*10) + 
-				(IsOrdinal==0 ? " " + m : m + "Õ€…");
+				(IsOrdinal==0 ? " " + m : m + "–ù–´–ô");
 			else
 			if (IsOrdinal==0)
 				if ( x % (10*Q) != 0 && x % (10*Q) < 5*Q && (x % (100*Q))/(10*Q) != 1) 
-					return  spellout_number_ru(x / Q, IsOrdinal) + " " + m + "¿"; //Ã»ÀÀ»ŒÕ¿
-				else return spellout_number_ru(x / Q, IsOrdinal) + " " + m + "Œ¬"; //Ã»ÀÀ»ŒÕŒ¬
-			else return spellout_number_ru(x / Q , IsOrdinal*10) + m + "Õ€…"; //Ã»ÀÀ»ŒÕ€…
+					return  spellout_number_ru(x / Q, IsOrdinal) + " " + m + "–ê"; //–ú–ò–õ–õ–ò–û–ù–ê
+				else return spellout_number_ru(x / Q, IsOrdinal) + " " + m + "–û–í"; //–ú–ò–õ–õ–ò–û–ù–û–í
+			else return spellout_number_ru(x / Q , IsOrdinal*10) + m + "–ù–´–ô"; //–ú–ò–õ–õ–ò–û–ù–´–ô
 		else
 			return spellout_number_ru((x / Q) * Q, 0) + " " +
 						spellout_number_ru(x % Q, IsOrdinal);

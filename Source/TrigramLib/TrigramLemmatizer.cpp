@@ -52,7 +52,7 @@ bool CTrigramModel::FindGramTabLineInTags(const vector<CTag>& Tags, poses_mask_t
 			)
 			continue;
 
-		if (Tags[j].m_Pos == PREP) // не проверяем падеж у предлогов
+		if (Tags[j].m_Pos == PREP) // РЅРµ РїСЂРѕРІРµСЂСЏРµРј РїР°РґРµР¶ Сѓ РїСЂРµРґР»РѕРіРѕРІ
 			return true;
 		else
 			if (Tags[j].m_Grammems != (Tags[j].m_Grammems&AllGrammems))
@@ -162,7 +162,7 @@ try {
 	{
 		if (bOnlyWithMaxWeight && (MostHeavyLemma != ""))
 		{
-			// вызывается только из lemmatize_sentence, поэтому выдаем самую тяжелую лемму
+			// РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РёР· lemmatize_sentence, РїРѕСЌС‚РѕРјСѓ РІС‹РґР°РµРј СЃР°РјСѓСЋ С‚СЏР¶РµР»СѓСЋ Р»РµРјРјСѓ
 			Lemmas.insert(MostHeavyLemma);
 		}
 		else
@@ -255,7 +255,7 @@ void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const string& WordSt
 	{
 		if (		(WordStr.size() == 1) 
 				&&	!FormInfos[i].m_bFound
-			) // игнорируем однобуквенные предсказанные слова
+			) // РёРіРЅРѕСЂРёСЂСѓРµРј РѕРґРЅРѕР±СѓРєРІРµРЅРЅС‹Рµ РїСЂРµРґСЃРєР°Р·Р°РЅРЅС‹Рµ СЃР»РѕРІР°
 			continue;
 		QWORD CommonGrammems = 0;
         m_pAgramtab->GetGrammems(FormInfos[i].GetCommonAncode().c_str(), CommonGrammems);
@@ -263,10 +263,10 @@ void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const string& WordSt
 		string Lemma = FormInfos[i].GetWordForm(0);
 		for (size_t j=0; j < Ancodes.size(); j+=2)
 		{
-			// игнорируем предлоги 
+			// РёРіРЅРѕСЂРёСЂСѓРµРј РїСЂРµРґР»РѕРіРё 
 			if (m_pAgramtab->GetPartOfSpeech(Ancodes.c_str()+j) == PREP)
 				continue;
-			// получаем тег по анкоду 
+			// РїРѕР»СѓС‡Р°РµРј С‚РµРі РїРѕ Р°РЅРєРѕРґСѓ 
 			const CTag& tag  = m_TagSet.GetTagFromAncode(m_pAgramtab, Ancodes.c_str()+j, CommonGrammems, Lemma);
             if (!tag.IsEmptyTag())
             {
@@ -332,7 +332,7 @@ bool CTrigramModel::tag_sentence(char* SentenceStr) const
 			set<string> Lemmas1 = GetLemmaSetByTagAndWordStr(words[i], m_RegisteredTags[tags[i].m_TagId1], false);
 			
 			if (		Lemmas1.find(lemmas[i]) == Lemmas1.end()
-					&&	!(Lemmas1.find("ТОТ")!= Lemmas1.end() && (lemmas[i] == "ТО"))
+					&&	!(Lemmas1.find("РўРћРў")!= Lemmas1.end() && (lemmas[i] == "РўРћ"))
 				)
 			{
 				
@@ -391,7 +391,7 @@ bool CheckWhetherUkranian(const vector<string>& tokens)
 {
 	for (size_t LineNo=1; LineNo < tokens.size(); LineNo++)
 	{
-		if ((tokens[LineNo] == "ї") || (tokens[LineNo] == "Ѕ"))
+		if ((tokens[LineNo] == "С—") || (tokens[LineNo] == "Р…"))
 			return true;
 	}
 	return false;

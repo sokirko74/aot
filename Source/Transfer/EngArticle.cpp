@@ -1,6 +1,6 @@
 /*
 
- реализация документа l:\documents\артикли.doc
+ СЂРµР°Р»РёР·Р°С†РёСЏ РґРѕРєСѓРјРµРЅС‚Р° l:\documents\Р°СЂС‚РёРєР»Рё.doc
 
 */
 #include "StdAfx.h"
@@ -131,7 +131,7 @@ bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, poses_mask_t  Poses) c
 		const CEngSemRelation &rel = m_Relations[rels[i]];
 		if  ( ( (1<<m_Nodes[rel.m_TargetNodeNo].GetPos()) & Poses ) > 0 )
 			return true;
-		// узел типа MUA считаем "прозрачным"		
+		// СѓР·РµР» С‚РёРїР° MUA СЃС‡РёС‚Р°РµРј "РїСЂРѕР·СЂР°С‡РЅС‹Рј"		
 		if (m_Nodes[rel.m_TargetNodeNo].m_NodeType == MNA)
 		{
 				vector<long> rels1;
@@ -154,13 +154,13 @@ void  CEngSemStructure::InitArticleField ()
 	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++)
 	{
 		if (m_Nodes[NodeNo].m_bProper) continue;
-		// 1. входящие отношения
+		// 1. РІС…РѕРґСЏС‰РёРµ РѕС‚РЅРѕС€РµРЅРёСЏ
 		vector<long> Rels;
 		GetIncomingInClauseRelations(NodeNo, Rels);
 		long InRelNo = -1;
 		if (Rels.size() == 1)
 		{
-			/*для фразы "он был учителем и садовником"*/
+			/*РґР»СЏ С„СЂР°Р·С‹ "РѕРЅ Р±С‹Р» СѓС‡РёС‚РµР»РµРј Рё СЃР°РґРѕРІРЅРёРєРѕРј"*/
 			if (m_Nodes[m_Relations[Rels[0]].m_SourceNodeNo].m_NodeType == MNA)
 			{
 				GetIncomingInClauseRelations(m_Relations[Rels[0]].m_SourceNodeNo, Rels);
@@ -172,13 +172,13 @@ void  CEngSemStructure::InitArticleField ()
 		if (InRelNo != -1)
 			update_article(m_Relations[InRelNo].m_Pattern, m_Nodes[NodeNo]);
 
-		// 2. выходящие реверсивные отношения
+		// 2. РІС‹С…РѕРґСЏС‰РёРµ СЂРµРІРµСЂСЃРёРІРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ
 		ReverseRelArticles[NodeNo] = m_Nodes[NodeNo].m_ArticleStr == "";
 
-		/*ReverseRelArticle - истина, если  какая-нибудь реверсиная связь требует
-		 своего артикля. Это очень сильный критерий. Можеь быть даже сильный...
-		 Например, с помощью реверсивных связей описывается, что если
-		 есть прит. мест, тогда нужен пустой артикль.
+		/*ReverseRelArticle - РёСЃС‚РёРЅР°, РµСЃР»Рё  РєР°РєР°СЏ-РЅРёР±СѓРґСЊ СЂРµРІРµСЂСЃРёРЅР°СЏ СЃРІСЏР·СЊ С‚СЂРµР±СѓРµС‚
+		 СЃРІРѕРµРіРѕ Р°СЂС‚РёРєР»СЏ. Р­С‚Рѕ РѕС‡РµРЅСЊ СЃРёР»СЊРЅС‹Р№ РєСЂРёС‚РµСЂРёР№. РњРѕР¶РµСЊ Р±С‹С‚СЊ РґР°Р¶Рµ СЃРёР»СЊРЅС‹Р№...
+		 РќР°РїСЂРёРјРµСЂ, СЃ РїРѕРјРѕС‰СЊСЋ СЂРµРІРµСЂСЃРёРІРЅС‹С… СЃРІСЏР·РµР№ РѕРїРёСЃС‹РІР°РµС‚СЃСЏ, С‡С‚Рѕ РµСЃР»Рё
+		 РµСЃС‚СЊ РїСЂРёС‚. РјРµСЃС‚, С‚РѕРіРґР° РЅСѓР¶РµРЅ РїСѓСЃС‚РѕР№ Р°СЂС‚РёРєР»СЊ.
 		*/
 
 		GetOutcomingInClauseRelations(NodeNo, Rels);
@@ -189,7 +189,7 @@ void  CEngSemStructure::InitArticleField ()
 		 };
 		ReverseRelArticles[NodeNo] = m_Nodes[NodeNo].m_ArticleStr != "";
 		 
-		// значение поля DETERM из добавочных статей
+		// Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ DETERM РёР· РґРѕР±Р°РІРѕС‡РЅС‹С… СЃС‚Р°С‚РµР№
 
 		vector<long> Articles;
 		FindAbstractAdditionArticle (Aoss, m_Nodes[NodeNo], Articles, false, -1);
@@ -205,7 +205,7 @@ void  CEngSemStructure::InitArticleField ()
 		
 
 
-		// 3. собственные значения поля DETERM		
+		// 3. СЃРѕР±СЃС‚РІРµРЅРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ DETERM		
 		if (m_Nodes[NodeNo].GetUnitNo() !=  ErrUnitNo)
 		{
 			CSemPattern P;
@@ -214,15 +214,15 @@ void  CEngSemStructure::InitArticleField ()
 			update_article(P, m_Nodes[NodeNo]);
 		};
 
-		// 4. выходящие реверсивные отношения (местоимения)
+		// 4. РІС‹С…РѕРґСЏС‰РёРµ СЂРµРІРµСЂСЃРёРІРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ (РјРµСЃС‚РѕРёРјРµРЅРёСЏ)
 		for (int j =0; j < Rels.size();j++)
 		 if (m_Relations[Rels[j]].m_bReverseRel)
 			 if (m_Nodes[m_Relations[Rels[j]].m_TargetNodeNo].HasPOS(ePN_ADJ) )
 				update_article(m_Relations[Rels[j]].m_Pattern, m_Nodes[NodeNo]);
 	}
 
-	// елси артикль быk записан на прилагательном, тогда его нужно перевесить на 
-	// существительное, от которого это прилагательное зависит
+	// РµР»СЃРё Р°СЂС‚РёРєР»СЊ Р±С‹k Р·Р°РїРёСЃР°РЅ РЅР° РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРј, С‚РѕРіРґР° РµРіРѕ РЅСѓР¶РЅРѕ РїРµСЂРµРІРµСЃРёС‚СЊ РЅР° 
+	// СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ, РѕС‚ РєРѕС‚РѕСЂРѕРіРѕ СЌС‚Рѕ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ Р·Р°РІРёСЃРёС‚
 	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++)
 		if (   m_Nodes[NodeNo].HasPOS(ePN_ADJ) 
 			|| m_Nodes[NodeNo].HasPOS(eADJ) 		
@@ -256,7 +256,7 @@ void  CEngSemStructure::InitArticleField ()
 		//=================== zero article =================
         if (m_Nodes[NodeNo].m_ArticleStr == "-") continue;
 
-		// IDENT, NAME или одно слово в кавычках
+		// IDENT, NAME РёР»Рё РѕРґРЅРѕ СЃР»РѕРІРѕ РІ РєР°РІС‹С‡РєР°С…
 		if (		HasOutRelationByName(NodeNo, "IDENT")|| HasOutRelationByName(NodeNo, "NAME")			
 				|| (    m_Nodes[NodeNo].m_bQuoteMarks
 					&&	(		(NodeNo+1 == m_Nodes.size())
@@ -284,7 +284,7 @@ void  CEngSemStructure::InitArticleField ()
 				continue;
 			};
 
-		// prop или geo 
+		// prop РёР»Рё geo 
 		if  (		m_Nodes[NodeNo].HasGrammemRich(eGeographics) 
 				||	m_Nodes[NodeNo].HasGrammemRich(eProper) 
 			)
@@ -294,7 +294,7 @@ void  CEngSemStructure::InitArticleField ()
 				continue;
 			};
 
-		// prop или geo 
+		// prop РёР»Рё geo 
 		if  (m_Nodes[NodeNo].m_bProper)
 			{
 				m_Nodes[NodeNo].m_ArticleStr = "-";
@@ -316,19 +316,19 @@ void  CEngSemStructure::InitArticleField ()
 		//=================== "the" article =================
 		if (m_Nodes[NodeNo].m_ArticleStr == "the") continue;
 		/*
-		 будем считать, что тайм-группам не надо 
-		 приписывать артикль, хотя  в документации этого нет 
-		 а то, например, в группе "аt first" востанвливается the
-		 из-за порядкового
+		 Р±СѓРґРµРј СЃС‡РёС‚Р°С‚СЊ, С‡С‚Рѕ С‚Р°Р№Рј-РіСЂСѓРїРїР°Рј РЅРµ РЅР°РґРѕ 
+		 РїСЂРёРїРёСЃС‹РІР°С‚СЊ Р°СЂС‚РёРєР»СЊ, С…РѕС‚СЏ  РІ РґРѕРєСѓРјРµРЅС‚Р°С†РёРё СЌС‚РѕРіРѕ РЅРµС‚ 
+		 Р° С‚Рѕ, РЅР°РїСЂРёРјРµСЂ, РІ РіСЂСѓРїРїРµ "Р°t first" РІРѕСЃС‚Р°РЅРІР»РёРІР°РµС‚СЃСЏ the
+		 РёР·-Р·Р° РїРѕСЂСЏРґРєРѕРІРѕРіРѕ
 		*/
 		if (m_Nodes[NodeNo].IsMainTimeRossNode()) continue;
 
 		/*
-		 не будем ставить артикль, если существительное стоит в 
-		 притяжательном падеже. Вообще говоря, это неверно, 
-         например, "a dog's life" или "the king's daughter",
-		 но лучше, по-моему, не ставить
-		 Сокирко
+		 РЅРµ Р±СѓРґРµРј СЃС‚Р°РІРёС‚СЊ Р°СЂС‚РёРєР»СЊ, РµСЃР»Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ СЃС‚РѕРёС‚ РІ 
+		 РїСЂРёС‚СЏР¶Р°С‚РµР»СЊРЅРѕРј РїР°РґРµР¶Рµ. Р’РѕРѕР±С‰Рµ РіРѕРІРѕСЂСЏ, СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ, 
+         РЅР°РїСЂРёРјРµСЂ, "a dog's life" РёР»Рё "the king's daughter",
+		 РЅРѕ Р»СѓС‡С€Рµ, РїРѕ-РјРѕРµРјСѓ, РЅРµ СЃС‚Р°РІРёС‚СЊ
+		 РЎРѕРєРёСЂРєРѕ
 		*/
 		if (m_Nodes[NodeNo].HasGrammemRich(ePossessive)) continue;
 
@@ -348,12 +348,12 @@ void  CEngSemStructure::InitArticleField ()
 		};
 
 		/*
-			если не было указаний на артикль с реверсивных связей, 
-			например, с прит. местоимений
+			РµСЃР»Рё РЅРµ Р±С‹Р»Рѕ СѓРєР°Р·Р°РЅРёР№ РЅР° Р°СЂС‚РёРєР»СЊ СЃ СЂРµРІРµСЂСЃРёРІРЅС‹С… СЃРІСЏР·РµР№, 
+			РЅР°РїСЂРёРјРµСЂ, СЃ РїСЂРёС‚. РјРµСЃС‚РѕРёРјРµРЅРёР№
 		*/
 		if (!ReverseRelArticles[NodeNo])
 		{
-			// тема - рема
+			// С‚РµРјР° - СЂРµРјР°
 			vector<long> Roots;
 			GetClauseRoots(m_Nodes[NodeNo].m_ClauseNo, Roots);
 
@@ -363,8 +363,8 @@ void  CEngSemStructure::InitArticleField ()
 				&& (m_Nodes[NodeNo].GetMinWordNo() < m_Nodes[Roots[0]].GetMinWordNo())
 				&& (m_Nodes[NodeNo].GetPos() == eNOUN)
 				&& (m_Nodes[NodeNo].GetType()  != TimeRoss)
-				 // последняя проверка введена, чтобы не ставлися артикль перед тайм-группой
-				 // "в 2000 году зарплата возрастет"
+				 // РїРѕСЃР»РµРґРЅСЏСЏ РїСЂРѕРІРµСЂРєР° РІРІРµРґРµРЅР°, С‡С‚РѕР±С‹ РЅРµ СЃС‚Р°РІР»РёСЃСЏ Р°СЂС‚РёРєР»СЊ РїРµСЂРµРґ С‚Р°Р№Рј-РіСЂСѓРїРїРѕР№
+				 // "РІ 2000 РіРѕРґСѓ Р·Р°СЂРїР»Р°С‚Р° РІРѕР·СЂР°СЃС‚РµС‚"
 			   )
 			  {
 				  m_Nodes[NodeNo].m_ArticleStr = "the";
@@ -381,7 +381,7 @@ void  CEngSemStructure::InitArticleField ()
 			 };
 		
 
-// TRG-PNT или SRC-PNT		 
+// TRG-PNT РёР»Рё SRC-PNT		 
 			if (InRelNo != -1)
 			if (		(m_Relations[InRelNo].m_Valency.m_RelationStr == "TRG-PNT")
 					||	(m_Relations[InRelNo].m_Valency.m_RelationStr == "SRC-PNT")			   
@@ -393,13 +393,13 @@ void  CEngSemStructure::InitArticleField ()
 			};
 
          /*
-		  этого правила пока нет в описании 
-	      хочу, чтобы любая локативная группа, которая состоит только из одного слова,
-		  переводилась с определнным артиклем
-          например "в лесу", "в доме"
-          конечно, тогда фразы "в опасности" "в тревоге" 
-		  будут переводиться как "in the trouble", "in the fear",
-		поэтому нужно брать только LABL.OBJ.		  */
+		  СЌС‚РѕРіРѕ РїСЂР°РІРёР»Р° РїРѕРєР° РЅРµС‚ РІ РѕРїРёСЃР°РЅРёРё 
+	      С…РѕС‡Сѓ, С‡С‚РѕР±С‹ Р»СЋР±Р°СЏ Р»РѕРєР°С‚РёРІРЅР°СЏ РіСЂСѓРїРїР°, РєРѕС‚РѕСЂР°СЏ СЃРѕСЃС‚РѕРёС‚ С‚РѕР»СЊРєРѕ РёР· РѕРґРЅРѕРіРѕ СЃР»РѕРІР°,
+		  РїРµСЂРµРІРѕРґРёР»Р°СЃСЊ СЃ РѕРїСЂРµРґРµР»РЅРЅС‹Рј Р°СЂС‚РёРєР»РµРј
+          РЅР°РїСЂРёРјРµСЂ "РІ Р»РµСЃСѓ", "РІ РґРѕРјРµ"
+          РєРѕРЅРµС‡РЅРѕ, С‚РѕРіРґР° С„СЂР°Р·С‹ "РІ РѕРїР°СЃРЅРѕСЃС‚Рё" "РІ С‚СЂРµРІРѕРіРµ" 
+		  Р±СѓРґСѓС‚ РїРµСЂРµРІРѕРґРёС‚СЊСЃСЏ РєР°Рє "in the trouble", "in the fear",
+		РїРѕСЌС‚РѕРјСѓ РЅСѓР¶РЅРѕ Р±СЂР°С‚СЊ С‚РѕР»СЊРєРѕ LABL.OBJ.		  */
 		 if (InRelNo != -1)
 			if (		(m_Relations[InRelNo].m_Valency.m_RelationStr == "LOK")
 					&&	CheckAllOutcomingRelationsIfAnyExists(NodeNo, "SPECIF")
@@ -414,9 +414,9 @@ void  CEngSemStructure::InitArticleField ()
 
 		};
 
-		 // ЭЛЕКТ_ИГ
+		 // Р­Р›Р•РљРў_РР“
 		for (j =0; j < OutRels.size();j++)
-		  if ( m_Relations[OutRels[j]].m_SyntacticRelation == "ЭЛЕКТ_ИГ" )
+		  if ( m_Relations[OutRels[j]].m_SyntacticRelation == "Р­Р›Р•РљРў_РР“" )
 		  {
 			  m_Nodes[NodeNo].m_ArticleStr = "the";
 			  m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleBecauseOfNominalSupplement );
@@ -427,7 +427,7 @@ void  CEngSemStructure::InitArticleField ()
 
 	
 		
-		// NP с предлогом of
+		// NP СЃ РїСЂРµРґР»РѕРіРѕРј of
 		PrintNodes();
 		WORD UnitNo = GetRoss(EngObor)->LocateUnit("of",1);
 		vector<long> OutAllRels;
@@ -448,8 +448,8 @@ void  CEngSemStructure::InitArticleField ()
 
 		//=================== "a" article =================
 		/* 
-		   даже если по статьям выходит артикль "a", a  граммемы припuсана uncount, 
-		   mass или pl, нужно ставить нулевой артикль
+		   РґР°Р¶Рµ РµСЃР»Рё РїРѕ СЃС‚Р°С‚СЊСЏРј РІС‹С…РѕРґРёС‚ Р°СЂС‚РёРєР»СЊ "a", a  РіСЂР°РјРјРµРјС‹ РїСЂРёРїuСЃР°РЅР° uncount, 
+		   mass РёР»Рё pl, РЅСѓР¶РЅРѕ СЃС‚Р°РІРёС‚СЊ РЅСѓР»РµРІРѕР№ Р°СЂС‚РёРєР»СЊ
 		*/
 		if (m_Nodes[NodeNo].GetGrammemsRich() & 
 			   (  _QM(eMass)| _QM(eUncountable) | _QM(ePlural) ) ) 
@@ -462,7 +462,7 @@ void  CEngSemStructure::InitArticleField ()
 		if (m_Nodes[NodeNo].m_ArticleStr == "a") continue;
 
 		long i = InRelNo;
-		// ставим только существительному
+		// СЃС‚Р°РІРёРј С‚РѕР»СЊРєРѕ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРјСѓ
 		
 		if (m_Nodes[NodeNo].GetPos() == eNOUN)
 		while (i != -1)
@@ -482,7 +482,7 @@ void  CEngSemStructure::InitArticleField ()
 			}
 
 	 /*
-	  После as надо ставить неопределенный артикль
+	  РџРѕСЃР»Рµ as РЅР°РґРѕ СЃС‚Р°РІРёС‚СЊ РЅРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ Р°СЂС‚РёРєР»СЊ
 	  Internet datagram as an independent entity
 	 */
 	 if (InRelNo != -1)
@@ -501,10 +501,10 @@ void  CEngSemStructure::InitArticleField ()
 
 	   if (i!= -1)
 			continue;
-		// последнее условие с клаузой "if" пока не запрограммировано
+		// РїРѕСЃР»РµРґРЅРµРµ СѓСЃР»РѕРІРёРµ СЃ РєР»Р°СѓР·РѕР№ "if" РїРѕРєР° РЅРµ Р·Р°РїСЂРѕРіСЂР°РјРјРёСЂРѕРІР°РЅРѕ
 
 
-	   /* Все  должности,у котрых не заполнены вылентности, будут иметь определенный артикль*/
+	   /* Р’СЃРµ  РґРѕР»Р¶РЅРѕСЃС‚Рё,Сѓ РєРѕС‚СЂС‹С… РЅРµ Р·Р°РїРѕР»РЅРµРЅС‹ РІС‹Р»РµРЅС‚РЅРѕСЃС‚Рё, Р±СѓРґСѓС‚ РёРјРµС‚СЊ РѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ Р°СЂС‚РёРєР»СЊ*/
 			if  (HasSemFetPro(m_Nodes[NodeNo].m_NodeSemFets, "PROF"))			
 			{
 				m_Nodes[NodeNo].m_ArticleStr = "the";
@@ -514,9 +514,9 @@ void  CEngSemStructure::InitArticleField ()
 
 			   
 		/*
-		   Хочу, чтобы перед NP, которое осложнено определительным 
-		   придаточным, ставился артикль the. Это правило с очень низким приоритетом, просто,
-		   чтобы хоть что-нибудь стояло.
+		   РҐРѕС‡Сѓ, С‡С‚РѕР±С‹ РїРµСЂРµРґ NP, РєРѕС‚РѕСЂРѕРµ РѕСЃР»РѕР¶РЅРµРЅРѕ РѕРїСЂРµРґРµР»РёС‚РµР»СЊРЅС‹Рј 
+		   РїСЂРёРґР°С‚РѕС‡РЅС‹Рј, СЃС‚Р°РІРёР»СЃСЏ Р°СЂС‚РёРєР»СЊ the. Р­С‚Рѕ РїСЂР°РІРёР»Рѕ СЃ РѕС‡РµРЅСЊ РЅРёР·РєРёРј РїСЂРёРѕСЂРёС‚РµС‚РѕРј, РїСЂРѕСЃС‚Рѕ,
+		   С‡С‚РѕР±С‹ С…РѕС‚СЊ С‡С‚Рѕ-РЅРёР±СѓРґСЊ СЃС‚РѕСЏР»Рѕ.
 	   */
 		GetIncomingRelations(NodeNo, InRels, false);
   		for (j =0; j < InRels.size();j++)

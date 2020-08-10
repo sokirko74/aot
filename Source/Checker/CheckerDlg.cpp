@@ -286,16 +286,16 @@ BOOL CCheckerDlg::InitCom()
 {
 	try 
 	{
-// инициализируем библиотеку COM
+// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Р±РёР±Р»РёРѕС‚РµРєСѓ COM
 	CoInitialize(NULL);
 	if (!m_bLoadCOM) return TRUE;
-// создаем семантический анализ (ISemStructurePtr)
+// СЃРѕР·РґР°РµРј СЃРµРјР°РЅС‚РёС‡РµСЃРєРёР№ Р°РЅР°Р»РёР· (ISemStructurePtr)
 	piSeman.CreateInstance( __uuidof(SEMANLib::SemStructure));
 	clock_t     start = clock();
 
-// инициализация досемантических словарей
+// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РґРѕСЃРµРјР°РЅС‚РёС‡РµСЃРєРёС… СЃР»РѕРІР°СЂРµР№
 	piSeman->InitPresemanDicts();
-// инициализация семантических словарей
+// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃРµРјР°РЅС‚РёС‡РµСЃРєРёС… СЃР»РѕРІР°СЂРµР№
 	piSeman->InitSemanDicts();
 	piSeman->InitializeIndices();
     piSeman->ShouldBuildTclGraph = FALSE;
@@ -725,7 +725,7 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 
 						Groups.insert(S);
 					};
-					// распечатываем клаузу
+					// СЂР°СЃРїРµС‡Р°С‚С‹РІР°РµРј РєР»Р°СѓР·Сѓ
 
 					string S = GetClauseTypeDescr(Language, piClause, V->ClauseRootNo);
 					S += "\t=\t";
@@ -740,7 +740,7 @@ string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr Gr
 					};
 					Groups.insert(S);
 
-					// распечатываем все группы 
+					// СЂР°СЃРїРµС‡Р°С‚С‹РІР°РµРј РІСЃРµ РіСЂСѓРїРїС‹ 
 					
 
 					for (int GroupNo = 0; GroupNo < V->GroupsCount; GroupNo++)
@@ -959,7 +959,7 @@ static UINT MakeProc(LPVOID pArg)
 						}
 			case TranslatorCheck:
 						{
-							string SemGraph = (const char*)pDlg->piSeman->FindSituations(pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),0,"общ",20000,-1,"");
+							string SemGraph = (const char*)pDlg->piSeman->FindSituations(pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),0,"РѕР±С‰",20000,-1,"");
 							string SynGraph = (const char*)pDlg->piSeman->TranslateToEnglish();
 							Result  = (const char*)pDlg->piSeman->BuildSentence();
 							break;
@@ -988,12 +988,12 @@ static UINT MakeProc(LPVOID pArg)
 							}
 
 							
-							Result = (const char*)pDlg->piSeman->FindSituations(SourceText.c_str(),0,"общ",20000,-1,"");
+							Result = (const char*)pDlg->piSeman->FindSituations(SourceText.c_str(),0,"РѕР±С‰",20000,-1,"");
 							pDlg->piSeman->SetLemmasToReplace(LemmasToReplace.c_str());
 							if (!Question.empty())
 							{
 								pDlg->piSeman->SaveThisSentence();
-								pDlg->piSeman->FindSituations(Question.c_str(),0,"общ",20000,-1,"");
+								pDlg->piSeman->FindSituations(Question.c_str(),0,"РѕР±С‰",20000,-1,"");
 								Result  = pDlg->piSeman->Answer();
 							}
 							else

@@ -9,7 +9,7 @@ long CRusSemStructure::GetAnaphoricRelationsCount(long Tag)
   for (size_t i = 0;  i < m_DopRelations.size(); i++)
    if (HasTag(m_DopRelations[i].m_SourceNodeNo, Tag))
     if (m_DopRelations[i].m_bRelUse)
- 	 if (m_DopRelations[i].m_SyntacticRelation == "анафора")
+ 	 if (m_DopRelations[i].m_SyntacticRelation == "Р°РЅР°С„РѕСЂР°")
 	 		Result++;
 
   return Result; 
@@ -33,8 +33,8 @@ void CRusSemStructure::InitLexVariant(size_t ClauseNo)
 
 };
 
-// процедура, которая выбирает все варианты, причем если где-это был выбран вариант Х,  
-// то во всех последующих вариантах выбирается этот же Х, если это возможно
+// РїСЂРѕС†РµРґСѓСЂР°, РєРѕС‚РѕСЂР°СЏ РІС‹Р±РёСЂР°РµС‚ РІСЃРµ РІР°СЂРёР°РЅС‚С‹, РїСЂРёС‡РµРј РµСЃР»Рё РіРґРµ-СЌС‚Рѕ Р±С‹Р» РІС‹Р±СЂР°РЅ РІР°СЂРёР°РЅС‚ РҐ,  
+// С‚Рѕ РІРѕ РІСЃРµС… РїРѕСЃР»РµРґСѓСЋС‰РёС… РІР°СЂРёР°РЅС‚Р°С… РІС‹Р±РёСЂР°РµС‚СЃСЏ СЌС‚РѕС‚ Р¶Рµ РҐ, РµСЃР»Рё СЌС‚Рѕ РІРѕР·РјРѕР¶РЅРѕ
 static void GetLexVariants(  const vector<CDictUnitInterpVector>&  Parents, 
 						   CDictUnitInterpVector&   V,
 						   vector<CDictUnitInterpVector>&  Variants, 
@@ -83,7 +83,7 @@ StartPoint :
 
 
 
-	// строим текущее множество  словосочетаний
+	// СЃС‚СЂРѕРёРј С‚РµРєСѓС‰РµРµ РјРЅРѕР¶РµСЃС‚РІРѕ  СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№
 	BuildBlackBoxCollocs(ClauseNo, CurrSetCollocHypNo);
 
 	vector<CDictUnitInterpVector> Parents;
@@ -100,14 +100,14 @@ StartPoint :
 
 			}
 
-	// получаем множество всех вариантов интерпретации
-	CDictUnitInterpVector V_curr; // текущий вариант 
+	// РїРѕР»СѓС‡Р°РµРј РјРЅРѕР¶РµСЃС‚РІРѕ РІСЃРµС… РІР°СЂРёР°РЅС‚РѕРІ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё
+	CDictUnitInterpVector V_curr; // С‚РµРєСѓС‰РёР№ РІР°СЂРёР°РЅС‚ 
 	V_curr.resize(Parents.size());
-	vector<CDictUnitInterpVector> Variants; // все возможные варианты
+	vector<CDictUnitInterpVector> Variants; // РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹
 	GetLexVariants(Parents, V_curr, Variants, 0);
 
-	// если текущий вариант последний для текущего C.m_SetCollocHyps[m_CurrSetCollocHypNo],
-	// перейти к следующему множеству словосочетаний
+	// РµСЃР»Рё С‚РµРєСѓС‰РёР№ РІР°СЂРёР°РЅС‚ РїРѕСЃР»РµРґРЅРёР№ РґР»СЏ С‚РµРєСѓС‰РµРіРѕ C.m_SetCollocHyps[m_CurrSetCollocHypNo],
+	// РїРµСЂРµР№С‚Рё Рє СЃР»РµРґСѓСЋС‰РµРјСѓ РјРЅРѕР¶РµСЃС‚РІСѓ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№
 	if (LexVariantInCurrSetCollocNo >= Variants.size()) 
 		if (CurrSetCollocHypNo+1 == m_ClauseSetCollocHyps[ClauseNo].size())
 		{
@@ -127,7 +127,7 @@ StartPoint :
 	PopClausesNodeReferences();
 
 
-	// приписывание текущей словарной интерпретации
+	// РїСЂРёРїРёСЃС‹РІР°РЅРёРµ С‚РµРєСѓС‰РµР№ СЃР»РѕРІР°СЂРЅРѕР№ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё
 	size_t k = 0;
 	CDictUnitInterpVector& V = Variants[LexVariantInCurrSetCollocNo];
 
@@ -149,7 +149,7 @@ void CRusSemStructure::DeleteSAMNode(long ClauseNo, CRusSemNode& SamNode)
 	for (long i=0; i < m_Nodes.size(); i++)
 		if ( IsInClause(i, ClauseNo) )
 			if (m_Nodes[i].IsPrimitive() && CanBeDeleted(i))
-				if  (    HasGramFetAfterColon (i, "нар") 
+				if  (    HasGramFetAfterColon (i, "РЅР°СЂ") 
 					&& HasRichPOS (i, PRONOUN_P)
 					)
 
@@ -162,12 +162,12 @@ void CRusSemStructure::DeleteSAMNode(long ClauseNo, CRusSemNode& SamNode)
 };
 
 /*
-  Эта функция проверяет, что  для слов "сам" и "один" выбрана правильная интерпретация.
-  Если  интерпретация равна GF = *:нар, тогда она должна  применяться только для случая 
-  "Он сделал это сам.", когда "сам" не подчинено именной группе.
-  Если интерпретация содеджит GF = *:c_опр, тогда она может быть использована только 
-  для случая "Сам директор сказал это".  Если  интерпретация для "сам" и "один" не соответствуется  
-  входному син. представлению, тогда данному лексическому варианту приписывается штраф.
+  Р­С‚Р° С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ  РґР»СЏ СЃР»РѕРІ "СЃР°Рј" Рё "РѕРґРёРЅ" РІС‹Р±СЂР°РЅР° РїСЂР°РІРёР»СЊРЅР°СЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ.
+  Р•СЃР»Рё  РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ СЂР°РІРЅР° GF = *:РЅР°СЂ, С‚РѕРіРґР° РѕРЅР° РґРѕР»Р¶РЅР°  РїСЂРёРјРµРЅСЏС‚СЊСЃСЏ С‚РѕР»СЊРєРѕ РґР»СЏ СЃР»СѓС‡Р°СЏ 
+  "РћРЅ СЃРґРµР»Р°Р» СЌС‚Рѕ СЃР°Рј.", РєРѕРіРґР° "СЃР°Рј" РЅРµ РїРѕРґС‡РёРЅРµРЅРѕ РёРјРµРЅРЅРѕР№ РіСЂСѓРїРїРµ.
+  Р•СЃР»Рё РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ СЃРѕРґРµРґР¶РёС‚ GF = *:c_РѕРїСЂ, С‚РѕРіРґР° РѕРЅР° РјРѕР¶РµС‚ Р±С‹С‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅР° С‚РѕР»СЊРєРѕ 
+  РґР»СЏ СЃР»СѓС‡Р°СЏ "РЎР°Рј РґРёСЂРµРєС‚РѕСЂ СЃРєР°Р·Р°Р» СЌС‚Рѕ".  Р•СЃР»Рё  РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ РґР»СЏ "СЃР°Рј" Рё "РѕРґРёРЅ" РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚СЃСЏ  
+  РІС…РѕРґРЅРѕРјСѓ СЃРёРЅ. РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЋ, С‚РѕРіРґР° РґР°РЅРЅРѕРјСѓ Р»РµРєСЃРёС‡РµСЃРєРѕРјСѓ РІР°СЂРёР°РЅС‚Сѓ РїСЂРёРїРёСЃС‹РІР°РµС‚СЃСЏ С€С‚СЂР°С„.
 */
 bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 {
@@ -175,17 +175,17 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 		if ( IsInClause(i, ClauseNo) )
 			if (m_Nodes[i].IsPrimitive())
 			{
-				if  (    HasGramFetAfterColon (i, "нар") 
+				if  (    HasGramFetAfterColon (i, "РЅР°СЂ") 
 					&& HasRichPOS (i, PRONOUN_P)
 					)
 				{
 					if ( HasIncomingNotWeakSynRelation (i) )  return false;
 				};
 
-				if  ( HasGramFetAfterColon (i, "с_опр") )
+				if  ( HasGramFetAfterColon (i, "СЃ_РѕРїСЂ") )
 					if  ( m_Nodes[i].IsPrimitive() )
-						if (    m_Nodes[i].IsLemma("ОДИН")
-							||  m_Nodes[i].IsLemma("САМ")
+						if (    m_Nodes[i].IsLemma("РћР”РРќ")
+							||  m_Nodes[i].IsLemma("РЎРђРњ")
 							)  
 							if ( !HasIncomingNotWeakSynRelation (i) )
 								return false;
@@ -196,14 +196,14 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 
 
 /*
-Функция вставляет узел "сам" или "один" и проводит отношения ASPECT к нему для всех потециальных подлежащих. Если ни одного отношения не удалось провести, 
- тогда возвращаем ложь.
- Между подлежащим и узлом сам проверяется согласование.
+Р¤СѓРЅРєС†РёСЏ РІСЃС‚Р°РІР»СЏРµС‚ СѓР·РµР» "СЃР°Рј" РёР»Рё "РѕРґРёРЅ" Рё РїСЂРѕРІРѕРґРёС‚ РѕС‚РЅРѕС€РµРЅРёСЏ ASPECT Рє РЅРµРјСѓ РґР»СЏ РІСЃРµС… РїРѕС‚РµС†РёР°Р»СЊРЅС‹С… РїРѕРґР»РµР¶Р°С‰РёС…. Р•СЃР»Рё РЅРё РѕРґРЅРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ РЅРµ СѓРґР°Р»РѕСЃСЊ РїСЂРѕРІРµСЃС‚Рё, 
+ С‚РѕРіРґР° РІРѕР·РІСЂР°С‰Р°РµРј Р»РѕР¶СЊ.
+ РњРµР¶РґСѓ РїРѕРґР»РµР¶Р°С‰РёРј Рё СѓР·Р»РѕРј СЃР°Рј РїСЂРѕРІРµСЂСЏРµС‚СЃСЏ СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ.
 */
 bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
 {
   /*
-    если ничего вставлять не надо, выйдем с истиной 
+    РµСЃР»Рё РЅРёС‡РµРіРѕ РІСЃС‚Р°РІР»СЏС‚СЊ РЅРµ РЅР°РґРѕ, РІС‹Р№РґРµРј СЃ РёСЃС‚РёРЅРѕР№ 
   */
   if (SamNode.m_Words.size() == 0) return true;
 
@@ -215,8 +215,8 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
    {
 	   CRelSet R = GetIncomingRelations(i, false);
 	   for (long l=0; l < R.m_RelsCount; l++)
-		if ( m_Relations[R.m_Rels[l]].m_SyntacticRelation == "подл" )
-			// проверяем согласование по числу/роду
+		if ( m_Relations[R.m_Rels[l]].m_SyntacticRelation == "РїРѕРґР»" )
+			// РїСЂРѕРІРµСЂСЏРµРј СЃРѕРіР»Р°СЃРѕРІР°РЅРёРµ РїРѕ С‡РёСЃР»Сѓ/СЂРѕРґСѓ
 		  if (    (   (   (_QM(rPlural) | _QM(rSingular))
 			            & SamNode.GetGrammems()
 			            & m_Nodes[m_Relations[R.m_Rels[l]].m_SourceNodeNo].GetGrammems()
@@ -234,17 +234,17 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
 			 )
 		  {	
 			AddRelation(CRusSemRelation(CValency("ASPECT", A_C), m_Relations[R.m_Rels[l]].m_SourceNodeNo,    SamNodeNo,   ""));			
-			// оно должно быть реверсивным, чтобы не отличаться от простых 
-			// наречий, чтобы занять правильное место в англ. предложении.
+			// РѕРЅРѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЂРµРІРµСЂСЃРёРІРЅС‹Рј, С‡С‚РѕР±С‹ РЅРµ РѕС‚Р»РёС‡Р°С‚СЊСЃСЏ РѕС‚ РїСЂРѕСЃС‚С‹С… 
+			// РЅР°СЂРµС‡РёР№, С‡С‚РѕР±С‹ Р·Р°РЅСЏС‚СЊ РїСЂР°РІРёР»СЊРЅРѕРµ РјРµСЃС‚Рѕ РІ Р°РЅРіР». РїСЂРµРґР»РѕР¶РµРЅРёРё.
 			m_Relations[m_Relations.size()-1].m_bReverseRel = true;
-			m_DopRelations.push_back(CRusSemRelation(CValency("THESAME", A_C),  SamNodeNo,  m_Relations[R.m_Rels[l]].m_TargetNodeNo,  "анафора"));			
+			m_DopRelations.push_back(CRusSemRelation(CValency("THESAME", A_C),  SamNodeNo,  m_Relations[R.m_Rels[l]].m_TargetNodeNo,  "Р°РЅР°С„РѕСЂР°"));			
 			bResult = true;
 		  }
          else    
 		  {
-			 // удаляем субъектную стрелку, которая не  согласовалась со словом "САМ"
+			 // СѓРґР°Р»СЏРµРј СЃСѓР±СЉРµРєС‚РЅСѓСЋ СЃС‚СЂРµР»РєСѓ, РєРѕС‚РѕСЂР°СЏ РЅРµ  СЃРѕРіР»Р°СЃРѕРІР°Р»Р°СЃСЊ СЃРѕ СЃР»РѕРІРѕРј "РЎРђРњ"
 			 EraseRelation(R.m_Rels[l]); 
-			 // получаем новый набор выходящих отношений
+			 // РїРѕР»СѓС‡Р°РµРј РЅРѕРІС‹Р№ РЅР°Р±РѕСЂ РІС‹С…РѕРґСЏС‰РёС… РѕС‚РЅРѕС€РµРЅРёР№
 			 R = GetIncomingRelations(i, false);
 			 l=-1;
 		  };
@@ -277,19 +277,19 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 		long CurrLexVariant = m_Clauses[ClauseNo].m_CurrLexVariantNo;
 		CLexVariant& W = I.m_BestLexVariants[CurrLexVariant];
 
-		// копируем узлы
+		// РєРѕРїРёСЂСѓРµРј СѓР·Р»С‹
 		/*
-		вообще говоря, в функции построения лексического варианта
-		сейчас не строятся неабстрактные узлы (только Copul).
-		На это мы опираемся. Если бы они строились, тогда мы имели проблему, что
-		два узла имеют один WordNo, потому что сейчас мы просто
-		копируем узлы, а если в копируемые узлы был бы вставлен  новый узел,
-		тогда в последующей клаузе точно нашелся бы один узел, у которого
-		WordNo совпадает с WordNo какого-то узла текущей клаузы.
+		РІРѕРѕР±С‰Рµ РіРѕРІРѕСЂСЏ, РІ С„СѓРЅРєС†РёРё РїРѕСЃС‚СЂРѕРµРЅРёСЏ Р»РµРєСЃРёС‡РµСЃРєРѕРіРѕ РІР°СЂРёР°РЅС‚Р°
+		СЃРµР№С‡Р°СЃ РЅРµ СЃС‚СЂРѕСЏС‚СЃСЏ РЅРµР°Р±СЃС‚СЂР°РєС‚РЅС‹Рµ СѓР·Р»С‹ (С‚РѕР»СЊРєРѕ Copul).
+		РќР° СЌС‚Рѕ РјС‹ РѕРїРёСЂР°РµРјСЃСЏ. Р•СЃР»Рё Р±С‹ РѕРЅРё СЃС‚СЂРѕРёР»РёСЃСЊ, С‚РѕРіРґР° РјС‹ РёРјРµР»Рё РїСЂРѕР±Р»РµРјСѓ, С‡С‚Рѕ
+		РґРІР° СѓР·Р»Р° РёРјРµСЋС‚ РѕРґРёРЅ WordNo, РїРѕС‚РѕРјСѓ С‡С‚Рѕ СЃРµР№С‡Р°СЃ РјС‹ РїСЂРѕСЃС‚Рѕ
+		РєРѕРїРёСЂСѓРµРј СѓР·Р»С‹, Р° РµСЃР»Рё РІ РєРѕРїРёСЂСѓРµРјС‹Рµ СѓР·Р»С‹ Р±С‹Р» Р±С‹ РІСЃС‚Р°РІР»РµРЅ  РЅРѕРІС‹Р№ СѓР·РµР»,
+		С‚РѕРіРґР° РІ РїРѕСЃР»РµРґСѓСЋС‰РµР№ РєР»Р°СѓР·Рµ С‚РѕС‡РЅРѕ РЅР°С€РµР»СЃСЏ Р±С‹ РѕРґРёРЅ СѓР·РµР», Сѓ РєРѕС‚РѕСЂРѕРіРѕ
+		WordNo СЃРѕРІРїР°РґР°РµС‚ СЃ WordNo РєР°РєРѕРіРѕ-С‚Рѕ СѓР·Р»Р° С‚РµРєСѓС‰РµР№ РєР»Р°СѓР·С‹.
 		*/
 		/*
-		ClauseNo может отличаться от I.m_BuiltClauseNo, поскольку сохраненная 
-		клаузы могла быть построена в варианте, где произошло объединение клауз
+		ClauseNo РјРѕР¶РµС‚ РѕС‚Р»РёС‡Р°С‚СЊСЃСЏ РѕС‚ I.m_BuiltClauseNo, РїРѕСЃРєРѕР»СЊРєСѓ СЃРѕС…СЂР°РЅРµРЅРЅР°СЏ 
+		РєР»Р°СѓР·С‹ РјРѕРіР»Р° Р±С‹С‚СЊ РїРѕСЃС‚СЂРѕРµРЅР° РІ РІР°СЂРёР°РЅС‚Рµ, РіРґРµ РїСЂРѕРёР·РѕС€Р»Рѕ РѕР±СЉРµРґРёРЅРµРЅРёРµ РєР»Р°СѓР·
 		*/
 		long SaveClauseNo = I.m_BuiltClauseNo;
 		m_Nodes.erase(m_Nodes.begin() +m_Clauses[ClauseNo].m_BeginNodeNo, m_Nodes.begin() +m_Clauses[ClauseNo].m_EndNodeNo);
@@ -299,7 +299,7 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 			W.m_Nodes.begin() + W.m_Clauses[SaveClauseNo].m_EndNodeNo);
 
 
-		// копируем отношения
+		// РєРѕРїРёСЂСѓРµРј РѕС‚РЅРѕС€РµРЅРёСЏ
 		long SaveStartNode = W.m_Clauses[SaveClauseNo].m_BeginNodeNo;
 		long SaveLength =  W.m_Clauses[SaveClauseNo].GetNodesCount();
 		long StartNode = m_Clauses[ClauseNo].m_BeginNodeNo;
@@ -308,10 +308,10 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 		//W.IncrementNodeRef(W.m_Clauses[SaveClauseNo].m_BeginNodeNo, Delta);
 		/*
-		добавим Delta ко всем узлам (не только к узлам клаузы и узлам идущим после них)
-		Если мы изменим индексы отношений только для этйо клаузы,
-		тогжа появится отношения, которое не принадлежит данной клаузы, но его
-		могут указыать на узлы данной клаузы 
+		РґРѕР±Р°РІРёРј Delta РєРѕ РІСЃРµРј СѓР·Р»Р°Рј (РЅРµ С‚РѕР»СЊРєРѕ Рє СѓР·Р»Р°Рј РєР»Р°СѓР·С‹ Рё СѓР·Р»Р°Рј РёРґСѓС‰РёРј РїРѕСЃР»Рµ РЅРёС…)
+		Р•СЃР»Рё РјС‹ РёР·РјРµРЅРёРј РёРЅРґРµРєСЃС‹ РѕС‚РЅРѕС€РµРЅРёР№ С‚РѕР»СЊРєРѕ РґР»СЏ СЌС‚Р№Рѕ РєР»Р°СѓР·С‹,
+		С‚РѕРіР¶Р° РїРѕСЏРІРёС‚СЃСЏ РѕС‚РЅРѕС€РµРЅРёСЏ, РєРѕС‚РѕСЂРѕРµ РЅРµ РїСЂРёРЅР°РґР»РµР¶РёС‚ РґР°РЅРЅРѕР№ РєР»Р°СѓР·С‹, РЅРѕ РµРіРѕ
+		РјРѕРіСѓС‚ СѓРєР°Р·С‹Р°С‚СЊ РЅР° СѓР·Р»С‹ РґР°РЅРЅРѕР№ РєР»Р°СѓР·С‹ 
 		*/
 		W.IncrementNodeRef(0, Delta);
 		W.m_Clauses[SaveClauseNo].IncrementNodesReferences(Delta);
@@ -327,10 +327,10 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 
 		/*
-		В W.m_SynRelations слоты m_SourceNodeNo и слоты m_TargetNodeNo
-		уже указывают на this->m_Nodes, а не на W.m_Nodes, поскольку
-		была вызвана процедура W.IncrementNodeRef, поэтому корректно выражение
-		m_Nodes[W.m_SynRelations[j].m_SourceNodeNo] и
+		Р’ W.m_SynRelations СЃР»РѕС‚С‹ m_SourceNodeNo Рё СЃР»РѕС‚С‹ m_TargetNodeNo
+		СѓР¶Рµ СѓРєР°Р·С‹РІР°СЋС‚ РЅР° this->m_Nodes, Р° РЅРµ РЅР° W.m_Nodes, РїРѕСЃРєРѕР»СЊРєСѓ
+		Р±С‹Р»Р° РІС‹Р·РІР°РЅР° РїСЂРѕС†РµРґСѓСЂР° W.IncrementNodeRef, РїРѕСЌС‚РѕРјСѓ РєРѕСЂСЂРµРєС‚РЅРѕ РІС‹СЂР°Р¶РµРЅРёРµ
+		m_Nodes[W.m_SynRelations[j].m_SourceNodeNo] Рё
 		m_Nodes[W.m_SynRelations[j].m_TargetNodeNo]
 		*/
 		for  (long j =0; j < 	W.m_SynRelations.size(); j++)
@@ -345,7 +345,7 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 		//*    
 
 		/*
-		см. выше замечание о слияние клауз и о неравенсте номеров клауз
+		СЃРј. РІС‹С€Рµ Р·Р°РјРµС‡Р°РЅРёРµ Рѕ СЃР»РёСЏРЅРёРµ РєР»Р°СѓР· Рё Рѕ РЅРµСЂР°РІРµРЅСЃС‚Рµ РЅРѕРјРµСЂРѕРІ РєР»Р°СѓР·
 		*/
 		for (long i=m_Clauses[ClauseNo].m_BeginNodeNo;i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
 			m_Nodes[i].m_ClauseNo = ClauseNo;
@@ -372,7 +372,7 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 
 
-	// пробуем связать все предложение 
+	// РїСЂРѕР±СѓРµРј СЃРІСЏР·Р°С‚СЊ РІСЃРµ РїСЂРµРґР»РѕР¶РµРЅРёРµ 
 	SetNodeToDeleteFalse();
 	SetRelsToDeleteFalse();
 
@@ -380,21 +380,21 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 	CLexVariant InitialLexVariant (*this);
 
-	// устаналиваем обычный режим построения межклаузных связей
+	// СѓСЃС‚Р°РЅР°Р»РёРІР°РµРј РѕР±С‹С‡РЅС‹Р№ СЂРµР¶РёРј РїРѕСЃС‚СЂРѕРµРЅРёСЏ РјРµР¶РєР»Р°СѓР·РЅС‹С… СЃРІСЏР·РµР№
 	m_ClauseConnectionType  = ProminentClauseRules;
 
-	// три попытки соединить клаузы
-	// 1 попытка
+	// С‚СЂРё РїРѕРїС‹С‚РєРё СЃРѕРµРґРёРЅРёС‚СЊ РєР»Р°СѓР·С‹
+	// 1 РїРѕРїС‹С‚РєР°
 	ApplyClauseRules( 1);
 
-	// 2 попытка
+	// 2 РїРѕРїС‹С‚РєР°
 	if (GetClauseRelationCount() != m_Clauses.size() - 1)
 	{
 		CopyLexVar (InitialLexVariant);
 		ApplyClauseRules(m_Clauses.size());
 	};
 
-	// 3 попытка
+	// 3 РїРѕРїС‹С‚РєР°
 	if (GetClauseRelationCount() != m_Clauses.size() - 1)
 	{
 		CopyLexVar (InitialLexVariant);
@@ -405,8 +405,8 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 
 	/*
-	нужно удалить отношения и узлы, которые помечены к удалению
-	в функции ApplyClauseRules 
+	РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ РѕС‚РЅРѕС€РµРЅРёСЏ Рё СѓР·Р»С‹, РєРѕС‚РѕСЂС‹Рµ РїРѕРјРµС‡РµРЅС‹ Рє СѓРґР°Р»РµРЅРёСЋ
+	РІ С„СѓРЅРєС†РёРё ApplyClauseRules 
 	*/
 	DelRelsToDelete();
 	DelNodesToDelete();
@@ -427,7 +427,7 @@ try
 
 	m_Relations.clear();
 
-	// узел, содежащий лемму "САМ",удаленный на время построения дерева
+	// СѓР·РµР», СЃРѕРґРµР¶Р°С‰РёР№ Р»РµРјРјСѓ "РЎРђРњ",СѓРґР°Р»РµРЅРЅС‹Р№ РЅР° РІСЂРµРјСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РґРµСЂРµРІР°
 	CRusSemNode SamNode;
 	DeleteSAMNode(ClauseNo, SamNode);
 
@@ -451,7 +451,7 @@ try
 
  
 	/*
-		если  не удалось вставить узел "сам", значит мы получили еще один разрыв
+		РµСЃР»Рё  РЅРµ СѓРґР°Р»РѕСЃСЊ РІСЃС‚Р°РІРёС‚СЊ СѓР·РµР» "СЃР°Рј", Р·РЅР°С‡РёС‚ РјС‹ РїРѕР»СѓС‡РёР»Рё РµС‰Рµ РѕРґРёРЅ СЂР°Р·СЂС‹РІ
 	*/
 	if (!InsertSAMNode(ClauseNo, SamNode))
 		V.m_BestValue.ConnectedComponentsCount++;
@@ -469,34 +469,34 @@ catch (...)
 
 
 
-//восстанавливаем леммы НИКТО, НИЧТО, НИСКОЛЬКО, НИКАКОЙ,
-// если они были записаны разрывно, типа "ни о чем"
+//РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р»РµРјРјС‹ РќРРљРўРћ, РќРР§РўРћ, РќРРЎРљРћР›Р¬РљРћ, РќРРљРђРљРћР™,
+// РµСЃР»Рё РѕРЅРё Р±С‹Р»Рё Р·Р°РїРёСЃР°РЅС‹ СЂР°Р·СЂС‹РІРЅРѕ, С‚РёРїР° "РЅРё Рѕ С‡РµРј"
 
 void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
 {
 	for (long i = R.m_Clauses[ClauseNo].m_BeginNodeNo; i < R.m_Clauses[ClauseNo].m_EndNodeNo; i++)
-		if (R.m_Nodes[i].IsLemmaList("КТО","ЧТО","СКОЛЬКО","КАКОЙ", ""))
+		if (R.m_Nodes[i].IsLemmaList("РљРўРћ","Р§РўРћ","РЎРљРћР›Р¬РљРћ","РљРђРљРћР™", ""))
 		{
-			//"НИ" может стоять контактно или быть разделено предлогом 
+			//"РќР" РјРѕР¶РµС‚ СЃС‚РѕСЏС‚СЊ РєРѕРЅС‚Р°РєС‚РЅРѕ РёР»Рё Р±С‹С‚СЊ СЂР°Р·РґРµР»РµРЅРѕ РїСЂРµРґР»РѕРіРѕРј 
 			if  (     (i > 0)
-					&& R.m_Nodes[i-1].IsWordForm("НИ")
+					&& R.m_Nodes[i-1].IsWordForm("РќР")
 					&& R.CanBeDeleted(i-1)
 				)
 				R.DelNode(i-1);
 			else
 				if  (     (i > 1)
-						&& R.m_Nodes[i-2].IsWordForm("НИ")
+						&& R.m_Nodes[i-2].IsWordForm("РќР")
 						&& R.CanBeDeleted(i-2)
 					)
 					  R.DelNode(i-2);
 				else
 					continue;
-			// только что удалили узел
+			// С‚РѕР»СЊРєРѕ С‡С‚Рѕ СѓРґР°Р»РёР»Рё СѓР·РµР»
 			i--;
 
 
 			CRusSemWord& W = R.m_Nodes[i].m_Words[0];
-			W.m_Lemma = "НИ" + W.m_Lemma;
+			W.m_Lemma = "РќР" + W.m_Lemma;
 			W.m_ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, W.m_Lemma,  0);
 			R.m_Nodes[i].DelAllInterps();
 
@@ -513,7 +513,7 @@ void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
 
 };
 
-// проходит по макисмальным узлам, подсоединяя частицу "не", "только" к первому слева узлу.
+// РїСЂРѕС…РѕРґРёС‚ РїРѕ РјР°РєРёСЃРјР°Р»СЊРЅС‹Рј СѓР·Р»Р°Рј, РїРѕРґСЃРѕРµРґРёРЅСЏСЏ С‡Р°СЃС‚РёС†Сѓ "РЅРµ", "С‚РѕР»СЊРєРѕ" Рє РїРµСЂРІРѕРјСѓ СЃР»РµРІР° СѓР·Р»Сѓ.
 void CRusSemStructure::InitRelationOperators (long ClauseNo)
 {
 	UnitDisruptedConjunctions(*this, ClauseNo);
@@ -522,25 +522,25 @@ void CRusSemStructure::InitRelationOperators (long ClauseNo)
 
 	SetNodeToDeleteFalse();
 
-	// префиксные операторы
+	// РїСЂРµС„РёРєСЃРЅС‹Рµ РѕРїРµСЂР°С‚РѕСЂС‹
 	for (long i=m_Clauses[ClauseNo].m_BeginNodeNo; i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
 	{
-		// префиксных операторов может быть много
+		// РїСЂРµС„РёРєСЃРЅС‹С… РѕРїРµСЂР°С‚РѕСЂРѕРІ РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРЅРѕРіРѕ
 		StringVector PrefixRelOperators;
 		long k=i;
 		for (; (k < m_Clauses[ClauseNo].m_EndNodeNo) && CanBePrefixRelationOperator(k); k++)
 			if (		!m_Nodes[k].IsTimeRossNode() 
 					&&	(m_Nodes[k].m_MNAType != RepeatMNA) 
 					&&	CanBeDeleted(k)
-				// двойной союз "ни ..., ни" не является оператором, хотя одиночный "ни" - оператор
+				// РґРІРѕР№РЅРѕР№ СЃРѕСЋР· "РЅРё ..., РЅРё" РЅРµ СЏРІР»СЏРµС‚СЃСЏ РѕРїРµСЂР°С‚РѕСЂРѕРј, С…РѕС‚СЏ РѕРґРёРЅРѕС‡РЅС‹Р№ "РЅРё" - РѕРїРµСЂР°С‚РѕСЂ
 				)
 			{
 				m_Nodes[k].m_bToDelete = true;
 				PrefixRelOperators.push_back(m_Nodes[k].m_Words[0].m_Lemma);
 			};
 
-		// добавляем префиксные операторы, если  они были найдены, и после них был  найден
-		// хотя бы одно слово, не явл. преф. оператором ( к-й узел)
+		// РґРѕР±Р°РІР»СЏРµРј РїСЂРµС„РёРєСЃРЅС‹Рµ РѕРїРµСЂР°С‚РѕСЂС‹, РµСЃР»Рё  РѕРЅРё Р±С‹Р»Рё РЅР°Р№РґРµРЅС‹, Рё РїРѕСЃР»Рµ РЅРёС… Р±С‹Р»  РЅР°Р№РґРµРЅ
+		// С…РѕС‚СЏ Р±С‹ РѕРґРЅРѕ СЃР»РѕРІРѕ, РЅРµ СЏРІР». РїСЂРµС„. РѕРїРµСЂР°С‚РѕСЂРѕРј ( Рє-Р№ СѓР·РµР»)
 		if (k <  m_Clauses[ClauseNo].m_EndNodeNo)
 		{
 			for (long l=0; l <  PrefixRelOperators.size(); l++)
@@ -558,8 +558,8 @@ void CRusSemStructure::InitRelationOperators (long ClauseNo)
 		i = k;
 	};
 
-	// постфиксные операторы
-	long MainNodeNo = 0; // главное слово - к которому  будет добавляться операторы
+	// РїРѕСЃС‚С„РёРєСЃРЅС‹Рµ РѕРїРµСЂР°С‚РѕСЂС‹
+	long MainNodeNo = 0; // РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ - Рє РєРѕС‚РѕСЂРѕРјСѓ  Р±СѓРґРµС‚ РґРѕР±Р°РІР»СЏС‚СЊСЃСЏ РѕРїРµСЂР°С‚РѕСЂС‹
 	for (long i=m_Clauses[ClauseNo].m_BeginNodeNo+1; i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
 		if ( CanBePostfixRelationOperator(i)  )
 		{
@@ -598,13 +598,13 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 	m_bHasConjBut = false;
    //::MessageBox(0, "111", "111", MB_OK);
 
-  	StartTimer("Интерпретация синтаксиса",0);
+  	StartTimer("РРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ СЃРёРЅС‚Р°РєСЃРёСЃР°",0);
 	try {
       BuildSemNodesBySyntax();
 	}
 	catch (...)
 	{
-		ErrorMessage("Ошибка в интерпретации синтаксиса");
+		ErrorMessage("РћС€РёР±РєР° РІ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё СЃРёРЅС‚Р°РєСЃРёСЃР°");
 	    throw;
 	};
 
@@ -615,7 +615,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 		PrintLemNodes();
 		AssertValidGraph();
 	#endif
-	EndTimer("Интерпретация синтаксиса");
+	EndTimer("РРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ СЃРёРЅС‚Р°РєСЃРёСЃР°");
 
 	rml_TRACE ("=================================================\n");
 	rml_TRACE ("===  FindSituationsForClauseVariantCombination %i===\n",  m_ClauseVariantsCombinationNo);
@@ -627,7 +627,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 //*
 
 
-	// создаем архивные места для морф. вариантов клауз
+	// СЃРѕР·РґР°РµРј Р°СЂС…РёРІРЅС‹Рµ РјРµСЃС‚Р° РґР»СЏ РјРѕСЂС„. РІР°СЂРёР°РЅС‚РѕРІ РєР»Р°СѓР·
     for (long ClauseNo =0; ClauseNo < m_Clauses.size(); ClauseNo++)
     {
 		m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo = FindAlreadyBuiltClauseVariant(ClauseNo);
@@ -659,9 +659,9 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 			InterpretRepeatConj(ClauseNo);
 
-			// InitRelationOperators должен стоять до  поиска словосочетаний, но
-			// после поиска разрывных союзов, иначе не будет собираться группа типы
-			// "не красивую, но новую  маму", где "не" неправильно подсоединится к "красивую"
+			// InitRelationOperators РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ РґРѕ  РїРѕРёСЃРєР° СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№, РЅРѕ
+			// РїРѕСЃР»Рµ РїРѕРёСЃРєР° СЂР°Р·СЂС‹РІРЅС‹С… СЃРѕСЋР·РѕРІ, РёРЅР°С‡Рµ РЅРµ Р±СѓРґРµС‚ СЃРѕР±РёСЂР°С‚СЊСЃСЏ РіСЂСѓРїРїР° С‚РёРїС‹
+			// "РЅРµ РєСЂР°СЃРёРІСѓСЋ, РЅРѕ РЅРѕРІСѓСЋ  РјР°РјСѓ", РіРґРµ "РЅРµ" РЅРµРїСЂР°РІРёР»СЊРЅРѕ РїРѕРґСЃРѕРµРґРёРЅРёС‚СЃСЏ Рє "РєСЂР°СЃРёРІСѓСЋ"
 			InitRelationOperators(ClauseNo);
 			
 			InterpretPrepNouns(ClauseNo);
@@ -685,7 +685,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 			CLexVariant InitialLexVariant;
 			InitialLexVariant.CopyLexVar(*this);
 
-			// здесь начинается инициализация морфологического варината
+			// Р·РґРµСЃСЊ РЅР°С‡РёРЅР°РµС‚СЃСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РІР°СЂРёРЅР°С‚Р°
 			ClauseVar.m_bNew = false;
 			m_InterfaceClauseNo ++;
 
@@ -696,7 +696,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 			size_t CurrSetCollocHypNo = 0;
 			
 
-			// цикл по всем лексическим вариантам 
+			// С†РёРєР» РїРѕ РІСЃРµРј Р»РµРєСЃРёС‡РµСЃРєРёРј РІР°СЂРёР°РЅС‚Р°Рј 
 			for (;;)
 			{
 				if (m_bShouldBeStopped) return constMinStructureWeight;
@@ -725,24 +725,24 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 				V.CopyLexVar(*this);
 
 			   
-				rml_TRACE ("Клауза %i\n", ClauseNo);
-				rml_TRACE ("Лексический вариант(ClauseNo = %i) =  %i, Набор сл-ний = %i(из %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
-				rml_TRACE ("Вес лучшего варианта дерева %i\n", V.GetBestTreeWeight());
+				rml_TRACE ("РљР»Р°СѓР·Р° %i\n", ClauseNo);
+				rml_TRACE ("Р›РµРєСЃРёС‡РµСЃРєРёР№ РІР°СЂРёР°РЅС‚(ClauseNo = %i) =  %i, РќР°Р±РѕСЂ СЃР»-РЅРёР№ = %i(РёР· %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
+				rml_TRACE ("Р’РµСЃ Р»СѓС‡С€РµРіРѕ РІР°СЂРёР°РЅС‚Р° РґРµСЂРµРІР° %i\n", V.GetBestTreeWeight());
 				ClauseVar.m_BestLexVariants.push_back(V);
-				rml_TRACE ("Связноть  клаузы %i\n", IsConnectedClause(ClauseNo));
+				rml_TRACE ("РЎРІСЏР·РЅРѕС‚СЊ  РєР»Р°СѓР·С‹ %i\n", IsConnectedClause(ClauseNo));
 				CopyLexVar(InitialLexVariant);
 				LexVariantInCurrSetCollocNo++;
 				/*
-				если лексических вариантов больше 100, тогда надо выходить
-				по паническим причинам
+				РµСЃР»Рё Р»РµРєСЃРёС‡РµСЃРєРёС… РІР°СЂРёР°РЅС‚РѕРІ Р±РѕР»СЊС€Рµ 100, С‚РѕРіРґР° РЅР°РґРѕ РІС‹С…РѕРґРёС‚СЊ
+				РїРѕ РїР°РЅРёС‡РµСЃРєРёРј РїСЂРёС‡РёРЅР°Рј
 				*/
 				if (LexVariantInCurrSetCollocNo > 100)
 					break;
 
 				
-			} // конец цикла
+			} // РєРѕРЅРµС† С†РёРєР»Р°
 
-	  	 // уничтожение плохих вариантов
+	  	 // СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РїР»РѕС…РёС… РІР°СЂРёР°РЅС‚РѕРІ
 			sort (ClauseVar.m_BestLexVariants.begin(),ClauseVar.m_BestLexVariants.end());
 			for ( long i=0; i < ClauseVar.m_BestLexVariants.size(); )
 				if ( ClauseVar.m_BestLexVariants[i].GetBestTreeWeight() > ClauseVar.m_BestLexVariants[0].GetBestTreeWeight() )
@@ -763,7 +763,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 	rml_TRACE  ("===  Connecting clauses   %i ===\n", m_ClauseVariantsCombinationNo);
 	m_InterfaceClauseNo ++;
 
-	// построение связного варианта
+	// РїРѕСЃС‚СЂРѕРµРЅРёРµ СЃРІСЏР·РЅРѕРіРѕ РІР°СЂРёР°РЅС‚Р°
 	VectorLong V;
 	
 	V.resize(m_Clauses.size());
@@ -811,7 +811,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 
 	rml_TRACE  ("=================================================\n");
-	rml_TRACE  ("===  Запись лучшего варианта  %i ===\n", m_ClauseVariantsCombinationNo);
+	rml_TRACE  ("===  Р—Р°РїРёСЃСЊ Р»СѓС‡С€РµРіРѕ РІР°СЂРёР°РЅС‚Р°  %i ===\n", m_ClauseVariantsCombinationNo);
 
 	if (BestCombNo != -1)
 	{
@@ -844,9 +844,9 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 			V.CopyLexVar(*this);
 
 
-			rml_TRACE ("Клауза %i\n", ClauseNo);
-			rml_TRACE ("Лексический вариант(ClauseNo = %i) =  %i, Набор сл-ний = %i(из %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
-			rml_TRACE ("Вес лучшего варианта дерева %i\n", V.GetBestTreeWeight());
+			rml_TRACE ("РљР»Р°СѓР·Р° %i\n", ClauseNo);
+			rml_TRACE ("Р›РµРєСЃРёС‡РµСЃРєРёР№ РІР°СЂРёР°РЅС‚(ClauseNo = %i) =  %i, РќР°Р±РѕСЂ СЃР»-РЅРёР№ = %i(РёР· %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
+			rml_TRACE ("Р’РµСЃ Р»СѓС‡С€РµРіРѕ РІР°СЂРёР°РЅС‚Р° РґРµСЂРµРІР° %i\n", V.GetBestTreeWeight());
 			ClauseVar.m_BestLexVariants.push_back(V);
 			CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[ClauseNo].m_CurrLexVariantNo];
 			Weight += W.GetBestTreeWeight1(!IsConn);
@@ -872,9 +872,9 @@ long CRusSemStructure::GetStructureWeight()
 	for (size_t i =0; i < m_Clauses.size(); i++)
 	{
 		/*
-			когда дублируются морф. варианты, может возникнуть ситуация, когда 
-			m_Clauses[i].m_AlreadyBuiltClauseVariantNo не проинициализирован, тогда
-			такой вариант надо пропускать (дать очень большой штраф)
+			РєРѕРіРґР° РґСѓР±Р»РёСЂСѓСЋС‚СЃСЏ РјРѕСЂС„. РІР°СЂРёР°РЅС‚С‹, РјРѕР¶РµС‚ РІРѕР·РЅРёРєРЅСѓС‚СЊ СЃРёС‚СѓР°С†РёСЏ, РєРѕРіРґР° 
+			m_Clauses[i].m_AlreadyBuiltClauseVariantNo РЅРµ РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅ, С‚РѕРіРґР°
+			С‚Р°РєРѕР№ РІР°СЂРёР°РЅС‚ РЅР°РґРѕ РїСЂРѕРїСѓСЃРєР°С‚СЊ (РґР°С‚СЊ РѕС‡РµРЅСЊ Р±РѕР»СЊС€РѕР№ С€С‚СЂР°С„)
 		*/
 		if (m_Clauses[i].m_AlreadyBuiltClauseVariantNo == -1)
 		{
@@ -896,7 +896,7 @@ long CRusSemStructure::GetStructureWeight()
 	long RelsCount = GetUseRelationsCount();  
 	TreeVariantValue Summa;
 	Summa.Coefs = &m_SemCoefs;
-	// перевычисляем те оценки, которые относятся к отношениям ( 5 оценок )
+	// РїРµСЂРµРІС‹С‡РёСЃР»СЏРµРј С‚Рµ РѕС†РµРЅРєРё, РєРѕС‚РѕСЂС‹Рµ РѕС‚РЅРѕСЃСЏС‚СЃСЏ Рє РѕС‚РЅРѕС€РµРЅРёСЏРј ( 5 РѕС†РµРЅРѕРє )
 	Summa.SemFetDisagree = RelsCount ? GetSemFetDisagreeCount(Tag)*1000 / RelsCount : 0;
 	Summa.LexFetAgreeCount = RelsCount ? GetLexFetAgreeCount(Tag)*1000 / RelsCount : 0;
 	Summa.OptionalValencyCount = GetOptionalValenciesCount(Tag);
@@ -905,16 +905,16 @@ long CRusSemStructure::GetStructureWeight()
     if (Summa.CorporaGleicheCount == 1)
 	  Summa.CorporaGleicheCount = 0;
 
-	// вообще не будем учитывать оценку по длине связей на межклаузном уровне 
-	// точнее, ее надо учесть, но вычислять расстояние в клаузах, а не в словах. 
-	// Пока просто не будем учитывать.
+	// РІРѕРѕР±С‰Рµ РЅРµ Р±СѓРґРµРј СѓС‡РёС‚С‹РІР°С‚СЊ РѕС†РµРЅРєСѓ РїРѕ РґР»РёРЅРµ СЃРІСЏР·РµР№ РЅР° РјРµР¶РєР»Р°СѓР·РЅРѕРј СѓСЂРѕРІРЅРµ 
+	// С‚РѕС‡РЅРµРµ, РµРµ РЅР°РґРѕ СѓС‡РµСЃС‚СЊ, РЅРѕ РІС‹С‡РёСЃР»СЏС‚СЊ СЂР°СЃСЃС‚РѕСЏРЅРёРµ РІ РєР»Р°СѓР·Р°С…, Р° РЅРµ РІ СЃР»РѕРІР°С…. 
+	// РџРѕРєР° РїСЂРѕСЃС‚Рѕ РЅРµ Р±СѓРґРµРј СѓС‡РёС‚С‹РІР°С‚СЊ.
 	Summa.RelationsLength = 0;
 
 
-	// это нужно сделать, но я забыл зачем?
+	// СЌС‚Рѕ РЅСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ, РЅРѕ СЏ Р·Р°Р±С‹Р» Р·Р°С‡РµРј?
     Summa.ObligatoryValencyViolationCount = GetObligatoryValencyViolation(Tag);
 
-	// нужно сделать, поскольку под лексические функции подводятся, например, разрывные союзы.
+	// РЅСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ, РїРѕСЃРєРѕР»СЊРєСѓ РїРѕРґ Р»РµРєСЃРёС‡РµСЃРєРёРµ С„СѓРЅРєС†РёРё РїРѕРґРІРѕРґСЏС‚СЃСЏ, РЅР°РїСЂРёРјРµСЂ, СЂР°Р·СЂС‹РІРЅС‹Рµ СЃРѕСЋР·С‹.
 	Summa.LexFunctsCount = m_LexFuncts.size();
     UpdateBlockedRelations();
 	if (!IsConn)
@@ -930,8 +930,8 @@ long CRusSemStructure::GetStructureWeight()
 	Weight -= GetAnaphoricRelationsCount(Tag) * 5;
 	//rml_TRACE("%s\n", Summa.GetStr().c_str());
 	/*
-	 если были использованы недостоверные межклаузные  связи, тогда
-	 нужно дать штраф этой структуре
+	 РµСЃР»Рё Р±С‹Р»Рё РёСЃРїРѕР»СЊР·РѕРІР°РЅС‹ РЅРµРґРѕСЃС‚РѕРІРµСЂРЅС‹Рµ РјРµР¶РєР»Р°СѓР·РЅС‹Рµ  СЃРІСЏР·Рё, С‚РѕРіРґР°
+	 РЅСѓР¶РЅРѕ РґР°С‚СЊ С€С‚СЂР°С„ СЌС‚РѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ
 	*/
 	if (AllPossibleClauseRules == m_ClauseConnectionType)
 		Weight += 60;
@@ -950,7 +950,7 @@ struct CClauseComplexity
 	};
 	string GetStr()
 	{
-	   return Format ("Клауза=%i, Сложность=%.2f",
+	   return Format ("РљР»Р°СѓР·Р°=%i, РЎР»РѕР¶РЅРѕСЃС‚СЊ=%.2f",
 		   m_ClauseNo, m_Complexity );
 	};
 };
@@ -997,7 +997,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 {
    if ( GetRoss(Ross) == NULL) return false;
 
-   WORD UnitNo = GetRossHolder(Ross)->LocateUnit("_коэф",1);
+   WORD UnitNo = GetRossHolder(Ross)->LocateUnit("_РєРѕСЌС„",1);
    if (UnitNo == ErrUnitNo) return false;
 
    if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
@@ -1046,7 +1046,7 @@ bool CRusSemStructure::GetClauseVariantCombination()
 			m_AllClausesVariants++;
 		}
 	};
-	VectorLong V; // текущий вариант 
+	VectorLong V; // С‚РµРєСѓС‰РёР№ РІР°СЂРёР°РЅС‚ 
 	V.resize(Parents.size());
 	vector<VectorLong> Variants;
 	GetCommonVariants(Parents, V, Variants, 0);
@@ -1084,7 +1084,7 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 	};
 
-	rml_TRACE ("Номер набора синтаксических вариантов клаузы %i (из %i)\n", m_ClauseVariantsCombinationNo+1, Variants.size());
+	rml_TRACE ("РќРѕРјРµСЂ РЅР°Р±РѕСЂР° СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёС… РІР°СЂРёР°РЅС‚РѕРІ РєР»Р°СѓР·С‹ %i (РёР· %i)\n", m_ClauseVariantsCombinationNo+1, Variants.size());
 	m_ClauseCombinationVariantsCount = Variants.size();
 	m_Nodes.clear();
 	return true;
@@ -1099,7 +1099,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 	try {
 		m_AllClausesVariants = 0;
 		ClearTimers();
-		StartTimer("Общее время работы",0);
+		StartTimer("РћР±С‰РµРµ РІСЂРµРјСЏ СЂР°Р±РѕС‚С‹",0);
 
 		if (!ReadAuxiliaryArticles())
 		{
@@ -1112,7 +1112,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_MemRelations.clear();
 		m_MemNodes.clear();
 
-		StartTimer("Интерпретация синтаксиса",0);
+		StartTimer("РРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ СЃРёРЅС‚Р°РєСЃРёСЃР°",0);
 
 		m_AlreadyBuiltClauseVariants.clear();
 
@@ -1135,7 +1135,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_InterfaceClauseNo = 0;
 
 
-		EndTimer("Интерпретация синтаксиса");
+		EndTimer("РРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ СЃРёРЅС‚Р°РєСЃРёСЃР°");
 		long BestClauseVariantsCombinationNo = 0;
 		long BestClauseVariantsCombinationWeight = 100000;
 
@@ -1160,7 +1160,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 
 				rml_TRACE ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
-				rml_TRACE ("Общий вес варианта %i = %i \n", m_ClauseVariantsCombinationNo, Weight);
+				rml_TRACE ("РћР±С‰РёР№ РІРµСЃ РІР°СЂРёР°РЅС‚Р° %i = %i \n", m_ClauseVariantsCombinationNo, Weight);
 				rml_TRACE ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
 
 				if (Weight  < BestClauseVariantsCombinationWeight)
@@ -1175,8 +1175,8 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 #ifndef _DEBUG
 
 				/*
-				В релизной  версии, если  скорость меньше, чем полсекунды на слово,
-				тогда надо выходить.
+				Р’ СЂРµР»РёР·РЅРѕР№  РІРµСЂСЃРёРё, РµСЃР»Рё  СЃРєРѕСЂРѕСЃС‚СЊ РјРµРЅСЊС€Рµ, С‡РµРј РїРѕР»СЃРµРєСѓРЅРґС‹ РЅР° СЃР»РѕРІРѕ,
+				С‚РѕРіРґР° РЅР°РґРѕ РІС‹С…РѕРґРёС‚СЊ.
 				*/
 				if ( (WordsPerSecond < 0.5) &&  (WordsPerSecond > 0))
 				{
@@ -1212,10 +1212,10 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 		ConvertParticipleTreeToClause();
 
-		string S = Format("Число слов в предложении %i\n Число запросов к словарю: %i\n Лучший вариант клауз : %i (из %i)\n",
+		string S = Format("Р§РёСЃР»Рѕ СЃР»РѕРІ РІ РїСЂРµРґР»РѕР¶РµРЅРёРё %i\n Р§РёСЃР»Рѕ Р·Р°РїСЂРѕСЃРѕРІ Рє СЃР»РѕРІР°СЂСЋ: %i\n Р›СѓС‡С€РёР№ РІР°СЂРёР°РЅС‚ РєР»Р°СѓР· : %i (РёР· %i)\n",
 			m_piSent->m_Words.size(), Queries.size(), BestClauseVariantsCombinationNo+1, m_ClauseCombinationVariantsCount);
 
-		EndTimer("Общее время работы");
+		EndTimer("РћР±С‰РµРµ РІСЂРµРјСЏ СЂР°Р±РѕС‚С‹");
 
 
 
@@ -1223,14 +1223,14 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 		m_TimeStatictics += GetClauseComplexitiesStr()+string("\n");
 
-		S = Format("==========\n Вес предложения: %i\n", BestClauseVariantsCombinationWeight);
+		S = Format("==========\n Р’РµСЃ РїСЂРµРґР»РѕР¶РµРЅРёСЏ: %i\n", BestClauseVariantsCombinationWeight);
 		m_ClausePropertiesProtocol +=  S;
-		S = Format("Число запр. лекс. вар. : %i\n", m_UserProhibitedLexVars.size());
+		S = Format("Р§РёСЃР»Рѕ Р·Р°РїСЂ. Р»РµРєСЃ. РІР°СЂ. : %i\n", m_UserProhibitedLexVars.size());
 		m_ClausePropertiesProtocol +=  S;
-		S = Format("Скорость (слово/секунда) =  %10.0f\n", WordsPerSecond);
+		S = Format("РЎРєРѕСЂРѕСЃС‚СЊ (СЃР»РѕРІРѕ/СЃРµРєСѓРЅРґР°) =  %10.0f\n", WordsPerSecond);
 		if (bTooSlow)
 		{
-			S += "Выход по скорости !!!!\n";
+			S += "Р’С‹С…РѕРґ РїРѕ СЃРєРѕСЂРѕСЃС‚Рё !!!!\n";
 		};
 
 		m_ClausePropertiesProtocol +=  S;
@@ -1269,7 +1269,7 @@ bool CRusSemStructure::GetSyntaxTreeByText(string text, int ClauseVarNo, string&
 		   m_ClauseVariantsCombinationNo = 0;
 		GetClauseVariantCombination();
 		BuildSemNodesBySyntax();
-		m_TimeStatictics = Format("Число слов в предложении %i\n Кол-во морф. вариантов : %i\n",m_piSent->m_Words.size(),  m_ClauseCombinationVariantsCount);
+		m_TimeStatictics = Format("Р§РёСЃР»Рѕ СЃР»РѕРІ РІ РїСЂРµРґР»РѕР¶РµРЅРёРё %i\n РљРѕР»-РІРѕ РјРѕСЂС„. РІР°СЂРёР°РЅС‚РѕРІ : %i\n",m_piSent->m_Words.size(),  m_ClauseCombinationVariantsCount);
 
 		Graph =  GetTclSyntaxGraph ();
 

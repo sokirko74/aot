@@ -131,12 +131,12 @@ int CVisualSentence::CalculateCoordinates(CDC* pDC,int iY,int iWidth,BOOL bShowG
 				iPrevY = iFinalY + SPACE_BETWEEN_SENTENCE;
 				m_vectorSentLines.push_back(SentLine);
 				SentLine.Reset();
-				//âîçâðàò êàðåòêè
+				//Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‚ ÐºÐ°Ñ€ÐµÑ‚ÐºÐ¸
 				iX = 0;
 				iFinalY += m_iSpaceBetweenLinesG + SPACE_BETWEEN_SENTENCE;
 			}
 			
-			//äëÿ âû÷èñëåíèÿ rect äëÿ âñåãî ïðåäëîæåíèÿ
+			//Ð´Ð»Ñ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ rect Ð´Ð»Ñ Ð²ÑÐµÐ³Ð¾ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ
 			if( (iX + iLen + sizeSpace.cx) >= maxLen )
 				maxLen = iX + iLen;
 

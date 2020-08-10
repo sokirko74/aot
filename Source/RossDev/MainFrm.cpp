@@ -110,9 +110,9 @@ void CMainFrame::Dump(CDumpContext& dc) const
 int MakeFName ( char *OFN,  char *IFN,  char *Ext)
  {
 	strcpy (OFN,IFN);
-	 char *s = strrchr (OFN,'.'); // найти последнее расширение
+	 char *s = strrchr (OFN,'.'); // РЅР°Р№С‚Рё РїРѕСЃР»РµРґРЅРµРµ СЂР°СЃС€РёСЂРµРЅРёРµ
 
-	if ( s == NULL) // если нет, то прибамбасить его
+	if ( s == NULL) // РµСЃР»Рё РЅРµС‚, С‚Рѕ РїСЂРёР±Р°РјР±Р°СЃРёС‚СЊ РµРіРѕ
      {strcat(OFN,".");
       strcat (OFN,Ext); }
   else

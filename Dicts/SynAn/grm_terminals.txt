@@ -1,27 +1,27 @@
 %% == common rules for terminals ==
 
-[NOUN] -> [TOKEN grm="Ñ"];
-[ADJ] -> [TOKEN grm="Ï"];
-[SH-ADJ] -> [TOKEN grm="ÊÐ_ÏÐÈË"];
-[PART] -> [TOKEN grm="ÏÐÈ×ÀÑÒÈÅ"];
-[SH-PART] -> [TOKEN grm="ÊÐ_ÏÐÈ×ÀÑÒÈÅ"];
-[DEEPR] -> [TOKEN grm="ÄÅÅÏÐÈ×ÀÑÒÈÅ"];
-[V] -> [TOKEN grm="Ã"];
-[ADV] -> [TOKEN grm="Í"];
-[INF] -> [TOKEN grm="ÈÍÔÈÍÈÒÈÂ"];
-[PRO] -> [TOKEN grm="ÌÑ"];
-[PRO-ADJ] -> [TOKEN grm="ÌÑ-Ï"];
-[PRED] -> [TOKEN grm="ÏÐÅÄÊ"];
-[PRED-PRO] -> [TOKEN grm="ÌÑ-ÏÐÅÄÊ"];
-[NUM] -> [TOKEN grm="×ÈÑË"];
+[NOUN] -> [TOKEN grm="Ð¡"];
+[ADJ] -> [TOKEN grm="ÐŸ"];
+[SH-ADJ] -> [TOKEN grm="ÐšÐ _ÐŸÐ Ð˜Ð›"];
+[PART] -> [TOKEN grm="ÐŸÐ Ð˜Ð§ÐÐ¡Ð¢Ð˜Ð•"];
+[SH-PART] -> [TOKEN grm="ÐšÐ _ÐŸÐ Ð˜Ð§ÐÐ¡Ð¢Ð˜Ð•"];
+[DEEPR] -> [TOKEN grm="Ð”Ð•Ð•ÐŸÐ Ð˜Ð§ÐÐ¡Ð¢Ð˜Ð•"];
+[V] -> [TOKEN grm="Ð“"];
+[ADV] -> [TOKEN grm="Ð"];
+[INF] -> [TOKEN grm="Ð˜ÐÐ¤Ð˜ÐÐ˜Ð¢Ð˜Ð’"];
+[PRO] -> [TOKEN grm="ÐœÐ¡"];
+[PRO-ADJ] -> [TOKEN grm="ÐœÐ¡-ÐŸ"];
+[PRED] -> [TOKEN grm="ÐŸÐ Ð•Ð”Ðš"];
+[PRED-PRO] -> [TOKEN grm="ÐœÐ¡-ÐŸÐ Ð•Ð”Ðš"];
+[NUM] -> [TOKEN grm="Ð§Ð˜Ð¡Ð›"];
 [DIG] -> [TOKEN type="DC"];
-[PARTICLE] -> [TOKEN form="ËÈ" grm="×ÀÑÒ"] | [TOKEN form="ÆÅ" grm="×ÀÑÒ"] | [TOKEN form="ÁÛ" grm="×ÀÑÒ"] | [TOKEN form="ÓÆ" grm="×ÀÑÒ"] | [TOKEN form="ÒÎËÜÊÎ" grm="×ÀÑÒ"] | [TOKEN form="Æ" grm="×ÀÑÒ"] | [TOKEN form="Á" grm="×ÀÑÒ"] | [TOKEN form="ËÜ" grm="×ÀÑÒ"];
+[PARTICLE] -> [TOKEN form="Ð›Ð˜" grm="Ð§ÐÐ¡Ð¢"] | [TOKEN form="Ð–Ð•" grm="Ð§ÐÐ¡Ð¢"] | [TOKEN form="Ð‘Ð«" grm="Ð§ÐÐ¡Ð¢"] | [TOKEN form="Ð£Ð–" grm="Ð§ÐÐ¡Ð¢"] | [TOKEN form="Ð¢ÐžÐ›Ð¬ÐšÐž" grm="Ð§ÐÐ¡Ð¢"] | [TOKEN form="Ð–" grm="Ð§ÐÐ¡Ð¢"] | [TOKEN form="Ð‘" grm="Ð§ÐÐ¡Ð¢"] | [TOKEN form="Ð›Ð¬" grm="Ð§ÐÐ¡Ð¢"];
 [COMMA] -> ',';
 [DOT] -> '.';
-[CONJ] -> 'è' | 'èëè';
-[PREP] -> [TOKEN grm="ÏÐÅÄË" hom="yes"];
-[PREP_SIMPLE] -> [TOKEN grm="ÏÐÅÄË" hom="no"];
-[UZH] -> [TOKEN form="óæ" grm="×ÀÑÒ"];
+[CONJ] -> 'Ð¸' | 'Ð¸Ð»Ð¸';
+[PREP] -> [TOKEN grm="ÐŸÐ Ð•Ð”Ð›" hom="yes"];
+[PREP_SIMPLE] -> [TOKEN grm="ÐŸÐ Ð•Ð”Ð›" hom="no"];
+[UZH] -> [TOKEN form="ÑƒÐ¶" grm="Ð§ÐÐ¡Ð¢"];
 
 [ROOT] -> [NOUN] | 
 		  [ADJ] | 

@@ -74,7 +74,7 @@ WORD  CDictUnitInterp::GetSemCorrectUnitNo () const
 };
 
 
-// иначе выдает ErrUnitNo.
+// РёРЅР°С‡Рµ РІС‹РґР°РµС‚ ErrUnitNo.
 WORD CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
 {
  if (UnitNo == ErrUnitNo) return ErrUnitNo;

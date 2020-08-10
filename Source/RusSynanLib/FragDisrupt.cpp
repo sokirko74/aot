@@ -10,9 +10,9 @@
 
 
 /*
- Выдает все типы групп, которые накрывают слово WordNo, а если слово
- разделяет подлежащее и сказуемое, тогда  в выходное множество выдается еще и 
- тип SUBJ
+ Р’С‹РґР°РµС‚ РІСЃРµ С‚РёРїС‹ РіСЂСѓРїРї, РєРѕС‚РѕСЂС‹Рµ РЅР°РєСЂС‹РІР°СЋС‚ СЃР»РѕРІРѕ WordNo, Р° РµСЃР»Рё СЃР»РѕРІРѕ
+ СЂР°Р·РґРµР»СЏРµС‚ РїРѕРґР»РµР¶Р°С‰РµРµ Рё СЃРєР°Р·СѓРµРјРѕРµ, С‚РѕРіРґР°  РІ РІС‹С…РѕРґРЅРѕРµ РјРЅРѕР¶РµСЃС‚РІРѕ РІС‹РґР°РµС‚СЃСЏ РµС‰Рµ Рё 
+ С‚РёРї SUBJ
 */
 static void get_all_group_types_for_the_word(const CMorphVariant& F, int UnitNo, vector<int>& Types)
 {
@@ -37,9 +37,9 @@ static void get_all_group_types_for_the_word(const CMorphVariant& F, int UnitNo,
 
 
 /*
-  добавляет один морф. вариант к другому, если у добавляемого варианта 
-  прописано подлежащее и сказуемое, тогда нужно 
-  заимствовать у добавляемого эти слоты
+  РґРѕР±Р°РІР»СЏРµС‚ РѕРґРёРЅ РјРѕСЂС„. РІР°СЂРёР°РЅС‚ Рє РґСЂСѓРіРѕРјСѓ, РµСЃР»Рё Сѓ РґРѕР±Р°РІР»СЏРµРјРѕРіРѕ РІР°СЂРёР°РЅС‚Р° 
+  РїСЂРѕРїРёСЃР°РЅРѕ РїРѕРґР»РµР¶Р°С‰РµРµ Рё СЃРєР°Р·СѓРµРјРѕРµ, С‚РѕРіРґР° РЅСѓР¶РЅРѕ 
+  Р·Р°РёРјСЃС‚РІРѕРІР°С‚СЊ Сѓ РґРѕР±Р°РІР»СЏРµРјРѕРіРѕ СЌС‚Рё СЃР»РѕС‚С‹
 */
 void AddSynVar(CMorphVariant& morphVar, const CMorphVariant& ToAdd)
 {
@@ -74,7 +74,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 	
 	FormatCaller.AddAllRules();
 
-	//следующий кусок во многом цитирует CClause::FillWithAlreadyBuiltGroups
+	//СЃР»РµРґСѓСЋС‰РёР№ РєСѓСЃРѕРє РІРѕ РјРЅРѕРіРѕРј С†РёС‚РёСЂСѓРµС‚ CClause::FillWithAlreadyBuiltGroups
     CMorphVariant synVariant(GetRusGramTab());
 	int CountOfVariants = 0;
 	for(CSVI pFirstSynVar = ClFirst.m_SynVariants.begin() ; pFirstSynVar != ClFirst.m_SynVariants.end() ; pFirstSynVar++)
@@ -82,7 +82,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 		size_t debug = ClSecond.m_SynVariants.size();
 		for(CSVI pSecondSynVar = ClSecond.m_SynVariants.begin() ; pSecondSynVar != ClSecond.m_SynVariants.end(); pSecondSynVar++ )
 		{
-			// если число общих вариантов больше 500, надо выйти, поскольку  приходится слишком долго ждать.
+			// РµСЃР»Рё С‡РёСЃР»Рѕ РѕР±С‰РёС… РІР°СЂРёР°РЅС‚РѕРІ Р±РѕР»СЊС€Рµ 500, РЅР°РґРѕ РІС‹Р№С‚Рё, РїРѕСЃРєРѕР»СЊРєСѓ  РїСЂРёС…РѕРґРёС‚СЃСЏ СЃР»РёС€РєРѕРј РґРѕР»РіРѕ Р¶РґР°С‚СЊ.
 			CountOfVariants++;
 			if (CountOfVariants > 500)
 				break;
@@ -94,7 +94,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 			
 			AddSynVar(synVariant, synVariantLeft);			
 
-			// если клаузы  не стоят влотную, тогда  добавим пустую клаузу между  ними
+			// РµСЃР»Рё РєР»Р°СѓР·С‹  РЅРµ СЃС‚РѕСЏС‚ РІР»РѕС‚РЅСѓСЋ, С‚РѕРіРґР°  РґРѕР±Р°РІРёРј РїСѓСЃС‚СѓСЋ РєР»Р°СѓР·Сѓ РјРµР¶РґСѓ  РЅРёРјРё
 			if (ClFirst.m_iLastWord+1 !=  ClSecond.m_iFirstWord)
 			{
 				CSynUnit S(GetRusGramTab());
@@ -126,7 +126,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 				{
 					plmWord.m_UnitType = EClause;
 					plmWord.m_Clause = SynVarUnit.m_SentPeriod;
-					// если данная  клауза не пустыха
+					// РµСЃР»Рё РґР°РЅРЅР°СЏ  РєР»Р°СѓР·Р° РЅРµ РїСѓСЃС‚С‹С…Р°
 					if (SynVarUnit.m_iClauseTypeNum != -1)
 					{
 						int ii = FindClauseIndexByPeriod(SynVarUnit.m_SentPeriod);
@@ -188,7 +188,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 			
 
 
-	        //конец цитаты CClause::FillWithAlreadyBuiltGroups
+	        //РєРѕРЅРµС† С†РёС‚Р°С‚С‹ CClause::FillWithAlreadyBuiltGroups
 				get_all_group_types_for_the_word(synVariant, synVariantLeft.GetUnitsCount(), Types);
 
 			if (bFindSubjPredikate)
@@ -211,13 +211,13 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 }
 
 /*
-Примеры:
- Дом, где живет Петров, сломался
- Мысль, что он придет, ее угнетала.
- Мысль, что он, в самом деле, придет, ее угнетала.
+РџСЂРёРјРµСЂС‹:
+ Р”РѕРј, РіРґРµ Р¶РёРІРµС‚ РџРµС‚СЂРѕРІ, СЃР»РѕРјР°Р»СЃСЏ
+ РњС‹СЃР»СЊ, С‡С‚Рѕ РѕРЅ РїСЂРёРґРµС‚, РµРµ СѓРіРЅРµС‚Р°Р»Р°.
+ РњС‹СЃР»СЊ, С‡С‚Рѕ РѕРЅ, РІ СЃР°РјРѕРј РґРµР»Рµ, РїСЂРёРґРµС‚, РµРµ СѓРіРЅРµС‚Р°Р»Р°.
 
 
- Между первой и третьей клаузами должно быть построено отношение ПОДЛ-СКАЗУЕМОЕ.
+ РњРµР¶РґСѓ РїРµСЂРІРѕР№ Рё С‚СЂРµС‚СЊРµР№ РєР»Р°СѓР·Р°РјРё РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїРѕСЃС‚СЂРѕРµРЅРѕ РѕС‚РЅРѕС€РµРЅРёРµ РџРћР”Р›-РЎРљРђР—РЈР•РњРћР•.
 */
 
 bool CRusSentence::RuleForDisruptClausesBySubject(int iClauseNum)
@@ -259,7 +259,7 @@ bool CRusSentence::RuleForDisruptClausesBySubject(int iClauseNum)
 
 	if ( !pClause2.HasLeftStarter() ) return false; //: nim 18.01.01
 
-	// пустыхи нельзя вкладывать в другие клаузы
+	// РїСѓСЃС‚С‹С…Рё РЅРµР»СЊР·СЏ РІРєР»Р°РґС‹РІР°С‚СЊ РІ РґСЂСѓРіРёРµ РєР»Р°СѓР·С‹
 	if ( pClause2.m_vectorTypes.size() == 0 ) return false; 
 	
 	if ( pClause3.HasLeftStarter() ) return false;
@@ -273,7 +273,7 @@ bool CRusSentence::RuleForDisruptClausesBySubject(int iClauseNum)
 	vector<int> Types;
 
 	/*
-	  пробуем найти  подлеажащее для сказуемого во  третьей клаузе
+	  РїСЂРѕР±СѓРµРј РЅР°Р№С‚Рё  РїРѕРґР»РµР°Р¶Р°С‰РµРµ РґР»СЏ СЃРєР°Р·СѓРµРјРѕРіРѕ РІРѕ  С‚СЂРµС‚СЊРµР№ РєР»Р°СѓР·Рµ
 	*/
 	if (!TryToFindCommonGroupsForUnitedSynVariants(pClause1, pClause3, Types, true))
 		return false;
@@ -344,7 +344,7 @@ bool CRusSentence::RuleForUnitingClausesBySubject(int iClauseNum, bool bIgnoreWe
 	vector<int> Types;
 
 	/*
-	  пробуем найти  подлежащее для сказуемого во второй клаузе
+	  РїСЂРѕР±СѓРµРј РЅР°Р№С‚Рё  РїРѕРґР»РµР¶Р°С‰РµРµ РґР»СЏ СЃРєР°Р·СѓРµРјРѕРіРѕ РІРѕ РІС‚РѕСЂРѕР№ РєР»Р°СѓР·Рµ
 	*/
 	if (!TryToFindCommonGroupsForUnitedSynVariants(pClause1, pClause2, Types, true))
 		return false;
@@ -366,10 +366,10 @@ bool CRusSentence::RuleForUnitingClausesBySubjectStrong(int iClauseNum)
 
 
 /*
-эта функция проверяет, что в первой клаузе есть начало разрывного союза,
-а во второй - конец. Если эта функция выдает ложь, значит на границе
-не может быть построена группа с разрывным союзом. 
-Эта функция сделана только для ускорения.
+СЌС‚Р° С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РІ РїРµСЂРІРѕР№ РєР»Р°СѓР·Рµ РµСЃС‚СЊ РЅР°С‡Р°Р»Рѕ СЂР°Р·СЂС‹РІРЅРѕРіРѕ СЃРѕСЋР·Р°,
+Р° РІРѕ РІС‚РѕСЂРѕР№ - РєРѕРЅРµС†. Р•СЃР»Рё СЌС‚Р° С„СѓРЅРєС†РёСЏ РІС‹РґР°РµС‚ Р»РѕР¶СЊ, Р·РЅР°С‡РёС‚ РЅР° РіСЂР°РЅРёС†Рµ
+РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїРѕСЃС‚СЂРѕРµРЅР° РіСЂСѓРїРїР° СЃ СЂР°Р·СЂС‹РІРЅС‹Рј СЃРѕСЋР·РѕРј. 
+Р­С‚Р° С„СѓРЅРєС†РёСЏ СЃРґРµР»Р°РЅР° С‚РѕР»СЊРєРѕ РґР»СЏ СѓСЃРєРѕСЂРµРЅРёСЏ.
 */
 bool CRusSentence::CanBeDisruptConjClause (const CClause& pClauseLeft, const CClause& pClauseRight) const
 {
@@ -390,13 +390,13 @@ bool CRusSentence::CanBeDisruptConjClause (const CClause& pClauseLeft, const CCl
 }
 
 /*
- Примеры:
- Он изобрел и сад, и огород.
- И сад, и огород он изобрел. 
- Я хочу и пить, и курить.
- Не красивая, а желтая страница выпала из книги.
- будь то доступ в Интернет, код регистрации программы или нужная вам глава из книги 
- И красивая, и желтая страница.
+ РџСЂРёРјРµСЂС‹:
+ РћРЅ РёР·РѕР±СЂРµР» Рё СЃР°Рґ, Рё РѕРіРѕСЂРѕРґ.
+ Р СЃР°Рґ, Рё РѕРіРѕСЂРѕРґ РѕРЅ РёР·РѕР±СЂРµР». 
+ РЇ С…РѕС‡Сѓ Рё РїРёС‚СЊ, Рё РєСѓСЂРёС‚СЊ.
+ РќРµ РєСЂР°СЃРёРІР°СЏ, Р° Р¶РµР»С‚Р°СЏ СЃС‚СЂР°РЅРёС†Р° РІС‹РїР°Р»Р° РёР· РєРЅРёРіРё.
+ Р±СѓРґСЊ С‚Рѕ РґРѕСЃС‚СѓРї РІ РРЅС‚РµСЂРЅРµС‚, РєРѕРґ СЂРµРіРёСЃС‚СЂР°С†РёРё РїСЂРѕРіСЂР°РјРјС‹ РёР»Рё РЅСѓР¶РЅР°СЏ РІР°Рј РіР»Р°РІР° РёР· РєРЅРёРіРё 
+ Р РєСЂР°СЃРёРІР°СЏ, Рё Р¶РµР»С‚Р°СЏ СЃС‚СЂР°РЅРёС†Р°.
 
 */
 
@@ -411,11 +411,11 @@ bool CRusSentence::RuleForDisruptConjUnion(int iClauseNum)
 
 	CClause& pClauseRight = GetClause(iNxt);		
 	
-	//специальная проверка для союза "будь то ... , будь то"
+	//СЃРїРµС†РёР°Р»СЊРЅР°СЏ РїСЂРѕРІРµСЂРєР° РґР»СЏ СЃРѕСЋР·Р° "Р±СѓРґСЊ С‚Рѕ ... , Р±СѓРґСЊ С‚Рѕ"
 	bool bPredikatConj = false;
 	if (!pClauseLeft.m_vectorTypes.empty())
 		if ( pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo == pClauseLeft.m_iFirstWord )
-			if (GetWords()[pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo].m_strUpperWord == "БУДЬ")
+			if (GetWords()[pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo].m_strUpperWord == "Р‘РЈР”Р¬")
 				bPredikatConj = true;
 
 	vector<int> Types;
@@ -430,9 +430,9 @@ bool CRusSentence::RuleForDisruptConjUnion(int iClauseNum)
 		if (GetOpt()->m_DisruptConjGroupType == Types[i] )
 		{
 		  /*
-		    если вершина преовй клаузы был "будь", тогда первую клаузу
-			надо сдлеать пустыхой, поскольку она вошла в группа разрывных союзов
-			и параметры объед. клаузы нужно брать от второй клаузы
+		    РµСЃР»Рё РІРµСЂС€РёРЅР° РїСЂРµРѕРІР№ РєР»Р°СѓР·С‹ Р±С‹Р» "Р±СѓРґСЊ", С‚РѕРіРґР° РїРµСЂРІСѓСЋ РєР»Р°СѓР·Сѓ
+			РЅР°РґРѕ СЃРґР»РµР°С‚СЊ РїСѓСЃС‚С‹С…РѕР№, РїРѕСЃРєРѕР»СЊРєСѓ РѕРЅР° РІРѕС€Р»Р° РІ РіСЂСѓРїРїР° СЂР°Р·СЂС‹РІРЅС‹С… СЃРѕСЋР·РѕРІ
+			Рё РїР°СЂР°РјРµС‚СЂС‹ РѕР±СЉРµРґ. РєР»Р°СѓР·С‹ РЅСѓР¶РЅРѕ Р±СЂР°С‚СЊ РѕС‚ РІС‚РѕСЂРѕР№ РєР»Р°СѓР·С‹
 		  */
           if (bPredikatConj)
 		  {

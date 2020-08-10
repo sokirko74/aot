@@ -32,31 +32,31 @@ bool CRusSentence::SetClauseBorderIfThereAreTwoPotentialPredicates(int FWrd, int
 	for (int i = FWrd; i <= LWrd; i++)
 	{	
 	  bool bVerb = true;	
-	  //проверяю, что все омонимы одной словоформы являются предикат 	
+	  //РїСЂРѕРІРµСЂСЏСЋ, С‡С‚Рѕ РІСЃРµ РѕРјРѕРЅРёРјС‹ РѕРґРЅРѕР№ СЃР»РѕРІРѕС„РѕСЂРјС‹ СЏРІР»СЏСЋС‚СЃСЏ РїСЂРµРґРёРєР°С‚ 	
 	  for (j = 0; j < m_Words[i].GetHomonymsCount(); j++)
 	  {
 		  const CSynHomonym& Hom = m_Words[i].GetSynHomonym(j);
 
 		  if (!Hom.HasPos(VERB)) bVerb = false; 	
 
-	      if (Hom.IsLemma("БЫТЬ") && Hom.HasPos(INFINITIVE) )
+	      if (Hom.IsLemma("Р‘Р«РўР¬") && Hom.HasPos(INFINITIVE) )
 		  	nBeInf = i;
 
 		  if ( GetOpt()->GetGramTab()->IsStrongClauseRoot(Hom.m_iPoses))
 		  {
-				//не проверяю глагол "стать", т.к. он имеет омоним сущ-ного 
-				if (	Hom.IsLemma("БЫТЬ")
+				//РЅРµ РїСЂРѕРІРµСЂСЏСЋ РіР»Р°РіРѕР» "СЃС‚Р°С‚СЊ", С‚.Рє. РѕРЅ РёРјРµРµС‚ РѕРјРѕРЅРёРј СЃСѓС‰-РЅРѕРіРѕ 
+				if (	Hom.IsLemma("Р‘Р«РўР¬")
 					&&!( Hom.HasGrammem(rPresentTense) && Hom.HasPos(VERB) ) )
 				{
 					iBe++;
 					nBe = i;
 					break;
 				}
-				//глаголы, которые не являются самостоятельным предикатом или суть ан.ф.
-				if (!Hom.IsLemma("ДАВАТЬ")&&
-					!Hom.IsLemma("СТАНОВИТЬСЯ") &&
-					!Hom.IsLemma("ОКАЗАТЬСЯ")&&
-					!Hom.IsLemma("СТАТЬ"))
+				//РіР»Р°РіРѕР»С‹, РєРѕС‚РѕСЂС‹Рµ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅС‹Рј РїСЂРµРґРёРєР°С‚РѕРј РёР»Рё СЃСѓС‚СЊ Р°РЅ.С„.
+				if (!Hom.IsLemma("Р”РђР’РђРўР¬")&&
+					!Hom.IsLemma("РЎРўРђРќРћР’РРўР¬РЎРЇ") &&
+					!Hom.IsLemma("РћРљРђР—РђРўР¬РЎРЇ")&&
+					!Hom.IsLemma("РЎРўРђРўР¬"))
 					continue;
 
 		  }
@@ -76,20 +76,20 @@ bool CRusSentence::SetClauseBorderIfThereAreTwoPotentialPredicates(int FWrd, int
 	}	
 	
 	assert(iPredicCount < 4);
-	//случай, когда аналитическая форма может быть инфинитивом:
-	//'может быть автоматизирован'
+	//СЃР»СѓС‡Р°Р№, РєРѕРіРґР° Р°РЅР°Р»РёС‚РёС‡РµСЃРєР°СЏ С„РѕСЂРјР° РјРѕР¶РµС‚ Р±С‹С‚СЊ РёРЅС„РёРЅРёС‚РёРІРѕРј:
+	//'РјРѕР¶РµС‚ Р±С‹С‚СЊ Р°РІС‚РѕРјР°С‚РёР·РёСЂРѕРІР°РЅ'
 	CIntVector dummyVector;
 	int DummyHomonymNo;
 	if ( (2 == iPredicCount) && (-1 != nBeInf) && (-1 != nAnalytPredic) )
 		if ( IsAnalyticalVerbForm(nBeInf, nAnalytPredic, DummyHomonymNo, dummyVector) )
 			return false;
 
-	//если два предиката в одной клаузе, восстанавливаю запятую	
+	//РµСЃР»Рё РґРІР° РїСЂРµРґРёРєР°С‚Р° РІ РѕРґРЅРѕР№ РєР»Р°СѓР·Рµ, РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°СЋ Р·Р°РїСЏС‚СѓСЋ	
 	if	(		(2 <= iPredicCount) 
 			||	(2 == iBe) 
 			||	(1 == iVerb && 1 == iBe) 
 			||	( 		
-					//если вспомогательный глагол и предикат не образуют ан. ф., восстанавливаю запятую
+					//РµСЃР»Рё РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РіР»Р°РіРѕР» Рё РїСЂРµРґРёРєР°С‚ РЅРµ РѕР±СЂР°Р·СѓСЋС‚ Р°РЅ. С„., РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°СЋ Р·Р°РїСЏС‚СѓСЋ
 						(1 == iPredicCount)
 					&&	(1 == iBe)
 					&&	(nBe != -1)

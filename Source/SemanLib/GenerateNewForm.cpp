@@ -140,7 +140,7 @@ static void GenerateNewWordFormAndAdjustCoordination (CRusSemStructure& R, int N
 	R.GetOutcomingRelations(NodeNo, Rels);
 	for (size_t i=0; i <Rels.size(); i++)
 	{
-		if (R.m_Relations[Rels[i]].m_SyntacticRelation == "ÏÐÈË_ÑÓÙ")
+		if (R.m_Relations[Rels[i]].m_SyntacticRelation == "ÐŸÐ Ð˜Ð›_Ð¡Ð£Ð©")
 			GenerateCoordinatedNodes(R,Rels[i], NewGrammems, OldGrammems);
 
 	};
@@ -153,7 +153,7 @@ static void GenerateNewWordFormAndAdjustCoordination (CRusSemStructure& R, int N
 		long RelNo = RelSet.m_Rels[i];
 		if (R.m_Relations[RelNo].m_bDopRelation) continue;
 
-		if (R.m_Relations[RelNo].m_SyntacticRelation == "ïîäë")
+		if (R.m_Relations[RelNo].m_SyntacticRelation == "Ð¿Ð¾Ð´Ð»")
 			GeneratePredicateBySubject(R,RelNo, NewGrammems, OldGrammems);
 	};
 

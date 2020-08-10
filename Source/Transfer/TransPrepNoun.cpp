@@ -31,7 +31,7 @@ string CEngSemStructure::GetPrep(const TCortege& cortege, DictTypeEnum type)
 	return strPrep;
 }
 
-//переводит русский предлог с помощью поля PREP
+//РїРµСЂРµРІРѕРґРёС‚ СЂСѓСЃСЃРєРёР№ РїСЂРµРґР»РѕРі СЃ РїРѕРјРѕС‰СЊСЋ РїРѕР»СЏ PREP
 string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,int  iRusActant,CEngSemNode&  engActantm)
 {
 	assert( iRusActant != -1 );
@@ -87,7 +87,7 @@ bool CEngSemStructure::Rule_TranslateRelWithPrepField( int iRusActant, long Rela
 		return false;
 	const CSemRelation& semRusRel = *RusStr.GetRelation(semEngRel.m_RusRel);	
 
-	//если статье описан особый случай перевода этого предлога
+	//РµСЃР»Рё СЃС‚Р°С‚СЊРµ РѕРїРёСЃР°РЅ РѕСЃРѕР±С‹Р№ СЃР»СѓС‡Р°Р№ РїРµСЂРµРІРѕРґР° СЌС‚РѕРіРѕ РїСЂРµРґР»РѕРіР°
 	string strPrep = HasParticularPrepInField(pRossDoc, iRusActant, engActant);
 	if( !strPrep.empty())
 	{
@@ -118,7 +118,7 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 
 	CRossHolder* pLocRossDoc = GetRossHolder(LocRoss);
 
-	//если есть лексическая функция Loc у англ. слова
+	//РµСЃР»Рё РµСЃС‚СЊ Р»РµРєСЃРёС‡РµСЃРєР°СЏ С„СѓРЅРєС†РёСЏ Loc Сѓ Р°РЅРіР». СЃР»РѕРІР°
 	CLexicalFunctionField LexicalFunct("","");
 	CDictUnitInterp UnitInterp;
 	UnitInterp.m_DictType = engActant.GetType();
@@ -133,8 +133,8 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 		return false;
 //
 	int iPrepPhr = NumPrepPhr(GramCorteges, engNode.GetType());
-	//если нет PREP_PHR то берем первый попавшийся предлог( вообще лучше сначала свериться с Путринским переводом и выбрать 
-	//тот предлого, который тот вернет( если ок один из тех, что в АОССе))
+	//РµСЃР»Рё РЅРµС‚ PREP_PHR С‚Рѕ Р±РµСЂРµРј РїРµСЂРІС‹Р№ РїРѕРїР°РІС€РёР№СЃСЏ РїСЂРµРґР»РѕРі( РІРѕРѕР±С‰Рµ Р»СѓС‡С€Рµ СЃРЅР°С‡Р°Р»Р° СЃРІРµСЂРёС‚СЊСЃСЏ СЃ РџСѓС‚СЂРёРЅСЃРєРёРј РїРµСЂРµРІРѕРґРѕРј Рё РІС‹Р±СЂР°С‚СЊ 
+	//С‚РѕС‚ РїСЂРµРґР»РѕРіРѕ, РєРѕС‚РѕСЂС‹Р№ С‚РѕС‚ РІРµСЂРЅРµС‚( РµСЃР»Рё РѕРє РѕРґРёРЅ РёР· С‚РµС…, С‡С‚Рѕ РІ РђРћРЎРЎРµ))
 	if( iPrepPhr==-1 )
 	{
 		string strPrep = GetPrep(GramCorteges[0], engNode.GetType());
@@ -146,7 +146,7 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 			return true;
 		}
 	}
-	//если есть PREP_PHR, то выбрать ничего не можем - переводим синтаксисом	
+	//РµСЃР»Рё РµСЃС‚СЊ PREP_PHR, С‚Рѕ РІС‹Р±СЂР°С‚СЊ РЅРёС‡РµРіРѕ РЅРµ РјРѕР¶РµРј - РїРµСЂРµРІРѕРґРёРј СЃРёРЅС‚Р°РєСЃРёСЃРѕРј	
 	else
 	{
 		semEngRel.m_SynReal.m_Cortege = GramCorteges[iPrepPhr]; 

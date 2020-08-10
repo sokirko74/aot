@@ -168,7 +168,7 @@ BOOL CDemoDlg::OnInitDialog()
 			AfxMessageBox("Fatal Error: German agramtab creation failed");
 			return FALSE;
 		}
-	//	Грузим словари
+	//	Р“СЂСѓР·РёРј СЃР»РѕРІР°СЂРё
 		m_bGerAgramLoaded = false;	
 		m_bGermanLoaded = false;
 		hr = m_piGerman->raw_LoadDictionariesRegistry();
@@ -179,7 +179,7 @@ BOOL CDemoDlg::OnInitDialog()
 			if (!FAILED(hr))
 				m_bGerAgramLoaded=true;
 		}
-	//	Выставляем свойства
+	//	Р’С‹СЃС‚Р°РІР»СЏРµРј СЃРІРѕР№СЃС‚РІР°
 		m_piGerman->UseStatistic = FALSE;
 	};
 
@@ -358,7 +358,7 @@ void CDemoDlg::OnButtonFind()
 		Languages.push_back(InterfaceToEnum(m_iLang));
 
 
-	// проверяем, что все src состоит  только из цифр, тогда запускаем CreateParadigmFromID
+	// РїСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РІСЃРµ src СЃРѕСЃС‚РѕРёС‚  С‚РѕР»СЊРєРѕ РёР· С†РёС„СЂ, С‚РѕРіРґР° Р·Р°РїСѓСЃРєР°РµРј CreateParadigmFromID
 	size_t i=0;
 	for (; i < src_str.length(); i++)
 		if (!isdigit((unsigned char)src_str[i]))
@@ -394,7 +394,7 @@ void CDemoDlg::OnButtonFind()
 		std::string result;
 		
 		
-	//	Распечатываем парадигмы
+	//	Р Р°СЃРїРµС‡Р°С‚С‹РІР°РµРј РїР°СЂР°РґРёРіРјС‹
 		i=0;
 		while (true)
 		{

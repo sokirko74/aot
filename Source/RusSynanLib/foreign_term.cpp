@@ -7,15 +7,15 @@
 
 
 
-//цепочка иностранных лексем
+//С†РµРїРѕС‡РєР° РёРЅРѕСЃС‚СЂР°РЅРЅС‹С… Р»РµРєСЃРµРј
 bool CRusFormatCaller::format_for_foreign_term(CGroup& G)
 {
     if( W1.HasFlag(fl_ile) )
 	 {
 		   for (int j = G.m_iFirstWord; (j < sent.size()) &&  (sent[j].HasFlag(fl_ile) 
-			   || (sent[j].HasFlag(fl_digit) && j>G.m_iFirstWord && is_english_upper(sent[j-1].get_word()[0]))); j++) //Corning представит Gorilla Glass 3 на CES 2013
+			   || (sent[j].HasFlag(fl_digit) && j>G.m_iFirstWord && is_english_upper(sent[j-1].get_word()[0]))); j++) //Corning РїСЂРµРґСЃС‚Р°РІРёС‚ Gorilla Glass 3 РЅР° CES 2013
 		   {
-			   // возможно, что иностранная лексема вошла куда-то, тогда надо выйти
+			   // РІРѕР·РјРѕР¶РЅРѕ, С‡С‚Рѕ РёРЅРѕСЃС‚СЂР°РЅРЅР°СЏ Р»РµРєСЃРµРјР° РІРѕС€Р»Р° РєСѓРґР°-С‚Рѕ, С‚РѕРіРґР° РЅР°РґРѕ РІС‹Р№С‚Рё
 			   if (get_maximal_group(j).size() > 1) return false;
 			   G.m_iLastWord = j;
 		   }
@@ -25,7 +25,7 @@ bool CRusFormatCaller::format_for_foreign_term(CGroup& G)
 		   G.m_MainGroup.m_iFirstWord = G.m_iFirstWord;
 		   G.m_MainGroup.m_iLastWord = G.m_iLastWord;
 		   G.m_GroupType = FOREIGN_TERM;
-		   G.m_Cause = "Правило для иностранных лексем.";
+		   G.m_Cause = "РџСЂР°РІРёР»Рѕ РґР»СЏ РёРЅРѕСЃС‚СЂР°РЅРЅС‹С… Р»РµРєСЃРµРј.";
 		   return true;
 	 }
 	else

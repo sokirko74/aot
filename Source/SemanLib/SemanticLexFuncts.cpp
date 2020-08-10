@@ -42,10 +42,10 @@ bool			IsOper (const string& LexFunct)
 		    	  ||  IsOper2(LexFunct)
 				  ||  IsOper3(LexFunct)
   				  /*
-				    CausFunc0 не совсем  правильно сюда включать, поскольку
-					подлежащим для этой функции будет  слово, которое не является 
-					участником  ситуации (каузатор). Но эта функция похожа 
-					на Operi тем, что ситуация является прямым дополнением.
+				    CausFunc0 РЅРµ СЃРѕРІСЃРµРј  РїСЂР°РІРёР»СЊРЅРѕ СЃСЋРґР° РІРєР»СЋС‡Р°С‚СЊ, РїРѕСЃРєРѕР»СЊРєСѓ
+					РїРѕРґР»РµР¶Р°С‰РёРј РґР»СЏ СЌС‚РѕР№ С„СѓРЅРєС†РёРё Р±СѓРґРµС‚  СЃР»РѕРІРѕ, РєРѕС‚РѕСЂРѕРµ РЅРµ СЏРІР»СЏРµС‚СЃСЏ 
+					СѓС‡Р°СЃС‚РЅРёРєРѕРј  СЃРёС‚СѓР°С†РёРё (РєР°СѓР·Р°С‚РѕСЂ). РќРѕ СЌС‚Р° С„СѓРЅРєС†РёСЏ РїРѕС…РѕР¶Р° 
+					РЅР° Operi С‚РµРј, С‡С‚Рѕ СЃРёС‚СѓР°С†РёСЏ СЏРІР»СЏРµС‚СЃСЏ РїСЂСЏРјС‹Рј РґРѕРїРѕР»РЅРµРЅРёРµРј.
 				  */
 				  || (LexFunct == "CausFunc0")
 				  ;
@@ -172,9 +172,9 @@ void AddByLemma(const vector<SLexFunIndexes>& base, string Lemma, vector<CDictRe
 };
 
 /*
- эти функции были написаны, чтобы просчитать 
- семантическое сходство первой и последней клауз в следующем предложении
- "Его ударил тот мужчина, который был в красной куртке, а полицейский их разнял"
+ СЌС‚Рё С„СѓРЅРєС†РёРё Р±С‹Р»Рё РЅР°РїРёСЃР°РЅС‹, С‡С‚РѕР±С‹ РїСЂРѕСЃС‡РёС‚Р°С‚СЊ 
+ СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕРµ СЃС…РѕРґСЃС‚РІРѕ РїРµСЂРІРѕР№ Рё РїРѕСЃР»РµРґРЅРµР№ РєР»Р°СѓР· РІ СЃР»РµРґСѓСЋС‰РµРј РїСЂРµРґР»РѕР¶РµРЅРёРё
+ "Р•РіРѕ СѓРґР°СЂРёР» С‚РѕС‚ РјСѓР¶С‡РёРЅР°, РєРѕС‚РѕСЂС‹Р№ Р±С‹Р» РІ РєСЂР°СЃРЅРѕР№ РєСѓСЂС‚РєРµ, Р° РїРѕР»РёС†РµР№СЃРєРёР№ РёС… СЂР°Р·РЅСЏР»"
 */
 void CRusSemStructure::FindConnectedSituations(long NodeNo) 
 {
@@ -189,11 +189,11 @@ void CRusSemStructure::FindConnectedSituations(long NodeNo)
 }
 
 /*
- для всех существительных находит глаголы, для которых эти существительные являются S0
- например, у "постановки" должна быть ссылка на глагол "ставить"
- поскольку S0(ставить) = "постановка"
- Это нужно, чтобы провести LF S0.Oper от слова "вопрос" к слову  "постановка" во 
- фразе  "постановка вопроса"
+ РґР»СЏ РІСЃРµС… СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹С… РЅР°С…РѕРґРёС‚ РіР»Р°РіРѕР»С‹, РґР»СЏ РєРѕС‚РѕСЂС‹С… СЌС‚Рё СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅС‹Рµ СЏРІР»СЏСЋС‚СЃСЏ S0
+ РЅР°РїСЂРёРјРµСЂ, Сѓ "РїРѕСЃС‚Р°РЅРѕРІРєРё" РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЃСЃС‹Р»РєР° РЅР° РіР»Р°РіРѕР» "СЃС‚Р°РІРёС‚СЊ"
+ РїРѕСЃРєРѕР»СЊРєСѓ S0(СЃС‚Р°РІРёС‚СЊ) = "РїРѕСЃС‚Р°РЅРѕРІРєР°"
+ Р­С‚Рѕ РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ РїСЂРѕРІРµСЃС‚Рё LF S0.Oper РѕС‚ СЃР»РѕРІР° "РІРѕРїСЂРѕСЃ" Рє СЃР»РѕРІСѓ  "РїРѕСЃС‚Р°РЅРѕРІРєР°" РІРѕ 
+ С„СЂР°Р·Рµ  "РїРѕСЃС‚Р°РЅРѕРІРєР° РІРѕРїСЂРѕСЃР°"
 */
 
 void CRusSemStructure::FindVerbsOfS0(long NodeNo) 
@@ -227,7 +227,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 	vector<CLexicalFunctionField>::const_iterator It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), ParamNode.m_Words[ParamNode.m_MainWordNo].m_Lemma);
 	if (It == SitNode.m_LexFunctFields.end())
 	{
-		// поищем среди эквивалентов
+		// РїРѕРёС‰РµРј СЃСЂРµРґРё СЌРєРІРёРІР°Р»РµРЅС‚РѕРІ
 		const CRusSemWord& W = 	ParamNode.m_Words[ParamNode.m_MainWordNo];
 		for (long j=0; j < W.m_WordEquals.size(); j++)
 		{
@@ -236,13 +236,13 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 		}
 	};
 	/*
-	параметр может  быть словосочетанием 
-	Например: IncepOper1 (ответственность) = взять_на_себя
+	РїР°СЂР°РјРµС‚СЂ РјРѕР¶РµС‚  Р±С‹С‚СЊ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРµРј 
+	РќР°РїСЂРёРјРµСЂ: IncepOper1 (РѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕСЃС‚СЊ) = РІР·СЏС‚СЊ_РЅР°_СЃРµР±СЏ
 	*/
 	if (It == SitNode.m_LexFunctFields.end())
 		if (ParamNode.GetType() == CollocRoss)
 		{
-			// берем TITLЕ	  
+			// Р±РµСЂРµРј TITLР•	  
 			string UnitStr = GetRoss(CollocRoss)->GetEntryStr(ParamNode.GetInterp()->m_UnitNo);
 			EngRusMakeUpper(UnitStr);
 			It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), UnitStr);
@@ -250,12 +250,12 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 
 
 	/*
-	строим LF SO.Oper типа "постановка вопроса"
+	СЃС‚СЂРѕРёРј LF SO.Oper С‚РёРїР° "РїРѕСЃС‚Р°РЅРѕРІРєР° РІРѕРїСЂРѕСЃР°"
 	*/
 	bool bS0 = false;
 	if (It == SitNode.m_LexFunctFields.end())
 	{
-		// поищем среди V0
+		// РїРѕРёС‰РµРј СЃСЂРµРґРё V0
 		for (long j=0; j < ParamNode.m_VerbsOfS0.size(); j++)
 		{
 			It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), ParamNode.m_VerbsOfS0[j]);
@@ -275,14 +275,14 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 		)
 		return;
 
-	// если не совпало по номеру значения
+	// РµСЃР»Рё РЅРµ СЃРѕРІРїР°Р»Рѕ РїРѕ РЅРѕРјРµСЂСѓ Р·РЅР°С‡РµРЅРёСЏ
 	if (It->m_MeanNum != -1)
 		if (ParamNode.GetInterp() != 0)
 			if ( GetRoss(ParamNode.GetInterp()->m_DictType)->GetUnitMeanNum(ParamNode.GetInterp()->m_UnitNo) != It->m_MeanNum)
 				return;  
 
 	/*
-	Для Func надо проверить, что слово-ситуация имеет номинатив
+	Р”Р»СЏ Func РЅР°РґРѕ РїСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ СЃР»РѕРІРѕ-СЃРёС‚СѓР°С†РёСЏ РёРјРµРµС‚ РЅРѕРјРёРЅР°С‚РёРІ
 	*/
 	if (!bS0)
 		if (IsFunc(It->m_LexFunct))
@@ -290,11 +290,11 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 				return;
 
 	/*
-	для  Оперов загружаем вторую валентность, и проверям, что
-	слово-ситуация подпадает под этот шаблон.
-	Проверку не нужно делать, если мы имеем дело с S0.Oper
-	Проверку не нужно делать, если мы строим межклаузную LF
-	например: "реформы, проведенные в прошлом году"
+	РґР»СЏ  РћРїРµСЂРѕРІ Р·Р°РіСЂСѓР¶Р°РµРј РІС‚РѕСЂСѓСЋ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ, Рё РїСЂРѕРІРµСЂСЏРј, С‡С‚Рѕ
+	СЃР»РѕРІРѕ-СЃРёС‚СѓР°С†РёСЏ РїРѕРґРїР°РґР°РµС‚ РїРѕРґ СЌС‚РѕС‚ С€Р°Р±Р»РѕРЅ.
+	РџСЂРѕРІРµСЂРєСѓ РЅРµ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ, РµСЃР»Рё РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ S0.Oper
+	РџСЂРѕРІРµСЂРєСѓ РЅРµ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ, РµСЃР»Рё РјС‹ СЃС‚СЂРѕРёРј РјРµР¶РєР»Р°СѓР·РЅСѓСЋ LF
+	РЅР°РїСЂРёРјРµСЂ: "СЂРµС„РѕСЂРјС‹, РїСЂРѕРІРµРґРµРЅРЅС‹Рµ РІ РїСЂРѕС€Р»РѕРј РіРѕРґСѓ"
 	*/
 	if (!bS0)
 		if (ParamNode.m_ClauseNo == SitNode.m_ClauseNo)
@@ -321,7 +321,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 			};
 
 
-	//ведем стрелку от слова ситуации в присвязочный глагол
+	//РІРµРґРµРј СЃС‚СЂРµР»РєСѓ РѕС‚ СЃР»РѕРІР° СЃРёС‚СѓР°С†РёРё РІ РїСЂРёСЃРІСЏР·РѕС‡РЅС‹Р№ РіР»Р°РіРѕР»
 	string LexFunctName = It->m_LexFunct;
 	if (bS0) LexFunctName = "S0."+LexFunctName;
 	m_LexFuncts.push_back (CLexFunctRel(SitNodeNo, ParamNodeNo, LexFunctName));
@@ -329,7 +329,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 
 void CRusSemStructure::BuildVerbLexFunctParameter(long ClauseNo) 
 {
-   // создаем узлы на лексических функциях из двух узлов 
+   // СЃРѕР·РґР°РµРј СѓР·Р»С‹ РЅР° Р»РµРєСЃРёС‡РµСЃРєРёС… С„СѓРЅРєС†РёСЏС… РёР· РґРІСѓС… СѓР·Р»РѕРІ 
    for (long i =0; i < m_Nodes.size(); i++)
      if (      IsInClause(i, ClauseNo) 
 		 	&& m_Nodes[i].IsWordContainer()
@@ -365,18 +365,18 @@ void CRusSemStructure::BuildAdjOrAdvLexFunctParamNodes(long ClauseNo)
 		 vector<long> Nodes;
 		 vector<long> Rels;
 		 GetOutcomingSynRelations(NodeNo, Rels);
-		 // формируем множество узлов, которые могут быть лексическими функциями типа Magn  
+		 // С„РѕСЂРјРёСЂСѓРµРј РјРЅРѕР¶РµСЃС‚РІРѕ СѓР·Р»РѕРІ, РєРѕС‚РѕСЂС‹Рµ РјРѕРіСѓС‚ Р±С‹С‚СЊ Р»РµРєСЃРёС‡РµСЃРєРёРјРё С„СѓРЅРєС†РёСЏРјРё С‚РёРїР° Magn  
 		 for (long i=0; i < Rels.size(); i++)
-			 if  (   (m_SynRelations[Rels[i]].m_SynRelName == "ПРИЛ_СУЩ")
-				  || (m_SynRelations[Rels[i]].m_SynRelName == "НАРЕЧ_ГЛАГОЛ")
+			 if  (   (m_SynRelations[Rels[i]].m_SynRelName == "РџР РР›_РЎРЈР©")
+				  || (m_SynRelations[Rels[i]].m_SynRelName == "РќРђР Р•Р§_Р“Р›РђР“РћР›")
 				 )
 			 {
 				 vector<long> Rels1;
 				 GetOutcomingSynRelations(m_SynRelations[Rels[i]].m_TargetNodeNo, Rels1);
 				 bool b = false;;
 				 for (long l=0; l < Rels1.size(); l++)
-                   if  (   (m_SynRelations[Rels1[l]].m_SynRelName == "ОДНОР_ПРИЛ")
-					     ||(m_SynRelations[Rels1[l]].m_SynRelName == "ОДНОР_НАР")
+                   if  (   (m_SynRelations[Rels1[l]].m_SynRelName == "РћР”РќРћР _РџР РР›")
+					     ||(m_SynRelations[Rels1[l]].m_SynRelName == "РћР”РќРћР _РќРђР ")
 					   )
 				   {
 					   Nodes.push_back(m_SynRelations[Rels1[l]].m_TargetNodeNo);
@@ -392,7 +392,7 @@ void CRusSemStructure::BuildAdjOrAdvLexFunctParamNodes(long ClauseNo)
 		 {
 			 vector<CLexicalFunctionField>::const_iterator It = find(m_Nodes[NodeNo].m_LexFunctFields.begin(), m_Nodes[NodeNo].m_LexFunctFields.end(), m_Nodes[Nodes[i]].m_Words[0].m_Lemma);
 		   if (It == m_Nodes[NodeNo].m_LexFunctFields.end()) continue;
-		   //ведем стрелку от слова ситуации в LF
+		   //РІРµРґРµРј СЃС‚СЂРµР»РєСѓ РѕС‚ СЃР»РѕРІР° СЃРёС‚СѓР°С†РёРё РІ LF
             m_LexFuncts.push_back (CLexFunctRel(NodeNo, Nodes[i], It->m_LexFunct));
 		 };
 

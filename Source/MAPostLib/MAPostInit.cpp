@@ -137,14 +137,14 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 		};
 
 	
-		//ÔÓÎÛ˜‡ÂÏ ËÁ ÏÓÙÓÎÓ„ËË ÍÓ‰ Õ≈”¡»¬¿…Ã≈Õﬂ (ÌÂËÁÏÂÌˇÂÏÏÓÂ ÒÛ˘ÂÒÚ‚ËÚÂÎ¸ÌÓÂ ‚ÒÂı Ó‰Ó‚)
+		//–ø–æ–ª—É—á–∞–µ–º –∏–∑ –º–æ—Ä—Ñ–æ–ª–æ–≥–∏–∏ –∫–æ–¥ –ù–ï–£–ë–ò–í–ê–ô–ú–ï–ù–Ø (–Ω–µ–∏–∑–º–µ–Ω—è–µ–º–º–æ–µ —Å—É—â–µ—Å—Ç–≤–∏—Ç–µ–ª—å–Ω–æ–µ –≤—Å–µ—Ö —Ä–æ–¥–æ–≤)
 		BYTE POS;
 		QWORD Grammems;
-		if (    !m_pRusGramTab->ProcessPOSAndGrammemsIfCan(" — Ï,Ê,Ò,ÏÌ,Â‰,ËÏ,‰,‰Ú,‚Ì,Ú‚,Ô",&POS, &Grammems) 
+		if (    !m_pRusGramTab->ProcessPOSAndGrammemsIfCan(" –° –º—Ä,–∂—Ä,—Å—Ä,–º–Ω,–µ–¥,–∏–º,—Ä–¥,–¥—Ç,–≤–Ω,—Ç–≤,–ø—Ä",&POS, &Grammems) 
 			 || !m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (POS, Grammems, m_DURNOVOGramCode)
 		   )
 		{
-			ErrorMessage ("MAPOST", "Cannot parse string for Õ≈”¡»¬¿…Ã≈Õﬂ");
+			ErrorMessage ("MAPOST", "Cannot parse string for –ù–ï–£–ë–ò–í–ê–ô–ú–ï–ù–Ø");
 			return false;
 		};
 	    

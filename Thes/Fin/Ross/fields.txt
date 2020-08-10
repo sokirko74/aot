@@ -1,60 +1,60 @@
 12
 20347;1;EXM;M;FALSE;10
-149;10;D_EXM;_ИЛЛ
+149;10;D_EXM;_РР›Р›
 
 512;1;CAT;F;FALSE;80
-5;0;D_CAT;_КА
+5;0;D_CAT;_РљРђ
 
 501;11;GF;F;TRUE;100
-84;10;D_GF_MAIN;Главное слово
+84;10;D_GF_MAIN;Р“Р»Р°РІРЅРѕРµ СЃР»РѕРІРѕ
 153;11;D_BOOL ;---
 154;12;D_1 ;---
-130;20;D_SYN_FUNCT;Роль
-87;30;D_SYN_FUNCT D_COLON D_PHR_SPECIF;Роль:УточнГруппа
-95;40;D_SYN_FUNCT D_COLON D_1;Роль:НачГруппы+УточнГруппа
-151;90;D_SYN_FUNCT D_COLON D_MUA D_COLON D_PHR_SPECIF;Роль:МНА:УточнГруппа
-152;100;D_SYN_FUNCT D_COLON D_MUA D_COLON D_1;Роль:МНА:НачГруппы+УточнГруппа
-131;110;D_SYN_FUNCT D_COLON D_WORDFORM;Роль:Словоформа
-148;120;D_POSITION D_SYN_FUNCT D_COLON D_PHR_SPECIF;Полож Роль:Уточн
+130;20;D_SYN_FUNCT;Р РѕР»СЊ
+87;30;D_SYN_FUNCT D_COLON D_PHR_SPECIF;Р РѕР»СЊ:РЈС‚РѕС‡РЅР“СЂСѓРїРїР°
+95;40;D_SYN_FUNCT D_COLON D_1;Р РѕР»СЊ:РќР°С‡Р“СЂСѓРїРїС‹+РЈС‚РѕС‡РЅР“СЂСѓРїРїР°
+151;90;D_SYN_FUNCT D_COLON D_MUA D_COLON D_PHR_SPECIF;Р РѕР»СЊ:РњРќРђ:РЈС‚РѕС‡РЅР“СЂСѓРїРїР°
+152;100;D_SYN_FUNCT D_COLON D_MUA D_COLON D_1;Р РѕР»СЊ:РњРќРђ:РќР°С‡Р“СЂСѓРїРїС‹+РЈС‚РѕС‡РЅР“СЂСѓРїРїР°
+131;110;D_SYN_FUNCT D_COLON D_WORDFORM;Р РѕР»СЊ:РЎР»РѕРІРѕС„РѕСЂРјР°
+148;120;D_POSITION D_SYN_FUNCT D_COLON D_PHR_SPECIF;РџРѕР»РѕР¶ Р РѕР»СЊ:РЈС‚РѕС‡РЅ
 155;130;D_PART_OF_SPEECH ;---
 
 503;1;RESTR;O;FALSE;160
-49;0;D_NUMBER D_EXCL_MARK;ОГРН_1
+49;0;D_NUMBER D_EXCL_MARK;РћР“Р Рќ_1
 
 502;9;SF;F;TRUE;170
-152;8;D_FIELDS D_OPN D_NUMBERS D_CLS;ПОЛЕ_АКТАНТА
-151;9;D_FIELDS D_OPN D_CLS;ПОЛЕ
-91;10;D_SEM_REL;СО
-150;20;D_SF;СХ
+152;8;D_FIELDS D_OPN D_NUMBERS D_CLS;РџРћР›Р•_РђРљРўРђРќРўРђ
+151;9;D_FIELDS D_OPN D_CLS;РџРћР›Р•
+91;10;D_SEM_REL;РЎРћ
+150;20;D_SF;РЎРҐ
 153;25;D_LF D_OPN D_ENGL D_CLS ;---
-109;30;D_LF D_OPN D_RLE D_NUMBERS D_CLS;ЛФ+ЛЕ+ЗНАЧ
-110;40;D_LF D_OPN D_RLE D_CLS;ЛФ+ЛЕ
-116;50;D_LF;ЛФ
+109;30;D_LF D_OPN D_RLE D_NUMBERS D_CLS;Р›Р¤+Р›Р•+Р—РќРђР§
+110;40;D_LF D_OPN D_RLE D_CLS;Р›Р¤+Р›Р•
+116;50;D_LF;Р›Р¤
 154;70;D_HYPHEN ;---
 
 511;2;VAL;M;FALSE;190
-14;0;D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS;ВАЛ_1
-15;1;D_SEM_REL D_OPN  D_ACTANTS D_COMMA D_ACTANTS D_CLS;ВАЛ_2
+14;0;D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS;Р’РђР›_1
+15;1;D_SEM_REL D_OPN  D_ACTANTS D_COMMA D_ACTANTS D_CLS;Р’РђР›_2
 
 1100;2;AUX;M;FALSE;3100
-102;1;D_SEM_REL D_OPN D_ACTANTS D_COMMA D_ACTANTS D_CLS;_ДОП
-103;2;D_SEM_REL D_OPN D_ACTANTS D_COMMA D_RLE_PLUS D_CLS;_ДОП_СЛОВО
+102;1;D_SEM_REL D_OPN D_ACTANTS D_COMMA D_ACTANTS D_CLS;_Р”РћРџ
+103;2;D_SEM_REL D_OPN D_ACTANTS D_COMMA D_RLE_PLUS D_CLS;_Р”РћРџ_РЎР›РћР’Рћ
 
 505;7;LF;M;FALSE;3110
-7;10;D_LF  D_COLON D_PREP D_PLUS D_CASE;Предлог+падеж
-146;11;D_LF  D_COLON D_RLE D_1;ЛЕ+предлог+падеж
-147;12;D_LF  D_COLON D_RLE D_CASE;ЛЕ+падеж
+7;10;D_LF  D_COLON D_PREP D_PLUS D_CASE;РџСЂРµРґР»РѕРі+РїР°РґРµР¶
+146;11;D_LF  D_COLON D_RLE D_1;Р›Р•+РїСЂРµРґР»РѕРі+РїР°РґРµР¶
+147;12;D_LF  D_COLON D_RLE D_CASE;Р›Р•+РїР°РґРµР¶
 148;13;D_LF D_COLON D_ENGL ;---
-145;20;D_LF D_COLON D_RLE D_NUMBERS;Двоеточие+ЛЕ+Знач
-96;30;D_LF D_COLON D_RLE_PLUS;Двоеточие+ЛЕ
-94;40;D_LF D_DASH D_RLE_PLUS;Черта+ЛЕ
+145;20;D_LF D_COLON D_RLE D_NUMBERS;Р”РІРѕРµС‚РѕС‡РёРµ+Р›Р•+Р—РЅР°С‡
+96;30;D_LF D_COLON D_RLE_PLUS;Р”РІРѕРµС‚РѕС‡РёРµ+Р›Р•
+94;40;D_LF D_DASH D_RLE_PLUS;Р§РµСЂС‚Р°+Р›Р•
 
 1000;2;LEX;F;TRUE;240
-1;10;D_NUMBERS;ЦИФРЫ
-0;20;D_RLE_PLUS;ЛЕ_ПЛЮС
+1;10;D_NUMBERS;Р¦РР¤Р Р«
+0;20;D_RLE_PLUS;Р›Р•_РџР›Р®РЎ
 
 0;2;DETERM;O;FALSE;0
-1;1;D_ENGL;артикль
+1;1;D_ENGL;Р°СЂС‚РёРєР»СЊ
 2;2;D_BOOL ;no_name
 
 0;1;COMM;M;FALSE;3111

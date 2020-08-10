@@ -251,7 +251,7 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 	POSITION pos = m_WordList.GetFirstSelectedItemPosition();
 	if (pos != 0)
 		UnitNo = m_WordList.GetNextSelectedItem(pos);
-	m_UnitsSize.Format ("Cловарный вход %i (из %i)",    UnitNo+1, m_WordList.GetItemCount());
+	m_UnitsSize.Format ("CР»РѕРІР°СЂРЅС‹Р№ РІС…РѕРґ %i (РёР· %i)",    UnitNo+1, m_WordList.GetItemCount());
 	//UpdateData(FALSE);
 }
 
@@ -272,7 +272,7 @@ void CWordList::Update()
 
 void CWordList::BuildIndex()  
 { 
-	// для тезаурусных РОССов строится свой индекс в самом начале, который не меняется
+	// РґР»СЏ С‚РµР·Р°СѓСЂСѓСЃРЅС‹С… Р РћРЎРЎРѕРІ СЃС‚СЂРѕРёС‚СЃСЏ СЃРІРѕР№ РёРЅРґРµРєСЃ РІ СЃР°РјРѕРј РЅР°С‡Р°Р»Рµ, РєРѕС‚РѕСЂС‹Р№ РЅРµ РјРµРЅСЏРµС‚СЃСЏ
 	if (GetDocument()->IsThesRoss())
 	{
 		long Count = GetRoss()->GetUnitsSize();
@@ -292,8 +292,8 @@ void CWordList::BuildIndex()
 		CIndex I;
 		I.UnitNo = (!IsFiltered()) ? i : GetRoss()->GetSelectedUnitNo(i);
 
-		if (m_Sorted != SortByLemma) // GetUnitModifTimeStr занимает много времени,
-			// поэтому отключаем ее в нормальном режиме
+		if (m_Sorted != SortByLemma) // GetUnitModifTimeStr Р·Р°РЅРёРјР°РµС‚ РјРЅРѕРіРѕ РІСЂРµРјРµРЅРё,
+			// РїРѕСЌС‚РѕРјСѓ РѕС‚РєР»СЋС‡Р°РµРј РµРµ РІ РЅРѕСЂРјР°Р»СЊРЅРѕРј СЂРµР¶РёРјРµ
 		{
 			CString TimeStr = GetRoss()->GetUnitModifTimeStr(I.UnitNo).c_str();
 			I.modif_tm = Str2Tm(TimeStr);
@@ -319,7 +319,7 @@ void CWordList::OnInitialUpdate()
 
     
 	
-	// установка контекстного меню 
+	// СѓСЃС‚Р°РЅРѕРІРєР° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ 
 	if (m_Menu.LoadMenu(IDR_POPUP_WORDLIST))
 	    SetMenu(&m_Menu);
 	else
@@ -328,7 +328,7 @@ void CWordList::OnInitialUpdate()
 
 
 
-	    //установка основного списка
+	    //СѓСЃС‚Р°РЅРѕРІРєР° РѕСЃРЅРѕРІРЅРѕРіРѕ СЃРїРёСЃРєР°
     m_WordList.InsertColumn(1,"Title",LVCFMT_LEFT, 200);
 	m_WordList.InsertColumn(2,"Sense",LVCFMT_LEFT, 60);
 	m_WordList.InsertColumn(3,"Comm.",LVCFMT_LEFT, 70);
@@ -351,7 +351,7 @@ void CWordList::OnInitialUpdate()
 	if (m_WordList.GetItemCount() > 0) 
       m_WordList.SetItemState( 0,   LVIS_FOCUSED| LVIS_SELECTED , LVIS_FOCUSED|LVIS_SELECTED );
 
-	// установка ширфта 
+	// СѓСЃС‚Р°РЅРѕРІРєР° С€РёСЂС„С‚Р° 
 	CWnd* wnd =  GetDlgItem(IDC_STATIC_LEFT);
 	CFont* F = wnd->GetFont(); 
 	LOGFONT pLogFont;
@@ -363,7 +363,7 @@ void CWordList::OnInitialUpdate()
 	wnd->SetFont(&G);
 	GetDlgItem(IDC_STATIC_RIGHT)->SetFont(&G); 
 
-	// Установка размеров
+	// РЈСЃС‚Р°РЅРѕРІРєР° СЂР°Р·РјРµСЂРѕРІ
 	int GlobalX = ::GetSystemMetrics(SM_CXSCREEN);
 	int GlobalY = ::GetSystemMetrics(SM_CYSCREEN);
 	GetParent()->SetWindowPos(NULL, (GlobalX-DlgWidth)/2, (GlobalY-DlgHeight)/2-60, DlgWidth, DlgHeight, SWP_SHOWWINDOW|SWP_NOZORDER);
@@ -450,7 +450,7 @@ bool CWordList::AddNewRecordToUnits (char* Word, bool bTalk, char* Comments)
     Update();
 	SetArticle(UnitNo, PosChoicer.m_ResultString + Trans.m_ResultString);
     
-	// установка курсора на нужную строку 
+	// СѓСЃС‚Р°РЅРѕРІРєР° РєСѓСЂСЃРѕСЂР° РЅР° РЅСѓР¶РЅСѓСЋ СЃС‚СЂРѕРєСѓ 
     SetCursor (UnitNo);
     GetDocument()->SetModifiedFlag();
   }
@@ -611,7 +611,7 @@ void CWordList::OnChangeLemmaLocator()
 		SetCursor (It - m_Termins.begin());
 
 	};
-	// установка курсора на нужную строку 
+	// СѓСЃС‚Р°РЅРѕРІРєР° РєСѓСЂСЃРѕСЂР° РЅР° РЅСѓР¶РЅСѓСЋ СЃС‚СЂРѕРєСѓ 
 
 };
 
@@ -660,7 +660,7 @@ void CWordList::OnSetSelectedButton()
 void CWordList::OnWordlistArticleBtn() 
 {
 	// TODO: Add your control notification handler code here
-	// получения ссылки на текущуь словарную статью
+	// РїРѕР»СѓС‡РµРЅРёСЏ СЃСЃС‹Р»РєРё РЅР° С‚РµРєСѓС‰СѓСЊ СЃР»РѕРІР°СЂРЅСѓСЋ СЃС‚Р°С‚СЊСЋ
 	try 
 	{
       WORD UnitNo;
@@ -804,7 +804,7 @@ void CWordList::OnStatistic()
 	vector<CStatis> V;
 	char s[200];
 	s[0] = 0;
-	if ( !InputBox("Введите название домена (* - все константные домены):", s, 200) )
+	if ( !InputBox("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РґРѕРјРµРЅР° (* - РІСЃРµ РєРѕРЅСЃС‚Р°РЅС‚РЅС‹Рµ РґРѕРјРµРЅС‹):", s, 200) )
 		return;
 	CString Q(s);
 	Q.TrimLeft();
@@ -842,7 +842,7 @@ void CWordList::OnStatistic()
 
 	s[0] = 0; 
 	char caption[200];
-	sprintf (caption, "Введите число элементов кортежа, которые надо сравнивать (1..%i)", GetRoss()->m_MaxNumDom);
+	sprintf (caption, "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РєРѕСЂС‚РµР¶Р°, РєРѕС‚РѕСЂС‹Рµ РЅР°РґРѕ СЃСЂР°РІРЅРёРІР°С‚СЊ (1..%i)", GetRoss()->m_MaxNumDom);
 	if (!InputBox(caption, s, 200))
 		return;
 
@@ -872,7 +872,7 @@ void CWordList::OnStatistic()
 	};
 
 
-	CString S = " Домен                Константа              Частота \r\n_______________________________________________________\r\n" ;
+	CString S = " Р”РѕРјРµРЅ                РљРѕРЅСЃС‚Р°РЅС‚Р°              Р§Р°СЃС‚РѕС‚Р° \r\n_______________________________________________________\r\n" ;
 	for (size_t k = 0; k < V.size(); k++)
 	{
 		CString Q;
@@ -883,7 +883,7 @@ void CWordList::OnStatistic()
 		S += Q;
 	};
 
-	GlobalOpenReport (S, "Частота констант");
+	GlobalOpenReport (S, "Р§Р°СЃС‚РѕС‚Р° РєРѕРЅСЃС‚Р°РЅС‚");
 }
 
 void CWordList::OnChangeTitle() 
@@ -930,7 +930,7 @@ void CWordList::OnComments()
   CString  C = pComms->Comments;
   char s[100];
   strcpy  (s, C);
-  if (!InputBox("Комментарий:", s, 100,"РОСС",this))
+  if (!InputBox("РљРѕРјРјРµРЅС‚Р°СЂРёР№:", s, 100,"Р РћРЎРЎ",this))
   return;
   if (!strcmp (s, C)) return;
   GetRoss()->SetUnitCommentStr(UnitNo, s);
@@ -940,7 +940,7 @@ void CWordList::OnComments()
 };
 
 
-// иерархия отношений
+// РёРµСЂР°СЂС…РёСЏ РѕС‚РЅРѕС€РµРЅРёР№
 void CWordList::OnMenuitem32788() 
 {
   // TODO: Add your command handler code here
@@ -969,7 +969,7 @@ void CWordList::BuildVals (vector<Valency>& Vals, WORD UnitNo)
 
 
 
-// построить дерево вложения валентных структур 
+// РїРѕСЃС‚СЂРѕРёС‚СЊ РґРµСЂРµРІРѕ РІР»РѕР¶РµРЅРёСЏ РІР°Р»РµРЅС‚РЅС‹С… СЃС‚СЂСѓРєС‚СѓСЂ 
 void CWordList::OnValencies()
 {
 try {
@@ -1061,7 +1061,7 @@ try {
 	  S += Record;
   };
 
-  GlobalOpenReport (S, "Валентные структуры");
+  GlobalOpenReport (S, "Р’Р°Р»РµРЅС‚РЅС‹Рµ СЃС‚СЂСѓРєС‚СѓСЂС‹");
 }
  catch (...)
  {
@@ -1105,7 +1105,7 @@ void CWordList::OnStatisticFieldValue()
 	vector<CFieldValue> V;
 	char s[200];
 	s[0] = 0;
-	if ( !InputBox("Введите название поля (* - все поля):", s, 200) ) return;
+	if ( !InputBox("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РїРѕР»СЏ (* - РІСЃРµ РїРѕР»СЏ):", s, 200) ) return;
 	BYTE FieldNo = ErrUChar;
 	if (s[0] != '*')
 	{
@@ -1156,7 +1156,7 @@ void CWordList::OnStatisticFieldValue()
 		S += Q;
 	};
 
-	GlobalOpenReport (S, "Заполнение словарных полей");
+	GlobalOpenReport (S, "Р—Р°РїРѕР»РЅРµРЅРёРµ СЃР»РѕРІР°СЂРЅС‹С… РїРѕР»РµР№");
 
 
 };
@@ -1285,7 +1285,7 @@ void CWordList::OnArticleAppend()
 	{
 		AfxMessageBox ("Some error has occured");
 	};
-	//GlobalOpenReport (S, "Добавление подстатей");
+	//GlobalOpenReport (S, "Р”РѕР±Р°РІР»РµРЅРёРµ РїРѕРґСЃС‚Р°С‚РµР№");
 };
 
 
@@ -1338,7 +1338,7 @@ void CWordList::OnSetAuthor()
   if (::MessageBox(this->m_hWnd, Q, "Confirmation",MB_YESNO) == IDNO) return;
   char s[200];
   s[0] = 0;
-  if ( !InputBox("Введите имя автора:", s, 15) ) return;
+  if ( !InputBox("Р’РІРµРґРёС‚Рµ РёРјСЏ Р°РІС‚РѕСЂР°:", s, 15) ) return;
   CWaitCursor C;
   vector <TUnit> UnitNos;
 
@@ -1358,7 +1358,7 @@ void CWordList::OnSelectByAuthor()
 {
 	char s[200];
 	s[0] = 0;
-	if ( !InputBox("Введите имя автора:", s, 15) ) return;
+	if ( !InputBox("Р’РІРµРґРёС‚Рµ РёРјСЏ Р°РІС‚РѕСЂР°:", s, 15) ) return;
 	CWaitCursor C;
 
 	for (size_t  i = 0; i < GetUnitsSize(); i++)
@@ -1586,7 +1586,7 @@ void CWordList::UpdateCurrentPos()
   if (pos != 0)
 	{
 	  UnitNo = m_WordList.GetNextSelectedItem(pos);
-      m_UnitsSize.Format ("Entry No %i (из %i)",    UnitNo+1, m_WordList.GetItemCount());
+      m_UnitsSize.Format ("Entry No %i (РёР· %i)",    UnitNo+1, m_WordList.GetItemCount());
       UpdateData(FALSE);
 	};
 
@@ -1629,7 +1629,7 @@ void CWordList::OnKeydownWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 LRESULT CWordList::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam) 
 {
 	/*
-	Когда фокус стоит в списке или локаторе клавига ENTER открывает статью.
+	РљРѕРіРґР° С„РѕРєСѓСЃ СЃС‚РѕРёС‚ РІ СЃРїРёСЃРєРµ РёР»Рё Р»РѕРєР°С‚РѕСЂРµ РєР»Р°РІРёРіР° ENTER РѕС‚РєСЂС‹РІР°РµС‚ СЃС‚Р°С‚СЊСЋ.
 	*/
 	if ( (message == 273) && (wParam ==1))
 	{

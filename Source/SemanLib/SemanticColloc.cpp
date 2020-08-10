@@ -49,12 +49,12 @@ void CRusSemStructure::AddCollocHyp (long StartNodeNo,
 							if (ispunct((BYTE)Colloc.Items[NextItemNo].Item[0]))
 							{
 								/*
-								Здесь приходится рассматривать два случая:
-									1.  когда знак препинания был удален из m_Nodes и включен в СRusSemWord::m_PostPuncts
-									2.  когда он не был удален.  
-									В первом случае мы должны сейчас проверить его  с помощью HasPostPunct,
-									во втором - проверка бедет сделана на общих основаниях, как будто 
-									этот знак препинания обычное слово.
+								Р—РґРµСЃСЊ РїСЂРёС…РѕРґРёС‚СЃСЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ РґРІР° СЃР»СѓС‡Р°СЏ:
+									1.  РєРѕРіРґР° Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ Р±С‹Р» СѓРґР°Р»РµРЅ РёР· m_Nodes Рё РІРєР»СЋС‡РµРЅ РІ РЎRusSemWord::m_PostPuncts
+									2.  РєРѕРіРґР° РѕРЅ РЅРµ Р±С‹Р» СѓРґР°Р»РµРЅ.  
+									Р’ РїРµСЂРІРѕРј СЃР»СѓС‡Р°Рµ РјС‹ РґРѕР»Р¶РЅС‹ СЃРµР№С‡Р°СЃ РїСЂРѕРІРµСЂРёС‚СЊ РµРіРѕ  СЃ РїРѕРјРѕС‰СЊСЋ HasPostPunct,
+									РІРѕ РІС‚РѕСЂРѕРј - РїСЂРѕРІРµСЂРєР° Р±РµРґРµС‚ СЃРґРµР»Р°РЅР° РЅР° РѕР±С‰РёС… РѕСЃРЅРѕРІР°РЅРёСЏС…, РєР°Рє Р±СѓРґС‚Рѕ 
+									СЌС‚РѕС‚ Р·РЅР°Рє РїСЂРµРїРёРЅР°РЅРёСЏ РѕР±С‹С‡РЅРѕРµ СЃР»РѕРІРѕ.
 
 								*/
 								if (	(StartNodeNo +1 != Clause.m_EndNodeNo)
@@ -108,15 +108,15 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 		)
 		return false;
 
-	// проверка частицы "не"
-	// факультативно частицу "не" может принимать только первое слово словосочетания
-	if (    ( (I.RelOperator1 == "НЕ") || (I.RelOperator2 == "НЕ") )
-		&&  m_Nodes[NodeNo].HasRelOperator("НЕ")
+	// РїСЂРѕРІРµСЂРєР° С‡Р°СЃС‚РёС†С‹ "РЅРµ"
+	// С„Р°РєСѓР»СЊС‚Р°С‚РёРІРЅРѕ С‡Р°СЃС‚РёС†Сѓ "РЅРµ" РјРѕР¶РµС‚ РїСЂРёРЅРёРјР°С‚СЊ С‚РѕР»СЊРєРѕ РїРµСЂРІРѕРµ СЃР»РѕРІРѕ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
+	if (    ( (I.RelOperator1 == "РќР•") || (I.RelOperator2 == "РќР•") )
+		&&  m_Nodes[NodeNo].HasRelOperator("РќР•")
 		&&  (ItemNo > 0)
 		)
 		return false;
 
-	// проверка предлога
+	// РїСЂРѕРІРµСЂРєР° РїСЂРµРґР»РѕРіР°
 	vector<CRossInterp> Preps;
 	m_pData->GetPrepsFromArticle (GetRoss(CollocRoss), m_pData->m_RusCollocs[CollocNo].UnitNo, 0, ItemNo+1, Preps);
 	long l=0;
@@ -127,7 +127,7 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 		return false;
 
 
-	// проверка граммем
+	// РїСЂРѕРІРµСЂРєР° РіСЂР°РјРјРµРј
 	CSemPattern P;
 	P.InitSemPattern(GetRossHolder(CollocRoss), m_pData->m_RusCollocs[CollocNo].UnitNo, 0, ItemNo+1);
 	P.LoadGramFromDict();
@@ -200,10 +200,10 @@ void get_all_subsets(vector<int>& the_set, vector<vector<int> >& subsets)
 
 }
 
-// строит множество всех возможных наборов словосочетаний
-// и записывает его в слот  m_Clauses[ClauseNo].m_SetCollocHyps, без последнего 
-// не будет работать процедура BuildBlackBoxCollocs, которая вызывается из процедуры
-// SetLexVariant (построение лексического варианта) 
+// СЃС‚СЂРѕРёС‚ РјРЅРѕР¶РµСЃС‚РІРѕ РІСЃРµС… РІРѕР·РјРѕР¶РЅС‹С… РЅР°Р±РѕСЂРѕРІ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№
+// Рё Р·Р°РїРёСЃС‹РІР°РµС‚ РµРіРѕ РІ СЃР»РѕС‚  m_Clauses[ClauseNo].m_SetCollocHyps, Р±РµР· РїРѕСЃР»РµРґРЅРµРіРѕ 
+// РЅРµ Р±СѓРґРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ РїСЂРѕС†РµРґСѓСЂР° BuildBlackBoxCollocs, РєРѕС‚РѕСЂР°СЏ РІС‹Р·С‹РІР°РµС‚СЃСЏ РёР· РїСЂРѕС†РµРґСѓСЂС‹
+// SetLexVariant (РїРѕСЃС‚СЂРѕРµРЅРёРµ Р»РµРєСЃРёС‡РµСЃРєРѕРіРѕ РІР°СЂРёР°РЅС‚Р°) 
 void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 {
 	vector<CSemCollocHyp> AllHyps;
@@ -213,7 +213,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 
 	for (long i = Clause.m_BeginNodeNo; i < Clause.m_EndNodeNo; i++)
 	{
-		// мы предполагем, что в поле CONTENT входят только примитивные узлы
+		// РјС‹ РїСЂРµРґРїРѕР»Р°РіРµРј, С‡С‚Рѕ РІ РїРѕР»Рµ CONTENT РІС…РѕРґСЏС‚ С‚РѕР»СЊРєРѕ РїСЂРёРјРёС‚РёРІРЅС‹Рµ СѓР·Р»С‹
 		if (!m_Nodes[i].IsPrimitive()) continue;
 		string S  =  m_Nodes[i].m_Words[0].m_Lemma;
 		if (S == "") S = m_Nodes[i].m_Words[0].m_Word;
@@ -227,17 +227,17 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 			RefCollocItems[i-Clause.m_BeginNodeNo] = -1;
 	};
 
-	// получение множетсва гипотез
+	// РїРѕР»СѓС‡РµРЅРёРµ РјРЅРѕР¶РµС‚СЃРІР° РіРёРїРѕС‚РµР·
 	for (long i=0; i<m_pData->m_RusCollocs.size();i++)
 	{
 		CSemCollocHyp Hyp(i);
 		AddCollocHyp(Clause.m_BeginNodeNo, RefCollocItems, 0, Hyp, AllHyps);
 	}
 
-	// проверка GF(i)
+	// РїСЂРѕРІРµСЂРєР° GF(i)
 	for (long i=0; i<AllHyps.size();)
 	{
-		rml_TRACE ("проверка GF(*) для %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		rml_TRACE ("РїСЂРѕРІРµСЂРєР° GF(*) РґР»СЏ %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 		long k=0;
 		for (; k < AllHyps[i].m_Coords.size(); k++)
 			if (!CheckCollocItemGramFet(
@@ -254,13 +254,13 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 			i++;
 	};
 
-	// проверка SYNREP
+	// РїСЂРѕРІРµСЂРєР° SYNREP
 	for (long i=0; i<AllHyps.size();i++)
 	{
-		rml_TRACE ("проверка SYNREP для %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		rml_TRACE ("РїСЂРѕРІРµСЂРєР° SYNREP РґР»СЏ %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 		const CColloc& C = m_pData->m_RusCollocs[AllHyps[i].m_CollocNo];
 		for (long j=0; j <  C.m_Rels.size(); j++)
-			if (C.m_Rels[j].m_SynRelName == "ПРИЛ_СУЩ")
+			if (C.m_Rels[j].m_SynRelName == "РџР РР›_РЎРЈР©")
 			{
 				vector<long> Rels;
 				long TargetNodeNo = FindNodeByWordNo(AllHyps[i].m_Coords[C.m_Rels[j].m_TargetNodeNo].m_WordNo, ClauseNo);
@@ -286,7 +286,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	for (long i=0; i<AllHyps.size();i++)
 		rml_TRACE ("%s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 
-	// получение всех подмножеств множества гипотез для условных словосочетаний
+	// РїРѕР»СѓС‡РµРЅРёРµ РІСЃРµС… РїРѕРґРјРЅРѕР¶РµСЃС‚РІ РјРЅРѕР¶РµСЃС‚РІР° РіРёРїРѕС‚РµР· РґР»СЏ СѓСЃР»РѕРІРЅС‹С… СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№
 	vector<vector<int> > subsets;
 	vector<int> the_set;
 	for (long i=0; i<AllHyps.size();i++)
@@ -294,12 +294,12 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 			the_set.push_back(i);
 	get_all_subsets(the_set, subsets);
 
-	//добавление пустого подмножества
+	//РґРѕР±Р°РІР»РµРЅРёРµ РїСѓСЃС‚РѕРіРѕ РїРѕРґРјРЅРѕР¶РµСЃС‚РІР°
 	m_ClauseSetCollocHyps[ClauseNo].clear();
 	CSemCollocHypVector C;
 	m_ClauseSetCollocHyps[ClauseNo].push_back(C);
 
-	// сначала добавляем условные словосочетания
+	// СЃРЅР°С‡Р°Р»Р° РґРѕР±Р°РІР»СЏРµРј СѓСЃР»РѕРІРЅС‹Рµ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
 	for (long i=0; i <subsets.size(); i++)
 	{
 		CSemCollocHypVector C;
@@ -311,7 +311,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	};
 
 
-	// затем безусловные (для всех подмножеств одно и то же)
+	// Р·Р°С‚РµРј Р±РµР·СѓСЃР»РѕРІРЅС‹Рµ (РґР»СЏ РІСЃРµС… РїРѕРґРјРЅРѕР¶РµСЃС‚РІ РѕРґРЅРѕ Рё С‚Рѕ Р¶Рµ)
 	for (long i=0; i < m_ClauseSetCollocHyps[ClauseNo].size(); i++)
 	{
 		CSemCollocHypVector& C = m_ClauseSetCollocHyps[ClauseNo][i];
@@ -322,7 +322,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	};
 
 
-	// удаление всех несовместных множеств
+	// СѓРґР°Р»РµРЅРёРµ РІСЃРµС… РЅРµСЃРѕРІРјРµСЃС‚РЅС‹С… РјРЅРѕР¶РµСЃС‚РІ
 	for (long i=0; i < m_ClauseSetCollocHyps[ClauseNo].size(); )
 		if (!VectorSemCollocHypCanBeTogether(m_ClauseSetCollocHyps[ClauseNo][i]))
 			m_ClauseSetCollocHyps[ClauseNo].erase(m_ClauseSetCollocHyps[ClauseNo].begin() + i);
@@ -342,7 +342,7 @@ void CRusSemStructure::BuildBlackBoxCollocs(long ClauseNo, size_t SetNo)
 {
 	SetNodeToDeleteFalse();
 
-	// идем по всем словосочетаниям, которые нужно построить
+	// РёРґРµРј РїРѕ РІСЃРµРј СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏРј, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ РїРѕСЃС‚СЂРѕРёС‚СЊ
 	for (long i=0; i <m_ClauseSetCollocHyps[ClauseNo][SetNo].size(); i++)
 	{
 		const CSemCollocHyp& H = m_ClauseSetCollocHyps[ClauseNo][SetNo][i];
@@ -371,8 +371,8 @@ void CRusSemStructure::BuildBlackBoxCollocs(long ClauseNo, size_t SetNo)
 					W.m_Word =  Prep+" "+W.m_Word;
 				N.m_Words.push_back(W);
 			};
-			// если это главное слово, то нужно изменить характеристики всего словосочетания
-			// если главного слова нет, тогда нужно взять характеристики от первого слова словосочетания
+			// РµСЃР»Рё СЌС‚Рѕ РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ, С‚Рѕ РЅСѓР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РІСЃРµРіРѕ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
+			// РµСЃР»Рё РіР»Р°РІРЅРѕРіРѕ СЃР»РѕРІР° РЅРµС‚, С‚РѕРіРґР° РЅСѓР¶РЅРѕ РІР·СЏС‚СЊ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РѕС‚ РїРµСЂРІРѕРіРѕ СЃР»РѕРІР° СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
 			if	(bMainItem)
 			{
 				N.SetMainWordNo(k);
@@ -386,23 +386,23 @@ void CRusSemStructure::BuildBlackBoxCollocs(long ClauseNo, size_t SetNo)
 					N.m_RelOperators=m_Nodes[NodeNo].m_RelOperators;
 				};
 			};
-			// удаляем примитивный узел
+			// СѓРґР°Р»СЏРµРј РїСЂРёРјРёС‚РёРІРЅС‹Р№ СѓР·РµР»
 			assert (CanBeDeleted(NodeNo));
 			m_Nodes[NodeNo].m_bToDelete = true;;
 		};
 		N.AddInterp( CDictUnitInterp(GetRossHolder(CollocRoss), CollocRoss,m_pData->m_RusCollocs[H.m_CollocNo].UnitNo, false,false) );
 		InitVals(N);
 		long OldNodeNo = FindNodeByWordNo(N.m_Words[N.m_MainWordNo].m_WordNo, ClauseNo);
-		//сохраняю синтаксические отношения, которые былит приписаны  OldNodeNo
-		// в виртуальный узел -2 (-1 используется как ошибка)
+		//СЃРѕС…СЂР°РЅСЏСЋ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС‚РЅРѕС€РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»РёС‚ РїСЂРёРїРёСЃР°РЅС‹  OldNodeNo
+		// РІ РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ СѓР·РµР» -2 (-1 РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєР°Рє РѕС€РёР±РєР°)
 		MoveSynRelations(OldNodeNo, -2);
-		//удаляю примитивные узлы, из которых состоит словосочетание, в том числе и  OldNodeNo
+		//СѓРґР°Р»СЏСЋ РїСЂРёРјРёС‚РёРІРЅС‹Рµ СѓР·Р»С‹, РёР· РєРѕС‚РѕСЂС‹С… СЃРѕСЃС‚РѕРёС‚ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРµ, РІ С‚РѕРј С‡РёСЃР»Рµ Рё  OldNodeNo
 		DelNodesToDelete();
-		// строю новый узел со словосочетанием, куда вошли только что удаленные,
-		// а удалить их нужно было, поскольку  функция InsertNode не может добавить узел, который
-		// по словам пересекается с другим существующим уже узлом
+		// СЃС‚СЂРѕСЋ РЅРѕРІС‹Р№ СѓР·РµР» СЃРѕ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёРµРј, РєСѓРґР° РІРѕС€Р»Рё С‚РѕР»СЊРєРѕ С‡С‚Рѕ СѓРґР°Р»РµРЅРЅС‹Рµ,
+		// Р° СѓРґР°Р»РёС‚СЊ РёС… РЅСѓР¶РЅРѕ Р±С‹Р»Рѕ, РїРѕСЃРєРѕР»СЊРєСѓ  С„СѓРЅРєС†РёСЏ InsertNode РЅРµ РјРѕР¶РµС‚ РґРѕР±Р°РІРёС‚СЊ СѓР·РµР», РєРѕС‚РѕСЂС‹Р№
+		// РїРѕ СЃР»РѕРІР°Рј РїРµСЂРµСЃРµРєР°РµС‚СЃСЏ СЃ РґСЂСѓРіРёРј СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј СѓР¶Рµ СѓР·Р»РѕРј
 		long nd = InsertNode(N);
-		// теперь вспоминаем синтаксические отношения, приписанные  OldNodeNo
+		// С‚РµРїРµСЂСЊ РІСЃРїРѕРјРёРЅР°РµРј СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРёРµ РѕС‚РЅРѕС€РµРЅРёСЏ, РїСЂРёРїРёСЃР°РЅРЅС‹Рµ  OldNodeNo
 		MoveSynRelations(-2, nd);
 
 		if (IsClauseSyntaxTop)

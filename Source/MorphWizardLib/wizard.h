@@ -14,7 +14,7 @@
 //----------------------------------------------------------------------------
 const WORD UnknownSessionNo = 0xffff-1;
 const WORD UnknownPrefixSetNo = 0xffff-1;
-const BYTE UnknownAccent = 0xff;	// не менять - уже проставлено в mrd
+const BYTE UnknownAccent = 0xff;	// РЅРµ РјРµРЅСЏС‚СЊ - СѓР¶Рµ РїСЂРѕСЃС‚Р°РІР»РµРЅРѕ РІ mrd
 
 // Nick [17/Dec/2003]
 const WORD AnyParadigmNo = 0xffff;

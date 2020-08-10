@@ -2,13 +2,13 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 1#"ab+D/A"#0#10#0#
 2#"aber"#1#10#0#
 3#"abseits+G"#2#10#0#
-4#"abz¸glich+G"#3#10#0#
+4#"abz—åglich+G"#3#10#0#
 5#"als"#4#10#0#
 6#"am+D"#5#10#0#
 7#"an+D"#6#10#0#
 8#"angesichts+G"#7#10#0#
 9#"anhand+G"#8#10#0#
-10#"anl‰ﬂlich+G"#9#10#0#
+10#"anl–¥–Ølich+G"#9#10#0#
 11#"ans+A"#10#10#0#
 12#"anstatt"#11#10#0#
 13#"anstatt+G"#12#10#0#
@@ -20,14 +20,14 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 19#"aufseiten+G"#18#10#0#
 20#"aus+D"#19#10#0#
 21#"ausgangs+G"#20#10#0#
-22#"auﬂer+D"#21#10#0#
-23#"auﬂer+G"#22#10#0#
-24#"auﬂerhalb+G"#23#10#0#
+22#"au–Øer+D"#21#10#0#
+23#"au–Øer+G"#22#10#0#
+24#"au–Øerhalb+G"#23#10#0#
 25#"bei+D"#24#10#0#
 26#"beiderseits+G"#25#10#0#
 27#"beim+D"#26#10#0#
 28#"bevor"#27#10#0#
-29#"bez¸glich+G"#28#10#0#
+29#"bez—åglich+G"#28#10#0#
 30#"binnen+D"#29#10#0#
 31#"bis"#30#10#0#
 32#"bis+A"#31#10#0#
@@ -39,10 +39,10 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 38#"durch+A"#37#10#0#
 39#"durchs+A"#38#10#0#
 40#"ehe"#39#10#0#
-41#"ein biﬂchen"#40#10#0#
+41#"ein bi–Øchen"#40#10#0#
 42#"ein paar"#41#10#0#
 43#"eingangs+G"#42#10#0#
-44#"einschlieﬂlich+G"#43#10#0#
+44#"einschlie–Ølich+G"#43#10#0#
 45#"entgegen+D"#44#10#0#
 46#"entlang+A"#45#10#0#
 47#"entsprechend+D"#46#10#0#
@@ -50,11 +50,11 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 49#"exklusive+G"#48#10#0#
 50#"falls"#49#10#0#
 51#"fern+D"#50#10#0#
-52#"f¸r+A"#51#10#0#
-53#"f¸rs+A"#52#10#0#
+52#"f—år+A"#51#10#0#
+53#"f—års+A"#52#10#0#
 54#"gegen+A"#53#10#0#
-55#"gegen¸ber+D"#54#10#0#
-56#"gem‰ﬂ+D"#55#10#0#
+55#"gegen—åber+D"#54#10#0#
+56#"gem–¥–Ø+D"#55#10#0#
 57#"gen+A"#56#10#0#
 58#"gleich+D"#57#10#0#
 59#"hinsichtlich+G"#58#10#0#
@@ -77,8 +77,8 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 76#"kontra+A"#75#10#0#
 77#"kraft+G"#76#10#0#
 78#"laut+G"#77#10#0#
-79#"l‰ngs+G"#78#10#0#
-80#"l‰ngsseits+G"#79#10#0#
+79#"l–¥ngs+G"#78#10#0#
+80#"l–¥ngsseits+G"#79#10#0#
 81#"mangels+G"#80#10#0#
 82#"mit+D"#81#10#0#
 83#"mitsamt+D"#82#10#0#
@@ -88,7 +88,7 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 87#"nahe+D"#86#10#0#
 88#"neben+D/A"#87#10#0#
 89#"nebst+D"#88#10#0#
-90#"n‰chst+D"#89#10#0#
+90#"n–¥chst+D"#89#10#0#
 91#"ob"#90#10#0#
 92#"oberhalb+G"#91#10#0#
 93#"obwohl"#92#10#0#
@@ -104,7 +104,7 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 103#"seit+D"#102#10#0#
 104#"seitens+G"#103#10#0#
 105#"seitlich+G"#104#10#0#
-106#"seitw‰rts+G"#105#10#0#
+106#"seitw–¥rts+G"#105#10#0#
 107#"so"#106#10#0#
 108#"sobald"#107#10#0#
 109#"sofern"#108#10#0#
@@ -138,8 +138,8 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 137#"wider+A"#136#10#0#
 138#"wie"#137#10#0#
 139#"wohingegen"#138#10#0#
-140#"w‰hrend"#139#10#0#
-141#"w‰hrend+G"#140#10#0#
+140#"w–¥hrend"#139#10#0#
+141#"w–¥hrend+G"#140#10#0#
 142#"zeit+G"#141#10#0#
 143#"zu+D"#142#10#0#
 144#"zufolge+G"#143#10#0#
@@ -150,10 +150,10 @@ OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;
 149#"zur+D"#148#10#0#
 150#"zuungunsten+G"#149#10#0#
 151#"zuwider+D"#150#10#0#
-152#"zuz¸glich+G"#151#10#0#
+152#"zuz—åglich+G"#151#10#0#
 153#"zwar...aber"#152#10#0#
 154#"zwecks+G"#153#10#0#
 155#"zwischen+D/A"#154#10#0#
-156#"¸ber+D/A"#155#10#0#
-157#"¸berm+D"#156#10#0#
-158#"¸bers+A"#157#10#0#
+156#"—åber+D/A"#155#10#0#
+157#"—åberm+D"#156#10#0#
+158#"—åbers+A"#157#10#0#

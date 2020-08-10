@@ -33,7 +33,7 @@ enum EngVerbTenseEnum
 		prf_inf_tn,			 // to have worked
 		prf_cont_inf_tn,	 // to have been working 
 		pp_cont_tn,			 // been working
-		ing_tn				 // working (морфологически совпадает с gerund_tn)
+		ing_tn				 // working (РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРё СЃРѕРІРїР°РґР°РµС‚ СЃ gerund_tn)
 };
 
 
@@ -65,7 +65,7 @@ struct SPosleLog
 
 	CRossInterp   m_PosleLogPrep;
 	string        m_PosleLog;
-	// домен D_POSITION (<,<<,>>,>,^, "dir_obj _")
+	// РґРѕРјРµРЅ D_POSITION (<,<<,>>,>,^, "dir_obj _")
 	string	      m_Position;
 
 };
@@ -90,19 +90,19 @@ struct CTenseHistory {
 
 
 class CEngSemWord : public CSemWord {
-	 // время для английской глагольной формы, если узел не является гл. формой, то
+	 // РІСЂРµРјСЏ РґР»СЏ Р°РЅРіР»РёР№СЃРєРѕР№ РіР»Р°РіРѕР»СЊРЅРѕР№ С„РѕСЂРјС‹, РµСЃР»Рё СѓР·РµР» РЅРµ СЏРІР»СЏРµС‚СЃСЏ РіР». С„РѕСЂРјРѕР№, С‚Рѕ
 	 // m_Tense = zero_tn;
 	 EngVerbTenseEnum	m_Tense;
 
 public:
     
      SPosleLog		 m_PosleLog;
-     // флаг для синтеза, чтобы он не пытался поставить  слово в форму, указананную в граммемах
+     // С„Р»Р°Рі РґР»СЏ СЃРёРЅС‚РµР·Р°, С‡С‚РѕР±С‹ РѕРЅ РЅРµ РїС‹С‚Р°Р»СЃСЏ РїРѕСЃС‚Р°РІРёС‚СЊ  СЃР»РѕРІРѕ РІ С„РѕСЂРјСѓ, СѓРєР°Р·Р°РЅР°РЅРЅСѓСЋ РІ РіСЂР°РјРјРµРјР°С…
      bool            m_bDoNotChangeForm;
  
 
-	 //  использует для порождение всп. глагола be перед основным глаголом и конвертации глагола  в P2
-	 // вспомогательный  глагол будет добавлен функцией BuildAuxiliaryVerbs
+	 //  РёСЃРїРѕР»СЊР·СѓРµС‚ РґР»СЏ РїРѕСЂРѕР¶РґРµРЅРёРµ РІСЃРї. РіР»Р°РіРѕР»Р° be РїРµСЂРµРґ РѕСЃРЅРѕРІРЅС‹Рј РіР»Р°РіРѕР»РѕРј Рё РєРѕРЅРІРµСЂС‚Р°С†РёРё РіР»Р°РіРѕР»Р°  РІ P2
+	 // РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№  РіР»Р°РіРѕР» Р±СѓРґРµС‚ РґРѕР±Р°РІР»РµРЅ С„СѓРЅРєС†РёРµР№ BuildAuxiliaryVerbs
 	 bool			 m_bMorphologicalPassiveForm;
 	 bool			 m_bImperative;
 	 string			 m_OneselfStr;
@@ -116,7 +116,7 @@ public:
 	 void Init();
 	 CEngSemWord();
 	 CEngSemWord (const CSemWord& X);
-	// принадлежит ли данная часть речи набору частей речи, который приписан слову?
+	// РїСЂРёРЅР°РґР»РµР¶РёС‚ Р»Рё РґР°РЅРЅР°СЏ С‡Р°СЃС‚СЊ СЂРµС‡Рё РЅР°Р±РѕСЂСѓ С‡Р°СЃС‚РµР№ СЂРµС‡Рё, РєРѕС‚РѕСЂС‹Р№ РїСЂРёРїРёСЃР°РЅ СЃР»РѕРІСѓ?
 	 virtual bool   HasPOS (size_t POS) const;
 };
 
@@ -177,7 +177,7 @@ public:
 
 	string m_engPrep;
 	bool m_bSourceClauseIsMain;
-	EGramCortegeType m_GramType; //по какому типу перевелось
+	EGramCortegeType m_GramType; //РїРѕ РєР°РєРѕРјСѓ С‚РёРїСѓ РїРµСЂРµРІРµР»РѕСЃСЊ
 
 	int  m_iHoleNum;
 	bool m_bAuxFlag;
@@ -252,8 +252,8 @@ public:
 	vector<CEngSemClause>		m_Clauses;
 
 	/*
-	  текущее множество переведeнных русских узлов 
-	  (те узлы, для которых построены англ. узлы)
+	  С‚РµРєСѓС‰РµРµ РјРЅРѕР¶РµСЃС‚РІРѕ РїРµСЂРµРІРµРґeРЅРЅС‹С… СЂСѓСЃСЃРєРёС… СѓР·Р»РѕРІ 
+	  (С‚Рµ СѓР·Р»С‹, РґР»СЏ РєРѕС‚РѕСЂС‹С… РїРѕСЃС‚СЂРѕРµРЅС‹ Р°РЅРіР». СѓР·Р»С‹)
 	*/
 	vector<long>			m_InterpretedRusNodes;
 
@@ -271,7 +271,7 @@ public:
 	virtual		  CSemNode*	GetNodePtr(int NodeNo)  {return &(m_Nodes[NodeNo]);}
 	virtual int				GetNodesSize() const {return m_Nodes.size();};
 	virtual string GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const;
-	    // перечень всех СемО
+	    // РїРµСЂРµС‡РµРЅСЊ РІСЃРµС… РЎРµРјРћ
 	vector<CEngSemRelation>	m_Relations;
     virtual const CSemRelation*	GetRelation(int RelNo) const {return &(m_Relations[RelNo]);}
 	virtual		  CSemRelation*	GetRelation(int RelNo)		 {return &(m_Relations[RelNo]);}
@@ -280,7 +280,7 @@ public:
 
 	virtual void GetColorAndWidthOfRelation(int RelNo,float& Width,string& Color);
 
-	//===========    работа с дополнительными семантическими отношениями 
+	//===========    СЂР°Р±РѕС‚Р° СЃ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹РјРё СЃРµРјР°РЅС‚РёС‡РµСЃРєРёРјРё РѕС‚РЅРѕС€РµРЅРёСЏРјРё 
 	vector<CEngSemRelation>		m_DopRelations;
     virtual const CSemRelation*	GetDopRelation(int RelNo) const {return &(m_DopRelations[RelNo]);}
 	virtual		  CSemRelation*	GetDopRelation(int RelNo)		 {return &(m_DopRelations[RelNo]);}
@@ -356,7 +356,7 @@ public:
 
 
 	bool IsSubj (const CEngSemRelation& Rel) const ;
-	// с помощью IsSubj ищется субъекта среди выходящих стрелок, выдает номер узла субъекта
+	// СЃ РїРѕРјРѕС‰СЊСЋ IsSubj РёС‰РµС‚СЃСЏ СЃСѓР±СЉРµРєС‚Р° СЃСЂРµРґРё РІС‹С…РѕРґСЏС‰РёС… СЃС‚СЂРµР»РѕРє, РІС‹РґР°РµС‚ РЅРѕРјРµСЂ СѓР·Р»Р° СЃСѓР±СЉРµРєС‚Р°
 	long GetSubj(long NodeNo) const;
 
 	void InitEngVals(CEngSemNode& Node);
@@ -371,7 +371,7 @@ public:
 	bool FindEnglishEquivHelper(vector<CEngInterp>& engEquivs, const CEngUnitNoToRusUnit RusEquivToEngArticleNo, DictTypeEnum type );
     bool InterpretWithPlugArticles (long RusNodeNo, CEnglishEquivMap& mapRNodeToENode);
 
-//моё
+//РјРѕС‘
 	void CreateLexFunNodeAnRel(CLexicalFunctionField& LexicalFunct, int iRusLexFunNode,CSemRelation& rusRel, int iEngNode, int iRusRel);
 	bool AddGXiFromLexFunFuncWord(long LexFunctWordUnitNo, CSemPattern& semPattern1, int iValNum, int iFuncNum );
 	void CreateEngLexFunDummyRel(CLexicalFunctionField& LexicalFunct, int iLexFunNodeDummy, int iEngNode);
@@ -506,148 +506,148 @@ public:
 
 	virtual void            EraseNode(int NodeNo) { m_Nodes.erase(m_Nodes.begin() +NodeNo);};
 
-	// Выдает  номер английского узла по номеру русского 
+	// Р’С‹РґР°РµС‚  РЅРѕРјРµСЂ Р°РЅРіР»РёР№СЃРєРѕРіРѕ СѓР·Р»Р° РїРѕ РЅРѕРјРµСЂСѓ СЂСѓСЃСЃРєРѕРіРѕ 
     long					GetEngNodeByRusNode(long RusNodeNo) const;
-	// проверяет, что данный русский узел уже был перевден
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РґР°РЅРЅС‹Р№ СЂСѓСЃСЃРєРёР№ СѓР·РµР» СѓР¶Рµ Р±С‹Р» РїРµСЂРµРІРґРµРЅ
 	bool					WasInterpreted (long RusNodeNo) const;
-	// помечает, что  данный русский узел уже был перевден
+	// РїРѕРјРµС‡Р°РµС‚, С‡С‚Рѕ  РґР°РЅРЅС‹Р№ СЂСѓСЃСЃРєРёР№ СѓР·РµР» СѓР¶Рµ Р±С‹Р» РїРµСЂРµРІРґРµРЅ
 	void					SetInterpreted (long RusNodeNo);
 
-	// является ли статья UnitNo заглушечной
+	// СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃС‚Р°С‚СЊСЏ UnitNo Р·Р°РіР»СѓС€РµС‡РЅРѕР№
 	bool					IsPlugArticle(const CRossHolder* RossHolder, WORD UnitNo) const;
 	bool					IsValFromRossArticle(const CSemRelation& semRel) const;
 
-    // переводит тайм-группу (на вход подается главный узел группы)
+    // РїРµСЂРµРІРѕРґРёС‚ С‚Р°Р№Рј-РіСЂСѓРїРїСѓ (РЅР° РІС…РѕРґ РїРѕРґР°РµС‚СЃСЏ РіР»Р°РІРЅС‹Р№ СѓР·РµР» РіСЂСѓРїРїС‹)
     bool					translate_time_node ( int MainTimeNodeNo);
-	// переводит элемент тайм-группы с помощью функции SR
+	// РїРµСЂРµРІРѕРґРёС‚ СЌР»РµРјРµРЅС‚ С‚Р°Р№Рј-РіСЂСѓРїРїС‹ СЃ РїРѕРјРѕС‰СЊСЋ С„СѓРЅРєС†РёРё SR
 	string					time_tr_by_ross(long RusNodeNo, string &brack);
-    // перевод терминов. На вход подается главное слово термина
+    // РїРµСЂРµРІРѕРґ С‚РµСЂРјРёРЅРѕРІ. РќР° РІС…РѕРґ РїРѕРґР°РµС‚СЃСЏ РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ С‚РµСЂРјРёРЅР°
 	bool					translate_termin_node(int MainNodeNo);
-	// перевод бинарным словарем 
+	// РїРµСЂРµРІРѕРґ Р±РёРЅР°СЂРЅС‹Рј СЃР»РѕРІР°СЂРµРј 
 	bool					translate_binary(long NodeNo);
-	// выдает номер первого слова клаузы
+	// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ РїРµСЂРІРѕРіРѕ СЃР»РѕРІР° РєР»Р°СѓР·С‹
 	virtual long	GetClauseFirstWordNo(long ClauseNo) const;  
-	// выдает номер последенего  слова клаузы
+	// РІС‹РґР°РµС‚ РЅРѕРјРµСЂ РїРѕСЃР»РµРґРµРЅРµРіРѕ  СЃР»РѕРІР° РєР»Р°СѓР·С‹
 	virtual long	GetClauseLastWordNo(long ClauseNo) const;
-    // переводит русские предлоги в английские с помощью оборотов  
+    // РїРµСЂРµРІРѕРґРёС‚ СЂСѓСЃСЃРєРёРµ РїСЂРµРґР»РѕРіРё РІ Р°РЅРіР»РёР№СЃРєРёРµ СЃ РїРѕРјРѕС‰СЊСЋ РѕР±РѕСЂРѕС‚РѕРІ  
 	CSynRealization TranslateRelization (const CSynRealization& RusSynReal,  const CSemNode& RusNode)  const;
-	// создает узел oneself
+	// СЃРѕР·РґР°РµС‚ СѓР·РµР» oneself
 	void			CreateOneselfNodes();	
 
-	// освобождает номер слова для дальнеьшего использования
+	// РѕСЃРІРѕР±РѕР¶РґР°РµС‚ РЅРѕРјРµСЂ СЃР»РѕРІР° РґР»СЏ РґР°Р»СЊРЅРµСЊС€РµРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ
 	void			FreeWordNo(long WordNo);	
 
-     // выдает морфологическое представление узла (лемма и граммема)
+     // РІС‹РґР°РµС‚ РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ СѓР·Р»Р° (Р»РµРјРјР° Рё РіСЂР°РјРјРµРјР°)
 	virtual string	GetMorphologyOfNode(long NodeNo) const;
 
-	// проходит по сыновьям узла указанной структуры
-	// и смотрит, есть ли у сыновей поле RUSETENSE, в котором 
-	// прописана схема получения английского времени по русскому
+	// РїСЂРѕС…РѕРґРёС‚ РїРѕ СЃС‹РЅРѕРІСЊСЏРј СѓР·Р»Р° СѓРєР°Р·Р°РЅРЅРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
+	// Рё СЃРјРѕС‚СЂРёС‚, РµСЃС‚СЊ Р»Рё Сѓ СЃС‹РЅРѕРІРµР№ РїРѕР»Рµ RUSETENSE, РІ РєРѕС‚РѕСЂРѕРј 
+	// РїСЂРѕРїРёСЃР°РЅР° СЃС…РµРјР° РїРѕР»СѓС‡РµРЅРёСЏ Р°РЅРіР»РёР№СЃРєРѕРіРѕ РІСЂРµРјРµРЅРё РїРѕ СЂСѓСЃСЃРєРѕРјСѓ
 	EngVerbTenseEnum handle_AVREM_field(long RelNodeNo,bool bEngStr = false, long TimNodeNo = -1) const;
 
-	//  правило согласования времен
+	//  РїСЂР°РІРёР»Рѕ СЃРѕРіР»Р°СЃРѕРІР°РЅРёСЏ РІСЂРµРјРµРЅ
 	void			ApplySequenceOfTenseRule();
-	// получение по типу EngVerbTenseEnum строкового представления
+	// РїРѕР»СѓС‡РµРЅРёРµ РїРѕ С‚РёРїСѓ EngVerbTenseEnum СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ
 	string			GetTenseString(EngVerbTenseEnum Tense) const;
-	// выделение вспомогательного глагола
+	// РІС‹РґРµР»РµРЅРёРµ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРіРѕ РіР»Р°РіРѕР»Р°
 	void			BuildAuxiliaryVerbs();
-	// является ли данный узел вспомогательным  глаголом
+	// СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рј  РіР»Р°РіРѕР»РѕРј
 	bool			IsAuxVerb(long NodeNo) const;
-	// имеет  ли данный узел вспомогательный  глагол
+	// РёРјРµРµС‚  Р»Рё РґР°РЅРЅС‹Р№ СѓР·РµР» РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№  РіР»Р°РіРѕР»
 	bool			HasBeVerb(long NodeNo) const;
-	// изменяет время глагола, если в поле RESTR статьи этого глагола стоят соотв. пометы
-	// Например, помета "not_cont".
+	// РёР·РјРµРЅСЏРµС‚ РІСЂРµРјСЏ РіР»Р°РіРѕР»Р°, РµСЃР»Рё РІ РїРѕР»Рµ RESTR СЃС‚Р°С‚СЊРё СЌС‚РѕРіРѕ РіР»Р°РіРѕР»Р° СЃС‚РѕСЏС‚ СЃРѕРѕС‚РІ. РїРѕРјРµС‚С‹
+	// РќР°РїСЂРёРјРµСЂ, РїРѕРјРµС‚Р° "not_cont".
 	bool			CorrectTenseByDictVerbFeatures(CEngSemNode& VerbEngNode);
-	// изменяет время глагола, если в поле RESTR статьи союза стоят соотв. пометы,
-	// например, помета "not_fut". Предполагается, что союз подчиняет глагол.
+	// РёР·РјРµРЅСЏРµС‚ РІСЂРµРјСЏ РіР»Р°РіРѕР»Р°, РµСЃР»Рё РІ РїРѕР»Рµ RESTR СЃС‚Р°С‚СЊРё СЃРѕСЋР·Р° СЃС‚РѕСЏС‚ СЃРѕРѕС‚РІ. РїРѕРјРµС‚С‹,
+	// РЅР°РїСЂРёРјРµСЂ, РїРѕРјРµС‚Р° "not_fut". РџСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ СЃРѕСЋР· РїРѕРґС‡РёРЅСЏРµС‚ РіР»Р°РіРѕР».
 	bool			CorrectTenseByDictConjFeatures(int iNode,CDictUnitInterp ConjInterp);
-	// переносит дополнительные отношения в дополнительный список
+	// РїРµСЂРµРЅРѕСЃРёС‚ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ РІ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ СЃРїРёСЃРѕРє
 	void			MoveDopRelations();
-	// проверка валидности всех индексов
+	// РїСЂРѕРІРµСЂРєР° РІР°Р»РёРґРЅРѕСЃС‚Рё РІСЃРµС… РёРЅРґРµРєСЃРѕРІ
 	void			AssertValidGraph();
-	// выдает узел прямого дополнения, если таковой есть
+	// РІС‹РґР°РµС‚ СѓР·РµР» РїСЂСЏРјРѕРіРѕ РґРѕРїРѕР»РЅРµРЅРёСЏ, РµСЃР»Рё С‚Р°РєРѕРІРѕР№ РµСЃС‚СЊ
 	long 			FindDirObj(long VerbNodeNo) const;
-	// устанавливает позицию наречий 
+	// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїРѕР·РёС†РёСЋ РЅР°СЂРµС‡РёР№ 
 	void			HandleAdverbPositions(long VerbNodeNo);
-	// проверяет, что прямое дополнение является "длинным" дополнением
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РїСЂСЏРјРѕРµ РґРѕРїРѕР»РЅРµРЅРёРµ СЏРІР»СЏРµС‚СЃСЏ "РґР»РёРЅРЅС‹Рј" РґРѕРїРѕР»РЅРµРЅРёРµРј
 	bool			dir_obj_is_long(int NodeNo) const;
-	// получение  левой вершиной клаузы	
+	// РїРѕР»СѓС‡РµРЅРёРµ  Р»РµРІРѕР№ РІРµСЂС€РёРЅРѕР№ РєР»Р°СѓР·С‹	
 	long			GetLeftClauseTop(long ClauseNo) const;
-	// узел является самой левой вершиной клаузы	
+	// СѓР·РµР» СЏРІР»СЏРµС‚СЃСЏ СЃР°РјРѕР№ Р»РµРІРѕР№ РІРµСЂС€РёРЅРѕР№ РєР»Р°СѓР·С‹	
 	bool			IsLeftClauseTop(long NodeNo) const;
-	// узел является самой левой вершиной клаузы	
+	// СѓР·РµР» СЏРІР»СЏРµС‚СЃСЏ СЃР°РјРѕР№ Р»РµРІРѕР№ РІРµСЂС€РёРЅРѕР№ РєР»Р°СѓР·С‹	
 	long			GetMainClauseRoot(long ClauseNo) const;
-	// выдает все узлы, которые зависят от данного 	
+	// РІС‹РґР°РµС‚ РІСЃРµ СѓР·Р»С‹, РєРѕС‚РѕСЂС‹Рµ Р·Р°РІРёСЃСЏС‚ РѕС‚ РґР°РЅРЅРѕРіРѕ 	
 	void			dfs_out(size_t NodeNo, vector<long>& Nodes) const;
-	// проверяет, что узел являетс самым левым узлом в клаузе
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ СѓР·РµР» СЏРІР»СЏРµС‚СЃ СЃР°РјС‹Рј Р»РµРІС‹Рј СѓР·Р»РѕРј РІ РєР»Р°СѓР·Рµ
 	
 	bool			IsTheVeryLeftNodeOfClause(long NodeNo) const;
 
-	// инициализирует слот CSemRelation::m_SyntacticRelation для валентнтых связей;
-	// название связи берется из словарной статьи
+	// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ СЃР»РѕС‚ CSemRelation::m_SyntacticRelation РґР»СЏ РІР°Р»РµРЅС‚РЅС‚С‹С… СЃРІСЏР·РµР№;
+	// РЅР°Р·РІР°РЅРёРµ СЃРІСЏР·Рё Р±РµСЂРµС‚СЃСЏ РёР· СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё
 	void			InitSyntaxRelations ();
-	// инициализирует поле CEngSemNode::m_Article по словарной статье
+	// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РїРѕР»Рµ CEngSemNode::m_Article РїРѕ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРµ
 	void			InitArticleField();
-	// провереят, что у  узла есть выходящая валентность RelationStr 
+	// РїСЂРѕРІРµСЂРµСЏС‚, С‡С‚Рѕ Сѓ  СѓР·Р»Р° РµСЃС‚СЊ РІС‹С…РѕРґСЏС‰Р°СЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ RelationStr 
 	bool			HasOutRelationByName(long NodeNo, string RelationStr) const;
-	// выдает выходящие из узла NodeNo внутриклаущные отношения. 
+	// РІС‹РґР°РµС‚ РІС‹С…РѕРґСЏС‰РёРµ РёР· СѓР·Р»Р° NodeNo РІРЅСѓС‚СЂРёРєР»Р°СѓС‰РЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ. 
 	void			GetOutcomingInClauseRelations (long NodeNo, vector<long>& Relations) const;
-	// проверяет, что  все выходящие отношения имеют название RelationStr
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ  РІСЃРµ РІС‹С…РѕРґСЏС‰РёРµ РѕС‚РЅРѕС€РµРЅРёСЏ РёРјРµСЋС‚ РЅР°Р·РІР°РЅРёРµ RelationStr
 	bool			CheckAllOutcomingRelationsIfAnyExists (long NodeNo, string RelationStr) const;
-	// провереят, что у  узла есть выходящая валентность в узел с валентностями Grammems
+	// РїСЂРѕРІРµСЂРµСЏС‚, С‡С‚Рѕ Сѓ  СѓР·Р»Р° РµСЃС‚СЊ РІС‹С…РѕРґСЏС‰Р°СЏ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ РІ СѓР·РµР» СЃ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЏРјРё Grammems
 	bool			HasOutRelationByGrammems(long NodeNo, QWORD Grammems) const;
-	// проверяет, что у  узла есть выходящее отношение, идущее в примитивный узел, который содержит слово  Word
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ Сѓ  СѓР·Р»Р° РµСЃС‚СЊ РІС‹С…РѕРґСЏС‰РµРµ РѕС‚РЅРѕС€РµРЅРёРµ, РёРґСѓС‰РµРµ РІ РїСЂРёРјРёС‚РёРІРЅС‹Р№ СѓР·РµР», РєРѕС‚РѕСЂС‹Р№ СЃРѕРґРµСЂР¶РёС‚ СЃР»РѕРІРѕ  Word
 	int				GetOutRelationByWord(long NodeNo, string Word) const;
-	// проверяет, что у  узла есть выходящее отношение, идущее в узел, которому приписана  часть речи POS
+	// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ Сѓ  СѓР·Р»Р° РµСЃС‚СЊ РІС‹С…РѕРґСЏС‰РµРµ РѕС‚РЅРѕС€РµРЅРёРµ, РёРґСѓС‰РµРµ РІ СѓР·РµР», РєРѕС‚РѕСЂРѕРјСѓ РїСЂРёРїРёСЃР°РЅР°  С‡Р°СЃС‚СЊ СЂРµС‡Рё POS
 	bool			HasOutRelationByPoses(long NodeNo, poses_mask_t Pos) const;
 
-	// переводит аббревиатурные формы теримнов
+	// РїРµСЂРµРІРѕРґРёС‚ Р°Р±Р±СЂРµРІРёР°С‚СѓСЂРЅС‹Рµ С„РѕСЂРјС‹ С‚РµСЂРёРјРЅРѕРІ
 	void			translate_abbr_termin_node(int MainNodeNo);	
-    // запись термина в узел 
+    // Р·Р°РїРёСЃСЊ С‚РµСЂРјРёРЅР° РІ СѓР·РµР» 
 	bool			set_multiword_termin(int NodeNo, const CInnerTermin* eng_termin, int ThesId);
-	// обходим граф от текущей вершины (по стрелкам и против стрелок) и помечает достигнутые вершины 
-	// (используется обычный перечень отношений)
-	// если Tag != -1, то обход не идеь по уникальным отношениям
+	// РѕР±С…РѕРґРёРј РіСЂР°С„ РѕС‚ С‚РµРєСѓС‰РµР№ РІРµСЂС€РёРЅС‹ (РїРѕ СЃС‚СЂРµР»РєР°Рј Рё РїСЂРѕС‚РёРІ СЃС‚СЂРµР»РѕРє) Рё РїРѕРјРµС‡Р°РµС‚ РґРѕСЃС‚РёРіРЅСѓС‚С‹Рµ РІРµСЂС€РёРЅС‹ 
+	// (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РѕР±С‹С‡РЅС‹Р№ РїРµСЂРµС‡РµРЅСЊ РѕС‚РЅРѕС€РµРЅРёР№)
+	// РµСЃР»Рё Tag != -1, С‚Рѕ РѕР±С…РѕРґ РЅРµ РёРґРµСЊ РїРѕ СѓРЅРёРєР°Р»СЊРЅС‹Рј РѕС‚РЅРѕС€РµРЅРёСЏРј
 	virtual void			dfs(size_t NodeNo, bool ConsiderUseOfNodes,long Tag = -1);
 
 	bool				TranslateCasesIfNeed (long NodeNo);
 	bool				has_plural_rel(long NodeNo) const;
 	/*
-	две функции, которые обрабатывают позиции сравнит. прилагательных в конструкции
-	"the sooner, the better". Здесь используются поля POSi, которые 
-	устанавливают позиции актантов i-го актанта.
+	РґРІРµ С„СѓРЅРєС†РёРё, РєРѕС‚РѕСЂС‹Рµ РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‚ РїРѕР·РёС†РёРё СЃСЂР°РІРЅРёС‚. РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹С… РІ РєРѕРЅСЃС‚СЂСѓРєС†РёРё
+	"the sooner, the better". Р—РґРµСЃСЊ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РїРѕР»СЏ POSi, РєРѕС‚РѕСЂС‹Рµ 
+	СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‚ РїРѕР·РёС†РёРё Р°РєС‚Р°РЅС‚РѕРІ i-РіРѕ Р°РєС‚Р°РЅС‚Р°.
 	*/
 	void				SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, string Position);
 	void				SetPositionsFromConj ();
 	void				SetSelectiveRelations();
 	long				FindNodeByLeafId (long NodeNo, int LeafId) const;
 	/*
-		проверяет, что в русской морфологии Lemma может быть глаголом
+		РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РІ СЂСѓСЃСЃРєРѕР№ РјРѕСЂС„РѕР»РѕРіРёРё Lemma РјРѕР¶РµС‚ Р±С‹С‚СЊ РіР»Р°РіРѕР»РѕРј
 	*/
 	bool				CanBeRusVerb(const string& Lemma)  const;
 
 	/*
-	устанавливает позицию для дополнений, которые осложнены определительными придаточными
+	СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїРѕР·РёС†РёСЋ РґР»СЏ РґРѕРїРѕР»РЅРµРЅРёР№, РєРѕС‚РѕСЂС‹Рµ РѕСЃР»РѕР¶РЅРµРЅС‹ РѕРїСЂРµРґРµР»РёС‚РµР»СЊРЅС‹РјРё РїСЂРёРґР°С‚РѕС‡РЅС‹РјРё
 	*/
 	void				SetLongRelations();
 
 	/*
-		устанавливает в GF отношения константу subj
+		СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РІ GF РѕС‚РЅРѕС€РµРЅРёСЏ РєРѕРЅСЃС‚Р°РЅС‚Сѓ subj
 	*/
 	bool SetSubjPattern(CEngSemRelation& semRel);
 
 	/*
-		проверяет, что в словарной  статье  узла есть запись GF1 = 1 subj	*/
+		РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РІ СЃР»РѕРІР°СЂРЅРѕР№  СЃС‚Р°С‚СЊРµ  СѓР·Р»Р° РµСЃС‚СЊ Р·Р°РїРёСЃСЊ GF1 = 1 subj	*/
 	bool HasSubjAsFirstValency(const CEngSemNode& N);
 
 	/*
-	 находит валентность, которой приписано ГХi = 1 subj, если такой  валентности нет, 
-	 возвращает -1.
+	 РЅР°С…РѕРґРёС‚ РІР°Р»РµРЅС‚РЅРѕСЃС‚СЊ, РєРѕС‚РѕСЂРѕР№ РїСЂРёРїРёСЃР°РЅРѕ Р“РҐi = 1 subj, РµСЃР»Рё С‚Р°РєРѕР№  РІР°Р»РµРЅС‚РЅРѕСЃС‚Рё РЅРµС‚, 
+	 РІРѕР·РІСЂР°С‰Р°РµС‚ -1.
 	*/
 	bool FindSubjPattern(const CEngSemNode& N, CSemPattern& Result);
 
 
-	// Переводит наречия "по-английски", "по-хорошему"...
+	// РџРµСЂРµРІРѕРґРёС‚ РЅР°СЂРµС‡РёСЏ "РїРѕ-Р°РЅРіР»РёР№СЃРєРё", "РїРѕ-С…РѕСЂРѕС€РµРјСѓ"...
 	void TranslateAdverbAdjectiveRule(int EngNodeNo);
 
 };

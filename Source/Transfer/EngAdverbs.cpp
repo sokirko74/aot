@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-// ищет потомка глагола, для которого ГХi=obj
+// РёС‰РµС‚ РїРѕС‚РѕРјРєР° РіР»Р°РіРѕР»Р°, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ Р“РҐi=obj
 long CEngSemStructure::FindDirObj(long VerbNodeNo) const
 {
 	vector<long> rels;
@@ -24,7 +24,7 @@ bool CEngSemStructure::dir_obj_is_long(int NodeNo) const
 	if( m_Nodes[NodeNo].m_NodeType == MNA )
 		return true;
 
-// выходящие межклаузные связи
+// РІС‹С…РѕРґСЏС‰РёРµ РјРµР¶РєР»Р°СѓР·РЅС‹Рµ СЃРІСЏР·Рё
 	vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);
 	for( int i=0; i<outRels.size(); i++ )
@@ -35,7 +35,7 @@ bool CEngSemStructure::dir_obj_is_long(int NodeNo) const
 			return true;
 	}
 
-// много детей
+// РјРЅРѕРіРѕ РґРµС‚РµР№
 	vector<long> outChilds;
 	GetChildNodes(NodeNo,outChilds);
 	if( outChilds.size()>=3 )
@@ -80,14 +80,14 @@ void EnrichPositionsByAdvKind (CAdvPosType adv_kind, StringVector& Positions)
 			if(!_find(Positions, "VA"))
 			{
 				Positions.push_back("AV");
-				Positions.push_back("НAV");
+				Positions.push_back("РќAV");
 			};
 			break;
 		case adv_freq:
 			if (Positions.size() == 0)
 			{
 				Positions.push_back("BA");
-				Positions.push_back("НAV");
+				Positions.push_back("РќAV");
 				Positions.push_back("AV");
 				Positions.push_back("HAB");
 			};
@@ -137,7 +137,7 @@ void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 		else if(node.IsTimeRossNode())
 			ok = true;
 		else if(		(node.GetType()==EngObor) 
-					||	(node.GetType()==EngCollocRoss)  // TITLЕ = in_opinion			    
+					||	(node.GetType()==EngCollocRoss)  // TITLР• = in_opinion			    
 				)
 			ok = true;
 		if(n == DirObjNodeNo) ok = false;
@@ -183,7 +183,7 @@ void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 
 		CAdvPosType adv_kind = get_adv_pos_kind(node);
 
-		// загружаем поле POS  из словарной статьи
+		// Р·Р°РіСЂСѓР¶Р°РµРј РїРѕР»Рµ POS  РёР· СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё
 		StringVector Positions;
 		if( type != NoneRoss && unit != ErrUnitNo )
 			GetRossHolder(type)->GetSimpleFieldItemsFromArticle(unit, "POS", 0, 0, Positions);
@@ -196,9 +196,9 @@ void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 		  
 		{
 			/*
-			  если это наречие подчинено прилагательному, например: 
-			  "оба думали о том , как велика эта страна" -> ",,, how large"
-			  тогда нужно перевегивать вместе с прилагательным
+			  РµСЃР»Рё СЌС‚Рѕ РЅР°СЂРµС‡РёРµ РїРѕРґС‡РёРЅРµРЅРѕ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРјСѓ, РЅР°РїСЂРёРјРµСЂ: 
+			  "РѕР±Р° РґСѓРјР°Р»Рё Рѕ С‚РѕРј , РєР°Рє РІРµР»РёРєР° СЌС‚Р° СЃС‚СЂР°РЅР°" -> ",,, how large"
+			  С‚РѕРіРґР° РЅСѓР¶РЅРѕ РїРµСЂРµРІРµРіРёРІР°С‚СЊ РІРјРµСЃС‚Рµ СЃ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рј
 			*/ 
 			if (   (m_Nodes[m_Relations[InRelNo].m_SourceNodeNo].GetPos() == eADJ)
 			    && (m_Nodes[m_Relations[InRelNo].m_TargetNodeNo].GetPos() == eADV)
@@ -214,8 +214,8 @@ void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 
 			if (InRelNo != -1)
 			{
-				// перевешиваем узел на главный узел клаузы
-				//Gri по-видимому, он хороший преподаватель
+				// РїРµСЂРµРІРµС€РёРІР°РµРј СѓР·РµР» РЅР° РіР»Р°РІРЅС‹Р№ СѓР·РµР» РєР»Р°СѓР·С‹
+				//Gri РїРѕ-РІРёРґРёРјРѕРјСѓ, РѕРЅ С…РѕСЂРѕС€РёР№ РїСЂРµРїРѕРґР°РІР°С‚РµР»СЊ
 				long RootNodeNo = GetLeftClauseTop(m_Nodes[m_Relations[InRelNo].m_SourceNodeNo].m_ClauseNo);
 				if  (RootNodeNo != -1 )
 				{
@@ -237,12 +237,12 @@ void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 			continue;
 
 			/*
-				Позицию для реверсивных отношений нужно писать наоборот.
-				Предполагается, что здесь обрабатывабтся только реверсивные отношения.
+				РџРѕР·РёС†РёСЋ РґР»СЏ СЂРµРІРµСЂСЃРёРІРЅС‹С… РѕС‚РЅРѕС€РµРЅРёР№ РЅСѓР¶РЅРѕ РїРёСЃР°С‚СЊ РЅР°РѕР±РѕСЂРѕС‚.
+				РџСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ Р·РґРµСЃСЊ РѕР±СЂР°Р±Р°С‚С‹РІР°Р±С‚СЃСЏ С‚РѕР»СЊРєРѕ СЂРµРІРµСЂСЃРёРІРЅС‹Рµ РѕС‚РЅРѕС€РµРЅРёСЏ.
 			*/
 			if(_find(Positions, "VOA") && !is_be && has_obj )
 			{
-				// перевешиваем на прямое дополнение
+				// РїРµСЂРµРІРµС€РёРІР°РµРј РЅР° РїСЂСЏРјРѕРµ РґРѕРїРѕР»РЅРµРЅРёРµ
 				m_Relations[InRelNo].m_SourceNodeNo =  DirObjNodeNo;
 				m_Relations[InRelNo].m_Position = ">";
 			}

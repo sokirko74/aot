@@ -14,7 +14,7 @@ bool  CRusSentence::CanBeInsideParenthesisOborot(const CSynWord& W) const
     for (size_t i=0; i < W.GetHomonymsCount(); i++)
     {
         const  CHomonym* pH = W.GetHomonym(i);
-        // Только союзы или простые частицы
+        // РўРѕР»СЊРєРѕ СЃРѕСЋР·С‹ РёР»Рё РїСЂРѕСЃС‚С‹Рµ С‡Р°СЃС‚РёС†С‹
         if ( pH->HasPos(CONJ) || GetOpt()->GetGramTab()->IsSimpleParticle(pH->m_strLemma.c_str(), pH->m_iPoses))
             return true;
     }
@@ -35,7 +35,7 @@ bool  CRusSentence::CheckBorders (int start, int end) const
 
 };
 
-// возвращает список отрезков, на которых не может быть вводных оборотов, поскольку они не отделены от предикатных слова знаками препинанния
+// РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє РѕС‚СЂРµР·РєРѕРІ, РЅР° РєРѕС‚РѕСЂС‹С… РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІРІРѕРґРЅС‹С… РѕР±РѕСЂРѕС‚РѕРІ, РїРѕСЃРєРѕР»СЊРєСѓ РѕРЅРё РЅРµ РѕС‚РґРµР»РµРЅС‹ РѕС‚ РїСЂРµРґРёРєР°С‚РЅС‹С… СЃР»РѕРІР° Р·РЅР°РєР°РјРё РїСЂРµРїРёРЅР°РЅРЅРёСЏ
 vector<CPeriod> CRusSentence::FindParenthesisOborotsWithoutComma() const
 {
 	vector<CPeriod> OborotsToDel;
@@ -72,11 +72,11 @@ void CRusSentence::DetermineParenthesis()
         int FirstWordNo = v_oborots_del[i].m_iFirstWord;
         CSynWord& FirstWord = m_Words[FirstWordNo];
 
-        if ( v_oborots_del[i].size() == 1 ) // однословный
+        if ( v_oborots_del[i].size() == 1 ) // РѕРґРЅРѕСЃР»РѕРІРЅС‹Р№
         {
             for (int HomNo = FirstWord.GetHomonymsCount()-1; HomNo >=0; HomNo--)
             {
-                //example : Все конечно.
+                //example : Р’СЃРµ РєРѕРЅРµС‡РЅРѕ.
                 if ( FirstWord.GetHomonymsCount() > 1 )
                     if ( FirstWord.GetHomonym(HomNo)->HasPos(INP) ) 
                         FirstWord.EraseHomonym(HomNo);			
@@ -87,11 +87,11 @@ void CRusSentence::DetermineParenthesis()
         {
             if (!FirstWord.GetSynHomonym(0).GetOborotPtr()->HasOnlyPartOfSpeech(INP) )
             {
-                // помечаем,  что данный оборот не может стать причиной веришины "вводн", 
-                // поскольку выяснилось, что оборот стоит внутри клаузы с другим словами и 
-                // и не обособлен знаками препинания, значит он не может быть вершиной клаузы, а клаузы не может быть вложена как ВВОДН.
+                // РїРѕРјРµС‡Р°РµРј,  С‡С‚Рѕ РґР°РЅРЅС‹Р№ РѕР±РѕСЂРѕС‚ РЅРµ РјРѕР¶РµС‚ СЃС‚Р°С‚СЊ РїСЂРёС‡РёРЅРѕР№ РІРµСЂРёС€РёРЅС‹ "РІРІРѕРґРЅ", 
+                // РїРѕСЃРєРѕР»СЊРєСѓ РІС‹СЏСЃРЅРёР»РѕСЃСЊ, С‡С‚Рѕ РѕР±РѕСЂРѕС‚ СЃС‚РѕРёС‚ РІРЅСѓС‚СЂРё РєР»Р°СѓР·С‹ СЃ РґСЂСѓРіРёРј СЃР»РѕРІР°РјРё Рё 
+                // Рё РЅРµ РѕР±РѕСЃРѕР±Р»РµРЅ Р·РЅР°РєР°РјРё РїСЂРµРїРёРЅР°РЅРёСЏ, Р·РЅР°С‡РёС‚ РѕРЅ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІРµСЂС€РёРЅРѕР№ РєР»Р°СѓР·С‹, Р° РєР»Р°СѓР·С‹ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІР»РѕР¶РµРЅР° РєР°Рє Р’Р’РћР”Рќ.
 
-                // мы не можем удалить, поскольку это не чисто вводный обоорот
+                // РјС‹ РЅРµ РјРѕР¶РµРј СѓРґР°Р»РёС‚СЊ, РїРѕСЃРєРѕР»СЊРєСѓ СЌС‚Рѕ РЅРµ С‡РёСЃС‚Рѕ РІРІРѕРґРЅС‹Р№ РѕР±РѕРѕСЂРѕС‚
                 FirstWord.m_bBadParenthesis = true;
             }
             else

@@ -11,16 +11,16 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CEngGramTab
-	const unsigned int eStartUp =  0x6161; //aa 
+	const unsigned int eStartUp =  0x6161; //aaВ 
 	const unsigned int eEndUp =  0x7A7B;  //zz + 1
-	const unsigned int eMaxGrmCount  = eEndUp -eStartUp; // // 5911  (5 Кб) 
+	const unsigned int eMaxGrmCount  = eEndUp -eStartUp; // // 5911  (5 РљР±) 
 
 	const BYTE ePartOfSpeechesCount = 17;
-	// не должно быть пробелов между словами 
+	// РЅРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїСЂРѕР±РµР»РѕРІ РјРµР¶РґСѓ СЃР»РѕРІР°РјРё 
 	const char ePartOfSpeeches[ePartOfSpeechesCount][20] = 
 	{
 		"NOUN",
-		"ADJECTIVE", // полное прилагательное
+		"ADJECTIVE", // РїРѕР»РЅРѕРµ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ
 		"VERB",
 		"VBE",
 		"MOD",

@@ -6,14 +6,14 @@
 #include "RusFormatCaller.h"
 
 
-// Примеры:
-// не отказал
+// РџСЂРёРјРµСЂС‹:
+// РЅРµ РѕС‚РєР°Р·Р°Р»
 
 bool CRusFormatCaller::format_for_neg_verb (CGroup& G)
 {
-  if (!W1.is_lemma("НЕ")) return false;
+  if (!W1.is_lemma("РќР•")) return false;
   if (G.m_iFirstWord+1 >= sent.size()) return false;  
-  // "не" может входить в оборот ("едва не")
+  // "РЅРµ" РјРѕР¶РµС‚ РІС…РѕРґРёС‚СЊ РІ РѕР±РѕСЂРѕС‚ ("РµРґРІР° РЅРµ")
   if (W1.HasFlag(fl_in_oborot)) 
   {
 	  if (!W1.HasFlag(fl_oborot1) || !W1.HasFlag(fl_oborot2))
@@ -25,14 +25,14 @@ bool CRusFormatCaller::format_for_neg_verb (CGroup& G)
   G.m_GroupType = NEG_VERB;
   G.m_MainGroup = G.m_iFirstWord + 1;
   G.m_iLastWord = G.m_iFirstWord + 1;
-  G.m_Cause = "Частица 'не', справа которой стоит глагольная форма"; 
+  G.m_Cause = "Р§Р°СЃС‚РёС†Р° 'РЅРµ', СЃРїСЂР°РІР° РєРѕС‚РѕСЂРѕР№ СЃС‚РѕРёС‚ РіР»Р°РіРѕР»СЊРЅР°СЏ С„РѕСЂРјР°"; 
   create_syn_rel(G, get_main_word(G.m_iLastWord),G.m_iFirstWord,NEG_VERB);
   return true;
 }
 
-// Примеры:
-// ломать баню 
-// не любить стальные пилы 
+// РџСЂРёРјРµСЂС‹:
+// Р»РѕРјР°С‚СЊ Р±Р°РЅСЋ 
+// РЅРµ Р»СЋР±РёС‚СЊ СЃС‚Р°Р»СЊРЅС‹Рµ РїРёР»С‹ 
 
 bool CRusFormatCaller::format_for_dir_obj (CGroup& G)
 { 
@@ -66,15 +66,15 @@ bool CRusFormatCaller::format_for_dir_obj (CGroup& G)
 	G.m_MainGroup = VerbGroup;
 	G.m_GroupType = DIR_OBJ;
 	G.SetGrammems( Wi.GetGrammems() );
- 	QWORD g = ObjGroup.GetGrammems() & (_QM(rAccusativ) | ~rAllCases); //убиваем лишние падежи, "открыл дверь"
+ 	QWORD g = ObjGroup.GetGrammems() & (_QM(rAccusativ) | ~rAllCases); //СѓР±РёРІР°РµРј Р»РёС€РЅРёРµ РїР°РґРµР¶Рё, "РѕС‚РєСЂС‹Р» РґРІРµСЂСЊ"
 	((CGroup&)ObjGroup).SetGrammems(g);
 	if (Wk.GetGrammems() & _QM(rAccusativ) )
-		Wk.SetGrammems(Wk.GetGrammems() & (_QM(rAccusativ) | _QM(rDativ) | ~rAllCases)); //rDativ для "правительство выделило церкви гектар"
+		Wk.SetGrammems(Wk.GetGrammems() & (_QM(rAccusativ) | _QM(rDativ) | ~rAllCases)); //rDativ РґР»СЏ "РїСЂР°РІРёС‚РµР»СЊСЃС‚РІРѕ РІС‹РґРµР»РёР»Рѕ С†РµСЂРєРІРё РіРµРєС‚Р°СЂ"
 	return true;
 }
 
-// "Дом был заполнен людьми"
-// но не он "бродил ночью"
+// "Р”РѕРј Р±С‹Р» Р·Р°РїРѕР»РЅРµРЅ Р»СЋРґСЊРјРё"
+// РЅРѕ РЅРµ РѕРЅ "Р±СЂРѕРґРёР» РЅРѕС‡СЊСЋ"
 bool CRusFormatCaller::format_for_instr_obj (CGroup& G)
 { 
     const CGroup& VerbGroup =  get_maximal_group (G.m_iFirstWord);
@@ -101,10 +101,10 @@ bool CRusFormatCaller::format_for_instr_obj (CGroup& G)
 	if ((ObjGroup.GetGrammems() & rAllCases) != _QM(rInstrumentalis))
 			return false;
 
-	if (		Wk.is_word_upper("НОЧЬЮ")
-			||	Wk.is_word_upper("ДНЕМ")
-			||	Wk.is_word_upper("УТРОМ")
-			||	Wk.is_word_upper("ВЕЧЕРОМ")
+	if (		Wk.is_word_upper("РќРћР§Р¬Р®")
+			||	Wk.is_word_upper("Р”РќР•Рњ")
+			||	Wk.is_word_upper("РЈРўР РћРњ")
+			||	Wk.is_word_upper("Р’Р•Р§Р•Р РћРњ")
 		)
 	return  false;
 
@@ -118,10 +118,10 @@ bool CRusFormatCaller::format_for_instr_obj (CGroup& G)
 
 
 /*
-	построение группы прямого дополнения, когда прямое дополнение стоит перед глаголом и выражено
-	местоимением:
-	"Я их знаю"
-	"всех зазывал в свою компанию".
+	РїРѕСЃС‚СЂРѕРµРЅРёРµ РіСЂСѓРїРїС‹ РїСЂСЏРјРѕРіРѕ РґРѕРїРѕР»РЅРµРЅРёСЏ, РєРѕРіРґР° РїСЂСЏРјРѕРµ РґРѕРїРѕР»РЅРµРЅРёРµ СЃС‚РѕРёС‚ РїРµСЂРµРґ РіР»Р°РіРѕР»РѕРј Рё РІС‹СЂР°Р¶РµРЅРѕ
+	РјРµСЃС‚РѕРёРјРµРЅРёРµРј:
+	"РЇ РёС… Р·РЅР°СЋ"
+	"РІСЃРµС… Р·Р°Р·С‹РІР°Р» РІ СЃРІРѕСЋ РєРѕРјРїР°РЅРёСЋ".
 */
 bool CRusFormatCaller::format_for_dir_obj_rev (CGroup& G)
 { 
@@ -140,18 +140,18 @@ bool CRusFormatCaller::format_for_dir_obj_rev (CGroup& G)
 	const CGroup& RightGroup =  get_maximal_group (k);
 	if ( RightGroup.m_GroupType == DIR_OBJ ) return false;
 
-	if (	!Wi.is_word_upper("МЕНЯ") 
-		&&	!Wi.is_word_upper("ТЕБЯ") 
-		&&	!Wi.is_word_upper("ЕГО") 
-		&&	!Wi.is_word_upper("ЕЕ") 
-		&&	!Wi.is_word_upper("НАС") 
-		&&	!Wi.is_word_upper("ВАС") 
-		&&	!Wi.is_word_upper("ИХ") 
-		&&	!Wi.is_word_upper("ВСЕХ") 
-		&&	!Wi.is_word_upper("НИЧЕГО") 
-		&&	!Wi.is_word_upper("НИКОГО") 
-		&&	!Wi.is_word_upper("ЧТО-ТО") 
-		&&	!Wi.is_word_upper("КОГО-ТО") 
+	if (	!Wi.is_word_upper("РњР•РќРЇ") 
+		&&	!Wi.is_word_upper("РўР•Р‘РЇ") 
+		&&	!Wi.is_word_upper("Р•Р“Рћ") 
+		&&	!Wi.is_word_upper("Р•Р•") 
+		&&	!Wi.is_word_upper("РќРђРЎ") 
+		&&	!Wi.is_word_upper("Р’РђРЎ") 
+		&&	!Wi.is_word_upper("РРҐ") 
+		&&	!Wi.is_word_upper("Р’РЎР•РҐ") 
+		&&	!Wi.is_word_upper("РќРР§Р•Р“Рћ") 
+		&&	!Wi.is_word_upper("РќРРљРћР“Рћ") 
+		&&	!Wi.is_word_upper("Р§РўРћ-РўРћ") 
+		&&	!Wi.is_word_upper("РљРћР“Рћ-РўРћ") 
 		)
 	return false;
 
@@ -165,9 +165,9 @@ bool CRusFormatCaller::format_for_dir_obj_rev (CGroup& G)
 
 
 
-// Примеры:
-// любить строить // переходный
-// могу съесть  // непереходный
+// РџСЂРёРјРµСЂС‹:
+// Р»СЋР±РёС‚СЊ СЃС‚СЂРѕРёС‚СЊ // РїРµСЂРµС…РѕРґРЅС‹Р№
+// РјРѕРіСѓ СЃСЉРµСЃС‚СЊ  // РЅРµРїРµСЂРµС…РѕРґРЅС‹Р№
 
 bool CRusFormatCaller::format_for_verb_inf (CGroup& G)
 {
@@ -191,7 +191,7 @@ bool CRusFormatCaller::format_for_verb_inf (CGroup& G)
   if (Wj.m_UnitType  != EWord) return false;
   
   G.m_iLastWord = H1.m_iLastWord;
-  G.m_Cause = "ГГ + инфинитив";
+  G.m_Cause = "Р“Р“ + РёРЅС„РёРЅРёС‚РёРІ";
   G.m_MainGroup = H;
   G.m_GroupType = VERB_INF;
   G.SetGrammems( H.GetGrammems() );

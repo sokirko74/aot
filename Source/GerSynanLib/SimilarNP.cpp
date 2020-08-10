@@ -3,7 +3,7 @@
 
 
 // example 
-// amerikanische Soldaten und kurdische Kömpfer
+// amerikanische Soldaten und kurdische KÑ†mpfer
 // du, er und ich
 
 bool CGerFormatCaller::can_be_part_of_similar_NP(const CSynPlmLine& L) const
@@ -12,7 +12,7 @@ bool CGerFormatCaller::can_be_part_of_similar_NP(const CSynPlmLine& L) const
 	if (is_morph_adj(L) && L.has_lemma())
 	{
 		if (!strcmp (L.m_lemma,"ANDER") ) return true;
-		if (!strcmp (L.m_lemma,"ÄHNLICH") ) return true;
+		if (!strcmp (L.m_lemma,"Ð”HNLICH") ) return true;
 	};
 
 

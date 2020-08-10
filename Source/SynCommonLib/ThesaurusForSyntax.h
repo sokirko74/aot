@@ -109,7 +109,7 @@ class CThesaurusForSyntax
 public:
 	const CSyntaxOpt* GetOpt() const 	{		return m_pSyntaxOptions;	};
 
-	CInt2Vector m_TerminsGrouppedByLength; //здесь хранятся индексы из m_Termins
+	CInt2Vector m_TerminsGrouppedByLength; //Р·РґРµСЃСЊ С…СЂР°РЅСЏС‚СЃСЏ РёРЅРґРµРєСЃС‹ РёР· m_Termins
 
 	CThesaurusForSyntax(const CSyntaxOpt* Opt);
 	virtual ~CThesaurusForSyntax();

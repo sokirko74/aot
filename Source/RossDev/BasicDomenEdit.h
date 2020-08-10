@@ -37,7 +37,7 @@ public:
  		POSITION pos = m_List.GetFirstSelectedItemPosition();
 
   		if (pos == NULL)
-			{ ::MessageBox(0, "В списке не выделено ни одного элемента", "Message Box", MB_OK);
+			{ ::MessageBox(0, "Р’ СЃРїРёСЃРєРµ РЅРµ РІС‹РґРµР»РµРЅРѕ РЅРё РѕРґРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°", "Message Box", MB_OK);
 			  return -1;};
 
 		return m_List.GetNextSelectedItem(pos);

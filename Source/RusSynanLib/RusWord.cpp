@@ -17,8 +17,8 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 	if (H.m_strLemma.length() < 3)  return false;
 	if (H.m_lPradigmID == -1) return false;
 	string suffix = H.m_strLemma.substr(H.m_strLemma.length()-2);
-	bool bMasc = (suffix == "ÈÉ") ||  (suffix == "ÛÉ");
-	bool bFem = (suffix == "Àß") ||  (suffix == "ßß");
+	bool bMasc = (suffix == "Ð˜Ð™") ||  (suffix == "Ð«Ð™");
+	bool bFem = (suffix == "ÐÐ¯") ||  (suffix == "Ð¯Ð¯");
 	if (!bMasc && !bFem) return false;
 
 	CFormInfo Info;
@@ -34,11 +34,11 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 				int l = Form.length();
 				if (l < 3) return false;
 				if (bMasc)
-					return		(Form.substr(l-3) == "ÅÃÎ")
-							||	(Form.substr(l-3) == "ÎÃÎ");
+					return		(Form.substr(l-3) == "Ð•Ð“Ðž")
+							||	(Form.substr(l-3) == "ÐžÐ“Ðž");
 				else
-					return		(Form.substr(l-2) == "ÎÉ")
-							||	(Form.substr(l-2) == "ÅÉ");
+					return		(Form.substr(l-2) == "ÐžÐ™")
+							||	(Form.substr(l-2) == "Ð•Ð™");
 			};
 	};
 	return false;		
@@ -49,7 +49,7 @@ void CRusSentence::InitHomonymMorphInfo (CSynHomonym& H)
 
     H.InitAncodePattern( );
 	
-	//ñðàâíåíèå ñî ñëîâíèêàìè
+	//ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ðµ ÑÐ¾ ÑÐ»Ð¾Ð²Ð½Ð¸ÐºÐ°Ð¼Ð¸
 	H.m_bMonth = GetOpt()->GetGramTab()->is_month(H.m_strLemma.c_str());
 	H.m_bAdvAdj = H.CompareWithPredefinedWords(*(GetOpt()->AdvAdj));
 	H.m_bCanSynDependOnAdj = H.CompareWithPredefinedWords(*(GetOpt()->SynDependOnAdj));
@@ -63,7 +63,7 @@ void CRusSentence::InitHomonymMorphInfo (CSynHomonym& H)
 };
 
 const UINT SmallNumbersCount = 5;
-const char SmallNumbers [SmallNumbersCount][10] = {"ÄÂÀ", "ÒÐÈ", "×ÅÒÛÐÅ","ÎÁÀ", "ÏÎËÒÎÐÀ"};
+const char SmallNumbers [SmallNumbersCount][10] = {"Ð”Ð’Ð", "Ð¢Ð Ð˜", "Ð§Ð•Ð¢Ð«Ð Ð•","ÐžÐ‘Ð", "ÐŸÐžÐ›Ð¢ÐžÐ Ð"};
 
 
 void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
@@ -77,7 +77,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 						   && FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
 	H.m_bRussianOdin =	 pWord->HasDes(ODigits)
 					&&	pWord->m_strWord[iLen - 1] == '1'
-					//  ìîæåò çàêàí÷èâàòüñÿ íà 01, 21,31,41,51,61,71,81,91, íî íå íà 11
+					//  Ð¼Ð¾Ð¶ÐµÑ‚ Ð·Ð°ÐºÐ°Ð½Ñ‡Ð¸Ð²Ð°Ñ‚ÑŒÑÑ Ð½Ð° 01, 21,31,41,51,61,71,81,91, Ð½Ð¾ Ð½Ðµ Ð½Ð° 11
 					&&	(		(iLen == 1) 
 							||	(pWord->m_strWord[iLen - 2] != '1')
 						)
@@ -85,7 +85,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 
 	//if( pWord->HasDes(ODigits) && (iLen == 1) && ( pWord->m_strWord[0] == '1') )
 	//{
-	//	H.m_GramCodes = "éàéáéâéãéäéåéæéçéèéééêéëéìéíéîéïéðéñ";
+	//	H.m_GramCodes = "Ð¹Ð°Ð¹Ð±Ð¹Ð²Ð¹Ð³Ð¹Ð´Ð¹ÐµÐ¹Ð¶Ð¹Ð·Ð¹Ð¸Ð¹Ð¹Ð¹ÐºÐ¹Ð»Ð¹Ð¼Ð¹Ð½Ð¹Ð¾Ð¹Ð¿Ð¹Ñ€Ð¹Ñ";
  //       H.InitAncodePattern( );
 	//	
 	//}
@@ -97,8 +97,8 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 	if( !pWord->HasDes(ODigits ))
 	{
 		for (long  i=0; i<SmallNumbersCount; i++)
-		  if (	H.IsLemma(SmallNumbers[i]) // m_strLemma ìîæåò áûòü ðàâíà "îäèí-äâà",
-			  || (   (H.m_strLemma.find('-') != string::npos) // íàïðèìåð, "îäèí-äâà äíÿ", òîãäà íàäî ñðàâíèâàòü ñ ïîñëåäíèì ÷èñëèòåëüíûì
+		  if (	H.IsLemma(SmallNumbers[i]) // m_strLemma Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ñ€Ð°Ð²Ð½Ð° "Ð¾Ð´Ð¸Ð½-Ð´Ð²Ð°",
+			  || (   (H.m_strLemma.find('-') != string::npos) // Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, "Ð¾Ð´Ð¸Ð½-Ð´Ð²Ð° Ð´Ð½Ñ", Ñ‚Ð¾Ð³Ð´Ð° Ð½Ð°Ð´Ð¾ ÑÑ€Ð°Ð²Ð½Ð¸Ð²Ð°Ñ‚ÑŒ Ñ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½Ð¸Ð¼ Ñ‡Ð¸ÑÐ»Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼
 				  && (strlen(SmallNumbers[i]) < H.m_strLemma.length())
 				  && (SmallNumbers[i] == H.m_strLemma.substr(H.m_strLemma.find('-') + 1))
 				 )
@@ -108,7 +108,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 		  };
 	};
 
-	if( (H.m_strLemma=="ÎÄÈÍ") &&  H.GetGramCodes()[0] == 'ý'/*(m_iPoses & (1 << NUMERAL))*/)
+	if( (H.m_strLemma=="ÐžÐ”Ð˜Ð") &&  H.GetGramCodes()[0] == 'Ñ'/*(m_iPoses & (1 << NUMERAL))*/)
 		H.m_bRussianOdin = true;
 }
 
@@ -157,11 +157,11 @@ bool CRusSentence::AllHomonymsArePredicates(const CSynWord& W) const
 			 (Hom.HasPos(PREDK)) )
 			 continue;
 
-		//ãëàãîëû, êîòîðûå íå ÿâëÿþòñÿ ñàìîñòîÿòåëüíûì ïðåäèêàòîì èëè ñóòü àí.ô.
-		if (	!Hom.IsLemma("ÄÀÂÀÒÜ") 
-			&&	!Hom.IsLemma("ÑÒÀÍÎÂÈÒÜÑß")
-			&&	!Hom.IsLemma("ÎÊÀÇÀÒÜÑß")
-			&&	!Hom.IsLemma("ÑÒÀÒÜ")
+		//Ð³Ð»Ð°Ð³Ð¾Ð»Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð½Ðµ ÑÐ²Ð»ÑÑŽÑ‚ÑÑ ÑÐ°Ð¼Ð¾ÑÑ‚Ð¾ÑÑ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼ Ð¿Ñ€ÐµÐ´Ð¸ÐºÐ°Ñ‚Ð¾Ð¼ Ð¸Ð»Ð¸ ÑÑƒÑ‚ÑŒ Ð°Ð½.Ñ„.
+		if (	!Hom.IsLemma("Ð”ÐÐ’ÐÐ¢Ð¬") 
+			&&	!Hom.IsLemma("Ð¡Ð¢ÐÐÐžÐ’Ð˜Ð¢Ð¬Ð¡Ð¯")
+			&&	!Hom.IsLemma("ÐžÐšÐÐ—ÐÐ¢Ð¬Ð¡Ð¯")
+			&&	!Hom.IsLemma("Ð¡Ð¢ÐÐ¢Ð¬")
 			)
 			  break;
 	 }

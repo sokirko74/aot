@@ -127,7 +127,7 @@ void CRusSemStructure::MoveIncomingSynRelations(long FromNode, long ToNode)
 		if (m_SynRelations[i].m_TargetNodeNo == FromNode )
 			m_SynRelations[i].m_TargetNodeNo = ToNode;
 
-		// уничтожение петел, которые могли взяться из потсроения Timeнодов
+		// СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РїРµС‚РµР», РєРѕС‚РѕСЂС‹Рµ РјРѕРіР»Рё РІР·СЏС‚СЊСЃСЏ РёР· РїРѕС‚СЃСЂРѕРµРЅРёСЏ TimeРЅРѕРґРѕРІ
 		if (m_SynRelations[i].m_TargetNodeNo == m_SynRelations[i].m_SourceNodeNo)
 			m_SynRelations.erase(m_SynRelations.begin() + i);
 		else
@@ -173,7 +173,7 @@ void CRusSemStructure::MoveSynRelations(long FromNode, long ToNode)
 		if (m_SynRelations[i].m_SourceNodeNo == FromNode )
 			m_SynRelations[i].m_SourceNodeNo = ToNode;
 
-		// уничтожение петел, которые могли взяться из потсроения Timeнодов
+		// СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РїРµС‚РµР», РєРѕС‚РѕСЂС‹Рµ РјРѕРіР»Рё РІР·СЏС‚СЊСЃСЏ РёР· РїРѕС‚СЃСЂРѕРµРЅРёСЏ TimeРЅРѕРґРѕРІ
 		if (m_SynRelations[i].m_TargetNodeNo == m_SynRelations[i].m_SourceNodeNo)
 			m_SynRelations.erase(m_SynRelations.begin() +i);
 		else

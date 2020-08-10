@@ -11,58 +11,58 @@ CRusFormatCaller::CRusFormatCaller(const CSyntaxOpt* Opt) : CFormatCaller(Opt)
 {
 	#define InsertRule(_rule, _member, _group_name, _direction)  FormatCalls.insert(CFormatCallMap::value_type( _rule ,  CFormatCall ((CFormatFunc)&CRusFormatCaller:: _member , _group_name, _direction )));
 
-	InsertRule ( rule_for_numbers, format_for_numbers, "КОЛИЧ", FROM_LEFT);
-	InsertRule ( rule_for_num_complex, format_for_num_complex,"СЛОЖ_ЧИСЛ", FROM_LEFT);
-	InsertRule ( rule_for_similar_numerals, format_for_similar_numerals,"ОДНОР_ЧИСЛ", FROM_LEFT);
-	InsertRule ( rule_for_noun_adjuncts, format_for_noun_adjunct_group,"ПРИЛОЖЕНИЕ", FROM_LEFT);
-	InsertRule ( rule_for_noun_num, format_for_noun_num,"СУЩ_ЧИСЛ", FROM_LEFT);
-	InsertRule ( rule_for_names, format_for_FAM1_FAM2, "ФИО", FROM_LEFT);
-	InsertRule ( rule_for_adv_adj, format_for_adv_adj,"НАР_ПРИЛ", FROM_LEFT);
-	InsertRule ( rule_for_similar_adjs, format_for_similar_adjs,"ОДНОР_ПРИЛ", FROM_LEFT);
-	InsertRule ( rule_for_modif_adj, format_for_modif_adj_groups,"МОДИФ_ПРИЛ", FROM_LEFT);
-	InsertRule ( rule_for_similar_advs, format_for_similar_advs,"ОДНОР_НАР", FROM_LEFT);
-	InsertRule ( rule_for_similar_advs_comp_conj, format_for_similar_advs_comp_conj,"ОДНОР_НАР", FROM_LEFT);
-	InsertRule ( rule_for_similar_infs, format_for_similar_infs,"ОДНОР_ИНФ", FROM_LEFT);
-	InsertRule ( rule_for_similar_comp_adjs, format_for_similar_comp_adjs,"ОДНОР_ПРИЛ", FROM_LEFT);
-	InsertRule ( rule_for_web_addr, format_for_web_addr,"ЭЛ_АДРЕС", FROM_LEFT);
-	InsertRule ( rule_for_comp_adv, format_for_comp_adv,"СРАВН_СТЕПЕНЬ", FROM_LEFT);
-	InsertRule ( rule_for_adv_verb, format_for_adv_verb,"НАРЕЧ_ГЛАГОЛ", FROM_LEFT);
-	InsertRule ( rule_for_noun_groups, format_for_noun_groups,"ПРИЛ_СУЩ", FROM_LEFT);
-	InsertRule ( rule_for_number_adverb, format_for_number_adverb,"НАР_ЧИСЛ_СУЩ", FROM_LEFT);
-	InsertRule ( rule_for_number_noun, format_for_number_noun,"ЧИСЛ_СУЩ", FROM_LEFT);
-	InsertRule ( rule_for_approx_noun_number, format_for_approx_noun_number,"АППРОКС_ИГ", FROM_LEFT);
+	InsertRule ( rule_for_numbers, format_for_numbers, "РљРћР›РР§", FROM_LEFT);
+	InsertRule ( rule_for_num_complex, format_for_num_complex,"РЎР›РћР–_Р§РРЎР›", FROM_LEFT);
+	InsertRule ( rule_for_similar_numerals, format_for_similar_numerals,"РћР”РќРћР _Р§РРЎР›", FROM_LEFT);
+	InsertRule ( rule_for_noun_adjuncts, format_for_noun_adjunct_group,"РџР РР›РћР–Р•РќРР•", FROM_LEFT);
+	InsertRule ( rule_for_noun_num, format_for_noun_num,"РЎРЈР©_Р§РРЎР›", FROM_LEFT);
+	InsertRule ( rule_for_names, format_for_FAM1_FAM2, "Р¤РРћ", FROM_LEFT);
+	InsertRule ( rule_for_adv_adj, format_for_adv_adj,"РќРђР _РџР РР›", FROM_LEFT);
+	InsertRule ( rule_for_similar_adjs, format_for_similar_adjs,"РћР”РќРћР _РџР РР›", FROM_LEFT);
+	InsertRule ( rule_for_modif_adj, format_for_modif_adj_groups,"РњРћР”РР¤_РџР РР›", FROM_LEFT);
+	InsertRule ( rule_for_similar_advs, format_for_similar_advs,"РћР”РќРћР _РќРђР ", FROM_LEFT);
+	InsertRule ( rule_for_similar_advs_comp_conj, format_for_similar_advs_comp_conj,"РћР”РќРћР _РќРђР ", FROM_LEFT);
+	InsertRule ( rule_for_similar_infs, format_for_similar_infs,"РћР”РќРћР _РРќР¤", FROM_LEFT);
+	InsertRule ( rule_for_similar_comp_adjs, format_for_similar_comp_adjs,"РћР”РќРћР _РџР РР›", FROM_LEFT);
+	InsertRule ( rule_for_web_addr, format_for_web_addr,"Р­Р›_РђР”Р Р•РЎ", FROM_LEFT);
+	InsertRule ( rule_for_comp_adv, format_for_comp_adv,"РЎР РђР’Рќ_РЎРўР•РџР•РќР¬", FROM_LEFT);
+	InsertRule ( rule_for_adv_verb, format_for_adv_verb,"РќРђР Р•Р§_Р“Р›РђР“РћР›", FROM_LEFT);
+	InsertRule ( rule_for_noun_groups, format_for_noun_groups,"РџР РР›_РЎРЈР©", FROM_LEFT);
+	InsertRule ( rule_for_number_adverb, format_for_number_adverb,"РќРђР _Р§РРЎР›_РЎРЈР©", FROM_LEFT);
+	InsertRule ( rule_for_number_noun, format_for_number_noun,"Р§РРЎР›_РЎРЈР©", FROM_LEFT);
+	InsertRule ( rule_for_approx_noun_number, format_for_approx_noun_number,"РђРџРџР РћРљРЎ_РР“", FROM_LEFT);
 	 
-	InsertRule ( rule_for_rank_surname, format_for_rank_surname,"ДОЛЖ_ФИО", FROM_LEFT);
-	InsertRule ( rule_for_gen_chains, format_for_gen_chains,"ГЕНИТ_ИГ", FROM_LEFT);
+	InsertRule ( rule_for_rank_surname, format_for_rank_surname,"Р”РћР›Р–_Р¤РРћ", FROM_LEFT);
+	InsertRule ( rule_for_gen_chains, format_for_gen_chains,"Р“Р•РќРРў_РР“", FROM_LEFT);
 
-	InsertRule ( rule_for_from_compar, format_for_from_compar,"ОТСРАВН",FROM_LEFT);
+	InsertRule ( rule_for_from_compar, format_for_from_compar,"РћРўРЎР РђР’Рќ",FROM_LEFT);
 	 
-	InsertRule ( rule_for_preps, format_for_preps,"ПГ", FROM_LEFT);
-	InsertRule ( rule_for_prep_IZ, format_for_prep_IZ,"ПГ (из)", FROM_LEFT);
+	InsertRule ( rule_for_preps, format_for_preps,"РџР“", FROM_LEFT);
+	InsertRule ( rule_for_prep_IZ, format_for_prep_IZ,"РџР“ (РёР·)", FROM_LEFT);
 	 
-	InsertRule ( rule_for_selective_groups, format_for_selective_groups,"ЭЛЕКТ_ИГ", FROM_LEFT);
-	InsertRule ( rule_for_similar_noun_groups, format_for_similar_noun_groups,"ОДНОР_ИГ", FROM_LEFT);
-	InsertRule ( rule_for_neg_verb,format_for_neg_verb,"ОТР_ФОРМА", FROM_LEFT);
-	InsertRule ( rule_for_dir_obj, format_for_dir_obj,"ПРЯМ_ДОП", FROM_LEFT);
-	InsertRule ( rule_for_instr_obj, format_for_instr_obj,"ИНСТР_ДОП", FROM_LEFT);
-	InsertRule ( rule_for_dir_obj_rev, format_for_dir_obj_rev,"ПРЯМ_ДОП_РЕВ", FROM_LEFT);
-	InsertRule ( rule_for_verb_inf, format_for_verb_inf,"ПЕР_ГЛАГ_ИНФ", FROM_LEFT);
-	InsertRule ( rule_for_adv_adv, format_for_adv_adv,"НАР_НАР", FROM_LEFT);
-	InsertRule ( rule_adv_number_adverb, format_for_adv_number_adverb,"НАР_НАР_ЧИСЛ", FROM_LEFT);
-	InsertRule ( rule_for_approx_prep_noun, format_for_approx_noun_prep,"АППРОКС_ПГ", FROM_LEFT);
-	InsertRule ( rule_for_partic_clause, format_for_partic_clause,"ПРИЧ_СУЩ",FROM_RIGHT);
-	InsertRule ( rule_for_whose_clause, format_for_whose_clause,"ПРИДАТ_ОПР",FROM_RIGHT);
-	InsertRule ( rule_for_adj_in_commas_preposition, format_for_adj_in_commas_preposition,"ПРИЛ-СУЩ",FROM_RIGHT);
-	InsertRule ( rule_for_plural_noun_adj, format_for_plural_noun_adj,"ПРИЛ-СУЩ",FROM_LEFT);
-	InsertRule ( rule_for_noun_adj_postposition, format_for_noun_adj_postposition,"ПРИЛ_ПОСТПОС",FROM_LEFT);
-	InsertRule ( rule_for_noun_detached_adj_postposition, format_for_noun_detached_adj_postposition,"СУЩ_ОБС_ПРИЛ",FROM_LEFT);
-	InsertRule ( rule_for_keyb, format_for_keyb,"КЛВ",FROM_LEFT);
-	InsertRule ( rule_for_disrupt_conj, format_for_disrupt_conj,"РАЗРЫВ_СОЮЗ",FROM_LEFT);
-	InsertRule ( rule_for_adv_predik, format_for_adv_predik,"НАР_ПРЕДИК", FROM_LEFT);
-	InsertRule ( rule_for_anat_compar, format_for_anat_compar,"АНАТ_СРАВН", FROM_LEFT);
-	InsertRule ( rule_for_foreign_term, format_for_foreign_term,"ИНОСТР_ЛЕКС",FROM_LEFT);
-	InsertRule ( rule_for_preps_adj, format_for_preps_adj,"ПГ (для прилагательных)", FROM_LEFT);
-	InsertRule ( rule_for_oborots, format_for_oborots,"ОБОРОТ", FROM_LEFT);
+	InsertRule ( rule_for_selective_groups, format_for_selective_groups,"Р­Р›Р•РљРў_РР“", FROM_LEFT);
+	InsertRule ( rule_for_similar_noun_groups, format_for_similar_noun_groups,"РћР”РќРћР _РР“", FROM_LEFT);
+	InsertRule ( rule_for_neg_verb,format_for_neg_verb,"РћРўР _Р¤РћР РњРђ", FROM_LEFT);
+	InsertRule ( rule_for_dir_obj, format_for_dir_obj,"РџР РЇРњ_Р”РћРџ", FROM_LEFT);
+	InsertRule ( rule_for_instr_obj, format_for_instr_obj,"РРќРЎРўР _Р”РћРџ", FROM_LEFT);
+	InsertRule ( rule_for_dir_obj_rev, format_for_dir_obj_rev,"РџР РЇРњ_Р”РћРџ_Р Р•Р’", FROM_LEFT);
+	InsertRule ( rule_for_verb_inf, format_for_verb_inf,"РџР•Р _Р“Р›РђР“_РРќР¤", FROM_LEFT);
+	InsertRule ( rule_for_adv_adv, format_for_adv_adv,"РќРђР _РќРђР ", FROM_LEFT);
+	InsertRule ( rule_adv_number_adverb, format_for_adv_number_adverb,"РќРђР _РќРђР _Р§РРЎР›", FROM_LEFT);
+	InsertRule ( rule_for_approx_prep_noun, format_for_approx_noun_prep,"РђРџРџР РћРљРЎ_РџР“", FROM_LEFT);
+	InsertRule ( rule_for_partic_clause, format_for_partic_clause,"РџР РР§_РЎРЈР©",FROM_RIGHT);
+	InsertRule ( rule_for_whose_clause, format_for_whose_clause,"РџР РР”РђРў_РћРџР ",FROM_RIGHT);
+	InsertRule ( rule_for_adj_in_commas_preposition, format_for_adj_in_commas_preposition,"РџР РР›-РЎРЈР©",FROM_RIGHT);
+	InsertRule ( rule_for_plural_noun_adj, format_for_plural_noun_adj,"РџР РР›-РЎРЈР©",FROM_LEFT);
+	InsertRule ( rule_for_noun_adj_postposition, format_for_noun_adj_postposition,"РџР РР›_РџРћРЎРўРџРћРЎ",FROM_LEFT);
+	InsertRule ( rule_for_noun_detached_adj_postposition, format_for_noun_detached_adj_postposition,"РЎРЈР©_РћР‘РЎ_РџР РР›",FROM_LEFT);
+	InsertRule ( rule_for_keyb, format_for_keyb,"РљР›Р’",FROM_LEFT);
+	InsertRule ( rule_for_disrupt_conj, format_for_disrupt_conj,"Р РђР—Р Р«Р’_РЎРћР®Р—",FROM_LEFT);
+	InsertRule ( rule_for_adv_predik, format_for_adv_predik,"РќРђР _РџР Р•Р”РРљ", FROM_LEFT);
+	InsertRule ( rule_for_anat_compar, format_for_anat_compar,"РђРќРђРў_РЎР РђР’Рќ", FROM_LEFT);
+	InsertRule ( rule_for_foreign_term, format_for_foreign_term,"РРќРћРЎРўР _Р›Р•РљРЎ",FROM_LEFT);
+	InsertRule ( rule_for_preps_adj, format_for_preps_adj,"РџР“ (РґР»СЏ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹С…)", FROM_LEFT);
+	InsertRule ( rule_for_oborots, format_for_oborots,"РћР‘РћР РћРў", FROM_LEFT);
 	
 
 #undef InsertRule
@@ -83,26 +83,26 @@ int   CRusFormatCaller::GetRuleByGroupTypeForThesaurus(int GroupType) const
 
 
 	/*
-		Функция InitForSimilarAdj инициализирует порядок правил для  однородных  прилагательных.
-		Форматка rule_for_similar_adjs применяется дважды. Сначала  строятся  группы однородных прилагательных,
-		которые не включают в качестве самостоятельных членов  слова "самый" и "такой" .
-		Например, для фразы 
-			"стройный, такой красивый и молодой"
-		будет построена группа "красивый и молодой",а "стройный, такой" построена не будет.
-		Далее прогоняется правило МОДИФ_ПРИЛ, которая строит для вышеуказанного примера группу 
-			"такой красивый и молодой"
-		Потом еще раз прогоняется правило ОДНОР_ПРИЛ, которое достраивает (строит)  уже все ОДНОР_ПРИЛ, поскольку
-		слова "самый" и "такой" уже вошли в группы и стоят на зависимых  местах. Получается такое:
-			(стройный и (такой (красивый и молодой)))
-		Интуитивно этот порядок применения правил говорит о том, что "такой" и "самый" в однородном ряде всегда распространяется на все 
-		идущие после него члены. Однако по этому же правилу поучается, что
-				"большой, стройный и такой красивый и молодой"
-			строится так 			( (большой, стройный) и (такой (красивый и молодой)) ),
+		Р¤СѓРЅРєС†РёСЏ InitForSimilarAdj РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РїРѕСЂСЏРґРѕРє РїСЂР°РІРёР» РґР»СЏ  РѕРґРЅРѕСЂРѕРґРЅС‹С…  РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹С….
+		Р¤РѕСЂРјР°С‚РєР° rule_for_similar_adjs РїСЂРёРјРµРЅСЏРµС‚СЃСЏ РґРІР°Р¶РґС‹. РЎРЅР°С‡Р°Р»Р°  СЃС‚СЂРѕСЏС‚СЃСЏ  РіСЂСѓРїРїС‹ РѕРґРЅРѕСЂРѕРґРЅС‹С… РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹С…,
+		РєРѕС‚РѕСЂС‹Рµ РЅРµ РІРєР»СЋС‡Р°СЋС‚ РІ РєР°С‡РµСЃС‚РІРµ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅС‹С… С‡Р»РµРЅРѕРІ  СЃР»РѕРІР° "СЃР°РјС‹Р№" Рё "С‚Р°РєРѕР№" .
+		РќР°РїСЂРёРјРµСЂ, РґР»СЏ С„СЂР°Р·С‹ 
+			"СЃС‚СЂРѕР№РЅС‹Р№, С‚Р°РєРѕР№ РєСЂР°СЃРёРІС‹Р№ Рё РјРѕР»РѕРґРѕР№"
+		Р±СѓРґРµС‚ РїРѕСЃС‚СЂРѕРµРЅР° РіСЂСѓРїРїР° "РєСЂР°СЃРёРІС‹Р№ Рё РјРѕР»РѕРґРѕР№",Р° "СЃС‚СЂРѕР№РЅС‹Р№, С‚Р°РєРѕР№" РїРѕСЃС‚СЂРѕРµРЅР° РЅРµ Р±СѓРґРµС‚.
+		Р”Р°Р»РµРµ РїСЂРѕРіРѕРЅСЏРµС‚СЃСЏ РїСЂР°РІРёР»Рѕ РњРћР”РР¤_РџР РР›, РєРѕС‚РѕСЂР°СЏ СЃС‚СЂРѕРёС‚ РґР»СЏ РІС‹С€РµСѓРєР°Р·Р°РЅРЅРѕРіРѕ РїСЂРёРјРµСЂР° РіСЂСѓРїРїСѓ 
+			"С‚Р°РєРѕР№ РєСЂР°СЃРёРІС‹Р№ Рё РјРѕР»РѕРґРѕР№"
+		РџРѕС‚РѕРј РµС‰Рµ СЂР°Р· РїСЂРѕРіРѕРЅСЏРµС‚СЃСЏ РїСЂР°РІРёР»Рѕ РћР”РќРћР _РџР РР›, РєРѕС‚РѕСЂРѕРµ РґРѕСЃС‚СЂР°РёРІР°РµС‚ (СЃС‚СЂРѕРёС‚)  СѓР¶Рµ РІСЃРµ РћР”РќРћР _РџР РР›, РїРѕСЃРєРѕР»СЊРєСѓ
+		СЃР»РѕРІР° "СЃР°РјС‹Р№" Рё "С‚Р°РєРѕР№" СѓР¶Рµ РІРѕС€Р»Рё РІ РіСЂСѓРїРїС‹ Рё СЃС‚РѕСЏС‚ РЅР° Р·Р°РІРёСЃРёРјС‹С…  РјРµСЃС‚Р°С…. РџРѕР»СѓС‡Р°РµС‚СЃСЏ С‚Р°РєРѕРµ:
+			(СЃС‚СЂРѕР№РЅС‹Р№ Рё (С‚Р°РєРѕР№ (РєСЂР°СЃРёРІС‹Р№ Рё РјРѕР»РѕРґРѕР№)))
+		РРЅС‚СѓРёС‚РёРІРЅРѕ СЌС‚РѕС‚ РїРѕСЂСЏРґРѕРє РїСЂРёРјРµРЅРµРЅРёСЏ РїСЂР°РІРёР» РіРѕРІРѕСЂРёС‚ Рѕ С‚РѕРј, С‡С‚Рѕ "С‚Р°РєРѕР№" Рё "СЃР°РјС‹Р№" РІ РѕРґРЅРѕСЂРѕРґРЅРѕРј СЂСЏРґРµ РІСЃРµРіРґР° СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ РЅР° РІСЃРµ 
+		РёРґСѓС‰РёРµ РїРѕСЃР»Рµ РЅРµРіРѕ С‡Р»РµРЅС‹. РћРґРЅР°РєРѕ РїРѕ СЌС‚РѕРјСѓ Р¶Рµ РїСЂР°РІРёР»Сѓ РїРѕСѓС‡Р°РµС‚СЃСЏ, С‡С‚Рѕ
+				"Р±РѕР»СЊС€РѕР№, СЃС‚СЂРѕР№РЅС‹Р№ Рё С‚Р°РєРѕР№ РєСЂР°СЃРёРІС‹Р№ Рё РјРѕР»РѕРґРѕР№"
+			СЃС‚СЂРѕРёС‚СЃСЏ С‚Р°Рє 			( (Р±РѕР»СЊС€РѕР№, СЃС‚СЂРѕР№РЅС‹Р№) Рё (С‚Р°РєРѕР№ (РєСЂР°СЃРёРІС‹Р№ Рё РјРѕР»РѕРґРѕР№)) ),
 
-			А фраза "стройный, такой красивый и совсем молодой"
-			строится как  (стройный, (такой (красивый и (совсем молодой))) ).
+			Рђ С„СЂР°Р·Р° "СЃС‚СЂРѕР№РЅС‹Р№, С‚Р°РєРѕР№ РєСЂР°СЃРёРІС‹Р№ Рё СЃРѕРІСЃРµРј РјРѕР»РѕРґРѕР№"
+			СЃС‚СЂРѕРёС‚СЃСЏ РєР°Рє  (СЃС‚СЂРѕР№РЅС‹Р№, (С‚Р°РєРѕР№ (РєСЂР°СЃРёРІС‹Р№ Рё (СЃРѕРІСЃРµРј РјРѕР»РѕРґРѕР№))) ).
 
-		Это все ошибки, которые надо исправить.	
+		Р­С‚Рѕ РІСЃРµ РѕС€РёР±РєРё, РєРѕС‚РѕСЂС‹Рµ РЅР°РґРѕ РёСЃРїСЂР°РІРёС‚СЊ.	
 	*/
 
 static void InitForSimilarAdj( CFormatCaller& FormatCaller)
@@ -114,7 +114,7 @@ static void InitForSimilarAdj( CFormatCaller& FormatCaller)
 
 void CRusFormatCaller::AddAllRules()
 {
-	// первыми всегда  должны   стоять правила, которые основываются только на графематике
+	// РїРµСЂРІС‹РјРё РІСЃРµРіРґР°  РґРѕР»Р¶РЅС‹   СЃС‚РѕСЏС‚СЊ РїСЂР°РІРёР»Р°, РєРѕС‚РѕСЂС‹Рµ РѕСЃРЅРѕРІС‹РІР°СЋС‚СЃСЏ С‚РѕР»СЊРєРѕ РЅР° РіСЂР°С„РµРјР°С‚РёРєРµ
 	m_vectorRulesNumbers.push_back(rule_for_names);
 	m_vectorRulesNumbers.push_back(rule_for_web_addr);
 	m_vectorRulesNumbers.push_back(rule_for_keyb);
@@ -151,7 +151,7 @@ void CRusFormatCaller::AddAllRules()
 	m_vectorRulesNumbers.push_back(rule_for_plural_noun_adj);
 	m_vectorRulesNumbers.push_back(rule_for_noun_adj_postposition);
 	m_vectorRulesNumbers.push_back(rule_for_noun_detached_adj_postposition);
-	m_vectorRulesNumbers.push_back(rule_for_number_noun); // "совершила более 40 тяжких преступлений"
+	m_vectorRulesNumbers.push_back(rule_for_number_noun); // "СЃРѕРІРµСЂС€РёР»Р° Р±РѕР»РµРµ 40 С‚СЏР¶РєРёС… РїСЂРµСЃС‚СѓРїР»РµРЅРёР№"
 	m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);	
 	m_vectorRulesNumbers.push_back(rule_for_number_noun);
@@ -162,8 +162,8 @@ void CRusFormatCaller::AddAllRules()
 	m_vectorRulesNumbers.push_back(rule_for_selective_groups);
 	m_vectorRulesNumbers.push_back(rule_for_preps);
 	m_vectorRulesNumbers.push_back(rule_for_similar_noun_groups);
-	m_vectorRulesNumbers.push_back(rule_for_similar_noun_groups); //дублирование для примеров типа "стол и стул и окно"
-	m_vectorRulesNumbers.push_back(rule_for_plural_noun_adj); // чтобы собрать "черные шкаф и стул"
+	m_vectorRulesNumbers.push_back(rule_for_similar_noun_groups); //РґСѓР±Р»РёСЂРѕРІР°РЅРёРµ РґР»СЏ РїСЂРёРјРµСЂРѕРІ С‚РёРїР° "СЃС‚РѕР» Рё СЃС‚СѓР» Рё РѕРєРЅРѕ"
+	m_vectorRulesNumbers.push_back(rule_for_plural_noun_adj); // С‡С‚РѕР±С‹ СЃРѕР±СЂР°С‚СЊ "С‡РµСЂРЅС‹Рµ С€РєР°С„ Рё СЃС‚СѓР»"
 	m_vectorRulesNumbers.push_back(rule_for_neg_verb);
 	m_vectorRulesNumbers.push_back(rule_for_dir_obj);
 	m_vectorRulesNumbers.push_back(rule_for_instr_obj);
@@ -176,19 +176,19 @@ void CRusFormatCaller::AddAllRules()
 
 	m_vectorRulesNumbers.push_back(rule_for_noun_adjuncts);
 
-	//  еще раз вызываем правило rule_for_gen_chains для фразы "руководителям отдела и всего проекта"
+	//  РµС‰Рµ СЂР°Р· РІС‹Р·С‹РІР°РµРј РїСЂР°РІРёР»Рѕ rule_for_gen_chains РґР»СЏ С„СЂР°Р·С‹ "СЂСѓРєРѕРІРѕРґРёС‚РµР»СЏРј РѕС‚РґРµР»Р° Рё РІСЃРµРіРѕ РїСЂРѕРµРєС‚Р°"
 	m_vectorRulesNumbers.push_back(rule_for_gen_chains);
 
-	//  еще раз вызываем правило rule_for_verb_inf для фразы "Он хотел научиться писать"
+	//  РµС‰Рµ СЂР°Р· РІС‹Р·С‹РІР°РµРј РїСЂР°РІРёР»Рѕ rule_for_verb_inf РґР»СЏ С„СЂР°Р·С‹ "РћРЅ С…РѕС‚РµР» РЅР°СѓС‡РёС‚СЊСЃСЏ РїРёСЃР°С‚СЊ"
 	m_vectorRulesNumbers.push_back(rule_for_verb_inf);
 
-	//  для предложения   "Он изобрел и сад, и огород."
+	//  РґР»СЏ РїСЂРµРґР»РѕР¶РµРЅРёСЏ   "РћРЅ РёР·РѕР±СЂРµР» Рё СЃР°Рґ, Рё РѕРіРѕСЂРѕРґ."
 	m_vectorRulesNumbers.push_back(rule_for_dir_obj);
 }
 
 void CRusFormatCaller::AddRulesBeforeSimClauses( )
 {
-	// первыми всегда  должны   стоять правила, которые основываются только на графематике
+	// РїРµСЂРІС‹РјРё РІСЃРµРіРґР°  РґРѕР»Р¶РЅС‹   СЃС‚РѕСЏС‚СЊ РїСЂР°РІРёР»Р°, РєРѕС‚РѕСЂС‹Рµ РѕСЃРЅРѕРІС‹РІР°СЋС‚СЃСЏ С‚РѕР»СЊРєРѕ РЅР° РіСЂР°С„РµРјР°С‚РёРєРµ
 	m_vectorRulesNumbers.push_back(rule_for_names);
 	m_vectorRulesNumbers.push_back(rule_for_web_addr);
 	m_vectorRulesNumbers.push_back(rule_for_keyb);	
@@ -224,7 +224,7 @@ void CRusFormatCaller::AddRulesBeforeSimClauses( )
 	m_vectorRulesNumbers.push_back(rule_for_plural_noun_adj);
 	m_vectorRulesNumbers.push_back(rule_for_noun_adj_postposition);
 	m_vectorRulesNumbers.push_back(rule_for_noun_detached_adj_postposition);
-	m_vectorRulesNumbers.push_back(rule_for_number_noun); // "совершила более 40 тяжких преступлений"
+	m_vectorRulesNumbers.push_back(rule_for_number_noun); // "СЃРѕРІРµСЂС€РёР»Р° Р±РѕР»РµРµ 40 С‚СЏР¶РєРёС… РїСЂРµСЃС‚СѓРїР»РµРЅРёР№"
 	m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	m_vectorRulesNumbers.push_back(rule_for_number_noun);
 	m_vectorRulesNumbers.push_back(rule_for_rank_surname);
@@ -238,7 +238,7 @@ void CRusFormatCaller::AddRulesBeforeSimClauses( )
 void CRusFormatCaller::AddRulesAfterSimClauses( )
 {
 	m_vectorRulesNumbers.push_back(rule_for_similar_noun_groups);
-	m_vectorRulesNumbers.push_back(rule_for_similar_noun_groups); //дублирование для примеров типа "стол и стул и окно"
+	m_vectorRulesNumbers.push_back(rule_for_similar_noun_groups); //РґСѓР±Р»РёСЂРѕРІР°РЅРёРµ РґР»СЏ РїСЂРёРјРµСЂРѕРІ С‚РёРїР° "СЃС‚РѕР» Рё СЃС‚СѓР» Рё РѕРєРЅРѕ"
 	m_vectorRulesNumbers.push_back(rule_for_neg_verb);
 	m_vectorRulesNumbers.push_back(rule_for_dir_obj);
 	m_vectorRulesNumbers.push_back(rule_for_instr_obj);

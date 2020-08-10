@@ -5,7 +5,7 @@
 const size_t CitiesCount = 4;
 const string Cities[CitiesCount] = 
 {
-	"STADT", "HAUPTSTADT", "HAFENSTADT","KÜSTENSTADT"
+	"STADT", "HAUPTSTADT", "HAFENSTADT","KÐ¬STENSTADT"
 };
 
 

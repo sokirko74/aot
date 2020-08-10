@@ -6,9 +6,9 @@
 #include "RusFormatCaller.h"
 
 
-// Примеры:
-// дом отца 
-// дом старой постройки
+// РџСЂРёРјРµСЂС‹:
+// РґРѕРј РѕС‚С†Р° 
+// РґРѕРј СЃС‚Р°СЂРѕР№ РїРѕСЃС‚СЂРѕР№РєРё
 
 bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 {
@@ -19,22 +19,22 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 	if (Wi.m_UnitType != EWord) return false;
 
 	/*
-		для больших числительных в единственном числе лучше пускай строится группа 
-		ЧИСЛ-СУЩ, например "тысяча работников",
-		если это условие не вставиь тогда тут строится ГЕНИГ_ИГ
-		Для "тысячи работников" (множественное число)	пусть генит_ИГ строится.
-		Сокирко
+		РґР»СЏ Р±РѕР»СЊС€РёС… С‡РёСЃР»РёС‚РµР»СЊРЅС‹С… РІ РµРґРёРЅСЃС‚РІРµРЅРЅРѕРј С‡РёСЃР»Рµ Р»СѓС‡С€Рµ РїСѓСЃРєР°Р№ СЃС‚СЂРѕРёС‚СЃСЏ РіСЂСѓРїРїР° 
+		Р§РРЎР›-РЎРЈР©, РЅР°РїСЂРёРјРµСЂ "С‚С‹СЃСЏС‡Р° СЂР°Р±РѕС‚РЅРёРєРѕРІ",
+		РµСЃР»Рё СЌС‚Рѕ СѓСЃР»РѕРІРёРµ РЅРµ РІСЃС‚Р°РІРёСЊ С‚РѕРіРґР° С‚СѓС‚ СЃС‚СЂРѕРёС‚СЃСЏ Р“Р•РќРР“_РР“
+		Р”Р»СЏ "С‚С‹СЃСЏС‡Рё СЂР°Р±РѕС‚РЅРёРєРѕРІ" (РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ С‡РёСЃР»Рѕ)	РїСѓСЃС‚СЊ РіРµРЅРёС‚_РР“ СЃС‚СЂРѕРёС‚СЃСЏ.
+		РЎРѕРєРёСЂРєРѕ
 	*/
 	if  ( !Wi.has_grammem(rPlural))
 		if (FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, sent[i].get_lemma() ) != -1) 
 			return false;
 
-	// со словом "нет" ГЕНИТ_ИГ не образуется 
-	if (Wi.is_lemma("НЕТ"))
+	// СЃРѕ СЃР»РѕРІРѕРј "РЅРµС‚" Р“Р•РќРРў_РР“ РЅРµ РѕР±СЂР°Р·СѓРµС‚СЃСЏ 
+	if (Wi.is_lemma("РќР•Рў"))
 		return false;
 
 
-	 // если перед текущей группой стоит существительное, то выйти 	 
+	 // РµСЃР»Рё РїРµСЂРµРґ С‚РµРєСѓС‰РµР№ РіСЂСѓРїРїРѕР№ СЃС‚РѕРёС‚ СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРµ, С‚Рѕ РІС‹Р№С‚Рё 	 
 	if (G.m_iFirstWord > 0)
 	{ 
         const CGroup& H = get_maximal_group (G.m_iFirstWord - 1);
@@ -52,12 +52,12 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 	int k = get_next_main_word(i);
 	if (k == sent.size()) return false;
 
-	// проходим частицу, если она встретилась
+	// РїСЂРѕС…РѕРґРёРј С‡Р°СЃС‚РёС†Сѓ, РµСЃР»Рё РѕРЅР° РІСЃС‚СЂРµС‚РёР»Р°СЃСЊ
 	if	(GetGramTab()->IsSimpleParticle(Wk.get_lemma(), Wk.GetPoses()) )
 		k = get_next_main_word(k);
 	if (k == sent.size()) return false;
 
-	if (!Wk.is_morph_noun() || Wk.is_lemma("КОТОРЫЙ")) return false;
+	if (!Wk.is_morph_noun() || Wk.is_lemma("РљРћРўРћР Р«Р™")) return false;
 	const CGroup& RightGroup = get_maximal_group (k);
 	if( RightGroup.m_GroupType == NUMERALS || RightGroup.m_GroupType == NUMERAL_NOUN)
 			return false;
@@ -81,8 +81,8 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 };
 
 /*
-  краше тебя
-  краше старой крепости
+  РєСЂР°С€Рµ С‚РµР±СЏ
+  РєСЂР°С€Рµ СЃС‚Р°СЂРѕР№ РєСЂРµРїРѕСЃС‚Рё
 */
 bool CRusFormatCaller::format_for_from_compar (CGroup& G)
 {
@@ -101,18 +101,18 @@ bool CRusFormatCaller::format_for_from_compar (CGroup& G)
 	 if (P.m_iLastWord + 1 >= sent.size()) return false;
      const CGroup& H = get_maximal_group (P.m_iLastWord + 1);
 	 int j = H.m_MainWordNo;
-	 if (!Wj.is_syn_noun() || Wj.is_lemma("КОТОРЫЙ")) return false;
+	 if (!Wj.is_syn_noun() || Wj.is_lemma("РљРћРўРћР Р«Р™")) return false;
 	 
 	 if( H.m_GroupType == NUMERALS)		 return false;
 	 if (!(H.GetGrammems() & _QM(rGenitiv))) return false;
 
-	 // нельзя у подч. существительного убивать все падежи, кроме род. из-за примера 
-	 // "Она мечтала побыстрее его женить."
+	 // РЅРµР»СЊР·СЏ Сѓ РїРѕРґС‡. СЃСѓС‰РµСЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ СѓР±РёРІР°С‚СЊ РІСЃРµ РїР°РґРµР¶Рё, РєСЂРѕРјРµ СЂРѕРґ. РёР·-Р·Р° РїСЂРёРјРµСЂР° 
+	 // "РћРЅР° РјРµС‡С‚Р°Р»Р° РїРѕР±С‹СЃС‚СЂРµРµ РµРіРѕ Р¶РµРЅРёС‚СЊ."
 	 // !!!! change_words_in_group_grammems(H, (1<<rGenitiv), rAllCases);  
 
 	 G.m_MainGroup = P;
 	 G.m_iLastWord = H.m_iLastWord;
-	 G.m_Cause = "Сравнительное прилагательное и идущее сразу за ним ИГ в род. падеже ";
+	 G.m_Cause = "РЎСЂР°РІРЅРёС‚РµР»СЊРЅРѕРµ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅРѕРµ Рё РёРґСѓС‰РµРµ СЃСЂР°Р·Сѓ Р·Р° РЅРёРј РР“ РІ СЂРѕРґ. РїР°РґРµР¶Рµ ";
 	 G.m_GroupType = FROM_COMPAR;
 	 G.SetGrammems( 0 );
 

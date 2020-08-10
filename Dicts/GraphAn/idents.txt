@@ -19,10 +19,10 @@ POP2
 POP3
 PS/2
 TCP/IP
-а:
-с:
-си++
-СИ++
-бит/с
+Р°:
+СЃ:
+СЃРё++
+РЎР++
+Р±РёС‚/СЃ
 Unix-to-Unix
 terminate-and-stay

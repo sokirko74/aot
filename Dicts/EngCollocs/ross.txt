@@ -47,10 +47,10 @@ POS     =  before
 CONTENT =  times
 EXM     =  the United Kingdom has attracted five times as much
            Japanese investment as Germany or France -
-           Соединенное Королевство привлекло в пять раз больше инвестиций, чем
-           Германия или Франция
+           РЎРѕРµРґРёРЅРµРЅРЅРѕРµ РљРѕСЂРѕР»РµРІСЃС‚РІРѕ РїСЂРёРІР»РµРєР»Рѕ РІ РїСЏС‚СЊ СЂР°Р· Р±РѕР»СЊС€Рµ РёРЅРІРµСЃС‚РёС†РёР№, С‡РµРј
+           Р“РµСЂРјР°РЅРёСЏ РёР»Рё Р¤СЂР°РЅС†РёСЏ
            the gold content of the rouble was increased four times only -
-           золотое содержание рубля было увеличено всего в 4 раза
+           Р·РѕР»РѕС‚РѕРµ СЃРѕРґРµСЂР¶Р°РЅРёРµ СЂСѓР±Р»СЏ Р±С‹Р»Рѕ СѓРІРµР»РёС‡РµРЅРѕ РІСЃРµРіРѕ РІ 4 СЂР°Р·Р°
 ROOT    =  1
 GF      = 1  ADV
 SF      = 1  VALUE
@@ -58,7 +58,7 @@ VAL     =  VALUE , A1 , C
 GF(2)   = 1  NOUN pl
 GF1     = 1  << NUM
 SF1     = 1  QUANTIT
-RUS     =  в_раз 1
+RUS     =  РІ_СЂР°Р· 1
 PREP    =  -
 ============
 TITLE        = absolutely_nothing
@@ -68,7 +68,7 @@ TIME_CREATE       = 15/5/1 15:11:7
 CONTENT =  absolutely nothing
 ROOT    =  2
 GF      = 1  PN:Neg
-RUS     =  ровным_счетом_ничего 1
+RUS     =  СЂРѕРІРЅС‹Рј_СЃС‡РµС‚РѕРј_РЅРёС‡РµРіРѕ 1
 ============
 TITLE        = according_to_information
 SENSE       = 1
@@ -78,7 +78,7 @@ TIME_CREATE       = 24/11/1 21:5:8
 POS     =  begin
 CONTENT =  information
 EXM     =  According to their information, no one will escape -
-           по их данным, никто не убежит
+           РїРѕ РёС… РґР°РЅРЅС‹Рј, РЅРёРєС‚Рѕ РЅРµ СѓР±РµР¶РёС‚
 ROOT    =  1
 GF      = 1  PARENTH
 VAL     =  SUB , A1 , C
@@ -88,7 +88,7 @@ GF(1)   = 1  NOUN sg
 GF1     = 1  NP_poss
 SF1     = 1  ANIM
 GF2     = 1  X! : VERB
-RUS     =  по_данным 1
+RUS     =  РїРѕ_РґР°РЅРЅС‹Рј 1
 ============
 TITLE        = all_the_rest
 SENSE       = 1
@@ -98,7 +98,7 @@ DETERM  =  -
 CONTENT =  all the rest
 ROOT    =  1
 GF      = 1  NOUN
-RUS     =  все_остальное 1
+RUS     =  РІСЃРµ_РѕСЃС‚Р°Р»СЊРЅРѕРµ 1
 ============
 TITLE        = all_the_same
 SENSE       = 1
@@ -106,14 +106,14 @@ AUTHOR       = user
 REDACT       = d
 TIME_CREATE       = 3473408/786433/523788 3737065:251396358:-1236992000
 CONTENT =  all the same
-EXM     =  if it is all the same to you —
-           если вы не возражаете; если это вам безразлично
+EXM     =  if it is all the same to you вЂ”
+           РµСЃР»Рё РІС‹ РЅРµ РІРѕР·СЂР°Р¶Р°РµС‚Рµ; РµСЃР»Рё СЌС‚Рѕ РІР°Рј Р±РµР·СЂР°Р·Р»РёС‡РЅРѕ
 GF      = 1  PN
 VAL     =  SUB , A1 , C
            CONTEN , A2 , C
 GF2     = 1  > sent
 GF1     = 1  >> to+NP
-RUS     =  безразлично 1
+RUS     =  Р±РµР·СЂР°Р·Р»РёС‡РЅРѕ 1
 ============
 TITLE        = as_possible
 SENSE       = 1
@@ -124,7 +124,7 @@ ROOT    =  2
 GF      = 1  ADV
 VAL     =  MODL , C , A1
 GF1     = 1  ^ X! : ADJ
-RUS     =  как_нельзя 1
+RUS     =  РєР°Рє_РЅРµР»СЊР·СЏ 1
 ============
 TITLE        = at_expense
 SENSE       = 1
@@ -134,7 +134,7 @@ TIME_CREATE       = 24/11/1 21:5:17
 CONTENT =  expense
 POS     =  end
 EXM     =  They were in plain clothes and, in his opinion, drunk -
-           они были просто одеты и, по его мнению, пьяны
+           РѕРЅРё Р±С‹Р»Рё РїСЂРѕСЃС‚Рѕ РѕРґРµС‚С‹ Рё, РїРѕ РµРіРѕ РјРЅРµРЅРёСЋ, РїСЊСЏРЅС‹
 ROOT    =  1
 GF      = 1  ADV
 VAL     =  RESTR , C , A1
@@ -144,7 +144,7 @@ GF(1)   = 1  NOUN sg
 GF1     = 1  X! : VERB
 GF2     = 1  NP_poss
 SF2     = 1  ANIM
-RUS     =  за_счет 1
+RUS     =  Р·Р°_СЃС‡РµС‚ 1
 ============
 TITLE        = at_full_drive
 SENSE       = 1
@@ -159,7 +159,7 @@ PREP    =  at
 GF(2)   = 1  NOUN sg
 GF1     = 1  VERB
 LEX1    =  go
-RUS     =  полным_ходом 1
+RUS     =  РїРѕР»РЅС‹Рј_С…РѕРґРѕРј 1
 ============
 TITLE        = at_home
 SENSE       = 1
@@ -168,10 +168,10 @@ REDACT       = alex
 TIME_CREATE       = 24/11/1 21:5:34
 CONTENT =  home
 ROOT    =  1
-GF      = 1  ОБСТ_ГР
+GF      = 1  РћР‘РЎРў_Р“Р 
 PREP    =  at
 GF1     = 1  < X! : VERB
-RUS     =  дома 1
+RUS     =  РґРѕРјР° 1
 ============
 TITLE        = bare_one's_head
 SENSE       = 1
@@ -187,7 +187,7 @@ GF(3)   = 1  NOUN
 GF1     = 1  < subj
 SF1     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  обнажать_голову 1
+RUS     =  РѕР±РЅР°Р¶Р°С‚СЊ_РіРѕР»РѕРІСѓ 1
 SYNR    =  obj ( C1 , C3 )
            attr ( C3 , C2 )
 ============
@@ -203,7 +203,7 @@ GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  subj
 SF1     = 1  ANIM
-RUS     =  родиться 1
+RUS     =  СЂРѕРґРёС‚СЊСЃСЏ 1
 ============
 TITLE        = be_getting_somewhere
 SENSE       = 1
@@ -212,13 +212,13 @@ TIME_CREATE       = 15/5/1 15:11:7
 CONTENT =  be getting somewhere
 ROOT    =  1
 EXM     =  Now we are getting somewhere. -
-           Теперь мы наконец сдвинулись с места.
+           РўРµРїРµСЂСЊ РјС‹ РЅР°РєРѕРЅРµС† СЃРґРІРёРЅСѓР»РёСЃСЊ СЃ РјРµСЃС‚Р°.
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  сдвинуться_с_места 1
-ETENSE  =  прш > pres
+RUS     =  СЃРґРІРёРЅСѓС‚СЊСЃСЏ_СЃ_РјРµСЃС‚Р° 1
+ETENSE  =  РїСЂС€ > pres
 ============
 TITLE        = be_home
 SENSE       = 1
@@ -227,7 +227,7 @@ AUTHOR       = boris
 TIME_CREATE       = 327680/22413313/0 6553600:720896:524288
 CONTENT =  be home
 EXM     =  he often borrows money from me  -
-           он часто берет у меня взаймы
+           РѕРЅ С‡Р°СЃС‚Рѕ Р±РµСЂРµС‚ Сѓ РјРµРЅСЏ РІР·Р°Р№РјС‹
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  LOK
@@ -235,7 +235,7 @@ VAL     =  SUB , A1 , C
 PREP(2) =  at
 GF1     = 1  subj
 SF1     = 1  ANIM
-RUS     =  быть_дома 1
+RUS     =  Р±С‹С‚СЊ_РґРѕРјР° 1
 SYNR    =  indir_obj ( C1 , C2 )
 ============
 TITLE        = be_in_clover
@@ -247,7 +247,7 @@ ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
-RUS     =  лафа 1
+RUS     =  Р»Р°С„Р° 1
 ============
 TITLE        = be_in_progress
 SENSE       = 1
@@ -255,14 +255,14 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:7
 CONTENT =  be in progress
 EXM     =  an inquiry is now in progress -
-           сейчас идёт следствие
+           СЃРµР№С‡Р°СЃ РёРґС‘С‚ СЃР»РµРґСЃС‚РІРёРµ
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  OBJ , A1 , C
 GF1     = 1  < subj
 SF1     = 1  SITUAT
-RUS     =  происходить 3
-           выполняться 1
+RUS     =  РїСЂРѕРёСЃС…РѕРґРёС‚СЊ 3
+           РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ 1
 ============
 TITLE        = be_on_the_drink
 SENSE       = 1
@@ -273,7 +273,7 @@ ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
-RUS     =  пить_горькую 1
+RUS     =  РїРёС‚СЊ_РіРѕСЂСЊРєСѓСЋ 1
 ============
 TITLE        = be_on_the_rise
 SENSE       = 1
@@ -285,7 +285,7 @@ GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  идти_в_гору 1
+RUS     =  РёРґС‚Рё_РІ_РіРѕСЂСѓ 1
 ============
 TITLE        = be_out_of
 SENSE       = 1
@@ -293,7 +293,7 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 9/6/1 21:35:26
 CONTENT =  be out of
-EXM     =  I am out of cigarettes — у меня кончились сигареты
+EXM     =  I am out of cigarettes вЂ” Сѓ РјРµРЅСЏ РєРѕРЅС‡РёР»РёСЃСЊ СЃРёРіР°СЂРµС‚С‹
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  LOK
@@ -302,7 +302,7 @@ VAL     =  PACIEN , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  > obj
-RUS     =  кончиться 1
+RUS     =  РєРѕРЅС‡РёС‚СЊСЃСЏ 1
 ============
 TITLE        = be_well
 SENSE       = 1
@@ -316,7 +316,7 @@ GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  SITUAT
-RUS     =  здравствовать 1
+RUS     =  Р·РґСЂР°РІСЃС‚РІРѕРІР°С‚СЊ 1
 ============
 TITLE        = borrow_money
 SENSE       = 1
@@ -324,7 +324,7 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:7
 CONTENT =  borrow money
 EXM     =  he often borrows money from me  -
-           он часто берет у меня взаймы
+           РѕРЅ С‡Р°СЃС‚Рѕ Р±РµСЂРµС‚ Сѓ РјРµРЅСЏ РІР·Р°Р№РјС‹
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  FIN
@@ -336,7 +336,7 @@ GF2     = 1  > from+NP
 SF2     = 1  THINGN
              ANIM
           2  FIN
-RUS     =  брать_взаймы 1
+RUS     =  Р±СЂР°С‚СЊ_РІР·Р°Р№РјС‹ 1
 ============
 TITLE        = bother_one's_brains
 SENSE       = 1
@@ -357,7 +357,7 @@ SF2     = 1  CONTEN
           2  MEDINF
 AUX     =  THESAME ( A1 , C2 )
 SYN     =  break one's head
-RUS     =  ломать_голову 1
+RUS     =  Р»РѕРјР°С‚СЊ_РіРѕР»РѕРІСѓ 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -378,7 +378,7 @@ GF2     = 1  >> obj
 SF2     = 1  ANIM
           2  ABSTR
           3  PHENOM
-RUS     =  производить_на_свет 1
+RUS     =  РїСЂРѕРёР·РІРѕРґРёС‚СЊ_РЅР°_СЃРІРµС‚ 1
 SYNR    =  dir_obj ( C1 , A2 )
            indir_obj ( C1 , C2 )
 ============
@@ -389,11 +389,11 @@ REDACT       = alex
 TIME_CREATE       = 24/11/1 21:5:51
 CONTENT =  #oneself
 EXM     =  I can do it by myself -
-           я могу это сделать сам
+           СЏ РјРѕРіСѓ СЌС‚Рѕ СЃРґРµР»Р°С‚СЊ СЃР°Рј
 ROOT    =  1
 PREP    =  by
-RUS     =  сам 2
-           самостоятельно 1
+RUS     =  СЃР°Рј 2
+           СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ 1
 ============
 TITLE        = by_reason
 SENSE       = 1
@@ -402,12 +402,12 @@ REDACT       = alex
 TIME_CREATE       = 19/1/3 17:24:17
 CONTENT =  reason
 PREP    =  by
-EXM     =  by reason of …
+EXM     =  by reason of вЂ¦
 ROOT    =  1
 VAL     =  CONTEN , A1 , C
 GF      = 1  NOUN
 GF1     = 1  > of+NP
-RUS     =  по_причинам 1
+RUS     =  РїРѕ_РїСЂРёС‡РёРЅР°Рј 1
 ============
 TITLE        = collect_one's_thoughts
 SENSE       = 1
@@ -416,7 +416,7 @@ REDACT       = alex
 TIME_CREATE       = 28/10/1 14:42:50
 CONTENT =  collect #one's thoughts
 EXM     =  Benjamin paused to collect his thoughts. -
-           Бенджамин остановился, чтобы собраться с мыслями.
+           Р‘РµРЅРґР¶Р°РјРёРЅ РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ, С‡С‚РѕР±С‹ СЃРѕР±СЂР°С‚СЊСЃСЏ СЃ РјС‹СЃР»СЏРјРё.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -424,7 +424,7 @@ GF(3)   = 1  NOUN
 GF1     = 1  < subj
 SF1     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  собираться_с_мыслями 1
+RUS     =  СЃРѕР±РёСЂР°С‚СЊСЃСЏ_СЃ_РјС‹СЃР»СЏРјРё 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -436,8 +436,8 @@ DETERM(2)=  the
 CONTENT =  come scene
 EXM     =  Technology has come on the scene to help firms with
            all of these practice management needs. -
-           Технология появилась на сцене, чтобы помочь фирмам со
-           всеми их нуждами в области практического управления.
+           РўРµС…РЅРѕР»РѕРіРёСЏ РїРѕСЏРІРёР»Р°СЃСЊ РЅР° СЃС†РµРЅРµ, С‡С‚РѕР±С‹ РїРѕРјРѕС‡СЊ С„РёСЂРјР°Рј СЃРѕ
+           РІСЃРµРјРё РёС… РЅСѓР¶РґР°РјРё РІ РѕР±Р»Р°СЃС‚Рё РїСЂР°РєС‚РёС‡РµСЃРєРѕРіРѕ СѓРїСЂР°РІР»РµРЅРёСЏ.
 ROOT    =  1
 CAT     = 1  LABL.SIT
 GF      = 1  VERB
@@ -449,7 +449,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
           2  PHENOM
 GF(2)   = 1  NOUN
-RUS     =  появляться_на_сцене 1
+RUS     =  РїРѕСЏРІР»СЏС‚СЊСЃСЏ_РЅР°_СЃС†РµРЅРµ 1
 SYNR    =  indir_obj ( C1 , C2 )
 ============
 TITLE        = control_one's_feelings
@@ -460,8 +460,8 @@ TIME_CREATE       = 28/10/1 14:43:0
 CONTENT =  control #one's feelings
 EXM     =  No longer able to control my feelings, I poured out
            what was in my heart. -
-           Не в силах более держать себя в руках, я вывалил то,
-           что было у меня на сердце.
+           РќРµ РІ СЃРёР»Р°С… Р±РѕР»РµРµ РґРµСЂР¶Р°С‚СЊ СЃРµР±СЏ РІ СЂСѓРєР°С…, СЏ РІС‹РІР°Р»РёР» С‚Рѕ,
+           С‡С‚Рѕ Р±С‹Р»Рѕ Сѓ РјРµРЅСЏ РЅР° СЃРµСЂРґС†Рµ.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -469,7 +469,7 @@ GF(3)   = 1  NOUN
 GF1     = 1  < subj
 SF1     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  держать_себя_в_руках 1
+RUS     =  РґРµСЂР¶Р°С‚СЊ_СЃРµР±СЏ_РІ_СЂСѓРєР°С… 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -489,7 +489,7 @@ GF2     = 1  obj
           2  >> to+NP
 SF2     = 1  ANIM
 GF(2)   = 1  NOUN
-RUS     =  делать_честь 1
+RUS     =  РґРµР»Р°С‚СЊ_С‡РµСЃС‚СЊ 1
 SYNR    =  obj ( C1 , C2 )
 ============
 TITLE        = do_one's_work
@@ -505,7 +505,7 @@ GF(3)   = 1  NOUN
 GF1     = 1  < subj
 SF1     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  сделать_свое_дело 1
+RUS     =  СЃРґРµР»Р°С‚СЊ_СЃРІРѕРµ_РґРµР»Рѕ 1
 SYNR    =  dir_obj ( C1 , C3 )
            attr ( C3 , C2 )
 ============
@@ -524,7 +524,7 @@ GF(4)   = 1  NOUN
 GF1     = 1  < subj
 SF1     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  испускать_дух 1
+RUS     =  РёСЃРїСѓСЃРєР°С‚СЊ_РґСѓС… 1
 SYNR    =  attr ( C4 , C2 )
            attr ( C4 , C3 )
            dir_obj ( C1 , C4 )
@@ -545,7 +545,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  >> obj
 AUX     =  THESAME ( A2 , C2 )
-RUS     =  выводить_из_себя 1
+RUS     =  РІС‹РІРѕРґРёС‚СЊ_РёР·_СЃРµР±СЏ 1
 SYNR    =  indir_obj ( C1 , C3 )
            attr ( C3 , C2 )
 ============
@@ -556,7 +556,7 @@ AUTHOR       = user
 TIME_CREATE       = 327680/22413313/0 6553600:720896:524288
 CONTENT =  each other
 GF      = 1  NP
-RUS     =  друг_друга 1
+RUS     =  РґСЂСѓРі_РґСЂСѓРіР° 1
 ============
 TITLE        = fall_in_price
 SENSE       = 1
@@ -574,7 +574,7 @@ SF1     = 1  ARTEF
           2  SUBST
           3  THINGN
           4  PARAM
-RUS     =  дешеветь 1
+RUS     =  РґРµС€РµРІРµС‚СЊ 1
 ============
 TITLE        = far_away
 SENSE       = 1
@@ -584,7 +584,7 @@ CONTENT =  far away
 GF      = 1  ADV
 EXM     =  The fate of those people is being decided far away from where they
            are. -
-           Судьба этих людей решается далеко от того места, где они находятся.
+           РЎСѓРґСЊР±Р° СЌС‚РёС… Р»СЋРґРµР№ СЂРµС€Р°РµС‚СЃСЏ РґР°Р»РµРєРѕ РѕС‚ С‚РѕРіРѕ РјРµСЃС‚Р°, РіРґРµ РѕРЅРё РЅР°С…РѕРґСЏС‚СЃСЏ.
 ROOT    =  1
 CAT     = 1  RELAT
 SF      = 1  LOK
@@ -593,7 +593,7 @@ VAL     =  F-ACT , A1 , C
 GF1     = 1  X! : VERB
 GF2     = 1  >> from+NP
 SF2     = 1  LOK
-RUS     =  вдали 1
+RUS     =  РІРґР°Р»Рё 1
 ============
 TITLE        = follow_in_footsteps
 SENSE       = 1
@@ -610,7 +610,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  NP_poss
 SF2     = 1  ANIM
-RUS     =  идти_по_стопам 1
+RUS     =  РёРґС‚Рё_РїРѕ_СЃС‚РѕРїР°Рј 1
 SYNR    =  attr ( C2 , A2 )
            indir_obj ( C1 , C2 )
 ============
@@ -625,7 +625,7 @@ GF      = 1  ADV
 VAL     =  PROPERT , A1 , C
 GF(2)   = 1  NOUN sg
 GF1     = 1  VERB
-RUS     =  свыше 1
+RUS     =  СЃРІС‹С€Рµ 1
 ============
 TITLE        = get_a_grip
 SENSE       = 1
@@ -633,8 +633,8 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:8
 CONTENT =  get a grip
 EXM     =  I must get a grip on myself, she told herself firmly. -
-           "Я должна овладеть собой", - сказала она себе
-           решительно.
+           "РЇ РґРѕР»Р¶РЅР° РѕРІР»Р°РґРµС‚СЊ СЃРѕР±РѕР№", - СЃРєР°Р·Р°Р»Р° РѕРЅР° СЃРµР±Рµ
+           СЂРµС€РёС‚РµР»СЊРЅРѕ.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -651,14 +651,14 @@ TIME_CREATE       = 15/5/1 15:11:8
 CONTENT =  get ahead #oneself
 EXM     =  How many times do I have to tell you: don't get ahead
            of yourself! -
-           Сколько раз тебе говорить - никогда не надо забегать
-           вперед.
+           РЎРєРѕР»СЊРєРѕ СЂР°Р· С‚РµР±Рµ РіРѕРІРѕСЂРёС‚СЊ - РЅРёРєРѕРіРґР° РЅРµ РЅР°РґРѕ Р·Р°Р±РµРіР°С‚СЊ
+           РІРїРµСЂРµРґ.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  забегать_вперед 1
+RUS     =  Р·Р°Р±РµРіР°С‚СЊ_РІРїРµСЂРµРґ 1
 PREP(3) =  of
 ============
 TITLE        = get_caught_in_the_toils
@@ -674,7 +674,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  NP_poss
 SF2     = 1  ANIM
-RUS     =  попадать_в_сети 1
+RUS     =  РїРѕРїР°РґР°С‚СЊ_РІ_СЃРµС‚Рё 1
 ============
 TITLE        = get_on_nerves
 SENSE       = 1
@@ -690,7 +690,7 @@ GF(2)   = 1  NOUN pl
 GF1     = 1  < subj
 GF2     = 1  NP_poss
 SF2     = 1  ANIM
-RUS     =  действовать_на_нервы 1
+RUS     =  РґРµР№СЃС‚РІРѕРІР°С‚СЊ_РЅР°_РЅРµСЂРІС‹ 1
 SYNR    =  attr ( C2 , A2 )
            indir_obj ( C1 , C2 )
 ============
@@ -710,7 +710,7 @@ SF1     = 1  ANIM
 GF2     = 1  > obj : to+NP
 SF2     = 1  ANIM
 GF3     = 1  > in+NP
-RUS     =  заткнуть_за_пояс 1
+RUS     =  Р·Р°С‚РєРЅСѓС‚СЊ_Р·Р°_РїРѕСЏСЃ 1
 ============
 TITLE        = give_up_the_spirit
 SENSE       = 1
@@ -722,7 +722,7 @@ GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  отдать_богу_душу 1
+RUS     =  РѕС‚РґР°С‚СЊ_Р±РѕРіСѓ_РґСѓС€Сѓ 1
 ============
 TITLE        = go_bail
 SENSE       = 1
@@ -730,7 +730,7 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:8
 CONTENT =  go bail
 EXM     =  He goes bail for her -
-           Он за нее поручился
+           РћРЅ Р·Р° РЅРµРµ РїРѕСЂСѓС‡РёР»СЃСЏ
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -739,7 +739,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  > for+NP
 SF2     = 1  ANIM
-RUS     =  вносить_залог 1
+RUS     =  РІРЅРѕСЃРёС‚СЊ_Р·Р°Р»РѕРі 1
 ============
 TITLE        = go_mad
 SENSE       = 1
@@ -747,7 +747,7 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:8
 CONTENT =  go mad
 EXM     =  War is insane and we mustn't go mad with it. -
-           Война безумна, и мы не должны сходить с ума от нее.
+           Р’РѕР№РЅР° Р±РµР·СѓРјРЅР°, Рё РјС‹ РЅРµ РґРѕР»Р¶РЅС‹ СЃС…РѕРґРёС‚СЊ СЃ СѓРјР° РѕС‚ РЅРµРµ.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -756,7 +756,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  > with+NP
           2  > gerund
-RUS     =  сходить_с_ума 1
+RUS     =  СЃС…РѕРґРёС‚СЊ_СЃ_СѓРјР° 1
 SYN     =  go crazy
 ============
 TITLE        = go_to_sleep
@@ -764,13 +764,13 @@ SENSE       = 1
 AUTHOR       = alex
 TIME_CREATE       = 15/5/1 15:11:8
 CONTENT =  go to sleep
-EXM     =  He went to sleep - Он заснул
+EXM     =  He went to sleep - РћРЅ Р·Р°СЃРЅСѓР»
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  AGENT , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  засыпать 2
+RUS     =  Р·Р°СЃС‹РїР°С‚СЊ 2
 ============
 TITLE        = good_bye
 SENSE       = 1
@@ -780,7 +780,7 @@ TIME_CREATE       = 2/4/4 10:45:2
 CONTENT =  good bye
 ROOT    =  1
 GF      = 1  NOUN
-RUS     =  до_свидания 1
+RUS     =  РґРѕ_СЃРІРёРґР°РЅРёСЏ 1
 ============
 TITLE        = have_a_change_of_heart
 SENSE       = 1
@@ -793,7 +793,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
 SYN     =  be appeased
-RUS     =  сменить_гнев_на_милость 1
+RUS     =  СЃРјРµРЅРёС‚СЊ_РіРЅРµРІ_РЅР°_РјРёР»РѕСЃС‚СЊ 1
 ============
 TITLE        = have_enough
 SENSE       = 1
@@ -801,8 +801,8 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:8
 CONTENT =  have enough
 EXM     =  we have enough men to handle this problem -
-           у нас достаточно людей, чтобы справиться с этой
-           проблемой
+           Сѓ РЅР°СЃ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Р»СЋРґРµР№, С‡С‚РѕР±С‹ СЃРїСЂР°РІРёС‚СЊСЃСЏ СЃ СЌС‚РѕР№
+           РїСЂРѕР±Р»РµРјРѕР№
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  ESTIM
@@ -813,7 +813,7 @@ GF1     = 1  < subj
 GF2     = 1  >> NP
 GF3     = 1  > to+inf
 AUX     =  SUB ( A1 , A3 )
-RUS     =  достаточно 3
+RUS     =  РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ 3
 ============
 TITLE        = have_fun
 SENSE       = 1
@@ -821,7 +821,7 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:10
 CONTENT =  have fun
 EXM     =  Have fun! -
-           Развлекайся!
+           Р Р°Р·РІР»РµРєР°Р№СЃСЏ!
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  EMOT
@@ -833,9 +833,9 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  >> to+inf
 SF2     = 1  SITUAT
-RUS     =  весело 1
-           развлекаться 1
-           веселиться 1
+RUS     =  РІРµСЃРµР»Рѕ 1
+           СЂР°Р·РІР»РµРєР°С‚СЊСЃСЏ 1
+           РІРµСЃРµР»РёС‚СЊСЃСЏ 1
 ============
 TITLE        = have_in_heart
 SENSE       = 1
@@ -845,8 +845,8 @@ TIME_CREATE       = 28/10/1 14:43:38
 CONTENT =  have #one's heart
 EXM     =  People always have something in their hearts
            that they are eager to talk about -
-           У людей всегда бывает на душе что-нибудь такое ,
-           что они охотно бы рассказали
+           РЈ Р»СЋРґРµР№ РІСЃРµРіРґР° Р±С‹РІР°РµС‚ РЅР° РґСѓС€Рµ С‡С‚Рѕ-РЅРёР±СѓРґСЊ С‚Р°РєРѕРµ ,
+           С‡С‚Рѕ РѕРЅРё РѕС…РѕС‚РЅРѕ Р±С‹ СЂР°СЃСЃРєР°Р·Р°Р»Рё
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -858,7 +858,7 @@ SF1     = 1  ANIM
 GF2     = 1  > obj
 SF2     = 1  SITUAT
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  бывать_на_душе 1
+RUS     =  Р±С‹РІР°С‚СЊ_РЅР°_РґСѓС€Рµ 1
 SYNR    =  attr ( C3 , C2 )
            indir_obj ( C1 , C3 )
 ============
@@ -868,8 +868,8 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 7/11/1 15:40:28
 CONTENT =  have it out
-EXM     =  to have it out with smb. — выяснить отношения с кем-л., объясниться с кем-л.
-           Я хотел выяснить отношения с ним
+EXM     =  to have it out with smb. вЂ” РІС‹СЏСЃРЅРёС‚СЊ РѕС‚РЅРѕС€РµРЅРёСЏ СЃ РєРµРј-Р»., РѕР±СЉСЏСЃРЅРёС‚СЊСЃСЏ СЃ РєРµРј-Р».
+           РЇ С…РѕС‚РµР» РІС‹СЏСЃРЅРёС‚СЊ РѕС‚РЅРѕС€РµРЅРёСЏ СЃ РЅРёРј
 CAT     = 1  LABL.SIT
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -878,7 +878,7 @@ GF1     = 1  subj
 SF1     = 1  ANIM
 GF2     = 1  >> with+NP
 ROOT    =  1
-RUS     =  выяснять_отношения 1
+RUS     =  РІС‹СЏСЃРЅСЏС‚СЊ_РѕС‚РЅРѕС€РµРЅРёСЏ 1
 ============
 TITLE        = have_only_to
 SENSE       = 1
@@ -887,7 +887,7 @@ AUTHOR       = user
 TIME_CREATE       = 327680/22413313/0 6553600:720896:524288
 CONTENT =  have only to
 EXM     =  you  have only to read the headings to understand it -
-           вам достаточно прочитать заголовки, чтоюы понять это
+           РІР°Рј РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ Р·Р°РіРѕР»РѕРІРєРё, С‡С‚РѕСЋС‹ РїРѕРЅСЏС‚СЊ СЌС‚Рѕ
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  ESTIM
@@ -899,7 +899,7 @@ GF2     = 1  >> inf
 GF3     = 1  > to+inf
 AUX     =  SUB ( A1 , A2 )
            SUB ( A1 , A3 )
-RUS     =  достаточно 2
+RUS     =  РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ 2
 ============
 TITLE        = have_the_heart
 SENSE       = 1
@@ -908,9 +908,9 @@ REDACT       = alex
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  have the heart
 EXM     =  no one had the heart to tell him about it -
-           ни у кого не хватило духу сказать ему об этом
+           РЅРё Сѓ РєРѕРіРѕ РЅРµ С…РІР°С‚РёР»Рѕ РґСѓС…Сѓ СЃРєР°Р·Р°С‚СЊ РµРјСѓ РѕР± СЌС‚РѕРј
            Leila didn't have the heart to tell him the truth -
-           Лейле не хватало духу рассказать ему правду
+           Р›РµР№Р»Рµ РЅРµ С…РІР°С‚Р°Р»Рѕ РґСѓС…Сѓ СЂР°СЃСЃРєР°Р·Р°С‚СЊ РµРјСѓ РїСЂР°РІРґСѓ
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  MODL
@@ -921,7 +921,7 @@ GF(4)   = 1  NOUN sg
 GF1     = 1  < subj
 GF2     = 1  > to+inf
           2  > for+NP
-RUS     =  не_хватать_духу 1
+RUS     =  РЅРµ_С…РІР°С‚Р°С‚СЊ_РґСѓС…Сѓ 1
 ============
 TITLE        = have_the_honour
 SENSE       = 1
@@ -936,7 +936,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  > to+inf
 SF2     = 1  AKTIO
-RUS     =  иметь_честь 1
+RUS     =  РёРјРµС‚СЊ_С‡РµСЃС‚СЊ 1
 ============
 TITLE        = heave_down_the_stairs
 SENSE       = 1
@@ -946,9 +946,9 @@ DETERM(2)=  the
 CONTENT =  heave  stairs
 EXM     =  Got so touchy that he assaults anyone who asks questions,
            and heaves reporters doun the stairs. -
-           До того его довели, что он стал буквально кидаться на
-           всех, кто обращается к нему с вопросами, и уже не
-           одного репортера спустил с лестницы.
+           Р”Рѕ С‚РѕРіРѕ РµРіРѕ РґРѕРІРµР»Рё, С‡С‚Рѕ РѕРЅ СЃС‚Р°Р» Р±СѓРєРІР°Р»СЊРЅРѕ РєРёРґР°С‚СЊСЃСЏ РЅР°
+           РІСЃРµС…, РєС‚Рѕ РѕР±СЂР°С‰Р°РµС‚СЃСЏ Рє РЅРµРјСѓ СЃ РІРѕРїСЂРѕСЃР°РјРё, Рё СѓР¶Рµ РЅРµ
+           РѕРґРЅРѕРіРѕ СЂРµРїРѕСЂС‚РµСЂР° СЃРїСѓСЃС‚РёР» СЃ Р»РµСЃС‚РЅРёС†С‹.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -959,7 +959,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  obj
 SF2     = 1  ANIM
-RUS     =  спускать_с_лестницы 1
+RUS     =  СЃРїСѓСЃРєР°С‚СЊ_СЃ_Р»РµСЃС‚РЅРёС†С‹ 1
 SYNR    =  indir_obj ( C1 , C2 )
 ============
 TITLE        = how_many
@@ -972,7 +972,7 @@ GF      = 1  ADV:Quest
 SF      = 1  QUANTIT
 VAL     =  VALUE , C , A1
 GF1     = 1  >> NP
-RUS     =  сколько 1
+RUS     =  СЃРєРѕР»СЊРєРѕ 1
 ============
 TITLE        = how_much
 SENSE       = 1
@@ -984,7 +984,7 @@ GF      = 1  ADV:Quest
 SF      = 1  QUANTIT
 VAL     =  VALUE , C , A1
 GF1     = 1  >> NP_sg
-RUS     =  сколько 1
+RUS     =  СЃРєРѕР»СЊРєРѕ 1
 ============
 TITLE        = if_you_like
 SENSE       = 1
@@ -995,7 +995,7 @@ CONTENT =  if you like
 ROOT    =  3
 VAL     =  MODL , C , A1
 GF1     = 1  X! : VERB
-RUS     =  хоть 1
+RUS     =  С…РѕС‚СЊ 1
 ============
 TITLE        = in_opinion
 SENSE       = 1
@@ -1005,7 +1005,7 @@ TIME_CREATE       = 24/11/1 21:4:13
 POS     =  begin
 CONTENT =  opinion
 EXM     =  They were in plain clothes and, in his opinion, drunk -
-           они были просто одеты и, по его мнению, пьяны
+           РѕРЅРё Р±С‹Р»Рё РїСЂРѕСЃС‚Рѕ РѕРґРµС‚С‹ Рё, РїРѕ РµРіРѕ РјРЅРµРЅРёСЋ, РїСЊСЏРЅС‹
 ROOT    =  1
 GF      = 1  PARENTH
 VAL     =  SUB , A1 , C
@@ -1013,8 +1013,8 @@ PREP    =  in
 GF(1)   = 1  NOUN sg
 GF1     = 1  NP_poss
 SF1     = 1  ANIM
-RUS     =  на_взгляд 1
-           по_мнению 1
+RUS     =  РЅР°_РІР·РіР»СЏРґ 1
+           РїРѕ_РјРЅРµРЅРёСЋ 1
 ============
 TITLE        = keep_faith
 SENSE       = 1
@@ -1028,7 +1028,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  subj
 SF1     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  держать_слово 1
+RUS     =  РґРµСЂР¶Р°С‚СЊ_СЃР»РѕРІРѕ 1
 ============
 TITLE        = keep_in_touch
 SENSE       = 1
@@ -1044,7 +1044,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 GF2     = 1  >> with+NP
 SF2     = 1  ANIM
-RUS     =  поддерживать_контакт 1
+RUS     =  РїРѕРґРґРµСЂР¶РёРІР°С‚СЊ_РєРѕРЅС‚Р°РєС‚ 1
 ============
 TITLE        = keep_to_oneself
 SENSE       = 1
@@ -1061,7 +1061,7 @@ SF1     = 1  ANIM
 GF2     = 1  obj
 SF2     = 1  MEDINF
 SYNR    =  indir_obj ( C1 , C2 )
-RUS     =  оставлять_при_себе 1
+RUS     =  РѕСЃС‚Р°РІР»СЏС‚СЊ_РїСЂРё_СЃРµР±Рµ 1
 ============
 TITLE        = kick_over_the_traces
 SENSE       = 1
@@ -1073,7 +1073,7 @@ GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  закусывать_удила 1
+RUS     =  Р·Р°РєСѓСЃС‹РІР°С‚СЊ_СѓРґРёР»Р° 1
 ============
 TITLE        = leave_much_to_be_desired
 SENSE       = 1
@@ -1081,12 +1081,12 @@ AUTHOR       = graf
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  leave much to be desired
 EXM     =  His behaviour leaves much to be desired. -
-           Его поведение оставляет желать лучшего.
+           Р•РіРѕ РїРѕРІРµРґРµРЅРёРµ РѕСЃС‚Р°РІР»СЏРµС‚ Р¶РµР»Р°С‚СЊ Р»СѓС‡С€РµРіРѕ.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
-RUS     =  оставлять_желать_лучшего 1
+RUS     =  РѕСЃС‚Р°РІР»СЏС‚СЊ_Р¶РµР»Р°С‚СЊ_Р»СѓС‡С€РµРіРѕ 1
 ============
 TITLE        = let_one's_eye_dwell
 SENSE       = 1
@@ -1122,7 +1122,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  >> of+NP
-RUS     =  выходить_за_рамки 1
+RUS     =  РІС‹С…РѕРґРёС‚СЊ_Р·Р°_СЂР°РјРєРё 1
 ============
 TITLE        = lose_one's_balance
 SENSE       = 1
@@ -1140,7 +1140,7 @@ AUX     =  THESAME ( A1 , C2 )
 SYN     =  be angry
            be beside oneself with rage
            get mad
-RUS     =  выходить_из_себя 1
+RUS     =  РІС‹С…РѕРґРёС‚СЊ_РёР·_СЃРµР±СЏ 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -1156,7 +1156,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  > of+NP
-RUS     =  упускать_из_виду 1
+RUS     =  СѓРїСѓСЃРєР°С‚СЊ_РёР·_РІРёРґСѓ 1
 ============
 TITLE        = make_it_possible
 SENSE       = 1
@@ -1174,7 +1174,7 @@ GF1     = 1  < subj
 GF2     = 1  > for+NP
 GF3     = 1  > to+inf
 AUX     =  SUB ( A2 , A3 )
-RUS     =  делать_возможным 1
+RUS     =  РґРµР»Р°С‚СЊ_РІРѕР·РјРѕР¶РЅС‹Рј 1
 ============
 TITLE        = make_known
 SENSE       = 1
@@ -1192,7 +1192,7 @@ GF2     = 1  obj
 SF2     = 1  MEDINF
 GF3     = 1  >> to+NP
 SF3     = 1  ANIM
-RUS     =  доводить_до_сведения 1
+RUS     =  РґРѕРІРѕРґРёС‚СЊ_РґРѕ_СЃРІРµРґРµРЅРёСЏ 1
 SYNR    =  dir_obj ( C1 , C2 )
 ============
 TITLE        = make_no_progress
@@ -1201,7 +1201,7 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  make no progress
 EXM     =  this organisation makes no  progress -
-           эта организация давно остановилась в развитии
+           СЌС‚Р° РѕСЂРіР°РЅРёР·Р°С†РёСЏ РґР°РІРЅРѕ РѕСЃС‚Р°РЅРѕРІРёР»Р°СЃСЊ РІ СЂР°Р·РІРёС‚РёРё
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  NEG
@@ -1209,7 +1209,7 @@ SF      = 1  NEG
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  остановиться_в_развитии 1
+RUS     =  РѕСЃС‚Р°РЅРѕРІРёС‚СЊСЃСЏ_РІ_СЂР°Р·РІРёС‚РёРё 1
 ============
 TITLE        = make_of_oneself
 SENSE       = 1
@@ -1217,7 +1217,7 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  make #oneself
 EXM     =  Don't make a public ass of yourself. -
-           Не стройте из себя дурака при всем честном народе!
+           РќРµ СЃС‚СЂРѕР№С‚Рµ РёР· СЃРµР±СЏ РґСѓСЂР°РєР° РїСЂРё РІСЃРµРј С‡РµСЃС‚РЅРѕРј РЅР°СЂРѕРґРµ!
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -1229,7 +1229,7 @@ GF2     = 1  obj
           2  > obj
 SF2     = 1  ANIM
              ESTIM
-RUS     =  строить_из_себя 1
+RUS     =  СЃС‚СЂРѕРёС‚СЊ_РёР·_СЃРµР±СЏ 1
 SYNR    =  indir_obj ( C1 , C2 )
 ============
 TITLE        = make_one's_contribution
@@ -1249,7 +1249,7 @@ SF1     = 1  ANIM
 GF2     = 1  > to+NP
 SF2     = 1  AKTIO
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  вносить_свой_вклад 1
+RUS     =  РІРЅРѕСЃРёС‚СЊ_СЃРІРѕР№_РІРєР»Р°Рґ 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -1260,9 +1260,9 @@ REDACT       = alex
 TIME_CREATE       = 24/10/1 23:31:50
 CONTENT =  make sure
 EXM     =  make sure the dogs are back in their kennels
-           — проверь, привязаны ли
+           вЂ” РїСЂРѕРІРµСЂСЊ, РїСЂРёРІСЏР·Р°РЅС‹ Р»Рё
            it would be a good thing to make sure of it
-           — неплохо было бы и этом убедиться  (see
+           вЂ” РЅРµРїР»РѕС…Рѕ Р±С‹Р»Рѕ Р±С‹ Рё СЌС‚РѕРј СѓР±РµРґРёС‚СЊСЃСЏ  (see
 ROOT    =  1
 GF      = 1  VERB
 RESTR   =  not_cont !
@@ -1273,7 +1273,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  subj
 GF2     = 1  >> of+NP
           2  > that+sent
-RUS     =  удостовериться 1
+RUS     =  СѓРґРѕСЃС‚РѕРІРµСЂРёС‚СЊСЃСЏ 1
 ============
 TITLE        = my_name_is
 SENSE       = 1
@@ -1290,9 +1290,9 @@ GF1     = 1  NP_poss
 SF1     = 1  ANIM
 GF2     = 1  NP
 SF2     = 1  NAME
-RUS     =  зовут 1
-COMM    =  "numeral_transfer ( А1 , С2 )" означает, что
-           число для name надо брать от первого актанта.
+RUS     =  Р·РѕРІСѓС‚ 1
+COMM    =  "numeral_transfer ( Рђ1 , РЎ2 )" РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ
+           С‡РёСЃР»Рѕ РґР»СЏ name РЅР°РґРѕ Р±СЂР°С‚СЊ РѕС‚ РїРµСЂРІРѕРіРѕ Р°РєС‚Р°РЅС‚Р°.
 SYNR    =  subj ( C2 , C1 )
            poss ( C1 , A1 )
            obj ( C2 , A2 )
@@ -1303,7 +1303,7 @@ SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  no need
-EXM     =  тебе незачем ходить туда -
+EXM     =  С‚РµР±Рµ РЅРµР·Р°С‡РµРј С…РѕРґРёС‚СЊ С‚СѓРґР° -
            you have no need to go there
 GF      = 1  NOUN:Neg
 SF      = 1  NEG
@@ -1313,7 +1313,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
           2  -
 GF2     = 1  > to+inf
-RUS     =  незачем 1
+RUS     =  РЅРµР·Р°С‡РµРј 1
 ============
 TITLE        = no_place
 SENSE       = 1
@@ -1321,7 +1321,7 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  no place
 EXM     =  I have no place to go -
-           Мне некуда идти
+           РњРЅРµ РЅРµРєСѓРґР° РёРґС‚Рё
 GF      = 1  PN:Neg
 SF      = 1  NEG
              TRG-PNT
@@ -1331,8 +1331,8 @@ GF1     = 1  < subj
           2  -
 GF2     = 1  > to+inf
 SYN     =  nowhere 1
-RUS     =  некуда 1
-           негде 1
+RUS     =  РЅРµРєСѓРґР° 1
+           РЅРµРіРґРµ 1
 ============
 TITLE        = no_place
 SENSE       = 2
@@ -1341,7 +1341,7 @@ TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  no place
 ALG     =  AL_there
 EXM     =  there is no place for you in our town -
-           тебе нет места в нашем городе
+           С‚РµР±Рµ РЅРµС‚ РјРµСЃС‚Р° РІ РЅР°С€РµРј РіРѕСЂРѕРґРµ
 GF      = 1  NOUN:Neg
 SF      = 1  NEG
              TRG-PNT
@@ -1350,7 +1350,7 @@ VAL     =  OBJ , A1 , C
 GF1     = 1  >> for+NP
           2  -
 GF2     = 1  > in+NP
-RUS     =  нет_места 1
+RUS     =  РЅРµС‚_РјРµСЃС‚Р° 1
 ============
 TITLE        = no_time
 SENSE       = 1
@@ -1360,9 +1360,9 @@ CONTENT =  no time
 ALG     =  AL_neg
 POS     =  > V
 EXM     =  I have no time to speak about it -
-           Мне некогда разговаривать об этом
+           РњРЅРµ РЅРµРєРѕРіРґР° СЂР°Р·РіРѕРІР°СЂРёРІР°С‚СЊ РѕР± СЌС‚РѕРј
            There is no time to raise speculative questions -
-           Некогда поднимать отвлеченные вопросы
+           РќРµРєРѕРіРґР° РїРѕРґРЅРёРјР°С‚СЊ РѕС‚РІР»РµС‡РµРЅРЅС‹Рµ РІРѕРїСЂРѕСЃС‹
 GF      = 1  NOUN:Neg
 SF      = 1  NEG
              TIME
@@ -1371,23 +1371,23 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
           2  -
 GF2     = 1  > to+inf
-RUS     =  некогда 1
-           нет_времени 1
-           недосуг 1
+RUS     =  РЅРµРєРѕРіРґР° 1
+           РЅРµС‚_РІСЂРµРјРµРЅРё 1
+           РЅРµРґРѕСЃСѓРі 1
 ============
 TITLE        = no_wonder
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  no wonder
-EXM     =  нет ничего удивительного в том, что он не пришел
+EXM     =  РЅРµС‚ РЅРёС‡РµРіРѕ СѓРґРёРІРёС‚РµР»СЊРЅРѕРіРѕ РІ С‚РѕРј, С‡С‚Рѕ РѕРЅ РЅРµ РїСЂРёС€РµР»
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  ESTIM
 VAL     =  CONTEN , A1 , C
 GF1     = 1  > that+sent
-RUS     =  нет_ничего_удивительного 1
-           немудрено 1
+RUS     =  РЅРµС‚_РЅРёС‡РµРіРѕ_СѓРґРёРІРёС‚РµР»СЊРЅРѕРіРѕ 1
+           РЅРµРјСѓРґСЂРµРЅРѕ 1
 ============
 TITLE        = not_a_jot
 SENSE       = 1
@@ -1395,11 +1395,11 @@ AUTHOR       = graf
 TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  not a jot
 ROOT    =  3
-GF      = 1  ОБСТ_ГР
+GF      = 1  РћР‘РЎРў_Р“Р 
 SF      = 1  NEG
 VAL     =  RESTR , C , A1
 GF1     = 1  < X! : VERB
-RUS     =  ни_на_йоту 1
+RUS     =  РЅРё_РЅР°_Р№РѕС‚Сѓ 1
 ============
 TITLE        = not_care_a_straw
 SENSE       = 1
@@ -1414,7 +1414,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  >> for+NP
           2  >> for+gerund
-RUS     =  нипочем 1
+RUS     =  РЅРёРїРѕС‡РµРј 1
 ============
 TITLE        = not_in_the_mood
 SENSE       = 1
@@ -1431,7 +1431,7 @@ SF1     = 1  ANIM
 GF2     = 1  >> for+gerund
           2  >> for+NP
 SF2     = 1  SITUAT
-RUS     =  неохота 1
+RUS     =  РЅРµРѕС…РѕС‚Р° 1
 ============
 TITLE        = not_to_speak_of
 SENSE       = 1
@@ -1444,7 +1444,7 @@ GF      = 1  VERB inf
 VAL     =  SUB , A1 , C
            CONTEN , A2 , C
 GF2     = 1  >> of+NP
-RUS     =  не_говоря_о 1
+RUS     =  РЅРµ_РіРѕРІРѕСЂСЏ_Рѕ 1
 ============
 TITLE        = nothing_else
 SENSE       = 1
@@ -1453,7 +1453,7 @@ TIME_CREATE       = 15/5/1 15:10:51
 CONTENT =  nothing else
 ROOT    =  1
 GF      = 1  PN:Neg
-RUS     =  больше_нечего 1
+RUS     =  Р±РѕР»СЊС€Рµ_РЅРµС‡РµРіРѕ 1
 ============
 TITLE        = on_one's_hands
 SENSE       = 1
@@ -1467,7 +1467,7 @@ PREP(2) =  on
 GF(2)   = 1  NOUN pl
 GF1     = 1  VERB
 LEX1    =  sit
-RUS     =  сложа_руки 1
+RUS     =  СЃР»РѕР¶Р°_СЂСѓРєРё 1
 SYNR    =  attr ( C2 , C1 )
 ============
 TITLE        = one_more
@@ -1476,13 +1476,13 @@ AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:7
 CONTENT =  one more
 EXM     =  try this one more time -
-           попробуй еще раз
+           РїРѕРїСЂРѕР±СѓР№ РµС‰Рµ СЂР°Р·
 ROOT    =  1
 GF      = 1  PN
 DETERM1 =  -
 VAL     =  PROPERT , C , A1
 GF1     = 1  > NP
-RUS     =  еще_один 1
+RUS     =  РµС‰Рµ_РѕРґРёРЅ 1
 ============
 TITLE        = pass_one's_word
 SENSE       = 1
@@ -1502,7 +1502,7 @@ GF2     = 1  obj
 SF2     = 1  ANIM
 GF3     = 1  >> that+sent
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  давать_слово 1
+RUS     =  РґР°РІР°С‚СЊ_СЃР»РѕРІРѕ 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -1514,17 +1514,17 @@ TIME_CREATE       = 28/10/1 14:44:31
 CONTENT =  pull #oneself together
 EXM     =  He emptied the glass, and made an effort to pull
            himself together. -
-           Он осушил стакан и сделал усилие, чтобы взять себя в
-           руки.
+           РћРЅ РѕСЃСѓС€РёР» СЃС‚Р°РєР°РЅ Рё СЃРґРµР»Р°Р» СѓСЃРёР»РёРµ, С‡С‚РѕР±С‹ РІР·СЏС‚СЊ СЃРµР±СЏ РІ
+           СЂСѓРєРё.
            Ruth was silent, trying to pull herself together. -
-           Рут молчала, пытаясь взять себя в руки.
+           Р СѓС‚ РјРѕР»С‡Р°Р»Р°, РїС‹С‚Р°СЏСЃСЊ РІР·СЏС‚СЊ СЃРµР±СЏ РІ СЂСѓРєРё.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  брать_себя_в_руки 1
+RUS     =  Р±СЂР°С‚СЊ_СЃРµР±СЏ_РІ_СЂСѓРєРё 1
 SYNR    =  dir_obj ( C1 , C2 )
            indir_obj ( C1 , C3 )
 ============
@@ -1534,7 +1534,7 @@ AUTHOR       = graf
 TIME_CREATE       = 15/5/1 15:11:7
 CONTENT =  put action
 EXM     =  The gun was put out of action. -
-           Орудие было выведено из строя.
+           РћСЂСѓРґРёРµ Р±С‹Р»Рѕ РІС‹РІРµРґРµРЅРѕ РёР· СЃС‚СЂРѕСЏ.
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  Liqu
@@ -1546,7 +1546,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  obj
 SF2     = 1  INSTR
-RUS     =  выводить_из_строя 1
+RUS     =  РІС‹РІРѕРґРёС‚СЊ_РёР·_СЃС‚СЂРѕСЏ 1
 SYNR    =  indir_obj ( C1 , C2 )
 ============
 TITLE        = put_pen_to_paper
@@ -1559,7 +1559,7 @@ GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
-RUS     =  браться_за_перо 1
+RUS     =  Р±СЂР°С‚СЊСЃСЏ_Р·Р°_РїРµСЂРѕ 1
 ============
 TITLE        = raise_one's_voice
 SENSE       = 1
@@ -1569,8 +1569,8 @@ TIME_CREATE       = 28/10/1 14:44:41
 CONTENT =  raise #one's voice
 EXM     =  He paused for a moment, and then, raising his voice,
            repeated slowly the words. -
-           Мистер Уолдрон умолк на секунду, а затем, повысив
-           голос , с расстановкой повторил свои последние слова.
+           РњРёСЃС‚РµСЂ РЈРѕР»РґСЂРѕРЅ СѓРјРѕР»Рє РЅР° СЃРµРєСѓРЅРґСѓ, Р° Р·Р°С‚РµРј, РїРѕРІС‹СЃРёРІ
+           РіРѕР»РѕСЃ , СЃ СЂР°СЃСЃС‚Р°РЅРѕРІРєРѕР№ РїРѕРІС‚РѕСЂРёР» СЃРІРѕРё РїРѕСЃР»РµРґРЅРёРµ СЃР»РѕРІР°.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -1581,7 +1581,7 @@ SF1     = 1  ANIM
 GF2     = 1  >> obj : at+NP
 SF2     = 1  ANIM
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  повышать_голос 1
+RUS     =  РїРѕРІС‹С€Р°С‚СЊ_РіРѕР»РѕСЃ 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -1597,7 +1597,7 @@ VAL     =  SUB , A1 , C
 GF(3)   = 1  NOUN pl
 GF1     = 1  < subj
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  пожинать_лавры 1
+RUS     =  РїРѕР¶РёРЅР°С‚СЊ_Р»Р°РІСЂС‹ 1
 SYNR    =  dir_obj ( C1 , C3 )
            attr ( C3 , C2 )
 ============
@@ -1617,7 +1617,7 @@ SF1     = 1  ARTEF
           2  SUBST
           3  THINGN
           4  PARAM
-RUS     =  дорожать 1
+RUS     =  РґРѕСЂРѕР¶Р°С‚СЊ 1
 ============
 TITLE        = run_one's_eye
 SENSE       = 1
@@ -1628,9 +1628,9 @@ CONTENT =  run #one's eye
 EXM     =  The man at the desk pulled and twisted his spiky
            moustache for a few moments as he ran his eye up and
            down the paper presented to him. -
-           За те несколько секунд, что потребовались ему, чтобы
-           пробежать глазами принесенную бумагу, человек за
-           столом закрутил и подправил свои остроконечные усы.
+           Р—Р° С‚Рµ РЅРµСЃРєРѕР»СЊРєРѕ СЃРµРєСѓРЅРґ, С‡С‚Рѕ РїРѕС‚СЂРµР±РѕРІР°Р»РёСЃСЊ РµРјСѓ, С‡С‚РѕР±С‹
+           РїСЂРѕР±РµР¶Р°С‚СЊ РіР»Р°Р·Р°РјРё РїСЂРёРЅРµСЃРµРЅРЅСѓСЋ Р±СѓРјР°РіСѓ, С‡РµР»РѕРІРµРє Р·Р°
+           СЃС‚РѕР»РѕРј Р·Р°РєСЂСѓС‚РёР» Рё РїРѕРґРїСЂР°РІРёР» СЃРІРѕРё РѕСЃС‚СЂРѕРєРѕРЅРµС‡РЅС‹Рµ СѓСЃС‹.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -1642,7 +1642,7 @@ GF2     = 1  >> obj : up+NP
           2  >> obj : down+NP
 SF2     = 1  MEDINF
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  пробегать_глазами 1
+RUS     =  РїСЂРѕР±РµРіР°С‚СЊ_РіР»Р°Р·Р°РјРё 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -1667,8 +1667,8 @@ GF3     = 1  > with+NP
 SF3     = 1  ANIM
 GF4     = 1  > ADV
 LEX4    =  a lot
-RUS     =  видеться 1
-COMM    =  Такой выверт.
+RUS     =  РІРёРґРµС‚СЊСЃСЏ 1
+COMM    =  РўР°РєРѕР№ РІС‹РІРµСЂС‚.
 SYNR    =  indir_obj ( C1 , C3 )
            attr ( C3 , C2 )
 ============
@@ -1676,7 +1676,7 @@ TITLE        = settle_a_score
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 15/5/1 15:11:7
-CONTENT =  settle а score
+CONTENT =  settle Р° score
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -1685,7 +1685,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  > with+NP
 SF2     = 1  ANIM
-RUS     =  сводить_счеты 1
+RUS     =  СЃРІРѕРґРёС‚СЊ_СЃС‡РµС‚С‹ 1
 ============
 TITLE        = shrug_one's_shoulders
 SENSE       = 1
@@ -1695,7 +1695,7 @@ TIME_CREATE       = 28/10/1 14:45:8
 CONTENT =  shrug #one's shoulders
 EXM     =  Challenger tossed his head and shrugged his heavy
            shoulders. -
-           Челленджер вскинул голову и пожал плечами.
+           Р§РµР»Р»РµРЅРґР¶РµСЂ РІСЃРєРёРЅСѓР» РіРѕР»РѕРІСѓ Рё РїРѕР¶Р°Р» РїР»РµС‡Р°РјРё.
 ROOT    =  1
 GF      = 1  VERB
 SF      = 1  ANIM
@@ -1703,7 +1703,7 @@ VAL     =  SUB , A1 , C
 GF(3)   = 1  NOUN
 GF1     = 1  > subj
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  пожимать_плечами 1
+RUS     =  РїРѕР¶РёРјР°С‚СЊ_РїР»РµС‡Р°РјРё 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -1722,7 +1722,7 @@ GF(3)   = 1  NOUN
 GF1     = 1  < subj
 GF2     = 1  >> obj : NP
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  выкидывать_из_головы 1
+RUS     =  РІС‹РєРёРґС‹РІР°С‚СЊ_РёР·_РіРѕР»РѕРІС‹ 1
 SYNR    =  attr ( C3 , C2 )
            indir_obj ( C1 , C3 )
 ============
@@ -1740,7 +1740,7 @@ VAL     =  SUB , A1 , C
 PREP(2) =  down
 GF1     = 1  subj
 SF1     = 1  ANIM
-RUS     =  сесть_за_стол 1
+RUS     =  СЃРµСЃС‚СЊ_Р·Р°_СЃС‚РѕР» 1
 SYNR    =  indir_obj ( C1 , C2 )
 ============
 TITLE        = speed_of_operation
@@ -1750,7 +1750,7 @@ TIME_CREATE       = 15/5/1 15:11:7
 CONTENT =  speed of operation
 ROOT    =  1
 GF      = 1  NOUN
-RUS     =  быстродействие 1
+RUS     =  Р±С‹СЃС‚СЂРѕРґРµР№СЃС‚РІРёРµ 1
 ============
 TITLE        = stand_to_credit
 SENSE       = 1
@@ -1768,7 +1768,7 @@ SF1     = 1  SITUAT
 GF2     = 1  NP_poss
 SF2     = 1  ANIM
 GF(2)   = 1  NOUN
-RUS     =  делать_честь 1
+RUS     =  РґРµР»Р°С‚СЊ_С‡РµСЃС‚СЊ 1
 SYNR    =  indir_obj ( C1 , C2 )
            attr ( C2 , A2 )
 ============
@@ -1782,7 +1782,7 @@ ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
 GF1     = 1  < subj
-RUS     =  выходить_за_рамки 1
+RUS     =  РІС‹С…РѕРґРёС‚СЊ_Р·Р°_СЂР°РјРєРё 1
 ============
 TITLE        = straighten_one's_shoulders
 SENSE       = 1
@@ -1796,7 +1796,7 @@ VAL     =  SUB , A1 , C
 GF(3)   = 1  NOUN pl
 GF1     = 1  < subj
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  расправлять_плечи 1
+RUS     =  СЂР°СЃРїСЂР°РІР»СЏС‚СЊ_РїР»РµС‡Рё 1
 SYNR    =  attr ( C3 , C2 )
            dir_obj ( C1 , C3 )
 ============
@@ -1815,7 +1815,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  > obj
 SF2     = 1  ANIM
-RUS     =  дать_по_шее 1
+RUS     =  РґР°С‚СЊ_РїРѕ_С€РµРµ 1
 SYNR    =  indir_obj ( C1 , C2 )
 PREP(2) =  on
 ============
@@ -1833,7 +1833,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 GF2     = 1  NP_poss
 SF2     = 1  ANIM
-RUS     =  бросаться_в_глаза 1
+RUS     =  Р±СЂРѕСЃР°С‚СЊСЃСЏ_РІ_РіР»Р°Р·Р° 1
 SYNR    =  attr ( C2 , A2 )
            dir_obj ( C1 , C2 )
 ============
@@ -1848,7 +1848,7 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  SITUAT
           2  MEDINF
-RUS     =  получать_огласку 1
+RUS     =  РїРѕР»СѓС‡Р°С‚СЊ_РѕРіР»Р°СЃРєСѓ 1
 ============
 TITLE        = take_by_surprise
 SENSE       = 1
@@ -1870,7 +1870,7 @@ GF2     = 1  obj
 SF2     = 1  ANIM
 GF3     = 1  > by+gerund
           2  > for+NP
-RUS     =  застигнуть_врасплох 1
+RUS     =  Р·Р°СЃС‚РёРіРЅСѓС‚СЊ_РІСЂР°СЃРїР»РѕС… 1
 SYNR    =  indir_obj ( C1 , C2 )
 ============
 TITLE        = take_place
@@ -1880,8 +1880,8 @@ TIME_CREATE       = 20/5/1 16:4:23
 CONTENT =  take place
 EXM     =  The meeting and Thermal analysis will take place on 7 April 1992 at
            Leeds Polytechnic. -
-           Встреча и термический анализ будет иметь место 7 апреля 1992 в
-           Политехническом институте Лидса.
+           Р’СЃС‚СЂРµС‡Р° Рё С‚РµСЂРјРёС‡РµСЃРєРёР№ Р°РЅР°Р»РёР· Р±СѓРґРµС‚ РёРјРµС‚СЊ РјРµСЃС‚Рѕ 7 Р°РїСЂРµР»СЏ 1992 РІ
+           РџРѕР»РёС‚РµС…РЅРёС‡РµСЃРєРѕРј РёРЅСЃС‚РёС‚СѓС‚Рµ Р›РёРґСЃР°.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -1889,20 +1889,20 @@ VAL     =  SUB , A1 , C
            LOK , A3 , C
 GF1     = 1  < subj
 SF1     = 1  SITUAT
-GF2     = 1  > ОБСТ_ГР
-GF3     = 1  > ОБСТ_ГР
+GF2     = 1  > РћР‘РЎРў_Р“Р 
+GF3     = 1  > РћР‘РЎРў_Р“Р 
 SYN     =  find place
-RUS     =  иметь_место 1
+RUS     =  РёРјРµС‚СЊ_РјРµСЃС‚Рѕ 1
 ============
 TITLE        = take_revenge
 SENSE       = 1
 AUTHOR       = boris
 TIME_CREATE       = 20/5/1 16:4:23
 CONTENT =  take revenge
-EXM     =  он отомстил за эти слова
+EXM     =  РѕРЅ РѕС‚РѕРјСЃС‚РёР» Р·Р° СЌС‚Рё СЃР»РѕРІР°
 ROOT    =  1
 CAT     = 1  LABL.SIT
-GF      = 1  ГЛ:ГГ
+GF      = 1  Р“Р›:Р“Р“
 VAL     =  AGENT , A1 , C
            C-AGENT , A2 , C
            CAUSE , A3 , C
@@ -1914,7 +1914,7 @@ GF3     = 1  > for+NP
           2  > for+gerund
 SF3     = 1  SITUAT
           2  INF
-RUS     =  мстить 1
+RUS     =  РјСЃС‚РёС‚СЊ 1
 DETERM2 =  the
 ============
 TITLE        = take_the_liberty
@@ -1930,7 +1930,7 @@ GF1     = 1  < subj
 GF2     = 1  > to+inf
           2  > of+gerund
 SF2     = 1  AKTIO
-RUS     =  позволять_себе 1
+RUS     =  РїРѕР·РІРѕР»СЏС‚СЊ_СЃРµР±Рµ 1
 ============
 TITLE        = thank_you
 SENSE       = 1
@@ -1942,7 +1942,7 @@ ROOT    =  1
 GF      = 1  VERB
 VAL     =  CAUSE , A1 , C
 GF1     = 1  >> for+NP
-RUS     =  спасибо 1
+RUS     =  СЃРїР°СЃРёР±Рѕ 1
 ============
 TITLE        = think_nothing
 SENSE       = 1
@@ -1957,7 +1957,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  >> of+gerund
 SF2     = 1  SITUAT
-RUS     =  нипочем 1
+RUS     =  РЅРёРїРѕС‡РµРј 1
 ============
 TITLE        = throw_at_each_other
 SENSE       = 1
@@ -1973,7 +1973,7 @@ GF1     = 1  < subj_pl
 SF1     = 1  ANIM
 GF2     = 1  obj
 SF2     = 1  ANIM
-RUS     =  видеться 1
+RUS     =  РІРёРґРµС‚СЊСЃСЏ 1
 SYNR    =  indir_obj ( C1 , C3 )
            attr ( C3 , C2 )
 ============
@@ -1984,8 +1984,8 @@ TIME_CREATE       = 20/5/1 16:4:23
 CONTENT =  throw mud
 EXM     =  You can only throw mud at the men who have risked
            their lives to open new fields to science. -
-           Вы способны только поливать грязью людей, которые
-           рисковали жизнью, завоевывая новые просторы науки.
+           Р’С‹ СЃРїРѕСЃРѕР±РЅС‹ С‚РѕР»СЊРєРѕ РїРѕР»РёРІР°С‚СЊ РіСЂСЏР·СЊСЋ Р»СЋРґРµР№, РєРѕС‚РѕСЂС‹Рµ
+           СЂРёСЃРєРѕРІР°Р»Рё Р¶РёР·РЅСЊСЋ, Р·Р°РІРѕРµРІС‹РІР°СЏ РЅРѕРІС‹Рµ РїСЂРѕСЃС‚РѕСЂС‹ РЅР°СѓРєРё.
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -1995,7 +1995,7 @@ SF1     = 1  ANIM
 GF2     = 1  > obj : at+NP
 SF2     = 1  ANIM
           2  ABSTR
-RUS     =  поливать_грязью 1
+RUS     =  РїРѕР»РёРІР°С‚СЊ_РіСЂСЏР·СЊСЋ 1
 ============
 TITLE        = tire_by_walking
 SENSE       = 1
@@ -2011,7 +2011,7 @@ PREP(3) =  by
 GF(3)   = 1  VERB ing
 GF1     = 1  < subj
 AUX     =  THESAME ( A1 , C2 )
-RUS     =  находиться 2
+RUS     =  РЅР°С…РѕРґРёС‚СЊСЃСЏ 2
 SYNR    =  dir_obj ( C1 , C2 )
            indir_obj ( C1 , C3 )
 ============
@@ -2023,7 +2023,7 @@ TIME_CREATE       = 24/11/1 21:6:40
 DETERM(1)=  the
 CONTENT =  left
 EXM     =  he turned abruptly to the left
-           он резко повернул  влево
+           РѕРЅ СЂРµР·РєРѕ РїРѕРІРµСЂРЅСѓР»  РІР»РµРІРѕ
 ROOT    =  1
 GF      = 1  ADV
 SF      = 1  TRG-PNT
@@ -2032,7 +2032,7 @@ PREP    =  to
 GF1     = 1  X! : VERB
 SF1     = 1  SITUAT
           2  MOV
-RUS     =  влево 1
+RUS     =  РІР»РµРІРѕ 1
 ============
 TITLE        = to_the_right
 SENSE       = 1
@@ -2042,7 +2042,7 @@ TIME_CREATE       = 24/11/1 21:6:50
 DETERM(1)=  the
 CONTENT =  right
 EXM     =  he turned to the right
-           он повернул вправо
+           РѕРЅ РїРѕРІРµСЂРЅСѓР» РІРїСЂР°РІРѕ
 ROOT    =  1
 GF      = 1  ADV
 SF      = 1  TRG-PNT
@@ -2051,7 +2051,7 @@ PREP    =  to
 GF1     = 1  X! : VERB
 SF1     = 1  SITUAT
           2  MOV
-RUS     =  вправо 1
+RUS     =  РІРїСЂР°РІРѕ 1
 ============
 TITLE        = try_luck
 SENSE       = 1
@@ -2060,7 +2060,7 @@ REDACT       = alex
 TIME_CREATE       = 28/10/1 14:45:43
 CONTENT =  try  #one's luck
 EXM     =  to try one's luck at the roulette -
-           попытать счастья в рулетку
+           РїРѕРїС‹С‚Р°С‚СЊ СЃС‡Р°СЃС‚СЊСЏ РІ СЂСѓР»РµС‚РєСѓ
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -2070,11 +2070,11 @@ GF(3)   = 1  NOUN
 GF1     = 1  < subj
 GF2     = 1  > at+NP
           2  -
-GF3     = 1  > ОБСТ_ГР
+GF3     = 1  > РћР‘РЎРў_Р“Р 
           2  -
 AUX     =  THESAME ( A1 , C2 )
 SYN     =  seek_fortune
-RUS     =  попытать_счастья 1
+RUS     =  РїРѕРїС‹С‚Р°С‚СЊ_СЃС‡Р°СЃС‚СЊСЏ 1
 SYNR    =  obj ( C1 , C3 )
            attr ( C3 , C2 )
 ============
@@ -2084,7 +2084,7 @@ AUTHOR       = user
 TIME_CREATE       = 11/6/1 10:47:52
 CONTENT =  try patience
 EXM     =  You'd try the patience of a saint! -
-           Ты и святого выведешь из себя!
+           РўС‹ Рё СЃРІСЏС‚РѕРіРѕ РІС‹РІРµРґРµС€СЊ РёР· СЃРµР±СЏ!
 ROOT    =  1
 GF      = 1  VERB
 VAL     =  SUB , A1 , C
@@ -2094,7 +2094,7 @@ GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  NP_poss
 SF2     = 1  ANIM
-RUS     =  выводить_из_терпения 1
+RUS     =  РІС‹РІРѕРґРёС‚СЊ_РёР·_С‚РµСЂРїРµРЅРёСЏ 1
 SYNR    =  attr ( C2 , A2 )
            dir_obj ( C1 , C2 )
 ============
@@ -2106,8 +2106,8 @@ CONTENT =  way of life
 ROOT    =  1
 GF      = 1  NOUN
 GF1     = 1  NP_poss
-RUS     =  образ_жизни 1
-           быт 1
+RUS     =  РѕР±СЂР°Р·_Р¶РёР·РЅРё 1
+           Р±С‹С‚ 1
 ============
 TITLE        = with_love
 SENSE       = 1
@@ -2121,7 +2121,7 @@ GF      = 1  NOUN
 VAL     =  SUB , A1 , C
 PREP    =  with
 GF1     = 1  >> subj
-RUS     =  целую_ 1
+RUS     =  С†РµР»СѓСЋ_ 1
 ============
 TITLE        = would_like
 SENSE       = 1
@@ -2134,8 +2134,8 @@ VAL     =  SUB , A1 , C
 GF1     = 1  < subj
 SF1     = 1  ANIM
 GF2     = 1  >> to+inf
-RUS     =  хотеть 1
-           хотеться 1
+RUS     =  С…РѕС‚РµС‚СЊ 1
+           С…РѕС‚РµС‚СЊСЃСЏ 1
 ============
 TITLE        = you_know
 SENSE       = 1
@@ -2143,8 +2143,8 @@ AUTHOR       = boris
 TIME_CREATE       = 11/6/1 10:47:52
 POS     =  end
 EXM     =  she is very rich, you know -
-           ведь она очень богата
+           РІРµРґСЊ РѕРЅР° РѕС‡РµРЅСЊ Р±РѕРіР°С‚Р°
 CONTENT =  you know
 CAT     = 1  LABL.SIT
 GF      = 1  VERB
-RUS     =  ведь 1
+RUS     =  РІРµРґСЊ 1

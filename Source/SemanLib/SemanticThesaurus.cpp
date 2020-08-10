@@ -14,7 +14,7 @@ void CRusSemStructure::InterpretOrganisations (long ClauseNo)
 				m_Nodes[i].m_Vals.push_back(V);
 		   }
 		   else 
-// ORG1 + ORG2,рд  => BELNG(ORG1, ORG2)		   
+// ORG1 + ORG2,СЂРґ  => BELNG(ORG1, ORG2)		   
 			if (m_Nodes[i].m_bOrgName && m_Nodes[i+1].m_bOrgName) 
 			{
 				CValency V ("BELNG", C_A);			  
@@ -23,13 +23,13 @@ void CRusSemStructure::InterpretOrganisations (long ClauseNo)
 			}
 };
 
-// все термины были разделены на отдельные слова 
-// создаем отношение из Nd2 в Nd1  (нумерация берется из R (Nd1, Nd2))) 
+// РІСЃРµ С‚РµСЂРјРёРЅС‹ Р±С‹Р»Рё СЂР°Р·РґРµР»РµРЅС‹ РЅР° РѕС‚РґРµР»СЊРЅС‹Рµ СЃР»РѕРІР° 
+// СЃРѕР·РґР°РµРј РѕС‚РЅРѕС€РµРЅРёРµ РёР· Nd2 РІ Nd1  (РЅСѓРјРµСЂР°С†РёСЏ Р±РµСЂРµС‚СЃСЏ РёР· R (Nd1, Nd2))) 
 void CRusSemStructure::ApplyTerminSemStrForOneRel (string RelationStr, long Nd1, long Nd2, const CRossHolder* RossHolder)
 {
 	vector<long> Rels;
 
-	//  удаляем все отношения, которые идут из Nd2 c названием RelationStr кроме тех, что идут в MUA GetOutcomingRelations(Nd2, Rels, false);
+	//  СѓРґР°Р»СЏРµРј РІСЃРµ РѕС‚РЅРѕС€РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РёРґСѓС‚ РёР· Nd2 c РЅР°Р·РІР°РЅРёРµРј RelationStr РєСЂРѕРјРµ С‚РµС…, С‡С‚Рѕ РёРґСѓС‚ РІ MUA GetOutcomingRelations(Nd2, Rels, false);
 	for (long i=0; i < Rels.size();)
 		if (    (m_Relations[Rels[i]].m_Valency.m_RelationStr != RelationStr)
 			|| (m_Nodes[m_Relations[Rels[i]].m_TargetNodeNo].m_NodeType == MNA)
@@ -39,7 +39,7 @@ void CRusSemStructure::ApplyTerminSemStrForOneRel (string RelationStr, long Nd1,
 			i++;
 	DeleteRelations(Rels);
 
-	//  удаляем все отношения, которые идут в Nd1 кроме тех, что идут из MUA 
+	//  СѓРґР°Р»СЏРµРј РІСЃРµ РѕС‚РЅРѕС€РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РёРґСѓС‚ РІ Nd1 РєСЂРѕРјРµ С‚РµС…, С‡С‚Рѕ РёРґСѓС‚ РёР· MUA 
 	CRelSet R = GetIncomingRelations(Nd1, false);
 	for (long i=0; i < R.m_RelsCount;)
 		if ( m_Nodes[m_Relations[R.m_Rels[i]].m_SourceNodeNo].m_NodeType == MNA)
@@ -49,11 +49,11 @@ void CRusSemStructure::ApplyTerminSemStrForOneRel (string RelationStr, long Nd1,
 	DeleteRelSet(R);
 
 
-	// удаляем отношение, идущее из Nd1 в Nd2, если такое было
+	// СѓРґР°Р»СЏРµРј РѕС‚РЅРѕС€РµРЅРёРµ, РёРґСѓС‰РµРµ РёР· Nd1 РІ Nd2, РµСЃР»Рё С‚Р°РєРѕРµ Р±С‹Р»Рѕ
 	FindRelations(Nd1, Nd2, Rels);
 	DeleteRelations(Rels);
 
-	// создаем новое отношение 
+	// СЃРѕР·РґР°РµРј РЅРѕРІРѕРµ РѕС‚РЅРѕС€РµРЅРёРµ 
 	CValency V (RelationStr, A_C,RossHolder);
 	AddRelation(CRusSemRelation(V, Nd2, Nd1, ""));
 	if (find (m_Nodes[Nd2].m_Vals.begin(),m_Nodes[Nd2].m_Vals.end(), V) == m_Nodes[Nd2].m_Vals.end())
@@ -83,7 +83,7 @@ long  CRusSemStructure::AddThesSemRelations(const CRossHolder* Dict, long UnitNo
 			 || (Rel.m_TargetNodeNo >= EndClauseNo)
 			)
 		 {
-			 ErrorMessage (" Ошибка в интерпретации поля AUX");
+			 ErrorMessage (" РћС€РёР±РєР° РІ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё РїРѕР»СЏ AUX");
 			 m_ThesSemRelations.erase(m_ThesSemRelations.begin() +SaveDopRelationsCount, m_ThesSemRelations.end());
 			 return -1;
 		 };
@@ -99,7 +99,7 @@ bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CRoss
 	if (MainNodeNo == -1)
 		return false;
 	const CThesaurus* Thes = m_pData->GetThes(m_Nodes[StartNodeNo].m_ThesaurusId);
-	string ErrorMess = "Ошибка в поле AUX термина ";  
+	string ErrorMess = "РћС€РёР±РєР° РІ РїРѕР»Рµ AUX С‚РµСЂРјРёРЅР° ";  
 	ErrorMess += Thes->m_Termins[Thes->GetTerminNoByTextEntryId(m_Nodes[StartNodeNo].m_TerminId)].m_TerminStr;
 
 	for (size_t k=SaveDopRelationsCount; k < m_ThesSemRelations.size(); k++)
@@ -134,14 +134,14 @@ WORD CRusSemStructure::GetArticleByModel (long TerminId, int ThesaurusId) const
 	long ModelNo = Termin.m_ModelNo;
 	const CInnerModel& Model =	Thes->m_Models[ModelNo];
 	long ModelId = Model.m_ModelId;
-	string S = Format("@Модель%i",ModelId);
+	string S = Format("@РњРѕРґРµР»СЊ%i",ModelId);
 	return  GetRoss(GetRossIdByThesId(ThesaurusId))->LocateUnit(S.c_str(), 1);
 };
 
 
 
 /*
- функция загружает поле AUX в слот m_ThesSemRelations
+ С„СѓРЅРєС†РёСЏ Р·Р°РіСЂСѓР¶Р°РµС‚ РїРѕР»Рµ AUX РІ СЃР»РѕС‚ m_ThesSemRelations
 */
 
 void CRusSemStructure::ReadDopFieldForClause(long ClauseNo)
@@ -167,8 +167,8 @@ void CRusSemStructure::ReadDopFieldForClause(long ClauseNo)
 				||  !ReadDopField(ClauseNo, StartNodeNo, Dict, UnitNo, CollocId)
 				)
 				/*
-				если нет статьи или нет поля AUX, тогда пробем прочесть 
-				статью заглушку.
+				РµСЃР»Рё РЅРµС‚ СЃС‚Р°С‚СЊРё РёР»Рё РЅРµС‚ РїРѕР»СЏ AUX, С‚РѕРіРґР° РїСЂРѕР±РµРј РїСЂРѕС‡РµСЃС‚СЊ 
+				СЃС‚Р°С‚СЊСЋ Р·Р°РіР»СѓС€РєСѓ.
 				*/
 				try  {
 					UnitNo = GetArticleByModel(m_Nodes[StartNodeNo].m_TerminId, ThesaurusId);
@@ -198,9 +198,9 @@ void CRusSemStructure::ReadThesInterps(long ClauseNo)
 				)
 			{
 				/*
-				если в статье термина есть поле VAL, тогда находим главное слово термина
-				и приписываем ему эту словарную статью, стираяя все его 
-				предыдущие словарные интерпретации
+				РµСЃР»Рё РІ СЃС‚Р°С‚СЊРµ С‚РµСЂРјРёРЅР° РµСЃС‚СЊ РїРѕР»Рµ VAL, С‚РѕРіРґР° РЅР°С…РѕРґРёРј РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ С‚РµСЂРјРёРЅР°
+				Рё РїСЂРёРїРёСЃС‹РІР°РµРј РµРјСѓ СЌС‚Сѓ СЃР»РѕРІР°СЂРЅСѓСЋ СЃС‚Р°С‚СЊСЋ, СЃС‚РёСЂР°СЏСЏ РІСЃРµ РµРіРѕ 
+				РїСЂРµРґС‹РґСѓС‰РёРµ СЃР»РѕРІР°СЂРЅС‹Рµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё
 				*/
 				size_t i = Dict->GetRoss()->GetUnitStartPos(UnitNo);
 
@@ -218,7 +218,7 @@ void CRusSemStructure::ReadThesInterps(long ClauseNo)
 						{
 							m_Nodes[i].SetInterp(CDictUnitInterp(Dict, GetRossIdByThesId(m_Nodes[StartNodeNo].m_ThesaurusId), UnitNo, false, false));
 							m_Nodes[i].GetInterp()->m_TerminId = m_Nodes[StartNodeNo].m_TerminId;
-							// главное слово может быть только одно
+							// РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ РѕРґРЅРѕ
 							break;
 						};
 
@@ -235,7 +235,7 @@ void CRusSemStructure::ApplyTerminSemStr(long ClauseNo)
 
   for (long i =0; i < m_ThesSemRelations.size(); i++)
   if (m_Nodes[m_ThesSemRelations[i].m_SourceNodeNo].m_ClauseNo == ClauseNo)
-	 // признаков может быть много
+	 // РїСЂРёР·РЅР°РєРѕРІ РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРЅРѕРіРѕ
 	if (m_ThesSemRelations[i].m_SemRelName != "PROPERT")	 
 	{
 		  long SourceNodeNo = m_ThesSemRelations[i].m_SourceNodeNo;
@@ -277,18 +277,18 @@ void CRusSemStructure::GetThesInterps(string UnitStr, const CRusSemWord& W, cons
 
 
 		/*
-		выше по тексту мы объявили, что все первые слова предложений  как бы не написаны 
-		с маленькой буквы (чтобы на синтезе они не писались автоматически с большой буквы)
-		но при сравнении с тезаурусом учитывается регистр: если в тексте было написано 
-		с маленькой  буквы, а в тезаурусе с большой, то такой теримн не рассматривается.
-		Таким образом, для слова Microsoft  в начале предложения прописывается LowLow, из-за
-		чего оно не интерпретируется в тезаурусе. 
-		Поэтому приходится здесь считать, то первой слово написано с большой буквы.
+		РІС‹С€Рµ РїРѕ С‚РµРєСЃС‚Сѓ РјС‹ РѕР±СЉСЏРІРёР»Рё, С‡С‚Рѕ РІСЃРµ РїРµСЂРІС‹Рµ СЃР»РѕРІР° РїСЂРµРґР»РѕР¶РµРЅРёР№  РєР°Рє Р±С‹ РЅРµ РЅР°РїРёСЃР°РЅС‹ 
+		СЃ РјР°Р»РµРЅСЊРєРѕР№ Р±СѓРєРІС‹ (С‡С‚РѕР±С‹ РЅР° СЃРёРЅС‚РµР·Рµ РѕРЅРё РЅРµ РїРёСЃР°Р»РёСЃСЊ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё СЃ Р±РѕР»СЊС€РѕР№ Р±СѓРєРІС‹)
+		РЅРѕ РїСЂРё СЃСЂР°РІРЅРµРЅРёРё СЃ С‚РµР·Р°СѓСЂСѓСЃРѕРј СѓС‡РёС‚С‹РІР°РµС‚СЃСЏ СЂРµРіРёСЃС‚СЂ: РµСЃР»Рё РІ С‚РµРєСЃС‚Рµ Р±С‹Р»Рѕ РЅР°РїРёСЃР°РЅРѕ 
+		СЃ РјР°Р»РµРЅСЊРєРѕР№  Р±СѓРєРІС‹, Р° РІ С‚РµР·Р°СѓСЂСѓСЃРµ СЃ Р±РѕР»СЊС€РѕР№, С‚Рѕ С‚Р°РєРѕР№ С‚РµСЂРёРјРЅ РЅРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµС‚СЃСЏ.
+		РўР°РєРёРј РѕР±СЂР°Р·РѕРј, РґР»СЏ СЃР»РѕРІР° Microsoft  РІ РЅР°С‡Р°Р»Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ РїСЂРѕРїРёСЃС‹РІР°РµС‚СЃСЏ LowLow, РёР·-Р·Р°
+		С‡РµРіРѕ РѕРЅРѕ РЅРµ РёРЅС‚РµСЂРїСЂРµС‚РёСЂСѓРµС‚СЃСЏ РІ С‚РµР·Р°СѓСЂСѓСЃРµ. 
+		РџРѕСЌС‚РѕРјСѓ РїСЂРёС…РѕРґРёС‚СЃСЏ Р·РґРµСЃСЊ СЃС‡РёС‚Р°С‚СЊ, С‚Рѕ РїРµСЂРІРѕР№ СЃР»РѕРІРѕ РЅР°РїРёСЃР°РЅРѕ СЃ Р±РѕР»СЊС€РѕР№ Р±СѓРєРІС‹.
 
 		*/
 
 		/*
-		если не совпадает регистр, то нужно выйти 
+		РµСЃР»Рё РЅРµ СЃРѕРІРїР°РґР°РµС‚ СЂРµРіРёСЃС‚СЂ, С‚Рѕ РЅСѓР¶РЅРѕ РІС‹Р№С‚Рё 
 		*/
 		RegisterEnum   CharCase = W.m_CharCase;
 		if (W.m_WordNo == 0)
@@ -296,7 +296,7 @@ void CRusSemStructure::GetThesInterps(string UnitStr, const CRusSemWord& W, cons
 
 		const CInnerTermin& T = Thes->m_Termins[TerminNo];
 		assert(T.m_Items.size() > 0);
-		// assert(T.m_Items.size() == 1); этого делать нельзя, поскольку дефисные слова имеют леммы для каждой дефисной части
+		// assert(T.m_Items.size() == 1); СЌС‚РѕРіРѕ РґРµР»Р°С‚СЊ РЅРµР»СЊР·СЏ, РїРѕСЃРєРѕР»СЊРєСѓ РґРµС„РёСЃРЅС‹Рµ СЃР»РѕРІР° РёРјРµСЋС‚ Р»РµРјРјС‹ РґР»СЏ РєР°Р¶РґРѕР№ РґРµС„РёСЃРЅРѕР№ С‡Р°СЃС‚Рё
 
 		if	(CharCase == LowLow)
 		{
@@ -307,14 +307,14 @@ void CRusSemStructure::GetThesInterps(string UnitStr, const CRusSemWord& W, cons
 				return;
 		}
 
-		//  проверка части речи
+		//  РїСЂРѕРІРµСЂРєР° С‡Р°СЃС‚Рё СЂРµС‡Рё
 		int ModelNo = Thes->m_Termins[TerminNo].m_ModelNo;
 		if (ModelNo == -1) return;
 		const CInnerModel& M = Thes->m_Models[ModelNo];
 		if (M.m_AtomGroups.size() != 1) return;
 		if ( !W.HasPOS(M.m_AtomGroups[0].m_PartOfSpeech) )  return;
 
-		//  добавление статьи, если она есть
+		//  РґРѕР±Р°РІР»РµРЅРёРµ СЃС‚Р°С‚СЊРё, РµСЃР»Рё РѕРЅР° РµСЃС‚СЊ
 		WORD UnitNo = GetUnitNoByTerminId(DictType, TerminId);
 		if (UnitNo == ErrUnitNo)  return;
 
@@ -325,7 +325,7 @@ void CRusSemStructure::GetThesInterps(string UnitStr, const CRusSemWord& W, cons
 	}
 	catch (...)
 	{
-		ErrorMessage ("Ошибка тезаурусной интерпретации");
+		ErrorMessage ("РћС€РёР±РєР° С‚РµР·Р°СѓСЂСѓСЃРЅРѕР№ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё");
 		throw;
 	};
 };
@@ -334,7 +334,7 @@ void CRusSemStructure::GetThesInterps(string UnitStr, const CRusSemWord& W, cons
 
 void CRusSemStructure::AscribeFindConceptFets(long ClauseNo, const StringVector& ConceptStrs)
 {
-  // идем по всем узлам 
+  // РёРґРµРј РїРѕ РІСЃРµРј СѓР·Р»Р°Рј 
   for (long i=0; i < m_Nodes.size(); i++)
   if (    IsThesRoss(m_Nodes[i].GetType())
 	   && (m_Nodes[i].m_ClauseNo == ClauseNo)
@@ -359,7 +359,7 @@ void CRusSemStructure::AscribeFindConceptFets(long ClauseNo, const StringVector&
 
 void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 {
-	// получаем все LEX или MANLEX, которые начинаются с '#'
+	// РїРѕР»СѓС‡Р°РµРј РІСЃРµ LEX РёР»Рё MANLEX, РєРѕС‚РѕСЂС‹Рµ РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃ '#'
 	StringVector ConceptStrs;
 
 	const vector<CAbstractArticle>* pAbstractArticles = m_pData->GetAbstractArticles(Ross);
@@ -413,11 +413,11 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 };
 
 struct CTerminItem {
-	// номер элемента в термине 
+	// РЅРѕРјРµСЂ СЌР»РµРјРµРЅС‚Р° РІ С‚РµСЂРјРёРЅРµ 
 	UINT m_ItemNo;
 	/*
-	при загрузке английских терминов m_TextItemId - WordNo;
-    при загрузке разделенных русских m_TextItemId - NodeNo;
+	РїСЂРё Р·Р°РіСЂСѓР·РєРµ Р°РЅРіР»РёР№СЃРєРёС… С‚РµСЂРјРёРЅРѕРІ m_TextItemId - WordNo;
+    РїСЂРё Р·Р°РіСЂСѓР·РєРµ СЂР°Р·РґРµР»РµРЅРЅС‹С… СЂСѓСЃСЃРєРёС… m_TextItemId - NodeNo;
 	*/
 	UINT m_TextItemId; 
 	bool m_bSelected;
@@ -457,7 +457,7 @@ void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId,  co
 		T.m_ThesaurusId = ThesaurusId;
 		T.m_TerminNo = Thes->m_SynItems[TerminItems[i]].m_TerminNo;    
 		I.m_ItemNo = Thes->m_SynItems[TerminItems[i]].m_ItemPos;
-		// односоставные теримны пропускаем
+		// РѕРґРЅРѕСЃРѕСЃС‚Р°РІРЅС‹Рµ С‚РµСЂРёРјРЅС‹ РїСЂРѕРїСѓСЃРєР°РµРј
 		long ModelNo = Thes->m_Termins[T.m_TerminNo].m_ModelNo;
 		if  (ModelNo == -1) continue;
 		if (Thes->m_Models[ModelNo].m_AtomGroups.size() == 1)  continue;
@@ -473,7 +473,7 @@ void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId,  co
 };
 
 
-// проверяет один вариант приписывания элементов разделенных терминов словам
+// РїСЂРѕРІРµСЂСЏРµС‚ РѕРґРёРЅ РІР°СЂРёР°РЅС‚ РїСЂРёРїРёСЃС‹РІР°РЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ СЂР°Р·РґРµР»РµРЅРЅС‹С… С‚РµСЂРјРёРЅРѕРІ СЃР»РѕРІР°Рј
 bool CheckAndBuildOneDividedTermin(CRusSemStructure& R,const CSemanTermin& T,  const vector<CDopField>& DopFields, long MainItemNo)
 {
 	for (long DopFieldNo=0;  DopFieldNo < DopFields.size(); DopFieldNo++)
@@ -488,14 +488,14 @@ bool CheckAndBuildOneDividedTermin(CRusSemStructure& R,const CSemanTermin& T,  c
 			else
 			  if (T.m_Items[j].m_ItemNo == F.m_Word2)
 				ItemNo2 = j;
-		// если не найдено элементов, это, скорее всего, означает, что неверно составлено поле AUX
+		// РµСЃР»Рё РЅРµ РЅР°Р№РґРµРЅРѕ СЌР»РµРјРµРЅС‚РѕРІ, СЌС‚Рѕ, СЃРєРѕСЂРµРµ РІСЃРµРіРѕ, РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ РЅРµРІРµСЂРЅРѕ СЃРѕСЃС‚Р°РІР»РµРЅРѕ РїРѕР»Рµ AUX
 		if ( (ItemNo1 == -1) || (ItemNo2 == -1)) return false;
 
-		// если элементы уже являются частью тезаурусной  интерпретации надо выйти
+		// РµСЃР»Рё СЌР»РµРјРµРЅС‚С‹ СѓР¶Рµ СЏРІР»СЏСЋС‚СЃСЏ С‡Р°СЃС‚СЊСЋ С‚РµР·Р°СѓСЂСѓСЃРЅРѕР№  РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё РЅР°РґРѕ РІС‹Р№С‚Рё
 		if (R.m_Nodes[T.m_Items[ItemNo1].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
 		if (R.m_Nodes[T.m_Items[ItemNo2].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
 
-		// Ищем отношение, которое их связывает
+		// РС‰РµРј РѕС‚РЅРѕС€РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РёС… СЃРІСЏР·С‹РІР°РµС‚
 		long RelNo = R.FindFirstRelation (T.m_Items[ItemNo2].m_TextItemId, T.m_Items[ItemNo1].m_TextItemId);
 		if (RelNo == -1) return false;
 		if (R.m_Relations[RelNo].m_Valency.m_RelationStr !=  F.m_RelationStr) return false;
@@ -519,7 +519,7 @@ bool CheckAndBuildOneDividedTermin(CRusSemStructure& R,const CSemanTermin& T,  c
 };
 
 
-// проверяет, что для разделенного термина были найдены все  его элементы
+// РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РґР»СЏ СЂР°Р·РґРµР»РµРЅРЅРѕРіРѕ С‚РµСЂРјРёРЅР° Р±С‹Р»Рё РЅР°Р№РґРµРЅС‹ РІСЃРµ  РµРіРѕ СЌР»РµРјРµРЅС‚С‹
 bool CheckIfAllItemsFoundForDividedTermin(const CRusSemStructure& R, const CSemanTermin& T) 
 {
 	vector<bool> V (T.m_TextItemsCount, false);
@@ -610,7 +610,7 @@ try {
 		LoadTerminItems(*this,  CompThes,i, m_Nodes[i].m_Words[0].m_Lemma.c_str(),Termins);
 
 	};
-	// строим разорванные термины
+	// СЃС‚СЂРѕРёРј СЂР°Р·РѕСЂРІР°РЅРЅС‹Рµ С‚РµСЂРјРёРЅС‹
 	for (int TerminNo=0; TerminNo< Termins.size(); TerminNo++)
 	{
 
@@ -621,11 +621,11 @@ try {
 		T.m_TextItemsCount = Thes->m_Termins[T.m_TerminNo].m_Items.size();
 
 		if (!CheckIfAllItemsFoundForDividedTermin(*this, T)) continue;
-		// дальше  мы будем уничтожать элементы вектора  T.m_Items, оставляя в нем только те, 
-		// для которых были найдены отношения из поля AUX
-		// Если, например,  для некого двухсловного термина для первого слова было найдено две гипотезы  в тексте,
-		// и только одна из этих двух слов-гипотез состоит в нужным отношении со вторым словом,
-		// тогда  второе гипотеза будет удалена
+		// РґР°Р»СЊС€Рµ  РјС‹ Р±СѓРґРµРј СѓРЅРёС‡С‚РѕР¶Р°С‚СЊ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР°  T.m_Items, РѕСЃС‚Р°РІР»СЏСЏ РІ РЅРµРј С‚РѕР»СЊРєРѕ С‚Рµ, 
+		// РґР»СЏ РєРѕС‚РѕСЂС‹С… Р±С‹Р»Рё РЅР°Р№РґРµРЅС‹ РѕС‚РЅРѕС€РµРЅРёСЏ РёР· РїРѕР»СЏ AUX
+		// Р•СЃР»Рё, РЅР°РїСЂРёРјРµСЂ,  РґР»СЏ РЅРµРєРѕРіРѕ РґРІСѓС…СЃР»РѕРІРЅРѕРіРѕ С‚РµСЂРјРёРЅР° РґР»СЏ РїРµСЂРІРѕРіРѕ СЃР»РѕРІР° Р±С‹Р»Рѕ РЅР°Р№РґРµРЅРѕ РґРІРµ РіРёРїРѕС‚РµР·С‹  РІ С‚РµРєСЃС‚Рµ,
+		// Рё С‚РѕР»СЊРєРѕ РѕРґРЅР° РёР· СЌС‚РёС… РґРІСѓС… СЃР»РѕРІ-РіРёРїРѕС‚РµР· СЃРѕСЃС‚РѕРёС‚ РІ РЅСѓР¶РЅС‹Рј РѕС‚РЅРѕС€РµРЅРёРё СЃРѕ РІС‚РѕСЂС‹Рј СЃР»РѕРІРѕРј,
+		// С‚РѕРіРґР°  РІС‚РѕСЂРѕРµ РіРёРїРѕС‚РµР·Р° Р±СѓРґРµС‚ СѓРґР°Р»РµРЅР°
 
 		vector<CDopField> DopFields;
 		T.m_TerminId = Thes->m_Termins[T.m_TerminNo].m_TerminId;
@@ -633,7 +633,7 @@ try {
 		if (UnitNo == ErrUnitNo) continue;
 		long MainItemNo = GetRossHolder(GetRossIdByThesId(T.m_ThesaurusId))->GetDopFields(UnitNo, DopFields);
 
-		// если поле AUX пусто, тогда не на что опираться, призодится выходить
+		// РµСЃР»Рё РїРѕР»Рµ AUX РїСѓСЃС‚Рѕ, С‚РѕРіРґР° РЅРµ РЅР° С‡С‚Рѕ РѕРїРёСЂР°С‚СЊСЃСЏ, РїСЂРёР·РѕРґРёС‚СЃСЏ РІС‹С…РѕРґРёС‚СЊ
 		if (DopFields.size() == 0) continue;
 
 		GetThesInterpFirstVariant(T);
@@ -655,7 +655,7 @@ try {
 };
 
 /*
-Создаем интерпретацию для тезаурусных сокращений типа "ВДНХ"
+РЎРѕР·РґР°РµРј РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ РґР»СЏ С‚РµР·Р°СѓСЂСѓСЃРЅС‹С… СЃРѕРєСЂР°С‰РµРЅРёР№ С‚РёРїР° "Р’Р”РќРҐ"
 */
 
 void CRusSemStructure::FindAbbrTermins()
@@ -674,19 +674,19 @@ try {
 			 TerminNo = m_pData->GetThes(FinThes)->FindAbbr(WordStr.c_str());
 			 ThesId = FinThes;
 		 };
-		 // ОПЕК - 
+		 // РћРџР•Рљ - 
 		 if (TerminNo == -1)
 		 {
 			 TerminNo = m_pData->GetThes(CompThes)->FindAbbr(WordStr.c_str());
 			 ThesId = CompThes;
 		 };
-		 // СПС - Союз Правых Сил
+		 // РЎРџРЎ - РЎРѕСЋР· РџСЂР°РІС‹С… РЎРёР»
 		 if (TerminNo == -1)
 		 {
 			 TerminNo = m_pData->GetThes(OmniThes)->FindAbbr(WordStr.c_str());
 			 ThesId = OmniThes;
 		 };
-		 // США - Соединенные Штаты Америки
+		 // РЎРЁРђ - РЎРѕРµРґРёРЅРµРЅРЅС‹Рµ РЁС‚Р°С‚С‹ РђРјРµСЂРёРєРё
 		 if (TerminNo == -1)
 		 {
 			 TerminNo = m_pData->GetThes(LocThes)->FindAbbr(WordStr.c_str());
@@ -721,7 +721,7 @@ try {
 
 
 /*
-  Создаем интерпретацию для английских многословных названий типа Adobe Photoshop
+  РЎРѕР·РґР°РµРј РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЋ РґР»СЏ Р°РЅРіР»РёР№СЃРєРёС… РјРЅРѕРіРѕСЃР»РѕРІРЅС‹С… РЅР°Р·РІР°РЅРёР№ С‚РёРїР° Adobe Photoshop
 */
 
 void CRusSemStructure::FindEnglishTermins()

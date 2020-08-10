@@ -108,7 +108,7 @@ void CProceedDlg::SetBaseVariant(int ExampleNo)
 	m_BaseStartNo = -1;
 	m_BaseCurrentNo = -1;
 
-	// идем по всем сохраненным результатам, ищем начало "ExampleNo"
+	// РёРґРµРј РїРѕ РІСЃРµРј СЃРѕС…СЂР°РЅРµРЅРЅС‹Рј СЂРµР·СѓР»СЊС‚Р°С‚Р°Рј, РёС‰РµРј РЅР°С‡Р°Р»Рѕ "ExampleNo"
 	int i1=0;
 	for( ; i1<pDlg->m_base.size(); i1++ )
 	{
@@ -118,7 +118,7 @@ void CProceedDlg::SetBaseVariant(int ExampleNo)
 	if( i1 >= pDlg->m_base.size() )
 		return;
 
-   // идем по всем сохраненным результатам, ищем конец "ExampleNo"
+   // РёРґРµРј РїРѕ РІСЃРµРј СЃРѕС…СЂР°РЅРµРЅРЅС‹Рј СЂРµР·СѓР»СЊС‚Р°С‚Р°Рј, РёС‰РµРј РєРѕРЅРµС† "ExampleNo"
 	int i2=i1;
 	for( ; i2<pDlg->m_base.size(); i2++ )
 	{

@@ -104,7 +104,7 @@ BOOL CTranslations::OnSetActive()
 
 				CString Q = Prd.GetWordForm(0).c_str();
 
-				//!!! ïîëó÷àåì ôëàã
+				//!!! Ð¿Ð¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ñ„Ð»Ð°Ð³
 				string t;
 				int POS = Pairs.GetFlag(k, 0, t);
 				if (   ((P->PartOfSpeech == NOUN) &&  (POS != 0 ))

@@ -81,7 +81,7 @@ int main()
 		tt += clock();
 		std::cout << "Loaded two lemmatizers at " << tt << " tiks" << std::endl; //"\r";
 
-		//!!! Создаем и загружаем словарь
+		//!!! РЎРѕР·РґР°РµРј Рё Р·Р°РіСЂСѓР¶Р°РµРј СЃР»РѕРІР°СЂСЊ
 		tt = -clock();
 		if (!Dict.Load())
 		{
@@ -114,7 +114,7 @@ int main()
 	}
 
 	bool Direct = false;
-	//!!! число флагов 
+	//!!! С‡РёСЃР»Рѕ С„Р»Р°РіРѕРІ 
 	int flag_count = Dict.GetFlagCount();
 	while(true){
 		std::cout << ">> ";
@@ -179,17 +179,17 @@ int main()
 
 			}
 
-			//!!! получаем набор пар
+			//!!! РїРѕР»СѓС‡Р°РµРј РЅР°Р±РѕСЂ РїР°СЂ
 			CSetOfWordPairs pairs = Direct 
 				? Dict.TranslateDirect(ids[i])
 				: Dict.TranslateIndirect(ids[i]);
-			//!!! число пар
+			//!!! С‡РёСЃР»Рѕ РїР°СЂ
 			int count = pairs.get_Count();
 			if(count == 0)
 				std::cerr << "No entry" << std::endl;
 
 			for(j = 0; j < count; j++){
-				//!!! получаем перевод
+				//!!! РїРѕР»СѓС‡Р°РµРј РїРµСЂРµРІРѕРґ
 				long to_id = pairs.GetId(j);
 				std::string to;
 				id_to_string(to_id, to, TransHolder);
@@ -221,7 +221,7 @@ int main()
 				std::cout << " --";
 				for(int fl = 0; fl < flag_count; fl++){
 					
-					//!!! получаем флаг
+					//!!! РїРѕР»СѓС‡Р°РµРј С„Р»Р°Рі
 					std::string fl_str;
 					DWORD flag = pairs.GetFlag(j, fl, fl_str);
 					std::cout << " " << convert_to_utf8(fl_str.c_str(), morphRussian) ;
@@ -232,7 +232,7 @@ int main()
 		}
 	}
 
-	//!!! уничтожаем словарь
+	//!!! СѓРЅРёС‡С‚РѕР¶Р°РµРј СЃР»РѕРІР°СЂСЊ
 
 }
 

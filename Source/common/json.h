@@ -1,4 +1,4 @@
-﻿#pragma once
+п»ї#pragma once
 #include "../contrib/nlohmann/json.hpp"
 #include "utilit.h"
 

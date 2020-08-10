@@ -9,33 +9,33 @@
 
 
 /*
- к обвиняемому и потерпевшему
- О ленивом я не хочу говорить.
- никак сегодня не натягивало на сорок .
+ Рє РѕР±РІРёРЅСЏРµРјРѕРјСѓ Рё РїРѕС‚РµСЂРїРµРІС€РµРјСѓ
+ Рћ Р»РµРЅРёРІРѕРј СЏ РЅРµ С…РѕС‡Сѓ РіРѕРІРѕСЂРёС‚СЊ.
+ РЅРёРєР°Рє СЃРµРіРѕРґРЅСЏ РЅРµ РЅР°С‚СЏРіРёРІР°Р»Рѕ РЅР° СЃРѕСЂРѕРє .
 */
 bool CRusFormatCaller::format_for_preps_adj (CGroup& G)
 {
-	// падежи предлога 
+	// РїР°РґРµР¶Рё РїСЂРµРґР»РѕРіР° 
 	QWORD depend_cases;	
-	// стоит ли на первом месте предлог?
+	// СЃС‚РѕРёС‚ Р»Рё РЅР° РїРµСЂРІРѕРј РјРµСЃС‚Рµ РїСЂРµРґР»РѕРі?
 	int j = check_first_part_of_prep_noun (G, depend_cases, PREP_NOUN);
-	// не стоит - выходим
+	// РЅРµ СЃС‚РѕРёС‚ - РІС‹С…РѕРґРёРј
 	if (j == -1 ) return false;
-	// k - главное слово группы после предлога
+	// k - РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ РіСЂСѓРїРїС‹ РїРѕСЃР»Рµ РїСЂРµРґР»РѕРіР°
 	int k = get_next_main_word( j );
 	if( k == sent.size() )
 	 return false;
 	if (sent[k].m_UnitType != EWord)
 		return false;
 
-	// берем только прилагательные 
+	// Р±РµСЂРµРј С‚РѕР»СЊРєРѕ РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рµ 
 	if ( ( Wk.GetPoses() & ( (1 << ADJ_FULL) |  (1 << PARTICIPLE) |  (1 << NUMERAL)) )  == 0) return false;
 
 
 
 	if ((depend_cases & Wk.GetGrammems() )  == 0) return false;
 
-	// специальная  проверка для  в+И_мн
+	// СЃРїРµС†РёР°Р»СЊРЅР°СЏ  РїСЂРѕРІРµСЂРєР° РґР»СЏ  РІ+Р_РјРЅ
 	if (		((depend_cases & Wk.GetGrammems() & rAllCases)  == _QM(rNominativ) )
 			&&	((Wk.GetGrammems() & _QM(rPlural)) == 0)
 		)
@@ -56,7 +56,7 @@ bool CRusFormatCaller::format_for_preps_adj (CGroup& G)
 		change_group_grammems(*GetGroupPtr(i_group), depend_cases, rAllCases);
 
 	W1.m_FoundPrepDependCases  =  depend_cases & Wk.GetGrammems() & rAllCases;
-	G.m_Cause = "Предложная группа c прилагательным";
+	G.m_Cause = "РџСЂРµРґР»РѕР¶РЅР°СЏ РіСЂСѓРїРїР° c РїСЂРёР»Р°РіР°С‚РµР»СЊРЅС‹Рј";
 
 	//  saving grammems
 	sent[G.m_iFirstWord].SetGrammems(G.GetGrammems());
@@ -65,11 +65,11 @@ bool CRusFormatCaller::format_for_preps_adj (CGroup& G)
 };
 
 /*
- Примеры:
-	 в столе 
-	 в красивой вазе 
-	 в ногах и руках 
-	 в выделенной прошлой весной комнате
+ РџСЂРёРјРµСЂС‹:
+	 РІ СЃС‚РѕР»Рµ 
+	 РІ РєСЂР°СЃРёРІРѕР№ РІР°Р·Рµ 
+	 РІ РЅРѕРіР°С… Рё СЂСѓРєР°С… 
+	 РІ РІС‹РґРµР»РµРЅРЅРѕР№ РїСЂРѕС€Р»РѕР№ РІРµСЃРЅРѕР№ РєРѕРјРЅР°С‚Рµ
 */
 
 bool CRusFormatCaller::format_for_preps (CGroup& G)
@@ -102,17 +102,17 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 
 
 	/*
-	Следующий "if (!Wk.is_syn_noun())" добавил я, чтобы бралась 
-	фраза  
-	"я разговаривал о том, что ты сказал"
-	"Первый номер сообщает , в какой из нескольких больших географических зон находится BBS"
+	РЎР»РµРґСѓСЋС‰РёР№ "if (!Wk.is_syn_noun())" РґРѕР±Р°РІРёР» СЏ, С‡С‚РѕР±С‹ Р±СЂР°Р»Р°СЃСЊ 
+	С„СЂР°Р·Р°  
+	"СЏ СЂР°Р·РіРѕРІР°СЂРёРІР°Р» Рѕ С‚РѕРј, С‡С‚Рѕ С‚С‹ СЃРєР°Р·Р°Р»"
+	"РџРµСЂРІС‹Р№ РЅРѕРјРµСЂ СЃРѕРѕР±С‰Р°РµС‚ , РІ РєР°РєРѕР№ РёР· РЅРµСЃРєРѕР»СЊРєРёС… Р±РѕР»СЊС€РёС… РіРµРѕРіСЂР°С„РёС‡РµСЃРєРёС… Р·РѕРЅ РЅР°С…РѕРґРёС‚СЃСЏ BBS"
 	*/
 	
 	if (!Wk.is_syn_noun()	)
 	if	(	    is_morph_pronoun_adjective(Wk) 
 			&&  i_group == -1
-			&& !sent[G.m_iFirstWord].is_lemma("ИЗ") 
-			&& !Wk.is_lemma("КОТОРЫЙ") 
+			&& !sent[G.m_iFirstWord].is_lemma("РР—") 
+			&& !Wk.is_lemma("РљРћРўРћР Р«Р™") 
 		) 
 		return false; 
 
@@ -132,21 +132,21 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 	{
 
 		 /*
-		  предлог "по" может управлять номинативом, например:
-		  "по две девочки" или "по двадцать долларов"
-		  Сейчас надо проверить этот случай.
+		  РїСЂРµРґР»РѕРі "РїРѕ" РјРѕР¶РµС‚ СѓРїСЂР°РІР»СЏС‚СЊ РЅРѕРјРёРЅР°С‚РёРІРѕРј, РЅР°РїСЂРёРјРµСЂ:
+		  "РїРѕ РґРІРµ РґРµРІРѕС‡РєРё" РёР»Рё "РїРѕ РґРІР°РґС†Р°С‚СЊ РґРѕР»Р»Р°СЂРѕРІ"
+		  РЎРµР№С‡Р°СЃ РЅР°РґРѕ РїСЂРѕРІРµСЂРёС‚СЊ СЌС‚РѕС‚ СЃР»СѓС‡Р°Р№.
 		 */
 		if (    i_group != -1  
 			 && (GetGroups()[i_group].m_GroupType == NUMERAL_NOUN) 
 			 && (GetGroups()[i_group].GetGrammems() & _QM(rNominativ ) ) 
-			 && ( sent[G.m_iFirstWord].is_lemma("ПО") || sent[G.m_iFirstWord].is_lemma("НА"))
+			 && ( sent[G.m_iFirstWord].is_lemma("РџРћ") || sent[G.m_iFirstWord].is_lemma("РќРђ"))
 			) 
 		;
 		else
 		 return false;
 	};
 
-	// специальная  проверка для  в+И_мн //"меня приняли в пионеры"
+	// СЃРїРµС†РёР°Р»СЊРЅР°СЏ  РїСЂРѕРІРµСЂРєР° РґР»СЏ  РІ+Р_РјРЅ //"РјРµРЅСЏ РїСЂРёРЅСЏР»Рё РІ РїРёРѕРЅРµСЂС‹"
 	if (		((depend_cases & grammems & rAllCases)  == _QM(rNominativ) )
 		&&	((grammems & _QM(rPlural)) != 0)
 		)
@@ -154,12 +154,12 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 	else depend_cases &= ~_QM(rNominativ);
 
 	/*
-		запретить:
-			"в  его",                    (надо "в него")
-			"над им",                    (надо "над ним")
-			и т.д.
-		Короче, в предложной группе для личных местоимений он, она, оно
-		выбирать только те, которые начинаются на согласный.
+		Р·Р°РїСЂРµС‚РёС‚СЊ:
+			"РІ  РµРіРѕ",                    (РЅР°РґРѕ "РІ РЅРµРіРѕ")
+			"РЅР°Рґ РёРј",                    (РЅР°РґРѕ "РЅР°Рґ РЅРёРј")
+			Рё С‚.Рґ.
+		РљРѕСЂРѕС‡Рµ, РІ РїСЂРµРґР»РѕР¶РЅРѕР№ РіСЂСѓРїРїРµ РґР»СЏ Р»РёС‡РЅС‹С… РјРµСЃС‚РѕРёРјРµРЅРёР№ РѕРЅ, РѕРЅР°, РѕРЅРѕ
+		РІС‹Р±РёСЂР°С‚СЊ С‚РѕР»СЊРєРѕ С‚Рµ, РєРѕС‚РѕСЂС‹Рµ РЅР°С‡РёРЅР°СЋС‚СЃСЏ РЅР° СЃРѕРіР»Р°СЃРЅС‹Р№.
 	*/
 	if (GetGramTab()->is_morph_personal_pronoun(Wk.GetPoses(),Wk.GetGrammems())) 
 		if (is_upper_vowel(Wk.get_upper_word()[0],morphRussian))
@@ -180,7 +180,7 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 		change_group_grammems(*GetGroupPtr(i_group), depend_cases, rAllCases);
 	
 	if ( !(depend_cases & grammems) ) 
-		W1.m_FoundPrepDependCases = _QM(rDativ ); //  почему датив? Сокирко ноябрь, 2002
+		W1.m_FoundPrepDependCases = _QM(rDativ ); //  РїРѕС‡РµРјСѓ РґР°С‚РёРІ? РЎРѕРєРёСЂРєРѕ РЅРѕСЏР±СЂСЊ, 2002
 	else
 		W1.m_FoundPrepDependCases = (depend_cases & grammems & rAllCases);
 
@@ -191,7 +191,7 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 bool CRusFormatCaller::format_for_prep_IZ (CGroup& G)
 {
 	const CSynPlmLine& first_word_plm = sent[G.m_iFirstWord];
-	if (!first_word_plm.is_lemma("ИЗ")) return false;
+	if (!first_word_plm.is_lemma("РР—")) return false;
 	return format_for_preps(G);
 };
 

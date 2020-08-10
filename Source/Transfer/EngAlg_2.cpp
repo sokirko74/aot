@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Английские алгоритмы 2
+// РђРЅРіР»РёР№СЃРєРёРµ Р°Р»РіРѕСЂРёС‚РјС‹ 2
 
 // ApplyModalCopulRule()
 
@@ -13,10 +13,10 @@
 #include "StdAfx.h"
 
 /////////////////////////////////////////////////////////////////////////////
-// ApplyModalCopulRule() "некуда" и.т.п 
-// ex. "мне некуда идти" -> "I have no place to go"
-//  "некуда идти" -> "There is no place to go"
-// --> добавит have | there be
+// ApplyModalCopulRule() "РЅРµРєСѓРґР°" Рё.С‚.Рї 
+// ex. "РјРЅРµ РЅРµРєСѓРґР° РёРґС‚Рё" -> "I have no place to go"
+//  "РЅРµРєСѓРґР° РёРґС‚Рё" -> "There is no place to go"
+// --> РґРѕР±Р°РІРёС‚ have | there be
 
 void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 {
@@ -45,18 +45,18 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		}
 	}
 
-// должна быть связь от ModalCopul на глагол 
+// РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЃРІСЏР·СЊ РѕС‚ ModalCopul РЅР° РіР»Р°РіРѕР» 
 	if( iVerbRel==-1 )
 	{
-		DelNode(iEngNode); // все равно с этим узлом нечего делать
+		DelNode(iEngNode); // РІСЃРµ СЂР°РІРЅРѕ СЃ СЌС‚РёРј СѓР·Р»РѕРј РЅРµС‡РµРіРѕ РґРµР»Р°С‚СЊ
 		return;
 	}
 	
 	int iVerbNode = m_Relations[iVerbRel].m_TargetNodeNo;
 	int iMCopRel = -1;
 
-// должна быть связь от глагола на породившее ModalCopul русское слово
-// если это MUA (некуда бежать и плыть)	
+// РґРѕР»Р¶РЅР° Р±С‹С‚СЊ СЃРІСЏР·СЊ РѕС‚ РіР»Р°РіРѕР»Р° РЅР° РїРѕСЂРѕРґРёРІС€РµРµ ModalCopul СЂСѓСЃСЃРєРѕРµ СЃР»РѕРІРѕ
+// РµСЃР»Рё СЌС‚Рѕ MUA (РЅРµРєСѓРґР° Р±РµР¶Р°С‚СЊ Рё РїР»С‹С‚СЊ)	
 	if( m_Nodes[iVerbNode].m_NodeType == MNA )
 	{
 		vector<long> mnaRels;
@@ -98,7 +98,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		}
 	}
 
-// если связь не найдена, породившее слово должно быть просто подвешено
+// РµСЃР»Рё СЃРІСЏР·СЊ РЅРµ РЅР°Р№РґРµРЅР°, РїРѕСЂРѕРґРёРІС€РµРµ СЃР»РѕРІРѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїСЂРѕСЃС‚Рѕ РїРѕРґРІРµС€РµРЅРѕ
 	if( iMCopRel==-1 )
 	{
 		outRels.clear();
@@ -118,11 +118,11 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		return;
 
 	int iRusNode = m_Nodes[m_Relations[iMCopRel].m_TargetNodeNo].RusNode;
-	assert( iRusNode!=-1 ); // неверно собрано
+	assert( iRusNode!=-1 ); // РЅРµРІРµСЂРЅРѕ СЃРѕР±СЂР°РЅРѕ
 	if( iRusNode==-1 )
 		return;
 
-// все есть
+// РІСЃРµ РµСЃС‚СЊ
 	CEngSemNode newNode;
 	int iSubjPattern = -1, iObjPattern = -1;
 
@@ -178,8 +178,8 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		newNode1.m_Words[0].m_WordNo = wNo;
 		m_Nodes.push_back(newNode1);
 
-		// Проводим отношение от be к there 
-		// Делаем это отношение подлежащим
+		// РџСЂРѕРІРѕРґРёРј РѕС‚РЅРѕС€РµРЅРёРµ РѕС‚ be Рє there 
+		// Р”РµР»Р°РµРј СЌС‚Рѕ РѕС‚РЅРѕС€РµРЅРёРµ РїРѕРґР»РµР¶Р°С‰РёРј
 		CEngSemRelation newRel1(CValency("ModalCopul",A_C),iEngNode,m_Nodes.size()-1,"");
 		newRel1.m_bInterpreted = true;
 		newRel1.m_Valency = m_Nodes[iEngNode].m_Vals[iSubjPattern];
@@ -196,11 +196,11 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 	m_Relations[iVerbRel].m_SyntacticRelation.erase();
 	m_Relations[iVerbRel].m_Valency.m_RelationStr = "ModalCopul";
 
-// выставим позицию ModalCopul
+// РІС‹СЃС‚Р°РІРёРј РїРѕР·РёС†РёСЋ ModalCopul
 	m_Relations[iMCopRel].m_Position = "<";
 	m_Relations[iMCopRel].m_PosType = FromAlgorithmPosType;
 
-// выставим число
+// РІС‹СЃС‚Р°РІРёРј С‡РёСЃР»Рѕ
 	if( iSubjRel>=0 )
 	{
 		CEngSemNode& subNode = m_Nodes[m_Relations[iSubjRel].m_TargetNodeNo];
@@ -212,7 +212,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 	else
 		m_Nodes[iEngNode].AddOneGrammemRich( eSingular);
 
-// выставим время
+// РІС‹СЃС‚Р°РІРёРј РІСЂРµРјСЏ
 	TransferTimeGrammems(RusStr.GetNode(iRusNode),m_Nodes[iEngNode],"ApplyModalCopulRule");
 	if( m_Nodes[iEngNode].m_Words[0].GetTense() == zero_tn )
 		m_Nodes[iEngNode].m_Words[0].SetTense(present_smp_tn,"ApplyModalCopulRule");
@@ -220,7 +220,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 	m_Nodes[m_Relations[iMCopRel].m_TargetNodeNo].m_Words[0].SetTense(zero_tn,"ApplyModalCopulRule");
         
 	
-// отследим предлоги	
+// РѕС‚СЃР»РµРґРёРј РїСЂРµРґР»РѕРіРё	
 	if( m_Relations[iMCopRel].m_SynReal.m_Preps.size() )
 	{
 		int iMainWord = m_Nodes[m_Relations[iMCopRel].m_SourceNodeNo].m_MainWordNo;
@@ -231,18 +231,18 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		}
 	}
 
-// новая версия:
+// РЅРѕРІР°СЏ РІРµСЂСЃРёСЏ:
 	CEngSemRelation newRel(CValency("ModalCopul",A_C),iEngNode,m_Relations[iMCopRel].m_TargetNodeNo,"");
 	newRel.m_Position = ">>";
 	newRel.m_PosType = FromAlgorithmPosType;
-	m_Relations.push_back(newRel); // Сopul->Word
+	m_Relations.push_back(newRel); // РЎopul->Word
 	EraseRelation(iMCopRel);
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// ApplyNoRule() "нет" (no 1) 
-// ex. "у меня нет денег" | "нет денег"
-// --> добавит have | there be
+// ApplyNoRule() "РЅРµС‚" (no 1) 
+// ex. "Сѓ РјРµРЅСЏ РЅРµС‚ РґРµРЅРµРі" | "РЅРµС‚ РґРµРЅРµРі"
+// --> РґРѕР±Р°РІРёС‚ have | there be
 
 void CEngSemStructure::ApplyNoRule(int iEngNode)
 {
@@ -298,19 +298,19 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 				iMoreRel = outRels[i];
 		};
 	}
-// должен Subj | Obj
+// РґРѕР»Р¶РµРЅ Subj | Obj
 	if( iSubRel<0 && iObjRel<0 )
 		return;
 
-	// забываем о русском  отношении, иначе объектная связь считается субъектной 
-	// в предложении "нечего не было"
+	// Р·Р°Р±С‹РІР°РµРј Рѕ СЂСѓСЃСЃРєРѕРј  РѕС‚РЅРѕС€РµРЅРёРё, РёРЅР°С‡Рµ РѕР±СЉРµРєС‚РЅР°СЏ СЃРІСЏР·СЊ СЃС‡РёС‚Р°РµС‚СЃСЏ СЃСѓР±СЉРµРєС‚РЅРѕР№ 
+	// РІ РїСЂРµРґР»РѕР¶РµРЅРёРё "РЅРµС‡РµРіРѕ РЅРµ Р±С‹Р»Рѕ"
 	if( iObjRel!=-1 )
 	{
 		m_Relations[iObjRel].m_RusRel = -1; 
 	};
 
 
-	//  Нужно, чтобы  more не отделялось от "no":  "I have no more hope"
+	//  РќСѓР¶РЅРѕ, С‡С‚РѕР±С‹  more РЅРµ РѕС‚РґРµР»СЏР»РѕСЃСЊ РѕС‚ "no":  "I have no more hope"
 	if (iMoreRel != -1)
 	{
 		m_Relations[iMoreRel].m_PosType = FromAlgorithmPosType;
@@ -319,7 +319,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 
 
 
-// надо удалить оператор "НЕ" 
+// РЅР°РґРѕ СѓРґР°Р»РёС‚СЊ РѕРїРµСЂР°С‚РѕСЂ "РќР•" 
 	m_Nodes[iEngNode].m_RelOperators.clear();
 
 	if( iSubRel>=0 )
@@ -343,7 +343,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 
 		m_Relations[iSubRel].m_Valency = newNode.m_Vals[0];
 		m_Relations[iSubRel].m_SynReal.m_Cortege = newNode.m_Patterns[iSubjPattern].m_GramCorteges[0];
-		m_Relations[iSubRel].m_SynReal.m_Preps.clear(); // предлоги
+		m_Relations[iSubRel].m_SynReal.m_Preps.clear(); // РїСЂРµРґР»РѕРіРё
 		m_Relations[iSubRel].m_SourceNodeNo = m_Nodes.size()-1; // have->Subj
 
 		CEngSemRelation newRel(CValency("ApplyNoRule",A_C),m_Nodes.size()-1,iEngNode,"");
@@ -397,7 +397,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 
 	int iNewNode = m_Nodes.size() - 1; // have | be
 
-	if( iSubRel>=0 ) // выставим число по субъекту
+	if( iSubRel>=0 ) // РІС‹СЃС‚Р°РІРёРј С‡РёСЃР»Рѕ РїРѕ СЃСѓР±СЉРµРєС‚Сѓ
 	{
 		CEngSemNode& subNode = m_Nodes[m_Relations[iSubRel].m_TargetNodeNo];
 		if( subNode.m_NodeType == MNA )
@@ -407,7 +407,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 		else
 			m_Nodes[iNewNode].AddOneGrammemRich( eSingular);
 	}
-	else // выставим число по объекту
+	else // РІС‹СЃС‚Р°РІРёРј С‡РёСЃР»Рѕ РїРѕ РѕР±СЉРµРєС‚Сѓ
 	{
 		CEngSemNode& objNode = m_Nodes[m_Relations[iObjRel].m_TargetNodeNo];
 		if( objNode.m_NodeType == MNA )
@@ -418,19 +418,19 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 			m_Nodes[iNewNode].AddOneGrammemRich(eSingular);
 	}
 
-// выставим время
+// РІС‹СЃС‚Р°РІРёРј РІСЂРµРјСЏ
 	TransferTimeGrammems(RusStr.GetNode(iRusNode),m_Nodes[iNewNode],"ApplyNoRule");
 	if( m_Nodes[iNewNode].m_Words[0].GetTense() == zero_tn )
 		m_Nodes[iNewNode].m_Words[0].SetTense(present_smp_tn,"ApplyNoRule");
 	m_Nodes[iEngNode].m_Words[0].SetTense(zero_tn,"ApplyNoRule");
 
-// связи
+// СЃРІСЏР·Рё
 	PrintNodes();
 	PrintRelations();
 	MoveMeaningRelsToNewNode(iEngNode,iNewNode);
 
-// нет ни денег,ни результатов
-// у меня нет ничего
+// РЅРµС‚ РЅРё РґРµРЅРµРі,РЅРё СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ
+// Сѓ РјРµРЅСЏ РЅРµС‚ РЅРёС‡РµРіРѕ
 	if( iObjRel<0 )
 		return;
 	CEngSemNode& objNode = m_Nodes[m_Relations[iObjRel].m_TargetNodeNo];
@@ -439,7 +439,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	if( objNode.RusNode != -1 &&
 		RusStr.GetNode(objNode.RusNode).m_NodeType == MNA &&
 		RusStr.GetNode(objNode.RusNode).m_MainWordNo != -1 &&
-		RusStr.GetNode(objNode.RusNode).GetWord(RusStr.GetNode(objNode.RusNode).m_MainWordNo).m_Lemma == "НИ" )
+		RusStr.GetNode(objNode.RusNode).GetWord(RusStr.GetNode(objNode.RusNode).m_MainWordNo).m_Lemma == "РќР" )
 	{
 		negMna = true;
 	}
@@ -460,18 +460,18 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	if( !negMna && !negChild )
 		return;
 
-// надо удалить сам этот узел
+// РЅР°РґРѕ СѓРґР°Р»РёС‚СЊ СЃР°Рј СЌС‚РѕС‚ СѓР·РµР»
 	vector<long> inRels;
 	GetIncomingRelations(iEngNode,inRels,false);
 	assert( inRels.size() == 1 );
 	m_Relations.erase(m_Relations.begin() +inRels[0]); // be|have -> no
 	MoveRelations(iEngNode,iNewNode);
 
-// надо вернуть оператор "НЕ" для ApplyTwoNegationsRule()
+// РЅР°РґРѕ РІРµСЂРЅСѓС‚СЊ РѕРїРµСЂР°С‚РѕСЂ "РќР•" РґР»СЏ ApplyTwoNegationsRule()
 	if( negChild )
 	{
 		m_Nodes[iNewNode].RusNode = m_Nodes[iEngNode].RusNode;
-		m_Nodes[iNewNode].m_RelOperators.push_back("НЕ");
+		m_Nodes[iNewNode].m_RelOperators.push_back("РќР•");
 	}
 	
 	DelNode(iEngNode);
@@ -479,8 +479,8 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 
 /////////////////////////////////////////////////////////////////////////////
 // ApplyBeRule() be 4
-// ех. "есть много разных стран"
-// --> добавит "there"
+// РµС…. "РµСЃС‚СЊ РјРЅРѕРіРѕ СЂР°Р·РЅС‹С… СЃС‚СЂР°РЅ"
+// --> РґРѕР±Р°РІРёС‚ "there"
 
 void CEngSemStructure::ApplyBeRule(int iEngNode)
 {
@@ -501,7 +501,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 	if( RusStr.IsQuestionClause(iRusClau) )
 		return;
 	/*
-		Во фразе "там были люди" there уже есть, поэтому добавлять его не надо.
+		Р’Рѕ С„СЂР°Р·Рµ "С‚Р°Рј Р±С‹Р»Рё Р»СЋРґРё" there СѓР¶Рµ РµСЃС‚СЊ, РїРѕСЌС‚РѕРјСѓ РґРѕР±Р°РІР»СЏС‚СЊ РµРіРѕ РЅРµ РЅР°РґРѕ.
 	*/
 	int RelNo = GetOutRelationByWord(iEngNode, "there");
 	if (RelNo != -1 )
@@ -540,7 +540,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 		m_Relations.push_back(newRel); // be->there
 	};
 
-// если был Subj, надо проставить число для be и указать, что это больше не Subj
+// РµСЃР»Рё Р±С‹Р» Subj, РЅР°РґРѕ РїСЂРѕСЃС‚Р°РІРёС‚СЊ С‡РёСЃР»Рѕ РґР»СЏ be Рё СѓРєР°Р·Р°С‚СЊ, С‡С‚Рѕ СЌС‚Рѕ Р±РѕР»СЊС€Рµ РЅРµ Subj
 	vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
@@ -571,12 +571,12 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 
 /////////////////////////////////////////////////////////////////////////////
 // ApplyKeepRule() __vce
-// ex. "она все уходила посмотреть на дочь"
-// --> проставит keep в корень и пропишет глаголу герундий
+// ex. "РѕРЅР° РІСЃРµ СѓС…РѕРґРёР»Р° РїРѕСЃРјРѕС‚СЂРµС‚СЊ РЅР° РґРѕС‡СЊ"
+// --> РїСЂРѕСЃС‚Р°РІРёС‚ keep РІ РєРѕСЂРµРЅСЊ Рё РїСЂРѕРїРёС€РµС‚ РіР»Р°РіРѕР»Сѓ РіРµСЂСѓРЅРґРёР№
 
 void CEngSemStructure::ApplyKeepRule(int iEngNode)
 {
-	if (!m_Nodes[iEngNode].HasRelOperator("ПРОДОЛЖ")) return;
+	if (!m_Nodes[iEngNode].HasRelOperator("РџР РћР”РћР›Р–")) return;
 	int iRusNode = m_Nodes[iEngNode].RusNode;
 	if( iRusNode == -1 )
 		return;
@@ -586,8 +586,8 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 	if( !RusStr.IsVerbOrMNAVerb(m_Nodes[iEngNode].RusNode) )
 		return;
 
-   // если VERB с отрицанием...
-	if( m_Nodes[iEngNode].HasRelOperator("НЕ") )
+   // РµСЃР»Рё VERB СЃ РѕС‚СЂРёС†Р°РЅРёРµРј...
+	if( m_Nodes[iEngNode].HasRelOperator("РќР•") )
 	{
 		CEngSemNode newNode;
 		CreateSimpleEnglNode("still",newNode,0,true);
@@ -606,7 +606,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 		return;
 	}
 
-// сделаем из VERB узел KEEP
+// СЃРґРµР»Р°РµРј РёР· VERB СѓР·РµР» KEEP
 	CEngSemNode keepNode;
 	CreateSimpleEnglNodeByOldNode("keep",keepNode,eVERB,false,m_Nodes[iEngNode]);
 	assert( keepNode.m_Words.size()==1 );
@@ -619,7 +619,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 	keepNode.m_ClauseNo = m_Nodes[iEngNode].m_ClauseNo;
 	m_Nodes.push_back(keepNode);
 
-// переставим Subj (если есть) и выставим число
+// РїРµСЂРµСЃС‚Р°РІРёРј Subj (РµСЃР»Рё РµСЃС‚СЊ) Рё РІС‹СЃС‚Р°РІРёРј С‡РёСЃР»Рѕ
 	int iSubRel = -1;
 	vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
@@ -646,7 +646,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 			m_Nodes[m_Nodes.size() - 1].AddOneGrammemRich(eSingular);
 	}
 
-// проведем связь 
+// РїСЂРѕРІРµРґРµРј СЃРІСЏР·СЊ 
 	CEngSemRelation newRel(CValency("ApplyKeepRule",A_C,GetRossHolder(Aoss)),m_Nodes.size()-1,iEngNode,"");
 	newRel.m_bReverseRel = false;
 	newRel.m_bInterpreted = false;
@@ -654,11 +654,11 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 	newRel.m_PosType = FromAlgorithmPosType;
 	m_Relations.push_back(newRel);
 
-	// пропишем герундий
+	// РїСЂРѕРїРёС€РµРј РіРµСЂСѓРЅРґРёР№
 	m_Nodes[iEngNode].m_Words[iSemMainWord].SetTense(gerund_tn,"ApplyKeepRule");
 
 
-// надо прописать герундий всем "AND" связям с немодальными глаголами без НЕ
+// РЅР°РґРѕ РїСЂРѕРїРёСЃР°С‚СЊ РіРµСЂСѓРЅРґРёР№ РІСЃРµРј "AND" СЃРІСЏР·СЏРј СЃ РЅРµРјРѕРґР°Р»СЊРЅС‹РјРё РіР»Р°РіРѕР»Р°РјРё Р±РµР· РќР•
 	outRels.clear();
 	GetOutcomingRelations(iEngNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
@@ -670,20 +670,20 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			break;
-		if( m_Nodes[iNode].HasRelOperator("НЕ") )
+		if( m_Nodes[iNode].HasRelOperator("РќР•") )
 			break;
 		if( !GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("GF","VERB",m_Nodes[iNode].GetUnitNo()) )
 			continue;
 		m_Nodes[iNode].m_Words[iSemMainWord].SetTense(gerund_tn,"ApplyKeepRule");
 	}
 
-// связи
+// СЃРІСЏР·Рё
 	MoveMeaningRelsToNewNode(iEngNode,m_Nodes.size() -1);
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// ApplyALG_it() "ему кажется" | "мне больно ходить"
-// --> добавит "it"   (it seem | it hurts)
+// ApplyALG_it() "РµРјСѓ РєР°Р¶РµС‚СЃСЏ" | "РјРЅРµ Р±РѕР»СЊРЅРѕ С…РѕРґРёС‚СЊ"
+// --> РґРѕР±Р°РІРёС‚ "it"   (it seem | it hurts)
 
 void CEngSemStructure::ApplyALG_it(int iEngNode)
 {
@@ -737,7 +737,7 @@ void CEngSemStructure::ApplyALG_it(int iEngNode)
 	m_Relations.push_back(newRel);
 	assert (IsSubj(m_Relations.back()));
 
-// выставим время и число
+// РІС‹СЃС‚Р°РІРёРј РІСЂРµРјСЏ Рё С‡РёСЃР»Рѕ
 	int iRusNode = m_Nodes[iEngNode].RusNode;
 	if( iRusNode != -1 )
 		TransferTimeGrammems(RusStr.GetNode(iRusNode),m_Nodes[iEngNode],"ApplyALG_it");
@@ -747,9 +747,9 @@ void CEngSemStructure::ApplyALG_it(int iEngNode)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// ApplyALG_compl_obj() <AL5|AL6> (межклаузный)
-// ex. "мы хотим, чтобы вы спели" | "мы видели, что она бежит"
-// --> сделает "вы" subj, поставит "спели" инфинитив (5?6) отследит "to"
+// ApplyALG_compl_obj() <AL5|AL6> (РјРµР¶РєР»Р°СѓР·РЅС‹Р№)
+// ex. "РјС‹ С…РѕС‚РёРј, С‡С‚РѕР±С‹ РІС‹ СЃРїРµР»Рё" | "РјС‹ РІРёРґРµР»Рё, С‡С‚Рѕ РѕРЅР° Р±РµР¶РёС‚"
+// --> СЃРґРµР»Р°РµС‚ "РІС‹" subj, РїРѕСЃС‚Р°РІРёС‚ "СЃРїРµР»Рё" РёРЅС„РёРЅРёС‚РёРІ (5?6) РѕС‚СЃР»РµРґРёС‚ "to"
 
 void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 {
@@ -761,7 +761,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 		!HasALG(m_Nodes[iEngNode].GetType(),m_Nodes[iEngNode].GetUnitNo(),"AL_compl_obj") )
 		return;
 
-// проверим наличие выходящей межклаузной связи "AIM"|"CONTEN" к глаголу	
+// РїСЂРѕРІРµСЂРёРј РЅР°Р»РёС‡РёРµ РІС‹С…РѕРґСЏС‰РµР№ РјРµР¶РєР»Р°СѓР·РЅРѕР№ СЃРІСЏР·Рё "AIM"|"CONTEN" Рє РіР»Р°РіРѕР»Сѓ	
 	vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	int i=0;
@@ -798,7 +798,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 	int iRelToVerb = outRels[i];
 	CEngSemRelation& rRelToVerb = m_Relations[iRelToVerb];
 
-// проверка применимости алгоритма
+// РїСЂРѕРІРµСЂРєР° РїСЂРёРјРµРЅРёРјРѕСЃС‚Рё Р°Р»РіРѕСЂРёС‚РјР°
 	outRels.clear();
 	GetOutcomingRelations(iNodeVerb,outRels);
 	for( i=0; i<outRels.size(); i++ )
@@ -812,11 +812,11 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			return;
-		if( m_Nodes[iNode].HasRelOperator("НЕ") )
+		if( m_Nodes[iNode].HasRelOperator("РќР•") )
 			return;
 	}
 
-	// проверим наличие выходящей связи "SUB"	
+	// РїСЂРѕРІРµСЂРёРј РЅР°Р»РёС‡РёРµ РІС‹С…РѕРґСЏС‰РµР№ СЃРІСЏР·Рё "SUB"	
 	i=0;
 	for( ; i<outRels.size(); i++ )
 	{
@@ -828,13 +828,13 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 	int iRelToSubj = outRels[i];
 
 	/*
-	 если у подлежащего есть зависимые, тогда не надо 
-	 применять алгоритм, поскольку конструкция c that всегда применима,
-	 а complex object не всегда.
-	 например, наверно, нельзя сказать 
+	 РµСЃР»Рё Сѓ РїРѕРґР»РµР¶Р°С‰РµРіРѕ РµСЃС‚СЊ Р·Р°РІРёСЃРёРјС‹Рµ, С‚РѕРіРґР° РЅРµ РЅР°РґРѕ 
+	 РїСЂРёРјРµРЅСЏС‚СЊ Р°Р»РіРѕСЂРёС‚Рј, РїРѕСЃРєРѕР»СЊРєСѓ РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ c that РІСЃРµРіРґР° РїСЂРёРјРµРЅРёРјР°,
+	 Р° complex object РЅРµ РІСЃРµРіРґР°.
+	 РЅР°РїСЂРёРјРµСЂ, РЅР°РІРµСЂРЅРѕ, РЅРµР»СЊР·СЏ СЃРєР°Р·Р°С‚СЊ 
 	 "We saw this black or white or yellow man quickly or slowly run"
-	 Короче, дело в размере.
-	 Сокирко
+	 РљРѕСЂРѕС‡Рµ, РґРµР»Рѕ РІ СЂР°Р·РјРµСЂРµ.
+	 РЎРѕРєРёСЂРєРѕ
 	*/
 	if (GetOutcomingRelationsCount(m_Relations[outRels[i]].m_TargetNodeNo, false) > 0)
 		return;
@@ -855,7 +855,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 	rRelToVerb.m_bInterpreted = false;
 	rRelToVerb.m_Type = NotBetweenClauses;
 
-// надо прописать инфинитив всем "AND" связям с немодальными глаголами без НЕ
+// РЅР°РґРѕ РїСЂРѕРїРёСЃР°С‚СЊ РёРЅС„РёРЅРёС‚РёРІ РІСЃРµРј "AND" СЃРІСЏР·СЏРј СЃ РЅРµРјРѕРґР°Р»СЊРЅС‹РјРё РіР»Р°РіРѕР»Р°РјРё Р±РµР· РќР•
 	outRels.clear();
 	GetOutcomingRelations(iNodeVerb,outRels);
 	for( int i=0; i<outRels.size(); i++ )
@@ -867,7 +867,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			break;
-		if( m_Nodes[iNode].HasRelOperator("НЕ") )
+		if( m_Nodes[iNode].HasRelOperator("РќР•") )
 			break;
 		if( !GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("GF","VERB",m_Nodes[iNode].GetUnitNo()) )
 			continue;
@@ -889,7 +889,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 	rRelToSubj.m_Position = ">";	
 	rRelToSubj.m_PosType = FromAlgorithmPosType;	
 
-// переведем Subj с детьми в породившую клаузу 
+// РїРµСЂРµРІРµРґРµРј Subj СЃ РґРµС‚СЊРјРё РІ РїРѕСЂРѕРґРёРІС€СѓСЋ РєР»Р°СѓР·Сѓ 
 	int iNodeSubj = m_Relations[iRelToSubj].m_TargetNodeNo;
 	m_Nodes[iNodeSubj].m_ClauseNo = m_Nodes[iEngNode].m_ClauseNo;
 	outRels.clear();
@@ -899,7 +899,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 		m_Nodes[m_Relations[outRels[i]].m_TargetNodeNo].m_ClauseNo = m_Nodes[iEngNode].m_ClauseNo;
 	}
 
-// "направление"
+// "РЅР°РїСЂР°РІР»РµРЅРёРµ"
 	ChangeGrammemsForDirObj(iNodeSubj); // she->her
 }
 

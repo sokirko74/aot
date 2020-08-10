@@ -8,11 +8,11 @@
 #include "../common/GramInfo.h"
 
 
-// частичная словарная интерпретация 
+// С‡Р°СЃС‚РёС‡РЅР°СЏ СЃР»РѕРІР°СЂРЅР°СЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ 
 struct  CPartialInterp {
-	// номер элемента в поле CONTENT или в термине
+	// РЅРѕРјРµСЂ СЌР»РµРјРµРЅС‚Р° РІ РїРѕР»Рµ CONTENT РёР»Рё РІ С‚РµСЂРјРёРЅРµ
 	short          m_ItemNo;
-	// является ли данный элемент главным словом
+	// СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РіР»Р°РІРЅС‹Рј СЃР»РѕРІРѕРј
 	bool           m_bMainWord;
 
 	CPartialInterp () {
@@ -21,11 +21,11 @@ struct  CPartialInterp {
 	};
 };
 
-// тезаурусная интерпретация 
+// С‚РµР·Р°СѓСЂСѓСЃРЅР°СЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ 
 struct  CThesInterp {
-	// уникальный номер тезауруса
+	// СѓРЅРёРєР°Р»СЊРЅС‹Р№ РЅРѕРјРµСЂ С‚РµР·Р°СѓСЂСѓСЃР°
     long m_ThesaurusId;
-	// уникальный номер термина
+	// СѓРЅРёРєР°Р»СЊРЅС‹Р№ РЅРѕРјРµСЂ С‚РµСЂРјРёРЅР°
 	long m_TerminId;
 	CThesInterp () {
 		m_ThesaurusId = -1;
@@ -35,18 +35,18 @@ struct  CThesInterp {
 
 
 
-// частичная тезаурусная  интерпретация 
+// С‡Р°СЃС‚РёС‡РЅР°СЏ С‚РµР·Р°СѓСЂСѓСЃРЅР°СЏ  РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ 
 struct CThesPartialInterp : public CThesInterp, public CPartialInterp
 {
 
 };
 
-// частичная словарная интерпретация 
+// С‡Р°СЃС‚РёС‡РЅР°СЏ СЃР»РѕРІР°СЂРЅР°СЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ 
 struct CRossPartialInterp : public CRossInterp, public CPartialInterp
 {
-	// номер значения в поле LEX, с которым совпал этот элемент
+	// РЅРѕРјРµСЂ Р·РЅР°С‡РµРЅРёСЏ РІ РїРѕР»Рµ LEX, СЃ РєРѕС‚РѕСЂС‹Рј СЃРѕРІРїР°Р» СЌС‚РѕС‚ СЌР»РµРјРµРЅС‚
 	char           m_LexFetNo;
-	 // номер значения в поле PREP, с которым совпал этот предлог, приписанный этому элементу
+	 // РЅРѕРјРµСЂ Р·РЅР°С‡РµРЅРёСЏ РІ РїРѕР»Рµ PREP, СЃ РєРѕС‚РѕСЂС‹Рј СЃРѕРІРїР°Р» СЌС‚РѕС‚ РїСЂРµРґР»РѕРі, РїСЂРёРїРёСЃР°РЅРЅС‹Р№ СЌС‚РѕРјСѓ СЌР»РµРјРµРЅС‚Сѓ
 	char           m_PrepNoInArticle;
 	CRossPartialInterp() : CRossInterp(), CPartialInterp() {
 		m_LexFetNo = -1;
@@ -58,14 +58,14 @@ struct CRossPartialInterp : public CRossInterp, public CPartialInterp
 
 enum OpenCollocTypeEnum {NoneType, ThesType,  RossType};
 
-// интерпретация открытого словосочетания
+// РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ РѕС‚РєСЂС‹С‚РѕРіРѕ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
 class COpenCollocInterp  {
-	  // тезаурусная интерпретация 
+	  // С‚РµР·Р°СѓСЂСѓСЃРЅР°СЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ 
 	  CThesPartialInterp m_ThesInterp;
-	  // словарная интерпретация 
+	  // СЃР»РѕРІР°СЂРЅР°СЏ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ 
 	  CRossPartialInterp m_RossInterp;
 public:
-      // тип открытого словосочетания 
+      // С‚РёРї РѕС‚РєСЂС‹С‚РѕРіРѕ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ 
 	  OpenCollocTypeEnum m_Type;
 	  
 	  CThesPartialInterp& GetThesInterp() {
@@ -109,34 +109,34 @@ struct SEngEquiv
 	string  m_StrNumeral;
 };
 
-// класс грамматического и семантического выражения i-го актанта (формируется из полей VAL, GFi, LEXi, MANLEXi, SFi словарной статьи)
+// РєР»Р°СЃСЃ РіСЂР°РјРјР°С‚РёС‡РµСЃРєРѕРіРѕ Рё СЃРµРјР°РЅС‚РёС‡РµСЃРєРѕРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ i-РіРѕ Р°РєС‚Р°РЅС‚Р° (С„РѕСЂРјРёСЂСѓРµС‚СЃСЏ РёР· РїРѕР»РµР№ VAL, GFi, LEXi, MANLEXi, SFi СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё)
 
 
 
 
 
-// класс оборота - соответствует одной словарной статтье из русского словаря оборотов
+// РєР»Р°СЃСЃ РѕР±РѕСЂРѕС‚Р° - СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ РѕРґРЅРѕР№ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚С‚СЊРµ РёР· СЂСѓСЃСЃРєРѕРіРѕ СЃР»РѕРІР°СЂСЏ РѕР±РѕСЂРѕС‚РѕРІ
 struct  CObor {
-	// поле TITLЕ	
+	// РїРѕР»Рµ TITLР•	
 	string	m_UnitStr;
-	// номер слованой статьи
+	// РЅРѕРјРµСЂ СЃР»РѕРІР°РЅРѕР№ СЃС‚Р°С‚СЊРё
 	WORD    m_UnitNo;
  	
-    // подчинительный союз-оборот
+    // РїРѕРґС‡РёРЅРёС‚РµР»СЊРЅС‹Р№ СЃРѕСЋР·-РѕР±РѕСЂРѕС‚
 	bool m_bRusSubConj;
-	// подчинительный союз-оборот, у которого есть помета RESTR = подл !
+	// РїРѕРґС‡РёРЅРёС‚РµР»СЊРЅС‹Р№ СЃРѕСЋР·-РѕР±РѕСЂРѕС‚, Сѓ РєРѕС‚РѕСЂРѕРіРѕ РµСЃС‚СЊ РїРѕРјРµС‚Р° RESTR = РїРѕРґР» !
 	bool m_bRusSubConjCanBeAfterSubject;
-	// сочинительный союз-оборот
+	// СЃРѕС‡РёРЅРёС‚РµР»СЊРЅС‹Р№ СЃРѕСЋР·-РѕР±РѕСЂРѕС‚
 	bool m_bRusCoordConj;
-	// предлог-оборот
+	// РїСЂРµРґР»РѕРі-РѕР±РѕСЂРѕС‚
 	bool m_bRusOborPrep;
-    // модальный обстоятельственный оборот  
+    // РјРѕРґР°Р»СЊРЅС‹Р№ РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРµРЅРЅС‹Р№ РѕР±РѕСЂРѕС‚  
 	bool m_bRusModalOborAdverbial;
-    // вводный обстоятельственный оборот 
+    // РІРІРѕРґРЅС‹Р№ РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРµРЅРЅС‹Р№ РѕР±РѕСЂРѕС‚ 
 	bool m_bRusIntrExpr;
-	// усилительный ( с частицей НИ) обстоятельственный оборот 
+	// СѓСЃРёР»РёС‚РµР»СЊРЅС‹Р№ ( СЃ С‡Р°СЃС‚РёС†РµР№ РќР) РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРµРЅРЅС‹Р№ РѕР±РѕСЂРѕС‚ 
 	bool m_bRusNegOborAdverbial;
-    // обстоятельственный оборот
+    // РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРµРЅРЅС‹Р№ РѕР±РѕСЂРѕС‚
 	bool m_bRusOborAdverbial;
 
 	CObor ()
@@ -154,11 +154,11 @@ struct  CObor {
 
 };
 
-// класс простого бинарного отношения
+// РєР»Р°СЃСЃ РїСЂРѕСЃС‚РѕРіРѕ Р±РёРЅР°СЂРЅРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ
 struct CSimpleBinaryRelation {
-	// исходный узел
+	// РёСЃС…РѕРґРЅС‹Р№ СѓР·РµР»
 	long    m_SourceNodeNo;
-	// конечный узел
+	// РєРѕРЅРµС‡РЅС‹Р№ СѓР·РµР»
 	long    m_TargetNodeNo;
 
 	CSimpleBinaryRelation (long SourceNodeNo,	long    TargetNodeNo)
@@ -174,7 +174,7 @@ struct CSimpleBinaryRelation {
 	}
 };
 
-// класс синтаксического отношения
+// РєР»Р°СЃСЃ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ
 struct CSynRelation : public CSimpleBinaryRelation
 {
 	string			   m_SynRelName;
@@ -200,7 +200,7 @@ struct CSynRelation : public CSimpleBinaryRelation
 };
 
 
-// класс синтаксического отношения
+// РєР»Р°СЃСЃ СЃРёРЅС‚Р°РєСЃРёС‡РµСЃРєРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ
 struct CSemThesRelation : public CSimpleBinaryRelation
 {
 	string			   m_SemRelName;
@@ -224,10 +224,10 @@ struct CSemThesRelation : public CSimpleBinaryRelation
 
 
 
-// класс отношения LF
+// РєР»Р°СЃСЃ РѕС‚РЅРѕС€РµРЅРёСЏ LF
 struct CLexFunctRel : public CSimpleBinaryRelation
 {
-	// название отношения
+	// РЅР°Р·РІР°РЅРёРµ РѕС‚РЅРѕС€РµРЅРёСЏ
 	string			m_LexFunctName;
 	CDictUnitInterp m_Prep;
 	string			m_LexFunParamLemma;
@@ -253,9 +253,9 @@ struct CLexFunctRel : public CSimpleBinaryRelation
 
 
 /*
- Ссылка на словарную статью (например в поле LF). Здесь не указывается,
- в каком словаре  содержится эта статья, но подразумевается, что  это РОСС (русские слова) 
- или АОСС (английские слова).
+ РЎСЃС‹Р»РєР° РЅР° СЃР»РѕРІР°СЂРЅСѓСЋ СЃС‚Р°С‚СЊСЋ (РЅР°РїСЂРёРјРµСЂ РІ РїРѕР»Рµ LF). Р—РґРµСЃСЊ РЅРµ СѓРєР°Р·С‹РІР°РµС‚СЃСЏ,
+ РІ РєР°РєРѕРј СЃР»РѕРІР°СЂРµ  СЃРѕРґРµСЂР¶РёС‚СЃСЏ СЌС‚Р° СЃС‚Р°С‚СЊСЏ, РЅРѕ РїРѕРґСЂР°Р·СѓРјРµРІР°РµС‚СЃСЏ, С‡С‚Рѕ  СЌС‚Рѕ Р РћРЎРЎ (СЂСѓСЃСЃРєРёРµ СЃР»РѕРІР°) 
+ РёР»Рё РђРћРЎРЎ (Р°РЅРіР»РёР№СЃРєРёРµ СЃР»РѕРІР°).
 */
 
 struct CDictReference 
@@ -291,16 +291,16 @@ struct SLexFunIndexes
 	};
 
 
-	// лексическая  функция  (S0, Oper1...)
+	// Р»РµРєСЃРёС‡РµСЃРєР°СЏ  С„СѓРЅРєС†РёСЏ  (S0, Oper1...)
 	string			  m_LexFun;
-	// аргумент (стоит в скобках)
+	// Р°СЂРіСѓРјРµРЅС‚ (СЃС‚РѕРёС‚ РІ СЃРєРѕР±РєР°С…)
 	CDictReference    m_LexFunArg;
-	// значение  (стоит  после знака равно)
+	// Р·РЅР°С‡РµРЅРёРµ  (СЃС‚РѕРёС‚  РїРѕСЃР»Рµ Р·РЅР°РєР° СЂР°РІРЅРѕ)
 	CDictReference	  m_LexFunValue;
 
-	// например, Oper1(экзамен) = сдавать.
-	// здесь "экзамен" - аргумент, а "сдавать" - значение
-	// или S0(эказаминировать) = экзамен, здесь "эказаменировать" аргумент
+	// РЅР°РїСЂРёРјРµСЂ, Oper1(СЌРєР·Р°РјРµРЅ) = СЃРґР°РІР°С‚СЊ.
+	// Р·РґРµСЃСЊ "СЌРєР·Р°РјРµРЅ" - Р°СЂРіСѓРјРµРЅС‚, Р° "СЃРґР°РІР°С‚СЊ" - Р·РЅР°С‡РµРЅРёРµ
+	// РёР»Рё S0(СЌРєР°Р·Р°РјРёРЅРёСЂРѕРІР°С‚СЊ) = СЌРєР·Р°РјРµРЅ, Р·РґРµСЃСЊ "СЌРєР°Р·Р°РјРµРЅРёСЂРѕРІР°С‚СЊ" Р°СЂРіСѓРјРµРЅС‚
 
 
 };
@@ -311,15 +311,15 @@ bool WordInList(const char* word_list, int count, string word);
 bool LexFunArgComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2);
 bool LexFunValueComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2);
 
-// класс, в котором по номеру статьи из Aoss,  EngCollocRoss или EngObor можно получить один из переводов, 
-// стоящих в поле RUS (заголовок и номер значения) статьи m_EngUnitNo
+// РєР»Р°СЃСЃ, РІ РєРѕС‚РѕСЂРѕРј РїРѕ РЅРѕРјРµСЂСѓ СЃС‚Р°С‚СЊРё РёР· Aoss,  EngCollocRoss РёР»Рё EngObor РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РѕРґРёРЅ РёР· РїРµСЂРµРІРѕРґРѕРІ, 
+// СЃС‚РѕСЏС‰РёС… РІ РїРѕР»Рµ RUS (Р·Р°РіРѕР»РѕРІРѕРє Рё РЅРѕРјРµСЂ Р·РЅР°С‡РµРЅРёСЏ) СЃС‚Р°С‚СЊРё m_EngUnitNo
 struct CEngUnitNoToRusUnit
 {
-	// заголовок русской словарной статьи
+	// Р·Р°РіРѕР»РѕРІРѕРє СЂСѓСЃСЃРєРѕР№ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё
     string  m_RusUnitStr;
-	// номер значения русской словарной статьи
+	// РЅРѕРјРµСЂ Р·РЅР°С‡РµРЅРёСЏ СЂСѓСЃСЃРєРѕР№ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё
 	BYTE    m_RusMeanNum;
-	// номер словарной статьи в АОССе
+	// РЅРѕРјРµСЂ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё РІ РђРћРЎРЎРµ
 	WORD	m_EngUnitNo;	
 
 	CEngUnitNoToRusUnit()
@@ -327,7 +327,7 @@ struct CEngUnitNoToRusUnit
 		m_RusMeanNum = 10;
 	}
 
-	// сортровка по русскому входу (как в россе)
+	// СЃРѕСЂС‚СЂРѕРІРєР° РїРѕ СЂСѓСЃСЃРєРѕРјСѓ РІС…РѕРґСѓ (РєР°Рє РІ СЂРѕСЃСЃРµ)
 	bool operator < (const CEngUnitNoToRusUnit& RusEquiv ) const
 	{
 		if( RusEquiv.m_RusUnitStr < m_RusUnitStr )		
@@ -456,7 +456,7 @@ public:
 	long UnitNo;
 	bool IsBlackBox;
 	bool IsConditional;
-	// m_SemMainWord содержит числовое значение поля СГС  (счет начинается с 1)
+	// m_SemMainWord СЃРѕРґРµСЂР¶РёС‚ С‡РёСЃР»РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ РЎР“РЎ  (СЃС‡РµС‚ РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ 1)
 	long m_SemMainWord;
 	vector<CCollocItem> Items;
 	vector<CSynRelation>		m_Rels;
@@ -468,8 +468,8 @@ const int MaxLeafId  = 10;
 typedef pair<string, long>  stringLong;
 typedef pair<long, long>     LongLong;
 
-// класс, в котором содержится лексический материал, с помощью которого заполняется
-// дырка в группе времение (берется из полей LEX(i) и  PREPi(j)
+// РєР»Р°СЃСЃ, РІ РєРѕС‚РѕСЂРѕРј СЃРѕРґРµСЂР¶РёС‚СЃСЏ Р»РµРєСЃРёС‡РµСЃРєРёР№ РјР°С‚РµСЂРёР°Р», СЃ РїРѕРјРѕС‰СЊСЋ РєРѕС‚РѕСЂРѕРіРѕ Р·Р°РїРѕР»РЅСЏРµС‚СЃСЏ
+// РґС‹СЂРєР° РІ РіСЂСѓРїРїРµ РІСЂРµРјРµРЅРёРµ (Р±РµСЂРµС‚СЃСЏ РёР· РїРѕР»РµР№ LEX(i) Рё  PREPi(j)
 struct CTimeLexicalFilling { 
 	BYTE m_LeafId;
 	BYTE m_BracketLeafId;
@@ -488,7 +488,7 @@ struct CTimeLexicalFilling {
 	};
 };
 
-// класс одной словарной статьи словаря групп времени
+// РєР»Р°СЃСЃ РѕРґРЅРѕР№ СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё СЃР»РѕРІР°СЂСЏ РіСЂСѓРїРї РІСЂРµРјРµРЅРё
 struct CTimeUnit {
 	StringVector				m_Places;
 	long						m_UnitNo;
@@ -530,7 +530,7 @@ struct CUnitContent
 	
 };
 
-//Например, "больше->много", "позже->поздно"
+//РќР°РїСЂРёРјРµСЂ, "Р±РѕР»СЊС€Рµ->РјРЅРѕРіРѕ", "РїРѕР·Р¶Рµ->РїРѕР·РґРЅРѕ"
 struct CComparAdverb {
 	string m_Adverb;
 	string m_ComparAdverb;
@@ -545,18 +545,18 @@ struct CComparAdverb {
 
 struct CDoubleConj
 {
-	// ссылка на словарную статью в словаре оборотов
+	// СЃСЃС‹Р»РєР° РЅР° СЃР»РѕРІР°СЂРЅСѓСЋ СЃС‚Р°С‚СЊСЋ РІ СЃР»РѕРІР°СЂРµ РѕР±РѕСЂРѕС‚РѕРІ
 	int				 m_UnitNo;
-	// первая часть союза
+	// РїРµСЂРІР°СЏ С‡Р°СЃС‚СЊ СЃРѕСЋР·Р°
 	StringVector m_FirstPart;
-	// вторая часть союза (между словами союза стоит 0)
+	// РІС‚РѕСЂР°СЏ С‡Р°СЃС‚СЊ СЃРѕСЋР·Р° (РјРµР¶РґСѓ СЃР»РѕРІР°РјРё СЃРѕСЋР·Р° СЃС‚РѕРёС‚ 0)
 	StringVector m_SecondPart;
-	// например, для союза  "если бы не ... то"
-	// m_FirstPart = "ЕСЛИ"; "БЫ"; "НЕ"
-	// m_SecondPart = "ТО"
+	// РЅР°РїСЂРёРјРµСЂ, РґР»СЏ СЃРѕСЋР·Р°  "РµСЃР»Рё Р±С‹ РЅРµ ... С‚Рѕ"
+	// m_FirstPart = "Р•РЎР›Р"; "Р‘Р«"; "РќР•"
+	// m_SecondPart = "РўРћ"
 
-	// означает, что первая часть союза совпадает со второй
-	// например, "или ... или"
+	// РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ РїРµСЂРІР°СЏ С‡Р°СЃС‚СЊ СЃРѕСЋР·Р° СЃРѕРІРїР°РґР°РµС‚ СЃРѕ РІС‚РѕСЂРѕР№
+	// РЅР°РїСЂРёРјРµСЂ, "РёР»Рё ... РёР»Рё"
 	bool			m_bRepeating;
 };
 
@@ -569,14 +569,14 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 	CSemanticsHolder();
 
-	// список всех локативных предлогов
+	// СЃРїРёСЃРѕРє РІСЃРµС… Р»РѕРєР°С‚РёРІРЅС‹С… РїСЂРµРґР»РѕРіРѕРІ
 	vector<LocPrep>      m_LocPreps;
 
-	// список всех словосочетаний 
+	// СЃРїРёСЃРѕРє РІСЃРµС… СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№ 
 	vector<CColloc>         m_RusCollocs;
 	vector<CCollocItemRefCollect>  m_RusCollocItemRefs;
 
-	// список всех сокращений из TimeRoss
+	// СЃРїРёСЃРѕРє РІСЃРµС… СЃРѕРєСЂР°С‰РµРЅРёР№ РёР· TimeRoss
 	vector<CAbbrFunct>    m_TimeAbbrPairs;
 	vector<CTimeUnit>     m_TimeUnits;
 	StringVector   m_RusMonths;
@@ -586,9 +586,9 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 	vector<CObor> Oborottos;
 	vector<CDoubleConj>  m_DisruptConj;
-	//варианты  английских оборотов	в поле CONTENT
+	//РІР°СЂРёР°РЅС‚С‹  Р°РЅРіР»РёР№СЃРєРёС… РѕР±РѕСЂРѕС‚РѕРІ	РІ РїРѕР»Рµ CONTENT
 	vector<CUnitContent> m_vectorEngOborStr;
-	//варианты  английских словосочетаний в поле CONTENT
+	//РІР°СЂРёР°РЅС‚С‹  Р°РЅРіР»РёР№СЃРєРёС… СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№ РІ РїРѕР»Рµ CONTENT
 	vector<CUnitContent> m_vectorEngCollocStr;
 
 
@@ -607,18 +607,18 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 
 
-	// список всех абстрактных статей из словарей
+	// СЃРїРёСЃРѕРє РІСЃРµС… Р°Р±СЃС‚СЂР°РєС‚РЅС‹С… СЃС‚Р°С‚РµР№ РёР· СЃР»РѕРІР°СЂРµР№
 	typedef map<DictTypeEnum, vector<CAbstractArticle> > AbsractArticleMap;
 	AbsractArticleMap   m_AbstractArticles;
 	const vector<CAbstractArticle>* GetAbstractArticles(DictTypeEnum type ) const;
 
-	//индексы по полю RUS
+	//РёРЅРґРµРєСЃС‹ РїРѕ РїРѕР»СЋ RUS
 	vector<CEngUnitNoToRusUnit>  m_RusEquivs;
 	vector<CEngUnitNoToRusUnit>  m_RusEquivsEngObor;
 	vector<CEngUnitNoToRusUnit>  m_RusEquivsEngColsocs;
 	vector<CEngUnitNoToRusUnit>& GetRusEquivIndexes(DictTypeEnum type);
 
-	//индексы по лексическим функциям
+	//РёРЅРґРµРєСЃС‹ РїРѕ Р»РµРєСЃРёС‡РµСЃРєРёРј С„СѓРЅРєС†РёСЏРј
 	vector<SLexFunIndexes> m_LexFunIndexesRusByValue;
 	vector<SLexFunIndexes> m_LexFunIndexesRusByArg;
 	vector<SLexFunIndexes> m_LexFunIndexesEng;	  
@@ -642,12 +642,12 @@ class CSemanticsHolder  : public CAllRossesHolder
 	void			GetPrepsFromArticle (const CDictionary* pRoss, long UnitNo, BYTE LeafId, BYTE BracketLeafId, vector<CRossInterp>& Preps);
 	UINT			GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, string AdjWordForm);
 
-	// =========  словосочетания
-// добавляет отдельный элемент поля CONTENT в глобальный перечень всех отдельных элементов поля CONTENT	
+	// =========  СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ
+// РґРѕР±Р°РІР»СЏРµС‚ РѕС‚РґРµР»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РїРѕР»СЏ CONTENT РІ РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїРµСЂРµС‡РµРЅСЊ РІСЃРµС… РѕС‚РґРµР»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ РїРѕР»СЏ CONTENT	
 	CCollocItemRefCollect* InsertRusCollocItemRef(string S);
-	// читает поле CONTENT словосочетания CollocUnitNo и создает по нему множество словосочетаний
+	// С‡РёС‚Р°РµС‚ РїРѕР»Рµ CONTENT СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёСЏ CollocUnitNo Рё СЃРѕР·РґР°РµС‚ РїРѕ РЅРµРјСѓ РјРЅРѕР¶РµСЃС‚РІРѕ СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№
 	bool			BuildColloc (string ContentFieldStr, int CollocUnitNo);
-	// запускаем BuildColloc  для всех словосочетаний
+	// Р·Р°РїСѓСЃРєР°РµРј BuildColloc  РґР»СЏ РІСЃРµС… СЃР»РѕРІРѕСЃРѕС‡РµС‚Р°РЅРёР№
 	bool			BuildCollocs();
 	bool			TokenizeDoubleConj();
 	

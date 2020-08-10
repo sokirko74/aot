@@ -179,16 +179,16 @@ bool StrSpacingCompare (const char* Sample,  const char* Text, size_t SampleLeng
 {
 	int spacing = 1;
 
-	// после первой буквы должна идти  разрядка
+	// РїРѕСЃР»Рµ РїРµСЂРІРѕР№ Р±СѓРєРІС‹ РґРѕР»Р¶РЅР° РёРґС‚Рё  СЂР°Р·СЂСЏРґРєР°
 	if ( !is_spc_fill((BYTE) Text[spacing] ) ) return false;
 
-	//  разрядка может быть в два пробела 
+	//  СЂР°Р·СЂСЏРґРєР° РјРѕР¶РµС‚ Р±С‹С‚СЊ РІ РґРІР° РїСЂРѕР±РµР»Р° 
 	if ( is_spc_fill((BYTE) Text[spacing+1] )  ) spacing++;
 
-	// Разрядка не может быть  больше двух пробелов
+	// Р Р°Р·СЂСЏРґРєР° РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ  Р±РѕР»СЊС€Рµ РґРІСѓС… РїСЂРѕР±РµР»РѕРІ
 	if ( is_spc_fill((BYTE) Text[spacing+1] )  ) return false;
 
-	// пошла проверка слов
+	// РїРѕС€Р»Р° РїСЂРѕРІРµСЂРєР° СЃР»РѕРІ
 	for (int i=0; i<SampleLength; i++)
 	{ 
 		if (!IsSuperEqualChar((BYTE) Sample[i], (BYTE) Text[(spacing+1)*i], langua) )

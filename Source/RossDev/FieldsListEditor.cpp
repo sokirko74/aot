@@ -83,7 +83,7 @@ void CFieldsListEditor::OnButton1()
    m_pRossDoc->SetModifiedFlag(TRUE);
 }
 
-// добавить
+// РґРѕР±Р°РІРёС‚СЊ
 void CFieldsListEditor::OnAddButton() 
 {
 	// TODO: Add your control notification handler code here

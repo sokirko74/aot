@@ -33,11 +33,11 @@ std::vector<rec> suff_vec, pref_vec;
 void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vector<rec> &rec_vec)
 {
 	StringSet little_roots;
-	little_roots.insert("ад");
-	little_roots.insert("юг");
-	little_roots.insert("ют");
-	little_roots.insert("як");
-	little_roots.insert("ям");
+	little_roots.insert("Р°Рґ");
+	little_roots.insert("СЋРі");
+	little_roots.insert("СЋС‚");
+	little_roots.insert("СЏРє");
+	little_roots.insert("СЏРј");
     
 	while(true){
 		char Line[1000];
@@ -95,18 +95,18 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 
 
 /**
-Этот класс -- хранилище бызы данных словаря словобразования.
-Бинарный файл устроен так:
-Сначала идет текстовая часть:
-N  -- число
-афикс1
+Р­С‚РѕС‚ РєР»Р°СЃСЃ -- С…СЂР°РЅРёР»РёС‰Рµ Р±С‹Р·С‹ РґР°РЅРЅС‹С… СЃР»РѕРІР°СЂСЏ СЃР»РѕРІРѕР±СЂР°Р·РѕРІР°РЅРёСЏ.
+Р‘РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р» СѓСЃС‚СЂРѕРµРЅ С‚Р°Рє:
+РЎРЅР°С‡Р°Р»Р° РёРґРµС‚ С‚РµРєСЃС‚РѕРІР°СЏ С‡Р°СЃС‚СЊ:
+N  -- С‡РёСЃР»Рѕ
+Р°С„РёРєСЃ1
 ...
-афиксN
-Потом стоит символ 0 и далее в бинарном виде идут тройки UINTов
+Р°С„РёРєСЃN
+РџРѕС‚РѕРј СЃС‚РѕРёС‚ СЃРёРјРІРѕР» 0 Рё РґР°Р»РµРµ РІ Р±РёРЅР°СЂРЅРѕРј РІРёРґРµ РёРґСѓС‚ С‚СЂРѕР№РєРё UINTРѕРІ
 id1 id2 index
 
-id1 и id2 -- ParadigmId слов из пары. 
-index -- индекс афикса.
+id1 Рё id2 -- ParadigmId СЃР»РѕРІ РёР· РїР°СЂС‹. 
+index -- РёРЅРґРµРєСЃ Р°С„РёРєСЃР°.
 
 */
 class AfixDerivDict{

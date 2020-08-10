@@ -37,7 +37,7 @@ BOOL CVisualWord::Init(IWordPtr& piWord, ISentencePtr& piSentence)
 		long lHomCount;
 
 		m_iClauseNo = piWord->GetClauseNo();
-		//âûòàñêèâàåì âñå ëåììû è ãðàìåìû
+		//Ð²Ñ‹Ñ‚Ð°ÑÐºÐ¸Ð²Ð°ÐµÐ¼ Ð²ÑÐµ Ð»ÐµÐ¼Ð¼Ñ‹ Ð¸ Ð³Ñ€Ð°Ð¼ÐµÐ¼Ñ‹
 		lHomCount = piWord->GetHomonymsCount();
 		for(int i = 0 ; i < lHomCount ; i++) 
 		{

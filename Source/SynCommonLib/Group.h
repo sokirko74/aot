@@ -47,8 +47,8 @@ struct CClauseRelation
 {
 		int						m_iClauseNo;
 		const CMorphVariant*	m_pClauseVar;
-		CPeriod					m_ClausePeriod;//используется только для межклаузных связей
-		vector<EClauseType>		m_ClauseTypes; //используется только для межклаузных связей
+		CPeriod					m_ClausePeriod;//РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РґР»СЏ РјРµР¶РєР»Р°СѓР·РЅС‹С… СЃРІСЏР·РµР№
+		vector<EClauseType>		m_ClauseTypes; //РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РґР»СЏ РјРµР¶РєР»Р°СѓР·РЅС‹С… СЃРІСЏР·РµР№
 		CClauseRelation();
 };
 
