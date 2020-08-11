@@ -149,7 +149,6 @@ TRoss::TRoss(BYTE MaxNumDom) : TCortegeContainer(MaxNumDom)
 {
 	m_bShouldSaveComments = false;
 	m_bDontLoadExamples = false;
-	m_bRussianFields = false;
 	m_MaxMeanNum = 7;
 
 };
@@ -173,25 +172,25 @@ bool TRoss::LoadOnlyConstants(const char* _RossPath)
 		return false;
 	};
 
-	if (!MakePathAndCheck(RossPath, "domitems.txt", DomItemsTextFile))
+	if (!MakePathAndCheck(RossPath, "domitems.bin", DomItemsTextFile))
 	{
 		m_LastError = "cannot find domitems.txt";
 		return false;
 	};
 
-	if (!MakePathAndCheck(RossPath, "items.txt", ItemsFile))
+	if (!MakePathAndCheck(RossPath, "items.bin", ItemsFile))
 	{
 		m_LastError = "cannot find items.txt";
 		return false;
 	};
 
 
-	if (!MakePathAndCheck(RossPath, "domens.txt", DomensFile))
+	if (!MakePathAndCheck(RossPath, "domains.bin", DomensFile))
 	{
-		m_LastError = "cannot find domens.txt";
+		m_LastError = "cannot find domains.txt";
 		return false;
 	};
-	if (!MakePathAndCheck(RossPath, "fields.txt", FieldsFile))
+	if (!MakePathAndCheck(RossPath, "fields.bin", FieldsFile))
 	{
 		m_LastError = "cannot find fields.txt";
 		return false;
@@ -326,57 +325,34 @@ bool	TRoss::ReadConfig()
 
 const char* TRoss::GetTitleFieldName() const
 {
-	if (m_bRussianFields)
-		return "ЗГЛ";
-	else
-		return "TITLE";
-
+	return "TITLE";
 };
 
 
 const char* TRoss::GetSenseFieldName() const
 {
-	if (m_bRussianFields)
-		return "ЗНАЧ";
-	else
-		return "SENSE";
-
+	return "SENSE";
 };
 
 
 const char* TRoss::GetCommFieldName() const
 {
-	if (m_bRussianFields)
-		return "КОММ";
-	else
-		return "COMM";
-
+	return "COMM";
 };
+
 const char* TRoss::GetAuthorFieldName() const
 {
-	if (m_bRussianFields)
-		return "АВТОР";
-	else
-		return "AUTHOR";
-
+	return "AUTHOR";
 };
+
 const char* TRoss::GetTimeCreatFieldName() const
 {
-	if (m_bRussianFields)
-		return "ВРЕМЯ_СОЗД";
-	else
-		return "TIME_CREATE";
-
+	return "TIME_CREATE";
 };
 
 const char* TRoss::GetRedactFieldName() const
 {
-
-	if (m_bRussianFields)
-		return "РЕДАКТ";
-	else
-		return "REDACT";
-
+	return "REDACT";
 };
 
 bool IsBinFile(const std::string FileName) {
@@ -700,7 +676,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE Sig
 				FlagNextDelim = true;
 
 		if (FlagNextDelim)
-			strcat(Delim, m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].m_Items);
+			strcat(Delim, m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].m_DomainItemsBuffer);
 
 		if (!FlagLastItem && !FlagNextDelim)
 			strcat(Delim, " ");
@@ -1111,23 +1087,23 @@ std::string TRoss::GetUnitTextHeader(WORD UnitNo) const
 	const CStructEntry& U = m_Units[UnitNo];
 	const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
 
-	R += Format("%s        = %s\r\n", GetTitleFieldName(), U.m_EntryStr);
-	R += Format("%s       = %u\r\n", GetSenseFieldName(), U.m_MeanNum);
+	R += Format("%s        = %s\n", GetTitleFieldName(), U.m_EntryStr);
+	R += Format("%s       = %u\n", GetSenseFieldName(), U.m_MeanNum);
 
 	if (C && strlen(C->Comments))
-		R += Format("%s       = %s\r\n", GetCommFieldName(), C->Comments);
+		R += Format("%s       = %s\n", GetCommFieldName(), C->Comments);
 
 
 	if (strlen(U.m_AuthorStr) > 0)
-		R += Format("%s       = %s\r\n", GetAuthorFieldName(), U.m_AuthorStr);
+		R += Format("%s       = %s\n", GetAuthorFieldName(), U.m_AuthorStr);
 
 
 	if (C && strlen(C->Editor))
-		R += Format("%s       = %s\r\n", GetRedactFieldName(), C->Editor);
+		R += Format("%s       = %s\n", GetRedactFieldName(), C->Editor);
 
 	std::string t = TRoss::GetUnitModifTimeStr(UnitNo);
 	if (!t.empty())
-		R += Format("%s       = %s\r\n", GetTimeCreatFieldName(), t.c_str());
+		R += Format("%s       = %s\n", GetTimeCreatFieldName(), t.c_str());
 
 	return R;
 }
@@ -1310,14 +1286,12 @@ void CutComments(vector<CSourceLine>& L)
 	}
 }
 
-
-
 void AddMessage(std::string Message, int LineNo, std::string& Messages)
 {
 	Trim(Message);
 	if (LineNo != -1)
 		Message += Format(" (line %i)", LineNo);
-	Message += "\r\n";
+	Message += "\n";
 	Messages += Message;
 };
 
@@ -1338,7 +1312,7 @@ bool CDictionary::ImportFromText(std::string FileName, bool bSimulating, ImportC
 		int CurrentLineNo = 0;
 		while (fgets(buffer, 1000, fp))
 		{
-			std::string S = buffer;
+			std::string S = convert_from_utf(buffer, m_Language);
 			Trim(S);
 			L.push_back(CSourceLine(S, CurrentLineNo));
 			CurrentLineNo++;

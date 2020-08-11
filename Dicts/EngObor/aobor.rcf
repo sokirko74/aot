@@ -5,10 +5,6 @@ masha
 boris
 af
 [DomensParams]
-Д_СХ 32768 10
-Д_СЕМ_О 16711680 10
-Д_ЛФ 255 10
-Д_1 8388736 10
 [Options]
 Language English
 DoNotLock 1

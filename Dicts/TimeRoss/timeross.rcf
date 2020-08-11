@@ -3,9 +3,6 @@ alex Last
 masha
 boris
 [DomensParams]
-Д_СХ 255 20
-Д_ФУНКТ 128 10
-Д_СЕМ_О 16711680 10
 [Options]
 Language Russian
 DoNotLock 1

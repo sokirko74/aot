@@ -13,6 +13,9 @@ endif()
 
 set (RML $ENV{RML})
 #set (INSTALL_BIN_FOLDER $ENV{RML}/Bin)
+#set (RML ${CMAKE_CURRENT_SOURCE_DIR})
+message ("RML=" ${RML})
+
 
 set (INSTALL_BIN_FOLDER /Bin) # not "Bin", but "/Bin"
 

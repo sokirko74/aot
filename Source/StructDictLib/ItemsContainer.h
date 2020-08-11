@@ -2,16 +2,13 @@
 // ==========  Dialing Structural Dictionary (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 
-#ifndef ItemsContainer
-#define ItemsContainer
+#pragma once 
 
 #include "../common/utilit.h"
 #include "Domen.h"
 #include "Field.h"
 #include "../common/cortege.h"
 #include "../common/bserialize.h"
-
-
 
 
 struct TDomNoItemStr {
@@ -71,8 +68,6 @@ public :
 	vector<CField> Fields;
 	std::string FieldsFile;
 	bool	m_bDontLoadExamples;
-	bool	m_bRussianFields;
-	map<std::string,std::string>	m_Russian2EnglishFields;
 	
 
 	//константы доменов
@@ -95,7 +90,7 @@ public :
 	const char*			 GetDomItemStr(const TDomItem& Item) const 
 	{
 		 assert (!m_Domens[Item.GetDomNo()].m_bFreed);
-		 return m_Domens[Item.GetDomNo()].m_Items+Item.GetItemStrNo();
+		 return m_Domens[Item.GetDomNo()].m_DomainItemsBuffer+Item.GetItemStrNo();
 	};
 
 	void 			ErrorMessage (std::string s ) const;
@@ -117,6 +112,7 @@ public :
 	bool		ClearFields ();
 	bool		BuildFields(BYTE MaxNumDom);
 	bool		WriteFields() const;
+	void		WriteFieldsJson() const;
 	bool		BuildFormats(BYTE MaxNumDom);
 	bool		BuildOneFieldFormat (CSignat& Sgn, char* Frmt, char* Name, BYTE MaxNumDom);
 	virtual bool	UpdateSignatsOfTheFieldInCorteges (BYTE FieldNo, vector<CSignat>& Signats)= 0; 
@@ -127,7 +123,3 @@ public :
 
 
 };
-
-
-
-#endif

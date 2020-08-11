@@ -16,35 +16,35 @@
 //==================================================
 
 CDomen::CDomen() {
-    m_Items = 0;
-    m_ItemsLength = 0;
+    m_DomainItemsBuffer = 0;
+    m_DomainItemsBufferLength = 0;
     m_StartDomItem = -1;
     m_EndDomItem = -1;
     m_bFreed = false;
 }
 
 int CDomen::AddItem(const char *s, int Length) {
-    m_ItemsLength += Length + 1;
-    m_Items = (char *) realloc(m_Items, m_ItemsLength);
-    memcpy(m_Items + m_ItemsLength - Length - 1, s, Length);
-    m_Items[m_ItemsLength - 1] = 0;
-    return m_ItemsLength - Length - 1;
+    m_DomainItemsBufferLength += Length + 1;
+    m_DomainItemsBuffer = (char *) realloc(m_DomainItemsBuffer, m_DomainItemsBufferLength);
+    memcpy(m_DomainItemsBuffer + m_DomainItemsBufferLength - Length - 1, s, Length);
+    m_DomainItemsBuffer[m_DomainItemsBufferLength - 1] = 0;
+    return m_DomainItemsBufferLength - Length - 1;
 }
 
 void CDomen::DelItem(int Offset, int Length) {
-    memmove(m_Items + Offset, m_Items + Offset + Length + 1, m_ItemsLength - (Offset + Length + 1));
-    m_ItemsLength -= Length + 1;
-    m_Items = (char *) realloc(m_Items, m_ItemsLength);
+    memmove(m_DomainItemsBuffer + Offset, m_DomainItemsBuffer + Offset + Length + 1, m_DomainItemsBufferLength - (Offset + Length + 1));
+    m_DomainItemsBufferLength -= Length + 1;
+    m_DomainItemsBuffer = (char *) realloc(m_DomainItemsBuffer, m_DomainItemsBufferLength);
     m_EndDomItem--;
-    if (m_ItemsLength == 0) {
+    if (m_DomainItemsBufferLength == 0) {
         m_StartDomItem = -1;
         m_EndDomItem = -1;
     };
 };
 
 CDomen::~CDomen() {
-    if (m_Items != 0)
-        free(m_Items);
+    if (m_DomainItemsBuffer != 0)
+        free(m_DomainItemsBuffer);
 };
 
 bool CDomen::IsEmpty() const {
@@ -73,75 +73,6 @@ inline size_t restore_from_bytes(TDomItem &i, const BYTE *buf) {
 
 TItemContainer::TItemContainer() {
     m_Language = morphRussian;
-
-    m_Russian2EnglishFields["СХ"] = "SF";
-    m_Russian2EnglishFields["ГХ"] = "GF";
-    m_Russian2EnglishFields["ВАЛ"] = "VAL";
-    m_Russian2EnglishFields["ИЛЛ"] = "EXM";
-    m_Russian2EnglishFields["ОТС"] = "REF";
-    m_Russian2EnglishFields["ЛХ"] = "LEX";
-    m_Russian2EnglishFields["ТЕРМ"] = "TERM";
-
-    m_Russian2EnglishFields["КАТ"] = "CAT";
-    m_Russian2EnglishFields["СОСТАВ"] = "CONTENT";
-    m_Russian2EnglishFields["ОГРН"] = "RESTR";
-    m_Russian2EnglishFields["ДОП"] = "AUX";
-    m_Russian2EnglishFields["АЛГОРИТМ"] = "ALG";
-    m_Russian2EnglishFields["ПО"] = "DOMAIN";
-
-    m_Russian2EnglishFields["АНГ"] = "ENG";
-    m_Russian2EnglishFields["АГХ"] = "EGF";
-    m_Russian2EnglishFields["АПО"] = "EDOMAIN";
-    m_Russian2EnglishFields["АСХ"] = "ESF";
-    m_Russian2EnglishFields["АВРЕМ"] = "ETENSE";
-    m_Russian2EnglishFields["АЛФ"] = "ELF";
-    m_Russian2EnglishFields["АЛХ"] = "ELEX";
-    m_Russian2EnglishFields["АОПЕРАТОР"] = "EOPERATOR";
-    m_Russian2EnglishFields["АЧИСЛО"] = "ENUMBER";
-    m_Russian2EnglishFields["АПРЕДЛОГ"] = "EPREP";
-
-
-    m_Russian2EnglishFields["ЛФ"] = "LF";
-    m_Russian2EnglishFields["СЛСЧ"] = "COLLOC";
-    m_Russian2EnglishFields["ВАР"] = "SYN";
-    m_Russian2EnglishFields["ТИП"] = "TYP";
-
-    m_Russian2EnglishFields["НЕСОВМ"] = "INCONS";
-    m_Russian2EnglishFields["КОММ"] = "COMM";
-    m_Russian2EnglishFields["ПОЗ"] = "POS";
-    m_Russian2EnglishFields["АРТИКЛЬ"] = "DETERM";
-    m_Russian2EnglishFields["РУСАВРЕМ"] = "RUSETENSE";
-
-    m_Russian2EnglishFields["РУС"] = "RUS";
-    m_Russian2EnglishFields["РГХ"] = "RGF";
-    m_Russian2EnglishFields["РСХ"] = "RSF";
-    m_Russian2EnglishFields["РПО"] = "RDOMAIN";
-
-    m_Russian2EnglishFields["ОЛХ"] = "MANLEX";
-    m_Russian2EnglishFields["СИНО"] = "SYNR";
-    m_Russian2EnglishFields["СГС"] = "ROOT";
-    m_Russian2EnglishFields["ПРЕДЛОГ"] = "PREP";
-
-    m_Russian2EnglishFields["ЭНЦ"] = "ENC";
-    m_Russian2EnglishFields["ЭСИТ"] = "BSIT";
-    m_Russian2EnglishFields["СВЯЗКА"] = "COPUL";
-
-    m_Russian2EnglishFields["ПРОИЗВ"] = "DERIV";
-    m_Russian2EnglishFields["КАЧ"] = "QUALIT";
-    m_Russian2EnglishFields["КР"] = "PREDIC";
-    m_Russian2EnglishFields["РОД"] = "GENUS";
-    m_Russian2EnglishFields["ВЕС"] = "WEIGHT";
-    m_Russian2EnglishFields["ВЫШЕ"] = "ISA";
-    m_Russian2EnglishFields["ёСЦ"] = "ASS";
-    m_Russian2EnglishFields["КЛАУЗА"] = "CLAUSE";
-    m_Russian2EnglishFields["АКЛАУЗА"] = "ECLAUSE";
-    m_Russian2EnglishFields["УЗЕЛ"] = "NODE";
-    m_Russian2EnglishFields["СТРУКТ_ВЕС"] = "STRUCT_WEIGHT";
-
-    m_Russian2EnglishFields["СИНП"] = "SYNREP";
-    m_Russian2EnglishFields["TR"] = "TR";
-    m_Russian2EnglishFields["PR"] = "PR";
-
 };
 
 BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr) const {
@@ -192,8 +123,8 @@ int TItemContainer::GetItemNoByItemStr(const char *ItemStr, BYTE DomNo) const {
     } else {
         if (D.IsDelim)
             if (!(strlen(ItemStr) == 1)
-                || (D.m_ItemsLength == 0)
-                || !strchr(D.m_Items, ItemStr[0])
+                || (D.m_DomainItemsBufferLength == 0)
+                || !strchr(D.m_DomainItemsBuffer, ItemStr[0])
                     )
                 return -1;
         vector<TDomItem>::const_iterator U = lower_bound(m_DomItems.begin(), m_DomItems.end(), I,
@@ -359,28 +290,29 @@ bool TItemContainer::BuildDomItems() {
         if (!fp) return false;
 
         for (size_t k = 0; k < m_Domens.size(); k++) {
-            char q[255];
+            char buffer[513];
             /*
                 при добавлении новых доменов файл Items получается  неполным
                 (там нет добавленных доменов), поэтому  следующий fgets
                 на добавленном домене вернет false
             */
-            if (!fgets(q, 255, fp)) break;
-
-            StringTokenizer tok(q, ";");
+            if (!fgets(buffer, 512, fp)) break;
+            //std::string q = convert_from_utf(buffer, m_Language);
+            std::string q = buffer;
+            StringTokenizer tok(q.c_str(), ";");
             if (!tok()) return false;
             assert (tok.val() == std::string(m_Domens[k].DomStr));
             if (tok.val() != std::string(m_Domens[k].DomStr))
                 return false;
 
-            m_Domens[k].m_ItemsLength = tok() ? atoi(tok.val()) : 0;
-            if (m_Domens[k].m_ItemsLength == 0)
-                m_Domens[k].m_Items = 0;
+            m_Domens[k].m_DomainItemsBufferLength = tok() ? atoi(tok.val()) : 0;
+            if (m_Domens[k].m_DomainItemsBufferLength == 0)
+                m_Domens[k].m_DomainItemsBuffer = 0;
             else {
-                m_Domens[k].m_Items = (char *) malloc(m_Domens[k].m_ItemsLength);
-                fread(m_Domens[k].m_Items, 1, m_Domens[k].m_ItemsLength, fp);
+                m_Domens[k].m_DomainItemsBuffer = (char *) malloc(m_Domens[k].m_DomainItemsBufferLength);
+                fread(m_Domens[k].m_DomainItemsBuffer, 1, m_Domens[k].m_DomainItemsBufferLength, fp);
             };
-            fgets(q, 255, fp);
+            fgets(buffer, 512, fp);
         };
         fclose(fp);
     }
@@ -402,8 +334,8 @@ bool TItemContainer::BuildDomItems() {
             if (!strcmp(m_Domens[k].DomStr, "D_EXM")
                 || !strcmp(m_Domens[k].DomStr, "D_THES")
                     ) {
-                free(m_Domens[k].m_Items);
-                m_Domens[k].m_Items = 0;
+                free(m_Domens[k].m_DomainItemsBuffer);
+                m_Domens[k].m_DomainItemsBuffer = 0;
                 m_Domens[k].m_bFreed = true;
             };
 
@@ -426,8 +358,8 @@ bool TItemContainer::WriteDomItems() const {
     for (size_t k = 0; k < m_Domens.size(); k++) {
         fprintf(fp, "%s;%i\n",
                 m_Domens[k].DomStr,
-                m_Domens[k].m_ItemsLength);
-        fwrite(m_Domens[k].m_Items, 1, m_Domens[k].m_ItemsLength, fp);
+                m_Domens[k].m_DomainItemsBufferLength);
+        fwrite(m_Domens[k].m_DomainItemsBuffer, 1, m_Domens[k].m_DomainItemsBufferLength, fp);
         fprintf(fp, "\n");
     };
     fclose(fp);
@@ -585,12 +517,6 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
                 //printf ("Error!");
                 return false;
             };
-            /*if (m_Russian2EnglishFields.find(Fields[FieldNo].FieldStr) == m_Russian2EnglishFields.end())
-                ErrorMessage(Format("Cannot translate %s",Fields[FieldNo].FieldStr));
-            else
-            {
-                strcpy(Fields[FieldNo].FieldStr, m_Russian2EnglishFields[Fields[FieldNo].FieldStr].c_str());
-            };*/
             Fields[FieldNo].IsApplicToActant = strcmp(q, "FALSE") != 0;
 
 
@@ -631,6 +557,7 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
 
     return BuildFormats(MaxNumDom);
 }
+
 
 bool TItemContainer::WriteFields() const {
     FILE *fp = fopen(FieldsFile.c_str(), "wb");
@@ -730,8 +657,8 @@ bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, B
                 ) {
             strcat(Sgn.sFrmt, " ");
             if (!m_Domens[DomenNo].IsEmpty()) {
-                strcat(Sgn.sFrmt, m_Domens[DomenNo].m_Items);
-                strcat(Sgn.sFrmtWithotSpaces, m_Domens[DomenNo].m_Items);
+                strcat(Sgn.sFrmt, m_Domens[DomenNo].m_DomainItemsBuffer);
+                strcat(Sgn.sFrmtWithotSpaces, m_Domens[DomenNo].m_DomainItemsBuffer);
             }
         } else {
             strcat(Sgn.sFrmt, " %s");

@@ -2,9 +2,7 @@
 // ==========  Dialing Structural Dictionary (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 
-
-#ifndef __DOMEN_H_
-#define __DOMEN_H_
+#pragma once
 
 #include "../common/utilit.h"
 
@@ -27,8 +25,8 @@ struct CDomen  {
   BYTE PartsSize;
   int   DropDownCount;
   DWORD Color;
-  char* m_Items;
-  int    m_ItemsLength;
+  char* m_DomainItemsBuffer;
+  int    m_DomainItemsBufferLength;
   TItemContainer*  m_pParent;
   int 	  m_StartDomItem;
   int 	  m_EndDomItem;
@@ -42,5 +40,3 @@ struct CDomen  {
   void DelItem (int Offset, int Length);
   bool IsEmpty () const;
 };
-
-#endif //__DOMEN_H_

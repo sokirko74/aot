@@ -6,9 +6,6 @@ masha
 af
 oleg
 [DomensParams]
-Д_СХ 32768 10
-Д_СЕМ_О 16711680 10
-Д_ЛФ 255 10
 [Options]
 Language Russian
 DoNotLock 1
