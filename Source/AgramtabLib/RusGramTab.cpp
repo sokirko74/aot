@@ -1,6 +1,4 @@
-﻿#include "StdGramtab.h"
-
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+﻿// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
@@ -109,7 +107,7 @@ CRusGramTab::CRusGramTab()
 
 	for (; i < GetMaxGrmCount(); i++)
 		GetLine(i) = NULL;
-
+	m_Language = morphRussian;
 }
 
 CRusGramTab :: ~CRusGramTab()

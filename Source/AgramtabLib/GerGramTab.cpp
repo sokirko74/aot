@@ -1,8 +1,6 @@
 // ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
-
-#include "StdGramtab.h"
 #include "GerGramTab.h"
 #include "ger_consts.h"       
 
@@ -11,11 +9,10 @@ extern std::string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const s
 
 CGerGramTab :: CGerGramTab()
 {
-	size_t i=0;
-
-	for (; i<GetMaxGrmCount(); i++) 
+	for (size_t i = 0; i<GetMaxGrmCount(); i++)
 	    GetLine(i) = NULL;
 
+	m_Language = morphEnglish;
 }
 
 

@@ -3,8 +3,6 @@
 // ==========  Copyright by Alexey Sokirko
 
 #pragma once
-
-
 #include "../common/utilit.h"
 
 
@@ -26,6 +24,7 @@ class CAgramtab {
 
    public :
 	bool	m_bInited;
+	MorphLanguageEnum  m_Language;
 
 	CAgramtab ();
     virtual ~CAgramtab ();

@@ -1,25 +1,23 @@
-#include "StdGramtab.h"
-#include "../common/util_classes.h"
 // ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
-
+#include "../common/util_classes.h"
 #include "agramtab_.h"
-//#include "assert.h"
+#include "rus_consts.h"
+
+#include <fstream>
+#include <string>
 
 
 static BYTE GetTagFromStr(const CAgramtab& A, const char* tab_str) 
 {
-    
-    
     for (BYTE i = 0; i < A.GetPartOfSpeechesCount(); i++)
 			if  (!strcmp(tab_str, A.GetPartOfSpeechStr(i)))
 		  	 return i;
      
     return UnknownPartOfSpeech;
 }
-
 
 
 CAgramtabLine :: CAgramtabLine (size_t SourceLineNo) 
@@ -51,8 +49,6 @@ std::string   CAgramtab::GrammemsToStr(QWORD grammems) const
 	grammems_to_str(grammems, szGrammems);
 	return szGrammems;
 }
-
-//#pragma optimize( "", off )
 
 bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, BYTE& PartOfSpeech, QWORD& grammems)  const
 {
@@ -102,13 +98,10 @@ bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, BYTE& Part
 	return true;
 };
 
-//#pragma optimize( "", on )
-
 bool  CAgramtab::ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  QWORD* grammems) const
 {
 	return ProcessPOSAndGrammems(tab_str, *PartOfSpeech, *grammems);
 };
-   
 
 static bool  ProcessAgramtabLine (CAgramtab& A, const char* tab_str,  size_t LineNo)
 {
@@ -134,35 +127,30 @@ bool CAgramtab :: Read (const char * FileName)
 	for (size_t i=0; i<GetMaxGrmCount(); i++) 
 		GetLine(i) = 0;
 
+	std::ifstream inp(FileName);
+	assert (inp.is_open());
 
-	FILE* fp = fopen (FileName,"r");
-
-	assert (fp);
-
-	if( !fp)
+	if( !inp.is_open() )
 		return false;
 
 
-	char buff[300];
 	size_t LineNo = 0;;
-	while (fgets (buff,300,fp))
+	std::string line;
+	while (std::getline(inp, line))
 	{
 		LineNo++;
-		char * s = buff;
-		for (; isspace ( (unsigned char) *s); s++);
-		if (!*s) continue;
-		if (!strncmp (s,"//",2)) continue;
+		std::string s = Trim(convert_from_utf(line.c_str(), this->m_Language));
+		if (s.empty() || (s.rfind("//", 0) == 0)) continue;
 
 		CAgramtabLine* pAgramtabLine = new CAgramtabLine(LineNo);
-
+		size_t gram_index = s2i(s.c_str());
 		// a double can  occur
-		if (GetLine(s2i(s))) delete GetLine(s2i(s));
-
-		GetLine(s2i(s)) = pAgramtabLine;
-		bool bResult = ProcessAgramtabLine(*this, buff,s2i(s));
+		if (GetLine(gram_index)) {
+			delete GetLine(gram_index);
+		}
+		GetLine(gram_index) = pAgramtabLine;
+		ProcessAgramtabLine(*this, s.c_str(), gram_index);
 	}
-
-	fclose (fp);
 
 	m_bInited = true;
 	return true;
@@ -295,8 +283,6 @@ bool CAgramtab :: FindGrammems (const char* gram_codes, QWORD grammems) const
   return false;	
 };
 
-
-
 bool CAgramtab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, std::string& gramcodes) const
 {
 
@@ -371,10 +357,6 @@ QWORD CAgramtab::GetAllGrammems(const char *gram_code) const
 	return grammems;
 }
 
-
-
-
-
 bool CAgramtab::LoadFromRegistry ()
 {
 	try
@@ -410,9 +392,6 @@ BYTE CAgramtab::GetFirstPartOfSpeech(const poses_mask_t poses) const
 
 	return Count;
 };
-
-
-
 
 std::string	CAgramtab::GetAllPossibleAncodes(BYTE pos, QWORD grammems)const
 {
@@ -469,9 +448,6 @@ QWORD CAgramtab::Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, c
  	return grammems;
 };
 
-
-
-
 //  uses gleiche to compare ancodes from gram_codes1 with  ancodes gram_codes2
 //  returns all ancodes from gram_codes1, which satisfy CompareFunc
 std::string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
@@ -479,6 +455,7 @@ std::string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, const char* g
     std::string EmptyString;
 	return GleicheAncode1(CompareFunc, std::string(gram_codes1), std::string(gram_codes2), EmptyString);
 }
+
 std::string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, std::string gram_codes1, std::string gram_codes2) const
 {
     std::string EmptyString;
@@ -531,6 +508,7 @@ std::string CAgramtab::GleicheAncode1 (GrammemCompare CompareFunc, std::string G
 	if(has_pair) GramCodes1pair = pair;
  	return Result;
 };
+
 std::string CAgramtab::UniqueGramCodes(std::string gram_codes) const
 {
 	std::string Result;
@@ -539,6 +517,7 @@ std::string CAgramtab::UniqueGramCodes(std::string gram_codes) const
 			Result.append(gram_codes.substr(m,2));
 	return Result;
 }
+
 std::string CAgramtab::FilterGramCodes(std::string gram_codes, QWORD grammems1, QWORD grammems2) const
 {
 	std::string Result;
@@ -556,6 +535,7 @@ std::string CAgramtab::FilterGramCodes(std::string gram_codes, QWORD grammems1, 
 	//if(has_pair) gram_codes1pair = pair;
  	return Result;
 }	
+
 std::string CAgramtab::FilterGramCodes(QWORD breaks, std::string gram_codes, QWORD g1) const
 {
 	std::string Result;
@@ -576,7 +556,6 @@ std::string CAgramtab::FilterGramCodes(QWORD breaks, std::string gram_codes, QWO
 		if ( R )  
 			Result.append(gram_codes1+l,2);
 	}
-	//if(has_pair) gram_codes1pair = pair;
  	return Result;
 }	
 

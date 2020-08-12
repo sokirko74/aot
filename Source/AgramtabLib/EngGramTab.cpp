@@ -1,7 +1,6 @@
 // ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
-#include "StdGramtab.h"
 #include "EngGramTab.h"
 
 
@@ -9,7 +8,7 @@ CEngGramTab :: CEngGramTab()
 {
 	for (size_t i = 0; i<GetMaxGrmCount(); i++) 
 	    GetLine(i) = NULL;
-
+	m_Language = morphEnglish;
 }
 
 CEngGramTab :: ~CEngGramTab()
