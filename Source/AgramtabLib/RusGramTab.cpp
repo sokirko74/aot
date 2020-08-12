@@ -522,27 +522,27 @@ bool CRusGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
 
 
 
-const char* months[12] = { "ЯНВАРЬ","ФЕВРАЛЬ","МАРТ",
-			   "АПРЕЛЬ","МАЙ","ИЮНЬ",
-			   "ИЮЛЬ","АВГУСТ","СЕНТЯБРЬ"
-			   ,"ОКТЯБРЬ","НОЯБРЬ","ДЕКАБРЬ" };
+const static std::string months[] = { _R("ЯНВАРЬ"),_R("ФЕВРАЛЬ"),_R("МАРТ"),
+			   _R("АПРЕЛЬ"),_R("МАЙ"),_R("ИЮНЬ"),
+			   _R("ИЮЛЬ"),_R("АВГУСТ"),_R("СЕНТЯБРЬ")
+			   ,_R("ОКТЯБРЬ"),_R("НОЯБРЬ"),_R("ДЕКАБРЬ") };
 
 bool CRusGramTab::is_month(const char* lemma) const
 {
 	if (!lemma) return false;
 	for (size_t i = 0; i < 12; i++)
-		if (!strcmp(lemma, months[i]))
+		if (months[i] == lemma)
 			return true;
 	return false;
 }
 
-const char* SmallNumbers[5] = { "ДВА","ТРИ","ЧЕТЫРЕ","ОБА","ПОЛТОРА" };
+const static std::string SmallNumbers[] = { _R("ДВА"),_R("ТРИ"),_R("ЧЕТЫРЕ"),_R("ОБА"),_R("ПОЛТОРА") };
 
 bool CRusGramTab::is_small_number(const char* lemma) const
 {
 	if (!lemma) return false;
 	for (size_t i = 0; i < 5; i++)
-		if (!strcmp(lemma, SmallNumbers[i]))
+		if (SmallNumbers[i].compare(lemma) == 0)
 			return true;
 	return false;
 }
@@ -630,14 +630,14 @@ bool CRusGramTab::is_morph_personal_pronoun(poses_mask_t poses, QWORD grammems) 
 
 
 const size_t  ParticleCount = 8;
-const char Particles[ParticleCount][20] = { "ЛИ","ЖЕ","БЫ","УЖ","ТОЛЬКО", "Ж", "Б", "ЛЬ" };
+const static std::string Particles[ParticleCount] = { _R("ЛИ"),_R("ЖЕ"),_R("БЫ"),_R("УЖ"),_R("ТОЛЬКО"), _R("Ж"), _R("Б"), _R("ЛЬ") };
 
 bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 {
 	if (!lemma) return false;
 	if (!(poses & (1 << PARTICLE))) return false;
 	for (int i = 0; i < ParticleCount; i++)
-		if (!strcmp(lemma, Particles[i]))
+		if (Particles[i] == lemma)
 			return true;
 
 	return false;
@@ -653,7 +653,7 @@ bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 
 /*
 	Есть такие  мест. прилагательные, которые могут выступать в роли существительных:
-	"КАЖДЫЙ", "ОДИН", "ДРУГОЙ","ТОТ","КОТОРЫЙ".
+	_R("КАЖДЫЙ"), _R("ОДИН"), _R("ДРУГОЙ"),_R("ТОТ"),_R("КОТОРЫЙ").
 	Для  них не имеет смысла вводит аналогичные местоимения,поскольку  все они могут
 	быть использованы во всех родах. Эти прилагательные могут вести себя так же, как
 	существительные. Например,
@@ -661,44 +661,44 @@ bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 	Я знаю ту, которая тебя видит
 	Один пришел, другой ушел.
 	Я вижу дом, который разрушился.
-	Вышеуказанные мест. прилагательные отличаются, например, от местоимения "этот" и "всякий", поскольку
+	Вышеуказанные мест. прилагательные отличаются, например, от местоимения _R(_R("этот")) и _R("всякий"), поскольку
 	трудно себе представить что-то вроде:
 	"эта пришла"
 	"всякая пришла"
 	Но возможно:
 	"всякое бывает"
 	"это бывает"
-	Здесь "всякое" и "это" - простые местоимения ср рода.
+	Здесь _R("всякое") и _R("это") - простые местоимения ср рода.
 
 	!! Таким образом, я не хочу дублировать в морфологии МС-П, если они могут использованы
 	!! во всех родах в качестве существительного.
 
 	1 марта 2001 года, Сокирко
 */
-bool CRusGramTab::IsSynNoun(poses_mask_t poses, const char* Lemma) const
+bool CRusGramTab::IsSynNoun(poses_mask_t poses, const char* lemma) const
 {
 	return   IsMorphNoun(poses)
 		|| (poses & (1 << PRONOUN))
 		|| ((poses & (1 << PRONOUN_P))
-			&& (!strcmp(Lemma, "КАЖДЫЙ")
-				|| !strcmp(Lemma, "ОДИН")
-				|| !strcmp(Lemma, "ДРУГОЙ")
-				|| !strcmp(Lemma, "ТОТ")
-				|| !strcmp(Lemma, "КОТОРЫЙ")
+			&&     (_R("КАЖДЫЙ") == lemma)
+				|| (_R("ОДИН") == lemma)
+				|| (_R("ДРУГОЙ") == lemma)
+				|| (_R("ТОТ") == lemma)
+				|| (_R("КОТОРЫЙ") == lemma)
 				)
-			);
+			;
 };
 
 
 const int StandardParamAbbrCount = 8;
-const char* StandardParamAbbr[StandardParamAbbrCount] =
-{ "КГ", "КМ", "СМ","МЛ", "МБ","КБ", "МГЦ", "КВ" };
+const static std::string StandardParamAbbr[StandardParamAbbrCount] =
+{ _R("КГ"), _R("КМ"), _R("СМ"),_R("МЛ"), _R("МБ"),_R("КБ"), _R("МГЦ"), _R("КВ") };
 
 bool CRusGramTab::IsStandardParamAbbr(const char* WordStrUpper) const
 {
 	if (strlen(WordStrUpper) > 4) return false;
 	for (long i = 0; i < StandardParamAbbrCount; i++)
-		if (!strcmp(WordStrUpper, StandardParamAbbr[i]))
+		if (StandardParamAbbr[i] == WordStrUpper)
 			return true;
 
 	return false;

@@ -64,11 +64,9 @@ bool CHomonym::IsIsOb() const
 }
 
 
-bool CHomonym::IsLemma(const char* lemma) const 
+bool CHomonym::IsLemma(const std::string& lemma) const 
 {
-	if (lemma == 0) return false;
 	return m_strLemma == lemma;
-
 };
 
 bool CHomonym::IsSynNoun() const

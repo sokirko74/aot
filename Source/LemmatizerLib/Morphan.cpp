@@ -189,7 +189,7 @@ vector<CFormAndGrammems> BuildFormAndGrammems(const CMorphologyHolder* Holder, c
 			F.m_POS = pGramtab->GetPartOfSpeechStr(GetWidePOS(POS, F.m_Grammems, Holder->m_CurrentLanguage));
 
 			// для сортировки
-			if (F.m_POS == "ИНФИНИТИВ")
+			if (F.m_POS == _R("ИНФИНИТИВ"))
 				F.m_POS.insert(0, " ");
 
 
@@ -204,22 +204,22 @@ vector<CFormAndGrammems> BuildFormAndGrammems(const CMorphologyHolder* Holder, c
 static std::string GetInterfacePOS(std::string POS)
 {
 	Trim(POS);
-	if (POS == "Г") return "ЛИЧНАЯ ФОРМА";
-	if (POS == "С") return "СУЩЕСТВИТЕЛЬНОЕ";
-	if (POS == "П") return "ПРИЛАГАТЕЛЬНОЕ";
-	if (POS == "МС") return "МЕСТОИМЕНИЕ";
-	if (POS == "МС-П") return "МЕСТОИМЕНИЕ-ПРИЛАГАТЕЛЬНОЕ";
-	if (POS == "МС-ПРЕДК") return "МЕСТОИМЕНИЕ-ПРЕДИКАТИВ";
-	if (POS == "ЧИСЛ") return "ЧИСЛИТЕЛЬНОЕ";
-	if (POS == "ЧИСЛ-П") return "ПОРЯДКОВОЕ ЧИСЛИТЕЛЬНОЕ";
-	if (POS == "Н") return "НАРЕЧИЕ";
-	if (POS == "ПРЕДК") return "ПРЕДИКАТИВ";
-	if (POS == "ПРЕДЛ") return "ПРЕДЛОГ";
-	if (POS == "МЕЖД") return "МЕЖДОМЕТИЕ";
-	if (POS == "ВВОДН") return "ВВОДНОЕ СЛОВО";
-	if (POS == "ЧАСТ") return "ЧАСТИЦА";
-	if (POS == "КР_ПРИЛ") return "КРАТКОЕ ПРИЛАГАТЕЛЬНОЕ";
-	if (POS == "КР_ПРИЧАСТИЕ") return "КРАТКОЕ ПРИЧАСТИЕ";
+	if (POS == _R("Г")) return "ЛИЧНАЯ ФОРМА";
+	if (POS == _R("С")) return _R("СУЩЕСТВИТЕЛЬНОЕ");
+	if (POS == _R("П")) return _R("ПРИЛАГАТЕЛЬНОЕ");
+	if (POS == _R("МС")) return _R("МЕСТОИМЕНИЕ");
+	if (POS == _R("МС-П")) return _R("МЕСТОИМЕНИЕ-ПРИЛАГАТЕЛЬНОЕ");
+	if (POS == _R("МС-ПРЕДК")) return _R("МЕСТОИМЕНИЕ-ПРЕДИКАТИВ");
+	if (POS == _R("ЧИСЛ")) return _R("ЧИСЛИТЕЛЬНОЕ");
+	if (POS == _R("ЧИСЛ-П")) return "ПОРЯДКОВОЕ ЧИСЛИТЕЛЬНОЕ";
+	if (POS == _R("Н")) return _R("НАРЕЧИЕ");
+	if (POS == _R("ПРЕДК")) return _R("ПРЕДИКАТИВ");
+	if (POS == _R("ПРЕДЛ")) return _R("ПРЕДЛОГ");
+	if (POS == _R("МЕЖД")) return _R("МЕЖДОМЕТИЕ");
+	if (POS == _R("ВВОДН")) return "ВВОДНОЕ СЛОВО";
+	if (POS == _R("ЧАСТ")) return _R("ЧАСТИЦА");
+	if (POS == _R("КР_ПРИЛ")) return "КРАТКОЕ ПРИЛАГАТЕЛЬНОЕ";
+	if (POS == _R("КР_ПРИЧАСТИЕ")) return "КРАТКОЕ ПРИЧАСТИЕ";
 	return POS;
 };
 

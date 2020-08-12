@@ -1358,7 +1358,7 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 	size_t RealStart = start;
 	if (L.size() == 1) return false;
 	std::string S;
-	if (GetValue(L[RealStart].m_Line, "Дескриптор", S)) {
+	if (GetValue(L[RealStart].m_Line, _R("Дескриптор"), S)) {
 		RealStart++;
 	}
 
@@ -1538,7 +1538,7 @@ void CDictionary::SetUnitCurrentTime(WORD UnitNo)
 bool CDictionary::AddField(std::string FieldStr)
 {
 	if (FieldStr.empty())
-		FieldStr = "_";
+		FieldStr = _R("_");
 	if (FieldStr.length() + 1 >= FieldStrLen)
 	{
 		ErrorMessage("Field is too long");

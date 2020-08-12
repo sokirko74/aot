@@ -78,18 +78,18 @@ struct CAntecedent {
 const int KTO_AntecedentCount = 12;
 
 const CAntecedent KTO_Antecedents[KTO_AntecedentCount] =  {
-	{"ТОТ",    1<<PRONOUN_P },
-	{"КАЖДЫЙ", 1<<PRONOUN_P},
-	{"ВСЯКИЙ", 1<<PRONOUN},
-	{"ВСЯКАЯ", 1<<PRONOUN},
-	{"ЛЮБОЙ", 1<<PRONOUN},
-	{"ЛЮБАЯ", 1<<PRONOUN},
-	{"ВСЕ", 1<<PRONOUN},
-	{"НИКТО", 1<<PRONOUN},
-	{"КТО-НИБУДЬ", 1<<PRONOUN},
-	{"КТО-ТО", 1<<PRONOUN},
-	{"КОЕ-КТО", 1<<PRONOUN},
-	{"ПРОЧИЙ", 1<<PRONOUN}
+	{_R("ТОТ"),    1<<PRONOUN_P },
+	{_R("КАЖДЫЙ"), 1<<PRONOUN_P},
+	{_R("ВСЯКИЙ"), 1<<PRONOUN},
+	{_R("ВСЯКАЯ"), 1<<PRONOUN},
+	{_R("ЛЮБОЙ"), 1<<PRONOUN},
+	{_R("ЛЮБАЯ"), 1<<PRONOUN},
+	{_R("ВСЕ"), 1<<PRONOUN},
+	{_R("НИКТО"), 1<<PRONOUN},
+	{_R("КТО-НИБУДЬ"), 1<<PRONOUN},
+	{_R("КТО-ТО"), 1<<PRONOUN},
+	{_R("КОЕ-КТО"), 1<<PRONOUN},
+	{_R("ПРОЧИЙ"), 1<<PRONOUN}
 };
 
 /*
@@ -123,7 +123,7 @@ bool CRusSentence::RuleForKTO(int iClauseNum)
 	{
 		const SConjIndex& conj = pAbstClause->m_vectorConjs[i];
 		if(		(conj.m_FromWhere == FROM_SUB_CONJ)
-			&&	(GetOpt()->GetOborDic()->GetSubConjs()[conj.m_index] == "КТО")
+			&&	(GetOpt()->GetOborDic()->GetSubConjs()[conj.m_index] == _R("КТО"))
 		  )
 		break;
 	}
@@ -201,7 +201,7 @@ bool CRusSentence::RuleForSubClause(int iClauseNum)
 	  )
 		return false;
 
-	if( pAbstClause1->HasType(INFINITIVE_T) && !pAbstClause1->HasSubConj("ЧТОБЫ"))
+	if( pAbstClause1->HasType(INFINITIVE_T) && !pAbstClause1->HasSubConj(_R("ЧТОБЫ")))
 		return false;
 
 	
@@ -239,7 +239,7 @@ bool CRusSentence::RuleForAdverbPart(int iClauseNum)
 
 
 	// Деепричастный  оборот должен быть отделен запятой, если он не стоит в самом начале.
-	//  В конструкции "Он шел, свистя и напевая" "напевая" должно вложиться в "свистя".
+	//  В конструкции "Он шел, свистя и напевая" _R("напевая") должно вложиться в _R("свистя").
 	if (pAbstClause->m_iFirstWord != 0)
 		if (!m_Words[pAbstClause->m_iFirstWord].m_bComma)
 			return false;

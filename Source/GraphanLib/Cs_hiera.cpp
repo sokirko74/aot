@@ -218,7 +218,7 @@ void SetDepthOfBullet (CConSent& C)
   while(nt <=  C.m_HardGraphEndNo)
   {
      if (    !GraFile->HasDescr(nt,ODigits) 
-		  && !C.GetUnit(nt).IsString("З")
+		  && !C.GetUnit(nt).IsString(_R("З"))
 		 ) break;
 	 nt ++;
 	 if (nt >  C.m_HardGraphEndNo) break;

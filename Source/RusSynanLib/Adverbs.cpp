@@ -49,7 +49,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 
 bool IsUZH_Particle (const CSynPlmLine& W)
 {
-    return W.is_lemma("УЖ") && W.HasPOS(PARTICLE);
+    return W.is_lemma(_R("УЖ")) && W.HasPOS(PARTICLE);
 };
 
 
@@ -160,7 +160,7 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 	if( !is_morph_adv(Wi) )
 		return false;
 
-    if( Wi.has_grammem(rInterrogative))   //*is_word_upper("КАК") )
+    if( Wi.has_grammem(rInterrogative))   //*is_word_upper(_R("КАК")) )
 		return false;
 
 	if( !Wi.can_syn_depend_on_adv() )
@@ -175,7 +175,7 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 	if( !is_morph_adv(Wj) )
 		return false;
 
-	if (Wj.is_lemma("УЖ"))
+	if (Wj.is_lemma(_R("УЖ")))
 		return false;
 
      if( Wj.has_grammem(rInterrogative))   

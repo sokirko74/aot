@@ -24,10 +24,10 @@ bool CRusSentence::HasStrictestLeftClauseBorder(int ClauseNum) const
 
 		if(     ( GetWords()[iWord].m_strWord[0] ==  ',' )
 			&&  (iWord  < GetWords().size() - 2 )
-			&&  (   GetWords()[iWord+1].FindLemma("И") 
-				 || GetWords()[iWord+1].FindLemma("ИЛИ")  
-				 || GetWords()[iWord+1].FindLemma("НО")  
-				 || GetWords()[iWord+1].FindLemma("А")  
+			&&  (   GetWords()[iWord+1].FindLemma(_R("И")) 
+				 || GetWords()[iWord+1].FindLemma(_R("ИЛИ"))  
+				 || GetWords()[iWord+1].FindLemma(_R("НО"))  
+				 || GetWords()[iWord+1].FindLemma(_R("А"))  
 				) 
 		  )
 		  return true;
@@ -81,7 +81,7 @@ bool CRusSentence::IsGoodEmptyClause(const CClause* pAbstClause) const
 	   "Вас спросят, в какой город ехать"
 	*/
 	for (int jj = pAbstClause->m_iFirstWord; jj < pAbstClause->m_iLastWord; jj++)
-		if ( GetWords()[jj].FindLemma("КАКОЙ") )
+		if ( GetWords()[jj].FindLemma(_R("КАКОЙ")) )
 			return false;
 
 	int iFirstWord = pAbstClause->m_iFirstWord;

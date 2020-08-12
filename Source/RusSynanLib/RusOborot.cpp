@@ -14,18 +14,18 @@ COborDic* NewOborDicRussian (CSyntaxOpt* Opt)
 };
 
 static const int SubConjsCount = 21;
-static const std::string strSubConjs[SubConjsCount] = {"ЧТО","ЧТОБЫ","ГДЕ","КОГДА","ЕСЛИ","ЗАЧЕМ","ОТЧЕГО",
-														 "ПОЧЕМУ","СКОЛЬКО","НАСКОЛЬКО","ЧЕМ",
-														 "ХОТЯ","КТО","ПОСКОЛЬКУ","ПОКА","КАК", "ОТКУДА","КУДА","КОТОРЫЙ","ЧЕЙ", "ДАБЫ"};
+static const std::string strSubConjs[SubConjsCount] = {_R("ЧТО"),_R("ЧТОБЫ"),_R("ГДЕ"),_R("КОГДА"),_R("ЕСЛИ"),_R("ЗАЧЕМ"),_R("ОТЧЕГО"),
+														 _R("ПОЧЕМУ"),_R("СКОЛЬКО"),_R("НАСКОЛЬКО"),_R("ЧЕМ"),
+														 _R("ХОТЯ"),_R("КТО"),_R("ПОСКОЛЬКУ"),_R("ПОКА"),_R("КАК"), _R("ОТКУДА"),_R("КУДА"),_R("КОТОРЫЙ"),_R("ЧЕЙ"), _R("ДАБЫ")};
 
 
 static const size_t CoordConjTypesCount = 5;
 static const CCoordConjType CoordConjTypes[CoordConjTypesCount] = {
-	{"И", false},
-    {"ИЛИ", false},
-	{"ЛИБО",false},
-	{"НО", true},
-	{"А", true}};
+	{_R("И"), false},
+    {_R("ИЛИ"), false},
+	{_R("ЛИБО"),false},
+	{_R("НО"), true},
+	{_R("А"), true}};
 
 
 CRusOborDic::CRusOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
@@ -64,44 +64,44 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 
 		BYTE GramFetFieldNo = piOborDic->GetFieldNoByFieldStr ("GF");
 		assert (GramFetFieldNo != ErrUChar);
-		long ParenthesItemNo = GetItemNoByItemStr(piOborDic,"ВВОДН", "D_PART_OF_SPEECH");
+		long ParenthesItemNo = GetItemNoByItemStr(piOborDic,_R("ВВОДН"), "D_PART_OF_SPEECH");
 		assert(ParenthesItemNo != -1);
-		long AdverbItemNo = GetItemNoByItemStr(piOborDic,"НАР", "D_PART_OF_SPEECH");
+		long AdverbItemNo = GetItemNoByItemStr(piOborDic,_R("НАР"), "D_PART_OF_SPEECH");
 		assert(AdverbItemNo != -1);
-		long ParticItemNo = GetItemNoByItemStr(piOborDic,"ЧАСТ", "D_PART_OF_SPEECH");
+		long ParticItemNo = GetItemNoByItemStr(piOborDic,_R("ЧАСТ"), "D_PART_OF_SPEECH");
 		assert(ParticItemNo != -1);
-		long SubordConjItemNo = GetItemNoByItemStr(piOborDic,"ПОДЧ_СОЮЗ", "D_PART_OF_SPEECH");
+		long SubordConjItemNo = GetItemNoByItemStr(piOborDic,_R("ПОДЧ_СОЮЗ"), "D_PART_OF_SPEECH");
 		assert(SubordConjItemNo != -1);
-		long CoordConjItemNo = GetItemNoByItemStr(piOborDic,"СОЧ_СОЮЗ", "D_PART_OF_SPEECH");
+		long CoordConjItemNo = GetItemNoByItemStr(piOborDic,_R("СОЧ_СОЮЗ"), "D_PART_OF_SPEECH");
 		assert(CoordConjItemNo != -1);
-		long SimplePrepItemNo = GetItemNoByItemStr(piOborDic,"ПРОСТ_ПРЕДЛ", "D_PART_OF_SPEECH");
+		long SimplePrepItemNo = GetItemNoByItemStr(piOborDic,_R("ПРОСТ_ПРЕДЛ"), "D_PART_OF_SPEECH");
 		assert(SimplePrepItemNo != -1);
-		long CoordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic,"СОЧ_РАЗРЫВ_СОЮЗ", "D_PART_OF_SPEECH");
+		long CoordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic,_R("СОЧ_РАЗРЫВ_СОЮЗ"), "D_PART_OF_SPEECH");
 		assert(CoordDisruptPrepItemNo != -1);
-		long SubordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic,"ПОДЧ_РАЗРЫВ_СОЮЗ", "D_PART_OF_SPEECH");
+		long SubordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic,_R("ПОДЧ_РАЗРЫВ_СОЮЗ"), "D_PART_OF_SPEECH");
 		assert(SubordDisruptPrepItemNo != -1);
-		long PrepItemNo = GetItemNoByItemStr(piOborDic,"ПРЕДЛ", "D_PART_OF_SPEECH");
+		long PrepItemNo = GetItemNoByItemStr(piOborDic,_R("ПРЕДЛ"), "D_PART_OF_SPEECH");
 		assert(PrepItemNo != -1);
 		// падежи 
-		long NominativItemNo = GetItemNoByItemStr(piOborDic,"И", "D_CASE");
+		long NominativItemNo = GetItemNoByItemStr(piOborDic,_R("И"), "D_CASE");
 		assert(NominativItemNo != -1);
-		long GenitivItemNo = GetItemNoByItemStr(piOborDic,"Р", "D_CASE");
+		long GenitivItemNo = GetItemNoByItemStr(piOborDic,_R("Р"), "D_CASE");
 		assert(GenitivItemNo != -1);
-		long AccusativItemNo = GetItemNoByItemStr(piOborDic,"В", "D_CASE");
+		long AccusativItemNo = GetItemNoByItemStr(piOborDic,_R("В"), "D_CASE");
 		assert(AccusativItemNo != -1);
-		long DativItemNo = GetItemNoByItemStr(piOborDic,"Д", "D_CASE");
+		long DativItemNo = GetItemNoByItemStr(piOborDic,_R("Д"), "D_CASE");
 		assert(DativItemNo != -1);
-		long InstrumentalisItemNo = GetItemNoByItemStr(piOborDic,"Т", "D_CASE");
+		long InstrumentalisItemNo = GetItemNoByItemStr(piOborDic,_R("Т"), "D_CASE");
 		assert(InstrumentalisItemNo != -1);
-		long VocativItemNo = GetItemNoByItemStr(piOborDic,"П", "D_CASE");
+		long VocativItemNo = GetItemNoByItemStr(piOborDic,_R("П"), "D_CASE");
 		assert(VocativItemNo != -1);
-		long NominativPluralItemNo = GetItemNoByItemStr(piOborDic,"И_мн", "D_CASE");
+		long NominativPluralItemNo = GetItemNoByItemStr(piOborDic,_R("И_мн"), "D_CASE");
 
 		
 		
 
 		// уточнения ГГ
-		long InfinitiveItemNo = GetItemNoByItemStr(piOborDic,"инф", "D_VP_SPECIF");
+		long InfinitiveItemNo = GetItemNoByItemStr(piOborDic,_R("инф"), "D_VP_SPECIF");
 		assert(InfinitiveItemNo != -1);
 
 
@@ -130,8 +130,8 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 						piOborDic->CortegeToStr(*piOborDic->GetCortege(i), OutBuffer);
 						oborot.m_GrammarFeature = OutBuffer;
 						Trim(oborot.m_GrammarFeature);
-						if (oborot.m_GrammarFeature == "НАР")
-							oborot.m_GrammarFeature = "Н";
+						if (oborot.m_GrammarFeature == _R("НАР"))
+							oborot.m_GrammarFeature = _R("Н");
 
 					};
 					//nim : вводный оборот, проверить GF=ВВОДН
@@ -142,7 +142,7 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 
 					};
 
-					//nim : наречие ("заграницей"), проверить GF=НАР
+					//nim : наречие (_R("заграницей")), проверить GF=НАР
 					if ( AdverbItemNo == Item0)
 
 						oborot.AddPartOfSpeech(ADV);

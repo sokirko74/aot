@@ -127,7 +127,7 @@ void  CGraphanDicts:: BuildOborot (const std::string& s, int OborotNo, bool bFix
 			// если заканчивается на предлог "с", "в" или "к"
 			if ( (q ==  " К") || (q ==  " С") || (q ==  " В") )
 			{
-				O.m_UnitStr += "О";
+				O.m_UnitStr += _R("О");
 				if (find(m_Oborottos.begin(),  m_Oborottos.end(), O.m_UnitStr) == m_Oborottos.end())
 					m_Oborottos.push_back(O);
 			};

@@ -100,7 +100,7 @@ public:
 	bool IsChar (int c) const;
 	bool IsAsterisk () const;
 	bool HasSingleSpaceAfter()  const;
-	bool IsString (const char* s) const;
+	bool IsString (const std::string&) const;
 	int  ToInt () const;
 	bool IsEndTextPeriodDescriptor (int d) const;
 	bool HasMacroSyntaxDelimiter () const;

@@ -33,9 +33,8 @@ std::string FindByNumber(QWORD Number, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 -
 
 int IsAdverbRule(const std::string& Lemma)
 {
-	
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
-		if (!strcmp (Lemma.c_str(), NumeralToNumber[i].m_Adverb))
+		if (Lemma == NumeralToNumber[i].m_Adverb)
 			return NumeralToNumber[i].m_Number;
 
    return -1;
@@ -68,7 +67,7 @@ QWORD GetNounNumeral(const std::string& word)
 
 std::string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
 {	 
-	if (x == 0) return IsOrdinal ? "НУЛЕВОЙ" : "НОЛЬ";
+	if (x == 0) return IsOrdinal ? _R("НУЛЕВОЙ") : _R("НОЛЬ");
 	if (x < 20)
 		return FindByNumber(x, IsOrdinal);
 	if (x < 100) {
@@ -85,16 +84,18 @@ std::string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 
 	}
 	if (x < 1000000) {
 		if (x % 1000 == 0)
-			if ( x % 10000 == 1000 && (x % 100000)/10000 != 1)
-				return (x % 1000000 != 1000 ? spellout_number_ru((x / 10000)*10, IsOrdinal*10) + " " : "") +
-				+ (IsOrdinal==0 ? "ОДНА ТЫСЯЧА" : "ОДНОТЫСЯЧНЫЙ");
+			if (x % 10000 == 1000 && (x % 100000) / 10000 != 1) {
+				std::string s1 = (x % 1000000 != 1000 ? spellout_number_ru((x / 10000) * 10, IsOrdinal * 10) + " " : "");
+				std::string s2 = (IsOrdinal == 0 ? _R("ОДНА ТЫСЯЧА") : _R("ОДНОТЫСЯЧНЫЙ"));
+				return s1 + s2;
+			}
 			else
 			if (IsOrdinal==0)
 				if ( x % 10000 != 0 && x % 10000 < 5000 && (x % 100000)/10000 != 1) 
-					return (x % 10000 == 2000 ? (x % 1000000 != 2000 ? spellout_number_ru((x / 10000)*10, IsOrdinal) + " " : "") + "ДВЕ" : 
-					spellout_number_ru(x / 1000, IsOrdinal)) + " ТЫСЯЧИ";
-				else return spellout_number_ru(x / 1000, IsOrdinal) + " ТЫСЯЧ";
-			else return spellout_number_ru(x / 1000 , IsOrdinal*10) + "ТЫСЯЧНЫЙ";
+					return (x % 10000 == 2000 ? (x % 1000000 != 2000 ? spellout_number_ru((x / 10000)*10, IsOrdinal) + " " : "") + _R("ДВЕ") : 
+					spellout_number_ru(x / 1000, IsOrdinal)) + _R(" ТЫСЯЧИ");
+				else return spellout_number_ru(x / 1000, IsOrdinal) + _R(" ТЫСЯЧ");
+			else return spellout_number_ru(x / 1000 , IsOrdinal*10) + _R("ТЫСЯЧНЫЙ");
 		else
 			return spellout_number_ru((x / 1000) * 1000, 0) + " " +
 						spellout_number_ru(x % 1000, IsOrdinal);
@@ -105,13 +106,13 @@ std::string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 
 		std::string m = FindByNumber(Q);
 		if (x % Q == 0)
 			if ( x % (10*Q) == Q ) return spellout_number_ru(x / Q , IsOrdinal*10) + 
-				(IsOrdinal==0 ? " " + m : m + "НЫЙ");
+				(IsOrdinal==0 ? " " + m : m + _R("НЫЙ"));
 			else
 			if (IsOrdinal==0)
 				if ( x % (10*Q) != 0 && x % (10*Q) < 5*Q && (x % (100*Q))/(10*Q) != 1) 
-					return  spellout_number_ru(x / Q, IsOrdinal) + " " + m + "А"; //МИЛЛИОНА
-				else return spellout_number_ru(x / Q, IsOrdinal) + " " + m + "ОВ"; //МИЛЛИОНОВ
-			else return spellout_number_ru(x / Q , IsOrdinal*10) + m + "НЫЙ"; //МИЛЛИОНЫЙ
+					return  spellout_number_ru(x / Q, IsOrdinal) + " " + m + _R("А"); //МИЛЛИОНА
+				else return spellout_number_ru(x / Q, IsOrdinal) + " " + m + _R("ОВ"); //МИЛЛИОНОВ
+			else return spellout_number_ru(x / Q , IsOrdinal*10) + m + _R("НЫЙ"); //МИЛЛИОНЫЙ
 		else
 			return spellout_number_ru((x / Q) * Q, 0) + " " +
 						spellout_number_ru(x % Q, IsOrdinal);

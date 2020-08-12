@@ -19,8 +19,8 @@ CFormatCaller *CRusSentence::GetNewFormatCaller() const {
 CRusSentence::CRusSentence(const CSyntaxOpt *pSyntaxOptions) : CSentence(pSyntaxOptions) {
     InitClauseVectorRules();
 
-    m_KOTORYI_INDEX = GetOpt()->GetOborDic()->FindSubConj("КОТОРЫЙ");
-    m_CHEI_INDEX = GetOpt()->GetOborDic()->FindSubConj("ЧЕЙ");
+    m_KOTORYI_INDEX = GetOpt()->GetOborDic()->FindSubConj(_R("КОТОРЫЙ"));
+    m_CHEI_INDEX = GetOpt()->GetOborDic()->FindSubConj(_R("ЧЕЙ"));
 
 }
 
@@ -109,7 +109,7 @@ bool CRusSentence::RunSyntaxInClauses(ESynRulesSet type) {
 
 
 void TryBuildVerbLemmaWithKa(CSynWord &W) {
-    if (W.m_strWord.find("-ка") == std::string::npos) return;
+    if (W.m_strWord.find(_R("-ка")) == std::string::npos) return;
 
     for (int i = 0; i < W.m_Homonyms.size(); i++) {
         if (W.m_Homonyms[i].HasPos(VERB))
@@ -183,7 +183,7 @@ void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, std::string psAn
     H.m_lPradigmID = plPardigmID;
 
     H.m_lFreqHom = 1;
-    s = "НЕЧЕГО";
+    s = _R("НЕЧЕГО");
     H.SetLemma(s);
     H.m_iCmpnLen = 6;
     H.m_LemSign = '+';
@@ -261,9 +261,9 @@ void CRusSentence::DisruptPronounPredik() {
         if (m_Words[i + 2].HasOborot1() != m_Words[i + 2].HasOborot2()) continue;
 
         int ihom = m_Words[i + 2].GetHomonymByPOS(PRONOUN);
-        if (m_Words[i].FindLemma("НЕ")
+        if (m_Words[i].FindLemma(_R("НЕ"))
             && m_Words[i + 1].GetHomonymByPOS(PREP) != -1
-            && m_Words[i + 2].FindLemma("ЧТО")
+            && m_Words[i + 2].FindLemma(_R("ЧТО"))
             && ihom != -1
                 ) {
             QWORD lOldGrammems = m_Words[i + 2].m_Homonyms[ihom].m_iGrammems;
@@ -282,7 +282,7 @@ void CRusSentence::DisruptPronounPredik() {
 
 
 const long CommonNounPrefixesCount = 2;
-const std::string CommonNounPrefixes[CommonNounPrefixesCount] = {"ВИЦЕ-", "ЭКС-"};
+const std::string CommonNounPrefixes[CommonNounPrefixesCount] = {_R("ВИЦЕ-"), _R("ЭКС-")};
 
 
 void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, std::string psAncode, std::string sLem, std::string TypeAncode) {

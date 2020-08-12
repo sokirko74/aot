@@ -276,10 +276,10 @@ bool CGerSentence::RuleForModalVerb(int iClauseNum)
 		const SClauseType&  type = pMainClause->m_vectorTypes[0];
 		if (type.m_Root.IsEmpty()) return false;
 		const CSynHomonym& H = m_Words[type.m_Root.m_WordNo].m_Homonyms[type.m_Root.m_HomonymNo];
-		if	(		!H.IsLemma("MЬSSEN")
-				&&	!H.IsLemma("KЦNNEN")
-				&&	!H.IsLemma("DЬRFEN")
-				&&	!H.IsLemma("MЦGEN")
+		if	(		!H.IsLemma(_G("MÜSSEN"))
+				&&	!H.IsLemma(_G("KÖNNEN"))
+				&&	!H.IsLemma(_G("DÜRFEN"))
+				&&	!H.IsLemma(_G("MÖGEN"))
 				&&	!H.IsLemma("WOLLEN")
 				&&	!H.IsLemma("SOLLEN")
 				&&	!H.IsLemma("LASSEN")

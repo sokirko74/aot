@@ -14,7 +14,7 @@ enum{
 };
 struct label_info{
 	int type;
-	const char * str;
+	std::string str;
 };
 
 

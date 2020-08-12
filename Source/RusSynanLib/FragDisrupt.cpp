@@ -415,7 +415,7 @@ bool CRusSentence::RuleForDisruptConjUnion(int iClauseNum)
 	bool bPredikatConj = false;
 	if (!pClauseLeft.m_vectorTypes.empty())
 		if ( pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo == pClauseLeft.m_iFirstWord )
-			if (GetWords()[pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo].m_strUpperWord == "БУДЬ")
+			if (GetWords()[pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo].m_strUpperWord == _R("БУДЬ"))
 				bPredikatConj = true;
 
 	vector<int> Types;
@@ -430,7 +430,7 @@ bool CRusSentence::RuleForDisruptConjUnion(int iClauseNum)
 		if (GetOpt()->m_DisruptConjGroupType == Types[i] )
 		{
 		  /*
-		    если вершина преовй клаузы был "будь", тогда первую клаузу
+		    если вершина преовй клаузы был _R("будь"), тогда первую клаузу
 			надо сдлеать пустыхой, поскольку она вошла в группа разрывных союзов
 			и параметры объед. клаузы нужно брать от второй клаузы
 		  */

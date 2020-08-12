@@ -959,7 +959,8 @@ static UINT MakeProc(LPVOID pArg)
 						}
 			case TranslatorCheck:
 						{
-							std::string SemGraph = (const char*)pDlg->piSeman->FindSituations(pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),0,"общ",20000,-1,"");
+							std::string SemGraph = (const char*)pDlg->piSeman->FindSituations(
+								pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),0, _R("общ"), 20000,-1,"");
 							std::string SynGraph = (const char*)pDlg->piSeman->TranslateToEnglish();
 							Result  = (const char*)pDlg->piSeman->BuildSentence();
 							break;
@@ -988,12 +989,12 @@ static UINT MakeProc(LPVOID pArg)
 							}
 
 							
-							Result = (const char*)pDlg->piSeman->FindSituations(SourceText.c_str(),0,"общ",20000,-1,"");
+							Result = (const char*)pDlg->piSeman->FindSituations(SourceText.c_str(),0,_R("общ"),20000,-1,"");
 							pDlg->piSeman->SetLemmasToReplace(LemmasToReplace.c_str());
 							if (!Question.empty())
 							{
 								pDlg->piSeman->SaveThisSentence();
-								pDlg->piSeman->FindSituations(Question.c_str(),0,"общ",20000,-1,"");
+								pDlg->piSeman->FindSituations(Question.c_str(),0, _R("общ"),20000,-1,"");
 								Result  = pDlg->piSeman->Answer();
 							}
 							else

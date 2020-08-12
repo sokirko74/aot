@@ -160,7 +160,7 @@ struct CConSent {
 	BYTE LastChar () const { return GetUnit(m_HardGraphEndNo).GetToken()[GetUnit(m_HardGraphEndNo).GetTokenLength()-1]; };
 	BYTE FirstChar ()	const { return GetUnit(m_HardGraphStartNo).GetToken()[0]; }; 
 	const CGraLine&     FirstUnit ()	 const { return GetUnit(m_HardGraphStartNo); };
-	bool  IsFirstWord(const char* s)	 const;
+	bool  IsFirstWord(const std::string& )	 const;
 	const CGraLine&     LastUnit ()	const { return GetUnit(m_HardGraphEndNo); };
 
 	bool  IsGround() const {return m_StartNo != UnGroundNo;};

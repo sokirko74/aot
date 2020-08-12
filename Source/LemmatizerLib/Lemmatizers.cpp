@@ -24,7 +24,7 @@ CLemmatizer::~CLemmatizer()
 std::string CLemmatizer::GetPath()  const
 {
 	std::string RegStr = GetRegistryString();
-	//fprintf (stderr,"1");
+	//fprintf (stderr,_R("1"));
 	std::string load_path = ::GetRegistryString( RegStr );
 	//fprintf (stderr,"2");
 	if (	(load_path.length() > 0)	
@@ -105,7 +105,7 @@ bool CLemmatizer::LemmatizeWord(std::string& InputWordStr, const bool cap, const
 					};
 			};
 
-			// отменяем предсказание по местоимениям, например "Семыкиным"
+			// отменяем предсказание по местоимениям, например _R("Семыкиным")
 			for (size_t i=0; i<results.size(); i++)
 				if (m_NPSs[results[i].m_ModelNo] == UnknownPartOfSpeech)
 				{
@@ -366,7 +366,7 @@ bool CLemmatizer::CreateParadigmCollection(bool bNorm, std::string& InputWordStr
 		for(int n = 0; n < NumeralToNumberCount; n++)
 		{
 			if( !NumeralToNumber[n].m_bNoun ) continue;
-			int len = strlen(NumeralToNumber[n].m_Ordinal);
+			int len = NumeralToNumber[n].m_Ordinal.length();
 			if(NumeralToNumber[n].m_Ordinal[0]!=0 && InputWordStr.length()>len+1
 				&& (pos = InputWordStr.substr(InputWordStr.length() - len - 1).rfind(std::string(NumeralToNumber[n].m_Ordinal).substr(0, len - 2))) != std::string::npos)
 			{
@@ -599,15 +599,15 @@ bool CLemmatizer::ProcessHyphenWords(CGraphmatFile* piGraphmatFile) const
 CLemmatizerRussian::CLemmatizerRussian() : CLemmatizer(morphRussian)
 {
 	m_Registry = "Software\\Dialing\\Lemmatizer\\Russian\\DictPath";
-	m_HyphenPostfixes.insert("КА");
-	m_HyphenPostfixes.insert("ТО");
-	m_HyphenPostfixes.insert("С");
+	m_HyphenPostfixes.insert(_R("КА"));
+	m_HyphenPostfixes.insert(_R("ТО"));
+	m_HyphenPostfixes.insert(_R("С"));
 
-    m_HyphenPrefixes.insert("ПОЛУ");
-    m_HyphenPrefixes.insert("ПОЛ");
-    m_HyphenPrefixes.insert("ВИЦЕ");
-    m_HyphenPrefixes.insert("МИНИ");
-    m_HyphenPrefixes.insert("КИК");
+    m_HyphenPrefixes.insert(_R("ПОЛУ"));
+    m_HyphenPrefixes.insert(_R("ПОЛ"));
+    m_HyphenPrefixes.insert(_R("ВИЦЕ"));
+    m_HyphenPrefixes.insert(_R("МИНИ"));
+    m_HyphenPrefixes.insert(_R("КИК"));
 };
 
 
@@ -616,7 +616,7 @@ void CLemmatizerRussian::FilterSrc(std::string& src) const
 	if (!m_bAllowRussianJo)
 		ConvertJO2Je(src); 
 
-	// переводим ' в "ъ", например, "об'явление" -> "объявление"
+	// переводим ' в _R("ъ"), например, "об'явление" -> _R("объявление")
 	size_t len = src.length();
 	for (size_t i=0; i<len; i++)
 		if (src[i] == '\'')

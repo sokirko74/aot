@@ -344,7 +344,7 @@ int CGraphmatFile::DealReferences (size_t i,size_t HB)
    if ( (nt == HB) || ((nt -k) > 20)) return false;
 
    if	(		(GetUnits()[nt].GetTokenLength() != 2) 
-			||	strncmp (GetUppercaseToken(nt), "СТ",2)
+			|| _R("СТ") != GetUppercaseToken(nt)
 		) 
 	  return false;
 

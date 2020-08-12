@@ -122,7 +122,7 @@ bool CRusSemStructure:: ClauseHasCompAdj (long ClauseNo) const
 	for (size_t i=0; i< m_Nodes.size(); i++)
 		if (    IsInClause(i, ClauseNo) 
 		 	 &&  (    IsCompAdj(i)
-			      || HasSynRelation (i, "АНАТ_СРАВН")
+			      || HasSynRelation (i, _R("АНАТ_СРАВН"))
 				  || (     HasRichPOS(i, NUMERAL)
 					   && m_Nodes[i].HasOneGrammem (rComparative)
 				     )
@@ -138,7 +138,7 @@ bool CRusSemStructure:: ClauseHasChem(long ClauseNo) const
 	for (size_t i=0; i< m_Nodes.size(); i++)
 		if (    IsInClause(i, ClauseNo) 
 		 	 && m_Nodes[i].IsPrimitive()
-			 && ( m_Nodes[i].m_Words[0].m_Lemma == "ЧЕМ")
+			 && ( m_Nodes[i].m_Words[0].m_Lemma == _R("ЧЕМ"))
 		   )
 		   return true;
 
@@ -152,7 +152,7 @@ bool CRusSemStructure:: ClauseHasNegation (long ClauseNo) const
 	for (size_t i=0; i< m_Nodes.size(); i++)
 		if (    IsInClause(i, ClauseNo) 
 			 && m_Nodes[i].IsPrimitive()
-		 	 && (m_Nodes[i].m_Words[0].m_Lemma == "НЕ")
+		 	 && (m_Nodes[i].m_Words[0].m_Lemma == _R("НЕ"))
 		   )
 		   return true;
 
@@ -164,7 +164,7 @@ bool CRusSemStructure:: ClauseHasNegationInVerb (long ClauseNo) const
 	for (size_t i=0; i< m_Nodes.size(); i++)
 		if (    IsInClause(i, ClauseNo) 
 			 && m_Nodes[i].IsPrimitive()
-		 	 && m_Nodes[i].HasRelOperator("НЕ")
+		 	 && m_Nodes[i].HasRelOperator(_R("НЕ"))
 			 && IsVerbForm(m_Nodes[i])
 		   )
 		   return true;
@@ -268,7 +268,7 @@ bool CRusSemStructure::TryClauseSubordConj(long ClauseRuleNo, long ClauseNo1, lo
 	long NodeNo = FindFirstNode(ClauseNo2);
 	if  (NodeNo == -1) return 0;
 	assert (m_Nodes[NodeNo].m_Words.size() > 0);
-	if (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЧТО") return false;
+	if (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ЧТО")) return false;
 
 	// получение вершины второй клаузы, сравниваем ее граммемы и часть речи с GF2 союза 
 	vector<long> Nodes2;
@@ -283,17 +283,17 @@ bool CRusSemStructure::TryClauseSubordConj(long ClauseRuleNo, long ClauseNo1, lo
 	{
 		std::string SynRel = P.GetSynRelStr(l);
 
-		if  (    (SynRel == "инф") 
+		if  (    (SynRel == _R("инф")) 
 			&& IsInfinitiveOrMNAInfinitive(Nodes2[1])
 			) 
 			break;
 
-		if  (    (SynRel == "ГГ_прш") 
+		if  (    (SynRel == _R("ГГ_прш")) 
 			&& m_Nodes[Nodes2[1]].HasOneGrammem( rPastTense)
 			) break;
 
-		if  (     (SynRel == "ПРОП") 
-			||  (SynRel == "ГГ")
+		if  (     (SynRel == _R("ПРОП")) 
+			||  (SynRel == _R("ГГ"))
 			) break;
 	};
 
@@ -317,10 +317,10 @@ bool CRusSemStructure::TryClauseCHTO_TOT_Dop(long ClauseRuleNo, long ClauseNo1, 
 	const CDictUnitInterp* Conj =   GetSubordConjFromTheBegining(ClauseNo2);
 	if (Conj == 0) return false;
 
-	// проверка, что это "что" 
+	// проверка, что это _R("что") 
 	long NodeNo = FindFirstNode(ClauseNo2);
 	if  (NodeNo == -1) return 0;
-	if (!m_Nodes[NodeNo].IsLemma("ЧТО")) return false;
+	if (!m_Nodes[NodeNo].IsLemma(_R("ЧТО"))) return false;
 
 	vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
@@ -333,7 +333,7 @@ bool CRusSemStructure::TryClauseCHTO_TOT_Dop(long ClauseRuleNo, long ClauseNo1, 
 		if (m_Nodes[i].IsWordContainer())
 			break;
 
-	if (    !m_Nodes[i].IsLemma("ТОТ")
+	if (    !m_Nodes[i].IsLemma(_R("ТОТ"))
 		|| !m_Nodes[i].HasOneGrammem (rNeutrum)
 		)
 		return false;
@@ -361,7 +361,7 @@ bool CRusSemStructure::TryClauseParenthesis(long ClauseRuleNo, long ClauseNo1, l
 {
 	long i=0;
 	for (; i < m_SynClauseRels.size();  i++)
-		if (   (m_SynClauseRels[i].m_SynRelName == "ВВОДН_КЛАУЗА")
+		if (   (m_SynClauseRels[i].m_SynRelName == _R("ВВОДН_КЛАУЗА"))
 			&& (m_SynClauseRels[i].m_SourceNodeNo == ClauseNo1)
 			&& (m_SynClauseRels[i].m_TargetNodeNo == ClauseNo2)
 			)
@@ -378,7 +378,7 @@ bool CRusSemStructure::TryClauseParenthesis(long ClauseRuleNo, long ClauseNo1, l
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (Nodes2.size() != 1)  return false;
 
-	AddRelation(CRusSemRelation(CValency ("МСДЛ",A_C), Nodes1[0], Nodes2[0],   "ВВОДН"));
+	AddRelation(CRusSemRelation(CValency (_R("МСДЛ"),A_C), Nodes1[0], Nodes2[0],   _R("ВВОДН")));
 	m_Relations[m_Relations.size()-1].m_ClauseRuleNo = ClauseRuleNo;
 
 	/*
@@ -399,7 +399,7 @@ bool CRusSemStructure::TryClauseNSO(long ClauseRuleNo, long ClauseNo1, long Clau
 {
 	long i=0;
 	for (; i < m_SynClauseRels.size();  i++)
-		if (   (m_SynClauseRels[i].m_SynRelName == "ПРИЛ_СУЩ")
+		if (   (m_SynClauseRels[i].m_SynRelName == _R("ПРИЛ_СУЩ"))
 			&& (m_SynClauseRels[i].m_SourceNodeNo == ClauseNo1)
 			&& (m_SynClauseRels[i].m_TargetNodeNo == ClauseNo2)
 			)
@@ -424,7 +424,7 @@ bool CRusSemStructure::TryClauseNSO(long ClauseRuleNo, long ClauseNo1, long Clau
 	if ( NodeNo == m_Clauses[ClauseNo1].m_EndNodeNo )	return false;
 
 
-	AddRelation(CRusSemRelation(CValency ("PROPERT",A_C), NodeNo, Nodes2[0],   "НСО")); 
+	AddRelation(CRusSemRelation(CValency ("PROPERT",A_C), NodeNo, Nodes2[0],   _R("НСО"))); 
 	m_Relations[m_Relations.size()-1].m_ClauseRuleNo = ClauseRuleNo;
 
 	return true;
@@ -432,11 +432,11 @@ bool CRusSemStructure::TryClauseNSO(long ClauseRuleNo, long ClauseNo1, long Clau
 
 const CConj SimpleCoordConj[]  =
 {
-	{"И","" ,"AND"},
-	{"А","" , "BUT"},
-	{"ТОЧНО","" , "ALIKE"},	
-	{"НО","" , "BUT"},
-	{"ИЛИ", "" ,"OR"}
+	{_R("И"),"" ,"AND"},
+	{_R("А"),"" , "BUT"},
+	{_R("ТОЧНО"),"" , "ALIKE"},	
+	{_R("НО"),"" , "BUT"},
+	{_R("ИЛИ"), "" ,"OR"}
 };	
 
 
@@ -459,7 +459,7 @@ bool CRusSemStructure::IsCoordConj(long NodeNo)  const
 				&& m_pData->Oborottos[m_Nodes[NodeNo].GetUnitNo()].m_bRusCoordConj
 		)
 		||(      m_Nodes[NodeNo].IsPrimitive()
-		&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ПОТОМ")
+		&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ПОТОМ"))
 		)
 		||(      m_Nodes[NodeNo].IsPrimitive()
 			&&	m_Nodes[NodeNo].HasPOS(CONJ)
@@ -529,7 +529,7 @@ long CRusSemStructure::GetCoordSimpleConj (long m_ClauseNo) const
 
 bool CRusSemStructure::IsConjWord (long NodeNo)  const
 {
-  return HasGramFetAfterColon (NodeNo, "ВОПР");
+  return HasGramFetAfterColon (NodeNo, _R("ВОПР"));
 };
 
 long CRusSemStructure::GetConjWordFromClause (long ClauseNo) const
@@ -625,15 +625,15 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 	CSynRealization SynReal;
 
 	// для союза "что" есть  отдельное правило:TryClauseAnaphoricSubordWithoutAntecedent
-	if (m_Nodes[ConjNodeNo].m_Words[0].m_Lemma == "ЧТО")
+	if (m_Nodes[ConjNodeNo].m_Words[0].m_Lemma == _R("ЧТО"))
 		return false;
 
 
 	// вопрос, где жить, мы снимем.
 	for (long i=0; i <m_Nodes.size(); i++)
 		if (    IsInClause(i, ClauseNo1)    
-			&& (    GetFreeActantPattern (i, P,  SynReal, "ПРИД_ПР", true,  "", true)
-			|| GetFreeActantPattern (i, P,  SynReal, "ПРИД_ПР_без_что", true,  "", true)
+			&& (    GetFreeActantPattern (i, P,  SynReal, _R("ПРИД_ПР"), true,  "", true)
+			|| GetFreeActantPattern (i, P,  SynReal, _R("ПРИД_ПР_без_что"), true,  "", true)
 			)
 
 			)
@@ -650,8 +650,8 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 		};
 	if (NodeNo != -1)
 	{
-		if (!GetFreeActantPattern (NodeNo, P,  SynReal, "ПРИД_ПР",true, "", true))
-			GetFreeActantPattern (NodeNo, P,  SynReal, "ПРИД_ПР_без_что",true, "", true);
+		if (!GetFreeActantPattern (NodeNo, P,  SynReal, _R("ПРИД_ПР"),true, "", true))
+			GetFreeActantPattern (NodeNo, P,  SynReal, _R("ПРИД_ПР_без_что"),true, "", true);
 
 		P.m_PatternValency.m_RossHolder = GetRossHolder(Ross);
 		AddRelation(CRusSemRelation(P.m_PatternValency, NodeNo, ConjNodeNo,   ""));
@@ -667,7 +667,7 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 		vector<long> Nodes;
 		GetOutcomingNodes(NodeNo,Nodes, false);
 		for (long j=0; j < Nodes.size(); j++)
-			if (   m_Nodes[Nodes[j]].IsLemma("ТОТ")
+			if (   m_Nodes[Nodes[j]].IsLemma(_R("ТОТ"))
 				&& m_Nodes[Nodes[j]].HasThePrep(O_UnitNo)
 				)
 				m_Nodes[Nodes[j]].m_bToDelete = true;
@@ -720,19 +720,19 @@ bool CRusSemStructure::TryClauseCHTOBY_GG (long ClauseRuleNo, long ClauseNo1, lo
   std::string ConjStr =  m_Nodes[ConjNodeNo].m_Words[0].m_Word;
 
   // если союз заполнил валентность в прид.пред, то это не союз, а союзное слово
-  if (ConjStr == "ЧТО") 
+  if (ConjStr == _R("ЧТО")) 
     if (GetIncomingRelationsCount (ConjNodeNo ) > 0) 
 		return false;
 
   // союз 'что' должен лежать в обооротах
-  if (ConjStr == "ЧТО") 
+  if (ConjStr == _R("ЧТО")) 
     if (m_Nodes[ConjNodeNo].GetType() != OborRoss) 
 		return false;
 
 
   
-  if (    (ConjStr == "ЧТОБЫ")
-	   || (ConjStr == "ЧТО") 
+  if (    (ConjStr == _R("ЧТОБЫ"))
+	   || (ConjStr == _R("ЧТО")) 
                              //  появилась женщина , такая красивая , что они остановились
 	 )
   // ищем незаполненную валентность, которая выражается чтобы+ГГ_прш
@@ -790,7 +790,7 @@ bool CRusSemStructure::TryClauseCHTOBY_GG (long ClauseRuleNo, long ClauseNo1, lo
        if (! CreateClauseRelation(ClauseRuleNo, ClauseNo1, ClauseNo2, V, ConjNodeNo, *Conj, NodeNo)) return false;
 	   BestSynReal.m_Conj = *Conj;
 	   m_Relations[m_Relations.size() - 1].m_SynReal =  BestSynReal;
-	   m_Relations[m_Relations.size() - 1].m_SyntacticRelation = "ПРИД_ПР";
+	   m_Relations[m_Relations.size() - 1].m_SyntacticRelation = _R("ПРИД_ПР");
 
 	   return true;
 	 };
@@ -970,9 +970,9 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
   long  AnaphoricNodeNo = FindFirstNode (ClauseNo2);
   if (AnaphoricNodeNo == -1) return false;
   if (!m_Nodes[AnaphoricNodeNo].IsPrimitive()) return false;
-  if (    (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma != "КТО") 
-	  &&  (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma != "ЧТО") 
-	  &&  (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma != "КАК") 
+  if (    (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma != _R("КТО")) 
+	  &&  (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma != _R("ЧТО")) 
+	  &&  (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma != _R("КАК")) 
 	 )
 	 return false;
 
@@ -994,9 +994,9 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
 	   CSynRealization SynReal;
 	   
 	   if  (    (Nodes2.size() == 1) // союзное слово (является членом предложения в подч. клаузе)
-			&& (!GetFreeActantPattern(NodeNo, P, SynReal, "ПРИД_ПР_без_что",true, "", false))
-			&& (    GetFreeActantPattern(NodeNo, P, SynReal, "п_доп", true, "", false)
-			    ||  GetFreeActantPattern(NodeNo, P, SynReal, "ПРИД_ПР",true, "", true)
+			&& (!GetFreeActantPattern(NodeNo, P, SynReal, _R("ПРИД_ПР_без_что"),true, "", false))
+			&& (    GetFreeActantPattern(NodeNo, P, SynReal, _R("п_доп"), true, "", false)
+			    ||  GetFreeActantPattern(NodeNo, P, SynReal, _R("ПРИД_ПР"),true, "", true)
 			   )
 			   /* GF  = п_доп:В
 				  GF  = ПРИД_ПР
@@ -1017,11 +1017,11 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
 	   else // союз
 		 if (	     (m_Nodes[AnaphoricNodeNo].GetType() == OborRoss)
 				 &&  m_Nodes[AnaphoricNodeNo].IsPrimitive()
-				 &&  (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma == "ЧТО")
+				 &&  (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma == _R("ЧТО"))
 			)
 	     if (        GetFreeActantPattern(NodeNo, P,SynReal, "",false, "что+ГГ", true)
 			     &&  (Nodes2.size() == 2)
-			     && !HasRichPOS(Nodes2[1], INFINITIVE) // "я знаю, что делать", инфинитив не может подчиняться союзу "что"
+			     && !HasRichPOS(Nodes2[1], INFINITIVE) // "я знаю, что делать", инфинитив не может подчиняться союзу _R("что")
 			) 
 		  {
 				 // я знаю, что ты ушел
@@ -1061,7 +1061,7 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
      if  (    ( Nodes2.size() == 1) // союзное слово (является членом предложения в подч. клаузе)
 		   && (m_Nodes[AnaphoricNodeNo].GetType() != OborRoss)
 		   && m_Nodes[AnaphoricNodeNo].IsPrimitive()
-		   && (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma == "ЧТО")
+		   && (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma == _R("ЧТО"))
 		 )
 	   {
               
@@ -1141,21 +1141,21 @@ CRusSemNode  CRusSemStructure::CreateAnaphoricPronoun (long PrototypeNode)
 
     std::string Lemma;
 	if (m_Nodes[PrototypeNode].HasOneGrammem (rPlural) )
-		Lemma = "ОНИ";
+		Lemma = _R("ОНИ");
 	else
 	  if (m_Nodes[PrototypeNode].HasOneGrammem (rNeutrum))
-			Lemma = "ОНО";
+			Lemma = _R("ОНО");
 	  else
 	   if (m_Nodes[PrototypeNode].HasOneGrammem (rMasculinum))
-			Lemma = "ОН";
+			Lemma = _R("ОН");
 	    else
 		  if (m_Nodes[PrototypeNode].HasOneGrammem (rFeminum))
-			Lemma = "ОНА";
+			Lemma = _R("ОНА");
 		  else
 			  if (m_Nodes[PrototypeNode].m_NodeType == MNA)
-				  Lemma = "ОНИ";
+				  Lemma = _R("ОНИ");
 			  else
-				  Lemma = "ОН";
+				  Lemma = _R("ОН");
 
   CRusSemNode N	= CreatePronounByLemma(Lemma);
   N.m_NodeSemFets = m_Nodes[PrototypeNode].m_NodeSemFets;
@@ -1173,7 +1173,7 @@ bool CRusSemStructure::TryClauseCHTO_WITH_ANIMAT (long ClauseRuleNo, long Clause
   CDictUnitInterp* Conj =  m_Nodes[ConjNodeNo].GetInterp();
   std::string ConjStr =  m_Nodes[ConjNodeNo].m_Words[0].m_Word;
 
-  if (ConjStr != "ЧТО")   return false;
+  if (ConjStr != _R("ЧТО"))   return false;
   if (Conj == 0) return false;
   if (Conj->m_DictType != Ross) return false;
 
@@ -1181,7 +1181,7 @@ bool CRusSemStructure::TryClauseCHTO_WITH_ANIMAT (long ClauseRuleNo, long Clause
   CRelSet R = GetIncomingRelations(ConjNodeNo,  false);
   if (R.m_RelsCount == 0) 
 		return false;
-  if (m_Relations[R.m_Rels[0]].m_SyntacticRelation != "подл")
+  if (m_Relations[R.m_Rels[0]].m_SyntacticRelation != _R("подл"))
 	  return false;
   long Root2 = m_Relations[R.m_Rels[0]].m_SourceNodeNo;
   // 1)  проверить, что первой валентности приписаны только SF1 = ANIM или разновидности ANIM
@@ -1216,9 +1216,9 @@ bool CRusSemStructure::TryClauseCHTO_WITH_ANIMAT (long ClauseRuleNo, long Clause
  newRel.m_TargetNodeNo =  InsertNode(NewSubj);
  AddRelation(newRel);
  //всегда возвращаем false, поскольку другая процедура должна построить межклаузную связь на союзе
- // "что", который теперь уже союз, ведь он стоит изолированно
+ // _R("что"), который теперь уже союз, ведь он стоит изолированно
  Conj->m_DictType  = OborRoss;
- Conj->m_UnitNo  = GetRossHolder(OborRoss)->LocateUnit ("что", 1);
+ Conj->m_UnitNo  = GetRossHolder(OborRoss)->LocateUnit (_R("что"), 1);
  return false;
 };
 
@@ -1281,7 +1281,7 @@ bool CRusSemStructure::TryClauseSimpleComma (long ClauseRuleNo, long ClauseNo1, 
   if (m_Nodes[Nodes1[0]].HasPOS(PARTICIPLE) != m_Nodes[Nodes2[0]].HasPOS(PARTICIPLE) ) return false;
 
 
-  AddRelation(CRusSemRelation(CValency("AND", A_C), Nodes1[0], Nodes2[0],   "примык"));
+  AddRelation(CRusSemRelation(CValency("AND", A_C), Nodes1[0], Nodes2[0],   _R("примык")));
   m_Relations[m_Relations.size()-1].m_ClauseRuleNo = ClauseRuleNo;
   return true;
 };
@@ -1301,7 +1301,7 @@ bool CRusSemStructure::TryBracketClause(long ClauseRuleNo, long ClauseNo1, long 
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (   (Nodes2.size() != 1) ) return false;
 
-	AddRelation(CRusSemRelation(CValency("TOGETHER", A_C), Nodes1[0], Nodes2[0],   "примык"));  m_Relations[m_Relations.size()-1].m_ClauseRuleNo = ClauseRuleNo;
+	AddRelation(CRusSemRelation(CValency("TOGETHER", A_C), Nodes1[0], Nodes2[0],   _R("примык")));  m_Relations[m_Relations.size()-1].m_ClauseRuleNo = ClauseRuleNo;
 	return true;
 };
 
@@ -1361,20 +1361,20 @@ bool CRusSemStructure::TryClauseSubordDoubleConj (long ClauseRuleNo, long Clause
   for (; l < P.m_GramCorteges.size();l++)
   {
 	 std::string SynRel = P.GetSynRelStr(l);
-	 if  (    (SynRel == "инф") 
+	 if  (    (SynRel == _R("инф")) 
 		   && IsInfinitiveOrMNAInfinitive(Nodes2[0])
 		 ) 
 	 break;
-	 if  (    (SynRel == "ГГ_прш") 
+	 if  (    (SynRel == _R("ГГ_прш")) 
 		   && m_Nodes[Nodes2[0]].HasOneGrammem (rPastTense)  
 		 ) break;
-     if  (    (SynRel == "ПРОП_личн") 
+     if  (    (SynRel == _R("ПРОП_личн")) 
 		   && (!HasRichPOS (Nodes2[0], INFINITIVE)) 
 		 ) 
 		 break;
 
- 	 if  (     (SynRel == "ПРОП") 
-		   ||  (SynRel == "ГГ")
+ 	 if  (     (SynRel == _R("ПРОП")) 
+		   ||  (SynRel == _R("ГГ"))
 		 ) break;
   };
 
@@ -1608,8 +1608,8 @@ long CRusSemStructure::GetKOTORYJorKAKOJ (long ClauseNo) const
 	for (size_t i=0; i < m_Nodes.size(); i++)
 		if (IsInClause(i, ClauseNo))
 			if ( m_Nodes[i].IsPrimitive() )
-				if  (      (m_Nodes[i].m_Words[0].m_Lemma == "КОТОРЫЙ")
-					|| (m_Nodes[i].m_Words[0].m_Lemma == "КАКОЙ")
+				if  (      (m_Nodes[i].m_Words[0].m_Lemma == _R("КОТОРЫЙ"))
+					|| (m_Nodes[i].m_Words[0].m_Lemma == _R("КАКОЙ"))
 					)
 					return i;
 
@@ -1769,14 +1769,14 @@ struct CMotherLandHyp {
 
 bool IsSubordConj(std::string S)
 { 
-	return    ( S == "ЧТО")
-		  ||  ( S == "ГДЕ")
-		  ||  ( S == "КОГДА")
-		  ||  ( S == "ЧТОБЫ")
-		  ||  ( S == "ПОЧЕМУ")
-		  ||  ( S == "КАК")
-		  ||  ( S == "КОТОРЫЙ")
-		  ||  ( S == "КАКОЙ");
+	return    ( S == _R("ЧТО"))
+		  ||  ( S == _R("ГДЕ"))
+		  ||  ( S == _R("КОГДА"))
+		  ||  ( S == _R("ЧТОБЫ"))
+		  ||  ( S == _R("ПОЧЕМУ"))
+		  ||  ( S == _R("КАК"))
+		  ||  ( S == _R("КОТОРЫЙ"))
+		  ||  ( S == _R("КАКОЙ"));
 };
 
 
@@ -1796,8 +1796,8 @@ void FindAllMotherLandHypots(const CRusSemStructure& S, vector<CMotherLandHyp>& 
 			// он был больше, чем учитель.
 			long NodeNo = S.FindFirstNode(i);
 			if (NodeNo == -1) continue;
-			bool StartWithCHEM  = S.m_Nodes[NodeNo].IsLemma("ЧЕМ");
-			bool StartWithSOJUZ_A  = S.m_Nodes[NodeNo].IsLemma("А");
+			bool StartWithCHEM  = S.m_Nodes[NodeNo].IsLemma(_R("ЧЕМ"));
+			bool StartWithSOJUZ_A  = S.m_Nodes[NodeNo].IsLemma(_R("А"));
 			bool StartWithSubord =    
 								(S.GetSubordConjFromTheBegining(i) !=0)
 							|| S.IsConjWord(NodeNo);
@@ -1847,7 +1847,7 @@ void FindAllMotherLandHypots(const CRusSemStructure& S, vector<CMotherLandHyp>& 
 			// Нам надо проверить согласоание между "девочка" и "дура", толькот тогда мы 
 			// вливаем пустыху с "как"  в главную клаузу.
 
-			if (S.m_Nodes[NodeNo].IsLemma("КАК"))
+			if (S.m_Nodes[NodeNo].IsLemma(_R("КАК")))
 				if ((i-k) >= 0)
 				{
 				   long NounNodeNo1 = S.FindLeftClosestNode(NodeNo);
@@ -1985,7 +1985,7 @@ void CRusSemStructure:: ProcessParticipleAndInTheFirstClause()
 {
 	// первая клауза	
 	long NodeNo = FindFirstNode(0);
-	if (   m_Nodes[NodeNo].IsLemma("НО")  && CanBeDeleted(NodeNo))
+	if (   m_Nodes[NodeNo].IsLemma(_R("НО"))  && CanBeDeleted(NodeNo))
 	{
 		m_bHasConjBut = true;
 		DelNode(NodeNo); 
@@ -1994,8 +1994,8 @@ void CRusSemStructure:: ProcessParticipleAndInTheFirstClause()
 	};
 	if (NodeNo == -1) return;
 
-	if	(		(		m_Nodes[NodeNo].IsLemma("И") 
-					|| m_Nodes[NodeNo].IsLemma("А")
+	if	(		(		m_Nodes[NodeNo].IsLemma(_R("И")) 
+					|| m_Nodes[NodeNo].IsLemma(_R("А"))
 				)
 			&&	(NodeNo+1 < m_Clauses[0].m_EndNodeNo)
 			&&	!m_Nodes[NodeNo+1].IsWordForm(".") // не путать союз с инициалом
@@ -2006,7 +2006,7 @@ void CRusSemStructure:: ProcessParticipleAndInTheFirstClause()
 		for (; i < m_Clauses.size(); i++)
 		{
 			long NodeNo = FindFirstNode(i);
-			if (m_Nodes[NodeNo].IsLemma("И"))
+			if (m_Nodes[NodeNo].IsLemma(_R("И")))
 				break;
 		};
 		// если нашли двойной союз и...и, выходим из обработки
@@ -2024,7 +2024,7 @@ void CRusSemStructure:: ProcessParticipleAndInTheFirstClause()
 	{
 		long NodeNo = FindFirstNode(ClauseNo);
 		if (NodeNo+1 < m_Clauses[ClauseNo].m_EndNodeNo)
-			if (m_Nodes[NodeNo].IsLemma("И") )
+			if (m_Nodes[NodeNo].IsLemma(_R("И")) )
 				if(!m_Nodes[NodeNo+1].IsWordForm(".") ) // не путать союз с инициалом
 				{
 					const CDictUnitInterp* Conj =   m_Nodes[NodeNo+1].GetInterp();
@@ -2041,14 +2041,14 @@ void CRusSemStructure:: ProcessParticipleAndInTheFirstClause()
 
 };
 
-// процедура проходит по всем союзам "и" если из них не  выходит ни одной стрелки
+// процедура проходит по всем союзам _R("и") если из них не  выходит ни одной стрелки
 // и в клаузе есть узлы кроме этого союза, тогда объявлемя, что этот союз частица
 // например:
 // "С такими воспоминаниями он и засыпал"
 void CRusSemStructure:: ProcessIsolatedParticipleAnd()
 {
 	for (long i =0; i<m_Nodes.size(); i++)
-		if (   (m_Nodes[i].IsLemma("И") || m_Nodes[i].IsWordForm(","))
+		if (   (m_Nodes[i].IsLemma(_R("И")) || m_Nodes[i].IsWordForm(","))
 			&& (GetOutcomingRelationsCount(i, false) == 0)
 			&& CanBeDeleted(i)
 			&& (		(m_Nodes[i].m_ClauseNo == 0)
@@ -2059,7 +2059,7 @@ void CRusSemStructure:: ProcessIsolatedParticipleAnd()
 
 		 )
 		{
-			if (m_Nodes[i].IsLemma("И"))
+			if (m_Nodes[i].IsLemma(_R("И")))
 				m_Clauses[m_Nodes[i].m_ClauseNo].m_bHasParticleConjAnd = true;
 			DelNode(i);
 			i--;
@@ -2156,7 +2156,7 @@ void CRusSemStructure:: CorrectClauseRelations1()
 	for (long k=i+1; k < m_Relations.size(); k++)
 	  if (m_Relations[i].m_TargetNodeNo ==  m_Relations[k].m_TargetNodeNo)
 	  if(    (m_Relations[i].m_ClauseRuleNo != -1)
-		  && (m_ClauseRules[m_Relations[i].m_ClauseRuleNo].m_Name == "сочинение")
+		  && (m_ClauseRules[m_Relations[i].m_ClauseRuleNo].m_Name == _R("сочинение"))
 		)
 	  if(    (m_Relations[k].m_ClauseRuleNo != -1)
 		  && (m_ClauseRules[m_Relations[k].m_ClauseRuleNo].m_Name == "подчинение (справа налево)")
@@ -2219,7 +2219,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 		for (long i=0; i < ClausePairs.size(); i++)
 			if (    AreConnectedClauses (ClausePairs[i].first, ClausePairs[i].second)
 				&& (m_Clauses[ClausePairs[i].second].m_ClauseRuleNo != -1)
-				&& (m_ClauseRules[m_Clauses[ClausePairs[i].second].m_ClauseRuleNo].m_Name == "сочинение")
+				&& (m_ClauseRules[m_Clauses[ClausePairs[i].second].m_ClauseRuleNo].m_Name == _R("сочинение"))
 				)
 			{
 				//определяем цепочку X1, Xn, сейчас пока Х1 = m_Nodes[BorderNodePairs[i].first].m_ClauseNo
@@ -2230,7 +2230,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 					for (; k < ClausePairs.size(); k++)
 						if (      AreConnectedClauses (ClausePairs[k].first, ClausePairs[k].second)
 							&& (m_Clauses[ClausePairs[k].second].m_ClauseRuleNo != -1)
-							&& (m_ClauseRules[m_Clauses[ClausePairs[k].second].m_ClauseRuleNo].m_Name == "сочинение")
+							&& (m_ClauseRules[m_Clauses[ClausePairs[k].second].m_ClauseRuleNo].m_Name == _R("сочинение"))
 							&& (Xi ==   ClausePairs[k].first)
 							)
 							break;
@@ -2261,7 +2261,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 					этот if весьма сомнителен
 					*/
 					if (    (m_Clauses[j].m_ClauseRuleNo == -1)
-						|| (m_ClauseRules[m_Clauses[j].m_ClauseRuleNo].m_Name == "сочинение")
+						|| (m_ClauseRules[m_Clauses[j].m_ClauseRuleNo].m_Name == _R("сочинение"))
 						)
 						if (  ClausesHaveCommonSituation(i, j) )
 							Clauses.push_back(j);
@@ -2319,28 +2319,28 @@ CRusSemStructure::CRusSemStructure()
 	m_ClauseConnectionType	    = ProminentClauseRules;
 	// наверно, он ушел
 	{
-		CSemanClauseRule N(&CRusSemStructure::TryClauseParenthesis, LeftToRight, "вводное");
+		CSemanClauseRule N(&CRusSemStructure::TryClauseParenthesis, LeftToRight, _R("вводное"));
 		m_ClauseRules.push_back(N);
 	}
 
 	//"приостановить разорительную для меня реформу"
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseNSO, LeftToRight, "НСО"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseNSO, LeftToRight, _R("НСО")));
 
 	// он ушел, наверно
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseParenthesis, RightToLeft, "вводное(справо налево)"));
 
 	// я плыл, улыбаясь.
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseDeeprichastie, LeftToRight, "деепричастие"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseDeeprichastie, LeftToRight, _R("деепричастие")));
 
 	// я люблю тебя, сделавшего меня
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClausePrichastie, LeftToRight, "причастный оборот"));
 
 	// улыбаясь, я плыл
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseDeeprichastie, RightToLeft, "деепричастие"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseDeeprichastie, RightToLeft, _R("деепричастие")));
 
 	// он знал, что будет улыбаться
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTO_WITH_ANIMAT, LeftToRight, "что+SUB(ANIM)"));
-	// я помню о том, что ты сказал это сделал("что" - союз), но есть соотносительное слово
+	// я помню о том, что ты сказал это сделал(_R("что") - союз), но есть соотносительное слово
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTO_TOT_Dop, LeftToRight,"подчинение (что+ГГ)"));
 
 	// я хотел,  чтобы ты ушел
@@ -2352,7 +2352,7 @@ CRusSemStructure::CRusSemStructure()
 
 
 
-	// я знаю, что ты знаешь ("что" - член предложения)
+	// я знаю, что ты знаешь (_R("что") - член предложения)
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent, LeftToRight,"подчинение (что+ГГ)"));
 
 
@@ -2366,7 +2366,7 @@ CRusSemStructure::CRusSemStructure()
 
 
 	// мы думали, а вы  плясали
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCoordSimpleConj, LeftToRight,"сочинение"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCoordSimpleConj, LeftToRight,_R("сочинение")));
 
 	// Вчера рухнул дом, который построил Джек, .
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseKOTORYJ, LeftToRight,"определение (который)" ));
@@ -2480,7 +2480,7 @@ void CRusSemStructure::InsertNodeAsSubject (long RootNodeNo, CRusSemNode SubjNod
 	/*
 	 поскольку мы вставляем узел перед RootNodeNo, RootNodeNo нужно увеличить на единицу
 	*/
-	CRusSemRelation R(V, RootNodeNo+1, InsertNode(SubjNode), "подл");
+	CRusSemRelation R(V, RootNodeNo+1, InsertNode(SubjNode), _R("подл"));
 	AddRelation(R);
 };
 
@@ -2511,7 +2511,7 @@ long CRusSemStructure::CreateDefaultSubjectFromPreviousClause()
 			&& m_pData->GetRusGramTab()->GleicheSubjectPredicate(m_Nodes[PrevSubjNodeNo].m_GramCodes.c_str(), m_Nodes[Roots[0]].m_GramCodes.c_str() ) 
 			/* если клауза сочинена, тогда не надо восстанавливать подлежащее*/
 			&& (    (m_Clauses[ClauseNo].m_ClauseRuleNo == -1)
-			    || (m_ClauseRules[m_Clauses[ClauseNo].m_ClauseRuleNo].m_Name.substr(0,9) != "сочинение")
+			    || (m_ClauseRules[m_Clauses[ClauseNo].m_ClauseRuleNo].m_Name.substr(0,9) != _R("сочинение"))
 			   )
 
 		   )
@@ -2539,16 +2539,16 @@ long CRusSemStructure::CreateDefaultSubjectFromPreviousClause()
 			  && ( (m_Nodes[Roots[0]].GetGrammems() & rAllTimes) == _QM(rPresentTense))//чистые императивы отсекаем
 			  && (m_Nodes[Roots[0]].m_Vals.size() > 0)
 			  //  это не должно быть приглас. накл. тип "идем в лес!"
-			  && !m_Nodes[Roots[0]].HasRelOperator("_пригласит_наклонение")
+			  && !m_Nodes[Roots[0]].HasRelOperator(_R("_пригласит_наклонение"))
 			)
 		 {
 			 std::string Lemma;
 			 if (m_Nodes[Roots[0]].HasOneGrammem (rFirstPerson)) 
 			 {
 				 if (m_Nodes[Roots[0]].HasOneGrammem (rSingular) )
-					 Lemma = "Я";
+					 Lemma = _R("Я");
 				else
-					Lemma = "МЫ";
+					Lemma = _R("МЫ");
 
 				 // уменьшаем вес этого варианта предложения, поскольку мы нанли подлежащее
 				if (!m_AlreadyBuiltClauseVariants.empty() && !m_AlreadyBuiltClauseVariants[0].m_BestLexVariants.empty())

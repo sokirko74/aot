@@ -33,11 +33,11 @@ std::vector<rec> suff_vec, pref_vec;
 void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vector<rec> &rec_vec)
 {
 	StringSet little_roots;
-	little_roots.insert("ад");
-	little_roots.insert("юг");
-	little_roots.insert("ют");
-	little_roots.insert("як");
-	little_roots.insert("ям");
+	little_roots.insert(_R("ад"));
+	little_roots.insert(_R("юг"));
+	little_roots.insert(_R("ют"));
+	little_roots.insert(_R("як"));
+	little_roots.insert(_R("ям"));
     
 	while(true){
 		char Line[1000];

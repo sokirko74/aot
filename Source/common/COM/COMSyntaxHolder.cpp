@@ -270,7 +270,7 @@ std::string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::ICla
 	if (ClauseRootNo == -1)
 	{
 		if (Language == morphRussian)
-			return "ПУСТЫХА";
+			return _R("ПУСТЫХА");
 		else
 			return "EMPTY";
 	}

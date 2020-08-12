@@ -30,7 +30,7 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 			return false;
 
 	// со словом "нет" ГЕНИТ_ИГ не образуется 
-	if (Wi.is_lemma("НЕТ"))
+	if (Wi.is_lemma(_R("НЕТ")))
 		return false;
 
 
@@ -57,7 +57,7 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 		k = get_next_main_word(k);
 	if (k == sent.size()) return false;
 
-	if (!Wk.is_morph_noun() || Wk.is_lemma("КОТОРЫЙ")) return false;
+	if (!Wk.is_morph_noun() || Wk.is_lemma(_R("КОТОРЫЙ"))) return false;
 	const CGroup& RightGroup = get_maximal_group (k);
 	if( RightGroup.m_GroupType == NUMERALS || RightGroup.m_GroupType == NUMERAL_NOUN)
 			return false;
@@ -101,7 +101,7 @@ bool CRusFormatCaller::format_for_from_compar (CGroup& G)
 	 if (P.m_iLastWord + 1 >= sent.size()) return false;
      const CGroup& H = get_maximal_group (P.m_iLastWord + 1);
 	 int j = H.m_MainWordNo;
-	 if (!Wj.is_syn_noun() || Wj.is_lemma("КОТОРЫЙ")) return false;
+	 if (!Wj.is_syn_noun() || Wj.is_lemma(_R("КОТОРЫЙ"))) return false;
 	 
 	 if( H.m_GroupType == NUMERALS)		 return false;
 	 if (!(H.GetGrammems() & _QM(rGenitiv))) return false;

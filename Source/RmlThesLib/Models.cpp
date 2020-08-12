@@ -21,13 +21,13 @@ bool CThesaurus::LoadModelRelations(std::string Buff, CInnerModel &M) {
 
         std::string Name = s;
         Trim(Name);
-        if (Name == "с_опр")
+        if (Name == _R("с_опр"))
             R.m_Name = Coord;
-        else if (Name == "упр")
+        else if (Name == _R("упр"))
             R.m_Name = Subord;
-        else if (Name == "с_соч")
+        else if (Name == _R("с_соч"))
             R.m_Name = CoordSimilar;
-        else if (Name == "деф")
+        else if (Name == _R("деф"))
             R.m_Name = Hyphen;
         else if (Name == "subord")
             R.m_Name = eSubord;

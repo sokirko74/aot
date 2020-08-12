@@ -53,7 +53,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	if (FirstChild.m_iFirstWord != G.m_iFirstWord) return false;
 	int i =  get_main_word_in_group(FirstChild);
 	if (!is_left_noun_modifier (Wi)) return false;
-	if( Wi.is_lemma("КОТОРЫЙ") )
+	if( Wi.is_lemma(_R("КОТОРЫЙ")) )
 	  		return false;
 	std::string debug_str;
 	bool bFound_VSE = false; //слово "всe" начинает группу
@@ -63,8 +63,8 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	int NounGroupNo;
 
 	if(		Wi.get_upper_word()
-		&&	!strcmp(Wi.get_upper_word(), "ВСЕ")
-		&&    Wi.is_lemma("ВЕСЬ")
+		&&	!strcmp(Wi.get_upper_word(), _R("ВСЕ"))
+		&&    Wi.is_lemma(_R("ВЕСЬ"))
 		&&	(get_maximal_group_size(i) == 1)
 		)
 	bFound_VSE = true;
@@ -82,17 +82,17 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 
 	// собираем группу "сам себя"
 	int j;
-	if (    Wi.is_lemma( "САМ") )
+	if (    Wi.is_lemma( _R("САМ")) )
 	{
 		G.m_iLastWord = get_maximal_group(G.m_iFirstWord).m_iLastWord + 1; 
 		if (G.m_iLastWord < sent.size())
 		{
 			NounGroupNo = get_maximal_group_no(G.m_iLastWord);		
             j = (NounGroupNo == -1 ) ? G.m_iLastWord : GetGroups()[NounGroupNo].m_MainWordNo;
-			if (   Wj.is_lemma("СЕБЯ") 
-				|| Wj.is_lemma("ТЫ") 
-				|| Wj.is_lemma("Я") 
-				|| Wj.is_lemma("МЫ")  // "сами мы не местные"
+			if (   Wj.is_lemma(_R("СЕБЯ")) 
+				|| Wj.is_lemma(_R("ТЫ")) 
+				|| Wj.is_lemma(_R("Я")) 
+				|| Wj.is_lemma(_R("МЫ"))  // "сами мы не местные"
 				)
 				if ((Wi.GetGrammems() & Wj.GetGrammems() & rAllCases) > 0)
 				{
@@ -117,7 +117,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 			int i_gr = get_maximal_group_no(G.m_iLastWord);		
             i = (i_gr == -1) ? G.m_iLastWord:GetGroups()[i_gr].m_MainWordNo;
 
-			if( Wi.is_lemma("КОТОРЫЙ") )
+			if( Wi.is_lemma(_R("КОТОРЫЙ")) )
 	  			return false;
 
 			if( i_gr != -1 ) 

@@ -652,31 +652,16 @@ void CRossDoc::DelTextDomains()
 
 const char* CRossDoc::GetGramFetFieldName() const
 {
-
-	if (GetRoss()->m_bRussianFields)
-		return "ГХ";
-	else
 		return "GF";
-
 };
 
 const char* CRossDoc::GetReferenceFieldName() const
 {
-
-	if (GetRoss()->m_bRussianFields)
-		return "ОТС";
-	else
 		return "REF";
-
 };
 
 
 const char* CRossDoc::GetEnglishFieldName() const
 {
-
-	if (GetRoss()->m_bRussianFields)
-		return "АНГ";
-	else
 		return "ENG";
-
 };

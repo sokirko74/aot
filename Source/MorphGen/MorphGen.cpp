@@ -25,7 +25,7 @@ void PrintUsage()
 std::string GetPrefixPartOfSpeech (MorphLanguageEnum Langua)
 {
 	switch (Langua) {
-		case morphRussian: return  "ПРИСТ";
+		case morphRussian: return  _R("ПРИСТ");
 		case morphEnglish: return  "PREFIX";
 		case morphGerman: return  "PREFIX";
 		default :return "unk";

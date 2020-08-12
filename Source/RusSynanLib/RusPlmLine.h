@@ -11,11 +11,11 @@
 
 const int  g_BigNumeralsCount = 5;
 const char g_BigNumerals[g_BigNumeralsCount][MAX_WORD_LEN]  = { 
-												"МИЛЛИОН", 
-												"МИЛЛИАРД",
-												"ТРИЛЛИОН",
-												"КВАДРИЛЛИОН",
-												"ТЫСЯЧА"
+												_R("МИЛЛИОН"), 
+												_R("МИЛЛИАРД"),
+												_R("ТРИЛЛИОН"),
+												_R("КВАДРИЛЛИОН"),
+												_R("ТЫСЯЧА")
 												};
 
 #endif

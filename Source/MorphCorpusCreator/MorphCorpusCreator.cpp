@@ -284,7 +284,7 @@ bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, 
 {
 
 	std::string wrd = piWord->WordStr;
-	if( wrd.find("-") == std::string::npos )
+	if( wrd.find(_R(_R("-"))) == std::string::npos )
 		return false;
 
 	
@@ -292,7 +292,7 @@ bool CMorphCorpusCreator::try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, 
 	for(int i = 0 ; i < piWord->HomonymsCount ; i++ )
 	{
 		std::string Lemma = piWord->Homonym[i]->Lemma;
-		if( Lemma.find("-") != std::string::npos)
+		if( Lemma.find(_R(_R("-"))) != std::string::npos)
 			return false;
 	}
 
@@ -528,17 +528,17 @@ std::string CMorphCorpusCreator::GetLemma(std::string lemma, BYTE Pos, long Para
 
 	std::string graph_descr = (const char*)piWord->GraphDescrs;
 	
-	if( graph_descr.find("#ПОЛУ") != std::string::npos )
+	if( graph_descr.find(_R("#ПОЛУ")) != std::string::npos )
 	{
 		std::string wrd = (const char*)piWord->WordStr;
 		RmlMakeLower(wrd, m_CurrentLanguage);
-		if( wrd.find("полу") == 0)
-			lemma = std::string("полу") + lemma;
+		if( wrd.find(_R("полу")) == 0)
+			lemma = std::string(_R("полу")) + lemma;
 		else 
-			if( wrd.find("пол-") == 0)
-				lemma = std::string("пол-") + lemma;
+			if( wrd.find(_R("пол-")) == 0)
+				lemma = std::string(_R("пол-")) + lemma;
 			else
-				lemma = std::string("пол") + lemma;		
+				lemma = std::string(_R("пол")) + lemma;		
 		lemma += "?";
 	}
 
@@ -653,7 +653,7 @@ std::string CMorphCorpusCreator::process_gram_homonym(std::string lemma, long pa
 			if( grammems & _QM(AGRAMTABLib::rGenitiv) )
 				if( hasSecondCase(paradigm_id, str_word, AGRAMTABLib::rGenitiv) )
 				{
-					int iPos = str_gramems.find("рд");
+					int iPos = str_gramems.find(_R("рд"));
 					if( iPos != -1 ) 
 					{
 						str_gramems.replace(iPos, 2, "рд2");
@@ -664,7 +664,7 @@ std::string CMorphCorpusCreator::process_gram_homonym(std::string lemma, long pa
 			if( grammems & _QM(AGRAMTABLib::rLocativ) )
 				if( hasSecondCase(paradigm_id, str_word, AGRAMTABLib::rLocativ) )
 				{	
-					int iPos = str_gramems.find("пр");
+					int iPos = str_gramems.find(_R("пр"));
 					if( iPos != -1 ) 
 						str_gramems.replace(iPos, 2, "пр2");
 				}

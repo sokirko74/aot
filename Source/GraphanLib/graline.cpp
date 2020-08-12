@@ -121,8 +121,8 @@ bool CGraLine::IsAsterisk() const {
 bool CGraLine::HasSingleSpaceAfter() const { return (m_Status & stSingleSpaceAfter) > 0; };
 
 
-bool CGraLine::IsString(const char *s) const {
-    return (s[ulen] == 0) && (!strncmp(unit, s, ulen));
+bool CGraLine::IsString(const std::string& s) const {
+    return (s.length() == ulen) && !s.compare(0, ulen, unit);
 };
 
 void CGraLine::SetSpace() {

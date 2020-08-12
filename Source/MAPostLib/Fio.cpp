@@ -34,19 +34,19 @@ struct CFIOFormat
 		{
 			std::string s = tok.val();
 			FioItemTypeEnum t;
-		    if  (s == "ИМЯ")
+		    if  (s == _R("ИМЯ"))
 				t = fiName;
 			else
-			if (s == "ФАМИЛИЯ")
+			if (s == _R("ФАМИЛИЯ"))
 				t = fiSurname;
 			else
-			if (s == "ОТЧЕСТВО")
+			if (s == _R("ОТЧЕСТВО"))
 				t = fiMiddle;
 		    else
-			if (s == "ИНИЦИАЛ")
+			if (s == _R("ИНИЦИАЛ"))
 				t = fiAbbr;	
 			else
-			if (s == "ТОЧКА")
+			if (s == _R("ТОЧКА"))
 				t = fiStop;
 		    else
 			if (s == "РИМСК_ЦК")
@@ -97,10 +97,10 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
     {
         case fiName     :  return pH->HasGrammem(rName);
         case fiSurname  :  return pH->HasGrammem(rSurName) || (Word.m_bFirstUpperAlpha 
-							   && (pH->m_strLemma.rfind("ИЙ")==pH->m_strLemma.size()-2
-							    || pH->m_strLemma.rfind("АЯ")==pH->m_strLemma.size()-2
-							    || pH->m_strLemma.rfind("ОВ")==pH->m_strLemma.size()-2
-								|| pH->m_strLemma.rfind("ОВА")==pH->m_strLemma.size()-3
+							   && (pH->m_strLemma.rfind(_R("ИЙ"))==pH->m_strLemma.size()-2
+							    || pH->m_strLemma.rfind(_R("АЯ"))==pH->m_strLemma.size()-2
+							    || pH->m_strLemma.rfind(_R("ОВ"))==pH->m_strLemma.size()-2
+								|| pH->m_strLemma.rfind(_R("ОВА"))==pH->m_strLemma.size()-3
 								));
         case fiMiddle   :  return pH->HasGrammem(rPatronymic);
 

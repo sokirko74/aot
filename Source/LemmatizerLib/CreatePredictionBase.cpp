@@ -126,9 +126,9 @@ void log (std::string s)
 std::string GetPlugLemmabyLanguage (MorphLanguageEnum Langua)
 {
 	switch (Langua) {
-		case morphRussian: return  "НЕУБИВАЙМЕНЯ";
-		case morphEnglish: return  "DURNOVO";
-		case morphGerman: return  "UNKNOWN";
+		case morphRussian: return  _R("НЕУБИВАЙМЕНЯ");
+		case morphEnglish: return  _E("DURNOVO");
+		case morphGerman: return  _G("UNKNOWN");
 		default :return "unk";
 	}
 };

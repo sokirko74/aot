@@ -567,7 +567,7 @@ bool CLemWord::HasAnalyticalBe() const
 
     for (int i = 0; i < GetHomonymsCount(); i++)
 		if	(		(GetHomonym(i)->HasPos(VERB) || GetHomonym(i)->HasPos(INFINITIVE)) 
-				&& 	( GetHomonym(i)->IsLemma("БЫТЬ") || GetHomonym(i)->IsLemma("СТАТЬ"))
+				&& 	( GetHomonym(i)->IsLemma(_R("БЫТЬ").c_str()) || GetHomonym(i)->IsLemma(_R("СТАТЬ")))
 			)
 			return true;
 		

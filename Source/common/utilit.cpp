@@ -625,15 +625,15 @@ BYTE force_rus_char (BYTE ch)
 {
 	// в первой строке находятся латинские буквы, который могут быть заменены на
 	// русские
-	char search[] = "AaEe3KkMHOoPpCcyXxuT";
+	const std::string search = _R("AaEe3KkMHOoPpCcyXxuT");
 	// во второй строке находятся русские
-	char replace[] = "АаЕеЗКкМНОоРрСсуХхиТ";
+	const std::string replace = _R("АаЕеЗКкМНОоРрСсуХхиТ");
 
-	char *t = strchr (search,ch);
+	const char *t = strchr (search.c_str(), ch);
 
 	if (t == 0) return 0;
 
-	return replace[(size_t) ((char*)t- (char*)search)];
+	return replace[(size_t) ((char*)t - search.c_str())];
 }
 
 
@@ -950,26 +950,22 @@ bool CheckEvaluationTime ()
 
 const int predict_poses_size = 4;
 
-//  we cannot use here class std::string, because VC7 shows in this case memory leaks
-struct CPredictPartOfSpeech {
-	char m_pos_str[100];
-};
-const CPredictPartOfSpeech  predict_rus_pos[predict_poses_size] =
+const static std::string  predict_rus_pos[predict_poses_size] =
 {
-	"С",
-	"ИНФИНИТИВ",
-	"П",
-	"Н",
+	_R("С"),
+	_R("ИНФИНИТИВ"),
+	_R("П"),
+	_R("Н"),
 };
 
-const CPredictPartOfSpeech predict_eng_pos[predict_poses_size] =
+const static std::string predict_eng_pos[predict_poses_size] =
 {
 	"NOUN",
 	"VERB",
 	"ADJECTIVE",
 	"ADVERB",
 };
-const CPredictPartOfSpeech predict_ger_pos[predict_poses_size] =
+const static std::string predict_ger_pos[predict_poses_size] =
 {
 	"SUB",
 	"VER",
@@ -980,7 +976,7 @@ const CPredictPartOfSpeech predict_ger_pos[predict_poses_size] =
 
 int GetPredictionPartOfSpeech(const std::string& PartOfSpeech, MorphLanguageEnum langua)
 {
-	const CPredictPartOfSpeech* PossiblePoses;
+	const std::string* PossiblePoses;
 	switch (langua)
 	{
 		case morphEnglish: PossiblePoses = predict_eng_pos; break;
@@ -988,19 +984,13 @@ int GetPredictionPartOfSpeech(const std::string& PartOfSpeech, MorphLanguageEnum
 		case morphRussian: PossiblePoses = predict_rus_pos; break;
 		default : assert(false);
 	};
-
-
-	int k=0;
-	for(; k < predict_poses_size; k++ )
-		if( PartOfSpeech == PossiblePoses[k].m_pos_str )
+	for (size_t k = 0; k < predict_poses_size; k++) {
+		if (PartOfSpeech == PossiblePoses[k])
 		{
-			break;
+			return k;
 		};
-
-	if (k == predict_poses_size)
-		return UnknownPartOfSpeech;
-	else
-		return k;
+	}
+	return UnknownPartOfSpeech;
 };
 
 

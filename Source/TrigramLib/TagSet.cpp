@@ -12,7 +12,7 @@
 // ==================   struct CTag  =================
 
 CTag::CTag() {
-	m_Pos = rPartOfSpeechCount;
+	m_Pos = RUSSIAN_PART_OF_SPEECH_COUNT;
 	m_Grammems = 0;
 };
 

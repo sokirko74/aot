@@ -56,7 +56,7 @@ public:
 	bool	IsOb1() const;
 	bool	IsOb2() const;
 	bool	IsIsOb() const;
-	bool	IsLemma(const char* lemma) const;
+	bool	IsLemma(const std::string& lemma) const;
 	bool	IsMorphNoun() const;
     bool	IsSynNoun() const;
 	bool	IsLeftNounModifier() const;

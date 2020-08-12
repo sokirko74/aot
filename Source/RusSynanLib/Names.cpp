@@ -207,8 +207,8 @@ bool CRusFormatCaller::format_for_anat_compar(CGroup& G)
 	const CGroup& MaxGrp = get_maximal_group(i);
 	if (MaxGrp.m_iFirstWord != MaxGrp.m_iLastWord) return false;
 
-    if (   !Wi.is_word_upper("БОЛЕЕ") 
-		&& !Wi.is_word_upper("МЕНЕЕ") 
+    if (   !Wi.is_word_upper(_R("БОЛЕЕ")) 
+		&& !Wi.is_word_upper(_R("МЕНЕЕ")) 
 	   ) return false;
 	size_t j = i + 1;
 	if (j >= sent.size()) return false;
