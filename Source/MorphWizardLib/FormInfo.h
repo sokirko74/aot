@@ -1,4 +1,5 @@
 #pragma once
+#include "../common/utilit.h"
 
 struct CMorphForm 
 {
@@ -22,8 +23,6 @@ struct CMorphForm
 
 };
 
-//----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
 struct  CFlexiaModel
 {
 	std::string				m_Comments;
@@ -41,7 +40,6 @@ struct  CFlexiaModel
 	bool		has_ancode(const std::string& search_ancode) const;
 	
 };
-
 
 
 //----------------------------------------------------------------------------
@@ -105,7 +103,23 @@ struct CLemmaInfo
 	}
 
 };
-extern void ReadFlexiaModels(std::ifstream&, vector<CFlexiaModel>& FlexiaModels );
-extern void WriteFlexiaModels(FILE* out_fp, const vector<CFlexiaModel>& FlexiaModels );
-extern void ReadAccentModels (std::ifstream&, vector<CAccentModel>&	AccentModels );
-extern void WriteAccentModels(FILE* out_fp, const vector<CAccentModel>& AccentModels );
+
+class CMorphWizardBase {
+public:
+	MorphLanguageEnum		m_Language;
+
+	//  a vector of all Paradigms 
+	vector<CFlexiaModel>	m_FlexiaModels;
+
+	// all accent models
+	vector<CAccentModel>	m_AccentModels;
+
+	bool read_utf8_line(ifstream& inp, std::string& line) const;
+
+
+	void ReadFlexiaModels(std::ifstream& mrdFile);
+	void WriteFlexiaModels(FILE* out_fp) const;
+
+	void ReadAccentModels(std::ifstream& mrdFile);
+	void WriteAccentModels(FILE* out_fp) const;
+};

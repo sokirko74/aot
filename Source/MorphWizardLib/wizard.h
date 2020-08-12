@@ -123,7 +123,7 @@ struct CDumpParadigm
 };
 
 //----------------------------------------------------------------------------
-class MorphoWizard
+class MorphoWizard : public CMorphWizardBase
 {
 	
 	bool			m_bWasChanged;
@@ -145,6 +145,7 @@ class MorphoWizard
 
 	void load_gramtab();
 	void ReadSessions (std::ifstream& mrdFile);
+	void ReadLemmas(std::ifstream& mrdFile);
 public:
 	struct AncodeLess
 	{
@@ -154,12 +155,6 @@ public:
 	};
 	AncodeLess ancode_less;
 
-	//  a vector of all Paradigms 
-	vector<CFlexiaModel>	m_FlexiaModels;
-
-	// all accent models
-	vector<CAccentModel>	m_AccentModels;
-	
 
 
 	vector<set<string> >	m_PrefixSets;
@@ -175,7 +170,6 @@ public:
 	vector< predict_container_t::const_iterator>				m_CurrentPredictedParadigms;
 
 	
-	MorphLanguageEnum		m_Language;
 
 	//! a table of character properties for regular expressions which depend on CConcIndexator::m_Language
 	vector<BYTE>			m_PcreCharacterTables;
@@ -192,7 +186,7 @@ public:
 	~MorphoWizard();
 
 	//=================  general: loading, saving, logging ======================
-	bool	load_wizard(const char *path,const char *user_name, bool bCreatePrediction= true);
+	void	load_wizard(const char *path,const char *user_name, bool bCreatePrediction= true);
 	void	load_mrd(bool guest, bool bCreatePrediction);
 	bool	load_static(MorphLanguageEnum langua);
 	void	load_string_vector(const std::string &name, StringVector &res);

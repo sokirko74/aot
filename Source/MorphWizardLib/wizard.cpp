@@ -1,6 +1,3 @@
-
-#pragma warning(disable:4786)
-
 #include "wizard.h"
 #include "../common/util_classes.h"
 #include "../AgramtabLib/EngGramTab.h"
@@ -417,7 +414,8 @@ bool MorphoWizard::load_static(MorphLanguageEnum langua) {
     return true;
 }
 
-bool MorphoWizard::load_wizard(const char *path, const char *user_name, bool bCreatePrediction) {
+
+void MorphoWizard::load_wizard(const char *path, const char *user_name, bool bCreatePrediction) {
     m_ProjectFileKeys["ProjectsDir"] = GetFullPathByName(path);
 
     std::ifstream mwzFile(path);
@@ -425,7 +423,7 @@ bool MorphoWizard::load_wizard(const char *path, const char *user_name, bool bCr
         throw CExpc("Cannot open file " + std::string(path));
 
     std::string buffer;
-    while (getline(mwzFile, buffer)) {
+    while (read_utf8_line(mwzFile, buffer)) {
         std::string key, val;
         StringTokenizer tok(buffer.c_str(), " \t\r\n");
         if (!tok()) continue;
@@ -468,16 +466,11 @@ bool MorphoWizard::load_wizard(const char *path, const char *user_name, bool bCr
 
     if (!guest && !login) {
         throw CExpc("Incorrect login!");
-        return false;
     }
 
     load_mrd(guest, bCreatePrediction);
-
     StartSession(user_name);
-
-
     m_bLoaded = true;
-    return true;
 }
 
 
@@ -515,76 +508,14 @@ static void CreateLockFile(const std::string &LockFileName) {
     }
 }
 
-template<class T>
-void t1(vector<string> *sss, vector<T> *FlexiaModels) {
-    vector<string> ss = (*sss);
-    for (int num = 0; num < ss.size(); num++) {
-        Trim(ss[num]);
-        T M;
-        if (!M.ReadFromString(ss[num]))
-            throw CExpc("Cannot parse paradigm No %i", num + 1);
 
-        (*FlexiaModels).push_back(M);
-    }
-}
-
-static size_t getCount(std::ifstream &mrdFile, const char *sectionName) {
+static size_t getCount(std::ifstream& mrdFile, const char* sectionName) {
     std::string line;
     if (!getline(mrdFile, line)) {
         throw CExpc("Cannot get size of section  %s", sectionName);
     }
     return atoi(line.c_str());
 }
-
-void ReadFlexiaModels(std::ifstream &mrdFile, vector<CFlexiaModel> &FlexiaModels) {
-    FlexiaModels.clear();
-    size_t count = getCount(mrdFile, "flexia models");
-
-    for (size_t num = 0; num < count; num++) {
-        std::string line;
-        if (!getline(mrdFile, line)) {
-            throw CExpc("Cannot read enough flexia models ");
-        }
-        Trim(line);
-        CFlexiaModel M;
-        if (!M.ReadFromString(line))
-            throw CExpc("Cannot parse paradigm No %i", num + 1);
-
-        FlexiaModels.push_back(M);
-    }
-};
-
-void WriteFlexiaModels(FILE *out_fp, const vector<CFlexiaModel> &FlexiaModels) {
-    fprintf(out_fp, "%i\n", FlexiaModels.size());
-    for (size_t i = 0; i < FlexiaModels.size(); i++)
-        fprintf(out_fp, "%s\n", FlexiaModels[i].ToString().c_str());
-};
-
-
-void ReadAccentModels(std::ifstream &mrdFile, vector<CAccentModel> &AccentModels) {
-    AccentModels.clear();
-    size_t count = getCount(mrdFile, "accent models");
-    for (size_t num = 0; num < count; num++) {
-        std::string line;
-        if (!getline(mrdFile, line)) {
-            throw CExpc("Cannot read enough accent models ");
-        }
-        Trim(line);
-
-        CAccentModel M;
-        if (!M.ReadFromString(line))
-            throw CExpc("Cannot parse accent model %s", line.c_str());
-
-        AccentModels.push_back(M);
-
-    };
-};
-
-void WriteAccentModels(FILE *out_fp, const vector<CAccentModel> &AccentModels) {
-    fprintf(out_fp, "%i\n", AccentModels.size());
-    for (size_t i = 0; i < AccentModels.size(); i++)
-        fprintf(out_fp, "%s\n", AccentModels[i].ToString().c_str());
-};
 
 void MorphoWizard::ReadSessions(std::ifstream &mrdFile) {
     m_Sessions.clear();
@@ -593,7 +524,7 @@ void MorphoWizard::ReadSessions(std::ifstream &mrdFile) {
 
     for (size_t num = 0; num < count; num++) {
         std::string line;
-        if (!getline(mrdFile, line)) {
+        if (!read_utf8_line(mrdFile, line)) {
             throw CExpc("Cannot read enough sessions ");
         }
 
@@ -634,7 +565,7 @@ void MorphoWizard::ReadPrefixSets(std::ifstream &mrdFile) {
 
     for (size_t num = 0; num < count; num++) {
         std::string line;
-        if (!getline(mrdFile, line)) {
+        if (!read_utf8_line(mrdFile, line)) {
             throw CExpc("Cannot read enough prefix sets");
         }
 
@@ -648,8 +579,8 @@ void MorphoWizard::ReadPrefixSets(std::ifstream &mrdFile) {
 };
 
 
-static void ReadLemmas(std::ifstream &mrdFile, MorphoWizard &W) {
-    W.m_LemmaToParadigm.clear();
+void MorphoWizard::ReadLemmas(std::ifstream &mrdFile) {
+    m_LemmaToParadigm.clear();
 
     size_t count = getCount(mrdFile, "lemmas");
 
@@ -659,7 +590,7 @@ static void ReadLemmas(std::ifstream &mrdFile, MorphoWizard &W) {
         std::string lemm, CommonAncode, PrefixSetNoStr;
         std::string line;
 
-        if (!getline(mrdFile, line)) {
+        if (!read_utf8_line(mrdFile, line)) {
             throw CExpc("Cannot read enough lemmas");
         }
         std::stringstream ss(line);
@@ -676,18 +607,15 @@ static void ReadLemmas(std::ifstream &mrdFile, MorphoWizard &W) {
 
         if (lemm == "#") lemm.erase();
 
-        lemm += W.m_FlexiaModels[ParadigmNo].get_first_flex();
+        lemm += m_FlexiaModels[ParadigmNo].get_first_flex();
 
-        W.m_LemmaToParadigm.insert(make_pair(lemm, CParadigmInfo(ParadigmNo, AccentModelNo, SessionNo, AuxAccent,
+        m_LemmaToParadigm.insert(make_pair(lemm, CParadigmInfo(ParadigmNo, AccentModelNo, SessionNo, AuxAccent,
                                                                  CommonAncode.c_str(), PrefixSetNo)));
 
     }
 }
 
 
-//	Р—Р°РіСЂСѓР¶Р°РµС‚ *.mrd file.
-//---------------------------------------------------
-//	РћРїРёСЃР°РЅРёРµ С„РѕСЂРјР°С‚Р° *.mrd.
 
 //	file: paradigm_number
 //		paradigm |
@@ -734,15 +662,15 @@ void MorphoWizard::load_mrd(bool guest, bool bCreatePrediction) {
         throw CExpc("Wrong mrd file : " + m_MrdPath);
 
     fprintf(stderr, ".");
-    ReadFlexiaModels(mrdFile, m_FlexiaModels);
+    ReadFlexiaModels(mrdFile);
     fprintf(stderr, ".");
-    ReadAccentModels(mrdFile, m_AccentModels);
+    ReadAccentModels(mrdFile);
     fprintf(stderr, ".");
     ReadSessions(mrdFile);
     fprintf(stderr, ".");
     ReadPrefixSets(mrdFile);
     fprintf(stderr, ".");
-    ReadLemmas(mrdFile, *this);
+    this->ReadLemmas(mrdFile);
     fprintf(stderr, ".");
     if (bCreatePrediction)
         CreatePredictIndex();
@@ -768,15 +696,13 @@ void MorphoWizard::save_mrd() {
     EndSession();
 
 
-    // Р·РґРµСЃСЊ СЂР°РЅСЊС€Рµ СЃРѕС…СЂР°РЅСЏР»Рё СЃ РїРѕРјРѕС‰СЊСЋ stream, СЏ Р·Р°РјРµРЅРёР» РЅР° FILE, СЃС‚Р°Р»Рѕ СЂР°Р±РѕС‚Р°С‚СЊ
-    // РІ  3 СЂР°Р· Р±С‹СЃС‚СЂРµРµ
 
     FILE *out_fp = fopen(Path.c_str(), "w");
     if (!out_fp) throw CExpc("Error while saving to file. It may be corrupted");
 
-    WriteFlexiaModels(out_fp, m_FlexiaModels);
+    WriteFlexiaModels(out_fp);
 
-    WriteAccentModels(out_fp, m_AccentModels);
+    WriteAccentModels(out_fp);
 
     fprintf(out_fp, "%i\n", m_Sessions.size());
     for (size_t i = 0; i < m_Sessions.size(); i++)
@@ -2399,10 +2325,7 @@ BYTE MorphoWizard::_GetReverseVowelNo(const std::string &form, WORD accentModelN
 
 bool PrintAllForms(const char *MrdFile, std::string OutFile) {
     MorphoWizard Wizard;
-    if (!Wizard.load_wizard(MrdFile, "guest", false)) {
-        fprintf(stderr, "Cannot load mrd-file : %s\n", MrdFile);
-        return false;
-    };
+    Wizard.load_wizard(MrdFile, "guest", false);
 
     fprintf(stderr, "attach_form_prefixes_to_bases \n");
     if (!Wizard.attach_form_prefixes_to_bases())
