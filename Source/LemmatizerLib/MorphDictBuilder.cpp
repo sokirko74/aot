@@ -20,13 +20,9 @@ CMorphDictBuilder::~CMorphDictBuilder()
 {
 };
 
-//bool  operator <  (const char*& s1, const char* s2)
-//{
-//	return strcmp(s1,s2) < 0;
-//}
-bool CMorphDictBuilder::GenerateLemmas(const MorphoWizard& Wizard) 
+void CMorphDictBuilder::GenerateLemmas(const MorphoWizard& Wizard) 
 {
-	printf ("GenerateLemmas\n");
+	std::cout << "GenerateLemmas\n";
 	vector<set<string> > InfoToBases;
 	{	// creaing CMorphDict::m_Bases
 		set<string> Bases;
@@ -48,11 +44,12 @@ bool CMorphDictBuilder::GenerateLemmas(const MorphoWizard& Wizard)
 			Bases.insert(curr_bases.begin(), curr_bases.end());
 		};
 
+		std::cout << "CreateFromSet\n";
 		m_Bases.CreateFromSet(Bases);
 	};
 
 	{
-		// creating vector<CLemmaInfoAndLemma>	m_LemmaInfos
+		std::cout << "create LemmaInfos\n";
 		size_t Index = 0;
 		for( const_lemma_iterator_t lemm_it= Wizard.m_LemmaToParadigm.begin(); lemm_it!=Wizard.m_LemmaToParadigm.end(); lemm_it++ )
 		{
@@ -75,45 +72,35 @@ bool CMorphDictBuilder::GenerateLemmas(const MorphoWizard& Wizard)
 	
 	if (m_LemmaInfos.size() >= MaxLemmaCount)
 	{
-		fprintf (stderr, "Cannot be more than %i lemmas\n", MaxLemmaCount-1); 
-		return false;
+		throw CExpc ("Cannot be more than %i lemmas\n", MaxLemmaCount-1); 
 	};
 
-
-	return true;
 }
 
 
 
-bool  CMorphDictBuilder::GenerateUnitedFlexModels(const MorphoWizard& Wizard)
+void  CMorphDictBuilder::GenerateUnitedFlexModels(const MorphoWizard& Wizard)
 {
 	printf ("GenerateUnitedFlexModels\n");
-	//===========================
 	// Creating m_ModelInfo
 	m_ModelInfo.clear();
 	m_FlexiaModels.clear();
 	m_NPSs.clear();
 	if (Wizard.m_FlexiaModels.size() >=  MaxFlexiaModelsCount)
 	{
-		fprintf (stderr, "Cannot be more than %i flexia models\n", MaxFlexiaModelsCount-1); 
-		return false;
+		throw CExpc ("Cannot be more than %i flexia models\n", MaxFlexiaModelsCount-1); 
 	};
 
 	for( size_t ModelNo=0; ModelNo < Wizard.m_FlexiaModels.size(); ModelNo++ )
 	{
 		CFlexiaModel p = Wizard.m_FlexiaModels[ModelNo];
-
-		
 		m_NPSs.push_back(GetPredictionPartOfSpeech(Wizard.get_pos_string(p.get_first_code()), 
 													Wizard.m_Language));
-		
-
 		m_ModelInfo.push_back(vector<bool>(p.m_Flexia.size(), true));
 
 		if ( p.m_Flexia.size() >=  MaxNumberFormsInOneParadigm)
 		{
-			fprintf (stderr, "Error: flexia No %zu contains more than %i forms. !\n", ModelNo, MaxNumberFormsInOneParadigm);
-			return false;
+			throw CExpc ("Error: flexia No %zu contains more than %i forms. !\n", ModelNo, MaxNumberFormsInOneParadigm);
 		};
 
 		for (size_t i=0; i <p.m_Flexia.size(); i++)
@@ -128,11 +115,9 @@ bool  CMorphDictBuilder::GenerateUnitedFlexModels(const MorphoWizard& Wizard)
 						};
 		m_FlexiaModels.push_back(p);
 	};
-	
-	return true;
 };
 
-bool  CMorphDictBuilder::GeneratePrefixes(const MorphoWizard& Wizard)
+void  CMorphDictBuilder::GeneratePrefixes(const MorphoWizard& Wizard)
 {
 	printf ("GeneratePrefixes\n");
 	m_Prefixes.clear();
@@ -152,45 +137,30 @@ bool  CMorphDictBuilder::GeneratePrefixes(const MorphoWizard& Wizard)
 		};
 		if (m_PrefixSets.back().empty())
 		{
-			fprintf (stderr, "PrefixSet %i  has no prefixes\n", i); 
-			return false;
+			throw CExpc("PrefixSet %i  has no prefixes\n", i); 
 		};
 
 	};
 	if (m_Prefixes.size() >= MaxLemmaPrefixCount)
 	{
-		fprintf (stderr, "Cannot be more than %i prefixes\n", MaxLemmaPrefixCount-1); 
-		return false;
+		throw CExpc("Cannot be more than %i prefixes\n", MaxLemmaPrefixCount-1);
 	};
-
-	return true;
 };
 
 
 
 extern size_t RegisterSize;
 
-bool  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
+void  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 {
-	
 	GetFormBuilder()->InitTrie();
-	
 	m_AccentModels = Wizard.m_AccentModels;
-
-	
-
-	if (!GeneratePrefixes(Wizard))
-		return false;
-	
-
+	GeneratePrefixes(Wizard);
 	// Creating tries for paradigms
 	size_t RuleNo = 0; 
 	size_t LemmaNo = 0;
 	size_t ReusedNodes = 0;
-	
-	
 	DwordVector EmptyGlobalPrefixes(1, 0);
-	
 	printf ("Generate the main automat ...\n");
 	size_t FormsCount = 0;
 	
@@ -200,20 +170,11 @@ bool  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 		if (!(LemmaNo % 100))
 			fprintf (stderr,"Lemma %i/%i  RegisterSize = %i \r", LemmaNo, Wizard.m_LemmaToParadigm.size(), RegisterSize);
 			
-		
-		//if (LemmaNo  >  12000)
-		//	break;
-
-		/*if (LemmaNo  <  39000)
-			continue;*/
-
 		size_t ModelNo = it->second.m_FlexiaModelNo;
 		if (ModelNo  > Wizard.m_FlexiaModels.size())
 		{
-			fprintf (stderr,"Bad flexia model  : %s\n", Wizard.get_lemm_string(it).c_str());
-			return false;
+			throw CExpc("Bad flexia model  : %s\n", Wizard.get_lemm_string(it).c_str());
 		};
-
 
 		DwordVector* pPrefixVector = &EmptyGlobalPrefixes;
 		if (it->second.m_PrefixSetNo != UnknownPrefixSetNo)
@@ -250,49 +211,30 @@ bool  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 								||	(checkPrefixNo != (*pPrefixVector)[PrefixNo])
 							)
 						{
-							fprintf (stderr, "General annotation encoding error!\n");
-							return false;
+							throw CExpc ("General annotation encoding error!");
 						};
 
 					};
 
 					WordForm += GetFormBuilder()->EncodeIntToAlphabet(info);	
 				};
-
 				
-
-				
-				if (!GetFormBuilder()->AddStringDaciuk(WordForm))
-					return false;
+				GetFormBuilder()->AddStringDaciuk(WordForm);
 			};
 		};
-
-
 		LemmaNo++;
-
-		
 	};
+
 	fprintf (stderr,"Lemma %i/%i  RegisterSize=%i   \n", LemmaNo, Wizard.m_LemmaToParadigm.size(), RegisterSize);
 
 	if (LemmaNo >  0xffffff)
 	{
-		fprintf (stderr, "Cannot be more than 0xffffff lemmas\n"); 
-		return false;
+		throw CExpc("Cannot be more than 0xffffff lemmas"); 
 	};
 	fprintf (stderr,"Count of word forms =  %i \n", FormsCount);
 	
-
-	bool bResult = true;
-
-	/*printf ("Testing ...\n");
-	bResult = IsValid();*/
-		
 	GetFormBuilder()->ClearRegister();
-
-	printf ("ConvertBuildRelationsToRelations for word forms...  \n");
+	fprintf(stderr, "ConvertBuildRelationsToRelations for word forms...  \n");
 	GetFormBuilder()->ConvertBuildRelationsToRelations();
-
-
-	return bResult;
 };
 

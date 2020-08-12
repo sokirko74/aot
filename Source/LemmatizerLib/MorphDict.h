@@ -10,7 +10,6 @@
 #include "../MorphWizardLib/FormInfo.h"
 
 
-
 struct CLemmaInfoAndLemma 
 {
 	int			m_LemmaStrNo;
@@ -29,7 +28,7 @@ struct CLemmaInfoAndLemma
 
 
 
-class CMorphDict   
+class CMorphDict : public CMorphWizardBase
 {
 	
 protected:
@@ -73,8 +72,6 @@ protected:
 	void	CreateModelsIndex();
 
 public:
-	vector<CFlexiaModel>		m_FlexiaModels;
-	vector<CAccentModel>		m_AccentModels;
 	CShortStringHolder			m_Bases;
 	vector<CLemmaInfoAndLemma>	m_LemmaInfos;
 	StringVector				m_Prefixes;

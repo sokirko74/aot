@@ -82,18 +82,17 @@ DWORD CABCEncoder::DecodeFromAlphabet(const std::string& v) const
 	return Result;
 };
 
-bool  CABCEncoder::CheckABCWithAnnotator(const std::string& WordForm) const
+void  CABCEncoder::CheckABCWithAnnotator(const std::string& WordForm) const
 {
-	size_t Length = WordForm.length();
-	for (size_t i=0; i < Length; i++)
-		if (m_Alphabet2Code[(BYTE)WordForm[i]] == -1)
-			return false;
-	return true;
+	for (size_t i = 0; i < WordForm.length(); i++)
+		if (m_Alphabet2Code[(BYTE)WordForm[i]] == -1) {
+			throw CExpc("Bad ABC Word=\"%s\", char='%c', index=%i", WordForm.c_str(), WordForm[i], i);
+		}
 };
+
 bool  CABCEncoder::CheckABCWithoutAnnotator(const std::string& WordForm) const
 {
-	size_t Length = WordForm.length();
-	for (size_t i=0; i < Length; i++)
+	for (size_t i=0; i < WordForm.length(); i++)
 		if (m_Alphabet2CodeWithoutAnnotator[(BYTE)WordForm[i]] == -1)
 			return false;
 	return true;

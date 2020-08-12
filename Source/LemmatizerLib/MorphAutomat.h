@@ -106,7 +106,7 @@ public:
 	int							m_Alphabet2CodeWithoutAnnotator[256];					
 	int							m_Code2AlphabetWithoutAnnotator[MaxAlphabetSize];
 
-	bool	CheckABCWithAnnotator(const std::string& WordForm) const;
+	void	CheckABCWithAnnotator(const std::string& WordForm) const;
 	bool	CheckABCWithoutAnnotator(const std::string& WordForm) const;
 	std::string	EncodeIntToAlphabet(DWORD v) const;
 	DWORD	DecodeFromAlphabet(const std::string& v) const;

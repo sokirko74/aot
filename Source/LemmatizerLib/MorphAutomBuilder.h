@@ -95,7 +95,7 @@ public:
 	~CMorphAutomatBuilder();
 
 	void	InitTrie();
-	bool	AddStringDaciuk(const std::string& WordForm);
+	void	AddStringDaciuk(const std::string& WordForm);
 	void	ClearRegister();
 	void	ConvertBuildRelationsToRelations();
 };

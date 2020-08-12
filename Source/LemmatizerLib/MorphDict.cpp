@@ -162,8 +162,8 @@ bool CMorphDict::Load(std::string GrammarFileName)
         ErrorMessage (Format("Cannot open %s", PrecompiledFile.c_str()));
         return false;
     };
-    ReadFlexiaModels(annotFile, m_FlexiaModels);
-    ReadAccentModels(annotFile, m_AccentModels);
+    ReadFlexiaModels(annotFile);
+    ReadAccentModels(annotFile);
 
     {
        size_t count = getCount(annotFile, "prefix sets");
@@ -218,9 +218,9 @@ bool CMorphDict::Save(std::string GrammarFileName) const
 
         
 
-        WriteFlexiaModels(fp, m_FlexiaModels);
+        WriteFlexiaModels(fp);
 
-        WriteAccentModels(fp, m_AccentModels);
+        WriteAccentModels(fp);
 
         
         assert (!m_Prefixes.empty() && m_Prefixes[0].empty());

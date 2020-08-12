@@ -27,7 +27,7 @@ class CMorphDictBuilder : public CMorphDict
 	
 	
 	bool				CheckFlexiaGramInfo(const MorphoWizard& Wizard) const;
-	bool				GeneratePrefixes(const MorphoWizard& Wizard);
+	void				GeneratePrefixes(const MorphoWizard& Wizard);
 
 	//  debug functions 
 	bool				CheckRegister() const;
@@ -40,9 +40,9 @@ public:
 	CMorphDictBuilder(MorphLanguageEnum Language);
 	~CMorphDictBuilder();
 
-	bool	CreateAutomat(const MorphoWizard& Wizard);
-	bool	GenerateLemmas(const MorphoWizard& Wizard);
-	bool	GenerateUnitedFlexModels(const MorphoWizard& Wizard);
+	void	CreateAutomat(const MorphoWizard& Wizard);
+	void	GenerateLemmas(const MorphoWizard& Wizard);
+	void	GenerateUnitedFlexModels(const MorphoWizard& Wizard);
 	bool	GenPredictIdx(const MorphoWizard& wizard, int PostfixLength, int MinFreq, std::string path);
 };
 

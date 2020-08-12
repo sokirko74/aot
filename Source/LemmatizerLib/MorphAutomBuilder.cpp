@@ -461,21 +461,14 @@ CTrieNodeBuild* CMorphAutomatBuilder::AddSuffix(CTrieNodeBuild* pParentNodeNo, c
 
 
 
-bool CMorphAutomatBuilder::AddStringDaciuk(const std::string& WordForm)
+void CMorphAutomatBuilder::AddStringDaciuk(const std::string& WordForm)
 {
-	if (!CheckABCWithAnnotator(WordForm))
-	{
-		fprintf (stderr, "%s - bad ABC    \n", WordForm.c_str());
-		return false;
-	};
-
+	CheckABCWithAnnotator(WordForm);
+	
 	if (WordForm.rfind(m_AnnotChar) == WordForm.length() - 1)
 	{
-		fprintf (stderr, "%s - bad annotation   \n", WordForm.c_str());
-		return false;
+		throw CExpc ("%s - bad annotation", WordForm.c_str());
 	};
-		
-
 
 	UpdateCommonPrefix(WordForm);
 
@@ -484,25 +477,25 @@ bool CMorphAutomatBuilder::AddStringDaciuk(const std::string& WordForm)
 		)
 	{
 		// an equal std::string is already in the dictionary 
-		return true;
+		return;
 	};
 
 	CTrieNodeBuild*	pLastNode = m_Prefix.back();
 
 	int FirstConfluenceState = GetFirstConfluenceState();
-	if (FirstConfluenceState != -1)
+	if (FirstConfluenceState != -1) {
 		pLastNode = CloneNode(pLastNode);
+	}
 	else
 	{
 		// we should unregister Prefix.back() otherwize some node of suffix can be minimized to 
 		// Prefix.back()
 		UnregisterNode(pLastNode);
 	};
-
 	
-
-	if (m_Prefix.size() == WordForm.length()+1) 
-		pLastNode->SetFinal(  true );
+	if (m_Prefix.size() == WordForm.length() + 1) {
+		pLastNode->SetFinal(true);
+	}
 	else
 	{
 		AddSuffix(pLastNode, WordForm.c_str()+m_Prefix.size()-1);
@@ -511,8 +504,7 @@ bool CMorphAutomatBuilder::AddStringDaciuk(const std::string& WordForm)
 
 	// CurrentIndex is a pointer to prefix node, which was not yet registered
 	int  CurrentIndex = m_Prefix.size() - 1;
-	
-	
+		
 	if (FirstConfluenceState != -1)
 	{	
 		FirstConfluenceState = GetFirstConfluenceState();
@@ -565,12 +557,6 @@ bool CMorphAutomatBuilder::AddStringDaciuk(const std::string& WordForm)
 		pLastNode = m_Prefix[CurrentIndex-1];
 		
 	};
-	
-
-//	PrintTreeJpg();
-
-	//assert (IsValid());
-	return true;
 };
 
 
