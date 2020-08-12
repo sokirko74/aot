@@ -558,7 +558,39 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
     return BuildFormats(MaxNumDom);
 }
 
+/* todo: use more json serialization
 
+void TItemContainer::WriteFieldsJson() const {
+    auto fields = nlohmann::json::array();
+    for (auto f : Fields) {
+        nlohmann::json signats = nlohmann::json::array();
+        for (auto s : f.m_Signats) {
+            nlohmann::json signat = {
+                {"id", s.SignatId},
+                {"order", s.OrderNo},
+                {"format", s.FormatStr},
+                {"name", s.FormatName},
+            };
+            signats.push_back(signat);
+        }
+
+        nlohmann::json field = {
+            {"id", f.FieldId},
+            {"name", f.FieldStr},
+            {"type", f.TypeRes},
+            {"actant", f.IsApplicToActant},
+            {"order", f.OrderId},
+            {"signats", signats},
+        };
+        fields.push_back(field);
+
+    };
+    std::ofstream outf(FieldsFile);
+    outf << fields.dump(4);
+    outf.close();
+
+};
+*/
 bool TItemContainer::WriteFields() const {
     FILE *fp = fopen(FieldsFile.c_str(), "wb");
     fprintf(fp, "%i\r\n", Fields.size());

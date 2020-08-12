@@ -92,10 +92,8 @@ void CMorphwizardDoc::Serialize(CArchive& ar)
 		CGriIni cIni;
 		cIni.Init();
 		CWizardProgressMeter meter(m_Wizard);
-		bool ret = GetWizard()->load_wizard(ar.GetFile()->GetFilePath(), dlgLogin.m_name);
-		
+		GetWizard()->load_wizard(ar.GetFile()->GetFilePath(), dlgLogin.m_name);
 		SetInputLanguage(GetWizard()->m_Language);
-
 		cIni.Exit();
 	}
 }
