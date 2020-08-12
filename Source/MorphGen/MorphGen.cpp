@@ -1,9 +1,3 @@
-// MorphGen.cpp : Defines the entry point for the console application.
-//
-#pragma warning(disable:4786)
-#pragma warning(disable:4503)
-
-
 #include "../LemmatizerLib/StdMorph.h"
 #include "../LemmatizerLib/Predict.h"
 #include "../MorphWizardLib/wizard.h"
@@ -96,96 +90,70 @@ int main(int argc, const char* argv[])
 
 		MorphoWizard Wizard;
 		std::string WizardFilename = argv[1];
-		if (!Wizard.load_wizard(args.Retrieve("input").c_str(), "guest", false))
-		{	
-			fprintf (stderr,"Cannot load mrd-file : %s\n", WizardFilename.c_str());
-			return 1;
-		};
-
+		Wizard.load_wizard(args.Retrieve("input").c_str(), "guest", false);
 		if (!bAllowRussianJo)
 		{
-			fprintf (stderr,"prepare_for_RML\n");
+			std::cerr << "prepare_for_RML\n";
 			if (!Wizard.prepare_for_RML())
 				return 1;
 		};
 		if (bAllowRussianJeJo)
 		{
-			fprintf (stderr,"prepare_for_RML2\n");
+			std::cerr << "prepare_for_RML2\n";
 			if (!Wizard.prepare_for_RML2())
 				return 1;
 		};
 
 		{
 			CMorphDictBuilder R(Wizard.m_Language);
-
-
-			if (!R.GenerateLemmas(Wizard))
+			R.GenerateLemmas(Wizard);
+			R.GenerateUnitedFlexModels(Wizard);
+			R.CreateAutomat(Wizard);
+			std::cerr << "Saving...\n";
+			std::string outFileName = std::string(OutputPath + MORPH_MAIN_FILES);
+			if (!R.Save(outFileName))
 			{
-				fprintf (stderr,"Cannot generate lemmas \n");
+				std::cerr << "Cannot save the main automat to " << outFileName << std::endl;
 				return 1;
 			};
-		
-			if (!R.GenerateUnitedFlexModels(Wizard))
-			{
-				fprintf (stderr,"Cannot generate flex models \n");
-				return 1;
-			};
+			std::cerr << "Successful written indices of the main automat to " << outFileName << std::endl;
 
-
-			if (!R.CreateAutomat(Wizard )) 
-			{
-				fprintf (stderr,"Cannot create the main automat \n");
-				return 1;
-			};
-
-			fprintf (stderr,"Saving...\n");
-			if (!R.Save(OutputPath+MORPH_MAIN_FILES)) 
-			{
-				fprintf (stderr,"Cannot save the main automat to %s\n", std::string(OutputPath+MORPH_MAIN_FILES).c_str());
-				return 1;
-			};
-			fprintf (stderr,"Successful written indices of the main automat to %s\n", std::string(OutputPath+MORPH_MAIN_FILES).c_str());
-
-			fprintf (stderr,"test\n");
-
-		
 			if (!R.GenPredictIdx(Wizard, PostfixLength, MinFreq, OutputPath))
 			{
-				fprintf (stderr,"Cannot create prediction base \n");
+				std::cerr << "Cannot create prediction base\n";
 				return 1;
 			};
 		}
 
 		
 		{ // generating options file
-			std::string OptFileName = OutputPath+OPTIONS_FILE;
-			fprintf(stderr, "writing options file %s\n", OptFileName.c_str());
+			std::string OptFileName = OutputPath + OPTIONS_FILE;
+			std::cerr << "writing options file " << OptFileName << std::endl;
 			FILE * opt_fp = fopen(OptFileName.c_str(),"w");
 			if (!opt_fp)
 			{
-				fprintf (stderr,"Cannot write to file %s \n",OptFileName.c_str());
+				std::cerr << "Cannot write to file " << OptFileName << std::endl;
 				return 1;
 			};
 			if (bAllowRussianJo)
 				fprintf (opt_fp,"AllowRussianJo\n");
 			fclose (opt_fp);
-			fprintf (stderr,"Options file was created\n");
+			std::cerr << "Options file was created\n";
 		}
 
 	}
-	catch(CExpc c)
+	catch(CExpc e)
 	{
-		printf("Can not Generate: %s\n", c.m_strCause.c_str());
+		std::cerr << "exception=" << e.m_strCause << std::endl;
 		return 1;
 	}
 	catch(...)
 	{
-		printf("Can not Generate\n");
+		std::cerr << "Can not Generate,  general exception\n";
 		return 1;
 	}
 
-	fprintf(stderr, "exit\n");
-
+	std::cerr << "exit with success\n";
 	return 0;
 }
 
