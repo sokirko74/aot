@@ -5,14 +5,104 @@
 #include "ger_consts.h"       
 
 
+
+const static std::string GermanPartOfSpeech[] = {
+	"ART",
+	"ADJ",
+	"ADV",
+	"EIG",
+	"SUB",
+	"VER",
+	"PA1",
+	"PA2",
+	"PRO",
+	"PRP",
+	"KON",
+	"NEG",
+	"INJ",
+	"ZAL",
+	"ZUS",
+	"PROBEG",
+	"INF"
+};
+
+const static std::string GermanGrammems[] = {
+
+	//common unknown 0..3
+	"noa", // ohne artikel
+	"prd", // predikativ
+	"pro",
+	"tmp",
+
+
+	// eigennamen 4..12
+	"nac","mou","cou","geo","wat","geb","std","lok","vor",
+
+	//  reflexive Verben 13..14
+	"sich-akk","sich-dat",
+
+	// verb clasess 15..18
+	"sft","non","mod","aux",
+
+	// verb forms 19..26
+	"kj1","kj2","pa1","pa2","eiz","imp","prt","prae",
+
+	//adjective 27..29
+	"gru","kom","sup",
+
+	// konjunk 30..34
+	"pri","inf","vgl","neb","unt",
+
+
+	//pronouns 35..41
+	"per","dem","inr","pos","ref","rin","alg",
+
+	//adjective's articles 42.44
+	"sol","ind","def",
+
+	//persons 45..47
+	"1",  "2",  "3",
+
+	//genus 48..50
+	"fem","mas","neu",
+
+
+	// number 51..52
+	"plu","sin",
+
+	//cases 53..56
+	"nom","gen","dat","akk",
+
+	//abbreviation 57
+	"abbr",
+
+	//Einwohnerbezeichnung 58
+	"ew",
+
+	//Transitiv 59,60,61
+	"trans", "intra", "imper"
+};
+
+
+const static std::string  GermanClauseTypes[] =
+{
+	"VERBSATZ", 
+	"PARTIZIPIALSATZ", 
+	"INFINITIVSATZ"
+};
+
 extern std::string CommonAncodeAssignFunction(const CAgramtab* pGramTab, const std::string& s1, const std::string& s2);
 
 CGerGramTab :: CGerGramTab()
 {
+	assert(sizeof(GermanGrammems) / sizeof(std::string) == GermanGrammemsCount);
+	assert(sizeof(GermanPartOfSpeech) / sizeof(std::string) == GERMAN_PART_OF_SPEECH_COUNT);
+	assert(sizeof(GermanClauseTypes) / sizeof(std::string) == GERMAN_CLAUSE_TYPE_COUNT);
+
 	for (size_t i = 0; i<GetMaxGrmCount(); i++)
 	    GetLine(i) = NULL;
 
-	m_Language = morphEnglish;
+	m_Language = morphGerman;
 }
 
 
@@ -23,18 +113,35 @@ CGerGramTab :: ~CGerGramTab()
 			delete GetLine(i);
 }
 
+BYTE CGerGramTab::GetPartOfSpeechesCount() const { 
+	return GERMAN_PART_OF_SPEECH_COUNT;
+};
 
+const char* CGerGramTab::GetPartOfSpeechStr(BYTE i) const { 
+		return GermanPartOfSpeech[i].c_str();
+};
+
+size_t CGerGramTab::GetGrammemsCount()  const { 
+		return GermanGrammemsCount;
+};
+
+const char* CGerGramTab::GetGrammemStr(size_t i) const { 
+	return GermanGrammems[i].c_str(); 
+};
+
+size_t CGerGramTab::GetMaxGrmCount() const { 
+	return gMaxGrmCount; 
+};
 
 long CGerGramTab::GetClauseTypeByName(const char* TypeName) const
 {
-	for(int i = 0 ; i < gClauseTypesCount ; i++ )
+	for(int i = 0 ; i < GERMAN_CLAUSE_TYPE_COUNT; i++ )
 	{
-		if( !strcmp(gClauseTypes[i], TypeName) )
+		if(GermanClauseTypes[i] == TypeName)
 		{
 			return i;
 		}
 	}
-
 	return -1;
 }
 
@@ -42,11 +149,16 @@ long CGerGramTab::GetClauseTypeByName(const char* TypeName) const
 const char* CGerGramTab::GetClauseNameByType(long type) const
 
 {
-	if (type >= gClauseTypesCount) return 0;
+	if (type >= GERMAN_CLAUSE_TYPE_COUNT) return 0;
 	if (type < 0) return 0;
-
-	return gClauseTypes[type];	
+	return GermanClauseTypes[type].c_str();
 }
+
+const size_t CGerGramTab::GetClauseTypesCount() const
+{
+	return GERMAN_CLAUSE_TYPE_COUNT;
+};
+
 
 bool GenderNumberGerman(const CAgramtabLine* l1, const CAgramtabLine* l2)
 {
@@ -99,9 +211,6 @@ bool CGerGramTab::GleicheSubjectPredicate(const char* subj, const char* pred) co
 {
 	return  Gleiche(SubjectPredicateGerman, subj, pred) != 0;
 }
-
-
-
 
 bool CGerGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
 {

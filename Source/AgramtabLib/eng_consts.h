@@ -2,13 +2,9 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko, Dmitry Pankratov
 
-#ifndef __AGRAMTABLib_LIBRARY_DEFINED__
+#pragma once
 
-#ifndef eng_consts_h
- #define eng_consts_h
-
-
- enum ePartOfSpeeches 
+ enum EnglishPartOfSpeechEnum
  {
 	  eNOUN  = 0, 
 	  eADJ = 1, 
@@ -26,11 +22,12 @@
 	  eORDNUM = 13,  
 	  ePRON = 14,
 	  ePOSS = 15,
-	  ePN_ADJ = 16
+	  ePN_ADJ = 16,
+	  ENGLISH_PART_OF_SPEECH_COUNT = 17
 };
 
 
-enum eGrammems {
+enum EnglishGrammemsEnum {
 		eSingular = 0,
 		ePlural = 1,
 		eMasculinum = 2,
@@ -65,12 +62,6 @@ enum eGrammems {
 		eApostropheS = 30,
         eApostrophe = 31,
 		eNames = 32,
-        eOrganisation = 33
-
+        eOrganisation = 33,
+		EnglishGrammemsCount = 34
  };
-
-
-#endif
-
-
-#endif

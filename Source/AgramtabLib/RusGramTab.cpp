@@ -7,105 +7,112 @@
 
 // не должно быть пробелов между словами 
 
-const char* rPartOfSpeechesStr[] =
-{ "С",  // 0
-	"П", // 1
-	"Г", // 2
-	"МС", // 3
-	"МС-П", // 4
-	"МС-ПРЕДК", // 5
-	"ЧИСЛ", // 6
-	"ЧИСЛ-П", // 7
-	"Н", // 8
-	"ПРЕДК", //9 
-	"ПРЕДЛ", // 10
-	"ПОСЛ", // 11
-	"СОЮЗ", // 12
-	"МЕЖД", // 13
-	"ВВОДН",// 14
-	"ФРАЗ", // 15
-	"ЧАСТ", // 16
-	"КР_ПРИЛ",  // 17
-	"ПРИЧАСТИЕ", //18
-	"ДЕЕПРИЧАСТИЕ", //19
-	"КР_ПРИЧАСТИЕ", // 20
-	"ИНФИНИТИВ"  //21
-};
-
-const short GrammemsCount = 52;
-const char* Grammems[GrammemsCount] = {
-	// 0..1
-	"мн","ед",
-	// 2..8
-	"им","рд","дт","вн","тв","пр","зв",
-	// род 9-12
-	"мр","жр","ср","мр-жр",
-	// 13..15
-	"нст","буд","прш",
-	// 16..18
-	"1л","2л","3л",
-	// 19
-	"пвл",
-	// 20..21
-	"од","но",
-	// 22
-	"сравн",
-	// 23..24
-	"св","нс",
-	// 25..26
-	"нп","пе",
-	// 27..28
-	"дст","стр",
-	// 29-31
-	"0", "аббр", "отч",
-	// 32-33
-	"лок", "орг",
-	// 34-35
-	"кач", "дфст",
-	// 36-37 (наречия)
-	"вопр", "указат",
-	// 38..39
-	"имя","фам",
-	// 40
-	"безл",
-	// 41,42
-	"жарг", "опч",
-	// 43,44,45
-	"разг", "притяж", "арх",
-	// для второго родительного и второго предложного
-	"2",
-	"поэт", "проф",
-	"прев", "полож"
+const static std::string RussianPartOfSpeech[] =
+{ 
+	_R("С"),  // 0
+	_R("П"), // 1
+	_R("Г"), // 2
+	_R("МС"), // 3
+	_R("МС-П"), // 4
+	_R("МС-ПРЕДК"), // 5
+	_R("ЧИСЛ"), // 6
+	_R("ЧИСЛ-П"), // 7
+	_R("Н"), // 8
+	_R("ПРЕДК"), //9 
+	_R("ПРЕДЛ"), // 10
+	_R("ПОСЛ"), // 11
+	_R("СОЮЗ"), // 12
+	_R("МЕЖД"), // 13
+	_R("ВВОДН"),// 14
+	_R("ФРАЗ"), // 15
+	_R("ЧАСТ"), // 16
+	_R("КР_ПРИЛ"),  // 17
+	_R("ПРИЧАСТИЕ"), //18
+	_R("ДЕЕПРИЧАСТИЕ"), //19
+	_R("КР_ПРИЧАСТИЕ"), // 20
+	_R("ИНФИНИТИВ")  //21
 };
 
 
+const static std::string Grammems[] = {
+	_R("мн"),
+	_R("ед"),
+	_R("им"),
+	_R("рд"),
+	_R("дт"),
+	_R("вн"),
+	_R("тв"),
+	_R("пр"),
+	_R("зв"),
+	_R("мр"),
+	_R("жр"),
+	_R("ср"),
+	_R("мр-жр"),
+	_R("нст"),
+	_R("буд"),
+	_R("прш"),
+	_R("1л"),
+	_R("2л"),
+	_R("3л"),
+	_R("пвл"),
+	_R("од"),
+	_R("но"),
+	_R("сравн"),
+	_R("св"),
+	_R("нс"),
+	_R("нп"),
+	_R("пе"),
+	_R("дст"),
+	_R("стр"),
+	_R("0"), 
+	_R("аббр"), 
+	_R("отч"),
+	_R("лок"), 
+	_R("орг"),
+	_R("кач"), 
+	_R("дфст"),
+	_R("вопр"), 
+	_R("указат"),
+	_R("имя"),
+	_R("фам"),
+	_R("безл"),
+	_R("жарг"), 
+	_R("опч"),
+	_R("разг"), 
+	_R("притяж"), 
+	_R("арх"),
+	_R("2"),
+	_R("поэт"), 
+	_R("проф"),
+	_R("прев"), 
+	_R("полож")
+};
 
 
-const int rClauseTypesCount = 12;
-const char rClauseTypes[rClauseTypesCount][30] =
+std::string rClauseTypes[] =
 {
-	"ГЛ_ЛИЧН",
-	"ДПР",
-	"КР_ПРЧ",
-	"КР_ПРИЛ",
-	"ПРЕДК",
-	"ПРЧ",
-	"ИНФ",
-	"ВВОД",
-	"ТИРЕ",
-	"НСО",
-	"СРАВН",
-	"КОПУЛ"
+	_R("ГЛ_ЛИЧН"),
+	_R("ДПР"),
+	_R("КР_ПРЧ"),
+	_R("КР_ПРИЛ"),
+	_R("ПРЕДК"),
+	_R("ПРЧ"),
+	_R("ИНФ"),
+	_R("ВВОД"),
+	_R("ТИРЕ"),
+	_R("НСО"),
+	_R("СРАВН"),
+	_R("КОПУЛ")
 };
-
-
 
 
 CRusGramTab::CRusGramTab()
 {
-	size_t i = 0;
-
-	for (; i < GetMaxGrmCount(); i++)
+	assert(sizeof(Grammems) / sizeof(std::string) == RussianGrammemsCount);
+	assert(sizeof(RussianPartOfSpeech) / sizeof(std::string) == RUSSIAN_PART_OF_SPEECH_COUNT);
+	assert(sizeof(rClauseTypes) / sizeof(std::string) == RUSSIAN_CLAUSE_TYPE_COUNT);
+	
+	for (size_t i = 0; i < GetMaxGrmCount(); i++)
 		GetLine(i) = NULL;
 	m_Language = morphRussian;
 }
@@ -126,27 +133,27 @@ const char* CRusGramTab::GetRegistryString() const
 
 BYTE	CRusGramTab::GetPartOfSpeechesCount() const
 {
-	return rPartOfSpeechCount;
+	return RUSSIAN_PART_OF_SPEECH_COUNT;
 };
 
 size_t CRusGramTab::GetMaxGrmCount() const
 {
-	return MaxGrmCount;
+	return rMaxGrmCount;
 }
 
 const char* CRusGramTab::GetPartOfSpeechStr(BYTE i) const
 {
-	return rPartOfSpeechesStr[i];
+	return RussianPartOfSpeech[i].c_str();
 };
 
 size_t			CRusGramTab::GetGrammemsCount()  const
 {
-	return GrammemsCount;
+	return RussianGrammemsCount;
 };
 
 const char* CRusGramTab::GetGrammemStr(size_t i) const
 {
-	return Grammems[i];
+	return Grammems[i].c_str();
 };
 
 CAgramtabLine*& CRusGramTab::GetLine(size_t LineNo)
@@ -161,12 +168,12 @@ const CAgramtabLine* CRusGramTab::GetLine(size_t LineNo) const
 
 size_t CRusGramTab::s2i(const char* s)  const
 {
-	return  (unsigned char)s[0] * 0x100 + (unsigned char)s[1] - StartUp;
+	return  (unsigned char)s[0] * 0x100 + (unsigned char)s[1] - rStartUp;
 };
 
 std::string CRusGramTab::i2s(WORD i) const
 {
-	i += StartUp;
+	i += rStartUp;
 	char res[3];
 
 	res[0] = (i >> 8);
@@ -464,14 +471,14 @@ bool CRusGramTab::GleicheCase(const char* gram_code1, const char* gram_code2) co
 
 const size_t CRusGramTab::GetClauseTypesCount() const
 {
-	return rClauseTypesCount;
+	return RUSSIAN_CLAUSE_TYPE_COUNT;
 };
 
 long CRusGramTab::GetClauseTypeByName(const char* TypeName) const
 {
-	for (int i = 0; i < rClauseTypesCount; i++)
+	for (int i = 0; i < RUSSIAN_CLAUSE_TYPE_COUNT; i++)
 	{
-		if (!strcmp(rClauseTypes[i], TypeName))
+		if (rClauseTypes[i] == TypeName)
 		{
 			return i;
 		}
@@ -483,10 +490,10 @@ long CRusGramTab::GetClauseTypeByName(const char* TypeName) const
 
 const char* CRusGramTab::GetClauseNameByType(long type) const
 {
-	if (type >= rClauseTypesCount) return 0;
+	if (type >= RUSSIAN_CLAUSE_TYPE_COUNT) return 0;
 	if (type < 0) return 0;
 
-	return rClauseTypes[type];
+	return rClauseTypes[type].c_str();
 }
 
 

@@ -3,9 +3,40 @@
 // ==========  Copyright by Alexey Sokirko
 #include "EngGramTab.h"
 
+const static std::string EnglishPartOfSpeech[] =
+{
+	"NOUN",
+	"ADJECTIVE",
+	"VERB",
+	"VBE",
+	"MOD",
+	"NUMERAL",
+	"CONJ",
+	"INT",
+	"PREP",
+	"PART",
+	"ARTICLE",
+	"ADVERB",
+	"PN",
+	"ORDNUM",
+	"PRON",
+	"POSS",
+	"PN_ADJ"
+};
+
+const static std::string EnglishGrammems[] =
+{
+	"sg", "pl", "m", "f", "anim", "perf", "nom", "obj", "narr","geo",
+	"prop" ,"pers", "poss", "pred", "uncount", "ref", "dem", "mass", "comp", "sup",
+	"1", "2", "3", "prsa", "inf", "pasa", "pp", "ing", "fut", "if", "plsq", "plsgs", "name","org" 
+};
+
 
 CEngGramTab :: CEngGramTab()
 {
+	assert(sizeof(EnglishGrammems) / sizeof(std::string) == EnglishGrammemsCount);
+	assert(sizeof(EnglishPartOfSpeech) / sizeof(std::string) == ENGLISH_PART_OF_SPEECH_COUNT);
+
 	for (size_t i = 0; i<GetMaxGrmCount(); i++) 
 	    GetLine(i) = NULL;
 	m_Language = morphEnglish;
@@ -22,8 +53,25 @@ CEngGramTab :: ~CEngGramTab()
 		};
 };
 
+BYTE CEngGramTab::GetPartOfSpeechesCount() const { 
+	return ENGLISH_PART_OF_SPEECH_COUNT;
+};
 
+const char* CEngGramTab::GetPartOfSpeechStr(BYTE i) const { 
+	return EnglishPartOfSpeech[i].c_str();
+};
 
+size_t CEngGramTab::GetGrammemsCount()  const { 
+	return EnglishGrammemsCount;
+};
+
+const char* CEngGramTab::GetGrammemStr(size_t i) const { 
+	return EnglishGrammems[i].c_str();
+};
+
+size_t CEngGramTab::GetMaxGrmCount() const { 
+	return eMaxGrmCount; 
+};
 
 
 bool CEngGramTab::GleicheGenderNumber(const char* gram_code1, const char* gram_code2) const

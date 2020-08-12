@@ -294,3 +294,15 @@ extern QWORD pow(QWORD x,int y);
 
 extern int CountBits(QWORD value);
 extern size_t FindFloatingPoint(const char* str);
+
+inline std::string _R(const char* buffer) {
+	return convert_from_utf(buffer, morphRussian);
+}
+
+inline std::string _E(const char* buffer) {
+	return convert_from_utf(buffer, morphEnglish);
+}
+
+inline std::string _G(const char* buffer) {
+	return convert_from_utf(buffer, morphGerman);
+}

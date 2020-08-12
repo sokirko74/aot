@@ -2,68 +2,31 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
-#ifndef __EngGRAMTAB_H_
-#define __EngGRAMTAB_H_
-
+#pragma once
 
 #include "agramtab_.h"       // main symbols
-
-
-/////////////////////////////////////////////////////////////////////////////
-// CEngGramTab
-	const unsigned int eStartUp =  0x6161; //aa 
-	const unsigned int eEndUp =  0x7A7B;  //zz + 1
-	const unsigned int eMaxGrmCount  = eEndUp -eStartUp; // // 5911  (5 Кб) 
-
-	const BYTE ePartOfSpeechesCount = 17;
-	// не должно быть пробелов между словами 
-	const char ePartOfSpeeches[ePartOfSpeechesCount][20] = 
-	{
-		"NOUN",
-		"ADJECTIVE", // полное прилагательное
-		"VERB",
-		"VBE",
-		"MOD",
-		"NUMERAL",
-		"CONJ",
-		"INT",
-		"PREP",
-		"PART",
-		"ARTICLE",
-		"ADVERB",
-		"PN",
-		"ORDNUM",
-		"PRON",
-		"POSS",
-		"PN_ADJ"
-	};
-	const short eGrammemsCount = 34;
-    const char eGrammems[eGrammemsCount][8] = {
-      "sg", "pl", "m", "f", "anim", "perf", "nom", "obj", "narr","geo", 
-      "prop" ,"pers", "poss", "pred", "uncount", "ref", "dem", "mass", "comp", "sup", 
-      "1", "2", "3", "prsa", "inf", "pasa", "pp", "ing", "fut", "if", "plsq", "plsgs", "name","org"};
-
-
+#include "eng_consts.h"
 
 
 
 class CEngGramTab : public CAgramtab
 {
+	const static size_t eStartUp = 0x6161; //aa 
+	const static size_t eEndUp = 0x7A7B;  //zz + 1
+	const static size_t eMaxGrmCount = eEndUp - eStartUp; // // 5911  (5 Кб) 
 public:
 	CAgramtabLine*  Lines[eMaxGrmCount];
 	CEngGramTab();
 	~CEngGramTab();
 	
-	BYTE GetPartOfSpeechesCount () const {return ePartOfSpeechesCount;};
-	const char*   GetPartOfSpeechStr(BYTE i) const {return ePartOfSpeeches[i];};
-	size_t GetGrammemsCount()  const {return eGrammemsCount;};
-	const char*   GetGrammemStr(size_t i) const {return eGrammems[i];};
-	size_t GetMaxGrmCount() const {return eMaxGrmCount;};
+	BYTE GetPartOfSpeechesCount() const;
+	const char* GetPartOfSpeechStr(BYTE i) const;
+	size_t GetGrammemsCount()  const;
+	const char* GetGrammemStr(size_t i) const;
+	size_t GetMaxGrmCount() const;
 	CAgramtabLine*& GetLine(size_t LineNo) {return Lines[LineNo];}
 	const CAgramtabLine* GetLine(size_t LineNo) const {return Lines[LineNo];};
 	size_t s2i(const char * s ) const { return  (unsigned char) s[0]*0x100+(unsigned char) s[1] - eStartUp;};
-
-
 	std::string i2s(WORD i)  const
 	{ 
 		i += eStartUp;
@@ -116,6 +79,3 @@ public:
 
 
 };
-
-
-#endif

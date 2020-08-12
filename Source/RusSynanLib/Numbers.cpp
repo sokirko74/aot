@@ -231,7 +231,7 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 
 
 
-size_t get_number_with_this_case(const CSynPlmLine& L,rGrammems Case, const CAgramtab* piRusGramTab )
+size_t get_number_with_this_case(const CSynPlmLine& L,RussianGrammemsEnum Case, const CAgramtab* piRusGramTab )
 {
 	unsigned int ret_gram = 0;
 	if (!L.GetGramcodes()) return 0;

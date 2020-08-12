@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+	// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
@@ -7,16 +7,13 @@
 #include "agramtab_.h"
 #include "rus_consts.h"
 
-const unsigned int  StartUp = 0xC0E0; //Аа 
-const unsigned int  EndUp = 0x10000;  //яя
-const unsigned int MaxGrmCount = EndUp - StartUp; // // 16159  (16 Кб) 
-const BYTE rPartOfSpeechCount = 22;
-
-
 
 class CRusGramTab : public CAgramtab {
+	const static size_t  rStartUp = 0xC0E0; //Аа 
+	const static size_t  rEndUp = 0x10000;  //яя
+	const static size_t rMaxGrmCount = rEndUp - rStartUp; // // 16159  (16 Кб) 
 public:
-	CAgramtabLine* Lines[MaxGrmCount];
+	CAgramtabLine* Lines[rMaxGrmCount];
 	CRusGramTab();
 	~CRusGramTab();
 
