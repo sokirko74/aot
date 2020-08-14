@@ -155,7 +155,7 @@ int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
     MorphLanguageEnum  language = args.GetLanguage();
-
+    
     bPrintIds = !args.Exists("no-ids");
     bPrintForms = args.Exists("forms");
     bSortParadigms = args.Exists("sort");
@@ -163,7 +163,7 @@ int main(int argc, const char **argv) {
     
 	std::cerr << "Loading..\n";
     if (!Holder.LoadLemmatizer(language)) {
-        std::cerr << "Cannot load %s morphology\n";
+        std::cerr << "Cannot load morphology\n";
         return 1;
     }
 

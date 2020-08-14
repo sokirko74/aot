@@ -13,15 +13,16 @@
 //======================================================
 
 
-CMorphDict::CMorphDict(MorphLanguageEnum Language) : 
+CMorphDict::CMorphDict(MorphLanguageEnum language) : 
     m_SearchInfoLess(m_Bases)
 {
     m_pFormAutomat  = 0;
+    m_Language = language;
 };
 
 CMorphDict::~CMorphDict() 
 {
-    if (m_pFormAutomat != 0)
+    if (m_pFormAutomat != nullptr)
         delete m_pFormAutomat;
     m_pFormAutomat = 0;
 };
@@ -209,37 +210,29 @@ bool CMorphDict::Save(std::string GrammarFileName) const
 
 
         std::string PrecompiledFile = MakeFName(GrammarFileName,"annot");
-        FILE * fp = fopen(PrecompiledFile.c_str(), "wb");
-        if (!fp)
+        std::ofstream outp(PrecompiledFile, std::ios::binary);
+        if (!outp.is_open())
         {
             ErrorMessage (Format("Cannot write to %s", PrecompiledFile.c_str()));
             return false;
         };
-
-        
-
-        WriteFlexiaModels(fp);
-
-        WriteAccentModels(fp);
-
-        
+        WriteFlexiaModels(outp);
+        WriteAccentModels(outp);
         assert (!m_Prefixes.empty() && m_Prefixes[0].empty());
-        // do not write the first empty prefix, instead add it manually each time during loading
-        fprintf(fp, "%i\n", m_Prefixes.size()-1);
-
-        for (size_t i=1; i < m_Prefixes.size(); i++)
-            fprintf (fp, "%s\n",m_Prefixes[i].c_str());
         
-
-        fprintf(fp, "%i\n", m_LemmaInfos.size());
-        if (!WriteVectorInner(fp, m_LemmaInfos)) return false;
+        // do not write the first empty prefix, instead add it manually each time during loading
+        outp << m_Prefixes.size() - 1 << "\n";
+        for (size_t i = 1; i < m_Prefixes.size(); i++) {
+            outp << m_Prefixes[i] << "\n";
+        }
+        
+        outp << m_LemmaInfos.size() << "\n";
+        if (!WriteVectorStream(outp, m_LemmaInfos)) return false;
 
         assert (m_NPSs.size()  == m_FlexiaModels.size());
-        fprintf(fp, "%i\n", m_NPSs.size());
-        if (!WriteVectorInner(fp, m_NPSs)) return false;
-        
-
-        fclose(fp);
+        outp <<  m_NPSs.size() << "\n";
+        if (!WriteVectorStream(outp, m_NPSs)) return false;
+        outp.close();
 
         if (!m_Bases.WriteShortStringHolder(MakeFName(GrammarFileName,"bases")))
         {

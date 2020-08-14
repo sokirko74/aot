@@ -159,7 +159,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 			if ( m_Words[j].GetHomonymsCount() > 1 && !isdigit((BYTE)m_Words[j].m_strWord[0]) ) continue;
 
-			if ( m_Words[j].GetSynHomonym(0).IsLemma(_R("КОТОРЫЙ"))) )
+			if ( m_Words[j].GetSynHomonym(0).IsLemma(_R("КОТОРЫЙ"))) 
 				continue;
 
 			if (		HasNounInNom( m_Words[j]) 

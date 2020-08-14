@@ -13,7 +13,7 @@ CFormatCall::CFormatCall()
 	m_format = NULL; 
 };
 
-CFormatCall::CFormatCall(CFormatFunc _format, const char*  _name, int _dir) 
+CFormatCall::CFormatCall(CFormatFunc _format, const std::string&  _name, int _dir) 
 { 
 	m_format = _format;
 	m_name =  _name;

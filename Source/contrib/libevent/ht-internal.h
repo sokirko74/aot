@@ -72,9 +72,9 @@ ht_improve_hash_(unsigned h)
 }
 
 #if 0
-/** Basic std::string hash function, from Java standard String.hashCode(). */
+/** Basic string hash function, from Java standard String.hashCode(). */
 static inline unsigned
-ht_std::string_hash_(const char *s)
+ht_string_hash_(const char *s)
 {
   unsigned h = 0;
   int m = 1;
@@ -86,7 +86,7 @@ ht_std::string_hash_(const char *s)
 }
 #endif
 
-/** Basic std::string hash function, from Python's str.__hash__() */
+/** Basic string hash function, from Python's str.__hash__() */
 static inline unsigned
 ht_string_hash_(const char *s)
 {
@@ -96,7 +96,7 @@ ht_string_hash_(const char *s)
   while (*cp) {
     h = (1000003*h) ^ *cp++;
   }
-  /* This conversion truncates the length of the std::string, but that's ok. */
+  /* This conversion truncates the length of the string, but that's ok. */
   h ^= (unsigned)(cp-(const unsigned char*)s);
   return h;
 }

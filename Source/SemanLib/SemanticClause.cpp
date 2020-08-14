@@ -1218,7 +1218,7 @@ bool CRusSemStructure::TryClauseCHTO_WITH_ANIMAT (long ClauseRuleNo, long Clause
  //всегда возвращаем false, поскольку другая процедура должна построить межклаузную связь на союзе
  // _R("что"), который теперь уже союз, ведь он стоит изолированно
  Conj->m_DictType  = OborRoss;
- Conj->m_UnitNo  = GetRossHolder(OborRoss)->LocateUnit (_R("что"), 1);
+ Conj->m_UnitNo  = GetRossHolder(OborRoss)->LocateUnit (_R("что").c_str(), 1);
  return false;
 };
 

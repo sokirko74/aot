@@ -9,7 +9,7 @@
 #include "../SynCommonLib/Group.h"
 
 const int  g_AdjModifCount = 2;
-const char g_strAdjModif[g_AdjModifCount][MAX_WORD_LEN] = {_R("САМЫЙ"),_R("ТАКОЙ")};
+const std::string g_strAdjModif[g_AdjModifCount] = {_R("САМЫЙ"),_R("ТАКОЙ")};
 
 
 

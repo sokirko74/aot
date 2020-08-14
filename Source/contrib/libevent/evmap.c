@@ -43,6 +43,7 @@
 #include <unistd.h>
 #endif
 #include <errno.h>
+#include <limits.h>
 #include <signal.h>
 #include <string.h>
 #include <time.h>
@@ -207,8 +208,14 @@ evmap_make_space(struct event_signal_map *map, int slot, int msize)
 		int nentries = map->nentries ? map->nentries : 32;
 		void **tmp;
 
+		if (slot > INT_MAX / 2)
+			return (-1);
+
 		while (nentries <= slot)
 			nentries <<= 1;
+
+		if (nentries > INT_MAX / msize)
+			return (-1);
 
 		tmp = (void **)mm_realloc(map->entries, nentries * msize);
 		if (tmp == NULL)
@@ -425,7 +432,7 @@ evmap_io_active_(struct event_base *base, evutil_socket_t fd, short events)
 	if (NULL == ctx)
 		return;
 	LIST_FOREACH(ev, &ctx->events, ev_io_next) {
-		if (ev->ev_events & events)
+		if (ev->ev_events & (events & ~EV_ET))
 			event_active_nolock_(ev, ev->ev_events & events, 1);
 	}
 }
@@ -445,6 +452,9 @@ evmap_signal_add_(struct event_base *base, int sig, struct event *ev)
 	const struct eventop *evsel = base->evsigsel;
 	struct event_signal_map *map = &base->sigmap;
 	struct evmap_signal *ctx = NULL;
+
+	if (sig < 0 || sig >= NSIG)
+		return (-1);
 
 	if (sig >= map->nentries) {
 		if (evmap_make_space(
@@ -472,7 +482,7 @@ evmap_signal_del_(struct event_base *base, int sig, struct event *ev)
 	struct event_signal_map *map = &base->sigmap;
 	struct evmap_signal *ctx;
 
-	if (sig >= map->nentries)
+	if (sig < 0 || sig >= map->nentries)
 		return (-1);
 
 	GET_SIGNAL_SLOT(ctx, map, sig, evmap_signal);

@@ -84,32 +84,28 @@ BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr) const {
 };
 
 bool TItemContainer::AreEqualDomItems(const TDomItem &Item1, const TDomNoItemStr &Item2) const {
-    int i = strcmp(GetDomItemStr(Item1), Item2.ItemStr);
-
-    return (i == 0)
+    return    (Item2.ItemStr == GetDomItemStr(Item1))
            && (Item1.GetDomNo() == Item2.DomNo);
 }
 
 
-inline int TItemContainer::GetItemNoByItemStr(const char *ItemStr, const char *DomStr) const {
+inline int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, const char *DomStr) const {
     BYTE DomNo = GetDomenNoByDomStr(DomStr);
     if (DomNo == ErrUChar) return -1;
     return GetItemNoByItemStr(ItemStr, DomNo);
 };
 
-int TItemContainer::GetItemNoByItemStr(const char *ItemStr, BYTE DomNo) const {
+int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, BYTE DomNo) const {
     if (DomNo == ErrUChar) return -1;
 
     if (DomNo == LexPlusDomNo) {
-        DomNo = GetDomNoForLePlus(ItemStr);
+        DomNo = GetDomNoForLePlus(ItemStr.c_str());
         if (DomNo == ErrUChar) {
             return -1;
         };
     };
 
-    TDomNoItemStr I;
-    strcpy(I.ItemStr, ItemStr);
-    I.DomNo = DomNo;
+    TDomNoItemStr I = { ItemStr, DomNo };
     const CDomen &D = m_Domens[I.DomNo];
     if (D.Source == dsUnion) {
         int Res = -1;
@@ -122,10 +118,10 @@ int TItemContainer::GetItemNoByItemStr(const char *ItemStr, BYTE DomNo) const {
         return Res;
     } else {
         if (D.IsDelim)
-            if (!(strlen(ItemStr) == 1)
+            if (   (ItemStr.length() != 1)
                 || (D.m_DomainItemsBufferLength == 0)
                 || !strchr(D.m_DomainItemsBuffer, ItemStr[0])
-                    )
+               )
                 return -1;
         vector<TDomItem>::const_iterator U = lower_bound(m_DomItems.begin(), m_DomItems.end(), I,
                                                          IsLessByNotStableItemStrNew(this));

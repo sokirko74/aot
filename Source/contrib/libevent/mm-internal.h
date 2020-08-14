@@ -57,10 +57,10 @@ void *event_mm_malloc_(size_t sz);
 EVENT2_EXPORT_SYMBOL
 void *event_mm_calloc_(size_t count, size_t size);
 
-/** Duplicate a std::string.
+/** Duplicate a string.
  *
  * @return On success, return a pointer to a newly allocated duplicate
- *     of a std::string.
+ *     of a string.
  *     Set errno to ENOMEM and return NULL if a memory allocation error
  *     occurs (or would occur) in the process.
  *     If the argument str is NULL, set errno to EINVAL and return NULL.

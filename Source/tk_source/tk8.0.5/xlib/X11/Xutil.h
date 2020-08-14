@@ -35,7 +35,7 @@ SOFTWARE.
 
 /* 
  * Bitmask returned by XParseGeometry().  Each bit tells if the corresponding
- * value (x, y, width, height) was found in the parsed std::string.
+ * value (x, y, width, height) was found in the parsed string.
  */
 #define NoValue		0x0000
 #define XValue  	0x0001
@@ -295,7 +295,7 @@ typedef struct {
 typedef int XContext;
 
 #define XUniqueContext()       ((XContext) XrmUniqueQuark())
-#define XStringToContext(std::string)   ((XContext) XrmStringToQuark(std::string))
+#define XStringToContext(string)   ((XContext) XrmStringToQuark(string))
 
 _XFUNCPROTOBEGIN
 

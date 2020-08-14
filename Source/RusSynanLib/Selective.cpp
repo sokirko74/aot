@@ -105,7 +105,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 		if( GetGroups()[gr_num].m_GroupType != MODIF_ADJ )
 			return false;
 
-		if( !first_word_plm.is_lemma("САМЫЙ") )
+		if( !first_word_plm.is_lemma(_R("САМЫЙ")) )
 			return false;
 		next_word = GetGroups()[gr_num].m_iLastWord + 1;
 	}
@@ -123,7 +123,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 	
 	const CGroup& prep_gr = GetGroups()[next_gr_num];
 	if(		(prep_gr.m_GroupType != PREP_NOUN)
-		||	!sent[prep_gr.m_iFirstWord].is_lemma("ИЗ")
+		||	!sent[prep_gr.m_iFirstWord].is_lemma(_R("ИЗ"))
 	  )
 		return false;
 

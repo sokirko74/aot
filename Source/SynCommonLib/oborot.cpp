@@ -53,13 +53,15 @@ const CSyntaxOpt* COborDic::GetOpt() const
 
 const char OborotDels[] = " \t";
 
-int COborDic::FindSubConj(const char* word_upper) const
+int COborDic::FindSubConj(const std::string& word_upper) const
 {
-	if (!word_upper) return -1;
 	const StringVector& V = GetSubConjs();
-	StringVector::const_iterator it= find (V.begin(), V.end(), word_upper);
-	if (it == V.end()) return -1;
-	return it - V.begin();
+	for (size_t i = 0; i < V.size(); ++i) {
+		if (V[i] == word_upper) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 

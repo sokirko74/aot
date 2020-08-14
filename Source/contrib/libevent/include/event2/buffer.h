@@ -424,13 +424,13 @@ enum evbuffer_eol_style {
  * Read a single line from an evbuffer.
  *
  * Reads a line terminated by an EOL as determined by the evbuffer_eol_style
- * argument.  Returns a newly allocated nul-terminated std::string; the caller must
- * free the returned value.  The EOL is not included in the returned std::string.
+ * argument.  Returns a newly allocated nul-terminated string; the caller must
+ * free the returned value.  The EOL is not included in the returned string.
  *
  * @param buffer the evbuffer to read from
  * @param n_read_out if non-NULL, points to a size_t that is set to the
- *       number of characters in the returned std::string.  This is useful for
- *       std::strings that can contain NUL characters.
+ *       number of characters in the returned string.  This is useful for
+ *       strings that can contain NUL characters.
  * @param eol_style the style of line-ending to use.
  * @return pointer to a single line, or NULL if an error occurred
  */
@@ -647,12 +647,12 @@ int evbuffer_add_file_segment(struct evbuffer *buf,
     struct evbuffer_file_segment *seg, ev_off_t offset, ev_off_t length);
 
 /**
-  Append a formatted std::string to the end of an evbuffer.
+  Append a formatted string to the end of an evbuffer.
 
-  The std::string is formated as printf.
+  The string is formated as printf.
 
   @param buf the evbuffer that will be appended to
-  @param fmt a format std::string
+  @param fmt a format string
   @param ... arguments that will be passed to printf(3)
   @return The number of bytes added if successful, or -1 if an error occurred.
 
@@ -666,10 +666,10 @@ int evbuffer_add_printf(struct evbuffer *buf, const char *fmt, ...)
 ;
 
 /**
-  Append a va_list formatted std::string to the end of an evbuffer.
+  Append a va_list formatted string to the end of an evbuffer.
 
   @param buf the evbuffer that will be appended to
-  @param fmt a format std::string
+  @param fmt a format string
   @param ap a varargs va_list argument array that will be passed to vprintf(3)
   @return The number of bytes added if successful, or -1 if an error occurred.
  */
@@ -726,7 +726,8 @@ int evbuffer_write_atmost(struct evbuffer *buffer, evutil_socket_t fd,
 
   @param buffer the evbuffer to store the result
   @param fd the file descriptor to read from
-  @param howmuch the number of bytes to be read
+  @param howmuch the number of bytes to be read. If the given number is negative
+  or out of maximum bytes per one read, as many bytes as we can will be read.
   @return the number of bytes read, or -1 if an error occurred
   @see evbuffer_write()
  */
@@ -734,32 +735,32 @@ EVENT2_EXPORT_SYMBOL
 int evbuffer_read(struct evbuffer *buffer, evutil_socket_t fd, int howmuch);
 
 /**
-   Search for a std::string within an evbuffer.
+   Search for a string within an evbuffer.
 
    @param buffer the evbuffer to be searched
-   @param what the std::string to be searched for
-   @param len the length of the search std::string
+   @param what the string to be searched for
+   @param len the length of the search string
    @param start NULL or a pointer to a valid struct evbuffer_ptr.
    @return a struct evbuffer_ptr whose 'pos' field has the offset of the
-     first occurrence of the std::string in the buffer after 'start'.  The 'pos'
-     field of the result is -1 if the std::string was not found.
+     first occurrence of the string in the buffer after 'start'.  The 'pos'
+     field of the result is -1 if the string was not found.
  */
 EVENT2_EXPORT_SYMBOL
 struct evbuffer_ptr evbuffer_search(struct evbuffer *buffer, const char *what, size_t len, const struct evbuffer_ptr *start);
 
 /**
-   Search for a std::string within part of an evbuffer.
+   Search for a string within part of an evbuffer.
 
    @param buffer the evbuffer to be searched
-   @param what the std::string to be searched for
-   @param len the length of the search std::string
+   @param what the string to be searched for
+   @param len the length of the search string
    @param start NULL or a pointer to a valid struct evbuffer_ptr that
      indicates where we should start searching.
    @param end NULL or a pointer to a valid struct evbuffer_ptr that
      indicates where we should stop searching.
    @return a struct evbuffer_ptr whose 'pos' field has the offset of the
-     first occurrence of the std::string in the buffer after 'start'.  The 'pos'
-     field of the result is -1 if the std::string was not found.
+     first occurrence of the string in the buffer after 'start'.  The 'pos'
+     field of the result is -1 if the string was not found.
  */
 EVENT2_EXPORT_SYMBOL
 struct evbuffer_ptr evbuffer_search_range(struct evbuffer *buffer, const char *what, size_t len, const struct evbuffer_ptr *start, const struct evbuffer_ptr *end);
@@ -803,18 +804,18 @@ evbuffer_ptr_set(struct evbuffer *buffer, struct evbuffer_ptr *ptr,
     size_t position, enum evbuffer_ptr_how how);
 
 /**
-   Search for an end-of-line std::string within an evbuffer.
+   Search for an end-of-line string within an evbuffer.
 
    @param buffer the evbuffer to be searched
    @param start NULL or a pointer to a valid struct evbuffer_ptr to start
       searching at.
    @param eol_len_out If non-NULL, the pointed-to value will be set to
-      the length of the end-of-line std::string.
+      the length of the end-of-line string.
    @param eol_style The kind of EOL to look for; see evbuffer_readln() for
       more information
    @return a struct evbuffer_ptr whose 'pos' field has the offset of the
      first occurrence EOL in the buffer after 'start'.  The 'pos'
-     field of the result is -1 if the std::string was not found.
+     field of the result is -1 if the string was not found.
  */
 EVENT2_EXPORT_SYMBOL
 struct evbuffer_ptr evbuffer_search_eol(struct evbuffer *buffer,

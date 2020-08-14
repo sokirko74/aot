@@ -12300,9 +12300,9 @@ class json_pointer
     @throw parse_error.107  if the pointer is not empty or begins with '/'
     @throw parse_error.108  if character '~' is not followed by '0' or '1'
     */
-    static std::vector<string> split(const std::string& reference_string)
+    static std::vector<std::string> split(const std::string& reference_string)
     {
-        std::vector<string> result;
+        std::vector<std::string> result;
 
         // special case: empty reference string -> no reference tokens
         if (reference_string.empty())
@@ -12511,7 +12511,7 @@ class json_pointer
     }
 
     /// the reference tokens
-    std::vector<string> reference_tokens;
+    std::vector<std::string> reference_tokens;
 };
 }  // namespace nlohmann
 
@@ -12919,7 +12919,7 @@ class basic_json
     std::map<
       std::string, // key_type
       basic_json, // value_type
-      std::less<string>, // key_compare
+      std::less<std::string>, // key_compare
       std::allocator<std::pair<const std::string, basic_json>> // allocator_type
     >
     @endcode

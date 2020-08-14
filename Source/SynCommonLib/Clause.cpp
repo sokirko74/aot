@@ -97,7 +97,7 @@ std::string  CClause::GetTraceStr() const
 };
 
 
-int CClause::FindClauseSubordConj(const char* ConjStr)  const
+int CClause::FindClauseSubordConj(const std::string& ConjStr)  const
 {
 	const COborDic* D = GetOpt()->GetOborDic();
 	for(int i = 0; i < m_vectorConjs.size() ; i++ )
@@ -105,8 +105,8 @@ int CClause::FindClauseSubordConj(const char* ConjStr)  const
 		const SConjIndex& conj = m_vectorConjs[i];
 
 		if	(		( conj.m_FromWhere == FROM_SUB_CONJ )
-				&&	(		!ConjStr
-						||	!strcmp( D->GetSubConjs()[m_vectorConjs[i].m_index].c_str(), ConjStr ) 
+				&&	(		ConjStr.empty()
+						||	D->GetSubConjs()[m_vectorConjs[i].m_index] == ConjStr
 					)
 			)
 			return i;
@@ -116,8 +116,8 @@ int CClause::FindClauseSubordConj(const char* ConjStr)  const
 		{
 			const COborotForSyntax& O =  D->m_Entries[m_vectorConjs[i].m_index];
 			if (	(O.m_ConjType == sub_conj) 
-				&&	(		!ConjStr
-						||	!strcmp( O.m_OborotEntryStr.c_str(), ConjStr) 
+				&&	(		ConjStr.empty()
+						||	O.m_OborotEntryStr.c_str() == ConjStr 
 					)
 			)
 			return i;
@@ -127,7 +127,7 @@ int CClause::FindClauseSubordConj(const char* ConjStr)  const
 	return -1;
 }
 
-bool CClause::HasSubConj(const char* strConj) const 
+bool CClause::HasSubConj(const std::string& strConj) const 
 {
 	return FindClauseSubordConj(strConj) != -1;
 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+    cmake_minimum_required(VERSION 3.5)
 
 set(my_SOURCES
 AncodePattern.cpp
@@ -17,5 +17,8 @@ if (COMPILE_WITH_HTTP)
     set(my_SOURCES ${my_SOURCES} http_server.cpp)
 endif()
 
-
 add_library(aot_common  ${my_SOURCES})
+
+target_link_libraries(aot_common 
+    iconv_subset
+)

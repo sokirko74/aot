@@ -403,7 +403,7 @@ bool CRusFormatCaller::format_for_both(CGroup& G)
 
 	int i_number = -1, i_noun = -1;
 
-	if( sent[G.m_iFirstWord].is_lemma( "ОБА") )
+	if( sent[G.m_iFirstWord].is_lemma( _R("ОБА")) )
 	{
 		i_number = G.m_iFirstWord;
         if	(		! sent[G.m_iFirstWord+1].HasPOS(PRONOUN) 
@@ -418,7 +418,7 @@ bool CRusFormatCaller::format_for_both(CGroup& G)
 			&&	 sent[G.m_iFirstWord].has_grammem(rPlural) ) 
 		{
 			i_noun = G.m_iFirstWord;
-			if( sent[G.m_iFirstWord + 1].is_lemma("ОБА") )
+			if( sent[G.m_iFirstWord + 1].is_lemma( _R("ОБА") ) )
 				i_number = G.m_iFirstWord + 1;
 			else
 				return false;

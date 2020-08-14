@@ -58,9 +58,6 @@ extern "C" {
 #endif
 #include <stdarg.h>
 #ifdef EVENT__HAVE_NETDB_H
-#if !defined(_GNU_SOURCE)
-#define _GNU_SOURCE
-#endif
 #include <netdb.h>
 #endif
 
@@ -113,14 +110,6 @@ extern "C" {
  *
  * @{
  */
-
-// compile only under C++11
-#define EVENT__HAVE_UINT64_T 1
-#define EVENT__HAVE_UINT32_T 1
-#define EVENT__HAVE_UINT16_T 1
-#define EVENT__HAVE_UINT8_T  1
-#define EVENT__HAVE_UINTPTR_T 1
-
 #ifdef EVENT__HAVE_UINT64_T
 #define ev_uint64_t uint64_t
 #define ev_int64_t int64_t
@@ -342,7 +331,7 @@ struct evutil_monotonic_timer
 #define EV_MONOT_PRECISE  1
 #define EV_MONOT_FALLBACK 2
 
-/** Format a date std::string using RFC 1123 format (used in HTTP).
+/** Format a date string using RFC 1123 format (used in HTTP).
  * If `tm` is NULL, current system's time will be used.
  * The number of characters written will be returned.
  * One should check if the return value is smaller than `datelen` to check if
@@ -489,7 +478,7 @@ int evutil_make_tcp_listen_socket_deferred(evutil_socket_t sock);
 /** Return the most recent socket error to occur on sock. */
 EVENT2_EXPORT_SYMBOL
 int evutil_socket_geterror(evutil_socket_t sock);
-/** Convert a socket error to a std::string. */
+/** Convert a socket error to a string. */
 EVENT2_EXPORT_SYMBOL
 const char *evutil_socket_error_to_string(int errcode);
 #define EVUTIL_INVALID_SOCKET INVALID_SOCKET
@@ -514,8 +503,8 @@ const char *evutil_socket_error_to_string(int errcode);
 #define EVUTIL_SET_SOCKET_ERROR(errcode) ...
 /** Return the most recent socket error to occur on sock. */
 #define evutil_socket_geterror(sock) ...
-/** Convert a socket error to a std::string. */
-#define evutil_socket_error_to_std::string(errcode) ...
+/** Convert a socket error to a string. */
+#define evutil_socket_error_to_string(errcode) ...
 #define EVUTIL_INVALID_SOCKET -1
 /**@}*/
 #else /** !EVENT_IN_DOXYGEN_ && !_WIN32 */
@@ -523,7 +512,7 @@ const char *evutil_socket_error_to_string(int errcode);
 #define EVUTIL_SET_SOCKET_ERROR(errcode)		\
 		do { errno = (errcode); } while (0)
 #define evutil_socket_geterror(sock) (errno)
-#define evutil_socket_error_to_std::string(errcode) (strerror(errcode))
+#define evutil_socket_error_to_string(errcode) (strerror(errcode))
 #define EVUTIL_INVALID_SOCKET -1
 #endif /** !_WIN32 */
 
@@ -588,7 +577,7 @@ const char *evutil_socket_error_to_string(int errcode);
 #endif
 
 /* big-int related functions */
-/** Parse a 64-bit value from a std::string.  Arguments are as for strtol. */
+/** Parse a 64-bit value from a string.  Arguments are as for strtol. */
 EVENT2_EXPORT_SYMBOL
 ev_int64_t evutil_strtoll(const char *s, char **endptr, int base);
 
@@ -623,12 +612,18 @@ int evutil_vsnprintf(char *buf, size_t buflen, const char *format, va_list ap)
 /** Replacement for inet_ntop for platforms which lack it. */
 EVENT2_EXPORT_SYMBOL
 const char *evutil_inet_ntop(int af, const void *src, char *dst, size_t len);
+/** Variation of inet_pton that also parses IPv6 scopes. Public for
+    unit tests. No reason to call this directly.
+ */
+EVENT2_EXPORT_SYMBOL
+int evutil_inet_pton_scope(int af, const char *src, void *dst,
+	unsigned *indexp);
 /** Replacement for inet_pton for platforms which lack it. */
 EVENT2_EXPORT_SYMBOL
 int evutil_inet_pton(int af, const char *src, void *dst);
 struct sockaddr;
 
-/** Parse an IPv4 or IPv6 address, with optional port, from a std::string.
+/** Parse an IPv4 or IPv6 address, with optional port, from a string.
 
     Recognized formats are:
     - [IPv6Address]:port
@@ -639,7 +634,7 @@ struct sockaddr;
 
     If no port is specified, the port in the output is set to 0.
 
-    @param str The std::string to parse.
+    @param str The string to parse.
     @param out A struct sockaddr to hold the result.  This should probably be
        a struct sockaddr_storage.
     @param outlen A pointer to the number of bytes that that 'out' can safely
@@ -858,7 +853,7 @@ int evutil_secure_rng_init(void);
  * Call this function BEFORE calling any other initialization or RNG
  * functions.
  *
- * (This std::string will _NOT_ be copied internally. Do not free it while any
+ * (This string will _NOT_ be copied internally. Do not free it while any
  * user of the secure RNG might be running. Don't pass anything other than a
  * real /dev/...random device file here, or you might lose security.)
  *

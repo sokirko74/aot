@@ -15,10 +15,11 @@ ELSE (WIN32)
 ENDIF()
 
 #http server 
-include_directories(${RML}/Source)
-include_directories(${RML}/Source/contrib/libevent/include)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/contrib/libevent/include)
-message ("add to include path " ${CMAKE_CURRENT_BINARY_DIR}/contrib/libevent/include)
+if(COMPILE_WITH_HTTP)
+    message ("include_directories contrib/libevent/include" )
+    include_directories(contrib/libevent/include)
+    find_package(libevent REQUIRED PATHS contrib/libevent)
+ENDIF()
 
 #json
 include_directories(${RML}/Source/contrib/nlohmann)
@@ -34,11 +35,11 @@ else()
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} -O2")
 endif()
 
+add_subdirectory (contrib/iconv_subset)
 
 add_subdirectory (tinyxml)
 add_subdirectory (common)
 add_subdirectory (PCRE)
-add_subdirectory (contrib/libevent)
 
 add_subdirectory (StructDictLib)
 add_subdirectory (StructDictLoader)
@@ -94,6 +95,7 @@ add_subdirectory (SemanDaemon)
 
 IF (MSVC)
     macro(CompileIDL Project)
+        message ("==========  compile idl ${Project} ==============" )
         file (WRITE dummy.cpp "") # creat empty file it no lib is produced
 
         add_library(${Project}_TLB

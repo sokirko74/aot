@@ -12,7 +12,7 @@
 
 
 struct TDomNoItemStr {
-	char ItemStr[100];
+	std::string ItemStr;
     BYTE DomNo;
 };
 
@@ -95,8 +95,8 @@ public :
 
 	void 			ErrorMessage (std::string s ) const;
 	bool			InitDomensConsts();
-	int				GetItemNoByItemStr (const char*  ItemStr, BYTE DomNo) const;
-	int				GetItemNoByItemStr (const char*  ItemStr, const char* DomStr) const;
+	int				GetItemNoByItemStr (const std::string&  ItemStr, BYTE DomNo) const;
+	int				GetItemNoByItemStr (const std::string&  ItemStr, const char* DomStr) const;
 	BYTE			GetDomenNoByDomStr (const char* DomStr) const;
 	bool			AreEqualDomItems(const TDomItem& Item1, const TDomNoItemStr& Item2) const;
 

@@ -27,18 +27,17 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
     for windows I used 
     https://sourceforge.net/projects/swig/files/swigwin/swigwin-3.0.12/swigwin-3.0.12.zip/download
     https://www.python.org/downloads/release/python-2715/
-
-5. You need locale CP1251 and ISO-8859-1 under unix. 
-On POSIX systems you can type "locale -a" to list the names of supported locales. 
-
-ubuntu:
-sudo locale-gen ru_RU.UTF-8
-sudo locale-gen ru_RU.iso88595
-sudo locale-gen de_DE
-dpkg-reconfigure locales
-
-See https://askubuntu.com/questions/76013/how-do-i-add-locale-to-ubuntu-server
-
+ 
+5. We include libevent in Source/contrib (to run aot.ru webdaemons), but sometimes you need configure this library.
+   You could switch off libevent with set(COMPILE_WITH_HTTP 0)
+   Here are instructions to update libevent to a newer version:
+   6.1. download source archive from  https://libevent.org/ , for example 
+   6.2  wget https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/c
+   6.3  tar xfz libevent-2.1.12-stable.tar.gz
+   6.4  mv libevent-2.1.12-stable/libevent-2.1.12-stable $RML/Source/contrib/libevent
+   6.5  cd $RML/Source/contrib/libevent
+   6.6  ./configure --disable-openssl
+   6.7  make 
 
 =================   Compilation =======================
   export RML=/home/sokirko/RML

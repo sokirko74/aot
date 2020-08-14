@@ -29,7 +29,7 @@ bool CTag::operator < (const CTag& T) const {
 bool CTag::IsEmptyTag() const
 {
 	return		m_Lemmas.empty() 
-			&&	m_Pos == rPartOfSpeechCount 
+			&&	m_Pos == RUSSIAN_PART_OF_SPEECH_COUNT 
 			&&	m_Grammems == 0;
 };
 
@@ -258,7 +258,7 @@ CTag CTagSet::GetBestSuitedTag (const CTag& T) const
 		// игнорируем тэги, которые не совпали по частям речи
 		if (bCheckLemma || P.m_Lemmas.empty())
 		if  (		(P.m_Pos == T.m_Pos) 
-				||	(		(P.m_Pos == rPartOfSpeechCount)
+				||	(		(P.m_Pos == RUSSIAN_PART_OF_SPEECH_COUNT)
 						&& !P.m_Lemmas.empty()
 					)
 			)

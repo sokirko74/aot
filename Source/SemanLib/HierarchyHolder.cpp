@@ -242,7 +242,7 @@ void CHierarchyHolder::SetHierarchyTransitiveClosure()
 void CHierarchyHolder::CreateNode(const char* Name) 
 { 
 	CHierarchyNode N(Name);
-	N.ItemNo = GetRoss()->GetItemNoByItemStr((const char*)Name, GetDomNo());;
+	N.ItemNo = GetRoss()->GetItemNoByItemStr(Name, GetDomNo());;
 	Nodes.push_back(N);
 };
 
@@ -330,7 +330,7 @@ const int MaxLevelId = 30;
 // ниже по иерархии
 bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc)
 {
-	long ItemNo = Ross->GetRoss()->GetItemNoByItemStr (ItemStr.c_str(), Ross->SemFetDomNo);
+	long ItemNo = Ross->GetRoss()->GetItemNoByItemStr (ItemStr, Ross->SemFetDomNo);
 	assert (ItemNo != -1);
 	long LastNo = Ross->GetRoss()->GetUnitEndPos(Host);
 	bool Found = false;

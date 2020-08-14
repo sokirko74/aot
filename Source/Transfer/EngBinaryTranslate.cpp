@@ -8,7 +8,9 @@
 int find_label(const char *label)
 {
 	for(int i = 0;  i < GetTransLabelsCount(); i++){
-		if(!strcmp(label, GetTransLabels()[i].str)) return i;
+		if (GetTransLabels()[i].str == label) {
+			return i;
+		}
 	}
 	return -1;
 }

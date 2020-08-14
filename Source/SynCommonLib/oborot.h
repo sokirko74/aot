@@ -13,12 +13,13 @@
 struct CCoordConjType 
 {
 	// conjunction
-	char word[20];
+	std::string Word;
 	// true, if before the conjunction should be a comma 
 	bool should_be_after_comma;
-	bool operator == (const char* WordUpper) const 
+
+	bool operator == (const char* wordUpper) const 
 	{
-		return !strcmp(WordUpper, word);
+		return Word == wordUpper;
 	};
 };
 
@@ -132,7 +133,7 @@ public:
 	//  using members
 	const vector<CCoordConjType>&	GetCoordConjs() const {return m_SimpleCoordConj;};
 	const StringVector&			GetSubConjs() const {return m_SimpleSubConj;};
-	int								FindSubConj(const char* word_upper) const;
+	int								FindSubConj(const std::string& word_upper) const;
 
 	int						FindSimplePrep(std::string strPrep) const;
 	vector<int>				FindAllArticlesForSimplePrep(std::string strPrep) const;

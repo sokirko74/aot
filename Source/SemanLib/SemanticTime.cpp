@@ -292,7 +292,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
 	  if (j==-1) return false;
 	  S = S.substr(j+1, S.length() -  j);
 	  TrimLeft(S);
-	  long ItemNo = GetRossHolder(Ross)->GetItemNoByItemStr(S.c_str(), "D_CASE");
+	  long ItemNo = GetRossHolder(Ross)->GetItemNoByItemStr(S, "D_CASE");
 	  QWORD Grammems = GetCaseGrammem(GetRossHolder(Ross), ItemNo);
 	  QWORD Grm =  m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].GetGrammems();
 

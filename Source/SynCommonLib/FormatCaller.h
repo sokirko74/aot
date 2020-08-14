@@ -20,12 +20,12 @@ typedef bool(CFormatCaller::*CFormatFunc)(CGroup& G);
 
 struct CFormatCall   
 {
+		CFormatFunc	m_format;
 		std::string		m_name;
 		int			m_direction;       
-        CFormatFunc	m_format;
 
         CFormatCall();
-		CFormatCall(CFormatFunc _format, const char*  _name, int _dir);
+		CFormatCall(CFormatFunc _format, const std::string&  _name, int _dir);
 
 		bool operator==(const CFormatCall& X) const
 		{ return m_name == X.m_name;};

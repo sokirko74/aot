@@ -1,6 +1,8 @@
 #pragma once
 typedef unsigned char BYTE;
 
+#include "../contrib/iconv_subset/iconv.h"
+
 // common single byte chars (shared between windows-1251 and windows-1252),
 const BYTE GraphematicalTAB    = (BYTE) 16;
 const BYTE cParagraph    = (BYTE) 21;
@@ -59,3 +61,4 @@ const BYTE ozirkun = 244;
 const BYTE ouml  = 246;
 const BYTE uzirkun = 251;
 const BYTE uuml  = 252;
+

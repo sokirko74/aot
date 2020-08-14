@@ -52,16 +52,22 @@ extern "C" {
 
 /* __has_attribute() wrapper */
 #ifdef __has_attribute
-#define EVUTIL_HAS_ATTRIBUTE __has_attribute
+# define EVUTIL_HAS_ATTRIBUTE __has_attribute
 #endif
 /** clang 3 __has_attribute misbehaves in some versions */
-#if defined(__clang__) && \
-	__clang__ == 1 && __clang_major__ == 3 && \
-	(__clang_minor__ >= 2 && __clang_minor__ <= 5)
-#undef EVUTIL_HAS_ATTRIBUTE
-#endif
+#if defined(__clang__) && __clang__ == 1
+# if defined(__apple_build_version__)
+#  if __clang_major__ <= 6
+#   undef EVUTIL_HAS_ATTRIBUTE
+#  endif
+# else /* !__apple_build_version__ */
+#  if __clang_major__ == 3 && __clang_minor__ >= 2 && __clang_minor__ <= 5
+#   undef EVUTIL_HAS_ATTRIBUTE
+#  endif
+# endif /* __apple_build_version__ */
+#endif /*\ defined(__clang__) && __clang__ == 1 */
 #ifndef EVUTIL_HAS_ATTRIBUTE
-#define EVUTIL_HAS_ATTRIBUTE(x) 0
+# define EVUTIL_HAS_ATTRIBUTE(x) 0
 #endif
 
 /* If we need magic to say "inline", get it for free internally. */
@@ -259,7 +265,7 @@ EVENT2_EXPORT_SYMBOL
 char EVUTIL_TOLOWER_(char c);
 
 /** Remove all trailing horizontal whitespace (space or tab) from the end of a
- * std::string */
+ * string */
 EVENT2_EXPORT_SYMBOL
 void evutil_rtrim_lws_(char *);
 
@@ -431,7 +437,7 @@ int evutil_sockaddr_is_loopback_(const struct sockaddr *sa);
 
 
 /**
-    Formats a sockaddr sa into a std::string buffer of size outlen stored in out.
+    Formats a sockaddr sa into a string buffer of size outlen stored in out.
     Returns a pointer to out.  Always writes something into out, so it's safe
     to use the output of this function without checking it for NULL.
  */

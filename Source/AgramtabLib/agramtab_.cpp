@@ -139,7 +139,8 @@ bool CAgramtab :: Read (const char * FileName)
 	while (std::getline(inp, line))
 	{
 		LineNo++;
-		std::string s = Trim(convert_from_utf(line.c_str(), this->m_Language));
+		std::string s = convert_from_utf(line.c_str(), this->m_Language);
+		Trim(s);
 		if (s.empty() || (s.rfind("//", 0) == 0)) continue;
 
 		CAgramtabLine* pAgramtabLine = new CAgramtabLine(LineNo);

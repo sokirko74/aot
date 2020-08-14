@@ -2,20 +2,13 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef rus_plmline_h
- #define rus_plmline_h
-
-
+#pragma once
 #include "../SynCommonLib/SynPlmLine.h"
-
-
 const int  g_BigNumeralsCount = 5;
-const char g_BigNumerals[g_BigNumeralsCount][MAX_WORD_LEN]  = { 
+const std::string g_BigNumerals[g_BigNumeralsCount]  = { 
 												_R("МИЛЛИОН"), 
 												_R("МИЛЛИАРД"),
 												_R("ТРИЛЛИОН"),
 												_R("КВАДРИЛЛИОН"),
 												_R("ТЫСЯЧА")
 												};
-
-#endif

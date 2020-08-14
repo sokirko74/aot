@@ -206,7 +206,7 @@ public:
    CDictionary* GetRoss () {return &m_Ross;}
    const CDictionary* GetRoss () const {return &m_Ross;}
    bool			OpenRossHolder (const std::string strPathName, bool bDontLoadExamples);
-   long         GetItemNoByItemStr(const char* ItemStr, const char* DomStr) const ;
+   long         GetItemNoByItemStr(const std::string& ItemStr, const char* DomStr) const ;
    bool         InitDomainsConsts();
    
 

@@ -11,6 +11,10 @@ bool CMorphWizardBase::read_utf8_line(ifstream& inp, std::string& line) const {
     return true;
 }
 
+std::string CMorphWizardBase::str_to_utf8(const std::string& line) const {
+    return convert_to_utf8(line, m_Language);
+}
+
 static size_t getCount(std::ifstream& mrdFile, const char* sectionName) {
     std::string line;
     if (!getline(mrdFile, line)) {
@@ -37,10 +41,11 @@ void CMorphWizardBase::ReadFlexiaModels(std::ifstream& mrdFile) {
     }
 };
 
-void CMorphWizardBase::WriteFlexiaModels(FILE* out_fp) const {
-    fprintf(out_fp, "%i\n", m_FlexiaModels.size());
-    for (size_t i = 0; i < m_FlexiaModels.size(); i++)
-        fprintf(out_fp, "%s\n", m_FlexiaModels[i].ToString().c_str());
+void CMorphWizardBase::WriteFlexiaModels(ofstream& outp) const {
+    outp << m_FlexiaModels.size() << "\n";
+    for (auto f : m_FlexiaModels) {
+        outp << str_to_utf8(f.ToString()) << "\n";
+    }
 };
 
 
@@ -63,9 +68,10 @@ void CMorphWizardBase::ReadAccentModels(std::ifstream& mrdFile) {
     };
 };
 
-void CMorphWizardBase::WriteAccentModels(FILE* out_fp) const {
-    fprintf(out_fp, "%i\n", m_AccentModels.size());
-    for (size_t i = 0; i < m_AccentModels.size(); i++)
-        fprintf(out_fp, "%s\n", m_AccentModels[i].ToString().c_str());
+void CMorphWizardBase::WriteAccentModels(ofstream& outp) const {
+    outp << m_AccentModels.size() << "\n";
+    for (auto a  : m_AccentModels) {
+        outp << str_to_utf8(a.ToString()) << "\n";
+    }
 };
 

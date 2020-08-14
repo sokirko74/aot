@@ -113,8 +113,8 @@
 #define tt_assert_test_fmt_type(a,b,str_test,type,test,printf_type,printf_fmt, \
     setup_block,cleanup_block,die_on_fail)				\
 	TT_STMT_BEGIN							\
-	type val1_ = (a);						\
-	type val2_ = (b);						\
+	type val1_ = (type)(a);						\
+	type val2_ = (type)(b);						\
 	int tt_status_ = (test);					\
 	if (!tt_status_ || tinytest_get_verbosity_()>1)	{		\
 		printf_type print_;					\
@@ -174,7 +174,7 @@
 	tt_assert_test_type(a,b,#a" "#op" "#b,const void*,              \
 	    (val1_ op val2_),"%p",TT_EXIT_TEST_FUNCTION)
 
-/** XXX: have some issues with printing this non-NUL terminated std::strings */
+/** XXX: have some issues with printing this non-NUL terminated strings */
 #define tt_nstr_op(n,a,op,b)						\
 	tt_assert_test_type_opt(a,b,#a" "#op" "#b,const char *,		\
 	    (val1_ && val2_ && strncmp(val1_,val2_,(n)) op 0),"<%s>",	\

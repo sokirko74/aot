@@ -181,16 +181,16 @@ protected:
 
 inline bool CanNumeralBeNoun(const char* s)
 {
-	return !strcmp(s, _R("ДВОЕ")) 
-		|| !strcmp(s, _R("ТРОЕ")) 
-		|| !strcmp(s, _R("ЧЕТВЕРО")) 
-		|| !strcmp(s, _R("ПЯТЕРО")) 
-		|| !strcmp(s, _R("ШЕСТЕРО"))
-		|| !strcmp(s, _R("СЕМЕРО")) 
-		|| !strcmp(s, _R("ВОСЬМЕРО")) 
-		|| !strcmp(s, _R("ДЕВЯТЕРО"))
-		|| !strcmp(s, _R("ДЕСЯТЕРО"))
-		|| !strcmp(s, _R("ОБА"));
+	return s == _R("ДВОЕ") 
+		|| s == _R("ТРОЕ")
+		|| s == _R("ЧЕТВЕРО")
+		|| s == _R("ПЯТЕРО")
+		|| s == _R("ШЕСТЕРО")
+		|| s == _R("СЕМЕРО")
+		|| s == _R("ВОСЬМЕРО")
+		|| s == _R("ДЕВЯТЕРО")
+		|| s == _R("ДЕСЯТЕРО")
+		|| s == _R("ОБА");
 };
 
 

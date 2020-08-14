@@ -2,11 +2,9 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#pragma warning(disable:4786)
-
 #include  "stdafx.h"
 #include  <stdio.h>
-#include  <std::string.h>
+#include  <string.h>
 #include  <stdlib.h>
 #include  <assert.h>
 

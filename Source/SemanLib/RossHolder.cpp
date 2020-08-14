@@ -56,16 +56,16 @@ bool CRossHolder::InitConsts()
 	SynGroupDomNo =	GetRoss()->GetDomenNoByDomStr("D_GROUPS");
 	LemGroupBeginingDomNo =	GetRoss()->GetDomenNoByDomStr("D_1");
 
-	IndirObjSynONo =  GetRoss()->GetItemNoByItemStr	("к_доп", SynRelDomNo);
-	ReverseSynONo =	 GetRoss()->GetItemNoByItemStr ("X!", SynRelDomNo);
-	UncoordAttrSynONo =	 GetRoss()->GetItemNoByItemStr ("нс_опр", SynRelDomNo);
-	CoordAttrSynONo	=  GetRoss()->GetItemNoByItemStr ("с_опр", SynRelDomNo);
-	DirectObjSynONo	=  GetRoss()->GetItemNoByItemStr ("п_доп", SynRelDomNo);
-	SubjSynONo =  GetRoss()->GetItemNoByItemStr	("подл", SynRelDomNo);
-	EnglSubjSynONo =  GetRoss()->GetItemNoByItemStr	("subj", SynRelDomNo);
-	ParatAttrSynONo	=  GetRoss()->GetItemNoByItemStr ("прим_опр", SynRelDomNo);
-	FromPredicSynONo =	GetRoss()->GetItemNoByItemStr ("отпредик", SynRelDomNo);
-	PostSpecifSynONo =	GetRoss()->GetItemNoByItemStr ("уточн",	SynRelDomNo);
+	IndirObjSynONo =  GetRoss()->GetItemNoByItemStr	(_R("к_доп"), SynRelDomNo);
+	ReverseSynONo =	 GetRoss()->GetItemNoByItemStr (_R("X!"), SynRelDomNo);
+	UncoordAttrSynONo =	 GetRoss()->GetItemNoByItemStr (_R("нс_опр"), SynRelDomNo);
+	CoordAttrSynONo	=  GetRoss()->GetItemNoByItemStr (_R("с_опр"), SynRelDomNo);
+	DirectObjSynONo	=  GetRoss()->GetItemNoByItemStr (_R("п_доп"), SynRelDomNo);
+	SubjSynONo =  GetRoss()->GetItemNoByItemStr	(_R("подл"), SynRelDomNo);
+	EnglSubjSynONo =  GetRoss()->GetItemNoByItemStr	(_R("subj"), SynRelDomNo);
+	ParatAttrSynONo	=  GetRoss()->GetItemNoByItemStr (_R("прим_опр"), SynRelDomNo);
+	FromPredicSynONo =	GetRoss()->GetItemNoByItemStr (_R("отпредик"), SynRelDomNo);
+	PostSpecifSynONo =	GetRoss()->GetItemNoByItemStr (_R("уточн"),	SynRelDomNo);
 
 
 	
@@ -88,12 +88,12 @@ bool CRossHolder::InitConsts()
 	ActDomNo = GetRoss()->GetDomenNoByDomStr("D_ACTANTS");
 //	GroupBeginAndGrammemDomNo =	GetRoss()->GetDomenNoByDomStr("D_1");
 	MNADomNo = GetRoss()->GetDomenNoByDomStr("D_MUA");
-	SelfLabelNo	= GetRoss()->GetItemNoByItemStr("C",ActDomNo);
+	SelfLabelNo	= GetRoss()->GetItemNoByItemStr(_R("C"),ActDomNo);
 	PositionDomNo =	GetRoss()->GetDomenNoByDomStr("D_POSITION");
 	VerbFetDomNo = GetRoss()->GetDomenNoByDomStr("D_VP_SPECIF");
 	LexFunctDomNo =	GetRoss()->GetDomenNoByDomStr("D_LF");
 
-	MainWordVarNo =	GetRoss()->GetItemNoByItemStr ("C",	ActDomNo);
+	MainWordVarNo =	GetRoss()->GetItemNoByItemStr (_R("C"),	ActDomNo);
 	
 
 	InitDomainsConsts();
@@ -108,7 +108,7 @@ bool CRossHolder::InitConsts()
 
 	S_And_InstrNo =	-1;
 	if (LemGroupBeginingDomNo != ErrUChar)
-		S_And_InstrNo =	GetRoss()->GetItemNoByItemStr("с+Т",LemGroupBeginingDomNo);
+		S_And_InstrNo =	GetRoss()->GetItemNoByItemStr(_R("с+Т"),LemGroupBeginingDomNo);
 	return true;
 };
 
@@ -156,71 +156,61 @@ std::string WriteToString (const CDictionary* Ross, const char* Frmt, const TCor
 	return	Result;
 }
 
-
-
-
 const int LoginSize	= 10;
-
-
-
-
-long CRossHolder::GetItemNoByItemStr(const char* ItemStr, const	char* DomStr) const
+long CRossHolder::GetItemNoByItemStr(const std::string& ItemStr, const	char* DomStr) const
 {
 	BYTE DomNo = GetRoss()->GetDomenNoByDomStr(DomStr);
 	return GetRoss()->GetItemNoByItemStr(ItemStr, DomNo);
 }
 
- 
-
-
 bool CRossHolder::InitDomainsConsts()
 {
-	AdvAdjMainNo = GetItemNoByItemStr ("НАР:нар_опр", "D_GF_MAIN");
-	NounMainNo = GetItemNoByItemStr	("СУЩ:ИГ", "D_GF_MAIN");
-	VerbMainNo = GetItemNoByItemStr	("ГЛ:ГГ", "D_GF_MAIN");
-	AdjMainNo =	GetItemNoByItemStr ("ПРИЛ:с_опр", "D_GF_MAIN");
-	PronMainNo = GetItemNoByItemStr	("МЕСТОИМ:с_опр", "D_GF_MAIN");
-	ClauseGrpNo	=  GetItemNoByItemStr ("ПРИД_ПР", "D_GROUPS");
-	NounGrpNo =	 GetItemNoByItemStr	("ИГ", "D_GROUPS");
-	AdverbialGrpNo =  GetItemNoByItemStr ("ОБСТ_ГР", "D_GROUPS");
-	VerbGrpNo =	 GetItemNoByItemStr	("ГГ", "D_GROUPS");
+	AdvAdjMainNo = GetItemNoByItemStr (_R("НАР:нар_опр"), "D_GF_MAIN");
+	NounMainNo = GetItemNoByItemStr	(_R("СУЩ:ИГ"), "D_GF_MAIN");
+	VerbMainNo = GetItemNoByItemStr	(_R("ГЛ:ГГ"), "D_GF_MAIN");
+	AdjMainNo =	GetItemNoByItemStr (_R("ПРИЛ:с_опр"), "D_GF_MAIN");
+	PronMainNo = GetItemNoByItemStr	(_R("МЕСТОИМ:с_опр"), "D_GF_MAIN");
+	ClauseGrpNo	=  GetItemNoByItemStr (_R("ПРИД_ПР"), "D_GROUPS");
+	NounGrpNo =	 GetItemNoByItemStr	(_R("ИГ"), "D_GROUPS");
+	AdverbialGrpNo =  GetItemNoByItemStr (_R("ОБСТ_ГР"), "D_GROUPS");
+	VerbGrpNo =	 GetItemNoByItemStr	(_R("ГГ"), "D_GROUPS");
 	CopulNo	=  GetItemNoByItemStr ("Copul",	"D_GROUPS");
 	ModalCopulNo =	GetItemNoByItemStr ("ModalCopul", "D_GROUPS");
-	NumerComplexNo =  GetItemNoByItemStr ("ЦК",	"D_GRAFEM_DESC");
-	NumerSymbComplexNo =  GetItemNoByItemStr ("ЦБК", "D_GRAFEM_DESC");
-	HyphenNo =	GetItemNoByItemStr ("ДЕФ", "D_GRAFEM_DESC");
-	AdvNo =	 GetItemNoByItemStr	("НАР",	"D_PART_OF_SPEECH");
-	AdjNo =	 GetItemNoByItemStr	("ПРИЛ", "D_PART_OF_SPEECH");
-	NumeralNo =	 GetItemNoByItemStr	("ЧИСЛ", "D_PART_OF_SPEECH");
-	PossPronNo =  GetItemNoByItemStr ("ПРИТ_МЕСТМ",	"D_PART_OF_SPEECH");
-	NominativeNo =	GetItemNoByItemStr ("И", "D_CASE");
-	InstrumentalisNo =	GetItemNoByItemStr ("Т", "D_CASE");
-	GenitivNo =	 GetItemNoByItemStr	("Р", "D_CASE");
-	DativNo	=  GetItemNoByItemStr ("Д",	"D_CASE");
-	VocativNo =	 GetItemNoByItemStr	("П", "D_CASE");
-	AccusativNo	=  GetItemNoByItemStr ("В",	"D_CASE");
-	NominativePluralisNo =	GetItemNoByItemStr ("И_мн",	"D_CASE_NUMBER");
-	InstrumentalisPluralisNo =	GetItemNoByItemStr ("Т_мн",	"D_CASE_NUMBER");
-	GenitivPluralisNo =	 GetItemNoByItemStr	("Р_мн", "D_CASE_NUMBER");
-	DativPluralisNo	=  GetItemNoByItemStr ("Д_мн", "D_CASE_NUMBER");
-	VocativPluralisNo =	 GetItemNoByItemStr	("П_мн", "D_CASE_NUMBER");
+	NumerComplexNo =  GetItemNoByItemStr (_R("ЦК"),	"D_GRAFEM_DESC");
+	NumerSymbComplexNo =  GetItemNoByItemStr (_R("ЦБК"), "D_GRAFEM_DESC");
+	HyphenNo =	GetItemNoByItemStr (_R("ДЕФ"), "D_GRAFEM_DESC");
+	AdvNo =	 GetItemNoByItemStr	(_R("НАР"),	"D_PART_OF_SPEECH");
+	AdjNo =	 GetItemNoByItemStr	(_R("ПРИЛ"), "D_PART_OF_SPEECH");
+	NumeralNo =	 GetItemNoByItemStr	(_R("ЧИСЛ"), "D_PART_OF_SPEECH");
+	PossPronNo =  GetItemNoByItemStr (_R("ПРИТ_МЕСТМ"),	"D_PART_OF_SPEECH");
+	NominativeNo =	GetItemNoByItemStr (_R("И"), "D_CASE");
+	InstrumentalisNo =	GetItemNoByItemStr (_R("Т"), "D_CASE");
+	GenitivNo =	 GetItemNoByItemStr	(_R("Р"), "D_CASE");
+	DativNo	=  GetItemNoByItemStr (_R("Д"),	"D_CASE");
+	VocativNo =	 GetItemNoByItemStr	(_R("П"), "D_CASE");
+	AccusativNo	=  GetItemNoByItemStr (_R("В"),	"D_CASE");
+	NominativePluralisNo =	GetItemNoByItemStr (_R("И_мн"),	"D_CASE_NUMBER");
+	InstrumentalisPluralisNo =	GetItemNoByItemStr (_R("Т_мн"),	"D_CASE_NUMBER");
+	GenitivPluralisNo =	 GetItemNoByItemStr	(_R("Р_мн"), "D_CASE_NUMBER");
+	DativPluralisNo	=  GetItemNoByItemStr (_R("Д_мн"), "D_CASE_NUMBER");
+	VocativPluralisNo =	 GetItemNoByItemStr	(_R("П_мн"), "D_CASE_NUMBER");
 
-	NominativeSingularNo =	GetItemNoByItemStr ("И_ед",	"D_CASE_NUMBER");
-	InstrumentalisSingularNo =	GetItemNoByItemStr ("Т_ед",	"D_CASE_NUMBER");
-	GenitivSingularNo =	 GetItemNoByItemStr	("Р_ед", "D_CASE_NUMBER");
-	DativSingularNo	=  GetItemNoByItemStr ("Д_ед", "D_CASE_NUMBER");
-	VocativSingularNo =	 GetItemNoByItemStr	("П_ед", "D_CASE_NUMBER");
-	AccusativSingularNo	=  GetItemNoByItemStr ("В_ед", "D_CASE_NUMBER");
+	NominativeSingularNo =	GetItemNoByItemStr (_R("И_ед"),	"D_CASE_NUMBER");
+	InstrumentalisSingularNo =	GetItemNoByItemStr (_R("Т_ед"),	"D_CASE_NUMBER");
+	GenitivSingularNo =	 GetItemNoByItemStr	(_R("Р_ед"), "D_CASE_NUMBER");
+	DativSingularNo	=  GetItemNoByItemStr (_R("Д_ед"), "D_CASE_NUMBER");
+	VocativSingularNo =	 GetItemNoByItemStr	(_R("П_ед"), "D_CASE_NUMBER");
+	AccusativSingularNo	=  GetItemNoByItemStr (_R("В_ед"), "D_CASE_NUMBER");
 	
 
-	AccusativPluralisNo	=  GetItemNoByItemStr ("В_мн", "D_CASE_NUMBER");
-	InstrumentalisAdjNo	=  GetItemNoByItemStr ("Т_ПРИЛ", "D_CASE_POS");
-	InfinitiveNo =	GetItemNoByItemStr ("инф", "D_VP_SPECIF");
-	NegativeNo =  GetItemNoByItemStr ("отр", "D_VP_SPECIF");
-	PassiveNo =	 GetItemNoByItemStr	("стр",	"D_VP_SPECIF");
-	QuoteMarkNo	=  GetItemNoByItemStr ("квч", "D_GRAFEM_DESC");
-	ILENo =	 GetItemNoByItemStr	("ИЛЕ",	"D_GRAFEM_DESC");
-	A0LexFunctNo = GetRoss()->GetItemNoByItemStr ("A0",	LexFunctDomNo);
+	AccusativPluralisNo	=  GetItemNoByItemStr (_R("В_мн"), "D_CASE_NUMBER");
+	InstrumentalisAdjNo	=  GetItemNoByItemStr (_R("Т_ПРИЛ"), "D_CASE_POS");
+	InfinitiveNo =	GetItemNoByItemStr (_R("инф"), "D_VP_SPECIF");
+	NegativeNo =  GetItemNoByItemStr (_R("отр"), "D_VP_SPECIF");
+	PassiveNo =	 GetItemNoByItemStr	(_R("стр"),	"D_VP_SPECIF");
+	QuoteMarkNo	=  GetItemNoByItemStr (_R("квч"), "D_GRAFEM_DESC");
+	ILENo =	 GetItemNoByItemStr	(_R("ИЛЕ"),	"D_GRAFEM_DESC");
+	A0LexFunctNo = GetRoss()->GetItemNoByItemStr (_R("A0"),	LexFunctDomNo);
 	S0LexFunctNo = GetRoss()->GetItemNoByItemStr ("S0",	LexFunctDomNo);
 	RightDirectionNo = GetItemNoByItemStr (">",	"D_POSITION");
 
@@ -336,7 +326,7 @@ bool CRossHolder::HasItem (WORD	UnitNo,	const std::string FieldStr, const std::s
 	if (UnitNo == ErrUnitNo)  return false;
 	BYTE DomNo = GetRoss()->GetDomenNoByDomStr(DomStr.c_str());
 	if (DomNo == ErrUChar) return false;
-	long ItemNo	= GetRoss()->GetItemNoByItemStr(ItemStr.c_str(), DomNo);
+	long ItemNo	= GetRoss()->GetItemNoByItemStr(ItemStr, DomNo);
 	if (ItemNo == -1) return false;
 	BYTE FieldNo = GetRoss()->GetFieldNoByFieldStr(FieldStr.c_str());
 
@@ -351,7 +341,7 @@ bool CRossHolder::HasItem (WORD	UnitNo,	const std::string FieldStr, const std::s
 	return false;
 };
 
-WORD CRossHolder::LocateUnit (const	char* UnitStr, BYTE	MeanNum) const
+WORD CRossHolder::LocateUnit (const char* UnitStr, BYTE	MeanNum) const
 {
 	return GetRoss()->LocateUnit(UnitStr, MeanNum);
 };

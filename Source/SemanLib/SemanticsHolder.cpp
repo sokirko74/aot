@@ -258,8 +258,8 @@ bool CSemanticsHolder::InitTimeUnits()
 {
  // инициализация констант 
  BYTE GramFunctDomNo = GetRoss(TimeRoss)->GetDomenNoByDomStr("D_GRAM_FUNCT");
- int AbbrFunctName = GetRoss(TimeRoss)->GetItemNoByItemStr("СОКР", GramFunctDomNo);
- int AbbrFunctPluralName = GetRoss(TimeRoss)->GetItemNoByItemStr("СОКР_мн", GramFunctDomNo);
+ int AbbrFunctName = GetRoss(TimeRoss)->GetItemNoByItemStr(_R("СОКР"), GramFunctDomNo);
+ int AbbrFunctPluralName = GetRoss(TimeRoss)->GetItemNoByItemStr(_R("СОКР_мн"), GramFunctDomNo);
  m_TimeAbbrPairs.clear();
  m_TimeUnits.clear();
  

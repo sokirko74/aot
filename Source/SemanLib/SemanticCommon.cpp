@@ -1601,8 +1601,8 @@ void CSemanticStructure::InitThesSemFet (CSemNode& OutNode, const CSemNode& InNo
   {
 		std::string ConceptStr = Thes->m_Concepts[TopConcepts[k]].m_ConceptStr;
 		Trim(ConceptStr);
-		if (  ( GetRossHolder(Ross)->GetItemNoByItemStr (ConceptStr.c_str(), "D_SF") != -1)
-			|| ( GetRossHolder(Ross)->GetItemNoByItemStr (ConceptStr.c_str(), "D_SEM_REL") != -1)
+		if (  ( GetRossHolder(Ross)->GetItemNoByItemStr (ConceptStr, "D_SF") != -1)
+			|| ( GetRossHolder(Ross)->GetItemNoByItemStr (ConceptStr, "D_SEM_REL") != -1)
 		   )
 			AddSemFet(OutNode,ConceptStr.c_str());
   };

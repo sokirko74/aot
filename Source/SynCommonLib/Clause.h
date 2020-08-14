@@ -105,8 +105,8 @@ public:
 	int		FindType(EClauseType Type) const;
     int     FindCommonType  (const CClause& C ) const;
 	bool	HasType (EClauseType Type)  const;
-	int		FindClauseSubordConj(const char* ConjStr)  const;
-	bool	HasSubConj (const char* conj = 0) const;
+	int		FindClauseSubordConj(const std::string& ConjStr)  const;
+	bool	HasSubConj (const std::string& strConj = std::string()) const;
 	bool	HasLeftStarter() const;
 
 	// the clause has only one coordinating  conjunction

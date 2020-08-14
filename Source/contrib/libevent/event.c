@@ -1706,8 +1706,8 @@ event_process_active_single_queue(struct event_base *base,
 			evcb_evfinalize = ev->ev_evcallback.evcb_cb_union.evcb_evfinalize;
 			EVUTIL_ASSERT((evcb->evcb_flags & EVLIST_FINALIZING));
 			EVBASE_RELEASE_LOCK(base, th_base_lock);
-			evcb_evfinalize(ev, ev->ev_arg);
 			event_debug_note_teardown_(ev);
+			evcb_evfinalize(ev, ev->ev_arg);
 			if (evcb_closure == EV_CLOSURE_EVENT_FINALIZE_FREE)
 				mm_free(ev);
 		}
@@ -2055,6 +2055,9 @@ event_base_once(struct event_base *base, evutil_socket_t fd, short events,
 	struct event_once *eonce;
 	int res = 0;
 	int activate = 0;
+
+	if (!base)
+		return (-1);
 
 	/* We cannot support signals that just fire once, or persistent
 	 * events. */
@@ -3823,7 +3826,35 @@ void
 event_base_active_by_fd(struct event_base *base, evutil_socket_t fd, short events)
 {
 	EVBASE_ACQUIRE_LOCK(base, th_base_lock);
-	evmap_io_active_(base, fd, events & (EV_READ|EV_WRITE|EV_CLOSED));
+
+	/* Activate any non timer events */
+	if (!(events & EV_TIMEOUT)) {
+		evmap_io_active_(base, fd, events & (EV_READ|EV_WRITE|EV_CLOSED));
+	} else {
+		/* If we want to activate timer events, loop and activate each event with
+		 * the same fd in both the timeheap and common timeouts list */
+		int i;
+		unsigned u;
+		struct event *ev;
+
+		for (u = 0; u < base->timeheap.n; ++u) {
+			ev = base->timeheap.p[u];
+			if (ev->ev_fd == fd) {
+				event_active_nolock_(ev, EV_TIMEOUT, 1);
+			}
+		}
+
+		for (i = 0; i < base->n_common_timeouts; ++i) {
+			struct common_timeout_list *ctl = base->common_timeout_queues[i];
+			TAILQ_FOREACH(ev, &ctl->events,
+				ev_timeout_pos.ev_next_with_common_timeout) {
+				if (ev->ev_fd == fd) {
+					event_active_nolock_(ev, EV_TIMEOUT, 1);
+				}
+			}
+		}
+	}
+
 	EVBASE_RELEASE_LOCK(base, th_base_lock);
 }
 

@@ -130,9 +130,6 @@ struct event {
 	} ev_timeout_pos;
 	evutil_socket_t ev_fd;
 
-	short ev_events;
-	short ev_res;		/* result passed to event callback */
-
 	struct event_base *ev_base;
 
 	union {
@@ -151,7 +148,8 @@ struct event {
 		} ev_signal;
 	} ev_;
 
-
+	short ev_events;
+	short ev_res;		/* result passed to event callback */
 	struct timeval ev_timeout;
 };
 

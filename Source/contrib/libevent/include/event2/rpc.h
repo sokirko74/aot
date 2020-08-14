@@ -543,7 +543,7 @@ int evrpc_resume_request(void *vbase, void *ctx, enum EVRPC_HOOK_RESULT res);
  * and retrieved by the incoming request hook.
  *
  * @param ctx the context provided to the hook call
- * @param key a NUL-terminated c-std::string
+ * @param key a NUL-terminated c-string
  * @param data the data to be associated with the key
  * @param data_size the size of the data
  */
@@ -556,7 +556,7 @@ void evrpc_hook_add_meta(void *ctx, const char *key,
  * evrpc_hook_find_meta() can be used to retrieve meta data associated to a
  * request by a previous hook.
  * @param ctx the context provided to the hook call
- * @param key a NUL-terminated c-std::string
+ * @param key a NUL-terminated c-string
  * @param data pointer to a data pointer that will contain the retrieved data
  * @param data_size pointer to the size of the data
  * @return 0 on success or -1 on failure

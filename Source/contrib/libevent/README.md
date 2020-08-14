@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://libevent.org/libevent3.png" alt="libevent logo"/>
+  <img src="https://strcpy.net/libevent3.png" alt="libevent logo"/>
 </p>
 
 
 
-[![Appveyor Win32 Build Status](https://ci.appveyor.com/api/projects/status/github/libevent/libevent?branch=master&svg=true)](https://ci.appveyor.com/project/nmathewson/libevent)
+[![Appveyor Win32 Build Status](https://ci.appveyor.com/api/projects/status/ng3jg0uhy44mp7ik?svg=true)](https://ci.appveyor.com/project/libevent/libevent)
 [![Travis Build Status](https://travis-ci.org/libevent/libevent.svg?branch=master)](https://travis-ci.org/libevent/libevent)
 [![Coverage Status](https://coveralls.io/repos/github/libevent/libevent/badge.svg)](https://coveralls.io/github/libevent/libevent)
 [![Join the chat at https://gitter.im/libevent/libevent](https://badges.gitter.im/libevent/libevent.svg)](https://gitter.im/libevent/libevent?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -412,5 +412,76 @@ fixing bugs:
  * johnsonlee
  * Philip Prindeville
  * Vis Virial
+ * Andreas Gustafsson
+ * Andrey Okoshkin
+ * an-tao
+ * baixiangcpp
+ * Bernard Spil
+ * Bogdan Harjoc
+ * Carlo Marcelo Arenas Belón
+ * David Benjamin
+ * David Disseldorp
+ * Dmitry Alimov
+ * Dominic Chen
+ * dpayne
+ * ejurgensen
+ * Fredrik Strupe
+ * Gonçalo Ribeiro
+ * James Synge
+ * Jan Beich
+ * Jesse Fang
+ * Jiri Luznicky
+ * José Luis Millán
+ * Kiyoshi Aman
+ * Leo Zhang
+ * lightningkay
+ * Luke Dashjr
+ * Marcin Szewczyk
+ * Maximilian Brunner
+ * Maya Rashish
+ * Murat Demirten
+ * Nathan French
+ * Nikolay Edigaryev
+ * Philip Herron
+ * Redfoxmoon
+ * stenn
+ * SuckShit
+ * The Gitter Badger
+ * tim-le
+ * Vincent JARDIN
+ * Xiang Zhang
+ * Xiaozhou Liu
+ * yongqing.jiao
+ * Enji Cooper
+ * linxiaohui
+ * Seong-Joong Kim
+ * Tobias Stoeckmann
+ * Yury Korzhetsky
+ * zhuizhuhaomeng
+ * Pierce Lopez
+ * yuangongji
+ * Keith Smiley
+ * jeremyerb
+ * Fabrice Fontaine
+ * wenyg
+ * Aleksandr-Melnikov
+ * ayuseleznev
+ * chenguolong
+ * Dimo Markov
+ * dota17
+ * fanquake
+ * Jan Kasiak
+ * Kamil Rytarowski
+ * Mario Emmenlauer
+ * Michael Davidsaver
+ * mohuang
+ * Nick Grifka
+ * Nicolas J. Bouliane
+ * Paul Osborne
+ * Philip Homburg
+ * Wataru Ashihara
+ * William A Rowe Jr
+ * yangyongsheng
+
 
 If we have forgotten your name, please contact us.

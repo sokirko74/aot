@@ -279,7 +279,8 @@ AddSemRelToGramCortege("MULTI", CreateCortege("of+NP", "D_1"));
 TCortege CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen)
 {
 	TCortege cortege;
-	cortege.m_DomItemNos[0] = GetRoss(Aoss)->GetItemNoByItemStr(strGX.c_str(),GetRoss(Aoss)->GetDomenNoByDomStr(strDomen.c_str()));
+	cortege.m_DomItemNos[0] = GetRoss(Aoss)->GetItemNoByItemStr(strGX, 
+							GetRoss(Aoss)->GetDomenNoByDomStr(strDomen.c_str()));
 	cortege.m_DomItemNos[1] = -1;
 	return cortege;
 }

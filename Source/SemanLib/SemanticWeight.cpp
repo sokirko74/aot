@@ -1138,7 +1138,7 @@ bool CRusSemStructure::TopAgreeWithSyntaxCriteria (long Tag)
 
 
 //=======================================
-typedef short_std::string<40> std::string40;
+typedef short_string<40> string40;
 long CRusSemStructure::IsLexFetAgree(long NodeNo) const 
 {
 	long ParentNodeNo = NodeNo;
@@ -1164,12 +1164,12 @@ long CRusSemStructure::IsLexFetAgree(long NodeNo) const
 
 	// ищем как простую лемму 
 	if (m_Nodes[NodeNo].m_MainWordNo ==  -1) return false;
-	std::string40 Lemmas[10];
+	string40 Lemmas[10];
 	int LemmasCount = 0;
 	Lemmas[LemmasCount++] = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma;
 	if (m_Nodes[NodeNo].GetType() == CollocRoss)
 	{
-		Lemmas[LemmasCount++] = std::string40( GetRoss(CollocRoss)->GetEntryStr(m_Nodes[NodeNo].GetUnitNo()).c_str()  );
+		Lemmas[LemmasCount++] = string40( GetRoss(CollocRoss)->GetEntryStr(m_Nodes[NodeNo].GetUnitNo()).c_str()  );
 		EngRusMakeUpper((char *)Lemmas[LemmasCount - 1]);
 	};
 

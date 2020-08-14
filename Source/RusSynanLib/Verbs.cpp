@@ -11,7 +11,7 @@
 
 bool CRusFormatCaller::format_for_neg_verb (CGroup& G)
 {
-  if (!W1.is_lemma("НЕ")) return false;
+  if (!W1.is_lemma(_R("НЕ"))) return false;
   if (G.m_iFirstWord+1 >= sent.size()) return false;  
   // "не" может входить в оборот ("едва не")
   if (W1.HasFlag(fl_in_oborot)) 

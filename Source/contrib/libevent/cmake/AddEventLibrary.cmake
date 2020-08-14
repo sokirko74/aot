@@ -35,13 +35,54 @@ macro(generate_pkgconfig LIB_NAME)
     )
 endmacro()
 
+# LIB_NAME maybe event_core, event_extra, event_openssl, event_pthreads or event.
+# Targets whose LIB_NAME is not 'event' should be exported and installed.
+macro(export_install_target TYPE LIB_NAME OUTER_INCLUDES)
+    if("${LIB_NAME}" STREQUAL "event")
+        install(TARGETS "${LIB_NAME}_${TYPE}"
+            LIBRARY DESTINATION "lib" COMPONENT lib
+            ARCHIVE DESTINATION "lib" COMPONENT lib
+            RUNTIME DESTINATION "lib" COMPONENT lib
+            COMPONENT dev
+        )
+    else()
+        string(REPLACE "event_" "" PURE_NAME ${LIB_NAME})
+        string(TOUPPER ${TYPE} UPPER_TYPE)
+        list(APPEND LIBEVENT_${UPPER_TYPE}_LIBRARIES "${PURE_NAME}")
+        set(OUTER_INCS)
+        if (NOT "${OUTER_INCLUDES}" STREQUAL "NONE")
+            set(OUTER_INCS ${OUTER_INCLUDES})
+        endif()
+        target_include_directories("${LIB_NAME}_${TYPE}"
+            PUBLIC  "$<INSTALL_INTERFACE:include>"
+                    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
+                    "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>"
+                    ${OUTER_INCS}
+        )
+        set_target_properties("${LIB_NAME}_${TYPE}" PROPERTIES EXPORT_NAME ${PURE_NAME})
+        export(TARGETS "${LIB_NAME}_${TYPE}"
+            NAMESPACE ${PROJECT_NAME}::
+            FILE "${PROJECT_BINARY_DIR}/LibeventTargets-${TYPE}.cmake"
+            APPEND
+        )
+        install(TARGETS "${LIB_NAME}_${TYPE}"
+            EXPORT LibeventTargets-${TYPE}
+            LIBRARY DESTINATION "lib" COMPONENT lib
+            ARCHIVE DESTINATION "lib" COMPONENT lib
+            RUNTIME DESTINATION "lib" COMPONENT lib
+            COMPONENT dev
+        )
+    endif()
+endmacro()
 
 # Global variables that it uses:
 # - EVENT_ABI_LIBVERSION
+# - EVENT_ABI_LIBVERSION_CURRENT
+# - EVENT_ABI_LIBVERSION_REVISION
+# - EVENT_ABI_LIBVERSION_AGE
+# - EVENT_PACKAGE_RELEASE
 # - CMAKE_THREAD_LIBS_INIT LIB_PLATFORM
 # - OPENSSL_LIBRARIES
-# - HDR_PUBLIC
-# - EVENT_INSTALL_INCLUDE_DIR
 # - EVENT_SHARED_FLAGS
 # - EVENT_LIBRARY_STATIC
 # - EVENT_LIBRARY_SHARED
@@ -53,11 +94,13 @@ macro(add_event_library LIB_NAME)
     cmake_parse_arguments(LIB
         "" # Options
         "VERSION" # One val
-        "SOURCES;LIBRARIES" # Multi val
+        "SOURCES;LIBRARIES;INNER_LIBRARIES;OUTER_INCLUDES" # Multi val
         ${ARGN}
     )
 
-    set(ADD_EVENT_LIBRARY_TARGETS)
+    if ("${LIB_OUTER_INCLUDES}" STREQUAL "")
+        set(LIB_OUTER_INCLUDES NONE)
+    endif()
     set(ADD_EVENT_LIBRARY_INTERFACE)
 
     if (${EVENT_LIBRARY_STATIC})
@@ -65,12 +108,17 @@ macro(add_event_library LIB_NAME)
         set_target_properties("${LIB_NAME}_static" PROPERTIES
             OUTPUT_NAME "${LIB_NAME}"
             CLEAN_DIRECT_OUTPUT 1)
-        set_target_properties(
-            "${LIB_NAME}_static" PROPERTIES
-            PUBLIC_HEADER "${HDR_PUBLIC}")
 
-        list(APPEND LIBEVENT_STATIC_LIBRARIES "${LIB_NAME}_static")
-        list(APPEND ADD_EVENT_LIBRARY_TARGETS "${LIB_NAME}_static")
+        if(LIB_INNER_LIBRARIES)
+            set(INNER_LIBRARIES "${LIB_INNER_LIBRARIES}_static")
+        endif()
+        target_link_libraries("${LIB_NAME}_static"
+            ${CMAKE_THREAD_LIBS_INIT}
+            ${LIB_PLATFORM}
+            ${INNER_LIBRARIES}
+            ${LIB_LIBRARIES})
+
+        export_install_target(static "${LIB_NAME}" "${LIB_OUTER_INCLUDES}")
 
         set(ADD_EVENT_LIBRARY_INTERFACE "${LIB_NAME}_static")
     endif()
@@ -78,45 +126,65 @@ macro(add_event_library LIB_NAME)
     if (${EVENT_LIBRARY_SHARED})
         add_library("${LIB_NAME}_shared" SHARED ${LIB_SOURCES})
 
+        if(LIB_INNER_LIBRARIES)
+            set(INNER_LIBRARIES "${LIB_INNER_LIBRARIES}_shared")
+        endif()
         target_link_libraries("${LIB_NAME}_shared"
             ${CMAKE_THREAD_LIBS_INIT}
             ${LIB_PLATFORM}
+            ${INNER_LIBRARIES}
             ${LIB_LIBRARIES})
 
         if (EVENT_SHARED_FLAGS)
             set_event_shared_lib_flags("${LIB_NAME}" "${EVENT_SHARED_FLAGS}")
         endif()
 
-        set_target_properties("${LIB_NAME}_shared" PROPERTIES
-            OUTPUT_NAME "${LIB_NAME}"
-            CLEAN_DIRECT_OUTPUT 1)
-        set_target_properties(
-            "${LIB_NAME}_shared" PROPERTIES
-            PUBLIC_HEADER "${HDR_PUBLIC}")
-        set_target_properties(
-            "${LIB_NAME}_shared" PROPERTIES
-            SOVERSION ${EVENT_ABI_LIBVERSION}
-        )
+        if (WIN32)
+            set_target_properties(
+                "${LIB_NAME}_shared" PROPERTIES
+                OUTPUT_NAME "${LIB_NAME}"
+                SOVERSION ${EVENT_ABI_LIBVERSION})
+        elseif (APPLE)
+            math(EXPR COMPATIBILITY_VERSION "${EVENT_ABI_LIBVERSION_CURRENT}+1")
+            math(EXPR CURRENT_MINUS_AGE "${EVENT_ABI_LIBVERSION_CURRENT}-${EVENT_ABI_LIBVERSION_AGE}")
+            set_target_properties(
+                "${LIB_NAME}_shared" PROPERTIES
+                OUTPUT_NAME "${LIB_NAME}-${EVENT_PACKAGE_RELEASE}.${CURRENT_MINUS_AGE}"
+                INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+                LINK_FLAGS "-compatibility_version ${COMPATIBILITY_VERSION} -current_version ${COMPATIBILITY_VERSION}.${EVENT_ABI_LIBVERSION_REVISION}")
+        else()
+            math(EXPR CURRENT_MINUS_AGE "${EVENT_ABI_LIBVERSION_CURRENT}-${EVENT_ABI_LIBVERSION_AGE}")
+            set_target_properties(
+                "${LIB_NAME}_shared" PROPERTIES
+                OUTPUT_NAME "${LIB_NAME}-${EVENT_PACKAGE_RELEASE}"
+                VERSION "${CURRENT_MINUS_AGE}.${EVENT_ABI_LIBVERSION_AGE}.${EVENT_ABI_LIBVERSION_REVISION}"
+                SOVERSION "${CURRENT_MINUS_AGE}"
+                INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+        endif()
 
-        list(APPEND LIBEVENT_SHARED_LIBRARIES "${LIB_NAME}_shared")
-        list(APPEND ADD_EVENT_LIBRARY_TARGETS "${LIB_NAME}_shared")
+        if (NOT WIN32)
+            set(LIB_LINK_NAME
+                "${CMAKE_SHARED_LIBRARY_PREFIX}${LIB_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}")
+
+            add_custom_command(TARGET ${LIB_NAME}_shared
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E create_symlink
+                    "$<TARGET_FILE_NAME:${LIB_NAME}_shared>"
+                    "${LIB_LINK_NAME}"
+                WORKING_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+        endif()
+
+        export_install_target(shared "${LIB_NAME}" "${LIB_OUTER_INCLUDES}")
 
         set(ADD_EVENT_LIBRARY_INTERFACE "${LIB_NAME}_shared")
+
+        if (NOT WIN32)
+            install(FILES
+                "$<TARGET_FILE_DIR:${LIB_NAME}_shared>/${LIB_LINK_NAME}"
+                DESTINATION "lib"
+                COMPONENT lib)
+        endif()
     endif()
-
-    export(TARGETS ${ADD_EVENT_LIBRARY_TARGETS}
-       FILE "${PROJECT_BINARY_DIR}/LibeventTargets.cmake"
-       APPEND
-    )
-
-    install(TARGETS ${ADD_EVENT_LIBRARY_TARGETS}
-        EXPORT LibeventTargets
-        LIBRARY DESTINATION "lib" COMPONENT lib
-        ARCHIVE DESTINATION "lib" COMPONENT lib
-        RUNTIME DESTINATION "lib" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "include/event2"
-        COMPONENT dev
-    )
 
     add_library(${LIB_NAME} INTERFACE)
     target_link_libraries(${LIB_NAME} INTERFACE ${ADD_EVENT_LIBRARY_INTERFACE})

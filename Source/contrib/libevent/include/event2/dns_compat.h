@@ -168,7 +168,7 @@ int evdns_resume(void);
 /**
   Add a nameserver.
 
-  This wraps the evdns_nameserver_add() function by parsing a std::string as an IP
+  This wraps the evdns_nameserver_add() function by parsing a string as an IP
   address and adds it as a nameserver.
 
   @deprecated This function is deprecated because it does not allow the

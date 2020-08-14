@@ -115,11 +115,11 @@ public:
 	vector<CAccentModel>	m_AccentModels;
 
 	bool read_utf8_line(ifstream& inp, std::string& line) const;
+	std::string str_to_utf8(const std::string& line) const;
 
+	void ReadFlexiaModels(std::ifstream&);
+	void WriteFlexiaModels(std::ofstream&) const;
 
-	void ReadFlexiaModels(std::ifstream& mrdFile);
-	void WriteFlexiaModels(FILE* out_fp) const;
-
-	void ReadAccentModels(std::ifstream& mrdFile);
-	void WriteAccentModels(FILE* out_fp) const;
+	void ReadAccentModels(std::ifstream&);
+	void WriteAccentModels(std::ofstream&) const;
 };

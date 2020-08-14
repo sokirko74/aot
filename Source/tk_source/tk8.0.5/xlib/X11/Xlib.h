@@ -467,7 +467,7 @@ typedef struct _XDisplay {
 	unsigned max_request_size; /* maximum number 32 bit words in request*/
 	struct _XrmHashBucketRec *db;
 	int (*synchandler)();	/* Synchronization handler */
-	char *display_name;	/* "host:display" std::string used on this connect*/
+	char *display_name;	/* "host:display" string used on this connect*/
 	int default_screen;	/* default screen for operations */
 	int nscreens;		/* number of screens on this server*/
 	Screen *screens;	/* pointer to list of screens */
@@ -1004,9 +1004,9 @@ typedef struct {
  * PolyText routines take these as arguments.
  */
 typedef struct {
-    char *chars;		/* pointer to std::string */
+    char *chars;		/* pointer to string */
     int nchars;			/* number of characters */
-    int delta;			/* delta between std::strings */
+    int delta;			/* delta between strings */
     _X_Font font;			/* font to print it in, None don't change */
 } XTextItem;
 
@@ -1018,7 +1018,7 @@ typedef struct {		/* normal 16 bit characters are two bytes */
 typedef struct {
     XChar2b *chars;		/* two byte characters */
     int nchars;			/* number of characters */
-    int delta;			/* delta between std::strings */
+    int delta;			/* delta between strings */
     _X_Font font;			/* font to print it in, None don't change */
 } XTextItem16;
 
@@ -1135,11 +1135,11 @@ typedef struct _XIMText {
     union {
 	char *multi_byte;
 	wchar_t *wide_char;
-    } std::string; 
+    } string; 
 } XIMText;
 
 typedef struct _XIMPreeditDrawCallbackStruct {
-    int caret;		/* Cursor offset within pre-edit std::string */
+    int caret;		/* Cursor offset within pre-edit string */
     int chg_first;	/* Starting change position */
     int chg_length;	/* Length of the change in character count */
     XIMText *text;
@@ -1162,7 +1162,7 @@ typedef enum {
 } XIMCaretStyle;
 
 typedef struct _XIMPreeditCaretCallbackStruct {
-    int position;		 /* Caret offset within pre-edit std::string */
+    int position;		 /* Caret offset within pre-edit string */
     XIMCaretDirection direction; /* Caret moves direction */
     XIMCaretStyle style;	 /* Feedback of the caret */
 } XIMPreeditCaretCallbackStruct;
@@ -1328,7 +1328,7 @@ extern char *XGetDefault(
 );
 extern char *XDisplayName(
 #if NeedFunctionPrototypes
-    _Xconst char*	/* std::string */
+    _Xconst char*	/* string */
 #endif
 );
 extern char *XKeysymToString(
@@ -1573,7 +1573,7 @@ extern KeySym *XGetKeyboardMapping(
 );
 extern KeySym XStringToKeysym(
 #if NeedFunctionPrototypes
-    _Xconst char*	/* std::string */
+    _Xconst char*	/* string */
 #endif
 );
 extern long XMaxRequestSize(
@@ -2400,7 +2400,7 @@ extern void XDrawImageString(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst char*	/* std::string */,
+    _Xconst char*	/* string */,
     int			/* length */
 #endif
 );
@@ -2412,7 +2412,7 @@ extern void XDrawImageString16(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst XChar2b*	/* std::string */,
+    _Xconst XChar2b*	/* string */,
     int			/* length */
 #endif
 );
@@ -2500,7 +2500,7 @@ extern void XDrawString(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst char*	/* std::string */,
+    _Xconst char*	/* string */,
     int			/* length */
 #endif
 );
@@ -2512,7 +2512,7 @@ extern void XDrawString16(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst XChar2b*	/* std::string */,
+    _Xconst XChar2b*	/* string */,
     int			/* length */
 #endif
 );
@@ -2739,7 +2739,7 @@ extern void XGetErrorDatabaseText(
     Display*		/* display */,
     _Xconst char*	/* name */,
     _Xconst char*	/* message */,
-    _Xconst char*	/* default_std::string */,
+    _Xconst char*	/* default_string */,
     char*		/* buffer_return */,
     int			/* length */
 #endif
@@ -3088,7 +3088,7 @@ extern Status XParseColor(
 
 extern int XParseGeometry(
 #if NeedFunctionPrototypes
-    _Xconst char*	/* parsestd::string */,
+    _Xconst char*	/* parsestring */,
     int*		/* x_return */,
     int*		/* y_return */,
     unsigned int*	/* width_return */,
@@ -3269,7 +3269,7 @@ extern void XQueryTextExtents(
 #if NeedFunctionPrototypes
     Display*		/* display */,
     XID			/* font_ID */,
-    _Xconst char*	/* std::string */,
+    _Xconst char*	/* string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3282,7 +3282,7 @@ extern void XQueryTextExtents16(
 #if NeedFunctionPrototypes
     Display*		/* display */,
     XID			/* font_ID */,
-    _Xconst XChar2b*	/* std::string */,
+    _Xconst XChar2b*	/* string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3328,8 +3328,8 @@ extern void XRebindKeysym(
     KeySym		/* keysym */,
     KeySym*		/* list */,
     int			/* mod_count */,
-    _Xconst unsigned char*	/* std::string */,
-    int			/* bytes_std::string */
+    _Xconst unsigned char*	/* string */,
+    int			/* bytes_string */
 #endif
 );
 
@@ -3802,7 +3802,7 @@ extern void XSync(
 extern void XTextExtents(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst char*	/* std::string */,
+    _Xconst char*	/* string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3814,7 +3814,7 @@ extern void XTextExtents(
 extern void XTextExtents16(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst XChar2b*	/* std::string */,
+    _Xconst XChar2b*	/* string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3826,7 +3826,7 @@ extern void XTextExtents16(
 extern int XTextWidth(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst char*	/* std::string */,
+    _Xconst char*	/* string */,
     int			/* count */
 #endif
 );
@@ -3834,7 +3834,7 @@ extern int XTextWidth(
 extern int XTextWidth16(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst XChar2b*	/* std::string */,
+    _Xconst XChar2b*	/* string */,
     int			/* count */
 #endif
 );
@@ -3996,7 +3996,7 @@ extern XFontSet XCreateFontSet(
     _Xconst char*	/* base_font_name_list */,
     char***		/* missing_charset_list */,
     int*		/* missing_charset_count */,
-    char**		/* def_std::string */
+    char**		/* def_string */
 #endif
 );
 

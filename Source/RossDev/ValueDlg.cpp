@@ -280,7 +280,7 @@ bool CValueDlg::SetNewValue()
 		  BYTE DomNo = GetSignatDomNo(i);
 		  CString S;
 		  m_Lists[i].GetWindowText(S);
-		  m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr((const char*)S, DomNo);//m_Lists[i].GetItemData(nPos);
+		  m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr(S, DomNo);
 	  }
 	  else
 	  {
@@ -300,7 +300,7 @@ bool CValueDlg::SetNewValue()
 			  return false;
 		};
 
-		m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr((const char*)S, DomNo);
+		m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr(S, DomNo);
 		try 
 		{
 			if (m_NewValue.m_DomItemNos[i] == -1)

@@ -90,18 +90,19 @@ typedef void (*evbuffer_cb)(struct evbuffer *buffer, size_t old_len, size_t new_
   @param cb the callback function to invoke when the evbuffer is modified,
 	 or NULL to remove all callbacks.
   @param cbarg an argument to be provided to the callback function
+  @return 0 if successful, or -1 on error
  */
 EVENT2_EXPORT_SYMBOL
-void evbuffer_setcb(struct evbuffer *buffer, evbuffer_cb cb, void *cbarg);
+int evbuffer_setcb(struct evbuffer *buffer, evbuffer_cb cb, void *cbarg);
 
 
 /**
-  Find a std::string within an evbuffer.
+  Find a string within an evbuffer.
 
   @param buffer the evbuffer to be searched
-  @param what the std::string to be searched for
-  @param len the length of the search std::string
-  @return a pointer to the beginning of the search std::string, or NULL if the search failed.
+  @param what the string to be searched for
+  @param len the length of the search string
+  @return a pointer to the beginning of the search string, or NULL if the search failed.
  */
 EVENT2_EXPORT_SYMBOL
 unsigned char *evbuffer_find(struct evbuffer *buffer, const unsigned char *what, size_t len);

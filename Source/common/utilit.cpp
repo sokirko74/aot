@@ -2492,75 +2492,16 @@ size_t FindFloatingPoint(const char* str)
 	return c == std::string::npos ? -1 : c;
 }
 
-std::string utf8_to_string(const char *utf8str, const locale& loc)
-{
-	// UTF-8 to wstring
-	wstring_convert<codecvt_utf8<wchar_t>> wconv;
-	wstring wstr = wconv.from_bytes(utf8str);
-	// wstd::string to std::string
-	vector<char> buf(wstr.size());
-	use_facet<ctype<wchar_t>>(loc).narrow(wstr.data(), wstr.data() + wstr.size(), '?', buf.data());
-	return std::string(buf.data(), buf.size());
-}
-
-// use Construct On First Use Idiom because static std::locales  crush under Visual Studio
-// see  https://isocpp.org/wiki/faq/ctors#static-init-order
-struct TRmlLocales {
-	static const std::locale& Russian() {
-		#ifdef WIN32
-			const char* enc = ".1251";
-		#else
-			const char* enc = "ru_RU.cp1251";
-		#endif
-		static std::locale* loc = new std::locale(enc);
-		return *loc;
-	}
-	static const std::locale& Latin() {
-			#ifdef WIN32
-                static std::locale* loc = new std::locale(".1252");
-                return *loc;
-            #else
-				try {
-				    /*
-				     * https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables
-				     * Variables declared at block scope with the specifier static or thread_local (since C++11) have
-				     * static or thread (since C++11) storage duration but are initialized the first time control
-				     * passes through their declaration (unless their initialization is zero- or constant-initialization,
-				     * which can be performed before the block is first entered). On all further calls
-				     * , the declaration is skipped.
-				     */
-
-                    static std::locale* loc = new std::locale("de_DE.iso88591");
-                    return *loc;
-                } catch (runtime_error r) {
-				    fprintf (stderr, "cannot find German single byte encoding de_DE.ISO-8859-1, try run \"sudo locale-gen de_DE\" exception %s", r.what());
-				    throw;
-				}
-            #endif
-		}
-};
-
-static TRmlLocales RmlLocales;
-
 std::string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {
-		return utf8_to_string(utf8str, RmlLocales.Russian());
+		return convert_utf8_to_cp1251(utf8str);
 	}
-	return utf8_to_string(utf8str, RmlLocales.Latin());
-}
-
-std::string to_utf8(const std::string& str, const std::locale& loc = std::locale{}) {
-	// to wide
-	std::wstring wstr(str.size(), U'\0');
-	std::use_facet<std::ctype<wchar_t>>(loc).widen(str.data(), str.data() + str.size(), &wstr[0]);
-	// to utf8
-	std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
-	return cvt.to_bytes(wstr);
+	return convert_utf8_to_cp1252(utf8str);
 }
 
 std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua) {
 	if (langua == morphRussian) {
-		return to_utf8(str, RmlLocales.Russian());
+		return convert_cp1251_to_utf8(str);
 	}
-	return to_utf8(str, RmlLocales.Latin());
+	return convert_cp1252_to_utf8(str);
 }

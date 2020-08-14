@@ -63,8 +63,8 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	int NounGroupNo;
 
 	if(		Wi.get_upper_word()
-		&&	!strcmp(Wi.get_upper_word(), _R("ВСЕ"))
-		&&    Wi.is_lemma(_R("ВЕСЬ"))
+		&&  _R("ВСЕ") == Wi.get_upper_word()
+		&&  Wi.is_lemma(_R("ВЕСЬ"))
 		&&	(get_maximal_group_size(i) == 1)
 		)
 	bFound_VSE = true;

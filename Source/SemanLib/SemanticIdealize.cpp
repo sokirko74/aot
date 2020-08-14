@@ -277,7 +277,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 					int j = s.find("+");
 					if (j==-1) continue;
 					s.erase(0, j+1);
-					CaseItemNo = RossHolder->GetItemNoByItemStr (s.c_str(), "D_CASE");
+					CaseItemNo = RossHolder->GetItemNoByItemStr(s, "D_CASE");
 				}
 			}
 			else

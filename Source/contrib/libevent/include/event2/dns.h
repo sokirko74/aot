@@ -179,11 +179,39 @@ extern "C" {
 
 #define DNS_QUERY_NO_SEARCH 1
 
+/* Allow searching */
 #define DNS_OPTION_SEARCH 1
+/* Parse "nameserver" and add default if no such section */
 #define DNS_OPTION_NAMESERVERS 2
+/* Parse additional options like:
+ * - timeout:
+ * - getaddrinfo-allow-skew:
+ * - max-timeouts:
+ * - max-inflight:
+ * - attempts:
+ * - randomize-case:
+ * - initial-probe-timeout:
+ */
 #define DNS_OPTION_MISC 4
+/* Load hosts file (i.e. "/etc/hosts") */
 #define DNS_OPTION_HOSTSFILE 8
-#define DNS_OPTIONS_ALL 15
+/**
+ * All above:
+ * - DNS_OPTION_SEARCH
+ * - DNS_OPTION_NAMESERVERS
+ * - DNS_OPTION_MISC
+ * - DNS_OPTION_HOSTSFILE
+ */
+#define DNS_OPTIONS_ALL (    \
+    DNS_OPTION_SEARCH      | \
+    DNS_OPTION_NAMESERVERS | \
+    DNS_OPTION_MISC        | \
+    DNS_OPTION_HOSTSFILE   | \
+    0                        \
+)
+/* Do not "default" nameserver (i.e. "127.0.0.1:53") if there is no nameservers
+ * in resolv.conf, (iff DNS_OPTION_NAMESERVERS is set) */
+#define DNS_OPTION_NAMESERVERS_NO_DEFAULT 16
 
 /* Obsolete name for DNS_QUERY_NO_SEARCH */
 #define DNS_NO_SEARCH DNS_QUERY_NO_SEARCH
@@ -196,7 +224,7 @@ extern "C" {
  * - ttl is the number of seconds the resolution may be cached for.
  * - addresses needs to be cast according to type.  It will be an array of
  *   4-byte sequences for ipv4, or an array of 16-byte sequences for ipv6,
- *   or a nul-terminated std::string for PTR.
+ *   or a nul-terminated string for PTR.
  */
 typedef void (*evdns_callback_type) (int result, char type, int count, int ttl, void *addresses, void *arg);
 
@@ -208,6 +236,10 @@ struct event_base;
 /** Flag for evdns_base_new: Do not prevent the libevent event loop from
  * exiting when we have no active dns requests. */
 #define EVDNS_BASE_DISABLE_WHEN_INACTIVE 0x8000
+/** Flag for evdns_base_new: If EVDNS_BASE_INITIALIZE_NAMESERVERS isset, do not
+ * add default nameserver if there are no nameservers in resolv.conf
+ * @see DNS_OPTION_NAMESERVERS_NO_DEFAULT */
+#define EVDNS_BASE_NAMESERVERS_NO_DEFAULT 0x10000
 
 /**
   Initialize the asynchronous DNS library.
@@ -218,7 +250,7 @@ struct event_base;
 
   @param event_base the event base to associate the dns client with
   @param flags any of EVDNS_BASE_INITIALIZE_NAMESERVERS|
-    EVDNS_BASE_DISABLE_WHEN_INACTIVE
+    EVDNS_BASE_DISABLE_WHEN_INACTIVE|EVDNS_BASE_NAMESERVERS_NO_DEFAULT
   @return evdns_base object if successful, or NULL if an error occurred.
   @see evdns_base_free()
  */
@@ -251,10 +283,10 @@ EVENT2_EXPORT_SYMBOL
 void evdns_base_clear_host_addresses(struct evdns_base *base);
 
 /**
-  Convert a DNS error code to a std::string.
+  Convert a DNS error code to a string.
 
   @param err the DNS error code
-  @return a std::string containing an explanation of the error code
+  @return a string containing an explanation of the error code
 */
 EVENT2_EXPORT_SYMBOL
 const char *evdns_err_to_string(int err);
@@ -317,9 +349,9 @@ EVENT2_EXPORT_SYMBOL
 int evdns_base_resume(struct evdns_base *base);
 
 /**
-  Add a nameserver by std::string address.
+  Add a nameserver by string address.
 
-  This function parses a n IPv4 or IPv6 address from a std::string and adds it as a
+  This function parses a n IPv4 or IPv6 address from a string and adds it as a
   nameserver.  It supports the following formats:
   - [IPv6Address]:port
   - [IPv6Address]
@@ -423,7 +455,8 @@ void evdns_cancel_request(struct evdns_base *base, struct evdns_request *req);
   The currently available configuration options are:
 
     ndots, timeout, max-timeouts, max-inflight, attempts, randomize-case,
-    bind-to, initial-probe-timeout, getaddrinfo-allow-skew.
+    bind-to, initial-probe-timeout, getaddrinfo-allow-skew,
+    so-rcvbuf, so-sndbuf.
 
   In versions before Libevent 2.0.3-alpha, the option name needed to end with
   a colon.
@@ -453,7 +486,7 @@ int evdns_base_set_option(struct evdns_base *base, const char *option, const cha
 
   @param base the evdns_base to which to apply this operation
   @param flags any of DNS_OPTION_NAMESERVERS|DNS_OPTION_SEARCH|DNS_OPTION_MISC|
-    DNS_OPTION_HOSTSFILE|DNS_OPTIONS_ALL
+    DNS_OPTION_HOSTSFILE|DNS_OPTIONS_ALL|DNS_OPTION_NAMESERVERS_NO_DEFAULT
   @param filename the path to the resolv.conf file
   @return 0 if successful, or various positive error codes if an error
     occurred (see above)

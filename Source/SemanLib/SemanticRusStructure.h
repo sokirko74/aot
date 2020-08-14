@@ -357,9 +357,9 @@ typedef vector<CRusSemNode>  CRusSemNodeVec;
 
 
 struct CConj {
-	const char* conj;
-	const char* antecedent;
-	const char* RelationStr;
+	std::string conj;
+	std::string antecedent;
+	std::string RelationStr;
 };
 
 // Этот класс используется пока только для нахождения групп времени

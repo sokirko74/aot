@@ -697,22 +697,23 @@ void MorphoWizard::save_mrd() {
 
 
 
-    FILE *out_fp = fopen(Path.c_str(), "w");
-    if (!out_fp) throw CExpc("Error while saving to file. It may be corrupted");
+    std::ofstream outp(Path, std::ios::binary);
+    if (!outp.is_open()) {
+        throw CExpc("Error while saving to file. It may be corrupted");
+    }
+    WriteFlexiaModels(outp);
+    WriteAccentModels(outp);
 
-    WriteFlexiaModels(out_fp);
+    outp << m_Sessions.size() << "\n";
+    for (auto s : m_Sessions)
+        outp << str_to_utf8(s.ToString()) << "\n";
 
-    WriteAccentModels(out_fp);
+    outp << m_PrefixSets.size() << "\n";
+    for (size_t i = 0; i < m_PrefixSets.size(); i++) {
+        outp << str_to_utf8(get_prefix_set_str((WORD)i)) << "\n";
+    }
 
-    fprintf(out_fp, "%i\n", m_Sessions.size());
-    for (size_t i = 0; i < m_Sessions.size(); i++)
-        fprintf(out_fp, "%s\n", m_Sessions[i].ToString().c_str());
-
-    fprintf(out_fp, "%i\n", m_PrefixSets.size());
-    for (size_t i = 0; i < m_PrefixSets.size(); i++)
-        fprintf(out_fp, "%s\n", get_prefix_set_str((WORD) i).c_str());
-
-    fprintf(out_fp, "%i\n", m_LemmaToParadigm.size());
+    outp << m_LemmaToParadigm.size() << "\n";
     for (lemma_iterator_t b = m_LemmaToParadigm.begin(); b != m_LemmaToParadigm.end(); ++b) {
         const CFlexiaModel &p = m_FlexiaModels[b->second.m_FlexiaModelNo];
         int flex_size = p.get_first_flex().size();
@@ -721,11 +722,12 @@ void MorphoWizard::save_mrd() {
         if (base.empty()) base = "#";
         std::string s1 = (b->second.m_CommonAncode[0] == 0) ? "-" : b->second.GetCommonAncodeIfCan();
         std::string s2 = (b->second.m_PrefixSetNo == UnknownPrefixSetNo) ? "-" : Format("%i", b->second.m_PrefixSetNo);
-        fprintf(out_fp, "%s %i %i %i %s %s\n", base.c_str(), b->second.m_FlexiaModelNo, b->second.m_AccentModelNo,
-                b->second.m_SessionNo, s1.c_str(), s2.c_str());
+        outp << str_to_utf8(base) << " " << b->second.m_FlexiaModelNo << " " <<
+            b->second.m_AccentModelNo << " " << b->second.m_SessionNo << " " <<
+            str_to_utf8(s1) << " " << str_to_utf8(s2) << "\n";
 
     }
-    fclose(out_fp);
+    outp.close();
 
     m_bWasChanged = false;
 

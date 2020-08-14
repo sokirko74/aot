@@ -18,9 +18,6 @@
 #define HTTP_WRITE_TIMEOUT	50
 #define HTTP_READ_TIMEOUT	50
 
-#define HTTP_PREFIX		"http://"
-#define HTTP_DEFAULTPORT	80
-
 enum message_read_status {
 	ALL_DATA_READ = 1,
 	MORE_DATA_EXPECTED = 0,
@@ -170,8 +167,6 @@ struct evhttp {
 	void *gencbarg;
 	struct bufferevent* (*bevcb)(struct event_base *, void *);
 	void *bevcbarg;
-	int (*newreqcb)(struct evhttp_request *req, void *);
-	void *newreqcbarg;
 
 	struct event_base *base;
 };
@@ -208,4 +203,4 @@ EVENT2_EXPORT_SYMBOL
 int evhttp_decode_uri_internal(const char *uri, size_t length,
     char *ret, int decode_plus);
 
-#endif /* _HTTP_H */
+#endif /* HTTP_INTERNAL_H_INCLUDED_ */

@@ -47,7 +47,7 @@ bool CTrigramModel::FindGramTabLineInTags(const vector<CTag>& Tags, poses_mask_t
 {
     for (int j=0; j < Tags.size(); j++)
 	{
-		if (		(Tags[j].m_Pos != rPartOfSpeechCount)
+		if (		(Tags[j].m_Pos != RUSSIAN_PART_OF_SPEECH_COUNT)
 				&&	(((1<<Tags[j].m_Pos)&Poses) == 0)
 			)
 			continue;

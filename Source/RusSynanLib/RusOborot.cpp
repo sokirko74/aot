@@ -25,7 +25,8 @@ static const CCoordConjType CoordConjTypes[CoordConjTypesCount] = {
     {_R("ИЛИ"), false},
 	{_R("ЛИБО"),false},
 	{_R("НО"), true},
-	{_R("А"), true}};
+	{_R("А"), true}
+};
 
 
 CRusOborDic::CRusOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
@@ -43,7 +44,7 @@ CRusOborDic::CRusOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
 
 
 
-static long GetItemNoByItemStr(const CDictionary* piOborDic, const char* ItemStr, const char* _DomStr) 
+static long GetItemNoByItemStr(const CDictionary* piOborDic, const std::string& ItemStr, const char* _DomStr) 
 {
 	BYTE DomNo = piOborDic->GetDomenNoByDomStr(_DomStr);
     return piOborDic->GetItemNoByItemStr(ItemStr, DomNo);
@@ -91,9 +92,9 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 		assert(AccusativItemNo != -1);
 		long DativItemNo = GetItemNoByItemStr(piOborDic,_R("Д"), "D_CASE");
 		assert(DativItemNo != -1);
-		long InstrumentalisItemNo = GetItemNoByItemStr(piOborDic,_R("Т"), "D_CASE");
+		long InstrumentalisItemNo = GetItemNoByItemStr(piOborDic, _R("Т"), "D_CASE");
 		assert(InstrumentalisItemNo != -1);
-		long VocativItemNo = GetItemNoByItemStr(piOborDic,_R("П"), "D_CASE");
+		long VocativItemNo = GetItemNoByItemStr(piOborDic, _R("П"), "D_CASE");
 		assert(VocativItemNo != -1);
 		long NominativPluralItemNo = GetItemNoByItemStr(piOborDic,_R("И_мн"), "D_CASE");
 

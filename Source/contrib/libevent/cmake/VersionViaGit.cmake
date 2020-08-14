@@ -2,7 +2,7 @@
 # git to determine the parent tag. And if found the macro
 # will attempt to parse them in the github tag fomat
 #
-# Usful for auto-versionin in ou CMakeLists
+# Useful for auto-versioning in our CMakeLists
 #
 #  EVENT_GIT___VERSION_MAJOR - Major version.
 #  EVENT_GIT___VERSION_MINOR - Minor version
@@ -22,16 +22,16 @@ include(FindGit)
 macro(event_fuzzy_version_from_git)
 	# set our defaults.
 	set(EVENT_GIT___VERSION_MAJOR 2)
-	set(EVENT_GIT___VERSION_MINOR 2)
-	set(EVENT_GIT___VERSION_PATCH 0)
-	set(EVENT_GIT___VERSION_STAGE "alpha-dev")
+	set(EVENT_GIT___VERSION_MINOR 1)
+	set(EVENT_GIT___VERSION_PATCH 12)
+	set(EVENT_GIT___VERSION_STAGE "stable")
 
 	find_package(Git)
 
 	if (GIT_FOUND)
 		execute_process(
 			COMMAND
-				${GIT_EXECUTABLE} describe --abbrev=0
+				${GIT_EXECUTABLE} describe --abbrev=0 --always
 			WORKING_DIRECTORY
 				${PROJECT_SOURCE_DIR}
 			RESULT_VARIABLE
@@ -42,7 +42,9 @@ macro(event_fuzzy_version_from_git)
 		)
 
 		string(REGEX REPLACE "[\\._-]" ";" VERSION_LIST "${GITVERSION}")
-		list(LENGTH VERSION_LIST VERSION_LIST_LENGTH)
+		if(VERSION_LIST)
+			list(LENGTH VERSION_LIST VERSION_LIST_LENGTH)
+		endif()
 
 		if ((GITRET EQUAL 0) AND (VERSION_LIST_LENGTH EQUAL 5))
 			list(GET VERSION_LIST 1 _MAJOR)

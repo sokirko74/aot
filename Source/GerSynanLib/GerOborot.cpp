@@ -18,7 +18,7 @@ CGerOborDic::CGerOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
 
 }
 
-static long GetItemNoByItemStr(const CDictionary* piOborDic, const char* ItemStr, const char* _DomStr) 
+static long GetItemNoByItemStr(const CDictionary* piOborDic, const std::string& ItemStr, const char* _DomStr) 
 {
 	BYTE DomNo = piOborDic->GetDomenNoByDomStr(_DomStr);
     return piOborDic->GetItemNoByItemStr(ItemStr, DomNo);

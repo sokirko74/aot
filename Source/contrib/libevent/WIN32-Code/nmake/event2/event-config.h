@@ -151,10 +151,10 @@
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define EVENT__HAVE_STDLIB_H 1
 
-/* Define to 1 if you have the <std::strings.h> header file. */
+/* Define to 1 if you have the <strings.h> header file. */
 #define EVENT__HAVE_STRINGS_H 1
 
-/* Define to 1 if you have the <std::string.h> header file. */
+/* Define to 1 if you have the <string.h> header file. */
 #define EVENT__HAVE_STRING_H 1
 
 /* Define to 1 if you have the `strlcpy' function. */
@@ -271,7 +271,7 @@
 /* #undef EVENT__HAVE_WORKING_KQUEUE */
 
 /* Numeric representation of the version */
-#define EVENT__NUMERIC_VERSION 0x02020001
+#define EVENT__NUMERIC_VERSION 0x02010c00
 
 /* Name of package */
 #define EVENT__PACKAGE "libevent"
@@ -332,7 +332,7 @@
 #define EVENT__TIME_WITH_SYS_TIME 1
 
 /* Version number of package */
-#define EVENT__VERSION "2.2.0-alpha-dev"
+#define EVENT__VERSION "2.1.12-stable"
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'inline' is not supported under any name.  */

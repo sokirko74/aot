@@ -486,10 +486,13 @@ void CMAPost::Cifrdef()
         std::string AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Cardinal, Flexia, NumeralToNumber[i].m_bNoun);
 		if  ( AnCodes.empty() && Flexia != "" )
 			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun);
-		if( !strcmp(NumeralToNumber[i].m_Cardinal, _R("ОДИН"))) AnCodes = _R("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"); //все грамкоды с родом
+        if (NumeralToNumber[i].m_Cardinal == _R("ОДИН")) {
+            AnCodes = _R("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"); //все грамкоды с родом
+        }
 		std::string AnCodes0 = AnCodes; //числ
-        if  (NumWordForm != _R("0"))
-			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun );
+        if (NumWordForm != "0") {
+            AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun);
+        }
 		if ( Flexia == "" )
 			AnCodes = m_pRusGramTab->FilterGramCodes(rAllNumbers,AnCodes, _QM(rSingular));
 		if ( FindFloatingPoint(NumWordForm.c_str()) != -1 || AnCodes0 == AnCodes)

@@ -101,20 +101,15 @@ bool CSynPlmLine :: has_lemma() const
 	return (get_lemma() != 0) &&  (get_lemma()[0] != 0);
 };
 
-bool CSynPlmLine :: is_lemma(const char* lemma) const 
+bool CSynPlmLine :: is_lemma(const std::string& lemma) const 
 {
-	if (!has_lemma()) return false;
-	if (lemma == 0) return false;
-	return !strcmp(get_lemma(),lemma);
-
+	return has_lemma() && lemma == get_lemma();
 };
 
-bool CSynPlmLine :: is_word_upper(const char* word_upper) const 
+bool CSynPlmLine :: is_word_upper(const std::string& word_upper) const
 {
 	if (get_upper_word() == 0) return false;
-	if (word_upper == 0) return false;
-	return !strcmp(get_upper_word(),word_upper);
-
+	return word_upper == get_upper_word();
 };
 
 bool CSynPlmLine :: has_grammem (BYTE g)  const

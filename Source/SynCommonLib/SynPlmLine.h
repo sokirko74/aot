@@ -82,8 +82,8 @@ public:
 
 	bool	is_single_punct (BYTE c ) const;
 	bool	has_lemma() const;
-	bool	is_lemma(const char* lemma) const;
-	bool	is_word_upper(const char* word_upper) const;
+	bool	is_lemma(const std::string& lemma) const;
+	bool	is_word_upper(const std::string& word_upper) const;
 	bool	has_grammem (BYTE g)  const;
 	bool	is_morph_noun () const;
 	bool	is_syn_noun() const;

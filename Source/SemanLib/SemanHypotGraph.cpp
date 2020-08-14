@@ -195,7 +195,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo)
 				for (int k=0; k < P.m_ActantSemFets[i].size(); k++)
 					if	(		(		(std::string(P.m_ActantSemFets[i][k]) != "Copul")
 									&&	!IsParameterOfAdjOrAdv(std::string(P.m_ActantSemFets[i][k]))
-									&&	(GetRossHolder(Ross)->GetItemNoByItemStr (P.m_ActantSemFets[i][k].c_str(), "D_LF") != -1)
+									&&	(GetRossHolder(Ross)->GetItemNoByItemStr (P.m_ActantSemFets[i][k], "D_LF") != -1)
 								)
 							||	(P.m_ActantSemFets[i][k] == "REL") // SF=REL только мешает			 
 						)

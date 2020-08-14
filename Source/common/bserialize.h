@@ -326,6 +326,21 @@ bool WriteVectorInner(FILE *fp, const vector<T> &V) {
     return true;
 };
 
+template<class T>
+bool WriteVectorStream(std::ofstream& outp, const vector<T>& vec) {
+    T dummy;
+    size_t size_of_t = get_size_in_bytes(dummy);
+
+    BYTE buffer[VectorMaxStructSize];
+    assert(size_of_t < VectorMaxStructSize);
+
+    for (auto item : vec) {
+        save_to_bytes(item, buffer);
+        outp.write((char*)buffer, size_of_t);
+    };
+    return true;
+};
+
 
 template<class T>
 inline bool WriteVector(const std::string &FileName, const vector<T> &V) {

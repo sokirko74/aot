@@ -71,7 +71,7 @@ void CRusSentence::InitClauseVectorRules()
 
 
 struct CAntecedent {
-	char m_Lemma[20];
+	std::string m_Lemma;
 	int		   m_Poses;
 };
 

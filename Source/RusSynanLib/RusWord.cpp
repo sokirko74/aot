@@ -63,7 +63,9 @@ void CRusSentence::InitHomonymMorphInfo (CSynHomonym& H)
 };
 
 const UINT SmallNumbersCount = 5;
-const char SmallNumbers [SmallNumbersCount][10] = {"ДВА", "ТРИ", "ЧЕТЫРЕ","ОБА", "ПОЛТОРА"};
+std::string SmallNumbers[SmallNumbersCount] = {
+	_R("ДВА"), _R("ТРИ"), _R("ЧЕТЫРЕ"), _R("ОБА"), _R("ПОЛТОРА")
+};
 
 
 void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
@@ -99,7 +101,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 		for (long  i=0; i<SmallNumbersCount; i++)
 		  if (	H.IsLemma(SmallNumbers[i]) // m_strLemma может быть равна "один-два",
 			  || (   (H.m_strLemma.find('-') != std::string::npos) // например, "один-два дня", тогда надо сравнивать с последним числительным
-				  && (strlen(SmallNumbers[i]) < H.m_strLemma.length())
+				  && (SmallNumbers[i].length() < H.m_strLemma.length())
 				  && (SmallNumbers[i] == H.m_strLemma.substr(H.m_strLemma.find('-') + 1))
 				 )
 			  )
