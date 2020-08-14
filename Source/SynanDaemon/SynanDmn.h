@@ -1,4 +1,4 @@
-#include <common/http_server.h>
+#include "../common/http_server.h"
 
 class TSynanHttpServer : public TRMLHttpServer {
 	std::string ProcessMorphology(TDaemonParsedRequest& request);

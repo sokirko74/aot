@@ -492,7 +492,7 @@ bool CRusSemStructure::AgreeWithSyntaxTop (long Tag) const
 			long  RelNo = m_Nodes[SubjectNodeNo].m_InRels[i];
 			if (HasTag(m_Relations[RelNo].m_SourceNodeNo, Tag))
 				if (m_Relations[RelNo].m_bRelUse)
-					if (m_Relations[RelNo].m_SyntacticRelation != "подл") 
+					if (m_Relations[RelNo].m_SyntacticRelation != _R("подл")) 
 						return false;
 		};
 
@@ -915,7 +915,7 @@ void CRusSemStructure::FindSemFetDisagree(long Tag)
 
 					m_Relations[k].m_bSemFetAgree = false;
 
-					if  (   (m_Relations[k].m_SyntacticRelation == "врем_группа")
+					if  (   (m_Relations[k].m_SyntacticRelation == _R("врем_группа"))
 						|| (m_Relations[k].m_Valency.m_RelationStr == "THESAME")		   )
 					{
 						m_Relations[k].m_bSemFetAgree = true;
@@ -970,7 +970,7 @@ void CRusSemStructure::FindSemFetDisagree(long Tag)
 					интерпретируется как "сорока"	 (птица)
 					*/
 					if (m_Relations[i].m_Valency.m_RelationStr == "QUANTIT")	    
-						if (m_Relations[i].m_SyntacticRelation == "ЧИСЛ_СУЩ")
+						if (m_Relations[i].m_SyntacticRelation == _R("ЧИСЛ_СУЩ"))
 						{
 							m_Relations[k].m_bSemFetAgree = true;
 							continue;
@@ -1218,9 +1218,9 @@ bool CRusSemStructure::CheckSubjectPredicateRelation (long SubjNodeNo, long Pred
 	if (m_Nodes[SubjNodeNo].IsPrimitive())
 	{
 		// "ничего не произошло"
-		if (m_Nodes[SubjNodeNo].m_Words[0].m_Word == "НИЧЕГО") return true;
+		if (m_Nodes[SubjNodeNo].m_Words[0].m_Word == _R("НИЧЕГО")) return true;
 		// "никто не пришел"
-		if (m_Nodes[SubjNodeNo].m_Words[0].m_Word == "НИКТО") return true;
+		if (m_Nodes[SubjNodeNo].m_Words[0].m_Word == _R("НИКТО")) return true;
 	};
 	/*
 	  Разрешаем обе формы: "два мальчика пришло" и "два мальчика пришли", т.е 
@@ -1252,7 +1252,7 @@ long CRusSemStructure::GetSubjectPredicateViolationsCount (long Tag)
   for (size_t i = 0;  i < m_Relations.size(); i++)
    if (HasTag(m_Relations[i].m_SourceNodeNo, Tag))
     if (m_Relations[i].m_bRelUse)
-     if (m_Relations[i].m_SyntacticRelation == "подл")
+     if (m_Relations[i].m_SyntacticRelation == _R("подл"))
 		 if (!CheckSubjectPredicateRelation(m_Relations[i].m_TargetNodeNo, m_Relations[i].m_SourceNodeNo))
 			 Result ++;
 

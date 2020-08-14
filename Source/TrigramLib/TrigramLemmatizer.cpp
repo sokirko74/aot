@@ -397,11 +397,14 @@ bool CheckWhetherUkranian(const vector<string>& tokens)
 	return false;
 }
 
-bool CTrigramModel::TagRawText(std::string FileName) 
+bool CTrigramModel::TagRawText(std::string FileName)
 {
-	if (!m_Graphan.LoadFileToGraphan(FileName))
+	try {
+		m_Graphan.LoadFileToGraphan(FileName);
+	}
+	catch (CExpc e)
 	{
-		fprintf (stderr,"Cannot load file %s \n", FileName.c_str());
+		std::cerr << "Cannot load file " << FileName << " ,exception: " << e.m_strCause << "\n";
 		return false;
 	};
 	fprintf (stderr,"load file %s \n", FileName.c_str());

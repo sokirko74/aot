@@ -291,11 +291,7 @@ try
 			std::string InputFileName = Files[FileNo];
 			fprintf (stderr,"===== [%zu/%zu] %s ===== \n",FileNo+1, Files.size(), InputFileName.c_str());
 			AllFileSize += FileSize(InputFileName.c_str());
-			if (!Graphan.LoadFileToGraphan(InputFileName))
-			{
-				fprintf (stderr,"Cannot load file %s \n", InputFileName.c_str());
-				continue;
-			};
+			Graphan.LoadFileToGraphan(InputFileName);
 			size_t TokensCount = Graphan.GetUnits().size();
 			interp_t Tokens =  GetTokensBySentences(Graphan);
 			if  (bUseHMM)

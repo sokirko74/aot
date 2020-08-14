@@ -67,12 +67,12 @@ static bool CheckComma (CGraphmatFile& F, size_t Sent1No, size_t Sent2No)
 
 */
 
-static bool SetSentMarkers (CGraphmatFile& F, const size_t PreviousSentEnd, const size_t NewSentStart , BYTE& SentenceOpenBracket, bool& bSentenceQuotationMarks, DWORD& StartSentenceOffset)
+static void SetSentMarkers (CGraphmatFile& F, const size_t PreviousSentEnd, const size_t NewSentStart , BYTE& SentenceOpenBracket, bool& bSentenceQuotationMarks, DWORD& StartSentenceOffset)
 {	
 	if (PreviousSentEnd >= NewSentStart)
 	{
 		assert (PreviousSentEnd < NewSentStart);
-		return false;
+		throw CExpc("SetSentMarkers: assert (PreviousSentEnd < NewSentStart) failed");
 	};
 
 	size_t EndPos = F.GetUnits().size();
@@ -103,7 +103,6 @@ static bool SetSentMarkers (CGraphmatFile& F, const size_t PreviousSentEnd, cons
 		//  we calcultaing sentence offset from the previous sentence end
 		StartSentenceOffset = F.GetTokenInputOffset(PreviousSentEnd);
 	};
-	return true;
 };
 
 
@@ -146,7 +145,7 @@ bool IsLastInGroupOrFree(const CGraphmatFile& F, size_t i)
 };
 
 
-bool CGraphmatFile::DealSentBreaker ()
+void CGraphmatFile::DealSentBreaker ()
 {
 	size_t EndPos   = GetUnits().size();
 	
@@ -184,16 +183,10 @@ bool CGraphmatFile::DealSentBreaker ()
 	long CountOfSentence = 0;
 
 	long FirstSentStart = PPunctOrSoft (1, EndPos);
-	{
-		if (!SetSentMarkers (*this, 0, FirstSentStart, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset))
-			return false;
-	};
+	SetSentMarkers(*this, 0, FirstSentStart, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 
 	// for empty texts
-	if (EndPos == 1) return true;
-
-
-
+	if (EndPos == 1) return;
 	
 	// going through the input text, 
 	// we should start from FirstSentStart, since SentenceOpenBracket, bSentenceQuotationMarks
@@ -225,9 +218,7 @@ bool CGraphmatFile::DealSentBreaker ()
 		if (  HasDescr (WordNo, OPar) && (CountOfSentence>0))
 		{
 			size_t End = FindSentEndAfterParagraph(*this, WordNo - 1, EndPos);
-			if (!SetSentMarkers (*this, End, WordNo, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset))
-				return false;
-
+			SetSentMarkers(*this, End, WordNo, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 			// no more search for  a close bracket!
 			InnerOpenBracket = 0;
 			CountOfSentence++;
@@ -246,8 +237,7 @@ bool CGraphmatFile::DealSentBreaker ()
 			size_t StartSent = PSoft (WordNo+1, EndPos);
 			if ( StartSent == EndPos) continue;
 			size_t End = FindSentEndAfterParagraph(*this, StartSent-1, EndPos);
-			if (!SetSentMarkers (*this, End, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset))
-				return false;
+			SetSentMarkers(*this, End, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 			InnerOpenBracket = 0;
 			CountOfSentence++;
 			WordNo = StartSent - 1;
@@ -277,9 +267,7 @@ bool CGraphmatFile::DealSentBreaker ()
 
 			if (CheckComma(*this, WordNo, StartSent))
 			{
-				if ( !SetSentMarkers (*this, WordNo, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset) )
-					return false;
-
+				SetSentMarkers(*this, WordNo, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 				WordNo = StartSent-1;
 			};
 
@@ -379,8 +367,7 @@ bool CGraphmatFile::DealSentBreaker ()
 					continue;
 			
 			
-			if (!SetSentMarkers (*this, SentEnd, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset))
-				return false;
+			SetSentMarkers(*this, SentEnd, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 			
 			WordNo = StartSent-1;
 
@@ -399,8 +386,7 @@ bool CGraphmatFile::DealSentBreaker ()
 			// SentEnd  cannot be at the same graphematical line 
 			size_t StartSent = PSoft(WordNo+1, EndPos);
 			if (   StartSent == EndPos ) continue; //  the end of file  has a special processing
-			if (!SetSentMarkers (*this, WordNo, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset))
-				return false;
+			SetSentMarkers(*this, WordNo, StartSent, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 			
 			CountOfSentence++;
 			InnerOpenBracket = 0;
@@ -415,10 +401,6 @@ bool CGraphmatFile::DealSentBreaker ()
 	I go to the forest (!)
 	Here the close bracket will be marked with OSentEnd, (not "!")
 	*/
-	if ( !SetSentMarkers (*this, BSoft (EndPos-1), EndPos,  SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset) )
-			return false;
-	
-
-	return true;
+	SetSentMarkers(*this, BSoft(EndPos - 1), EndPos, SentenceOpenBracket, bSentenceQuotationMarks, StartSentenceOffset);
 };
 

@@ -1,5 +1,6 @@
 
 #include <stdint.h>
+#include <string.h>
 #include <string>
 #include "iconv.h"
 
@@ -23,20 +24,21 @@ std::string convert_to_utf8(const std::string& single_byte_string, multibyte_to_
 	size_t buffer_offset = 0;
 	for (size_t i = 0; i < single_byte_string.length(); ++i) {
 		ucs4_t unicode_char;
+		auto input = (const unsigned char*)(single_byte_string.c_str() + i);
 		int result = converter_to_wide(
 			0, 
 			&unicode_char, 
-			(const unsigned char*)(single_byte_string.c_str() + i), 
+			input,
 			0);
 		if (RET_ILSEQ == result) {
-			throw std::exception("cannot convert from cp1251 to wide char");
+			throw convert_exception("cannot convert from single byte to wide char");
 		}
 		result = utf8_wctomb(0, buffer + buffer_offset, unicode_char, utf8_string.length() - buffer_offset);
 		if (RET_ILUNI == result) {
-			throw std::exception("bad conversion: from wide char to utf8");
+			throw convert_exception("bad conversion: from wide char to utf8");
 		}
 		if (RET_TOOSMALL == result) {
-			throw std::exception("bad conversion: from wide char to utf8");
+			throw convert_exception("bad conversion: from wide char to utf8");
 		}
 		buffer_offset += result;
 	}
@@ -68,10 +70,10 @@ std::string convert_from_utf8(const char* utfstring, widechar_to_multibyte conve
 								(const unsigned char*)(utfstring + utfstring_offset),
 								single_byte_string.length() - output_buffer_offset);
 		if (RET_ILUNI == count) {
-			throw std::exception("bad conversion: from utf8 to wide");
+			throw convert_exception("bad conversion: from utf8 to wide");
 		}
 		if (RET_TOOSMALL == count) {
-			throw std::exception("bad conversion: not enough space");
+			throw convert_exception("bad conversion: not enough space");
 		}
 		utfstring_offset += count;
 
@@ -80,7 +82,7 @@ std::string convert_from_utf8(const char* utfstring, widechar_to_multibyte conve
 					unicode_char, 
 					single_byte_string.length() - output_buffer_offset);
 		if (RET_ILSEQ == result) {
-			throw std::exception("cannot convert from wide to single_byte");
+			throw convert_exception("cannot convert from wide to single_byte");
 		}
 		output_buffer_offset += 1;
 	}

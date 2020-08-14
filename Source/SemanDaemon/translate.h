@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SemanLib/SemStructureBuilder.h>
+#include "../SemanLib/SemStructureBuilder.h"
 
-#include <common/http_server.h>
+#include "../common/http_server.h"
 
 class TSemanHttpServer : public TRMLHttpServer {
 	CSemStructureBuilder SemBuilder;

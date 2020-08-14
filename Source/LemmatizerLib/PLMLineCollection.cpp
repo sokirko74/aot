@@ -45,11 +45,8 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 		
 		for (LineNo = 0; LineNo < Gr->GetTokensCount(); LineNo++)
 		{
-			// take a line from Graphematics
-			char buffer[CriticalGraphemLineLength];
-			Gr->GetGraphematicalLine(buffer, LineNo);
-		 	std::string strProcess = buffer;
-
+			std::string strProcess  = Gr->GetGraphematicalLine(LineNo);
+		 	
 			//=====   do not lemmatize oborots with EXPR=Fixed!
 			if (Gr->StartsFixedOborot(LineNo))
 			{

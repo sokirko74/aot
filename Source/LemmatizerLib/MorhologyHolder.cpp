@@ -115,13 +115,13 @@ bool CMorphologyHolder::GetMorphology(std::string str, bool bFile, int& CountOfW
 	try {
 		// ============  Graphematics =======================
 		if (m_bTimeStatis) t1= clock();
-		bool bResult = (bFile) ? m_Graphan.LoadFileToGraphan(str.c_str()):m_Graphan.LoadStringToGraphan(str.c_str());
-		if (!bResult)
-		{
-			fprintf (stderr, "Graphan has crushed!\n");
-			return false;
-		};
-		
+		if (bFile) {
+			m_Graphan.LoadFileToGraphan(str);
+		}
+		else {
+			m_Graphan.LoadStringToGraphan(str);
+		}
+
 		if (m_bTimeStatis) 
 		{
 			t2 = clock();
@@ -157,6 +157,9 @@ bool CMorphologyHolder::GetMorphology(std::string str, bool bFile, int& CountOfW
 		m_Graphan.FreeTable();
 		return true;
 	}
+	catch (CExpc e) {
+		std::cerr << e.m_strCause << "\n";
+		return false;	}
 	catch (...)
 	{
 		return false;

@@ -33,7 +33,7 @@ class IsLessByNotStableItemStrNew : public std::binary_function<const TDomItem&,
 	  if (Item1.GetDomNo() != Item2.DomNo)
 		return (Item1.GetDomNo() < Item2.DomNo);
 	  else
-		return Item2.ItemStr.compare(m_pRoss->GetDomItemStr(Item1)) >=0;
+		return Item2.ItemStr.compare(m_pRoss->GetDomItemStr(Item1)) > 0;
   }
   bool operator()(const TDomNoItemStr& Item1,  const TDomItem& Item2) const
   {

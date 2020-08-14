@@ -1,5 +1,5 @@
 #include "VisualGraph.h"
-#include <common/json.h>
+#include "../common/json.h"
 #include <assert.h>
 
 const size_t NodeHeight = 60;

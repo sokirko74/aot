@@ -90,8 +90,10 @@ add_subdirectory (SemanLib)
 add_subdirectory (TestSeman)
 add_subdirectory (Transfer)
 
-add_subdirectory (SynanDaemon)
-add_subdirectory (SemanDaemon)
+if(COMPILE_WITH_HTTP)
+    add_subdirectory (SynanDaemon)
+    add_subdirectory (SemanDaemon)
+endif()
 
 IF (MSVC)
     macro(CompileIDL Project)

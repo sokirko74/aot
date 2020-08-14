@@ -558,7 +558,7 @@ long	CRossHolder::IsCompAdjCortege(const  TCortege& C) const
 {
    long ItemNo = GetSynFet(C);
    return  (ItemNo != -1) 
-	   &&  (std::string( GetDomItemStrInner(ItemNo)) == "сравн");
+	   &&  (std::string( GetDomItemStrInner(ItemNo)) == _R("сравн"));
 };
 
 

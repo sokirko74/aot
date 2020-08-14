@@ -62,11 +62,11 @@ class CGraphmatFile : public CUnitHolder {
 
     void DealNames(size_t LB, size_t HB);
 
-    bool DealSentBreaker();
+    void DealSentBreaker();
 
     void InitNonContextDescriptors(CGraLine &L);
 
-    bool GraphmatMain();
+    void GraphmatMain();
 
     int InitContextDescriptors(size_t LB, size_t HB);
 
@@ -125,15 +125,13 @@ public:
 
     bool LoadStringToGraphan(const std::string &szBuffer);
 
-    bool LoadFileToGraphan(const std::string &CommandLine);
+    void LoadFileToGraphan(const std::string &CommandLine);
 
     void FreeDicts();
 
     const std::string &GetLastError() const;
 
-    //  browsing results
-
-    void GetGraphematicalLine(char *line, size_t NumLine) const;
+    std::string GetGraphematicalLine(size_t NumLine) const;
 
     MorphLanguageEnum GetTokenLanguage(int LineNo) const;
 

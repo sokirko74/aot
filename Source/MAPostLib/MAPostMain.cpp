@@ -1084,7 +1084,7 @@ void CMAPost::Rule_Ideclinable()
         if ( !W.HasPos(NOUN) ) continue;
 		const std::string& WordForm = W.m_strUpperWord;
         if (WordForm.empty()) continue;
-		if ((BYTE)WordForm[WordForm.length() - 1] != (BYTE)'О') continue;
+		if ((BYTE)WordForm[WordForm.length() - 1] != (BYTE)_R("О")[0]) continue;
         for (int i=0; i < W.GetHomonymsCount(); i++)
         {
             CHomonym* pH = W.GetHomonym(i);

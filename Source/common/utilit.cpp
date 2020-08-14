@@ -2482,6 +2482,7 @@ int CountBits(QWORD value)
 	}
 	return count;
 }
+
 size_t FindFloatingPoint(const char* str)
 {
 	if(!str || sizeof(str)<3) return -1;
@@ -2492,16 +2493,27 @@ size_t FindFloatingPoint(const char* str)
 	return c == std::string::npos ? -1 : c;
 }
 
-std::string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua) {
-	if (langua == morphRussian) {
-		return convert_utf8_to_cp1251(utf8str);
+std::string convert_from_utf(const char* utf8str, const MorphLanguageEnum langua) {
+	try {
+		if (langua == morphRussian) {
+			return convert_utf8_to_cp1251(utf8str);
+		}
+		return convert_utf8_to_cp1252(utf8str);
 	}
-	return convert_utf8_to_cp1252(utf8str);
+	catch (convert_exception e) {
+		throw CExpc(e.what());
+	}
 }
 
+
 std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua) {
-	if (langua == morphRussian) {
-		return convert_cp1251_to_utf8(str);
+	try {
+		if (langua == morphRussian) {
+			return convert_cp1251_to_utf8(str);
+		}
+		return convert_cp1252_to_utf8(str);
 	}
-	return convert_cp1252_to_utf8(str);
+	catch (convert_exception e) {
+		throw CExpc(e.what());
+	}
 }

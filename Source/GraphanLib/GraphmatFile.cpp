@@ -147,74 +147,53 @@ bool CGraphmatFile::LoadDicts ()
 
 
 
-bool CGraphmatFile :: GraphmatMain ()
+void CGraphmatFile :: GraphmatMain ()
 {
-	m_LastError = "";
-
 	if (0x500000 < GetInputBuffer().size())
 	{
-		m_LastError = "File is to large, it cannot be more than 5 MB";
-		return false;
+		throw CExpc( "File is to large, it cannot be more than 5 MB");
 	};
 
 
 	InitTokenBuffer();
 
-	try
+	// NUMBER of all UNITS which were read from INPUT file
+	size_t  CurrOutBufOffset  = 0;
+
+	// we should process all bytes except the last terminating null
+	size_t InputBufferSize = GetInputBuffer().size()-1;
+
+	for (size_t InputOffset  = 0; InputOffset < InputBufferSize ; )
 	{
-		// NUMBER of all UNITS which were read from INPUT file
-		size_t  CurrOutBufOffset  = 0;
-
-		// we should process all bytes except the last terminating null
-		size_t InputBufferSize = GetInputBuffer().size()-1;
-
-		for (size_t InputOffset  = 0; InputOffset < InputBufferSize ; )
+		CGraLine NewLine;
+			
+		NewLine.SetToken(GetUnitBufferStart() + CurrOutBufOffset);
+		DWORD	PageNumber;
+		InputOffset = NewLine.ReadWord(InputOffset,this, PageNumber);
+			
+		//  ignore single spaces in order to save memory
+		if	( !NewLine.IsSingleSpaceToDelete() )
 		{
-			CGraLine NewLine;
-			
-			NewLine.SetToken(GetUnitBufferStart() + CurrOutBufOffset);
-			DWORD	PageNumber;
-			InputOffset = NewLine.ReadWord(InputOffset,this, PageNumber);
-			
-			//  ignore single spaces in order to save memory
-			if	( !NewLine.IsSingleSpaceToDelete() )
-			{
-				AddUnit(NewLine);  
-				CurrOutBufOffset += NewLine.GetTokenLength();
-				if (NewLine.IsPageBreak() )
-					SetPageNumber(GetUnits().size() - 1,PageNumber);
-			}
-			else
-			{
-				assert (!GetUnits().empty());
-				GetUnit(GetUnits().size() -1).SetSingleSpaceAfter();
-			};
+			AddUnit(NewLine);  
+			CurrOutBufOffset += NewLine.GetTokenLength();
+			if (NewLine.IsPageBreak() )
+				SetPageNumber(GetUnits().size() - 1,PageNumber);
 		}
+		else
+		{
+			assert (!GetUnits().empty());
+			GetUnit(GetUnits().size() -1).SetSingleSpaceAfter();
+		};
 	}
-	catch (...)
-	{
-
-		m_LastError = "Graphan Error! An exception during tokenization";
-		return false;
-	};
 
 
 	// больше TBuf не нужен, так что освобождаем память
 	ClearInputBuffer();
 
 
-	try
-	{
-		size_t Count = GetUnits().size();
-		for (size_t i=1; i< Count; i++)  
-			InitNonContextDescriptors(GetUnit(i));
-	}
-	catch (...)
-	{
-		m_LastError = "Graphan Error! An exception during ascribing non-context graphematical descriptors";
-		return false;
-	};
-
+	size_t Count = GetUnits().size();
+	for (size_t i=1; i< Count; i++)  
+		InitNonContextDescriptors(GetUnit(i));
 
 	
 	if (m_bConvertRussianJo2Je)
@@ -227,159 +206,59 @@ bool CGraphmatFile :: GraphmatMain ()
 
 	BuildUnitBufferUpper();
 
-	try {
-		InitContextDescriptors (0,GetUnits().size());  
+	InitContextDescriptors (0,GetUnits().size());  
+
+	MacSynHierarchy();
+	
+
+	if (m_bSentBreaker) {
+		DealSentBreaker();
 	}
-	catch (...)
-	{
-		if (m_LastError.empty())
-			m_LastError = "Graphan Error! An exception during ascribing context graphematical descriptors";
-		return false;
-	};
-
-	try 
-	{
-		MacSynHierarchy();
-	}
-	catch (...)
-	{
-		m_LastError = "Graphan Error! An exception during building macrosyntax structure";
-		return false;
-	};
-
-
-	if (m_bSentBreaker)
-		if (!DealSentBreaker ())
-		{
-			m_LastError = "An exception occurred in Sentence breaker";
-			return false;
-		};
-	//m_GraOutputFile = "m_GraOutputFile.txt";
-
-
+	
 	if   (!m_GraOutputFile.empty())
 	{
-		//fprintf (stderr, "write to %s\n", m_GraOutputFile.c_str());
 		WriteGraphMat (m_GraOutputFile.c_str());
 	}
-
-
-	return true;
 };
 
 
 bool CGraphmatFile::LoadStringToGraphan(const std::string& szBuffer)
 {
-	try {
-		m_GraOutputFile = "";
-		m_XmlMacSynOutputFile = "";
+	m_GraOutputFile = "";
+	m_XmlMacSynOutputFile = "";
 
-		if (!InitInputBuffer(szBuffer)) 
-		{
-			m_LastError = Format("Cannot init inpur buffer for %i bytes", szBuffer.length());
-			return false;
-		};
-
-		return GraphmatMain();
-	}
-	catch (CExpc& C)
+	if (!InitInputBuffer(szBuffer)) 
 	{
-        m_LastError = C.m_strCause;
-		return false;
-	}
-	catch (...)
-	{
-		m_LastError = Format("general exception in Graphan; Length Of Input = %i", szBuffer.length());
-		return false;
+		throw CExpc ("Cannot init inpur buffer for %i bytes", szBuffer.length());
 	};
+
+	GraphmatMain();
 }
 
 
-#ifdef WIN32
-#include <io.h>
-
-bool IsOlder (const char* FileName1, const char* FileName2)
+void CGraphmatFile :: LoadFileToGraphan (const std::string&  fileName)
 {
-   struct _stat buf1;
-   struct _stat buf2;
-
-   FILE* fp1 = fopen (FileName1, "r");
-   FILE* fp2 = fopen (FileName2, "r");
-   _fstat( fileno(fp1), &buf1 ); 
-   _fstat( fileno(fp2), &buf2 ); 
-   fclose (fp1);
-   fclose (fp2);
-   return buf1.st_mtime < buf2.st_mtime;
-};
-
-#else
-
-#include <sys/stat.h>
-
-bool IsOlder (const char* FileName1, const char* FileName2)
-{
-   struct stat buf1;
-   struct stat buf2;
-
-   FILE* fp1 = fopen (FileName1, "r");
-   FILE* fp2 = fopen (FileName2, "r");
-   fstat( fileno(fp1), &buf1 ); 
-   fstat( fileno(fp2), &buf2 ); 
-   fclose (fp1);
-   fclose (fp2);
-   return buf1.st_mtime < buf2.st_mtime;
-};
-
-#endif
-
-
-
-bool CGraphmatFile :: LoadFileToGraphan (const std::string&  CommandLine)
-{
-	try 
+	m_SourceFileName = fileName;
+	std::string inputText;
+	if (IsHtmlFile(m_SourceFileName))
 	{
-		m_SourceFileName = CommandLine.c_str();
-		
-		if (IsHtmlFile(m_SourceFileName))
-		{
-			HTML Convert;
-			std::string Text = Convert.GetTextFromHtmlFile(m_SourceFileName);
-			
-			if (!InitInputBuffer(Text)) 
-			{	
-				m_LastError = Format("Cannot init inpur buffer for %i bytes", Text.length());
-				return false;
-			}
-
+		HTML Convert;
+		inputText = Convert.GetTextFromHtmlFile(m_SourceFileName);
+	}
+	else
+	{
+		if (!FileExists(m_SourceFileName.c_str())) {
+			throw CExpc("Cannot read file %s", m_SourceFileName.c_str());
 		}
-		else
-		{
-			if (access(m_SourceFileName.c_str(), 04) != 0) return  false;
-			std::string Text;
-			LoadFileToString(m_SourceFileName, Text);
-			if (!InitInputBuffer(Text)) 
-			{
-				m_LastError = Format("Cannot init inpur buffer for %i bytes", Text.length());
-				return false;
-			};
+		LoadFileToString(m_SourceFileName, inputText);
 
-		};
-
-
-
-		return  GraphmatMain ();
-
-	}
-	catch (CExpc& C)
-	{
-        m_LastError = C.m_strCause;
-		return false;
-	}
-	catch (...)
-	{
-		m_LastError = "general exception";
-		return false;
 	};
+	inputText = convert_from_utf(inputText.c_str(), m_Language);
+	if (!InitInputBuffer(inputText))
+	{
+		throw CExpc("Cannot init input buffer for %i bytes", inputText.length());
+	}
+	GraphmatMain ();
 };
 
 const std::string&	CGraphmatFile::GetLastError() const

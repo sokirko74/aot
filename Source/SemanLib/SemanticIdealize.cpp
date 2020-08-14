@@ -85,8 +85,8 @@ long CRusSemStructure::Idealize ()
 						CRusSemNode& N =  m_Nodes[m_Relations[i].m_TargetNodeNo];
 						if    (     !N.IsPrimitive()  ) 
 							continue;
-						if    (     !(N.m_Words[0].m_Lemma == "ОН")
-							&& !(N.m_Words[0].m_Lemma == "ОНА")
+						if    (     !(N.m_Words[0].m_Lemma == _R("ОН"))
+							&& !(N.m_Words[0].m_Lemma == _R("ОНА"))
 							&& !(N.HasOneGrammem(rAnimative) &&  N.HasOneGrammem(rNonAnimative))
 				   )
 				   continue;
@@ -105,14 +105,14 @@ long CRusSemStructure::Idealize ()
 			// поэтому достраиваем синтаксис
 			for (long i=0;  i < m_Relations.size(); i++)
 				if (m_Nodes[m_Relations[i].m_TargetNodeNo].IsPrimitive())
-					if (m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Lemma == "КАК")
+					if (m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Lemma == _R("КАК"))
 					{
 						if (HasRichPOS(m_Relations[i].m_SourceNodeNo, ADJ_SHORT))
-							m_Relations[i].m_SyntacticRelation = "НАР_ПРИЛ";
+							m_Relations[i].m_SyntacticRelation = _R("НАР_ПРИЛ");
 						if (HasRichPOS(m_Relations[i].m_SourceNodeNo,PREDK))
-							m_Relations[i].m_SyntacticRelation = "НАР_ПРЕДИК";
+							m_Relations[i].m_SyntacticRelation = _R("НАР_ПРЕДИК");
 						if (HasRichPOS (m_Relations[i].m_SourceNodeNo, ADV))
-							m_Relations[i].m_SyntacticRelation = "НАР_НАР";
+							m_Relations[i].m_SyntacticRelation = _R("НАР_НАР");
 					};
 
 
@@ -205,9 +205,9 @@ void CRusSemStructure::InterpretAdjNounGroupsAfter ()
 {
   // меняем направление стрелки для отношений ЧИСЛ_СУЩ, ПРИЛ_СУЩ
   for (long i=0; i < m_Relations.size(); i++) 
-   if  (    ( m_Relations[i].m_SyntacticRelation == "ЧИСЛ_СУЩ" )
-	     || ( m_Relations[i].m_SyntacticRelation == "АППРОКС_ИГ" )
-		 || ( m_Relations[i].m_SyntacticRelation == "НАР_ЧИСЛ_СУЩ" )
+   if  (    ( m_Relations[i].m_SyntacticRelation == _R("ЧИСЛ_СУЩ") )
+	     || ( m_Relations[i].m_SyntacticRelation == _R("АППРОКС_ИГ") )
+		 || ( m_Relations[i].m_SyntacticRelation == _R("НАР_ЧИСЛ_СУЩ") )
 	   )
    {
 	  // swap(m_Relations[i].m_SourceNodeNo, m_Relations[i].m_TargetNodeNo);
@@ -216,9 +216,9 @@ void CRusSemStructure::InterpretAdjNounGroupsAfter ()
 			m_Relations[i].m_Valency.m_RelationStr = "QUANTIT";   
    }
    else
-   if  (    ( m_Relations[i].m_SyntacticRelation == "ПРИЛ_СУЩ" )
-	    ||  ( m_Relations[i].m_SyntacticRelation == "НАР_ПРИЛ" )
-		||  ( m_Relations[i].m_SyntacticRelation == "МОДИФ_ПРИЛ" )
+   if  (    ( m_Relations[i].m_SyntacticRelation == _R("ПРИЛ_СУЩ") )
+	    ||  ( m_Relations[i].m_SyntacticRelation == _R("НАР_ПРИЛ") )
+		||  ( m_Relations[i].m_SyntacticRelation == _R("МОДИФ_ПРИЛ") )
 	   )
    {
 	   //swap(m_Relations[i].m_SourceNodeNo, m_Relations[i].m_TargetNodeNo);
@@ -227,14 +227,14 @@ void CRusSemStructure::InterpretAdjNounGroupsAfter ()
 			m_Relations[i].m_Valency.m_RelationStr = "PROPERT";
    }
    else
-   if  (    ( m_Relations[i].m_SyntacticRelation == "ОДНОР_ПРИЛ" ) )
+   if  (    ( m_Relations[i].m_SyntacticRelation == _R("ОДНОР_ПРИЛ") ) )
    {
 	   m_Nodes[m_Relations[i].m_SourceNodeNo].m_NodeType  = MNA;
 	   m_Nodes[m_Relations[i].m_SourceNodeNo].m_MNAType  = SimpleMNA;
 
    }
    else
-   if  ( m_Relations[i].m_SyntacticRelation == "НАРЕЧ_ГЛАГОЛ" )
+   if  ( m_Relations[i].m_SyntacticRelation == _R("НАРЕЧ_ГЛАГОЛ") )
    {
 	   	   if (m_Relations[i].m_Valency.m_RelationStr.empty())
 				m_Relations[i].m_Valency.m_RelationStr = "ASPECT";
@@ -651,7 +651,8 @@ void CRusSemStructure::FindQuestionClauses ()
    for (long i=0; i< HostClauses.size(); i++)
     if (HostClauses.size() > 1)
 	   for (long j=m_Clauses[HostClauses[i]].m_BeginNodeNo; (j < m_Clauses[HostClauses[i]].m_EndNodeNo) && ((j - m_Clauses[HostClauses[i]].m_BeginNodeNo) < ConjWordDistance); j++)
-			if (m_Nodes[j].IsLemmaList("ЧТОБЫ",  "ЕСЛИ",  "ХОТЯ", "ПОСКОЛЬКУ", "ПОКА", "КОТОРЫЙ", ""))
+			if (m_Nodes[j].IsLemmaList(
+				_R("ЧТОБЫ"),  _R("ЕСЛИ"),  _R("ХОТЯ"), _R("ПОСКОЛЬКУ"), _R("ПОКА"), _R("КОТОРЫЙ"), ""))
 			{
 				HostClauses.erase(HostClauses.begin() +i);
 			   i--;
@@ -665,7 +666,7 @@ void CRusSemStructure::FindQuestionClauses ()
 
 	   for (long i=0; i< m_Clauses.size(); i++)
 		 if (    (m_Clauses[i].m_ClauseRuleNo != -1)
-			  && (m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name == "сочинение")
+			  && (m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name == _R("сочинение"))
 			)
 		   for (long j=0; j< SimilClauses.size(); j++)
 			   if (m_Clauses[i].m_HostClause  == SimilClauses[j])

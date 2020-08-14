@@ -15,7 +15,7 @@ Relations:
 */
 #include "../SemanLib/SemStructureBuilder.h"
 #include "../common/argparse.h"
-#include "SemanLib/VisualGraph.h"
+#include "../SemanLib/VisualGraph.h"
 
 extern void (*GlobalErrorMessage)(const std::string &);
 
@@ -216,7 +216,7 @@ int main(int argc, const char *argv[]) {
             args.GetOutputStream() << s << "\n";
             SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
             std::string dummy;
-            SemBuilder.FindSituations(s, 0, "общ", 20000, -1, "", dummy);
+            SemBuilder.FindSituations(s, 0, _R("общ"), 20000, -1, "", dummy);
             if (args.Exists("visual")) {
                 PrintRelationsAsToJavascript(SemBuilder, args.GetOutputStream());
             } else {

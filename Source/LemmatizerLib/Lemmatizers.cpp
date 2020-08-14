@@ -620,7 +620,7 @@ void CLemmatizerRussian::FilterSrc(std::string& src) const
 	size_t len = src.length();
 	for (size_t i=0; i<len; i++)
 		if (src[i] == '\'')
-			src[i] = 'ъ';
+			src[i] = _R("ъ")[0];
 };
 
 CLemmatizerEnglish:: CLemmatizerEnglish() : CLemmatizer(morphEnglish)

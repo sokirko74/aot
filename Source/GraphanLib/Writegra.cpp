@@ -7,110 +7,89 @@
 #include "Consent.h"
 #include "GraphanDicts.h"
 #include "../common/gra_descr_primitives.h"
+#include "algorithm"
 
 
-void CGraphmatFile :: GetGraphematicalLine (char* line, size_t LineNo) const
+std::string CGraphmatFile :: GetGraphematicalLine (size_t LineNo) const
 {
 	const CGraLine& L = GetUnits()[LineNo];
+	std::string result;
 
 	{
 		int l;
-		line[0] = 0;
 
 		if (!L.IsSoft())
 		{ 
-			if	(		!L.IsNotPrint()
-					&&  (L.GetToken()!= NULL)
-					&&  (L.GetToken()[0] != 0)
-				)
-					strncpy(line,L.GetToken(),L.GetTokenLength());
-			else
-					line[0] = GraphematicalSPACE;
-
-			l =  L.GetTokenLength();
-		} // write current graphema 
+			if (!L.IsNotPrint()
+				&& (L.GetToken() != NULL)
+				&& (L.GetToken()[0] != 0)
+				) 
+			{
+				result.append(L.GetToken(), L.GetTokenLength());
+			}
+			else {
+				result.append(1, GraphematicalSPACE);
+			}
+		}  
 		else
 		{ 
-
-			l = 0;
-			for (size_t k=0; k<L.GetTokenLength(); k++)
+			for (size_t k=0; k<L.GetTokenLength(); ++k)
 				switch ((unsigned char)L.GetToken()[k]) 
 				{
-					case ' '  : line[l++] = GraphematicalSPACE; break;
-					case '\t' : line[l++] = GraphematicalTAB; break;
-					case '\n' : line[l++] = GraphematicalEOLN; break;
+					case ' '  : result.append(1, GraphematicalSPACE); break;
+					case '\t' : result.append(1, GraphematicalTAB); break;
+					case '\n' : result.append(1, GraphematicalEOLN); break;
 					case '\r' :  break;
 					default   : assert (false); break;
 				};
 		};
 
-		if (l < 32)
-		{
-			memset(line+l,' ',32-l); // make clear the rest  
-			line[32] = 0; 
-		}
-		else
-		{
-			line[l] = ' '; // put at least one space
-			line[l+1] = 0; // put at least one space
-		};
+		result.append(std::max(1, 32 - (int)result.length()), ' ');
 	}
 	
 	
-	char dig_buffer[30];
-	IntToStr(L.GetInputOffset(),dig_buffer);       
-	strcat(line, dig_buffer);
+	result.append(Format("%zu %zu", L.GetInputOffset(), L.GetTokenLength()));
 
-	IntToStr(L.GetTokenLength(),dig_buffer);       
-	strcat(line, " ");
-	strcat(line, dig_buffer);
-	
-
-	for (int l=0;l<63;l++)     // write descriptors 
-		if ((L.GetDescriptors() & _QM(l) ) > 0)
-		{  
-			strcat(line, " ");
-			strcat(line, GetDescriptorStr(l));
+	// write descriptors 
+	for (int l = 0; l < 63; l++) {
+		if ((L.GetDescriptors() & _QM(l)) > 0)
+		{
+			result.append(" ");
+			result.append(GetDescriptorStr(l));
 		};
+	}
 
 	short OborotNo  = GetOborotNo(LineNo);
 	if (OborotNo != -1)
 	{
-		strcat(line," EXPR_NO");
-		IntToStr(m_pDicts->m_Oborottos[OborotNo].m_UnitNo,line+strlen(line));
+		result.append( Format(" EXPR_NO%zu", m_pDicts->m_Oborottos[OborotNo].m_UnitNo) );
 
 		if (m_pDicts->m_Oborottos[OborotNo].m_bFixedFet)
-			strcat(line," FIXED ");
+			result.append(" FIXED ");
 	}
 
 	if (L.IsPageBreak())
 	{
-		strcat(line," PGBR");
-		sprintf (line+strlen(line), "%zu", GetPageNumber(LineNo));
+		result.append(Format(" PGBR%zu", GetPageNumber(LineNo)));
 	}
 
 	if (L.IsParagraphTag())
 	{
-		strcat(line," PARTAG");
+		result.append (" PARTAG");
 	}
+	return result;
 };
 
 
-void CGraphmatFile :: WriteGraphMat (const char* FName) const
+void CGraphmatFile :: WriteGraphMat (const char* filename) const
 {
-	char line[CriticalGraphemLineLength];
-	FILE *fp = fopen (FName,"wb");
-
-	assert (fp);
-
+	std::ofstream outp(filename, std::ios::binary);
 
 	for (size_t i=0; i<GetUnits().size(); i++)
 	{  
-		GetGraphematicalLine (line, i);
-		fprintf  (fp,"%s\r\n",line);
+		auto line = convert_to_utf8(GetGraphematicalLine(i), m_Language);
+		outp << line << "\n";
 	};
-
-	fclose (fp);
 }
 
 

@@ -34,7 +34,7 @@ int get_id(std::string str, DwordVector &res, bool is_left)
 		bool is_nonperfective = (gr & _QM(rNonPerfective)) != 0;
 		std::string norm = Paradigm.GetWordForm(0);
 		for(int i = 0; i < norm.size(); i++)
-			norm[i] = norm[i] - 'А' + 'а';
+			norm[i] = norm[i] - _R("А")[0] + _R("а")[0];
 		if(norm != str) continue;
 
 		if(is_perfective && is_nonperfective) 

@@ -8,13 +8,13 @@ const BYTE GraphematicalTAB    = (BYTE) 16;
 const BYTE cParagraph    = (BYTE) 21;
 const BYTE Apostrophe    = (BYTE) 39;
 const BYTE cHyphenChar   = (BYTE) 45;
-const BYTE GraphematicalSPACE  = (BYTE) 129;
 
 const BYTE cEllipseChar  = (BYTE) 133;
-const BYTE GraphematicalEOLN  = (BYTE) 171;
+const BYTE GraphematicalSPACE = (BYTE)160;
 const BYTE OpenQuoteMark1251  = (BYTE) 171;
 const BYTE cCompanyChar  = (BYTE) 176;
 const BYTE cPiChar       = (BYTE) 182;
+const BYTE GraphematicalEOLN = (BYTE)182;
 const BYTE cIonChar      = (BYTE) 183;
 const BYTE cNumberChar   = (BYTE) 185;
 const BYTE CloseQuoteMark1251  = (BYTE) 187;

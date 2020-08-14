@@ -313,8 +313,8 @@ int CGraphmatFile::DealReferences (size_t i,size_t HB)
    // п. 1 ст. 2 
    // п. 1.1 ст. 2
 
-   bool is_part_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == 'ч');
-   bool is_bullet_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == 'п');
+   bool is_part_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == _R("ч")[0]);
+   bool is_bullet_string =  (GetUnits()[i].GetTokenLength() == 1)  &&  (GetUnits()[i].GetToken()[0] == _R("п")[0]);
 
    if (!is_part_string && !is_bullet_string) return false;
 

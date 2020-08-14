@@ -25,19 +25,19 @@ translate_helper::translate_helper()
 void translate_helper::init_private_lists()
 {
 	m_bad_flags_arr.clear();
-	m_bad_flags_arr.push_back(find_label("сл"));
-	m_bad_flags_arr.push_back(find_label("бран"));
-	m_bad_flags_arr.push_back(find_label("вульг"));
-	m_bad_flags_arr.push_back(find_label("груб"));
-	m_bad_flags_arr.push_back(find_label("жарг"));
-	m_bad_flags_arr.push_back(find_label("ирон"));
-	m_bad_flags_arr.push_back(find_label("неприст"));
-	m_bad_flags_arr.push_back(find_label("презр"));
-	m_bad_flags_arr.push_back(find_label("прост"));
-	m_bad_flags_arr.push_back(find_label("редк"));
-	m_bad_flags_arr.push_back(find_label("разг"));
-	m_bad_flags_arr.push_back(find_label("уст"));
-	m_bad_flags_arr.push_back(find_label("фольк"));
+	m_bad_flags_arr.push_back(find_label(_R("сл")));
+	m_bad_flags_arr.push_back(find_label(_R("бран")));
+	m_bad_flags_arr.push_back(find_label(_R("вульг")));
+	m_bad_flags_arr.push_back(find_label(_R("груб")));
+	m_bad_flags_arr.push_back(find_label(_R("жарг")));
+	m_bad_flags_arr.push_back(find_label(_R("ирон")));
+	m_bad_flags_arr.push_back(find_label(_R("неприст")));
+	m_bad_flags_arr.push_back(find_label(_R("презр")));
+	m_bad_flags_arr.push_back(find_label(_R("прост")));
+	m_bad_flags_arr.push_back(find_label(_R("редк")));
+	m_bad_flags_arr.push_back(find_label(_R("разг")));
+	m_bad_flags_arr.push_back(find_label(_R("уст")));
+	m_bad_flags_arr.push_back(find_label(_R("фольк")));
     sort(m_bad_flags_arr.begin(), m_bad_flags_arr.end());
 
 	init_list_from_ross(GetRossHolder(Aoss), "_an_article_exception" , except_vec);
@@ -268,16 +268,16 @@ void add_rel_operators(CEngSemNode& Node)
 		// добавление стандартных префиксов
 	if (Node.m_RelOperators.size() > 0)
 	 for (long i=Node.m_RelOperators.size()-1;  i>=0; i--)
- 	  if (Node.m_RelOperators[i] == "АВИА")
+ 	  if (Node.m_RelOperators[i] == _R("АВИА"))
 		  Node.m_Words[WordNo].m_Word = "aero"+Node.m_Words[WordNo].m_Word;
 	  else
-	  if (Node.m_RelOperators[i] == "ВИЦЕ-")
+	  if (Node.m_RelOperators[i] == _R("ВИЦЕ-"))
 		  Node.m_Words[WordNo].m_Word = "vice-"+Node.m_Words[WordNo].m_Word;
 	  else
-  	  if (Node.m_RelOperators[i] == "ЭКС-")
+  	  if (Node.m_RelOperators[i] == _R("ЭКС-"))
 		  Node.m_Words[WordNo].m_Word = "ex-"+Node.m_Words[WordNo].m_Word;
 	  else
-		  if (Node.m_RelOperators[i] == "ПОЛУ")
+		  if (Node.m_RelOperators[i] == _R("ПОЛУ"))
 		  {
 			if (Node.GetPos () == eADJ)
 		      Node.m_Words[WordNo].m_Word = "semi"+Node.m_Words[WordNo].m_Word;
@@ -286,7 +286,7 @@ void add_rel_operators(CEngSemNode& Node)
 		  }
 	  else
 		  /* переводим фразу "все больше людей"-> "more and more people"*/
-		  if (   (Node.m_RelOperators[i] == "ПРОДОЛЖ")
+		  if (   (Node.m_RelOperators[i] == _R("ПРОДОЛЖ"))
 			  && ( Node.HasGrammemRich(eComparativ) )
 			 )
 		  {
@@ -328,7 +328,7 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 	// отрубаем множественное число у конструкций типа half an hour, чтобы
 	// не получилось half hours.
 	if (Node.GetPos() == eNOUN)
-	 if (Node.HasRelOperator("ПОЛУ"))
+	 if (Node.HasRelOperator(_R("ПОЛУ")))
 	 {
 		Node.AddOneGrammemRich(eSingular);
 		Node.DeleteGrammemsRich( _QM(ePlural) );
@@ -690,7 +690,7 @@ void translate_helper::transliterate(CEngSemWord& W )
 	PAIR('Я', "Ya");
 #undef PAIR
 
-	unsigned char before_e[] = "УЕЪЫАОЭЯИЬЮ";
+	unsigned char before_e[] = _R("УЕЪЫАОЭЯИЬЮ");
 	sort(before_e, before_e + sizeof(before_e));
 
 	for(int i = 0; str[i]; i++)

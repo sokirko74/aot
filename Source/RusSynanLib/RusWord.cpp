@@ -17,8 +17,8 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 	if (H.m_strLemma.length() < 3)  return false;
 	if (H.m_lPradigmID == -1) return false;
 	std::string suffix = H.m_strLemma.substr(H.m_strLemma.length()-2);
-	bool bMasc = (suffix == "ИЙ") ||  (suffix == "ЫЙ");
-	bool bFem = (suffix == "АЯ") ||  (suffix == "ЯЯ");
+	bool bMasc = (suffix == _R("ИЙ")) ||  (suffix == _R("ЫЙ"));
+	bool bFem = (suffix == _R("АЯ")) ||  (suffix == _R("ЯЯ"));
 	if (!bMasc && !bFem) return false;
 
 	CFormInfo Info;
@@ -34,11 +34,11 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 				int l = Form.length();
 				if (l < 3) return false;
 				if (bMasc)
-					return		(Form.substr(l-3) == "ЕГО")
-							||	(Form.substr(l-3) == "ОГО");
+					return		(Form.substr(l-3) == _R("ЕГО"))
+							||	(Form.substr(l-3) == _R("ОГО"));
 				else
-					return		(Form.substr(l-2) == "ОЙ")
-							||	(Form.substr(l-2) == "ЕЙ");
+					return		(Form.substr(l-2) == _R("ОЙ"))
+							||	(Form.substr(l-2) == _R("ЕЙ"));
 			};
 	};
 	return false;		
@@ -85,13 +85,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 						)
 						&& FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
 
-	//if( pWord->HasDes(ODigits) && (iLen == 1) && ( pWord->m_strWord[0] == '1') )
-	//{
-	//	H.m_GramCodes = "йайбйвйгйдйейжйзйийййкйлймйнйойпйрйс";
- //       H.InitAncodePattern( );
-	//	
-	//}
-
+	
 	if( (iLen > 1) && pWord->HasDes(ODigits) )
 		if(pWord->m_strWord[iLen - 2] == '1')
 			H.m_bSmallNumber = false;
@@ -110,7 +104,7 @@ void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
 		  };
 	};
 
-	if( (H.m_strLemma=="ОДИН") &&  H.GetGramCodes()[0] == 'э'/*(m_iPoses & (1 << NUMERAL))*/)
+	if( (H.m_strLemma == _R("ОДИН")) &&  H.GetGramCodes()[0] == _R("э")[0])
 		H.m_bRussianOdin = true;
 }
 
@@ -160,10 +154,10 @@ bool CRusSentence::AllHomonymsArePredicates(const CSynWord& W) const
 			 continue;
 
 		//глаголы, которые не являются самостоятельным предикатом или суть ан.ф.
-		if (	!Hom.IsLemma("ДАВАТЬ") 
-			&&	!Hom.IsLemma("СТАНОВИТЬСЯ")
-			&&	!Hom.IsLemma("ОКАЗАТЬСЯ")
-			&&	!Hom.IsLemma("СТАТЬ")
+		if (	!Hom.IsLemma(_R("ДАВАТЬ"))
+			&&	!Hom.IsLemma(_R("СТАНОВИТЬСЯ"))
+			&&	!Hom.IsLemma(_R("ОКАЗАТЬСЯ"))
+			&&	!Hom.IsLemma(_R("СТАТЬ"))
 			)
 			  break;
 	 }

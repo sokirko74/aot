@@ -146,7 +146,7 @@ bool CRusSemStructure::CheckOneTimeWord(CTimeUnit& TimeUnit,  CNodeHypotVector& 
 
 bool CRusSemStructure::CheckTimeNumeral(long NodeNo, std::string GramFet) const 
 {
-	 assert ( GramFet.substr(0, 2) == "ЦК");
+	 assert ( GramFet.substr(0, 2) == _R("ЦК"));
 	 
 	 BYTE Length = 100;
 
@@ -178,11 +178,11 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot&  Hypot, CTimeUnit& TimeUnit,
 		std::string GramFet = WriteToString(GetRoss(TimeRoss), (char*)(GetRoss(TimeRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		Trim(GramFet);
 
-		if ( GramFet.substr(0, 2) == "ЦК")   
+		if ( GramFet.substr(0, 2) == _R("ЦК"))   
 		{
 			if (CheckTimeNumeral(Hypot.m_NodeNo, GramFet))
 			{
-				if (GramFet == "ЦК_порядк")
+				if (GramFet == _R("ЦК_порядк"))
 					Hypot.m_bShouldBeNumeral_P = true;
 				return true;
 			};
@@ -282,7 +282,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
   // Отношение ПР_УПР не входит  перечень синтаксических отношений, поэтому мы не проверяем,
   // построено или нет это отношение синтаксисом. Для отношения ПР_УПР мы только проверяем,
   // что ИГ, в которое это отношение входит, стоит в правильном падеже.
-  if (U.m_Rels[i].m_SynRelName == "ПР_УПР")
+  if (U.m_Rels[i].m_SynRelName == _R("ПР_УПР"))
   {
 	  long PrepNo = V[U.m_Rels[i].m_TargetNodeNo].m_PrepNo;
 	  if (PrepNo == -1)
@@ -392,10 +392,10 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 			if (AbbrFunctNo == -1)
 				Numbers = rAllNumbers;
 			else
-				 if (m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FunctName  == "СОКР_мн")
+				 if (m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FunctName  == _R("СОКР_мн"))
 					 Numbers = _QM(rPlural);
 				 else
-					if (HasAbbrFunct (m_pData->m_TimeAbbrPairs, m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm, "СОКР_мн"))
+					if (HasAbbrFunct (m_pData->m_TimeAbbrPairs, m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm, _R("СОКР_мн")))
 						Numbers = _QM(rSingular);
 					else
 						Numbers = rAllNumbers;
@@ -412,7 +412,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 			 if ( !CheckTimeSemFet(Period[PlaceNo].m_NodeNo, UnitNo, PlaceNo) )
 				  break;
 
- 			 if (HasSynRelation (Period[PlaceNo].m_NodeNo, "ОДНОР_ЧИСЛ"))
+ 			 if (HasSynRelation (Period[PlaceNo].m_NodeNo, _R("ОДНОР_ЧИСЛ")))
 			 {
 				 SimilarNumeralLength += GetOutcomingSynRelationsCount(GetSynHost(Period[PlaceNo].m_NodeNo));
 			 };
@@ -454,10 +454,10 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 		 for (long PeriodNo=0; PeriodNo < BestHypot.m_Periods.size(); PeriodNo++)
 		 {
 			 long nd = BestHypot.m_Periods[PeriodNo].m_NodeNo;
-			 if (HasSynRelation (nd, "ОДНОР_ЧИСЛ"))
+			 if (HasSynRelation (nd, _R("ОДНОР_ЧИСЛ")))
 				 nd = GetSynHost(nd);
 			 if ( m_pData->m_TimeUnits[BestHypot.m_UnitNo].m_Rels.size() == 0 //не работал TimeHypotIsSyntaxAgree
-				 && (!BestHypot.m_Periods[PeriodNo].m_bShouldBeNumeral_P && !HasSynRelation (nd, "ЧИСЛ_СУЩ")) 
+				 && (!BestHypot.m_Periods[PeriodNo].m_bShouldBeNumeral_P && !HasSynRelation (nd, _R("ЧИСЛ_СУЩ"))) 
 				 )
 				 continue;
 			 m_Nodes[nd].m_Colloc.m_Type = RossType;
@@ -477,7 +477,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 					  Синтаксис ошибочно считал эти ЦК числительными, а это порядковые числительные.
 					  Нужно удалить син. связи, построенные от него как от существительного
 					 */
-					 DeleteSynRelationsByName(nd, "ЧИСЛ_СУЩ");
+					 DeleteSynRelationsByName(nd, _R("ЧИСЛ_СУЩ"));
 				 };
 
 				
@@ -501,7 +501,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 				   break;
 
 			  if (l == Rels.size())
-				  m_SynRelations.push_back(CSynRelation(BestHypot.m_Periods[MainWordNo].m_NodeNo, nd, "врем_группа"));
+				  m_SynRelations.push_back(CSynRelation(BestHypot.m_Periods[MainWordNo].m_NodeNo, nd, _R("врем_группа")));
 
 			 };
 		 };
@@ -615,11 +615,11 @@ long CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
 			 m_Relations[R.m_Rels[0]].m_SynReal.m_Preps.push_back(*m_Nodes[PrepNodeNo].GetInterp());
 		 }
 		 else 
-			 if ( HasSynRelation(NodeNo, "врем_группа"))
+			 if ( HasSynRelation(NodeNo, _R("врем_группа")))
 			 {
 				 //res +=300; //штраф за удаленный узел и связи, "В конце 2 года"
 				 //удаляем не состоявшуюся группу и пересчитываем лучший вариант
-				 DeleteSynRelationsByName(NodeNo, "врем_группа");
+				 DeleteSynRelationsByName(NodeNo, _R("врем_группа"));
 				 m_Nodes[PrepNodeNo].DelAllInterps(); 
 				 for (long ClauseNo=0; ClauseNo <m_Clauses.size(); ClauseNo++)
 				 {

@@ -1,8 +1,6 @@
 #include "JVisualSynAnParamBuilder.h"
-
-#include <SynanLib/SyntaxHolder.h>
-
-#include <common/json.h>
+#include "../SynanLib/SyntaxHolder.h"
+#include "../common/json.h"
 
 struct SGroup
 {
