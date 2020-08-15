@@ -5,7 +5,7 @@
 #include "../AprRead/all_labels.h"
 
 
-int find_label(const char *label)
+int find_label(const std::string& label)
 {
 	for(int i = 0;  i < GetTransLabelsCount(); i++){
 		if (GetTransLabels()[i].str == label) {
@@ -654,49 +654,48 @@ void translate_helper::transliterate(CEngSemWord& W )
 	StringVector vec;
 	vec = StringVector(256);
 	for(int i = 0; i < 256; i++) vec[i] = (char)(unsigned char)i;
-#define PAIR(ch, s) vec[(int)(unsigned char)ch] = s;
-	PAIR('А', "A");
-	PAIR('Б', "B");
-	PAIR('В', "V");
-	PAIR('Г', "G");
-	PAIR('Д', "D");
-//	PAIR('Е', "");
-	PAIR('Ё', "E");
-	PAIR('Ж', "Zh");
-	PAIR('З', "Z");
-	PAIR('И', "I");
-	PAIR('Й', "Y");
-	PAIR('К', "K");
-	PAIR('Л', "L");
-	PAIR('М', "M");
-	PAIR('Н', "N");
-	PAIR('О', "O");
-	PAIR('П', "P");
-	PAIR('Р', "R");
-	PAIR('С', "S");
-	PAIR('Т', "T");
-	PAIR('У', "U");
-	PAIR('Ф', "F");
-	PAIR('Х', "Kh");
-	PAIR('Ц', "Ts");
-	PAIR('Ч', "Ch");
-	PAIR('Ш', "Sh");
-	PAIR('Щ', "Shch");
-	PAIR('Ъ', "\"");
-	PAIR('Ы', "Y");
-	PAIR('Ь', "'");
-	PAIR('Э', "E");
-	PAIR('Ю', "Yu");
-	PAIR('Я', "Ya");
+#define PAIR(ch, s) vec[(int)_R(ch)[0]] = s;
+	PAIR("А", "A");
+	PAIR("Б", "B");
+	PAIR("В", "V");
+	PAIR("Г", "G");
+	PAIR("Д", "D");
+//	PAIR("Е", "");
+	PAIR("Ё", "E");
+	PAIR("Ж", "Zh");
+	PAIR("З", "Z");
+	PAIR("И", "I");
+	PAIR("Й", "Y");
+	PAIR("К", "K");
+	PAIR("Л", "L");
+	PAIR("М", "M");
+	PAIR("Н", "N");
+	PAIR("О", "O");
+	PAIR("П", "P");
+	PAIR("Р", "R");
+	PAIR("С", "S");
+	PAIR("Т", "T");
+	PAIR("У", "U");
+	PAIR("Ф", "F");
+	PAIR("Х", "Kh");
+	PAIR("Ц", "Ts");
+	PAIR("Ч", "Ch");
+	PAIR("Ш", "Sh");
+	PAIR("Щ", "Shch");
+	PAIR("Ъ", "\"");
+	PAIR("Ы", "Y");
+	PAIR("Ь", "'");
+	PAIR("Э", "E");
+	PAIR("Ю", "Yu");
+	PAIR("Я", "Ya");
 #undef PAIR
 
-	unsigned char before_e[] = _R("УЕЪЫАОЭЯИЬЮ");
-	sort(before_e, before_e + sizeof(before_e));
+	std::string before_e = _R("УЕЪЫАОЭЯИЬЮ");
 
 	for(int i = 0; str[i]; i++)
-		if(str[i] == 'Е')
+		if(str[i] == _R("Е")[0])
 			if(    i == 0 
-				|| binary_search(before_e, before_e + sizeof(before_e), (unsigned char)str[i-1])
+				|| before_e.find((unsigned char)str[i-1]) != std::string::npos
 			  )
 				res += "Ye";
 			else

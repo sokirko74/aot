@@ -3,6 +3,7 @@
 #include <string.h>
 #include <string>
 #include "iconv.h"
+#include <sstream>
 
 typedef int conv_t;  // to compile iconv
 typedef uint32_t ucs4_t;
@@ -31,7 +32,9 @@ std::string convert_to_utf8(const std::string& single_byte_string, multibyte_to_
 			input,
 			0);
 		if (RET_ILSEQ == result) {
-			throw convert_exception("cannot convert from single byte to wide char");
+			std::string message = "cannot convert from single byte to wide char, ord=" +
+				std::to_string((unsigned char)*input);
+			throw convert_exception(message.c_str());
 		}
 		result = utf8_wctomb(0, buffer + buffer_offset, unicode_char, utf8_string.length() - buffer_offset);
 		if (RET_ILUNI == result) {

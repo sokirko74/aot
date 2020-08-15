@@ -183,14 +183,21 @@ int main(int argc, const char **argv) {
 		s = convert_from_utf(s.c_str(), language);
 		std::string result;
 
-		if (args.Exists("morphan")) {
-			result = LemmatizeJson(s.c_str(), &Holder, bPrintForms, true, true);
-		}
-		else {
-			result = GetMorphInfo(s);
-			result = convert_to_utf8(result, language);
-		}
-		args.GetOutputStream() << result << "\n";
+        try {
+            if (args.Exists("morphan")) {
+                result = LemmatizeJson(s.c_str(), &Holder, bPrintForms, true, true);
+            }
+            else {
+                result = GetMorphInfo(s);
+                result = convert_to_utf8(result, language);
+            }
+            args.GetOutputStream() << result << "\n";
+        }
+        catch (CExpc c) {
+            std::cerr << c.m_strCause << "\n";
+            exit(1);
+        }
 	};
+
     return 0;
 }

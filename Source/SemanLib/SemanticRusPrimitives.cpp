@@ -1033,21 +1033,16 @@ bool CRusSemNode::IsWordForm(std::string WordForm) const
 	return IsPrimitive() && (m_Words[0].m_Word == WordForm);
 };
 
-bool CRusSemNode::IsLemmaList( const char*  FirstLemma, ... ) const
+bool CRusSemNode::IsLemmaList(const std::vector<std::string>& lemmas) const
 {
-		if (!IsPrimitive()) return false; 
-		if (m_Words[0].m_Lemma.empty()) return false;
-	    va_list arglst;
-		std::string CurrLemma = FirstLemma;
-		va_start( arglst, FirstLemma);
-		while( CurrLemma != "" )
-		{
-			if (CurrLemma == m_Words[0].m_Lemma)
-				break;
-			CurrLemma = va_arg( arglst, const char*);
+	if (!IsPrimitive()) return false; 
+	if (m_Words[0].m_Lemma.empty()) return false;
+	for (auto& l : lemmas) {
+		if (l == m_Words[0].m_Lemma) {
+			return true;
 		}
-   	    va_end( arglst );
-		return CurrLemma == m_Words[0].m_Lemma;
+	}
+	return false;
 };
 
 bool CRusSemNode::IsEqualMorph (const CRusSemNode& N) 	const 

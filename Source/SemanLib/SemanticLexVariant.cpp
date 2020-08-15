@@ -3,12 +3,12 @@
 
 struct CProductivePrefix 
 {
-	const char* m_Prefix;
-	const char* m_GraDescr;
+	std::string m_Prefix;
+	std::string m_GraDescr;
 };
 
 const int PrefixesCount = 2;
-const CProductivePrefix Prefixes[PrefixesCount] = { {"АВИА", "АВИА"},{"АЭРО", "АВИА"} };
+const CProductivePrefix Prefixes[PrefixesCount] = { {_R("АВИА"), _R("АВИА")},{_R("АЭРО"), _R("АВИА")} };
 
 
 poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD UnitNo) const
@@ -21,40 +21,40 @@ poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD U
 	{
      std::string S = GramFets[i].substr(0, GramFets[i].find_first_of(":"));
 	 
-	 if (S == "СУЩ")	 
+	 if (S ==_R( "СУЩ"))	 
 		 ret_poses |=  (1 << NOUN);
 	 else
-     if (S == "МС") 	 
+     if (S ==_R( "МС")) 	 
 		 ret_poses |= (1<<PRONOUN);
 	 else
     
-     if ((S == "МЕСТОИМ") || (S == "МС-П")  || (S == "ПРИТ_МЕСТМ") )
+     if ((S ==_R( "МЕСТОИМ")) || (S ==_R( "МС-П"))  || (S ==_R( "ПРИТ_МЕСТМ")) )
 		 ret_poses |= (1 << PRONOUN_P);
 	 else
-     if (S == "НАР")
+     if (S ==_R( "НАР"))
 		 ret_poses |=  (1 << ADV);
 	 else
-      if (S == "ЧАСТ")
+      if (S ==_R( "ЧАСТ"))
 		  ret_poses |= (1 << PARTICLE);
 	 else
-     if (S == "ПРЕДК")
+     if (S ==_R( "ПРЕДК"))
 		  ret_poses |= (1 << PREDK)  | (1 << PRONOUN_PREDK)	 ;
 	  else
-      if (S == "ГЛ")
+      if (S ==_R( "ГЛ"))
 		  ret_poses |= (	(1 << VERB) |
 							(1 << ADVERB_PARTICIPLE) |
 							(1 << PARTICIPLE) |
 							(1 << PARTICIPLE_SHORT) |
 							(1 << INFINITIVE) );
 	  else
-      if (S == "ПРИЛ")
+      if (S ==_R( "ПРИЛ"))
 		 ret_poses |=	( (1<<ADJ_FULL) 
 						| (1 << ADJ_SHORT)
 						| (1 << PARTICIPLE)
 						| (1 << PARTICIPLE_SHORT)
 						);
 	 else
-	 if (S == "ЧИСЛ")		  
+	 if (S ==_R( "ЧИСЛ"))		  
 		ret_poses |= ((1<<NUMERAL_P) | (1<<NUMERAL) );		
 	 else
 	 {
@@ -98,7 +98,7 @@ std::string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const
 		Grammems |= _QM(rActiveVoice);
 	if (W.HasOneGrammem(rPassiveVoice))
 		Grammems |= _QM(rPassiveVoice);
-	// строим по краткой форме "обеспокоен" форму "обеспокоенный"
+	// строим по краткой форме_R( "обеспокоен") форму_R( "обеспокоенный")
     if (W.HasOneGrammem(rPastTense) || W.HasPOS(PARTICIPLE_SHORT))
 		Grammems |= _QM(rPastTense);
 	else
@@ -130,9 +130,9 @@ std::string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const
 WORD CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
 {
 	for (long i=0; i < PrefixesCount; i++)
-	  if  (W.m_Lemma.substr(0, strlen(Prefixes[i].m_Prefix)) == Prefixes[i].m_Prefix) 
+	  if  (W.m_Lemma.substr(0, Prefixes[i].m_Prefix.length()) == Prefixes[i].m_Prefix) 
 	  {
-		 std::string UnitStr=  W.m_Lemma.substr(strlen(Prefixes[i].m_Prefix));
+		 std::string UnitStr=  W.m_Lemma.substr(Prefixes[i].m_Prefix.length());
 		 EngRusMakeLower(UnitStr);
 		 WORD UnitNo  = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 		 if (UnitNo == ErrUnitNo)  continue;
@@ -140,9 +140,9 @@ WORD CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
 		 DWORD ParadigmId = m_pData->GetFirstParadigmId(morphRussian, UnitStr,  W.m_Poses);
 		 if (ParadigmId == UnknownParadigmId) continue;
  		 W.m_Lemma =  UnitStr;
-		 W.m_GraphDescrs += " "+std::string(Prefixes[i].m_GraDescr);
+		 W.m_GraphDescrs += " " + Prefixes[i].m_GraDescr;
 		 W.m_ParadigmId = ParadigmId;
-		 W.m_Word.erase(0, strlen(Prefixes[i].m_Prefix));
+		 W.m_Word.erase(0, Prefixes[i].m_Prefix.length());
 		 return UnitNo; 
 	  };
   return ErrUnitNo;
@@ -159,24 +159,24 @@ bool CRusSemStructure::BuildWordWithoutFemineSuffix (std::string& Word) const
 {
 	std::string NewWord;
 	if (  (Word.length() > 8)
-	    &&(Word.substr(Word.length()-8) == "тельница")
+	    &&(Word.substr(Word.length()-8) ==_R( "тельница"))
 	   )
 		NewWord = Word.substr(0,Word.length()-4);
 	else
 	if (  (Word.length() > 4)
-	    &&(Word.substr(Word.length()-4) == "ница")
+	    &&(Word.substr(Word.length()-4) ==_R("ница"))
 	   )
-		NewWord = Word.substr(0,Word.length()-2) + "к";
+		NewWord = Word.substr(0,Word.length()-2) +_R( "к");
 	else
 	if (  (Word.length() > 3)
-	    &&(Word.substr(Word.length()-3) == "ица")
+	    &&(Word.substr(Word.length()-3) == _R("ица"))
 	   )
-		NewWord = Word.substr(0,Word.length()-2) + "к";
+		NewWord = Word.substr(0,Word.length()-2) + _R("к");
 	else
 	if (  (Word.length() > 4)
-	    &&(Word.substr(Word.length()-4) == "стка")
+	    &&(Word.substr(Word.length()-4) == _R("стка"))
 	   )
-		NewWord = Word.substr(0,Word.length()-2);
+		NewWord = Word.substr(0,Word.length() - 2);
 	else
 		return false;
 	
@@ -522,41 +522,22 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 		SemWord.m_WordEquals = m_pData->GetAspVerb(SemWord.m_ParadigmId, false );
 
 
-	// получение позитивной степени по превосходной степени
-	/*{
-		vector<DWORD> ids, afixes;
-		if( m_pData->m_piSupAdjDict.SourceToTarget(SemWord.m_ParadigmId, ids, afixes) > 0)
-		{
-			if (ids.empty())
-				throw CExpc ("Empty vector in SupAdjDict interface");
-			DWORD ParadigmId = ids[0];
-			if (ParadigmId != -1)
-			{
-				SemWord.m_ParadigmId = ParadigmId;
-				CFormInfo Paradigm;
-				bool bRes =  m_pData->GetRusLemmatizer()->CreateParadigmFromID(ParadigmId, Paradigm);
-				assert (bRes);
-				SemWord.m_Lemma = Paradigm.GetWordForm(0);
-				N.m_RelOperators.push_back ("Magn");
-			};
-		};
-	}*/
 	  
 	// Добавляем операторы, которые пришли из морфологии (они были помещены в графеты
 	// на Mapostе)
 	
-	if (SemWord.m_GraphDescrs.find("#ПОЛУ") !=  -1)
-		N.m_RelOperators.push_back ("ПОЛУ");
+	if (SemWord.m_GraphDescrs.find(_R("#ПОЛУ")) !=  -1)
+		N.m_RelOperators.push_back (_R("ПОЛУ"));
 
-	if (SemWord.m_GraphDescrs.find("ЭКС-") !=  -1)
-		N.m_RelOperators.push_back ("ЭКС-");
+	if (SemWord.m_GraphDescrs.find(_R("ЭКС-")) !=  -1)
+		N.m_RelOperators.push_back (_R("ЭКС-"));
 
-	if (SemWord.m_GraphDescrs.find("ВИЦЕ-") !=  -1)
-		N.m_RelOperators.push_back ("ВИЦЕ-");
+	if (SemWord.m_GraphDescrs.find(_R("ВИЦЕ-")) !=  -1)
+		N.m_RelOperators.push_back (_R("ВИЦЕ-"));
 
-	if (SemWord.m_GraphDescrs.find("#КАК_МОЖНО") !=  -1)
+	if (SemWord.m_GraphDescrs.find(_R("#КАК_МОЖНО")) !=  -1)
 	{
-		N.m_RelOperators.push_back ("КАК_МОЖНО");
+		N.m_RelOperators.push_back (_R("КАК_МОЖНО"));
 		long ParadigmId = m_pData->GetAdverbWith_O_ByAdjective(SemWord.m_ParadigmId, SemWord.m_Word);
 		if (ParadigmId != -1)
 		{
@@ -590,23 +571,23 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 	S = SemWord.m_Word;
 	EngRusMakeUpper(S);
 	//  создаем интерпретацию для наречий типа "по-английски", "по-человечески"
-	if	(			(S.substr(0,3) == "ПО-")
+	if	(			(S.substr(0,3) == _R("ПО-"))
 				&&	
 				(		(SemWord.m_Poses == (1<<ADV))
 					||	(		(SemWord.m_ParadigmId == -1)
 							&&	(S.length() > 3)
-							&&	(		(S.substr(S.length() - 2)  == "КИ")
-									||	(S.substr(S.length() - 2)  == "МУ")
+							&&	(		(S.substr(S.length() - 2)  == _R("КИ"))
+									||	(S.substr(S.length() - 2)  == _R("МУ"))
 								)
 						)
 				)
 
 		)
 	{
-		if (S.substr(S.length() - 2)  == "КИ")
+		if (S.substr(S.length() - 2)  == _R("КИ"))
 		{
 			// "по-солдатски"
-			SemWord.m_Lemma = S.substr(3) + "Й";	
+			SemWord.m_Lemma = S.substr(3) + _R("Й");	
 			SemWord.m_ParadigmId = m_pData->GetFirstParadigmId(morphRussian, SemWord.m_Lemma,  1<<ADJ_FULL);
 		}
 		else
@@ -641,8 +622,8 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 	
 	N.m_bQuoteMarks  = (SemWord.m_GraphDescrs.find(" #QUOTED") !=  -1);
 
-	if (SemWord.m_GraphDescrs.find("АВИА") !=  -1)
-		N.m_RelOperators.push_back ("АВИА");
+	if (SemWord.m_GraphDescrs.find(_R("АВИА")) !=  -1)
+		N.m_RelOperators.push_back (_R("АВИА"));
 
 	
 	// если у краткого прилагательного  нет граммем времени,
@@ -664,7 +645,8 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 	N.m_bFirstInTermin = W.m_bFirstWordInTermin;
 	N.m_TypeAncode = TypeAncode;
 
-	N.m_bQuestionWord = N.IsLemmaList ("КТО", "ЧТО", "ГДЕ", "КОГДА", "КУДА", "ОТКУДА", "ЗАЧЕМ", "КАКОЙ", "КАК", "ПОЧЕМУ", "ОТЧЕГО", "СКОЛЬКО", "НАСКОЛЬКО", "");
+	N.m_bQuestionWord = N.IsLemmaList (
+		{ _R("КТО"), _R("ЧТО"), _R("ГДЕ"), _R("КОГДА"), _R("КУДА"), _R("ОТКУДА"), _R("ЗАЧЕМ"), _R("КАКОЙ"), _R("КАК"), _R("ПОЧЕМУ"), _R("ОТЧЕГО"), _R("СКОЛЬКО"), _R("НАСКОЛЬКО") });
 
 	return N;
 
@@ -892,7 +874,7 @@ void CRusSemStructure::InterpretSelectiveRelations(long ClauseNo)
 {
   for (long RelNo=0; RelNo < m_SynRelations.size(); RelNo++)
    if (m_Nodes[m_SynRelations[RelNo].m_SourceNodeNo].m_ClauseNo == ClauseNo)
-    if (m_SynRelations[RelNo].m_SynRelName == "ЭЛЕКТ_ИГ")
+    if (m_SynRelations[RelNo].m_SynRelName == _R("ЭЛЕКТ_ИГ"))
 	{
 		long NumeralNode = m_SynRelations[RelNo].m_SourceNodeNo;
 		long NounNode =  m_SynRelations[RelNo].m_TargetNodeNo;
@@ -922,7 +904,7 @@ void CRusSemStructure::InterpretRepeatConj(long ClauseNo)
 	*/
 	for (long i=0; i < m_SynRelations.size(); i++)
 		if (m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_ClauseNo == ClauseNo)
-			if (m_SynRelations[i].m_SynRelName == "ОТСОЮЗ")
+			if (m_SynRelations[i].m_SynRelName == _R("ОТСОЮЗ"))
 			{
 				long Word1 = m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_Words[0].m_SynWordNo;
 				long Word2 = m_Nodes[m_SynRelations[i].m_TargetNodeNo].m_Words[0].m_SynWordNo;
@@ -954,7 +936,7 @@ void CRusSemStructure::InterpretRepeatConj(long ClauseNo)
 			GetOutcomingSynRelations(NodeNo, Rels);
 			vector<long> Nodes;
 			for (long i=0; i < Rels.size();)
-				if (m_SynRelations[Rels[i]].m_SynRelName == "ОТСОЮЗ")
+				if (m_SynRelations[Rels[i]].m_SynRelName == _R("ОТСОЮЗ"))
 				{
 					Nodes.push_back (m_SynRelations[Rels[i]].m_TargetNodeNo);
 					i++;
@@ -1006,8 +988,8 @@ void CRusSemStructure::FindParticleBY(long ClauseNo)
  for (long i=0; i < m_Nodes.size(); i++)
  if (m_Nodes[i].IsPrimitive() && CanBeDeleted(i))
   if (IsInClause(i, ClauseNo))
-   if (   (m_Nodes[i].m_Words[0].m_Lemma == "БЫ")
-	   || (     (m_Nodes[i].m_Words[0].m_Lemma == "Б")
+   if (   (m_Nodes[i].m_Words[0].m_Lemma == _R("БЫ"))
+	   || (     (m_Nodes[i].m_Words[0].m_Lemma == _R("Б"))
 	        &&  (m_Nodes[i].m_Words[0].m_PostPuncts.size() == 0)
             &&  (m_Nodes[i].m_Words[0].m_CharCase == LowLow)
 			&&  (i>0)
@@ -1046,7 +1028,7 @@ void CRusSemStructure::BuildPustychaWithETO (long ClauseNo)
  if (m_Nodes[i].m_MainWordNo != -1)
  {
 	 std::string Q = m_Nodes[i].m_Words[m_Nodes[i].m_MainWordNo].m_Word;
-	 if ((Q == "ЭТО") || (Q == "ТАМ")) break;
+	 if ((Q == _R("ЭТО")) || (Q == _R("ТАМ"))) break;
  };
 
  size_t ETONodeNo = i;
@@ -1096,10 +1078,10 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree (long ClauseNo)
 	int DAVAI_NodeNo=m_Clauses[ClauseNo].m_BeginNodeNo;
 	for (; DAVAI_NodeNo<m_Clauses[ClauseNo].m_EndNodeNo; DAVAI_NodeNo++)
 		if (   m_Nodes[DAVAI_NodeNo].IsPrimitive() 
-			&& (    (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == "ДАВАЙТЕ")
-			||  (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == "ДАВАЙТЕ-КА")	
-			||  (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == "ДАВАЙ")	
-			||  (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == "ДАВАЙ-КА")	
+			&& (    (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == _R("ДАВАЙТЕ"))
+			||  (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == _R("ДАВАЙТЕ-КА"))	
+			||  (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == _R("ДАВАЙ"))	
+			||  (m_Nodes[DAVAI_NodeNo].m_Words[0].m_Word == _R("ДАВАЙ-КА"))	
 			)
 			)
 			break;
@@ -1129,8 +1111,8 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree (long ClauseNo)
 		if (DAVAI_NodeNo == m_Clauses[ClauseNo].m_EndNodeNo) break;
 		if (	CanBeDeleted(DAVAI_NodeNo) )
 		{
-			if (!m_Nodes[RootNodeNo].HasRelOperator("_мягк_пригласит_наклонение"))     
-				m_Nodes[RootNodeNo].m_RelOperators.push_back("_мягк_пригласит_наклонение");
+			if (!m_Nodes[RootNodeNo].HasRelOperator(_R("_мягк_пригласит_наклонение")))     
+				m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_мягк_пригласит_наклонение"));
 			MoveSynRelations(DAVAI_NodeNo, RootNodeNo);	
 			DelNode(DAVAI_NodeNo);
 		}
@@ -1147,8 +1129,8 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree (long ClauseNo)
 		if (DAVAI_NodeNo == m_Clauses[ClauseNo].m_EndNodeNo) break;
 		if (	CanBeDeleted(DAVAI_NodeNo) )
 		{
-			if (!m_Nodes[RootNodeNo].HasRelOperator("_пригласит_наклонение"))     
-				m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
+			if (!m_Nodes[RootNodeNo].HasRelOperator(_R("_пригласит_наклонение")))     
+				m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
 			MoveSynRelations(DAVAI_NodeNo, RootNodeNo);
 			DelNode(DAVAI_NodeNo);
 		}
@@ -1164,12 +1146,12 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree (long ClauseNo)
 			break;
 		std::string word = m_Nodes[RootNodeNo].m_Words[0].m_Word;
 		if (word.length() < 3) break; 
-		if (    (word.substr (word.length() - 3, 3) != "-КА") 
-			&& (word.substr (word.length() - 2, 2) != "ТЕ") 
+		if (    (word.substr (word.length() - 3, 3) != _R("-КА")) 
+			&& (word.substr (word.length() - 2, 2) != _R("ТЕ")) 
 			) 
 			break;
-		if (!m_Nodes[RootNodeNo].HasRelOperator("_пригласит_наклонение"))     
-			m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
+		if (!m_Nodes[RootNodeNo].HasRelOperator(_R("_пригласит_наклонение")))     
+			m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
 		return;
 	};
 
@@ -1188,12 +1170,12 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree ()
 	  if (RootNodeNo == -1) continue;;
 	  // проверка, что в мягком пригл. наклон заполнена первая валентносто, иначе конвертируем 
 	  // 
-	  if ( m_Nodes[RootNodeNo].HasRelOperator ("_мягк_пригласит_наклонение") )
+	  if ( m_Nodes[RootNodeNo].HasRelOperator (_R("_мягк_пригласит_наклонение")) )
 	  {
 		if (GetRusSubj(RootNodeNo) == -1)
 		{
-		  m_Nodes[RootNodeNo].DelRelOperator ("_мягк_пригласит_наклонение");
-		  m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
+		  m_Nodes[RootNodeNo].DelRelOperator (_R("_мягк_пригласит_наклонение"));
+		  m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
 		};
 	  }
 	  else
@@ -1206,7 +1188,7 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree ()
 		  if (HasRichPOS (RootNodeNo, VERB))  
 		  if (GetRusSubj(RootNodeNo) == -1) 
 			if (HasSemFet(m_Nodes[RootNodeNo], "MOV"))		  if (GetSubordConjFromTheBegining(ClauseNo) == 0) 
-			  m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
+			  m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
 
 		  // пятый случай пригласительной конструкции
 	  	  if  (     m_Nodes[RootNodeNo].HasGrammems (_QM(rFirstPerson) | _QM(rSingular)  | _QM(rImperative))
@@ -1214,13 +1196,13 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree ()
 				 
 			  )
 		  if (m_Clauses[ClauseNo].m_ClauseRuleNo != -1)
-		  if (m_ClauseRules[m_Clauses[ClauseNo].m_ClauseRuleNo].m_Name == "сочинение")
+		  if (m_ClauseRules[m_Clauses[ClauseNo].m_ClauseRuleNo].m_Name == _R("сочинение"))
 		  {
 			 vector<long> Rels;
 			 GetIncomingClauseRelations(ClauseNo, Rels);
 			 if (Rels.size() == 1)
-			   if (m_Nodes[m_Relations[Rels[0]].m_SourceNodeNo].HasRelOperator("_пригласит_наклонение"))
-				   m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
+			   if (m_Nodes[m_Relations[Rels[0]].m_SourceNodeNo].HasRelOperator(_R("_пригласит_наклонение")))
+				   m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
 		  };
 		  
 	  };
@@ -1268,23 +1250,23 @@ CRusSemNode Create_EST_Node(CRusSemStructure& R, long ClauseNo)
    const CLemmatizer* P = R.m_pData->GetRusLemmatizer(); 
    
    vector<CFormInfo> ParadigmCollection;
-   std::string Est ="есть";
+   std::string Est =_R("есть");
    P->CreateParadigmCollection(false,Est,false, false, ParadigmCollection);
 
    
    assert (!ParadigmCollection.empty());
    long i=0;
    for (; i < ParadigmCollection.size(); i++)
-	   if (ParadigmCollection[i].GetWordForm(0) == "БЫТЬ")
+	   if (ParadigmCollection[i].GetWordForm(0) == _R("БЫТЬ"))
 		   break;
    assert ( i < ParadigmCollection.size() );
 
    std::string GramCodes = ParadigmCollection[i].GetSrcAncode();
-   CRusSemWord SemWord(-1, "БЫТЬ");
+   CRusSemWord SemWord(-1, _R("БЫТЬ"));
    QWORD dummy = R.m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
    SemWord.SetFormGrammems( dummy );
    SemWord.m_Poses = 1 << VERB;
-   SemWord.m_Word = "есть";
+   SemWord.m_Word = _R("есть");
    SemWord.m_CharCase = LowLow;
    SemWord.m_ParadigmId = ParadigmCollection[i].GetParadigmId();
    SemWord.m_IsPunct =  false;
@@ -1302,7 +1284,7 @@ CRusSemNode Create_EST_Node(CRusSemStructure& R, long ClauseNo)
 };
 
 
-// переводит тире в клаузе типа "тире" в глагол "есть"
+// переводит тире в клаузе типа _R("тире") в глагол "есть"
 void CRusSemStructure::ProcessDashClauses()
 {
 	for (long ClauseNo=0; ClauseNo < m_Clauses.size(); ClauseNo++)

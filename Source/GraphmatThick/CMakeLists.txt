@@ -11,7 +11,7 @@ target_link_libraries(GraphmatThick
 macro (GraphTest lang)
     add_test(
         NAME ${lang}Graphan 
-        COMMAND GraphmatThick ${lang} test/${lang}/text.txt -gra test/${lang}/out.gra
+        COMMAND GraphmatThick --language ${lang} --input-file test/${lang}/text.txt --output-file test/${lang}/out.gra
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
     add_test(

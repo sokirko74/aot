@@ -538,7 +538,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		std::string strAOP = GetCortegeStr(rusNode.GetType(),vectorAop[i]);
 		if( vectorAop[i].m_LeafId == 0 ) //если это EOPERATOR без индекса
 		{
-			if (strAOP == "БЫ")
+			if (strAOP == _R("БЫ"))
 			{
 			  if ( !RusStr.GetSemClause(rusNode.m_ClauseNo).m_HasParticleBY )
 				  continue;

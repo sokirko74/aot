@@ -64,10 +64,10 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 		{
 			std::string SynRel = Q.GetSynRelStr(i);
 			std::string SynFet = Q.GetSynFetStr(i);
-			if (  (SynRel ==  "ПРИД_ПР")
+			if (  (SynRel ==  _R("ПРИД_ПР"))
 				||(    (SynFet.length() > 4)
-				&& (    (SynFet.substr(SynFet.length()-3) ==  "+ГГ")
-				||  (SynFet.substr(SynFet.length()-4) ==  "+инф")
+				&& (    (SynFet.substr(SynFet.length()-3) ==  _R("+ГГ"))
+				||  (SynFet.substr(SynFet.length()-4) ==  _R("+инф"))
 				)
 				)
 			 )
@@ -203,17 +203,17 @@ bool IsEqualWithPhonetics (const std::string& TextItem,  const std::string& Form
 {
 	return         (TextItem ==  FormatItem)
 		        || (FormatItem == "*")
-		        || ( (TextItem == "СО") && (FormatItem == "С") )
-				|| ( (TextItem == "КО") && (FormatItem == "К") )
-				|| ( (TextItem == "ВО") && (FormatItem == "В") )
-				|| ( (TextItem == "ПОДО") && (FormatItem == "ПОД") )
-				|| ( (TextItem == "ИЗО") && (FormatItem == "ИЗ") )
-				|| ( (TextItem== "ПЕРЕДО") && (FormatItem == "ПЕРЕД") )
-				|| ( (TextItem == "ОБ") && (FormatItem == "О") )				
-				|| ( (TextItem == "ОБО") && (FormatItem == "О") )
-				|| ( (TextItem == "ОБО") && (FormatItem == "OBJ") )				
-				|| ( (TextItem == "НАДО") && (FormatItem == "НАД") )
-				|| ( (TextItem == "ОТО") && (FormatItem == "ОТ") );
+		        || ( (TextItem == _R("СО")) && (FormatItem == _R("С")) )
+				|| ( (TextItem == _R("КО")) && (FormatItem == _R("К")) )
+				|| ( (TextItem == _R("ВО")) && (FormatItem == _R("В")) )
+				|| ( (TextItem == _R("ПОДО")) && (FormatItem == _R("ПОД")) )
+				|| ( (TextItem == _R("ИЗО")) && (FormatItem == _R("ИЗ")) )
+				|| ( (TextItem== _R("ПЕРЕДО")) && (FormatItem == _R("ПЕРЕД")) )
+				|| ( (TextItem == _R("ОБ")) && (FormatItem == _R("О")) )				
+				|| ( (TextItem == _R("ОБО")) && (FormatItem == _R("О")) )
+				|| ( (TextItem == _R("ОБО")) && (FormatItem == "OBJ") )				
+				|| ( (TextItem == _R("НАДО")) && (FormatItem == _R("НАД")) )
+				|| ( (TextItem == _R("ОТО")) && (FormatItem == _R("ОТ")) );
 }
 
 
@@ -302,8 +302,8 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine (CSemPattern& P,  CSynReal
 	 if  (   m_Nodes[P.m_SourceNo].m_bFullGleiche
 		  || HasRichPOS (P.m_SourceNo, ADV) 
 		 )
-	   if (   SynFetStr == "ПРИЛ"
-		   || SynFetStr == "ИГ"
+	   if (   SynFetStr == _R("ПРИЛ")
+		   || SynFetStr == _R("ИГ")
 		  )
 		 {
 		    /* Связь между  существительное и прилагательным  не может идти через  предлог.
@@ -336,11 +336,11 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine (CSemPattern& P,  CSynReal
 
 		  if (   m_Nodes[P.m_SourceNo].IsPrimitive() )
 		  {
-			  if (m_Nodes[P.m_SourceNo].m_Words[0].m_Lemma == "ОДИН")
+			  if (m_Nodes[P.m_SourceNo].m_Words[0].m_Lemma == _R("ОДИН"))
 				 if ( !m_Nodes[P.m_SourceNo].HasOneGrammem (rSingular) )
 					 return false;
 
-			  if (m_Nodes[P.m_SourceNo].m_Words[0].m_Lemma == "ОБА")
+			  if (m_Nodes[P.m_SourceNo].m_Words[0].m_Lemma == _R("ОБА"))
 			     if ( !m_Nodes[P.m_SourceNo].HasOneGrammem (rPlural) )
 				     return false;
 		  };
@@ -351,7 +351,7 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine (CSemPattern& P,  CSynReal
  
 	 // в клаузе COMPARATIVE_T  сравнительная степень играет роль главного слова
 	if (m_Nodes[NodeNo].m_bCompAdj)
-	 if (SynFetStr == "ГГ")
+	 if (SynFetStr == _R("ГГ"))
 	  if (m_Clauses[m_Nodes[NodeNo].m_ClauseNo].m_ClauseType == COMPARATIVE_T)
 		  return true;
 
@@ -372,52 +372,52 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine (CSemPattern& P,  CSynReal
 			)  return false;
 
 	if ( IsVerbForm (m_Nodes[NodeNo]) ) 
-	  if (SynFetStr == "ГГ_нсв")
+	  if (SynFetStr == _R("ГГ_нсв"))
 		  return   m_Nodes[NodeNo].HasOneGrammem (rNonPerfective);
 	  else
-		 if (SynFetStr == "ГГ_св")
+		 if (SynFetStr == _R("ГГ_св"))
 			 return  m_Nodes[NodeNo].HasOneGrammem (rPerfective);
 		 else
- 		   if (SynFetStr == "ГГ_личн")
+ 		   if (SynFetStr == _R("ГГ_личн"))
 			 return  !HasRichPOS (NodeNo,INFINITIVE);
   			else
- 		      if (SynFetStr == "инф")
+ 		      if (SynFetStr == _R("инф"))
 			   return  HasRichPOS (NodeNo,INFINITIVE);
 			  else
-   		        if (SynFetStr == "ПРОП_отр")
-		          return  m_Nodes[NodeNo].HasRelOperator("НЕ");
+   		        if (SynFetStr == _R("ПРОП_отр"))
+		          return  m_Nodes[NodeNo].HasRelOperator(_R("НЕ"));
 				else
-				  if ( (SynFetStr == "ГГ") || (SynFetStr == "ПРОП"))
+				  if ( (SynFetStr == _R("ГГ")) || (SynFetStr == _R("ПРОП")))
 					 return  true;
 
 	
 	// ГГ может обозначать краткое прилагательное
 	if (HasRichPOS(NodeNo, ADJ_SHORT))
-	 if ( (SynFetStr == "ГГ") || (SynFetStr == "ПРОП"))
+	 if ( (SynFetStr == _R("ГГ")) || (SynFetStr == _R("ПРОП")))
 		  return true;
 
 	if (HasRichPOS (NodeNo, PREDK))	
-		if ( (SynFetStr == "ГГ") || (SynFetStr == "ПРОП"))
+		if ( (SynFetStr == _R("ГГ")) || (SynFetStr == _R("ПРОП")))
 				return  true;
 
     if (HasRichPOS(NodeNo, ADJ_SHORT))
-       if (SynFetStr == "КР_ПРИЛ")  
+       if (SynFetStr == _R("КР_ПРИЛ"))  
 		  return  true;
 	 else
-	    if (SynFetStr == "ПРОП_отр")
-		    return  m_Nodes[NodeNo].HasRelOperator("НЕ");
+	    if (SynFetStr == _R("ПРОП_отр"))
+		    return  m_Nodes[NodeNo].HasRelOperator(_R("НЕ"));
 
 
-	if (SynFetStr == "ИГ")
+	if (SynFetStr == _R("ИГ"))
 	  return  HasRichPOS(NodeNo, NOUN) || HasPOS(NodeNo, PRONOUN);
 
 	// "такой красивый"
-	if (SynFetStr == "ПРИЛ")
+	if (SynFetStr == _R("ПРИЛ"))
 	  return  HasRichPOS(NodeNo, ADJ_FULL);
 
 	// здесь нужно брать внутренние граммемы. Вообще, во всей этой процедуре нужно так делать.
 	// Просто  это актуально только для этих двух условий.
-   if (SynFetStr == "Р_ед")
+   if (SynFetStr == _R("Р_ед"))
    {
 	   // не должна собираться конструкция типа "сколько у тебя",
 	   // где "сколько" пассивно валентно на Р_ед, а "тебя" - это рд, ед
@@ -428,10 +428,10 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine (CSemPattern& P,  CSynReal
 	         && ( ( m_Nodes[NodeNo].GetInnerGrammems() & ( _QM(rSingular) |  _QM(rGenitiv) )) == ( _QM(rSingular) |  _QM(rGenitiv) ));
    };
 
-   if (SynFetStr == "Р_мн")
+   if (SynFetStr == _R("Р_мн"))
    {
    	  // не должна собираться конструкция типа "сколько у тебя",
-	  // где "сколько" пассивно валентно на Р_ед, а "тебя" - это рд, ед
+	  // где _R("сколько") пассивно валентно на Р_ед, а "тебя" - это рд, ед
 	  if (m_Nodes[NodeNo].HasSomePrep())
 		  if (P.m_SourceNo < NodeNo)
 			  return false;
@@ -471,10 +471,10 @@ bool CRusSemStructure::CanBeSubjectForImperative (long NodeNo, long SourceNodeNo
 	   return true;
 
 	const CRusSemNode& N = m_Nodes[NodeNo];
-	return     N.IsLemma("ЧЕРТ")  // черт тебя побери
-		   ||  (bDir && N.IsLemma("ТЫ"))    // иди ты в баню
-		   ||  N.IsLemma("БОЖЕ")    // Боже помилуй полярников.
-		   ||  (bDir && N.IsLemma("ВЫ"));   // идите вы в баню
+	return     N.IsLemma(_R("ЧЕРТ"))  // черт тебя побери
+		   ||  (bDir && N.IsLemma(_R("ТЫ")))    // иди ты в баню
+		   ||  N.IsLemma(_R("БОЖЕ"))    // Боже помилуй полярников.
+		   ||  (bDir && N.IsLemma(_R("ВЫ")));   // идите вы в баню
 };
 
 bool CanBeMorphSubject (const CRusSemNode& Node )
@@ -482,14 +482,14 @@ bool CanBeMorphSubject (const CRusSemNode& Node )
 	if (Node.IsPrimitive())
 	{
 		// "ничего не произошло"
-		if (Node.m_Words[0].m_Word == "НИЧЕГО") return true;
+		if (Node.m_Words[0].m_Word == _R("НИЧЕГО")) return true;
 		// "никто не пришел"
-		if (Node.m_Words[0].m_Word == "НИКТО") return true;
+		if (Node.m_Words[0].m_Word == _R("НИКТО")) return true;
 	};
      if (	  !Node.HasOneGrammem(rNominativ)
-		   || Node.IsLemma("ЕГО")
-		   || Node.IsLemma("ИХ") 
-		   || Node.IsLemma("ЕЕ") 
+		   || Node.IsLemma(_R("ЕГО"))
+		   || Node.IsLemma(_R("ИХ")) 
+		   || Node.IsLemma(_R("ЕЕ")) 
 		   || (     Node.HasPOS(PRONOUN_P) 
 				&& (   !Node.IsPrimitive()
 					|| !Node.m_Words[0].IsRusSubstPronounP()
@@ -511,7 +511,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 
 	if (P.m_pRossDoc->IsVerbFet(C.m_DomItemNos[0]))
 		if (C.m_DomItemNos[0] == P.m_pRossDoc->NegativeNo) 	
-			if (!m_Nodes[P.m_SourceNo].HasRelOperator("НЕ"))
+			if (!m_Nodes[P.m_SourceNo].HasRelOperator(_R("НЕ")))
 				return false;
 
 	if (P.m_pRossDoc->IsPosition(C.m_DomItemNos[0]))
@@ -594,8 +594,8 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 	рассматриваем случай тип "мама, красивая и радостная, пришла домой"
 	*/
 
-	if ( SynRelStr == "уточн" )	
-		if ( SynFetStr == "ПРИЛ" )	
+	if ( SynRelStr == _R("уточн") )	
+		if ( SynFetStr == _R("ПРИЛ") )	
 			if ( HasRichPOS(P.m_SourceNo, NOUN) )
 				if ( HasRichPOS(NodeNo, ADJ_FULL)  )
 				{
@@ -631,7 +631,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 	};
 
 	// предложная группа не может управлять ни чем, что идет до нее,
-	// кроме случая c местоименным предикативом типа "нечего", например в форме "не о чем", 
+	// кроме случая c местоименным предикативом типа _R("нечего"), например в форме "не о чем", 
 	if (    m_Nodes[P.m_SourceNo].HasSomePrep() 
 		&&  m_Nodes[NodeNo].IsWordContainer()	
 		&&  (m_Nodes[NodeNo].GetMinWordNo() < m_Nodes[P.m_SourceNo].GetMinWordNo())
@@ -648,9 +648,9 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 		&& m_Nodes[NodeNo].HasOneGrammem(rGenitiv)
 		)
 		// переходный глагол с отрицанием может управлять с помощью родителного,
-		if (     m_Nodes[P.m_SourceNo].HasRelOperator("НЕ") 
+		if (     m_Nodes[P.m_SourceNo].HasRelOperator(_R("НЕ")) 
 
-			//  иногда наличие "НЕ" у хозяина позволяет переходному глаголу управлять 
+			//  иногда наличие _R("НЕ") у хозяина позволяет переходному глаголу управлять 
 			//  с помощью родительного, а не винительного, например:
 			//  "Он не терпит вмешательства"
 			|| m_Clauses[m_Nodes[P.m_SourceNo].m_ClauseNo].m_bSaveClauseHasNegationInVerb
@@ -662,16 +662,16 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 		)
 		if (     m_Nodes[NodeNo].IsWordContainer()
 			&&  (m_Nodes[NodeNo].m_MainWordNo != -1)
-			&&  (       (m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma == "НЕЧЕГО")
-			||    (m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma == "НЕКОГО")
+			&&  (       (m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma == _R("НЕЧЕГО"))
+			||    (m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma == _R("НЕКОГО"))
 			)
 			&&  m_Nodes[NodeNo].HasOneGrammem(rGenitiv)
 			)
 			SynFet = P.m_pRossDoc->GenitivNo;
 
 
-	if ( SynRelStr == "с_опр" )	
-		if ( SynFetStr == "ПРИЛ" )	
+	if ( SynRelStr == _R("с_опр") )	
+		if ( SynFetStr == _R("ПРИЛ") )	
 			return false;
 
 
@@ -689,7 +689,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 					return false;
 				else
 				{
-					if  (    (SynFetStr == "И_мн") 
+					if  (    (SynFetStr == _R("И_мн")) 
 						&& ! m_Nodes[NodeNo].HasOneGrammem (rPlural)
 						)
 						return false;
@@ -736,8 +736,8 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 	// Если отноешение не является реверсивным, тогда это же касается
 	// прилагательных или местоимений, а реверсивные отношения были выше.  
 	if (   
-		(    ( SynRelStr == "к_доп") 
-		|| ( SynRelStr == "ОБСТ_ГР")
+		(    ( SynRelStr == _R("к_доп")) 
+		|| ( SynRelStr == _R("ОБСТ_ГР"))
 		)
 		&&    HasRichPOS(P.m_SourceNo, NOUN) 
 		&&  (     HasRichPOS(NodeNo, PRONOUN)  
@@ -756,18 +756,18 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 
 
 	// GF = с_опр : ПРИТ_МЕСТМ
-	if (SynRelStr == "с_опр")
-		if (SynFetStr == "ПРИТ_МЕСТМ")
+	if (SynRelStr == _R("с_опр"))
+		if (SynFetStr == _R("ПРИТ_МЕСТМ"))
 			if (     IsPossesivePronoun(m_Nodes[NodeNo])
 				|| (     m_Nodes[NodeNo].IsPrimitive()
-				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЧЕЙ")
+				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ЧЕЙ"))
 			 )
 			 )
 			 if (  (      FullGleiche(P.m_SourceNo, NodeNo) 
 				 &&   (GetSynRelationsCount(NodeNo)  == 0)
 				 )
 				 ||     
-				 _find(m_SynRelations, CSynRelation (P.m_SourceNo, NodeNo, "ПРИЛ_СУЩ"))
+				 _find(m_SynRelations, CSynRelation (P.m_SourceNo, NodeNo, _R("ПРИЛ_СУЩ")))
 				 )
 			 {
 				 //SynRealization.m_SynRelation = NOUN_ADJ;
@@ -777,8 +777,8 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 				 return false;
 
 	// GF = числ-сущ : *
-	if (SynRelStr == "числ_сущ")	
-		if (_find(m_SynRelations, CSynRelation(P.m_SourceNo, NodeNo, "ЧИСЛ_СУЩ")))
+	if (SynRelStr == _R("числ_сущ"))	
+		if (_find(m_SynRelations, CSynRelation(P.m_SourceNo, NodeNo, _R("ЧИСЛ_СУЩ"))))
 		{
 			return true;
 		}
@@ -787,8 +787,8 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 
 
 
-	if ( SynRelStr == "с_опр" )	
-		if ( SynFetStr == "ПРИЛ" )	
+	if ( SynRelStr == _R("с_опр") )	
+		if ( SynFetStr == _R("ПРИЛ") )	
 			if ( !HaveNounNodeBetweenInOneClause(NodeNo, P.m_SourceNo) )
 				if ( HasRichPOS(NodeNo, ADJ_FULL)   || HasPOS(NodeNo, PRONOUN_P)   )
 					if ( FullGleiche(NodeNo, P.m_SourceNo)   )
@@ -799,15 +799,15 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 
 
 	// GF =    отпредик : И
-	if (SynRelStr == "отпредик")
-		if (SynFetStr == "И")
+	if (SynRelStr == _R("отпредик"))
+		if (SynFetStr == _R("И"))
 			if  ( HasRichPOS (NodeNo, ADJ_SHORT) )
 				return true;
 
 
 
 	//примыкающее определение должно стоять только справа
-	if (SynRelStr == "прим_опр")
+	if (SynRelStr == _R("прим_опр"))
 		if (m_Nodes[NodeNo].GetMinWordNo() - m_Nodes[P.m_SourceNo].GetMinWordNo() <=  0  )
 			return false;
 
@@ -818,22 +818,22 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 		const CRusSemWord& SynMainWord = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo];
 
 		// GF =    отпредик : Р_ПРИЛ
-		if (SynRelStr == "отпредик")
-			if (SynFetStr == "Р_ПРИЛ")
+		if (SynRelStr == _R("отпредик"))
+			if (SynFetStr == _R("Р_ПРИЛ"))
 				if  ( HasRichPOS (NodeNo, ADJ_FULL)  || HasPOS (NodeNo, PARTICIPLE))
 					if (GetSynHost (NodeNo)  == -1)
 						if ( SynMainWord.HasOneGrammem(rGenitiv) ) 
 							return true;
 
 		// GF =    отпредик : Т_ПРИЛ
-		if (SynRelStr == "отпредик")
-			if (SynFetStr == "Т_ПРИЛ")
+		if (SynRelStr == _R("отпредик"))
+			if (SynFetStr == _R("Т_ПРИЛ"))
 				if  ( HasRichPOS (NodeNo, ADJ_FULL)  || HasPOS (NodeNo, PARTICIPLE))
 					if (GetSynHost (NodeNo)  == -1)
 						if ( SynMainWord.HasOneGrammem(rInstrumentalis) ) 
 							return true;
 
-		if (SynRelStr == "отпредик")
+		if (SynRelStr == _R("отпредик"))
 			if (P.m_pRossDoc->IsCompAdjCortege( C))
 				return m_Nodes[NodeNo].HasOneGrammem(rComparative) ;
 
@@ -844,8 +844,8 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 		Олег.
 		*/
 		if (   m_Nodes[NodeNo].IsPrimitive() 
-			&& (SynRelStr == "п_доп")
-			&& (m_Nodes[NodeNo].m_Words[0].m_Word == "НЕГО")
+			&& (SynRelStr == _R("п_доп"))
+			&& (m_Nodes[NodeNo].m_Words[0].m_Word == _R("НЕГО"))
 			)
 			return false;
 
@@ -926,7 +926,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 			// вообще, валентное MUA может быть только в подлежащем и в прямом дополнении.  
 
 			//GF* = *  прим_опр : ИГ
-			if (SynRelNo == P.m_pRossDoc->ParatAttrSynONo) // достаточно только того, что это "прим_опр" 
+			if (SynRelNo == P.m_pRossDoc->ParatAttrSynONo) // достаточно только того, что это _R("прим_опр") 
 				if (SynFet !=  P.m_pRossDoc->HyphenNo) // //GF* = *  прим_опр:ДЕФ должно разбираться отдельно, так как морфология  соединяет в одно слово 
 					// комплексы типа "врач-терапевт", "студент-заочник"
 					if  (		m_pData->GetRusGramTab()->GleicheCaseNumber(m_Nodes[P.m_SourceNo].m_GramCodes.c_str(), m_Nodes[NodeNo].m_GramCodes.c_str()) 
@@ -942,8 +942,8 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 
 	PrepNo = -1;
 
-	if (SynRelStr == "ОБСТ_ГР" ) 
-		if ( SynFetStr == "НАР" )
+	if (SynRelStr == _R("ОБСТ_ГР") ) 
+		if ( SynFetStr == _R("НАР") )
 			return HasRichPOS(NodeNo,ADV);
 		else
 			if (SynFet == -1)
@@ -983,7 +983,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 	// GF*     = *  к_доп : инф
 	if (   (SynRelNo == P.m_pRossDoc->DirectObjSynONo) 
 		|| (SynRelNo == P.m_pRossDoc->IndirObjSynONo) 
-		|| (SynRelStr == "отпредик")
+		|| (SynRelStr == _R("отпредик"))
 		)
 		if (SynFet == P.m_pRossDoc->InfinitiveNo) 
 		{
@@ -1172,7 +1172,7 @@ void CRusSemStructure::InitGrammarMatrix1 (long ClauseNo)
 
 						// инициализируем флаг наличия только одного союза
 						if (k == i+2)
-							if ( m_Nodes[i+1].IsLemmaList("И", "ИЛИ", "НО", "А", "") )
+							if (m_Nodes[i + 1].IsLemmaList({ _R("И"), _R("ИЛИ"), _R("НО"), _R("А")}))
 							{
 								C.AddFlagToGramMatrix(i,k, HaveOnlyConjBetween);
 							};

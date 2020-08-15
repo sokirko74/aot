@@ -72,7 +72,7 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 
  if (m_Clauses[ClauseNo].m_ClauseType != COMPARATIVE_T)
  	 for (long i = m_Clauses[ClauseNo].m_BeginNodeNo+1;  i < m_Clauses[ClauseNo].m_EndNodeNo ; i++)
-		 if (    m_Nodes[i].IsLemmaList ("БОЛЬШОЙ", "МАЛЕНЬКИЙ", "") 
+		 if (   m_Nodes[i].IsLemmaList({ _R("БОЛЬШОЙ"), _R("МАЛЕНЬКИЙ") })
 		    &&	m_Nodes[i].HasOneGrammem(rComparative)
 		 )
 	  return false;

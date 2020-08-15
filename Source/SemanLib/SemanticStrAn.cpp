@@ -9,7 +9,7 @@ long CRusSemStructure::GetAnaphoricRelationsCount(long Tag)
   for (size_t i = 0;  i < m_DopRelations.size(); i++)
    if (HasTag(m_DopRelations[i].m_SourceNodeNo, Tag))
     if (m_DopRelations[i].m_bRelUse)
- 	 if (m_DopRelations[i].m_SyntacticRelation == "анафора")
+ 	 if (m_DopRelations[i].m_SyntacticRelation == _R("анафора"))
 	 		Result++;
 
   return Result; 
@@ -149,7 +149,7 @@ void CRusSemStructure::DeleteSAMNode(long ClauseNo, CRusSemNode& SamNode)
 	for (long i=0; i < m_Nodes.size(); i++)
 		if ( IsInClause(i, ClauseNo) )
 			if (m_Nodes[i].IsPrimitive() && CanBeDeleted(i))
-				if  (    HasGramFetAfterColon (i, "нар") 
+				if  (    HasGramFetAfterColon (i, _R("нар")) 
 					&& HasRichPOS (i, PRONOUN_P)
 					)
 
@@ -175,17 +175,17 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 		if ( IsInClause(i, ClauseNo) )
 			if (m_Nodes[i].IsPrimitive())
 			{
-				if  (    HasGramFetAfterColon (i, "нар") 
+				if  (    HasGramFetAfterColon (i, _R("нар")) 
 					&& HasRichPOS (i, PRONOUN_P)
 					)
 				{
 					if ( HasIncomingNotWeakSynRelation (i) )  return false;
 				};
 
-				if  ( HasGramFetAfterColon (i, "с_опр") )
+				if  ( HasGramFetAfterColon (i, _R("с_опр")) )
 					if  ( m_Nodes[i].IsPrimitive() )
-						if (    m_Nodes[i].IsLemma("ОДИН")
-							||  m_Nodes[i].IsLemma("САМ")
+						if (    m_Nodes[i].IsLemma(_R("ОДИН"))
+							||  m_Nodes[i].IsLemma(_R("САМ"))
 							)  
 							if ( !HasIncomingNotWeakSynRelation (i) )
 								return false;
@@ -196,7 +196,7 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 
 
 /*
-Функция вставляет узел "сам" или "один" и проводит отношения ASPECT к нему для всех потециальных подлежащих. Если ни одного отношения не удалось провести, 
+Функция вставляет узел _R("сам") или "один" и проводит отношения ASPECT к нему для всех потециальных подлежащих. Если ни одного отношения не удалось провести, 
  тогда возвращаем ложь.
  Между подлежащим и узлом сам проверяется согласование.
 */
@@ -215,7 +215,7 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
    {
 	   CRelSet R = GetIncomingRelations(i, false);
 	   for (long l=0; l < R.m_RelsCount; l++)
-		if ( m_Relations[R.m_Rels[l]].m_SyntacticRelation == "подл" )
+		if ( m_Relations[R.m_Rels[l]].m_SyntacticRelation == _R("подл") )
 			// проверяем согласование по числу/роду
 		  if (    (   (   (_QM(rPlural) | _QM(rSingular))
 			            & SamNode.GetGrammems()
@@ -237,12 +237,12 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
 			// оно должно быть реверсивным, чтобы не отличаться от простых 
 			// наречий, чтобы занять правильное место в англ. предложении.
 			m_Relations[m_Relations.size()-1].m_bReverseRel = true;
-			m_DopRelations.push_back(CRusSemRelation(CValency("THESAME", A_C),  SamNodeNo,  m_Relations[R.m_Rels[l]].m_TargetNodeNo,  "анафора"));			
+			m_DopRelations.push_back(CRusSemRelation(CValency("THESAME", A_C),  SamNodeNo,  m_Relations[R.m_Rels[l]].m_TargetNodeNo,  _R("анафора")));			
 			bResult = true;
 		  }
          else    
 		  {
-			 // удаляем субъектную стрелку, которая не  согласовалась со словом "САМ"
+			 // удаляем субъектную стрелку, которая не  согласовалась со словом _R("САМ")
 			 EraseRelation(R.m_Rels[l]); 
 			 // получаем новый набор выходящих отношений
 			 R = GetIncomingRelations(i, false);
@@ -475,17 +475,17 @@ catch (...)
 void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
 {
 	for (long i = R.m_Clauses[ClauseNo].m_BeginNodeNo; i < R.m_Clauses[ClauseNo].m_EndNodeNo; i++)
-		if (R.m_Nodes[i].IsLemmaList("КТО","ЧТО","СКОЛЬКО","КАКОЙ", ""))
+		if (R.m_Nodes[i].IsLemmaList({ _R("КТО"),_R("ЧТО"),_R("СКОЛЬКО"),_R("КАКОЙ") }))
 		{
-			//"НИ" может стоять контактно или быть разделено предлогом 
+			//_R("НИ") может стоять контактно или быть разделено предлогом 
 			if  (     (i > 0)
-					&& R.m_Nodes[i-1].IsWordForm("НИ")
+					&& R.m_Nodes[i-1].IsWordForm(_R("НИ"))
 					&& R.CanBeDeleted(i-1)
 				)
 				R.DelNode(i-1);
 			else
 				if  (     (i > 1)
-						&& R.m_Nodes[i-2].IsWordForm("НИ")
+						&& R.m_Nodes[i-2].IsWordForm(_R("НИ"))
 						&& R.CanBeDeleted(i-2)
 					)
 					  R.DelNode(i-2);
@@ -496,7 +496,7 @@ void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
 
 
 			CRusSemWord& W = R.m_Nodes[i].m_Words[0];
-			W.m_Lemma = "НИ" + W.m_Lemma;
+			W.m_Lemma = _R("НИ") + W.m_Lemma;
 			W.m_ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, W.m_Lemma,  0);
 			R.m_Nodes[i].DelAllInterps();
 
@@ -828,30 +828,6 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 		long Improvements = Idealize();
 
-		/*if ( Improvements > 0 )
-		{
-			CSemClauseVariantResult& ClauseVar = m_AlreadyBuiltClauseVariants[m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo];
-			bool bCheckSAMNode = CheckSAMNode(ClauseNo);
-			CLexVariant V = BuildTheVariant(ClauseNo);
-			PrintRelations();
-			PrintNodes();
-			ClauseVar.m_NodesCount  += m_Clauses[ClauseNo].GetNodesCount();
-			ClauseVar.m_PanicRelationsCount += V.AllRelationsCount;
-			V.m_BestValue.SAMNodeViolation = !bCheckSAMNode;
-			V.m_LexVariantNo = LexVariantInCurrSetCollocNo;
-			V.m_SetCollocHypNo = CurrSetCollocHypNo; 
-			V.m_BestValue.CollocsCount = m_ClauseSetCollocHyps[ClauseNo][CurrSetCollocHypNo].size();
-			V.CopyLexVar(*this);
-
-
-			rml_TRACE ("Клауза %i\n", ClauseNo);
-			rml_TRACE ("Лексический вариант(ClauseNo = %i) =  %i, Набор сл-ний = %i(из %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
-			rml_TRACE ("Вес лучшего варианта дерева %i\n", V.GetBestTreeWeight());
-			ClauseVar.m_BestLexVariants.push_back(V);
-			CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[ClauseNo].m_CurrLexVariantNo];
-			Weight += W.GetBestTreeWeight1(!IsConn);
-
-		}*/
 		return GetStructureWeight() + Improvements;
 
 
@@ -997,7 +973,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 {
    if ( GetRoss(Ross) == NULL) return false;
 
-   WORD UnitNo = GetRossHolder(Ross)->LocateUnit("_коэф",1);
+   WORD UnitNo = GetRossHolder(Ross)->LocateUnit(_R("_коэф").c_str(),1);
    if (UnitNo == ErrUnitNo) return false;
 
    if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))

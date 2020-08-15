@@ -42,8 +42,8 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 				(		(SubordNodesCount	== 0)
 					&&	!R.m_Clauses[R.m_Nodes[NodeNo].m_ClauseNo].m_bHasCHEM
 					&&	(IncomRelsCount	 ==	1)
-					&&	(			( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== "чистое_обстоятельство")
-							||		( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== "НАР_ЧИСЛ_СУЩ")
+					&&	(			( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== _R("чистое_обстоятельство"))
+							||		( R.m_Relations[IncomRels[0]].m_SyntacticRelation	== _R("НАР_ЧИСЛ_СУЩ"))
 						)
 				)
 			)
@@ -83,9 +83,9 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 	*/
 	if (IncomRelsCount == 1)
 		if	(		R.HasSemFetPro(R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].m_NodeSemFets, "MODL")
-				||	R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].IsLemma("БЫТЬ")
+				||	R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].IsLemma(_R("БЫТЬ"))
 			)
-			if ( !R.m_Nodes[NodeNo].IsLemmaList ("МНОГО",	"МАЛО",	"ОСТРЫЙ", "СКОРЫЙ",	"СИЛЬНЫЙ", "РАННИЙ", "ОХОТНЫЙ",	 "") )
+			if (!R.m_Nodes[NodeNo].IsLemmaList({ _R("МНОГО"),	_R("МАЛО"),	_R("ОСТРЫЙ"), _R("СКОРЫЙ"),	_R("СИЛЬНЫЙ"), _R("РАННИЙ"), _R("ОХОТНЫЙ") }))
 				Result += 20;
 	/*
 	Примеры на	модальные  глаголы со сравнительными степенями:
@@ -98,7 +98,7 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 
 	*/
 	if	(IncomRelsCount	== 1)
-		if ( R.m_Relations[IncomRels[0]].m_SyntacticRelation ==	"чистое_обстоятельство")
+		if ( R.m_Relations[IncomRels[0]].m_SyntacticRelation ==	_R("чистое_обстоятельство"))
 			if (SubordNodesCount > 0) 
 				Result +=	20;
 
@@ -117,10 +117,10 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 	*/
 	if	(SubordNodesCount	== 2) 
 		if	(  (   R.m_Nodes[SubordNodes[0]].IsPrimitive() 
-				&& (R.m_Nodes[SubordNodes[0]].m_Words[0].m_Word	== "ЕГО")
+				&& (R.m_Nodes[SubordNodes[0]].m_Words[0].m_Word	== _R("ЕГО"))
 				)
 			||	(		R.m_Nodes[SubordNodes[1]].IsPrimitive() 
-					&&	(R.m_Nodes[SubordNodes[1]].m_Words[0].m_Word	== "ЕГО")
+					&&	(R.m_Nodes[SubordNodes[1]].m_Words[0].m_Word	== _R("ЕГО"))
 				)
 			)
 			if (	(IncomRelsCount == 1) 
@@ -238,11 +238,11 @@ long CRusSemStructure::GetSemFetAgreeMNACount(long Tag)
 void CRusSemStructure::InterpretSimilarNounGroups (long ClauseNo)
 {
 	for (size_t i = 0;  i<m_SynRelations.size(); i++)
-		if (  (     ( m_SynRelations[i].m_SynRelName == "ОДНОР_ИГ" ) 
-				||	( m_SynRelations[i].m_SynRelName == "ОДНОР_ИНФ" ) 
-				||	( m_SynRelations[i].m_SynRelName == "ОДНОР_ЧИСЛ" ) 
-				||  ( m_SynRelations[i].m_SynRelName == "РАЗРЫВ_СОЮЗ" ) 
-				||	( m_SynRelations[i].m_SynRelName == "ОДНОР" ) 
+		if (  (     ( m_SynRelations[i].m_SynRelName == _R("ОДНОР_ИГ") ) 
+				||	( m_SynRelations[i].m_SynRelName == _R("ОДНОР_ИНФ") ) 
+				||	( m_SynRelations[i].m_SynRelName == _R("ОДНОР_ЧИСЛ") ) 
+				||  ( m_SynRelations[i].m_SynRelName == _R("РАЗРЫВ_СОЮЗ") ) 
+				||	( m_SynRelations[i].m_SynRelName == _R("ОДНОР") ) 
 			)
 			&& IsInClause(m_SynRelations[i].m_SourceNodeNo,  ClauseNo)
 			)
@@ -260,7 +260,7 @@ void CRusSemStructure::InterpretSimilarNounGroups (long ClauseNo)
 			{
 				long Target = m_SynRelations[i].m_TargetNodeNo;
 				AddRelation(CRusSemRelation (CValency(), MNANodeNo, Target, std::string("") ));
-				m_Relations.back().m_CannotHaveOnlyCommaBetween = ( m_SynRelations[i].m_SynRelName != "РАЗРЫВ_СОЮЗ");
+				m_Relations.back().m_CannotHaveOnlyCommaBetween = ( m_SynRelations[i].m_SynRelName != _R("РАЗРЫВ_СОЮЗ"));
 				
 			}
 
@@ -305,7 +305,7 @@ void CRusSemStructure::ConvertFreeCoordConjToMNA (long ClauseNo)
 long RepeatConjCount = 2;
 const std::string RepeatConj[2]  =
 {
-	"ТО", "ЛИБО"
+	_R("ТО"), _R("ЛИБО")
 };
 
 long CRusSemStructure::GetRepeatConj (long NodeNo)
@@ -431,7 +431,7 @@ void CRusSemStructure::BuildMNA_KAK(long ClauseNo)
 		for (long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo < m_Clauses[ClauseNo].m_EndNodeNo; NodeNo++)
 			if (    
 				m_Nodes[NodeNo].IsPrimitive()
-				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == "КАК") 
+				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("КАК")) 
 				&& (m_Nodes[NodeNo].GetType() == OborRoss) 
 				&& (m_Nodes[NodeNo].m_MNAType != RepeatMNA)
 				)
@@ -453,7 +453,7 @@ void CRusSemStructure::BuildMNA_KAK(long ClauseNo)
 					/* 
 					здесь  нужно перевести интерпретацию на как3, чтобы "как" переводился в "like"
 					*/
-					m_Nodes[NodeNo].GetInterp()->m_UnitNo = GetRossHolder(OborRoss)->LocateUnit("как",3);
+					m_Nodes[NodeNo].GetInterp()->m_UnitNo = GetRossHolder(OborRoss)->LocateUnit(_R("как").c_str(),3);
 					assert (m_Nodes[NodeNo].GetInterp()->m_UnitNo != ErrUnitNo);
 				};
 
@@ -484,7 +484,7 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 		long  PatternPoses;
 		QWORD Grammems;
 		GetMNAPattern(NodeNo, PatternPoses, Grammems);
-		bool bAdjMNA = HasOutcomingSynRelation(NodeNo,"ОДНОР_ПРИЛ");
+		bool bAdjMNA = HasOutcomingSynRelation(NodeNo,_R("ОДНОР_ПРИЛ"));
 		
         // мы начинаем поиск левых потомков от оператора однородности 
 		// (единственный правый потомок уже был присоединен в процедуре, которая ищет оператор однородности )
@@ -524,7 +524,7 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 						|| (Grammems == 0)
 						|| (( PatternPoses & (1<<ADV) ) > 0)
 						|| ( m_Nodes[LeftChildNo].GetGrammems() & Grammems & _QM(rComparative)) 
-						|| ( HasSynRelation (LeftChildNo, "АНАТ_СРАВН") && (Grammems & _QM(rComparative)))
+						|| ( HasSynRelation (LeftChildNo, _R("АНАТ_СРАВН")) && (Grammems & _QM(rComparative)))
 						)
 					&& (!bAdjMNA || ( m_Nodes[LeftChildNo].HasPOS(ADJ_FULL) || m_Nodes[LeftChildNo].HasPOS(ADJ_SHORT)) )	
 				   )
@@ -615,8 +615,8 @@ void CRusSemStructure::BuildMNAIncoming(long ClauseNo)
 				// Для сравнительного оборота такой эллипсис не возможен, например:
 				// Я жил в Америке дольше, чем в России.
 				// но возможны обороты:
-				// Я не знаю человека, больше чем Вася (здесь "Вася" не стоит в рд.  или  вн.) 
-				// Я не отдаю тебе охотнее его (здесь "его" стоит в рд.) 
+				// Я не знаю человека, больше чем Вася (здесь _R("Вася") не стоит в рд.  или  вн.) 
+				// Я не отдаю тебе охотнее его (здесь _R("его") стоит в рд.) 
 				if (    (   (Count > 0)
 					//	&& (m_Nodes[NodeNo].m_MNAType != CHEMOborot)
 					   )

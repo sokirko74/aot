@@ -651,8 +651,8 @@ void CRusSemStructure::FindQuestionClauses ()
    for (long i=0; i< HostClauses.size(); i++)
     if (HostClauses.size() > 1)
 	   for (long j=m_Clauses[HostClauses[i]].m_BeginNodeNo; (j < m_Clauses[HostClauses[i]].m_EndNodeNo) && ((j - m_Clauses[HostClauses[i]].m_BeginNodeNo) < ConjWordDistance); j++)
-			if (m_Nodes[j].IsLemmaList(
-				_R("ЧТОБЫ"),  _R("ЕСЛИ"),  _R("ХОТЯ"), _R("ПОСКОЛЬКУ"), _R("ПОКА"), _R("КОТОРЫЙ"), ""))
+		   if (m_Nodes[j].IsLemmaList({
+			   _R("ЧТОБЫ"),  _R("ЕСЛИ"),  _R("ХОТЯ"), _R("ПОСКОЛЬКУ"), _R("ПОКА"), _R("КОТОРЫЙ") }))
 			{
 				HostClauses.erase(HostClauses.begin() +i);
 			   i--;

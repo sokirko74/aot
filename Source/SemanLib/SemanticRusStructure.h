@@ -147,7 +147,7 @@ public:
 	QWORD GetInnerGrammems() const;
 	bool IsLemma(std::string Lemma) const;
 	bool IsWordForm(std::string WordForm) const;
-	bool IsLemmaList( const char*  FirstLemma, ... ) const;
+	bool IsLemmaList(const std::vector<std::string>& lemmas) const;
 	bool IsEqualMorph (const CRusSemNode& N) 	const;
 	void SetMainWordNo (long WordNo);
 	void ModifyGramCodes(std::string GramCodes, int mode, const CRusGramTab *R);
