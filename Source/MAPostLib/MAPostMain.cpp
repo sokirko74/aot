@@ -364,7 +364,7 @@ std::string CMAPost::GetSimilarNumAncode (const std::string&  Lemma, const std::
 	{
 		  std::string Form = P.GetWordForm(k);
 		  EngRusMakeLower(Form);
-		  if ( IsNoun && Form != h && std::string("ао,ап,ат,ау,ац,ач,аъ").find(P.GetAncode(k)) != std::string::npos ) // 1000 - не аббр, "свыше 1000 человек"
+		  if ( IsNoun && Form != h && std::string(_R("ао,ап,ат,ау,ац,ач,аъ")).find(P.GetAncode(k)) != std::string::npos ) // 1000 - не аббр, "свыше 1000 человек"
 			  continue;
 		  if (Form.length() > Flexia.length())
 			  if (Flexia == "" || Flexia == Form.substr (Form.length()-Flexia.length()))
@@ -671,7 +671,7 @@ void CMAPost::PronounP_Pronoun_Homonymy()
             || (W.m_strUpperWord == _R("ИХ")) 
             || (W.m_strUpperWord == _R("ЕГО")) 
             || (W.m_strUpperWord == _R("ЕЕ")) 
-            || (W.m_strUpperWord == "ЕЁ") 
+            || (W.m_strUpperWord == _R("ЕЁ")) 
             )
             continue;
 
@@ -877,7 +877,7 @@ void CMAPost::SemiAdjectives()
         for (int i=0; i < W.GetHomonymsCount(); i++)
             W.GetHomonym(i)->m_strLemma.erase(0,4);
         // установка графематической пометы
-        W.m_UnparsedGraphemDescriptorsStr  += " #ПОЛУ ";
+        W.m_UnparsedGraphemDescriptorsStr  += _R(" #ПОЛУ ");
     };
 };
 
@@ -954,7 +954,7 @@ void CMAPost::SemiNouns()
         
         
         // установка графематической пометы
-        W.m_UnparsedGraphemDescriptorsStr += " #ПОЛУ ";
+        W.m_UnparsedGraphemDescriptorsStr += _R(" #ПОЛУ ");
 
         // установка граммем
         if (bChangeToPlural)
@@ -1313,7 +1313,7 @@ void CMAPost::Rule_KAK_MOZHNO()
         //оставляем только омоним [П сравн]
         compar_it->SetAllOtherHomsDel(iHom);
         compar_it->DeleteMarkedHomonymsBeforeClauses();
-        compar_it->m_UnparsedGraphemDescriptorsStr += " #КАК_МОЖНО ";
+        compar_it->m_UnparsedGraphemDescriptorsStr += _R(" #КАК_МОЖНО ");
         m_Words.erase(it);
         m_Words.erase(mozno_it);
         it = compar_it;
@@ -1375,7 +1375,7 @@ void CMAPost::Rule_Redublication()
             while(itt !=  last_it)
                 itt = m_Words.erase(itt);
             m_Words.erase(last_it);
-            W.m_UnparsedGraphemDescriptorsStr += " #РЕДУПЛ ";
+            W.m_UnparsedGraphemDescriptorsStr += _R(" #РЕДУПЛ ");
             if (bHasEndOfSent)
                 W.AddDes(OSentEnd);
         }

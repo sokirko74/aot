@@ -49,13 +49,13 @@ struct CFIOFormat
 			if (s == _R("ТОЧКА"))
 				t = fiStop;
 		    else
-			if (s == "РИМСК_ЦК")
+			if (s == _R("РИМСК_ЦК"))
 				t = fiRoman;
 			else
-		 	if (s == "ИМ?")
+		 	if (s == _R("ИМ?"))
 				t = fiProbName;
 			else
-		 	if (s == "ПОРЯД_ЧИСЛ")
+		 	if (s == _R("ПОРЯД_ЧИСЛ"))
 				t = fiOrdinal;
 		    else
 			{
@@ -221,19 +221,19 @@ bool CMAPost::SetFioFormat (const CFIOFormat* Format, CLineIter it)
 void CMAPost::Rule_Fio() 
 {
     vector<CFIOFormat> FioFormats;
-    FioFormats.push_back(CFIOFormat("ИМЯ ОТЧЕСТВО ФАМИЛИЯ", true));
-    FioFormats.push_back(CFIOFormat("ФАМИЛИЯ ИМЯ ОТЧЕСТВО", true));
-    FioFormats.push_back(CFIOFormat("ИМЯ ФАМИЛИЯ", true));
-    FioFormats.push_back(CFIOFormat("ФАМИЛИЯ ИМЯ", true));
-    FioFormats.push_back(CFIOFormat("ИМЯ ОТЧЕСТВО", true));
-    FioFormats.push_back(CFIOFormat("ИМЯ ИМЯ ИМ?", false)); // Эрих Мария Ремарк
-    FioFormats.push_back(CFIOFormat("ИНИЦИАЛ ТОЧКА ИНИЦИАЛ ТОЧКА ФАМИЛИЯ", false)); // М.Горбачев
-    FioFormats.push_back(CFIOFormat("ИНИЦИАЛ ТОЧКА ФАМИЛИЯ", false)); // М.Горбачев
-    FioFormats.push_back(CFIOFormat("ИМЯ ИМЯ РИМСК_ЦК", false)); // Иоанн Павел II
-    FioFormats.push_back(CFIOFormat("ИМЯ РИМСК_ЦК", false)); // Александр II
-    FioFormats.push_back(CFIOFormat("ИМЯ ПОРЯД_ЧИСЛ", true)); // Александр Второй
-    FioFormats.push_back(CFIOFormat("ИМЯ ИМЯ ПОРЯД_ЧИСЛ", false)); // Иоанн Павел Второй
-    FioFormats.push_back(CFIOFormat("ДОН ЖУАН", false)); // Дон Жуан
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ ОТЧЕСТВО ФАМИЛИЯ"), true));
+    FioFormats.push_back(CFIOFormat(_R("ФАМИЛИЯ ИМЯ ОТЧЕСТВО"), true));
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ ФАМИЛИЯ"), true));
+    FioFormats.push_back(CFIOFormat(_R("ФАМИЛИЯ ИМЯ"), true));
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ ОТЧЕСТВО"), true));
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ ИМЯ ИМ?"), false)); // Эрих Мария Ремарк
+    FioFormats.push_back(CFIOFormat(_R("ИНИЦИАЛ ТОЧКА ИНИЦИАЛ ТОЧКА ФАМИЛИЯ"), false)); // М.Горбачев
+    FioFormats.push_back(CFIOFormat(_R("ИНИЦИАЛ ТОЧКА ФАМИЛИЯ"), false)); // М.Горбачев
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ ИМЯ РИМСК_ЦК"), false)); // Иоанн Павел II
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ РИМСК_ЦК"), false)); // Александр II
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ ПОРЯД_ЧИСЛ"), true)); // Александр Второй
+    FioFormats.push_back(CFIOFormat(_R("ИМЯ ИМЯ ПОРЯД_ЧИСЛ"), false)); // Иоанн Павел Второй
+    FioFormats.push_back(CFIOFormat(_R("ДОН ЖУАН"), false)); // Дон Жуан
 
     
     for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
