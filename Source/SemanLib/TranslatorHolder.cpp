@@ -120,7 +120,7 @@ bool CTranslatorHolder::InitAspDict() {
     }
     catch (...) {
         m_AspDictEnabled = false;
-        ErrorMessage("Cannot load словарь видовых  пар");
+        ErrorMessage(_R("Cannot load словарь видовых  пар"));
     };
     return m_AspDictEnabled;
 
@@ -144,13 +144,13 @@ bool CTranslatorHolder::Init() {
 
     try {
         if (!m_pSynonymsDict.Load(GetRegistryString(g_strSynDictionary))) {
-            ErrorMessage("Cannot load словарь синонимов");
+            ErrorMessage(_R("Cannot load словарь синонимов"));
             return false;
         }
 
     }
     catch (...) {
-        ErrorMessage("Cannot load словарь синонимов");
+        ErrorMessage(_R("Cannot load словарь синонимов"));
         return false;
     };
 
@@ -191,7 +191,7 @@ bool CTranslatorHolder::Init() {
         m_AdjNounDualFreq.Load(GetRegistryString(g_strAdjNounDualFreqPath));
     }
     catch (...) {
-        ErrorMessage("Cannot load словарь частот английских ADJ-NOUN");
+        ErrorMessage(_R("Cannot load словарь частот английских ADJ-NOUN"));
         return false;;
     };
 

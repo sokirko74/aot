@@ -123,7 +123,7 @@ const long			CRusSemStructure::GetSemClausesCount() const
 
 bool  CRusSemStructure::IsOptional(long RelNo) const 
 {
-  if (m_Relations[RelNo].m_SyntacticRelation == "врем_группа") return false;
+  if (m_Relations[RelNo].m_SyntacticRelation == _R("врем_группа")) return false;
 
   return  m_Relations[RelNo].m_Valency.m_bOptional;
 };
@@ -137,17 +137,17 @@ std::string CSemClauseVariantResult :: GetStr()
 bool CRusSemStructure::CanBePrefixRelationOperator (long NodeNo) const
 {
 	return     m_Nodes[NodeNo].IsPrimitive()
-		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "НЕ")
-                || (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ТОЛЬКО")
-				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ДАЖЕ")
-				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "НИ")
+		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("НЕ"))
+                || (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ТОЛЬКО"))
+				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ДАЖЕ"))
+				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("НИ"))
 			   );
 }
 
 bool CRusSemStructure::CanBePostfixRelationOperator (long NodeNo) const
 {
 	return     m_Nodes[NodeNo].IsPrimitive()
-		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЖЕ")
+		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ЖЕ"))
 			   );
 }
 
@@ -235,7 +235,7 @@ bool CRusSemStructure::IsPostSpecifAdjNode(long NodeNo) const
 {
 	CRelSet R = GetIncomingRelations(NodeNo, false);
 	if (R.m_RelsCount != 1) return false;
-return    (GetRelation(R.m_Rels[0])->m_Valency.m_RelationStr == "PROPERT")		   && (GetRelation(R.m_Rels[0])->m_SyntacticRelation == "уточн");
+return    (GetRelation(R.m_Rels[0])->m_Valency.m_RelationStr == "PROPERT")		   && (GetRelation(R.m_Rels[0])->m_SyntacticRelation == _R("уточн"));
 };
 
 
@@ -537,9 +537,9 @@ std::string CRusSemStructure::GetMorphologyOfNode(long NodeNo) const
 bool	CRusSemStructure::IsParenthesis (long NodeNo) const
 {
 	  return          (m_Nodes[NodeNo].GetType() != NoneRoss) 
-			   && (   HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","ВВОДН", "D_PART_OF_SPEECH",0,0)
-				   || HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","ВВОДН", "D_GROUPS",0,0)
-				   || HasGramFetAfterColon (NodeNo, "ВВОДН")
+			   && (   HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF",_R("ВВОДН"), "D_PART_OF_SPEECH",0,0)
+				   || HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF",_R("ВВОДН"), "D_GROUPS",0,0)
+				   || HasGramFetAfterColon (NodeNo, _R("ВВОДН"))
 				  );
 };
 
@@ -547,7 +547,7 @@ void CRusSemStructure::CopyDopRelationsExceptAnaphor()
 {
 
 	for(int i = 0 ; i < m_DopRelations.size() ; i++ )
-		if (    (m_DopRelations[i].m_SyntacticRelation != "анафора") 
+		if (    (m_DopRelations[i].m_SyntacticRelation != _R("анафора")) 
 			 && (m_DopRelations[i].m_SyntacticRelation != "ModalCopul") 
 		   )
 		{
@@ -871,7 +871,7 @@ bool CRusSemStructure::IsSimpleNounGroupUnderPrep(long NodeNo) const
 							m_Nodes[NodeNo].m_Words[0].HasPOS(NOUN) 
 						|| m_Nodes[NodeNo].m_Words[0].HasPOS(PRONOUN) 
 						|| m_Nodes[NodeNo].m_Words[0].m_ILE
-						|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "КОТОРЫЙ")
+						|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("КОТОРЫЙ"))
 						)
 				)
 					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_ADJ)
@@ -1007,10 +1007,10 @@ bool CRusSemNode::operator < (const CRusSemNode& Node) const
 bool CRusSemNode::IsAnaphoricPronoun () const
 {
 	return (     IsPrimitive() 
-		&& (    (m_Words[0].m_Lemma == "ОН")
-		    || (m_Words[0].m_Lemma == "ОНА")
-            || (m_Words[0].m_Lemma == "ОНО")
-			|| (m_Words[0].m_Lemma == "ОНИ")
+		&& (    (m_Words[0].m_Lemma == _R("ОН"))
+		    || (m_Words[0].m_Lemma == _R("ОНА"))
+            || (m_Words[0].m_Lemma == _R("ОНО"))
+			|| (m_Words[0].m_Lemma == _R("ОНИ"))
 			)
 		);
 };
@@ -1112,13 +1112,13 @@ UINT CRusSemWord::GetRusRichPoses () const
 {
     UINT Poses = m_Poses;
 
-	if (m_Lemma == "ЛИ")
+	if (m_Lemma == _R("ЛИ"))
 		Poses &= ~(1 << CONJ);
 
-	if (    (m_Lemma == "ПЕРВОЕ")
-		|| (m_Lemma == "ВТОРОЕ")
-		|| (m_Lemma == "ТРЕТЬЕ")
-		|| (m_Lemma == "ЧЕТВЕРТОЕ")
+	if (    (m_Lemma == _R("ПЕРВОЕ"))
+		|| (m_Lemma == _R("ВТОРОЕ"))
+		|| (m_Lemma == _R("ТРЕТЬЕ"))
+		|| (m_Lemma == _R("ЧЕТВЕРТОЕ"))
 		)
 		Poses |= (1 << NUMERAL_P);
 
@@ -1156,7 +1156,7 @@ CRusMorphHomonym::CRusMorphHomonym(const CRusSemWord& X)
 
 
 //=========================
-const std::string PossPronoun [] = {"НАШ", "ВАШ", "МОЙ", "ТВОЙ", "ЕЕ", "ЕГО", "ИХ"};
+const std::string PossPronoun [] = {_R("НАШ"), _R("ВАШ"), _R("МОЙ"), _R("ТВОЙ"), _R("ЕЕ"), _R("ЕГО"), _R("ИХ")};
 bool IsPossesivePronoun(const CSemNode& N)
 {
 	if (!N.IsPrimitive() ) return false;
@@ -1169,8 +1169,8 @@ bool HasReflexiveSuffix (const std::string& s)
 	if ( s.length () <  3)   return false;
 	std::string suffix  = s.substr (s.length() - 2);
 	EngRusMakeUpper(suffix);
-	return   (    ( suffix == "СЯ")
-				|| ( suffix == "СЬ")
+	return   (    ( suffix == _R("СЯ"))
+				|| ( suffix == _R("СЬ"))
 				);
 };
 

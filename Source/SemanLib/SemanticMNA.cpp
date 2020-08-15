@@ -371,7 +371,7 @@ bool CRusSemStructure::DealWithNodePrepS(long NodeNo)
 		nd = GetFirstMNAMemberIfHas(NodeNo);
 
 	long PrepNo;
-	if (!CheckGroupBeginAndCase("с+Т",nd, PrepNo)) return false;
+	if (!CheckGroupBeginAndCase(_R("с+Т"),nd, PrepNo)) return false;
 	long SourceNodeNo = FindLeftClosestNode(nd);
 	if (SourceNodeNo == -1) return false;
 	if (!IsInClause (SourceNodeNo, m_Nodes[nd].m_ClauseNo)) return false;

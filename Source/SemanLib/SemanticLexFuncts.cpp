@@ -367,16 +367,16 @@ void CRusSemStructure::BuildAdjOrAdvLexFunctParamNodes(long ClauseNo)
 		 GetOutcomingSynRelations(NodeNo, Rels);
 		 // формируем множество узлов, которые могут быть лексическими функциями типа Magn  
 		 for (long i=0; i < Rels.size(); i++)
-			 if  (   (m_SynRelations[Rels[i]].m_SynRelName == "ПРИЛ_СУЩ")
-				  || (m_SynRelations[Rels[i]].m_SynRelName == "НАРЕЧ_ГЛАГОЛ")
+			 if  (   (m_SynRelations[Rels[i]].m_SynRelName == _R("ПРИЛ_СУЩ"))
+				  || (m_SynRelations[Rels[i]].m_SynRelName == _R("НАРЕЧ_ГЛАГОЛ"))
 				 )
 			 {
 				 vector<long> Rels1;
 				 GetOutcomingSynRelations(m_SynRelations[Rels[i]].m_TargetNodeNo, Rels1);
 				 bool b = false;;
 				 for (long l=0; l < Rels1.size(); l++)
-                   if  (   (m_SynRelations[Rels1[l]].m_SynRelName == "ОДНОР_ПРИЛ")
-					     ||(m_SynRelations[Rels1[l]].m_SynRelName == "ОДНОР_НАР")
+                   if  (   (m_SynRelations[Rels1[l]].m_SynRelName == _R("ОДНОР_ПРИЛ"))
+					     ||(m_SynRelations[Rels1[l]].m_SynRelName == _R("ОДНОР_НАР"))
 					   )
 				   {
 					   Nodes.push_back(m_SynRelations[Rels1[l]].m_TargetNodeNo);

@@ -185,13 +185,13 @@ void CRusSemStructure::ConvertVSE2_toOperator()
 	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++) 
 	{
 		if (m_Nodes[NodeNo].GetType() != Ross) continue;
-		if (!m_Nodes[NodeNo].IsLemma("ВСЕ"))  continue;
+		if (!m_Nodes[NodeNo].IsLemma(_R("ВСЕ")))  continue;
 		if (GetRoss(Ross)->GetUnitMeanNum(m_Nodes[NodeNo].GetUnitNo()) != 2)  continue;
 		CRelSet R = GetIncomingRelations(NodeNo, false);
 		if (R.m_RelsCount  != 1) continue;
 		long nd = m_Relations[R.m_Rels[0]].m_SourceNodeNo;
 		if (!IsVerbForm (m_Nodes[nd])) continue;
-		m_Nodes[nd].m_RelOperators.push_back("ПРОДОЛЖ");
+		m_Nodes[nd].m_RelOperators.push_back(_R("ПРОДОЛЖ"));
 		if (CanBeDeleted(NodeNo))
 		{
 			DelNode(NodeNo);
@@ -289,7 +289,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 
 			// если у глагола есть отрицание, и он  валентен на п_доп, тогда 
 			// он может управлять как номинативом, так и генитивом
-			if (m_Nodes[m_Relations[MainRelNo].m_SourceNodeNo].HasRelOperator("НЕ"))
+			if (m_Nodes[m_Relations[MainRelNo].m_SourceNodeNo].HasRelOperator(_R("НЕ")))
 			 if (RossHolder->GetSynRel( C) ==  RossHolder->DirectObjSynONo)
 				Grammems = _QM(rAccusativ) | _QM(rGenitiv);
 			 // запускаем удаление анкодов, только если  внешние и внутренние граммемы равны,
@@ -631,7 +631,7 @@ void CRusSemStructure::FindQuestionClauses ()
 		 vector<long> Nodes;
 		 GetClauseRootsWithoutDeleted(i,Nodes);
 		 if (Nodes.size() != 1)  continue;
-		 if (!m_Nodes[Nodes[0]].HasRelOperator("НИ")) continue;
+		 if (!m_Nodes[Nodes[0]].HasRelOperator(_R("НИ"))) continue;
 		 m_Clauses[i].m_bQuestion = true;
 		 m_Nodes[Nodes[0]].m_RelOperators.push_back("no_matter"); 
 		 m_Clauses[i].m_HasParticleBY = false;
@@ -769,7 +769,7 @@ void CRusSemStructure::ConvertParticipleTreeToClause()
 				  };
 				  m_Clauses.back().m_HostClause = ClauseNo;
 				  for (i=0; i < m_ClauseRules.size(); i++)
-					  if (m_ClauseRules[i].m_Name == "причастный оборот")
+					  if (m_ClauseRules[i].m_Name == _R("причастный оборот"))
 					  {
 						  m_Clauses.back().m_ClauseRuleNo = i;
 						  break;

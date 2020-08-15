@@ -94,8 +94,8 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 			  &&	CanBeDeleted(i)
 		 )
 	  {
-			  if ( !m_Nodes[i-1].IsWordForm("ВСЕ") ) continue;
-	  		  m_Nodes[i].m_RelOperators.push_back("ПРОДОЛЖ");
+			  if ( !m_Nodes[i-1].IsWordForm(_R("ВСЕ")) ) continue;
+	  		  m_Nodes[i].m_RelOperators.push_back(_R("ПРОДОЛЖ"));
 			  DelNode(i-1);
 			  i--;
 	  }
@@ -123,7 +123,7 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 		long  k=CompNodeNo+1;
 		for (; k < EndNodeNo; k++)
         if  (     m_Nodes[k].IsPrimitive()
-			   && (m_Nodes[k].m_Words[0].m_Lemma == "ЧЕМ")
+			   && (m_Nodes[k].m_Words[0].m_Lemma == _R("ЧЕМ"))
 			 )
 		break;
         if (k == EndNodeNo) continue;
@@ -234,8 +234,8 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 
 	  for (long CompNodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  CompNodeNo <   m_Clauses[ClauseNo].m_EndNodeNo; CompNodeNo++)
 		if (    m_Nodes[CompNodeNo].HasOneGrammem(rComparative)
-			&&  (   m_Nodes[CompNodeNo].IsLemma("БОЛЬШОЙ") 		
-				 || m_Nodes[CompNodeNo].IsLemma("МАЛЕНЬКИЙ") 		
+			&&  (   m_Nodes[CompNodeNo].IsLemma(_R("БОЛЬШОЙ")) 		
+				 || m_Nodes[CompNodeNo].IsLemma(_R("МАЛЕНЬКИЙ")) 		
 				)
 		   )
 		{
@@ -249,7 +249,7 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 				 break;
 			if ( k == m_Clauses[ClauseNo].m_EndNodeNo ) return;
 			if (!m_Nodes[k].IsPrimitive()) return;
-			m_Nodes[k].m_Words[0].m_Lemma = "МНОГО";
+			m_Nodes[k].m_Words[0].m_Lemma = _R("МНОГО");
 			InitInterps(m_Nodes[k].m_Words[0], false, ClauseNo, m_Nodes[k]);
 		};
 	};
@@ -268,12 +268,12 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 {
    if (m_Clauses[ClauseNo].m_ClauseSyntaxTop != -1)
-   if (    m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].HasRelOperator("НЕ") 
-	    || m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].IsLemma ("НЕТ")
+   if (    m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].HasRelOperator(_R("НЕ")) 
+	    || m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].IsLemma (_R("НЕТ"))
 	  )
    for (long CompNodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  CompNodeNo <   m_Clauses[ClauseNo].m_EndNodeNo; CompNodeNo++)
 		if (    m_Nodes[CompNodeNo].HasOneGrammem (rComparative)
-			&&  m_Nodes[CompNodeNo].IsLemma("МНОГО") 		
+			&&  m_Nodes[CompNodeNo].IsLemma(_R("МНОГО")) 		
 		   )
 		{
 			vector<long> Rels;
@@ -285,7 +285,7 @@ void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 например, "больше воды" - здесь, когда есть связь QUANTIT,  у "воды" внешние граммемы "им,вн",а поскольку связь QUANTIT разрывается, внешние граммемы нужно приравнять				 внутренним
 				*/
 
-				assert (m_SynRelations[Rels[0]].m_SynRelName == "НАР_ЧИСЛ_СУЩ");
+				assert (m_SynRelations[Rels[0]].m_SynRelName == _R("НАР_ЧИСЛ_СУЩ"));
 				CRusSemNode& NounNode = m_Nodes[m_SynRelations[Rels[0]].m_SourceNodeNo];
 				assert (NounNode.IsWordContainer());
 				assert (NounNode.m_MainWordNo != -1);
@@ -317,13 +317,13 @@ try {
 		if (	m_Nodes[CompNodeNo].m_bCompAdj		)
 		{
 
-			if (!m_Nodes[CompNodeNo].IsLemma ("БОЛЬШОЙ"))
+			if (!m_Nodes[CompNodeNo].IsLemma (_R("БОЛЬШОЙ")))
 				for	(long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo <	 EndNodeNo;	NodeNo++)
 					if	(		IsVerbForm (m_Nodes[NodeNo])	
 							||	HasRichPOS (NodeNo, PREDK) // "у	меня нет больше	 надежды"
 						)
 					{
-						AddRelation(CRusSemRelation(CValency("ACT",A_C), NodeNo, CompNodeNo,  "чистое_обстоятельство"));			
+						AddRelation(CRusSemRelation(CValency("ACT",A_C), NodeNo, CompNodeNo,  _R("чистое_обстоятельство")));			
 					};
 		}
 

@@ -110,8 +110,8 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 
 	// проверка частицы "не"
 	// факультативно частицу "не" может принимать только первое слово словосочетания
-	if (    ( (I.RelOperator1 == "НЕ") || (I.RelOperator2 == "НЕ") )
-		&&  m_Nodes[NodeNo].HasRelOperator("НЕ")
+	if (    ( (I.RelOperator1 == _R("НЕ")) || (I.RelOperator2 == _R("НЕ")) )
+		&&  m_Nodes[NodeNo].HasRelOperator(_R("НЕ"))
 		&&  (ItemNo > 0)
 		)
 		return false;
@@ -237,7 +237,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	// проверка GF(i)
 	for (long i=0; i<AllHyps.size();)
 	{
-		rml_TRACE ("проверка GF(*) для %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		rml_TRACE (_R("проверка GF(*) для %s\n"),GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 		long k=0;
 		for (; k < AllHyps[i].m_Coords.size(); k++)
 			if (!CheckCollocItemGramFet(
@@ -257,10 +257,10 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	// проверка SYNREP
 	for (long i=0; i<AllHyps.size();i++)
 	{
-		rml_TRACE ("проверка SYNREP для %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		rml_TRACE (_R("проверка SYNREP для %s\n"),GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 		const CColloc& C = m_pData->m_RusCollocs[AllHyps[i].m_CollocNo];
 		for (long j=0; j <  C.m_Rels.size(); j++)
-			if (C.m_Rels[j].m_SynRelName == "ПРИЛ_СУЩ")
+			if (C.m_Rels[j].m_SynRelName == _R("ПРИЛ_СУЩ"))
 			{
 				vector<long> Rels;
 				long TargetNodeNo = FindNodeByWordNo(AllHyps[i].m_Coords[C.m_Rels[j].m_TargetNodeNo].m_WordNo, ClauseNo);

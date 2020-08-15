@@ -15,42 +15,42 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 	{
 		if (NumeralToNumber[i].m_Number == 0)
 		{
-			GenitFormsOfCardinal.push_back("НУЛЬ");
+			GenitFormsOfCardinal.push_back(_R("НУЛЬ"));
 			continue;
 		};
 		if (NumeralToNumber[i].m_Number == 1)
 		{
-			GenitFormsOfCardinal.push_back("ОДНО");
+			GenitFormsOfCardinal.push_back(_R("ОДНО"));
 			continue;
 		};
 		if (NumeralToNumber[i].m_Number == 100)
 		{
-			GenitFormsOfCardinal.push_back("СТО");
+			GenitFormsOfCardinal.push_back(_R("СТО"));
 			continue;
 		};
 		if (NumeralToNumber[i].m_Number == 1000)
 		{
-			GenitFormsOfCardinal.push_back("ТЫСЯЧЕ");
+			GenitFormsOfCardinal.push_back(_R("ТЫСЯЧЕ"));
 			continue;
 		};
 		if (NumeralToNumber[i].m_Number == 1000000)
 		{
-			GenitFormsOfCardinal.push_back("МИЛЛИОНО");
+			GenitFormsOfCardinal.push_back(_R("МИЛЛИОНО"));
 			continue;
 		};
 		if (NumeralToNumber[i].m_Number == 1000000000)
 		{
-			GenitFormsOfCardinal.push_back("МИЛЛИАРДНО");
+			GenitFormsOfCardinal.push_back(_R("МИЛЛИАРДНО"));
 			continue;
 		};
 		if (NumeralToNumber[i].m_Number == 1000000000000.0)
 		{
-			GenitFormsOfCardinal.push_back("ТРИЛЛИОНО");
+			GenitFormsOfCardinal.push_back(_R("ТРИЛЛИОНО"));
 			continue;
 		};
 		if (NumeralToNumber[i].m_Number == 1000000000000000.0)
 		{
-			GenitFormsOfCardinal.push_back("КВАДРИЛЛИОНО");
+			GenitFormsOfCardinal.push_back(_R("КВАДРИЛЛИОНО"));
 			continue;
 		};
 		vector<CFormInfo> ParadigmCollection;
@@ -122,7 +122,7 @@ int GetNumeralPrefixGenitForm(std::string word, int& PrefixLength)
 	};
 
 	if (PrefixLength < 3)
-  	 if( !strncmp(word.c_str(), "ДВУ", 3) ) // двуногий
+  	 if( !strncmp(word.c_str(), _R("ДВУ"), 3) ) // двуногий
 		{
 			NumLine = 2;
 			PrefixLength = 3;
@@ -130,7 +130,7 @@ int GetNumeralPrefixGenitForm(std::string word, int& PrefixLength)
 		};
 
 	if (PrefixLength < 5)
-  	 if( !strncmp(word.c_str(), "ДВУХЪ", 5) ) // двухъярусный
+  	 if( !strncmp(word.c_str(), _R("ДВУХЪ"), 5) ) // двухъярусный
 		{
 			NumLine = 2;
 			PrefixLength = 5;
@@ -138,7 +138,7 @@ int GetNumeralPrefixGenitForm(std::string word, int& PrefixLength)
 		};
 
 	 if (PrefixLength < 5)
-  	 if( !strncmp(word.c_str(), "ТРЕХЪ", 5) ) // трехъярусный
+  	 if( !strncmp(word.c_str(), _R("ТРЕХЪ"), 5) ) // трехъярусный
 		{
 			NumLine = 3;
 			PrefixLength = 5;
@@ -146,7 +146,7 @@ int GetNumeralPrefixGenitForm(std::string word, int& PrefixLength)
 		};
 
     if (PrefixLength < 8)
-  	 if( !strncmp(word.c_str(), "ЧЕТЫРЕХЪ", 8) ) // четырехъярусный
+  	 if( !strncmp(word.c_str(), _R("ЧЕТЫРЕХЪ"), 8) ) // четырехъярусный
 		{
 			NumLine = 4;
 			PrefixLength = 8;
@@ -154,14 +154,14 @@ int GetNumeralPrefixGenitForm(std::string word, int& PrefixLength)
 		};
 
 	if (PrefixLength < 4)
-  	 if( !strncmp(word.c_str(), "ОДНО", 4) ) // одноэтажный
+  	 if( !strncmp(word.c_str(), _R("ОДНО"), 4) ) // одноэтажный
 		{
 			NumLine = 0;
 			PrefixLength = 4;
 			assert (NumeralToNumber[NumLine].m_Number == 1);
 		};
 	if (PrefixLength < 4)
-  	 if( !strncmp(word.c_str(), "НУЛЬ", 4) ) // нульмодемный
+  	 if( !strncmp(word.c_str(), _R("НУЛЬ"), 4) ) // нульмодемный
 		{
 			NumLine = NumeralToNumberCount;
 			PrefixLength = 4;
@@ -286,13 +286,13 @@ bool FullAdjWithNumeralPrefix (const CRusSemNode& Node)
 	  if (  !Node.m_Words[0].HasPOS(ADJ_FULL)  ) return false;
 	  int dummy;
 	  if ( GetNumeralPrefixGenitForm(Node.m_Words[0].m_Word, dummy) == -1) return false;
-	  if (Node.m_Words[0].m_Word.substr (0, 3) == "СТО")
+	  if (Node.m_Words[0].m_Word.substr (0, 3) == _R("СТО"))
 	  {
 		  std::string Word = Node.m_Words[0].m_Word.substr(3);
 		  if (GetNumeralPrefixGenitForm(Word, dummy) != -1) return true;
 	  };
-	  if  (   (Node.m_Words[0].m_Word.substr (0, 3) == "СТО")
-		   || (Node.m_Words[0].m_Word.substr (0, 4) == "ОДНО")
+	  if  (   (Node.m_Words[0].m_Word.substr (0, 3) == _R("СТО"))
+		   || (Node.m_Words[0].m_Word.substr (0, 4) == _R("ОДНО"))
 		  )
 	  if (Node.m_Words[0].m_ParadigmId != -1) return false;
 	  return true;

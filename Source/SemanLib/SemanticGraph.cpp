@@ -278,7 +278,7 @@ std::string  CSemanticStructure::GetNodeStr(const CSemNode& N, size_t MaxLength)
 	std::string S;
 	if (N.m_NodeType == Copul) return "Copul";
 	if (N.m_NodeType == ModalCopul) return "ModalCopul";
-	if (N.m_NodeType == SJA) return "СЯ";
+	if (N.m_NodeType == SJA) return _R("СЯ");
 	if (N.m_NodeType == Situat) return "SIT";	
 	int WordsCount = N.GetWordsSize();
 
@@ -698,7 +698,7 @@ long CSemanticStructure::GetAnaphoraTarget(long NodeNo) const
 {
   for (size_t i = 0; i<GetDopRelationsSize(); i++)
      if (GetDopRelation(i)->m_SourceNodeNo == NodeNo)
-		 if (GetDopRelation(i)->m_SyntacticRelation == "анафора") 
+		 if (GetDopRelation(i)->m_SyntacticRelation == _R("анафора")) 
 		   return GetDopRelation(i)->m_TargetNodeNo;
   return -1;	
 };

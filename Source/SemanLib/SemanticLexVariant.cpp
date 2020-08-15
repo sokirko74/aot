@@ -21,40 +21,40 @@ poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD U
 	{
      std::string S = GramFets[i].substr(0, GramFets[i].find_first_of(":"));
 	 
-	 if (S ==_R( "СУЩ"))	 
+	 if (S ==_R( _R("СУЩ")))	 
 		 ret_poses |=  (1 << NOUN);
 	 else
-     if (S ==_R( "МС")) 	 
+     if (S ==_R( _R("МС"))) 	 
 		 ret_poses |= (1<<PRONOUN);
 	 else
     
-     if ((S ==_R( "МЕСТОИМ")) || (S ==_R( "МС-П"))  || (S ==_R( "ПРИТ_МЕСТМ")) )
+     if ((S ==_R( _R("МЕСТОИМ"))) || (S ==_R( _R("МС-П")))  || (S ==_R( _R("ПРИТ_МЕСТМ"))) )
 		 ret_poses |= (1 << PRONOUN_P);
 	 else
-     if (S ==_R( "НАР"))
+     if (S ==_R( _R("НАР")))
 		 ret_poses |=  (1 << ADV);
 	 else
-      if (S ==_R( "ЧАСТ"))
+      if (S ==_R( _R("ЧАСТ")))
 		  ret_poses |= (1 << PARTICLE);
 	 else
-     if (S ==_R( "ПРЕДК"))
+     if (S ==_R( _R("ПРЕДК")))
 		  ret_poses |= (1 << PREDK)  | (1 << PRONOUN_PREDK)	 ;
 	  else
-      if (S ==_R( "ГЛ"))
+      if (S ==_R( _R("ГЛ")))
 		  ret_poses |= (	(1 << VERB) |
 							(1 << ADVERB_PARTICIPLE) |
 							(1 << PARTICIPLE) |
 							(1 << PARTICIPLE_SHORT) |
 							(1 << INFINITIVE) );
 	  else
-      if (S ==_R( "ПРИЛ"))
+      if (S ==_R( _R("ПРИЛ")))
 		 ret_poses |=	( (1<<ADJ_FULL) 
 						| (1 << ADJ_SHORT)
 						| (1 << PARTICIPLE)
 						| (1 << PARTICIPLE_SHORT)
 						);
 	 else
-	 if (S ==_R( "ЧИСЛ"))		  
+	 if (S ==_R( _R("ЧИСЛ")))		  
 		ret_poses |= ((1<<NUMERAL_P) | (1<<NUMERAL) );		
 	 else
 	 {
@@ -159,14 +159,14 @@ bool CRusSemStructure::BuildWordWithoutFemineSuffix (std::string& Word) const
 {
 	std::string NewWord;
 	if (  (Word.length() > 8)
-	    &&(Word.substr(Word.length()-8) ==_R( "тельница"))
+	    &&(Word.substr(Word.length()-8) ==_R( _R("тельница")))
 	   )
 		NewWord = Word.substr(0,Word.length()-4);
 	else
 	if (  (Word.length() > 4)
 	    &&(Word.substr(Word.length()-4) ==_R("ница"))
 	   )
-		NewWord = Word.substr(0,Word.length()-2) +_R( "к");
+		NewWord = Word.substr(0,Word.length()-2) +_R( _R("к"));
 	else
 	if (  (Word.length() > 3)
 	    &&(Word.substr(Word.length()-3) == _R("ица"))
@@ -390,7 +390,7 @@ TryWithoutFeminSuffix:
 	}
 	catch (...)
 	{
-		ErrorMessage ("Ошибка словарной	интерпретации");
+		ErrorMessage (_R("Ошибка словарной	интерпретации"));
 		throw;
 	};
 };
@@ -819,7 +819,7 @@ void CRusSemStructure::InterpretPrepNouns(long ClauseNo)
         if (m_Nodes[m_SynRelations[RelNo].m_SourceNodeNo].m_ClauseNo != ClauseNo)
             RelNo++;
         else	
-            if (m_SynRelations[RelNo].m_SynRelName == "ПГ")
+            if (m_SynRelations[RelNo].m_SynRelName == _R("ПГ"))
             {
                 long PrepNode = m_SynRelations[RelNo].m_SourceNodeNo;
 
@@ -1311,7 +1311,7 @@ void CRusSemStructure::ProcessDashClauses()
 		  // Во фразе "Мир - это сон" уничтожаем "это"
 		  if (	NodeWasCreated )
   		   for (long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo; NodeNo < m_Clauses[ClauseNo].m_EndNodeNo;  NodeNo++)
-			   if (m_Nodes[NodeNo].IsLemma("ЭТО") && CanBeDeleted(NodeNo) )
+			   if (m_Nodes[NodeNo].IsLemma(_R("ЭТО")) && CanBeDeleted(NodeNo) )
 			   {
 				   DelNode(NodeNo);
 				   break;
@@ -1326,13 +1326,13 @@ void CRusSemStructure::ProcessDashClauses()
 		  long NodeNo = GetConjWordFromClause(ClauseNo);
 		  if (NodeNo == -1) continue;
 		  // "какие розы!" здесь  не надо восстанавливать связку
-		  if (m_Nodes[NodeNo].IsLemma("КАКОЙ")) continue;
+		  if (m_Nodes[NodeNo].IsLemma(_R("КАКОЙ"))) continue;
 		  // пустыха, которая начинается с "чем", будем считать частью сравн. оборота
 	      if (    m_Nodes[NodeNo].IsPrimitive()   )
 		  {
 			  std::string Word = m_Nodes[NodeNo].m_Words[0].m_Word;
 			  EngRusMakeUpper(Word);
-              if (Word == "ЧЕМ") continue;
+              if (Word == _R("ЧЕМ")) continue;
 		  };
 		  FreeWordNo(m_Nodes[NodeNo].GetMaxWordNo() + 1);
 		  CRusSemNode N = Create_EST_Node(*this, ClauseNo);
@@ -1356,15 +1356,15 @@ void CRusSemStructure::ProcessDashClauses()
 void CRusSemStructure::ProcessSAM_SEBJA()
 {
 	for (long i =0; i < m_Nodes.size(); i++)
-	  if (m_Nodes[i].IsLemma("СЕБЯ") )
+	  if (m_Nodes[i].IsLemma(_R("СЕБЯ")) )
 		  if (     (i+1 < m_Nodes.size())
-			    && m_Nodes[i+1].IsLemma("САМ") 
+			    && m_Nodes[i+1].IsLemma(_R("САМ")) 
 				&& CanBeDeleted(i+1)
 			 )
 			 DelNode (i+1);
 		  else
   		  if (     (i >0 )
-			    && m_Nodes[i-1].IsLemma("САМ") 
+			    && m_Nodes[i-1].IsLemma(_R("САМ")) 
 				&& CanBeDeleted(i-1)
 			 )
 		  {
@@ -1506,7 +1506,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 					CurrentGrammems |= (VerbGrammems & rAllGenders);
 				}
 				CurrentPoses = Word->m_Poses;
-				strPos = "Г";
+				strPos = _R("Г");
 			}
 			else
                 if ( POS == PARTICIPLE_SHORT )
@@ -1525,7 +1525,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 				if ( (VerbGrammems & _QM(rImperative)) != 0 )
 					CurrentGrammems |= _QM(rImperative);
 
-				strPos = "ПРИЧАСТИЕ";
+				strPos = _R("ПРИЧАСТИЕ");
 				CurrentPoses |= (1<<PARTICIPLE_SHORT);
 			}
 			else
@@ -1541,7 +1541,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 					CurrentGrammems &= ~_QM(rActiveVoice);
 
 				CurrentPoses |= (1<<ADJ_SHORT);
-				strPos = "П";
+				strPos = _R("П");
 			}
 			else
 			//  "мне было больно"
@@ -1552,7 +1552,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 				if ( (CurrentGrammems & (1 << rActiveVoice)) != 0 )
 					CurrentGrammems &= ~(1 << rActiveVoice);
 
-				strPos = "ПРЕДК";
+				strPos = _R("ПРЕДК");
 				CurrentPoses |= (1<<POS);
 			}
 			else
@@ -1565,7 +1565,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 				if ( (CurrentGrammems & (1 << rActiveVoice)) != 0 )
 					CurrentGrammems &= ~(1 << rActiveVoice);
 
-				strPos = "МС-ПРЕДК";
+				strPos = _R("МС-ПРЕДК");
 				CurrentPoses |= (1<<POS);
 			}
 			else
@@ -1576,7 +1576,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 					VerbGrammems &= ~_QM(rActiveVoice);
 
 				CurrentGrammems = (VerbGrammems | _QM(rComparative));
-				strPos = "П";
+				strPos = _R("П");
 				CurrentPoses  |= (1<<POS);
 			}
 			else
@@ -1590,14 +1590,14 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 			if ( AuxVerb->HasPOS(INFINITIVE) )
 			{
 				CurrentPoses |= (1 << INFINITIVE);
-				strPos = "ИНФИНИТИВ";
+				strPos = _R("ИНФИНИТИВ");
 			}
 			else
 			//  "будучи лишней"
 			if ( AuxVerb->HasPOS(ADVERB_PARTICIPLE))
 			{
 				CurrentPoses |= (1 << ADVERB_PARTICIPLE);
-				strPos = "ДЕЕПРИЧАСТИЕ";
+				strPos = _R("ДЕЕПРИЧАСТИЕ");
 			}
 			
 			if (strPos == "") continue;
@@ -1629,7 +1629,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 	if ( (Grammems != 0) && (Poses != 0) && CanBeDeleted(MainVerbNodeNo) )
 	{
 		// "стал писать" "стану писать" "стать писать" - совершенный вид
-		if (AuxVerb->IsLemma("СТАТЬ") )
+		if (AuxVerb->IsLemma(_R("СТАТЬ")) )
 		{
 			Grammems |= _QM(rPerfective);
 		}
@@ -1734,22 +1734,22 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 			/*очень частный случай. Работает на фразе " Я знаю это больше тебя", где у "тебя" должен
 			появиться родительный падеж, который затирается синтаксисом */
 
-			if  (m_SynRelations.back().m_SynRelName == "НАР_ЧИСЛ_СУЩ")
-				if (   m_Nodes[m_SynRelations.back().m_TargetNodeNo].IsWordForm("БОЛЬШЕ")
-					|| m_Nodes[m_SynRelations.back().m_TargetNodeNo].IsWordForm("МЕНЬШЕ")  
+			if  (m_SynRelations.back().m_SynRelName == _R("НАР_ЧИСЛ_СУЩ"))
+				if (   m_Nodes[m_SynRelations.back().m_TargetNodeNo].IsWordForm(_R("БОЛЬШЕ"))
+					|| m_Nodes[m_SynRelations.back().m_TargetNodeNo].IsWordForm(_R("МЕНЬШЕ"))  
 					)
 					m_Nodes[m_SynRelations.back().m_SourceNodeNo].AddOneGrammem (rGenitiv);
 			//случай ЧИСЛ_СУЩ
-			if( m_SynRelations.back().m_SynRelName.find("ЧИСЛ_СУЩ")!=std::string::npos
+			if( m_SynRelations.back().m_SynRelName.find(_R("ЧИСЛ_СУЩ"))!=std::string::npos
 				|| piRel.m_Relation.type == 25) //NOUN_NUMERAL_APPROX
 			{
 				const CRusGramTab *R = (CRusGramTab*)piRel.GetOpt()->GetGramTab();
-				if( piRel.m_Relation.m_GramCodes != "" && m_SynRelations.back().m_SynRelName!="НАР_ЧИСЛ_СУЩ")
+				if( piRel.m_Relation.m_GramCodes != "" && m_SynRelations.back().m_SynRelName!=_R("НАР_ЧИСЛ_СУЩ"))
 					m_Nodes[TargetNodeNo].m_GramCodes = piRel.m_Relation.m_GramCodes; //ЧИСЛ
 				QWORD RelGr = piRel.m_Relation.m_iGrammems;
 				if( !(RelGr& rAllGenders) ) 
 					RelGr |= m_Nodes[SourceNodeNo].GetGrammems() & rAllGenders;
-				m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0, "ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел",
+				m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0, _R("ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел"),
 					R->GetGramCodes(NOUN, RelGr, CaseNumberGender0));
 				m_Nodes[SourceNodeNo].SetGrammems(RelGr);
 				m_Nodes[TargetNodeNo].SetGrammems(RelGr); //m_Nodes[TargetNodeNo].GetGrammems() & ~(rAllCases|rAllGenders|rAllPersons|rAllAnimative) | 
@@ -1800,7 +1800,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 							&& (m_Nodes[i-1].GetMinWordNo()+1 == m_Nodes[i].GetMinWordNo())
 							)
 						{
-							m_SynRelations.push_back(CSynRelation(i, i+1, "ОДНОР"));
+							m_SynRelations.push_back(CSynRelation(i, i+1, _R("ОДНОР")));
 							continue;
 						};
 
@@ -1852,24 +1852,24 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 	*/
 	for (size_t i=0; i < m_Nodes.size(); i++)
 		if (   (m_Nodes[i].IsPrimitive())
-			&& (m_Nodes[i].m_Words[0].m_Lemma == "СЕБЯ")
+			&& (m_Nodes[i].m_Words[0].m_Lemma == _R("СЕБЯ"))
 			)
 
 			m_Nodes[i].AddGrammems (rAllNumbers);
 
 	for (size_t i=0; i < m_Nodes.size(); i++)
-		m_Nodes[i].m_bCompAdj =    IsCompAdj(i)  || HasSynRelation (i, "АНАТ_СРАВН");
+		m_Nodes[i].m_bCompAdj =    IsCompAdj(i)  || HasSynRelation (i, _R("АНАТ_СРАВН"));
 
 	/*
 	перевешиваем графету КАК_МОЖНО во фразе 
 	"как можно более простым языком" со слова "более" на "простой",
 	*/
 	for (size_t i=0; i < m_SynRelations.size(); i++)
-		if (m_SynRelations[i].m_SynRelName == "АНАТ_СРАВН")
-			if ( m_Nodes[m_SynRelations[i].m_TargetNodeNo].HasRelOperator("КАК_МОЖНО") && CanBeDeleted(m_SynRelations[i].m_TargetNodeNo) )
+		if (m_SynRelations[i].m_SynRelName == _R("АНАТ_СРАВН"))
+			if ( m_Nodes[m_SynRelations[i].m_TargetNodeNo].HasRelOperator(_R("КАК_МОЖНО")) && CanBeDeleted(m_SynRelations[i].m_TargetNodeNo) )
 			{
-				m_Nodes[m_SynRelations[i].m_TargetNodeNo].DelRelOperator("КАК_МОЖНО");
-				m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_RelOperators.push_back("КАК_МОЖНО");
+				m_Nodes[m_SynRelations[i].m_TargetNodeNo].DelRelOperator(_R("КАК_МОЖНО"));
+				m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_RelOperators.push_back(_R("КАК_МОЖНО"));
 				DelNode(m_SynRelations[i].m_TargetNodeNo);
 			};
 

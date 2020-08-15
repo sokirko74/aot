@@ -774,17 +774,17 @@ void MoveDopRelationsBack(T& SemStr)
 extern bool IsLocSemRel (const std::string& S);
 extern void SetSpacesAndRegisterInSentence (std::string& str, MorphLanguageEnum Langua);
 
-const  std::string SIMILAR_NUMERALS = "ОДНОР_ЧИСЛ";
-const  std::string NUMERALS = "КОЛИЧ";
-const  std::string C_NUMERALS = "СЛОЖ_ЧИСЛ";
-const  std::string KEYB = "КЛВ";
-const  std::string WEB_ADDR = "ЭЛ_АДРЕС";
-const  std::string NAMES = "ФИО";
-const  std::string NUMERAL_NOUN = "ЧИСЛ_СУЩ";
-const  std::string NOUN_ADJ = "ПРИЛ_СУЩ";
-const  std::string NOUN_NUMERAL = "СУЩ_ЧИСЛ";
-const  std::string NUMERAL_ADVERB = "НАР_ЧИСЛ_СУЩ";
-const  std::string SELECTIVE_GR = "ЭЛЕКТ_ИГ";
+const  std::string SIMILAR_NUMERALS = _R("ОДНОР_ЧИСЛ");
+const  std::string NUMERALS = _R("КОЛИЧ");
+const  std::string C_NUMERALS = _R("СЛОЖ_ЧИСЛ");
+const  std::string KEYB = _R("КЛВ");
+const  std::string WEB_ADDR = _R("ЭЛ_АДРЕС");
+const  std::string NAMES = _R("ФИО");
+const  std::string NUMERAL_NOUN = _R("ЧИСЛ_СУЩ");
+const  std::string NOUN_ADJ = _R("ПРИЛ_СУЩ");
+const  std::string NOUN_NUMERAL = _R("СУЩ_ЧИСЛ");
+const  std::string NUMERAL_ADVERB = _R("НАР_ЧИСЛ_СУЩ");
+const  std::string SELECTIVE_GR = _R("ЭЛЕКТ_ИГ");
 const size_t MaxValsCount = 15;
 
 

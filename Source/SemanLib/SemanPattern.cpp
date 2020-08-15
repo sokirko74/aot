@@ -1343,7 +1343,7 @@ void CRusSemStructure::TryPatternOnNodes(size_t NodeNo, size_t ClauseNo, CSemPat
 				R.m_CannotHaveOnlyCommaBetween = true;
 
 				// случай уточнения прилагательным
-				if (SyntacticRelation == "уточн")
+				if (SyntacticRelation == _R("уточн"))
 					if (HasRichPOS (i, ADJ_FULL))
 						R.m_CannotHaveOnlyCommaBetween = false;
 

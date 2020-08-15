@@ -38,7 +38,7 @@ bool CRusSemStructure :: IsLocNode(size_t NodeNo) const
 ;
   if (     Result
 	    && (N.GetType() == LocRoss) 
-	    && GetRossHolder(LocRoss)->HasCX(N.GetUnitNo(),  "ЧАСТЬ_ТЕЛА", "D_SF")
+	    && GetRossHolder(LocRoss)->HasCX(N.GetUnitNo(),  _R("ЧАСТЬ_ТЕЛА"), "D_SF")
 		&& !N.HasSomePrep()
      )
   return false; 
@@ -117,7 +117,7 @@ std::string    GetPO (const CDictionary* Ross, WORD UnitNo, long POFieldNo)
 		 )
 			return (const char*)Ross->GetDomItemStr(GetCortege(Ross,i).m_DomItemNos[0]);
 
-   return std::string("общ");
+   return std::string(_R("общ"));
 };
 
 struct  CLocHostHypot {
@@ -239,7 +239,7 @@ long  CRusSemStructure :: GetLocInterp(std::string UnitStr, bool& NegativeForm) 
   NegativeForm = false;
   WORD UnitNo = GetRossHolder(LocRoss)->LocateUnit(UnitStr.c_str(), 1);
   if (UnitNo == ErrUnitNo)
-	 if (UnitStr.substr(0,2) == "не")
+	 if (UnitStr.substr(0,2) == _R("не"))
 		 {
 			 UnitNo = GetRossHolder(LocRoss)->LocateUnit(UnitStr.substr(0, UnitStr.length() - 2).c_str(), 1);
 			 if (UnitNo != ErrUnitNo)
@@ -247,7 +247,7 @@ long  CRusSemStructure :: GetLocInterp(std::string UnitStr, bool& NegativeForm) 
 		 };
   std::string PO = GetPO(GetRoss(LocRoss), UnitNo, GetRossHolder(LocRoss)->POFieldNo);
   if (UnitNo != ErrUnitNo)
-	   if (   (PO == "общ") 
+	   if (   (PO == _R("общ")) 
 		   || (m_PO == PO) 
 		  ) 
 		 return UnitNo;

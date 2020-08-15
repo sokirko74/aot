@@ -83,7 +83,7 @@ long  CRusSemStructure::AddThesSemRelations(const CRossHolder* Dict, long UnitNo
 			 || (Rel.m_TargetNodeNo >= EndClauseNo)
 			)
 		 {
-			 ErrorMessage (" Ошибка в интерпретации поля AUX");
+			 ErrorMessage (_R(" Ошибка в интерпретации поля AUX"));
 			 m_ThesSemRelations.erase(m_ThesSemRelations.begin() +SaveDopRelationsCount, m_ThesSemRelations.end());
 			 return -1;
 		 };
@@ -99,7 +99,7 @@ bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CRoss
 	if (MainNodeNo == -1)
 		return false;
 	const CThesaurus* Thes = m_pData->GetThes(m_Nodes[StartNodeNo].m_ThesaurusId);
-	std::string ErrorMess = "Ошибка в поле AUX термина ";  
+	std::string ErrorMess = _R("Ошибка в поле AUX термина ");  
 	ErrorMess += Thes->m_Termins[Thes->GetTerminNoByTextEntryId(m_Nodes[StartNodeNo].m_TerminId)].m_TerminStr;
 
 	for (size_t k=SaveDopRelationsCount; k < m_ThesSemRelations.size(); k++)
@@ -134,7 +134,7 @@ WORD CRusSemStructure::GetArticleByModel (long TerminId, int ThesaurusId) const
 	long ModelNo = Termin.m_ModelNo;
 	const CInnerModel& Model =	Thes->m_Models[ModelNo];
 	long ModelId = Model.m_ModelId;
-	std::string S = Format("@Модель%i",ModelId);
+	std::string S = Format(_R("@Модель%i"),ModelId);
 	return  GetRoss(GetRossIdByThesId(ThesaurusId))->LocateUnit(S.c_str(), 1);
 };
 
@@ -325,7 +325,7 @@ void CRusSemStructure::GetThesInterps(std::string UnitStr, const CRusSemWord& W,
 	}
 	catch (...)
 	{
-		ErrorMessage ("Ошибка тезаурусной интерпретации");
+		ErrorMessage (_R("Ошибка тезаурусной интерпретации"));
 		throw;
 	};
 };

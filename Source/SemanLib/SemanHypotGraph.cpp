@@ -361,20 +361,20 @@ void CRusSemStructure::InitPOs(long ClauseNo)
 								TCortege C = GetCortege(pRoss, i);
 								if (C.m_DomItemNos[0] == -1) continue;
 								std::string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
-								if (S != "общ")
+								if (S != _R("общ"))
 									m_Nodes[NodeNo].m_POs.push_back(S);
 							};
 
 			};
 
 			if (IsThesCorpora(m_Nodes[NodeNo], LocRoss))
-				m_Nodes[NodeNo].m_POs.push_back("геогр");
+				m_Nodes[NodeNo].m_POs.push_back(_R("геогр"));
 
 			if (IsThesCorpora(m_Nodes[NodeNo], FinRoss))
-				m_Nodes[NodeNo].m_POs.push_back("фин");
+				m_Nodes[NodeNo].m_POs.push_back(_R("фин"));
 
 			if (IsThesCorpora(m_Nodes[NodeNo], CompRoss))
-				m_Nodes[NodeNo].m_POs.push_back("информ");
+				m_Nodes[NodeNo].m_POs.push_back(_R("информ"));
 
 
 
@@ -486,7 +486,7 @@ void CRusSemStructure::CalculateBestCorporaLabel(size_t ClauseNo)
 	  если  пользователь выбрал  предметную область (=/= "общ"), тогда это приравниваем
 	  тому  случаю, когда одно слово с этой предметной областью вошли в предложение
 	*/
-	if (m_PO != "общ")
+	if (m_PO != _R("общ"))
 		POs.push_back(pair<std::string, int>(m_PO, 1));
 
 	for (size_t NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
@@ -509,7 +509,7 @@ void CRusSemStructure::CalculateBestCorporaLabel(size_t ClauseNo)
 			m_Clauses[ClauseNo].m_BestPONodesCount = POs[i].second;
 			m_Clauses[ClauseNo].m_BestPO = POs[i].first;
 		};
-	if (m_Clauses[ClauseNo].m_BestPO == "общ")
+	if (m_Clauses[ClauseNo].m_BestPO == _R("общ"))
 	{
 		m_Clauses[ClauseNo].m_BestPO = "";
 		m_Clauses[ClauseNo].m_BestPONodesCount = 0;
@@ -531,7 +531,7 @@ void CRusSemStructure::ProcessEveryIdents(long ClauseNo)
 	 */
 
 	for (long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo + 1; NodeNo < m_Clauses[ClauseNo].m_EndNodeNo - 1; NodeNo++)
-		if (HasOutcomingSynRelation(NodeNo, "СУЩ_ЧИСЛ", NodeNo - 1)
+		if (HasOutcomingSynRelation(NodeNo, _R("СУЩ_ЧИСЛ"), NodeNo - 1)
 			&& HasRichPOS(NodeNo - 1, NOUN)
 			)
 		{
@@ -547,19 +547,19 @@ void CRusSemStructure::BuildIZCHORelation(long ClauseNo)
 	for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
 		if (IsInClause(NodeNo, ClauseNo))
 			if (m_Nodes[NodeNo].IsPrimitive())
-				if (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЕЩЕ")
+				if (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ЕЩЕ"))
 				{
 					long q = FindRightClosestNode(NodeNo);
 					if (q == -1) continue;
 					if (m_Nodes[q].m_Words.size() == 0) continue;
-					if ((m_Nodes[q].m_Words[0].m_Lemma == "ОДИН")
-						|| (m_Nodes[q].m_Words[0].m_Lemma == "ЧТО-НИБУДЬ")
-						|| (m_Nodes[q].m_Words[0].m_Lemma == "КТО-НИБУДЬ")
+					if ((m_Nodes[q].m_Words[0].m_Lemma == _R("ОДИН"))
+						|| (m_Nodes[q].m_Words[0].m_Lemma == _R("ЧТО-НИБУДЬ"))
+						|| (m_Nodes[q].m_Words[0].m_Lemma == _R("КТО-НИБУДЬ"))
 						|| ((m_Nodes[q].m_Words[0].HasPOS(ADJ_FULL))
 							&& m_Nodes[q].m_Words[0].HasOneGrammem(rComparative)
 							)
 						|| (m_Nodes[q].m_Words[0].HasPOS(ADV)
-							&& (m_Nodes[q].m_Words[0].m_Lemma.substr(m_Nodes[q].m_Words[0].m_Lemma.length() - 2) == "ШЕ")
+							&& (m_Nodes[q].m_Words[0].m_Lemma.substr(m_Nodes[q].m_Words[0].m_Lemma.length() - 2) == _R("ШЕ"))
 							)
 						|| m_Nodes[q].IsMainTimeRossNode()
 						)
@@ -789,8 +789,8 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 {
 	size_t NodeNo;
 
-	StartTimer("Панический граф", 0);
-	StartTimer("До построения всех отношений", 1);
+	StartTimer(_R("Панический граф"), 0);
+	StartTimer(_R("До построения всех отношений"), 1);
 
 	try {
 		//for (size_t i=0; i<  m_Nodes.size(); 
@@ -902,8 +902,8 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 		}
 
 
-		EndTimer("До построения всех отношений");
-		StartTimer("Построение всех отношений", 1);
+		EndTimer(_R("До построения всех отношений"));
+		StartTimer(_R("Построение всех отношений"), 1);
 
 		RestoreMemoryRelations(ClauseNo);
 
@@ -946,7 +946,7 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 
 		CopyToMemory(ClauseNo);
 
-		EndTimer("Построение всех отношений");
+		EndTimer(_R("Построение всех отношений"));
 
 		try
 		{
@@ -1024,7 +1024,7 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 		throw;
 	};
 
-	EndTimer("Панический граф");
+	EndTimer(_R("Панический граф"));
 	return true;
 
 };

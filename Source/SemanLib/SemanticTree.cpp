@@ -541,7 +541,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 {
 	if (m_Relations.size() >  250) 
 	{
-		ErrorMessage ("PanicRelationsCount для одной клаузы больше 250. Это очень сложный граф.");
+		ErrorMessage (_R("PanicRelationsCount для одной клаузы больше 250. Это очень сложный граф."));
 		VarAndVals.resize(1);
 		VarAndVals[0].second.Panic = true;
 		throw;
@@ -551,7 +551,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 	vector<CTreeVariant> Parents;
 	long HypotVariantCount = 1;
-	StartTimer("Граф Шалимова",1);
+	StartTimer(_R("Граф Шалимова"),1);
 
 	for (size_t i = 0;  i < m_Nodes.size(); i++)
 		if (HasTag(i, Tag))
@@ -597,7 +597,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 	CTreeVariant V; // текущий вариант 
 	GetTreeVariants(Parents, V, Variants, 0);
 	size_t VariantCount = Variants.size();
-	EndTimer("Граф Шалимова");
+	EndTimer(_R("Граф Шалимова"));
 
 	if (Variants.size() > m_PanicTreeVariantCount*100) 
 	{
@@ -606,7 +606,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		return;
 	};
 
-	StartTimer("Расцикливание",1);
+	StartTimer(_R("Расцикливание"),1);
 
 	long CycledMinComponentNum = Parents.size();
 
@@ -622,8 +622,8 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 		};
 	};
-	EndTimer("Расцикливание");
-	StartTimer("Удаление повторов для неуник. отношений",1);
+	EndTimer(_R("Расцикливание"));
+	StartTimer(_R("Удаление повторов для неуник. отношений"),1);
 
 	long MinComponentNum = Parents.size();
 
@@ -647,9 +647,9 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 
 	};
-	EndTimer("Удаление повторов для неуник. отношений");
+	EndTimer(_R("Удаление повторов для неуник. отношений"));
 
-	StartTimer("Удаление малосвязных вариантов",1);
+	StartTimer(_R("Удаление малосвязных вариантов"),1);
 	// уничтожаем все варианты, у которых число компонент связности меньше минимального значения 
 	// для всех вариантов
 
@@ -680,8 +680,8 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		return;
 	};
 
-	EndTimer("Удаление малосвязных вариантов");
-	StartTimer("Оценка деревьев",1);
+	EndTimer(_R("Удаление малосвязных вариантов"));
+	StartTimer(_R("Оценка деревьев"),1);
 
 
 	long l=0;
@@ -695,7 +695,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 			l++;
 		};
 
-	EndTimer("Оценка деревьев");
+	EndTimer(_R("Оценка деревьев"));
 
 };
 
@@ -742,7 +742,7 @@ long CRusSemStructure::GetTreeByConnectedComponents (size_t ClauseNo,  TreeVaria
 
 TryWithoutLongRelationsLabel:
 
-	StartTimer("Общее время построения дерева",0);
+	StartTimer(_R("Общее время построения дерева"),0);
 
 	// узел, содежащий союз, который стоит в начале клаузы, удаленные на время построения дерева
 	CRusSemNode  FirstConjNode;
@@ -769,7 +769,7 @@ TryWithoutLongRelationsLabel:
 		ResultValue.Panic = true;
 		if (FirstConjNode.m_Words.size() > 0)
 			InsertNode (FirstConjNode);
-		EndTimer("Общее время построения дерева");
+		EndTimer(_R("Общее время построения дерева"));
 		return 0;
 	};
 
@@ -788,7 +788,7 @@ TryWithoutLongRelationsLabel:
 		if (VarAndVals[i][0].second.Panic)
 		{
 			ResultValue.Panic = true;
-			EndTimer("Общее время построения дерева");
+			EndTimer(_R("Общее время построения дерева"));
 			if (FirstConjNode.m_Words.size() > 0)
 				InsertNode (FirstConjNode);
 			if (TryWithoutLongRelations)
@@ -819,7 +819,7 @@ TryWithoutLongRelationsLabel:
 			m_Relations.clear();
 			ApplySynStr (ClauseNo);
 
-			EndTimer("Общее время построения дерева");
+			EndTimer(_R("Общее время построения дерева"));
 			return VarAndVals[i].size();
 		};
 		// может быть ни одно 
@@ -885,7 +885,7 @@ TryWithoutLongRelationsLabel:
 
 
 
-	EndTimer("Общее время построения дерева");
+	EndTimer(_R("Общее время построения дерева"));
 
 	return WeightAndPositions.size();
 };
@@ -958,23 +958,23 @@ void CRusSemStructure::ValueTreeVariant (TreeVariantValue& Value, long Tag)
   Value.ValencyDisorder = GetValencyDisorderCount(Tag);
 
   //  оценка отношений 
-  StartTimer("Проверка по SF",2);
+  StartTimer(_R("Проверка по SF"),2);
   Value.SemFetDisagree = RelsCount ? GetSemFetDisagreeCount(Tag)*1000 / RelsCount : 0;
-  EndTimer("Проверка по SF");
+  EndTimer(_R("Проверка по SF"));
   // должно идти после GetSemFetDisagreeCount
   // другие оценки
-  StartTimer("Оценка деревьев_1",2);
+  StartTimer(_R("Оценка деревьев_1"),2);
   Value.OptionalValencyCount = GetOptionalValenciesCount(Tag);
   Value.LexFetAgreeCount = RelsCount ? GetLexFetAgreeCount(Tag)*1000  / RelsCount : 0;
   Value.RelationsLength = SemanticVolume ? GetRelationsLength(Tag)*1000  / SemanticVolume : 0;
   Value.InstrAgentRelsCount =  SemanticVolume ? GetInstrAgentRelsCount(Tag)*1000  / SemanticVolume: 0;
-  EndTimer("Оценка деревьев_1");
+  EndTimer(_R("Оценка деревьев_1"));
   // другие оценки
-  StartTimer("Проверка проективности",2);
+  StartTimer(_R("Проверка проективности"),2);
   Value.ProjectnessCoef = IsProjectedNew(Tag) ? 0 : 1;
-  EndTimer("Проверка проективности");
+  EndTimer(_R("Проверка проективности"));
 
-  StartTimer("Оценка деревьев_2",2);
+  StartTimer(_R("Оценка деревьев_2"),2);
   Value.AgreeWithSyntaxTopCoef = AgreeWithSyntaxTop(Tag) ? 1 : 0;
   Value.TopAgreeWithSyntaxCriteria = TopAgreeWithSyntaxCriteria(Tag) ? 1 : 0;
   Value.MNAViolationsCount = GetMNAViolationsCount(Tag);
@@ -990,7 +990,7 @@ void CRusSemStructure::ValueTreeVariant (TreeVariantValue& Value, long Tag)
   Value.PrichastieWithoutActantsCount = GetPrichastieWithoutActants(Tag);
 
   Value.PassiveValencyCount = GetPassiveValencyCount(Tag);
-  EndTimer("Оценка деревьев_2");
+  EndTimer(_R("Оценка деревьев_2"));
   
 };
 
@@ -1193,7 +1193,7 @@ void CRusSemStructure::BuildAnaphoricRels()
 				if (Hypots[0].m_NodeNo != -1)
 				{
 					// построение отношения
-					CRusSemRelation R(CValency("THESAME", A_C, GetRossHolder(Ross)),  NodeNo,  Hypots[0].m_NodeNo,  "анафора");
+					CRusSemRelation R(CValency("THESAME", A_C, GetRossHolder(Ross)),  NodeNo,  Hypots[0].m_NodeNo,  _R("анафора"));
 					m_DopRelations.push_back(R);
 
 
@@ -1297,7 +1297,7 @@ long CRusSemStructure::GetColloquialInterpsCount(long Tag) const
 
   for (size_t i = 0;  i < m_Nodes.size(); i++)
    if (HasTag(i, Tag))
-	  if (find (m_Nodes[i].m_POs.begin(), m_Nodes[i].m_POs.end(), "разг") != m_Nodes[i].m_POs.end())
+	  if (find (m_Nodes[i].m_POs.begin(), m_Nodes[i].m_POs.end(), _R("разг")) != m_Nodes[i].m_POs.end())
 	    Result++;
 
   return Result; 

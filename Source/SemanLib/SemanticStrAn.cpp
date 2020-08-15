@@ -598,13 +598,13 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 	m_bHasConjBut = false;
    //::MessageBox(0, "111", "111", MB_OK);
 
-  	StartTimer("Интерпретация синтаксиса",0);
+  	StartTimer(_R("Интерпретация синтаксиса"),0);
 	try {
       BuildSemNodesBySyntax();
 	}
 	catch (...)
 	{
-		ErrorMessage("Ошибка в интерпретации синтаксиса");
+		ErrorMessage(_R("Ошибка в интерпретации синтаксиса"));
 	    throw;
 	};
 
@@ -615,7 +615,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 		PrintLemNodes();
 		AssertValidGraph();
 	#endif
-	EndTimer("Интерпретация синтаксиса");
+	EndTimer(_R("Интерпретация синтаксиса"));
 
 	rml_TRACE ("=================================================\n");
 	rml_TRACE ("===  FindSituationsForClauseVariantCombination %i===\n",  m_ClauseVariantsCombinationNo);
@@ -725,11 +725,11 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 				V.CopyLexVar(*this);
 
 			   
-				rml_TRACE ("Клауза %i\n", ClauseNo);
-				rml_TRACE ("Лексический вариант(ClauseNo = %i) =  %i, Набор сл-ний = %i(из %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
-				rml_TRACE ("Вес лучшего варианта дерева %i\n", V.GetBestTreeWeight());
+				rml_TRACE (_R("Клауза %i\n"), ClauseNo);
+				rml_TRACE (_R("Лексический вариант(ClauseNo = %i) =  %i, Набор сл-ний = %i(из %i)\n"), ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
+				rml_TRACE (_R("Вес лучшего варианта дерева %i\n"), V.GetBestTreeWeight());
 				ClauseVar.m_BestLexVariants.push_back(V);
-				rml_TRACE ("Связноть  клаузы %i\n", IsConnectedClause(ClauseNo));
+				rml_TRACE (_R("Связноть  клаузы %i\n"), IsConnectedClause(ClauseNo));
 				CopyLexVar(InitialLexVariant);
 				LexVariantInCurrSetCollocNo++;
 				/*
@@ -811,7 +811,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 
 	rml_TRACE  ("=================================================\n");
-	rml_TRACE  ("===  Запись лучшего варианта  %i ===\n", m_ClauseVariantsCombinationNo);
+	rml_TRACE  (_R("===  Запись лучшего варианта  %i ===\n"), m_ClauseVariantsCombinationNo);
 
 	if (BestCombNo != -1)
 	{
@@ -926,7 +926,7 @@ struct CClauseComplexity
 	};
 	std::string GetStr()
 	{
-	   return Format ("Клауза=%i, Сложность=%.2f",
+	   return Format (_R("Клауза=%i, Сложность=%.2f"),
 		   m_ClauseNo, m_Complexity );
 	};
 };
@@ -1060,7 +1060,7 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 	};
 
-	rml_TRACE ("Номер набора синтаксических вариантов клаузы %i (из %i)\n", m_ClauseVariantsCombinationNo+1, Variants.size());
+	rml_TRACE (_R("Номер набора синтаксических вариантов клаузы %i (из %i)\n"), m_ClauseVariantsCombinationNo+1, Variants.size());
 	m_ClauseCombinationVariantsCount = Variants.size();
 	m_Nodes.clear();
 	return true;
@@ -1075,7 +1075,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 	try {
 		m_AllClausesVariants = 0;
 		ClearTimers();
-		StartTimer("Общее время работы",0);
+		StartTimer(_R("Общее время работы"),0);
 
 		if (!ReadAuxiliaryArticles())
 		{
@@ -1088,7 +1088,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_MemRelations.clear();
 		m_MemNodes.clear();
 
-		StartTimer("Интерпретация синтаксиса",0);
+		StartTimer(_R("Интерпретация синтаксиса"),0);
 
 		m_AlreadyBuiltClauseVariants.clear();
 
@@ -1111,7 +1111,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_InterfaceClauseNo = 0;
 
 
-		EndTimer("Интерпретация синтаксиса");
+		EndTimer(_R("Интерпретация синтаксиса"));
 		long BestClauseVariantsCombinationNo = 0;
 		long BestClauseVariantsCombinationWeight = 100000;
 
@@ -1136,7 +1136,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 
 				rml_TRACE ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
-				rml_TRACE ("Общий вес варианта %i = %i \n", m_ClauseVariantsCombinationNo, Weight);
+				rml_TRACE (_R("Общий вес варианта %i = %i \n"), m_ClauseVariantsCombinationNo, Weight);
 				rml_TRACE ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
 
 				if (Weight  < BestClauseVariantsCombinationWeight)
@@ -1188,10 +1188,10 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 		ConvertParticipleTreeToClause();
 
-		std::string S = Format("Число слов в предложении %i\n Число запросов к словарю: %i\n Лучший вариант клауз : %i (из %i)\n",
+		std::string S = Format(_R("Число слов в предложении %i\n Число запросов к словарю: %i\n Лучший вариант клауз : %i (из %i)\n"),
 			m_piSent->m_Words.size(), Queries.size(), BestClauseVariantsCombinationNo+1, m_ClauseCombinationVariantsCount);
 
-		EndTimer("Общее время работы");
+		EndTimer(_R("Общее время работы"));
 
 
 
@@ -1199,14 +1199,14 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 		m_TimeStatictics += GetClauseComplexitiesStr()+std::string("\n");
 
-		S = Format("==========\n Вес предложения: %i\n", BestClauseVariantsCombinationWeight);
+		S = Format(_R("==========\n Вес предложения: %i\n"), BestClauseVariantsCombinationWeight);
 		m_ClausePropertiesProtocol +=  S;
-		S = Format("Число запр. лекс. вар. : %i\n", m_UserProhibitedLexVars.size());
+		S = Format(_R("Число запр. лекс. вар. : %i\n"), m_UserProhibitedLexVars.size());
 		m_ClausePropertiesProtocol +=  S;
-		S = Format("Скорость (слово/секунда) =  %10.0f\n", WordsPerSecond);
+		S = Format(_R("Скорость (слово/секунда) =  %10.0f\n"), WordsPerSecond);
 		if (bTooSlow)
 		{
-			S += "Выход по скорости !!!!\n";
+			S += _R("Выход по скорости !!!!\n");
 		};
 
 		m_ClausePropertiesProtocol +=  S;
@@ -1245,7 +1245,7 @@ bool CRusSemStructure::GetSyntaxTreeByText(std::string text, int ClauseVarNo, st
 		   m_ClauseVariantsCombinationNo = 0;
 		GetClauseVariantCombination();
 		BuildSemNodesBySyntax();
-		m_TimeStatictics = Format("Число слов в предложении %i\n Кол-во морф. вариантов : %i\n",m_piSent->m_Words.size(),  m_ClauseCombinationVariantsCount);
+		m_TimeStatictics = Format(_R("Число слов в предложении %i\n Кол-во морф. вариантов : %i\n"),m_piSent->m_Words.size(),  m_ClauseCombinationVariantsCount);
 
 		Graph =  GetTclSyntaxGraph ();
 

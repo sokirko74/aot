@@ -180,7 +180,7 @@ void CSemanticsHolder::GetCustomGrammems (std::string GramFet, QWORD& Grammems, 
 	}
 	else
 	{
-		GramFet = "С "+ GramFet;
+		GramFet = _R("С ")+ GramFet;
 		if (GetRusGramTab()->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G) )
 		{
 			Grammems = G;
@@ -353,7 +353,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		     WORD PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
              if (PrepNo == ErrUnitNo) 
 			 {
-				 std::string Q =Format ("Предлог %s в статье %s не найден в словаре оборотов", Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
+				 std::string Q =Format (_R("Предлог %s в статье %s не найден в словаре оборотов"), Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
 				 ErrorMessage (Q);
 				 continue;
 			 };

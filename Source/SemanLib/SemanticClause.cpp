@@ -663,7 +663,7 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 		находим тогда удаляем ее, например
 		"я думал о том, почему ты мне надоел"
 		*/
-		WORD O_UnitNo = GetRoss(OborRoss)->LocateUnit("о+П",1);
+		WORD O_UnitNo = GetRoss(OborRoss)->LocateUnit(_R("о+П"),1);
 		vector<long> Nodes;
 		GetOutcomingNodes(NodeNo,Nodes, false);
 		for (long j=0; j < Nodes.size(); j++)
@@ -743,9 +743,9 @@ bool CRusSemStructure::TryClauseCHTOBY_GG (long ClauseRuleNo, long ClauseNo1, lo
 	  long RootNodeNo2 = Nodes2[Nodes2.size()-1];
 
 	  EngRusMakeLower(ConjStr);
-	  std::string SynFet1 = std::string(ConjStr)+std::string("+ГГ");
-	  std::string SynFet2 = std::string(ConjStr)+std::string("+инф");
-	  std::string SynFet3 = std::string(ConjStr)+std::string("+ГГ_прш");
+	  std::string SynFet1 = std::string(ConjStr)+std::string(_R("+ГГ"));
+	  std::string SynFet2 = std::string(ConjStr)+std::string(_R("+инф"));
+	  std::string SynFet3 = std::string(ConjStr)+std::string(_R("+ГГ_прш"));
       long MinDistance = 1000;
       long NodeNo  = -1;
 	  CValency V;
@@ -1019,7 +1019,7 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
 				 &&  m_Nodes[AnaphoricNodeNo].IsPrimitive()
 				 &&  (m_Nodes[AnaphoricNodeNo].m_Words[0].m_Lemma == _R("ЧТО"))
 			)
-	     if (        GetFreeActantPattern(NodeNo, P,SynReal, "",false, "что+ГГ", true)
+	     if (        GetFreeActantPattern(NodeNo, P,SynReal, "",false, _R("что+ГГ"), true)
 			     &&  (Nodes2.size() == 2)
 			     && !HasRichPOS(Nodes2[1], INFINITIVE) // "я знаю, что делать", инфинитив не может подчиняться союзу _R("что")
 			) 
@@ -1235,7 +1235,7 @@ bool CRusSemStructure::TryClauseZeroSubordWithoutAntecedent (long ClauseRuleNo, 
 	// проверяем наличие незаполненной валентности  на 0+ГГ
 	CSemPattern P;
 	CSynRealization SynReal;
-	if (!GetFreeActantPattern(NodeNo1, P, SynReal, "",false, "0+ГГ", true) ) return false;
+	if (!GetFreeActantPattern(NodeNo1, P, SynReal, "",false, _R("0+ГГ"), true) ) return false;
 	P.m_PatternValency.m_RossHolder = GetRossHolder(Ross);
 
 	vector<long> Nodes2;
@@ -2159,7 +2159,7 @@ void CRusSemStructure:: CorrectClauseRelations1()
 		  && (m_ClauseRules[m_Relations[i].m_ClauseRuleNo].m_Name == _R("сочинение"))
 		)
 	  if(    (m_Relations[k].m_ClauseRuleNo != -1)
-		  && (m_ClauseRules[m_Relations[k].m_ClauseRuleNo].m_Name == "подчинение (справа налево)")
+		  && (m_ClauseRules[m_Relations[k].m_ClauseRuleNo].m_Name == _R("подчинение (справа налево)"))
 		)
 	  {
 		  m_Nodes[m_Relations[i].m_TargetNodeNo].m_IncomRelsCount--;
@@ -2174,7 +2174,7 @@ void CRusSemStructure:: CorrectClauseRelations1()
 void CRusSemStructure:: ApplyClauseRules(long GapSize)
 {
 	try {
-		StartTimer("Межклаузные связи",0);
+		StartTimer(_R("Межклаузные связи"),0);
 
 
 
@@ -2281,7 +2281,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 
 		CorrectClauseRelations1();  
 
-		EndTimer("Межклаузные связи");
+		EndTimer(_R("Межклаузные связи"));
 	}
 	catch (...)
 	{
@@ -2327,65 +2327,65 @@ CRusSemStructure::CRusSemStructure()
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseNSO, LeftToRight, _R("НСО")));
 
 	// он ушел, наверно
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseParenthesis, RightToLeft, "вводное(справо налево)"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseParenthesis, RightToLeft, _R("вводное(справо налево)")));
 
 	// я плыл, улыбаясь.
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseDeeprichastie, LeftToRight, _R("деепричастие")));
 
 	// я люблю тебя, сделавшего меня
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClausePrichastie, LeftToRight, "причастный оборот"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClausePrichastie, LeftToRight, _R("причастный оборот")));
 
 	// улыбаясь, я плыл
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseDeeprichastie, RightToLeft, _R("деепричастие")));
 
 	// он знал, что будет улыбаться
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTO_WITH_ANIMAT, LeftToRight, "что+SUB(ANIM)"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTO_WITH_ANIMAT, LeftToRight, _R("что+SUB(ANIM)")));
 	// я помню о том, что ты сказал это сделал(_R("что") - союз), но есть соотносительное слово
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTO_TOT_Dop, LeftToRight,"подчинение (что+ГГ)"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTO_TOT_Dop, LeftToRight,_R("подчинение (что+ГГ)")));
 
 	// я хотел,  чтобы ты ушел
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTOBY_GG , LeftToRight, "чтобы(что)+ГГ"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCHTOBY_GG , LeftToRight, _R("чтобы(что)+ГГ")));
 
 	// я знаю, когда ты придешь
 	// я знаю то, что ты скажешь
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseConjWord, LeftToRight, "подчинение с союзн. словом"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseConjWord, LeftToRight, _R("подчинение с союзн. словом")));
 
 
 
 	// я знаю, что ты знаешь (_R("что") - член предложения)
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent, LeftToRight,"подчинение (что+ГГ)"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent, LeftToRight,_R("подчинение (что+ГГ)")));
 
 
 	// я сделал это, потому что ты сделал это.
 	//  я мыл посуду, когда ты пришел
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSubordConj, LeftToRight, "подчинение с союзом"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSubordConj, LeftToRight, _R("подчинение с союзом")));
 
 
 	// если ты сделаешь это, то я умру.
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSubordDoubleConj, LeftToRight, "подчинение(дв.союз)"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSubordDoubleConj, LeftToRight, _R("подчинение(дв.союз)")));
 
 
 	// мы думали, а вы  плясали
 	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseCoordSimpleConj, LeftToRight,_R("сочинение")));
 
 	// Вчера рухнул дом, который построил Джек, .
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseKOTORYJ, LeftToRight,"определение (который)" ));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseKOTORYJ, LeftToRight,_R("определение (который)") ));
 	// когда ты пришел, я мыл посуду 
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseConjWord, RightToLeft, "подчинение (союзн.слово, справа налево)"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseConjWord, RightToLeft, _R("подчинение (союзн.слово, справа налево)")));
 
 	// что ты знаешь, я знаю,  ("что" - член предложения)
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent, RightToLeft, "подчинение (что+ГГ, справа налево)"));		 
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent, RightToLeft, _R("подчинение (что+ГГ, справа налево)")));		 
 
 	// потому что ты сделал это, я сделал это.
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSubordConj, RightToLeft, "подчинение (справа налево)"));
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSubordConj, RightToLeft, _R("подчинение (справа налево)")));
 	// Будь он с нами, мы бы здесь не сидели
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseConditionalImperative, LeftToRight, "императив в условной клаузе"));		 
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseConditionalImperative, LeftToRight, _R("императив в условной клаузе")));		 
 	// я знаю, ты ушел
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseZeroSubordWithoutAntecedent, LeftToRight, "подчинение (0+ГГ)"));		 
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseZeroSubordWithoutAntecedent, LeftToRight, _R("подчинение (0+ГГ)")));		 
 	// я ушел, ты пришел
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSimpleComma, LeftToRight, "сочинение (запятая)"));		 
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryClauseSimpleComma, LeftToRight, _R("сочинение (запятая)")));		 
 	// я ушел (ты пришел)
-	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryBracketClause, LeftToRight, "примыкание со скобками"));		 
+	m_ClauseRules.push_back(CSemanClauseRule(&CRusSemStructure::TryBracketClause, LeftToRight, _R("примыкание со скобками")));		 
 	m_bShouldBeStopped = false;
 	m_AllClausesVariants = 0;
 }
@@ -2395,10 +2395,10 @@ CRusSemStructure::CRusSemStructure()
 
 std::string    CRusSemStructure::GetClauseProperiesStr(long ClauseNo) const
 {
-	std::string Res = "Свойства:\n";
+	std::string Res = _R("Свойства:\n");
 	if (m_Clauses[ClauseNo].m_bQuestion)
 	{
-		Res += "Вопросительная клауза\n";
+		Res += _R("Вопросительная клауза\n");
 	};
 	return Res;
 };
