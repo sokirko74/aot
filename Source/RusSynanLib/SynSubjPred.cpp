@@ -36,7 +36,7 @@ bool	CRusSentence::IsGoodSubject(const CMorphVariant& synVariant, const std::str
 	const CSynWord& SubjWord = m_Words[SubjUnit.m_SentPeriod.m_iFirstWord];
 	const CSynHomonym& SubjHom = SubjWord.m_Homonyms[SubjUnit.m_iHomonymNum];
 
-	if( SubjHom.IsLemma("ЧТО") )
+	if( SubjHom.IsLemma(_R("ЧТО")) )
 		return false;
 
 
@@ -239,7 +239,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 
 	// случай a)
 	// "я знаю, кто пришел", "кто" - неомонимичное союзное слово, может быть только подл.
-	if (strWord == "КТО")
+	if (strWord == _R("КТО"))
 		return true;
 
 
@@ -270,7 +270,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 				  "папа", "мама"
 				*/
 				if(			!(grammems & (rAllCases & ~_QM(rNominativ)))
-						&&	(strWord !="ЧТО")
+						&&	(strWord !=_R("ЧТО"))
 					)
 					return true;
 				else
@@ -285,7 +285,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 				  "стол", "дуб"
 				*/
 				if(	    ( (grammems & rAllCases)  == ( _QM(rNominativ) | _QM(rAccusativ)) ) 
-					&&	(strWord != "ЧТО") 
+					&&	(strWord != _R("ЧТО")) 
 				   )
 					return true;
 				else
@@ -304,7 +304,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 					 есть "что", тогда надо выйти 
 					*/
 					if  (    !bCanBeWhatAsSubj
-						  && (strWord == "ЧТО") 
+						  && (strWord == _R("ЧТО")) 
 						)
 						break;
 					else
@@ -608,8 +608,8 @@ bool CRusSentence::find_subj(CMorphVariant& synVariant, int predk)
 	 "Леди следует в Париж " - (у слова "леди"  все падежи)
 	 Это нужно, чтобы отличить преликативное употребление от личной формы.
 	*/
-	if (   PredHom.IsLemma("СЛЕДОВАТЬ") 
-		|| PredHom.IsLemma("КАЗАТЬСЯ") 
+	if (   PredHom.IsLemma(_R("СЛЕДОВАТЬ")) 
+		|| PredHom.IsLemma(_R("КАЗАТЬСЯ")) 
 	   )
 	   if (    (PredHom.m_iGrammems  & (_QM(rThirdPerson) | _QM(rSingular) ))//"кажется"
 		    || (PredHom.m_iGrammems  & _QM(rNeutrum)) //"казалось"

@@ -21,12 +21,12 @@ struct CSelectiveWord
 const int g_iSelectiveWordsCount = 6;
 const CSelectiveWord g_strSelectiveWords[g_iSelectiveWordsCount] =
 {
-	CSelectiveWord("КАКОЙ", rAllNumbers ),
-	CSelectiveWord("МНОГИЕ",(1<<rPlural) ),
-	CSelectiveWord("НЕКОТОРЫЕ", (1<<rPlural)),  // ?*"некоторый  из нас"
-	CSelectiveWord("КАЖДЫЙ",(1<<rSingular)),  // "???каждые из нас"
-	CSelectiveWord("ОДИН", rAllNumbers),   
-	CSelectiveWord("ЛЮБОЙ", rAllNumbers)   
+	CSelectiveWord(_R("КАКОЙ"), rAllNumbers ),
+	CSelectiveWord(_R("МНОГИЕ"),(1<<rPlural) ),
+	CSelectiveWord(_R("НЕКОТОРЫЕ"), (1<<rPlural)),  // ?*"некоторый  из нас"
+	CSelectiveWord(_R("КАЖДЫЙ"),(1<<rSingular)),  // "???каждые из нас"
+	CSelectiveWord(_R("ОДИН"), rAllNumbers),   
+	CSelectiveWord(_R("ЛЮБОЙ"), rAllNumbers)   
 };
 
 /*
@@ -76,7 +76,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 				if( strlen(lemma) < 4)
 					return false;
 				lemma = lemma + ( strlen(lemma) - 3);
-				if( strcmp(lemma,"ШИЙ") )
+				if( strcmp(lemma,_R("ШИЙ")) )
 					return false;
 				next_word = G.m_iFirstWord + 1;
 		}

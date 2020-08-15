@@ -56,7 +56,7 @@ bool CRusFormatCaller::format_for_preps_adj (CGroup& G)
 		change_group_grammems(*GetGroupPtr(i_group), depend_cases, rAllCases);
 
 	W1.m_FoundPrepDependCases  =  depend_cases & Wk.GetGrammems() & rAllCases;
-	G.m_Cause = "Предложная группа c прилагательным";
+	G.m_Cause = _R("Предложная группа c прилагательным");
 
 	//  saving grammems
 	sent[G.m_iFirstWord].SetGrammems(G.GetGrammems());

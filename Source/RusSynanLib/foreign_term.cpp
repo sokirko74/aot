@@ -25,7 +25,7 @@ bool CRusFormatCaller::format_for_foreign_term(CGroup& G)
 		   G.m_MainGroup.m_iFirstWord = G.m_iFirstWord;
 		   G.m_MainGroup.m_iLastWord = G.m_iLastWord;
 		   G.m_GroupType = FOREIGN_TERM;
-		   G.m_Cause = "Правило для иностранных лексем.";
+		   G.m_Cause = _R("Правило для иностранных лексем.");
 		   return true;
 	 }
 	else

@@ -757,7 +757,7 @@ void CRusSentence::CloneHomonymsForOborots() {
                             else
                                 Pose = (1 << (size_t) Pos);
                         } else {
-                            GramFet = "С " + GramFet;
+                            GramFet = _R("С ") + GramFet;
                             if (R->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G)) {
                                 Grammems = G;
                                 Pose = 0xffffffff;

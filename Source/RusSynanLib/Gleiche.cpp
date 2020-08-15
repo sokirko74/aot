@@ -273,7 +273,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 	debug_str = GetGramTab()->GrammemsToStr(G.GetGrammems());
 	debug_str = GetGramTab()->GrammemsToStr(W2.GetGrammems());
 
-	G.m_Cause = "ИГ, согласованная по роду, числу и падежу";
+	G.m_Cause = _R("ИГ, согласованная по роду, числу и падежу");
 
 	if (is_morph_pronoun(Wi)) return false; 
 

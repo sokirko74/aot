@@ -98,7 +98,7 @@ bool CRusFormatCaller::format_for_similar_comp_adjs(CGroup& G)
 	if (G.m_iLastWord != G.m_iFirstWord)
 	{
 		G.m_bCommaDelimited = is_only_comma_delimited(G);
-		G.m_Cause = "Соч. группа срав. прилагательных, соединенная запятыми и простыми союзами";
+		G.m_Cause = _R("Соч. группа срав. прилагательных, соединенная запятыми и простыми союзами");
 		G.m_GroupType = SIMILAR_ADJS;
 		G.m_MainGroup = get_maximal_group(G.m_iFirstWord);
 		return true;

@@ -25,7 +25,7 @@ bool CRusFormatCaller::format_for_neg_verb (CGroup& G)
   G.m_GroupType = NEG_VERB;
   G.m_MainGroup = G.m_iFirstWord + 1;
   G.m_iLastWord = G.m_iFirstWord + 1;
-  G.m_Cause = "Частица 'не', справа которой стоит глагольная форма"; 
+  G.m_Cause = _R("Частица 'не', справа которой стоит глагольная форма"); 
   create_syn_rel(G, get_main_word(G.m_iLastWord),G.m_iFirstWord,NEG_VERB);
   return true;
 }
@@ -101,10 +101,10 @@ bool CRusFormatCaller::format_for_instr_obj (CGroup& G)
 	if ((ObjGroup.GetGrammems() & rAllCases) != _QM(rInstrumentalis))
 			return false;
 
-	if (		Wk.is_word_upper("НОЧЬЮ")
-			||	Wk.is_word_upper("ДНЕМ")
-			||	Wk.is_word_upper("УТРОМ")
-			||	Wk.is_word_upper("ВЕЧЕРОМ")
+	if (		Wk.is_word_upper(_R("НОЧЬЮ"))
+			||	Wk.is_word_upper(_R("ДНЕМ"))
+			||	Wk.is_word_upper(_R("УТРОМ"))
+			||	Wk.is_word_upper(_R("ВЕЧЕРОМ"))
 		)
 	return  false;
 
@@ -140,18 +140,18 @@ bool CRusFormatCaller::format_for_dir_obj_rev (CGroup& G)
 	const CGroup& RightGroup =  get_maximal_group (k);
 	if ( RightGroup.m_GroupType == DIR_OBJ ) return false;
 
-	if (	!Wi.is_word_upper("МЕНЯ") 
-		&&	!Wi.is_word_upper("ТЕБЯ") 
-		&&	!Wi.is_word_upper("ЕГО") 
-		&&	!Wi.is_word_upper("ЕЕ") 
-		&&	!Wi.is_word_upper("НАС") 
-		&&	!Wi.is_word_upper("ВАС") 
-		&&	!Wi.is_word_upper("ИХ") 
-		&&	!Wi.is_word_upper("ВСЕХ") 
-		&&	!Wi.is_word_upper("НИЧЕГО") 
-		&&	!Wi.is_word_upper("НИКОГО") 
-		&&	!Wi.is_word_upper("ЧТО-ТО") 
-		&&	!Wi.is_word_upper("КОГО-ТО") 
+	if (	!Wi.is_word_upper(_R("МЕНЯ")) 
+		&&	!Wi.is_word_upper(_R("ТЕБЯ")) 
+		&&	!Wi.is_word_upper(_R("ЕГО")) 
+		&&	!Wi.is_word_upper(_R("ЕЕ")) 
+		&&	!Wi.is_word_upper(_R("НАС")) 
+		&&	!Wi.is_word_upper(_R("ВАС")) 
+		&&	!Wi.is_word_upper(_R("ИХ")) 
+		&&	!Wi.is_word_upper(_R("ВСЕХ")) 
+		&&	!Wi.is_word_upper(_R("НИЧЕГО")) 
+		&&	!Wi.is_word_upper(_R("НИКОГО")) 
+		&&	!Wi.is_word_upper(_R("ЧТО-ТО")) 
+		&&	!Wi.is_word_upper(_R("КОГО-ТО")) 
 		)
 	return false;
 
@@ -191,7 +191,7 @@ bool CRusFormatCaller::format_for_verb_inf (CGroup& G)
   if (Wj.m_UnitType  != EWord) return false;
   
   G.m_iLastWord = H1.m_iLastWord;
-  G.m_Cause = "ГГ + инфинитив";
+  G.m_Cause = _R("ГГ + инфинитив");
   G.m_MainGroup = H;
   G.m_GroupType = VERB_INF;
   G.SetGrammems( H.GetGrammems() );

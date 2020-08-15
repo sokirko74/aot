@@ -174,7 +174,7 @@ bool CRusFormatCaller::format_for_num_complex (CGroup& G)
 		|| W1.GetPoses() != W3.GetPoses()) // кроме "на 1,7 - 1,8%"
 		return false;
 
-	G.m_Cause = "Последовательность чисел вперемешку со знаками препинания";
+	G.m_Cause = _R("Последовательность чисел вперемешку со знаками препинания");
 	G.m_GroupType = C_NUMERALS;
 	G.SetGrammems( sent[G.m_iLastWord].GetGrammems());
 	G.m_MainGroup = G.m_iFirstWord;
@@ -217,11 +217,11 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 	
 	G.m_iLastWord += get_maximal_group_size(G.m_iLastWord)-1;
 	const CGroup& MainGroup = get_maximal_group(G.m_iFirstWord);
-	change_words_in_group_gramcodes(get_maximal_group(k), "аа", CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
+	change_words_in_group_gramcodes(get_maximal_group(k), _R("аа"), CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
 	if(!strcmp(Wk.get_word(), "№") &&  is_numeral(sent[k+1])) //я вышел из дома №26
 	{
-		Wk.SetGramcodes( "аа" );
-		change_words_in_group_gramcodes(get_maximal_group(k+1), "аа", CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
+		Wk.SetGramcodes( _R("аа") );
+		change_words_in_group_gramcodes(get_maximal_group(k+1), _R("аа"), CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
 	}
 	G.m_MainGroup = MainGroup;
 	G.SetGrammems( Wi.GetGrammems() );  
@@ -289,7 +289,7 @@ bool CRusFormatCaller::format_for_number_adverb (CGroup& G)
 
     if( G.m_iLastWord >= sent.size() )
         return false;
-    G.m_Cause = "Группа наречное числительное+ИГ(мн рд)";
+    G.m_Cause = _R("Группа наречное числительное+ИГ(мн рд)");
     G.m_GroupType = NUMERAL_ADVERB;
     const CGroup& MainGroup = get_maximal_group(i);
     G.m_MainGroup = MainGroup;
@@ -378,7 +378,7 @@ bool CRusFormatCaller::is_small_number_group (size_t WordNo)
 bool NumberLikeAdj (const CSynPlmLine& L) 
 {
  return    L.is_word_upper("1") 
-	    || L.is_lemma("ОДИН"); 
+	    || L.is_lemma(_R("ОДИН")); 
 	 
 };
 
@@ -509,12 +509,12 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 
 		bAdjShouldBeInGenitivOrNominativ = (noun_grammems & _QM(rGenitiv)) > 0;
 			
-		std::string num_grc = "эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"; //ЧИСЛ мр..ср им("два");рд;..пр
-		std::string noun_pair = "абазаиабакалгбгзгигбгкглебезеиебекел"; //С мр..ср рд,ед("2 дома");рд,мн;..;пр,мн
+		std::string num_grc = _R("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"); //ЧИСЛ мр..ср им("два");рд;..пр
+		std::string noun_pair = _R("абазаиабакалгбгзгигбгкглебезеиебекел"); //С мр..ср рд,ед("2 дома");рд,мн;..;пр,мн
 		if(!small_number)
-			noun_pair = "азазаиазакалгзгзгигзгкглезезеиезекел"; //С мр..ср рд,мн("5 домов");рд,мн;..;ср,пр,мн
+			noun_pair = _R("азазаиазакалгзгзгигзгкглезезеиезекел"); //С мр..ср рд,мн("5 домов");рд,мн;..;ср,пр,мн
 		if(has_point) 
-			noun_pair = "абабабабабабгбгбгбгбгбгбебебебебебеб"; //С мр..ср рд,мн("1.4 метра");рд,мн;..;ср,рд,мн
+			noun_pair = _R("абабабабабабгбгбгбгбгбгбебебебебебеб"); //С мр..ср рд,мн("1.4 метра");рд,мн;..;ср,рд,мн
 		R->GleicheAncode1(CaseNumberGender0, noun_pair, new_grc, num_grc);
 		num_grc = R->UniqueGramCodes(R->GleicheAncode1(sent[i_number].HasPOS(NOUN)? CaseNumber0 : CaseNumberGender0, num_grc.c_str(), 
 			R->UniqueGramCodes(sent[i_number].HasPOS(NOUN)? Gi.m_GramCodes : sent[i_number].GetGramcodes())));
@@ -549,9 +549,9 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 		const char* word = sent[i_last_number].get_upper_word();
 		if (!word) return false;
 
-		if( !strcmp(word, "ДВА") ||
-			!strcmp(word, "ОБА") ||
-			!strcmp(word, "ПОЛТОРА") 
+		if( _R("ДВА") == word ||
+			_R("ОБА") == word || 
+			_R("ПОЛТОРА") == word 
 			)
 		{
 			// мужской и средний рода:
@@ -598,9 +598,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 		} 
 		else
 
-		if( !strcmp(word, "ДВЕ") ||
-			!strcmp(word, "ОБЕ") ||
-			!strcmp(word, "ПОЛТОРЫ") )
+		if(  (_R("ДВЕ") == word) ||
+			(_R("ОБЕ") == word) ||
+			(_R("ПОЛТОРЫ") == word)
+			)
 		{
 			// 
 			if (noun_grammems & _QM(rFeminum))
@@ -640,8 +641,8 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 				}
 				
 		} else
-		if( !strcmp(word, "ТРИ") ||
-			!strcmp(word, "ЧЕТЫРЕ")) 
+		if( _R("ТРИ") == word ||
+			_R("ЧЕТЫРЕ") == word )
 		{
 			if( (noun_grammems & _QM(rGenitiv)) &&
 				(noun_grammems & _QM(rSingular))) 
@@ -848,7 +849,7 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 	if( sent[i_number].HasFlag(fl_digit) ) // до 81 унции
 	{
 		std::string num_grc = R->GetGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender); //"эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэчасЙш"; //ЧИСЛ мр..ср им("один");рд;..пр
-		std::string noun_pair =  "ааабавагадаегагбгвгггдгееаебевегедее"; //С мр..ср им,ед("дом");рд,ед;..;пр,ед
+		std::string noun_pair =  _R("ааабавагадаегагбгвгггдгееаебевегедее"); //С мр..ср им,ед("дом");рд,ед;..;пр,ед
 		R->GleicheAncode1(CaseNumberGender0, noun_pair.c_str(), new_grc.c_str(), num_grc);
 		num_grc = R->UniqueGramCodes(R->GleicheAncode1(CaseNumberGender0, num_grc.c_str(), R->UniqueGramCodes(sent[i_number].GetGramcodes())));
 		if(num_grc=="")
@@ -945,10 +946,10 @@ bool CRusFormatCaller::format_standard_param_abbr(CGroup& G)
 	const CRusGramTab *R = (CRusGramTab*)GetGramTab();
 	G.SetGrammems(Wk.GetGrammems() & (rAllCases|rAllGenders) | 
 		(sent[k-1].HasFlag(fl_russian_odin)?_QM(rSingular):_QM(rPlural)));
-	G.m_GramCodes = R->GleicheAncode1(0, "ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел",
+	G.m_GramCodes = R->GleicheAncode1(0, _R("ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел"),
 				R->GetGramCodes(NOUN, G.GetGrammems(), CaseNumberGender));
 
-	G.m_Cause = "Группа числительных + аббр";
+	G.m_Cause = _R("Группа числительных + аббр");
 
 
 	set_noun_numeral_group_type(G, NUMERAL_NOUN);
@@ -1093,9 +1094,10 @@ bool CRusFormatCaller::gleiche_noun_numeral_for_approx(int i_noun, int i_number)
             const char* word = sent[i_last_number].get_upper_word();
             if (!word) return false;
 
-            if( !strcmp(word, "ДВА") ||
-                !strcmp(word, "ОБА") ||
-                !strcmp(word, "ПОЛТОРА") )
+            if( _R("ДВА") == word ||
+				_R("ОБА") == word ||
+				_R("ПОЛТОРА") == word
+				)
             {
                 if(((noun_grammems & (1 << rMasculinum)) ||
                     (noun_grammems & (1 << rNeutrum))) &&
@@ -1107,9 +1109,9 @@ bool CRusFormatCaller::gleiche_noun_numeral_for_approx(int i_noun, int i_number)
             } 
             else
 
-                if( !strcmp(word, "ДВЕ") ||
-                    !strcmp(word, "ОБЕ") ||
-                    !strcmp(word, "ПОЛТОРЫ") )
+                if( _R("ДВЕ") == word ||
+					_R("ОБЕ") == word ||
+					_R("ПОЛТОРЫ") == word)
                 {
                     if( (noun_grammems & (1 << rFeminum)) &&
                         (noun_grammems & (1 << rGenitiv)) &&
@@ -1119,8 +1121,7 @@ bool CRusFormatCaller::gleiche_noun_numeral_for_approx(int i_noun, int i_number)
                     }
                 } else
 
-                    if( !strcmp(word, "ТРИ") ||
-                        !strcmp(word, "ЧЕТЫРЕ")) 
+                    if( _R("ТРИ") == word || _R("ЧЕТЫРЕ") == word)
                     {
                         if( (noun_grammems & (1 << rGenitiv)) &&
                             (noun_grammems & (1 << rSingular))) 

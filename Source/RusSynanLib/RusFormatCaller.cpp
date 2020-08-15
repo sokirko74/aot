@@ -57,7 +57,7 @@ CRusFormatCaller::CRusFormatCaller(const CSyntaxOpt* Opt) : CFormatCaller(Opt)
 		{rule_for_adv_predik, {(CFormatFunc)&CRusFormatCaller::format_for_adv_predik,_R("НАР_ПРЕДИК"), FROM_LEFT}},
 		{rule_for_anat_compar, {(CFormatFunc)&CRusFormatCaller::format_for_anat_compar,_R("АНАТ_СРАВН"), FROM_LEFT}},
 		{rule_for_foreign_term, {(CFormatFunc)&CRusFormatCaller::format_for_foreign_term,_R("ИНОСТР_ЛЕКС"),FROM_LEFT}},
-		{rule_for_preps_adj, {(CFormatFunc)&CRusFormatCaller::format_for_preps_adj,"ПГ (для прилагательных)", FROM_LEFT}},
+		{rule_for_preps_adj, {(CFormatFunc)&CRusFormatCaller::format_for_preps_adj,_R("ПГ (для прилагательных)"), FROM_LEFT}},
 		{rule_for_oborots, {(CFormatFunc)&CRusFormatCaller::format_for_oborots, _R("ОБОРОТ"), FROM_LEFT}}
 	};
 };

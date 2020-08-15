@@ -28,7 +28,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 	            G.m_MainGroup = G.m_iLastWord;
 				G.SetGrammems(sent[G.m_iLastWord]);
 				create_syn_rel(G, G.m_iFirstWord, G.m_iLastWord, COMP_ADV);				
-			    G.m_Cause = " Аналитическая форма сравнительной степени прил. или наречия.";}
+			    G.m_Cause = _R(" Аналитическая форма сравнительной степени прил. или наречия.");}
 	   else;
     else
       if  (    (GetGroups()[I].m_GroupType == SIMILAR_ADJS)
@@ -38,7 +38,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 	      G.m_MainGroup = GetGroups()[I].m_MainGroup.m_iFirstWord;
 		  G.SetGrammems(sent[GetGroups()[I].m_MainGroup.m_iFirstWord]);
 		  create_syn_rel(G, G.m_iFirstWord,get_main_word_in_group(GetGroups()[I]), COMP_ADV);
-		  G.m_Cause = " Аналитическая форма сравнительной степени соч. группы прил.";
+		  G.m_Cause = _R(" Аналитическая форма сравнительной степени соч. группы прил.");
 	  }
 
 
@@ -87,7 +87,7 @@ bool CRusFormatCaller::format_for_adv_adj(CGroup& G)
 			return false;
 
 
-		G.m_Cause = "Слова степени (типа \"очень\") с группой прилагательных или причастий";
+		G.m_Cause = _R("Слова степени (типа \")очень\_R(") с группой прилагательных или причастий");
 		G.m_GroupType = ADV_ADJ;
 
 		G.m_MainGroup = get_maximal_group(j);

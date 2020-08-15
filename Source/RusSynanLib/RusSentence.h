@@ -50,18 +50,18 @@ struct SAnalyticalFormVariant
 		if (X.bAllHomPredik)
 			return false;
 
-		if ( s_Lemma == "СВЕТАТЬ" ||
-			 s_Lemma == "ТЕМНЕТЬ" ||
-			 s_Lemma == "ХОЛОДАТЬ" ||
-			 s_Lemma == "ТЕПЛЕТЬ" ||
-			 s_Lemma == "СМЕРКАТЬСЯ" )
+		if ( s_Lemma == _R("СВЕТАТЬ") ||
+			 s_Lemma == _R("ТЕМНЕТЬ") ||
+			 s_Lemma == _R("ХОЛОДАТЬ") ||
+			 s_Lemma == _R("ТЕПЛЕТЬ") ||
+			 s_Lemma == _R("СМЕРКАТЬСЯ") )
 			 return true;
 
-		if ( X.s_Lemma == "СВЕТАТЬ" ||
-			 X.s_Lemma == "ТЕМНЕТЬ" ||
-			 X.s_Lemma == "ХОЛОДАТЬ" ||
-			 X.s_Lemma == "ТЕПЛЕТЬ" ||
-			 X.s_Lemma == "СМЕРКАТЬСЯ" )
+		if ( X.s_Lemma == _R("СВЕТАТЬ") ||
+			 X.s_Lemma == _R("ТЕМНЕТЬ") ||
+			 X.s_Lemma == _R("ХОЛОДАТЬ") ||
+			 X.s_Lemma == _R("ТЕПЛЕТЬ") ||
+			 X.s_Lemma == _R("СМЕРКАТЬСЯ") )
 			 return false;
 
 
