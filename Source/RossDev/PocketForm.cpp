@@ -158,11 +158,11 @@ int OpenPocket(   const vector<CRossPocketItem>& UnitNos,
 	POSITION pos =  pDocument->GetFirstViewPosition();
 	CPocketForm* V = (CPocketForm*)(pDocument->GetNextView(pos));
 	V->m_PocketItems = UnitNos;
-    V->m_WordList.InsertColumn(1,"Словарный вход", LVCFMT_LEFT, 200);
-	V->m_WordList.InsertColumn(2,"Номер значения", LVCFMT_LEFT, 60);
-	V->m_WordList.InsertColumn(2,"Название словаря", LVCFMT_LEFT, 60);
+    V->m_WordList.InsertColumn(1,_R("Словарный вход"), LVCFMT_LEFT, 200);
+	V->m_WordList.InsertColumn(2,_R("Номер значения"), LVCFMT_LEFT, 60);
+	V->m_WordList.InsertColumn(2,_R("Название словаря"), LVCFMT_LEFT, 60);
 	V->m_WordList.SetItemCountEx(UnitNos.size());
-	V->m_UnitsSize.Format ("Число словарных входов : %i",    V->m_WordList.GetItemCount());
+	V->m_UnitsSize.Format (_R("Число словарных входов : %i"),    V->m_WordList.GetItemCount());
     V->UpdateData(FALSE);
     V->m_WordList.UpdateData(FALSE);
     V->m_WordList.Invalidate();	

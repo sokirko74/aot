@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
 	// lemmatizing a word
     {
-	    LEMMATIZERLib::IParadigmCollectionPtr piParadigmCollection = piLemmatizer->CreateParadigmCollectionFromForm("мама", FALSE, FALSE);
+	    LEMMATIZERLib::IParadigmCollectionPtr piParadigmCollection = piLemmatizer->CreateParadigmCollectionFromForm(_R("мама"), FALSE, FALSE);
 
 	    //  print possible lemmas
 	    for (int j=0; j < piParadigmCollection->Count; j++)

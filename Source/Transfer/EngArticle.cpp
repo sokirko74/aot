@@ -416,7 +416,7 @@ void  CEngSemStructure::InitArticleField ()
 
 		 // ЭЛЕКТ_ИГ
 		for (j =0; j < OutRels.size();j++)
-		  if ( m_Relations[OutRels[j]].m_SyntacticRelation == "ЭЛЕКТ_ИГ" )
+		  if ( m_Relations[OutRels[j]].m_SyntacticRelation == _R("ЭЛЕКТ_ИГ") )
 		  {
 			  m_Nodes[NodeNo].m_ArticleStr = "the";
 			  m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleBecauseOfNominalSupplement );

@@ -274,7 +274,7 @@ bool CValueDlg::SetNewValue()
 		  int nPos = m_Lists[i].GetCurSel();
 		  if (nPos == LB_ERR) 
 		  {
-			  AfxMessageBox("Остались пустые места!");
+			  AfxMessageBox(_R("Остались пустые места!"));
 			  return false;
 		  }
 		  BYTE DomNo = GetSignatDomNo(i);

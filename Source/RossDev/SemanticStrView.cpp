@@ -358,7 +358,7 @@ int CreateSynStr (ClientData clienData,
 	CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 	if  (App->m_bGraphanIsBusy)
 	{
-			AfxMessageBox ("Graphan is busy (получение минус перечня)");
+			AfxMessageBox (_R("Graphan is busy (получение минус перечня)"));
 			return TCL_OK;
 	};
 
@@ -426,7 +426,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 		if  (App->m_bGraphanIsBusy)
 		{
-			AfxMessageBox ("Graphan is busy (получение минус перечня)");
+			AfxMessageBox (_R("Graphan is busy (получение минус перечня)"));
 			return TCL_OK;
 		};
 		std::string text = "";
@@ -527,7 +527,7 @@ int AnswerBySavedSentences (ClientData clienData,
 
 	  std::string Sent = GetSemBuilder().Answer();
 
-	  ::GlobalOpenReport(Sent.c_str(), "Ответ:");
+	  ::GlobalOpenReport(Sent.c_str(), _R("Ответ:"));
 	  Doc->m_bBusy = false;
 
 	  return TCL_OK;
@@ -615,7 +615,7 @@ int BuildSentence (ClientData clienData,
 	  std::string Sent;
 	  if (GetSemBuilder().BuildSentence(Sent))
 	  {
-		::GlobalOpenReport(Sent.c_str(), "Перевод:");
+		::GlobalOpenReport(Sent.c_str(), _R("Перевод:"));
 	  }
 	  Doc->m_bBusy = false;
 
@@ -636,7 +636,7 @@ int SyntRusSentence (ClientData clienData,
 	  std::string Sent;
 	  if (GetSemBuilder().SyntRusSentence(Sent))
 	  {
-		  ::GlobalOpenReport(Sent.c_str(), "Русский синтез:");
+		  ::GlobalOpenReport(Sent.c_str(), _R("Русский синтез:"));
 	  }
 	  Doc->m_bBusy = false;
 

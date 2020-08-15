@@ -641,7 +641,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 			if( rusNode.m_MainWordNo!=-1 )
 			{
 				std::string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
-				if( (qwrd=="КТО" || qwrd=="ЧТО") )
+				if( (qwrd==_R("КТО") || qwrd==_R("ЧТО")) )
 					return true;
 			}
 		}
@@ -658,7 +658,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 			if( rusNode.m_MainWordNo!=-1 )
 			{
 				std::string qwrd = rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma;
-				if( qwrd=="КАКОЙ" || qwrd=="ЧЕЙ" )
+				if( qwrd==_R("КАКОЙ") || qwrd==_R("ЧЕЙ") )
 					return true;
 			}
 		}
@@ -790,8 +790,8 @@ NEXTSTEP:;
 		const CSemNode& rusNode = RusStr.GetNode(engNode.RusNode);
 		if( rusNode.m_MainWordNo==-1 )
 			continue;
-		if( (rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == "ЛИ" ||
-			 rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == "ЖЕ") )
+		if( (rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == _R("ЛИ") ||
+			 rusNode.GetWord(rusNode.m_MainWordNo).m_Lemma == _R("ЖЕ")) )
 		{
 			DelNode(outChilds[i]);
 			goto NEXTSTEP;

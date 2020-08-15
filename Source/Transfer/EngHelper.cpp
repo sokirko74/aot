@@ -3,7 +3,7 @@
 #include "../SemanLib/LexFuncts.h"
 
 const int g_PersPronounsCount = 5;
-const char g_PersPronouns[g_PersPronounsCount][MaxWordLen] = {"Я","ТЫ","ОН","ОНА", "ОНО"};
+const char g_PersPronouns[g_PersPronounsCount][MaxWordLen] = {_R("Я"),_R("ТЫ"),_R("ОН"),_R("ОНА"), _R("ОНО")};
 
 
 bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const
@@ -203,8 +203,8 @@ bool CEngSemStructure::IsChtoOrKto(int iNode)
 	if(	rusNode.GetWordsSize() != 1)		
 		return false;
 
-	if( (rusNode.GetWord(0).m_Lemma == "КТО") ||
-		(rusNode.GetWord(0).m_Lemma == "ЧТО") )
+	if( (rusNode.GetWord(0).m_Lemma == _R("КТО")) ||
+		(rusNode.GetWord(0).m_Lemma == _R("ЧТО")) )
 		return true;
 	
 	return false;
@@ -567,7 +567,7 @@ bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, WORD UnitNo
 	for(int i = 0 ; i < corteges.size() ; i++ )
 	{
 			if( corteges[i].m_DomItemNos[0] != -1 )
-				if( std::string("ЗАГЛУШКА") == (const char*)RossHolder->GetRoss()->GetDomItemStr(corteges[i].m_DomItemNos[0])  )
+				if( std::string(_R("ЗАГЛУШКА")) == (const char*)RossHolder->GetRoss()->GetDomItemStr(corteges[i].m_DomItemNos[0])  )
 					return true;
 	}
 	return false;
@@ -779,7 +779,7 @@ if(m_Relations[rels[i]].m_Valency.m_RelationStr == "QUANTIT"){			const CEngSemNo
 // gri
 
 			if(    ! ( (Number != 0) && (Number <2))
-				&&   node.m_Words[0].m_Lemma != "ОДИН"
+				&&   node.m_Words[0].m_Lemma != _R("ОДИН")
 			  )
 			return true;
 

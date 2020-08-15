@@ -137,7 +137,7 @@ void CBasicDomainEdit::OnAddButton()
   OutBuffer[0] =0;
   if (GetRoss()->m_Domens[m_DomNo].Source == dsUnion)
   {
-      if (!InputBox ("Новый домен", OutBuffer, 100))
+      if (!InputBox (_R("Новый домен"), OutBuffer, 100))
 		  return;
 
 	  if (GetRoss()->GetDomenNoByDomStr(OutBuffer) == ErrUChar)
@@ -176,7 +176,7 @@ void CBasicDomainEdit::OnAddButton()
 	strcpy (OutBuffer, Q);
   }
   else
-    if (!InputBox ("Новое значение", OutBuffer, 100))
+    if (!InputBox (_R("Новое значение"), OutBuffer, 100))
 		return;
     AddItem(CString (OutBuffer));
 
@@ -207,7 +207,7 @@ void CBasicDomainEdit::OnDeleteBtn()
 				if (Refs.size() > 0)
 				{
 					CString prompt;
-					prompt.Format("Константа \"%s\" упоминается в словаре %i раз. Придется удалить все эти упоминания. Продолжить?", (const char*)GetRoss()->GetDomItemStr(ItemNo), Refs.size());
+					prompt.Format(_R("Константа \")%s\_R(" упоминается в словаре %i раз. Придется удалить все эти упоминания. Продолжить?"), (const char*)GetRoss()->GetDomItemStr(ItemNo), Refs.size());
 					if (AfxMessageBox (prompt, MB_OKCANCEL) == IDCANCEL)
 						break;
 				}

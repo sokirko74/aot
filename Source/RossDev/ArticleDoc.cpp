@@ -252,7 +252,7 @@ BOOL CArticleDoc::SaveModified()
 	}
 	catch (...)
 	{
-        prompt.Format("Статья \"%s\" содержит ошибки (%s) . Выйти без сохранения?", name, GetArticleErrorStr().c_str());
+        prompt.Format(_R("Статья \")%s\_R(" содержит ошибки (%s) . Выйти без сохранения?"), name, GetArticleErrorStr().c_str());
 		
 		switch (AfxMessageBox (prompt, MB_OKCANCEL))
 		{

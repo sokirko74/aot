@@ -432,7 +432,7 @@ void CEngSemStructure::CorrectNodeNumByRelNum()
 		CEngSemNode& Node2 = m_Nodes[iNode2];
 
 		if( Node2.GetType()!=NoneRoss && Node2.GetUnitNo()!=ErrUnitNo &&
-			GetRossHolder(Node2.GetType())->HasFieldValue("RESTR","ед",Node2.GetUnitNo()) )
+			GetRossHolder(Node2.GetType())->HasFieldValue("RESTR",_R("ед"),Node2.GetUnitNo()) )
 		{
 			if( Node1.m_MainWordNo!=-1 && Node1.m_Words[Node1.m_MainWordNo].m_Lemma=="many" )
 			{

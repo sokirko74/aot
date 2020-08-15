@@ -58,7 +58,7 @@ int SaveToRossdev (ClientData clienData,
 {
 
 	if (argc > 3) {
-		interp->result = "Неправильное использование: random ? range";
+		interp->result = _R("Неправильное использование: random ? range");
 		return TCL_ERROR;
 	};
 	int limit = 0;
@@ -108,7 +108,7 @@ CString  CHierarchyDoc::GetNewNode(CString Nodes)
 		 Nodes.TrimLeft();
 	};
 
-	bool  SecondDomain =  (m_Type == SemFet) && (::MessageBox(0, "Вы хотите добавить SF (yes - SF; no - SEMR) ", "Message Box", MB_YESNO) == IDNO);
+	bool  SecondDomain =  (m_Type == SemFet) && (::MessageBox(0, _R("Вы хотите добавить SF (yes - SF; no - SEMR) "), "Message Box", MB_YESNO) == IDNO);
 
 	LONG ItemNo;
 
@@ -165,8 +165,8 @@ bool CHierarchyDoc::OpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
 
     switch (Type) 
 	{
-	   case SemFet : SetPathName("Иерархия семантических характеристик"); break;
-	   case SemRel : SetPathName("Иерархия семантических отношений"); break;
+	   case SemFet : SetPathName(_R("Иерархия семантических характеристик")); break;
+	   case SemRel : SetPathName(_R("Иерархия семантических отношений")); break;
 	};
 
 	GetDocTemplate()->InitialUpdateFrame(pFrame, this, TRUE);

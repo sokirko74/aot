@@ -439,7 +439,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	if( objNode.RusNode != -1 &&
 		RusStr.GetNode(objNode.RusNode).m_NodeType == MNA &&
 		RusStr.GetNode(objNode.RusNode).m_MainWordNo != -1 &&
-		RusStr.GetNode(objNode.RusNode).GetWord(RusStr.GetNode(objNode.RusNode).m_MainWordNo).m_Lemma == "НИ" )
+		RusStr.GetNode(objNode.RusNode).GetWord(RusStr.GetNode(objNode.RusNode).m_MainWordNo).m_Lemma == _R("НИ") )
 	{
 		negMna = true;
 	}
@@ -471,7 +471,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	if( negChild )
 	{
 		m_Nodes[iNewNode].RusNode = m_Nodes[iEngNode].RusNode;
-		m_Nodes[iNewNode].m_RelOperators.push_back("НЕ");
+		m_Nodes[iNewNode].m_RelOperators.push_back(_R("НЕ"));
 	}
 	
 	DelNode(iEngNode);
@@ -576,7 +576,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 
 void CEngSemStructure::ApplyKeepRule(int iEngNode)
 {
-	if (!m_Nodes[iEngNode].HasRelOperator("ПРОДОЛЖ")) return;
+	if (!m_Nodes[iEngNode].HasRelOperator(_R("ПРОДОЛЖ"))) return;
 	int iRusNode = m_Nodes[iEngNode].RusNode;
 	if( iRusNode == -1 )
 		return;
@@ -587,7 +587,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 		return;
 
    // если VERB с отрицанием...
-	if( m_Nodes[iEngNode].HasRelOperator("НЕ") )
+	if( m_Nodes[iEngNode].HasRelOperator(_R("НЕ")) )
 	{
 		CEngSemNode newNode;
 		CreateSimpleEnglNode("still",newNode,0,true);
@@ -670,7 +670,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			break;
-		if( m_Nodes[iNode].HasRelOperator("НЕ") )
+		if( m_Nodes[iNode].HasRelOperator(_R("НЕ")) )
 			break;
 		if( !GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("GF","VERB",m_Nodes[iNode].GetUnitNo()) )
 			continue;
@@ -812,7 +812,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			return;
-		if( m_Nodes[iNode].HasRelOperator("НЕ") )
+		if( m_Nodes[iNode].HasRelOperator(_R("НЕ")) )
 			return;
 	}
 
@@ -867,7 +867,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			break;
-		if( m_Nodes[iNode].HasRelOperator("НЕ") )
+		if( m_Nodes[iNode].HasRelOperator(_R("НЕ")) )
 			break;
 		if( !GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("GF","VERB",m_Nodes[iNode].GetUnitNo()) )
 			continue;

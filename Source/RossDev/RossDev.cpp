@@ -586,7 +586,7 @@ BOOL CRossDevApp::OnIdle(LONG lCount)
 	{
       ResetEvent(m_hEventMinusListReport); 
 	  ((CFrameWnd*)((CRossDevApp*)AfxGetApp())->m_pMainWnd)->SetMessageText("");
-	  GlobalOpenReport (m_strMinusListReport, "Перечень всех лемм, которые не были найдены в словарных входах");
+	  GlobalOpenReport (m_strMinusListReport, _R("Перечень всех лемм, которые не были найдены в словарных входах"));
 
 	};
 	

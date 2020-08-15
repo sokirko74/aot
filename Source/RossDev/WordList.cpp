@@ -251,7 +251,7 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 	POSITION pos = m_WordList.GetFirstSelectedItemPosition();
 	if (pos != 0)
 		UnitNo = m_WordList.GetNextSelectedItem(pos);
-	m_UnitsSize.Format ("Cловарный вход %i (из %i)",    UnitNo+1, m_WordList.GetItemCount());
+	m_UnitsSize.Format (_R("Cловарный вход %i (из %i)"),    UnitNo+1, m_WordList.GetItemCount());
 	//UpdateData(FALSE);
 }
 
@@ -804,7 +804,7 @@ void CWordList::OnStatistic()
 	vector<CStatis> V;
 	char s[200];
 	s[0] = 0;
-	if ( !InputBox("Введите название домена (* - все константные домены):", s, 200) )
+	if ( !InputBox(_R("Введите название домена (* - все константные домены):"), s, 200) )
 		return;
 	CString Q(s);
 	Q.TrimLeft();
@@ -842,7 +842,7 @@ void CWordList::OnStatistic()
 
 	s[0] = 0; 
 	char caption[200];
-	sprintf (caption, "Введите число элементов кортежа, которые надо сравнивать (1..%i)", GetRoss()->m_MaxNumDom);
+	sprintf (caption, _R("Введите число элементов кортежа, которые надо сравнивать (1..%i)"), GetRoss()->m_MaxNumDom);
 	if (!InputBox(caption, s, 200))
 		return;
 
@@ -872,7 +872,7 @@ void CWordList::OnStatistic()
 	};
 
 
-	CString S = " Домен                Константа              Частота \r\n_______________________________________________________\r\n" ;
+	CString S = _R(" Домен                Константа              Частота \r\n_______________________________________________________\r\n") ;
 	for (size_t k = 0; k < V.size(); k++)
 	{
 		CString Q;
@@ -883,7 +883,7 @@ void CWordList::OnStatistic()
 		S += Q;
 	};
 
-	GlobalOpenReport (S, "Частота констант");
+	GlobalOpenReport (S, _R("Частота констант"));
 }
 
 void CWordList::OnChangeTitle() 
@@ -930,7 +930,7 @@ void CWordList::OnComments()
   CString  C = pComms->Comments;
   char s[100];
   strcpy  (s, C);
-  if (!InputBox("Комментарий:", s, 100,"РОСС",this))
+  if (!InputBox(_R("Комментарий:"), s, 100,_R("РОСС"),this))
   return;
   if (!strcmp (s, C)) return;
   GetRoss()->SetUnitCommentStr(UnitNo, s);
@@ -1061,7 +1061,7 @@ try {
 	  S += Record;
   };
 
-  GlobalOpenReport (S, "Валентные структуры");
+  GlobalOpenReport (S, _R("Валентные структуры"));
 }
  catch (...)
  {
@@ -1105,7 +1105,7 @@ void CWordList::OnStatisticFieldValue()
 	vector<CFieldValue> V;
 	char s[200];
 	s[0] = 0;
-	if ( !InputBox("Введите название поля (* - все поля):", s, 200) ) return;
+	if ( !InputBox(_R("Введите название поля (* - все поля):"), s, 200) ) return;
 	BYTE FieldNo = ErrUChar;
 	if (s[0] != '*')
 	{
@@ -1156,7 +1156,7 @@ void CWordList::OnStatisticFieldValue()
 		S += Q;
 	};
 
-	GlobalOpenReport (S, "Заполнение словарных полей");
+	GlobalOpenReport (S, _R("Заполнение словарных полей"));
 
 
 };
@@ -1338,7 +1338,7 @@ void CWordList::OnSetAuthor()
   if (::MessageBox(this->m_hWnd, Q, "Confirmation",MB_YESNO) == IDNO) return;
   char s[200];
   s[0] = 0;
-  if ( !InputBox("Введите имя автора:", s, 15) ) return;
+  if ( !InputBox(_R("Введите имя автора:"), s, 15) ) return;
   CWaitCursor C;
   vector <TUnit> UnitNos;
 
@@ -1358,7 +1358,7 @@ void CWordList::OnSelectByAuthor()
 {
 	char s[200];
 	s[0] = 0;
-	if ( !InputBox("Введите имя автора:", s, 15) ) return;
+	if ( !InputBox(_R("Введите имя автора:"), s, 15) ) return;
 	CWaitCursor C;
 
 	for (size_t  i = 0; i < GetUnitsSize(); i++)
@@ -1586,7 +1586,7 @@ void CWordList::UpdateCurrentPos()
   if (pos != 0)
 	{
 	  UnitNo = m_WordList.GetNextSelectedItem(pos);
-      m_UnitsSize.Format ("Entry No %i (из %i)",    UnitNo+1, m_WordList.GetItemCount());
+      m_UnitsSize.Format (_R("Entry No %i (из %i)"),    UnitNo+1, m_WordList.GetItemCount());
       UpdateData(FALSE);
 	};
 

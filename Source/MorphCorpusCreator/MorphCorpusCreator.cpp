@@ -656,7 +656,7 @@ std::string CMorphCorpusCreator::process_gram_homonym(std::string lemma, long pa
 					int iPos = str_gramems.find(_R("рд"));
 					if( iPos != -1 ) 
 					{
-						str_gramems.replace(iPos, 2, "рд2");
+						str_gramems.replace(iPos, 2, _R("рд2"));
 					}
 				}
 				
@@ -666,7 +666,7 @@ std::string CMorphCorpusCreator::process_gram_homonym(std::string lemma, long pa
 				{	
 					int iPos = str_gramems.find(_R("пр"));
 					if( iPos != -1 ) 
-						str_gramems.replace(iPos, 2, "пр2");
+						str_gramems.replace(iPos, 2, _R("пр2"));
 				}
 		}
 	}

@@ -337,7 +337,7 @@ one of the boy. Для этого надо числительное сделат
 void  CEngSemStructure::SetSelectiveRelations()
 {
 	for (long RelNo=0; RelNo< m_Relations.size(); RelNo++)
-	if ( m_Relations[RelNo].m_SyntacticRelation == "ЭЛЕКТ_ИГ" )
+	if ( m_Relations[RelNo].m_SyntacticRelation == _R("ЭЛЕКТ_ИГ") )
 	{
 		MoveIncomingRelations(m_Relations[RelNo].m_SourceNodeNo,m_Relations[RelNo].m_TargetNodeNo);
 		MoveIncomingDopRelations(m_Relations[RelNo].m_SourceNodeNo,m_Relations[RelNo].m_TargetNodeNo);
@@ -687,7 +687,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 			EngVerbTenseEnum AVREM_Tense = handle_AVREM_field(algNodes[j],true,engNode.RusNode);
 			if( AVREM_Tense != zero_tn )
 			{
-				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,"по полю RUSETENSE");
+				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,_R("по полю RUSETENSE"));
 				CorrectTenseByDictVerbFeatures(engNode); // "RESTR" "not_cont"
 			}
 		}

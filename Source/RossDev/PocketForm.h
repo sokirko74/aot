@@ -39,7 +39,7 @@ public:
  		POSITION pos = m_WordList.GetFirstSelectedItemPosition();
 
   		if (pos == NULL)
-			{ ::MessageBox(0, "В списке не выделено ни одного словарного входа", "Message Box", MB_OK);
+			{ ::MessageBox(0, _R("В списке не выделено ни одного словарного входа"), "Message Box", MB_OK);
 			  return false;};
 
 		UnitNo = m_WordList.GetNextSelectedItem(pos);

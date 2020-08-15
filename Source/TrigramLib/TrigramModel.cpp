@@ -511,11 +511,11 @@ CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 		)
 		{
             for (size_t  i=0; i < m_RegisteredTags.size();i++)
-                if (m_RegisteredTags[i].length() > 3 && m_RegisteredTags[i].substr(0,4) == "ЧИСЛ")
+                if (m_RegisteredTags[i].length() > 3 && m_RegisteredTags[i].substr(0,4) == _R("ЧИСЛ"))
                     R.m_PossibleWordTags.insert(i);
 
             if (R.m_PossibleWordTags.empty())
-				throw CExpc ("Cannot find ЧИСЛ tag");
+				throw CExpc (_R("Cannot find ЧИСЛ tag"));
 		}
 		else
 		if (		ispunct((BYTE)WordStr[0])

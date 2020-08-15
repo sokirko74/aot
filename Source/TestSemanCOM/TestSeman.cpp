@@ -88,7 +88,7 @@ std::string GetWordStrOfNode (ISemStructurePtr piSeman, int NodeNo)
 		NodeStr += "\t";
 		NodeStr += GetGramInfo(Word->Poses, Word->Grammems);
 	}
-	NodeStr += " Отредакт. морф. информация: ";
+	NodeStr += _R(" Отредакт. морф. информация: ");
 	NodeStr += GetGramInfo(Node->Poses, Node->Grammems);
 
 	return NodeStr;
@@ -158,7 +158,7 @@ int main(int argc, char* argv[])
 		{
 			printf ("SentenceNo = %i\n",SentenceNo++);
 
-			piSeman->FindSituations(buffer,0,"общ",20000,-1,"");
+			piSeman->FindSituations(buffer,0,_R("общ"),20000,-1,"");
 			do {
 				printf ("Nodes:\n");
 				for (int i = 0; i < piSeman->NodesCount; i++)

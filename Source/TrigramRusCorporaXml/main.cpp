@@ -43,7 +43,7 @@ void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const 
             std::string pos = "UNK";
 
             if (isdigit((BYTE) pos[0]))
-                pos = "пїЅпїЅ";
+                pos = _R("пїЅпїЅ");
             else if (W.IsImportantPunct())
                 pos = W.m_WordStr.c_str();
 

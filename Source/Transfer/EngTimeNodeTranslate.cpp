@@ -114,14 +114,14 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 		/*
 		 если есть числительное полу, тогда слово должно быть в единственном
 		*/
-	    if (RusNode.HasRelOperator("ПОЛУ"))
+	    if (RusNode.HasRelOperator(_R("ПОЛУ")))
 			  pl_str ="";
 
 
 		res = tr_by_ross_simple(GetRossHolder(TimeRoss), word);
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator(_R("ПОЛУ")))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -129,7 +129,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 		res = tr_by_thesaurus(m_pData->GetThes(OmniThes), word);
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator(_R("ПОЛУ")))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -149,7 +149,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 		 };
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator(_R("ПОЛУ")))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -171,7 +171,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 
 		if(res.size()) 
 		{ 
-			if (RusNode.HasRelOperator("ПОЛУ"))
+			if (RusNode.HasRelOperator(_R("ПОЛУ")))
 			  res = " half "+res;
 			return res + pl_str;
 		};
@@ -276,7 +276,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 			if (nodes[PlaceNo] == 0)
 			{
 				std::string UnitStr =  GetRoss(TimeRoss)->GetEntryStr(MainArticle.m_UnitNo);
-				std::string Mess = "При переводе \""+UnitStr +"\" не найдено  соответствия для " +eng_item;
+				std::string Mess = _R("При переводе \")"+UnitStr +"\_R(" не найдено  соответствия для ") +eng_item;
 				MainNode.m_bReached = true;  
 				ErrorMessage (Mess);
 				return true;

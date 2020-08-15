@@ -332,7 +332,7 @@ bool CTrigramModel::tag_sentence(char* SentenceStr) const
 			set<string> Lemmas1 = GetLemmaSetByTagAndWordStr(words[i], m_RegisteredTags[tags[i].m_TagId1], false);
 			
 			if (		Lemmas1.find(lemmas[i]) == Lemmas1.end()
-					&&	!(Lemmas1.find("ТОТ")!= Lemmas1.end() && (lemmas[i] == "ТО"))
+					&&	!(Lemmas1.find(_R("ТОТ"))!= Lemmas1.end() && (lemmas[i] == _R("ТО")))
 				)
 			{
 				

@@ -391,8 +391,8 @@ void CEngSemStructure::ApplyPredicativeRule(int iEngNode)
 
 	if( RusStr.GetNode(iRusNode).GetType() != Ross )
 		return;
-	if(		!GetRossHolder(Ross)->HasFieldValue(std::string("GF"),std::string("ПРЕДК:ГГ"),RusStr.GetNode(iRusNode).GetUnitNo())
-		&&	!GetRossHolder(Ross)->HasFieldValue(std::string("GF"),std::string("ГЛ:ГГ_безл"),RusStr.GetNode(iRusNode).GetUnitNo())
+	if(		!GetRossHolder(Ross)->HasFieldValue(std::string("GF"),std::string(_R("ПРЕДК:ГГ")),RusStr.GetNode(iRusNode).GetUnitNo())
+		&&	!GetRossHolder(Ross)->HasFieldValue(std::string("GF"),std::string(_R("ГЛ:ГГ_безл")),RusStr.GetNode(iRusNode).GetUnitNo())
 		)
 		return;
 
@@ -546,7 +546,7 @@ void CEngSemStructure::ApplyTwoNegationsRule(int iEngNode)
 	if( iSemMainWord == -1 )
 		return;
 
-	if( !m_Nodes[iEngNode].HasRelOperator("НЕ") )
+	if( !m_Nodes[iEngNode].HasRelOperator(_R("НЕ")) )
 		return;
 //
 	vector<long> outChilds;
@@ -563,7 +563,7 @@ void CEngSemStructure::ApplyTwoNegationsRule(int iEngNode)
 	if( negChilds.size() < 1 )
 		return;
 //
-	m_Nodes[iEngNode].DelRelOperator("НЕ");
+	m_Nodes[iEngNode].DelRelOperator(_R("НЕ"));
 	if( negChilds.size() == 1 )
 		return;
 //
@@ -650,8 +650,8 @@ void CEngSemStructure::ImpersonalVerb(int iEngNode)
 	if( !engWord.HasPOS(eVERB) && !engWord.HasPOS(eMOD) )
 		return;
 
-	if( engNode.HasRelOperator("_мягк_пригласит_наклонение") ||
-		engNode.HasRelOperator("_пригласит_наклонение") )
+	if( engNode.HasRelOperator(_R("_мягк_пригласит_наклонение")) ||
+		engNode.HasRelOperator(_R("_пригласит_наклонение")) )
 		return;
 
 	if( engNode.m_Words[0].m_Lemma=="have" )
@@ -882,7 +882,7 @@ if( !GetRossHolder(rusNode.GetType())->HasFieldValue(std::string("SF"),std::stri
 	if( rusRel.m_SynReal.m_Conj.m_UnitNo == ErrUnitNo )
 		return;
 	std::string strOb = GetRoss(OborRoss)->GetEntryStr(rusRel.m_SynReal.m_Conj.m_UnitNo);
-	if( strOb.find("если") == -1)
+	if( strOb.find(_R("если")) == -1)
 		return;
 
 // проверим, что нет subj

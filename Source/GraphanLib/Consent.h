@@ -30,14 +30,14 @@ inline const char* GetStrByRubiconType (RubiconEnum t )
 {
 	switch (t) {
 		case rUndef : return "????";
-		case rELine : return "Пустая строка";
-		case rPar : return "Отступ";
-		case rPoint	: return "Начало пункта";
-		case rBeg : return "Начало текста";
-		case rEnd : return "Конец текста";
-		case rQQ1 : return "Начало кукушки";
-		case rQQ2 : return "Конец кукушки";
-		default  : return "Конец УП (превышение по длине)";
+		case rELine : return _R("Пустая строка");
+		case rPar : return _R("Отступ");
+		case rPoint	: return _R("Начало пункта");
+		case rBeg : return _R("Начало текста");
+		case rEnd : return _R("Конец текста");
+		case rQQ1 : return _R("Начало кукушки");
+		case rQQ2 : return _R("Конец кукушки");
+		default  : return _R("Конец УП (превышение по длине)");
 	};
 
 };

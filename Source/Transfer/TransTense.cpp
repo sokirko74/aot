@@ -171,7 +171,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 		if( m_Nodes[iEngNode].m_Words[iMainWord].m_Lemma == "cannot" )
 		{
 			m_Nodes[iEngNode].m_RelOperators.clear();
-			m_Nodes[iEngNode].m_RelOperators.push_back("НЕ");
+			m_Nodes[iEngNode].m_RelOperators.push_back(_R("НЕ"));
 			m_Nodes[iEngNode].m_Words[iMainWord].m_Lemma = "can";
 		}
 		
@@ -396,7 +396,7 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 		// одно из правил синтеза. потом, наверно, оно должно уйти, когла
 		// начнем обрабатывать условные конструкции
 		if( m_Clauses[m_Nodes[NodeNo].m_ClauseNo].m_HasParticleBY )
-			  MainWord.SetTense(would_smp_tn, "Частица \'БЫ\'");
+			  MainWord.SetTense(would_smp_tn, _R("Частица \'БЫ\'"));
 
 
 		// у глагола to be нет вспомогательных глаголов в настоящем и прошедшем временах
@@ -408,7 +408,7 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 		// вспомогательный глагол не нужен
         if( (MainWord.GetTense()==past_smp_tn || MainWord.GetTense() == present_smp_tn) 
 			&& !MainWord.m_bMorphologicalPassiveForm  
-			&& !m_Nodes[NodeNo].HasRelOperator("НЕ") )
+			&& !m_Nodes[NodeNo].HasRelOperator(_R("НЕ")) )
 		{
 			if( !RusStr.IsQuestionClause(RusStr.GetNode(m_Nodes[NodeNo].RusNode).m_ClauseNo) )
 				continue;
@@ -564,7 +564,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 			{
 				std::string s1 = AVREM_values[j].first;
 				std::string s2 = AVREM_values[j].second;
-				if( s1=="прш" && s2=="Simple" )
+				if( s1==_R("прш") && s2=="Simple" )
 					return gerund_prf_tn;
 			}
 			return zero_tn;
@@ -584,26 +584,26 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 		{
 			DefaultTense = s2;
 		}
-		else if(s0 == "нст")
+		else if(s0 == _R("нст"))
 		{
 			if( present.empty() )
 				present = s2;
 		}
-		else if(s0 == "прш")
+		else if(s0 == _R("прш"))
 		{
 			if( past.empty() )
 				past = s2;
 		}
-		else if(s0 == "буд")
+		else if(s0 == _R("буд"))
 		{
 			if(future.empty())
 				future = s2;
 		}
-		else if(s0 == "нсв")
+		else if(s0 == _R("нсв"))
 		{
 			nsv = s2;		
 		}
-		else if(s0 == "св")
+		else if(s0 == _R("св"))
 		{
 			sv = s2;
 		}
@@ -768,7 +768,7 @@ bool CEngSemStructure::CorrectTenseByDictConjFeatures(int iNode,CDictUnitInterp 
 		else if(is_past(NewTense))		NewTense = past_cnt_tn;
 		else if(is_would(NewTense))		NewTense = would_cnt_tn;
 	
-	if(ConjHasRestr("RUSETENSE", "буд - > present"))
+	if(ConjHasRestr("RUSETENSE", _R("буд - > present")))
 		switch(NewTense){
 			case future_smp_tn: NewTense = present_smp_tn; break;
 			case future_prf_tn: NewTense = present_prf_tn; break;
@@ -776,7 +776,7 @@ bool CEngSemStructure::CorrectTenseByDictConjFeatures(int iNode,CDictUnitInterp 
 			case future_prf_cnt_tn: NewTense = present_prf_cnt_tn; break;
 		}
 
-	if(ConjHasRestr("RUSETENSE", "прш - > past_prf"))
+	if(ConjHasRestr("RUSETENSE", _R("прш - > past_prf")))
 		if(is_past(NewTense))	NewTense = past_prf_tn;
 
 	if (GetRossHolder(ConjInterp.m_DictType)->HasFullFieldValue("GF", ">> gerund",  ConjInterp.m_UnitNo, 2))

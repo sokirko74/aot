@@ -535,7 +535,7 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 	{		
 		const SDoubleConj& vConj = *it;
 		long CurrWordNo  = G.m_iFirstWord;
-        if ((std::string(vConj.m_FirstPart[0].m_item) == "КАК") && !sent[G.m_iFirstWord].HasPOS(GetOpt()->m_Conjunction))
+        if ((std::string(vConj.m_FirstPart[0].m_item) == _R("КАК")) && !sent[G.m_iFirstWord].HasPOS(GetOpt()->m_Conjunction))
             break;
 
 		/*

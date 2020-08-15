@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 			return -1;
 
 		// processing one Russian sentence (from Graphematics to Syntax)
-		if (!SyntaxHolder.GetSentencesFromSynAn("мама мыла раму", FALSE, FALSE, FALSE))
+		if (!SyntaxHolder.GetSentencesFromSynAn(_R("мама мыла раму"), FALSE, FALSE, FALSE))
 			return -1;
 
 		// printing all syntax groups

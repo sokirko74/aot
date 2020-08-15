@@ -83,7 +83,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 
 	// then put numerals
 	for(i = 0; i < rels.size(); i++){
-		if(SyntaxRelIs(rels[i], "ЧИСЛ_СУЩ") || SyntaxRelIs(rels[i], "НАР_ЧИСЛ_СУЩ")){
+		if(SyntaxRelIs(rels[i], _R("ЧИСЛ_СУЩ")) || SyntaxRelIs(rels[i], _R("НАР_ЧИСЛ_СУЩ"))){
 			ordered_rels[i] = true;
 			int sub = Rel(rels[i]).m_TargetNodeNo;
 			Res(sub).order("<<", curent_pos++);
@@ -115,7 +115,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 		// GEN_NOUN
 		int rel = rels[i];
 		int sub_node = Rel(rel).m_TargetNodeNo;
-		if(SyntaxRelIs(rel, "ПРИЛ_СУЩ")){
+		if(SyntaxRelIs(rel, _R("ПРИЛ_СУЩ"))){
 
 			Res(sub_node).order("<<", curent_pos++);
 

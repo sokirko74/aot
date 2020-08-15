@@ -60,7 +60,7 @@ BOOL CSetEditor::OnInitDialog()
 	CDialog::OnInitDialog();
 
 
-    SetWindowText(CString("Значения поля ") + ConstructFldName(GetRoss(), m_Field.FieldNo, m_Field.LeafId, m_Field.BracketLeafId));
+    SetWindowText(CString(_R("Значения поля ")) + ConstructFldName(GetRoss(), m_Field.FieldNo, m_Field.LeafId, m_Field.BracketLeafId));
 
 	// установка шрифта
 	CFont* F = m_ListBox.GetFont();
