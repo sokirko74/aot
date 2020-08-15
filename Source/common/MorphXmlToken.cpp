@@ -258,7 +258,7 @@ std::string Grammem_MyStem2Dialing(std::string pos)
 	if (pos == "pl") return _R("мн"); else
 	if (pos == "nom") return _R("им");  else
 	if (pos == "gen") return _R("рд");  else
-	if (pos == "gen2") return "рд,2";  else
+	if (pos == "gen2") return _R("рд,2");  else
 	if (pos == "dat") return _R("дт");  else
 	if (pos == "acc") return _R("вн");  else
 	if (pos == "acc2") return _R("им");  else // "пошел в солдаты"
@@ -279,18 +279,18 @@ std::string Grammem_MyStem2Dialing(std::string pos)
 	if (pos == "partcp") return _R("прч");  else
 	if (pos == "ger") return _R("дпр");  else
 	if (pos == "1p") return _R("1л");  else
-	if (pos == "1-л") return _R("1л");  else
+	if (pos == _R("1-л")) return _R("1л");  else
 	if (pos == "2p") return _R("2л");  else
 	if (pos == "3p") return _R("3л");  else
 	if (pos == "comp") return _R("сравн");  else
-	if (pos == "comp2") return "сравн,2";  else
+	if (pos == "comp2") return _R("сравн,2");  else
 	if (pos == "supr") return _R("прев");  else
 	if (pos == _R("прев")) return _R("прев");  else
 	if (pos == "brev") return _R("кр");  else
 	if (pos == "sh") return _R("кр");  else
 	if (pos == "praes") return _R("нст");  else
 	if (pos == "abbr") return _R("аббр");  else
-	if (pos == "наст*") return _R("нст");  else
+	if (pos == _R("наст*")) return _R("нст");  else
 	if (pos == "fut") return _R("буд");  else
 	if (pos == "praet") return _R("прш");  else
 	if (pos == "act") return _R("дст");  else
