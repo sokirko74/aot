@@ -7,7 +7,7 @@ const std::string TrennbarePraefixe[TrennbarePraefixeCount] = {
 "AB",		"AN",		"AUF",		"AUS",		"BEI",		"DAR",		"DURCH",	"EIN",		
 "FEHL",		"FEST",		"HEIM",		"HINZU",	"IRRE",		"LOS",		"MIT",		"NACH",			
 "PREIS",	"STAND",	"STATT",	"TEIL",		"UEBER",	"UM",		"UNTER",	"VOR",		
-"WETT",		"WIDER",	"WUNDER",	"ZU",		"ZURECHT",	"ZURЬCK",	"ZUSAMMEN"};
+"WETT",		"WIDER",	"WUNDER",	"ZU",		"ZURECHT",	_G("ZURÜCK"),	"ZUSAMMEN"};
 
 
 
