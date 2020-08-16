@@ -8,7 +8,7 @@
 
 // should be without "bleiben"
 const size_t PerfeckAnomalieWordsCount = 11;
-const char PerfeckAnomalieWords[PerfeckAnomalieWordsCount][MAX_WORD_LEN] = 
+std::string PerfeckAnomalieWords[PerfeckAnomalieWordsCount] = 
 {_G("MÜSSEN"), _G("KÖNNEN"), _G("DÜRFEN"),_G("MÖGEN"), 
 "WOLLEN", "SOLLEN",_G("HЦREN"),"LASSEN","SEHEN", "HELFEN", "LEHREN"};
 

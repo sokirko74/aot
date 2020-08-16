@@ -4,6 +4,8 @@
 #include "../../common/util_classes.h"
 #include "../../GraphanLib/GraphmatFile.h"
 #include "../../TrigramLib/TrigramModel.h"
+#include "MergeFiles.h"
+
 #include <string>
 
 #ifndef WIN32
@@ -71,13 +73,11 @@ bool WriteBigramsAndClear(BigramsType& Bigrams, std::string FileName)
 	return true;
 };
 
-void RemoveTempFiles(std::string AllTempFilesStr)
+void RemoveTempFiles(std::vector<std::string> AllTempFiles)
 {
-	fprintf (stderr,"remove temporary files \n");
-	StringTokenizer  tok (AllTempFilesStr.c_str()," ");
-	while (tok())
-		remove(tok.val());
-
+	for (auto& f : AllTempFiles) {
+		remove(f.c_str());
+	}
 };
 
 
@@ -151,11 +151,11 @@ interp_t DeletePunctuationMarks(const interp_t& Tokens)
 
 
 
-std::string AllTempFilesStr;
+std::vector<std::string> AllTempFiles;
 
 void  termination_handler(int signum)
 {
-	RemoveTempFiles(AllTempFilesStr);
+	RemoveTempFiles(AllTempFiles);
 	exit(1);
 };
 
@@ -338,33 +338,22 @@ try
 				fprintf (stderr,"write to temporary file %s\n", TempFile.c_str());
 				if (!WriteBigramsAndClear(Bigrams, TempFile))
 					return 1;
-				AllTempFilesStr += " "+TempFile;
+				AllTempFiles.push_back(TempFile);
 				
 			};
 		};
 		std::string TempFile = CreateTempFileName();
 		if (!WriteBigramsAndClear(Bigrams, TempFile))
 			return 1;
-		AllTempFilesStr += " "+TempFile;
+		AllTempFiles.push_back(TempFile);
 		
 		fprintf (stderr,"AllFilesSize = %zu\n", AllFileSize);
 
 		fprintf (stderr,"writing bigrams to %s\n", OutputFile.c_str());
+		MergeSortedFiles m(AllTempFiles, OutputFile);
+		m.Merge();
 		std::string  UniteCommand;
-		#ifdef WIN32
-			UniteCommand = Format ("gsort -m %s > %s", AllTempFilesStr.c_str(), OutputFile.c_str());
-		#else
-			UniteCommand = Format ("sort -m %s > %s", AllTempFilesStr.c_str(), OutputFile.c_str());
-		#endif
-		fprintf (stderr,"%s\n", UniteCommand.c_str());
-
-		if (system (UniteCommand.c_str()) != 0)
-		{
-			fprintf (stderr,"!!! an exception occurred (cannot sort) !!!\n");
-			RemoveTempFiles(AllTempFilesStr);
-			return 0;
-		};
-		RemoveTempFiles(AllTempFilesStr);
+		RemoveTempFiles(AllTempFiles);
 
 		#ifndef  WIN32
 			signal(SIGINT, oldHandler);

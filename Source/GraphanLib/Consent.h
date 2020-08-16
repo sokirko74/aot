@@ -22,22 +22,18 @@
 class CGraphmatFile;
 
 
-enum RubiconEnum {	rUndef, 	rELine, 	rPar, 	rPoint,	rBeg, 	rEnd,	rQQ1,
-	rQQ2, 	rMaxLimit
-};
+enum RubiconEnum {	rUndef, 	rELine, 	rPar, 	rPoint,	rBeg, 	rEnd,	rMaxLimit};
 
 inline const char* GetStrByRubiconType (RubiconEnum t )
 {
 	switch (t) {
 		case rUndef : return "????";
-		case rELine : return _R("Пустая строка");
-		case rPar : return _R("Отступ");
-		case rPoint	: return _R("Начало пункта");
-		case rBeg : return _R("Начало текста");
-		case rEnd : return _R("Конец текста");
-		case rQQ1 : return _R("Начало кукушки");
-		case rQQ2 : return _R("Конец кукушки");
-		default  : return _R("Конец УП (превышение по длине)");
+		case rELine : return "Empty line";
+		case rPar : return "Indention";
+		case rPoint	: return "Bullet start";
+		case rBeg : return "Text start";
+		case rEnd : return "Text end";
+		default  : return "Length limit";
 	};
 
 };

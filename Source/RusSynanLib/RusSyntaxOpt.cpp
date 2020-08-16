@@ -10,11 +10,10 @@
 #include  "../StructDictLib/TempArticle.h"
 
 
-const int rSyntaxGroupTypesCount = 48 ;
-const char rSyntaxGroupTypes [rSyntaxGroupTypesCount][30] = 
+const int rSyntaxGroupTypesCount = 48;
+const std::string rSyntaxGroupTypes [rSyntaxGroupTypesCount] = 
 {
-
-					_R("ПРИЛ_СУЩ"),				_R("КОЛИЧ"),      
+						_R("ПРИЛ_СУЩ"),				_R("КОЛИЧ"),      
 _R("СЛОЖ_ЧИСЛ"),		_R("НАР_ЧИСЛ_СУЩ"),			_R("СУЩ_ЧИСЛ"),    
 _R("ПГ"),				_R("ОДНОР_ПРИЛ"),			_R("НАРЕЧ_ГЛАГОЛ"),	
 _R("НАР_ПРИЛ"),			_R("НАР_НАР"),				_R("СРАВН_СТЕПЕНЬ"),	
@@ -337,7 +336,7 @@ bool CRusSyntaxOpt::IsGroupWithoutWeight(int GroupType, const char* cause) const
 	//  "самого ленивого"
 	
 	if (    cause
-			&& !strcmp(cause,_R("Предложная группа c прилагательным"))
+			&& !strcmp(cause,"PP + adjective")
 		)
 		return true;
 

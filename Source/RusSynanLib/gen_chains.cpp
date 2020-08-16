@@ -112,7 +112,7 @@ bool CRusFormatCaller::format_for_from_compar (CGroup& G)
 
 	 G.m_MainGroup = P;
 	 G.m_iLastWord = H.m_iLastWord;
-	 G.m_Cause = _R("Сравнительное прилагательное и идущее сразу за ним ИГ в род. падеже ");
+	 G.m_Cause = "A comparative adjective and an NP immediately following it in genitive";
 	 G.m_GroupType = FROM_COMPAR;
 	 G.SetGrammems( 0 );
 

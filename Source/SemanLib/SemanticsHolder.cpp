@@ -353,7 +353,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		     WORD PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
              if (PrepNo == ErrUnitNo) 
 			 {
-				 std::string Q =Format (_R("Предлог %s в статье %s не найден в словаре оборотов"), Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
+				 std::string Q =Format ("Preposition %s in unit %s cannot be found in the dictionary", Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
 				 ErrorMessage (Q);
 				 continue;
 			 };

@@ -16,7 +16,7 @@
 #include "StdAfx.h"
 
 const int AntecWordsCount = 8;
-const char g_strAntecWords[AntecWordsCount][MaxWordLen] = {_R("ВСЕ"), _R("КТО-НИБУДЬ"), _R("КТО-ТО"), _R("ОДИН"), _R("КАЖДЫЙ"), _R("ТОТ"), _R("ТО"), _R("ЧТО-НИБУДЬ")};
+std::string g_strAntecWords[AntecWordsCount] = {_R("ВСЕ"), _R("КТО-НИБУДЬ"), _R("КТО-ТО"), _R("ОДИН"), _R("КАЖДЫЙ"), _R("ТОТ"), _R("ТО"), _R("ЧТО-НИБУДЬ")};
 
 
 #define _SWITCH(X) std::string __switch_val = X;

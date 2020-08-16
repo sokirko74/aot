@@ -663,7 +663,7 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 		находим тогда удаляем ее, например
 		"я думал о том, почему ты мне надоел"
 		*/
-		WORD O_UnitNo = GetRoss(OborRoss)->LocateUnit(_R("о+П"),1);
+		WORD O_UnitNo = GetRoss(OborRoss)->LocateUnit(_R("о+П").c_str(), 1);
 		vector<long> Nodes;
 		GetOutcomingNodes(NodeNo,Nodes, false);
 		for (long j=0; j < Nodes.size(); j++)

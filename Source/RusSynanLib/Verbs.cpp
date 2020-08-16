@@ -25,7 +25,7 @@ bool CRusFormatCaller::format_for_neg_verb (CGroup& G)
   G.m_GroupType = NEG_VERB;
   G.m_MainGroup = G.m_iFirstWord + 1;
   G.m_iLastWord = G.m_iFirstWord + 1;
-  G.m_Cause = _R("Частица 'не', справа которой стоит глагольная форма"); 
+  G.m_Cause = "'not' + VP"; 
   create_syn_rel(G, get_main_word(G.m_iLastWord),G.m_iFirstWord,NEG_VERB);
   return true;
 }
@@ -191,7 +191,7 @@ bool CRusFormatCaller::format_for_verb_inf (CGroup& G)
   if (Wj.m_UnitType  != EWord) return false;
   
   G.m_iLastWord = H1.m_iLastWord;
-  G.m_Cause = _R("ГГ + инфинитив");
+  G.m_Cause = "VP + infinitive";
   G.m_MainGroup = H;
   G.m_GroupType = VERB_INF;
   G.SetGrammems( H.GetGrammems() );

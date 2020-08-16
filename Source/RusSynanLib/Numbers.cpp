@@ -174,7 +174,7 @@ bool CRusFormatCaller::format_for_num_complex (CGroup& G)
 		|| W1.GetPoses() != W3.GetPoses()) // кроме "на 1,7 - 1,8%"
 		return false;
 
-	G.m_Cause = _R("Последовательность чисел вперемешку со знаками препинания");
+	G.m_Cause = "numbers and punctuation marks";
 	G.m_GroupType = C_NUMERALS;
 	G.SetGrammems( sent[G.m_iLastWord].GetGrammems());
 	G.m_MainGroup = G.m_iFirstWord;
@@ -221,7 +221,8 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 	if(!strcmp(Wk.get_word(), "№") &&  is_numeral(sent[k+1])) //я вышел из дома №26
 	{
 		Wk.SetGramcodes( _R("аа") );
-		change_words_in_group_gramcodes(get_maximal_group(k+1), _R("аа"), CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
+
+		change_words_in_group_gramcodes(get_maximal_group(k+1), _R("аа"), CaseNumberGender0); 
 	}
 	G.m_MainGroup = MainGroup;
 	G.SetGrammems( Wi.GetGrammems() );  
@@ -289,7 +290,7 @@ bool CRusFormatCaller::format_for_number_adverb (CGroup& G)
 
     if( G.m_iLastWord >= sent.size() )
         return false;
-    G.m_Cause = _R("Группа наречное числительное+ИГ(мн рд)");
+    G.m_Cause = "adverb numeral group +NP(plural, genitive)";
     G.m_GroupType = NUMERAL_ADVERB;
     const CGroup& MainGroup = get_maximal_group(i);
     G.m_MainGroup = MainGroup;
@@ -741,7 +742,6 @@ bool CRusFormatCaller::format_for_plural_number_noun(CGroup& G, bool small_numbe
         G.m_MainGroup = G2;
 		G.m_OtherGroup = G1;
 		G.SetGrammems(grammems, G1.m_GramCodes.c_str());
-		//G.m_Cause = "Группа числительные + ИГ(мн рд)";
         create_syn_rel(G, G2.m_MainWordNo,G1.m_MainWordNo, G.m_GroupType);
         G.m_iLastWord = G2.m_iLastWord;						
 	}
@@ -949,7 +949,7 @@ bool CRusFormatCaller::format_standard_param_abbr(CGroup& G)
 	G.m_GramCodes = R->GleicheAncode1(0, _R("ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел"),
 				R->GetGramCodes(NOUN, G.GetGrammems(), CaseNumberGender));
 
-	G.m_Cause = _R("Группа числительных + аббр");
+	G.m_Cause = "Numeral group + abbreviation";
 
 
 	set_noun_numeral_group_type(G, NUMERAL_NOUN);

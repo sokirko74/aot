@@ -50,7 +50,7 @@ bool CRusFormatCaller::format_for_similar_infs(CGroup& G)
 	};
 	if (last_member == i) return false;
 
-	G.m_Cause = _R("Соч. группа инфинитивов, соединенная запятыми и простыми союзами");
+	G.m_Cause = "conjoined infinitives";
 	G.m_GroupType = SIMILAR_INFS;
 	G.m_MainGroup = get_maximal_group(G.m_iFirstWord);
 	G.m_iLastWord = get_maximal_group(last_member).m_iLastWord;

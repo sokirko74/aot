@@ -306,3 +306,7 @@ inline std::string _E(const char* buffer) {
 inline std::string _G(const char* buffer) {
 	return convert_from_utf(buffer, morphGerman);
 }
+
+inline bool startswith(const std::string& main, const std::string& prefix) {
+	return main.rfind(prefix, 0) == 0;
+}

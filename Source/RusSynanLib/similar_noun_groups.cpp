@@ -201,7 +201,7 @@ bool CRusFormatCaller::format_for_similar_noun_groups (CGroup& G)
         G.m_iFirstWord =  G.m_MainGroup.m_iFirstWord;
 		
 
-		G.m_Cause = _R("группа ИГ, соединенная запятыми и простыми союзами, согл. по падежу ");
+		G.m_Cause = "conjoined NPs";
 		G.m_GroupType = SIMILAR_NOUN_GROUPS;
 
         G.m_bCommaDelimited = is_only_comma_delimited(G);

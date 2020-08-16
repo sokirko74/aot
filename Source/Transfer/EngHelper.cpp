@@ -3,7 +3,7 @@
 #include "../SemanLib/LexFuncts.h"
 
 const int g_PersPronounsCount = 5;
-const char g_PersPronouns[g_PersPronounsCount][MaxWordLen] = {_R("Я"),_R("ТЫ"),_R("ОН"),_R("ОНА"), _R("ОНО")};
+std::string g_PersPronouns[g_PersPronounsCount] = {_R("Я"),_R("ТЫ"),_R("ОН"),_R("ОНА"), _R("ОНО")};
 
 
 bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const

@@ -372,7 +372,7 @@ void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD gramm
 		};
 }
 
-bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const char* gramcodes, GrammemCompare CompareFunc)
+bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const std::string& gramcodes, GrammemCompare CompareFunc)
 {
 	if( gramcodes[0]==0 ) return false;
 	const CAgramtab *R = GetOpt()->GetGramTab(); 

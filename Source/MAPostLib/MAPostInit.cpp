@@ -140,7 +140,7 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 		//получаем из морфологии код НЕУБИВАЙМЕНЯ (неизменяеммое существительное всех родов)
 		BYTE POS;
 		QWORD Grammems;
-		if (    !m_pRusGramTab->ProcessPOSAndGrammemsIfCan(_R(" С мр,жр,ср,мн,ед,им,рд,дт,вн,тв,пр"),&POS, &Grammems) 
+		if (    !m_pRusGramTab->ProcessPOSAndGrammemsIfCan(_R(" С мр,жр,ср,мн,ед,им,рд,дт,вн,тв,пр").c_str(),&POS, &Grammems) 
 			 || !m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (POS, Grammems, m_DURNOVOGramCode)
 		   )
 		{

@@ -131,9 +131,9 @@ struct NodeHelper{
 	// истина, если отношение не было переведено
 	bool rel_is_valency(int rel) const;
 	bool ValencyIs(int rel, const char *str)	{return Rel(rel).m_Valency.m_RelationStr == str;}
-	bool SyntaxRelIs(int rel, const char *str)	{return Rel(rel).m_SyntacticRelation == str;}
+	bool SyntaxRelIs(int rel, const std::string& str)	const {return Rel(rel).m_SyntacticRelation == str;}
 
-	bool HasRelOperator(int node, const char *op)	
+	bool HasRelOperator(int node, const std::string& op)	
 	{
 		return Node(node).HasRelOperator(op);
 

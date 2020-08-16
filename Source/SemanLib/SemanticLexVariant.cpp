@@ -21,50 +21,46 @@ poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD U
 	{
      std::string S = GramFets[i].substr(0, GramFets[i].find_first_of(":"));
 	 
-	 if (S ==_R( _R("СУЩ")))	 
+	 if (S ==_R("СУЩ"))	 
 		 ret_poses |=  (1 << NOUN);
 	 else
-     if (S ==_R( _R("МС"))) 	 
+     if (S == _R("МС")) 	 
 		 ret_poses |= (1<<PRONOUN);
 	 else
     
-     if ((S ==_R( _R("МЕСТОИМ"))) || (S ==_R( _R("МС-П")))  || (S ==_R( _R("ПРИТ_МЕСТМ"))) )
+     if ((S ==_R("МЕСТОИМ")) || (S ==_R("МС-П"))  || (S ==_R("ПРИТ_МЕСТМ")) )
 		 ret_poses |= (1 << PRONOUN_P);
 	 else
-     if (S ==_R( _R("НАР")))
+     if (S ==_R("НАР"))
 		 ret_poses |=  (1 << ADV);
 	 else
-      if (S ==_R( _R("ЧАСТ")))
+      if (S ==_R("ЧАСТ"))
 		  ret_poses |= (1 << PARTICLE);
 	 else
-     if (S ==_R( _R("ПРЕДК")))
+     if (S ==_R("ПРЕДК"))
 		  ret_poses |= (1 << PREDK)  | (1 << PRONOUN_PREDK)	 ;
 	  else
-      if (S ==_R( _R("ГЛ")))
+      if (S ==_R("ГЛ"))
 		  ret_poses |= (	(1 << VERB) |
 							(1 << ADVERB_PARTICIPLE) |
 							(1 << PARTICIPLE) |
 							(1 << PARTICIPLE_SHORT) |
 							(1 << INFINITIVE) );
 	  else
-      if (S ==_R( _R("ПРИЛ")))
+      if (S ==_R("ПРИЛ"))
 		 ret_poses |=	( (1<<ADJ_FULL) 
 						| (1 << ADJ_SHORT)
 						| (1 << PARTICIPLE)
 						| (1 << PARTICIPLE_SHORT)
 						);
 	 else
-	 if (S ==_R( _R("ЧИСЛ")))		  
+	 if (S == _R("ЧИСЛ"))		  
 		ret_poses |= ((1<<NUMERAL_P) | (1<<NUMERAL) );		
 	 else
 	 {
 		 ErrorMessage (std::string("Unknown POS ")+std::string(GramFets[i])
 			 + std::string(" in article ") 
 			 + std::string(Ross.GetRoss()->GetEntryStr(UnitNo)));
-
-		 #ifdef  DEBUG
-		  throw CExpc ("Unknown POS ");
-		 #endif
 
 		 return 0;
 	 };
@@ -159,14 +155,14 @@ bool CRusSemStructure::BuildWordWithoutFemineSuffix (std::string& Word) const
 {
 	std::string NewWord;
 	if (  (Word.length() > 8)
-	    &&(Word.substr(Word.length()-8) ==_R( _R("тельница")))
+	    &&(Word.substr(Word.length()-8) == _R("тельница"))
 	   )
 		NewWord = Word.substr(0,Word.length()-4);
 	else
 	if (  (Word.length() > 4)
 	    &&(Word.substr(Word.length()-4) ==_R("ница"))
 	   )
-		NewWord = Word.substr(0,Word.length()-2) +_R( _R("к"));
+		NewWord = Word.substr(0,Word.length()-2) + _R("к");
 	else
 	if (  (Word.length() > 3)
 	    &&(Word.substr(Word.length()-3) == _R("ица"))

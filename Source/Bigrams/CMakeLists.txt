@@ -3,6 +3,7 @@ project(Bigrams)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
+#build bigrams.txt
 add_test(
         NAME BigramsBuilder
         COMMAND  Text2Bigrams English file.con --only-words

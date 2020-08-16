@@ -33,7 +33,7 @@ bool CRusFormatCaller :: format_for_rank_surname (CGroup& G)
 	G.SetGrammems( Wi.GetGrammems() );
 	G.m_MainGroup = main_gr;
     G.m_GroupType = RANK_NAMES;
-	G.m_Cause = _R("Правила сборки Должность+ФИО");   
+	G.m_Cause = "position + name";   
 	create_syn_rel(G,i,j,RANK_NAMES);
 	
 	return true;

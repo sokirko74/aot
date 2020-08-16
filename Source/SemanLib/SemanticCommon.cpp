@@ -263,7 +263,7 @@ long CSemNode::GetMinWordNo () const
 
 
 // проверяет наличие оператора среди  RelOperators
-bool CSemNode::HasRelOperator (std::string oper) const
+bool CSemNode::HasRelOperator (const std::string& oper) const
 {
 	return  find(m_RelOperators.begin(),m_RelOperators.end(), oper) != m_RelOperators.end();
 };

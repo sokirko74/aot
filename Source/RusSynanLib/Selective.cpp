@@ -8,9 +8,9 @@
 
 struct CSelectiveWord
 {
-	const char* m_Lemma;
+	std::string m_Lemma;
 	QWORD		m_Numder;		
-	CSelectiveWord (const char* Lemma, QWORD Numder)
+	CSelectiveWord (const std::string& Lemma, QWORD Numder)
 	{
 		m_Lemma = Lemma;
 		m_Numder = Numder;
@@ -76,7 +76,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 				if( strlen(lemma) < 4)
 					return false;
 				lemma = lemma + ( strlen(lemma) - 3);
-				if( strcmp(lemma,_R("ШИЙ")) )
+				if( _R("ШИЙ") != lemma)
 					return false;
 				next_word = G.m_iFirstWord + 1;
 		}

@@ -237,7 +237,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	// проверка GF(i)
 	for (long i=0; i<AllHyps.size();)
 	{
-		rml_TRACE (_R("проверка GF(*) для %s\n"),GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		rml_TRACE ("check GF(*) for %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 		long k=0;
 		for (; k < AllHyps[i].m_Coords.size(); k++)
 			if (!CheckCollocItemGramFet(
@@ -257,7 +257,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	// проверка SYNREP
 	for (long i=0; i<AllHyps.size();i++)
 	{
-		rml_TRACE (_R("проверка SYNREP для %s\n"),GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		rml_TRACE ("check SYNREP for %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 		const CColloc& C = m_pData->m_RusCollocs[AllHyps[i].m_CollocNo];
 		for (long j=0; j <  C.m_Rels.size(); j++)
 			if (C.m_Rels[j].m_SynRelName == _R("ПРИЛ_СУЩ"))

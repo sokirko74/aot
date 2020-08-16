@@ -223,7 +223,7 @@ public:
 
 	// changers
 	void	change_words_in_group_grammems(const CPeriod& group, QWORD grammems, QWORD breaks);
-	bool    change_words_in_group_gramcodes(const CPeriod& group, const char* gramcodes, GrammemCompare CompareFunc);
+	bool    change_words_in_group_gramcodes(const CPeriod& group, const std::string& gramcodes, GrammemCompare CompareFunc);
 	void	change_words_in_group_grammems(const CPeriod& group, QWORD grammems);
 	void	change_group_grammems(CGroup& group, QWORD grammems, QWORD breaks);
 	void	BuildSimilarSynRels(CGroup& G,int iGroupNum);

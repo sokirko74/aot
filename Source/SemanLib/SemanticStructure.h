@@ -288,7 +288,7 @@ public:
 	// выдает номер самого правого слова данного узла
 	long	GetMinWordNo () const;
 	// проверяет наличие оператора среди  RelOperators
-	bool	HasRelOperator (std::string oper) const;
+	bool	HasRelOperator (const std::string& oper) const;
 	// удаляет из оператор из  m_RelOperators
 	void	DelRelOperator(const std::string& oper);
     // проверяет, приписан ли узлу хотя бы один предлог

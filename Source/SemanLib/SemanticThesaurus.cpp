@@ -134,7 +134,7 @@ WORD CRusSemStructure::GetArticleByModel (long TerminId, int ThesaurusId) const
 	long ModelNo = Termin.m_ModelNo;
 	const CInnerModel& Model =	Thes->m_Models[ModelNo];
 	long ModelId = Model.m_ModelId;
-	std::string S = Format(_R("@Модель%i"),ModelId);
+	std::string S = Format("@ModelId=%i",ModelId);
 	return  GetRoss(GetRossIdByThesId(ThesaurusId))->LocateUnit(S.c_str(), 1);
 };
 

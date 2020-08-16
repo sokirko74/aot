@@ -276,7 +276,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 			if (nodes[PlaceNo] == 0)
 			{
 				std::string UnitStr =  GetRoss(TimeRoss)->GetEntryStr(MainArticle.m_UnitNo);
-				std::string Mess = _R("При переводе \")"+UnitStr +"\_R(" не найдено  соответствия для ") +eng_item;
+				std::string Mess = "Cannot translate \""+UnitStr +"\" to " + eng_item;
 				MainNode.m_bReached = true;  
 				ErrorMessage (Mess);
 				return true;
