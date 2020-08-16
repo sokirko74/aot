@@ -180,7 +180,7 @@ int main(int argc, const char **argv) {
 		if (bEchoInput) {
 			args.GetOutputStream() << s << "\t";
 		}
-		s = convert_from_utf(s.c_str(), language);
+		s = convert_from_utf8(s.c_str(), language);
 		std::string result;
 
         try {

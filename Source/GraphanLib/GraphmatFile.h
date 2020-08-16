@@ -123,7 +123,7 @@ public:
     // processing
     bool LoadDicts();
 
-    bool LoadStringToGraphan(const std::string &szBuffer);
+    void LoadStringToGraphan(const std::string &szBuffer);
 
     void LoadFileToGraphan(const std::string &CommandLine);
 

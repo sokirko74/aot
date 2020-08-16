@@ -1,22 +1,22 @@
 <chunk>
-<input>Мама мыла раму.</input>
+<input>РњР°РјР° РјС‹Р»Р° СЂР°РјСѓ.</input>
 <sent>
 	<synvar>
-		<clause type="ГЛ_ЛИЧН">Мама мыла раму .</clause>
-		<group type="ПРЯМ_ДОП">мыла раму</group>
+		<clause type="Р“Р›_Р›РР§Рќ">РњР°РјР° РјС‹Р»Р° СЂР°РјСѓ .</clause>
+		<group type="РџР РЇРњ_Р”РћРџ">РјС‹Р»Р° СЂР°РјСѓ</group>
 	</synvar>
-	<rel name="ПРЯМ_ДОП" gramrel="дст,пе,нс,прш,жр,ед," lemmprnt="МЫТЬ" grmprnt="дст,пе,нс,прш,жр,ед," lemmchld="РАМА" grmchld="но,жр,вн,ед," > мыла -> раму </rel>
-	<rel name="ПОДЛ" gramrel="" lemmprnt="МЫТЬ" grmprnt="дст,пе,нс,прш,жр,ед," lemmchld="МАМА" grmchld="од,жр,им,ед," > мыла -> Мама </rel>
+	<rel name="РџР РЇРњ_Р”РћРџ" gramrel="РґСЃС‚,РїРµ,РЅСЃ,РїСЂС€,Р¶СЂ,РµРґ," lemmprnt="РњР«РўР¬" grmprnt="РґСЃС‚,РїРµ,РЅСЃ,РїСЂС€,Р¶СЂ,РµРґ," lemmchld="Р РђРњРђ" grmchld="РЅРѕ,Р¶СЂ,РІРЅ,РµРґ," > РјС‹Р»Р° -> СЂР°РјСѓ </rel>
+	<rel name="РџРћР”Р›" gramrel="" lemmprnt="РњР«РўР¬" grmprnt="РґСЃС‚,РїРµ,РЅСЃ,РїСЂС€,Р¶СЂ,РµРґ," lemmchld="РњРђРњРђ" grmchld="РѕРґ,Р¶СЂ,РёРј,РµРґ," > РјС‹Р»Р° -> РњР°РјР° </rel>
 </sent>
 </chunk>
 <chunk>
-<input>Папа ушел на работу.</input>
+<input>РџР°РїР° СѓС€РµР» РЅР° СЂР°Р±РѕС‚Сѓ.</input>
 <sent>
 	<synvar>
-		<clause type="ГЛ_ЛИЧН">Папа ушел на работу .</clause>
-		<group type="ПГ">на работу</group>
+		<clause type="Р“Р›_Р›РР§Рќ">РџР°РїР° СѓС€РµР» РЅР° СЂР°Р±РѕС‚Сѓ .</clause>
+		<group type="РџР“">РЅР° СЂР°Р±РѕС‚Сѓ</group>
 	</synvar>
-	<rel name="ПГ" gramrel="вн," lemmprnt="НА" grmprnt="" lemmchld="РАБОТА" grmchld="но,жр,вн,ед," > на -> работу </rel>
-	<rel name="ПОДЛ" gramrel="" lemmprnt="УЙТИ" grmprnt="дст,нп,св,прш,мр,ед," lemmchld="ПАПА" grmchld="од,мр,им,ед," > ушел -> Папа </rel>
+	<rel name="РџР“" gramrel="РІРЅ," lemmprnt="РќРђ" grmprnt="" lemmchld="Р РђР‘РћРўРђ" grmchld="РЅРѕ,Р¶СЂ,РІРЅ,РµРґ," > РЅР° -> СЂР°Р±РѕС‚Сѓ </rel>
+	<rel name="РџРћР”Р›" gramrel="" lemmprnt="РЈР™РўР" grmprnt="РґСЃС‚,РЅРї,СЃРІ,РїСЂС€,РјСЂ,РµРґ," lemmchld="РџРђРџРђ" grmchld="РѕРґ,РјСЂ,РёРј,РµРґ," > СѓС€РµР» -> РџР°РїР° </rel>
 </sent>
 </chunk>

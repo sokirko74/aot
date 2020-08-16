@@ -25,7 +25,7 @@ int main(int argc, const char **argv) {
 
     MorphLanguageEnum  language = args.GetLanguage();
     bool direct  = ! args.Exists("indirect");
-    std::string word = convert_from_utf(args.Retrieve("input-word").c_str(), language);
+    std::string word = convert_from_utf8(args.Retrieve("input-word").c_str(), language);
     EngRusMakeUpper(word);
     std::string result = GetConnectedWords(word, 0, direct, "SortByBigramsFreq", language );
     args.GetOutputStream() << result << "\n";

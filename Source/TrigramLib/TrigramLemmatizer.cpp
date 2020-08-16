@@ -559,11 +559,7 @@ set<string> GetMystemSpecificGrammem(const vector<CMorphInterpretation>& v)
 vector<string> CTrigramModel::get_tokens_from_graphan(std::string InputStr)
 {
 	vector<string> tokens;
-	if (!m_Graphan.LoadStringToGraphan(InputStr))
-	{
-		return tokens;
-	};
-	
+	m_Graphan.LoadStringToGraphan(InputStr);
 	size_t TokensCount = m_Graphan.GetUnits().size();
 	
 	
@@ -582,12 +578,7 @@ vector<string> CTrigramModel::get_tokens_from_graphan(std::string InputStr)
 bool CTrigramModel::tagging_string_with_end_of_sents(std::string InputStr, std::string& Result) 
 {
 	Result = "";
-	if (!m_Graphan.LoadStringToGraphan(InputStr))
-	{
-		Result = "Cannot load std::string into graphan\n";
-		return false;
-	};
-	
+	m_Graphan.LoadStringToGraphan(InputStr);
 	size_t TokensCount = m_Graphan.GetUnits().size();
 	vector<string> tokens;
 	vector<CWordIntepretation> tags;

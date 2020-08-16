@@ -19,7 +19,7 @@ typedef int (*widechar_to_multibyte)(conv_t, unsigned char*, ucs4_t, size_t);
 #include "lib/utf8.h"
 
 
-std::string convert_to_utf8(const std::string& single_byte_string, multibyte_to_widechar converter_to_wide) {
+static std::string convert_to_utf8(const std::string& single_byte_string, multibyte_to_widechar converter_to_wide) {
 	std::string utf8_string(4 * single_byte_string.length(), ' ');
 	unsigned char* buffer = (unsigned char*)&utf8_string[0];
 	size_t buffer_offset = 0;
@@ -57,7 +57,7 @@ std::string convert_cp1252_to_utf8(const std::string& s){
 	return convert_to_utf8(s, cp1252_mbtowc);
 }
 
-std::string convert_from_utf8(const char* utfstring, widechar_to_multibyte converter_from_wide) {
+static std::string convert_from_utf8(const char* utfstring, widechar_to_multibyte converter_from_wide) {
 	if (utfstring == nullptr) {
 		return std::string();
 	}

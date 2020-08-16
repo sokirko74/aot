@@ -63,7 +63,7 @@ struct CInnerSynItem {
 
 struct CInnerTermin {
 	std::string m_TerminStr;
-	char   m_AbbrForm[12];
+	std::string m_AbbrForm;
 	int	   m_TerminId;
 	short  m_ModelNo;
 	vector<long> m_Items;

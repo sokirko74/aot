@@ -156,14 +156,26 @@ STDMETHODIMP CComGraphmatFile::GetUnitLength(int LineNo, BYTE *Length)
 STDMETHODIMP CComGraphmatFile::LoadStringToGraphan(BSTR szBuffer)
 {
 	_bstr_t t = szBuffer;
-	return CGraphmatFile::LoadStringToGraphan((const char*)t) ? S_OK : E_FAIL;
+	try {
+		CGraphmatFile::LoadStringToGraphan((const char*)t);
+		return S_OK;
+	}
+	catch (...) {
+		return E_FAIL;
+	}
 };
 
 
 STDMETHODIMP CComGraphmatFile::LoadFileToGraphan(BSTR CommandLine)
 {
 	_bstr_t t = CommandLine;
-	return CGraphmatFile::LoadFileToGraphan((const char*)t) ? S_OK : E_FAIL;
+	try {
+		CGraphmatFile::LoadFileToGraphan((const char*)t);
+		return S_OK;
+	}
+	catch (...) {
+		return E_FAIL;
+	}
 };
 
 STDMETHODIMP CComGraphmatFile::LoadDicts()

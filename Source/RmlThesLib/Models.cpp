@@ -4,6 +4,7 @@
 
 #include "StdRmlThes.h"
 #include "Thesaurus.h"
+#include "../common/utilit.h"
 
 bool CThesaurus::LoadModelRelations(std::string Buff, CInnerModel &M) {
     StringTokenizer Line(Buff.c_str(), ";");
@@ -109,7 +110,8 @@ bool CThesaurus::LoadModels(std::string FileName) {
         return false;
     while (fgets(buff, 2000, fp)) {
         CInnerModel M;
-        StringTokenizer Line(buff, FieldDelimiter);
+        string innerStr = convert_from_utf8(buff, m_MainLanguage);
+        StringTokenizer Line(innerStr.c_str(), FieldDelimiter);
         int i = 0;
         while (true) {
             const char *s = Line();

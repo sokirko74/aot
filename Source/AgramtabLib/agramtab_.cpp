@@ -139,7 +139,7 @@ bool CAgramtab :: Read (const char * FileName)
 	while (std::getline(inp, line))
 	{
 		LineNo++;
-		std::string s = convert_from_utf(line.c_str(), this->m_Language);
+		std::string s = convert_from_utf8(line.c_str(), m_Language);
 		Trim(s);
 		if (s.empty() || (s.rfind("//", 0) == 0)) continue;
 

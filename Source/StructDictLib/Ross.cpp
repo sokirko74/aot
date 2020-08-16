@@ -1312,7 +1312,7 @@ bool CDictionary::ImportFromText(std::string FileName, bool bSimulating, ImportC
 		int CurrentLineNo = 0;
 		while (fgets(buffer, 1000, fp))
 		{
-			std::string S = convert_from_utf(buffer, m_Language);
+			std::string S = convert_from_utf8(buffer, m_Language);
 			Trim(S);
 			L.push_back(CSourceLine(S, CurrentLineNo));
 			CurrentLineNo++;

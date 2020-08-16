@@ -4,7 +4,6 @@
 
 
 #include "StdRmlThes.h"
-#pragma warning (disable:4786)
 #include "Thesaurus.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -444,16 +443,15 @@ bool CThesaurus::LoadSynItems(std::string FileName)
 		return false;
 	}
 
-    	long SaveTerminId = -1;
+    long SaveTerminId = -1;
 	long SaveTerminNo = -1; 
 	while   (fgets(buff, 2000, fp))
 	{ 
 		int i = 0;
 		CInnerSynItem I;
 		long TerminId;
-		long OborotId;
-
-		for (char* s = strtok(buff,FieldDelimiter); s; s = strtok(0, FieldDelimiter))
+		long OborotId = -1;
+		for (char* s = strtok(buff, FieldDelimiter); s; s = strtok(0, FieldDelimiter))
 		{
 			int len = strlen(s);			
 			if (s[0] == '"')
@@ -476,7 +474,7 @@ bool CThesaurus::LoadSynItems(std::string FileName)
       	      else
 			if (i==2)
 			{
-				I.m_ItemStr = s;
+				I.m_ItemStr = convert_from_utf8(s, m_MainLanguage);
 				Trim(I.m_ItemStr);
 			}
 			else

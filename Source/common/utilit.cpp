@@ -2493,7 +2493,7 @@ size_t FindFloatingPoint(const char* str)
 	return c == std::string::npos ? -1 : c;
 }
 
-std::string convert_from_utf(const char* utf8str, const MorphLanguageEnum langua) {
+std::string convert_from_utf8(const char* utf8str, const MorphLanguageEnum langua) {
 	try {
 		if (langua == morphRussian) {
 			return convert_utf8_to_cp1251(utf8str);

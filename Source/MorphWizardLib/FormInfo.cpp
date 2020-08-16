@@ -7,7 +7,7 @@ bool CMorphWizardBase::read_utf8_line(ifstream& inp, std::string& line) const {
     if (!getline(inp, line)) {
         return false;
     }
-    line = convert_from_utf(line.c_str(), m_Language);
+    line = convert_from_utf8(line.c_str(), m_Language);
     return true;
 }
 

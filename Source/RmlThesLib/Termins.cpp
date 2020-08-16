@@ -68,7 +68,7 @@ bool CThesaurus::LoadTermins(std::string FileName)
 	{
 		int i = 0;
 		CInnerTermin T;
-		for (char* s = strtok(buff,FieldDelimiter); s; s = strtok(0, FieldDelimiter))
+		for (char* s = strtok(buff, FieldDelimiter); s; s = strtok(0, FieldDelimiter))
 		{
 			int len = strlen(s);			
 			if (s[0] == '"')
@@ -87,7 +87,7 @@ bool CThesaurus::LoadTermins(std::string FileName)
 			else
 		    if (i==1)
 			{
-				T.m_TerminStr =  s;
+				T.m_TerminStr =  convert_from_utf8(s, m_MainLanguage);
 				Trim(T.m_TerminStr);
 			}
 			else
@@ -96,9 +96,8 @@ bool CThesaurus::LoadTermins(std::string FileName)
    			else
 			   if (i==3)
 				{
-				    T.m_AbbrForm[0] = 0;
-				    strcpy (T.m_AbbrForm, s);
-					rtrim(T.m_AbbrForm);
+				    T.m_AbbrForm = convert_from_utf8(s, m_MainLanguage);
+					Trim(T.m_AbbrForm);
 				}
             i++;
 		}

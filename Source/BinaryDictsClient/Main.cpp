@@ -132,7 +132,7 @@ int main()
 		else
 			Direct = false;
 		if (!Direct) 	
-			alt = convert_from_utf(alt.c_str(), morphRussian);
+			alt = convert_from_utf8(alt.c_str(), morphRussian);
 
 
 		{

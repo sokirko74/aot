@@ -229,7 +229,7 @@ extern std::string& RmlMakeLower (std::string& word, MorphLanguageEnum langua);
 
 extern std::string&  EngRusMakeUpper (std::string& word);
 extern char*  EngRusMakeUpper (char* word);
-std::string convert_from_utf(const char *utf8str, const MorphLanguageEnum langua);
+std::string convert_from_utf8(const char *utf8str, const MorphLanguageEnum langua);
 std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua);
 
 
@@ -296,15 +296,15 @@ extern int CountBits(QWORD value);
 extern size_t FindFloatingPoint(const char* str);
 
 inline std::string _R(const char* buffer) {
-	return convert_from_utf(buffer, morphRussian);
+	return convert_from_utf8(buffer, morphRussian);
 }
 
 inline std::string _E(const char* buffer) {
-	return convert_from_utf(buffer, morphEnglish);
+	return convert_from_utf8(buffer, morphEnglish);
 }
 
 inline std::string _G(const char* buffer) {
-	return convert_from_utf(buffer, morphGerman);
+	return convert_from_utf8(buffer, morphGerman);
 }
 
 inline bool startswith(const std::string& main, const std::string& prefix) {

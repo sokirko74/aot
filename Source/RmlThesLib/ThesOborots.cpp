@@ -12,9 +12,9 @@ bool CThesaurus::LoadOborots (std::string FileName)
 	FILE* fp = fopen (FileName.c_str(), "r");
 	if (!fp) return false;
 	char buff[2000];
-	if ( !fgets (buff, 2000, fp) )
+	if (!fgets(buff, 2000, fp))
 		return false;
-	std::string Header = buff;
+	std::string Header = convert_from_utf8(buff, m_MainLanguage);
 	Trim(Header);
 	if (Header != "OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;")
 		return false;
@@ -64,4 +64,3 @@ bool CThesaurus::LoadOborots (std::string FileName)
 
  return true;
 };
-
