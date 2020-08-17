@@ -6,7 +6,8 @@
 #include "Lemmatizers.h"
 #include "PLMLineCollection.h"
 #include "../common/Graspace.h"
-#include	 "../GraphanLib/GraphmatFile.h"
+#include "../GraphanLib/GraphmatFile.h"
+#include <fstream>
 
 CPlmLineCollection::CPlmLineCollection()
 {
@@ -23,65 +24,53 @@ CPlmLineCollection::~CPlmLineCollection()
 
 bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 {
-	int LineNo = 0;
+	if (!m_pLemmatizer)
+		return false;
+
 	try
 	{
-		if (!m_pLemmatizer)
-			return false;
-
 		m_Items.clear();
 
-        vector<CFormInfo> results;
-		results.reserve(5);
+        vector<CFormInfo> lem_results;
+		lem_results.reserve(5);
 
-		vector<CFormInfo> results1;
-		results1.reserve(5);
-
-		vector<CFormInfo> results2;
-		results2.reserve(5);
-		
 		const CGraphmatFile* Gr = piGraphmatFile;
 		bool bInFixedExpression = false;
 		
-		for (LineNo = 0; LineNo < Gr->GetTokensCount(); LineNo++)
+		for (size_t lineNo = 0; lineNo < Gr->GetTokensCount(); lineNo++)
 		{
-			std::string strProcess  = Gr->GetGraphematicalLine(LineNo);
-		
-			if (Gr->HasDescr(LineNo, OBeg)) {
-				continue;
-			}
+			std::string strProcess  = Gr->GetGraphematicalLine(lineNo);
+
 			//=====   do not lemmatize oborots with EXPR=Fixed!
-			if (Gr->StartsFixedOborot(LineNo))
+			if (Gr->StartsFixedOborot(lineNo))
 			{
 				bInFixedExpression = true;
 			};
 
-			if (bInFixedExpression)
+			if (bInFixedExpression || Gr->HasDescr(lineNo, OBeg))
 			{
 				m_Items.push_back(strProcess);
-				if (Gr->HasDescr(LineNo, OEXPR2))	
+				if (Gr->HasDescr(lineNo, OEXPR2))	
 					bInFixedExpression = false;
 				continue;
 			};
-			//=====   
-
-
-
-			if (m_pLemmatizer->GetLanguage() == Gr->GetTokenLanguage(LineNo))
+			if (m_pLemmatizer->GetLanguage() == Gr->GetTokenLanguage(lineNo))
 			{
-				std::string InputWordStr = Gr->GetToken(LineNo);
+				std::string word = Gr->GetToken(lineNo);
+				m_pLemmatizer->CreateParadigmCollection(false, 
+						word, 
+						!Gr->HasDescr(lineNo, OLw), true, lem_results);
 
-                m_pLemmatizer->CreateParadigmCollection(false, InputWordStr, !Gr->HasDescr(LineNo, OLw), true, results);
-
-				if (results.empty() )
-					m_Items.push_back(strProcess+ Format(" -?? %s ?? -1 0",Gr->GetUppercaseToken(LineNo)) );
+				if (lem_results.empty() ) {
+					m_Items.push_back(strProcess+ Format(" -?? %s ?? -1 0",Gr->GetUppercaseToken(lineNo)) );
+				}
 				else
-					for( int i=0; i<results.size(); i++ )
+					for( int i=0; i < lem_results.size(); i++ )
 					{
-						std::string Line;
-						if (i > 0) Line = 	"  ";
-                        Line +=  strProcess+" "+results[i].FormatAsInPlmLine();
-						m_Items.push_back(Line);
+						std::string line;
+						if (i > 0) line = 	"  ";
+                        line +=  strProcess + " " + lem_results[i].FormatAsInPlmLine();
+						m_Items.push_back(line);
 					}
 			}
 			else
@@ -105,11 +94,11 @@ bool CPlmLineCollection::SaveToFile(std::string filename) const
 {
 	try
 	{
-		FILE* fp = fopen (filename.c_str(),"wb");
-		if (!fp) return false;
-		for (int i = 0; i < m_Items.size(); i++)
-			fprintf (fp, "%s\n",m_Items[i].c_str());
-		fclose (fp);
+		std::ofstream outp(filename.c_str(), std::ios::binary);
+		if (!outp.is_open()) return false;
+		for (auto i : m_Items) {
+			outp <<  i << "\n";
+		}
 	}
 	catch(...)
 	{

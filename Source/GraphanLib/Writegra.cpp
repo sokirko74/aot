@@ -28,7 +28,12 @@ std::string CGraphmatFile :: GetGraphematicalLine (size_t LineNo) const
 				result.append(L.GetToken(), L.GetTokenLength());
 			}
 			else {
-				result.append(1, GraphematicalSPACE);
+				if (LineNo == 0) {
+					result.append(1, ' ');
+				}
+				else {
+					result.append(1, GraphematicalSPACE);
+				}
 			}
 		}  
 		else

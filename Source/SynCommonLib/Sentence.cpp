@@ -363,7 +363,6 @@ bool ReadSentence(CSentence &S, const CPlmLineCollection *piPLMLinePtr, size_t &
 
     for (; LineNo < piPLMLinePtr->m_Items.size(); LineNo++) {
         const char *strPlmLine = piPLMLinePtr->m_Items[LineNo].c_str();
-
         if (!CheckIfHomonymPlmLine(strPlmLine)) {
             // if the previous  word was  the last in the sentence, then exit
             if (!S.m_Words.empty() && S.m_Words.back().HasDes(OSentEnd))
@@ -375,9 +374,7 @@ bool ReadSentence(CSentence &S, const CPlmLineCollection *piPLMLinePtr, size_t &
             if (!Word.ProcessPlmLineForTheFirstHomonym(strPlmLine, S.GetOpt()->m_Language, OborotNo))
                 return false;
             Word.m_bHasSpaceBefore = S.m_Words.empty()
-                                     ||
-                                     S.m_Words.back().m_GraphematicalUnitOffset + S.m_Words.back().m_strWord.length() <
-                                     Word.m_GraphematicalUnitOffset
+                                     || S.m_Words.back().m_GraphematicalUnitOffset + S.m_Words.back().m_strWord.length() <  Word.m_GraphematicalUnitOffset
                                      || S.m_Words.back().m_bSpace;
             S.AddSynWord(Word);
 
