@@ -270,19 +270,19 @@ bool CGLRTable::LoadGLRTable(std::string FileName)
 		ErrorMessage (Format("Cannot read to %s",FileName.c_str()));
 		return false;
 	};
-	size_t Count;
+	size_t count;
 	char buffer[512];
 
 	if (!fgets(buffer, 512, fp)) return false;
-	if (sscanf (buffer, "%lu\n", &Count) != 1) return false;
-	if (!Count) return false;
+	if (sscanf (buffer, "%zu\n", &count) != 1) return false;
+	if (!count) return false;
 	m_RuleInfos.clear();
-	ReadVectorInner(fp, m_RuleInfos, Count);
+	ReadVectorInner(fp, m_RuleInfos, count);
 
 
 	if (!fgets(buffer, 512, fp)) return false;
-	if (sscanf (buffer, "%lu\n", &Count) != 1) return false;
-	if (!Count) return false;
+	if (sscanf (buffer, "%zu\n", &count) != 1) return false;
+	if (!count) return false;
 	m_WorkLineSize = m_pWorkGrammar->m_UniqueGrammarItems.size();
 	if (m_WorkLineSize == 0)
 	{
@@ -290,16 +290,16 @@ bool CGLRTable::LoadGLRTable(std::string FileName)
 		return false;
 	};
 
-	if ((Count %  m_WorkLineSize) != 0)
+	if ((count %  m_WorkLineSize) != 0)
 	{
 		ErrorMessage ("The number of lines in the parse table doesn't correspond to grammar symbols number");
 		return false;
 	};
-	ReadVectorInner(fp, m_WorkTable, Count);
+	ReadVectorInner(fp, m_WorkTable, count);
 	
 	if (!fgets(buffer, 512, fp)) return false;
-	if (sscanf (buffer, "%lu\n", &Count) != 1) return false;
-	ReadVectorInner(fp, m_ReduceRuleSets, Count);
+	if (sscanf (buffer, "%zu\n", &count) != 1) return false;
+	ReadVectorInner(fp, m_ReduceRuleSets, count);
 
 	fclose(fp);
 
