@@ -101,9 +101,9 @@ BOOL CSignatEditor::OnInitDialog()
 			{
 				CString Delims;
 				long j=0;
-				for (; j <D.m_ItemsLength; j++)
+				for (; j < D.m_DomainItemsBufferLength; j++)
 				{
-					Delims += (const char*)D.m_Items[j];
+					Delims += (const char*)D.m_DomainItemsBuffer[j];
 					Delims += " ";
 				};
 				if (j == 0) continue;

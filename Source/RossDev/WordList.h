@@ -189,7 +189,7 @@ public:
 		  return m_Index[i].UnitNo;
 		else
 			return m_Termins[i].m_UnitNo;
-	};
+	}
 	std::string GetEntryStr(WORD UnitNo) const;
 	WORD GetUnitsSize () const
 	{
@@ -302,7 +302,6 @@ protected:
 	afx_msg void OnFindWrongRefs();
 	afx_msg void OnClickWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnKeydownWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnSetfocusLemmaLocator();
 	afx_msg void OnExportAllDicts();
 	afx_msg void OnEmptyAllDicts();
 	afx_msg void OnImportAllDicts();

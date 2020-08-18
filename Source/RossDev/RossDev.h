@@ -154,7 +154,7 @@ inline bool GlobalPocketAndArticleDocTempalteAreEmpty(CRossDoc* RossDoc)
     CArticleDoc* Doc  = (CArticleDoc*)tmpl->GetNextDoc(pos);
 	if (Doc->m_pRossDoc == RossDoc)
 	{
-		AfxMessageBox (_R(" Сначала закройте статьи этого словаря!"));
+		AfxMessageBox ("Close all windows of this dictionary!");
 		return false;
 	};
   };
@@ -171,7 +171,7 @@ inline bool GlobalPocketAndArticleDocTempalteAreEmpty(CRossDoc* RossDoc)
 	for (long i=0; i < View->m_PocketItems.size(); i++)
 		if (View->m_PocketItems[i].m_pRossDoc == RossDoc)
 		{
-			AfxMessageBox (_R(" Сначала закройте карманы, в которых есть ссылки на этот словарь!"));
+			AfxMessageBox ("Close the pockets that contain links to this dictionary!");
 			return false;
 		};
   };

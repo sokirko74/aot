@@ -26,9 +26,6 @@ IMPLEMENT_DYNCREATE(CArticleView, CSizeFormView)
 CArticleView::CArticleView( )
 	: CSizeFormView(CArticleView::IDD)
 {
-	//{{AFX_DATA_INIT(CArticleView)
-	//}}AFX_DATA_INIT
-	//m_pRossDoc = ((CRossDevApp*)AfxGetApp())->GetRossDoc();
 	m_StandardLogFont.lfFaceName[0] = 0;
 }
 
@@ -91,7 +88,6 @@ void CArticleView::Dump(CDumpContext& dc) const
 
 void CArticleView::OnArticleformClose() 
 {
-	// TODO: Add your control notification handler code here
    GetParent()->SendMessage(WM_SYSCOMMAND, SC_CLOSE, 1);
 }
 
@@ -101,11 +97,6 @@ void CArticleView::OnArticleformClose()
 
 void CArticleView::OnArticleviewMarkup() 
 {
-
-	//long a, b;
-	//m_RichEdit.GetSel(a,b);
-	//AfxMessageBox (Format("GetSel() = (%i, %i)", a,b).c_str());
-
 	try
 	{
 		((CArticleDoc*)GetDocument())->Markout();	
@@ -122,8 +113,6 @@ void CArticleView::OnArticleviewMarkup()
 	};
 	
 }
-
-
 
 
 void CArticleView::SetFocusToField (int nPos)
@@ -152,7 +141,6 @@ void CArticleView::SetFocusToField (int nPos)
 void CArticleView::OnArticleviewTextbtn() 
 {
 	 m_FldScroll.ShowWindow (SW_HIDE);
-	 //m_RichEdit.SetReadOnly(FALSE);
      m_RichEdit.SetFocus();
 }
 

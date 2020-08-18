@@ -135,7 +135,7 @@ void CSplashWnd::OnPaint()
 	dcImage.SelectObject(pOldBitmap);
 }
 
-void CSplashWnd::OnTimer(UINT nIDEvent)
+void CSplashWnd::OnTimer(UINT_PTR)
 {
 	// Destroy the splash screen window.
 	HideSplashScreen();

@@ -24,7 +24,6 @@ public:
 	void ClearSentences();
 	void ClearOptions();
 	void put_SilentMode(bool newVal);
-	//void SetThesaurus(UINT ThesId, const CThesaurus* Thes);
 	void SetLemmatizer(const CLemmatizer* R);
 	void SetOborDic(const CDictionary* D);
 	void SetEnableAllThesauri(bool Value);

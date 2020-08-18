@@ -111,7 +111,7 @@ int main(int argc, char ** argv)
 			while(fgets(buffer, 10000, fp))
 			{
 				LineNo++;
-				StringTokenizer tok(buffer, "\r\n\t ");
+				StringTokenizer tok(convert_from_utf8(buffer,morphRussian).c_str(),  "\r\n\t ");
 				std::string r  = tok.next_token();
 				std::string rc = tok.next_token();
 				std::string e = tok.next_token();

@@ -45,9 +45,8 @@ END_MESSAGE_MAP()
 // CProgressForm message handlers
 
 extern bool ThreadFinish;
-void CProgressForm::OnTimer(UINT nIDEvent) 
+void CProgressForm::OnTimer(UINT_PTR dummy) 
 {
-	// TODO: Add your message handler code here and/or call default
     if (ThreadFinish) EndDialog(0);
 
 	
@@ -72,7 +71,7 @@ void CProgressForm::OnTimer(UINT nIDEvent)
 
 		};
 	
-	CDialog::OnTimer(nIDEvent);
+	CDialog::OnTimer(dummy);
 }
 
 BOOL CProgressForm::OnInitDialog() 

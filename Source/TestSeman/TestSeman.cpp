@@ -132,9 +132,9 @@ void outputRelation(const CRusSemStructure& SS, const CRusSemRelation& R, std::o
                                                                                 : R.m_TargetNodeNo;
     //"  %s (%s, %s) = %s (%i, %i)\n",
     result << "  " << R.m_Valency.m_RelationStr << " (";
-    result << SS.GetNodeStr1(targetNodeNo) << ", ";
-    result << SS.GetNodeStr1(sourceNodeNo) << ") = ";
-    result << R.m_SyntacticRelation << " (";
+    result << convert_to_utf8(SS.GetNodeStr1(targetNodeNo), morphRussian) << ", ";
+    result << convert_to_utf8(SS.GetNodeStr1(sourceNodeNo), morphRussian) << ") = ";
+    result << convert_to_utf8(R.m_SyntacticRelation, morphRussian) << " (";
     result << targetNodeNo << ", ";
     result << sourceNodeNo << ")\n";
 }
@@ -147,9 +147,12 @@ void PrintRelationsToText(const CRusSemStructure& SS, ostream& result) {
         words[i] = SS.m_piSent->m_Words[i].m_strWord;
     result << "Nodes:\n";
     for (int i = 0; i < SS.m_Nodes.size(); i++) {
-        std::string Nstr = GetWordStrOfNode(SS, i);
+        std::string nstr = GetWordStrOfNode(SS, i);
+        if (nstr.empty()) {
+            nstr = SS.GetNodeStr1(i);
+        }
         result << "  Node " << i << " ";
-        result << (Nstr.empty() ? SS.GetNodeStr1(i) : Nstr);
+        result << convert_to_utf8(nstr, morphRussian);
         result << "\n";
     }
     result << "Relations:\n";
@@ -171,7 +174,7 @@ void PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuilder, ostrea
     CVisualSemGraph graph;
     graph.InitFromSemantics(SemBuilder);
     graph.SetGraphLayout();
-    result << graph.GetResultStr() << "\n";
+    result << convert_to_utf8(graph.GetResultStr(), morphRussian) << "\n";
 }
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
@@ -203,6 +206,7 @@ int main(int argc, const char *argv[]) {
         if ((comment = s.find("//")) != std::string::npos) {
             s = s.substr(0, comment);
         }
+        s = convert_from_utf8(s.c_str(), morphRussian);
         Trim(s);
         if (s.length() > 250) {
             std::cerr << "skip the sentence of " << s.length() << " chars (too long)\n";
@@ -213,7 +217,7 @@ int main(int argc, const char *argv[]) {
             continue;
         }
         try {
-            args.GetOutputStream() << s << "\n";
+            args.GetOutputStream() << convert_to_utf8(s, morphRussian) << "\n";
             SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
             std::string dummy;
             SemBuilder.FindSituations(s, 0, _R("общ"), 20000, -1, "", dummy);
@@ -222,6 +226,9 @@ int main(int argc, const char *argv[]) {
             } else {
                 PrintRelationsToText(SemBuilder.m_RusStr, args.GetOutputStream());
             }
+        }
+        catch (CExpc e) {
+            std::cerr << "an exception occurred: " << e.m_strCause << "\n";
         }
         catch (...) {
             std::cerr << "an exception occurred: " << lineCount << "\n";

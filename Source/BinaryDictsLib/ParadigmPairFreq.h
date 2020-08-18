@@ -1,7 +1,4 @@
-#ifndef __PARADIGMPAIRFREQ_H_
-#define __PARADIGMPAIRFREQ_H_
-
-#include "../common/utilit.h"
+#pragma once
 
 struct CParadigmPairAndFreq
 {
@@ -20,8 +17,3 @@ struct CParadigmPairAndFreq
 		return false;
 	}
 };
-
-
-
-
-#endif

@@ -417,9 +417,6 @@ import "ocidl.idl";
 		/** sets a pointer to lemmatizer, this function should be called before  
 		InitializeProcesser, otherwise procedure InitializeProcesser loads a new copy of lemmatizer */
 		[id(20), helpstring("method SetLemmatizer")] HRESULT SetLemmatizer([in] IUnknown* Interf);
-		/** sets a pointer to the dictionary of oborots, this function should be called before 
-		InitializeProcesser, otherwise procedure InitializeProcesser loads a new copy of the dictionary */
-		[id(21), helpstring("method SetOborDic")] HRESULT SetOborDic([in] IUnknown* Interf);
 		/** true, if the syntax module should delete all morphological variants which are less than the maximum by the  coverage weight */
 		[propget, id(22), helpstring("property DeleteEqualPrimitiveClauseVariants")] HRESULT DeleteEqualPrimitiveClauseVariants([out, retval] BOOL *pVal);
 		[propput, id(22), helpstring("property DeleteEqualPrimitiveClauseVariants")] HRESULT DeleteEqualPrimitiveClauseVariants([in] BOOL newVal);

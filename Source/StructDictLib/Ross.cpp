@@ -1197,9 +1197,15 @@ const char* CDictionary::GetDomItemStr(int ItemNo) const
 {
 	return  (ItemNo == -1) ? NULL : GetDomItemStrInner(ItemNo);
 }
+
 std::string	CDictionary::GetEntryStr(WORD EntryNo) const
 {
 	return m_Units[EntryNo].m_EntryStr;
+};
+
+std::string	CDictionary::GetEntryStrUtf8(WORD EntryNo) const
+{
+	return convert_to_utf8(m_Units[EntryNo].m_EntryStr, this->m_Language);
 };
 
 BYTE		CDictionary::GetUnitMeanNum(WORD EntryNo) const
@@ -1215,7 +1221,7 @@ bool CDictionary::IncludeArticle(WORD UnitNo, std::string Article) const
 
 	CTempArticle A2;
 	A2.m_pRoss = const_cast<CDictionary*>(this);
-	A2.SetArticleStr(Article.c_str());
+	A2.ReadFromUtf8String(Article.c_str());
 	A2.MarkUp();
 	A2.BuildCortegeList();
 	return A2.IsPartOf(&A1, true);
@@ -1296,7 +1302,7 @@ void AddMessage(std::string Message, int LineNo, std::string& Messages)
 };
 
 
-bool CDictionary::ImportFromText(std::string FileName, bool bSimulating, ImportConflictEnum ConflictSolver, int StartEntry, std::string& Messages)
+bool CDictionary::ImportFromText(std::string FileName, int StartEntry, std::string& Messages)
 {
 	Messages = "";
 
@@ -1341,19 +1347,19 @@ bool CDictionary::ImportFromText(std::string FileName, bool bSimulating, ImportC
 		FindRubicon(L, last);
 		if (i + 1 < StartEntry) continue;
 
-		if (ProcessOneArticle(L, start, last, bSimulating, ConflictSolver, Messages))
+		if (ProcessOneArticle(L, start, last, Messages))
 			NumOfGoodArt++;
 		else
 			ErrorsCount++;
 	};
 
-	Messages += Format("Number of %s entries: %i\n", (bSimulating ? " tested" : "loaded"), NumOfGoodArt);
+	Messages += Format("Number of loaded entries: %i\n", NumOfGoodArt);
 	Messages += Format("Number of new constants: %i\n", GetDomItemsSize() - SaveDomItemCount);
 	return ErrorsCount == 0;
 }
 
 
-bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last, bool bSimulating, ImportConflictEnum ConflictSolver, std::string& Messages)
+bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last, std::string& Messages)
 {
 	size_t RealStart = start;
 	if (L.size() == 1) return false;
@@ -1439,19 +1445,10 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 	WORD UnitNo = LocateUnit(Lemma.c_str(), MeanNum);
 
 	if (UnitNo != ErrUnitNo) {
-		if (ConflictSolver == iceSkip)
-			return true;
-		else
-			if ((ConflictSolver == iceOverwrite)
-				&& !m_Units[UnitNo].HasEmptyArticle()
-				&& !bSimulating
-				)
-				ClearUnit(UnitNo);
-			else;
+		return true;
 	}
 	else {
-		if (!bSimulating)
-			UnitNo = InsertUnit(Lemma.c_str(), MeanNum);
+		UnitNo = InsertUnit(Lemma.c_str(), MeanNum);
 	}
 
 	CTempArticle A1;
@@ -1464,31 +1461,9 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 		NewArticle += L[i].m_Line + std::string("\n");
 
 	CTempArticle A2;
-
-
 	try
 	{
-		A2.m_pRoss = this;
-		if (!A2.SetArticleStr(NewArticle.c_str()))
-		{
-			int LocalLineNo = A2.m_ErrorLine - 1;
-			if (LocalLineNo < 0)
-				LocalLineNo = 0;
-			AddMessage(A2.m_LastError, L[LocalLineNo + start + (RealStart - start)].m_SourceLineNo + 1, Messages);
-			if (A2.m_LastError.empty())
-				Messages += "an error occurred!\n";
-			return false;
-		};
-
-		if ((ConflictSolver == iceAppend)
-			&& (A1.IntersectByFields(&A2) > 0)
-			)
-		{
-			Messages += "You cannot add one entry to another, because they both contain the same fields\n";
-			return false;
-		};
-
-		if (!A1.AddArticle(&A2))
+		if ( !A1.ReadFromUtf8String(convert_to_utf8(NewArticle, m_Language).c_str()) )
 		{
 			int LocalLineNo = A1.m_ErrorLine - 1;
 			if (LocalLineNo < 0)
@@ -1498,21 +1473,12 @@ bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last,
 				Messages += "an error occurred!\n";
 			return false;
 		};
-
-		if (bSimulating)
-			return true;
-
-		// запись комментария
 		SetUnitCommentStr(UnitNo, Comments.c_str());
 		SetUnitAuthor(UnitNo, Author.c_str());
 		if (ModifTime != "")
 			SetUnitModifTimeStr(UnitNo, ModifTime.c_str());
-
 		if (UnitEditor != "")
 			SetUnitEditor(UnitNo, UnitEditor.c_str());
-
-
-		// запись кортежей	 
 		A1.WriteToDictionary();
 	}
 	catch (...)

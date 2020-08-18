@@ -306,9 +306,8 @@ UINT CGridCtrl::OnGetDlgCode()
 
 // For drag-selection. Scrolls hidden cells into view
 // TODO: decrease timer interval over time to speed up selection over time
-void CGridCtrl::OnTimer(UINT nIDEvent)
+void CGridCtrl::OnTimer(UINT_PTR)
 {
-    ASSERT(nIDEvent == WM_LBUTTONDOWN);
     CPoint pt, origPt;
 
     if (!GetCursorPos(&origPt)) return;

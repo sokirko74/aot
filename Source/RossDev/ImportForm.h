@@ -60,7 +60,6 @@ public:
     CRossDoc* m_pRossDoc;
 	CDictionary* GetRoss () {return m_pRossDoc->GetRoss();};
 	void SendInfo (CString S, long LineNo = -1);
-	ImportConflictEnum GetConflictSolver() const;
 	afx_msg void OnRun();
 
 
@@ -73,7 +72,6 @@ public:
 	int		m_Skip;
 	CString	m_FileName;
 	CString	m_Protocol;
-	BOOL	m_SimulatingMode;
 	CString	m_NumberOfArticle;
 	//}}AFX_DATA
 

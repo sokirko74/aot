@@ -38,7 +38,7 @@ protected:
 
 	// Generated message  functions
 	//{{AFX_MSG(CProgressForm)
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR);
 	virtual BOOL OnInitDialog();
 	virtual void OnCancel();
 	//}}AFX_MSG

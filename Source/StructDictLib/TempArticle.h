@@ -13,6 +13,11 @@
 class CTempArticle 
 {
 	std::string					m_ArticleStr;
+	const TCortege10& GetRossCortege(size_t i) const;
+	std::string		ConstructFldName(BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
+	bool		PutCortegeOnTheRigthPosition(const TCortege10& C);
+	bool		ArticleToText();
+
 public:
 	char					m_EntryStr[EntryStrSize];
 	BYTE					m_MeanNum;
@@ -28,24 +33,21 @@ public:
 	
 
 
-	const TCortege10&	GetRossCortege (size_t i) const;
 	size_t				GetCortegesSize () const;
 	const TCortege10&	GetCortege (size_t i)  const;
-	std::string		ConstructFldName (BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
 	bool		IsPartOf(const CTempArticle *Article, bool UseWildCards) const;
 	int			IntersectByFields(const CTempArticle *Article) const;
 	bool		AddArticle(const CTempArticle *Article);
-	bool		PutCortegeOnTheRigthPosition (const TCortege10& C);
-	bool		ArticleToText ();
 	bool		AddCortegeToVector (CTextField& F);
 	bool		CheckCortegeVector ();
-	bool		SetArticleStr(const char * s);
+	bool		ReadFromUtf8String(const char * s);
 	bool		MarkUp();
 	bool		BuildCortegeList();
 	bool		WriteToDictionary();
 	bool		IsModified() const;
 	void		ReadFromDictionary(WORD UnitNo, bool VisualOrder, bool ReadOnly);
 	const std::string& GetArticleStr();
+	std::string GetArticleStrUtf8(bool check=false);
 	
 };
 

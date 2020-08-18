@@ -65,7 +65,6 @@ public:
 	STDMETHOD(HasDescr)(UINT LineNo,UINT D, BOOL* result);
 	STDMETHOD(FreeTable)();
 	STDMETHOD(LoadFileToGraphan (BSTR  CommandLine)); 
-	STDMETHOD(SetOborDic (IUnknown *Dic));
 	STDMETHOD(get_bSubdueWrongMacroSynUnitToMainRoot)(BOOL* pVal);
 	STDMETHOD(put_bSubdueWrongMacroSynUnitToMainRoot)(BOOL newVal);
 	STDMETHOD(GetTokenLanguage)(int LineNo, int* Language);

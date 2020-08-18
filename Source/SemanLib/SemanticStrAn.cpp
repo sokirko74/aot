@@ -598,7 +598,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 	m_bHasConjBut = false;
    //::MessageBox(0, "111", "111", MB_OK);
 
-  	StartTimer(_R("Интерпретация синтаксиса"),0);
+  	StartTimer("Syntax interpretation",0);
 	try {
       BuildSemNodesBySyntax();
 	}
@@ -615,7 +615,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 		PrintLemNodes();
 		AssertValidGraph();
 	#endif
-	EndTimer(_R("Интерпретация синтаксиса"));
+	EndTimer("Syntax interpretation");
 
 	rml_TRACE ("=================================================\n");
 	rml_TRACE ("===  FindSituationsForClauseVariantCombination %i===\n",  m_ClauseVariantsCombinationNo);
@@ -1070,12 +1070,10 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 long CRusSemStructure::FindSituations(size_t SentNo)
 {
-	//m_bTimeSpanHolderEnabled = false;
-
 	try {
 		m_AllClausesVariants = 0;
 		ClearTimers();
-		StartTimer(_R("Общее время работы"),0);
+		StartTimer("All time",0);
 
 		if (!ReadAuxiliaryArticles())
 		{
@@ -1088,7 +1086,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_MemRelations.clear();
 		m_MemNodes.clear();
 
-		StartTimer(_R("Интерпретация синтаксиса"),0);
+		StartTimer("Syntax interpretation",0);
 
 		m_AlreadyBuiltClauseVariants.clear();
 
@@ -1111,7 +1109,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_InterfaceClauseNo = 0;
 
 
-		EndTimer(_R("Интерпретация синтаксиса"));
+		EndTimer(_R("Syntax interpretation"));
 		long BestClauseVariantsCombinationNo = 0;
 		long BestClauseVariantsCombinationWeight = 100000;
 
@@ -1191,7 +1189,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		std::string S = Format("Sentence length: %i\n Dictionary request count: %i\n Best clause : %i (out of  %i)\n",
 			m_piSent->m_Words.size(), Queries.size(), BestClauseVariantsCombinationNo+1, m_ClauseCombinationVariantsCount);
 
-		EndTimer("Общее время работы");
+		EndTimer("All time");
 
 
 

@@ -115,7 +115,8 @@ static bool loadDat(std::string &name)
 	while( ifs.getline(buf,2048) )
 	{
 		lin++;
-		std::istrstream istr(buf);
+
+		std::istrstream istr(convert_from_utf8(buf, morphRussian).c_str()	);
 		std::string swrd,spid,spos,sgrm;
 		int val=-1;
 

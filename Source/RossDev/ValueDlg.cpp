@@ -141,11 +141,6 @@ void CValueDlg::DrawControls ()
 		  LabelStr.erase(0,2);
 
 	  m_Labels[i].Create(LabelStr.c_str(), WS_VISIBLE, LabelRect, this);
-/*	  CFont* Font = m_Labels[i].GetFont( );
-	  LOGFONT  Fnt;
-	  Fnt.lfWidth = 5;
-	  Font->CreateFontIndirect (&Fnt);
-	  m_Labels[i].SetFont(Font);*/
 	  
 	  if (    (! GetRoss()->m_Domens[DomNo].IsFree)  
 			&& (DomNo != GetRoss()->LexPlusDomNo)
@@ -200,16 +195,11 @@ void CValueDlg::DrawControls ()
 BOOL CValueDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-
-
-	
-	// TODO: Add extra initialization here
 	m_NewValue = m_OldValue;
-
     DrawControls ();
-
-	if (!m_bOneFormat)
-	SetWindowText(CString("One field value ") + ConstructFldName(GetRoss(), m_OldValue.m_FieldNo, m_OldValue.m_LeafId, m_OldValue.m_BracketLeafId));
+	if (!m_bOneFormat) {
+		SetWindowText(CString("One field value ") + ConstructFldName(GetRoss(), m_OldValue.m_FieldNo, m_OldValue.m_LeafId, m_OldValue.m_BracketLeafId));
+	}
 
     // Установка Сигнатур, если их больше одной
 	m_pSignatGroup = GetDlgItem (IDC_VALUEDLG_SIGNATGROUP);
@@ -251,11 +241,6 @@ BOOL CValueDlg::OnInitDialog()
 
 	   m_SignatsBtns[m_NewValue.GetSignatNo()]->SetCheck(1);
 	}
-
-
-
-
-  	
  return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
@@ -274,13 +259,13 @@ bool CValueDlg::SetNewValue()
 		  int nPos = m_Lists[i].GetCurSel();
 		  if (nPos == LB_ERR) 
 		  {
-			  AfxMessageBox(_R("Остались пустые места!"));
+			  AfxMessageBox("Threre are vacant places!");
 			  return false;
 		  }
 		  BYTE DomNo = GetSignatDomNo(i);
 		  CString S;
 		  m_Lists[i].GetWindowText(S);
-		  m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr(S, DomNo);
+		  m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr(std::string(S), DomNo);
 	  }
 	  else
 	  {
@@ -300,7 +285,7 @@ bool CValueDlg::SetNewValue()
 			  return false;
 		};
 
-		m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr(S, DomNo);
+		m_NewValue.m_DomItemNos[i] =  GetRoss()->GetItemNoByItemStr(std::string(S), DomNo);
 		try 
 		{
 			if (m_NewValue.m_DomItemNos[i] == -1)

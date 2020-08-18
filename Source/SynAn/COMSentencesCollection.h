@@ -34,11 +34,9 @@ END_COM_MAP()
 public:
 	STDMETHOD(get_DeleteEqualPrimitiveClauseVariants)(/*[out, retval]*/ BOOL *pVal);
 	STDMETHOD(put_DeleteEqualPrimitiveClauseVariants)(/*[in]*/ BOOL newVal);
-	STDMETHOD(SetOborDic)(/*[in]*/ IUnknown* Interf);
 	STDMETHOD(SetLemmatizer)(/*[in]*/ IUnknown* Interf);
 	STDMETHOD(get_KillHomonymsMode)(/*[out, retval]*/ UINT *pVal);
 	STDMETHOD(put_KillHomonymsMode)(/*[in]*/ UINT newVal);
-	//STDMETHOD(SetThesaurus)(/*[in]*/ UINT ThesId, /*[in]*/ IUnknown* Thes);
 	STDMETHOD(put_SilentMode)(/*[in]*/ BOOL newVal);
 	STDMETHOD(put_EnableThesauri)(/*[in]*/ BOOL newVal);
 	STDMETHOD(get_EnableThesauri)(BOOL* Val);

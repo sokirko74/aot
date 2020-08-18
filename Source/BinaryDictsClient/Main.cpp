@@ -4,7 +4,6 @@
 #include  "../BinaryDictsLib/AspPairDict.h"
 #include  "../BinaryDictsLib/FreqDict.h"
 #include  "../BinaryDictsLib/DerivDict.h"
-#include  "../BinaryDictsLib/SynDictionary.h"
 #include  "../BinaryDictsLib/BinaryDictionary.h"
 #include  "../BinaryDictsLib/SetOfWordPairs.h"
 

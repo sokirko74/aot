@@ -21,7 +21,7 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CArticleDoc
 
-IMPLEMENT_DYNCREATE(CArticleDoc, CDocument) 
+IMPLEMENT_DYNCREATE(CArticleDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CArticleDoc, CDocument)
 	//{{AFX_MSG_MAP(CArticleDoc)
@@ -35,9 +35,9 @@ END_MESSAGE_MAP()
 CArticleDoc::CArticleDoc()
 {
 
-//  m_MessageKiller = new CMessageBoxKillerThread (AfxGetApp()->m_pMainWnd->m_hWnd);
-//  m_MessageKiller->CreateThread();
-   
+	//  m_MessageKiller = new CMessageBoxKillerThread (AfxGetApp()->m_pMainWnd->m_hWnd);
+	//  m_MessageKiller->CreateThread();
+
 }
 
 CArticleDoc::~CArticleDoc()
@@ -58,17 +58,17 @@ void CArticleDoc::Serialize(CArchive& ar)
 	{
 		// TODO: add storing code here
 		m_WasSaved = true;
-        
-		if (!Markout ()) 
-		{  
-			AfxMessageBox (GetArticleErrorStr().c_str());
+
+		if (!Markout())
+		{
+			AfxMessageBox(GetArticleErrorStr().c_str());
 			m_WasSaved = false;
-		    return;
+			return;
 		};
 
 		try {
-			
-			m_Article.SetArticleStr( GetArticleView ()->GetText() );
+
+			m_Article.ReadFromUtf8String(GetArticleView()->GetText());
 			m_Article.WriteToDictionary();
 			if (m_pRossDoc->m_Author != "")
 			{
@@ -77,49 +77,49 @@ void CArticleDoc::Serialize(CArchive& ar)
 
 			GetRoss()->SetUnitCurrentTime(m_UnitNo);
 		}
-		catch (...){
+		catch (...) {
 			CString prompt = GetArticleErrorStr().c_str();
 			if (prompt != "")
-				AfxMessageBox (prompt);
+				AfxMessageBox(prompt);
 			else
-				AfxMessageBox ("Cannot write article (Structdict)");
+				AfxMessageBox("Cannot write article");
 		};
-		
+
 
 		((CWordList*)(m_pRossDoc->GetWordList()))->UpdateIndex();
 		m_pRossDoc->SetModifiedFlag(TRUE);
 		try {
-			CString S  = m_pRossDoc->m_Author;
+			CString S = m_pRossDoc->m_Author;
 			if (S == "") S = "user";
 			S += "." + CString(m_pRossDoc->GetRossHolder()->m_DictName.c_str()) + ".log";
-			S = m_pRossDoc->GetRossHolder()->m_DictName.c_str()+S;
-			FILE * fp = fopen(S, "ab");
-			fseek(fp,SEEK_END,0); 
-			fprintf (fp,"============\r\n");
-			fprintf (fp,"%s",GetRoss()->GetUnitTextHeader(m_UnitNo).c_str());
-		    try {
+			S = m_pRossDoc->GetRossHolder()->m_DictName.c_str() + S;
+			FILE* fp = fopen(S, "ab");
+			fseek(fp, SEEK_END, 0);
+			fprintf(fp, "============\r\n");
+			fprintf(fp, "%s", GetRoss()->GetUnitTextHeader(m_UnitNo).c_str());
+			try {
 				std::string strPath = GetRegistryString("SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName\\ComputerName");
-				fprintf (fp, "//MachineName = %s \r\n", strPath.c_str());
-				fprintf (fp,"//Date = %s\r\n", (const char*)CTime::GetCurrentTime().Format( "%A, %B %d, %Y ") ); 
-				fprintf (fp,"//Time = %s\r\n", (const char*)CTime::GetCurrentTime().Format( "%H : %M" ));
+				fprintf(fp, "//MachineName = %s \r\n", strPath.c_str());
+				fprintf(fp, "//Date = %s\r\n", (const char*)CTime::GetCurrentTime().Format("%A, %B %d, %Y "));
+				fprintf(fp, "//Time = %s\r\n", (const char*)CTime::GetCurrentTime().Format("%H : %M"));
 				CString UserName = getenv("USERNAME");
 				if (!UserName.IsEmpty())
-					fprintf (fp, "//UserName = %s \r\n", (const char*)UserName);
+					fprintf(fp, "//UserName = %s \r\n", (const char*)UserName);
 
 			}
-		    catch (...)
+			catch (...)
 			{
 			};
 
-			fprintf (fp, "%s", (const char*) GetArticleView ()->GetText());
+			fprintf(fp, "%s", (const char*)GetArticleView()->GetText());
 			fclose(fp);
 		}
-		catch (...){
-			AfxMessageBox ("Cannot write backup");
+		catch (...) {
+			AfxMessageBox("Cannot write backup");
 		};
 	}
 	else
-	{   
+	{
 	}
 }
 
@@ -145,22 +145,22 @@ void CArticleDoc::Dump(CDumpContext& dc) const
 
 void _AfxFontConvertOLE2LOG(CDC& dc, COleFont& from, LOGFONT& to)
 {
-	int Height = from.GetSize().Lo/10000;
+	int Height = from.GetSize().Lo / 10000;
 	Height = -MulDiv(Height, dc.GetDeviceCaps(LOGPIXELSY), 72);
 	to.lfHeight = Height;
-	to.lfWidth 	= 0 ;
-	to.lfEscapement 	= 0 ;
-	to.lfOrientation 	= 0 ;
-	to.lfWeight 		= from.GetWeight();
-	to.lfItalic 		= from.GetItalic();
-	to.lfUnderline 	= from.GetUnderline();
-	to.lfStrikeOut 	= from.GetStrikethrough();
-	to.lfCharSet		= from.GetCharset();
-	to.lfOutPrecision = OUT_TT_PRECIS ;
-	to.lfClipPrecision= CLIP_DEFAULT_PRECIS ;
-	to.lfQuality 		= PROOF_QUALITY ;
-	to.lfPitchAndFamily = VARIABLE_PITCH | TMPF_TRUETYPE | FF_MODERN ;
-	strcpy(to.lfFaceName, from.GetName()) ;  
+	to.lfWidth = 0;
+	to.lfEscapement = 0;
+	to.lfOrientation = 0;
+	to.lfWeight = from.GetWeight();
+	to.lfItalic = from.GetItalic();
+	to.lfUnderline = from.GetUnderline();
+	to.lfStrikeOut = from.GetStrikethrough();
+	to.lfCharSet = from.GetCharset();
+	to.lfOutPrecision = OUT_TT_PRECIS;
+	to.lfClipPrecision = CLIP_DEFAULT_PRECIS;
+	to.lfQuality = PROOF_QUALITY;
+	to.lfPitchAndFamily = VARIABLE_PITCH | TMPF_TRUETYPE | FF_MODERN;
+	strcpy(to.lfFaceName, from.GetName());
 }
 
 void _AfxFontConvertLOG2OLE(CDC& dc, LOGFONT& from, COleFont& to)
@@ -174,12 +174,12 @@ void _AfxFontConvertLOG2OLE(CDC& dc, LOGFONT& from, COleFont& to)
 	to.SetUnderline(from.lfUnderline);
 	to.SetStrikethrough(from.lfStrikeOut);
 	to.SetCharset(from.lfCharSet);
-	to.SetName("Arial"/*from.lfFaceName*/);   
+	to.SetName("Arial"/*from.lfFaceName*/);
 }
 
 
 
-BOOL CArticleDoc::OpenArticle (WORD  UnitNo, CRossDoc* pRossDoc)
+BOOL CArticleDoc::OpenArticle(WORD  UnitNo, CRossDoc* pRossDoc)
 {
 	m_UnitNo = UnitNo;
 	m_pRossDoc = pRossDoc;
@@ -203,28 +203,28 @@ BOOL CArticleDoc::OpenArticle (WORD  UnitNo, CRossDoc* pRossDoc)
 	// open an existing document
 	GetDocTemplate()->InitialUpdateFrame(pFrame, this, TRUE);
 
-    
+
 
 	// Инициализация  CArticleView
-    CArticleView* View = GetArticleView ();
-	
+	CArticleView* View = GetArticleView();
+
 	m_Article.m_pRoss = GetRoss();
 	m_Article.ReadFromDictionary(UnitNo, true, false);
 
-	std::string Article  = m_Article.GetArticleStr();
-	if (Article.length() > 0 )
+	std::string Article = m_Article.GetArticleStrUtf8();
+	if (Article.length() > 0)
 		View->SetText(Article.c_str());
 
-    if(!m_pRossDoc->m_bArticleInitTextMode)
+	if (!m_pRossDoc->m_bArticleInitTextMode)
 	{
-	   Markout();	
-	   if (!m_Article.m_Fields.empty())
-	     View->SetFocusToField (0);
+		Markout();
+		if (!m_Article.m_Fields.empty())
+			View->SetFocusToField(0);
 	}
 
-	
-	
-		
+
+
+
 
 	return TRUE;
 };
@@ -232,11 +232,11 @@ BOOL CArticleDoc::OpenArticle (WORD  UnitNo, CRossDoc* pRossDoc)
 
 std::string CArticleDoc::GetArticleErrorStr() const
 {
-	std::string  s =  m_Article.m_LastError;
-	if ( s.empty() ) return s;
+	std::string  s = m_Article.m_LastError;
+	if (s.empty()) return s;
 	int ErrorLine = m_Article.m_ErrorLine;
 	if (ErrorLine != -1)
-			s += Format(" (line %i)", ErrorLine);
+		s += Format(" (line %i)", ErrorLine);
 	return s;
 };
 BOOL CArticleDoc::SaveModified()
@@ -246,24 +246,24 @@ BOOL CArticleDoc::SaveModified()
 	CString prompt;
 
 	try
-    {
-	if (!IsModified())
-		return TRUE;        // ok to continue
+	{
+		if (!IsModified())
+			return TRUE;        // ok to continue
 	}
 	catch (...)
 	{
-        prompt.Format(_R("Статья \")%s\_R(" содержит ошибки (%s) . Выйти без сохранения?"), name, GetArticleErrorStr().c_str());
-		
-		switch (AfxMessageBox (prompt, MB_OKCANCEL))
+		prompt.Format("Unit \"%s\" contains errors (%s) . Exit without save?", name, GetArticleErrorStr().c_str());
+
+		switch (AfxMessageBox(prompt, MB_OKCANCEL))
 		{
-		   case IDCANCEL:
-			 return FALSE;
-  	  	   case IDOK:
-		     return TRUE;
- 	         break;
-		   default:
-		     ASSERT(FALSE);
-		     break;
+		case IDCANCEL:
+			return FALSE;
+		case IDOK:
+			return TRUE;
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
 		};
 	};
 
@@ -290,44 +290,44 @@ BOOL CArticleDoc::SaveModified()
 };
 
 
-bool CArticleDoc :: AddCortegeToVector (vector<TCortege10>& L, CRossDevTextField& F)
+bool CArticleDoc::AddCortegeToVector(vector<TCortege10>& L, CRossDevTextField& F)
 {
 
-	 vector<CString>  Lines;
-	 size_t Count = m_Article.GetCortegesSize();
-     for (size_t i=0;  i < Count; i++)
-	 { 
-	   const TCortege10& C = m_Article.GetCortege(i);
-	   if  (   (C.m_FieldNo == F.FieldNo)
-		    && (C.m_LeafId  == F.LeafId)
-			&& (C.m_BracketLeafId  == F.BracketLeafId)
-			&& (C.m_DomItemNos[0] != -1) )
-       L.push_back(C);
-	 };
+	vector<CString>  Lines;
+	size_t Count = m_Article.GetCortegesSize();
+	for (size_t i = 0; i < Count; i++)
+	{
+		const TCortege10& C = m_Article.GetCortege(i);
+		if ((C.m_FieldNo == F.FieldNo)
+			&& (C.m_LeafId == F.LeafId)
+			&& (C.m_BracketLeafId == F.BracketLeafId)
+			&& (C.m_DomItemNos[0] != -1))
+			L.push_back(C);
+	};
 
-	 return true;
+	return true;
 };
 
 
-bool CArticleDoc :: Markout ()
+bool CArticleDoc::Markout()
 {
 
-	try    
+	try
 	{
 		CString SaveArticleStr = GetArticleView()->GetText();
-		if (m_Article.SetArticleStr(GetArticleView()->GetText()))
+		if (m_Article.ReadFromUtf8String(GetArticleView()->GetText()))
 		{
-			std::string  A = m_Article.GetArticleStr();
+			std::string  A = m_Article.GetArticleStrUtf8();
 			GetArticleView()->SetText(A.c_str());
 
-			GetArticleView()->m_FldScroll.SetScrollRange (0, (m_Article.m_Fields.empty() ? 0 : m_Article.m_Fields.size() - 1));
+			GetArticleView()->m_FldScroll.SetScrollRange(0, (m_Article.m_Fields.empty() ? 0 : m_Article.m_Fields.size() - 1));
 			//GetArticleView()->m_RichEdit.SetReadOnly(TRUE);
-			GetArticleView()->m_FldScroll.ShowWindow (SW_SHOW);
+			GetArticleView()->m_FldScroll.ShowWindow(SW_SHOW);
 			GetArticleView()->m_RichEdit.SetFocus();
 		}
 		else
 		{
-			ErrorMessage (m_Article.m_LastError);
+			ErrorMessage(m_Article.m_LastError);
 			return false;
 		}
 	}
@@ -342,36 +342,36 @@ bool CArticleDoc :: Markout ()
 
 BOOL CArticleDoc::IsModified()
 {
-  if (!Markout ()) return TRUE;
-  return m_Article.IsModified() ? TRUE : FALSE;
+	if (!Markout()) return TRUE;
+	return m_Article.IsModified() ? TRUE : FALSE;
 };
 
 
 BOOL CArticleDoc::DoFileSave()
 {
-  try 
-  {
-    return DoSave(m_strPathName);
-  }
-  catch (...)
-  {
-	  return FALSE;
-  };
+	try
+	{
+		return DoSave(m_strPathName);
+	}
+	catch (...)
+	{
+		return FALSE;
+	};
 };
 
-void CArticleDoc::SetTitle(LPCTSTR lpszTitle) 
+void CArticleDoc::SetTitle(LPCTSTR lpszTitle)
 {
-	CString S (GetRoss()->GetEntryStr(m_UnitNo).c_str());
+	CString S(GetRoss()->GetEntryStr(m_UnitNo).c_str());
 	char s[10];
-	sprintf (s, "%i", GetRoss()->GetUnitMeanNum(m_UnitNo));
-	S += CString (s); 
-	S = CString(m_pRossDoc->GetRossHolder()->m_DictName.c_str())+":   "+S; 
+	sprintf(s, "%i", GetRoss()->GetUnitMeanNum(m_UnitNo));
+	S += CString(s);
+	S = CString(m_pRossDoc->GetRossHolder()->m_DictName.c_str()) + ":   " + S;
 	CDocument::SetTitle(S);
 }
 
 
 
-BOOL CArticleDoc::OnSaveDocument(LPCTSTR lpszPathName) 
+BOOL CArticleDoc::OnSaveDocument(LPCTSTR lpszPathName)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	CFile p;
@@ -382,12 +382,12 @@ BOOL CArticleDoc::OnSaveDocument(LPCTSTR lpszPathName)
 		Serialize(saveArchive);     // save me
 		saveArchive.Close();
 	}
-	CATCH_ALL(e)
+		CATCH_ALL(e)
 	{
 		return FALSE;
 	}
 	END_CATCH_ALL
-    if ( !m_WasSaved ) return FALSE;
+		if (!m_WasSaved) return FALSE;
 
 	SetModifiedFlag(FALSE);     // back to unmodified
 

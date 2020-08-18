@@ -139,20 +139,10 @@ bool CTranslatorHolder::Init() {
         return false;
     fprintf(stderr, "morphRussian %f\n", (double) (clock() - m_TimeSpan));
     m_TimeSpan = clock();
-    if (!InitAspDict())
+    if (!InitAspDict()) {
+        ErrorMessage("Cannot load asp dict");
         return false;
-
-    try {
-        if (!m_pSynonymsDict.Load(GetRegistryString(g_strSynDictionary))) {
-            ErrorMessage(_R("Cannot load словарь синонимов"));
-            return false;
-        }
-
     }
-    catch (...) {
-        ErrorMessage(_R("Cannot load словарь синонимов"));
-        return false;
-    };
 
     try {
 
@@ -191,7 +181,7 @@ bool CTranslatorHolder::Init() {
         m_AdjNounDualFreq.Load(GetRegistryString(g_strAdjNounDualFreqPath));
     }
     catch (...) {
-        ErrorMessage(_R("Cannot load словарь частот английских ADJ-NOUN"));
+        ErrorMessage("Cannot load English ADJ-NOUN dict");
         return false;;
     };
 

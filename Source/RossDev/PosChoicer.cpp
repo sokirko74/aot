@@ -106,7 +106,8 @@ LRESULT CPosChoicer::OnWizardNext()
 							CNewRefArticles* p;
 							if (P->GetPageCount() < 4)
 							{
-								p = new  CNewRefArticles(_R("Создание отсылочных статей для глаголов несов. вида"));
+								p = new  CNewRefArticles(
+									"Create reference article for non-perfective verbs");
 								P->AddPage(p);
 							}
 							else
@@ -139,12 +140,11 @@ BOOL CPosChoicer::OnSetActive()
 		CString LineToAdd;
 		switch  (PartOfSpeech) 
 		{
-
-		case NOUN:			LineToAdd = _R("СУЩ:ИГ"); break;
-		case INFINITIVE:	LineToAdd = _R("ГЛ:ГГ"); break;
-		case ADJ_FULL:		LineToAdd = _R("ПРИЛ:с_опр"); break;
-		case ADV:			LineToAdd = _R("НАР:ОБСТ_ГР"); break;
-		case PREDK:			LineToAdd = _R("НАР:нар_опр"); break;
+			case NOUN:			LineToAdd = "СУЩ:ИГ"; break;
+			case INFINITIVE:	LineToAdd = "ГЛ:ГГ"; break;
+			case ADJ_FULL:		LineToAdd = "ПРИЛ:с_опр"; break;
+			case ADV:			LineToAdd = "НАР:ОБСТ_ГР"; break;
+			case PREDK:			LineToAdd = "НАР:нар_опр"; break;
 		};
 
 

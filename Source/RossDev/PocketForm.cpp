@@ -158,17 +158,16 @@ int OpenPocket(   const vector<CRossPocketItem>& UnitNos,
 	POSITION pos =  pDocument->GetFirstViewPosition();
 	CPocketForm* V = (CPocketForm*)(pDocument->GetNextView(pos));
 	V->m_PocketItems = UnitNos;
-    V->m_WordList.InsertColumn(1,_R("Словарный вход"), LVCFMT_LEFT, 200);
-	V->m_WordList.InsertColumn(2,_R("Номер значения"), LVCFMT_LEFT, 60);
-	V->m_WordList.InsertColumn(2,_R("Название словаря"), LVCFMT_LEFT, 60);
+    V->m_WordList.InsertColumn(1, "Dictionary entry", LVCFMT_LEFT, 200);
+	V->m_WordList.InsertColumn(2, "Sense ID", LVCFMT_LEFT, 60);
+	V->m_WordList.InsertColumn(2, "Dictionary name", LVCFMT_LEFT, 60);
 	V->m_WordList.SetItemCountEx(UnitNos.size());
-	V->m_UnitsSize.Format (_R("Число словарных входов : %i"),    V->m_WordList.GetItemCount());
+	V->m_UnitsSize.Format ("Number dictionary entries: %i",    V->m_WordList.GetItemCount());
     V->UpdateData(FALSE);
     V->m_WordList.UpdateData(FALSE);
     V->m_WordList.Invalidate();	
 	V->m_Title = Title;
 
-	// установка размеров
 	V->GetParent()->SetWindowPos(NULL, 0,0, 535 , 500, SWP_SHOWWINDOW|SWP_NOZORDER|SWP_NOMOVE);
 	return true;
 };
@@ -176,7 +175,6 @@ int OpenPocket(   const vector<CRossPocketItem>& UnitNos,
 // записать
 void CPocketForm::OnButton2() 
 {
-	// TODO: Add your control notification handler code here
     CFileDialog D(FALSE, "txt", m_Title);
 	if (D.DoModal() != IDOK) return;
 	FILE * fp = fopen (D.GetPathName(),"wb");
@@ -192,7 +190,6 @@ void CPocketForm::OnButton2()
 // отобразить в пометы 
 void CPocketForm::OnButton3() 
 {
-	// TODO: Add your control notification handler code here
 	for (size_t i=0; i < m_PocketItems.size(); i++)
 	{
 		CRossDoc* RossDoc = m_PocketItems[i].m_pRossDoc;

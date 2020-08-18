@@ -92,7 +92,7 @@ try{
 			{
 				if (pRossDoc->GetRoss()->IsEmptyArticle(UnitNo)) continue;
 				A.ReadFromDictionary(UnitNo, false, true);
-				if (A.GetArticleStr().find(m_FindString) != -1)
+				if (A.GetArticleStrUtf8().find(m_FindString) != -1)
 					PocketItems.push_back(CRossPocketItem(UnitNo, pRossDoc));
 			};
 		}

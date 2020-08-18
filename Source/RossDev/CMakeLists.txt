@@ -10,7 +10,7 @@ if (WIN32)
 endif()
 
 add_executable (${PROJECT_NAME} WIN32
-../common/COM/COMSyntaxHolder.cpp
+#../common/COM/COMSyntaxHolder.cpp
 ArticleDoc.cpp
 ArticleView.cpp
 BasicDomenEdit.cpp
@@ -61,9 +61,6 @@ picture.cpp
 rowcursor.cpp
 )
 
-#add_dependencies(${PROJECT_NAME} 
-#    Seman
-#)
 
 target_link_libraries(${PROJECT_NAME}
     aot_common

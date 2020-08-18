@@ -186,10 +186,6 @@ bool CSyntaxOpt::InitializeOptions() {
         if (GetOborDictionary() == nullptr) {
             std::string strPath;
             auto pOborDictionary = new CDictionary;
-            if (!pOborDictionary) {
-                OutputErrorString("Failed to load \"StructDict.dll\"");
-                return false;
-            }
             if (m_Language == morphRussian)
                 strPath = GetRegistryString(g_strRusRegOborDicPath);
             else

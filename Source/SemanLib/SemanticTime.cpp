@@ -352,7 +352,7 @@ void CRusSemStructure::GetTimeInterps(std::string Lemma, std::string WordStr,  s
 
 void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 {
-  StartTimer(_R("Построение групп времени"),0); 
+  StartTimer("Time groups",0); 
 
  //поиск Time-групп
  for (long NodeNo=m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo < m_Clauses[ClauseNo].m_EndNodeNo; )
@@ -509,7 +509,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 	 };
  };
 
- EndTimer(_R("Построение групп времени"));  
+ EndTimer("Time groups");
 };
 
 long CRusSemStructure::FindTimeHost (long NodeNo, long ClauseNo)

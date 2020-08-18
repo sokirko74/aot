@@ -406,11 +406,6 @@ void CRossDoc::WriteConfig(CArchive& ar)
 	else
 		ar.WriteString("Language English\r\n");
 
-	if (GetRoss()->m_bRussianFields)
-		ar.WriteString("RussianFields\r\n");
-
-
-
 	Q.Format("DoNotLock %i\r\n", m_DoNotLock ?  1 : 0);
 	ar.WriteString(Q);
 
@@ -463,7 +458,6 @@ CString CRossDoc::SerializeInner(CArchive& ar)
 		try
 		{
 			GetRossHolder()->OpenRossHolder(DictFileName.c_str(), false);
-			GetRoss()->m_bRussianFields = m_bRussianFields;
 		}
 		catch(...)
 		{

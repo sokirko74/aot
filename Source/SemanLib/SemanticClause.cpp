@@ -2174,7 +2174,7 @@ void CRusSemStructure:: CorrectClauseRelations1()
 void CRusSemStructure:: ApplyClauseRules(long GapSize)
 {
 	try {
-		StartTimer(_R("Межклаузные связи"),0);
+		StartTimer("Clause relations",0);
 
 
 
@@ -2281,7 +2281,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 
 		CorrectClauseRelations1();  
 
-		EndTimer(_R("Межклаузные связи"));
+		EndTimer("Clause relations");
 	}
 	catch (...)
 	{

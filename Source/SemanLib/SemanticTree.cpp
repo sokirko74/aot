@@ -551,7 +551,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 	vector<CTreeVariant> Parents;
 	long HypotVariantCount = 1;
-	StartTimer(_R("Граф Шалимова"),1);
+	StartTimer("Shalimov's graph",1);
 
 	for (size_t i = 0;  i < m_Nodes.size(); i++)
 		if (HasTag(i, Tag))
@@ -597,7 +597,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 	CTreeVariant V; // текущий вариант 
 	GetTreeVariants(Parents, V, Variants, 0);
 	size_t VariantCount = Variants.size();
-	EndTimer(_R("Граф Шалимова"));
+	EndTimer("Shalimov's graph");
 
 	if (Variants.size() > m_PanicTreeVariantCount*100) 
 	{
@@ -606,7 +606,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		return;
 	};
 
-	StartTimer(_R("Расцикливание"),1);
+	StartTimer("Uncycling",1);
 
 	long CycledMinComponentNum = Parents.size();
 
@@ -622,8 +622,8 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 		};
 	};
-	EndTimer(_R("Расцикливание"));
-	StartTimer(_R("Удаление повторов для неуник. отношений"),1);
+	EndTimer("Uncycling");
+	StartTimer("Delete equal relations", 1);
 
 	long MinComponentNum = Parents.size();
 
@@ -647,9 +647,9 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 
 	};
-	EndTimer(_R("Удаление повторов для неуник. отношений"));
+	EndTimer("Delete equal relations");
 
-	StartTimer(_R("Удаление малосвязных вариантов"),1);
+	StartTimer("Delete weakly connected  variants", 1);
 	// уничтожаем все варианты, у которых число компонент связности меньше минимального значения 
 	// для всех вариантов
 
@@ -680,8 +680,8 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		return;
 	};
 
-	EndTimer(_R("Удаление малосвязных вариантов"));
-	StartTimer(_R("Оценка деревьев"),1);
+	EndTimer("Delete weakly connected  variants");
+	StartTimer("Tree estimation",1);
 
 
 	long l=0;
@@ -695,7 +695,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 			l++;
 		};
 
-	EndTimer(_R("Оценка деревьев"));
+	EndTimer("Tree estimation");
 
 };
 
@@ -742,7 +742,7 @@ long CRusSemStructure::GetTreeByConnectedComponents (size_t ClauseNo,  TreeVaria
 
 TryWithoutLongRelationsLabel:
 
-	StartTimer(_R("Общее время построения дерева"),0);
+	StartTimer("All tree building time",0);
 
 	// узел, содежащий союз, который стоит в начале клаузы, удаленные на время построения дерева
 	CRusSemNode  FirstConjNode;
@@ -769,7 +769,7 @@ TryWithoutLongRelationsLabel:
 		ResultValue.Panic = true;
 		if (FirstConjNode.m_Words.size() > 0)
 			InsertNode (FirstConjNode);
-		EndTimer(_R("Общее время построения дерева"));
+		EndTimer("All tree building time");
 		return 0;
 	};
 
@@ -788,7 +788,7 @@ TryWithoutLongRelationsLabel:
 		if (VarAndVals[i][0].second.Panic)
 		{
 			ResultValue.Panic = true;
-			EndTimer(_R("Общее время построения дерева"));
+			EndTimer("All tree building time");
 			if (FirstConjNode.m_Words.size() > 0)
 				InsertNode (FirstConjNode);
 			if (TryWithoutLongRelations)
@@ -819,7 +819,7 @@ TryWithoutLongRelationsLabel:
 			m_Relations.clear();
 			ApplySynStr (ClauseNo);
 
-			EndTimer(_R("Общее время построения дерева"));
+			EndTimer("All tree building time");
 			return VarAndVals[i].size();
 		};
 		// может быть ни одно 
@@ -885,7 +885,7 @@ TryWithoutLongRelationsLabel:
 
 
 
-	EndTimer(_R("Общее время построения дерева"));
+	EndTimer("All tree building time");
 
 	return WeightAndPositions.size();
 };
@@ -958,23 +958,23 @@ void CRusSemStructure::ValueTreeVariant (TreeVariantValue& Value, long Tag)
   Value.ValencyDisorder = GetValencyDisorderCount(Tag);
 
   //  оценка отношений 
-  StartTimer(_R("Проверка по SF"),2);
+  StartTimer("SF checking", 2);
   Value.SemFetDisagree = RelsCount ? GetSemFetDisagreeCount(Tag)*1000 / RelsCount : 0;
-  EndTimer(_R("Проверка по SF"));
+  EndTimer("SF checking");
   // должно идти после GetSemFetDisagreeCount
   // другие оценки
-  StartTimer(_R("Оценка деревьев_1"),2);
+  StartTimer("Tree estimation_1",2);
   Value.OptionalValencyCount = GetOptionalValenciesCount(Tag);
   Value.LexFetAgreeCount = RelsCount ? GetLexFetAgreeCount(Tag)*1000  / RelsCount : 0;
   Value.RelationsLength = SemanticVolume ? GetRelationsLength(Tag)*1000  / SemanticVolume : 0;
   Value.InstrAgentRelsCount =  SemanticVolume ? GetInstrAgentRelsCount(Tag)*1000  / SemanticVolume: 0;
-  EndTimer(_R("Оценка деревьев_1"));
+  EndTimer("Tree estimation_1");
   // другие оценки
-  StartTimer(_R("Проверка проективности"),2);
+  StartTimer("Projectivity checking",2);
   Value.ProjectnessCoef = IsProjectedNew(Tag) ? 0 : 1;
-  EndTimer(_R("Проверка проективности"));
+  EndTimer("Projectivity checking");
 
-  StartTimer(_R("Оценка деревьев_2"),2);
+  StartTimer("Tree estimation_2",2);
   Value.AgreeWithSyntaxTopCoef = AgreeWithSyntaxTop(Tag) ? 1 : 0;
   Value.TopAgreeWithSyntaxCriteria = TopAgreeWithSyntaxCriteria(Tag) ? 1 : 0;
   Value.MNAViolationsCount = GetMNAViolationsCount(Tag);
@@ -990,7 +990,7 @@ void CRusSemStructure::ValueTreeVariant (TreeVariantValue& Value, long Tag)
   Value.PrichastieWithoutActantsCount = GetPrichastieWithoutActants(Tag);
 
   Value.PassiveValencyCount = GetPassiveValencyCount(Tag);
-  EndTimer(_R("Оценка деревьев_2"));
+  EndTimer("Tree estimation_2");
   
 };
 

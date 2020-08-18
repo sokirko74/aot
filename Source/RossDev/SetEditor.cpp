@@ -60,7 +60,8 @@ BOOL CSetEditor::OnInitDialog()
 	CDialog::OnInitDialog();
 
 
-    SetWindowText(CString(_R("Значения поля ")) + ConstructFldName(GetRoss(), m_Field.FieldNo, m_Field.LeafId, m_Field.BracketLeafId));
+    SetWindowText(CString("Field value ") 
+				+ ConstructFldName(GetRoss(), m_Field.FieldNo, m_Field.LeafId, m_Field.BracketLeafId));
 
 	// установка шрифта
 	CFont* F = m_ListBox.GetFont();
@@ -137,7 +138,7 @@ void CSetEditor::OnSeteditorValue()
 		S = ConstructFldName(GetRoss(), m_Field.FieldNo, m_Field.LeafId, m_Field.BracketLeafId) + CString(" = ") + S; 
 		CTempArticle A;
 		A.m_pRoss = GetRoss();
-		A.SetArticleStr( (const char*)S );
+		A.ReadFromUtf8String( (const char*)S );
 
 		TCortege OldValue = A.GetCortege(0);
      	TCortege NewValue;
@@ -171,7 +172,7 @@ void CSetEditor::OnOK()
 	try  {
 		CTempArticle A;
 		A.m_pRoss =  GetRoss();
-		A.SetArticleStr(   (const char*)S );
+		A.ReadFromUtf8String(   (const char*)S );
 		size_t Count = A.GetCortegesSize();
 		m_NewValue.clear();
 		for (int i=0;  i < Count; i++)

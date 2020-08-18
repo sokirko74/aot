@@ -4,7 +4,6 @@
 
 #include "ComGraphmatFile.h"
 #include <comdef.h>
-#include "../StructDict/ComDictionary.h"
 
 
 STDMETHODIMP CComGraphmatFile::FreeTable()
@@ -115,14 +114,6 @@ STDMETHODIMP CComGraphmatFile::get_IsTableLoaded(BOOL *pVal)
 STDMETHODIMP CComGraphmatFile::FreeDicts()
 {
 	CGraphmatFile::FreeDicts();
-	return S_OK;
-}
-
-
-STDMETHODIMP CComGraphmatFile::SetOborDic(IUnknown *Dic)
-{
-	assert (m_pDicts);
-	const_cast<CGraphanDicts*>(m_pDicts)->SetOborDic(reinterpret_cast<CComDictionary*>(Dic));
 	return S_OK;
 }
 

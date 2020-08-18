@@ -217,8 +217,6 @@ public:
 };
 
 
-typedef enum {	iceOverwrite = 0, iceSkip = 1, iceAppend = 2} ImportConflictEnum;
-
 struct CSourceLine 
 {
 	std::string m_Line;
@@ -234,6 +232,8 @@ struct CSourceLine
 
 class CDictionary : public TRoss
 {
+	bool		ProcessOneArticle(vector<CSourceLine>& L, int start, int last, std::string& Messages);
+
 public:
 	
 	/*
@@ -255,13 +255,13 @@ public:
 	BYTE		GetDomItemDomNo (int ItemNo) const;
 	int			GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const;
 	const char*	GetDomItemStr(int ItemNo) const;
-	std::string		GetEntryStr (WORD EntryNo) const;
+	std::string	GetEntryStr (WORD EntryNo) const;
+	std::string	GetEntryStrUtf8(WORD EntryNo) const;
 	BYTE		GetUnitMeanNum(WORD EntryNo) const;
 	bool		IncludeArticle(WORD UnitNo, std::string Article) const;
 
 	bool		Load(const char* Path);
-	bool		ProcessOneArticle ( vector<CSourceLine>& L, int start, int last, bool bSimulating, ImportConflictEnum ConflictSolver, std::string& Messages);
-	bool		ImportFromText(std::string FileName, bool bSimulating, ImportConflictEnum ConflictSolver, int StartEntry,std::string& Messages);
+	bool		ImportFromText(std::string FileName, int StartEntry,std::string& Messages);
 	void		SetUnitCurrentTime(WORD UnitNo);
 	bool		AddField(std::string FieldStr);
 	std::string		GetUnitEditor(WORD UnitNo) const;

@@ -4,8 +4,6 @@
 #include "SynAn.h"
 #include "COMSentencesCollection.h"
 #include "../Lemmatizer/ComPlmLineCollection.h"
-//#include "../RmlThes/ComThesaurus.h"
-#include "../StructDict/ComDictionary.h"
 #import "../../bin/Lemmatizer.tlb"
 
 
@@ -24,13 +22,6 @@ STDMETHODIMP CCOMSentencesCollection::SetLemmatizer(IUnknown *Interf)
 	CSentencesCollection::SetLemmatizer(  reinterpret_cast<CCOMLemmatizerRussian*>(Interf) );
 	return S_OK;
 }
-
-STDMETHODIMP CCOMSentencesCollection::SetOborDic(IUnknown *Interf)
-{
-	CSentencesCollection::SetOborDic(  reinterpret_cast<CComDictionary*>(Interf) );
-	return S_OK;
-}
-
 
 STDMETHODIMP CCOMSentencesCollection::InitializeProcesser()
 {

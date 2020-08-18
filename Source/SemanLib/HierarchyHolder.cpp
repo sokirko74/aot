@@ -95,7 +95,7 @@ void CHierarchyHolder::WriteToRoss(std::string Entry)
   	CTempArticle A;
 	A.m_pRoss = const_cast<CDictionary*>(GetRoss());
 	A.ReadFromDictionary(UnitNo, true, false);
-	A.SetArticleStr(Entry.c_str());
+	A.ReadFromUtf8String(Entry.c_str());
 	A.WriteToDictionary();
 };
 

@@ -44,7 +44,7 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 		in.getline(Line, 1000);
 		std::string s = Line;
 		if(in.eof()) break;
-		StringTokenizer tok(s.c_str(), " ;");
+		StringTokenizer tok(convert_to_utf8(s.c_str(), morphRussian).c_str(), " ;");
 		std::string left = tok();
 		Trim(left);
 

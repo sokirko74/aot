@@ -129,10 +129,10 @@ void CRusSyntaxOpt::DestroyOptions ()
 
 
 
-void BuildArticle(CDictionary* piRossDict, std::string s, CTempArticle& A1)
+void BuildArticleFromUtf8String(CDictionary* piRossDict, std::string s, CTempArticle& A1)
 {
 	A1.m_pRoss =  piRossDict;
-	A1.SetArticleStr( s.c_str() );
+	A1.ReadFromUtf8String( s.c_str() );
 	A1.MarkUp();
 	A1.BuildCortegeList();
 };
@@ -151,13 +151,13 @@ void CRusSyntaxOpt :: LoadFromRoss(CDictionary* piRossDict)
 		SynDependOnAdj = new SDatItems(_QM(ADV));	
 
 		CTempArticle A1;
-		BuildArticle(piRossDict,_R("GF = * НАР:нар_опр"), A1);
+		BuildArticleFromUtf8String(piRossDict,"GF = * НАР:нар_опр", A1);
 		
 		CTempArticle A2;
-		BuildArticle(piRossDict,_R("GF1 = * X!:НАР"), A2);
+		BuildArticleFromUtf8String(piRossDict,"GF1 = * X!:НАР", A2);
 
 		CTempArticle A3;
-		BuildArticle(piRossDict,_R("GF1 = * X!:ПРИЛ"), A3);		
+		BuildArticleFromUtf8String(piRossDict,"GF1 = * X!:ПРИЛ", A3);		
 
 		
 		CTempArticle A;
@@ -233,7 +233,7 @@ bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 	}
 	catch(...)
 	{			
-		OutputErrorString("Failed to load \"StructDict.dll\" ( Ross)");	
+		OutputErrorString("Failed to load Ross");	
 		return false;
 	}
 

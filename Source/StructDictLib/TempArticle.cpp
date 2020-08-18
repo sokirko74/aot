@@ -591,13 +591,12 @@ void CTempArticle::ReadFromDictionary(WORD UnitNo, bool VisualOrder, bool ReadOn
 }
 
 
-bool CTempArticle::SetArticleStr(const char * s)
+bool CTempArticle::ReadFromUtf8String(const char * s)
 {
-	m_ArticleStr = "";
-	m_ArticleStr += s; 
+	m_ArticleStr = convert_from_utf8(s, m_pRoss->m_Language); 
 	DeleteEmptyLines(m_ArticleStr);
 	if (!MarkUp()) return false;
-	if (!BuildCortegeList()) return false;;
+	if (!BuildCortegeList()) return false;
 	return true;
 }
 
@@ -778,10 +777,20 @@ bool CTempArticle::IsModified() const
 
 }
 
-const std::string& CTempArticle::GetArticleStr()
+const std::string& CTempArticle::GetArticleStr() 
 {
     ArticleToText();
 	return m_ArticleStr;
+}
+
+std::string CTempArticle::GetArticleStrUtf8(bool check)
+{
+	if (!ArticleToText()) {
+		if (check) {
+			throw CExpc("cannot parse %zu", m_UnitNo);
+		}
+	}
+	return convert_to_utf8(m_ArticleStr, m_pRoss->m_Language);
 }
 
 

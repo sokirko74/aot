@@ -30,7 +30,6 @@ CImportForm::CImportForm(CRossDoc* pRossDoc,
 	m_OverWrite = -1;
 	m_Append = -1;
 	m_Skip = 0;
-	m_SimulatingMode = TRUE;
 	m_NumberOfArticle = _T("1");
 	//}}AFX_DATA_INIT
 	try { 
@@ -55,7 +54,6 @@ void CImportForm::DoDataExchange(CDataExchange* pDX)
 	DDX_Radio(pDX, IDC_RADIO2, m_Append);
 	DDX_Radio(pDX, IDC_RADIO3, m_Skip);
 	DDX_Text(pDX, IDC_EDIT2, m_FileName);
-	DDX_Check(pDX, IDC_CHECK1, m_SimulatingMode);
 	DDX_Text(pDX, IDC_EDIT3, m_NumberOfArticle);
 	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_RICHEDIT21, m_MainRichEdit);
@@ -130,14 +128,6 @@ void CImportForm::SendInfo (CString S, long LineNo)
 };
 
 
-//  a from MFC to ImportConflictEnum (in Ross.h) 
-ImportConflictEnum CImportForm::GetConflictSolver() const
-{
-	if (!m_OverWrite) return iceOverwrite;
-	if (!m_Skip) return iceSkip;
-	return iceAppend;
-};
-
 void CImportForm::OnRun() 
 {
 	// TODO: Add your control notification handler code here
@@ -167,15 +157,12 @@ void CImportForm::OnRun()
 	m_ProtocolRichEdit.SetSel(0, -1);
 	m_ProtocolRichEdit.Clear();
 
-	if (!m_SimulatingMode)
-       m_pRossDoc->SetModifiedFlag(TRUE);
+    m_pRossDoc->SetModifiedFlag(TRUE);
 
 
 	std::string Messages;
 	GetRoss()->ImportFromText(
 		(const char*)m_FileName, 
-		m_SimulatingMode==TRUE, 
-		GetConflictSolver(), 
 		atoi (m_NumberOfArticle),
 		Messages
 		);

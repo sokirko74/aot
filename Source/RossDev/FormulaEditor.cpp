@@ -162,7 +162,7 @@ void CFormulaEditor::OnOK()
    try {
 	   CTempArticle A;
 	   A.m_pRoss = GetRoss();
-	   A.SetArticleStr( (const char*)S );
+	   A.ReadFromUtf8String( (const char*)S );
 	   size_t Count = A.GetCortegesSize();
 	   m_NewValue.clear();
 	   for (int i=0;  i < Count; i++)
@@ -250,7 +250,7 @@ void CFormulaEditor::OnFormulaEditorValue()
 	{
 		CTempArticle A;
 		A.m_pRoss = GetRoss();
-		A.SetArticleStr( (const char*)S );
+		A.ReadFromUtf8String( (const char*)S );
         OldValue = A.GetCortege(0);
 	}
 	catch (...)

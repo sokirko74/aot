@@ -55,7 +55,7 @@ bool readDat(istream &ifs, set<CStatInfo> &Infos) {
 
     while (ifs.getline(buf, 2048)) {
         lin++;
-        StringTokenizer tok(buf, ";");
+        StringTokenizer tok(convert_from_utf8(buf, morphRussian).c_str(), ";");
         CStatInfo I;
         I.m_Lemma = tok();
         std::string sgrm = tok();

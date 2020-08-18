@@ -46,7 +46,7 @@ protected:
 	//{{AFX_MSG(CSplashWnd)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnPaint();
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

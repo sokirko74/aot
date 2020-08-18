@@ -789,12 +789,10 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 {
 	size_t NodeNo;
 
-	StartTimer(_R("Панический граф"), 0);
-	StartTimer(_R("До построения всех отношений"), 1);
+	StartTimer("Panic graph", 0);
+	StartTimer("Before all relations", 1);
 
 	try {
-		//for (size_t i=0; i<  m_Nodes.size(); 
-
 		try {
 
 			FindOldNodes(ClauseNo);
@@ -902,8 +900,8 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 		}
 
 
-		EndTimer(_R("До построения всех отношений"));
-		StartTimer(_R("Построение всех отношений"), 1);
+		EndTimer("Before all relations");
+		StartTimer("Build all relations", 1);
 
 		RestoreMemoryRelations(ClauseNo);
 
@@ -946,7 +944,7 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 
 		CopyToMemory(ClauseNo);
 
-		EndTimer(_R("Построение всех отношений"));
+		EndTimer("Build all relations");
 
 		try
 		{
@@ -1024,7 +1022,7 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 		throw;
 	};
 
-	EndTimer(_R("Панический граф"));
+	EndTimer("Panic graph");
 	return true;
 
 };

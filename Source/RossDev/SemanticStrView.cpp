@@ -192,7 +192,7 @@ void CSemanticStrView::OnSize(UINT nType, int cx, int cy)
 		GetClientRect(clrect);
 		Tk_MoveResizeWindow(m_tkwin,0,0,clrect.Width(),clrect.Height());
 		char s[2000];
-		sprintf (s, "$GT($main,canvas) configure -height %u -width %u", clrect.Width()-100);;
+		sprintf (s, "$GT($main,canvas) configure -height %u -width %u", clrect.Height(), clrect.Width()-100);;
 		Tcl_Eval(theInterp,s);
 		Tcl_Eval(theInterp,"ResizeChildControls");
 
@@ -358,7 +358,7 @@ int CreateSynStr (ClientData clienData,
 	CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 	if  (App->m_bGraphanIsBusy)
 	{
-			AfxMessageBox (_R("Graphan is busy (получение минус перечня)"));
+			AfxMessageBox ("Graphan is busy (getting minus list)");
 			return TCL_OK;
 	};
 
@@ -426,7 +426,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 		if  (App->m_bGraphanIsBusy)
 		{
-			AfxMessageBox (_R("Graphan is busy (получение минус перечня)"));
+			AfxMessageBox ("Graphan is busy (getting minus list)");
 			return TCL_OK;
 		};
 		std::string text = "";
@@ -527,7 +527,7 @@ int AnswerBySavedSentences (ClientData clienData,
 
 	  std::string Sent = GetSemBuilder().Answer();
 
-	  ::GlobalOpenReport(Sent.c_str(), _R("Ответ:"));
+	  ::GlobalOpenReport(Sent.c_str(), "Answer:");
 	  Doc->m_bBusy = false;
 
 	  return TCL_OK;
@@ -615,7 +615,7 @@ int BuildSentence (ClientData clienData,
 	  std::string Sent;
 	  if (GetSemBuilder().BuildSentence(Sent))
 	  {
-		::GlobalOpenReport(Sent.c_str(), _R("Перевод:"));
+		::GlobalOpenReport(Sent.c_str(), "Translation:");
 	  }
 	  Doc->m_bBusy = false;
 
@@ -636,7 +636,7 @@ int SyntRusSentence (ClientData clienData,
 	  std::string Sent;
 	  if (GetSemBuilder().SyntRusSentence(Sent))
 	  {
-		  ::GlobalOpenReport(Sent.c_str(), _R("Русский синтез:"));
+		  ::GlobalOpenReport(Sent.c_str(), "Russian synthesis:");
 	  }
 	  Doc->m_bBusy = false;
 

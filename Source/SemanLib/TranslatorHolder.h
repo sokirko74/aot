@@ -7,7 +7,6 @@
 #include  "../BinaryDictsLib/AspPairDict.h"
 #include  "../BinaryDictsLib/FreqDict.h"
 #include  "../BinaryDictsLib/DerivDict.h"
-#include  "../BinaryDictsLib/SynDictionary.h"
 #include  "../BinaryDictsLib/BinaryDictionary.h"
 
 #include  "../SynanLib/SyntaxHolder.h"
@@ -89,8 +88,6 @@ public:
 	CFreqDict				m_CompFreq;
 	CFreqDict				m_FinFreq;
 	CFreqDict				m_AdjNounDualFreq;
-	//CDerivDictonary			m_piSupAdjDict;
-	CSynDictionary			m_pSynonymsDict;
 	CAspPairDict			m_AspDict;
 	bool                    m_AspDictEnabled;
 	long					m_LastUpdateTime;

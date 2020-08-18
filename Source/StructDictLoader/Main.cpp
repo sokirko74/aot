@@ -29,20 +29,7 @@ void export_dict(std::string fileName, std::string folder) {
 	for (WORD i = 0; i < Dict.m_Units.size(); i++)
 	{
 		outf << "============\n" << convert_to_utf8(Dict.GetUnitTextHeader(i), Dict.m_Language);
-		try
-		{
-			A.ReadFromDictionary(i, false, true);
-			if (!A.ArticleToText())
-			{
-				throw CExpc("Error! Cannot get the entry No %i", i);
-			};
-			outf << convert_to_utf8(A.GetArticleStr(), Dict.m_Language);
-		}
-		catch (...)
-		{
-			throw CExpc("Error! Cannot get the entry No %i", i);
-		}
-
+		outf << A.GetArticleStrUtf8(true);
 	};
 }
 

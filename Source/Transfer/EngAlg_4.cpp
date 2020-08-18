@@ -545,7 +545,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 				try{
 				  CTempArticle A;
 				  A.m_pRoss = const_cast<CDictionary*> (GetRoss(Aoss));
-				  A.SetArticleStr("GF*     = *  NP_poss");
+				  A.ReadFromUtf8String("GF*     = *  NP_poss");
 				  TCortege C = A.GetCortege(0);	
 				  newRels[k].m_SynReal.m_Cortege = C;		
 				}

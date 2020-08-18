@@ -55,9 +55,9 @@ bool  CSemStructureBuilder::FindSituations(std::string text, long UserTreeVarian
 					ErrorMessage("Syntax has crushed");
 					return false;
 				};
-				m_GlobalSpan.StartTimer(_R("Семантика"),0);
+				m_GlobalSpan.StartTimer("Semantics",0);
 				m_RusStr.FindSituations(m_CurrentSentence);
-				m_GlobalSpan.EndTimer(_R("Семантика"));
+				m_GlobalSpan.EndTimer("Semantics");
 				if (m_RusStr.m_bShouldBeStopped) return true;
 			}	
 			else
@@ -93,11 +93,11 @@ bool CSemStructureBuilder::TranslateToEnglish(std::string& Graph)
 	try 
 	{
 		Graph = "";
-		m_GlobalSpan.StartTimer(_R("Трансфер"),0);
+		m_GlobalSpan.StartTimer("Transfer",0);
 		m_EngStr.m_pData->InitializeIndices();
 		
 		m_EngStr.TranslateToEnglish();
-		m_GlobalSpan.EndTimer(_R("Трансфер"));
+		m_GlobalSpan.EndTimer("Transfer");
         if (m_bShouldBuildTclGraph) 
 		{
 			Graph =  m_EngStr.GetTclGraph (false, true);
@@ -116,19 +116,19 @@ bool CSemStructureBuilder::TranslateToEnglish(std::string& Graph)
 
 bool  CSemStructureBuilder::BuildSentence(std::string& Sentence)
 {
-	m_GlobalSpan.StartTimer(_R("Синтез"),0);	
+	m_GlobalSpan.StartTimer("Synthesis",0);	
 	m_RusStr.m_pData->InitializeIndices();
 	Sentence =  m_EngStr.BuildSentence();
-	m_GlobalSpan.EndTimer(_R("Синтез"));	
+	m_GlobalSpan.EndTimer("Synthesis");
 	return true;
 }
 
 bool CSemStructureBuilder::SyntRusSentence(std::string& Sentence)
 {
-	m_GlobalSpan.StartTimer(_R("Русский Синтез"),0);	
+	m_GlobalSpan.StartTimer("Russian Synthesis",0);
 	m_RusStr.m_pData->InitializeIndices();
 	if (!m_RusStr.RussianSynthesis(Sentence)) return false;
-	m_GlobalSpan.EndTimer(_R("Русский Синтез"));	
+	m_GlobalSpan.EndTimer("Russian Synthesis");
 	return true;
 }
 

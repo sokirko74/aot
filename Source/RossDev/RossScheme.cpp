@@ -106,8 +106,8 @@ void CRossScheme::OnBnClickedSaveToFiles()
 		
 		std::string FileName = Path + (const char*)D.DomStr + std::string(".txt");
 		FILE* fp = fopen (FileName.c_str(), "w");
-		for (size_t k = 0; k < D.m_ItemsLength; k++)
-			fprintf (fp, "%s\n", (const char*)D.m_Items[k]);
+		for (size_t k = 0; k < D.m_DomainItemsBufferLength; k++)
+			fprintf (fp, "%s\n", (const char*)D.m_DomainItemsBuffer[k]);
 		fclose(fp);
 	};
 

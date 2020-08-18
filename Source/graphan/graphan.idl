@@ -99,10 +99,6 @@ import "ocidl.idl";
 		/*! get a oborot index that starts from LineNo, -1 if there is no oborots*/		
 		[id(22), helpstring("method GetOborotNo")] HRESULT GetOborotNo([in] UINT LineNo, [retval, out] LONG* result);
 	
-		/*! set a pointer to oborot-dictionary. It should be set before calling LoadDicts,
-		otherwise another copy of the dictionary would be loaded by the module itself*/		
-		[id(24), helpstring("method SetOborDic")] HRESULT SetOborDic([in] IUnknown* Dic);
-
 		/*! get offset in the input buffer of line LineNo, for plain text files or strings this offset 
 		is equal to the file offset*/		
 		[id(25), helpstring("method GetUnitOffset")] HRESULT GetUnitOffset([in] int LineNo, [out, retval] int* Offset );
