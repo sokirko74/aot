@@ -18,7 +18,9 @@ Convertor(AprDictGen dict2809.txt ${PROJECT_SOURCE_DIR}/../BinDict/dict.bin)
 Convertor(asp_read ASP.txt ${PROJECT_SOURCE_DIR}/../BinDict/asp_dict.bin)
 Convertor(deriv_read troiki_suff ${PROJECT_SOURCE_DIR}/../BinDict/deriv_suff.bin)
 Convertor(deriv_read troiki_pref ${PROJECT_SOURCE_DIR}/../BinDict/deriv_pref.bin)
-Convertor(GenSynDict synonyms.txt ${PROJECT_SOURCE_DIR}/../BinDict/synonyms.bin)
+
+#not used
+#Convertor(GenSynDict synonyms.txt ${PROJECT_SOURCE_DIR}/../BinDict/synonyms.bin)
 
 
 macro (GenFreqDictConv Source BinData)
