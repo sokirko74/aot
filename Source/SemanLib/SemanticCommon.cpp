@@ -54,12 +54,12 @@ bool CSemWord::IsRusSubstPronounP () const
 {
 	if (m_Poses	 != (1<< PRONOUN_P)) return false;
 
-	return     (m_Lemma == "КАЖДЫЙ" )
-			||  (m_Lemma == "ЛЮБОЙ")			   
-			||  (m_Lemma == "ТОТ")
-			||  (m_Lemma == "КОТОРЫЙ")
-			||  (m_Lemma == "ДРУГОЙ")
-			||  (m_Lemma == "ОДИН");
+	return     (m_Lemma == _R("КАЖДЫЙ") )
+			||  (m_Lemma == _R("ЛЮБОЙ"))
+			||  (m_Lemma == _R("ТОТ"))
+			||  (m_Lemma == _R("КОТОРЫЙ"))
+			||  (m_Lemma == _R("ДРУГОЙ"))
+			||  (m_Lemma == _R("ОДИН"));
 };
 
 QWORD		CSemWord::GetAllGrammems() const
@@ -472,15 +472,15 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 
 inline long ConvertGramRestrToGrammems(std::string t)
 {
-	if ( t  == "ед" )
+	if ( t  == _R("ед") )
 			  return _QM(rSingular);
-    if ( t == "мн" )
+    if ( t == _R("мн") )
 			  return _QM(rPlural);
-	if ( t == "1л" )
+	if ( t == _R("1л") )
 	          return _QM(rFirstPerson);
-    if ( t == "2л" )
+    if ( t == _R("2л") )
 			  return _QM(rSecondPerson);
-	if ( t == "3л" )
+	if ( t == _R("3л") )
 			  return _QM(rThirdPerson);
 	return 0;
 };
@@ -556,7 +556,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 			if (GetNode(i).IsPrimitive())
 				if (!GetNode(i).GetWord(0).m_WordEquals.empty())
 				{
-					Q+= "\n Полные эквиваленты:";
+					Q+= "\n Copies:";
 					for (long j=0; j < GetNode(i).GetWord(0).m_WordEquals.size(); j++)
 						Q+= Format("\n%s", GetNode(i).GetWord(0).m_WordEquals[j].c_str());
 
@@ -564,7 +564,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 
 			if (GetNode(i).m_SynGroupTypeStr != "")
 			{
-				Q += Format("\nЖесткая группа  = %s", GetNode(i).m_SynGroupTypeStr.c_str());
+				Q += Format("\nFixed group  = %s", GetNode(i).m_SynGroupTypeStr.c_str());
 			};
 			;
 			Res += Format("$GT($main,graph) set $nds(%i)  .morphology \"%s\"\1",i, Q.c_str());
@@ -720,7 +720,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 		if (GetRelation(i)->m_Valency.IsFromDict())
 			if (GetRelation(i)->m_Valency.m_UnitNo != ErrUnitNo)
 			{
-				Props += "Статья = ";
+				Props += "Article = ";
 				Props += GetRelation(i)->m_Valency.m_RossHolder->GetRoss()->GetEntryStr(GetRelation(i)->m_Valency.m_UnitNo);
 				Props += "\n";
 			};
@@ -732,7 +732,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 		else
 			LeafIdStr = Format("%i(%i)", LeafId&31, LeafId >> 5);
 
-		Props += "Актант = ";
+		Props += "Actant = ";
 		Props += "A";
 		Props += LeafIdStr;
 		Props += "\n";
@@ -751,23 +751,23 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 			};
 		if (!GetRelation(i)->m_SyntacticRelation.empty())
 		{
-			Props += " СинО = "+ GetRelation(i)->m_SyntacticRelation;
+			Props += " SynR = "+ GetRelation(i)->m_SyntacticRelation;
 			Props += "\n";
 		};
 		//
 			
 		if (GetRelation(i)->m_Position != "")
 		{
-			Props += " Позиция = "+ GetRelation(i)->m_Position;
+			Props += " Postions = "+ GetRelation(i)->m_Position;
 			Props += "\n";
 
-			Props += " Тип Позиции = ";
+			Props += " Position type = ";
 
 			if (GetRelation(i)->m_PosType ==  FromAlgorithmPosType)
-				Props += "Алгоритм";
+				Props += "Algorithm";
 			else
 				if (GetRelation(i)->m_PosType ==  FromArticlePosType)
-					Props += "Статья";
+					Props += "Article";
 
 			Props += "\n";
 		};
@@ -1224,7 +1224,7 @@ bool CSemanticStructure::CheckGroupBeginAndCase(std::string ItemStr, size_t Node
 {
    const CSemNode&  N = GetNode(NodeNo);
    if (ItemStr.length() > 3)
-   if (ItemStr.substr (ItemStr.length() - 3) == "_мн")
+   if (ItemStr.substr (ItemStr.length() - 3) == _R("_мн"))
    {
 	   if (       !N.HasOneGrammem (rPlural)
 		      && (N.m_NodeType != MNA)
@@ -1263,11 +1263,11 @@ bool    CSemanticStructure  :: HasLocPrepInBegining (size_t NodeNo) const
 bool CSemanticStructure::IsRusSubj(int iRel) const
 {
 	if( GetRelation(iRel)->
-		 m_SyntacticRelation == "подл")
+		 m_SyntacticRelation == _R("подл"))
 		return true;
 	long iRusSynRel = GetSynRelBySemRel(iRel);
 	if( iRusSynRel != -1 )
-		if( GetSynRels()[iRusSynRel].m_SynRelName == "ПОДЛ" )
+		if( GetSynRels()[iRusSynRel].m_SynRelName == _R("ПОДЛ") )
 			return true;
 	return false;
 }

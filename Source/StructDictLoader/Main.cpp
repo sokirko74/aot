@@ -47,7 +47,7 @@ void import_dict(std::string fileName, std::string folder) {
 	Dict.m_bShouldSaveComments = true;
 
 	std::string Messages;
-	if (!Dict.ImportFromText(fileName, false, iceSkip, 1, Messages)) {
+	if (!Dict.ImportFromText(fileName, 1, Messages)) {
 		throw CExpc(Messages);
 	}
 	Dict.Save();

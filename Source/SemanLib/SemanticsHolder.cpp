@@ -741,7 +741,7 @@ bool  CSemanticsHolder::BuildOborottos ()
 			if (	GetRossHolder(OborRoss)->HasItem (UnitNo, "GF", _R("ВВОДН"),"D_PART_OF_SPEECH",0,0) )
 				O.m_bRusIntrExpr = true;
 
-			if ( GetRoss(OborRoss)->IncludeArticle(UnitNo, _R("GF = * НАР : УСИЛ") ) )
+			if ( GetRoss(OborRoss)->IncludeArticle(UnitNo, "GF = * НАР : УСИЛ" ) )
 				O.m_bRusNegOborAdverbial = true;
 
 			if ( GetRossHolder(OborRoss)->HasItem (UnitNo, "GF", _R("НАР"),"D_PART_OF_SPEECH",0,0) )

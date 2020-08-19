@@ -1213,7 +1213,7 @@ BYTE		CDictionary::GetUnitMeanNum(WORD EntryNo) const
 	return m_Units[EntryNo].m_MeanNum;
 };
 
-bool CDictionary::IncludeArticle(WORD UnitNo, std::string Article) const
+bool CDictionary::IncludeArticle(WORD UnitNo, std::string ArticleUtf8) const
 {
 	CTempArticle A1;
 	A1.m_pRoss = const_cast<CDictionary*>(this);
@@ -1221,7 +1221,7 @@ bool CDictionary::IncludeArticle(WORD UnitNo, std::string Article) const
 
 	CTempArticle A2;
 	A2.m_pRoss = const_cast<CDictionary*>(this);
-	A2.ReadFromUtf8String(Article.c_str());
+	A2.ReadFromUtf8String(ArticleUtf8.c_str());
 	A2.MarkUp();
 	A2.BuildCortegeList();
 	return A2.IsPartOf(&A1, true);
