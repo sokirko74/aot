@@ -163,7 +163,7 @@ proc initialize_graphic { main } {
 	set  RusSynthesisBtn [button $main.controls.rusSynthesisBtn -text RusSynt -command onRusSynthesis -state normal]
 	place $RusSynthesisBtn -x 157 -y 30 -height 20
 	
-	set  mainEntry [text $main.controls.mainEntry -relief sunken -bd 2 -setgrid 1 -height 3 -width 100]
+	set  mainEntry [text $main.controls.mainEntry -relief sunken -bd 2 -setgrid 1 -height 3 -width 100 -font "systemfixed" ]
 	place $mainEntry -x 220 -y 4
 
 
@@ -187,34 +187,37 @@ proc initialize_graphic { main } {
 	place [label $main.switches.resultText -relief sunken -width 31 -height 17  -justify left  ] -x 7 -y 165
 
 	# предметная область
-	label $main.switches.po -text "ПO"
+
+	label $main.switches.po -text "Topic"
 	place $main.switches.po -x 10 -y 60
-	
-	radiobutton $main.switches.po_common -text "общ" -variable po   -relief flat -value общ
+
+    #font create AppHighlightFont -family Helvetica -size 12 -weight bold	
+	radiobutton $main.switches.po_common -font "systemfixed" -text "общ" -variable po   -relief flat -value общ
+
 	place $main.switches.po_common -x 10 -y 75
 
-	radiobutton $main.switches.po_finance -text "фин" -variable po  -relief flat -value фин
+	radiobutton $main.switches.po_finance -font "systemfixed" -text "фин" -variable po  -relief flat -value фин
 	place $main.switches.po_finance -x 10 -y 95 
 
-	radiobutton $main.switches.po_computer -text "комп" -variable po  -relief flat -value информ
+	radiobutton $main.switches.po_computer -font "systemfixed" -text "комп" -variable po  -relief flat -value информ
 	place $main.switches.po_computer -x 10 -y 115 
 
 
 	# тип показываемого графа
-	label $main.switches.graph_type -text "Граф"
+	label $main.switches.graph_type -text "Graph"
 	place $main.switches.graph_type -x 70 -y 60
 	set graph_type main_graph_type
-	radiobutton $main.switches.main_graph_type -text "основной" -variable graph_type   -relief flat \
+	radiobutton $main.switches.main_graph_type -text "main" -variable graph_type   -relief flat \
 		-value main_graph_type \
 		-command {SetMainGraphType}
 	place $main.switches.main_graph_type -x 70 -y 75
 
-	radiobutton $main.switches.clause_graph_type -text "клаузы" -variable graph_type  -relief flat \
+	radiobutton $main.switches.clause_graph_type -text "clause" -variable graph_type  -relief flat \
 		-value clause_graph_type \
 		-command {SetClauseGraphType}
 	place $main.switches.clause_graph_type -x 70 -y 95 
 
-	radiobutton $main.switches.lex_var_graph_type -text "лекс.вар." -variable graph_type  -relief flat \
+	radiobutton $main.switches.lex_var_graph_type -text "lexvars" -variable graph_type  -relief flat \
 		-value lex_var_graph_type \
 		-command {SetLexVarType}
 	place $main.switches.lex_var_graph_type -x 70 -y 115 
@@ -1046,9 +1049,6 @@ proc delete_lexical_variants { editor} {
 
 
 
-
-
-
 proc SetLexVarType {} {
   global GT  LastSentence 
   global main
@@ -1068,37 +1068,3 @@ proc SetLexVarType {} {
 }
 
 
-proc GetJavaGraph {} {
- global main GT  
-
- #tk_messageBox -message "GetJavaGraph started"
-  set graph $GT($main,graph) 
-
- 
- set Result "nodes"
- set i 0
- foreach node [$graph nodes] {
-   set x [$graph get $node -x]
-   set y [$graph get $node -y]
-   set label [$graph get $node -label]
-   set morph [$graph get $node .morphology]
-   set Result "$Result#(#x $x#y $y#label $label#Morphology $morph#)"
-   $graph set $node  .node_id $i
-   incr i 1
- };
-
- set Result "$Result#edges"
- foreach edge [$graph edges] {
- 	    set source [$graph get $edge -source]
-	    set target [$graph get $edge -target]
-	    set source_id [$graph get $source .node_id]
-        set target_id [$graph get $target .node_id]
-		set label [$graph get $edge -label]
-		set Result "$Result#(#source_id $source_id#target_id $target_id#label $label#)"
-
- }
- set Result "$Result#"
- 
- return $Result
-
-};

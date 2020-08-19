@@ -76,6 +76,7 @@ set GT_selection(types) {node edge}
 
 source [file join $GT(graphscript_dir) init options.tcl]
 GT_init_options
+
 source [file join $GT(graphscript_dir) init postscript.tcl]
 GT_init_postscript_options
 source [file join $GT(graphscript_dir) init action.tcl]
