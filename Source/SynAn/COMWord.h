@@ -6,7 +6,7 @@
 #include "resource.h"       // main symbols
 #include "ComHomonym.h"
 #include "StdAfx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "COMClauseVariant.h"
 
 

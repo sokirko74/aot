@@ -5,7 +5,7 @@
 
 #include "resource.h"       // main symbols
 #include "../SynCommonLib/Clause.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CCOMClauseType

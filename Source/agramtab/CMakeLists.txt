@@ -2,11 +2,14 @@ cmake_minimum_required(VERSION 3.6)
 
 project (agramtab)
 
+
+add_subdirectory (agramtab_idl)
+
+
 list (APPEND LIB_DEPENDS 
-     aot_common AgramtabLib
+     aot_common AgramtabLib agramtab_idl
 )
  
-CompileIDL(${PROJECT_NAME})
 
 add_library(${PROJECT_NAME} SHARED
     ComGramTab.cpp

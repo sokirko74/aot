@@ -1,11 +1,16 @@
 ﻿project (SynAn)
 
+add_subdirectory (synan_idl)
+
 list (APPEND LIB_DEPENDS 
     SynCommonLib
     SynanLib
+    lemmatizer_idl
+    graphan_idl
+    mapost_idl
+    synan_idl
 )
  
-CompileIDL(${PROJECT_NAME})
 
 add_library(${PROJECT_NAME} SHARED
 COMClause.cpp
@@ -20,7 +25,6 @@ ComRelation.cpp
 ComRelationIterator.cpp
 StdAfx.cpp
 SynAn.cpp
-SynAn.idl
 SynAn.rc
 Unit.cpp
 COMClauseType.rgs

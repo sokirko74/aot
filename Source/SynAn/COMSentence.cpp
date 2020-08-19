@@ -1,6 +1,6 @@
 // COMSentence.cpp : Implementation of CCOMSentence
 #include "stdafx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "COMSentence.h"
 #include "COMWord.h"
 /////////////////////////////////////////////////////////////////////////////

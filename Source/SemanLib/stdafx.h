@@ -14,6 +14,7 @@
 #include  "../StructDictLib/Ross.h"
 #include  "../StructDictLib/StructDictConsts.h"
 #include "../GraphanLib/GraphanDicts.h"
-// TODO: reference additional headers your program requires here
+#include "../AgramtabLib/rus_consts.h"
+#include "../AgramtabLib/eng_consts.h"
 
 #endif

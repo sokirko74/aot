@@ -6,7 +6,7 @@
 #pragma warning(disable:4530)
 
 #include "stdafx.h"
-#include "Lemmatizer.h"
+#include "Lemmatizer_i.h"
 #include "ComParadigm.h"
 STDMETHODIMP  CCOMParadigm::get_ParadigmID(/*[out, retval]*/ DWORD *pVal)
 {

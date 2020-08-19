@@ -21,12 +21,8 @@
 extern CComModule _Module;
 #include <atlcom.h>
 #include <comdef.h>
-
-#include "SynAn.h"
-
+#include "SynAn_i.h"
 #include "../common/util_classes.h"
-
-
 #include "../SynCommonLib/stdafx.h"
 
 

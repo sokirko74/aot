@@ -1,11 +1,15 @@
 ﻿project (Seman)
 
+add_subdirectory (seman_idl)
+
 list (APPEND LIB_DEPENDS 
     SemanLib
+    lemmatizer_idl
+    graphan_idl
+    mapost_idl
+    synan_idl
 )
  
-CompileIDL(${PROJECT_NAME})
-
 add_library(${PROJECT_NAME} SHARED
 ComSemNode.cpp
 ComSemRelation.cpp

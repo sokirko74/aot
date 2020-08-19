@@ -1,6 +1,6 @@
 // Unit.cpp : Implementation of CCOMUnit
 #include "stdafx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "Unit.h"
 
 /////////////////////////////////////////////////////////////////////////////

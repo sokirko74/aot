@@ -1,6 +1,6 @@
 // GraphmatFile.cpp : Implementation of CComGraphmatFile
 #include "StdPch.h"
-#include "Graphan.h"
+#include "graphan_i.h"
 
 #include "ComGraphmatFile.h"
 #include <comdef.h>
@@ -69,9 +69,8 @@ STDMETHODIMP CComGraphmatFile::GetRubiconTypeStr(UINT RubiconTypeNo, BSTR *resul
 
 STDMETHODIMP CComGraphmatFile::GetLine(UINT LineNo, BSTR *result)
 {
-	char s[CriticalGraphemLineLength];
-	CGraphmatFile::GetGraphematicalLine(s, LineNo);
-	*result =  _bstr_t(s).copy();
+	std::string s = CGraphmatFile::GetGraphematicalLine(LineNo);
+	*result =  _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
 

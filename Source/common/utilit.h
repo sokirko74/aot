@@ -39,19 +39,16 @@
 using namespace std;
 
 typedef unsigned char BYTE;
+typedef int64_t QWORD;
 
 #ifdef WIN32
 	#include  <io.h>
 	#include <fcntl.h>
-    #ifndef _WINDNS_INCLUDED_
-	    typedef __int64 QWORD;
-    #endif
 	
 #else
 	#include  <unistd.h>
 	typedef unsigned int	DWORD;	
 	typedef unsigned short	WORD;
-	typedef long long		QWORD;
 	typedef unsigned int	UINT;
 	const   unsigned int _MAX_PATH = 512;
 #endif

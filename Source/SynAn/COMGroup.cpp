@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "comdef.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "COMGroup.h"
 
 

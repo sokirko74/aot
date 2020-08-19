@@ -5,8 +5,6 @@
 #pragma once
 
 #include "agramtab_.h"       // main symbols
-#include "eng_consts.h"
-
 
 
 class CEngGramTab : public CAgramtab

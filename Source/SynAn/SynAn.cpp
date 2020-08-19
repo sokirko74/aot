@@ -9,9 +9,10 @@
 
 #include "resource.h"
 #include <initguid.h>
-#include "SynAn.h"
 
+#include "Synan_i.h"
 #include "SynAn_i.c"
+
 #include "COMSentencesCollection.h"
 
 #include "COMSentence.h"

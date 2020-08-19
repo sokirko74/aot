@@ -7,7 +7,7 @@
 #include "StdAfx.h"
 #include "agram_resource.h"
 #include <initguid.h>
-#include "agramtab.h"
+#include "agramtab_i.h"
 
 #include "agramtab_i.c"
 #include "ComGramTab.h"

@@ -18,6 +18,7 @@
 #include "../SynCommonLib/stdafx.h"
 #include "RusSyntaxOpt.h"
 #include "RusPlmLine.h"
+#include "../AgramtabLib/rus_consts.h"
 
 #endif 
 

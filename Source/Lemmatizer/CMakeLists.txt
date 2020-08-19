@@ -1,10 +1,12 @@
 project(Lemmatizer)
 
+add_subdirectory (lemmatizer_idl)
+
 list (APPEND LIB_DEPENDS 
      LemmatizerLib
+     lemmatizer_idl
+     graphan_idl
 )
-
-CompileIDL(${PROJECT_NAME})
 
 add_library(${PROJECT_NAME} SHARED
 COMLemmatizerEnglish.rgs

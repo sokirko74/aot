@@ -6,7 +6,7 @@
 #ifndef __COM_PARADIGM_H_
 #define __COM_PARADIGM_H_
 
-#include "Lemmatizer.h"      
+#include "Lemmatizer_i.h"      
 #include "atlcom.h"
 #include "comdef.h"
 

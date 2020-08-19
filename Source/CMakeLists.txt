@@ -94,33 +94,12 @@ if(BUILD_HTTP_SERVERS)
     add_subdirectory (SemanDaemon)
 endif()
 
+if (BUILD_COM) 
+    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+    find_package(IDL REQUIRED)
+endif()
+
 IF (MSVC)
-    macro(CompileIDL Project)
-        message ("==========  compile idl ${Project} ==============" )
-        file (WRITE dummy.cpp "") # creat empty file it no lib is produced
-
-        add_library(${Project}_TLB
-            ${Project}.idl
-            dummy.cpp           # without it no lib is produced
-        )
-
-        list (APPEND LIB_DEPENDS 
-             ${Project}_TLB     # add to dependency list
-        )
-
-        add_custom_command(
-            TARGET ${Project}_TLB
-            POST_BUILD        
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}.tlb ${CMAKE_SOURCE_DIR}/Bin
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}.tlb ${PROJECT_SOURCE_DIR}
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}.h ${PROJECT_SOURCE_DIR}
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}_i.c ${PROJECT_SOURCE_DIR}
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${IntDir}${Project}_p.c ${PROJECT_SOURCE_DIR}
-            VERBATIM
-        )
-
-    endmacro()
-
     macro(CopyAndRegsvr Project)
         add_custom_command(
             TARGET ${Project}
@@ -146,17 +125,17 @@ IF (MSVC)
         message ("compile COM-objects for Microsoft Windows")
         add_subdirectory (agramtab)
         add_subdirectory (graphan)
+        add_subdirectory (Lemmatizer)
         add_subdirectory (MAPost)
         add_subdirectory (SynAn)
-        add_subdirectory (Lemmatizer)
         add_subdirectory (Seman)
         add_subdirectory (TestCOMGraphan)
         add_subdirectory (TestLemmatizerCOM)
         add_subdirectory (TestSemanCOM)
         add_subdirectory (TestSynanCOM)
         if(BUILD_WINDOWS_GUI)
-            add_subdirectory (VisualSynan)
-            add_subdirectory (Demo)
+            #add_subdirectory (VisualSynan)
+            #add_subdirectory (Demo)
         endif()
     endif()
 

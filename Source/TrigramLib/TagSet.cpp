@@ -6,7 +6,7 @@
 #ifdef  USE_TRIGRAM_LEMMATIZER
 
 #include "../AgramtabLib/RusGramTab.h"
-
+#include "../AgramtabLib/rus_consts.h"
 
 
 // ==================   struct CTag  =================

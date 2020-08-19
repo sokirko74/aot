@@ -4,7 +4,7 @@
 #define __COM_HOMONYM_H_
 
 #include "resource.h"       // main symbols
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "../SynCommonLib/Word.h"
 #include "StdAfx.h"
 #include "../SynCommonLib/SyntaxInit.h"

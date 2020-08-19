@@ -5,7 +5,6 @@
 #pragma once
 
 #include "agramtab_.h"
-#include "rus_consts.h"
 
 
 class CRusGramTab : public CAgramtab {
@@ -68,37 +67,10 @@ public:
 
 extern bool GenderNumberCaseRussian(const CAgramtabLine* l1, const CAgramtabLine* l2);
 extern bool FiniteFormCoordRussian(const CAgramtabLine* l1, const CAgramtabLine* l2);
+extern bool CaseNumber(const CAgramtabLine* l1, const CAgramtabLine* l2);
+extern bool CaseGender(const CAgramtabLine* l1, const CAgramtabLine* l2);
+extern bool CaseNumberGender(const CAgramtabLine* l1, const CAgramtabLine* l2);
+extern bool CaseNumberGender0(const CAgramtabLine* l1, const CAgramtabLine* l2); //with absent grammems check
+extern bool GenderNumber0(const CAgramtabLine* l1, const CAgramtabLine* l2); //with absent grammems check
+extern bool CaseNumber0(const CAgramtabLine* l1, const CAgramtabLine* l2); //with absent grammems check
 
-// Стандартное согласование между двумя именами  по  числу и падежу
-inline bool CaseNumber(const CAgramtabLine* l1, const CAgramtabLine* l2)
-{
-	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0) &&
-		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0);
-};
-inline bool CaseGender(const CAgramtabLine* l1, const CAgramtabLine* l2)
-{
-	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0) &&
-		((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0);
-};
-inline bool CaseNumberGender(const CAgramtabLine* l1, const CAgramtabLine* l2)
-{
-	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0) &&
-		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0) &&
-		((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0);
-};
-inline bool CaseNumberGender0(const CAgramtabLine* l1, const CAgramtabLine* l2) //with absent grammems check
-{
-	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllCases & l1->m_Grammems) || !(rAllCases & l2->m_Grammems)) &&
-		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllNumbers & l1->m_Grammems) || !(rAllNumbers & l2->m_Grammems)) &&
-		((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllGenders & l1->m_Grammems) || !(rAllGenders & l2->m_Grammems)); ;
-};
-inline bool GenderNumber0(const CAgramtabLine* l1, const CAgramtabLine* l2) //with absent grammems check
-{
-	return ((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllGenders & l1->m_Grammems) || !(rAllGenders & l2->m_Grammems)) &&
-		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllNumbers & l1->m_Grammems) || !(rAllNumbers & l2->m_Grammems));
-};
-inline bool CaseNumber0(const CAgramtabLine* l1, const CAgramtabLine* l2) //with absent grammems check
-{
-	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllCases & l1->m_Grammems) || !(rAllCases & l2->m_Grammems)) &&
-		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllNumbers & l1->m_Grammems) || !(rAllNumbers & l2->m_Grammems)); ;
-};

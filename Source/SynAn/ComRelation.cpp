@@ -1,6 +1,6 @@
 // ComRelation.cpp : Implementation of CCOMRelation
 #include "stdafx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "comdef.h"
 #include "ComRelation.h"
 

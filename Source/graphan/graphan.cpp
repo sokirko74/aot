@@ -8,9 +8,10 @@
 #include "StdPch.h"
 #include "resource.h"
 #include <initguid.h>
-#include "graphan.h"
 
+#include "graphan_i.h"
 #include "graphan_i.c"
+
 #include "ComGraphmatFile.h"
 
 CComModule _Module;

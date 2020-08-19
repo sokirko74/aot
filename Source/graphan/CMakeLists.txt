@@ -1,10 +1,10 @@
 project(graphan)
 
-list (APPEND LIB_DEPENDS 
-     GraphanLib
-)
+add_subdirectory (graphan_idl)
 
-CompileIDL(${PROJECT_NAME})
+list (APPEND LIB_DEPENDS 
+     GraphanLib graphan_idl
+)
 
 add_library(${PROJECT_NAME} SHARED
     ComGraphmatFile.cpp

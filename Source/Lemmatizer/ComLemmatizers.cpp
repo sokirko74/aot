@@ -5,7 +5,7 @@
 #include "stdafx.h"
 #include "ComLemmatizers.h"
 #include "ComParadigm.h"
-#include "Lemmatizer.h"
+#include "Lemmatizer_i.h"
 #include "../LemmatizerLib/Lemmatizers.h"
 
 

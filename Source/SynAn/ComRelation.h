@@ -5,7 +5,7 @@
 
 #include "resource.h"       
 #include "ComGroup.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "../SynCommonLib/RelationsIterator.h"
 
 /////////////////////////////////////////////////////////////////////////////

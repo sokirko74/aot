@@ -1,6 +1,6 @@
 // COMHomonym.cpp : Implementation of CCOMHomonym
 #include "stdafx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "comdef.h"
 #include "COMHomonym.h"
 

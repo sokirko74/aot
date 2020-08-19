@@ -4,7 +4,7 @@
 #define __COMGRAPHMATFILE_H_
 
 
-#include "../Graphan/graphan.h"       // main symbols
+#include "graphan_i.h"       // main symbols
 #include "resource.h"       // main symbols
 #include "../GraphanLib/GraphmatFile.h"
 #include "../GraphanLib/Consent.h"

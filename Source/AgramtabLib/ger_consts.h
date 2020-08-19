@@ -1,6 +1,6 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
-// ==========  Dialing Lemmatizer (www.aot.ru)
-// ==========  Copyright by Alexey Sokirko, Dmitry Pankratov
+// #pragma once  is not enough since this file is included from agramtab.idl
+
+#ifndef __GerGramTab_FWD_DEFINED__
 #pragma once 
 
 enum GermanPartOfSpeechEnum
@@ -142,4 +142,4 @@ enum GermanClauseTypeEnum {
 	GERMAN_CLAUSE_TYPE_COUNT = 3
 };
 
-
+#endif

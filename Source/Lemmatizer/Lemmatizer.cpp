@@ -9,7 +9,7 @@
 #include "StdAfx.h"
 #include "lemmatizer_resource.h"
 #include <initguid.h>
-#include "Lemmatizer.h"
+#include "Lemmatizer_i.h"
 #include "ComPlmLineCollection.h"
 
 #include "Lemmatizer_i.c"

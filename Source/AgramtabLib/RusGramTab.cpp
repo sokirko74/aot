@@ -3,6 +3,7 @@
 // ==========  Copyright by Alexey Sokirko
 
 #include "RusGramTab.h"
+#include "rus_consts.h"
 
 
 // не должно быть пробелов между словами 
@@ -734,3 +735,39 @@ QWORD CRusGramTab::ChangeGleicheAncode1(GrammemCompare CompareFunc, const std::s
 	return 	wordGrammems & ~(gramFilter) | GetAllGrammems(groupGramCodes.c_str());
 }
 
+
+bool CaseNumber(const CAgramtabLine* l1, const CAgramtabLine* l2)
+{
+	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0) &&
+		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0);
+};
+bool CaseGender(const CAgramtabLine* l1, const CAgramtabLine* l2)
+{
+	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0) &&
+		((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0);
+};
+
+bool CaseNumberGender(const CAgramtabLine* l1, const CAgramtabLine* l2)
+{
+	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0) &&
+		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0) &&
+		((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0);
+};
+
+bool CaseNumberGender0(const CAgramtabLine* l1, const CAgramtabLine* l2) //with absent grammems check
+{
+	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllCases & l1->m_Grammems) || !(rAllCases & l2->m_Grammems)) &&
+		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllNumbers & l1->m_Grammems) || !(rAllNumbers & l2->m_Grammems)) &&
+		((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllGenders & l1->m_Grammems) || !(rAllGenders & l2->m_Grammems)); ;
+};
+bool GenderNumber0(const CAgramtabLine* l1, const CAgramtabLine* l2) //with absent grammems check
+{
+	return ((rAllGenders & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllGenders & l1->m_Grammems) || !(rAllGenders & l2->m_Grammems)) &&
+		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllNumbers & l1->m_Grammems) || !(rAllNumbers & l2->m_Grammems));
+};
+
+bool CaseNumber0(const CAgramtabLine* l1, const CAgramtabLine* l2) //with absent grammems check
+{
+	return ((rAllCases & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllCases & l1->m_Grammems) || !(rAllCases & l2->m_Grammems)) &&
+		((rAllNumbers & l1->m_Grammems & l2->m_Grammems) > 0 || !(rAllNumbers & l1->m_Grammems) || !(rAllNumbers & l2->m_Grammems)); ;
+};

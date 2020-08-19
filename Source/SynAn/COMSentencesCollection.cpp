@@ -1,10 +1,11 @@
 // COMSentencesCollection.cpp : Implementation of CCOMSentencesCollection
 
 #include "stdafx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "COMSentencesCollection.h"
 #include "../Lemmatizer/ComPlmLineCollection.h"
-#import "../../bin/Lemmatizer.tlb"
+//#import "../../bin/Lemmatizer.tlb"
+#include "../Lemmatizer/Lemmatizer_i.h"
 
 
 
@@ -36,16 +37,9 @@ STDMETHODIMP CCOMSentencesCollection::ProcessData(IUnknown *piPlmLine)
 {
 	try
 	{
-		LEMMATIZERLib::IPLMLineCollectionPtr piPLMLinePtr;
-
-		piPLMLinePtr.Attach(reinterpret_cast<LEMMATIZERLib::IPLMLineCollection*>(piPlmLine));
-
 		CCOMPLMLineCollection* pPlm = reinterpret_cast<CCOMPLMLineCollection*>(piPlmLine);
-
 		if (!CSentencesCollection::ProcessData(pPlm)) return E_FAIL;
 
-		piPLMLinePtr.Detach();
-	
 	}
 	catch(...)
 	{

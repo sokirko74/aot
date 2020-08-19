@@ -1,6 +1,6 @@
 // RelationsIterator.cpp : Implementation of CCOMRelationsIterator
 #include "stdafx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "ComRelationIterator.h"
 
 

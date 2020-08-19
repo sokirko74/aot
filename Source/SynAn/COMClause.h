@@ -6,7 +6,7 @@
 #include "resource.h"       // main symbols
 #include "StdAfx.h"
 #include "ComClauseVariant.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 /////////////////////////////////////////////////////////////////////////////
 // CCOMClause
 class ATL_NO_VTABLE CCOMClause : 

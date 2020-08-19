@@ -23,7 +23,6 @@
 extern CComModule _Module;
 #include <atlcom.h>
 #include "../common/utilit.h"
-#include "../Graphan/ComGraphmatFile.h"
 #include "../LemmatizerLib/Lemmatizers.h"
 
 

@@ -131,3 +131,6 @@ enum RussianClauseTypeEnum  {
 	RUSSIAN_CLAUSE_TYPE_COUNT = 12
 };
 
+
+// Стандартное согласование между двумя именами  по  числу и падежу
+	

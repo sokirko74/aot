@@ -5,8 +5,7 @@
 #pragma once 
 
 #include "agramtab_.h"       
-#include "ger_consts.h"       
-
+#include "ger_consts.h"
 
 class CGerGramTab : public CAgramtab
 {
@@ -73,14 +72,10 @@ public:
 	
 };
 
-
-
-const QWORD gBestimtheit = ( _QM(gAdjektiveOhneArtikel) | _QM(gAdjektiveMitUnbestimmte) | _QM(gAdjektiveMitBestimmte));
 const QWORD gAllCases = (_QM(gNominativ) | _QM(gGenitiv) | _QM(gDativ) | _QM(gAkkusativ));
-const QWORD gAllNumbers = ( _QM(gPlural) | _QM(gSingular) );
-const QWORD gAllGenders = ( _QM(gFeminin) | _QM(gMaskulin) | _QM(gNeutrum));
-const QWORD gAllPersons = ( _QM(gErstePerson) | _QM(gZweitePerson) | _QM(gDrittePerson));
-const QWORD gAllVerbForms = ( _QM(gKonj1) | _QM(gKonj2) | _QM(gImperativ)| _QM(gPrasens)| _QM(gPraeteritum));
-const QWORD gAllVerbClasses = ( _QM(gModal) | _QM(gAuxiliar) | _QM(gSchwach)| _QM(gNichtSchwach));
-
+const QWORD gAllNumbers = (_QM(gPlural) | _QM(gSingular));
+const QWORD gAllGenders = (_QM(gFeminin) | _QM(gMaskulin) | _QM(gNeutrum));
+const QWORD gAllPersons = (_QM(gErstePerson) | _QM(gZweitePerson) | _QM(gDrittePerson));
+const QWORD gAllVerbForms = (_QM(gKonj1) | _QM(gKonj2) | _QM(gImperativ) | _QM(gPrasens) | _QM(gPraeteritum));
+const QWORD gAllVerbClasses = (_QM(gModal) | _QM(gAuxiliar) | _QM(gSchwach) | _QM(gNichtSchwach));
 

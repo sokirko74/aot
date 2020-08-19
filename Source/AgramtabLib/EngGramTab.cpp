@@ -2,6 +2,7 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 #include "EngGramTab.h"
+#include "eng_consts.h"
 
 const static std::string EnglishPartOfSpeech[] =
 {

@@ -5,7 +5,7 @@
 
 
 #include "resource.h"       // main symbols
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "COMSentence.h"
 #include "../SynanLib/SentencesCollection.h"
 #include <windows.h>

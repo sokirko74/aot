@@ -1,7 +1,8 @@
-// PLMLineCollection.cpp : Implementation of CCOMPLMLineCollection
-#include "StdAfx.h"
 
-#include "Lemmatizer.h"
+#include "StdAfx.h"
+#include "../Graphan/ComGraphmatFile.h"
+
+#include "Lemmatizer_i.h"
 #include "ComPlmLineCollection.h"
 #include <sstream>
 #include <fstream>

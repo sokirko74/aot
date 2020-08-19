@@ -1,6 +1,6 @@
 // COMClauseType.cpp : Implementation of CCOMClauseType
 #include "stdafx.h"
-#include "SynAn.h"
+#include "Synan_i.h"
 #include "COMClauseType.h"
 
 

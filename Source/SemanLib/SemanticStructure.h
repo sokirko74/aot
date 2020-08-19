@@ -8,6 +8,8 @@
 #include "../StructDictLib/Ross.h"
 #include "SemanticsHolder.h"
 #include "SemPattern.h"
+#include "../AgramtabLib/rus_consts.h"
+#include "../AgramtabLib/eng_consts.h"
 
  
 typedef vector<long> VectorLong;

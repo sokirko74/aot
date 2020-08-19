@@ -5,6 +5,7 @@
 #include "../AgramtabLib/GerGramTab.h"
 #include "../LemmatizerLib/Lemmatizers.h"
 #include "../LemmatizerLib/Paradigm.h"
+#include "../AgramtabLib/rus_consts.h"
 
 #ifdef  USE_TRIGRAM_LEMMATIZER
 

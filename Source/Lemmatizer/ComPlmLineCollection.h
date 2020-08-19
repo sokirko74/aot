@@ -3,7 +3,6 @@
 #ifndef __COMPLMLINECOLLECTION_H_
 #define __COMPLMLINECOLLECTION_H_
 
-//#include "Lemmatizer.h"       // main symbols
 #include "ComLemmatizers.h"       // main symbols
 #include "lemmatizer_resource.h"       // main symbols
 #include "../LemmatizerLib/PlmLineCollection.h"
