@@ -18,25 +18,25 @@ import "ocidl.idl";
 	interface IGramTab : IDispatch
 	{
 		[id(1), helpstring("method GetPartOfSpeech")] HRESULT GetPartOfSpeech([in] BSTR gram_code, [retval, out] BYTE* result);
-		[id(2), helpstring("method GetGrammems")] HRESULT GetGrammems([in] BSTR gram_code, [retval, out]  hyper* result);
+		[id(2), helpstring("method GetGrammems")] HRESULT GetGrammems([in] BSTR gram_code, [retval, out]  unsigned hyper* result);
 		[id(21), helpstring("method GetClauseTypeByName")] HRESULT GetClauseTypeByName([in]BSTR bstrTypeName, [out,retval]long* lType);
 		[id(22), helpstring("method GetClauseTypeByNameIfCan")] HRESULT GetClauseTypeByNameIfCan([in]BSTR bstrTypeName, [out]long* lType, [out,retval]BOOL* Result);
 		[id(23), helpstring("method GetClauseNameByType")] HRESULT GetClauseNameByType([in]long type, [out, retval]BSTR* name);
-		[id(24), helpstring("method GetGramCodeByGrammemsAndPartofSpeechIfCan")] HRESULT GetGramCodeByGrammemsAndPartofSpeechIfCan([in]BYTE Pos, [in] hyper grammems, [out]BSTR* gramcodes, [out, retval]BOOL* bRes);
+		[id(24), helpstring("method GetGramCodeByGrammemsAndPartofSpeechIfCan")] HRESULT GetGramCodeByGrammemsAndPartofSpeechIfCan([in]BYTE Pos, [in] unsigned hyper grammems, [out]BSTR* gramcodes, [out, retval]BOOL* bRes);
 		[propget, id(25), helpstring("property PartOfSpeechCount")] HRESULT PartOfSpeechCount([out, retval] BYTE *pVal);
 		[propget, id(26), helpstring("property GrammemsCount")] HRESULT GrammemsCount([out, retval] LONG *pVal);
-		[id(3), helpstring("method GrammemsToStr")] HRESULT GrammemsToStr([in]  hyper grammems, [retval, out] BSTR* result);
+		[id(3), helpstring("method GrammemsToStr")] HRESULT GrammemsToStr([in]  unsigned hyper grammems, [retval, out] BSTR* result);
 		[id(4), helpstring("method GetPartOfSpeechStr")] HRESULT GetPartOfSpeechStr([in] BYTE PartOfSpeech, [retval, out] BSTR* result);
 		[id(5), helpstring("method Load")] HRESULT Load();
 		[id(6), helpstring("method HaveEqualPartOfSpeech")] HRESULT HaveEqualPartOfSpeech([in]BSTR gram_code1, [in]BSTR gram_code2, [retval, out] BOOL* result);
-		[id(7), helpstring("method ProcessPOSAndGrammems")] HRESULT ProcessPOSAndGrammems([in]BSTR in, [out] BYTE* PartOfSpeech, [out]  hyper* Grammems);
+		[id(7), helpstring("method ProcessPOSAndGrammems")] HRESULT ProcessPOSAndGrammems([in]BSTR in, [out] BYTE* PartOfSpeech, [out]  unsigned hyper* Grammems);
 		[id(8), helpstring("method GleicheGenderNumberCase")] HRESULT GleicheGenderNumberCase([in] BSTR common_noun_gram_code, [in] BSTR noun_gram_code,  [in] BSTR adj_gram_code, [retval, out] BOOL* result);
 		[id(9), helpstring("method GleicheCaseNumber")] HRESULT GleicheCaseNumber([in] BSTR gram_code1,  [in] BSTR gram_code2, [retval, out] BOOL* result);
-		[id(11), helpstring("method GetAllGrammems")] HRESULT GetAllGrammems([in] BSTR gram_code, [retval, out]  hyper* result);
+		[id(11), helpstring("method GetAllGrammems")] HRESULT GetAllGrammems([in] BSTR gram_code, [retval, out]  unsigned hyper* result);
 		[id(12), helpstring("method GleicheGenderNumber")] HRESULT GleicheGenderNumber([in] BSTR gram_code1,  [in] BSTR gram_code2, [retval, out] BOOL* result);
-		[id(13), helpstring("method FindGrammem")] HRESULT FindGrammem([in] BSTR gram_codes, [in]  hyper grammems, [retval,out] BOOL* result);
+		[id(13), helpstring("method FindGrammem")] HRESULT FindGrammem([in] BSTR gram_codes, [in]  unsigned hyper grammems, [retval,out] BOOL* result);
 		[id(18), helpstring("method GleicheSubjectPredicate")] HRESULT GleicheSubjectPredicate([in]BSTR gram_code1, [in]BSTR gram_code2, [retval, out]BOOL *bRes);
-		[id(19), helpstring("method ProcessPOSAndGrammemsIfCan")] HRESULT ProcessPOSAndGrammemsIfCan([in]BSTR in, [out] BYTE* PartOfSpeech, [out]  hyper* Grammems, [out,retval] BOOL* Result);
+		[id(19), helpstring("method ProcessPOSAndGrammemsIfCan")] HRESULT ProcessPOSAndGrammemsIfCan([in]BSTR in, [out] BYTE* PartOfSpeech, [out]  unsigned hyper* Grammems, [out,retval] BOOL* Result);
 	};
 
 

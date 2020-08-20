@@ -17,10 +17,22 @@ CComGramTab::~CComGramTab()
 	delete m_pAgramtab;
 };
 
+std::string CComGramTab::_IN(BSTR str)
+{
+	std::string s = (const char*)_bstr_t(str);
+	return convert_from_utf8(s.c_str(), m_pAgramtab->m_Language);
+}
+
+BSTR CComGramTab::_OUT(std::string& str)
+{
+	std::string s = convert_to_utf8(str, m_pAgramtab->m_Language);
+	return _bstr_t(s.c_str()).copy();
+}
+
 
 STDMETHODIMP CComGramTab::GetPartOfSpeech(BSTR gram_code, BYTE* result)
 {
-	*result = m_pAgramtab->GetPartOfSpeech((const char*)_bstr_t (gram_code));
+	*result = m_pAgramtab->GetPartOfSpeech(_IN(gram_code).c_str());
 
 	if (*result == UnknownPartOfSpeech)
 		return E_FAIL;
@@ -29,10 +41,11 @@ STDMETHODIMP CComGramTab::GetPartOfSpeech(BSTR gram_code, BYTE* result)
 }
 
 
-STDMETHODIMP CComGramTab::GetGrammems(BSTR gram_code, QWORD *result)
+STDMETHODIMP CComGramTab::GetGrammems(BSTR gram_code, unsigned hyper *result)
 {
-	_bstr_t t = gram_code;
-    m_pAgramtab->GetGrammems((const char*)t, *result);
+	QWORD r;
+	m_pAgramtab->GetGrammems(_IN(gram_code).c_str(), r);
+	*result = r;
 	return S_OK;
 }
 
@@ -41,19 +54,17 @@ STDMETHODIMP CComGramTab::GrammemsToStr(QWORD grammems, BSTR *result)
 {
 	char szGrammems[32*5];
 	m_pAgramtab->grammems_to_str(grammems, szGrammems);
-	CComBSTR bstrString(szGrammems);
-	bstrString.CopyTo(result);
-	//*result =  _bstr_t("test").copy(); 
+	*result = _OUT(std::string(szGrammems));
 	return S_OK;
 }
 
 STDMETHODIMP CComGramTab::GetPartOfSpeechStr(BYTE PartOfSpeech, BSTR *result)
-{
-	*result =  _bstr_t(m_pAgramtab->GetPartOfSpeechStr(PartOfSpeech)).copy(); 
+{	
+	std::string s = m_pAgramtab->GetPartOfSpeechStr(PartOfSpeech);
+	s = convert_to_utf8(s, m_pAgramtab->m_Language);
+	*result =  _bstr_t(s.c_str()).copy(); 
 	return S_OK;
 }
-
-
 
 STDMETHODIMP CComGramTab::Load()
 {
@@ -63,20 +74,17 @@ STDMETHODIMP CComGramTab::Load()
 
 STDMETHODIMP CComGramTab::HaveEqualPartOfSpeech(BSTR gram_code1, BSTR gram_code2, BOOL* result)
 {
-	_bstr_t g1 = gram_code1;
-	_bstr_t g2 = gram_code2;
-	*result = m_pAgramtab->AreEqualPartOfSpeech(g1, g2);
+	*result = m_pAgramtab->AreEqualPartOfSpeech(_IN(gram_code1).c_str(), _IN(gram_code2).c_str());
 	return S_OK;
 }
 
 STDMETHODIMP CComGramTab::ProcessPOSAndGrammems(BSTR in, BYTE *PartOfSpeech, QWORD *Grammems)
 {
-	_bstr_t g1 = in;
-	if (!m_pAgramtab->ProcessPOSAndGrammems ((char*)g1, *PartOfSpeech, *Grammems))
-	 return E_FAIL;
+	if (!m_pAgramtab->ProcessPOSAndGrammems (_IN(in).c_str(), *PartOfSpeech, *Grammems))
+		return E_FAIL;
 
 	if (*PartOfSpeech == UnknownPartOfSpeech)
-	 return E_FAIL;
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -84,19 +92,26 @@ STDMETHODIMP CComGramTab::ProcessPOSAndGrammems(BSTR in, BYTE *PartOfSpeech, QWO
 
 STDMETHODIMP CComGramTab::GleicheGenderNumberCase(BSTR common_noun_gram_code, BSTR noun_gram_code, BSTR adj_code, BOOL *result)
 {
-	*result = m_pAgramtab->GleicheGenderNumberCase((const char*)_bstr_t(common_noun_gram_code), (const char*)_bstr_t(noun_gram_code), (const char*)_bstr_t(adj_code)) ? TRUE : FALSE;
+	*result = m_pAgramtab->GleicheGenderNumberCase(
+		_IN(common_noun_gram_code).c_str(), 
+		_IN(noun_gram_code).c_str(),
+		_IN(adj_code).c_str()) ? TRUE : FALSE;
 	return S_OK;
 }
 
 STDMETHODIMP CComGramTab::GleicheCaseNumber(BSTR gram_code1, BSTR gram_code2, BOOL *result)
 {
-	*result = m_pAgramtab->GleicheCaseNumber((const char*)_bstr_t(gram_code1), (const char*)_bstr_t(gram_code2)) ? TRUE : FALSE;
+	*result = m_pAgramtab->GleicheCaseNumber(
+		_IN(gram_code1).c_str(), 
+		_IN(gram_code2).c_str()) ? TRUE : FALSE;
 	return S_OK;
 }
 
 STDMETHODIMP CComGramTab::GleicheGenderNumber(BSTR gram_code1, BSTR gram_code2, BOOL *result)
 {
-	*result = m_pAgramtab->GleicheGenderNumber((const char*)_bstr_t(gram_code1), (const char*)_bstr_t(gram_code2)) ? TRUE : FALSE;
+	*result = m_pAgramtab->GleicheGenderNumber(
+		_IN(gram_code1).c_str(), 
+		_IN(gram_code2).c_str()) ? TRUE : FALSE;
 	return S_OK;
 }
 
@@ -104,7 +119,9 @@ STDMETHODIMP CComGramTab::GleicheGenderNumber(BSTR gram_code1, BSTR gram_code2, 
 
 STDMETHODIMP CComGramTab::GleicheSubjectPredicate(BSTR gram_code1, BSTR gram_code2, BOOL *bRes)
 {
-	*bRes =m_pAgramtab->GleicheSubjectPredicate((const char*)_bstr_t(gram_code1), (const char*)_bstr_t(gram_code2)) ? TRUE : FALSE;
+	*bRes = m_pAgramtab->GleicheSubjectPredicate(
+		_IN(gram_code1).c_str(), 
+		_IN(gram_code2).c_str() ) ? TRUE : FALSE;
 	return S_OK;
 }
 
@@ -112,7 +129,7 @@ STDMETHODIMP CComGramTab::GleicheSubjectPredicate(BSTR gram_code1, BSTR gram_cod
 
 STDMETHODIMP CComGramTab::GetAllGrammems(BSTR gram_code, QWORD *result)
 {
-	*result = m_pAgramtab->GetAllGrammems((const char*)_bstr_t(gram_code));
+	*result = m_pAgramtab->GetAllGrammems(_IN(gram_code).c_str());
 	return S_OK;
 }
 
@@ -121,23 +138,22 @@ STDMETHODIMP CComGramTab::GetAllGrammems(BSTR gram_code, QWORD *result)
 
 STDMETHODIMP CComGramTab::FindGrammem(BSTR gram_codes, QWORD grammems, BOOL *result)
 {
-    _bstr_t t =  gram_codes;
-	*result = m_pAgramtab->FindGrammems(t, grammems) ? TRUE : FALSE;	 
+	*result = m_pAgramtab->FindGrammems(_IN(gram_codes).c_str(), grammems) ? TRUE : FALSE;
 	return S_OK;
 }
 
 
 
-STDMETHODIMP CComGramTab::ProcessPOSAndGrammemsIfCan(BSTR in, BYTE *PartOfSpeech, QWORD *Grammems, BOOL* Result)
+STDMETHODIMP CComGramTab::ProcessPOSAndGrammemsIfCan(BSTR in, BYTE *PartOfSpeech, unsigned hyper *Grammems, BOOL* Result)
 {
-    _bstr_t g1 = in;
-	*Result = m_pAgramtab->ProcessPOSAndGrammems ((const char*)g1, *PartOfSpeech, *Grammems) ? TRUE : FALSE;
+	*Result = m_pAgramtab->ProcessPOSAndGrammems (
+		_IN(in).c_str(), *PartOfSpeech, *Grammems) ? TRUE : FALSE;
 	return S_OK;
 }
 
 STDMETHODIMP CComGramTab::GetClauseTypeByName(BSTR bstrTypeName, long *lType)
 {
-	*lType = m_pAgramtab->GetClauseTypeByName((const char*)_bstr_t(bstrTypeName));
+	*lType = m_pAgramtab->GetClauseTypeByName(_IN(bstrTypeName).c_str());
 	if (*lType == -1)
 		return E_FAIL;
 	return S_OK;
@@ -160,7 +176,7 @@ STDMETHODIMP CComGramTab::GetClauseNameByType(long type, BSTR *bstrName)
 {
 	try
 	{
-		*bstrName = _bstr_t(m_pAgramtab->GetClauseNameByType(type)).copy();	
+		*bstrName = _OUT(std::string(m_pAgramtab->GetClauseNameByType(type)));	
 		return S_OK;
 	}
 	catch(...)
@@ -175,7 +191,7 @@ STDMETHODIMP CComGramTab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QW
 {
 	std::string str;
 	*bRes = m_pAgramtab->GetGramCodeByGrammemsAndPartofSpeechIfCan(Pos, grammems, str);
-	*gramcodes = _bstr_t(str.c_str()).copy();
+	*gramcodes = _OUT(str);
 
 	return S_OK;
 }

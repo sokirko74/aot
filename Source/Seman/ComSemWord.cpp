@@ -9,15 +9,17 @@
 
 STDMETHODIMP CComSemWord::get_WordStr(BSTR *pVal)
 {	
-	*pVal = _bstr_t(m_pWord->m_Word.c_str()).copy();
-
-
+	auto s = m_pWord->m_Word;
+	s = convert_to_utf8(s, morphRussian);
+	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
 
 STDMETHODIMP CComSemWord::get_Lemma(BSTR *pVal)
 {
-	*pVal = _bstr_t(m_pWord->m_Lemma.c_str()).copy();
+	auto s = m_pWord->m_Lemma;
+	s = convert_to_utf8(s, morphRussian);
+	*pVal = _bstr_t(s.c_str()).copy();
 
 	return S_OK;
 }

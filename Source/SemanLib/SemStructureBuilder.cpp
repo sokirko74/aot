@@ -27,7 +27,7 @@ bool CSemStructureBuilder::FindSituationsForNextSentence()
 	return true;
 }
 
-bool  CSemStructureBuilder::FindSituations(std::string text, long UserTreeVariantNo, std::string PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, std::string AllowableLexVars, std::string& Graph)
+bool  CSemStructureBuilder::FindSituations(std::string utf8text, long UserTreeVariantNo, std::string PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, std::string AllowableLexVars, std::string& Graph)
 {
 	try {
 		
@@ -43,14 +43,14 @@ bool  CSemStructureBuilder::FindSituations(std::string text, long UserTreeVarian
 
 		m_RusStr.ProcessAllowableLexVars(AllowableLexVars.c_str());
 
-		if (!m_RusStr.TryTestTree(text))
+		if (!m_RusStr.TryTestTree(utf8text))
 		{
-			Trim(text);
+			Trim(utf8text);
 			
-			if (!text.empty())
+			if (!utf8text.empty())
 			{
 
-				if (!m_RusStr.m_pData->MakeSyntaxStr(text.c_str(), m_GlobalSpan)) 
+				if (!m_RusStr.m_pData->MakeSyntaxStr(utf8text.c_str(), m_GlobalSpan))
 				{
 					ErrorMessage("Syntax has crushed");
 					return false;

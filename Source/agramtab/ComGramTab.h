@@ -11,6 +11,9 @@ class ATL_NO_VTABLE CComGramTab :
 {
 protected:
 	CAgramtab* m_pAgramtab;
+	std::string _IN(BSTR str);
+	BSTR _OUT(std::string& str);
+
 public:
 	CComGramTab();
 	~CComGramTab();
@@ -20,7 +23,6 @@ public:
 DECLARE_REGISTRY_RESOURCEID(IDR_RUSGRAMTAB)
 
 DECLARE_PROTECT_FINAL_CONSTRUCT()
-
 BEGIN_COM_MAP(CComGramTab)
 	COM_INTERFACE_ENTRY(IGramTab)
 	COM_INTERFACE_ENTRY(IDispatch)
@@ -31,21 +33,21 @@ public:
 
 	STDMETHOD(get_GrammemsCount)(/*[out, retval]*/ LONG *pVal);
 	STDMETHOD(get_PartOfSpeechCount)(/*[out, retval]*/ BYTE *pVal);
-	STDMETHOD(GetGramCodeByGrammemsAndPartofSpeechIfCan)(/*[in]*/BYTE Pos, /*[in]*/QWORD grammems, /*[out, retval]*/BSTR* gramcodes, BOOL* bRes);
+	STDMETHOD(GetGramCodeByGrammemsAndPartofSpeechIfCan)(/*[in]*/BYTE Pos, /*[in]*/unsigned hyper grammems, /*[out, retval]*/BSTR* gramcodes, BOOL* bRes);
 	STDMETHOD(GetClauseNameByType)(/*[in]*/long type, /*[out, retval]*/BSTR* name);
 	STDMETHOD(GetClauseTypeByNameIfCan)(/*[in]*/BSTR bstrTypeName, /*[out]*/long* lType, /*[out,retval]*/BOOL* Result);
 	STDMETHOD(GetClauseTypeByName)(/*[in]*/BSTR bstrTypeName, /*[out,retval]*/long* lType);
-	STDMETHOD(ProcessPOSAndGrammemsIfCan)(/*[in]*/BSTR in, /*[out]*/ BYTE* PartOfSpeech, /*[out]*/ QWORD* Grammems, /*[out,retval]*/ BOOL* Result);
+	STDMETHOD(ProcessPOSAndGrammemsIfCan)(/*[in]*/BSTR in, /*[out]*/ BYTE* PartOfSpeech, /*[out]*/ unsigned hyper* Grammems,  BOOL* Result);
 	STDMETHOD(GleicheSubjectPredicate)(/*[in]*/BSTR gram_code1, /*[in]*/BSTR gram_code2, /*[out]*/BOOL *bRes);
-	STDMETHOD(FindGrammem)(/*[in]*/ BSTR gram_codes, /*[in]*/ QWORD grammems, /*[retval,out]*/ BOOL* result);
+	STDMETHOD(FindGrammem)(/*[in]*/ BSTR gram_codes, /*[in]*/ unsigned hyper grammems, /*[retval,out]*/ BOOL* result);
 	STDMETHOD(GleicheGenderNumber)(/*[in]*/ BSTR gram_code1,  /*[in]*/ BSTR gram_code2, /*[retval, out]*/ BOOL* result);
-	STDMETHOD(GetAllGrammems)(/*[in]*/ BSTR gram_code, /*[retval, out]*/ QWORD* result);
-	STDMETHOD(ProcessPOSAndGrammems)(/*[in]*/BSTR in, /*[out]*/ BYTE* PartOfSpeech, /*[out]*/ QWORD* Grammems);
+	STDMETHOD(GetAllGrammems)(/*[in]*/ BSTR gram_code, /*[retval, out]*/ unsigned hyper* result);
+	STDMETHOD(ProcessPOSAndGrammems)(/*[in]*/BSTR in, /*[out]*/ BYTE* PartOfSpeech, /*[out]*/ unsigned hyper* Grammems);
 	STDMETHOD(HaveEqualPartOfSpeech)(/*[in]*/BSTR gram_code1, /*[in]*/BSTR gram_code2, BOOL* result);
 	STDMETHOD(Load)();
 	STDMETHOD(GetPartOfSpeechStr)(/*[in]*/ BYTE PartOfSpeech, /*[out]*/ BSTR* result);
-	STDMETHOD(GrammemsToStr)(/*[in]*/ QWORD grammems, /*[out]*/ BSTR* result);
-	STDMETHOD(GetGrammems)(/*[in]*/ BSTR gram_code, /*[out]*/ QWORD* result);
+	STDMETHOD(GrammemsToStr)(/*[in]*/ unsigned hyper grammems, /*[out]*/ BSTR* result);
+	STDMETHOD(GetGrammems)(/*[in]*/ BSTR gram_code, /*[out]*/ unsigned hyper* result);
 	STDMETHOD(GetPartOfSpeech)(/*[in]*/ BSTR gram_code, BYTE* result);
 
 	STDMETHOD(GleicheCaseNumber)(/*[in]*/ BSTR gram_code1,  /*[in]*/ BSTR  gram_code2, /*[retval, out]*/ BOOL* result);

@@ -181,7 +181,6 @@ int main(int argc, const char **argv) {
         while (getline(args.GetInputStream(), s)) {
             Trim(s);
             if (s.empty()) continue;
-            s = convert_from_utf8(s.c_str(), H.m_CurrentLanguage);
             H.GetSentencesFromSynAn(s, false);
             s = GetStringBySyntax(H.m_Synan, *H.m_pGramTab, s);
             args.GetOutputStream()  << convert_to_utf8(s, H.m_CurrentLanguage);

@@ -41,10 +41,14 @@ STDMETHODIMP CSemStructure::GetSyntaxTreeByText(BSTR text, int ClauseVarNo, BSTR
 {
 	try {
 		std::string t = text ? (const char*)_bstr_t(text) : "";
+		t = convert_from_utf8(t.c_str(), morphRussian);
 		std::string ResultGraph;
 		if (!m_RusStr.GetSyntaxTreeByText(t, ClauseVarNo, ResultGraph))
 			return S_FALSE;
-		*Graph = _bstr_t(ResultGraph.c_str()).copy();
+
+		auto s = ResultGraph;
+		s = convert_to_utf8(s.c_str(), morphRussian);
+		*Graph = _bstr_t(s.c_str()).copy();
 		return S_OK;
 	}
 	catch (...)
@@ -66,8 +70,6 @@ STDMETHODIMP CSemStructure::put_CurrentTime(long newVal)
 }
 
 
-
-
 STDMETHODIMP CSemStructure::FindSituationsForNextSentence(BOOL* Result)
 {
 	if (!CSemStructureBuilder::FindSituationsForNextSentence())
@@ -77,12 +79,13 @@ STDMETHODIMP CSemStructure::FindSituationsForNextSentence(BOOL* Result)
 	return S_OK;
 }
 
-STDMETHODIMP CSemStructure::FindSituations(BSTR text, long UserTreeVariantNo, BSTR PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, BSTR AllowableLexVars, BSTR* Graph)
+STDMETHODIMP CSemStructure::FindSituations(BSTR utf8text, long UserTreeVariantNo, BSTR PO, long PanicTreeVariantCount, long UserClauseVariantsCombinationNo, BSTR AllowableLexVars, BSTR* Graph)
 {
 	std::string ResultGraph;
 
-	std::string sText				= text ? (const char*)_bstr_t(text) : "";
+	std::string sText				= utf8text ? (const char*)_bstr_t(utf8text) : "";
 	std::string sPO					= PO ? (const char*)_bstr_t(PO) : "";
+	sPO = convert_from_utf8(sPO.c_str(), morphRussian);
 	std::string sAllowableLexVars	= AllowableLexVars? (const char*)_bstr_t(AllowableLexVars) : "";
 	
 	bool bRes = CSemStructureBuilder::FindSituations
@@ -97,11 +100,11 @@ STDMETHODIMP CSemStructure::FindSituations(BSTR text, long UserTreeVariantNo, BS
 		);
 	if (!bRes)
 		return E_FAIL;
+	ResultGraph = convert_to_utf8(ResultGraph, morphRussian);
 	*Graph = _bstr_t(ResultGraph.c_str()).copy();
 	return S_OK;
 
 }
-
 
 
 STDMETHODIMP CSemStructure::TranslateToEnglish(BSTR* Graph)
@@ -110,6 +113,7 @@ STDMETHODIMP CSemStructure::TranslateToEnglish(BSTR* Graph)
 	bool bRes = CSemStructureBuilder::TranslateToEnglish(ResultGraph);
 	if (!bRes)
 		return E_FAIL;
+	ResultGraph = convert_to_utf8(ResultGraph, morphRussian);
 	*Graph = _bstr_t(ResultGraph.c_str()).copy();
 	return S_OK;
 }
@@ -121,6 +125,7 @@ STDMETHODIMP CSemStructure::BuildSentence(BSTR* Sentence)
 	bool bRes = CSemStructureBuilder::BuildSentence(ResultSentence);
 	if (!bRes)
 		return E_FAIL;
+	ResultSentence = convert_to_utf8(ResultSentence, morphRussian);
 	*Sentence = _bstr_t(ResultSentence.c_str()).copy();
 	return S_OK;
 }
@@ -131,11 +136,10 @@ STDMETHODIMP CSemStructure::SyntRusSentence(BSTR* Sentence)
 	bool bRes = CSemStructureBuilder::SyntRusSentence(ResultSentence);
 	if (!bRes)
 		return E_FAIL;
+	ResultSentence = convert_to_utf8(ResultSentence, morphRussian);
 	*Sentence = _bstr_t(ResultSentence.c_str()).copy();
 	return S_OK;
 }
-
-
 
 STDMETHODIMP CSemStructure::get_LastError(BSTR *pVal)
 {
@@ -244,7 +248,7 @@ STDMETHODIMP CSemStructure::put_SilentMode(BOOL newVal)
 STDMETHODIMP CSemStructure::SetLemmasToReplace(BSTR LemmasToReplace)
 {
 	std::string s = LemmasToReplace ? (const char*)_bstr_t(LemmasToReplace) : "";
-
+	s = convert_from_utf8(s.c_str(), morphRussian);
 	if (!m_RusStr.SetLemmasToReplace(s))
 		return E_FAIL;
 	else
@@ -265,7 +269,8 @@ STDMETHODIMP CSemStructure::ClearSavedSentences(void)
 
 STDMETHODIMP CSemStructure::Answer(BSTR* sAnswer)
 {
-	std::string Result = CSemStructureBuilder::Answer();
-	*sAnswer = _bstr_t(Result.c_str()).copy();
+	std::string result = CSemStructureBuilder::Answer();
+	result = convert_to_utf8(result, morphRussian);
+	*sAnswer = _bstr_t(result.c_str()).copy();
 	return S_OK;
 }

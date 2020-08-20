@@ -250,7 +250,7 @@ CAgramtab :: ~CAgramtab ()
 	
  };
 
-int CAgramtab :: AreEqualPartOfSpeech (char *grm1, char* grm2) 
+int CAgramtab :: AreEqualPartOfSpeech (const char *grm1, const char* grm2)
  {
    if ((grm1==0) && (grm2==0)) return 1;
    if ((grm1==0) && (grm2!=0)) return 0;

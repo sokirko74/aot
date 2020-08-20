@@ -14,14 +14,14 @@ Relations:
 	OBJ (2, 1)
 */
 
-#include "std::string"
-#import "../../bin/seman.tlb"
-#import "../../bin/agramtab.tlb"
-using namespace SEMANLib;
+#include "string"
+#include <iostream>
+#include <fstream>
+#include "assert.h"
+#import "../agramtab/agramtab.tlb"
+#import "../Seman/seman.tlb"
 
 AGRAMTABLib::IGramTabPtr piRusGramTab;
-using namespace std;
-
 
 std::string GetGramInfo (long Poses, __int64 Grammems )
 {
@@ -37,7 +37,7 @@ std::string GetGramInfo (long Poses, __int64 Grammems )
 	return  Result;
 }
 
-std::string GetRelOperatorsOfNode (IComSemNodePtr Node)
+std::string GetRelOperatorsOfNode (SEMANLib::IComSemNodePtr Node)
 {
 	std::string R;
 	for(int i=0; i < Node->RelOperatorsCount; i++)
@@ -49,11 +49,11 @@ std::string GetRelOperatorsOfNode (IComSemNodePtr Node)
 
 }
 
-std::string GetWordRealizationOfIncominRelation (ISemStructurePtr piSeman, int NodeNo)
+std::string GetWordRealizationOfIncominRelation (SEMANLib::ISemStructurePtr piSeman, int NodeNo)
 {
 	for (int i = 0; i < piSeman->RelationsCount; i++)
 	{
-		IComSemRelationPtr R = piSeman->Relations[i];
+		auto R = piSeman->Relations[i];
 		if (R->TargetNodeNo == NodeNo)
 		{
 			return (const char*)R->WordRealization;
@@ -63,9 +63,9 @@ std::string GetWordRealizationOfIncominRelation (ISemStructurePtr piSeman, int N
 }
 
 
-std::string GetWordStrOfNode (ISemStructurePtr piSeman, int NodeNo)
+std::string GetWordStrOfNode (SEMANLib::ISemStructurePtr piSeman, int NodeNo)
 {
-	IComSemNodePtr Node = piSeman->Nodes[NodeNo];
+	auto Node = piSeman->Nodes[NodeNo];
 	std::string NodeStr;
 
 	std::string PrepOrConj = 
@@ -77,7 +77,7 @@ std::string GetWordStrOfNode (ISemStructurePtr piSeman, int NodeNo)
 	
 	for (int i=0; i< Node->WordsCount; i++)
 	{
-		IComSemWordPtr Word = Node->Words[i];
+		auto Word = Node->Words[i];
 		NodeStr += (const char*)Word->WordStr;
 		NodeStr += "\t";
 		NodeStr += (const char*)Word->Lemma;
@@ -88,19 +88,20 @@ std::string GetWordStrOfNode (ISemStructurePtr piSeman, int NodeNo)
 		NodeStr += "\t";
 		NodeStr += GetGramInfo(Word->Poses, Word->Grammems);
 	}
-	NodeStr += _R(" Отредакт. морф. информация: ");
+	NodeStr += " Отредакт. морф. информация: ";
 	NodeStr += GetGramInfo(Node->Poses, Node->Grammems);
 
 	return NodeStr;
 };
 
+
 int main(int argc, char* argv[])
 {
-	if (argc != 1)
+	if (argc != 2)
 	{
-		fprintf (stderr, "TestSeman prints the best semantic relations");
-		fprintf (stderr, " for the input stream (www.aot.ru)\n");
-		fprintf (stderr, "Usage:  TestSeman <input.txt >output.txt\n");
+		std::cerr << "TestSeman prints the best semantic relations\n";
+		std::cerr << " for the input stream (www.aot.ru)\n";
+		std::cerr << "Usage:  TestSeman input.txt\n";
 		return 1;
 	};
 
@@ -113,97 +114,92 @@ int main(int argc, char* argv[])
 	}
 	catch(...)
 	{
-		fprintf (stderr, "agramtab.dll is not registered!\n");
-		return 0;
+		std::cerr << "agramtab.dll is not registered!\n";
+		return 1;
 	}
 
-	ISemStructurePtr piSeman;
+	SEMANLib::ISemStructurePtr piSeman;
 	try 
 	{
-		piSeman.CreateInstance( __uuidof(SemStructure));
+		piSeman.CreateInstance( __uuidof(SEMANLib::SemStructure));
 	}
 	catch(...)
 	{
-		fprintf (stderr, "Seman.dll is not registered!\n");
-		return 0;
+		std::cerr << "Seman.dll is not registered!\n";
+		return 1;
 	}
 	if (piSeman == 0)
 	{
-		fprintf (stderr, "Seman.dll is not registered!\n");
-		return 0;
+		std::cerr << "Seman.dll is not registered!\n";
+		return 1;
 	}
 	
 	try 
 	{
-		fprintf (stderr, "initialize presemantic dictionaries...\n");
+		std::cerr << "initialize presemantic dictionaries...\n";
 		piSeman->InitPresemanDicts();
-		fprintf (stderr, "initialize semantic dictionaries...\n");
+		std::cerr << "initialize semantic dictionaries...\n";
 		piSeman->InitSemanDicts();
 		piSeman->InitializeIndices();
-		piSeman->ShouldBuildTclGraph = FALSE;
+		piSeman->ShouldBuildTclGraph = 0;
 	}
 	catch(...)
 	{
-		fprintf (stderr, "Cannot load semantic dictionaries!\n");
-		return 0;
+		std::cerr << "Cannot load semantic dictionaries!\n";
+		return 1;
 	};
 
 
 	try 
 	{
-		fprintf (stderr, "Parsing sentences!\n");
-		char buffer[10000];
+		std::cerr << "Parsing sentences!\n";
 		size_t SentenceNo = 1;
-		while (fgets(buffer,  10000, stdin))
+		std::string inputFileName = argv[1];
+		std::ifstream  inp(inputFileName);
+		assert(inp.is_open());
+		
+		std::ofstream  outp(inputFileName + ".seman");
+		assert(outp.is_open());
+		std::string s;
+		while (std::getline(inp, s))
 		{
-			printf ("SentenceNo = %i\n",SentenceNo++);
-
-			piSeman->FindSituations(buffer,0,_R("общ"),20000,-1,"");
+			piSeman->FindSituations(s.c_str(), 0, "общ",20000,-1,"");
 			do {
-				printf ("Nodes:\n");
+				outp << "Nodes:\n";
 				for (int i = 0; i < piSeman->NodesCount; i++)
 				{
-					printf ("\tNode %i %s\n",  
-								i, 
-								GetWordStrOfNode(piSeman, i).c_str());
+					outp <<  "\tNode "<< i << " " << GetWordStrOfNode(piSeman, i) << "\n";
 				}
-				printf ("Relations:\n");
+				outp << "Relations:\n";
 				for (int i = 0; i < piSeman->RelationsCount; i++)
 				{
-					IComSemRelationPtr R = piSeman->Relations[i];
-					printf ("\t%s (%i, %i)\n", 
-						(const char*) R->Name,
-									R->TargetNodeNo,
-									R->SourceNodeNo);
+					auto R = piSeman->Relations[i];
+					outp << "\t" << R->Name << "(" << R->TargetNodeNo << "," << R->SourceNodeNo << ")\n";
 				};
 
 				if (piSeman->DopRelationsCount > 0)
 				{
-					printf ("Aux Relations:\n");
+					outp << "Aux Relations:\n";
 					for (int i = 0; i < piSeman->DopRelationsCount; i++)
 					{
-						IComSemRelationPtr R = piSeman->DopRelations[i];
-						printf ("\t%s (%i, %i)\n", 
-							(const char*) R->Name,
-										R->TargetNodeNo,
-										R->SourceNodeNo);
+						auto R = piSeman->DopRelations[i];
+						outp << "\t" << R->Name << "(" << R->TargetNodeNo << "," << R->SourceNodeNo << ")\n";
 					};
 				}
 			}
 			while (piSeman->FindSituationsForNextSentence()); 
 								// вызов следующего предложения
 		};
-		fprintf (stderr, "exit\n");	
+		std::cerr << "exit\n";	
 		piSeman = 0;
 		piRusGramTab = 0;
 		CoUninitialize();
+		return 0;
 
 	} catch(...)
 	{
-		printf ("an exception occurred(%s)!", 
-				(const char*)piSeman->GetLastError());
-		return 0;
+		std::cerr << "an exception occurred:" << (const char*)piSeman->GetLastError() << "\n";
+		return 1;
 	}
 
-	return 0;
 }

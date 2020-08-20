@@ -1,16 +1,11 @@
-// ComSemNode.cpp : Implementation of CComSemNode
 #include "stdafx.h"
 #include "seman_i.h"
 #include "ComSemNode.h"
 #include "ComSemWord.h"
 
-/////////////////////////////////////////////////////////////////////////////
-// CComSemNode
 
 STDMETHODIMP CComSemNode::get_DictType(idlDictTypeEnum *pVal)
 {
-	// TODO: Add your implementation code here
-
 	*pVal = InternalDictTypeToIdl (m_pNode->GetType()); 
 	return S_OK;
 }
@@ -52,7 +47,9 @@ STDMETHODIMP CComSemNode::get_Words(long pos, IComSemWord **pVal)
 
 STDMETHODIMP CComSemNode::get_GramCodes(BSTR *pVal)
 {
-	*pVal = _bstr_t(m_pNode->m_GramCodes.c_str()).copy();	
+	std::string s = m_pNode->m_GramCodes;
+	s = convert_to_utf8(s, morphRussian);
+	*pVal = _bstr_t(s.c_str()).copy();	
 	return S_OK;
 }
 
@@ -71,10 +68,6 @@ STDMETHODIMP CComSemNode::get_ClauseNo(long *pVal)
 	return S_OK;
 }
 
-
-
-
-
 STDMETHODIMP CComSemNode::get_RelOperatorsCount(int* pVal)
 {
 	*pVal = m_pNode->m_RelOperators.size();
@@ -88,7 +81,9 @@ STDMETHODIMP CComSemNode::get_RelOperators(int Index, BSTR* pVal)
 			||		( Index < 0)
 		)
 		return E_FAIL;
-	*pVal = _bstr_t(m_pNode->m_RelOperators[Index].c_str()).copy();	
+	std::string s = m_pNode->m_RelOperators[Index];
+	s = convert_to_utf8(s, morphRussian);
+	*pVal = _bstr_t(s.c_str()).copy();
 
 	return S_OK;
 }
@@ -98,6 +93,7 @@ STDMETHODIMP CComSemNode::get_Prep(BSTR* pVal)
 	
 	const CSynRealization& R = m_pNode->m_SynReal;
 	std::string s = m_pRusStr->GetPrepOrConjFromSynReal(R);
+	s = convert_to_utf8(s, morphRussian);
 	*pVal = _bstr_t(s.c_str()).copy();
 	
 

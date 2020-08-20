@@ -312,8 +312,8 @@ DWORD CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, std:
 
 };
 
-bool CTranslatorHolder::MakeSyntaxStr(const char *text, CMyTimeSpanHolder &GlobalSpan) {
-    return m_RusHolder.GetSentencesFromSynAn(text, false);
+bool CTranslatorHolder::MakeSyntaxStr(const char * utf8text, CMyTimeSpanHolder &GlobalSpan) {
+    return m_RusHolder.GetSentencesFromSynAn(utf8text, false);
 }
 
 const CDictionary *CTranslatorHolder::GetRusOborots() const {

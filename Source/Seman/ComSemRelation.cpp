@@ -27,13 +27,16 @@ STDMETHODIMP CComSemRelation::get_TargetNodeNo(long *pVal)
 
 STDMETHODIMP CComSemRelation::get_Name(BSTR *pVal)
 {
-	*pVal = _bstr_t(m_pRelation->m_Valency.m_RelationStr.c_str()).copy();
+	std::string s = m_pRelation->m_Valency.m_RelationStr;
+	s = convert_to_utf8(s, morphRussian);
+	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
 
 STDMETHODIMP CComSemRelation::get_WordRealization(BSTR* pVal)
 {
 	std::string s = m_pRusStr->GetPrepOrConjFromSynReal(m_pRelation->m_SynReal);
+	s = convert_to_utf8(s, morphRussian);
 	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }

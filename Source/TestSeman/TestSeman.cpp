@@ -206,7 +206,6 @@ int main(int argc, const char *argv[]) {
         if ((comment = s.find("//")) != std::string::npos) {
             s = s.substr(0, comment);
         }
-        s = convert_from_utf8(s.c_str(), morphRussian);
         Trim(s);
         if (s.length() > 250) {
             std::cerr << "skip the sentence of " << s.length() << " chars (too long)\n";
@@ -217,7 +216,7 @@ int main(int argc, const char *argv[]) {
             continue;
         }
         try {
-            args.GetOutputStream() << convert_to_utf8(s, morphRussian) << "\n";
+            args.GetOutputStream() << s << "\n";
             SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
             std::string dummy;
             SemBuilder.FindSituations(s, 0, _R("общ"), 20000, -1, "", dummy);

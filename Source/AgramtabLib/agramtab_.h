@@ -81,7 +81,7 @@ class CAgramtab {
 	
 	bool	LoadFromRegistry ();
 	bool	LoadFromRegistryAndCheck ();
-	int		AreEqualPartOfSpeech (char *grm1, char* grm2) ;
+	int		AreEqualPartOfSpeech (const char *grm1, const char* grm2) ;
 	bool	ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  QWORD* grammems) const;
 	char*	grammems_to_str (QWORD grammems, char* out_buf) const;
 	bool	FindGrammems (const char* gram_codes, QWORD grammems) const;

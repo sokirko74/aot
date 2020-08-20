@@ -64,7 +64,7 @@ bool CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 
 
 
-bool CSyntaxHolder::GetSentencesFromSynAn(std::string str, bool bFile)
+bool CSyntaxHolder::GetSentencesFromSynAn(std::string utf8str, bool bFile)
 {
 	clock_t t1,t2;
 	int CountOfWords;
@@ -74,7 +74,7 @@ bool CSyntaxHolder::GetSentencesFromSynAn(std::string str, bool bFile)
 		m_Synan.ClearSentences();
 		m_PlmLines.m_Items.clear();
 
-		if (!GetMorphology(str, bFile, CountOfWords))
+		if (!GetMorphology(utf8str, bFile, CountOfWords))
 			return false;;
 
         #ifdef _DEBUG
@@ -91,6 +91,7 @@ bool CSyntaxHolder::GetSentencesFromSynAn(std::string str, bool bFile)
 
 		};
         CPlmLineCollection MapostPlmLines;
+		MapostPlmLines.m_pLemmatizer = m_PlmLines.m_pLemmatizer;
         m_pPostMorph->SwapResults(MapostPlmLines.m_Items);
 
         if (m_bTimeStatis) 
