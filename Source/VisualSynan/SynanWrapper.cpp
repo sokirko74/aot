@@ -32,20 +32,5 @@ CSynanWrapper::~CSynanWrapper()
 
 BOOL CSynanWrapper::BuildSyntaxByCommandLine()
 {
-	/*if(!m_strCommandLine.IsEmpty())
-	{
-		char* strCommandLineBuffer;
-		strCommandLineBuffer = m_strCommandLine.GetBuffer(m_strCommandLine.GetLength());
-		
-		//imported functions from synan.dll
-		InitSyntax(strInitSynanFile);		
-		BuildSyntaxByFile(strCommandLineBuffer);
-		ClearSyntax(TRUE,);
-
-		m_strCommandLine.ReleaseBuffer();
-		return TRUE;
-	}
-	else
-		return FALSE;*/
 	return TRUE;
 }

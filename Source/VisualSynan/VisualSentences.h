@@ -45,12 +45,11 @@ public:
 	BOOL GetActiveHomDescr(int m_iActiveSentenceTT,int m_iActiveWordTT,CString& strLemma,CString& strGramChar);
 	CSize GetSentencesSize();	
 	BOOL PrintSentences(CDC* pDC, CRect& rectForDrawing, int iOffset);
-	int PrintSentencesOnPrn(CDC* pDC, int iSent, int& iLine, int iBottom, int& iOffset);
 	void SetPlmFile(CString strPlmFile)
 	{
 		m_strPlmFile = strPlmFile;
 	}	
-	BOOL FillSentencesArray(ISentencesCollectionPtr& piSentCollection);
+	BOOL FillSentencesArray(SYNANLib::ISentencesCollectionPtr& piSentCollection);
 
 protected:
 	
@@ -93,7 +92,7 @@ public:
 	{ return m_iSpaceBetweenLinesG; };
 	BOOL PrintSentences(CDC* pDC);
 	BOOL FillActiveGroupsArray(BOOL bUseGroupID);
-	BOOL Init(ISentencePtr& piSentence);
+	BOOL Init(SYNANLib::ISentencePtr& piSentence);
 	BOOL PointInSentRect(CPoint& point) { return m_SentRect.PtInRect(point); };
 	BOOL GetHomonymsArray(CPoint& point,CPtrArray** pHomonymsArray, int* iActiveWord);
 	BOOL GetActiveHomDescr(int iActiveWord,CString& strLemma,CString& strGramChar);
@@ -109,7 +108,6 @@ public:
 	BOOL PrintAllLinesInRect(int iStartLine, CDC* pDC, CRect& rectForDrawing, int iOffset);
 	BOOL LineInrRect(CRect& rectForDrawing, CSentenceLine& line);
 	BOOL PrintAllLinesTillBottom(int& iStartLine,CDC*  pDC,int iBottom,int& iOffset) ;
-	int GetLineBottom(int i);
 	int GetLinesCount()
 	{ return m_vectorSentLines.size();}
 
@@ -117,8 +115,8 @@ public:
 
 protected:
 
-	BOOL ReadWords(ISentencePtr& piSentence);
-	BOOL ReadClauses(ISentencePtr& piSentence);
+	BOOL ReadWords(SYNANLib::ISentencePtr& piSentence);
+	BOOL ReadClauses(SYNANLib::ISentencePtr& piSentence);
 	vector<CVisualClause*> m_arrClauses;
 	CPtrArray m_arrWords;
 	int m_iMaxClauseGroupLevel;
@@ -191,7 +189,7 @@ struct CVisualGroup : public CVisualPeriod
 
 
 	CVisualGroup();
-	BOOL Init(IGroupPtr& piGroup);
+	BOOL Init(SYNANLib::IGroupPtr& piGroup);
 	BOOL CalculateCoordinates(CDC* pDC, CPoint& pointLeftLeg, CPoint& poitRightLeg, int top, int iWidth, BOOL bOnDifferentLines, COLORREF Color,int iLine);
 	void PrintGroupPart(CDC* pDC, int i, int iOffset = 0);
 };
@@ -246,7 +244,7 @@ public:
 		m_iPredk = -1;		
 	};	
 
-	void InitClauseVariant(IClausePtr& piClause, int ClauseVariantNo);
+	void InitClauseVariant(SYNANLib::IClausePtr& piClause, int ClauseVariantNo);
 
 	bool operator==(const vector<SUnit> vectorUnits) const
 	{
@@ -284,7 +282,7 @@ public:
 	};
 
 	~CClauseType () {};
-	BOOL Init(IClauseRootPtr piClauseType);
+	BOOL Init(SYNANLib::IClauseRootPtr piClauseType);
 	BOOL HasHom(int iHom)
 	{
 		for(int i = 0 ; i <  m_arrHomNum.GetSize() ; i++ )
@@ -309,7 +307,7 @@ friend class CVisualSentence;
 public:
 	CVisualClause();
 	~CVisualClause();
-	BOOL InitVisualClause(IClausePtr& piClause);
+	BOOL InitVisualClause(SYNANLib::IClausePtr& piClause);
 	BOOL CalculateClauseGroupCoordinates(CDC* pDC,int iWidth,BOOL bShowGroups, int& iLine);
 	BOOL FillActiveGroupsArray(BOOL bUseGroupID, map<int, int>& mapClauseNumTypeNum, int iClauseNum);
 	
@@ -383,7 +381,7 @@ public:
 	CVisualWord();
 	~CVisualWord();
 
-	BOOL Init(IWordPtr& piWord, ISentencePtr& piSentence);
+	BOOL Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSentence);
 	int GetWordLen(CDC* pDC);
 	int GetWordHight(CDC* pDC);
 	int PrintWord(CDC* pDC,int iX, int iY);

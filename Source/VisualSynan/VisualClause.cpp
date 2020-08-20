@@ -46,7 +46,7 @@ void CVisualClause::SetActiveType(int iType)
 
 }
 
-BOOL CVisualClause::InitVisualClause(IClausePtr& piClause)
+BOOL CVisualClause::InitVisualClause(SYNANLib::IClausePtr& piClause)
 {
 	try
 	{
@@ -63,8 +63,7 @@ BOOL CVisualClause::InitVisualClause(IClausePtr& piClause)
 				RelativeWord->m_ReferenceWordNo  = piClause->AntecedentWord;
 			};
 		};
-		_bstr_t bstrDescr = piClause->GetDescription();
-		m_strConjsName = CString((char*)bstrDescr);
+		m_strConjsName = _OUT(piClause->GetDescription());
 		int iTypeCount = piClause->GetClauseRootsCount();
 
 		BOOL bFirst = TRUE;
@@ -74,10 +73,9 @@ BOOL CVisualClause::InitVisualClause(IClausePtr& piClause)
 		for(int i = 0 ; i < iTypeCount ; i++)
 		{
 			
-			IClauseRootPtr piType = piClause->GetClauseRoots(i);
+			SYNANLib::IClauseRootPtr piType = piClause->GetClauseRoots(i);
 
 			int iWordNum = piType->RootWordNo;
-			_bstr_t bstrDesc = piType->GetDescription();
 
 			CClauseType* pType = new CClauseType;
 
@@ -401,14 +399,13 @@ int  AssignPeriodLevel(vector<CVisualGroup*>& pPeriodArr)
 }
 
 
-BOOL CClauseType::Init(IClauseRootPtr piClauseType)
+BOOL CClauseType::Init(SYNANLib::IClauseRootPtr piClauseType)
 {
 	try
 	{
 		m_arrHomNum.Add(piClauseType->RootHomonymNo);
 		m_iWordNum = piClauseType->RootWordNo;
-		_bstr_t bstrDesc = piClauseType->GetDescription();
-		m_strName = CString((char*)bstrDesc);
+		m_strName = _OUT(piClauseType->GetDescription());
 	}
 	catch(...)
 	{

@@ -84,10 +84,7 @@ public:
 	{
 		return (m_VisualSentences.SentCount() == 0);
 	}
-	int PrintSentencesOnPrn(CDC* pDC, int iSent, int& iLine, int iBottom, int& iOffset)
-	{
-		return m_VisualSentences.PrintSentencesOnPrn(pDC, iSent, iLine, iBottom, iOffset);
-	}
+
 	void Reset()
 	{
 		m_VisualSentences.Reset();

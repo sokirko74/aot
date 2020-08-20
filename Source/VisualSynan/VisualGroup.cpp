@@ -17,13 +17,12 @@ CVisualGroup::CVisualGroup()
 }
 
 
-BOOL CVisualGroup::Init(IGroupPtr& piGroup)
+BOOL CVisualGroup::Init(SYNANLib::IGroupPtr& piGroup)
 {
 	
 	m_iFirstWord = piGroup->GetFirstWord();
 	m_iLastWord = piGroup->GetLastWord();
-	_bstr_t bstrDescr= piGroup->TypeStr;
-	m_strDescription = CString((char*)bstrDescr);
+	m_strDescription = _OUT(piGroup->TypeStr);
 	m_strDescription.MakeLower();
 	return TRUE;
 }

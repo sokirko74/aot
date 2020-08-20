@@ -22,7 +22,7 @@ CVisualSentences::~CVisualSentences()
 
 
 
-BOOL CVisualSentences::FillSentencesArray(ISentencesCollectionPtr& piSentCollection)
+BOOL CVisualSentences::FillSentencesArray(SYNANLib::ISentencesCollectionPtr& piSentCollection)
 {
 	BOOL bRes = TRUE;
 	try
@@ -34,7 +34,7 @@ BOOL CVisualSentences::FillSentencesArray(ISentencesCollectionPtr& piSentCollect
 
 		for(int i = 0 ; i < iSentCount ; i++ )
 		{			
-			ISentencePtr piSentence;
+			SYNANLib::ISentencePtr piSentence;
 			piSentence = piSentCollection->GetSentence(i);
 			pVisualSentence = new CVisualSentence;
 			bRes = pVisualSentence->Init(piSentence);
@@ -78,49 +78,6 @@ BOOL CVisualSentences::CalculateCoordinates(CDC* pDC,int iWidth,BOOL bShowGroups
 		return FALSE;
 	}
 	return TRUE;	
-}
-
-int CVisualSentences::PrintSentencesOnPrn(CDC* pDC, int iSent, int& iLine, int iBottom,int& iOffset)
-{
-	m_bLocked = TRUE;
-
-	ASSERT( (iSent >= 0) && (iLine >= 0) );
-	CVisualSentence* pVisualSentence;
-	if( iSent || iLine)
-	{
-		if( iLine > 0)
-		{
-			pVisualSentence = (CVisualSentence*)(m_arrSentences.GetAt(iSent));
-			iBottom += pVisualSentence->GetLineBottom( iLine - 1 );
-		}
-		else if( (iSent > 0) && ( iLine == 0) )
-		{
-			pVisualSentence = (CVisualSentence*)(m_arrSentences.GetAt(iSent));
-			iBottom += pVisualSentence->GetLineBottom(0);			
-		}
-
-	}
-
-	for(; iSent < m_arrSentences.GetSize() ; iSent++)
-	{
-		pVisualSentence = (CVisualSentence*)(m_arrSentences.GetAt(iSent));
-		if( !pVisualSentence->PrintAllLinesTillBottom(iLine, pDC, iBottom, iOffset) )
-			break;
-		iLine = 0;
-	}
-
-	m_bLocked = FALSE;
-	if( iSent == m_arrSentences.GetSize() ) 	
-		return -1;
-
-
-	if( iLine == 0 )
-		iOffset = pVisualSentence->GetLineBottom(pVisualSentence->GetLinesCount() - 1);	
-	else
-		iOffset = pVisualSentence->GetLineBottom( iLine - 1 );
-
-
-	return iSent;
 }
 
 
@@ -225,7 +182,7 @@ void CVisualSentences::BuildRels(CString& report)
 	try
 	{
 
-		ISentencesCollectionPtr piSentCollection = ((CVisualSynanApp*)::AfxGetApp())->m_SyntaxHolder.m_piSentCollection;
+		SYNANLib::ISentencesCollectionPtr piSentCollection = ((CVisualSynanApp*)::AfxGetApp())->m_SyntaxHolder.m_piSentCollection;
 
 		
 		for(int i = 0 ; i < piSentCollection->SentencesCount ; i++ )
@@ -238,8 +195,8 @@ void CVisualSentences::BuildRels(CString& report)
 			report += ss;
 			report += "\n";
 			
-			IRelationsIteratorPtr piRelIt;
-			ISentencePtr piSent = piSentCollection->Sentence[i];
+			SYNANLib::IRelationsIteratorPtr piRelIt;
+			SYNANLib::ISentencePtr piSent = piSentCollection->Sentence[i];
 
 			for(int l = 0 ; l < piSent->GetPrimitiveClausesCount() ; l++ )
 			{
@@ -260,12 +217,12 @@ void CVisualSentences::BuildRels(CString& report)
 			for(int j = 0 ; j < piRelIt->FirmGroupsCount ; j++ )
 			{
 				CString str;
-				IGroupPtr& piGroup = piRelIt->GetFirmGroup(j);
-				str += (const char*)piGroup->TypeStr;
+				SYNANLib::IGroupPtr& piGroup = piRelIt->GetFirmGroup(j);
+				str += _OUT(piGroup->TypeStr);
 				str += "(";
 				for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
 				{
-					str = str + (const char*)piSent->GetWord(k)->GetWordStr() + " ";					
+					str = str + _OUT(piSent->GetWord(k)->GetWordStr()) + " ";					
 				}
 
 				str += ")";
@@ -280,25 +237,25 @@ void CVisualSentences::BuildRels(CString& report)
 			for(int j = 0 ; j < piRelIt->RelationsCount ; j++ )
 			{
 				CString str;
-				IRelationPtr piRel;
+				SYNANLib::IRelationPtr piRel;
 				piRel = piRelIt->Relation[j];
-				str += (const char*)piRel->GetName();
+				str += _OUT(piRel->GetName());
 				str += "(";
 
 				if( piRel->SourceItemType == EWord )
 				{
 					int iSourceWord = piRel->GetSourceItemNo();
 					int iClause = piSent->GetWord(iSourceWord)->GetClauseNo();
-					str = str + (const char*)piSent->GetWord(iSourceWord)->GetWordStr();					
+					str = str + _OUT(piSent->GetWord(iSourceWord)->GetWordStr());					
 				}
 				else
 				if( piRel->SourceItemType == EGroup )
 				{
 					int iSourceGroup =  piRel->GetSourceItemNo();
-					IGroupPtr piGroup = piRelIt->GetFirmGroup(iSourceGroup);
+					SYNANLib::IGroupPtr piGroup = piRelIt->GetFirmGroup(iSourceGroup);
 					for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
 					{
-						str = str + (const char*)piSent->GetWord(k)->GetWordStr() + " ";	
+						str = str + _OUT(piSent->GetWord(k)->GetWordStr()) + " ";	
 					}
 				}
 
@@ -308,16 +265,16 @@ void CVisualSentences::BuildRels(CString& report)
 				{
 					int iTargetWord = piRel->GetTargetItemNo();
 					int iClause = piSent->GetWord(iTargetWord)->GetClauseNo();
-					str = str + (const char*)piSent->GetWord(iTargetWord)->GetWordStr();
+					str = str + _OUT(piSent->GetWord(iTargetWord)->GetWordStr());
 				}
 				else
 				if( piRel->TargetItemType == EGroup )
 				{
 					int iTargetGroup =  piRel->GetTargetItemNo();
-					IGroupPtr piGroup = piRelIt->GetFirmGroup(iTargetGroup);
+					SYNANLib::IGroupPtr piGroup = piRelIt->GetFirmGroup(iTargetGroup);
 					for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
 					{
-						str = str + (const char*)piSent->GetWord(k)->GetWordStr() + " ";	
+						str = str + _OUT(piSent->GetWord(k)->GetWordStr()) + " ";	
 					}			
 				}
 				str = str + ")";
@@ -338,9 +295,9 @@ void CVisualSentences::BuildRels(CString& report)
 
 
 
-void CVisualSynVariant::InitClauseVariant(IClausePtr& piClause, int ClauseVariantNo)
+void CVisualSynVariant::InitClauseVariant(SYNANLib::IClausePtr& piClause, int ClauseVariantNo)
 {
-	IClauseVariantPtr& piClauseVariant  = piClause->GetClauseVariant(ClauseVariantNo);
+	SYNANLib::IClauseVariantPtr& piClauseVariant  = piClause->GetClauseVariant(ClauseVariantNo);
 	for(int i = 0 ; i < piClauseVariant->GetUnitsCount() ; i++ )
 	{
 		SUnit unit;
@@ -356,11 +313,11 @@ void CVisualSynVariant::InitClauseVariant(IClausePtr& piClause, int ClauseVarian
 			for(int k = 0 ; k < piClauseVariant->GetUnit(i)->GetSimplePrepsCount(); k++ )
 			{
 				CString str = "Ob:";
-				str.Format(" %s", (const char*)piClauseVariant->GetUnit(i)->GetSimplePrepStr(k));
+				str.Format(" %s", _OUT(piClauseVariant->GetUnit(i)->GetSimplePrepStr(k)));
 				unit.m_strOborotsNum += str;					
 			}
 			
-			unit.m_strGrammems = (const char*)piClauseVariant->GetUnit(i)->GetGrammemsStr();
+			unit.m_strGrammems = _OUT(piClauseVariant->GetUnit(i)->GetGrammemsStr());
 			unit.m_iHommonyNum = piClauseVariant->GetUnit(i)->GetActiveHomonymNum();
 			unit.m_iWordNum = piClauseVariant->GetUnit(i)->GetWordNum();
 		}

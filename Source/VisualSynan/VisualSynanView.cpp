@@ -41,9 +41,6 @@ BEGIN_MESSAGE_MAP(CVisualSynanView, CScrollView)
 	ON_COMMAND(ID_VIEW_TEST, OnViewTest)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
-	ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
-	ON_COMMAND(ID_FILE_PRINT_DIRECT, CView::OnFilePrint)
-	ON_COMMAND(ID_FILE_PRINT_PREVIEW, CView::OnFilePrintPreview)
 	ON_NOTIFY_EX( TTN_NEEDTEXT, 0, OnNeedText)
 END_MESSAGE_MAP()
 
@@ -243,7 +240,8 @@ void CVisualSynanView::OnContextMenu(CWnd*, CPoint point)
 				CString grm = ((CSynHomonym*)m_pHomonymsArray->GetAt(i))->m_strCommonGrammems;
 				if (!grm.IsEmpty())
 					strLemma += " " + grm;;
-				menu.AppendMenu(MF_STRING | MF_ENABLED,ID_HOMONYMS_MENU_ITEM + i,strLemma);
+				std::string s = convert_to_utf8((const char*)strLemma, ((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder.m_CurrentLanguage);
+				menu.AppendMenu(MF_STRING | MF_ENABLED,ID_HOMONYMS_MENU_ITEM + i, _IN(strLemma));
 			}
 
 			menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y,
@@ -642,23 +640,6 @@ int CVisualSynanView::OnNeedText( UINT id, NMHDR * pNMHDR, LRESULT * pResult )
 	}
 }
 
-void CVisualSynanView::OnPrint(CDC* pDC, CPrintInfo* pInfo) 
-{
-
-	//selecting choosen font
-	CFont* pOldFont;
-
-	if( m_bExistUsefulFont)
-	{
-		pOldFont = pDC->SelectObject(&m_FontForWords);
-	}
-
-	GetDocument()->CalculateCoordinates(pDC,pInfo->m_rectDraw.right, m_bShowGroups);
-	m_iStartSent = GetDocument()->PrintSentencesOnPrn(pDC, m_iStartSent, m_iStartLine, pInfo->m_rectDraw.bottom, m_iOffset);
-
-	if( m_bExistUsefulFont)
-		pDC->SelectObject(pOldFont);	
-}
 
 void CVisualSynanView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar) 
 {

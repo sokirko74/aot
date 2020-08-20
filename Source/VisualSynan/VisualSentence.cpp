@@ -26,7 +26,7 @@ CVisualSentence::~CVisualSentence()
 }
 
 
-BOOL CVisualSentence::Init(ISentencePtr& piSentence)
+BOOL CVisualSentence::Init(SYNANLib::ISentencePtr& piSentence)
 {
 	BOOL bRes;
 
@@ -64,11 +64,6 @@ int	CVisualSentence:: InRect(CRect& rectForDrawing)
 			return i;
 	}
 	return -1;
-}
-
-int CVisualSentence::GetLineBottom(int i)
-{
-	return m_vectorSentLines[i].m_rectLine.bottom;
 }
 
 
@@ -264,7 +259,7 @@ void CVisualSentence::PrintLine(CDC *pDC, int iLine, int& iOffset)
 }
 
 
-BOOL CVisualSentence::ReadClauses(ISentencePtr& piSentence)
+BOOL CVisualSentence::ReadClauses(SYNANLib::ISentencePtr& piSentence)
 {
 
 	int ClauseNo = 0;
@@ -279,7 +274,7 @@ BOOL CVisualSentence::ReadClauses(ISentencePtr& piSentence)
 		{
 
 			CVisualClause* pClause = new CVisualClause;
-			IClausePtr piClause = piSentence->GetClause(ClauseNo);			
+			SYNANLib::IClausePtr piClause = piSentence->GetClause(ClauseNo);
 
 			pClause->SetWordsArray(&m_arrWords);
 
@@ -306,14 +301,14 @@ BOOL CVisualSentence::ReadClauses(ISentencePtr& piSentence)
 	return TRUE;
 }
 
-BOOL CVisualSentence::ReadWords(ISentencePtr& piSentence)
+BOOL CVisualSentence::ReadWords(SYNANLib::ISentencePtr& piSentence)
 {
 	try
 	{
 		BOOL bRes = TRUE;
 		long lWordCount;
 		lWordCount = piSentence->GetWordsNum();
-		IWordPtr piWord;
+		SYNANLib::IWordPtr piWord;
 		CVisualWord* pVisualWord;
 
 		for(int i = 0 ; i < lWordCount ; i++)

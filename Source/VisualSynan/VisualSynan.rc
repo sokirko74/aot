@@ -63,8 +63,6 @@ BEGIN
 
         MENUITEM "Reinitialize syntax",         ID_FILE_REINITIALIZESYNTAX
         MENUITEM SEPARATOR
-        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
-        MENUITEM SEPARATOR
         MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_APP_EXIT
@@ -92,9 +90,7 @@ BEGIN
         MENUITEM "&Close",                      ID_FILE_CLOSE
         MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
         MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
-        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
         MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
-        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
         MENUITEM "Show Graphematics Results",   ID_FILE_SHOWGRAPHEMATICSRESULTS
 
         MENUITEM "Show Morphology Results",     ID_FILE_SHOWMORPHOLOGYRESULTS

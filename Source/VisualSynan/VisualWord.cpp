@@ -25,11 +25,11 @@ CVisualWord::~CVisualWord()
 	}
 }
 
-BOOL CVisualWord::Init(IWordPtr& piWord, ISentencePtr& piSentence)
+BOOL CVisualWord::Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSentence)
 {
 	try
 	{
-		m_strWord = (const char*)piWord->GetWordStr();
+		m_strWord = _OUT(piWord->GetWordStr());
 		if (piWord->bDeleted == TRUE)
 			m_strWord = "[" + m_strWord + "]";
 		m_bInTermin = piWord->IsInThesaurusEntry;
@@ -41,12 +41,12 @@ BOOL CVisualWord::Init(IWordPtr& piWord, ISentencePtr& piSentence)
 		lHomCount = piWord->GetHomonymsCount();
 		for(int i = 0 ; i < lHomCount ; i++) 
 		{
-			IHomonymPtr piHomonym = piWord->GetHomonym(i);
+			SYNANLib::IHomonymPtr piHomonym = piWord->GetHomonym(i);
 
 			CSynHomonym* pHomonym = new CSynHomonym;
-			pHomonym->m_strLemma = (const char*)piHomonym->GetLemma();
-			pHomonym->m_strCommonGrammems = (const char*)piHomonym->CommonGrammemsStr;
-			pHomonym->m_strPOS = (const char*)piHomonym->GetPOSStr();
+			pHomonym->m_strLemma = _OUT(piHomonym->GetLemma());
+			pHomonym->m_strCommonGrammems = _OUT(piHomonym->CommonGrammemsStr);
+			pHomonym->m_strPOS = _OUT(piHomonym->GetPOSStr());
 
 			
 			
@@ -60,7 +60,7 @@ BOOL CVisualWord::Init(IWordPtr& piWord, ISentencePtr& piSentence)
 				if (OborotId != -1)
 				{
 					CString str;
-					str.Format("Ob: %s", (const char*)piSentence->GetOborotStrByOborotId(OborotId));
+					str.Format("Ob: %s", _OUT(piSentence->GetOborotStrByOborotId(OborotId)));
 					pHomonym->m_strOborotsNum += str; 
 				};
 			}
@@ -79,7 +79,7 @@ BOOL CVisualWord::Init(IWordPtr& piWord, ISentencePtr& piSentence)
 				{
 					CString str = ":";
 					int OborotId = piHomonym->GetOborDictIdOfSimplePrep(k);
-					str.Format(" %s", (const char*)piSentence->GetOborotStrByOborotId(OborotId));
+					str.Format(" %s", (const char*)_OUT(piSentence->GetOborotStrByOborotId(OborotId)));
 					pHomonym->m_strSomeDescr += str; 
 				}
 				pHomonym->m_strSomeDescr += ")"; 
@@ -206,7 +206,6 @@ int CVisualWord::CalculateCoordinates(CDC* pDC,int iX, int iY)
 		sizeWord = pDC->GetOutputTextExtent(m_strWord);
 	
 	m_WordRect.SetRect(iX,iY,sizeWord.cx + iX, sizeWord.cy + iY);
-	//m_WordRect.SetRect(iX,iY,iX, sizeWord.cy + iY);
 
 	return iX + sizeWord.cx;
 }
@@ -279,7 +278,8 @@ void CVisualWord::ResetSubjAndPred()
 
 BOOL CVisualWord::GetActiveHomDescr(CString& strLemma,CString& strGramChar)
 {
-	strLemma = ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strLemma;
+	strLemma = _IN( ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strLemma ); 
+	
 	strGramChar = m_strActiveGrammems;
 	strGramChar = ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strCommonGrammems + " "+strGramChar;
 	strGramChar = ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strPOS + " " + strGramChar;
@@ -294,7 +294,7 @@ BOOL CVisualWord::GetActiveHomDescr(CString& strLemma,CString& strGramChar)
 	strGramChar += ss;
 
 	strGramChar += m_strSomeDescr;
-
+	strGramChar = _IN(strGramChar);
 	return TRUE;
 }
 

@@ -25,7 +25,6 @@ BEGIN_MESSAGE_MAP(CVisualSynanApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
 	ON_COMMAND(ID_FILE_NEW, OnSynFileNew)
 	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
-	ON_COMMAND(ID_FILE_PRINT_SETUP, CWinApp::OnFilePrintSetup)
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 END_MESSAGE_MAP()
@@ -221,3 +220,4 @@ BOOL CVisualSynanApp::PreTranslateMessage(MSG* pMsg)
 
 	return CWinApp::PreTranslateMessage(pMsg);
 }
+

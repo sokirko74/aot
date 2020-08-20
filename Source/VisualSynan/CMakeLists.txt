@@ -4,6 +4,8 @@ project(VisualSynan)
 
 add_definitions(-D_AFXDLL)
 set(CMAKE_MFC_FLAG 2)
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /utf-8 /D _UNICODE /D UNICODE" )
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /utf-8 ")
 
 add_executable (${PROJECT_NAME} WIN32
 ChildFrm.cpp
