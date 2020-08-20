@@ -323,8 +323,6 @@ BYTE	CUnitHolder::GetTokenLength(DWORD LineNo) const
 };
 
 
-
-
 void	CUnitHolder::InitTokenBuffer()
 {
 	FreeTable();
@@ -342,12 +340,13 @@ void	CUnitHolder::InitTokenBuffer()
 
 
 
-bool	CUnitHolder::InitInputBuffer(const std::string& S)
+bool	CUnitHolder::InitInputBuffer(const std::string& utfString)
 {
+	std::string inputText = convert_from_utf8(utfString.c_str(), m_Language);
 	m_InputBuffer.clear();
 	// copy with terminated null 
-	size_t len = S.length() + 1;
-	m_InputBuffer.insert(m_InputBuffer.begin(), S.c_str(), S.c_str()+len);
+	size_t len = inputText.length() + 1;
+	m_InputBuffer.insert(m_InputBuffer.begin(), inputText.c_str(), inputText.c_str()+len);
 	return m_InputBuffer.size() == len;
 };
 

@@ -22,7 +22,7 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 
-#import "..\..\bin\SynAn.tlb"
+#import "../SynAn/SynAn.tlb"
 using namespace SYNANLib;
 
 #include "../common/utilit.h"

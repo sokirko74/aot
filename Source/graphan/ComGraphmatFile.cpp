@@ -29,6 +29,7 @@ STDMETHODIMP CComGraphmatFile::GetWord(UINT LineNo, BSTR* s)
 {
     try {
 		std::string buf(GetUnits()[LineNo].GetToken(), GetUnits()[LineNo].GetTokenLength());
+		buf = convert_to_utf8(buf, m_Language);
 		*s =  _bstr_t(buf.c_str()).copy();
 		return S_OK;
 	}
@@ -54,12 +55,9 @@ STDMETHODIMP CComGraphmatFile::GetDescriptorStr(UINT DescriptorNo, BSTR *result)
 
 STDMETHODIMP CComGraphmatFile::GetRubiconTypeStr(UINT RubiconTypeNo, BSTR *result)
 {
-	// TODO: Add your implementation code here
     try { 
-
-	*result =  _bstr_t(GetStrByRubiconType((RubiconEnum)RubiconTypeNo)).copy();
- 
-	return S_OK;
+		*result =  _bstr_t(GetStrByRubiconType((RubiconEnum)RubiconTypeNo)).copy();
+ 	return S_OK;
 	}
 	catch (...)
 	{
@@ -73,9 +71,6 @@ STDMETHODIMP CComGraphmatFile::GetLine(UINT LineNo, BSTR *result)
 	*result =  _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
-
-
-
 
 
 STDMETHODIMP CComGraphmatFile::get_GraOutputFile(BSTR *pVal)

@@ -1,6 +1,6 @@
 // ComSemWord.cpp : Implementation of CComSemWord
 #include "stdafx.h"
-#include "Seman.h"
+#include "seman_i.h"
 #include "ComSemWord.h"
 
 /////////////////////////////////////////////////////////////////////////////

@@ -39,7 +39,7 @@
 using namespace std;
 
 typedef unsigned char BYTE;
-typedef int64_t QWORD;
+typedef uint64_t QWORD;
 
 #ifdef WIN32
 	#include  <io.h>

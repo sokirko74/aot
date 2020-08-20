@@ -8,6 +8,7 @@ list (APPEND LIB_DEPENDS
     graphan_idl
     mapost_idl
     synan_idl
+    seman_idl
 )
  
 add_library(${PROJECT_NAME} SHARED

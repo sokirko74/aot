@@ -5,19 +5,16 @@
 // of the syntax system into the memory for the  given language
 // 2. 	BOOL GetSentencesFromSynAn(std::string str)  - building a syntax structure for 
 //    the given text ("str")
-
- 
-#ifndef COMSyntaxHolder
-#define COMSyntaxHolder
+#pragma once
 
 #include "../utilit.h"
 #include <comdef.h>
 #include <atlbase.h>
-#import "../../../Bin/Lemmatizer.tlb"
-#import "../../../Bin/MAPost.tlb"
-#import "../../../Bin/Agramtab.tlb"
-#import "../../../Bin/Graphan.tlb"
-#import "../../../Bin/Synan.tlb"
+#import "../../Lemmatizer/Lemmatizer.tlb"
+#import "../../MAPost/MAPost.tlb"
+#import "../../Agramtab/Agramtab.tlb"
+#import "../../Graphan/Graphan.tlb"
+#import "../../Synan/Synan.tlb"
 
 class CCOMSyntaxHolder
 {
@@ -47,4 +44,3 @@ public:
 	
 };
 extern std::string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo);
-#endif

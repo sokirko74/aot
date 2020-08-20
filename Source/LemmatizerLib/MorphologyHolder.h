@@ -7,6 +7,9 @@
 #include "../AgramtabLib/RusGramTab.h"
 #include "../AgramtabLib/GerGramTab.h"
 #include "../AgramtabLib/EngGramTab.h"
+#include "../AgramtabLib/rus_consts.h"
+#include "../AgramtabLib/eng_consts.h"
+#include "../AgramtabLib/ger_consts.h"
 
 class CMorphologyHolder
 {

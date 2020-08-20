@@ -1,12 +1,12 @@
 // MAPostCOM.cpp : Implementation of CCOMMAPost
 #include "stdafx.h"
 #include "..\Agramtab\ComGramTab.h"
-#include "MAPost.h"
+#include "MAPost_i.h"
 #include "MAPostCOM.h"
 #include "..\common\utilit.h"
 #include "..\common\rus_numerals.h"
 #include "..\Lemmatizer\ComPlmLineCollection.h"
-#import "..\..\Bin\Lemmatizer.tlb"
+#import "..\Lemmatizer\Lemmatizer.tlb"
 
 // language specific 
 extern CPostMorphInteface* NewGermanPostMorph(const CLemmatizer*, const CAgramtab*);

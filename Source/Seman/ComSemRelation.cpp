@@ -1,8 +1,7 @@
 // ComSemRelation.cpp : Implementation of CComSemRelation
 #include "stdafx.h"
-#include "Seman.h"
+#include "seman_i.h"
 #include "ComSemRelation.h"
-#include ".\comsemrelation.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CComSemRelation

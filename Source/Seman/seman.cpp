@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "resource.h"
 #include <initguid.h>
-#include "seman.h"
+#include "seman_i.h"
 
 #include "seman_i.c"
 #include "SemStructure.h"

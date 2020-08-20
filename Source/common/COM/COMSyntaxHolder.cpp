@@ -147,17 +147,17 @@ BOOL CCOMSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 
 BOOL CCOMSyntaxHolder::BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWriteIntermFiles, BOOL bSaveIntermResults)
 {
-	m_piBeforeSyntaxPlmLines = 0;	
+	m_piBeforeSyntaxPlmLines = 0;
 	m_piAfterMorphPlmLines = 0;
-	HRESULT hr =  m_piAfterMorphPlmLines.CreateInstance(__uuidof(LEMMATIZERLib::PLMLineCollection));
+	HRESULT hr = m_piAfterMorphPlmLines.CreateInstance(__uuidof(LEMMATIZERLib::PLMLineCollection));
 	m_piAfterMorphPlmLines->AttachLemmatizer(m_piLemmatizer);
 
 	m_piSentCollection->ClearSentences();
 	std::string log_path;
 	std::string FileName = "rossdev.log";
 	try {
-		
-		log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
+
+		log_path = GetRegistryString("Software\\Dialing\\Logs\\Main");
 		log_path += "/";
 	}
 	catch (...) {
@@ -165,18 +165,20 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWrit
 	if (bFile)
 		if (!FileExists(str.c_str()))
 		{
-			ErrorMessage (Format("file %s  is not found", str.c_str()));
+			ErrorMessage(Format("file %s  is not found", str.c_str()));
 			return FALSE;
 		};
 
 
 	COM_TRY
-		
-		
-		if( bFile )
+
+
+		if (bFile)
 			m_piGraphan->LoadFileToGraphan(_bstr_t(str.c_str()).copy());
-		else
-			m_piGraphan->LoadStringToGraphan(_bstr_t(str.c_str()).copy());
+		else {
+			std::string s = convert_to_utf8(str.c_str(), m_CurrentLanguage);
+			m_piGraphan->LoadStringToGraphan(_bstr_t(s.c_str()).copy());
+		}
 		
 
 		

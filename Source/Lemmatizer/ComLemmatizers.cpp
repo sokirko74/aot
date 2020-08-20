@@ -53,6 +53,7 @@ STDMETHODIMP CCOMLemmatizer::put_UseStatistic(/*[in]*/ BOOL newVal)
 STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionInner(bool bNorm, /*[in]*/ BSTR form, /*[in]*/ BOOL capital, BOOL use_prediction, /*[out, retval]*/ IParadigmCollection* *pVal)
 {
 	std::string WordStr = (const char*) _bstr_t (form);
+	WordStr = convert_from_utf8(WordStr.c_str(), m_pLemmatizer->m_Language);
 	vector<CFormInfo> Vec;
     m_pLemmatizer->CreateParadigmCollection(bNorm, WordStr, (capital?true:false), (use_prediction?true:false), Vec);
 	CComObject<CCOMParadigmCollection>* res_collection = NULL;
@@ -85,9 +86,10 @@ STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionFromForm(/*[in]*/ BSTR form
 
 STDMETHODIMP CCOMLemmatizer::CheckABC(BSTR Word, BOOL* Result) 
 {
-	std::string s = (const char*)_bstr_t(Word);
-	RmlMakeUpper(s,m_pLemmatizer->GetLanguage());
-	*Result =  m_pLemmatizer->CheckABC(s) ?  TRUE : FALSE;
+	std::string wordStr = (const char*)_bstr_t(Word);
+	wordStr = convert_from_utf8(wordStr.c_str(), m_pLemmatizer->m_Language);
+	RmlMakeUpper(wordStr, m_pLemmatizer->GetLanguage());
+	*Result =  m_pLemmatizer->CheckABC(wordStr) ?  TRUE : FALSE;
 	return S_OK;
 };
 
@@ -114,6 +116,7 @@ STDMETHODIMP CCOMLemmatizer::CreateParadigmFromID(/*[in]*/ long id, /*[out, retv
 	}
 	return S_OK;
 }
+
 STDMETHODIMP CCOMLemmatizer::LoadStatisticRegistry(/*[in]*/ idlSubjectEnum subj)
 {
 	return m_pLemmatizer->LoadStatisticRegistry((SubjectEnum)subj) ? S_OK : E_FAIL; 

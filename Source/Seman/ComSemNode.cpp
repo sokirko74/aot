@@ -1,9 +1,8 @@
 // ComSemNode.cpp : Implementation of CComSemNode
 #include "stdafx.h"
-#include "Seman.h"
+#include "seman_i.h"
 #include "ComSemNode.h"
 #include "ComSemWord.h"
-#include ".\comsemnode.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CComSemNode

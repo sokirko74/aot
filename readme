@@ -39,6 +39,8 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
    6.6  ./configure --disable-openssl
    6.7  make 
 
+6. To compile COM-objects you need to run Visual Studio as administrator.
+
 =================   Compilation =======================
   export RML=/home/sokirko/RML
   export CXX=/usr/bin/g++

@@ -5,47 +5,55 @@
 
 #include <stdio.h>
 #include <comdef.h>
-#import "../../bin/Lemmatizer.tlb"
+#include <string>
+#include <fstream>
+#include <iostream>
+#import "../Lemmatizer/Lemmatizer.tlb"
 
-int main(int argc, char *argv[]) 
+
+int main(int argc, char* argv[])
 {
 	::CoInitialize(NULL);
 
 	//  creating and loading Russian dictionary
-	LEMMATIZERLib::ILemmatizerPtr	piLemmatizer;
+	LEMMATIZERLib::ILemmatizerPtr piLemmatizer;
 	HRESULT hr = piLemmatizer.CreateInstance(__uuidof(LEMMATIZERLib::LemmatizerRussian));
 	if (FAILED(hr))
 	{
-		fprintf(stderr, "Fatal Error: Lemmatizer creation failed");
+		std::cerr << "Fatal Error: Lemmatizer creation failed";
 		return 1;
 	}
 	// loading dictionary into the memory
 	hr = piLemmatizer->LoadDictionariesRegistry();
 	if (FAILED(hr))
 	{
-		printf("Fatal Error: Lemmatizer loading failed");
-		return false;
+		std::cerr << "Fatal Error: Lemmatizer loading failed";
+		return 1;
 	}
 
+	std::string inputFile = argv[1];
+	std::cout << "Loading file " << inputFile << "\n";
+	std::ifstream inp(inputFile);
+	assert(inp.is_open());
 
-	// lemmatizing a word
-    {
-	    LEMMATIZERLib::IParadigmCollectionPtr piParadigmCollection = piLemmatizer->CreateParadigmCollectionFromForm(_R("мама"), FALSE, FALSE);
+	std::ofstream outp(inputFile + ".lemma");
+	assert(outp.is_open());
 
-	    //  print possible lemmas
-	    for (int j=0; j < piParadigmCollection->Count; j++)
-	    {
-		    _bstr_t Lemma = 		_bstr_t(piParadigmCollection->Item[j]->Norm);
-		    printf ("Lemma %i = \"%s\"\n", j+1, (const char*)Lemma);
-	    };
-    }
+	// lemmatizing a word in utf8
+	std::string word;
+	while (std::getline(inp, word))
+	{
+		auto piParadigmCollection = piLemmatizer->CreateParadigmCollectionFromForm(word.c_str(), FALSE, FALSE);
 
+		for (int j = 0; j < piParadigmCollection->Count; j++)
+		{
+			auto p = piParadigmCollection->Item[j];
+			outp << p->Norm <<  " " << p->SrcAncode <<  "\n";
+		};
+		outp << "\n";
+	}
 
-
-
-	// destroy the dictionary
 	piLemmatizer = 0;
-
-	::CoUninitialize();	
+	::CoUninitialize();
 
 }

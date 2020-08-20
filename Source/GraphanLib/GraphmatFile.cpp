@@ -253,7 +253,7 @@ void CGraphmatFile :: LoadFileToGraphan (const std::string&  fileName)
 		LoadFileToString(m_SourceFileName, inputText);
 
 	};
-	inputText = convert_from_utf8(inputText.c_str(), m_Language);
+	
 	if (!InitInputBuffer(inputText))
 	{
 		throw CExpc("Cannot init input buffer for %i bytes", inputText.length());

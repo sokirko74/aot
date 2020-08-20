@@ -8,8 +8,7 @@
 #include "stdafx.h"
 #include "resource.h"
 #include <initguid.h>
-#include "MAPost.h"
-
+#include "MAPost_i.h"
 #include "MAPost_i.c"
 #include "MAPostCOM.h"
 

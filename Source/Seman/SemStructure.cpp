@@ -1,6 +1,6 @@
 // SemStructure.cpp : Implementation of CSemStructure
 #include "stdafx.h"
-#include "Seman.h"
+#include "Seman_i.h"
 #include <comdef.h>
 #include "ComSemNode.h"
 #include "ComSemRelation.h"

@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "Lemmatizer_i.h"
 #include "ComParadigm.h"
+
 STDMETHODIMP  CCOMParadigm::get_ParadigmID(/*[out, retval]*/ DWORD *pVal)
 {
 	*pVal = GetParadigmId();;
@@ -31,13 +32,15 @@ STDMETHODIMP  CCOMParadigm::get_Count(/*[out, retval]*/ DWORD *pVal)
 
 STDMETHODIMP  CCOMParadigm::get_Ancode(/*[in]*/ DWORD pos, /*[out, retval]*/ BSTR *pVal)
 {
-	*pVal = _bstr_t(GetAncode(pos).c_str()).copy();
+	std::string s = convert_to_utf8(GetAncode(pos).c_str(), m_pParent->m_Language);
+	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
 
 STDMETHODIMP  CCOMParadigm::get_Norm(/*[out, retval]*/ BSTR *pVal)
 {
-	*pVal = _bstr_t(GetWordForm(0).c_str()).copy();
+	std::string s = convert_to_utf8(GetWordForm(0).c_str(), m_pParent->m_Language);
+	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 
 }
@@ -45,13 +48,15 @@ STDMETHODIMP  CCOMParadigm::get_Norm(/*[out, retval]*/ BSTR *pVal)
 
 STDMETHODIMP  CCOMParadigm::get_Form(/*[in]*/ DWORD pos, /*[out, retval]*/ BSTR *pVal)
 {
-	*pVal = _bstr_t( GetWordForm(pos).c_str() ).copy();
+	std::string s = convert_to_utf8(GetWordForm(pos).c_str(), m_pParent->m_Language);
+	*pVal = _bstr_t( s.c_str() ).copy();
 	return S_OK;
 }
 
 STDMETHODIMP  CCOMParadigm::get_TypeAncode(BSTR *pVal)
 {
-	*pVal = _bstr_t(GetCommonAncode().c_str()).copy();
+	std::string s = convert_to_utf8(GetCommonAncode().c_str(), m_pParent->m_Language);
+	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
 
@@ -64,13 +69,15 @@ STDMETHODIMP  CCOMParadigm::get_Founded(/*[out, retval]*/ BOOL *pVal)
 //gri
 STDMETHODIMP  CCOMParadigm::get_SrcAncode(/*[out, retval]*/ BSTR *pVal)
 {
-	*pVal = _bstr_t(GetSrcAncode().c_str()).copy() ;
+	std::string s = convert_to_utf8(GetSrcAncode().c_str(), m_pParent->m_Language);
+	*pVal = _bstr_t(s.c_str()).copy() ;
 	return S_OK;
 }
 
 STDMETHODIMP  CCOMParadigm::get_SrcNorm(/*[out, retval]*/ BSTR *pVal)
 {
-	*pVal = _bstr_t(GetSrcNorm().c_str()).copy() ;	
+	std::string s = convert_to_utf8(GetSrcNorm().c_str(), m_pParent->m_Language);
+	*pVal = _bstr_t(s.c_str()).copy() ;
 	return S_OK;
 }
 
