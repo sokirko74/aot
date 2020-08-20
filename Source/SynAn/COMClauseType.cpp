@@ -35,6 +35,7 @@ STDMETHODIMP CCOMClauseType::get_Description(BSTR *pVal)
 				str = "EMPTY";
 		else
 			str = m_pOptions->GetGramTab()->GetClauseNameByType((long)m_pType->m_Type);
+		str = convert_to_utf8(str.c_str(), GetOpt()->m_Language);
 		*pVal = _bstr_t(str.c_str()).copy();		
 	}
 	catch(...)

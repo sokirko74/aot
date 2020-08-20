@@ -88,6 +88,7 @@ typedef enum {	idlRussian = 1, idlEnglish = 2, idlGerman = 3} idlMorphLanguageEn
 		[id(11), helpstring("method ProcessHyphenWords")] HRESULT ProcessHyphenWords(IUnknown* piGraphan);
 		[id(12), helpstring("method CopyItems")] HRESULT CopyItems([in]IUnknown* piPlmLinesFrom);
 		[id(13), helpstring("method AddLine")] HRESULT AddLine([in]BSTR newVal);
+		[propget, id(14), helpstring("property Lemmatizer")] HRESULT Lemmatizer([out, retval] IUnknown** pVal);
 	};
 [
 	uuid(CA8CF90E-FBB6-11D2-9C98-00105A68BAF2),

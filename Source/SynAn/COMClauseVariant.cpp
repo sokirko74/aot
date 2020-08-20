@@ -1,13 +1,8 @@
-// COMClauseVariant.cpp : Implementation of CCOMClauseVariant
 #include "stdafx.h"
 #include "Synan_i.h"
 #include "COMClauseVariant.h"
 #include "COMGroup.h"
 #include "COMClauseType.h"
-
-/////////////////////////////////////////////////////////////////////////////
-// CCOMClauseVariant
-
 
 
 BOOL CCOMClauseVariant::InitSynVariant(const CClause* pClause, CSVI pSynVar)

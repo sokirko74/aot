@@ -26,19 +26,22 @@ CCOMMAPost::~CCOMMAPost()
 
 STDMETHODIMP CCOMMAPost::ProcessData(IUnknown *piInputTextItems, IUnknown **piOutputTextItems)
 {
-	const CCOMPLMLineCollection* In = reinterpret_cast<const CCOMPLMLineCollection*>(piInputTextItems);
+	CCOMPLMLineCollection* In = reinterpret_cast<CCOMPLMLineCollection*>(piInputTextItems);
 
 	LEMMATIZERLib::IPLMLineCollectionPtr piPlmLines;
 	HRESULT hr =  piPlmLines.CreateInstance(__uuidof(LEMMATIZERLib::PLMLineCollection));
-
 	CCOMPLMLineCollection* Out = reinterpret_cast<CCOMPLMLineCollection*>(piPlmLines.GetInterfacePtr());
 	Out->AddRef();
 
+	IUnknown* lemmatizer;
+	In->get_Lemmatizer(&lemmatizer);
+	Out->AttachLemmatizer((ILemmatizer*)lemmatizer);
 	if (!m_pPostMorphInterface->ProcessData (In))
 	    return E_FAIL;
 
-    for (size_t i = 0; i < m_pPostMorphInterface->GetResultLemWordCount(); ++i) {
-        piPlmLines->AddLine(m_pPostMorphInterface->GetResultLemWord(i).c_str());
+    for (size_t i = 0; i < m_pPostMorphInterface->GetResultPlmLineCount(); ++i) {
+		std::string l = m_pPostMorphInterface->GetResultPlmLineUtf8(i);
+        piPlmLines->AddLine(l.c_str());
     }
 
     *piOutputTextItems = Out;

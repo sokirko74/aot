@@ -38,11 +38,9 @@ END_COM_MAP()
 	STDMETHODIMP get_UseStatistic(/*[out, retval]*/ BOOL *pVal);
 	STDMETHODIMP put_UseStatistic(/*[in]*/ BOOL newVal);
 
-	/*
-		function CreateParadigmCollectionInner is not included into idl
-	*/
-		
+	//		function CreateParadigmCollectionInner is not included into idl
 	STDMETHOD(CreateParadigmCollectionInner)(bool bNorm, /*[in]*/ BSTR form, /*[in]*/ BOOL capital,BOOL use_prediction, /*[out, retval]*/ IParadigmCollection* *pVal);
+
 	STDMETHOD(CreateParadigmCollectionFromNorm)(/*[in]*/ BSTR norm, /*[in]*/ BOOL capital, BOOL use_prediction,/*[out, retval]*/ IParadigmCollection* *pVal);
 	STDMETHOD(CreateParadigmCollectionFromForm)(/*[in]*/ BSTR form, /*[in]*/ BOOL capital, BOOL use_prediction,/*[out, retval]*/ IParadigmCollection* *pVal);
 	STDMETHOD(CheckABC)(BSTR Word, BOOL* Result) ;

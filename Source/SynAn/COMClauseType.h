@@ -51,6 +51,11 @@ public:
 		m_pType = pType;
 		return TRUE;
 	}
+	const CSyntaxOpt* GetOpt() const
+	{
+		return m_pOptions;
+	};
+
 };
 
 #endif //__COMCLAUSETYPE_H_

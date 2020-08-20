@@ -11,6 +11,7 @@ STDMETHODIMP CCOMGroup::get_TypeStr(BSTR* pVal)
 	try
 	{
 		std::string s = m_pOptions->GetGroupNameByIndex(m_pGroup->m_GroupType);
+		s  = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
 		*pVal = _bstr_t(s.c_str()).copy();
 	}
 	catch(...)

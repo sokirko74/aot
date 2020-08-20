@@ -19,6 +19,7 @@ CPostMorphInteface* NewGermanPostMorph(const CLemmatizer* GerLemmatizer, const C
 
 CGermanPostMorph::CGermanPostMorph()
 {
+	m_Language = morphGerman;
 	m_GerGramTab = 0;
 	m_bCanChangeInputText = false;
     m_bHumanFriendlyOutput = false;

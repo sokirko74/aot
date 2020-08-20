@@ -180,6 +180,7 @@ STDMETHODIMP CCOMClause::get_Description(BSTR *pVal)
 		}	
 		if (m_pClause->IsRelative())
 			S = "Relative " + S;
+		S = convert_to_utf8(S.c_str(), GetOpt()->m_Language);
 		*pVal = _bstr_t(S.c_str()).copy();
 	}
 	catch(...)
@@ -235,8 +236,9 @@ STDMETHODIMP CCOMClause::get_ConjStr(int iNum, BSTR *pVal)
 			}
 		
 		}
-			
-		*pVal = _bstr_t(strBuf).copy();
+		std::string s = convert_to_utf8(strBuf, GetOpt()->m_Language);
+
+		*pVal = _bstr_t( s.c_str() ).copy();
 
 	}
 	catch(...)

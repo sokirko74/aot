@@ -7,9 +7,24 @@ add_executable (${PROJECT_NAME}
 
 add_dependencies(${PROJECT_NAME}
     SynAn
+    Lemmatizer
+    MAPost
+    graphan
 )
 
 
 target_link_libraries(${PROJECT_NAME}
     aot_common
+)
+
+add_test(
+    NAME RussianCOMSynan 
+    COMMAND TestSynanCOM test/Russian/text.txt
+    WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+add_test(
+    NAME RussianCOMSynanCompare 
+    COMMAND ${CMAKE_COMMAND} -E compare_files  test/Russian/canon.synan test/Russian/text.txt.synan
+    WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
 )

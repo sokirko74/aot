@@ -1,12 +1,13 @@
-// COMHomonym.cpp : Implementation of CCOMHomonym
 #include "stdafx.h"
 #include "Synan_i.h"
 #include "comdef.h"
 #include "COMHomonym.h"
+#include "COMSentence.h"
 
-/////////////////////////////////////////////////////////////////////////////
-// CCOMHomonym
-
+const CSyntaxOpt* CCOMHomonym::GetOpt() const
+{
+	return m_pSent->GetOpt();
+};
 
 STDMETHODIMP CCOMHomonym::get_LemSign(BSTR *pVal)
 {
@@ -16,6 +17,7 @@ STDMETHODIMP CCOMHomonym::get_LemSign(BSTR *pVal)
 		if (m_pHomonym->m_LemSign)
 			s += m_pHomonym->m_LemSign;
 		s += m_pHomonym->m_CommonGramCode;
+		s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
 		*pVal = _bstr_t(s.c_str()).copy();
 	}
 	catch(...)
@@ -47,7 +49,9 @@ STDMETHODIMP CCOMHomonym::get_Lemma(BSTR *pVal)
 {
 	try
 	{
-		*pVal = _bstr_t(m_pHomonym->m_strLemma.c_str()).copy();
+		std::string s = m_pHomonym->m_strLemma;
+		s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
+		*pVal = _bstr_t(s.c_str()).copy();
 	}
 	catch(...)
 	{
@@ -75,6 +79,7 @@ STDMETHODIMP CCOMHomonym::get_Grammems(hyper *pVal)
 STDMETHODIMP CCOMHomonym::get_GramDescriptionStr(BSTR *pVal)
 {
 	std::string s = m_pHomonym->GetGrammemsStr();
+	s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
 
 	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
@@ -90,7 +95,9 @@ STDMETHODIMP CCOMHomonym::get_GramCodes(BSTR *pVal)
 {
 	try
 	{
-		*pVal = _bstr_t(m_pHomonym->GetGramCodes().c_str()).copy();
+		std::string s = m_pHomonym->GetGramCodes();
+		s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
+		*pVal = _bstr_t(s.c_str()).copy();
 	}
 	catch(...)
 	{
@@ -106,7 +113,9 @@ STDMETHODIMP CCOMHomonym::get_GramCodes(BSTR *pVal)
 
 STDMETHODIMP CCOMHomonym::get_POSStr(BSTR *pVal)
 {
-	*pVal = _bstr_t(m_pHomonym->GetPartOfSpeechStr().c_str()).copy();
+	std::string s = m_pHomonym->GetPartOfSpeechStr();
+	s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
+	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
 
@@ -186,7 +195,9 @@ STDMETHODIMP CCOMHomonym::GetOborotGF(BSTR* GF)
 		*GF = _bstr_t("");
 		if (m_pHomonym->m_OborotNo == -1) 
 			return S_OK;
-		*GF = _bstr_t(m_pHomonym->GetOborotPtr()->m_GrammarFeature.c_str()).copy();
+		std::string s = m_pHomonym->GetOborotPtr()->m_GrammarFeature;
+		s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
+		*GF = _bstr_t(s.c_str()).copy();
 	}
 	catch(...)
 	{
@@ -200,6 +211,7 @@ STDMETHODIMP CCOMHomonym::get_CommonGrammemsStr(BSTR* pVal)
 {
 
 	std::string s = m_pHomonym->GetOpt()->GetGramTab()->GrammemsToStr(m_pHomonym->m_TypeGrammems);
+	s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
 	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }

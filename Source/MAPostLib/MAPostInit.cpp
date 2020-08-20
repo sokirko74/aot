@@ -20,6 +20,7 @@ CPostMorphInteface* NewRussianPostMorph(const CLemmatizer* RusLemmatizer, const 
 
 CMAPost::CMAPost()
 {
+	m_Language = morphRussian;
     m_bUseTrigrams = false;
 	m_LogFileName = "";
 	/*try {

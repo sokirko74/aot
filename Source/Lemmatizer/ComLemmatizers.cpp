@@ -78,6 +78,7 @@ STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionFromNorm(/*[in]*/ BSTR norm
 {
 	return CreateParadigmCollectionInner(true,  norm, capital, use_prediction, pVal);
 };
+
 STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionFromForm(/*[in]*/ BSTR form, /*[in]*/ BOOL capital, BOOL use_prediction,/*[out, retval]*/ IParadigmCollection* *pVal)
 {
 	return CreateParadigmCollectionInner(false,  form, capital, use_prediction, pVal);	

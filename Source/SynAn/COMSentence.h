@@ -48,9 +48,7 @@ public:
 	STDMETHOD(get_ClausesCount)(long *pVal);
 	STDMETHOD(get_Word)(long lWordNum, IWord* *pVal);
 	STDMETHOD(get_WordsNum)(long *pVal);
-
-
-
+	const CSyntaxOpt* GetOpt() const;
 };
 
 #endif //__SENTENCE_H_

@@ -1,17 +1,16 @@
-// COMWord.cpp : Implementation of CCOMWord
 #include "stdafx.h"
 #include "comdef.h"
 #include "Synan_i.h"
 #include "COMWord.h"
 
 
-
 STDMETHODIMP CCOMWord::get_WordStr(BSTR *pVal)
 {
 	try
 	{
-		_bstr_t b (m_pWord->m_strWord.c_str());
-		*pVal = b.copy();
+		std::string s = m_pWord->m_strWord;
+		s = convert_to_utf8(s.c_str(), m_pSent->GetOpt()->m_Language);
+		*pVal = _bstr_t(s.c_str());
 
 	}
 	catch(...)
@@ -233,7 +232,9 @@ STDMETHODIMP CCOMWord::get_GraphDescrs(BSTR *pVal)
 {
 	try
 	{
-		*pVal = _bstr_t(m_pWord->BuildGraphemDescr().c_str()).copy();
+		std::string s = m_pWord->BuildGraphemDescr();
+		s = convert_to_utf8(s.c_str(), m_pSent->GetOpt()->m_Language);
+		*pVal = _bstr_t(s.c_str()).copy();
 
 	}
 	catch(...)

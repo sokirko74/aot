@@ -54,6 +54,12 @@ public:
 protected:
 	const CGroup* m_pGroup;
 	const CSyntaxOpt*		m_pOptions;
+
+	const CSyntaxOpt* GetOpt() const
+	{
+		return m_pOptions;
+	};
+
 };
 
 #endif //__GROUP_H_

@@ -97,7 +97,7 @@ bool CPlmLineCollection::SaveToFile(std::string filename) const
 		std::ofstream outp(filename.c_str(), std::ios::binary);
 		if (!outp.is_open()) return false;
 		for (auto i : m_Items) {
-			outp <<  i << "\n";
+			outp <<  convert_to_utf8(i, m_pLemmatizer->m_Language) << "\n";
 		}
 	}
 	catch(...)

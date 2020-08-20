@@ -154,7 +154,6 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWrit
 
 	m_piSentCollection->ClearSentences();
 	std::string log_path;
-	std::string FileName = "rossdev.log";
 	try {
 
 		log_path = GetRegistryString("Software\\Dialing\\Logs\\Main");
@@ -171,18 +170,11 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWrit
 
 
 	COM_TRY
-
-
 		if (bFile)
 			m_piGraphan->LoadFileToGraphan(_bstr_t(str.c_str()).copy());
 		else {
-			std::string s = convert_to_utf8(str.c_str(), m_CurrentLanguage);
-			m_piGraphan->LoadStringToGraphan(_bstr_t(s.c_str()).copy());
+			m_piGraphan->LoadStringToGraphan(_bstr_t(str.c_str()).copy());
 		}
-		
-
-		
-
 	COM_CATCH( "GraphAn has crushed.");
 
 	
@@ -190,8 +182,6 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWrit
 
 	COM_TRY
 		m_piAfterMorphPlmLines->ProcessHyphenWords(m_piGraphan);
-
-
 		m_piAfterMorphPlmLines->ProcessPlmLines(m_piGraphan);				
 		if (bWriteIntermFiles)
 			m_piAfterMorphPlmLines->SaveToFile(std::string(log_path+"before.lem").c_str()); 

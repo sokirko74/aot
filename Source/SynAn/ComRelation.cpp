@@ -1,11 +1,7 @@
-// ComRelation.cpp : Implementation of CCOMRelation
 #include "stdafx.h"
 #include "Synan_i.h"
 #include "comdef.h"
 #include "ComRelation.h"
-
-/////////////////////////////////////////////////////////////////////////////
-// CCOMRelation
 
 
 STDMETHODIMP CCOMRelation::get_SourceItemType(int* type)
@@ -46,8 +42,9 @@ STDMETHODIMP CCOMRelation::get_Name(BSTR *pVal)
 {
 	try
 	{
-		_bstr_t bstrDescr = GetOpt()->GetGroupNameByIndex(m_Relation.type);
-		*pVal = _bstr_t((char*)bstrDescr).copy();
+		std::string s = GetOpt()->GetGroupNameByIndex(m_Relation.type);
+		s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
+		*pVal = _bstr_t(s.c_str()).copy();
 	}
 	catch(...)
 	{

@@ -1,7 +1,5 @@
 // PLMLineCollection.h : Declaration of the CCOMPLMLineCollection
-
-#ifndef __COMPLMLINECOLLECTION_H_
-#define __COMPLMLINECOLLECTION_H_
+#pragma once
 
 #include "ComLemmatizers.h"       // main symbols
 #include "lemmatizer_resource.h"       // main symbols
@@ -35,47 +33,18 @@ END_COM_MAP()
 public:
 	STDMETHOD(Clear)();
 	STDMETHOD(AttachLemmatizer)(ILemmatizer* pVal);
+	STDMETHOD(get_Lemmatizer)(IUnknown** pVal);
 
-	STDMETHOD(get_Count)(/*[out, retval]*/ long *pVal)
-	{
-		*pVal = m_Items.size();
-		return S_OK;
-	}
-	STDMETHOD(get_Item)(/*[in]*/ long pos, /*[out, retval]*/ BSTR *pVal)
-	{
-		if (pos >= m_Items.size())
-			return E_FAIL;
-		*pVal = _bstr_t(m_Items[pos].c_str()).copy();
-		return S_OK;
-	}
-	STDMETHOD(put_Item)(/*[in]*/ long pos, /*[in]*/ BSTR newVal)
-	{
-		if (pos >= m_Items.size())
-			return E_FAIL;
-		m_Items[pos] = (const char*)_bstr_t(newVal);
-		return S_OK;
-	}
-	STDMETHODIMP CCOMPLMLineCollection::AddLine(BSTR LineStr)
-	{
-	   	m_Items.push_back((const char*)_bstr_t(LineStr));
-		return S_OK;
-	}
-
-	STDMETHOD(Remove)(/*[in]*/ long pos)
-	{
-		if (pos >= m_Items.size())
-			return E_FAIL;
-		m_Items.erase(m_Items.begin() + pos);
-		return S_OK;
-	}
+	STDMETHOD(get_Count)(/*[out, retval]*/ long* pVal);
+	STDMETHOD(get_Item)(/*[in]*/ long pos, /*[out, retval]*/ BSTR* pVal);
+	STDMETHOD(put_Item)(/*[in]*/ long pos, /*[in]*/ BSTR newVal);
+	STDMETHOD(AddLine)	(BSTR LineStr);
+	STDMETHOD(Remove)(/*[in]*/ long pos);
 	STDMETHOD(ProcessPlmLines)(/*[in]*/ IUnknown* piGraphmatFile);
 	STDMETHOD(SaveToFile)(/*[in]*/ BSTR filename);
+	STDMETHOD(ProcessHyphenWords)(IUnknown* piGraphan);
+	STDMETHOD(CopyItems)(IUnknown* piPlmLinesFrom);
 private:
 	CCOMLemmatizer*		m_pComLemmatizer;
 
-public:
-	STDMETHOD(ProcessHyphenWords)(IUnknown* piGraphan);
-	STDMETHOD(CopyItems)(IUnknown* piPlmLinesFrom);
 };
-
-#endif //__COMPLMLINECOLLECTION_H_

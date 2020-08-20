@@ -68,6 +68,8 @@ public:
 protected:
 	CSynHomonym* m_pHomonym;
 	CSentence* m_pSent;
+	const CSyntaxOpt* GetOpt() const;
+
 };
 
 #endif //__HOMONYM_H_

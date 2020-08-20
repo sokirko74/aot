@@ -5,53 +5,58 @@
 */
 #include "../common/COM/COMSyntaxHolder.h"
 #include "../common/utilit.h"
+#include <fstream>
 
 int main(int argc, char* argv[])
 {
 	::CoInitialize(0);
-	
-
-
 	{
 		// loading Russian syntax
 		CCOMSyntaxHolder	SyntaxHolder;
-		if (!SyntaxHolder.LoadSyntax(morphRussian))
-			return -1;
+		if (!SyntaxHolder.LoadSyntax(morphRussian)) {
+			std::cerr << "cannot initialize syntax\n";
+			return 1;
+		}
+
+		std::string inputFile = argv[1];
+		assert(access(inputFile.c_str(), 0) != -1);
+		std::cout << "Loading file " << inputFile << "\n";
 
 		// processing one Russian sentence (from Graphematics to Syntax)
-		if (!SyntaxHolder.GetSentencesFromSynAn(_R("мама мыла раму"), FALSE, FALSE, FALSE))
+		if (!SyntaxHolder.GetSentencesFromSynAn(inputFile.c_str(), TRUE, TRUE, FALSE)) {
+			std::cerr << "cannot process the input file\n";
 			return -1;
+		}
+
+
 
 		// printing all syntax groups
 
 		// going through all sentences
+		std::ofstream outp(inputFile + ".synan");
+
 		for(int i = 0 ; i < SyntaxHolder.m_piSentCollection->SentencesCount ; i++ )
 		{
-			SYNANLib::ISentencePtr piSent = SyntaxHolder.m_piSentCollection->GetSentence(i);
+			auto piSent = SyntaxHolder.m_piSentCollection->GetSentence(i);
 
 			// going through all clauses in this sentence
 			for(int j = 0 ; j < piSent->ClausesCount ; j++ )
 			{
-				SYNANLib::IClausePtr piClause = piSent->Clause[j];
+				auto piClause = piSent->Clause[j];
 				//  getting the first morphological variant
 				if (piClause->VariantsCount == 0)
 				{
-					printf (" Error! A clause with no morph. variant is found\n"); 
+					std::cerr << " Error! A clause with no morph. variant is found\n"; 
 					continue;
 				};
 
 				// going through all syntax groups
 				for(int k = 0 ; k < piClause->ClauseVariant[0]->GroupsCount ; k++ )
 				{
-					
-					SYNANLib::IGroupPtr piGroup = piClause->ClauseVariant[0]->Group[k];
-					SYNANLib::IWordPtr piW1 = piSent->Word[piGroup->FirstWord];
-					SYNANLib::IWordPtr piW2 = piSent->Word[piGroup->LastWord];
-					printf("(%s %s %s )\n", 
-							(const char*)piGroup->TypeStr, 
-							(const char*)piW1->WordStr, 
-							(const char*)piW2->WordStr
-							);				
+					auto piGroup = piClause->ClauseVariant[0]->Group[k];
+					auto s = piGroup->FirstWord;
+					auto l = piGroup->LastWord;
+					outp << piGroup->TypeStr << "[" << s << ", " << l << "]\n";
 				}
 
 			}

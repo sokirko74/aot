@@ -1,12 +1,11 @@
-// COMSentence.cpp : Implementation of CCOMSentence
 #include "stdafx.h"
 #include "Synan_i.h"
 #include "COMSentence.h"
 #include "COMWord.h"
-/////////////////////////////////////////////////////////////////////////////
-// CCOMSentence
 
-
+const CSyntaxOpt* CCOMSentence::GetOpt() const {
+	return m_pSentence->GetOpt();
+}
 
 STDMETHODIMP CCOMSentence::get_PrimitiveClausesCount(long *pVal)
 {
@@ -171,8 +170,9 @@ STDMETHODIMP CCOMSentence::GetOborotStrByOborotId(long OborotId, BSTR *pVal)
 {
 	try
 	{
-		std::string Descr = m_pSentence->GetOpt()->GetOborDic()->m_Entries[OborotId].m_OborotEntryStr;
-		*pVal = _bstr_t(Descr.c_str()).copy();
+		std::string s = m_pSentence->GetOpt()->GetOborDic()->m_Entries[OborotId].m_OborotEntryStr;
+		s = convert_to_utf8(s.c_str(), GetOpt()->m_Language);
+		*pVal = _bstr_t(s.c_str()).copy();
 		return S_OK;
 	}
 	catch(...)
