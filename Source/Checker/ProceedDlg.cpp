@@ -177,7 +177,6 @@ void CProceedDlg::ShowDifferences()
 	CCheckerDlg *pDlg = (CCheckerDlg *)AfxGetMainWnd();
 
 	if (		(pDlg->m_CheckerType == SyntaxCheck) 
-			||	(pDlg->m_CheckerType == MorphCorpusCheck)
 			||	(pDlg->m_CheckerType == ExternalExeFileCheck)
 			
 		)

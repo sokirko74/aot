@@ -1,0 +1,4 @@
+                                0 0 BEG DOC
+1                               0 1 DC BUL INDENT FILE1
+.                               1 1 PUN
+txt                             2 3 LLE aa CS? SENT_END FILE2

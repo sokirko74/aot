@@ -5,8 +5,6 @@
 #include "Checker.h"
 #include "CheckerDlg.h"
 #include "ProceedDlg.h"
-#include "../MorphCorpusCreator/MorphCorpusCreator.h"
-
 #include "GriThrPB.h"
 
 #ifdef _DEBUG
@@ -28,14 +26,14 @@ class CAboutDlg : public CDialog
 public:
 	CAboutDlg();
 
-// Dialog Data
-	//{{AFX_DATA(CAboutDlg)
+	// Dialog Data
+		//{{AFX_DATA(CAboutDlg)
 	enum { IDD = IDD_ABOUTBOX };
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CAboutDlg)
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
 
@@ -81,14 +79,14 @@ CCheckerDlg::CCheckerDlg(CWnd* pParent /*=NULL*/)
 	m_bLoadCOM = true;
 	LoadHistory();
 }
-CCheckerDlg::~CCheckerDlg() 
+CCheckerDlg::~CCheckerDlg()
 {
 	SaveHistory();
 }
 
 
 
-CString CCheckerDlg::GetCurrFileName() const 
+CString CCheckerDlg::GetCurrFileName() const
 {
 	CString FileName;
 	m_comboHistory.GetWindowText(FileName);
@@ -106,7 +104,7 @@ void CCheckerDlg::LoadHistory()
 	{
 		int iSeparatorPos = 0;
 		int iPos = 0;
-		while(iPos < iLen)
+		while (iPos < iLen)
 		{
 			strProfileString = CString(strSection + iPos);
 			iSeparatorPos = strProfileString.Find('=');
@@ -125,7 +123,7 @@ void CCheckerDlg::SaveHistory()
 	list<CString>::iterator pos = m_LastQueries.begin();
 	CString strKey;
 	int i = 1;
-	while(pos != m_LastQueries.end())
+	while (pos != m_LastQueries.end())
 	{
 		strKey.Format("Query%d", i);
 		strVal = *pos;
@@ -133,7 +131,7 @@ void CCheckerDlg::SaveHistory()
 			break;
 		pos++;
 		i++;
-        if (i > HISTORY_SIZE) break;
+		if (i > HISTORY_SIZE) break;
 	}
 }
 
@@ -141,7 +139,7 @@ void CCheckerDlg::ChangeHistory(const CString& query)
 {
 	m_LastQueries.push_front(query);
 	if (m_LastQueries.size() > HISTORY_SIZE)
-		m_LastQueries.pop_back();	
+		m_LastQueries.pop_back();
 	UpdateData(FALSE);
 }
 
@@ -163,15 +161,15 @@ void CCheckerDlg::DoDataExchange(CDataExchange* pDX)
 		m_comboHistory.AddString(*pos);
 		pos++;
 	}
-	
-    if (!m_LastQueries.empty())
-    {
-        m_comboHistory.SetCurSel(0);
-        m_comboHistory.SelectString(-1, *m_LastQueries.begin());
-    }
+
+	if (!m_LastQueries.empty())
+	{
+		m_comboHistory.SetCurSel(0);
+		m_comboHistory.SelectString(-1, *m_LastQueries.begin());
+	}
 
 
-	
+
 }
 
 BEGIN_MESSAGE_MAP(CCheckerDlg, CDialog)
@@ -211,7 +209,7 @@ BOOL CCheckerDlg::OnInitDialog()
 
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
-	
+
 // TODO: Add extra initialization here
 	return TRUE;
 }
@@ -233,13 +231,13 @@ void CCheckerDlg::OnSysCommand(UINT nID, LPARAM lParam)
 //  to draw the icon.  For MFC applications using the document/view model,
 //  this is automatically done for you by the framework.
 
-void CCheckerDlg::OnPaint() 
+void CCheckerDlg::OnPaint()
 {
 	if (IsIconic())
 	{
 		CPaintDC dc(this); // device context for painting
 
-		SendMessage(WM_ICONERASEBKGND, (WPARAM) dc.GetSafeHdc(), 0);
+		SendMessage(WM_ICONERASEBKGND, (WPARAM)dc.GetSafeHdc(), 0);
 
 		// Center icon in client rectangle
 		int cxIcon = GetSystemMetrics(SM_CXICON);
@@ -260,20 +258,20 @@ void CCheckerDlg::OnPaint()
 
 HCURSOR CCheckerDlg::OnQueryDragIcon()
 {
-	return (HCURSOR) m_hIcon;
+	return (HCURSOR)m_hIcon;
 }
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CCheckerDlg::OnOpenFile() 
+void CCheckerDlg::OnOpenFile()
 {
 	CString  FileName = GetCurrFileName();
-	CFileDialog cDlg(TRUE,NULL,FileName,
+	CFileDialog cDlg(TRUE, NULL, FileName,
 		OFN_HIDEREADONLY | OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST,
 		"Text Files (*.txt)|*.txt|All Files (*.*)|*.*||", AfxGetMainWnd());
 	cDlg.m_ofn.lpstrTitle = " Input File:";
 
-	if( cDlg.DoModal() != IDOK )
+	if (cDlg.DoModal() != IDOK)
 		return;
 
 	ChangeHistory(cDlg.GetPathName());
@@ -284,33 +282,34 @@ void CCheckerDlg::OnOpenFile()
 
 BOOL CCheckerDlg::InitCom()
 {
-	try 
+	try
 	{
-// инициализируем библиотеку COM
-	CoInitialize(NULL);
-	if (!m_bLoadCOM) return TRUE;
-// создаем семантический анализ (ISemStructurePtr)
-	piSeman.CreateInstance( __uuidof(SEMANLib::SemStructure));
-	clock_t     start = clock();
+		// инициализируем библиотеку COM
+		CoInitialize(NULL);
+		if (!m_bLoadCOM) return TRUE;
+		// создаем семантический анализ (ISemStructurePtr)
+		piSeman.CreateInstance(__uuidof(SEMANLib::SemStructure));
+		clock_t     start = clock();
 
-// инициализация досемантических словарей
-	piSeman->InitPresemanDicts();
-// инициализация семантических словарей
-	piSeman->InitSemanDicts();
-	piSeman->InitializeIndices();
-    piSeman->ShouldBuildTclGraph = FALSE;
-	clock_t finish = clock();
-	double timespan = finish - start; 
-	m_GerSyntaxHolder.LoadSyntax(morphGerman);
-	m_RusSyntaxHolder.LoadSyntax(morphRussian);
-	} catch(...)
+		// инициализация досемантических словарей
+		piSeman->InitPresemanDicts();
+		// инициализация семантических словарей
+		piSeman->InitSemanDicts();
+		piSeman->InitializeIndices();
+		piSeman->ShouldBuildTclGraph = FALSE;
+		clock_t finish = clock();
+		double timespan = finish - start;
+		m_GerSyntaxHolder.LoadSyntax(morphGerman);
+		m_RusSyntaxHolder.LoadSyntax(morphRussian);
+	}
+	catch (...)
 	{
 		AfxMessageBox("SEMAN initialization failed!");
 		return FALSE;
 	}
 
 	m_Language = morphRussian;
-	
+
 
 	return TRUE;
 }
@@ -329,19 +328,19 @@ void CCheckerDlg::ExitCom()
 
 BOOL CCheckerDlg::LoadData()
 {
-	FILE *fi;
-	if( (fi=fopen(GetCurrFileName(),"rt"))==NULL )
+	FILE* fi;
+	if ((fi = fopen(GetCurrFileName(), "rt")) == NULL)
 	{
 		CString s;
-		AfxFormatString1(s,IDS_OPNERR,GetCurrFileName());
+		AfxFormatString1(s, IDS_OPNERR, GetCurrFileName());
 		AfxMessageBox(s);
 		return FALSE;
 	}
 
 
 	char tmp[8196];
-	
-	while( fgets(tmp,8196,fi)!=NULL )
+
+	while (fgets(tmp, 8196, fi) != NULL)
 	{
 		std::string s = tmp;
 		Trim(s);
@@ -353,9 +352,9 @@ BOOL CCheckerDlg::LoadData()
 			// skipping  empty lines 
 			continue;
 		};
-		for (size_t i=0; i <s.length(); i++)
-			if (s.substr(i,2) == "\\n")
-				s.replace(i,2,"\r\n");
+		for (size_t i = 0; i < s.length(); i++)
+			if (s.substr(i, 2) == "\\n")
+				s.replace(i, 2, "\r\n");
 
 		std::string Comments;
 
@@ -363,7 +362,7 @@ BOOL CCheckerDlg::LoadData()
 			int k = s.find("//");
 			if (k != std::string::npos)
 			{
-				Comments = s.substr(k+2);
+				Comments = s.substr(k + 2);
 				s.erase(k);
 			};
 		};
@@ -372,13 +371,13 @@ BOOL CCheckerDlg::LoadData()
 		E.m_Comments = Comments;
 		m_CheckExamples.push_back(E);
 
-		
+
 	}
 
 	fclose(fi);
 	m_CheckerType = TranslatorCheck;
 	m_Language = morphRussian;
-	fi = fopen (MakeFName((const char*)GetCurrFileName(), "opt").c_str(), "r");
+	fi = fopen(MakeFName((const char*)GetCurrFileName(), "opt").c_str(), "r");
 	m_CommandLine = "";
 	m_ExternalOutFile = "";
 	m_ExternalCatalog = "";
@@ -386,69 +385,65 @@ BOOL CCheckerDlg::LoadData()
 	if (fi)
 	{
 		char s[1024];
-		while (fgets(s,1024,fi))
+		while (fgets(s, 1024, fi))
 		{
-			char* q = strtok(s," \t\n\r");
+			char* q = strtok(s, " \t\n\r");
 			if (q)
 			{
-				if (!stricmp ("SyntaxCheck", q))
+				if (!stricmp("SyntaxCheck", q))
 				{
 					m_CheckerType = SyntaxCheck;
 				}
-				if (!stricmp ("PostMorphCheck", q))
+				if (!stricmp("PostMorphCheck", q))
 				{
 					m_CheckerType = PostMorphCheck;
 				}
-				if (!stricmp ("RusSynthesis", q))
+				if (!stricmp("RusSynthesis", q))
 				{
 					m_CheckerType = RusSynthesisCheck;
 				}
-				if (!stricmp ("SentenceBreaker", q))
+				if (!stricmp("SentenceBreaker", q))
 				{
 					m_CheckerType = SentenceBreakerCheck;
 				}
-				if (!stricmp ("Prediction", q))
+				if (!stricmp("Prediction", q))
 				{
 					m_CheckerType = PredictionCheck;
 				}
-				if (!stricmp ("MorphCorpusCheck", q))
-				{
-					m_CheckerType = MorphCorpusCheck;
-				}
-				if (!stricmp ("ExternalExeFileCheck", q))
+				if (!stricmp("ExternalExeFileCheck", q))
 				{
 					m_CheckerType = ExternalExeFileCheck;
 				}
-				if (!stricmp ("ResultsAreSmall", q))
+				if (!stricmp("ResultsAreSmall", q))
 				{
 					m_bResultsAreSmall = true;
 				}
-				
+
 
 				MorphLanguageEnum langua;
 				if (GetLanguageByString(q, langua))
 					m_Language = langua;
 
-				if (!stricmp ("ExternalCommandLine", q))
+				if (!stricmp("ExternalCommandLine", q))
 				{
-					q = strtok(NULL,"\r\n");
+					q = strtok(NULL, "\r\n");
 					m_CommandLine = q;
 				}
 
-				if (!stricmp ("ExternalOutFile", q))
+				if (!stricmp("ExternalOutFile", q))
 				{
-					q = strtok(NULL,"\r\n");
+					q = strtok(NULL, "\r\n");
 					m_ExternalOutFile = q;
 				}
 
-				if (!stricmp ("ExternalCatalog", q))
+				if (!stricmp("ExternalCatalog", q))
 				{
-					q = strtok(NULL,"\r\n");
+					q = strtok(NULL, "\r\n");
 					m_ExternalCatalog = q;
 				}
-				
+
 			};
-			
+
 		};
 
 		fclose(fi);
@@ -456,17 +451,17 @@ BOOL CCheckerDlg::LoadData()
 
 	if (m_CheckerType == ExternalExeFileCheck)
 	{
-		if (m_CommandLine.empty()) 
+		if (m_CommandLine.empty())
 		{
-			ErrorMessage ("No definition of ExternalCommandLine in options file");
+			ErrorMessage("No definition of ExternalCommandLine in options file");
 			return FALSE;
 		};
-		if (m_ExternalOutFile.empty()) 
+		if (m_ExternalOutFile.empty())
 		{
-			ErrorMessage ("No definition of ExternalOutFile in options file");
+			ErrorMessage("No definition of ExternalOutFile in options file");
 			return FALSE;
 		};
-		
+
 	}
 	return TRUE;
 }
@@ -481,34 +476,34 @@ BOOL CCheckerDlg::LoadBase()
 {
 	m_changed = FALSE;
 
-	
-	
-	FILE *fb;
-	if( (fb=fopen(GetBaseFileName().c_str(),"rt"))==NULL )
+
+
+	FILE* fb;
+	if ((fb = fopen(GetBaseFileName().c_str(), "rt")) == NULL)
 	{
-		if( AfxMessageBox(IDS_NOBASE,MB_ICONQUESTION|MB_YESNO)!=IDYES )
+		if (AfxMessageBox(IDS_NOBASE, MB_ICONQUESTION | MB_YESNO) != IDYES)
 			return FALSE;
 		else
-		return TRUE;
+			return TRUE;
 	}
 
 	char tmp[40000];
 	int LineNo = 0;
-	while( fgets(tmp,40000,fb)!=NULL )
+	while (fgets(tmp, 40000, fb) != NULL)
 	{
 		LineNo++;
-		std::string line  = tmp;
+		std::string line = tmp;
 		if (line.empty()) continue;
-		if( line[0] != '[')
+		if (line[0] != '[')
 		{
-			ErrorMessage (Format("Cannot read base at line %i (no open bracket)",LineNo));
+			ErrorMessage(Format("Cannot read base at line %i (no open bracket)", LineNo));
 			fclose(fb);
 			return FALSE;
 		}
 		int index = line.find("] ");
-		if( index == std::string::npos)
+		if (index == std::string::npos)
 		{
-			ErrorMessage (Format("Cannot read base at line %i (no close bracket)",LineNo));
+			ErrorMessage(Format("Cannot read base at line %i (no close bracket)", LineNo));
 			fclose(fb);
 			return FALSE;
 		}
@@ -516,7 +511,7 @@ BOOL CCheckerDlg::LoadBase()
 		base.num = atoi(line.c_str() + 1);
 		if (base.num == 0)
 		{
-			ErrorMessage (Format("Cannot read base at line %i (base num is zero)",LineNo));
+			ErrorMessage(Format("Cannot read base at line %i (base num is zero)", LineNo));
 			fclose(fb);
 			return FALSE;
 		}
@@ -526,7 +521,7 @@ BOOL CCheckerDlg::LoadBase()
 	}
 	fclose(fb);
 
-	sort(m_base.begin(),m_base.end());
+	sort(m_base.begin(), m_base.end());
 	return TRUE;
 }
 
@@ -534,21 +529,21 @@ BOOL CCheckerDlg::LoadBase()
 
 BOOL CCheckerDlg::SaveBase()
 {
-	if( !m_changed )
+	if (!m_changed)
 		return TRUE;
 
-	
-	FILE *fb;
-	if( (fb=fopen(GetBaseFileName().c_str(),"w+t"))==NULL )
+
+	FILE* fb;
+	if ((fb = fopen(GetBaseFileName().c_str(), "w+t")) == NULL)
 	{
 		CString s;
-		AfxFormatString1(s,IDS_OPNERR,GetBaseFileName().c_str());
+		AfxFormatString1(s, IDS_OPNERR, GetBaseFileName().c_str());
 		AfxMessageBox(s);
 		return FALSE;
 	}
 
-	for( int i=0; i<m_base.size(); i++ )
-		fprintf(fb,"[%03i] %s\n",m_base[i].num,m_base[i].txt.c_str());
+	for (int i = 0; i < m_base.size(); i++)
+		fprintf(fb, "[%03i] %s\n", m_base[i].num, m_base[i].txt.c_str());
 	fclose(fb);
 
 	return TRUE;
@@ -556,26 +551,26 @@ BOOL CCheckerDlg::SaveBase()
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CCheckerDlg::OnOK() 
+void CCheckerDlg::OnOK()
 {
-	GetDlgItemText(IDC_EDIT1,GetCurrFileName());
+	GetDlgItemText(IDC_EDIT1, GetCurrFileName());
 	m_from = GetDlgItemInt(IDC_FROM);
 	if (m_from < 1)  m_from = 1;
 	m_numb = GetDlgItemInt(IDC_NUMB);
-//
+	//
 	m_CheckExamples.clear();
 	m_base.clear();
 	m_tran.clear();
 	m_nbad.clear();
-//
-	if( !LoadData() )
+	//
+	if (!LoadData())
 		return;
-	if( !LoadBase() )
+	if (!LoadBase())
 		return;
-//
-	if( !Operate() )
+	//
+	if (!Operate())
 		return;
-//
+	//
 	Proceed();
 	SaveBase();
 }
@@ -583,23 +578,23 @@ void CCheckerDlg::OnOK()
 /////////////////////////////////////////////////////////////////////////////
 
 
-std::string GetGramInfo (IGramTabPtr  A, IParadigmPtr& F)
+std::string GetGramInfo(IGramTabPtr  A, IParadigmPtr& F)
 {
 	std::string tab_str = (const char*)F->SrcAncode;
-	short   PartOfSpeech = A->GetPartOfSpeech (tab_str.c_str());
-	std::string  Result	= (const char*)A->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ") ;	
+	short   PartOfSpeech = A->GetPartOfSpeech(tab_str.c_str());
+	std::string  Result = (const char*)A->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ");
 	std::string  CommonAncode = (const char*)F->TypeAncode;
 	if (!CommonAncode.empty() && CommonAncode[0] != '?')
 	{
-		Result +=  (const char*)A->GrammemsToStr (A->GetGrammems(_bstr_t(CommonAncode.c_str())));
-		Result +=  "| ";
+		Result += (const char*)A->GrammemsToStr(A->GetGrammems(_bstr_t(CommonAncode.c_str())));
+		Result += "| ";
 	};
 
-	for (long i=0; i < tab_str.length(); i+=2)
+	for (long i = 0; i < tab_str.length(); i += 2)
 	{
-		
-		QWORD G = A->GetGrammems(_bstr_t(tab_str.c_str()+i));
-		Result += (const char*)A->GrammemsToStr (G) + std::string(";");
+
+		QWORD G = A->GetGrammems(_bstr_t(tab_str.c_str() + i));
+		Result += (const char*)A->GrammemsToStr(G) + std::string(";");
 	};
 	return Result;
 }
@@ -607,15 +602,15 @@ std::string GetGramInfo (IGramTabPtr  A, IParadigmPtr& F)
 std::string GetStringByMorph(MorphLanguageEnum	Language, IParadigmCollectionPtr P, IGramTabPtr GramTab)
 {
 	std::string Result;
-	for (size_t i=0; i< P->Count; i++)
+	for (size_t i = 0; i < P->Count; i++)
 	{
-		IParadigmPtr F =  P->Item[i];
-		Result +=  F->Founded ? "+" : "-";
-		Result +=  " ";
-		Result +=  (const char*)F->Form[0];
-		Result +=  " ";
-		Result +=  GetGramInfo(GramTab,F);
-		Result +=  "\x1";
+		IParadigmPtr F = P->Item[i];
+		Result += F->Founded ? "+" : "-";
+		Result += " ";
+		Result += (const char*)F->Form[0];
+		Result += " ";
+		Result += GetGramInfo(GramTab, F);
+		Result += "\x1";
 	};
 	return Result;
 };
@@ -624,7 +619,7 @@ std::string GetStringByMorph(MorphLanguageEnum	Language, IParadigmCollectionPtr 
 std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr GramTab)
 {
 	ISentencesCollectionPtr Synan = P;
-	
+
 	int nSent = Synan->SentencesCount;
 	if (nSent == 0)
 	{
@@ -635,25 +630,25 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 	for (int SentenceNo = 0; SentenceNo < nSent; SentenceNo++)
 	{
 		ISentencePtr piSentence = Synan->Sentence[SentenceNo];
-		int iWord=0,iClau=0,iCvar=0;
-		
+		int iWord = 0, iClau = 0, iCvar = 0;
+
 
 		try {
-		
+
 			int nClausesCount = piSentence->PrimitiveClausesCount;
-			for( int WordNo = 0; WordNo<piSentence->WordsNum; WordNo++ )
+			for (int WordNo = 0; WordNo < piSentence->WordsNum; WordNo++)
 			{
 				IWordPtr W = piSentence->Word[WordNo];
 
 				if (W->MainVerbsCount > 0)
 				{
-					std::string S = std::string("AnalytForm\t=\t")+  (const char*)W->GetWordStr();
-					for (size_t i=0; i< W->MainVerbsCount; i++)
+					std::string S = std::string("AnalytForm\t=\t") + (const char*)W->GetWordStr();
+					for (size_t i = 0; i < W->MainVerbsCount; i++)
 					{
 						S += std::string(" ") + (const char*)piSentence->Word[W->MainVerbs[i]]->GetWordStr();
 
 						IWordPtr W1 = piSentence->Word[W->MainVerbs[i]];
-						for (size_t j=0; j< W1->MainVerbsCount; j++)
+						for (size_t j = 0; j < W1->MainVerbsCount; j++)
 							S += std::string(" ") + (const char*)piSentence->Word[W1->MainVerbs[j]]->GetWordStr();
 
 					};
@@ -662,65 +657,65 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 
 				if (W->HomonymsCount > 1)
 				{
-					
+
 					vector<string>	 Homonyms;
-					for (size_t i=0; i< W->HomonymsCount; i++)
+					for (size_t i = 0; i < W->HomonymsCount; i++)
 					{
 						IHomonymPtr H = W->Homonym[i];
-						Homonyms.push_back(std::string((const char*)H->Lemma) + std::string("[")+(const char*)H->POSStr+std::string("]"));
+						Homonyms.push_back(std::string((const char*)H->Lemma) + std::string("[") + (const char*)H->POSStr + std::string("]"));
 					};
-					sort (Homonyms.begin(), Homonyms.end());
-					std::string S = std::string("Homonyms\t=\t")+  (const char*)W->GetWordStr();
-					for (size_t i=0; i< Homonyms.size(); i++)
+					sort(Homonyms.begin(), Homonyms.end());
+					std::string S = std::string("Homonyms\t=\t") + (const char*)W->GetWordStr();
+					for (size_t i = 0; i < Homonyms.size(); i++)
 						S += std::string(" ") + Homonyms[i];
 					Groups.insert(S);
 				};
-				
+
 			};
 
-			for( int ClauseNo = 0; ClauseNo<nClausesCount; ClauseNo++ )
+			for (int ClauseNo = 0; ClauseNo < nClausesCount; ClauseNo++)
 			{
 				IClausePtr piClause = piSentence->GetClause(ClauseNo);
 				int nCvar = piClause->GetVariantsCount();
 				if (nCvar == 0)
 				{
-					ErrorMessage (" a clause with no variants is found");
+					ErrorMessage(" a clause with no variants is found");
 					continue;
 				};
 
 				int nVmax = piClause->ClauseVariant[0]->VariantWeight;
 				if (piClause->RelativeWord != -1)
 				{
-						std::string S = std::string("RelativeWord\t=\t")+  (const char*)piSentence->Word[piClause->RelativeWord]->GetWordStr();
-						Groups.insert(S);
+					std::string S = std::string("RelativeWord\t=\t") + (const char*)piSentence->Word[piClause->RelativeWord]->GetWordStr();
+					Groups.insert(S);
 				};
 				if (piClause->AntecedentWord != -1)
 				{
-						std::string S = std::string("AntecedentWord\t=\t")+  (const char*)piSentence->Word[piClause->AntecedentWord]->GetWordStr();
-						Groups.insert(S);
+					std::string S = std::string("AntecedentWord\t=\t") + (const char*)piSentence->Word[piClause->AntecedentWord]->GetWordStr();
+					Groups.insert(S);
 				};
-				
-				for( int iCvar=0; iCvar<nCvar; iCvar++ )
+
+				for (int iCvar = 0; iCvar < nCvar; iCvar++)
 				{
 					IClauseVariantPtr V = piClause->ClauseVariant[iCvar];
-					if( V->VariantWeight < nVmax ) break;
-					
-					for (size_t i =0; i < V->SubjectsCount; i++)
+					if (V->VariantWeight < nVmax) break;
+
+					for (size_t i = 0; i < V->SubjectsCount; i++)
 					{
-						int WordNo  = V->Unit[V->Subjects[i] ]->WordNum;
+						int WordNo = V->Unit[V->Subjects[i]]->WordNum;
 						IWordPtr piSubjWord = piSentence->Word[WordNo];
-						std::string S = std::string("SUBJ\t=\t")+  (const char*)piSubjWord->GetWordStr();
+						std::string S = std::string("SUBJ\t=\t") + (const char*)piSubjWord->GetWordStr();
 						Groups.insert(S);
 					};
 
 					if (V->Predicate != -1)
 					{
-						int  WordNo  = V->Unit[V->Predicate]->WordNum;
+						int  WordNo = V->Unit[V->Predicate]->WordNum;
 						IWordPtr piPredWord = piSentence->Word[WordNo];
-						std::string S = std::string("PREDICATE\t=\t")+  (const char*)piPredWord->GetWordStr();
-						for (size_t i=0; i< piPredWord->MainVerbsCount; i++)
+						std::string S = std::string("PREDICATE\t=\t") + (const char*)piPredWord->GetWordStr();
+						for (size_t i = 0; i < piPredWord->MainVerbsCount; i++)
 						{
-							S+= std::string("-") + (const char*)piSentence->Word[piPredWord->MainVerbs[i]]->GetWordStr();
+							S += std::string("-") + (const char*)piSentence->Word[piPredWord->MainVerbs[i]]->GetWordStr();
 						};
 
 						Groups.insert(S);
@@ -732,7 +727,7 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 					for (int WordNo = piClause->FirstWord; WordNo <= piClause->LastWord; WordNo++)
 					{
 						IWordPtr piWord = piSentence->Word[WordNo];
-						if (piWord->bDeleted == FALSE) 
+						if (piWord->bDeleted == FALSE)
 						{
 							S += (const char*)piWord->GetWordStr();
 							S += " ";
@@ -741,18 +736,18 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 					Groups.insert(S);
 
 					// распечатываем все группы 
-					
+
 
 					for (int GroupNo = 0; GroupNo < V->GroupsCount; GroupNo++)
 					{
-						SYNANLib::IGroupPtr G  = V->Group[GroupNo];
-						
+						SYNANLib::IGroupPtr G = V->Group[GroupNo];
+
 						S = (const char*)G->TypeStr;
 						S += "\t=\t";
 						for (int WordNo = G->FirstWord; WordNo <= G->LastWord; WordNo++)
 						{
 							IWordPtr piWord = piSentence->Word[WordNo];
-							if (piWord->bDeleted == FALSE) 
+							if (piWord->bDeleted == FALSE)
 							{
 								S += (const char*)piWord->GetWordStr();
 								S += " ";
@@ -760,12 +755,12 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 						};
 						Groups.insert(S);
 					};
-					
+
 				};
 
 			};
-		} 
-		catch(...)
+		}
+		catch (...)
 		{
 			return "an exception occured";
 		}
@@ -782,15 +777,15 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 };
 
 
-std::string GetStringBySentenceBreaker (GRAPHANLib::IGraphmatFilePtr piGraphan)
+std::string GetStringBySentenceBreaker(GRAPHANLib::IGraphmatFilePtr piGraphan)
 {
 	int CountOfSentences = 1;
 	std::string Result, Line;
 
-	for (int i=1; i<piGraphan->GetLineCount(); i++)
+	for (int i = 1; i < piGraphan->GetLineCount(); i++)
 	{
-		if (			!piGraphan->HasDescr(i, GRAPHANLib::OEOLN)
-				&&		!piGraphan->HasDescr(i, GRAPHANLib::OSpc)
+		if (!piGraphan->HasDescr(i, GRAPHANLib::OEOLN)
+			&& !piGraphan->HasDescr(i, GRAPHANLib::OSpc)
 			)
 		{
 			Line += (const char*)piGraphan->GetWord(i);
@@ -798,55 +793,48 @@ std::string GetStringBySentenceBreaker (GRAPHANLib::IGraphmatFilePtr piGraphan)
 		};
 		if (piGraphan->HasDescr(i, GRAPHANLib::OSentEnd))
 		{
-			Result += Format("Sent%i\t=\t",CountOfSentences++);
+			Result += Format("Sent%i\t=\t", CountOfSentences++);
 			Result += Line;
 			Result += "\x1";
 			Line = "";
-			
-			
+
+
 		};
 	};
 	return Result;
 };
 
-std::string  MakeSyntaxCheck (CCOMSyntaxHolder& SyntaxHolder, std::string Input)
+std::string  MakeSyntaxCheck(CCOMSyntaxHolder& SyntaxHolder, std::string Input)
 {
 	SyntaxHolder.GetSentencesFromSynAn(Input.c_str(), FALSE, FALSE, FALSE);
 	return GetStringBySyntax(SyntaxHolder.m_CurrentLanguage, SyntaxHolder.m_piSentCollection, SyntaxHolder.m_pGramTab);
 }
 
-std::string  MakePostMorphCheck (CCOMSyntaxHolder& SyntaxHolder, std::string Input)
+std::string  MakePostMorphCheck(CCOMSyntaxHolder& SyntaxHolder, std::string Input)
 {
-    SyntaxHolder.m_piMAPost->bHumanFriendlyOutput = TRUE; 
-    SyntaxHolder.BuildBeforeSyntax(Input.c_str(), FALSE, FALSE, FALSE);
-    SyntaxHolder.m_piMAPost->bHumanFriendlyOutput = FALSE;
-    std::string Result;
-    for (size_t i=0; i < SyntaxHolder.m_piBeforeSyntaxPlmLines->Count; i++)
-    {
-        Result += (const char*)SyntaxHolder.m_piBeforeSyntaxPlmLines->Item[i];
-        Result += "\x1";
-    }
+	SyntaxHolder.m_piMAPost->bHumanFriendlyOutput = TRUE;
+	SyntaxHolder.BuildBeforeSyntax(Input.c_str(), FALSE, FALSE, FALSE);
+	SyntaxHolder.m_piMAPost->bHumanFriendlyOutput = FALSE;
+	std::string Result;
+	for (size_t i = 0; i < SyntaxHolder.m_piBeforeSyntaxPlmLines->Count; i++)
+	{
+		Result += (const char*)SyntaxHolder.m_piBeforeSyntaxPlmLines->Item[i];
+		Result += "\x1";
+	}
 	return Result;
-}
-
-std::string  MakeMorphCorpusCheck (CCOMSyntaxHolder& SyntaxHolder, std::string Input)
-{
-	CMorphCorpusCreator C;
-	SyntaxHolder.GetSentencesFromSynAn(Input.c_str(), FALSE, FALSE, FALSE);
-	return  C.get_xml_result(SyntaxHolder);
 }
 
 
 static UINT MakeProc(LPVOID pArg)
 {
-	CCheckerDlg *pDlg = (CCheckerDlg *)pArg;
+	CCheckerDlg* pDlg = (CCheckerDlg*)pArg;
 
 	CoInitialize(NULL);
 
-	
+
 
 	vector<string> SynCollocCheckResults;
-	if ( ExternalExeFileCheck == pDlg->m_CheckerType)
+	if (ExternalExeFileCheck == pDlg->m_CheckerType)
 	{
 		if (!pDlg->PerformExternalExeFileCheck(SynCollocCheckResults))
 		{
@@ -855,159 +843,152 @@ static UINT MakeProc(LPVOID pArg)
 			return 1;
 		};
 		// ignore  user choice if ExternalExeFileCheck
-		pDlg->m_from  = 1;
-		pDlg->m_numb  = 99999;
+		pDlg->m_from = 1;
+		pDlg->m_numb = 99999;
 	};
 
 
-	for( int i=0; i<pDlg->m_from-1; i++ )
+	for (int i = 0; i < pDlg->m_from - 1; i++)
 		pDlg->m_tran.push_back("");
 
 	int size = pDlg->GetNumberOfExamplesToCheck();
-	
-	for( int i=0; i<size; i++ )
+
+	for (int i = 0; i < size; i++)
 	{
 		std::string Result;
-		int SentenceNo = i+pDlg->m_from-1;
-        if (SentenceNo >= pDlg->m_CheckExamples.size())
-        {
-            AfxMessageBox("Sentence ID is out of bounds!");
-            continue;
-        }
-		try 
+		int SentenceNo = i + pDlg->m_from - 1;
+		if (SentenceNo >= pDlg->m_CheckExamples.size())
 		{
-			if( theTpb->IsBreak() )
+			AfxMessageBox("Sentence ID is out of bounds!");
+			continue;
+		}
+		try
+		{
+			if (theTpb->IsBreak())
 			{
-				
+
 				CoUninitialize();
 				theTpb->EndExit();
-				return( 0 );
+				return(0);
 			}
-			
+
 			char hdr[128];
-			sprintf(hdr," Processing sentence %i of %i",i+1,size);
+			sprintf(hdr, " Processing sentence %i of %i", i + 1, size);
 			theTpb->SetHead(hdr);
-			theTpb->Percent(i*100/size);
-	//
+			theTpb->Percent(i * 100 / size);
+			//
 			;
 			switch (pDlg->m_CheckerType) {
-                
+
 			case  PostMorphCheck:
-						{
-							Result  = MakePostMorphCheck
-								(
-									(pDlg->m_Language == morphGerman)?pDlg->m_GerSyntaxHolder:pDlg->m_RusSyntaxHolder,
-									pDlg->m_CheckExamples[SentenceNo].m_Text
-								);
-							break;
-						}
+			{
+				Result = MakePostMorphCheck
+				(
+					(pDlg->m_Language == morphGerman) ? pDlg->m_GerSyntaxHolder : pDlg->m_RusSyntaxHolder,
+					pDlg->m_CheckExamples[SentenceNo].m_Text
+				);
+				break;
+			}
 			case  SyntaxCheck:
-						{
-							Result  = MakeSyntaxCheck
-								(
-									(pDlg->m_Language == morphGerman)?pDlg->m_GerSyntaxHolder:pDlg->m_RusSyntaxHolder,
-									pDlg->m_CheckExamples[SentenceNo].m_Text
-								);
-							break;
-						}
+			{
+				Result = MakeSyntaxCheck
+				(
+					(pDlg->m_Language == morphGerman) ? pDlg->m_GerSyntaxHolder : pDlg->m_RusSyntaxHolder,
+					pDlg->m_CheckExamples[SentenceNo].m_Text
+				);
+				break;
+			}
 			case  ExternalExeFileCheck:
-						{
-							Result = SynCollocCheckResults[i];
-							break;
-						}
-			case  MorphCorpusCheck:
-						{
-							Result = MakeMorphCorpusCheck
-								(
-									(pDlg->m_Language == morphGerman)?pDlg->m_GerSyntaxHolder:pDlg->m_RusSyntaxHolder,
-									pDlg->m_CheckExamples[SentenceNo].m_Text
-								);
-
-							for (size_t i=0; i  <  Result.length(); i++)
-								if (Result[i] == '\n')
-									Result[i] = '\x1';
-
-							break;
-						}
+			{
+				Result = SynCollocCheckResults[i];
+				break;
+			}
 			case  PredictionCheck:
-						{
-							IParadigmCollectionPtr P;
-							std::string WordForm  = pDlg->m_CheckExamples[SentenceNo].m_Text;
-							Trim(WordForm);
-							if (pDlg->m_Language == morphGerman)
-							{
-								P = pDlg->m_GerSyntaxHolder.m_piLemmatizer->CreateParadigmCollectionFromForm(WordForm.c_str(), TRUE, TRUE);
-								Result  = GetStringByMorph(morphGerman, P, pDlg->m_GerSyntaxHolder.m_pGramTab);
-							}
-							else
-							{
-								P = pDlg->m_RusSyntaxHolder.m_piLemmatizer->CreateParadigmCollectionFromForm(WordForm.c_str(), TRUE, TRUE);
-								Result  = GetStringByMorph(morphRussian, P, pDlg->m_RusSyntaxHolder.m_pGramTab);
-							};
-							break;
-						}
+			{
+				IParadigmCollectionPtr P;
+				std::string WordForm = pDlg->m_CheckExamples[SentenceNo].m_Text;
+				Trim(WordForm);
+				if (pDlg->m_Language == morphGerman)
+				{
+					P = pDlg->m_GerSyntaxHolder.m_piLemmatizer->CreateParadigmCollectionFromForm(WordForm.c_str(), TRUE, TRUE);
+					Result = GetStringByMorph(morphGerman, P, pDlg->m_GerSyntaxHolder.m_pGramTab);
+				}
+				else
+				{
+					P = pDlg->m_RusSyntaxHolder.m_piLemmatizer->CreateParadigmCollectionFromForm(WordForm.c_str(), TRUE, TRUE);
+					Result = GetStringByMorph(morphRussian, P, pDlg->m_RusSyntaxHolder.m_pGramTab);
+				};
+				break;
+			}
 			case  SentenceBreakerCheck:
-						{
-							GRAPHANLib::IGraphmatFilePtr piGraphan;
-							if (pDlg->m_Language != morphGerman)
-								piGraphan = pDlg->m_RusSyntaxHolder.m_piGraphan;
-							else
-								piGraphan = pDlg->m_GerSyntaxHolder.m_piGraphan;
-							piGraphan->LoadStringToGraphan(pDlg->m_CheckExamples[SentenceNo].m_Text.c_str());
-							Result  = GetStringBySentenceBreaker(piGraphan);
-							break;
-						}
+			{
+				GRAPHANLib::IGraphmatFilePtr piGraphan;
+				if (pDlg->m_Language != morphGerman)
+					piGraphan = pDlg->m_RusSyntaxHolder.m_piGraphan;
+				else
+					piGraphan = pDlg->m_GerSyntaxHolder.m_piGraphan;
+				piGraphan->LoadStringToGraphan(pDlg->m_CheckExamples[SentenceNo].m_Text.c_str());
+				Result = GetStringBySentenceBreaker(piGraphan);
+				break;
+			}
 			case TranslatorCheck:
-						{
-							std::string SemGraph = (const char*)pDlg->piSeman->FindSituations(
-								pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),0, _R("общ"), 20000,-1,"");
-							std::string SynGraph = (const char*)pDlg->piSeman->TranslateToEnglish();
-							Result  = (const char*)pDlg->piSeman->BuildSentence();
-							break;
-						};
+			{
+				std::string SemGraph = (const char*)pDlg->piSeman->FindSituations(
+					pDlg->m_CheckExamples[SentenceNo].m_Text.c_str(),
+					0,
+					_R("общ").c_str(),
+					20000, -1, "");
+				std::string SynGraph = (const char*)pDlg->piSeman->TranslateToEnglish();
+				Result = (const char*)pDlg->piSeman->BuildSentence();
+				break;
+			};
 			case RusSynthesisCheck:
-						{
-							std::string SourceText = pDlg->m_CheckExamples[SentenceNo].m_Text;
-							std::string LemmasToReplace;
-							{
-								int index = SourceText.find("##");
-								if (index != std::string::npos)
-								{
-									LemmasToReplace = SourceText.substr(index+2);
-									SourceText.erase(index);
-								}
-							}
-							std::string Question;
-							{
-								int index = SourceText.find("#mem");
-								if (index != std::string::npos)
-								{
-									Question = SourceText.substr(index+4);
-									SourceText.erase(index);
-								};
+			{
+				std::string SourceText = pDlg->m_CheckExamples[SentenceNo].m_Text;
+				std::string LemmasToReplace;
+				{
+					int index = SourceText.find("##");
+					if (index != std::string::npos)
+					{
+						LemmasToReplace = SourceText.substr(index + 2);
+						SourceText.erase(index);
+					}
+				}
+				std::string Question;
+				{
+					int index = SourceText.find("#mem");
+					if (index != std::string::npos)
+					{
+						Question = SourceText.substr(index + 4);
+						SourceText.erase(index);
+					};
 
-							}
+				}
 
-							
-							Result = (const char*)pDlg->piSeman->FindSituations(SourceText.c_str(),0,_R("общ"),20000,-1,"");
-							pDlg->piSeman->SetLemmasToReplace(LemmasToReplace.c_str());
-							if (!Question.empty())
-							{
-								pDlg->piSeman->SaveThisSentence();
-								pDlg->piSeman->FindSituations(Question.c_str(),0, _R("общ"),20000,-1,"");
-								Result  = pDlg->piSeman->Answer();
-							}
-							else
-								Result  = (const char*)pDlg->piSeman->SyntRusSentence();
-							break;
-						};
+
+				Result = (const char*)pDlg->piSeman->FindSituations(
+					SourceText.c_str(), 0,
+					_R("общ").c_str(), 20000, -1, "");
+				pDlg->piSeman->SetLemmasToReplace(LemmasToReplace.c_str());
+				if (!Question.empty())
+				{
+					pDlg->piSeman->SaveThisSentence();
+					pDlg->piSeman->FindSituations(
+						Question.c_str(), 0,
+						_R("общ").c_str(), 20000, -1, "");
+					Result = pDlg->piSeman->Answer();
+				}
+				else
+					Result = (const char*)pDlg->piSeman->SyntRusSentence();
+				break;
+			};
 			};
 		}
 		catch (...)
 		{
 			CString S;
-			S.Format("Cannot process the sentence N %i", SentenceNo+1);
-			AfxMessageBox (S);
+			S.Format("Cannot process the sentence N %i", SentenceNo + 1);
+			AfxMessageBox(S);
 			theTpb->EndExit();
 			return 0;
 		};
@@ -1015,34 +996,34 @@ static UINT MakeProc(LPVOID pArg)
 
 
 		pDlg->m_tran.push_back(Result);
-	
+
 		CBase b;
-		b.num = SentenceNo+1;
+		b.num = SentenceNo + 1;
 		b.txt = Result;
-		if( !binary_search(pDlg->m_base.begin(),pDlg->m_base.end(),b) && pDlg->m_base.size() > 0 )
+		if (!binary_search(pDlg->m_base.begin(), pDlg->m_base.end(), b) && pDlg->m_base.size() > 0)
 		{
-			bool bDebug = binary_search(pDlg->m_base.begin(),pDlg->m_base.end(),b);
+			bool bDebug = binary_search(pDlg->m_base.begin(), pDlg->m_base.end(), b);
 			// ignoring homonims order for PostMorphCheck
 			int k = 0;
-			for	(; pDlg->m_base[SentenceNo+k].num != b.num; k++);
-			std::string s = pDlg->m_base[SentenceNo+k].txt;
-			if ( pDlg->m_CheckerType == PostMorphCheck && s.length() ==  Result.length())
+			for (; pDlg->m_base[SentenceNo + k].num != b.num; k++);
+			std::string s = pDlg->m_base[SentenceNo + k].txt;
+			if (pDlg->m_CheckerType == PostMorphCheck && s.length() == Result.length())
 			{
-				
+
 				int startw = 0, starth = 0, endh = 0, endw = 0;
-				for	(int i = 0; i<Result.length() - 1; i++)
+				for (int i = 0; i < Result.length() - 1; i++)
 				{
 					if (Result[i] == 1)
-						if (Result[i+1] != 0x20)
-							if (s[i+1] != Result[i+1]) goto push;
+						if (Result[i + 1] != 0x20)
+							if (s[i + 1] != Result[i + 1]) goto push;
 							else
-								startw = starth = i+1;
-						else if (Result[i+2] == 0x20) i = starth = i+3;
-					if (Result[i]!=s[i])
+								startw = starth = i + 1;
+						else if (Result[i + 2] == 0x20) i = starth = i + 3;
+					if (Result[i] != s[i])
 					{
 						for (endh = i; Result[endh] != 1; endh++);
-						for (endw = endh; endw < (s.length() - 1) && !(s[endw] == 1 && s[endw+1] != 0x20); endw++);
-						if (s.substr(startw, endw - startw).find(Result.substr(starth, endh - starth)) == -1) 
+						for (endw = endh; endw < (s.length() - 1) && !(s[endw] == 1 && s[endw + 1] != 0x20); endw++);
+						if (s.substr(startw, endw - startw).find(Result.substr(starth, endh - starth)) == -1)
 							goto push;
 						else i = max(i, endh - 1);
 					}
@@ -1050,28 +1031,28 @@ static UINT MakeProc(LPVOID pArg)
 				pDlg->m_base[SentenceNo].txt = Result;
 				continue;
 			}
-push:
-			pDlg->m_nbad.push_back(i+pDlg->m_from-1);
+		push:
+			pDlg->m_nbad.push_back(i + pDlg->m_from - 1);
 		}
-		
+
 
 	}
 
 
 	CoUninitialize();
 	theTpb->EndDone();
-	return( 1 );
+	return(1);
 }
 
-int CCheckerDlg::GetNumberOfExamplesToCheck() const 
+int CCheckerDlg::GetNumberOfExamplesToCheck() const
 {
-	return  min(m_CheckExamples.size()-m_from+1,m_numb);
+	return  min(m_CheckExamples.size() - m_from + 1, m_numb);
 };
 
 std::string change_x1_to_cr(std::string s)
 {
 	std::string b;
-	for (size_t i=0; i < s.length(); i++)
+	for (size_t i = 0; i < s.length(); i++)
 		if (s[i] == 1)
 			b += "\r\n";
 		else
@@ -1082,8 +1063,8 @@ std::string change_x1_to_cr(std::string s)
 bool CCheckerDlg::PerformExternalExeFileCheck(vector<string>& Result)
 {
 	vector<string> InputFiles;
-	InputFiles.push_back( (const char*)GetCurrFileName() );
-    
+	InputFiles.push_back((const char*)GetCurrFileName());
+
 	m_CheckExamples.clear();
 	Result.clear();
 
@@ -1091,56 +1072,55 @@ bool CCheckerDlg::PerformExternalExeFileCheck(vector<string>& Result)
 	{
 		struct _finddata_t c_file;
 		long hFile;
-		if( (hFile = _findfirst( m_ExternalCatalog.c_str(), &c_file )) == -1L )
+		if ((hFile = _findfirst(m_ExternalCatalog.c_str(), &c_file)) == -1L)
 		{
-			ErrorMessage(Format("No input file  in %s", m_ExternalCatalog.c_str()) );
+			ErrorMessage(Format("No input file  in %s", m_ExternalCatalog.c_str()));
 			return false;
 		};
 		InputFiles.clear();
-		do 
+		do
 		{
-			InputFiles.push_back( GetPathByFile(m_ExternalCatalog) + c_file.name );
-		}
-		while (!m_ExternalCatalog.empty() && _findnext( hFile, &c_file ) == 0);
-		sort (InputFiles.begin(), InputFiles.end());
+			InputFiles.push_back(GetPathByFile(m_ExternalCatalog) + c_file.name);
+		} while (!m_ExternalCatalog.empty() && _findnext(hFile, &c_file) == 0);
+		sort(InputFiles.begin(), InputFiles.end());
 	};
 
 
-	for(int FileNo=0; FileNo < InputFiles.size();FileNo++)
+	for (int FileNo = 0; FileNo < InputFiles.size(); FileNo++)
 	{
 		std::string InputFile = InputFiles[FileNo];
 
 		std::string CommandLine = Format(m_CommandLine.c_str(), InputFile.c_str());
-		system (CommandLine.c_str());
-		FILE * fp = fopen(m_ExternalOutFile.c_str(), "r");
+		system(CommandLine.c_str());
+		FILE* fp = fopen(m_ExternalOutFile.c_str(), "r");
 		if (!fp)
 		{
-			ErrorMessage(Format("Cannot open output file %s", m_ExternalOutFile.c_str()) );
+			ErrorMessage(Format("Cannot open output file %s", m_ExternalOutFile.c_str()));
 			return false;
 		};
 		char buffer[10000];
 		bool bFirstResultIsFound = false;
 		bool bFirstLineIsFound = false;
 
-		while (fgets(buffer,10000, fp))
+		while (fgets(buffer, 10000, fp))
 		{
 			rtrim(buffer);
 			if (buffer[0] != '\t')
 			{
 				CSourceExample E;
 				E.m_Text = change_x1_to_cr(buffer);
-				if (m_ExternalCatalog.empty() || m_CheckExamples.empty() || !bFirstLineIsFound) 
+				if (m_ExternalCatalog.empty() || m_CheckExamples.empty() || !bFirstLineIsFound)
 				{
 					m_CheckExamples.push_back(E);
 					Result.push_back("");
 					bFirstLineIsFound = true;
 				}
 				else
-				if (!bFirstResultIsFound)
-				{
+					if (!bFirstResultIsFound)
+					{
 
-					m_CheckExamples.back().m_Text += std::string(" ") + change_x1_to_cr(buffer);
-				}
+						m_CheckExamples.back().m_Text += std::string(" ") + change_x1_to_cr(buffer);
+					}
 			}
 			else
 			{
@@ -1148,12 +1128,12 @@ bool CCheckerDlg::PerformExternalExeFileCheck(vector<string>& Result)
 				bFirstResultIsFound = true;
 			}
 		};
-		fclose (fp);
+		fclose(fp);
 	}
-	
 
-		
-	
+
+
+
 	return true;
 };
 
@@ -1161,11 +1141,11 @@ bool CCheckerDlg::PerformExternalExeFileCheck(vector<string>& Result)
 
 /////////////////////////////////////////////////////////////////////////////
 
-BOOL CCheckerDlg::Operate() 
+BOOL CCheckerDlg::Operate()
 {
 	CTime C_begin = CTime::GetCurrentTime();
 
-	theTpb = new CThrPB(this,MakeProc,this);
+	theTpb = new CThrPB(this, MakeProc, this);
 	BOOL bRet = theTpb->DoModal();
 
 	if (bRet)
@@ -1174,11 +1154,11 @@ BOOL CCheckerDlg::Operate()
 			CString S;
 			CTime C_end = CTime::GetCurrentTime();
 			CTimeSpan t = C_end - C_begin;
-			S.Format ("Elapsed time:\n %s\n Total time = %s", 
+			S.Format("Elapsed time:\n %s\n Total time = %s",
 				(const char*)piSeman->ModuleTimeStatistics,
-				t.Format ("%M minutes %S seconds"));
-			
-			AfxMessageBox (S);
+				t.Format("%M minutes %S seconds"));
+
+			AfxMessageBox(S);
 		};
 
 	delete theTpb;
@@ -1191,9 +1171,9 @@ BOOL CCheckerDlg::Operate()
 
 void CCheckerDlg::Proceed()
 {
-	if( m_nbad.size()==0 )
+	if (m_nbad.size() == 0)
 	{
-		AfxMessageBox("No differences!",MB_ICONINFORMATION|MB_OK);
+		AfxMessageBox("No differences!", MB_ICONINFORMATION | MB_OK);
 		return;
 	}
 
@@ -1206,8 +1186,8 @@ void CCheckerDlg::Proceed()
 
 void CCheckerDlg::OnBnClickedDeleteBase()
 {
-	if( AfxMessageBox(IDS_PROMPT_DELETE_BASE,MB_ICONQUESTION|MB_YESNO)!=IDYES )
+	if (AfxMessageBox(IDS_PROMPT_DELETE_BASE, MB_ICONQUESTION | MB_YESNO) != IDYES)
 		return;
 	remove(GetBaseFileName().c_str());
-	
+
 }

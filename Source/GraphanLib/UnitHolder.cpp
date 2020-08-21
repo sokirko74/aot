@@ -342,7 +342,14 @@ void	CUnitHolder::InitTokenBuffer()
 
 bool	CUnitHolder::InitInputBuffer(const std::string& utfString)
 {
-	std::string inputText = convert_from_utf8(utfString.c_str(), m_Language);
+	std::string s = utfString;
+	// convert one non-printable to another
+	for (size_t i = 0; i < s.size(); ++i) {
+		if (s[i] == 0) {
+			s[i] = 1;
+		}
+	}
+	std::string inputText = convert_from_utf8(s.c_str(), m_Language);
 	m_InputBuffer.clear();
 	// copy with terminated null 
 	size_t len = inputText.length() + 1;

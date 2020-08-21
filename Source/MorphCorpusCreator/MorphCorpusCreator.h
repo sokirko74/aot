@@ -10,7 +10,7 @@
 #endif // _MSC_VER > 1000
 
 #include "assert.h"
-#include "../common/COMSyntaxHolder.h"
+#include "../common/COM/COMSyntaxHolder.h"
 
 class CMorphCorpusCreator 
 {

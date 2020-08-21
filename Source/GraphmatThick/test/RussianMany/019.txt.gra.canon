@@ -1,0 +1,6 @@
+                                0 0 BEG DOC
+ctrl                            0 4 LLE aa KEY1
+-                               4 1 PUN HYP
+alt                             5 3 LLE aa
+-                               8 1 PUN HYP
+del                             9 3 LLE aa CS? SENT_END KEY2

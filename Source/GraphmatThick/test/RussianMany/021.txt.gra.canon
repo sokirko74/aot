@@ -1,0 +1,5 @@
+                                0 0 BEG DOC
+control                         0 7 LLE aa KEY1
+-                               7 1 PUN HYP
+Num                             8 3 LLE Aa NAM?
+Lock                            12 4 LLE Aa NAM? CS? SENT_END KEY2

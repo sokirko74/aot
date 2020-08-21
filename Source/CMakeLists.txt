@@ -99,6 +99,7 @@ if (BUILD_COM)
     find_package(IDL REQUIRED)
 endif()
 
+
 IF (MSVC)
     macro(CopyAndRegsvr Project)
         add_custom_command(
@@ -118,7 +119,6 @@ IF (MSVC)
             COMMAND ${CMAKE_COMMAND} -E copy_if_different ${OutDir}${Project}.exe ${CMAKE_SOURCE_DIR}/Bin
             VERBATIM
         )
-
     endmacro()
 
     if (BUILD_COM)
@@ -136,6 +136,7 @@ IF (MSVC)
         if(BUILD_WINDOWS_GUI)
             add_subdirectory (VisualSynan)
             add_subdirectory (Demo)
+            add_subdirectory (Checker)
         endif()
     endif()
 

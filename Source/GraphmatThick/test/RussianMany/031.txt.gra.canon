@@ -1,0 +1,6 @@
+                                0 0 BEG DOC
+Пашков                          0 6 RLE Aa NAM? FAM1
+А                               7 1 RLE AA EXPR1 EXPR2 EXPR_NO3
+.                               8 1 PUN
+В                               9 1 RLE AA EXPR1 EXPR2 EXPR_NO17
+.                               10 1 PUN CS? SENT_END FAM2

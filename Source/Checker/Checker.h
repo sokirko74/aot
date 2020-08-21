@@ -14,10 +14,10 @@
 
 #include "resource.h"		// main symbols
 
-#import "../../bin/lemmatizer.tlb"
+#import "../Lemmatizer/lemmatizer.tlb"
 using namespace LEMMATIZERLib;
 
-#import "../../bin/agramtab.tlb"
+#import "../agramtab/agramtab.tlb"
 using namespace AGRAMTABLib;
 
 /////////////////////////////////////////////////////////////////////////////

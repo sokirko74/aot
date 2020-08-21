@@ -12,7 +12,7 @@
 
 #pragma warning(disable: 4786)
 #include "../common/utilit.h"
-#include "../common/COMSyntaxHolder.h"
+#include "../common/COM/COMSyntaxHolder.h"
 #include "afxwin.h"
 #include "list"
 
@@ -49,7 +49,9 @@ struct CSourceExample
 /////////////////////////////////////////////////////////////////////////////
 // CCheckerDlg dialog
 
-enum CheckerTypeEnum {SentenceBreakerCheck, SyntaxCheck, TranslatorCheck, RusSynthesisCheck, PredictionCheck, MorphCorpusCheck, ExternalExeFileCheck, PostMorphCheck}; 
+enum CheckerTypeEnum {SentenceBreakerCheck, SyntaxCheck, TranslatorCheck, 
+	RusSynthesisCheck, PredictionCheck, 
+	ExternalExeFileCheck, PostMorphCheck}; 
 class CCheckerDlg : public CDialog
 {
 // Construction

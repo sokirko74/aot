@@ -68,12 +68,9 @@ BOOL CCheckerApp::InitInstance()
 	SetRegistryKey("Gri");
 	//dlg.m_file = GetProfileString("","File","");
 //
-	dlg.DoModal();
+	auto result =  dlg.DoModal();
 
-// Registry I/O
-	//WriteProfileString("","File",dlg.m_file);
-
-	dlg.ExitCom();
+	dlg.ExitCom();;
 	return FALSE;
 }
 

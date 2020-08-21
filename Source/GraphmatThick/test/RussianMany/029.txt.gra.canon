@@ -1,0 +1,8 @@
+                                0 0 BEG DOC
+К                               0 1 RLE AA EXPR1 EXPR2 EXPR_NO243
+О                               2 1 RLE AA EXPR1 EXPR2 EXPR_NO332
+Н                               4 1 RLE AA
+Е                               6 1 RLE AA
+Ц                               8 1 RLE AA SENT_END
+                                9 11 DEL SPC
+¶                               20 2 DEL EOLN CS?
