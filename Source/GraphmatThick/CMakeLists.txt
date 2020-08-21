@@ -8,36 +8,26 @@ target_link_libraries(GraphmatThick
     GraphanLib
 )
 
-macro (GraphTest lang)
+macro (GraphTest lang filename)
+    get_filename_component(base_name ${filename} NAME)
     add_test(
-        NAME ${lang}Graphan 
-        COMMAND GraphmatThick --language ${lang} --input-file test/${lang}/text.txt --output-file test/${lang}/out.gra
+        NAME ${lang}_${base_name}_Graphan 
+        COMMAND GraphmatThick --language ${lang} --input-file ${filename} --output-file ${filename}.gra
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
     add_test(
-        NAME ${lang}GraphanCompare 
-        COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}/canon.gra test/${lang}/out.gra
+        NAME ${lang}_${base_name}_GraphanCompare 
+        COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.gra ${filename}.gra.canon
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
 endmacro(GraphTest)
 
-GraphTest (Russian)
-GraphTest (English)
-GraphTest (German)
+GraphTest (Russian test/Russian/text.txt)
+GraphTest (English test/English/text.txt)
+GraphTest (German test/German/text.txt)
+GraphTest (German test/German/sentbreaker.txt)
 
 file(GLOB grapan_tests ${PROJECT_SOURCE_DIR}/test/RussianMany/*.txt)
-
 foreach (input_file ${grapan_tests})
-    get_filename_component(test_name ${input_file} NAME)
-    message (${input_file})
-    add_test(
-        NAME ${test_name}Graphan 
-        COMMAND GraphmatThick --language Russian --input-file ${input_file} --output-file ${input_file}.gra
-        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
-    )
-    add_test(
-        NAME ${test_name}GraphanCompare 
-        COMMAND ${CMAKE_COMMAND} -E compare_files  ${input_file}.gra ${input_file}.gra.canon
-        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
-    )
+    GraphTest (Russian ${input_file})
 endforeach(loop_var)

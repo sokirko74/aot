@@ -1,0 +1,157 @@
+                                0 0 BEG DOC
+Ich                             0 3 LLE Aa NAM?
+gehe                            4 4 LLE aa SENT_END
+¶¶                              8 4 DEL EOLN CS?
+Ich                             12 3 LLE Aa NAM?
+gehe                            16 4 LLE aa SENT_END
+¶¶                              20 4 DEL EOLN CS?
+[                               24 1 PUN OPN
+Reuter                          25 6 LLE Aa NAM?
+]                               31 1 PUN CLS
+We                              33 2 LLE Aa NAM?
+were                            36 4 LLE aa
+informed                        41 8 LLE aa
+...                             49 3 PUN PLP SENT_END
+¶                               52 2 DEL EOLN
+Du                              54 2 LLE Aa NAM?
+gehst                           57 5 LLE aa
+!                               62 1 PUN SENT_END
+Gehe                            64 4 LLE Aa NAM?
+ich                             69 3 LLE aa
+?                               72 1 PUN SENT_END
+Wir                             74 3 LLE Aa NAM?
+gehen                           78 5 LLE aa
+...                             83 3 PUN PLP SENT_END
+                                86 2 DEL SPC
+Ich                             88 3 LLE Aa NAM?
+gehe                            92 4 LLE aa
+.                               96 1 PUN SENT_END
+¶                               97 2 DEL EOLN
+Du                              99 2 LLE Aa NAM?
+(                               102 1 PUN OPN
+gehst                           103 5 LLE aa
+!                               108 1 PUN
+)                               109 1 PUN CLS SENT_END
+Gehe                            111 4 LLE Aa NAM?
+ich                             116 3 LLE aa
+.                               119 1 PUN SENT_END
+¶                               120 2 DEL EOLN
+Du                              122 2 LLE Aa NAM?
+(                               125 1 PUN OPN
+gehst                           126 5 LLE aa
+!                               131 1 PUN
+)                               132 1 PUN CLS
+ins                             134 3 LLE aa EXPR1 EXPR2 EXPR_NO71
+Haus                            138 4 LLE Aa NAM?
+.                               142 1 PUN CS? SENT_END
+¶¶                              143 4 DEL EOLN
+Ich                             147 3 LLE Aa NAM?
+gehe                            151 4 LLE aa
+.                               155 1 PUN SENT_END
+"                               157 1 PUN
+Du                              158 2 LLE Aa NAM?
+gehst                           161 5 LLE aa
+.                               166 1 PUN
+"                               167 1 PUN CS? SENT_END
+¶¶                              168 4 DEL EOLN
+Ich                             172 3 LLE Aa NAM?
+gehe                            176 4 LLE aa
+.                               180 1 PUN
+"                               182 1 PUN SENT_END
+Du                              183 2 LLE Aa NAM?
+gehst                           186 5 LLE aa
+.                               191 1 PUN
+"                               192 1 PUN SENT_END
+                                193 2 DEL SPC
+Ich                             195 3 LLE Aa NAM?
+gehe                            199 4 LLE aa
+.                               203 1 PUN SENT_END
+¶                               204 2 DEL EOLN
+Ich                             206 3 LLE Aa NAM?
+gehe                            210 4 LLE aa
+.                               214 1 PUN SENT_END
+"                               216 1 PUN
+Du                              217 2 LLE Aa NAM?
+gehst                           220 5 LLE aa
+"                               225 1 PUN
+.                               226 1 PUN SENT_END
+                                227 2 DEL SPC
+Ich                             229 3 LLE Aa NAM?
+gehe                            233 4 LLE aa
+.                               237 1 PUN SENT_END
+¶                               239 2 DEL EOLN
+Ich                             241 3 LLE Aa NAM?
+gehe                            245 4 LLE aa
+.                               249 1 PUN SENT_END
+Du                              251 2 LLE Aa NAM?
+"                               254 1 PUN
+gehst                           255 5 LLE aa
+.                               260 1 PUN
+"                               261 1 PUN SENT_END
+                                262 2 DEL SPC
+Ich                             264 3 LLE Aa NAM?
+gehe                            268 4 LLE aa
+.                               272 1 PUN SENT_END
+¶                               273 2 DEL EOLN
+Ich                             275 3 LLE Aa NAM?
+gng                             279 3 LLE aa
+.                               282 1 PUN
+,                               283 1 PUN
+Peter                           285 5 LLE Aa NAM?
+macht                           291 5 LLE aa
+den                             297 3 LLE aa
+Korb                            301 4 LLE Aa NAM?
+.                               305 1 PUN
+¶                               306 2 DEL EOLN
+auf                             308 3 LLE aa EXPR1 EXPR2 EXPR_NO15
+den                             312 3 LLE aa
+8                               316 1 DC ABB1
+.                               317 1 PUN
+Mai                             319 3 LLE Aa NAM? ABB2
+.                               322 1 PUN SENT_END
+Das                             324 3 LLE Aa NAM?
+5                               328 1 DC
+.                               329 1 PUN
+                                330 2 DEL SPC
+Corps                           332 5 LLE Aa NAM?
+¶                               337 2 DEL EOLN
+Dr                              339 2 LLE Aa NAM? ABB1
+.                               341 1 PUN
+Geyken                          343 6 LLE Aa NAM? ABB2
+gruesst                         350 7 LLE aa
+Mr                              358 2 LLE Aa NAM? ABB1
+.                               360 1 PUN
+Bush                            362 4 LLE Aa NAM? ABB2
+.                               366 1 PUN
+¶                               367 2 DEL EOLN
+sf                              369 2 LLE aa FILE1
+.                               372 1 PUN
+html                            373 4 LLE aa FILE2
+¶                               377 2 DEL EOLN
+Am                              379 2 LLE Aa NAM? EXPR1 EXPR2 EXPR_NO5
+21                              382 2 DC ABB1
+.                               385 1 PUN
+Juni                            387 4 LLE Aa NAM? ABB2
+1931                            392 4 DC
+¶                               397 2 DEL EOLN
+Von                             399 3 LLE Aa NAM? EXPR1 EXPR2 EXPR_NO131
+Dr                              403 2 LLE Aa NAM? ABB1
+.                               406 1 PUN
+L                               408 1 LLE AA
+.                               410 1 PUN
+Fleck                           412 5 LLE Aa NAM? ABB2
+und                             418 3 LLE aa EXPR1 EXPR2 EXPR_NO121
+Dr                              422 2 LLE Aa NAM? ABB1
+.                               425 1 PUN
+J                               427 1 LLE AA
+.                               429 1 PUN
+Hescheles                       431 9 LLE Aa NAM? ABB2
+¶                               440 2 DEL EOLN
+"                               442 1 PUN
+Kennen                          443 6 LLE Aa NAM?
+                                449 2 DEL SPC
+jungen                          451 6 LLE aa
+!                               457 1 PUN
+"                               458 1 PUN SENT_END
+Das                             460 3 LLE Aa NAM?
+.                               463 1 PUN CS? SENT_END
