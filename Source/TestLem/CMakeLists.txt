@@ -8,39 +8,29 @@ target_link_libraries(TestLem
     LemmatizerLib
 )
 
-macro (TestLemLang lang)
+macro (TestLemLang lang filename optional_morphan_arg)
+    get_filename_component(base_name ${filename} NAME)
     add_test(
-        NAME ${lang}TestLem 
-        COMMAND TestLem --echo  --no-ids --forms --language ${lang} --input test/${lang}/test.txt --output test/${lang}/out.txt
+        NAME ${lang}_${base_name}_TestLem 
+        COMMAND TestLem --echo  ${optional_morphan_arg} --no-ids --forms --language ${lang} --input ${filename} --output ${filename}.morph
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
 
     add_test(
-        NAME ${lang}TestLemCompare 
-        COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}/canon.txt test/${lang}/out.txt
+        NAME ${lang}_${base_name}_TestLemCompare 
+        COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.morph ${filename}.morph.canon
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
 endmacro(TestLemLang)
 
-TestLemLang(Russian)
-TestLemLang(German)
-TestLemLang(English)
+TestLemLang(Russian test/Russian/test.txt "")
+TestLemLang(Russian test/Russian/morphan.txt --morphan)
+TestLemLang(Russian test/Russian/predict.txt "")
 
-macro (MorphanLang lang)
-    add_test(
-        NAME ${lang}Morphan 
-        COMMAND TestLem --echo  --forms --morphan --language ${lang} --input test/${lang}_morphan/test.txt --output test/${lang}_morphan/out.txt
-        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
-    )
+TestLemLang(German test/German/test.txt "")
+TestLemLang(German test/German/morphan.txt --morphan)
 
-    add_test(
-        NAME ${lang}MorphanCompare 
-        COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}_morphan/canon.txt test/${lang}_morphan/out.txt
-        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
-    )
-endmacro()
-MorphanLang(Russian)
-MorphanLang(German)
+TestLemLang(English test/English/test.txt "")
 
 if (BUILD_DICTS)
     add_dependencies (TestLem MorphDicts)

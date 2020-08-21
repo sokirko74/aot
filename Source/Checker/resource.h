@@ -44,7 +44,7 @@
 #define IDC_ADD_ALL                     1023
 #define IDC_TPB_PB                      1060
 #define IDC_TPB_ST                      1061
-
+#define IDC_STATIC_INPUT_TEXT           1062
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

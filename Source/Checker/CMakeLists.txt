@@ -33,3 +33,5 @@ CopyExe(${PROJECT_NAME})
 if (BUILD_DICTS)
     add_dependencies (${PROJECT_NAME} MorphDicts)
 endif()
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}" )

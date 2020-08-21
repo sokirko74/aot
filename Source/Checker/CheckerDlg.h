@@ -56,6 +56,7 @@ class CCheckerDlg : public CDialog
 {
 // Construction
 public:
+	CFont Font;
 	CheckerTypeEnum m_CheckerType;
 	CCheckerDlg(CWnd* pParent = NULL);	// standard constructor
 	~CCheckerDlg();

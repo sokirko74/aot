@@ -210,6 +210,16 @@ BOOL CCheckerDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
+	/*CWnd* w = GetDlgItem(IDC_STATIC_INPUT_TEXT);
+	CFont* currFont = w->GetFont();
+	LOGFONT lgFont;
+	currFont->GetLogFont(&lgFont);
+	strcpy(lgFont.lfFaceName, "Times New Roman");
+	lgFont.lfCharSet = RUSSIAN_CHARSET;
+	//lgFont.lfHeight = 120;
+	Font.CreateFontIndirectA(&lgFont);
+	w->SetFont(&Font);
+	*/
 // TODO: Add extra initialization here
 	return TRUE;
 }
@@ -280,12 +290,26 @@ void CCheckerDlg::OnOpenFile()
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+
+
 BOOL CCheckerDlg::InitCom()
 {
+	//HFONT hf;
+	//long lfHeight;
+
+	//CDC hdc = GetDC();
+	//lfHeight = -MulDiv(12, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+	//ReleaseDC( hdc);
+
+	//HFONT hFont = CreateFont(12, 0, 0, 0, 0, TRUE, 0, 0, RUSSIAN_CHARSET, 0, 0, 0, 0, "Times New Roman");
+	//this-SendMessage(WM_SETFONT, reinterpret_cast<WPARAM>(hFont), TRUE);
+	//this - SendMessage(WM_SETFONT, reinterpret_cast<WPARAM>(hFont), TRUE);
+
 	try
 	{
 		// инициализируем библиотеку COM
 		CoInitialize(NULL);
+
 		if (!m_bLoadCOM) return TRUE;
 		// создаем семантический анализ (ISemStructurePtr)
 		piSeman.CreateInstance(__uuidof(SEMANLib::SemStructure));
@@ -324,7 +348,16 @@ void CCheckerDlg::ExitCom()
 	CoUninitialize();
 }
 
-/////////////////////////////////////////////////////////////////////////////
+bool read_line(FILE* fp, std::string& line)
+{
+	char tmp[40000];
+	if (fgets(tmp, 40000, fp) == NULL) {
+		return false;
+	}
+	//line =  convert_from_utf8(tmp, morphRussian);
+	return true;
+}
+	/////////////////////////////////////////////////////////////////////////////
 
 BOOL CCheckerDlg::LoadData()
 {
@@ -338,11 +371,9 @@ BOOL CCheckerDlg::LoadData()
 	}
 
 
-	char tmp[8196];
-
-	while (fgets(tmp, 8196, fi) != NULL)
+	std::string s;
+	while (read_line(fi, s))
 	{
-		std::string s = tmp;
 		Trim(s);
 		if (s.empty())
 		{
@@ -384,10 +415,12 @@ BOOL CCheckerDlg::LoadData()
 	m_bResultsAreSmall = false;
 	if (fi)
 	{
-		char s[1024];
-		while (fgets(s, 1024, fi))
+		std::string s;
+		while (read_line(fi, s))
 		{
-			char* q = strtok(s, " \t\n\r");
+			char buffer[40000];
+			strcpy(buffer, s.c_str());
+			char* q = strtok(buffer, " \t\n\r");
 			if (q)
 			{
 				if (!stricmp("SyntaxCheck", q))
@@ -487,12 +520,11 @@ BOOL CCheckerDlg::LoadBase()
 			return TRUE;
 	}
 
-	char tmp[40000];
+	std::string line;
 	int LineNo = 0;
-	while (fgets(tmp, 40000, fb) != NULL)
+	while (read_line(fb, line))
 	{
 		LineNo++;
-		std::string line = tmp;
 		if (line.empty()) continue;
 		if (line[0] != '[')
 		{
