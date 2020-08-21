@@ -113,8 +113,9 @@ STDMETHODIMP CCOMUnit::get_Gramcodes(BSTR *pVal)
 	{
 		if( !m_pUnit )
 			return E_FAIL;
-
-		*pVal = _bstr_t(m_pUnit->GetGramCodes().c_str()).copy();
+		std::string s = m_pUnit->GetGramCodes();
+		s = convert_to_utf8(s, this->m_pClause->GetOpt()->m_Language);
+		*pVal = _bstr_t(s.c_str()).copy();
 
 	}
 	catch(...)
@@ -136,18 +137,19 @@ STDMETHODIMP CCOMUnit::get_GrammemsStr(BSTR *pVal)
 			return E_FAIL;
 
 
-		std::string GrammemsStr = m_pUnit->GetGrammemsByAncodes();
+		std::string s = m_pUnit->GetGrammemsByAncodes();
+		s = convert_to_utf8(s, this->m_pClause->GetOpt()->m_Language);
 
 		if (m_pUnit->m_Type == EWord)
 		{
 			const CSynHomonym& H = m_pClause->GetWords()[m_pUnit->m_SentPeriod.m_iFirstWord].m_Homonyms[m_pUnit->m_iHomonymNum];
 			if (H.m_bPassive)
-				GrammemsStr = "PASSIVE " +GrammemsStr;
+				s = "PASSIVE " + s;
 			if (m_pUnit->m_bReflexive)
-				GrammemsStr = "REFLEXIVE " +GrammemsStr;
+				s = "REFLEXIVE " + s;
 		};
 
-		*pVal = _bstr_t(GrammemsStr.c_str()).copy();
+		*pVal = _bstr_t(s.c_str()).copy();
 
 	}
 	catch(...)
@@ -211,7 +213,10 @@ STDMETHODIMP CCOMUnit::get_SimplePrepStr(long ii,BSTR *pVal)
 		if( !m_pClause->GetOpt() )
 			return E_FAIL;
 
-		*pVal = _bstr_t(m_pClause->GetOpt()->GetOborDic()->m_Entries[m_pUnit->m_SimplePrepNos[ii]].m_OborotEntryStr.c_str()).copy();
+		std::string s = m_pClause->GetOpt()->GetOborDic()->m_Entries[m_pUnit->m_SimplePrepNos[ii]].m_OborotEntryStr;
+		s = convert_to_utf8(s, this->m_pClause->GetOpt()->m_Language);
+
+		*pVal = _bstr_t(s.c_str()).copy();
 
 	}
 	catch(...)
