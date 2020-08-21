@@ -1,8 +1,5 @@
 #pragma once
 
-//#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
-//#define _WIN32_WINNT 0x0500
-
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
 #include <afxdisp.h>        // MFC Automation classes
@@ -13,9 +10,11 @@
 
 
 #import "../SynAn/SynAn.tlb"
-
+#import "../Lemmatizer/Lemmatizer.tlb"
+#import "../graphan/graphan.tlb"
 #include "../common/utilit.h"
-
+#include <tchar.h>
 #include <map>
 extern CString _OUT(BSTR t);
 extern CString _IN(CString s);
+extern std::string WstrToUtf8Str(const std::wstring& wstr);

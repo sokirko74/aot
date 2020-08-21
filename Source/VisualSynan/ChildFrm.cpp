@@ -128,15 +128,16 @@ BOOL CChildFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 
 		m_bNewDoc = TRUE;
 		m_pEditView =	(CEditView*)m_wndSplitter.GetPane(0,0); 
+		
 		try 
 		{
-			LOGFONT lf;                        // Used to create the CFont.
+			/*LOGFONT lf;                        // Used to create the CFont.
 			memset(&lf, 0, sizeof(LOGFONT));   // Clear out structure.
 			std::string strFontSize = GetRegistryString( g_strFontSizeRegPath);
 			lf.lfHeight = atoi(strFontSize.c_str());                  // Request a 20-pixel-high font
 			strcpy(lf.lfFaceName, GetRegistryString( g_strFontNameRegPath ).c_str());    //    with face name "Arial".
 			m_Font.CreateFontIndirect(&lf);    // Create the font.
-			m_pEditView->SetFont (&m_Font);
+			m_pEditView->SetFont (&m_Font);*/
 			m_pSynView = (CVisualSynanView*)m_wndSplitter.GetPane(1,0);
        
 		}
@@ -164,7 +165,7 @@ void CChildFrame::OnRunSyntax()
 	ASSERT(m_pSynView && m_pEditView);
 	m_pSynView->Reset();
 
-	std::string str = m_pEditView->LockBuffer();
+	std::wstring str = m_pEditView->LockBuffer();
 	m_pEditView->UnlockBuffer();
 
 	int nBeg,nEnd;
@@ -180,6 +181,7 @@ void CChildFrame::OnRunSyntax()
 
 	m_pSynView->Invalidate();	
 }
+
 void CChildFrame::OnRussianSyntax()
 {
 	CMainFrame*p = (CMainFrame*)AfxGetApp()->m_pMainWnd;

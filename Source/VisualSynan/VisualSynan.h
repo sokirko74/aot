@@ -46,10 +46,6 @@ public:
 	//{{AFX_MSG(CVisualSynanApp)
 	afx_msg void OnAppAbout();
 	afx_msg void OnSynFileNew();
-	//afx_msg LRESULT OnProcessTxtFile(WPARAM, LPARAM);
-		// NOTE - the ClassWizard will add and remove member functions here.
-		//    DO NOT EDIT what you see in these blocks of generated code !
-	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
 

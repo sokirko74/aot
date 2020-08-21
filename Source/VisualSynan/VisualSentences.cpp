@@ -191,7 +191,7 @@ void CVisualSentences::BuildRels(CString& report)
 			//file << "Sentence № " << i << endl;
 			report += "Sentence № ";
 			CString ss;
-			ss.Format("%d ", i);
+			ss.Format(_T("%d "), i);
 			report += ss;
 			report += "\n";
 			
@@ -288,7 +288,7 @@ void CVisualSentences::BuildRels(CString& report)
 	}
 	catch(...)
 	{
-		::AfxMessageBox("Build-rels error!");
+		::AfxMessageBox(_T("Build-rels error!"));
 	}
 
 }
@@ -313,7 +313,7 @@ void CVisualSynVariant::InitClauseVariant(SYNANLib::IClausePtr& piClause, int Cl
 			for(int k = 0 ; k < piClauseVariant->GetUnit(i)->GetSimplePrepsCount(); k++ )
 			{
 				CString str = "Ob:";
-				str.Format(" %s", _OUT(piClauseVariant->GetUnit(i)->GetSimplePrepStr(k)));
+				str.Format(_T(" %s"), _OUT(piClauseVariant->GetUnit(i)->GetSimplePrepStr(k)));
 				unit.m_strOborotsNum += str;					
 			}
 			

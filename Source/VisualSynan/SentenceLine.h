@@ -1,15 +1,6 @@
-// SentenceLine.h: interface for the CSentenceLine class.
-//
-//////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_SENTENCELINE_H__B0ECF574_23B8_11D3_8C48_00105A68ADF3__INCLUDED_)
-#define AFX_SENTENCELINE_H__B0ECF574_23B8_11D3_8C48_00105A68ADF3__INCLUDED_
+#pragma once
 
 #include "stdafx.h"
-
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
 
 typedef vector<int> CIntVector;
 
@@ -29,7 +20,9 @@ struct SFigure
 
 struct SFigureInClause : public SFigure
 {
-	SFigureInClause() {};
+	SFigureInClause() {
+		m_iClauseNum = 0;
+	};
 
 	int m_iClauseNum;
 };
@@ -127,6 +120,3 @@ public:
 	CRect	m_rectForDescr;	
 	
 };
-
-
-#endif // !defined(AFX_SENTENCELINE_H__B0ECF574_23B8_11D3_8C48_00105A68ADF3__INCLUDED_)

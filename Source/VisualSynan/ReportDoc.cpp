@@ -36,7 +36,7 @@ CReportDoc::~CReportDoc()
 {
 }
 
-void CReportDoc::InitFonts()
+/*void CReportDoc::InitFonts()
 {
 	CRichEditCtrl& C =  GetView()->GetRichEditCtrl();
 	C.SetReadOnly(TRUE);
@@ -50,7 +50,7 @@ void CReportDoc::InitFonts()
     C.Invalidate();
 
 };
-
+*/
 
 
 CRichEditCntrItem* CReportDoc::CreateClientItem(REOBJECT* preo) const

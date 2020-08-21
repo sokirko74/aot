@@ -137,7 +137,7 @@ void CVisualClause::SetBestHomonyms()
 {
 	if( m_SynVars.size() == 0)
 	{
-		::MessageBox (0, "Clause with no synvariants found", "VisualSynan", MB_OK);
+		::MessageBox (0, _T("Clause with no synvariants found"), _T("VisualSynan"), MB_OK);
 		return;
 	};
 	CVisualSynVariant& SynVar = m_SynVars[0];

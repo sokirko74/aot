@@ -76,7 +76,7 @@ static BOOL GetSentencesFromSynAn(CVisualSynanDoc& C, CString strText, BOOL bFil
 	try {
 		CTime StartTime = CTime::GetCurrentTime();
 		CVisualSynanApp* A = (CVisualSynanApp*)AfxGetApp();
-		std::string s = convert_to_utf8((const char*)strText, A->m_SyntaxHolder.m_CurrentLanguage);
+		std::string s = WstrToUtf8Str(std::wstring(strText));
 		
 		BOOL bRes = A->m_SyntaxHolder.GetSentencesFromSynAn(s.c_str(), bFile, TRUE, TRUE);
 		if( !bRes )

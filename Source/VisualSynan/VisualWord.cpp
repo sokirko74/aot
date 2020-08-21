@@ -60,7 +60,7 @@ BOOL CVisualWord::Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSen
 				if (OborotId != -1)
 				{
 					CString str;
-					str.Format("Ob: %s", _OUT(piSentence->GetOborotStrByOborotId(OborotId)));
+					str.Format(_T("Ob: %s"), _OUT(piSentence->GetOborotStrByOborotId(OborotId)));
 					pHomonym->m_strOborotsNum += str; 
 				};
 			}
@@ -79,7 +79,7 @@ BOOL CVisualWord::Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSen
 				{
 					CString str = ":";
 					int OborotId = piHomonym->GetOborDictIdOfSimplePrep(k);
-					str.Format(" %s", (const char*)_OUT(piSentence->GetOborotStrByOborotId(OborotId)));
+					str.Format(_T(" %s"), _OUT(piSentence->GetOborotStrByOborotId(OborotId)));
 					pHomonym->m_strSomeDescr += str; 
 				}
 				pHomonym->m_strSomeDescr += ")"; 
@@ -285,12 +285,12 @@ BOOL CVisualWord::GetActiveHomDescr(CString& strLemma,CString& strGramChar)
 	strGramChar = ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strPOS + " " + strGramChar;
 	int ii = ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_iPradigmID;
 	CString ss;
-	ss.Format("%d", ii);
+	ss.Format(_T("%d"), ii);
 	strGramChar = strGramChar + " " + ss;
 	strGramChar += ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strSomeDescr;
 
 	ss.Empty();
-	ss.Format(" (ClauseNo %d)", m_iClauseNo);
+	ss.Format(_T(" (ClauseNo %d)"), m_iClauseNo);
 	strGramChar += ss;
 
 	strGramChar += m_strSomeDescr;

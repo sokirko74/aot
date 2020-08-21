@@ -60,9 +60,7 @@ protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnBuildFromFile();
 	afx_msg void OnReinitializeSyntax();
-	
 	afx_msg LRESULT OnProcessTxtFile(WPARAM, LPARAM);
-	afx_msg void OnSynHelp();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

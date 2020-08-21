@@ -12,7 +12,7 @@ typedef vector<CPartOfArc*>  CPartOfArcVector;
 typedef vector<int>	CIntVector;
 typedef pair<int, int>		CIntPair;
 
-#import "../Graphan/Graphan.tlb"
+
 
 #define RADIUS_ANGLE 8
 #define PLACE_HOLDER "###"

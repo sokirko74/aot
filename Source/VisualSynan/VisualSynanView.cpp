@@ -34,10 +34,8 @@ BEGIN_MESSAGE_MAP(CVisualSynanView, CScrollView)
 	//{{AFX_MSG_MAP(CVisualSynanView)
 	ON_WM_PAINT()
 	ON_WM_RBUTTONDOWN()
-	ON_COMMAND(ID_FONTS, OnFonts)
 	ON_WM_SIZE()
 	ON_WM_VSCROLL()
-	ON_COMMAND(ID_SYN_HELP, OnSynHelp)	
 	ON_COMMAND(ID_VIEW_TEST, OnViewTest)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
@@ -240,8 +238,7 @@ void CVisualSynanView::OnContextMenu(CWnd*, CPoint point)
 				CString grm = ((CSynHomonym*)m_pHomonymsArray->GetAt(i))->m_strCommonGrammems;
 				if (!grm.IsEmpty())
 					strLemma += " " + grm;;
-				std::string s = convert_to_utf8((const char*)strLemma, ((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder.m_CurrentLanguage);
-				menu.AppendMenu(MF_STRING | MF_ENABLED,ID_HOMONYMS_MENU_ITEM + i, _IN(strLemma));
+				menu.AppendMenu(MF_STRING | MF_ENABLED,ID_HOMONYMS_MENU_ITEM + i, strLemma);
 			}
 
 			menu.TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y,
@@ -274,39 +271,6 @@ BOOL CVisualSynanView::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLE
 
 
 
-void CVisualSynanView::OnFonts() 
-{
-	CFontDialog dlgFonts;	
-
-	if( dlgFonts.DoModal() != IDOK)
-		return;
-
-	LOGFONT lfOldFont;
-	LogFontCpy(&lfOldFont, m_LogFontForWords);
-	dlgFonts.GetCurrentFont(&m_LogFontForWords);
-	CString str = dlgFonts.GetFaceName();
-	CClientDC dc(this);
-	EnumFontFamiliesEx(dc.m_hDC, &m_LogFontForWords, &TestIfTrueTypeEx,(LPARAM)this,0);
-	if( !m_bExistUsefulFont )
-	{
-		::AfxMessageBox(IDS_NOT_TRUE_TYPE);
-		LogFontCpy(&m_LogFontForWords,lfOldFont);
-		return;
-	}
-	if(!(m_LogFontForWords.lfCharSet & RUSSIAN_CHARSET) )
-	{
-		::AfxMessageBox(IDS_NOT_RUSSIAN_CHARSET);
-		LogFontCpy(&m_LogFontForWords,lfOldFont);
-		return;
-	};
-
-	// m_LogFontForWords has changed!!
-	UpdateFontsFromLogFont();
-
-	CClientDC clDC(this);
-	Recalculate(clDC);
-	Invalidate();
-}
 
 
 int CALLBACK GetFefaultFontEx(
@@ -322,7 +286,7 @@ int CALLBACK GetFefaultFontEx(
 		pView->m_LogFontForWords.lfCharSet = RUSSIAN_CHARSET;//elfLogFont->lfCharSet;
 		pView->m_LogFontForWords.lfClipPrecision = elfLogFont->lfClipPrecision;
 		pView->m_LogFontForWords.lfEscapement = elfLogFont->lfEscapement;
-		strcpy(pView->m_LogFontForWords.lfFaceName,elfLogFont->lfFaceName);
+		wcscpy(pView->m_LogFontForWords.lfFaceName,elfLogFont->lfFaceName);
 		pView->m_LogFontForWords.lfHeight = 24;//elfLogFont->lfHeight;
 		pView->m_LogFontForWords.lfItalic = elfLogFont->lfItalic;
 		pView->m_LogFontForWords.lfOrientation = elfLogFont->lfOrientation;
@@ -351,7 +315,7 @@ int CALLBACK TestIfTrueTypeEx(
 {
 
 	CVisualSynanView* pView = (CVisualSynanView*)lParam;
-	if( !strcmp(pView->m_LogFontForWords.lfFaceName,lpelf->lfFaceName))
+	if( !wcscmp(pView->m_LogFontForWords.lfFaceName,lpelf->lfFaceName))
 	{
 		if( FontType & TRUETYPE_FONTTYPE )		
 			pView->m_bExistUsefulFont = TRUE;
@@ -440,7 +404,7 @@ void CVisualSynanView::OnInitialUpdate()
 	CView::OnInitialUpdate();	
 	CClientDC dc(this);
 	LOGFONT lfFont;
-	strcpy(lfFont.lfFaceName,"Times New Roman");
+	wcscpy(lfFont.lfFaceName,_T("Times New Roman"));
 	lfFont.lfCharSet = RUSSIAN_CHARSET;
 	EnumFontFamiliesEx(dc.m_hDC, &lfFont , &GetFefaultFontEx,(LPARAM)this,0);
 	if( !m_bExistUsefulFont )
@@ -564,7 +528,7 @@ void CVisualSynanView::LogFontCpy(LOGFONT* dstFont, LOGFONT srcFont)
 		dstFont->lfCharSet = srcFont.lfCharSet;
 		dstFont->lfClipPrecision = srcFont.lfClipPrecision;
 		dstFont->lfEscapement = srcFont.lfEscapement;
-		strcpy(dstFont->lfFaceName,srcFont.lfFaceName);
+		wcscpy(dstFont->lfFaceName,srcFont.lfFaceName);
 		dstFont->lfHeight = srcFont.lfHeight;
 		dstFont->lfItalic = srcFont.lfItalic;
 		dstFont->lfOrientation = srcFont.lfOrientation;
@@ -620,14 +584,14 @@ int CVisualSynanView::OnNeedText( UINT id, NMHDR * pNMHDR, LRESULT * pResult )
 			BOOL bRes = GetDocument()->GetActiveHomDescr(m_iActiveSentenceTT,m_iActiveWordTT,strLemma,strGramChar);
 			if(bRes)
 			{
-				std::string s = std::string((const char*)strLemma) + std::string(" ") + std::string((const char*)strGramChar);
-				if (s.length() > 80)
+				CString s = strLemma + CString(" ") + strGramChar;
+				if (s.GetLength() > 80)
 				{
-					s.erase(76); 
+					s.Delete(76, s.GetLength() - 76); 
 					s += "...";
 				};
-				ASSERT(s.length() < 80);
-				strcpy(pTTT->szText,s.c_str());
+				ASSERT(s.GetLength() < 80);
+				wcscpy(pTTT->szText, s);
 
 				return FALSE;
 			}
@@ -652,12 +616,6 @@ void CVisualSynanView::Reset()
 {
 	m_bFirsTime = TRUE;
 	GetDocument()->Reset();
-}
-void CVisualSynanView::OnSynHelp() 
-{
-	DWORD dummy = 0;
-	::WinHelp(::AfxGetApp()->m_pMainWnd->m_hWnd, "syntax.hlp",HELP_FINDER, dummy);
-	
 }
 
 void CVisualSynanView::OnBuildRels(CString& str) 

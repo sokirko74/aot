@@ -25,7 +25,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	ON_COMMAND(ID_FILE_REINITIALIZESYNTAX, OnReinitializeSyntax)
 	
 	ON_MESSAGE(ID_PROCESS_TXT_FILE, OnProcessTxtFile)
-	ON_COMMAND(ID_SYN_HELP, OnSynHelp)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -167,12 +166,6 @@ LRESULT CMainFrame::OnProcessTxtFile(WPARAM, LPARAM)
 
 
 	return 0;
-}
-
-void CMainFrame::OnSynHelp() 
-{
-	DWORD dummy = 0;
-	::WinHelp(::AfxGetApp()->m_pMainWnd->m_hWnd, "syntax.hlp",HELP_FINDER, dummy);	
 }
 
 bool CMainFrame::LoadSyntaxByLanguage(MorphLanguageEnum t) 

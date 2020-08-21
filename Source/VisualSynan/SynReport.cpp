@@ -14,7 +14,7 @@ bool GlobalOpenReport(CString S, CString Name)
 	pDocument->SetPathName(Name, FALSE);
 		
     C.SetWindowText (S);
-	pDocument->InitFonts();
+	//pDocument->InitFonts();
 	return true;
 };
 

@@ -11,6 +11,7 @@
 #include "VisualSynanDoc.h"
 #include "VisualSynanView.h"
 #include "Splash.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -60,7 +61,8 @@ public:
 	{
 		CString S = pszParam;
 		MorphLanguageEnum l;
-		if (GetLanguageByString((const char*)S,l))
+		std::string utfstr = WstrToUtf8Str(pszParam);
+		if (GetLanguageByString(utfstr.c_str(), l))
 			m_Language = l;
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
 	};
@@ -214,7 +216,6 @@ int CVisualSynanApp::ExitInstance()
 
 BOOL CVisualSynanApp::PreTranslateMessage(MSG* pMsg)
 {
-	// CG: The following lines were added by the Splash Screen component.
 	if (CSplashWnd::PreTranslateAppMessage(pMsg))
 		return TRUE;
 
