@@ -80,10 +80,11 @@ void CGraphmatFile :: InitNonContextDescriptors (CGraLine& L)
 
 		return;
 	}
-
+	bool has_hyphen = false;
 	for (int i=0; i<TokenLength; i++)
 	{
-		if ((BYTE)Token[i] == 39) continue;
+		if ((BYTE)Token[i] == Apostrophe) continue;
+		if ((BYTE)Token[i] == cHyphenChar) has_hyphen = true;
 		if (m_Language == morphRussian)
 		{
 			if (is_russian_alpha((BYTE)Token[i]))
@@ -113,8 +114,9 @@ void CGraphmatFile :: InitNonContextDescriptors (CGraLine& L)
 			&&	(fl_ra	||	fl_la)
 		)
 	{
-
-		if (fl_ra&&fl_la&& !is_russian_alpha((BYTE)Token[sizeof(Token) - 1]))  // встретились русские и латинские буквы, "IP-адрес"
+		// встретились русские и латинские буквы, 
+		// но нет дефиса, чтобы не трогать "IP-адрес"
+		if (fl_ra && fl_la && !has_hyphen)
 			if (!m_bForceToRus) // если не надо приводить к русскому алфавиту
 				L.SetDes(OUnk); // установить дескриптор "вопрос"
 			else // попробовать привести слово к русскому алфав.

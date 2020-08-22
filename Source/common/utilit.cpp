@@ -621,19 +621,26 @@ int CompareWithoutRegister ( const char *s1, const char *s2, size_t l, MorphLang
 
 
 
+// в первой строке находятся латинские буквы, который могут быть заменены на
+// русские
+const static std::string latin_chars = "AaEe3KkMHOoPpCcyXxuT";
+
+// во второй строке находятся русские
+const static std::string russian_chars = _R("АаЕеЗКкМНОоРрСсуХхиТ");
+
+
 BYTE force_rus_char (BYTE ch)
 {
-	// в первой строке находятся латинские буквы, который могут быть заменены на
-	// русские
-	const std::string search = _R("AaEe3KkMHOoPpCcyXxuT");
-	// во второй строке находятся русские
-	const std::string replace = _R("АаЕеЗКкМНОоРрСсуХхиТ");
 
-	const char *t = strchr (search.c_str(), ch);
+#ifdef _DEBUG
+	assert(latin_chars.length() == russian_chars.length());
+#endif
 
-	if (t == 0) return 0;
+	size_t i  = latin_chars.find(ch);
 
-	return replace[(size_t) ((char*)t - search.c_str())];
+	if (i == std::string::npos) return 0;
+
+	return russian_chars[i];
 }
 
 

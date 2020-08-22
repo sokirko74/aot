@@ -23,6 +23,7 @@ macro (GraphTest lang filename)
 endmacro(GraphTest)
 
 GraphTest (Russian test/Russian/text.txt)
+GraphTest (Russian test/Russian/force_to_rus.txt)
 GraphTest (English test/English/text.txt)
 GraphTest (German test/German/text.txt)
 GraphTest (German test/German/sentbreaker.txt)

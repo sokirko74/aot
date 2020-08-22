@@ -20,6 +20,7 @@ set(CMAKE_MFC_FLAG 2)
 add_dependencies(${PROJECT_NAME} 
     SynAn
     Lemmatizer
+    MAPost
     graphan
 )
 

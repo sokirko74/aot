@@ -1,0 +1,5 @@
+                                0 0 BEG DOC
+IP-адрес                        0 8 RLE Aa NAM? SENT_END
+¶¶                              8 2 DEL EOLN CS?
+слишком                         10 7 RLE aa SENT_END
+¶                               17 1 DEL EOLN CS?
