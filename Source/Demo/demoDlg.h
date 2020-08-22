@@ -9,8 +9,8 @@
 #endif // _MSC_VER > 1000
 
 
-#import "../../bin/lemmatizer.tlb"
-#import "../../bin/agramtab.tlb"
+#import "../Lemmatizer/lemmatizer.tlb"
+#import "../agramtab/agramtab.tlb"
 
 /////////////////////////////////////////////////////////////////////////////
 // CDemoDlg dialog
