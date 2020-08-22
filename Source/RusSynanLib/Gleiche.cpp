@@ -15,7 +15,7 @@ bool CRusFormatCaller::format_for_modif_adj_groups (CGroup& G)
     if (get_maximal_group_no(G.m_iFirstWord) != -1) return  false;    
     int j =  G.m_iFirstWord;
 
-    if( FindInList((const char*)g_strAdjModif, g_AdjModifCount, Wj.get_lemma()) == -1)
+    if( !HasInSet(g_strAdjModif, Wj.get_lemma()))
         return false;
 
 

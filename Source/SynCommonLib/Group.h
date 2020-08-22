@@ -8,8 +8,14 @@
 
 #include "SynPlmLine.h"
 
+#include <unordered_set>
 
 
+inline bool HasInSet(const std::unordered_set<std::string>& vct, const char* item)
+{
+	if (item == nullptr) return false;
+	return vct.find(item) != vct.end();
+}
 
 int FindInList(const char* arrWords, int iLen, const char* word_upper);
 

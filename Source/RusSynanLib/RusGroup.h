@@ -8,8 +8,7 @@
 
 #include "../SynCommonLib/Group.h"
 
-const int  g_AdjModifCount = 2;
-const std::string g_strAdjModif[g_AdjModifCount] = {_R("САМЫЙ"),_R("ТАКОЙ")};
+const std::unordered_set<std::string> g_strAdjModif = {_R("САМЫЙ"),_R("ТАКОЙ")};
 
 
 

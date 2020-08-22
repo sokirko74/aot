@@ -43,4 +43,4 @@ public:
 	
 	
 };
-extern std::string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo);
+

@@ -217,20 +217,6 @@ int CFormatCaller::main_analyse()
 }
 
 
-int FindInList(const char* arrWords, int iLen, const char* word_upper)
-{
-	if (!word_upper) return -1;
-	for(int j = 0 ; j < iLen ; j++ )
-		if( !strcmp(word_upper, arrWords + (j * MAX_WORD_LEN)))
-			return j;		
-
-	return -1;
-
-}
-
-
-
-
 
 bool  CFormatCaller::create_groups_from_termin(const SFoundTermin& FoundTermin)
 { 

@@ -26,7 +26,7 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 		Сокирко
 	*/
 	if  ( !Wi.has_grammem(rPlural))
-		if (FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, sent[i].get_lemma() ) != -1) 
+		if (HasInSet(g_BigNumerals, sent[i].get_lemma() )) 
 			return false;
 
 	// со словом "нет" ГЕНИТ_ИГ не образуется 

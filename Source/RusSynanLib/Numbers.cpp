@@ -62,7 +62,7 @@ bool CRusFormatCaller::format_for_numbers (CGroup& G)
 	if  (	(		!is_numeral(Wi)  // либо числительное, которое не является наречным числительным
 				||	has_item (GetOpt()->m_pNumberAdverbsList, Wi.get_lemma()) //"свыше ста пяти человек"
 			)
-		&& ( FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, Wi.get_lemma() ) == -1) 
+		&& !HasInSet(g_BigNumerals, Wi.get_lemma() )  
 			// либо большое числительное, которое является  морф. существительным
 
 		&& !Wi.HasFlag(fl_digit)
@@ -78,7 +78,7 @@ bool CRusFormatCaller::format_for_numbers (CGroup& G)
 	    if  (	(		!is_numeral(Wi)
                     && !Wi.HasPOS(NUMERAL_P)
 					&& !Wi.HasFlag(fl_digit) 
-					&& ( FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, Wi.get_lemma() ) == -1)
+					&& !HasInSet(g_BigNumerals, Wi.get_lemma())
 				)
 			)
         break; 
@@ -120,7 +120,7 @@ bool CRusFormatCaller::format_for_numbers (CGroup& G)
 		create_syn_rel (G, i+1,i, NUMERALS);
 
 
-	if (        ( FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, sent[LastWordExceptFullStop].get_lemma() ) != -1 )
+	if (        HasInSet(g_BigNumerals, sent[LastWordExceptFullStop].get_lemma() )
 			&&  (sent[LastWordExceptFullStop].has_grammem(rGenitiv))
 		)
 	{
@@ -142,7 +142,7 @@ bool CRusFormatCaller::format_for_numbers (CGroup& G)
 				    G.SetGrammems( _QM(rNominativ) |  _QM(rAccusativ) | _QM(rPlural));
 	};
 	for (i =G.m_iFirstWord; i <=  G.m_iLastWord; i++)
-		if ( FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, sent[i].get_lemma() ) != -1)
+		if ( HasInSet(g_BigNumerals, sent[i].get_lemma()) ) 
 			G.m_bNumeralMoreThanThousand = true;
 	return true;
 };
@@ -281,7 +281,7 @@ bool CRusFormatCaller::format_for_number_adverb (CGroup& G)
     .*/
 	if (!(Wi.is_syn_noun() || (Wi.HasPOS(NUMERAL) && Wi.has_grammem(rComparative) && ((Wi.GetGrammems() & rAllCases) == 0)) )) return false; // || Wi.HasPOS(NUMERAL) "более 5 человек"
 
-    if ( FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, Wi.get_lemma() ) != -1) 
+    if ( HasInSet(g_BigNumerals, Wi.get_lemma() )) 
         return false;
 
 
@@ -791,7 +791,7 @@ bool CRusFormatCaller::format_for_plural_number_noun(CGroup& G, bool small_numbe
 			{
 				number_grammems = Num.GetGrammems();
 				// см. выше (1)
-				if ( FindInList((const char*)g_BigNumerals, g_BigNumeralsCount, Num.get_lemma() ) != -1)
+				if ( HasInSet(g_BigNumerals, Num.get_lemma() ))
 					return false;
 			}
 			else

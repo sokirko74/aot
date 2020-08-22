@@ -257,17 +257,3 @@ void CCOMSyntaxHolder::DeleteProcessors()
 };
 
 
-std::string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo) 
-{
-	if (ClauseRootNo == -1)
-	{
-		if (Language == morphRussian)
-			return _R("ПУСТЫХА");
-		else
-			return "EMPTY";
-	}
-	else
-	{
-		return (const char*)piClause->ClauseRoots[ClauseRootNo]->GetDescription();
-	}
-};

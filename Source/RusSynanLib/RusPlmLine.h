@@ -4,8 +4,7 @@
 
 #pragma once
 #include "../SynCommonLib/SynPlmLine.h"
-const int  g_BigNumeralsCount = 5;
-const std::string g_BigNumerals[g_BigNumeralsCount]  = { 
+const std::unordered_set<std::string> g_BigNumerals  = { 
 												_R("МИЛЛИОН"), 
 												_R("МИЛЛИАРД"),
 												_R("ТРИЛЛИОН"),

@@ -649,6 +649,22 @@ std::string GetStringByMorph(MorphLanguageEnum	Language, IParadigmCollectionPtr 
 };
 
 
+std::string  GetClauseTypeDescr(MorphLanguageEnum	Language, const SYNANLib::IClausePtr& piClause, int ClauseRootNo)
+{
+	if (ClauseRootNo == -1)
+	{
+		if (Language == morphRussian)
+			return "ПУСТЫХА"; // utf8
+		else
+			return "EMPTY";
+	}
+	else
+	{
+		return (const char*)piClause->ClauseRoots[ClauseRootNo]->GetDescription();
+	}
+};
+
+
 std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabPtr GramTab)
 {
 	ISentencesCollectionPtr Synan = P;
@@ -695,7 +711,9 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 					for (size_t i = 0; i < W->HomonymsCount; i++)
 					{
 						IHomonymPtr H = W->Homonym[i];
-						Homonyms.push_back(std::string((const char*)H->Lemma) + std::string("[") + (const char*)H->POSStr + std::string("]"));
+						std::string lemma = (const char*)H->Lemma;
+						std::string pos = (const char*)H->POSStr;
+						Homonyms.push_back(lemma + std::string("[") + pos + std::string("]"));
 					};
 					sort(Homonyms.begin(), Homonyms.end());
 					std::string S = std::string("Homonyms\t=\t") + (const char*)W->GetWordStr();

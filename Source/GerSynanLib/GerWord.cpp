@@ -8,7 +8,7 @@
 
 // should be without "bleiben"
 const size_t PerfeckAnomalieWordsCount = 11;
-std::string PerfeckAnomalieWords[PerfeckAnomalieWordsCount] = 
+std::unordered_set<std::string> PerfeckAnomalieWords = 
 {_G("MÜSSEN"), _G("KÖNNEN"), _G("DÜRFEN"),_G("MÖGEN"), 
 "WOLLEN", "SOLLEN",_G("HЦREN"),"LASSEN","SEHEN", "HELFEN", "LEHREN"};
 
@@ -16,7 +16,7 @@ std::string PerfeckAnomalieWords[PerfeckAnomalieWordsCount] =
 void CGerSentence::InitHomonymMorphInfo (CSynHomonym& H)
 {
     H.InitAncodePattern(  );
-	H.m_bPerfectAnomalie = FindInList((const char*)PerfeckAnomalieWords, PerfeckAnomalieWordsCount,H.m_strLemma.c_str()) != -1 && H.HasGrammem(gInfinitiv);
+	H.m_bPerfectAnomalie = HasInSet(PerfeckAnomalieWords, H.m_strLemma.c_str()) && H.HasGrammem(gInfinitiv);
 	H.m_bInfinitiveConstruction = H.m_bPerfectAnomalie || ( H.IsLemma("BLEIBEN") && !H.HasPos(gSUB));
 	H.m_bAdjWithActiveValency = H.HasPos(gADJ) && binary_search(GetOpt()->m_pAdjPrp->begin(), GetOpt()->m_pAdjPrp->end(), H.m_strLemma);
 };

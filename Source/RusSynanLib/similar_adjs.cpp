@@ -40,7 +40,7 @@ bool CRusFormatCaller::format_for_similar_adjs(CGroup& G)
 		bHasPossesive = bHasPossesive || GetOpt()->GetGramTab()->is_morph_pronoun_adjective(Wk.GetPoses());
 
 		if (	!is_left_noun_modifier (Wk) 
-			|| 	(FindInList((const char*)g_strAdjModif, g_AdjModifCount, Wk.get_lemma()) != -1)
+			|| 	HasInSet(g_strAdjModif, Wk.get_lemma())
 			) 
 			break;
 
