@@ -26,6 +26,14 @@ macro (TestMapost lang filename)
 endmacro(TestMapost)
 
 TestMapost(Russian test/Russian/fio.txt "")
+TestMapost(Russian test/Russian/lle.txt "")
+TestMapost(Russian test/Russian/num.txt "")
+TestMapost(Russian test/Russian/hom.txt "")
+TestMapost(Russian test/Russian/fixed_collocs.txt "")
+TestMapost(Russian test/Russian/seminouns.txt "")
+TestMapost(Russian test/Russian/redub.txt "")
+TestMapost(Russian test/Russian/other.txt "")
+TestMapost(Russian test/Russian/indecline.txt "")
 
 
 if (BUILD_DICTS)
