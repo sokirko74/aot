@@ -11,12 +11,12 @@ target_link_libraries(GraphmatThick
 macro (GraphTest lang filename)
     get_filename_component(base_name ${filename} NAME)
     add_test(
-        NAME ${lang}_${base_name}_Graphan 
+        NAME Graphan_${lang}_${base_name} 
         COMMAND GraphmatThick --language ${lang} --input-file ${filename} --output-file ${filename}.gra
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
     add_test(
-        NAME ${lang}_${base_name}_GraphanCompare 
+        NAME Graphan_${lang}_${base_name}_cmp
         COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.gra ${filename}.gra.canon
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )

@@ -11,12 +11,12 @@ target_link_libraries(TestSynan
 
 macro (TestSynanLang lang)
     add_test(
-        NAME ${lang}Synan 
+        NAME Synan_${lang} 
         COMMAND TestSynan --language ${lang} --input test/${lang}/test.txt --output test/${lang}/out.txt
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
     add_test(
-        NAME ${lang}SynanCompare 
+        NAME Synan_${lang}_cmp 
         COMMAND ${CMAKE_COMMAND} -E compare_files  test/${lang}/canon.txt test/${lang}/out.txt
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )

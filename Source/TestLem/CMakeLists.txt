@@ -11,13 +11,13 @@ target_link_libraries(TestLem
 macro (TestLemLang lang filename optional_morphan_arg)
     get_filename_component(base_name ${filename} NAME)
     add_test(
-        NAME ${lang}_${base_name}_TestLem 
+        NAME Morphan_${lang}_${base_name} 
         COMMAND TestLem --echo  ${optional_morphan_arg} --no-ids --forms --language ${lang} --input ${filename} --output ${filename}.morph
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
 
     add_test(
-        NAME ${lang}_${base_name}_TestLemCompare 
+        NAME Morphan_${lang}_${base_name}_cmp
         COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.morph ${filename}.morph.canon
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )

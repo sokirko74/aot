@@ -18,13 +18,13 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 add_test(
-    NAME RussianCOMSynan 
+    NAME Synan_COM_Russian 
     COMMAND TestSynanCOM test/Russian/text.txt
     WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 add_test(
-    NAME RussianCOMSynanCompare 
+    NAME Synan_COM_Russian_cmp 
     COMMAND ${CMAKE_COMMAND} -E compare_files  test/Russian/canon.synan test/Russian/text.txt.synan
     WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
 )

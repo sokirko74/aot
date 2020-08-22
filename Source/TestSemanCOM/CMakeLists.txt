@@ -15,13 +15,13 @@ add_dependencies(TestSemanCOM
 
 
 add_test(
-    NAME RussianCOMSeman 
+    NAME Seman_COM_Russian 
     COMMAND TestSemanCOM test/Russian/text.txt
     WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 add_test(
-    NAME RussianCOMSemanCompare 
+    NAME Seman_COM_Russian_cmp
     COMMAND ${CMAKE_COMMAND} -E compare_files  test/Russian/canon.seman test/Russian/text.txt.seman
     WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
 )

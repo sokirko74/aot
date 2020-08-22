@@ -15,7 +15,7 @@ add_test(
 )
 
 add_test (
-    NAME SemanCompare 
+    NAME Seman_cmp 
     COMMAND ${CMAKE_COMMAND} -E compare_files  test/Russian/canon.txt test/Russian/out.txt
     WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
 )

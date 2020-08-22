@@ -9,13 +9,13 @@ add_dependencies(TestCOMGraphan
 )
 
 add_test(
-    NAME RussianCOMGraphan 
+    NAME Graphan_COM_Russian 
     COMMAND TestCOMGraphan test/Russian/text.txt
     WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 add_test(
-    NAME RussianCOMGraphanCompare 
+    NAME Graphan_COM_Russian_cmp
     COMMAND ${CMAKE_COMMAND} -E compare_files  test/Russian/canon.tokens test/Russian/text.txt.tokens
     WORKING_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}
 )
