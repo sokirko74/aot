@@ -120,20 +120,16 @@ void GetRelations(const CSentence &Sentence, std::string &Result) {
     }
 }
 
-std::string GetStringBySyntax(const CSentencesCollection &SC, const CAgramtab &A, std::string input) {
+std::string GetStringBySyntax(const CSentencesCollection &SC, const CAgramtab &A) {
     std::string Result;
-    Result += Format("<chunk>\n");
-    Result += Format("<input>%s</input>\n", input.c_str());
     for (size_t nSent = 0; nSent < SC.m_vectorSents.size(); nSent++) {
         const CSentence &Sentence = *SC.m_vectorSents[nSent];
-        int iWord = 0, iClau = 0, iCvar = 0;
         Result += "<sent>\n";
         GetAnanlytForms(Sentence, Result);
         GetGroups(Sentence, A, Result);
         GetRelations(Sentence, Result);
         Result += "</sent>\n";
     }
-    Result += Format("</chunk>\n");
 
     std::cerr << "sentences count: " <<  SC.m_vectorSents.size() << "\n";
     return Result;
@@ -155,7 +151,7 @@ void checkSpeed(ArgumentParser& args, CSyntaxHolder& H) {
         std::cerr << "File " <<  f << "\n";
         H.m_bTimeStatis = true;
         H.GetSentencesFromSynAn(f, true);
-        std::string s = GetStringBySyntax(H.m_Synan, *H.m_pGramTab, f.c_str());
+        std::string s = GetStringBySyntax(H.m_Synan, *H.m_pGramTab);
         args.GetOutputStream() << s << "\n\n";
     }
 }
@@ -182,8 +178,10 @@ int main(int argc, const char **argv) {
             Trim(s);
             if (s.empty()) continue;
             H.GetSentencesFromSynAn(s, false);
-            s = GetStringBySyntax(H.m_Synan, *H.m_pGramTab, s);
-            args.GetOutputStream()  << convert_to_utf8(s, H.m_CurrentLanguage);
+            args.GetOutputStream() << "<chunk>\n"
+                << "<input>" << s << "</input>\n"
+                << convert_to_utf8(GetStringBySyntax(H.m_Synan, *H.m_pGramTab), H.m_CurrentLanguage)
+                << "</chunk>\n";
         };
     }
     catch (...) {

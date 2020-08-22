@@ -83,7 +83,7 @@ void CSynWord::UpdateConjInfo()
 						)
 				)
 
-				m_SubordinateConjNo = GetOpt()->GetOborDic()->FindSubConj(pHomonym.m_strLemma.c_str() );
+				m_SubordinateConjNo = GetOpt()->GetOborDic()->FindSubConj(pHomonym.m_strLemma );
             pHomonym.m_CoordConjNo = m_pSent->GetCoordConjNo(pHomonym.m_strLemma.c_str());
 		}
 	}

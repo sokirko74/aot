@@ -238,7 +238,7 @@ bool CRusFormatCaller::format_for_adv_verb(CGroup& G)
 	const CGroup& G2 = get_maximal_group(G1.m_iLastWord+1);
     
     const CSynPlmLine& ww = sent[G1.m_MainWordNo];
-	if( GetOpt()->GetOborDic()->FindSubConj (ww.get_lemma() ) != -1 )
+	if( GetOpt()->GetOborDic()->FindSubConj (ww.get_lemma_string() ) != -1 )
 		return false;
 
 	if (G1.m_GroupType == OBOROTS) return false;

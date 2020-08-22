@@ -101,6 +101,7 @@ public:
     const char* get_word() const;
     const char* get_upper_word() const;
     const char* get_lemma() const;
+	const std::string& get_lemma_string() const;
     const COborotForSyntax* get_oborot_ptr() const;
     int                     get_coord_conj_no() const;
     const vector<int>*      get_simple_preps() const;

@@ -151,9 +151,16 @@ const char* CSynPlmLine :: get_upper_word() const
 {
     return m_pActiveWord ? m_pActiveWord->m_strUpperWord.c_str() : 0;
 }
+
 const char* CSynPlmLine :: get_lemma() const
 {
     return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma.c_str() : 0;
+}
+
+
+const  std::string& CSynPlmLine::get_lemma_string() const
+{
+	return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma : std::string("");
 }
 
 const COborotForSyntax* CSynPlmLine :: get_oborot_ptr() const

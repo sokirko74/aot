@@ -1880,9 +1880,13 @@ bool CMAPost::FilterPostMorphWords()
             for (list<CPostLemWord>::iterator it2 = sent_start; it2 !=  it; it2++)	
             {
                 assert (WordNo < tags.size());
-                FilterOnePostLemWord (*it2, tags[WordNo].m_TagId1, tags[WordNo].m_TagId2);
+                CPostLemWord& w = *it2;
+                if (w.m_strUpperWord != _R("УЖ") && w.m_strUpperWord != _R("МНОГО") && w.m_strUpperWord != _R("МАЛО")) {
+                    FilterOnePostLemWord(w, tags[WordNo].m_TagId1, tags[WordNo].m_TagId2);
+                }
                 WordNo++;
             }
+
 
 
             tokens.clear();
