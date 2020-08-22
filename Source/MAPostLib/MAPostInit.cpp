@@ -23,13 +23,6 @@ CMAPost::CMAPost()
 	m_Language = morphRussian;
     m_bUseTrigrams = false;
 	m_LogFileName = "";
-	/*try {
-		
-		std::string log_path  = GetRegistryString( "Software\\Dialing\\Logs\\Main" );
-		m_LogFileName = log_path + "mapost.log";
-	}
-	catch (...) {
-	};*/
 	m_bCanChangeInputText = true;
     m_bHumanFriendlyOutput = false;
 

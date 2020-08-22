@@ -16,9 +16,11 @@
 class CProceedDlg : public CDialog
 {
 // Construction
+	void set_russ_font(CWnd* w);
+
 public:
 	CProceedDlg(CWnd* pParent = NULL);   // standard constructor
-
+	CFont Font;
 // Dialog Data
 	//{{AFX_DATA(CProceedDlg)
 	enum { IDD = IDD_PROCEED_DIALOG };

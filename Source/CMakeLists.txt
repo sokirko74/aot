@@ -75,6 +75,7 @@ add_subdirectory (CheckGramTab)
 
 add_subdirectory (GerPostMorph)
 add_subdirectory (MAPostLib)
+add_subdirectory (TestMapost)
 add_subdirectory (SimpleGrammarLib)
 add_subdirectory (SimpleGrammarPrecompiled)
 
@@ -148,5 +149,4 @@ IF (MSVC)
     endif()
 
 ENDIF()
-
 

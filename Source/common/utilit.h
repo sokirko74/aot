@@ -307,3 +307,12 @@ inline std::string _G(const char* buffer) {
 inline bool startswith(const std::string& main, const std::string& prefix) {
 	return main.rfind(prefix, 0) == 0;
 }
+
+inline bool endswith(const std::string& main, const std::string& suffix) {
+	if (main.length() >= suffix.length()) {
+		return (0 == main.compare(main.length() - suffix.length(), suffix.length(), suffix));
+	}
+	else {
+		return false;
+	}
+}

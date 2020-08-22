@@ -47,6 +47,17 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CProceedDlg message handlers
 
+void CProceedDlg::set_russ_font(CWnd* w) {
+	CFont* currFont = w->GetFont();
+	LOGFONT lgFont;
+	currFont->GetLogFont(&lgFont);
+	strcpy(lgFont.lfFaceName, "Times New Roman");
+	lgFont.lfCharSet = RUSSIAN_CHARSET;
+	//lgFont.lfHeight = 120;
+	Font.CreateFontIndirectA(&lgFont);
+	w->SetFont(&Font);
+}
+
 BOOL CProceedDlg::OnInitDialog() 
 {
 	CCheckerDlg *pDlg = (CCheckerDlg *)AfxGetMainWnd();
@@ -84,7 +95,9 @@ BOOL CProceedDlg::OnInitDialog()
 
 	m_CurrentBadSentence = -1;
 	PostMessage(WM_COMMAND,IDC_SKIP);
-
+	set_russ_font(GetDlgItem(IDC_TEXT3));
+	set_russ_font(GetDlgItem(IDC_TEXT2));
+	set_russ_font(GetDlgItem(IDC_TEXT1));
 	return TRUE;
 }
 
@@ -236,6 +249,7 @@ void CProceedDlg::UpdateOldBaseOnTheScreen()
 	std::string old_base;
 	if (m_BaseStartNo != -1)
 		old_base = ConvertEOLN(pDlg->m_base[m_BaseCurrentNo].txt);
+	old_base = convert_from_utf8(old_base.c_str(), morphRussian);
 	SetDlgItemText(IDC_TEXT3,old_base.c_str());		
 
 	char tmp[256];
@@ -243,7 +257,9 @@ void CProceedDlg::UpdateOldBaseOnTheScreen()
 	SetDlgItemText(IDC_BASENO,tmp);
 
 	int no = pDlg->m_nbad[m_CurrentBadSentence];
-	SetDlgItemText(IDC_TEXT2,ConvertEOLN(pDlg->m_tran[no]).c_str());
+	std::string s = ConvertEOLN(pDlg->m_tran[no]);
+	s = convert_from_utf8(s.c_str(), morphRussian);
+	SetDlgItemText(IDC_TEXT2,s.c_str());
 
 	ShowDifferences();
 };
@@ -268,8 +284,9 @@ void CProceedDlg::OnSkip()
 	SetBaseVariant(no+1);
 
 	// GetBaseVar(no+1);
-
-	SetDlgItemText(IDC_TEXT1,pDlg->m_CheckExamples[no].m_Text.c_str());
+	std::string s = pDlg->m_CheckExamples[no].m_Text;
+	s = convert_from_utf8(s.c_str(), morphRussian);
+	SetDlgItemText(IDC_TEXT1, s.c_str());
 
 	SetDlgItemText(IDC_COMMENTS,pDlg->m_CheckExamples[no].m_Comments.c_str());
 	

@@ -354,6 +354,7 @@ bool read_line(FILE* fp, std::string& line)
 	if (fgets(tmp, 40000, fp) == NULL) {
 		return false;
 	}
+	line = tmp;
 	//line =  convert_from_utf8(tmp, morphRussian);
 	return true;
 }
