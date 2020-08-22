@@ -23,6 +23,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddArgument("--language", "language");
     parser.AddArgument("--input-file", "specify file for input text in utf-8");
     parser.AddArgument("--output-file", "specify file for tokens table");
+    parser.AddOption("--print-ancodes");
     parser.Parse(argc, argv);
 }
 
@@ -35,11 +36,16 @@ int main(int argc, const char **argv) {
         std::cerr << "initialization error\n";
         return 1;
     };
-    H.m_pPostMorph->m_bHumanFriendlyOutput = true;
+    H.m_pPostMorph->m_bHumanFriendlyOutput = !args.Exists("print-ancodes");
     int dummy;
     if (!H.GetMorphology(args.Retrieve("input-file"), true, dummy)) {
         return 1;
     }
+
+    #ifdef _DEBUG
+        H.m_PlmLines.SaveToFile("before.lem");
+    #endif
+
     CPlmLineCollection MapostPlmLines;
     if (!H.RunMapost(MapostPlmLines)) {
         return 1;

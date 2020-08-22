@@ -47,7 +47,7 @@ void CMAPost::RunRules()
 			Odnobuk();
 
 
-				if (m_bCanChangeInputText)
+			if (m_bCanChangeInputText)
 			{
 				log("Cifrdef");
 				Cifrdef();
@@ -123,13 +123,15 @@ void CMAPost::RunRules()
 
 			};
 			
-			log("Rule_UnknownNames");
+            log("Rule_UnknownNames");
 			Rule_UnknownNames();
 
 			log("Rule_SOROK");
 			Rule_SOROK();
 
-			Rule_Abbreviation();
+            Rule_ExpandIndeclinableGramcodes();
+
+            Rule_Abbreviation();
 
 			Rule_ChangePatronymicLemmas();
 
@@ -1082,9 +1084,7 @@ void CMAPost::Rule_Ideclinable()
         CPostLemWord& W = *it;
         if ( !W.HasDes(ORLE) ) continue;
         if ( !W.HasPos(NOUN) ) continue;
-		const std::string& WordForm = W.m_strUpperWord;
-        if (WordForm.empty()) continue;
-		if ((BYTE)WordForm[WordForm.length() - 1] != (BYTE)_R("О")[0]) continue;
+		if (!endswith(W.m_strUpperWord, _R("О"))) continue;
         for (int i=0; i < W.GetHomonymsCount(); i++)
         {
             CHomonym* pH = W.GetHomonym(i);
@@ -1591,6 +1591,29 @@ void CMAPost::Rule_SOROK()
 };
 
 
+/*
+* правило  заменяет анкод неизменяемого существительного на все анкоды всех падежей, чисел и родов
+*/
+void CMAPost::Rule_ExpandIndeclinableGramcodes()
+{
+    for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
+    {
+        CPostLemWord& W = *it;
+        if (!W.HasDes(ORLE)) continue;
+
+        //ЦБ      С ср,0 -> C ср,им  ср,вн ср,дт
+        for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++) {
+            if (W.GetHomonym(HomNo)->HasPos(NOUN) && W.GetHomonym(HomNo)->HasGrammem(rIndeclinable) && !W.GetHomonym(HomNo)->HasGrammem(rInitialism))
+            {
+                CHomonym* pH = W.GetHomonym(HomNo);
+                pH->m_CommonGramCode += pH->GetGramCodes();
+                pH->SetGramCodes(m_pRusGramTab->GleicheAncode1(GenderNumber0,
+                    m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0), pH->GetGramCodes()));  //rAllNumbers, AnCodes, _QM(rSingular));
+            }
+        }
+    }
+}
+
 
 /*
 	программа ищет словоформы, которые не были написаны только заглавными буквами, 
@@ -1602,20 +1625,11 @@ void CMAPost::Rule_SOROK()
 
 void CMAPost::Rule_Abbreviation() 
 {	
-    
 	for (CLineIter it=m_Words.begin(); it !=  m_Words.end(); it++)
 	{
 	    CPostLemWord& W = *it;
         if (!W.HasDes(ORLE)) continue;
-		//ЦБ      С ср,0 -> 
-		for(int HomNo = 0 ; HomNo < W.GetHomonymsCount() ; HomNo++)
-			if(W.GetHomonym(HomNo)->HasPos(NOUN) && W.GetHomonym(HomNo)->HasGrammem(rIndeclinable) && !W.GetHomonym(HomNo)->HasGrammem(rInitialism) ) 
-			{
-				CHomonym* pH = W.GetHomonym(HomNo);
-				pH->m_CommonGramCode += pH->GetGramCodes();
-				pH->SetGramCodes (m_pRusGramTab->GleicheAncode1(GenderNumber0, 
-					m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0), pH->GetGramCodes()));  //rAllNumbers, AnCodes, _QM(rSingular));
-			}
+
         if (W.HasDes(OUp)) continue;
 
 		for(int HomNo = 0 ; HomNo < W.GetHomonymsCount(); HomNo++)

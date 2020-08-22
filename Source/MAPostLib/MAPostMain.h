@@ -125,6 +125,7 @@ protected:
 	void Rule_Ideclinable();
 	void Rule_DeadPlurals();
 	void Rule_RelationalAdjective();
+	void Rule_ExpandIndeclinableGramcodes();
 	void OtherRules();
 	
 	std::string GetNormSurnameSuffix(long ParadigmNo) const;
