@@ -28,7 +28,7 @@ CFormatCaller* CEngSentence::GetNewFormatCaller() const
     return new CEngFormatCaller(GetOpt());
 };
 
-void CEngSentence::ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMorphVariant& V)
+void CEngSentence::ChooseClauseType(const  std::vector<SClauseType>& vectorTypes, CMorphVariant& V)
 {
 	int empty_type = -1; 
 

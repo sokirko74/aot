@@ -35,7 +35,7 @@ GADGETRESIZEHANDLE CreateGadgetResizeHandle(CWnd* pWnd)
 		::GetWindowRect(hWndChild, &(pRectWnd->m_rect));
 		pWnd->ScreenToClient(&(pRectWnd->m_rect));
 
-		// if it's a drop down combo box, then we set bottom -ve to indicate
+		// if it's a drop down combo box, then we std::set bottom -ve to indicate
 		// we should keep the height fixed. Otherwise we might find that the drop
 		// down size gets stupidly small.
 		if (_tcscmp(szClassName, _T("ComboBox")) == 0 &&

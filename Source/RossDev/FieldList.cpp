@@ -15,7 +15,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 CFieldList::CFieldList(const CRossDoc* pRossDoc, 
-						vector<CRossDevTextField>& Result,
+						std::vector<CRossDevTextField>& Result,
 						CWnd* pParent /*=NULL*/)
 	: CDialog(CFieldList::IDD, pParent), 
 	  m_Result(Result)

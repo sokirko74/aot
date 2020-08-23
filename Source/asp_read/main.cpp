@@ -12,7 +12,7 @@
 void get_id(CMorphologyHolder& morphHolder, std::string str, DwordVector &res, bool is_left)
 {
 	
-    vector<CFormInfo> ParadigmCollection;
+    std::vector<CFormInfo> ParadigmCollection;
 
 	std::string s = str;
 	if (!morphHolder.m_pLemmatizer->CreateParadigmCollection(false, s, false, false,  ParadigmCollection))

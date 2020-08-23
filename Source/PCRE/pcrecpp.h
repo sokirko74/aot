@@ -50,7 +50,7 @@
 //   "hello (\\w+) world"  -- \w matches a "word" character
 //   "version (\\d+)"      -- \d matches a digit
 //   "hello\\s+world"      -- \s matches any whitespace character
-//   "\\b(\\w+)\\b"        -- \b matches empty string at a word boundary
+//   "\\b(\\w+)\\b"        -- \b matches empty std::string at a word boundary
 //   "(?i)hello"           -- (?i) turns on case-insensitive matching
 //   "/\\*(.*?)\\*/"       -- .*? matches . minimum no. of times possible
 //
@@ -71,7 +71,7 @@
 // Example: creating a temporary RE object:
 //    pcrecpp::RE("h.*o").FullMatch("hello");
 //
-// You can pass in a "const char*" or a "string" for "text".  The
+// You can pass in a "const char*" or a "std::string" for "text".  The
 // examples below tend to use a const char*.
 //
 // You can, as in the different examples above, store the RE object
@@ -86,7 +86,7 @@
 //
 // Example: extracts "ruby" into "s" and 1234 into "i"
 //    int i;
-//    string s;
+//    std::string s;
 //    pcrecpp::RE re("(\\w+):(\\d+)");
 //    re.FullMatch("ruby:1234", &s, &i);
 //
@@ -102,12 +102,12 @@
 // Example: fails because there aren't enough sub-patterns:
 //    !pcrecpp::RE("\\w+:\\d+").FullMatch("ruby:1234", &s);
 //
-// Example: fails because string cannot be stored in integer
+// Example: fails because std::string cannot be stored in integer
 //    !pcrecpp::RE("(.*)").FullMatch("ruby", &i);
 //
 // The provided pointer arguments can be pointers to any scalar numeric
 // type, or one of
-//    string        (matched piece is copied to string)
+//    std::string        (matched piece is copied to std::string)
 //    StringPiece   (StringPiece is mutated to point to matched piece)
 //    T             (where "bool T::ParseFrom(const char*, int)" exists)
 //    NULL          (the corresponding matched sub-pattern is not copied)
@@ -125,10 +125,10 @@
 // You can use the "PartialMatch" operation when you want the pattern
 // to match any substring of the text.
 //
-// Example: simple search for a string:
+// Example: simple search for a std::string:
 //    pcrecpp::RE("ell").PartialMatch("hello");
 //
-// Example: find first number in a string:
+// Example: find first number in a std::string:
 //    int number;
 //    pcrecpp::RE re("(\\d+)");
 //    re.PartialMatch("x*100 + 20", &number);
@@ -139,12 +139,12 @@
 //
 // By default, pattern and text are plain text, one byte per character.
 // The UTF8 flag, passed to the constructor, causes both pattern
-// and string to be treated as UTF-8 text, still a byte stream but
+// and std::string to be treated as UTF-8 text, still a byte stream but
 // potentially multiple bytes per character. In practice, the text
 // is likelier to be UTF-8 than the pattern, but the match returned
 // may depend on the UTF8 flag, so always use it when matching
 // UTF8 text.  E.g., "." will match one byte normally but with UTF8
-// set may match up to three bytes of a multi-byte character.
+// std::set may match up to three bytes of a multi-byte character.
 //
 // Example:
 //    pcrecpp::RE_Options options;
@@ -192,7 +192,7 @@
 // out of the modifier in lowercase, without the "PCRE_" prefix. For
 // instance, PCRE_CASELESS is handled by
 //    bool caseless(),
-// which returns true if the modifier is set, and
+// which returns true if the modifier is std::set, and
 //    RE_Options & set_caseless(bool),
 // which sets or unsets the modifier.
 //
@@ -205,7 +205,7 @@
 // disable match limiting.
 //
 // Normally, to pass one or more modifiers to a RE class, you declare
-// a RE_Options object, set the appropriate options, and pass this
+// a RE_Options object, std::set the appropriate options, and pass this
 // object to a RE constructor. Example:
 //
 //    RE_options opt;
@@ -214,7 +214,7 @@
 //    if (RE("HELLO", opt).PartialMatch("hello world")) ...
 //
 // RE_options has two constructors. The default constructor takes no
-// arguments and creates a set of flags that are off by default.
+// arguments and creates a std::set of flags that are off by default.
 //
 // The optional parameter 'option_flags' is to facilitate transfer
 // of legacy code from C programs.  This lets you do
@@ -227,10 +227,10 @@
 //
 // If you are going to pass one of the most used modifiers, there are some
 // convenience functions that return a RE_Options class with the
-// appropriate modifier already set:
+// appropriate modifier already std::set:
 // CASELESS(), UTF8(), MULTILINE(), DOTALL(), EXTENDED()
 //
-// If you need to set several options at once, and you don't want to go
+// If you need to std::set several options at once, and you don't want to go
 // through the pains of declaring a RE_Options object and setting several
 // options, there is a parallel method that give you such ability on the
 // fly. You can concatenate several set_xxxxx member functions, since each
@@ -247,28 +247,28 @@
 // SCANNING TEXT INCREMENTALLY
 //
 // The "Consume" operation may be useful if you want to repeatedly
-// match regular expressions at the front of a string and skip over
+// match regular expressions at the front of a std::string and skip over
 // them as they match.  This requires use of the "StringPiece" type,
-// which represents a sub-range of a real string.  Like RE, StringPiece
+// which represents a sub-range of a real std::string.  Like RE, StringPiece
 // is defined in the pcrecpp namespace.
 //
-// Example: read lines of the form "var = value" from a string.
-//    string contents = ...;                 // Fill string somehow
+// Example: read lines of the form "var = value" from a std::string.
+//    std::string contents = ...;                 // Fill std::string somehow
 //    pcrecpp::StringPiece input(contents);  // Wrap in a StringPiece
 //
-//    string var;
+//    std::string var;
 //    int value;
 //    pcrecpp::RE re("(\\w+) = (\\d+)\n");
 //    while (re.Consume(&input, &var, &value)) {
 //      ...;
 //    }
 //
-// Each successful call to "Consume" will set "var/value", and also
+// Each successful call to "Consume" will std::set "var/value", and also
 // advance "input" so it points past the matched text.
 //
 // The "FindAndConsume" operation is similar to "Consume" but does not
-// anchor your match at the beginning of the string.  For example, you
-// could extract all words from a string by repeatedly calling
+// anchor your match at the beginning of the std::string.  For example, you
+// could extract all words from a std::string by repeatedly calling
 //     pcrecpp::RE("(\\w+)").FindAndConsume(&input, &word)
 //
 // -----------------------------------------------------------------------
@@ -298,17 +298,17 @@
 // group from the pattern.  \0 in "rewrite" refers to the entire
 // matching text.  E.g.,
 //
-//   string s = "yabba dabba doo";
+//   std::string s = "yabba dabba doo";
 //   pcrecpp::RE("b+").Replace("d", &s);
 //
 // will leave "s" containing "yada dabba doo".  The result is true if
 // the pattern matches and a replacement occurs, or false otherwise.
 //
 // GlobalReplace() is like Replace(), except that it replaces all
-// occurrences of the pattern in the string with the rewrite.
+// occurrences of the pattern in the std::string with the rewrite.
 // Replacements are not subject to re-matching.  E.g.,
 //
-//   string s = "yabba dabba doo";
+//   std::string s = "yabba dabba doo";
 //   pcrecpp::RE("b+").GlobalReplace("d", &s);
 //
 // will leave "s" containing "yada dada doo".  It returns the number
@@ -318,7 +318,7 @@
 // "rewrite" is copied into "out" (an additional argument) with
 // substitutions.  The non-matching portions of "text" are ignored.
 // Returns true iff a match occurred and the extraction happened
-// successfully.  If no match occurs, the string is left unaffected.
+// successfully.  If no match occurs, the std::string is left unaffected.
 
 
 #include <string>
@@ -341,7 +341,7 @@ class Arg;
 extern Arg no_arg;
 
 
-// RE_Options allow you to set options to be passed along to pcre,
+// RE_Options allow you to std::set options to be passed along to pcre,
 // along with other options we put on top of pcre.
 // Only 9 modifiers, plus match_limit are supported now.
 class RE_Options {
@@ -471,7 +471,7 @@ static inline RE_Options EXTENDED() {
 class RE {
  public:
   // We provide implicit conversions from strings so that users can
-  // pass in a string or a "const char*" wherever an "RE" is expected.
+  // pass in a std::string or a "const char*" wherever an "RE" is expected.
   RE(const char* pat) { Init(pat, NULL); }
   RE(const char *pat, const RE_Options& option) { Init(pat, &option); }
   RE(const std::string& pat) { Init(pat.c_str(), NULL); }
@@ -479,13 +479,13 @@ class RE {
 
   ~RE();
 
-  // The string specification for this RE.  E.g.
+  // The std::string specification for this RE.  E.g.
   //   RE re("ab*c?d+");
   //   re.pattern();    // "ab*c?d+"
   const std::string& pattern() const { return pattern_; }
 
-  // If RE could not be created properly, returns an error string.
-  // Else returns the empty string.
+  // If RE could not be created properly, returns an error std::string.
+  // Else returns the empty std::string.
   const std::string& error() const { return *error_; }
 
   /***** The useful part: the matching interface *****/
@@ -640,7 +640,7 @@ class RE {
   RE_Options    options_;
   pcre*         re_full_;       // For full matches
   pcre*         re_partial_;    // For partial matches
-  const std::string* error_;         // Error indicator (or points to empty string)
+  const std::string* error_;         // Error indicator (or points to empty std::string)
   int           match_limit_;   // limit on execution resources
 
   // Don't allow the default copy or assignment constructors --

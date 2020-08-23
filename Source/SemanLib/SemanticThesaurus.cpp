@@ -27,7 +27,7 @@ void CRusSemStructure::InterpretOrganisations (long ClauseNo)
 // создаем отношение из Nd2 в Nd1  (нумерация берется из R (Nd1, Nd2))) 
 void CRusSemStructure::ApplyTerminSemStrForOneRel (std::string RelationStr, long Nd1, long Nd2, const CRossHolder* RossHolder)
 {
-	vector<long> Rels;
+	std::vector<long> Rels;
 
 	//  удаляем все отношения, которые идут из Nd2 c названием RelationStr кроме тех, что идут в MUA GetOutcomingRelations(Nd2, Rels, false);
 	for (long i=0; i < Rels.size();)
@@ -65,7 +65,7 @@ void CRusSemStructure::ApplyTerminSemStrForOneRel (std::string RelationStr, long
 
 long  CRusSemStructure::AddThesSemRelations(const CRossHolder* Dict, long UnitNo, long StartNodeNo)
 {
-  vector<CDopField> DopFields;
+  std::vector<CDopField> DopFields;
   long MainItemNo = Dict->GetDopFields(UnitNo, DopFields);
   if (MainItemNo == -1) return false;
   long Result = -1;
@@ -362,13 +362,13 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 	// получаем все LEX или MANLEX, которые начинаются с '#'
 	StringVector ConceptStrs;
 
-	const vector<CAbstractArticle>* pAbstractArticles = m_pData->GetAbstractArticles(Ross);
+	const std::vector<CAbstractArticle>* pAbstractArticles = m_pData->GetAbstractArticles(Ross);
 
 	assert (pAbstractArticles);
 	if (!pAbstractArticles)
 		return;
 
-	const vector<CAbstractArticle>& AbstractArticles = *pAbstractArticles;
+	const std::vector<CAbstractArticle>& AbstractArticles = *pAbstractArticles;
 
 	for (long i=0; i< AbstractArticles.size(); i++)
 		if  (AbstractArticles[i].m_Type == atAdditionArticle)
@@ -431,7 +431,7 @@ struct CTerminItem {
 struct CSemanTermin {
 	long m_ThesaurusId;   
 	UINT m_TerminNo;
-	vector<CTerminItem> m_Items;
+	std::vector<CTerminItem> m_Items;
 	long	m_TextItemsCount;
 	long	m_TerminId;
 
@@ -443,10 +443,10 @@ struct CSemanTermin {
 };
 
 
-void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId,  const char*  Lemma, vector<CSemanTermin>& Result)
+void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId,  const char*  Lemma, std::vector<CSemanTermin>& Result)
 {
 	const CThesaurus* Thes  = R.m_pData->GetThes(ThesaurusId);
-	vector<int> TerminItems;
+	std::vector<int> TerminItems;
 	Thes->QueryTerminItem(Lemma, TerminItems);
 	long Count  = TerminItems.size();
 	for (long i=0; i < Count;  i++)
@@ -462,7 +462,7 @@ void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId,  co
 		if  (ModelNo == -1) continue;
 		if (Thes->m_Models[ModelNo].m_AtomGroups.size() == 1)  continue;
 
-		vector<CSemanTermin>::iterator It= find(Result.begin(),Result.end(), T);
+		std::vector<CSemanTermin>::iterator It= find(Result.begin(),Result.end(), T);
 		if (It == Result.end())
 		{
 			Result.push_back(T);
@@ -474,7 +474,7 @@ void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId,  co
 
 
 // проверяет один вариант приписывания элементов разделенных терминов словам
-bool CheckAndBuildOneDividedTermin(CRusSemStructure& R,const CSemanTermin& T,  const vector<CDopField>& DopFields, long MainItemNo)
+bool CheckAndBuildOneDividedTermin(CRusSemStructure& R,const CSemanTermin& T,  const std::vector<CDopField>& DopFields, long MainItemNo)
 {
 	for (long DopFieldNo=0;  DopFieldNo < DopFields.size(); DopFieldNo++)
 	{
@@ -522,7 +522,7 @@ bool CheckAndBuildOneDividedTermin(CRusSemStructure& R,const CSemanTermin& T,  c
 // проверяет, что для разделенного термина были найдены все  его элементы
 bool CheckIfAllItemsFoundForDividedTermin(const CRusSemStructure& R, const CSemanTermin& T) 
 {
-	vector<bool> V (T.m_TextItemsCount, false);
+	std::vector<bool> V (T.m_TextItemsCount, false);
 
 	for (int i = 0;  i < T.m_Items.size(); i++)
 	{
@@ -540,7 +540,7 @@ bool CheckIfAllItemsFoundForDividedTermin(const CRusSemStructure& R, const CSema
 
 void GetThesInterpFirstVariant(CSemanTermin& T)
 {
-	vector<bool> V (T.m_TextItemsCount, false);
+	std::vector<bool> V (T.m_TextItemsCount, false);
 	for (int i = 0; i <T.m_Items.size(); i++)
 	{
 		int z = T.m_Items[i].m_ItemNo - 1;
@@ -596,7 +596,7 @@ bool GetInterpNextVariant(CSemanTermin& T)
 void CRusSemStructure::FindDividedTermins()
 {
 try {
-	vector<CSemanTermin> Termins;
+	std::vector<CSemanTermin> Termins;
 	for (long i=0; i < m_Nodes.size(); i++)
 	{
 		if (   !m_Nodes[i].IsPrimitive() 
@@ -627,7 +627,7 @@ try {
 		// и только одна из этих двух слов-гипотез состоит в нужным отношении со вторым словом,
 		// тогда  второе гипотеза будет удалена
 
-		vector<CDopField> DopFields;
+		std::vector<CDopField> DopFields;
 		T.m_TerminId = Thes->m_Termins[T.m_TerminNo].m_TerminId;
 		WORD UnitNo = GetUnitNoByTerminId(GetRossIdByThesId(T.m_ThesaurusId), T.m_TerminId);
 		if (UnitNo == ErrUnitNo) continue;
@@ -736,7 +736,7 @@ try {
 			   break;
 		 if (i < m_Nodes[NodeNo].m_Words.size()) continue;
 
-	 	vector<CSemanTermin> Termins;
+	 	std::vector<CSemanTermin> Termins;
   	    for (i=0; i < m_Nodes[NodeNo].m_Words.size(); i++)
 		{
  			LoadTerminItems(*this,  LocThes,i,m_Nodes[NodeNo].m_Words[i].m_Lemma.c_str(), Termins);

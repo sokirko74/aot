@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 
-typedef vector<int> CIntVector;
+typedef std::vector<int> CIntVector;
 
 struct SFigure 
 {
@@ -27,8 +27,8 @@ struct SFigureInClause : public SFigure
 	int m_iClauseNum;
 };
 
-typedef vector<SFigure> CFigureVector;
-typedef vector<SFigureInClause> CFigureInClauseVector;
+typedef std::vector<SFigure> CFigureVector;
+typedef std::vector<SFigureInClause> CFigureInClauseVector;
 
 
 class CSentenceLine  

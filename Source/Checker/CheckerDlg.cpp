@@ -120,7 +120,7 @@ void CCheckerDlg::SaveHistory()
 {
 	CString strVal;
 	::WritePrivateProfileSection("History", "", PROFILE_PATH);
-	list<CString>::iterator pos = m_LastQueries.begin();
+	std::list<CString>::iterator pos = m_LastQueries.begin();
 	CString strKey;
 	int i = 1;
 	while (pos != m_LastQueries.end())
@@ -155,7 +155,7 @@ void CCheckerDlg::DoDataExchange(CDataExchange* pDX)
 	//  init history
 
 	m_comboHistory.ResetContent();
-	list<CString>::iterator pos = m_LastQueries.begin();
+	std::list<CString>::iterator pos = m_LastQueries.begin();
 	while (pos != m_LastQueries.end())
 	{
 		m_comboHistory.AddString(*pos);
@@ -707,7 +707,7 @@ std::string GetStringBySyntax(MorphLanguageEnum	Language, IUnknown* P, IGramTabP
 				if (W->HomonymsCount > 1)
 				{
 
-					vector<string>	 Homonyms;
+					std::vector<std::string>	 Homonyms;
 					for (size_t i = 0; i < W->HomonymsCount; i++)
 					{
 						IHomonymPtr H = W->Homonym[i];
@@ -884,7 +884,7 @@ static UINT MakeProc(LPVOID pArg)
 
 
 
-	vector<string> SynCollocCheckResults;
+	std::vector<std::string> SynCollocCheckResults;
 	if (ExternalExeFileCheck == pDlg->m_CheckerType)
 	{
 		if (!pDlg->PerformExternalExeFileCheck(SynCollocCheckResults))
@@ -1111,9 +1111,9 @@ std::string change_x1_to_cr(std::string s)
 	return b;
 }
 
-bool CCheckerDlg::PerformExternalExeFileCheck(vector<string>& Result)
+bool CCheckerDlg::PerformExternalExeFileCheck(std::vector<std::string>& Result)
 {
-	vector<string> InputFiles;
+	std::vector<std::string> InputFiles;
 	InputFiles.push_back((const char*)GetCurrFileName());
 
 	m_CheckExamples.clear();

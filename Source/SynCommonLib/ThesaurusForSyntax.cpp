@@ -60,7 +60,7 @@ bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const C
 			try 
 			{
 				std::string s_accost = "PROF";
-				vector<int> Res;
+				std::vector<int> Res;
 				Thes->QueryLowerTermins(s_accost.c_str(), morphRussian, Res);
 				for (int i=0; i <Res.size(); i++)
 				{
@@ -114,9 +114,9 @@ void CThesaurusForSyntax::SortIndexes()
 
 bool CThesaurusForSyntax::ReadTermins(const CThesaurus* piThes, EThesType eThesType)
 {
-	map<EThesType, vector<CGroups> >::const_iterator it = m_AllThesModels.find(eThesType);
+	std::map<EThesType, std::vector<CGroups> >::const_iterator it = m_AllThesModels.find(eThesType);
 	assert (it != m_AllThesModels.end());
-	const vector<CGroups>& Models = it->second;
+	const std::vector<CGroups>& Models = it->second;
 
 	int i;
 	try
@@ -230,7 +230,7 @@ bool CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType
 	size_t ModelNo = 0;
 	std::string Name = Thes.m_Name;
 	try {
-		vector<CGroups>& Models = m_AllThesModels[eThesType];
+		std::vector<CGroups>& Models = m_AllThesModels[eThesType];
 
 		long iModelsCount = Thes.m_Models.size();
 		//printf ("iModelsCount = %i\n",iModelsCount);

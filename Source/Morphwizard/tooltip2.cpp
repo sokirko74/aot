@@ -130,7 +130,7 @@ void CToolTip2::DisplayToolTip(const CPoint& rCurrentPoint)
 	pDC->Rectangle(0,0,rectToolTip.Width(),rectToolTip.Height());
 
 	//Draw tooltip text
-   	pDC->SetTextColor( GetSysColor(COLOR_INFOTEXT) );//Tool Tip color set in control panel settings
+   	pDC->SetTextColor( GetSysColor(COLOR_INFOTEXT) );//Tool Tip color std::set in control panel settings
 	pDC->SetTextAlign(TA_LEFT);
 	//pDC->TextOut(3,1, m_szText);
 	x = 0;

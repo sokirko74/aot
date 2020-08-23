@@ -38,7 +38,7 @@ struct  CGraphemOborot {
 	WORD m_UnitNo;
 	// статья имеет RESTR = fixed !
 	bool m_bFixedFet;		
-	vector<WORD> m_TokenIds;
+	std::vector<WORD> m_TokenIds;
 
 	bool operator == (const std::string& s)
 	{

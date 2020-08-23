@@ -67,7 +67,7 @@ bool AreEqual(const CHomonym& L, const CWord& W, const CGrammarItem& I)
 void CGerSentence::BuildTerminalSymbolsByWord(CWord& W)							
 {
 	const CWorkGrammar& G = GetOpt()->m_FormatsGrammar;
-	const vector<CGrammarItem>&	TerminalSymbols = G.m_UniqueGrammarItems;
+	const std::vector<CGrammarItem>&	TerminalSymbols = G.m_UniqueGrammarItems;
 
 	// adding an end of stream symbol to each word
 	assert (!W.m_Homonyms.empty());
@@ -109,7 +109,7 @@ void CGerSentence::BuildTerminalSymbolsByWord(CWord& W)
 void CGerSentence::BuildTerminalSymbolsByClause(size_t ClauseNo)							
 {
 	const CWorkGrammar& G = GetOpt()->m_FormatsGrammar;
-	const vector<CGrammarItem>&	TerminalSymbols = G.m_UniqueGrammarItems;
+	const std::vector<CGrammarItem>&	TerminalSymbols = G.m_UniqueGrammarItems;
 
 	CClause& Clause = m_Clauses[ClauseNo];
 
@@ -145,20 +145,20 @@ void CGerSentence::BuildTerminalSymbolsByClause(size_t ClauseNo)
 };
 
 
-void CGerSentence::ApplyGLR_Parsing (CGLRParser& Parser, const vector<CBuildingUnit>& BuildingUnits)
+void CGerSentence::ApplyGLR_Parsing (CGLRParser& Parser, const std::vector<CBuildingUnit>& BuildingUnits)
 {
 	const CWorkGrammar& G = GetOpt()->m_FormatsGrammar;
 	Parser.m_bRobust = true;
 	Parser.InitGLRParser(&G.m_GLRTable); 
 
-	set<CInputSymbol> EndOfSentenceSet;
+	std::set<CInputSymbol> EndOfSentenceSet;
 
 	EndOfSentenceSet.insert(CInputSymbol(G.GetEndOfStreamSymbol(),""));
 
 	for (size_t CurrWordNo = 0; CurrWordNo < BuildingUnits.size(); CurrWordNo++)
 	{
 		const CBuildingUnit& Unit = BuildingUnits[CurrWordNo];
-		const set<CInputSymbol>& Symbols = (Unit.m_ChildClauseNo == -1) ? 
+		const std::set<CInputSymbol>& Symbols = (Unit.m_ChildClauseNo == -1) ? 
 					m_Words[Unit.m_WordNo].m_AutomatSymbolInterpetationUnion 
 				:	m_Clauses[Unit.m_ChildClauseNo].m_AutomatSymbolInterpetationUnion;
 
@@ -185,12 +185,12 @@ void CGerSentence::ApplyGLR_Parsing (CGLRParser& Parser, const vector<CBuildingU
 	
 };
 
-extern void GetMaxCoverage (vector< COccurrence >& Occurrences);
-void CGerSentence::GetBestChunks(CGLRParser& Parser, vector< COccurrence>& Occurrences) const
+extern void GetMaxCoverage (std::vector< COccurrence >& Occurrences);
+void CGerSentence::GetBestChunks(CGLRParser& Parser, std::vector< COccurrence>& Occurrences) const
 {
 	const CWorkGrammar& G = GetOpt()->m_FormatsGrammar;
 	Occurrences.clear();
-	const vector<CSymbolNode>& Output = Parser.m_SymbolNodes;
+	const std::vector<CSymbolNode>& Output = Parser.m_SymbolNodes;
 	for (size_t i=0; i<Output.size(); i++)
 	{
 		if	(G.m_UniqueGrammarItems[Output[i].m_Symbol.m_GrammarSymbolNo].m_bGrammarRoot )
@@ -228,7 +228,7 @@ CGroup CGerSentence::ConvertFromTomitaNodeToCGroup(const CGLRParser& Parser, CCl
 	assert (!Node.m_ParseChildren.empty());
 
 	// determining the main word  and the main group
-	// we take into account only the first children set
+	// we take into account only the first children std::set
 	const CParsingChildrenSet&  Set = Node.m_ParseChildren[0];
 	const CGLRRuleInfo* pRule = Set.m_ReduceRule; 
 	size_t MainChildNo = Set.m_Items[pRule->m_SynMainItemNo];
@@ -240,7 +240,7 @@ CGroup CGerSentence::ConvertFromTomitaNodeToCGroup(const CGLRParser& Parser, CCl
 
 
 
-bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const vector< COccurrence>& Occurrences, CClause& pClause, vector<CBuildingUnit>& BuildingUnits )
+bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const std::vector< COccurrence>& Occurrences, CClause& pClause, std::vector<CBuildingUnit>& BuildingUnits )
 {
 	//m_bShowAllGroups = true;
 	pClause.m_SynVariants.clear();
@@ -252,8 +252,8 @@ bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const ve
 
 	// permit all homonyms, which are in the best coverages
 	
-	vector<set<int> > UsedOccurrences(BuildingUnits.size());
-	vector< CGroups > GroupsList;
+	std::vector<std::set<int> > UsedOccurrences(BuildingUnits.size());
+	std::vector< CGroups > GroupsList;
 	const CWorkGrammar& Grammar = GetOpt()->m_FormatsGrammar;
 
 	for (size_t OccurNo=0; OccurNo<Occurrences.size(); OccurNo++)
@@ -265,7 +265,7 @@ bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const ve
 			CGroups& Groups = GroupsList.back();
 			Groups.ResizeAtomicDummy(BuildingUnits.size());
 
-			vector<size_t> ParseTree;
+			std::vector<size_t> ParseTree;
 			Parser.GetParseNodesRecursive(C.m_GrammarRuleNo, ParseTree, false);
 			
 			for (int j = ParseTree.size()-1; j >=0; j--)
@@ -298,7 +298,7 @@ bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const ve
 
 		{	// get all leaves
 
-			vector<size_t> Leaves;
+			std::vector<size_t> Leaves;
 			Parser.GetParseNodesRecursive(C.m_GrammarRuleNo, Leaves, true);
 			for (size_t j = 0; j < Leaves.size(); j++)
 			{
@@ -353,9 +353,9 @@ bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const ve
 		assert (synVariant.m_SynUnits.size() == BuildingUnits.size());
 		for (size_t UnitNo=0; UnitNo<BuildingUnits.size();UnitNo++)
 		{
-			const set<int>& Occur = UsedOccurrences[UnitNo];
+			const std::set<int>& Occur = UsedOccurrences[UnitNo];
 
-			for (set<int>::const_iterator it = Occur.begin();  it != Occur.end(); it++)
+			for (std::set<int>::const_iterator it = Occur.begin();  it != Occur.end(); it++)
 			{
 				size_t OccurNo = *it;
 				const COccurrence& C = Occurrences[OccurNo];
@@ -375,7 +375,7 @@ bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const ve
 				if (bFound)
 				{
 					//  adding groups checking projectivity
-					const vector<CGroup> G =  GroupsList[OccurNo].GetGroups();
+					const std::vector<CGroup> G =  GroupsList[OccurNo].GetGroups();
 					
 					for (size_t j=0; j< G.size(); j++)
 					{
@@ -411,7 +411,7 @@ bool CGerSentence::BuildMorphVariantsByTomita(const CGLRParser& Parser, const ve
 
 bool CGerSentence::BuildGroups(CClause& pClause)
 {
-	vector<CBuildingUnit> BuildingUnits;
+	std::vector<CBuildingUnit> BuildingUnits;
 	pClause.GetBuildingUnits(BuildingUnits);
 
 	for (size_t i=0; i < BuildingUnits.size(); i++)
@@ -429,7 +429,7 @@ bool CGerSentence::BuildGroups(CClause& pClause)
 	CGLRParser Parser;
 	ApplyGLR_Parsing(Parser, BuildingUnits);
 
-	vector< COccurrence> Occurrences;
+	std::vector< COccurrence> Occurrences;
 	GetBestChunks(Parser, Occurrences);
 	
 	BuildMorphVariantsByTomita(Parser, Occurrences, pClause, BuildingUnits);

@@ -9,7 +9,7 @@ class CListCtrlToolTip : public CListCtrl
 	DECLARE_DYNAMIC(CListCtrlToolTip)
 	CToolTipCtrl	m_tooltip;
 public:
-	vector<string>		m_ToolTips;
+	std::vector<std::string>		m_ToolTips;
 	CListCtrlToolTip();
 	virtual ~CListCtrlToolTip();
 	void clear();

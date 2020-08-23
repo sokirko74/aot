@@ -95,11 +95,11 @@ struct NodeHelper{
 		:E(EngStr){}
 
 	// выдает выходящие отношения без межклаузных,  добавляя туда additional_rels
-	void	get_out_rels(int node, vector<long> &res) const;
+	void	get_out_rels(int node, std::vector<long> &res) const;
     // выдает входящеt отношения без межклаузных 
 	int		get_in_rel(int node);
     // выдает все выходящее клаузные отношения
-	void	get_out_clause_rel(int node, vector<long> &res);
+	void	get_out_clause_rel(int node, std::vector<long> &res);
 	// выдает входящее клаузное отношение
 	int     get_in_clause_rel(int node);
 	
@@ -186,14 +186,14 @@ private:
 	// ссылка от главного узла клаузы к союзному слову клаузы
 	// Например, I know where to live (clause_conj_words(live)==where )
 	// союзные слова отличаются от союзов тем, что последние не являются отдельным узлом  в структуру
-	vector<CClauseRootToConjWord> clause_conj_words; 
+	std::vector<CClauseRootToConjWord> clause_conj_words; 
 	// по номеру клаузы получаем номер узла, который является openerом в этой клаузе
-	map<int, int> clause_openers;
+	std::map<int, int> clause_openers;
 	// по номеру клаузы получаем номер узла, который является союзом в этой клаузе
-	map<int, CClauseConj> clause_conj;
+	std::map<int, CClauseConj> clause_conj;
 	// по узлу Х получаем номера узлов, которые принадлежат уже другой клаузе, но
 	// должны стоять после узла Х
-	multimap<int, pair<int, bool> > node_sub_clause_put_after;
+	std::multimap<int, pair<int, bool> > node_sub_clause_put_after;
 	
 
 	void find_all_clause_connectors();
@@ -204,7 +204,7 @@ private:
 	friend class CEngVerbTense;
 	translate_helper helper;
 
-	vector<SynthesResult> result_vec;
+	std::vector<SynthesResult> result_vec;
 	SynthesResult& Res(int node)	{return result_vec[node];}
 
 	void translate_node(int node);

@@ -62,16 +62,16 @@ bool CTrigramModel::SaveBinary()
     if (!WriteVector(Path+"/bigrams.bin", m_Bigrams))
         throw CExpc ("cannot write bigrams.bin");
     {
-        vector<int> counts;
+        std::vector<int> counts;
         counts.insert(counts.end(),m_TypeCounts, m_TypeCounts+3);
         counts.insert(counts.end(),m_TokenCounts, m_TokenCounts+3);
         if (!WriteVector(Path+"/counts.bin", counts))
         throw CExpc ("cannot write counts.bin");
     }
     {
-        vector<pair<trigram_integer_t,int> > pairs;
-        for (map<trigram_integer_t,int>::const_iterator it=m_Trigrams.begin(); it != m_Trigrams.end(); it++)
-            pairs.push_back(pair<trigram_integer_t,int>(it->first, it->second));
+        std::vector<std::pair<trigram_integer_t,int> > pairs;
+        for (std::map<trigram_integer_t,int>::const_iterator it=m_Trigrams.begin(); it != m_Trigrams.end(); it++)
+            pairs.push_back(std::pair<trigram_integer_t,int>(it->first, it->second));
         if (!WriteVector(Path+"/trigrams.bin", pairs))
         throw CExpc ("cannot write trigrams.bin");
 
@@ -150,7 +150,7 @@ bool CTrigramModel::ReadBinary()
 
     {
         std::string filename = Path + "/counts.bin";
-        vector<int> counts;
+        std::vector<int> counts;
         ReadVector(filename, counts);
         if (counts.size() != 6)
             throw CExpc("cannot read %s", filename.c_str());
@@ -163,7 +163,7 @@ bool CTrigramModel::ReadBinary()
 
     {
         std::string filename = Path + "/trigrams.bin";
-        vector<pair<trigram_integer_t,int> > pairs;
+        std::vector<std::pair<trigram_integer_t,int> > pairs;
         ReadVector(filename, pairs);
         if (pairs.empty() )
             throw CExpc("cannot read %s", filename.c_str());

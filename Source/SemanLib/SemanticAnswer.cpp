@@ -25,10 +25,10 @@ bool  CheckTreeRecursive(const CRusSemStructure& AnswerStruct, int AnswerRoot, c
 	if (!AreEqualNodes(AnswerStruct.m_Nodes[AnswerRoot], QuestionStruct.m_Nodes[QuestionRoot]))
 		return false;
 
-	vector<long> QuestRels;
+	std::vector<long> QuestRels;
 	QuestionStruct.GetOutcomingRelations(QuestionRoot, QuestRels, false);
 
-	vector<long> AnswerRels;
+	std::vector<long> AnswerRels;
 	AnswerStruct.GetOutcomingRelations(AnswerRoot, AnswerRels, false);
 
 	for (size_t  i=0; i < QuestRels.size(); i++)
@@ -38,7 +38,7 @@ bool  CheckTreeRecursive(const CRusSemStructure& AnswerStruct, int AnswerRoot, c
 		bool bQuestionWord = QuestionStruct.m_Nodes[QuestRel.m_TargetNodeNo].m_bQuestionWord;
 
 		std::string QuestRelName( QuestRel.m_Valency.m_RelationStr.c_str() );
-		vector<std::string> PossibleRels(1,  QuestRelName);
+		std::vector<std::string> PossibleRels(1,  QuestRelName);
 		if (bQuestionWord)
 		{
 			IncludeLowerInHierarchy (&QuestionStruct.m_pData->m_HierarchySemRelDoc, PossibleRels);
@@ -81,7 +81,7 @@ bool  CheckTreeRecursive(const CRusSemStructure& AnswerStruct, int AnswerRoot, c
 
 int	FindAnswer(const CRusSemStructure& AnswerStr, const CRusSemStructure& QuestionStr)
 {
-	vector<long> roots;	
+	std::vector<long> roots;	
 	QuestionStr.GetRoots(roots);
 	if ((roots.size() > 1) ||  roots.empty())
 	{
@@ -106,7 +106,7 @@ int	FindAnswer(const CRusSemStructure& AnswerStr, const CRusSemStructure& Questi
 	return -1;
 };
 
-bool	CRusSemStructure::SemanticAnswer(std::string& Result, const vector<CRusSemStructure>&	SavedSentences) const
+bool	CRusSemStructure::SemanticAnswer(std::string& Result, const std::vector<CRusSemStructure>&	SavedSentences) const
 {
 	try {
 		for (size_t i=0; i < SavedSentences.size(); i++)

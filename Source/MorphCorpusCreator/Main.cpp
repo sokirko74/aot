@@ -63,9 +63,9 @@ int main(int argc, char* argv[])
 
 		std::string result = pr.get_xml_result(Holder);
 
-		ofstream file;
+		std::ofstream file;
 		file.clear();
-		file.open(argv[3], ofstream::binary|ofstream::out);
+		file.open(argv[3], std::ofstream::binary|std::ofstream::out);
 		file.write(result.c_str(), result.size() + 1);
 		file.close();
 

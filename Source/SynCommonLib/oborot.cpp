@@ -74,9 +74,9 @@ bool COborDic::ReadOborots(const CDictionary* piOborDic)
 };
 
 
-vector<int> COborDic::FindAllArticlesForSimplePrep(std::string strPrep) const
+std::vector<int> COborDic::FindAllArticlesForSimplePrep(std::string strPrep) const
 {
-	vector<int> v;
+	std::vector<int> v;
 	if (strPrep.empty()) return v;
 	RmlMakeLower(strPrep, GetOpt()->m_Language);
 
@@ -130,7 +130,7 @@ void  COborDic::WriteSimplePrep(std::string s, int OborotNo)
 	it = m_mapSimplePrep.find(strPrep);
 	if( it == m_mapSimplePrep.end() )
 	{
-		vector<int> v;
+		std::vector<int> v;
 		v.push_back(OborotNo);
 		m_mapSimplePrep[strPrep] = v;
 	}
@@ -156,7 +156,7 @@ void  COborDic::MergeCasesOfSimililarSimplePreps()
 
 	{
 		//const std::string&  debug  = it->first;
-		vector<int>& article_nums = it->second;
+		std::vector<int>& article_nums = it->second;
 		QWORD _cases = 0;
 		
 		for(i=0; i < article_nums.size() ; i++)		
@@ -203,7 +203,7 @@ void COborDic::TokenizeDoubleConj(std::string s, int OborotNo)
 
 	DoubleConj.m_iOborNum = OborotNo;
 	DoubleConj.m_bRepeating = (DoubleConj.m_FirstPart == DoubleConj.m_SecondPart);
-	vector<SDoubleConj>::iterator it = lower_bound (m_DisruptConj.begin(), m_DisruptConj.end(), DoubleConj);
+	std::vector<SDoubleConj>::iterator it = lower_bound (m_DisruptConj.begin(), m_DisruptConj.end(), DoubleConj);
 	m_DisruptConj.insert(it, DoubleConj);
 	
 

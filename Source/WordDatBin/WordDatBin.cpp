@@ -47,7 +47,7 @@ struct CStatInfo {
     }
 };
 
-bool readDat(istream &ifs, set<CStatInfo> &Infos) {
+bool readDat(std::istream &ifs, std::set<CStatInfo> &Infos) {
     Infos.clear();
 
     char buf[256];
@@ -72,7 +72,7 @@ bool readDat(istream &ifs, set<CStatInfo> &Infos) {
             std::cout << "Error in morph. pattern line: " << buf << " skipped" << std::endl;
             continue;
         };
-        pair<set<CStatInfo>::iterator, bool> r = Infos.insert(I);
+        std::pair<std::set<CStatInfo>::iterator, bool> r = Infos.insert(I);
         if (!r.second) {
             CStatInfo A = *r.first;;
             A.m_Freq += I.m_Freq;
@@ -85,11 +85,11 @@ bool readDat(istream &ifs, set<CStatInfo> &Infos) {
     return true;
 }
 
-void DealWithUniqueLemmas(set<CStatInfo> &Infos) {
-    set<CStatInfo> NewInfos;
-    for (set<CStatInfo>::iterator it = Infos.begin(); it != Infos.end();) {
+void DealWithUniqueLemmas(std::set<CStatInfo> &Infos) {
+    std::set<CStatInfo> NewInfos;
+    for (std::set<CStatInfo>::iterator it = Infos.begin(); it != Infos.end();) {
         CStatInfo I = *it;
-        vector<CFormInfo> ParadigmCollection;
+        std::vector<CFormInfo> ParadigmCollection;
 
         std::string s = I.m_Lemma;
         if (!MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(true, s, true, false, ParadigmCollection)) {
@@ -108,7 +108,7 @@ void DealWithUniqueLemmas(set<CStatInfo> &Infos) {
         }
 
         if (CountWithTheSamePOS == 1) {
-            set<CStatInfo>::iterator it1 = it;
+            std::set<CStatInfo>::iterator it1 = it;
             it1++;
             for (; it1 != Infos.end(); it1++)
                 if ((it1->m_Lemma == I.m_Lemma)
@@ -131,17 +131,17 @@ void DealWithUniqueLemmas(set<CStatInfo> &Infos) {
 
 }
 
-static bool loadDat(istream &ifs) {
-    set<CStatInfo> Infos;
+static bool loadDat(std::istream &ifs) {
+    std::set<CStatInfo> Infos;
     if (!readDat(ifs, Infos))
         return false;
 
     DealWithUniqueLemmas(Infos);
 
-    for (set<CStatInfo>::const_iterator it = Infos.begin(); it != Infos.end(); it++) {
+    for (std::set<CStatInfo>::const_iterator it = Infos.begin(); it != Infos.end(); it++) {
         const CStatInfo &I = *it;
         bool bFound = false;
-        vector<CFormInfo> ParadigmCollection;
+        std::vector<CFormInfo> ParadigmCollection;
         std::string s = I.m_Lemma;
         if (!MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(true, s, true, false, ParadigmCollection)) {
             std::cout << "Exception in Lemmatizer (probably wrong ABC: " << I.m_Lemma << " skipped" << std::endl;

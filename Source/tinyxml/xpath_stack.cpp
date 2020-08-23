@@ -88,7 +88,7 @@ int xpath_stack::i_pop_int ()
    return i_res;   
 }
 
-/// Pops the top string from the stack
+/// Pops the top std::string from the stack
 TIXML_STRING xpath_stack::S_pop_string ()
 {
    TIXML_STRING S_res;
@@ -171,7 +171,7 @@ void xpath_stack::v_push_bool (bool o_in)
    v_push (er_res);
 }
 
-/// Push a string on the stack
+/// Push a std::string on the stack
 void xpath_stack::v_push_string (TIXML_STRING S_in)
 {
    expression_result er_res;

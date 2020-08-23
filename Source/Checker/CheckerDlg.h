@@ -61,7 +61,7 @@ public:
 	CCheckerDlg(CWnd* pParent = NULL);	// standard constructor
 	~CCheckerDlg();
 	bool	m_bLoadCOM;
-	list<CString>				m_LastQueries;
+	std::list<CString>				m_LastQueries;
 	bool	m_bResultsAreSmall;
 
 // Dialog Data
@@ -92,13 +92,13 @@ public:
 
 	
 
-	vector<CSourceExample> m_CheckExamples;
+	std::vector<CSourceExample> m_CheckExamples;
 
-	vector<CBase>  m_base;
+	std::vector<CBase>  m_base;
 	BOOL m_changed;
 
 	StringVector m_tran;
-	vector<int>    m_nbad;
+	std::vector<int>    m_nbad;
 
 // Implementation
 	BOOL InitCom();
@@ -112,7 +112,7 @@ public:
 
 	BOOL SaveBase();
 	std::string GetBaseFileName() const;
-	bool PerformExternalExeFileCheck(vector<string>& Result);
+	bool PerformExternalExeFileCheck(std::vector<std::string>& Result);
 	int		GetNumberOfExamplesToCheck() const;
 	void	ChangeHistory(const CString& query);
 	CString GetCurrFileName() const;

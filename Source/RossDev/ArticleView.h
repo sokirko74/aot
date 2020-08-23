@@ -73,11 +73,11 @@ public:
 	CRossDoc*  GetRossDoc ();
 	void   	GotoLastField();
 	void   	AddOrInsertRossField (int nPos, ActionType fnAction);
-	bool   	GetFieldList (vector<CRossDevTextField>& Result, vector<CRossDevTextField>& Prohibited);
+	bool   	GetFieldList (std::vector<CRossDevTextField>& Result, std::vector<CRossDevTextField>& Prohibited);
 	void   	EditValue(int nPos);
 	void   	EditOneValue(CRossDevTextField& F);
 	void   	EditFormulaValue (int nPos, char TypeRes);
-	void	WriteToEdit (vector<TCortege10>& L, size_t nPos);
+	void	WriteToEdit (std::vector<TCortege10>& L, size_t nPos);
 	void	DelField(size_t nPos);
 
 // Overrides

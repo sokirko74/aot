@@ -162,7 +162,7 @@ void CGraphmatFile::DealSentBreaker ()
 		InnerOpenBracket contains  the code of this  bracket.
 		As soon we have found an open bracket inside the sentence  we should find a matching close bracket for it.
 		We pass all possible  "end of sentence" marks until we find a match. Only if we find 
-		a paragraph break then we set an end of sentence.
+		a paragraph break then we std::set an end of sentence.
 		According to this  rule, in the example "Test (test. test)  Мама." the procedure finds only  two sentences.
 	*/
 	BYTE InnerOpenBracket = 0;
@@ -193,7 +193,7 @@ void CGraphmatFile::DealSentBreaker ()
 	// were calculated 
 	for (size_t WordNo = FirstSentStart; WordNo < EndPos; WordNo++)
 	{
-		// WordNo cannot be between sentences, after we have set a sentence break we should
+		// WordNo cannot be between sentences, after we have std::set a sentence break we should
 		// shift  WordNo to the beginning of a new sentence if it is neccessary
 		assert (WordNo+1 >= EndPos || !HasDescr(WordNo+1, OSentEnd));
 		if (HasDescr(WordNo, OOpn))
@@ -396,7 +396,7 @@ void CGraphmatFile::DealSentBreaker ()
 	}; // main for  cycle
 
 	/*
-	we set OSentEnd at the the last word or delimiter of the text,
+	we std::set OSentEnd at the the last word or delimiter of the text,
 	for example:
 	I go to the forest (!)
 	Here the close bracket will be marked with OSentEnd, (not "!")

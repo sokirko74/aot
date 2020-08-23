@@ -168,7 +168,7 @@ int main(int argc, char *argv[])
 		{
 			std::string InputWordForm = Line[ColumnNo-1];
 			RmlMakeUpper(InputWordForm, langua);
-			vector<CFormInfo>  ParadigmCollection; 
+			std::vector<CFormInfo>  ParadigmCollection; 
 			Holder.m_pLemmatizer->CreateParadigmCollection(!bProcessWordForms, InputWordForm, true, false, ParadigmCollection);
 			
 			for (int j=0; j < ParadigmCollection.size(); j++)

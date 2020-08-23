@@ -17,8 +17,8 @@ static char THIS_FILE[] = __FILE__;
 
 
 CSetEditor::CSetEditor(CRossDoc* pRossDoc,
-					   vector<TCortege>& OldValue,
-		               vector<TCortege>& NewValue,
+					   std::vector<TCortege>& OldValue,
+		               std::vector<TCortege>& NewValue,
 			           CRossDevTextField& F,
 					   CWnd* pParent /*=NULL*/)
 	: CDialog(CSetEditor::IDD, pParent),

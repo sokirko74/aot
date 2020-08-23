@@ -60,7 +60,7 @@ void CPostLemWord::SafeDeleteMarkedHomonyms()
 
 bool CPostLemWord::LemmatizeForm(const std::string& s, const CLemmatizer* pLemmatizer )
 {
-    vector<CFormInfo> Paradigms;
+    std::vector<CFormInfo> Paradigms;
     std::string Word = s;
 	if (!pLemmatizer->CreateParadigmCollection(false, Word, false, false, Paradigms)) return false;
     if (Paradigms.empty()) return false;

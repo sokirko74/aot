@@ -18,8 +18,8 @@ class CFormulaEditor : public CDialog
 	int					m_RowsCount;
 	int					m_ColumnsCount;
 	CRossDevTextField&			m_Field;
-	vector<TCortege>&	m_OldValue;
-	vector<TCortege>&	m_NewValue;
+	std::vector<TCortege>&	m_OldValue;
+	std::vector<TCortege>&	m_NewValue;
 	CRossDoc*			m_pRossDoc;
 
 
@@ -30,8 +30,8 @@ class CFormulaEditor : public CDialog
 
 public:
     CFormulaEditor(CRossDoc* pRossDoc,
-	 	           vector<TCortege>& OldValue,
-		           vector<TCortege>& NewValue,
+	 	           std::vector<TCortege>& OldValue,
+		           std::vector<TCortege>& NewValue,
 			       CRossDevTextField& F,
 		           CWnd* pParent = NULL);   // standard constructor
 

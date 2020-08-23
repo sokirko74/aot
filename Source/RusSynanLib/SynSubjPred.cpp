@@ -171,7 +171,9 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 	int MinWordNo = SubjWordNo;
 	int MaxWordNo = RootWordNo;
 	int CountOfCommmas = 0; 
-	if (MaxWordNo <  MinWordNo) swap (MaxWordNo, MinWordNo);
+	if (MaxWordNo < MinWordNo) {
+		std::swap(MaxWordNo, MinWordNo);
+	}
 	for (long WordNo=MinWordNo; WordNo < MaxWordNo; WordNo++)
 	{
 		const CSynUnit& U = synVariant.m_SynUnits[WordNo];

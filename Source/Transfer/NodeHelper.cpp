@@ -3,10 +3,10 @@
 
 
 
-void	NodeHelper::get_out_rels(int node, vector<long> &res) const
+void	NodeHelper::get_out_rels(int node, std::vector<long> &res) const
 {
 	if(node == -1) return;
-	vector<long> rels;
+	std::vector<long> rels;
 	E.GetOutcomingRelations(node,rels);
 	for(int i = 0; i < rels.size(); i++){
 		if(IsBetweenClause(rels[i])) continue;
@@ -18,7 +18,7 @@ int	NodeHelper::get_in_clause_rel(int node)
 {
 	if(node == -1) return -1;
 	int res = -1;
-	vector<long> rels;
+	std::vector<long> rels;
 	E.GetIncomingRelations(node, rels, false);
 	for(int i = 0; i < rels.size(); i++){
 		if(!IsBetweenClause(rels[i])) continue;
@@ -34,7 +34,7 @@ int	NodeHelper::get_in_rel(int node)
 {
 	if(node == -1) return -1;
 	int res = -1;
-	vector<long> rels;
+	std::vector<long> rels;
 	E.GetIncomingRelations(node, rels, false);
 	for(int i = 0; i < rels.size(); i++){
 		if(IsBetweenClause(rels[i])) continue;
@@ -44,10 +44,10 @@ int	NodeHelper::get_in_rel(int node)
 	return res;
 }
 
-void	NodeHelper::get_out_clause_rel(int node, vector<long> &res)
+void	NodeHelper::get_out_clause_rel(int node, std::vector<long> &res)
 {
 	if(node == -1) return;
-	vector<long> rels;
+	std::vector<long> rels;
 	E.GetOutcomingRelations(node,rels);
 	for(int i = 0; i < rels.size(); i++){
 		if(!IsBetweenClause(rels[i])) continue;
@@ -124,7 +124,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &
 		if (Dict == 0) return false;
 
 		long eng_termin;
-		vector<int> EnglishTranslations;
+		std::vector<int> EnglishTranslations;
 		Thes->QueryEnglishTranslations(node.m_Colloc.GetThesInterp().m_TerminId, EnglishTranslations);
 		if(EnglishTranslations.empty()) return false;
 		eng_termin = EnglishTranslations[0];
@@ -150,7 +150,7 @@ bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, WORD unit_no,
 {
 	if(unit_no == ErrUnitNo) return false;
 	if (RossHolder == 0) return false;
-	vector<TCortege> vec;
+	std::vector<TCortege> vec;
 	StringTokenizer tok(value.c_str(), " \t");
 	StringVector value_vec;
 	while(tok()) value_vec.push_back(tok.val());
@@ -182,7 +182,7 @@ bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, WORD unit_no,
 void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, WORD unit_no, const std::string &field, 
 				 StringVector &res, int max_items) const
 {
-	vector<TCortege> vec;
+	std::vector<TCortege> vec;
 	E.GetRossHolder(dict_kind)->GetFieldValues(field.c_str(), unit_no, vec);
 	for(int i = 0; i < vec.size(); i++){
 		std::string value;

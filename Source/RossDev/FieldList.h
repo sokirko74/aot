@@ -17,10 +17,10 @@ class CFieldList : public CDialog
 // Construction
 public:
     bool m_SelectProhibited;
-	vector<CRossDevTextField>& m_Result;
+	std::vector<CRossDevTextField>& m_Result;
 
 	CFieldList(const CRossDoc* pRossDoc, 
-				vector<CRossDevTextField>& Result, 
+				std::vector<CRossDevTextField>& Result, 
 				CWnd* pParent = NULL);   // standard constructor
 	const CRossDoc* m_pRossDoc;
 	const CDictionary* GetRoss ();

@@ -7,7 +7,7 @@
 
 int CThesaurus::GetModelNoByModelId (long ModelId) const
 {
-	vector<CInnerModel>::const_iterator It = lower_bound(m_Models.begin(), m_Models.end(),CInnerModel(ModelId));
+	std::vector<CInnerModel>::const_iterator It = lower_bound(m_Models.begin(), m_Models.end(),CInnerModel(ModelId));
 	if  (  (It != m_Models.end())
 		 &&(It->m_ModelId==ModelId)
 		)
@@ -35,7 +35,7 @@ struct IsLessByTerminId {
 
 int  CThesaurus::GetTerminNoByTextEntryId(long TextEntryId) const
 {
-	vector<CInnerTermin>::const_iterator It = lower_bound (m_Termins.begin(), m_Termins.end(), TextEntryId, IsLessByTerminId());
+	std::vector<CInnerTermin>::const_iterator It = lower_bound (m_Termins.begin(), m_Termins.end(), TextEntryId, IsLessByTerminId());
 	if (   ( It !=   m_Termins.end())
 		&& (TextEntryId == It->m_TerminId) 
 		)

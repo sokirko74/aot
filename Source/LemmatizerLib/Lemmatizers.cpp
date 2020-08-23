@@ -74,7 +74,7 @@ bool CLemmatizer::IsPrefix(const std::string& Prefix) const
 
 //   CLemmatizer::LemmatizeWord should return true if 
 // the word was found in the dictionary, if it was predicted, then it returns false
-bool CLemmatizer::LemmatizeWord(std::string& InputWordStr, const bool cap, const bool predict, vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const
+bool CLemmatizer::LemmatizeWord(std::string& InputWordStr, const bool cap, const bool predict, std::vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const
 {
 	
 	RmlMakeUpper (InputWordStr, GetLanguage());
@@ -146,7 +146,7 @@ bool CLemmatizer::LemmatizeWord(std::string& InputWordStr, const bool cap, const
 
 
 
-void CLemmatizer::AssignWeightIfNeed(vector<CAutomAnnotationInner>& FindResults) const
+void CLemmatizer::AssignWeightIfNeed(std::vector<CAutomAnnotationInner>& FindResults) const
 {
 
 	for (size_t i = 0; i < FindResults.size(); i++)
@@ -165,7 +165,7 @@ void CLemmatizer::GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* O
 	*OutBuffer = 0;
 	std::string InputWordStr = (const char*)WordForm;
 	FilterSrc(InputWordStr);
-	vector<CAutomAnnotationInner>	FindResults;
+	std::vector<CAutomAnnotationInner>	FindResults;
 	LemmatizeWord(InputWordStr, capital, bUsePrediction, FindResults, true);
 	size_t Count = FindResults.size();
 	for (DWORD i=0; i < Count; i++)
@@ -196,7 +196,7 @@ bool CLemmatizer::GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool ca
 {
 	FilterSrc(InputWordStr);
 
-	vector<CAutomAnnotationInner>	FindResults;
+	std::vector<CAutomAnnotationInner>	FindResults;
 
 	bool bFound = LemmatizeWord(InputWordStr, capital, bUsePrediction, FindResults, false);
 
@@ -310,13 +310,13 @@ bool CLemmatizer::LoadDictionariesRegistry(std::string& strError)
 	}
 }
 
-bool IsFound(const vector<CFormInfo> & results)
+bool IsFound(const std::vector<CFormInfo> & results)
 {
     return !results.empty() && results[0].m_bFound;
 
 };
 
-void CreateDecartProduction (const vector<CFormInfo>& results1, const vector<CFormInfo>& results2, vector<CFormInfo>& results)
+void CreateDecartProduction (const std::vector<CFormInfo>& results1, const std::vector<CFormInfo>& results2, std::vector<CFormInfo>& results)
 {
 	results.clear();
 	for (size_t i=0; i<results1.size(); i++)
@@ -331,11 +331,11 @@ void CreateDecartProduction (const vector<CFormInfo>& results1, const vector<CFo
 
 
 
-bool CLemmatizer::CreateParadigmCollection(bool bNorm, std::string& InputWordStr, bool capital, bool bUsePrediction, vector<CFormInfo>& Result) const
+bool CLemmatizer::CreateParadigmCollection(bool bNorm, std::string& InputWordStr, bool capital, bool bUsePrediction, std::vector<CFormInfo>& Result) const
 {
     Result.clear();
 	FilterSrc(InputWordStr);
-	vector<CAutomAnnotationInner>	FindResults;
+	std::vector<CAutomAnnotationInner>	FindResults;
 	bool bFound = LemmatizeWord(InputWordStr, capital, bUsePrediction, FindResults, true);
 		
 	AssignWeightIfNeed(FindResults);
@@ -357,7 +357,7 @@ bool CLemmatizer::CreateParadigmCollection(bool bNorm, std::string& InputWordStr
 		// if the word was not found in the dictionary 
 		// and the word contains a hyphen 
 		// then we should try to predict each parts of the hyphened word separately
-        vector<CFormInfo> results1, results2;
+        std::vector<CFormInfo> results1, results2;
 
 		int hyph = InputWordStr.find("-");
 		bool gennum = false;
@@ -478,22 +478,22 @@ CAutomAnnotationInner  CLemmatizer::ConvertPredictTupleToAnnot(const CPredictTup
 };
 
 
-bool CLemmatizer::CheckAbbreviation(std::string InputWordStr,vector<CAutomAnnotationInner>& FindResults, bool is_cap) const
+bool CLemmatizer::CheckAbbreviation(std::string InputWordStr,std::vector<CAutomAnnotationInner>& FindResults, bool is_cap) const
 {
 	for(size_t i=0; i <InputWordStr.length(); i++)
 		if (!is_upper_consonant((BYTE)InputWordStr[i], GetLanguage()))
 			return false;
 
-	vector<CPredictTuple> res;
+	std::vector<CPredictTuple> res;
 	m_Predict.Find(m_pFormAutomat->GetCriticalNounLetterPack(),res); 
 	FindResults.push_back(ConvertPredictTupleToAnnot(res[0]));
 	return true;
 };
 
-void CLemmatizer::PredictByDataBase(std::string InputWordStr,  vector<CAutomAnnotationInner>& FindResults,bool is_cap) const  
+void CLemmatizer::PredictByDataBase(std::string InputWordStr,  std::vector<CAutomAnnotationInner>& FindResults,bool is_cap) const  
 {
 
-	vector<CPredictTuple> res;
+	std::vector<CPredictTuple> res;
 	if (CheckAbbreviation(InputWordStr, FindResults, is_cap))
 		return;
 
@@ -503,7 +503,7 @@ void CLemmatizer::PredictByDataBase(std::string InputWordStr,  vector<CAutomAnno
 		m_Predict.Find(InputWordStr,res);
 	}
 
-	vector<int> has_nps(32, -1); // assume not more than 32 different pos
+	std::vector<int> has_nps(32, -1); // assume not more than 32 different pos
 	for( int j=0; j<res.size(); j++ )
 	{
 		BYTE PartOfSpeechNo = res[j].m_PartOfSpeechNo;
@@ -572,7 +572,7 @@ bool CLemmatizer::ProcessHyphenWords(CGraphmatFile* piGraphmatFile) const
 				std::string HyphenWord = piGraphmatFile->GetToken(LineNo-1)+"-"+piGraphmatFile->GetToken(NextWord);
 
 
-				vector<CAutomAnnotationInner>	FindResults;
+				std::vector<CAutomAnnotationInner>	FindResults;
 				if (LemmatizeWord(HyphenWord, !piGraphmatFile->HasDescr(LineNo-1,OLw), false,FindResults, false))
 				{
 					// uniting words LineNo-1, LineNo,  and NextWord

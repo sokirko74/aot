@@ -154,7 +154,7 @@ static long GetRelationsCount(const CThesaurus& T, int ConceptNo, RelationEnum R
 {
 	long Result = 0;
 	for (
-		vector<CRelat>::const_iterator It = lower_bound(T.m_Relats.begin(), T.m_Relats.end(),ConceptNo, IsLessByConcept1());
+		std::vector<CRelat>::const_iterator It = lower_bound(T.m_Relats.begin(), T.m_Relats.end(),ConceptNo, IsLessByConcept1());
 	  !(It == T.m_Relats.end()) && (It->m_Concept1No==ConceptNo);
 	  It++
 	 )
@@ -165,7 +165,7 @@ static long GetRelationsCount(const CThesaurus& T, int ConceptNo, RelationEnum R
 };
 
 
-bool CThesaurus::GetTree(int ConceptNo, vector<long>& TreeConcepts,  vector<long> CurrPath, RelationEnum RelationType) const
+bool CThesaurus::GetTree(int ConceptNo, std::vector<long>& TreeConcepts,  std::vector<long> CurrPath, RelationEnum RelationType) const
 {
 
 	for (long i=0; i <CurrPath.size(); i++)
@@ -174,7 +174,7 @@ bool CThesaurus::GetTree(int ConceptNo, vector<long>& TreeConcepts,  vector<long
 	CurrPath.push_back(ConceptNo);
 
 	for (
-		vector<CRelat>::const_iterator It = lower_bound(m_Relats.begin(), m_Relats.end(),ConceptNo, IsLessByConcept1());
+		std::vector<CRelat>::const_iterator It = lower_bound(m_Relats.begin(), m_Relats.end(),ConceptNo, IsLessByConcept1());
 		!(It == m_Relats.end()) && (It->m_Concept1No==ConceptNo);
 		It++
 		)
@@ -194,12 +194,12 @@ bool CThesaurus::IsA(DWORD TextEntryId, std::string ConceptStr) const
 	if (ConceptNo == -1) return   false;
 	long ConceptId = m_Concepts[ConceptNo].m_ConceptId;
 
-	vector<long> ConceptsFromTextEntry;
+	std::vector<long> ConceptsFromTextEntry;
 	GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
 	if (ConceptsFromTextEntry.empty()) return true;
 
-	vector<long> HIGHERConcepts;
-	vector<long> Path;
+	std::vector<long> HIGHERConcepts;
+	std::vector<long> Path;
 	for (long i=0; i < ConceptsFromTextEntry.size();i++)
 	{
 		HIGHERConcepts.clear();
@@ -227,10 +227,10 @@ bool IsEnglishModel (const CInnerModel& M)
 
 };
 
-void CThesaurus::QueryEnglishTranslations(DWORD TextEntryId, vector<int>& CurrentEnglishTermins) const
+void CThesaurus::QueryEnglishTranslations(DWORD TextEntryId, std::vector<int>& CurrentEnglishTermins) const
 {
 	CurrentEnglishTermins.clear();
-	vector<long> ConceptsFromTextEntry;
+	std::vector<long> ConceptsFromTextEntry;
 	GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
 	if (ConceptsFromTextEntry.empty()) return;
 
@@ -283,7 +283,7 @@ int CThesaurus::GetTerminIdBySingleWord(std::string WordStr) const
 
 	EngRusMakeUpper(I.m_ItemStr);
 
-	for (vector<CInnerSynItem>::const_iterator It = lower_bound (m_SynItems.begin(), m_SynItems.end(),I);
+	for (std::vector<CInnerSynItem>::const_iterator It = lower_bound (m_SynItems.begin(), m_SynItems.end(),I);
 	     (It < m_SynItems.end()) && (It->m_ItemStr == I.m_ItemStr);
 		 It++)
       if (m_Termins[It->m_TerminNo].m_ModelNo != -1)
@@ -296,17 +296,17 @@ int CThesaurus::GetTerminIdBySingleWord(std::string WordStr) const
 	return -1;
 }
 
-int CThesaurus::QueryTopConcepts(UINT TextEntryId, vector<int>& CurrentTopConcepts) const
+int CThesaurus::QueryTopConcepts(UINT TextEntryId, std::vector<int>& CurrentTopConcepts) const
 {
   CurrentTopConcepts.clear();
-  vector<long> ConceptsFromTextEntry;
+  std::vector<long> ConceptsFromTextEntry;
   GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
   if (ConceptsFromTextEntry.empty()) return 0;
 
   for (long i=0; i <ConceptsFromTextEntry.size(); i++)
   {
-	vector<long> HIGHERConcepts;
-	vector<long> Path;
+	std::vector<long> HIGHERConcepts;
+	std::vector<long> Path;
 
     if (!GetTree(GetConceptNoByConceptId(ConceptsFromTextEntry[i]), HIGHERConcepts, Path, HIGHER))
     {
@@ -326,7 +326,7 @@ int CThesaurus::QueryTopConcepts(UINT TextEntryId, vector<int>& CurrentTopConcep
 
 
 
-void  CThesaurus::QueryHigherTermins(UINT TextEntryId, vector<int>& CurrentHigherTermins) const
+void  CThesaurus::QueryHigherTermins(UINT TextEntryId, std::vector<int>& CurrentHigherTermins) const
 {
 	CurrentHigherTermins.clear();
 	long TerminNo = GetTerminNoByTextEntryId(TextEntryId);
@@ -335,15 +335,15 @@ void  CThesaurus::QueryHigherTermins(UINT TextEntryId, vector<int>& CurrentHighe
 	bool IsEnglish =   IsEnglishModel(m_Models[m_Termins[TerminNo].m_ModelNo]);
  
 
-	vector<long> ConceptsFromTextEntry;
+	std::vector<long> ConceptsFromTextEntry;
 	GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
 	if (ConceptsFromTextEntry.empty()) return;
-	vector<long> HigherConcepts;
+	std::vector<long> HigherConcepts;
 	long i=0;
 	for (; i <ConceptsFromTextEntry.size(); i++)
 	{
-		vector<long> HIGHERConcepts;
-		vector<long> Path;
+		std::vector<long> HIGHERConcepts;
+		std::vector<long> Path;
 
 		if (!GetTree(GetConceptNoByConceptId(ConceptsFromTextEntry[i]), HIGHERConcepts, Path, HIGHER))
 		{
@@ -359,7 +359,7 @@ void  CThesaurus::QueryHigherTermins(UINT TextEntryId, vector<int>& CurrentHighe
 
 	for (i=0; i <HigherConcepts.size(); i++)
 	{
-	  vector<long> TextEntries;
+	  std::vector<long> TextEntries;
 	  GetTextEntriesByConcept(m_Concepts[HigherConcepts[i]].m_ConceptId, TextEntries);
 	  for (long k=0; k < TextEntries.size(); k++)
 	  {
@@ -374,12 +374,12 @@ void  CThesaurus::QueryHigherTermins(UINT TextEntryId, vector<int>& CurrentHighe
 }
 
 
-DWORD CThesaurus::QueryTerminItem(const std::string& ItemStr, vector<int>& CurrentTerminItems) const
+DWORD CThesaurus::QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const
 {
 	CurrentTerminItems.clear();
 	CInnerSynItem I;
 	I.m_ItemStr = ItemStr;
-	for (vector<CInnerSynItem>::const_iterator It = lower_bound (m_SynItems.begin(), m_SynItems.end(),I);
+	for (std::vector<CInnerSynItem>::const_iterator It = lower_bound (m_SynItems.begin(), m_SynItems.end(),I);
 	     (It < m_SynItems.end()) && (It->m_ItemStr == I.m_ItemStr);
 		 It++)
 	     CurrentTerminItems.push_back(It - m_SynItems.begin());
@@ -389,20 +389,20 @@ DWORD CThesaurus::QueryTerminItem(const std::string& ItemStr, vector<int>& Curre
 
 
 
-void CThesaurus::QueryLowerTermins(const std::string& ConceptStr, UINT Language, vector<int>& CurrentLowerTermins) const
+void CThesaurus::QueryLowerTermins(const std::string& ConceptStr, UINT Language, std::vector<int>& CurrentLowerTermins) const
 {
 	CurrentLowerTermins.clear();
 	long ConceptNo = GetConceptNoByConceptStr(ConceptStr);	
 	if (ConceptNo == -1) return;
-	vector<long> LOWERConcepts;
-	vector<long> Path;
+	std::vector<long> LOWERConcepts;
+	std::vector<long> Path;
 	if (!GetTree(ConceptNo, LOWERConcepts, Path, LOWER))
 		  return;
 
 	bool IsEnglish =  Language == morphEnglish;
 	for (long i=0; i <LOWERConcepts.size(); i++)
 	{
-	  vector<long> TextEntries;
+	  std::vector<long> TextEntries;
 	  GetTextEntriesByConcept(m_Concepts[LOWERConcepts[i]].m_ConceptId, TextEntries);
 	  for (long k=0; k < TextEntries.size(); k++)
 	  {
@@ -504,7 +504,7 @@ bool CThesaurus::LoadSynItems(std::string FileName)
 		I.m_OborotNo = ErrUnitNo;
 		if (OborotId != -1)
 		{
-			vector<COborot>::const_iterator It = lower_bound(m_Oborots.begin(), m_Oborots.end(),COborot(OborotId));
+			std::vector<COborot>::const_iterator It = lower_bound(m_Oborots.begin(), m_Oborots.end(),COborot(OborotId));
 			if  (  (It != m_Oborots.end())
 				 &&(It->m_OborotId == OborotId)
 				)

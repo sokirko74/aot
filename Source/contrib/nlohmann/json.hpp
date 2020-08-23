@@ -6476,7 +6476,7 @@ class output_adapter
 #include <iterator> // back_inserter
 #include <limits> // numeric_limits
 #include <string> // char_traits, string
-#include <utility> // make_pair, move
+#include <utility> // std::make_pair, move
 
 // #include <nlohmann/detail/input/input_adapters.hpp>
 

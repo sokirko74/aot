@@ -290,10 +290,10 @@ BOOL CArticleDoc::SaveModified()
 };
 
 
-bool CArticleDoc::AddCortegeToVector(vector<TCortege10>& L, CRossDevTextField& F)
+bool CArticleDoc::AddCortegeToVector(std::vector<TCortege10>& L, CRossDevTextField& F)
 {
 
-	vector<CString>  Lines;
+	std::vector<CString>  Lines;
 	size_t Count = m_Article.GetCortegesSize();
 	for (size_t i = 0; i < Count; i++)
 	{

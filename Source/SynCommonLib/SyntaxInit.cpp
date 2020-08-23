@@ -35,7 +35,7 @@ void CSyntaxOpt::DestroyOptions() {
 
 bool CSyntaxOpt::ReadListFile(const std::string &FileName, StringHashSet& C) {
 
-    ifstream inp(FileName.c_str());
+    std::ifstream inp(FileName.c_str());
     if (!inp.is_open() ) {
         OutputErrorString(Format("Can't open file \'%s\'.", FileName.c_str()));
         return false;

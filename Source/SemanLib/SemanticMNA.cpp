@@ -323,7 +323,7 @@ long CRusSemStructure::GetRepeatConj (long NodeNo)
 
 
 
-void CRusSemStructure::GetMNARelations(long NodeNo, vector<long>& Rels, bool UseUse) const 
+void CRusSemStructure::GetMNARelations(long NodeNo, std::vector<long>& Rels, bool UseUse) const 
 {
  	GetOutcomingRelations(NodeNo, Rels, UseUse);
 
@@ -336,9 +336,9 @@ void CRusSemStructure::GetMNARelations(long NodeNo, vector<long>& Rels, bool Use
 			};
 };
 
-void CRusSemStructure::GetMNAMembers(long NodeNo, vector<long>& Nodes, bool UseUse) const 
+void CRusSemStructure::GetMNAMembers(long NodeNo, std::vector<long>& Nodes, bool UseUse) const 
 {
-	vector <long> Rels;
+	std::vector <long> Rels;
 	GetMNARelations(NodeNo, Rels, UseUse);
 
 	Nodes.clear();
@@ -351,7 +351,7 @@ void CRusSemStructure::GetMNAMembers(long NodeNo, vector<long>& Nodes, bool UseU
 long CRusSemStructure::GetFirstMNAMemberIfHas(long NodeNo) const 
 {
     
-	vector <long> Nodes;
+	std::vector <long> Nodes;
 
 	GetMNAMembers (NodeNo, Nodes, false);
 
@@ -557,11 +557,11 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 
 
 
-vector<QWORD> CRusSemStructure::GetSemFetsOfFirstValency(long NodeNo)
+std::vector<QWORD> CRusSemStructure::GetSemFetsOfFirstValency(long NodeNo)
 {
 	//получаем SF1 из РОСС  	 
 	
-	vector<QWORD> SemFets;
+	std::vector<QWORD> SemFets;
 	if (   (m_Nodes[NodeNo].m_Vals.size() > 0)
 		&& (m_Nodes[NodeNo].GetType() != NoneRoss)
 		)
@@ -668,7 +668,7 @@ void CRusSemStructure::DeleteMNAWithOneChild(long ClauseNo)
 		&& (m_Nodes[NodeNo].m_NodeType == MNA)
 	   )
 	{
-		vector<long> Rels;
+		std::vector<long> Rels;
 		GetOutcomingRelations(NodeNo, Rels, false);
 		if (Rels.size() == 1)
 			// я буду умнее

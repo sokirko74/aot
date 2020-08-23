@@ -2,7 +2,7 @@
 #include "../common/MorphXmlToken.h"
 
 
-void PrintCookedSentence (const vector<CXmlToken>& Tokens, bool bPrintLemmas)
+void PrintCookedSentence (const std::vector<CXmlToken>& Tokens, bool bPrintLemmas)
 {
     for (size_t i=0; i<Tokens.size(); i++)
     {

@@ -16,7 +16,7 @@ class CNewRefArticles : public CPropertyPage
 
 // Construction
 public:
-	vector<LONG>   m_RefsId;
+	std::vector<LONG>   m_RefsId;
 	CString        m_ResultString;
 	CString        m_Caption;
 	CString        m_Lemma;
@@ -24,7 +24,7 @@ public:
 	CNewRefArticles();
 	CNewRefArticles(CString Caption);
 	~CNewRefArticles();
-	void SetRefs(vector<LONG>& RefsId);
+	void SetRefs(std::vector<LONG>& RefsId);
 
 
 // Dialog Data

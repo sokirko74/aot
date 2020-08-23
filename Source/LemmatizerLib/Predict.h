@@ -24,7 +24,7 @@ struct  CPredictTuple
 class CPredictBase 
 {	
 	CMorphAutomat				m_SuffixAutomat;
-	void FindRecursive(int r, std::string& curr_path, vector<CPredictTuple>& Infos) const;
+	void FindRecursive(int r, std::string& curr_path, std::vector<CPredictTuple>& Infos) const;
 public:
 	DwordVector			m_ModelFreq;
 
@@ -32,7 +32,7 @@ public:
 	CPredictBase(MorphLanguageEnum);
 
 	void Load (const std::string &path);
-	bool Find(const std::string &lettId, vector<CPredictTuple>& res) const;
+	bool Find(const std::string &lettId, std::vector<CPredictTuple>& res) const;
 };
 
 

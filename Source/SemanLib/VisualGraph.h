@@ -20,14 +20,14 @@ struct CVisualRelation
 
 struct CVisualSemGraph {
 
-	vector<CVisualNode>		m_Nodes;
-	vector<CVisualRelation> m_Relations;
-	vector<CVisualRelation> m_DopRelations;
+	std::vector<CVisualNode>		m_Nodes;
+	std::vector<CVisualRelation> m_Relations;
+	std::vector<CVisualRelation> m_DopRelations;
 
 	CVisualSemGraph();
 	void InitFromSemantics (const CSemStructureBuilder& SemBuilder);
-	vector<int> GetChildren(int NodeNo) const ;
-	vector<int> GetParents(int NodeNo) const ;
+	std::vector<int> GetChildren(int NodeNo) const ;
+	std::vector<int> GetParents(int NodeNo) const ;
 	int SetTreeLayout (int Root, int Left, int Top);
 	int GetLeavesCount (int Root) const;
 	void  SetGraphLayout();

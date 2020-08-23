@@ -2,7 +2,7 @@
 #include "SemanticRusStructure.h"
 
 
-void CRusSemStructure::GetIncomingSynRelations (long NodeNo, vector<long>& Relations) const 
+void CRusSemStructure::GetIncomingSynRelations (long NodeNo, std::vector<long>& Relations) const 
 {
   Relations.clear();
   for (size_t i = 0; i<m_SynRelations.size(); i++)
@@ -15,7 +15,7 @@ void CRusSemStructure::GetIncomingSynRelations (long NodeNo, vector<long>& Relat
 
 bool CRusSemStructure::HasIncomingNotWeakSynRelation (long NodeNo) const 
 {
-	vector<long> Relations;
+	std::vector<long> Relations;
 	GetIncomingSynRelations(NodeNo, Relations);
     for (long i=0; i < Relations.size(); i++)
 	  if ( !IsWeakSynRel(m_SynRelations[Relations[i]].m_SynRelName) )
@@ -30,7 +30,7 @@ long  CRusSemStructure::GetDefiniteRightHostByNotWeakSynRelation (long NodeNo) c
 		if (NodeNo >= m_Nodes.size()) return -1;
 		for (;;)
 		{
-			vector<long> Relations;
+			std::vector<long> Relations;
 			GetIncomingSynRelations(NodeNo, Relations);
 			long i=0;
 			for (; i < Relations.size(); i++)
@@ -69,14 +69,14 @@ long CRusSemStructure::GetSynRelationsCount (long NodeNo) const
 
 long CRusSemStructure::GetSynHost (long NodeNo) const 
 {
-  vector<long> Rels;
+  std::vector<long> Rels;
   GetIncomingSynRelations (NodeNo, Rels);
   if (Rels.size() == 0)
 	  return -1;
   return m_SynRelations[Rels[0]].m_SourceNodeNo;
 };
 
-void CRusSemStructure::GetOutcomingSynRelations (long NodeNo, vector<long>& Relations) const 
+void CRusSemStructure::GetOutcomingSynRelations (long NodeNo, std::vector<long>& Relations) const 
 {
   Relations.clear();
   for (size_t i = 0; i<m_SynRelations.size(); i++)
@@ -86,7 +86,7 @@ void CRusSemStructure::GetOutcomingSynRelations (long NodeNo, vector<long>& Rela
 
 
 
-void CRusSemStructure::DeleteSynRelations(vector<long>& Rels)
+void CRusSemStructure::DeleteSynRelations(std::vector<long>& Rels)
 {
 	if (Rels.size() == 0) return;
 	sort (Rels.begin(), Rels.end());
@@ -191,14 +191,14 @@ void CRusSemStructure::MoveSynRelations(long FromNode, long ToNode)
 
 long CRusSemStructure::GetIncomingSynRelationsCount (long NodeNo) const
 {
- vector<long> Relations;
+ std::vector<long> Relations;
  GetIncomingSynRelations(NodeNo, Relations);
  return Relations.size();
 };
 
 long CRusSemStructure::GetOutcomingSynRelationsCount (long NodeNo) const
 {
- vector<long> Relations;
+ std::vector<long> Relations;
  GetOutcomingSynRelations(NodeNo, Relations);
  return Relations.size();
 };

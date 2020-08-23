@@ -82,11 +82,11 @@ class CRossDoc : public CDocument
 	bool				m_bSerialized;
 	DictTypeEnum		m_RossId;
 	bool				m_IsDefault;
-	vector<CString>		m_Authors;
+	std::vector<CString>		m_Authors;
 	bool				m_FirstLoadReadonly;
 	bool				m_DoNotLock;
 	bool				m_bDoNotSaveLastUserName;	
-	vector<CString>		m_OptionsComments;
+	std::vector<CString>		m_OptionsComments;
 
 
 	void ReadConfig(CArchive& ar, CString& Login);
@@ -101,8 +101,8 @@ protected: // create from serialization only
 public:
 	
 	
-	vector<CDomainParam>	m_DomainParams;
-	vector<BYTE>			m_DomParamsPtr;
+	std::vector<CDomainParam>	m_DomainParams;
+	std::vector<BYTE>			m_DomParamsPtr;
 	CString					m_Author;
 	bool					m_ReadOnly;
 	bool					m_bArticleInitTextMode;
@@ -146,7 +146,7 @@ public:
 
 // Implementation
 public:
-    vector<TBaseDomItem> m_BasicDomItems;
+    std::vector<TBaseDomItem> m_BasicDomItems;
 	StringVector		m_Fields;
 
 	

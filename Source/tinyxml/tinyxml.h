@@ -141,7 +141,7 @@ public:
 
     /**	The world does not agree on whether white space should be kept or
         not. In order to make everyone happy, these global, static functions
-        are provided to set whether or not TinyXml will condense all white space
+        are provided to std::set whether or not TinyXml will condense all white space
         into a single space or not. The default is to condense. Note changing this
         values is not thread safe.
     */
@@ -155,8 +155,8 @@ public:
         1,1). If the returns values are 0 or less, then the parser does not have
         a row and column value.
 
-        Generally, the row and column value will be set when the TiXmlDocument::Load(),
-        TiXmlDocument::LoadFile(), or any TiXmlNode::Parse() is called. It will NOT be set
+        Generally, the row and column value will be std::set when the TiXmlDocument::Load(),
+        TiXmlDocument::LoadFile(), or any TiXmlNode::Parse() is called. It will NOT be std::set
         when the DOM was created from operator>>.
 
         The values reflect the initial load. Once the DOM is modified programmatically
@@ -209,7 +209,7 @@ protected:
 
     static bool StreamTo(TIXML_ISTREAM *in, int character, TIXML_STRING *tag);
 
-    /*	Reads an XML name into the string provided. Returns
+    /*	Reads an XML name into the std::string provided. Returns
         a pointer just past the last character of the name,
         or 0 if the function has an error.
     */
@@ -219,7 +219,7 @@ protected:
         Wickedly complex options, but it keeps the (sensitive) code in one place.
     */
     static const char *ReadText(const char *in,                // where to start
-                                TIXML_STRING *text,            // the string read
+                                TIXML_STRING *text,            // the std::string read
                                 bool ignoreWhiteSpace,        // whether to keep the white space
                                 const char *endTag,            // what ends this text
                                 bool ignoreCase,            // whether to ignore case in the end tag
@@ -253,7 +253,7 @@ protected:
         }
     }
 
-    // Puts a string to a stream, expanding entities as it goes.
+    // Puts a std::string to a stream, expanding entities as it goes.
     // Note this should not contian the '<', '>', etc, or they will be transformed into entities!
     static void PutString(const TIXML_STRING &str, TIXML_OSTREAM *out);
 
@@ -391,7 +391,7 @@ public:
         Element:	name of the element
         Comment:	the comment text
         Unknown:	the tag contents
-        Text:		the text string
+        Text:		the text std::string
         @endverbatim
 
         The subclasses will wrap this function.
@@ -404,7 +404,7 @@ public:
         Element:	name of the element
         Comment:	the comment text
         Unknown:	the tag contents
-        Text:		the text string
+        Text:		the text std::string
         @endverbatim
     */
     void SetValue(const char *_value) { value = _value; }
@@ -654,7 +654,7 @@ public:
     const double
     DoubleValue() const;                                ///< Return the value of this attribute, converted to a double.
 
-    /** QueryIntValue examines the value string. It is an alternative to the
+    /** QueryIntValue examines the value std::string. It is an alternative to the
         IntValue() method with richer error checking.
         If the value is an integer, it is stored in 'value' and
         the call returns TIXML_SUCCESS. If it is not
@@ -665,7 +665,7 @@ public:
     */
     int QueryIntValue(int *value) const;
 
-    /// QueryDoubleValue examines the value string. See QueryIntValue().
+    /// QueryDoubleValue examines the value std::string. See QueryIntValue().
     int QueryDoubleValue(double *value) const;
 
     void SetName(const char *_name) { name = _name; }                ///< Set the name of this attribute.
@@ -724,7 +724,7 @@ private:
 /*	A class used to manage a group of attributes.
 	It is only used internally, both by the ELEMENT and the DECLARATION.
 	
-	The set can be changed transparent to the Element and Declaration
+	The std::set can be changed transparent to the Element and Declaration
 	classes that use it, but NOT transparent to the Attribute
 	which has to implement a next() and previous() method. Which makes
 	it a bit problematic and prevents the use of STL.
@@ -996,10 +996,10 @@ public:
 
     virtual ~TiXmlDeclaration() {}
 
-    /// Version. Will return an empty string if none was found.
+    /// Version. Will return an empty std::string if none was found.
     const char *Version() const { return version.c_str(); }
 
-    /// Encoding. Will return an empty string if none was found.
+    /// Encoding. Will return an empty std::string if none was found.
     const char *Encoding() const { return encoding.c_str(); }
 
     /// Is this a standalone document?
@@ -1116,7 +1116,7 @@ public:
     */
     TiXmlElement *RootElement() const { return FirstChildElement(); }
 
-    /** If an error occurs, Error will be set to true. Also,
+    /** If an error occurs, Error will be std::set to true. Also,
         - The ErrorId() will contain the integer identifier of the error (not generally useful)
         - The ErrorDesc() method will return the name of the error. (very useful)
         - The ErrorRow() and ErrorCol() will return the location of the error (if known)
@@ -1126,7 +1126,7 @@ public:
     /// Contains a textual (english) description of the error if one occurs.
     const char *ErrorDesc() const { return errorDesc.c_str(); }
 
-    /** Generally, you probably want the error string ( ErrorDesc() ). But if you
+    /** Generally, you probably want the error std::string ( ErrorDesc() ). But if you
         prefer the ErrorId, this function will fetch it.
     */
     const int ErrorId() const { return errorId; }
@@ -1148,7 +1148,7 @@ public:
         the source file.
 
         The tab size is required for calculating the location of nodes. If not
-        set, the default of 4 is used. The tabsize is set per document. Setting
+        std::set, the default of 4 is used. The tabsize is std::set per document. Setting
         the tabsize to 0 disables row/column tracking.
 
         Note that row and column tracking is not supported when using operator>>.

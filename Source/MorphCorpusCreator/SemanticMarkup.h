@@ -11,7 +11,7 @@
 
 struct SSemMeaning
 {
-	vector<string> m_values;
+	std::vector<std::string> m_values;
 };
 
 struct SSemInfo
@@ -22,7 +22,7 @@ struct SSemInfo
 		m_Meanings.push_back(m);
 	};
 
-	vector<SSemMeaning> m_Meanings;
+	std::vector<SSemMeaning> m_Meanings;
 };
 
 struct SLemma
@@ -56,7 +56,7 @@ protected:
 	BYTE GetPOS(std::string s);
 	void ReadHeadLine(const char *ss);
 	void ReadItems(const char *ss);
-	vector<string> m_Titles;
+	std::vector<std::string> m_Titles;
 	map<SLemma,SSemInfo> m_Entries;
 };
 

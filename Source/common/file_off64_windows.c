@@ -251,7 +251,7 @@ __int64 __cdecl _ftelli64 (
 
                                         _lseeki64(fd, filepos, SEEK_SET);
 
-                                        /* We want to set rdcnt to the number
+                                        /* We want to std::set rdcnt to the number
                                            of bytes originally read into the
                                            stream buffer (before crlf->lf
                                            translation). In most cases, this
@@ -267,7 +267,7 @@ __int64 __cdecl _ftelli64 (
                                                 /* The translated contents of
                                                    the buffer is small and we
                                                    are not at eof. The buffer
-                                                   size must have been set to
+                                                   size must have been std::set to
                                                    _SMALL_BUFSIZ during the
                                                    last _filbuf call. */
 

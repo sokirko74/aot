@@ -56,27 +56,27 @@ inline prob_t  mod(const prob_t& x)
 
 
 
-void CTrigramModel::BuildReverseLexProb(const vector<std::string>& words, vector<map<WORD,prob_t> >& RevLexProbs) const 
+void CTrigramModel::BuildReverseLexProb(const std::vector<std::string>& words, std::vector<std::map<WORD,prob_t> >& RevLexProbs) const 
 {
-    RevLexProbs.resize(words.size(), map<WORD,prob_t>() );
+    RevLexProbs.resize(words.size(), std::map<WORD,prob_t>() );
     if (!m_pReverseModel) return;
     int WordsCount = words.size();    
 
-    set<WORD> PrevTags;
+    std::set<WORD> PrevTags;
     PrevTags.insert(0);
     for (int WordNo=(int)WordsCount-1; WordNo>=0; WordNo--)
     {
         CDictionarySearch DS = m_pReverseModel->find_word(words[WordNo]);
-        map<WORD,prob_t>& distr =  RevLexProbs[WordNo];
-        for (set<WORD>::const_iterator curr_it=DS.m_PossibleWordTags.begin(); curr_it!=DS.m_PossibleWordTags.end(); curr_it++) // a tag for current word
-            for  (set<WORD>::const_iterator prev_it = PrevTags.begin(); prev_it!=PrevTags.end(); prev_it++)
+        std::map<WORD,prob_t>& distr =  RevLexProbs[WordNo];
+        for (std::set<WORD>::const_iterator curr_it=DS.m_PossibleWordTags.begin(); curr_it!=DS.m_PossibleWordTags.end(); curr_it++) // a tag for current word
+            for  (std::set<WORD>::const_iterator prev_it = PrevTags.begin(); prev_it!=PrevTags.end(); prev_it++)
             {
                 WORD PrevTag = *prev_it;
                 WORD CurrTag = *curr_it;
                 prob_t LexProb =  m_pReverseModel->GetSmoothedLexProb(DS, PrevTag, CurrTag);
-                map<WORD,prob_t>::iterator it = distr.find(CurrTag);
+                std::map<WORD,prob_t>::iterator it = distr.find(CurrTag);
                 if (it != distr.end())
-                    it->second = max (it->second, LexProb);
+                    it->second = std::max (it->second, LexProb);
                 else
                     distr[CurrTag] = LexProb;
             }
@@ -85,9 +85,9 @@ void CTrigramModel::BuildReverseLexProb(const vector<std::string>& words, vector
     }  
     for (size_t WordNo=0; WordNo < WordsCount; WordNo++)
     {
-        map<WORD,prob_t>& distr =  RevLexProbs[WordNo];
-        map<WORD,prob_t> new_distr;
-        for (map<WORD,prob_t>::const_iterator curr_it=distr.begin(); curr_it!=distr.end(); curr_it++) 
+        std::map<WORD,prob_t>& distr =  RevLexProbs[WordNo];
+        std::map<WORD,prob_t> new_distr;
+        for (std::map<WORD,prob_t>::const_iterator curr_it=distr.begin(); curr_it!=distr.end(); curr_it++) 
         {
             WORD t = curr_it->first;
             new_distr[ find_tag(m_pReverseModel->m_RegisteredTags[t]) ] = curr_it->second;
@@ -95,7 +95,7 @@ void CTrigramModel::BuildReverseLexProb(const vector<std::string>& words, vector
         distr.swap(new_distr);
     }
 }
-void CTrigramModel::ViterbiForward(const vector<std::string>& words, vector<CViterbiInfo>& Triplet, const vector<CViterbiInfo>& RevTriplet) const 
+void CTrigramModel::ViterbiForward(const std::vector<std::string>& words, std::vector<CViterbiInfo>& Triplet, const std::vector<CViterbiInfo>& RevTriplet) const 
 {
 	if (m_bDebugViterbi)
 	{
@@ -104,9 +104,9 @@ void CTrigramModel::ViterbiForward(const vector<std::string>& words, vector<CVit
 	}
 	size_t WordsCount = (int)words.size();
 	Triplet[0].SetProb(0,0, 0.0);
-	set<WORD> OuterBoundTags;
+	std::set<WORD> OuterBoundTags;
 	OuterBoundTags.insert(0);
-    vector<map<WORD,prob_t> > RevLexProbs;
+    std::vector<std::map<WORD,prob_t> > RevLexProbs;
     BuildReverseLexProb(words, RevLexProbs);
     
 
@@ -125,11 +125,11 @@ void CTrigramModel::ViterbiForward(const vector<std::string>& words, vector<CVit
 		}
 					
 
-		for (set<WORD>::const_iterator curr_it=I.m_LexicalProbs.begin(); curr_it!=I.m_LexicalProbs.end(); curr_it++) // a tag for current word
+		for (std::set<WORD>::const_iterator curr_it=I.m_LexicalProbs.begin(); curr_it!=I.m_LexicalProbs.end(); curr_it++) // a tag for current word
 		{
 			WORD CurrTag = *curr_it;
-			const set<WORD>& PrevTags = (WordNo<1) ? OuterBoundTags : Triplet[WordNo-1].m_LexicalProbs;
-			for (set<WORD>::const_iterator prev_it=PrevTags.begin(); prev_it != PrevTags.end(); prev_it++) // the tag of the previous word
+			const std::set<WORD>& PrevTags = (WordNo<1) ? OuterBoundTags : Triplet[WordNo-1].m_LexicalProbs;
+			for (std::set<WORD>::const_iterator prev_it=PrevTags.begin(); prev_it != PrevTags.end(); prev_it++) // the tag of the previous word
 			{
 				WORD PrevTag = *prev_it;
 				prob_t LexProb =  GetSmoothedLexProb(DS, PrevTag, CurrTag);
@@ -137,8 +137,8 @@ void CTrigramModel::ViterbiForward(const vector<std::string>& words, vector<CVit
                 if (m_pReverseModel)
                     LexProb /= 2;
 
-				const set<WORD>& PrevPrevTags = (WordNo<2) ? OuterBoundTags : Triplet[WordNo-2].m_LexicalProbs;
-				for (set<WORD>::const_iterator prev_prev_it=PrevPrevTags.begin(); prev_prev_it != PrevPrevTags.end(); prev_prev_it++) // the tag of the previous of the previous word
+				const std::set<WORD>& PrevPrevTags = (WordNo<2) ? OuterBoundTags : Triplet[WordNo-2].m_LexicalProbs;
+				for (std::set<WORD>::const_iterator prev_prev_it=PrevPrevTags.begin(); prev_prev_it != PrevPrevTags.end(); prev_prev_it++) // the tag of the previous of the previous word
 				{
 					WORD PrevPrevTag = *prev_prev_it;
 					
@@ -185,7 +185,7 @@ void CTrigramModel::ViterbiForward(const vector<std::string>& words, vector<CVit
 }
 
 
-void CTrigramModel::ViterbiBackward(const vector<std::string>& words, const vector<CViterbiInfo>& Triplet, vector<CWordIntepretation>& tags) const 
+void CTrigramModel::ViterbiBackward(const std::vector<std::string>& words, const std::vector<CViterbiInfo>& Triplet, std::vector<CWordIntepretation>& tags) const 
 {
 	if (m_bDebugViterbi)
 	{
@@ -199,8 +199,8 @@ void CTrigramModel::ViterbiBackward(const vector<std::string>& words, const vect
 	
     {
         prob_t b_a = -MAXPROB;
-	    map<pair<WORD,WORD>, prob_t> FinalProbs = Triplet.back().GetAllProbs();
-	    for (map<pair<WORD,WORD>, prob_t>::const_iterator it = FinalProbs.begin();  it != FinalProbs.end(); it++)
+		std::map<std::pair<WORD,WORD>, prob_t> FinalProbs = Triplet.back().GetAllProbs();
+	    for (std::map<std::pair<WORD,WORD>, prob_t>::const_iterator it = FinalProbs.begin();  it != FinalProbs.end(); it++)
 	    {
 		    WORD i = (WORD)it->first.first;
 		    WORD j = (WORD)it->first.second;
@@ -234,8 +234,8 @@ void CTrigramModel::ViterbiBackward(const vector<std::string>& words, const vect
 
         if (Triplet[WordNo].IsAmbig() )
 		{
-            pair<prob_t,WORD> First = Triplet[WordNo].GetFirstMaximum();
-            pair<prob_t,WORD> Second = Triplet[WordNo].GetSecondMaximum();
+            std::pair<prob_t,WORD> First = Triplet[WordNo].GetFirstMaximum();
+            std::pair<prob_t,WORD> Second = Triplet[WordNo].GetSecondMaximum();
             if (First.second != CurrTag)
 		    {
 			    tags[WordNo].m_TagId2 = First.second;
@@ -256,33 +256,33 @@ void CTrigramModel::ViterbiBackward(const vector<std::string>& words, const vect
 };
 
 
-bool CTrigramModel::viterbi(const vector<std::string>& words, vector<CWordIntepretation>& tags) const 
+bool CTrigramModel::viterbi(const std::vector<std::string>& words, std::vector<CWordIntepretation>& tags) const 
 {
     assert (m_TagsCount != UnknownTag );
     if (m_bReverseModel)
     {
         
-        vector<std::string> words_r = words;
+        std::vector<std::string> words_r = words;
         reverse(words_r.begin(), words_r.end());
-        vector<CViterbiInfo> Triplet(words.size()+1);
-        ViterbiForward(words_r, Triplet, vector<CViterbiInfo>());
+        std::vector<CViterbiInfo> Triplet(words.size()+1);
+        ViterbiForward(words_r, Triplet, std::vector<CViterbiInfo>());
 	    ViterbiBackward(words_r, Triplet, tags);
         reverse(tags.begin(), tags.end());
 
     }
     else
     {
-        vector<CViterbiInfo> Triplet(words.size()+1);
+        std::vector<CViterbiInfo> Triplet(words.size()+1);
         /*if (m_pReverseModel)
         {
-            vector<CViterbiInfo> RevTriplets(words.size()+1);
-            vector<std::string> words_r = words;
+            std::vector<CViterbiInfo> RevTriplets(words.size()+1);
+            std::vector<std::string> words_r = words;
             reverse(words_r.begin(), words_r.end());
-            m_pReverseModel->ViterbiForward(words_r, RevTriplets, vector<CViterbiInfo>());
+            m_pReverseModel->ViterbiForward(words_r, RevTriplets, std::vector<CViterbiInfo>());
            	ViterbiForward(words, Triplet, RevTriplets);
         }
         else*/
-            ViterbiForward(words, Triplet, vector<CViterbiInfo>());
+            ViterbiForward(words, Triplet, std::vector<CViterbiInfo>());
 
 	    ViterbiBackward(words, Triplet, tags);
     }
@@ -308,9 +308,9 @@ bool CTrigramModel::testing(std::string FileName) const
 	while (fgets(buffer, 10000, fp))
 	{ 
 		SentNo++;
-		vector<std::string> words;
-		vector<CWordIntepretation> tags;
-		vector<size_t> refs;
+		std::vector<std::string> words;
+		std::vector<CWordIntepretation> tags;
+		std::vector<size_t> refs;
 
 		StringTokenizer tok(buffer, " \t\r\n");
 		for (size_t i=0; tok(); i++)
@@ -352,10 +352,10 @@ bool CTrigramModel::testing(std::string FileName) const
 			{
 				// если  указана опция --check-only-amb-words,
 				// тогда берем в расчет только слова, у которых больше одной леммы
-				vector<CFormInfo> Paradigms;
+				std::vector<CFormInfo> Paradigms;
 				std::string WordStr = words[i];
 				m_pLemmatizer->CreateParadigmCollection(false, WordStr, is_upper_alpha((BYTE)WordStr[0], m_Language), true, Paradigms);
-				set<std::string> UniqueLemmas;
+				std::set<std::string> UniqueLemmas;
 				for (int h=0; h < Paradigms.size(); h++)
 					UniqueLemmas.insert(Paradigms[h].GetWordForm(0));
 				if (UniqueLemmas.size() <= 1)
@@ -390,7 +390,7 @@ bool CTrigramModel::testing(std::string FileName) const
 				std::string debug_tag = m_RegisteredTags[tags[i].m_TagId1];
 				if (tags[i].m_TagId2 != UnknownTag)
 					debug_tag += "["+m_RegisteredTags[tags[i].m_TagId2]+"]";
-				for (int j=(int)i-5; j<(int)min(i+5, words.size()); j++)
+				for (int j=(int)i-5; j<(int)std::min(i+5, words.size()); j++)
 				{
 					if (j<0) { continue; }
 					if (j != i)

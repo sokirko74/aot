@@ -45,7 +45,7 @@ struct  CDictUnitInterp : public CRossInterp {
 
 
 const  CDictUnitInterp  EmptyInterp =  CDictUnitInterp (NoneRoss, ErrUnitNo);
-typedef vector<CDictUnitInterp>  CDictUnitInterpVector;
+typedef std::vector<CDictUnitInterp>  CDictUnitInterpVector;
 
 
 #endif

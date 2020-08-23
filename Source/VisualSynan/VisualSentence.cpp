@@ -333,7 +333,7 @@ BOOL CVisualSentence::ReadWords(SYNANLib::ISentencePtr& piSentence)
 int CVisualSentence::CalculateSpaceBetweenLines(CDC* pDC, BOOL bShowGroups)
 {	
 	int iMaxLevel = 0;
-	map<int, int> mapClauseNumTypeNum;
+	std::map<int, int> mapClauseNumTypeNum;
 
 	for(int i = 0 ; i < m_arrClauses.size() ; i++ )
 	{

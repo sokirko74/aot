@@ -127,13 +127,13 @@ protected:
 	CMorphAutomRelation*			m_pRelations;
 	size_t							m_RelationsCount;
 
-	vector<int>						m_ChildrenCache;
+	std::vector<int>						m_ChildrenCache;
 	
 
 	
 	void	DumpAllStringsRecursive(FILE* fp, int NodeNo, std::string CurrPath) const;
 	void	BuildChildrenCache();
-	void	GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_path, vector<CAutomAnnotationInner>& Infos) const;
+	void	GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_path, std::vector<CAutomAnnotationInner>& Infos) const;
 	int		FindStringAndPassAnnotChar (const std::string& Text, size_t TextPos) const;
 	void	Clear();
 
@@ -144,7 +144,7 @@ public:
 	bool	Load(std::string GrammarFileName);
 	bool	Save(std::string GrammarFileName) const;
 	bool	DumpAllStrings(std::string FileName) const;
-	void	GetInnerMorphInfos (const std::string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const;
+	void	GetInnerMorphInfos (const std::string& Text, size_t TextPos, std::vector<CAutomAnnotationInner>& Infos) const;
 	const CMorphAutomRelation*  GetChildren(size_t NodeNo) const;
 	int		NextNode(int NodeNo, BYTE Child) const;
 	size_t	GetChildrenCount(size_t NodeNo)  const;

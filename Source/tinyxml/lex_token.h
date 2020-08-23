@@ -55,12 +55,12 @@ public :
       ltp_next = NULL;
       ltp_prev = NULL;
    }
-   /// set the next element in list
+   /// std::set the next element in list
    void v_set_next (lex_token * ltp_in_next)
    {
       ltp_next = ltp_in_next;
    }
-   /// set the previous element in list
+   /// std::set the previous element in list
    void v_set_prev (lex_token * ltp_in_prev)
    {
       ltp_prev = ltp_in_prev;
@@ -108,7 +108,7 @@ public :
       return l_enum;
    }
 
-   /// Set the string value of a lexical element
+   /// Set the std::string value of a lexical element
    void v_set (lexico lex_in, const char * cp_repre)
    {
       unsigned u_length;
@@ -120,7 +120,7 @@ public :
       strcpy (cp_value, cp_repre);
    }
 
-   /// return the string value of a lexical element
+   /// return the std::string value of a lexical element
    const char * cp_get_literal ()
    {
       return cp_value;

@@ -16,7 +16,7 @@ void CPredictBase::Load (const std::string &path)
 	m_SuffixAutomat.Load(path);
 };
 
-void CPredictBase::FindRecursive(int NodeNo, std::string& curr_path, vector<CPredictTuple>& Infos) const
+void CPredictBase::FindRecursive(int NodeNo, std::string& curr_path, std::vector<CPredictTuple>& Infos) const
 {
 	const CMorphAutomNode& N = m_SuffixAutomat.GetNode(NodeNo);
 	if (N.IsFinal())
@@ -46,7 +46,7 @@ void CPredictBase::FindRecursive(int NodeNo, std::string& curr_path, vector<CPre
 	curr_path.resize(CurrPathSize);
 };
 
-bool CPredictBase::Find(const std::string &ReversedWordForm, vector<CPredictTuple>& res) const
+bool CPredictBase::Find(const std::string &ReversedWordForm, std::vector<CPredictTuple>& res) const
 {
 	//  we don't want to predict words which contains "AnnotChar" 
 	//if (ReversedWordForm.find(AnnotChar) != std::string::npos)

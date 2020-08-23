@@ -58,7 +58,7 @@ void make_bin(std::string &r, std::string &rc, std::string &e, std::string &ec, 
 
 void get_english_ancode(std::string e, std::string &ec)
 {
-    vector<CFormInfo> ParadigmCollection;
+    std::vector<CFormInfo> ParadigmCollection;
 
 	if (!MorphHolderEng.m_pLemmatizer->CreateParadigmCollection(true, e, true, false, ParadigmCollection))
 		throw CExpc(Format("Cannot lemmatize %s by English lemmatizer" , e.c_str()));

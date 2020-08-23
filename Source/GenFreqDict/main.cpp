@@ -209,7 +209,7 @@ std::vector<std::string> read_file_list(const char* file_name) {
 	return v;
 }
 
-size_t write_out_file(const long maxFreq, const std::map<word_pair, int>& word_map, ofstream& out) {
+size_t write_out_file(const long maxFreq, const std::map<word_pair, int>& word_map, std::ofstream& out) {
 	size_t written = 0;
 
 	for (auto it = word_map.begin(); it != word_map.end(); ++it)

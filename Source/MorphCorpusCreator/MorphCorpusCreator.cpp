@@ -61,7 +61,7 @@ std::string CMorphCorpusCreator::get_xml_result(const CCOMSyntaxHolder& Holder)
 	}
 }
 
-void CMorphCorpusCreator::get_top_clauses(SYNANLib::ISentencePtr piSent, vector<long>& topClauses)
+void CMorphCorpusCreator::get_top_clauses(SYNANLib::ISentencePtr piSent, std::vector<long>& topClauses)
 {	
 	topClauses.clear();
 	long clCount = piSent->ClausesCount;
@@ -84,7 +84,7 @@ void CMorphCorpusCreator::get_top_clauses(SYNANLib::ISentencePtr piSent, vector<
 
 void CMorphCorpusCreator::process_sent(SYNANLib::ISentencePtr piSent, std::string& result)
 {
-	vector<long> topClauses;
+	std::vector<long> topClauses;
 	get_top_clauses(piSent, topClauses);
 
 	std::string SentenceStr  ="<s>\n";
@@ -405,8 +405,8 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 	result += Format("\t<w> %s\n", (const char*)piWord->WordStr);
 
 	// process homonyms
-	set<long> processed_homonyms;
-	set<std::string> good_morph_interps;
+	std::set<long> processed_homonyms;
+	std::set<std::string> good_morph_interps;
 	for (size_t i=0; i < piClause->GetVariantsCount(); i++)
 	{
 		SYNANLib::IClauseVariantPtr piVar = piClause->GetClauseVariant(i);	
@@ -417,19 +417,19 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 		process_homonym(piWord->Homonym[iHom], piUnit, piWord, good_morph_interps);	
 	};
 
-	for (set<std::string>::const_iterator it =  good_morph_interps.begin(); it !=  good_morph_interps.end(); it++)
+	for (std::set<std::string>::const_iterator it =  good_morph_interps.begin(); it !=  good_morph_interps.end(); it++)
 	{
 		result +=  "\t\t<ana " + *it + " />\n";
 	};
 	std::string WordStr = (const char*)piWord->WordStr;
 	if (is_alpha(WordStr[0], m_CurrentLanguage))
 	{
-		set<std::string> all_morph_interps;
+		std::set<std::string> all_morph_interps;
 		get_all_morph_interps(piWord, all_morph_interps);
-		vector<std::string> Result(all_morph_interps.size());
-		vector<std::string>::iterator end = set_difference( all_morph_interps.begin(), all_morph_interps.end(),
+		std::vector<std::string> Result(all_morph_interps.size());
+		std::vector<std::string>::iterator end = set_difference( all_morph_interps.begin(), all_morph_interps.end(),
 			good_morph_interps.begin(), good_morph_interps.end(), Result.begin());	
-		for (vector<std::string>::iterator it = Result.begin(); it != end; it++)
+		for (std::vector<std::string>::iterator it = Result.begin(); it != end; it++)
 		{
 			result +=  "\t\t<ana_del " + *it + " />\n";
 		};
@@ -444,7 +444,7 @@ long CMorphCorpusCreator::process_word(SYNANLib::ISentencePtr piSent, long iUnit
 }
 
 
-void CMorphCorpusCreator::get_all_morph_interps(SYNANLib::IWordPtr piWord , set<std::string>& all_morph_interps)
+void CMorphCorpusCreator::get_all_morph_interps(SYNANLib::IWordPtr piWord , std::set<std::string>& all_morph_interps)
 {
 try {
 		all_morph_interps.clear();
@@ -683,7 +683,7 @@ std::string CMorphCorpusCreator::process_gram_homonym(std::string lemma, long pa
 
 
 
-void CMorphCorpusCreator::process_homonym(SYNANLib::IHomonymPtr piHom, SYNANLib::ISyntaxUnitPtr piUnit, SYNANLib::IWordPtr piWord, set<std::string>& result_inters)
+void CMorphCorpusCreator::process_homonym(SYNANLib::IHomonymPtr piHom, SYNANLib::ISyntaxUnitPtr piUnit, SYNANLib::IWordPtr piWord, std::set<std::string>& result_inters)
 {
 try
 {

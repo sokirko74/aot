@@ -24,7 +24,7 @@ CRichEditRedrawer::CRichEditRedrawer( CColorRichEditView& view )
 	long mask = GetRichEditCtrl().GetEventMask();
 	GetRichEditCtrl().SetEventMask(mask &= ~ENM_CHANGE );
 
-	//set redraw to false to reduce flicker, and to speed things up
+	//std::set redraw to false to reduce flicker, and to speed things up
 	GetRichEditCtrl().SetRedraw(FALSE);
 }
 

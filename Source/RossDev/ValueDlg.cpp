@@ -150,7 +150,7 @@ void CValueDlg::DrawControls ()
 		  ControlRect.bottom += Control_Height* DropDownCount; 
 		  m_Lists[i].Create(WS_VSCROLL|CBS_AUTOHSCROLL|WS_VISIBLE|CBS_SORT|CBS_DROPDOWNLIST, ControlRect, this, i);
            
-		  vector<BYTE> DomNos;
+		  std::vector<BYTE> DomNos;
 		  if (GetRoss()->m_Domens[DomNo].Source == dsUnion)
 			  for (size_t j=0; j<GetRoss()->m_Domens[DomNo].PartsSize; j++)
 			    DomNos.push_back(GetRoss()->m_Domens[DomNo].Parts[j]);  

@@ -136,7 +136,7 @@ public:
     BOOL SetFlags(DWORD dwFlags);           // sets the control's functionality
 
 #ifdef AFX_PJAIMAGE_H__F15965B0_B05A_11D4_B625_A1459D96AB20__INCLUDED_
-    BOOL SetButtonImage(HANDLE hImage, DWORD PJAIFlags, COLORREF Transparent = CLR_DEFAULT); // set the image for the browse button
+    BOOL SetButtonImage(HANDLE hImage, DWORD PJAIFlags, COLORREF Transparent = CLR_DEFAULT); // std::set the image for the browse button
 #endif
 
 protected:
@@ -151,7 +151,7 @@ protected:
     BOOL FECOpenFile();                     // starts and handles the returns from the CFileDialog
     void FillBuffers();                     // fills the buffers used by GetStartPosition() and GetNextPathName() functions
     BOOL GetValidFolder(LPTSTR Path);       // converts Path to an existing folder path
-	void Redraw (BOOL Flat);                // redraws the borders if the FEC_FLAT flag is set
+	void Redraw (BOOL Flat);                // redraws the borders if the FEC_FLAT flag is std::set
     BOOL ScreenPointInButtonRect(CPoint point); // checks if the given point is in the browse button
 
 // Message handlers
@@ -188,8 +188,8 @@ private:
     CStringArray     m_Files;               // file names
     int              m_nButtonState;        // current button state (up, down, or disabled)
     int              m_nButtonWidth;        // the width of the button (-1 is default)
-    BROWSEINFO*      m_pBROWSEINFO;         // only active when FEC_FOLDER flag is set
-    CFECFileDialog*  m_pCFileDialog;        // only active when FEC_FILE flag is set
+    BROWSEINFO*      m_pBROWSEINFO;         // only active when FEC_FOLDER flag is std::set
+    CFECFileDialog*  m_pCFileDialog;        // only active when FEC_FILE flag is std::set
     CRect            m_rcButtonRect;        // window coordinates of the button
     CString          m_szCaption;           // caption of CFileDialog
     CString          m_szClientTip;         // client area tooltip text

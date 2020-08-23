@@ -23,10 +23,10 @@ public:
 	BYTE					m_MeanNum;
 	WORD					m_UnitNo;
 	bool						m_ReadOnly;
-	vector<CTextField>		m_Fields;
+	std::vector<CTextField>		m_Fields;
 	CDictionary*				m_pRoss;
 	
-	vector<TCortege10>		m_Corteges;
+	std::vector<TCortege10>		m_Corteges;
 	std::string				m_LastError;
 	int						m_ErrorLine;
 	CTempArticle();

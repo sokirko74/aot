@@ -9,9 +9,9 @@ import "ocidl.idl";
  to build simple NP groups  inside clauses. Clauses and groups can be nested, that's why we use
  a special term (a "syntax unit" or simply a "unit"), which is a generalization of 
  the notions of clauses and words. So a subclause as well as a simple word 
- is a unit inside the superclause.  Each clause contains a set of morphological variants, 
- where  a morphological variant is a vector of syntax units.  For each morphological variant 
- we build a set of syntax groups. The main properties of a syntax group and a clause are 
+ is a unit inside the superclause.  Each clause contains a std::set of morphological variants, 
+ where  a morphological variant is a std::vector of syntax units.  For each morphological variant 
+ we build a std::set of syntax groups. The main properties of a syntax group and a clause are 
  the same:<br>
   - the starting word, <br>
   - the end word, <br>
@@ -51,9 +51,9 @@ import "ocidl.idl";
 		[propget, id(1), helpstring("property Type")] HRESULT Type([out, retval] int *pVal);
 		/** an index  of the root word in the sentence coordinates */
 		[propget, id(2), helpstring("property RootWordNo")] HRESULT RootWordNo([out, retval] long *pVal);
-		/** an index  of the used homonym in the root word's homonym set */
+		/** an index  of the used homonym in the root word's homonym std::set */
 		[propget, id(3), helpstring("property RootHomonymNo")] HRESULT RootHomonymNo([out, retval] long *pVal);
-		/** a string description of the type of the root  */
+		/** a std::string description of the type of the root  */
 		[propget, id(4), helpstring("property Description")] HRESULT Description([out, retval] BSTR *pVal);		
 	};
 
@@ -74,25 +74,25 @@ import "ocidl.idl";
 		[propget, id(1), helpstring("property Type")] HRESULT Type([out, retval] int *pVal);
 		/** an index  of the word in the sentence coordinates, if this unit is a word */
 		[propget, id(2), helpstring("property WordNum")] HRESULT WordNum([out, retval] long *pVal);
-		/** an index  of the word's homonym set, if this unit is a word */
+		/** an index  of the word's homonym std::set, if this unit is a word */
 		[propget, id(3), helpstring("property ActiveHomonymNum")] HRESULT ActiveHomonymNum([out, retval] long *pVal);
 		/** an index in ISentence::Clause if this unit is a clause */
 		[propget, id(5), helpstring("property ClauseNum")] HRESULT ClauseNum([out, retval] long *pVal);
-		/** an index  of the clause root set, if this unit is a clause */
+		/** an index  of the clause root std::set, if this unit is a clause */
 		[propget, id(4), helpstring("property ActiveClauseType")] HRESULT ActiveClauseTypeNum([out, retval] long *pVal);
 
 		/** a union of all grammems of the syntax unit */
 		[propget, id(6), helpstring("property Grammems")] HRESULT Grammems([out, retval] hyper *pVal);
 		/** morphological codes  of the syntax unit */
 		[propget, id(7), helpstring("property Gramcodes")] HRESULT Gramcodes([out, retval] BSTR *pVal);
-		/** a string representation of grammems */
+		/** a std::string representation of grammems */
 		[propget, id(8), helpstring("property GrammemsStr")] HRESULT GrammemsStr([out, retval] BSTR *pVal);
 		/** The number of simple prepositions which can be interpretations of the unit, if it is a preposition.
 		 This slot is presented because Syntax can solve some cases of ambiguity in the preposition subordination */
 		[propget, id(9), helpstring("property SimplePrepsCount")] HRESULT SimplePrepsCount([out, retval] long *pVal);
 		/** an  ID of a particular simple preposition  */
 		[propget, id(10), helpstring("property SimplePrepId")] HRESULT SimplePrepId([in] long ii, [out, retval] long *pVal);
-		/** a string representation of a particular simple preposition  */
+		/** a std::string representation of a particular simple preposition  */
 		[propget, id(11), helpstring("property SimplePrepStr")] HRESULT SimplePrepStr([in]long ii,[out, retval] BSTR *pVal);
 
 	};
@@ -109,7 +109,7 @@ import "ocidl.idl";
 	]
 	/**
 	 An interface to a word homonym, which contains all morphological properties.
-	 To some extent a word can be considered as a set of its homonyms.
+	 To some extent a word can be considered as a std::set of its homonyms.
 	*/
 	interface IHomonym : IDispatch
 	{
@@ -117,17 +117,17 @@ import "ocidl.idl";
 		[propget, id(2), helpstring("property Grammems")] HRESULT Grammems([out, retval] hyper *pVal);
 		/** lemma ( normal form) */
 		[propget, id(3), helpstring("property Lemma")] HRESULT Lemma([out, retval] BSTR *pVal);
-		/** the  string ID of morphological dictionary, where this word was found */
+		/** the  std::string ID of morphological dictionary, where this word was found */
 		[propget, id(16), helpstring("property LemSign")] HRESULT LemSign([out, retval] BSTR *pVal);
 		/** the union of all part of speeches of the word  */
 		[propget, id(20), helpstring("property Poses")] HRESULT Poses([out, retval] long *pVal);	
-		/** a string description of the morphology interpretation */
+		/** a std::string description of the morphology interpretation */
 		[propget, id(23), helpstring("property GramDescriptionStr")] HRESULT GramDescriptionStr([out, retval] BSTR *pVal);
 		/** paradigm ID of the morphology interpretation */
 		[propget, id(24), helpstring("property ParadigmID")] HRESULT ParadigmID([out, retval] long *pVal);
 		/** morphological codes of the morphology interpretation */
 		[propget, id(25), helpstring("property GramCodes")] HRESULT GramCodes([out, retval] BSTR *pVal);
-		/** a string representation of Poses (part of speeches) */
+		/** a std::string representation of Poses (part of speeches) */
 		[propget, id(28), helpstring("property POSStr")] HRESULT POSStr([out, retval] BSTR *pVal);
 		/** true, if this homonym starts an oborot */
 		[propget, id(29), helpstring("property IsOb1")] HRESULT IsOb1([out, retval] BOOL *pVal);
@@ -155,7 +155,7 @@ import "ocidl.idl";
 		pointer_default(unique)
 	]
 	/**
-		This is an interface to a word (a set of morphological homonyms). It contains all graphematical
+		This is an interface to a word (a std::set of morphological homonyms). It contains all graphematical
 		properties of a word which are common to its morphological homonyms.
 		The interface describes word's thesaurus interpretations, 
 		since thesaurus interpretation is done once for all homonyms.
@@ -182,7 +182,7 @@ import "ocidl.idl";
 		[propget, id(26), helpstring("property ThesType")] HRESULT ThesType([out, retval] int *pVal);
 		/** an index of the minimal(primitive) clause, which contains this word */
 		[propget, id(28), helpstring("property ClauseNo")] HRESULT ClauseNo([out, retval] long *pVal);
-		/** a string representation of graphematical descriptions */
+		/** a std::string representation of graphematical descriptions */
 		[propget, id(29), helpstring("property GraphDescrs")] HRESULT GraphDescrs([out, retval] BSTR *pVal);
 		/** true, if the word was created by the syntax itself, for example a dash for Russian */
 		[propget, id(30), helpstring("property bArtificialCreated")] HRESULT bArtificialCreated([out, retval] BOOL *pVal);
@@ -267,7 +267,7 @@ import "ocidl.idl";
 	]
 	/**
 		IClauseVariant is an interface to one morphological variant of a clause, which is 
-		a vector of syntax units. Based on this vector we build a set of syntax groups, 
+		a std::vector of syntax units. Based on this std::vector we build a std::set of syntax groups, 
 		and find a subject and a predicate.
 	*/
 	interface IClauseVariant : IDispatch
@@ -286,7 +286,7 @@ import "ocidl.idl";
 		[propget, id(7), helpstring("property Subjects")] HRESULT Subjects([in] long SubjectNo, [out, retval] long *pVal);
 		/**  an index of a predicate in this variant in clause coordinates */
 		[propget, id(8), helpstring("property Predicate")] HRESULT Predicate([out, retval] long *pVal);
-		/** ClauseRootNo returns an index to clause root set, which this clause variant contains
+		/** ClauseRootNo returns an index to clause root std::set, which this clause variant contains
 		 ClauseRootNo can be -1, if there is no root found in this morphological variant */
 		[propget, id(13), helpstring("property ClauseRootNo")] HRESULT ClauseRootNo([out, retval] long *pVal);
 		/** returns the weight of this variant, which is approximately the number of all words under all syntax groups  */
@@ -303,7 +303,7 @@ import "ocidl.idl";
 	]
 	/**
 		Interface IClause provides an access to one clause of the input sentence. A clause is a 
-		chunk from the input sentence with possibly ambiguous clause roots. Each clause has a set of 
+		chunk from the input sentence with possibly ambiguous clause roots. Each clause has a std::set of 
 		morphological variants where syntax groups are built.
 	*/
 	interface IClause : IDispatch
@@ -324,11 +324,11 @@ import "ocidl.idl";
 		[propget, id(5), helpstring("property RootsCount")] HRESULT ClauseRootsCount([out, retval] long *pVal);
 		/** returns a clause root by an index */
 		[propget, id(6), helpstring("property ClauseRoots")] HRESULT ClauseRoots([in]long lNum, [out, retval] IClauseRoot* *pVal);
-		/** a string representaion of the main properties of the clause */
+		/** a std::string representaion of the main properties of the clause */
 		[propget, id(8), helpstring("property Description")] HRESULT Description([out, retval] BSTR *pVal);
 		/** the number of all clause conjunctions which start the clause  */
 		[propget, id(14), helpstring("property ConjsCount")] HRESULT ConjsCount([out, retval] long *pVal);
-		/** returns  a string representation of a clause conjunction by an index */
+		/** returns  a std::string representation of a clause conjunction by an index */
 		[propget, id(18), helpstring("property ConjStr")] HRESULT ConjStr([in]int iNum, [out, retval] BSTR *pVal);
 	};
 
@@ -341,8 +341,8 @@ import "ocidl.idl";
 		pointer_default(unique)
 	]
 	/**
-		A sentence provides an access to one input sentence. A sentence contains a vector of words
-		and a set of clauses. A clause can be called a primitive or minimal one, if there is a word
+		A sentence provides an access to one input sentence. A sentence contains a std::vector of words
+		and a std::set of clauses. A clause can be called a primitive or minimal one, if there is a word
 		for which this clause is the smallest clause, which contains this word. In principle, it is possible to create  a clause,
 		which contains a one or more subclauses and and which does not immediately contain words. The interface 
 		supports two lists of clauses: the full list(slots ClausesCount and   Clause) and
@@ -373,7 +373,7 @@ import "ocidl.idl";
 		[id(13), helpstring("method ClauseNoByPrimitiveClauseNo")] HRESULT ClauseNoByPrimitiveClauseNo([in]long lPrClauseNo, [out, retval]long* lClauseNo);
 		/** returns the primitive clause index by the clause index, if it is possible */
 		[id(14), helpstring("method PrimitiveClauseNoByClauseNo")] HRESULT PrimitiveClauseNoByClauseNo([in]long lClauseNo, [out, retval]long* lPrClauseNo);
-		/** returns a string  representation of an oborot by an ID */
+		/** returns a std::string  representation of an oborot by an ID */
 		[id(15), helpstring("method GetOborotStrByOborotId")] HRESULT GetOborotStrByOborotId([in] long OborotId, [out, retval] BSTR* pVal);
 	};
 		
@@ -386,7 +386,7 @@ import "ocidl.idl";
 		pointer_default(unique)
 	]
 	/**
-		ISentencesCollection is the utmost interface in Dialing Syntax MOdule. It contains a set 
+		ISentencesCollection is the utmost interface in Dialing Syntax MOdule. It contains a std::set 
 		of sentences, i.e. the input text. It also provides an access to all options of 
 		the syntax process.
 	*/
@@ -401,7 +401,7 @@ import "ocidl.idl";
 		[propget, id(5), helpstring("property SentencesCount")] HRESULT SentencesCount([out, retval] long *pVal);
 		/** returns a sentence by an index */
 		[propget, id(6), helpstring("property Sentence")] HRESULT Sentence([in]long i, [out, retval] ISentence* *pVal);
-		/** deletes the set of processed sentences */
+		/** deletes the std::set of processed sentences */
 		[id(7), helpstring("method ClearSentences")] HRESULT ClearSentences();
 		/** enables or disables thesauri */
 		[propput, id(10), helpstring("property EnableThesauri")] HRESULT EnableThesauri([in] BOOL newVal);		

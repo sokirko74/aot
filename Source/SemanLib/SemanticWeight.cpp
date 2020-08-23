@@ -518,7 +518,7 @@ long CRusSemStructure::GetCommaBetweenBrothersExceptMNAViolationsCount(long Tag)
 		{
 			size_t ClauseNo = m_Nodes[i].m_ClauseNo;
 			const CRusSemClause& C = m_Clauses[ClauseNo];
-			const vector<long>& Rels = m_Nodes[i].m_OutRels;
+			const std::vector<long>& Rels = m_Nodes[i].m_OutRels;
 
 			for (long  k=0; k+1 < Rels.size(); k++)
 				if (m_Relations[Rels[k]].m_bRelUse)
@@ -648,7 +648,7 @@ long CRusSemStructure::GetCopulViolationsCount (long Tag) const
 				|| HasSemFetPro(m_Nodes[i], "Copul")
 				)
 			{
-				const vector<long>& Rels = m_Nodes[i].m_OutRels;
+				const std::vector<long>& Rels = m_Nodes[i].m_OutRels;
 				long CopulRelsCount = 0;
 
 				for (long k=0; k <  Rels.size(); k++)
@@ -725,7 +725,7 @@ struct CObligatoryVal{
 long CRusSemStructure::GetObligatoryValencyViolation (long Tag)
 {
 	long NodesCount = m_Nodes.size();
-	vector<CObligatoryVal> X(NodesCount);
+	std::vector<CObligatoryVal> X(NodesCount);
 
 	long StartNodeOfTag = -1;
 	for (long i=0; i < NodesCount; i++)

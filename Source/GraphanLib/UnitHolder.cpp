@@ -374,12 +374,12 @@ CGraLine& CUnitHolder::GetUnit(size_t UnitNo)
 	return m_Units[UnitNo]; 
 };
 
-const vector<char>& CUnitHolder::GetUnitBuf() const 
+const std::vector<char>& CUnitHolder::GetUnitBuf() const 
 { 
 	return m_TokenBuf; 
 };
 
-const vector<BYTE>& CUnitHolder::GetInputBuffer() const 
+const std::vector<BYTE>& CUnitHolder::GetInputBuffer() const 
 { 
 	return m_InputBuffer; 
 };
@@ -526,7 +526,7 @@ void CUnitHolder::SetOborotNo(size_t LineNo, short OborotNo)
 short CUnitHolder::GetOborotNo(size_t LineNo) const
 {
 	if (LineNo == 0) return -1;
-	map<size_t, short>::const_iterator it = m_FoundOborots.find(m_Units[LineNo].GetInputOffset());
+	std::map<size_t, short>::const_iterator it = m_FoundOborots.find(m_Units[LineNo].GetInputOffset());
 	if ( it == m_FoundOborots.end() )
 		return -1;
 	else
@@ -544,7 +544,7 @@ void	CUnitHolder::SetPageNumber(size_t LineNo, DWORD PageNumber)
 
 DWORD	CUnitHolder::GetPageNumber(size_t LineNo) const
 {
-	map<size_t, DWORD>::const_iterator it = m_FoundPageBreaks.find(m_Units[LineNo].GetInputOffset());
+	std::map<size_t, DWORD>::const_iterator it = m_FoundPageBreaks.find(m_Units[LineNo].GetInputOffset());
 	if ( it == m_FoundPageBreaks.end() )
 		return UnknownPageNumber;
 	else

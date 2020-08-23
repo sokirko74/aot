@@ -36,22 +36,22 @@ public:
 struct SSynVariant2Groups
 {
 public:
-	vector< CSynUnit> m_SynUnits;
-	vector<SGroup> m_Groups;
+	std::vector< CSynUnit> m_SynUnits;
+	std::vector<SGroup> m_Groups;
 
 };
 
 class JVisualSynAnParamBuilder
 {
 	nlohmann::json WriteWords(const CSentence& piSent, long StartWord, long LastWord);
-	void GetTopClauses(const CSentence& piSent, vector<long>& topClauses);
-	void AddVariants(vector<SSynVariant2Groups>& synVariants, long iClause, const CSentence& piSent);
-	void AddOneVariant(vector<SSynVariant2Groups>& synVariants, const CMorphVariant& piVar, const CSentence& piSent, const CClause& Clause);
-	void AddGroups(vector<SSynVariant2Groups>& synVariants, const CMorphVariant& piVar, const CClause& Clause);
-	void MultVariants(vector<SSynVariant2Groups>& SynVariants1, vector<SSynVariant2Groups>& synVariants2);
+	void GetTopClauses(const CSentence& piSent, std::vector<long>& topClauses);
+	void AddVariants(std::vector<SSynVariant2Groups>& synVariants, long iClause, const CSentence& piSent);
+	void AddOneVariant(std::vector<SSynVariant2Groups>& synVariants, const CMorphVariant& piVar, const CSentence& piSent, const CClause& Clause);
+	void AddGroups(std::vector<SSynVariant2Groups>& synVariants, const CMorphVariant& piVar, const CClause& Clause);
+	void MultVariants(std::vector<SSynVariant2Groups>& SynVariants1, std::vector<SSynVariant2Groups>& synVariants2);
 	void MultTwoVariants(SSynVariant2Groups& var1, SSynVariant2Groups& var2, SSynVariant2Groups& res);
-	void AddHomonym(vector<SSynVariant2Groups>& synVariants, const CSynUnit& Unit);
-	void AddGroup(vector<SSynVariant2Groups>& synVariants, const CGroup& piGroup);
+	void AddHomonym(std::vector<SSynVariant2Groups>& synVariants, const CSynUnit& Unit);
+	void AddGroup(std::vector<SSynVariant2Groups>& synVariants, const CGroup& piGroup);
 	nlohmann::json WriteVariant(const SSynVariant2Groups& var);
 
 public:
@@ -87,7 +87,7 @@ nlohmann::json JVisualSynAnParamBuilder::WriteWords(const CSentence& piSent, lon
 	return result;
 }
 
-void JVisualSynAnParamBuilder::GetTopClauses(const CSentence& piSent, vector<long>& topClauses)
+void JVisualSynAnParamBuilder::GetTopClauses(const CSentence& piSent, std::vector<long>& topClauses)
 {	
 	long clCount = piSent.m_Clauses.size();
 	const CClause*  piNextClause = 0;
@@ -107,14 +107,14 @@ void JVisualSynAnParamBuilder::GetTopClauses(const CSentence& piSent, vector<lon
 
 // this procedure adds all variants of the clause iClause to allSynVariants
 // and before it the procedure adds all variants of subclauses of clause iClause
-void JVisualSynAnParamBuilder::AddVariants(vector<SSynVariant2Groups>& allSynVariants,long iClause,  const CSentence& piSent)
+void JVisualSynAnParamBuilder::AddVariants(std::vector<SSynVariant2Groups>& allSynVariants,long iClause,  const CSentence& piSent)
 {
 	const CClause& Clause = piSent.m_Clauses[iClause];
 	long variantsCount = Clause.GetSynVariantsCount();
 
 	for(CSVI i =  Clause.m_SynVariants.begin() ; i != Clause.m_SynVariants.end(); i++ )
 	{
-		vector<SSynVariant2Groups> synVariants;
+		std::vector<SSynVariant2Groups> synVariants;
 		AddOneVariant(synVariants, *i, piSent, Clause);
 
 		for( int j = 0 ; j < synVariants.size() ; j++ )
@@ -133,14 +133,14 @@ void JVisualSynAnParamBuilder::AddVariants(vector<SSynVariant2Groups>& allSynVar
 	}
 }
 
-void JVisualSynAnParamBuilder::AddHomonym(vector<SSynVariant2Groups>& synVariants, const CSynUnit& Unit)
+void JVisualSynAnParamBuilder::AddHomonym(std::vector<SSynVariant2Groups>& synVariants, const CSynUnit& Unit)
 {
 	for (auto& v: synVariants) {
 		v.m_SynUnits.push_back(Unit);
 	}
 }
 
-void JVisualSynAnParamBuilder::AddGroup(vector<SSynVariant2Groups>& synVariants, const CGroup&  piGroup)
+void JVisualSynAnParamBuilder::AddGroup(std::vector<SSynVariant2Groups>& synVariants, const CGroup&  piGroup)
 {
 	for (auto& v : synVariants)	{
 		SGroup group;
@@ -155,7 +155,7 @@ void JVisualSynAnParamBuilder::AddGroup(vector<SSynVariant2Groups>& synVariants,
 }
 
 
-void JVisualSynAnParamBuilder::AddGroups(vector<SSynVariant2Groups>& synVariants, const CMorphVariant& piVar, const CClause& Clause) {
+void JVisualSynAnParamBuilder::AddGroups(std::vector<SSynVariant2Groups>& synVariants, const CMorphVariant& piVar, const CClause& Clause) {
 	for (long i = 0; i < piVar.m_vectorGroups.GetGroups().size(); i++) {
 		AddGroup(synVariants, piVar.m_vectorGroups.GetGroups()[i]);
 	}
@@ -180,7 +180,7 @@ void JVisualSynAnParamBuilder::AddGroups(vector<SSynVariant2Groups>& synVariants
 }
 
 
-void JVisualSynAnParamBuilder::AddOneVariant(vector<SSynVariant2Groups>& allSynVariants,const CMorphVariant& piVar,  const CSentence& piSent, const CClause& Clause)
+void JVisualSynAnParamBuilder::AddOneVariant(std::vector<SSynVariant2Groups>& allSynVariants,const CMorphVariant& piVar,  const CSentence& piSent, const CClause& Clause)
 {
 	long unitsCount = piVar.m_SynUnits.size();
 	SSynVariant2Groups var;
@@ -194,7 +194,7 @@ void JVisualSynAnParamBuilder::AddOneVariant(vector<SSynVariant2Groups>& allSynV
 		}
 		else
 		{
-			vector<SSynVariant2Groups> synVariants;
+			std::vector<SSynVariant2Groups> synVariants;
 			int ClauseNo = piSent.FindClauseIndexByPeriod(piVar.m_SynUnits[i].m_SentPeriod);
 			AddVariants(synVariants, ClauseNo, piSent);
 			MultVariants(allSynVariants, synVariants);
@@ -212,9 +212,9 @@ void JVisualSynAnParamBuilder::MultTwoVariants(SSynVariant2Groups& var1, SSynVar
 }
 
 
-void JVisualSynAnParamBuilder::MultVariants(vector<SSynVariant2Groups>& synVariants1, vector<SSynVariant2Groups>& synVariants2)
+void JVisualSynAnParamBuilder::MultVariants(std::vector<SSynVariant2Groups>& synVariants1, std::vector<SSynVariant2Groups>& synVariants2)
 {
-	vector<SSynVariant2Groups> resVars;
+	std::vector<SSynVariant2Groups> resVars;
 	for(int i = 0 ; i < synVariants1.size() ; i++)
 	{
 		for(int j = 0 ; j < synVariants2.size() ; j++)
@@ -253,7 +253,7 @@ nlohmann::json JVisualSynAnParamBuilder::WriteVariant(const SSynVariant2Groups& 
 
 nlohmann::json JVisualSynAnParamBuilder::BuildJson(const CSentence& piSent) {
 	try {
-		vector<long> topClauses;
+		std::vector<long> topClauses;
 		GetTopClauses(piSent, topClauses);
 		auto result = nlohmann::json::array();
 		for(long i = 0; i < topClauses.size() ; i++ ) {
@@ -261,11 +261,11 @@ nlohmann::json JVisualSynAnParamBuilder::BuildJson(const CSentence& piSent) {
 			auto clause = nlohmann::json::object();
 			clause["words"] = WriteWords(piSent, C.m_iFirstWord, C.m_iLastWord);
 
-			vector<SSynVariant2Groups> synVariants;
+			std::vector<SSynVariant2Groups> synVariants;
 			AddVariants(synVariants, topClauses[i],  piSent);
 			clause["variants"] = nlohmann::json::array();
 			for(auto& v : synVariants) {
-				vector<SGroup>& G =  v.m_Groups;
+				std::vector<SGroup>& G =  v.m_Groups;
 				for(auto& g : v.m_Groups)	{
 					g.m_W1 -= C.m_iFirstWord;
 					g.m_W2 -= C.m_iFirstWord;

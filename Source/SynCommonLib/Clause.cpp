@@ -191,9 +191,9 @@ const CMorphVariant* CClause::GetSynVariantByClauseType(const SClauseType& type)
 
 
 
-vector<CMorphVariant*> CClause::GetSynVariantIndexesByTypeNum(int i_type) 
+std::vector<CMorphVariant*> CClause::GetSynVariantIndexesByTypeNum(int i_type) 
 {
-	vector<CMorphVariant*> res;
+	std::vector<CMorphVariant*> res;
 
 	for(SVI i =  m_SynVariants.begin() ; i != m_SynVariants.end(); i++ )
 		if( i_type == i->m_ClauseTypeNo )
@@ -423,7 +423,7 @@ void CClause::BuildVectorOfWords(CFormatCaller& FormatCaller, CSVI pVar) const
 }
 
 
-void CClause::GetBuildingUnits(vector<CBuildingUnit>& BuildingUnits)
+void CClause::GetBuildingUnits(std::vector<CBuildingUnit>& BuildingUnits)
 {
 	BuildingUnits.clear();
 	for (int WordNo = m_iFirstWord;  WordNo <= m_iLastWord; WordNo++)
@@ -459,7 +459,7 @@ void CClause::GetBuildingUnits(vector<CBuildingUnit>& BuildingUnits)
 	};
 };
 
-int AddUnitAsClause (vector<CBuildingUnit>::const_iterator pUnit, int CurrentHomonymNo, const CClause& C, CMorphVariant& synVariant)
+int AddUnitAsClause (std::vector<CBuildingUnit>::const_iterator pUnit, int CurrentHomonymNo, const CClause& C, CMorphVariant& synVariant)
 {
 	const CClause& Child = C.m_pSent->m_Clauses[pUnit->m_ChildClauseNo];
     CSynUnit SClauseHomonym(C.GetOpt()->GetGramTab());
@@ -470,7 +470,7 @@ int AddUnitAsClause (vector<CBuildingUnit>::const_iterator pUnit, int CurrentHom
 	return Child.m_iLastWord  + 1;
 };
 
-int AddUnitAsWord (vector<CBuildingUnit>::const_iterator pUnit, int CurrentHomonymNo, const CClause& C, CMorphVariant& synVariant)
+int AddUnitAsWord (std::vector<CBuildingUnit>::const_iterator pUnit, int CurrentHomonymNo, const CClause& C, CMorphVariant& synVariant)
 {
 	synVariant.PushHomonymNum(CurrentHomonymNo); 
 	const CSynWord& W = C.GetWords()[pUnit->m_WordNo]; 
@@ -482,7 +482,7 @@ int AddUnitAsWord (vector<CBuildingUnit>::const_iterator pUnit, int CurrentHomon
 // максимальное количество вариантов в одной  клаузе (все остальные игнорируются)
 const int MorphVarMaxCount = 1600;
 
-void CClause::BuildSynVariantsRecursive(vector<CBuildingUnit>::iterator pUnit, CMorphVariant& synVariant)
+void CClause::BuildSynVariantsRecursive(std::vector<CBuildingUnit>::iterator pUnit, CMorphVariant& synVariant)
 {
 	int StartWordNo = pUnit->m_WordNo;
 	int CountOfTypes =  pUnit->m_HomonymsCount;
@@ -526,7 +526,7 @@ void CClause::BuildSynVariantsRecursive(vector<CBuildingUnit>::iterator pUnit, C
 //Функция AddSynVariantsWithUnusedHomonyms запукается  только тогда, когда число вариантов превысило допутимый предел.
 	
 
-void AddSynVariantsWithUnusedHomonyms(CClause& C, vector<CBuildingUnit>& BuildingUnits) 
+void AddSynVariantsWithUnusedHomonyms(CClause& C, std::vector<CBuildingUnit>& BuildingUnits) 
 {
 	CMorphVariant synVariant(C.GetOpt()->GetGramTab());
 
@@ -566,7 +566,7 @@ void CClause::BuildSynVariants()
 {
 	m_SynVariants.clear();
 	
-	vector<CBuildingUnit> BuildingUnits;
+	std::vector<CBuildingUnit> BuildingUnits;
 	GetBuildingUnits(BuildingUnits);
 	
 	CMorphVariant synVariant(GetOpt()->GetGramTab());
@@ -611,7 +611,7 @@ void CreateGroupsForTermins(CClause& C, CFormatCaller& FormatCaller, CMorphVaria
 {
   
 
-	vector<int> SynVarHomonyms;
+	std::vector<int> SynVarHomonyms;
 	for (int j = 0; j < synVariant.GetUnitsCount(); j++)
 		SynVarHomonyms.push_back( synVariant.GetHomNum(j) );
 
@@ -877,7 +877,7 @@ void CClause::AssignVariantWeight(CMorphVariant& synVariant)
 					CClause* clause = m_pSent->FindClauseByPeriod(p);
 					assert(clause != NULL);
 
-					vector<CMorphVariant*> clause_vars = clause->GetSynVariantIndexesByTypeNum(synVariant.m_SynUnits[k].m_iClauseTypeNum);				
+					std::vector<CMorphVariant*> clause_vars = clause->GetSynVariantIndexesByTypeNum(synVariant.m_SynUnits[k].m_iClauseTypeNum);				
 
 					for (long j=0; j < clause_vars.size(); j++)
 						if( clause_vars[j]->m_iWeight != -1) 
@@ -990,7 +990,7 @@ void CClause::AssignSynVariantsGrammems(CMorphVariant&  synVariant, const CForma
 		{
 			synVariant.m_SynUnits[UnitNo].m_SimplePrepNos.clear();
 
-			const vector<int>& preps = *(FormatCaller.sent[UnitNo].get_simple_preps());
+			const std::vector<int>& preps = *(FormatCaller.sent[UnitNo].get_simple_preps());
 			
 			for(int k = 0 ; k < preps.size() ; k++ ) 
 				if (FormatCaller.sent[UnitNo].m_FoundPrepDependCases == 0)

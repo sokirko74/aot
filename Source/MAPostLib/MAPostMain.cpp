@@ -197,7 +197,7 @@ bool CMAPost::ProcessData(const CPlmLineCollection *piInTextItems)
 		RunRules();
 
 		m_ResultLemWords.clear();
-        for (list<CPostLemWord>::const_iterator it = m_Words.begin(); it !=  m_Words.end(); it++)
+        for (std::list<CPostLemWord>::const_iterator it = m_Words.begin(); it !=  m_Words.end(); it++)
             for (size_t i=0; i < it->GetHomonymsCount(); i++)
             {
                 if (m_bHumanFriendlyOutput)
@@ -339,7 +339,7 @@ void CMAPost::ILeDefLe()
 std::string CMAPost::GetSimilarNumAncode (const std::string&  Lemma, const std::string&  Flexia, bool IsNoun) 
 {
 	if (Lemma.length() == 0) return "";
-	vector<CFormInfo> Paradigms;
+	std::vector<CFormInfo> Paradigms;
 	std::string h = Lemma;
 	m_pRusLemmatizer->CreateParadigmCollection(false, h, false, false, Paradigms);
 	if ( Paradigms.size() == 0 ) return ""; // например, нету в Ё-словаре слова ЧЕТВЕРТЫЙ
@@ -404,7 +404,7 @@ void CMAPost::Cifrdef()
         if (!isdigit((BYTE)W.m_strWord[0]) &&  !(hyp > 0 && is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1]))) 
 		if (dollar==prev_it)//$9,4 млрд
 		{
-			vector<CFormInfo> Paradigms;
+			std::vector<CFormInfo> Paradigms;
 			m_pRusLemmatizer->CreateParadigmCollection(false, W.m_strWord, false, false, Paradigms);
 			if ( Paradigms.size() == 0 ) 
 				continue;
@@ -431,7 +431,7 @@ void CMAPost::Cifrdef()
 				W.AddDes(ORLE);
 				W.DeleteAllHomonyms();
 				CHomonym* pNew = W.AddNewHomonym();
-				vector<CFormInfo> Paradigms;
+				std::vector<CFormInfo> Paradigms;
                 std::string TmpStr = W.m_strWord.substr(0,hyp);
 				m_pRusLemmatizer->CreateParadigmCollection(false, TmpStr, false, false, Paradigms);
 				if(Paradigms.size() > 0) // плутония-238
@@ -532,7 +532,7 @@ void CMAPost::Cifrdef()
 			if( it != spec_it)
 			{
 				CPostLemWord& W2 = *spec_it;
-				vector<CFormInfo> Paradigms;
+				std::vector<CFormInfo> Paradigms;
 				W2.DeleteOborotMarks();
 				W2.AddDes(ORLE);
 				W2.DelDes(OPun);
@@ -700,7 +700,7 @@ void CMAPost::PronounP_Pronoun_Homonymy()
 // выдает по форме и части речи парадигму
 bool CMAPost::HasParadigmOfFormAndPoses(std::string WordForm, poses_mask_t Poses) const
 {
-	vector<CFormInfo> Paradigms;
+	std::vector<CFormInfo> Paradigms;
 	m_pRusLemmatizer->CreateParadigmCollection(false, WordForm, false, false, Paradigms);
 	
 	for (long k=0; k < Paradigms.size(); k++)
@@ -1440,7 +1440,7 @@ void CMAPost::Rule_CHTO_ZA()
         if (!noun_it->HasPos(NOUN)) break;
         
         
-        vector<CFormInfo> Kakoi;
+        std::vector<CFormInfo> Kakoi;
 		std::string a = _R("какой");
         m_pRusLemmatizer->CreateParadigmCollection(true,a ,false,false,Kakoi);
         if (Kakoi.empty()) return;
@@ -1639,7 +1639,7 @@ void CMAPost::Rule_Abbreviation()
 				else
 				{
 					CHomonym* pH = W.GetHomonym(HomNo);
-					vector<CFormInfo> Paradigms;
+					std::vector<CFormInfo> Paradigms;
 					CFormInfo P;
 					std::string AnCodes;
 					m_pRusLemmatizer->CreateParadigmFromID(pH->m_lPradigmID,  P);
@@ -1738,7 +1738,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
         if (HomNo == -1) continue;
         CHomonym* pH = W.GetHomonym(HomNo);
 
-		vector<CFormInfo> Paradigms;
+		std::vector<CFormInfo> Paradigms;
 		std::string Word = W.m_strWord;
 		m_pRusLemmatizer->CreateParadigmCollection(false, Word, true, true, Paradigms);
 		for (long k=0; k < Paradigms.size(); k++)
@@ -1839,14 +1839,14 @@ void CMAPost::Rule_TwoPredicates()
 
 bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) const
 {
-    vector<CTag> Tags =  m_TrigramModel.m_TagSet.DecipherTagStr( m_TrigramModel.m_RegisteredTags[tagid1], m_pRusGramTab);
+    std::vector<CTag> Tags =  m_TrigramModel.m_TagSet.DecipherTagStr( m_TrigramModel.m_RegisteredTags[tagid1], m_pRusGramTab);
     if (tagid2 != UnknownTag)
     {
-        vector<CTag> Tags2 =  m_TrigramModel.m_TagSet.DecipherTagStr( m_TrigramModel.m_RegisteredTags[tagid2], m_pRusGramTab);
+        std::vector<CTag> Tags2 =  m_TrigramModel.m_TagSet.DecipherTagStr( m_TrigramModel.m_RegisteredTags[tagid2], m_pRusGramTab);
         Tags.insert(Tags.end(), Tags2.begin(), Tags2.end());
     }
 
-    set<std::string> Lemmas;
+    std::set<std::string> Lemmas;
     for (size_t i = 0; i < W.GetHomonymsCount(); i++)
     {
         CHomonym* pH = W.GetHomonym(i);
@@ -1874,10 +1874,10 @@ bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) co
 
 bool CMAPost::FilterPostMorphWords() 
 {
-	vector<std::string> tokens;
-	vector<CWordIntepretation> tags;
-    list<CPostLemWord>::iterator sent_start = m_Words.begin();
-    for (list<CPostLemWord>::iterator it=m_Words.begin(); it !=  m_Words.end(); )	
+	std::vector<std::string> tokens;
+	std::vector<CWordIntepretation> tags;
+    std::list<CPostLemWord>::iterator sent_start = m_Words.begin();
+    for (std::list<CPostLemWord>::iterator it=m_Words.begin(); it !=  m_Words.end(); )	
     {
         if (it->HasDes(OSentEnd ) || (tokens.size() > 150))
         {
@@ -1886,7 +1886,7 @@ bool CMAPost::FilterPostMorphWords()
 		    	return false;
             size_t WordNo = 0;
             it++;
-            for (list<CPostLemWord>::iterator it2 = sent_start; it2 !=  it; it2++)	
+            for (std::list<CPostLemWord>::iterator it2 = sent_start; it2 !=  it; it2++)	
             {
                 assert (WordNo < tags.size());
                 CPostLemWord& w = *it2;

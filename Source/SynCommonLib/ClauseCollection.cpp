@@ -79,7 +79,7 @@ void CClauseCollection::ChangeRightBorderPr(int i, int iNewBorder)
 int CClauseCollection::FindPreviousClauseIndex(int ClauseNo) const
 {
 	const CClause& pClause = m_Clauses[ClauseNo];	
-	vector<CClause>::const_iterator  pClause1;	
+	std::vector<CClause>::const_iterator  pClause1;	
 	do
 	{
 		ClauseNo--;
@@ -128,7 +128,7 @@ bool CClauseCollection::IsEnclosedClause(int iClauseNum) const
 
 
 
-void CClauseCollection::GetClausesByLastWord(vector<int>& Parents, const CPeriod* pLeftPeriod) const
+void CClauseCollection::GetClausesByLastWord(std::vector<int>& Parents, const CPeriod* pLeftPeriod) const
 {
 	Parents.clear();
 
@@ -143,7 +143,7 @@ void CClauseCollection::GetClausesByLastWord(vector<int>& Parents, const CPeriod
 	}
 }
 
-void CClauseCollection::GetClausesByFirstWord(vector<int>& Parents, const CPeriod* pRightPeriod) const
+void CClauseCollection::GetClausesByFirstWord(std::vector<int>& Parents, const CPeriod* pRightPeriod) const
 {
 	Parents.clear();
 

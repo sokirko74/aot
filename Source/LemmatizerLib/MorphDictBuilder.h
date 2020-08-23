@@ -19,8 +19,8 @@ class CMorphDictBuilder : public CMorphDict
 	// m_ModelInfo[i][j] is a word which should be written into CTrieNodeBuild::m_Info
 	//  where i is the index of MorphoWizard::m_FlexiaModels
 	//  and j is a the index of CFlexiaModel::m_Flexia
-	vector< vector <bool> >		m_ModelInfo;
-	vector< DwordVector >	m_PrefixSets;
+	std::vector< std::vector <bool> >		m_ModelInfo;
+	std::vector< DwordVector >	m_PrefixSets;
 
 	
 	void				ClearRegister();

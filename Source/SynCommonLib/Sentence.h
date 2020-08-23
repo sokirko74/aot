@@ -10,8 +10,8 @@
 
 enum ESynRulesSet{ SimpleSimilarRules, RulesBeforeSimClauses, RulesAfterSimClauses, AllRules, GroupRulesForClause};
 
-typedef pair<int, int> CIntPair;
-typedef vector<CIntPair> CIntPairVector;
+typedef std::pair<int, int> CIntPair;
+typedef std::vector<CIntPair> CIntPairVector;
 
 struct SGraPair
 {
@@ -103,25 +103,25 @@ public:
 	CWordVector& GetWords() { return m_Words;};
 	const CWordVector& GetWords() const { return m_Words;};
 
-	vector<int> m_vectorPrClauseNo;
+	std::vector<int> m_vectorPrClauseNo;
 	bool	m_bShowAllGroups;
 	bool	m_bPanicMode;
-	vector<CClauseRule> m_vectorPrimitiveRules;
-	vector<CClauseRule> m_vectorMainEncloseRules;
-	vector<CClauseRule> m_vectorDisruptRules;
+	std::vector<CClauseRule> m_vectorPrimitiveRules;
+	std::vector<CClauseRule> m_vectorMainEncloseRules;
+	std::vector<CClauseRule> m_vectorDisruptRules;
     // используется только в фукции CheckPairDelimiters
 	bool m_bFirstInPairFound;	
 	// вектор всех найденных терминов
-	vector<SFoundTermin>	m_vectorTermins;	
+	std::vector<SFoundTermin>	m_vectorTermins;	
 	// вектор всех графематических вилок (типа EXPR1-EXPR2)
-	vector<SGraPair>		m_vectorGraPairs;
+	std::vector<SGraPair>		m_vectorGraPairs;
 
 
 	//  list of models which were built upon grammars
 	// should  be a list since we use a pointer to its member
-	list<CGroups>			m_GrammarModels;
+	std::list<CGroups>			m_GrammarModels;
 	// вектор всех найденных терминов
-	vector<SFoundTermin>	m_GrammarItems;	
+	std::vector<SFoundTermin>	m_GrammarItems;	
 
 	bool m_bShouldUseTwoPotentialRule;
 	
@@ -147,7 +147,7 @@ public:
 	virtual bool	CanBeRelativeAntecedent(const CSynHomonym& H) const = 0;	
 	virtual bool	IsProfession(const CSynHomonym& H) const = 0;
 	virtual bool	RunSyntaxInClauses(ESynRulesSet) = 0;	
-	virtual void	ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMorphVariant& V) = 0;
+	virtual void	ChooseClauseType(const  std::vector<SClauseType>& vectorTypes, CMorphVariant& V) = 0;
 	virtual bool	CheckLastPredicatePosition(size_t ClauseLastWordNo, long RootWordNo)  const = 0;	
 	
 
@@ -208,7 +208,7 @@ public:
 	virtual void	CloneHomonymsForOborots() = 0;
 
 	bool	RunClauseRule(const CClauseRule*it, int iClauseNum);
-	void	OneRunOfClauseRules(const vector<CClauseRule>& ListOfRules);
+	void	OneRunOfClauseRules(const std::vector<CClauseRule>& ListOfRules);
 	int	    GetCoordConjNo(const char* WordUpper) const;
 
 	int		FindWordWithOneHomonym(int iFirstWord, int iLastWord, BYTE pos) const;
@@ -241,12 +241,12 @@ public:
 	void		BuildGLRGroupsInClause(CClause& pClause);
 	void		BuildGLRGroupsInSentence();
 	void		BuildTerminalSymbolsByClause(size_t ClauseNo);
-	void		ApplyGLR_Parsing (CGLRParser& Parser, const vector<CBuildingUnit>& BuildingUnits);
-	void		GetBestChunks(CGLRParser& Parser, vector< COccurrence>& Occurrences) const;
-	bool		BuildMorphVariantsByTomita(const CGLRParser& Parser, const vector< COccurrence>& Occurrences, CClause& pClause, vector<CBuildingUnit>& BuildingUnits);
+	void		ApplyGLR_Parsing (CGLRParser& Parser, const std::vector<CBuildingUnit>& BuildingUnits);
+	void		GetBestChunks(CGLRParser& Parser, std::vector< COccurrence>& Occurrences) const;
+	bool		BuildMorphVariantsByTomita(const CGLRParser& Parser, const std::vector< COccurrence>& Occurrences, CClause& pClause, std::vector<CBuildingUnit>& BuildingUnits);
 	CGroup		ConvertFromTomitaNodeToCGroup(const CGLRParser& Parser, const CClause& pClause, int SymbolNo ) const;
 	void		BuildGroupByGLR(const CGLRParser& Parser, const COccurrence& C, const CClause& pClause, CGroups& Groups ) const;
-	void		ProjectUsedHomonyms(const CGLRParser& Parser, const COccurrence& C, const size_t OccurNo, vector<CBuildingUnit>& BuildingUnits, vector<set< pair<int, int> > >& UsedOccurrences ) const;
+	void		ProjectUsedHomonyms(const CGLRParser& Parser, const COccurrence& C, const size_t OccurNo, std::vector<CBuildingUnit>& BuildingUnits, std::vector<std::set< std::pair<int, int> > >& UsedOccurrences ) const;
 
 	bool		CheckSubclausePredicatePositionForAllRoots(const CClause& C);
 

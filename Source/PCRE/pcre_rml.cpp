@@ -19,7 +19,7 @@
 #define ctype_word    0x10   /* alphameric or '_' */
 #define ctype_meta    0x80   /* regexp meta char or zero (end pattern) */
 
-/* Offsets for the bitmap tables in pcre_cbits. Each table contains a set
+/* Offsets for the bitmap tables in pcre_cbits. Each table contains a std::set
 of bits for a class map. Some classes are built by combining these tables. */
 
 #define cbit_space     0      /* [:space:] or \s */
@@ -45,7 +45,7 @@ total length. */
 
 
 
-void RmlPcreMakeTables(vector<BYTE>& table, MorphLanguageEnum Langua)
+void RmlPcreMakeTables(std::vector<BYTE>& table, MorphLanguageEnum Langua)
 {
 	table.resize(tables_length);
 	int start  = 0;
@@ -121,13 +121,13 @@ within regexes. */
 // Special object that stands-in for no argument
 pcrecpp::Arg no_arg((void*)NULL);
 
-// Maximum number of args we can set
+// Maximum number of args we can std::set
 static const int kMaxArgs = 16;
 static const int kVecSize = (1 + kMaxArgs) * 3;  // results + PCRE workspace
 
 
 // If a regular expression has no error, its error_ field points here
-static const string empty_string;
+static const std::string empty_string;
 
 // If the user doesn't ask for any options, we just use this one
 static pcrecpp::RE_Options default_options;
@@ -177,7 +177,7 @@ pcre* RML_RE::Compile(Anchor anchor, const unsigned char *tableptr) {
 
   // Special treatment for anchoring.  This is needed because at
   // runtime pcre only provides an option for anchoring at the
-  // beginning of a string (unless you use offset).
+  // beginning of a std::string (unless you use offset).
   //
   // There are three types of anchoring we want:
   //    UNANCHORED      Compile the original pattern, and use
@@ -196,14 +196,14 @@ pcre* RML_RE::Compile(Anchor anchor, const unsigned char *tableptr) {
   } else {
     // Tack a '\z' at the end of RE.  Parenthesize it first so that
     // the '\z' applies to all top-level alternatives in the regexp.
-    string wrapped = "(?:";  // A non-counting grouping operator
+    std::string wrapped = "(?:";  // A non-counting grouping operator
     wrapped += pattern_;
     wrapped += ")\\z";
     re = pcre_compile(wrapped.c_str(), pcre_options,
                       &compile_error, &eoffset, tableptr);
   }
   if (re == NULL) {
-    if (error_ == &empty_string) error_ = new string(compile_error);
+    if (error_ == &empty_string) error_ = new std::string(compile_error);
   }
   return re;
 }
@@ -391,13 +391,13 @@ bool RML_RE::FindAndConsume(StringPiece* input,
 }
 
 bool RML_RE::Replace(const StringPiece& rewrite,
-                 string *str) const {
+                 std::string *str) const {
   int vec[kVecSize];
   int matches = TryMatch(*str, 0, UNANCHORED, vec, kVecSize);
   if (matches == 0)
     return false;
 
-  string s;
+  std::string s;
   if (!Rewrite(&s, rewrite, *str, vec, matches))
     return false;
 
@@ -408,10 +408,10 @@ bool RML_RE::Replace(const StringPiece& rewrite,
 }
 
 int RML_RE::GlobalReplace(const StringPiece& rewrite,
-                      string *str) const {
+                      std::string *str) const {
   int count = 0;
   int vec[kVecSize];
-  string out;
+  std::string out;
   int start = 0;
   int lastend = -1;
 
@@ -423,7 +423,7 @@ int RML_RE::GlobalReplace(const StringPiece& rewrite,
     assert(matchstart >= start);
     assert(matchend >= matchstart);
     if (matchstart == matchend && matchstart == lastend) {
-      // advance one character if we matched an empty string at the same
+      // advance one character if we matched an empty std::string at the same
       // place as the last match occurred
       if (start < static_cast<int>(str->length()))
         out.push_back((*str)[start]);
@@ -448,7 +448,7 @@ int RML_RE::GlobalReplace(const StringPiece& rewrite,
 
 bool RML_RE::Extract(const StringPiece& rewrite,
                  const StringPiece& text,
-                 string *out) const {
+                 std::string *out) const {
   int vec[kVecSize];
   int matches = TryMatch(text, 0, UNANCHORED, vec, kVecSize);
   if (matches == 0)
@@ -493,15 +493,15 @@ int RML_RE::TryMatch(const StringPiece& text,
     return 0;
   } else if (rc == 0) {
     // pcre_exec() returns 0 as a special case when the number of
-    // capturing subpatterns exceeds the size of the vector.
-    // When this happens, there is a match and the output vector
+    // capturing subpatterns exceeds the size of the std::vector.
+    // When this happens, there is a match and the output std::vector
     // is filled, but we miss out on the positions of the extra subpatterns.
     rc = vecsize / 2;
   }
 
   if ((anchor == ANCHOR_BOTH) && (re_full_ == re_partial_)) {
     // We need an extra check to make sure that the match extended
-    // to the end of the input string
+    // to the end of the input std::string
     assert(vec[0] == 0);                 // PCRE_ANCHORED forces starting match
     if (vec[1] != text.size()) return 0; // Did not get ending match
   }
@@ -559,7 +559,7 @@ bool RML_RE::DoMatch(const StringPiece& text,
   return retval;
 }
 
-bool RML_RE::Rewrite(string *out, const StringPiece &rewrite,
+bool RML_RE::Rewrite(std::string *out, const StringPiece &rewrite,
                  const StringPiece &text, int *vec, int veclen) const {
   for (const char *s = rewrite.data(), *end = s + rewrite.size();
        s < end; s++) {

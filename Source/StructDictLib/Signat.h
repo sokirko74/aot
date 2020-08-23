@@ -29,8 +29,8 @@ struct CSignat
 {
    char   sFrmt[512];
    char   sFrmtWithotSpaces[512];
-   vector<TSignatItem>  DomsWithDelims;  
-   vector<BYTE>  Doms; 
+   std::vector<TSignatItem>  DomsWithDelims;  
+   std::vector<BYTE>  Doms; 
    
    char   FormatStr[255];
    char   FormatName[255];

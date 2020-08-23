@@ -7,12 +7,12 @@
 #include "../AgramtabLib/rus_consts.h"
 
 
-class CWord_eq : public unary_function<CSynWord,bool>
+class CWord_eq
 {
 	std::string s;
 public:
 	CWord_eq(std::string ss) : s(ss) {}
-	bool operator() (CSynWord& el)  
+	bool operator() (CSynWord& el)  const 
 	{ return el.m_strWord ==  s; }
 };
 
@@ -213,12 +213,12 @@ int CSentence::CanLinkSimpleSimilar(int CommaWordNo)
 
 
 		const int Radius = (GetOpt()->m_Language == morphGerman)? 10 : 6;
-		int StartClauseWordNo = max(0, CommaWordNo - Radius);
+		int StartClauseWordNo = std::max(0, CommaWordNo - Radius);
 		CSentence* pSent = GetOpt()->NewSentence();
 		if (!pSent)
 			throw CExpc ("Cannot create sentence");
 		
-		for (int i = StartClauseWordNo; i < min((int)m_Words.size(), CommaWordNo + Radius); i++)
+		for (int i = StartClauseWordNo; i < std::min((int)m_Words.size(), CommaWordNo + Radius); i++)
             pSent->m_Words.push_back(m_Words[i]);
 		
 
@@ -263,11 +263,11 @@ int CSentence::CanLinkSimpleSimilar(int CommaWordNo)
 
 }
 
-class CWordInPair_eq : public unary_function<SFoundTermin, bool>
+class CWordInPair_eq
 {
 public:
 	CWordInPair_eq(int iWord) { m_iWord = iWord; };
-	bool operator() (SFoundTermin& _pair)
+	bool operator() (SFoundTermin& _pair) const 
 	{
 		return ( m_iWord > _pair.m_iFirstWord ) && (m_iWord < _pair.m_iLastWord );
 	}
@@ -301,7 +301,7 @@ int CSentence::IsClauseBorder(int WordNo, int& iStartSearch,int& iPunctsCount, i
 	{	// a clause border cannot divide an analytical verb form (for Russian)
 		int  NextWord  = FindFirstAuxVerb(WordNo);
 		if (!pWord.m_MainVerbs.empty())
-			NextWord = max( NextWord, *max_element(pWord.m_MainVerbs.begin(), pWord.m_MainVerbs.end()));
+			NextWord = std::max( NextWord, *max_element(pWord.m_MainVerbs.begin(), pWord.m_MainVerbs.end()));
 		if (NextWord > WordNo)
 		{
 			iStartSearch = NextWord;
@@ -497,7 +497,7 @@ int CSentence::IsClauseBorder(int WordNo, int& iStartSearch,int& iPunctsCount, i
 
 		// if a multiword conjunction occurs...
 		// if there is no clause border just before this conjunction,i.e. there is no
-		// comma and simple coord. conj., then we should  set a clause border here
+		// comma and simple coord. conj., then we should  std::set a clause border here
 		// Russian examples:
 		// - Он очень хотел научиться если не писать, так читать.  //по "если" границы не будет - оно является простым союзом
 		// - Я знаю и так, чтобы ты ушел //по "так, чтобы" границы не будет -  перед ним стоит простой союз
@@ -536,7 +536,7 @@ void CSentence::InitClauseType(CClause& clause)
 
 	clause.m_vectorTypes.clear();
 
-	vector <SClauseType> WeakTypes;
+	std::vector <SClauseType> WeakTypes;
 
 	// bHasStrongRoot is true if there is a word whose all homonyms are clause roots
 	// if no such a word exists, then we should add weak clause types  to CClause::m_vectorTypes

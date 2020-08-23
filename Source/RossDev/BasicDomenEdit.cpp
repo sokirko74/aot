@@ -20,7 +20,7 @@ static char THIS_FILE[] = __FILE__;
 CBasicDomainEdit::CBasicDomainEdit(CRossDoc* pRossRoc,
 								  BYTE DomNo, 
 								  bool EditMode,
-								  vector<CString>* pHiddenItems,
+								  std::vector<CString>* pHiddenItems,
 								  LONG* pItemNo,
 								  CWnd* pParent /*=NULL*/)
 	: CDialog(CBasicDomainEdit::IDD, pParent),
@@ -195,7 +195,7 @@ void CBasicDomainEdit::OnDeleteBtn()
 	{
 
 		LONG ItemNo = m_List.GetItemData(Pos);
-		vector<int>  Refs;
+		std::vector<int>  Refs;
 		for (size_t i = 0;  i<GetRoss()->_GetCortegesSize(); i++)
 			for (size_t k=0; k < MaxNumDom; k++)
 				if (GetCortege(GetRoss(), i).m_DomItemNos[k] == ItemNo)

@@ -78,7 +78,7 @@ void CEngSemStructure::IndexSemFets()
 
 void CEngSemStructure::TranslateActants(int iEngNode, int iClause)
 {
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);	
 
 	for( int i=0; i<outRels.size(); i++ )
@@ -275,7 +275,7 @@ void  CEngSemStructure::InitSyntaxRelations ()
 
 void  CEngSemStructure::SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, std::string Position)
 {
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);	
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -304,7 +304,7 @@ void  CEngSemStructure::SetPositionsFromConj ()
 		{
 			for (long LeafId =0; LeafId < 2; LeafId++)
 			{
-				vector<TCortege> Corteges;
+				std::vector<TCortege> Corteges;
 				GetRossHolder(EngObor)->GetFieldValues ("POS", conj.m_UnitNo, Corteges, 1, 0);
 				for (long j=0; j < Corteges.size(); j++)
 				{
@@ -363,10 +363,10 @@ void  CEngSemStructure::SetLongRelations()
 	if ( m_Nodes[NodeNo].m_NodeType == MNA ) continue;
 	if ( IsAuxVerb(NodeNo) ) continue;
 
- 	vector<long> outRels;
+ 	std::vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);	
-	vector<int> ClauseRelNos;
-	vector<int> InnerRelNos;
+	std::vector<int> ClauseRelNos;
+	std::vector<int> InnerRelNos;
 	for( int i=0; i<outRels.size(); i++ )
 	if  (       !m_Relations[outRels[i]].m_bReverseRel
 		   &&   !IsRelBetweenClauses(m_Relations[outRels[i]]) 
@@ -378,7 +378,7 @@ void  CEngSemStructure::SetLongRelations()
 	}
 	else
 	{
-		vector<long> Rels;
+		std::vector<long> Rels;
 		GetRelations(m_Relations[outRels[i]].m_TargetNodeNo, Rels);
 		long j=0;
 		for (; j < Rels.size(); j++)
@@ -417,7 +417,7 @@ void  CEngSemStructure::SetLongRelations()
 // непроинтерпретированный дательный падеж переводим предлогом to
 bool CEngSemStructure::TranslateCasesIfNeed (long NodeNo)
 {
-	vector<long> Rels;
+	std::vector<long> Rels;
 	GetIncomingRelations(NodeNo, Rels, false); 
 	if (Rels.size() != 0) return false;
 	if (m_Nodes[NodeNo].m_SynReal.m_Preps.size()  > 0) return false;
@@ -501,7 +501,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 		FindEnglishEquivMain(mapRNodeToENode);
 		ResetAllReachedFlags<CEngSemStructure>(*this);
 
-		vector<long> Roots;
+		std::vector<long> Roots;
 		RusStr.GetRoots(Roots);
 		
 		for( int i=0; i<Roots.size(); i++ )
@@ -552,7 +552,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 		
 		for( int ClauseNo=0; ClauseNo<m_Clauses.size(); ClauseNo++ )
 		{
-			vector<long> Roots;
+			std::vector<long> Roots;
 			Roots.clear();
 			GetClauseRoots(ClauseNo, Roots);
 
@@ -575,7 +575,7 @@ bool CEngSemStructure::TranslateToEnglish( )
 	try 
 	{
 // добавляем общие алгоритмы
-		vector<long> algNodes;
+		std::vector<long> algNodes;
 	
 		for( int i=0; i<m_Nodes.size(); i++ )
 			RefineByNumeralMarks(i);

@@ -5,7 +5,7 @@
 
 // The main function of this file is CMorphAutomatBuilder::AddStringDaciuk 
 // This function is an implementation of algorithm for constructing minimal,
-// deterministic, acyclic FSM from unordered set of std::strings, which was described 
+// deterministic, acyclic FSM from unordered std::set of std::strings, which was described 
 // in  "Jan Daciuk, Stoyan Mihov, Bruce Watson, and Richard Watson, 
 //      Incremental Construction of Minimal Acyclic Finite State Automata, 
 //		Computational Linguistics, 26(1), March 2000."
@@ -90,7 +90,7 @@ CTrieNodeBuild* CTrieNodeBuild::GetNextNode(BYTE ChildNo)  const
 
 
 
-void CTrieNodeBuild::GetIncomingRelationsCountRecursive(map<const CTrieNodeBuild*, size_t>& Node2Incoming) const
+void CTrieNodeBuild::GetIncomingRelationsCountRecursive(std::map<const CTrieNodeBuild*, size_t>& Node2Incoming) const
 {
 	
 	for (size_t i=m_FirstChildNo; i < MaxAlphabetSize; i++)
@@ -103,7 +103,7 @@ void CTrieNodeBuild::GetIncomingRelationsCountRecursive(map<const CTrieNodeBuild
 	};
 };
 
-bool CTrieNodeBuild::CheckIncomingRelationsCountRecursive(map<const CTrieNodeBuild*, size_t>& Node2Incoming) const
+bool CTrieNodeBuild::CheckIncomingRelationsCountRecursive(std::map<const CTrieNodeBuild*, size_t>& Node2Incoming) const
 {
 	size_t debug = Node2Incoming[this];
 	assert (Node2Incoming[this] == m_IncomingRelationsCount);
@@ -177,7 +177,7 @@ bool IsLessRegister::operator ()(const CTrieNodeBuild* pNodeNo1, const CTrieNode
 	assert (pNodeNo1->m_SecondChildNo == pNodeNo1->m_SecondChildNo);
 	if (pNodeNo1->m_SecondChildNo == 0xff) return false;
 
-	return lexicographical_compare
+	return std::lexicographical_compare
 			(pNodeNo1->m_Children+pNodeNo1->m_SecondChildNo, pNodeNo1->m_Children+MaxAlphabetSize,
 			pNodeNo2->m_Children+pNodeNo2->m_SecondChildNo, pNodeNo2->m_Children+MaxAlphabetSize);
 }
@@ -410,7 +410,7 @@ bool CMorphAutomatBuilder::IsValid() const
 		return false;
 
 	// checking CTrieNodeBuild::m_IncomingRelationsCount
-	map<const CTrieNodeBuild*, size_t> Node2Incoming;
+	std::map<const CTrieNodeBuild*, size_t> Node2Incoming;
 	m_pRoot->GetIncomingRelationsCountRecursive(Node2Incoming);
 	if (!m_pRoot->CheckIncomingRelationsCountRecursive(Node2Incoming))
 		return false;
@@ -565,12 +565,12 @@ void CMorphAutomatBuilder::ConvertBuildRelationsToRelations()
 {
 	if (!m_pRoot) return;
 	m_pRoot->SetNodeIdNullRecursive();
-	queue<CTrieNodeBuild*> NodesQueue;
+	std::queue<CTrieNodeBuild*> NodesQueue;
 	NodesQueue.push(m_pRoot);
 	m_pRoot->m_NodeId = 0;
 
-	vector<CMorphAutomNode> Nodes;
-	vector<CMorphAutomRelation> Relations;
+	std::vector<CMorphAutomNode> Nodes;
+	std::vector<CMorphAutomRelation> Relations;
 
 	while (!NodesQueue.empty())
 	{

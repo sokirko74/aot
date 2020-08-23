@@ -12,7 +12,7 @@ public:
 	long						m_CurrentSentence;
 	CMyTimeSpanHolder			m_GlobalSpan; 
 	bool						m_bShouldBuildTclGraph;
-	vector<CRusSemStructure>	m_SavedSentences;
+	std::vector<CRusSemStructure>	m_SavedSentences;
 
 	CSemStructureBuilder(void);
 	~CSemStructureBuilder(void);

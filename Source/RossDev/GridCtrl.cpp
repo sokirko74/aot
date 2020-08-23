@@ -271,7 +271,7 @@ void CGridCtrl::EraseBkgnd(CDC* pDC)
     // Draw non-fixed cell background
     if (rect.IntersectRect(VisRect, ClipRect)) 
     {
-        CRect CellRect(max(nFixedColumnWidth, rect.left), max(nFixedRowHeight, rect.top),
+        CRect CellRect(std::max(nFixedColumnWidth, rect.left), std::max(nFixedRowHeight, rect.top),
                        rect.right, rect.bottom);
         pDC->FillSolidRect(CellRect, GetTextBkColor());
     }
@@ -508,7 +508,7 @@ void CGridCtrl::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
             if (scrollPos > 0 && idTopLeft.col > GetFixedColumnCount())
             {
                 int xScroll = GetColumnWidth(idTopLeft.col-1);
-                SetScrollPos(SB_HORZ, max(0,scrollPos - xScroll));
+                SetScrollPos(SB_HORZ, std::max(0,scrollPos - xScroll));
                 rect.left = GetFixedColumnWidth();
                 ScrollWindow(xScroll, 0, rect);
                 rect.right = rect.left + xScroll;
@@ -521,7 +521,7 @@ void CGridCtrl::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
             {
                 rect.left = GetFixedColumnWidth();
                 int offset = rect.Width();
-                int pos = min(m_nHScrollMax, scrollPos + offset);
+                int pos = std::min(m_nHScrollMax, scrollPos + offset);
                 SetScrollPos(SB_HORZ, pos);
                 rect.left = GetFixedColumnWidth();
                 InvalidateRect(rect);
@@ -533,7 +533,7 @@ void CGridCtrl::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
             {
                 rect.left = GetFixedColumnWidth();
                 int offset = -rect.Width();
-                int pos = max(0, scrollPos + offset);
+                int pos = std::max(0, scrollPos + offset);
                 SetScrollPos(SB_HORZ, pos);
                 rect.left = GetFixedColumnWidth();
                 InvalidateRect(rect);
@@ -602,7 +602,7 @@ void CGridCtrl::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
             if (scrollPos > 0 && idTopLeft.row > GetFixedRowCount())
             {
                 int yScroll = GetRowHeight(idTopLeft.row-1);
-                SetScrollPos(SB_VERT, max(0, scrollPos - yScroll));
+                SetScrollPos(SB_VERT, std::max(0, scrollPos - yScroll));
                 rect.top = GetFixedRowHeight();
                 ScrollWindow(0, yScroll, rect);
                 rect.bottom = rect.top + yScroll;
@@ -614,7 +614,7 @@ void CGridCtrl::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
             if (scrollPos < m_nVScrollMax)
             {
                 rect.top = GetFixedRowHeight();
-                scrollPos = min(m_nVScrollMax, scrollPos + rect.Height());
+                scrollPos = std::min(m_nVScrollMax, scrollPos + rect.Height());
                 SetScrollPos(SB_VERT, scrollPos);
                 rect.top = GetFixedRowHeight();
                 InvalidateRect(rect);
@@ -626,7 +626,7 @@ void CGridCtrl::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
             {
                 rect.top = GetFixedRowHeight();
                 int offset = -rect.Height();
-                int pos = max(0, scrollPos + offset);
+                int pos = std::max(0, scrollPos + offset);
                 SetScrollPos(SB_VERT, pos);
                 rect.top = GetFixedRowHeight();
                 InvalidateRect(rect);
@@ -1056,8 +1056,8 @@ void CGridCtrl::SelectCells(CCellID currentCell)
     //if (currentCell == m_LeftClickDownCell)  return;
     //else if (currentCell == m_idCurrentCell) return;
 
-    SetSelectedRange(min(m_SelectionStartCell.row, row), min(m_SelectionStartCell.col, col), 
-                     max(m_SelectionStartCell.row, row), max(m_SelectionStartCell.col, col)); 
+    SetSelectedRange(std::min(m_SelectionStartCell.row, row), std::min(m_SelectionStartCell.col, col), 
+                     std::max(m_SelectionStartCell.row, row), std::max(m_SelectionStartCell.col, col)); 
 }
 
 void CGridCtrl::OnSelecting(const CCellID& currentCell)
@@ -1184,7 +1184,7 @@ CCellRange CGridCtrl::GetVisibleNonFixedCellRange(LPRECT pRect /*=NULL*/)
             break;
         }
     }                                
-    int maxVisibleRow = min(i, GetRowCount() - 1);
+    int maxVisibleRow = std::min(i, GetRowCount() - 1);
     
     // calc right
     int right = GetFixedColumnWidth();
@@ -1196,7 +1196,7 @@ CCellRange CGridCtrl::GetVisibleNonFixedCellRange(LPRECT pRect /*=NULL*/)
             break;
         }
     }
-    int maxVisibleCol = min(i, GetColumnCount() - 1);
+    int maxVisibleCol = std::min(i, GetColumnCount() - 1);
     if (pRect) {
         pRect->left = pRect->top = 0;
         pRect->right = right;
@@ -1222,7 +1222,7 @@ CCellRange CGridCtrl::GetUnobstructedNonFixedCellRange()
         bottom += GetRowHeight(i);
         if (bottom >= rect.bottom) break;
     }
-    int maxVisibleRow = min(i, GetRowCount() - 1);
+    int maxVisibleRow = std::min(i, GetRowCount() - 1);
     if (maxVisibleRow > 0 && bottom > rect.bottom) maxVisibleRow--;
     
     // calc right
@@ -1232,7 +1232,7 @@ CCellRange CGridCtrl::GetUnobstructedNonFixedCellRange()
         right += GetColumnWidth(i);
         if (right >= rect.right) break;
     }
-    int maxVisibleCol = min(i, GetColumnCount() - 1);
+    int maxVisibleCol = std::min(i, GetColumnCount() - 1);
     if (maxVisibleCol > 0 && right > rect.right) maxVisibleCol--;
 
 
@@ -2390,8 +2390,8 @@ void CGridCtrl::OnLButtonDown(UINT nFlags, CPoint point)
         return;
     } else {
         SetFocusCell(-1,-1);
-        SetFocusCell(max(m_LeftClickDownCell.row, m_nFixedRows),
-                     max(m_LeftClickDownCell.col, m_nFixedCols));
+        SetFocusCell(std::max(m_LeftClickDownCell.row, m_nFixedRows),
+                     std::max(m_LeftClickDownCell.col, m_nFixedCols));
     }
 
     

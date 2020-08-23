@@ -97,8 +97,8 @@ class TCortegeContainer
   typedef TBasicCortege<3> CortegeType3;
   typedef TBasicCortege<10> CortegeType10;
 
-  vector<CortegeType3>      m_Corteges3;
-  vector<CortegeType10>     m_Corteges10;
+  std::vector<CortegeType3>      m_Corteges3;
+  std::vector<CortegeType10>     m_Corteges10;
 public :
   BYTE m_MaxNumDom;
 
@@ -130,8 +130,8 @@ public:
 	BYTE					m_MaxMeanNum;
 	std::string					m_DictName;
 	
-	vector<CStructEntry>	m_Units;
-	vector<TUnitComment>	m_UnitComments;
+	std::vector<CStructEntry>	m_Units;
+	std::vector<TUnitComment>	m_UnitComments;
 	bool					m_bShouldSaveComments;
 
 
@@ -150,7 +150,7 @@ public:
 	WORD	GetUnitsSize() const { return (WORD)m_Units.size();	};
 	bool	ClearUnits();
 	void	ClearUnit(WORD UnitNo);
-	void	DelUnit(vector<CStructEntry>::iterator It);
+	void	DelUnit(std::vector<CStructEntry>::iterator It);
 	WORD	LocateUnit (const char * EntryStr, int MeanNum) const;
 	WORD    GetSelectedUnitNo (WORD i) const;
 	WORD	GetSelectedUnitsSize() const;
@@ -177,7 +177,7 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	bool			BuildCorteges();
-	virtual bool	UpdateSignatsOfTheFieldInCorteges (BYTE FieldNo, vector<CSignat>& Signats);
+	virtual bool	UpdateSignatsOfTheFieldInCorteges (BYTE FieldNo, std::vector<CSignat>& Signats);
 	void			DelCorteges (size_t start, size_t last);
 						 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -232,7 +232,7 @@ struct CSourceLine
 
 class CDictionary : public TRoss
 {
-	bool		ProcessOneArticle(vector<CSourceLine>& L, int start, int last, std::string& Messages);
+	bool		ProcessOneArticle(std::vector<CSourceLine>& L, int start, int last, std::string& Messages);
 
 public:
 	
@@ -240,7 +240,7 @@ public:
 		By default  TCortegeContainer::m_MaxNumDom is equal to 3.
 		Before invoking TRoss::Load it can be adjusted.
 	*/
-	vector<CStructEntry>& GetUnits();
+	std::vector<CStructEntry>& GetUnits();
 
 	CDictionary();
 	

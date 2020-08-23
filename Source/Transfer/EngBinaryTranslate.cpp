@@ -384,11 +384,11 @@ struct FreqDictLess{
 	// русская ParadigmId
 	long						m_RusParadigmId;
 	// частотыне словари для каждой предметной области
-	vector<const CFreqDict*>&	 m_FreqDicts;
+	std::vector<const CFreqDict*>&	 m_FreqDicts;
 	// текущая предметная область
 	int							m_TextKind;
 
-	FreqDictLess(long RusParadigmId, vector<const CFreqDict*> &FreqDicts, int TextKind)
+	FreqDictLess(long RusParadigmId, std::vector<const CFreqDict*> &FreqDicts, int TextKind)
 		:m_RusParadigmId(RusParadigmId),
 		m_FreqDicts(FreqDicts),
 		m_TextKind(TextKind)
@@ -400,8 +400,8 @@ struct FreqDictLess{
 		int i;
 		if(id_eng1 == id_eng2) return false;
 		// main freqs are equal
-		vector<long> vec1(m_FreqDicts.size());
-		vector<long> vec2(m_FreqDicts.size());
+		std::vector<long> vec1(m_FreqDicts.size());
+		std::vector<long> vec2(m_FreqDicts.size());
 		for(i = 0; i < m_FreqDicts.size(); i++){
 			vec1[i] = m_FreqDicts[i]->GetFreq(id_eng1, m_RusParadigmId);
 			vec2[i] = m_FreqDicts[i]->GetFreq(id_eng2, m_RusParadigmId);
@@ -428,14 +428,14 @@ const CThesaurus*   translate_helper::GetThes(int ThesId)  const
 }
 
 
-void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t RusPoses) const
+void translate_helper::translate_id(long Id, std::vector<long> &res, poses_mask_t RusPoses) const
 {
 	
 	// получение всех видовых пар данного слова, если это глагол,
-	vector<long> rus_vec;
+	std::vector<long> rus_vec;
 	rus_vec.push_back(Id);
 	int i;
-	vector<DWORD> ResVector;
+	std::vector<DWORD> ResVector;
 	m_pData->m_AspDict.nonperf2perf(Id, ResVector);
 	for(i = 0; i < ResVector.size(); i++)
 		rus_vec.push_back(ResVector[i]);
@@ -515,7 +515,7 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 
 	// сортируем по частотам перевода в предметных областях
 	// первое слово в отсортированном массиве - самый вероятный перевод
-	vector<const CFreqDict*> freq_vec(3);
+	std::vector<const CFreqDict*> freq_vec(3);
 	freq_vec[0] = &m_pData->m_CompFreq;
 	freq_vec[1] = &m_pData->m_FinFreq;
 	freq_vec[2] = &m_pData->m_HudFreq;
@@ -533,7 +533,7 @@ void translate_helper::translate_id(long Id, vector<long> &res, poses_mask_t Rus
 long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::string norm, UINT pos, bool bProper) const
 {
 
-	vector<CFormInfo> ParadigmCollection;
+	std::vector<CFormInfo> ParadigmCollection;
 	Trim(norm);
 	const CLemmatizer*  lemmatizer = GetLemmatizer(langua);
 	const CAgramtab*	GramTab = GetGramTab(langua);
@@ -634,7 +634,7 @@ bool translate_helper::starts_with(const std::string &s,const StringVector &star
 	EngRusMakeLower(lower_s);
 	for(int i = 0; i < starts.size(); i++)
 	{
-		int size = min(starts[i].size(), s.size());
+		int size = std::min(starts[i].size(), s.size());
 		if(lower_s.substr(0,size) ==  starts[i])
 			return true;
 	}
@@ -748,7 +748,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 	const CSemWord& W = RusStr.GetNode(m_Nodes[NodeNo].RusNode).GetWord(0);
 	long ParadigmId = W.m_ParadigmId;
 
-	vector<long> EngIds;
+	std::vector<long> EngIds;
 	helper.translate_id(ParadigmId, EngIds, W.m_Poses);
 
 	if (EngIds.empty() || W.HasOneGrammem(rPatronymic) )

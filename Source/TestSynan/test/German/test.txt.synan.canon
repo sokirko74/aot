@@ -1,0 +1,95 @@
+[
+    {
+        "comments": "",
+        "input": "Ich gehe nach Hause.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "PP",
+                                        "words": "nach Hause"
+                                    }
+                                ],
+                                "type": "VERBSATZ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Ich gehe nach Hause ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "EXPR",
+                        "src": "gehe",
+                        "src_grm": "imper,intra,sin,3,1,prae,imp,kj1,non,",
+                        "src_lemma": "GEHEN",
+                        "trg": "Ich",
+                        "trg_grm": "nom,sin,1,alg,per,",
+                        "trg_lemma": "SIE"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Du bist ein Idiot.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "MODIF_NP",
+                                        "words": "ein Idiot"
+                                    }
+                                ],
+                                "type": "VERBSATZ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Du bist ein Idiot ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "EXPR",
+                        "src": "bist",
+                        "src_grm": "imper,intra,trans,sin,2,prae,aux,non,",
+                        "src_lemma": "SEIN",
+                        "trg": "Du",
+                        "trg_grm": "nom,sin,2,alg,per,",
+                        "trg_lemma": "SIE"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "",
+        "result": null
+    },
+    {
+        "comments": "",
+        "input": "",
+        "result": null
+    },
+    {
+        "comments": "",
+        "input": "",
+        "result": null
+    }
+]

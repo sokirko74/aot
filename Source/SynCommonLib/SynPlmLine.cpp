@@ -176,7 +176,7 @@ int     CSynPlmLine :: get_coord_conj_no() const
     return m_pActiveHomonym ? m_pActiveHomonym->m_CoordConjNo : 0;
     
 }
-const vector<int>* CSynPlmLine :: get_simple_preps() const 
+const std::vector<int>* CSynPlmLine :: get_simple_preps() const 
 {
     return m_pActiveHomonym ? &m_pActiveHomonym->m_SimplePrepNos : 0;
 }

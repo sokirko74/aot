@@ -68,7 +68,7 @@ WORD CTrigramModel::find_tag(const std::string &t) const
 { 
 	assert (!t.empty());
 	size_t debug = m_RegisteredTags.size();
-	vector<std::string>::const_iterator it = find(m_RegisteredTags.begin(), m_RegisteredTags.end(), t);
+	std::vector<std::string>::const_iterator it = find(m_RegisteredTags.begin(), m_RegisteredTags.end(), t);
 	if (it == m_RegisteredTags.end())
 		return UnknownTag;
 	else
@@ -114,7 +114,7 @@ void CTrigramModel::set_ngram(size_t n, WORD t1, WORD t2, WORD t3, int value)
 	{
 		case 0: m_Unigrams[ngram_index(t1)] = value; return;
 		case 1: m_Bigrams[ngram_index(t1,t2)] = value; return; 
-		case 2: m_Trigrams.insert(make_pair(ngram_index(t1,t2,t3), value)); return;
+		case 2: m_Trigrams.insert(std::make_pair(ngram_index(t1,t2,t3), value)); return;
 	}
 	ErrorMessage(Format("ngram_index %d>2\n", n));
 }
@@ -126,7 +126,7 @@ size_t CTrigramModel::GetTrigram(WORD t1, WORD t2, WORD t3)  const
 	// и триграмма пуста
 	if ( (m_Bigrams[ngram_index(t1, t2)] == 0) || (m_Bigrams[ngram_index(t2, t3)] == 0)) return 0;
 
-	map<trigram_integer_t,int>::const_iterator it = m_Trigrams.find(ngram_index(t1,t2,t3));
+	std::map<trigram_integer_t,int>::const_iterator it = m_Trigrams.find(ngram_index(t1,t2,t3));
 
 	if (it == m_Trigrams.end())
 		return 0;
@@ -218,7 +218,7 @@ CLambdas CTrigramModel::compute_lambdas_for_one_bucket(PMap::const_iterator star
 
 	for (PMap::const_iterator it = start_it; it  != end_it; it++)
 	{
-		const vector< CSingleHistory >& V = it->second;
+		const std::vector< CSingleHistory >& V = it->second;
 		for (int i =0; i < V.size(); i++)
 		{
 			const CSingleHistory& H = V[i];
@@ -279,7 +279,7 @@ CLambdas CTrigramModel::compute_lambdas_for_one_bucket(PMap::const_iterator star
 // That is we take the average count over non-zero counts for trigrams.
 int CTrigramModel::compute_bucket_denominator(WORD i, WORD j, int& TrigramsCount)
 {
-	map<size_t,int> TrigramCount2Count;
+	std::map<size_t,int> TrigramCount2Count;
 	TrigramsCount = 0;
 	for (WORD k=START_AT_TAG; k<m_TagsCount; k++)
 	{
@@ -293,7 +293,7 @@ int CTrigramModel::compute_bucket_denominator(WORD i, WORD j, int& TrigramsCount
 	}
 	if (TrigramCount2Count.empty()) return 1;
 	int sum = 0;
-	for (map<size_t,int>::const_iterator it = TrigramCount2Count.begin(); it != TrigramCount2Count.end(); it++)
+	for (std::map<size_t,int>::const_iterator it = TrigramCount2Count.begin(); it != TrigramCount2Count.end(); it++)
 		sum += it->second;
 	int size = (int)TrigramCount2Count.size();
 	int denom = sum/size;
@@ -342,7 +342,7 @@ bool CTrigramModel::compute_bucketed_lambdas()
 			if (it != single_history_values.end())
 				it->second.push_back(H);
 			else
-				single_history_values[hist_value] = vector< CSingleHistory >(1, H);
+				single_history_values[hist_value] = std::vector< CSingleHistory >(1, H);
 		}
 	}
 
@@ -359,7 +359,7 @@ bool CTrigramModel::compute_bucketed_lambdas()
 	PMap::const_iterator start_bucket_it = single_history_values.begin();
 	for (PMap::const_iterator it = single_history_values.begin(); it != single_history_values.end(); it++)
 	{
-		const vector< CSingleHistory >& V = it->second;
+		const std::vector< CSingleHistory >& V = it->second;
 		for (int i =0; i < V.size(); i++)
 		{
 			CurrentBucketSize += V[i].m_TrigramsCount;
@@ -399,7 +399,7 @@ bool CTrigramModel::compute_bucketed_lambdas()
 
 
 //#pragma optimize( "", off )
-void  CTrigramModel::get_tags_from_annots(const vector<CXmlMorphAnnot>& Annots, set<WORD>& tags, const std::string& WordStr) const
+void  CTrigramModel::get_tags_from_annots(const std::vector<CXmlMorphAnnot>& Annots, std::set<WORD>& tags, const std::string& WordStr) const
 {
     size_t good_annots_count = 0;
     for (size_t i=0; i < Annots.size(); i++)
@@ -455,7 +455,7 @@ struct LessByWordStr {
 
 const CTrigramWord* CTrigramModel::lookup_word(const std::string& s) const
 {
-    vector<CTrigramWord>::const_iterator it = lower_bound(m_Dictionary.begin(), m_Dictionary.end(), s, LessByWordStr());
+    std::vector<CTrigramWord>::const_iterator it = lower_bound(m_Dictionary.begin(), m_Dictionary.end(), s, LessByWordStr());
     if (it == m_Dictionary.end()) return nullptr;
     if (it->m_WordStr != s) return nullptr;
     return &(*it);
@@ -496,7 +496,7 @@ CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 	}
 
 	// получаем все возможные тэги из морф. словаря
-    map<std::string, const vector<CXmlMorphAnnot>* >::iterator it = m_CurrentSentenceWords2Annots.find(WordStr);
+    std::map<std::string, const std::vector<CXmlMorphAnnot>* >::iterator it = m_CurrentSentenceWords2Annots.find(WordStr);
     if (it != m_CurrentSentenceWords2Annots.end())
         get_tags_from_annots(*it->second,R.m_PossibleWordTags, WordStr);
 
@@ -533,7 +533,7 @@ CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 			// приписываем все тэги
 			if (!m_bQuiet)
 				fprintf (stderr, "No information for word %s\n",WordStr.c_str());
-			for (size_t i=0; i < min((size_t)200, m_TagsOrderedByUnigrams.size()); i++)
+			for (size_t i=0; i < std::min((size_t)200, m_TagsOrderedByUnigrams.size()); i++)
 			{
 				WORD tagno = m_TagsOrderedByUnigrams[i];
 				std::string tag = m_RegisteredTags[tagno];
@@ -673,9 +673,9 @@ bool CTrigramModel::adjusting_homonyms_coef(std::string FileName) const
 	while (fgets(buffer, 10000, fp))
 	{ 
 		SentNo++;
-		vector<std::string> words;
-		vector<CWordIntepretation> tags;
-		vector<WORD> refs;
+		std::vector<std::string> words;
+		std::vector<CWordIntepretation> tags;
+		std::vector<WORD> refs;
 
 		StringTokenizer tok(buffer, " \t\r\n");
 		for (size_t i=0; tok(); i++)
@@ -725,7 +725,7 @@ bool CTrigramModel::adjusting_homonyms_coef(std::string FileName) const
 				std::string rs = m_RegisteredTags[ref];
 				
 				
-				for (int j=(int)i-5; j<(int)min(i+5, words.size()); j++)
+				for (int j=(int)i-5; j<(int)std::min(i+5, words.size()); j++)
 				{
 					if (j<0) { continue; }
 					
@@ -875,7 +875,7 @@ void CTrigramModel::InitModelFromConfigAndBuildTagset(std::string FileName, cons
 		fprintf (stderr, "building default tagset\n");
 		m_TagSet.BuildDefaultTags(m_pAgramtab);
 	}
-	fprintf (stderr, "tag set file contains %i tags \n", m_TagSet.m_Tags.size());
+	fprintf (stderr, "tag std::set file contains %i tags \n", m_TagSet.m_Tags.size());
 #endif
 
     if (bLoadReverseModel && !ReverseModelConfig.empty())
@@ -894,10 +894,10 @@ void CTrigramModel::InitModelFromConfigAndBuildTagset(std::string FileName, cons
 
 
 
-bool CTrigramModel::DisambiguateRusCorpXml(vector<CXmlToken>& Words)  const
+bool CTrigramModel::DisambiguateRusCorpXml(std::vector<CXmlToken>& Words)  const
 {
-	vector<std::string> tokens;
-	vector<CWordIntepretation> tags;
+	std::vector<std::string> tokens;
+	std::vector<CWordIntepretation> tags;
     m_CurrentSentenceWords2Annots.clear();    
     for (size_t WordNo=0; WordNo < Words.size(); WordNo++)	
     {
@@ -913,7 +913,7 @@ bool CTrigramModel::DisambiguateRusCorpXml(vector<CXmlToken>& Words)  const
         CXmlToken& W = Words[WordNo];
         WORD besttag = tags[WordNo].m_TagId1;
         size_t i=0;
-        vector<CXmlMorphAnnot> NewAnnots;
+        std::vector<CXmlMorphAnnot> NewAnnots;
         for (;  i <W.m_Annots.size(); i++)
         {
             std::string TagStr = W.m_Annots[i].BuildRusCorpAnnot();

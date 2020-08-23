@@ -4,15 +4,15 @@
 
 
 // building m_FirstSets.
-// m_FirstSets[i] is a set of all terminals which can start a terminal sequence, 
+// m_FirstSets[i] is a std::set of all terminals which can start a terminal sequence, 
 // which can be produced from  nonterminal symbol  i
 //==============
-//  1. We first initialize the FIRST sets to the empty set
+//  1. We first initialize the FIRST sets to the empty std::set
 // 2. Then we process each grammar rule in the following way: if the right-hand side
-// starts with a teminal  symbol. we add this symbol to the FIRST set  of the 
+// starts with a teminal  symbol. we add this symbol to the FIRST std::set  of the 
 //  left-hand side, since it  can be the firts symbol of a sentential form 
 // derived from the left side.  If the right-hand side starts with a non-terminal symbol
-// we add all symbols of the present FIRST set of this non-terminal to the FIRST set
+// we add all symbols of the present FIRST std::set of this non-terminal to the FIRST std::set
 // of the left-hand side. These are all symbols that can be the first  terminal of
 //  a sentential for derived from teh left-hand side.
 //  3. The previuos  step is repeated until no more new symbols are added to any of the
@@ -31,8 +31,8 @@ void CWorkGrammar::Build_FIRST_Set()
 			int SymbolNo = R.m_RightPart.m_Items[0];
 			if (m_UniqueGrammarItems[SymbolNo].m_bMeta)
 			{
-				const set<size_t>& s = m_FirstSets[SymbolNo];
-				for (set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
+				const std::set<size_t>& s = m_FirstSets[SymbolNo];
+				for (std::set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
 					if (m_FirstSets[R.m_LeftPart].insert(*it).second)
 						bChanged  = true;			
 			}
@@ -49,8 +49,8 @@ void CWorkGrammar::Build_FIRST_Set()
 	if	(m_UniqueGrammarItems[SymbolNo].m_Type == siMeta)
 	{
 		printf ("FIRST(%s) = ",m_UniqueGrammarItems[SymbolNo].GetDumpString().c_str());
-		const set<size_t>& s = m_FirstSets[SymbolNo];
-		for (set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
+		const std::set<size_t>& s = m_FirstSets[SymbolNo];
+		for (std::set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
 			printf ("%s,",m_UniqueGrammarItems[*it].GetDumpString().c_str());
 		printf ("\n");
 
@@ -65,7 +65,7 @@ void CWorkGrammar::Build_FIRST_Set()
 	to function CWorkGrammar::Build_FIRST_Set.
 */
 
-void CWorkGrammar::Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, map<size_t, CPrefixSet >& First_k)  const
+void CWorkGrammar::Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, std::map<size_t, CPrefixSet >& First_k)  const
 {
 	First_k.clear();
 	bool bChanged = true;
@@ -80,7 +80,7 @@ void CWorkGrammar::Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, map<size_t
 			//  we should add an empty prefix
 			ThisRuleResult.insert(CPrefix());
 
-			for (size_t i=0; i < min (PrefixLength,R.m_RightPart.m_Items.size()); i++)
+			for (size_t i=0; i < std::min (PrefixLength,R.m_RightPart.m_Items.size()); i++)
 			{
 				CPrefixSet Additions;
 				int SymbolNo = R.m_RightPart.m_Items[i];
@@ -108,7 +108,7 @@ void CWorkGrammar::Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, map<size_t
 						{
 							CPrefix UpdatedPrefix = Prefix;
 
-							int AddLen = min(Addition.size(), PrefixLength - Prefix.size());
+							int AddLen = std::min(Addition.size(), PrefixLength - Prefix.size());
 
 							UpdatedPrefix.insert (UpdatedPrefix.end(), Addition.begin(), Addition.begin()+AddLen);
 
@@ -152,13 +152,13 @@ void CWorkGrammar::Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, map<size_t
 
 void CWorkGrammar::BuildRootPrefixes(size_t PrefixLength) 
 {
-	map<size_t, CPrefixSet > First_k;
+	std::map<size_t, CPrefixSet > First_k;
 	Build_MAP_Node_To_FIRST_Set_k(PrefixLength, First_k);
 
 
 	//  Building CWorkGrammar::m_RootPrefixes
 	size_t RuleId = 1;
-	for  (map<size_t, CPrefixSet >::const_iterator it=First_k.begin(); it != First_k.end(); it++)
+	for  (std::map<size_t, CPrefixSet >::const_iterator it=First_k.begin(); it != First_k.end(); it++)
 	if (m_UniqueGrammarItems[it->first].m_bGrammarRoot)
 	{
 		for (CPrefixSet::const_iterator it1 =  it->second.begin(); it1 != it->second.end(); it1++)
@@ -180,7 +180,7 @@ void CWorkGrammar::BuildRootPrefixes(size_t PrefixLength)
 
 
 // building m_FollowSets.
-// m_FollowSets[i] is a set of all terminals which can be after a terminal sequence, 
+// m_FollowSets[i] is a std::set of all terminals which can be after a terminal sequence, 
 // which can be produced from  nonterminal symbol  i
 void CWorkGrammar::Build_FOLLOW_Set() 
 {
@@ -205,8 +205,8 @@ void CWorkGrammar::Build_FOLLOW_Set()
 				if (m_UniqueGrammarItems[SymbolNo].m_bMeta)
 				{
 					//  adding FIRST(SymbolNo) to  FOLLOW(R.m_RightPart[i])
-					const set<size_t>& s = m_FirstSets[SymbolNo];
-					for (set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
+					const std::set<size_t>& s = m_FirstSets[SymbolNo];
+					for (std::set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
 						if (m_FollowSets[R.m_RightPart.m_Items[i]].insert(*it).second)
 							bChanged  = true;			
 				}
@@ -220,8 +220,8 @@ void CWorkGrammar::Build_FOLLOW_Set()
 			if (m_UniqueGrammarItems[SymbolNo].m_bMeta) 
 			{
 				//  adding FOLLOW(R.m_LeftPart) to  FOLLOW(SymbolNo)
-				const set<size_t>& s = m_FollowSets[R.m_LeftPart];
-				for (set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
+				const std::set<size_t>& s = m_FollowSets[R.m_LeftPart];
+				for (std::set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
 					if (m_FollowSets[SymbolNo].insert(*it).second)
 						bChanged  = true;			
 			};
@@ -235,8 +235,8 @@ void CWorkGrammar::Build_FOLLOW_Set()
 	//if	(m_UniqueGrammarItems[SymbolNo].m_bMeta)
 	//{
 	//	printf ("FOLLOW(%s) = ",m_UniqueGrammarItems[SymbolNo].GetDumpString().c_str());
-	//	const set<size_t>& s = m_FollowSets[SymbolNo];
-	//	for (set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
+	//	const std::set<size_t>& s = m_FollowSets[SymbolNo];
+	//	for (std::set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
 	//		printf ("%s,",m_UniqueGrammarItems[*it].GetDumpString().c_str());
 	//	printf ("\n");
 

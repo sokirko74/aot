@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 /* This file contains a private PCRE function that converts an ordinal
-character value into a UTF8 string. */
+character value into a UTF8 std::string. */
 
 #ifdef HAVE_CONFIG_H
 #include "pcre_config.h"

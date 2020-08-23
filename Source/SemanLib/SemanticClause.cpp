@@ -12,7 +12,7 @@ bool CRusSemStructure::CreateClauseRelation(long ClauseRuleNo, long ClauseNo1, l
 	if (SourceNodeNo == -1)
 	{
 
-		vector<long> Nodes1;
+		std::vector<long> Nodes1;
 		GetClauseRootsWithoutDeleted(ClauseNo1,Nodes1);
 
 		// если два узла, то считаем, что на первом месте стоит союз, который мы пропускаем
@@ -25,12 +25,12 @@ bool CRusSemStructure::CreateClauseRelation(long ClauseRuleNo, long ClauseNo1, l
 				SourceNodeNo = Nodes1[0];
 	};
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (Nodes2.size() == 2)  
 	{
 
-		vector<long>::iterator It = find (Nodes2.begin(), Nodes2.end(), TargetNodeNo);
+		std::vector<long>::iterator It = find (Nodes2.begin(), Nodes2.end(), TargetNodeNo);
 		if (It == Nodes2.end()) return false;
 		Nodes2.erase(It);
 		AddRelation(CRusSemRelation(V, SourceNodeNo, Nodes2[0],   ""));
@@ -198,7 +198,7 @@ bool CRusSemStructure::IsConnectedClause(size_t ClauseNo)
 
 
 
-void CRusSemStructure::GetClauseRootsWithoutDeleted (size_t ClauseNo, vector<long>& Nodes) const
+void CRusSemStructure::GetClauseRootsWithoutDeleted (size_t ClauseNo, std::vector<long>& Nodes) const
 {
 	Nodes.clear();
 	// проходим по всем узлам и добавляем узлы, в которые не входит ни одно связи 
@@ -228,7 +228,7 @@ void CRusSemStructure::GetClauseRootsWithoutDeleted (size_t ClauseNo, vector<lon
  чтобы он выдал "случиться"
 
 */
-void GetRootsWithoutDeletedOrSyntaxTop(const CRusSemStructure& R, long ClauseNo, vector<long>& Nodes)
+void GetRootsWithoutDeletedOrSyntaxTop(const CRusSemStructure& R, long ClauseNo, std::vector<long>& Nodes)
 {
 	R.GetClauseRootsWithoutDeleted(ClauseNo,Nodes);
 	if (Nodes.size() == 0)
@@ -271,7 +271,7 @@ bool CRusSemStructure::TryClauseSubordConj(long ClauseRuleNo, long ClauseNo1, lo
 	if (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ЧТО")) return false;
 
 	// получение вершины второй клаузы, сравниваем ее граммемы и часть речи с GF2 союза 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (Nodes2.size() != 2)  return false;
 	CSemPattern P;
@@ -322,7 +322,7 @@ bool CRusSemStructure::TryClauseCHTO_TOT_Dop(long ClauseRuleNo, long ClauseNo1, 
 	if  (NodeNo == -1) return 0;
 	if (!m_Nodes[NodeNo].IsLemma(_R("ЧТО"))) return false;
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (Nodes2.size() != 2)  return false;
 
@@ -338,7 +338,7 @@ bool CRusSemStructure::TryClauseCHTO_TOT_Dop(long ClauseRuleNo, long ClauseNo1, 
 		)
 		return false;
 
-	vector<long> Rels;
+	std::vector<long> Rels;
 	GetIncomingInClauseRelations(i,Rels);
 	if (Rels.size() != 1) return false;
 	CValency V = m_Relations[Rels[0]].m_Valency;
@@ -370,11 +370,11 @@ bool CRusSemStructure::TryClauseParenthesis(long ClauseRuleNo, long ClauseNo1, l
 	if (i == m_SynClauseRels.size()) return false;
 
 
-	vector<long> Nodes1;
+	std::vector<long> Nodes1;
 	GetRootsWithoutDeletedOrSyntaxTop(*this, ClauseNo1,Nodes1);
 	if (Nodes1.size() != 1)  return false;
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (Nodes2.size() != 1)  return false;
 
@@ -407,7 +407,7 @@ bool CRusSemStructure::TryClauseNSO(long ClauseRuleNo, long ClauseNo1, long Clau
 
 	if (i == m_SynClauseRels.size()) return false;
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (Nodes2.size() != 1)  return false;
 
@@ -481,7 +481,7 @@ const CDictUnitInterp* CRusSemStructure::GetSubordConjFromTheBegining (long Clau
 		|| (NodeNo == m_Nodes.size() - 1)
 		)
 	{
-		vector<long> Rels;
+		std::vector<long> Rels;
 		GetIncomingInClauseRelations(NodeNo,Rels);
 		if ( (Rels.size() != 1) || !IsRusSubj(Rels[0])) return 0;
 		const CDictUnitInterp* Conj =   m_Nodes[NodeNo+1].GetInterp();
@@ -554,9 +554,9 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 	if (Conj.m_DictType == OborRoss) return false;
 
 	CValency V = GetSemRelOfPrepOrConj(Conj);
-	typedef pair<int, std::string> PosLemmaPair;
+	typedef std::pair<int, std::string> PosLemmaPair;
 
-	vector<PosLemmaPair> Relats;
+	std::vector<PosLemmaPair> Relats;
 	for (long l=0; l < m_Nodes[ConjNodeNo].m_LexFunctFields.size(); l++)
 		if (m_Nodes[ConjNodeNo].m_LexFunctFields[l].m_LexFunct == "Relat")
 		{
@@ -664,7 +664,7 @@ bool CRusSemStructure::TryClauseConjWord (long ClauseRuleNo, long ClauseNo1, lon
 		"я думал о том, почему ты мне надоел"
 		*/
 		WORD O_UnitNo = GetRoss(OborRoss)->LocateUnit(_R("о+П").c_str(), 1);
-		vector<long> Nodes;
+		std::vector<long> Nodes;
 		GetOutcomingNodes(NodeNo,Nodes, false);
 		for (long j=0; j < Nodes.size(); j++)
 			if (   m_Nodes[Nodes[j]].IsLemma(_R("ТОТ"))
@@ -737,7 +737,7 @@ bool CRusSemStructure::TryClauseCHTOBY_GG (long ClauseRuleNo, long ClauseNo1, lo
 	 )
   // ищем незаполненную валентность, которая выражается чтобы+ГГ_прш
   {
-      vector<long> Nodes2;
+      std::vector<long> Nodes2;
       GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	  if (Nodes2.size() != 2) return false;
 	  long RootNodeNo2 = Nodes2[Nodes2.size()-1];
@@ -843,11 +843,11 @@ bool CRusSemStructure::TryClauseCoordSimpleConj (long ClauseRuleNo, long ClauseN
 {
   // "мне об этом сказали, и хоть я не огорчился особо, все бросились меня утешать"
   // здесь обрабатывается связь между первой и второй клаузой
-  vector<long> Nodes1;
+  std::vector<long> Nodes1;
   GetRootsWithoutDeletedOrSyntaxTop(*this, ClauseNo1,Nodes1);
   if (Nodes1.size() == 0) return false;
   
-  vector<long> Nodes2;
+  std::vector<long> Nodes2;
   GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
   if (Nodes2.size() < 2) return false;
 
@@ -913,7 +913,7 @@ bool CRusSemStructure :: GetFreeActantPattern (long NodeNo, CSemPattern& P, CSyn
 {
 
 	SynReal.SetEmpty();
-	vector<CValency> ValencyMisses;
+	std::vector<CValency> ValencyMisses;
 
 	GetValencyMisses (NodeNo, ValencyMisses);
 
@@ -963,7 +963,7 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
 // я сделал, что ты просил
 // ты понял, что так поступать нельзя
 
-  vector<long> Nodes1;
+  std::vector<long> Nodes1;
   GetClauseRootsWithoutDeleted(ClauseNo1,Nodes1);
   if (Nodes1.size() != 1)  return false;
 
@@ -977,7 +977,7 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
 	 return false;
 
 
-  vector<long> Nodes2;
+  std::vector<long> Nodes2;
   GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
   if (   (Nodes2.size() != 1)
 	  && (     (Nodes2.size() != 2)
@@ -1102,7 +1102,7 @@ bool CRusSemStructure::TryClauseAnaphoricSubordWithoutAntecedent (long ClauseRul
 CRusSemNode  CRusSemStructure::CreatePronounByLemma(std::string Lemma)
 {
 	const CLemmatizer* P = m_pData->GetRusLemmatizer(); 
-	vector<CFormInfo> ParadigmCollection;
+	std::vector<CFormInfo> ParadigmCollection;
 	P->CreateParadigmCollection(true, Lemma,false, false, ParadigmCollection);
 	assert (!ParadigmCollection.empty());
 	std::string GramCodes = ParadigmCollection[0].GetSrcAncode();
@@ -1197,7 +1197,7 @@ bool CRusSemStructure::TryClauseCHTO_WITH_ANIMAT (long ClauseRuleNo, long Clause
 						&m_pData->m_HierarchySemFetDoc ) )
 						 return false;
 
- vector<long> Nodes1;
+ std::vector<long> Nodes1;
  GetClauseRootsWithoutDeleted(ClauseNo1, Nodes1);
  if (Nodes1.size() != 1) return false;
  long PrototypeSubj = GetRusSubj(Nodes1[0]);
@@ -1238,7 +1238,7 @@ bool CRusSemStructure::TryClauseZeroSubordWithoutAntecedent (long ClauseRuleNo, 
 	if (!GetFreeActantPattern(NodeNo1, P, SynReal, "",false, _R("0+ГГ"), true) ) return false;
 	P.m_PatternValency.m_RossHolder = GetRossHolder(Ross);
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (   (Nodes2.size() != 1) ) return false;
 	AddRelation(CRusSemRelation(P.m_PatternValency, NodeNo1, Nodes2[0],   ""));
@@ -1268,11 +1268,11 @@ bool CRusSemStructure::TryClauseSimpleComma (long ClauseRuleNo, long ClauseNo1, 
   if (m_Nodes[NodeNo1].GetMinWordNo() > m_Nodes[NodeNo2].GetMinWordNo()) return false;
   if ( !m_Nodes[NodeNo1].HasPostPunct(',') ) return false;
   
-  vector<long> Nodes1;
+  std::vector<long> Nodes1;
   GetClauseRootsWithoutDeleted(ClauseNo1,Nodes1);
   if (   (Nodes1.size() != 1) ) return false;
   
-  vector<long> Nodes2;
+  std::vector<long> Nodes2;
   GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
   if (   (Nodes2.size() != 1) ) return false;
 
@@ -1293,11 +1293,11 @@ bool CRusSemStructure::TryBracketClause(long ClauseRuleNo, long ClauseNo1, long 
 	if (ClauseNo1+1 != ClauseNo2) return false;
 	if (!m_Clauses[ClauseNo2].m_bBracketed) return false;
 
-	vector<long> Nodes1;
+	std::vector<long> Nodes1;
 	GetClauseRootsWithoutDeleted(ClauseNo1,Nodes1);
 	if (   (Nodes1.size() != 1) ) return false;
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (   (Nodes2.size() != 1) ) return false;
 
@@ -1312,7 +1312,7 @@ bool CRusSemStructure::TryBracketClause(long ClauseRuleNo, long ClauseNo1, long 
 bool CRusSemStructure::TryClauseSubordDoubleConj (long ClauseRuleNo, long ClauseNo1, long ClauseNo2)
 {
 
-  vector<long> ConjNodes;
+  std::vector<long> ConjNodes;
   size_t i =0;
   for (; i < m_pData->m_DisruptConj.size(); i++)
   {
@@ -1349,7 +1349,7 @@ bool CRusSemStructure::TryClauseSubordDoubleConj (long ClauseRuleNo, long Clause
   for (i=0; i < ConjNodes.size(); i++)
 	  m_Nodes[ConjNodes[i]].m_bToDelete = true;
 
-  vector<long> Nodes2;
+  std::vector<long> Nodes2;
   GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
   if (Nodes2.size() != 1) return false;
 	 
@@ -1380,7 +1380,7 @@ bool CRusSemStructure::TryClauseSubordDoubleConj (long ClauseRuleNo, long Clause
 
  if (l == P.m_GramCorteges.size()) return false;
 
- vector<long> Nodes1;
+ std::vector<long> Nodes1;
  GetClauseRootsWithoutDeleted(ClauseNo1,Nodes1);
  if (Nodes1.size() != 1) return false;
 
@@ -1400,7 +1400,7 @@ bool CRusSemStructure::TryClauseSubordDoubleConj (long ClauseRuleNo, long Clause
 // я живу, улыбаясь
 bool CRusSemStructure::TryClauseDeeprichastie (long ClauseRuleNo, long ClauseNo1, long ClauseNo2)
 {
-	vector<long> Nodes1;
+	std::vector<long> Nodes1;
 	GetRootsWithoutDeletedOrSyntaxTop(*this, ClauseNo1,Nodes1);
 	for (size_t i =0; i <Nodes1.size(); i++)
 		if (    HasRichPOS(Nodes1[i], CONJ) 
@@ -1414,13 +1414,13 @@ bool CRusSemStructure::TryClauseDeeprichastie (long ClauseRuleNo, long ClauseNo1
 	if (Nodes1.size() != 1)  return false;
 	if  (HasRichPOS (Nodes1[0], ADVERB_PARTICIPLE)) return false;	
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 
 	if (Nodes2.size() != 1)  return false;
 	if  (!HasRichPOS (Nodes2[0], ADVERB_PARTICIPLE)) return false;
 
-	vector<long> Rels;
+	std::vector<long> Rels;
 
 	/*
 	может не быть подлежащего, например:
@@ -1473,13 +1473,13 @@ bool CRusSemStructure::CanHaveRightClauseRelation (long NodeNo1, long NodeNo2) c
 				//  копул приравниваем его хозяину
 				if (m_Nodes[i].m_NodeType == Copul)
 				{
-					vector<long> Rels1;
+					std::vector<long> Rels1;
 					GetIncomingInClauseRelations(i, Rels1);
 					if (Rels1.size() == 1)
 						if (!IsBetween(m_Nodes[m_Relations[Rels1[0]].m_SourceNodeNo], m_Nodes[NodeNo1], m_Nodes[NodeNo2]))
 							continue;
 				};
-				vector<long> Rels;
+				std::vector<long> Rels;
 				GetRelations (i, Rels, false);
 
 
@@ -1489,7 +1489,7 @@ bool CRusSemStructure::CanHaveRightClauseRelation (long NodeNo1, long NodeNo2) c
 					//  копул приравниваем его хозяину
 					if (m_Nodes[nd].m_NodeType == Copul)
 					{
-						vector<long> Rels1;
+						std::vector<long> Rels1;
 						GetIncomingInClauseRelations(i, Rels1);
 						if (Rels1.size() == 1)
 							nd = m_Relations[Rels1[0]].m_SourceNodeNo;
@@ -1506,13 +1506,13 @@ bool CRusSemStructure::CanHaveRightClauseRelation (long NodeNo1, long NodeNo2) c
 //Сгорел дом, стоявший на пригорке
 bool CRusSemStructure::TryClausePrichastie (long ClauseRuleNo, long ClauseNo1, long ClauseNo2)
 {
-  vector<long> Nodes2;
+  std::vector<long> Nodes2;
   GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
   
   if (Nodes2.size() != 1)  return false;
   if  (!HasRichPOS (Nodes2[0], PARTICIPLE)) return false;
 
-  vector<long> Rels;
+  std::vector<long> Rels;
   GetOutcomingRelations(Nodes2[0], Rels, false);
   
 
@@ -1657,7 +1657,7 @@ bool CRusSemStructure::TryClauseConditionalImperative (long ClauseRuleNo, long C
 {
 	if (!m_Clauses[ClauseNo2].m_HasParticleBY) return false;
 
-	vector<long> Nodes1;
+	std::vector<long> Nodes1;
 	GetClauseRootsWithoutDeleted(ClauseNo1,Nodes1);
 	if (Nodes1.size() != 1)  return false;
 	if ( !m_Nodes[Nodes1[0]].HasOneGrammem (rImperative) ) return false;
@@ -1666,7 +1666,7 @@ bool CRusSemStructure::TryClauseConditionalImperative (long ClauseRuleNo, long C
 	if (!CheckDirection(Nodes1[0], SubjNodeNo, ">>")) return false;
 
 
-	vector<long> Nodes2;
+	std::vector<long> Nodes2;
 	GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
 	if (Nodes2.size() != 1)  return false;
 
@@ -1780,7 +1780,7 @@ bool IsSubordConj(std::string S)
 };
 
 
-void FindAllMotherLandHypots(const CRusSemStructure& S, vector<CMotherLandHyp>& MotherLandHyps)
+void FindAllMotherLandHypots(const CRusSemStructure& S, std::vector<CMotherLandHyp>& MotherLandHyps)
 {
 	for (long i=0; i < S.m_Clauses.size(); i++)
 	if (!S.m_Clauses[i].m_bBracketed)
@@ -1888,12 +1888,12 @@ void CRusSemStructure:: FindMotherLandForPustycha()
 { 
 	PrintNodes();
 
-	vector<CMotherLandHyp> MotherLandHyps;
+	std::vector<CMotherLandHyp> MotherLandHyps;
 
 	FindAllMotherLandHypots(*this, MotherLandHyps);
 
 	
-	vector<VectorLong> Parents;
+	std::vector<VectorLong> Parents;
 	Parents.resize(m_Clauses.size());
 	for (int i=0; i <MotherLandHyps.size(); i++)
 	 Parents[MotherLandHyps[i].m_PustychaClauseNo].push_back(i);
@@ -1904,7 +1904,7 @@ void CRusSemStructure:: FindMotherLandForPustycha()
 
 	VectorLong V; // текущий вариант 
 	V.resize(Parents.size());
-	vector<VectorLong> Variants; // все возможные варианты
+	std::vector<VectorLong> Variants; // все возможные варианты
 	GetCommonVariants(Parents, V, Variants, 0);
 	long BestWeight = 1000;
 	long BestVariantNo = -1;
@@ -1943,7 +1943,7 @@ void CRusSemStructure:: FindMotherLandForPustycha()
 
 	if (BestVariantNo != -1)
 	{
-		vector<CRusSemNode> SaveNodes;
+		std::vector<CRusSemNode> SaveNodes;
 		SetNodeToDeleteFalse();
 		for (long ClauseNo=0; ClauseNo< m_Clauses.size(); ClauseNo++)
 		if  (Variants[BestVariantNo][ClauseNo] != -1)
@@ -2087,7 +2087,7 @@ void CRusSemStructure:: DeleteConjInTheBegining(long ClauseNo, CRusSemNode& Firs
 
 
 
-void CRusSemStructure:: ApplyClauseRulesOnly(vector<PairOfLong>& ClausePairs)
+void CRusSemStructure:: ApplyClauseRulesOnly(std::vector<PairOfLong>& ClausePairs)
 {
  for (long i  =0; i < ClausePairs.size(); i++)
    if (!AreConnectedClauses (ClausePairs[i].first, ClausePairs[i].second)) 
@@ -2124,9 +2124,9 @@ void CRusSemStructure:: ApplyClauseRulesOnly(vector<PairOfLong>& ClausePairs)
 
 bool  CRusSemStructure:: ClausesHaveCommonSituation (long ClauseNo1, long ClauseNo2) const
 {
-   vector<long> Nodes1;
+   std::vector<long> Nodes1;
    GetClauseRootsWithoutDeleted(ClauseNo1,Nodes1);
-   vector<long> Nodes2;
+   std::vector<long> Nodes2;
    GetClauseRootsWithoutDeleted(ClauseNo2,Nodes2);
    if (Nodes1.size() == 0) return false;
    if (Nodes2.size() == 0) return false;
@@ -2181,9 +2181,9 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 		SetUseTrue();
 
 		//получения множества всех границ клауз
-		vector<long> Nodes;
+		std::vector<long> Nodes;
 		GetAllTextOrderedNodes(Nodes);
-		vector<PairOfLong> ClausePairs;
+		std::vector<PairOfLong> ClausePairs;
 
 		for (long i =0; i+1  < Nodes.size(); i++)
 			if (     (m_Nodes[Nodes[i]].m_ClauseNo !=  m_Nodes[Nodes[i+1]].m_ClauseNo)
@@ -2214,7 +2214,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 		// для полученных пар. Таким образом, мы запускаем правила от первого члена однородного ряда,
 		// перепрыгивая через остальные члены однородного ряда.
 		// Пример: "если ты пришел и я ушел, то ты уйдешь"
-		vector<PairOfLong> NewClausePairs;
+		std::vector<PairOfLong> NewClausePairs;
 
 		for (long i=0; i < ClausePairs.size(); i++)
 			if (    AreConnectedClauses (ClausePairs[i].first, ClausePairs[i].second)
@@ -2255,7 +2255,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 		for (int i=0;i < m_Clauses.size(); i++)
 			if (GetClauseCoordSimpleConj(i) != -1)
 			{
-				vector<long> Clauses;
+				std::vector<long> Clauses;
 				for (long j=0; j < i; j++)
 					/*
 					этот if весьма сомнителен
@@ -2268,7 +2268,7 @@ void CRusSemStructure:: ApplyClauseRules(long GapSize)
 
 				if (Clauses.size() == 1)
 				{
-					vector<long> Rels;
+					std::vector<long> Rels;
 					GetIncomingClauseRelations(i, Rels);
 					DeleteRelations(Rels);
 					NewClausePairs.clear();
@@ -2433,9 +2433,9 @@ std::string    CRusSemStructure::GetClauseTreeForTcl()
 		 name +="         ";
 		 name =  "         " + name;
 
-        Res += Format ("$GT($main,clause_graph) set $clause_nds(%i) -label \"%s\" -type oval -x 0 -y 0\1", i,  name.c_str());
+        Res += Format ("$GT($main,clause_graph) std::set $clause_nds(%i) -label \"%s\" -type oval -x 0 -y 0\1", i,  name.c_str());
 
-        Res += Format ("$GT($main,clause_graph) set $clause_nds(%i)  .props \"%s\"\1",i,GetClauseProperiesStr(i).c_str());
+        Res += Format ("$GT($main,clause_graph) std::set $clause_nds(%i)  .props \"%s\"\1",i,GetClauseProperiesStr(i).c_str());
 
    };
 
@@ -2447,7 +2447,7 @@ std::string    CRusSemStructure::GetClauseTreeForTcl()
 	   if ( m_Clauses[i].m_ClauseRuleNo != -1)
 	   {
          std::string name =   m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name;
-	     Res += Format("$GT($main,clause_graph) set $edge -label \"%s\"\1", name.c_str());
+	     Res += Format("$GT($main,clause_graph) std::set $edge -label \"%s\"\1", name.c_str());
 	   };
    };
 
@@ -2494,7 +2494,7 @@ long CRusSemStructure::CreateDefaultSubjectFromPreviousClause()
 
 	for (long ClauseNo=0;  ClauseNo < m_Clauses.size(); ClauseNo++)
 	{
-	   vector<long> Roots;
+	   std::vector<long> Roots;
 	   GetClauseRoots(ClauseNo,Roots);
 	   if (Roots.size() != 1)  
 	   { 
@@ -2529,7 +2529,7 @@ long CRusSemStructure::CreateDefaultSubjectFromPreviousClause()
 	// попытаемся восстановить его по глагольной форме
 	// например, "иду, курю" или 
 	// "Поздравляем Вас с покупкой электронного словаря"
-    vector<long> Roots;
+    std::vector<long> Roots;
     GetClauseRootsWithoutDeleted(0,Roots);
 	if (Roots.size() == 1)  
 	{ 

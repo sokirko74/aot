@@ -9,7 +9,7 @@
 #include "../common/argparse.h"
 
 
-void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const vector<CXmlToken> &Tokens, ostream& outputStream) {
+void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const std::vector<CXmlToken> &Tokens, std::ostream& outputStream) {
     for (size_t i = 0; i < Tokens.size(); i++) {
         const CXmlToken &W = Tokens[i];
         if (!W.m_Annots.empty() && !W.m_Annots[0].m_Lemma.empty()) {
@@ -57,7 +57,7 @@ void PrintCookedSentence(const CAgramtab* gramTab, const CTagSet& tagSet, const 
 }
 
 
-bool CookSentence(const CTrigramModel& M, istream& inputStream, ostream& outputStream) {
+bool CookSentence(const CTrigramModel& M, std::istream& inputStream, std::ostream& outputStream) {
     size_t TokensCount = 0;
 
     CRusCorpXmlFile XmlFile;
@@ -75,7 +75,7 @@ bool CookSentence(const CTrigramModel& M, istream& inputStream, ostream& outputS
     return true;
 }
 
-bool Disambiguate(const CTrigramModel &M, istream& inputStream, ostream& outputStream) {
+bool Disambiguate(const CTrigramModel &M, std::istream& inputStream, std::ostream& outputStream) {
     size_t TokensCount = 0;
     std::string Sent;
     try {
@@ -137,15 +137,15 @@ int main(int argc, const char *argv[]) {
         }
     }
     bool bRes = true;
-    vector<std::string> inputFiles = args.GetInputFiles();
+    std::vector<std::string> inputFiles = args.GetInputFiles();
 
     for (size_t i = 0; bRes && i < inputFiles.size(); i++) {
         if (inputFiles.size() > 1)
             std::cerr << i << "/" <<  inputFiles.size() << ": " << inputFiles[i] << "\n";
         std::istream* inputStream = &args.GetInputStream();
         std::ostream* outputStream = &args.GetOutputStream();
-        ofstream outputFile;
-        ifstream inputFile;
+        std::ofstream outputFile;
+        std::ifstream inputFile;
         if (inputFiles.size() > 1) {
             outputFile.open(MakeFName(inputFiles[i], "trigram"));
             outputStream = &outputFile;

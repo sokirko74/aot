@@ -171,7 +171,7 @@ bool CMorphologyHolder::GetMorphology(std::string str, bool bFile, int& CountOfW
 
 DwordVector CMorphologyHolder::GetParadigmIdsByNormAndAncode(std::string &str, const std::string &code) const
 {
-	vector<CFormInfo> ParadigmCollection;
+	std::vector<CFormInfo> ParadigmCollection;
 	DwordVector res;
 	if (!m_pLemmatizer->CreateParadigmCollection(true, str, true, false, ParadigmCollection ))
 		throw CExpc(Format("Cannot lemmatize %s", str.c_str()));
@@ -197,7 +197,7 @@ void CMorphologyHolder::string_to_ids(const char *str, DwordVector &ids, bool bN
 {
 	ids.clear();
 	
-	vector<CFormInfo > ParadigmCollection;
+	std::vector<CFormInfo > ParadigmCollection;
 	
 	std::string Word = str;
 	if (!m_pLemmatizer->CreateParadigmCollection(bNorm, Word, true, false, ParadigmCollection))

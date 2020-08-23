@@ -23,7 +23,7 @@ CWorkGrammar::~CWorkGrammar() {
 };
 
 size_t CWorkGrammar::GetItemId(const CGrammarItem &I) {
-    vector<CGrammarItem>::const_iterator it = find(m_UniqueGrammarItems.begin(), m_UniqueGrammarItems.end(), I);
+    std::vector<CGrammarItem>::const_iterator it = find(m_UniqueGrammarItems.begin(), m_UniqueGrammarItems.end(), I);
 
     if (it != m_UniqueGrammarItems.end())
         return it - m_UniqueGrammarItems.begin();
@@ -37,7 +37,7 @@ size_t CWorkGrammar::GetItemId(const CGrammarItem &I) {
 };
 
 
-std::string CWorkGrammar::GetLeftPartStr(set<CWorkRule>::const_iterator it) const {
+std::string CWorkGrammar::GetLeftPartStr(std::set<CWorkRule>::const_iterator it) const {
     return m_UniqueGrammarItems[it->m_LeftPart].GetDumpString();
 };
 
@@ -58,7 +58,7 @@ std::string CWorkGrammar::GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bP
         Result += "*";
 
     if (bPrintFeatures) {
-        const vector<CRuleFeature> &Features = m_RuleFeatures[R.m_RuleFeaturesNo];
+        const std::vector<CRuleFeature> &Features = m_RuleFeatures[R.m_RuleFeaturesNo];
         for (size_t i = 0; i < Features.size(); i++) {
             const CRuleFeature &F = Features[i];
             Result += "\n\t\t : ";
@@ -315,7 +315,7 @@ void PrintGroups(const CWorkGrammar &Grammar) {
 
 };
 
-void CWorkGrammar::ConvertToPrecompiled(const set<CWorkRule> &EncodedRules) {
+void CWorkGrammar::ConvertToPrecompiled(const std::set<CWorkRule> &EncodedRules) {
     LogStream << "ConvertToPrecompiled\n";
     m_PrecompiledEncodedRules.clear();
     m_PrecompiledEncodedRules.reserve(EncodedRules.size());
@@ -328,7 +328,7 @@ void CWorkGrammar::ConvertToPrecompiled(const set<CWorkRule> &EncodedRules) {
 
 };
 
-void CWorkGrammar::BuildAutomat(set<CWorkRule> &EncodedRules) {
+void CWorkGrammar::BuildAutomat(std::set<CWorkRule> &EncodedRules) {
     CreateAutomatSymbolInformation();
 
 /*	for (CWRI it = EncodedRules.begin(); it!= EncodedRules.end(); it++)
@@ -352,8 +352,8 @@ bool CWorkGrammar::IsValid() const {
     return true;
 };
 
-void UpdateOld2NewMap(map<int, int> &Old2New, size_t &Index, int &MaxNewIndex) {
-    map<int, int>::const_iterator it = Old2New.find(Index);
+void UpdateOld2NewMap(std::map<int, int> &Old2New, size_t &Index, int &MaxNewIndex) {
+    std::map<int, int>::const_iterator it = Old2New.find(Index);
     if (it == Old2New.end()) {
         Old2New[Index] = MaxNewIndex;
         Index = MaxNewIndex;
@@ -364,8 +364,8 @@ void UpdateOld2NewMap(map<int, int> &Old2New, size_t &Index, int &MaxNewIndex) {
 };
 
 void CWorkGrammar::DeleteUnusedSymbols() {
-    set<CWorkRule> NewEncodedRules;
-    map<int, int> Old2New;
+    std::set<CWorkRule> NewEncodedRules;
+    std::map<int, int> Old2New;
     int CountOfUsedSymbols = 0;
     for (WRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
         CWorkRule R = (*it);
@@ -379,8 +379,8 @@ void CWorkGrammar::DeleteUnusedSymbols() {
     m_EncodedRules = NewEncodedRules;
 
 
-    vector<CGrammarItem> NewUniqueRuleItems(CountOfUsedSymbols);
-    map<int, int>::const_iterator it1 = Old2New.begin();
+    std::vector<CGrammarItem> NewUniqueRuleItems(CountOfUsedSymbols);
+    std::map<int, int>::const_iterator it1 = Old2New.begin();
     for (; it1 != Old2New.end(); it1++)
         NewUniqueRuleItems[it1->second] = m_UniqueGrammarItems[it1->first];
 
@@ -400,7 +400,7 @@ For example it is not possible:
 D->[A grm="gen"]
 
 Procedure CParseGrammar::CreateNodesForNodesWithWorkAttributes finds for each node [X w],
-where "w" is a set of  work attributes, and for each rule [X]->z, 
+where "w" is a std::set of  work attributes, and for each rule [X]->z, 
 where X is the same node as "[X w]",  but without work attributes, and adds a rule [X w]->z.
 For example,
 [D] -> [FILE name="test.txt"]			[D] -> [FILE name="test.txt"]
@@ -414,7 +414,7 @@ For example,
 
 
 bool SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item, std::string &ErrorStr) {
-    vector<CWorkRule> NewRules;
+    std::vector<CWorkRule> NewRules;
 
     for (WRI it = Grammar.m_EncodedRules.begin(); it != Grammar.m_EncodedRules.end(); it++) {
         const CWorkRule &Rule = (*it);
@@ -470,7 +470,7 @@ bool CWorkGrammar::CreateNodesForNodesWithWorkAttributes(std::string &ErrorStr) 
 
 
 bool CWorkGrammar::CheckCoherence() const {
-    set<size_t> AllLeftParts;
+    std::set<size_t> AllLeftParts;
     size_t i = 0;
 
     for (CWRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
@@ -663,7 +663,7 @@ bool CWorkGrammar::AugmentGrammar() {
     CWorkRule R;
     R.m_RuleId = 0;
     R.m_RuleFeaturesNo = m_RuleFeatures.size();
-    m_RuleFeatures.push_back(vector<CRuleFeature>());
+    m_RuleFeatures.push_back(std::vector<CRuleFeature>());
     R.m_LeftPart = m_UniqueGrammarItems.size() - 1;
     R.m_RightPart.m_SynMainItemNo = 0;
     R.m_RightPart.m_Items.push_back(i);

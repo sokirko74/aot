@@ -38,7 +38,7 @@ protected:
     std::unique_ptr<CThesaurusForSyntax> m_pThesaurus;
     std::unique_ptr<COborDic> m_pOborDic;
 
-    const CLemmatizer *m_piLemmatizerWeak = nullptr; // can be set from COM (external)
+    const CLemmatizer *m_piLemmatizerWeak = nullptr; // can be std::set from COM (external)
     const CDictionary *m_piOborDictionaryWeak = nullptr;
     std::unique_ptr<CThesaurus> m_FinThes;
     std::unique_ptr<CThesaurus> m_CompThes;
@@ -46,7 +46,7 @@ protected:
     std::unique_ptr<CThesaurus> m_OmniThes;
 
 public:
-    unique_ptr<SDatItems> m_pProfessions;
+    std::unique_ptr<SDatItems> m_pProfessions;
     // special constants
     QWORD m_PluralMask;
     QWORD m_SingularMask;
@@ -82,7 +82,7 @@ public:
     size_t m_EmptyClauseType;
 
 
-    mutable vector <string> m_SyntaxGroupTypes;
+    mutable std::vector <std::string> m_SyntaxGroupTypes;
 
     CWorkGrammar m_FormatsGrammar;
 

@@ -396,7 +396,7 @@ void CFileEditCtrl::ButtonClicked()
     else if (Flags & FEC_FILE)
         bResult = FECOpenFile();
     else
-        ASSERT (FALSE);  // control flags not properly set (should never get here)
+        ASSERT (FALSE);  // control flags not properly std::set (should never get here)
 
     if (bResult && IsWindow(pParent))
     {
@@ -447,7 +447,7 @@ BOOL CFileEditCtrl::Create(DWORD dwFlags,
     {   // call CFileEditCtrl::SetFlags() to initialize the internal data structures
         bResult = SetFlags(dwFlags);
         if (bResult)
-        {   // set the font to the font used by the parent window
+        {   // std::set the font to the font used by the parent window
             if (IsWindow(pParentWnd))
                 SetFont(pParentWnd->GetFont());
         }
@@ -721,7 +721,7 @@ void CFileEditCtrl::DrawDots(CDC *pDC, COLORREF CR, int nOffset /* = 0 */)
     }
     else
     {
-        CPen thePen(PS_SOLID, 1, CR);           // set the dot colour
+        CPen thePen(PS_SOLID, 1, CR);           // std::set the dot colour
         CPen *pOldPen = pDC->SelectObject(&thePen);
         CBrush theBrush(CR);
         CBrush *pOldBrush = pDC->SelectObject(&theBrush);
@@ -893,10 +893,10 @@ int CALLBACK FECFolderProc(HWND hWnd, UINT nMsg, LPARAM, LPARAM lpData)
 BOOL CFileEditCtrl::FECOpenFile()
 {
     BOOL bReturnValue = FALSE;
-    BOOL bDirectory = TRUE;                     // assume user of this class has set the initial directory
+    BOOL bDirectory = TRUE;                     // assume user of this class has std::set the initial directory
     TCHAR lpstrDirectory[_MAX_PATH] = _T("");
-    if (m_pCFileDialog->m_ofn.lpstrInitialDir == NULL)  // user has not set the initial directory
-    {                                                   // flag it, and set the initial directory
+    if (m_pCFileDialog->m_ofn.lpstrInitialDir == NULL)  // user has not std::set the initial directory
+    {                                                   // flag it, and std::set the initial directory
         bDirectory = FALSE;                             // to the directory in the edit control
         POSITION pos = GetStartPosition();
         if (pos)
@@ -908,7 +908,7 @@ BOOL CFileEditCtrl::FECOpenFile()
                 || ((attrib == 0xFFFFFFFF) && (!(m_pCFileDialog->m_ofn.Flags & OFN_FILEMUSTEXIST))))
                 // if ((file exists && is not a folder) || (does not exist && does not have to exist))
             {
-                // set the filename editbox in CFileDialog to the name of the
+                // std::set the filename editbox in CFileDialog to the name of the
                 // first file in the control
                 TCHAR Name[_MAX_FNAME];
                 TCHAR Ext[_MAX_EXT];
@@ -1083,12 +1083,12 @@ void CFileEditCtrl::FillBuffers()
 //    None
 //
 //  Returns :
-//    A pointer to the BROWSEINFO structure if the FEC_FOLDER flag was set
+//    A pointer to the BROWSEINFO structure if the FEC_FOLDER flag was std::set
 //    NULL otherwise
 //
 //  Note :
 //    If the default SHBrowseForFolder settings do not fit your use, Use the pointer
-//    returned by this function to set up the SHBrowseForFolder using your own settings
+//    returned by this function to std::set up the SHBrowseForFolder using your own settings
 //    
 /////////////////////////////////////////////////////////////////////////////
 
@@ -1165,7 +1165,7 @@ DWORD CFileEditCtrl::GetFlags()
 //
 //  Note :
 //    The starting position is retreived using the GetStartPosition() function.
-//    pos will be set to NULL when there are no more files
+//    pos will be std::set to NULL when there are no more files
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -1196,7 +1196,7 @@ CString CFileEditCtrl::GetNextPathName(POSITION &pos)
             DereferenceLink(ReturnString);
     }
     
-    index++;                                    // set pos to next file
+    index++;                                    // std::set pos to next file
     if (index > m_Files.GetUpperBound())
         index = -1;
     pos = (POSITION)(index + 1);
@@ -1212,12 +1212,12 @@ CString CFileEditCtrl::GetNextPathName(POSITION &pos)
 //    None
 //
 //  Returns :
-//    A pointer to the OPENFILENAME structure if the FEC_FILE flag was set
+//    A pointer to the OPENFILENAME structure if the FEC_FILE flag was std::set
 //    NULL otherwise
 //
 //  Note :
 //    If the default CFileDialog settings do not fit your use, Use the pointer
-//    returned by this function to set up the CFileDialog using your own settings
+//    returned by this function to std::set up the CFileDialog using your own settings
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -1301,7 +1301,7 @@ BOOL CFileEditCtrl::GetValidFolder(LPTSTR Path)
         }
     } while (pos > 0);
 
-    // no valid folder, set 'Path' to empty std::string
+    // no valid folder, std::set 'Path' to empty std::string
     Path[0] = 0;
     return valid;
 }
@@ -1369,7 +1369,7 @@ BOOL CFileEditCtrl::OnChange()
 //
 //  Note :
 //    The control must have the WS_EX_ACCEPTFILES extended windows
-//    style bit set in order for drag and drop to work
+//    style bit std::set in order for drag and drop to work
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -1518,7 +1518,7 @@ void CFileEditCtrl::OnKillFocus(CWnd *pNewWnd)
 //
 //  CFileEditCtrl::OnLButtonDown  (protected member function)
 //    Handles the WM_LBUTTONDOWN message
-//    If the user clicks on the button, capture mouse input, set the focus
+//    If the user clicks on the button, capture mouse input, std::set the focus
 //    to this control, and draw the button as pressed
 //
 //  Parameters :
@@ -1625,7 +1625,7 @@ void CFileEditCtrl::OnMouseMove(UINT nFlags, CPoint point)
             Redraw(TRUE);
         }
         else
-        {   // set the correct mouse cursor
+        {   // std::set the correct mouse cursor
             GetClientRect(&rc);
             ClientToScreen(&rc);
             if (rc.PtInRect(point))
@@ -1656,11 +1656,11 @@ void CFileEditCtrl::OnNcCalcSize(BOOL bCalcValidRects, NCCALCSIZE_PARAMS FAR* lp
 {
     CEdit::OnNcCalcSize(bCalcValidRects, lpncsp);
 
-    // if m_nButtonWidth is -1, set the button width to 80% of the control height
-    // else set the button width to m_nButtonWidth
+    // if m_nButtonWidth is -1, std::set the button width to 80% of the control height
+    // else std::set the button width to m_nButtonWidth
     int ButtonWidth = (m_nButtonWidth == -1) ? (lpncsp->rgrc[0].bottom - lpncsp->rgrc[0].top) * 8/10 : m_nButtonWidth;
     
-    // set button area equal to client area of edit control
+    // std::set button area equal to client area of edit control
     m_rcButtonRect = lpncsp->rgrc[0];
     
     if (m_bButtonLeft == FEC_BUTTONLEFT)  // draw the button on the left side of the control
@@ -1746,7 +1746,7 @@ void CFileEditCtrl::OnNcLButtonDblClk(UINT nHitTest, CPoint point)
 //
 //  CFileEditCtrl::OnNcLButtonDown  (protected member function)
 //    Handles the WM_NCLBUTTONDOWN message
-//    If the user clicks on the button, capture mouse input, set the focus
+//    If the user clicks on the button, capture mouse input, std::set the focus
 //    to this control, and draw the button as pressed
 //
 //  Parameters :
@@ -1874,7 +1874,7 @@ void CFileEditCtrl::OnSetFocus(CWnd* pOldWnd)
 //    Whatever the default windows procedure returns
 //
 //  Note :
-//    If the control has the FEC_FLAT flag set, the border must
+//    If the control has the FEC_FLAT flag std::set, the border must
 //    be redrawn when the readonly state is changed
 //
 /////////////////////////////////////////////////////////////////////////////
@@ -1972,7 +1972,7 @@ BOOL CFileEditCtrl::OnTTNNeedText(UINT, NMHDR *pTTTStruct, LRESULT *)
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CFileEditCtrl::PostNcDestroy  (protected member function)
-//    deletes this control object if the m_bAutoDelete flag is set
+//    deletes this control object if the m_bAutoDelete flag is std::set
 //
 //  Parameters :
 //    None
@@ -2103,7 +2103,7 @@ BOOL CFileEditCtrl::ScreenPointInButtonRect(CPoint point)
 //                       of the top left pixel is used as the transparent colour
 //
 //  Returns :
-//    TRUE if a new image is set, FALSE if not
+//    TRUE if a new image is std::set, FALSE if not
 //
 //  Note :
 //    Flags used in the PJAIFlags parameter :
@@ -2113,8 +2113,8 @@ BOOL CFileEditCtrl::ScreenPointInButtonRect(CPoint point)
 //      PJAI_TRANSPARENT - the HBITMAP image will be drawn transparently. The transparent 
 //                         colour is specified using the Transparent parameter.
 //      PJAI_AUTODELETE  - the image handle will be deleted and the memory freed when 
-//                         when a new image is set or the CFileEditCtrl is deleted. If
-//                         this flag is not set, the user of this class is responsible
+//                         when a new image is std::set or the CFileEditCtrl is deleted. If
+//                         this flag is not std::set, the user of this class is responsible
 //                         for deleting the handle.
 //
 //    The PJAImage.h file must be included (see lines 37 to 41 of FileEditCtrl.h) in
@@ -2181,7 +2181,7 @@ int CFileEditCtrl::SetButtonWidth(int width/* = -1*/)
 //    Sets the text to be used by the client area tooltip
 //
 //  Parameters :
-//    text [in] - The text to set
+//    text [in] - The text to std::set
 //
 //  Returns :
 //    Nothing
@@ -2201,7 +2201,7 @@ void CFileEditCtrl::SetClientTipText(CString text)
 //    Forces the control to be redrawn if the button position changes
 //
 //  Parameters :
-//    dwFlags [in] - The flags to set
+//    dwFlags [in] - The flags to std::set
 //
 //  Returns :
 //    TRUE if successful
@@ -2217,7 +2217,7 @@ BOOL CFileEditCtrl::SetFlags(DWORD dwFlags)
     m_bTextChanged = TRUE;
 
     if (dwFlags & FEC_FOLDER)
-    {   // set the control to find folders
+    {   // std::set the control to find folders
         if (dwFlags & FEC_FILE)
         {
             TRACE (_T("CFileEditCtrl::SetFlags() : Can not specify FEC_FILE with FEC_FOLDER\n"));
@@ -2238,7 +2238,7 @@ BOOL CFileEditCtrl::SetFlags(DWORD dwFlags)
                 delete m_pCFileDialog;          // delete the CFileDialog
                 m_pCFileDialog = NULL;
             }
-            // set up the BROWSEINFO structure used by SHBrowseForFolder()
+            // std::set up the BROWSEINFO structure used by SHBrowseForFolder()
             ::ZeroMemory(m_pBROWSEINFO, sizeof(BROWSEINFO));
             m_pBROWSEINFO->hwndOwner = GetSafeHwnd();
             m_pBROWSEINFO->lParam = (LPARAM)this;
@@ -2248,9 +2248,9 @@ BOOL CFileEditCtrl::SetFlags(DWORD dwFlags)
     }
 
     else if (dwFlags & FEC_FILE)
-    {   // set the control to find files
+    {   // std::set the control to find files
         if (m_pCFileDialog)
-        {   // already set to find files
+        {   // already std::set to find files
             if (dwFlags & FEC_MULTIPLE)
                 m_pCFileDialog->m_ofn.Flags |= OFN_ALLOWMULTISELECT;
             else
@@ -2286,7 +2286,7 @@ BOOL CFileEditCtrl::SetFlags(DWORD dwFlags)
                 delete m_pBROWSEINFO;               // delete the BROWSEINFO structure
                 m_pBROWSEINFO = NULL;
             }
-            // set up the CFileDialog
+            // std::set up the CFileDialog
             if (dwFlags & FEC_MULTIPLE)
                 m_pCFileDialog->m_ofn.Flags |= OFN_ALLOWMULTISELECT;
             if (dwFlags & FEC_NODEREFERENCELINKS)
@@ -2435,7 +2435,7 @@ void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CString& rStr, DWORD dwFlags
             rStr = pFEC->GetNextPathName(pos);
     }
     else                                        // create the control if it is not already created
-    {                                           // set the control text to the text in std::string
+    {                                           // std::set the control text to the text in std::string
         CFileEditCtrl *pFEC = NULL;
         if (!pWnd->IsKindOf(RUNTIME_CLASS(CFileEditCtrl)))    // not subclassed yet
         {
@@ -2465,7 +2465,7 @@ void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CString& rStr, DWORD dwFlags
         else                                    // control already exists
             pFEC = (CFileEditCtrl *)pWnd;
         if (pFEC)
-            pFEC->SetWindowText(rStr);          // set the control text
+            pFEC->SetWindowText(rStr);          // std::set the control text
     }
 }
 

@@ -55,13 +55,13 @@ static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word,
 static void GenerateCoordinatedNodes(CRusSemStructure& R, int RelNo, 	QWORD NewGrammems, 	QWORD OldGrammems)
 {
 	const CRusSemRelation& Rel = R.m_Relations[RelNo];
-	vector<long> SubNodes;
+	std::vector<long> SubNodes;
 
 	if (R.m_Nodes[Rel.m_TargetNodeNo].m_NodeType != MNA)
 		SubNodes.push_back(Rel.m_TargetNodeNo);
 	else
 	{
-		vector<long> SubRels;
+		std::vector<long> SubRels;
 		R.GetOutcomingRelations(Rel.m_TargetNodeNo, SubRels);
 		for (size_t j=0; j <SubRels.size(); j++)
 			SubNodes.push_back(R.m_Relations[SubRels[j]].m_TargetNodeNo);
@@ -135,7 +135,7 @@ static void GenerateNewWordFormAndAdjustCoordination (CRusSemStructure& R, int N
 		if (WordNo != Node.m_MainWordNo) return;
 	}
 
-	vector<long> Rels;
+	std::vector<long> Rels;
 	R.GetOutcomingRelations(NodeNo, Rels);
 	for (size_t i=0; i <Rels.size(); i++)
 	{
@@ -163,7 +163,7 @@ static void GenerateNewWordFormAndAdjustCoordination (CRusSemStructure& R, int N
 void GenerateRecursive(CRusSemStructure& R, int NodeNo)
 {
 
-	vector<long> Rels;
+	std::vector<long> Rels;
 	R.GetOutcomingRelations(NodeNo, Rels, false);
 	for (size_t  i=0; i < Rels.size(); i++)
 	{
@@ -175,7 +175,7 @@ void GenerateRecursive(CRusSemStructure& R, int NodeNo)
 	for (size_t i=0; i < Node.m_Words.size(); i++)
 	{
 		
-		map<std::string,std::string>::const_iterator it = R.m_SynthLemmaToReplace.find(Node.m_Words[i].m_Lemma);
+		std::map<std::string,std::string>::const_iterator it = R.m_SynthLemmaToReplace.find(Node.m_Words[i].m_Lemma);
 		if (it == R.m_SynthLemmaToReplace.end()) continue;
 		Node.m_Words[i].m_Lemma = it->second;
 		GenerateNewWordFormAndAdjustCoordination(R, NodeNo, i);

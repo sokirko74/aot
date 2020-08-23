@@ -183,7 +183,7 @@ long CRusSemStructure::SetTagToSentence()
 };
 
 
-class IsLessBySourceNodeNo : public binary_function<bool,const long, const long>
+class IsLessBySourceNodeNo
 {
 public:  
 	const CRusSemStructure* m_SemStr;
@@ -191,12 +191,13 @@ public:
 	IsLessBySourceNodeNo(const CRusSemStructure* SemStr)
 	{m_SemStr = SemStr;}  
 
-	result_type operator()(const long& RelNo1, const long& RelNo2)
+	bool operator()(const long& RelNo1, const long& RelNo2) const
 	{
 		return m_SemStr->m_Relations[RelNo1].m_SourceNodeNo < m_SemStr->m_Relations[RelNo2].m_SourceNodeNo;
 	}
 };
-class IsLessByTargetNodeNo : public binary_function<bool,const long, const long>
+
+class IsLessByTargetNodeNo
 {
 public:  
 	const CRusSemStructure* m_SemStr;
@@ -204,7 +205,7 @@ public:
 	IsLessByTargetNodeNo(const CRusSemStructure* SemStr)
 	{m_SemStr = SemStr;}  
 
-	result_type operator()(const long& RelNo1, const long& RelNo2)
+	bool operator()(const long& RelNo1, const long& RelNo2) const 
 	{
 		return m_SemStr->m_Relations[RelNo1].m_TargetNodeNo < m_SemStr->m_Relations[RelNo2].m_TargetNodeNo;
 	}
@@ -348,7 +349,7 @@ bool CRusSemStructure::FindCycle (long Tag)
 
  
 void CRusSemStructure::UncycleVariant(size_t  VarNo, 
-					                  vector<CTreeVariant>& Variants,
+					                  std::vector<CTreeVariant>& Variants,
 									  long Tag)
 
 {
@@ -375,7 +376,7 @@ void CRusSemStructure::UncycleVariant(size_t  VarNo,
 */
 
 bool CRusSemStructure::SplitVariantWithRepeats(size_t  VarNo, 
-											   vector<CTreeVariant>& Variants)
+											   std::vector<CTreeVariant>& Variants)
 
 {
 	for (size_t i =0; i< Variants[VarNo].GetRelsCount(); i++)
@@ -498,7 +499,7 @@ long AreEqual (const CTreeVariant& V1, const CTreeVariant& V2)
 	return i == V1.GetRelsCount();
 };
 
-void TestEquality (const vector<CTreeVariant>& Variants)
+void TestEquality (const std::vector<CTreeVariant>& Variants)
 { 
 	for (size_t VarNo=0;  VarNo < Variants.size(); VarNo++)
 		for (size_t VarNo1=VarNo+1;  VarNo1 < Variants.size(); VarNo1++)
@@ -509,9 +510,9 @@ void TestEquality (const vector<CTreeVariant>& Variants)
 
 };
 
-void GetTreeVariants(const vector<CTreeVariant>&  Parents, 
+void GetTreeVariants(const std::vector<CTreeVariant>&  Parents, 
 					 CTreeVariant&   V,
-					 vector<CTreeVariant>&  Variants, 
+					 std::vector<CTreeVariant>&  Variants, 
 					 long       Position)
 { 
 	if (Variants.size() > 30000) return;
@@ -549,7 +550,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 	};
 
 
-	vector<CTreeVariant> Parents;
+	std::vector<CTreeVariant> Parents;
 	long HypotVariantCount = 1;
 	StartTimer("Shalimov's graph",1);
 
@@ -592,7 +593,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 		VarAndVals[0].second.Panic = true;
 	};
 
-	vector<CTreeVariant>  Variants;
+	std::vector<CTreeVariant>  Variants;
 	Variants.reserve(HypotVariantCount*2);
 	CTreeVariant V; // текущий вариант 
 	GetTreeVariants(Parents, V, Variants, 0);
@@ -653,7 +654,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 	// уничтожаем все варианты, у которых число компонент связности меньше минимального значения 
 	// для всех вариантов
 
-	vector<PairOfLong> CompCountAndNumber;
+	std::vector<PairOfLong> CompCountAndNumber;
 	CompCountAndNumber.reserve(Variants.size());
 	for (long VarNo=0;  VarNo< Variants.size(); VarNo++)
 	{
@@ -701,7 +702,7 @@ void CRusSemStructure::GetTree (long Tag, TreeAndValueVector& VarAndVals)
 
 
 
-void QuickGetIndexedVariants(const vector<TreeAndValueVector>&  Parents, 
+void QuickGetIndexedVariants(const std::vector<TreeAndValueVector>&  Parents, 
 							long& VarNo,
 							const long VariantSize,
 							long* Variants, 
@@ -775,7 +776,7 @@ TryWithoutLongRelationsLabel:
 
 
 	//  i-й элемент вектора хранит варианты дерева и его оценку для i-й компоненты связности 
-	vector<TreeAndValueVector> VarAndVals;
+	std::vector<TreeAndValueVector> VarAndVals;
 
 	VarAndVals.resize(TopConnectedComponentsCount);
 
@@ -835,7 +836,7 @@ TryWithoutLongRelationsLabel:
 	assert (VarNo == HypotCount);
 
 
-	vector<PairOfLong>    WeightAndPositions;
+	std::vector<PairOfLong>    WeightAndPositions;
 	WeightAndPositions.resize(HypotCount);
 
 
@@ -1043,7 +1044,7 @@ void CRusSemStructure::FindPossibleAntecedents()
 {
 	size_t WordCount = GetSynWordsCount();
 
-	for (map<pair<int,CRusSemNode>, int>::iterator it = m_PriorNounNodes2Distance.begin(); it != m_PriorNounNodes2Distance.end(); it++)
+	for (std::map<std::pair<int,CRusSemNode>, int>::iterator it = m_PriorNounNodes2Distance.begin(); it != m_PriorNounNodes2Distance.end(); it++)
 	{
 		it->second += WordCount;
 		printf ("%i,%s -> %i\n", it->first.first, GetNodeStr((const CSemNode&)it->first.second).c_str(), it->second);
@@ -1056,11 +1057,11 @@ void CRusSemStructure::FindPossibleAntecedents()
 				&&	HasRichPOS (NodeNo, NOUN) 
 			)
 		{
-			m_PriorNounNodes2Distance[pair<int,CRusSemNode>(m_SentenceCount, m_Nodes[NodeNo]) ] =  WordCount - m_Nodes[NodeNo].GetMaxWordNo();
+			m_PriorNounNodes2Distance[std::pair<int,CRusSemNode>(m_SentenceCount, m_Nodes[NodeNo]) ] =  WordCount - m_Nodes[NodeNo].GetMaxWordNo();
 		}
 
 	printf ("new m_PriorNounNodes2Distance ===\n");
-	for (map<pair<int,CRusSemNode>, int>::iterator it = m_PriorNounNodes2Distance.begin(); it != m_PriorNounNodes2Distance.end(); it++)
+	for (std::map<std::pair<int,CRusSemNode>, int>::iterator it = m_PriorNounNodes2Distance.begin(); it != m_PriorNounNodes2Distance.end(); it++)
 	{
 		printf ("%i,%s -> %i\n", it->first.first, GetNodeStr((const CSemNode&)it->first.second).c_str(), it->second);
 	}
@@ -1086,8 +1087,8 @@ void CRusSemStructure::BuildAnaphoricRels()
 		if (m_Nodes[NodeNo].IsAnaphoricPronoun() )
 		{
 			QWORD Grammems = ((rAllNumbers|rAllGenders) & m_Nodes[NodeNo].m_Words[0].GetAllGrammems());
-			vector<CAntecedentHypot> Hypots;
-			vector<long>  BrotherNodes;
+			std::vector<CAntecedentHypot> Hypots;
+			std::vector<long>  BrotherNodes;
 			GetBrothers(NodeNo, BrotherNodes, false);
 			long ClauseNo = m_Nodes[NodeNo].m_ClauseNo;
 
@@ -1107,7 +1108,7 @@ void CRusSemStructure::BuildAnaphoricRels()
 					Hypots.push_back(CAntecedentHypot(m_Nodes[i], GetDistance(i, NodeNo), i));
 
 
-			for (map<pair<int,CRusSemNode>, int>::const_iterator it = m_PriorNounNodes2Distance.begin(); it != m_PriorNounNodes2Distance.end(); it++)
+			for (std::map<std::pair<int,CRusSemNode>, int>::const_iterator it = m_PriorNounNodes2Distance.begin(); it != m_PriorNounNodes2Distance.end(); it++)
 				if (((it->first.second.GetGrammems() & Grammems) == Grammems))
 				{
 					Hypots.push_back(CAntecedentHypot(it->first.second, it->second + m_Nodes[NodeNo].GetMinWordNo() ) );
@@ -1117,12 +1118,12 @@ void CRusSemStructure::BuildAnaphoricRels()
 
 				for (long HypotNo = 0; HypotNo < Hypots.size(); HypotNo++)
 				{   
-					vector<CRusSemNode>     SaveNodes   = m_Nodes;
-					vector<CRusSemRelation> SaveRels    = m_Relations;
-					vector<CSynRelation>	SaveSynRels	 = m_SynRelations;
-					vector<CRusSemClause>   SaveClauses = m_Clauses;
-					vector<CLexFunctRel>   SaveLexFuncts = m_LexFuncts;
-					vector<CSemThesRelation>   SaveThesSemRelations = m_ThesSemRelations;
+					std::vector<CRusSemNode>     SaveNodes   = m_Nodes;
+					std::vector<CRusSemRelation> SaveRels    = m_Relations;
+					std::vector<CSynRelation>	SaveSynRels	 = m_SynRelations;
+					std::vector<CRusSemClause>   SaveClauses = m_Clauses;
+					std::vector<CLexFunctRel>   SaveLexFuncts = m_LexFuncts;
+					std::vector<CSemThesRelation>   SaveThesSemRelations = m_ThesSemRelations;
 
 					CRusSemNode N = Hypots[HypotNo].m_Node;
 					N.SetGrammems( m_Nodes[NodeNo].GetGrammems() );
@@ -1233,7 +1234,7 @@ CRusSemNode CreateDummyNode(long WordNo, const CSemanticsHolder* pData)
 bool CRusSemStructure::TryTestTree(std::string s)
 {
 	m_Nodes.clear();
-	vector<CRusSemRelation> Relations;
+	std::vector<CRusSemRelation> Relations;
 	m_Clauses.clear();
 	m_Clauses.push_back (CRusSemClause());
 	if (s.length() < 7) return false;

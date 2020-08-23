@@ -214,7 +214,7 @@ TIXML_STRING S_remove_lead_trail (const char * cp_in)
 	return S_ret;
 }
 
-/// Assign an integer to a string
+/// Assign an integer to a std::string
 void v_assign_int_to_string (TIXML_STRING & S_string, int i_val)
 {
    char ca_int [80];
@@ -223,7 +223,7 @@ void v_assign_int_to_string (TIXML_STRING & S_string, int i_val)
    S_string = ca_int;
 }
 
-/// Assign a double to a string, cleaning any trailing zeroes and the decimal point if there's no
+/// Assign a double to a std::string, cleaning any trailing zeroes and the decimal point if there's no
 /// decimal part
 void v_assign_double_to_string (TIXML_STRING & S_string, double d_val)
 {

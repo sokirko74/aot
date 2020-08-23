@@ -32,7 +32,7 @@ private:
 		offset_range(unsigned long l = 0L, unsigned long h = 0L) : low(l), high(h){};
       };
 
-      vector<offset_range> offsets;
+      std::vector<offset_range> offsets;
 };
 
 

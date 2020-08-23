@@ -48,7 +48,7 @@
 #define TCL_PATCH_LEVEL	    "8.0.5"
 
 /*
- * The following definitions set up the proper options for Windows
+ * The following definitions std::set up the proper options for Windows
  * compilers.  We use this method because there is no autoconf equivalent.
  */
 
@@ -83,7 +83,7 @@
 #endif /* __WIN32__ */
 
 /*
- * The following definitions set up the proper options for Macintosh
+ * The following definitions std::set up the proper options for Macintosh
  * compilers.  We use this method because there is no autoconf equivalent.
  */
 
@@ -146,7 +146,7 @@
  * is used in procedure prototypes.  TCL_VARARGS_DEF is used to declare
  * the arguments in a function definiton: it takes the type and name of
  * the first argument and supplies the appropriate argument declaration
- * string for use in the function definition.  TCL_VARARGS_START
+ * std::string for use in the function definition.  TCL_VARARGS_START
  * initializes the va_list data structure and returns the first argument.
  */
 
@@ -173,7 +173,7 @@
  * and DLLEXPORT macros to be nonempty. To build a static library, the
  * macro STATIC_BUILD should be defined.
  * The support follows the convention that a macro called BUILD_xxxx, where
- * xxxx is the name of a library we are building, is set on the compile line
+ * xxxx is the name of a library we are building, is std::set on the compile line
  * for sources that are to be placed in the library. See BUILD_tcl in this
  * file for an example of how the macro is to be used.
  */
@@ -273,9 +273,9 @@ typedef long LONG;
 /*
  * Data structures defined opaquely in this module. The definitions below
  * just provide dummy types. A few fields are made visible in Tcl_Interp
- * structures, namely those used for returning a string result from
+ * structures, namely those used for returning a std::string result from
  * commands. Direct access to the result field is discouraged in Tcl 8.0.
- * The interpreter result is either an object or a string, and the two
+ * The interpreter result is either an object or a std::string, and the two
  * values are kept consistent unless some C code sets interp->result
  * directly. Programmers should use either the procedure Tcl_GetObjResult()
  * or Tcl_GetStringResult() to read the interpreter's result. See the
@@ -284,16 +284,16 @@ typedef long LONG;
  * Note: any change to the Tcl_Interp definition below must be mirrored
  * in the "real" definition in tclInt.h.
  *
- * Note: Tcl_ObjCmdProc procedures do not directly set result and freeProc.
- * Instead, they set a Tcl_Obj member in the "real" structure that can be
+ * Note: Tcl_ObjCmdProc procedures do not directly std::set result and freeProc.
+ * Instead, they std::set a Tcl_Obj member in the "real" structure that can be
  * accessed with Tcl_GetObjResult() and Tcl_SetObjResult().
  */
 
 typedef struct Tcl_Interp {
-    char *result;		/* If the last command returned a string
+    char *result;		/* If the last command returned a std::string
 				 * result, this points to it. */
     void (*freeProc) _ANSI_ARGS_((char *blockPtr));
-				/* Zero means the string result is
+				/* Zero means the std::string result is
 				 * statically allocated. TCL_DYNAMIC means
 				 * it was allocated with ckalloc and should
 				 * be freed with ckfree. Other values give
@@ -413,7 +413,7 @@ typedef char *(Tcl_VarTraceProc) _ANSI_ARGS_((ClientData clientData,
 
 /*
  * The following structure represents a type of object, which is a
- * particular internal representation for an object plus a set of
+ * particular internal representation for an object plus a std::set of
  * procedures that provide standard operations on objects of that type.
  */
 
@@ -427,7 +427,7 @@ typedef struct Tcl_ObjType {
     				/* Called to create a new object as a copy
 				 * of an existing object. */
     Tcl_UpdateStringProc *updateStringProc;
-    				/* Called to update the string rep from the
+    				/* Called to update the std::string rep from the
 				 * type's internal representation. */
     Tcl_SetFromAnyProc *setFromAnyProc;
     				/* Called to convert the object's internal
@@ -438,19 +438,19 @@ typedef struct Tcl_ObjType {
 
 /*
  * One of the following structures exists for each object in the Tcl
- * system. An object stores a value as either a string, some internal
+ * system. An object stores a value as either a std::string, some internal
  * representation, or both.
  */
 
 typedef struct Tcl_Obj {
     int refCount;		/* When 0 the object will be freed. */
     char *bytes;		/* This points to the first byte of the
-				 * object's string representation. The array
+				 * object's std::string representation. The array
 				 * must be followed by a null byte (i.e., at
 				 * offset length) but may also contain
 				 * embedded null characters. The array's
 				 * storage is allocated by ckalloc. NULL
-				 * means the string rep is invalid and must
+				 * means the std::string rep is invalid and must
 				 * be regenerated from the internal rep.
 				 * Clients should use Tcl_GetStringFromObj
 				 * to get a pointer to the byte array as a
@@ -600,14 +600,14 @@ typedef struct Tcl_CallFrame {
  * Information about commands that is returned by Tcl_GetCommandInfo and
  * passed to Tcl_SetCommandInfo. objProc is an objc/objv object-based
  * command procedure while proc is a traditional Tcl argc/argv
- * string-based procedure. Tcl_CreateObjCommand and Tcl_CreateCommand
+ * std::string-based procedure. Tcl_CreateObjCommand and Tcl_CreateCommand
  * ensure that both objProc and proc are non-NULL and can be called to
  * execute the command. However, it may be faster to call one instead of
- * the other. The member isNativeObjectProc is set to 1 if an
+ * the other. The member isNativeObjectProc is std::set to 1 if an
  * object-based procedure was registered by Tcl_CreateObjCommand, and to
- * 0 if a string-based procedure was registered by Tcl_CreateCommand.
- * The other procedure is typically set to a compatibility wrapper that
- * does string-to-object or object-to-string argument conversions then
+ * 0 if a std::string-based procedure was registered by Tcl_CreateCommand.
+ * The other procedure is typically std::set to a compatibility wrapper that
+ * does std::string-to-object or object-to-std::string argument conversions then
  * calls the other procedure.
  */
      
@@ -618,8 +618,8 @@ typedef struct Tcl_CmdInfo {
 				  * field. */
     Tcl_ObjCmdProc *objProc;	 /* Command's object-based procedure. */
     ClientData objClientData;	 /* ClientData for object proc. */
-    Tcl_CmdProc *proc;		 /* Command's string-based procedure. */
-    ClientData clientData;	 /* ClientData for string proc. */
+    Tcl_CmdProc *proc;		 /* Command's std::string-based procedure. */
+    ClientData clientData;	 /* ClientData for std::string proc. */
     Tcl_CmdDeleteProc *deleteProc;
                                  /* Procedure to call when command is
                                   * deleted. */
@@ -634,25 +634,25 @@ typedef struct Tcl_CmdInfo {
 
 /*
  * The structure defined below is used to hold dynamic strings.  The only
- * field that clients should use is the string field, and they should
+ * field that clients should use is the std::string field, and they should
  * never modify it.
  */
 
 #define TCL_DSTRING_STATIC_SIZE 200
 typedef struct Tcl_DString {
-    char *string;		/* Points to beginning of string:  either
+    char *std::string;		/* Points to beginning of std::string:  either
 				 * staticSpace below or a malloced array. */
     int length;			/* Number of non-NULL characters in the
-				 * string. */
+				 * std::string. */
     int spaceAvl;		/* Total number of bytes available for the
-				 * string and its terminating NULL char. */
+				 * std::string and its terminating NULL char. */
     char staticSpace[TCL_DSTRING_STATIC_SIZE];
-				/* Space to use in common case where string
+				/* Space to use in common case where std::string
 				 * is small. */
 } Tcl_DString;
 
 #define Tcl_DStringLength(dsPtr) ((dsPtr)->length)
-#define Tcl_DStringValue(dsPtr) ((dsPtr)->string)
+#define Tcl_DStringValue(dsPtr) ((dsPtr)->std::string)
 #define Tcl_DStringTrunc Tcl_DStringSetLength
 
 /*
@@ -803,7 +803,7 @@ typedef struct Tcl_HashEntry {
 					 * The actual size will be as large
 					 * as necessary for this table's
 					 * keys. */
-	char string[4];			/* String for key.  The actual size
+	char std::string[4];			/* String for key.  The actual size
 					 * will be as large as needed to hold
 					 * the key. */
     } key;				/* MUST BE LAST FIELD IN RECORD!! */
@@ -874,7 +874,7 @@ typedef struct Tcl_HashSearch {
 #define Tcl_SetHashValue(h, value) ((h)->clientData = (ClientData) (value))
 #define Tcl_GetHashKey(tablePtr, h) \
     ((char *) (((tablePtr)->keyType == TCL_ONE_WORD_KEYS) ? (h)->key.oneWordValue \
-						: (h)->key.string))
+						: (h)->key.std::string))
 
 /*
  * Macros to use for clients to use to invoke find and create procedures
@@ -1035,7 +1035,7 @@ typedef struct Tcl_ChannelType {
 
 /*
  * The following flags determine whether the blockModeProc above should
- * set the channel into blocking or nonblocking mode. They are passed
+ * std::set the channel into blocking or nonblocking mode. They are passed
  * as arguments to the blockModeProc procedure in the above structure.
  */
 
@@ -1065,7 +1065,7 @@ EXTERN void		Tcl_AllowExceptions _ANSI_ARGS_((Tcl_Interp *interp));
 EXTERN int		Tcl_AppendAllObjTypes _ANSI_ARGS_((
 			    Tcl_Interp *interp, Tcl_Obj *objPtr));
 EXTERN void		Tcl_AppendElement _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string));
+			    char *std::string));
 EXTERN void		Tcl_AppendResult _ANSI_ARGS_(
 			    TCL_VARARGS(Tcl_Interp *,interp));
 EXTERN void		Tcl_AppendToObj _ANSI_ARGS_((Tcl_Obj *objPtr,
@@ -1210,9 +1210,9 @@ EXTERN int		Tcl_DoOneEvent _ANSI_ARGS_((int flags));
 EXTERN void		Tcl_DoWhenIdle _ANSI_ARGS_((Tcl_IdleProc *proc,
 			    ClientData clientData));
 EXTERN char *		Tcl_DStringAppend _ANSI_ARGS_((Tcl_DString *dsPtr,
-			    CONST char *string, int length));
+			    CONST char *std::string, int length));
 EXTERN char *		Tcl_DStringAppendElement _ANSI_ARGS_((
-			    Tcl_DString *dsPtr, CONST char *string));
+			    Tcl_DString *dsPtr, CONST char *std::string));
 EXTERN void		Tcl_DStringEndSublist _ANSI_ARGS_((Tcl_DString *dsPtr));
 EXTERN void		Tcl_DStringFree _ANSI_ARGS_((Tcl_DString *dsPtr));
 EXTERN void		Tcl_DStringGetResult _ANSI_ARGS_((Tcl_Interp *interp,
@@ -1229,7 +1229,7 @@ EXTERN int		Tcl_Eof _ANSI_ARGS_((Tcl_Channel chan));
 EXTERN char *		Tcl_ErrnoId _ANSI_ARGS_((void));
 EXTERN char *		Tcl_ErrnoMsg _ANSI_ARGS_((int err));
 EXTERN int		Tcl_Eval _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string));
+			    char *std::string));
 EXTERN int		Tcl_EvalFile _ANSI_ARGS_((Tcl_Interp *interp,
 			    char *fileName));
 EXTERN void		Tcl_EventuallyFree _ANSI_ARGS_((ClientData clientData,
@@ -1240,21 +1240,21 @@ EXTERN void		Tcl_Exit _ANSI_ARGS_((int status));
 EXTERN int		Tcl_ExposeCommand _ANSI_ARGS_((Tcl_Interp *interp,
         		    char *hiddenCmdToken, char *cmdName));
 EXTERN int		Tcl_ExprBoolean _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, int *ptr));
+			    char *std::string, int *ptr));
 EXTERN int		Tcl_ExprBooleanObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Obj *objPtr, int *ptr));
 EXTERN int		Tcl_ExprDouble _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, double *ptr));
+			    char *std::string, double *ptr));
 EXTERN int		Tcl_ExprDoubleObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Obj *objPtr, double *ptr));
 EXTERN int		Tcl_ExprLong _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, long *ptr));
+			    char *std::string, long *ptr));
 EXTERN int		Tcl_ExprLongObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Obj *objPtr, long *ptr));
 EXTERN int		Tcl_ExprObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Obj *objPtr, Tcl_Obj **resultPtrPtr));
 EXTERN int		Tcl_ExprString _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string));
+			    char *std::string));
 EXTERN void		Tcl_Finalize _ANSI_ARGS_((void));
 EXTERN void		Tcl_FindExecutable _ANSI_ARGS_((char *argv0));
 EXTERN Tcl_HashEntry *	Tcl_FirstHashEntry _ANSI_ARGS_((
@@ -1274,7 +1274,7 @@ EXTERN int		Tcl_GetAliasObj _ANSI_ARGS_((Tcl_Interp *interp,
 EXTERN ClientData	Tcl_GetAssocData _ANSI_ARGS_((Tcl_Interp *interp,
                             char *name, Tcl_InterpDeleteProc **procPtr));
 EXTERN int		Tcl_GetBoolean _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, int *boolPtr));
+			    char *std::string, int *boolPtr));
 EXTERN int		Tcl_GetBooleanFromObj _ANSI_ARGS_((
 			    Tcl_Interp *interp, Tcl_Obj *objPtr,
 			    int *boolPtr));
@@ -1297,7 +1297,7 @@ EXTERN int		Tcl_GetCommandInfo _ANSI_ARGS_((Tcl_Interp *interp,
 EXTERN char *		Tcl_GetCommandName _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Command command));
 EXTERN int		Tcl_GetDouble _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, double *doublePtr));
+			    char *std::string, double *doublePtr));
 EXTERN int		Tcl_GetDoubleFromObj _ANSI_ARGS_((
 			    Tcl_Interp *interp, Tcl_Obj *objPtr,
 			    double *doublePtr));
@@ -1307,7 +1307,7 @@ EXTERN int		Tcl_GetIndexFromObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Obj *objPtr, char **tablePtr, char *msg,
 			    int flags, int *indexPtr));
 EXTERN int		Tcl_GetInt _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, int *intPtr));
+			    char *std::string, int *intPtr));
 EXTERN int		Tcl_GetInterpPath _ANSI_ARGS_((Tcl_Interp *askInterp,
 			    Tcl_Interp *slaveInterp));
 EXTERN int		Tcl_GetIntFromObj _ANSI_ARGS_((Tcl_Interp *interp,
@@ -1319,7 +1319,7 @@ EXTERN CONST char *	Tcl_GetNameOfExecutable _ANSI_ARGS_((void));
 EXTERN Tcl_Obj *	Tcl_GetObjResult _ANSI_ARGS_((Tcl_Interp *interp));
 EXTERN Tcl_ObjType *	Tcl_GetObjType _ANSI_ARGS_((char *typeName));
 EXTERN int		Tcl_GetOpenFile _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, int write, int checkUsage,
+			    char *std::string, int write, int checkUsage,
 			    ClientData *filePtr));
 EXTERN Tcl_PathType	Tcl_GetPathType _ANSI_ARGS_((char *path));
 EXTERN int		Tcl_Gets _ANSI_ARGS_((Tcl_Channel chan,
@@ -1407,7 +1407,7 @@ EXTERN Tcl_Channel	Tcl_OpenTcpServer _ANSI_ARGS_((Tcl_Interp *interp,
         		    Tcl_TcpAcceptProc *acceptProc,
 			    ClientData callbackData));
 EXTERN char *		Tcl_ParseVar _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, char **termPtr));
+			    char *std::string, char **termPtr));
 EXTERN int		Tcl_PkgProvide _ANSI_ARGS_((Tcl_Interp *interp,
 			    char *name, char *version));
 EXTERN char *		Tcl_PkgRequire _ANSI_ARGS_((Tcl_Interp *interp,
@@ -1416,7 +1416,7 @@ EXTERN char *		Tcl_PosixError _ANSI_ARGS_((Tcl_Interp *interp));
 EXTERN void		Tcl_Preserve _ANSI_ARGS_((ClientData data));
 EXTERN void		Tcl_PrintDouble _ANSI_ARGS_((Tcl_Interp *interp,
 			    double value, char *dst));
-EXTERN int		Tcl_PutEnv _ANSI_ARGS_((CONST char *string));
+EXTERN int		Tcl_PutEnv _ANSI_ARGS_((CONST char *std::string));
 EXTERN void		Tcl_QueueEvent _ANSI_ARGS_((Tcl_Event *evPtr,
 			    Tcl_QueuePosition position));
 EXTERN int		Tcl_Read _ANSI_ARGS_((Tcl_Channel chan,
@@ -1427,11 +1427,11 @@ EXTERN int		Tcl_RecordAndEval _ANSI_ARGS_((Tcl_Interp *interp,
 EXTERN int		Tcl_RecordAndEvalObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tcl_Obj *cmdPtr, int flags));
 EXTERN Tcl_RegExp	Tcl_RegExpCompile _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string));
+			    char *std::string));
 EXTERN int		Tcl_RegExpExec _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tcl_RegExp regexp, char *string, char *start));
+			    Tcl_RegExp regexp, char *std::string, char *start));
 EXTERN int		Tcl_RegExpMatch _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, char *pattern));
+			    char *std::string, char *pattern));
 EXTERN void		Tcl_RegExpRange _ANSI_ARGS_((Tcl_RegExp regexp,
 			    int index, char **startPtr, char **endPtr));
 EXTERN void		Tcl_RegisterChannel _ANSI_ARGS_((Tcl_Interp *interp,
@@ -1441,9 +1441,9 @@ EXTERN void		Tcl_RegisterObjType _ANSI_ARGS_((
 EXTERN void		Tcl_Release _ANSI_ARGS_((ClientData clientData));
 EXTERN void		Tcl_ResetResult _ANSI_ARGS_((Tcl_Interp *interp));
 #define Tcl_Return Tcl_SetResult
-EXTERN int		Tcl_ScanCountedElement _ANSI_ARGS_((CONST char *string,
+EXTERN int		Tcl_ScanCountedElement _ANSI_ARGS_((CONST char *std::string,
 			    int length, int *flagPtr));
-EXTERN int		Tcl_ScanElement _ANSI_ARGS_((CONST char *string,
+EXTERN int		Tcl_ScanElement _ANSI_ARGS_((CONST char *std::string,
 			    int *flagPtr));
 EXTERN int		Tcl_Seek _ANSI_ARGS_((Tcl_Channel chan,
         		    int offset, int mode));
@@ -1484,7 +1484,7 @@ EXTERN void		Tcl_SetPanicProc _ANSI_ARGS_((void (*proc)
 EXTERN int		Tcl_SetRecursionLimit _ANSI_ARGS_((Tcl_Interp *interp,
 			    int depth));
 EXTERN void		Tcl_SetResult _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *string, Tcl_FreeProc *freeProc));
+			    char *std::string, Tcl_FreeProc *freeProc));
 EXTERN int		Tcl_SetServiceMode _ANSI_ARGS_((int mode));
 EXTERN void		Tcl_SetStdChannel _ANSI_ARGS_((Tcl_Channel channel,
 			    int type));
@@ -1507,7 +1507,7 @@ EXTERN void		Tcl_SplitPath _ANSI_ARGS_((char *path,
 EXTERN void		Tcl_StaticPackage _ANSI_ARGS_((Tcl_Interp *interp,
 			    char *pkgName, Tcl_PackageInitProc *initProc,
 			    Tcl_PackageInitProc *safeInitProc));
-EXTERN int		Tcl_StringMatch _ANSI_ARGS_((char *string,
+EXTERN int		Tcl_StringMatch _ANSI_ARGS_((char *std::string,
 			    char *pattern));
 EXTERN int		Tcl_Tell _ANSI_ARGS_((Tcl_Channel chan));
 #define Tcl_TildeSubst Tcl_TranslateFileName

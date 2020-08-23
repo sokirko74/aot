@@ -93,19 +93,19 @@ bool			CRusSemStructure::IsWordContainerRel(int iRel)  const
 		&&	m_Nodes[m_Relations[iRel].m_TargetNodeNo].IsWordContainer();
 }
 
-const vector<CSynRelation>&		CRusSemStructure::GetSynRels()  	const 
+const std::vector<CSynRelation>&		CRusSemStructure::GetSynRels()  	const 
 {
 	return m_SynRelations;
 };
-vector<CSynRelation>&		CRusSemStructure::GetSynRels()  	
+std::vector<CSynRelation>&		CRusSemStructure::GetSynRels()  	
 {
 	return m_SynRelations;
 };
-const vector<CLexFunctRel>&		CRusSemStructure::GetLexFuncts()	const 
+const std::vector<CLexFunctRel>&		CRusSemStructure::GetLexFuncts()	const 
 {
 	return m_LexFuncts;
 };
-vector<CLexFunctRel>&		CRusSemStructure::GetLexFuncts()
+std::vector<CLexFunctRel>&		CRusSemStructure::GetLexFuncts()
 {
 	return m_LexFuncts;
 };
@@ -182,7 +182,7 @@ bool CRusSemStructure::ContainsSemCopul(long NodeNo) const
 
 long CRusSemStructure::GetRusSubj(int NodeNo)
 {
-	vector<long> Rels; 
+	std::vector<long> Rels; 
 	GetOutcomingRelations(NodeNo, Rels, false);
 	long  i=0;
 	for (; i < Rels.size(); i++)
@@ -194,7 +194,7 @@ long CRusSemStructure::GetRusSubj(int NodeNo)
 			*/
 			if (m_Nodes[m_Relations[Rels[i]].m_TargetNodeNo].m_NodeType == Copul)
 			{
-				vector<long> Rels1; 
+				std::vector<long> Rels1; 
 				GetOutcomingRelations(m_Relations[Rels[i]].m_TargetNodeNo, Rels1, false);
 				long  j=0;
 				for (; j < Rels1.size(); j++)
@@ -246,9 +246,9 @@ long  CRusSemStructure::InsertNode (CRusSemNode& N)
 	if ( N.IsAbstract() )
 		N.m_AbstractNodeId = m_Nodes.size();
 
-	vector<CRusSemNode>::iterator It =  lower_bound (m_Nodes.begin(),m_Nodes.end(),N);
+	std::vector<CRusSemNode>::iterator It =  lower_bound (m_Nodes.begin(),m_Nodes.end(),N);
 
-	vector<CRusSemNode>::const_iterator Inserted = m_Nodes.insert(It, N);
+	std::vector<CRusSemNode>::const_iterator Inserted = m_Nodes.insert(It, N);
 
     long NodeNo = Inserted - m_Nodes.begin();
 
@@ -444,7 +444,7 @@ long CRusSemStructure::FindNodeByWordNo(long WordNo, long ClauseNo) const
 
 
 
-void CRusSemStructure::GetAllTextOrderedNodes(vector <long>& Nodes) const
+void CRusSemStructure::GetAllTextOrderedNodes(std::vector <long>& Nodes) const
 {
 	Nodes.clear();
 
@@ -686,7 +686,7 @@ CRelSet CRusSemStructure::GetValencyPlaces(long NodeNo, CRelSet& OutRelations) c
 	//валентности
 	CRelSet Result;
 	OutRelations.m_RelsCount = 0;
-	const vector<CValency>& Vals = m_Nodes[NodeNo].m_Vals;
+	const std::vector<CValency>& Vals = m_Nodes[NodeNo].m_Vals;
 	if (Vals.empty())  return Result;
 	if (m_Nodes[NodeNo].m_NodeType == MNA ) return Result;
 
@@ -697,7 +697,7 @@ CRelSet CRusSemStructure::GetValencyPlaces(long NodeNo, CRelSet& OutRelations) c
 			&&	!m_Relations[i].m_bReverseRel
 			)
 		{
-			vector<CValency>::const_iterator It = find(Vals.begin(),Vals.end(), m_Relations[i].m_Valency); 
+			std::vector<CValency>::const_iterator It = find(Vals.begin(),Vals.end(), m_Relations[i].m_Valency); 
 			if (It != Vals.end())
 			{
 				// устанавливаем узел в последовательность Nodes
@@ -715,7 +715,7 @@ CRelSet CRusSemStructure::GetValencyPlaces(long NodeNo, CRelSet& OutRelations) c
 };
 
 // выдаем все пропущенные валентности
-void CRusSemStructure::GetValencyMisses(long NodeNo, vector<CValency>& ValencyMisses) const 
+void CRusSemStructure::GetValencyMisses(long NodeNo, std::vector<CValency>& ValencyMisses) const 
 {
 	CRelSet OutRels;
     CRelSet R = GetValencyPlaces(NodeNo, OutRels);
@@ -763,7 +763,7 @@ bool CRusSemStructure::CheckAllIncomingRelations(long NodeNo, const std::string&
 
 void  CRusSemStructure::FindIf(long ClauseNo,
 			                bool (CRusSemStructure::*Fun)(long) const, 
-					        vector <long>& Nodes) const
+					        std::vector <long>& Nodes) const
 {
 			Nodes.clear();
 			for (long  i=m_Clauses[ClauseNo].m_BeginNodeNo; i <  m_Clauses[ClauseNo].m_EndNodeNo; i++)
@@ -1243,7 +1243,7 @@ void CRusSemClause::InitGramMatrix ()
 	if (size != m_GrammarMatrix.size())
 	{
 		m_GrammarMatrix.clear();
-		m_GrammarMatrix.resize(size, vector<BYTE>(size, 0));
+		m_GrammarMatrix.resize(size, std::vector<BYTE>(size, 0));
 		return;
 	};
 
@@ -1255,7 +1255,7 @@ void CRusSemClause::UpdateSizeOfGramMatrix()
 {
 	size_t size = GetNodesCount();
 	if (size == m_GrammarMatrix.size()) return;
-	m_GrammarMatrix.resize(size, vector<BYTE>(size, 0));
+	m_GrammarMatrix.resize(size, std::vector<BYTE>(size, 0));
 	for (long i=0; i < size;i++)
 		m_GrammarMatrix[i].resize(size, 0);
 };

@@ -26,7 +26,7 @@ size_t CGLRTable::GetRuleInfo (const CWorkRule* R) const
 {
 	CGLRRuleInfo I;
 	I.m_RuleId = R->m_RuleId;
-	vector<CGLRRuleInfo>::const_iterator it = lower_bound(m_RuleInfos.begin(), m_RuleInfos.end(), I);
+	std::vector<CGLRRuleInfo>::const_iterator it = lower_bound(m_RuleInfos.begin(), m_RuleInfos.end(), I);
 	assert (it != m_RuleInfos.end());
 	assert (it->m_RuleId == R->m_RuleId);
 	return it - m_RuleInfos.begin();
@@ -35,15 +35,15 @@ size_t CGLRTable::GetRuleInfo (const CWorkRule* R) const
 };
 /*
 Constructing the SLR parsing table
- * Compute the canonical LR collection set of LR(0) items for grammr G
+ * Compute the canonical LR collection std::set of LR(0) items for grammr G
    let it be C = {I0, I1,...,In}
- * For terminal a, if A->X.aY in Ii anf goto(Ii,a) = Ij, then set action[i,a] to shift j
- * if A->X. is in Ii and A != S',  for all terminals  a in Follow(A) set action [i,a] 
+ * For terminal a, if A->X.aY in Ii anf goto(Ii,a) = Ij, then std::set action[i,a] to shift j
+ * if A->X. is in Ii and A != S',  for all terminals  a in Follow(A) std::set action [i,a] 
    to  reduce A->X (S' is a new specially  inserted root of the grammar)
- * if S'->S. is in Ii, then set action[i,$]=accept (this is not implemented because we use 
+ * if S'->S. is in Ii, then std::set action[i,$]=accept (this is not implemented because we use 
    this grammar for longest match search)
- * For non-terminal symbol A, if goto(Ii,A) = Ij, then set goto(i,A)=j
- * set all other table entries to "error"
+ * For non-terminal symbol A, if goto(Ii,A) = Ij, then std::set goto(i,A)=j
+ * std::set all other table entries to "error"
 
  Since we should use this table for GLR, we should not stop when 
  a conflict occurrs, to the contrary we should proceed collection all possible 
@@ -56,14 +56,14 @@ bool CGLRTable::BuildGLRTable()
 	// initializing m_RuleInfos, in order to be independent from class CWorkGrammar
 	// while  parsing
 	m_RuleInfos.clear();
-	for (set<CWorkRule>::const_iterator it = m_pWorkGrammar->m_EncodedRules.begin(); it!=m_pWorkGrammar->m_EncodedRules.end(); it++)
+	for (std::set<CWorkRule>::const_iterator it = m_pWorkGrammar->m_EncodedRules.begin(); it!=m_pWorkGrammar->m_EncodedRules.end(); it++)
 	{
 		CGLRRuleInfo I;
 		I.Init(&*it);
 		m_RuleInfos.push_back(I);
 	};
 	sort(m_RuleInfos.begin(), m_RuleInfos.end());
-	// creating a canonical LR(0) index item set collection
+	// creating a canonical LR(0) index item std::set collection
     
 	CLRCollectionSet S;
 	S.Compute(m_pWorkGrammar);
@@ -73,18 +73,18 @@ bool CGLRTable::BuildGLRTable()
 	// building m_Table by  CLRCollectionSet
 	for (size_t i=0;  i<S.m_ItemSets.size(); i++)
 	{
-		const set<CLRItem>& ItemSet = S.m_ItemSets[i];
+		const std::set<CLRItem>& ItemSet = S.m_ItemSets[i];
 
 		// TableLine is a new table line in SLR table, which should  be added to the end of the table
-		vector < CSLRCellBuild > TableLine;
+		std::vector < CSLRCellBuild > TableLine;
 
 		// we resize it to contain all symbols 
 		TableLine.resize(m_pWorkGrammar->m_UniqueGrammarItems.size());
 
 		// initializing shift actions and reduce actions
-		for (set<CLRItem>::const_iterator it = ItemSet.begin(); it != ItemSet.end(); it++)
+		for (std::set<CLRItem>::const_iterator it = ItemSet.begin(); it != ItemSet.end(); it++)
 		{
-			// "For terminal a, if A->X.aY in Ii and goto(Ii,a) = Ij, then set action[i,a] to shift j"
+			// "For terminal a, if A->X.aY in Ii and goto(Ii,a) = Ij, then std::set action[i,a] to shift j"
 			if	(		!it->IsFinished()
 					&&	!m_pWorkGrammar->m_UniqueGrammarItems[it->GetSymbolNo()].m_bMeta 
 				)
@@ -103,15 +103,15 @@ bool CGLRTable::BuildGLRTable()
 				};
 
 			};
-			// if A->X. is in Ii and A != S',  for all terminals  a in Follow(A) set action [i,a] 
+			// if A->X. is in Ii and A != S',  for all terminals  a in Follow(A) std::set action [i,a] 
 			// to  reduce A->X 
 			if	(		it->IsFinished() 
 						// "and A != S'"
 						&&	it->m_pRule->m_LeftPart != m_pWorkGrammar->GetNewRoot()
 				)
 			{				
-				const set<size_t>& Follow = m_pWorkGrammar->m_FollowSets[it->m_pRule->m_LeftPart];
-				for (set<size_t>::const_iterator it1 = Follow.begin(); it1 != Follow.end(); it1++)
+				const std::set<size_t>& Follow = m_pWorkGrammar->m_FollowSets[it->m_pRule->m_LeftPart];
+				for (std::set<size_t>::const_iterator it1 = Follow.begin(); it1 != Follow.end(); it1++)
 				{
 					int SymbolNo = *it1;
 					TableLine[SymbolNo].m_ReduceRules.push_back( GetRuleInfo(it->m_pRule) );

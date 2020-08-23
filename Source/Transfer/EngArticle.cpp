@@ -38,7 +38,7 @@ void update_article(const CSemPattern& P, CEngSemNode& N)
 	}
 }
 
-void CEngSemStructure::GetOutcomingInClauseRelations (long NodeNo, vector<long>& Relations) const 
+void CEngSemStructure::GetOutcomingInClauseRelations (long NodeNo, std::vector<long>& Relations) const 
 {
   Relations.clear();
   for (size_t i = 0; i<GetRelationsSize(); i++)
@@ -71,7 +71,7 @@ void CEngSemStructure::GetOutcomingInClauseRelations (long NodeNo, vector<long>&
 
 bool CEngSemStructure::HasOutRelationByName (long NodeNo, std::string RelationStr) const
 {
-	vector<long> Rels;
+	std::vector<long> Rels;
 	GetOutcomingInClauseRelations(NodeNo, Rels);
 	for (long j =0; j < Rels.size();j++)
 	  if (m_Relations[Rels[j]].m_Valency.m_RelationStr == RelationStr)
@@ -83,7 +83,7 @@ bool CEngSemStructure::HasOutRelationByName (long NodeNo, std::string RelationSt
 
 bool CEngSemStructure::CheckAllOutcomingRelationsIfAnyExists (long NodeNo, std::string RelationStr) const
 {
-	vector<long> Rels;
+	std::vector<long> Rels;
 	GetOutcomingInClauseRelations(NodeNo, Rels);
 	for (long j =0; j < Rels.size();j++)
 	  if (m_Relations[Rels[j]].m_Valency.m_RelationStr != RelationStr)
@@ -96,7 +96,7 @@ bool CEngSemStructure::CheckAllOutcomingRelationsIfAnyExists (long NodeNo, std::
 
 bool CEngSemStructure::HasOutRelationByGrammems(long NodeNo, QWORD Grammems) const
 {
-	vector<long> rels;
+	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);
 	for(int i = 0; i < rels.size(); i++)
 	{
@@ -109,7 +109,7 @@ bool CEngSemStructure::HasOutRelationByGrammems(long NodeNo, QWORD Grammems) con
 
 int CEngSemStructure::GetOutRelationByWord(long NodeNo, std::string Word) const
 {
-	vector<long> rels;
+	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);
 	for(int i = 0; i < rels.size(); i++)
 	{
@@ -124,7 +124,7 @@ int CEngSemStructure::GetOutRelationByWord(long NodeNo, std::string Word) const
 
 bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, poses_mask_t  Poses) const
 {
-	vector<long> rels;
+	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);
 	for(int i = 0; i < rels.size(); i++)
 	{
@@ -134,7 +134,7 @@ bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, poses_mask_t  Poses) c
 		// узел типа MUA считаем "прозрачным"		
 		if (m_Nodes[rel.m_TargetNodeNo].m_NodeType == MNA)
 		{
-				vector<long> rels1;
+				std::vector<long> rels1;
 				GetOutcomingRelations(rel.m_TargetNodeNo,rels1);
 				for(int j = 0; j < rels1.size(); j++)
 				{
@@ -149,13 +149,13 @@ bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, poses_mask_t  Poses) c
 
 void  CEngSemStructure::InitArticleField ()
 {
-	vector<bool> ReverseRelArticles;
+	std::vector<bool> ReverseRelArticles;
 	ReverseRelArticles.resize(m_Nodes.size());
 	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++)
 	{
 		if (m_Nodes[NodeNo].m_bProper) continue;
 		// 1. входящие отношения
-		vector<long> Rels;
+		std::vector<long> Rels;
 		GetIncomingInClauseRelations(NodeNo, Rels);
 		long InRelNo = -1;
 		if (Rels.size() == 1)
@@ -191,12 +191,12 @@ void  CEngSemStructure::InitArticleField ()
 		 
 		// значение поля DETERM из добавочных статей
 
-		vector<long> Articles;
+		std::vector<long> Articles;
 		FindAbstractAdditionArticle (Aoss, m_Nodes[NodeNo], Articles, false, -1);
 		
 		for (int i =0; i<Articles.size(); i++)
 		{
-			const vector<CAbstractArticle>& AbstractArticles = *m_pData->GetAbstractArticles(Aoss);
+			const std::vector<CAbstractArticle>& AbstractArticles = *m_pData->GetAbstractArticles(Aoss);
 			CSemPattern P;
 			P.InitSemPattern(GetRossHolder(Aoss), AbstractArticles[Articles[i]].m_UnitNo,0,0);
 			P.LoadGramFromDict();
@@ -229,7 +229,7 @@ void  CEngSemStructure::InitArticleField ()
 		  )
 		if (m_Nodes[NodeNo].m_ArticleStr != "")
 	{
-		vector<long> InRels;
+		std::vector<long> InRels;
 		GetIncomingInClauseRelations(NodeNo, InRels);
 		long InRelNo = -1;
 		if (InRels.size() == 1)
@@ -247,7 +247,7 @@ void  CEngSemStructure::InitArticleField ()
 	PrintNodes();
  	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++)
 	{
-		vector<long> InRels;
+		std::vector<long> InRels;
 		GetIncomingInClauseRelations(NodeNo, InRels);
 		long InRelNo = -1;
 		if (InRels.size() == 1)
@@ -333,7 +333,7 @@ void  CEngSemStructure::InitArticleField ()
 		if (m_Nodes[NodeNo].HasGrammemRich(ePossessive)) continue;
 
 		// eORDNUM
-		vector<long> OutRels;
+		std::vector<long> OutRels;
 		GetOutcomingInClauseRelations(NodeNo, OutRels);
 		long j =0;
 		for (; j < OutRels.size();j++)
@@ -354,7 +354,7 @@ void  CEngSemStructure::InitArticleField ()
 		if (!ReverseRelArticles[NodeNo])
 		{
 			// тема - рема
-			vector<long> Roots;
+			std::vector<long> Roots;
 			GetClauseRoots(m_Nodes[NodeNo].m_ClauseNo, Roots);
 
 			if (   (Roots.size() == 1)
@@ -430,7 +430,7 @@ void  CEngSemStructure::InitArticleField ()
 		// NP с предлогом of
 		PrintNodes();
 		WORD UnitNo = GetRoss(EngObor)->LocateUnit("of",1);
-		vector<long> OutAllRels;
+		std::vector<long> OutAllRels;
 		GetOutcomingRelations(NodeNo, OutAllRels, false);
   		for (j =0; j < OutAllRels.size();j++)
 		{
@@ -473,7 +473,7 @@ void  CEngSemStructure::InitArticleField ()
 					m_Nodes[NodeNo].m_ArticleStr = "a";
 					break;
 				};
-				vector<long> Rels;
+				std::vector<long> Rels;
 				GetIncomingInClauseRelations(m_Relations[i].m_SourceNodeNo, Rels);
 				if (Rels.size() == 1) 
 					i = Rels[0];

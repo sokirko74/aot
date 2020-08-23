@@ -114,7 +114,7 @@ switch (what)
     ((re->flags & PCRE_STARTLINE) != 0)? -1 : -2;
   break;
 
-  /* Make sure we pass back the pointer to the bit vector in the external
+  /* Make sure we pass back the pointer to the bit std::vector in the external
   block, not the internal copy (with flipped integer fields). */
 
   case PCRE_INFO_FIRSTTABLE:

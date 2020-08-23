@@ -12,7 +12,7 @@
 #include "../AgramtabLib/eng_consts.h"
 
  
-typedef vector<long> VectorLong;
+typedef std::vector<long> VectorLong;
 
 
 // класс запросов к словарю РОСС (запоминает запросы к словарю, если попадается
@@ -113,14 +113,14 @@ public:
 };
 
 
-typedef pair<std::string,std::string> PairOfString;
+typedef std::pair<std::string,std::string> PairOfString;
 
 
 
 struct CSynRealization   
 {
 	// предлоги  
-	vector<CRossInterp>		m_Preps;
+	std::vector<CRossInterp>		m_Preps;
 	// союзы (для отношений)
     CRossInterp				m_Conj;
 
@@ -173,7 +173,7 @@ struct  CInterpNodeInfo  {
 	// сем. категория ( LABL, LABL.OBJ, LABL.SIT, REL)	
 	SemCategoryEnum	m_SemCategory;
 	//SF узла
-	vector<QWORD>	m_NodeSemFets;
+	std::vector<QWORD>	m_NodeSemFets;
 	// предметные области узла
 	StringVector  m_POs;
 	bool			m_ThesAbbrForm;
@@ -185,7 +185,7 @@ struct  CInterpNodeInfo  {
 
 
     // лексические функции для текущей словарной интерпретации узла 
-	vector<CLexicalFunctionField>	m_LexFunctFields;
+	std::vector<CLexicalFunctionField>	m_LexFunctFields;
 
 	StringVector	m_HigherConcepts;
 
@@ -194,10 +194,10 @@ struct  CInterpNodeInfo  {
 	// для слова "сдавать"  здесь будет "экзамен"
 	// для слова "брать"  здесь будет "барьер"
 	// поскольку Oper1(экзамен) = сдавать, Real(барьер)= брать
-	vector<CDictReference> m_ConnectedSits;
+	std::vector<CDictReference> m_ConnectedSits;
 
 	// валентная структура узла в текущей словарной интерпретации
-	vector<CValency>  m_Vals;
+	std::vector<CValency>  m_Vals;
 };
 
 
@@ -366,7 +366,7 @@ struct CSemRelation : public CSimpleBinaryRelation{
 	StringVector		m_LexFets;
 
 	//SF отношения
-	vector<QWORD>	m_SemFets;
+	std::vector<QWORD>	m_SemFets;
 
 	bool			m_bDopRelation;
 
@@ -427,10 +427,10 @@ public:
 	CRossHolder* GetRossHolder (DictTypeEnum Type)   const;
 	const CDictionary* GetRoss (DictTypeEnum Type) const;
 
-	virtual const vector<CSynRelation>&		GetSynRels() const = 0;
-	virtual		  vector<CSynRelation>&		GetSynRels() = 0;
-	virtual const vector<CLexFunctRel>&		GetLexFuncts() const = 0;
-	virtual		  vector<CLexFunctRel>&		GetLexFuncts() = 0;
+	virtual const std::vector<CSynRelation>&		GetSynRels() const = 0;
+	virtual		  std::vector<CSynRelation>&		GetSynRels() = 0;
+	virtual const std::vector<CLexFunctRel>&		GetLexFuncts() const = 0;
+	virtual		  std::vector<CLexFunctRel>&		GetLexFuncts() = 0;
 	virtual const CSemClause&				GetSemClause(long ClauseNo) const = 0;
 	virtual const long						GetSemClausesCount() const = 0;
 
@@ -456,10 +456,10 @@ public:
 
 
     // все запросы, которые делаллись через функцию HasItem	
-	vector<CRossQuery> Queries;
+	std::vector<CRossQuery> Queries;
 
 
-	vector<string>   m_IndexedSemFets;
+	std::vector<std::string>   m_IndexedSemFets;
 
 
 	//===========    работа с дополнительными семантическими отношениями 
@@ -467,9 +467,9 @@ public:
 	virtual		  CSemRelation*	GetDopRelation(int RelNo)		= 0;
 	virtual int					GetDopRelationsSize() const	 = 0;
 	virtual void				EraseDopRelation(int RelNo) 	= 0;
-	void						GetIncomingDopRelations (long NodeNo, vector<long>& Relations) const;
+	void						GetIncomingDopRelations (long NodeNo, std::vector<long>& Relations) const;
 	// выдает выходящие в узел NodeNo AUX-отношения.
-	void						GetOutcomingDopRelations (long NodeNo, vector<long>& Relations) const;
+	void						GetOutcomingDopRelations (long NodeNo, std::vector<long>& Relations) const;
 	// выдает узел, на который ссылается анафорическое местоимение
 	long						GetAnaphoraTarget(long NodeNo) const;
 	// выдает узел, в который идет дополнительное отношение THESAME	
@@ -490,27 +490,27 @@ public:
 	
 	// выдает все узлы из клаузы ClauseNo, в которые не входит ни одного СемО из другого узла этой же клаузы
 	//(межклаузные отношения могут входить!)
-	virtual	void				GetClauseRoots (size_t ClauseNo, vector<long>& Roots) const;
+	virtual	void				GetClauseRoots (size_t ClauseNo, std::vector<long>& Roots) const;
 
 	// выдает входящие из узла NodeNo отношения. Если   UseUse = true, то выдает только те отношения,
 	// для которых CSemRelation::m_RelUse==true
-	void			GetIncomingRelations  (long NodeNo, vector<long>& Relations, bool UseUse = false) const;
+	void			GetIncomingRelations  (long NodeNo, std::vector<long>& Relations, bool UseUse = false) const;
 	// выдает входящие из узла NodeNo внутриклаущные отношения. 
-	void			GetIncomingInClauseRelations (long NodeNo, vector<long>& Relations) const;
+	void			GetIncomingInClauseRelations (long NodeNo, std::vector<long>& Relations) const;
 	// выдает входящие из узла NodeNo межклаузные отношения. 
-	void			GetIncomingClauseRelations (long ClauseNo, vector<long>& Relations) const;
+	void			GetIncomingClauseRelations (long ClauseNo, std::vector<long>& Relations) const;
 	// выдает инцидентные узлу NodeNo отношения. 
-	void			GetRelations  (long NodeNo, vector<long>& Relations, bool UseUse= false) const;
+	void			GetRelations  (long NodeNo, std::vector<long>& Relations, bool UseUse= false) const;
 	// выдает число входящих в узел NodeNo отношений.
 	long			GetIncomingRelationsCount (long NodeNo, bool UseUse = false) const;
 	// выдает выходящие в узел NodeNo отношения.
-	void			GetOutcomingRelations (long NodeNo, vector<long>& Relations, bool UseUse= false) const;
+	void			GetOutcomingRelations (long NodeNo, std::vector<long>& Relations, bool UseUse= false) const;
 	// выдает число выходящих в узел NodeNo отношений.
 	long			GetOutcomingRelationsCount (long NodeNo,  bool UseUse = false) const;
 	// выдает узлы, в которые входят выходящие в узел NodeNo отношения.
-	void			GetOutcomingNodes (long NodeNo, vector<long>& Nodes, bool UseUse = false) const;
+	void			GetOutcomingNodes (long NodeNo, std::vector<long>& Nodes, bool UseUse = false) const;
 	// выдает узлы, в которые входят отношения из узлов, из которых идут отношения в узел NodeNo
-	void			GetBrothers (long NodeNo, vector<long>& Nodes, bool UseUse = false) const;
+	void			GetBrothers (long NodeNo, std::vector<long>& Nodes, bool UseUse = false) const;
 	// избавляется от дублей отношений, где дубль - это отношение, которое идет из того же и туда же, что
 	// некоторое другое отношение
 	void			DeleteDubleRelations();
@@ -519,13 +519,13 @@ public:
 	// проверяет, что сущетсвует хотя бы одно отношение, которое идет между ClauseNo1 и ClauseNo2
 	bool			AreConnectedClauses (long ClauseNo1, long ClauseNo2) const;
 	// выдает все отношения между NodeNo1 и NodeNo2
-	void			FindRelations (long NodeNo1, long NodeNo2, vector<long>& Rels) const;
+	void			FindRelations (long NodeNo1, long NodeNo2, std::vector<long>& Rels) const;
 	// выдает первое отношение (случайное) между NodeNo1 и NodeNo2
 	long			FindFirstRelation (long NodeNo1, long NodeNo2) const;
 	// выдает первое дополнительное отношение (случайное) между NodeNo1 и NodeNo2
 	long			FindDopFirstRelation (long NodeNo1, long NodeNo2) const;
 	// удаляет отношения Rels
-	void			DeleteRelations(vector<long>& Rels);
+	void			DeleteRelations(std::vector<long>& Rels);
 	// переносит все отношения, инцидентные узлу FromNode,  к узлу ToNode
 	void			MoveRelations(long FromNode, long ToNode);		
 	// переносит все входящие отношения в узел FromNode  к узлу ToNode
@@ -535,7 +535,7 @@ public:
 	// переносит все отношения во всех графах, инцидентные узлу FromNode,  к узлу ToNode
 	void			MoveAllRelations(long FromNode, long ToNode);
 	// выдает все узлы, в которые не входит ни одного СемО
-	void			GetRoots(vector<long>& Roots) const;
+	void			GetRoots(std::vector<long>& Roots) const;
 	//проверяет, что данное отношение - отношение между  подлежащим и сказуемым   
 	bool			IsRusSubj(int iRel) const;
 	// выдает первое синтаксическое отношение, начало и конец которого совпадает с началом и концом iSemRelNo
@@ -609,26 +609,26 @@ public:
 	bool			HasSemFetOrLower (const CSemNode& Node, const std::string& SemFet) const;
 	// проходит по всем дизъюнктам, если в дизъюнкте отстутствует CAUS и NEG,    
 	// и присутствует SemFet, тогда выдает истину
-	bool			HasSemFetPro (const vector<QWORD>& SemFets, const std::string& SemFet) const;
+	bool			HasSemFetPro (const std::vector<QWORD>& SemFets, const std::string& SemFet) const;
     bool			HasSemFetPro (const CSemNode& Node, const std::string& SemFet) const;
 	// проверяет, что в одном из значений поля FieldStr стоит константа ItemStr из домена DomStr
 	bool HasItem (DictTypeEnum DictTy,  WORD UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
 	// перевод  словарную интерпретацию в строковое представление
-	std::string			InterpToStr(vector<CDictUnitInterp>::const_iterator I)  const;
+	std::string			InterpToStr(std::vector<CDictUnitInterp>::const_iterator I)  const;
 	// перевод  интерпретацию открытого словосочетания в строковое представление
 	std::string			OpenCollocInterpToStr(const COpenCollocInterp& I)  const;
 	//выдает граммемы, полученные из поля RESTR для текущей словарной интерпретации
-	vector<QWORD>	GetGramRestr(const CSemNode& W);
+	std::vector<QWORD>	GetGramRestr(const CSemNode& W);
 	// проверяет согласование по SF
-	bool			GleicheSemFet(const vector<QWORD>& SemFets1, const vector<QWORD>& SemFets2, bool bInclusion) const;
+	bool			GleicheSemFet(const std::vector<QWORD>& SemFets1, const std::vector<QWORD>& SemFets2, bool bInclusion) const;
 	// индексирует один этаж (один дизъюнкт)
-	QWORD			GetOneIndexedSemFet (const vector<string>& SemFet, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy = false);
+	QWORD			GetOneIndexedSemFet (const std::vector<std::string>& SemFet, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy = false);
 	// индексирует SF
-	vector<QWORD> GetIndexedSemFets (const CSemPattern& P, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy);
+	std::vector<QWORD> GetIndexedSemFets (const CSemPattern& P, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy);
 	// выдает представление SF как вектор строк
-	vector<string>	GetSemFetStr (QWORD SemFet) const;
+	std::vector<std::string>	GetSemFetStr (QWORD SemFet) const;
 	// выдает строковое представление SF
-	std::string			GetSemFetsInOneStr (const vector<QWORD>& SemFets) const;
+	std::string			GetSemFetsInOneStr (const std::vector<QWORD>& SemFets) const;
 	// проверяет, есть ли в статье AL1, если есть, то выдает его 
 	SEngEquiv		GetAL1Value(int NodeNo) const;
    // по словарной статье предлога или союза выдает семантическое отношение, которое они выражает
@@ -694,8 +694,8 @@ public:
 	//инициализация валентностей из текущей словарной интерпретации
 	void		InitVals(CSemNode& Node);
 	long        FindAbstractPlugArticle (DictTypeEnum type, QWORD Grammems, poses_mask_t Poses, long ClauseType) const;
-	void        FindAbstractAdditionArticle (DictTypeEnum type, const CSemNode& Node, vector<long>& Articles,  bool IsClauseSyntaxRoot, long ClauseType);
-	void		AddAbstractAdditionVals (DictTypeEnum type, CSemNode& Node, const vector<long>& Articles);
+	void        FindAbstractAdditionArticle (DictTypeEnum type, const CSemNode& Node, std::vector<long>& Articles,  bool IsClauseSyntaxRoot, long ClauseType);
+	void		AddAbstractAdditionVals (DictTypeEnum type, CSemNode& Node, const std::vector<long>& Articles);
 
 
 	//============ локативы
@@ -722,7 +722,7 @@ public:
 
 
 
-class IsLessByMinWordNo : public binary_function<bool,const long, const long>
+class IsLessByMinWordNo
 {
  public:  
   const CSemanticStructure* m_SemStr;
@@ -730,7 +730,7 @@ class IsLessByMinWordNo : public binary_function<bool,const long, const long>
   IsLessByMinWordNo(const CSemanticStructure* SemStr)
 	{m_SemStr = SemStr;}  
 
-  result_type operator()(const long& NodeNo1, const long& NodeNo2)
+  bool operator()(const long& NodeNo1, const long& NodeNo2) const
   {
 	  return m_SemStr->GetNode(NodeNo1).GetMinWordNo() < m_SemStr->GetNode(NodeNo2).GetMinWordNo();
   }

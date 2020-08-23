@@ -26,7 +26,7 @@ struct CMorphForm
 struct  CFlexiaModel
 {
 	std::string				m_Comments;
-	vector<CMorphForm>	m_Flexia;
+	std::vector<CMorphForm>	m_Flexia;
 
 	bool		operator == (const CFlexiaModel& X) const 
 	{
@@ -45,7 +45,7 @@ struct  CFlexiaModel
 //----------------------------------------------------------------------------
 struct CAccentModel 
 {
-	vector<BYTE> m_Accents;
+	std::vector<BYTE> m_Accents;
 
 	bool operator == (const CAccentModel& X) const
 	{
@@ -108,13 +108,13 @@ class CMorphWizardBase {
 public:
 	MorphLanguageEnum		m_Language;
 
-	//  a vector of all Paradigms 
-	vector<CFlexiaModel>	m_FlexiaModels;
+	//  a std::vector of all Paradigms 
+	std::vector<CFlexiaModel>	m_FlexiaModels;
 
 	// all accent models
-	vector<CAccentModel>	m_AccentModels;
+	std::vector<CAccentModel>	m_AccentModels;
 
-	bool read_utf8_line(ifstream& inp, std::string& line) const;
+	bool read_utf8_line(std::ifstream& inp, std::string& line) const;
 	std::string str_to_utf8(const std::string& line) const;
 
 	void ReadFlexiaModels(std::ifstream&);

@@ -68,7 +68,7 @@ struct CFormAndGrammems {
 
 struct CFormGroup {
 	QWORD			   m_IntersectGrammems;
-	vector<int>    m_FormNos;
+	std::vector<int>    m_FormNos;
 };
 
 int GetWidePOS(BYTE POS, QWORD Grammems, MorphLanguageEnum Langua)
@@ -101,10 +101,10 @@ std::string GetGramInfoStr(std::string GramInfo, const CMorphologyHolder* Holder
 
 };
 
-vector<CFormGroup> GetParadigmByGroups(const vector<CFormAndGrammems>& Forms, const CMorphologyHolder* Holder, QWORD& CommonGrammems)
+std::vector<CFormGroup> GetParadigmByGroups(const std::vector<CFormAndGrammems>& Forms, const CMorphologyHolder* Holder, QWORD& CommonGrammems)
 {
-	vector<CFormGroup> Results;
-	vector<bool> IncludedVector;
+	std::vector<CFormGroup> Results;
+	std::vector<bool> IncludedVector;
 	int i = 0;
 	const CAgramtab* pGramtab = Holder->m_pGramTab;
 
@@ -158,22 +158,22 @@ vector<CFormGroup> GetParadigmByGroups(const vector<CFormAndGrammems>& Forms, co
 };
 
 
-vector<CFormGroup>  BuildInterfaceParadigmPart(const CMorphologyHolder* Holder, const vector<CFormAndGrammems> FormAndGrammems, int& FormNo, QWORD& commonGrammems) {
+std::vector<CFormGroup>  BuildInterfaceParadigmPart(const CMorphologyHolder* Holder, const std::vector<CFormAndGrammems> FormAndGrammems, int& FormNo, QWORD& commonGrammems) {
 	int EndFormNo = FormNo + 1;
 	for (; EndFormNo < FormAndGrammems.size(); EndFormNo++)
 		if (FormAndGrammems[FormNo].m_POS != FormAndGrammems[EndFormNo].m_POS)
 			break;
-	vector<CFormAndGrammems> FormAndGrammemsPart;
+	std::vector<CFormAndGrammems> FormAndGrammemsPart;
 	FormAndGrammemsPart.insert(FormAndGrammemsPart.begin(), FormAndGrammems.begin() + FormNo, FormAndGrammems.begin() + EndFormNo);
 	FormNo = EndFormNo;
 	return GetParadigmByGroups(FormAndGrammemsPart, Holder, commonGrammems);
 };
 
 
-vector<CFormAndGrammems> BuildFormAndGrammems(const CMorphologyHolder* Holder, const CFormInfo* piParadigm) {
+std::vector<CFormAndGrammems> BuildFormAndGrammems(const CMorphologyHolder* Holder, const CFormInfo* piParadigm) {
 	const CAgramtab* pGramtab = Holder->m_pGramTab;
 	// получаем все формы и граммемы в массив FormAndGrammems
-	vector<CFormAndGrammems> FormAndGrammems;
+	std::vector<CFormAndGrammems> FormAndGrammems;
 	for (int j = 0; j < piParadigm->GetCount(); j++)
 	{
 		std::string GramInfo = piParadigm->GetAncode(j);
@@ -225,13 +225,13 @@ static std::string GetInterfacePOS(std::string POS)
 
 nlohmann::json  GetParadigmFromDictionary(const CFormInfo* piParadigm, const CMorphologyHolder* Holder, bool sortForms) {
 	const CAgramtab* pGramtab = Holder->m_pGramTab;
-	const vector<CFormAndGrammems> FormAndGrammems = BuildFormAndGrammems(Holder, piParadigm);
+	const std::vector<CFormAndGrammems> FormAndGrammems = BuildFormAndGrammems(Holder, piParadigm);
 	nlohmann::json result = nlohmann::json::array();
 	int FormNo = 0;
 	while (FormNo < FormAndGrammems.size()) {
 		int saveFormNo = FormNo;
 		QWORD commonGrammems;
-		const vector<CFormGroup> FormGroups = BuildInterfaceParadigmPart(Holder, FormAndGrammems, FormNo, commonGrammems);
+		const std::vector<CFormGroup> FormGroups = BuildInterfaceParadigmPart(Holder, FormAndGrammems, FormNo, commonGrammems);
 		assert(FormNo > saveFormNo);
 		auto prdPart = nlohmann::json::object();
 		std::string pos = GetInterfacePOS(FormAndGrammems[saveFormNo].m_POS);
@@ -309,7 +309,7 @@ inline  bool IsUpper(int x, MorphLanguageEnum Langua)
 
 
 
-bool GetParadigmCollection(std::string WordForm, vector<CFormInfo>&	Paradigms, const CMorphologyHolder* Holder)
+bool GetParadigmCollection(std::string WordForm, std::vector<CFormInfo>&	Paradigms, const CMorphologyHolder* Holder)
 {
 	if (WordForm.length() == 0)	{
 		return false;
@@ -330,7 +330,7 @@ bool GetParadigmCollection(std::string WordForm, vector<CFormInfo>&	Paradigms, c
 };
 
 std::string LemmatizeJson(std::string WordForm, const CMorphologyHolder* Holder, bool withParadigm, bool prettyJson, bool sortForms) {
-	vector<CFormInfo>	Paradigms;
+	std::vector<CFormInfo>	Paradigms;
 	if (!GetParadigmCollection(WordForm, Paradigms, Holder)) {
 		return "[]";
 	};

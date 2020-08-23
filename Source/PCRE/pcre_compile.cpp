@@ -47,8 +47,8 @@ supporting internal functions that are not used by other modules. */
 #endif
 
 #define NLBLOCK cd             /* Block containing newline information */
-#define PSSTART start_pattern  /* Field containing processed string start */
-#define PSEND   end_pattern    /* Field containing processed string end */
+#define PSSTART start_pattern  /* Field containing processed std::string start */
+#define PSEND   end_pattern    /* Field containing processed std::string end */
 
 #include "pcre_internal.h"
 
@@ -141,7 +141,7 @@ static const short int escapes[] = {
 
 
 /* Table of special "verbs" like (*PRUNE). This is a short table, so it is
-searched linearly. Put all the names into a single string, in order to reduce
+searched linearly. Put all the names into a single std::string, in order to reduce
 the number of relocations when a shared library is dynamically linked. */
 
 typedef struct verbitem {
@@ -172,7 +172,7 @@ static int verbcount = sizeof(verbs)/sizeof(verbitem);
 
 
 /* Tables of names of POSIX character classes and their lengths. The names are
-now all in a single string, to reduce the number of relocations when a shared
+now all in a single std::string, to reduce the number of relocations when a shared
 library is dynamically loaded. The list of lengths is terminated by a zero
 length entry. The first three must be alpha, lower, upper, as this is assumed
 for handling case independence. */
@@ -221,7 +221,7 @@ are passed to the outside world. Do not ever re-use any error number, because
 they are documented. Always add a new error instead. Messages marked DEAD below
 are no longer used. This used to be a table of strings, but in order to reduce
 the number of relocations needed when a shared library is loaded dynamically,
-it is now one long string. We cannot use a table of offsets, because the
+it is now one long std::string. We cannot use a table of offsets, because the
 lengths of inserts such as XSTRING(MAX_NAME_SIZE) are not known. Instead, we
 simply count through to the one we want - this isn't a performance issue
 because these strings are used only when there is a compilation error. */
@@ -239,7 +239,7 @@ static const char error_texts[] =
   "range out of order in character class\0"
   "nothing to repeat\0"
   /* 10 */
-  "operand of unlimited repeat could match the empty string\0"  /** DEAD **/
+  "operand of unlimited repeat could match the empty std::string\0"  /** DEAD **/
   "internal error: unexpected repeat\0"
   "unrecognized character after (? or (?-\0"
   "POSIX named classes are supported only within a class\0"
@@ -279,7 +279,7 @@ static const char error_texts[] =
   "unrecognized character after (?P\0"
   "syntax error in subpattern name (missing terminator)\0"
   "two named subpatterns have the same name\0"
-  "invalid UTF-8 string\0"
+  "invalid UTF-8 std::string\0"
   /* 45 */
   "support for \\P, \\p, and \\X has not been compiled\0"
   "malformed \\P or \\p sequence\0"
@@ -441,13 +441,13 @@ static BOOL
 *            Find an error text                  *
 *************************************************/
 
-/* The error texts are now all in one long string, to save on relocations. As
+/* The error texts are now all in one long std::string, to save on relocations. As
 some of the text is of unknown length, we can't use a table of offsets.
 Instead, just count through the strings. This is not a performance issue
 because it happens only when there has been a compilation error.
 
 Argument:   the error number
-Returns:    pointer to the error string
+Returns:    pointer to the error std::string
 */
 
 static const char *
@@ -590,7 +590,7 @@ else
     c = -(ESC_REF + c);
     break;
 
-    /* The handling of escape sequences consisting of a string of digits
+    /* The handling of escape sequences consisting of a std::string of digits
     starting with one that is not zero is not straightforward. By experiment,
     the way Perl works seems to be as follows:
 
@@ -1505,7 +1505,7 @@ for (;;)
 *************************************************/
 
 /* This function scans through a branch of a compiled pattern to see whether it
-can match the empty string or not. It is called from could_be_empty()
+can match the empty std::string or not. It is called from could_be_empty()
 below and from compile_branch() when checking for an unlimited repeat of a
 group that can match nothing. Note that first_significant_code() skips over
 backward and negative forward assertions when its final argument is TRUE. If we
@@ -1706,7 +1706,7 @@ return TRUE;
 
 /* This function is called to check for left recursive calls. We want to check
 the current branch of the current pattern to see if it could match the empty
-string. If it could, we must look outwards for branches at other levels,
+std::string. If it could, we must look outwards for branches at other levels,
 stopping when we pass beyond the bracket which is the subject of the recursion.
 
 Arguments:
@@ -2321,7 +2321,7 @@ switch(op_code)
 *           Compile one branch                   *
 *************************************************/
 
-/* Scan the pattern, compiling it into the a vector. If the options are
+/* Scan the pattern, compiling it into the a std::vector. If the options are
 changed during the branch, the pointer is used to change the external options
 bits. This function is used during the pre-compile phase when we are trying
 to find out the amount of memory needed, as well as during the real compile
@@ -2553,7 +2553,7 @@ for (;; ptr++)
         }
       if (*ptr != 0) continue;
 
-      /* Else fall through to handle end of string */
+      /* Else fall through to handle end of std::string */
       c = 0;
       }
     }
@@ -2569,7 +2569,7 @@ for (;; ptr++)
   switch(c)
     {
     /* ===================================================================*/
-    case 0:                        /* The branch terminates at string end */
+    case 0:                        /* The branch terminates at std::string end */
     case '|':                      /* or | or ) */
     case ')':
     *firstbyteptr = firstbyte;
@@ -2820,11 +2820,11 @@ for (;; ptr++)
         if (-c == ESC_b) c = '\b';       /* \b is backspace in a class */
         else if (-c == ESC_X) c = 'X';   /* \X is literal X in a class */
         else if (-c == ESC_R) c = 'R';   /* \R is literal R in a class */
-        else if (-c == ESC_Q)            /* Handle start of quoted string */
+        else if (-c == ESC_Q)            /* Handle start of quoted std::string */
           {
           if (ptr[1] == '\\' && ptr[2] == 'E')
             {
-            ptr += 2; /* avoid empty string */
+            ptr += 2; /* avoid empty std::string */
             }
           else inescq = TRUE;
           continue;
@@ -3403,7 +3403,7 @@ we set the flag only if there is a literal "\r" or "\n" in the class. */
     /* If there are no characters > 255, set the opcode to OP_CLASS or
     OP_NCLASS, depending on whether the whole class was negated and whether
     there were negative specials such as \S in the class. Then copy the 32-byte
-    map into the code vector, negating it if necessary. */
+    map into the code std::vector, negating it if necessary. */
 
     *code++ = (negate_class == should_flip_negation) ? OP_CLASS : OP_NCLASS;
     if (negate_class)
@@ -3995,7 +3995,7 @@ we set the flag only if there is a literal "\r" or "\n" in the class. */
       correct offset was computed above.
 
       Then, when we are doing the actual compile phase, check to see whether
-      this group is a non-atomic one that could match an empty string. If so,
+      this group is a non-atomic one that could match an empty std::string. If so,
       convert the initial operator to the S form (e.g. OP_BRA -> OP_SBRA) so
       that runtime checking can be done. [This check is also applied to
       atomic groups at runtime, but in a different way.] */
@@ -4036,7 +4036,7 @@ we set the flag only if there is a literal "\r" or "\n" in the class. */
     anything else, we wrap the entire repeated item inside OP_ONCE brackets.
     The '+' notation is just syntactic sugar, taken from Sun's Java package,
     but the special opcodes can optimize it a bit. The repeated item starts at
-    tempcode, not at previous, which might be the first part of a string whose
+    tempcode, not at previous, which might be the first part of a std::string whose
     (former) last char we repeated.
 
     Possessifying an 'exact' quantifier has no effect, so we can ignore it. But
@@ -4082,7 +4082,7 @@ we set the flag only if there is a literal "\r" or "\n" in the class. */
       }
 
     /* In all case we no longer have a previous item. We also set the
-    "follows varying string" flag for subsequently encountered reqbytes if
+    "follows varying std::string" flag for subsequently encountered reqbytes if
     it isn't already set and we have just passed a varying length item. */
 
     END_REPEAT:
@@ -4267,7 +4267,7 @@ we set the flag only if there is a literal "\r" or "\n" in the class. */
         if (lengthptr != NULL) break;
 
         /* In the real compile we do the work of looking for the actual
-        reference. If the string started with "+" or "-" we require the rest to
+        reference. If the std::string started with "+" or "-" we require the rest to
         be digits, in which case recno will be set. */
 
         if (refsign > 0)
@@ -5057,9 +5057,9 @@ we set the flag only if there is a literal "\r" or "\n" in the class. */
 
     if (c < 0)
       {
-      if (-c == ESC_Q)            /* Handle start of quoted string */
+      if (-c == ESC_Q)            /* Handle start of quoted std::string */
         {
-        if (ptr[1] == '\\' && ptr[2] == 'E') ptr += 2; /* avoid empty string */
+        if (ptr[1] == '\\' && ptr[2] == 'E') ptr += 2; /* avoid empty std::string */
           else inescq = TRUE;
         continue;
         }
@@ -5243,7 +5243,7 @@ return FALSE;
 *************************************************/
 
 /* On entry, ptr is pointing past the bracket character, but on return it
-points to the closing bracket, or vertical bar, or end of string. The code
+points to the closing bracket, or vertical bar, or end of std::string. The code
 variable is pointing at the byte into which the BRA operator has been stored.
 If the ims options are changed at the start (for a (?ims: group) or during any
 branch, we need to insert an OP_OPT item at the start of every following branch
@@ -5402,7 +5402,7 @@ for (;;)
       else reqbyte |= branchreqbyte;   /* To "or" REQ_VARY */
       }
 
-    /* If lookbehind, check that this branch matches a fixed-length string, and
+    /* If lookbehind, check that this branch matches a fixed-length std::string, and
     put the length into the OP_REVERSE item. Temporarily mark the end of the
     branch with OP_END. */
 
@@ -5754,7 +5754,7 @@ return c;
 *        Compile a Regular Expression            *
 *************************************************/
 
-/* This function takes a string and returns a pointer to a block of store
+/* This function takes a std::string and returns a pointer to a block of store
 holding a compiled version of the expression. The original API for this
 function had no error code return variable; it is retained for backwards
 compatibility. The new function is given a new name.

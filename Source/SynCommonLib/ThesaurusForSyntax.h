@@ -10,12 +10,12 @@
 #include "Group.h"
 
 
-typedef vector<const char*> CVectorOfStrings;
-typedef pair<int,int>   CIntPair;
-typedef vector<	int	>     CIntVector;
-typedef map< int, CIntVector > CInt2Vector;
-typedef set<int> CSetOfInt;
-typedef pair<int const, CIntVector> CInt2IntVectorPair;
+typedef std::vector<const char*> CVectorOfStrings;
+typedef std::pair<int,int>   CIntPair;
+typedef std::vector<	int	>     CIntVector;
+typedef std::map< int, CIntVector > CInt2Vector;
+typedef std::set<int> CSetOfInt;
+typedef std::pair<int const, CIntVector> CInt2IntVectorPair;
 
 class CGroups;
 
@@ -52,11 +52,11 @@ public:
 };
 
 
-typedef vector<CTermin> CVectorOfTermins;
+typedef std::vector<CTermin> CVectorOfTermins;
 
 
 
-class CTerminSort_less : public binary_function<int, int, bool>
+class CTerminSort_less
 {
 public:
 	CTerminSort_less(const CVectorOfTermins* pTermins)
@@ -115,7 +115,7 @@ public:
 	virtual ~CThesaurusForSyntax();
 
 	CThesaurus* LoadThesaurus(const char* ThesName) const;
-	bool LoadThesaurus_mt(std::string tn, vector<CThesaurus*>* ts);
+	bool LoadThesaurus_mt(std::string tn, std::vector<CThesaurus*>* ts);
 
 	bool ReadThesaurusForSyntax(const char* ThesName, const CThesaurus* Thes, StringHashSet& p_vectorAccost);
 	bool ReadTermins(const CThesaurus* piThes, EThesType eThesType);
@@ -131,7 +131,7 @@ public:
 protected:
 	
 	CVectorOfTermins					m_Termins; 	
-	map<EThesType, vector<CGroups> >	m_AllThesModels;	
+	std::map<EThesType, std::vector<CGroups> >	m_AllThesModels;	
 	CAgramtab*							m_pEngGramTab;
 
 	virtual void AssignMainGroupsToModel(CGroups& model, const CInnerModel& piModel) = 0;

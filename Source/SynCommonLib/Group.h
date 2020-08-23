@@ -54,7 +54,7 @@ struct CClauseRelation
 		int						m_iClauseNo;
 		const CMorphVariant*	m_pClauseVar;
 		CPeriod					m_ClausePeriod;//используется только для межклаузных связей
-		vector<EClauseType>		m_ClauseTypes; //используется только для межклаузных связей
+		std::vector<EClauseType>		m_ClauseTypes; //используется только для межклаузных связей
 		CClauseRelation();
 };
 
@@ -96,7 +96,7 @@ public:
 
 };
 
-typedef vector<int> CIntVector;
+typedef std::vector<int> CIntVector;
 
 
 class CGroup : public CTypedPeriod
@@ -161,13 +161,13 @@ public:
 class CGroupsVector 
 {
 protected:
-	vector<CGroup>		m_Groups;
+	std::vector<CGroup>		m_Groups;
 
 public:
 	// syntactic relation
-	vector<CRelation>	m_Relations;
+	std::vector<CRelation>	m_Relations;
 	
-	const vector<CGroup>&	GetGroups() const {return m_Groups; };
+	const std::vector<CGroup>&	GetGroups() const {return m_Groups; };
 	CGroup*					GetGroupPtr(int i)  {return &(m_Groups[i]); };
 	void					Clear();
 
@@ -193,8 +193,8 @@ class CGroups  : public CGroupsVector
 {
 protected:
 	const CSyntaxOpt*	m_pSyntaxOptions;
-	vector<CGroup>		m_GroupsToRebuild;
-	vector<CGroup>		m_AtomicGroups;
+	std::vector<CGroup>		m_GroupsToRebuild;
+	std::vector<CGroup>		m_AtomicGroups;
 	
 
 public:
@@ -243,7 +243,7 @@ public:
 	void	ResizeAtomicDummy(size_t Number);
 };
 
-//extern int get_maximal_group_no(vector<CGroup>::const_iterator begin, vector<CGroup>::const_iterator end, size_t WordNo);
+//extern int get_maximal_group_no(std::vector<CGroup>::const_iterator begin, std::vector<CGroup>::const_iterator end, size_t WordNo);
 
 
 

@@ -57,7 +57,7 @@ void show_register(std::string &s, RegisterEnum Register) {
             EngRusMakeUpper(s);
 }
 
-vector<std::string> words;
+std::vector<std::string> words;
 
 std::string GetWordStrOfNode(const CRusSemStructure& SS, int ssi, bool bOnlyWords = false) {
     const CRusSemNode &Node = SS.m_Nodes[ssi];

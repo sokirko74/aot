@@ -26,7 +26,7 @@ protected: // create from serialization only
 public:
    CWinThread* m_MessageKiller;
    CRossDoc*   m_pRossDoc;
-   vector<CString> m_Lines;
+   std::vector<CString> m_Lines;
 
    WORD  m_UnitNo;
    CTempArticle m_Article;
@@ -48,7 +48,7 @@ public:
    BOOL    OpenArticle (WORD UnitNo, CRossDoc* pRossDoc);
    CDictionary* GetRoss () {return m_pRossDoc->GetRoss();}
            bool Markout ();
-		   bool AddCortegeToVector (vector<TCortege10>& L, CRossDevTextField& F);
+		   bool AddCortegeToVector (std::vector<TCortege10>& L, CRossDevTextField& F);
    virtual void SetTitle(LPCTSTR lpszTitle);
    virtual BOOL SaveModified(); 
    virtual BOOL DoFileSave();

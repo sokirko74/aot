@@ -8,7 +8,7 @@
 
 int CThesaurus::GetConceptNoByConceptId (long ConceptId) const
 {
-	vector<CConcept>::const_iterator It = lower_bound(m_Concepts.begin(), m_Concepts.end(),CConcept(ConceptId));
+	std::vector<CConcept>::const_iterator It = lower_bound(m_Concepts.begin(), m_Concepts.end(),CConcept(ConceptId));
 	if  (  (It != m_Concepts.end())
 		 &&(It->m_ConceptId==ConceptId)
 		)

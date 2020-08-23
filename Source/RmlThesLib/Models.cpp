@@ -110,7 +110,7 @@ bool CThesaurus::LoadModels(std::string FileName) {
         return false;
     while (fgets(buff, 2000, fp)) {
         CInnerModel M;
-        string innerStr = convert_from_utf8(buff, m_MainLanguage);
+        std::string innerStr = convert_from_utf8(buff, m_MainLanguage);
         StringTokenizer Line(innerStr.c_str(), FieldDelimiter);
         int i = 0;
         while (true) {

@@ -43,7 +43,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 
 
 // будем искать Subj
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelationsInThisClause(iEngNode,inRels);
 	if( inRels.size() > 1 )
 		return; // это нечто, чего мы не понимаем
@@ -77,7 +77,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 		 )
 		{
 			iRelSubj = inRels[0];
-			vector<long> inRelsSubj;
+			std::vector<long> inRelsSubj;
 			GetIncomingRelationsInThisClause(iEnode,inRelsSubj);
 			if( inRelsSubj.size() > 1 )
 				return; // это нечто, чего мы не понимаем
@@ -119,10 +119,10 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 	}
 
 // ищем субъект (неименованные связи)
-	vector<long> outRels;
+	std::vector<long> outRels;
 	if( iRelSubj==-1 )
 	{
-		vector<long> outRelsRaw;
+		std::vector<long> outRelsRaw;
 		GetOutcomingRelations(iEngNode,outRelsRaw);
 
 		for( int j=0; j<outRelsRaw.size(); j++ )
@@ -169,7 +169,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 		const CSemNode& rusNode = RusStr.GetNode(iParRus);
 		if(	RusStr.GetNode(iParRus).m_NodeType == MNA )
 			iNodeMNA = m_Relations[inRels[0]].m_SourceNodeNo;
-		vector<long> outMna;
+		std::vector<long> outMna;
 		GetOutcomingRelations(iParent,outMna);
 		for( int i=0; i<outMna.size(); i++ )
 		{
@@ -287,7 +287,7 @@ void  CEngSemStructure::ApplyAdjShortRule(int iEngNode)
 	 создан инфинитив "to be"
 	 Сокирко 31 июня 2001 года
 	*/
-	vector<long> Rels;
+	std::vector<long> Rels;
 	GetIncomingRelations(iEngNode, Rels, false);
 	if (Rels.size()  == 1) 
 	 if (HasGramFet(m_Relations[Rels[0]], "to be+ADJECTIVE"))
@@ -329,7 +329,7 @@ void  CEngSemStructure::ApplyAdjShortRule(int iEngNode)
 	m_Relations.push_back(newRel); // become->Node
 
 // поищем Subj
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	int iSubRel = -1;
 	for( int i=0; i<outRels.size(); i++ )
@@ -401,7 +401,7 @@ void CEngSemStructure::ApplyPredicativeRule(int iEngNode)
 		m_Nodes[iEngNode].HasPOS(eVERB) )
 		return;
 
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelations(iEngNode,inRels,false);
 	for( int i=0; i<inRels.size(); i++ )
 	{
@@ -454,7 +454,7 @@ CEngSemRelation newRel(CValency("S-ACT",A_C),m_Nodes.size()-1,iEngNode,"");	newR
 	m_Relations.push_back(newRel); // be->Pred
 
 // поищем Subj, поставим предлог for
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	int iSubjRel = -1;
 	for( int i=0; i<outRels.size(); i++ )
@@ -549,12 +549,12 @@ void CEngSemStructure::ApplyTwoNegationsRule(int iEngNode)
 	if( !m_Nodes[iEngNode].HasRelOperator(_R("НЕ")) )
 		return;
 //
-	vector<long> outChilds;
+	std::vector<long> outChilds;
 	GetChildNodes(iEngNode,outChilds);
 	if( outChilds.size() < 1 )
 		return;
 //
-	vector<long> negChilds;
+	std::vector<long> negChilds;
 	for( int i=0; i<outChilds.size(); i++ )
 	{
 		if( HasNeg(m_Nodes[outChilds[i]].GetUnitNo(),m_Nodes[outChilds[i]].GetType()) )
@@ -567,7 +567,7 @@ void CEngSemStructure::ApplyTwoNegationsRule(int iEngNode)
 	if( negChilds.size() == 1 )
 		return;
 //
-	vector<long> rusNodes;
+	std::vector<long> rusNodes;
 	for( int i=0; i<negChilds.size(); i++ )
 	{			
 		if( m_Nodes[negChilds[i]].RusNode != -1 )
@@ -584,7 +584,7 @@ void CEngSemStructure::ApplyTwoNegationsRule(int iEngNode)
 
 // весь следующий код на тему "ничего и никого"
 		bool bCaseMNA = false;
-		vector<long> inRels;
+		std::vector<long> inRels;
 		GetIncomingRelations(negChilds[i],inRels,false);
 		if( inRels.size() == 1 )
 		{
@@ -604,7 +604,7 @@ void CEngSemStructure::ApplyTwoNegationsRule(int iEngNode)
 		}
 
 		int	iNodeMNA = m_Relations[inRels[0]].m_SourceNodeNo;
-		vector<long> outMna;
+		std::vector<long> outMna;
 		GetOutcomingRelations(iNodeMNA,outMna);
 		bool bInFirstMNA = false;
 		for( int j=0; j<outMna.size(); j++ )
@@ -659,7 +659,7 @@ void CEngSemStructure::ImpersonalVerb(int iEngNode)
 	if( engNode.m_Words[0].m_Lemma=="keep" )
 		return;
 
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelations(iEngNode, inRels, false);
 	for( int k=0; k<inRels.size(); k++ )
 	{
@@ -691,7 +691,7 @@ void CEngSemStructure::ImpersonalVerb(int iEngNode)
 	if ( GetSubj(iEngNode) != -1 ) return;
 
 	// для помет pass(ADR) ищем адресата	
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 
 	int iAdrRel = -1;
@@ -762,7 +762,7 @@ if( m_Relations[outRels[i]].m_Valency.m_RelationStr=="ADR" )			{
 			int iNode = m_Relations[outRels[i]].m_TargetNodeNo;
 			if( !m_Nodes[iNode].HasPOS(eVERB) )
 				continue;
-			vector<long> outRels2;
+			std::vector<long> outRels2;
 			GetOutcomingRelations(iNode,outRels2);
 			bool bHasSub = false;
 			for( int j=0; j<outRels2.size(); j++ )
@@ -868,7 +868,7 @@ void CEngSemStructure::InfinitiveAndIf(int iEngNode)
 if( !GetRossHolder(rusNode.GetType())->HasFieldValue(std::string("SF"),std::string("ANIM"),rusNode.GetUnitNo(),1) )		return;
 
 // проверим, что есть межклаузная связь с "если"
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelations(iEngNode, inRels, false);
 	if( inRels.size() != 1 )
 		return;
@@ -886,7 +886,7 @@ if( !GetRossHolder(rusNode.GetType())->HasFieldValue(std::string("SF"),std::stri
 		return;
 
 // проверим, что нет subj
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{

@@ -13,7 +13,7 @@ void CRusSemStructure::FindPragmaticallyStrongSynRel ()
 		// тогда таким отношениям можно доверять
 		if (m_SynRelations[RelNo].m_SynRelName.substr(0,5) == _R("ОДНОР"))
 		{
-			vector<long> Rels;
+			std::vector<long> Rels;
 			GetOutcomingSynRelations(m_SynRelations[RelNo].m_SourceNodeNo, Rels);
 			long Count =0;
 			for (long i=0;i < Rels.size(); i++) 
@@ -78,7 +78,7 @@ void CRusSemStructure::ApplySynStr (long ClauseNo)
 					&& m_Nodes[i].IsWordContainer()
 				)
 			{
-				vector<long> SynRels;
+				std::vector<long> SynRels;
 				GetIncomingSynRelations(i, SynRels);
 
 				for (long	l=0; l < SynRels.size(); l++)

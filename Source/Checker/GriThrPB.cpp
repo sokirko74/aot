@@ -66,7 +66,7 @@ static char   buf[12];
 void CThrPB::Percent(int iValue)
 {
 	ASSERT( iValue>=0 && iValue<=100 );
-	iValue = (max(0,min(100,iValue)));
+	iValue = (max(0, min(100,iValue)));
 	if( iValue == m_iValue )
 		return;
 	m_iValue = iValue;

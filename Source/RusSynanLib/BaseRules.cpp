@@ -346,7 +346,7 @@ bool CRusSentence::RuleForClauseDisruptWithSubordinateClauses(int iClauseNum)
 
 	if (!GetClause(iNxt).HasLeftStarter()) return false;
 
-	vector<CPeriod> vClausesForEnclose;
+	std::vector<CPeriod> vClausesForEnclose;
 	int iNum = -1;
 
 	for ( i = pClause2.m_iLastWord+1; i < GetWords().size(); )

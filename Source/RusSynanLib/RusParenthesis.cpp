@@ -36,9 +36,9 @@ bool  CRusSentence::CheckBorders (int start, int end) const
 };
 
 // возвращает список отрезков, на которых не может быть вводных оборотов, поскольку они не отделены от предикатных слова знаками препинанния
-vector<CPeriod> CRusSentence::FindParenthesisOborotsWithoutComma() const
+std::vector<CPeriod> CRusSentence::FindParenthesisOborotsWithoutComma() const
 {
-	vector<CPeriod> OborotsToDel;
+	std::vector<CPeriod> OborotsToDel;
     for (int i = 0; i < m_Words.size(); i++)
     {
         for (size_t HomNo=0; HomNo< m_Words[i].GetHomonymsCount(); HomNo++)
@@ -65,7 +65,7 @@ vector<CPeriod> CRusSentence::FindParenthesisOborotsWithoutComma() const
 void CRusSentence::DetermineParenthesis()
 {
 
-	vector<CPeriod> v_oborots_del = FindParenthesisOborotsWithoutComma();
+	std::vector<CPeriod> v_oborots_del = FindParenthesisOborotsWithoutComma();
 	
     for (int i = 0; i < v_oborots_del.size(); i++)
     {

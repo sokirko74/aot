@@ -11,7 +11,7 @@ class ATL_NO_VTABLE CCOMParadigmCollection :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMParadigmCollection, &CLSID_ParadigmCollection>,
 	public IDispatchImpl<IParadigmCollection, &IID_IParadigmCollection, &LIBID_LEMMATIZERLib>,
-	public vector<	CComObject<CCOMParadigm>*	>
+	public std::vector<	CComObject<CCOMParadigm>*	>
 {
 public:
 	CCOMParadigmCollection()

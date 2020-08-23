@@ -228,7 +228,7 @@ bool CRossHolder::InitDomainsConsts()
 
 
 // По полю выдает набор	кортежей, которые ему приписано
-void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE LeafId, BYTE BracketLeafId) const	
+void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, std::vector<TCortege>& vectorCorteges, BYTE LeafId, BYTE BracketLeafId) const	
 {
 	if (UnitNo == ErrUnitNo)	return;
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
@@ -247,7 +247,7 @@ void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, vector<T
 // Проверяет, стоит	ли на первом месте одного из кортежей поля strFieldName	константа strValue
 bool CRossHolder::HasFieldValue(std::string strFieldName, std::string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	GetFieldValues(strFieldName, UnitNo, corteges, LeafId);
 	for(int	i =	0 ;	i <	corteges.size()	; i++ )
 	{
@@ -262,7 +262,7 @@ bool CRossHolder::HasFieldValue(std::string strFieldName, std::string	strValue, 
 // Проверяет, является ли одним	из значений	поля strFieldName константа	strValue
 bool CRossHolder::HasFullFieldValue(std::string strFieldName, std::string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	GetFieldValues(strFieldName, UnitNo, corteges, LeafId);
 	Trim(strValue);
 	for(int	i =	0 ;	i <	corteges.size()	; i++ )
@@ -346,12 +346,12 @@ WORD CRossHolder::LocateUnit (const char* UnitStr, BYTE	MeanNum) const
 	return GetRoss()->LocateUnit(UnitStr, MeanNum);
 };
 
-long  CRossHolder::GetDopFields(long UnitNo, vector<CDopField>&	DopFields) const
+long  CRossHolder::GetDopFields(long UnitNo, std::vector<CDopField>&	DopFields) const
 {
   // в этом	векторе	все	узлы термина
-  vector<long> AllItems;
+  std::vector<long> AllItems;
    // в	этом векторе лежат узлы	термина, в которые вошло хотя бы одно отношение
-  vector<long> SubItems;
+  std::vector<long> SubItems;
   BYTE DopFldName =	GetRoss()->GetFieldNoByFieldStr("AUX");
   if (!GetRoss()->IsEmptyArticle(UnitNo)) 
   for (size_t k=GetRoss()->GetUnitStartPos(UnitNo);	k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
@@ -404,7 +404,7 @@ bool CRossHolder::GetVal(long UnitNo, CValency& V) const
 };
 
 // эта функция не обнуляет  вектор OutVector!!!
-void CRossHolder::GetLexFuncts (size_t UnitNo,  vector<CLexicalFunctionField>& OutVector, DictTypeEnum type /*NoneRoss*/, const CRossHolder* pRossHolderObor /*= NULL*/)  const
+void CRossHolder::GetLexFuncts (size_t UnitNo,  std::vector<CLexicalFunctionField>& OutVector, DictTypeEnum type /*NoneRoss*/, const CRossHolder* pRossHolderObor /*= NULL*/)  const
 {
   if (!GetRoss()->IsEmptyArticle(UnitNo))
   for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i<= GetRoss()->GetUnitEndPos(UnitNo); i++)

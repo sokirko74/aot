@@ -1,8 +1,8 @@
 #include  "MorphXmlToken.h"
 #include  "util_classes.h"
-#include  <set>
+#include <set>
 
-void	CXmlMorphAnnot::GetAsSetOfProperties(vector<string>& Result)  const
+void	CXmlMorphAnnot::GetAsSetOfProperties(std::vector<std::string>& Result)  const
 {
 	Result.clear();
 
@@ -35,7 +35,7 @@ bool CXmlToken::IsImportantPunct() const
 
 class CRusCorpFeatures {
 public:
-    std::set<string> m_RusCorpFeatures;
+    std::set<std::string> m_RusCorpFeatures;
     CRusCorpFeatures()
     {
         m_RusCorpFeatures.insert("adv");
@@ -111,7 +111,7 @@ bool IsImportantRusCorpFeature(const std::string& s)
 std::string CXmlMorphAnnot::BuildRusCorpAnnot() const
 {
     StringTokenizer tok (m_GrammemsStr.c_str(), ", ");
-    set<string> gs;
+    std::set<std::string> gs;
     while ( tok() )
     {
         std::string s = tok.val();
@@ -121,7 +121,7 @@ std::string CXmlMorphAnnot::BuildRusCorpAnnot() const
     }
 
     std::string res;
-    for (set<string>::const_iterator it = gs.begin(); it != gs.end(); it++)
+    for (std::set<std::string>::const_iterator it = gs.begin(); it != gs.end(); it++)
         res += *it + "_";
     if (!res.empty())
         res.erase(res.length() -1);

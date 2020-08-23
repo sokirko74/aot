@@ -107,7 +107,7 @@ extern "C" {
 #define PCRE_BSR_ANYCRLF        0x00800000
 #define PCRE_BSR_UNICODE        0x01000000
 
-/* Exec-time and get/set-time error codes */
+/* Exec-time and get/std::set-time error codes */
 
 #define PCRE_ERROR_NOMATCH         (-1)
 #define PCRE_ERROR_NULL            (-2)
@@ -193,7 +193,7 @@ such as way as to be extensible. Always add new fields at the end, in order to
 remain compatible. */
 
 typedef struct pcre_extra {
-  unsigned long int flags;        /* Bits for which fields are set */
+  unsigned long int flags;        /* Bits for which fields are std::set */
   void *study_data;               /* Opaque data from pcre_study() */
   unsigned long int match_limit;  /* Maximum number of calls to match() */
   void *callout_data;             /* Data passed back in callouts */
@@ -210,7 +210,7 @@ typedef struct pcre_callout_block {
   int          version;           /* Identifies version of block */
   /* ------------------------ Version 0 ------------------------------- */
   int          callout_number;    /* Number compiled into pattern */
-  int         *offset_vector;     /* The offset vector */
+  int         *offset_vector;     /* The offset std::vector */
   PCRE_SPTR    subject;           /* The subject being matched */
   int          subject_length;    /* The length of the subject */
   int          start_match;       /* Offset to start of this match attempt */
@@ -224,7 +224,7 @@ typedef struct pcre_callout_block {
   /* ------------------------------------------------------------------ */
 } pcre_callout_block;
 
-/* Indirection for store get and free functions. These can be set to
+/* Indirection for store get and free functions. These can be std::set to
 alternative malloc/free functions if required. Special ones are used in the
 non-recursive case for "frames". There is also an optional callout function
 that is triggered by the (?) regex item. For Virtual Pascal, these definitions

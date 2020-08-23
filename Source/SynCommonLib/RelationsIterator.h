@@ -26,9 +26,9 @@ class CRelationsIterator
 {
 protected:
 	const CSentence*		m_pSent;
-	map<int,CSVI>			m_mapClauseNo2SynVar;
-	vector<CSynOutputRelation>	m_vectorIRelations;
-	vector<CGroup>			m_vectorGroups;
+	std::map<int,CSVI>			m_mapClauseNo2SynVar;
+	std::vector<CSynOutputRelation>	m_vectorIRelations;
+	std::vector<CGroup>			m_vectorGroups;
 
 	const CSyntaxOpt* GetOpt() const;
 	int		FindFirmGroupClauseRelations(int iClauseNum, CSVI pSynVar, int iRelMember);
@@ -42,8 +42,8 @@ protected:
 
 public:
 	void								SetSentence(const CSentence* pSent);
-	const vector<CGroup>&				GetFirmGroups() const;
-	const vector<CSynOutputRelation>&	GetRelations() const;
+	const std::vector<CGroup>&				GetFirmGroups() const;
+	const std::vector<CSynOutputRelation>&	GetRelations() const;
 
 	bool		BuildRelations();
 	void		AddClauseNoAndVariantNo(long iClauseNo, long iVarNo);

@@ -3,7 +3,7 @@
 // ищет потомка глагола, для которого ГХi=obj
 long CEngSemStructure::FindDirObj(long VerbNodeNo) const
 {
-	vector<long> rels;
+	std::vector<long> rels;
 	GetOutcomingRelations(VerbNodeNo,rels);
 	for(int i = 0; i < rels.size(); i++){
 		const CEngSemRelation &rel = m_Relations[rels[i]];
@@ -25,7 +25,7 @@ bool CEngSemStructure::dir_obj_is_long(int NodeNo) const
 		return true;
 
 // выходящие межклаузные связи
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -36,7 +36,7 @@ bool CEngSemStructure::dir_obj_is_long(int NodeNo) const
 	}
 
 // много детей
-	vector<long> outChilds;
+	std::vector<long> outChilds;
 	GetChildNodes(NodeNo,outChilds);
 	if( outChilds.size()>=3 )
 		return true;
@@ -121,8 +121,8 @@ void EnrichPositionsByAdvKind (CAdvPosType adv_kind, StringVector& Positions)
 
 void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 {
-	vector<long> adv_rels;
-	vector<long> rels;
+	std::vector<long> adv_rels;
+	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);
 	long DirObjNodeNo = FindDirObj(NodeNo);
 
@@ -204,7 +204,7 @@ void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 			    && (m_Nodes[m_Relations[InRelNo].m_TargetNodeNo].GetPos() == eADV)
 			   )
 			{
-				vector<long>  Rels;
+				std::vector<long>  Rels;
 				GetIncomingInClauseRelations(m_Relations[InRelNo].m_SourceNodeNo, Rels);
 				if (Rels.size()  == 1)
 					InRelNo = Rels[0];

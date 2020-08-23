@@ -43,7 +43,7 @@
    internal match() function can be called during a single execution of
    pcre_exec(). There is a runtime interface for setting a different limit.
    The limit exists in order to catch runaway regular expressions that take
-   for ever to determine that they do not match. The default is set very large
+   for ever to determine that they do not match. The default is std::set very large
    so that it does not accidentally catch legitimate cases. On systems that
    support it, "configure" can be used to override this default default. */
 #define MATCH_LIMIT 10000000
@@ -81,7 +81,7 @@
    match() function; instead it creates its own stack by steam using
    pcre_recurse_malloc() to obtain memory from the heap. For more detail, see
    the comments and other stuff just above the match() function. On systems
-   that support it, "configure" can be used to set this in the Makefile (use
+   that support it, "configure" can be used to std::set this in the Makefile (use
    --disable-stack-for-recursion). */
 /* #undef NO_RECURSE */
 

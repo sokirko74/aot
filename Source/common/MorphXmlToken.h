@@ -14,8 +14,8 @@ struct  CXmlMorphAnnot
 	std::string				m_GrammemsStr;
     //! reference to xml node
     void*               m_XmlRef;
-	//! return the structure as a set of token properties
-	void	GetAsSetOfProperties(vector<string>& Result)  const;
+	//! return the structure as a std::set of token properties
+	void	GetAsSetOfProperties(std::vector<std::string>& Result)  const;
     //! return std::string annotation for words from Russian corpus
     std::string  BuildRusCorpAnnot() const;
 };
@@ -30,7 +30,7 @@ struct CXmlToken
 	//! original  std::string itself 
 	std::string						m_OrigWordStr;
 	//! all morphological annotations
-	vector<CXmlMorphAnnot>		m_Annots;
+	std::vector<CXmlMorphAnnot>		m_Annots;
 	//! true if the token is last in the sentence
 	bool						m_bLastInSentence;
     bool                        IsImportantPunct() const;

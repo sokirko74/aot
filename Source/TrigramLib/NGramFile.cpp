@@ -7,8 +7,8 @@
 
 class IsGreaterByUnigrams {
 public:
-	const vector<int>&			m_Unigrams;
-	IsGreaterByUnigrams(const vector<int>& Unigrams): m_Unigrams(Unigrams) {};
+	const std::vector<int>&			m_Unigrams;
+	IsGreaterByUnigrams(const std::vector<int>& Unigrams): m_Unigrams(Unigrams) {};
 	bool operator () (const WORD& i1, const WORD& i2) const 
 	{
 		return m_Unigrams[i1] > m_Unigrams[i2];

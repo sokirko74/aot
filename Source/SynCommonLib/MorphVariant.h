@@ -11,8 +11,8 @@
 #include "../SimpleGrammarLib/InputSymbol.h"
 #include "../common/AncodePattern.h"
 
-typedef  vector<int>  CIntVector;
-typedef	 pair<int, int> CIntPair;
+typedef  std::vector<int>  CIntVector;
+typedef	 std::pair<int, int> CIntPair;
 
 
 class CSentence;
@@ -38,7 +38,7 @@ struct SClauseType
 	EClauseType			m_Type;
 	CWordAndHomonym		m_Root;
 
-set<CInputSymbol>	m_AutomatSymbolInterpetation;
+std::set<CInputSymbol>	m_AutomatSymbolInterpetation;
 
 	SClauseType(EClauseType Type, int iNodeIndex, int iHomNum)
 	{
@@ -96,14 +96,14 @@ struct  CMorphVariant
 	// there should be no  dublicates and no non-projectivities 
 	CGroupsVector					m_vectorGroups;
 
-	// vector of units which  constitute this morph. variant
-	vector<CSynUnit>				m_SynUnits; 	
+	// std::vector of units which  constitute this morph. variant
+	std::vector<CSynUnit>				m_SynUnits; 	
 
 	// the clause type, which is found in this CMorphVariant
 	int								m_ClauseTypeNo;
 	
 	// possible subjects of the clause ( measured in Units)
-	vector<int>						m_Subjects;
+	std::vector<int>						m_Subjects;
 
 	bool							m_bGoodSubject;
 
@@ -154,7 +154,7 @@ struct  CMorphVariant
 	
 	size_t GetUnitsCount() const;
 	EUnitType GetUnitType(int iUnit) const;
-	const vector<int>& GetSimplePrepNos(int i) const;
+	const std::vector<int>& GetSimplePrepNos(int i) const;
 	int GetHomNum(int iMemb) const;
 
 	//  returns true id iWrd is in subclause 
@@ -184,8 +184,8 @@ struct  CMorphVariant
 };
 
 
-typedef list<CMorphVariant>::const_iterator	CSVI;
-typedef list<CMorphVariant>::iterator			SVI;
+typedef std::list<CMorphVariant>::const_iterator	CSVI;
+typedef std::list<CMorphVariant>::iterator			SVI;
 
 
 

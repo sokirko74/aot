@@ -10,7 +10,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 {
 	if(Res(node_no).do_not_put) return true; // for parts of termin
 	int i;
-	vector<long> rels;
+	std::vector<long> rels;
 	get_out_rels(node_no, rels);
 	int parent_rel = get_in_rel(node_no);
 	if (    (parent_rel != -1)
@@ -60,7 +60,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 
 	sort(rels.begin(), rels.end(), rel_pos_less(*this));
 
-	vector<bool> ordered_rels(rels.size(), false);
+	std::vector<bool> ordered_rels(rels.size(), false);
 	
 
 
@@ -162,7 +162,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 bool CEngSynthes::try_adj_node(int node_no)
 {
 	if(!_node_is_adj (E.m_Nodes[node_no])) return false;
-	vector<long> rels;
+	std::vector<long> rels;
 	get_out_rels(node_no, rels);
 	sort(rels.begin(), rels.end(), rel_pos_less(*this));
 
@@ -214,7 +214,7 @@ bool CEngSynthes::lemma_is_demonstrative_pronoun (std::string Lemma) const
 {
   try
   {
-	vector<CFormInfo> ParadigmCollection; 
+	std::vector<CFormInfo> ParadigmCollection; 
 	E.m_pData->GetEngLemmatizer()->CreateParadigmCollection(true, Lemma, false, false, ParadigmCollection);
 
 	for(int i = 0; i < ParadigmCollection.size(); i++)
@@ -286,7 +286,7 @@ bool CEngSynthes::try_pronoun_node(int node_no)
 	Res(node_no).m_WordForms.push_back(EngWord.m_Word);
 
 	// sons are here
-	vector<long > rels;
+	std::vector<long > rels;
 	get_out_rels(node_no, rels);
 	for(int i = 0; i < rels.size(); i++){
 		translate_node(E.m_Relations[rels[i]].m_TargetNodeNo);

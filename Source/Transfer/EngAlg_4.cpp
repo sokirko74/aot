@@ -36,7 +36,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 		return;
 
 // смотрим, было ли указание на лексическую функцию
-	vector< SEngEquiv > vectorEngEquivs;
+	std::vector< SEngEquiv > vectorEngEquivs;
 	GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),iRusNode);
 
 	std::string StrLexFunc = "";
@@ -130,7 +130,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 
 // обработка Subj + число
 	bool bHasSub = false;
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -177,7 +177,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 /////////////////////////////////////////////////////////////////////////////
 // служебные функции для ConvertClosedCollocToOpen()
 
-bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,vector<TCortege>& vecSINO) const
+bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,std::vector<TCortege>& vecSINO) const
 {
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
@@ -192,7 +192,7 @@ bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,vector<TCortege>& v
 	return( vecSINO.size()>0 );
 }
 
-void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,vector<TCortege>& vecSPrp) const
+void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,std::vector<TCortege>& vecSPrp) const
 {
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
@@ -205,7 +205,7 @@ void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,vector<TCortege>& v
 	}
 }
 
-void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,vector<TCortege>& vecSArt) const
+void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,std::vector<TCortege>& vecSArt) const
 {
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
@@ -219,7 +219,7 @@ void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,vector<TCortege>& v
 }
 long CEngSemStructure::FindNodeByLeafId (long NodeNo, int LeafId) const
 {
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);
 	for( int m=0; m<outRels.size(); m++ )
 	{
@@ -231,7 +231,7 @@ long CEngSemStructure::FindNodeByLeafId (long NodeNo, int LeafId) const
 	return -1;
 };
 
-void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,vector<TCortege>& vecSGxi) const
+void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,std::vector<TCortege>& vecSGxi) const
 {
 	assert( type == EngCollocRoss );
 	assert( unit != ErrUnitNo );
@@ -269,7 +269,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		if( nWords==1 )
 			continue;
 
-		vector<TCortege> vecSINO;
+		std::vector<TCortege> vecSINO;
 		if( !GetSINO(type,UnitNo,vecSINO) )
 			continue;
 
@@ -279,7 +279,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			FreeWordNo(curWNo+j);
 
 // загрузим артикли
-		vector<TCortege> vecSArt;
+		std::vector<TCortege> vecSArt;
 		GetSArt(type,UnitNo,vecSArt);
 		StringVector articles;
 		for( int j=0; j<nWords; j++ )
@@ -293,7 +293,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 // загрузим части речи
-		vector<TCortege> vecSGxi;
+		std::vector<TCortege> vecSGxi;
 		GetSGxi(type,UnitNo,vecSGxi);
 		StringVector poses;
 		for( int j=0; j<nWords; j++ )
@@ -320,7 +320,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 // создадим новые узлы
-		vector<CEngSemNode> newNodes;
+		std::vector<CEngSemNode> newNodes;
 		for( int j=0; j<nWords; j++ )
 		{
 			CEngSemNode newNode;
@@ -367,9 +367,9 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 		// выделим связи и сразу их зачистим
-		vector<long> outRelsRaw;
+		std::vector<long> outRelsRaw;
 		// в outRels загрузим все нереверсивные связи
-		vector<long> outRels;
+		std::vector<long> outRels;
 		GetOutcomingRelations(iEngNode,outRelsRaw);
 		for( int m=0; m<outRelsRaw.size(); m++ )
 		{
@@ -398,7 +398,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 // просчитаем их будущие места в m_Nodes[]
-		vector<int> index;
+		std::vector<int> index;
 		index.resize(newNodes.size());
 		int curval = m_Nodes.size();
 		for( int j=0; j<newNodes.size(); j++ )
@@ -415,7 +415,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 // загрузим предлоги
-		vector<TCortege> vecSPrp;
+		std::vector<TCortege> vecSPrp;
 		GetSPrp(type,UnitNo,vecSPrp);
 		StringVector preps;
 		for( int j=0; j<nWords; j++ )
@@ -430,7 +430,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 
 // создадим новые связи
 		SetRelsToDeleteFalse();
-		vector<CEngSemRelation> newRels;
+		std::vector<CEngSemRelation> newRels;
 		for( int k=0; k<vecSINO.size(); k++ )
 		{
 			assert( vecSINO[k].m_DomItemNos[0]!=-1 );
@@ -473,8 +473,8 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		// C-A связь
 			else if( e1lt=="C" && e2lt=="A" )
 			{
-				vector<long> outRelsRaw;
-				vector<long> outRels;
+				std::vector<long> outRelsRaw;
+				std::vector<long> outRels;
 				GetOutcomingRelations(iEngNode,outRelsRaw);
 				for( int m=0; m<outRelsRaw.size(); m++ )
 				{
@@ -502,8 +502,8 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		// A-C связь
 			else if( e1lt=="A" && e2lt=="C" )
 			{
-				vector<long> outRelsRaw;
-				vector<long> outRels;
+				std::vector<long> outRelsRaw;
+				std::vector<long> outRels;
 				GetOutcomingRelations(iEngNode,outRelsRaw);
 				for( int m=0; m<outRelsRaw.size(); m++ )
 				{
@@ -579,7 +579,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 		// вставим дополнительные отношения (только для THESAME)	    
-		vector<CDopField> DopFields;
+		std::vector<CDopField> DopFields;
 		long MainItemNo = GetRossHolder(type)->GetDopFields(UnitNo, DopFields);
 		for (int i=0;  i < DopFields.size(); i++)
 			if (DopFields[i].m_RelationStr == "THESAME")			
@@ -601,7 +601,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 {
 // ищем ВС
 	iQueRel = -1;
-	vector<long> outChilds;
+	std::vector<long> outChilds;
 	GetChildNodes(iEngRoot,outChilds);
 	for( int i=0; i<outChilds.size(); i++ )	
 	{
@@ -610,7 +610,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 			HasQuest(engNode.GetUnitNo(),engNode.GetType()) &&
 			engNode.m_Words[engNode.m_MainWordNo].m_Lemma != "whether" )
 		{
-			vector<long> inRels;
+			std::vector<long> inRels;
 			GetIncomingRelations(outChilds[i],inRels,false);
 			assert( inRels.size()==1 );
 			iQueRel = inRels[0];
@@ -620,7 +620,7 @@ bool CEngSemStructure::CheckQuestionClause(int iEngRoot,int &iQueRel,int &iSubRe
 	
 // ищем subj
 	iSubRel = -1;
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngRoot,outRels);
 	for( int i=0; i<outRels.size(); i++ )	
 	{
@@ -700,7 +700,7 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 		{
 			while( true )
 			{
-				vector<long> inRels;
+				std::vector<long> inRels;
 				GetIncomingRelations(m_Relations[iQueGrp].m_SourceNodeNo,inRels);
 				if( inRels.size()!=1 )
 					break;
@@ -780,7 +780,7 @@ void CEngSemStructure::HandleQuestionClause(int iEngRoot)
 
 // "ли" и "же" игнорируются
 NEXTSTEP:;
-	vector<long> outChilds;
+	std::vector<long> outChilds;
 	GetChildNodes(iEngRoot,outChilds);
 	for( int i=0; i<outChilds.size(); i++ )
 	{
@@ -854,7 +854,7 @@ bool CEngSemStructure::HandleQuestionNode()
 		newNode.m_Words[0].m_WordNo = wNo;
 		m_Nodes[iEngNode] = newNode;
 		
-		vector<long> inRels;
+		std::vector<long> inRels;
 		GetIncomingRelations(iEngNode,inRels,false);
 		if( inRels.size() > 0 )
 		{

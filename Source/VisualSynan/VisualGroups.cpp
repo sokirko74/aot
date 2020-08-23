@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "VisualSentences.h"
+#include <algorithm>
 
 
 void  CVisualGroups::CalculateGroupsCoordinates(CDC* pDC,int iWidth, int& iLine, int iPrevBottom)

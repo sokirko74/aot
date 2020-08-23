@@ -129,7 +129,7 @@ bool CSemPattern::LoadSemFromDict()
 			)
 		{
 			if (C.m_LevelId  > m_ActantSemFets.size())   
-				m_ActantSemFets.push_back(vector<std::string>());
+				m_ActantSemFets.push_back(std::vector<std::string>());
 
 			std::string s = m_PatternValency.m_RossHolder->GetDomItemStrInner(C.m_DomItemNos[0]);
 			if (C.m_LevelId - 1 >= m_ActantSemFets.size())

@@ -20,7 +20,7 @@ public:
     bool            m_bUnkGramcodes;
 			
 	// all single preposition interpretations
-	vector<int>		m_SimplePrepNos;
+	std::vector<int>		m_SimplePrepNos;
 
 	CAncodePattern(const	CAgramtab* pGramTab);
     const	CAgramtab* GetGramTab() const;

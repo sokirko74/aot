@@ -126,7 +126,7 @@ void node_set::v_copy_selected_node_recursive_no_attrib (
    }
 }
 
-/// Return the string value aka concatenation of all text items
+/// Return the std::string value aka concatenation of all text items
 TIXML_STRING node_set::S_get_string_value () const
 {
    TIXML_STRING S_res;
@@ -146,9 +146,9 @@ TIXML_STRING node_set::S_get_string_value () const
    return S_res;
 }
 
-/// Checks if a node exist in the node set
+/// Checks if a node exist in the node std::set
 bool node_set::o_exist_in_set (
-   const TiXmlBase * XBp_member)    ///< Check if a base exist in the node set
+   const TiXmlBase * XBp_member)    ///< Check if a base exist in the node std::set
 {
    unsigned u_node;
 
@@ -158,7 +158,7 @@ bool node_set::o_exist_in_set (
    return false;
 }
 
-/// Adds a new node in the node set
+/// Adds a new node in the node std::set
 void node_set::v_add_base_in_set (
    const TiXmlBase * XBp_member,    ///< Base to add (node or attribute)
    bool o_attrib)                   ///< true if the base is an attribute, false if it's a node
@@ -184,7 +184,7 @@ void node_set::v_add_base_in_set (
    u_nb_node++;
 }
 
-/// Populate the node set with all following nodes.
+/// Populate the node std::set with all following nodes.
 /// \n Exerpt : \n
 /// the following axis contains all nodes in the same document as the context 
 /// node that are after the context node in document order, excluding any 
@@ -212,7 +212,7 @@ void node_set::v_add_all_foll_node (
       v_add_all_foll_node (XNp_ptr, S_name);
 }
 
-/// Populate the node set with all preceding nodes.
+/// Populate the node std::set with all preceding nodes.
 /// \n Exerpt : \n
 /// the preceding axis contains all nodes in the same document as the context 
 /// node that are before the context node in document order, excluding any 
@@ -240,7 +240,7 @@ void node_set::v_add_all_prec_node (
    }
 }
 
-/// Internal utility class for the node set sorting
+/// Internal utility class for the node std::set sorting
 class ptr_and_flag 
 {
 public :
@@ -248,7 +248,7 @@ public :
    bool o_flag;
 } ;
 
-/// Internal utility function for node set sorting
+/// Internal utility function for node std::set sorting
 int i_compare_ptr_and_flag (
    const void * vp_1,   ///< Ptr to first element to compare
    const void * vp_2)   ///< Ptr to second element to compare
@@ -266,7 +266,7 @@ int i_compare_ptr_and_flag (
    return (long) (XNp_1 -> GetUserData ()) - (long) (XNp_2 -> GetUserData ());
 }
 
-/// Sort the node set according to the document order.
+/// Sort the node std::set according to the document order.
 /// \n The document order must have been recorded already in the tiny xml user's value
 /// \n There's still a problem with the attributes. They aren't covered by the GetUserData / SetUserData
 /// yet. If two attributes come from the same element, we have to compute on the fly their relative position
@@ -295,14 +295,14 @@ void node_set::v_document_sort ()
    delete [] pafp_list;
 }
 
-/// Debug function to print the content of a node set to stdout
+/// Debug function to print the content of a node std::set to stdout
 void node_set::v_dump ()
 {
    unsigned u_node;
    const TiXmlAttribute * XAp_att;
    const TiXmlNode * XNp_node;
 
-   printf ("-- start node set (%d items) --\n", u_nb_node);
+   printf ("-- start node std::set (%d items) --\n", u_nb_node);
    for (u_node = 0; u_node < u_nb_node; u_node++)
    {
       if (op_attrib [u_node])
@@ -316,7 +316,7 @@ void node_set::v_dump ()
          printf ("   [%d] : Node : %s\n", u_node, XNp_node -> Value ());
       }
    }
-   printf ("-- end node set --\n");
+   printf ("-- end node std::set --\n");
 }
 
 }

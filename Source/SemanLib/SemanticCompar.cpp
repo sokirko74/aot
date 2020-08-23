@@ -28,7 +28,7 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
    интерпретацию слова больше как числительного.
 
  */
-  vector<bool> UncounNodes;
+  std::vector<bool> UncounNodes;
   UncounNodes.resize(m_Nodes.size());
   for (long i=0; i < m_Nodes.size(); i++)
 	 if (IsInClause(i, ClauseNo))
@@ -129,7 +129,7 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
         if (k == EndNodeNo) continue;
         long ChemNodeNo = k;
 		//получаем SF1 компаратива из РОСС		
-		vector<QWORD> SemFets = GetSemFetsOfFirstValency(CompNodeNo);
+		std::vector<QWORD> SemFets = GetSemFetsOfFirstValency(CompNodeNo);
 
 		for (k=ChemNodeNo+1; k < EndNodeNo; k++)
            if (     IsAdverbial(k)
@@ -276,7 +276,7 @@ void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 			&&  m_Nodes[CompNodeNo].IsLemma(_R("МНОГО")) 		
 		   )
 		{
-			vector<long> Rels;
+			std::vector<long> Rels;
 			GetIncomingSynRelations(CompNodeNo, Rels);
 			if (Rels.size() ==  1)
 			{
@@ -332,7 +332,7 @@ try {
 				&&	m_Nodes[CompNodeNo].m_bCompAdj		
 			)
 		{
-			vector<long> ChildNodes;
+			std::vector<long> ChildNodes;
 
 			size_t	k=CompNodeNo+1;
 			for	(;	k <	EndNodeNo; k++)
@@ -390,7 +390,7 @@ try {
 			};
 
 			//получаем SF1 компаратива из РОСС		
-			vector<QWORD> SemFets =	GetSemFetsOfFirstValency(CompNodeNo);
+			std::vector<QWORD> SemFets =	GetSemFetsOfFirstValency(CompNodeNo);
 
 			for	(long l=0; l	< ChildNodes.size(); l++)
 			{

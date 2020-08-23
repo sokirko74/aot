@@ -17,14 +17,14 @@ public:
     CBasicDomainEdit( CRossDoc* pRossDoc,
 					  BYTE DomNo, 
 					  bool EditMode,
-					  vector<CString>* pHiddenItems = NULL,
+					  std::vector<CString>* pHiddenItems = NULL,
 					  LONG* pItemNo = NULL, 
 					  CWnd* pParent = NULL);
 
 
    CRossDoc* m_pRossDoc;
    CDictionary* GetRoss () {return m_pRossDoc->GetRoss();}
-   vector<CString>* m_pHiddenItems;
+   std::vector<CString>* m_pHiddenItems;
    LONG* m_pItemNo;
    
    BYTE m_DomNo;

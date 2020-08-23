@@ -83,7 +83,7 @@ void CEngSynthes::find_position_for_slave_clause_components()
 	for(long ClauseNo=0; ClauseNo< E.m_Clauses.size(); ClauseNo++)
 	{
         // берем вершины клаузы
-		vector<long> roots;	
+		std::vector<long> roots;	
 		E.GetClauseRoots(ClauseNo, roots);
 		long MainClauseRoot = E.GetMainClauseRoot(ClauseNo);
 
@@ -91,7 +91,7 @@ void CEngSynthes::find_position_for_slave_clause_components()
 		if (MainClauseRoot == -1) continue;
 
 		// находим самый левый узел главной компоненты связностей.
-	    vector<long> Nodes;
+	    std::vector<long> Nodes;
 		E.dfs_out(MainClauseRoot, Nodes);
 		sort(Nodes.begin(),Nodes.end(),IsLessByMinWordNo(&E));
 	    assert( Nodes.size() > 0);
@@ -109,12 +109,12 @@ void CEngSynthes::find_position_for_slave_clause_components()
 		   // считаем, что неглавные компоненты связностей, как бы, подчиненные клаузы
 		   if (E.IsTheVeryLeftNodeOfClause(Nodes[0]))
 		   {
-				node_sub_clause_put_after.insert(make_pair(MainLeftNodeNo, make_pair(roots[i], false)));
+				node_sub_clause_put_after.insert(std::make_pair(MainLeftNodeNo, std::make_pair(roots[i], false)));
 		   }
 		   else
 		   {
 			   long NodeNo = E.FindLeftClosestNode(Nodes[0]);
-			   node_sub_clause_put_after.insert(make_pair(NodeNo, make_pair(roots[i], true)));
+			   node_sub_clause_put_after.insert(std::make_pair(NodeNo, std::make_pair(roots[i], true)));
 		   };
 
 		 };
@@ -223,7 +223,7 @@ std::string CEngSynthes::BuildSentence()
 	// абсолютные вершины - те, в которые не  входит ни одной стрелки (даже межклаузных),
 	// то есть вершины главных клауз ( в норамальном случае в  предложении  есть это ровно одна 
 	// абсолютная вершина
-	vector<long> final_roots;
+	std::vector<long> final_roots;
 
     // идем по всем клаузам 
 	for(long ClauseNo=0; ClauseNo< E.m_Clauses.size(); ClauseNo++)
@@ -231,7 +231,7 @@ std::string CEngSynthes::BuildSentence()
         // берем вершины клаузы
 		long MainClauseRoot = E.GetMainClauseRoot(ClauseNo);
 		if (!IsSlaveClause(ClauseNo)) final_roots.push_back(MainClauseRoot);
-		vector<long> roots;	
+		std::vector<long> roots;	
 		E.GetClauseRoots(ClauseNo, roots);
 		for (long i =0; i < roots.size();i++)
 		  translate_node(roots[i]);
@@ -325,7 +325,7 @@ bool CEngSynthes::try_numeral_node(int node_no)
 	*/
 	if ( W.HasPOS(eORDNUM) )
 	{
-		vector<long> Rels;
+		std::vector<long> Rels;
 		E.GetIncomingInClauseRelations(node_no, Rels);
 		long InRelNo = -1;
 		if (Rels.size() == 1)
@@ -343,7 +343,7 @@ bool CEngSynthes::try_numeral_node(int node_no)
 	};
 
     // переводим сыновей числительного (для ЭЛЕКТ_ИГ)
-	vector<long> rels;
+	std::vector<long> rels;
 	get_out_rels(node_no, rels);
 	for(long i = 0; i < rels.size(); i++)
 		translate_node(Rel(rels[i]).m_TargetNodeNo);
@@ -356,7 +356,7 @@ bool CEngSynthes::try_verb_node(int node_no)
 {
 
 	// ищем подлежащее 
-	vector<long> rels;
+	std::vector<long> rels;
 	get_out_rels(node_no, rels);
 	int i = 0;
 	for(; i < rels.size(); i++)
@@ -391,7 +391,7 @@ bool CEngSynthes::try_verb_node(int node_no)
 
 bool CEngSynthes::try_default_node(int node_no)
 {
-	vector<long> out_rels;
+	std::vector<long> out_rels;
 	get_out_rels(node_no, out_rels);
 	CEngSemNode node = Node(node_no);
 	if(node_is_pronoun(node_no)) Res(node_no).m_Article = ZeroArticle;
@@ -427,7 +427,7 @@ bool CEngSynthes::try_mna_node(int node_no)
 	};
 
 	Res(node_no).m_WordForms.push_back(tr);
-	vector<long> rels;
+	std::vector<long> rels;
 	get_out_rels(node_no, rels);
 	sort(rels.begin(), rels.end(), rel_pos_less(*this));
 
@@ -498,7 +498,7 @@ bool CEngSynthes::try_simple_group(int node_no)
 
 			  const CSemWord& W = E.RusStr.GetNode(node.RusNode).GetWord(i);
 			  long ParadigmId = W.m_ParadigmId;
-			  vector<long> EngIds;
+			  std::vector<long> EngIds;
 			  helper.translate_id(ParadigmId, EngIds, W.m_Poses);
 			  if (!EngIds.empty() && !W.HasOneGrammem(rPatronymic))
 			  {
@@ -513,7 +513,7 @@ bool CEngSynthes::try_simple_group(int node_no)
 			str += node.m_Words[i].m_Word.c_str();
 		}
 
-		vector<long> rels;
+		std::vector<long> rels;
 		get_out_rels(node_no, rels);
 		for(i = 0; i < rels.size(); i++)
 		{
@@ -534,7 +534,7 @@ bool CEngSynthes::try_simple_group(int node_no)
 bool CEngSynthes::HasInfinitiveInTree(int node_no) const
 {
   if (is_infinitive(E.m_Nodes[node_no].GetTense()) ) return true;
-  vector<long> Rels;
+  std::vector<long> Rels;
   get_out_rels(node_no, Rels);
   for (long i =0; i < Rels.size(); i++)
 	if (HasInfinitiveInTree(E.m_Relations[Rels[i]].m_TargetNodeNo) )
@@ -705,7 +705,7 @@ std::string CEngSynthes::collect_results(int node)
 
 	MainNodeStr += result.postfix + " ";
 
-	vector<long> out_rels;
+	std::vector<long> out_rels;
 	get_out_rels(node, out_rels);
 	  
 	
@@ -955,7 +955,7 @@ std::string CEngSynthes::collect_results(int node)
 	// check for clause rel
 	if(node_sub_clause_put_after.count(node))
 	{
-		typedef multimap<int, pair<int, bool> >::iterator iter;
+		typedef std::multimap<int, pair<int, bool> >::iterator iter;
 		pair<iter, iter> range = node_sub_clause_put_after.equal_range(node);
 		for(iter it = range.first; it != range.second; ++it){
 			bool put_after = it->second.second;
@@ -1020,7 +1020,7 @@ bool CEngSynthes::is_conj_word(int parent, int son)
 	
 bool CEngSynthes::is_clause_opener(int ClauseNo, int OpenerNodeNo)
 {
-	map<int,int>::iterator  It =  clause_openers.find (ClauseNo);
+	std::map<int,int>::iterator  It =  clause_openers.find (ClauseNo);
 
 	return    (It !=  clause_openers.end())
 		   && (*It).second == OpenerNodeNo;
@@ -1117,7 +1117,7 @@ void CEngSynthes::find_all_clause_connectors()
 		  межклаузная связь  идет от наречия, поэтому клауза встанет после всей главной 
 		*/
 	    int node_to_put_after = master;		
-		vector<long> roots;	
+		std::vector<long> roots;	
 		E.GetClauseRoots(E.m_Nodes[master].m_ClauseNo, roots);
 		if (roots.size() > 0)
 		 if (   (E.m_Nodes[master].m_MainWordNo != -1) 
@@ -1162,7 +1162,7 @@ void CEngSynthes::find_all_clause_connectors()
 
 	
 		node_sub_clause_put_after
-			.insert(make_pair(node_to_put_after, make_pair(slave_root, put_after)));
+			.insert(std::make_pair(node_to_put_after, std::make_pair(slave_root, put_after)));
 
 
 
@@ -1275,7 +1275,7 @@ bool CEngSynthes::try_oneself_node(int node_no)
 			...yourselves: ознакомься с книгой - acquaint yourself with the
 			book.
 		*/
-		vector<long> Rels;
+		std::vector<long> Rels;
 		E.GetIncomingRelations(node_no, Rels);
 		if (Rels.size() == 1)
 		{
@@ -1301,7 +1301,7 @@ bool CEngSynthes::try_oneself_node(int node_no)
 	*/
 	if (oneself)
 	{
-		vector<long> Rels;
+		std::vector<long> Rels;
 		E.GetIncomingRelations(node_no, Rels);
 		if (Rels.size() == 1)
 		{
@@ -1354,7 +1354,7 @@ void CEngSynthes::detect_clause_openers()
 		   если узлу проставлена позиция, тогда не будем считать это opener, например:
 		   "все так же он поет" -> "He is still singing"
 		  */
-		  vector<long> Rels;
+		  std::vector<long> Rels;
 		  E.GetIncomingRelations(i, Rels);
 		  if (Rels.size() == 1)
 			  if (E.m_Relations[Rels[0]].m_Position != "")
@@ -1388,7 +1388,7 @@ void CEngSynthes::handle_rel_operators(int node, bool with_no)
 
 void CEngSynthes::handle_other_relations(int node)
 {
-	vector<long> out_rels, rels;
+	std::vector<long> out_rels, rels;
 	get_out_rels(node, out_rels);
 
 	int i;
@@ -1420,7 +1420,7 @@ bool CEngSynthes::try_conj_disrupt(int node_no)
 	std::string tr = E.m_pData->GetEngOborStr(node.GetUnitNo());
 	size_t elpsis = tr.find("...");
 	assert(elpsis != std::string::npos);
-	vector<long>  rels;
+	std::vector<long>  rels;
 	get_out_rels(node_no, rels);
 	assert(rels.size() == 2);
 	sort(rels.begin(), rels.end(), rel_pos_less(*this));

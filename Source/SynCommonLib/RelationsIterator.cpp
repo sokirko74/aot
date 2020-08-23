@@ -45,12 +45,12 @@ void CRelationsIterator::SetSentence(const CSentence* pSent)
 	m_pSent = pSent;
 }
 
-const vector<CGroup>&  CRelationsIterator::GetFirmGroups() const 
+const std::vector<CGroup>&  CRelationsIterator::GetFirmGroups() const 
 {
 	return m_vectorGroups;
 };
 
-const vector<CSynOutputRelation>&	CRelationsIterator::GetRelations() const
+const std::vector<CSynOutputRelation>&	CRelationsIterator::GetRelations() const
 {
 	return m_vectorIRelations;
 };
@@ -75,7 +75,7 @@ bool CRelationsIterator::BuildRelations()
 	try
 	{
 		// строим отношения внутри клауз
-		map<int,CSVI>::iterator it ;
+		std::map<int,CSVI>::iterator it ;
 		for( it = m_mapClauseNo2SynVar.begin() ; it != m_mapClauseNo2SynVar.end() ; it++ )
 		{
 			if( !BuildRelationsInClause(it->first, it->second) )
@@ -86,8 +86,8 @@ bool CRelationsIterator::BuildRelations()
 		for(int i = 0 ; i < m_pSent->m_ClausesRelations.size() ; i++ )
 		{
 			const CRelation& rel = m_pSent->m_ClausesRelations[i];
-			map<int,CSVI>::iterator itSource = m_mapClauseNo2SynVar.find(rel.m_SourceClause.m_iClauseNo);
-			map<int,CSVI>::iterator itTarget = m_mapClauseNo2SynVar.find(rel.m_TargetClause.m_iClauseNo);
+			std::map<int,CSVI>::iterator itSource = m_mapClauseNo2SynVar.find(rel.m_SourceClause.m_iClauseNo);
+			std::map<int,CSVI>::iterator itTarget = m_mapClauseNo2SynVar.find(rel.m_TargetClause.m_iClauseNo);
 
 			if( (  itSource == m_mapClauseNo2SynVar.end() ) ||
 				(  itTarget == m_mapClauseNo2SynVar.end() ) )
@@ -132,8 +132,8 @@ bool CRelationsIterator::BuildRelationsOfGroups(const CClause& clause, CSVI pSyn
 			)
 		continue;
 
-		map<int,CSVI>::iterator itSource;
-		map<int,CSVI>::iterator itTarget;
+		std::map<int,CSVI>::iterator itSource;
+		std::map<int,CSVI>::iterator itTarget;
 
 
 		itSource = m_mapClauseNo2SynVar.find(rel.m_SourceClause.m_iClauseNo);

@@ -54,7 +54,7 @@ static void addLines(std::string &str, tagLines &lines) {
     }
 }
 
-static bool loadDat(istream &ifs) {
+static bool loadDat(std::istream &ifs) {
     std::string str;
     tagLines lines;
 
@@ -116,7 +116,7 @@ static bool loadDat(istream &ifs) {
         }
 
 
-        vector<CFormInfo> ParadigmCollection;
+        std::vector<CFormInfo> ParadigmCollection;
 
         std::string s = str;
         if (!MorphHolder.m_pLemmatizer->CreateParadigmCollection(true, spid, true, false, ParadigmCollection))

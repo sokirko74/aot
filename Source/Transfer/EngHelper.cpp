@@ -59,7 +59,7 @@ void CEngSemStructure::ReadMorphFromMainGF(WORD UnitNo, DictTypeEnum type, CSemW
 			return;
 	};
 
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	if( corteges.size() == 0 )
 		return;
@@ -91,7 +91,7 @@ bool CEngSemStructure::HasThisLexFunc(std::string LexFunctName, CRossInterp Unit
 	if( UnitInterp.m_UnitNo == ErrUnitNo )
 		return false;
 	assert (UnitInterp.m_DictType != NoneRoss);
-	vector<CLexicalFunctionField> LexFuncts;
+	std::vector<CLexicalFunctionField> LexFuncts;
 	GetRossHolder(UnitInterp.m_DictType)->GetLexFuncts(UnitInterp.m_UnitNo, LexFuncts, EngObor, GetRossHolder(EngObor));
 	for(int i = 0 ; i < LexFuncts.size() ; i++ )
 		{
@@ -109,7 +109,7 @@ bool CEngSemStructure::HasThisLexFunc(std::string LexFunctName, CRossInterp Unit
 
 
 
-bool CEngSemStructure::HasCopul(vector<CValency>& Vals, std::string strRusVal)
+bool CEngSemStructure::HasCopul(std::vector<CValency>& Vals, std::string strRusVal)
 {
 	for(int i = 0 ; i < Vals.size() ; i++ )
 	{
@@ -211,7 +211,7 @@ bool CEngSemStructure::IsChtoOrKto(int iNode)
 }
 
 
-void CEngSemStructure::GetIncomingRelationsInThisClause(int iNode, vector<long>& IncomeRels) const
+void CEngSemStructure::GetIncomingRelationsInThisClause(int iNode, std::vector<long>& IncomeRels) const
 {
 	GetIncomingRelations(iNode, IncomeRels, false);
 	for(int i = IncomeRels.size() - 1 ; i >= 0  ; i-- )
@@ -222,7 +222,7 @@ void CEngSemStructure::GetIncomingRelationsInThisClause(int iNode, vector<long>&
 	}
 }
 
-bool CEngSemStructure::HasThisGX(const vector<TCortege>& gramCorteges, std::string value, DictTypeEnum type) const
+bool CEngSemStructure::HasThisGX(const std::vector<TCortege>& gramCorteges, std::string value, DictTypeEnum type) const
 {
 	if( type == NoneRoss )
 		return false;
@@ -325,7 +325,7 @@ bool CEngSemStructure::IsSubj(const CEngSemRelation& Rel) const
 	if( IsSubjPattern(Rel) )
 		return true;
 
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(Rel.m_SourceNodeNo,outRels);
 
 	for( int i=0; i<outRels.size(); i++ )
@@ -340,7 +340,7 @@ bool CEngSemStructure::IsSubj(const CEngSemRelation& Rel) const
 	// копул прозрачен для подлежащего
 	if( m_Nodes[Rel.m_TargetNodeNo].m_NodeType == Copul )
 	{
-		vector<long> rels;
+		std::vector<long> rels;
 		GetOutcomingRelations(Rel.m_TargetNodeNo,rels);
 		for( int i=0; i<rels.size(); i++ )
 		{
@@ -354,7 +354,7 @@ bool CEngSemStructure::IsSubj(const CEngSemRelation& Rel) const
 
 long  CEngSemStructure::GetSubj(long NodeNo) const 
 {
-	vector<long> Rels;
+	std::vector<long> Rels;
 	GetOutcomingRelations(NodeNo,Rels);
 	for (long i=0; i <Rels.size(); i++)
       if ( !IsRelBetweenClauses(m_Relations[Rels[i]]) )
@@ -469,13 +469,13 @@ void CEngSemStructure::HideCopul()
 	{
 		if( m_Nodes[i].m_NodeType == Copul )
 		{
-			vector<long> incomRels;
+			std::vector<long> incomRels;
 			GetIncomingRelations(i,incomRels, false);
 			assert(incomRels.size() <= 1);
 			if( incomRels.size() )
 			{
 				CEngSemNode& parentOfCopul = m_Nodes[m_Relations[incomRels[0]].m_SourceNodeNo];
-				vector<long> outcomRels;
+				std::vector<long> outcomRels;
 				GetOutcomingRelations(i,outcomRels);
 
 				for(int j = 0 ; j < outcomRels.size() ; j++ )
@@ -562,7 +562,7 @@ void CEngSemStructure::FilLexFunctRel()
 bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, WORD UnitNo) const
 {
     if (!RossHolder || (UnitNo == ErrUnitNo)) return false;
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	RossHolder->GetFieldValues(std::string("TYP"), UnitNo, corteges);
 	for(int i = 0 ; i < corteges.size() ; i++ )
 	{
@@ -582,7 +582,7 @@ bool CEngSemStructure::IsValFromRossArticle(const CSemRelation& semRel) const
 bool CEngSemStructure::TryToAddNewSemPatternFromLexFunWord(int iRel)
 {
 	CEngSemRelation& semRel = m_Relations[iRel];
-	vector<long> InRels;
+	std::vector<long> InRels;
 	GetIncomingRelations(semRel.m_SourceNodeNo, InRels, false);
 	if( InRels.size() != 1 )
 		return false;
@@ -644,7 +644,7 @@ bool CEngSemStructure::IsLeftClauseTop(long NodeNo) const
 // самая левая вершина клаузы	
 long  CEngSemStructure::GetLeftClauseTop(long ClauseNo) const
 {
-   vector<long> roots;	
+   std::vector<long> roots;	
    GetClauseRoots(ClauseNo,roots);
    if( roots.size() == 0 )
 	   return -1;
@@ -652,7 +652,7 @@ long  CEngSemStructure::GetLeftClauseTop(long ClauseNo) const
    return roots[0];
 }
 
-void CEngSemStructure::dfs_out(size_t NodeNo, vector<long>& Nodes) const
+void CEngSemStructure::dfs_out(size_t NodeNo, std::vector<long>& Nodes) const
 {
   Nodes.push_back(NodeNo);
   for (size_t i=0; i<m_Relations.size(); i++)
@@ -711,16 +711,16 @@ bool  CEngSemStructure::IsTheVeryLeftNodeOfClause(long NodeNo) const
 
 long  CEngSemStructure::GetMainClauseRoot(long ClauseNo) const
 {
-   vector<long> roots;	
+   std::vector<long> roots;	
    GetClauseRoots(ClauseNo,roots);
    if( roots.size() == 0 )
 	   return -1;
    if (roots.size() == 1) return roots[0];
    
-   vector<CClauseRootProps >  RootProps;
+   std::vector<CClauseRootProps >  RootProps;
    for (long i=0; i < roots.size(); i++)
    {
-	   vector<long> Nodes;
+	   std::vector<long> Nodes;
 	   dfs_out(roots[i], Nodes);
 	   CClauseRootProps P (roots[i]);;
 	   for (long j=0; j < Nodes.size(); j++)
@@ -763,7 +763,7 @@ void CEngSemStructure::dfs(size_t NodeNo, bool ConsiderUseOfNodes, long Tag)
 bool CEngSemStructure::has_plural_rel(long NodeNo) const
 {
 	
-	vector<long> rels;
+	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo, rels);
 	for(int i = 0; i < rels.size(); i++){
 if(m_Relations[rels[i]].m_Valency.m_RelationStr == "QUANTIT"){			const CEngSemNode& node = m_Nodes[m_Relations[rels[i]].m_TargetNodeNo];
@@ -813,7 +813,7 @@ std::string GetStringByArticleCause(ArticleCauseEnum t)
 	return "unk cause!";
 };
 
-std::string GetArticleCauseHistory (const vector<ArticleCauseEnum>& t)
+std::string GetArticleCauseHistory (const std::vector<ArticleCauseEnum>& t)
 {
 	std::string Result;
 	for (int  i=0; i<t.size(); i++)

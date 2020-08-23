@@ -16,7 +16,7 @@ class CPosChoicer : public CPropertyPage
 // Construction
 public:
 	CPosChoicer();   // standard constructor
-	vector<CFormInfo>	m_ParadigmCollection;
+	std::vector<CFormInfo>	m_ParadigmCollection;
 	~CPosChoicer()
 	{
 		

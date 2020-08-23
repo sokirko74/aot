@@ -1146,7 +1146,7 @@ void CRusSemStructure::InitGrammarMatrix1 (long ClauseNo)
 
 
 	// инициализируем флаги HaveFiniteVerbBetween и HaveOnlyConjBetween
-	vector<bool> StrongRoots(m_Nodes.size(), false);
+	std::vector<bool> StrongRoots(m_Nodes.size(), false);
 	for (long i=C.m_BeginNodeNo; i < EndWordContNodeNo; i++)
 		StrongRoots[i] =		(HasRichPOS(i, VERB) || HasPOS(i, ADJ_SHORT) || HasPOS(i, PARTICIPLE_SHORT))
 							&&	!ContainsSemCopul(i);
@@ -1621,7 +1621,7 @@ void CRusSemStructure::HeuristicsLocative(long ClauseNo)
 
 	  if (  (NounNodeNo != -1) && (VerbNodeNo != -1))
 	  {
-		   vector<long> Rels;
+		   std::vector<long> Rels;
 		   FindRelations (VerbNodeNo, NodeNo, Rels);
 		   DeleteRelations(Rels);
 		   UpdateBlockedRelations();
@@ -1646,7 +1646,7 @@ void CRusSemStructure::DealUnboundModalCopul(long ClauseNo)
 			&& (m_Nodes[i].m_NodeType == ModalCopul)
 		   )
 		{
-			vector<long> Rels;
+			std::vector<long> Rels;
 			GetIncomingDopRelations(i, Rels);
 			assert (Rels.size() == 1);
 			if (GetIncomingRelationsCount(m_DopRelations[Rels[0]].m_SourceNodeNo, false) > 0)

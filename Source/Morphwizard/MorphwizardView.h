@@ -29,7 +29,7 @@ class CMorphwizardView : public CSizeFormView
 	bool			m_inPredict;
 	bool			m_inFilter;
 	HICON			m_hIcon;
-	list<string>	m_LastQueries;
+	std::list<std::string>	m_LastQueries;
 
 
 	void	ShowFoundParadigms();

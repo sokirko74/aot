@@ -48,7 +48,7 @@ struct CTrennbarPrefixHyp
 
 void CGerSentence::BuildTrennbarePraefixe()
 {
-	vector<CTrennbarPrefixHyp> Hypots;
+	std::vector<CTrennbarPrefixHyp> Hypots;
 
 	for (int PrefixWordNo = m_Words.size()-1;  PrefixWordNo >= 0; PrefixWordNo--)
 		if	(		binary_search(TrennbarePraefixe, TrennbarePraefixe+TrennbarePraefixeCount, m_Words[PrefixWordNo].m_strUpperWord)
@@ -71,7 +71,7 @@ void CGerSentence::BuildTrennbarePraefixe()
 					{
 						std::string  NewWord = Praefix+MainWord.m_strWord;
 						// checking, if morphology has such a verb
-						vector<CFormInfo> Paradigms;
+						std::vector<CFormInfo> Paradigms;
 						GetOpt()->GetLemmatizer()->CreateParadigmCollection(false,NewWord, true, false, Paradigms);
 						if (Paradigms.empty()) continue;
 
@@ -143,7 +143,7 @@ void CGerSentence::BuildTrennbarePraefixe()
 // gemacht
 // gemacht haben
 // gefahren sein
-void FindAllRAPs(const CGerSentence& C, vector< CPeriod >&  RAPs)
+void FindAllRAPs(const CGerSentence& C, std::vector< CPeriod >&  RAPs)
 {
 	RAPs.clear();
 
@@ -376,9 +376,9 @@ LAP and RAP this comma is the only comma.  It is done for:
 */
 void BuildDividedAnalyticalForms(CGerSentence &C)
 {
-	vector< CPeriod >  RAPs;
+	std::vector< CPeriod >  RAPs;
 	FindAllRAPs(C, RAPs);
-	vector<CDividedUnionInfo > UnionInfos;
+	std::vector<CDividedUnionInfo > UnionInfos;
 
 	for (int RapNo=RAPs.size()-1; RapNo>=0; RapNo--)
 	{
@@ -412,7 +412,7 @@ void BuildDividedAnalyticalForms(CGerSentence &C)
 				// but the current RAP is closer to the auxiliary verb than
 				// the RAP of the existing solution, then replace  this solution
 				// with the current one
-				vector<CDividedUnionInfo >::iterator it = lower_bound(UnionInfos.begin(), UnionInfos.end(), Info);
+				std::vector<CDividedUnionInfo >::iterator it = lower_bound(UnionInfos.begin(), UnionInfos.end(), Info);
 				if	(		(it != UnionInfos.end())
 						&&	(it->m_LeftPartWordNo == Info.m_LeftPartWordNo)
 						&&	(it->Distance() > Info.Distance())
@@ -796,9 +796,9 @@ void BuildCoordinatedAuxVerb(CGerSentence &C)
 		if (!C.m_Words[WordNo+1].m_bSimilarConj) continue;
 
 		
-		for (int AnalytForm=WordNo+2; AnalytForm<min(WordNo+10, C.m_Words.size()); AnalytForm++)
+		for (int AnalytForm=WordNo+2; AnalytForm<std::min(WordNo+10, C.m_Words.size()); AnalytForm++)
 		{
-			vector<int>& v = C.m_Words[AnalytForm].m_MainVerbs;
+			std::vector<int>& v = C.m_Words[AnalytForm].m_MainVerbs;
 			if (!v.empty())
 				if (find(v.begin(),v.end() , WordNo) == v.end() )
 				{

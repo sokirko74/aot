@@ -47,13 +47,13 @@ struct CModelPostfix
 };
 
 
-typedef map<std::string, vector<CPredictWord> > Flex2WordMap;
-typedef map<CModelPostfix, size_t > Postfix2FreqMap;
+typedef std::map<std::string, std::vector<CPredictWord> > Flex2WordMap;
+typedef std::map<CModelPostfix, size_t > Postfix2FreqMap;
 
 
 /*
  this function add  a new item to svMapRaw.
- svMapRaw is  from a postfix to  a vector of possible predict words.
+ svMapRaw is  from a postfix to  a std::vector of possible predict words.
  
 */
 void AddElem(	Flex2WordMap& svMapRaw, 
@@ -62,7 +62,7 @@ void AddElem(	Flex2WordMap& svMapRaw,
 				const WORD nps,
 				const WORD ItemNo,
 				Postfix2FreqMap& ModelFreq, 
-				const vector<CLemmaInfoAndLemma>&	LemmaInfos
+				const std::vector<CLemmaInfoAndLemma>&	LemmaInfos
 				)
 {
 
@@ -76,7 +76,7 @@ void AddElem(	Flex2WordMap& svMapRaw,
 
 	if( svMapIt==svMapRaw.end() )
 	{
-		vector<CPredictWord> set2vec;
+		std::vector<CPredictWord> set2vec;
 		set2vec.push_back(set2);
 		svMapRaw[Postfix] = set2vec;
 	}
@@ -157,8 +157,9 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 	fprintf (stderr, "CMorphDictBuilder::GenPredictIdx\n");
 	DwordVector ModelFreq(wizard.m_FlexiaModels.size(), 0);
 	//  building frequences of flexia models
-	for(const_lemma_iterator_t lnMapIt = wizard.m_LemmaToParadigm.begin(); lnMapIt != wizard.m_LemmaToParadigm.end(); lnMapIt++)
+	for (const_lemma_iterator_t lnMapIt = wizard.m_LemmaToParadigm.begin(); lnMapIt != wizard.m_LemmaToParadigm.end(); lnMapIt++) {
 		ModelFreq[lnMapIt->second.m_FlexiaModelNo]++;
+	}
 
 	bool bSparsedDictionary;
 	{
@@ -180,7 +181,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 		size_t ModelNo = LemmaInfo.m_FlexiaModelNo;
 		const CFlexiaModel& paradigm = m_FlexiaModels[ModelNo];
 		std::string	base = m_Bases[m_LemmaInfos[lin].m_LemmaStrNo].GetString();
-		const vector <bool>& Infos = m_ModelInfo[ModelNo];
+		const std::vector <bool>& Infos = m_ModelInfo[ModelNo];
 		for (size_t i=0; i<paradigm.m_Flexia.size(); i++)
 			if (Infos[i])
 			{
@@ -241,7 +242,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 			continue;
 
 
-		const vector <bool>& Infos = m_ModelInfo[ModelNo];
+		const std::vector <bool>& Infos = m_ModelInfo[ModelNo];
 		for (size_t i=0; i<paradigm.m_Flexia.size(); i++)
 		if (Infos[i])
 		{

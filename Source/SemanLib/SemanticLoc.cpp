@@ -149,7 +149,7 @@ struct  CLocHostHypot {
 
 long CRusSemStructure::FindLocHost (long NodeNo, long ClauseNo)
 {
-	vector <CLocHostHypot> HypotNodes;
+	std::vector <CLocHostHypot> HypotNodes;
 	for (size_t i=0; i < m_Nodes.size(); i++)
 		if	(m_Nodes[i].IsWordContainer())
 		if	(IsInClause(i, ClauseNo))

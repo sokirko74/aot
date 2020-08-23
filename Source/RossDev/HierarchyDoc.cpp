@@ -98,7 +98,7 @@ int GetNewNode(ClientData clienData,
 
 CString  CHierarchyDoc::GetNewNode(CString Nodes) 
 {
-	vector<CString> UsedItems; 
+	std::vector<CString> UsedItems; 
 	while (!Nodes.IsEmpty())
 	{
 		 CString Q = Nodes.SpanExcluding(" ");

@@ -40,7 +40,7 @@ void string_to_id(const char *str, DwordVector &ids, DwordVector &pos_vec)
 	bool is_capital = isupper((BYTE)str[0]) != 0;
 
 		
-	vector<CFormInfo > ParadigmCollection;
+	std::vector<CFormInfo > ParadigmCollection;
 	
 	std::string Word = str;
 	if (!MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(false, Word, is_capital, ParadigmCollection))

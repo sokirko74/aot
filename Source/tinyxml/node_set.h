@@ -30,11 +30,11 @@ distribution.
 namespace TinyXPath
 {
 
-/// Node set class. A node set is an unordered collection of node
+/// Node std::set class. A node std::set is an unordered collection of node
 class node_set
 {
 public :
-   /// constructor : creates an empty set
+   /// constructor : creates an empty std::set
    node_set () 
    {
       u_nb_node = 0; 
@@ -58,13 +58,13 @@ public :
    node_set & operator = (const node_set & ns2);
    void v_add_base_in_set (const TiXmlBase * XBp_member, bool o_attrib);
 
-   /// Adds an attribute in the node set
+   /// Adds an attribute in the node std::set
    void v_add_attrib_in_set (const TiXmlAttribute * XAp_attrib)
    {
       v_add_base_in_set (XAp_attrib, true);
    }
 
-   /// Adds a node in the node set
+   /// Adds a node in the node std::set
    void v_add_node_in_set (const TiXmlNode * XNp_node)
    {
       v_add_base_in_set (XNp_node, false);
@@ -98,7 +98,7 @@ public :
          v_add_base_in_set (XAp_attrib, true);
    }
 
-   /// Get nb of nodes in the node set
+   /// Get nb of nodes in the node std::set
    unsigned u_get_nb_node_in_set () const 
    {
       return u_nb_node;
@@ -168,7 +168,7 @@ public :
    void v_dump ();
    void v_document_sort ();
 protected :
-   /// Nb of nodes in the set
+   /// Nb of nodes in the std::set
    unsigned u_nb_node;
    /// List of node pointers to the 
 	const void ** vpp_node_set;

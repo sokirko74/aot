@@ -16,7 +16,7 @@ enum ParseMethodEnum {
 };
 
 struct CWorkRightRulePart {
-    vector<TerminalSymbolType> m_Items;
+    std::vector<TerminalSymbolType> m_Items;
 
     //  calculated by CGrammarItem::m_SynMain in  CParseGrammar::EncodeGrammar
     size_t m_SynMainItemNo;
@@ -75,7 +75,7 @@ struct CAttribAndId {
 
 struct CRuleFeature {
     CAttribAndId m_LeftItem;
-    vector<CAttribAndId> m_RightItems;
+    std::vector<CAttribAndId> m_RightItems;
 
     FeatureOperatorEnum m_Type;
     FeatureFuncEnum m_FuncType;
@@ -150,38 +150,38 @@ struct CTokenItem {
 
 };
 
-typedef set<CWorkRule>::const_iterator CWRI;
-typedef set<CWorkRule>::iterator WRI;
+typedef std::set<CWorkRule>::const_iterator CWRI;
+typedef std::set<CWorkRule>::iterator WRI;
 
-typedef vector<TerminalSymbolType> CPrefix;
-typedef set<CPrefix> CPrefixSet;
+typedef std::vector<TerminalSymbolType> CPrefix;
+typedef std::set<CPrefix> CPrefixSet;
 
 
 class CWorkGrammar {
 public:
     MorphLanguageEnum m_Language;
     const CAgramtab *m_pGramTab;
-    vector<CGrammarItem> m_UniqueGrammarItems;
+    std::vector<CGrammarItem> m_UniqueGrammarItems;
 
-    set<CWorkRule> m_EncodedRules;
-    vector<vector<CRuleFeature> > m_RuleFeatures;
-    vector<CPrecompiledWorkRule> m_PrecompiledEncodedRules;
+    std::set<CWorkRule> m_EncodedRules;
+    std::vector<std::vector<CRuleFeature> > m_RuleFeatures;
+    std::vector<CPrecompiledWorkRule> m_PrecompiledEncodedRules;
 
-    vector<CTokenItem> m_TokenList;
+    std::vector<CTokenItem> m_TokenList;
 
-    vector<set<size_t> > m_FirstSets;
-    vector<set<size_t> > m_FollowSets;
+    std::vector<std::set<size_t> > m_FirstSets;
+    std::vector<std::set<size_t> > m_FollowSets;
 
     //  we use here CWorkRule in order to be compatible with the functions
     //  which build Trie-Automat, though we use only CWorkRule::m_RightPart::m_Items
     //  all other slots are unused
-    set<CWorkRule> m_RootPrefixes;
+    std::set<CWorkRule> m_RootPrefixes;
 
-    //  a set of all second pass symbols (to detect abridged named entities)
+    //  a std::set of all second pass symbols (to detect abridged named entities)
     StringSet m_SecondPassSymbols;
 
 
-    list<CTokenListFile> m_TokenListFiles;
+    std::list<CTokenListFile> m_TokenListFiles;
 
     SymbolInformationType m_AutomatSymbolInformation;
 
@@ -223,14 +223,14 @@ public:
     std::string GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bPrintFeatures = true) const;
 
     bool GetPossibleTerminalStrings(size_t NonTerminalSymbolNo,
-                                    map<size_t, vector<CWorkRightRulePart> > &MetaSymbolToTerminalRules) const;
+                                    std::map<size_t, std::vector<CWorkRightRulePart> > &MetaSymbolToTerminalRules) const;
 
     size_t GetCountOfRoots() const;
 
     bool ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection &PlmLines, const CAgramtab *pGramTab,
-                   vector<string> &Result, bool bDumpOccurrences) const;
+                   std::vector<std::string> &Result, bool bDumpOccurrences) const;
 
-    void BuildAutomat(set<CWorkRule> &EncodedRules);
+    void BuildAutomat(std::set<CWorkRule> &EncodedRules);
 
     bool IsValid() const;
 
@@ -238,7 +238,7 @@ public:
 
     bool LoadFromPrecompiled();
 
-    void ConvertToPrecompiled(const set<CWorkRule> &EncodedRules);
+    void ConvertToPrecompiled(const std::set<CWorkRule> &EncodedRules);
 
     void PrintPrecompiled() const;
 
@@ -270,7 +270,7 @@ protected:
 
     void CreateAutomatSymbolInformation();
 
-    void Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, map<size_t, CPrefixSet> &First_k) const;
+    void Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, std::map<size_t, CPrefixSet> &First_k) const;
 
     int FindTokenListByFileName(const std::string &FileName, size_t EndItemNo);
 

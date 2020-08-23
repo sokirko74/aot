@@ -57,7 +57,7 @@ int main(int argc, const char* argv[])
 	int PostfixLength = atoi(args.Retrieve("postfix-len").c_str());
 	if ((PostfixLength == 0) ||  (PostfixLength > 5) )
 	{
-		std::cerr << "PostfixLength is set to " << PostfixLength << "\n";
+		std::cerr << "PostfixLength is std::set to " << PostfixLength << "\n";
 		std::cerr << "PostfixLength should be between 1 and 5\n";
 		return 1;
 	};

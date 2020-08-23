@@ -44,7 +44,7 @@ struct CParadigmInfo : public CLemmaInfo
 };
 
 
-typedef multimap<std::string, CParadigmInfo>		LemmaMap;
+typedef std::multimap<std::string, CParadigmInfo>		LemmaMap;
 typedef LemmaMap::iterator lemma_iterator_t;
 typedef LemmaMap::const_iterator const_lemma_iterator_t;
 
@@ -104,7 +104,7 @@ class MorphWizardMeter;
 const int MinPredictSuffixLength = 2;
 const int MaxPredictSuffixLength = 5;
 
-typedef set<CPredictSuffix> predict_container_t;
+typedef std::set<CPredictSuffix> predict_container_t;
 
 struct CDumpParadigm 
 {
@@ -138,7 +138,7 @@ class MorphoWizard : public CMorphWizardBase
 	
 	StringVector			m_Users;
 	size_t					m_SessionNo;
-	vector<CMorphSession>	m_Sessions;
+	std::vector<CMorphSession>	m_Sessions;
 
 	friend	class MorphWizardMeter;
 	MorphWizardMeter* m_pMeter;	// Nick 30.11.2003
@@ -157,22 +157,22 @@ public:
 
 
 
-	vector<set<string> >	m_PrefixSets;
+	std::vector<std::set<std::string> >	m_PrefixSets;
 
 	// the multimap from lemma to paradigms (the most largest list)
 	LemmaMap				m_LemmaToParadigm;
 
 
 	// the keys from .mwz file (project file)
-	map<std::string, std::string>		m_ProjectFileKeys;
+	std::map<std::string, std::string>		m_ProjectFileKeys;
 
 	std::string											m_CurrentNewLemma;
-	vector< predict_container_t::const_iterator>				m_CurrentPredictedParadigms;
+	std::vector< predict_container_t::const_iterator>				m_CurrentPredictedParadigms;
 
 	
 
 	//! a table of character properties for regular expressions which depend on CConcIndexator::m_Language
-	vector<BYTE>			m_PcreCharacterTables;
+	std::vector<BYTE>			m_PcreCharacterTables;
 
 	bool					m_bLoaded;
 
@@ -223,15 +223,15 @@ public:
 	const StringVector&	get_type_grammems(){return m_TypeGrammemsList;}
 
 	//  ===========   find procedures ================
-	void find_lemm_by_grammem(const std::string &pos_and_grammems, vector<lemma_iterator_t> &res);
-	void find_lemm(std::string lemm, bool bCheckLemmaPrefix, vector<lemma_iterator_t> &res);
-	void find_lemm_by_user(std::string username, vector<lemma_iterator_t> &res);
-	void find_wordforms(std::string lemm, vector<lemma_iterator_t> &res);
-	void find_ancodes(const std::string &ancode, vector<lemma_iterator_t> &res);
-	void find_lemm_by_prdno(WORD no, vector<lemma_iterator_t> &res);
-	void find_lemm_by_accent_model(int no, vector<lemma_iterator_t> &res);
+	void find_lemm_by_grammem(const std::string &pos_and_grammems, std::vector<lemma_iterator_t> &res);
+	void find_lemm(std::string lemm, bool bCheckLemmaPrefix, std::vector<lemma_iterator_t> &res);
+	void find_lemm_by_user(std::string username, std::vector<lemma_iterator_t> &res);
+	void find_wordforms(std::string lemm, std::vector<lemma_iterator_t> &res);
+	void find_ancodes(const std::string &ancode, std::vector<lemma_iterator_t> &res);
+	void find_lemm_by_prdno(WORD no, std::vector<lemma_iterator_t> &res);
+	void find_lemm_by_accent_model(int no, std::vector<lemma_iterator_t> &res);
 	
-	void find_lemm_by_prd_info( const CParadigmInfo& info, vector<lemma_iterator_t> &res);
+	void find_lemm_by_prd_info( const CParadigmInfo& info, std::vector<lemma_iterator_t> &res);
 
 	//============ Main functions for editing dictionary ====================
 	// Mrd -> Slf (Converting from dictionary to text representation)
@@ -274,7 +274,7 @@ private:
 	BYTE	_GetReverseVowelNo( const std::string& form, WORD accentModelNo, WORD formInd ) const;
 	void	SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, std::string& form) const;
 	std::string	get_prefix_set_str(WORD PrefixSetNo) const;
-	void	ReadOnePrefixSet(std::string PrefixSet, set<string>& Result) const;
+	void	ReadOnePrefixSet(std::string PrefixSet, std::set<std::string>& Result) const;
 	void	ReadPrefixSets (std::ifstream& mrdFile);
 	WORD	AddPrefixSet(std::string PrefixSetStr);
 

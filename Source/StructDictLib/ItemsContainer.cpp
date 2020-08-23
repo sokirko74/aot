@@ -123,7 +123,7 @@ int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, BYTE DomNo) c
                 || !strchr(D.m_DomainItemsBuffer, ItemStr[0])
                )
                 return -1;
-        vector<TDomItem>::const_iterator U = lower_bound(m_DomItems.begin(), m_DomItems.end(), I,
+        std::vector<TDomItem>::const_iterator U = lower_bound(m_DomItems.begin(), m_DomItems.end(), I,
                                                          IsLessByNotStableItemStrNew(this));
         if ((U == m_DomItems.end())
             || !AreEqualDomItems(*U, I)
@@ -611,7 +611,7 @@ bool TItemContainer::WriteFields() const {
 bool TItemContainer::BuildFormats(BYTE MaxNumDom) {
     BYTE FieldNo = 0;
     for (FieldNo = 0; FieldNo < Fields.size(); FieldNo++) {
-        vector<CSignat> Signats = Fields[FieldNo].m_Signats;
+        std::vector<CSignat> Signats = Fields[FieldNo].m_Signats;
 
         sort(Signats.begin(), Signats.end());
 

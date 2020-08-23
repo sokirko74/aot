@@ -7,7 +7,7 @@
 //====================================================================
 
 
-void CSemanticStructure::GetIncomingRelations (long NodeNo, vector<long>& Relations, bool UseUse) const 
+void CSemanticStructure::GetIncomingRelations (long NodeNo, std::vector<long>& Relations, bool UseUse) const 
 {
   Relations.clear();
   for (size_t i = 0; i<GetRelationsSize(); i++)
@@ -17,7 +17,7 @@ void CSemanticStructure::GetIncomingRelations (long NodeNo, vector<long>& Relati
 
 };
 
-void CSemanticStructure::GetIncomingInClauseRelations (long NodeNo, vector<long>& Relations) const 
+void CSemanticStructure::GetIncomingInClauseRelations (long NodeNo, std::vector<long>& Relations) const 
 {
   Relations.clear();
   for (size_t i = 0; i<GetRelationsSize(); i++)
@@ -27,7 +27,7 @@ void CSemanticStructure::GetIncomingInClauseRelations (long NodeNo, vector<long>
 
 	    Relations.push_back(i);
 };
-void CSemanticStructure::GetIncomingClauseRelations (long ClauseNo, vector<long>& Relations) const 
+void CSemanticStructure::GetIncomingClauseRelations (long ClauseNo, std::vector<long>& Relations) const 
 {
   Relations.clear();
   for (size_t i = 0; i<GetRelationsSize(); i++)
@@ -40,7 +40,7 @@ void CSemanticStructure::GetIncomingClauseRelations (long ClauseNo, vector<long>
 
 
 
-void CSemanticStructure::GetOutcomingRelations (long NodeNo, vector<long>& Relations, bool UseUse) const 
+void CSemanticStructure::GetOutcomingRelations (long NodeNo, std::vector<long>& Relations, bool UseUse) const 
 {
  Relations.clear();
 
@@ -52,22 +52,22 @@ void CSemanticStructure::GetOutcomingRelations (long NodeNo, vector<long>& Relat
 
 long CSemanticStructure::GetOutcomingRelationsCount (long NodeNo,  bool UseUse) const 
 {
- vector<long> Relations;
+ std::vector<long> Relations;
  GetOutcomingRelations(NodeNo, Relations, UseUse);
  return Relations.size();
 };
 
-void CSemanticStructure::GetOutcomingNodes (long NodeNo, vector<long>& Nodes, bool UseUse) const
+void CSemanticStructure::GetOutcomingNodes (long NodeNo, std::vector<long>& Nodes, bool UseUse) const
 {
   Nodes.clear();
-  vector <long> Rels;
+  std::vector <long> Rels;
   GetOutcomingRelations (NodeNo, Rels, UseUse);
   for (size_t i = 0; i<Rels.size(); i++)
   	   Nodes.push_back(GetRelation(Rels[i])->m_TargetNodeNo);
 };
 
 
-void CSemanticStructure::GetRelations (long NodeNo, vector<long>& Relations, bool UseUse) const 
+void CSemanticStructure::GetRelations (long NodeNo, std::vector<long>& Relations, bool UseUse) const 
 {
   Relations.clear();
 
@@ -80,20 +80,20 @@ void CSemanticStructure::GetRelations (long NodeNo, vector<long>& Relations, boo
 
 
 };
-void CSemanticStructure::GetBrothers (long NodeNo, vector<long>& Nodes, bool UseUse) const
+void CSemanticStructure::GetBrothers (long NodeNo, std::vector<long>& Nodes, bool UseUse) const
 {
   Nodes.clear();
-  vector<long> Rels;
+  std::vector<long> Rels;
   GetIncomingRelations (NodeNo, Rels, UseUse);
   for (long i=0; i < Rels.size(); i++)
   {
-    vector <long> CurrNodes;
+    std::vector <long> CurrNodes;
     GetOutcomingNodes (GetRelation(Rels[i])->m_SourceNodeNo, CurrNodes, UseUse);
 	for (long j=0; j < CurrNodes.size();j++)
 	 if (!_find(Nodes, CurrNodes[j]))
 		Nodes.push_back(CurrNodes[j]);
 
-	vector <long> DopRels;
+	std::vector <long> DopRels;
     GetOutcomingDopRelations (GetRelation(Rels[i])->m_SourceNodeNo, DopRels);
 	for ( long j=0; j < DopRels.size();j++)
 	 if (!_find(Nodes, GetDopRelation(DopRels[j])->m_TargetNodeNo))
@@ -106,13 +106,13 @@ void CSemanticStructure::GetBrothers (long NodeNo, vector<long>& Nodes, bool Use
   GetIncomingDopRelations (NodeNo, Rels);
   for (long i=0; i < Rels.size(); i++)
   {
-    vector <long> CurrNodes;
+    std::vector <long> CurrNodes;
     GetOutcomingNodes (GetDopRelation(Rels[i])->m_SourceNodeNo, CurrNodes, UseUse);
 	for (long j=0; j < CurrNodes.size();j++)
 	 if (!_find(Nodes, CurrNodes[j]))
 		Nodes.push_back(CurrNodes[j]);
 
-	vector <long> DopRels;
+	std::vector <long> DopRels;
     GetOutcomingDopRelations (GetDopRelation(Rels[i])->m_SourceNodeNo, DopRels);
 	for ( long j=0; j < DopRels.size();j++)
 	 if (!_find(Nodes, GetDopRelation(DopRels[j])->m_TargetNodeNo))
@@ -126,7 +126,7 @@ void CSemanticStructure::GetBrothers (long NodeNo, vector<long>& Nodes, bool Use
 
 long CSemanticStructure::GetIncomingRelationsCount (long NodeNo, bool UseUse) const
 {
- vector<long> Relations;
+ std::vector<long> Relations;
  GetIncomingRelations(NodeNo, Relations, UseUse);
  return Relations.size();
 };
@@ -158,7 +158,7 @@ void CSemanticStructure::PrintRelations() const
 
 };
 
-void CSemanticStructure::FindRelations (long NodeNo1, long NodeNo2, vector<long>& Rels ) const 
+void CSemanticStructure::FindRelations (long NodeNo1, long NodeNo2, std::vector<long>& Rels ) const 
 {
  Rels.clear();
  for (size_t i=0; i<GetRelationsSize(); i++)
@@ -171,7 +171,7 @@ void CSemanticStructure::FindRelations (long NodeNo1, long NodeNo2, vector<long>
 
 long CSemanticStructure::FindFirstRelation (long NodeNo1, long NodeNo2) const
 {
- vector<long> Rels;
+ std::vector<long> Rels;
  FindRelations (NodeNo1, NodeNo2, Rels);
  if (Rels.size() == 0) return -1;
  return Rels[0];
@@ -190,13 +190,13 @@ long CSemanticStructure::FindDopFirstRelation (long NodeNo1, long NodeNo2) const
 
 
 
-void CSemanticStructure::GetClauseRoots (size_t ClauseNo, vector<long>& Roots) const
+void CSemanticStructure::GetClauseRoots (size_t ClauseNo, std::vector<long>& Roots) const
 {
  Roots.clear();
  for (size_t i=0; i<GetNodesSize(); i++)
   if  ( IsInClause(i, ClauseNo) )
   {
-	  vector <long> IncomRels;
+	  std::vector <long> IncomRels;
 
 	  GetIncomingRelations(i, IncomRels, false);
 	  for (size_t k=0; k <IncomRels.size(); k++)
@@ -246,7 +246,7 @@ void CSemanticStructure::DeleteDubleRelations()
 
 };
 
-void CSemanticStructure::DeleteRelations(vector<long>& Rels)
+void CSemanticStructure::DeleteRelations(std::vector<long>& Rels)
 {
 	if (Rels.size() == 0) return;
 	sort (Rels.begin(), Rels.end());
@@ -632,14 +632,14 @@ long  CSemanticStructure::FindLexFunctByParameterNodeNo(long NodeNo) const
 
 
 // получает все вершины  предложения
-void CSemanticStructure::GetRoots(vector<long>& Roots) const
+void CSemanticStructure::GetRoots(std::vector<long>& Roots) const
 {
 	long count = GetNodesSize();
 	long relscount = GetRelationsSize();
 
 	for(int i = 0 ; i < count ; i++ )
 	{
-	  vector <long> IncomRels;
+	  std::vector <long> IncomRels;
 	  GetIncomingRelations(i, IncomRels, false);
 	  /*
 	    дополнительные отношения, которые на время интерпретации русской структуры были скопированы
@@ -676,7 +676,7 @@ long CSemanticStructure::GetSynRelBySemRel(long iSemRelNo) const
 
 
 
-void CSemanticStructure::GetIncomingDopRelations (long NodeNo, vector<long>& Relations) const 
+void CSemanticStructure::GetIncomingDopRelations (long NodeNo, std::vector<long>& Relations) const 
 {
   Relations.clear();
   for (size_t i = 0; i<GetDopRelationsSize(); i++)
@@ -685,7 +685,7 @@ void CSemanticStructure::GetIncomingDopRelations (long NodeNo, vector<long>& Rel
 
 };
 
-void CSemanticStructure::GetOutcomingDopRelations (long NodeNo, vector<long>& Relations) const 
+void CSemanticStructure::GetOutcomingDopRelations (long NodeNo, std::vector<long>& Relations) const 
 {
   Relations.clear();
 

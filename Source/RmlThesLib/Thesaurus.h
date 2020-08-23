@@ -66,7 +66,7 @@ struct CInnerTermin {
 	std::string m_AbbrForm;
 	int	   m_TerminId;
 	short  m_ModelNo;
-	vector<long> m_Items;
+	std::vector<long> m_Items;
 };
 
 
@@ -108,7 +108,7 @@ struct CRelat {
 };
 
 
-typedef map<std::string, int> String2Int;
+typedef std::map<std::string, int> String2Int;
 
 class CThesaurus 
 {
@@ -118,18 +118,18 @@ public:
 	std::string			m_Name;
 	std::string			m_Directory;
 	MorphLanguageEnum m_MainLanguage;
-    vector<CInnerModel>	m_Models;
+    std::vector<CInnerModel>	m_Models;
 	const CAgramtab*	m_pEngGramTab;
 	const CAgramtab*	m_pMainGramTab;
 	const CDictionary*	m_pOborDictionary;
 	
-	vector<COborot>			m_Oborots;
-	vector<CInnerTermin>	m_Termins;
-	vector<CSynonym>		m_SynonymsByConcept;
-	vector<CSynonym>		m_SynonymsByTextEntry;
-	vector<CConcept>		m_Concepts;
-	vector<CRelat>			m_Relats;
-	vector<CInnerSynItem>	m_SynItems;
+	std::vector<COborot>			m_Oborots;
+	std::vector<CInnerTermin>	m_Termins;
+	std::vector<CSynonym>		m_SynonymsByConcept;
+	std::vector<CSynonym>		m_SynonymsByTextEntry;
+	std::vector<CConcept>		m_Concepts;
+	std::vector<CRelat>			m_Relats;
+	std::vector<CInnerSynItem>	m_SynItems;
 	String2Int				m_AbbrForms2TerminNo;
 	
 	
@@ -146,9 +146,9 @@ public:
 	int	 GetModelNoByModelId (long ModelId) const;
 	bool LoadTermins (std::string FileName);
 
-	void GetConceptsByTextEntryId(long TextEntryId, vector<long>& Concepts) const;
-	void GetTextEntriesByConcept(long ConceptId, vector<long>& TextEntries) const;
-	bool GetTree(int ConceptNo, vector<long>& TreeConcepts,  vector<long> CurrPath, RelationEnum RelationType) const;
+	void GetConceptsByTextEntryId(long TextEntryId, std::vector<long>& Concepts) const;
+	void GetTextEntriesByConcept(long ConceptId, std::vector<long>& TextEntries) const;
+	bool GetTree(int ConceptNo, std::vector<long>& TreeConcepts,  std::vector<long> CurrPath, RelationEnum RelationType) const;
 	bool LoadSynonyms (std::string FileName);
 
 	
@@ -167,12 +167,12 @@ public:
 	bool	ReadRelationsFromDisk();
 	bool	SetDatabase(std::string DatabaseName);
 	bool	IsA(DWORD TextEntryId, std::string ConceptStr) const;
-	void	QueryEnglishTranslations(DWORD TextEntryId, vector<int>& CurrentEnglishTermins) const;
+	void	QueryEnglishTranslations(DWORD TextEntryId, std::vector<int>& CurrentEnglishTermins) const;
 	int		GetTerminIdBySingleWord(std::string WordStr) const;
-	int		QueryTopConcepts(UINT TextEntryId, vector<int>& CurrentTopConcepts) const;
-	void	QueryHigherTermins(UINT TextEntryId, vector<int>& CurrentHigherTermins) const;
-	DWORD	QueryTerminItem(const std::string& ItemStr, vector<int>& CurrentTerminItems) const;
-	void	QueryLowerTermins(const std::string& ConceptStr, UINT Language, vector<int>& CurrentLowerTermins) const;
+	int		QueryTopConcepts(UINT TextEntryId, std::vector<int>& CurrentTopConcepts) const;
+	void	QueryHigherTermins(UINT TextEntryId, std::vector<int>& CurrentHigherTermins) const;
+	DWORD	QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const;
+	void	QueryLowerTermins(const std::string& ConceptStr, UINT Language, std::vector<int>& CurrentLowerTermins) const;
 	int		FindAbbr(const std::string& str) const;
 	void	SetDicts(MorphLanguageEnum MainLanguage, const CDictionary* OborDic, const CAgramtab* MainGramtab, const CAgramtab* EngGramtab);
 };

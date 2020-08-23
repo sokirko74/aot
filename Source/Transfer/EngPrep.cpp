@@ -56,7 +56,7 @@ void CEngSynthes::handle_prep(int node_no)
 		)
 	{
 		int nd = Rel(eng_rel).m_SourceNodeNo;
-		vector<long> Nodes;
+		std::vector<long> Nodes;
 		E.GetChildNodes(nd, Nodes);
 		sort(Nodes.begin(),Nodes.end(),IsLessByMinWordNo(&E));
 		if (node_no != Nodes[0])

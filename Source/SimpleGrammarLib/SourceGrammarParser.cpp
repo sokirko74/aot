@@ -16,7 +16,7 @@ bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLa
 	
 	if (pNode->m_pAttributes)
 	{
-		for (list<CNodeAttribute*>::const_iterator it = pNode->m_pAttributes->m_Items.begin(); it != pNode->m_pAttributes->m_Items.end(); it++)
+		for (std::list<CNodeAttribute*>::const_iterator it = pNode->m_pAttributes->m_Items.begin(); it != pNode->m_pAttributes->m_Items.end(); it++)
 		{
 			const CNodeAttribute* A = (*it);
 			if (!I.AddAttribute(A->m_Name,A->m_Value, Language, ErrorStr, SourceFileName))
@@ -32,7 +32,7 @@ bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLa
 	return true;	
 };
 
-bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo, CGrammarItem& I, vector<CRuleFeature>& Features, std::string& ErrorStr)
+bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo, CGrammarItem& I, std::vector<CRuleFeature>& Features, std::string& ErrorStr)
 {
 	// convert attribute "grm" to a feature "has_grammem"
 	if (		(I.m_bMeta)  
@@ -77,7 +77,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 			F.m_RightItems.push_back(A);
 		}
 		F.m_Type = foeCheck;
-		map<std::string, std::string>::iterator it  = I.m_Attributes.find("det");
+		std::map<std::string, std::string>::iterator it  = I.m_Attributes.find("det");
 		assert (it != I.m_Attributes.end());
 		bool b = F.InitFuncName(it->second);
 		if (!b)
@@ -96,7 +96,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 			&&	(I.m_Attributes.find("has_one_grm") != I.m_Attributes.end())
 		)
 	{
-		map<std::string, std::string>::iterator it  = I.m_Attributes.find("has_one_grm");
+		std::map<std::string, std::string>::iterator it  = I.m_Attributes.find("has_one_grm");
 		assert (it != I.m_Attributes.end());
 		CRuleFeature F;
 		{
@@ -131,7 +131,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 			&&	(I.m_Attributes.find("atomic") != I.m_Attributes.end())
 		)
 	{
-		map<std::string, std::string>::iterator it  = I.m_Attributes.find("atomic");
+		std::map<std::string, std::string>::iterator it  = I.m_Attributes.find("atomic");
 		CRuleFeature F;
 		{
 			CAttribAndId A;
@@ -161,7 +161,7 @@ bool AttributesToFeatures (CWorkGrammar& WorkGrammar, const size_t CurrentItemNo
 
 bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGrammar, CWorkRule& NewRule, std::string& ErrorStr, const std::string& SourceFileName )
 {
-	const vector<CChunkNode*>& V = pNode->GetChildren();	
+	const std::vector<CChunkNode*>& V = pNode->GetChildren();	
 
 	for (size_t i=0; i<V.size(); i++)
 	{
@@ -207,7 +207,7 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 
 	int RuleId = 1;
 	
-	for (list<CChunkRule*>::const_iterator it = ChunkGrammar.m_Rules.begin(); it != ChunkGrammar.m_Rules.end(); it++)
+	for (std::list<CChunkRule*>::const_iterator it = ChunkGrammar.m_Rules.begin(); it != ChunkGrammar.m_Rules.end(); it++)
 	{
 		
 		const CChunkRule* Rule = *it;
@@ -221,7 +221,7 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 		};
 		size_t LeftPartId = WorkGrammar.GetItemId(I);
 
-		for (list<CChunkSequenceNode*>::const_iterator it1 = Rule->m_pRightHand.begin(); it1 != Rule->m_pRightHand.end(); it1++)
+		for (std::list<CChunkSequenceNode*>::const_iterator it1 = Rule->m_pRightHand.begin(); it1 != Rule->m_pRightHand.end(); it1++)
 		{
 			WorkGrammar.m_RuleFeatures.push_back(Rule->m_FeatureExprs);
 			CWorkRule WorkRule;

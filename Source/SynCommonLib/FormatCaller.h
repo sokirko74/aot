@@ -32,8 +32,8 @@ struct CFormatCall
 
 };
 
-typedef map<int,CFormatCall> CFormatCallMap;
-typedef pair<int, int> CIntPair;
+typedef std::map<int,CFormatCall> CFormatCallMap;
+typedef std::pair<int, int> CIntPair;
 
 
 class CFormatCaller : public CGroups
@@ -93,7 +93,7 @@ public:
 
 protected:	  
 	virtual int		GetRuleByGroupTypeForThesaurus(int GroupType) const = 0;
-	void			change_if_has_obor_inside(CGroup& group, vector<CPeriod>& oborots);
+	void			change_if_has_obor_inside(CGroup& group, std::vector<CPeriod>& oborots);
 	int				FindEndOfExpression(int StartWordNo) const;
 
 };

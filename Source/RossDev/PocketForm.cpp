@@ -120,7 +120,7 @@ int CPocketForm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 }
 
 
-int OpenPocket(   const vector<CRossPocketItem>& UnitNos,
+int OpenPocket(   const std::vector<CRossPocketItem>& UnitNos,
 			  CString    Title) 
 {
 

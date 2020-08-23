@@ -162,8 +162,8 @@ bool CRusCorpXmlFile::CreateGraTable() {
 };
 
 
-bool CRusCorpXmlFile::PrintDisambiguatedXmlNodes(ostream &outputStream) {
-    set<void *> GoodAnnots;
+bool CRusCorpXmlFile::PrintDisambiguatedXmlNodes(std::ostream &outputStream) {
+    std::set<void *> GoodAnnots;
     for (size_t i = 0; i < m_CurrSentTokens.size(); i++)
         for (size_t j = 0; j < m_CurrSentTokens[i].m_Annots.size(); j++)
             GoodAnnots.insert(m_CurrSentTokens[i].m_Annots[j].m_XmlRef);

@@ -41,7 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 /* This module contains internal functions for testing newlines when more than
 one kind of newline is to be recognized. When a newline is found, its length is
 returned. In principle, we could implement several newline "types", each
-referring to a different set of newline characters. At present, PCRE supports
+referring to a different std::set of newline characters. At present, PCRE supports
 only NLTYPE_FIXED, which gets handled without these functions, NLTYPE_ANYCRLF,
 and NLTYPE_ANY. The full list of Unicode newline characters is taken from
 http://unicode.org/unicode/reports/tr18/. */
@@ -60,12 +60,12 @@ http://unicode.org/unicode/reports/tr18/. */
 *************************************************/
 
 /* It is guaranteed that the initial value of ptr is less than the end of the
-string that is being processed.
+std::string that is being processed.
 
 Arguments:
   ptr          pointer to possible newline
   type         the newline type
-  endptr       pointer to the end of the string
+  endptr       pointer to the end of the std::string
   lenptr       where to return the length
   utf8         TRUE if in utf8 mode
 
@@ -110,12 +110,12 @@ else switch(c)
 *************************************************/
 
 /* It is guaranteed that the initial value of ptr is greater than the start of
-the string that is being processed.
+the std::string that is being processed.
 
 Arguments:
   ptr          pointer to possible newline
   type         the newline type
-  startptr     pointer to the start of the string
+  startptr     pointer to the start of the std::string
   lenptr       where to return the length
   utf8         TRUE if in utf8 mode
 

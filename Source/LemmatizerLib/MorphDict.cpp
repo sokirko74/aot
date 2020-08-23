@@ -35,7 +35,7 @@ void CMorphDict::InitAutomat(CMorphAutomat*    pFormAutomat)
 };
 
 
-void    CMorphDict::GetLemmaInfos (const std::string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const 
+void    CMorphDict::GetLemmaInfos (const std::string& Text, size_t TextPos, std::vector<CAutomAnnotationInner>& Infos) const 
 {
     const size_t TextLength = Text.length();
     size_t Count =     Infos.size();
@@ -49,10 +49,10 @@ void    CMorphDict::GetLemmaInfos (const std::string& Text, size_t TextPos, vect
         //std::string Base = Text.substr(TextStartPos, TextLength-TextStartPos-M.m_FlexiaStr.length());
         std::string Base = m_Prefixes[A.m_PrefixNo]+Text.substr(TextStartPos, TextLength-TextStartPos-M.m_FlexiaStr.length());
 
-        vector<CLemmaInfoAndLemma>::const_iterator start = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo];
-        vector<CLemmaInfoAndLemma>::const_iterator end = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo+1];
+        std::vector<CLemmaInfoAndLemma>::const_iterator start = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo];
+        std::vector<CLemmaInfoAndLemma>::const_iterator end = m_LemmaInfos.begin()+m_ModelsIndex[A.m_ModelNo+1];
 
-        vector<CLemmaInfoAndLemma>::const_iterator it =  
+        std::vector<CLemmaInfoAndLemma>::const_iterator it =  
             lower_bound (start,  end, Base.c_str(), m_SearchInfoLess);
         
     
@@ -70,7 +70,7 @@ void    CMorphDict::GetLemmaInfos (const std::string& Text, size_t TextPos, vect
 
 
 
-void    CMorphDict::PredictBySuffix (const std::string& Text, size_t& TextPos, size_t MinimalPredictSuffixlen, vector<CAutomAnnotationInner>& Infos) const 
+void    CMorphDict::PredictBySuffix (const std::string& Text, size_t& TextPos, size_t MinimalPredictSuffixlen, std::vector<CAutomAnnotationInner>& Infos) const 
 {
     size_t Count = Text.length();
     
@@ -157,7 +157,7 @@ bool CMorphDict::Load(std::string GrammarFileName)
         return false;
 
     std::string PrecompiledFile = MakeFName(GrammarFileName,"annot");
-    std::ifstream annotFile(PrecompiledFile, ios::binary);
+    std::ifstream annotFile(PrecompiledFile, std::ios::binary);
     if (!annotFile.is_open() )
     {
         ErrorMessage (Format("Cannot open %s", PrecompiledFile.c_str()));

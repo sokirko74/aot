@@ -237,7 +237,7 @@ std::string MorphoWizard::get_lock_file_name() const {
     int i = s.find_last_of("/");
     if (i == std::string::npos)
         i = s.find_last_of("\\");
-    map<std::string, std::string>::const_iterator it = m_ProjectFileKeys.find("ProjectsDir");
+    std::map<std::string, std::string>::const_iterator it = m_ProjectFileKeys.find("ProjectsDir");
     std::string Path;
     if (it != m_ProjectFileKeys.end())
         Path = it->second;
@@ -257,7 +257,7 @@ std::string MorphoWizard::get_log_file_name() const {
     int i = s.find_last_of("/");
     if (i == std::string::npos)
         i = s.find_last_of("\\");
-    map<std::string, std::string>::const_iterator it = m_ProjectFileKeys.find("ProjectsDir");
+    std::map<std::string, std::string>::const_iterator it = m_ProjectFileKeys.find("ProjectsDir");
     std::string Path;
     if (it != m_ProjectFileKeys.end())
         Path = it->second;
@@ -485,7 +485,7 @@ void MorphoWizard::check_paradigm(long line_no) {
     catch (...) {
     };
     error_label:
-    vector<lemma_iterator_t> found_paradigms;
+    std::vector<lemma_iterator_t> found_paradigms;
     find_lemm_by_prdno(line_no, found_paradigms);
     if (found_paradigms.size() > 0)
         ErrorMessage(Format("Flexiamodel No %i has invalid gramcodes", line_no));
@@ -539,7 +539,7 @@ void MorphoWizard::ReadSessions(std::ifstream &mrdFile) {
 
 };
 
-void MorphoWizard::ReadOnePrefixSet(std::string PrefixSetStr, set<string> &Result) const {
+void MorphoWizard::ReadOnePrefixSet(std::string PrefixSetStr, std::set<std::string> &Result) const {
     RmlMakeUpper(PrefixSetStr, m_Language);
     Trim(PrefixSetStr);
     for (size_t i = 0; i < PrefixSetStr.length(); i++)
@@ -547,7 +547,7 @@ void MorphoWizard::ReadOnePrefixSet(std::string PrefixSetStr, set<string> &Resul
             && (BYTE) PrefixSetStr[i] != ','
             && (BYTE) PrefixSetStr[i] != ' '
                 )
-            throw CExpc("Cannot parse the prefix set");
+            throw CExpc("Cannot parse the prefix std::set");
 
 
     StringTokenizer tok(PrefixSetStr.c_str(), ", \t\r\n");
@@ -569,7 +569,7 @@ void MorphoWizard::ReadPrefixSets(std::ifstream &mrdFile) {
             throw CExpc("Cannot read enough prefix sets");
         }
 
-        set<string> PrefixSet;
+        std::set<std::string> PrefixSet;
         ReadOnePrefixSet(line, PrefixSet);
         if (PrefixSet.empty())
             throw CExpc("No prefixes found in prefix sets section");
@@ -609,7 +609,7 @@ void MorphoWizard::ReadLemmas(std::ifstream &mrdFile) {
 
         lemm += m_FlexiaModels[ParadigmNo].get_first_flex();
 
-        m_LemmaToParadigm.insert(make_pair(lemm, CParadigmInfo(ParadigmNo, AccentModelNo, SessionNo, AuxAccent,
+        m_LemmaToParadigm.insert(std::make_pair(lemm, CParadigmInfo(ParadigmNo, AccentModelNo, SessionNo, AuxAccent,
                                                                  CommonAncode.c_str(), PrefixSetNo)));
 
     }
@@ -678,7 +678,7 @@ void MorphoWizard::load_mrd(bool guest, bool bCreatePrediction) {
 }
 
 std::string &MorphoWizard::get_value(const std::string &key) {
-    map<std::string, std::string>::iterator it = m_ProjectFileKeys.find(key);
+    std::map<std::string, std::string>::iterator it = m_ProjectFileKeys.find(key);
     if (it == m_ProjectFileKeys.end()) throw CExpc("No such key: " + key);
     return it->second;
 }
@@ -736,7 +736,7 @@ void MorphoWizard::save_mrd() {
 
 
 //----------------------------------------------------------------------------
-void MorphoWizard::find_lemm(std::string lemm, bool bCheckLemmaPrefix, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_lemm(std::string lemm, bool bCheckLemmaPrefix, std::vector<lemma_iterator_t> &res) {
     if (!!m_pMeter) {
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding lemmas...");
@@ -778,7 +778,7 @@ void MorphoWizard::find_lemm(std::string lemm, bool bCheckLemmaPrefix, vector<le
             RmlMakeUpper(Prefix, m_Language);
             Lemma.erase(0, prefix_pos + 1);
         };
-        pair<lemma_iterator_t, lemma_iterator_t> range = m_LemmaToParadigm.equal_range(Lemma);
+        std::pair<lemma_iterator_t, lemma_iterator_t> range = m_LemmaToParadigm.equal_range(Lemma);
 
         if (!!m_pMeter)
             m_pMeter->SetMaxPos(distance(range.first, range.second));
@@ -845,10 +845,10 @@ bool IsLessBySession(const lemma_iterator_t &it1, const lemma_iterator_t &it2) {
     return it1->second.m_SessionNo < it2->second.m_SessionNo;
 };
 
-void MorphoWizard::find_lemm_by_user(std::string username, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_lemm_by_user(std::string username, std::vector<lemma_iterator_t> &res) {
     res.clear();
 
-    set<size_t> Sessions;
+    std::set<size_t> Sessions;
 
     for (size_t i = 0; i < m_Sessions.size(); i++)
         if (m_Sessions[i].m_UserName == username)
@@ -887,7 +887,7 @@ bool simple_match(const std::string &pattern, const std::string &word) {
 //----------------------------------------------------------------------------
 // search a word form in all paradigms
 //----------------------------------------------------------------------------
-void MorphoWizard::find_wordforms(std::string wordform, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_wordforms(std::string wordform, std::vector<lemma_iterator_t> &res) {
     if (!!m_pMeter) {
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding wordforms...");
@@ -931,7 +931,7 @@ void MorphoWizard::find_wordforms(std::string wordform, vector<lemma_iterator_t>
 
 /*
 //----------------------------------------------------------------------------
-void MorphoWizard::find_wordforms(const std::string &wordform, vector<lemma_iterator_t> &res)
+void MorphoWizard::find_wordforms(const std::string &wordform, std::vector<lemma_iterator_t> &res)
 {
 	if( !!m_pMeter )
 	{
@@ -939,7 +939,7 @@ void MorphoWizard::find_wordforms(const std::string &wordform, vector<lemma_iter
 		m_pMeter->SetInfo("Finding wordforms...");
 	}
 
-	vector<string> wordforms;
+	std::vector<std::string> wordforms;
 	for (lemma_iterator_t it = m_LemmaToParadigm.begin(); it != m_LemmaToParadigm.end();it++)
 	{
 		get_wordforms(it, wordforms);
@@ -959,13 +959,13 @@ void MorphoWizard::find_wordforms(const std::string &wordform, vector<lemma_iter
 //----------------------------------------------------------------------------
 // search an ancode std::string in all paradigms (an ancode std::string can contain more than one ancode)
 //----------------------------------------------------------------------------
-void MorphoWizard::find_ancodes(const std::string &ancodes, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_ancodes(const std::string &ancodes, std::vector<lemma_iterator_t> &res) {
     if (!!m_pMeter) {
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding ancodes...");
     }
 
-    vector<WORD> prdno;
+    std::vector<WORD> prdno;
 
     for (size_t i = 0; i < m_FlexiaModels.size(); i++)
         for (size_t l = 0; l < ancodes.size(); l += 2)
@@ -984,7 +984,7 @@ void MorphoWizard::find_ancodes(const std::string &ancodes, vector<lemma_iterato
 }
 
 //----------------------------------------------------------------------------
-void MorphoWizard::find_lemm_by_grammem(const std::string &pos_and_grammems, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_lemm_by_grammem(const std::string &pos_and_grammems, std::vector<lemma_iterator_t> &res) {
     BYTE pos;
     QWORD gra;
     /*{	// processing type grammems for example "РЎ Р»РѕРє | РѕРґ,
@@ -1018,12 +1018,12 @@ void MorphoWizard::find_lemm_by_grammem(const std::string &pos_and_grammems, vec
 }
 
 //----------------------------------------------------------------------------
-void MorphoWizard::find_lemm_by_accent_model(int AccentModelNo, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_lemm_by_accent_model(int AccentModelNo, std::vector<lemma_iterator_t> &res) {
     if (!!m_pMeter) {
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding lemmas...");
     }
-    set<WORD> Models;
+    std::set<WORD> Models;
     if (AccentModelNo == -1) {
         for (size_t k = 0; k < m_AccentModels.size(); k++)
             if (find(m_AccentModels[k].m_Accents.begin(), m_AccentModels[k].m_Accents.end(), UnknownAccent) !=
@@ -1042,7 +1042,7 @@ void MorphoWizard::find_lemm_by_accent_model(int AccentModelNo, vector<lemma_ite
 
 
 //----------------------------------------------------------------------------
-void MorphoWizard::find_lemm_by_prdno(WORD prdno, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_lemm_by_prdno(WORD prdno, std::vector<lemma_iterator_t> &res) {
     if (!!m_pMeter) {
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding lemmas...");
@@ -1057,7 +1057,7 @@ void MorphoWizard::find_lemm_by_prdno(WORD prdno, vector<lemma_iterator_t> &res)
 }
 
 //----------------------------------------------------------------------------
-void MorphoWizard::find_lemm_by_prd_info(const CParadigmInfo &info, vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_lemm_by_prd_info(const CParadigmInfo &info, std::vector<lemma_iterator_t> &res) {
     if (!!m_pMeter) {
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding lemmas...");
@@ -1169,11 +1169,11 @@ void MorphoWizard::remove_lemm(lemma_iterator_t it) {
 
 std::string MorphoWizard::get_prefix_set_str(WORD PrefixSetNo) const {
     std::string Result;
-    const set<string> &PS = m_PrefixSets[PrefixSetNo];
+    const std::set<std::string> &PS = m_PrefixSets[PrefixSetNo];
     assert(!PS.empty());
     if (PS.empty()) return "";
 
-    for (set<string>::const_iterator it = PS.begin(); it != PS.end(); it++) {
+    for (std::set<std::string>::const_iterator it = PS.begin(); it != PS.end(); it++) {
         Result += *it;
         Result += ",";
     };
@@ -1328,8 +1328,8 @@ void MorphoWizard::slf_to_mrd(const std::string &s, std::string &lemm, CFlexiaMo
     StringTokenizer lines(s.c_str(), "\r\n");
 
     std::string lemm_gramcode;
-    typedef set<CSlfLineByAncode, CSlfLineByAncodeLess> SlfLineSet;
-    typedef map<std::string, SlfLineSet, AncodeLess> Gramcode2SlfLineMap;
+    typedef std::set<CSlfLineByAncode, CSlfLineByAncodeLess> SlfLineSet;
+    typedef std::map<std::string, SlfLineSet, AncodeLess> Gramcode2SlfLineMap;
     Gramcode2SlfLineMap Paradigm(ancode_less);
     size_t CommonLeftPartSize = lemm.size();
     BYTE LemmaAccentByte;
@@ -1442,16 +1442,16 @@ void MorphoWizard::slf_to_mrd(const std::string &s, std::string &lemm, CFlexiaMo
             Line.m_Form = form;
             Line.m_Prefix = Prefix;
 
-            SlfLineSet set;
-            set.insert(Line);
-            pair<Gramcode2SlfLineMap::iterator, bool> p = Paradigm.insert(make_pair(gramcode, set));
+            SlfLineSet slfset;
+            slfset.insert(Line);
+            std::pair<Gramcode2SlfLineMap::iterator, bool> p = Paradigm.insert(std::make_pair(gramcode, slfset));
             if (!p.second) {
                 p.first->second.insert(Line);
             }
 
             //  calculating the common left part  of  all wordforms
             size_t i = 0;
-            for (; i < min(CommonLeftPartSize, form.length()); i++)
+            for (; i < std::min(CommonLeftPartSize, form.length()); i++)
                 if (form[i] != lemm[i])
                     break;
 
@@ -1472,9 +1472,9 @@ void MorphoWizard::slf_to_mrd(const std::string &s, std::string &lemm, CFlexiaMo
 
     //  adding the rest paradigm ordered by ancode
     for (Gramcode2SlfLineMap::const_iterator pit = Paradigm.begin(); pit != Paradigm.end(); pit++) {
-        const SlfLineSet &set = pit->second;
+        const SlfLineSet &slf_set = pit->second;
         std::string Gramcode = pit->first;
-        for (SlfLineSet::const_iterator it = set.begin(); it != set.end(); it++) {
+        for (SlfLineSet::const_iterator it = slf_set.begin(); it != slf_set.end(); it++) {
             std::string Flexia = it->m_Form.substr(CommonLeftPartSize);
             BYTE AccentByte = it->m_AccentByte;
             std::string Prefix = it->m_Prefix;
@@ -1522,7 +1522,7 @@ void MorphoWizard::log(const std::string &lemm, const CFlexiaModel &p, bool is_a
 WORD AddAccentModel(MorphoWizard &C, const CAccentModel &AccentModel) {
     WORD AccentModelNo = UnknownAccentModelNo;
     if (!AccentModel.m_Accents.empty()) {
-        vector<CAccentModel>::iterator accent_it = find(C.m_AccentModels.begin(), C.m_AccentModels.end(), AccentModel);
+        std::vector<CAccentModel>::iterator accent_it = find(C.m_AccentModels.begin(), C.m_AccentModels.end(), AccentModel);
         if (accent_it == C.m_AccentModels.end()) {
             //  a new accent model should be added
             AccentModelNo = (WORD) C.m_AccentModels.size();
@@ -1540,7 +1540,7 @@ WORD AddAccentModel(MorphoWizard &C, const CAccentModel &AccentModel) {
 WORD AddFlexiaModel(MorphoWizard &C, const CFlexiaModel &FlexiaModel) {
     WORD ParadigmNo;
     // finding Paradigm No
-    vector<CFlexiaModel>::iterator pit = find(C.m_FlexiaModels.begin(), C.m_FlexiaModels.end(), FlexiaModel);
+    std::vector<CFlexiaModel>::iterator pit = find(C.m_FlexiaModels.begin(), C.m_FlexiaModels.end(), FlexiaModel);
 
     if (pit == C.m_FlexiaModels.end()) {
         //  a new paradigm should be added
@@ -1562,7 +1562,7 @@ WORD MorphoWizard::AddPrefixSet(std::string PrefixSetStr) {
     if (PrefixSetStr.empty())
         return UnknownPrefixSetNo;
 
-    set<string> PrefixSet;
+    std::set<std::string> PrefixSet;
     ReadOnePrefixSet(PrefixSetStr, PrefixSet);
 
     if (PrefixSet.empty())
@@ -1570,9 +1570,9 @@ WORD MorphoWizard::AddPrefixSet(std::string PrefixSetStr) {
 
 
     WORD Result;
-    vector<set<string> >::iterator pit = find(m_PrefixSets.begin(), m_PrefixSets.end(), PrefixSet);
+    std::vector<std::set<std::string> >::iterator pit = find(m_PrefixSets.begin(), m_PrefixSets.end(), PrefixSet);
     if (pit == m_PrefixSets.end()) {
-        //  a new prefix set should be added
+        //  a new prefix std::set should be added
         Result = (WORD) m_PrefixSets.size();
         if (Result == 0xffff)
             throw CExpc("Too many prefix sets");
@@ -1612,7 +1612,7 @@ MorphoWizard::add_lemma(const std::string &slf, std::string common_grammems, con
         SessionNo = GetCurrentSessionNo();
 
     CParadigmInfo NewInfo(ParadigmNo, AccentModelNo, SessionNo, AuxAccent, common_gramcode.c_str(), PrefixSetNo);
-    m_LemmaToParadigm.insert(make_pair(lemm, NewInfo));
+    m_LemmaToParadigm.insert(std::make_pair(lemm, NewInfo));
     log(lemm, FlexiaModel, true);
     m_bWasChanged = true;
     return NewInfo;
@@ -1710,7 +1710,7 @@ void MorphoWizard::CreatePredictIndex() {
     }
 
     // go through all words
-    vector<CPredictSuffix> AllLemmas;
+    std::vector<CPredictSuffix> AllLemmas;
     for (lemma_iterator_t lemm_it = m_LemmaToParadigm.begin(); lemm_it != m_LemmaToParadigm.end(); lemm_it++) {
         const CFlexiaModel &p = m_FlexiaModels[lemm_it->second.m_FlexiaModelNo];
 
@@ -1738,7 +1738,7 @@ void MorphoWizard::CreatePredictIndex() {
 
             S.m_Suffix = GetSuffix(S.m_SourceLemma, suff_len);
 
-            pair<predict_container_t::iterator, bool> bRes = PredictIndex.insert(S);
+            std::pair<predict_container_t::iterator, bool> bRes = PredictIndex.insert(S);
             if (!bRes.second) {
                 bRes.first->m_Frequence++;
             }
@@ -1837,9 +1837,9 @@ std::string MorphoWizard::create_slf_from_predicted(int PredictParadigmNo, std::
 
 
 void MorphoWizard::pack() {
-    map<int, int> OldFlexiaModelsToNewFlexiaModels;
-    map<int, int> OldAccentModelsToNewAccentModels;
-    map<int, int> OldPrefixSetsToNewPrefixSets;
+    std::map<int, int> OldFlexiaModelsToNewFlexiaModels;
+    std::map<int, int> OldAccentModelsToNewAccentModels;
+    std::map<int, int> OldPrefixSetsToNewPrefixSets;
 
     if (HasMeter()) {
         GetMeter()->SetInfo("Packing paradigms...");
@@ -1848,9 +1848,9 @@ void MorphoWizard::pack() {
 
     {
         log("finding all used flexia and accent modleys");
-        set<WORD> UsedFlexiaModels;
-        set<WORD> UsedAccentModels;
-        set<WORD> UsedPrefixSets;
+        std::set<WORD> UsedFlexiaModels;
+        std::set<WORD> UsedAccentModels;
+        std::set<WORD> UsedPrefixSets;
         for (lemma_iterator_t lemm_it = m_LemmaToParadigm.begin(); lemm_it != m_LemmaToParadigm.end(); lemm_it++) {
             UsedFlexiaModels.insert(lemm_it->second.m_FlexiaModelNo);
             UsedAccentModels.insert(lemm_it->second.m_AccentModelNo);
@@ -1859,7 +1859,7 @@ void MorphoWizard::pack() {
 
 
         log("creating new flexia models without unused items");
-        vector<CFlexiaModel> NewParadigms;
+        std::vector<CFlexiaModel> NewParadigms;
         for (size_t i = 0; i < m_FlexiaModels.size(); i++)
             if (UsedFlexiaModels.find((WORD) i) != UsedFlexiaModels.end()) {
 
@@ -1880,7 +1880,7 @@ void MorphoWizard::pack() {
         m_FlexiaModels = NewParadigms;
 
         log("creating new accent models without unused items");
-        vector<CAccentModel> NewAccentModels;
+        std::vector<CAccentModel> NewAccentModels;
         for (size_t k = 0; k < m_AccentModels.size(); k++)
             if (UsedAccentModels.find((WORD) k) != UsedAccentModels.end()) {
                 NewAccentModels.push_back(m_AccentModels[k]);
@@ -1889,7 +1889,7 @@ void MorphoWizard::pack() {
         m_AccentModels = NewAccentModels;
 
         log("creating new prefix sets");
-        vector<set<string> > NewPrefixSets;
+        std::vector<std::set<std::string> > NewPrefixSets;
         for (size_t i = 0; i < m_PrefixSets.size(); i++)
             if (UsedPrefixSets.find((WORD) i) != UsedPrefixSets.end()) {
                 NewPrefixSets.push_back(m_PrefixSets[i]);
@@ -1903,12 +1903,12 @@ void MorphoWizard::pack() {
     log("fixing index from lemmas to paradigms");
     LemmaMap NewLemmaToParadigm;
     for (lemma_iterator_t lemm_it = m_LemmaToParadigm.begin(); lemm_it != m_LemmaToParadigm.end(); lemm_it++) {
-        map<int, int>::const_iterator flex_it = OldFlexiaModelsToNewFlexiaModels.find(lemm_it->second.m_FlexiaModelNo);
+        std::map<int, int>::const_iterator flex_it = OldFlexiaModelsToNewFlexiaModels.find(lemm_it->second.m_FlexiaModelNo);
         assert(flex_it != OldFlexiaModelsToNewFlexiaModels.end());
 
         WORD AccentModelNo = lemm_it->second.m_AccentModelNo;
         if (AccentModelNo != UnknownAccentModelNo) {
-            map<int, int>::const_iterator accent_it = OldAccentModelsToNewAccentModels.find(
+            std::map<int, int>::const_iterator accent_it = OldAccentModelsToNewAccentModels.find(
                     lemm_it->second.m_AccentModelNo);
             assert(accent_it != OldAccentModelsToNewAccentModels.end());
             AccentModelNo = accent_it->second;
@@ -1916,7 +1916,7 @@ void MorphoWizard::pack() {
 
         WORD PrefixSetNo = lemm_it->second.m_PrefixSetNo;
         if (PrefixSetNo != UnknownPrefixSetNo) {
-            map<int, int>::const_iterator prefix_set_it = OldPrefixSetsToNewPrefixSets.find(PrefixSetNo);
+            std::map<int, int>::const_iterator prefix_set_it = OldPrefixSetsToNewPrefixSets.find(PrefixSetNo);
             assert(prefix_set_it != OldPrefixSetsToNewPrefixSets.end());
             PrefixSetNo = prefix_set_it->second;
         }
@@ -1929,7 +1929,7 @@ void MorphoWizard::pack() {
                               lemm_it->second.m_CommonAncode,
                               PrefixSetNo);
 
-        NewLemmaToParadigm.insert(make_pair(lemm_it->first, NewInfo));
+        NewLemmaToParadigm.insert(std::make_pair(lemm_it->first, NewInfo));
 
         if (HasMeter()) GetMeter()->AddPos();
     }
@@ -1976,12 +1976,12 @@ bool MorphoWizard::change_prd_info(CParadigmInfo &I, const std::string &Lemma,
         is a success, then we transfer accent from the old wordform to the new one.
         */
         std::string OldBase = Lemma;
-        const vector<CMorphForm> &OldFlexia = m_FlexiaModels[I.m_FlexiaModelNo].m_Flexia;
+        const std::vector<CMorphForm> &OldFlexia = m_FlexiaModels[I.m_FlexiaModelNo].m_Flexia;
         OldBase.erase(OldBase.length() - OldFlexia[0].m_FlexiaStr.length());
 
 
         std::string NewBase = Lemma;
-        const vector<CMorphForm> &NewFlexia = m_FlexiaModels[NewFlexiaModelNo].m_Flexia;
+        const std::vector<CMorphForm> &NewFlexia = m_FlexiaModels[NewFlexiaModelNo].m_Flexia;
         NewBase.erase(NewBase.length() - NewFlexia[0].m_FlexiaStr.length());
 
         CAccentModel NewAccents;
@@ -2024,7 +2024,7 @@ void MorphoWizard::clear_predicted_paradigms() {
 std::string MorphoWizard::get_predict_src_file_path(int mode) const {
     std::string name = GetPathByFile(m_MrdPath) + "predict.idx";
     if (access(name.c_str(), mode)) {
-        map<std::string, std::string>::const_iterator it = m_ProjectFileKeys.find("ProjectsDir");
+        std::map<std::string, std::string>::const_iterator it = m_ProjectFileKeys.find("ProjectsDir");
         std::string Path;
         if (it != m_ProjectFileKeys.end())
             Path = it->second;
@@ -2221,7 +2221,7 @@ bool MorphoWizard::prepare_for_RML() {
         if (Lemma != lemm_it->first) {
             CParadigmInfo P = lemm_it->second;
             m_LemmaToParadigm.erase(lemm_it);
-            m_LemmaToParadigm.insert(make_pair(Lemma, P));
+            m_LemmaToParadigm.insert(std::make_pair(Lemma, P));
         };
         lemm_it = next_lemm_it;
     };
@@ -2242,8 +2242,8 @@ bool MorphoWizard::prepare_for_RML2() {
 
 
     int sz = m_FlexiaModels.size();
-    map<int, int> joFlex;
-    typedef pair<int, int> Int_Pair;
+    std::map<int, int> joFlex;
+    typedef std::pair<int, int> Int_Pair;
     for (int ModelNo = 0; ModelNo < sz; ModelNo++) {
         bool hasjo = false;
         for (size_t k = 0; k < m_FlexiaModels[ModelNo].m_Flexia.size(); k++)
@@ -2269,7 +2269,7 @@ bool MorphoWizard::prepare_for_RML2() {
         CParadigmInfo P = lemm_it->second;
         if (Lemma != lemm_it->first || joFlex.find(P.m_FlexiaModelNo) != joFlex.end()) {
             //m_LemmaToParadigm.erase(lemm_it);
-            nojo.insert(make_pair(Lemma, P)); // no jo
+            nojo.insert(std::make_pair(Lemma, P)); // no jo
         };
         if (joFlex.find(P.m_FlexiaModelNo) != joFlex.end())
             lemm_it->second.m_FlexiaModelNo = joFlex.find(P.m_FlexiaModelNo)->second;
@@ -2487,7 +2487,7 @@ bool CDumpParadigm::SaveToFile(FILE *fp) const {
 WORD MorphoWizard::RegisterSession(const CMorphSession &S) {
     if (S.IsEmpty()) return UnknownSessionNo;
 
-    vector<CMorphSession>::const_iterator it = find(m_Sessions.begin(), m_Sessions.end(), S);
+    std::vector<CMorphSession>::const_iterator it = find(m_Sessions.begin(), m_Sessions.end(), S);
     if (it == m_Sessions.end()) {
         m_Sessions.push_back(S);
         return (WORD) m_Sessions.size() - 1;

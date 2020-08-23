@@ -52,14 +52,14 @@ try{
 	A.m_pRoss = m_pActiveRossDoc->GetRoss();
 	BYTE EngFieldNo = m_pActiveRossDoc->GetRoss()->GetFieldNoByFieldStr((const char*)m_FieldStr);
 
-	vector<CRossDoc*> RossDocs;
+	std::vector<CRossDoc*> RossDocs;
 	CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
 	POSITION pos = pRossDocTemplate->GetFirstDocPosition();
 	while( pos )
 			RossDocs.push_back ((CRossDoc*)pRossDocTemplate->GetNextDoc(pos));	
 
     CWaitCursor C;
-	vector<CRossPocketItem> PocketItems;		
+	std::vector<CRossPocketItem> PocketItems;		
 
 	for (size_t UnitNo= 0;  UnitNo< m_pActiveRossDoc->GetRoss()->GetUnitsSize(); UnitNo++)
 	{

@@ -59,13 +59,13 @@ class TItemContainer
 public :
 	MorphLanguageEnum	m_Language;
     std::string RossPath;
-	vector<TDomItem>  m_DomItems;
+	std::vector<TDomItem>  m_DomItems;
 	std::string DomItemsFile;
 	std::string DomItemsTextFile;
 	std::string ItemsFile;
-	vector <CDomen> m_Domens;
+	std::vector <CDomen> m_Domens;
 	std::string DomensFile;
-	vector<CField> Fields;
+	std::vector<CField> Fields;
 	std::string FieldsFile;
 	bool	m_bDontLoadExamples;
 	
@@ -115,7 +115,7 @@ public :
 	void		WriteFieldsJson() const;
 	bool		BuildFormats(BYTE MaxNumDom);
 	bool		BuildOneFieldFormat (CSignat& Sgn, char* Frmt, char* Name, BYTE MaxNumDom);
-	virtual bool	UpdateSignatsOfTheFieldInCorteges (BYTE FieldNo, vector<CSignat>& Signats)= 0; 
+	virtual bool	UpdateSignatsOfTheFieldInCorteges (BYTE FieldNo, std::vector<CSignat>& Signats)= 0; 
 	bool		WriteDomens () const;
 	size_t		GetDomItemsSize() const {return m_DomItems.size();};
 	bool		WriteDomItems() const ;

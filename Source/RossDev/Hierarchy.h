@@ -36,8 +36,8 @@ public:
 	HWND      m_tkhwnd;
 
 
-	//vector<CNode>     Nodes;
-	//vector<CRelation> Relations;
+	//std::vector<CNode>     Nodes;
+	//std::vector<CRelation> Relations;
 
 	bool FindRelation (size_t  node1, size_t node2);
 	bool FindOmniDirectionRelation (size_t  node1, size_t node2);

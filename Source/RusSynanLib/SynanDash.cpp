@@ -138,7 +138,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		if ( j < pClause.m_iLastWord ) continue;
 
-		vector<int> Noun_Nom, Adj_Nom, Eto, Noun_Gen, Copul_Words, Noun_NomSgPl;
+		std::vector<int> Noun_Nom, Adj_Nom, Eto, Noun_Gen, Copul_Words, Noun_NomSgPl;
 		int Prep_U = -1;
 		bool Vozrast = false;
 

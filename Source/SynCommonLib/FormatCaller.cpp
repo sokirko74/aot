@@ -116,7 +116,7 @@ int CFormatCaller::main_analyse()
 
 			{
 				int s = get_maximal_group_no(WordNo);
-				vector<CGroup>		m_Groups = GetGroups();
+				std::vector<CGroup>		m_Groups = GetGroups();
 				if( (s != -1 ) && (GetGroups()[s].m_iFirstWord != WordNo) )
 				{
                     if (FormatCall.m_direction == FROM_LEFT)
@@ -224,7 +224,7 @@ bool  CFormatCaller::create_groups_from_termin(const SFoundTermin& FoundTermin)
 
 	const CGroups* pModel = FoundTermin.m_pModel;
 
-    vector<size_t> ThesCoord2Real;
+    std::vector<size_t> ThesCoord2Real;
 
     int iCoef = FoundTermin.m_iFirstWord;
     int Delta = iCoef;
@@ -493,7 +493,7 @@ It is done for the following Russian example:
 
 bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 {
-	// we use a small vector for speed
+	// we use a small std::vector for speed
 	CSmallVector<int, 6> WordsOfConj;
 	if (sent[G.m_iFirstWord].m_UnitType != EWord) return false;
 
@@ -511,7 +511,7 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 	// ===  end
 
 	// searching for  the first part of a conjunction in GetOpt()->GetOborDic()->m_DisruptConj
-	vector<SDoubleConj>::const_iterator it = lower_bound (GetOpt()->GetOborDic()->m_DisruptConj.begin(), GetOpt()->GetOborDic()->m_DisruptConj.end(), sent[G.m_iFirstWord].get_upper_word(),DobleConjLess());
+	std::vector<SDoubleConj>::const_iterator it = lower_bound (GetOpt()->GetOborDic()->m_DisruptConj.begin(), GetOpt()->GetOborDic()->m_DisruptConj.end(), sent[G.m_iFirstWord].get_upper_word(),DobleConjLess());
 
 	// checking all conjunction with the same first part
 	for ( ;
@@ -692,7 +692,7 @@ Russian examples:
 */
 bool CFormatCaller::create_repeating_disrupt_conj(CGroup& G, const SDoubleConj& pConj)
 {
-	// we use a small vector for speed
+	// we use a small std::vector for speed
     const size_t MaxConjCount = 20;
 	// all conjunction parts
 	CSmallVector<int,MaxConjCount> WordsOfConj;
@@ -772,7 +772,7 @@ bool CFormatCaller::create_repeating_disrupt_conj(CGroup& G, const SDoubleConj& 
 		if (CountMorphEqualGroupPairs+1 != DisruptGroups.size())
             if ((CountMorphEqualGroupPairs+1)*pConj.m_FirstPart.size() < MaxConjCount)
 		    {
-			    // resing the vector of the connected groups.
+			    // resing the std::vector of the connected groups.
 			    DisruptGroups.m_ItemsCount =  CountMorphEqualGroupPairs+1;
 			    WordsOfConj.m_ItemsCount = (CountMorphEqualGroupPairs+1)*pConj.m_FirstPart.size();
 		    };

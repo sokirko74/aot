@@ -158,7 +158,7 @@ const WORD MustBeIgnored = 0xffff-1;
 class CTreeVariant 
 {
 	// the size of m_TreeRels can really be more than 256 on some sentences
-	vector<WORD>	m_TreeRels;
+	std::vector<WORD>	m_TreeRels;
 	size_t			m_Size;	
 public:
 	CTreeVariant()
@@ -272,9 +272,9 @@ struct  CSyntaxClauseVariant {
 
 
 
-typedef vector<CTreeOfLexVariantWeight> CLexVariantWeightVector;
-typedef pair<CTreeVariant, TreeVariantValue> TreeAndValue;
-typedef vector<TreeAndValue> TreeAndValueVector;
+typedef std::vector<CTreeOfLexVariantWeight> CLexVariantWeightVector;
+typedef std::pair<CTreeVariant, TreeVariantValue> TreeAndValue;
+typedef std::vector<TreeAndValue> TreeAndValueVector;
 
 
 #endif

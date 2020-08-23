@@ -81,7 +81,7 @@ struct SAnalyticalFormVariant
 };
 
 
-typedef vector<SAnalyticalFormVariant> CAnalyticalFormVars; 
+typedef std::vector<SAnalyticalFormVariant> CAnalyticalFormVars; 
 
 
 
@@ -93,7 +93,7 @@ typedef vector<SAnalyticalFormVariant> CAnalyticalFormVars;
 class CRusSentence   : public CSentence
 {
 	bool IsAdjDeclination (const CSynHomonym& H) const;
-    vector<CPeriod> FindParenthesisOborotsWithoutComma() const;
+    std::vector<CPeriod> FindParenthesisOborotsWithoutComma() const;
     bool  CheckBorders (int start, int end) const;
     bool  CanBeInsideParenthesisOborot(const CSynWord& W) const;
 public:
@@ -130,7 +130,7 @@ public:
 	//   Base Clause Rules
 	void InitClauseVectorRules();
 	bool ClauseHasSubjPredik(const CClause& Clause) const;
-	bool TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFirst, const CClause& ClSecond, vector<int>& Types, bool bFindSubjPredikate);
+	bool TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFirst, const CClause& ClSecond, std::vector<int>& Types, bool bFindSubjPredikate);
 	bool RuleForDashClause(int iClauseNum);
 	bool RuleForEmptyClauses(int iClauseNum);
 	bool RuleForKTO(int iClauseNum);
@@ -219,7 +219,7 @@ public:
 
 	void	ProcessFio1Fio2();
 
-	void	ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMorphVariant& V);
+	void	ChooseClauseType(const  std::vector<SClauseType>& vectorTypes, CMorphVariant& V);
 	bool	CheckLastPredicatePosition(size_t ClauseLastWordNo, long RootWordNo) const { return true;};	
     void    CloneHomonymsForOborots() override;	
 };

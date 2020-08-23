@@ -31,46 +31,46 @@ bool is_false(const bool b) {	return !b; };
 
 
 const size_t PossibleAssignFunc0Count = 2;
-pair<std::string, AssignType0*> PossibleAssignFunc0[PossibleAssignFunc0Count] = {
-	make_pair(std::string("true"), (AssignType0*)set_true),
-	make_pair(std::string("false"), (AssignType0*)set_false)
+std::pair<std::string, AssignType0*> PossibleAssignFunc0[PossibleAssignFunc0Count] = {
+	std::make_pair(std::string("true"), (AssignType0*)set_true),
+	std::make_pair(std::string("false"), (AssignType0*)set_false)
 };
 
 
 const size_t PossibleCheckFunc1Count = 3;
-pair<std::string, CheckType1*> PossibleCheckFunc1[PossibleCheckFunc1Count] = {
-	make_pair(std::string("true"), (CheckType1*)is_true),
-	make_pair(std::string("false"), (CheckType1*)is_false),
-	make_pair(std::string("is_atomic"), (CheckType1*)is_true)
+std::pair<std::string, CheckType1*> PossibleCheckFunc1[PossibleCheckFunc1Count] = {
+	std::make_pair(std::string("true"), (CheckType1*)is_true),
+	std::make_pair(std::string("false"), (CheckType1*)is_false),
+	std::make_pair(std::string("is_atomic"), (CheckType1*)is_true)
 };
 
 const size_t PossibleCheckFunc3Count = 3;
-pair<std::string, CheckType3*> PossibleCheckFunc3[PossibleCheckFunc3Count] = {
-	make_pair(std::string("has_only_case"), (CheckType3*)HasOnlyOneCase),
-	make_pair(std::string("has_grammem"), (CheckType3*)HasGrammem),
-	make_pair(std::string("has_one_grm"), (CheckType3*)HasOneGrammem)
+std::pair<std::string, CheckType3*> PossibleCheckFunc3[PossibleCheckFunc3Count] = {
+	std::make_pair(std::string("has_only_case"), (CheckType3*)HasOnlyOneCase),
+	std::make_pair(std::string("has_grammem"), (CheckType3*)HasGrammem),
+	std::make_pair(std::string("has_one_grm"), (CheckType3*)HasOneGrammem)
 };
 
 const size_t PossibleFunc1Count = 1;
-pair<std::string, AssignType1*> PossibleFunc1[PossibleFunc1Count] = {
-	make_pair(std::string("convert_to_plural"), (AssignType1*)ConvertToPlural)
+std::pair<std::string, AssignType1*> PossibleFunc1[PossibleFunc1Count] = {
+	std::make_pair(std::string("convert_to_plural"), (AssignType1*)ConvertToPlural)
 };
 
 const size_t PossibleFunc2Count = 5;
-pair<std::string, AssignType2*> PossibleFunc2[PossibleFunc2Count] = {
-	make_pair(std::string("common_case_number_gender"), (AssignType2*)CommonCaseNumberGender),
-	make_pair(std::string("weak_decl"), (AssignType2*)WeakDeclAssignFunction2),
-	make_pair(std::string("mixed_decl"), (AssignType2*)MixedDeclAssignFunction2),
-	make_pair(std::string("strong_decl"), (AssignType2*)StrongDeclAssignFunction),
-	make_pair(std::string("common_case"), (AssignType2*)CommonCase)
+std::pair<std::string, AssignType2*> PossibleFunc2[PossibleFunc2Count] = {
+	std::make_pair(std::string("common_case_number_gender"), (AssignType2*)CommonCaseNumberGender),
+	std::make_pair(std::string("weak_decl"), (AssignType2*)WeakDeclAssignFunction2),
+	std::make_pair(std::string("mixed_decl"), (AssignType2*)MixedDeclAssignFunction2),
+	std::make_pair(std::string("strong_decl"), (AssignType2*)StrongDeclAssignFunction),
+	std::make_pair(std::string("common_case"), (AssignType2*)CommonCase)
 };
 
 const size_t PossibleFunc3Count = 3;
-pair<std::string, AssignType3*> PossibleFunc3[PossibleFunc3Count] = 
+std::pair<std::string, AssignType3*> PossibleFunc3[PossibleFunc3Count] = 
 {
-		make_pair(std::string("weak_decl"), (AssignType3*)WeakDeclAssignFunction3 ), 
-		make_pair(std::string("mixed_decl"), (AssignType3*)MixedDeclAssignFunction3),
-		make_pair(std::string("case_number_gender"), (AssignType3*)RussianCaseNumberGender)
+		std::make_pair(std::string("weak_decl"), (AssignType3*)WeakDeclAssignFunction3 ), 
+		std::make_pair(std::string("mixed_decl"), (AssignType3*)MixedDeclAssignFunction3),
+		std::make_pair(std::string("case_number_gender"), (AssignType3*)RussianCaseNumberGender)
 };
 
 
@@ -236,7 +236,7 @@ std::string CNodeAttribute::GetStr() const
 
 CNodeAttributes::~CNodeAttributes()
 {
-	for (list<CNodeAttribute*>::iterator it = m_Items.begin(); it != m_Items.end(); it++)
+	for (std::list<CNodeAttribute*>::iterator it = m_Items.begin(); it != m_Items.end(); it++)
 	{
 		delete *it;
 	}
@@ -268,7 +268,7 @@ std::string CChunkNode::GetStr() const
 	std::string Result = m_AtomicName;
 	Result += " ";
 	if (m_pAttributes)
-		for (list<CNodeAttribute*>::iterator it = m_pAttributes->m_Items.begin(); it != m_pAttributes->m_Items.end(); it++)
+		for (std::list<CNodeAttribute*>::iterator it = m_pAttributes->m_Items.begin(); it != m_pAttributes->m_Items.end(); it++)
 		{
 			Result += (*it)->GetStr();
 			Result += " ";
@@ -286,7 +286,7 @@ void CChunkSequenceNode::Create(CChunkNode* child1)
 	child1->m_RefCount++;
 }
 
-const vector<CChunkNode*>& CChunkSequenceNode::GetChildren() const
+const std::vector<CChunkNode*>& CChunkSequenceNode::GetChildren() const
 {
 	return m_Children;
 }
@@ -368,7 +368,7 @@ CChunkRule::~CChunkRule()
 		delete m_pLeftHand;
 	};
 
-	for (list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)
+	for (std::list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)
 	{
 		CChunkSequenceNode* pNode = *it;
 
@@ -424,11 +424,11 @@ bool CChunkRule::AddRightHandMultipleNode(CChunkRule* pRule, ChunkOperationEnum 
 	if	(		(Type == stSequence) 
 		)
 	{
-		list<CChunkSequenceNode*> NewList;
-		for (list<CChunkSequenceNode*>::iterator it1 = m_pRightHand.begin(); it1 != m_pRightHand.end(); it1++)
+		std::list<CChunkSequenceNode*> NewList;
+		for (std::list<CChunkSequenceNode*>::iterator it1 = m_pRightHand.begin(); it1 != m_pRightHand.end(); it1++)
 		{
 			CChunkSequenceNode* pNode  = *it1;
-			for (list<CChunkSequenceNode*>::iterator it2 = pRule->m_pRightHand.begin(); it2 != pRule->m_pRightHand.end(); it2++)
+			for (std::list<CChunkSequenceNode*>::iterator it2 = pRule->m_pRightHand.begin(); it2 != pRule->m_pRightHand.end(); it2++)
 			{
 				CChunkSequenceNode* NewNode = pNode->Clone();
 				CChunkSequenceNode* NodeToAdd = *it2;
@@ -445,12 +445,12 @@ bool CChunkRule::AddRightHandMultipleNode(CChunkRule* pRule, ChunkOperationEnum 
 		assert (Type == stOr);
 		CChunkSequenceNode* first = *m_pRightHand.begin();
 		
-		for (list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)		
+		for (std::list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)		
 			if ((*it)->GetChildren().back() !=  first->GetChildren().back())
 				break;
 			else
 			{
-				for (list<CChunkSequenceNode*>::iterator it2 = pRule->m_pRightHand.begin(); it2 != pRule->m_pRightHand.end(); it2++)
+				for (std::list<CChunkSequenceNode*>::iterator it2 = pRule->m_pRightHand.begin(); it2 != pRule->m_pRightHand.end(); it2++)
 				{
 					// clone node
 					CChunkSequenceNode* CloneNode = first->Clone();
@@ -472,7 +472,7 @@ bool CChunkRule::MakeLastNodeFacultative()
 	if (m_pRightHand.empty()) return false;
 	
 	size_t Count = m_pRightHand.size();
-	list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin();
+	std::list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin();
 	for (size_t i=0; i < Count; it++,i++)		
 	{
 		CChunkSequenceNode* CloneNode = (*it)->Clone();
@@ -485,7 +485,7 @@ bool CChunkRule::MakeLastNodeFacultative()
 
 bool CChunkRule::EncloseNodes()
 {
-	for (list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)
+	for (std::list<CChunkSequenceNode*>::iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)
 	{
 		CChunkSequenceNode* pNode  = *it;
 		if (pNode->GetChildren().size() > 1)
@@ -504,7 +504,7 @@ std::string CChunkRule::GetStr() const
 	std::string Result = m_pLeftHand->GetStr();
 	Result += " -> ";
 	
-	for (list<CChunkSequenceNode*>::const_iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)
+	for (std::list<CChunkSequenceNode*>::const_iterator it = m_pRightHand.begin(); it != m_pRightHand.end(); it++)
 	{
 		Result += (*it)->GetStr();
 		Result += " | ";
@@ -526,7 +526,7 @@ void CChunkRule::AddRuleFeatute(CRuleFeature* pFeature)
 
 CChunkGrammar::~CChunkGrammar()
 {
-	for (list<CChunkRule*>::iterator it = m_Rules.begin(); it != m_Rules.end(); it++)
+	for (std::list<CChunkRule*>::iterator it = m_Rules.begin(); it != m_Rules.end(); it++)
 	{
 		CChunkRule* pNode = *it;
 		delete pNode;
@@ -536,7 +536,7 @@ CChunkGrammar::~CChunkGrammar()
 std::string CChunkGrammar::GetStr() const
 {
 	std::string Result = "";
-	for (list<CChunkRule*>::const_iterator it = m_Rules.begin(); it != m_Rules.end(); it++)
+	for (std::list<CChunkRule*>::const_iterator it = m_Rules.begin(); it != m_Rules.end(); it++)
 	{
 		Result += (*it)->GetStr();
 		Result += ";\n";

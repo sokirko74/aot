@@ -263,8 +263,8 @@ typedef struct {
     unsigned long backing_planes;/* planes to be preseved if possible */
     unsigned long backing_pixel;/* value to use in restoring planes */
     Bool save_under;		/* should bits under be saved? (popups) */
-    long event_mask;		/* set of events that should be saved */
-    long do_not_propagate_mask;	/* set of events that should not propagate */
+    long event_mask;		/* std::set of events that should be saved */
+    long do_not_propagate_mask;	/* std::set of events that should not propagate */
     Bool override_redirect;	/* boolean value for override-redirect */
     Colormap colormap;		/* color map to be associated with window */
     Cursor cursor;		/* cursor to be displayed (or None) */
@@ -291,9 +291,9 @@ typedef struct {
     Colormap colormap;		/* color map to be associated with window */
     Bool map_installed;		/* boolean, is color map currently installed*/
     int map_state;		/* IsUnmapped, IsUnviewable, IsViewable */
-    long all_event_masks;	/* set of events all people have interest in*/
+    long all_event_masks;	/* std::set of events all people have interest in*/
     long your_event_mask;	/* my event mask */
-    long do_not_propagate_mask; /* set of events that should not propagate */
+    long do_not_propagate_mask; /* std::set of events that should not propagate */
     Bool override_redirect;	/* boolean value for override-redirect */
     Screen *screen;		/* back pointer to correct screen */
 } XWindowAttributes;
@@ -467,7 +467,7 @@ typedef struct _XDisplay {
 	unsigned max_request_size; /* maximum number 32 bit words in request*/
 	struct _XrmHashBucketRec *db;
 	int (*synchandler)();	/* Synchronization handler */
-	char *display_name;	/* "host:display" string used on this connect*/
+	char *display_name;	/* "host:display" std::string used on this connect*/
 	int default_screen;	/* default screen for operations */
 	int nscreens;		/* number of screens on this server*/
 	Screen *screens;	/* pointer to list of screens */
@@ -486,13 +486,13 @@ typedef struct _XDisplay {
 	/*
 	 * the following can be fixed size, as the protocol defines how
 	 * much address space is available. 
-	 * While this could be done using the extension vector, there
+	 * While this could be done using the extension std::vector, there
 	 * may be MANY events processed, so a search through the extension
 	 * list to find the right procedure for each event might be
 	 * expensive if many extensions are being used.
 	 */
-	Bool (*event_vec[128])();  /* vector for wire to event */
-	Status (*wire_vec[128])(); /* vector for event to wire */
+	Bool (*event_vec[128])();  /* std::vector for wire to event */
+	Status (*wire_vec[128])(); /* std::vector for event to wire */
 	KeySym lock_meaning;	   /* for XLookupString */
 	struct _XLockInfo *lock;   /* multi-thread state, display lock */
 	struct _XInternalAsync *async_handlers; /* for internal async */
@@ -504,7 +504,7 @@ typedef struct _XDisplay {
 	struct _XDisplayAtoms *atoms; /* for XInternAtom */
 	unsigned int mode_switch;  /* keyboard group modifiers */
 	struct _XContextDB *context_db; /* context database */
-	Bool (**error_vec)();      /* vector for wire to error */
+	Bool (**error_vec)();      /* std::vector for wire to error */
 	/*
 	 * Xcms information
 	 */
@@ -719,7 +719,7 @@ typedef struct {
 	Display *display;	/* Display the event was read from */
 	Window event;
 	Window window;
-	Bool override_redirect;	/* boolean, is override set... */
+	Bool override_redirect;	/* boolean, is override std::set... */
 } XMapEvent;
 
 typedef struct {
@@ -1004,7 +1004,7 @@ typedef struct {
  * PolyText routines take these as arguments.
  */
 typedef struct {
-    char *chars;		/* pointer to string */
+    char *chars;		/* pointer to std::string */
     int nchars;			/* number of characters */
     int delta;			/* delta between strings */
     _X_Font font;			/* font to print it in, None don't change */
@@ -1135,11 +1135,11 @@ typedef struct _XIMText {
     union {
 	char *multi_byte;
 	wchar_t *wide_char;
-    } string; 
+    } std::string; 
 } XIMText;
 
 typedef struct _XIMPreeditDrawCallbackStruct {
-    int caret;		/* Cursor offset within pre-edit string */
+    int caret;		/* Cursor offset within pre-edit std::string */
     int chg_first;	/* Starting change position */
     int chg_length;	/* Length of the change in character count */
     XIMText *text;
@@ -1162,7 +1162,7 @@ typedef enum {
 } XIMCaretStyle;
 
 typedef struct _XIMPreeditCaretCallbackStruct {
-    int position;		 /* Caret offset within pre-edit string */
+    int position;		 /* Caret offset within pre-edit std::string */
     XIMCaretDirection direction; /* Caret moves direction */
     XIMCaretStyle style;	 /* Feedback of the caret */
 } XIMPreeditCaretCallbackStruct;
@@ -1328,7 +1328,7 @@ extern char *XGetDefault(
 );
 extern char *XDisplayName(
 #if NeedFunctionPrototypes
-    _Xconst char*	/* string */
+    _Xconst char*	/* std::string */
 #endif
 );
 extern char *XKeysymToString(
@@ -1573,7 +1573,7 @@ extern KeySym *XGetKeyboardMapping(
 );
 extern KeySym XStringToKeysym(
 #if NeedFunctionPrototypes
-    _Xconst char*	/* string */
+    _Xconst char*	/* std::string */
 #endif
 );
 extern long XMaxRequestSize(
@@ -2400,7 +2400,7 @@ extern void XDrawImageString(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst char*	/* string */,
+    _Xconst char*	/* std::string */,
     int			/* length */
 #endif
 );
@@ -2412,7 +2412,7 @@ extern void XDrawImageString16(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst XChar2b*	/* string */,
+    _Xconst XChar2b*	/* std::string */,
     int			/* length */
 #endif
 );
@@ -2500,7 +2500,7 @@ extern void XDrawString(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst char*	/* string */,
+    _Xconst char*	/* std::string */,
     int			/* length */
 #endif
 );
@@ -2512,7 +2512,7 @@ extern void XDrawString16(
     GC			/* gc */,
     int			/* x */,
     int			/* y */,
-    _Xconst XChar2b*	/* string */,
+    _Xconst XChar2b*	/* std::string */,
     int			/* length */
 #endif
 );
@@ -3269,7 +3269,7 @@ extern void XQueryTextExtents(
 #if NeedFunctionPrototypes
     Display*		/* display */,
     XID			/* font_ID */,
-    _Xconst char*	/* string */,
+    _Xconst char*	/* std::string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3282,7 +3282,7 @@ extern void XQueryTextExtents16(
 #if NeedFunctionPrototypes
     Display*		/* display */,
     XID			/* font_ID */,
-    _Xconst XChar2b*	/* string */,
+    _Xconst XChar2b*	/* std::string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3328,7 +3328,7 @@ extern void XRebindKeysym(
     KeySym		/* keysym */,
     KeySym*		/* list */,
     int			/* mod_count */,
-    _Xconst unsigned char*	/* string */,
+    _Xconst unsigned char*	/* std::string */,
     int			/* bytes_string */
 #endif
 );
@@ -3802,7 +3802,7 @@ extern void XSync(
 extern void XTextExtents(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst char*	/* string */,
+    _Xconst char*	/* std::string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3814,7 +3814,7 @@ extern void XTextExtents(
 extern void XTextExtents16(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst XChar2b*	/* string */,
+    _Xconst XChar2b*	/* std::string */,
     int			/* nchars */,
     int*		/* direction_return */,
     int*		/* font_ascent_return */,
@@ -3826,7 +3826,7 @@ extern void XTextExtents16(
 extern int XTextWidth(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst char*	/* string */,
+    _Xconst char*	/* std::string */,
     int			/* count */
 #endif
 );
@@ -3834,7 +3834,7 @@ extern int XTextWidth(
 extern int XTextWidth16(
 #if NeedFunctionPrototypes
     XFontStruct*	/* font_struct */,
-    _Xconst XChar2b*	/* string */,
+    _Xconst XChar2b*	/* std::string */,
     int			/* count */
 #endif
 );

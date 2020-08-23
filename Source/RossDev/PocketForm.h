@@ -32,7 +32,7 @@ public:
 	CPocketForm();   // standard constructor
 	DECLARE_DYNCREATE(CPocketForm)
 
-	vector<CRossPocketItem> m_PocketItems;
+	std::vector<CRossPocketItem> m_PocketItems;
 	CString m_Title;
 	bool GetSelectedUnitNo (WORD& UnitNo)
 	{
@@ -90,7 +90,7 @@ protected:
 
 };
 
-extern int OpenPocket(const vector<CRossPocketItem>& UnitNos, CString    Title);
+extern int OpenPocket(const std::vector<CRossPocketItem>& UnitNos, CString    Title);
 
 
 //{{AFX_INSERT_LOCATION}}

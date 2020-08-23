@@ -28,8 +28,8 @@ class CTranslations : public CPropertyPage
 public:
 
 	CTranslations();
-	vector<CFormInfo> m_ParadigmCollection;
-	vector<TransLemma> RusLemmas;
+	std::vector<CFormInfo> m_ParadigmCollection;
+	std::vector<TransLemma> RusLemmas;
 	CString m_ResultString;
 	
 

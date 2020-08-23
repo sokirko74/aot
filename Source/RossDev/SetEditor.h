@@ -15,13 +15,13 @@ class CSetEditor : public CDialog
 // Construction
 public:
 	CSetEditor(CRossDoc*		pRossDoc,
-		       vector<TCortege>& OldValue,
-		       vector<TCortege>& NewValue,
+		       std::vector<TCortege>& OldValue,
+		       std::vector<TCortege>& NewValue,
 			   CRossDevTextField& F,
 		       CWnd* pParent = NULL);   // standard constructor
 
-	vector<TCortege>& m_OldValue;
-	vector<TCortege>& m_NewValue;
+	std::vector<TCortege>& m_OldValue;
+	std::vector<TCortege>& m_NewValue;
 	CRossDevTextField& m_Field;
     CRossDoc* m_pRossDoc;
     CDictionary* GetRoss () {return m_pRossDoc->GetRoss();}

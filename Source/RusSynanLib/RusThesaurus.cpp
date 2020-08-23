@@ -24,7 +24,7 @@ static bool  TryToAssignMainGroupToNOUN_GR(CGroups& model, int iGr, const CInner
 
 		//  ищем слово, в которое не входит ни одного отношения от слов внутри данной группы
 		int i = 0;
-		vector<bool> HasParent(group.size(), false);
+		std::vector<bool> HasParent(group.size(), false);
 		for( ; i < piModel.m_SynRelations.size(); i++ )
 		{
 			const CThesSynRelation& piRel =  piModel.m_SynRelations[i];;

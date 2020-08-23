@@ -28,11 +28,11 @@ BOOL Thread::Create(DWORD dwCreateFlags)
 	ASSERT(!IsValid());
 
 	//_beginthread returns -1 on an error, in which case errno is 
-	//  set to EAGAIN if there are too many threads, or to EINVAL 
+	//  std::set to EAGAIN if there are too many threads, or to EINVAL 
 	//  if the argument is invalid or the stack size is incorrect
 
 	//_beginthreadex returns 0 on an error, in which case errno 
-	//  and doserrno are set
+	//  and doserrno are std::set
 
 	unsigned threadid;
 	m_handle = (HANDLE)_beginthreadex(NULL, 0, &ThreadProc,
@@ -100,7 +100,7 @@ UINT Thread::Cycle()
 	//_endthread automatically closes the thread handle
 	//_endthreadex needs explicit ::CloseHandle
 	
-	//we _need_ handle to be closed and set to INVALID_HANDLE,
+	//we _need_ handle to be closed and std::set to INVALID_HANDLE,
 	// so we do explicit Close on handle here and in Destroy
 
 	//our thread with invalid handle will still live - until 

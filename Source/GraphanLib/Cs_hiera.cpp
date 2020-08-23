@@ -60,7 +60,7 @@ RubiconEnum RubiconText (const CGraphmatFile& G, size_t i)
 //   Space, Eoln  => (0,0)
 //   OPar, OPar => (0,0) (1,1)
 
-void  RecognizeSimpleCS (const CGraphmatFile& G,vector<CConSent> &CSL, size_t LB, size_t HB, RubiconEnum LB_Rubicon, RubiconEnum HB_Rubicon )
+void  RecognizeSimpleCS (const CGraphmatFile& G,std::vector<CConSent> &CSL, size_t LB, size_t HB, RubiconEnum LB_Rubicon, RubiconEnum HB_Rubicon )
 {
   RubiconEnum TypeRubicon = LB_Rubicon;
 
@@ -124,7 +124,7 @@ inline void AdjustRubiconsInSpaceCompact  (const CGraphmatFile& C, size_t &Start
 // таким образом, чтобы система ME стала разбиением (всякий символ входного 
 // текста принадлежит одному и только одной ME).
 
-void RecognizeCS (const CGraphmatFile& G, vector<CConSent>& CSL, size_t LB, size_t HB)
+void RecognizeCS (const CGraphmatFile& G, std::vector<CConSent>& CSL, size_t LB, size_t HB)
 {
   // =====   Первый этап  =====
   RecognizeSimpleCS (G, CSL, LB, HB, rBeg,rEnd);
@@ -648,7 +648,7 @@ void AssertValid (CSList& List) {
 bool SetMacroSyntDependcies (const CGraphmatFile& G,  CSList& List)
 {
    bool bCanIterate = true;
-   stack<MacroSynStackItem> Parents; // стек родителей
+   std::stack<MacroSynStackItem> Parents; // стек родителей
    Parents.push(MacroSynStackItem(0)); // добавляем туда корневой узел
 
    long SentNo = 1;
@@ -745,7 +745,7 @@ const char* GetEnglishTag(Descriptors D)
 };
 
 
-void  PrintXmlSubtree (const vector<CConSent>& CSL, FILE* fp, int SentNo)
+void  PrintXmlSubtree (const std::vector<CConSent>& CSL, FILE* fp, int SentNo)
 {
 	const char* Type = GetEnglishTag(CSL[SentNo].m_Type);
 	fprintf (fp, "<%s>\r\n",  Type);
@@ -770,7 +770,7 @@ void  PrintXmlSubtree (const vector<CConSent>& CSL, FILE* fp, int SentNo)
 };
 
 
-void  WriteXmlMacSyn (const vector<CConSent>& CSL, const  char* Filename)
+void  WriteXmlMacSyn (const std::vector<CConSent>& CSL, const  char* Filename)
 {
   if (CSL.size() == 0) return;
   
@@ -788,7 +788,7 @@ void CGraphmatFile :: MacSynHierarchy ()
 // ===================			Recognition		========================
 // ===============================================================
 
-	vector<CConSent> CSL;
+	std::vector<CConSent> CSL;
 
 	// если файл пуст надо выйти
 	if (PSoft(1, GetUnits().size()) == GetUnits().size()) return;

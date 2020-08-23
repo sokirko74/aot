@@ -383,7 +383,7 @@ struct CCollocItemRef {
 struct CCollocItemRefCollect
 {
   std::string                Item;
-  vector<CCollocItemRef> Refs;	 
+  std::vector<CCollocItemRef> Refs;	 
   CCollocItemRefCollect(const std::string S) 
   {
 	  Item = S;
@@ -429,14 +429,14 @@ enum AbstractArticleEnum  {  atEmptyType, atArticlePlug, atAdditionArticle };
 struct CAbstractArticle {
    long               m_UnitNo;
    std::string            m_UnitStr;
-   vector<TCortege10> m_Article;
-   vector<CGramInfo>  m_GramInfos;
-   vector<long>       m_ClauseTypes;
+   std::vector<TCortege10> m_Article;
+   std::vector<CGramInfo>  m_GramInfos;
+   std::vector<long>       m_ClauseTypes;
    AbstractArticleEnum m_Type;
    StringVector     m_SemTypes;
    StringVector     m_SemFets;
    StringVector     m_LexFets;
-   vector<CValency>    m_Vals;
+   std::vector<CValency>    m_Vals;
 };
 
 
@@ -458,23 +458,23 @@ public:
 	bool IsConditional;
 	// m_SemMainWord содержит числовое значение поля СГС  (счет начинается с 1)
 	long m_SemMainWord;
-	vector<CCollocItem> Items;
-	vector<CSynRelation>		m_Rels;
+	std::vector<CCollocItem> Items;
+	std::vector<CSynRelation>		m_Rels;
 };
 
 
 
 const int MaxLeafId  = 10;
-typedef pair<std::string, long>  StringLong;
-typedef pair<long, long>     LongLong;
+typedef std::pair<std::string, long>  StringLong;
+typedef std::pair<long, long>     LongLong;
 
 // класс, в котором содержится лексический материал, с помощью которого заполняется
 // дырка в группе времение (берется из полей LEX(i) и  PREPi(j)
 struct CTimeLexicalFilling { 
 	BYTE m_LeafId;
 	BYTE m_BracketLeafId;
-	vector<StringLong> m_LexFets;
-	vector<LongLong>    m_Preps;
+	std::vector<StringLong> m_LexFets;
+	std::vector<LongLong>    m_Preps;
 
 	CTimeLexicalFilling  (BYTE LeafId, BYTE BracketLeafId)
 	{
@@ -492,8 +492,8 @@ struct CTimeLexicalFilling {
 struct CTimeUnit {
 	StringVector				m_Places;
 	long						m_UnitNo;
-	vector<CSynRelation>		m_Rels;
-	vector<CTimeLexicalFilling>	m_LexicalFillings;
+	std::vector<CSynRelation>		m_Rels;
+	std::vector<CTimeLexicalFilling>	m_LexicalFillings;
 	bool						m_bCanFillNotTimeValency;
 	CTimeUnit ()
 	{
@@ -503,7 +503,7 @@ struct CTimeUnit {
 	
 	int	GetLexicalFillingNo (const CTimeLexicalFilling& C)  
 	{
-		vector<CTimeLexicalFilling>::iterator It = find(m_LexicalFillings.begin(), m_LexicalFillings.end(), C);
+		std::vector<CTimeLexicalFilling>::iterator It = find(m_LexicalFillings.begin(), m_LexicalFillings.end(), C);
 
 		if (It == m_LexicalFillings.end())
 		{
@@ -570,32 +570,32 @@ class CSemanticsHolder  : public CAllRossesHolder
 	CSemanticsHolder();
 
 	// список всех локативных предлогов
-	vector<LocPrep>      m_LocPreps;
+	std::vector<LocPrep>      m_LocPreps;
 
 	// список всех словосочетаний 
-	vector<CColloc>         m_RusCollocs;
-	vector<CCollocItemRefCollect>  m_RusCollocItemRefs;
+	std::vector<CColloc>         m_RusCollocs;
+	std::vector<CCollocItemRefCollect>  m_RusCollocItemRefs;
 
 	// список всех сокращений из TimeRoss
-	vector<CAbbrFunct>    m_TimeAbbrPairs;
-	vector<CTimeUnit>     m_TimeUnits;
+	std::vector<CAbbrFunct>    m_TimeAbbrPairs;
+	std::vector<CTimeUnit>     m_TimeUnits;
 	StringVector   m_RusMonths;
 	StringVector   m_RusWeekDays;
 	bool                  InitTimeUnits();
 	bool                  InitTimeThesLists();
 
-	vector<CObor> Oborottos;
-	vector<CDoubleConj>  m_DisruptConj;
+	std::vector<CObor> Oborottos;
+	std::vector<CDoubleConj>  m_DisruptConj;
 	//варианты  английских оборотов	в поле CONTENT
-	vector<CUnitContent> m_vectorEngOborStr;
+	std::vector<CUnitContent> m_vectorEngOborStr;
 	//варианты  английских словосочетаний в поле CONTENT
-	vector<CUnitContent> m_vectorEngCollocStr;
+	std::vector<CUnitContent> m_vectorEngCollocStr;
 
 
 
 	bool BuildEngOborStr();
 	bool BuildEngCollocsStr();
-	std::string GetContentsOborStr(long UnitNo, vector<CUnitContent> & Contents);
+	std::string GetContentsOborStr(long UnitNo, std::vector<CUnitContent> & Contents);
 	std::string GetEngOborStr(long UnitNo)
 	{
 		return GetContentsOborStr(UnitNo, m_vectorEngOborStr);
@@ -608,26 +608,26 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 
 	// список всех абстрактных статей из словарей
-	typedef map<DictTypeEnum, vector<CAbstractArticle> > AbsractArticleMap;
+	typedef std::map<DictTypeEnum, std::vector<CAbstractArticle> > AbsractArticleMap;
 	AbsractArticleMap   m_AbstractArticles;
-	const vector<CAbstractArticle>* GetAbstractArticles(DictTypeEnum type ) const;
+	const std::vector<CAbstractArticle>* GetAbstractArticles(DictTypeEnum type ) const;
 
 	//индексы по полю RUS
-	vector<CEngUnitNoToRusUnit>  m_RusEquivs;
-	vector<CEngUnitNoToRusUnit>  m_RusEquivsEngObor;
-	vector<CEngUnitNoToRusUnit>  m_RusEquivsEngColsocs;
-	vector<CEngUnitNoToRusUnit>& GetRusEquivIndexes(DictTypeEnum type);
+	std::vector<CEngUnitNoToRusUnit>  m_RusEquivs;
+	std::vector<CEngUnitNoToRusUnit>  m_RusEquivsEngObor;
+	std::vector<CEngUnitNoToRusUnit>  m_RusEquivsEngColsocs;
+	std::vector<CEngUnitNoToRusUnit>& GetRusEquivIndexes(DictTypeEnum type);
 
 	//индексы по лексическим функциям
-	vector<SLexFunIndexes> m_LexFunIndexesRusByValue;
-	vector<SLexFunIndexes> m_LexFunIndexesRusByArg;
-	vector<SLexFunIndexes> m_LexFunIndexesEng;	  
+	std::vector<SLexFunIndexes> m_LexFunIndexesRusByValue;
+	std::vector<SLexFunIndexes> m_LexFunIndexesRusByArg;
+	std::vector<SLexFunIndexes> m_LexFunIndexesEng;	  
 
 	bool CreateAROSSIndex();
 	bool CreateEngOborIndex();
 	bool CreateEngCollocsROSSIndex();	  
-	bool CreateEngDictIndex(DictTypeEnum type, vector<CEngUnitNoToRusUnit>& RusEquivs);
-	bool CreateLexFunIndexes(const CDictionary* pRoss, vector<SLexFunIndexes>& LexFunIndexes);
+	bool CreateEngDictIndex(DictTypeEnum type, std::vector<CEngUnitNoToRusUnit>& RusEquivs);
+	bool CreateLexFunIndexes(const CDictionary* pRoss, std::vector<SLexFunIndexes>& LexFunIndexes);
 	bool PrintRusEquivs(std::string strFileName, DictTypeEnum type);
 
 
@@ -639,7 +639,7 @@ class CSemanticsHolder  : public CAllRossesHolder
 	bool			InitializeIndices();
 
 
-	void			GetPrepsFromArticle (const CDictionary* pRoss, long UnitNo, BYTE LeafId, BYTE BracketLeafId, vector<CRossInterp>& Preps);
+	void			GetPrepsFromArticle (const CDictionary* pRoss, long UnitNo, BYTE LeafId, BYTE BracketLeafId, std::vector<CRossInterp>& Preps);
 	UINT			GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, std::string AdjWordForm);
 
 	// =========  словосочетания

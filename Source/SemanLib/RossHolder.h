@@ -221,7 +221,7 @@ public:
    bool					HasFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0  ) const;
    // проверят все значения поля
    bool					HasFullFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0) const;
-   void					GetFieldValues(std::string strFieldName, long UnitNo, vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
+   void					GetFieldValues(std::string strFieldName, long UnitNo, std::vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
    bool					HasItem (WORD UnitNo, const std::string FieldStr, const std::string ItemStr, const std::string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
    
 
@@ -230,9 +230,9 @@ public:
 	WORD				LocateUnit (const char* UnitStr, BYTE MeanNum) const;
 	const char*			GetDomItemStrInner (long ItemNo) const;
 	// читает поле AUX, возвращает номер главного слова
-	long				GetDopFields(long UnitNo, vector<CDopField>& DopFields) const;
+	long				GetDopFields(long UnitNo, std::vector<CDopField>& DopFields) const;
 	bool				GetVal(long UnitNo, CValency& V) const;
-	void				GetLexFuncts (size_t UnitNo,  vector<CLexicalFunctionField>& OutVector, DictTypeEnum type = NoneRoss, const CRossHolder* pRossHolderObor = NULL) const;
+	void				GetLexFuncts (size_t UnitNo,  std::vector<CLexicalFunctionField>& OutVector, DictTypeEnum type = NoneRoss, const CRossHolder* pRossHolderObor = NULL) const;
 	// по словарной статье предлога или союза выдает семантическое отношение, которое они выражает
 	CValency			GetSemRelOfPrepOrConj(WORD UnitNo) const;
 	long				GetSemMainWordFromArticle (long UnitNo) const;

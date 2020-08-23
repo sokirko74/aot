@@ -25,13 +25,13 @@ protected:
 	std::string				m_Registry;
 	
     // Postfixes-particles, that do not change the meaning 
-	set<string>     	m_HyphenPostfixes;
+	std::set<std::string>     	m_HyphenPostfixes;
     // productive prefixes
-    set<string> 		m_HyphenPrefixes;
+    std::set<std::string> 		m_HyphenPrefixes;
 
 	CStatistic			m_Statistic;
 	CPredictBase		m_Predict;
-	set<string>			m_PrefixesSet;
+	std::set<std::string>			m_PrefixesSet;
 
 
 	virtual void			FilterSrc(std::string& src) const = 0;
@@ -41,13 +41,13 @@ protected:
 	void					ReadOptions(std::string FileName);
 		
 	
-	bool					LemmatizeWord(std::string& InputWordStr, const bool cap, const bool predict, vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const;
-	void					AssignWeightIfNeed(vector<CAutomAnnotationInner>& FindResults) const;
+	bool					LemmatizeWord(std::string& InputWordStr, const bool cap, const bool predict, std::vector<CAutomAnnotationInner>& results, bool bGetLemmaInfos) const;
+	void					AssignWeightIfNeed(std::vector<CAutomAnnotationInner>& FindResults) const;
 
 	// prediction by suffix
-	bool					CheckAbbreviation(std::string InputWordStr,vector<CAutomAnnotationInner>& FindResults, bool is_cap) const;
+	bool					CheckAbbreviation(std::string InputWordStr,std::vector<CAutomAnnotationInner>& FindResults, bool is_cap) const;
 	CAutomAnnotationInner	ConvertPredictTupleToAnnot(const CPredictTuple& input) const;
-	void					PredictByDataBase(std::string InputWordStr,  vector<CAutomAnnotationInner>&  results,bool is_cap) const;
+	void					PredictByDataBase(std::string InputWordStr,  std::vector<CAutomAnnotationInner>&  results,bool is_cap) const;
 	bool					IsPrefix(const std::string& Prefix) const;
 	
 
@@ -76,7 +76,7 @@ public:
 	bool	LoadStatisticRegistry(SubjectEnum subj);
 
 	//  main interfaces
-	bool	CreateParadigmCollection(bool bNorm, std::string& WordStr, bool capital, bool bUsePrediction, vector<CFormInfo>& Result) const;
+	bool	CreateParadigmCollection(bool bNorm, std::string& WordStr, bool capital, bool bUsePrediction, std::vector<CFormInfo>& Result) const;
 	void	GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* OutBuffer, bool bUsePrediction) const;
 	//std::string	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital) const;
 	bool	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital, char* OutBuffer, size_t MaxBufferSize, bool bUsePrediction) const;

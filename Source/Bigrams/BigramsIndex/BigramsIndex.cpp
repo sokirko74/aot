@@ -18,10 +18,10 @@ struct CWordInfo {
     size_t m_Freq;
 
     size_t m_FileOffset1 = UINT_MAX;
-    vector<CBigramInfo> m_Bigrams1;
+    std::vector<CBigramInfo> m_Bigrams1;
 
     size_t m_FileOffset2 = UINT_MAX;
-    vector<CBigramInfo> m_Bigrams2;
+    std::vector<CBigramInfo> m_Bigrams2;
 
     bool operator<(const CWordInfo &W) const {
         return m_WordStr < W.m_WordStr;
@@ -41,13 +41,13 @@ struct CWordInfo {
 
 };
 
-vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
+std::vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
     fprintf(stderr, "open file %s\n", WordFreqFileName.c_str());
     FILE *freq_fp = fopen(WordFreqFileName.c_str(), "rb");
     if (!freq_fp) {
         throw CExpc("cannot open file %s\n", WordFreqFileName.c_str());
     }
-    vector<CWordInfo> wordInfos;
+    std::vector<CWordInfo> wordInfos;
     char buffer[10000];
     while (fgets(buffer, 10000, freq_fp)) {
         char w[500];
@@ -70,7 +70,7 @@ vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
     return wordInfos;
 }
 
-void ReadBigrams(std::string BigramsFileName, vector<CWordInfo> &wordInfos) {
+void ReadBigrams(std::string BigramsFileName, std::vector<CWordInfo> &wordInfos) {
     fprintf(stderr, "open file %s\n", BigramsFileName.c_str());
     FILE *in_fp = fopen(BigramsFileName.c_str(), "rb");
     if (!in_fp) {
@@ -110,7 +110,7 @@ void ReadBigrams(std::string BigramsFileName, vector<CWordInfo> &wordInfos) {
     fprintf(stderr, "read %zu bigrams\n", linesCount);
 }
 
-void WriteBigramsBin(bool bFirstOffset1, vector<CWordInfo>& WordInfos, std::string BinName ) {
+void WriteBigramsBin(bool bFirstOffset1, std::vector<CWordInfo>& WordInfos, std::string BinName ) {
     fprintf(stderr, "write  to  file %s\n", BinName.c_str());
     FILE *out_fp = fopen(BinName.c_str(), "wb");
     if (!out_fp) {
@@ -143,7 +143,7 @@ int main(int argc, char *argv[]) {
     std::string WordFreqFileName = MakeFName(BigramsFileName, "wrd_freq");
 
     try {
-        vector<CWordInfo> wordInfos = ReadWordFreqs(WordFreqFileName);
+        std::vector<CWordInfo> wordInfos = ReadWordFreqs(WordFreqFileName);
         ReadBigrams(BigramsFileName, wordInfos);
         WriteBigramsBin(true, wordInfos, MakeFName(BigramsFileName, "bin1"));
         WriteBigramsBin( false, wordInfos, MakeFName(BigramsFileName, "bin2"));

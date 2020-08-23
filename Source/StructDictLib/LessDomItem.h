@@ -1,7 +1,7 @@
 #ifndef LessDomItem_h
 #define LessDomItem_h
 
-class IsLessByItemStrNew : public std::binary_function<const TDomItem, const TDomItem, bool>
+class IsLessByItemStrNew
 {
  public:
   const TItemContainer* m_pRoss;
@@ -20,7 +20,7 @@ class IsLessByItemStrNew : public std::binary_function<const TDomItem, const TDo
 
 
 
-class IsLessByNotStableItemStrNew : public std::binary_function<const TDomItem&, const TDomNoItemStr&, bool>
+class IsLessByNotStableItemStrNew
 {
  public:
   const TItemContainer* m_pRoss;

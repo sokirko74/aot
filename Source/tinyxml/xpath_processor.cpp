@@ -76,8 +76,8 @@ xpath_processor::xpath_processor (
    o_is_context_by_name = false;
 }
 
-/// Compute an XPath expression, and return the number of nodes in the resulting node set.
-/// \n Returns 0 if the result is not a node set
+/// Compute an XPath expression, and return the number of nodes in the resulting node std::set.
+/// \n Returns 0 if the result is not a node std::set
 unsigned xpath_processor::u_compute_xpath_node_set ()
 {
    er_compute_xpath ();
@@ -86,7 +86,7 @@ unsigned xpath_processor::u_compute_xpath_node_set ()
    return er_result . nsp_get_node_set () -> u_get_nb_node_in_set ();
 }
 
-/// Get one of the XML nodes from the resulting node set. Can only be used after a call to u_compute_xpath_node_set
+/// Get one of the XML nodes from the resulting node std::set. Can only be used after a call to u_compute_xpath_node_set
 void xpath_processor::v_get_xpath_base (
    unsigned u_order,             ///< Order of the node. Must be between 0 and the number of nodes - 1
    const TiXmlBase * & XBp_res,  ///< Output node
@@ -102,7 +102,7 @@ void xpath_processor::v_get_xpath_base (
    o_attrib = er_result . nsp_get_node_set () -> o_is_attrib (u_order);
 }
 
-/// Retrieves an XPath node from the node set. This assumes you know it's not an attribute
+/// Retrieves an XPath node from the node std::set. This assumes you know it's not an attribute
 TiXmlNode * xpath_processor::XNp_get_xpath_node (
    unsigned u_order)    ///< Order of the node. Must be between 0 and the number of nodes - 1
 {
@@ -117,7 +117,7 @@ TiXmlNode * xpath_processor::XNp_get_xpath_node (
    return (TiXmlNode *) XBp_res;
 }
 
-/// Retrieves an XPath attribute from the node set. This assumes you know it's an attribute
+/// Retrieves an XPath attribute from the node std::set. This assumes you know it's an attribute
 TiXmlAttribute * xpath_processor::XAp_get_xpath_attribute (
    unsigned u_order)    ///< Order of the node. Must be between 0 and the number of nodes - 1
 {
@@ -150,7 +150,7 @@ void xpath_processor::v_build_root ()
       XEp_root = new TiXmlElement ("root");
       XEp_root -> LinkEndChild ((TiXmlNode *) XNp_base);
 
-      // set the main node as the context one, if it's an element
+      // std::set the main node as the context one, if it's an element
       if (XNp_base -> ToElement ())
          XEp_context = XNp_base -> ToElement ();
       v_order_tree ();
@@ -231,7 +231,7 @@ expression_result xpath_processor::er_compute_xpath ()
    return er_result;
 }
 
-/// Compute an XPath expression and return the result as a string
+/// Compute an XPath expression and return the result as a std::string
 TIXML_STRING xpath_processor::S_compute_xpath ()
 {
    expression_result er_res;
@@ -305,7 +305,7 @@ void xpath_processor::v_pop_one_action (
    xpath_construct & xc_action,  ///< Next rule on placeholder
    unsigned & u_sub,             ///< Sub rule  
    unsigned & u_ref,             ///< Rule optional parameter
-   TIXML_STRING & S_literal)     ///< Rule optional string
+   TIXML_STRING & S_literal)     ///< Rule optional std::string
 {
    int i_1, i_2, i_3;
 
@@ -981,7 +981,7 @@ void xpath_processor::v_execute_one (
    }
 }
 
-/// Execute a full set of absolute/relative/relative/.. computation
+/// Execute a full std::set of absolute/relative/relative/.. computation
 void xpath_processor::v_execute_absolute_path (
    unsigned u_action_position,      ///< Position of the placeholder after the rule
    bool o_with_rel,                 ///< true if there is some relative path
@@ -1068,7 +1068,7 @@ void xpath_processor ::v_execute_step (
 
    if (! o_skip_only)
    {
-      /// Initialize the source node set if it's the first step of a path
+      /// Initialize the source node std::set if it's the first step of a path
       switch (i_relative_action)
       {
          case -2 :
@@ -1382,7 +1382,7 @@ void xpath_processor::v_execute_function (
       v_function_starts_with (u_nb_arg, erpp_arg);
    else
 
-   if (S_name == "string-length")
+   if (S_name == "std::string-length")
       v_function_string_length (u_nb_arg, erpp_arg);
    else
 
@@ -1612,7 +1612,7 @@ void xpath_processor::v_function_string_length (
    if (u_nb_arg != 1)
       throw execution_error (28);
    S_arg = erpp_arg [0] -> S_get_string ();
-   v_push_int (S_arg . length (), "string-length");
+   v_push_int (S_arg . length (), "std::string-length");
 }
 
 /**
@@ -1621,7 +1621,7 @@ Standard excerpt:\n
 The substring function returns the substring of the first argument starting at the position specified in the second argument 
 with length specified in the third argument. For example, substring("12345",2,3) returns "234". If the third argument is not 
 specified, it returns the substring starting at the position specified in the second argument and continuing to the end of 
-the string. For example, substring("12345",2) returns "2345".
+the std::string. For example, substring("12345",2) returns "2345".
 */
 void xpath_processor::v_function_substring (
    unsigned u_nb_arg,               ///< Nb of arguments
@@ -1668,8 +1668,8 @@ void xpath_processor::v_function_substring (
 
 /// XPath \b sum function\n
 /// Standard exerpt :\n
-/// The sum function returns the sum, for each node in the argument node-set, 
-/// of the result of converting the string-values of the node to a number.
+/// The sum function returns the sum, for each node in the argument node-std::set, 
+/// of the result of converting the std::string-values of the node to a number.
 void xpath_processor::v_function_sum (
    unsigned u_nb_arg,               ///< Nb of arguments
    expression_result ** erpp_arg)   ///< Argument list
@@ -1744,27 +1744,27 @@ This function is for internal use : evaluation of an equality expression \n
 Standard excerpt :\n
 
 If both objects to be compared are node-sets, then the comparison will be true if and only if there is a node in the first 
-node-set and a node in the second node-set such that the result of performing the comparison on the string-values of the 
+node-std::set and a node in the second node-std::set such that the result of performing the comparison on the std::string-values of the 
 two nodes is true. \n
 
-If one object to be compared is a node-set and the other is a number, then the comparison will be true 
-if and only if there is a node in the node-set such that the result of performing the comparison on the number to be compared 
-and on the result of converting the string-value of that node to a number using the number function is true. \n
+If one object to be compared is a node-std::set and the other is a number, then the comparison will be true 
+if and only if there is a node in the node-std::set such that the result of performing the comparison on the number to be compared 
+and on the result of converting the std::string-value of that node to a number using the number function is true. \n
 
-If one object to be compared is a node-set and the other is a string, then the comparison will be true if and only if there is a node in 
-the node-set such that the result of performing the comparison on the string-value of the node and the other string is true. \n
+If one object to be compared is a node-std::set and the other is a std::string, then the comparison will be true if and only if there is a node in 
+the node-std::set such that the result of performing the comparison on the std::string-value of the node and the other std::string is true. \n
 
-If one object to be compared is a node-set and the other is a boolean, then the comparison will be true if and only if the 
-result of performing the comparison on the boolean and on the result of converting the node-set to a boolean using the boolean 
+If one object to be compared is a node-std::set and the other is a boolean, then the comparison will be true if and only if the 
+result of performing the comparison on the boolean and on the result of converting the node-std::set to a boolean using the boolean 
 function is true.\n
 
-When neither object to be compared is a node-set and the operator is = or !=, then the objects are compared by converting them 
+When neither object to be compared is a node-std::set and the operator is = or !=, then the objects are compared by converting them 
 to a common type as follows and then comparing them. 
 -  If at least one object to be compared is a boolean, then each object to be compared is converted to a boolean as if by 
    applying the boolean function. 
 -  Otherwise, if at least one object to be compared is a number, then each object to be compared is converted to a number as 
    if by applying the number function. 
--  Otherwise, both objects to be compared are converted to strings as if by applying the string function. The = comparison will 
+-  Otherwise, both objects to be compared are converted to strings as if by applying the std::string function. The = comparison will 
    be true if and only if the objects are equal; the != comparison will be true if and only if the objects are not equal. 
 -  Numbers are compared for equality according to IEEE 754. 
 -  Two booleans are equal if either both are true or both are false. 
@@ -1808,18 +1808,18 @@ void xpath_processor::v_function_not_equal (expression_result ** erpp_arg)
 }
 
 /**
-Utility function that evaluates the equality between a node set and a non-node set\n
+Utility function that evaluates the equality between a node std::set and a non-node std::set\n
 
 Standard excerpt :\n
-If one object to be compared is a node-set and the other is a number, then the comparison will be true 
-if and only if there is a node in the node-set such that the result of performing the comparison on the number to be compared 
-and on the result of converting the string-value of that node to a number using the number function is true. \n
+If one object to be compared is a node-std::set and the other is a number, then the comparison will be true 
+if and only if there is a node in the node-std::set such that the result of performing the comparison on the number to be compared 
+and on the result of converting the std::string-value of that node to a number using the number function is true. \n
 
-If one object to be compared is a node-set and the other is a string, then the comparison will be true if and only if there is a node in 
-the node-set such that the result of performing the comparison on the string-value of the node and the other string is true. \n
+If one object to be compared is a node-std::set and the other is a std::string, then the comparison will be true if and only if there is a node in 
+the node-std::set such that the result of performing the comparison on the std::string-value of the node and the other std::string is true. \n
 
-If one object to be compared is a node-set and the other is a boolean, then the comparison will be true if and only if the 
-result of performing the comparison on the boolean and on the result of converting the node-set to a boolean using the boolean 
+If one object to be compared is a node-std::set and the other is a boolean, then the comparison will be true if and only if the 
+result of performing the comparison on the boolean and on the result of converting the node-std::set to a boolean using the boolean 
 function is true.\n
 */
 void xpath_processor::v_function_equal_node_and_other (expression_result * erp_node_set, expression_result * erp_non)

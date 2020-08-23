@@ -10,18 +10,18 @@
 
 class CUnitHolder
 {
-	vector<CGraLine>		m_Units;
-	vector<char>			m_TokenBuf;
-	vector<char>			m_UnitBufUpper;
-	vector<BYTE>			m_InputBuffer;
+	std::vector<CGraLine>		m_Units;
+	std::vector<char>			m_TokenBuf;
+	std::vector<char>			m_UnitBufUpper;
+	std::vector<BYTE>			m_InputBuffer;
 
-	map<size_t, short>		m_FoundOborots;
-	map<size_t, DWORD>		m_FoundPageBreaks;
+	std::map<size_t, short>		m_FoundOborots;
+	std::map<size_t, DWORD>		m_FoundPageBreaks;
 public:
-	const vector<CGraLine>& GetUnits() const	{ return m_Units; 	};
+	const std::vector<CGraLine>& GetUnits() const	{ return m_Units; 	};
 	CGraLine& GetUnit(size_t UnitNo);
-	const vector<char>& GetUnitBuf() const;
-	const vector<BYTE>& GetInputBuffer() const;
+	const std::vector<char>& GetUnitBuf() const;
+	const std::vector<BYTE>& GetInputBuffer() const;
 
 	MorphLanguageEnum		m_Language;
 

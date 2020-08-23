@@ -12,17 +12,17 @@ public:
   // валентность, для этого актанта, взятая из поля VAL
   CValency				m_PatternValency;
   // GFi для этого актанита
-  vector<TCortege10>	m_GramCorteges;
+  std::vector<TCortege10>	m_GramCorteges;
   // LEXi для этого актанита
   StringVector		m_LexFets;
   // MANLEXi для этого актанита
   StringVector		m_ObligLexFets;
   // DETERMi для этого актанита
-  vector<TCortege10>	m_ArticleCorteges;
+  std::vector<TCortege10>	m_ArticleCorteges;
   // направление, в котором следует искать этот актант (см. домен D_POSITION)
   std::string				m_Direction;
   // SFi для этого актанита
-  vector< vector<string> >		m_ActantSemFets;
+  std::vector< std::vector<std::string> >		m_ActantSemFets;
   // словарь, из которого было взято это грамматическое выражение
   const CRossHolder*			m_pRossDoc;
   const CRossHolder*			GetRossHolder() const;

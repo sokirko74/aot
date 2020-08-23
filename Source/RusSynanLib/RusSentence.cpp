@@ -32,7 +32,7 @@ void CRusSentence::ReadNextFromPlmLinesLanguageSpecific() {
     TryBuildVerbLemmaWithKa();
 }
 
-void CRusSentence::ChooseClauseType(const vector<SClauseType> &vectorTypes, CMorphVariant &V) {
+void CRusSentence::ChooseClauseType(const std::vector<SClauseType> &vectorTypes, CMorphVariant &V) {
     int empty_type = -1;
 
     for (int i = 0; i < vectorTypes.size(); i++) {
@@ -195,7 +195,7 @@ void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, std::string psAn
 
     H.m_iGrammems &= ~_QM(rGenitiv);
     int lGramm = H.m_iGrammems;
-    vector<int> v_gramm;
+    std::vector<int> v_gramm;
 
     if ((plOldGrammems & _QM(rGenitiv)) != 0) {
         H.m_iGrammems |= _QM(rGenitiv);
@@ -303,7 +303,7 @@ void CRusSentence::CutPrefixEksAndVize() {
 
     for (int ii = 0; ii < m_Words.size(); ii++) {
         std::string Word = m_Words[ii].m_strUpperWord;
-        vector<int> Prefixes;
+        std::vector<int> Prefixes;
         for (long i = 0; i < CommonNounPrefixesCount; i++)
             if (CommonNounPrefixes[i] == Word.substr(0, CommonNounPrefixes[i].length())) {
                 Prefixes.push_back(i);
@@ -314,12 +314,12 @@ void CRusSentence::CutPrefixEksAndVize() {
         if (Prefixes.empty()) continue;
 
 
-        vector<CFormInfo> Paradigms;
+        std::vector<CFormInfo> Paradigms;
         GetOpt()->GetLemmatizer()->CreateParadigmCollection(false, Word, false, false, Paradigms);
 
         if (Paradigms.size() < 1) continue;
 
-        vector<CSynHomonym> vec_Homonyms;
+        std::vector<CSynHomonym> vec_Homonyms;
         for (long k = 0; k < Paradigms.size(); k++) {
             long lParadigm = Paradigms[k].GetParadigmId();
             std::string TypeAncode = Paradigms[k].GetCommonAncode();
@@ -550,8 +550,8 @@ bool CRusSentence::BuildClauses() {
     FindAllTermins();
 
     bool SecondTryOfCoverageKillHomonyms = false;
-    vector<CSynWord> SaveWords = m_Words;
-    vector<SFoundTermin> SaveFoundTermins = m_vectorTermins;
+    std::vector<CSynWord> SaveWords = m_Words;
+    std::vector<SFoundTermin> SaveFoundTermins = m_vectorTermins;
 
 
     BuildInitialClausesLabel:
@@ -686,7 +686,7 @@ bool CRusSentence::BuildClauses() {
                         //поскольку тогда  восстановятся все омонимы,которые были удалены KillHomonymsInAllSentence.
                         //Поэтому мы делаем следующее.
 
-                        vector<CSynWord> p;
+                        std::vector<CSynWord> p;
                         for (int i = 0; i < SaveWords.size(); i++) {
                             int j = 0;
                             for (; j < m_Words.size(); j++)

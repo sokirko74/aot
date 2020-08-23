@@ -316,7 +316,7 @@ void CSynWord::BuildTerminalSymbolsByWord()
 
 
 	const CWorkGrammar& G = GetOpt()->m_FormatsGrammar;
-	const vector<CGrammarItem>&	TerminalSymbols = G.m_UniqueGrammarItems;
+	const std::vector<CGrammarItem>&	TerminalSymbols = G.m_UniqueGrammarItems;
 
 	// adding an end of stream symbol to each word
 	assert (!m_Homonyms.empty());

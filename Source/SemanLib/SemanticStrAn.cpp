@@ -35,9 +35,9 @@ void CRusSemStructure::InitLexVariant(size_t ClauseNo)
 
 // процедура, которая выбирает все варианты, причем если где-это был выбран вариант Х,  
 // то во всех последующих вариантах выбирается этот же Х, если это возможно
-static void GetLexVariants(  const vector<CDictUnitInterpVector>&  Parents, 
+static void GetLexVariants(  const std::vector<CDictUnitInterpVector>&  Parents, 
 						   CDictUnitInterpVector&   V,
-						   vector<CDictUnitInterpVector>&  Variants, 
+						   std::vector<CDictUnitInterpVector>&  Variants, 
 						   long       Position)
 { 
 	if (Variants.size() > 20000) return;
@@ -76,8 +76,8 @@ bool CRusSemStructure ::  SetLexVariant(size_t ClauseNo, size_t& LexVariantInCur
 StartPoint :
 
 	CRusSemClause& C = m_Clauses[ClauseNo];
-	vector<CRusSemNode> SaveNodes = m_Nodes;
-	vector<CSynRelation> SaveSynRelations = m_SynRelations;
+	std::vector<CRusSemNode> SaveNodes = m_Nodes;
+	std::vector<CSynRelation> SaveSynRelations = m_SynRelations;
 	SaveClausesNodeReferences();
 
 
@@ -86,7 +86,7 @@ StartPoint :
 	// строим текущее множество  словосочетаний
 	BuildBlackBoxCollocs(ClauseNo, CurrSetCollocHypNo);
 
-	vector<CDictUnitInterpVector> Parents;
+	std::vector<CDictUnitInterpVector> Parents;
 
 
 	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++)
@@ -103,7 +103,7 @@ StartPoint :
 	// получаем множество всех вариантов интерпретации
 	CDictUnitInterpVector V_curr; // текущий вариант 
 	V_curr.resize(Parents.size());
-	vector<CDictUnitInterpVector> Variants; // все возможные варианты
+	std::vector<CDictUnitInterpVector> Variants; // все возможные варианты
 	GetLexVariants(Parents, V_curr, Variants, 0);
 
 	// если текущий вариант последний для текущего C.m_SetCollocHyps[m_CurrSetCollocHypNo],
@@ -573,9 +573,9 @@ void CRusSemStructure::InitRelationOperators (long ClauseNo)
 };
 
 
-static void GetIndexedVariants(const vector<CLexVariantWeightVector>&  Parents, 
+static void GetIndexedVariants(const std::vector<CLexVariantWeightVector>&  Parents, 
 									   VectorLong&   V,
-							  vector<VectorLong>&  Variants, 
+							  std::vector<VectorLong>&  Variants, 
 								long       Position)
 { 
 	if (Variants.size() > 10000) return;
@@ -758,7 +758,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
     
 //*
 	long BestCombNo = -1;
-	vector<VectorLong> Variants;
+	std::vector<VectorLong> Variants;
 	rml_TRACE ("=================================================\n");
 	rml_TRACE  ("===  Connecting clauses   %i ===\n", m_ClauseVariantsCombinationNo);
 	m_InterfaceClauseNo ++;
@@ -767,7 +767,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 	VectorLong V;
 	
 	V.resize(m_Clauses.size());
-	vector<CLexVariantWeightVector> Parents;
+	std::vector<CLexVariantWeightVector> Parents;
 	for (long i=0; i <m_Clauses.size(); i++)
 	{
 		long k = m_Clauses[i].m_AlreadyBuiltClauseVariantNo;
@@ -933,7 +933,7 @@ struct CClauseComplexity
 
 std::string CRusSemStructure::GetClauseComplexitiesStr()
 {
-   vector<CClauseComplexity> ComplexClauses;
+   std::vector<CClauseComplexity> ComplexClauses;
    for (long j=0;j <m_AlreadyBuiltClauseVariants.size(); j++)
    {
 	   
@@ -1011,7 +1011,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 
 bool CRusSemStructure::GetClauseVariantCombination()
 {
-	vector<VectorLong> Parents;
+	std::vector<VectorLong> Parents;
 	Parents.resize(m_piSent->GetPrimitiveClausesCount());
 	m_AllClausesVariants = 0;
 	for (long i=0; i < Parents.size(); i++)
@@ -1024,7 +1024,7 @@ bool CRusSemStructure::GetClauseVariantCombination()
 	};
 	VectorLong V; // текущий вариант 
 	V.resize(Parents.size());
-	vector<VectorLong> Variants;
+	std::vector<VectorLong> Variants;
 	GetCommonVariants(Parents, V, Variants, 0);
 
 

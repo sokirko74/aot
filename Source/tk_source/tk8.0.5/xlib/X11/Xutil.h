@@ -35,7 +35,7 @@ SOFTWARE.
 
 /* 
  * Bitmask returned by XParseGeometry().  Each bit tells if the corresponding
- * value (x, y, width, height) was found in the parsed string.
+ * value (x, y, width, height) was found in the parsed std::string.
  */
 #define NoValue		0x0000
 #define XValue  	0x0001
@@ -53,7 +53,7 @@ SOFTWARE.
 typedef struct {
     	long flags;	/* marks which fields in this structure are defined */
 	int x, y;		/* obsolete for new window mgrs, but clients */
-	int width, height;	/* should set so old wm's don't mess up */
+	int width, height;	/* should std::set so old wm's don't mess up */
 	int min_width, min_height;
 	int max_width, max_height;
     	int width_inc, height_inc;
@@ -295,7 +295,7 @@ typedef struct {
 typedef int XContext;
 
 #define XUniqueContext()       ((XContext) XrmUniqueQuark())
-#define XStringToContext(string)   ((XContext) XrmStringToQuark(string))
+#define XStringToContext(std::string)   ((XContext) XrmStringToQuark(std::string))
 
 _XFUNCPROTOBEGIN
 

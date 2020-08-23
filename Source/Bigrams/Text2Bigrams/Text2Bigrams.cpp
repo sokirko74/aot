@@ -37,9 +37,9 @@ void PrintUsageAndExit()
 	
 };
 
-map<std::string, size_t> WordFreqs;
+std::map<std::string, size_t> WordFreqs;
 
-typedef map<pair<std::string,std::string>, size_t> BigramsType;
+typedef std::map<std::pair<std::string,std::string>, size_t> BigramsType;
 
 
 /*
@@ -81,7 +81,7 @@ void RemoveTempFiles(std::vector<std::string> AllTempFiles)
 };
 
 
-typedef list<vector<string> > interp_t;
+typedef std::list<std::vector<std::string> > interp_t;
 bool IsBigramToken(const CGraLine& L)
 {
 	return !L.IsNotPrint()  && !L.IsSoft();
@@ -91,7 +91,7 @@ interp_t GetTokensBySentences(CGraphmatFile& Graphan)
 {
 	interp_t Result;
 	size_t TokensCount = Graphan.GetUnits().size();
-	vector<string> tokens;
+	std::vector<std::string> tokens;
 	for (size_t LineNo=1; LineNo < TokensCount; LineNo++)
 	{
 		tokens.clear();
@@ -118,7 +118,7 @@ interp_t GetTokensBySentences(CGraphmatFile& Graphan)
 interp_t GetLemmasFromHMM(const interp_t& Tokens, const CTrigramModel& M)
 {
 	interp_t Result;
-	vector<string> lemmas;
+	std::vector<std::string> lemmas;
 	for (interp_t::const_iterator it = Tokens.begin(); it != Tokens.end(); it++)
 	{
 		M.lemmatize_sentence(*it, lemmas);
@@ -131,7 +131,7 @@ interp_t GetLemmasFromHMM(const interp_t& Tokens, const CTrigramModel& M)
 interp_t DeletePunctuationMarks(const interp_t& Tokens)
 {
 	interp_t Result;
-	vector<string> lemmas;
+	std::vector<std::string> lemmas;
 	for (interp_t::const_iterator it = Tokens.begin(); it != Tokens.end(); it++)
 	{
 		lemmas.clear();
@@ -307,7 +307,7 @@ try
 				{
 					std::string  s1 = (*it)[LineNo];
 					EngRusMakeUpper(s1);
-					map<std::string,size_t>::iterator freq_it  = WordFreqs.find(s1);
+					std::map<std::string,size_t>::iterator freq_it  = WordFreqs.find(s1);
 					if (freq_it == WordFreqs.end())
 						WordFreqs[s1] = 1;
 					else
@@ -321,7 +321,7 @@ try
 					{
 							std::string  s2 = (*it)[k];
 							EngRusMakeUpper(s2);
-							auto p = make_pair(s1, s2);
+							auto p = std::make_pair(s1, s2);
 							BigramsType::iterator it = Bigrams.find(p);
 							if (it != Bigrams.end())
 								it->second++;

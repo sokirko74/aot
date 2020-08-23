@@ -175,6 +175,6 @@ struct CConSent {
 };
 
 
-typedef vector<CConSent> CSList;
+typedef std::vector<CConSent> CSList;
 
 #endif

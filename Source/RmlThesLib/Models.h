@@ -34,9 +34,9 @@ struct CThesSynGroup {
 
 struct CInnerModel {
 	int					 m_ModelId;
-	vector<CThesSynRelation> m_SynRelations;
-	vector<CThesSynGroup>	 m_SynGroups;
-	vector<CAtomGroup>	 m_AtomGroups;
+	std::vector<CThesSynRelation> m_SynRelations;
+	std::vector<CThesSynGroup>	 m_SynGroups;
+	std::vector<CAtomGroup>	 m_AtomGroups;
 	CInnerModel()
 	{
 		m_ModelId = -1;

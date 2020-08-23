@@ -56,7 +56,7 @@ compilation of dftables.c, in which case the macro DFTABLES is defined. */
 *           Create PCRE character tables         *
 *************************************************/
 
-/* This function builds a set of character tables for use by PCRE and returns
+/* This function builds a std::set of character tables for use by PCRE and returns
 a pointer to them. They are build using the ctype functions, and consequently
 their contents will depend upon the current locale setting. When compiled as
 part of the library, the store is obtained via pcre_malloc(), but when compiled

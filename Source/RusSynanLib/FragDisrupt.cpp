@@ -14,7 +14,7 @@
  разделяет подлежащее и сказуемое, тогда  в выходное множество выдается еще и 
  тип SUBJ
 */
-static void get_all_group_types_for_the_word(const CMorphVariant& F, int UnitNo, vector<int>& Types)
+static void get_all_group_types_for_the_word(const CMorphVariant& F, int UnitNo, std::vector<int>& Types)
 {
 	Types.clear();
 	for (size_t i =  0; i < F.m_vectorGroups.GetGroups().size(); i++)
@@ -62,7 +62,7 @@ void AddSynVar(CMorphVariant& morphVar, const CMorphVariant& ToAdd)
 
 
 
-bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFirst, const CClause& ClSecond, vector<int>& Types, bool bFindSubjPredikate) 
+bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFirst, const CClause& ClSecond, std::vector<int>& Types, bool bFindSubjPredikate) 
 {
 	assert (ClFirst.m_iFirstWord < ClSecond.m_iFirstWord);
 
@@ -163,7 +163,7 @@ bool CRusSentence::TryToFindCommonGroupsForUnitedSynVariants(const CClause& ClFi
 				FormatCaller.SetGrammems(i,  synVariant.m_SynUnits[i].m_iGrammems, synVariant.m_SynUnits[i].GetGramCodes().c_str());
 			}
 
-			vector<SFoundTermin> m_vTermins;
+			std::vector<SFoundTermin> m_vTermins;
 			int iSynInfrormativeCount = 0;
 			
 			FormatCaller.main_analyse();
@@ -270,7 +270,7 @@ bool CRusSentence::RuleForDisruptClausesBySubject(int iClauseNum)
 		 !(pClause3.HasType(PARTICIPLE_SHORT_T)) && !(pClause3.HasType(ADJ_SHORT_T)) &&
 		 !(pClause3.HasType(PREDK_T)) && !(pClause3.HasType(INFINITIVE_T)) ) return false;
 	
-	vector<int> Types;
+	std::vector<int> Types;
 
 	/*
 	  пробуем найти  подлеажащее для сказуемого во  третьей клаузе
@@ -288,7 +288,7 @@ bool CRusSentence::RuleForDisruptClausesBySubject(int iClauseNum)
 	return true;
 }
 
-bool HasOnlyWeakTypes (const vector<SClauseType>& vectorTypes)
+bool HasOnlyWeakTypes (const std::vector<SClauseType>& vectorTypes)
 {
 	for  (size_t i=0; i < vectorTypes.size(); i++)
 	{
@@ -341,7 +341,7 @@ bool CRusSentence::RuleForUnitingClausesBySubject(int iClauseNum, bool bIgnoreWe
 		 !(pClause2.HasType(PARTICIPLE_SHORT_T)) && !(pClause2.HasType(ADJ_SHORT_T)) &&
 		 !(pClause2.HasType(PREDK_T)) && !(pClause2.HasType(INFINITIVE_T)) ) return false;
 	
-	vector<int> Types;
+	std::vector<int> Types;
 
 	/*
 	  пробуем найти  подлежащее для сказуемого во второй клаузе
@@ -418,7 +418,7 @@ bool CRusSentence::RuleForDisruptConjUnion(int iClauseNum)
 			if (GetWords()[pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo].m_strUpperWord == _R("БУДЬ"))
 				bPredikatConj = true;
 
-	vector<int> Types;
+	std::vector<int> Types;
 
 	if (!CanBeDisruptConjClause(pClauseLeft,pClauseRight))
 		return false;

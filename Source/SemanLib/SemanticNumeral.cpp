@@ -53,7 +53,7 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 			GenitFormsOfCardinal.push_back(_R("КВАДРИЛЛИОНО"));
 			continue;
 		};
-		vector<CFormInfo> ParadigmCollection;
+		std::vector<CFormInfo> ParadigmCollection;
 		std::string WordForm = NumeralToNumber[i].m_Cardinal;
 		piRusLemmatizer->CreateParadigmCollection(true, WordForm, false, false, ParadigmCollection);
 		// ищем числительное
@@ -186,14 +186,14 @@ double FindInTable(std::string word)
 };
 
 
-double ConvertNumeralByTable(vector<CRusSemWord>::const_iterator Start, vector<CRusSemWord>::const_iterator End)
+double ConvertNumeralByTable(std::vector<CRusSemWord>::const_iterator Start, std::vector<CRusSemWord>::const_iterator End)
 {
 
 	double Result = 0;
 
 
 	long LastLength = 20;
-	for (vector<CRusSemWord>::const_iterator Word = Start; Word < End; Word++)
+	for (std::vector<CRusSemWord>::const_iterator Word = Start; Word < End; Word++)
 	{
 		double Res;
 
@@ -253,7 +253,7 @@ std::string ConvertOneWordOrdinalNumeral(const std::string& InputOrdinal)
 };
 
 
-std::string ConvertHugeNumeral(vector<CRusSemWord>::const_iterator Start, vector<CRusSemWord>::const_iterator End, QWORD Order)
+std::string ConvertHugeNumeral(std::vector<CRusSemWord>::const_iterator Start, std::vector<CRusSemWord>::const_iterator End, QWORD Order)
 {
 	std::string OrderStr = FindByNumber(Order);
 	std::string Result;
@@ -264,7 +264,7 @@ std::string ConvertHugeNumeral(vector<CRusSemWord>::const_iterator Start, vector
 	}
 	else
 	{
-		vector<CRusSemWord>::const_iterator Word = Start;
+		std::vector<CRusSemWord>::const_iterator Word = Start;
 		for (; Word < End; Word++)
 			if (Word->m_Lemma == OrderStr)
 				break;
@@ -486,7 +486,7 @@ void CRusSemStructure::NumeralAdverbRule()
 
 
 			long ClauseNo = m_Nodes[NumNodeNo].m_ClauseNo;
-			vector<long> Hypots;
+			std::vector<long> Hypots;
 			for (long i = NumNodeNo - 1; i >= m_Clauses[ClauseNo].m_BeginNodeNo; i--)
 				if (CanBeNumeralAdverbHostMorph(m_Nodes[i]))
 					Hypots.push_back(i);
@@ -515,7 +515,7 @@ void CRusSemStructure::NumeralAdverbRule()
 					HypotNodeNo = Hypots[0];
 			};
 
-			vector<long> Rels;
+			std::vector<long> Rels;
 			GetIncomingInClauseRelations(NumNodeNo, Rels);
 			if (Rels.size() == 1)
 			{

@@ -109,7 +109,7 @@ void CEngSemStructure::TranslateClauseRels()
 
 	size_t InitialRelationCount = m_Relations.size();
 
-	for( int i=0; i< min(InitialRelationCount,m_Relations.size()); i++ )
+	for( int i=0; i< std::min(InitialRelationCount,m_Relations.size()); i++ )
 	{		
 		int iSrc = m_Nodes[m_Relations[i].m_SourceNodeNo].m_ClauseNo;
 		int iTrg = m_Nodes[m_Relations[i].m_TargetNodeNo].m_ClauseNo;
@@ -163,7 +163,7 @@ void CEngSemStructure::TranslateClauseRels()
 				if( rusSemRel.m_SynReal.m_Conj.m_DictType == NoneRoss )
 					break;
 
-				vector<CEngInterp> equivs;
+				std::vector<CEngInterp> equivs;
 				FindEngEquivForRusArticle(rusSemRel.m_SynReal.m_Conj,equivs,EngObor);
 				if( equivs.size() > 0 )	
 				{
@@ -243,7 +243,7 @@ void CEngSemStructure::ClauseRelRule_Kakoj(int iRel)
 	m_Nodes[semRel.m_TargetNodeNo] = newNode;
 	semRel.m_bSourceClauseIsMain = true;
 
-	vector<long> incomingRels;
+	std::vector<long> incomingRels;
 	GetIncomingRelations(semRel.m_TargetNodeNo, incomingRels, false);
 
 	if( incomingRels.size() == 2 )
@@ -281,7 +281,7 @@ void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 		std::string rus_str = GetCortegeStr(rusNode.GetType(),rusSemRel.m_SynReal.m_Cortege);
 		bool bRusInf = (rus_str.find(_R("инф"))!=std::string::npos );
 
-		vector<SGramCortegesAndType> GramCortegesAndTypeV;	
+		std::vector<SGramCortegesAndType> GramCortegesAndTypeV;	
 		GetGramCortegesAndTypeFromRel(GramCortegesAndTypeV, engSemRel);
 
 		bool bEngInf = false;
@@ -325,7 +325,7 @@ void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 		}
 	}
 //
-	vector<CEngInterp> equivs;
+	std::vector<CEngInterp> equivs;
 	FindEngEquivForRusArticle(rusSemRel.m_SynReal.m_Conj,equivs,EngObor);
 	if( equivs.size() > 0 )	
 	{
@@ -342,7 +342,7 @@ void CEngSemStructure::ClauseRelRule_Kak(int iRelNum)
 	if( m_Relations[iRelNum].m_Valency.m_RelationStr == "THESAME")	
 	{
 		int iAntecEngNode = m_Relations[iRelNum].m_TargetNodeNo;
-		vector<long> InRels;
+		std::vector<long> InRels;
 		GetIncomingRelations(iAntecEngNode, InRels, false);
 		assert(InRels.size() == 2);
 		if( InRels.size() != 2 )
@@ -411,7 +411,7 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 			if( strAntecWord == _R("ТОТ") )
 			{
 				m_Relations.erase(m_Relations.begin() + iRelNum);
-				vector<long> inRels;
+				std::vector<long> inRels;
 				GetIncomingRelations(iAntecEngNode, inRels,false);
 				for( int k=0; k< inRels.size(); k++ )
 				{
@@ -490,7 +490,7 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 	engSemRel.m_Position = "begin";
 	engSemRel.m_PosType = FromAlgorithmPosType;
 	
-	vector<long> incomeRels;
+	std::vector<long> incomeRels;
 	GetIncomingRelations(iConjEngNode, incomeRels, false);
 	for( int i=0; i<incomeRels.size(); i++ )
 	{
@@ -533,7 +533,7 @@ void CEngSemStructure::ClauseRelRule_Kotoryj(int iRelNum)
 	const CSemNode& sourceNode = RusStr.GetNode(rusSemRel.m_SourceNodeNo);	 
 	const CSemNode& targetNode = RusStr.GetNode(rusSemRel.m_TargetNodeNo);	 
 
-	vector<long> incomeRels;
+	std::vector<long> incomeRels;
 	GetIncomingRelationsInThisClause(engSemRel.m_SourceNodeNo, incomeRels);
 	if( incomeRels.size() != 1 )
 		return;

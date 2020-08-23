@@ -74,7 +74,7 @@ int CGerSentence::get_weight_of_subj_pred_relation(const CMorphVariant& synVaria
 	
 	// counting brackets between subject and predicate
 	int CountOfBrackets = 0;
-	for (int i=min(Subj, Pred); i<max(Subj, Pred); i++)
+	for (int i=std::min(Subj, Pred); i<std::max(Subj, Pred); i++)
 	{
 		const CSynUnit& U = synVariant.m_SynUnits[i];
 		if (U.m_Type == EClause)
@@ -134,7 +134,7 @@ bool CGerSentence::CheckLastPredicatePosition(size_t ClauseLastWordNo, long Root
 {
 	//  if this root has an auxiliry verb then get the very left auxiliary verb
 	for (long  NextWord = FindFirstAuxVerb(RootWordNo); NextWord != -1; NextWord = FindFirstAuxVerb(NextWord))
-		RootWordNo = max(NextWord, RootWordNo);
+		RootWordNo = std::max(NextWord, RootWordNo);
 
 	if (RootWordNo == ClauseLastWordNo)  return true;
 	const CSynWord&  W = m_Words[RootWordNo+1];
@@ -151,7 +151,7 @@ void CGerSentence::BuildSubjAndPredRelation(CMorphVariant& synVariant,long RootW
 
 	if (RootWordNo == -1) return;
 
-	vector<int> PossibleAccusativArguments;
+	std::vector<int> PossibleAccusativArguments;
 	if (		synVariant.m_SynUnits[RootWordNo].HasGrammem(gTransitiv) 
 			&&	!synVariant.m_SynUnits[RootWordNo].HasGrammem(gIntransitiv) 
 			&&	!synVariant.m_SynUnits[RootWordNo].HasGrammem(gImpersonal) 

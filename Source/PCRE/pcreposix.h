@@ -109,7 +109,7 @@ typedef struct {
 
 /* When an application links to a PCRE DLL in Windows, the symbols that are
 imported have to be identified as such. When building PCRE, the appropriate
-export settings are needed, and are set in pcreposix.c before including this
+export settings are needed, and are std::set in pcreposix.c before including this
 file. */
 
 /* By default, we use the standard "extern" declarations. */

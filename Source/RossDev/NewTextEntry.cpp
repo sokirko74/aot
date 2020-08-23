@@ -89,7 +89,7 @@ LRESULT CNewTextEntry::OnWizardNext()
    CRossDevApp* A = ((CRossDevApp*)AfxGetApp());
    ((CPosChoicer*)Wzd->GetPage(1))->m_ParadigmCollection.clear();
    ((CTranslations*)Wzd->GetPage(2))->m_ParadigmCollection.clear();
-   vector<CFormInfo>& ParadigmCollection = ((CPosChoicer*)Wzd->GetPage(1))->m_ParadigmCollection;
+   std::vector<CFormInfo>& ParadigmCollection = ((CPosChoicer*)Wzd->GetPage(1))->m_ParadigmCollection;
 
    
    const CLemmatizer* P = GetSemBuilder().m_RusStr.m_pData->GetRusLemmatizer();

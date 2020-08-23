@@ -51,7 +51,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CNewRefArticles message handlers
 
-void CNewRefArticles::SetRefs(vector<LONG>& RefsId)
+void CNewRefArticles::SetRefs(std::vector<LONG>& RefsId)
 {
 	m_RefsId.clear();
 	for (size_t i=0; i<RefsId.size(); i++)

@@ -29,7 +29,7 @@ int		CStatistic::get_HomoWeight(int paradigmid, int form) const
 	_homonode_t findnode;
 	findnode.first = paradigmid;
 	findnode.second = form;
-	vector<_homonode_t>::const_iterator	presult = lower_bound(m_HomoWeights.begin(), m_HomoWeights.end(), findnode, less4homonode);
+	std::vector<_homonode_t>::const_iterator	presult = lower_bound(m_HomoWeights.begin(), m_HomoWeights.end(), findnode, less4homonode);
 	if (	(presult != m_HomoWeights.end())
 		&&	(presult->first == findnode.first)
 		&&	(presult->second == findnode.second)
@@ -50,7 +50,7 @@ int		CStatistic::get_WordWeight(int paradigmid) const
 	
 	_statnode_t findnode;
 	findnode.first = paradigmid;
-	vector<_statnode_t>::const_iterator	presult =  lower_bound(m_WordWeights.begin(), m_WordWeights.end(), findnode, less4statnode);
+	std::vector<_statnode_t>::const_iterator	presult =  lower_bound(m_WordWeights.begin(), m_WordWeights.end(), findnode, less4statnode);
 
 	if (	(presult != m_WordWeights.end())
 		&&	(presult->first == findnode.first)

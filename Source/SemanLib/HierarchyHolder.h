@@ -48,11 +48,11 @@ struct CHierarchyRelation
 class CHierarchyHolder 
 {
 public:
-	vector<CHierarchyNode>     Nodes;
-	vector<CHierarchyRelation> Relations;
+	std::vector<CHierarchyNode>     Nodes;
+	std::vector<CHierarchyRelation> Relations;
 
 	// строковый вариант транзитивного замыкания иерархии
-	vector<CStringRelation>   m_TransitiveRels;
+	std::vector<CStringRelation>   m_TransitiveRels;
 	CRossHolder*              m_pRossDoc;
 	CDictionary*  GetRoss () {return m_pRossDoc->GetRoss();}
 	const CDictionary*   GetRoss () const {return m_pRossDoc->GetRoss();}
@@ -87,9 +87,9 @@ public:
 
 extern bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc);
 // добавляет в SemFets все SF, которые стоят ниже по иерархии 
-extern void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<string>& SemFets);
+extern void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, std::vector<std::string>& SemFets);
 // добавляет в SemFets все SF, которые стоят выше по иерархии 
-extern void  IncludeHigherInHierarchy(CHierarchyHolder* pHierarchyDoc, vector<string>& SemFets);
+extern void  IncludeHigherInHierarchy(CHierarchyHolder* pHierarchyDoc, std::vector<std::string>& SemFets);
 
 
 #endif

@@ -44,7 +44,7 @@ std::string GetMorphInfo(std::string Form) {
     std::vector<CFormInfo> Paradigms;
     Holder.m_pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
 
-    std::vector<string> Results;
+    std::vector<std::string> Results;
     for (int i = 0; i < Paradigms.size(); i++) {
         std::string Result;
         const CFormInfo &F = Paradigms[i];

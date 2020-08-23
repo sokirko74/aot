@@ -167,9 +167,9 @@ const WORD ASCII[256] = {
 /*next line (nel) ':'*/                            fWordDelim,
 /*start of selected area (ssa) '+'*/               fWordDelim,
 /*end of selected area (esa) '+'*/                 fWordDelim,
-/*character tabulation set (hts) '_'*/             fWordDelim,
+/*character tabulation std::set (hts) '_'*/             fWordDelim,
 /*character tabulation with justification (htj) '%'*/ fWordDelim,
-/*line tabulation set (vts) '_'*/                  0,
+/*line tabulation std::set (vts) '_'*/                  0,
 /*partial line forward (pld) '<'*/                 fWordDelim,
 /*partial line backward (plu) '_'*/                fWordDelim,
 /*reverse line feed (ri) '_'*/                     fWordDelim,
@@ -178,7 +178,7 @@ const WORD ASCII[256] = {
 /*device control std::string (dcs) '_'*/                fWordDelim,
 /*private use one (pu1) '''*/                      fWordDelim,
 /*private use two (pu2) '''*/                      fWordDelim,
-/*set transmit state (sts) '"'*/                   fWordDelim,
+/*std::set transmit state (sts) '"'*/                   fWordDelim,
 /*cancel character (cch) '"'*/                     fWordDelim,
 /*message waiting (mw) ''*/                       fWordDelim,
 /*start of guarded area (spa) '-'*/                fWordDelim,
@@ -422,7 +422,7 @@ std::string GetPathByFile (std::string FileName)
 		if (j == std::string::npos) 
 			return FileName.substr(0, i+1);
 		else
-			return FileName.substr(0, max(i,j)+1); 
+			return FileName.substr(0, std::max(i,j)+1); 
 };
 
 
@@ -724,14 +724,14 @@ void AddFile(const char* MainFile, const char* ToAdd)
 		LONG res; 
 		res = RegOpenKeyEx( HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",  0, KEY_ALL_ACCESS, &hKeyResult ); 
 		if(res != ERROR_SUCCESS)
-			throw CExpc("Error! Environment variable \"RML\"is not set!");
+			throw CExpc("Error! Environment variable \"RML\"is not std::set!");
 		else
 		{ 
 			char buf[512]; 
 			DWORD dwBytes = sizeof(buf); 
 			res = RegQueryValueEx( hKeyResult, "RML", 0, NULL, reinterpret_cast <PBYTE> (buf), &dwBytes); 
 			if(res != ERROR_SUCCESS) 
-				throw CExpc("Error! Environment variable \"RML\"is not set!");
+				throw CExpc("Error! Environment variable \"RML\"is not std::set!");
 			return buf;
 		}
 	} 
@@ -746,7 +746,7 @@ std::string GetRmlVariable()
 	else
 	{
 		#ifndef WIN32
-			throw CExpc("Error! Environment variable \"RML\"is not set!");
+			throw CExpc("Error! Environment variable \"RML\"is not std::set!");
 		#else
 			s = TryReadRMLFromRegistry();
 		#endif
@@ -1771,7 +1771,7 @@ size_t dual_bracket (BYTE x)
 
 // ============     CShortString and  CShortStringHolder =========================
 
-CShortString::CShortString(vector<char>::const_iterator pData)
+CShortString::CShortString(std::vector<char>::const_iterator pData)
 {
 	m_pStringPointer = pData;
 };
@@ -1780,7 +1780,7 @@ BYTE CShortString::GetLength() const
 	return	(BYTE)m_pStringPointer[0];	
 }
 
-vector<char>::const_iterator	CShortString::GetData() const
+std::vector<char>::const_iterator	CShortString::GetData() const
 {	
 	return	m_pStringPointer;	
 }
@@ -1973,7 +1973,7 @@ void CMyTimeSpanHolder::StartTimer(const std::string& Name, long NestId)
 	{
 		CMyTimeSpan X (m_SequenceId, NestId);
 
-		pair<Iterator, bool> p = m_TimeSpans.insert(pair<std::string, CMyTimeSpan>(Name, X));
+		std::pair<Iterator, bool> p = m_TimeSpans.insert(std::pair<std::string, CMyTimeSpan>(Name, X));
 
 		it = p.first;
 	};
@@ -2011,12 +2011,12 @@ std::string CMyTimeSpanHolder::GetStrRepresentation (double AllClocksCount) cons
 	if (!m_bTimeSpanHolderEnabled)  return "profiler is disabled\n";
 
 	
-	map<int, ConstIterator>			TimerSequence;
+	std::map<int, ConstIterator>			TimerSequence;
 
 	for (ConstIterator It = m_TimeSpans.begin(); It != m_TimeSpans.end();It++)
 		TimerSequence[It->second.m_SequenceId] = It;
 
-	for (map<int, ConstIterator>::const_iterator It1 = TimerSequence.begin(); It1 != TimerSequence.end();It1++)
+	for (std::map<int, ConstIterator>::const_iterator It1 = TimerSequence.begin(); It1 != TimerSequence.end();It1++)
 	{
 		char s[1000];
 		ConstIterator It = It1->second;
@@ -2068,7 +2068,7 @@ bool LoadFileToString(std::string FileName, std::string& Result)
 	if ( access(FileName.c_str(), 4) != 0) return false;
 
 
-	vector<char> V;
+	std::vector<char> V;
 	ReadVector(FileName,V);
 	Result = std::string (V.begin(), V.end());
 	return true;
@@ -2526,7 +2526,7 @@ std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum lang
 }
 
 
-void CTestCaseBase::read_test_cases(istream& inp) {
+void CTestCaseBase::read_test_cases(std::istream& inp) {
 	TestCases.clear();
 	std::string s;
 	while (getline(inp, s)) {
@@ -2542,7 +2542,7 @@ void CTestCaseBase::read_test_cases(istream& inp) {
 	}
 }
 
-void CTestCaseBase::write_test_cases(ostream& outp) const {
+void CTestCaseBase::write_test_cases(std::ostream& outp) const {
 	nlohmann::json cases = nlohmann::json::array();
 	for (auto c : TestCases) {
 		cases.push_back({
@@ -2553,3 +2553,21 @@ void CTestCaseBase::write_test_cases(ostream& outp) const {
 	}
 	outp << cases.dump(4);
 }
+/*
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+namespace fs = std::filesystem;
+
+int a()
+{
+	std::string path("/your/dir/");
+	std::string ext(".sample");
+	for (auto& p : fs::recursive_directory_iterator(path)
+	{
+		if (p.path().extension() == ext())
+			std::cout << p << '\n';
+	}
+	return 0;
+};
+*/

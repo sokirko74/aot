@@ -28,7 +28,7 @@ void CTrieHolder::PrintChildren(size_t NodeNo) const
 	{
 		printf(" Lengths=");	
 
-		for (set<CPattern>::const_iterator it = m_TerminatedPeriods.begin(); it !=  m_TerminatedPeriods.end(); it++)
+		for (std::set<CPattern>::const_iterator it = m_TerminatedPeriods.begin(); it !=  m_TerminatedPeriods.end(); it++)
 		{
 				printf("<%i,%s>,", it->size(), it->m_PeriodNameStr.c_str() );	
 		};
@@ -94,7 +94,7 @@ void CTrieHolder::InitFailureFunction()
 {
 	assert (!m_Nodes.empty());
 
-	vector<size_t> BFS;
+	std::vector<size_t> BFS;
 	BFS.push_back(0);
 
 	//  going breadth-first search
@@ -178,7 +178,7 @@ void CTrieHolder::ConvertAuxChildrenToNormal()
 	m_ChildrenAux.clear();
 };
 
-void CTrieHolder::CreateTrie(const set< CWorkRule >& Patterns)
+void CTrieHolder::CreateTrie(const std::set< CWorkRule >& Patterns)
 {
 	assert(!Patterns.empty());
 	m_Nodes.clear();
@@ -190,7 +190,7 @@ void CTrieHolder::CreateTrie(const set< CWorkRule >& Patterns)
 	AddNode(CTrieNode ());
 	
 
-	set< CWorkRule >::const_iterator iter, prev_iter;
+	std::set< CWorkRule >::const_iterator iter, prev_iter;
 	iter = prev_iter = Patterns.begin();
 	size_t RuleNo = 0; 
 	CreateChildrenSequence(iter->m_RightPart.m_Items.begin(), iter->m_RightPart.m_Items.end(),  0, RuleNo);
@@ -253,7 +253,7 @@ void CTrieHolder::CreateTrie(const set< CWorkRule >& Patterns)
 };
 
 
-void CTrieHolder::Create(const set< CWorkRule >& Patterns, const SymbolInformationType* Info)
+void CTrieHolder::Create(const std::set< CWorkRule >& Patterns, const SymbolInformationType* Info)
 {
 	m_pSymbolInformation = Info;
 	m_AlphabetSize = m_pSymbolInformation->size();
@@ -278,7 +278,7 @@ void CTrieHolder::Create(const set< CWorkRule >& Patterns, const SymbolInformati
 };
 
 
-void CTrieHolder::UpdatePossibleOutputSymbolsbyOnState(size_t NodeNo,  vector<bool>& PossibleOutputSymbols) const
+void CTrieHolder::UpdatePossibleOutputSymbolsbyOnState(size_t NodeNo,  std::vector<bool>& PossibleOutputSymbols) const
 {
 	size_t Count =  GetChildrenCount(NodeNo);
 	for (size_t i=0; i<Count; i++)
@@ -288,11 +288,11 @@ void CTrieHolder::UpdatePossibleOutputSymbolsbyOnState(size_t NodeNo,  vector<bo
 	};
 };
 
-void CTrieHolder::UpdatePossibleOutputSymbols (const set<size_t>& CurrentStates, vector<bool>& PossibleOutputSymbols) const 
+void CTrieHolder::UpdatePossibleOutputSymbols (const std::set<size_t>& CurrentStates, std::vector<bool>& PossibleOutputSymbols) const 
 {
 	PossibleOutputSymbols.resize(GetAlphabetSize(), false);
 
-	for (	set<size_t>::const_iterator it = CurrentStates.begin(); 
+	for (	std::set<size_t>::const_iterator it = CurrentStates.begin(); 
 			it != CurrentStates.end(); 
 			it++
 		)
@@ -307,7 +307,7 @@ void CTrieHolder::UpdatePossibleOutputSymbols (const set<size_t>& CurrentStates,
 
 
 
-int CTrieHolder::NextState (int State, size_t TextPositionNo, TerminalSymbolType Symbol, vector< COccurrence >& Occurrences) const 
+int CTrieHolder::NextState (int State, size_t TextPositionNo, TerminalSymbolType Symbol, std::vector< COccurrence >& Occurrences) const 
 {
 	while ( State!=-1 &&  (FindChild(State,Symbol) == -1)) 
 		State =  m_Nodes[State].m_FailureFunction;
@@ -333,7 +333,7 @@ int CTrieHolder::NextState (int State, size_t TextPositionNo, TerminalSymbolType
 	return State;
 };
 
-void CTrieHolder::GetOccurrences (const TerminalString& Text, vector< COccurrence >& Occurrences) const 
+void CTrieHolder::GetOccurrences (const TerminalString& Text, std::vector< COccurrence >& Occurrences) const 
 {
 	int r = 0;
 	Occurrences.clear();
@@ -464,7 +464,7 @@ size_t CTrieHolder::GetAlphabetSize() const
 	return m_AlphabetSize; 
 };
 
-vector<CTrieRelation>::const_iterator  CTrieHolder::GetChildren(size_t NodeNo) const 
+std::vector<CTrieRelation>::const_iterator  CTrieHolder::GetChildren(size_t NodeNo) const 
 { 
 	return m_Children.begin() + m_Nodes[NodeNo].m_ChildrenIndex; 
 };

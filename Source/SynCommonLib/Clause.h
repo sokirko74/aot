@@ -41,8 +41,8 @@ struct SConjIndex : public CPeriod
 
 class CClauseCollection;
 
-typedef pair<int, int> CIntPair;
-//typedef map<int, CGroup> CGroupMap;
+typedef std::pair<int, int> CIntPair;
+//typedef std::map<int, CGroup> CGroupMap;
 
 
 
@@ -63,7 +63,7 @@ class CClause : public CPeriod
 {
 public:
 	// list of all conjunctions, which  the clause contains
-	vector<SConjIndex> m_vectorConjs; 
+	std::vector<SConjIndex> m_vectorConjs; 
 
 	// pointer to relative word 
 	CWordAndHomonym	m_RelativeWord;
@@ -72,7 +72,7 @@ public:
 	int				m_AntecedentWordNo;
 
 	//types of clause
-	vector<SClauseType> m_vectorTypes;
+	std::vector<SClauseType> m_vectorTypes;
 
 	//  the number of clause in CClauseCollection::m_Clauses
 	size_t	m_SelfClauseNo;
@@ -83,9 +83,9 @@ public:
 	// all found groups in all morphological variants
     //CGroupMap  m_mapGroups;
 
-	list<CMorphVariant>	m_SynVariants;
+	std::list<CMorphVariant>	m_SynVariants;
 
-	set<CInputSymbol> m_AutomatSymbolInterpetationUnion;
+	std::set<CInputSymbol> m_AutomatSymbolInterpetationUnion;
 
 	//the sentence of this  clause (the parent)
 	CSentence* m_pSent;
@@ -148,7 +148,7 @@ public:
 	bool IsGoodVariant(const CMorphVariant& synVariant) const ;
 
 	int							GetSynVariantsCount() const;
-	vector<CMorphVariant*>		GetSynVariantIndexesByTypeNum(int i_type);
+	std::vector<CMorphVariant*>		GetSynVariantIndexesByTypeNum(int i_type);
 	const CMorphVariant*		GetSynVariantByClauseType(const SClauseType& type) const;
 	const CSVI					GetSynVariantByNo(long lVarNum) const;
 	bool						IsValidCSVI(CSVI it) const;
@@ -178,11 +178,11 @@ public:
 	void	DeleteClauseType(int ClauseTypeNo);
 	void	ChangeAllClauseTypesToOneType(SClauseType Type);
 	void	DeleteClauseTypeInHostClause(CClause* FirstHost,  int TypeNo);
-	bool	AssignWordNoAndClauseVarToRelNode(int& iNode, vector<CSVI>& ClauseVars, const vector<EClauseType>& types);	
+	bool	AssignWordNoAndClauseVarToRelNode(int& iNode, std::vector<CSVI>& ClauseVars, const std::vector<EClauseType>& types);	
 	SVI		EraseMorphVariant(SVI pSynVar);
 
-	void	GetBuildingUnits(vector<CBuildingUnit>& BuildingUnits);
-	void	BuildSynVariantsRecursive(vector<CBuildingUnit>::iterator pUnit, CMorphVariant& synVariant);
+	void	GetBuildingUnits(std::vector<CBuildingUnit>& BuildingUnits);
+	void	BuildSynVariantsRecursive(std::vector<CBuildingUnit>::iterator pUnit, CMorphVariant& synVariant);
 	int		GetMainWordOfTheClauseForThisVariant(const CMorphVariant& M, const CClauseRelation& R ) const;
 	void	TranslateCoordSynVarForGroup(CGroup& pGrp) const;
 	void	TranslateFormatCallerGroups(CMorphVariant& V);
@@ -195,8 +195,8 @@ public:
 class CClauseCollection
 {
 public:
-	vector<CRelation>	m_ClausesRelations;	
-	vector<CClause>		m_Clauses;
+	std::vector<CRelation>	m_ClausesRelations;	
+	std::vector<CClause>		m_Clauses;
 	
 	CClauseCollection() {};
 	virtual ~CClauseCollection() {};
@@ -264,11 +264,11 @@ public:
 	/*
 	 функция выдает клаузы, которые включают  pLeftPeriod и у которых  конец совпадает с концом pLeftPeriod
 	*/
-	void GetClausesByLastWord(vector<int>& EncloseClauseVector, const CPeriod* pLeftPeriod) const;
+	void GetClausesByLastWord(std::vector<int>& EncloseClauseVector, const CPeriod* pLeftPeriod) const;
 	/*
 	 функция выдает клаузы, которые включают  pRightPeriod и у которых  начало совпадает с началом  pRightPeriod
 	*/
-	void GetClausesByFirstWord(vector<int>& EncloseClauseVector, const CPeriod* pRightPeriod) const;
+	void GetClausesByFirstWord(std::vector<int>& EncloseClauseVector, const CPeriod* pRightPeriod) const;
 
 	/*
 	 выдает максимальную клаузу, которая начинается с iFWrd

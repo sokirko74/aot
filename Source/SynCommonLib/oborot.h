@@ -83,10 +83,10 @@ struct SDoubleConj
 	int				 m_iOborNum;
 
 	// the first part of the conjunction 
-	vector<string30> m_FirstPart;
+	std::vector<string30> m_FirstPart;
 
 	// the second  part of the conjunction 
-	vector<string30> m_SecondPart;
+	std::vector<string30> m_SecondPart;
 	
 	// true, if the second part  is equal to the first, for example
 	// "или ... или" (Russian)
@@ -103,7 +103,7 @@ struct SDoubleConj
 
 
 
-typedef map<std::string, vector<int>	> CSimplePrepToArticles;
+typedef std::map<std::string, std::vector<int>	> CSimplePrepToArticles;
 
 class COborDic;
 class CSyntaxOpt;
@@ -116,11 +116,11 @@ class COborDic
 {
 public:
 	//  all entries of the dictionary
-	vector<COborotForSyntax>	m_Entries;
+	std::vector<COborotForSyntax>	m_Entries;
 
 	// a specially  processed subset of  m_Entries, which contains 
 	// disruptive conjunctions
-	vector<SDoubleConj>			m_DisruptConj; 
+	std::vector<SDoubleConj>			m_DisruptConj; 
 
 
 	COborDic(const CSyntaxOpt*);
@@ -131,12 +131,12 @@ public:
 	bool	ReadOborots(const CDictionary* piOborDic);
 	
 	//  using members
-	const vector<CCoordConjType>&	GetCoordConjs() const {return m_SimpleCoordConj;};
+	const std::vector<CCoordConjType>&	GetCoordConjs() const {return m_SimpleCoordConj;};
 	const StringVector&			GetSubConjs() const {return m_SimpleSubConj;};
 	int								FindSubConj(const std::string& word_upper) const;
 
 	int						FindSimplePrep(std::string strPrep) const;
-	vector<int>				FindAllArticlesForSimplePrep(std::string strPrep) const;
+	std::vector<int>				FindAllArticlesForSimplePrep(std::string strPrep) const;
 	
 	void					WriteSimplePrep(std::string s, int OborotNo); 
 	void					TokenizeDoubleConj(std::string s, int OborotNo);
@@ -149,7 +149,7 @@ protected:
 
 	//  simple lists of conjunctions
 	StringVector				m_SimpleSubConj;
-	vector<CCoordConjType>		m_SimpleCoordConj;
+	std::vector<CCoordConjType>		m_SimpleCoordConj;
 
 	
 	// a  from a simple preposition to all dictionary entries for  this  preposition

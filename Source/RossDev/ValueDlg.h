@@ -41,7 +41,7 @@ public:
    CComboBox        m_Lists[MaxNumDom];
    CEdit            m_Edits[MaxNumDom];
    CStatic          m_Labels[MaxNumDom];
-   vector<CButton*> m_SignatsBtns;
+   std::vector<CButton*> m_SignatsBtns;
    bool             m_bOneFormat;
    BYTE             m_SignatNo;
    const CSignat*   m_pSignat;

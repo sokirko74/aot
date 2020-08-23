@@ -54,7 +54,7 @@ STDMETHODIMP CCOMLemmatizer::CreateParadigmCollectionInner(bool bNorm, /*[in]*/ 
 {
 	std::string WordStr = (const char*) _bstr_t (form);
 	WordStr = convert_from_utf8(WordStr.c_str(), m_pLemmatizer->m_Language);
-	vector<CFormInfo> Vec;
+	std::vector<CFormInfo> Vec;
     m_pLemmatizer->CreateParadigmCollection(bNorm, WordStr, (capital?true:false), (use_prediction?true:false), Vec);
 	CComObject<CCOMParadigmCollection>* res_collection = NULL;
 	res_collection = new CComObject<CCOMParadigmCollection>; 

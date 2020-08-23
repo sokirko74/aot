@@ -560,7 +560,7 @@ void CRossDoc::BuildBasicDomItems()
 	m_DomParamsPtr.resize(GetRoss()->m_Domens.size());
     for (size_t i=0; i<GetRoss()->m_Domens.size(); i++)
 	{
-		vector<CDomainParam>::iterator It = find(m_DomainParams.begin(), m_DomainParams.end(), 
+		std::vector<CDomainParam>::iterator It = find(m_DomainParams.begin(), m_DomainParams.end(), 
 			GetRoss()->m_Domens[i].DomStr);
 		if (It == m_DomainParams.end())
 			m_DomParamsPtr[i]  = ErrUChar;
@@ -612,7 +612,7 @@ void CRossDoc::BuildBasicDomItems()
 void CRossDoc::DelTextDomains()
 {
 	size_t count = GetRoss()->GetDomItemsSize();
-	vector<BYTE> DomNos;
+	std::vector<BYTE> DomNos;
 	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_RLE"));
 	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_COLLOC"));
 	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_ENGL"));

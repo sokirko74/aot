@@ -24,7 +24,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 	if( engNode.m_NodeType != ModalCopul )
 		return;
 
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 
 	int iSubjRel = -1, iVerbRel = -1;
@@ -59,7 +59,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 // если это MUA (некуда бежать и плыть)	
 	if( m_Nodes[iVerbNode].m_NodeType == MNA )
 	{
-		vector<long> mnaRels;
+		std::vector<long> mnaRels;
 		GetOutcomingRelations(iVerbNode,mnaRels);
 		int iTestVerb = -1;
 		for( int j=0; j<mnaRels.size(); j++ )
@@ -259,7 +259,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	if( iRusNode == -1 )
 		return;
 //
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	if( outRels.size() == 0 )
 		return;
@@ -444,7 +444,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 		negMna = true;
 	}
 	
-	vector<long> outChilds;
+	std::vector<long> outChilds;
 	GetChildNodes(iEngNode,outChilds);
 	bool negChild = false;
 	PrintRelations();
@@ -461,7 +461,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 		return;
 
 // надо удалить сам этот узел
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelations(iEngNode,inRels,false);
 	assert( inRels.size() == 1 );
 	m_Relations.erase(m_Relations.begin() +inRels[0]); // be|have -> no
@@ -541,7 +541,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 	};
 
 // если был Subj, надо проставить число для be и указать, что это больше не Subj
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -621,7 +621,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 
 // переставим Subj (если есть) и выставим число
 	int iSubRel = -1;
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -706,7 +706,7 @@ void CEngSemStructure::ApplyALG_it(int iEngNode)
 	if( is_not_finite_form(m_Nodes[iEngNode].GetTense()) )
 		return;
 
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -762,7 +762,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 		return;
 
 // проверим наличие выходящей межклаузной связи "AIM"|"CONTEN" к глаголу	
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	int i=0;
 	for( ; i<outRels.size(); i++ )

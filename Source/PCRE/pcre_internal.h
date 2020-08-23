@@ -70,7 +70,7 @@ be absolutely sure we get our version. */
 
 
 /* Standard C headers plus the external interface definition. The only time
-setjmp and stdarg are used is when NO_RECURSE is set. */
+setjmp and stdarg are used is when NO_RECURSE is std::set. */
 
 #include <ctype.h>
 #include <limits.h>
@@ -105,8 +105,8 @@ internals, can #include pcre.h first to get an application's-eye view.
 
 In principle, people compiling for non-Windows, non-Unix-like (i.e. uncommon,
 special-purpose environments) might want to stick other stuff in front of
-exported symbols. That's why, in the non-Windows case, we set PCRE_EXP_DEFN and
-PCRE_EXP_DATA_DEFN only if they are not already set. */
+exported symbols. That's why, in the non-Windows case, we std::set PCRE_EXP_DEFN and
+PCRE_EXP_DATA_DEFN only if they are not already std::set. */
 
 #ifndef PCRE_EXP_DECL
 #   ifdef __cplusplus
@@ -147,7 +147,7 @@ preprocessor time in standard C environments. */
 #endif
 
 /* All character handling must be done as unsigned characters. Otherwise there
-are problems with top-bit-set characters and functions such as isspace().
+are problems with top-bit-std::set characters and functions such as isspace().
 However, we leave the interface to the outside world as char *, because that
 should make things easier for callers. We define a short type for unsigned char
 to save lots of typing. I tried "uchar", but it causes problems on Digital
@@ -165,9 +165,9 @@ characters only go up to 0x7fffffff (though Unicode doesn't go beyond
 "any" and "anycrlf" at present). The following macros are used to package up
 testing for newlines. NLBLOCK, PSSTART, and PSEND are defined in the various
 modules to indicate in which datablock the parameters exist, and what the
-start/end of string field names are. */
+start/end of std::string field names are. */
 
-#define NLTYPE_FIXED    0     /* Newline is a fixed length string */
+#define NLTYPE_FIXED    0     /* Newline is a fixed length std::string */
 #define NLTYPE_ANY      1     /* Newline is any Unicode line ending */
 #define NLTYPE_ANYCRLF  2     /* Newline is CR, LF, or CRLF */
 
@@ -202,7 +202,7 @@ start/end of string field names are. */
 /* When PCRE is compiled as a C++ library, the subject pointer can be replaced
 with a custom type. This makes it possible, for example, to allow pcre_exec()
 to process subject strings that are discontinuous by using a smart pointer
-class. It must always be possible to inspect all of the subject string in
+class. It must always be possible to inspect all of the subject std::string in
 pcre_exec() because of the way it backtracks. Two macros are required in the
 normal case, for sign-unspecified and unsigned char pointers. The former is
 used for the external interface and appears in pcre.h, which is why its name
@@ -239,7 +239,7 @@ option on the command line. */
 
 /* To cope with SunOS4 and other systems that lack memmove() but have bcopy(),
 define a macro for memmove() if HAVE_MEMMOVE is false, provided that HAVE_BCOPY
-is set. Otherwise, include an emulating function for those systems that have
+is std::set. Otherwise, include an emulating function for those systems that have
 neither (there some non-Unix environments where this is the case). */
 
 #ifndef HAVE_MEMMOVE
@@ -278,7 +278,7 @@ start of a subpattern to its alternatives and its end. The use of 2 bytes per
 offset limits the size of the compiled regex to around 64K, which is big enough
 for almost everybody. However, I received a request for an even bigger limit.
 For this reason, and also to make the code easier to maintain, the storing and
-loading of offsets from the byte string is now handled by the macros that are
+loading of offsets from the byte std::string is now handled by the macros that are
 defined here.
 
 The macros are controlled by the value of LINK_SIZE. This defaults to 2 in
@@ -486,8 +486,8 @@ live at the top end of the options word, but that got almost full, so now they
 are in a 16-bit flags word. */
 
 #define PCRE_NOPARTIAL     0x0001  /* can't use partial with this regex */
-#define PCRE_FIRSTSET      0x0002  /* first_byte is set */
-#define PCRE_REQCHSET      0x0004  /* req_byte is set */
+#define PCRE_FIRSTSET      0x0002  /* first_byte is std::set */
+#define PCRE_REQCHSET      0x0004  /* req_byte is std::set */
 #define PCRE_STARTLINE     0x0008  /* start after \n for multiline */
 #define PCRE_JCHANGED      0x0010  /* j option used in regex */
 #define PCRE_HASCRORLF     0x0020  /* explicit \r or \n in pattern */
@@ -654,7 +654,7 @@ enum {
   OP_STAR,           /* 30 The maximizing and minimizing versions of */
   OP_MINSTAR,        /* 31 these six opcodes must come in pairs, with */
   OP_PLUS,           /* 32 the minimizing one second. */
-  OP_MINPLUS,        /* 33 This first set applies to single characters.*/
+  OP_MINPLUS,        /* 33 This first std::set applies to single characters.*/
   OP_QUERY,          /* 34 */
   OP_MINQUERY,       /* 35 */
 
@@ -671,7 +671,7 @@ enum {
   OP_NOTMINSTAR,     /* 44 these six opcodes must come in pairs, with */
   OP_NOTPLUS,        /* 45 the minimizing one second. They must be in */
   OP_NOTMINPLUS,     /* 46 exactly the same order as those above. */
-  OP_NOTQUERY,       /* 47 This set applies to "not" single characters. */
+  OP_NOTQUERY,       /* 47 This std::set applies to "not" single characters. */
   OP_NOTMINQUERY,    /* 48 */
 
   OP_NOTUPTO,        /* 49 From 0 to n matches */
@@ -687,7 +687,7 @@ enum {
   OP_TYPEMINSTAR,    /* 57 these six opcodes must come in pairs, with */
   OP_TYPEPLUS,       /* 58 the minimizing one second. These codes must */
   OP_TYPEMINPLUS,    /* 59 be in exactly the same order as those above. */
-  OP_TYPEQUERY,      /* 60 This set applies to character types such as \d */
+  OP_TYPEQUERY,      /* 60 This std::set applies to character types such as \d */
   OP_TYPEMINQUERY,   /* 61 */
 
   OP_TYPEUPTO,       /* 62 From 0 to n matches */
@@ -874,7 +874,7 @@ enum { ERR0,  ERR1,  ERR2,  ERR3,  ERR4,  ERR5,  ERR6,  ERR7,  ERR8,  ERR9,
        ERR60, ERR61, ERR62, ERR63 };
 
 /* The real format of the start of the pcre block; the index of names and the
-code vector run on as long as necessary after the end. We store an explicit
+code std::vector run on as long as necessary after the end. We store an explicit
 offset to the name table so that if a regex is compiled on one host, saved, and
 then run on another where the size of pointers is different, all might still
 be well. For the case of compiled-on-4 and run-on-8, we include an extra
@@ -939,12 +939,12 @@ typedef struct compile_data {
   int  top_backref;             /* Maximum back reference */
   unsigned int backref_map;     /* Bitmap of low back refs */
   int  external_options;        /* External (initial) options */
-  int  external_flags;          /* External flag bits to be set */
+  int  external_flags;          /* External flag bits to be std::set */
   int  req_varyopt;             /* "After variable item" flag for reqbyte */
   BOOL had_accept;              /* (*ACCEPT) encountered */
   int  nltype;                  /* Newline type */
-  int  nllen;                   /* Newline string length */
-  uschar nl[4];                 /* Newline string when fixed length */
+  int  nllen;                   /* Newline std::string length */
+  uschar nl[4];                 /* Newline std::string when fixed length */
 } compile_data;
 
 /* Structure for maintaining a chain of pointers to the currently incomplete
@@ -968,7 +968,7 @@ typedef struct recursion_info {
 } recursion_info;
 
 /* Structure for building a chain of data for holding the values of the subject
-pointer at the start of each subpattern, so as to detect when an empty string
+pointer at the start of each subpattern, so as to detect when an empty std::string
 has been matched by a subpattern - to break infinite loops. */
 
 typedef struct eptrblock {
@@ -984,12 +984,12 @@ typedef struct match_data {
   unsigned long int match_call_count;      /* As it says */
   unsigned long int match_limit;           /* As it says */
   unsigned long int match_limit_recursion; /* As it says */
-  int   *offset_vector;         /* Offset vector */
+  int   *offset_vector;         /* Offset std::vector */
   int    offset_end;            /* One past the end */
   int    offset_max;            /* The maximum usable for return data */
   int    nltype;                /* Newline type */
-  int    nllen;                 /* Newline string length */
-  uschar nl[4];                 /* Newline string when fixed */
+  int    nllen;                 /* Newline std::string length */
+  uschar nl[4];                 /* Newline std::string when fixed */
   const uschar *lcc;            /* Points to lower casing table */
   const uschar *ctypes;         /* Points to table of type maps */
   BOOL   offset_overflow;       /* Set if too many extractions */
@@ -997,14 +997,14 @@ typedef struct match_data {
   BOOL   noteol;                /* NOTEOL flag */
   BOOL   utf8;                  /* UTF8 flag */
   BOOL   endonly;               /* Dollar not before final \n */
-  BOOL   notempty;              /* Empty string match not wanted */
+  BOOL   notempty;              /* Empty std::string match not wanted */
   BOOL   partial;               /* PARTIAL flag */
   BOOL   hitend;                /* Hit the end of the subject at some point */
   BOOL   bsr_anycrlf;           /* \R is just any CRLF, not full Unicode */
   const uschar *start_code;     /* For use when recursing */
-  USPTR  start_subject;         /* Start of the subject string */
-  USPTR  end_subject;           /* End of the subject string */
-  USPTR  start_match_ptr;       /* Start of matched string */
+  USPTR  start_subject;         /* Start of the subject std::string */
+  USPTR  end_subject;           /* End of the subject std::string */
+  USPTR  start_match_ptr;       /* Start of matched std::string */
   USPTR  end_match_ptr;         /* Subject position at end match */
   int    end_offset_top;        /* Highwater mark at end of match */
   int    capture_last;          /* Most recent capture number */
@@ -1020,14 +1020,14 @@ functions. */
 
 typedef struct dfa_match_data {
   const uschar *start_code;     /* Start of the compiled pattern */
-  const uschar *start_subject;  /* Start of the subject string */
-  const uschar *end_subject;    /* End of subject string */
+  const uschar *start_subject;  /* Start of the subject std::string */
+  const uschar *end_subject;    /* End of subject std::string */
   const uschar *tables;         /* Character tables */
   int   moptions;               /* Match options */
   int   poptions;               /* Pattern options */
   int    nltype;                /* Newline type */
-  int    nllen;                 /* Newline string length */
-  uschar nl[4];                 /* Newline string when fixed */
+  int    nllen;                 /* Newline std::string length */
+  uschar nl[4];                 /* Newline std::string when fixed */
   void  *callout_data;          /* To pass back to callouts */
 } dfa_match_data;
 
@@ -1040,7 +1040,7 @@ typedef struct dfa_match_data {
 #define ctype_word    0x10   /* alphanumeric or '_' */
 #define ctype_meta    0x80   /* regexp meta char or zero (end pattern) */
 
-/* Offsets for the bitmap tables in pcre_cbits. Each table contains a set
+/* Offsets for the bitmap tables in pcre_cbits. Each table contains a std::set
 of bits for a class map. Some classes are built by combining these tables. */
 
 #define cbit_space     0      /* [:space:] or \s */
@@ -1066,7 +1066,7 @@ total length. */
 
 /* Layout of the UCP type table that translates property names into types and
 codes. Each entry used to point directly to a name, but to reduce the number of
-relocations in shared libraries, it now has an offset into a single string
+relocations in shared libraries, it now has an offset into a single std::string
 instead. */
 
 typedef struct {

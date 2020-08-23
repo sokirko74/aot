@@ -5,7 +5,7 @@
 
 //   The main function of this header is CMorphAutomatBuilder::AddStringDaciuk 
 //  This function is an implementation of algorithm for constructing minimal,
-// deterministic, acyclic FSM from unordered set of std::strings, which was described 
+// deterministic, acyclic FSM from unordered std::set of std::strings, which was described 
 // in  "Jan Daciuk, Stoyan Mihov, Bruce Watson, and Richard Watson, 
 //      Incremental Construction of Minimal Acyclic Finite State Automata, 
 //		Computational Linguistics, 26(1), March 2000."
@@ -18,12 +18,12 @@
 
 
 struct CTrieNodeBuild;
-struct IsLessRegister: public less<CTrieNodeBuild*>
+struct IsLessRegister: public std::less<CTrieNodeBuild*>
 {
 	bool operator ()(const CTrieNodeBuild* pNodeNo1, const CTrieNodeBuild* pNodeNo2) const;
 };
 
-typedef set<CTrieNodeBuild*, IsLessRegister> CTrieRegister;
+typedef std::set<CTrieNodeBuild*, IsLessRegister> CTrieRegister;
 
 
 
@@ -49,8 +49,8 @@ struct CTrieNodeBuild
 	
 
 	//  debug function
-	bool				CheckIncomingRelationsCountRecursive(map<const CTrieNodeBuild*, size_t>& Node2Incoming) const;
-	void				GetIncomingRelationsCountRecursive(map<const CTrieNodeBuild*, size_t>& Node2Incoming) const;
+	bool				CheckIncomingRelationsCountRecursive(std::map<const CTrieNodeBuild*, size_t>& Node2Incoming) const;
+	void				GetIncomingRelationsCountRecursive(std::map<const CTrieNodeBuild*, size_t>& Node2Incoming) const;
 	bool				CheckRegisterRecursive() const;
 	void				SetFinal(bool bFinal);
 };
@@ -66,9 +66,9 @@ class CMorphAutomatBuilder : public CMorphAutomat
 	// a hash by the letter of the first  child and the number of children
 	CTrieRegister			m_RegisterHash[MaxAlphabetSize+1][MaxAlphabetSize+1];
 
-	vector<CTrieNodeBuild*>				m_Prefix;
+	std::vector<CTrieNodeBuild*>				m_Prefix;
 
-	vector<CTrieNodeBuild*>		m_DeletedNodes;
+	std::vector<CTrieNodeBuild*>		m_DeletedNodes;
 	
 	void				ClearBuildNodes();
 

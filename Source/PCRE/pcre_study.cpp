@@ -58,7 +58,7 @@ enum { SSB_FAIL, SSB_DONE, SSB_CONTINUE };
 *      Set a bit and maybe its alternate case    *
 *************************************************/
 
-/* Given a character, set its bit in the table, and also the bit for the other
+/* Given a character, std::set its bit in the table, and also the bit for the other
 version of a letter if we are caseless.
 
 Arguments:
@@ -85,7 +85,7 @@ if (caseless && (cd->ctypes[c] & ctype_letter) != 0)
 *************************************************/
 
 /* This function scans a compiled unanchored expression recursively and
-attempts to build a bitmap of the set of possible starting bytes. As time goes
+attempts to build a bitmap of the std::set of possible starting bytes. As time goes
 by, we may be able to get more clever at doing this. The SSB_CONTINUE return is
 useful for parenthesized groups in patterns such as (a*)b where the group
 provides some optional starting bytes but scanning must continue at the outer
@@ -143,7 +143,7 @@ do
       default:
       return SSB_FAIL;
 
-      /* If we hit a bracket or a positive lookahead assertion, recurse to set
+      /* If we hit a bracket or a positive lookahead assertion, recurse to std::set
       bits from within the subpattern. If it can't find anything, we have to
       give up. If it finds some mandatory character(s), we are done for this
       branch. Otherwise, carry on scanning after the subpattern. */
@@ -324,7 +324,7 @@ do
       tcode += 3;
       break;
 
-      /* Zero or more repeats of character types set the bits and then
+      /* Zero or more repeats of character types std::set the bits and then
       try again. */
 
       case OP_TYPEUPTO:
@@ -391,7 +391,7 @@ do
       tcode += 2;
       break;
 
-      /* Character class where all the information is in a bit map: set the
+      /* Character class where all the information is in a bit map: std::set the
       bits and either carry on or not, according to the repeat count. If it was
       a negative class, and we are operating with UTF-8 characters, any byte
       with a value >= 0xc4 is a potentially valid starter because it starts a
@@ -488,10 +488,10 @@ Arguments:
   re        points to the compiled expression
   options   contains option bits
   errorptr  points to where to place error messages;
-            set NULL unless error
+            std::set NULL unless error
 
 Returns:    pointer to a pcre_extra block, with study_data filled in and the
-              appropriate flag set;
+              appropriate flag std::set;
             NULL on error or if no optimization possible
 */
 
@@ -516,7 +516,7 @@ if (re == NULL || re->magic_number != MAGIC_NUMBER)
 
 if ((options & ~PUBLIC_STUDY_OPTIONS) != 0)
   {
-  *errorptr = "unknown or incorrect option bit(s) set";
+  *errorptr = "unknown or incorrect option bit(s) std::set";
   return NULL;
   }
 
@@ -543,7 +543,7 @@ compile_block.fcc = tables + fcc_offset;
 compile_block.cbits = tables + cbits_offset;
 compile_block.ctypes = tables + ctypes_offset;
 
-/* See if we can find a fixed set of initial characters for the pattern. */
+/* See if we can find a fixed std::set of initial characters for the pattern. */
 
 memset(start_bits, 0, 32 * sizeof(uschar));
 if (set_start_bits(code, start_bits, (re->options & PCRE_CASELESS) != 0,
@@ -551,7 +551,7 @@ if (set_start_bits(code, start_bits, (re->options & PCRE_CASELESS) != 0,
 
 /* Get a pcre_extra block and a pcre_study_data block. The study data is put in
 the latter, which is pointed to by the former, which may also get additional
-data set later by the calling program. At the moment, the size of
+data std::set later by the calling program. At the moment, the size of
 pcre_study_data is fixed. We nevertheless save it in a field for returning via
 the pcre_fullinfo() function so that if it becomes variable in the future, we
 don't have to change that code. */

@@ -89,7 +89,7 @@ public:
 	void synthesize(CEngSemWord& EngWord) const;
 	void synthesize_by_node(CEngSemNode& Node) const;
 
-    void translate_id(long id, vector<long> &res, poses_mask_t Poses) const;
+    void translate_id(long id, std::vector<long> &res, poses_mask_t Poses) const;
 
 	void transliterate(CEngSemWord& EngWord);
 	
@@ -109,7 +109,7 @@ public:
 
 private:
 	// флаги из словаря БАРС, которые помечают слова, которыми лучше не переводить
-	vector<int>    m_bad_flags_arr;
+	std::vector<int>    m_bad_flags_arr;
 	// список исключений, перед которыми нужно ставить ратикль "an",  а не "a"
 	StringVector except_vec;
 
@@ -122,7 +122,7 @@ private:
 	void init_list_from_ross(const CRossHolder* RossHolder, const std::string &list_name, StringVector &res);
 
 private:
-	vector<translate_result_t> result_vec;
+	std::vector<translate_result_t> result_vec;
 	translate_option_t  m_option;
 };
 

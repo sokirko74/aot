@@ -35,7 +35,7 @@ protected:
 	
 	CMorphAutomat*				m_pFormAutomat;
 
-	vector<int>					m_ModelsIndex;
+	std::vector<int>					m_ModelsIndex;
 	
 	
 
@@ -68,14 +68,14 @@ protected:
 
 	};
 	IsLessMorphInterp m_SearchInfoLess;
-	void	GetLemmaInfos (const std::string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const;
+	void	GetLemmaInfos (const std::string& Text, size_t TextPos, std::vector<CAutomAnnotationInner>& Infos) const;
 	void	CreateModelsIndex();
 
 public:
 	CShortStringHolder			m_Bases;
-	vector<CLemmaInfoAndLemma>	m_LemmaInfos;
+	std::vector<CLemmaInfoAndLemma>	m_LemmaInfos;
 	StringVector				m_Prefixes;
-	vector<BYTE>				m_NPSs;
+	std::vector<BYTE>				m_NPSs;
 
 	CMorphDict(MorphLanguageEnum Language);
 	virtual ~CMorphDict();
@@ -86,7 +86,7 @@ public:
 	bool	Save(std::string GrammarFileName) const;
 	
 	
-	void	PredictBySuffix (const std::string& Text, size_t& TextOffset, size_t MinimalPredictSuffixlen, vector<CAutomAnnotationInner>& Infos) const;
+	void	PredictBySuffix (const std::string& Text, size_t& TextOffset, size_t MinimalPredictSuffixlen, std::vector<CAutomAnnotationInner>& Infos) const;
 	std::string	GetAllMorphInterpsStr (const std::string& Text,const size_t TextPos, bool bFullInterp) const;
 };
 

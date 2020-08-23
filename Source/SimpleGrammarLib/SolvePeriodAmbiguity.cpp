@@ -3,7 +3,7 @@
 
 
 
-inline int IsUnambiguous (const vector< COccurrence >& Occurrences, size_t PeriodNo)
+inline int IsUnambiguous (const std::vector< COccurrence >& Occurrences, size_t PeriodNo)
 {
 	return		(	(PeriodNo+1 ==	Occurrences.size())
 					||	(Occurrences[PeriodNo+1].first >= Occurrences[PeriodNo].second)
@@ -14,19 +14,19 @@ inline int IsUnambiguous (const vector< COccurrence >& Occurrences, size_t Perio
 };
 
 /*
-SolveAmbiguityRecursive finds the most longest non-intersected set of periods,
+SolveAmbiguityRecursive finds the most longest non-intersected std::set of periods,
 which  includes period A.
 
 This function recieves the following:
-1. A base set of periods  "Occurrences", which has intersections. 
-2. A position in the set of periods "Start". from which an ambiguous ( = with intersections)
+1. A base std::set of periods  "Occurrences", which has intersections. 
+2. A position in the std::set of periods "Start". from which an ambiguous ( = with intersections)
 part starts;
 
 
 The output parameter are:
 1.  "Solution", which is the maximal possiblle unambiguous subset of  
 Occurrences which includes period Start. 
-2.  "MaxRightBorder" is  the maximal right border, to which extends the ambigous set of periods.
+2.  "MaxRightBorder" is  the maximal right border, to which extends the ambigous std::set of periods.
 MaxRightBorder can be 
 	1. the end of the whole text;
 	2. the start of the first unambiguous period;
@@ -35,7 +35,7 @@ The return value is coverage of this maximal solution i.e.
 length(Solution[0]) + ... length(Solution[Solution.size() - 1])
 */
 
-size_t SolveAmbiguityRecursive (const vector< COccurrence >& Occurrences, size_t Start, vector<size_t>& Solution, size_t& MaxRightBorder)
+size_t SolveAmbiguityRecursive (const std::vector< COccurrence >& Occurrences, size_t Start, std::vector<size_t>& Solution, size_t& MaxRightBorder)
 {
 	// if this period has no, intersection  then exit
 	if (IsUnambiguous(Occurrences, Start)) 
@@ -47,7 +47,7 @@ size_t SolveAmbiguityRecursive (const vector< COccurrence >& Occurrences, size_t
 	// all periods which have intersecion with intersection of Start and First.
 	// Therefore we find the maximal subset which includes period Start
 	// and each two members of this subset have an intersection.
-	vector<size_t> InconsistentPeriods;
+	std::vector<size_t> InconsistentPeriods;
 	
 
 	// "EndIntersection" is the end of the common intersecion, it is not 
@@ -61,7 +61,7 @@ size_t SolveAmbiguityRecursive (const vector< COccurrence >& Occurrences, size_t
 		{
 			InconsistentPeriods.push_back(i);
 			// initializing  EndInterection
-			EndIntersection = min(Occurrences[Start].second, Occurrences[i].second);
+			EndIntersection = std::min(Occurrences[Start].second, Occurrences[i].second);
 			if (MaxRightBorder <  Occurrences[i].second)
 				MaxRightBorder = Occurrences[i].second;
 
@@ -77,14 +77,14 @@ size_t SolveAmbiguityRecursive (const vector< COccurrence >& Occurrences, size_t
 	*/
 
 	size_t MaxCoverage = 0;
-	vector<size_t> SaveSolution = Solution;
+	std::vector<size_t> SaveSolution = Solution;
 	
 	for (i=0; i < InconsistentPeriods.size(); i++)
 	{
 		size_t  k = InconsistentPeriods[i];
 		
 		size_t Coverage = Occurrences[k].second - Occurrences[k].first;
-		vector<size_t> CurrSolution = SaveSolution;
+		std::vector<size_t> CurrSolution = SaveSolution;
 
 		// try k as a possible  variant of continuing
 		CurrSolution.push_back(k);
@@ -121,7 +121,7 @@ size_t SolveAmbiguityRecursive (const vector< COccurrence >& Occurrences, size_t
 };
 
 
-void SolveAmbiguity (vector< COccurrence >& Occurrences)
+void SolveAmbiguity (std::vector< COccurrence >& Occurrences)
 {
 	
 	sort (Occurrences.begin(), Occurrences.end());
@@ -129,7 +129,7 @@ void SolveAmbiguity (vector< COccurrence >& Occurrences)
 	for (size_t i=0; i+1 < Occurrences.size(); i++)
 		if	(Occurrences[i+1].first < Occurrences[i].second)
 		{
-			vector<size_t> Solution;
+			std::vector<size_t> Solution;
 
 			size_t MaxRightBorder = Occurrences[i].second;
 			SolveAmbiguityRecursive(Occurrences,i, Solution, MaxRightBorder);

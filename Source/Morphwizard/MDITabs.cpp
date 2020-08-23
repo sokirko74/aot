@@ -97,7 +97,7 @@ void CMDITabs::Update()
   typedef std::vector<HWND> TWndVec;
   typedef TWndVec::iterator TWndIter;
 
-  TWndVec vChild; // put all child windows in a list (actually a vector)
+  TWndVec vChild; // put all child windows in a list (actually a std::vector)
   for (HWND child = active; child; child = ::GetNextWindow(child, GW_HWNDNEXT))
   {
     vChild.push_back(child);

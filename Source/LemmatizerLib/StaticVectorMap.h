@@ -6,23 +6,23 @@
 #define __index_vector_h_
 
 /*
-	CStaticVectorMap is a class for storing and retrieving a vector of T by a key.
+	CStaticVectorMap is a class for storing and retrieving a std::vector of T by a key.
 	The key is of DWORD and there should be no holes between two neighbour keys. i.e.  
 	for each i key[i]+1 = key[i+1].  
 */
 template	<class T>
 class CStaticVectorMap 
 {
-	// the keys, each item points to the beginning of the vector. For example,  
-	// "m_Keys[i] = j" means that the vector No i starts from j position.
+	// the keys, each item points to the beginning of the std::vector. For example,  
+	// "m_Keys[i] = j" means that the std::vector No i starts from j position.
 	// One "CStaticVectorMap" stores  m_Keys.size() vectors.
-	vector<	DWORD > m_Keys;
+	std::vector<	DWORD > m_Keys;
 
 	// the base of the index 
-	vector< T >		m_Base;
+	std::vector< T >		m_Base;
 	
 public:
-	typedef typename vector<T>::const_iterator const_iter_t;
+	typedef typename std::vector<T>::const_iterator const_iter_t;
 	
 	
 	const_iter_t	GetVectorEnd (DWORD VectorNo) const
@@ -53,7 +53,7 @@ public:
 		return m_Keys.empty();
 	}
 
-	void Create(vector< vector<T> >& src)
+	void Create(std::vector< std::vector<T> >& src)
 	{
 		m_Keys.resize( src.size() );
 		m_Base.clear();
@@ -129,7 +129,7 @@ public:
 		KeyNo = 0;
 		if (BaseNo != 0) 
 		{
-			vector<DWORD>::const_iterator it = lower_bound(m_Keys.begin(), m_Keys.end(), BaseNo);
+			std::vector<DWORD>::const_iterator it = lower_bound(m_Keys.begin(), m_Keys.end(), BaseNo);
 			if (it == m_Keys.begin()) return false;
 			if (it == m_Keys.end()) return false;
 			if (BaseNo < *it) it--;

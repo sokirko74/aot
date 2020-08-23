@@ -75,7 +75,7 @@ bool CRusSemStructure::VerbCanBeWithoutReflexiveSuffix(std::string Lemma) const
    const CLemmatizer* P = m_pData->GetRusLemmatizer(); 
    
 
-   vector<CFormInfo> ParadigmCollection;
+   std::vector<CFormInfo> ParadigmCollection;
    P->CreateParadigmCollection(true,	Lemma, false, false, ParadigmCollection);
 
    for (int i =0; i < ParadigmCollection.size(); i++)
@@ -680,7 +680,7 @@ bool CRusSemStructure::HasAuxiliaryPOS(std::string Lemma) const
 {
 	
 
-	vector<CFormInfo>  ParadigmCollection; 
+	std::vector<CFormInfo>  ParadigmCollection; 
 	m_pData->GetRusLemmatizer()->CreateParadigmCollection(true,Lemma, true, false, ParadigmCollection);
 
 
@@ -705,7 +705,7 @@ void CRusSemStructure::GetMaxWordWeightByLemma(std::string Lemma, CRusSemWord& S
 {
 	
 
-	vector<CFormInfo>  ParadigmCollection; 
+	std::vector<CFormInfo>  ParadigmCollection; 
 	m_pData->GetRusLemmatizer()->CreateParadigmCollection(true, Lemma, true, false, ParadigmCollection);
 
 	for (int i =0; i < ParadigmCollection.size(); i++)
@@ -928,9 +928,9 @@ void CRusSemStructure::InterpretRepeatConj(long ClauseNo)
 			&& CanBeDeleted (NodeNo)
 			)
 		{
-			vector<long> Rels;
+			std::vector<long> Rels;
 			GetOutcomingSynRelations(NodeNo, Rels);
-			vector<long> Nodes;
+			std::vector<long> Nodes;
 			for (long i=0; i < Rels.size();)
 				if (m_SynRelations[Rels[i]].m_SynRelName == _R("ОТСОЮЗ"))
 				{
@@ -1194,7 +1194,7 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree ()
 		  if (m_Clauses[ClauseNo].m_ClauseRuleNo != -1)
 		  if (m_ClauseRules[m_Clauses[ClauseNo].m_ClauseRuleNo].m_Name == _R("сочинение"))
 		  {
-			 vector<long> Rels;
+			 std::vector<long> Rels;
 			 GetIncomingClauseRelations(ClauseNo, Rels);
 			 if (Rels.size() == 1)
 			   if (m_Nodes[m_Relations[Rels[0]].m_SourceNodeNo].HasRelOperator(_R("_пригласит_наклонение")))
@@ -1211,7 +1211,7 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree ()
 
 void CRusSemStructure::DeleteWordNoGaps() 
 {
-	vector<long> WordNos;
+	std::vector<long> WordNos;
 	long NodeNo=0;
 	for (;NodeNo< m_Nodes.size(); NodeNo++)
 	  for (long i=0;i< m_Nodes[NodeNo].m_Words.size(); i++)
@@ -1222,7 +1222,7 @@ void CRusSemStructure::DeleteWordNoGaps()
 	for (NodeNo=0;NodeNo< m_Nodes.size(); NodeNo++)
 	  for (long i=0;i< m_Nodes[NodeNo].m_Words.size(); i++)
 	  {
-		  vector<long>::const_iterator It = find(WordNos.begin(),WordNos.end(),m_Nodes[NodeNo].m_Words[i].m_WordNo);
+		  std::vector<long>::const_iterator It = find(WordNos.begin(),WordNos.end(),m_Nodes[NodeNo].m_Words[i].m_WordNo);
 		  m_Nodes[NodeNo].m_Words[i].m_WordNo = It - WordNos.begin();
 	  };
 
@@ -1245,7 +1245,7 @@ CRusSemNode Create_EST_Node(CRusSemStructure& R, long ClauseNo)
 {
    const CLemmatizer* P = R.m_pData->GetRusLemmatizer(); 
    
-   vector<CFormInfo> ParadigmCollection;
+   std::vector<CFormInfo> ParadigmCollection;
    std::string Est =_R("есть");
    P->CreateParadigmCollection(false,Est,false, false, ParadigmCollection);
 
@@ -1372,7 +1372,7 @@ void CRusSemStructure::ProcessSAM_SEBJA()
 
 long CRusSemStructure::GetClauseSyntaxTop(long ClauseNo) const 
 {
-    vector <long> Nodes;
+    std::vector <long> Nodes;
 
     // если в клаузе есть только один ModalCopul
     FindIf (ClauseNo, &CRusSemStructure::IsModalCopul, Nodes);

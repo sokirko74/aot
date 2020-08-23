@@ -64,7 +64,7 @@ void CFindByStrDlg::OnOK()
 	// TODO: Add extra validation here
 try{
 	UpdateData(TRUE);
-	vector<CRossDoc*> RossDocs;
+	std::vector<CRossDoc*> RossDocs;
 
 	if(GetCheckedRadioButton(IDC_FIND_IN_ALL_DICTS,IDC_FIND_IN_ACTIVE_DICT)==IDC_FIND_IN_ALL_DICTS)
 	{
@@ -79,7 +79,7 @@ try{
 	};
 
 	CWaitCursor C;
-	vector<CRossPocketItem> PocketItems;
+	std::vector<CRossPocketItem> PocketItems;
 	for (int RossDocNo=0; RossDocNo<RossDocs.size();  RossDocNo++)
 	{
 		CRossDoc* pRossDoc = RossDocs[RossDocNo];

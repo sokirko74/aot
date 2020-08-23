@@ -47,10 +47,10 @@ functions. */
 #endif
 
 
-/* Ensure that the PCREPOSIX_EXP_xxx macros are set appropriately for
+/* Ensure that the PCREPOSIX_EXP_xxx macros are std::set appropriately for
 compiling these functions. This must come before including pcreposix.h, where
-they are set for an application (using these functions) if they have not
-previously been set. */
+they are std::set for an application (using these functions) if they have not
+previously been std::set. */
 
 #include "pcre.h"
 #include "pcre_internal.h"
@@ -70,14 +70,14 @@ static const int eint[] = {
   REG_ECTYPE,  /* invalid escape sequence in character class */
   REG_ERANGE,  /* range out of order in character class */
   REG_BADRPT,  /* nothing to repeat */
-  REG_BADRPT,  /* operand of unlimited repeat could match the empty string */
+  REG_BADRPT,  /* operand of unlimited repeat could match the empty std::string */
   REG_ASSERT,  /* internal error: unexpected repeat */
   REG_BADPAT,  /* unrecognized character after (? */
   REG_BADPAT,  /* POSIX named classes are supported only within a class */
   REG_EPAREN,  /* missing ) */
   REG_ESUBREG, /* reference to non-existent subpattern */
   REG_INVARG,  /* erroffset passed as NULL */
-  REG_INVARG,  /* unknown option bit(s) set */
+  REG_INVARG,  /* unknown option bit(s) std::set */
   REG_EPAREN,  /* missing ) after comment */
   REG_ESIZE,   /* parentheses nested too deeply */
   REG_ESIZE,   /* regular expression too large */
@@ -104,7 +104,7 @@ static const int eint[] = {
   REG_BADPAT,  /* unrecognized character after (?P */
   REG_BADPAT,  /* syntax error in subpattern name (missing terminator) */
   REG_BADPAT,  /* two named subpatterns have the same name */
-  REG_BADPAT,  /* invalid UTF-8 string */
+  REG_BADPAT,  /* invalid UTF-8 std::string */
   REG_BADPAT,  /* support for \P, \p, and \X has not been compiled */
   REG_BADPAT,  /* malformed \P or \p sequence */
   REG_BADPAT,  /* unknown property name after \P or \p */
@@ -151,7 +151,7 @@ static const char *const pstring[] = {
 
 
 /*************************************************
-*          Translate error code to string        *
+*          Translate error code to std::string        *
 *************************************************/
 
 size_t
@@ -251,7 +251,7 @@ block of store on the stack, to reduce the use of malloc/free. The threshold is
 in a macro that can be changed at configure time.
 
 If REG_NOSUB was specified at compile time, the PCRE_NO_AUTO_CAPTURE flag will
-be set. When this is the case, the nmatch and pmatch arguments are ignored, and
+be std::set. When this is the case, the nmatch and pmatch arguments are ignored, and
 the only result is yes/no/error. */
 
 int
@@ -271,8 +271,8 @@ if ((eflags & REG_NOTEOL) != 0) options |= PCRE_NOTEOL;
 
 ((regex_t *)preg)->re_erroffset = (size_t)(-1);  /* Only has meaning after compile */
 
-/* When no string data is being returned, ensure that nmatch is zero.
-Otherwise, ensure the vector for holding the return data is large enough. */
+/* When no std::string data is being returned, ensure that nmatch is zero.
+Otherwise, ensure the std::vector for holding the return data is large enough. */
 
 if (nosub) nmatch = 0;
 

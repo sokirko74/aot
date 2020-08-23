@@ -48,7 +48,7 @@ public:
 	bool m_bAdjWithActiveValency;
 
 	//  all possible interpretation in the formats grammar
-	set<CInputSymbol> m_AutomatSymbolInterpetation;
+	std::set<CInputSymbol> m_AutomatSymbolInterpetation;
 
 	const CSentence* m_pSent;	
 	
@@ -66,7 +66,7 @@ public:
 	int		m_TrennbarePraefixWordNo;
 
 	// ========================  Morphology ========================
-	vector<CSynHomonym> m_Homonyms;
+	std::vector<CSynHomonym> m_Homonyms;
 
 
 	// is a simple coordinating conjunction
@@ -105,7 +105,7 @@ public:
 	int m_iReduplication;
 
 	// the main verb of an auxiliary verb
-	vector<int>	m_MainVerbs;
+	std::vector<int>	m_MainVerbs;
 
 	
 
@@ -122,7 +122,7 @@ public:
 	bool m_bArtificialCreated;
 
 
-	set<CInputSymbol> m_AutomatSymbolInterpetationUnion;
+	std::set<CInputSymbol> m_AutomatSymbolInterpetationUnion;
 
 	CSynWord(CSentence* pSent); 
 	const	CSyntaxOpt* GetOpt() const; 
@@ -159,4 +159,4 @@ public:
     void    InitLevelSpecific(CHomonym* pHom);
 };
 
-typedef vector<CSynWord> CWordVector;
+typedef std::vector<CSynWord> CWordVector;

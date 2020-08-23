@@ -14,7 +14,7 @@ class CSentencesCollection
 public:
 	CSentencesCollection();
 	~CSentencesCollection();
-	vector<CSentence*>						m_vectorSents;
+	std::vector<CSentence*>						m_vectorSents;
 	bool									m_bEnableProgressBar;
 	bool									m_bLogProcessedSentence;
 

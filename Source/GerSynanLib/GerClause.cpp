@@ -18,7 +18,7 @@
 //  The point is that in the sentence " Ich will dass machen", 
 // word "will" should be the root of the clause, not "machen".
 
-void CGerSentence::ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMorphVariant& V)
+void CGerSentence::ChooseClauseType(const  std::vector<SClauseType>& vectorTypes, CMorphVariant& V)
 {
 
 	int empty_type = -1; 
@@ -109,7 +109,7 @@ int CGerSentence::GetCountOfStrongRoots(const CClause& C, const CMorphVariant& s
 
 	if (iHypPredk > 1)
 		if (bInfinitiveConstruction)
-			iHypPredk -= max(1,  iHypPredk-Infinitives);
+			iHypPredk -= std::max(1,  iHypPredk-Infinitives);
 
 
 	return iHypPredk;

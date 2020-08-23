@@ -23,9 +23,9 @@
 /////////////////////////////////////////////////////////////////////////////
 // Выдает вектор дочерних нод с отслеживанием уникальности
 
-void CEngSemStructure::GetChildNodes(int iNode,vector<long> &nodes) const
+void CEngSemStructure::GetChildNodes(int iNode,std::vector<long> &nodes) const
 {
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iNode,outRels);
 	if( outRels.size() < 1 )
 		return;
@@ -38,7 +38,7 @@ void CEngSemStructure::GetChildNodes(int iNode,vector<long> &nodes) const
 		GetChildNodes(m_Relations[outRels[i]].m_TargetNodeNo,nodes);
 	}
 	sort(nodes.begin(),nodes.end());
-	vector<long>::iterator it = unique(nodes.begin(),nodes.end());
+	std::vector<long>::iterator it = unique(nodes.begin(),nodes.end());
 	int bad = nodes.size() - ( it-nodes.begin() );
 	for( int i=0; i<bad; i++ )
 		nodes.pop_back();
@@ -47,13 +47,13 @@ void CEngSemStructure::GetChildNodes(int iNode,vector<long> &nodes) const
 /////////////////////////////////////////////////////////////////////////////
 // Выдает вектор узлов для корневых алгоритмов
 
-void CEngSemStructure::GetAlgNodes(vector<long> &nodes) const
+void CEngSemStructure::GetAlgNodes(std::vector<long> &nodes) const
 {
 	nodes.clear();
 	
 	for( int i=0; i<m_Nodes.size(); i++ )
 	{
-		vector<long> inRels;
+		std::vector<long> inRels;
 		GetIncomingRelations(i,inRels,false);
 		bool bOk = true;
 		for( int j=0; j<inRels.size(); j++ )
@@ -78,7 +78,7 @@ bool CEngSemStructure::HasNeg(long UnitNo, DictTypeEnum type )
 {
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	bool bFound = false;
 
@@ -104,7 +104,7 @@ bool CEngSemStructure::HasQuest(long UnitNo, DictTypeEnum type )
 {
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	bool bFound = false;
 
@@ -131,7 +131,7 @@ void CEngSemStructure::ChangeNegWord(int iEngNode)
 	if( m_Nodes[iEngNode].GetType() == NoneRoss)
 		return;
 
-	vector<CLexicalFunctionField> LexFuncts;
+	std::vector<CLexicalFunctionField> LexFuncts;
 	GetRossHolder(m_Nodes[iEngNode].GetType())->GetLexFuncts(m_Nodes[iEngNode].GetUnitNo(), LexFuncts, EngObor, GetRossHolder(EngObor));
 
 	for( int i=0; i<LexFuncts.size(); i++ )
@@ -211,7 +211,7 @@ void CEngSemStructure::CreateOneselfNodes()
 		// например,  "сам он этого не сделает"
 		if( m_Nodes[NodeNo].RusNode != -1 )
 		{
-			vector<long> Rels;
+			std::vector<long> Rels;
 			RusStr.GetIncomingRelations(m_Nodes[NodeNo].RusNode, Rels, false);
 			long i=0;
 			for (; i < Rels.size();i++)
@@ -236,7 +236,7 @@ void CEngSemStructure::CreateOneselfNodes()
 		bool bHasParentInfinitive = false;
 		while(true)
 		{
-			vector<long> Rels;
+			std::vector<long> Rels;
 			GetIncomingRelations(parent, Rels);
 			if (Rels.size() == 0) break;
 			int rel = Rels[0];
@@ -253,7 +253,7 @@ void CEngSemStructure::CreateOneselfNodes()
 			long AntecedentNodeNo = GetSubj(parent);
 			if (bHasParentInfinitive)
 			{
-				vector<long> Rels;
+				std::vector<long> Rels;
 				GetOutcomingRelations(parent,Rels);
 				for (long i=0; i< Rels.size(); i++)
 				if  (    (m_Relations[Rels[i]].m_Valency.m_RelationStr == "C-AGENT")
@@ -287,7 +287,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 		if( type!=EngCollocRoss )
 			continue;
 		int unit = m_Nodes[i].GetUnitNo();
-		vector<TCortege> vec;
+		std::vector<TCortege> vec;
 		for( int j=GetRoss(type)->GetUnitStartPos(unit); j<=GetRoss(type)->GetUnitEndPos(unit); j++ )
 		{
 			TCortege C = GetCortege(GetRoss(type),j);
@@ -308,7 +308,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 		else
 		   SetSimpleEngPrep(value,i,-1);
 		
-		vector<long> inRels;
+		std::vector<long> inRels;
 		GetIncomingRelations(i,inRels,false);
 		for( int k=0; k<inRels.size(); k++ )
 		{
@@ -347,10 +347,10 @@ void  CEngSemStructure::RefineComparativeMNAwithPreps()
 		if( m_Nodes[i].m_NodeType = SimpleNode )
 			continue;
 
-		vector<long> outRelsRaw;
+		std::vector<long> outRelsRaw;
 		GetOutcomingRelations(i,outRelsRaw);
 
-		vector<long> outRels;
+		std::vector<long> outRels;
 		for( int j=0; j<outRelsRaw.size(); j++ )
 		{
 			if( m_Relations[outRelsRaw[j]].m_Valency.m_RelationStr == "" &&

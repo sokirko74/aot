@@ -174,7 +174,7 @@ BOOL CVisualClause::CalculateClauseGroupCoordinates(CDC* pDC,int iWidth,BOOL bSh
 
 
 
-BOOL CVisualClause::FillActiveGroupsArray(BOOL bUseGroupID, map<int, int>& mapClauseNumTypeNum, int iClauseNum)
+BOOL CVisualClause::FillActiveGroupsArray(BOOL bUseGroupID, std::map<int, int>& mapClauseNumTypeNum, int iClauseNum)
 {			
 
 	if( m_bBestVariant )
@@ -183,7 +183,7 @@ BOOL CVisualClause::FillActiveGroupsArray(BOOL bUseGroupID, map<int, int>& mapCl
 		m_bBestVariant = FALSE;
 	}
 
-	vector<SUnit> vectorUnits;
+	std::vector<SUnit> vectorUnits;
 	CVisualWord* pWord;
 
 	ASSERT(m_SynVars.size() > 0);
@@ -204,7 +204,7 @@ BOOL CVisualClause::FillActiveGroupsArray(BOOL bUseGroupID, map<int, int>& mapCl
 		}
 		else
 		{
-			//map<int, int>::iterator it = mapClauseNumTypeNum.find(SynVar1.m_vectorUnits[i]..m_iClauseNum);
+			//std::map<int, int>::iterator it = mapClauseNumTypeNum.find(SynVar1.m_vectorUnits[i]..m_iClauseNum);
 			//ASSERT(it != mapClauseNumTypeNum.end() );
 			//if( it == mapClauseNumTypeNum.end() )
 			//	return FALSE;
@@ -342,7 +342,7 @@ bool PeriodsCompare_sort(const CVisualPeriod* pPeriod1, const CVisualPeriod* pPe
 
 
 //!!! can be applied only to the sorted array of CVisualPeriod
-int  AssignPeriodLevel(vector<CVisualGroup*>& pPeriodArr)
+int  AssignPeriodLevel(std::vector<CVisualGroup*>& pPeriodArr)
 {
 	CVisualPeriod* pPeriod;
 	int iMaxGroupLevel = 1;

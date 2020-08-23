@@ -214,7 +214,7 @@ BOOL CDemoDlg::OnInitDialog()
 	};
 
 //
-	return TRUE;  // return TRUE  unless you set the focus to a control
+	return TRUE;  // return TRUE  unless you std::set the focus to a control
 }
 
 // If you add a minimize button to your dialog, you will need the code below

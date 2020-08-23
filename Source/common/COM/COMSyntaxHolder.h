@@ -8,6 +8,7 @@
 #pragma once
 
 #include "../utilit.h"
+
 #include <comdef.h>
 #include <atlbase.h>
 #import "../../Lemmatizer/Lemmatizer.tlb"
@@ -15,6 +16,7 @@
 #import "../../Agramtab/Agramtab.tlb"
 #import "../../Graphan/Graphan.tlb"
 #import "../../Synan/Synan.tlb"
+
 
 class CCOMSyntaxHolder
 {

@@ -28,7 +28,7 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 
 IDR_ROSSDETYPE MENU 
 BEGIN
-    POPUP "&База данных"
+    POPUP "&пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
     BEGIN
         MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
         MENUITEM "&Close",                      ID_FILE_CLOSE
@@ -152,7 +152,7 @@ BEGIN
         MENUITEM "Delete all entries",          IDR_DEL_ALL_SELECTED
         MENUITEM "Statistics for GFi",          IDR_GXI_STATISTICS
         MENUITEM "Empy all entries",            ID_MENUITEM32805
-        MENUITEM "Find entry by a string",      ID_FIND_BY_STR
+        MENUITEM "Find entry by a std::string",      ID_FIND_BY_STR
         MENUITEM "Search for invalid cross-dictionary entries", 
                                                 ID_FIND_WRONG_REFS
     END
@@ -333,7 +333,7 @@ END
 
 IDD_STATIS_DLG DIALOG  0, 0, 495, 250
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Статистика"
+CAPTION "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,438,7,50,14
@@ -362,7 +362,7 @@ END
 
 IDD_IMPORT_DLG DIALOGEX 0, 0, 358, 338
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Импорт"
+CAPTION "пїЅпїЅпїЅпїЅпїЅпїЅ"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "Exit",IDOK,290,15,50,14
@@ -407,7 +407,7 @@ END
 
 IDD_FIELDS_EDITOR_FORM DIALOGEX 0, 0, 212, 276
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Поля"
+CAPTION "пїЅпїЅпїЅпїЅ"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,141,17,50,14
@@ -475,7 +475,7 @@ END
 
 IDD_NEW_TEXTENTRY DIALOGEX 0, 0, 246, 114
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "Словарный вход"
+CAPTION "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     EDITTEXT        IDC_EDIT1,89,34,133,14,ES_AUTOHSCROLL

@@ -49,8 +49,8 @@ applications. */
 #endif
 
 #define NLBLOCK md             /* Block containing newline information */
-#define PSSTART start_subject  /* Field containing processed string start */
-#define PSEND   end_subject    /* Field containing processed string end */
+#define PSSTART start_subject  /* Field containing processed std::string start */
+#define PSEND   end_subject    /* Field containing processed std::string end */
 
 #include "pcre_internal.h"
 
@@ -157,8 +157,8 @@ static uschar toptable2[] = {
 
 /* Structure for holding data about a particular state, which is in effect the
 current data for an active path through the match tree. It must consist
-entirely of ints because the working vector we are passed, and which we put
-these structures in, is a vector of ints. */
+entirely of ints because the working std::vector we are passed, and which we put
+these structures in, is a std::vector of ints. */
 
 typedef struct stateblock {
   int offset;                     /* Offset to opcode */
@@ -172,13 +172,13 @@ typedef struct stateblock {
 
 #ifdef DEBUG
 /*************************************************
-*             Print character string             *
+*             Print character std::string             *
 *************************************************/
 
-/* Character string printing function for debugging.
+/* Character std::string printing function for debugging.
 
 Arguments:
-  p            points to string
+  p            points to std::string
   length       number of bytes
   f            where to print
 
@@ -205,7 +205,7 @@ while (length-- > 0)
 *    Execute a Regular Expression - DFA engine   *
 *************************************************/
 
-/* This internal function applies a compiled pattern to a subject string,
+/* This internal function applies a compiled pattern to a subject std::string,
 starting at a given point, using a DFA engine. This function is called from the
 external one, possibly multiple times if the pattern is not anchored. The
 function calls itself recursively for some kinds of subpattern.
@@ -213,11 +213,11 @@ function calls itself recursively for some kinds of subpattern.
 Arguments:
   md                the match_data block with fixed information
   this_start_code   the opening bracket of this subexpression's code
-  current_subject   where we currently are in the subject string
-  start_offset      start offset in the subject string
-  offsets           vector to contain the matching string offsets
+  current_subject   where we currently are in the subject std::string
+  start_offset      start offset in the subject std::string
+  offsets           std::vector to contain the matching std::string offsets
   offsetcount       size of same
-  workspace         vector of workspace
+  workspace         std::vector of workspace
   wscount           size of same
   ims               the current ims flags
   rlevel            function call recursion level
@@ -346,7 +346,7 @@ matching internal ket rather than at the end.
 
 If the first opcode in the first alternative is OP_REVERSE, we are dealing with
 a backward assertion. In that case, we have to find out the maximum amount to
-move back, and set up each alternative appropriately. */
+move back, and std::set up each alternative appropriately. */
 
 if (*first_op == OP_REVERSE)
   {
@@ -442,7 +442,7 @@ else
     }
   }
 
-workspace[0] = 0;    /* Bit indicating which vector is current */
+workspace[0] = 0;    /* Bit indicating which std::vector is current */
 
 DPRINTF(("%.*sEnd state = %d\n", rlevel*2-2, SP, end_code - start_code));
 
@@ -601,7 +601,7 @@ for (;;)
     else
       {
       dlen = 0;         /* Not strictly necessary, but compilers moan */
-      d = NOTACHAR;     /* if these variables are not set. */
+      d = NOTACHAR;     /* if these variables are not std::set. */
       }
 
 
@@ -612,8 +612,8 @@ for (;;)
 
 /* ========================================================================== */
       /* Reached a closing bracket. If not at the end of the pattern, carry
-      on with the next opcode. Otherwise, unless we have an empty string and
-      PCRE_NOTEMPTY is set, save the match data, shifting up all previous
+      on with the next opcode. Otherwise, unless we have an empty std::string and
+      PCRE_NOTEMPTY is std::set, save the match data, shifting up all previous
       matches so we always have the longest first. */
 
       case OP_KET:
@@ -638,7 +638,7 @@ for (;;)
           {
           offsets[0] = current_subject - start_subject;
           offsets[1] = ptr - start_subject;
-          DPRINTF(("%.*sSet matched string = \"%.*s\"\n", rlevel*2-2, SP,
+          DPRINTF(("%.*sSet matched std::string = \"%.*s\"\n", rlevel*2-2, SP,
             offsets[1] - offsets[0], current_subject));
           }
         if ((md->moptions & PCRE_DFA_SHORTEST) != 0)
@@ -1733,7 +1733,7 @@ for (;;)
 #ifdef SUPPORT_UCP
       /*-----------------------------------------------------------------*/
       /* This is a tricky one because it can match more than one character.
-      Find out how many characters to skip, and then set up a negative state
+      Find out how many characters to skip, and then std::set up a negative state
       to wait for them to pass before continuing. */
 
       case OP_EXTUNI:
@@ -1756,7 +1756,7 @@ for (;;)
 
       /*-----------------------------------------------------------------*/
       /* This is a tricky like EXTUNI because it too can match more than one
-      character (when CR is followed by LF). In this case, set up a negative
+      character (when CR is followed by LF). In this case, std::set up a negative
       state to wait for one character to pass before continuing. */
 
       case OP_ANYNL:
@@ -2089,7 +2089,7 @@ for (;;)
         const uschar *ecode;
 
         /* For a simple class, there is always just a 32-byte table, and we
-        can set isinclass from it. */
+        can std::set isinclass from it. */
 
         if (codevalue != OP_XCLASS)
           {
@@ -2111,7 +2111,7 @@ for (;;)
          if (clen > 0) isinclass = _pcre_xclass(c, code + 1 + LINK_SIZE);
          }
 
-        /* At this point, isinclass is set for all kinds of class, and ecode
+        /* At this point, isinclass is std::set for all kinds of class, and ecode
         points to the byte after the end of the class. If there is a
         quantifier, this is where it will be. */
 
@@ -2181,9 +2181,9 @@ for (;;)
           code,                                 /* this subexpression's code */
           ptr,                                  /* where we currently are */
           ptr - start_subject,                  /* start offset */
-          local_offsets,                        /* offset vector */
+          local_offsets,                        /* offset std::vector */
           sizeof(local_offsets)/sizeof(int),    /* size of same */
-          local_workspace,                      /* workspace vector */
+          local_workspace,                      /* workspace std::vector */
           sizeof(local_workspace)/sizeof(int),  /* size of same */
           ims,                                  /* the current ims flags */
           rlevel,                               /* function recursion level */
@@ -2240,9 +2240,9 @@ for (;;)
             asscode,                              /* this subexpression's code */
             ptr,                                  /* where we currently are */
             ptr - start_subject,                  /* start offset */
-            local_offsets,                        /* offset vector */
+            local_offsets,                        /* offset std::vector */
             sizeof(local_offsets)/sizeof(int),    /* size of same */
-            local_workspace,                      /* workspace vector */
+            local_workspace,                      /* workspace std::vector */
             sizeof(local_workspace)/sizeof(int),  /* size of same */
             ims,                                  /* the current ims flags */
             rlevel,                               /* function recursion level */
@@ -2272,9 +2272,9 @@ for (;;)
           start_code + GET(code, 1),            /* this subexpression's code */
           ptr,                                  /* where we currently are */
           ptr - start_subject,                  /* start offset */
-          local_offsets,                        /* offset vector */
+          local_offsets,                        /* offset std::vector */
           sizeof(local_offsets)/sizeof(int),    /* size of same */
-          local_workspace,                      /* workspace vector */
+          local_workspace,                      /* workspace std::vector */
           sizeof(local_workspace)/sizeof(int),  /* size of same */
           ims,                                  /* the current ims flags */
           rlevel,                               /* function recursion level */
@@ -2287,7 +2287,7 @@ for (;;)
 
         if (rc == 0) return PCRE_ERROR_DFA_RECURSE;
 
-        /* For each successful matched substring, set up the next state with a
+        /* For each successful matched substring, std::set up the next state with a
         count of characters to skip before trying it. Note that the count is in
         characters, not bytes. */
 
@@ -2324,9 +2324,9 @@ for (;;)
           code,                                 /* this subexpression's code */
           ptr,                                  /* where we currently are */
           ptr - start_subject,                  /* start offset */
-          local_offsets,                        /* offset vector */
+          local_offsets,                        /* offset std::vector */
           sizeof(local_offsets)/sizeof(int),    /* size of same */
-          local_workspace,                      /* workspace vector */
+          local_workspace,                      /* workspace std::vector */
           sizeof(local_workspace)/sizeof(int),  /* size of same */
           ims,                                  /* the current ims flags */
           rlevel,                               /* function recursion level */
@@ -2344,16 +2344,16 @@ for (;;)
 
           /* If the end of this subpattern is KETRMAX or KETRMIN, we must
           arrange for the repeat state also to be added to the relevant list.
-          Calculate the offset, or set -1 for no repeat. */
+          Calculate the offset, or std::set -1 for no repeat. */
 
           repeat_state_offset = (*end_subpattern == OP_KETRMAX ||
                                  *end_subpattern == OP_KETRMIN)?
             end_subpattern - start_code - GET(end_subpattern, 1) : -1;
 
-          /* If we have matched an empty string, add the next state at the
+          /* If we have matched an empty std::string, add the next state at the
           current character pointer. This is important so that the duplicate
           checking kicks in, which is what breaks infinite loops that match an
-          empty string. */
+          empty std::string. */
 
           if (charcount == 0)
             {
@@ -2361,8 +2361,8 @@ for (;;)
             }
 
           /* Optimization: if there are no more active states, and there
-          are no new states yet set up, then skip over the subject string
-          right here, to save looping. Otherwise, set up the new state to swing
+          are no new states yet std::set up, then skip over the subject std::string
+          right here, to save looping. Otherwise, std::set up the new state to swing
           into action when the end of the substring is reached. */
 
           else if (i + 1 >= active_count && new_count == 0)
@@ -2436,7 +2436,7 @@ for (;;)
     }      /* End of loop scanning active states */
 
   /* We have finished the processing at the current subject character. If no
-  new states have been set for the next character, we have found all the
+  new states have been std::set for the next character, we have found all the
   matches that we are going to find. If we are at the top level and partial
   matching has been requested, check for appropriate conditions. */
 
@@ -2446,7 +2446,7 @@ for (;;)
         rlevel == 1 &&                         /* Top level match function */
         (md->moptions & PCRE_PARTIAL) != 0 &&  /* Want partial matching */
         ptr >= end_subject &&                  /* Reached end of subject */
-        ptr > current_subject)                 /* Matched non-empty string */
+        ptr > current_subject)                 /* Matched non-empty std::string */
       {
       if (offsetcount >= 2)
         {
@@ -2465,7 +2465,7 @@ for (;;)
   /* One or more states are active for the next character. */
 
   ptr += clen;    /* Advance to next subject character */
-  }               /* Loop to move along the subject string */
+  }               /* Loop to move along the subject std::string */
 
 /* Control gets here from "break" a few lines above. We do it this way because
 if we use "return" above, we have compiler trouble. Some compilers warn if
@@ -2483,20 +2483,20 @@ return match_count;
 *    Execute a Regular Expression - DFA engine   *
 *************************************************/
 
-/* This external function applies a compiled re to a subject string using a DFA
+/* This external function applies a compiled re to a subject std::string using a DFA
 engine. This function calls the internal function multiple times if the pattern
 is not anchored.
 
 Arguments:
   argument_re     points to the compiled expression
   extra_data      points to extra data or is NULL
-  subject         points to the subject string
-  length          length of subject string (may contain binary zeros)
-  start_offset    where to start in the subject string
+  subject         points to the subject std::string
+  length          length of subject std::string (may contain binary zeros)
+  start_offset    where to start in the subject std::string
   options         option bits
-  offsets         vector of match offsets
+  offsets         std::vector of match offsets
   offsetcount     size of same
-  workspace       workspace vector
+  workspace       workspace std::vector
   wscount         size of same
 
 Returns:          > 0 => number of match offset pairs placed in offsets
@@ -2538,9 +2538,9 @@ if (offsetcount < 0) return PCRE_ERROR_BADCOUNT;
 if (wscount < 20) return PCRE_ERROR_DFA_WSSIZE;
 
 /* We need to find the pointer to any study data before we test for byte
-flipping, so we scan the extra_data block first. This may set two fields in the
+flipping, so we scan the extra_data block first. This may std::set two fields in the
 match block, so we must initialize them beforehand. However, the other fields
-in the match block must not be set until after the byte flipping. */
+in the match block must not be std::set until after the byte flipping. */
 
 md->tables = re->tables;
 md->callout_data = NULL;
@@ -2595,7 +2595,7 @@ md->end_subject = end_subject;
 md->moptions = options;
 md->poptions = re->options;
 
-/* If the BSR option is not set at match time, copy what was set
+/* If the BSR option is not std::set at match time, copy what was std::set
 at compile time. */
 
 if ((md->moptions & (PCRE_BSR_ANYCRLF|PCRE_BSR_UNICODE)) == 0)
@@ -2608,7 +2608,7 @@ if ((md->moptions & (PCRE_BSR_ANYCRLF|PCRE_BSR_UNICODE)) == 0)
   }
 
 /* Handle different types of newline. The three bits give eight cases. If
-nothing is set at run time, whatever was used at compile time applies. */
+nothing is std::set at run time, whatever was used at compile time applies. */
 
 switch ((((options & PCRE_NEWLINE_BITS) == 0)? re->options : (pcre_uint32)options) &
          PCRE_NEWLINE_BITS)
@@ -2647,7 +2647,7 @@ else
     }
   }
 
-/* Check a UTF-8 string if required. Unfortunately there's no way of passing
+/* Check a UTF-8 std::string if required. Unfortunately there's no way of passing
 back the character offset. */
 
 #ifdef SUPPORT_UTF8
@@ -2681,7 +2681,7 @@ startline = (re->flags & PCRE_STARTLINE) != 0;
 firstline = (re->options & PCRE_FIRSTLINE) != 0;
 
 /* Set up the first character to match, if available. The first_byte value is
-never set for an anchored regular expression, but the anchoring may be forced
+never std::set for an anchored regular expression, but the anchoring may be forced
 at run time, so we have to test for anchoring. The first char may be unset for
 an unanchored pattern, of course. If there's no first char and the pattern was
 studied, there may be a bitmap of possible first characters. */
@@ -2703,7 +2703,7 @@ if (!anchored)
   }
 
 /* For anchored or unanchored matches, there may be a "last known required
-character" set. */
+character" std::set. */
 
 if ((re->flags & PCRE_REQCHSET) != 0)
   {
@@ -2726,7 +2726,7 @@ for (;;)
     const uschar *save_end_subject = end_subject;
 
     /* Advance to a unique first char if possible. If firstline is TRUE, the
-    start of the match is constrained to the first line of a multiline string.
+    start of the match is constrained to the first line of a multiline std::string.
     Implement this by temporarily adjusting end_subject so that we stop
     scanning at a newline. If the match fails at the newline, later code breaks
     this loop. */
@@ -2787,18 +2787,18 @@ for (;;)
     end_subject = save_end_subject;
     }
 
-  /* If req_byte is set, we know that that character must appear in the subject
-  for the match to succeed. If the first character is set, req_byte must be
+  /* If req_byte is std::set, we know that that character must appear in the subject
+  for the match to succeed. If the first character is std::set, req_byte must be
   later in the subject; otherwise the test starts at the match point. This
   optimization can save a huge amount of work in patterns with nested unlimited
   repeats that aren't going to match. Writing separate code for cased/caseless
   versions makes it go faster, as does using an autoincrement and backing off
   on a match.
 
-  HOWEVER: when the subject string is very, very long, searching to its end can
+  HOWEVER: when the subject std::string is very, very long, searching to its end can
   take a long time, and give bad performance on quite ordinary patterns. This
-  showed up when somebody was matching /^C/ on a 32-megabyte string... so we
-  don't do this when the string is sufficiently long.
+  showed up when somebody was matching /^C/ on a 32-megabyte std::string... so we
+  don't do this when the std::string is sufficiently long.
 
   ALSO: this processing is disabled when partial matching is requested.
   */
@@ -2850,9 +2850,9 @@ for (;;)
     md->start_code,                    /* this subexpression's code */
     current_subject,                   /* where we currently are */
     start_offset,                      /* start offset in subject */
-    offsets,                           /* offset vector */
+    offsets,                           /* offset std::vector */
     offsetcount,                       /* size of same */
-    workspace,                         /* workspace vector */
+    workspace,                         /* workspace std::vector */
     wscount,                           /* size of same */
     re->options & (PCRE_CASELESS|PCRE_MULTILINE|PCRE_DOTALL), /* ims flags */
     0,                                 /* function recurse level */
@@ -2864,7 +2864,7 @@ for (;;)
   if (rc != PCRE_ERROR_NOMATCH || anchored) return rc;
 
   /* Advance to the next subject character unless we are at the end of a line
-  and firstline is set. */
+  and firstline is std::set. */
 
   if (firstline && IS_NEWLINE(current_subject)) break;
   current_subject++;

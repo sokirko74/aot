@@ -26,7 +26,7 @@ struct CGLRRuleInfo
 struct CSLRCellBuild 
 {
 	bool						m_bShift;
-	vector<size_t>				m_ReduceRules;
+	std::vector<size_t>				m_ReduceRules;
 	int							m_GotoLine;
 	CSLRCellBuild()
 	{
@@ -50,8 +50,8 @@ struct CSLRCellWork
 class CGLRTable  
 {
 	
-	vector< vector < CSLRCellBuild > >		m_BuildTable;
-	vector < CSLRCellWork >					m_WorkTable;
+	std::vector< std::vector < CSLRCellBuild > >		m_BuildTable;
+	std::vector < CSLRCellWork >					m_WorkTable;
 	
 
 	void			ConvertBuildCellsToWordCells();
@@ -60,8 +60,8 @@ class CGLRTable
 
 public:
 	const CWorkGrammar*					m_pWorkGrammar;
-	vector<CGLRRuleInfo>				m_RuleInfos;
-	vector<DWORD>						m_ReduceRuleSets;
+	std::vector<CGLRRuleInfo>				m_RuleInfos;
+	std::vector<DWORD>						m_ReduceRuleSets;
 	
 	
 

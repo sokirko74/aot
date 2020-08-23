@@ -382,7 +382,7 @@ std::string	CMorphAutomat::GetFirstResult (const std::string& Text) const
 	return res;
 };
 
-void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_path, vector<CAutomAnnotationInner>& Infos) const 
+void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_path, std::vector<CAutomAnnotationInner>& Infos) const 
 {
 	const CMorphAutomNode& N = m_pNodes[NodeNo];
 	if (N.IsFinal())
@@ -431,7 +431,7 @@ int	CMorphAutomat::FindStringAndPassAnnotChar (const std::string& Text, size_t T
 	return NextNode(r,m_AnnotChar);
 };
 
-void	CMorphAutomat::GetInnerMorphInfos (const std::string& Text, size_t TextPos, vector<CAutomAnnotationInner>& Infos) const 
+void	CMorphAutomat::GetInnerMorphInfos (const std::string& Text, size_t TextPos, std::vector<CAutomAnnotationInner>& Infos) const 
 {
 	Infos.clear();
 	int r = FindStringAndPassAnnotChar(Text, TextPos);

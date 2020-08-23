@@ -35,8 +35,8 @@ void CVisualSemGraph::InitFromSemantics(const CSemStructureBuilder &SemBuilder) 
     }
 }
 
-vector<int> CVisualSemGraph::GetChildren(int NodeNo) const {
-    vector<int> Nodes;
+std::vector<int> CVisualSemGraph::GetChildren(int NodeNo) const {
+    std::vector<int> Nodes;
     for (const auto &r : m_Relations) {
         if (r.m_SourceNodeNo == NodeNo)
             Nodes.push_back(r.m_TargetNodeNo);
@@ -44,8 +44,8 @@ vector<int> CVisualSemGraph::GetChildren(int NodeNo) const {
     return Nodes;
 }
 
-vector<int> CVisualSemGraph::GetParents(int NodeNo) const {
-    vector<int> Nodes;
+std::vector<int> CVisualSemGraph::GetParents(int NodeNo) const {
+    std::vector<int> Nodes;
     for (const auto &r : m_Relations) {
         if (r.m_TargetNodeNo == NodeNo)
             Nodes.push_back(r.m_SourceNodeNo);
@@ -84,7 +84,7 @@ std::string CVisualSemGraph::GetResultStr() const {
 }
 
 int CVisualSemGraph::GetLeavesCount(int Root) const {
-    vector<int> Children = GetChildren(Root);
+    std::vector<int> Children = GetChildren(Root);
     if (Children.empty()) return 1;
     int Result = 0;
     for (size_t i = 0; i < Children.size(); i++)

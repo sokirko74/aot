@@ -23,18 +23,18 @@ CMorphDictBuilder::~CMorphDictBuilder()
 void CMorphDictBuilder::GenerateLemmas(const MorphoWizard& Wizard) 
 {
 	std::cout << "GenerateLemmas\n";
-	vector<set<string> > InfoToBases;
+	std::vector<std::set<std::string> > InfoToBases;
 	{	// creaing CMorphDict::m_Bases
-		set<string> Bases;
+		std::set<std::string> Bases;
 		
 		for( const_lemma_iterator_t lemm_it= Wizard.m_LemmaToParadigm.begin(); lemm_it!=Wizard.m_LemmaToParadigm.end(); lemm_it++ )
 		{
-			set<string> curr_bases;
+			std::set<std::string> curr_bases;
 
 			if (lemm_it->second.m_PrefixSetNo != UnknownPrefixSetNo)
 			{
-				const set<string>& s = Wizard.m_PrefixSets[lemm_it->second.m_PrefixSetNo];
-				for(set<string>::const_iterator it_s = s.begin(); it_s != s.end(); it_s++)
+				const std::set<std::string>& s = Wizard.m_PrefixSets[lemm_it->second.m_PrefixSetNo];
+				for(std::set<std::string>::const_iterator it_s = s.begin(); it_s != s.end(); it_s++)
 					curr_bases.insert(*it_s+Wizard.get_base_string(lemm_it));
 			}
 			else
@@ -55,9 +55,9 @@ void CMorphDictBuilder::GenerateLemmas(const MorphoWizard& Wizard)
 		{
 			CLemmaInfoAndLemma I;
 			
-			for(set<string>::const_iterator it = InfoToBases[Index].begin(); it != InfoToBases[Index].end(); it++)
+			for(std::set<std::string>::const_iterator it = InfoToBases[Index].begin(); it != InfoToBases[Index].end(); it++)
 			{
-				vector<CShortString>::const_iterator base_it =  lower_bound(m_Bases.begin(), m_Bases.end(), it->c_str(), IsLessShortString());
+				std::vector<CShortString>::const_iterator base_it =  lower_bound(m_Bases.begin(), m_Bases.end(), it->c_str(), IsLessShortString());
 				assert (base_it != m_Bases.end());
 				assert (*it == base_it->GetString());
 				I.m_LemmaStrNo = base_it - m_Bases.begin();
@@ -96,7 +96,7 @@ void  CMorphDictBuilder::GenerateUnitedFlexModels(const MorphoWizard& Wizard)
 		CFlexiaModel p = Wizard.m_FlexiaModels[ModelNo];
 		m_NPSs.push_back(GetPredictionPartOfSpeech(Wizard.get_pos_string(p.get_first_code()), 
 													Wizard.m_Language));
-		m_ModelInfo.push_back(vector<bool>(p.m_Flexia.size(), true));
+		m_ModelInfo.push_back(std::vector<bool>(p.m_Flexia.size(), true));
 
 		if ( p.m_Flexia.size() >=  MaxNumberFormsInOneParadigm)
 		{
@@ -127,7 +127,7 @@ void  CMorphDictBuilder::GeneratePrefixes(const MorphoWizard& Wizard)
 	{
 		m_PrefixSets.push_back(DwordVector());
 		
-		for (set<string>::const_iterator it =  Wizard.m_PrefixSets[i].begin();  it != Wizard.m_PrefixSets[i].end(); it++)
+		for (std::set<std::string>::const_iterator it =  Wizard.m_PrefixSets[i].begin();  it != Wizard.m_PrefixSets[i].end(); it++)
 		{
 			std::string prefix = *it;
 			StringVector::iterator it_c = find(m_Prefixes.begin(), m_Prefixes.end(), prefix);
@@ -183,7 +183,7 @@ void  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 		assert (!pPrefixVector->empty());
 
 		const CFlexiaModel&p = Wizard.m_FlexiaModels[ModelNo];
-		const vector <bool>& Infos = m_ModelInfo[ModelNo];
+		const std::vector <bool>& Infos = m_ModelInfo[ModelNo];
 		
 		for (size_t PrefixNo = 0; PrefixNo < pPrefixVector->size();PrefixNo++)
 		{

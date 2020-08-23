@@ -103,17 +103,18 @@ public:
 
 class CShortString
 {
-	vector<char>::const_iterator m_pStringPointer;
+	std::vector<char>::const_iterator m_pStringPointer;
 public:
-	CShortString(vector<char>::const_iterator pData);
+	CShortString(std::vector<char>::const_iterator pData);
 
 	BYTE GetLength() const;
-	vector<char>::const_iterator GetData() const;
+	std::vector<char>::const_iterator GetData() const;
 	const char*	GetString() const;
 	//bool  operator <(const CShortString& s) const;
 };
 
-class IsLessShortString : public std::binary_function<const CShortString&, const char*, bool>
+
+class IsLessShortString 
 {
 public:
 	bool operator()(const CShortString& Item1,	const char* Item2) const;
@@ -122,9 +123,9 @@ public:
 };
 
 
-class CShortStringHolder : public vector<CShortString> 
+class CShortStringHolder : public std::vector<CShortString> 
 {
-	vector<char> m_Buffer;
+	std::vector<char> m_Buffer;
 	template<class T>
 		bool CreateFromSequence(T begin, T end);
 public:	
@@ -150,14 +151,14 @@ struct CMyTimeSpan
 
 class CMyTimeSpanHolder 
 {
-	map<std::string, CMyTimeSpan>	m_TimeSpans;
+	std::map<std::string, CMyTimeSpan>	m_TimeSpans;
 	long						m_SequenceId;
 	
 public:
 	bool						m_bTimeSpanHolderEnabled;
 
-	typedef map<std::string, CMyTimeSpan>::const_iterator	ConstIterator;
-	typedef map<std::string, CMyTimeSpan>::iterator			Iterator;
+	typedef std::map<std::string, CMyTimeSpan>::const_iterator	ConstIterator;
+	typedef std::map<std::string, CMyTimeSpan>::iterator			Iterator;
 
 	CMyTimeSpanHolder();
 	void StartTimer(const std::string& Name, long NestId);
@@ -214,6 +215,6 @@ struct CTestCase {
 
 struct CTestCaseBase {
 	std::vector<CTestCase> TestCases;
-	void read_test_cases(istream& inp);
-	void write_test_cases(ostream& outp) const;
+	void read_test_cases(std::istream& inp);
+	void write_test_cases(std::ostream& outp) const;
 };

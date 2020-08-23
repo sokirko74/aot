@@ -92,7 +92,7 @@ void CEngSemStructure::ApplySequenceOfTenseRule()
 			continue; // мы имеем дело не с тем глаголом
 
 		// проверка, что ни у одного подчиненного нет пометы RESTR=not_seq_tn
-		vector<long> OutRels;
+		std::vector<long> OutRels;
 		GetOutcomingRelations(NodeNo,OutRels);
 		int i=0;
 		for( ; i<OutRels.size(); i++ )
@@ -212,7 +212,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 			m_Nodes.push_back(beNode); // be
 			int iBeNode = m_Nodes.size()-1;
 //
-			vector<long> outRels;
+			std::vector<long> outRels;
 			GetOutcomingRelations(iEngNode,outRels);
 			for( int i=0; i<outRels.size(); i++ )
 			{
@@ -252,7 +252,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 			}
 			assert( iObjPattern!=-1 );
 
-			vector<long> outRels;
+			std::vector<long> outRels;
 			GetOutcomingRelations(iEngNode,outRels);
 			for( int i=0; i<outRels.size(); i++ )
 			{
@@ -283,7 +283,7 @@ void CEngSemStructure::ApplyModalVerbTenseRule()
 			ищем вторую валентность слова и интерпретируем ее по новой словарной статье
 			(чтобы поставить to перед глаголом)
 		*/
-		vector<long> rels;
+		std::vector<long> rels;
 		GetOutcomingRelations(iEngNode,rels);
 		for (int i = 0; i < rels.size(); i++)
 		{
@@ -342,7 +342,7 @@ CAuxVerbInfo GetAuxVerbLemmaAndTense(EngVerbTenseEnum Tense)
 // является ли данный узел вспомогательным  глаголом
 bool	CEngSemStructure::IsAuxVerb(long NodeNo) const
 {
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	  if( m_Relations[outRels[i]].m_Valency.m_RelationStr == "AUX_VERB")
@@ -354,7 +354,7 @@ bool	CEngSemStructure::IsAuxVerb(long NodeNo) const
 // имеет  ли данный узел вспомогательный  глагол
 bool	CEngSemStructure::HasBeVerb(long NodeNo) const
 {
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetRelations(NodeNo,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -505,8 +505,8 @@ void	CEngSemStructure::BuildAuxiliaryVerbs()
 
 EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngStr,long TimNodeNo) const
 {
-	typedef pair<std::string,std::string> PairOfString; 
-	vector<PairOfString> AVREM_values;
+	typedef std::pair<std::string,std::string> PairOfString; 
+	std::vector<PairOfString> AVREM_values;
 
 	const CSemanticStructure &Rus = RusStr;
 	const CSemanticStructure &Eng = *this;
@@ -516,7 +516,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 		TimNodeNo = RelNodeNo;
 	assert( TimNodeNo!=-1 );
 	
-	vector<long> rels;
+	std::vector<long> rels;
 	Str.GetOutcomingRelations(RelNodeNo,rels);
 	for( int i=0; i<rels.size(); i++ )
 	{
@@ -532,7 +532,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 			unit = node.m_Colloc.GetRossInterp().m_UnitNo;
 		}
 
-		vector<TCortege> vec;
+		std::vector<TCortege> vec;
 		GetRossHolder(type)->GetFieldValues("RUSETENSE",unit,vec);
 		if( vec.size() == 0 )
 			continue;
@@ -544,7 +544,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 			   continue; 
 		   std::string s0 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[0]);
 		   std::string s2 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[2]);
-		   AVREM_values.push_back(make_pair(s0,s2));
+		   AVREM_values.push_back(std::make_pair(s0,s2));
 		}
 	}
 
@@ -725,7 +725,7 @@ bool CEngSemStructure::CorrectTenseByDictConjFeatures(int iNode,CDictUnitInterp 
 
 	EngVerbTenseEnum NewTense;
 	
-	vector<long> outRels;
+	std::vector<long> outRels;
 	if( m_Nodes[iNode].m_NodeType == MNA )	
 	{
 		GetOutcomingRelations(iNode,outRels);

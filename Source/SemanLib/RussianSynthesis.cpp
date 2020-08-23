@@ -73,7 +73,7 @@ std::string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 {
 	const CRusSemNode& Node = R.m_Nodes[NodeNo];
 
-	vector<long> Rels;
+	std::vector<long> Rels;
 	R.GetOutcomingRelations(NodeNo, Rels, false);
 	
 
@@ -139,7 +139,7 @@ std::string	CRusSemStructure::RussianSynthesisOfNode(int NodeNo)
 	{
 		//  if  it is a clause root then we should add the clause conjunction to the beginning
 		// if it exists
-		vector<long> Rels;
+		std::vector<long> Rels;
 		CSemanticStructure::GetIncomingRelations(NodeNo,Rels, false);
 		for (size_t i=0; i<Rels.size(); i++)
 			if (IsRelBetweenClauses(m_Relations[Rels[i]]))
@@ -156,7 +156,7 @@ bool	CRusSemStructure::RussianSynthesis(std::string& Result) const
 	std::string str;
 	CRusSemStructure NewStructure = *this;
     // берем все вершины клаузы
-	vector<long> roots;	
+	std::vector<long> roots;	
 	GetRoots(roots);
 	for (size_t RootNo =0;  RootNo <roots.size(); RootNo++)
 	{

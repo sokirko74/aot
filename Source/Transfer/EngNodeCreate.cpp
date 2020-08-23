@@ -64,7 +64,7 @@ void CEngSemStructure::CreateEnglNodeForEngColloc(long UnitNo, CEngSemNode& engN
 	UnitInterp.m_UnitNo = UnitNo;	
 	engNode.SetInterp(UnitInterp);
 	int No = 0;
-	vector<long> word_nums;
+	std::vector<long> word_nums;
 	while( strTok() )
 	{
 		CEngSemWord newWord;
@@ -96,7 +96,7 @@ void CEngSemStructure::CreateEnglNodeForEngColloc(long UnitNo, CEngSemNode& engN
 		}
 	}
 
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	
 	corteges.clear();
 	GetRossHolder(EngCollocRoss)->GetFieldValues("ROOT", UnitNo, corteges);

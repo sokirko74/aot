@@ -10,7 +10,7 @@ class CPlmLineCollection;
 class CPostMorphInteface
 {
 protected:
-    vector<string>  m_ResultLemWords;  
+    std::vector<std::string>  m_ResultLemWords;  
     MorphLanguageEnum m_Language;
 public:
     bool			m_bCanChangeInputText;
@@ -22,6 +22,6 @@ public:
             return convert_to_utf8(m_ResultLemWords[i], m_Language);
     };
     size_t    GetResultPlmLineCount() const {return m_ResultLemWords.size(); }
-    void SwapResults(vector<string>& v) {v.swap(m_ResultLemWords);};
+    void SwapResults(std::vector<std::string>& v) {v.swap(m_ResultLemWords);};
 };
 

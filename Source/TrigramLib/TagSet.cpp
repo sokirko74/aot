@@ -250,7 +250,7 @@ CTag CTagSet::GetBestSuitedTag (const CTag& T) const
 {
 	CTag Best;
 	size_t  MaxSize = 0;
-	for (map<std::string, CTag>::const_iterator it = m_Tags.begin(); it != m_Tags.end(); it++)
+	for (std::map<std::string, CTag>::const_iterator it = m_Tags.begin(); it != m_Tags.end(); it++)
 	{ 
 		const CTag&  P = it->second;
 		bool bCheckLemma =  !T.m_Lemmas.empty() && find(P.m_Lemmas.begin(), P.m_Lemmas.end(), *T.m_Lemmas.begin()) != P.m_Lemmas.end();
@@ -279,10 +279,10 @@ CTag CTagSet::GetBestSuitedTag (const CTag& T) const
 
 
 
-vector<CTag> CTagSet::DecipherTagStr (std::string TagStr, const CAgramtab* pAgramtab) const 
+std::vector<CTag> CTagSet::DecipherTagStr (std::string TagStr, const CAgramtab* pAgramtab) const 
 {
-	map<std::string, CTag>::const_iterator tag_set_it = m_Tags.find(TagStr);
-	vector<CTag> Tags;
+	std::map<std::string, CTag>::const_iterator tag_set_it = m_Tags.find(TagStr);
+	std::vector<CTag> Tags;
 	if (tag_set_it != m_Tags.end())
 	{
 		//fprintf (stderr, "\t tag %s is found\n",  TagStr.c_str());

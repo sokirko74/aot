@@ -23,7 +23,7 @@
 #include  <stdexcept>
 #include  <vector>
 #include  <iostream>
-#include  <set>
+#include <set>
 #include  <stack>
 #include  <map>
 #include  <time.h>
@@ -37,7 +37,7 @@
 #pragma warning  (disable : 4251)
 #pragma warning  (disable : 4996)
 		
-using namespace std;
+//using namespace std;
 
 typedef unsigned char BYTE;
 typedef uint64_t QWORD;
@@ -54,10 +54,10 @@ typedef uint64_t QWORD;
 	const   unsigned int _MAX_PATH = 512;
 #endif
 
-typedef vector<string> StringVector;
+typedef std::vector<std::string> StringVector;
 typedef std::unordered_set<std::string> StringHashSet;
-typedef set<string> StringSet;
-typedef vector<DWORD> DwordVector;
+typedef std::set<std::string> StringSet;
+typedef std::vector<DWORD> DwordVector;
 
 inline QWORD GetMaxQWORD ()
 {
@@ -73,7 +73,7 @@ inline QWORD GetMaxQWORD ()
 typedef enum {	morphUnknown = 0, morphRussian = 1, morphEnglish = 2, morphGerman = 3, morphGeneric = 4, morphURL=5, morphDigits=6} MorphLanguageEnum;
 
 template <class T1, class T2, class T3>
-struct	troika : public pair<T1, T2>
+struct	troika : public std::pair<T1, T2>
 {
 	T3 third;
 };

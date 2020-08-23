@@ -48,7 +48,7 @@ bool CChunkParser::ParseGrammar(const char* src)
 
 	std::string  Query = src;
 	std::stringstream QueryStream (Query.c_str());
-	switch_streams((istream*)(&QueryStream), 0);
+	switch_streams((std::istream*)(&QueryStream), 0);
 	int m_line_num = 1;
 	if (yyparse(this) != 0)
 	{

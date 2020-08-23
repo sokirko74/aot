@@ -53,7 +53,7 @@ public:
 	bool	SetClauseBorderIfThereAreTwoPotentialPredicates(int FWrd, int LWrd); 
 
 	
-	void	ChooseClauseType(const  vector<SClauseType>& vectorTypes, CMorphVariant& V);
+	void	ChooseClauseType(const  std::vector<SClauseType>& vectorTypes, CMorphVariant& V);
 	bool	CheckLastPredicatePosition(size_t ClauseLastWordNo, long RootWordNo)  const { return true;};	
     void    CloneHomonymsForOborots() override {};
 };

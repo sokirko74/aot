@@ -7,10 +7,10 @@
 #include "SentenceLine.h"
 
 
-typedef vector<CSentenceLine> CSentLineVector;
-typedef vector<CPartOfArc*>  CPartOfArcVector;
-typedef vector<int>	CIntVector;
-typedef pair<int, int>		CIntPair;
+typedef std::vector<CSentenceLine> CSentLineVector;
+typedef std::vector<CPartOfArc*>  CPartOfArcVector;
+typedef std::vector<int>	CIntVector;
+typedef std::pair<int, int>		CIntPair;
 
 
 
@@ -73,7 +73,7 @@ public:
 protected:
 	BOOL GetRightLegPointForGroupArc(int iGroupNum, CPoint* pPoint, int iWidth);
 	BOOL  GetLeftLegPointForGroupArc(int iGroupNum, CPoint* pPoint, int iWidth);
-	vector<CVisualGroup*> m_arrActiveGroups;
+	std::vector<CVisualGroup*> m_arrActiveGroups;
 	CPtrArray* m_pWordsArr;
 	int m_iMaxGroupLevel;
 	int m_iSpaceBetweenLinesG;
@@ -117,7 +117,7 @@ protected:
 
 	BOOL ReadWords(SYNANLib::ISentencePtr& piSentence);
 	BOOL ReadClauses(SYNANLib::ISentencePtr& piSentence);
-	vector<CVisualClause*> m_arrClauses;
+	std::vector<CVisualClause*> m_arrClauses;
 	CPtrArray m_arrWords;
 	int m_iMaxClauseGroupLevel;
 	int m_iMaxClausesLevel;
@@ -226,9 +226,9 @@ struct SHomNumAndGrammems
 class CVisualSynVariant 
 {
 public:
-	vector<SUnit> m_vectorUnits;
- 	vector<CVisualGroup> m_Groups;
-	vector<int>		   m_Subjects;
+	std::vector<SUnit> m_vectorUnits;
+ 	std::vector<CVisualGroup> m_Groups;
+	std::vector<int>		   m_Subjects;
 	int		   m_iPredk;		
 	int		   m_iClauseTypeNum;
 	int		   m_Weight;
@@ -246,7 +246,7 @@ public:
 
 	void InitClauseVariant(SYNANLib::IClausePtr& piClause, int ClauseVariantNo);
 
-	bool operator==(const vector<SUnit> vectorUnits) const
+	bool operator==(const std::vector<SUnit> vectorUnits) const
 	{
 		if( m_vectorUnits.size() != vectorUnits.size() )
 			return false;
@@ -309,7 +309,7 @@ public:
 	~CVisualClause();
 	BOOL InitVisualClause(SYNANLib::IClausePtr& piClause);
 	BOOL CalculateClauseGroupCoordinates(CDC* pDC,int iWidth,BOOL bShowGroups, int& iLine);
-	BOOL FillActiveGroupsArray(BOOL bUseGroupID, map<int, int>& mapClauseNumTypeNum, int iClauseNum);
+	BOOL FillActiveGroupsArray(BOOL bUseGroupID, std::map<int, int>& mapClauseNumTypeNum, int iClauseNum);
 	
 	int GetMaxGroupLevel()
 		{ return m_iMaxGroupLevel; }
@@ -336,7 +336,7 @@ protected:
 	void  AssignGroupsLevel();
 	CString m_strConjsName;
 	int m_iArrActiveRelsCount;
-	vector<CVisualSynVariant> m_SynVars;
+	std::vector<CVisualSynVariant> m_SynVars;
 	CPtrArray m_arrTypes;
 	CUIntArray m_arrPresentSetOfHomonims;
 	CUIntArray m_arrPresentSetOfGroups;
@@ -367,7 +367,7 @@ public:
 	CString m_strPOS;
 	CString m_strSomeDescr;
 	CString m_strOborotsNum;
-	vector<int> m_OborotsNum;
+	std::vector<int> m_OborotsNum;
 	int m_iPradigmID;
 
 protected:
@@ -409,7 +409,7 @@ public:
 	CString m_strActiveGrammems;
 	int m_iClauseNo;
 	int m_ReferenceWordNo;
-	vector<int>	m_MainVerbs;
+	std::vector<int>	m_MainVerbs;
 
 protected:
 	BOOL m_bBold;
@@ -421,7 +421,7 @@ protected:
 CPartOfGrArc* NewGroupArcPart(long color, int line, CPoint start, CPoint end,ETypeFigure type, CRect rectForArc, BOOL has_descr, BOOL whole_arc);
 
 //this one is for qsort(...)
-int  AssignPeriodLevel(vector<CVisualGroup*>& pPeriodArr);
+int  AssignPeriodLevel(std::vector<CVisualGroup*>& pPeriodArr);
 bool PeriodsCompare_sort(const CVisualPeriod* pPeriod1, const CVisualPeriod* pPeriod2 );
 
 #endif //_VisualSentences

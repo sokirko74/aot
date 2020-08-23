@@ -44,7 +44,7 @@ struct CGrammarItem
 	std::string				m_Token;
 	CMorphPattern		m_MorphPattern;
 	
-	map<std::string, std::string> m_Attributes;
+	std::map<std::string, std::string> m_Attributes;
 	std::string				m_Source; 
 
 	//  an index in CWorkGrammar m_TokenListFiles

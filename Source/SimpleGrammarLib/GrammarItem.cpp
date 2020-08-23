@@ -205,7 +205,7 @@ std::string CGrammarItem::GetDumpString() const
 		return Format("'%s'",m_ItemStrId.c_str());
 
 	std::string Attributes;
-	for (map<std::string, std::string>::const_iterator it = m_Attributes.begin(); it != m_Attributes.end(); it++)
+	for (std::map<std::string, std::string>::const_iterator it = m_Attributes.begin(); it != m_Attributes.end(); it++)
 		Attributes += Format ("%s=%s ",it->first.c_str(),it->second.c_str());
 
 	if (!m_MorphPattern.m_GrmAttribute.empty())
@@ -378,7 +378,7 @@ std::string	CGrammarItem::toString() const
 	Result += m_MorphPattern.ToString();
 	Result += Format("%i %i %i %i\n", m_bGrammarRoot?1:0, m_bSynMain?1:0, m_bCanHaveManyHomonyms?1:0, (int)m_Register);
 
-	for (map<std::string, std::string>::const_iterator i =m_Attributes.begin();  i != m_Attributes.end(); i++)
+	for (std::map<std::string, std::string>::const_iterator i =m_Attributes.begin();  i != m_Attributes.end(); i++)
 		Result += Format(";%s %s", i->first.c_str(),i->second.c_str());
 	Result += ";\n";
 	Result += "]\n";
@@ -471,7 +471,7 @@ bool	CGrammarItem::HasAnyOfWorkingAttributes() const
 
 std::string CGrammarItem::GetFullFileName(const std::string& GrammarFileName) const
 {
-	map<std::string,std::string>::const_iterator it = m_Attributes.find("filename");
+	std::map<std::string,std::string>::const_iterator it = m_Attributes.find("filename");
 	if (it == m_Attributes.end())  return "";
 	return GetPathByFile(GrammarFileName)+it->second;
 };

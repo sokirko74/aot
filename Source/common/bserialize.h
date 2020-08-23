@@ -120,19 +120,19 @@ inline size_t restore_from_bytes(double &i, const BYTE *buf) {
 
 // ============== PAIR =====================
 template<class T>
-inline size_t get_size_in_bytes(const pair<T, T> &t) {
+inline size_t get_size_in_bytes(const std::pair<T, T> &t) {
     return get_size_in_bytes(t.first) * 2;
 };
 
 template<class T>
-inline size_t save_to_bytes(const pair<T, T> &t, BYTE *buf) {
+inline size_t save_to_bytes(const std::pair<T, T> &t, BYTE *buf) {
     buf += save_to_bytes(t.first, buf);
     buf += save_to_bytes(t.second, buf);
     return get_size_in_bytes(t);
 };
 
 template<class T>
-inline size_t restore_from_bytes(pair<T, T> &t, const BYTE *buf) {
+inline size_t restore_from_bytes(std::pair<T, T> &t, const BYTE *buf) {
     buf += restore_from_bytes(t.first, buf);
     buf += restore_from_bytes(t.second, buf);
     return get_size_in_bytes(t);
@@ -141,19 +141,19 @@ inline size_t restore_from_bytes(pair<T, T> &t, const BYTE *buf) {
 //
 // ============== PAIR =====================
 template<class T>
-inline size_t get_size_in_bytes(const pair<QWORD, T> &t) {
+inline size_t get_size_in_bytes(const std::pair<QWORD, T> &t) {
     return get_size_in_bytes(t.first) + get_size_in_bytes(t.second);
 };
 
 template<class T>
-inline size_t save_to_bytes(const pair<QWORD, T> &t, BYTE *buf) {
+inline size_t save_to_bytes(const std::pair<QWORD, T> &t, BYTE *buf) {
     buf += save_to_bytes(t.first, buf);
     buf += save_to_bytes(t.second, buf);
     return get_size_in_bytes(t);
 };
 
 template<class T>
-inline size_t restore_from_bytes(pair<QWORD, T> &t, const BYTE *buf) {
+inline size_t restore_from_bytes(std::pair<QWORD, T> &t, const BYTE *buf) {
     buf += restore_from_bytes(t.first, buf);
     buf += restore_from_bytes(t.second, buf);
     return get_size_in_bytes(t);
@@ -198,7 +198,7 @@ bool BinaryReadItem(FILE *fp, T &V) {
 }
 
 template<class T>
-void ReadVectorInner(FILE *fp, vector<T> &V, size_t Count) {
+void ReadVectorInner(FILE *fp, std::vector<T> &V, size_t Count) {
 #ifdef  WIN32
     if (_setmode( _fileno( fp ), _O_BINARY ) != _O_BINARY)
         throw CExpc(Format("ReadVectorInner: File is not opened in binary mode!"));
@@ -221,11 +221,11 @@ void ReadVectorInner(FILE *fp, vector<T> &V, size_t Count) {
             V.push_back(dummy);
         };
     }
-    catch (length_error &e) {
+    catch (std::length_error &e) {
         fprintf(stderr, "ReadVectorInner:length_error exception is caught: %s\n", e.what());
         throw;
     }
-    catch (exception &e) {
+    catch (std::exception &e) {
         fprintf(stderr, "ReadVectorInner: general std::exception is caught: %s\n", e.what());
         throw;
     };
@@ -233,7 +233,7 @@ void ReadVectorInner(FILE *fp, vector<T> &V, size_t Count) {
 };
 
 template<class T>
-void ReadVectorInner(ifstream &inputStream, vector<T> &V, size_t Count) {
+void ReadVectorInner(std::ifstream &inputStream, std::vector<T> &V, size_t Count) {
     try {
         T dummy;
         size_t size_of_t = get_size_in_bytes(dummy);
@@ -251,11 +251,11 @@ void ReadVectorInner(ifstream &inputStream, vector<T> &V, size_t Count) {
             V.push_back(dummy);
         };
     }
-    catch (length_error &e) {
+    catch (std::length_error &e) {
         fprintf(stderr, "ReadVectorInner:length_error exception is caught: %s\n", e.what());
         throw;
     }
-    catch (exception &e) {
+    catch (std::exception &e) {
         fprintf(stderr, "ReadVectorInner: general std::exception is caught: %s\n", e.what());
         throw;
     };
@@ -270,7 +270,7 @@ size_t GetSizeInBytes() {
 }
 
 template<class T>
-inline void ReadVector(const std::string &FileName, vector<T> &V) {
+inline void ReadVector(const std::string &FileName, std::vector<T> &V) {
     V.clear();
     file_off_t sz = FileSize(FileName.c_str());
 
@@ -302,7 +302,7 @@ bool BinaryWriteItem(FILE *fp, const T &V) {
 }
 
 template<class T>
-bool WriteVectorInner(FILE *fp, const vector<T> &V) {
+bool WriteVectorInner(FILE *fp, const std::vector<T> &V) {
 #ifdef  WIN32
     if (_setmode( _fileno( fp ), _O_BINARY ) != _O_BINARY)
     {
@@ -327,7 +327,7 @@ bool WriteVectorInner(FILE *fp, const vector<T> &V) {
 };
 
 template<class T>
-bool WriteVectorStream(std::ofstream& outp, const vector<T>& vec) {
+bool WriteVectorStream(std::ofstream& outp, const std::vector<T>& vec) {
     T dummy;
     size_t size_of_t = get_size_in_bytes(dummy);
 
@@ -343,10 +343,10 @@ bool WriteVectorStream(std::ofstream& outp, const vector<T>& vec) {
 
 
 template<class T>
-inline bool WriteVector(const std::string &FileName, const vector<T> &V) {
+inline bool WriteVector(const std::string &FileName, const std::vector<T> &V) {
     FILE *fp = fopen(FileName.c_str(), "wb");
     if (!fp) {
-        ErrorMessage("Cannot write vector to " + FileName);
+        ErrorMessage("Cannot write std::vector to " + FileName);
         return false;
     };
     bool b = WriteVectorInner(fp, V);

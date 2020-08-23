@@ -52,12 +52,12 @@ struct Valency {
 
 struct TreeNode;
 struct TreeNode{
-	vector<Valency>  Vals;
-	vector<TreeNode> SubItems;
-	vector<WORD> UnitNos;
+	std::vector<Valency>  Vals;
+	std::vector<TreeNode> SubItems;
+	std::vector<WORD> UnitNos;
 
 
-	bool operator==(const vector<Valency>& _Vals) const
+	bool operator==(const std::vector<Valency>& _Vals) const
 			{return Vals == _Vals; }
 
 	bool operator==(const TreeNode& X) const
@@ -74,7 +74,7 @@ struct TreeNode{
 
 
 	
-    static void Normalize (CHierarchyHolder& D, vector<Valency>& V) 
+    static void Normalize (CHierarchyHolder& D, std::vector<Valency>& V) 
 	{
 		/*for (size_t i = 0; i < V.size(); i++)
 			V[i].ValNo = D.GetTopmostWork(V[i].ValNo);*/
@@ -94,8 +94,8 @@ struct TreeNode{
 
 	bool IsEqualWithHiera (CHierarchyDoc& D, TreeNode& N)
 	{
-		vector<Valency> V1  = Vals;
-		vector<Valency> V2  = N.Vals;
+		std::vector<Valency> V1  = Vals;
+		std::vector<Valency> V2  = N.Vals;
 		Normalize(D, V1);
 		Normalize(D, V2);
 		return V1 == V2;
@@ -173,9 +173,9 @@ public:
 	CMenu m_Menu;
 	enum SortType {SortByLemma, SortByDateAndTime};
 	SortType m_Sorted;
-	vector <CRossDevTermin> m_Termins;
+	std::vector <CRossDevTermin> m_Termins;
 
-	vector<CIndex> m_Index;
+	std::vector<CIndex> m_Index;
 	void BuildIndex();
 	void UpdateIndex();
 
@@ -237,7 +237,7 @@ public:
 	void SetCursor (int i);
 	CDocument* FindArticle (WORD UnitNo);
 	bool       SetArticle(WORD UnitNo, CString Value);
-	void       BuildVals (vector<Valency>& Vals, WORD UnitNo);
+	void       BuildVals (std::vector<Valency>& Vals, WORD UnitNo);
 	bool       PocketAndArticleDocTempalteAreEmpty();
 	void	   UpdateCurrentPos();
 	void	   SaveRossToTxt(CString FileName) const;

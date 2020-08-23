@@ -73,10 +73,10 @@ import "ocidl.idl";
 		/*! load a file into graphematics*/
 		[id(13), helpstring("method LoadFileToGraphan")] HRESULT LoadFileToGraphan([in] BSTR CommandLine);
 
-		/*! load a string into graphematics*/
+		/*! load a std::string into graphematics*/
 		[id(14), helpstring("method LoadStringToGraphan")] HRESULT LoadStringToGraphan([in] BSTR Buffer);
 
-		/*! true, if  a file or s string was loaded into the module*/
+		/*! true, if  a file or s std::string was loaded into the module*/
 		[propget, id(15), helpstring("property IsTableLoaded")] HRESULT IsTableLoaded([out, retval] BOOL *pVal);
 
 		/*! get the number of lines in the graphematical table*/
@@ -88,12 +88,12 @@ import "ocidl.idl";
 		/*! true, if a line index <a> LineNo</a> in the graphematical table contains descriptor <a>D</a> */
 		[id(16), helpstring("method HasDescr")] HRESULT HasDescr([in] UINT LineNo, [in]UINT D, [retval, out] BOOL* result);
 
-		/*! get a string representation of a graphematical descriptor*/		
+		/*! get a std::string representation of a graphematical descriptor*/		
 		[id(19), helpstring("method GetDescriptorStr")] HRESULT GetDescriptorStr([in] UINT DescriptorNo, [retval, out] BSTR* result);
 
 		[id(20), helpstring("method GetRubiconTypeStr")] HRESULT GetRubiconTypeStr([in]UINT RubiconTypeNo, [retval, out] BSTR* result);
 
-		/*! get a string representation of row LineNo from the graphematical table*/		
+		/*! get a std::string representation of row LineNo from the graphematical table*/		
 		[id(21), helpstring("method GetLine")] HRESULT GetLine([in] UINT LineNo, [retval, out] BSTR* result);
 
 		/*! get a oborot index that starts from LineNo, -1 if there is no oborots*/		

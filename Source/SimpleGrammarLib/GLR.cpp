@@ -10,7 +10,7 @@ CGLRParser::CGLRParser()
 
 /*
   create a state node v0 labelled with the start state 0 of DFA 
-  set the first input related closure set be  {v0}, 
+  std::set the first input related closure std::set be  {v0}, 
 	  m_ActiveNodes = 0
 	  m_PendingShifts = 0
 	  m_PendingReductions = 0
@@ -50,7 +50,7 @@ void CGLRParser :: InitGLRParser(const CGLRTable*	pTable)
    }
 */
 //void CGLRParser::Actor(size_t SymbolNo)
-void CGLRParser::Actor(const set<CInputSymbol>& Symbols)
+void CGLRParser::Actor(const std::set<CInputSymbol>& Symbols)
 {
 	assert (!m_ActiveNodes.empty());
 	size_t StateNodeNo = *m_ActiveNodes.begin();
@@ -59,7 +59,7 @@ void CGLRParser::Actor(const set<CInputSymbol>& Symbols)
 
 	//assert (Node.m_StateNo < m_pTable->m_Table.size());
 
-	for (set<CInputSymbol>::const_iterator it = Symbols.begin(); it != Symbols.end(); it++)
+	for (std::set<CInputSymbol>::const_iterator it = Symbols.begin(); it != Symbols.end(); it++)
 	{
 		const CInputSymbol& Symbol = *it;
 		const CSLRCellWork& Cell = m_pTable->GetCell(Node.m_StateNo, Symbol.m_GrammarSymbolNo); 
@@ -120,7 +120,7 @@ bool CGLRParser::HasPathOfLengthTwo(int SourceNodeNo, const CSymbolNode& Between
 
 
 /*
- this function creates or re-uses a  node which should be in the current input related closure set 
+ this function creates or re-uses a  node which should be in the current input related closure std::set 
  and which should have StateNo associated with it.
  Return Value: 
 	NewNodeNo - the number of the result node
@@ -131,10 +131,10 @@ bool CGLRParser::CreateOrReuseStateNode(int StateNo, size_t& NewNodeNo)
 	assert (!m_InputLevels.empty());
 
 	if (m_bRobust)
-		// if m_bRobust, then the root is included into the active  nodes set,
+		// if m_bRobust, then the root is included into the active  nodes std::set,
 		//  if the root (m_StateNodes[0]) is included, we should first check whether
 		// we can reuse it, we should do it specially, because 
-		// the cycle which goes through the current input related closure set  doesn't include the root
+		// the cycle which goes through the current input related closure std::set  doesn't include the root
 		if (m_StateNodes[0].m_StateNo == StateNo)
 		{
 			NewNodeNo = 0;
@@ -156,7 +156,7 @@ bool CGLRParser::CreateOrReuseStateNode(int StateNo, size_t& NewNodeNo)
 	return true;
 };
 
-inline CSymbolNode& CGLRParser::GetNodeFromPath(const vector<size_t>& Path, size_t RuleItemNo)
+inline CSymbolNode& CGLRParser::GetNodeFromPath(const std::vector<size_t>& Path, size_t RuleItemNo)
 {
 	assert (RuleItemNo > 0);  // 0 is reserved for the left-handed part
 	size_t idx = Path.size()-RuleItemNo*2;
@@ -166,11 +166,11 @@ inline CSymbolNode& CGLRParser::GetNodeFromPath(const vector<size_t>& Path, size
 	return m_SymbolNodes[NodeNo];
 };
 
-bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const vector<size_t>& Path, CSymbolNode& Node)
+bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const std::vector<size_t>& Path, CSymbolNode& Node)
 {
 	const CGLRRuleInfo& Rule = *Reduction.m_pReduceRule;
 	const CWorkGrammar& Grammar = *m_pTable->m_pWorkGrammar;
-	const vector<CRuleFeature>&  Features = Grammar.m_RuleFeatures[Rule.m_RuleFeaturesNo];
+	const std::vector<CRuleFeature>&  Features = Grammar.m_RuleFeatures[Rule.m_RuleFeaturesNo];
 	size_t  PathSize = Path.size();
 
 	// by default copy all properties from the root child
@@ -280,8 +280,8 @@ bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const ve
 	{
 		let k be the label of the w( = "ChildNode.m_StateNo")
 		let "goto l" be the entry in position (k, LeftPart) in the parsing table (="Cell.m_GotoLine")
-		if there is no node in the last input related closure set labeled l then 
-		  create a new state node in the GSS labelled l and  add it to  the last input related closure set
+		if there is no node in the last input related closure std::set labeled l then 
+		  create a new state node in the GSS labelled l and  add it to  the last input related closure std::set
 										and to m_ActiveNodes
 		let  v be the node in the last input related closure labelled l (==NewNodeNo)
 		if there is a path of length 2  in the GSS from v to w then do nothing
@@ -300,7 +300,7 @@ bool CGLRParser::GetGrammarFeatures(const CPendingReduction& Reduction, const ve
 */
 
 
-void CGLRParser::ReduceOnePath(const set<CInputSymbol>& Symbols, const CPendingReduction& Reduction, const vector<size_t>& Path)
+void CGLRParser::ReduceOnePath(const std::set<CInputSymbol>& Symbols, const CPendingReduction& Reduction, const std::vector<size_t>& Path)
 {
 	const size_t RuleLength = Reduction.m_pReduceRule->m_RuleLength;
 	const size_t LeftPart  = Reduction.m_pReduceRule->m_LeftPart;
@@ -350,7 +350,7 @@ void CGLRParser::ReduceOnePath(const set<CInputSymbol>& Symbols, const CPendingR
 		*/
 		if (m_ActiveNodes.find(NewStateNodeNo) == m_ActiveNodes.end())
 		{
-			for (set<CInputSymbol>::const_iterator it = Symbols.begin(); it != Symbols.end(); it++)			
+			for (std::set<CInputSymbol>::const_iterator it = Symbols.begin(); it != Symbols.end(); it++)			
 			{
 				const CInputSymbol& Symbol = *it;
 				const CSLRCellWork& C = m_pTable->GetCell(Cell.m_GotoLine, Symbol.m_GrammarSymbolNo);
@@ -394,7 +394,7 @@ void CGLRParser::ReduceOnePath(const set<CInputSymbol>& Symbols, const CPendingR
 // 2. otherwise  we go to the neighbour or to the parent's neighbour of the current top, if a neighbour doesn't exist
 
 //void CGLRParser::Reducer(size_t SymbolNo)
-void CGLRParser::Reducer(const set<CInputSymbol>& Symbols)
+void CGLRParser::Reducer(const std::set<CInputSymbol>& Symbols)
 {
 	
 	assert (!m_PendingReductions.empty());
@@ -404,8 +404,8 @@ void CGLRParser::Reducer(const set<CInputSymbol>& Symbols)
 	m_PendingReductions.erase(m_PendingReductions.begin());
 	size_t RuleLength = Reduction.m_pReduceRule->m_RuleLength;
 	
-	vector< size_t > Path;
-	vector< size_t > Starts;
+	std::vector< size_t > Path;
+	std::vector< size_t > Starts;
 	{
 		// adding the first item of the DFS-stack
 		Path.push_back(Reduction.m_LastStateNodeNo);
@@ -428,7 +428,7 @@ void CGLRParser::Reducer(const set<CInputSymbol>& Symbols)
 			ReduceOnePath(Symbols, Reduction, Path);
 		};
 
-		const vector<size_t>& children = (Path.size()%2==0) ? m_SymbolNodes[d].m_NodeChildren : m_StateNodes[d].m_SymbolChildren;
+		const std::vector<size_t>& children = (Path.size()%2==0) ? m_SymbolNodes[d].m_NodeChildren : m_StateNodes[d].m_SymbolChildren;
 		if	(		(Path.size() <= 2*RuleLength )
 				&&	!children.empty() 
 			)
@@ -441,7 +441,7 @@ void CGLRParser::Reducer(const set<CInputSymbol>& Symbols)
 			while (Path.size () > 1)
 			{
 				d = Path.back();
-				const vector<size_t>& curr_children = (Path.size()%2==0) ? m_SymbolNodes[d].m_NodeChildren : m_StateNodes[d].m_SymbolChildren;
+				const std::vector<size_t>& curr_children = (Path.size()%2==0) ? m_SymbolNodes[d].m_NodeChildren : m_StateNodes[d].m_SymbolChildren;
 
 				Starts.back()++;
 				if (Starts.back() < curr_children.size())
@@ -473,7 +473,7 @@ void CGLRParser::Reducer(const set<CInputSymbol>& Symbols)
 
 */
 
-void CGLRParser::Shifter(const set<CInputSymbol>& Symbols)
+void CGLRParser::Shifter(const std::set<CInputSymbol>& Symbols)
 {
 	
 	while (!m_PendingShifts.empty())
@@ -491,7 +491,7 @@ void CGLRParser::Shifter(const set<CInputSymbol>& Symbols)
 
 		// == if w does not have a successor mode,u, labelled SymbolNo create one
 		
-		vector<size_t>::const_iterator it = Node.m_SymbolChildren.begin();
+		std::vector<size_t>::const_iterator it = Node.m_SymbolChildren.begin();
 		for (; it != Node.m_SymbolChildren.end(); it++)
 			if ( m_SymbolNodes[*it].m_Symbol == *Shift.m_pSymbol  )
 				break;
@@ -539,7 +539,7 @@ std::string CGLRParser::GetDotStringOfSymbolNode(size_t SymbolNodeNo) const
 
 	for (size_t i=0; i<C.m_ParseChildren.size(); i++)
 	{
-		const vector<size_t>& v = C.m_ParseChildren[i].m_Items;
+		const std::vector<size_t>& v = C.m_ParseChildren[i].m_Items;
 		bool bFound = false;		
 		std::string CurrentResult;
 		for (size_t j=0; j < v.size(); j++)
@@ -588,7 +588,7 @@ size_t CGLRParser::GetNumberOfClosureSet(size_t StateNodeNo) const
 std::string CGLRParser::GetDotStringOfStack(bool bShowStates) const
 {
 	std::string Result = "digraph G {\n";
-	int size = max(m_SymbolNodes.size(), (size_t)10);
+	int size = std::max(m_SymbolNodes.size(), (size_t)10);
 	Result += Format("size = \"%i.0,%i.0\";\n", size, size);
 
 
@@ -646,23 +646,23 @@ bool	CGLRParser::HasGrammarRootAtStart() const
 	return false;
 };
 
-void CGLRParser::GetParseNodesRecursiveWithoutSyntaxAmbiguity(size_t SymbolNodeNo, vector<size_t>& Nodes, bool bShouldBeLeaf) const
+void CGLRParser::GetParseNodesRecursiveWithoutSyntaxAmbiguity(size_t SymbolNodeNo, std::vector<size_t>& Nodes, bool bShouldBeLeaf) const
 {
 
 	if (bShouldBeLeaf ==  m_SymbolNodes[SymbolNodeNo].m_ParseChildren.empty())
 		Nodes.push_back(SymbolNodeNo);
 
-	//  we get only the first children set, since the  input coverage doesn't depend upon 
+	//  we get only the first children std::set, since the  input coverage doesn't depend upon 
 	// the "children ambiguity"
 	if (!m_SymbolNodes[SymbolNodeNo].m_ParseChildren.empty())
 	{
-		const vector<size_t>& v = m_SymbolNodes[SymbolNodeNo].m_ParseChildren[0].m_Items;
+		const std::vector<size_t>& v = m_SymbolNodes[SymbolNodeNo].m_ParseChildren[0].m_Items;
 		for (size_t j=0; j < v.size(); j++)
 			GetParseNodesRecursiveWithoutSyntaxAmbiguity(v[j], Nodes, bShouldBeLeaf);
 	};
 };
 
-void CGLRParser::GetParseNodesRecursive(size_t SymbolNodeNo, vector< set<size_t> >& Nodes, bool bShouldBeLeaf, size_t  RootInputStart) const
+void CGLRParser::GetParseNodesRecursive(size_t SymbolNodeNo, std::vector< std::set<size_t> >& Nodes, bool bShouldBeLeaf, size_t  RootInputStart) const
 {
 	assert (!Nodes.empty() );
 
@@ -673,7 +673,7 @@ void CGLRParser::GetParseNodesRecursive(size_t SymbolNodeNo, vector< set<size_t>
 
 	for (size_t i=0; i< Node.m_ParseChildren.size(); i++)
 	{
-		const vector<size_t>& v = Node.m_ParseChildren[i].m_Items;
+		const std::vector<size_t>& v = Node.m_ParseChildren[i].m_Items;
 
 		for (size_t j=0; j < v.size(); j++)
 		{
@@ -695,7 +695,7 @@ size_t CGLRParser::GetMainWordRecursive(size_t SymbolNodeNo)  const
 	//  it should be called only for non-terminals
 	assert (!S.m_ParseChildren.empty());
 
-	// we take into account only the first children set, since the next sets doesn't have an impact on the longest match algorithm
+	// we take into account only the first children std::set, since the next sets doesn't have an impact on the longest match algorithm
 	const CParsingChildrenSet&  Set = S.m_ParseChildren[0];
 	const CGLRRuleInfo* pRule = Set.m_ReduceRule; 
 	assert(pRule);
@@ -714,11 +714,11 @@ size_t CGLRParser::GetMainWordRecursive(size_t SymbolNodeNo)  const
 
 
 
-bool CGLRParser::ParseSymbol(const set<CInputSymbol>& Symbols)
+bool CGLRParser::ParseSymbol(const std::set<CInputSymbol>& Symbols)
 {
 	m_ActiveNodes.clear();
 //	DumpParser(true);
-	//  copying from previous input-related closure set to the current actve nodes set
+	//  copying from previous input-related closure std::set to the current actve nodes std::set
 	assert (m_StateNodes.size() == m_InputLevels.back());
 	size_t start = 0;
 	if (m_InputLevels.size() > 1)
@@ -745,10 +745,10 @@ bool CGLRParser::ParseSymbol(const set<CInputSymbol>& Symbols)
 		}
 	};
 
-	//  finish current input related closure set
+	//  finish current input related closure std::set
 	m_InputLevels.back() = m_StateNodes.size();
 
-	// add a new one input related closure set
+	// add a new one input related closure std::set
 	m_InputLevels.push_back( m_StateNodes.size() );
 
 

@@ -51,7 +51,7 @@ protected :
 	int i_content;
    /// double content
 	double d_content;
-   /// node set content
+   /// node std::set content
    node_set ns_set;
 
 public :
@@ -109,13 +109,13 @@ public :
 		e_type = e_int;
 		i_content = i_in;
 	}
-   /// Set expression_result to a string
+   /// Set expression_result to a std::string
 	void v_set_string (const char * cp_in)
 	{
 		e_type = e_string;
 		S_content = cp_in;
 	}
-   /// Set expression_result to a string
+   /// Set expression_result to a std::string
 	void v_set_string (TIXML_STRING S_in)
 	{
 		e_type = e_string;
@@ -136,7 +136,7 @@ public :
 	}
 	int i_get_int ();
 	TIXML_STRING S_get_string ();
-   /// Get the expression_result as a string
+   /// Get the expression_result as a std::string
 	const char * cp_get_string ()
 	{
 		assert (e_type == e_string);
@@ -144,42 +144,42 @@ public :
 	}	
 	bool o_get_bool ();
 	double d_get_double ();
-   /// Set the expression_result as a node set
+   /// Set the expression_result as a node std::set
 	void v_set_node_set (node_set * nsp_source)
 	{
 		e_type = e_node_set;
       ns_set = * nsp_source;
 	}
-   /// Set the expression_result as a node set
+   /// Set the expression_result as a node std::set
 	void v_set_node_set (TiXmlNode * XNp_root)
 	{
 		e_type = e_node_set;
       ns_set . v_copy_node_children (XNp_root);
 	}
-   /// Set the expression_result as a node set
+   /// Set the expression_result as a node std::set
 	void v_set_node_set (TiXmlNode * XNp_root, const char * cp_lookup)
 	{
 		e_type = e_node_set;
       ns_set . v_copy_node_children (XNp_root, cp_lookup);
 	}
-   /// Set the expression_result as a node set
+   /// Set the expression_result as a node std::set
 	void v_set_node_set_recursive (TiXmlNode * XNp_root)
 	{
 		e_type = e_node_set;
       ns_set . v_copy_selected_node_recursive (XNp_root);
 	}
-   /// Set the expression_result as a node set
+   /// Set the expression_result as a node std::set
 	void v_set_node_set_recursive (TiXmlNode * XNp_root, const char * cp_lookup)
 	{
 		e_type = e_node_set;
       ns_set . v_copy_selected_node_recursive (XNp_root, cp_lookup);
 	}
-   /// Set the expression_result as an empty node set
+   /// Set the expression_result as an empty node std::set
 	void v_set_node_set ()
    {
       e_type = e_node_set;
    }
-   /// Get the expression_result as a node set
+   /// Get the expression_result as a node std::set
    node_set * nsp_get_node_set ()
    {
       return & ns_set;

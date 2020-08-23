@@ -384,11 +384,11 @@ void   TRoss::ClearUnit(WORD UnitNo)
 
 
 
-void  TRoss::DelUnit(vector<CStructEntry>::iterator It)
+void  TRoss::DelUnit(std::vector<CStructEntry>::iterator It)
 {
 	if (!It->HasEmptyArticle())
 		DelCorteges(It->m_StartCortegeNo, It->m_LastCortegeNo + 1);
-	vector<TUnitComment>::iterator C = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(It->m_EntryId));
+	std::vector<TUnitComment>::iterator C = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(It->m_EntryId));
 	assert(C->m_EntryId == It->m_EntryId);
 	m_UnitComments.erase(C);
 	m_Units.erase(It);
@@ -397,7 +397,7 @@ void  TRoss::DelUnit(vector<CStructEntry>::iterator It)
 WORD TRoss::LocateUnit(const char* EntryStr, int MeanNum) const
 {
 	CStructEntry T(EntryStr, MeanNum);
-	vector<CStructEntry>::const_iterator It = lower_bound(m_Units.begin(), m_Units.end(), T);
+	std::vector<CStructEntry>::const_iterator It = lower_bound(m_Units.begin(), m_Units.end(), T);
 	if (It == m_Units.end()) return ErrUnitNo;
 	if (!(T == *It)) return ErrUnitNo;
 	return It - m_Units.begin();
@@ -429,7 +429,7 @@ WORD	TRoss::GetSelectedUnitsSize() const
 
 WORD    TRoss::InsertUnit(CStructEntry& T)
 {
-	vector<CStructEntry>::iterator It = lower_bound(m_Units.begin(), m_Units.end(), T);
+	std::vector<CStructEntry>::iterator It = lower_bound(m_Units.begin(), m_Units.end(), T);
 	T.m_EntryId = (m_UnitComments.size() == 0) ? 1 : m_UnitComments[m_UnitComments.size() - 1].m_EntryId + 1;
 	WORD res = It - m_Units.begin();
 	m_Units.insert(It, T);
@@ -568,7 +568,7 @@ WORD    TRoss::InsertUnitComment(WORD EntryId)
 	try {
 		TUnitComment C;
 		C.m_EntryId = EntryId;
-		vector<TUnitComment>::iterator Ic = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), C);
+		std::vector<TUnitComment>::iterator Ic = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), C);
 		WORD No = Ic - m_UnitComments.begin();
 		m_UnitComments.insert(Ic, C);
 		return No;
@@ -582,7 +582,7 @@ WORD    TRoss::InsertUnitComment(WORD EntryId)
 
 TUnitComment* TRoss::GetCommentsByUnitId(WORD EntryId)
 {
-	vector<TUnitComment>::iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
+	std::vector<TUnitComment>::iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
 	assert((It != m_UnitComments.end())
 		&& (It->m_EntryId == EntryId)
 	);
@@ -591,7 +591,7 @@ TUnitComment* TRoss::GetCommentsByUnitId(WORD EntryId)
 
 const TUnitComment* TRoss::GetCommentsByUnitId(WORD EntryId)   const
 {
-	vector<TUnitComment>::const_iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
+	std::vector<TUnitComment>::const_iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
 	assert((It != m_UnitComments.end())
 		&& (It->m_EntryId == EntryId)
 	);
@@ -609,12 +609,12 @@ bool   TRoss::BuildCorteges()
 	return true;
 }
 
-bool TRoss::UpdateSignatsOfTheFieldInCorteges(BYTE FieldNo, vector<CSignat>& Signats)
+bool TRoss::UpdateSignatsOfTheFieldInCorteges(BYTE FieldNo, std::vector<CSignat>& Signats)
 {
 	for (size_t j = 0; j < _GetCortegesSize(); j++)
 		if (GetCortege(j)->m_FieldNo == FieldNo)
 		{
-			vector<CSignat>::iterator it = find(Signats.begin(), Signats.end(), Fields[FieldNo].m_Signats[GetCortege(j)->GetSignatNo()]);
+			std::vector<CSignat>::iterator it = find(Signats.begin(), Signats.end(), Fields[FieldNo].m_Signats[GetCortege(j)->GetSignatNo()]);
 
 			GetCortege(j)->SetSignatNo(it - Signats.begin());
 			if (GetCortege(j)->GetSignatNo() == Fields[FieldNo].m_Signats.size())
@@ -654,7 +654,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE Sig
 	int CurrItemNo = 0;
 	CSignat& Sgn = Fields[C.m_FieldNo].m_Signats[SignatNo];
 
-	vector<TItemStr> ItemStrVec;
+	std::vector<TItemStr> ItemStrVec;
 	const char* q = s;
 
 	int i = 0;
@@ -888,7 +888,7 @@ bool   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo, int& ItemNo)
 	D.SetDomNo(DomNo);
 	D.SetItemStrLen((BYTE)strlen(ItemStr));
 	D.SetItemStrNo(m_Domens[D.GetDomNo()].AddItem(ItemStr, D.GetItemStrLen()));
-	vector<TDomItem>::iterator It = lower_bound(m_DomItems.begin(), m_DomItems.end(), D, IsLessByItemStrNew(this));
+	std::vector<TDomItem>::iterator It = lower_bound(m_DomItems.begin(), m_DomItems.end(), D, IsLessByItemStrNew(this));
 	ItemNo = (int)(It - m_DomItems.begin());
 	if (m_Domens[DomNo].IsEmpty())
 	{
@@ -1138,7 +1138,7 @@ TUnitComment::TUnitComment(int _UnitId)
 CDictionary::CDictionary() : TRoss(3)
 {
 }
-vector<CStructEntry>& CDictionary::GetUnits()
+std::vector<CStructEntry>& CDictionary::GetUnits()
 {
 	return m_Units;
 };
@@ -1237,7 +1237,7 @@ bool IsRubicon(const std::string& S)
 }
 
 
-bool FindRubicon(vector<CSourceLine>& L, size_t& pos)
+bool FindRubicon(std::vector<CSourceLine>& L, size_t& pos)
 {
 	while ((pos < L.size())
 		&& (!IsRubicon(L[pos].m_Line))
@@ -1247,7 +1247,7 @@ bool FindRubicon(vector<CSourceLine>& L, size_t& pos)
 	return pos < L.size();
 }
 
-void DeleteEmptyLines(vector<CSourceLine>& L)
+void DeleteEmptyLines(std::vector<CSourceLine>& L)
 {
 	for (int i = 0; i < L.size(); )
 	{
@@ -1259,7 +1259,7 @@ void DeleteEmptyLines(vector<CSourceLine>& L)
 	};
 };
 
-int NumArt(vector<CSourceLine>& L)
+int NumArt(std::vector<CSourceLine>& L)
 {
 	int Res = 0;
 
@@ -1282,7 +1282,7 @@ bool GetValue(std::string Pair, std::string FldName, std::string& Value)
 };
 
 
-void CutComments(vector<CSourceLine>& L)
+void CutComments(std::vector<CSourceLine>& L)
 {
 	for (size_t i = 0; i < L.size(); i++)
 	{
@@ -1306,7 +1306,7 @@ bool CDictionary::ImportFromText(std::string FileName, int StartEntry, std::stri
 {
 	Messages = "";
 
-	vector<CSourceLine> L;
+	std::vector<CSourceLine> L;
 	{
 		FILE* fp = fopen(FileName.c_str(), "r");
 		if (!fp)
@@ -1359,7 +1359,7 @@ bool CDictionary::ImportFromText(std::string FileName, int StartEntry, std::stri
 }
 
 
-bool CDictionary::ProcessOneArticle(vector<CSourceLine>& L, int start, int last, std::string& Messages)
+bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int last, std::string& Messages)
 {
 	size_t RealStart = start;
 	if (L.size() == 1) return false;

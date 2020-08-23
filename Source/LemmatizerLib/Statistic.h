@@ -8,12 +8,12 @@
 #include "../common/utilit.h"
 
 typedef troika<int, int, int>	_homonode_t;		 
-typedef pair<int, int>		_statnode_t; 
+typedef std::pair<int, int>		_statnode_t; 
 
 class CStatistic  
 {
-	vector<_statnode_t>			m_WordWeights;
-	vector<_homonode_t>			m_HomoWeights;
+	std::vector<_statnode_t>			m_WordWeights;
+	std::vector<_homonode_t>			m_HomoWeights;
 public:
 	void	Load(const std::string& path);
 	int		get_HomoWeight(int paradigmid, int form) const;

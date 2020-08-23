@@ -269,7 +269,7 @@ bool CSentence::ProcessGrammarModels() {
 
 
 /*
-	This function builds vector  vector<CSimpleGroup>;:m_SimpleGroups;
+	This function builds std::vector  std::vector<CSimpleGroup>;:m_SimpleGroups;
 	Each group consists of two pointers to a word and  an name.
 */
 bool BuildAuxSimpleGroups(CSentence &S) {
@@ -572,13 +572,13 @@ void CSentence::AssignClauseNoToWords() {
 
 
 void CSentence::CalculatePrimitiveClausesCount() {
-    map<int, int> map_cl;
+    std::map<int, int> map_cl;
 
     if (m_vectorPrClauseNo.size() > 0)
         return;
     for (int i = 0; i < m_Words.size(); i++) {
-        pair<map<int, int>::iterator, bool> ret;
-        ret = map_cl.insert(map<int, int>::value_type(m_Words[i].m_iClauseNo, 0));
+        std::pair<std::map<int, int>::iterator, bool> ret;
+        ret = map_cl.insert(std::map<int, int>::value_type(m_Words[i].m_iClauseNo, 0));
         if (ret.second)
             m_vectorPrClauseNo.push_back(m_Words[i].m_iClauseNo);
     }
@@ -698,13 +698,13 @@ bool CSentence::EncloseClauseAsWord(int iWhat, int iWhere) {
 
     if (GladkijPeriodLess(*pPrimWhere, *pPrimWhat)) {
         PeriodPrimWhere.m_iLastWord = pPrimWhat->m_iLastWord;
-        vector<int> Parents;
+        std::vector<int> Parents;
         GetClausesByLastWord(Parents, pPrimWhere);
         for (int i = 0; i < Parents.size(); i++)
             m_Clauses[Parents[i]].m_iLastWord = pPrimWhat->m_iLastWord;
     } else {
         PeriodPrimWhere.m_iFirstWord = pPrimWhat->m_iFirstWord;
-        vector<int> Parents;
+        std::vector<int> Parents;
         GetClausesByFirstWord(Parents, pPrimWhere);
         for (int i = 0; i < Parents.size(); i++)
             m_Clauses[Parents[i]].m_iFirstWord = pPrimWhat->m_iFirstWord;
@@ -858,8 +858,8 @@ struct CPeriodAndRuleNo {
     };
 };
 
-void CSentence::OneRunOfClauseRules(const vector<CClauseRule> &ListOfRules) {
-    set<CPeriodAndRuleNo> AlreadyRunRuleForThisClause;
+void CSentence::OneRunOfClauseRules(const std::vector<CClauseRule> &ListOfRules) {
+    std::set<CPeriodAndRuleNo> AlreadyRunRuleForThisClause;
     IsValid();
 
     TraceClauses();
@@ -973,10 +973,10 @@ CClause &CSentence::UniteClauses(int iLeftClause, int iRightClause, ParametersSo
     else
         CopyParametersFromRight(newClause, pOldClauseL, pOldClauseR);
 
-    vector<int> LeftParents;
+    std::vector<int> LeftParents;
     GetClausesByLastWord(LeftParents, pOldClauseL);
 
-    vector<int> RightParents;
+    std::vector<int> RightParents;
     GetClausesByFirstWord(RightParents, pOldClauseR);
 
 
@@ -991,7 +991,7 @@ CClause &CSentence::UniteClauses(int iLeftClause, int iRightClause, ParametersSo
     // поскольку одна правая клауза  идет сразу за левой.
     assert ((LeftParents.size() == 1) || (RightParents.size() == 1));
 
-    vector<CPeriod> changed_clauses;
+    std::vector<CPeriod> changed_clauses;
 
     changed_clauses.push_back(newClause);
 
@@ -1075,8 +1075,8 @@ bool CSentence::IsInNonAtomicOborPairs(int iW) const {
 
 
 int CSentence::GetCoordConjNo(const char *WordUpper) const {
-    const vector<CCoordConjType> &C = GetOpt()->GetOborDic()->GetCoordConjs();
-    vector<CCoordConjType>::const_iterator it = find(C.begin(), C.end(), WordUpper);
+    const std::vector<CCoordConjType> &C = GetOpt()->GetOborDic()->GetCoordConjs();
+    std::vector<CCoordConjType>::const_iterator it = find(C.begin(), C.end(), WordUpper);
     if (it == C.end())
         return -1;
     else

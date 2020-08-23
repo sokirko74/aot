@@ -26,7 +26,7 @@ struct CBigramAndFreq {
 
 
 class CBigrams {
-    vector<CBigramsWordInfo> m_Word2Infos;
+    std::vector<CBigramsWordInfo> m_Word2Infos;
     FILE *m_Bigrams;
     FILE *m_BigramsRev;
     // РїРѕРєР° РІС‹С‡РёСЃР»СЏРµРј С‚РѕР»СЊРєРѕ РєРѕРЅС‚Р°РєС‚РЅС‹Рµ Р±РёРіСЂР°РјРјС‹,
@@ -44,7 +44,7 @@ public:
 
     bool Initialize(std::string BigramsFileName);
 
-    vector<CBigramAndFreq> GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq);
+    std::vector<CBigramAndFreq> GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq);
 };
 
 static CBigrams GlobalBigrams;
@@ -127,14 +127,14 @@ bool CBigrams::Initialize(std::string BigramsFileName) {
     return true;
 }
 
-vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq) {
+std::vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigramsFreq, bool bDirectFile, size_t &WordFreq) {
     WordFreq = 0;
-    vector<CBigramAndFreq> Result;
+    std::vector<CBigramAndFreq> Result;
     if (!m_Bigrams) return Result;
     if (!m_BigramsRev) return Result;
     EngRusMakeUpper(Word);
     // find word in the index
-    vector<CBigramsWordInfo>::const_iterator it = lower_bound(m_Word2Infos.begin(), m_Word2Infos.end(), Word,
+    std::vector<CBigramsWordInfo>::const_iterator it = lower_bound(m_Word2Infos.begin(), m_Word2Infos.end(), Word,
                                                               IsLessBigramsWordInfo());
     if (it == m_Word2Infos.end()) return Result;
     if (it->m_Word != Word) return Result;
@@ -153,7 +153,7 @@ vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigramsFreq
     if (fseek(big_fp, fpos, SEEK_SET)) {
         return Result;
     }
-    vector<CBigramInfo > Bigrams;
+    std::vector<CBigramInfo > Bigrams;
     ReadVectorInner(big_fp, Bigrams, size);
 
 
@@ -207,7 +207,7 @@ bool GreaterByBigramsFreq(const CBigramLine &_X1, const CBigramLine &_X2) {
 
 std::string GetConnectedWords(std::string Word, int MinBigramsFreq, bool bDirectFile, std::string sortMode, MorphLanguageEnum langua) {
     size_t WordFreq;
-    vector<CBigramLine> table;
+    std::vector<CBigramLine> table;
     for (auto &b : GlobalBigrams.GetBigrams(Word, MinBigramsFreq, bDirectFile, WordFreq)) {
         CBigramLine l;
         l.m_Word1 = convert_to_utf8(Word, langua);

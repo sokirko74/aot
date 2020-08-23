@@ -191,7 +191,7 @@ int main(int argc, const char **argv) {
                 t.Result = GetResultBySyntax(H.m_Synan, *H.m_pGramTab);
             }
         }
-        base.write_test_cases(args.GetOutputStream(), H.m_CurrentLanguage);
+        base.write_test_cases(args.GetOutputStream());
     }
     catch (...) {
         std::cerr << "an exception occurred!\n";

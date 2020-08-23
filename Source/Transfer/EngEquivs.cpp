@@ -9,12 +9,12 @@
 /////////////////////////////////////////////////////////////////////////////
 // ищет  в значениях поля  RUS словаря  type русский вход RusEquivToEngArticleNo,// все словарные статьи, которые содержат такое значение, помещаются в engEquivs
 
-bool CEngSemStructure::FindEnglishEquivHelper(vector<CEngInterp>& engEquivs,const CEngUnitNoToRusUnit RusEquivToEngArticleNo,DictTypeEnum type)
+bool CEngSemStructure::FindEnglishEquivHelper(std::vector<CEngInterp>& engEquivs,const CEngUnitNoToRusUnit RusEquivToEngArticleNo,DictTypeEnum type)
 {
 	bool bFlag = false;
 	bool bFound = false;
-	vector<CEngUnitNoToRusUnit>& equivs = m_pData->GetRusEquivIndexes(type);
-	vector<CEngUnitNoToRusUnit>::const_iterator iter = lower_bound(equivs.begin() , equivs.end(), RusEquivToEngArticleNo );
+	std::vector<CEngUnitNoToRusUnit>& equivs = m_pData->GetRusEquivIndexes(type);
+	std::vector<CEngUnitNoToRusUnit>::const_iterator iter = lower_bound(equivs.begin() , equivs.end(), RusEquivToEngArticleNo );
 	do
 	{
 		bFlag = (iter != equivs.end()) && (*iter == RusEquivToEngArticleNo);
@@ -36,7 +36,7 @@ bool CEngSemStructure::FindEnglishEquivHelper(vector<CEngInterp>& engEquivs,cons
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::FindEnglishEquiv(vector<CEngInterp>& engEquivs, const std::string& rus_lemma, BYTE MeanNum /* = 10*/, DictTypeEnum   EngDictType /* = Aoss*/)
+void CEngSemStructure::FindEnglishEquiv(std::vector<CEngInterp>& engEquivs, const std::string& rus_lemma, BYTE MeanNum /* = 10*/, DictTypeEnum   EngDictType /* = Aoss*/)
 {
 	CEngUnitNoToRusUnit RusEquivToEngArticleNo;
 	RusEquivToEngArticleNo.m_RusUnitStr = rus_lemma;
@@ -74,7 +74,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 			std::string rus_num = GetRoss(RusNode.GetType())->GetEntryStr(RusNode.GetUnitNo());
 			long TermId = RusNode.GetInterp()->m_TerminId;
 
-			vector<int> CurrentEnglishTermins;
+			std::vector<int> CurrentEnglishTermins;
 			helper.GetThes(ThesId)->QueryEnglishTranslations(TermId, CurrentEnglishTermins);
 			long count = CurrentEnglishTermins.size();
 			if( count>0 )
@@ -92,7 +92,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 
 				if( interp.m_UnitNo != ErrUnitNo )
 				{
-					vector<CEngInterp> mapRes;
+					std::vector<CEngInterp> mapRes;
 					mapRes.push_back(interp);
 					mapRNodeToENode[NodeNo] = mapRes;
 				}
@@ -102,7 +102,7 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 					//  if InterpretWithPlugArticles was successful
 					if (mapRNodeToENode.find(NodeNo) != mapRNodeToENode.end())
 					{
-						vector<CEngInterp>& mapRes = mapRNodeToENode[NodeNo];
+						std::vector<CEngInterp>& mapRes = mapRNodeToENode[NodeNo];
 						for (long i =0; i < mapRes.size(); i++)
 						{ 
 							mapRes[i].m_TerminId = interp.m_TerminId;
@@ -117,11 +117,11 @@ void CEngSemStructure::FindEnglishEquivMain(CEnglishEquivMap& mapRNodeToENode)
 
 
 // берем англ. эквиваленты из русской статьи		
-		vector< SEngEquiv > vectorEngEquivs;
+		std::vector< SEngEquiv > vectorEngEquivs;
 		GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),NodeNo);
 
 // устанавливаем соотвествие русских словарей английским
-		vector<DictTypeEnum> EngDictTypes;
+		std::vector<DictTypeEnum> EngDictTypes;
 		if( RusNode.GetType() == OborRoss )	
 		{
 			EngDictTypes.push_back(Aoss);
@@ -181,8 +181,8 @@ void CEngSemStructure::FindEquivForLexFunct(CEnglishEquivMap& mapRNodeToENode)
 		if( SitEquivs == mapRNodeToENode.end() )
 			continue;
 
-		vector<CEngInterp> newSitEquivs;
-		vector<CEngInterp> newParamEquivs;
+		std::vector<CEngInterp> newSitEquivs;
+		std::vector<CEngInterp> newParamEquivs;
 		CLexicalFunctionField LexicalFunct("","");
 		CRossInterp prep;
 		CLexFunctRel LexFunctRel;
@@ -232,11 +232,11 @@ void CEngSemStructure::FindEquivForLexFunct(CEnglishEquivMap& mapRNodeToENode)
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::FindEngEquivForRusArticle(CEngInterp rusUnit, vector<CEngInterp>& vectorEngEquivsFromDict,DictTypeEnum EngDictType)
+void CEngSemStructure::FindEngEquivForRusArticle(CEngInterp rusUnit, std::vector<CEngInterp>& vectorEngEquivsFromDict,DictTypeEnum EngDictType)
 {
-	vector<SEngEquiv> vectorEngEquivs;		
+	std::vector<SEngEquiv> vectorEngEquivs;		
 	GetEngEquivsFromRusArticle(vectorEngEquivs, rusUnit.m_UnitNo, rusUnit.m_DictType);
-	vector<DictTypeEnum> dicts;
+	std::vector<DictTypeEnum> dicts;
 	dicts.push_back(EngDictType);
 	FindEngWords(vectorEngEquivsFromDict, vectorEngEquivs, dicts);
 	if( !vectorEngEquivsFromDict.size() )
@@ -249,12 +249,12 @@ void CEngSemStructure::FindEngEquivForRusArticle(CEngInterp rusUnit, vector<CEng
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::IntersectEngEquivs(vector<SEngEquiv >& vectorEngEquivsFromRusArticle,vector<CEngInterp>& vectorEngEquivsFromAoss )
+void CEngSemStructure::IntersectEngEquivs(std::vector<SEngEquiv >& vectorEngEquivsFromRusArticle,std::vector<CEngInterp>& vectorEngEquivsFromAoss )
 {
 	if( vectorEngEquivsFromRusArticle.size() == 0 )
 		return;
 
-	vector<long> delEquivsNum;
+	std::vector<long> delEquivsNum;
 	for( int i = 0 ; i < vectorEngEquivsFromAoss.size() ; i++ )
 	{
 		CRossInterp& UnitInterp = vectorEngEquivsFromAoss[i];
@@ -285,7 +285,7 @@ void CEngSemStructure::IntersectEngEquivs(vector<SEngEquiv >& vectorEngEquivsFro
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, vector<TCortege>& vectorAgx, long UnitNo) const
+void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, std::vector<TCortege>& vectorAgx, long UnitNo) const
 {
 	if( type == NoneRoss)
 		return;
@@ -310,7 +310,7 @@ void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, 
 //  пробует ELF
 //  затем смотрит на EGF и ESF
 
-void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEngEquivs,
+void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vectorEngEquivs,
 	int RusUnitNo,DictTypeEnum DictType /* = Ross*/,int iRusNode /* = -1*/) const
 {
 	if( RusUnitNo == ErrUnitNo )
@@ -318,7 +318,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	if( DictType == NoneRoss )
 		return;
 //
-	vector<TCortege> corteges;
+	std::vector<TCortege> corteges;
 	GetRossHolder(DictType)->GetFieldValues(std::string("ENG"),RusUnitNo,corteges);
 
 	for( int i=0; i<corteges.size(); i++ )
@@ -367,13 +367,13 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 		return;
 	const CSemWord& rusWord = rusNode.GetWord(rusNode.m_MainWordNo);
 
-	vector<SEngEquiv> tempEngEquivs;
+	std::vector<SEngEquiv> tempEngEquivs;
 	
 // обработка ENUMBER
-	vector<TCortege> vectorAnm;
+	std::vector<TCortege> vectorAnm;
 	GetAFieldVector("ENUMBER", DictType,vectorAnm,RusUnitNo);
 
-	vector<long> vecListByAnm;
+	std::vector<long> vecListByAnm;
 	for( int i=0; i<vectorAnm.size(); i++ )
 	{
 		if( vectorAnm[i].m_DomItemNos[0] == -1 )
@@ -412,17 +412,17 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	}
 
 // обработка EDOMAIN
-	vector<TCortege> vectorApo;
+	std::vector<TCortege> vectorApo;
 	GetAFieldVector("EDOMAIN", DictType,vectorApo,RusUnitNo);
 	long ClauseNo = RusStr.GetNode(iRusNode).m_ClauseNo;
 	std::string tema = RusStr.GetClausePO(ClauseNo);
 
 // возьмем все связи (но дополнительные отношения брать не будем!)
-	vector<long> inRelsRus;
+	std::vector<long> inRelsRus;
 	RusStr.GetIncomingRelations(iRusNode,inRelsRus,false);
-	vector<long> outRelsRus;
+	std::vector<long> outRelsRus;
 	RusStr.GetOutcomingRelations(iRusNode,outRelsRus);
-	vector<long> usingRels;
+	std::vector<long> usingRels;
 	for( int i=0; i<inRelsRus.size(); i++ )
 	{
 		const CSemRelation* R = RusStr.GetRelation(inRelsRus[i]);
@@ -444,10 +444,10 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 
 // обработка ELEX
-	vector<TCortege> vectorAlx;
+	std::vector<TCortege> vectorAlx;
 	GetAFieldVector("ELEX", DictType,vectorAlx,RusUnitNo);
 
-	vector<long> vecGoodByAlx;
+	std::vector<long> vecGoodByAlx;
 	for( int i=0; i<vectorAlx.size(); i++ )
 	{
 		if( vectorAlx[i].m_DomItemNos[0] == -1 )
@@ -525,10 +525,10 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 	
 // обработка EOPERATOR
-	vector<TCortege> vectorAop;
+	std::vector<TCortege> vectorAop;
 	GetAFieldVector("EOPERATOR", DictType,vectorAop,RusUnitNo);
 
-	vector<long> vecGoodByAop;
+	std::vector<long> vecGoodByAop;
 	for( int i=0; i<vectorAop.size(); i++ )
 	{
 		if( vectorAop[i].m_DomItemNos[0] == -1 )
@@ -582,10 +582,10 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 
 	// обработка EPREP
-	vector<TCortege> vectorAPredlog;
+	std::vector<TCortege> vectorAPredlog;
 	GetAFieldVector("EPREP",DictType,vectorAPredlog,RusUnitNo);
 
-	vector<long> vecGoodByAPredlog;
+	std::vector<long> vecGoodByAPredlog;
 	for( int i=0; i<vectorAPredlog.size(); i++ )
 	{
 		if( vectorAPredlog[i].m_DomItemNos[0] == -1 )
@@ -608,10 +608,10 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	}
 
 	// обработка ELF
-	vector<TCortege> vectorAlf;
+	std::vector<TCortege> vectorAlf;
 	GetAFieldVector("ELF", DictType,vectorAlf,RusUnitNo);
 
-	vector<long> vecGoodByALF;
+	std::vector<long> vecGoodByALF;
 	for( int i=0; i<vectorAlf.size(); i++ )
 	{
 		if( vectorAlf[i].m_DomItemNos[0] == -1 )
@@ -656,11 +656,11 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	StringVector domens;
 	domens.push_back("D_GRAMMEMS");
 
-	vector<TCortege> vectorAgx;
+	std::vector<TCortege> vectorAgx;
 	GetAFieldVector("EGF", DictType,vectorAgx,RusUnitNo);
 
-	vector<long> vecListByAgx;
-	vector<long> vecGoodByAgx;
+	std::vector<long> vecListByAgx;
+	std::vector<long> vecGoodByAgx;
 	for( int i=0; i<vectorAgx.size(); i++ )
 	{
 		if( vectorAgx[i].m_DomItemNos[0] == -1 )
@@ -771,11 +771,11 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 	} // vectorAgx.size()
 
 // обработка ESF
-	vector<TCortege> vectorAcx;
+	std::vector<TCortege> vectorAcx;
 	GetAFieldVector("ESF", DictType,vectorAcx,RusUnitNo);
 
-	vector<long> vecListByAcx;
-	vector<long> vecGoodByAcx;
+	std::vector<long> vecListByAcx;
+	std::vector<long> vecGoodByAcx;
 	for( int i=0; i<vectorAcx.size(); i++ )
 	{
 		if( vectorAcx[i].m_DomItemNos[0] == -1 )
@@ -788,7 +788,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 			std::string strACX = GetCortegeStr(rusNode.GetType(),vectorAcx[i]);
 			
 
-			vector<std::string> SemFets;
+			std::vector<std::string> SemFets;
 			SemFets.push_back(strACX.c_str());
 			IncludeLowerInHierarchy(&m_pData->m_HierarchySemFetDoc,SemFets);
 			int k=0;
@@ -825,7 +825,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 				else
 					iRusActant = RusStr.GetRelation(usingRels[k])->m_TargetNodeNo;
 
-				vector<std::string> SemFets;
+				std::vector<std::string> SemFets;
 				SemFets.push_back(strACX.c_str());
 				IncludeLowerInHierarchy(&m_pData->m_HierarchySemFetDoc,SemFets);
 				int kk=0;
@@ -916,7 +916,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(vector< SEngEquiv >& vectorEng
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::FindEngWords(vector<CEngInterp>& resEngUnits, vector< SEngEquiv >& vectorEngEquivs, vector<DictTypeEnum> EngDictTypes)
+void CEngSemStructure::FindEngWords(std::vector<CEngInterp>& resEngUnits, std::vector< SEngEquiv >& vectorEngEquivs, std::vector<DictTypeEnum> EngDictTypes)
 {
 	for( int j=0; j<EngDictTypes.size(); j++ )
 	{
@@ -953,7 +953,7 @@ void CEngSemStructure::FindEngWords(vector<CEngInterp>& resEngUnits, vector< SEn
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::GetEngEquivsFromVector(CEnglishEquivMap& mapRNodeToENode, int iRusNode, vector< SEngEquiv >& vectorEngEquivs, vector<DictTypeEnum> EngDictTypes)
+void CEngSemStructure::GetEngEquivsFromVector(CEnglishEquivMap& mapRNodeToENode, int iRusNode, std::vector< SEngEquiv >& vectorEngEquivs, std::vector<DictTypeEnum> EngDictTypes)
 {
 	CEnglishEquivMap::iterator it;
 	it = mapRNodeToENode.find(iRusNode);
@@ -961,7 +961,7 @@ void CEngSemStructure::GetEngEquivsFromVector(CEnglishEquivMap& mapRNodeToENode,
 		FindEngWords(mapRNodeToENode[iRusNode], vectorEngEquivs, EngDictTypes);		
 	else
 	{
-		vector<CEngInterp> vector_intreps;
+		std::vector<CEngInterp> vector_intreps;
 		FindEngWords(vector_intreps,vectorEngEquivs,EngDictTypes);
 		if( vector_intreps.size() ) 
 			mapRNodeToENode[iRusNode] = vector_intreps;
@@ -1000,7 +1000,7 @@ bool CEngSemStructure::InterpretWithPlugArticles(long RusNodeNo,CEnglishEquivMap
 	if( EngEquiv.m_UnitNo == ErrUnitNo )
 		return false;
 
-	vector<CEngInterp> vectorEquivs;
+	std::vector<CEngInterp> vectorEquivs;
 	vectorEquivs.push_back(EngEquiv);
 	mapRNodeToENode[RusNodeNo] = vectorEquivs;
 	return true;

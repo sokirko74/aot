@@ -48,20 +48,20 @@ class CRusMorphHomonym
 };
 
 
-typedef pair<long,long> PairOfLong;
-typedef vector<int>		VectorInt;
+typedef std::pair<long,long> PairOfLong;
+typedef std::vector<int>		VectorInt;
 
 
 struct  CRusInterpNodeInfo  {
 	//  если в GF-главном стоит после двоеточия ВВОДН
 	bool			m_bSaveIsParenthesis;
 	// предпочтительный порядок следования валентностей в тексте, который вычисляется по словарной статье
-	vector<long>      m_ValsLayout;
+	std::vector<long>      m_ValsLayout;
 	// несовместные валентности (взяты из поля INCONS)
-	vector<PairOfLong>      ProhibitedPairOfVals;
+	std::vector<PairOfLong>      ProhibitedPairOfVals;
 	// множество множеств валентностей совместных друг с другом
 
-	vector<VectorInt>     m_NotProhibitedValSets;
+	std::vector<VectorInt>     m_NotProhibitedValSets;
 	//  если в GF-главном стоит после двоеточия c_опр (например, ПРИЛ:с_опр),
     // то следующий флаг - истина
 	bool			m_bFullGleiche;
@@ -89,7 +89,7 @@ struct  CRusInterpNodeInfo  {
 class CRusSemNode : public CSemNode, public CRusInterpNodeInfo
 {
 public:
-	vector<CRusSemWord>		m_Words;
+	std::vector<CRusSemWord>		m_Words;
 	const CSemWord&	GetWord(int WordNo) const { return m_Words[WordNo];};
 	int		GetWordsSize() const { return m_Words.size();};
 
@@ -109,8 +109,8 @@ public:
 
 	//  сохраненные номера исходящих и входящих семантических отношений 
 	// (используются на участках программы, где множество отношений не меняется)
-    vector<long>	m_InRels;
-	vector<long>	m_OutRels;
+    std::vector<long>	m_InRels;
+	std::vector<long>	m_OutRels;
 
 	long 			m_MemNodeNo;
 
@@ -157,13 +157,13 @@ public:
 class CMemNode : public CInterpNodeInfo, public CRusInterpNodeInfo
 {
 public:
-	vector<CRusMorphHomonym> m_Words;
+	std::vector<CRusMorphHomonym> m_Words;
 	CDictUnitInterp			 m_Interp;
 	long					 m_PrepsCount;
 	long					 m_FirstPrepUnitNo;
 	QWORD					 m_Grammems;
 	//случай, когда этот узел участвовал в построении отношений
-	set<long>				 m_Cases;
+	std::set<long>				 m_Cases;
 	CMemNode () {
 		m_PrepsCount = 0;
 		m_FirstPrepUnitNo = ErrUnitNo;
@@ -233,7 +233,7 @@ const BYTE OldNodesOfTheSameCase= 16;
 class CRusSemClause : public CSemClause 
 {
 	// матрица, в которой сохранены значения некоторых позиционных  оценок узлов 
-	vector < vector<BYTE> > m_GrammarMatrix;
+	std::vector < std::vector<BYTE> > m_GrammarMatrix;
 public:
 	// ======= чисто синтаксическая информация
 	// синтаксический номер клаузы
@@ -265,7 +265,7 @@ public:
 	// номер правила, по которому было поставлено межклаузное отношение
 	long						m_ClauseRuleNo;
 	// множетство добавленных морфологических вариантов клауз
-	vector<CSyntaxClauseVariant> m_AddedClauses;
+	std::vector<CSyntaxClauseVariant> m_AddedClauses;
 	// номер первого узла клаузы
 	long						m_BeginNodeNo;
 	// номер последнего узла клаузы
@@ -353,7 +353,7 @@ struct CSemanClauseRule {
 	};
 };
 
-typedef vector<CRusSemNode>  CRusSemNodeVec;
+typedef std::vector<CRusSemNode>  CRusSemNodeVec;
 
 
 struct CConj {
@@ -408,7 +408,7 @@ struct CNodeHypot {
 	};
 };
 
-typedef vector<CNodeHypot>  CNodeHypotVector;
+typedef std::vector<CNodeHypot>  CNodeHypotVector;
 
 enum ClauseRulesTypesEnum
 {
@@ -418,7 +418,7 @@ enum ClauseRulesTypesEnum
 
 
 template<class T>
- void IncrementIndexBinaryRelation (vector<T>& Vec,  long StartNodeNo, long Delta)
+ void IncrementIndexBinaryRelation (std::vector<T>& Vec,  long StartNodeNo, long Delta)
 	{
 	 for (long i=0; i < Vec.size(); i++)
 	 {
@@ -438,27 +438,27 @@ class CLexVariant : public CTreeOfLexVariantWeight
 {
 	public:
 	// перечень всех СемУ
-	vector<CRusSemNode>			m_Nodes;
+	std::vector<CRusSemNode>			m_Nodes;
 	// перечень всех СемО
-	vector<CRusSemRelation>		m_Relations;
+	std::vector<CRusSemRelation>		m_Relations;
 
 	// перечень всех дополнительных СемО
-	vector<CRusSemRelation>		m_DopRelations;
+	std::vector<CRusSemRelation>		m_DopRelations;
 
 	// клаузы предложений
-	vector<CRusSemClause>		m_Clauses; 
+	std::vector<CRusSemClause>		m_Clauses; 
 
 
 	// перечень всех СинО (как их построил синтаксис)
-	vector<CSynRelation>		m_SynRelations;
+	std::vector<CSynRelation>		m_SynRelations;
 
 	
 	// перечень всех LF, найденных в предложении
-	vector<CLexFunctRel>		m_LexFuncts;
+	std::vector<CLexFunctRel>		m_LexFuncts;
 
 	// перечень всех семантичесиких отношений, которые пришли
 	// из поля AUX терминов, которые нашел тезаурус
-	vector<CSemThesRelation>	m_ThesSemRelations;
+	std::vector<CSemThesRelation>	m_ThesSemRelations;
 
 	CLexVariant ( )	 {}
 	void CopyLexVar ( const CLexVariant& X)
@@ -490,10 +490,10 @@ struct  CSemClauseVariantResult : public CSyntaxClauseVariant {
 	bool m_bNew;
 	// =====  определяющая информация
 	// добавленные клаузы
-	vector<CSyntaxClauseVariant>	m_AddedClauses;
+	std::vector<CSyntaxClauseVariant>	m_AddedClauses;
 
 	//======  информация о самых лучших лексических вариантах 
-	vector<CLexVariant> m_BestLexVariants;
+	std::vector<CLexVariant> m_BestLexVariants;
 
 	//======  вспомогательныя информация для статистики
 	long m_NodesCount;
@@ -510,7 +510,7 @@ struct  CSemClauseVariantResult : public CSyntaxClauseVariant {
 
     CSemClauseVariantResult (long SyntaxClauseNo,
 	                         long ClauseVariantNo,
-							 const vector<CSyntaxClauseVariant>&          AddedClauses
+							 const std::vector<CSyntaxClauseVariant>&          AddedClauses
 							 )  :  CSyntaxClauseVariant(SyntaxClauseNo,ClauseVariantNo)
 	{
 		m_AddedClauses = AddedClauses;
@@ -569,7 +569,7 @@ struct CRelSet {
 
 
 
-typedef pair<long, long> PairOfLong;
+typedef std::pair<long, long> PairOfLong;
 
 struct CSemCollocHyp 
 {	
@@ -581,15 +581,15 @@ struct CSemCollocHyp
 		long  m_WordNo;
 	};
 	long							m_CollocNo;
-	vector<CCollocItemNoAndWordNo>  m_Coords;  
+	std::vector<CCollocItemNoAndWordNo>  m_Coords;  
 
 	CSemCollocHyp (long  CollocNo)
 	{
 		m_CollocNo = CollocNo;
 	}
 };
-typedef vector<CSemCollocHyp> CSemCollocHypVector;
-typedef vector<CSemCollocHypVector>  CSemCollocHypVectorVector;
+typedef std::vector<CSemCollocHyp> CSemCollocHypVector;
+typedef std::vector<CSemCollocHypVector>  CSemCollocHypVectorVector;
 
 
 
@@ -609,22 +609,22 @@ public:
 	long						m_UserTreeVariantNo;
 
 	// множество наденных множеств гипотез о словосочетаниях для каждой клаузы 
-	vector<CSemCollocHypVectorVector>	m_ClauseSetCollocHyps;
+	std::vector<CSemCollocHypVectorVector>	m_ClauseSetCollocHyps;
 
 
 	//все узлы и все отношения, которые были построены во всех вариантах
-	vector<CMemNode>			m_MemNodes;
-	vector<CRusSemRelation>     m_MemRelations;
+	std::vector<CMemNode>			m_MemNodes;
+	std::vector<CRusSemRelation>     m_MemRelations;
 	long						m_MemoryCaseNo;
 	long						m_MemSaveRelationCount;
 	size_t						m_SentenceCount;
-	map<pair<int,CRusSemNode>, int>		m_PriorNounNodes2Distance; 
+	std::map<std::pair<int,CRusSemNode>, int>		m_PriorNounNodes2Distance; 
 	// максимально разрешенное кол-во вариантов деревьев
 	long						m_PanicTreeVariantCount;
 	// множество всех слабых синтаксических отношений (которые можно изменять на семантике)
 	StringVector				m_WeakSynRels;
 	// запрещенные  лексические варианты (устанавливаются пользователем)
-	vector<CRossInterpAndLemma>			m_UserProhibitedLexVars;
+	std::vector<CRossInterpAndLemma>			m_UserProhibitedLexVars;
 	// число клаузных(морфологических) вариантов			
 	long						m_ClauseCombinationVariantsCount; 
 	// определяет, в каком режиме нужно запускать межклаузные правила, если 
@@ -641,7 +641,7 @@ public:
 	long						m_AllClausesVariants;
 
 	//  информация для синтеза о том, какие леммы надо заменить на другие
-	map<std::string,std::string>			m_SynthLemmaToReplace;
+	std::map<std::string,std::string>			m_SynthLemmaToReplace;
 
 	// перечень всех СемУ
     const CSemNode&		GetNode(int NodeNo) const;
@@ -669,10 +669,10 @@ public:
 
 	// проверяет, что узлы, которые связывает отношение не являются абстрактными
 	bool						IsWordContainerRel(int iRel)  const;
-	const vector<CSynRelation>&	GetSynRels() const;
-	vector<CSynRelation>&		GetSynRels();
-	const vector<CLexFunctRel>&	GetLexFuncts() const;
-	vector<CLexFunctRel>&		GetLexFuncts() ;
+	const std::vector<CSynRelation>&	GetSynRels() const;
+	std::vector<CSynRelation>&		GetSynRels();
+	const std::vector<CLexFunctRel>&	GetLexFuncts() const;
+	std::vector<CLexFunctRel>&		GetLexFuncts() ;
 
 
 	const CSemClause&			GetSemClause(long ClauseNo) const;
@@ -680,17 +680,17 @@ public:
 	void						FindPossibleAntecedents();
 
 	// межклаузные синтаксические отношения
-	vector<CSynRelation>		m_SynClauseRels;
+	std::vector<CSynRelation>		m_SynClauseRels;
 	
     // коэффициенты, с помощью которых взвешивают заключительную структуру
 	TreeVariantValueCoefs	m_SemCoefs; 
 
 
 	// построенные морфологические варианты клауз
-	vector<CSemClauseVariantResult>  m_AlreadyBuiltClauseVariants;    
+	std::vector<CSemClauseVariantResult>  m_AlreadyBuiltClauseVariants;    
 
 	//вектор всех правил для межклаузных связей
-	vector <CSemanClauseRule>  m_ClauseRules;
+	std::vector <CSemanClauseRule>  m_ClauseRules;
 
 
 
@@ -725,7 +725,7 @@ public:
 	//======================    работа с синтаксическими отношениями  (СинО)
 
 	// выдает все входящие в узел NodeNo СинО
-	void			GetIncomingSynRelations  (long NodeNo, vector<long>& Relations) const;
+	void			GetIncomingSynRelations  (long NodeNo, std::vector<long>& Relations) const;
 	// выдает число инцидентных узлу NodeNo СинО
     long			GetSynRelationsCount (long NodeNo) const;
 	// выдает номер узла, из которого выходит отношение, идущее в NodeNo, если число отношений, входящих в NodeNo,
@@ -736,9 +736,9 @@ public:
 	// выдает число выходящих из узла NodeNo СинО
 	long			GetOutcomingSynRelationsCount (long NodeNo) const;
 	// выдает все выходящие из узла NodeNo СинО
-	void			GetOutcomingSynRelations (long NodeNo, vector<long>& Relations) const;
+	void			GetOutcomingSynRelations (long NodeNo, std::vector<long>& Relations) const;
 	// удаляет синтаксические отношения
-	void			DeleteSynRelations(vector<long>& Rels);
+	void			DeleteSynRelations(std::vector<long>& Rels);
 	// удаляет входящие и выходящие отношения узла, имющие название rName
 	void			DeleteSynRelationsByName(long NodeNo, std::string Name);
 	// переносит входящие синтаксические отношения от FromNode к ToNode
@@ -774,7 +774,7 @@ public:
 	bool	IsParenthesis (long NodeNo) const;
 	// собирает все узлы из клаузы ClauseNo, которые удовлетворяют  условию Fun2
 	// и не помечены m_bToDelete
-	void          FindIf(long ClauseNo,bool (CRusSemStructure::*Fun)(long) const,vector <long>& Nodes) const;
+	void          FindIf(long ClauseNo,bool (CRusSemStructure::*Fun)(long) const,std::vector <long>& Nodes) const;
 	// выдает омоним слова  WordNo для текущей морфологической интерпретации клаузы ClauseNo
 	bool  GetHomonym (long ClauseNo, long WordNo, CSynHomonym& Homonym) const;
 	// проверяет часть речи узла
@@ -840,7 +840,7 @@ public:
 	bool            TryClauseNSO (long ClauseRuleNo, long ClauseNo1, long ClauseNo2);
 	
 	// применяет все межклаузные правила
-	void            ApplyClauseRulesOnly(vector<PairOfLong>& ClausePairs);
+	void            ApplyClauseRulesOnly(std::vector<PairOfLong>& ClausePairs);
 	// устанавливает все межклаузные границы и вызывает ApplyClauseRulesOnly
 	void            ApplyClauseRules(long GapSize);
 
@@ -874,7 +874,7 @@ public:
 	// находим все гипотезы словосочетаний
 	void			FindCollocsHyps(long ClauseNo);
 	// проверяет лексическую возможность существования сл-ния начиная от узла StartNodeNo
-	void			AddCollocHyp (long StartNodeNo,vector<long>& RefCollocItems,long ItemNo, CSemCollocHyp& Hyp,vector<CSemCollocHyp>& Hyps);
+	void			AddCollocHyp (long StartNodeNo,std::vector<long>& RefCollocItems,long ItemNo, CSemCollocHyp& Hyp,std::vector<CSemCollocHyp>& Hyps);
 	// проверяет грамматические ограничения элемента словосочетания  CollocNo для узла NodeNo
 	bool			CheckCollocItemGramFet(long CollocNo, long ItemNo, long NodeNo);
 	// создает узлы закрытых словосочетаний 
@@ -909,9 +909,9 @@ public:
 	// выдает грамматическую модель члена однородного ряда, построенную по самому правому потомку
 	long			GetFirstMNAMemberIfHas(long NodeNo) const;
 	// набор всех отношений, идущих из оператора однородности NodeNo
-	void			GetMNARelations(long NodeNo, vector<long>& Rels, bool UseUse) const;
+	void			GetMNARelations(long NodeNo, std::vector<long>& Rels, bool UseUse) const;
 	// набор всех узлов, к которым идет отношение из оператора однородности NodeNo
-	void			GetMNAMembers(long NodeNo, vector<long>& Nodes, bool UseUse) const;
+	void			GetMNAMembers(long NodeNo, std::vector<long>& Nodes, bool UseUse) const;
 	// интерпретирует оператор однородности, построенныы синтаксиом
 	void			InterpretSimilarNounGroups (long ClauseNo);
 	// строит оператор однородности для предлога типа Иван с Марией
@@ -1125,7 +1125,7 @@ public:
     // выдает узел, которому принадлежит слово WordNo
 	long			FindNodeByWordNo(long WordNo, long ClauseNo) const;
 	// выдает узлы, упорядоченные по тому, как они идут в руском тексте
-	void			GetAllTextOrderedNodes(vector <long>& Nodes) const;
+	void			GetAllTextOrderedNodes(std::vector <long>& Nodes) const;
 
 		// выдает длину (в словах) тех отношений, которые выходят из узлов, помеченных Tag.
 	long			GetRelationsLength(long Tag) const;
@@ -1136,7 +1136,7 @@ public:
 		void          InitLexVariant(size_t ClauseNo);
 		bool		  SetLexVariant(size_t ClauseNo, size_t& LexVariantInCurrSetCollocNo, size_t& CurrSetCollocHypNo);
 		void          FindParticleBY(long ClauseNo);
-		void          GetClauseVariantCombinations(vector<VectorLong>& Variants) const;
+		void          GetClauseVariantCombinations(std::vector<VectorLong>& Variants) const;
 		void          ApplyTerminSemStrForOneRel (std::string SemRel, long Word1, long Word2, const CRossHolder* RossHolder);
 		bool          GetClauseVariantCombination();
    		
@@ -1149,7 +1149,7 @@ public:
 		bool		  TryTestTree(std::string Graph);
 	  long FindAlreadyBuiltClauseVariant(long ClauseNo) const 
 	  {
-		  vector<CSemClauseVariantResult>::const_iterator It = find(m_AlreadyBuiltClauseVariants.begin(), m_AlreadyBuiltClauseVariants.end() ,CSemClauseVariantResult (m_Clauses[ClauseNo].m_SyntaxClauseNo, m_Clauses[ClauseNo].m_ClauseVariantNo, m_Clauses[ClauseNo].m_AddedClauses));
+		  std::vector<CSemClauseVariantResult>::const_iterator It = find(m_AlreadyBuiltClauseVariants.begin(), m_AlreadyBuiltClauseVariants.end() ,CSemClauseVariantResult (m_Clauses[ClauseNo].m_SyntaxClauseNo, m_Clauses[ClauseNo].m_ClauseVariantNo, m_Clauses[ClauseNo].m_AddedClauses));
 		  if (It == m_AlreadyBuiltClauseVariants.end()) return -1;
 		  return It - m_AlreadyBuiltClauseVariants.begin();
 	  };
@@ -1167,16 +1167,16 @@ public:
 		long          GetOnlyCommaBetweenViolationsCount (long Tag);
 		void          ApplySynStr (long ClauseNo);
 		bool          IsOptional(long RelNo) const;
-		bool          SplitVariantWithRepeats(size_t  VarNo,  vector<CTreeVariant>& Variants);
+		bool          SplitVariantWithRepeats(size_t  VarNo,  std::vector<CTreeVariant>& Variants);
 		long		  SetEqualFieldId(const CTreeVariant& V);
-		void          UncycleVariant(size_t  VarNo, vector<CTreeVariant>& Variants, long Tag);
+		void          UncycleVariant(size_t  VarNo, std::vector<CTreeVariant>& Variants, long Tag);
 		long          GetCopulViolationsCount(long Tag)  const;
 		long          GetInstrAgentRelsCount (long Tag) const;
 		void          AddTreeVariant (const CTreeVariant& Variant);
 		long            GetSimpleConj (long NodeNo, const CConj* Conj, long ConjCount) const;
 		void          SetTreeVariant (const CTreeVariant& Variant);
 		std::string       GetClauseComplexitiesStr();
-		void          GetValencyMisses(long NodeNo, vector<CValency>& ValencyMisses)  const;
+		void          GetValencyMisses(long NodeNo, std::vector<CValency>& ValencyMisses)  const;
 		// lexical varinats
 		bool          IsInLexVariant(long ClauseNo, long NodeNo);
 		void		  UpdateBlockedRelations();
@@ -1236,7 +1236,7 @@ public:
 		bool			dfs_to_test_unique_relation (size_t NodeNo, size_t RelNo);
 		std::string			GetClauseTreeForTcl();
 		// получает SF1 узла NodeNo		
-		vector<QWORD> GetSemFetsOfFirstValency(long NodeNo);
+		std::vector<QWORD> GetSemFetsOfFirstValency(long NodeNo);
 		// проверяет, что чразу перед узлм стоит запятая
 	    bool			HasCommaBefore (size_t NodeNo) const;
         // строит аналитическую превосходную степень
@@ -1380,7 +1380,7 @@ public:
 		//является ли этот узел локатинвым
 		bool			IsLocNode(size_t NodeNo) const;
 		// выдает все узлы клаузы, в которые не входит ни одного отношения, за исключением тех узлов, что помечены CSemNode::m_bToDelete
-		void			GetClauseRootsWithoutDeleted (size_t ClauseNo, vector<long>& Nodes) const;
+		void			GetClauseRootsWithoutDeleted (size_t ClauseNo, std::vector<long>& Nodes) const;
 		void			DelNode(long NodeNo);
 		void			PrintMemRelations() const;
 		// выдает нормальную форму причастия (мр, ед)
@@ -1390,7 +1390,7 @@ public:
 		void			ConvertParticipleTreeToClause();
 
 		// выдает все узлы,  зависимые от данного узла
-		void			dfs_in_clause(size_t NodeNo, vector<long>& Nodes) const;
+		void			dfs_in_clause(size_t NodeNo, std::vector<long>& Nodes) const;
 		// строит отношения между лок(темпор) узлами, которые идут друг за другом
 		void			BuildCircumsChains(long ClauseNo);
 		// строит       учительница -> учитель
@@ -1399,7 +1399,7 @@ public:
 		bool			RussianSynthesis(std::string& Result) const;
 		std::string			RussianSynthesisOfNode(int NodeNo);
 		std::string			GetPrepOrConjOfNode (const CRusSemNode&  Node) const;
-		bool			SemanticAnswer(std::string& Result, const vector<CRusSemStructure>&	SavedSentences) const;
+		bool			SemanticAnswer(std::string& Result, const std::vector<CRusSemStructure>&	SavedSentences) const;
 
 		bool			ContainsSemCopul(long NodeNo) const;
 		void			GetMaxWordWeightByLemma(std::string Lemma, CRusSemWord& SemWord) const;
@@ -1414,9 +1414,9 @@ public:
 
 extern bool HasReflexiveSuffix (const std::string& s);
 extern bool IsPossesivePronoun(const CSemNode& N);
-extern void GetCommonVariants(const vector<VectorLong>&  Parents, 
+extern void GetCommonVariants(const std::vector<VectorLong>&  Parents, 
 									   VectorLong&   V,
-							  vector<VectorLong>&  Variants, 
+							  std::vector<VectorLong>&  Variants, 
 								long       Position);
 
 extern bool IsBetween (const CRusSemNode& Node, const CRusSemNode& LowerBound, const CRusSemNode& UpperBound);

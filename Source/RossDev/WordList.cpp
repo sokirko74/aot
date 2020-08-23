@@ -602,7 +602,7 @@ void CWordList::OnChangeLemmaLocator()
 	else
 	{
 		CRossDevTermin T(0, (const char*)m_LemmaLocator);
-		vector<CRossDevTermin>::iterator It = lower_bound(m_Termins.begin(), m_Termins.end(), T);
+		std::vector<CRossDevTermin>::iterator It = lower_bound(m_Termins.begin(), m_Termins.end(), T);
 		SetCursor(It - m_Termins.begin());
 
 	};
@@ -738,7 +738,7 @@ void CWordList::OnSearchByArticle()
 	CWaitCursor C;
 	WORD UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
-	vector<CRossPocketItem> UnitNos;
+	std::vector<CRossPocketItem> UnitNos;
 
 	if (GetRoss()->IsEmptyArticle(UnitNo))
 	{
@@ -755,7 +755,7 @@ void CWordList::OnSearchByArticle()
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 		if (GetUnitNo(i) != UnitNo)
 		{
-			vector<TCortege> L2;
+			std::vector<TCortege> L2;
 			A2.ReadFromDictionary(GetUnitNo(i), false, true);
 			if (A1.IsPartOf(&A2, true))
 				UnitNos.push_back(CRossPocketItem(GetUnitNo(i), GetDocument()));
@@ -798,7 +798,7 @@ void CWordList::OnStatistic()
 {
 	CWaitCursor C;
 	CRossDoc* pRossDoc = GetDocument();
-	vector<CStatis> V;
+	std::vector<CStatis> V;
 	char s[200];
 	s[0] = 0;
 	if (!InputBox("Input domain name (* - akk constant domain):", s, 200))
@@ -862,7 +862,7 @@ void CWordList::OnStatistic()
 
 				CStatis I;
 				I.ItemNo = GetCortege(GetRoss(), i).m_DomItemNos[k];
-				vector<CStatis>::iterator It = lower_bound(V.begin(), V.end(), I);
+				std::vector<CStatis>::iterator It = lower_bound(V.begin(), V.end(), I);
 				if ((It != V.end())
 					&& (I == *It))
 					It->Freq++;
@@ -942,7 +942,7 @@ void CWordList::OnMenuitem32788()
 	GlobalOpenHierarchy(GetDocument(), SemRel);
 }
 
-void CWordList::BuildVals(vector<Valency>& Vals, WORD UnitNo)
+void CWordList::BuildVals(std::vector<Valency>& Vals, WORD UnitNo)
 {
 	Vals.clear();
 	if (GetRoss()->IsEmptyArticle(UnitNo)) return;
@@ -977,7 +977,7 @@ void CWordList::OnValencies()
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
-			vector<Valency> Vals;
+			std::vector<Valency> Vals;
 
 			BuildVals(Vals, GetUnitNo(i));
 
@@ -985,7 +985,7 @@ void CWordList::OnValencies()
 
 			sort(Vals.begin(), Vals.end());
 
-			vector<TreeNode>::iterator It = find(Tree.SubItems.begin(), Tree.SubItems.end(), Vals);
+			std::vector<TreeNode>::iterator It = find(Tree.SubItems.begin(), Tree.SubItems.end(), Vals);
 			if (It == Tree.SubItems.end())
 			{
 				TreeNode N;
@@ -1007,7 +1007,7 @@ void CWordList::OnValencies()
 			TreeNode N;
 			N.Vals = Tree.SubItems[k].Vals;
 			TreeNode::Normalize(D, N.Vals);
-			vector<TreeNode>::iterator It = find(NormTree.SubItems.begin(), NormTree.SubItems.end(), N.Vals);
+			std::vector<TreeNode>::iterator It = find(NormTree.SubItems.begin(), NormTree.SubItems.end(), N.Vals);
 			if (It == NormTree.SubItems.end())
 			{
 				NormTree.SubItems.push_back(N);
@@ -1085,7 +1085,7 @@ struct CFieldValue {
 
 void CWordList::OnStatisticFieldValue()
 {
-	vector<CFieldValue> V;
+	std::vector<CFieldValue> V;
 	char s[200];
 	s[0] = 0;
 	if (!InputBox("Enter field name (* for all fields):", s, 200)) return;
@@ -1115,7 +1115,7 @@ void CWordList::OnStatisticFieldValue()
 		Value.freq = 1;
 		Value.FieldNo = GetCortege(GetRoss(), i).m_FieldNo;
 		Value.m_MaxNumDom = GetRoss()->m_MaxNumDom;
-		vector<CFieldValue>::iterator It = find(V.begin(), V.end(), Value);
+		std::vector<CFieldValue>::iterator It = find(V.begin(), V.end(), Value);
 		if (It == V.end())
 			V.push_back(Value);
 		else
@@ -1212,12 +1212,12 @@ void CWordList::OnImport()
 };
 
 
-void UpdateWordAndFreq(vector <CWordAndFreq>& Unfound, const std::string& Word)
+void UpdateWordAndFreq(std::vector <CWordAndFreq>& Unfound, const std::string& Word)
 {
 	CWordAndFreq W;
 	W.m_Word = Word;
 	W.m_Freq = 1;
-	vector<CWordAndFreq>::iterator It = lower_bound(Unfound.begin(), Unfound.end(), W);
+	std::vector<CWordAndFreq>::iterator It = lower_bound(Unfound.begin(), Unfound.end(), W);
 	size_t i = It - Unfound.begin();
 	if ((It == Unfound.end())
 		|| !(*It == W)
@@ -1280,7 +1280,7 @@ void CWordList::OnDelAllSelected()
 		Q.Format("You are going to delete all entries (%i entries). Proceed?", GetUnitsSize());
 		if (::MessageBox(this->m_hWnd, Q, "Confirmation", MB_YESNO) == IDNO) return;
 		CWaitCursor C;
-		vector <TUnit> UnitNos;
+		std::vector <TUnit> UnitNos;
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
@@ -1320,7 +1320,7 @@ void CWordList::OnSetAuthor()
 	s[0] = 0;
 	if (!InputBox("Enter author name:", s, 15)) return;
 	CWaitCursor C;
-	vector <TUnit> UnitNos;
+	std::vector <TUnit> UnitNos;
 
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 	{
@@ -1361,7 +1361,7 @@ struct GxiStatistic
 	TCortege	m_GXi;
 	int			m_num;
 	BYTE		m_MaxNumDom;
-	vector<long> Units;
+	std::vector<long> Units;
 	GxiStatistic(CString SemRelName, TCortege GXi, long UnitNo, BYTE MaxNumDom)
 	{
 		m_SemRelName = SemRelName;
@@ -1393,13 +1393,13 @@ struct GxiStatistic
 
 void CWordList::OnGXiStatistics()
 {
-	vector<GxiStatistic> GxiStatisticVector;
+	std::vector<GxiStatistic> GxiStatisticVector;
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 	{
 		size_t UnitNo = GetUnitNo(i);
 		if (GetRoss()->IsEmptyArticle(UnitNo)) continue;
 
-		vector<CValency> Vals;
+		std::vector<CValency> Vals;
 		for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
 			if (GetRoss()->GetCortegeFieldNo(k) == GetDocument()->GetRossHolder()->ValFieldNo)
 				Vals.push_back(CValency(GetCortege(GetRoss(), k), GetDocument()->GetRossHolder()->MainWordVarNo, GetDocument()->GetRossHolder()));
@@ -1412,7 +1412,7 @@ void CWordList::OnGXiStatistics()
 			int ValencyNo = GetRoss()->GetCortegeLeafId(k) - 1;
 			if ((ValencyNo < 0) || (ValencyNo >= Vals.size())) break;
 			GxiStatistic GX(Vals[ValencyNo].m_RelationStr.c_str(), GetCortege(GetRoss(), k), UnitNo, GetRoss()->m_MaxNumDom);
-			vector<GxiStatistic>::iterator It = find(GxiStatisticVector.begin(), GxiStatisticVector.end(), GX);
+			std::vector<GxiStatistic>::iterator It = find(GxiStatisticVector.begin(), GxiStatisticVector.end(), GX);
 			if (It == GxiStatisticVector.end())
 				GxiStatisticVector.push_back(GX);
 			else
@@ -1478,7 +1478,7 @@ void CWordList::OnEmptyArticles()
 		Q.Format("You are going to clear all entries (%i entries). Proceed?", GetUnitsSize());
 		if (::MessageBox(this->m_hWnd, Q, "Confirmation", MB_YESNO) == IDNO) return;
 		CWaitCursor C;
-		vector <TUnit> UnitNos;
+		std::vector <TUnit> UnitNos;
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
@@ -1818,7 +1818,7 @@ struct CDictInterp {
 	};
 };
 
-void AddEntries(const CWordList* WordList, vector<CDictInterp>& AllEntries)
+void AddEntries(const CWordList* WordList, std::vector<CDictInterp>& AllEntries)
 {
 	if (!WordList->GetDocument()->IsThesRoss())
 	{
@@ -1854,7 +1854,7 @@ void CWordList::OnAllDictEntries()
 		CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
 		POSITION pos = pRossDocTemplate->GetFirstDocPosition();
 		int RossNo = 0;
-		vector<CDictInterp> AllEntries;
+		std::vector<CDictInterp> AllEntries;
 		while (pos)
 		{
 			const CRossDoc* pDoc = (const CRossDoc*)pRossDocTemplate->GetNextDoc(pos);

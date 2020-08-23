@@ -114,7 +114,7 @@ private:
             }
             if (a.Name == "input") {
                 if (Retrieve("input") != "-") {
-                    cerr << "read " << Retrieve("input") << "\n";
+                    std::cerr << "read " << Retrieve("input") << "\n";
                     InputStreamFile.open(Retrieve("input"));
                     if (!InputStreamFile.is_open()) {
                         ArgumentError("cannot open file " + Retrieve("input"));
@@ -240,7 +240,7 @@ public:
     }
 
     StringVector GetInputFiles() const {
-        vector<string> files;
+        std::vector<std::string> files;
         if (Exists("input-is-list-file")) {
             std::string s;
             while (getline(GetInputStream(), s)) {

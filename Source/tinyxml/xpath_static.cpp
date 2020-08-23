@@ -52,7 +52,7 @@ namespace TinyXPath
       return xp_proc . o_compute_xpath ();
    }
 
-   /// Static function to compute a string XPath expression, without an error check
+   /// Static function to compute a std::string XPath expression, without an error check
    TIXML_STRING S_xpath_string (const TiXmlNode * XNp_source_tree, const char * cp_xpath_expr)
    {
       xpath_processor xp_proc (XNp_source_tree, cp_xpath_expr);
@@ -107,7 +107,7 @@ namespace TinyXPath
       return xp_proc . e_error == TinyXPath::xpath_processor::e_no_error;
    }
 
-   /// Static function to compute a string XPath expression, without an error check
+   /// Static function to compute a std::string XPath expression, without an error check
    bool o_xpath_string (const TiXmlNode * XNp_source_tree, const char * cp_xpath_expr, TIXML_STRING & S_res)
    {
       xpath_processor xp_proc (XNp_source_tree, cp_xpath_expr);

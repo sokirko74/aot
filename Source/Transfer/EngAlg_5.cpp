@@ -19,7 +19,7 @@
 void  CEngSemStructure::MoveMeaningRelsToNewNode(int iOldNode,int iNewNode)
 {
 // перевешиваем подлежащее на вспомогательный глагол
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iOldNode,outRels);
 	for( int i=0; i<outRels.size(); i++ )
 	{
@@ -30,7 +30,7 @@ void  CEngSemStructure::MoveMeaningRelsToNewNode(int iOldNode,int iNewNode)
 	}
 
 // входящие связи
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelations(iOldNode,inRels,false);
 	for( int i=0; i<inRels.size(); i++ )
 	{
@@ -84,7 +84,7 @@ int CEngSemStructure::MakeBeNodeForEngNode(int iEngNode,std::string sTenseHistor
 //
 	if( bCheckOtherVerb )
 	{
-		vector<long> inRels;
+		std::vector<long> inRels;
 		GetIncomingRelations(iEngNode,inRels,false);
 		for( int i=0; i<inRels.size(); i++ )
 		{
@@ -127,7 +127,7 @@ CEngSemRelation newRel(CValency("S-ACT",A_C),m_Nodes.size()-1,iEngNode,"");	newR
 	m_Relations.push_back(newRel); // be->Node
 
 // поищем Subj
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 	int iSubRel = -1;
 	for( int i=0; i<outRels.size(); i++ )
@@ -205,7 +205,7 @@ void CEngSemStructure::ApplyALG_AL3(int iEngNode)
 	if( !HasALG(m_Nodes[iEngNode].GetType(),m_Nodes[iEngNode].GetUnitNo(),"AL3") )
 		return;
 //
-	vector<long> outRels;
+	std::vector<long> outRels;
 	GetOutcomingRelations(iEngNode,outRels);
 
 	int iObjRel = -1, iDirRel = -1;
@@ -343,7 +343,7 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 		return;
 
 // смотрим, было ли указание на эту тему
-	vector< SEngEquiv > vectorEngEquivs;
+	std::vector< SEngEquiv > vectorEngEquivs;
 	GetEngEquivsFromRusArticle(vectorEngEquivs,RusNode.GetUnitNo(),RusNode.GetType(),iRusNode);
 
 	std::string StrNumeral = "";
@@ -369,7 +369,7 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 	if( StrNumeral!="#ed" )
 		return; // неизвестная помета
 //
-	vector<CFormInfo> piPC;
+	std::vector<CFormInfo> piPC;
 	helper.GetEngLemmatizer()->CreateParadigmCollection(true, engWord.m_Lemma, false, false, piPC);
 	
 	int pid = -1;
@@ -405,7 +405,7 @@ void CEngSemStructure::RefineSynRealMarks(int iEngNode)
 	if( engNode.m_SynReal.m_AlgStr != _R("А1(НЕ)") )
 		return;
 
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelations(iEngNode,inRels,false);
 	for( int i=0; i<inRels.size(); i++ )
 	{
@@ -439,7 +439,7 @@ void CEngSemStructure::TranslateAdverbAdjectiveRule(int EngNodeNo)
 	if (!RusNode.GetWord(0).m_bAdverbFromAdjective) return;
 	if (!engNode.IsWordContainer()) return;
 	engNode.m_Words[0].m_Poses = _QM(eADJ);
-	vector<long> inRels;
+	std::vector<long> inRels;
 	GetIncomingRelations(EngNodeNo,inRels,false);
 	// проходим мимо MUA	
 	if (!inRels.empty())

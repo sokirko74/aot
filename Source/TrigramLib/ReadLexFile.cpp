@@ -26,7 +26,7 @@ inline size_t restore_from_bytes(CLexProb& t, const BYTE* buf)
 
 
 
-bool CTrigramModel::read_dictionary_text_file(map<std::string,  vector<CLexProb> >& Dictionary) const
+bool CTrigramModel::read_dictionary_text_file(std::map<std::string,  std::vector<CLexProb> >& Dictionary) const
 {
 	FILE* fp = fopen(m_DictionaryFile.c_str(), "r");
 	if (!fp) 
@@ -48,7 +48,7 @@ bool CTrigramModel::read_dictionary_text_file(map<std::string,  vector<CLexProb>
 			 return false;
 		};
         std::string WordStr = tok.val();
-		vector<CLexProb> wd;
+		std::vector<CLexProb> wd;
 		if (!m_TestLexicon.empty())
 		{
 			if (m_TestLexicon.find(WordStr) == m_TestLexicon.end())
@@ -100,21 +100,21 @@ bool CTrigramModel::read_dictionary_text_file(map<std::string,  vector<CLexProb>
 	return true;
 }
 
-bool CTrigramModel::write_dictionary_binary(const map<std::string, vector<CLexProb> >& Dictionary) const
+bool CTrigramModel::write_dictionary_binary(const std::map<std::string, std::vector<CLexProb> >& Dictionary) const
 {
     std::string WordsFile = m_DictionaryFile + ".words";
     {
         FILE* fp = fopen (WordsFile.c_str(), "w");
         if (!fp) return false;
-        for (map<std::string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
+        for (std::map<std::string,  std::vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
             fprintf (fp, "%s\n", it->first.c_str());
         fclose (fp);
     }
 
     std::string SizesFile = m_DictionaryFile + ".sizes";
     {
-        vector<DWORD> v;
-        for (map<std::string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
+        std::vector<DWORD> v;
+        for (std::map<std::string,  std::vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
             v.push_back( (DWORD)it->second.size() );
         if (!WriteVector(SizesFile, v))
             return false;
@@ -124,7 +124,7 @@ bool CTrigramModel::write_dictionary_binary(const map<std::string, vector<CLexPr
     {
         FILE* fp = fopen (IntersFile.c_str(), "wb");
         if (!fp) return false;
-        for (map<std::string,  vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
+        for (std::map<std::string,  std::vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
             if (!WriteVectorInner(fp, it->second))
                 return false;
         fclose (fp);
@@ -134,7 +134,7 @@ bool CTrigramModel::write_dictionary_binary(const map<std::string, vector<CLexPr
 
 bool CTrigramModel::read_dictionary_binary()
 {
-    vector<DWORD> sizes;
+    std::vector<DWORD> sizes;
     ReadVector(m_DictionaryFile + ".sizes", sizes);
     ReadVector(m_DictionaryFile + ".interps", m_LexProbs);
 
@@ -173,7 +173,7 @@ bool CTrigramModel::read_dictionary_binary()
 bool CTrigramModel::convert_to_lex_binary() 
 {
 
-    map<std::string,  vector<CLexProb> > Dictionary;
+    std::map<std::string,  std::vector<CLexProb> > Dictionary;
     if (!read_dictionary_text_file( Dictionary))
         throw CExpc ("canot read dictionary");
 

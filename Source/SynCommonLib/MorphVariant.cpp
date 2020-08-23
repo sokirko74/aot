@@ -83,7 +83,7 @@ EUnitType CMorphVariant::GetUnitType(int iUnit) const
 	return m_SynUnits[iUnit].m_Type;
 }
 
-const vector<int>& CMorphVariant::GetSimplePrepNos(int i) const
+const std::vector<int>& CMorphVariant::GetSimplePrepNos(int i) const
 {
 	return m_SynUnits[i].m_SimplePrepNos;
 }

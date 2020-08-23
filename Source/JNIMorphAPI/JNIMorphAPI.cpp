@@ -19,7 +19,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <std::string.h>
+#include <string.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -186,7 +186,7 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, std::string
 	jbyteArray baseFormBytes=NULL;
 //	try{
 	bool bCapital   = is_upper_alpha((BYTE)Form[0], dic.Language);
-	vector<CFormInfo> Paradigms;
+	std::vector<CFormInfo> Paradigms;
 	dic.pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
 	paradigmset=env->NewObject(setClazz, setConstructor);
 	if(env->ExceptionOccurred())return NULL;
@@ -448,7 +448,7 @@ JNIEXPORT void JNICALL Java_ru_aot_morph_JavaMorphAPI_initImpl
 
 	inited=false;
 	if(languagesBitSet==0){
-		throwEx(env, strdup("The set of languages is empty."));
+		throwEx(env, strdup("The std::set of languages is empty."));
 		return;
 	}
 	if(languagesBitSet!=1){

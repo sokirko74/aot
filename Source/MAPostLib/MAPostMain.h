@@ -30,7 +30,7 @@ struct CFixedColloc
 		std::string m_Lemma;
 		BYTE   m_POS;
 	};
-	vector<CLemmaAndPOS> m_Lemmas;
+	std::vector<CLemmaAndPOS> m_Lemmas;
 	long		   m_MainWordNo;
 	std::string		   m_InterfaceString;
 	CFixedColloc(std::string LemmaStr,	long MainWordNo,	std::string InterfaceString,  const CAgramtab* m_piRusGramTab);
@@ -55,7 +55,7 @@ struct CLemmaAndCodes {
 
 
 
-typedef list<CPostLemWord> LineCollection ;
+typedef std::list<CPostLemWord> LineCollection ;
 
 typedef LineCollection::iterator CLineIter;
 typedef LineCollection::const_iterator CConstLineIter;
@@ -67,7 +67,7 @@ class CMAPost  : public CPostMorphInteface
 {
 	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
 	std::string          m_DURNOVOGramCode;
-	list<CPostLemWord>	m_Words;
+	std::list<CPostLemWord>	m_Words;
     
 
 public:
@@ -88,7 +88,7 @@ public:
 protected:
 	const CLemmatizer*			m_pRusLemmatizer;
 	const CAgramtab*			m_pRusGramTab;
-	vector<CFixedColloc>        m_FixedCollocs;
+	std::vector<CFixedColloc>        m_FixedCollocs;
     CTrigramModel               m_TrigramModel;
 	bool                        m_bUseTrigrams;
 

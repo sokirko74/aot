@@ -56,7 +56,7 @@ std::string tr_by_thesaurus(const CThesaurus* Thes, std::string TextEntryStr)
 {	   
 	long TerminId = Thes->GetTerminIdBySingleWord(TextEntryStr.c_str());
 	if (TerminId ==-1) return "";
-	vector<int> EnglishTranslations;
+	std::vector<int> EnglishTranslations;
 	Thes->QueryEnglishTranslations(TerminId, EnglishTranslations);
 	if( EnglishTranslations.empty()  )
 		return "";
@@ -83,7 +83,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 	// переводим группу однородных числительных, которые заполняют одно место в поле CONTENT
 	if(RusNode.m_NodeType == MNA && RusNode.IsWordContainer())
 	{
-		vector<long> Nodes;
+		std::vector<long> Nodes;
 		RusStr.GetOutcomingNodes(RusNodeNo, Nodes, false);
 		for (long i=0; i<Nodes.size(); i++)
 		{
@@ -164,7 +164,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 
         long ParadigmId = helper.GetParadigmIdByLemma(morphRussian, RusNode.GetWord(0).m_Lemma,  0);
 		if (ParadigmId == -1) return "!!!error!!!";
-		vector<long> Ids;
+		std::vector<long> Ids;
 		helper.translate_id(ParadigmId, Ids, 0);
 		if (Ids.size() == 0) return "!!!error!!!";
 		res = helper.create_form_by_id (Ids[0], grammems);
@@ -337,11 +337,11 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 	 чтобы синтез не написал его два раза,
 	 кроме прелдлога "than", который ставит ApplyComparativeRule
 	*/
-	vector <long> Rels;
+	std::vector <long> Rels;
 	GetIncomingRelations(MainNodeNo,Rels);
 	if (Rels.size() == 1)
 	{
-		vector<CRossInterp>& V = m_Relations[Rels[0]].m_SynReal.m_Preps;
+		std::vector<CRossInterp>& V = m_Relations[Rels[0]].m_SynReal.m_Preps;
 		for (long i=0; i<V.size(); i++)
 			if (    (V[i].m_DictType == EngObor) 
 				 && (V[i].m_UnitNo != ErrUnitNo)  
@@ -373,7 +373,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 
 		if (!m_Nodes[i].IsMainTimeRossNode()) continue;
 
-		vector <long> Rels;
+		std::vector <long> Rels;
 		GetOutcomingRelations(i,Rels);
 	    for (int k=0; k < Rels.size(); k++)
 	     if (!m_Nodes[m_Relations[Rels[k]].m_TargetNodeNo].m_bToDelete)

@@ -542,7 +542,7 @@ inline bool SplitFldName (std::string& FldName, BYTE& LeafId, BYTE& BracketLeafI
 
 
 
-inline bool IsPartOf (const vector<TCortege10>& L1,  const vector<TCortege10>& L2, bool UseWildCards, int EmptyDomItemNo, BYTE MaxNumDom)
+inline bool IsPartOf (const std::vector<TCortege10>& L1,  const std::vector<TCortege10>& L2, bool UseWildCards, int EmptyDomItemNo, BYTE MaxNumDom)
 {
   for (size_t i=0; i<L1.size(); i++)
   {
@@ -563,7 +563,7 @@ inline bool IsPartOf (const vector<TCortege10>& L1,  const vector<TCortege10>& L
   return true;
 };
 
-inline bool AreEqual (const vector<TCortege10>& L1,  const vector<TCortege10>& L2, int MaxNumDom)
+inline bool AreEqual (const std::vector<TCortege10>& L1,  const std::vector<TCortege10>& L2, int MaxNumDom)
 {
 	return IsPartOf (L1, L2, false,0, MaxNumDom) && IsPartOf (L2, L1, false, 0, MaxNumDom);
 };
@@ -730,7 +730,7 @@ bool CTempArticle::WriteToDictionary()
 
     if (!CheckCortegeVector()) return false;
 
-	vector<CStructEntry>& Units = m_pRoss->m_Units;
+	std::vector<CStructEntry>& Units = m_pRoss->m_Units;
 
 	if ( !m_pRoss->m_Units[m_UnitNo].HasEmptyArticle() )
 	     m_pRoss->DelCorteges (Units[m_UnitNo].m_StartCortegeNo, Units[m_UnitNo].m_LastCortegeNo + 1);
@@ -763,7 +763,7 @@ bool CTempArticle::WriteToDictionary()
 bool CTempArticle::IsModified() const
 {
 
-    vector<TCortege10> SavedArticle;
+    std::vector<TCortege10> SavedArticle;
 	int StartPos = m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo;
 	int EndPos   = m_pRoss->m_Units[m_UnitNo].m_LastCortegeNo;
 

@@ -12,7 +12,7 @@ int get_termin_main_word(const CInnerTermin* termin, const CThesaurus* thes)
 	if( _modelnum == -1 )
 		return -1;
 	const CInnerModel&	Model =	thes->m_Models[_modelnum];
-	vector<long>	_relations;
+	std::vector<long>	_relations;
 	long _atomgroupscount = Model.m_AtomGroups.size();
 	_relations.resize(_atomgroupscount);
 	for (int i = 0; i < _atomgroupscount; i++)
@@ -26,7 +26,7 @@ int get_termin_main_word(const CInnerTermin* termin, const CThesaurus* thes)
 	};
 
 	int res = -1;
-	vector<long>::iterator	_iterator = find(_relations.begin(), _relations.end(), 0);
+	std::vector<long>::iterator	_iterator = find(_relations.begin(), _relations.end(), 0);
 	if (_iterator != _relations.end())
 		res = _iterator - _relations.begin();
 
@@ -39,7 +39,7 @@ void CEngSemStructure::translate_abbr_termin_node(int MainNodeNo)
 {
 	if (!m_Nodes[MainNodeNo].m_ThesAbbrForm) return;
 	int ThesId = m_Nodes[MainNodeNo].m_ThesaurusId;
-	vector<int> EnglishTranslations;
+	std::vector<int> EnglishTranslations;
 	helper.GetThes(ThesId)->QueryEnglishTranslations(m_Nodes[MainNodeNo].m_TerminId, EnglishTranslations);
 	if( EnglishTranslations.empty()) return;
 	long eng_num = EnglishTranslations[0];
@@ -111,7 +111,7 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 
 		std::string form = lemma;
 		try	{ // get  word form by thesaurus entry in the proper form
-				vector<CFormInfo>  ParadigmCollection;
+				std::vector<CFormInfo>  ParadigmCollection;
 				m_pData->GetEngLemmatizer()->CreateParadigmCollection(true, lemma, true, false, ParadigmCollection);
 				for(int i = 0; i < ParadigmCollection.size(); i++)
 				{
@@ -187,7 +187,7 @@ bool CEngSemStructure::translate_termin_node(int MainNodeNo)
 		}
 	}
 
-	vector<int> EnglishTranslations;
+	std::vector<int> EnglishTranslations;
 	helper.GetThes(colloc.m_ThesaurusId)->QueryEnglishTranslations(colloc.m_TerminId, EnglishTranslations);
 	if( EnglishTranslations.empty())
 		return false;
@@ -221,7 +221,7 @@ bool CEngSemStructure::translate_termin_node(int MainNodeNo)
 	for (int i=0; i < m_Nodes.size(); i++)
 	if  (m_Nodes[i].m_CollocId == m_Nodes[MainNodeNo].m_CollocId)
 	{
-		vector <long> Rels;
+		std::vector <long> Rels;
 		GetOutcomingRelations(i,Rels);
 	    for (int k=0; k < Rels.size(); k++)
 	     if (!m_Nodes[m_Relations[Rels[k]].m_TargetNodeNo].m_bToDelete)

@@ -73,7 +73,7 @@ bool AbbrevIsGreaterThanString (const CAbbrevItem& X, const CStrToCompare& Str)
 
 const char* NumberPlace = "/:D";
 
-static bool ReadAbbrevationsFromOneFile(std::string FileName, vector<CAbbrev>& V, MorphLanguageEnum langua)
+static bool ReadAbbrevationsFromOneFile(std::string FileName, std::vector<CAbbrev>& V, MorphLanguageEnum langua)
 {
     FILE* fp = fopen(FileName.c_str(), "rb");
 	if (!fp) return false;
@@ -145,7 +145,7 @@ bool CGraphanDicts::ReadAbbrevations()
 	// a
 	{
 		sort (m_Abbrevs.begin(),m_Abbrevs.end());
-		vector<CAbbrev>::iterator it = unique(m_Abbrevs.begin(), m_Abbrevs.end());
+		std::vector<CAbbrev>::iterator it = unique(m_Abbrevs.begin(), m_Abbrevs.end());
 		m_Abbrevs.erase(it, m_Abbrevs.end());
 		reverse(m_Abbrevs.begin(),m_Abbrevs.end());
 	}
@@ -236,7 +236,7 @@ bool CGraphanDicts::ReadExtensions(std::string FileName)
 
 
 
-typedef vector<CAbbrev>::const_iterator abbrev_t;
+typedef std::vector<CAbbrev>::const_iterator abbrev_t;
 
 abbrev_t	abbrev_lower_bound(abbrev_t _First, abbrev_t _Last, const CStrToCompare& _Val)
 {	
@@ -268,7 +268,7 @@ bool CGraphmatFile::DealAbbrev (size_t  StartPos, size_t EndPos)
 	if (GetUnits()[StartPos].IsSoft()) return false;
 
 	// search for the first word of the abbreviation
-	vector<CAbbrev>::const_iterator AbbrevIt;
+	std::vector<CAbbrev>::const_iterator AbbrevIt;
 
 	CStrToCompare FirstLine(this, StartPos, false);
 	
@@ -286,7 +286,7 @@ bool CGraphmatFile::DealAbbrev (size_t  StartPos, size_t EndPos)
 		)
 		return false;
 
-	vector<CAbbrev>::const_iterator StartAbbrevIt = AbbrevIt;
+	std::vector<CAbbrev>::const_iterator StartAbbrevIt = AbbrevIt;
 
 	while	(		AbbrevIt != m_pDicts->m_Abbrevs.end() 
 				&& (*AbbrevIt->begin() == *StartAbbrevIt->begin())

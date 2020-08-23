@@ -60,7 +60,7 @@ double expression_result::d_get_double ()
 	}
 }
 
-/// Get the expression_result as a string
+/// Get the expression_result as a std::string
 TIXML_STRING expression_result::S_get_string ()
 {
    TIXML_STRING S_res;
@@ -80,10 +80,10 @@ TIXML_STRING expression_result::S_get_string ()
          break;
       case e_node_set :
          // See XPath 1.0 spec, 3.2 :
-         // An argument is converted to type string as if by calling the string function
+         // An argument is converted to type std::string as if by calling the std::string function
          // ...
-         // A node-set is converted to a string by returning the string-value of the node 
-         // in the node-set that is first in document order. If the node-set is empty, an empty string is returned.
+         // A node-std::set is converted to a std::string by returning the std::string-value of the node 
+         // in the node-std::set that is first in document order. If the node-std::set is empty, an empty std::string is returned.
          nsp_ptr = nsp_get_node_set ();
          if (nsp_ptr -> u_get_nb_node_in_set ())
          {
@@ -108,8 +108,8 @@ TIXML_STRING expression_result::S_get_string ()
 Get the expression_result as a bool\n
 The boolean function converts its argument to a boolean as follows:
 - a number is true if and only if it is neither positive or negative zero nor NaN
-- a node-set is true if and only if it is non-empty
-- a string is true if and only if its length is non-zero
+- a node-std::set is true if and only if it is non-empty
+- a std::string is true if and only if its length is non-zero
 - an object of a type other than the four basic types is converted to a boolean in a way that is dependent on that type
 */
 bool expression_result::o_get_bool ()
@@ -126,10 +126,10 @@ bool expression_result::o_get_bool ()
          break;
       case e_node_set :
          // See XPath 1.0 spec, 3.2 :
-         // An argument is converted to type string as if by calling the string function
+         // An argument is converted to type std::string as if by calling the std::string function
          // ...
-         // A node-set is converted to a string by returning the string-value of the node 
-         // in the node-set that is first in document order. If the node-set is empty, an empty string is returned.
+         // A node-std::set is converted to a std::string by returning the std::string-value of the node 
+         // in the node-std::set that is first in document order. If the node-std::set is empty, an empty std::string is returned.
          nsp_ptr = nsp_get_node_set ();
          return nsp_ptr -> u_get_nb_node_in_set () != 0;
       case e_bool :  
@@ -149,7 +149,7 @@ bool expression_result::o_get_bool ()
             printf ("   bool : %s\n", o_content ? "true" : "false");
             break;
          case e_string :
-            printf ("   string : %s\n", S_content . c_str ());
+            printf ("   std::string : %s\n", S_content . c_str ());
             break;
          case e_int : 
             printf ("   int : %d", i_content);
@@ -161,7 +161,7 @@ bool expression_result::o_get_bool ()
             printf ("   double : %f\n", d_content);
             break;
          case e_node_set :
-            printf ("  node set\n");
+            printf ("  node std::set\n");
             ns_set . v_dump ();
             break;
          case e_invalid :

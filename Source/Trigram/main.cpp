@@ -17,7 +17,7 @@ void PrintUsageAndExit()
     fprintf (stderr,"  -b  read binary model \n");
 	fprintf (stderr,"  --raw-texts - use graphan to find sentences in the input  text \n");
 	fprintf (stderr,"  --supress-morph-errors - do not print morph errors to stderr \n");
-    fprintf (stderr,"  --second-local-coef <a> - set second local coefe\n");
+    fprintf (stderr,"  --second-local-coef <a> - std::set second local coefe\n");
     
 
     

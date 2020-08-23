@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 /* This module contains some convenience functions for extracting substrings
-from the subject string after a regex match has succeeded. The original idea
+from the subject std::string after a regex match has succeeded. The original idea
 for these functions came from Scott Wimer. */
 
 
@@ -51,7 +51,7 @@ for these functions came from Scott Wimer. */
 
 
 /*************************************************
-*           Find number for named string         *
+*           Find number for named std::string         *
 *************************************************/
 
 /* This function is used by the get_first_set() function below, as well
@@ -98,7 +98,7 @@ return PCRE_ERROR_NOSUBSTRING;
 
 
 /*************************************************
-*     Find (multiple) entries for named string   *
+*     Find (multiple) entries for named std::string   *
 *************************************************/
 
 /* This is used by the get_first_set() function below, as well as being
@@ -166,19 +166,19 @@ return PCRE_ERROR_NOSUBSTRING;
 
 
 /*************************************************
-*    Find first set of multiple named strings    *
+*    Find first std::set of multiple named strings    *
 *************************************************/
 
 /* This function allows for duplicate names in the table of named substrings.
-It returns the number of the first one that was set in a pattern match.
+It returns the number of the first one that was std::set in a pattern match.
 
 Arguments:
   code         the compiled regex
   stringname   the name of the capturing substring
-  ovector      the vector of matched substrings
+  ovector      the std::vector of matched substrings
 
-Returns:       the number of the first that is set,
-               or the number of the last one if none are set,
+Returns:       the number of the first that is std::set,
+               or the number of the last one if none are std::set,
                or a negative number on error
 */
 
@@ -205,15 +205,15 @@ return (first[0] << 8) + first[1];
 
 
 /*************************************************
-*      Copy captured string to given buffer      *
+*      Copy captured std::string to given buffer      *
 *************************************************/
 
 /* This function copies a single captured substring into a given buffer.
 Note that we use memcpy() rather than strncpy() in case there are binary zeros
-in the string.
+in the std::string.
 
 Arguments:
-  subject        the subject string that was matched
+  subject        the subject std::string that was matched
   ovector        pointer to the offsets table
   stringcount    the number of substrings that were captured
                    (i.e. the yield of the pcre_exec call, unless
@@ -224,7 +224,7 @@ Arguments:
   size           the size of the buffer
 
 Returns:         if successful:
-                   the length of the copied string, not including the zero
+                   the length of the copied std::string, not including the zero
                    that is put on the end; can be zero
                  if not successful:
                    PCRE_ERROR_NOMEMORY (-6) buffer too small
@@ -249,16 +249,16 @@ return yield;
 
 
 /*************************************************
-*   Copy named captured string to given buffer   *
+*   Copy named captured std::string to given buffer   *
 *************************************************/
 
 /* This function copies a single captured substring into a given buffer,
 identifying it by name. If the regex permits duplicate names, the first
-substring that is set is chosen.
+substring that is std::set is chosen.
 
 Arguments:
   code           the compiled regex
-  subject        the subject string that was matched
+  subject        the subject std::string that was matched
   ovector        pointer to the offsets table
   stringcount    the number of substrings that were captured
                    (i.e. the yield of the pcre_exec call, unless
@@ -269,7 +269,7 @@ Arguments:
   size           the size of the buffer
 
 Returns:         if successful:
-                   the length of the copied string, not including the zero
+                   the length of the copied std::string, not including the zero
                    that is put on the end; can be zero
                  if not successful:
                    PCRE_ERROR_NOMEMORY (-6) buffer too small
@@ -295,13 +295,13 @@ return pcre_copy_substring(subject, ovector, stringcount, n, buffer, size);
 of the captured substrings in it. A NULL pointer is put on the end of the list.
 
 Arguments:
-  subject        the subject string that was matched
+  subject        the subject std::string that was matched
   ovector        pointer to the offsets table
   stringcount    the number of substrings that were captured
                    (i.e. the yield of the pcre_exec call, unless
                    that was zero, in which case it should be 1/3
                    of the offset table size)
-  listptr        set to point to the list of pointers
+  listptr        std::set to point to the list of pointers
 
 Returns:         if successful: 0
                  if not successful:
@@ -362,14 +362,14 @@ pcre_free_substring_list(const char **pointer)
 
 
 /*************************************************
-*      Copy captured string to new store         *
+*      Copy captured std::string to new store         *
 *************************************************/
 
 /* This function copies a single captured substring into a piece of new
 store
 
 Arguments:
-  subject        the subject string that was matched
+  subject        the subject std::string that was matched
   ovector        pointer to the offsets table
   stringcount    the number of substrings that were captured
                    (i.e. the yield of the pcre_exec call, unless
@@ -379,7 +379,7 @@ Arguments:
   stringptr      where to put a pointer to the substring
 
 Returns:         if successful:
-                   the length of the string, not including the zero that
+                   the length of the std::string, not including the zero that
                    is put on the end; can be zero
                  if not successful:
                    PCRE_ERROR_NOMEMORY (-6) failed to get store
@@ -407,16 +407,16 @@ return yield;
 
 
 /*************************************************
-*   Copy named captured string to new store      *
+*   Copy named captured std::string to new store      *
 *************************************************/
 
 /* This function copies a single captured substring, identified by name, into
 new store. If the regex permits duplicate names, the first substring that is
-set is chosen.
+std::set is chosen.
 
 Arguments:
   code           the compiled regex
-  subject        the subject string that was matched
+  subject        the subject std::string that was matched
   ovector        pointer to the offsets table
   stringcount    the number of substrings that were captured
                    (i.e. the yield of the pcre_exec call, unless
@@ -426,7 +426,7 @@ Arguments:
   stringptr      where to put the pointer
 
 Returns:         if successful:
-                   the length of the copied string, not including the zero
+                   the length of the copied std::string, not including the zero
                    that is put on the end; can be zero
                  if not successful:
                    PCRE_ERROR_NOMEMORY (-6) couldn't get memory

@@ -59,7 +59,7 @@ CSemanticsHolder::CSemanticsHolder()
 	m_bDontLoadExamples = false;
 };
 
-const vector<CAbstractArticle>* CSemanticsHolder::GetAbstractArticles(DictTypeEnum type ) const
+const std::vector<CAbstractArticle>* CSemanticsHolder::GetAbstractArticles(DictTypeEnum type ) const
 {
 	AbsractArticleMap::const_iterator it = m_AbstractArticles.find(type);
 	if (it == m_AbstractArticles.end())
@@ -70,7 +70,7 @@ const vector<CAbstractArticle>* CSemanticsHolder::GetAbstractArticles(DictTypeEn
 
 bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 {
-	vector<CAbstractArticle> Articles;
+	std::vector<CAbstractArticle> Articles;
 	long UnitNo = GetRoss(type)->UnitsLowerBound("+");
 	long UnitsCount = GetRoss(type)->GetUnitsSize();
 	while  (    (UnitNo < UnitsCount) 
@@ -195,11 +195,11 @@ void CSemanticsHolder::GetCustomGrammems (std::string GramFet, QWORD& Grammems, 
 	};
 };
 
-std::string CSemanticsHolder::GetContentsOborStr(long UnitNo, vector<CUnitContent> & Contents)
+std::string CSemanticsHolder::GetContentsOborStr(long UnitNo, std::vector<CUnitContent> & Contents)
 {
 	CUnitContent T;
 	T.m_UnitNo = UnitNo;
-	vector<CUnitContent>::iterator It = lower_bound(Contents.begin(),Contents.end(), T);
+	std::vector<CUnitContent>::iterator It = lower_bound(Contents.begin(),Contents.end(), T);
 	if (    
 			(It < Contents.end())
 			&& (*It == T)
@@ -233,7 +233,7 @@ bool GetLemmaFromTitle (std::string S, long PlaceNo, std::string& Lemma)
 void InitThesList (const CThesaurus* Thes, std::string ConceptStr,	StringVector& Vec)
 {
 	Vec.clear();
-	vector<int> LowerTermins;
+	std::vector<int> LowerTermins;
 	Thes->QueryLowerTermins(ConceptStr.c_str(), morphRussian, LowerTermins);
 	long Count = LowerTermins.size();
 	for (long i=0; i <Count; i++)
@@ -378,9 +378,9 @@ bool CSemanticsHolder::InitTimeUnits()
 
 bool CSemanticsHolder::PrintRusEquivs(std::string strFileName, DictTypeEnum type)
 {
-	/*ofstream file;
+	/*std::ofstream file;
 	file.open(strFileName.c_str());
-	vector<CEngUnitNoToRusUnit>& equivs = GetRusEquivIndexes(type);
+	std::vector<CEngUnitNoToRusUnit>& equivs = GetRusEquivIndexes(type);
 	for(int i = 0 ; i < equivs.size() ; i++ )
 	{
 		std::string str = "<" + equivs[i].m_RusUnitStr + ">";
@@ -413,7 +413,7 @@ bool CSemanticsHolder::CreateEngCollocsROSSIndex()
 
 
 // создает индекс RusEquivs по словарю type
-bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, vector<CEngUnitNoToRusUnit>& RusEquivs)
+bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, std::vector<CEngUnitNoToRusUnit>& RusEquivs)
 {
 	RusEquivs.clear();
 	long UnitsCount = GetRoss(type)->GetUnitsSize();
@@ -448,7 +448,7 @@ bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, vector<CEngUnitNoTo
 	return true;
 }
 
-vector<CEngUnitNoToRusUnit>& CSemanticsHolder::GetRusEquivIndexes(DictTypeEnum type)
+std::vector<CEngUnitNoToRusUnit>& CSemanticsHolder::GetRusEquivIndexes(DictTypeEnum type)
 {
 	assert(( type == Aoss ) || ( type == EngCollocRoss ) || (type == EngObor) );
 	switch( type)
@@ -471,7 +471,7 @@ vector<CEngUnitNoToRusUnit>& CSemanticsHolder::GetRusEquivIndexes(DictTypeEnum t
 }
 
 
-bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, vector<SLexFunIndexes>& LexFunIndexesV)
+bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, std::vector<SLexFunIndexes>& LexFunIndexesV)
 {
 	LexFunIndexesV.clear();
 	long UnitsCount = pRoss->GetUnitsSize();
@@ -576,7 +576,7 @@ bool LexFunValueComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2)
 
 const char OborotDels[] = " \t";
 
-bool BuildByFieldContents(std::string s, WORD UnitNo, vector<CUnitContent>& Vect)
+bool BuildByFieldContents(std::string s, WORD UnitNo, std::vector<CUnitContent>& Vect)
 {
 	size_t i = s.find("(");
 	if (i == s.npos) 
@@ -629,7 +629,7 @@ bool BuildByFieldContents(std::string s, WORD UnitNo, vector<CUnitContent>& Vect
 
 
 
-bool BuildContensField(const CDictionary* Dict, vector<CUnitContent>& Vect)
+bool BuildContensField(const CDictionary* Dict, std::vector<CUnitContent>& Vect)
 {
 	Vect.clear();
 	long size = Dict->GetUnitsSize();
@@ -657,7 +657,7 @@ bool BuildContensField(const CDictionary* Dict, vector<CUnitContent>& Vect)
 
 bool CSemanticsHolder::TokenizeDoubleConj()
 {
- vector<CUnitContent> vectorOborStr;
+ std::vector<CUnitContent> vectorOborStr;
 
  if (!BuildContensField(GetRoss(OborRoss), vectorOborStr) )
 	 return false;
@@ -779,7 +779,7 @@ bool CSemanticsHolder::BuildEngCollocsStr()
 }
 
 
-void CSemanticsHolder::GetPrepsFromArticle (const CDictionary* Ross, long UnitNo, BYTE LeafId, BYTE BracketLeafId, vector<CRossInterp>& Preps)
+void CSemanticsHolder::GetPrepsFromArticle (const CDictionary* Ross, long UnitNo, BYTE LeafId, BYTE BracketLeafId, std::vector<CRossInterp>& Preps)
 {
  BYTE FieldNo = Ross->GetFieldNoByFieldStr("PREP");
 
@@ -997,7 +997,7 @@ bool CSemanticsHolder::BuildColloc (std::string ContentFieldStr, int CollocUnitN
 CCollocItemRefCollect* CSemanticsHolder::InsertRusCollocItemRef(std::string S)
 {
 	EngRusMakeUpper(S);
-	vector<CCollocItemRefCollect>::iterator It = lower_bound(m_RusCollocItemRefs.begin(), m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
+	std::vector<CCollocItemRefCollect>::iterator It = lower_bound(m_RusCollocItemRefs.begin(), m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
 	 if (     (It  == m_RusCollocItemRefs.end())
 		 || !(It->Item  == S)
 	   )

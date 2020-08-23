@@ -22,7 +22,7 @@ struct CFIOFormat
 {
 	std::string m_FormatStr;
 	bool   m_GleicheCase;
-	vector<CFIOItem> m_Items;
+	std::vector<CFIOItem> m_Items;
 	CFIOFormat() {};
 
 	CFIOFormat(std::string  FormatStr, bool GleicheCase)
@@ -70,9 +70,9 @@ struct CFIOFormat
 };
 
 
-static void GetCommonVariants(const vector<SmallHomonymsVec>& Parents,
+static void GetCommonVariants(const std::vector<SmallHomonymsVec>& Parents,
 	SmallHomonymsVec& V,
-	vector<SmallHomonymsVec>& Variants,
+	std::vector<SmallHomonymsVec>& Variants,
 	long       Position)
 {
 	if (Variants.size() > 1000) return;
@@ -126,7 +126,7 @@ bool IsPartOfNonSingleOborot(const CHomonym* pH)
 
 bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 {
-	vector<SmallHomonymsVec> Hypots;
+	std::vector<SmallHomonymsVec> Hypots;
 	SmallWordsVec FioWords;
 
 	Hypots.resize(Format->m_Items.size());
@@ -153,7 +153,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 	if (FioWords.size() != Format->m_Items.size()) return false; // не достроилось
 
 	SmallHomonymsVec V; // текущий вариант 
-	vector<SmallHomonymsVec> Variants;
+	std::vector<SmallHomonymsVec> Variants;
 	Variants.reserve(CountOfVariants);
 	V.m_ItemsCount = Hypots.size();
 	GetCommonVariants(Hypots, V, Variants, 0);
@@ -218,7 +218,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 
 void CMAPost::Rule_Fio()
 {
-	vector<CFIOFormat> FioFormats;
+	std::vector<CFIOFormat> FioFormats;
 	FioFormats.push_back(CFIOFormat(_R("ИМЯ ОТЧЕСТВО ФАМИЛИЯ"), true));
 	FioFormats.push_back(CFIOFormat(_R("ФАМИЛИЯ ИМЯ ОТЧЕСТВО"), true));
 	FioFormats.push_back(CFIOFormat(_R("ИМЯ ФАМИЛИЯ"), true));

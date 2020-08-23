@@ -31,7 +31,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 	{
 		m_Items.clear();
 
-        vector<CFormInfo> lem_results;
+        std::vector<CFormInfo> lem_results;
 		lem_results.reserve(5);
 
 		const CGraphmatFile* Gr = piGraphmatFile;

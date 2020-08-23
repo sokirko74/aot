@@ -129,7 +129,7 @@ bool CTranslatorHolder::InitAspDict() {
 bool CTranslatorHolder::Init() {
     //CMyTimeSpanHolder Test;
     //Test.StartTimer("Test",0);
-    vector<double> ts;
+    std::vector<double> ts;
     clock_t m_TimeSpan = clock();
     if (!m_EngHolder.LoadGraphanAndLemmatizer(morphEnglish))
         return false;
@@ -194,7 +194,7 @@ StringVector CTranslatorHolder::GetAspVerb(long ParadigmId, bool IsPerfective) {
     if (!m_AspDictEnabled) return Res;
 
 
-    vector<DWORD> ResVector;
+    std::vector<DWORD> ResVector;
 
     if (!IsPerfective)
         m_AspDict.nonperf2perf(ParadigmId, ResVector);
@@ -216,7 +216,7 @@ StringVector CTranslatorHolder::GetAspVerb(std::string Verb, bool IsPerfective) 
     StringVector Empty;
     try {
 
-        vector<CFormInfo> ParadigmCollection;
+        std::vector<CFormInfo> ParadigmCollection;
         GetRusLemmatizer()->CreateParadigmCollection(true, Verb, false, false, ParadigmCollection);
 
         for (int i = 0; i < ParadigmCollection.size(); i++)
@@ -255,7 +255,7 @@ DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum lang
     const CAgramtab *G = GetGramTab(langua);
     try {
 
-        vector<CFormInfo> ParadigmCollection;
+        std::vector<CFormInfo> ParadigmCollection;
         L->CreateParadigmCollection(false, WordForm, false, false, ParadigmCollection);
 
         if (Poses == 0) {
@@ -288,7 +288,7 @@ DWORD CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, std:
 
     try {
 
-        vector<CFormInfo> ParadigmCollection;
+        std::vector<CFormInfo> ParadigmCollection;
         L->CreateParadigmCollection(true, Lemma, false, false, ParadigmCollection);
 
 

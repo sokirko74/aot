@@ -8,7 +8,7 @@ class CAgramtab;
 struct CTag 
 {
 	std::string			m_Name;
-	vector<string>	m_Lemmas;
+	std::vector<std::string>	m_Lemmas;
 	BYTE			m_Pos;
 	QWORD			m_Grammems;
 	
@@ -23,17 +23,17 @@ struct CTag
 class CTagSet
 {
 public:
-	map<std::string, CTag>	m_Tags;
+	std::map<std::string, CTag>	m_Tags;
 	CTagSet(void);
 	~CTagSet(void);
-	// build the default (part of speech) tag set
+	// build the default (part of speech) tag std::set
 	bool			BuildDefaultTags(const CAgramtab* pAgramtab);
-	// read the tag set from file
+	// read the tag std::set from file
 	bool			ReadTagSet(std::string FileName, const CAgramtab* pAgramtab);
 	//bool			ReadMyStemTagSet(std::string FileName, const CAgramtab* pAgramtab);
 
 	CTag			GetBestSuitedTag (const CTag& A) const;
-	vector<CTag>	DecipherTagStr (std::string TagStr, const CAgramtab* pAgramtab) const;
+	std::vector<CTag>	DecipherTagStr (std::string TagStr, const CAgramtab* pAgramtab) const;
 	CTag			GetTagFromAncode(const CAgramtab* pAgramtab, const char* Ancode, QWORD CommonGrammems, const std::string& Lemma) const;
 };
 

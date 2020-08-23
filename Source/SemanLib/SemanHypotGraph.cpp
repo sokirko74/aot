@@ -15,11 +15,11 @@ bool IsThesCorpora(const CRusSemNode& N, DictTypeEnum Dict)
 };
 
 
-extern void get_all_subsets(vector<int>& the_set, vector<vector<int> >& subsets);
+extern void get_all_subsets(std::vector<int>& the_set, std::vector<std::vector<int> >& subsets);
 
 void CalculateValencyNoWithProhibited(CRusSemNode& N)
 {
-	vector<int> Vals;
+	std::vector<int> Vals;
 	for (long i = 0; i < N.m_Vals.size(); i++) Vals.push_back(i);
 	N.m_NotProhibitedValSets.clear();
 	if (N.ProhibitedPairOfVals.size() == 0)
@@ -29,7 +29,7 @@ void CalculateValencyNoWithProhibited(CRusSemNode& N)
 	};
 
 
-	vector<VectorInt> Subsets;
+	std::vector<VectorInt> Subsets;
 	get_all_subsets(Vals, Subsets);
 
 	for (int i = 0; i < Subsets.size(); i++)
@@ -217,7 +217,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo)
 
 	// добавляем абстрактные добавочные статьи
 	bool IsClauseSyntaxRoot = GetClauseSyntaxTop(m_Nodes[NodeNo].m_ClauseNo) == NodeNo;
-	vector<long> Articles;
+	std::vector<long> Articles;
 	FindAbstractAdditionArticle(Ross, m_Nodes[NodeNo], Articles, IsClauseSyntaxRoot, m_Clauses[m_Nodes[NodeNo].m_ClauseNo].m_ClauseType);
 	AddAbstractAdditionVals(Ross, m_Nodes[NodeNo], Articles);
 
@@ -323,7 +323,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo)
 	удаляем SF IDENT из всех кортежей. Поскольку это SF обозначает лишь то, что	слово является именем собственным.
 	Например, SF (Microsoft) = IDENT, ORGSF (Сокирко) = IDENT, ANIMПо существу IDENT ничего не обозначает. Для того чтоыбы пометить имена собственные	есть слот m_bProper.
 	*/
-	vector<std::string>::const_iterator It = find(m_IndexedSemFets.begin(), m_IndexedSemFets.end(), std::string("IDENT"));
+	std::vector<std::string>::const_iterator It = find(m_IndexedSemFets.begin(), m_IndexedSemFets.end(), std::string("IDENT"));
 	if (It != m_IndexedSemFets.end())
 	{
 		QWORD Num = It - m_IndexedSemFets.begin();
@@ -419,7 +419,7 @@ bool CRusSemStructure::ApplyGramRestr(size_t ClauseNo)
 				{
 					QWORD OldGrammems = m_Nodes[i].GetGrammems();
 					if (ErrUnitNo == m_Nodes[i].GetUnitNo()) continue;
-					vector<QWORD>  GrammemsSet = GetGramRestr(m_Nodes[i]);
+					std::vector<QWORD>  GrammemsSet = GetGramRestr(m_Nodes[i]);
 					if (GrammemsSet.empty()) continue;
 					// пока проверяем только первый кортеж, поскольку пока поле RESTR одиночное 
 
@@ -449,7 +449,7 @@ bool CRusSemStructure::BuildAnalyticalSupelative()
 	// обрабатываем наречия, которые превращают прилагательные в превосходную степень
 	// В этот список входят наречия "наиболее", "самый", "наименее".
 	// удаляем наречия,  а прилагательным приписываем оператор "_превос". 
-	static const vector<std::string> adverbs = { _R("НАИБОЛЕЕ"), _R("НАИМЕНЕЕ"), _R("САМЫЙ") };
+	static const std::vector<std::string> adverbs = { _R("НАИБОЛЕЕ"), _R("НАИМЕНЕЕ"), _R("САМЫЙ") };
 	for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
 		if (m_Nodes[NodeNo].IsLemmaList(adverbs))
 		{
@@ -480,8 +480,8 @@ bool CRusSemStructure::BuildAnalyticalSupelative()
 void CRusSemStructure::CalculateBestCorporaLabel(size_t ClauseNo)
 {
 	// все предметные области, которые упомянуты в узлах СемП
-	typedef pair<std::string, int> StringIntPair;
-	vector<StringIntPair>	 POs;
+	typedef std::pair<std::string, int> StringIntPair;
+	std::vector<StringIntPair>	 POs;
 	/*
 	  если  пользователь выбрал  предметную область (=/= "общ"), тогда это приравниваем
 	  тому  случаю, когда одно слово с этой предметной областью вошли в предложение
@@ -620,7 +620,7 @@ void CRusSemStructure::BuildCircumsChains(long ClauseNo)
 
 		if (NextNodeNo == m_Clauses[ClauseNo].m_EndNodeNo) break;
 
-		vector<long> Rels;
+		std::vector<long> Rels;
 		CSemanticStructure::GetIncomingRelations(NextNodeNo, Rels, false);
 		if (Rels.size() == 0) continue;
 		CSynRealization	SynReal = m_Relations[Rels[0]].m_SynReal;
@@ -731,7 +731,7 @@ void CRusSemStructure::FindOldNodes(long ClauseNo)
 
 void CRusSemStructure::RestoreMemoryRelations(long ClauseNo)
 {
-	vector<long> Nodes;
+	std::vector<long> Nodes;
 	Nodes.resize(m_MemNodes.size());
 
 	for (long i = 0; i < Nodes.size(); i++)

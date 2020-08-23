@@ -248,7 +248,7 @@ bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 
 	try
 	{
-		vector<CFormInfo> Paradigms;
+		std::vector<CFormInfo> Paradigms;
 		std::string h = _R("нечего");
 		GetLemmatizer()->CreateParadigmCollection(true, h, false, false, Paradigms);
 

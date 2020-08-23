@@ -69,7 +69,7 @@ public:
 	   char m_SpacedWord[MaxSpaceWordLen];
 	   int  m_SpacedWordLen; 
 	};
-	vector<CSpacedWord> m_Spaces;
+	std::vector<CSpacedWord> m_Spaces;
 	bool   ReadSpaces (std::string FileName);
 	const char*  SearchSpace (const char *In ,int *len ) const;
 
@@ -83,7 +83,7 @@ public:
 
 
 	// John, Bill
-	vector<CEnglishName>	m_EnglishNames;
+	std::vector<CEnglishName>	m_EnglishNames;
 	bool		ReadENames (std::string FileName);
 	
 
@@ -99,8 +99,8 @@ public:
 	};
 
 	
-	map<WORD, vector<WORD> >		m_OborottosFirstWordIndex;
-	vector<CGraphemOborot>			m_Oborottos;
+	std::map<WORD, std::vector<WORD> >		m_OborottosFirstWordIndex;
+	std::vector<CGraphemOborot>			m_Oborottos;
 	StringVector					m_OborotTokens;
 	
 
@@ -109,7 +109,7 @@ public:
 	void		BuildOborot (const std::string& s, int OborotNo,bool bFixedFet);
 	void		BuildOborottos ();
     
-	vector<CAbbrev>		m_Abbrevs;
+	std::vector<CAbbrev>		m_Abbrevs;
 	bool		ReadAbbrevations();
 
     

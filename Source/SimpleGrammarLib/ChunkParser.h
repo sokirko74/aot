@@ -30,7 +30,7 @@ public:
 	int yylex (void* valp);
 protected:
 	int yylex();
-	list<string>	m_Labels;
+	std::list<std::string>	m_Labels;
 	
 public:
 

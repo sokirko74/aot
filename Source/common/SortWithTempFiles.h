@@ -135,7 +135,7 @@ bool SortWithFiles (std::string InputFileName, std::string OutputFileName)
     file_off_t sz = FileSize(InputFileName.c_str());
     T dummy;
     size_t Count = (size_t)sz/get_size_in_bytes(dummy);
-    size_t PortionSize = max((size_t)1, SortBufferSize/get_size_in_bytes(dummy)); // 100 Mb for sorting buffer
+    size_t PortionSize = std::max((size_t)1, SortBufferSize/get_size_in_bytes(dummy)); // 100 Mb for sorting buffer
     
     FILE* fp = fopen (InputFileName.c_str(), "rb");
     if (!fp)
@@ -143,11 +143,11 @@ bool SortWithFiles (std::string InputFileName, std::string OutputFileName)
          fprintf (stderr, "Cannot open %s", InputFileName.c_str());
          return false;
     }
-    vector<string> PortionNames;
+    std::vector<std::string> PortionNames;
     for (size_t i =0; i<Count; i+= PortionSize)
     {
         size_t End = min (Count, i+PortionSize);
-        vector<T> Portion;
+        std::vector<T> Portion;
         ReadVectorInner(fp, Portion, End - i);
         sort (Portion.begin(),  Portion.end());
         PortionNames.push_back(CreateTempFileName());
@@ -158,7 +158,7 @@ bool SortWithFiles (std::string InputFileName, std::string OutputFileName)
     while (PortionNames.size() > 1)
     {
         size_t  SaveCount = PortionNames.size();
-        vector<string> NewPortionNames;
+        std::vector<std::string> NewPortionNames;
         for (size_t i=0; i < PortionNames.size(); i+=2)
         {
             if (i+1 == PortionNames.size())

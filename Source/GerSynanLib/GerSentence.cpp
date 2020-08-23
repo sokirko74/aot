@@ -356,7 +356,7 @@ void CGerSentence::FindReflexivePronomen()
 		CClause& C = m_Clauses[ClauseNo];
 
 		
-		//  collecting all subjects in set<std::string> Subjects
+		//  collecting all subjects in std::set<std::string> Subjects
 		for (SVI it = C.m_SynVariants.begin(); it != C.m_SynVariants.end(); it++)
 		{
 			CMorphVariant& V = *it;
@@ -393,7 +393,7 @@ void CGerSentence::FindReflexivePronomen()
 				};
 			};
 
-			set<std::string> Subjects;
+			std::set<std::string> Subjects;
 
 			
 			for (size_t i=0; i< V.m_Subjects.size(); i++)
@@ -511,8 +511,8 @@ TryWithoutTwoPotentialRule:
 	ProcessGrammarModels();
 
 	bool SecondTryOfCoverageKillHomonyms = false;
-	vector<CSynWord> SaveWords = m_Words;
-	vector<SFoundTermin> SaveFoundTermins = m_vectorTermins;
+	std::vector<CSynWord> SaveWords = m_Words;
+	std::vector<SFoundTermin> SaveFoundTermins = m_vectorTermins;
 BuildInitialClausesLabel:
 
 	if(! BuildInitialClauses() )
@@ -574,8 +574,8 @@ BuildInitialClausesLabel:
 
 		if (m_pSyntaxOptions->m_KillHomonymsMode == CoverageKillHomonyms)
 		{
-			vector<size_t> RootsCount;
-			set<size_t> RelativeWords;
+			std::vector<size_t> RootsCount;
+			std::set<size_t> RelativeWords;
 			for ( int ClauseNo = 0; ClauseNo < GetClausesCount(); ClauseNo++ )
 			{
 				RootsCount.push_back(GetClause(ClauseNo).m_vectorTypes.size() );
@@ -601,12 +601,12 @@ BuildInitialClausesLabel:
 				   {
 					  SecondTryOfCoverageKillHomonyms = true;
 					  /*
-						We should restore initial m_Words vector, since it was changen by 
+						We should restore initial m_Words std::vector, since it was changen by 
 						CGerSentence::BuildAnalyticalForms, but we should restore the homonyms
 						which were deleted by words KillHomonymsInAllSentence,
 						so m_Words = SaveWords is not relevant
 					  */
-					  vector<CSynWord> p;
+					  std::vector<CSynWord> p;
 					  for (int i =0; i < SaveWords.size(); i++)
 					  {
 							int WordNo=0;

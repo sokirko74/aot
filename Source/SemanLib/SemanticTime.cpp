@@ -42,7 +42,7 @@ bool CRusSemStructure::HasTimeSemFet(const CSemNode& N, std::string SemFet) cons
 
 
 
-long GetFullForm (vector<CAbbrFunct> TimeAbbrPairs, std::string AbbrForm)
+long GetFullForm (std::vector<CAbbrFunct> TimeAbbrPairs, std::string AbbrForm)
 {
 	for (long i=0; i < TimeAbbrPairs.size(); i++)
 		if (AbbrForm == TimeAbbrPairs[i].m_AbbrForm)
@@ -51,7 +51,7 @@ long GetFullForm (vector<CAbbrFunct> TimeAbbrPairs, std::string AbbrForm)
 };
 
 
-long HasAbbrFunct (vector<CAbbrFunct> TimeAbbrPairs, std::string FullForm, std::string FunctName)
+long HasAbbrFunct (std::vector<CAbbrFunct> TimeAbbrPairs, std::string FullForm, std::string FunctName)
 {
 	for (long i=0; i < TimeAbbrPairs.size(); i++)
 		if  (    (FullForm == TimeAbbrPairs[i].m_FullForm)
@@ -237,8 +237,8 @@ struct CTimeNodeHypot {
 	long m_LengthInTitle;
 	long m_CountOfLexFet;
 
-	vector <CNodeHypot> m_Periods;
-	CTimeNodeHypot (long UnitNo, size_t CountOfHoles, const vector <CNodeHypot>& Periods, long LengthInText, long LengthInTitle)
+	std::vector <CNodeHypot> m_Periods;
+	CTimeNodeHypot (long UnitNo, size_t CountOfHoles, const std::vector <CNodeHypot>& Periods, long LengthInText, long LengthInTitle)
 	{
 		m_UnitNo = UnitNo;
 		m_CountOfHoles = CountOfHoles;
@@ -309,7 +309,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree (CNodeHypotVector& V, CTimeUnit& U
   }
   else
   {
-    vector<long> Rels;
+    std::vector<long> Rels;
 
     GetIncomingSynRelations(V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo, Rels);
 
@@ -358,7 +358,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
  for (long NodeNo=m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo < m_Clauses[ClauseNo].m_EndNodeNo; )
  {
 	 // здесь будут лежать гипотезы групп времени 
-	 vector<CTimeNodeHypot> Hypots;
+	 std::vector<CTimeNodeHypot> Hypots;
 
 	 // идем по всем статьям  словаря групп времени 
 	 for (long TimeUnitNo =0; TimeUnitNo < m_pData->m_TimeUnits.size(); TimeUnitNo++)
@@ -493,7 +493,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 			 
 		     if ( (MainWordNo != -1) &&  (PeriodNo != MainWordNo) )
 			 {
-			  vector<long> Rels;
+			  std::vector<long> Rels;
 			  GetIncomingSynRelations(nd, Rels);
 			  long l=0;
 			  for (; l <Rels.size(); l++)
@@ -595,7 +595,7 @@ long CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
    if (   m_Nodes[NodeNo].IsMainTimeRossNode()
 	  )
    {
-		 vector<long> Nodes;
+		 std::vector<long> Nodes;
 	     GetOutcomingNodes(NodeNo, Nodes, false);
 		 long i=0;
 		 for (; i < Nodes.size(); i++)

@@ -47,8 +47,8 @@ possible. There are also some static supporting functions. */
 #endif
 
 #define NLBLOCK md             /* Block containing newline information */
-#define PSSTART start_subject  /* Field containing processed string start */
-#define PSEND   end_subject    /* Field containing processed string end */
+#define PSSTART start_subject  /* Field containing processed std::string start */
+#define PSEND   end_subject    /* Field containing processed std::string end */
 
 #include "pcre_internal.h"
 
@@ -77,8 +77,8 @@ negative to avoid the external error codes. */
 #define MATCH_THEN         (-996)
 
 /* Maximum number of ints of offset to save on the stack for recursive calls.
-If the offset vector is bigger, malloc is used. This should be a multiple of 3,
-because the offset vector is always a multiple of 3 long. */
+If the offset std::vector is bigger, malloc is used. This should be a multiple of 3,
+because the offset std::vector is always a multiple of 3 long. */
 
 #define REC_STACK_SAVE_MAX 30
 
@@ -122,11 +122,11 @@ while (length-- > 0)
 *          Match a back-reference                *
 *************************************************/
 
-/* If a back reference hasn't been set, the length that is passed is greater
-than the number of characters left in the string, so the match fails.
+/* If a back reference hasn't been std::set, the length that is passed is greater
+than the number of characters left in the std::string, so the match fails.
 
 Arguments:
-  offset      index into the offset vector
+  offset      index into the offset std::vector
   eptr        points into the subject
   length      length to be matched
   md          points to match data block
@@ -389,7 +389,7 @@ Arguments:
    flags       can contain
                  match_condassert - this is an assertion condition
                  match_cbegroup - this is the start of an unlimited repeat
-                   group that can match an empty string
+                   group that can match an empty std::string
    rdepth      the recursion depth
 
 Returns:       MATCH_MATCH if matched            )  these values are >= 0
@@ -588,7 +588,7 @@ if (rdepth >= md->match_limit_recursion) RRETURN(PCRE_ERROR_RECURSIONLIMIT);
 original_ims = ims;    /* Save for resetting on ')' */
 
 /* At the start of a group with an unlimited repeat that may match an empty
-string, the match_cbegroup flag is set. When this is the case, add the current
+std::string, the match_cbegroup flag is std::set. When this is the case, add the current
 subject pointer to the chain of such remembered pointers, to be checked when we
 hit the closing ket, in order to break infinite loops that match no characters.
 When match() is called in other circumstances, don't add to the chain. The
@@ -648,17 +648,17 @@ for (;;)
     if (rrc != MATCH_NOMATCH) RRETURN(rrc);
     RRETURN(MATCH_THEN);
 
-    /* Handle a capturing bracket. If there is space in the offset vector, save
-    the current subject position in the working slot at the top of the vector.
+    /* Handle a capturing bracket. If there is space in the offset std::vector, save
+    the current subject position in the working slot at the top of the std::vector.
     We mustn't change the current values of the data slot, because they may be
-    set from a previous iteration of this group, and be referred to by a
+    std::set from a previous iteration of this group, and be referred to by a
     reference inside the group.
 
     If the bracket fails to match, we need to restore this value and also the
-    values of the final offsets, in case they were set by a previous iteration
+    values of the final offsets, in case they were std::set by a previous iteration
     of the same bracket.
 
-    If there isn't enough space in the offset vector, treat this as if it were
+    If there isn't enough space in the offset std::vector, treat this as if it were
     a non-capturing bracket. Don't worry about setting the flag for the error
     case here; that is handled in the code for KET. */
 
@@ -719,7 +719,7 @@ for (;;)
     final alternative within the brackets, we would return the result of a
     recursive call to match() whatever happened. We can reduce stack usage by
     turning this into a tail recursion, except in the case when match_cbegroup
-    is set.*/
+    is std::set.*/
 
     case OP_BRA:
     case OP_SBRA:
@@ -852,8 +852,8 @@ for (;;)
       break;
       }
 
-    /* Otherwise, if PCRE_NOTEMPTY is set, fail if we have matched an empty
-    string - backtracking will then try other alternatives, if any. */
+    /* Otherwise, if PCRE_NOTEMPTY is std::set, fail if we have matched an empty
+    std::string - backtracking will then try other alternatives, if any. */
 
     if (md->notempty && eptr == mstart) RRETURN(MATCH_NOMATCH);
     md->end_match_ptr = eptr;           /* Record where we ended */
@@ -866,7 +866,7 @@ for (;;)
     case OP_OPT:
     ims = ecode[1];
     ecode += 2;
-    DPRINTF(("ims set to %02lx\n", ims));
+    DPRINTF(("ims std::set to %02lx\n", ims));
     break;
 
     /* Assertion brackets. Check the alternative branches in turn - the
@@ -1068,7 +1068,7 @@ for (;;)
     /* Control never reaches here */
 
     /* "Once" brackets are like assertion brackets except that after a match,
-    the point in the subject string is not moved back. Thus there can never be
+    the point in the subject std::string is not moved back. Thus there can never be
     a move back into the brackets. Friedl calls these "atomic" subpatterns.
     Check the alternative branches in turn - the matching won't pass the KET
     for this kind of subpattern. If any one branch matches, we carry on as at
@@ -1120,7 +1120,7 @@ for (;;)
     if (ecode[1+LINK_SIZE] == OP_OPT)
       {
       ims = (ims & ~PCRE_IMS) | ecode[4];
-      DPRINTF(("ims set to %02lx at group repeat\n", ims));
+      DPRINTF(("ims std::set to %02lx at group repeat\n", ims));
       }
 
     if (*ecode == OP_KETRMIN)
@@ -1182,8 +1182,8 @@ for (;;)
     prev = ecode - GET(ecode, 1);
 
     /* If this was a group that remembered the subject start, in order to break
-    infinite repeats of empty string matches, retrieve the subject start from
-    the chain. Otherwise, set it NULL. */
+    infinite repeats of empty std::string matches, retrieve the subject start from
+    the chain. Otherwise, std::set it NULL. */
 
     if (*prev >= OP_SBRA)
       {
@@ -1268,7 +1268,7 @@ for (;;)
     /* The repeating kets try the rest of the pattern or restart from the
     preceding bracket, in the appropriate order. In the second case, we can use
     tail recursion to avoid using another stack frame, unless we have an
-    unlimited repeat of a group that can match an empty string. */
+    unlimited repeat of a group that can match an empty std::string. */
 
     flags = (*prev >= OP_SBRA)? match_cbegroup : 0;
 
@@ -1276,7 +1276,7 @@ for (;;)
       {
       RMATCH(eptr, ecode + 1 + LINK_SIZE, offset_top, md, ims, eptrb, 0, RM12);
       if (rrc != MATCH_NOMATCH) RRETURN(rrc);
-      if (flags != 0)    /* Could match an empty string */
+      if (flags != 0)    /* Could match an empty std::string */
         {
         RMATCH(eptr, prev, offset_top, md, ims, eptrb, flags, RM50);
         RRETURN(rrc);
@@ -1330,7 +1330,7 @@ for (;;)
     break;
 
     /* Assert before internal newline if multiline, or before a terminating
-    newline unless endonly is set, else end of subject unless noteol is set. */
+    newline unless endonly is std::set, else end of subject unless noteol is std::set. */
 
     case OP_DOLL:
     if ((ims & PCRE_MULTILINE) != 0)
@@ -1716,7 +1716,7 @@ for (;;)
     item to see if there is repeat information following. The code is similar
     to that for character classes, but repeated for efficiency. Then obey
     similar code to character type repeats - written out again for speed.
-    However, if the referenced string is the empty string, always treat
+    However, if the referenced std::string is the empty std::string, always treat
     it as matched, any number of times (otherwise there could be infinite
     loops). */
 
@@ -1725,7 +1725,7 @@ for (;;)
       offset = GET2(ecode, 1) << 1;               /* Doubled ref number */
       ecode += 3;                                 /* Advance past item */
 
-      /* If the reference is unset, set the length to be longer than the amount
+      /* If the reference is unset, std::set the length to be longer than the amount
       of subject left; this ensures that every attempt at a match fails. We
       can't just fail here, because of the possibility of quantifiers with zero
       minima. */
@@ -1772,7 +1772,7 @@ for (;;)
       if (length == 0) continue;
 
       /* First, ensure the minimum number of matches are present. We get back
-      the length of the reference string explicitly rather than passing the
+      the length of the reference std::string explicitly rather than passing the
       address of eptr, so that eptr can be a register variable. */
 
       for (i = 1; i <= min; i++)
@@ -1801,7 +1801,7 @@ for (;;)
         /* Control never gets here */
         }
 
-      /* If maximizing, find the longest string and work backwards */
+      /* If maximizing, find the longest std::string and work backwards */
 
       else
         {
@@ -4328,19 +4328,19 @@ Undefine all the macros that were defined above to handle this. */
 *         Execute a Regular Expression           *
 *************************************************/
 
-/* This function applies a compiled re to a subject string and picks out
-portions of the string if it matches. Two elements in the vector are set for
+/* This function applies a compiled re to a subject std::string and picks out
+portions of the std::string if it matches. Two elements in the std::vector are std::set for
 each substring: the offsets to the start and end of the substring.
 
 Arguments:
   argument_re     points to the compiled expression
   extra_data      points to extra data or is NULL
-  subject         points to the subject string
-  length          length of subject string (may contain binary zeros)
-  start_offset    where to start in the subject string
+  subject         points to the subject std::string
+  length          length of subject std::string (may contain binary zeros)
+  start_offset    where to start in the subject std::string
   options         option bits
-  offsets         points to a vector of ints to be filled in with offsets
-  offsetcount     the number of elements in the vector
+  offsets         points to a std::vector of ints to be filled in with offsets
+  offsetcount     the number of elements in the std::vector
 
 Returns:          > 0 => success; value is the number of elements filled in
                   = 0 => success, but offsets is not big enough
@@ -4489,7 +4489,7 @@ switch (options & (PCRE_BSR_ANYCRLF|PCRE_BSR_UNICODE))
   }
 
 /* Handle different types of newline. The three bits give eight cases. If
-nothing is set at run time, whatever was used at compile time applies. */
+nothing is std::set at run time, whatever was used at compile time applies. */
 
 switch ((((options & PCRE_NEWLINE_BITS) == 0)? re->options :
         (pcre_uint32)options) & PCRE_NEWLINE_BITS)
@@ -4528,13 +4528,13 @@ else
     }
   }
 
-/* Partial matching is supported only for a restricted set of regexes at the
+/* Partial matching is supported only for a restricted std::set of regexes at the
 moment. */
 
 if (md->partial && (re->flags & PCRE_NOPARTIAL) != 0)
   return PCRE_ERROR_BADPARTIAL;
 
-/* Check a UTF-8 string if required. Unfortunately there's no way of passing
+/* Check a UTF-8 std::string if required. Unfortunately there's no way of passing
 back the character offset. */
 
 #ifdef SUPPORT_UTF8
@@ -4562,7 +4562,7 @@ ims = re->options & (PCRE_CASELESS|PCRE_MULTILINE|PCRE_DOTALL);
 
 /* If the expression has got more back references than the offsets supplied can
 hold, we get a temporary chunk of working store to use during the matching.
-Otherwise, we can use the vector supplied, rounding down its size to a multiple
+Otherwise, we can use the std::vector supplied, rounding down its size to a multiple
 of 3. */
 
 ocount = offsetcount - (offsetcount % 3);
@@ -4590,7 +4590,7 @@ resetcount = 2 + re->top_bracket * 2;
 if (resetcount > offsetcount) resetcount = ocount;
 
 /* Reset the working variable associated with each extraction. These should
-never be used unless previously set, but they get saved and restored, and so we
+never be used unless previously std::set, but they get saved and restored, and so we
 initialize them to avoid reading uninitialized locations. */
 
 if (md->offset_vector != NULL)
@@ -4601,7 +4601,7 @@ if (md->offset_vector != NULL)
   }
 
 /* Set up the first character to match, if available. The first_byte value is
-never set for an anchored regular expression, but the anchoring may be forced
+never std::set for an anchored regular expression, but the anchoring may be forced
 at run time, so we have to test for anchoring. The first char may be unset for
 an unanchored pattern, of course. If there's no first char and the pattern was
 studied, there may be a bitmap of possible first characters. */
@@ -4621,7 +4621,7 @@ if (!anchored)
   }
 
 /* For anchored or unanchored matches, there may be a "last known required
-character" set. */
+character" std::set. */
 
 if ((re->flags & PCRE_REQCHSET) != 0)
   {
@@ -4651,7 +4651,7 @@ for(;;)
     }
 
   /* Advance to a unique first char if possible. If firstline is TRUE, the
-  start of the match is constrained to the first line of a multiline string.
+  start of the match is constrained to the first line of a multiline std::string.
   That is, the match must be before or at the first newline. Implement this by
   temporarily adjusting end_subject so that we stop scanning at a newline. If
   the match fails at the newline, later code breaks this loop. */
@@ -4720,18 +4720,18 @@ for(;;)
   printf("\n");
 #endif
 
-  /* If req_byte is set, we know that that character must appear in the subject
-  for the match to succeed. If the first character is set, req_byte must be
+  /* If req_byte is std::set, we know that that character must appear in the subject
+  for the match to succeed. If the first character is std::set, req_byte must be
   later in the subject; otherwise the test starts at the match point. This
   optimization can save a huge amount of backtracking in patterns with nested
   unlimited repeats that aren't going to match. Writing separate code for
   cased/caseless versions makes it go faster, as does using an autoincrement
   and backing off on a match.
 
-  HOWEVER: when the subject string is very, very long, searching to its end can
+  HOWEVER: when the subject std::string is very, very long, searching to its end can
   take a long time, and give bad performance on quite ordinary patterns. This
   showed up when somebody was matching something like /^\d+C/ on a 32-megabyte
-  string... so we don't do this when the string is sufficiently long.
+  std::string... so we don't do this when the std::string is sufficiently long.
 
   ALSO: this processing is disabled when partial matching is requested.
   */
@@ -4825,7 +4825,7 @@ for(;;)
 
   rc = MATCH_NOMATCH;
 
-  /* If PCRE_FIRSTLINE is set, the match must happen before or at the first
+  /* If PCRE_FIRSTLINE is std::set, the match must happen before or at the first
   newline in the subject (though it may continue over the newline). Therefore,
   if we have just failed to match, starting at a newline, do not continue. */
 
@@ -4864,16 +4864,16 @@ conditions is true:
 
 (2) We are past the end of the subject;
 
-(3) PCRE_FIRSTLINE is set and we have failed to match at a newline, because
+(3) PCRE_FIRSTLINE is std::set and we have failed to match at a newline, because
     this option requests that a match occur at or before the first newline in
     the subject.
 
-When we have a match and the offset vector is big enough to deal with any
-backreferences, captured substring offsets will already be set up. In the case
+When we have a match and the offset std::vector is big enough to deal with any
+backreferences, captured substring offsets will already be std::set up. In the case
 where we had to get some local store to hold offsets for backreference
 processing, copy those that we can. In this case there need not be overflow if
 certain parts of the pattern were not used, even though there are more
-capturing parentheses than vector slots. */
+capturing parentheses than std::vector slots. */
 
 ENDLOOP:
 
@@ -4893,11 +4893,11 @@ if (rc == MATCH_MATCH)
     }
 
   /* Set the return code to the number of captured strings, or 0 if there are
-  too many to fit into the vector. */
+  too many to fit into the std::vector. */
 
   rc = md->offset_overflow? 0 : md->end_offset_top/2;
 
-  /* If there is space, set up the whole thing as substring 0. The value of
+  /* If there is space, std::set up the whole thing as substring 0. The value of
   md->start_match_ptr might be modified if \K was encountered on the success
   matching path. */
 

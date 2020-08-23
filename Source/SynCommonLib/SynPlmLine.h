@@ -104,7 +104,7 @@ public:
 	const std::string& get_lemma_string() const;
     const COborotForSyntax* get_oborot_ptr() const;
     int                     get_coord_conj_no() const;
-    const vector<int>*      get_simple_preps() const;
+    const std::vector<int>*      get_simple_preps() const;
     bool has_space_before() const;
     bool can_syn_depend_on_adv() const;
     bool can_syn_depend_on_adj() const;
@@ -114,5 +114,5 @@ public:
     bool has_unk_gramcodes() const;
 };
 
-typedef vector<CSynPlmLine> CPlmVector;
+typedef std::vector<CSynPlmLine> CPlmVector;
 #endif

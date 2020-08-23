@@ -3,10 +3,10 @@
 
 
 void CRusSemStructure::AddCollocHyp (long StartNodeNo, 
-									 vector<long>& RefCollocItems,
+									 std::vector<long>& RefCollocItems,
 									 long ItemNo,
 									 CSemCollocHyp& Hyp,
-									 vector<CSemCollocHyp>& Hyps)
+									 std::vector<CSemCollocHyp>& Hyps)
 {
 	if (ItemNo == 0)
 		Hyp.m_Coords.clear();
@@ -117,7 +117,7 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 		return false;
 
 	// проверка предлога
-	vector<CRossInterp> Preps;
+	std::vector<CRossInterp> Preps;
 	m_pData->GetPrepsFromArticle (GetRoss(CollocRoss), m_pData->m_RusCollocs[CollocNo].UnitNo, 0, ItemNo+1, Preps);
 	long l=0;
 	for (; l <Preps.size(); l++)
@@ -172,9 +172,9 @@ bool VectorSemCollocHypCanBeTogether(const CSemCollocHypVector& H)
 };
 
 
-void get_subsets_with_this_len(long len, vector<int>& subset, vector<vector<int> >& subsets, vector<int>::iterator the_set_it, vector<int>::iterator set_end)
+void get_subsets_with_this_len(long len, std::vector<int>& subset, std::vector<std::vector<int> >& subsets, std::vector<int>::iterator the_set_it, std::vector<int>::iterator set_end)
 {	
-	vector<int>::iterator it = the_set_it;
+	std::vector<int>::iterator it = the_set_it;
 	int size = subset.size();
 	for(; it != set_end ; )
 	{
@@ -190,11 +190,11 @@ void get_subsets_with_this_len(long len, vector<int>& subset, vector<vector<int>
 	}
 }
 
-void get_all_subsets(vector<int>& the_set, vector<vector<int> >& subsets)
+void get_all_subsets(std::vector<int>& the_set, std::vector<std::vector<int> >& subsets)
 {
 	for(int i = 1 ; i <= the_set.size() ; i++ )
 	{
-		vector<int> subset;
+		std::vector<int> subset;
 		get_subsets_with_this_len(i, subset, subsets, the_set.begin(), the_set.end() );
 	}
 
@@ -206,9 +206,9 @@ void get_all_subsets(vector<int>& the_set, vector<vector<int> >& subsets)
 // SetLexVariant (построение лексического варианта) 
 void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 {
-	vector<CSemCollocHyp> AllHyps;
+	std::vector<CSemCollocHyp> AllHyps;
 	CRusSemClause& Clause = m_Clauses[ClauseNo];
-	vector<long> RefCollocItems;
+	std::vector<long> RefCollocItems;
 	RefCollocItems.resize(Clause.GetNodesCount());
 
 	for (long i = Clause.m_BeginNodeNo; i < Clause.m_EndNodeNo; i++)
@@ -218,7 +218,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 		std::string S  =  m_Nodes[i].m_Words[0].m_Lemma;
 		if (S == "") S = m_Nodes[i].m_Words[0].m_Word;
 
-		vector<CCollocItemRefCollect>::const_iterator It = lower_bound(m_pData->m_RusCollocItemRefs.begin(), m_pData->m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
+		std::vector<CCollocItemRefCollect>::const_iterator It = lower_bound(m_pData->m_RusCollocItemRefs.begin(), m_pData->m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
 		if (       (It  != m_pData->m_RusCollocItemRefs.end())
 			&&  (It->Item == S)
 		 )
@@ -262,7 +262,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 		for (long j=0; j <  C.m_Rels.size(); j++)
 			if (C.m_Rels[j].m_SynRelName == _R("ПРИЛ_СУЩ"))
 			{
-				vector<long> Rels;
+				std::vector<long> Rels;
 				long TargetNodeNo = FindNodeByWordNo(AllHyps[i].m_Coords[C.m_Rels[j].m_TargetNodeNo].m_WordNo, ClauseNo);
 				long SourceNodeNo = FindNodeByWordNo(AllHyps[i].m_Coords[C.m_Rels[j].m_SourceNodeNo].m_WordNo, ClauseNo);
 				GetIncomingSynRelations(TargetNodeNo, Rels);
@@ -287,8 +287,8 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 		rml_TRACE ("%s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
 
 	// получение всех подмножеств множества гипотез для условных словосочетаний
-	vector<vector<int> > subsets;
-	vector<int> the_set;
+	std::vector<std::vector<int> > subsets;
+	std::vector<int> the_set;
 	for (long i=0; i<AllHyps.size();i++)
 		if (m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].IsConditional)
 			the_set.push_back(i);

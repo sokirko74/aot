@@ -1,7 +1,7 @@
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 cmake_minimum_required(VERSION 3.5)
 
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 17)
 
 IF (WIN32)
     # download from https://sourceforge.net/projects/winflexbison/?source=typ_redirect

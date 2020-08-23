@@ -11,7 +11,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::FillVectorOfGramCortegeAndType(vector<SGramCortegesAndType>& GramCortegesAndTypeV,vector<TCortege>&  GramCorteges, DictTypeEnum type)
+void CEngSemStructure::FillVectorOfGramCortegeAndType(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV,std::vector<TCortege>&  GramCorteges, DictTypeEnum type)
 {
 	for( int i=0; i<GramCorteges.size(); i++ )
 	{
@@ -49,7 +49,7 @@ void CEngSemStructure::FillVectorOfGramCortegeAndType(vector<SGramCortegesAndTyp
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::GetGramCortegesAndTypeFromRel(vector<SGramCortegesAndType>& GramCortegesAndTypeV, CEngSemRelation& semRel)
+void CEngSemStructure::GetGramCortegesAndTypeFromRel(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV, CEngSemRelation& semRel)
 {
 	int iEngNode;
 	if( semRel.m_bReverseRel )
@@ -57,7 +57,7 @@ void CEngSemStructure::GetGramCortegesAndTypeFromRel(vector<SGramCortegesAndType
 	else
 		iEngNode = semRel.m_SourceNodeNo;
 
-	vector<TCortege> GramCorteges;
+	std::vector<TCortege> GramCorteges;
 	if( semRel.m_bInterpreted && !semRel.m_Pattern.IsEmpty() )
 	{
 		GramCorteges = semRel.m_Pattern.m_GramCorteges;
@@ -135,7 +135,7 @@ void CEngSemStructure::TranslateOneActant(int iRel,int iEngNode)
 				break;
 		}
 
-		vector<SGramCortegesAndType> GramCortegesAndTypeV;	
+		std::vector<SGramCortegesAndType> GramCortegesAndTypeV;	
 		GetGramCortegesAndTypeFromRel(GramCortegesAndTypeV,semRel);
 
 		for( int i=0; i<GramCortegesAndTypeV.size(); i++ )
@@ -294,7 +294,7 @@ void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege corte
 		return;
 
 	SGramCortegesAndType	GramCortegesAndType;
-	vector<SGramCortegesAndType> GramCortegesAndTypeVector;
+	std::vector<SGramCortegesAndType> GramCortegesAndTypeVector;
 	SemRelToGramCortegeMap_t::iterator it;
 
 	if( (it=m_SemRelToGramCortegeMap.find(semRel)) != m_SemRelToGramCortegeMap.end() )

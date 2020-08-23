@@ -86,7 +86,7 @@ const int MaxBulletSectionSize = 40;
 
 bool CGraphmatFile::DealAsteriskBullet (size_t LB, size_t HB)
 {
-	vector<CAsteriskHyp> Hyps;
+	std::vector<CAsteriskHyp> Hyps;
 	size_t LineNo = 0;
 	size_t i;
 
@@ -139,7 +139,7 @@ bool CGraphmatFile::DealAsteriskBullet (size_t LB, size_t HB)
 
 }
 
-bool DealIndention  (CGraphmatFile& G, size_t i, size_t Offset, const vector<WORD>& LeftMargins)
+bool DealIndention  (CGraphmatFile& G, size_t i, size_t Offset, const std::vector<WORD>& LeftMargins)
 {
 	if (i == 0) return true;
 	if ( G.GetUnits()[i].IsSoft()) return true;
@@ -270,7 +270,7 @@ void CGraphmatFile::DealOborotto(size_t  HB)
 {
 
 	std::string s;
-	vector<WORD> OborotIds;
+	std::vector<WORD> OborotIds;
 	OborotIds.resize(HB);
 
 	int i=1;
@@ -392,7 +392,7 @@ int CGraphmatFile::DealReferences (size_t i,size_t HB)
 const size_t MaxLeftMargin = 300;
 
 
-void MapCorrectMinSpace (const CGraphmatFile& G, size_t LB, size_t HB, WORD& FuzzyMinSpace, WORD& MinSpace, int& NumOfFilledLines, const vector<WORD>& gLeftMargins )
+void MapCorrectMinSpace (const CGraphmatFile& G, size_t LB, size_t HB, WORD& FuzzyMinSpace, WORD& MinSpace, int& NumOfFilledLines, const std::vector<WORD>& gLeftMargins )
 {
 	size_t					LeftMargins [MaxLeftMargin];
 
@@ -658,7 +658,7 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 
 
 
-void CalculateLMarg (const CGraphmatFile& G, vector<WORD>& gLeftMargins)
+void CalculateLMarg (const CGraphmatFile& G, std::vector<WORD>& gLeftMargins)
 {
 	WORD lm = 0;
 	gLeftMargins.resize(G.GetUnits().size());
@@ -1103,7 +1103,7 @@ static void InitEnglishNameSlot (CGraphmatFile& C)
 
 			const char* UpperUnit = C.GetUppercaseToken(i);
 
-			vector<CEnglishName>::const_iterator It = lower_bound (C.m_pDicts->m_EnglishNames.begin(), C.m_pDicts->m_EnglishNames.end(), UpperUnit, EnglishNameLess());
+			std::vector<CEnglishName>::const_iterator It = lower_bound (C.m_pDicts->m_EnglishNames.begin(), C.m_pDicts->m_EnglishNames.end(), UpperUnit, EnglishNameLess());
 
 			if	(		 (It != C.m_pDicts->m_EnglishNames.end())
 					&&	!strcmp(It->name, UpperUnit)
@@ -1144,7 +1144,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 
 
 	//  === Смещение от левого края =====
-	vector<WORD> gLeftMargins;
+	std::vector<WORD> gLeftMargins;
 	try{
 		CalculateLMarg(*this, gLeftMargins);
 	}

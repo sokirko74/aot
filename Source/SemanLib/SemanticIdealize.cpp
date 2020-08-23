@@ -37,7 +37,7 @@ long CRusSemStructure::Idealize ()
 				&& (m_Nodes[NodeNo].m_Vals.size() > 0)
 				)
 			{
-				vector<long> Rels;
+				std::vector<long> Rels;
 				// ищем сначала в обычных отношениях, а потом  в дополнительных
 				GetOutcomingRelations(NodeNo, Rels, false);
 				long i=0;
@@ -420,8 +420,8 @@ void CRusSemStructure::ApplySubordinationSemfets ()
 			&& (m_Relations[MainRelNo].m_Valency.m_UnitNo != ErrUnitNo)
 		   )
 		{
-			const vector<QWORD>& SemFetsRel =  m_Relations[MainRelNo].m_SemFets;
-			vector<QWORD> SemFetsNode = m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_NodeSemFets;
+			const std::vector<QWORD>& SemFetsRel =  m_Relations[MainRelNo].m_SemFets;
+			std::vector<QWORD> SemFetsNode = m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_NodeSemFets;
 			if (!SemFetsRel.empty())
 				if (	   SemFetsNode.empty()
 						|| m_Nodes[m_Relations[RelNo].m_TargetNodeNo].IsAnaphoricPronoun()
@@ -508,7 +508,7 @@ void CRusSemStructure::ApplyDopInfinitive ()
             )
         {
             long NodeNo = m_Relations[RelNo].m_SourceNodeNo;
-            vector<long> Rels;
+            std::vector<long> Rels;
             GetOutcomingRelations(NodeNo, Rels, false);
             long DativSubjNodeNo = -1;
             long ParentSubjNodeNo = -1;
@@ -552,7 +552,7 @@ void CRusSemStructure::ApplyDopInfinitive ()
 
             NodeNo = m_Relations[RelNo].m_TargetNodeNo;
             if (m_Nodes[NodeNo].m_Vals.size() == 0) continue;
-            vector<CValency> ValencyMisses;
+            std::vector<CValency> ValencyMisses;
             GetValencyMisses (NodeNo, ValencyMisses);
             // у инфинитва обычно не заполненна первая валентность, но если вдруг 
             // заполнена, то это не наш случай
@@ -568,7 +568,7 @@ void CRusSemStructure::ApplyDopInfinitive ()
 
 long CRusSemStructure::GetValencyNoWithouProhibited (long NodeNo, long ValencyNo) const
 {
-  vector<long> Rels;
+  std::vector<long> Rels;
   GetOutcomingRelations(NodeNo, Rels);
 
   long Curr =	0; // текущий номер совместной валентности
@@ -628,7 +628,7 @@ void CRusSemStructure::FindQuestionClauses ()
 	if (m_Clauses[i].m_HasParticleBY)
 	 if (m_Nodes[m_Clauses[i].m_BeginNodeNo].m_bQuestionWord)
 	 {
-		 vector<long> Nodes;
+		 std::vector<long> Nodes;
 		 GetClauseRootsWithoutDeleted(i,Nodes);
 		 if (Nodes.size() != 1)  continue;
 		 if (!m_Nodes[Nodes[0]].HasRelOperator(_R("НИ"))) continue;
@@ -642,7 +642,7 @@ void CRusSemStructure::FindQuestionClauses ()
 	 */
    if (m_SentenceMood != Interrogative) return;
 
-   vector<long> HostClauses;
+   std::vector<long> HostClauses;
    for (long i=0; i< m_Clauses.size(); i++)
    	if (m_Clauses[i].m_HostClause  == -1)
 	  HostClauses.push_back(i);
@@ -661,7 +661,7 @@ void CRusSemStructure::FindQuestionClauses ()
        
    if (HostClauses.size() == 1)
    {
-	   vector<long> SimilClauses;
+	   std::vector<long> SimilClauses;
 	   SimilClauses.push_back(HostClauses[0]);
 
 	   for (long i=0; i< m_Clauses.size(); i++)
@@ -704,7 +704,7 @@ void CRusSemStructure::SolveImperativeHomonymy()
 };
 
 
-void CRusSemStructure::dfs_in_clause(size_t NodeNo, vector<long>& Nodes) const
+void CRusSemStructure::dfs_in_clause(size_t NodeNo, std::vector<long>& Nodes) const
 {
   Nodes.push_back(NodeNo);
   for (size_t i=0; i<m_Relations.size(); i++)
@@ -725,7 +725,7 @@ void CRusSemStructure::ConvertParticipleTreeToClause()
 				  /*
 				    причастия без зависимых слов будем пропускать
 				  */
-				  vector<long> Rels;
+				  std::vector<long> Rels;
 				  GetOutcomingRelations(NodeNo, Rels, false);
 				  long i =0;
 				  for (; i< Rels.size(); i++)
@@ -735,14 +735,14 @@ void CRusSemStructure::ConvertParticipleTreeToClause()
 				  if (i == Rels.size()) continue;
 
 
-				  vector<long> Roots;
+				  std::vector<long> Roots;
 				  GetClauseRootsWithoutDeleted(ClauseNo,Roots);
 				  if (Roots.size() != 1) continue;
 				  // если причастие уже стоит во главе клаузы, тогда надо выйти
 				  if (Roots[0] == NodeNo) continue;
-				  vector<long> iNodes;
+				  std::vector<long> iNodes;
 				  dfs_in_clause (NodeNo, iNodes);
-				  vector<CRusSemNode> Nodes;
+				  std::vector<CRusSemNode> Nodes;
 			      SetNodeToDeleteFalse();
 				  int NewClauseNo = m_Clauses.size();
 				  int NodesCount = m_Nodes.size();

@@ -157,13 +157,13 @@ size_t CRusSemStructure::CountLexFunctsInOneClause(long ClauseNo)
 
 
 
-void AddByLemma(const vector<SLexFunIndexes>& base, std::string Lemma, vector<CDictReference>& result) 
+void AddByLemma(const std::vector<SLexFunIndexes>& base, std::string Lemma, std::vector<CDictReference>& result) 
 {
 	SLexFunIndexes LexFunIndexes;
 	LexFunIndexes.m_LexFunValue.m_UnitStr = Lemma;
 	EngRusMakeLower(LexFunIndexes.m_LexFunValue.m_UnitStr);
 	for (
-		vector<SLexFunIndexes>::const_iterator  it = lower_bound(base.begin(), base.end(), LexFunIndexes, LexFunValueComp);
+		std::vector<SLexFunIndexes>::const_iterator  it = lower_bound(base.begin(), base.end(), LexFunIndexes, LexFunValueComp);
 		 (		(it != base.end() )
 			&&	( (*it).EqByLexFunValue(LexFunIndexes.m_LexFunValue)  )
 		 );
@@ -203,9 +203,9 @@ void CRusSemStructure::FindVerbsOfS0(long NodeNo)
 	SLexFunIndexes LexFunIndexes;
 	LexFunIndexes.m_LexFunValue.m_UnitStr = m_Nodes[NodeNo].m_Words[0].m_Lemma;
 	EngRusMakeLower(LexFunIndexes.m_LexFunValue.m_UnitStr);
-	const vector<SLexFunIndexes>& base = m_pData->m_LexFunIndexesRusByValue;
+	const std::vector<SLexFunIndexes>& base = m_pData->m_LexFunIndexesRusByValue;
 	for (
-		vector<SLexFunIndexes>::const_iterator  it = lower_bound(base.begin(), base.end(), LexFunIndexes, LexFunValueComp);
+		std::vector<SLexFunIndexes>::const_iterator  it = lower_bound(base.begin(), base.end(), LexFunIndexes, LexFunValueComp);
 		 (		(it != base.end() )
 			&&	( (*it).EqByLexFunValue(LexFunIndexes.m_LexFunValue)  )
 		 );
@@ -224,7 +224,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 
 	const CRusSemNode& SitNode = m_Nodes[SitNodeNo];
 	const CRusSemNode& ParamNode = m_Nodes[ParamNodeNo];
-	vector<CLexicalFunctionField>::const_iterator It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), ParamNode.m_Words[ParamNode.m_MainWordNo].m_Lemma);
+	std::vector<CLexicalFunctionField>::const_iterator It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), ParamNode.m_Words[ParamNode.m_MainWordNo].m_Lemma);
 	if (It == SitNode.m_LexFunctFields.end())
 	{
 		// поищем среди эквивалентов
@@ -362,8 +362,8 @@ void CRusSemStructure::BuildAdjOrAdvLexFunctParamNodes(long ClauseNo)
 			&& (m_Nodes[NodeNo].m_MainWordNo != -1)
 	   )
 	{
-		 vector<long> Nodes;
-		 vector<long> Rels;
+		 std::vector<long> Nodes;
+		 std::vector<long> Rels;
 		 GetOutcomingSynRelations(NodeNo, Rels);
 		 // формируем множество узлов, которые могут быть лексическими функциями типа Magn  
 		 for (long i=0; i < Rels.size(); i++)
@@ -371,7 +371,7 @@ void CRusSemStructure::BuildAdjOrAdvLexFunctParamNodes(long ClauseNo)
 				  || (m_SynRelations[Rels[i]].m_SynRelName == _R("НАРЕЧ_ГЛАГОЛ"))
 				 )
 			 {
-				 vector<long> Rels1;
+				 std::vector<long> Rels1;
 				 GetOutcomingSynRelations(m_SynRelations[Rels[i]].m_TargetNodeNo, Rels1);
 				 bool b = false;;
 				 for (long l=0; l < Rels1.size(); l++)
@@ -390,7 +390,7 @@ void CRusSemStructure::BuildAdjOrAdvLexFunctParamNodes(long ClauseNo)
          for (long i=0; i < Nodes.size();i++)
          if (m_Nodes[Nodes[i]].IsPrimitive())
 		 {
-			 vector<CLexicalFunctionField>::const_iterator It = find(m_Nodes[NodeNo].m_LexFunctFields.begin(), m_Nodes[NodeNo].m_LexFunctFields.end(), m_Nodes[Nodes[i]].m_Words[0].m_Lemma);
+			 std::vector<CLexicalFunctionField>::const_iterator It = find(m_Nodes[NodeNo].m_LexFunctFields.begin(), m_Nodes[NodeNo].m_LexFunctFields.end(), m_Nodes[Nodes[i]].m_Words[0].m_Lemma);
 		   if (It == m_Nodes[NodeNo].m_LexFunctFields.end()) continue;
 		   //ведем стрелку от слова ситуации в LF
             m_LexFuncts.push_back (CLexFunctRel(NodeNo, Nodes[i], It->m_LexFunct));

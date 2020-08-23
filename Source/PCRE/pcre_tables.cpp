@@ -72,7 +72,7 @@ const int _pcre_utf8_table1[] =
 
 const int _pcre_utf8_table1_size = sizeof(_pcre_utf8_table1)/sizeof(int);
 
-/* These are the indicator bits and the mask for the data bits to set in the
+/* These are the indicator bits and the mask for the data bits to std::set in the
 first byte of a character, indexed by the number of additional bytes. */
 
 const int _pcre_utf8_table2[] = { 0,    0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
@@ -92,7 +92,7 @@ code values. It is searched by binary chop, so must be in collating sequence of
 name. Originally, the table contained pointers to the name strings in the first
 field of each entry. However, that leads to a large number of relocations when
 a shared library is dynamically loaded. A significant reduction is made by
-putting all the names into a single, large string and then using offsets in the
+putting all the names into a single, large std::string and then using offsets in the
 table itself. Maintenance is more error-prone, but frequent changes to this
 data is unlikely. */
 

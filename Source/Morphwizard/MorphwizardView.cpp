@@ -105,7 +105,7 @@ void CMorphwizardView::DoDataExchange(CDataExchange* pDX)
 
 	//  init history
 	m_FindWhat.ResetContent();
-	list<string>::iterator pos = m_LastQueries.begin();
+	std::list<std::string>::iterator pos = m_LastQueries.begin();
 	while (pos != m_LastQueries.end())
 	{
 			m_FindWhat.AddString(pos->c_str());
@@ -200,7 +200,7 @@ void CMorphwizardView::SaveHistory()
 {
 	::WritePrivateProfileSection("History", "", PROFILE_PATH);
 
-	list<string>::iterator pos = m_LastQueries.begin();
+	std::list<std::string>::iterator pos = m_LastQueries.begin();
 	int i = 1;
 	while(pos != m_LastQueries.end())
 	{
@@ -592,7 +592,7 @@ void CMorphwizardView::OnPredict()
 			ErrorMessage("No variants found");
 			return;
 		};
-		vector<size_t> Index;
+		std::vector<size_t> Index;
 		for(size_t i=0; i < GetWizard()->m_CurrentPredictedParadigms.size(); i++)
 			Index.push_back(i);
 		std::sort (Index.begin(), Index.end(), IsLessForPredict(this));
@@ -1157,7 +1157,7 @@ void CMorphwizardView::OnToolsSetParaNo()
 {
 	if (found_paradigms.empty()) 
 	{
-		ErrorMessage("Cannot set paradigm No to an empty found list");
+		ErrorMessage("Cannot std::set paradigm No to an empty found list");
 		return;
 	};
 	POSITION pos = m_FoundList.GetFirstSelectedItemPosition();		

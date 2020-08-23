@@ -17,6 +17,7 @@ target_link_libraries(${PROJECT_NAME}
     aot_common
 )
 
+
 add_test(
     NAME Synan_COM_Russian 
     COMMAND TestSynanCOM test/Russian/text.txt

@@ -124,8 +124,8 @@ void	CGroupsVector :: Clear()
 //  which is ordered by GladkijPeriodLess
 int CGroupsVector :: get_maximal_group_no(size_t WordNo)  const 
 {
-	vector<CGroup>::const_iterator begin = GetGroups().begin();
-	vector<CGroup>::const_iterator end = GetGroups().end();
+	std::vector<CGroup>::const_iterator begin = GetGroups().begin();
+	std::vector<CGroup>::const_iterator end = GetGroups().end();
 	if (begin == end) return -1;
 
 	CPeriod P(WordNo);
@@ -308,8 +308,8 @@ bool CGroups :: has_sub_clauses(size_t GroupNo)  const
 */
 int CGroups :: get_maximal_group_no_without_clause(size_t WordNo)  const 
 {
-	vector<CGroup>::const_iterator begin = GetGroups().begin();
-	vector<CGroup>::const_iterator iterat = GetGroups().end();
+	std::vector<CGroup>::const_iterator begin = GetGroups().begin();
+	std::vector<CGroup>::const_iterator iterat = GetGroups().end();
 
 	if (begin == iterat) return -1;
 

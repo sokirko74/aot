@@ -755,7 +755,7 @@ bool TiXmlDocument::LoadFile( const char* filename, TiXmlEncoding encoding )
 
 	if ( file )
 	{
-		// Get the file size, so we can pre-allocate the string. HUGE speed impact.
+		// Get the file size, so we can pre-allocate the std::string. HUGE speed impact.
 		long length = 0;
 		fseek( file, 0, SEEK_END );
 		length = ftell( file );
@@ -1100,7 +1100,7 @@ TiXmlAttributeSet::~TiXmlAttributeSet()
 
 void TiXmlAttributeSet::Add( TiXmlAttribute* addMe )
 {
-	assert( !Find( addMe->Name() ) );	// Shouldn't be multiply adding to the set.
+	assert( !Find( addMe->Name() ) );	// Shouldn't be multiply adding to the std::set.
 
 	addMe->next = &sentinel;
 	addMe->prev = sentinel.prev;

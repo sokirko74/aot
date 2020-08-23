@@ -9,7 +9,7 @@ void CEngSemStructure::InitEngVals(CEngSemNode& Node)
 {
 	InitVals(Node);
 
-	vector<long> Articles;
+	std::vector<long> Articles;
 	FindAbstractAdditionArticle (Aoss, Node, Articles, false, -1);
 	AddAbstractAdditionVals(Aoss, Node, Articles);
 
@@ -49,7 +49,7 @@ void CEngSemStructure::InitEngVals(CEngSemNode& Node)
 
 /////////////////////////////////////////////////////////////////////////////
 
-int CEngSemStructure::FindEngVal(std::string strRusVal,CEngSemNode& engNode,vector<long>& iBadVals,bool bUseHierarchy)
+int CEngSemStructure::FindEngVal(std::string strRusVal,CEngSemNode& engNode,std::vector<long>& iBadVals,bool bUseHierarchy)
 {
 	for( int i=0; i<engNode.m_Vals.size(); i++ )
 	{
@@ -100,9 +100,9 @@ bool CEngSemStructure::ValencyEq(std::string strRusVal,std::string strEngVal)
 
 /////////////////////////////////////////////////////////////////////////////
 
-int CEngSemStructure::GetEnglishNodeBadWeight(int iRusNode, CEngInterp& UnitInterp, vector<long>& RusRelationsToValsOfNode, int& iSubjRel)
+int CEngSemStructure::GetEnglishNodeBadWeight(int iRusNode, CEngInterp& UnitInterp, std::vector<long>& RusRelationsToValsOfNode, int& iSubjRel)
 {
-	vector<long> vectorTargetRelationsNum;
+	std::vector<long> vectorTargetRelationsNum;
 	RusStr.GetOutcomingRelations(iRusNode,vectorTargetRelationsNum);	
 
 	iSubjRel = -1;
@@ -226,7 +226,7 @@ int CEngSemStructure::GetReverseRelValNo(const CSemRelation& rusRel,CEngSemNode&
 
 /////////////////////////////////////////////////////////////////////////////
 
-CEngInterp CEngSemStructure::FindBestEnglishNodes(int iRusNode,vector<CEngInterp>& vectorEngEquivs,vector<long>& RusRelationsToValsOfNode,int& iBestSubjRel)
+CEngInterp CEngSemStructure::FindBestEnglishNodes(int iRusNode,std::vector<CEngInterp>& vectorEngEquivs,std::vector<long>& RusRelationsToValsOfNode,int& iBestSubjRel)
 {
 	/*
 		если мы сюда поппали, тогда хоть какие-то переводы  должны  быть (хотя бы по заглушкам)
@@ -234,7 +234,7 @@ CEngInterp CEngSemStructure::FindBestEnglishNodes(int iRusNode,vector<CEngInterp
 	assert ( !vectorEngEquivs.empty() );
 	int iBestEquiv = 0;
 	int iSubjRel;
-	vector<long> goodRels;		
+	std::vector<long> goodRels;		
 	int iMinBadWeight = 0;
 
 	//перебираем найденные по АОССу англ. эквиваленты
@@ -281,7 +281,7 @@ bool  CEngSemStructure::AddGXiFromLexFunOperWord(long LexFunctWordUnitNo, CSemPa
 
 /////////////////////////////////////////////////////////////////////////////
 
-int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int iRusNode, vector<long>& RusRelationsToValsOfNode,int& iSubjRel)
+int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int iRusNode, std::vector<long>& RusRelationsToValsOfNode,int& iSubjRel)
 {
 	CEnglishEquivMap::iterator res = mapRNodeToENode.find(iRusNode);
 	CEngSemNode engNode;
@@ -407,13 +407,13 @@ bool CEngSemStructure::AddGXiFromLexFunFuncWord(long LexFunctWordUnitNo, CSemPat
 
 int CEngSemStructure::InterpretCopulNodeAndChildren( CEnglishEquivMap& mapRNodeToENode, int iRusCopulNode, int iEngCopulParentNode, int iValNum)
 {
-	vector<long> RusRelsToEngRels;
+	std::vector<long> RusRelsToEngRels;
 	int ii;
 	int iEngCopulNode = InterpretOneNode(mapRNodeToENode, iRusCopulNode, RusRelsToEngRels, ii);
 
 	m_Nodes[iEngCopulNode].CopyInterps( m_Nodes[iEngCopulParentNode]);
 
- 	vector<long> vectorTargetRelationsNum;
+ 	std::vector<long> vectorTargetRelationsNum;
 	RusStr.GetOutcomingRelations(iRusCopulNode,vectorTargetRelationsNum);	
 
 	for(int i = 0 ; i < vectorTargetRelationsNum.size() ; i++ )
@@ -429,7 +429,7 @@ int CEngSemStructure::InterpretCopulNodeAndChildren( CEnglishEquivMap& mapRNodeT
 			но лучше как-нибудь это переделать  и грузить GF из engRel.m_Valency.m_UnitNo,
 			а еще предполагется, что копулы есть только в AOCC, хотя зачем такое предположение нужно?
 		*/
-		vector<CValency>::const_iterator it =  find(m_Nodes[iEngCopulParentNode].m_Vals.begin(), m_Nodes[iEngCopulParentNode].m_Vals.end(), rusRel.m_Valency);
+		std::vector<CValency>::const_iterator it =  find(m_Nodes[iEngCopulParentNode].m_Vals.begin(), m_Nodes[iEngCopulParentNode].m_Vals.end(), rusRel.m_Valency);
 		if (it == m_Nodes[iEngCopulParentNode].m_Vals.end())
 		{
 			engRel.m_Valency.m_UnitNo = m_Nodes[iEngCopulParentNode].GetUnitNo();
@@ -477,12 +477,12 @@ int CEngSemStructure::InterpretCopulNodeAndChildren( CEnglishEquivMap& mapRNodeT
 int CEngSemStructure::InterpretRusNodeAndItsChildren( CEnglishEquivMap& mapRNodeToENode, int iRusNode)
 {
 	int iSubjRel;
-	vector<long> RusRelationsToValsOfNode;
+	std::vector<long> RusRelationsToValsOfNode;
 	
 	int iEngNode = InterpretOneNode(mapRNodeToENode, iRusNode, RusRelationsToValsOfNode, iSubjRel);		
 	const CSemNode& RusNode = RusStr.GetNode(iRusNode);
 
-	vector<long> vectorTargetRelationsNum;
+	std::vector<long> vectorTargetRelationsNum;
 	RusStr.GetOutcomingRelations(iRusNode,vectorTargetRelationsNum);	
 
 	for( int i=0; i<vectorTargetRelationsNum.size(); i++ )
@@ -602,13 +602,13 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 		std::string debug;
 		if (RusNode.IsWordContainer()) debug = RusNode.GetWord(0).m_Word;
 		assert(prep_int.m_DictType == OborRoss);
-		vector<SEngEquiv> vectorEngEquivs;
+		std::vector<SEngEquiv> vectorEngEquivs;
 		
-		vector<TCortege> vectorACX;
+		std::vector<TCortege> vectorACX;
 		
 		std::string strACX;
-		vector<std::string> SemFets;
-		vector<int> goodIds;
+		std::vector<std::string> SemFets;
+		std::vector<int> goodIds;
 		
 		GetEngEquivsFromRusArticle(vectorEngEquivs,prep_int.m_UnitNo,prep_int.m_DictType);
 
@@ -639,7 +639,7 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 		
 		if (!goodIds.empty())
 		{
-			vector<SEngEquiv> tempEngEquivs;
+			std::vector<SEngEquiv> tempEngEquivs;
 			for (int j=0; j < goodIds.size(); j++)
 			{
 				//assert ( goodIds[j] < vectorEngEquivs.size() ); 

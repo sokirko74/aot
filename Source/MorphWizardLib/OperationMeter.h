@@ -67,13 +67,13 @@ public:
 
 	void SetStep( DWORD step = 0)
 	{
-		m_step = (step==0 || step>=m_maxPos) ? max(m_maxPos/50,(DWORD)1) : step;
+		m_step = (step==0 || step>=m_maxPos) ? std::max(m_maxPos/50,(DWORD)1) : step;
 	}
 
 	void SetStepCount( DWORD count )
 	{
 		assert(count>0);
-		m_step = max(m_maxPos/count,(DWORD)1);
+		m_step = std::max(m_maxPos/count,(DWORD)1);
 	}
 
 	bool AddPos( DWORD pos  = 1)

@@ -54,11 +54,11 @@ struct CStateAndSymbol
 struct CLRCollectionSet  
 {
 	//  item sets  which can be generated from the grammar
-	vector< set<CLRItem> > m_ItemSets;
+	std::vector< std::set<CLRItem> > m_ItemSets;
 
 	// goto function m_GotoFunction[i] = k means that from 
 	//  Itemset i.m_StateNo we can go to Itemset k over symbol i.m_SymbolNo.
-	map< CStateAndSymbol, size_t> m_GotoFunction;
+	std::map< CStateAndSymbol, size_t> m_GotoFunction;
 
 	void Compute(const CWorkGrammar* pWorkGrammar);
 	bool GetGotoValue(int SymbolNo, size_t StateNo, size_t& ResultStateNo) const;

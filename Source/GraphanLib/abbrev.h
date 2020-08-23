@@ -20,7 +20,7 @@ struct  CAbbrevItem
 
 	
 };
-typedef list<CAbbrevItem> CAbbrev;
+typedef std::list<CAbbrevItem> CAbbrev;
 
 
 

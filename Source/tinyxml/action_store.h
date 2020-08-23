@@ -36,7 +36,7 @@ namespace TinyXPath
 {
 
 /// Action item for the XPath action placeholder
-/// \n Able to store 1 quadruplet (3 integers and a string)
+/// \n Able to store 1 quadruplet (3 integers and a std::string)
 class action_item 
 {
 public :
@@ -46,7 +46,7 @@ public :
    {
    }
 
-   /// Retrieve the set of values
+   /// Retrieve the std::set of values
    void v_get (int & i_out_1, int & i_out_2, int & i_out_3, TIXML_STRING & S_out)
    {
       i_out_1 = i_1;
@@ -63,8 +63,8 @@ protected :
 } ;
 
 /// The XPath action stack. Not a stack per se, only a placeholder
-/// \n It's able to store quadruplets (3 integers and a string)
-/// \n It allocates them by set of 100
+/// \n It's able to store quadruplets (3 integers and a std::string)
+/// \n It allocates them by std::set of 100
 class action_store 
 {
 public : 

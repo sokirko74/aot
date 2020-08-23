@@ -68,7 +68,7 @@ std::string HTML::GetTextFromHTMLBuffer(const char* Buffer, size_t BufferLen)
 	} state = normal;
 
 
-	stack<std::string> NotTextTags;
+	std::stack<std::string> NotTextTags;
 	BYTE ch;
 
 	while (cur_offset < BufferLen)
@@ -264,7 +264,7 @@ std::string HTML::GetTextFromHtmlFile(std::string FileName)
 	std::string result;
 
 	FILE* fp = fopen(FileName.c_str(), "rb");
-	vector<char> buffer;
+	std::vector<char> buffer;
 	for (;;)
 	{
 		int ch = fgetc(fp); 

@@ -22,7 +22,7 @@ struct CNodeAttribute
 
 struct CNodeAttributes {
 
-	list<CNodeAttribute*> m_Items;
+	std::list<CNodeAttribute*> m_Items;
 	~CNodeAttributes();
 };
 
@@ -52,7 +52,7 @@ public:
 
 class CChunkSequenceNode : public CChunkNode
 {
-	vector<CChunkNode*> m_Children;
+	std::vector<CChunkNode*> m_Children;
 public:
 	
 	virtual ~CChunkSequenceNode();
@@ -61,7 +61,7 @@ public:
 	void					AddChild(CChunkNode* child1);
 	void					DeleteLastChild();
 	CChunkSequenceNode*		Clone() const;
-	const vector<CChunkNode*>&	GetChildren() const;
+	const std::vector<CChunkNode*>&	GetChildren() const;
 	virtual std::string						GetStr() const;
 	
 };
@@ -72,8 +72,8 @@ class CChunkRule {
 public:
 	
 	CChunkNode*					m_pLeftHand;
-	list<CChunkSequenceNode*>	m_pRightHand;
-	vector<CRuleFeature>		m_FeatureExprs;
+	std::list<CChunkSequenceNode*>	m_pRightHand;
+	std::vector<CRuleFeature>		m_FeatureExprs;
 	int							m_SourceLineNo;
 	std::string						m_SourceFileName;
 
@@ -94,7 +94,7 @@ public:
 
 class CChunkGrammar {
 	public: 
-	list<CChunkRule*>	m_Rules;
+	std::list<CChunkRule*>	m_Rules;
 
 	~CChunkGrammar();
 	std::string		GetStr() const;

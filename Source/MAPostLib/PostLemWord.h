@@ -6,7 +6,7 @@
 class CLemmatizer;
 class CPostLemWord : public CLemWord
 {
-    vector<CHomonym> m_Homonyms;
+    std::vector<CHomonym> m_Homonyms;
     const CAgramtab* m_pGramTab;
 public:
     bool	m_bFirstUpperAlpha;

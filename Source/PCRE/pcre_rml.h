@@ -5,7 +5,7 @@
 #include "../common/utilit.h"
 #include <iostream>
 
-extern void RmlPcreMakeTables(vector<BYTE>& character_table, MorphLanguageEnum Langua);
+extern void RmlPcreMakeTables(std::vector<BYTE>& character_table, MorphLanguageEnum Langua);
 
 // We convert user-passed pointers into special Arg objects
 typedef pcrecpp::Arg Arg;
@@ -18,26 +18,26 @@ extern Arg no_arg;
 class RML_RE {
  public:
   // We provide implicit conversions from strings so that users can
-  // pass in a string or a "const char*" wherever an "RE" is expected.
+  // pass in a std::string or a "const char*" wherever an "RE" is expected.
   RML_RE(const char* pat) { Init(pat, NULL); }
   RML_RE(const char *pat, const pcrecpp::RE_Options& option) { Init(pat, &option); }
-  RML_RE(const string& pat) { Init(pat.c_str(), NULL); }
-  RML_RE(const string& pat, const pcrecpp::RE_Options& option) { Init(pat.c_str(), &option); }
+  RML_RE(const std::string& pat) { Init(pat.c_str(), NULL); }
+  RML_RE(const std::string& pat, const pcrecpp::RE_Options& option) { Init(pat.c_str(), &option); }
 
   // actually used by DDC
-  RML_RE(const string& pat, const vector<BYTE>& RegExpTables) { Init(pat.c_str(), NULL, &RegExpTables[0]); }
+  RML_RE(const std::string& pat, const std::vector<BYTE>& RegExpTables) { Init(pat.c_str(), NULL, &RegExpTables[0]); }
 
 
   ~RML_RE();
 
-  // The string specification for this RE.  E.g.
+  // The std::string specification for this RE.  E.g.
   //   RE re("ab*c?d+");
   //   re.pattern();    // "ab*c?d+"
-  const string& pattern() const { return pattern_; }
+  const std::string& pattern() const { return pattern_; }
 
-  // If RE could not be created properly, returns an error string.
-  // Else returns the empty string.
-  const string& error() const { return *error_; }
+  // If RE could not be created properly, returns an error std::string.
+  // Else returns the empty std::string.
+  const std::string& error() const { return *error_; }
 
   /***** The useful part: the matching interface *****/
 
@@ -121,14 +121,14 @@ class RML_RE {
                       const Arg& ptr16 = no_arg) const;
 
   bool Replace(const StringPiece& rewrite,
-               string *str) const;
+               std::string *str) const;
 
   int GlobalReplace(const StringPiece& rewrite,
-                    string *str) const;
+                    std::string *str) const;
 
   bool Extract(const StringPiece &rewrite,
                const StringPiece &text,
-               string *out) const;
+               std::string *out) const;
 
   /***** Generic matching interface *****/
 
@@ -172,9 +172,9 @@ class RML_RE {
                int *vec,
                int vecsize) const;
 
-  // Append the "rewrite" string, with backslash subsitutions from "text"
-  // and "vec", to string "out".
-  bool Rewrite(string *out,
+  // Append the "rewrite" std::string, with backslash subsitutions from "text"
+  // and "vec", to std::string "out".
+  bool Rewrite(std::string *out,
                const StringPiece& rewrite,
                const StringPiece& text,
                int *vec,
@@ -192,11 +192,11 @@ class RML_RE {
   // Compile the regexp for the specified anchoring mode
   pcre* Compile(Anchor anchor, const unsigned char *tableptr);
 
-  string        pattern_;
+  std::string        pattern_;
   RE_Options    options_;
   pcre*         re_full_;       // For full matches
   pcre*         re_partial_;    // For partial matches
-  const string* error_;         // Error indicator (or points to empty string)
+  const std::string* error_;         // Error indicator (or points to empty std::string)
   int           match_limit_;   // limit on execution resources
 
   // Don't allow the default copy or assignment constructors --

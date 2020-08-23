@@ -159,7 +159,7 @@ void CArticleView::OnAddButton()
 void CArticleView::AddOrInsertRossField (int nPos, ActionType fnAction) 
 {
 	// TODO: Add your control notification handler code here
-	vector <CRossDevTextField> ResultList;
+	std::vector <CRossDevTextField> ResultList;
 	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
 		
 
@@ -244,7 +244,7 @@ void CArticleView::OnArticleViewDelField()
 
 void CArticleView::EditOneValue(CRossDevTextField& F)
 {
-	vector<TCortege> L; //старое значение
+	std::vector<TCortege> L; //старое значение
 	TCortege NewValue; //новое  значение
 
 	CArticleDoc* D =  (CArticleDoc*)GetDocument();
@@ -294,7 +294,7 @@ void CArticleView::InsertLine (int LineNo, const CString& S)
 	parse();
 };
 
-void CArticleView::WriteToEdit (vector<TCortege10>& L, size_t nPos)
+void CArticleView::WriteToEdit (std::vector<TCortege10>& L, size_t nPos)
 {
 	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
 	if (A.m_Fields.size() == 1)
@@ -358,8 +358,8 @@ void CArticleView::WriteToEdit (vector<TCortege10>& L, size_t nPos)
 
 void CArticleView::EditFormulaValue (int nPos, char TypeRes)
 {
-	vector<TCortege> OldList; //старое значение
-	vector<TCortege> NewList;
+	std::vector<TCortege> OldList; //старое значение
+	std::vector<TCortege> NewList;
 	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
 	CRossDevTextField F(	A.m_Fields[nPos].FieldNo, A.m_Fields[nPos].LeafId, A.m_Fields[nPos].BracketLeafId);
 	
@@ -450,7 +450,7 @@ void Lemmatize(char* OutBuf, char* InBuf)
 		CountLemmatize++;
 
 		
-		vector<CFormInfo> ParadigmCollection;
+		std::vector<CFormInfo> ParadigmCollection;
 		std::string WordForm = InBuf;
 		P->CreateParadigmCollection(false, WordForm, false,false, ParadigmCollection);
 		if (ParadigmCollection.empty()) return;
@@ -493,7 +493,7 @@ bool IsKeyWordArticle (const CString& word, COLORREF& C, DWORD Data)
 	TBaseDomItem I;
 	if (word.GetLength() > EntryStrSize - 1) return false;
 	strcpy (I.ItemStr,  (const char*)word);
-	vector<TBaseDomItem>::const_iterator It = lower_bound (RossDoc->m_BasicDomItems.begin(), RossDoc->m_BasicDomItems.end(), I);
+	std::vector<TBaseDomItem>::const_iterator It = lower_bound (RossDoc->m_BasicDomItems.begin(), RossDoc->m_BasicDomItems.end(), I);
     if (    (It == RossDoc->m_BasicDomItems.end())
 		|| !(*It == I)
 		|| (  CString(RossDoc->GetRoss()->m_Domens[It->DomNo].DomStr) == CString("D_1"))) // если это не элемент метаязыка

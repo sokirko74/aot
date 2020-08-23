@@ -293,7 +293,7 @@ bool IsEqualOrHigherInHierarchy (CRossHolder* HostRoss, long HostItemNo,  CRossH
 
    if (Host == Slave) return true;
 
-   vector<CStringRelation>::iterator It = lower_bound(pHierarchyDoc->m_TransitiveRels.begin(), pHierarchyDoc->m_TransitiveRels.end(), Host, LessStringRelation());
+   std::vector<CStringRelation>::iterator It = lower_bound(pHierarchyDoc->m_TransitiveRels.begin(), pHierarchyDoc->m_TransitiveRels.end(), Host, LessStringRelation());
 
    for (;(It < pHierarchyDoc->m_TransitiveRels.end()) && (It->m_Source == Host) ; It++)
 	 if (It->m_Target == Slave)
@@ -302,7 +302,7 @@ bool IsEqualOrHigherInHierarchy (CRossHolder* HostRoss, long HostItemNo,  CRossH
     return false; 
 };
 
-void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<std::string>& SemFets)
+void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, std::vector<std::string>& SemFets)
 {
   for (int i=0; i < SemFets.size(); i++)
    for (int k=0; k < pHierarchyDoc->m_TransitiveRels.size(); k++)
@@ -312,7 +312,7 @@ void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<std::stri
 		 SemFets.push_back (pHierarchyDoc->m_TransitiveRels[k].m_Target);
 };
 
-void  IncludeHigherInHierarchy (CHierarchyHolder* pHierarchyDoc, vector<std::string>& SemFets)
+void  IncludeHigherInHierarchy (CHierarchyHolder* pHierarchyDoc, std::vector<std::string>& SemFets)
 {
   for (int i=0; i < SemFets.size(); i++)
    for (int k=0; k < pHierarchyDoc->m_TransitiveRels.size(); k++)

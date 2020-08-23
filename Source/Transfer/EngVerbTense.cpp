@@ -163,7 +163,7 @@ void CEngVerbTense::make_verb_form()
 
 bool CEngSynthes::IsInfinitivePatternWithoutTo (long NodeNo) const
 {
-	vector<long> Rels;
+	std::vector<long> Rels;
 	E.GetIncomingRelations(NodeNo, Rels, false);
 	if (Rels.size() != 1) return false;
 

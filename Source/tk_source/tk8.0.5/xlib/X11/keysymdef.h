@@ -103,7 +103,7 @@ SOFTWARE.
 #define XK_Cancel		0xFF69	/* Cancel, stop, abort, exit */
 #define XK_Help			0xFF6A	/* Help, ? */
 #define XK_Break		0xFF6B
-#define XK_Mode_switch		0xFF7E	/* Character set switch */
+#define XK_Mode_switch		0xFF7E	/* Character std::set switch */
 #define XK_script_switch        0xFF7E  /* Alias for mode_switch */
 #define XK_Num_Lock		0xFF7F
 
