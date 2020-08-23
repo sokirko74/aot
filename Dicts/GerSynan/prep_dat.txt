@@ -2,15 +2,15 @@ ab
 an
 auf
 aus
-auЯer
+außer
 bei
 binnen
 dank
 entgegen
 entsprechend
 fern
-gegenьber
-gemдЯ
+gegenüber
+gemäß
 gleich
 hinter
 hinterm
@@ -21,7 +21,7 @@ nach
 nahe
 neben
 nebst
-nдchst
+nächst
 samt
 seit
 unter
@@ -31,5 +31,5 @@ zu
 zuliebe
 zuwider
 zwischen
-ьber
+über
 laut

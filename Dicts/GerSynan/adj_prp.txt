@@ -1,218 +1,195 @@
-abhдngig von+D
-angeboren+D
-angemessen+D
-angenehm fьr+A
-angenehm+D
-angewiesen auf+A
-anstдndig zu+D
-ansдssig in+D
-arm an+D
-aufgelegt zu+D
-aufgeschlossen fьr+A
-bar+A
-bedenklich fьr+A
-bedeutungslos fьr+A
-bedьrftig+A
-befindlich in+D
-befreundet mit+D
-begabt in+D
-begierig auf+A/nach+D
-begreiflich+D
-behaftet mit+D
-behilflich bei+D
-behilflich+D
-bekannt fьr+A/mit+D
-bekannt+D
-beliebt bei+D
-bequem fьr+A
-bequem+D
-bereit zu+D
-berьhmt fьr+A
-berufen zu+D
-beschwerlich+D
-besessen von+D
-besorgt um+A
-bestдndig gegen+A
-bewandert in+D/auf+A
-bewusst+A
-bezeichnend fьr+A
-bitter fьr+A
-blind gegen+A/gegenьber+D/fьr+A
-brav zu+D
-bцse zu+D/auf+A
-bцse+D
-charakteristisch fьr+A
-dankbar fьr+A
-dankbar+D
-direkt von+D
-ehrlich zu+D
-eifersьchtig auf+A
-eigen+D
-eigentьmlich+D
-eingebildet auf+A
-einig in+D/ьber+A
-einverstanden mit+D
-empfindlich gegen+A
-empfдnglich fьr+A
-entfernt von+D
-entschieden in+D
-erfahren in+D
-erfreulich fьr+A
-ergeben+D
-ersichtlich aus+D
-erwьnscht+D
-feind+D
-fern von+D
-fern+D
-fertig mit+D
-fest gegen+A
-frech zu+D
-frei von+D
-fremd+D
-froh ьber+A
-fruchtbar an+D
-fдhig zu+D
-fдhig+A
-geeignet fьr+A/zu+D
-gefasst auf+A
-gefдhrlich fьr+A
-gefдhrlich+D
-gefдllig+D
-gegenwдrtig+D
-gelдufig+D
-gemeinsam mit+D
-gemeinsam+D
-gemдЯ+D
-genehm+D
-geneigt zu+D
-genug fьr+A
-gerecht+D
-geschickt in/bei+D
-gespannt auf+A
-gesund fьr+A
-gewachsen+D
-gewandt in+D
-gewiss+A
-gewohnt+A
-gewцhnt an+A
-gewдrtig+A
-gierig nach+D
-gleich mit+D
-gleich+D
-gleichgьltig gegen+A
-gleichgьltig+D
-gleichzeitig mit+D
-glьcklich ьber+A
-gьnstig+D
-grausam gegen+A
-grob zu+D
-gut fьr+A/zu+D
-haftbar fьr+A
-hart gegen+A
-heilsam fьr+A
-heilsam+D
-heimisch in+D
-herzlich zu+D
-hungrig nach+D
-hцflich zu+D
-immun gegen+A
-interessant fьr+A
-interessiert an+D
-klar zu+D
-klar+D
-kombinierbar mit+D
-krank vor+D
-kritisch gegenьber+D
-kundig+A
-ledig+A
-leid+A
-lieb+D
-los+A
-lдstig+D
-matt von/vor+D
-mьde+A
-mцglich+D
-mдchtig+A
-nachteilig fьr+A
-nahe+D
-nahestehend+D
-neidisch auf+A
-nett zu+D
-neu+D
-neugierig auf+A
-nьtzlich fьr+A
-nьtzlich+D
-nordwestlich von+D
-nordцstlich von+D
-nцrdlich von+D
-nцtig fьr+A
-ьberdrьssig+A
-ьberlegen+D
-ьberzeugt von+D
-offen fьr+A
-parallel zu+D
-passend fьr+A
-peinlich+D
-recht+D
-reich an+D
-reif fьr+A/zu+D
-satt+A
-scharf auf+A
-schmerzlich fьr+A
-schuld an+D
-schuldig an+D
-schuldig+A
-schuldig+D
-schwach gegenьber+D
-schдdlich+D
-sicher vor+D
-sicher+A
-sьdlich von+D
-sьdwestlich von+D
-sьdцstlich von+D
-speziell fьr+A
-starr vor+D
-stolz auf+A
-streng zu+D/gegen+A
-stumm vor+D
-taub gegen+A/auf+A
-teuer fьr+A
-treu+D
-typisch fьr+A
-unabhдngig von+D
-unempfindlich gegen+A
-unmittelbar vor+D
-unschuldig an+D
-unvereinbar mit+D
-verantwortlich fьr+A
-vereinbar mit+D
-vergleichbar mit+D
-verhasst bei+D
-verhasst+D
-verliebt in
-verschieden von+D
-verstдndlich fьr+A
-verstдndlich+D
-vertraut+D
-vertrдglich mit+D
-verwandt+D
-verwanzt+D
-verwurzelt in+D/mit+D 
-voll von+D/mit+D
-voll+A
-vorteilhaft fьr+A
-weit von+D
-wert+A
-wert+D
-westlich von+D
-wichtig fьr+A
-wichtig+D
-willkommen+D
-wьrdig+A
-wьtend auf+A
-zornig auf+A
-zufrieden mit+D
-zustдndig fьr+A
-цstlich von+D
-дhnlich+D
-дrgerlich ьber+A
+ABHÄNGIG
+ANGEBOREN
+ANGEMESSEN
+ANGENEHM
+ANGEWIESEN
+ANSTÄNDIG
+ANSÄSSIG
+ARM
+AUFGELEGT
+AUFGESCHLOSSEN
+BAR
+BEDENKLICH
+BEDEUTUNGSLOS
+BEDÜRFTIG
+BEFINDLICH
+BEFREUNDET
+BEGABT
+BEGIERIG
+BEGREIFLICH
+BEHAFTET
+BEHILFLICH
+BEKANNT
+BELIEBT
+BEQUEM
+BEREIT
+BERUFEN
+BERÜHMT
+BESCHWERLICH
+BESESSEN
+BESORGT
+BESTÄNDIG
+BEWANDERT
+BEWUSST
+BEZEICHNEND
+BITTER
+BLIND
+BRAV
+BÖSE
+CHARAKTERISTISCH
+DANKBAR
+DIREKT
+EHRLICH
+EIFERSÜCHTIG
+EIGEN
+EIGENTÜMLICH
+EINGEBILDET
+EINIG
+EINVERSTANDEN
+EMPFINDLICH
+EMPFÄNGLICH
+ENTFERNT
+ENTSCHIEDEN
+ERFAHREN
+ERFREULICH
+ERGEBEN
+ERSICHTLICH
+ERWÜNSCHT
+FEIND
+FERN
+FERTIG
+FEST
+FRECH
+FREI
+FREMD
+FROH
+FRUCHTBAR
+FÄHIG
+GEEIGNET
+GEFASST
+GEFÄHRLICH
+GEFÄLLIG
+GEGENWÄRTIG
+GELÄUFIG
+GEMEINSAM
+GEMÄß
+GENEHM
+GENEIGT
+GENUG
+GERECHT
+GESCHICKT
+GESPANNT
+GESUND
+GEWACHSEN
+GEWANDT
+GEWISS
+GEWOHNT
+GEWÄRTIG
+GEWÖHNT
+GIERIG
+GLEICH
+GLEICHGÜLTIG
+GLEICHZEITIG
+GLÜCKLICH
+GRAUSAM
+GROB
+GUT
+GÜNSTIG
+HAFTBAR
+HART
+HEILSAM
+HEIMISCH
+HERZLICH
+HUNGRIG
+HÖFLICH
+IMMUN
+INTERESSANT
+INTERESSIERT
+KLAR
+KOMBINIERBAR
+KRANK
+KRITISCH
+KUNDIG
+LEDIG
+LEID
+LIEB
+LOS
+LÄSTIG
+MATT
+MÄCHTIG
+MÖGLICH
+MÜDE
+NACHTEILIG
+NAHE
+NAHESTEHEND
+NEIDISCH
+NETT
+NEU
+NEUGIERIG
+NORDWESTLICH
+NORDÖSTLICH
+NÖRDLICH
+NÖTIG
+NÜTZLICH
+OFFEN
+PARALLEL
+PASSEND
+PEINLICH
+RECHT
+REICH
+REIF
+SATT
+SCHARF
+SCHMERZLICH
+SCHULD
+SCHULDIG
+SCHWACH
+SCHÄDLICH
+SICHER
+SPEZIELL
+STARR
+STOLZ
+STRENG
+STUMM
+SÜDLICH
+SÜDWESTLICH
+SÜDÖSTLICH
+TAUB
+TEUER
+TREU
+TYPISCH
+UNABHÄNGIG
+UNEMPFINDLICH
+UNMITTELBAR
+UNSCHULDIG
+UNVEREINBAR
+VERANTWORTLICH
+VEREINBAR
+VERGLEICHBAR
+VERHASST
+VERLIEBT
+VERSCHIEDEN
+VERSTÄNDLICH
+VERTRAUT
+VERTRÄGLICH
+VERWANDT
+VERWANZT
+VERWURZELT
+VOLL
+VORTEILHAFT
+WEIT
+WERT
+WESTLICH
+WICHTIG
+WILLKOMMEN
+WÜRDIG
+WÜTEND
+ZORNIG
+ZUFRIEDEN
+ZUSTÄNDIG
+ÄHNLICH
+ÄRGERLICH
+ÖSTLICH
+ÜBERDRÜSSIG
+ÜBERLEGEN
+ÜBERZEUGT
