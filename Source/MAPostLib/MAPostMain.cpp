@@ -1847,17 +1847,26 @@ bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) co
     }
 
     set<std::string> Lemmas;
-    for (int i =0; i < W.GetHomonymsCount(); i++)
+    for (size_t i = 0; i < W.GetHomonymsCount(); i++)
     {
         CHomonym* pH = W.GetHomonym(i);
-        if (m_TrigramModel.FindGramTabLineInTags(Tags, pH->m_iPoses, pH->m_iGrammems  | pH->m_TypeGrammems))
+        bool goodHomonym = m_TrigramModel.FindGramTabLineInTags(Tags, pH->m_iPoses, pH->m_iGrammems | pH->m_TypeGrammems);
+        if ((pH->m_iPoses & (_QM(PRONOUN_PREDK) | _QM(PREDK) | _QM(PARTICLE) | _QM(PREP) | _QM(CONJ))) > 0) {
+            goodHomonym = true; // Trigram is bad for auxiliary parts of speech
+        }
+        if (goodHomonym) {
             Lemmas.insert(pH->m_strLemma);
-        pH->m_bDelete = !m_TrigramModel.FindGramTabLineInTags(Tags, pH->m_iPoses, pH->m_iGrammems  | pH->m_TypeGrammems);
+        }
+        else {
+            pH->m_bDelete = true;
+        }
     }
-    for (int i =0; i < W.GetHomonymsCount(); i++)
+    for (size_t i = 0; i < W.GetHomonymsCount(); i++)
     {
         CHomonym* pH = W.GetHomonym(i);
-        pH->m_bDelete |= Lemmas.find(pH->m_strLemma) == Lemmas.end();
+        if (Lemmas.find(pH->m_strLemma) == Lemmas.end()) {
+            pH->m_bDelete = true;
+        }
     }
     W.SafeDeleteMarkedHomonyms();
     return true;
@@ -1881,9 +1890,7 @@ bool CMAPost::FilterPostMorphWords()
             {
                 assert (WordNo < tags.size());
                 CPostLemWord& w = *it2;
-                if (w.m_strUpperWord != _R("УЖ") && w.m_strUpperWord != _R("МНОГО") && w.m_strUpperWord != _R("МАЛО")) {
-                    FilterOnePostLemWord(w, tags[WordNo].m_TagId1, tags[WordNo].m_TagId2);
-                }
+                FilterOnePostLemWord(w, tags[WordNo].m_TagId1, tags[WordNo].m_TagId2);
                 WordNo++;
             }
 
