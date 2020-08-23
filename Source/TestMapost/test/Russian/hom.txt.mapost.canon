@@ -16,6 +16,7 @@
   Хорошо  90 6  RLE Aa NAM?  + ХОРОШО  ЧАСТ 
 ,  96 1  PUN 
 конечно  98 7  RLE aa EXPR1 EXPR2 EXPR_NO266 + КОНЕЧНО  ВВОДН 
+  конечно  98 7  RLE aa EXPR1 EXPR2 EXPR_NO266 + КОНЕЧНО  ЧАСТ 
 ,  105 1  PUN 
 а  107 1  RLE aa EXPR1 EXPR2 EXPR_NO3 + А  СОЮЗ 
 не  109 2  RLE aa EXPR1 EXPR2 EXPR_NO326 + НЕ  ЧАСТ 

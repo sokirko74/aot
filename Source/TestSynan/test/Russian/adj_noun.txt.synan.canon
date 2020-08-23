@@ -1,0 +1,206 @@
+[
+    {
+        "comments": "",
+        "input": "﻿новый дом",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "новый дом"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "новый дом"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,вн,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "дом",
+                        "src_grm": "но,мр,вн,им,ед,",
+                        "src_lemma": "ДОМ",
+                        "trg": "новый",
+                        "trg_grm": "кач,но,од,мр,вн,им,ед,",
+                        "trg_lemma": "НОВЫЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "большое пальто",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "большое пальто"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "большое пальто"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,вн,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "пальто",
+                        "src_grm": "0,но,ср,вн,им,ед,",
+                        "src_lemma": "ПАЛЬТО",
+                        "trg": "большое",
+                        "trg_grm": "кач,но,од,ср,вн,им,ед,",
+                        "trg_lemma": "БОЛЬШОЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "первое пальто",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "первое пальто"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "первое пальто"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,вн,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "пальто",
+                        "src_grm": "0,но,ср,вн,им,ед,",
+                        "src_lemma": "ПАЛЬТО",
+                        "trg": "первое",
+                        "trg_grm": "но,од,ср,вн,им,ед,",
+                        "trg_lemma": "ПЕРВЫЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "мое пальто",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "мое пальто"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "мое пальто"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,вн,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "пальто",
+                        "src_grm": "0,но,ср,вн,им,ед,",
+                        "src_lemma": "ПАЛЬТО",
+                        "trg": "мое",
+                        "trg_grm": "но,од,ср,вн,им,ед,",
+                        "trg_lemma": "МОЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "большие пальто",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "большие пальто"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "большие пальто"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "большие пальто"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "вн,им,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "пальто",
+                        "src_grm": "0,но,ср,вн,им,мн,",
+                        "src_lemma": "ПАЛЬТО",
+                        "trg": "большие",
+                        "trg_grm": "кач,но,од,вн,им,мн,",
+                        "trg_lemma": "БОЛЬШОЙ"
+                    }
+                ]
+            }
+        ]
+    }
+]

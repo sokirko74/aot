@@ -1,24 +1,26 @@
 #include <stdio.h>
 #include "../SynCommonLib/RelationsIterator.h"
 #include "../SynanLib/SyntaxHolder.h"
-
+#include "../common/util_classes.h"
 #include "../common/argparse.h"
 
-void GetAnanlytForms(const CSentence &Sentence, std::string &Res) {
+std::vector<std::string> GetAnanlytForms(const CSentence &Sentence) {
+    std::vector<std::string>  result;
     for (int WordNo = 0; WordNo < Sentence.m_Words.size(); WordNo++) {
         const CSynWord &W = Sentence.m_Words[WordNo];
         if (!W.m_MainVerbs.empty()) {
-            Res += std::string("\t<analyt> ") + W.m_strWord.c_str();
+            std::string form = W.m_strWord.c_str();
             for (size_t i = 0; i < W.m_MainVerbs.size(); i++) {
-                Res += std::string(" ") + Sentence.m_Words[W.m_MainVerbs[i]].m_strWord;
+                form += std::string(" ") + Sentence.m_Words[W.m_MainVerbs[i]].m_strWord;
 
                 const CSynWord &W_1 = Sentence.m_Words[W.m_MainVerbs[i]];
                 for (size_t j = 0; j < W_1.m_MainVerbs.size(); j++)
-                    Res += std::string(" ") + Sentence.m_Words[W_1.m_MainVerbs[j]].m_strWord;
+                    form += std::string(" ") + Sentence.m_Words[W_1.m_MainVerbs[j]].m_strWord;
             };
-            Res += "</analyt>\n";
+            result.push_back(form);
         }
     }
+    return result;
 }
 
 std::string GetWords(const CSentence &Sentence, const CPeriod &P) {
@@ -31,47 +33,63 @@ std::string GetWords(const CSentence &Sentence, const CPeriod &P) {
     return S;
 }
 
-void GetGroups(const CSentence &Sentence, const CAgramtab &A, std::string &Res) {
+nlohmann::json GetGroups(const CSentence &Sentence, const CAgramtab &A) {
     int nClausesCount = Sentence.GetClausesCount();
+    nlohmann::json  clauses = nlohmann::json::array();
 
     for (int ClauseNo = 0; ClauseNo < nClausesCount; ClauseNo++) {
         const CClause &Clause = Sentence.GetClause(ClauseNo);
         int nCvar = Clause.m_SynVariants.size();
 
         if (Clause.m_SynVariants.empty()) continue;
+        nlohmann::json clause;
+        clause["start"] = Clause.m_iFirstWord;
+        clause["last"] = Clause.m_iLastWord;
+        clause["words"] =  GetWords(Sentence, Clause);
+        clause["good_synvars"] = nlohmann::json::array();
+
+
+        if (!Clause.m_RelativeWord.IsEmpty())
+        {
+            clause["relative"] = Sentence.m_Words[Clause.m_RelativeWord.m_WordNo].m_strWord;
+        };
+        if (Clause.m_AntecedentWordNo != -1)
+        {
+            clause["antecedent"] = Sentence.m_Words[Clause.m_AntecedentWordNo].m_strWord;
+        };
+
 
         int nVmax = Clause.m_SynVariants.begin()->m_iWeight;
         for (CSVI pSynVar = Clause.m_SynVariants.begin(); pSynVar != Clause.m_SynVariants.end(); pSynVar++) {
             if (pSynVar->m_iWeight < nVmax) break;
 
             const CMorphVariant &V = *pSynVar;
-            Res += Format("\t<synvar>\n");
-
+            nlohmann::json synvar;
             // print the clause
             {
                 int ClauseType = (V.m_ClauseTypeNo == -1) ? UnknownSyntaxElement
                                                           : Clause.m_vectorTypes[V.m_ClauseTypeNo].m_Type;;
-                std::string Type;
                 if (ClauseType != UnknownSyntaxElement)
-                    Type = (const char *) A.GetClauseNameByType(ClauseType);
+                    synvar["type"] = (const char *) A.GetClauseNameByType(ClauseType);
                 else
-                    Type = "EMPTY";
-                Res += Format("\t\t<clause type=\"%s\">%s</clause>\n", Type.c_str(),
-                              GetWords(Sentence, Clause).c_str());
+                    synvar["type"] = "EMPTY";
             }
-
-
-            for (int GroupNo = 0; GroupNo < V.m_vectorGroups.GetGroups().size(); GroupNo++) {
+            nlohmann::json groups = nlohmann::json::array();
+            for (size_t GroupNo = 0; GroupNo < V.m_vectorGroups.GetGroups().size(); GroupNo++) {
                 const CGroup &G = V.m_vectorGroups.GetGroups()[GroupNo];
-                Res += Format("\t\t<group type=\"%s\">%s</group>\n",
-                              Sentence.GetOpt()->GetGroupNameByIndex(G.m_GroupType),
-                              GetWords(Sentence, G).c_str());
+                groups.push_back({
+                    {"type", Sentence.GetOpt()->GetGroupNameByIndex(G.m_GroupType)},
+                    {"words", GetWords(Sentence, G)},
+                });
+
             };
-            Res += Format("\t</synvar>\n");
+            synvar["groups"] = groups;
+            clause["good_synvars"].push_back(synvar);
         }
+        clauses.push_back(clause);
     }
 
-
+    return clauses;
 }
 
 std::string GetNodeStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo) {
@@ -81,8 +99,7 @@ std::string GetNodeStr(const CSentence &Sentence, const CRelationsIterator &RelI
         return Sentence.m_Words[WordNo].m_strWord;
 }
 
-std::string
-GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo, std::string &Lemma) {
+std::string GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo, std::string &Lemma) {
     Lemma = "";
     if (GroupNo != -1)
         return "";
@@ -97,12 +114,14 @@ GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int Gr
     }
 }
 
-void GetRelations(const CSentence &Sentence, std::string &Result) {
+nlohmann::json GetRelations(const CSentence &Sentence) {
     CRelationsIterator RelIt;
     RelIt.SetSentence(&Sentence);
     for (int i = 0; i < Sentence.m_vectorPrClauseNo.size(); i++)
         RelIt.AddClauseNoAndVariantNo(Sentence.m_vectorPrClauseNo[i], 0);
     RelIt.BuildRelations();
+    nlohmann::json  rels = nlohmann::json::array();
+
     for (long RelNo = 0; RelNo < RelIt.GetRelations().size(); RelNo++) {
         const CSynOutputRelation &piRel = RelIt.GetRelations()[RelNo];
         std::string RelName = Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
@@ -112,27 +131,33 @@ void GetRelations(const CSentence &Sentence, std::string &Result) {
         std::string SrcGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord, SrcLemma);
         std::string TrgGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord, TrgLemma);
         std::string GramRel = Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems);
-
-        Result += Format(
-                "\t<rel name=\"%s\" gramrel=\"%s\" lemmprnt=\"%s\" grmprnt=\"%s\" lemmchld=\"%s\" grmchld=\"%s\" > %s -> %s </rel>\n",
-                RelName.c_str(), GramRel.c_str(), SrcLemma.c_str(), SrcGrm.c_str(), TrgLemma.c_str(), TrgGrm.c_str(),
-                Src.c_str(), Trg.c_str());
+        rels.push_back({
+            {"src", Src},
+            {"trg", Trg},
+            {"name", RelName},
+            {"gramrel", GramRel},
+            {"src_lemma", SrcLemma},
+            {"src_grm", SrcGrm},
+            {"trg_lemma", TrgLemma},
+            {"trg_grm", TrgGrm},
+         });
     }
+    return rels;
 }
 
-std::string GetStringBySyntax(const CSentencesCollection &SC, const CAgramtab &A) {
-    std::string Result;
+nlohmann::json GetResultBySyntax(const CSentencesCollection &SC, const CAgramtab &A) {
+    nlohmann::json sents = nlohmann::json::array();
     for (size_t nSent = 0; nSent < SC.m_vectorSents.size(); nSent++) {
         const CSentence &Sentence = *SC.m_vectorSents[nSent];
-        Result += "<sent>\n";
-        GetAnanlytForms(Sentence, Result);
-        GetGroups(Sentence, A, Result);
-        GetRelations(Sentence, Result);
-        Result += "</sent>\n";
+        nlohmann::json sent = {
+            {"analytical",  GetAnanlytForms(Sentence)},
+            {"groups",  GetGroups(Sentence, A)},
+            {"relations",  GetRelations(Sentence)},
+        };
+        sents.push_back(sent);
     }
-
-    std::cerr << "sentences count: " <<  SC.m_vectorSents.size() << "\n";
-    return Result;
+    ConvertToUtfRecursive(sents, A.m_Language);
+    return sents;
 };
 
 
@@ -141,20 +166,10 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddArgument("--input", "input file");
     parser.AddArgument("--output", "output file");
     parser.AddArgument("--language", "language");
-    parser.AddOption("--speed-test");
     parser.AddOption("--input-is-list-file");
     parser.Parse(argc, argv);
 }
 
-void checkSpeed(ArgumentParser& args, CSyntaxHolder& H) {
-    for (auto f : args.GetInputFiles()) {
-        std::cerr << "File " <<  f << "\n";
-        H.m_bTimeStatis = true;
-        H.GetSentencesFromSynAn(f, true);
-        std::string s = GetStringBySyntax(H.m_Synan, *H.m_pGramTab);
-        args.GetOutputStream() << s << "\n\n";
-    }
-}
 
 int main(int argc, const char **argv) {
     ArgumentParser args;
@@ -167,22 +182,16 @@ int main(int argc, const char **argv) {
     };
     std::cerr << "ok\n";
 
-    if (args.Exists("speed-test")) {
-        checkSpeed(args, H);
-        return 0;
-    }
-
     try {
-        std::string s;
-        while (getline(args.GetInputStream(), s)) {
-            Trim(s);
-            if (s.empty()) continue;
-            H.GetSentencesFromSynAn(s, false);
-            args.GetOutputStream() << "<chunk>\n"
-                << "<input>" << s << "</input>\n"
-                << convert_to_utf8(GetStringBySyntax(H.m_Synan, *H.m_pGramTab), H.m_CurrentLanguage)
-                << "</chunk>\n";
-        };
+        CTestCaseBase base;
+        base.read_test_cases(args.GetInputStream());
+        for (auto& t : base.TestCases) {
+            if (!t.Text.empty()) {
+                H.GetSentencesFromSynAn(t.Text, false);
+                t.Result = GetResultBySyntax(H.m_Synan, *H.m_pGramTab);
+            }
+        }
+        base.write_test_cases(args.GetOutputStream(), H.m_CurrentLanguage);
     }
     catch (...) {
         std::cerr << "an exception occurred!\n";

@@ -1,0 +1,671 @@
+[
+    {
+        "comments": "// частицы в НАР_НАР",
+        "input": "уж очень хорошо",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРЕДИК",
+                                        "words": "уж очень хорошо"
+                                    }
+                                ],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР",
+                                        "words": "уж очень хорошо"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "уж очень хорошо"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "нст,",
+                        "name": "НАР_ПРЕДИК",
+                        "src": "хорошо",
+                        "src_grm": "нст,",
+                        "src_lemma": "ХОРОШО",
+                        "trg": "уж",
+                        "trg_grm": "",
+                        "trg_lemma": "УЖ"
+                    },
+                    {
+                        "gramrel": "нст,",
+                        "name": "НАР_ПРЕДИК",
+                        "src": "хорошо",
+                        "src_grm": "нст,",
+                        "src_lemma": "ХОРОШО",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// частицы в НАР_ПРИЛ",
+        "input": "очень уж хорошая",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень уж хорошая"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "очень уж хорошая"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,жр,им,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "хорошая",
+                        "src_grm": "кач,но,од,жр,им,ед,",
+                        "src_lemma": "ХОРОШИЙ",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    },
+                    {
+                        "gramrel": "кач,но,од,жр,им,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "хорошая",
+                        "src_grm": "кач,но,од,жр,им,ед,",
+                        "src_lemma": "ХОРОШИЙ",
+                        "trg": "уж",
+                        "trg_grm": "",
+                        "trg_lemma": "УЖ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// частицы в НАР_ПРИЛ",
+        "input": "уж очень хорошая",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "уж очень хорошая"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "уж очень хорошая"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,жр,им,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "хорошая",
+                        "src_grm": "кач,но,од,жр,им,ед,",
+                        "src_lemma": "ХОРОШИЙ",
+                        "trg": "уж",
+                        "trg_grm": "",
+                        "trg_lemma": "УЖ"
+                    },
+                    {
+                        "gramrel": "кач,но,од,жр,им,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "хорошая",
+                        "src_grm": "кач,но,од,жр,им,ед,",
+                        "src_lemma": "ХОРОШИЙ",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// частицы в НАР_НАР ",
+        "input": "cлишком же широко",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР",
+                                        "words": "слишком же широко"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "слишком же широко"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "НАР_НАР",
+                        "src": "широко",
+                        "src_grm": "",
+                        "src_lemma": "ШИРОКО",
+                        "trg": "слишком",
+                        "trg_grm": "",
+                        "trg_lemma": "СЛИШКОМ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "НАР_НАР",
+                        "src": "широко",
+                        "src_grm": "",
+                        "src_lemma": "ШИРОКО",
+                        "trg": "же",
+                        "trg_grm": "",
+                        "trg_lemma": "ЖЕ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// не надо строить группу НАР_НАР c наречием \"уж\"",
+        "input": "cлишком уж широко",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР",
+                                        "words": "слишком уж широко"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "слишком уж широко"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "НАР_НАР",
+                        "src": "широко",
+                        "src_grm": "",
+                        "src_lemma": "ШИРОКО",
+                        "trg": "слишком",
+                        "trg_grm": "",
+                        "trg_lemma": "СЛИШКОМ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "НАР_НАР",
+                        "src": "широко",
+                        "src_grm": "",
+                        "src_lemma": "ШИРОКО",
+                        "trg": "уж",
+                        "trg_grm": "",
+                        "trg_lemma": "УЖ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// частицы в НАР_ЧИСЛ",
+        "input": "уж очень же много",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР_ЧИСЛ",
+                                        "words": "очень же много"
+                                    },
+                                    {
+                                        "type": "НАР_ПРЕДИК",
+                                        "words": "уж очень же много"
+                                    }
+                                ],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР_ЧИСЛ",
+                                        "words": "уж очень же много"
+                                    }
+                                ],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР_ЧИСЛ",
+                                        "words": "уж очень же много"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "уж очень же много"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "нст,",
+                        "name": "НАР_НАР_ЧИСЛ",
+                        "src": "много",
+                        "src_grm": "нст,",
+                        "src_lemma": "МНОГО",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    },
+                    {
+                        "gramrel": "нст,",
+                        "name": "НАР_НАР_ЧИСЛ",
+                        "src": "много",
+                        "src_grm": "нст,",
+                        "src_lemma": "МНОГО",
+                        "trg": "же",
+                        "trg_grm": "",
+                        "trg_lemma": "ЖЕ"
+                    },
+                    {
+                        "gramrel": "нст,",
+                        "name": "НАР_ПРЕДИК",
+                        "src": "много",
+                        "src_grm": "нст,",
+                        "src_lemma": "МНОГО",
+                        "trg": "уж",
+                        "trg_grm": "",
+                        "trg_lemma": "УЖ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// удален омоними сравн. прилагательного",
+        "input": "уже ушел",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАРЕЧ_ГЛАГОЛ",
+                                        "words": "уже ушел"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "уже ушел"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "дст,нп,св,прш,мр,ед,",
+                        "name": "НАРЕЧ_ГЛАГОЛ",
+                        "src": "ушел",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "src_lemma": "УЙТИ",
+                        "trg": "уже",
+                        "trg_grm": "",
+                        "trg_lemma": "УЖЕ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Оттого и зло",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Оттого и зло"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Отчего и зло",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Отчего и зло"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Отчего и куда",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_НАР",
+                                        "words": "Отчего и куда"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Отчего и куда"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "Отчего",
+                        "trg_grm": "вопр,",
+                        "trg_lemma": "ОТЧЕГО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "куда",
+                        "trg_grm": "вопр,",
+                        "trg_lemma": "КУДА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "красиво и куда",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "красиво и куда"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "красиво и весело",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_НАР",
+                                        "words": "красиво и весело"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "красиво и весело"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "красиво",
+                        "trg_grm": "",
+                        "trg_lemma": "КРАСИВО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "весело",
+                        "trg_grm": "",
+                        "trg_lemma": "ВЕСЕЛО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// нейтр., вопр., и относ. наречия не могут смешиваться в ОДНОР_НАР",
+        "input": "Оттого и потому",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_НАР",
+                                        "words": "Оттого и потому"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Оттого и потому"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "Оттого",
+                        "trg_grm": "указат,",
+                        "trg_lemma": "ОТТОГО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "потому",
+                        "trg_grm": "указат,",
+                        "trg_lemma": "ПОТОМУ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "//  не собирать НАР_НАР с \"как\"",
+        "input": "как все железнодорожные подрядчики",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "все железнодорожные подрядчики"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "все железнодорожные подрядчики"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "как все железнодорожные подрядчики"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "им,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "подрядчики",
+                        "src_grm": "од,мр,им,мн,",
+                        "src_lemma": "ПОДРЯДЧИК",
+                        "trg": "все",
+                        "trg_grm": "но,од,им,мн,",
+                        "trg_lemma": "ВЕСЬ"
+                    },
+                    {
+                        "gramrel": "им,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "подрядчики",
+                        "src_grm": "од,мр,им,мн,",
+                        "src_lemma": "ПОДРЯДЧИК",
+                        "trg": "железнодорожные",
+                        "trg_grm": "но,од,им,мн,",
+                        "trg_lemma": "ЖЕЛЕЗНОДОРОЖНЫЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "",
+        "result": null
+    }
+]

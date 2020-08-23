@@ -1,0 +1,3428 @@
+[
+    {
+        "comments": "//была попытка построить НСО на термине",
+        "input": "печатной информации,  фильмов, компьютерных банков данных, ничего.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "печатной информации"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "компьютерных банков"
+                                    },
+                                    {
+                                        "type": "ГЕНИТ_ИГ",
+                                        "words": "компьютерных банков данных"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ИГ",
+                                        "words": "печатной информации , фильмов , компьютерных банков данных"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "печатной информации"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "компьютерных банков"
+                                    },
+                                    {
+                                        "type": "ГЕНИТ_ИГ",
+                                        "words": "компьютерных банков данных"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ИГ",
+                                        "words": "печатной информации , фильмов , компьютерных банков данных"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 10,
+                        "start": 0,
+                        "words": "печатной информации , фильмов , компьютерных банков данных , ничего ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "рд,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "банков",
+                        "src_grm": "но,мр,рд,мн,",
+                        "src_lemma": "БАНК",
+                        "trg": "компьютерных",
+                        "trg_grm": "но,од,рд,мн,",
+                        "trg_lemma": "КОМПЬЮТЕРНЫЙ"
+                    },
+                    {
+                        "gramrel": "жр,пр,дт,рд,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "информации",
+                        "src_grm": "но,жр,рд,ед,",
+                        "src_lemma": "ИНФОРМАЦИЯ",
+                        "trg": "печатной",
+                        "trg_grm": "кач,но,од,жр,рд,ед,",
+                        "trg_lemma": "ПЕЧАТНЫЙ"
+                    },
+                    {
+                        "gramrel": "рд,мн,",
+                        "name": "ГЕНИТ_ИГ",
+                        "src": "банков",
+                        "src_grm": "но,мр,рд,мн,",
+                        "src_lemma": "БАНК",
+                        "trg": "данных",
+                        "trg_grm": "но,пр,рд,мн,",
+                        "trg_lemma": "ДАННЫЕ"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "информации",
+                        "trg_grm": "но,жр,рд,ед,",
+                        "trg_lemma": "ИНФОРМАЦИЯ"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "фильмов",
+                        "trg_grm": "но,мр,рд,мн,",
+                        "trg_lemma": "ФИЛЬМ"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": ",",
+                        "trg_grm": "",
+                        "trg_lemma": ","
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "банков",
+                        "trg_grm": "но,мр,рд,мн,",
+                        "trg_lemma": "БАНК"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// оборот \"до конца\" не может быть антецедентом для \"кторый\"",
+        "input": "до  конца  встречи, который принес",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "antecedent": "конца",
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "relative": "который",
+                        "start": 3,
+                        "words": ", который принес"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ГЕНИТ_ИГ",
+                                        "words": "конца встречи"
+                                    },
+                                    {
+                                        "type": "ПРИДАТ_ОПР",
+                                        "words": "конца встречи , который принес"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "до конца встречи , который принес"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "до конца встречи , который принес"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "принес",
+                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "src_lemma": "ПРИНЕСТИ",
+                        "trg": "который",
+                        "trg_grm": "но,од,мр,им,ед,",
+                        "trg_lemma": "КОТОРЫЙ"
+                    },
+                    {
+                        "gramrel": "но,мр,рд,ед,",
+                        "name": "ПРИДАТ_ОПР",
+                        "src": "конца",
+                        "src_grm": "но,мр,рд,ед,",
+                        "src_lemma": "КОНЕЦ",
+                        "trg": "принес",
+                        "trg_grm": "дст,пе,св,прш,мр,ед,",
+                        "trg_lemma": "ПРИНЕСТИ"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "до",
+                        "src_grm": "",
+                        "src_lemma": "ДО",
+                        "trg": "конца",
+                        "trg_grm": "но,мр,рд,ед,",
+                        "trg_lemma": "КОНЕЦ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// здесь не нужно строить тире",
+        "input": "это облако",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "это облако"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "это облако"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,вн,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "облако",
+                        "src_grm": "но,ср,вн,им,ед,",
+                        "src_lemma": "ОБЛАКО",
+                        "trg": "это",
+                        "trg_grm": "но,од,ср,вн,им,ед,",
+                        "trg_lemma": "ЭТОТ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Давайте будем дружить.",
+        "result": [
+            {
+                "analytical": [
+                    "будем дружить"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "Давайте будем дружить ."
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Москва - столица СССР.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ГЕНИТ_ИГ",
+                                        "words": "столица СССР"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Москва - столица СССР ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "но,жр,им,ед,",
+                        "name": "ГЕНИТ_ИГ",
+                        "src": "столица",
+                        "src_grm": "но,жр,им,ед,",
+                        "src_lemma": "СТОЛИЦА",
+                        "trg": "СССР",
+                        "trg_grm": "дфст,лок,аббр,0,но,мр,зв,пр,тв,вн,дт,рд,им,ед,",
+                        "trg_lemma": "СССР"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "столица",
+                        "src_grm": "но,жр,им,ед,",
+                        "src_lemma": "СТОЛИЦА",
+                        "trg": "Москва",
+                        "trg_grm": "дфст,лок,но,жр,им,ед,",
+                        "trg_lemma": "МОСКВА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Он шел, свистя и напевая",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ДПР"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 4,
+                        "words": "и напевая"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ДПР"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 2,
+                        "words": ", свистя и напевая"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Он шел , свистя и напевая"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "шел",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "ИДТИ",
+                        "trg": "Он",
+                        "trg_grm": "3л,мр,им,ед,",
+                        "trg_lemma": "ОН"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДКЛАУЗА",
+                        "src": "свистя",
+                        "src_grm": "дст,пе,нс,нст,",
+                        "src_lemma": "СВИСТЕТЬ",
+                        "trg": "напевая",
+                        "trg_grm": "дст,пе,нс,нст,",
+                        "trg_lemma": "НАПЕВАТЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДКЛАУЗА",
+                        "src": "шел",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "ИДТИ",
+                        "trg": "свистя",
+                        "trg_grm": "дст,пе,нс,нст,",
+                        "trg_lemma": "СВИСТЕТЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Пойдем, наверно, в кино.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "в кино"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "в кино"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Пойдем , наверно , в кино ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "пр,вн,",
+                        "name": "ПГ",
+                        "src": "в",
+                        "src_grm": "",
+                        "src_lemma": "В",
+                        "trg": "кино",
+                        "trg_grm": "0,но,ср,пр,вн,ед,",
+                        "trg_lemma": "КИНО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "Пойдем",
+                        "src_grm": "дст,нп,св,пвл,1л,буд,мн,",
+                        "src_lemma": "ПОЙТИ",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Это, наверно, интересно.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Это , наверно , интересно ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "интересно",
+                        "src_grm": "кач,но,од,ср,ед,",
+                        "src_lemma": "ИНТЕРЕСНЫЙ",
+                        "trg": "Это",
+                        "trg_grm": "ср,им,ед,",
+                        "trg_lemma": "ЭТО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "интересно",
+                        "src_grm": "кач,но,од,ср,ед,",
+                        "src_lemma": "ИНТЕРЕСНЫЙ",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// который в первой клаузе",
+        "input": "- С которой? с Любецкой?",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "С которой"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "с Любецкой"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 6,
+                        "relative": "которой",
+                        "start": 0,
+                        "words": "- С которой ? с Любецкой ?"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "тв,рд,",
+                        "name": "ПГ",
+                        "src": "С",
+                        "src_grm": "",
+                        "src_lemma": "С",
+                        "trg": "которой",
+                        "trg_grm": "но,од,жр,тв,рд,ед,",
+                        "trg_lemma": "КОТОРЫЙ"
+                    },
+                    {
+                        "gramrel": "тв,вн,рд,",
+                        "name": "ПГ",
+                        "src": "с",
+                        "src_grm": "",
+                        "src_lemma": "С",
+                        "trg": "Любецкой",
+                        "trg_grm": "но,ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "trg_lemma": "ЛЮБЕЦКОЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// подлежащее, которое строится для императивного сказуемого, не имеет веса (типа \"пошел ты\")   !! стало лучше",
+        "input": "Боже ты мой",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Боже ты мой"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Пойдем-ка домой.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Пойдем-ка домой ."
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Мой дом - большой.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "Мой дом"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Мой дом - большой ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,вн,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "дом",
+                        "src_grm": "но,мр,вн,им,ед,",
+                        "src_lemma": "ДОМ",
+                        "trg": "Мой",
+                        "trg_grm": "но,од,мр,вн,им,ед,",
+                        "trg_lemma": "МОЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "машина должна быть красива",
+        "result": [
+            {
+                "analytical": [
+                    "быть красива"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "машина должна быть красива"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "должна",
+                        "src_grm": "кач,но,од,жр,ед,",
+                        "src_lemma": "ДОЛЖЕН",
+                        "trg": "машина",
+                        "trg_grm": "но,жр,им,ед,",
+                        "trg_lemma": "МАШИНА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "автомобиль должен  быть красив",
+        "result": [
+            {
+                "analytical": [
+                    "быть красив"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "автомобиль должен быть красив"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "должен",
+                        "src_grm": "кач,но,од,мр,ед,",
+                        "src_lemma": "ДОЛЖЕН",
+                        "trg": "автомобиль",
+                        "trg_grm": "но,мр,им,ед,",
+                        "trg_lemma": "АВТОМОБИЛЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "У меня срочные дела.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "У меня"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "срочные дела"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "У меня - срочные дела ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "вн,им,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "дела",
+                        "src_grm": "но,ср,вн,им,мн,",
+                        "src_lemma": "ДЕЛО",
+                        "trg": "срочные",
+                        "trg_grm": "кач,но,од,вн,им,мн,",
+                        "trg_lemma": "СРОЧНЫЙ"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "У",
+                        "src_grm": "",
+                        "src_lemma": "У",
+                        "trg": "меня",
+                        "trg_grm": "1л,рд,ед,",
+                        "trg_lemma": "Я"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// ",
+        "input": "- Вы, наверно, сыщик?",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 2,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "- Вы , наверно , сыщик ?"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Она, наверно, добрая.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Она , наверно , добрая ."
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Дом,видимо, - большой.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", видимо"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Дом , видимо , - большой ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "-",
+                        "src_grm": "",
+                        "src_lemma": "-",
+                        "trg": "видимо",
+                        "trg_grm": "",
+                        "trg_lemma": "ВИДИМО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Жить - родине служить.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Жить - родине служить ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "служить",
+                        "src_grm": "дст,пе,нс,",
+                        "src_lemma": "СЛУЖИТЬ",
+                        "trg": "Жить",
+                        "trg_grm": "дст,нп,нс,",
+                        "trg_lemma": "ЖИТЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Нам, наверно, уходить?",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ИНФ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ИНФ"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Нам , наверно , уходить ?"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "уходить",
+                        "src_grm": "дст,нп,нс,",
+                        "src_lemma": "УХОДИТЬ",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Не так, конечно, но...",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 2,
+                        "words": ", конечно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "Не так , конечно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 4,
+                        "words": ", но ..."
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Она, наверно, красива.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Она , наверно , красива ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "красива",
+                        "src_grm": "кач,но,од,жр,ед,",
+                        "src_lemma": "КРАСИВЫЙ",
+                        "trg": "Она",
+                        "trg_grm": "3л,жр,им,ед,",
+                        "trg_lemma": "ОНА"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "красива",
+                        "src_grm": "кач,но,од,жр,ед,",
+                        "src_lemma": "КРАСИВЫЙ",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Это, конечно, здорово.  !!!   Триграм удалил кр прилагательное здорово",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", конечно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Это , конечно , здорово ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "здорово",
+                        "src_grm": "нст,",
+                        "src_lemma": "ЗДОРОВО",
+                        "trg": "конечно",
+                        "trg_grm": "",
+                        "trg_lemma": "КОНЕЧНО"
+                    }
+                ]
+            },
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "удалил кр"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "удалил кр"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "!!! Триграм удалил кр прилагательное здорово"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "дст,пе,св,прш,мр,ед,",
+                        "name": "ПРЯМ_ДОП",
+                        "src": "удалил",
+                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "src_lemma": "УДАЛИТЬ",
+                        "trg": "кр",
+                        "trg_grm": "но,ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "trg_lemma": "КР"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "удалил",
+                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "src_lemma": "УДАЛИТЬ",
+                        "trg": "Триграм",
+                        "trg_grm": "но,ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "trg_lemma": "ТРИГРАМ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Ему хотелось пить и есть.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ИНФ",
+                                        "words": "пить и есть"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Ему хотелось пить и есть ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_ИНФ",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "пить",
+                        "trg_grm": "дст,пе,нс,",
+                        "trg_lemma": "ПИТЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_ИНФ",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "есть",
+                        "trg_grm": "дст,пе,нс,",
+                        "trg_lemma": "ЕСТЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "На холме стоял сам князь.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "На холме"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "сам князь"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "На холме стоял сам князь ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "князь",
+                        "src_grm": "од,мр,им,ед,",
+                        "src_lemma": "КНЯЗЬ",
+                        "trg": "сам",
+                        "trg_grm": "но,од,мр,им,ед,",
+                        "trg_lemma": "САМ"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "На",
+                        "src_grm": "",
+                        "src_lemma": "НА",
+                        "trg": "холме",
+                        "trg_grm": "но,мр,пр,ед,",
+                        "trg_lemma": "ХОЛМ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "стоял",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "СТОЯТЬ",
+                        "trg": "князь",
+                        "trg_grm": "од,мр,им,ед,",
+                        "trg_lemma": "КНЯЗЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "На этот раз она не права.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОБОРОТ",
+                                        "words": "На этот раз"
+                                    }
+                                ],
+                                "type": "КР_ПРИЛ"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "этот раз"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "На этот раз"
+                                    }
+                                ],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "На этот раз она не права ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "права",
+                        "src_grm": "кач,но,од,жр,ед,",
+                        "src_lemma": "ПРАВЫЙ",
+                        "trg": "она",
+                        "trg_grm": "3л,жр,им,ед,",
+                        "trg_lemma": "ОНА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Это было очень интересно.",
+        "result": [
+            {
+                "analytical": [
+                    "было интересно"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень интересно"
+                                    }
+                                ],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Это было очень интересно ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,ср,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "интересно",
+                        "src_grm": "кач,но,од,ср,ед,",
+                        "src_lemma": "ИНТЕРЕСНЫЙ",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "было",
+                        "src_grm": "дст,нп,нс,прш,ср,ед,",
+                        "src_lemma": "БЫТЬ",
+                        "trg": "Это",
+                        "trg_grm": "ср,им,ед,",
+                        "trg_lemma": "ЭТО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Это, наверно, Cyclopides!",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Это , наверно , Cyclopides !"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Она шла, наверно, бежала.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 2,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "Она шла , наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 4,
+                        "words": ", бежала ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "шла",
+                        "src_grm": "дст,нп,нс,прш,жр,ед,",
+                        "src_lemma": "ИДТИ",
+                        "trg": "Она",
+                        "trg_grm": "3л,жр,им,ед,",
+                        "trg_lemma": "ОНА"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "шла",
+                        "src_grm": "дст,нп,нс,прш,жр,ед,",
+                        "src_lemma": "ИДТИ",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Хорошо, наверно, не плохо.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Хорошо , наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 3,
+                        "words": ", не плохо ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "Хорошо",
+                        "src_grm": "нст,",
+                        "src_lemma": "ХОРОШО",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Мыла на кухне она не нашла.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "на кухне"
+                                    },
+                                    {
+                                        "type": "ОТР_ФОРМА",
+                                        "words": "не нашла"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Мыла на кухне она не нашла ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОТР_ФОРМА",
+                        "src": "нашла",
+                        "src_grm": "дст,пе,св,прш,жр,ед,",
+                        "src_lemma": "НАЙТИ",
+                        "trg": "не",
+                        "trg_grm": "",
+                        "trg_lemma": "НЕ"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "на",
+                        "src_grm": "",
+                        "src_lemma": "НА",
+                        "trg": "кухне",
+                        "trg_grm": "но,жр,пр,ед,",
+                        "trg_lemma": "КУХНЯ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "нашла",
+                        "src_grm": "дст,пе,св,прш,жр,ед,",
+                        "src_lemma": "НАЙТИ",
+                        "trg": "она",
+                        "trg_grm": "3л,жр,им,ед,",
+                        "trg_lemma": "ОНА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Она, наверно, пошла гулять.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "пошла гулять"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "пошла гулять"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Она , наверно , пошла гулять ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "дст,нп,св,прш,жр,ед,",
+                        "name": "ПЕР_ГЛАГ_ИНФ",
+                        "src": "пошла",
+                        "src_grm": "дст,нп,св,прш,жр,ед,",
+                        "src_lemma": "ПОЙТИ",
+                        "trg": "гулять",
+                        "trg_grm": "дст,нп,нс,",
+                        "trg_lemma": "ГУЛЯТЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "пошла",
+                        "src_grm": "дст,нп,св,прш,жр,ед,",
+                        "src_lemma": "ПОЙТИ",
+                        "trg": "Она",
+                        "trg_grm": "3л,жр,им,ед,",
+                        "trg_lemma": "ОНА"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "пошла",
+                        "src_grm": "дст,нп,св,прш,жр,ед,",
+                        "src_lemma": "ПОЙТИ",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Хорошо, конечно, а не плохо.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", конечно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Хорошо , конечно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 7,
+                        "start": 3,
+                        "words": ", а не плохо ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "Хорошо",
+                        "src_grm": "нст,",
+                        "src_lemma": "ХОРОШО",
+                        "trg": "конечно",
+                        "trg_grm": "",
+                        "trg_lemma": "КОНЕЧНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "А он гораздо менее привлекателен.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "АНАТ_СРАВН",
+                                        "words": "менее привлекателен"
+                                    },
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "гораздо менее привлекателен"
+                                    }
+                                ],
+                                "type": "КР_ПРИЛ"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "АНАТ_СРАВН",
+                                        "words": "менее привлекателен"
+                                    },
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "гораздо менее привлекателен"
+                                    }
+                                ],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "А он гораздо менее привлекателен ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,мр,ед,",
+                        "name": "АНАТ_СРАВН",
+                        "src": "привлекателен",
+                        "src_grm": "кач,но,од,мр,ед,",
+                        "src_lemma": "ПРИВЛЕКАТЕЛЬНЫЙ",
+                        "trg": "менее",
+                        "trg_grm": "",
+                        "trg_lemma": "МЕНЕЕ"
+                    },
+                    {
+                        "gramrel": "кач,но,од,мр,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "привлекателен",
+                        "src_grm": "кач,но,од,мр,ед,",
+                        "src_lemma": "ПРИВЛЕКАТЕЛЬНЫЙ",
+                        "trg": "гораздо",
+                        "trg_grm": "",
+                        "trg_lemma": "ГОРАЗДО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "привлекателен",
+                        "src_grm": "кач,но,од,мр,ед,",
+                        "src_lemma": "ПРИВЛЕКАТЕЛЬНЫЙ",
+                        "trg": "он",
+                        "trg_grm": "3л,мр,им,ед,",
+                        "trg_lemma": "ОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Дом, наверно,строящийся рабочими.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЧ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЧ"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Дом , наверно , строящийся рабочими ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "строящийся",
+                        "src_grm": "дст,нп,нс,но,од,нст,мр,вн,им,ед,",
+                        "src_lemma": "СТРОИТЬСЯ",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Маша - девочка, а Петя - мальчик.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Маша - девочка"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 8,
+                        "start": 3,
+                        "words": ", а Петя - мальчик ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "девочка",
+                        "src_grm": "од,жр,им,ед,",
+                        "src_lemma": "ДЕВОЧКА",
+                        "trg": "Маша",
+                        "trg_grm": "имя,од,жр,им,ед,",
+                        "trg_lemma": "МАША"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "мальчик",
+                        "src_grm": "од,мр,им,ед,",
+                        "src_lemma": "МАЛЬЧИК",
+                        "trg": "Петя",
+                        "trg_grm": "имя,од,мр,им,ед,",
+                        "trg_lemma": "ПЕТЯ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Мне достался очень красивый зонт.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень красивый"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "очень красивый зонт"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Мне достался очень красивый зонт ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,мр,вн,им,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "красивый",
+                        "src_grm": "кач,но,од,мр,им,ед,",
+                        "src_lemma": "КРАСИВЫЙ",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    },
+                    {
+                        "gramrel": "мр,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "зонт",
+                        "src_grm": "но,мр,им,ед,",
+                        "src_lemma": "ЗОНТ",
+                        "trg": "красивый",
+                        "trg_grm": "кач,но,од,мр,им,ед,",
+                        "trg_lemma": "КРАСИВЫЙ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "достался",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "src_lemma": "ДОСТАТЬСЯ",
+                        "trg": "зонт",
+                        "trg_grm": "но,мр,им,ед,",
+                        "trg_lemma": "ЗОНТ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// анал. формы строятся не со всеми типами предикативов",
+        "input": "мне будет интересно;мне будет бах",
+        "result": [
+            {
+                "analytical": [
+                    "будет интересно"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "мне будет интересно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 3,
+                        "words": "; мне будет бах"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "// format_for_oborots должен быть запускаться всегда ",
+        "input": "В процессе изучения были выявлены",
+        "result": [
+            {
+                "analytical": [
+                    "были выявлены"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОБОРОТ",
+                                        "words": "В процессе"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "В процессе изучения"
+                                    }
+                                ],
+                                "type": "КР_ПРЧ"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ГЕНИТ_ИГ",
+                                        "words": "процессе изучения"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "В процессе изучения"
+                                    }
+                                ],
+                                "type": "КР_ПРЧ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "В процессе изучения были выявлены"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "В процессе",
+                        "src_grm": "",
+                        "src_lemma": "",
+                        "trg": "изучения",
+                        "trg_grm": "но,ср,рд,ед,",
+                        "trg_lemma": "ИЗУЧЕНИЕ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Он вышел подышать свежим воздухом.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "вышел подышать"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "свежим воздухом"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Он вышел подышать свежим воздухом ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,тв,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "воздухом",
+                        "src_grm": "но,мр,тв,ед,",
+                        "src_lemma": "ВОЗДУХ",
+                        "trg": "свежим",
+                        "trg_grm": "кач,но,од,мр,тв,ед,",
+                        "trg_lemma": "СВЕЖИЙ"
+                    },
+                    {
+                        "gramrel": "дст,нп,св,прш,мр,ед,",
+                        "name": "ПЕР_ГЛАГ_ИНФ",
+                        "src": "вышел",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "src_lemma": "ВЫЙТИ",
+                        "trg": "подышать",
+                        "trg_grm": "дст,нп,св,",
+                        "trg_lemma": "ПОДЫШАТЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "вышел",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "src_lemma": "ВЫЙТИ",
+                        "trg": "Он",
+                        "trg_grm": "3л,мр,им,ед,",
+                        "trg_lemma": "ОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Трудно жить на свете пионеру Пете.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "Трудно жить"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "на свете"
+                                    }
+                                ],
+                                "type": "ПРЕДК"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Трудно жить на свете пионеру Пете ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "нст,",
+                        "name": "ПЕР_ГЛАГ_ИНФ",
+                        "src": "Трудно",
+                        "src_grm": "нст,",
+                        "src_lemma": "ТРУДНО",
+                        "trg": "жить",
+                        "trg_grm": "дст,нп,нс,",
+                        "trg_lemma": "ЖИТЬ"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "на",
+                        "src_grm": "",
+                        "src_lemma": "НА",
+                        "trg": "свете",
+                        "trg_grm": "дфст,но,мр,пр,ед,",
+                        "trg_lemma": "СВЕТ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Это, наверно, что-то очень важное.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 1,
+                        "words": ", наверно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "очень важное"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 8,
+                        "start": 0,
+                        "words": "Это , наверно , что-то - очень важное ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,ср,вн,им,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "важное",
+                        "src_grm": "кач,но,од,ср,вн,им,ед,",
+                        "src_lemma": "ВАЖНЫЙ",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "-",
+                        "src_grm": "",
+                        "src_lemma": "-",
+                        "trg": "наверно",
+                        "trg_grm": "",
+                        "trg_lemma": "НАВЕРНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Да нет, конечно, -- вздохнул Зафод.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ВВОД"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 2,
+                        "words": ", конечно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "Да нет , конечно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 8,
+                        "start": 4,
+                        "words": ", -- вздохнул Зафод ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "вздохнул",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "src_lemma": "ВЗДОХНУТЬ",
+                        "trg": "Зафод",
+                        "trg_grm": "но,ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "trg_lemma": "ЗАФОД"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ВВОДН_КЛАУЗА",
+                        "src": "Да",
+                        "src_grm": "0,",
+                        "src_lemma": "ДА",
+                        "trg": "конечно",
+                        "trg_grm": "",
+                        "trg_lemma": "КОНЕЧНО"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Дом, построенный на холме, - большой.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "на холме"
+                                    }
+                                ],
+                                "type": "ПРЧ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 1,
+                        "words": ", построенный на холме"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЧ_СУЩ",
+                                        "words": "Дом , построенный на холме"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 8,
+                        "start": 0,
+                        "words": "Дом , построенный на холме , - большой ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "на",
+                        "src_grm": "",
+                        "src_lemma": "НА",
+                        "trg": "холме",
+                        "trg_grm": "но,мр,пр,ед,",
+                        "trg_lemma": "ХОЛМ"
+                    },
+                    {
+                        "gramrel": "но,мр,вн,им,ед,",
+                        "name": "ПРИЧ_СУЩ",
+                        "src": "Дом",
+                        "src_grm": "но,мр,вн,им,ед,",
+                        "src_lemma": "ДОМ",
+                        "trg": "построенный",
+                        "trg_grm": "стр,пе,св,но,од,прш,мр,вн,им,ед,",
+                        "trg_lemma": "ПОСТРОИТЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Никогда не видел таких красивых яблок.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОТР_ФОРМА",
+                                        "words": "не видел"
+                                    },
+                                    {
+                                        "type": "МОДИФ_ПРИЛ",
+                                        "words": "таких красивых"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "таких красивых яблок"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Никогда не видел таких красивых яблок ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "но,од,рд,мн,",
+                        "name": "МОДИФ_ПРИЛ",
+                        "src": "красивых",
+                        "src_grm": "кач,но,од,рд,мн,",
+                        "src_lemma": "КРАСИВЫЙ",
+                        "trg": "таких",
+                        "trg_grm": "но,од,рд,мн,",
+                        "trg_lemma": "ТАКОЙ"
+                    },
+                    {
+                        "gramrel": "рд,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "яблок",
+                        "src_grm": "но,ср,рд,мн,",
+                        "src_lemma": "ЯБЛОКО",
+                        "trg": "красивых",
+                        "trg_grm": "кач,но,од,рд,мн,",
+                        "trg_lemma": "КРАСИВЫЙ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОТР_ФОРМА",
+                        "src": "видел",
+                        "src_grm": "дст,пе,нс,прш,мр,ед,",
+                        "src_lemma": "ВИДЕТЬ",
+                        "trg": "не",
+                        "trg_grm": "",
+                        "trg_lemma": "НЕ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Они должны были быть быстро потрачены.",
+        "result": [
+            {
+                "analytical": [
+                    "были должны",
+                    "быть потрачены"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАРЕЧ_ГЛАГОЛ",
+                                        "words": "быстро потрачены"
+                                    }
+                                ],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Они должны были быть быстро потрачены ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "стр,пе,св,но,од,прш,мн,",
+                        "name": "НАРЕЧ_ГЛАГОЛ",
+                        "src": "потрачены",
+                        "src_grm": "стр,пе,св,но,од,прш,мн,",
+                        "src_lemma": "ПОТРАТИТЬ",
+                        "trg": "быстро",
+                        "trg_grm": "",
+                        "trg_lemma": "БЫСТРО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "были",
+                        "src_grm": "дст,нп,нс,прш,мн,",
+                        "src_lemma": "БЫТЬ",
+                        "trg": "Они",
+                        "trg_grm": "3л,им,мн,",
+                        "trg_lemma": "ОНИ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Они осуществили захват быстро и четко.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "осуществили захват"
+                                    },
+                                    {
+                                        "type": "ОДНОР_НАР",
+                                        "words": "быстро и четко"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Они осуществили захват быстро и четко ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "дст,пе,св,прш,мн,",
+                        "name": "ПРЯМ_ДОП",
+                        "src": "осуществили",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ОСУЩЕСТВИТЬ",
+                        "trg": "захват",
+                        "trg_grm": "но,мр,вн,ед,",
+                        "trg_lemma": "ЗАХВАТ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "быстро",
+                        "trg_grm": "",
+                        "trg_lemma": "БЫСТРО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_НАР",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "четко",
+                        "trg_grm": "",
+                        "trg_lemma": "ЧЕТКО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "осуществили",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ОСУЩЕСТВИТЬ",
+                        "trg": "Они",
+                        "trg_grm": "3л,им,мн,",
+                        "trg_lemma": "ОНИ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Особенно хорош в тот вечер был десерт.",
+        "result": [
+            {
+                "analytical": [
+                    "был хорош"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_ПРИЛ",
+                                        "words": "Особенно хорош"
+                                    },
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "тот вечер"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "в тот вечер"
+                                    }
+                                ],
+                                "type": "КР_ПРИЛ"
+                            }
+                        ],
+                        "last": 7,
+                        "start": 0,
+                        "words": "Особенно хорош в тот вечер был десерт ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "кач,но,од,мр,ед,",
+                        "name": "НАР_ПРИЛ",
+                        "src": "хорош",
+                        "src_grm": "кач,но,од,мр,ед,",
+                        "src_lemma": "ХОРОШИЙ",
+                        "trg": "Особенно",
+                        "trg_grm": "",
+                        "trg_lemma": "ОСОБЕННО"
+                    },
+                    {
+                        "gramrel": "мр,вн,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "вечер",
+                        "src_grm": "но,мр,вн,ед,",
+                        "src_lemma": "ВЕЧЕР",
+                        "trg": "тот",
+                        "trg_grm": "но,мр,вн,ед,",
+                        "trg_lemma": "ТОТ"
+                    },
+                    {
+                        "gramrel": "вн,",
+                        "name": "ПГ",
+                        "src": "в",
+                        "src_grm": "",
+                        "src_lemma": "В",
+                        "trg": "вечер",
+                        "trg_grm": "но,мр,вн,ед,",
+                        "trg_lemma": "ВЕЧЕР"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "был",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "БЫТЬ",
+                        "trg": "десерт",
+                        "trg_grm": "но,мр,им,ед,",
+                        "trg_lemma": "ДЕСЕРТ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Я о нем плохо подумал,а Вася - хорошо.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "о нем"
+                                    },
+                                    {
+                                        "type": "НАРЕЧ_ГЛАГОЛ",
+                                        "words": "плохо подумал"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Я о нем плохо подумал"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 10,
+                        "start": 5,
+                        "words": ", а Вася - хорошо ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "дст,нп,св,прш,мр,ед,",
+                        "name": "НАРЕЧ_ГЛАГОЛ",
+                        "src": "подумал",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "src_lemma": "ПОДУМАТЬ",
+                        "trg": "плохо",
+                        "trg_grm": "",
+                        "trg_lemma": "ПЛОХО"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "о",
+                        "src_grm": "",
+                        "src_lemma": "О",
+                        "trg": "нем",
+                        "trg_grm": "3л,мр,пр,ед,",
+                        "trg_lemma": "ОН"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "подумал",
+                        "src_grm": "дст,нп,св,прш,мр,ед,",
+                        "src_lemma": "ПОДУМАТЬ",
+                        "trg": "Я",
+                        "trg_grm": "1л,им,ед,",
+                        "trg_lemma": "Я"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Глебов Иван не мог прийти на заседание.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ФИО",
+                                        "words": "Глебов Иван"
+                                    },
+                                    {
+                                        "type": "ОТР_ФОРМА",
+                                        "words": "не мог"
+                                    },
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "не мог прийти"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "на заседание"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 7,
+                        "start": 0,
+                        "words": "Глебов Иван не мог прийти на заседание ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОТР_ФОРМА",
+                        "src": "мог",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "МОЧЬ",
+                        "trg": "не",
+                        "trg_grm": "",
+                        "trg_lemma": "НЕ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПЕР_ГЛАГ_ИНФ",
+                        "src": "мог",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "МОЧЬ",
+                        "trg": "прийти",
+                        "trg_grm": "дст,нп,св,",
+                        "trg_lemma": "ПРИЙТИ"
+                    },
+                    {
+                        "gramrel": "вн,",
+                        "name": "ПГ",
+                        "src": "на",
+                        "src_grm": "",
+                        "src_lemma": "НА",
+                        "trg": "заседание",
+                        "trg_grm": "но,ср,вн,ед,",
+                        "trg_lemma": "ЗАСЕДАНИЕ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "мог",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "МОЧЬ",
+                        "trg": "Иван",
+                        "trg_grm": "имя,од,мр,им,ед,",
+                        "trg_lemma": "ИВАН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Машу позвали гулять, но она отказалась.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 7,
+                        "start": 3,
+                        "words": ", но она отказалась ."
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "позвали гулять"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 7,
+                        "start": 0,
+                        "words": "Машу позвали гулять , но она отказалась ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "отказалась",
+                        "src_grm": "дст,нп,св,прш,жр,ед,",
+                        "src_lemma": "ОТКАЗАТЬСЯ",
+                        "trg": "она",
+                        "trg_grm": "3л,жр,им,ед,",
+                        "trg_lemma": "ОНА"
+                    },
+                    {
+                        "gramrel": "дст,пе,св,прш,мн,",
+                        "name": "ПЕР_ГЛАГ_ИНФ",
+                        "src": "позвали",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ПОЗВАТЬ",
+                        "trg": "гулять",
+                        "trg_grm": "дст,нп,нс,",
+                        "trg_lemma": "ГУЛЯТЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДКЛАУЗА",
+                        "src": "позвали",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ПОЗВАТЬ",
+                        "trg": "отказалась",
+                        "trg_grm": "дст,нп,св,прш,жр,ед,",
+                        "trg_lemma": "ОТКАЗАТЬСЯ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Сейчас в салоне остаются 11 пассажиров.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "в салоне"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "11 пассажиров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "в салоне"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "11 пассажиров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 6,
+                        "start": 0,
+                        "words": "Сейчас в салоне остаются 11 пассажиров ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,мр,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "пассажиров",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "ПАССАЖИР",
+                        "trg": "11",
+                        "trg_grm": "вн,рд,им,",
+                        "trg_lemma": "11"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "в",
+                        "src_grm": "",
+                        "src_lemma": "В",
+                        "trg": "салоне",
+                        "trg_grm": "но,мр,пр,ед,",
+                        "trg_lemma": "САЛОН"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "остаются",
+                        "src_grm": "дст,нп,нс,3л,нст,мн,",
+                        "src_lemma": "ОСТАВАТЬСЯ",
+                        "trg": "пассажиров",
+                        "trg_grm": "од,мр,рд,мн,",
+                        "trg_lemma": "ПАССАЖИР"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Права он получил только с пятой попытки.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "пятой попытки"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "с пятой попытки"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "пятой попытки"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "с пятой попытки"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 7,
+                        "start": 0,
+                        "words": "Права он получил только с пятой попытки ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "жр,рд,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "попытки",
+                        "src_grm": "но,жр,рд,ед,",
+                        "src_lemma": "ПОПЫТКА",
+                        "trg": "пятой",
+                        "trg_grm": "но,од,жр,рд,ед,",
+                        "trg_lemma": "ПЯТЫЙ"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "с",
+                        "src_grm": "",
+                        "src_lemma": "С",
+                        "trg": "попытки",
+                        "trg_grm": "но,жр,рд,ед,",
+                        "trg_lemma": "ПОПЫТКА"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "получил",
+                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "src_lemma": "ПОЛУЧИТЬ",
+                        "trg": "он",
+                        "trg_grm": "3л,мр,им,ед,",
+                        "trg_lemma": "ОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "У меня три карандаша, а у Васи - четыре.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "У меня"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "три карандаша"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "У меня три карандаша"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "у Васи"
+                                    }
+                                ],
+                                "type": "ТИРЕ"
+                            }
+                        ],
+                        "last": 10,
+                        "start": 4,
+                        "words": ", а у Васи - четыре ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "вн,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "карандаша",
+                        "src_grm": "но,мр,рд,ед,",
+                        "src_lemma": "КАРАНДАШ",
+                        "trg": "три",
+                        "trg_grm": "вн,им,",
+                        "trg_lemma": "ТРИ"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "У",
+                        "src_grm": "",
+                        "src_lemma": "У",
+                        "trg": "меня",
+                        "trg_grm": "1л,рд,ед,",
+                        "trg_lemma": "Я"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "у",
+                        "src_grm": "",
+                        "src_lemma": "У",
+                        "trg": "Васи",
+                        "trg_grm": "имя,од,мр,рд,ед,",
+                        "trg_lemma": "ВАСЯ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Что-то, что было им важно, они не знали.",
+        "result": [
+            {
+                "analytical": [
+                    "было важно"
+                ],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "КР_ПРИЛ"
+                            },
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 1,
+                        "words": ", что было им важно"
+                    },
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОТР_ФОРМА",
+                                        "words": "не знали"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОТР_ФОРМА",
+                                        "words": "не знали"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 10,
+                        "start": 0,
+                        "words": "Что-то , что было им важно , они не знали ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОТР_ФОРМА",
+                        "src": "знали",
+                        "src_grm": "дст,пе,нс,прш,мн,",
+                        "src_lemma": "ЗНАТЬ",
+                        "trg": "не",
+                        "trg_grm": "",
+                        "trg_lemma": "НЕ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "знали",
+                        "src_grm": "дст,пе,нс,прш,мн,",
+                        "src_lemma": "ЗНАТЬ",
+                        "trg": "они",
+                        "trg_grm": "3л,им,мн,",
+                        "trg_lemma": "ОНИ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДКЛАУЗА",
+                        "src": "знали",
+                        "src_grm": "дст,пе,нс,прш,мн,",
+                        "src_lemma": "ЗНАТЬ",
+                        "trg": "важно",
+                        "trg_grm": "кач,но,од,ср,ед,",
+                        "trg_lemma": "ВАЖНЫЙ"
+                    }
+                ]
+            }
+        ]
+    }
+]

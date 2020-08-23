@@ -148,10 +148,11 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 
 	// специальная  проверка для  в+И_мн //"меня приняли в пионеры"
 	if (		((depend_cases & grammems & rAllCases)  == _QM(rNominativ) )
-		&&	((grammems & _QM(rPlural)) != 0)
+			&&	((grammems & _QM(rPlural)) == 0)
 		)
-	return false;
-	else depend_cases &= ~_QM(rNominativ);
+		return false;
+	else 
+		depend_cases &= ~_QM(rNominativ);
 
 	/*
 		запретить:

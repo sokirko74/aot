@@ -1,0 +1,294 @@
+[
+    {
+        "comments": "//  постморфология  ФАM1-ФАМ2",
+        "input": "Павла I-го",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ФИО",
+                                        "words": "Павла I-го"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "Павла I-го"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "//  постморфология  ФАM1-ФАМ2",
+        "input": "Павел Первый",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ФИО",
+                                        "words": "Павел Первый"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "Павел Первый"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "// здесь оборот, а не ФИО",
+        "input": "Т.Е. ОТКАЗАТЬСЯ",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОБОРОТ",
+                                        "words": "Т . Е ."
+                                    }
+                                ],
+                                "type": "ИНФ"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "Т . Е . ОТКАЗАТЬСЯ"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "// ФИО не должны пересекаться",
+        "input": "ЛАЗАРЕВ В.П. Г.САМАРА",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ФИО",
+                                        "words": "ЛАЗАРЕВ В . П ."
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "ЛАЗАРЕВ В . П ."
+                    }
+                ],
+                "relations": []
+            },
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "Г . САМАРА"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Императором Александром II.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ФИО",
+                                        "words": "Александром II"
+                                    },
+                                    {
+                                        "type": "ДОЛЖ_ФИО",
+                                        "words": "Императором Александром II"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "Императором Александром II ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "од,мр,тв,ед,",
+                        "name": "ДОЛЖ_ФИО",
+                        "src": "Императором",
+                        "src_grm": "од,мр,тв,ед,",
+                        "src_lemma": "ИМПЕРАТОР",
+                        "trg": "Александром II",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// здесь термин, а не ФИО",
+        "input": "М. И. Операционная система",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "Операционная система"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "М . И . Операционная система"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "жр,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "система",
+                        "src_grm": "но,жр,им,ед,",
+                        "src_lemma": "СИСТЕМА",
+                        "trg": "Операционная",
+                        "trg_grm": "но,од,жр,им,ед,",
+                        "trg_lemma": "ОПЕРАЦИОННЫЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Ludwig A. Rigveda, sokirko@yandex.ru, ctrl-z,",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ФИО",
+                                        "words": "Ludwig A . Rigveda"
+                                    },
+                                    {
+                                        "type": "КЛВ",
+                                        "words": "ctrl - z"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ИГ",
+                                        "words": "Ludwig A . Rigveda , sokirko@yandex.ru , ctrl - z"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 10,
+                        "start": 0,
+                        "words": "Ludwig A . Rigveda , sokirko@yandex.ru , ctrl - z ,"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "но,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "Ludwig A . Rigveda",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    },
+                    {
+                        "gramrel": "но,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "sokirko@yandex.ru",
+                        "trg_grm": "но,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "trg_lemma": "SOKIRKO@YANDEX.RU"
+                    },
+                    {
+                        "gramrel": "но,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": ",",
+                        "trg_grm": "",
+                        "trg_lemma": ","
+                    },
+                    {
+                        "gramrel": "но,ср,жр,мр,зв,пр,тв,вн,дт,рд,им,ед,мн,",
+                        "name": "ОДНОР_ИГ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "ctrl - z",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    }
+]

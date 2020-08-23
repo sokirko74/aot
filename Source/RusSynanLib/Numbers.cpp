@@ -475,6 +475,9 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 	{
 		i_last_noun = NP.m_iLastWord;
 		noun_grammems = NP.GetGrammems();
+		if ((noun_grammems & rAllGenders) == 0) { // Забираем род у существительного, его нет в грам. группы
+			noun_grammems |= sent[i_last_noun].GetGrammems() & rAllGenders;
+		}
 	}
 
 	i_number_group = get_maximal_group_no(i_number);

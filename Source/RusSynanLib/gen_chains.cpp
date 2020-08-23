@@ -59,8 +59,12 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 
 	if (!Wk.is_morph_noun() || Wk.is_lemma(_R("КОТОРЫЙ"))) return false;
 	const CGroup& RightGroup = get_maximal_group (k);
+
+	// todo: зачем здесь это условие? Из-за него не строится 
+	// группа "улица двух комиссаров", нужно поизучать...
 	if( RightGroup.m_GroupType == NUMERALS || RightGroup.m_GroupType == NUMERAL_NOUN)
 			return false;
+
 	if (!(RightGroup.GetGrammems() & _QM(rGenitiv))) return false;
 
 	change_group_grammems((CGroup&)RightGroup, _QM(rGenitiv), rAllCases);

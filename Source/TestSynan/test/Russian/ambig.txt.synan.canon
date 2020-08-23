@@ -1,0 +1,162 @@
+[
+    {
+        "comments": "// \"ах\"  не должно удаляться",
+        "input": "﻿Ах ты",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "Ах ты"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "// запятая в конце",
+        "input": "не был,",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОТР_ФОРМА",
+                                        "words": "не был"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "не был ,"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ОТР_ФОРМА",
+                        "src": "был",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "src_lemma": "БЫТЬ",
+                        "trg": "не",
+                        "trg_grm": "",
+                        "trg_lemma": "НЕ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// Тест на обороты",
+        "input": "И все-таки",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОБОРОТ",
+                                        "words": "И все-таки"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "И все-таки"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "все лишнее",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "все лишнее"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "все лишнее"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "но,од,ср,вн,им,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "лишнее",
+                        "src_grm": "но,од,ср,вн,им,ед,",
+                        "src_lemma": "ЛИШНИЙ",
+                        "trg": "все",
+                        "trg_grm": "но,од,ср,вн,им,ед,",
+                        "trg_lemma": "ВЕСЬ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// с числительными \"МНОГО\" или \"МАЛО\" не надо образовывать АППРОКС_ИГ  ",
+        "input": "денег мало",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "денег мало"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    }
+]

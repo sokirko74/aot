@@ -1,0 +1,2391 @@
+[
+    {
+        "comments": "",
+        "input": "2,3",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "2 , 3"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "2 3 4",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 3"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "2 3 4"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "2,3 4",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "3 4"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "3 4"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "3 4"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "3 4"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "2 , 3 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "2 , 3 4"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "20 тыс.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "20 тыс ."
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "20 тыс ."
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "20 тыс ."
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "2, 3 и 4",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 и 4"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "2 , 3 и 4"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "пр,тв,вн,дт,рд,им,",
+                        "name": "ОДНОР_ЧИСЛ",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "2 , 3",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    },
+                    {
+                        "gramrel": "пр,тв,вн,дт,рд,им,",
+                        "name": "ОДНОР_ЧИСЛ",
+                        "src": "и",
+                        "src_grm": "",
+                        "src_lemma": "И",
+                        "trg": "4",
+                        "trg_grm": "пр,тв,вн,дт,рд,им,",
+                        "trg_lemma": "4"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "20 тысяч",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "20 тысяч"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "20 тысяч"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "20 тысяч"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "// ПГ могут собираться с числительными",
+        "input": "на сорок два",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "сорок два"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "на сорок два"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "на сорок два"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "вн,",
+                        "name": "ПГ",
+                        "src": "на",
+                        "src_grm": "",
+                        "src_lemma": "НА",
+                        "trg": "сорок два",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "тысячи миль.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ГЕНИТ_ИГ",
+                                        "words": "тысячи миль"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "тысячи миль ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "но,жр,вн,рд,им,ед,мн,",
+                        "name": "ГЕНИТ_ИГ",
+                        "src": "тысячи",
+                        "src_grm": "но,жр,вн,рд,им,ед,мн,",
+                        "src_lemma": "ТЫСЯЧА",
+                        "trg": "миль",
+                        "trg_grm": "но,жр,рд,мн,",
+                        "trg_lemma": "МИЛЯ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "двадцать пять",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "двадцать пять"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "двадцать пять"
+                    }
+                ],
+                "relations": []
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "2-2, 3 или три",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 или три"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 или три"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 или три"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "СЛОЖ_ЧИСЛ",
+                                        "words": "2 , 3"
+                                    },
+                                    {
+                                        "type": "ОДНОР_ЧИСЛ",
+                                        "words": "2 , 3 или три"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 4,
+                        "start": 0,
+                        "words": "2 , 3 или три"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "вн,им,",
+                        "name": "ОДНОР_ЧИСЛ",
+                        "src": "или",
+                        "src_grm": "",
+                        "src_lemma": "ИЛИ",
+                        "trg": "2 , 3",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    },
+                    {
+                        "gramrel": "вн,им,",
+                        "name": "ОДНОР_ЧИСЛ",
+                        "src": "или",
+                        "src_grm": "",
+                        "src_lemma": "ИЛИ",
+                        "trg": "три",
+                        "trg_grm": "вн,им,",
+                        "trg_lemma": "ТРИ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// частицы в НАР_ЧИСЛ ",
+        "input": "очень уж много",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР_ЧИСЛ",
+                                        "words": "очень уж много"
+                                    }
+                                ],
+                                "type": "ПРЕДК"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "НАР_НАР_ЧИСЛ",
+                                        "words": "очень уж много"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "очень уж много"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "нст,",
+                        "name": "НАР_НАР_ЧИСЛ",
+                        "src": "много",
+                        "src_grm": "нст,",
+                        "src_lemma": "МНОГО",
+                        "trg": "очень",
+                        "trg_grm": "",
+                        "trg_lemma": "ОЧЕНЬ"
+                    },
+                    {
+                        "gramrel": "нст,",
+                        "name": "НАР_НАР_ЧИСЛ",
+                        "src": "много",
+                        "src_grm": "нст,",
+                        "src_lemma": "МНОГО",
+                        "trg": "уж",
+                        "trg_grm": "",
+                        "trg_lemma": "УЖ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "20 тыс. человек",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "20 тыс ."
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "20 тыс . человек"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "20 тыс . человек"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,вн,рд,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "человек",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "ЧЕЛОВЕК",
+                        "trg": "20 тыс .",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "В 1960-х годах",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "1960-х годах"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "В 1960-х годах"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "В 1960-х годах"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "пр,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "годах",
+                        "src_grm": "но,мр,пр,мн,",
+                        "src_lemma": "ГОД",
+                        "trg": "1960-х",
+                        "trg_grm": "но,од,пр,мн,",
+                        "trg_lemma": "1960"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "В",
+                        "src_grm": "",
+                        "src_lemma": "В",
+                        "trg": "годах",
+                        "trg_grm": "но,мр,пр,мн,",
+                        "trg_lemma": "ГОД"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "ста пяти человек",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "ста пяти"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "ста пяти человек"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "ста пяти человек"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,рд,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "человек",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "ЧЕЛОВЕК",
+                        "trg": "ста пяти",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "//  сокращение числ. без точки ",
+        "input": "400 млрд долларов",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "400 млрд"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "400 млрд долларов"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "400 млрд долларов"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,вн,рд,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "долларов",
+                        "src_grm": "но,мр,рд,мн,",
+                        "src_lemma": "ДОЛЛАР",
+                        "trg": "400 млрд",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "20 тыс. половниками",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "20 тыс ."
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "20 тыс . половниками"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "20 тыс . половниками"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,тв,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "половниками",
+                        "src_grm": "но,мр,тв,мн,",
+                        "src_lemma": "ПОЛОВНИК",
+                        "trg": "20 тыс .",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "//",
+        "input": "первые пол-стакана",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "первые пол-стакана"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "первые пол-стакана"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "вн,им,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "пол-стакана",
+                        "src_grm": "но,мр,вн,им,мн,",
+                        "src_lemma": "ПОЛ-СТАКАН",
+                        "trg": "первые",
+                        "trg_grm": "но,од,вн,им,мн,",
+                        "trg_lemma": "ПЕРВЫЙ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// правило постморфологии CifrDef",
+        "input": "до 1960-го года",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "1960-го года"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "до 1960-го года"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "до 1960-го года"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,рд,ед,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "года",
+                        "src_grm": "но,мр,рд,ед,",
+                        "src_lemma": "ГОД",
+                        "trg": "1960-го",
+                        "trg_grm": "но,од,мр,рд,ед,",
+                        "trg_lemma": "1960"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "до",
+                        "src_grm": "",
+                        "src_lemma": "ДО",
+                        "trg": "года",
+                        "trg_grm": "но,мр,рд,ед,",
+                        "trg_lemma": "ГОД"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// почему не собирается ЭЛЕКТ_ИГ?",
+        "input": "Одной из задач года",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ГЕНИТ_ИГ",
+                                        "words": "задач года"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "из задач года"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "Одной из задач года"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "но,жр,рд,мн,",
+                        "name": "ГЕНИТ_ИГ",
+                        "src": "задач",
+                        "src_grm": "но,жр,рд,мн,",
+                        "src_lemma": "ЗАДАЧА",
+                        "trg": "года",
+                        "trg_grm": "но,мр,рд,ед,",
+                        "trg_lemma": "ГОД"
+                    },
+                    {
+                        "gramrel": "рд,",
+                        "name": "ПГ",
+                        "src": "из",
+                        "src_grm": "",
+                        "src_lemma": "ИЗ",
+                        "trg": "задач",
+                        "trg_grm": "но,жр,рд,мн,",
+                        "trg_lemma": "ЗАДАЧА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// множеств. число",
+        "input": "Пол-Москвы знают об этом",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "об этом"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "Пол-Москвы знают об этом"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "об",
+                        "src_grm": "",
+                        "src_lemma": "ОБ",
+                        "trg": "этом",
+                        "trg_grm": "ср,пр,ед,",
+                        "trg_lemma": "ЭТО"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "знают",
+                        "src_grm": "дст,пе,нс,3л,нст,мн,",
+                        "src_lemma": "ЗНАТЬ",
+                        "trg": "Пол-Москвы",
+                        "trg_grm": "дфст,лок,но,жр,им,мн,",
+                        "trg_lemma": "ПОЛ-МОСКВА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "тридцать шестой человек",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "тридцать шестой"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "тридцать шестой человек"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "тридцать шестой человек"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,вн,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "человек",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "ЧЕЛОВЕК",
+                        "trg": "тридцать шестой",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Мы управимся  дней в пять.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "АППРОКС_ПГ",
+                                        "words": "дней в пять"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 5,
+                        "start": 0,
+                        "words": "Мы управимся дней в пять ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "",
+                        "name": "ПГ",
+                        "src": "в",
+                        "src_grm": "",
+                        "src_lemma": "В",
+                        "trg": "дней",
+                        "trg_grm": "но,мр,рд,мн,",
+                        "trg_lemma": "ДЕНЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "АППРОКС_ПГ",
+                        "src": "дней",
+                        "src_grm": "но,мр,рд,мн,",
+                        "src_lemma": "ДЕНЬ",
+                        "trg": "пять",
+                        "trg_grm": "вн,им,",
+                        "trg_lemma": "ПЯТЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "управимся",
+                        "src_grm": "дст,нп,св,пвл,1л,буд,мн,",
+                        "src_lemma": "УПРАВИТЬСЯ",
+                        "trg": "Мы",
+                        "trg_grm": "1л,им,мн,",
+                        "trg_lemma": "МЫ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "две красивые запятые",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "красивые запятые"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "две красивые запятые"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "две красивые запятые"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "им,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "запятые",
+                        "src_grm": "но,жр,им,мн,",
+                        "src_lemma": "ЗАПЯТАЯ",
+                        "trg": "красивые",
+                        "trg_grm": "кач,но,од,им,мн,",
+                        "trg_lemma": "КРАСИВЫЙ"
+                    },
+                    {
+                        "gramrel": "вн,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "запятые",
+                        "src_grm": "но,жр,им,мн,",
+                        "src_lemma": "ЗАПЯТАЯ",
+                        "trg": "две",
+                        "trg_grm": "жр,вн,им,",
+                        "trg_lemma": "ДВА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "два нищих",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "два нищих"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "два нищих"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "нищих",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "НИЩИЙ",
+                        "trg": "два",
+                        "trg_grm": "ср,мр,вн,им,",
+                        "trg_lemma": "ДВА"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "// адъективное склонение с малыми числительными !! сломалось, починил, было сломано в проде",
+        "input": "три красивые запятые",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "красивые запятые"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "три красивые запятые"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "три красивые запятые"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "им,мн,",
+                        "name": "ПРИЛ_СУЩ",
+                        "src": "запятые",
+                        "src_grm": "но,жр,им,мн,",
+                        "src_lemma": "ЗАПЯТАЯ",
+                        "trg": "красивые",
+                        "trg_grm": "кач,но,од,им,мн,",
+                        "trg_lemma": "КРАСИВЫЙ"
+                    },
+                    {
+                        "gramrel": "вн,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "запятые",
+                        "src_grm": "но,жр,им,мн,",
+                        "src_lemma": "ЗАПЯТАЯ",
+                        "trg": "три",
+                        "trg_grm": "вн,им,",
+                        "trg_lemma": "ТРИ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "два слона пробежали",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "два слона"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "два слона пробежали"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слона",
+                        "src_grm": "од,мр,рд,ед,",
+                        "src_lemma": "СЛОН",
+                        "trg": "два",
+                        "trg_grm": "ср,мр,вн,им,",
+                        "trg_lemma": "ДВА"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "пробежали",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ПРОБЕЖАТЬ",
+                        "trg": "слона",
+                        "trg_grm": "од,мр,рд,ед,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "я видел двух слонов",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "двух слонов"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "видел двух слонов"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "я видел двух слонов"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "вн,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонов",
+                        "src_grm": "од,мр,вн,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "двух",
+                        "trg_grm": "ср,жр,мр,пр,вн,рд,",
+                        "trg_lemma": "ДВА"
+                    },
+                    {
+                        "gramrel": "дст,пе,нс,прш,мр,ед,",
+                        "name": "ПРЯМ_ДОП",
+                        "src": "видел",
+                        "src_grm": "дст,пе,нс,прш,мр,ед,",
+                        "src_lemma": "ВИДЕТЬ",
+                        "trg": "слонов",
+                        "trg_grm": "од,мр,вн,мн,",
+                        "trg_lemma": "СЛОН"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "видел",
+                        "src_grm": "дст,пе,нс,прш,мр,ед,",
+                        "src_lemma": "ВИДЕТЬ",
+                        "trg": "я",
+                        "trg_grm": "1л,им,ед,",
+                        "trg_lemma": "Я"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "о двух слонах",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "двух слонах"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "о двух слонах"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "о двух слонах"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "пр,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонах",
+                        "src_grm": "од,мр,пр,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "двух",
+                        "trg_grm": "ср,жр,мр,пр,вн,",
+                        "trg_lemma": "ДВА"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "о",
+                        "src_grm": "",
+                        "src_lemma": "О",
+                        "trg": "слонах",
+                        "trg_grm": "од,мр,пр,мн,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "под двумя  слонами",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "двумя слонами"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "под двумя слонами"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "под двумя слонами"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "тв,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонами",
+                        "src_grm": "од,мр,тв,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "двумя",
+                        "trg_grm": "ср,жр,мр,тв,",
+                        "trg_lemma": "ДВА"
+                    },
+                    {
+                        "gramrel": "тв,",
+                        "name": "ПГ",
+                        "src": "под",
+                        "src_grm": "",
+                        "src_lemma": "ПОД",
+                        "trg": "слонами",
+                        "trg_grm": "од,мр,тв,мн,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "к двум слонам",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "двум слонам"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "к двум слонам"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "к двум слонам"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "дт,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонам",
+                        "src_grm": "од,мр,дт,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "двум",
+                        "trg_grm": "ср,жр,мр,дт,",
+                        "trg_lemma": "ДВА"
+                    },
+                    {
+                        "gramrel": "дт,",
+                        "name": "ПГ",
+                        "src": "к",
+                        "src_grm": "",
+                        "src_lemma": "К",
+                        "trg": "слонам",
+                        "trg_grm": "од,мр,дт,мн,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "мы пробежали 350 метров",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "пробежали 350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "пробежали 350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "пробежали 350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "пробежали 350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "мы пробежали 350 метров"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,вн,рд,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "метров",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "МЕТР",
+                        "trg": "350",
+                        "trg_grm": "вн,рд,им,",
+                        "trg_lemma": "350"
+                    },
+                    {
+                        "gramrel": "дст,пе,св,прш,мн,",
+                        "name": "ПРЯМ_ДОП",
+                        "src": "пробежали",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ПРОБЕЖАТЬ",
+                        "trg": "метров",
+                        "trg_grm": "од,мр,рд,мн,",
+                        "trg_lemma": "МЕТР"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "пробежали",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ПРОБЕЖАТЬ",
+                        "trg": "мы",
+                        "trg_grm": "1л,им,мн,",
+                        "trg_lemma": "МЫ"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "350 метров удлинились",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метров"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "350 метров удлинились"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,мр,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "метров",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "МЕТР",
+                        "trg": "350",
+                        "trg_grm": "вн,рд,им,",
+                        "trg_lemma": "350"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "удлинились",
+                        "src_grm": "дст,нп,св,прш,мн,",
+                        "src_lemma": "УДЛИНИТЬСЯ",
+                        "trg": "метров",
+                        "trg_grm": "од,мр,рд,мн,",
+                        "trg_lemma": "МЕТР"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "под 350 метрами",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метрами"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "под 350 метрами"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метрами"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "под 350 метрами"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "под 350 метрами"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,тв,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "метрами",
+                        "src_grm": "но,мр,тв,мн,",
+                        "src_lemma": "МЕТР",
+                        "trg": "350",
+                        "trg_grm": "тв,",
+                        "trg_lemma": "350"
+                    },
+                    {
+                        "gramrel": "тв,",
+                        "name": "ПГ",
+                        "src": "под",
+                        "src_grm": "",
+                        "src_lemma": "ПОД",
+                        "trg": "метрами",
+                        "trg_grm": "но,мр,тв,мн,",
+                        "trg_lemma": "МЕТР"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "о 350 метрах",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метрах"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "о 350 метрах"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "350 метрах"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "о 350 метрах"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "о 350 метрах"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,пр,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "метрах",
+                        "src_grm": "но,мр,пр,мн,",
+                        "src_lemma": "МЕТР",
+                        "trg": "350",
+                        "trg_grm": "пр,",
+                        "trg_lemma": "350"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "о",
+                        "src_grm": "",
+                        "src_lemma": "О",
+                        "trg": "метрах",
+                        "trg_grm": "но,мр,пр,мн,",
+                        "trg_lemma": "МЕТР"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "2 слона  пробежали",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слона"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "2 слона пробежали"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,мр,им,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слона",
+                        "src_grm": "од,мр,рд,ед,",
+                        "src_lemma": "СЛОН",
+                        "trg": "2",
+                        "trg_grm": "мр,вн,им,",
+                        "trg_lemma": "2"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "пробежали",
+                        "src_grm": "дст,пе,св,прш,мн,",
+                        "src_lemma": "ПРОБЕЖАТЬ",
+                        "trg": "слона",
+                        "trg_grm": "од,мр,рд,ед,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "я видел 2 слонов",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонов"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонов"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "видел 2 слонов"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 3,
+                        "start": 0,
+                        "words": "я видел 2 слонов"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,рд,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонов",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "2",
+                        "trg_grm": "мр,рд,",
+                        "trg_lemma": "2"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "видел",
+                        "src_grm": "дст,пе,нс,прш,мр,ед,",
+                        "src_lemma": "ВИДЕТЬ",
+                        "trg": "я",
+                        "trg_grm": "1л,им,ед,",
+                        "trg_lemma": "Я"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "о 2 слонах",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонах"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "о 2 слонах"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонах"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "о 2 слонах"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "о 2 слонах"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,пр,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонах",
+                        "src_grm": "од,мр,пр,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "2",
+                        "trg_grm": "мр,пр,",
+                        "trg_lemma": "2"
+                    },
+                    {
+                        "gramrel": "пр,",
+                        "name": "ПГ",
+                        "src": "о",
+                        "src_grm": "",
+                        "src_lemma": "О",
+                        "trg": "слонах",
+                        "trg_grm": "од,мр,пр,мн,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "под 2  слонами",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонами"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "под 2 слонами"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонами"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "под 2 слонами"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "под 2 слонами"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,тв,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонами",
+                        "src_grm": "од,мр,тв,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "2",
+                        "trg_grm": "мр,тв,",
+                        "trg_lemma": "2"
+                    },
+                    {
+                        "gramrel": "тв,",
+                        "name": "ПГ",
+                        "src": "под",
+                        "src_grm": "",
+                        "src_lemma": "ПОД",
+                        "trg": "слонами",
+                        "trg_grm": "од,мр,тв,мн,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "к 2 слонам",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонам"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "к 2 слонам"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            },
+                            {
+                                "groups": [
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "2 слонам"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "к 2 слонам"
+                                    }
+                                ],
+                                "type": "EMPTY"
+                            }
+                        ],
+                        "last": 2,
+                        "start": 0,
+                        "words": "к 2 слонам"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "мр,дт,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "слонам",
+                        "src_grm": "од,мр,дт,мн,",
+                        "src_lemma": "СЛОН",
+                        "trg": "2",
+                        "trg_grm": "мр,дт,",
+                        "trg_lemma": "2"
+                    },
+                    {
+                        "gramrel": "дт,",
+                        "name": "ПГ",
+                        "src": "к",
+                        "src_grm": "",
+                        "src_lemma": "К",
+                        "trg": "слонам",
+                        "trg_grm": "од,мр,дт,мн,",
+                        "trg_lemma": "СЛОН"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "Одна тысяча пятьсот девяносто шесть участников не смогли решить задачу.",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "groups": [
+                                    {
+                                        "type": "КОЛИЧ",
+                                        "words": "Одна тысяча пятьсот девяносто шесть"
+                                    },
+                                    {
+                                        "type": "ЧИСЛ_СУЩ",
+                                        "words": "Одна тысяча пятьсот девяносто шесть участников"
+                                    },
+                                    {
+                                        "type": "ОТР_ФОРМА",
+                                        "words": "не смогли"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "решить задачу"
+                                    },
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "не смогли решить задачу"
+                                    }
+                                ],
+                                "type": "ГЛ_ЛИЧН"
+                            }
+                        ],
+                        "last": 10,
+                        "start": 0,
+                        "words": "Одна тысяча пятьсот девяносто шесть участников не смогли решить задачу ."
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "ср,мр,им,ед,мн,",
+                        "name": "ЧИСЛ_СУЩ",
+                        "src": "участников",
+                        "src_grm": "од,мр,рд,мн,",
+                        "src_lemma": "УЧАСТНИК",
+                        "trg": "Одна тысяча пятьсот девяносто шесть",
+                        "trg_grm": "",
+                        "trg_lemma": ""
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОТР_ФОРМА",
+                        "src": "смогли",
+                        "src_grm": "дст,нп,св,прш,мн,",
+                        "src_lemma": "СМОЧЬ",
+                        "trg": "не",
+                        "trg_grm": "",
+                        "trg_lemma": "НЕ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПЕР_ГЛАГ_ИНФ",
+                        "src": "смогли",
+                        "src_grm": "дст,нп,св,прш,мн,",
+                        "src_lemma": "СМОЧЬ",
+                        "trg": "решить",
+                        "trg_grm": "дст,пе,св,",
+                        "trg_lemma": "РЕШИТЬ"
+                    },
+                    {
+                        "gramrel": "дст,пе,св,",
+                        "name": "ПРЯМ_ДОП",
+                        "src": "решить",
+                        "src_grm": "дст,пе,св,",
+                        "src_lemma": "РЕШИТЬ",
+                        "trg": "задачу",
+                        "trg_grm": "но,жр,вн,ед,",
+                        "trg_lemma": "ЗАДАЧА"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДЛ",
+                        "src": "смогли",
+                        "src_grm": "дст,нп,св,прш,мн,",
+                        "src_lemma": "СМОЧЬ",
+                        "trg": "участников",
+                        "trg_grm": "од,мр,рд,мн,",
+                        "trg_lemma": "УЧАСТНИК"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "comments": "",
+        "input": "",
+        "result": null
+    },
+    {
+        "comments": "",
+        "input": "",
+        "result": null
+    },
+    {
+        "comments": "",
+        "input": "",
+        "result": null
+    }
+]

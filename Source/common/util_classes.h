@@ -2,12 +2,9 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko
 
-#ifndef utilit_classes_h
- #define utilit_classes_h
-
+#pragma once
 #include "utilit.h"
-
-
+#include "json.h"
 
 template <class	Type, int Size>
 struct CSmallVector	{
@@ -209,6 +206,14 @@ public:
 
 };
 
+struct CTestCase {
+	std::string Text;
+	std::string Comment;
+	nlohmann::json Result;
+};
 
-
-#endif
+struct CTestCaseBase {
+	std::vector<CTestCase> TestCases;
+	void read_test_cases(istream& inp);
+	void write_test_cases(ostream& outp) const;
+};
