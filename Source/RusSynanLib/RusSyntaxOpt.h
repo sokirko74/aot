@@ -28,9 +28,9 @@ public:
 	SDatItems* m_pVerbsWithInstrObj;
     
 
-	StringVector* m_pCompAdvList;
-    StringVector* m_pNounNumList;//из Dicts\SynAn\noun_num.dat
-    StringVector* m_pNumberAdverbsList;
+	StringHashSet m_CompAdvList;
+	StringHashSet m_NounNumList;//из Dicts\SynAn\noun_num.dat
+	StringHashSet m_NumberAdverbsList;
 	
 
 
@@ -45,7 +45,6 @@ public:
 	bool IsGroupWithoutWeight(int GroupType, const char* cause) const;
 	bool is_firm_group(int GroupType) const;
 	CSentence* NewSentence() const override;
-	virtual CAgramtab *NewGramTab() const override;
 	virtual CLemmatizer *NewLemmatizer() const override;
 	virtual COborDic * NewOborDic(const CSyntaxOpt* opt) override;
 	virtual CThesaurusForSyntax* NewThesaurus(const CSyntaxOpt* opt) override;

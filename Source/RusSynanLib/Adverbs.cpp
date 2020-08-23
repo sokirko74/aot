@@ -15,7 +15,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 
 	if ( G.m_iFirstWord >= sent.size() - 1)  return false;
 
-    if ( !has_item( GetOpt()->m_pCompAdvList, W1.get_word()) ) return false;
+    if ( !has_item( GetOpt()->m_CompAdvList, W1.get_word()) ) return false;
 
 	int I = get_minimal_group(G.m_iFirstWord+1);
 
@@ -131,7 +131,7 @@ bool CRusFormatCaller::format_for_adv_number_adverb (CGroup& G)
 		j = get_next_main_word (j);
 	if (j == sent.size()) return false;
 
-	if (!has_item (GetOpt()->m_pNumberAdverbsList, Wj.get_lemma())) 
+	if (!has_item (GetOpt()->m_NumberAdverbsList, Wj.get_lemma())) 
 		return false;
 
 	G.m_GroupType = ADV_NUM_ADV;

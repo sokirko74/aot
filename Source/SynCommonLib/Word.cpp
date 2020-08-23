@@ -46,10 +46,9 @@ bool CSynHomonym::CompareWithPredefinedWords(const SDatItems& DatItems) const
 	if (!(DatItems.m_Poses & m_iPoses)) 
 		return false;
 
-	std::string  T = m_strLemma;
-	RmlMakeLower(T, GetOpt()->m_Language);
-	return binary_search(DatItems.m_vectorDatItems.begin(), DatItems.m_vectorDatItems.end(), T);
-	
+	std::string  lowerLemma = m_strLemma;
+	RmlMakeLower(lowerLemma, GetOpt()->m_Language);
+	return has_item(DatItems.m_vectorDatItems, lowerLemma.c_str());
 }
 
 

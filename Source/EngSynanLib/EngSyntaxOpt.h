@@ -16,7 +16,6 @@ public:
 	bool IsGroupWithoutWeight(int GroupType, const char* cause) const;
 	bool is_firm_group(int GroupType) const;
 	CSentence* NewSentence() const override;
-	virtual CAgramtab *NewGramTab() const override;
 	virtual CLemmatizer *NewLemmatizer() const override;
 	virtual COborDic * NewOborDic(const CSyntaxOpt* opt) override;
 	virtual CThesaurusForSyntax* NewThesaurus(const CSyntaxOpt* opt) override;

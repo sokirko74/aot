@@ -13,17 +13,8 @@ const char eSyntaxGroupTypes [eSyntaxGroupTypesCount][30] =
 };
 
 
-CSyntaxOpt*  NewOptionsEnglish ()
-{
-	return new CEngSyntaxOpt (morphEnglish);
-};
-
 CSentence* CEngSyntaxOpt::NewSentence() const {
 	return new CEngSentence(this);
-};
-
-CAgramtab *CEngSyntaxOpt::NewGramTab() const {
-    return new CEngGramTab();
 };
 
 CLemmatizer *CEngSyntaxOpt::NewLemmatizer() const {
@@ -53,6 +44,9 @@ CEngSyntaxOpt :: CEngSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 	m_SyntaxGroupTypes.clear();
 	for (size_t i=0; i < eSyntaxGroupTypesCount; i++)
 		m_SyntaxGroupTypes.push_back(eSyntaxGroupTypes[i]);
+	m_piGramTab = new CEngGramTab();
+	
+
 }
 
 
@@ -64,6 +58,9 @@ void CEngSyntaxOpt::DestroyOptions ()
 
 bool CEngSyntaxOpt :: InitOptionsLanguageSpecific()
 {
+	if (!m_piGramTab->LoadFromRegistry()) {
+		return false;
+	}
 	return true;
 }
 

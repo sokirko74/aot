@@ -60,7 +60,7 @@ bool CRusFormatCaller::format_for_numbers (CGroup& G)
 	int first_main_word = i;
 
 	if  (	(		!is_numeral(Wi)  // либо числительное, которое не является наречным числительным
-				||	has_item (GetOpt()->m_pNumberAdverbsList, Wi.get_lemma()) //"свыше ста пяти человек"
+				||	has_item (GetOpt()->m_NumberAdverbsList, Wi.get_lemma()) //"свыше ста пяти человек"
 			)
 		&& !HasInSet(g_BigNumerals, Wi.get_lemma() )  
 			// либо большое числительное, которое является  морф. существительным
@@ -209,8 +209,8 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 	return false;
 
 	// запрещаем фразу "дом несколько", поскльку "несколько" - числительное
-	if (has_item (GetOpt()->m_pNumberAdverbsList, Wk.get_lemma())) return false;
-	if (!has_item (GetOpt()->m_pNounNumList, (!Wi.has_lemma() ? Wi.get_word() : Wi.get_lemma()))
+	if (has_item (GetOpt()->m_NumberAdverbsList, Wk.get_lemma())) return false;
+	if (!has_item (GetOpt()->m_NounNumList, (!Wi.has_lemma() ? Wi.get_word() : Wi.get_lemma()))
 		&& !(Wi.has_des(OUpLw) && (Wi.has_des(OLLE) || k==sent.size()-1 || Wi.has_des(OQuoted) && !sent[k+1].has_des(OQuoted)) && (i == k - 1) && Wk.HasFlag(fl_digit))) return false; //Банк вводит вклад "Доход 2013"
 
 	G.m_GroupType = NOUN_NUMERAL;
@@ -264,7 +264,7 @@ bool CRusFormatCaller::format_for_number_adverb (CGroup& G)
 
     int j = H.m_MainWordNo;
     if( !is_numeral(Wj) )	  return false;
-    if (!has_item (GetOpt()->m_pNumberAdverbsList, Wj.get_lemma())) 
+    if (!has_item (GetOpt()->m_NumberAdverbsList, Wj.get_lemma())) 
         return false;
     if (H.m_iLastWord + 1 >= sent.size()) 
         return false;
@@ -967,7 +967,7 @@ bool CRusFormatCaller::format_standard_param_abbr(CGroup& G)
 
 bool CRusFormatCaller::format_for_number_noun (CGroup& G)
 {
-  if (has_item (GetOpt()->m_pNumberAdverbsList, W1.get_lemma())) 
+  if (has_item (GetOpt()->m_NumberAdverbsList, W1.get_lemma())) 
 	  return false;
 
   if ( sent[G.m_iFirstWord].HasFlag(fl_digit) && sent[G.m_iFirstWord].HasPOS(NUMERAL_P)) // "больше 111 рублей"

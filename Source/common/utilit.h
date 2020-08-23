@@ -28,6 +28,7 @@
 #include  <map>
 #include  <time.h>
 #include  <string.h>
+#include  <unordered_set>
 
 #pragma warning (disable : 4018)
 #pragma warning (disable : 4244)
@@ -54,6 +55,7 @@ typedef uint64_t QWORD;
 #endif
 
 typedef vector<string> StringVector;
+typedef std::unordered_set<std::string> StringHashSet;
 typedef set<string> StringSet;
 typedef vector<DWORD> DwordVector;
 

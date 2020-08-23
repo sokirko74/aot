@@ -27,40 +27,32 @@ bool CSyntaxOpt::IsValid() const {
 
 
 void CSyntaxOpt::DestroyOptions() {
+    delete m_piGramTab;
     m_pOborDic.reset(nullptr);
     m_pThesaurus.reset(nullptr);
     m_pProfessions.reset(nullptr);
 };
 
-bool CSyntaxOpt::ReadListFile(const std::string &FileName, StringVector &C) {
+bool CSyntaxOpt::ReadListFile(const std::string &FileName, StringHashSet& C) {
 
-    FILE *fp = fopen(FileName.c_str(), "r");
-    if (!fp) {
-        char strMsg[200];
-        sprintf(strMsg, "Can't open file \'%s\'.", FileName.c_str());
-        OutputErrorString(strMsg);
+    ifstream inp(FileName.c_str());
+    if (!inp.is_open() ) {
+        OutputErrorString(Format("Can't open file \'%s\'.", FileName.c_str()));
         return false;
     }
 
-    char buffer[500];
+    std::string s;
 
-    while (fgets(buffer, 500, fp)) {
-        std::string s = buffer;
+    while (std::getline(inp, s)) {
         int i = s.find("//");
         if (i != std::string::npos)
             s.erase(i);
         Trim(s);
-
+        s = convert_from_utf8(s.c_str(), m_Language);
         if (!s.empty())
-            C.push_back(s);
+            C.insert(s);
     };
-
-    fclose(fp);
-
-    sort(C.begin(), C.end());
-
     return true;
-
 };
 
 void CSyntaxOpt::OutputErrorString(std::string strMsg) const {
@@ -156,20 +148,6 @@ const char g_strGerRegOborDicPath[] = "Software\\Dialing\\GerObor\\DictPath";
 bool CSyntaxOpt::InitializeOptions() {
     m_pProfessions.reset(new SDatItems(0xffff));     //NOUN
 
-    try {
-        if (!GetGramTab()) {
-            auto G = NewGramTab();
-            if (!G) return false;
-            if (!G->LoadFromRegistry()) return false;
-            m_piGramTab.reset(G);
-            SetGramTabWeak(G);
-        }
-    }
-    catch (...) {
-        OutputErrorString("Failed to load \"agramtab.dll\"");
-        return false;
-    }
-
     if (GetLemmatizer() == nullptr) {
         auto pLem = NewLemmatizer();
         std::string strError;
@@ -222,12 +200,6 @@ bool CSyntaxOpt::InitializeOptions() {
 
     return true;
 };
-
-bool has_item(const StringVector *C, const char *item) {
-    if (!item) return false;
-    return binary_search(C->begin(), C->end(), std::string(item));
-};
-
 
 const char *CSyntaxOpt::GetGroupNameByIndex(long lType) const {
     if (lType < 0) return 0;

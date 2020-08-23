@@ -7,11 +7,6 @@
 #include "stdafx.h"
 #include  "ThesaurusForSyntax.h"
 #include "../SimpleGrammarLib/SimpleGrammar.h"
-
-#define MAX_DESC_LEN                    400
-#define MAX_GRAM_CODES_LEN              100
-
-
 #include "oborot.h"
 #include <memory>
 
@@ -27,13 +22,8 @@ class CSentence;
 
 struct SDatItems {
     DWORD m_Poses;
-    StringVector m_vectorDatItems;
-
+    StringHashSet m_vectorDatItems;
     SDatItems(DWORD Poses) { m_Poses = Poses; };
-
-    void Sort() {
-        sort(m_vectorDatItems.begin(), m_vectorDatItems.end());
-    };
 
 };
 
@@ -42,14 +32,13 @@ class CSyntaxOpt {
     std::unique_ptr<CThesaurus>& GetThesPointerByThesId(UINT ThesId);
 
 protected:
-    std::unique_ptr<const CAgramtab> m_piGramTab;
-    std::unique_ptr<const CLemmatizer> m_piLemmatizer;
+    CAgramtab* m_piGramTab;
+    std::unique_ptr<const CLemmatizer> m_piLemmatizer; // own pointer
     std::unique_ptr<const CDictionary> m_piOborDictionary;
     std::unique_ptr<CThesaurusForSyntax> m_pThesaurus;
     std::unique_ptr<COborDic> m_pOborDic;
 
-    const CAgramtab *m_piGramTabWeak = nullptr;
-    const CLemmatizer *m_piLemmatizerWeak = nullptr;
+    const CLemmatizer *m_piLemmatizerWeak = nullptr; // can be set from COM (external)
     const CDictionary *m_piOborDictionaryWeak = nullptr;
     std::unique_ptr<CThesaurus> m_FinThes;
     std::unique_ptr<CThesaurus> m_CompThes;
@@ -105,7 +94,7 @@ public:
 
     bool IsValid() const;
 
-    bool ReadListFile(const std::string &FileName, StringVector &C);
+    bool ReadListFile(const std::string& FileName, StringHashSet& C);
 
     const CThesaurus *GetThesByThesId(UINT ThesId) const;
 
@@ -118,9 +107,7 @@ public:
     const CThesaurusForSyntax* GetThesaurus() const { return m_pThesaurus.get(); }
     virtual CThesaurusForSyntax* NewThesaurus(const CSyntaxOpt* opt) = 0;
 
-    void SetGramTabWeak(const CAgramtab *A) { m_piGramTabWeak = A; };
-    const CAgramtab *GetGramTab() const { return m_piGramTabWeak; };
-    virtual CAgramtab *NewGramTab() const = 0;
+    const CAgramtab *GetGramTab() const { return m_piGramTab; };
 
     void SetLemmatizerWeak(const CLemmatizer *L) { m_piLemmatizerWeak = L; };
     const CLemmatizer *GetLemmatizer() const { return m_piLemmatizerWeak; };
@@ -157,4 +144,11 @@ public:
 
 bool GetRegString(std::string key, std::string &value);
 
-extern bool has_item(const StringVector *C, const char *item);
+inline bool has_item(const StringHashSet& C, const char* item) {
+    if (!item) return false;
+    return C.find(item) != C.end();
+};
+
+inline bool has_item(const StringHashSet& C, const std::string& item) {
+    return C.find(item) != C.end();
+};

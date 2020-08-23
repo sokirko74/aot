@@ -35,19 +35,12 @@ _R("ОТСРАВН"),			_R("ПРЯМ_ДОП_РЕВ"),			_R("ИНСТР_ДОП")
 
 
 
-CSyntaxOpt*  NewOptionsRussian ()
-{
-	return new CRusSyntaxOpt(morphRussian);
-};
-
 CRusSyntaxOpt :: CRusSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 {	
+	m_piGramTab = new CRusGramTab();
 	SynDependOnAdv = NULL;
 	SynDependOnAdj = NULL;
-	m_pCompAdvList = NULL;
-	m_pNounNumList = NULL;
 	m_pVerbsWithInstrObj = NULL;
-	m_pNumberAdverbsList = NULL;
     
 	AdvAdj = NULL;
 	VerbsThatCanSubdueInfinitive = NULL;
@@ -85,10 +78,6 @@ CSentence* CRusSyntaxOpt::NewSentence() const {
 	return new CRusSentence(this);
 };
 
-CAgramtab *CRusSyntaxOpt::NewGramTab() const {
-	return new CRusGramTab();
-};
-
 CLemmatizer *CRusSyntaxOpt::NewLemmatizer() const {
 	return new CLemmatizerRussian();
 };
@@ -104,15 +93,6 @@ CThesaurusForSyntax* CRusSyntaxOpt::NewThesaurus(const CSyntaxOpt* opt) {
 void CRusSyntaxOpt::DestroyOptions ()
 {
 	CSyntaxOpt::DestroyOptions();
-	if(m_pCompAdvList)
-		delete m_pCompAdvList;
-	if(m_pNounNumList)
-		delete m_pNounNumList;
-	if(m_pVerbsWithInstrObj)
-		delete m_pVerbsWithInstrObj;
-	
-	if(m_pNumberAdverbsList)
-		delete m_pNumberAdverbsList;
 	if(AdvAdj)
 		delete AdvAdj;
 	if(SynDependOnAdj)
@@ -172,19 +152,19 @@ void CRusSyntaxOpt :: LoadFromRoss(CDictionary* piRossDict)
 			if (A1.IsPartOf(&A, true))
 			{
 				std::string dat_item = piRossDict->m_Units[i].m_EntryStr;
-				AdvAdj->m_vectorDatItems.push_back(dat_item);
+				AdvAdj->m_vectorDatItems.insert(dat_item);
 			}
 
 			if (A2.IsPartOf(&A, true))
 			{
 				std::string  dat_item = piRossDict->m_Units[i].m_EntryStr;
-				SynDependOnAdv->m_vectorDatItems.push_back(dat_item);
+				SynDependOnAdv->m_vectorDatItems.insert(dat_item);
 			}
 
 			if (A3.IsPartOf(&A, true))
 			{
 				std::string  dat_item = piRossDict->m_Units[i].m_EntryStr;
-				SynDependOnAdj->m_vectorDatItems.push_back(dat_item);
+				SynDependOnAdj->m_vectorDatItems.insert(dat_item);
 			}
 		}
 	}
@@ -196,11 +176,6 @@ void CRusSyntaxOpt :: LoadFromRoss(CDictionary* piRossDict)
 		strcat (strMsg, "\"");
 		OutputErrorString(strMsg);
 	}
-	SynDependOnAdj->Sort();
-	SynDependOnAdv->Sort();
-	AdvAdj->Sort();
-
-
 }
 
 
@@ -214,6 +189,10 @@ static std::string GetSyntaxFilePath()
 
 bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 {
+	if (!m_piGramTab->LoadFromRegistry()) {
+		return false;
+	}
+
 	
 	//loading ross
 	try
@@ -241,38 +220,29 @@ bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 
 	
 	std::string Path = GetSyntaxFilePath();
-  	
-
-	m_pCompAdvList = new StringVector;
-	if (!ReadListFile (Path+"comp_adv.dat",*(m_pCompAdvList)))
+  	if (!ReadListFile (Path+"comp_adv.dat", m_CompAdvList))
 		return false;
 	
-	m_pNounNumList = new StringVector;
-	if (!ReadListFile (Path+"noun_num.dat",*(m_pNounNumList)))
+	if (!ReadListFile (Path+"noun_num.dat", m_NounNumList))
 		return false;
 
-
-	m_pNumberAdverbsList = new StringVector;
-	if (!ReadListFile (Path+"num_pr.dat",*(m_pNumberAdverbsList)))
+	if (!ReadListFile (Path+"num_pr.dat", m_NumberAdverbsList))
 		return false;
 
 	
 	VerbsThatCanSubdueInfinitive = new SDatItems(_QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));	
 	if (!ReadListFile (Path+"verbs_with_inf.txt", VerbsThatCanSubdueInfinitive->m_vectorDatItems))
 		return false;
-	VerbsThatCanSubdueInfinitive->Sort();
 
 	m_pVerbsWithInstrObj = new SDatItems(_QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));	
 	if (!ReadListFile (Path+"verbs_with_inf.txt", m_pVerbsWithInstrObj->m_vectorDatItems))
 		return false;
-	m_pVerbsWithInstrObj->Sort();
 	
     if (m_pProfessions->m_vectorDatItems.empty())
     {
         // read it from file if thesaurus is disabled
 	    if (!ReadListFile (Path+"profes.txt", m_pProfessions->m_vectorDatItems))
 		    return false;
-	    m_pProfessions->Sort();
     }
 
 

@@ -23,13 +23,11 @@ CSentence* CGerSyntaxOpt::NewSentence() const {
 	return new CGerSentence(this);
 };
 
-CSyntaxOpt*  NewOptionsGerman ()
-{
-	return new CGerSyntaxOpt (morphGerman);
-};
 
 CGerSyntaxOpt :: CGerSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 {
+	m_piGramTab = new CGerGramTab();
+
 	m_SimilarNPGroupType = GetSyntaxGroupOrRegister("NP_SIMIL");
 	m_PluralMask = _QM(gPlural);
 	m_SingularMask = _QM(gSingular);
@@ -57,12 +55,7 @@ CGerSyntaxOpt :: CGerSyntaxOpt (MorphLanguageEnum langua) : CSyntaxOpt(langua)
 	for (size_t i=0; i < gSyntaxGroupTypesCount; i++)
 		m_SyntaxGroupTypes.push_back(gSyntaxGroupTypes[i]);
 
-	m_pAdjPrp = new StringVector;
 }
-
-CAgramtab *CGerSyntaxOpt::NewGramTab() const {
-	return new CGerGramTab();
-};
 
 CLemmatizer *CGerSyntaxOpt::NewLemmatizer() const {
 	return new CLemmatizerGerman();
@@ -80,11 +73,6 @@ CThesaurusForSyntax* CGerSyntaxOpt::NewThesaurus(const CSyntaxOpt* opt) {
 void CGerSyntaxOpt::DestroyOptions ()
 {
 	CSyntaxOpt::DestroyOptions();
-	if (m_pAdjPrp)
-	{
-		delete  m_pAdjPrp;
-		m_pAdjPrp = 0;
-	};
 };
 
 static std::string GetSyntaxFilePath()
@@ -96,30 +84,16 @@ static std::string GetSyntaxFilePath()
 
 bool CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 {
+	if (!m_piGramTab->LoadFromRegistry()) {
+		return false;
+	}
+
 	//  reading adjektives
 	std::string strFileName = GetSyntaxFilePath()+"adj_prp.txt";
-	{
-		if (!ReadListFile (strFileName.c_str(),(*m_pAdjPrp)))
-			return false;
-		// deleting valency information
-		for (size_t i=0; i  < m_pAdjPrp->size(); i++)
-		{
-			std::string&  s = (*m_pAdjPrp)[i];
-			int q = s.find("+");
-			if (q != std::string::npos)
-				s.erase(q);
-			q = s.find(" ");
-			if (q != std::string::npos)
-				s.erase(q);
-			RmlMakeUpper(s, morphGerman);
-		};
-		sort(m_pAdjPrp->begin(), m_pAdjPrp->end());
-
-	};
-
-
-	// reading formats
+	if (!ReadListFile (strFileName, m_AdjPrp))
+		return false;
 	
+	// reading formats
 	strFileName = GetSyntaxFilePath()+"gformats.grm";
 	m_FormatsGrammar.m_Language = morphGerman;
 	m_FormatsGrammar.m_pGramTab = GetGramTab();

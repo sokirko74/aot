@@ -117,7 +117,7 @@ public:
 	CThesaurus* LoadThesaurus(const char* ThesName) const;
 	bool LoadThesaurus_mt(std::string tn, vector<CThesaurus*>* ts);
 
-	bool ReadThesaurusForSyntax(const char* ThesName, const CThesaurus* Thes, StringVector& p_vectorAccost);
+	bool ReadThesaurusForSyntax(const char* ThesName, const CThesaurus* Thes, StringHashSet& p_vectorAccost);
 	bool ReadTermins(const CThesaurus* piThes, EThesType eThesType);
 	bool ReadModels(const CThesaurus& piThes, EThesType eThesType);
 	void SortIndexes();

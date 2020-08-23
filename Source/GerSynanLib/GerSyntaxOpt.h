@@ -19,7 +19,7 @@
 class CGerSyntaxOpt :  public CSyntaxOpt
 {
 public:
-	StringVector* m_pAdjPrp;
+	std::unordered_set<std::string> m_AdjPrp;
 
     CGerSyntaxOpt (MorphLanguageEnum langua);
 	void DestroyOptions ();
@@ -32,7 +32,6 @@ public:
 	bool IsGroupWithoutWeight(int GroupType, const char* cause) const;
 	bool is_firm_group(int GroupType) const;
 	CSentence* NewSentence() const override;
-	virtual CAgramtab *NewGramTab() const override;
 	virtual CLemmatizer *NewLemmatizer() const override;
 	virtual COborDic * NewOborDic(const CSyntaxOpt* opt) override;
 	virtual CThesaurusForSyntax* NewThesaurus(const CSyntaxOpt* opt) override;

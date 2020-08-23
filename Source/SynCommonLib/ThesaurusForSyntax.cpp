@@ -42,7 +42,7 @@ CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 	return T;
 };
 
-bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const CThesaurus* Thes, StringVector& p_vectorAccost)
+bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const CThesaurus* Thes, StringHashSet& p_vectorAccost)
 {
 	try
 	{
@@ -65,10 +65,9 @@ bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const C
 				for (int i=0; i <Res.size(); i++)
 				{
 					std::string TerminStr =  Thes->m_Termins[Res[i]].m_TerminStr;
-					RmlMakeLower(	TerminStr, GetOpt()->m_Language);                    
-					p_vectorAccost.push_back(TerminStr);
+					RmlMakeLower(TerminStr, GetOpt()->m_Language);                    
+					p_vectorAccost.insert(TerminStr);
 				};
-				sort( p_vectorAccost.begin(), p_vectorAccost.end() );
 			}
 			catch(...)
 			{
