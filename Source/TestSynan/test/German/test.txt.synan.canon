@@ -34,7 +34,8 @@
                         "trg_grm": "nom,sin,1,alg,per,",
                         "trg_lemma": "SIE"
                     }
-                ]
+                ],
+                "terms": []
             }
         ]
     },
@@ -73,7 +74,8 @@
                         "trg_grm": "nom,sin,2,alg,per,",
                         "trg_lemma": "SIE"
                     }
-                ]
+                ],
+                "terms": []
             }
         ]
     },
