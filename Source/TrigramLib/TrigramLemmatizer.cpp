@@ -283,7 +283,7 @@ void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const std::string& W
             }
             else
             {
-                // morphology contains interpretation that cannot be mapped to this tag std::set, for example some brand-new part of speech 
+                // morphology contains interpretation that cannot be mapped to this tag set, for example some brand-new part of speech 
             }
 		}
 	};

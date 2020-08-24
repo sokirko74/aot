@@ -10,30 +10,25 @@ target_link_libraries(TestMapost
     SynanLib
 )
 
-macro (TestMapost lang filename)
-    get_filename_component(base_name ${filename} NAME)
+macro (TestMapostMacro lang file_mask)
     add_test(
-        NAME Mapost_${lang}_${base_name} 
-        COMMAND TestMapost --language ${lang} --input-file ${filename} --output-file ${filename}.mapost
+        NAME Mapost_${lang} 
+        COMMAND TestMapost --language ${lang} --input-file-mask ${file_mask}
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
 
-    add_test(
-        NAME Mapost_${lang}_${base_name}_cmp 
-        COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.mapost ${filename}.mapost.canon
-        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
-    )
-endmacro(TestMapost)
+    file(GLOB tests ${file_mask})
+    foreach (input_file ${tests})
+        get_filename_component(base_name ${input_file} NAME)
+        add_test(
+            NAME Mapost_${lang}_${base_name}_cmp 
+            COMMAND ${CMAKE_COMMAND} -E compare_files  ${input_file}.mapost ${input_file}.mapost.canon
+            WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
+        )
+    endforeach(input_file)
+endmacro(TestMapostMacro)
 
-TestMapost(Russian test/Russian/fio.txt "")
-TestMapost(Russian test/Russian/lle.txt "")
-TestMapost(Russian test/Russian/num.txt "")
-TestMapost(Russian test/Russian/hom.txt "")
-TestMapost(Russian test/Russian/fixed_collocs.txt "")
-TestMapost(Russian test/Russian/seminouns.txt "")
-TestMapost(Russian test/Russian/redub.txt "")
-TestMapost(Russian test/Russian/other.txt "")
-TestMapost(Russian test/Russian/indecline.txt "")
+TestMapostMacro(Russian test/Russian/*.txt)
 
 
 if (BUILD_DICTS)

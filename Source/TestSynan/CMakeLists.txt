@@ -9,25 +9,26 @@ target_link_libraries(TestSynan
     SynanLib
 )
 
-macro (TestSynanMacro lang filename)
-    get_filename_component(base_name ${filename} NAME)
+macro (TestSynanMacro lang file_mask)
     add_test(
-        NAME Synan_${lang}_${base_name} 
-        COMMAND TestSynan --language ${lang} --input ${filename} --output ${filename}.synan
+        NAME Synan_${lang} 
+        COMMAND TestSynan --language ${lang} --input-file-mask ${file_mask}
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
-    add_test(
-        NAME Synan_${lang}_${base_name}_cmp 
-        COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.synan ${filename}.synan.canon
-        WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
-    )
+
+    file(GLOB synan_tests ${file_mask})
+    foreach (input_file ${synan_tests})
+        get_filename_component(base_name ${input_file} NAME)
+        add_test(
+            NAME Synan_${lang}_${base_name}_cmp 
+            COMMAND ${CMAKE_COMMAND} -E compare_files  ${input_file}.synan ${input_file}.synan.canon
+            WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
+        )
+    endforeach(input_file)
+
 endmacro(TestSynanMacro)
 
 
-file(GLOB synan_tests ${PROJECT_SOURCE_DIR}/test/Russian/*.txt)
-foreach (input_file ${synan_tests})
-    TestSynanMacro(Russian ${input_file})
-endforeach(input_file)
-
-TestSynanMacro(German test/German/test.txt)
+TestSynanMacro(Russian ${PROJECT_SOURCE_DIR}/test/Russian/*.txt)
+TestSynanMacro(German ${PROJECT_SOURCE_DIR}/test/German/*.txt)
 

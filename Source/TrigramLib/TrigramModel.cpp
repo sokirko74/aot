@@ -875,7 +875,7 @@ void CTrigramModel::InitModelFromConfigAndBuildTagset(std::string FileName, cons
 		fprintf (stderr, "building default tagset\n");
 		m_TagSet.BuildDefaultTags(m_pAgramtab);
 	}
-	fprintf (stderr, "tag std::set file contains %i tags \n", m_TagSet.m_Tags.size());
+	fprintf (stderr, "tag set file contains %i tags \n", m_TagSet.m_Tags.size());
 #endif
 
     if (bLoadReverseModel && !ReverseModelConfig.empty())

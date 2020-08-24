@@ -163,15 +163,15 @@ nlohmann::json GetResultBySyntax(const CSentencesCollection &SC, const CAgramtab
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
-    parser.AddArgument("--input", "input file");
-    parser.AddArgument("--output", "output file");
+    parser.AddArgument("--input-file", "input file", true);
+    parser.AddArgument("--output-file", "output file", true);
+    parser.AddArgument("--input-file-mask", "c:/*.txt", true);
     parser.AddArgument("--language", "language");
-    parser.AddOption("--input-is-list-file");
     parser.Parse(argc, argv);
 }
 
 
-int main(int argc, const char **argv) {
+int main(int argc, const char** argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
 
@@ -181,17 +181,30 @@ int main(int argc, const char **argv) {
         return 1;
     };
     std::cerr << "ok\n";
+    std::vector <std::pair<std::string, std::string> > file_pairs;
 
-    try {
-        CTestCaseBase base;
-        base.read_test_cases(args.GetInputStream());
-        for (auto& t : base.TestCases) {
-            if (!t.Text.empty()) {
-                H.GetSentencesFromSynAn(t.Text, false);
-                t.Result = GetResultBySyntax(H.m_Synan, *H.m_pGramTab);
-            }
+    if (args.Exists("input-file-mask")) {
+        auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
+        for (auto filename : file_names) {
+            file_pairs.push_back({filename, filename  + ".synan"});
         }
-        base.write_test_cases(args.GetOutputStream());
+    }
+    else {
+        file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file")});
+    }
+    try {
+        for (auto& p : file_pairs) {
+            std::cerr << p.first << "\n";
+            CTestCaseBase base;
+                base.read_test_cases(std::ifstream(p.first));
+            for (auto& t : base.TestCases) {
+                if (!t.Text.empty()) {
+                    H.GetSentencesFromSynAn(t.Text, false);
+                    t.Result = GetResultBySyntax(H.m_Synan, *H.m_pGramTab);
+                }
+            }
+            base.write_test_cases(std::ofstream(p.second, std::ios::binary));
+        }
     }
     catch (...) {
         std::cerr << "an exception occurred!\n";

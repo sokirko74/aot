@@ -318,3 +318,4 @@ inline bool endswith(const std::string& main, const std::string& suffix) {
 		return false;
 	}
 }
+extern std::vector<std::string> list_path_by_file_mask(std::string filemask);

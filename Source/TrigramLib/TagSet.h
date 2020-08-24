@@ -26,9 +26,9 @@ public:
 	std::map<std::string, CTag>	m_Tags;
 	CTagSet(void);
 	~CTagSet(void);
-	// build the default (part of speech) tag std::set
+	// build the default (part of speech) tag set
 	bool			BuildDefaultTags(const CAgramtab* pAgramtab);
-	// read the tag std::set from file
+	// read the tag set from file
 	bool			ReadTagSet(std::string FileName, const CAgramtab* pAgramtab);
 	//bool			ReadMyStemTagSet(std::string FileName, const CAgramtab* pAgramtab);
 
