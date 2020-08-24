@@ -544,7 +544,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 	for (size_t i = 0;  i < GetNodesSize(); i++)
 	{
 		Res += Format("set nds(%i) [$GT($main,graph) create node]\1", i);;
-		Res += Format("$GT($main,graph) std::set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i,  GetNodeStr(i, 30).c_str());
+		Res += Format("$GT($main,graph) set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i,  GetNodeStr(i, 30).c_str());
 		Res += Format("foreach p [$GT($main,graph) get $nds(%i) -ports] {lappend values [lindex $p 0]}\1", i);
 
 		if (GetNode(i).m_SynGroupTypeStr != KEYB)
@@ -567,12 +567,12 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 				Q += Format("\nFixed group  = %s", GetNode(i).m_SynGroupTypeStr.c_str());
 			};
 			;
-			Res += Format("$GT($main,graph) std::set $nds(%i)  .morphology \"%s\"\1",i, Q.c_str());
+			Res += Format("$GT($main,graph) set $nds(%i)  .morphology \"%s\"\1",i, Q.c_str());
 		};
 
 		std::string ss = SynRealToStr(GetNode(i).m_SynReal, "\n");
 		if( !ss.empty())
-			Res += Format( "$GT($main,graph) std::set $nds(%i)  .preps \"%s\"\1",i, ss.c_str());
+			Res += Format( "$GT($main,graph) set $nds(%i)  .preps \"%s\"\1",i, ss.c_str());
 
 		if  (		   (GetNode(i).GetType() == LocRoss) 
 				||  (		 (GetNode(i).m_Colloc.m_Type  == ThesType)
@@ -581,28 +581,28 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 			)
 		{
 			
-			Res += Format("$GT($main,graph) std::set $nds(%i)  -fill green\1",i);
+			Res += Format("$GT($main,graph) set $nds(%i)  -fill green\1",i);
 		};
 
 		if ((GetNode(i).GetType() == CollocRoss) || (GetNode(i).GetType() == EngCollocRoss))
 		{
-			Res += Format("$GT($main,graph) std::set $nds(%i)  -fill snow4\1",i);
+			Res += Format("$GT($main,graph) set $nds(%i)  -fill snow4\1",i);
 		};
 
 		if (GetNode(i).IsTimeRossNode())
 		{
-			Res += Format("$GT($main,graph) std::set $nds(%i)  -fill \"cyan\"\1",i);
+			Res += Format("$GT($main,graph) set $nds(%i)  -fill \"cyan\"\1",i);
 		};
 
 
 		if (GetNode(i).IsThesNode())
 		{
-			Res += Format("$GT($main,graph) std::set $nds(%i)  -fill \"bisque1\"\1",i);
+			Res += Format("$GT($main,graph) set $nds(%i)  -fill \"bisque1\"\1",i);
 		};
 
 		if (GetNode(i).m_bProper)
 		{
-			Res += Format("$GT($main,graph) std::set $nds(%i)  -fill \"yellow\"\1",i);
+			Res += Format("$GT($main,graph) set $nds(%i)  -fill \"yellow\"\1",i);
 		};
 
 
@@ -627,11 +627,11 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 								InterpToStr(I).c_str());
 
 		};
-		Res += Format("$GT($main,graph) std::set $nds(%i)  .dict_interp \"%s\"\1",i,AllInterps.c_str());
+		Res += Format("$GT($main,graph) set $nds(%i)  .dict_interp \"%s\"\1",i,AllInterps.c_str());
 
 		if (GetNode(i).IsPrimitive())
 		{
-			Res += Format ("$GT($main,graph) std::set $nds(%i)  .lemma \"%s\"\1",i,GetNode(i).GetWord(0).m_Lemma.c_str());
+			Res += Format ("$GT($main,graph) set $nds(%i)  .lemma \"%s\"\1",i,GetNode(i).GetWord(0).m_Lemma.c_str());
 		};
 
 		std::string SemFets = std::string("CAT = ") + GetStrByCategory(GetNode(i).m_SemCategory) + std::string("\n");
@@ -645,7 +645,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 
 
 		;
-		Res += Format ("$GT($main,graph) std::set $nds(%i)  .sem_fets \"%s\"\1",i,SemFets.c_str());
+		Res += Format ("$GT($main,graph) set $nds(%i)  .sem_fets \"%s\"\1",i,SemFets.c_str());
 
 		std::string Props;
 		if (GetNode(i).m_bQuoteMarks)
@@ -656,10 +656,10 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 			for (long j=0; j < GetNode(i).m_ConnectedSits.size();j++)
 				Props += Format("%s\n", GetNode(i).m_ConnectedSits[j].m_UnitStr.c_str());
 		};
-		Res += Format ("$GT($main,graph) std::set $nds(%i)  .props \"%s\"\1",i,Props.c_str());
-		Res += Format ("$GT($main,graph) std::set $nds(%i)  .type_dict \"%i\"\1",i,GetNode(i).GetType());
-		Res += Format ("$GT($main,graph) std::set $nds(%i)  .unit_no \"%i\"\1",i,GetNode(i).GetUnitNo());
-		Res += Format ("$GT($main,graph) std::set $nds(%i)  .higher_concepts \"%s\"\1",i,GetStringVectorInOneStr(GetNode(i).m_HigherConcepts, "\n").c_str());
+		Res += Format ("$GT($main,graph) set $nds(%i)  .props \"%s\"\1",i,Props.c_str());
+		Res += Format ("$GT($main,graph) set $nds(%i)  .type_dict \"%i\"\1",i,GetNode(i).GetType());
+		Res += Format ("$GT($main,graph) set $nds(%i)  .unit_no \"%i\"\1",i,GetNode(i).GetUnitNo());
+		Res += Format ("$GT($main,graph) set $nds(%i)  .higher_concepts \"%s\"\1",i,GetStringVectorInOneStr(GetNode(i).m_HigherConcepts, "\n").c_str());
 
 		std::string AllVals;
 		for (size_t k=0; k < GetNode(i).m_Vals.size(); k++)
@@ -684,7 +684,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 			};
 			AllVals += "\n";
 		};
-		Res += Format("$GT($main,graph) std::set $nds(%i)  .vals \"%s\"\1",i,AllVals.c_str());
+		Res += Format("$GT($main,graph) set $nds(%i)  .vals \"%s\"\1",i,AllVals.c_str());
 
 	};
 
@@ -714,7 +714,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 		};
 
 		//
-		Res += Format("$GT($main,graph) std::set $edge -label \"%s\"\1", Label.c_str());
+		Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", Label.c_str());
 
 		std::string Props; 
 		if (GetRelation(i)->m_Valency.IsFromDict())
@@ -782,13 +782,13 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 		};
 
 
-		Res += Format("$GT($main,graph) std::set $edge .props \"%s\"\1",Props.c_str());
+		Res += Format("$GT($main,graph) set $edge .props \"%s\"\1",Props.c_str());
 
 		//
-		Res += Format("$GT($main,graph) std::set $edge .sem_fets \"%s\"\1",GetSemFetsInOneStr( GetRelation(i)->m_SemFets).c_str());
+		Res += Format("$GT($main,graph) set $edge .sem_fets \"%s\"\1",GetSemFetsInOneStr( GetRelation(i)->m_SemFets).c_str());
 
 		;
-		Res += Format("$GT($main,graph) std::set $edge .lex_fets \"%s\"\1",GetStringVectorInOneStr( GetRelation(i)->m_LexFets, "\n").c_str());
+		Res += Format("$GT($main,graph) set $edge .lex_fets \"%s\"\1",GetStringVectorInOneStr( GetRelation(i)->m_LexFets, "\n").c_str());
 
 
 		//
@@ -827,16 +827,16 @@ std::string CSemanticStructure::GetTclSyntaxGraph()
     for (size_t i = 0;  i < GetNodesSize(); i++)
    	{
     	Res += Format ("set nds(%i) [$GT($main,graph) create node]\1", i);
-	    Res += Format("$GT($main,graph) std::set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i,  GetNodeStr(i, 30).c_str());
+	    Res += Format("$GT($main,graph) set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i,  GetNodeStr(i, 30).c_str());
 		std::string Grammems = m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems());
-		Res += Format("$GT($main,graph) std::set $nds(%i)  .grammems \"%s\"\1",i, Grammems.c_str());
-		Res += Format("$GT($main,graph) std::set $nds(%i)  .lemmas \"%s\"\1",i, GetNodeLemStr(i).c_str());
+		Res += Format("$GT($main,graph) set $nds(%i)  .grammems \"%s\"\1",i, Grammems.c_str());
+		Res += Format("$GT($main,graph) set $nds(%i)  .lemmas \"%s\"\1",i, GetNodeLemStr(i).c_str());
 	};
 
     for (size_t i = 0;  i < GetSynRels().size(); i++)
 	 {
 	  Res += Format ("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", GetSynRels()[i].m_SourceNodeNo, GetSynRels()[i].m_TargetNodeNo);
-	  Res += Format("$GT($main,graph) std::set $edge -label \"%s\"\1", GetSynRels()[i].m_SynRelName.c_str());
+	  Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", GetSynRels()[i].m_SynRelName.c_str());
 
   	  std::string Color = !GetSynRels()[i].m_SynRelName.empty() ? "blue" : "darkgreen";
 	  Res += Format("$GT($main,graph) configure $edge graphics -fill %s \1", Color.c_str());
@@ -1387,7 +1387,7 @@ std::string CSemanticStructure::GetOtherRelations()
 	   )
    {
 	  Res += Format ("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", GetLexFuncts()[i].m_SourceNodeNo, GetLexFuncts()[i].m_TargetNodeNo);
-	  Res += Format ("$GT($main,graph) std::set $edge -label \"%s\"\1", GetLexFuncts()[i].m_LexFunctName.c_str());
+	  Res += Format ("$GT($main,graph) set $edge -label \"%s\"\1", GetLexFuncts()[i].m_LexFunctName.c_str());
 	  Res += Format ("$GT($main,graph) configure $edge graphics -fill blue -width 1.0 -stipple gray50\1");
    };
 
@@ -1399,9 +1399,9 @@ std::string CSemanticStructure::GetOtherRelations()
 	   )
    {
 	  Res += Format("set edge [$GT($main,graph) create edge $nds(%i) $nds(%i)]\1", GetDopRelation(i)->m_SourceNodeNo, GetDopRelation(i)->m_TargetNodeNo);
-	  Res += Format("$GT($main,graph) std::set $edge -label \"%s\"\1", GetDopRelation(i)->m_Valency.m_RelationStr.c_str());
+	  Res += Format("$GT($main,graph) set $edge -label \"%s\"\1", GetDopRelation(i)->m_Valency.m_RelationStr.c_str());
 	  Res += Format("$GT($main,graph) configure $edge graphics -fill blue -width 1.0 -stipple gray50\1");
-      Res += Format("$GT($main,graph) std::set $edge .sem_fets \"%s\"\1",GetSemFetsInOneStr( GetDopRelation(i)->m_SemFets).c_str());
+      Res += Format("$GT($main,graph) set $edge .sem_fets \"%s\"\1",GetSemFetsInOneStr( GetDopRelation(i)->m_SemFets).c_str());
 
    };
 

@@ -26,7 +26,7 @@ int yylex (void* valp, CChunkParser* _prs);
 %debug
 %union 
 {
-const string*		m_LabelPtr;  
+const std::string*	m_LabelPtr;  
 CChunkNode*			m_pNode;  
 CNodeAttributes*	m_pAttributes;  
 CNodeAttribute*		m_pAttribute;
@@ -238,7 +238,7 @@ attribute :		CHUNK_ATTR
 					CRuleFeature* pFeat = $4;
 					if (!pFeat) 
 						YYABORT;
-					string ErrorStr = pFeat->InitAssignement(*$1, *$3);
+					std::string ErrorStr = pFeat->InitAssignement(*$1, *$3);
 					if (!ErrorStr.empty())
 					{
 						yyerror(_prs, ErrorStr.c_str());
@@ -251,7 +251,7 @@ attribute :		CHUNK_ATTR
 					CRuleFeature* pFeat = $2;
 					if (!pFeat) 
 						YYABORT;
-					string ErrorStr = pFeat->InitCheck(*$1);
+					std::string ErrorStr = pFeat->InitCheck(*$1);
 					if (!ErrorStr.empty())
 					{
 						yyerror(_prs, ErrorStr.c_str());
@@ -264,7 +264,7 @@ attribute :		CHUNK_ATTR
 					CRuleFeature* pFeat = new CRuleFeature;
 					if (!pFeat) 
 						YYABORT;
-					string ErrorStr = pFeat->InitAssignement(*$1, *$3);
+					std::string ErrorStr = pFeat->InitAssignement(*$1, *$3);
 					if (!ErrorStr.empty())
 					{
 						yyerror(_prs, ErrorStr.c_str());
@@ -285,7 +285,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				CRuleFeature* pObj = new CRuleFeature;
 				if (!pObj->AddFeatureArgument(*$1))
 				{
-					string ErrorStr = string("Bad item id:") + *$1;
+					std::string ErrorStr = std::string("Bad item id:") + *$1;
 					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};
@@ -296,7 +296,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				CRuleFeature* pObj = $1;
 				if (!pObj->AddFeatureArgument(*$3))
 				{
-					string ErrorStr = string("Bad item id:") + *$3;
+					std::string ErrorStr = std::string("Bad item id:") + *$3;
 					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};
@@ -307,7 +307,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				CRuleFeature* pObj = new CRuleFeature;
 				if (!pObj->AddFeatureValue(_prs->m_pGramTab, *$1))
 				{
-					string ErrorStr = string("Bad argument:") + *$1;
+					std::string ErrorStr = std::string("Bad argument:") + *$1;
 					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};
@@ -318,7 +318,7 @@ feat_list :  CHUNK_ATTR_VARIABLE
 				CRuleFeature* pObj = $1;
 				if (!pObj->AddFeatureValue(_prs->m_pGramTab, *$3))
 				{
-					string ErrorStr = string("Bad argument :") + *$3;
+					std::string ErrorStr = std::string("Bad argument :") + *$3;
 					yyerror(_prs, ErrorStr.c_str());
 					YYABORT;
 				};

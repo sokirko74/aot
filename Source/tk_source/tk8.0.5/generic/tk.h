@@ -57,7 +57,7 @@
 #ifndef RESOURCE_INCLUDED
 
 /*
- * The following definitions std::set up the proper options for Macintosh
+ * The following definitions set up the proper options for Macintosh
  * compilers.  We use this method because there is no autoconf equivalent.
  */
 
@@ -121,7 +121,7 @@ typedef char *Tk_Uid;
  */
 
 typedef struct {
-    char *key;		/* The key std::string that flags the option in the
+    char *key;		/* The key string that flags the option in the
 			 * argv array. */
     int type;		/* Indicates option type;  see below. */
     char *src;		/* Value to be used in setting dst;  usage
@@ -162,7 +162,7 @@ typedef struct {
 /*
  * Structure used to describe application-specific configuration
  * options:  indicates procedures to call to parse an option and
- * to return a text std::string describing an option.
+ * to return a text string describing an option.
  */
 
 typedef int (Tk_OptionParseProc) _ANSI_ARGS_((ClientData clientData,
@@ -177,7 +177,7 @@ typedef struct Tk_CustomOption {
 					 * option and store it in converted
 					 * form. */
     Tk_OptionPrintProc *printProc;	/* Procedure to return a printable
-					 * std::string describing an existing
+					 * string describing an existing
 					 * option. */
     ClientData clientData;		/* Arbitrary one-word value used by
 					 * option parser:  passed to
@@ -411,7 +411,7 @@ typedef struct Tk_GeomMgr {
 /*
  *---------------------------------------------------------------------------
  *
- * Extensions to the X event std::set
+ * Extensions to the X event set
  *
  *---------------------------------------------------------------------------
  */
@@ -575,7 +575,7 @@ typedef struct Tk_FakeWin {
  *				for the field.
  * TK_DONT_DESTROY_WINDOW:	1 means that Tk_DestroyWindow should not
  *				invoke XDestroyWindow to destroy this widget's
- *				X window.  The flag is std::set when the window
+ *				X window.  The flag is set when the window
  *				has already been destroyed elsewhere (e.g.
  *				by another application) or when it will be
  *				destroyed later (e.g. by destroying its
@@ -730,7 +730,7 @@ typedef int	Tk_ItemSelectionProc _ANSI_ARGS_((Tk_Canvas canvas,
 		    Tk_Item *itemPtr, int offset, char *buffer,
 		    int maxBytes));
 typedef void	Tk_ItemInsertProc _ANSI_ARGS_((Tk_Canvas canvas,
-		    Tk_Item *itemPtr, int beforeThis, char *std::string));
+		    Tk_Item *itemPtr, int beforeThis, char *string));
 typedef void	Tk_ItemDCharsProc _ANSI_ARGS_((Tk_Canvas canvas,
 		    Tk_Item *itemPtr, int first, int last));
 
@@ -746,7 +746,7 @@ typedef struct Tk_ItemType {
 					 * returning configuration info. */
     Tk_ItemConfigureProc *configProc;	/* Procedure to call to change
 					 * configuration options. */
-    Tk_ItemCoordProc *coordProc;	/* Procedure to call to get and std::set
+    Tk_ItemCoordProc *coordProc;	/* Procedure to call to get and set
 					 * the item's coordinates. */
     Tk_ItemDeleteProc *deleteProc;	/* Procedure to delete existing item of
 					 * this type. */
@@ -770,7 +770,7 @@ typedef struct Tk_ItemType {
     Tk_ItemIndexProc *indexProc;	/* Procedure to determine index of
 					 * indicated character.  NULL if
 					 * item doesn't support indexing. */
-    Tk_ItemCursorProc *icursorProc;	/* Procedure to std::set insert cursor pos.
+    Tk_ItemCursorProc *icursorProc;	/* Procedure to set insert cursor pos.
 					 * to just before a given position. */
     Tk_ItemSelectionProc *selectionProc;/* Procedure to return selection (in
 					 * STRING format) when it is in this
@@ -931,14 +931,14 @@ typedef struct Tk_PhotoImageBlock {
 typedef struct Tk_PhotoImageFormat Tk_PhotoImageFormat;
 typedef int (Tk_ImageFileMatchProc) _ANSI_ARGS_((Tcl_Channel chan,
 	char *fileName, char *formatString, int *widthPtr, int *heightPtr));
-typedef int (Tk_ImageStringMatchProc) _ANSI_ARGS_((char *std::string,
+typedef int (Tk_ImageStringMatchProc) _ANSI_ARGS_((char *string,
 	char *formatString, int *widthPtr, int *heightPtr));
 typedef int (Tk_ImageFileReadProc) _ANSI_ARGS_((Tcl_Interp *interp,
 	Tcl_Channel chan, char *fileName, char *formatString,
 	Tk_PhotoHandle imageHandle, int destX, int destY,
 	int width, int height, int srcX, int srcY));
 typedef int (Tk_ImageStringReadProc) _ANSI_ARGS_((Tcl_Interp *interp,
-	char *std::string, char *formatString, Tk_PhotoHandle imageHandle,
+	char *string, char *formatString, Tk_PhotoHandle imageHandle,
 	int destX, int destY, int width, int height, int srcX, int srcY));
 typedef int (Tk_ImageFileWriteProc) _ANSI_ARGS_((Tcl_Interp *interp,
 	char *fileName, char *formatString, Tk_PhotoImageBlock *blockPtr));
@@ -960,18 +960,18 @@ struct Tk_PhotoImageFormat {
 				 * an image file matches this format. */
     Tk_ImageStringMatchProc *stringMatchProc;
 				/* Procedure to call to determine whether
-				 * the data in a std::string matches this format. */
+				 * the data in a string matches this format. */
     Tk_ImageFileReadProc *fileReadProc;
 				/* Procedure to call to read data from
 				 * an image file into a photo image. */
     Tk_ImageStringReadProc *stringReadProc;
 				/* Procedure to call to read data from
-				 * a std::string into a photo image. */
+				 * a string into a photo image. */
     Tk_ImageFileWriteProc *fileWriteProc;
 				/* Procedure to call to write data from
 				 * a photo image to a file. */
     Tk_ImageStringWriteProc *stringWriteProc;
-				/* Procedure to call to obtain a std::string
+				/* Procedure to call to obtain a string
 				 * representation of the data in a photo
 				 * image.*/
     struct Tk_PhotoImageFormat *nextPtr;
@@ -1076,7 +1076,7 @@ EXTERN void		Tk_CanvasEventuallyRedraw _ANSI_ARGS_((
 			    Tk_Canvas canvas, int x1, int y1, int x2,
 			    int y2));
 EXTERN int		Tk_CanvasGetCoord _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Canvas canvas, char *std::string,
+			    Tk_Canvas canvas, char *string,
 			    double *doublePtr));
 EXTERN Tk_CanvasTextInfo *Tk_CanvasGetTextInfo _ANSI_ARGS_((Tk_Canvas canvas));
 EXTERN int		Tk_CanvasPsBitmap _ANSI_ARGS_((Tcl_Interp *interp,
@@ -1131,7 +1131,7 @@ EXTERN int		Tk_ConfigureWidget _ANSI_ARGS_((Tcl_Interp *interp,
 EXTERN void		Tk_ConfigureWindow _ANSI_ARGS_((Tk_Window tkwin,
 			    unsigned int valueMask, XWindowChanges *valuePtr));
 EXTERN Tk_TextLayout	Tk_ComputeTextLayout _ANSI_ARGS_((Tk_Font font,
-			    CONST char *std::string, int numChars, int wrapLength,
+			    CONST char *string, int numChars, int wrapLength,
 			    Tk_Justify justify, int flags, int *widthPtr,
 			    int *heightPtr));
 EXTERN Tk_Window	Tk_CoordsToWindow _ANSI_ARGS_((int rootX, int rootY,
@@ -1244,33 +1244,33 @@ EXTERN Tk_3DBorder	Tk_Get3DBorder _ANSI_ARGS_((Tcl_Interp *interp,
 EXTERN void		Tk_GetAllBindings _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tk_BindingTable bindingTable, ClientData object));
 EXTERN int		Tk_GetAnchor _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *std::string, Tk_Anchor *anchorPtr));
+			    char *string, Tk_Anchor *anchorPtr));
 EXTERN char *		Tk_GetAtomName _ANSI_ARGS_((Tk_Window tkwin,
 			    Atom atom));
 EXTERN char *		Tk_GetBinding _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tk_BindingTable bindingTable, ClientData object,
 			    char *eventString));
 EXTERN Pixmap		Tk_GetBitmap _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Window tkwin, Tk_Uid std::string));
+			    Tk_Window tkwin, Tk_Uid string));
 EXTERN Pixmap		Tk_GetBitmapFromData _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tk_Window tkwin, char *source,
 			    int width, int height));
 EXTERN int		Tk_GetCapStyle _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *std::string, int *capPtr));
+			    char *string, int *capPtr));
 EXTERN XColor *		Tk_GetColor _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tk_Window tkwin, Tk_Uid name));
 EXTERN XColor *		Tk_GetColorByValue _ANSI_ARGS_((Tk_Window tkwin,
 			    XColor *colorPtr));
 EXTERN Colormap		Tk_GetColormap _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Window tkwin, char *std::string));
+			    Tk_Window tkwin, char *string));
 EXTERN Tk_Cursor	Tk_GetCursor _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Window tkwin, Tk_Uid std::string));
+			    Tk_Window tkwin, Tk_Uid string));
 EXTERN Tk_Cursor	Tk_GetCursorFromData _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tk_Window tkwin, char *source, char *mask,
 			    int width, int height, int xHot, int yHot,
 			    Tk_Uid fg, Tk_Uid bg));
 EXTERN Tk_Font		Tk_GetFont _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Window tkwin, CONST char *std::string));
+			    Tk_Window tkwin, CONST char *string));
 EXTERN Tk_Font		Tk_GetFontFromObj _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tk_Window tkwin, Tcl_Obj *objPtr));
 EXTERN void		Tk_GetFontMetrics _ANSI_ARGS_((Tk_Font font,
@@ -1285,14 +1285,14 @@ EXTERN ClientData	Tk_GetImageMasterData _ANSI_ARGS_ ((Tcl_Interp *interp,
 			    char *name, Tk_ImageType **typePtrPtr));
 EXTERN Tk_ItemType *	Tk_GetItemTypes _ANSI_ARGS_((void));
 EXTERN int		Tk_GetJoinStyle _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *std::string, int *joinPtr));
+			    char *string, int *joinPtr));
 EXTERN int		Tk_GetJustify _ANSI_ARGS_((Tcl_Interp *interp,
-			    char *std::string, Tk_Justify *justifyPtr));
+			    char *string, Tk_Justify *justifyPtr));
 EXTERN int		Tk_GetNumMainWindows _ANSI_ARGS_((void));
 EXTERN Tk_Uid		Tk_GetOption _ANSI_ARGS_((Tk_Window tkwin, char *name,
 			    char *className));
 EXTERN int		Tk_GetPixels _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Window tkwin, char *std::string, int *intPtr));
+			    Tk_Window tkwin, char *string, int *intPtr));
 EXTERN Pixmap		Tk_GetPixmap _ANSI_ARGS_((Display *display, Drawable d,
 			    int width, int height, int depth));
 EXTERN int		Tk_GetRelief _ANSI_ARGS_((Tcl_Interp *interp,
@@ -1303,13 +1303,13 @@ EXTERN int		Tk_GetScrollInfo _ANSI_ARGS_((Tcl_Interp *interp,
 			    int argc, char **argv, double *dblPtr,
 			    int *intPtr));
 EXTERN int		Tk_GetScreenMM _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Window tkwin, char *std::string, double *doublePtr));
+			    Tk_Window tkwin, char *string, double *doublePtr));
 EXTERN int		Tk_GetSelection _ANSI_ARGS_((Tcl_Interp *interp,
 			    Tk_Window tkwin, Atom selection, Atom target,
 			    Tk_GetSelProc *proc, ClientData clientData));
-EXTERN Tk_Uid		Tk_GetUid _ANSI_ARGS_((CONST char *std::string));
+EXTERN Tk_Uid		Tk_GetUid _ANSI_ARGS_((CONST char *string));
 EXTERN Visual *		Tk_GetVisual _ANSI_ARGS_((Tcl_Interp *interp,
-			    Tk_Window tkwin, char *std::string, int *depthPtr,
+			    Tk_Window tkwin, char *string, int *depthPtr,
 			    Colormap *colormapPtr));
 EXTERN void		Tk_GetVRootGeometry _ANSI_ARGS_((Tk_Window tkwin,
 			    int *xPtr, int *yPtr, int *widthPtr,
@@ -1441,7 +1441,7 @@ EXTERN int		Tk_StrictMotif _ANSI_ARGS_((Tk_Window tkwin));
 EXTERN void		Tk_TextLayoutToPostscript _ANSI_ARGS_((
 			    Tcl_Interp *interp, Tk_TextLayout layout));
 EXTERN int		Tk_TextWidth _ANSI_ARGS_((Tk_Font font,
-			    CONST char *std::string, int numChars));
+			    CONST char *string, int numChars));
 EXTERN void		Tk_UndefineCursor _ANSI_ARGS_((Tk_Window window));
 EXTERN void		Tk_UnderlineChars _ANSI_ARGS_((Display *display,
 			    Drawable drawable, GC gc, Tk_Font tkfont,

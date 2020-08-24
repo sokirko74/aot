@@ -108,7 +108,7 @@ public:
 	BOOL PrintAllLinesInRect(int iStartLine, CDC* pDC, CRect& rectForDrawing, int iOffset);
 	BOOL LineInrRect(CRect& rectForDrawing, CSentenceLine& line);
 	BOOL PrintAllLinesTillBottom(int& iStartLine,CDC*  pDC,int iBottom,int& iOffset) ;
-	int GetLinesCount()
+	size_t GetLinesCount()
 	{ return m_vectorSentLines.size();}
 
 	CRect m_SentRect;

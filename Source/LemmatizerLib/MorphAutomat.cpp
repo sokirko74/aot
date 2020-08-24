@@ -393,9 +393,9 @@ void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_p
 		size_t ModelNo;
 		size_t PrefixNo;
 		DecodeMorphAutomatInfo(i, ModelNo, ItemNo, PrefixNo);
-		A.m_ItemNo = ItemNo;
-		A.m_ModelNo =  ModelNo;
-		A.m_PrefixNo = PrefixNo;
+		A.m_ItemNo = (WORD)ItemNo;
+		A.m_ModelNo = (WORD)ModelNo;
+		A.m_PrefixNo = (WORD)PrefixNo;
 		Infos.push_back(A);
 	};
 

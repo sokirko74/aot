@@ -22,6 +22,7 @@ add_dependencies(${PROJECT_NAME}
     Lemmatizer
     MAPost
     graphan
+    Seman
 )
 
 target_link_libraries(${PROJECT_NAME}

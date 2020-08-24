@@ -49,7 +49,6 @@ bool  CSemStructureBuilder::FindSituations(std::string utf8text, long UserTreeVa
 			
 			if (!utf8text.empty())
 			{
-
 				if (!m_RusStr.m_pData->MakeSyntaxStr(utf8text.c_str(), m_GlobalSpan))
 				{
 					ErrorMessage("Syntax has crushed");

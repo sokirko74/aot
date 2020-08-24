@@ -1955,7 +1955,7 @@ void CRusSemStructure:: FindMotherLandForPustycha()
 			if (IsInClause(k, ClauseNo))
 			{
 				SaveNodes.push_back(m_Nodes[k]);
-				MoveSynRelations(k, -(SaveNodes.size() + 1));
+				MoveSynRelations(k, -((int)SaveNodes.size() + 1));
 				m_Nodes[k].m_bToDelete = true;
 				SaveNodes[SaveNodes.size() - 1].m_ClauseNo = MainClauseNo;
 			};
@@ -2433,9 +2433,9 @@ std::string    CRusSemStructure::GetClauseTreeForTcl()
 		 name +="         ";
 		 name =  "         " + name;
 
-        Res += Format ("$GT($main,clause_graph) std::set $clause_nds(%i) -label \"%s\" -type oval -x 0 -y 0\1", i,  name.c_str());
+        Res += Format ("$GT($main,clause_graph) set $clause_nds(%i) -label \"%s\" -type oval -x 0 -y 0\1", i,  name.c_str());
 
-        Res += Format ("$GT($main,clause_graph) std::set $clause_nds(%i)  .props \"%s\"\1",i,GetClauseProperiesStr(i).c_str());
+        Res += Format ("$GT($main,clause_graph) set $clause_nds(%i)  .props \"%s\"\1",i,GetClauseProperiesStr(i).c_str());
 
    };
 
@@ -2447,7 +2447,7 @@ std::string    CRusSemStructure::GetClauseTreeForTcl()
 	   if ( m_Clauses[i].m_ClauseRuleNo != -1)
 	   {
          std::string name =   m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name;
-	     Res += Format("$GT($main,clause_graph) std::set $edge -label \"%s\"\1", name.c_str());
+	     Res += Format("$GT($main,clause_graph) set $edge -label \"%s\"\1", name.c_str());
 	   };
    };
 

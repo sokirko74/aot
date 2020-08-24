@@ -1323,7 +1323,6 @@ struct CSlfLineByAncodeLess {
 
 void MorphoWizard::slf_to_mrd(const std::string &s, std::string &lemm, CFlexiaModel &FlexiaModel, CAccentModel &AccentModel,
                               BYTE &AuxAccent, int &line_no_err) const {
-    lemm.empty();
 
     StringTokenizer lines(s.c_str(), "\r\n");
 

@@ -27,13 +27,18 @@ include_directories(${RML}/Source/contrib/nlohmann)
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
     message ("compile debug")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
-    message ("enable_testing")
+    if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
+    endif()
+
     enable_testing()
 else()
     message ("compile release")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} -O2")
+    if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} -O2")
+    endif()
 endif()
+
 
 add_subdirectory (contrib/iconv_subset)
 

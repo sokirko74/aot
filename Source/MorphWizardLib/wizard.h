@@ -72,7 +72,7 @@ struct CPredictSuffix
 			return m_FlexiaModelNo < X.m_FlexiaModelNo;
 
 		if (m_SourceLemmaAncode != X.m_SourceLemmaAncode)
-			m_SourceLemmaAncode < X.m_SourceLemmaAncode;
+			return m_SourceLemmaAncode < X.m_SourceLemmaAncode;
 
 		return m_Suffix < X.m_Suffix;
 	};

@@ -641,6 +641,73 @@ bool translate_helper::starts_with(const std::string &s,const StringVector &star
 	return false;
 }
 
+struct CTransliteration {
+	StringVector Rus2Eng;
+
+	void init_char(const std::string& rus, const std::string& eng) {
+		BYTE rus_char = _R(rus.c_str())[0];
+		Rus2Eng[rus_char] = eng;
+	}
+
+	CTransliteration() {
+		Rus2Eng.resize(256);
+		for (int i = 0; i < 256; i++) {
+			Rus2Eng[i] = (char)(unsigned char)i;
+		}
+		init_char("А", "A");
+		init_char("Б", "B");
+		init_char("В", "V");
+		init_char("Г", "G");
+		init_char("Д", "D");
+//		init_char("Е", "Е");
+		init_char("Ё", "E");
+		init_char("Ж", "Zh");
+		init_char("З", "Z");
+		init_char("И", "I");
+		init_char("Й", "Y");
+		init_char("К", "K");
+		init_char("Л", "L");
+		init_char("М", "M");
+		init_char("Н", "N");
+		init_char("О", "O");
+		init_char("П", "P");
+		init_char("Р", "R");
+		init_char("С", "S");
+		init_char("Т", "T");
+		init_char("У", "U");
+		init_char("Ф", "F");
+		init_char("Х", "Kh");
+		init_char("Ц", "Ts");
+		init_char("Ч", "Ch");
+		init_char("Ш", "Sh");
+		init_char("Щ", "Shch");
+		init_char("Ъ", "\"");
+		init_char("Ы", "Y");
+		init_char("Ь", "'");
+		init_char("Э", "E");
+		init_char("Ю", "Yu");
+		init_char("Я", "Ya");
+	}
+	std::string transliterate(std::string str) const {
+		EngRusMakeUpper(str);
+		const std::string before_e = _R("УЕЪЫАОЭЯИЬЮ");
+		std::string res;
+		for (size_t i = 0; i < str.length(); i++)
+			if (str[i] == _R("Е")[0])
+				if (i == 0
+					|| before_e.find((unsigned char)str[i - 1]) != std::string::npos
+					)
+					res += "Ye";
+				else
+					res += "E";
+			else
+				res += Rus2Eng[(unsigned char)str[i]];
+		return res;
+	}
+};
+
+const static CTransliteration RusEngTransliteration = CTransliteration();
+
 // транслитериует русскую строку _str
 void translate_helper::transliterate(CEngSemWord& W ) 
 {
@@ -649,62 +716,11 @@ void translate_helper::transliterate(CEngSemWord& W )
 		str = W.m_Lemma;
 	else
 		str = W.m_Word;
-	EngRusMakeUpper(str);
-	std::string res;
-	StringVector vec;
-	vec = StringVector(256);
-	for(int i = 0; i < 256; i++) vec[i] = (char)(unsigned char)i;
-#define PAIR(ch, s) vec[(int)_R(ch)[0]] = s;
-	PAIR("А", "A");
-	PAIR("Б", "B");
-	PAIR("В", "V");
-	PAIR("Г", "G");
-	PAIR("Д", "D");
-//	PAIR("Е", "");
-	PAIR("Ё", "E");
-	PAIR("Ж", "Zh");
-	PAIR("З", "Z");
-	PAIR("И", "I");
-	PAIR("Й", "Y");
-	PAIR("К", "K");
-	PAIR("Л", "L");
-	PAIR("М", "M");
-	PAIR("Н", "N");
-	PAIR("О", "O");
-	PAIR("П", "P");
-	PAIR("Р", "R");
-	PAIR("С", "S");
-	PAIR("Т", "T");
-	PAIR("У", "U");
-	PAIR("Ф", "F");
-	PAIR("Х", "Kh");
-	PAIR("Ц", "Ts");
-	PAIR("Ч", "Ch");
-	PAIR("Ш", "Sh");
-	PAIR("Щ", "Shch");
-	PAIR("Ъ", "\"");
-	PAIR("Ы", "Y");
-	PAIR("Ь", "'");
-	PAIR("Э", "E");
-	PAIR("Ю", "Yu");
-	PAIR("Я", "Ya");
-#undef PAIR
-
-	std::string before_e = _R("УЕЪЫАОЭЯИЬЮ");
-
-	for(int i = 0; str[i]; i++)
-		if(str[i] == _R("Е")[0])
-			if(    i == 0 
-				|| before_e.find((unsigned char)str[i-1]) != std::string::npos
-			  )
-				res += "Ye";
-			else
-				res += "E";
-		else
-		  res += vec[(unsigned char)str[i]];
-   W.m_Lemma = res;
-   W.m_Word = res;
-   W.m_Word = fix_case(W);
+	
+	std::string res = RusEngTransliteration.transliterate(str);
+	W.m_Lemma = res;
+	W.m_Word = res;
+	W.m_Word = fix_case(W);
 }
 
 
