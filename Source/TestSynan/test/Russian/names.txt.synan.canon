@@ -23,7 +23,8 @@
                         "words": "Павла I-го"
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             }
         ]
     },
@@ -51,7 +52,8 @@
                         "words": "Павел Первый"
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             }
         ]
     },
@@ -79,7 +81,8 @@
                         "words": "Т . Е . ОТКАЗАТЬСЯ"
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             }
         ]
     },
@@ -107,7 +110,8 @@
                         "words": "ЛАЗАРЕВ В . П ."
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             },
             {
                 "analytical": [],
@@ -128,7 +132,8 @@
                         "words": "Г . САМАРА"
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             }
         ]
     },
@@ -171,7 +176,8 @@
                         "trg_grm": "",
                         "trg_lemma": ""
                     }
-                ]
+                ],
+                "terms": []
             }
         ]
     },
@@ -210,6 +216,9 @@
                         "trg_grm": "но,од,жр,им,ед,",
                         "trg_lemma": "ОПЕРАЦИОННЫЙ"
                     }
+                ],
+                "terms": [
+                    "Операционная система"
                 ]
             }
         ]
@@ -287,7 +296,8 @@
                         "trg_grm": "",
                         "trg_lemma": ""
                     }
-                ]
+                ],
+                "terms": []
             }
         ]
     }

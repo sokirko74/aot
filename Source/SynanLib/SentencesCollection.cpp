@@ -124,7 +124,7 @@ bool CSentencesCollection::ProcessData(const CPlmLineCollection *piPlmLine) {
 
 
 bool CSentencesCollection::ReadAndProcessSentences(const CPlmLineCollection *piPlmLine) {
-    const size_t LinesCount = piPlmLine->m_Items.size();
+    const size_t LinesCount = piPlmLine->m_PlmItems.size();
 
     if (!m_pSyntaxOptions->IsValid())
         return false;

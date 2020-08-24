@@ -47,6 +47,8 @@ target_link_libraries(SemanLib
     BinaryDictsLib
 )
 
+target_precompile_headers(${PROJECT_NAME} PUBLIC stdafx.h)
+
 if (BUILD_DICTS)
     add_dependencies (SemanLib 
         BinDicts 

@@ -16,10 +16,9 @@ bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLa
 	
 	if (pNode->m_pAttributes)
 	{
-		for (std::list<CNodeAttribute*>::const_iterator it = pNode->m_pAttributes->m_Items.begin(); it != pNode->m_pAttributes->m_Items.end(); it++)
+		for (const auto& a : pNode->m_pAttributes->m_Items)
 		{
-			const CNodeAttribute* A = (*it);
-			if (!I.AddAttribute(A->m_Name,A->m_Value, Language, ErrorStr, SourceFileName))
+			if (!I.AddAttribute(a->m_Name, a->m_Value, Language, ErrorStr, SourceFileName))
 			{
 				return false;
 			};
@@ -178,7 +177,7 @@ bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGr
 				return false;
 
 			if (!AttributesToFeatures(	WorkGrammar, 
-										NewRule.m_RightPart.m_Items.size()+1, 
+										NewRule.m_RightPart.m_RuleItems.size()+1, 
 										I,
 										WorkGrammar.m_RuleFeatures[NewRule.m_RuleFeaturesNo], 
 										ErrorStr))
@@ -188,9 +187,9 @@ bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGr
 			size_t id = WorkGrammar.GetItemId(I);
 
 			if (I.m_bSynMain)
-				NewRule.m_RightPart.m_SynMainItemNo = NewRule.m_RightPart.m_Items.size();
+				NewRule.m_RightPart.m_SynMainItemNo = NewRule.m_RightPart.m_RuleItems.size();
 
-			NewRule.m_RightPart.m_Items.push_back(id);
+			NewRule.m_RightPart.m_RuleItems.push_back(id);
 
 			WorkGrammar.m_UniqueGrammarItems[id].m_bGrammarRoot = false;
 		};

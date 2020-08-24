@@ -145,6 +145,22 @@ nlohmann::json GetRelations(const CSentence &Sentence) {
     return rels;
 }
 
+nlohmann::json GetThesaurusTerms(const CSentence& Sentence) {
+    nlohmann::json  terms = nlohmann::json::array();
+    for (size_t i = 0; i < Sentence.m_Words.size(); i++) {
+        if (Sentence.m_Words[i].m_bFirstWordInTermin) {
+            for (size_t k = i; k < Sentence.m_Words.size(); ++k) {
+                if (Sentence.m_Words[k].m_bLastWordInTermin) {
+                    terms.push_back(GetWords(Sentence, CPeriod(i, k)));
+                    break;
+                }
+            }
+            
+        }
+    }
+    return terms;
+}
+
 nlohmann::json GetResultBySyntax(const CSentencesCollection &SC, const CAgramtab &A) {
     nlohmann::json sents = nlohmann::json::array();
     for (size_t nSent = 0; nSent < SC.m_vectorSents.size(); nSent++) {
@@ -153,6 +169,7 @@ nlohmann::json GetResultBySyntax(const CSentencesCollection &SC, const CAgramtab
             {"analytical",  GetAnanlytForms(Sentence)},
             {"groups",  GetGroups(Sentence, A)},
             {"relations",  GetRelations(Sentence)},
+            {"terms",  GetThesaurusTerms(Sentence)},
         };
         sents.push_back(sent);
     }

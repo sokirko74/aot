@@ -62,7 +62,7 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 	int MainPos = -1;
 	long _modelnum = eng_termin->m_ModelNo;
 	const CInnerModel& piModel = helper.GetThes(ThesId)->m_Models[_modelnum];
-	long word_count = eng_termin->m_Items.size();
+	long word_count = eng_termin->m_TermItems.size();
 
 	// здесь будет накоплена результирующая строка
 	std::string result;
@@ -71,7 +71,7 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 	// переводим по атомарным группам
 	for(int i=0; i<word_count; i++ )
 	{
-		const CInnerSynItem&  SynItem = helper.GetThes(ThesId)->m_SynItems[eng_termin->m_Items[i]];
+		const CInnerSynItem&  SynItem = helper.GetThes(ThesId)->m_SynItems[eng_termin->m_TermItems[i]];
 
 		std::string lemma = SynItem.m_ItemStr;
 		AllLemmas += " ";

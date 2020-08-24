@@ -106,6 +106,7 @@ class CSyntaxOpt;
 class CThesaurusForSyntax
 {
 	const CSyntaxOpt*								m_pSyntaxOptions;
+
 public:
 	const CSyntaxOpt* GetOpt() const 	{		return m_pSyntaxOptions;	};
 
@@ -115,7 +116,6 @@ public:
 	virtual ~CThesaurusForSyntax();
 
 	CThesaurus* LoadThesaurus(const char* ThesName) const;
-	bool LoadThesaurus_mt(std::string tn, std::vector<CThesaurus*>* ts);
 
 	bool ReadThesaurusForSyntax(const char* ThesName, const CThesaurus* Thes, StringHashSet& p_vectorAccost);
 	bool ReadTermins(const CThesaurus* piThes, EThesType eThesType);
@@ -135,7 +135,7 @@ protected:
 	CAgramtab*							m_pEngGramTab;
 
 	virtual void AssignMainGroupsToModel(CGroups& model, const CInnerModel& piModel) = 0;
-
+	bool ReadOneTermin(const CThesaurus* piThes, const CInnerTermin& inputTerm, CTermin& outTerm) const;
 };
 
 

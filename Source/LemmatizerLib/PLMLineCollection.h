@@ -17,7 +17,7 @@
 class CPlmLineCollection 
 {
 public:
-	StringVector			m_Items;
+	StringVector			m_PlmItems;
 	CLemmatizer*			m_pLemmatizer;
 
 	CPlmLineCollection();

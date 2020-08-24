@@ -236,9 +236,9 @@ std::string CNodeAttribute::GetStr() const
 
 CNodeAttributes::~CNodeAttributes()
 {
-	for (std::list<CNodeAttribute*>::iterator it = m_Items.begin(); it != m_Items.end(); it++)
+	for (auto& a : m_Items)
 	{
-		delete *it;
+		delete a;
 	}
 };
 
@@ -268,9 +268,9 @@ std::string CChunkNode::GetStr() const
 	std::string Result = m_AtomicName;
 	Result += " ";
 	if (m_pAttributes)
-		for (std::list<CNodeAttribute*>::iterator it = m_pAttributes->m_Items.begin(); it != m_pAttributes->m_Items.end(); it++)
+		for (const auto& a : m_pAttributes->m_Items)
 		{
-			Result += (*it)->GetStr();
+			Result += a->GetStr();
 			Result += " ";
 		};
 	Trim(Result);

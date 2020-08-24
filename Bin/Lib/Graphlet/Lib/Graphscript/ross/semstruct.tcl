@@ -619,7 +619,10 @@ proc ShowAttr {attr} {
  
  set Label [$graph get $node .$attr]
 
- tk_messageBox -message $Label
+ #tk_messageBox -message $Label
+ #tk_messageBox -message "мама"
+ #tk_dialog  $editor.error $name $error_message error 0 "Ok"
+ ShowMessageMicrosoftWindows $Label
 }
 
 
@@ -637,7 +640,7 @@ proc ShowAttrEdge {attr} {
  set label [$graph get $edge .$attr]
 
 
- tk_messageBox -message $label
+ ShowMessageMicrosoftWindows $label
 }
 
 
@@ -688,11 +691,11 @@ proc ShowContextMenuForSemStruct {x y canv_x canv_y} {
 
 		 $GT($main,Menu) add command -label "Load Graph" -command {GT::action_file_open $main}
 
-		 $GT($main,Menu) add command -label "Properties of Tree Structure" -command {tk_messageBox -message $GT($main,tree_variant_props)}
+		 $GT($main,Menu) add command -label "Properties of Tree Structure" -command {ShowMessageMicrosoftWindows $GT($main,tree_variant_props)}
 
-		 $GT($main,Menu) add command -label "Statistics" -command {tk_messageBox -message $GT($main,statistics)}
+		 $GT($main,Menu) add command -label "Statistics" -command {ShowMessageMicrosoftWindows $GT($main,statistics)}
 
-		 $GT($main,Menu) add command -label "Variant Statistics" -command {tk_messageBox -message $GT($main,variants_statistics)}
+		 $GT($main,Menu) add command -label "Variant Statistics" -command {ShowMessageMicrosoftWindows $GT($main,variants_statistics)}
  
 		 $GT($main,Menu) add command -label "Remove bends" -command {GT::remove_bends $main}
 

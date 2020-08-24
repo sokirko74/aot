@@ -28,7 +28,7 @@ void CWorkGrammar::Build_FIRST_Set()
 		for (CWRI it = m_EncodedRules.begin(); it!= m_EncodedRules.end(); it++)
 		{
 			const CWorkRule& R = (*it);
-			int SymbolNo = R.m_RightPart.m_Items[0];
+			int SymbolNo = R.m_RightPart.m_RuleItems[0];
 			if (m_UniqueGrammarItems[SymbolNo].m_bMeta)
 			{
 				const std::set<size_t>& s = m_FirstSets[SymbolNo];
@@ -80,10 +80,10 @@ void CWorkGrammar::Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, std::map<s
 			//  we should add an empty prefix
 			ThisRuleResult.insert(CPrefix());
 
-			for (size_t i=0; i < std::min (PrefixLength,R.m_RightPart.m_Items.size()); i++)
+			for (size_t i=0; i < std::min (PrefixLength,R.m_RightPart.m_RuleItems.size()); i++)
 			{
 				CPrefixSet Additions;
-				int SymbolNo = R.m_RightPart.m_Items[i];
+				int SymbolNo = R.m_RightPart.m_RuleItems[i];
 				if (m_UniqueGrammarItems[SymbolNo].m_bMeta)
 					Additions = First_k[SymbolNo];
 				else
@@ -166,7 +166,7 @@ void CWorkGrammar::BuildRootPrefixes(size_t PrefixLength)
 			CWorkRule R;
 			R.m_LeftPart = it->first;
 			R.m_RuleId = RuleId++;
-			R.m_RightPart.m_Items = *it1;
+			R.m_RightPart.m_RuleItems = *it1;
 			R.m_RightPart.m_SynMainItemNo = 0;
 			R.m_RuleFeaturesNo = 0xffffffff;
 			m_RootPrefixes.insert(R);
@@ -198,25 +198,25 @@ void CWorkGrammar::Build_FOLLOW_Set()
 		for (CWRI it = m_EncodedRules.begin(); it!= m_EncodedRules.end(); it++)
 		{
 			const CWorkRule& R = (*it);
-			for (size_t i=0; i+1 < R.m_RightPart.m_Items.size(); i++)
+			for (size_t i=0; i+1 < R.m_RightPart.m_RuleItems.size(); i++)
 			{
-				int SymbolNo = R.m_RightPart.m_Items[i+1];
+				int SymbolNo = R.m_RightPart.m_RuleItems[i+1];
 
 				if (m_UniqueGrammarItems[SymbolNo].m_bMeta)
 				{
 					//  adding FIRST(SymbolNo) to  FOLLOW(R.m_RightPart[i])
 					const std::set<size_t>& s = m_FirstSets[SymbolNo];
 					for (std::set<size_t>::const_iterator it = s.begin(); it != s.end(); it++)
-						if (m_FollowSets[R.m_RightPart.m_Items[i]].insert(*it).second)
+						if (m_FollowSets[R.m_RightPart.m_RuleItems[i]].insert(*it).second)
 							bChanged  = true;			
 				}
 				else
 					//  adding SymbolNo itself to  FOLLOW(SymbolNo)
-					if (m_FollowSets[R.m_RightPart.m_Items[i]].insert(SymbolNo).second)
+					if (m_FollowSets[R.m_RightPart.m_RuleItems[i]].insert(SymbolNo).second)
 						bChanged  = true;			
 			};
 
-			int SymbolNo = R.m_RightPart.m_Items.back();
+			int SymbolNo = R.m_RightPart.m_RuleItems.back();
 			if (m_UniqueGrammarItems[SymbolNo].m_bMeta) 
 			{
 				//  adding FOLLOW(R.m_LeftPart) to  FOLLOW(SymbolNo)

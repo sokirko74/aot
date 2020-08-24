@@ -55,42 +55,42 @@ bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const C
 
 		
 
-		if ( !strcmp(strDBName, "RML_THES_OMNI") )
+if (!strcmp(strDBName, "RML_THES_OMNI"))
+{
+	try
+	{
+		std::string s_accost = "PROF";
+		std::vector<int> Res;
+		Thes->QueryLowerTermins(s_accost.c_str(), morphRussian, Res);
+		for (int i = 0; i < Res.size(); i++)
 		{
-			try 
-			{
-				std::string s_accost = "PROF";
-				std::vector<int> Res;
-				Thes->QueryLowerTermins(s_accost.c_str(), morphRussian, Res);
-				for (int i=0; i <Res.size(); i++)
-				{
-					std::string TerminStr =  Thes->m_Termins[Res[i]].m_TerminStr;
-					RmlMakeLower(TerminStr, GetOpt()->m_Language);                    
-					p_vectorAccost.insert(TerminStr);
-				};
-			}
-			catch(...)
-			{
-				ErrorMessage("SynAn", "Probably, RMLTHESLib::QueryLowerTermins function failed!");
-			}
-		}
-		//nim
-
-		bool bRes;
-
-		
-		bRes = ReadModels(*Thes, eThesType);
-		if( !bRes )
-		{
-			ErrorMessage (Format ("Cannot read models for %s", Thes->m_Name.c_str()));
-			return false;
+			std::string TerminStr = Thes->m_Termins[Res[i]].m_TerminStr;
+			RmlMakeLower(TerminStr, GetOpt()->m_Language);
+			p_vectorAccost.insert(TerminStr);
 		};
-		
-		bRes = ReadTermins(Thes, eThesType);
-
-		return bRes;
 	}
-	catch(...)
+	catch (...)
+	{
+		ErrorMessage("SynAn", "Probably, RMLTHESLib::QueryLowerTermins function failed!");
+	}
+}
+//nim
+
+bool bRes;
+
+
+bRes = ReadModels(*Thes, eThesType);
+if (!bRes)
+{
+	ErrorMessage(Format("Cannot read models for %s", Thes->m_Name.c_str()));
+	return false;
+};
+
+bRes = ReadTermins(Thes, eThesType);
+
+return bRes;
+	}
+	catch (...)
 	{
 		return false;
 	}
@@ -99,121 +99,69 @@ bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const C
 
 
 
-void CThesaurusForSyntax::SortIndexes() 
+void CThesaurusForSyntax::SortIndexes()
 {
-		CTerminSort_less pred(&m_Termins);
-		
-		for( CInt2Vector::iterator iter = m_TerminsGrouppedByLength.begin();
-			 iter != m_TerminsGrouppedByLength.end();
-			 iter++ )
-		{
-			CIntVector& IndexVector = iter->second;
-			sort(IndexVector.begin(), IndexVector.end(), pred);
-		}
+	CTerminSort_less pred(&m_Termins);
+
+	for (CInt2Vector::iterator iter = m_TerminsGrouppedByLength.begin();
+		iter != m_TerminsGrouppedByLength.end();
+		iter++)
+	{
+		CIntVector& IndexVector = iter->second;
+		sort(IndexVector.begin(), IndexVector.end(), pred);
+	}
 };
+
+bool CThesaurusForSyntax::ReadOneTermin(const CThesaurus* piThes, const CInnerTermin& inputTerm, CTermin& outTerm) const {
+	if (inputTerm.m_TermItems.empty()) {
+		return false;
+	}
+	for (const auto& i : inputTerm.m_TermItems)
+	{
+		const CInnerSynItem& piItem = piThes->m_SynItems[i];
+		if (piItem.m_ItemStr.empty() || piItem.m_ItemStr == "-")
+		{
+			return false;
+		}
+		outTerm.push_back(piItem.m_ItemStr.c_str());
+	};
+
+	outTerm.m_TerminId = inputTerm.m_TerminId;
+	outTerm.m_strTermin = inputTerm.m_TerminStr.c_str();
+	return true;
+}
 
 bool CThesaurusForSyntax::ReadTermins(const CThesaurus* piThes, EThesType eThesType)
 {
-	std::map<EThesType, std::vector<CGroups> >::const_iterator it = m_AllThesModels.find(eThesType);
-	assert (it != m_AllThesModels.end());
-	const std::vector<CGroups>& Models = it->second;
+	const std::vector<CGroups>& Models = m_AllThesModels.find(eThesType)->second;
+	int termId = (int)m_Termins.size();
 
-	int i;
-	try
-	{
-		
+	for (const auto& inputTerm : piThes->m_Termins) {
+		if ((inputTerm.m_ModelNo < 0) || inputTerm.m_ModelNo >= piThes->m_Models.size()) {
+			continue;
+		}
+		const auto& model = piThes->m_Models[inputTerm.m_ModelNo];
+		if (!model.IsRussian()) {
+			continue;
+		}
+		CTermin termin;
+		termin.m_pModel = &(Models[inputTerm.m_ModelNo]);
+		termin.m_ThesType = eThesType;
 
-		size_t Count =	piThes->m_Termins.size();
-		size_t iTerminsCount = m_Termins.size();
-		CInt2Vector::iterator iter;		
-
-		size_t iModelsCount = piThes->m_Models.size();
-
-		bool bBadTermin; 
-
-
-		for( i = 0 ; i < Count ; i++ )
-		{
-			try
+		if (ReadOneTermin(piThes, inputTerm, termin)) {
+			m_Termins.push_back(termin);
+			auto iter = m_TerminsGrouppedByLength.find(inputTerm.m_TermItems.size());
+			if (iter == m_TerminsGrouppedByLength.end())
 			{
-				bBadTermin = false;
-				const CInnerTermin& piTermin =  piThes->m_Termins[i];									
-				const char* TerminStr = piTermin.m_TerminStr.c_str();
-				long ModelNo = piTermin.m_ModelNo;
-				long iTerminID = piTermin.m_TerminId;		
-
-				CTermin termin;
-				long WordCountInTermin = piTermin.m_Items.size();
-
-				bool bRus = (ModelNo >= 0) && ( piThes->m_Models[ModelNo].IsRussian() );
-
-				if( ( ModelNo != -1 ) && ( ModelNo < iModelsCount ) && ( WordCountInTermin > 0 ) && bRus)
-				{
-
-					termin.m_pModel = & (Models[ModelNo]);
-					termin.m_TerminId = iTerminID;
-					bool bInOb = true;
-					for (long j=0; j < WordCountInTermin; j++)
-					{
-						const CInnerSynItem& piItem = piThes->m_SynItems[piTermin.m_Items[j]];;
-						const char* str = piItem.m_ItemStr.c_str();
-						
-						//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
-						//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
-						//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ" -  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
-						
-						if(		str == 0
-							||	(strlen(str) == 0)
-							||	(!strcmp(str,"-") )
-						  )
-						{
-							bBadTermin = true;
-
-							break;
-						}
-
-						termin.push_back(str);
-					};
-
-
-					if( bBadTermin )
-					{
-						//printf ("%s - bad termin\n", TerminStr);
-						continue;
-					};
-
-					termin.m_strTermin = TerminStr;
-					termin.m_ThesType = eThesType;
-					m_Termins.push_back(termin);
-					iter = m_TerminsGrouppedByLength.find(WordCountInTermin);
-					if(iter == m_TerminsGrouppedByLength.end() )
-					{
-						CIntVector IndexVector;
-						IndexVector.push_back(iTerminsCount);
-						m_TerminsGrouppedByLength.insert(CInt2Vector::value_type(WordCountInTermin, IndexVector));
-						//printf ("The maximal length of termin is %i (%s) \n",WordCountInTermin, TerminStr);
-					}
-					else
-					{
-						iter->second.push_back(iTerminsCount);
-					}
-
-					iTerminsCount++;
-				}
+				m_TerminsGrouppedByLength[inputTerm.m_TermItems.size()] = { termId };
 			}
-			catch(...)
+			else
 			{
-				continue;
-			}	
-
-		}		
-
-		
-	}
-	catch(...)
-	{
-		return false;
-	}
+				iter->second.push_back(termId);
+			}
+			++termId;
+		}
+	}		
 	return true;
 }
 

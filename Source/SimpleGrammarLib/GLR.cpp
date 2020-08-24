@@ -374,7 +374,7 @@ void CGLRParser::ReduceOnePath(const std::set<CInputSymbol>& Symbols, const CPen
 		//assert(Path.size()%2 == 0);
 
 		for	(int i=Path.size()-2; i>0; i-=2)
-			S.m_Items.push_back(Path[i]);
+			S.m_ChildItems.push_back(Path[i]);
 
 		m_SymbolNodes[NewSymbolNode].m_ParseChildren.push_back(S);
 	};
@@ -539,7 +539,7 @@ std::string CGLRParser::GetDotStringOfSymbolNode(size_t SymbolNodeNo) const
 
 	for (size_t i=0; i<C.m_ParseChildren.size(); i++)
 	{
-		const std::vector<size_t>& v = C.m_ParseChildren[i].m_Items;
+		const std::vector<size_t>& v = C.m_ParseChildren[i].m_ChildItems;
 		bool bFound = false;		
 		std::string CurrentResult;
 		for (size_t j=0; j < v.size(); j++)
@@ -656,7 +656,7 @@ void CGLRParser::GetParseNodesRecursiveWithoutSyntaxAmbiguity(size_t SymbolNodeN
 	// the "children ambiguity"
 	if (!m_SymbolNodes[SymbolNodeNo].m_ParseChildren.empty())
 	{
-		const std::vector<size_t>& v = m_SymbolNodes[SymbolNodeNo].m_ParseChildren[0].m_Items;
+		const std::vector<size_t>& v = m_SymbolNodes[SymbolNodeNo].m_ParseChildren[0].m_ChildItems;
 		for (size_t j=0; j < v.size(); j++)
 			GetParseNodesRecursiveWithoutSyntaxAmbiguity(v[j], Nodes, bShouldBeLeaf);
 	};
@@ -673,7 +673,7 @@ void CGLRParser::GetParseNodesRecursive(size_t SymbolNodeNo, std::vector< std::s
 
 	for (size_t i=0; i< Node.m_ParseChildren.size(); i++)
 	{
-		const std::vector<size_t>& v = Node.m_ParseChildren[i].m_Items;
+		const std::vector<size_t>& v = Node.m_ParseChildren[i].m_ChildItems;
 
 		for (size_t j=0; j < v.size(); j++)
 		{
@@ -700,10 +700,10 @@ size_t CGLRParser::GetMainWordRecursive(size_t SymbolNodeNo)  const
 	const CGLRRuleInfo* pRule = Set.m_ReduceRule; 
 	assert(pRule);
 	assert (pRule->m_SynMainItemNo < pRule->m_RuleLength);
-	assert (pRule->m_RuleLength == Set.m_Items.size());
+	assert (pRule->m_RuleLength == Set.m_ChildItems.size());
 
 	
-	size_t MainChildNo = Set.m_Items[pRule->m_SynMainItemNo];
+	size_t MainChildNo = Set.m_ChildItems[pRule->m_SynMainItemNo];
 
 	if (m_SymbolNodes[MainChildNo].m_ParseChildren.empty())
 		return m_SymbolNodes[MainChildNo].m_InputStart;

@@ -93,7 +93,8 @@ set GT_options(.graphlet_0,grid) {0}
 set GT_options(adjust_size_to_label) {1}
 set GT_options(developer) {1}
 set GT_options(constraint_fr_phase3_damping) {15.0}
-set GT_options(system_default_font) {MS Sans Serif}
+#set GT_options(system_default_font) {MS Sans Serif}
+set GT_options(system_default_font) {system}
 set GT_options(fileselector_postscript_types) {
 	    {{Postscript Files} {*.ps}}
 	    {{All Files} {*}}
@@ -165,7 +166,7 @@ set GT_options(edit_mode_on_extra_mouse_button) {0}
 set GT_options(tunkelang_depth) {100}
 set GT_options(radial_center_parent) {1}
 set GT_options(draw_edges_above) {0}
-set GT_options(system_default_font_size) {8}
+set GT_options(system_default_font_size) {10}
 set GT_options(fileselector_graphed_graphtypes) {
 	    {{Graphs} {*.g*}}
 	    {{All Files} {*}}

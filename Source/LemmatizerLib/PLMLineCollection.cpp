@@ -29,7 +29,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 
 	try
 	{
-		m_Items.clear();
+		m_PlmItems.clear();
 
         std::vector<CFormInfo> lem_results;
 		lem_results.reserve(5);
@@ -49,7 +49,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 
 			if (bInFixedExpression || Gr->HasDescr(lineNo, OBeg))
 			{
-				m_Items.push_back(strProcess);
+				m_PlmItems.push_back(strProcess);
 				if (Gr->HasDescr(lineNo, OEXPR2))	
 					bInFixedExpression = false;
 				continue;
@@ -62,7 +62,7 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 						!Gr->HasDescr(lineNo, OLw), true, lem_results);
 
 				if (lem_results.empty() ) {
-					m_Items.push_back(strProcess+ Format(" -?? %s ?? -1 0",Gr->GetUppercaseToken(lineNo)) );
+					m_PlmItems.push_back(strProcess+ Format(" -?? %s ?? -1 0",Gr->GetUppercaseToken(lineNo)) );
 				}
 				else
 					for( int i=0; i < lem_results.size(); i++ )
@@ -70,12 +70,12 @@ bool CPlmLineCollection::ProcessPlmLines(const CGraphmatFile* piGraphmatFile)
 						std::string line;
 						if (i > 0) line = 	"  ";
                         line +=  strProcess + " " + lem_results[i].FormatAsInPlmLine();
-						m_Items.push_back(line);
+						m_PlmItems.push_back(line);
 					}
 			}
 			else
 			{
-				m_Items.push_back(strProcess);
+				m_PlmItems.push_back(strProcess);
 			}
 		}
 	}
@@ -96,7 +96,7 @@ bool CPlmLineCollection::SaveToFile(std::string filename) const
 	{
 		std::ofstream outp(filename.c_str(), std::ios::binary);
 		if (!outp.is_open()) return false;
-		for (auto i : m_Items) {
+		for (auto i : m_PlmItems) {
 			outp <<  convert_to_utf8(i, m_pLemmatizer->m_Language) << "\n";
 		}
 	}

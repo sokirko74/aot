@@ -66,7 +66,7 @@ struct CInnerTermin {
 	std::string m_AbbrForm;
 	int	   m_TerminId;
 	short  m_ModelNo;
-	std::vector<long> m_Items;
+	std::vector<long> m_TermItems;
 };
 
 

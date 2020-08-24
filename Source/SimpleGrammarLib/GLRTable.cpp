@@ -10,7 +10,7 @@ void	CGLRRuleInfo::Init(const CWorkRule* p)
 {
 	m_RuleId = p->m_RuleId;
 	m_LeftPart = p->m_LeftPart;
-	m_RuleLength = p->m_RightPart.m_Items.size();
+	m_RuleLength = p->m_RightPart.m_RuleItems.size();
 	m_SynMainItemNo = p->m_RightPart.m_SynMainItemNo;
 	m_RuleFeaturesNo = p->m_RuleFeaturesNo;
 };

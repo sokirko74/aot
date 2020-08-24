@@ -9,41 +9,41 @@
 
 STDMETHODIMP CCOMPLMLineCollection::get_Count(/*[out, retval]*/ long* pVal)
 {
-	*pVal = m_Items.size();
+	*pVal = m_PlmItems.size();
 	return S_OK;
 }
 
 STDMETHODIMP CCOMPLMLineCollection::get_Item(/*[in]*/ long pos, /*[out, retval]*/ BSTR* pVal)
 {
-	if (pos >= m_Items.size())
+	if (pos >= m_PlmItems.size())
 		return E_FAIL;
-	std::string s = m_Items[pos];
+	std::string s = m_PlmItems[pos];
 	s = convert_to_utf8(s, m_pLemmatizer->m_Language);
 	*pVal = _bstr_t(s.c_str()).copy();
 	return S_OK;
 }
 STDMETHODIMP CCOMPLMLineCollection::put_Item(/*[in]*/ long pos, /*[in]*/ BSTR newVal)
 {
-	if (pos >= m_Items.size())
+	if (pos >= m_PlmItems.size())
 		return E_FAIL;
 	std::string s = (const char*)_bstr_t(newVal);
 	s = convert_from_utf8(s.c_str(), m_pLemmatizer->m_Language);
-	m_Items[pos] = s;
+	m_PlmItems[pos] = s;
 	return S_OK;
 }
 STDMETHODIMP CCOMPLMLineCollection::AddLine(BSTR LineStr)
 {
 	std::string s = (const char*)_bstr_t(LineStr);
 	s = convert_from_utf8(s.c_str(), m_pLemmatizer->m_Language);
-	m_Items.push_back(s);
+	m_PlmItems.push_back(s);
 	return S_OK;
 }
 
 STDMETHODIMP CCOMPLMLineCollection::Remove(/*[in]*/ long pos)
 {
-	if (pos >= m_Items.size())
+	if (pos >= m_PlmItems.size())
 		return E_FAIL;
-	m_Items.erase(m_Items.begin() + pos);
+	m_PlmItems.erase(m_PlmItems.begin() + pos);
 	return S_OK;
 }
 
@@ -77,7 +77,7 @@ STDMETHODIMP CCOMPLMLineCollection::AttachLemmatizer(/*[in]*/ ILemmatizer* pVal)
 
 STDMETHODIMP CCOMPLMLineCollection::Clear()
 {
-	m_Items.clear();
+	m_PlmItems.clear();
 	return S_OK;
 }
 
@@ -92,8 +92,8 @@ STDMETHODIMP CCOMPLMLineCollection::ProcessHyphenWords(IUnknown* piGraphan)
 STDMETHODIMP CCOMPLMLineCollection::CopyItems(IUnknown* piPlmLinesFrom)
 {
 	CCOMPLMLineCollection* pFrom = reinterpret_cast<CCOMPLMLineCollection*>(piPlmLinesFrom);
-	m_Items.clear();
-	m_Items = pFrom->m_Items;
+	m_PlmItems.clear();
+	m_PlmItems = pFrom->m_PlmItems;
 	return S_OK;
 }
 

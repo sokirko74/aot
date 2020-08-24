@@ -41,6 +41,8 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 6. To compile COM-objects you need to run Visual Studio as administrator.
 
+7. To run Windows GUI Rossdev.exe you must set Russian everywhere in Region Setting.
+
 =================   Compilation =======================
   export RML=/home/sokirko/RML
   export CXX=/usr/bin/g++

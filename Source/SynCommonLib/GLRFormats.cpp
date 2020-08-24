@@ -142,7 +142,7 @@ CGroup CSentence::ConvertFromTomitaNodeToCGroup(const CGLRParser& Parser, const 
 	// we take into account only the first children std::set
 	const CParsingChildrenSet&  Set = Node.m_ParseChildren[0];
 	const CGLRRuleInfo* pRule = Set.m_ReduceRule; 
-	size_t MainChildNo = Set.m_Items[pRule->m_SynMainItemNo];
+	size_t MainChildNo = Set.m_ChildItems[pRule->m_SynMainItemNo];
 	G.m_MainGroup.m_iFirstWord = Parser.m_SymbolNodes[MainChildNo].m_InputStart;
 	G.m_MainGroup.m_iLastWord = Parser.m_SymbolNodes[MainChildNo].m_InputEnd - 1;
 

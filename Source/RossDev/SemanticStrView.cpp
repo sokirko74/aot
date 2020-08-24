@@ -10,6 +10,7 @@
 #include "ProgressForm.h"
 #include "SemanticStrView.h"
 #include <atlbase.h>
+#include <sstream>
 
 
 #ifdef _DEBUG
@@ -236,15 +237,45 @@ LRESULT CSemanticStrView::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 			case WM_CUT: 
 			case WM_GETTEXT: 
 			case WM_SETFOCUS: ::SendMessage(m_tkhwnd,message,wParam,lParam); break;
-			//case WM_PASTE: PasteClipboard(); break;
-
- 				
+				
 				break;
 		}
 	}
 
 	return CView::WindowProc(message, wParam, lParam);
 }
+
+std::string WstrToUtf8Str(const std::wstring& wstr)
+{
+	std::string retStr;
+	if (!wstr.empty())
+	{
+		int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
+
+		if (sizeRequired > 0)
+		{
+			std::vector<char> utf8String(sizeRequired);
+			int bytesConverted = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(),
+				-1, &utf8String[0], utf8String.size(), NULL,
+				NULL);
+			if (bytesConverted != 0)
+			{
+				retStr = &utf8String[0];
+			}
+			else
+			{
+				std::stringstream err;
+				err << __FUNCTION__
+					<< " std::string WstrToUtf8Str failed to convert wstring '"
+					<< wstr.c_str() << L"'";
+				throw std::runtime_error(err.str());
+			}
+		}
+	}
+	return retStr;
+}
+
+
 void CSemanticStrView::PasteClipboard() 
 {
 	OpenClipboard();
@@ -254,19 +285,21 @@ void CSemanticStrView::PasteClipboard()
         return;    
     }
 
-	wchar_t s  [5000];
+	wchar_t wstr  [5000];
 	if ( GlobalSize(hMem) > 4999) 
 	{
 		AfxMessageBox (" Text is too big!");
 	};
 
-	CopyMemory( s, hMem, GlobalSize(hMem));
-	s[GlobalSize(hMem)] = 0;
-    CString Q = s;
+	CopyMemory( wstr, hMem, GlobalSize(hMem));
+	wstr[GlobalSize(hMem)] = 0;
+	std::string utf8 = WstrToUtf8Str(wstr);
+	std::string str1251 = convert_from_utf8(utf8.c_str(), morphRussian);
+    CString Q = str1251.c_str();
 	char cmd[5200];
 	strcpy (cmd, "$main.controls.mainEntry insert 0.0 \"");
     for (size_t i=0; i < Q.GetLength();i++)
-		if (s[i] == '"')
+		if (Q[i] == '"')
 			strcat (cmd, "\\\"");
 		else
 		{   size_t l = strlen(cmd);
@@ -688,7 +721,14 @@ int PasteClipboard (ClientData clienData,
 
 
 
-
+int ShowMessageMicrosoftWindows(ClientData clienData,
+	Tcl_Interp* interp,
+	int argc, char* argv[])
+{
+	std::string s = convert_to_utf8(argv[1], morphRussian);
+	AfxMessageBox(s.c_str());
+	return 1;
+}
 
 int Update    (ClientData clienData, 
 			   Tcl_Interp* interp, 

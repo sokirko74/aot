@@ -5,13 +5,13 @@
 
 bool CLRItem::IsFinished() const
 {
-	return m_pRule->m_RightPart.m_Items.size() == m_DotSymbolNo;
+	return m_pRule->m_RightPart.m_RuleItems.size() == m_DotSymbolNo;
 };
 
 
 int CLRItem::GetSymbolNo() const
 {
-	return m_pRule->m_RightPart.m_Items[m_DotSymbolNo];
+	return m_pRule->m_RightPart.m_RuleItems[m_DotSymbolNo];
 };
 
 

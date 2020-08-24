@@ -45,13 +45,13 @@ std::string CWorkGrammar::GetLeftPartStr(std::set<CWorkRule>::const_iterator it)
 std::string CWorkGrammar::GetRuleStr(const CWorkRule &R, int AsteriskNo, bool bPrintFeatures) const {
     std::string Result = m_UniqueGrammarItems[R.m_LeftPart].GetDumpString() + "->";
     size_t l = 0;
-    for (; l < R.m_RightPart.m_Items.size(); l++) {
+    for (; l < R.m_RightPart.m_RuleItems.size(); l++) {
         if (AsteriskNo == l)
             Result += "*";
 
-        Result += m_UniqueGrammarItems[R.m_RightPart.m_Items[l]].GetDumpString();
+        Result += m_UniqueGrammarItems[R.m_RightPart.m_RuleItems[l]].GetDumpString();
 
-        if (l + 1 != R.m_RightPart.m_Items.size())
+        if (l + 1 != R.m_RightPart.m_RuleItems.size())
             Result += ", ";
     };
     if (AsteriskNo == l)
@@ -253,8 +253,8 @@ bool CWorkGrammar::CreateTokenList(std::string &ErrorStr) {
 
 
 bool CWorkGrammar::HasOnlyTerminalOnTheRight(CWRI it) const {
-    for (size_t i = 0; i < it->m_RightPart.m_Items.size(); i++) {
-        const CGrammarItem &I = m_UniqueGrammarItems[it->m_RightPart.m_Items[i]];
+    for (size_t i = 0; i < it->m_RightPart.m_RuleItems.size(); i++) {
+        const CGrammarItem &I = m_UniqueGrammarItems[it->m_RightPart.m_RuleItems[i]];
         if (I.m_bMeta) return false;
     };
     return true;
@@ -263,8 +263,8 @@ bool CWorkGrammar::HasOnlyTerminalOnTheRight(CWRI it) const {
 
 size_t CWorkGrammar::GetCountOfSymbolOnTheRight(CWRI it, size_t ItemNo) const {
     size_t Result = 0;
-    for (size_t l = 0; l < it->m_RightPart.m_Items.size(); l++)
-        if (it->m_RightPart.m_Items[l] == ItemNo)
+    for (size_t l = 0; l < it->m_RightPart.m_RuleItems.size(); l++)
+        if (it->m_RightPart.m_RuleItems[l] == ItemNo)
             Result++;
 
     return Result;
@@ -342,7 +342,7 @@ void CWorkGrammar::BuildAutomat(std::set<CWorkRule> &EncodedRules) {
 bool CWorkGrammar::IsValid() const {
     for (CWRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
         const CWorkRightRulePart &R = it->m_RightPart;
-        if (R.m_SynMainItemNo >= R.m_Items.size()) {
+        if (R.m_SynMainItemNo >= R.m_RuleItems.size()) {
 
             ErrorMessage(Format("%s has no syntax root", GetRuleStr(it).c_str()));
             return false;
@@ -370,8 +370,8 @@ void CWorkGrammar::DeleteUnusedSymbols() {
     for (WRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
         CWorkRule R = (*it);
         UpdateOld2NewMap(Old2New, R.m_LeftPart, CountOfUsedSymbols);
-        for (int l = 0; l < R.m_RightPart.m_Items.size(); l++)
-            UpdateOld2NewMap(Old2New, (size_t &) R.m_RightPart.m_Items[l], CountOfUsedSymbols);
+        for (int l = 0; l < R.m_RightPart.m_RuleItems.size(); l++)
+            UpdateOld2NewMap(Old2New, (size_t &) R.m_RightPart.m_RuleItems[l], CountOfUsedSymbols);
 
         NewEncodedRules.insert(R);
     };
@@ -434,8 +434,8 @@ bool SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item
 
 
         { // copy working attributes from Item to the root of Rule
-            assert (NewRule.m_RightPart.m_SynMainItemNo < NewRule.m_RightPart.m_Items.size());
-            int &MainItemId = NewRule.m_RightPart.m_Items[NewRule.m_RightPart.m_SynMainItemNo];
+            assert (NewRule.m_RightPart.m_SynMainItemNo < NewRule.m_RightPart.m_RuleItems.size());
+            int &MainItemId = NewRule.m_RightPart.m_RuleItems[NewRule.m_RightPart.m_SynMainItemNo];
             CGrammarItem RightPart = Grammar.m_UniqueGrammarItems[MainItemId];
             RightPart.CopyNonEmptyWorkAttributesFrom(Item);
             MainItemId = Grammar.GetItemId(RightPart);
@@ -479,8 +479,8 @@ bool CWorkGrammar::CheckCoherence() const {
 
     for (CWRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
         const CWorkRule &R = (*it);
-        for (size_t j = 0; j < R.m_RightPart.m_Items.size(); j++) {
-            size_t id = R.m_RightPart.m_Items[j];
+        for (size_t j = 0; j < R.m_RightPart.m_RuleItems.size(); j++) {
+            size_t id = R.m_RightPart.m_RuleItems[j];
             const CGrammarItem &I = m_UniqueGrammarItems[id];
             if (I.m_bMeta) {
                 if (AllLeftParts.find(id) == AllLeftParts.end()) {
@@ -666,8 +666,8 @@ bool CWorkGrammar::AugmentGrammar() {
     m_RuleFeatures.push_back(std::vector<CRuleFeature>());
     R.m_LeftPart = m_UniqueGrammarItems.size() - 1;
     R.m_RightPart.m_SynMainItemNo = 0;
-    R.m_RightPart.m_Items.push_back(i);
-    R.m_RightPart.m_Items.push_back(m_UniqueGrammarItems.size() - 2);
+    R.m_RightPart.m_RuleItems.push_back(i);
+    R.m_RightPart.m_RuleItems.push_back(m_UniqueGrammarItems.size() - 2);
     m_EncodedRules.insert(R);
     return true;
 };

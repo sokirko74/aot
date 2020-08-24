@@ -70,9 +70,9 @@ bool CSyntaxHolder::RunMapost(CPlmLineCollection& mapostPlmLines)
 		return false;
 
 	};
-	mapostPlmLines.m_Items.clear();
+	mapostPlmLines.m_PlmItems.clear();
 	mapostPlmLines.m_pLemmatizer = m_PlmLines.m_pLemmatizer;
-	m_pPostMorph->SwapResults(mapostPlmLines.m_Items);
+	m_pPostMorph->SwapResults(mapostPlmLines.m_PlmItems);
 	return true;
 }
 
@@ -80,7 +80,7 @@ bool CSyntaxHolder::GetSentencesFromSynAn(std::string utf8str, bool bFile)
 {
 	try {
 		m_Synan.ClearSentences();
-		m_PlmLines.m_Items.clear();
+		m_PlmLines.m_PlmItems.clear();
 		int CountOfWords;
 
 		if (!GetMorphology(utf8str, bFile, CountOfWords))

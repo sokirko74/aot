@@ -224,6 +224,8 @@ extern int AnswerBySavedSentences(ClientData clienData, Tcl_Interp* interp, int 
 extern int CreateSynStr(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int GetOtherRelations(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int ShowArticle(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
+extern int ShowMessageMicrosoftWindows(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
+
 /////////////////////////////////////////////////////////////////////////////
 // CRossDevApp initialization
 
@@ -394,6 +396,7 @@ BOOL CRossDevApp::InitInstance()
 	Tcl_CreateCommand(theInterp, "FindSituations", FindSituations, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 	Tcl_CreateCommand(theInterp, "TranslateToEnglish", TranslateToEnglish, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 	Tcl_CreateCommand(theInterp, "PasteClipboard", PasteClipboard, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
+	Tcl_CreateCommand(theInterp, "ShowMessageMicrosoftWindows", ShowMessageMicrosoftWindows, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 	Tcl_CreateCommand(theInterp, "BuildSentence", BuildSentence, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 	Tcl_CreateCommand(theInterp, "SyntRusSentence", SyntRusSentence, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 

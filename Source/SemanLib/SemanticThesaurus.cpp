@@ -295,12 +295,12 @@ void CRusSemStructure::GetThesInterps(std::string UnitStr, const CRusSemWord& W,
 			CharCase = UpLow;
 
 		const CInnerTermin& T = Thes->m_Termins[TerminNo];
-		assert(T.m_Items.size() > 0);
+		assert(T.m_TermItems.size() > 0);
 		// assert(T.m_Items.size() == 1); этого делать нельзя, поскольку дефисные слова имеют леммы для каждой дефисной части
 
 		if	(CharCase == LowLow)
 		{
-			const CInnerSynItem&  SynItem = Thes->m_SynItems[T.m_Items[0]];
+			const CInnerSynItem&  SynItem = Thes->m_SynItems[T.m_TermItems[0]];
 			if	(		(SynItem.m_Flags & siUpLw) 
 					||	(SynItem.m_Flags & siUpUp)
 				)
@@ -431,7 +431,7 @@ struct CTerminItem {
 struct CSemanTermin {
 	long m_ThesaurusId;   
 	UINT m_TerminNo;
-	std::vector<CTerminItem> m_Items;
+	std::vector<CTerminItem> m_TermItems;
 	long	m_TextItemsCount;
 	long	m_TerminId;
 
@@ -468,7 +468,7 @@ void LoadTerminItems(CRusSemStructure& R, long ThesaurusId, long TextItemId,  co
 			Result.push_back(T);
 			It = Result.begin()+Result.size() - 1;
 		};
-		It->m_Items.push_back(I);
+		It->m_TermItems.push_back(I);
 	};
 };
 
@@ -481,39 +481,39 @@ bool CheckAndBuildOneDividedTermin(CRusSemStructure& R,const CSemanTermin& T,  c
 		const CDopField& F = DopFields[DopFieldNo];
 		long ItemNo1 = -1;
 		long ItemNo2 = -1;
-		for (long j=0; j< T.m_Items.size(); j++)
-		if (T.m_Items[j].m_bSelected)
-			if (T.m_Items[j].m_ItemNo == F.m_Word1)
+		for (long j=0; j< T.m_TermItems.size(); j++)
+		if (T.m_TermItems[j].m_bSelected)
+			if (T.m_TermItems[j].m_ItemNo == F.m_Word1)
 				ItemNo1 = j;
 			else
-			  if (T.m_Items[j].m_ItemNo == F.m_Word2)
+			  if (T.m_TermItems[j].m_ItemNo == F.m_Word2)
 				ItemNo2 = j;
 		// если не найдено элементов, это, скорее всего, означает, что неверно составлено поле AUX
 		if ( (ItemNo1 == -1) || (ItemNo2 == -1)) return false;
 
 		// если элементы уже являются частью тезаурусной  интерпретации надо выйти
-		if (R.m_Nodes[T.m_Items[ItemNo1].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
-		if (R.m_Nodes[T.m_Items[ItemNo2].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
+		if (R.m_Nodes[T.m_TermItems[ItemNo1].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
+		if (R.m_Nodes[T.m_TermItems[ItemNo2].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
 
 		// Ищем отношение, которое их связывает
-		long RelNo = R.FindFirstRelation (T.m_Items[ItemNo2].m_TextItemId, T.m_Items[ItemNo1].m_TextItemId);
+		long RelNo = R.FindFirstRelation (T.m_TermItems[ItemNo2].m_TextItemId, T.m_TermItems[ItemNo1].m_TextItemId);
 		if (RelNo == -1) return false;
 		if (R.m_Relations[RelNo].m_Valency.m_RelationStr !=  F.m_RelationStr) return false;
 	};
 
 	long CollocId = -1;
-	for (long j=0; j< T.m_Items.size(); j++)
-	if (T.m_Items[j].m_bSelected)
+	for (long j=0; j< T.m_TermItems.size(); j++)
+	if (T.m_TermItems[j].m_bSelected)
 	{
-		long Nd = T.m_Items[j].m_TextItemId;
+		long Nd = T.m_TermItems[j].m_TextItemId;
 		if (CollocId == -1)
 		  CollocId = R.m_Nodes[Nd].GetMinWordNo();
 		R.m_Nodes[Nd].m_CollocId = CollocId;
 		R.m_Nodes[Nd].m_Colloc.m_Type = ThesType;
 		R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_ThesaurusId =  T.m_ThesaurusId;
-		R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_ItemNo = T.m_Items[j].m_ItemNo-1;
+		R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_ItemNo = T.m_TermItems[j].m_ItemNo-1;
 		R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_TerminId = T.m_TerminId; 
-		R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_bMainWord = (MainItemNo == T.m_Items[j].m_ItemNo);
+		R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_bMainWord = (MainItemNo == T.m_TermItems[j].m_ItemNo);
 	};
 	return true;
 };
@@ -524,9 +524,9 @@ bool CheckIfAllItemsFoundForDividedTermin(const CRusSemStructure& R, const CSema
 {
 	std::vector<bool> V (T.m_TextItemsCount, false);
 
-	for (int i = 0;  i < T.m_Items.size(); i++)
+	for (int i = 0;  i < T.m_TermItems.size(); i++)
 	{
-		int z = T.m_Items[i].m_ItemNo - 1;
+		int z = T.m_TermItems[i].m_ItemNo - 1;
 		assert (z <  V.size());
 		V[z] = true;
 	};
@@ -541,13 +541,13 @@ bool CheckIfAllItemsFoundForDividedTermin(const CRusSemStructure& R, const CSema
 void GetThesInterpFirstVariant(CSemanTermin& T)
 {
 	std::vector<bool> V (T.m_TextItemsCount, false);
-	for (int i = 0; i <T.m_Items.size(); i++)
+	for (int i = 0; i <T.m_TermItems.size(); i++)
 	{
-		int z = T.m_Items[i].m_ItemNo - 1;
+		int z = T.m_TermItems[i].m_ItemNo - 1;
 		assert (z <  V.size());
 		if( !V[z] )
 		{
-			T.m_Items[i].m_bSelected = true;
+			T.m_TermItems[i].m_bSelected = true;
 			V[z] = true;
 		};
 	};
@@ -556,31 +556,31 @@ void GetThesInterpFirstVariant(CSemanTermin& T)
 
 bool NextPosition (CSemanTermin& T, int i)
 {
-	T.m_Items[i].m_bSelected = false;
+	T.m_TermItems[i].m_bSelected = false;
 
 	int k = i+1;
-	for (; k < T.m_Items.size(); k++)
-		if (T.m_Items[k].m_ItemNo == T.m_Items[i].m_ItemNo)
+	for (; k < T.m_TermItems.size(); k++)
+		if (T.m_TermItems[k].m_ItemNo == T.m_TermItems[i].m_ItemNo)
 		{
-			T.m_Items[k].m_bSelected = true; 
+			T.m_TermItems[k].m_bSelected = true; 
 			return true;
 		};
 
-	for (k = 0; k < T.m_Items.size(); k++)
-		if (T.m_Items[k].m_ItemNo == T.m_Items[i].m_ItemNo)
+	for (k = 0; k < T.m_TermItems.size(); k++)
+		if (T.m_TermItems[k].m_ItemNo == T.m_TermItems[i].m_ItemNo)
 			break;
 
-	assert (k < T.m_Items.size());
-	T.m_Items[k].m_bSelected = true; 
+	assert (k < T.m_TermItems.size());
+	T.m_TermItems[k].m_bSelected = true; 
 	return false;
 };
 
 bool GetInterpNextVariant(CSemanTermin& T)
 {
 	int CurrItemNo = 1;
-	for (int i = 0; i <T.m_Items.size(); i++)
-	if (T.m_Items[i].m_bSelected)
-		if (T.m_Items[i].m_ItemNo == CurrItemNo)
+	for (int i = 0; i <T.m_TermItems.size(); i++)
+	if (T.m_TermItems[i].m_bSelected)
+		if (T.m_TermItems[i].m_ItemNo == CurrItemNo)
 		{	
 			if (NextPosition (T, i)) return true;
 			CurrItemNo++;
@@ -618,7 +618,7 @@ try {
 
 		const CThesaurus* Thes  = m_pData->GetThes(T.m_ThesaurusId);
 
-		T.m_TextItemsCount = Thes->m_Termins[T.m_TerminNo].m_Items.size();
+		T.m_TextItemsCount = Thes->m_Termins[T.m_TerminNo].m_TermItems.size();
 
 		if (!CheckIfAllItemsFoundForDividedTermin(*this, T)) continue;
 		// дальше  мы будем уничтожать элементы вектора  T.m_Items, оставляя в нем только те, 
@@ -746,7 +746,7 @@ try {
 		};
 
 		for (i=0; i< Termins.size(); i++)
-		  if (Termins[i].m_Items.size() == m_Nodes[NodeNo].m_Words.size()) 
+		  if (Termins[i].m_TermItems.size() == m_Nodes[NodeNo].m_Words.size()) 
 			  break;
 
 		if (i==Termins.size()) continue;
@@ -757,9 +757,9 @@ try {
 		long TerminId = Thes->m_Termins[T.m_TerminNo].m_TerminId;
 		m_Nodes[NodeNo].m_TerminId = TerminId;
 		const CInnerTermin& Term = Thes->m_Termins[T.m_TerminNo];
-		assert(!Term.m_Items.empty());
+		assert(!Term.m_TermItems.empty());
 		
-		const CInnerSynItem& SynItem = Thes->m_SynItems[Term.m_Items[0]];
+		const CInnerSynItem& SynItem = Thes->m_SynItems[Term.m_TermItems[0]];
 		if  (SynItem.m_Flags & siUpUp)
 			m_Nodes[NodeNo].m_Words[0].m_CharCase  = UpUp;
 

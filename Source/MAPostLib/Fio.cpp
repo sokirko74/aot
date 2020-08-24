@@ -22,7 +22,7 @@ struct CFIOFormat
 {
 	std::string m_FormatStr;
 	bool   m_GleicheCase;
-	std::vector<CFIOItem> m_Items;
+	std::vector<CFIOItem> m_FioItems;
 	CFIOFormat() {};
 
 	CFIOFormat(std::string  FormatStr, bool GleicheCase)
@@ -64,7 +64,7 @@ struct CFIOFormat
 			CFIOItem I;
 			I.m_fiType = t;
 			I.m_ItemStr = s;
-			m_Items.push_back(I);
+			m_FioItems.push_back(I);
 		};
 	};
 };
@@ -79,7 +79,7 @@ static void GetCommonVariants(const std::vector<SmallHomonymsVec>& Parents,
 	if (Position < V.size())
 		for (long i = 0; i < Parents[Position].size(); i++)
 		{
-			V.m_Items[Position] = Parents[Position].m_Items[i];
+			V.m_VectorItems[Position] = Parents[Position].m_VectorItems[i];
 			GetCommonVariants(Parents, V, Variants, Position + 1);
 		}
 	else
@@ -129,10 +129,10 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 	std::vector<SmallHomonymsVec> Hypots;
 	SmallWordsVec FioWords;
 
-	Hypots.resize(Format->m_Items.size());
+	Hypots.resize(Format->m_FioItems.size());
 
 	int CountOfVariants = 1;
-	for (long ItemNo = 0; ItemNo < Format->m_Items.size() && it != m_Words.end(); ItemNo++, it = NextNotSpace(it))
+	for (long ItemNo = 0; ItemNo < Format->m_FioItems.size() && it != m_Words.end(); ItemNo++, it = NextNotSpace(it))
 	{
 		FioWords.Add(it);
 		CPostLemWord& W = *it;
@@ -143,14 +143,14 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 			// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
 			if (IsPartOfNonSingleOborot(pH)) return false;
 
-			if (IsPartFio(*this, Format->m_Items[ItemNo], W, pH))
+			if (IsPartFio(*this, Format->m_FioItems[ItemNo], W, pH))
 				Hypots[ItemNo].Add(pH);
 		};
 		if (Hypots[ItemNo].empty()) return false;
 		CountOfVariants *= Hypots[ItemNo].size();
 	};
 
-	if (FioWords.size() != Format->m_Items.size()) return false; // не достроилось
+	if (FioWords.size() != Format->m_FioItems.size()) return false; // не достроилось
 
 	SmallHomonymsVec V; // текущий вариант 
 	std::vector<SmallHomonymsVec> Variants;
@@ -164,7 +164,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 			QWORD Grammems = rAllCases | rAllNumbers;
 			for (long i = 0; i < Variants[VarNo].size(); i++)
 			{
-				Grammems &= Variants[VarNo].m_Items[i]->m_iGrammems;
+				Grammems &= Variants[VarNo].m_VectorItems[i]->m_iGrammems;
 			};
 			if ((Grammems & rAllCases) == 0 || (Grammems & rAllNumbers) == 0)
 			{
@@ -179,7 +179,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 	for (size_t i = 0; i < FioWords.size(); i++)
 	{
 		CPostLemWord& W = *FioWords[i];
-		CHomonym* pH = Variants[0].m_Items[i];
+		CHomonym* pH = Variants[0].m_VectorItems[i];
 		W.SetHomonymsDel(true);
 		pH->m_bDelete = false;
 		pH->DeleteOborotMarks(); // удаляем однословные оборотыб (многословных там быть не может)

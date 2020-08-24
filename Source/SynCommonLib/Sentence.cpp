@@ -361,8 +361,8 @@ bool ReadSentence(CSentence &S, const CPlmLineCollection *piPLMLinePtr, size_t &
 
     int OborotNo = -1;
 
-    for (; LineNo < piPLMLinePtr->m_Items.size(); LineNo++) {
-        const char *strPlmLine = piPLMLinePtr->m_Items[LineNo].c_str();
+    for (; LineNo < piPLMLinePtr->m_PlmItems.size(); LineNo++) {
+        const char *strPlmLine = piPLMLinePtr->m_PlmItems[LineNo].c_str();
         if (!CheckIfHomonymPlmLine(strPlmLine)) {
             // if the previous  word was  the last in the sentence, then exit
             if (!S.m_Words.empty() && S.m_Words.back().HasDes(OSentEnd))
@@ -403,7 +403,7 @@ changes LineNo, which   should point to the end position of the next sentence.
 bool CSentence::ReadNextFromPlmLines(const CPlmLineCollection *piPLMLinePtr, size_t &LineNo) {
     try {
         //  a cycle till a non-empty sentence is found or  the end is reached
-        while (m_Words.empty() && (LineNo < piPLMLinePtr->m_Items.size())) {
+        while (m_Words.empty() && (LineNo < piPLMLinePtr->m_PlmItems.size())) {
             // if an error occurs then exit with failure
             if (!ReadSentence(*this, piPLMLinePtr, LineNo)) return false;
         }

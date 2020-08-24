@@ -193,7 +193,7 @@ void CTrieHolder::CreateTrie(const std::set< CWorkRule >& Patterns)
 	std::set< CWorkRule >::const_iterator iter, prev_iter;
 	iter = prev_iter = Patterns.begin();
 	size_t RuleNo = 0; 
-	CreateChildrenSequence(iter->m_RightPart.m_Items.begin(), iter->m_RightPart.m_Items.end(),  0, RuleNo);
+	CreateChildrenSequence(iter->m_RightPart.m_RuleItems.begin(), iter->m_RightPart.m_RuleItems.end(),  0, RuleNo);
 	RuleNo++;
 	
 	
@@ -201,7 +201,7 @@ void CTrieHolder::CreateTrie(const std::set< CWorkRule >& Patterns)
 	for (iter++; iter != Patterns.end(); iter++, RuleNo++)
 	{
 		const CWorkRule& P = *iter;
-		assert (!P.m_RightPart.m_Items.empty());
+		assert (!P.m_RightPart.m_RuleItems.empty());
 
 		//  Starter should be the node of the previous pattern, from which we should start 
 		//  current sequence.
@@ -221,26 +221,26 @@ void CTrieHolder::CreateTrie(const std::set< CWorkRule >& Patterns)
 		
 		size_t Starter = 0;
 		int CharNo =0;
-		for (; CharNo < P.m_RightPart.m_Items.size(); CharNo++)
+		for (; CharNo < P.m_RightPart.m_RuleItems.size(); CharNo++)
 		{
-			if	(		(CharNo == prev_iter->m_RightPart.m_Items.size() )
-					||	(P.m_RightPart.m_Items[CharNo] !=  (*prev_iter).m_RightPart.m_Items[CharNo])
+			if	(		(CharNo == prev_iter->m_RightPart.m_RuleItems.size() )
+					||	(P.m_RightPart.m_RuleItems[CharNo] !=  (*prev_iter).m_RightPart.m_RuleItems[CharNo])
 				)
 			break;
 
-			Starter = GetChildrenAux(Starter)[P.m_RightPart.m_Items[CharNo]];
+			Starter = GetChildrenAux(Starter)[P.m_RightPart.m_RuleItems[CharNo]];
 			assert (Starter != -1);
 		};
 
 
-		if	(CharNo < P.m_RightPart.m_Items.size())
+		if	(CharNo < P.m_RightPart.m_RuleItems.size())
 		{
 			
-			CreateChildrenSequence(P.m_RightPart.m_Items.begin()+CharNo, P.m_RightPart.m_Items.end(),   Starter, RuleNo);
+			CreateChildrenSequence(P.m_RightPart.m_RuleItems.begin()+CharNo, P.m_RightPart.m_RuleItems.end(),   Starter, RuleNo);
 		}
 		else
 		{
-			assert (P.m_RightPart.m_Items.size() ==  prev_iter->m_RightPart.m_Items.size());
+			assert (P.m_RightPart.m_RuleItems.size() ==  prev_iter->m_RightPart.m_RuleItems.size());
 			// a grammar can has structural ambiguity, which causes dublicates  in patterns
 			//ErrorMessage( "a dublicate is found");
 		};
@@ -262,14 +262,14 @@ void CTrieHolder::Create(const std::set< CWorkRule >& Patterns, const SymbolInfo
 	fprintf (stderr, "CreateTrie\n");
 	time(&t1) ;
 	CreateTrie(Patterns);
-	time(&t2);fprintf (stderr, "Seconds = %i\n",  t2-t1);
+	time(&t2);fprintf (stderr, "Seconds = %zu\n",  t2-t1);
 
 	
 	//PrintChildren(0);
 	fprintf (stderr, "InitFailureFunction\n");
 	time(&t1) ;
 	InitFailureFunction();
-	time(&t2);fprintf (stderr, "Seconds = %i\n",  t2-t1);
+	time(&t2);fprintf (stderr, "Seconds = %zu\n",  t2-t1);
 
 	
 	

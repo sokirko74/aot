@@ -18,7 +18,8 @@
                         "words": "Ах ты"
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             }
         ]
     },
@@ -57,7 +58,8 @@
                         "trg_grm": "",
                         "trg_lemma": "НЕ"
                     }
-                ]
+                ],
+                "terms": []
             }
         ]
     },
@@ -85,7 +87,8 @@
                         "words": "И все-таки"
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             }
         ]
     },
@@ -124,7 +127,8 @@
                         "trg_grm": "но,од,ср,вн,им,ед,",
                         "trg_lemma": "ВЕСЬ"
                     }
-                ]
+                ],
+                "terms": []
             }
         ]
     },
@@ -155,7 +159,8 @@
                         "words": "денег мало"
                     }
                 ],
-                "relations": []
+                "relations": [],
+                "terms": []
             }
         ]
     }

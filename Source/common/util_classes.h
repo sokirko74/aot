@@ -8,7 +8,7 @@
 
 template <class	Type, int Size>
 struct CSmallVector	{
-	Type	 m_Items[Size];
+	Type	 m_VectorItems[Size];
 	int	 m_ItemsCount;
 	CSmallVector () 
 	{
@@ -20,7 +20,7 @@ struct CSmallVector	{
 		//	в Release просто не	будем добавлять	отношения, если	их слишком много
 		if	(m_ItemsCount >= Size-1)
 			return;
-		m_Items[m_ItemsCount++] = Item;
+		m_VectorItems[m_ItemsCount++] = Item;
 	};
 	void Insert (int No, Type Item)
 	{
@@ -30,15 +30,15 @@ struct CSmallVector	{
 			return;
 
 		for (long i = m_ItemsCount; i > No	; i--)
-			m_Items[i]	= m_Items[i-1];
-		m_Items[No] = Item;
+			m_VectorItems[i] = m_VectorItems[i-1];
+		m_VectorItems[No] = Item;
 		m_ItemsCount++;
 	};
 	void  Erase (int No)
 	{
 		//assert (No <	m_RelsCount);
 		for (long i = No; i < m_ItemsCount-1 ;	i++)
-			m_Items[i]	= m_Items[i+1];
+			m_VectorItems[i]	= m_VectorItems[i+1];
 		m_ItemsCount--;
 	};
 	void  Clear ()
@@ -53,13 +53,13 @@ struct CSmallVector	{
 	};
 
 	Type& back	() {
-		return	m_Items[m_ItemsCount - 1];
+		return	m_VectorItems[m_ItemsCount - 1];
 	};
-	Type& operator[](int No) {	return m_Items[No];	};
+	Type& operator[](int No) {	return m_VectorItems[No];	};
 
-	const Type& operator[](int	No)	const {	return m_Items[No];	};
+	const Type& operator[](int	No)	const {	return m_VectorItems[No];	};
 
-	size_t find_item (const Type& X) const { return find(m_Items, m_Items+m_ItemsCount, X) - m_Items; };
+	size_t find_item (const Type& X) const { return find(m_VectorItems, m_TermItems+m_ItemsCount, X) - m_TermItems; };
 
 	bool	has (const Type& X) const { return find_item(X) != m_ItemsCount; };
 

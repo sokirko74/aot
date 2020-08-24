@@ -182,16 +182,16 @@ bool AreEqual(const CPlmLine& L, const CGrammarItem& I)
 
 size_t CInputSentence::ReadSentence ( const CPlmLineCollection&	PlmLines, size_t StartLineNo)
 {
-	size_t EndLineNo = PlmLines.m_Items.size();
+	size_t EndLineNo = PlmLines.m_PlmItems.size();
 	assert (StartLineNo < EndLineNo);
 	m_Words.clear();
 
 	for (size_t i=StartLineNo; i<EndLineNo ; i++)
 	{
 		CInputHomonym Homonym;
-		if (!Homonym.LoadPlmLineFromString(PlmLines.m_Items[i].c_str(), i==0, m_pGramTab))
+		if (!Homonym.LoadPlmLineFromString(PlmLines.m_PlmItems[i].c_str(), i==0, m_pGramTab))
 		{
-			ErrorMessage ("Cannot parse "+ PlmLines.m_Items[i]);
+			ErrorMessage ("Cannot parse "+ PlmLines.m_PlmItems[i]);
 			return EndLineNo;
 		};
 		if (Homonym.m_TokenType == OTHER_TOKEN_TYPE) continue;
@@ -620,11 +620,11 @@ bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollecti
 {
 	//printf ("Parsing  file.... \n");
 	remove ("occurrs.txt");
-	if (PlmLines.m_Items.empty()) return false;
+	if (PlmLines.m_PlmItems.empty()) return false;
 	PlmLines.SaveToFile("input.lem");
-	size_t Count = PlmLines.m_Items.size();
+	size_t Count = PlmLines.m_PlmItems.size();
 	Result.clear();	
-	Result.push_back(PlmLines.m_Items[0]);
+	Result.push_back(PlmLines.m_PlmItems[0]);
 
 	CInputSentenceGLR Sentence(pGramTab);
 	

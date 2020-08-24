@@ -544,7 +544,8 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 	for (size_t i = 0;  i < GetNodesSize(); i++)
 	{
 		Res += Format("set nds(%i) [$GT($main,graph) create node]\1", i);;
-		Res += Format("$GT($main,graph) set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i,  GetNodeStr(i, 30).c_str());
+		auto nodeStr = GetNodeStr(i, 30);
+		Res += Format("$GT($main,graph) set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i, nodeStr.c_str());
 		Res += Format("foreach p [$GT($main,graph) get $nds(%i) -ports] {lappend values [lindex $p 0]}\1", i);
 
 		if (GetNode(i).m_SynGroupTypeStr != KEYB)

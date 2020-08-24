@@ -533,10 +533,10 @@ bool CThesaurus::LoadSynItems(std::string FileName)
 		{
 			CInnerTermin& T = m_Termins[m_SynItems[i].m_TerminNo];
 			long k=0;
-			for (; k < T.m_Items.size(); k++)
-				if (m_SynItems[T.m_Items[k]].m_ItemPos >  m_SynItems[i].m_ItemPos)
+			for (; k < T.m_TermItems.size(); k++)
+				if (m_SynItems[T.m_TermItems[k]].m_ItemPos >  m_SynItems[i].m_ItemPos)
 					break;
-			T.m_Items.insert (T.m_Items.begin() + k, i);
+			T.m_TermItems.insert (T.m_TermItems.begin() + k, i);
 		};
 	}
 	catch (...)

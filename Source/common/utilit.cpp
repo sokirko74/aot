@@ -2531,7 +2531,7 @@ void CTestCaseBase::read_test_cases(std::istream& inp) {
 	TestCases.clear();
 	std::string s;
 	while (getline(inp, s)) {
-		size_t commentsIndex = s.find('//');
+		size_t commentsIndex = s.find("//");
 		CTestCase e;
 		if (commentsIndex != -1) {
 			e.Comment = s.substr(commentsIndex);

@@ -154,9 +154,9 @@ bool CMAPost::LoadWords(const CPlmLineCollection *piInTextItems)
 		m_Words.clear();
         int CurrOborotNo = -1;
 	    
-        for (; i < piInTextItems->m_Items.size(); i++)
+        for (; i < piInTextItems->m_PlmItems.size(); i++)
         {
-	        const char* strPlmLine = piInTextItems->m_Items[i].c_str();
+	        const char* strPlmLine = piInTextItems->m_PlmItems[i].c_str();
     		if ( !CheckIfHomonymPlmLine(strPlmLine))
             {
     		    //  reading the first homonym and word's  properties 
@@ -183,7 +183,7 @@ bool CMAPost::LoadWords(const CPlmLineCollection *piInTextItems)
 	}
 	catch(...)
 	{
-		ErrorMessage ("MAPOST", Format("Cannot read line %i (\"%s\") from morphology", i, piInTextItems->m_Items[i].c_str()));
+		ErrorMessage ("MAPOST", Format("Cannot read line %i (\"%s\") from morphology", i, piInTextItems->m_PlmItems[i].c_str()));
 		return false;
 	}
 }
@@ -1747,7 +1747,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 				for (size_t j=0; j<Paradigms[k].GetCount(); j++)
 				{
 					QWORD g;
-					m_pRusGramTab->GetGrammems(Paradigms[k].GetAncode(j).c_str(), g);
+					m_pRusGramTab->GetGrammems(Paradigms[k].GetAncode((WORD)j).c_str(), g);
 					if	(		(g &  _QM(rPatronymic))
 							&&  (g & _QM(rNominativ)) 
 							&&  (g & _QM(rSingular)) 

@@ -16,20 +16,20 @@ enum ParseMethodEnum {
 };
 
 struct CWorkRightRulePart {
-    std::vector<TerminalSymbolType> m_Items;
+    std::vector<TerminalSymbolType> m_RuleItems;
 
     //  calculated by CGrammarItem::m_SynMain in  CParseGrammar::EncodeGrammar
     size_t m_SynMainItemNo;
 
 
     bool operator==(const CWorkRightRulePart &X) const {
-        return m_Items == X.m_Items
+        return m_RuleItems == X.m_RuleItems
                && m_SynMainItemNo == X.m_SynMainItemNo;
     };
 
     bool operator<(const CWorkRightRulePart &X) const {
-        if (m_Items != X.m_Items)
-            return m_Items < X.m_Items;
+        if (m_RuleItems != X.m_RuleItems)
+            return m_RuleItems < X.m_RuleItems;
 
         return m_SynMainItemNo < X.m_SynMainItemNo;
     };

@@ -650,7 +650,10 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 		 This realations  will be uses to  create fixed groups for semantics
 		*/
 		for (l = 1; l < WordsOfConj.m_ItemsCount ; l++)
-			create_syn_rel(G, WordsOfConj.m_Items[l-1], WordsOfConj.m_Items[l], GetOpt()->m_DisruptConjRelation);
+			create_syn_rel(G, 
+				WordsOfConj.m_VectorItems[l-1], 
+				WordsOfConj.m_VectorItems[l],
+				GetOpt()->m_DisruptConjRelation);
 
 		/*
 			We should  rebuild some groups, which now are invalid, because of the second compound group.
@@ -789,7 +792,10 @@ bool CFormatCaller::create_repeating_disrupt_conj(CGroup& G, const SDoubleConj& 
 		This realations  will be uses to  create fixed groups for semantics
 	*/
 	for (long l = 1; l < WordsOfConj.m_ItemsCount ; l++)
-			create_syn_rel(G, WordsOfConj.m_Items[l-1], WordsOfConj.m_Items[l], GetOpt()->m_DisruptConjRelation);
+			create_syn_rel(G, 
+				WordsOfConj.m_VectorItems[l-1],
+				WordsOfConj.m_VectorItems[l], 
+				GetOpt()->m_DisruptConjRelation);
 		
 
 

@@ -8,7 +8,7 @@
 struct CParsingChildrenSet
 {
 	const CGLRRuleInfo*	m_ReduceRule;
-	std::vector<size_t>		m_Items;
+	std::vector<size_t>		m_ChildItems;
 };
 
 struct CSymbolNode 
