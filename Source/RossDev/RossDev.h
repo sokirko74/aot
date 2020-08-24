@@ -1,24 +1,16 @@
-// Ross.h : main header file for the ROSSDEV application
-//
-
-#if !defined(AFX_ROSSDEV_H__553CC260_C720_11D2_A6E4_A290D9000000__INCLUDED_)
-#define AFX_ROSSDEV_H__553CC260_C720_11D2_A6E4_A290D9000000__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #ifndef __AFXWIN_H__
 	#error include 'stdafx.h' before including this file for PCH
 #endif
-#include "..\common\cortege.h"       // main symbols
-#include "RossDoc.h"       // main symbols
-#include "ArticleDoc.h"       // main symbols
-#include "PocketForm.h"       // main symbols
-#include "../SemanLib/HierarchyHolder.h"       // main symbols
-#include "HierarchyDoc.h"       // main symbols
-#include "afxrich.h"       // main symbols
-#include "../SemanLib/\SemStructureBuilder.h"
+#include "../common/cortege.h"
+#include "RossDoc.h"
+#include "ArticleDoc.h"
+#include "PocketForm.h"
+#include "../SemanLib/HierarchyHolder.h"
+#include "HierarchyDoc.h"
+#include "afxrich.h"
+#include "../SemanLib/SemStructureBuilder.h"
 
 
 
@@ -122,23 +114,11 @@ inline  CDocTemplate* GetSemanticStructureTemplate ()
 };
 
 
-
-
-
 inline bool GlobalOpenArticle(CRossDoc*  pRossDoc, WORD UnitNo)
 {
 	CDocument* pDocument = GetRossArticleTemplate()->CreateNewDocument();
     ASSERT_VALID(pDocument);
 	((CArticleDoc*)pDocument) -> OpenArticle (UnitNo, pRossDoc);
-	return true;
-};
-
-inline bool GlobalOpenHierarchy(CRossDoc*  pRossDoc, CHierarchyEnum Type)
-{
-	
-	CDocument* pDocument = GetHierarchyTemplate()->CreateNewDocument();
-    ASSERT_VALID(pDocument);
-	((CHierarchyDoc*)pDocument) -> OpenHierarchy ( pRossDoc, Type);
 	return true;
 };
 
@@ -181,23 +161,6 @@ inline bool GlobalPocketAndArticleDocTempalteAreEmpty(CRossDoc* RossDoc)
 
 
 
-inline CTime Tm2CTime (tm t)
-{
-	return CTime( t.tm_year + 1900, t.tm_mon + 1,t.tm_mday+1, t.tm_hour+1, t.tm_min, t.tm_sec, 0);
-};
-
-inline tm CTime2Tm (CTime t)
-{
-	tm out;
-	out.tm_year = t.GetYear() - 1900;
-	out.tm_mon = t.GetMonth() - 1;
-	out.tm_mday = t.GetDay() - 1;
-	out.tm_hour = t.GetHour()-2;
-	out.tm_min = t.GetMinute();
-	out.tm_sec = t.GetSecond();
-	return out;
-};
-
 class CRossDoc;
 
 
@@ -229,9 +192,6 @@ inline CString ConstructFldName (const CDictionary* pIRossForSyntax, BYTE FieldN
 };
 
 
-
-
-
 inline void GetCortegeList (const CDictionary* Ross, std::vector<TCortege>& L, LONG UnitNo)
 {
   for (size_t i= Ross->GetUnitStartPos(UnitNo); i <= Ross->GetUnitEndPos(UnitNo); i++)
@@ -261,13 +221,3 @@ inline CSemStructureBuilder&	GetSemBuilder()
 	return App->m_SemBuilder;
 }
 
-
-
-//const char szNodeWCL[] = "NodeClass";
-
-/////////////////////////////////////////////////////////////////////////////
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_ROSSDEV_H__553CC260_C720_11D2_A6E4_A290D9000000__INCLUDED_)

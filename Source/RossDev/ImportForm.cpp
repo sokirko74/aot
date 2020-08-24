@@ -127,6 +127,18 @@ void CImportForm::SendInfo (CString S, long LineNo)
 	UpdateData (FALSE);
 };
 
+inline bool SaveToFile(const CRichEditCtrl& C, CString FileName)
+{
+	FILE* fp = fopen(FileName, "wb");
+	if (!fp) return false;
+	CString S;
+	C.GetWindowText(S);
+	fprintf(fp, "%s", (const char*)S);
+	fclose(fp);
+	return true;
+};
+
+
 
 void CImportForm::OnRun() 
 {
@@ -168,6 +180,20 @@ void CImportForm::OnRun()
 		);
 	m_ProtocolRichEdit.SetWindowText(Messages.c_str());
 	UpdateData(FALSE);
+}
+
+inline bool LoadFromFile(CRichEditCtrl& C, CString FileName)
+{
+	FILE* fp = fopen(FileName, "rb");
+	if (!fp) return false;
+	char buffer[1000];
+	CString S;
+	while (fgets(buffer, 1000, fp))
+		S += buffer;
+	fclose(fp);
+
+	C.SetWindowText(S);
+	return true;
 }
 
 //выбор файла

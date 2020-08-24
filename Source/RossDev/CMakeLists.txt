@@ -5,12 +5,13 @@ project(RossDev)
 add_definitions(-D_AFXDLL)
 set(CMAKE_MFC_FLAG 2)
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /utf-8" )
+
 if (WIN32) 
     include_directories (AFTER ../tk_source/tk8.0.5/generic ../tcl_source/tcl8.0.5/generic ../tk_source/tk8.0.5/xlib)
 endif()
 
 add_executable (${PROJECT_NAME} WIN32
-#../common/COM/COMSyntaxHolder.cpp
 ArticleDoc.cpp
 ArticleView.cpp
 BasicDomenEdit.cpp
@@ -73,6 +74,7 @@ target_link_libraries(${PROJECT_NAME}
     ${PROJECT_SOURCE_DIR}/../tk_source/tk80.lib
 )
 
+target_precompile_headers(${PROJECT_NAME} PUBLIC stdafx.h)
 
 CopyExe(${PROJECT_NAME})
 

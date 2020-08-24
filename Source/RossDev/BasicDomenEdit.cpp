@@ -1,7 +1,5 @@
-// BasicDomenEdit.cpp : implementation file
-//
-
 #include "stdafx.h"
+
 #include "BasicDomenEdit.h"
 #include "InputBox.h"
 #include "ValueDlg.h"
@@ -22,7 +20,7 @@ CBasicDomainEdit::CBasicDomainEdit(CRossDoc* pRossRoc,
 								  bool EditMode,
 								  std::vector<CString>* pHiddenItems,
 								  LONG* pItemNo,
-								  CWnd* pParent /*=NULL*/)
+								  CWnd* pParent )
 	: CDialog(CBasicDomainEdit::IDD, pParent),
 	  m_pRossDoc(pRossRoc),
 	  m_DomNo (DomNo),

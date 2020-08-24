@@ -1,7 +1,5 @@
 #pragma once
 
-#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
-
 #include "resource.h"
 
 #include <afxwin.h>         // MFC core and standard components
@@ -12,8 +10,13 @@
 #include <afxcmn.h>			// MFC support for Windows Common Controls
 
 
-#include "..\common\cortege.h"
+#include "../common/cortege.h"
+#include "../common/utilit.h"
+#include "../SemanLib/TranslatorHolder.h"
+#include "../SemanLib/RossHolder.h"
+#include "RossDev.h"
 
+	
 const int MaxNumDom = 10;
 
 
@@ -41,42 +44,6 @@ struct CRossDevTextField
 
 };
 
-inline bool SaveToFile (const CRichEditCtrl& C,  CString FileName ) 
-{
-	FILE * fp = fopen (FileName,"wb");
-	if (!fp) return false;
-	CString S;
-	C.GetWindowText(S);
-	fprintf (fp, "%s", (const char*)S);
-	fclose(fp);
-	return true;
-};
-
-inline int GetVisibleLinesCount (const CRichEditCtrl& C) 
-{
-	CRect R;
-	C.GetWindowRect(&R);
-	CHARFORMAT cf;
-	C.GetDefaultCharFormat(cf);
-	HDC lngDC = ::GetDC(HWND_DESKTOP);
-	double TwipsPerPixelX = 1440 / GetDeviceCaps(lngDC, LOGPIXELSX);
-	int LineInPixel = (cf.yHeight + cf.yOffset)/TwipsPerPixelX;
-	return R.Height() / LineInPixel;
-};
-
-inline bool LoadFromFile (CRichEditCtrl& C,  CString FileName )
-{
-	FILE * fp = fopen (FileName,"rb");
-	if (!fp) return false;
-	char buffer[1000];
-	CString S;
-	while (fgets(buffer, 1000, fp))
-		S += buffer;
-	fclose(fp);	
-	
-	C.SetWindowText(S);
-	return true;
-}
 
 inline void SelectLine ( CRichEditCtrl& C, long LineNo )
 {
@@ -85,10 +52,4 @@ inline void SelectLine ( CRichEditCtrl& C, long LineNo )
 	C.SetSel(nStartChar, nEndChar);
 };
 
-
-
-#include "../common/utilit.h"
-#include "../SemanLib/translatorholder.h"
-#include "../SemanLib/rossholder.h"
-#include "rossdev.h"
 

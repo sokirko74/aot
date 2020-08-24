@@ -1,15 +1,10 @@
-#if !defined(AFX_ARTICLEVIEW_H__DD981AC7_CBCD_11D2_A6EB_AC559A000000__INCLUDED_)
-#define AFX_ARTICLEVIEW_H__DD981AC7_CBCD_11D2_A6EB_AC559A000000__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 
 #ifndef __AFXEXT_H__
 #include <afxext.h>
 #endif
-#include "SizeFormView.h "
+#include "SizeFormView.h"
 #include "SyntaxColorizer.h"
 
 #include  "FldScroll.h"
@@ -123,10 +118,3 @@ public:
 };
 
 
-
-/////////////////////////////////////////////////////////////////////////////
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_ARTICLEVIEW_H__DD981AC7_CBCD_11D2_A6EB_AC559A000000__INCLUDED_)

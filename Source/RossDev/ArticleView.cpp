@@ -114,6 +114,19 @@ void CArticleView::OnArticleviewMarkup()
 	
 }
 
+inline int GetVisibleLinesCount(const CRichEditCtrl& C)
+{
+	CRect R;
+	C.GetWindowRect(&R);
+	CHARFORMAT cf;
+	C.GetDefaultCharFormat(cf);
+	HDC lngDC = ::GetDC(HWND_DESKTOP);
+	double TwipsPerPixelX = 1440 / GetDeviceCaps(lngDC, LOGPIXELSX);
+	int LineInPixel = (cf.yHeight + cf.yOffset) / TwipsPerPixelX;
+	return R.Height() / LineInPixel;
+};
+
+
 
 void CArticleView::SetFocusToField (int nPos)
 {

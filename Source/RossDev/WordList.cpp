@@ -935,6 +935,14 @@ void CWordList::OnComments()
 
 };
 
+inline bool GlobalOpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
+{
+	CDocument* pDocument = GetHierarchyTemplate()->CreateNewDocument();
+	ASSERT_VALID(pDocument);
+	((CHierarchyDoc*)pDocument)->OpenHierarchy(pRossDoc, Type);
+	return true;
+};
+
 
 // иерархия отношений
 void CWordList::OnMenuitem32788()

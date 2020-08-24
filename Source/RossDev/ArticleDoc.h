@@ -1,17 +1,7 @@
-// ArticleDoc.h : interface of the CArticleDoc class
-//
-/////////////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_ArticleDoc_H__553CC268_C720_11D2_A6E4_A290D9000000__INCLUDED_)
-#define AFX_ArticleDoc_H__553CC268_C720_11D2_A6E4_A290D9000000__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
-
-#include "stdafx.h"
-#include "ArticleView.h"       // main symbols
-#include "../StructDictLib/TempArticle.h"       // main symbols
+#include "StdAfx.h"
+#include "ArticleView.h"
+#include "../StructDictLib/TempArticle.h"
 
 
 
@@ -81,9 +71,3 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-/////////////////////////////////////////////////////////////////////////////
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_ArticleDoc_H__553CC268_C720_11D2_A6E4_A290D9000000__INCLUDED_)

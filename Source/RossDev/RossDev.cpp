@@ -57,12 +57,10 @@ class CRossCommandLineInfo : public CCommandLineInfo
 public:
 	bool bSeman;
 	bool bOnlyRoss;
-	bool bServer;
 
 	CRossCommandLineInfo() : CCommandLineInfo() {
 		bSeman = false;
 		bOnlyRoss = false;
-		bServer = false;
 	};
 
 	virtual void ParseParam(const TCHAR* pszParam, BOOL bFlag, BOOL bLast)
@@ -70,7 +68,6 @@ public:
 		CString S = pszParam;
 		if (stricmp((const char*)S, "seman") == 0) bSeman = true;
 		if (stricmp((const char*)S, "onlyross") == 0) bOnlyRoss = true;
-		if (stricmp((const char*)S, "server") == 0) bServer = true;
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
 	};
 };

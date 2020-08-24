@@ -233,8 +233,6 @@ void CreateLockFile(CString FileName)
 {
 	FILE* fp = fopen (FileName, "wb");
 	try {
-        std::string strPath = GetRegistryString("SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName\\ComputerName");
-        fprintf (fp, "MachineName = %s \r\n", strPath.c_str());
 		fprintf (fp,"Date = %s\r\n", CTime::GetCurrentTime().Format( "%A, %B %d, %Y " )); 
 		fprintf (fp,"Time = %s\r\n", CTime::GetCurrentTime().Format( "%H : %M" )); 
 		CString UserName = getenv("USERNAME");
