@@ -1475,13 +1475,13 @@ SENSE       = 1
 TIME_CREATE       = 18/3/3 16:40:21
 LF      =  A0 : северо-восточный
 ============
-TITLE        = @Модель1
+TITLE        = @ModelId1
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:40:21
 AUX     =  PROPERT ( C1 , C2 )
 ============
-TITLE        = @Модель3
+TITLE        = @ModelId3
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:40:21
@@ -1491,7 +1491,7 @@ VAL     =  BELNG , C , A1
 GF1     = 1  к_доп : Р
 SF1     = 1  LOK
 ============
-TITLE        = @Модель4
+TITLE        = @ModelId4
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:40:21

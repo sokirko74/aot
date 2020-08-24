@@ -9467,13 +9467,13 @@ TITLE        = 177732
 SENSE       = 1
 TIME_CREATE       = 17/3/3 16:19:5
 ============
-TITLE        = @Модель1
+TITLE        = @ModelId1
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 17/3/3 16:19:5
 AUX     =  PROPERT ( C1 , C2 )
 ============
-TITLE        = @Модель16
+TITLE        = @ModelId16
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 17/3/3 16:19:5
@@ -9488,20 +9488,20 @@ GF2     = 1  к_доп : Р
 SF2     = 1  ANIM
           2  ORG
 ============
-TITLE        = @Модель2
+TITLE        = @ModelId2
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 17/3/3 16:19:5
 AUX     =  PROPERT ( C1 , C2 )
 ============
-TITLE        = @Модель34
+TITLE        = @ModelId34
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 17/3/3 16:19:5
 AUX     =  PROPERT ( C1 , C3 )
            PROPERT ( C2 , C3 )
 ============
-TITLE        = @Модель4
+TITLE        = @ModelId4
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 17/3/3 16:19:5

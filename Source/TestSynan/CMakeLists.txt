@@ -31,4 +31,3 @@ endmacro(TestSynanMacro)
 
 TestSynanMacro(Russian ${PROJECT_SOURCE_DIR}/test/Russian/*.txt)
 TestSynanMacro(German ${PROJECT_SOURCE_DIR}/test/German/*.txt)
-

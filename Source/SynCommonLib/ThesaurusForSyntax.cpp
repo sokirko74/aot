@@ -12,15 +12,15 @@
 
 
 CThesaurusForSyntax::CThesaurusForSyntax(const CSyntaxOpt* Opt)
-{ 
+{
 	m_pSyntaxOptions = Opt;
-	m_pEngGramTab  = new CEngGramTab;
+	m_pEngGramTab = new CEngGramTab;
 	m_pEngGramTab->LoadFromRegistry();
 };
 
-CThesaurusForSyntax::~CThesaurusForSyntax() 
-{ 
-	if (m_pEngGramTab) 
+CThesaurusForSyntax::~CThesaurusForSyntax()
+{
+	if (m_pEngGramTab)
 		delete m_pEngGramTab;
 };
 
@@ -29,12 +29,12 @@ CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 	CThesaurus* T = new CThesaurus;
 	if (!T) return 0;
 	if (!T->SetDatabase(ThesName)) return 0;
-	assert (GetOpt()->GetOborDictionary() != 0);
+	assert(GetOpt()->GetOborDictionary() != 0);
 	T->m_MainLanguage = GetOpt()->m_Language;
 	T->m_pOborDictionary = GetOpt()->GetOborDictionary();
-	assert (GetOpt()->GetGramTab() != 0);
+	assert(GetOpt()->GetGramTab() != 0);
 	T->m_pMainGramTab = GetOpt()->GetGramTab();
-	assert (m_pEngGramTab != 0);
+	assert(m_pEngGramTab != 0);
 	T->m_pEngGramTab = m_pEngGramTab;
 	if (!T->ReadThesaurusFromDisk()) return 0;
 	if (!T->ReadRelationsFromDisk()) return 0;
@@ -42,53 +42,53 @@ CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 	return T;
 };
 
-bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName,  const CThesaurus* Thes, StringHashSet& p_vectorAccost)
+bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName, const CThesaurus* Thes, StringHashSet& p_vectorAccost)
 {
 	try
 	{
 
-		
+
 		EThesType eThesType;
 		eThesType = GetThesTypeByStr(strDBName);
-		if( eThesType == NoneThes)
+		if (eThesType == NoneThes)
 			return false;
 
-		
 
-if (!strcmp(strDBName, "RML_THES_OMNI"))
-{
-	try
-	{
-		std::string s_accost = "PROF";
-		std::vector<int> Res;
-		Thes->QueryLowerTermins(s_accost.c_str(), morphRussian, Res);
-		for (int i = 0; i < Res.size(); i++)
+
+		if (!strcmp(strDBName, "RML_THES_OMNI"))
 		{
-			std::string TerminStr = Thes->m_Termins[Res[i]].m_TerminStr;
-			RmlMakeLower(TerminStr, GetOpt()->m_Language);
-			p_vectorAccost.insert(TerminStr);
+			try
+			{
+				std::string s_accost = "PROF";
+				std::vector<int> Res;
+				Thes->QueryLowerTermins(s_accost.c_str(), morphRussian, Res);
+				for (int i = 0; i < Res.size(); i++)
+				{
+					std::string TerminStr = Thes->m_Termins[Res[i]].m_TerminStr;
+					RmlMakeLower(TerminStr, GetOpt()->m_Language);
+					p_vectorAccost.insert(TerminStr);
+				};
+			}
+			catch (...)
+			{
+				ErrorMessage("SynAn", "Probably, RMLTHESLib::QueryLowerTermins function failed!");
+			}
+		}
+		//nim
+
+		bool bRes;
+
+
+		bRes = ReadModels(*Thes, eThesType);
+		if (!bRes)
+		{
+			ErrorMessage(Format("Cannot read models for %s", Thes->m_Name.c_str()));
+			return false;
 		};
-	}
-	catch (...)
-	{
-		ErrorMessage("SynAn", "Probably, RMLTHESLib::QueryLowerTermins function failed!");
-	}
-}
-//nim
 
-bool bRes;
+		bRes = ReadTermins(Thes, eThesType);
 
-
-bRes = ReadModels(*Thes, eThesType);
-if (!bRes)
-{
-	ErrorMessage(Format("Cannot read models for %s", Thes->m_Name.c_str()));
-	return false;
-};
-
-bRes = ReadTermins(Thes, eThesType);
-
-return bRes;
+		return bRes;
 	}
 	catch (...)
 	{
@@ -161,19 +161,19 @@ bool CThesaurusForSyntax::ReadTermins(const CThesaurus* piThes, EThesType eThesT
 			}
 			++termId;
 		}
-	}		
+	}
 	return true;
 }
 
 
-bool InitWordScheme(const CSyntaxOpt* Opt, CSynPlmLine& WordScheme,	const CAtomGroup& piWordScheme) 
+bool InitWordScheme(const CSyntaxOpt* Opt, CSynPlmLine& WordScheme, const CAtomGroup& piWordScheme)
 {
 	return true;
 }
 
 bool CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType)
 {
-	
+
 
 	size_t ModelNo = 0;
 	std::string Name = Thes.m_Name;
@@ -183,7 +183,7 @@ bool CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType
 		long iModelsCount = Thes.m_Models.size();
 		//printf ("iModelsCount = %i\n",iModelsCount);
 
-		for(; ModelNo < iModelsCount ; ModelNo++ )
+		for (; ModelNo < iModelsCount; ModelNo++)
 		{
 			const CInnerModel& piModel = Thes.m_Models[ModelNo];
 			CGroups model(GetOpt());
@@ -191,54 +191,54 @@ bool CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType
 
 			long iAtomGroupsCount = piModel.m_AtomGroups.size();
 			bool bRus = false;
-			int j = 0 ;
-            for(; j < iAtomGroupsCount ; j++ )
-            {
-                const CAtomGroup& ThesWordScheme = piModel.m_AtomGroups[j];
+			int j = 0;
+			for (; j < iAtomGroupsCount; j++)
+			{
+				const CAtomGroup& ThesWordScheme = piModel.m_AtomGroups[j];
 
-                CSynPlmLine WordScheme;
-                WordScheme.SetGrammems (ThesWordScheme.m_Grammems);
-                WordScheme.SetPoses((1 << ThesWordScheme.m_PartOfSpeech));
-                if (ThesWordScheme.m_LanguageId == morphRussian)
-                    WordScheme.SetFlag(fl_is_russian);
-                if (ThesWordScheme.m_bDigCmpl) WordScheme.SetFlag(fl_dg_ch);
-                if (GetOpt()->GetGramTab()->IsMorphNoun(WordScheme.GetPoses())) WordScheme.SetFlag(fl_morph_noun);
-                bRus = bRus || WordScheme.HasFlag(fl_is_russian);
-                model.AddWord(WordScheme);		
-            }
+				CSynPlmLine WordScheme;
+				WordScheme.SetGrammems(ThesWordScheme.m_Grammems);
+				WordScheme.SetPoses((1 << ThesWordScheme.m_PartOfSpeech));
+				if (ThesWordScheme.m_LanguageId == morphRussian)
+					WordScheme.SetFlag(fl_is_russian);
+				if (ThesWordScheme.m_bDigCmpl) WordScheme.SetFlag(fl_dg_ch);
+				if (GetOpt()->GetGramTab()->IsMorphNoun(WordScheme.GetPoses())) WordScheme.SetFlag(fl_morph_noun);
+				bRus = bRus || WordScheme.HasFlag(fl_is_russian);
+				model.AddWord(WordScheme);
+			}
 
-			
 
-			if( bRus )
+
+			if (bRus)
 			{
 				long iGroupsCount = piModel.m_SynGroups.size();
-				
-				
-				for(j = 0 ; j < iGroupsCount ; j++ )
+
+
+				for (j = 0; j < iGroupsCount; j++)
 				{
-					const CThesSynGroup& piGroup = piModel.m_SynGroups[j];		
-					assert (piGroup.m_First > 0);
-					assert (piGroup.m_Last > 0);
-					CGroup group (piGroup.m_First-1, piGroup.m_Last-1, 0);
+					const CThesSynGroup& piGroup = piModel.m_SynGroups[j];
+					assert(piGroup.m_First > 0);
+					assert(piGroup.m_Last > 0);
+					CGroup group(piGroup.m_First - 1, piGroup.m_Last - 1, 0);
 					group.m_GroupType = GetOpt()->GetGroupTypebyName(piGroup.m_TypeStr.c_str());
 					//  by default the main word is the first fort, later it will be changed
 					group.m_MainWordNo = group.m_iFirstWord;
 					model.create_group(group);
 				}
-				
+
 				//printf ("ModelId %i, iGroupsCount %i \n",piModel.m_ModelId, iGroupsCount);
-				
+
 				AssignMainGroupsToModel(model, piModel);
 			}
 
 			Models.push_back(model);
 
-		}	
+		}
 
 	}
 	catch (...)
 	{
-		ErrorMessage ("Synan", Format ("Cannot read models for %s ModelNo=%i", Thes.m_Name.c_str(), ModelNo));
+		ErrorMessage("Synan", Format("Cannot read models for %s ModelNo=%i", Thes.m_Name.c_str(), ModelNo));
 		return false;
 	};
 	return true;

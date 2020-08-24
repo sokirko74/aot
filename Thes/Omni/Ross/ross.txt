@@ -1234,20 +1234,20 @@ TIME_CREATE       = 18/3/3 16:34:19
 AUX     =  PROPERT ( C1 , C2 )
            IDENT ( C3 , C2 )
 ============
-TITLE        = @Модель1
+TITLE        = @ModelId1
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:34:19
 AUX     =  PROPERT ( C1 , C2 )
 ============
-TITLE        = @Модель3
+TITLE        = @ModelId3
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:34:19
 COMM    =  словарная статья для существительного
 GF      = 1  СУЩ:ИГ
 ============
-TITLE        = @Модель4
+TITLE        = @ModelId4
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:34:19

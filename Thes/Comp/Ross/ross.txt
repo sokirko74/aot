@@ -4226,45 +4226,45 @@ SENSE       = 1
 TIME_CREATE       = 18/3/3 16:15:55
 AUX     =  CONTEN ( C2 , C1 )
 ============
-TITLE        = @Модель1
+TITLE        = @ModelId1
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:15:55
 AUX     =  PROPERT ( C1 , C2 )
 ============
-TITLE        = @Модель141
+TITLE        = @ModelId141
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:15:55
 AUX     =  IDENT ( C2 , C1 )
 ============
-TITLE        = @Модель16
+TITLE        = @ModelId16
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:15:55
 COMM    =  модель для одиночного существительного
 GF      = 1  СУЩ:ИГ
 ============
-TITLE        = @Модель174
+TITLE        = @ModelId174
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:15:55
 AUX     =  IDENT ( C1 , C2 )
 ============
-TITLE        = @Модель175
+TITLE        = @ModelId175
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:15:55
 AUX     =  IDENT ( C2 , C1 )
 ============
-TITLE        = @Модель4
+TITLE        = @ModelId4
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:15:55
 AUX     =  PROPERT ( C1 , C3 )
            PROPERT ( C2 , C3 )
 ============
-TITLE        = @Модель83
+TITLE        = @ModelId83
 SENSE       = 1
 AUTHOR       = user
 TIME_CREATE       = 18/3/3 16:15:55
