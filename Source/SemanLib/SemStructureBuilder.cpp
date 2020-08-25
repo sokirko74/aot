@@ -113,6 +113,57 @@ bool CSemStructureBuilder::TranslateToEnglish(std::string& Graph)
 	};
 }
 
+
+std::string CSemStructureBuilder::TranslateRussianText(const std::string& russian, const std::string& po, void(*logger)(const char*)) {
+	std::string graphStr;
+	try {
+		if (logger) logger(Format("  FindSituations (po=%s) %s\n", po.c_str(), russian.c_str()).c_str());
+		FindSituations(russian.c_str(), 0, po.c_str(), 20000, -1, "", graphStr);
+	}
+	catch (CExpc c) {
+		throw;
+	}
+	catch (...)
+	{
+		std::string s = m_RusStr.m_pData->m_LastError;
+		if (s.empty())
+			s = "unknown error";
+		throw CExpc(s);
+	}
+
+	try {
+		std::string res;
+		for (;;) {
+			if (logger) logger("  TranslateToEnglish\n");
+			if (!TranslateToEnglish(graphStr)) {
+				if (logger) logger("Error in TranslateToEnglish\n");
+				return "Unexpected Error";
+			}
+
+			if (logger) logger("  BuildSentence\n");
+			std::string TranslatedSent;
+			if (!BuildSentence(TranslatedSent))
+			{
+				if (logger) logger("Error in Synthesis\n");
+				return "Unexpected Error";
+			}
+			res += TranslatedSent;
+
+			if (logger) logger("  FindSituationsForNextSentence\n");
+			if (!FindSituationsForNextSentence()) break;
+		}
+
+		return res;
+	}
+	catch (CExpc c) {
+		throw;
+	}
+	catch (...)
+	{
+		throw CExpc("Error in TranslateToEnglish or Synthesis");
+	}
+}
+
 bool  CSemStructureBuilder::BuildSentence(std::string& Sentence)
 {
 	m_GlobalSpan.StartTimer("Synthesis",0);	

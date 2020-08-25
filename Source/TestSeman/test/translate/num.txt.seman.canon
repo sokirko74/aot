@@ -1,0 +1,32 @@
+[
+    {
+        "comments": "",
+        "input": "﻿$200 тыс.",
+        "result": "Two hundred thousand dollars."
+    },
+    {
+        "comments": "",
+        "input": "два",
+        "result": "Two."
+    },
+    {
+        "comments": "",
+        "input": "больше",
+        "result": "More."
+    },
+    {
+        "comments": "",
+        "input": "оба",
+        "result": "Both."
+    },
+    {
+        "comments": "",
+        "input": "несколько",
+        "result": "Several."
+    },
+    {
+        "comments": "",
+        "input": "2000",
+        "result": "Two thousand."
+    }
+]

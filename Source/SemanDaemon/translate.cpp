@@ -25,53 +25,8 @@ void TSemanHttpServer::Load() {
 
 
 std::string TSemanHttpServer::Translate(const std::string& russian, const std::string &po) {
-	std::string graphStr;
-	try {
-		LogMessage(Format("  FindSituations (po=%s) %s\n", po.c_str(), russian.c_str()));
-		SemBuilder.FindSituations(russian.c_str(), 0, po.c_str(), 20000, -1, "", graphStr);
-	}
-	catch (CExpc c) {
-		throw;
-	}
-	catch (...)
-	{
-		std::string s = SemBuilder.m_RusStr.m_pData->m_LastError;
-		if (s.empty())
-			s = "unknown error";
-		throw CExpc(s);
-	}
-
-	try {
-		std::string res;
-		for(;;) {
-			LogMessage("  TranslateToEnglish\n");
-			if (!SemBuilder.TranslateToEnglish(graphStr)) {
-				LogMessage("Error in TranslateToEnglish\n");
-				return "Unexpected Error";
-			}
-
-			LogMessage("  BuildSentence\n");
-			std::string TranslatedSent;
-			if (!SemBuilder.BuildSentence(TranslatedSent))
-			{
-				LogMessage("Error in Synthesis\n");
-				return "Unexpected Error";
-			}
-			res += TranslatedSent;
-			
-			LogMessage("  FindSituationsForNextSentence\n");
-			if (!SemBuilder.FindSituationsForNextSentence()) break;
-		}
-
-		return Format("{\"translation\": \"%s\"}", res.c_str());
-	} 
-	catch (CExpc c) {
-		throw;
-	}
-	catch (...)
-	{
-		throw CExpc("Error in TranslateToEnglish or Synthesis");
-	}
+	std::string eng = SemBuilder.TranslateRussianText(russian, po, LogMessage); {
+	return Format("{\"translation\": \"%s\"}", eng.c_str());
 }
 
 std::string TSemanHttpServer::BuildRusGraph(const std::string& russian, const std::string &po)

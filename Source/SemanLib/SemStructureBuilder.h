@@ -27,7 +27,7 @@ public:
 	std::string  Answer();
 	long	GetScrollMax() const;
 	long	GetScrollCurrent() const;
-
+	std::string TranslateRussianText(const std::string& russian, const std::string& po, void(*logger)(const char*));
 
 };
 

@@ -136,14 +136,15 @@ nlohmann::json PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuild
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input-file", "input file", true);
-    parser.AddOption("--visual", "print visual graph (for javascript)");
     parser.AddArgument("--output-file", "output file", true);
     parser.AddArgument("--input-file-mask", "c:/*.txt", true);
+    parser.AddOption("--visual", "print visual graph (for javascript)");
+    parser.AddOption("--translate", "print English translation");
     parser.Parse(argc, argv);
 }
 
 
-void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, string inputFile, string outputFile) {
+void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, string inputFile, string outputFile) {
     std::cerr << inputFile << "\n";
     CTestCaseBase base;
     base.read_test_cases(std::ifstream(inputFile));
@@ -157,12 +158,17 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, string i
         }
         try {
             std::string dummy;
-            SemBuilder.FindSituations(t.Text, 0, _R("общ"), 20000, -1, "", dummy);
-            if (printVisual) {
-                t.Result = PrintRelationsAsToJavascript(SemBuilder);
+            if (printTranslation) {
+                t.Result = SemBuilder.TranslateRussianText(t.Text, _R("общ"), nullptr);
             }
             else {
-                t.Result = PrintRelationsToText(SemBuilder.m_RusStr);
+                SemBuilder.FindSituations(t.Text, 0, _R("общ"), 20000, -1, "", dummy);
+                if (printVisual) {
+                    t.Result = PrintRelationsAsToJavascript(SemBuilder);
+                }
+                else {
+                    t.Result = PrintRelationsToText(SemBuilder.m_RusStr);
+                }
             }
         }
         catch (CExpc e) {
@@ -203,7 +209,7 @@ int main(int argc, const char *argv[]) {
     }
 
     for (auto& p : file_pairs) {
-        processOneFile(SemBuilder, args.Exists("visual"), p.first, p.second);
+        processOneFile(SemBuilder, args.Exists("visual"), args.Exists("translate"), p.first, p.second);
     }
     std::cerr << "normal exit\n";
     return 0;
