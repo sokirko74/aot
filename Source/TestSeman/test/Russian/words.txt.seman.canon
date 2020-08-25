@@ -22,27 +22,5 @@
             ],
             "relations": []
         }
-    },
-    {
-        "comments": "",
-        "input": "два",
-        "result": {
-            "aux relations": [],
-            "nodes": [
-                {
-                    "index": 0,
-                    "interps": [],
-                    "morph": "ЧИСЛ ср,мр,вн,им,",
-                    "words": [
-                        {
-                            "inner morph": "ЧИСЛ ср,мр,вн,им,",
-                            "lemma": "",
-                            "word": "2"
-                        }
-                    ]
-                }
-            ],
-            "relations": []
-        }
     }
 ]

@@ -222,63 +222,59 @@ double ConvertNumeralByTable(std::vector<CRusSemWord>::const_iterator Start, std
 };
 
 
-std::string ConvertOneWordOrdinalNumeral(const std::string& InputOrdinal)
+static bool ConvertOneWordOrdinalNumeral(const std::string& InputOrdinal, string& result)
 {
-	std::string Result = IntToStr(GetOrdinalNumeral(InputOrdinal));
-	if (Result == "-1")
+	result = IntToStr(GetOrdinalNumeral(InputOrdinal));
+	if (result != "-1") {
+		return true;
+	}
+	std::string Word = InputOrdinal;
+	long PrefixNumber = 0;
+
+	for (;;)
 	{
-		std::string Word = InputOrdinal;
-		long PrefixNumber = 0;
-
-		for (;;)
-		{
-			int PrefixLength = -1;
-			int LineNo = GetNumeralPrefixGenitForm(Word, PrefixLength);
-			if (LineNo == -1) break;
-			Word.erase(0, PrefixLength);
-			PrefixNumber += (long)NumeralToNumber[LineNo].m_Number;
-		};
-
-		if (Word != InputOrdinal)
-		{
-			QWORD LastRes = GetOrdinalNumeral(Word);
-			if (LastRes >= 1000)  //"тысячный" или "миллионный"
-				Result = IntToStr(PrefixNumber * LastRes);
-			else
-				Result = IntToStr(PrefixNumber) + '#' + Word;
-		};
+		int PrefixLength = -1;
+		int LineNo = GetNumeralPrefixGenitForm(Word, PrefixLength);
+		if (LineNo == -1) break;
+		Word.erase(0, PrefixLength);
+		PrefixNumber += (long)NumeralToNumber[LineNo].m_Number;
 	};
 
-	return Result;
+	if (Word == InputOrdinal) {
+		return false;
+	}
+	QWORD lastRes = GetOrdinalNumeral(Word);
+	if (lastRes >= 1000)  //"тысячный" или "миллионный"
+		result = IntToStr(PrefixNumber * lastRes);
+	else
+		result = IntToStr(PrefixNumber) + '#' + Word;
+	return true;
 };
 
 
-std::string ConvertHugeNumeral(std::vector<CRusSemWord>::const_iterator Start, std::vector<CRusSemWord>::const_iterator End, QWORD Order)
+double ConvertNumeralByOrderRecursive(std::vector<CRusSemWord>::const_iterator Start, std::vector<CRusSemWord>::const_iterator End, QWORD Order)
 {
 	std::string OrderStr = FindByNumber(Order);
 	std::string Result;
 	if (Order == 1)
 	{
-		Result = IntToStr(ConvertNumeralByTable(Start, End));
-		if (Result == "-1") Result = ""; //"$200 тыс."
+		return ConvertNumeralByTable(Start, End);
 	}
 	else
 	{
-		std::vector<CRusSemWord>::const_iterator Word = Start;
-		for (; Word < End; Word++)
-			if (Word->m_Lemma == OrderStr)
-				break;
-
-		if (Word < End)
-			if (Word == Start)
-				Result = IntToStr(Order + atoi(ConvertHugeNumeral(Word + 1, End, Order / 1000).c_str()));
-			else
-				Result = IntToStr(Order * ConvertNumeralByTable(Start, Word) + atof(ConvertHugeNumeral(Word + 1, End, Order / 1000).c_str()));
-		else
-			Result = ConvertHugeNumeral(Start, End, Order / 1000);
+		for (auto i = Start; i < End; ++i) {
+			if (i->m_Lemma == OrderStr) {
+				double left_coef = 1.0;
+				if (i > Start) {
+					left_coef = ConvertNumeralByTable(Start, i);
+				}
+				double left = Order * left_coef;
+				double right = ConvertNumeralByOrderRecursive(i + 1, End, Order / 1000);
+				return left + right;
+			}
+		}
+		return ConvertNumeralByOrderRecursive(Start, End, Order / 1000);
 	}
-
-	return Result;
 };
 
 bool FullAdjWithNumeralPrefix(const CRusSemNode& Node)
@@ -299,157 +295,161 @@ bool FullAdjWithNumeralPrefix(const CRusSemNode& Node)
 	return true;
 };
 
-std::string ConvertRusNumeral(const CRusSemNode& Node)
+
+static bool ConvertRusNumeral(const CRusSemNode& Node, double& number)
 {
-	std::string Result;
 	if (Node.m_Words.size() == 1 && (FindFloatingPoint(Node.m_Words[0].m_Word.c_str()) != -1 || Node.m_Words[0].HasOneGrammem(rComparative)))
-		Result = Node.m_Words[0].m_Word;
-	else
-		Result = ConvertHugeNumeral(Node.m_Words.begin(), Node.m_Words.end(), 1000000000000);
-	return Result == "" ? Node.m_Words[0].m_Word : Result;
+		return false;
+	number =  ConvertNumeralByOrderRecursive(Node.m_Words.begin(), Node.m_Words.end(), 1000000000000);
+	return number != -1;
 };
 
 
-void InterpretAdjectivesWithNumeral(CRusSemStructure& R, long NodeNo)
+void InterpretAdjectivesWithNumeral(CRusSemStructure& R, CRusSemNode& node)
 {
 	// пробуем проинтерпретировать с "-" в начале
-	R.m_Nodes[NodeNo].m_Words[0].m_Lemma = "-" + R.m_Nodes[NodeNo].m_Words[0].m_Lemma;
-	R.InitInterps(R.m_Nodes[NodeNo].m_Words[0], false, R.m_Nodes[NodeNo].m_ClauseNo, R.m_Nodes[NodeNo], false);
+	node.m_Words[0].m_Lemma = "-" + node.m_Words[0].m_Lemma;
+	R.InitInterps(node.m_Words[0], false, node.m_ClauseNo, node, false);
 	// если не получилось, отрзаем  "-" и интерпретируем обычно
-	if (R.m_Nodes[NodeNo].GetInterps().empty())
+	if (node.GetInterps().empty())
 	{
-		R.m_Nodes[NodeNo].m_Words[0].m_Lemma.erase(0, 1);
-		R.InitInterps(R.m_Nodes[NodeNo].m_Words[0], false, R.m_Nodes[NodeNo].m_ClauseNo, R.m_Nodes[NodeNo], true);
+		node.m_Words[0].m_Lemma.erase(0, 1);
+		R.InitInterps(node.m_Words[0], false, node.m_ClauseNo, node, true);
 	};
 
 };
-std::string CRusSemStructure::ConvertArabictoRusNumeral(const CRusSemNode& Node)
-{
-	return ConvertRusNumeral(Node);
+
+void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
+	std::string LemmaAfterHyphen;
+	int pos = node.m_Words[0].m_Lemma.find("-");
+
+	if (pos != -1)
+	{
+		LemmaAfterHyphen = node.m_Words[0].m_Word.substr(pos + 1);
+		node.m_Words[0].m_Lemma = node.m_Words[0].m_Lemma.substr(0, pos);
+	};
+
+	std::string  ConvertedWord;
+	int dummy;
+	if ((node.IsPrimitive())
+		&& (node.m_Words[0].HasPOS(NUMERAL_P)
+			|| (
+				node.m_Words[0].HasPOS(ADJ_FULL)
+				&& (GetNumeralPrefixGenitForm(node.m_Words[0].m_Word, dummy) != -1)
+				)
+			)
+		)
+	{
+		if (!ConvertOneWordOrdinalNumeral(node.m_Words[0].m_Lemma, ConvertedWord)) {
+			return;
+		}
+		int j = ConvertedWord.find('#');
+
+		if (j != -1) // по этой же схеме идут числительные "двухтысячный", которые не обрабатывется в этом if
+		{
+			int len = ConvertedWord.length() - j - 1;
+			node.m_Words[0].m_Lemma.erase(0, node.m_Words[0].m_Lemma.length() - len);
+			node.m_Words[0].m_ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, node.m_Words[0].m_Lemma, 0);
+			node.m_Words[0].m_NumeralPrefix = ConvertedWord.substr(0, j);
+			ConvertedWord.erase(0, j + 1);
+			InterpretAdjectivesWithNumeral(R, node);
+		};
+	}
+	else {
+		double number;
+		if (!ConvertRusNumeral(node, number))
+		{
+			// слова типа "оба", "несколько" являются числительными, но не конвертируются,
+			// а оставляются нетронутыми
+			//assert (node.IsPrimitive());
+
+			//еще могут быть просто ряды числительных, которые нельзя считать целым QUANTIT, например:		
+			// "один два"
+			if (node.m_Words.size() > 1)
+				for (long i = 0; i < node.m_Words.size(); i++)
+				{
+					float Res = FindInTable(node.m_Words[i].m_Lemma);
+					if (Res != -1)
+					{
+						node.m_Words[i].m_Word = IntToStr(Res);;
+						node.m_Words[i].m_Lemma = "";
+						node.m_Words[i].m_ParadigmId = -1;
+					};
+
+				};
+			return;
+		};
+		ConvertedWord = IntToStr(number);
+	}
+
+	std::string  ConvertedWordHyphen = "-1";
+
+	// разберем случай "полтора-два миллиона баррелей"
+	if (LemmaAfterHyphen != "") {
+		node.m_Words[0].m_Lemma = LemmaAfterHyphen;
+		double number;
+		if (ConvertRusNumeral(node, number)) {
+			ConvertedWordHyphen = IntToStr(number);
+		}
+	};
+
+
+	// берем этот слоту первого слова
+	RegisterEnum FirstCase = node.m_Words[0].m_CharCase;
+	// удаляем все слова кроме последнего слова
+	node.m_Words.erase(node.m_Words.begin(), node.m_Words.end() - 1);
+	// обнуляем лемму последнего слова
+	if (node.m_Words[0].m_NumeralPrefix == "")
+	{
+		node.m_Words[0].m_Lemma = "";
+		node.m_Words[0].m_ParadigmId = -1;
+		node.DelAllInterps();
+	};
+	node.m_Words[0].m_Word = ConvertedWord;
+	if (R.HasRichPOS(node, NOUN)) // миилион, миллиард
+	{
+		node.m_Words[0].m_Poses = 1 << NUMERAL;
+		node.m_Words[0].SetFormGrammems(node.GetGrammems());
+		node.m_Words[0].m_GramCodes = node.m_GramCodes;
+	}
+	if (ConvertedWordHyphen != "-1")
+	{
+		node.m_Words[0].m_Word += "(" + ConvertedWordHyphen + ")";
+	};
+	node.m_Words[0].m_CharCase = FirstCase;
+	node.SetMainWordNo(0);
 }
+
 void CRusSemStructure::ConvertRusNumeralsToArabic()
 {
 	// прилагательные типа 2-кратный берутся на Maposte
 	// их  надо преобразовать в слот  NumeralPrefix
-	for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
-		if (m_Nodes[NodeNo].IsPrimitive()
-			&& HasRichPOS(NodeNo, ADJ_FULL)
-			&& isdigit((BYTE)m_Nodes[NodeNo].m_Words[0].m_Word[0])
+	for (auto& node : m_Nodes)
+		if (   node.IsPrimitive()
+			&& HasRichPOS(node, ADJ_FULL)
+			&& isdigit((BYTE)node.m_Words[0].m_Word[0])
 			)
 		{
-			int i = m_Nodes[NodeNo].m_Words[0].m_Word.find("#");
-			m_Nodes[NodeNo].m_Words[0].m_NumeralPrefix = m_Nodes[NodeNo].m_Words[0].m_Word.substr(0, i);
-			m_Nodes[NodeNo].m_Words[0].m_Word.erase(0, i + 1);
-			InterpretAdjectivesWithNumeral(*this, NodeNo);
-
+			int i = node.m_Words[0].m_Word.find("#");
+			node.m_Words[0].m_NumeralPrefix = node.m_Words[0].m_Word.substr(0, i);
+			node.m_Words[0].m_Word.erase(0, i + 1);
+			InterpretAdjectivesWithNumeral(*this, node);
 		};
 
-	/*
-		А теперь основной цикл ...
-	*/
-
-	for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
-		if ((m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERALS)
-			|| (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS(NodeNo, NUMERAL))
-			|| (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS(NodeNo, NUMERAL_P))
-			|| FullAdjWithNumeralPrefix(m_Nodes[NodeNo])
+	//	А теперь основной цикл ...
+	for (auto& node : m_Nodes) {
+		if (   (node.m_SynGroupTypeStr == NUMERALS)
+			|| (node.IsPrimitive() && HasRichPOS(node, NUMERAL))
+			|| (node.IsPrimitive() && HasRichPOS(node, NUMERAL_P))
+			|| FullAdjWithNumeralPrefix(node)
 			)
 		{
-			std::string LemmaAfterHyphen;
-			int pos = m_Nodes[NodeNo].m_Words[0].m_Lemma.find("-");
-
-			if (pos != -1)
-			{
-				LemmaAfterHyphen = m_Nodes[NodeNo].m_Words[0].m_Word.substr(pos + 1);
-				m_Nodes[NodeNo].m_Words[0].m_Lemma = m_Nodes[NodeNo].m_Words[0].m_Lemma.substr(0, pos);
-			};
-
-			std::string  ConvertedWord;
-			int dummy;
-			if ((m_Nodes[NodeNo].IsPrimitive())
-				&& (m_Nodes[NodeNo].m_Words[0].HasPOS(NUMERAL_P)
-					|| (
-						m_Nodes[NodeNo].m_Words[0].HasPOS(ADJ_FULL)
-						&& (GetNumeralPrefixGenitForm(m_Nodes[NodeNo].m_Words[0].m_Word, dummy) != -1)
-						)
-					)
-				)
-			{
-				ConvertedWord = ConvertOneWordOrdinalNumeral(m_Nodes[NodeNo].m_Words[0].m_Lemma);
-				int j = ConvertedWord.find('#');
-
-				if (j != -1) // по этой же схеме идут числительные "двухтысячный", которые не обрабатывется в этом if
-				{
-					int len = ConvertedWord.length() - j - 1;
-					m_Nodes[NodeNo].m_Words[0].m_Lemma.erase(0, m_Nodes[NodeNo].m_Words[0].m_Lemma.length() - len);
-					m_Nodes[NodeNo].m_Words[0].m_ParadigmId = m_pData->GetFirstParadigmId(morphRussian, m_Nodes[NodeNo].m_Words[0].m_Lemma, 0);
-					m_Nodes[NodeNo].m_Words[0].m_NumeralPrefix = ConvertedWord.substr(0, j);
-					ConvertedWord.erase(0, j + 1);
-					InterpretAdjectivesWithNumeral(*this, NodeNo);
-				};
-			}
-			else
-				ConvertedWord = ConvertRusNumeral(m_Nodes[NodeNo]);
-
-			std::string  ConvertedWordHyphen = "-1";
-
-			if (ConvertedWord == "-1")
-			{
-				// слова типа "оба", "несколько" являются числительными, но не конвертируются,
-				// а оставляются нетронутыми
-				//assert (m_Nodes[NodeNo].IsPrimitive());
-
-				//еще могут быть просто ряды числительных, которые нельзя считать целым QUANTIT, например:		
-				// "один два"
-				if (m_Nodes[NodeNo].m_Words.size() > 1)
-					for (long i = 0; i < m_Nodes[NodeNo].m_Words.size(); i++)
-					{
-						float Res = FindInTable(m_Nodes[NodeNo].m_Words[i].m_Lemma);
-						if (Res != -1)
-						{
-							m_Nodes[NodeNo].m_Words[i].m_Word = IntToStr(Res);;
-							m_Nodes[NodeNo].m_Words[i].m_Lemma = "";
-							m_Nodes[NodeNo].m_Words[i].m_ParadigmId = -1;
-						};
-
-					};
+			if (node.m_Words.size() == 1 && node.m_Words[0].m_ArabicNumber) {
 				continue;
-			};
-			// разберем случай "полтора-два миллиона баррелей"
-			if (LemmaAfterHyphen != "")
-			{
-				m_Nodes[NodeNo].m_Words[0].m_Lemma = LemmaAfterHyphen;
-				ConvertedWordHyphen = ConvertRusNumeral(m_Nodes[NodeNo]);
-			};
-
-
-			// берем этот слоту первого слова
-			RegisterEnum FirstCase = m_Nodes[NodeNo].m_Words[0].m_CharCase;
-			// удаляем все слова кроме последнего слова
-			m_Nodes[NodeNo].m_Words.erase(m_Nodes[NodeNo].m_Words.begin(), m_Nodes[NodeNo].m_Words.end() - 1);
-			// обнуляем лемму последнего слова
-			if (m_Nodes[NodeNo].m_Words[0].m_NumeralPrefix == "")
-			{
-				m_Nodes[NodeNo].m_Words[0].m_Lemma = "";
-				m_Nodes[NodeNo].m_Words[0].m_ParadigmId = -1;
-				m_Nodes[NodeNo].DelAllInterps();
-			};
-			m_Nodes[NodeNo].m_Words[0].m_Word = ConvertedWord;
-			if (HasRichPOS(NodeNo, NOUN)) // миилион, миллиард
-			{
-				m_Nodes[NodeNo].m_Words[0].m_Poses = 1 << NUMERAL;
-				m_Nodes[NodeNo].m_Words[0].SetFormGrammems(m_Nodes[NodeNo].GetGrammems());
-				m_Nodes[NodeNo].m_Words[0].m_GramCodes = m_Nodes[NodeNo].m_GramCodes;
 			}
-			if (ConvertedWordHyphen != "-1")
-			{
-				m_Nodes[NodeNo].m_Words[0].m_Word += "(" + ConvertedWordHyphen + ")";
-			};
-			m_Nodes[NodeNo].m_Words[0].m_CharCase = FirstCase;
-
-			m_Nodes[NodeNo].SetMainWordNo(0);
-			// case
+			ConvertOneRusNumeralsToArabic(*this, node);
 		};
+	}
 
 };
 

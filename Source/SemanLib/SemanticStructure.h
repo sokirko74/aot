@@ -84,6 +84,9 @@ public:
 	// является ли это слово наречием "по-английски", "по-хорошему"...
 	bool			m_bAdverbFromAdjective;	
 
+	// графематическая помета ЦК (цифровой комплекс)
+	bool           m_ArabicNumber;
+
 	// указатель на все словари системы 
 	const CSemanticsHolder* m_pData;
 	// две обертки для функций из CSemanticsHolder

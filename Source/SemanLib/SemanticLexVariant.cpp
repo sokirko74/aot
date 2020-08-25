@@ -401,6 +401,7 @@ void CRusSemStructure::InitWordFeatures(long WordNo, CRusSemWord& SemWord)
 
 		SemWord.m_IsPunct = !SemWord.m_Word.empty() && ispunct((BYTE)SemWord.m_Word[0]);
 		SemWord.m_ILE = SemWord.m_GraphDescrs.find(" LLE " ) != std::string::npos;
+		SemWord.m_ArabicNumber = SemWord.m_GraphDescrs.find("DC ") != std::string::npos;
 		if (SemWord.m_ILE) SemWord.SetFormGrammems (rAllCases);
 		SemWord.m_CharCase = W.m_Register;
 
@@ -427,7 +428,7 @@ void CRusSemStructure::InitWordFeatures(long WordNo, CRusSemWord& SemWord)
 		 римские цифры определяются так: у них должен быть приписана графета ЦК
 		 и первый символ должен быть латиницей
 		*/
-		if (SemWord.m_GraphDescrs.find("DC ") !=  -1)
+		if (SemWord.m_ArabicNumber)
 
 		  if (is_english_alpha( (BYTE)SemWord.m_Word[0]) )
 		  {
@@ -1693,18 +1694,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 					InsertNode(N);
 			};
 
-
-
-	std::string Sentence = "Find Situations :"; 
-	// создаем примитивные узлы 
-	for (size_t j = 0; j < m_piSent->m_Words.size(); j++)
-	{
-		Sentence += m_piSent->m_Words[j].m_strWord;
-		Sentence += " ";
-
-
-	};
-
+	PrintNodes();
 
 
 	// создаем отношения

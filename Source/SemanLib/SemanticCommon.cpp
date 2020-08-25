@@ -22,6 +22,7 @@ void CSemWord::Init()
 	m_WordWeight = 0;
 	m_AdditParadigmId = -1;
 	m_bAdverbFromAdjective = false;
+	m_ArabicNumber = false;
 };
 
 CSemWord::CSemWord() { Init(); }

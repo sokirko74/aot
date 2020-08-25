@@ -462,7 +462,11 @@ std::string	CreateTempFileName()
 
 };
 
-static FILE* log_fp = 0;
+#ifdef WIN32
+	#ifdef _DEBUG
+		static std::ofstream logger("seman.log");
+	#endif
+#endif
 
 void rml_TRACE( const char* format, ... )
 {
@@ -470,25 +474,18 @@ void rml_TRACE( const char* format, ... )
 #ifdef WIN32
 	#ifdef _DEBUG
 	      va_list arglst;
-          char s[2000];
+          char buffer[2000];
 		  if (strlen (format) >  200)
 		  {
 			  OutputDebugString("!!!!! too long debug line!!!");
 			  return;
 		  };
-
           va_start( arglst, format );
-	      vsprintf( s, format, arglst);
+	      vsprintf(buffer, format, arglst);
 	      va_end( arglst );
-		  OutputDebugString((s));
-		  
-		  if (log_fp)
-		  {
-			  fprintf (log_fp, "%s", s);
-			  fflush (log_fp);
-		  }
-		  else log_fp =  fopen("debug.log", "w+");
-
+		  OutputDebugString(buffer);
+		  logger << buffer;
+		  logger.flush();
 	#endif
 #endif
 };

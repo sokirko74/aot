@@ -1223,7 +1223,6 @@ public:
 		bool			IsProjectedNew(long Tag) const;	
 		// конвертирует все руские числительные в арабскую запись
 		void			ConvertRusNumeralsToArabic();
-		std::string			ConvertArabictoRusNumeral(const CRusSemNode& Node); //и обратно
 		// обработка клауз типа "давай пойдем в лес"
 		void			DealInvitatoryMoodBeforeTree (long ClauseNo);
 		void			DealInvitatoryMoodAfterTree ();

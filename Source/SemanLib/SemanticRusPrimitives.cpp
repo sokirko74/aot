@@ -1086,6 +1086,7 @@ void CRusSemWord::Init()
   	m_ILE = false;
 	m_bRomanNumber = false;
 	m_SynWordNo = -1;
+	m_ArabicNumber = false;
 };
 
 CRusSemWord::CRusSemWord() : CSemWord()

@@ -154,10 +154,15 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 			return res + pl_str;
 		};
 
-    	if (   RusNode.GetWord(0).HasPOS (NUMERAL) 
-			|| RusNode.GetWord(0).HasPOS (NUMERAL_P)
-		   )
-		  return  spellout_number (RusNode.GetWord(0).m_Word, RusNode.GetWord(0).HasPOS (NUMERAL));
+		if (RusNode.GetWord(0).HasPOS(NUMERAL)
+			|| RusNode.GetWord(0).HasPOS(NUMERAL_P)
+			) 
+		{
+			if (!RusNode.GetWord(0).m_ArabicNumber)
+				return  spellout_number(RusNode.GetWord(0).m_Word, RusNode.GetWord(0).HasPOS(NUMERAL));
+			else
+				return RusNode.GetWord(0).m_Word;
+		}
 
 		UINT grammems = 0;
 		if(is_pl) grammems |= ePlural;

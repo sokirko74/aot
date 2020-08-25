@@ -1,0 +1,654 @@
+[
+    {
+        "comments": "",
+        "input": "золото и серебро красивее и дороже бронзы",
+        "result": {
+            "aux relations": [],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  RML_THES_OMNI: 176779 1"
+                    ],
+                    "morph": "С дфст,но,ср,вн,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С дфст,но,ср,вн,им,ед,",
+                            "lemma": "ЗОЛОТО",
+                            "word": "ЗОЛОТО"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  RusOborots: и 1"
+                    ],
+                    "morph": "СОЮЗ дфст,но,ср,вн,им,ед,",
+                    "node_str": "MUA: И",
+                    "words": [
+                        {
+                            "inner morph": "СОЮЗ ",
+                            "lemma": "И",
+                            "word": "И"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  RML_THES_OMNI: 176927 1"
+                    ],
+                    "morph": "С дфст,но,ср,вн,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С дфст,но,ср,вн,им,ед,",
+                            "lemma": "СЕРЕБРО",
+                            "word": "СЕРЕБРО"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  ROSS: красивый 1"
+                    ],
+                    "morph": "П кач,сравн,но,од,",
+                    "words": [
+                        {
+                            "inner morph": "П кач,сравн,но,од,",
+                            "lemma": "КРАСИВЫЙ",
+                            "word": "КРАСИВЕЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "interps": [
+                        " +  RusOborots: и 1"
+                    ],
+                    "morph": "СОЮЗ ",
+                    "node_str": "MUA: И",
+                    "words": [
+                        {
+                            "inner morph": "СОЮЗ ",
+                            "lemma": "И",
+                            "word": "И"
+                        }
+                    ]
+                },
+                {
+                    "index": 5,
+                    "interps": [
+                        " +  ROSS: дорогой 1"
+                    ],
+                    "morph": "П кач,сравн,но,од,",
+                    "node_str": "MUA: ДОРОЖЕ",
+                    "words": [
+                        {
+                            "inner morph": "П кач,сравн,но,од,",
+                            "lemma": "ДОРОГОЙ",
+                            "word": "ДОРОЖЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 6,
+                    "interps": [
+                        " +  ROSS: +СУЩЕСТВ_неодуш 1"
+                    ],
+                    "morph": "С но,жр,рд,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С но,жр,вн,рд,им,ед,мн,",
+                            "lemma": "БРОНЗА",
+                            "word": "БРОНЗЫ"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 1,
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 0,
+                        "words": "ЗОЛОТО"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 1,
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 2,
+                        "words": "СЕРЕБРО"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 4,
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "ОДНОР_ПРИЛ",
+                    "target": {
+                        "node_id": 3,
+                        "words": "КРАСИВЕЕ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 4,
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "ОДНОР_ПРИЛ",
+                    "target": {
+                        "node_id": 5,
+                        "words": "MUA: ДОРОЖЕ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 5,
+                        "words": "MUA: ДОРОЖЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 6,
+                        "words": "БРОНЗЫ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 5,
+                        "words": "MUA: ДОРОЖЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 1,
+                        "words": "MUA: И"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "comments": "",
+        "input": "я люблю Петю больше, чем Васю",
+        "result": {
+            "aux relations": [],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  ROSS: я 1"
+                    ],
+                    "morph": "МС 1л,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 1л,им,ед,",
+                            "lemma": "Я",
+                            "word": "Я"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  ROSS: любить 1"
+                    ],
+                    "morph": "Г дст,пе,нс,1л,нст,ед,",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,пе,нс,1л,нст,ед,",
+                            "lemma": "ЛЮБИТЬ",
+                            "word": "ЛЮБЛЮ"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  ROSS: +СУЩЕСТВ_одуш 1"
+                    ],
+                    "morph": "С имя,од,мр,вн,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С имя,од,мр,вн,ед,",
+                            "lemma": "ПЕТЯ",
+                            "word": "ПЕТЮ"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  ROSS: много 1"
+                    ],
+                    "morph": "ЧИСЛ сравн,",
+                    "node_str": "MUA: БОЛЬШЕ",
+                    "words": [
+                        {
+                            "inner morph": "ЧИСЛ сравн,",
+                            "lemma": "МНОГО",
+                            "word": "БОЛЬШЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "interps": [
+                        " +  ROSS: +СУЩЕСТВ_одуш 1"
+                    ],
+                    "morph": "С имя,од,мр,вн,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С имя,од,мр,вн,ед,",
+                            "lemma": "ВАСЯ",
+                            "word": "ВАСЮ"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "SUB",
+                    "source": {
+                        "node_id": 1,
+                        "words": "ЛЮБЛЮ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "node_id": 0,
+                        "words": "Я"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 3,
+                        "words": "MUA: БОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 4,
+                        "words": "ВАСЮ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 3,
+                        "words": "MUA: БОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 2,
+                        "words": "ПЕТЮ"
+                    }
+                },
+                {
+                    "name": "CONTEN",
+                    "source": {
+                        "node_id": 1,
+                        "words": "ЛЮБЛЮ"
+                    },
+                    "syntax_rel": "п_доп",
+                    "target": {
+                        "node_id": 3,
+                        "words": "MUA: БОЛЬШЕ"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "comments": "",
+        "input": "я пел в два раза дольше тебя",
+        "result": {
+            "aux relations": [],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  ROSS: я 1"
+                    ],
+                    "morph": "МС 1л,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 1л,им,ед,",
+                            "lemma": "Я",
+                            "word": "Я"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  ROSS: петь 1"
+                    ],
+                    "morph": "Г дст,пе,нс,прш,мр,ед,",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,пе,нс,прш,мр,ед,",
+                            "lemma": "ПЕТЬ",
+                            "word": "ПЕЛ"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [],
+                    "morph": "ЧИСЛ мр,вн,",
+                    "words": [
+                        {
+                            "inner morph": "ЧИСЛ мр,вн,",
+                            "lemma": "",
+                            "word": "2"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  RusCollocs: в_раз 1"
+                    ],
+                    "morph": "С мр,вн,мн,",
+                    "words": [
+                        {
+                            "inner morph": "С но,мр,рд,ед,",
+                            "lemma": "РАЗ",
+                            "word": "РАЗА"
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "interps": [
+                        " +  ROSS: +П_сравн 1"
+                    ],
+                    "morph": "П кач,сравн,но,",
+                    "node_str": "MUA: ДОЛЬШЕ",
+                    "words": [
+                        {
+                            "inner morph": "П кач,сравн,но,од,",
+                            "lemma": "ДОЛГИЙ",
+                            "word": "ДОЛЬШЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 5,
+                    "interps": [
+                        " +  ROSS: ты 1"
+                    ],
+                    "morph": "МС 2л,рд,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 2л,вн,рд,ед,",
+                            "lemma": "ТЫ",
+                            "word": "ТЕБЯ"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "QUANTIT",
+                    "source": {
+                        "node_id": 3,
+                        "words": "РАЗА"
+                    },
+                    "syntax_rel": "ЧИСЛ_СУЩ",
+                    "target": {
+                        "node_id": 2,
+                        "words": "2"
+                    }
+                },
+                {
+                    "name": "VALUE",
+                    "source": {
+                        "node_id": 4,
+                        "words": "MUA: ДОЛЬШЕ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 3,
+                        "words": "РАЗА"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 4,
+                        "words": "MUA: ДОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 5,
+                        "words": "ТЕБЯ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 4,
+                        "words": "MUA: ДОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 0,
+                        "words": "Я"
+                    }
+                },
+                {
+                    "name": "AGENT",
+                    "source": {
+                        "node_id": 1,
+                        "words": "ПЕЛ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "node_id": 4,
+                        "words": "MUA: ДОЛЬШЕ"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "comments": "",
+        "input": "бюджетные ассигнования и гранты будут в два раза больше",
+        "result": {
+            "aux relations": [],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " + FinThes: 101251 (ItemNo=1)",
+                        " +  ROSS: +ПРИЛ 1"
+                    ],
+                    "morph": "П кач,но,вн,им,мн,",
+                    "words": [
+                        {
+                            "inner morph": "П кач,но,од,вн,им,мн,",
+                            "lemma": "БЮДЖЕТНЫЙ",
+                            "word": "БЮДЖЕТНЫЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " + FinThes: 101251 (ItemNo=2)",
+                        " -  ROSS: ассигнование 1",
+                        " +  ROSS: ассигнование 2"
+                    ],
+                    "morph": "С но,ср,им,мн,",
+                    "words": [
+                        {
+                            "inner morph": "С но,ср,им,мн,",
+                            "lemma": "АССИГНОВАНИЕ",
+                            "word": "АССИГНОВАНИЯ"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  RusOborots: и 1"
+                    ],
+                    "morph": "СОЮЗ вн,им,мн,",
+                    "node_str": "MUA: И",
+                    "words": [
+                        {
+                            "inner morph": "СОЮЗ ",
+                            "lemma": "И",
+                            "word": "И"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  ROSS: +СУЩЕСТВ_неодуш 1"
+                    ],
+                    "morph": "С но,мр,вн,им,мн,",
+                    "words": [
+                        {
+                            "inner morph": "С но,мр,вн,им,мн,",
+                            "lemma": "ГРАНТ",
+                            "word": "ГРАНТЫ"
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "interps": [
+                        " +  ROSS: много 1"
+                    ],
+                    "morph": "ЧИСЛ сравн,3л,буд,мн,",
+                    "node_str": "MUA: БУДУТ-БОЛЬШЕ",
+                    "words": [
+                        {
+                            "inner morph": "ЧИСЛ нп,нс,сравн,3л,буд,мн,",
+                            "lemma": "МНОГО",
+                            "word": "БУДУТ-БОЛЬШЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 5,
+                    "interps": [],
+                    "morph": "ЧИСЛ ",
+                    "words": [
+                        {
+                            "inner morph": "ЧИСЛ ",
+                            "lemma": "",
+                            "word": "2"
+                        }
+                    ]
+                },
+                {
+                    "index": 6,
+                    "interps": [
+                        " +  RusCollocs: в_раз 1"
+                    ],
+                    "morph": "С рд,",
+                    "words": [
+                        {
+                            "inner morph": "С но,мр,рд,ед,",
+                            "lemma": "РАЗ",
+                            "word": "РАЗА"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 2,
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 1,
+                        "words": "АССИГНОВАНИЯ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 2,
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 3,
+                        "words": "ГРАНТЫ"
+                    }
+                },
+                {
+                    "name": "QUANTIT",
+                    "source": {
+                        "node_id": 6,
+                        "words": "РАЗА"
+                    },
+                    "syntax_rel": "ЧИСЛ_СУЩ",
+                    "target": {
+                        "node_id": 5,
+                        "words": "2"
+                    }
+                },
+                {
+                    "name": "PROPERT",
+                    "source": {
+                        "node_id": 1,
+                        "words": "АССИГНОВАНИЯ"
+                    },
+                    "syntax_rel": "ПРИЛ_СУЩ",
+                    "target": {
+                        "node_id": 0,
+                        "words": "БЮДЖЕТНЫЕ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 4,
+                        "words": "MUA: БУДУТ-БОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 6,
+                        "words": "РАЗА"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "node_id": 4,
+                        "words": "MUA: БУДУТ-БОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 2,
+                        "words": "MUA: И"
+                    }
+                }
+            ]
+        }
+    }
+]
