@@ -1,0 +1,669 @@
+[
+    {
+        "comments": "",
+        "input": "﻿Своим неожиданным приездом  он  застал меня врасплох.",
+        "result": {
+            "aux relations": [],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  ROSS: свой 1"
+                    ],
+                    "morph": "МС-П но,мр,тв,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС-П но,од,мр,тв,ед,",
+                            "lemma": "СВОЙ",
+                            "word": "СВОИМ"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  ROSS: неожиданный 1"
+                    ],
+                    "morph": "П кач,но,мр,тв,ед,",
+                    "words": [
+                        {
+                            "inner morph": "П кач,но,од,мр,тв,ед,",
+                            "lemma": "НЕОЖИДАННЫЙ",
+                            "word": "НЕОЖИДАННЫМ"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  ROSS: приезд 1"
+                    ],
+                    "morph": "С но,мр,тв,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С но,мр,тв,ед,",
+                            "lemma": "ПРИЕЗД",
+                            "word": "ПРИЕЗДОМ"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  ROSS: он 1"
+                    ],
+                    "morph": "МС од,3л,мр,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 3л,мр,им,ед,",
+                            "lemma": "ОН",
+                            "word": "ОН"
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "interps": [
+                        " +  RusCollocs: застигнуть_врасплох 1"
+                    ],
+                    "morph": "Г дст,пе,св,прш,мр,ед,",
+                    "node_str": "ЗАСТАЛ ВРАСПЛОХ",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,пе,св,прш,мр,ед,",
+                            "lemma": "ЗАСТАТЬ",
+                            "word": "ЗАСТАЛ"
+                        },
+                        {
+                            "inner morph": "Н ",
+                            "lemma": "ВРАСПЛОХ",
+                            "word": "ВРАСПЛОХ"
+                        }
+                    ]
+                },
+                {
+                    "index": 5,
+                    "interps": [
+                        " +  ROSS: я 1"
+                    ],
+                    "morph": "МС 1л,вн,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 1л,вн,рд,ед,",
+                            "lemma": "Я",
+                            "word": "МЕНЯ"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "PROPERT",
+                    "source": {
+                        "node_id": 2,
+                        "words": "ПРИЕЗДОМ"
+                    },
+                    "syntax_rel": "ПРИЛ_СУЩ",
+                    "target": {
+                        "node_id": 0,
+                        "words": "СВОИМ"
+                    }
+                },
+                {
+                    "name": "PROPERT",
+                    "source": {
+                        "node_id": 2,
+                        "words": "ПРИЕЗДОМ"
+                    },
+                    "syntax_rel": "ПРИЛ_СУЩ",
+                    "target": {
+                        "node_id": 1,
+                        "words": "НЕОЖИДАННЫМ"
+                    }
+                },
+                {
+                    "name": "SUB",
+                    "source": {
+                        "node_id": 4,
+                        "words": "ЗАСТАЛ ВРАСПЛОХ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "node_id": 3,
+                        "words": "ОН"
+                    }
+                },
+                {
+                    "name": "OBJ",
+                    "source": {
+                        "node_id": 4,
+                        "words": "ЗАСТАЛ ВРАСПЛОХ"
+                    },
+                    "syntax_rel": "п_доп",
+                    "target": {
+                        "node_id": 5,
+                        "words": "МЕНЯ"
+                    }
+                },
+                {
+                    "name": "METHOD",
+                    "source": {
+                        "node_id": 4,
+                        "words": "ЗАСТАЛ ВРАСПЛОХ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 2,
+                        "words": "ПРИЕЗДОМ"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "comments": "",
+        "input": "Плохая погода свела на нет все преимущества, которые у нас были",
+        "result": {
+            "aux relations": [],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  ROSS: +ПРИЛ 1"
+                    ],
+                    "morph": "П кач,но,жр,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "П кач,но,од,жр,им,ед,",
+                            "lemma": "ПЛОХОЙ",
+                            "word": "ПЛОХАЯ"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  ROSS: погода 1"
+                    ],
+                    "morph": "С но,жр,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С но,жр,им,ед,",
+                            "lemma": "ПОГОДА",
+                            "word": "ПОГОДА"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  RusCollocs: сводить_на_нет 1"
+                    ],
+                    "morph": "Г дст,пе,св,прш,жр,ед,",
+                    "node_str": "СВЕЛА НА НЕТ",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,пе,св,прш,жр,ед,",
+                            "lemma": "СВЕСТИ",
+                            "word": "СВЕЛА"
+                        },
+                        {
+                            "inner morph": "ПРЕДЛ ",
+                            "lemma": "НА",
+                            "word": "НА"
+                        },
+                        {
+                            "inner morph": "ЧАСТ ",
+                            "lemma": "НЕТ",
+                            "word": "НЕТ"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " -  ROSS: весь 1",
+                        " +  ROSS: весь 2"
+                    ],
+                    "morph": "МС-П но,вн,им,мн,",
+                    "words": [
+                        {
+                            "inner morph": "МС-П но,од,вн,им,мн,",
+                            "lemma": "ВЕСЬ",
+                            "word": "ВСЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "interps": [
+                        " +  ROSS: преимущество 1"
+                    ],
+                    "morph": "С ср,вн,мн,",
+                    "words": [
+                        {
+                            "inner morph": "С но,ср,вн,им,мн,",
+                            "lemma": "ПРЕИМУЩЕСТВО",
+                            "word": "ПРЕИМУЩЕСТВА"
+                        }
+                    ]
+                },
+                {
+                    "index": 5,
+                    "interps": [
+                        " +  ROSS: который 1"
+                    ],
+                    "morph": "МС-П но,им,мн,",
+                    "words": [
+                        {
+                            "inner morph": "МС-П но,од,им,мн,",
+                            "lemma": "КОТОРЫЙ",
+                            "word": "КОТОРЫЕ"
+                        }
+                    ]
+                },
+                {
+                    "index": 6,
+                    "interps": [
+                        " +  ROSS: мы 1"
+                    ],
+                    "morph": "МС 1л,рд,мн,",
+                    "preposition": "у",
+                    "words": [
+                        {
+                            "inner morph": "МС 1л,рд,мн,",
+                            "lemma": "МЫ",
+                            "word": "НАС"
+                        }
+                    ]
+                },
+                {
+                    "index": 7,
+                    "interps": [
+                        " -  ROSS: быть 1",
+                        " +  ROSS: быть 2",
+                        " -  ROSS: быть 3",
+                        " -  ROSS: быть 4"
+                    ],
+                    "morph": "Г дст,нп,нс,прш,мн,",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,нп,нс,прш,мн,",
+                            "lemma": "БЫТЬ",
+                            "word": "БЫЛИ"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "PROPERT",
+                    "source": {
+                        "node_id": 1,
+                        "words": "ПОГОДА"
+                    },
+                    "syntax_rel": "ПРИЛ_СУЩ",
+                    "target": {
+                        "node_id": 0,
+                        "words": "ПЛОХАЯ"
+                    }
+                },
+                {
+                    "name": "SUB",
+                    "source": {
+                        "node_id": 2,
+                        "words": "СВЕЛА НА НЕТ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "node_id": 1,
+                        "words": "ПОГОДА"
+                    }
+                },
+                {
+                    "name": "CONTEN",
+                    "source": {
+                        "node_id": 2,
+                        "words": "СВЕЛА НА НЕТ"
+                    },
+                    "syntax_rel": "п_доп",
+                    "target": {
+                        "node_id": 4,
+                        "words": "ПРЕИМУЩЕСТВА"
+                    }
+                },
+                {
+                    "name": "PROPERT",
+                    "source": {
+                        "node_id": 4,
+                        "words": "ПРЕИМУЩЕСТВА"
+                    },
+                    "syntax_rel": "ПРИЛ_СУЩ",
+                    "target": {
+                        "node_id": 3,
+                        "words": "ВСЕ"
+                    }
+                },
+                {
+                    "name": "F-ACT",
+                    "source": {
+                        "node_id": 7,
+                        "words": "БЫЛИ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 6,
+                        "words": "НАС"
+                    }
+                },
+                {
+                    "name": "S-ACT",
+                    "source": {
+                        "node_id": 7,
+                        "words": "БЫЛИ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "node_id": 5,
+                        "words": "КОТОРЫЕ"
+                    }
+                },
+                {
+                    "name": "THESAME",
+                    "source": {
+                        "node_id": 5,
+                        "words": "КОТОРЫЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 4,
+                        "words": "ПРЕИМУЩЕСТВА"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "comments": "",
+        "input": "Ни у кого не хватило духу сказать ему об этом",
+        "result": {
+            "aux relations": [
+                {
+                    "name": "THESAME",
+                    "source": {
+                        "node_id": 4,
+                        "words": "ЕМУ"
+                    },
+                    "syntax_rel": "анафора",
+                    "target": {
+                        "node_id": 2,
+                        "words": "ДУХУ"
+                    }
+                }
+            ],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  ROSS: никто 1"
+                    ],
+                    "morph": "МС мр,рд,ед,",
+                    "preposition": "у",
+                    "words": [
+                        {
+                            "inner morph": "МС мр,рд,ед,",
+                            "lemma": "НИКТО",
+                            "word": "КОГО"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  ROSS: +ПЕР_ГЛАГ 1"
+                    ],
+                    "morph": "Г дст,пе,св,прш,ср,ед,",
+                    "node_str": "ХВАТИЛО (НЕ)",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,пе,св,прш,ср,ед,",
+                            "lemma": "ХВАТИТЬ",
+                            "word": "ХВАТИЛО"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  ROSS: +СУЩЕСТВ_одуш 1"
+                    ],
+                    "morph": "С од,мр,дт,ед,",
+                    "words": [
+                        {
+                            "inner morph": "С од,мр,дт,ед,",
+                            "lemma": "ДУХ",
+                            "word": "ДУХУ"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  ROSS: говорить 1"
+                    ],
+                    "morph": "ИНФИНИТИВ дст,пе,св,",
+                    "words": [
+                        {
+                            "inner morph": "ИНФИНИТИВ дст,пе,св,",
+                            "lemma": "СКАЗАТЬ",
+                            "word": "СКАЗАТЬ"
+                        }
+                    ]
+                },
+                {
+                    "anteceden": "ДУХУ[2]",
+                    "index": 4,
+                    "interps": [
+                        " +  ROSS: он 1"
+                    ],
+                    "morph": "МС 3л,мр,дт,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 3л,мр,дт,ед,",
+                            "lemma": "ОН",
+                            "word": "ЕМУ"
+                        }
+                    ]
+                },
+                {
+                    "index": 5,
+                    "interps": [
+                        " +  ROSS: это 1"
+                    ],
+                    "morph": "МС ср,пр,ед,",
+                    "preposition": "об",
+                    "words": [
+                        {
+                            "inner morph": "МС ср,пр,ед,",
+                            "lemma": "ЭТО",
+                            "word": "ЭТОМ"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "LOK",
+                    "source": {
+                        "node_id": 1,
+                        "words": "ХВАТИЛО (НЕ)"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 0,
+                        "words": "КОГО"
+                    }
+                },
+                {
+                    "name": "ADR",
+                    "source": {
+                        "node_id": 3,
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 2,
+                        "words": "ДУХУ"
+                    }
+                },
+                {
+                    "name": "THEME",
+                    "source": {
+                        "node_id": 3,
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 5,
+                        "words": "ЭТОМ"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "comments": "",
+        "input": "он отправляется попытать счастья в Лондоне",
+        "result": {
+            "aux relations": [
+                {
+                    "name": "SUB",
+                    "source": {
+                        "node_id": 2,
+                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 0,
+                        "words": "ОН"
+                    }
+                }
+            ],
+            "nodes": [
+                {
+                    "index": 0,
+                    "interps": [
+                        " +  ROSS: он 1"
+                    ],
+                    "morph": "МС од,3л,мр,им,ед,",
+                    "words": [
+                        {
+                            "inner morph": "МС 3л,мр,им,ед,",
+                            "lemma": "ОН",
+                            "word": "ОН"
+                        }
+                    ]
+                },
+                {
+                    "index": 1,
+                    "interps": [
+                        " +  ROSS: отправляться 1"
+                    ],
+                    "morph": "Г дст,нп,нс,3л,нст,ед,",
+                    "words": [
+                        {
+                            "inner morph": "Г дст,нп,нс,3л,нст,ед,",
+                            "lemma": "ОТПРАВЛЯТЬСЯ",
+                            "word": "ОТПРАВЛЯЕТСЯ"
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "interps": [
+                        " +  RusCollocs: попытать_счастья 1"
+                    ],
+                    "morph": "ИНФИНИТИВ дст,пе,св,",
+                    "node_str": "ПОПЫТАТЬ СЧАСТЬЯ",
+                    "words": [
+                        {
+                            "inner morph": "ИНФИНИТИВ дст,пе,св,",
+                            "lemma": "ПОПЫТАТЬ",
+                            "word": "ПОПЫТАТЬ"
+                        },
+                        {
+                            "inner morph": "С но,ср,вн,рд,им,ед,мн,",
+                            "lemma": "СЧАСТЬЕ",
+                            "word": "СЧАСТЬЯ"
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "interps": [
+                        " +  RML_THES_LOC: @ModelId3 1"
+                    ],
+                    "morph": "С дфст,лок,но,мр,пр,ед,",
+                    "preposition": "в",
+                    "words": [
+                        {
+                            "inner morph": "С дфст,лок,но,мр,пр,ед,",
+                            "lemma": "ЛОНДОН",
+                            "word": "ЛОНДОНЕ"
+                        }
+                    ]
+                }
+            ],
+            "relations": [
+                {
+                    "name": "AGENT",
+                    "source": {
+                        "node_id": 1,
+                        "words": "ОТПРАВЛЯЕТСЯ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "node_id": 0,
+                        "words": "ОН"
+                    }
+                },
+                {
+                    "name": "AIM",
+                    "source": {
+                        "node_id": 1,
+                        "words": "ОТПРАВЛЯЕТСЯ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 2,
+                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
+                    }
+                },
+                {
+                    "name": "LOK",
+                    "source": {
+                        "node_id": 2,
+                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 3,
+                        "words": "ЛОНДОНЕ"
+                    }
+                },
+                {
+                    "name": "SUB",
+                    "source": {
+                        "node_id": 2,
+                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 0,
+                        "words": "ОН"
+                    }
+                }
+            ]
+        }
+    }
+]

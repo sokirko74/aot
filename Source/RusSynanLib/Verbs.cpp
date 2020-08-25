@@ -68,8 +68,11 @@ bool CRusFormatCaller::format_for_dir_obj (CGroup& G)
 	G.SetGrammems( Wi.GetGrammems() );
  	QWORD g = ObjGroup.GetGrammems() & (_QM(rAccusativ) | ~rAllCases); //убиваем лишние падежи, "открыл дверь"
 	((CGroup&)ObjGroup).SetGrammems(g);
-	if (Wk.GetGrammems() & _QM(rAccusativ) )
-		Wk.SetGrammems(Wk.GetGrammems() & (_QM(rAccusativ) | _QM(rDativ) | ~rAllCases)); //rDativ для "правительство выделило церкви гектар"
+
+	// "он отправляется попытать счастья в Лондоне" менять граммемы пока не будем, поскольку здесь родительный
+	//if (Wk.GetGrammems() & _QM(rAccusativ) )
+	//	Wk.SetGrammems(Wk.GetGrammems() & (_QM(rAccusativ) | _QM(rDativ) | ~rAllCases)); //rDativ для "правительство выделило церкви гектар"
+
 	return true;
 }
 
