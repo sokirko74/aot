@@ -49,15 +49,16 @@ double GetCardinalNumeral(const std::string& word)
 	return -1;
 };
 
-QWORD GetOrdinalNumeral(const std::string& word)
+double GetOrdinalNumeral(const std::string& word)
 {
-	for(int i = 0 ; i < NumeralToNumberCount; i++ )
-		if( word == NumeralToNumber[i].m_Ordinal )
-			return NumeralToNumber[i].m_Number;
+	for(size_t i = 0 ; i < NumeralToNumberCount; i++ )
+		if (word == NumeralToNumber[i].m_Ordinal) {
+			return  NumeralToNumber[i].m_Number;
+		}
 	return -1;
 };
 
-QWORD GetNounNumeral(const std::string& word)
+double GetNounNumeral(const std::string& word)
 {
 	for(int i = 0 ; i < NumeralToNumberCount; i++ )
         if( word == NumeralToNumber[i].m_CoollectiveNumber )

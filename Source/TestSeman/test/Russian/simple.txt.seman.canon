@@ -8,7 +8,7 @@
                 {
                     "index": 0,
                     "interps": [
-                        " +  RML_THES_OMNI: @ModelId3 1\n"
+                        " +  RML_THES_OMNI: @ModelId3 1"
                     ],
                     "morph": "С од,жр,им,ед,",
                     "words": [
@@ -22,7 +22,7 @@
                 {
                     "index": 1,
                     "interps": [
-                        " +  ROSS: +ПЕР_ГЛАГ 1\n"
+                        " +  ROSS: +ПЕР_ГЛАГ 1"
                     ],
                     "morph": "Г дст,пе,нс,прш,жр,ед,",
                     "words": [
@@ -36,7 +36,7 @@
                 {
                     "index": 2,
                     "interps": [
-                        " +  ROSS: +СУЩЕСТВ_неодуш 1\n"
+                        " +  ROSS: +СУЩЕСТВ_неодуш 1"
                     ],
                     "morph": "С но,жр,вн,ед,",
                     "words": [
@@ -86,7 +86,7 @@
                     "index": 0,
                     "interps": [
                         " + TimeRoss: в_пятницу1 (ItemNo=2) (LexFetNo=1) (m_PrepNoInArticle=1)",
-                        " +  RML_THES_OMNI: @ModelId3 1\n"
+                        " +  RML_THES_OMNI: @ModelId3 1"
                     ],
                     "morph": "С но,мр,вн,ед,",
                     "preposition": "Во",
@@ -101,7 +101,7 @@
                 {
                     "index": 1,
                     "interps": [
-                        " +  ROSS: я 1\n"
+                        " +  ROSS: я 1"
                     ],
                     "morph": "МС 1л,им,ед,",
                     "words": [
@@ -115,8 +115,8 @@
                 {
                     "index": 2,
                     "interps": [
-                        " +  ROSS: выходить 1\n",
-                        " -  ROSS: выходить 2\n"
+                        " +  ROSS: выходить 1",
+                        " -  ROSS: выходить 2"
                     ],
                     "morph": "Г дст,нп,св,прш,мр,ед,",
                     "words": [
@@ -130,7 +130,7 @@
                 {
                     "index": 3,
                     "interps": [
-                        " +  RML_THES_LOC: @ModelId3 1\n"
+                        " +  RML_THES_LOC: @ModelId3 1"
                     ],
                     "morph": "С мр,вн,ед,",
                     "preposition": "во",
@@ -145,7 +145,7 @@
                 {
                     "index": 4,
                     "interps": [
-                        " +  ROSS: который 1\n"
+                        " +  ROSS: который 1"
                     ],
                     "morph": "МС-П но,мр,вн,рд,ед,",
                     "words": [
@@ -159,7 +159,7 @@
                 {
                     "index": 5,
                     "interps": [
-                        " +  ROSS: я 1\n"
+                        " +  ROSS: я 1"
                     ],
                     "morph": "МС 1л,им,ед,",
                     "words": [
@@ -173,7 +173,7 @@
                 {
                     "index": 6,
                     "interps": [
-                        " +  ROSS: любить 1\n"
+                        " +  ROSS: любить 1"
                     ],
                     "morph": "Г дст,пе,нс,прш,мр,ед,",
                     "node_str": "ЛЮБИЛ (НЕ)",

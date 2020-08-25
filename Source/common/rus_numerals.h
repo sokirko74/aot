@@ -68,7 +68,7 @@ extern std::string IntToStr (double i);
 extern std::string FindByNumber(QWORD Number);
 extern int IsAdverbRule(const std::string& Lemma);
 extern double GetCardinalNumeral(const std::string& word);
-extern QWORD GetOrdinalNumeral(const std::string& word);
-extern QWORD GetNounNumeral(const std::string& word);
+extern double GetOrdinalNumeral(const std::string& word);
+extern double GetNounNumeral(const std::string& word);
 extern std::string spellout_number_ru(QWORD x, BYTE IsOrdinal); // 0 - no , 1 - yes, 10 - yes, for thousands
 
