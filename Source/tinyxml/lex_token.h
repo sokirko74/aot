@@ -111,7 +111,7 @@ public :
    /// Set the std::string value of a lexical element
    void v_set (lexico lex_in, const char * cp_repre)
    {
-      unsigned u_length;
+      size_t u_length;
 
       l_enum = lex_in;
       delete [] cp_value;

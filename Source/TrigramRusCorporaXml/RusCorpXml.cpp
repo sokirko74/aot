@@ -20,7 +20,7 @@ bool is_postfix(const std::string &Body, const std::string &Postfix) {
 
 bool CRusCorpXmlFile::ReadNextSentence(std::istream &inputStream) {
     char ch;
-    int len = 0;
+    size_t len = 0;
     m_SentenceStr.clear();
     const std::string SentenceStart = "<se>";
     const std::string SentenceEnd = "</se>";

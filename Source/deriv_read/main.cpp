@@ -158,7 +158,7 @@ public:
 	}
 
 	//! find target by source. Return number of found targets.
-	int SourceToTarget(UINT id, DwordVector &ids, DwordVector &afixes){
+	size_t SourceToTarget(UINT id, DwordVector &ids, DwordVector &afixes){
 		std::pair<Iter, Iter> range = std::equal_range
 			(vec1.begin(), vec1.end(), deriv_pair(id, 0), deriv_pair::Less1());
 
@@ -170,7 +170,7 @@ public:
 	}
 
 	//! find source by target. Return number of found sources.
-	int TargetToSource(UINT id, DwordVector &ids, DwordVector &afixes){
+	size_t TargetToSource(UINT id, DwordVector &ids, DwordVector &afixes){
 		std::pair<Iter, Iter> range = std::equal_range
 			(vec2.begin(), vec2.end(), deriv_pair(0, id), deriv_pair::Less2());
 		for(Iter it = range.first; it != range.second; ++it){
@@ -182,7 +182,7 @@ public:
 
 
 	//! Number of afixes
-	int AfixCount(){
+	size_t AfixCount(){
 		return pref.size();
 	}
 	//! Get Afix of source by number. 
@@ -230,7 +230,7 @@ public:
 
 void create_nest(UINT id, std::set<UINT> &id_set, AfixDerivDict &d1, AfixDerivDict &d2)
 {
-	int size = id_set.size();
+	size_t size = id_set.size();
 	id_set.insert(id);
 	if(size == id_set.size())
 		return;

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "seman_i.h"
 #include "ComSemNode.h"
 #include "ComSemWord.h"

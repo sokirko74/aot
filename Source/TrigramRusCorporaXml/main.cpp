@@ -69,7 +69,7 @@ bool CookSentence(const CTrigramModel& M, std::istream& inputStream, std::ostrea
         }
     }
     catch (CExpc c) {
-        fprintf(stderr, "Error! %s, processed tokens count = %i\n", c.m_strCause.c_str(), TokensCount);
+        fprintf(stderr, "Error! %s, processed tokens count = %zi\n", c.m_strCause.c_str(), TokensCount);
         return false;
     }
     return true;
@@ -93,7 +93,7 @@ bool Disambiguate(const CTrigramModel &M, std::istream& inputStream, std::ostrea
         fprintf(stderr, "\n");
     }
     catch (CExpc c) {
-        fprintf(stderr, "Error! %s, processed tokens count = %i\n", c.m_strCause.c_str(), TokensCount);
+        fprintf(stderr, "Error! %s, processed tokens count = %zi\n", c.m_strCause.c_str(), TokensCount);
         return false;
     }
 

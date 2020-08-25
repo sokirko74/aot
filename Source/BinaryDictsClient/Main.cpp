@@ -136,7 +136,7 @@ int main()
 
 		{
 			std::string s(alt);
-			int slash = s.find('/');
+			size_t slash = s.find('/');
 			if(slash >= 0 && slash < s.size()){
 				std::string eng = s.substr(0,slash);
 				std::string rus = s.substr(slash+1, s.size());
