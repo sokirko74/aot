@@ -2568,3 +2568,15 @@ std::vector<std::string> list_path_by_file_mask(std::string filemask)
 	}
 	return filenames;
 };
+
+std::string join_string(const std::vector<std::string>& items, const std::string& delimiter) {
+	std::string result;
+	if (items.empty()) {
+		return result;
+	}
+	result = items[0];
+	for (size_t i = 1; i < items.size(); ++i) {
+		result += delimiter + items[i];
+	}
+	return result;
+}

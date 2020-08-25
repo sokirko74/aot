@@ -666,6 +666,8 @@ public:
 	std::string			GetTclGraph(bool ShowUnusedValencies, bool UseIsTop);
 	// выдает отношения, которые не нужно упорядочивать в дерево (они не являются основными)
 	std::string	GetOtherRelations();
+	// печатает все словарные интерпретации  узла
+	std::vector<std::string> GetNodeDictInterps(size_t nodeIndex) const;
 	// выдает TCL-представление для синтаксических отношений
 	std::string			GetTclSyntaxGraph();
 	// выдает ошибку 

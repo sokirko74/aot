@@ -523,6 +523,22 @@ std::string GetStringVectorInOneStr(const StringVector& Vec, std::string Delimit
 };
 
 
+std::vector<std::string> CSemanticStructure::GetNodeDictInterps(size_t nodeIndex) const {
+	std::vector<std::string> result;
+	if (GetNode(nodeIndex).m_Colloc.m_Type != NoneType)
+	{
+		result.push_back(" + " + OpenCollocInterpToStr(GetNode(nodeIndex).m_Colloc));
+	}
+
+	const CSemNode& N = GetNode(nodeIndex);
+	for (long k = 0; k < N.GetInterps().size(); k++)
+	{
+		result.push_back(Format("%s %s",
+			(k == N.GetCurrInterpNo()) ? " + " : " - ",
+			InterpToStr(N.GetInterps().begin() + k).c_str()));
+	};
+	return result;
+}
 
 
 
@@ -607,28 +623,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 		};
 
 
-
-		std::string AllInterps;
-
-		if  ( GetNode(i).m_Colloc.m_Type != NoneType  )
-		{
-			AllInterps += " + ";
-			AllInterps += OpenCollocInterpToStr(GetNode(i).m_Colloc);
-			AllInterps += "\n ";
-		}
-
-
-		for (long k=0; k < GetNode(i).GetInterps().size(); k++)
-		{
-			const CSemNode& N = GetNode(i);
-			const CDictUnitInterpVector& Interps = N.GetInterps();
-			std::vector<CDictUnitInterp>::const_iterator I = Interps.begin() + k;
-			AllInterps += Format("%s %s\n", 
-								(k == GetNode(i).GetCurrInterpNo()) ? " + ": " - ",
-								InterpToStr(I).c_str());
-
-		};
-		Res += Format("$GT($main,graph) set $nds(%i)  .dict_interp \"%s\"\1",i,AllInterps.c_str());
+		Res += Format("$GT($main,graph) set $nds(%i)  .dict_interp \"%s\"\1",i, join_string(GetNodeDictInterps(i), "\n").c_str());
 
 		if (GetNode(i).IsPrimitive())
 		{

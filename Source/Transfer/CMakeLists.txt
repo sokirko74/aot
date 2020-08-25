@@ -37,3 +37,4 @@ target_link_libraries(Transfer
     aot_common
 )
 
+target_precompile_headers(${PROJECT_NAME} PUBLIC StdAfx.h)

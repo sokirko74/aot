@@ -1,39 +1,13 @@
-/*
-Пример вызова интерфейса Seman. В stdin подаются предложения в  кодировке Win-1251(по одному на каждой строке). 
-Определите дерективу DOS для кодировки DOS (для работы в консоли Windows)
-Программа печатает семантические узлы и отношения для каждого входного предложения.
-Для каждого слова  семантического узла печатается лемма, часть речи и граммемы.
-
-Для фразы "Мама мыла раму" программа должна напечатать:
-Nodes:
-	Node 0 МАМА: МАМА С од,жр,им,ед,
-	Node 1 МЫЛА: МЫТЬ Г дст,пе,нс,прш,жр,ед,
-	Node 2 РАМУ: РАМА С но,жр,вн,ед,
-Relations:
-	SUB (0, 1)
-	OBJ (2, 1)
-*/
 #include "../SemanLib/SemStructureBuilder.h"
 #include "../common/argparse.h"
 #include "../SemanLib/VisualGraph.h"
+#include "../common/json.h"
 
 extern void (*GlobalErrorMessage)(const std::string &);
 
 void MyGlobalErrorMessage(const std::string &s) {
     throw CExpc(s);
 
-}
-
-const char *byte_to_binary(int x) {
-    static char b[9];
-    b[0] = '\0';
-
-    int z;
-    for (z = 128; z > 0; z >>= 1) {
-        strcat(b, ((x & z) == z) ? "1" : "0");
-    }
-
-    return b;
 }
 
 std::string GetGramInfo(const CRusSemStructure& SS, poses_mask_t Poses, QWORD Grammems) {
@@ -46,61 +20,6 @@ std::string GetGramInfo(const CRusSemStructure& SS, poses_mask_t Poses, QWORD Gr
     Result += SS.m_pData->GetRusGramTab()->GrammemsToStr(Grammems);
     return Result;
 }
-
-void show_register(std::string &s, RegisterEnum Register) {
-
-    EngRusMakeLower(s);
-    if (!s.empty())
-        if (Register == UpLow)
-            s[0] = rtoupper(s[0]);
-        else if (Register == UpUp)
-            EngRusMakeUpper(s);
-}
-
-std::vector<std::string> words;
-
-std::string GetWordStrOfNode(const CRusSemStructure& SS, int ssi, bool bOnlyWords = false) {
-    const CRusSemNode &Node = SS.m_Nodes[ssi];
-    std::string NodeStr;
-    if (bOnlyWords) {
-        if (Node.m_Words.size() > 1)
-            NodeStr += "(";
-        for (int i = 0; i < Node.m_Words.size(); i++) {
-            std::string w = Node.m_Words[i].m_Word;
-            show_register(w, Node.m_Words[i].m_CharCase);
-            NodeStr += w;
-            if (i + 1 < Node.m_Words.size())
-                NodeStr += " ";
-        }
-        if (Node.m_Words.size() > 1)
-            NodeStr += ")";
-
-    } else {
-        if (Node.m_Words.size() == 0 || Node.m_Words[0].m_Word != SS.GetNodeStr1(ssi))
-            NodeStr += SS.GetNodeStr1(ssi) + ": ";
-        for (int i = 0; i < Node.m_Words.size(); i++) {
-            const CRusSemWord &Word = Node.m_Words[i];
-            if (!(i == 0 && Word.m_Word != SS.GetNodeStr1(ssi)))
-                NodeStr += Word.m_Word + ": ";
-
-            NodeStr += Word.m_Lemma;
-            NodeStr += " ";
-            NodeStr += GetGramInfo(SS, Word.m_Poses, Word.GetAllGrammems());
-        }
-        if (Node.m_PrepWordNo >= 0) {
-            NodeStr = SS.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord + " " + NodeStr;
-            //words[Node.m_PrepWordNo] = SS.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord;
-        }
-        if (!NodeStr.empty())
-            NodeStr += " -> "; // Отредакт. морф. информация:
-        NodeStr += GetGramInfo(SS, Node.GetNodePoses(), Node.GetGrammems());
-        if (!Node.m_AntecedentStr.empty()) {
-            NodeStr += " anteced=" + Node.m_AntecedentStr;
-        }
-    }
-
-    return NodeStr;
-};
 
 
 int InitDicts(CSemStructureBuilder& SemBuilder)
@@ -126,64 +45,139 @@ int InitDicts(CSemStructureBuilder& SemBuilder)
     return 0;
 }
 
-void outputRelation(const CRusSemStructure& SS, const CRusSemRelation& R, std::ostream& result) {
-    long targetNodeNo = R.m_Valency.m_Direction == C_A && !R.m_bReverseRel ? R.m_SourceNodeNo : R.m_TargetNodeNo;
-    long sourceNodeNo = !(R.m_Valency.m_Direction == C_A && !R.m_bReverseRel) ? R.m_SourceNodeNo
-                                                                                : R.m_TargetNodeNo;
-    //"  %s (%s, %s) = %s (%i, %i)\n",
-    result << "  " << R.m_Valency.m_RelationStr << " (";
-    result << convert_to_utf8(SS.GetNodeStr1(targetNodeNo), morphRussian) << ", ";
-    result << convert_to_utf8(SS.GetNodeStr1(sourceNodeNo), morphRussian) << ") = ";
-    result << convert_to_utf8(R.m_SyntacticRelation, morphRussian) << " (";
-    result << targetNodeNo << ", ";
-    result << sourceNodeNo << ")\n";
-}
 
-void PrintRelationsToText(const CRusSemStructure& SS, ostream& result) {
-    std::string r;
+nlohmann::json getNodeInfo(const CRusSemStructure& SS, int nodeIndex) {
+    const CRusSemNode& Node = SS.m_Nodes[nodeIndex];
+    nlohmann::json words = nlohmann::json::array();
 
-    words.resize(SS.m_piSent->m_Words.size());
-    for (int i = 0; i < SS.m_piSent->m_Words.size(); i++)
-        words[i] = SS.m_piSent->m_Words[i].m_strWord;
-    result << "Nodes:\n";
-    for (int i = 0; i < SS.m_Nodes.size(); i++) {
-        std::string nstr = GetWordStrOfNode(SS, i);
-        if (nstr.empty()) {
-            nstr = SS.GetNodeStr1(i);
-        }
-        result << "  Node " << i << " ";
-        result << convert_to_utf8(nstr, morphRussian);
-        result << "\n";
+    for (auto& w : Node.m_Words) {
+        words.push_back({
+            {"word", w.m_Word},
+            {"lemma", w.m_Lemma},
+            {"inner morph", GetGramInfo(SS, w.m_Poses, w.GetAllGrammems())}
+            });
     }
-    result << "Relations:\n";
-
-    for (auto r : SS.m_Relations) {
-        outputRelation (SS, r, result);
-
+    nlohmann::json res = {
+        {"words", words},
+        {"index", nodeIndex},
+        {"morph", GetGramInfo(SS, Node.GetNodePoses(), Node.GetGrammems())},
+        {"interps", SS.GetNodeDictInterps(nodeIndex)}
     };
-    if (!SS.m_DopRelations.empty()) {
-        result << "Aux Relations:\n";
-        for (auto r : SS.m_DopRelations) {
-            outputRelation (SS, r, result);
-        }
+    if (Node.m_PrepWordNo >= 0) {
+        res["preposition"] = SS.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord;
     }
+    if (!Node.m_AntecedentStr.empty()) {
+        res["anteceden"] = Node.m_AntecedentStr;
+    }
+    if (Node.m_Words.empty() || Node.m_Words[0].m_Word != SS.GetNodeStr1(nodeIndex)) {
+        res["node_str"] = SS.GetNodeStr1(nodeIndex);
+    }
+    return res;
+};
+
+
+nlohmann::json getRelations(const CRusSemStructure& SS, const std::vector<CRusSemRelation>& rels) {
+    nlohmann::json result = nlohmann::json::array();
+    for (auto& r : rels) {
+        long targetNodeNo = r.m_Valency.m_Direction == C_A && !r.m_bReverseRel ? r.m_SourceNodeNo : r.m_TargetNodeNo;
+        long sourceNodeNo = !(r.m_Valency.m_Direction == C_A && !r.m_bReverseRel) ? r.m_SourceNodeNo
+            : r.m_TargetNodeNo;
+        nlohmann::json rel = {
+            {   "name",  r.m_Valency.m_RelationStr },
+            {   "target", {
+                    {"words", SS.GetNodeStr1(targetNodeNo)},
+                    {"node_id", targetNodeNo}
+                }
+            },
+            {   "source", {
+                    {"words", SS.GetNodeStr1(sourceNodeNo)},
+                    {"node_id", sourceNodeNo}
+                }
+            },
+            {    "syntax_rel", r.m_SyntacticRelation }
+        };
+        result.push_back(rel);
+    }
+    return result;
 }
 
-void PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuilder, ostream& result) {
+nlohmann::json getNodes(const CRusSemStructure& SS) {
+    auto r = nlohmann::json::array();
+    for (int i = 0; i < SS.m_Nodes.size(); i++) {
+        r.push_back(getNodeInfo(SS, i));
+    }
+    return r;
+}
+
+nlohmann::json PrintRelationsToText(const CRusSemStructure& SS) {
+    nlohmann::json result = {
+        {"nodes", getNodes(SS)},
+        {"relations", getRelations(SS, SS.m_Relations)},
+        {"aux relations", getRelations(SS, SS.m_DopRelations)}
+    };
+    ConvertToUtfRecursive(result, morphRussian);
+    return result;
+}
+
+
+nlohmann::json PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuilder) {
     std::string r;
     CVisualSemGraph graph;
     graph.InitFromSemantics(SemBuilder);
     graph.SetGraphLayout();
-    result << convert_to_utf8(graph.GetResultStr(), morphRussian) << "\n";
+    nlohmann::json result = {
+        {"java_script_data", graph.GetResultStr()}
+    };
+    ConvertToUtfRecursive(result, morphRussian);
+    return result;
 }
+
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
-    parser.AddArgument("--input", "input file in windows-1251");
-    parser.AddOption("--visual", "print visual graph");
-    parser.AddArgument("--output", "output file");
+    parser.AddArgument("--input-file", "input file", true);
+    parser.AddOption("--visual", "print visual graph (for javascript)");
+    parser.AddArgument("--output-file", "output file", true);
+    parser.AddArgument("--input-file-mask", "c:/*.txt", true);
     parser.Parse(argc, argv);
 }
+
+
+void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, string inputFile, string outputFile) {
+    std::cerr << inputFile << "\n";
+    CTestCaseBase base;
+    base.read_test_cases(std::ifstream(inputFile));
+    for (auto& t : base.TestCases) {
+        if (t.Text.length() > 250) {
+            std::cerr << "skip the sentence of " << t.Text.length() << " chars (too long)\n";
+            continue;
+        }
+        if (t.Text.empty()) {
+            continue;
+        }
+        try {
+            std::string dummy;
+            SemBuilder.FindSituations(t.Text, 0, _R("общ"), 20000, -1, "", dummy);
+            if (printVisual) {
+                t.Result = PrintRelationsAsToJavascript(SemBuilder);
+            }
+            else {
+                t.Result = PrintRelationsToText(SemBuilder.m_RusStr);
+            }
+        }
+        catch (CExpc e) {
+            std::cerr << "an exception occurred: " << e.m_strCause << "\n";
+            throw;
+        }
+        catch (...) {
+            std::cerr << "an exception occurred, sentence " << t.Text << "\n";
+            throw;
+        };
+    }
+    base.write_test_cases(std::ofstream(outputFile, std::ios::binary));
+
+}
+
 
 int main(int argc, const char *argv[]) {
     static CSemStructureBuilder SemBuilder;
@@ -195,45 +189,23 @@ int main(int argc, const char *argv[]) {
     if (InitDicts(SemBuilder) != 0) {
         return 1;
     }
+    SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
 
-    std::cerr << "parsing sentences:\n";
-    std::string s;
-    size_t lineCount = 0;
-    while (getline(args.GetInputStream(), s)) {
-        lineCount ++;
-        std::cerr << lineCount << ") " << s << "\n";
-        int comment = 0;
-        if ((comment = s.find("//")) != std::string::npos) {
-            s = s.substr(0, comment);
+    std::vector <std::pair<std::string, std::string> > file_pairs;
+    if (args.Exists("input-file-mask")) {
+        auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
+        for (auto filename : file_names) {
+            file_pairs.push_back({ filename, filename + ".seman" });
         }
-        Trim(s);
-        if (s.length() > 250) {
-            std::cerr << "skip the sentence of " << s.length() << " chars (too long)\n";
-            continue;
-        }
-        if (s.empty()) {
-            std::cerr << "skip empty sentence on line " << lineCount << "\n";
-            continue;
-        }
-        try {
-            args.GetOutputStream() << s << "\n";
-            SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
-            std::string dummy;
-            SemBuilder.FindSituations(s, 0, _R("общ"), 20000, -1, "", dummy);
-            if (args.Exists("visual")) {
-                PrintRelationsAsToJavascript(SemBuilder, args.GetOutputStream());
-            } else {
-                PrintRelationsToText(SemBuilder.m_RusStr, args.GetOutputStream());
-            }
-        }
-        catch (CExpc e) {
-            std::cerr << "an exception occurred: " << e.m_strCause << "\n";
-        }
-        catch (...) {
-            std::cerr << "an exception occurred: " << lineCount << "\n";
-        }
-
     }
-    std::cerr << "exit\n";
+    else {
+        file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file") });
+    }
+
+    for (auto& p : file_pairs) {
+        processOneFile(SemBuilder, args.Exists("visual"), p.first, p.second);
+    }
+    std::cerr << "normal exit\n";
     return 0;
 }
+
