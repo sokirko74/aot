@@ -9,13 +9,35 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "VERBSATZ",
                                 "groups": [
                                     {
                                         "type": "PP",
                                         "words": "nach Hause"
                                     }
                                 ],
-                                "type": "VERBSATZ"
+                                "syn_units": [
+                                    {
+                                        "lemma": "SIE",
+                                        "morph_info": "PRO nom,sin,1,alg,per,; "
+                                    },
+                                    {
+                                        "lemma": "GEHEN",
+                                        "morph_info": "VER sin,1,prae,non,; sin,imp,non,; sin,1,kj1,non,; sin,3,kj1,non,; "
+                                    },
+                                    {
+                                        "lemma": "NACH",
+                                        "morph_info": "PRP dat,lok,tmp,; "
+                                    },
+                                    {
+                                        "lemma": "HAUS",
+                                        "morph_info": "SUB dat,sin,neu,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 4,
@@ -49,13 +71,35 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "VERBSATZ",
                                 "groups": [
                                     {
                                         "type": "MODIF_NP",
                                         "words": "ein Idiot"
                                     }
                                 ],
-                                "type": "VERBSATZ"
+                                "syn_units": [
+                                    {
+                                        "lemma": "SIE",
+                                        "morph_info": "PRO nom,sin,2,alg,per,; "
+                                    },
+                                    {
+                                        "lemma": "SEIN",
+                                        "morph_info": "VER sin,2,prae,aux,; sin,2,prae,non,; "
+                                    },
+                                    {
+                                        "lemma": "EIN",
+                                        "morph_info": "ART nom,sin,mas,ind,; nom,sin,neu,ind,; akk,sin,neu,ind,; "
+                                    },
+                                    {
+                                        "lemma": "IDIOT",
+                                        "morph_info": "SUB nom,sin,mas,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 4,
