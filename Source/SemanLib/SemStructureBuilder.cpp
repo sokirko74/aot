@@ -38,7 +38,7 @@ bool  CSemStructureBuilder::FindSituations(std::string utf8text, long UserTreeVa
 		m_RusStr.m_PanicTreeVariantCount = PanicTreeVariantCount;
 		m_RusStr.m_UserClauseVariantsCombinationNo = UserClauseVariantsCombinationNo;
 		m_RusStr.m_UserTreeVariantNo = UserTreeVariantNo;
-		
+				
 
 
 		m_RusStr.ProcessAllowableLexVars(AllowableLexVars.c_str());

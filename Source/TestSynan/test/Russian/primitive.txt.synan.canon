@@ -9,13 +9,31 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "ПРЯМ_ДОП",
                                         "words": "мыла раму"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "МАМА",
+                                        "morph_info": "С жр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "МЫТЬ",
+                                        "morph_info": "Г дст,прш,жр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "РАМА",
+                                        "morph_info": "С жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 3,
@@ -59,13 +77,35 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "ПГ",
                                         "words": "на работу"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ПАПА",
+                                        "morph_info": "С мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "УЙТИ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "НА",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
+                                        "lemma": "РАБОТА",
+                                        "morph_info": "С жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 4,
@@ -109,13 +149,31 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "ПРЯМ_ДОП",
                                         "words": "ел арбуз"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ПАПА",
+                                        "morph_info": "С мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ЕСТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "АРБУЗ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 3,
@@ -159,13 +217,23 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ПГ",
                                         "words": "в лесу"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "В",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛЕС",
+                                        "morph_info": "С 2,мр,рд,ед,; мр,дт,ед,; 2,мр,пр,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 1,
@@ -200,8 +268,30 @@
                         "antecedent": "дом",
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "КОТОРЫЙ",
+                                        "morph_info": "МС-П но,од,мр,им,ед,; но,мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ПОСТРОИТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ДЖЕК",
+                                        "morph_info": "С имя,мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 7,
@@ -212,6 +302,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "ПРИДАТ_ОПР",
@@ -222,7 +313,20 @@
                                         "words": "вижу дом , который построил Джек ."
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "morph_info": "МС 1л,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ВИДЕТЬ",
+                                        "morph_info": "Г дст,1л,нст,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ДОМ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 7,

@@ -703,7 +703,8 @@ proc ShowContextMenuForSemStruct {x y canv_x canv_y} {
    
     $GT($main,Menu) add command -label "Count of Nodes" -command {tk_messageBox -message [llength [$GT($main,graph) nodes]]}
 	 if  {$selected_count_node > 0}  {
-		   $GT($main,Menu) add command -label "Properties" -command {ShowAttr props}
+		   $GT($main,Menu) add command -label "Grammems" -command {ShowAttr grammems}
+		   $GT($main,Menu) add command -label "Lemmas" -command {ShowAttr lemmas}
 	 }
    
 

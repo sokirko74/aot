@@ -397,17 +397,18 @@ int CreateSynStr (ClientData clienData,
 
     CString text = "";
     if (argv[2] != 0) text = argv[2];
-	text.TrimLeft();
-	text.TrimRight();
+	text.Trim();
 	if (text.IsEmpty()) 
 		return TCL_OK;
 	CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
 	if (Doc->m_bBusy) return TCL_OK;
 	Doc->m_bBusy = true;
-	CSemanticStrView& SemStr = *((CSemanticStrView*)Doc->GetView());
 	std::string Graph;
-	if (!GetSemBuilder().m_RusStr.GetSyntaxTreeByText((const char*)text, atoi(argv[3]), Graph))
+	std::string utf8text = convert_to_utf8((const char*)text, morphRussian);
+	auto& rusStr = GetSemBuilder().m_RusStr;
+	if (!rusStr.GetSyntaxTreeByText(utf8text, atoi(argv[3]), Graph))
 	{
+		Doc->m_bBusy = false;
 		return TCL_ERROR;
 	}
     Doc->GetView()->BuildTclGraph (Graph.c_str());

@@ -63,28 +63,47 @@ nlohmann::json GetGroups(const CSentence &Sentence, const CAgramtab &A) {
         for (CSVI pSynVar = Clause.m_SynVariants.begin(); pSynVar != Clause.m_SynVariants.end(); pSynVar++) {
             if (pSynVar->m_iWeight < nVmax) break;
 
-            const CMorphVariant &V = *pSynVar;
-            nlohmann::json synvar;
-            // print the clause
+            const CMorphVariant &synVar = *pSynVar;
+
+            std::string clauseType = "EMPTY";
             {
-                int ClauseType = (V.m_ClauseTypeNo == -1) ? UnknownSyntaxElement
-                                                          : Clause.m_vectorTypes[V.m_ClauseTypeNo].m_Type;;
+                int ClauseType = (synVar.m_ClauseTypeNo == -1) ? UnknownSyntaxElement
+                                                          : Clause.m_vectorTypes[synVar.m_ClauseTypeNo].m_Type;;
                 if (ClauseType != UnknownSyntaxElement)
-                    synvar["type"] = (const char *) A.GetClauseNameByType(ClauseType);
-                else
-                    synvar["type"] = "EMPTY";
+                    clauseType = A.GetClauseNameByType(ClauseType);
             }
             nlohmann::json groups = nlohmann::json::array();
-            for (size_t GroupNo = 0; GroupNo < V.m_vectorGroups.GetGroups().size(); GroupNo++) {
-                const CGroup &G = V.m_vectorGroups.GetGroups()[GroupNo];
+            for (size_t GroupNo = 0; GroupNo < synVar.m_vectorGroups.GetGroups().size(); GroupNo++) {
+                const CGroup &G = synVar.m_vectorGroups.GetGroups()[GroupNo];
                 groups.push_back({
                     {"type", Sentence.GetOpt()->GetGroupNameByIndex(G.m_GroupType)},
                     {"words", GetWords(Sentence, G)},
                 });
 
             };
-            synvar["groups"] = groups;
-            clause["good_synvars"].push_back(synvar);
+            
+
+            auto syn_units = nlohmann::json::array();
+            for (int unitNo = 0; unitNo < synVar.m_SynUnits.size(); unitNo++) {
+                int iWord = synVar.m_SynUnits[unitNo].m_SentPeriod.m_iFirstWord;
+                int homIndex = synVar.GetHomNum(unitNo);
+                if (homIndex != -1) {
+                    const CSynHomonym& hom = Sentence.GetWords()[iWord].GetSynHomonym(homIndex);
+                    syn_units.push_back({
+                        {"lemma", hom.m_strLemma},
+                        {"morph_info", hom.GetPartOfSpeechStr() + std::string(" ") + hom.GetGrammemsStr()}
+                        });
+                }
+                else {
+                    //todo: print subclauses
+                }
+            }
+            
+            clause["good_synvars"].push_back({
+                {"syn_units", syn_units},
+                {"groups",  groups },
+                {"clause_type", clauseType}
+            });
         }
         clauses.push_back(clause);
     }

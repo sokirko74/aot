@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 
 project(TestSynan)
 
-add_executable (TestSynan TestSynan.cpp)
+add_executable (${PROJECT_NAME} TestSynan.cpp)
 
-target_link_libraries(TestSynan 
+target_link_libraries(${PROJECT_NAME} 
     SynCommonLib
     SynanLib
 )
@@ -31,3 +31,5 @@ endmacro(TestSynanMacro)
 
 TestSynanMacro(Russian ${PROJECT_SOURCE_DIR}/test/Russian/*.txt)
 TestSynanMacro(German ${PROJECT_SOURCE_DIR}/test/German/*.txt)
+
+#CopyExe(${PROJECT_NAME})

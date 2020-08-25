@@ -9,13 +9,27 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ОДНОР_ИГ",
                                         "words": "мама и папа"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "МАМА",
+                                        "morph_info": "С жр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ПАПА",
+                                        "morph_info": "С мр,им,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 2,
@@ -59,6 +73,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ОДНОР_ПРИЛ",
@@ -69,7 +84,24 @@
                                         "words": "черная и белая ракетки"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЧЕРНЫЙ",
+                                        "morph_info": "П но,од,жр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "БЕЛЫЙ",
+                                        "morph_info": "П но,од,жр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "РАКЕТКА",
+                                        "morph_info": "С жр,рд,ед,; жр,им,мн,; жр,вн,мн,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 3,
@@ -123,6 +155,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ОДНОР_ИГ",
@@ -133,9 +166,27 @@
                                         "words": "черные шкаф и стул"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЧЕРНЫЙ",
+                                        "morph_info": "П но,од,им,мн,; но,вн,мн,; "
+                                    },
+                                    {
+                                        "lemma": "ШКАФ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "СТУЛ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
                             },
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ОДНОР_ИГ",
@@ -146,7 +197,24 @@
                                         "words": "черные шкаф и стул"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ЧЕРНЫЙ",
+                                        "morph_info": "П но,од,им,мн,; но,вн,мн,; "
+                                    },
+                                    {
+                                        "lemma": "ШКАФ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "СТУЛ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 3,
@@ -200,13 +268,31 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ПРИЛ_СУЩ",
                                         "words": "хороший дом"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "МОЙ",
+                                        "morph_info": "МС-П но,од,мр,им,ед,; но,мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ХОРОШИЙ",
+                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ДОМ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 3,
@@ -240,6 +326,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ПРИЛ_СУЩ",
@@ -250,7 +337,136 @@
                                         "words": "то ли белоруссы , то ли великороссы , то ли казаки , то ли грузины , то ли калмыки , то ли крымские татары , то ли русины , то ли украинцы"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "БЕЛОРУСС",
+                                        "morph_info": "С мр,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ВЕЛИКОРОСС",
+                                        "morph_info": "С мр,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "КАЗАК",
+                                        "morph_info": "С мр,им,мн,; мр,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ГРУЗИН",
+                                        "morph_info": "С мр,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "КАЛМЫК",
+                                        "morph_info": "С мр,им,мн,; мр,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "КРЫМСКИЙ",
+                                        "morph_info": "П но,од,им,мн,; но,вн,мн,; "
+                                    },
+                                    {
+                                        "lemma": "ТАТАРИН",
+                                        "morph_info": "С мр,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "РУСИН",
+                                        "morph_info": "С мр,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛИ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "УКРАИНЕЦ",
+                                        "morph_info": "С мр,им,мн,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 31,
@@ -434,6 +650,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "РАЗРЫВ_СОЮЗ",
@@ -444,7 +661,40 @@
                                         "words": "хочу и пить , и курить"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "morph_info": "МС 1л,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ХОТЕТЬ",
+                                        "morph_info": "Г дст,1л,нст,ед,; "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ПИТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "КУРИТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 7,
@@ -518,6 +768,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "РАЗРЫВ_СОЮЗ",
@@ -528,7 +779,40 @@
                                         "words": "изобрел и сад , и огород"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ИЗОБРЕСТИ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "САД",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ОГОРОД",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 7,
@@ -602,6 +886,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "РАЗРЫВ_СОЮЗ",
@@ -612,7 +897,40 @@
                                         "words": "изобрел и сад , и огород"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ИЗОБРЕСТИ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "САД",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ОГОРОД",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 7,
@@ -686,6 +1004,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "РАЗРЫВ_СОЮЗ",
@@ -696,7 +1015,32 @@
                                         "words": "не красивую , но летнюю шапку"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "НЕ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "КРАСИВЫЙ",
+                                        "morph_info": "П но,од,жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "НО",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ЛЕТНИЙ",
+                                        "morph_info": "П но,од,жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ШАПКА",
+                                        "morph_info": "С жр,вн,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 5,
@@ -760,6 +1104,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "РАЗРЫВ_СОЮЗ",
@@ -770,7 +1115,36 @@
                                         "words": "И красивая , и желтая страница"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "КРАСИВЫЙ",
+                                        "morph_info": "П но,од,жр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ЖЕЛТЫЙ",
+                                        "morph_info": "П но,од,жр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "СТРАНИЦА",
+                                        "morph_info": "С жр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 6,
@@ -834,6 +1208,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ГЕНИТ_ИГ",
@@ -844,7 +1219,36 @@
                                         "words": "не решением , а только постановкой вопросов"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "НЕ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "РЕШЕНИЕ",
+                                        "morph_info": "С ср,тв,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "А",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ТОЛЬКО",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ПОСТАНОВКА",
+                                        "morph_info": "С жр,тв,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ВОПРОС",
+                                        "morph_info": "С мр,рд,мн,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 6,
@@ -908,6 +1312,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "НАРЕЧ_ГЛАГОЛ",
@@ -930,9 +1335,55 @@
                                         "words": "очень хотел научиться если не писать , так читать"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ХОТЕТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "НАУЧИТЬСЯ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "ЕСЛИ",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "НЕ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ПИСАТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТАК",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ЧИТАТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             },
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "НАРЕЧ_ГЛАГОЛ",
@@ -955,7 +1406,52 @@
                                         "words": "очень хотел научиться если не писать , так читать"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "ОН",
+                                        "morph_info": "МС 3л,мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ОЧЕНЬ",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": "ХОТЕТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "НАУЧИТЬСЯ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "ЕСЛИ",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "НЕ",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ПИСАТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ТАК",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ЧИТАТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " "
+                                    }
+                                ]
                             }
                         ],
                         "last": 10,
@@ -1053,13 +1549,35 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "EMPTY",
                                 "groups": [
                                     {
                                         "type": "ПГ",
                                         "words": "из-за Триграм"
                                     }
                                 ],
-                                "type": "EMPTY"
+                                "syn_units": [
+                                    {
+                                        "lemma": "!!!!",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "РАЗРЫВ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "СОЮЗ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ИЗ-ЗА",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
+                                        "lemma": "ТРИГРАМ",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 4,
@@ -1069,8 +1587,18 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПОЧИНИТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 6,
@@ -1105,8 +1633,22 @@
                         "antecedent": "хлеб",
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "КОТОРЫЙ",
+                                        "morph_info": "МС-П но,од,мр,им,ед,; но,мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ПОСЕЯТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 11,
@@ -1117,6 +1659,7 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "ОДНОР_ИГ",
@@ -1143,9 +1686,47 @@
                                         "words": "хочу шить ботинки , пальто , печь хлеб , который посеял"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "morph_info": "МС 1л,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ХОТЕТЬ",
+                                        "morph_info": "Г дст,1л,нст,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ШИТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "БОТИНОК",
+                                        "morph_info": "С мр,им,мн,; мр,вн,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПАЛЬТО",
+                                        "morph_info": "С ср,им,ед,; ср,рд,ед,; ср,дт,ед,; ср,вн,ед,; ср,тв,ед,; ср,пр,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПЕЧЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "ХЛЕБ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
                             },
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
                                         "type": "ОДНОР_ИГ",
@@ -1164,7 +1745,44 @@
                                         "words": "хлеб , который посеял"
                                     }
                                 ],
-                                "type": "ГЛ_ЛИЧН"
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "morph_info": "МС 1л,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ХОТЕТЬ",
+                                        "morph_info": "Г дст,1л,нст,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ШИТЬ",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "БОТИНОК",
+                                        "morph_info": "С мр,им,мн,; мр,вн,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПАЛЬТО",
+                                        "morph_info": "С ср,им,ед,; ср,рд,ед,; ср,дт,ед,; ср,вн,ед,; ср,тв,ед,; ср,пр,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПЕЧЬ",
+                                        "morph_info": "С жр,им,ед,; жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ХЛЕБ",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 11,

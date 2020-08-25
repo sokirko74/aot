@@ -1405,7 +1405,7 @@ public:
 		void			GetMaxWordWeightByLemma(std::string Lemma, CRusSemWord& SemWord) const;
 		bool			HasAuxiliaryPOS(std::string Lemma) const;
 
-		bool			GetSyntaxTreeByText(std::string text, int ClauseVarNo, std::string& Graph);
+		bool			GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo, std::string& Graph);
 		bool			SetLemmasToReplace(std::string LemmasToReplace);
 		std::string			GetPrepOrConjFromSynReal (const CSynRealization&  SynReal) const ;
 		bool			CanBeDeleted(long NodeNo) const;
