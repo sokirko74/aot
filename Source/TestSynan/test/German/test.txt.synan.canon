@@ -19,22 +19,27 @@
                                 "syn_units": [
                                     {
                                         "lemma": "SIE",
+                                        "modified_grammems": "nom,sin,1,alg,per,",
                                         "morph_info": "PRO nom,sin,1,alg,per,; "
                                     },
                                     {
                                         "lemma": "GEHEN",
+                                        "modified_grammems": "sin,3,1,prae,imp,kj1,non,",
                                         "morph_info": "VER sin,1,prae,non,; sin,imp,non,; sin,1,kj1,non,; sin,3,kj1,non,; "
                                     },
                                     {
                                         "lemma": "NACH",
+                                        "modified_grammems": "dat,lok,tmp,",
                                         "morph_info": "PRP dat,lok,tmp,; "
                                     },
                                     {
                                         "lemma": "HAUS",
+                                        "modified_grammems": "dat,sin,neu,",
                                         "morph_info": "SUB dat,sin,neu,; "
                                     },
                                     {
                                         "lemma": ".",
+                                        "modified_grammems": "",
                                         "morph_info": " "
                                     }
                                 ]
@@ -81,22 +86,27 @@
                                 "syn_units": [
                                     {
                                         "lemma": "SIE",
+                                        "modified_grammems": "nom,sin,2,alg,per,",
                                         "morph_info": "PRO nom,sin,2,alg,per,; "
                                     },
                                     {
                                         "lemma": "SEIN",
+                                        "modified_grammems": "sin,2,prae,aux,non,",
                                         "morph_info": "VER sin,2,prae,aux,; sin,2,prae,non,; "
                                     },
                                     {
                                         "lemma": "EIN",
+                                        "modified_grammems": "akk,nom,sin,neu,mas,ind,",
                                         "morph_info": "ART nom,sin,mas,ind,; nom,sin,neu,ind,; akk,sin,neu,ind,; "
                                     },
                                     {
                                         "lemma": "IDIOT",
+                                        "modified_grammems": "nom,sin,mas,",
                                         "morph_info": "SUB nom,sin,mas,; "
                                     },
                                     {
                                         "lemma": ".",
+                                        "modified_grammems": "",
                                         "morph_info": " "
                                     }
                                 ]

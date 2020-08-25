@@ -19,18 +19,22 @@
                                 "syn_units": [
                                     {
                                         "lemma": "МАМА",
+                                        "modified_grammems": "жр,им,ед,",
                                         "morph_info": "С жр,им,ед,; "
                                     },
                                     {
                                         "lemma": "МЫТЬ",
+                                        "modified_grammems": "дст,прш,жр,ед,",
                                         "morph_info": "Г дст,прш,жр,ед,; "
                                     },
                                     {
                                         "lemma": "РАМА",
+                                        "modified_grammems": "жр,вн,ед,",
                                         "morph_info": "С жр,вн,ед,; "
                                     },
                                     {
                                         "lemma": ".",
+                                        "modified_grammems": "",
                                         "morph_info": " "
                                     }
                                 ]
@@ -87,22 +91,27 @@
                                 "syn_units": [
                                     {
                                         "lemma": "ПАПА",
+                                        "modified_grammems": "мр,им,ед,",
                                         "morph_info": "С мр,им,ед,; "
                                     },
                                     {
                                         "lemma": "УЙТИ",
+                                        "modified_grammems": "дст,прш,мр,ед,",
                                         "morph_info": "Г дст,прш,мр,ед,; "
                                     },
                                     {
                                         "lemma": "НА",
+                                        "modified_grammems": "",
                                         "morph_info": "ПРЕДЛ ; "
                                     },
                                     {
                                         "lemma": "РАБОТА",
+                                        "modified_grammems": "жр,вн,ед,",
                                         "morph_info": "С жр,вн,ед,; "
                                     },
                                     {
                                         "lemma": ".",
+                                        "modified_grammems": "",
                                         "morph_info": " "
                                     }
                                 ]
@@ -159,18 +168,22 @@
                                 "syn_units": [
                                     {
                                         "lemma": "ПАПА",
+                                        "modified_grammems": "мр,им,ед,",
                                         "morph_info": "С мр,им,ед,; "
                                     },
                                     {
                                         "lemma": "ЕСТЬ",
+                                        "modified_grammems": "дст,прш,мр,ед,",
                                         "morph_info": "Г дст,прш,мр,ед,; "
                                     },
                                     {
                                         "lemma": "АРБУЗ",
+                                        "modified_grammems": "мр,вн,ед,",
                                         "morph_info": "С мр,им,ед,; мр,вн,ед,; "
                                     },
                                     {
                                         "lemma": ".",
+                                        "modified_grammems": "",
                                         "morph_info": " "
                                     }
                                 ]
@@ -227,10 +240,12 @@
                                 "syn_units": [
                                     {
                                         "lemma": "В",
+                                        "modified_grammems": "",
                                         "morph_info": "ПРЕДЛ ; "
                                     },
                                     {
                                         "lemma": "ЛЕС",
+                                        "modified_grammems": "2,мр,пр,ед,",
                                         "morph_info": "С 2,мр,рд,ед,; мр,дт,ед,; 2,мр,пр,ед,; "
                                     }
                                 ]
@@ -273,22 +288,27 @@
                                 "syn_units": [
                                     {
                                         "lemma": ",",
+                                        "modified_grammems": "",
                                         "morph_info": " "
                                     },
                                     {
                                         "lemma": "КОТОРЫЙ",
+                                        "modified_grammems": "но,од,мр,вн,им,ед,",
                                         "morph_info": "МС-П но,од,мр,им,ед,; но,мр,вн,ед,; "
                                     },
                                     {
                                         "lemma": "ПОСТРОИТЬ",
+                                        "modified_grammems": "дст,прш,мр,ед,",
                                         "morph_info": "Г дст,прш,мр,ед,; "
                                     },
                                     {
                                         "lemma": "ДЖЕК",
+                                        "modified_grammems": "имя,мр,им,ед,",
                                         "morph_info": "С имя,мр,им,ед,; "
                                     },
                                     {
                                         "lemma": ".",
+                                        "modified_grammems": "",
                                         "morph_info": " "
                                     }
                                 ]
@@ -316,14 +336,17 @@
                                 "syn_units": [
                                     {
                                         "lemma": "Я",
+                                        "modified_grammems": "1л,им,ед,",
                                         "morph_info": "МС 1л,им,ед,; "
                                     },
                                     {
                                         "lemma": "ВИДЕТЬ",
+                                        "modified_grammems": "дст,1л,нст,ед,",
                                         "morph_info": "Г дст,1л,нст,ед,; "
                                     },
                                     {
                                         "lemma": "ДОМ",
+                                        "modified_grammems": "мр,вн,ед,",
                                         "morph_info": "С мр,им,ед,; мр,вн,ед,; "
                                     }
                                 ]

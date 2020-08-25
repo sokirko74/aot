@@ -91,7 +91,8 @@ nlohmann::json GetGroups(const CSentence &Sentence, const CAgramtab &A) {
                     const CSynHomonym& hom = Sentence.GetWords()[iWord].GetSynHomonym(homIndex);
                     syn_units.push_back({
                         {"lemma", hom.m_strLemma},
-                        {"morph_info", hom.GetPartOfSpeechStr() + std::string(" ") + hom.GetGrammemsStr()}
+                        {"morph_info", hom.GetPartOfSpeechStr() + std::string(" ") + hom.GetGrammemsStr()},
+                        {"modified_grammems", A.GrammemsToStr(synVar.m_SynUnits[unitNo].m_iGrammems)}
                         });
                 }
                 else {
