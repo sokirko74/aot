@@ -310,6 +310,42 @@
                                     },
                                     {
                                         "lemma": "ХВАТИТЬ",
+                                        "modified_grammems": "безл,буд,",
+                                        "morph_info": "Г безл,буд,; "
+                                    },
+                                    {
+                                        "lemma": "С",
+                                        "modified_grammems": "",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
+                                        "lemma": "Я",
+                                        "modified_grammems": "1л,вн,рд,ед,",
+                                        "morph_info": "МС 1л,рд,ед,; 1л,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ЭТО",
+                                        "modified_grammems": "ср,рд,ед,",
+                                        "morph_info": "МС ср,рд,ед,; "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "с меня"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ХВАТИТЬ",
                                         "modified_grammems": "дст,3л,буд,ед,",
                                         "morph_info": "Г дст,3л,буд,ед,; "
                                     },
@@ -337,6 +373,22 @@
                     },
                     {
                         "good_synvars": [
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ХВАТИТЬ",
+                                        "modified_grammems": "безл,буд,",
+                                        "morph_info": "Г безл,буд,; "
+                                    }
+                                ]
+                            },
                             {
                                 "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],
