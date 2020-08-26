@@ -28,6 +28,7 @@ void export_dict(std::string fileName, std::string folder) {
 
 	for (WORD i = 0; i < Dict.m_Units.size(); i++)
 	{
+		A.ReadFromDictionary(i, true, true);
 		outf << "============\n" << convert_to_utf8(Dict.GetUnitTextHeader(i), Dict.m_Language);
 		outf << A.GetArticleStrUtf8(true);
 	};
