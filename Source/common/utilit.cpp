@@ -464,7 +464,7 @@ std::string	CreateTempFileName()
 
 #ifdef WIN32
 	#ifdef _DEBUG
-		static std::ofstream logger("seman.log");
+		static std::ofstream logger;
 	#endif
 #endif
 
@@ -473,19 +473,22 @@ void rml_TRACE( const char* format, ... )
 
 #ifdef WIN32
 	#ifdef _DEBUG
-	      va_list arglst;
-          char buffer[2000];
-		  if (strlen (format) >  200)
-		  {
-			  OutputDebugString("!!!!! too long debug line!!!");
-			  return;
-		  };
-          va_start( arglst, format );
-	      vsprintf(buffer, format, arglst);
-	      va_end( arglst );
-		  OutputDebugString(buffer);
-		  logger << buffer;
-		  logger.flush();
+		if (!logger.is_open()) {
+			logger.open("trace.log");
+		}
+		va_list arglst;
+		char buffer[2000];
+		if (strlen (format) >  200)
+		{
+			OutputDebugString("!!!!! too long debug line!!!");
+			return;
+		};
+		va_start( arglst, format );
+		vsprintf(buffer, format, arglst);
+		va_end( arglst );
+		OutputDebugString(buffer);
+		logger << buffer;
+		logger.flush();
 	#endif
 #endif
 };
@@ -671,21 +674,6 @@ std::string& IntToStr (int Value, std::string& oBuffer)
 	oBuffer = Buffer;
 	return oBuffer;
 };
-
-#ifndef WIN32
-void strrev(char* s)
-{
-  if (!s) return;
-  size_t len = strlen(s);
-  for (int i=0; i < len/2; i++)
-    {
-      swap(s[i], s[len - i - 1]);
-    }
-
-};
-#endif
-
-
 
 bool IsHtmlFile (const std::string& FileName)
 {
@@ -2031,34 +2019,6 @@ void CMyTimeSpanHolder::ClearTimers()
 	m_TimeSpans.clear();
 	m_SequenceId = 0;
 };
-
-
-
-void QPEncodeString(std::string& s)
-{
-	std::string z;
-	for (size_t i=0; i<s.length(); i++)
-		z+= Format("%2x",(BYTE)s[i]);
-	s = z;
-}
-
-
-void QPDecodeString(std::string& s)
-{
-	std::string z;
-	char b[3];
-	b[2] = 0;
-	for (size_t i=0; i<s.length(); i+=2)
-	{
-		strncpy(b, s.c_str()+i,2);
-		int c;
-		sscanf(b, "%x",&c);
-		z += (BYTE)c;
-	};
-	s = z;
-}
-
-
 
 
 bool LoadFileToString(std::string FileName, std::string& Result)

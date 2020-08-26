@@ -150,12 +150,6 @@ extern bool		LoadFileToString(std::string FileName, std::string& Result);
 extern void		SqueezeSpacesAndDeleteEoln(std::string& s);
 extern DWORD	StringCrc32(const char* szString);
 
-extern void QPEncodeString(std::string& s);
-extern void QPDecodeString(std::string& s);
-#ifndef WIN32
-	extern void strrev(char* s);
-#endif
-
 const BYTE	UnknownPartOfSpeech		= 0xff;
 const int	UnknownSyntaxElement = 0xffff;
 typedef enum {DontKillHomonyms = 0, CoverageKillHomonyms = 1} KillHomonymsEnum;

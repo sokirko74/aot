@@ -59,7 +59,7 @@ struct CSmallVector	{
 
 	const Type& operator[](int	No)	const {	return m_VectorItems[No];	};
 
-	size_t find_item (const Type& X) const { return find(m_VectorItems, m_TermItems+m_ItemsCount, X) - m_TermItems; };
+	size_t find_item (const Type& X) const { return find(m_VectorItems, m_VectorItems+m_ItemsCount, X) - m_VectorItems; };
 
 	bool	has (const Type& X) const { return find_item(X) != m_ItemsCount; };
 
