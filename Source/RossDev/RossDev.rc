@@ -12,14 +12,10 @@
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
-/////////////////////////////////////////////////////////////////////////////
-// Russian resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
-#ifdef _WIN32
 LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 #pragma code_page(1251)
-#endif //_WIN32
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -217,7 +213,8 @@ END
 IDD_WORDLIST_FORM DIALOGEX 0, 0, 476, 287
 STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
 EXSTYLE WS_EX_CONTROLPARENT
-//FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "Times New Roman", 0, 0, 204
+//LANGUAGE 0x0019, 0
 BEGIN
     CONTROL         "List1",IDC_WORDLIST_GRID,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
@@ -801,10 +798,6 @@ IDB_SPLASH              BITMAP                  "Splsh16.bmp"
 // English (U.S.) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1251)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -930,6 +923,7 @@ BEGIN
     "\0"
 END
 
+/*
 3 TEXTINCLUDE 
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
@@ -939,7 +933,7 @@ BEGIN
     "\r\n"
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
     "#ifdef _WIN32\r\n"
-    "LANGUAGE 9, 1\r\n"
+    //"LANGUAGE 9, 1\r\n"
     "#pragma code_page(1251)\r\n"
     "#endif //_WIN32\r\n"
     "#include ""res\\RossDev.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
@@ -948,7 +942,7 @@ BEGIN
     "#endif\r\n"
     "\0"
 END
-
+*/
 #endif    // APSTUDIO_INVOKED
 
 
@@ -1180,6 +1174,8 @@ END
 
 
 #ifndef APSTUDIO_INVOKED
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Generated from the TEXTINCLUDE 3 resource.
@@ -1190,10 +1186,6 @@ END
 #define _AFX_NO_PROPERTY_RESOURCES
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE 9, 1
-#pragma code_page(1251)
-#endif //_WIN32
 #include "res\RossDev.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"         // Standard components
 #include "afxprint.rc"       // printing/print preview resources

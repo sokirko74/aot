@@ -188,21 +188,16 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 	char s[10];
 	CString S;
 	WORD UnitNo = GetUnitNo(pItem->iItem);
-
-
-
-
-
 	std::string entry_str;
 	if (pItem->mask & LVIF_TEXT) //valid text buffer?
 	{
 		switch (pItem->iSubItem) {
 		case 0: //fill in main text
 			if (m_Termins.empty()) {
-				entry_str = GetRoss()->GetEntryStrUtf8(UnitNo);
+				entry_str = GetRoss()->GetEntryStr(UnitNo);
 			}
 			else {
-				entry_str = convert_to_utf8(m_Termins[pItem->iItem].m_TerminStr.c_str(), morphRussian);
+				entry_str = m_Termins[pItem->iItem].m_TerminStr.c_str();
 			}
 			lstrcpy(pItem->pszText, entry_str.c_str());
 			break;
