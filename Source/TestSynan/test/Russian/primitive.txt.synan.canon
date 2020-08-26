@@ -244,6 +244,27 @@
                                         "morph_info": "ПРЕДЛ ; "
                                     },
                                     {
+                                        "lemma": "ЛЕСА",
+                                        "modified_grammems": "жр,вн,ед,",
+                                        "morph_info": "С жр,вн,ед,; жр,вн,ед,; "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "EMPTY",
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "в лесу"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "В",
+                                        "modified_grammems": "",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
                                         "lemma": "ЛЕС",
                                         "modified_grammems": "2,мр,пр,ед,",
                                         "morph_info": "С 2,мр,рд,ед,; мр,дт,ед,; 2,мр,пр,ед,; "
@@ -258,14 +279,14 @@
                 ],
                 "relations": [
                     {
-                        "gramrel": "пр,",
+                        "gramrel": "вн,",
                         "name": "ПГ",
                         "src": "в",
                         "src_grm": "",
                         "src_lemma": "В",
                         "trg": "лесу",
-                        "trg_grm": "2,но,мр,пр,ед,",
-                        "trg_lemma": "ЛЕС"
+                        "trg_grm": "но,жр,вн,ед,",
+                        "trg_lemma": "ЛЕСА"
                     }
                 ],
                 "terms": []

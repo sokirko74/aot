@@ -283,6 +283,37 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [
+                                    {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "хороший дом"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "МЫТЬ",
+                                        "modified_grammems": "дст,пвл,2л,ед,",
+                                        "morph_info": "Г дст,пвл,2л,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ХОРОШИЙ",
+                                        "modified_grammems": "но,од,мр,вн,им,ед,",
+                                        "morph_info": "П но,од,мр,им,ед,; но,мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ДОМ",
+                                        "modified_grammems": "мр,вн,им,ед,",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
+                            },
+                            {
                                 "clause_type": "EMPTY",
                                 "groups": [
                                     {
@@ -1666,6 +1697,46 @@
                     {
                         "good_synvars": [
                             {
+                                "clause_type": "ДПР",
+                                "groups": [
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "РАЗРЫВ СОЮЗ"
+                                    },
+                                    {
+                                        "type": "ПГ",
+                                        "words": "из-за Триграм"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "!!!!",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "РАЗРЫТЬ",
+                                        "modified_grammems": "дст,прш,",
+                                        "morph_info": "ДЕЕПРИЧАСТИЕ дст,прш,; "
+                                    },
+                                    {
+                                        "lemma": "СОЮЗ",
+                                        "modified_grammems": "мр,вн,им,ед,",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ИЗ-ЗА",
+                                        "modified_grammems": "",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
+                                        "lemma": "ТРИГРАМ",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; "
+                                    }
+                                ]
+                            },
+                            {
                                 "clause_type": "EMPTY",
                                 "groups": [
                                     {
@@ -1723,14 +1794,40 @@
                                         "morph_info": "Г дст,прш,мр,ед,; "
                                     }
                                 ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПОЧИНИТЬ",
+                                        "modified_grammems": "дст,прш,мр,ед,",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 6,
-                        "start": 5,
-                        "words": ", починил"
+                        "start": 0,
+                        "words": "!!!! РАЗРЫВ СОЮЗ из-за Триграм , починил"
                     }
                 ],
                 "relations": [
+                    {
+                        "gramrel": "дст,пе,св,прш,",
+                        "name": "ПРЯМ_ДОП",
+                        "src": "РАЗРЫВ",
+                        "src_grm": "дст,пе,св,прш,",
+                        "src_lemma": "РАЗРЫТЬ",
+                        "trg": "СОЮЗ",
+                        "trg_grm": "но,мр,вн,им,ед,",
+                        "trg_lemma": "СОЮЗ"
+                    },
                     {
                         "gramrel": "рд,",
                         "name": "ПГ",
@@ -1740,6 +1837,16 @@
                         "trg": "Триграм",
                         "trg_grm": "но,ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
                         "trg_lemma": "ТРИГРАМ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ПОДКЛАУЗА",
+                        "src": "починил",
+                        "src_grm": "дст,пе,св,прш,мр,ед,",
+                        "src_lemma": "ПОЧИНИТЬ",
+                        "trg": "РАЗРЫВ",
+                        "trg_grm": "дст,пе,св,прш,",
+                        "trg_lemma": "РАЗРЫТЬ"
                     }
                 ],
                 "terms": []

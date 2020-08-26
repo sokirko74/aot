@@ -1893,7 +1893,9 @@ bool CMAPost::FilterPostMorphWords()
             {
                 assert (WordNo < tags.size());
                 CPostLemWord& w = *it2;
-                FilterOnePostLemWord(w, tags[WordNo].m_TagId1, tags[WordNo].m_TagId2);
+                if (w.GetHomonymsCount() > 1) {
+                    FilterOnePostLemWord(w, tags[WordNo].m_TagId1, tags[WordNo].m_TagId2);
+                }
                 WordNo++;
             }
 
