@@ -231,13 +231,13 @@ bool CGLRTable::ConvertAndSaveGLRTable(std::string FileName)
 		ErrorMessage (Format("Cannot write to %s",FileName.c_str()));
 		return false;
 	};
-	fprintf (fp, "%lu\n", m_RuleInfos.size());
+	fprintf (fp, "%zu\n", m_RuleInfos.size());
 	WriteVectorInner(fp, m_RuleInfos);
 
-	fprintf (fp, "%lu\n", m_WorkTable.size());
+	fprintf (fp, "%zu\n", m_WorkTable.size());
 	WriteVectorInner(fp, m_WorkTable);
 
-	fprintf (fp, "%lu\n", m_ReduceRuleSets.size());
+	fprintf (fp, "%zu\n", m_ReduceRuleSets.size());
 	WriteVectorInner(fp, m_ReduceRuleSets);
 
 	fclose(fp);
@@ -318,7 +318,7 @@ void CGLRTable::PrintGLRTable(FILE* fp) const
 	{
 		assert  (m_pWorkGrammar->m_UniqueGrammarItems.size() == m_BuildTable[i].size());
 
-		fprintf (fp, "%2i ", i);
+		fprintf (fp, "%zi ", i);
 		
 		for (size_t SymbolNo=0; SymbolNo < m_BuildTable[i].size(); SymbolNo++)
 		{

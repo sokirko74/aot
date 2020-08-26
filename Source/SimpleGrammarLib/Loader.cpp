@@ -100,7 +100,7 @@ void CWorkGrammar::Print() const {
     int RuleNo = 0;
     for (CWRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
         RuleNo++;
-        printf("%i) %s\n", it->m_RuleId, GetRuleStr(it).c_str());
+        printf("%zu) %s\n", it->m_RuleId, GetRuleStr(it).c_str());
         //fprintf (fp, "%i: %s\n", RuleNo, GetRuleStr(it).c_str());
     };
     //fclose (fp);

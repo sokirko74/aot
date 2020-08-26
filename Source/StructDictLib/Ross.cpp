@@ -1105,7 +1105,7 @@ std::string TRoss::GetUnitTextHeader(WORD UnitNo) const
 	if (!t.empty())
 		R += Format("%s       = %s\n", GetTimeCreatFieldName(), t.c_str());
 
-	return R;
+	return convert_to_utf8(R, m_Language);
 }
 
 

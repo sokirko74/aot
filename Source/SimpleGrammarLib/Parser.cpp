@@ -602,7 +602,7 @@ void CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 			{
 				const CSymbolNode&  Node = C.m_pParser->m_SymbolNodes[ Nodes[i] ];
 				std::string GroupName = G.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;		
-				fprintf (fp, "%s[%i,%i); ", GroupName.c_str(), Node.m_InputStart, Node.m_InputEnd);
+				fprintf (fp, "%s[%zu,%zu); ", GroupName.c_str(), Node.m_InputStart, Node.m_InputEnd);
 			};
 			fprintf (fp, "\n");
 	};

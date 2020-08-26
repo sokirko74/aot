@@ -1854,6 +1854,9 @@ bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) co
         if ((pH->m_iPoses & (_QM(PRONOUN_PREDK) | _QM(PREDK) | _QM(PARTICLE) | _QM(PREP) | _QM(CONJ))) > 0) {
             goodHomonym = true; // Trigram is bad for auxiliary parts of speech
         }
+        if (pH->m_iGrammems & _QM(rImpersonal)) {
+            goodHomonym = true; // Ни у кого не хватило духу сказать ему об этом
+        }
         if (goodHomonym) {
             Lemmas.insert(pH->m_strLemma);
         }
