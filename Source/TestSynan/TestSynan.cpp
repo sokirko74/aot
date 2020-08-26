@@ -233,14 +233,16 @@ int main(int argc, const char** argv) {
         for (auto& p : file_pairs) {
             std::cerr << p.first << "\n";
             CTestCaseBase base;
-                base.read_test_cases(std::ifstream(p.first));
+            std::ifstream inp(p.first);
+            base.read_test_cases(inp);
             for (auto& t : base.TestCases) {
                 if (!t.Text.empty()) {
                     H.GetSentencesFromSynAn(t.Text, false);
                     t.Result = GetResultBySyntax(H.m_Synan, *H.m_pGramTab);
                 }
             }
-            base.write_test_cases(std::ofstream(p.second, std::ios::binary));
+            std::ofstream outp(p.second, std::ios::binary);
+            base.write_test_cases(outp);
         }
     }
     catch (...) {

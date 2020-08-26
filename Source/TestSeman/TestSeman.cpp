@@ -147,7 +147,8 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, string inputFile, string outputFile) {
     std::cerr << inputFile << "\n";
     CTestCaseBase base;
-    base.read_test_cases(std::ifstream(inputFile));
+    std::ifstream inp(inputFile);
+    base.read_test_cases(inp);
     for (auto& t : base.TestCases) {
         if (t.Text.length() > 250) {
             std::cerr << "skip the sentence of " << t.Text.length() << " chars (too long)\n";
@@ -180,7 +181,8 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
             throw;
         };
     }
-    base.write_test_cases(std::ofstream(outputFile, std::ios::binary));
+    std::ofstream outp(outputFile, std::ios::binary);
+    base.write_test_cases(outp);
 
 }
 

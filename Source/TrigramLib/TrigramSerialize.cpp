@@ -192,6 +192,6 @@ bool CTrigramModel::ReadBinary()
     compute_transition_probs();
     time_t end;
     time (&end);
-    fprintf (stderr,"time %i", end-start); 
+    fprintf (stderr,"time %zi", (size_t)(end-start)); 
     return true;
 }

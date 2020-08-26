@@ -157,10 +157,10 @@ const char* CSynPlmLine :: get_lemma() const
     return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma.c_str() : 0;
 }
 
-
+const std::string empty_string;
 const  std::string& CSynPlmLine::get_lemma_string() const
 {
-	return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma : std::string("");
+	return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma : empty_string;
 }
 
 const COborotForSyntax* CSynPlmLine :: get_oborot_ptr() const
