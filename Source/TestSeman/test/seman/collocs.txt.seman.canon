@@ -389,15 +389,15 @@
         "result": {
             "aux relations": [
                 {
-                    "name": "THESAME",
+                    "name": "SUB",
                     "source": {
-                        "node_id": 4,
-                        "words": "ЕМУ"
-                    },
-                    "syntax_rel": "анафора",
-                    "target": {
                         "node_id": 2,
-                        "words": "ДУХУ"
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 0,
+                        "words": "КОГО"
                     }
                 }
             ],
@@ -420,25 +420,16 @@
                 {
                     "index": 1,
                     "interps": [
-                        " +  ROSS: +ПЕР_ГЛАГ 1"
+                        " +  RusCollocs: не_хватать_духу 1"
                     ],
-                    "morph": "Г дст,пе,св,прш,ср,ед,",
-                    "node_str": "ХВАТИЛО (НЕ)",
+                    "morph": "Г безл,нс,прш,",
+                    "node_str": "ХВАТИЛО ДУХУ (НЕ)",
                     "words": [
                         {
-                            "inner morph": "Г дст,пе,св,прш,ср,ед,",
-                            "lemma": "ХВАТИТЬ",
+                            "inner morph": "Г безл,нс,прш,",
+                            "lemma": "ХВАТАТЬ",
                             "word": "ХВАТИЛО"
-                        }
-                    ]
-                },
-                {
-                    "index": 2,
-                    "interps": [
-                        " +  ROSS: +СУЩЕСТВ_одуш 1"
-                    ],
-                    "morph": "С од,мр,дт,ед,",
-                    "words": [
+                        },
                         {
                             "inner morph": "С од,мр,дт,ед,",
                             "lemma": "ДУХ",
@@ -447,7 +438,7 @@
                     ]
                 },
                 {
-                    "index": 3,
+                    "index": 2,
                     "interps": [
                         " +  ROSS: говорить 1"
                     ],
@@ -461,12 +452,11 @@
                     ]
                 },
                 {
-                    "anteceden": "ДУХУ[2]",
-                    "index": 4,
+                    "index": 3,
                     "interps": [
                         " +  ROSS: он 1"
                     ],
-                    "morph": "МС 3л,мр,дт,ед,",
+                    "morph": "МС од,3л,мр,дт,ед,",
                     "words": [
                         {
                             "inner morph": "МС 3л,мр,дт,ед,",
@@ -476,7 +466,7 @@
                     ]
                 },
                 {
-                    "index": 5,
+                    "index": 4,
                     "interps": [
                         " +  ROSS: это 1"
                     ],
@@ -493,39 +483,63 @@
             ],
             "relations": [
                 {
-                    "name": "LOK",
+                    "name": "ADR",
+                    "source": {
+                        "node_id": 2,
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 3,
+                        "words": "ЕМУ"
+                    }
+                },
+                {
+                    "name": "THEME",
+                    "source": {
+                        "node_id": 2,
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 4,
+                        "words": "ЭТОМ"
+                    }
+                },
+                {
+                    "name": "SUB",
                     "source": {
                         "node_id": 1,
-                        "words": "ХВАТИЛО (НЕ)"
+                        "words": "ХВАТИЛО ДУХУ (НЕ)"
                     },
-                    "syntax_rel": "",
+                    "syntax_rel": "к_доп",
                     "target": {
                         "node_id": 0,
                         "words": "КОГО"
                     }
                 },
                 {
-                    "name": "ADR",
+                    "name": "CONTEN",
                     "source": {
-                        "node_id": 3,
-                        "words": "СКАЗАТЬ"
+                        "node_id": 1,
+                        "words": "ХВАТИЛО ДУХУ (НЕ)"
                     },
                     "syntax_rel": "к_доп",
                     "target": {
                         "node_id": 2,
-                        "words": "ДУХУ"
+                        "words": "СКАЗАТЬ"
                     }
                 },
                 {
-                    "name": "THEME",
+                    "name": "SUB",
                     "source": {
-                        "node_id": 3,
+                        "node_id": 2,
                         "words": "СКАЗАТЬ"
                     },
-                    "syntax_rel": "к_доп",
+                    "syntax_rel": "",
                     "target": {
-                        "node_id": 5,
-                        "words": "ЭТОМ"
+                        "node_id": 0,
+                        "words": "КОГО"
                     }
                 }
             ]
