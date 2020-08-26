@@ -560,7 +560,10 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 		if( subNode.m_NodeType == MNA )
 			m_Nodes[iEngNode].AddOneGrammemRich(ePlural);
 		else if( subNode.m_MainWordNo!=-1 )
-			m_Nodes[iEngNode].AddGrammemsRich( subNode.GetGrammemsRich() & eAllNumbers );
+			if (subNode.GetGrammemsRich() & _QM(ePlural))
+				m_Nodes[iEngNode].AddGrammemsRich(_QM(ePlural));
+			else
+				m_Nodes[iEngNode].AddGrammemsRich(_QM(eSingular));
 		else
 			m_Nodes[iEngNode].AddOneGrammemRich(eSingular);
 

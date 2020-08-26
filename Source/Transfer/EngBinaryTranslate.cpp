@@ -98,6 +98,7 @@ std::string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) con
 
 
 	int count = Paradigm.GetCount();
+	rml_TRACE("lemma %s try to find a word form with grammems %s\n", Paradigm.GetSrcNorm().c_str(), GetEngGramTab()->GrammemsToStr(eng_grammems).c_str());
 	for(j = 0; j < count; j++)
 	{
 		UINT POS =  GetEngGramTab()->GetPartOfSpeech(Paradigm.GetAncode(j).c_str());

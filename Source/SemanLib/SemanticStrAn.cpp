@@ -725,8 +725,10 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 				V.CopyLexVar(*this);
 
 			   
-				rml_TRACE ("Клауза %i\n", ClauseNo);
-				rml_TRACE ("Лексический вариант(ClauseNo = %i) =  %i, Набор сл-ний = %i(из %i)\n", ClauseNo, LexVariantInCurrSetCollocNo+1,  CurrSetCollocHypNo+1,m_ClauseSetCollocHyps[ClauseNo].size());
+				rml_TRACE ("CLause %i\n", ClauseNo);
+				rml_TRACE ("Lex variant(ClauseNo = %i) =  %i, Collocation set = %i(of %i)\n", 
+					ClauseNo, LexVariantInCurrSetCollocNo+1,  
+					CurrSetCollocHypNo+1, m_ClauseSetCollocHyps[ClauseNo].size());
 				rml_TRACE ("Вес лучшего варианта дерева %i\n", V.GetBestTreeWeight());
 				ClauseVar.m_BestLexVariants.push_back(V);
 				rml_TRACE ("Связноть  клаузы %i\n", IsConnectedClause(ClauseNo));

@@ -568,20 +568,19 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo)
 	S = SemWord.m_Word;
 	EngRusMakeUpper(S);
 	//  создаем интерпретацию для наречий типа "по-английски", "по-человечески"
-	if	(			(S.substr(0,3) == _R("ПО-"))
+	if	(			startswith(S, _R("ПО-"))
 				&&	
 				(		(SemWord.m_Poses == (1<<ADV))
 					||	(		(SemWord.m_ParadigmId == -1)
-							&&	(S.length() > 3)
-							&&	(		(S.substr(S.length() - 2)  == _R("КИ"))
-									||	(S.substr(S.length() - 2)  == _R("МУ"))
+							&&	(	   endswith(S, _R("КИ"))
+									|| endswith(S, _R("МУ"))
 								)
 						)
 				)
 
 		)
 	{
-		if (S.substr(S.length() - 2)  == _R("КИ"))
+		if (endswith(S, _R("КИ")))
 		{
 			// "по-солдатски"
 			SemWord.m_Lemma = S.substr(3) + _R("Й");	

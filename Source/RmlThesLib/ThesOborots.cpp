@@ -6,61 +6,46 @@
 #include "Thesaurus.h"
 
 
-bool CThesaurus::LoadOborots (std::string FileName)
+bool CThesaurus::LoadOborots(std::string FileName)
 {
 	m_Oborots.clear();
-	FILE* fp = fopen (FileName.c_str(), "r");
-	if (!fp) return false;
-	char buff[2000];
-	if (!fgets(buff, 2000, fp))
+	std::ifstream inp(FileName);
+	if (!inp.is_open()) {
 		return false;
-	std::string Header = convert_from_utf8(buff, m_MainLanguage);
-	Trim(Header);
-	if (Header != "OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;")
+	}
+	std::string line;
+	if (!std::getline(inp, line)) {
 		return false;
+	}
+	if (line != "OborotId;OborotStr;OborotNo;PartOfSpeech;SubGrammems;") {
+		throw CExpc("bad header in %s", FileName.c_str());
+	}
 
 	if (!m_pOborDictionary) return false;
 
-    while   (fgets(buff, 2000, fp))
+	while (std::getline(inp, line))
 	{
+		line = convert_from_utf8(line.c_str(), m_MainLanguage);
+		StringTokenizer tok(line.c_str(), FieldDelimiter);
+		std::vector<std::string> items;
+		while (tok()) {
+			items.push_back(tok.val());
+		}
+		if (items.size() < 2) {
+			throw CExpc("bad number columns");
+		}
 		COborot O;
-		int i = 0;
-		std::string OborotStr;
-   		for (const char* s = strtok(buff,FieldDelimiter); s; s = strtok(0, FieldDelimiter))
-		{
-			std::string Field =  s;
-			if (Field[0] == '"')
-			{
-			   if (Field[Field.length() - 1] != '"')
-				   return false;
-			   Field.erase(0,1);
-			   Field.erase(Field.length() - 1,1);
-
-			};
-
-
-			if (i==0)
-				O.m_OborotId = atoi(Field.c_str());
-			else
-			if (i==1)
-			{
-				OborotStr = Field;
-			}
-            i++;
-		};
-
-		if (OborotStr.empty()) return false;
-        O.m_UnitNo = m_pOborDictionary->LocateUnit(OborotStr.c_str(), 1);
-		if ( O.m_UnitNo == ErrUnitNo)
+		O.m_OborotId = atoi(items[0].c_str());
+		auto oborotStr = trim_quotes(items[1]);
+		if (oborotStr.empty()) return false;
+		O.m_UnitNo = m_pOborDictionary->LocateUnit(oborotStr.c_str(), 1);
+		if (O.m_UnitNo == ErrUnitNo)
 		{
 			//ErrorMessage ("Cannot find oborot; This oborot was probably deleted! "+OborotStr);
 		};
-
 		m_Oborots.push_back(O);
 	};
 
 	sort(m_Oborots.begin(), m_Oborots.end());
-	fclose(fp);
-
- return true;
+	return true;
 };
