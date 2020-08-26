@@ -1,0 +1,8 @@
+============
+TITLE        = $GX
+SENSE       = 1
+COMM       = 5
+AUTHOR       = masha
+REDACT       = alex
+TIME_CREATE       = 27/6/1 12:40:29
+TYP     =  БЕЗУСЛ
