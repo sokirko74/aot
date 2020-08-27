@@ -32,18 +32,18 @@ bool CThesaurus::LoadRelats(std::string FileName)
 		for (const char* s = strtok(buff,FieldDelimiter); s; s = strtok(0, FieldDelimiter))
 		{
 			if (i==0)
-				R.m_Concept1No = GetConceptNoByConceptId(atoi(s));
+				R.m_Concept1Id = atoi(s);
 			else
 		    if (i==1)
-				R.m_Concept2No = GetConceptNoByConceptId(atoi(s));
+				R.m_Concept2Id = atoi(s);
 			else
 		    if (i==2)
 				R.m_RelationType =  atoi(s);
             i++;
 		}
 
-		if (   (R.m_Concept1No == -1) 
-			||  (R.m_Concept2No == -1) 
+		if (   (R.m_Concept1Id == UnknownConceptId)
+			||  (R.m_Concept2Id == UnknownConceptId)
 		   )
 		{
 			ErrorMessage("Thesaurus ("+m_Name+") integrity violations (cannot load thesaurus relations)");

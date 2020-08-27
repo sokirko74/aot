@@ -1,10 +1,7 @@
 // ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Thesaurus Browser (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (2000-2002)
-
-
-#ifndef __THESAURUS_H_
-#define __THESAURUS_H_
+#pragma once 
 
 #include "../common/utilit.h"       
 #include "../AgramtabLib/agramtab_.h"
@@ -12,10 +9,8 @@
 #include "Models.h"
 #include <map>       
 
-#pragma warning (disable : 4786)
-/////////////////////////////////////////////////////////////////////////////
-// CThesaurus
 const char FieldDelimiter[] = "#";
+
 struct COborot 
 {
 	WORD m_UnitNo;
@@ -41,6 +36,7 @@ const int siUpLw = 8;
 const int siUpUp = 16;
 const int siPlural = 32;
 
+
 struct CInnerSynItem {
  WORD   m_TerminNo;
  std::string m_ItemStr;
@@ -60,6 +56,13 @@ struct CInnerSynItem {
  
 };
 
+typedef int thesaurus_concept_t;
+const thesaurus_concept_t UnknownConceptId = -1;
+typedef std::unordered_set<thesaurus_concept_t> thesaurus_concept_set_t;
+
+typedef int thesaurus_termin_t;
+const thesaurus_termin_t UnknownTerminNo = -1;
+typedef std::unordered_set<thesaurus_termin_t>	thesaurus_termin_set_t;
 
 struct CInnerTermin {
 	std::string m_TerminStr;
@@ -70,22 +73,9 @@ struct CInnerTermin {
 };
 
 
-struct CConcept {
-	std::string m_ConceptStr;
-	int	   m_ConceptId;
-	CConcept ()	{};
-	CConcept (int ConceptId)
-	{
-		m_ConceptId = ConceptId;
-	};
-	bool operator < (const CConcept& X) const
-	{
-		return m_ConceptId < X.m_ConceptId;
-	};
-};
 
 struct CSynonym {
-	int		m_ConceptId;
+	thesaurus_concept_t		m_ConceptId;
 	int		m_TextEntryId;
 	UINT    m_DomainMask;
 	CSynonym ()	{};
@@ -102,8 +92,8 @@ enum RelationEnum
 };
 
 struct CRelat {
-	int		m_Concept1No;
-	int		m_Concept2No;
+	thesaurus_concept_t		m_Concept1Id;
+	thesaurus_concept_t		m_Concept2Id;
 	int		m_RelationType;
 };
 
@@ -112,6 +102,10 @@ typedef std::map<std::string, int> String2Int;
 
 class CThesaurus 
 {
+	std::unordered_map<thesaurus_concept_t, std::string>		m_ConceptId2Name;
+	std::unordered_map<std::string, thesaurus_concept_t>		m_ConceptName2Id;
+	void dfs(thesaurus_concept_t conceptId, RelationEnum relationType, thesaurus_concept_set_t& concepts) const;
+
 public:
 	std::string			m_TestDebug;
 	bool			m_bDontLoad;
@@ -127,7 +121,6 @@ public:
 	std::vector<CInnerTermin>	m_Termins;
 	std::vector<CSynonym>		m_SynonymsByConcept;
 	std::vector<CSynonym>		m_SynonymsByTextEntry;
-	std::vector<CConcept>		m_Concepts;
 	std::vector<CRelat>			m_Relats;
 	std::vector<CInnerSynItem>	m_SynItems;
 	String2Int				m_AbbrForms2TerminNo;
@@ -146,14 +139,13 @@ public:
 	int	 GetModelNoByModelId (long ModelId) const;
 	bool LoadTermins (std::string FileName);
 
-	void GetConceptsByTextEntryId(long TextEntryId, std::vector<long>& Concepts) const;
-	void GetTextEntriesByConcept(long ConceptId, std::vector<long>& TextEntries) const;
-	bool GetTree(int ConceptNo, std::vector<long>& TreeConcepts,  std::vector<long> CurrPath, RelationEnum RelationType) const;
+	void GetConceptsByTextEntryId(long TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const;
+	void GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<long>& TextEntries) const;
 	bool LoadSynonyms (std::string FileName);
 
 	
-	int	 GetConceptNoByConceptId (long ConceptId) const;
-	int	 GetConceptNoByConceptStr (std::string ConceptStr) const;
+	thesaurus_concept_t	 GetConceptIdByConceptStr (const std::string& ConceptStr) const;
+	std::string GetConceptStrById(const thesaurus_concept_t& id) const;
 	bool LoadConcepts (std::string FileName);
 
 	bool LoadRelats (std::string FileName);
@@ -169,12 +161,9 @@ public:
 	bool	IsA(DWORD TextEntryId, std::string ConceptStr) const;
 	void	QueryEnglishTranslations(DWORD TextEntryId, std::vector<int>& CurrentEnglishTermins) const;
 	int		GetTerminIdBySingleWord(std::string WordStr) const;
-	int		QueryTopConcepts(UINT TextEntryId, std::vector<int>& CurrentTopConcepts) const;
-	void	QueryHigherTermins(UINT TextEntryId, std::vector<int>& CurrentHigherTermins) const;
+	thesaurus_concept_set_t		QueryTopConcepts(UINT TextEntryId) const;
 	DWORD	QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const;
-	void	QueryLowerTermins(const std::string& ConceptStr, UINT Language, std::vector<int>& CurrentLowerTermins) const;
+	thesaurus_termin_set_t QueryLowerTermins(const std::string& conceptStr, MorphLanguageEnum lang) const;
 	int		FindAbbr(const std::string& str) const;
 	void	SetDicts(MorphLanguageEnum MainLanguage, const CDictionary* OborDic, const CAgramtab* MainGramtab, const CAgramtab* EngGramtab);
 };
-
-#endif 

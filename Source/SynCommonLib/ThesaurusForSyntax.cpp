@@ -59,14 +59,11 @@ bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName, const CT
 		{
 			try
 			{
-				std::string s_accost = "PROF";
-				std::vector<int> Res;
-				Thes->QueryLowerTermins(s_accost.c_str(), morphRussian, Res);
-				for (int i = 0; i < Res.size(); i++)
+				for (auto i : Thes->QueryLowerTermins("PROF", morphRussian) )
 				{
-					std::string TerminStr = Thes->m_Termins[Res[i]].m_TerminStr;
-					RmlMakeLower(TerminStr, GetOpt()->m_Language);
-					p_vectorAccost.insert(TerminStr);
+					std::string terminStr = Thes->m_Termins[i].m_TerminStr;
+					RmlMakeLower(terminStr, GetOpt()->m_Language);
+					p_vectorAccost.insert(terminStr);
 				};
 			}
 			catch (...)

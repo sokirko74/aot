@@ -6,46 +6,46 @@
 #include "StdRmlThes.h"
 #include "Thesaurus.h"
 
-inline bool IsLessByTextEntry (const CSynonym& _X1, const CSynonym& _X2) 
+inline bool IsLessByTextEntry(const CSynonym& _X1, const CSynonym& _X2)
 {
-		return _X1.m_TextEntryId < _X2.m_TextEntryId;
+	return _X1.m_TextEntryId < _X2.m_TextEntryId;
 };
 
-inline bool IsLessByConcept (const CSynonym& _X1, const CSynonym& _X2) 
+inline bool IsLessByConcept(const CSynonym& _X1, const CSynonym& _X2)
 {
-		return _X1.m_ConceptId < _X2.m_ConceptId;
+	return _X1.m_ConceptId < _X2.m_ConceptId;
 };
 
 
 
-void  CThesaurus::GetConceptsByTextEntryId(long TextEntryId, std::vector<long>& Concepts) const
+void  CThesaurus::GetConceptsByTextEntryId(long TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const
 {
- Concepts.clear();
- CSynonym S;
- S.m_TextEntryId = TextEntryId;
- for (
-	 std::vector<CSynonym>::const_iterator It = lower_bound(m_SynonymsByTextEntry.begin(), m_SynonymsByTextEntry.end(),S, IsLessByTextEntry);
-	  !(It == m_SynonymsByTextEntry.end()) && (It->m_TextEntryId==TextEntryId);
-	  It++
-	 )
- {
-	 Concepts.push_back(It->m_ConceptId);
- }
+	Concepts.clear();
+	CSynonym S;
+	S.m_TextEntryId = TextEntryId;
+	for (
+		std::vector<CSynonym>::const_iterator It = lower_bound(m_SynonymsByTextEntry.begin(), m_SynonymsByTextEntry.end(), S, IsLessByTextEntry);
+		!(It == m_SynonymsByTextEntry.end()) && (It->m_TextEntryId == TextEntryId);
+		It++
+		)
+	{
+		Concepts.push_back(It->m_ConceptId);
+	}
 };
 
-void  CThesaurus::GetTextEntriesByConcept(long ConceptId, std::vector<long>& TextEntries) const
+void  CThesaurus::GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<long>& TextEntries) const
 {
- TextEntries.clear();
- CSynonym S;
- S.m_ConceptId = ConceptId;
- for (
-	 std::vector<CSynonym>::const_iterator It = lower_bound(m_SynonymsByConcept.begin(), m_SynonymsByConcept.end(),S, IsLessByConcept);
-	  !(It == m_SynonymsByConcept.end()) && (It->m_ConceptId==ConceptId);
-	  It++
-	 )
- {
-	 TextEntries.push_back(It->m_TextEntryId);
- }
+	TextEntries.clear();
+	CSynonym S;
+	S.m_ConceptId = ConceptId;
+	for (
+		std::vector<CSynonym>::const_iterator It = lower_bound(m_SynonymsByConcept.begin(), m_SynonymsByConcept.end(), S, IsLessByConcept);
+		!(It == m_SynonymsByConcept.end()) && (It->m_ConceptId == ConceptId);
+		It++
+		)
+	{
+		TextEntries.push_back(It->m_TextEntryId);
+	}
 };
 
 
@@ -54,10 +54,10 @@ bool CThesaurus::LoadSynonyms(std::string FileName)
 {
 	m_SynonymsByConcept.clear();
 	m_SynonymsByTextEntry.clear();
-	FILE* fp = fopen (FileName.c_str(), "r");
+	FILE* fp = fopen(FileName.c_str(), "r");
 	if (!fp) return false;
 	char buff[2000];
-	if ( !fgets (buff, 2000, fp) )
+	if (!fgets(buff, 2000, fp))
 	{
 		fclose(fp);
 		return false;
@@ -70,26 +70,26 @@ bool CThesaurus::LoadSynonyms(std::string FileName)
 		return false;
 	};
 
-	while   (fgets(buff, 2000, fp))
+	while (fgets(buff, 2000, fp))
 	{
 		int i = 0;
 		CSynonym S;
-		for (const char* s = strtok(buff,FieldDelimiter); s; s = strtok(0, FieldDelimiter))
+		for (const char* s = strtok(buff, FieldDelimiter); s; s = strtok(0, FieldDelimiter))
 		{
-			if (i==0)
+			if (i == 0)
 				S.m_ConceptId = atoi(s);
 			else
-		    if (i==1)
-				S.m_TextEntryId =  atoi(s);
-            i++;
+				if (i == 1)
+					S.m_TextEntryId = atoi(s);
+			i++;
 		}
 
 		m_SynonymsByConcept.push_back(S);
 	};
-    fclose(fp);
+	fclose(fp);
 
 	m_SynonymsByTextEntry = m_SynonymsByConcept;
-	sort(m_SynonymsByTextEntry.begin(), m_SynonymsByTextEntry.end(), IsLessByTextEntry );
+	sort(m_SynonymsByTextEntry.begin(), m_SynonymsByTextEntry.end(), IsLessByTextEntry);
 
 	return true;
 };

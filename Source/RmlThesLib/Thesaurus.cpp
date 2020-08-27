@@ -11,7 +11,7 @@
 template<class _II, class _Ty> inline
 bool _find(_II It, const _Ty& _V)
 {
-	  return !(find(It.begin(), It.end(), _V) ==  It.end());
+	return !(find(It.begin(), It.end(), _V) == It.end());
 }
 
 
@@ -36,40 +36,40 @@ bool CThesaurus::ReadThesaurusFromDisk()
 	if (!m_pMainGramTab) return false;
 	if (!m_pEngGramTab) return false;
 	if (m_MainLanguage == morphUnknown) return false;
-	
-	if (!LoadModels (m_Directory+"/StatThes/FreqCollocTypes.txt"))
+
+	if (!LoadModels(m_Directory + "/StatThes/FreqCollocTypes.txt"))
 	{
-		ErrorMessage ("Cannot Load models " +m_Directory+"/StatThes/FreqCollocTypes.txt");
+		ErrorMessage("Cannot Load models " + m_Directory + "/StatThes/FreqCollocTypes.txt");
 		return false;
 	};
-	
-	std::string OborotsFileName = (m_MainLanguage == morphGerman) ?  
-				m_Directory+"/StatThes/GerOborots.txt" : m_Directory+"/StatThes/RusOborots.txt";
-	if (!LoadOborots (OborotsFileName))
+
+	std::string OborotsFileName = (m_MainLanguage == morphGerman) ?
+		m_Directory + "/StatThes/GerOborots.txt" : m_Directory + "/StatThes/RusOborots.txt";
+	if (!LoadOborots(OborotsFileName))
 	{
-		ErrorMessage ("Cannot Load oborots " + OborotsFileName);
-		return false;
-
-	};
-
-
-	if (!LoadTermins (m_Directory+"/StatThes/TextEntr.txt"))
-	{
-		ErrorMessage ("Cannot Load text entries " +m_Directory+"/StatThes/TextEntr.txt");
+		ErrorMessage("Cannot Load oborots " + OborotsFileName);
 		return false;
 
 	};
 
-	if (!LoadSynItems (m_Directory+"/StatThes/Lemmas.txt"))
+
+	if (!LoadTermins(m_Directory + "/StatThes/TextEntr.txt"))
 	{
-		ErrorMessage ("Cannot Load lemmas " +m_Directory+"/StatThes/Lemmas.txt");
+		ErrorMessage("Cannot Load text entries " + m_Directory + "/StatThes/TextEntr.txt");
 		return false;
 
 	};
 
-	if (!LoadSynonyms (m_Directory+"/StatThes/Synonyms.txt"))
+	if (!LoadSynItems(m_Directory + "/StatThes/Lemmas.txt"))
 	{
-		ErrorMessage ("Cannot Load text entries " +m_Directory+"/StatThes/Synonyms.txt");
+		ErrorMessage("Cannot Load lemmas " + m_Directory + "/StatThes/Lemmas.txt");
+		return false;
+
+	};
+
+	if (!LoadSynonyms(m_Directory + "/StatThes/Synonyms.txt"))
+	{
+		ErrorMessage("Cannot Load text entries " + m_Directory + "/StatThes/Synonyms.txt");
 		return false;
 
 	};
@@ -85,15 +85,15 @@ bool CThesaurus::ReadRelationsFromDisk()
 {
 	if (m_bDontLoad) return true;
 
-	if (!LoadConcepts (m_Directory+"/StatThes/Concepts.txt"))
+	if (!LoadConcepts(m_Directory + "/StatThes/Concepts.txt"))
 	{
-		ErrorMessage ("Cannot Load Concepts " +m_Directory+"/StatThes/Concepts.txt");
+		ErrorMessage("Cannot Load Concepts " + m_Directory + "/StatThes/Concepts.txt");
 		return false;
 
 	};
-	if (!LoadRelats (m_Directory+"/StatThes/Relats.txt"))
+	if (!LoadRelats(m_Directory + "/StatThes/Relats.txt"))
 	{
-		ErrorMessage ("Cannot Load Relats " +m_Directory+"/StatThes/Relats.txt");
+		ErrorMessage("Cannot Load Relats " + m_Directory + "/StatThes/Relats.txt");
 		return false;
 
 	};
@@ -104,169 +104,155 @@ bool CThesaurus::SetDatabase(std::string DatabaseName)
 {
 	m_bDontLoad = false;
 	m_Name = DatabaseName;
-	std::string KeyName = "Software\\Dialing\\"+m_Name+"\\DictPath";
+	std::string KeyName = "Software\\Dialing\\" + m_Name + "\\DictPath";
 	try {
-	  m_Directory = GetRegistryString(KeyName);
+		m_Directory = GetRegistryString(KeyName);
 	}
 	catch (...)
 	{
-		ErrorMessage ("Cannot open" + m_Name);
-        return false;
+		ErrorMessage("Cannot open" + m_Name);
+		return false;
 	};
 
 	try {
-	  std::string KeyName = "Software\\Dialing\\Thesauri\\IgnoreThesauri";
-	  if (CanGetRegistryString(KeyName))
-	  {
-		  std::string Value =  GetRegistryString(KeyName);
-		  m_bDontLoad =   (Value == "yes");
-	  }
+		std::string KeyName = "Software\\Dialing\\Thesauri\\IgnoreThesauri";
+		if (CanGetRegistryString(KeyName))
+		{
+			std::string Value = GetRegistryString(KeyName);
+			m_bDontLoad = (Value == "yes");
+		}
 	}
 	catch (...)
 	{
 	};
-	
+
 	return true;
 }
 
 
 
 
-struct IsLessByConcept1{
-	
-	bool  operator() (const CRelat& _X1, const int& ConceptNo) const
+struct IsLessByConcept1 {
+
+	bool  operator() (const CRelat& _X1, const thesaurus_concept_t& conceptId) const
 	{
-			return _X1.m_Concept1No < ConceptNo;
+		return _X1.m_Concept1Id < conceptId;
 	};
-	bool  operator() (const int& ConceptNo, const CRelat& _X1 ) const
+	bool  operator() (const thesaurus_concept_t& conceptId, const CRelat& _X1) const
 	{
-			return ConceptNo < _X1.m_Concept1No;
+		return conceptId < _X1.m_Concept1Id;
 	};
 	bool  operator() (const CRelat& _X1, const CRelat& _X2) const
 	{
-		return _X1.m_Concept1No < _X2.m_Concept1No;
+		return _X1.m_Concept1Id < _X2.m_Concept1Id;
 	};
 };
 
 
 
-static long GetRelationsCount(const CThesaurus& T, int ConceptNo, RelationEnum RelationId) 
+static size_t GetRelationsCount(const CThesaurus& T, thesaurus_concept_t conceptId, RelationEnum relationId)
 {
-	long Result = 0;
-	for (
-		std::vector<CRelat>::const_iterator It = lower_bound(T.m_Relats.begin(), T.m_Relats.end(),ConceptNo, IsLessByConcept1());
-	  !(It == T.m_Relats.end()) && (It->m_Concept1No==ConceptNo);
-	  It++
-	 )
-	 if (It->m_RelationType == RelationId)
-		 Result++;
-	 return Result;
-
+	auto p = std::equal_range(T.m_Relats.begin(), T.m_Relats.end(), conceptId, IsLessByConcept1());
+	size_t result = 0;
+	for (auto i = p.first; i != p.second; ++i)
+	{
+		if (i->m_RelationType == relationId) {
+			++result;
+		}
+	}
+	return result;
 };
 
 
-bool CThesaurus::GetTree(int ConceptNo, std::vector<long>& TreeConcepts,  std::vector<long> CurrPath, RelationEnum RelationType) const
+void CThesaurus::dfs(thesaurus_concept_t conceptId, RelationEnum relationType, std::unordered_set<thesaurus_concept_t>& concepts) const
 {
-
-	for (long i=0; i <CurrPath.size(); i++)
-		if (CurrPath[i] == ConceptNo)  return false;
-
-	CurrPath.push_back(ConceptNo);
-
-	for (
-		std::vector<CRelat>::const_iterator It = lower_bound(m_Relats.begin(), m_Relats.end(),ConceptNo, IsLessByConcept1());
-		!(It == m_Relats.end()) && (It->m_Concept1No==ConceptNo);
-		It++
-		)
-		if (It->m_RelationType == RelationType)
+	if (concepts.find(conceptId) != concepts.end()) {
+		return; 
+	}
+	concepts.insert(conceptId);
+	auto p = std::equal_range(m_Relats.begin(), m_Relats.end(), conceptId, IsLessByConcept1());
+	for (auto i = p.first; i != p.second; ++i)
+	{
+		if (i->m_RelationType == relationType)
 		{
-			if (!GetTree (It->m_Concept2No, TreeConcepts,CurrPath, RelationType)) return false;
-			TreeConcepts.push_back(It->m_Concept2No);
+			dfs(i->m_Concept2Id,  relationType, concepts);
 		};
 
-	return true;
+	}
 };
 
 
 bool CThesaurus::IsA(DWORD TextEntryId, std::string ConceptStr) const
 {
-	long ConceptNo = GetConceptNoByConceptStr(ConceptStr.c_str());	
-	if (ConceptNo == -1) return   false;
-	long ConceptId = m_Concepts[ConceptNo].m_ConceptId;
+	thesaurus_concept_t conceptId = GetConceptIdByConceptStr(ConceptStr.c_str());
+	if (conceptId == UnknownConceptId) return   false;
 
-	std::vector<long> ConceptsFromTextEntry;
-	GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
-	if (ConceptsFromTextEntry.empty()) return true;
+	std::vector<thesaurus_concept_t> conceptsFromTextEntry;
+	GetConceptsByTextEntryId(TextEntryId, conceptsFromTextEntry);
+	if (conceptsFromTextEntry.empty()) return true;
 
-	std::vector<long> HIGHERConcepts;
-	std::vector<long> Path;
-	for (long i=0; i < ConceptsFromTextEntry.size();i++)
+	for (auto& concept : conceptsFromTextEntry)
 	{
-		HIGHERConcepts.clear();
-		if (!GetTree(GetConceptNoByConceptId(ConceptsFromTextEntry[i]), HIGHERConcepts, Path, HIGHER))
-		{
-			ErrorMessage ("a cycle found starts from TextEntry " + m_Termins[GetTerminNoByTextEntryId(TextEntryId)].m_TerminStr);
-			return false;
+		std::unordered_set<thesaurus_concept_t> higherConcepts;
+		dfs(concept, HIGHER, higherConcepts);
+		if (higherConcepts.find(conceptId) != higherConcepts.end()) {
+			return true;
 		}
-
-		for (long k=0;  k <HIGHERConcepts.size();k++)
-			if (m_Concepts[HIGHERConcepts[k]].m_ConceptId == ConceptId) 
-				return true;
 	};
 
 	return false;
 }
 
-bool IsEnglishModel (const CInnerModel& M)
+bool IsEnglishModel(const CInnerModel& M)
 {
-  for (long i =0; i <M.m_AtomGroups.size(); i++)
-   if (M.m_AtomGroups[i].m_LanguageId != morphEnglish)
-     return false;
+	for (long i = 0; i < M.m_AtomGroups.size(); i++)
+		if (M.m_AtomGroups[i].m_LanguageId != morphEnglish)
+			return false;
 
-  return true;
+	return true;
 
 };
 
 void CThesaurus::QueryEnglishTranslations(DWORD TextEntryId, std::vector<int>& CurrentEnglishTermins) const
 {
 	CurrentEnglishTermins.clear();
-	std::vector<long> ConceptsFromTextEntry;
+	std::vector<thesaurus_concept_t> ConceptsFromTextEntry;
 	GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
 	if (ConceptsFromTextEntry.empty()) return;
 
-	for (long i=0; i <m_SynonymsByConcept.size();i++)
+	for (long i = 0; i < m_SynonymsByConcept.size(); i++)
 	{
 		bool Found = false;
-		long k=0;
-		for (; k <ConceptsFromTextEntry.size();k++)
+		long k = 0;
+		for (; k < ConceptsFromTextEntry.size(); k++)
 			if (m_SynonymsByConcept[i].m_ConceptId == ConceptsFromTextEntry[k])
 			{
 				Found = true;
 				break;
 			};
 
-		if  (Found)
+		if (Found)
 		{
 			k = GetTerminNoByTextEntryId(m_SynonymsByConcept[i].m_TextEntryId);
-			if (k != -1) 
+			if (k != -1)
 			{
-				if (m_Termins[k].m_ModelNo !=-1)
-				if (IsEnglishModel(m_Models[m_Termins[k].m_ModelNo]))
-				CurrentEnglishTermins.push_back(k);
+				if (m_Termins[k].m_ModelNo != -1)
+					if (IsEnglishModel(m_Models[m_Termins[k].m_ModelNo]))
+						CurrentEnglishTermins.push_back(k);
 
-				std::string s = m_Termins[k].m_TerminStr;	
-				long j=0;
+				std::string s = m_Termins[k].m_TerminStr;
+				long j = 0;
 				for (; j < s.length(); j++)
-					if (		!is_english_alpha((BYTE)s[j])
-							&&	!isdigit((BYTE)s[j])
-							&&	!ispunct((BYTE)s[j])
-							&&	!isspace((BYTE)s[j])
-					)
-					break;
+					if (!is_english_alpha((BYTE)s[j])
+						&& !isdigit((BYTE)s[j])
+						&& !ispunct((BYTE)s[j])
+						&& !isspace((BYTE)s[j])
+						)
+						break;
 
 				if (j == s.length())
-				if (!_find(CurrentEnglishTermins, k))
-				CurrentEnglishTermins.push_back(k);
+					if (!_find(CurrentEnglishTermins, k))
+						CurrentEnglishTermins.push_back(k);
 
 			};
 		};
@@ -279,99 +265,42 @@ void CThesaurus::QueryEnglishTranslations(DWORD TextEntryId, std::vector<int>& C
 int CThesaurus::GetTerminIdBySingleWord(std::string WordStr) const
 {
 	CInnerSynItem I;
-    I.m_ItemStr = WordStr;
+	I.m_ItemStr = WordStr;
 
 	EngRusMakeUpper(I.m_ItemStr);
 
-	for (std::vector<CInnerSynItem>::const_iterator It = lower_bound (m_SynItems.begin(), m_SynItems.end(),I);
-	     (It < m_SynItems.end()) && (It->m_ItemStr == I.m_ItemStr);
-		 It++)
-      if (m_Termins[It->m_TerminNo].m_ModelNo != -1)
-		  if (m_Models[m_Termins[It->m_TerminNo].m_ModelNo].m_AtomGroups.size() == 1)
-		  {
-			  return  m_Termins[It->m_TerminNo].m_TerminId;
+	for (std::vector<CInnerSynItem>::const_iterator It = lower_bound(m_SynItems.begin(), m_SynItems.end(), I);
+		(It < m_SynItems.end()) && (It->m_ItemStr == I.m_ItemStr);
+		It++)
+		if (m_Termins[It->m_TerminNo].m_ModelNo != -1)
+			if (m_Models[m_Termins[It->m_TerminNo].m_ModelNo].m_AtomGroups.size() == 1)
+			{
+				return  m_Termins[It->m_TerminNo].m_TerminId;
 
-		  };
+			};
 
 	return -1;
 }
 
-int CThesaurus::QueryTopConcepts(UINT TextEntryId, std::vector<int>& CurrentTopConcepts) const
+thesaurus_concept_set_t CThesaurus::QueryTopConcepts(UINT TextEntryId) const
 {
-  CurrentTopConcepts.clear();
-  std::vector<long> ConceptsFromTextEntry;
-  GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
-  if (ConceptsFromTextEntry.empty()) return 0;
+	std::vector<thesaurus_concept_t> conceptsFromTextEntry;
+	GetConceptsByTextEntryId(TextEntryId, conceptsFromTextEntry);
 
-  for (long i=0; i <ConceptsFromTextEntry.size(); i++)
-  {
-	std::vector<long> HIGHERConcepts;
-	std::vector<long> Path;
-
-    if (!GetTree(GetConceptNoByConceptId(ConceptsFromTextEntry[i]), HIGHERConcepts, Path, HIGHER))
-    {
-       ErrorMessage ("a cycle found starts from TextEntry " + m_Termins[GetTerminNoByTextEntryId(TextEntryId)].m_TerminStr);
-       return 0;
-    };
-
-
-   for (long k=0; k < HIGHERConcepts.size(); k++)
-    if (GetRelationsCount(*this, HIGHERConcepts[k], HIGHER) == 0) 
-		if (!_find(CurrentTopConcepts,HIGHERConcepts[k])) 
-          CurrentTopConcepts.push_back(HIGHERConcepts[k]);
-  };
-
-  return CurrentTopConcepts.size();
+	thesaurus_concept_set_t result;
+	for (auto i: conceptsFromTextEntry)
+	{
+		thesaurus_concept_set_t higherConcepts;
+		dfs(i, HIGHER, higherConcepts);
+		for (auto k : higherConcepts) {
+			if (GetRelationsCount(*this, k, HIGHER) == 0) {
+				result.insert(k);
+			}
+		}
+	};
+	return result;
 }
 
-
-
-void  CThesaurus::QueryHigherTermins(UINT TextEntryId, std::vector<int>& CurrentHigherTermins) const
-{
-	CurrentHigherTermins.clear();
-	long TerminNo = GetTerminNoByTextEntryId(TextEntryId);
-	if (TerminNo == -1) return;
-	if (m_Termins[TerminNo].m_ModelNo == -1) return;
-	bool IsEnglish =   IsEnglishModel(m_Models[m_Termins[TerminNo].m_ModelNo]);
- 
-
-	std::vector<long> ConceptsFromTextEntry;
-	GetConceptsByTextEntryId(TextEntryId, ConceptsFromTextEntry);
-	if (ConceptsFromTextEntry.empty()) return;
-	std::vector<long> HigherConcepts;
-	long i=0;
-	for (; i <ConceptsFromTextEntry.size(); i++)
-	{
-		std::vector<long> HIGHERConcepts;
-		std::vector<long> Path;
-
-		if (!GetTree(GetConceptNoByConceptId(ConceptsFromTextEntry[i]), HIGHERConcepts, Path, HIGHER))
-		{
-			ErrorMessage ("a cycle found starts from TextEntry " + m_Termins[GetTerminNoByTextEntryId(TextEntryId)].m_TerminStr);
-			return;
-		};
-
-
-		for (long k=0; k < HIGHERConcepts.size(); k++)
-			if ( !_find(HigherConcepts, HIGHERConcepts[k]) )
-				HigherConcepts.push_back(HIGHERConcepts[k]);
-	};
-
-	for (i=0; i <HigherConcepts.size(); i++)
-	{
-	  std::vector<long> TextEntries;
-	  GetTextEntriesByConcept(m_Concepts[HigherConcepts[i]].m_ConceptId, TextEntries);
-	  for (long k=0; k < TextEntries.size(); k++)
-	  {
-		  long TerminNo = GetTerminNoByTextEntryId(TextEntries[k]);
-		  if (m_Termins[TerminNo].m_ModelNo == -1) continue;
-		  if (IsEnglish != IsEnglishModel(m_Models[m_Termins[TerminNo].m_ModelNo])) continue;
-		  if (!_find (CurrentHigherTermins, TerminNo))
-			  CurrentHigherTermins.push_back(TerminNo);
-	  };
-	};
-
-}
 
 
 DWORD CThesaurus::QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const
@@ -379,41 +308,37 @@ DWORD CThesaurus::QueryTerminItem(const std::string& ItemStr, std::vector<int>& 
 	CurrentTerminItems.clear();
 	CInnerSynItem I;
 	I.m_ItemStr = ItemStr;
-	for (std::vector<CInnerSynItem>::const_iterator It = lower_bound (m_SynItems.begin(), m_SynItems.end(),I);
-	     (It < m_SynItems.end()) && (It->m_ItemStr == I.m_ItemStr);
-		 It++)
-	     CurrentTerminItems.push_back(It - m_SynItems.begin());
+	for (std::vector<CInnerSynItem>::const_iterator It = lower_bound(m_SynItems.begin(), m_SynItems.end(), I);
+		(It < m_SynItems.end()) && (It->m_ItemStr == I.m_ItemStr);
+		It++)
+		CurrentTerminItems.push_back(It - m_SynItems.begin());
 
 	return  CurrentTerminItems.size();
 }
 
 
 
-void CThesaurus::QueryLowerTermins(const std::string& ConceptStr, UINT Language, std::vector<int>& CurrentLowerTermins) const
+thesaurus_termin_set_t CThesaurus::QueryLowerTermins(const std::string& conceptStr, MorphLanguageEnum lang) const
 {
-	CurrentLowerTermins.clear();
-	long ConceptNo = GetConceptNoByConceptStr(ConceptStr);	
-	if (ConceptNo == -1) return;
-	std::vector<long> LOWERConcepts;
-	std::vector<long> Path;
-	if (!GetTree(ConceptNo, LOWERConcepts, Path, LOWER))
-		  return;
+	thesaurus_termin_set_t result;
+	thesaurus_concept_t conceptId = GetConceptIdByConceptStr(conceptStr);
+	thesaurus_concept_set_t lowerConcepts;
+	dfs(conceptId, LOWER, lowerConcepts);
 
-	bool IsEnglish =  Language == morphEnglish;
-	for (long i=0; i <LOWERConcepts.size(); i++)
+	bool IsEnglish = lang == morphEnglish;
+	for (auto i : lowerConcepts)
 	{
-	  std::vector<long> TextEntries;
-	  GetTextEntriesByConcept(m_Concepts[LOWERConcepts[i]].m_ConceptId, TextEntries);
-	  for (long k=0; k < TextEntries.size(); k++)
-	  {
-		  long TerminNo = GetTerminNoByTextEntryId(TextEntries[k]);
-		  if (m_Termins[TerminNo].m_ModelNo == -1) continue;
-		  if (IsEnglish != IsEnglishModel(m_Models[m_Termins[TerminNo].m_ModelNo])) continue;
-		  if (!_find (CurrentLowerTermins, TerminNo))
-			  CurrentLowerTermins.push_back(TerminNo);
-	  };
+		std::vector<long> TextEntries;
+		GetTextEntriesByConcept(i, TextEntries);
+		for (auto k : TextEntries)
+		{
+			thesaurus_termin_t TerminNo = GetTerminNoByTextEntryId(k);
+			if (m_Termins[TerminNo].m_ModelNo == -1) continue;
+			if (IsEnglish != IsEnglishModel(m_Models[m_Termins[TerminNo].m_ModelNo])) continue;
+			result.insert(TerminNo);
+		};
 	};
-
+	return result;
 }
 
 
@@ -430,10 +355,10 @@ int CThesaurus::FindAbbr(const std::string& str) const
 bool CThesaurus::LoadSynItems(std::string FileName)
 {
 	m_SynItems.clear();
-	FILE* fp = fopen (FileName.c_str(), "r");
+	FILE* fp = fopen(FileName.c_str(), "r");
 	if (!fp) return false;
 	char buff[2000];
-	if ( !fgets (buff, 2000, fp) )
+	if (!fgets(buff, 2000, fp))
 		return false;
 	std::string Header = buff;
 	Trim(Header);
@@ -443,17 +368,17 @@ bool CThesaurus::LoadSynItems(std::string FileName)
 		return false;
 	}
 
-    long SaveTerminId = -1;
-	long SaveTerminNo = -1; 
-	while   (fgets(buff, 2000, fp))
-	{ 
+	long SaveTerminId = -1;
+	long SaveTerminNo = -1;
+	while (fgets(buff, 2000, fp))
+	{
 		int i = 0;
 		CInnerSynItem I;
 		long TerminId;
 		long OborotId = -1;
 		for (char* s = strtok(buff, FieldDelimiter); s; s = strtok(0, FieldDelimiter))
 		{
-			int len = strlen(s);			
+			int len = strlen(s);
 			if (s[0] == '"')
 			{
 				if (s[len - 1] != '"')
@@ -461,88 +386,88 @@ bool CThesaurus::LoadSynItems(std::string FileName)
 					fclose(fp);
 					return false;
 				}
-			   s[len-1] = ' ';
-			   s++;
-			   
-			};
-			std::string Field =  s;
-			if (i==0)
-				TerminId = atoi(Field.c_str());
-	            else
-			if (i==1)
-				I.m_ItemPos = atoi(Field.c_str());
-      	      else
-			if (i==2)
-			{
-				I.m_ItemStr = convert_from_utf8(s, m_MainLanguage);
-				Trim(I.m_ItemStr);
-			}
-			else
-			if (i==3)
-				I.m_Flags |= (Field == "TRUE")? siLemma : 0;
-			else
-			if (i==4)
-				I.m_Flags |=   (Field == "TRUE")? siOb1 : 0;
-			else
-			if (i==5)
-			    I.m_Flags |=   (Field == "TRUE")? siOb2 : 0;
-			else
-			if (i==6)
-				OborotId = atoi(Field.c_str());
-			else
-			if (i==7)
-				I.m_Flags |=   (Field == "TRUE")?siUpLw : 0;
-			else
-			if (i==8)
-				I.m_Flags |=   (Field == "TRUE") ? siUpUp : 0;
-			else
-			if (i==9)
-				I.m_Flags |=   (Field == "TRUE") ? siPlural : 0;
+				s[len - 1] = ' ';
+				s++;
 
-	            i++;
+			};
+			std::string Field = s;
+			if (i == 0)
+				TerminId = atoi(Field.c_str());
+			else
+				if (i == 1)
+					I.m_ItemPos = atoi(Field.c_str());
+				else
+					if (i == 2)
+					{
+						I.m_ItemStr = convert_from_utf8(s, m_MainLanguage);
+						Trim(I.m_ItemStr);
+					}
+					else
+						if (i == 3)
+							I.m_Flags |= (Field == "TRUE") ? siLemma : 0;
+						else
+							if (i == 4)
+								I.m_Flags |= (Field == "TRUE") ? siOb1 : 0;
+							else
+								if (i == 5)
+									I.m_Flags |= (Field == "TRUE") ? siOb2 : 0;
+								else
+									if (i == 6)
+										OborotId = atoi(Field.c_str());
+									else
+										if (i == 7)
+											I.m_Flags |= (Field == "TRUE") ? siUpLw : 0;
+										else
+											if (i == 8)
+												I.m_Flags |= (Field == "TRUE") ? siUpUp : 0;
+											else
+												if (i == 9)
+													I.m_Flags |= (Field == "TRUE") ? siPlural : 0;
+
+			i++;
 		}
 		I.m_OborotNo = ErrUnitNo;
 		if (OborotId != -1)
 		{
-			std::vector<COborot>::const_iterator It = lower_bound(m_Oborots.begin(), m_Oborots.end(),COborot(OborotId));
-			if  (  (It != m_Oborots.end())
-				 &&(It->m_OborotId == OborotId)
+			std::vector<COborot>::const_iterator It = lower_bound(m_Oborots.begin(), m_Oborots.end(), COborot(OborotId));
+			if ((It != m_Oborots.end())
+				&& (It->m_OborotId == OborotId)
 				)
-			I.m_OborotNo =  It - m_Oborots.begin();
+				I.m_OborotNo = It - m_Oborots.begin();
 		};
-		long TerminNo ;
+		long TerminNo;
 		if (TerminId == SaveTerminId)
 			TerminNo = SaveTerminNo;
 		else
 			TerminNo = GetTerminNoByTextEntryId(TerminId);
 
-        if (TerminNo != -1)
+		if (TerminNo != -1)
 		{
-		  I.m_TerminNo = TerminNo;
-		  m_SynItems.push_back(I);
- 		  SaveTerminNo = I.m_TerminNo;
-		  SaveTerminId =  TerminId;
+			I.m_TerminNo = TerminNo;
+			m_SynItems.push_back(I);
+			SaveTerminNo = I.m_TerminNo;
+			SaveTerminId = TerminId;
 		};
-	 };
-	sort (m_SynItems.begin(), m_SynItems.end());
+	};
+	sort(m_SynItems.begin(), m_SynItems.end());
 
 	long Count = m_SynItems.size();
-	long i=0;
+	long i = 0;
 	try {
-		for (i=0; i < Count; i++)
+		for (i = 0; i < Count; i++)
 		{
 			CInnerTermin& T = m_Termins[m_SynItems[i].m_TerminNo];
-			long k=0;
+			long k = 0;
 			for (; k < T.m_TermItems.size(); k++)
-				if (m_SynItems[T.m_TermItems[k]].m_ItemPos >  m_SynItems[i].m_ItemPos)
+				if (m_SynItems[T.m_TermItems[k]].m_ItemPos > m_SynItems[i].m_ItemPos)
 					break;
-			T.m_TermItems.insert (T.m_TermItems.begin() + k, i);
+			T.m_TermItems.insert(T.m_TermItems.begin() + k, i);
 		};
 	}
 	catch (...)
 	{
 		return false;
-	}	
+	}
 	fclose(fp);
 	return true;
 };

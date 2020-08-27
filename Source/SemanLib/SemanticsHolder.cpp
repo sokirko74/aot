@@ -228,28 +228,23 @@ bool GetLemmaFromTitle (std::string S, long PlaceNo, std::string& Lemma)
 	return true;
 };
 
-
-
-void InitThesList (const CThesaurus* Thes, std::string ConceptStr,	StringVector& Vec)
+StringVector InitThesList (const CThesaurus* Thes, const std::string& conceptStr)
 {
-	Vec.clear();
-	std::vector<int> LowerTermins;
-	Thes->QueryLowerTermins(ConceptStr.c_str(), morphRussian, LowerTermins);
-	long Count = LowerTermins.size();
-	for (long i=0; i <Count; i++)
+	StringVector result;
+	for (auto i : Thes->QueryLowerTermins(conceptStr, morphRussian))
 	{
-			const CInnerTermin& T = Thes->m_Termins[LowerTermins[i]];
-			std::string TerminStr =  T.m_TerminStr;
-			EngRusMakeUpper(TerminStr);
-			Vec.push_back(TerminStr);
+		std::string terminStr = Thes->m_Termins[i].m_TerminStr;
+		EngRusMakeUpper(terminStr);
+		result.push_back(terminStr);
 	};
-	sort(Vec.begin(),Vec.end());
+	sort(result.begin(), result.end());
+	return result;
 };
 
 bool CSemanticsHolder::InitTimeThesLists()
 {
-	InitThesList(GetThes(OmniThes), "MONTH", m_RusMonths);
-	InitThesList(GetThes(OmniThes), "DAY-OF-WEEK", m_RusWeekDays);	
+	m_RusMonths = InitThesList(GetThes(OmniThes), "MONTH");
+	m_RusWeekDays = InitThesList(GetThes(OmniThes), "DAY-OF-WEEK");
 	return true;
 };
 

@@ -221,7 +221,7 @@ bool CSentencesCollection::ReadAndProcessSentences(const CPlmLineCollection *piP
         printf("Time : %i\n", seconds);
         printf("Count of tokens : %i\n", LinesCount);
         if (seconds > 0)
-            printf("The speed is %i tokens pro second\n", LinesCount / seconds);
+            printf("The speed is %zu tokens pro second\n", LinesCount / seconds);
     };
     return true;
 }

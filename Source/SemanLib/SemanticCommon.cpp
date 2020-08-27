@@ -1591,17 +1591,14 @@ void CSemanticStructure::InitThesSemFet(CSemNode& OutNode, const CSemNode& InNod
 	assert(TerminId != -1);
 
 	const CThesaurus* Thes = m_pData->GetThes(GetThesIdByRossId(InNode.GetType()));
-	std::vector<int> TopConcepts;
-	Thes->QueryTopConcepts(TerminId, TopConcepts);
-	long Count = TopConcepts.size();
-	for (long k = 0; k < Count; k++)
+	for (auto i : Thes->QueryTopConcepts(TerminId))
 	{
-		std::string ConceptStr = Thes->m_Concepts[TopConcepts[k]].m_ConceptStr;
-		Trim(ConceptStr);
-		if ((GetRossHolder(Ross)->GetItemNoByItemStr(ConceptStr, "D_SF") != -1)
-			|| (GetRossHolder(Ross)->GetItemNoByItemStr(ConceptStr, "D_SEM_REL") != -1)
+		std::string conceptStr = Thes->GetConceptStrById(i);
+		Trim(conceptStr);
+		if ((GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SF") != -1)
+			|| (GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SEM_REL") != -1)
 			)
-			AddSemFet(OutNode, ConceptStr.c_str());
+			AddSemFet(OutNode, conceptStr.c_str());
 	};
 };
 
