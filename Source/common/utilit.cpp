@@ -473,6 +473,9 @@ void rml_TRACE( const char* format, ... )
 
 #ifdef WIN32
 	#ifdef _DEBUG
+		if (!format) {
+			return;
+		}
 		if (!logger.is_open()) {
 			logger.open("trace.log");
 		}

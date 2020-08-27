@@ -378,9 +378,9 @@ bool CRusFormatCaller::is_small_number_group (size_t WordNo)
 
 bool NumberLikeAdj (const CSynPlmLine& L) 
 {
- return    L.is_word_upper("1") 
-	    || L.is_lemma(_R("ОДИН")); 
-	 
+return    L.is_word_upper("1")
+|| L.is_lemma(_R("ОДИН"));
+
 };
 
 
@@ -392,74 +392,150 @@ bool NumberLikeAdj (const CSynPlmLine& L)
 */
 bool CRusFormatCaller::format_for_both(CGroup& G)
 {
-	if( G.m_iFirstWord + 1 >= sent.size() )
+	if (G.m_iFirstWord + 1 >= sent.size())
 		return false;
 
 	// рассматриваем только атомарные группы
-	if( get_maximal_group_size(G.m_iFirstWord) > 1 )
+	if (get_maximal_group_size(G.m_iFirstWord) > 1)
 		return false;
-	
-	if( get_maximal_group_size(G.m_iFirstWord + 1) > 1)
+
+	if (get_maximal_group_size(G.m_iFirstWord + 1) > 1)
 		return false;
 
 	int i_number = -1, i_noun = -1;
 
-	if( sent[G.m_iFirstWord].is_lemma( _R("ОБА")) )
+	if (sent[G.m_iFirstWord].is_lemma(_R("ОБА")))
 	{
 		i_number = G.m_iFirstWord;
-        if	(		! sent[G.m_iFirstWord+1].HasPOS(PRONOUN) 
-				||	! sent[G.m_iFirstWord+1].has_grammem(rPlural)  
+		if (!sent[G.m_iFirstWord + 1].HasPOS(PRONOUN)
+			|| !sent[G.m_iFirstWord + 1].has_grammem(rPlural)
 			)
 			return false;
 		else
-			i_noun = G.m_iFirstWord+1;
+			i_noun = G.m_iFirstWord + 1;
 	}
 	else
-		if(		 sent[G.m_iFirstWord].HasPOS(PRONOUN)
-			&&	 sent[G.m_iFirstWord].has_grammem(rPlural) ) 
+		if (sent[G.m_iFirstWord].HasPOS(PRONOUN)
+			&& sent[G.m_iFirstWord].has_grammem(rPlural))
 		{
 			i_noun = G.m_iFirstWord;
-			if( sent[G.m_iFirstWord + 1].is_lemma( _R("ОБА") ) )
+			if (sent[G.m_iFirstWord + 1].is_lemma(_R("ОБА")))
 				i_number = G.m_iFirstWord + 1;
 			else
 				return false;
 		}
 
-	if( (i_number == -1) || (i_noun == -1) )
+	if ((i_number == -1) || (i_noun == -1))
 		return false;
-	
-	if( sent[i_number].GetGrammems() & sent[i_noun].GetGrammems()  & rAllCases )
+
+	if (sent[i_number].GetGrammems() & sent[i_noun].GetGrammems() & rAllCases)
 	{
 		G.m_iLastWord = (i_number > i_noun) ? i_number : i_noun;
-		G.SetGrammems( sent[i_noun].GetGrammems() );
+		G.SetGrammems(sent[i_noun].GetGrammems());
 		set_noun_numeral_group_type(G, NUMERAL_NOUN);
 		const CGroup& MainGroup = get_maximal_group(i_noun);
-		G.m_MainGroup = MainGroup;				
-		create_syn_rel(G, get_main_word_in_group(MainGroup),i_number, NUMERAL_NOUN);
+		G.m_MainGroup = MainGroup;
+		create_syn_rel(G, get_main_word_in_group(MainGroup), i_number, NUMERAL_NOUN);
 		return true;
 	}
 	return false;
-	
+
 }
 
+
+bool CRusFormatCaller::gleiche_for_big_numbers(int i_noun, int i_number, QWORD& new_group_grammems)
+{
+	bool arabicNumber = sent[i_number].HasFlag(fl_digit);
+	int i_first_noun = get_maximal_group(i_noun).m_iLastWord;
+	const CRusGramTab* R = (CRusGramTab*)GetGramTab();
+	CGroup& Gi = ((CGroup&)get_maximal_group(i_number));
+	bool has_point = arabicNumber && FindFloatingPoint(sent[Gi.m_iLastWord].get_word()) != -1 && Gi.m_GroupType != NUMERALS; //float point кроме КОЛИЧ
+	const CGroup& NP = get_maximal_group(i_first_noun);
+
+	if ((NP.GetGrammems() & _QM(rPlural)) == 0) {
+		return false; //пять девочка
+	}
+	auto noun_gram_codes = sent[i_first_noun].GetGramCodes();
+	bool noun_can_be_pl_gen = GetOpt()->GetGramTab()->FindGrammems(noun_gram_codes.c_str(), _QM(rGenitiv) | _QM(rPlural));
+
+	if (!arabicNumber) {
+		/*
+		когда числительное стоит в номинативе или аккузативе,
+		тогда ИГ должна быть в родительном, например:
+		"Я вижу пять девочек"
+		"Пять девочек пришло"
+		Во всех остальных случаях, числительное и ИГ должны быть согласованы
+		по падежу.
+		*/
+		bool number_can_be_nom_or_acc = (sent[i_number].GetGrammems() | _QM(rNominativ) | _QM(rAccusativ)) > 0;
+		bool nom_case = number_can_be_nom_or_acc && noun_can_be_pl_gen;
+		QWORD common_cases = (NP.GetGrammems() & sent[i_number].GetGrammems() & rAllCases);
+		bool gleiche_case = (common_cases & ~_QM(rNominativ)) > 0; // убираем "пять девочки"
+		if (!nom_case && !gleiche_case) {
+			return false;
+		}
+		Gi.m_GramCodes = "";
+		QWORD new_grm = NP.GetGrammems() & ~rAllCases;
+		QWORD cases = 0;
+		if (nom_case)
+		{
+			new_grm |= _QM(rGenitiv) | _QM(rNominativ) | _QM(rAccusativ);
+		}
+		if (gleiche_case) {
+			new_grm |= NP.GetGrammems() & sent[i_number].GetGrammems() & rAllCases;;
+		}
+		Gi.SetGrammems(new_grm);
+		sent[i_noun].SetGrammems(new_grm);
+		new_group_grammems = new_grm;
+	}
+	else {
+		QWORD cases = 0;
+		if (NP.GetGrammems() & _QM(rIndeclinable)) {
+			cases = rAllCases; // 5 пальто
+		}
+		else if (noun_can_be_pl_gen)
+		{
+			cases |= _QM(rGenitiv) | _QM(rNominativ) | _QM(rAccusativ); // 5 девочек
+		}
+		else {
+			// 5 руками
+			QWORD noun_cases = 0;
+			if (noun_gram_codes.empty()) {
+				noun_cases = NP.GetGrammems() & rAllCases;
+			}
+			else {
+				for (size_t i = 0; i < noun_gram_codes.length(); i += 2) {
+					auto g = GetOpt()->GetGramTab()->GetAllGrammems(noun_gram_codes.substr(i, 2).c_str());
+					if ((g & (_QM(rNominativ) | _QM(rAccusativ))) == 0) {
+						noun_cases |= g & rAllCases;;
+					}
+				}
+			}
+			cases |= noun_cases & sent[i_number].GetGrammems();
+		}
+		if (cases == 0) {
+			return false;
+		}
+		QWORD new_grm = (NP.GetGrammems() & ~rAllCases) | cases;
+		sent[i_noun].SetGrammems(new_grm);
+		new_group_grammems = new_grm;
+	}
+	return true;
+}
 
 /*
 Проверяет согласование между существительным(i_noun) и малым числительным(i_number).
 Если change_grammems true, тогда меняет граммемы у группы существительного.
 new_group_grammems - новые граммемы  группы(ЧИCЛ-СУЩ).
-bAdjShouldBeInGenitivOrNominativ - истинно, если  прилагательное, которое стоит между числительным и 
-существительным должно быть либо в номинативе, либо в генитиве.
 */
 
 
-bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool change_grammems, QWORD& new_group_grammems, bool& bAdjShouldBeInGenitivOrNominativ, bool small_number)
+bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, QWORD& new_group_grammems, bool small_number)
 {
-	bAdjShouldBeInGenitivOrNominativ = false;
-
-	int i_first_noun , i_last_noun, i_number_group;
+	int i_last_noun, i_number_group;
 	QWORD	noun_grammems , number_grammems;
 
-	i_first_noun = get_maximal_group(i_noun).m_iLastWord ;
+	int i_first_noun = get_maximal_group(i_noun).m_iLastWord ;
 
 	const CGroup&  NP  = get_maximal_group(i_first_noun);
 
@@ -489,62 +565,9 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 
 
 
-	if( sent[i_number].HasFlag(fl_digit) || !small_number)
+	if( !small_number)
 	{
-		/*
-		когда числительное стоит в номинативе или аккузативе,
-		тогда ИГ должна быть в родительном, например:
-		"Я вижу пять девочек"
-		"Пять девочек пришло"
-		Во всех остальных случаях, числительное и ИГ должны быть согласованы
-		по падежу.
-		*/
-		const CRusGramTab *R = (CRusGramTab*)GetGramTab();
-		CGroup& Gi = ((CGroup&)get_maximal_group(i_number));
-		bool has_point = !small_number && FindFloatingPoint(sent[Gi.m_iLastWord].get_word()) != -1 && Gi.m_GroupType != NUMERALS; //float point кроме КОЛИЧ
-		std::string new_grc = R->UniqueGramCodes(R->FilterGramCodes(std::string(sent[i_first_noun].GetGramcodes()), 
-			small_number ? ~rAllCases | _QM(rGenitiv) : 0, has_point ? ~(rAllCases|rAllNumbers) | _QM(rGenitiv)  | _QM(rSingular) : //для small_number rGenitiv во всех числах
-			~(rAllCases|rAllNumbers) | rAllCases & ~_QM(rNominativ) & ~_QM(rAccusativ)  | _QM(rPlural)));
-		std::string new_grc2 = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(), 
-			(R->GetGramCodes(NOUN, has_point ?  _QM(rGenitiv)  | _QM(rSingular) :
-			rAllCases & ~_QM(rNominativ) & ~_QM(rAccusativ)  | _QM(rPlural), CaseNumber)).c_str())); 
-		if(new_grc=="" || ((noun_grammems & rAllNumbers) == _QM(rSingular) && sent[i_noun].is_month()))
-			return false;
-
-		bAdjShouldBeInGenitivOrNominativ = (noun_grammems & _QM(rGenitiv)) > 0;
-			
-		std::string num_grc = _R("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"); //ЧИСЛ мр..ср им("два");рд;..пр
-		std::string noun_pair = _R("абазаиабакалгбгзгигбгкглебезеиебекел"); //С мр..ср рд,ед("2 дома");рд,мн;..;пр,мн
-		if(!small_number)
-			noun_pair = _R("азазаиазакалгзгзгигзгкглезезеиезекел"); //С мр..ср рд,мн("5 домов");рд,мн;..;ср,пр,мн
-		if(has_point) 
-			noun_pair = _R("абабабабабабгбгбгбгбгбгбебебебебебеб"); //С мр..ср рд,мн("1.4 метра");рд,мн;..;ср,рд,мн
-		R->GleicheAncode1(CaseNumberGender0, noun_pair, new_grc, num_grc);
-		num_grc = R->UniqueGramCodes(R->GleicheAncode1(sent[i_number].HasPOS(NOUN)? CaseNumber0 : CaseNumberGender0, num_grc.c_str(), 
-			R->UniqueGramCodes(sent[i_number].HasPOS(NOUN)? Gi.m_GramCodes : sent[i_number].GetGramcodes())));
-		if(num_grc=="")
-			return false;
-		if(num_grc.length()==4)//small_number
-			((CGroup&)get_atomic_group(i_first_noun)).m_GramCodes = new_grc = new_grc + new_grc; //дубль если им и вн у числ ("2 дома") для CRusSemStructure::Idealize ()
-		if(num_grc.length()==6)
-			new_grc = new_grc + new_grc + new_grc; //дубль если им, рд и вн у числ ("5 домов")
-		if(num_grc.length()==12 && !has_point) //для аббр
-			if(small_number)
-				new_grc = new_grc.insert(6,new_grc.substr(0,2)); 
-			else
-				new_grc = new_grc.substr(0,2) + new_grc.insert(4,new_grc.substr(0,2));  
-		if ( change_grammems )
-		{
-			new_group_grammems = R->GetAllGrammems(num_grc.c_str())  & ~rAllNumbers | _QM(rPlural);
-			Gi.SetGrammems(new_group_grammems, num_grc.c_str());
-			change_words_in_group_gramcodes(Gi, num_grc.c_str(), CaseNumberGender0);
-			change_words_in_group_gramcodes(NP, new_grc.c_str(), CaseNumberGender0);
-			((CGroup&)Gi).m_GramCodes = num_grc;
-			((CGroup&)NP).m_GramCodes = new_grc;
-			sent[i_noun].SetGramcodes(new_grc);
-		}
-
-		return true;
+		return gleiche_for_big_numbers(i_noun, i_number, new_group_grammems);
 	}
 	else
 	{
@@ -553,7 +576,23 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 		const char* word = sent[i_last_number].get_upper_word();
 		if (!word) return false;
 
-		if( _R("ДВА") == word ||
+		if (word == _R("2") ||  word == _R("3") || word == _R("4") ) {
+			// "2 мальчика"
+			QWORD cases = 0;
+			if (noun_grammems & _QM(rGenitiv)) {
+				cases |= _QM(rAccusativ) | _QM(rNominativ);
+			}
+			else {
+				cases |= rAllCases;
+			}
+			change_words_in_group_grammems(
+				get_maximal_group(i_last_noun),
+				cases,
+				rAllCases);
+			new_group_grammems = _QM(rPlural) | cases;
+			return true;
+		}
+		else if( _R("ДВА") == word ||
 			_R("ОБА") == word || 
 			_R("ПОЛТОРА") == word 
 			)
@@ -572,14 +611,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 					{
 						// "два  мальчика"
 						// "два  облака"
-						if( change_grammems )
-						{
-							change_words_in_group_grammems(
-									get_maximal_group(i_last_noun),
-									_QM(rMasculinum)|_QM(rNeutrum)|_QM(rGenitiv)|_QM(rSingular), 
-									rAllCases | rAllNumbers);
-						}
-
+						change_words_in_group_grammems(
+								get_maximal_group(i_last_noun),
+								_QM(rMasculinum)|_QM(rNeutrum)|_QM(rGenitiv)|_QM(rSingular), 
+								rAllCases | rAllNumbers);
 						bFirstCase = true;
 					}
 				}
@@ -588,13 +623,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 					{
 						// "два  нищих"
 						bFirstCase = true;
-						if( change_grammems )
-						{
-							change_words_in_group_grammems(
-									get_maximal_group(i_last_noun),
-									_QM(rMasculinum)|_QM(rNeutrum)|_QM(rGenitiv)|_QM(rPlural), 
-									rAllCases | rAllNumbers);
-						}
+						change_words_in_group_grammems(
+								get_maximal_group(i_last_noun),
+								_QM(rMasculinum)|_QM(rNeutrum)|_QM(rGenitiv)|_QM(rPlural), 
+								rAllCases | rAllNumbers);
 		
 					};
 
@@ -616,14 +648,11 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 						&&	(noun_grammems & _QM(rSingular))
 					) 
 				{
-					if( change_grammems )
-					{
-						change_words_in_group_grammems(
+					change_words_in_group_grammems(
 							get_maximal_group(i_last_noun),
 							_QM(rGenitiv)|_QM(rSingular), 
 							rAllCases | rAllNumbers);
-					};
-				
+					
 					bFirstCase = true;
 				}
 			}
@@ -633,14 +662,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 					) 
 				{
 					// "две запятые"
-					if( change_grammems )
-					{
-						change_words_in_group_grammems(
-							get_maximal_group(i_last_noun),
-							_QM(rNominativ)|_QM(rPlural), 
-							rAllCases | rAllNumbers);
-					};
-				
+					change_words_in_group_grammems(
+						get_maximal_group(i_last_noun),
+						_QM(rNominativ)|_QM(rPlural), 
+						rAllCases | rAllNumbers);
 					bFirstCase = true;
 				}
 				
@@ -651,13 +676,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 			if( (noun_grammems & _QM(rGenitiv)) &&
 				(noun_grammems & _QM(rSingular))) 
 			{
-				if( change_grammems )
-				{
-					change_words_in_group_grammems(
-								get_maximal_group(i_last_noun),
-								_QM(rGenitiv)|_QM(rSingular), 
-								rAllCases | rAllNumbers);				
-				}
+				change_words_in_group_grammems(
+							get_maximal_group(i_last_noun),
+							_QM(rGenitiv)|_QM(rSingular), 
+							rAllCases | rAllNumbers);				
 				bFirstCase = true;
 			}
 
@@ -665,14 +687,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 					&&	(noun_grammems & _QM(rFeminum))
 				)
 			{
-				// четыре запятые
-				if( change_grammems )
-				{
-					change_words_in_group_grammems(
-								get_maximal_group(i_last_noun),
-								_QM(rNominativ)|_QM(rPlural), 
-								rAllCases | rAllNumbers);				
-				}
+				change_words_in_group_grammems(
+							get_maximal_group(i_last_noun),
+							_QM(rNominativ)|_QM(rPlural), 
+							rAllCases | rAllNumbers);				
 				bFirstCase = true;
 
 			};
@@ -680,7 +698,6 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 
 		if( bFirstCase )
 		{
-			bAdjShouldBeInGenitivOrNominativ = true;
 			if( noun_grammems & _QM(rAnimative ))
 				new_group_grammems = _QM(rPlural) | _QM(rNominativ);
 			else
@@ -704,8 +721,7 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 
 
 				new_group_grammems = (number_grammems & rAllCases & noun_grammems) |  _QM(rPlural);
-				if( change_grammems )
-					change_words_in_group_grammems(get_maximal_group(i_last_noun), new_group_grammems, rAllCases | rAllNumbers);
+				change_words_in_group_grammems(get_maximal_group(i_last_noun), new_group_grammems, rAllCases | rAllNumbers);
 				return true;			
 			}	
 			
@@ -714,119 +730,106 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, bool
 }
 
 
-
-
-bool CRusFormatCaller::format_for_plural_number_noun(CGroup& G, bool small_number)
+// пять мальчиков
+bool CRusFormatCaller::format_for_number_noun_private(CGroup& G)
 {
-	const CGroup&  G1 = get_maximal_group(G.m_iFirstWord);
-    if (G1.m_iLastWord+1>=sent.size()) return false;
-	QWORD grammems  = G.GetGrammems();
-	int  k = can_start_number_noun_group(G.m_iFirstWord);
-	int i = get_main_word (G.m_iFirstWord);
-    if  (       (!small_number || is_numeral(sent[G1.m_MainWordNo])  
-	        ||  sent[G1.m_MainWordNo].HasFlag(fl_digit))
-			//&& (small_number || k != -1 && sent[k].is_morph_noun()
-			&& (small_number || sent[i].HasFlag(fl_digit) || k != -1 
-				&& !(!Wk.has_grammem(rIndeclinable) && !Wk.has_grammem(rPlural)) // "пять пальто"
-				&& !( !check_number_noun_coordination(Wi.GetGrammems(), Wk, GetGramTab()) 
-					&& ( !sent[i].HasFlag(fl_digit) || (Wk.GetGrammems() & rAllCases) != rAllCases && Wk.has_grammem(rNominativ)))) // чтобы  не строилась группа ЧИСЛ_СУЩ "1999 года"
-        )
-	{
+	bool small_number = is_small_number_group(G.m_iFirstWord);
+	QWORD grammems = G.GetGrammems();
+	const CGroup& G1 = get_maximal_group(G.m_iFirstWord);
 
-		const CGroup&  G2 = get_maximal_group(G1.m_iLastWord+1);	
+	int i = get_main_word(G.m_iFirstWord);
 
-		if(small_number && !is_noun_group(G2) ) 
-			return false;
+	const CGroup& G2 = get_maximal_group(G1.m_iLastWord + 1);
 
-        bool dummi;
-        if( !gleiche_for_plural_numbers(G2.m_MainWordNo, G1.m_MainWordNo, true, grammems , dummi, small_number) ) //sent[G1.m_MainWordNo].HasPOS(NUMERAL_P) || 
-            return false;
-        set_noun_numeral_group_type(G, NUMERAL_NOUN);
-        G.m_MainGroup = G2;
-		G.m_OtherGroup = G1;
-		G.SetGrammems(grammems, G1.m_GramCodes.c_str());
-        create_syn_rel(G, G2.m_MainWordNo,G1.m_MainWordNo, G.m_GroupType);
-        G.m_iLastWord = G2.m_iLastWord;						
-	}
-	else
-		if( is_noun_group(G1) )
-		{
-            const CGroup&  G2 = get_maximal_group(G1.m_iLastWord+1);
-            if(    !is_numeral(sent[G2.m_MainWordNo] ) 
-				&& !sent[G2.m_MainWordNo].HasFlag(fl_digit)
-				|| (!sent[G.m_iFirstWord].has_grammem(rPlural) && !small_number )
-			  )
-				return false;
+	if (small_number && !is_noun_group(G2))
+		return false;
 
-			const CGroup& NumberG = get_maximal_group(G.m_iFirstWord +1);
-			const CSynPlmLine& Num = sent[NumberG.m_MainWordNo];
-
-			if (Num.m_UnitType == EClause) return false;
-
-			if( NumberLikeAdj(Num) )
-				return false;
-
-			if( is_numeral(Num) )
-			{
-				//  с числительными "МНОГО" или "МАЛО" не надо образовывать АППРОКС_ИГ
-				if (GetCardinalNumeral(Num.get_lemma()) == -1 && !Num.HasFlag(fl_digit))
-					return false;
-			}
-			else
-				if(!Num.HasFlag(fl_digit) )
-					return false;
-			/*
-			(1)
-			можно сказать "человек сто/двести"
-			нельзя сказать "человек тысяча/миллион"
-			т.е. больше тысячи нельзя
-			*/
-			if (Num.HasFlag(fl_digit) )
-			{
-				if	(		!Num.get_word() 
-					||	strlen(Num.get_word()) > 3 // = "5000"
-					||  Num.HasPOS(NUMERAL_P)
-					) 
-					return false;
-			};
-			QWORD number_grammems;
-			if(NumberG.size() == 1)
-			{
-				number_grammems = Num.GetGrammems();
-				// см. выше (1)
-				if ( HasInSet(g_BigNumerals, Num.get_lemma() ))
-					return false;
-			}
-			else
-			{
-				if( NumberG.m_GroupType != NUMERALS &&  NumberG.m_GroupType != C_NUMERALS)
-					return false;
-				// см. выше (1)
-				if (NumberG.m_bNumeralMoreThanThousand)
-					return false;
-				if( ! sent[NumberG.m_iLastWord].HasPOS(NUMERAL) )
-					return false;
-				number_grammems = NumberG.GetGrammems();			
-			}
-
-            bool dummi;
-            if( !gleiche_for_plural_numbers(G1.m_MainWordNo, G2.m_MainWordNo, true, grammems , dummi, small_number) )
-                return false;
-            set_noun_numeral_group_type(G, NOUN_NUMERAL_APPROX);
-            G.m_MainGroup = G1;	
-			G.m_OtherGroup = G2;
-			G.SetGrammems(grammems, G2.m_GramCodes.c_str());
-            create_syn_rel(G, G1.m_MainWordNo,G2.m_MainWordNo, G.m_GroupType);// G.SetGrammems(grammems); ?
-            G.m_iLastWord = G2.m_iLastWord;						
-		}
-		else
-			return false;	
-
-	G.SetGrammems(grammems);
-    
+	if (!gleiche_for_plural_numbers(G2.m_MainWordNo, G1.m_MainWordNo, grammems, small_number))
+		return false;
+	set_noun_numeral_group_type(G, NUMERAL_NOUN);
+	G.m_MainGroup = G2;
+	G.m_OtherGroup = G1;
+	G.SetGrammems(grammems, G1.m_GramCodes.c_str());
+	create_syn_rel(G, G2.m_MainWordNo, G1.m_MainWordNo, G.m_GroupType);
+	G.m_iLastWord = G2.m_iLastWord;
 	return true;
 }
 
+// мальчиков пять
+bool CRusFormatCaller::format_for_noun_number_private(CGroup& G)
+{
+	const CGroup& G1 = get_maximal_group(G.m_iFirstWord);
+	QWORD grammems = G.GetGrammems();
+	if (G1.m_iLastWord + 1 >= sent.size()) return false;
+	const CGroup& G2 = get_maximal_group(G1.m_iLastWord + 1);
+	bool small_number = is_small_number_group(G2.m_iFirstWord);
+	if (!is_numeral(sent[G2.m_MainWordNo])
+		&& !sent[G2.m_MainWordNo].HasFlag(fl_digit)
+		|| (!sent[G.m_iFirstWord].has_grammem(rPlural) && !small_number)
+		)
+		return false;
+
+	const CGroup& NumberG = get_maximal_group(G.m_iFirstWord + 1);
+	const CSynPlmLine& Num = sent[NumberG.m_MainWordNo];
+
+	if (Num.m_UnitType == EClause) return false;
+
+	if (NumberLikeAdj(Num))
+		return false;
+
+	if (is_numeral(Num))
+	{
+		//  с числительными "МНОГО" или "МАЛО" не надо образовывать АППРОКС_ИГ
+		if (GetCardinalNumeral(Num.get_lemma()) == -1 && !Num.HasFlag(fl_digit))
+			return false;
+	}
+	else
+		if (!Num.HasFlag(fl_digit))
+			return false;
+	/*
+	(1)
+	можно сказать "человек сто/двести"
+	нельзя сказать "человек тысяча/миллион"
+	т.е. больше тысячи нельзя
+	*/
+	if (Num.HasFlag(fl_digit))
+	{
+		if (!Num.get_word()
+			|| strlen(Num.get_word()) > 3 // = "5000"
+			|| Num.HasPOS(NUMERAL_P)
+			)
+			return false;
+	};
+	QWORD number_grammems;
+	if (NumberG.size() == 1)
+	{
+		number_grammems = Num.GetGrammems();
+		// см. выше (1)
+		if (HasInSet(g_BigNumerals, Num.get_lemma()))
+			return false;
+	}
+	else
+	{
+		if (NumberG.m_GroupType != NUMERALS && NumberG.m_GroupType != C_NUMERALS)
+			return false;
+		// см. выше (1)
+		if (NumberG.m_bNumeralMoreThanThousand)
+			return false;
+		if (!sent[NumberG.m_iLastWord].HasPOS(NUMERAL))
+			return false;
+		number_grammems = NumberG.GetGrammems();
+	}
+
+	if (!gleiche_for_plural_numbers(G1.m_MainWordNo, G2.m_MainWordNo, grammems, small_number))
+		return false;
+	set_noun_numeral_group_type(G, NOUN_NUMERAL_APPROX);
+	G.m_MainGroup = G1;
+	G.m_OtherGroup = G2;
+	G.SetGrammems(grammems, G2.m_GramCodes.c_str());
+	create_syn_rel(G, G1.m_MainWordNo, G2.m_MainWordNo, G.m_GroupType);
+	G.m_iLastWord = G2.m_iLastWord;
+	return true;
+}
 
 bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 {
@@ -887,16 +890,6 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 
 
 
-
-
-bool CRusFormatCaller::format_for_approx_noun_number(CGroup& G)
-{
-    const CGroup& NP = get_maximal_group(G.m_iFirstWord);
-    if (NP.size() != 1)
-		return false;
-	
-	return format_for_plural_number_noun(G, NP.m_iLastWord + 1 >= sent.size() ? false : sent[NP.m_iLastWord + 1].HasFlag(fl_small_number));	//is_small_number_group( NP.m_iLastWord + 1) | 
-}
 
 
 /*
@@ -986,8 +979,18 @@ bool CRusFormatCaller::format_for_number_noun (CGroup& G)
  {
 	return format_for_odin_group(G);
  }
- else
-	return format_for_plural_number_noun(G, is_small_number_group (G.m_iFirstWord));	
+ else {
+	 const CGroup& G1 = get_maximal_group(G.m_iFirstWord);
+	 if (can_start_number_noun_group(G.m_iFirstWord) != -1)
+	 {
+		 return  format_for_number_noun_private(G);
+	 }
+	 else if (is_noun_group(G1))
+	 {
+		 return format_for_noun_number_private(G);
+	 }
+	 return false;
+ }
 };
 
 

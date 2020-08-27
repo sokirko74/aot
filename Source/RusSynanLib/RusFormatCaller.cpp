@@ -30,7 +30,6 @@ CRusFormatCaller::CRusFormatCaller(const CSyntaxOpt* Opt) : CFormatCaller(Opt)
 		{rule_for_noun_groups, {(CFormatFunc)&CRusFormatCaller::format_for_noun_groups,_R("ПРИЛ_СУЩ"), FROM_LEFT}},
 		{rule_for_number_adverb, {(CFormatFunc)&CRusFormatCaller::format_for_number_adverb,_R("НАР_ЧИСЛ_СУЩ"), FROM_LEFT}},
 		{rule_for_number_noun, {(CFormatFunc)&CRusFormatCaller::format_for_number_noun,_R("ЧИСЛ_СУЩ"), FROM_LEFT}},
-		{rule_for_approx_noun_number, {(CFormatFunc)&CRusFormatCaller::format_for_approx_noun_number,_R("АППРОКС_ИГ"), FROM_LEFT}},
 		{rule_for_rank_surname, {(CFormatFunc)&CRusFormatCaller::format_for_rank_surname,_R("ДОЛЖ_ФИО"), FROM_LEFT}},
 		{rule_for_gen_chains, {(CFormatFunc)&CRusFormatCaller::format_for_gen_chains,_R("ГЕНИТ_ИГ"), FROM_LEFT}},
 		{rule_for_from_compar, {(CFormatFunc)&CRusFormatCaller::format_for_from_compar,_R("ОТСРАВН"),FROM_LEFT}},
@@ -137,7 +136,6 @@ void CRusFormatCaller::AddAllRules()
 
 	m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	m_vectorRulesNumbers.push_back(rule_for_number_noun);
-	m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);
 	m_vectorRulesNumbers.push_back(rule_for_approx_prep_noun);	
 
 
@@ -147,7 +145,6 @@ void CRusFormatCaller::AddAllRules()
 	m_vectorRulesNumbers.push_back(rule_for_noun_detached_adj_postposition);
 	m_vectorRulesNumbers.push_back(rule_for_number_noun); // "совершила более 40 тяжких преступлений"
 	m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
-	m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);	
 	m_vectorRulesNumbers.push_back(rule_for_number_noun);
 	m_vectorRulesNumbers.push_back(rule_for_rank_surname);
 	m_vectorRulesNumbers.push_back(rule_for_gen_chains);
@@ -211,7 +208,6 @@ void CRusFormatCaller::AddRulesBeforeSimClauses( )
 
 	m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	m_vectorRulesNumbers.push_back(rule_for_number_noun);
-	m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);
 	m_vectorRulesNumbers.push_back(rule_for_approx_prep_noun);	
 
 	m_vectorRulesNumbers.push_back(rule_for_noun_groups);

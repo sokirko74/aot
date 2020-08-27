@@ -28,7 +28,6 @@ enum ESynRules {
 	rule_for_noun_groups,
 	rule_for_number_adverb,
 	rule_for_number_noun,
-	rule_for_approx_noun_number,
 	rule_for_rank_surname,
 	rule_for_gen_chains,
 	rule_for_from_compar,
@@ -69,6 +68,10 @@ enum ESynRules {
 
 class CRusFormatCaller : public CFormatCaller
 {
+	bool gleiche_for_big_numbers(int i_noun, int i_number, QWORD& new_group_grammems);
+	int can_start_number_noun_group(int StartWordNo) const;
+	bool format_for_number_noun_private(CGroup& G);
+	bool format_for_noun_number_private(CGroup& G);
 public:
 	CRusFormatCaller(const CSyntaxOpt* Opt);
 	~CRusFormatCaller(){};
@@ -86,10 +89,8 @@ public:
 	void	AddSimpleRulesForAnalyticalVerbFormChecking( );
 	void	AddSimilarNounGroupRules(  );
     void    BuildOborotGroups();
-
-	bool StandardGleiche (size_t i, size_t k);
-
-	bool format_for_plural_number_noun(CGroup& G, bool small_number);
+	
+	
 	bool format_for_both(CGroup& G);
 	
 
@@ -114,7 +115,6 @@ public:
 	bool format_for_noun_groups(CGroup& G); 
 
 	bool format_for_numbers(CGroup& G); 
-	bool format_for_approx_noun_number(CGroup& G);
 	bool format_for_odin_group(CGroup& G);
 	bool format_for_num_complex (CGroup& G); 
 	bool format_for_noun_num (CGroup& G); 
@@ -128,7 +128,6 @@ public:
 	bool format_for_dates	 (CGroup& G); 
 
 	bool format_for_number_adverb (CGroup& G); 
-	int can_start_number_noun_group (int StartWordNo) const;
 	bool format_standard_param_abbr(CGroup& G);
 	bool format_for_number_noun (CGroup& G);
 	bool format_for_selective_groups(CGroup& G);
@@ -158,7 +157,7 @@ public:
 
 	bool CanConnectSimilar(const CSynPlmLine& L) const;
 	
-	bool gleiche_for_plural_numbers(int i_noun, int i_number, bool change_grammems, QWORD& new_group_grammems, bool& unusual_case, bool small_number);
+	bool gleiche_for_plural_numbers(int i_noun, int i_number, QWORD& new_group_grammems, bool small_number);
 	bool gleiche_noun_numeral_for_approx(int i_noun, int i_num);
 	bool is_Pronoun_P_in_similar_groups(const CGroup& G);
 	bool format_for_noun_adj_postposition(CGroup& G);
@@ -172,9 +171,6 @@ public:
 
 	bool	IsSimilarConnector(const CSynPlmLine& L) const;
 	
-	
-protected:
-	bool Is_Repeating_Disrupt_Conj(SDoubleConj& pConj);
 	
 };
 

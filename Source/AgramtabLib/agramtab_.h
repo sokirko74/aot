@@ -104,7 +104,7 @@ class CAgramtab {
 	std::string GleicheAncode1 (GrammemCompare CompareFunc, std::string gram_codes1, std::string gram_codes2) const;
 	std::string GleicheAncode1 (GrammemCompare CompareFunc, std::string GramCodes1, std::string GramCodes2, std::string& GramCodes1pair) const;
 	std::string UniqueGramCodes(std::string gram_codes) const;
-	std::string FilterGramCodes(std::string gram_codes, QWORD grammems1, QWORD grammems2) const;
+	std::string FilterGramCodes(const std::string& gram_codes, QWORD grammems1, QWORD grammems2) const;
     std::string FilterGramCodes(QWORD breaks, std::string gram_codes, QWORD g1) const;
     bool CheckGramCode(const char* gram_code) const;
     virtual bool FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, QWORD& grammems) const {assert(false); return false;};

@@ -519,22 +519,19 @@ std::string CAgramtab::UniqueGramCodes(std::string gram_codes) const
 	return Result;
 }
 
-std::string CAgramtab::FilterGramCodes(std::string gram_codes, QWORD grammems1, QWORD grammems2) const
+std::string CAgramtab::FilterGramCodes(const std::string& gram_codes, QWORD grammems1, QWORD grammems2) const
 {
-	std::string Result;
-	const char * gram_codes1 = gram_codes.c_str();
-	//std::string pair;
-	if (!strcmp(gram_codes1, "??")) return gram_codes1;
-	size_t len1 = strlen(gram_codes1);
-	//bool has_pair = gram_codes1pair.length() == len1;
-	for (size_t l=0; l<len1; l+=2)
-	{
-		const CAgramtabLine* l1 = GetLine(s2i(gram_codes1+l));
-		if ( !(l1->m_Grammems & ~grammems1) ||  !(l1->m_Grammems & ~grammems2) )  
-			Result.append(gram_codes1+l,2);
+	std::string result;
+	if (gram_codes == "??") {
+		return gram_codes;
 	}
-	//if(has_pair) gram_codes1pair = pair;
- 	return Result;
+	for (size_t l = 0; l < gram_codes.length(); l += 2)
+	{
+		QWORD ancode_grammems = GetLine(s2i(gram_codes.c_str() + l))->m_Grammems;
+		if ( !(ancode_grammems & ~grammems1) ||  !(ancode_grammems & ~grammems2) )
+			result.append(gram_codes.c_str() + l,2);
+	}
+ 	return result;
 }	
 
 std::string CAgramtab::FilterGramCodes(QWORD breaks, std::string gram_codes, QWORD g1) const

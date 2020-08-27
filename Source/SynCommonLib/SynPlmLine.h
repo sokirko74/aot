@@ -95,7 +95,10 @@ public:
     void	SetFlag (PlmLineFlagEnum PlmLineFlag);
 	void	SetGrammems (QWORD value);
 	void	SetGramcodes (std::string value);
+	
 	const char*  GetGramcodes () const;
+	const std::string& GetGramCodes() const;
+
 	void	SetPoses (size_t value);
 	void	SetMorphByAncodePattern (const CAncodePattern & P);
     const char* get_word() const;

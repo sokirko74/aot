@@ -65,7 +65,6 @@ void InitAllRules( CFormatCaller& FormatCaller)
 
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_number_noun);
-	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_approx_prep_noun);	
 
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_noun_groups);
@@ -73,7 +72,6 @@ void InitAllRules( CFormatCaller& FormatCaller)
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_noun_adj_postposition);
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_noun_detached_adj_postposition);
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
-	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);	
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_number_noun);
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_rank_surname);
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_gen_chains);
@@ -128,7 +126,6 @@ void InitRulesBeforeSimClauses( CFormatCaller& FormatCaller)
 
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_number_adverb);/**/
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_number_noun);
-	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_approx_noun_number);
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_approx_prep_noun);	
 
 	FormatCaller.m_vectorRulesNumbers.push_back(rule_for_noun_groups);

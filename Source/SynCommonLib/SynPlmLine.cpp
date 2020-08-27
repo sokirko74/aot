@@ -65,6 +65,11 @@ const char* CSynPlmLine :: GetGramcodes () const
 	return m_gramcodes.c_str();
 };
 
+const std::string& CSynPlmLine::GetGramCodes() const
+{
+	return m_gramcodes;
+};
+
 
 void CSynPlmLine :: SetMorphByAncodePattern (const CAncodePattern & P) 
 {
