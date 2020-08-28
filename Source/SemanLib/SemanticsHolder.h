@@ -66,28 +66,28 @@ class COpenCollocInterp  {
 	  CRossPartialInterp m_RossInterp;
 public:
       // тип открытого словосочетания 
-	  OpenCollocTypeEnum m_Type;
+	  OpenCollocTypeEnum m_CollocSource;
 	  
 	  CThesPartialInterp& GetThesInterp() {
-		  assert (m_Type == ThesType) ;
+		  assert (m_CollocSource == ThesType) ;
 		  return m_ThesInterp;
 	  };
 	  const CThesPartialInterp& GetThesInterp() const {
-		  assert (m_Type == ThesType) ;
+		  assert (m_CollocSource == ThesType) ;
 		  return m_ThesInterp;
 	  };
 
 	  CRossPartialInterp& GetRossInterp() {
-		  assert (m_Type == RossType) ;
+		  assert (m_CollocSource == RossType) ;
 		  return m_RossInterp;
 	  };
 	  const CRossPartialInterp& GetRossInterp() const {
-		  assert (m_Type == RossType) ;
+		  assert (m_CollocSource == RossType) ;
 		  return m_RossInterp;
 	  };
 	 
 	  COpenCollocInterp () {
-			m_Type = NoneType;
+		  m_CollocSource = NoneType;
 	  };
 };
 

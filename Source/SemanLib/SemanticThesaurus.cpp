@@ -106,7 +106,7 @@ bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CRoss
 	{
 		long Nd1 = m_ThesSemRelations[k].m_TargetNodeNo;
 		m_Nodes[Nd1].m_CollocId = CollocId;
-		m_Nodes[Nd1].m_Colloc.m_Type = ThesType;
+		m_Nodes[Nd1].m_Colloc.m_CollocSource = ThesType;
 		m_Nodes[Nd1].m_Colloc.GetThesInterp().m_ThesaurusId = m_Nodes[StartNodeNo].m_ThesaurusId;
 		m_Nodes[Nd1].m_Colloc.GetThesInterp().m_ItemNo = Nd1 - StartNodeNo;
 		m_Nodes[Nd1].m_Colloc.GetThesInterp().m_TerminId = m_Nodes[StartNodeNo].m_TerminId;
@@ -116,7 +116,7 @@ bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CRoss
 
 		long Nd2 = m_ThesSemRelations[k].m_SourceNodeNo;
 		m_Nodes[Nd2].m_CollocId = CollocId;
-		m_Nodes[Nd2].m_Colloc.m_Type = ThesType;
+		m_Nodes[Nd2].m_Colloc.m_CollocSource = ThesType;
 		m_Nodes[Nd2].m_Colloc.GetThesInterp().m_ThesaurusId = m_Nodes[StartNodeNo].m_ThesaurusId;
 		m_Nodes[Nd2].m_Colloc.GetThesInterp().m_ItemNo = Nd2 - StartNodeNo;
 		m_Nodes[Nd2].m_Colloc.GetThesInterp().m_TerminId = m_Nodes[StartNodeNo].m_TerminId;
@@ -212,7 +212,7 @@ void CRusSemStructure::ReadThesInterps(long ClauseNo)
 				{
 					for (long i = 0; i < m_Nodes.size(); i++)
 						if ((m_Nodes[i].m_CollocId == m_Nodes[StartNodeNo].m_CollocId)
-							&& (m_Nodes[i].m_Colloc.m_Type != NoneType)
+							&& (m_Nodes[i].m_Colloc.m_CollocSource != NoneType)
 							&& m_Nodes[i].m_Colloc.GetThesInterp().m_bMainWord
 							)
 						{
@@ -492,8 +492,8 @@ bool CheckAndBuildOneDividedTermin(CRusSemStructure& R, const CSemanTermin& T, c
 		if ((ItemNo1 == -1) || (ItemNo2 == -1)) return false;
 
 		// если элементы уже являются частью тезаурусной  интерпретации надо выйти
-		if (R.m_Nodes[T.m_TermItems[ItemNo1].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
-		if (R.m_Nodes[T.m_TermItems[ItemNo2].m_TextItemId].m_Colloc.m_Type != NoneType) return false;
+		if (R.m_Nodes[T.m_TermItems[ItemNo1].m_TextItemId].m_Colloc.m_CollocSource != NoneType) return false;
+		if (R.m_Nodes[T.m_TermItems[ItemNo2].m_TextItemId].m_Colloc.m_CollocSource != NoneType) return false;
 
 		// Ищем отношение, которое их связывает
 		long RelNo = R.FindFirstRelation(T.m_TermItems[ItemNo2].m_TextItemId, T.m_TermItems[ItemNo1].m_TextItemId);
@@ -509,7 +509,7 @@ bool CheckAndBuildOneDividedTermin(CRusSemStructure& R, const CSemanTermin& T, c
 			if (CollocId == -1)
 				CollocId = R.m_Nodes[Nd].GetMinWordNo();
 			R.m_Nodes[Nd].m_CollocId = CollocId;
-			R.m_Nodes[Nd].m_Colloc.m_Type = ThesType;
+			R.m_Nodes[Nd].m_Colloc.m_CollocSource = ThesType;
 			R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_ThesaurusId = T.m_ThesaurusId;
 			R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_ItemNo = T.m_TermItems[j].m_ItemNo - 1;
 			R.m_Nodes[Nd].m_Colloc.GetThesInterp().m_TerminId = T.m_TerminId;

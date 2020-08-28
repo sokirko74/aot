@@ -822,7 +822,7 @@ void CRusSemStructure::InterpretPrepNouns(long ClauseNo)
                 long NounNode =  m_SynRelations[RelNo].m_TargetNodeNo;
 
                 // в словосчетаниях предлоги  были уже приписаны,  и куда более точнее, чем сы сейчас можем
-                if   (m_Nodes[NounNode].m_Colloc.m_Type !=  RossType) 
+                if   (m_Nodes[NounNode].m_Colloc.m_CollocSource !=  RossType)
                 {
                     m_Nodes[NounNode].m_SynReal.m_Preps.clear();
                     for (long i=0; i < m_Nodes[PrepNode].GetInterps().size(); i++)

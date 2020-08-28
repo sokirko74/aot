@@ -30,7 +30,7 @@ bool CRusSemStructure :: IsLocNode(size_t NodeNo) const
   const CRusSemNode& N = m_Nodes[NodeNo];
 
   bool Result =      N.IsTrueLocNode() 
-				||  (    (N.m_Colloc.m_Type  == ThesType)
+				||  (    (N.m_Colloc.m_CollocSource == ThesType)
 					 && (N.m_Colloc.GetThesInterp().m_ThesaurusId  == LocThes)
 			       )
                    ||  (N.HasGrammems(_QM(rToponym) )

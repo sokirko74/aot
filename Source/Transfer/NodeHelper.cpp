@@ -136,7 +136,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &
 		return FieldContainsValue(Dict, unit_no, field, value, leaf, leaf2);
 	}
 	else 
-		if(node.m_Colloc.m_Type == RossType)
+		if(node.m_Colloc.m_CollocSource == RossType)
 		{
 		dict_kind = node.m_Colloc.GetRossInterp().m_DictType;
 		unit_no = node.m_Colloc.GetRossInterp().m_UnitNo;

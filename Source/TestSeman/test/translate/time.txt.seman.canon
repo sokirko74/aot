@@ -1,7 +1,57 @@
 [
     {
         "comments": "",
-        "input": "﻿в 2000 году",
+        "input": "в 2000 году",
         "result": "In 2000."
+    },
+    {
+        "comments": "// раз_в_году once a day",
+        "input": "Раз в день",
+        "result": "Once a day."
+    },
+    {
+        "comments": "// in the middle of the",
+        "input": "в середине 1960 годов",
+        "result": "For 1960 years."
+    },
+    {
+        "comments": "",
+        "input": "в течение 1999 года",
+        "result": "In 1999."
+    },
+    {
+        "comments": "// 24 hours <a> day",
+        "input": "24 часа в сутки",
+        "result": "For 24 hours to days."
+    },
+    {
+        "comments": "",
+        "input": "19 декабря 1999 года",
+        "result": "On December 19, 1999."
+    },
+    {
+        "comments": "",
+        "input": "в течение 48 часов",
+        "result": "Within 48 hours."
+    },
+    {
+        "comments": "",
+        "input": "к восьми часам утра",
+        "result": "By eight o'clock in the morning."
+    },
+    {
+        "comments": "",
+        "input": "Год назад",
+        "result": "<а> year ago."
+    },
+    {
+        "comments": "",
+        "input": "9 мая",
+        "result": "On the 9 of May."
+    },
+    {
+        "comments": "",
+        "input": "В нынешнем году",
+        "result": "This year."
     }
 ]

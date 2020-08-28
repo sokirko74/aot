@@ -200,7 +200,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		  && IsPlugArticle(GetRossHolder(Aoss), MainNode.GetUnitNo())
 	      && (MainNode.m_Words.size() > 0)
 		  && !MainNode.m_Words[0].m_bDoNotChangeForm
-		  &&	(			( MainNode.m_Colloc.m_Type != RossType)
+		  &&	(			( MainNode.m_Colloc.m_CollocSource != RossType)
 					||		( MainNode.m_Colloc.GetRossInterp().m_DictType != TimeRoss)
 				)
 		)

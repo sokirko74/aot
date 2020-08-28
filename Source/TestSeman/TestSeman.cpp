@@ -115,6 +115,7 @@ nlohmann::json PrintRelationsToText(const CRusSemStructure& SS) {
         {"relations", getRelations(SS, SS.m_Relations)},
         {"aux relations", getRelations(SS, SS.m_DopRelations)}
     };
+    //std::string debug = result.dump();
     ConvertToUtfRecursive(result, morphRussian);
     return result;
 }
@@ -144,6 +145,35 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 }
 
 
+nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, std::string inputText) {
+    try {
+        if (printTranslation) {
+            auto s = SemBuilder.TranslateRussianText(inputText, _R("общ"), nullptr);
+            return convert_to_utf8(s, morphRussian); //остаются недопереведенные слова
+        }
+        else {
+            std::string dummy;
+            SemBuilder.FindSituations(inputText, 0, _R("общ"), 20000, -1, "", dummy);
+            if (printVisual) {
+                return PrintRelationsAsToJavascript(SemBuilder);
+            }
+            else {
+                return PrintRelationsToText(SemBuilder.m_RusStr);
+            }
+        }
+
+    }
+    catch (CExpc e) {
+        std::cerr << "an exception occurred: " << e.m_strCause << "\n";
+        throw;
+    }
+    catch (...) {
+        std::cerr << "an exception occurred, sentence " << inputText << "\n";
+        throw;
+    };
+
+}
+
 void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, string inputFile, string outputFile) {
     std::cerr << inputFile << "\n";
     CTestCaseBase base;
@@ -157,29 +187,7 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
         if (t.Text.empty()) {
             continue;
         }
-        try {
-            std::string dummy;
-            if (printTranslation) {
-                t.Result = SemBuilder.TranslateRussianText(t.Text, _R("общ"), nullptr);
-            }
-            else {
-                SemBuilder.FindSituations(t.Text, 0, _R("общ"), 20000, -1, "", dummy);
-                if (printVisual) {
-                    t.Result = PrintRelationsAsToJavascript(SemBuilder);
-                }
-                else {
-                    t.Result = PrintRelationsToText(SemBuilder.m_RusStr);
-                }
-            }
-        }
-        catch (CExpc e) {
-            std::cerr << "an exception occurred: " << e.m_strCause << "\n";
-            throw;
-        }
-        catch (...) {
-            std::cerr << "an exception occurred, sentence " << t.Text << "\n";
-            throw;
-        };
+        t.Result = processText(SemBuilder, printVisual, printTranslation, t.Text);
     }
     std::ofstream outp(outputFile, std::ios::binary);
     base.write_test_cases(outp);

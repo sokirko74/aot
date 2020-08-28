@@ -286,7 +286,7 @@ bool CSemNode::HasThePrep(WORD UnitNo) const
 
 bool  CSemNode::IsTimeRossNode() const
 {
-	return (m_Colloc.m_Type == RossType)
+	return (m_Colloc.m_CollocSource == RossType)
 		&& (m_Colloc.GetRossInterp().m_DictType == TimeRoss);
 };
 
@@ -299,7 +299,7 @@ bool  CSemNode::IsMainTimeRossNode() const
 
 bool CSemNode::IsThesNode() const
 {
-	return (m_Colloc.m_Type == ThesType);
+	return (m_Colloc.m_CollocSource == ThesType);
 };
 
 
@@ -526,7 +526,7 @@ std::string GetStringVectorInOneStr(const StringVector& Vec, std::string Delimit
 
 std::vector<std::string> CSemanticStructure::GetNodeDictInterps(size_t nodeIndex) const {
 	std::vector<std::string> result;
-	if (GetNode(nodeIndex).m_Colloc.m_Type != NoneType)
+	if (GetNode(nodeIndex).m_Colloc.m_CollocSource != NoneType)
 	{
 		result.push_back(" + " + OpenCollocInterpToStr(GetNode(nodeIndex).m_Colloc));
 	}
@@ -593,7 +593,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 				Res += Format("$GT($main,graph) set $nds(%i)  .preps \"%s\"\1", i, ss.c_str());
 
 			if ((GetNode(i).GetType() == LocRoss)
-				|| ((GetNode(i).m_Colloc.m_Type == ThesType)
+				|| ((GetNode(i).m_Colloc.m_CollocSource == ThesType)
 					&& (GetNode(i).m_Colloc.GetThesInterp().m_ThesaurusId == LocThes)
 					)
 				)
@@ -880,10 +880,10 @@ std::string   CSemanticStructure::InterpToStr(std::vector<CDictUnitInterp>::cons
 
 std::string   CSemanticStructure::OpenCollocInterpToStr(const COpenCollocInterp& I)  const
 {
-	assert(I.m_Type != NoneType);
+	assert(I.m_CollocSource != NoneType);
 	std::string S;
 
-	if (I.m_Type == RossType)
+	if (I.m_CollocSource == RossType)
 	{
 		S = Format("%s: %s%i",
 			GetRoss(I.GetRossInterp().m_DictType)->m_DictName.c_str(),

@@ -203,7 +203,7 @@ bool CEngSemStructure::translate_termin_node(int MainNodeNo)
 	CEngSemNode& Main = m_Nodes[MainNodeNo];
 	// счистаем, что уже это не открытое словосочетание, а просто узел,
 	// чтобы не заходить в эту процедуру еще раз.
-	Main.m_Colloc.m_Type = NoneType;
+	Main.m_Colloc.m_CollocSource = NoneType;
 
 	// если артикль был поставлен по синтаксическим причинам, тогда приходится  отказатся от этого артикля,
 	// поскольку синтаксическая структура можект претерпеть значительные изменения в термине,

@@ -757,7 +757,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 	if ( m_Nodes[NodeNo].GetType() != Aoss )
 		return false;
 	if (    !IsPlugArticle(GetRossHolder(Aoss), m_Nodes[NodeNo].GetUnitNo()) 
-	 	 && m_Nodes[NodeNo].m_Colloc.m_Type != ThesType 
+	 	 && m_Nodes[NodeNo].m_Colloc.m_CollocSource != ThesType
 	   )
 		return false;
 
