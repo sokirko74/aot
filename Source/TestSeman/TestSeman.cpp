@@ -115,7 +115,6 @@ nlohmann::json PrintRelationsToText(const CRusSemStructure& SS) {
         {"relations", getRelations(SS, SS.m_Relations)},
         {"aux relations", getRelations(SS, SS.m_DopRelations)}
     };
-    //std::string debug = result.dump();
     ConvertToUtfRecursive(result, morphRussian);
     return result;
 }
@@ -180,7 +179,7 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
     std::ifstream inp(inputFile);
     base.read_test_cases(inp);
     for (auto& t : base.TestCases) {
-        if (t.Text.length() > 250) {
+        if (t.Text.length() > 1050) {
             std::cerr << "skip the sentence of " << t.Text.length() << " chars (too long)\n";
             continue;
         }

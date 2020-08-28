@@ -8,9 +8,11 @@ target_link_libraries(TestSeman
     SemanLib
 )
 
-macro (TestSemanMacro lang file_mask mode)
+macro (TestSemanMacro lang folder mode)
+    get_filename_component(base_name ${folder} NAME)
+    set (file_mask ${folder}/*.txt)
     add_test(
-        NAME Seman_${lang}_${mode} 
+        NAME Seman_${lang}__${base_name} 
         COMMAND TestSeman --input-file-mask ${file_mask} ${mode}
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
     )
@@ -28,8 +30,9 @@ macro (TestSemanMacro lang file_mask mode)
 endmacro()
 
 
-TestSemanMacro(Russian ${PROJECT_SOURCE_DIR}/test/seman/*.txt "")
-TestSemanMacro(Russian ${PROJECT_SOURCE_DIR}/test/translate/*.txt --translate)
+TestSemanMacro(Russian ${PROJECT_SOURCE_DIR}/test/seman "")
+TestSemanMacro(Russian ${PROJECT_SOURCE_DIR}/test/translate --translate)
+TestSemanMacro(Russian ${PROJECT_SOURCE_DIR}/test/long --translate)
 
 
 
