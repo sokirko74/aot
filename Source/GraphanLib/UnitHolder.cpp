@@ -431,6 +431,20 @@ void	CUnitHolder::ClearPairDescriptors(size_t StartLineNo, size_t EndLineNo)
 };
 
 
+/*
+ all descriptors which end a text period like a sentence or a paragraph
+*/
+static bool IsEndTextPeriodDescriptor(Descriptors d)
+{
+	return     (d == CS_Undef)
+		|| (d == CS_Simple)
+		|| (d == CS_Parent)
+		|| (d == CS_Quasi)
+		|| (d == CS_Heading)
+		|| (d == CS_Explan)
+		|| (d == OSentEnd);
+};
+
 
 void	CUnitHolder::MakeOneWord(size_t StartLineNo, size_t EndLineNo)
 {

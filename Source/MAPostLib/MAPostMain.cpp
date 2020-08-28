@@ -335,56 +335,6 @@ void CMAPost::ILeDefLe()
 	}
 }
 
-std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::string& Flexia, bool IsNoun)
-{
-	if (Lemma.length() == 0) return "";
-	std::vector<CFormInfo> Paradigms;
-	std::string h = Lemma;
-	m_pRusLemmatizer->CreateParadigmCollection(false, h, false, false, Paradigms);
-	if (Paradigms.size() == 0) return ""; // например, нету в Ё-словаре слова ЧЕТВЕРТЫЙ
-	// ищем числительное
-	long k = 0;
-	for (; k < Paradigms.size(); k++)
-	{
-		std::string AnCode = Paradigms[k].GetAncode(0);
-		BYTE POS = m_pRusGramTab->GetPartOfSpeech(AnCode.c_str());
-		if (IsNoun)
-		{
-			if (POS == NOUN)
-				break;
-		}
-		if ((POS == NUMERAL) || (POS == NUMERAL_P) || Lemma == _R("НУЛЕВОЙ"))
-			break;
-	};
-	assert(k < Paradigms.size());
-	const CFormInfo& P = Paradigms[k];
-
-	// ищем максимальное совпадение с конца 
-	std::string AnCodes;
-	for (k = 0; k < P.GetCount(); k++)
-	{
-		std::string Form = P.GetWordForm(k);
-		EngRusMakeLower(Form);
-		if (IsNoun && Form != h && std::string(_R("ао,ап,ат,ау,ац,ач,аъ")).find(P.GetAncode(k)) != std::string::npos) // 1000 - не аббр, "свыше 1000 человек"
-			continue;
-		if (Form.length() > Flexia.length())
-			if (Flexia == "" || Flexia == Form.substr(Form.length() - Flexia.length()))
-				AnCodes += P.GetAncode(k);
-	};
-
-	return m_pRusGramTab->UniqueGramCodes(AnCodes);
-
-
-};
-
-
-
-
-
-
-
-
-
 
 
 

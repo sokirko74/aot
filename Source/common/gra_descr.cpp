@@ -77,22 +77,6 @@ const char* GetDescriptorStr(int DescriptorNo)
 
 
 
-/*
- all descriptors which end a text period like a sentence or a paragraph
-*/
-bool IsEndTextPeriodDescriptor (Descriptors d)
-{
-	return     (d == CS_Undef)
-			|| (d == CS_Simple)
-			|| (d == CS_Parent)
-			|| (d == CS_Quasi)
-			|| (d == CS_Heading)
-			|| (d == CS_Explan)
-			|| (d == OSentEnd);
-};
-
-
-
 QWORD parse_gra_descriptors ( const char * s, std::string& unparsed)
 {
     unparsed = "";

@@ -1,6 +1,5 @@
 #include "utilit.h"
 #include "gra_descr.h"
-extern bool IsEndTextPeriodDescriptor (Descriptors d);
 extern bool IsFirstMemberOfPairDesciptor(Descriptors d);
 extern bool IsSecondMemberOfPairDesciptor(Descriptors d);
 extern Descriptors GetSecondMemberByTheFirst(Descriptors d);

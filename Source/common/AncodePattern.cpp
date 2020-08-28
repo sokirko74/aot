@@ -68,6 +68,9 @@ bool CAncodePattern::HasPos(BYTE pos) const
 std::string CAncodePattern::GetGrammemsByAncodes() const
 {
 	std::string Result;
+	if (m_GramCodes == "??") {
+		return "";
+	}
 	for (int i = 0; i < m_GramCodes.length(); i += 2)
 	{
 		QWORD g;

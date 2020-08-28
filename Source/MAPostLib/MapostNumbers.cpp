@@ -5,8 +5,6 @@
 bool CMAPost::is_russian_numeral(std::string& word) const {
 	std::vector<CFormInfo> Paradigms;
 	m_pRusLemmatizer->CreateParadigmCollection(false, word, false, false, Paradigms);
-	if (Paradigms.empty())
-		return false;
 	for (auto& p : Paradigms)
 	{
 		std::string Form = p.GetWordForm(0);
@@ -16,9 +14,54 @@ bool CMAPost::is_russian_numeral(std::string& word) const {
 				return true;
 			}
 		}
+		break; 
 	}
 	return false;
 }
+
+std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::string& Flexia, bool IsNoun)
+{
+	if (Lemma.length() == 0) return "";
+	std::vector<CFormInfo> Paradigms;
+	std::string h = Lemma;
+	m_pRusLemmatizer->CreateParadigmCollection(false, h, false, false, Paradigms);
+	if (Paradigms.size() == 0) return ""; // например, нету в Ё-словаре слова ЧЕТВЕРТЫЙ
+	// ищем числительное
+	long k = 0;
+	for (; k < Paradigms.size(); k++)
+	{
+		std::string AnCode = Paradigms[k].GetAncode(0);
+		BYTE POS = m_pRusGramTab->GetPartOfSpeech(AnCode.c_str());
+		if (IsNoun)
+		{
+			if (POS == NOUN)
+				break;
+		}
+		if ((POS == NUMERAL) || (POS == NUMERAL_P) || Lemma == _R("НУЛЕВОЙ"))
+			break;
+	};
+	assert(k < Paradigms.size());
+	const CFormInfo& P = Paradigms[k];
+
+	// ищем максимальное совпадение с конца 
+	std::string AnCodes;
+	for (k = 0; k < P.GetCount(); k++)
+	{
+		std::string Form = P.GetWordForm(k);
+		EngRusMakeLower(Form);
+		if (IsNoun && Form != h && std::string(_R("ао,ап,ат,ау,ац,ач,аъ")).find(P.GetAncode(k)) != std::string::npos) // 1000 - не аббр, "свыше 1000 человек"
+			continue;
+		if (Form.length() > Flexia.length())
+			if (Flexia == "" || Flexia == Form.substr(Form.length() - Flexia.length()))
+				AnCodes += P.GetAncode(k);
+	};
+
+	return m_pRusGramTab->UniqueGramCodes(AnCodes);
+
+
+};
+
+
 
 
 void CMAPost::Cifrdef()
@@ -26,9 +69,7 @@ void CMAPost::Cifrdef()
 
 	// Ищем последовательность чисел и окончаний типа
 	// 1960-го                           2 6 DSC
-	//и лемматизируем этого слово как числительное 
-	//	1960-го                            4 0 4 RLE -= 1848 яя -1 #0
-	// А так же нулевые окончания
+	//и лемматизируем этого слово как ЧИСЛ и ЧИСЛ_П
 	CLineIter dollar = m_Words.end();
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
@@ -37,24 +78,27 @@ void CMAPost::Cifrdef()
 		CLineIter prev_it = it;
 		next_it++;
 		if (it != m_Words.begin()) prev_it--;
-		//if (W.m_strWord.length() < 3) continue;
-		int hyp = W.m_strWord.find("-");
-		//if (hyp == std::string::npos) continue;
+
+		size_t hyp = W.m_strWord.find("-");
+
+		bool foundHyp = (hyp != std::string::npos) && (hyp > 0);
 		if (W.IsInOborot()) continue;
 
 		// Доллары
-		if (!isdigit((BYTE)W.m_strWord[0]) && !(hyp > 0 && is_russian_alpha((BYTE)W.m_strWord.back())))
+		if (!isdigit((BYTE)W.m_strWord[0]) && !(foundHyp && is_russian_alpha((BYTE)W.m_strWord.back())))
 			if (dollar == prev_it)//$9,4 млрд
 			{
 				if (is_russian_numeral(W.m_strWord)) {
-					if ((*it).HasDes(OSentEnd)) { (*it).DelDes(OSentEnd); (*prev_it).AddDes(OSentEnd); }
-					if ((*it).HasDes(CS_Undef)) { (*it).DelDes(CS_Undef); (*prev_it).AddDes(CS_Undef); }
+					if ((*it).HasDes(OSentEnd)) { 
+						(*it).DelDes(OSentEnd); 
+						(*prev_it).AddDes(OSentEnd); 
+					}
 					iter_swap(prev_it, it);
 					dollar++;
 				}
 			}
 			else
-				if (isdigit((BYTE)W.m_strWord.back()) && hyp > 0 && is_russian_alpha((BYTE)W.m_strWord[0]))
+				if (isdigit((BYTE)W.m_strWord.back()) && foundHyp && is_russian_alpha((BYTE)W.m_strWord[0]))
 				{
 					W.DelDes(ONumChar);
 					W.AddDes(ORLE);
@@ -83,8 +127,8 @@ void CMAPost::Cifrdef()
 				else
 					continue;
 		// первая часть - цифры, второая - русская, если есть окончание
-		std::string NumWordForm = hyp < 0 ? it->m_strWord : it->m_strWord.substr(0, hyp);
-		std::string Flexia = hyp < 0 ? "" : it->m_strWord.substr(hyp + 1);
+		std::string NumWordForm = !foundHyp ? it->m_strWord : it->m_strWord.substr(0, hyp);
+		std::string Flexia = !foundHyp ? "" : it->m_strWord.substr(hyp + 1);
 
 		if (Flexia == "" && next_it != m_Words.end() && isdigit((BYTE)next_it->m_strWord[0]) && next_it->m_strWord.length() == 3) // "в 1 300 световых годах" -> 1300
 		{
@@ -210,7 +254,6 @@ void CMAPost::Cifrdef()
 			if (dollar == prev_it)
 			{
 				if ((*it).HasDes(OSentEnd)) { (*it).DelDes(OSentEnd); (*prev_it).AddDes(OSentEnd); }
-				if ((*it).HasDes(CS_Undef)) { (*it).DelDes(CS_Undef); (*prev_it).AddDes(CS_Undef); }
 				iter_swap(prev_it, it);
 				dollar++;
 			}

@@ -209,7 +209,8 @@ int CFormatCaller::main_analyse()
 		strMsg += strMsg1;	 	 
 		strMsg += "\n Syntax rule ";
 		strMsg += FormatCall.m_name;
-		GetOpt()->OutputErrorString(convert_to_utf8(strMsg.c_str(), GetOpt()->m_Language));
+		strMsg = convert_to_utf8(strMsg.c_str(), GetOpt()->m_Language);
+		GetOpt()->OutputErrorString(strMsg);
 	}
 
 

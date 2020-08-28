@@ -102,7 +102,6 @@ public:
 	bool HasSingleSpaceAfter()  const;
 	bool IsString (const std::string&) const;
 	int  ToInt () const;
-	bool IsEndTextPeriodDescriptor (int d) const;
 	bool HasMacroSyntaxDelimiter () const;
 	bool IsWordOrNumberOrAbbr() const;
 	
