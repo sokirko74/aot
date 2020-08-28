@@ -1437,5 +1437,17 @@ bool CEngSynthes::try_conj_disrupt(int node_no)
 	return true;
 }
 
-
+//==================================
+SynthesResult::SynthesResult()
+	:pos_order(-1),
+	m_Position(""),
+	do_not_put(false),
+	m_EngParadigmId(-1),
+	subject_node(-1),
+	times_visited(0),
+	is_passive_verb(false),
+	m_bParenth(false),
+	m_Article(UnknownArticle)
+{
+}
 

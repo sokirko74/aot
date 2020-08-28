@@ -1,7 +1,5 @@
-#pragma warning(disable:4786)
-#pragma warning(disable:4503)
-#ifndef INCL_ENGSYNTHES_H
-#define INCL_ENGSYNTHES_H
+#pragma once 
+
 #include "EngSemStructure.h"
 
 struct CGrammemsAnalyzer {
@@ -58,19 +56,7 @@ struct SynthesResult  : public CGrammemsAnalyzer{
 	int times_visited;
 
 
-	SynthesResult()
-		:pos_order(-1),
-		m_Position(""),
-		do_not_put(false),
-		m_EngParadigmId(-1),
-		subject_node(-1),
-		times_visited(0),
-		is_passive_verb(false),
-		m_bParenth ( false )
-	{}
-
-
-
+	SynthesResult();
 };
 
 enum CAdvPosType
@@ -308,6 +294,4 @@ public:
 
 extern long ValuePosition (std::string Position);
 extern std::string  GetDualPosition (std::string Position);
-
-#endif // INCL_ENGSYNTHES_H
 

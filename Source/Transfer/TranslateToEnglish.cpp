@@ -180,7 +180,6 @@ long CEngSemStructure::GetClauseLastWordNo(long ClauseNo) const
 
 
 
-
 std::string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const 
 {
   if  (m_Nodes[NodeNo].m_MainWordNo == -1) 
@@ -230,7 +229,6 @@ std::string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const
   {
 	Result += "\nArticle  = " + ArticleStringByType(m_Nodes[NodeNo].GetArticle()) + "\n";
 	Result += "ArticleHistory  = " + m_Nodes[NodeNo].GetArticleCauseHistory();
-	
   };
 
   Result += "\nNotUseTo  = " + std::string(m_Nodes[NodeNo].m_bNotUseTo?"yes":"no")+ "\n"; 
