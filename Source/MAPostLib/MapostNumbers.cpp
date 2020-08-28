@@ -168,8 +168,14 @@ void CMAPost::Cifrdef()
 		if (NumWordForm != "0") {
 			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun);
 		}
-		if (Flexia == "")
-			AnCodes = m_pRusGramTab->FilterGramCodes(rAllNumbers, AnCodes, _QM(rSingular));
+		if (Flexia == "") {
+			// 1. удаляем грамкоды множес. числа
+			// можно просто не удалять, тогда будет очень много вариантов на синтаксисе (чистая оптимизация)
+			//2. добавил условие для примера  "в 1960 годы", где порядковое существительное 1960 стоит в отчетливом множественном числе
+			if (W.m_strWord.length() != 4) { // "1960"
+				AnCodes = m_pRusGramTab->FilterGramCodes(rAllNumbers, AnCodes, _QM(rSingular));
+			}
+		}
 		if (FindFloatingPoint(NumWordForm.c_str()) != -1 || AnCodes0 == AnCodes)
 			AnCodes = "";
 		if (AnCodes.empty() && AnCodes0.empty())
