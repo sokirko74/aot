@@ -196,7 +196,7 @@ void CEngSemStructure::ClauseRelRule_Participle(int iRel)
 	CEngSemNode newNode;
 	CreateSimpleEnglNodeByOldNode(bAnim ? "who" : "which",newNode,0,true,targetNode);	
 	newNode.SetGrammems(_QM(eNominative));
-	newNode.m_ArticleStr = "-";
+	newNode.SetArticle(ZeroArticle, ClauseRelRuleParticipleArticle);
 
 	long wNo = targetNode.GetMinWordNo();
 	FreeWordNo(wNo);

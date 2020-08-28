@@ -136,13 +136,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 
 	
 
-	std::string article = E.m_Nodes[node_no].m_ArticleStr;
-	if(article == "-")
-		Res(node_no).m_Article = ZeroArticle;
-	else if(article == "a")
-		Res(node_no).m_Article = IndefArticle;
-	else if(article == "the")
-		Res(node_no).m_Article = DefArticle;
+	Res(node_no).m_Article = E.m_Nodes[node_no].GetArticle();
 		
 
  	handle_colloc_words(node_no, Res(node_no));

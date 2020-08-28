@@ -281,15 +281,17 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 // загрузим артикли
 		std::vector<TCortege> vecSArt;
 		GetSArt(type,UnitNo,vecSArt);
-		StringVector articles;
-		for( int j=0; j<nWords; j++ )
-			articles.push_back("");
+		std::vector<ArticleEnum> articles(nWords, UnknownArticle);
 
 		for( int k=0; k<vecSArt.size(); k++ )
 		{
 			int no = vecSArt[k].m_BracketLeafId - 1;
-			if( no>=0 && no<nWords )
-				articles[no] = GetCortegeStr(type,vecSArt[k]);
+			if (no >= 0 && no < nWords) {
+				std::string  s = GetCortegeStr(type, vecSArt[k]);
+				EngRusMakeLower(s);
+				articles[no] = ArticleTypeByString(s);
+				assert(articles[no] != UnknownArticle);
+			}
 		}
 
 // загрузим части речи
@@ -346,10 +348,9 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			newNode.RusNode = engNode.RusNode;
 			newNode.m_ClauseNo = engNode.m_ClauseNo;
 
-			if( !articles[j].empty() )
+			if( articles[j] != UnknownArticle)
 			{
-				newNode.m_ArticleStr = articles[j];
-				newNode.m_ArticleCauseHistory.push_back(ArticleFromDict);
+				newNode.SetArticle(articles[j], ArticleFromDict);
 			};
 
 			if( !poses[j].empty() )

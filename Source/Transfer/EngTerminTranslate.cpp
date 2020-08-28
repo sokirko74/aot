@@ -208,12 +208,10 @@ bool CEngSemStructure::translate_termin_node(int MainNodeNo)
 	// если артикль был поставлен по синтаксическим причинам, тогда приходится  отказатся от этого артикля,
 	// поскольку синтаксическая структура можект претерпеть значительные изменения в термине,
 	// например, "нарушение налоговых правил".-> "tax offence"
-	if (!Main.m_ArticleCauseHistory.empty() ) 
-		if (Main.m_ArticleCauseHistory.back() == DefArticleBecauseOfNominalSupplement)
-		{
-			m_Nodes[MainNodeNo].m_ArticleStr = "";
-			m_Nodes[MainNodeNo].m_ArticleCauseHistory.push_back(OverwriteArticleForTerminNodes);
-		};
+	if (Main.GetLastArticleCause() == DefArticleBecauseOfNominalSupplement)
+	{
+		m_Nodes[MainNodeNo].SetArticle(UnknownArticle, OverwriteArticleForTerminNodes);
+	};
 
 	// все отношения, идущие к узлам, не вошедшим в эту таум-группу 
 	// подвешиваем к главному узлу (узлы вошедшие в группу  помечены m_bToDelete),

@@ -230,8 +230,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 	// артикль, если нужно, будет прописан в словарной статье таймросса, а то получается
 	// в прошлом году -> the last year
 	// удаляем артикль, который был выставлен внешними процедурами
-	MainNode.m_ArticleStr = "";
-	MainNode.m_ArticleCauseHistory.push_back(OverwriteArticleForTimeNodes);
+	MainNode.SetArticle(UnknownArticle, OverwriteArticleForTimeNodes);
 
 	// собираем все узлы словосочетания в один Map 
 	map<int , CEngSemNode *> nodes;

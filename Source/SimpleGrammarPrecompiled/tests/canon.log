@@ -12,5 +12,4 @@ build automat for prefixes
 ConvertToPrecompiled
 Roots : [PNAME ],
 create token list for each node
-Seconds = 0
 ok

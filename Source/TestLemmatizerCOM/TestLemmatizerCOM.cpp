@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <assert.h>
 #import "../Lemmatizer/Lemmatizer.tlb"
 
 

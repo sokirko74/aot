@@ -359,3 +359,4 @@ void CEngSemStructure::SetPositionOfActantInColloc(CEngSemRelation& engRel, CSem
 	     engRel.m_Position = GetItemStr(semPattern.m_GramCorteges[0].m_DomItemNos[0], type);
 		
 }
+

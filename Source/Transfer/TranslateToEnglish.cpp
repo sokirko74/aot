@@ -226,10 +226,10 @@ std::string CEngSemStructure::GetMorphologyOfNode(long NodeNo) const
 	Result += " DoNotChangeForm \n"; 
   };
   
-  if (m_Nodes[NodeNo].m_ArticleStr != "")
+  if (m_Nodes[NodeNo].GetArticle() != UnknownArticle)
   {
-	Result += "\nArticle  = " + m_Nodes[NodeNo].m_ArticleStr + "\n"; 
-	Result += "ArticleHistory  = " + GetArticleCauseHistory(m_Nodes[NodeNo].m_ArticleCauseHistory);
+	Result += "\nArticle  = " + ArticleStringByType(m_Nodes[NodeNo].GetArticle()) + "\n";
+	Result += "ArticleHistory  = " + m_Nodes[NodeNo].GetArticleCauseHistory();
 	
   };
 

@@ -746,15 +746,11 @@ bool LoadGrammarForGLR(CWorkGrammar &WorkGrammar, bool bUsePrecompiledAutomat, b
     {
         WorkGrammar.LogStream << "create token list for each node\n";
         std::string ErrorStr;
-        time_t t1, t2;
-        time(&t1);
 
         if (!WorkGrammar.CreateTokenList(ErrorStr)) {
             ErrorMessage(ErrorStr);
             return false;
         };
-        time(&t2);
-        WorkGrammar.LogStream << "Seconds = " << t2 - t1 << "\n";
         WorkGrammar.LogStream << "ok\n";
     };
 

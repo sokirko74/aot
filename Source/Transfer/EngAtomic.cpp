@@ -57,7 +57,7 @@ void CEngSemNode::Init ()
 {
 	RusNode = -1;
 	m_bNotUseTo = false;
-	m_ArticleStr = "";
+	m_Article = UnknownArticle;
 };
 
 CEngSemNode::CEngSemNode() : CSemNode() 
@@ -142,6 +142,53 @@ void CEngSemNode::DeleteGrammemsRich(QWORD g)
 
 };
 
+void CEngSemNode::SetArticle(ArticleEnum s, ArticleCauseEnum cause) {
+	m_Article = s;
+	m_ArticleCauseHistory.push_back(cause);
+}
+
+ArticleEnum CEngSemNode::GetArticle() const {
+	return m_Article;
+}
+
+ArticleCauseEnum  CEngSemNode::GetLastArticleCause() const {
+	if (m_ArticleCauseHistory.empty()) {
+		return UnknownArticleCause;
+	}
+	return m_ArticleCauseHistory.back();
+}
+
+static std::string GetStringByArticleCause(ArticleCauseEnum t)
+{
+	switch (t) {
+	case ArticleFromDict: return "an article from dictionary";
+	case ArticleFromOrdNum: return "definite article because of ordinal number";
+	case ZeroArticleForProperNames: return "zero article for proper names";
+	case ZeroArticleBecauseOfPossessive: return "zero article because of possessive attribute";
+	case DefArticleBeforeClausePredicate: return "definite article before clause predicate (topic)";
+	case DefArticleBecauseOfNominalSupplement: return "definite article because of nominal supplement";
+	case DefArticleForAbstractLocal: return "definite article for abstract local nouns";
+	case NoIndefArticleForMassNouns: return "no indefinite article for mass nouns";
+	case IndefArticleAfterAs: return "indefinite article after <as> ";
+	case DefArticleBecauseDefiniteClause: return "definite article because of definite clauses";
+	case DefArticleForSingleRanks: return "definite article for single <rank>-nouns";
+	case OverwriteArticleForTimeNodes: return "undo article field because it is a time node ";
+	case OverwriteArticleForTerminNodes: return "undo article field because of change of termin syntax";
+
+	};
+	return "unk cause!";
+};
+
+
+std::string CEngSemNode::GetArticleCauseHistory() const
+{
+	std::string Result;
+	for (auto a: m_ArticleCauseHistory)
+		Result += "       " + GetStringByArticleCause(a) + "\n";
+	return Result;
+};
+
+
 //=======================================================
 void CEngSemRelation::Init()
 {
@@ -168,3 +215,4 @@ CEngSemRelation::CEngSemRelation (const CSemRelation& X)
 	*((CSemRelation*)this )= X;
 	Init();
 };
+

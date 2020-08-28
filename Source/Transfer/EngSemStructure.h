@@ -124,14 +124,26 @@ enum ArticleCauseEnum {	ArticleFromDict, ArticleFromOrdNum, ZeroArticleForProper
 						ZeroArticleBecauseOfPossessive, DefArticleBeforeClausePredicate,
 						DefArticleBecauseOfNominalSupplement, DefArticleForAbstractLocal,
 						NoIndefArticleForMassNouns, IndefArticleAfterAs, DefArticleBecauseDefiniteClause, 
-						DefArticleForSingleRanks, OverwriteArticleForTimeNodes, OverwriteArticleForTerminNodes};
+						DefArticleForSingleRanks, OverwriteArticleForTimeNodes, OverwriteArticleForTerminNodes, ClauseRelRuleParticipleArticle,
+                        IndefByModalVerb, UnknownArticleCause};
 
 extern std::string GetArticleCauseHistory (const std::vector<ArticleCauseEnum>& t);
 extern BYTE GetOnePOS(long poses);
+enum ArticleEnum { 
+	ZeroArticle, 
+	DefArticle, 
+	IndefArticle,
+	UnknownArticle
+};
 
+extern ArticleEnum ArticleTypeByString(const std::string& s);
+extern std::string ArticleStringByType(ArticleEnum t);
 
 class CEngSemNode : public CSemNode
 {
+	ArticleEnum				m_Article;
+	std::vector<ArticleCauseEnum>	m_ArticleCauseHistory;
+
 public:
 	std::vector<CEngSemWord> m_Words;
  	virtual const CSemWord& GetWord(int WordNo) const { return m_Words[WordNo];};
@@ -144,8 +156,6 @@ public:
 	
 
 	bool				m_bNotUseTo;
-	std::string				m_ArticleStr;
-	std::vector<ArticleCauseEnum>	m_ArticleCauseHistory;
 
 	void SetGrammemsRich(QWORD g);
 	QWORD GetGrammemsRich() const;
@@ -162,6 +172,11 @@ public:
 	EngVerbTenseEnum GetTense() const;
 	BYTE GetPos() const;
 	bool IsLemma(std::string Lemma) const;
+
+	void SetArticle(ArticleEnum s, ArticleCauseEnum cause);
+	ArticleEnum GetArticle() const;
+	ArticleCauseEnum  GetLastArticleCause() const;
+	std::string GetArticleCauseHistory() const;
 };
 
 

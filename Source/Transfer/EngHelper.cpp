@@ -792,31 +792,3 @@ if(m_Relations[rels[i]].m_Valency.m_RelationStr == "QUANTIT"){			const CEngSemNo
 
 
 
-std::string GetStringByArticleCause(ArticleCauseEnum t)
-{
-	switch (t) {
-		case ArticleFromDict: return "an article from dictionary";	
-		case ArticleFromOrdNum: return "definite article because of ordinal number";
-		case ZeroArticleForProperNames: return "zero article for proper names";
-		case ZeroArticleBecauseOfPossessive: return "zero article because of possessive attribute";
-		case DefArticleBeforeClausePredicate: return "definite article before clause predicate (topic)";
-		case DefArticleBecauseOfNominalSupplement: return "definite article because of nominal supplement";
-		case DefArticleForAbstractLocal: return "definite article for abstract local nouns";
-		case NoIndefArticleForMassNouns: return "no indefinite article for mass nouns"; 
-		case IndefArticleAfterAs: return "indefinite article after <as> ";
-		case DefArticleBecauseDefiniteClause : return "definite article because of definite clauses";
-		case DefArticleForSingleRanks : return "definite article for single <rank>-nouns";
-		case OverwriteArticleForTimeNodes : return "undo article field because it is a time node ";
-		case OverwriteArticleForTerminNodes: return "undo article field because of change of termin syntax";
-			
-	};
-	return "unk cause!";
-};
-
-std::string GetArticleCauseHistory (const std::vector<ArticleCauseEnum>& t)
-{
-	std::string Result;
-	for (int  i=0; i<t.size(); i++)
-		Result += "       "+GetStringByArticleCause(t[i]) +"\n";
-	return Result;
-};

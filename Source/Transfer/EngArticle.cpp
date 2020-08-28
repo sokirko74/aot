@@ -5,6 +5,25 @@
 */
 #include "StdAfx.h"
 
+ArticleEnum ArticleTypeByString(const std::string& s)
+{
+	if (s == "the")
+		return DefArticle;
+	if (s == "a")
+		return IndefArticle;
+	if (s == "-")
+		return ZeroArticle;
+	return UnknownArticle;
+}
+
+extern std::string ArticleStringByType(ArticleEnum t) {
+	switch (t) {
+		case ZeroArticle: return "";
+		case DefArticle: return "the";
+		case IndefArticle: return "a";
+		case UnknownArticle: return "";
+	}
+}
 
 void update_article(const CSemPattern& P, CEngSemNode& N)
 {
@@ -17,19 +36,22 @@ void update_article(const CSemPattern& P, CEngSemNode& N)
 			{
               if (ArticleStr == "the|NOUN")
 			  {
-				  if (N.HasPOS(eNOUN))
-					N.m_ArticleStr = "the";
+				  if (N.HasPOS(eNOUN)) {
+					  N.SetArticle(DefArticle, ArticleFromDict);
+				  }
 			  }
 			  else
                if (ArticleStr == "a|NOUN")
 			   {
 				   if (N.HasPOS(eNOUN))
-						N.m_ArticleStr = "a";
+					   N.SetArticle(IndefArticle, ArticleFromDict);
 			   }
-               else
-				  N.m_ArticleStr =  ArticleStr;
+			   else {
+				   auto a = ArticleTypeByString(ArticleStr);
+				   assert(a != UnknownArticle);
+				   N.SetArticle(a, ArticleFromDict);
+			   }
 
-			   N.m_ArticleCauseHistory.push_back(ArticleFromDict);
 			};
 		};
 
@@ -173,7 +195,7 @@ void  CEngSemStructure::InitArticleField ()
 			update_article(m_Relations[InRelNo].m_Pattern, m_Nodes[NodeNo]);
 
 		// 2. выходящие реверсивные отношения
-		ReverseRelArticles[NodeNo] = m_Nodes[NodeNo].m_ArticleStr == "";
+		ReverseRelArticles[NodeNo] = m_Nodes[NodeNo].GetArticle() == UnknownArticle;
 
 		/*ReverseRelArticle - истина, если  какая-нибудь реверсиная связь требует
 		 своего артикля. Это очень сильный критерий. Можеь быть даже сильный...
@@ -187,7 +209,7 @@ void  CEngSemStructure::InitArticleField ()
 		 {
 			 update_article(m_Relations[Rels[j]].m_Pattern, m_Nodes[NodeNo]);
 		 };
-		ReverseRelArticles[NodeNo] = m_Nodes[NodeNo].m_ArticleStr != "";
+		ReverseRelArticles[NodeNo] = m_Nodes[NodeNo].GetArticle() != UnknownArticle;
 		 
 		// значение поля DETERM из добавочных статей
 
@@ -227,7 +249,7 @@ void  CEngSemStructure::InitArticleField ()
 		if (   m_Nodes[NodeNo].HasPOS(ePN_ADJ) 
 			|| m_Nodes[NodeNo].HasPOS(eADJ) 		
 		  )
-		if (m_Nodes[NodeNo].m_ArticleStr != "")
+		if (m_Nodes[NodeNo].GetArticle() != UnknownArticle)
 	{
 		std::vector<long> InRels;
 		GetIncomingInClauseRelations(NodeNo, InRels);
@@ -238,8 +260,7 @@ void  CEngSemStructure::InitArticleField ()
 		if (InRelNo != -1)
 		  if (m_Nodes[m_Relations[InRelNo].m_SourceNodeNo].HasPOS(eNOUN))
 		  {
-			  m_Nodes[m_Relations[InRelNo].m_SourceNodeNo].m_ArticleStr =  m_Nodes[NodeNo].m_ArticleStr;
-			  m_Nodes[m_Relations[InRelNo].m_SourceNodeNo].m_ArticleCauseHistory.push_back( m_Nodes[NodeNo].m_ArticleCauseHistory.back() );
+			  m_Nodes[m_Relations[InRelNo].m_SourceNodeNo].SetArticle(m_Nodes[NodeNo].GetArticle(), m_Nodes[NodeNo].GetLastArticleCause());
 		  };
 	};
 
@@ -254,7 +275,7 @@ void  CEngSemStructure::InitArticleField ()
 			InRelNo = InRels[0];
 
 		//=================== zero article =================
-        if (m_Nodes[NodeNo].m_ArticleStr == "-") continue;
+        if (m_Nodes[NodeNo].GetArticle() == ZeroArticle) continue;
 
 		// IDENT, NAME или одно слово в кавычках
 		if (		HasOutRelationByName(NodeNo, "IDENT")|| HasOutRelationByName(NodeNo, "NAME")			
@@ -268,9 +289,7 @@ void  CEngSemStructure::InitArticleField ()
 					)
 		   )
 		{
-		  m_Nodes[NodeNo].m_ArticleStr = "-";
-		  m_Nodes[NodeNo].m_ArticleCauseHistory.push_back(  ZeroArticleForProperNames );
-		  
+		  m_Nodes[NodeNo].SetArticle(ZeroArticle, ZeroArticleForProperNames);
 		  continue;
 		};
 
@@ -279,8 +298,7 @@ void  CEngSemStructure::InitArticleField ()
 					||	(m_Relations[InRelNo].m_Valency.m_RelationStr == "NAME")			   
 				)
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "-";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( ZeroArticleForProperNames );
+				m_Nodes[NodeNo].SetArticle(ZeroArticle, ZeroArticleForProperNames);
 				continue;
 			};
 
@@ -289,16 +307,14 @@ void  CEngSemStructure::InitArticleField ()
 				||	m_Nodes[NodeNo].HasGrammemRich(eProper) 
 			)
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "-";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( ZeroArticleForProperNames );
+				m_Nodes[NodeNo].SetArticle(ZeroArticle, ZeroArticleForProperNames);
 				continue;
 			};
 
 		// prop или geo 
 		if  (m_Nodes[NodeNo].m_bProper)
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "-";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( ZeroArticleForProperNames );
+				m_Nodes[NodeNo].SetArticle(ZeroArticle, ZeroArticleForProperNames);
 				continue;
 			};
 
@@ -306,15 +322,14 @@ void  CEngSemStructure::InitArticleField ()
 			|| ( GetOutRelationByWord(NodeNo, "#one's") != -1)
 		   )
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "-";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( ZeroArticleBecauseOfPossessive );
+				m_Nodes[NodeNo].SetArticle(ZeroArticle, ZeroArticleBecauseOfPossessive);
 				continue;
 			};
 
 		
 
 		//=================== "the" article =================
-		if (m_Nodes[NodeNo].m_ArticleStr == "the") continue;
+		if (m_Nodes[NodeNo].GetArticle() == DefArticle) continue;
 		/*
 		 будем считать, что тайм-группам не надо 
 		 приписывать артикль, хотя  в документации этого нет 
@@ -342,8 +357,7 @@ void  CEngSemStructure::InitArticleField ()
 
 		if (j < OutRels.size())
 		{
-		  m_Nodes[NodeNo].m_ArticleStr = "the";
-		  m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( ArticleFromOrdNum );
+		  m_Nodes[NodeNo].SetArticle(DefArticle, ArticleFromOrdNum);
 		  continue;
 		};
 
@@ -367,16 +381,14 @@ void  CEngSemStructure::InitArticleField ()
 				 // "в 2000 году зарплата возрастет"
 			   )
 			  {
-				  m_Nodes[NodeNo].m_ArticleStr = "the";
-				  m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleBeforeClausePredicate );
+				  m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleBeforeClausePredicate);
 				  continue;
 			  };
 
 			// SF = CONTNR, VAL = TOGETHER
 			if  (    HasSemFetPro (m_Nodes[NodeNo],"CONTNR")&& HasOutRelationByName(NodeNo, "TOGETHER")				 )
 			 {
-			  m_Nodes[NodeNo].m_ArticleStr = "the";
-			  m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleBecauseOfNominalSupplement );
+			  m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleBecauseOfNominalSupplement);
 			  continue;
 			 };
 		
@@ -387,8 +399,7 @@ void  CEngSemStructure::InitArticleField ()
 					||	(m_Relations[InRelNo].m_Valency.m_RelationStr == "SRC-PNT")			   
 				)
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "the";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleForAbstractLocal );
+				m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleForAbstractLocal);
 				continue;
 			};
 
@@ -407,8 +418,7 @@ void  CEngSemStructure::InitArticleField ()
 					&&	(RusStr.GetNode(m_Nodes[NodeNo].RusNode).m_SemCategory == scObject)
 			   )
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "the";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleForAbstractLocal );
+				m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleForAbstractLocal);
 				continue;
 			};
 
@@ -418,15 +428,10 @@ void  CEngSemStructure::InitArticleField ()
 		for (j =0; j < OutRels.size();j++)
 		  if ( m_Relations[OutRels[j]].m_SyntacticRelation == _R("ЭЛЕКТ_ИГ") )
 		  {
-			  m_Nodes[NodeNo].m_ArticleStr = "the";
-			  m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleBecauseOfNominalSupplement );
+			  m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleBecauseOfNominalSupplement);
 			  break;
 		  };
 		if (j < OutRels.size()) continue;
-
-
-	
-		
 		// NP с предлогом of
 		PrintNodes();
 		WORD UnitNo = GetRoss(EngObor)->LocateUnit("of",1);
@@ -439,8 +444,7 @@ void  CEngSemStructure::InitArticleField ()
 		}
 		if (j < OutAllRels.size())
 		{
-			m_Nodes[NodeNo].m_ArticleStr = "the";
-			m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleBecauseOfNominalSupplement );
+			m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleBecauseOfNominalSupplement);
 			continue;
 		};
 
@@ -454,12 +458,11 @@ void  CEngSemStructure::InitArticleField ()
 		if (m_Nodes[NodeNo].GetGrammemsRich() & 
 			   (  _QM(eMass)| _QM(eUncountable) | _QM(ePlural) ) ) 
 		{
-			m_Nodes[NodeNo].m_ArticleStr = "";
-			m_Nodes[NodeNo].m_ArticleCauseHistory.push_back(  NoIndefArticleForMassNouns );
+			m_Nodes[NodeNo].SetArticle(UnknownArticle, NoIndefArticleForMassNouns);
 			continue;
 		};
 
-		if (m_Nodes[NodeNo].m_ArticleStr == "a") continue;
+		if (m_Nodes[NodeNo].GetArticle() == IndefArticle) continue;
 
 		long i = InRelNo;
 		// ставим только существительному
@@ -470,7 +473,7 @@ void  CEngSemStructure::InitArticleField ()
 				if (IsSubj(m_Relations[i])) break;
 
 			if (HasSemFetPro(m_Nodes[m_Relations[i].m_SourceNodeNo],"MODL"))				{
-					m_Nodes[NodeNo].m_ArticleStr = "a";
+					m_Nodes[NodeNo].SetArticle(IndefArticle, IndefByModalVerb);
 					break;
 				};
 				std::vector<long> Rels;
@@ -492,8 +495,7 @@ void  CEngSemStructure::InitArticleField ()
 				  && m_Nodes[NodeNo].GetMinWordNo() > m_Nodes[m_Relations[InRelNo].m_SourceNodeNo].GetMinWordNo() 
 			   )
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "a";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( IndefArticleAfterAs );
+				m_Nodes[NodeNo].SetArticle(IndefArticle, IndefArticleAfterAs);
 				continue;
 			};
 
@@ -507,8 +509,7 @@ void  CEngSemStructure::InitArticleField ()
 	   /* Все  должности,у котрых не заполнены вылентности, будут иметь определенный артикль*/
 			if  (HasSemFetPro(m_Nodes[NodeNo].m_NodeSemFets, "PROF"))			
 			{
-				m_Nodes[NodeNo].m_ArticleStr = "the";
-				m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleForSingleRanks );
+				m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleForSingleRanks);
 				continue;
 			};
 
@@ -527,8 +528,7 @@ void  CEngSemStructure::InitArticleField ()
 		}
 		if (j < InRels.size())
 		{
-			m_Nodes[NodeNo].m_ArticleStr = "the";
-			m_Nodes[NodeNo].m_ArticleCauseHistory.push_back( DefArticleBecauseDefiniteClause );
+			m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleBecauseDefiniteClause);
 			continue;
 		};
 

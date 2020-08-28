@@ -15,7 +15,7 @@ struct CGrammemsAnalyzer {
 };
     
 
-enum ArticleEnum { ZeroArticle, DefArticle, IndefArticle};
+
 struct SynthesResult  : public CGrammemsAnalyzer{
 	// слова, которые нужно  распечатать  в  той последовательности, в которой они здесь указаны
 	StringVector m_WordForms;
