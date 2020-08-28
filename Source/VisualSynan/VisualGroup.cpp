@@ -22,7 +22,7 @@ BOOL CVisualGroup::Init(SYNANLib::IGroupPtr& piGroup)
 	
 	m_iFirstWord = piGroup->GetFirstWord();
 	m_iLastWord = piGroup->GetLastWord();
-	m_strDescription = _OUT(piGroup->TypeStr);
+	m_strDescription = ReadStrFromCOM(piGroup->TypeStr);
 	m_strDescription.MakeLower();
 	return TRUE;
 }

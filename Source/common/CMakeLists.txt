@@ -8,7 +8,6 @@ LemWord.cpp
 MorphXmlToken.cpp
 PlmLine.cpp
 gra_descr.cpp
-#http_server.cpp
 rus_numerals.cpp
 utilit.cpp
 )

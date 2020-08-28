@@ -63,7 +63,7 @@ BOOL CVisualClause::InitVisualClause(SYNANLib::IClausePtr& piClause)
 				RelativeWord->m_ReferenceWordNo  = piClause->AntecedentWord;
 			};
 		};
-		m_strConjsName = _OUT(piClause->GetDescription());
+		m_strConjsName = ReadStrFromCOM(piClause->GetDescription());
 		int iTypeCount = piClause->GetClauseRootsCount();
 
 		BOOL bFirst = TRUE;
@@ -405,7 +405,7 @@ BOOL CClauseType::Init(SYNANLib::IClauseRootPtr piClauseType)
 	{
 		m_arrHomNum.Add(piClauseType->RootHomonymNo);
 		m_iWordNum = piClauseType->RootWordNo;
-		m_strName = _OUT(piClauseType->GetDescription());
+		m_strName = ReadStrFromCOM(piClauseType->GetDescription());
 	}
 	catch(...)
 	{

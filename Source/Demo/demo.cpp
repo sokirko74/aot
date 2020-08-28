@@ -6,6 +6,7 @@
 #include "demoDlg.h"
 #include "Splash.h"
 #include "../common/utilit.h"
+#include "../common/COM/windows_unicode.h"
 
 
 
@@ -33,7 +34,7 @@ public:
 	{
 		CString S = pszParam;
 		MorphLanguageEnum l;
-		if (GetLanguageByString((const char*)S,l))
+		if (GetLanguageByString(WstrToUtf8Str((const TCHAR*)S),l))
 			m_Language = l;
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
 	};
@@ -59,7 +60,7 @@ BOOL CDemoApp::InitInstance()
 {
 	if (FAILED(::CoInitialize(NULL)))
 	{
-		AfxMessageBox("Fatal Error: COM initialization failed");
+		AfxMessageBox(_T("Fatal Error: COM initialization failed"));
 		return FALSE;
 	}
 

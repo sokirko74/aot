@@ -6,7 +6,7 @@
 #include "vector"
 #include "assert.h"
 #include "demoDlg.h"
-#include "../common/utilit.h"
+
 
 #include "Splash.h"
 
@@ -100,8 +100,8 @@ BOOL CDemoDlg::OnInitDialog()
 //	ToolTip init
 	m_pToolTip = new CToolTipCtrl;
 	m_pToolTip->Create(this);
-	m_pToolTip->AddTool(&m_buttonExit, "Exit");
-	m_pToolTip->AddTool(&m_buttonFind, "Find");
+	m_pToolTip->AddTool(&m_buttonExit, _T("Exit"));
+	m_pToolTip->AddTool(&m_buttonFind, _T("Find"));
 //	Buttons init
 	HICON	hIcon = (HICON)LoadImage(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ICONEXIT), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
 	m_buttonExit.SetIcon(hIcon);
@@ -110,16 +110,16 @@ BOOL CDemoDlg::OnInitDialog()
 //	Column init
 	CRect rect;
 	m_ctrlResults.GetWindowRect(&rect);
-	m_ctrlResults.InsertColumn(COLUMN_LANGUAGE, "Lang", LVCFMT_LEFT, rect.Width() / 14, COLUMN_LANGUAGE); 
-	m_ctrlResults.InsertColumn(COLUMN_STATUS, "Status", LVCFMT_LEFT, rect.Width() / 10, COLUMN_STATUS); 
-	m_ctrlResults.InsertColumn(COLUMN_TYPE, "Type", LVCFMT_LEFT, rect.Width() / 12, COLUMN_TYPE); 
-	m_ctrlResults.InsertColumn(COLUMN_NORM, "Normal form", LVCFMT_LEFT, rect.Width() / 4, COLUMN_NORM); 
-	m_ctrlResults.InsertColumn(COLUMN_FORM, "Information", LVCFMT_LEFT, rect.Width() / 4, COLUMN_FORM); 
-	m_ctrlResults.InsertColumn(COLUMN_ID, "ID / Source", LVCFMT_LEFT, rect.Width() / 4, COLUMN_ID);
-	m_ctrlResults.InsertColumn(COLUMN_HOMO, "HomoWeight", LVCFMT_LEFT, rect.Width() / 4, COLUMN_HOMO);
-	m_ctrlResults.InsertColumn(COLUMN_WORD, "WordWeight", LVCFMT_LEFT, rect.Width() / 4, COLUMN_WORD);
-	m_ctrlResults.InsertColumn(COLUMN_ANCODE, "Ancode", LVCFMT_LEFT, rect.Width() / 4, COLUMN_ANCODE);
-	m_ctrlResults.InsertColumn(COLUMN_ACCENTS, "Accents", LVCFMT_LEFT, rect.Width() / 4, COLUMN_ACCENTS);
+	m_ctrlResults.InsertColumn(COLUMN_LANGUAGE, _T("Lang"), LVCFMT_LEFT, rect.Width() / 14, COLUMN_LANGUAGE); 
+	m_ctrlResults.InsertColumn(COLUMN_STATUS, _T("Status"), LVCFMT_LEFT, rect.Width() / 10, COLUMN_STATUS); 
+	m_ctrlResults.InsertColumn(COLUMN_TYPE, _T("Type"), LVCFMT_LEFT, rect.Width() / 12, COLUMN_TYPE); 
+	m_ctrlResults.InsertColumn(COLUMN_NORM, _T("Normal form"), LVCFMT_LEFT, rect.Width() / 4, COLUMN_NORM); 
+	m_ctrlResults.InsertColumn(COLUMN_FORM, _T("Information"), LVCFMT_LEFT, rect.Width() / 4, COLUMN_FORM); 
+	m_ctrlResults.InsertColumn(COLUMN_ID, _T("ID / Source"), LVCFMT_LEFT, rect.Width() / 4, COLUMN_ID);
+	m_ctrlResults.InsertColumn(COLUMN_HOMO, _T("HomoWeight"), LVCFMT_LEFT, rect.Width() / 4, COLUMN_HOMO);
+	m_ctrlResults.InsertColumn(COLUMN_WORD, _T("WordWeight"), LVCFMT_LEFT, rect.Width() / 4, COLUMN_WORD);
+	m_ctrlResults.InsertColumn(COLUMN_ANCODE, _T("Ancode"), LVCFMT_LEFT, rect.Width() / 4, COLUMN_ANCODE);
+	m_ctrlResults.InsertColumn(COLUMN_ACCENTS, _T("Accents"), LVCFMT_LEFT, rect.Width() / 4, COLUMN_ACCENTS);
 	
 
 //	Lemmatizer init
@@ -129,13 +129,13 @@ BOOL CDemoDlg::OnInitDialog()
 		HRESULT hr = m_piEnglish.CreateInstance(__uuidof(LEMMATIZERLib::LemmatizerEnglish));
 		if (FAILED(hr))
 		{
-			AfxMessageBox("Fatal Error: Lemmatizer creation failed");
+			AfxMessageBox(_T("Fatal Error: Lemmatizer creation failed"));
 			return FALSE;
 		}
 		hr = m_piEnglishAgram.CreateInstance(__uuidof(AGRAMTABLib::EngGramTab));
 		if (FAILED(hr))
 		{
-			AfxMessageBox("Fatal Error: English agramtab creation failed");
+			AfxMessageBox(_T("Fatal Error: English agramtab creation failed"));
 			return FALSE;
 		}
 		m_bEngAgramLoaded = false;	
@@ -158,14 +158,14 @@ BOOL CDemoDlg::OnInitDialog()
 		HRESULT hr = m_piGerman.CreateInstance(__uuidof(LEMMATIZERLib::LemmatizerGerman));
 		if (FAILED(hr))
 		{
-			AfxMessageBox("Fatal Error: Lemmatizer creation failed");
+			AfxMessageBox(_T("Fatal Error: Lemmatizer creation failed"));
 			return FALSE;
 		}
 
 		hr = m_piGermanAgram.CreateInstance(__uuidof(AGRAMTABLib::GerGramTab));
 		if (FAILED(hr))
 		{
-			AfxMessageBox("Fatal Error: German agramtab creation failed");
+			AfxMessageBox(_T("Fatal Error: German agramtab creation failed"));
 			return FALSE;
 		}
 	//	Грузим словари
@@ -190,13 +190,13 @@ BOOL CDemoDlg::OnInitDialog()
 		HRESULT hr = m_piRussian.CreateInstance(__uuidof(LEMMATIZERLib::LemmatizerRussian));
 		if (FAILED(hr))
 		{
-			AfxMessageBox("Fatal Error: Lemmatizer creation failed");
+			AfxMessageBox(_T("Fatal Error: Lemmatizer creation failed"));
 			return FALSE;
 		}
 		hr = m_piRussianAgram.CreateInstance(__uuidof(AGRAMTABLib::RusGramTab));
 		if (FAILED(hr))
 		{
-			AfxMessageBox("Fatal Error: Russian agramtab creation failed");
+			AfxMessageBox(_T("Fatal Error: Russian agramtab creation failed"));
 			return FALSE;
 		}
 		m_bRusAgramLoaded = false;	
@@ -307,22 +307,42 @@ inline MorphLanguageEnum InterfaceToEnum ( int Lang)
 	return morphRussian;
 };
 
+void UnicoodeMakeUpper(CStringW& s) {
+	std::wstring form = s;
+	for (size_t i = 0; i < form.length(); ++i) {
+		TCHAR b[2] = { form[i] , 0 };
+		CharUpper(b);
+		form[i] = b[0];
+	}
+	s = form.c_str();
+}
 
-std::string GetAccentedForms (LEMMATIZERLib::IParadigmPtr piParadigm, std::string Form, MorphLanguageEnum langua)
+void UnicoodeMakeLower(CStringW& s) {
+	std::wstring form = s;
+	for (size_t i = 0; i < form.length(); ++i) {
+		TCHAR b[2] = { form[i] , 0 };
+		CharLower(b);
+		form[i] = b[0];
+	}
+	s = form.c_str();
+}
+
+std::wstring GetAccentedForms (LEMMATIZERLib::IParadigmPtr piParadigm, CString Form, MorphLanguageEnum langua)
 {
-	std::string Result;
-	RmlMakeUpper(Form,langua);
-
+	CString Result;
+	UnicoodeMakeUpper(Form);
 	for (size_t i=0; i<piParadigm->Count; i++)
 	{
-		std::string s  = (const char*)piParadigm->Form[i];
+		CString s  = ReadStrFromCOM(piParadigm->Form[i]);
 		if (s == Form)
 		{
 			BYTE AccentedCharNo = piParadigm->Accent[i];
 			if (AccentedCharNo != 255)
 			{
-				RmlMakeLower(s,langua);
-				s[AccentedCharNo]=ReverseChar(s[AccentedCharNo], langua);
+				UnicoodeMakeLower(s);
+				CString c = s[AccentedCharNo];
+				UnicoodeMakeUpper(c);
+				s = s.Mid(0, AccentedCharNo) + c + s.Mid(AccentedCharNo + 1);
 				Result +=  s;
 				Result +=  ";";
 			};
@@ -343,7 +363,9 @@ void CDemoDlg::OnButtonFind()
 	if (m_strSrc.IsEmpty())
 		return; 
 
-	std::string src_str = m_strSrc;
+	m_strSrc.Trim();
+
+	CString src_str = m_strSrc;
 	
 	m_ctrlResults.DeleteAllItems();
 	
@@ -360,38 +382,41 @@ void CDemoDlg::OnButtonFind()
 
 	// проверяем, что все src состоит  только из цифр, тогда запускаем CreateParadigmFromID
 	size_t i=0;
-	for (; i < src_str.length(); i++)
-		if (!isdigit((unsigned char)src_str[i]))
+	for (; i < src_str.GetLength(); i++)
+		if (!iswdigit(src_str[i]))
 			break;
-    Trim(src_str);
-	bool OnlyDigits = (i ==  src_str.length());
+	bool OnlyDigits = (i ==  src_str.GetLength());
 
 	bool bFoundSomething = false;
 	for (int LangNo=0; LangNo<Languages.size(); LangNo++)
 	try
 	{
 		MorphLanguageEnum Lang = Languages[LangNo];
-		if (!OnlyDigits)
-			if (!check_language(src_str, Lang)) continue;
+		if (!OnlyDigits) {
+			auto utf8str = WstrToUtf8Str((const TCHAR*)src_str);
+			try {
+				if (!check_language(convert_from_utf8(utf8str.c_str(), Lang), Lang))
+					continue;
+			}
+			catch (convert_exception e) {
+				continue;
+			}
+		}
 		piAgram = GetGramTabByLanguage(Lang);;
 		piLemmatizer = GetLemmatizerByLanguage(Lang);;
 		if (piLemmatizer == 0) continue;
 
 
 		LEMMATIZERLib::IParadigmPtr ParadigmFromId = 0;
-        
-
-
-
-		if (OnlyDigits)
-			ParadigmFromId = piLemmatizer->CreateParadigmFromID(	atoi(src_str.c_str()));
+       	if (OnlyDigits)
+			ParadigmFromId = piLemmatizer->CreateParadigmFromID(	_wtoi((const TCHAR*)src_str));
         else
 		  piParadigmCollection = 
-				piLemmatizer->CreateParadigmCollectionFromForm(	src_str.c_str(),
-																is_upper_alpha((unsigned char)m_strSrc[0], Lang), TRUE);
+				piLemmatizer->CreateParadigmCollectionFromForm((const TCHAR*)src_str,
+																iswupper(m_strSrc[0]), TRUE);
 
 
-		std::string result;
+		CString result;
 		
 		
 	//	Распечатываем парадигмы
@@ -405,33 +430,33 @@ void CDemoDlg::OnButtonFind()
 			   if (i == piParadigmCollection->Count) break;
  			   piParadigm = piParadigmCollection->Item[i];
 			};
-			m_ctrlResults.InsertItem(i, GetStrByLanguage(Lang));
-			m_ctrlResults.SetItemText(i, COLUMN_STATUS, piParadigm->Founded ? "Found": "Predicted");
+			m_ctrlResults.InsertItem(i, UTF8toUTF16(GetStrByLanguage(Lang)));
+			m_ctrlResults.SetItemText(i, COLUMN_STATUS, piParadigm->Founded ? _T("Found"): _T("Predicted"));
 			bFoundSomething |= (piParadigm->Founded == TRUE);
 			if (piParadigm->Founded)
 			{
 				CString strID;
 
-                strID.Format("%u", piParadigm->ParadigmID);
+                strID.Format(_T("%u"), piParadigm->ParadigmID);
 				m_ctrlResults.SetItemText(i, COLUMN_ID, strID);
 				try {
-				  strID.Format("%d", piParadigm->HomonymWeight);
+				  strID.Format(_T("%d"), piParadigm->HomonymWeight);
 				  m_ctrlResults.SetItemText(i, COLUMN_HOMO, strID);
 				} 
 				catch (...){
-					m_ctrlResults.SetItemText(i, COLUMN_HOMO, "not found");
+					m_ctrlResults.SetItemText(i, COLUMN_HOMO, _T("not found"));
 				};
-				strID.Format("%d", piParadigm->WordWeight);
+				strID.Format(_T("%d"), piParadigm->WordWeight);
 				m_ctrlResults.SetItemText(i, COLUMN_WORD, strID);
 				m_ctrlResults.SetItemText(i, COLUMN_ACCENTS, GetAccentedForms(piParadigm, src_str, Lang).c_str() );
 
 			}
 			else
 			{
-				result = (const char*)piParadigm->SrcNorm;
-				m_ctrlResults.SetItemText(i, COLUMN_ID, result.c_str());
-				m_ctrlResults.SetItemText(i, COLUMN_HOMO, "");
-				m_ctrlResults.SetItemText(i, COLUMN_WORD, "");
+				result = ReadStrFromCOM(piParadigm->SrcNorm);
+				m_ctrlResults.SetItemText(i, COLUMN_ID, result);
+				m_ctrlResults.SetItemText(i, COLUMN_HOMO, _T(""));
+				m_ctrlResults.SetItemText(i, COLUMN_WORD, _T(""));
 			}
 
 			{
@@ -439,43 +464,43 @@ void CDemoDlg::OnButtonFind()
 				if (!type_ancode.empty())
 				{
 					QWORD grammems = piAgram->GetGrammems(type_ancode.c_str());
-					result = (const char*)piAgram->GrammemsToStr(grammems);
-					m_ctrlResults.SetItemText(i, COLUMN_TYPE, result.c_str());
+					result = ReadStrFromCOM(piAgram->GrammemsToStr(grammems));
+					m_ctrlResults.SetItemText(i, COLUMN_TYPE, result);
 				}
 			}
 			
-			m_ctrlResults.SetItemText(i, COLUMN_NORM, (const char*)piParadigm->Norm);
+			m_ctrlResults.SetItemText(i, COLUMN_NORM, ReadStrFromCOM(piParadigm->Norm));
 			try
 			{
-				result = (const char*)piParadigm->SrcAncode;
+				result = ReadStrFromCOM(piParadigm->SrcAncode);
 			} catch(...)
 			{
-				result = (const char*)piParadigm->GetAncode(0);
+				result = ReadStrFromCOM(piParadigm->GetAncode(0));
 			}
-			m_ctrlResults.SetItemText(i, COLUMN_ANCODE, result.c_str());
+			m_ctrlResults.SetItemText(i, COLUMN_ANCODE, result);
 			if (piAgram != NULL)
 			{
-				std::string srccode = result;
+				CString srccode = result;
 				result = "";
-				std::string oldpart = "";
-				for (int j = 0; j < srccode.length(); j+=2)
+				CString oldpart = "";
+				for (int j = 0; j < srccode.GetLength(); j+=2)
 				{
-					std::string onecode = srccode.substr(j, 2);
-					BYTE POS = piAgram->GetPartOfSpeech(onecode.c_str());
-					std::string newpart = (const char*)piAgram->GetPartOfSpeechStr(POS);
+					std::wstring onecode = srccode.Mid(j, 2);
+					BYTE POS = piAgram->GetPartOfSpeech(WstrToUtf8Str(onecode).c_str());
+					auto newpart = ReadStrFromCOM (piAgram->GetPartOfSpeechStr(POS));
 					if (oldpart != newpart)
 					{
 						oldpart = newpart;
 						result += oldpart + " ";
 					}
 					QWORD grammems = piAgram->GetGrammems(onecode.c_str());
-					std::string out_grammems = (const char*)piAgram->GrammemsToStr(grammems);
-					if (out_grammems.length() > 0)
+					CString out_grammems = ReadStrFromCOM(piAgram->GrammemsToStr(grammems));
+					if (out_grammems.GetLength() > 0)
 						out_grammems += "; ";
 					result += out_grammems;
 				}	
 			}
-			m_ctrlResults.SetItemText(i, COLUMN_FORM, result.c_str() );
+			m_ctrlResults.SetItemText(i, COLUMN_FORM, result );
 			if (OnlyDigits) break;
 			i++;
 		}

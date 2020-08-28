@@ -218,11 +218,11 @@ void CVisualSentences::BuildRels(CString& report)
 			{
 				CString str;
 				SYNANLib::IGroupPtr& piGroup = piRelIt->GetFirmGroup(j);
-				str += _OUT(piGroup->TypeStr);
+				str += ReadStrFromCOM(piGroup->TypeStr);
 				str += "(";
 				for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
 				{
-					str = str + _OUT(piSent->GetWord(k)->GetWordStr()) + " ";					
+					str = str + ReadStrFromCOM(piSent->GetWord(k)->GetWordStr()) + " ";					
 				}
 
 				str += ")";
@@ -239,14 +239,14 @@ void CVisualSentences::BuildRels(CString& report)
 				CString str;
 				SYNANLib::IRelationPtr piRel;
 				piRel = piRelIt->Relation[j];
-				str += _OUT(piRel->GetName());
+				str += ReadStrFromCOM(piRel->GetName());
 				str += "(";
 
 				if( piRel->SourceItemType == EWord )
 				{
 					int iSourceWord = piRel->GetSourceItemNo();
 					int iClause = piSent->GetWord(iSourceWord)->GetClauseNo();
-					str = str + _OUT(piSent->GetWord(iSourceWord)->GetWordStr());					
+					str = str + ReadStrFromCOM(piSent->GetWord(iSourceWord)->GetWordStr());					
 				}
 				else
 				if( piRel->SourceItemType == EGroup )
@@ -255,7 +255,7 @@ void CVisualSentences::BuildRels(CString& report)
 					SYNANLib::IGroupPtr piGroup = piRelIt->GetFirmGroup(iSourceGroup);
 					for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
 					{
-						str = str + _OUT(piSent->GetWord(k)->GetWordStr()) + " ";	
+						str = str + ReadStrFromCOM(piSent->GetWord(k)->GetWordStr()) + " ";	
 					}
 				}
 
@@ -265,7 +265,7 @@ void CVisualSentences::BuildRels(CString& report)
 				{
 					int iTargetWord = piRel->GetTargetItemNo();
 					int iClause = piSent->GetWord(iTargetWord)->GetClauseNo();
-					str = str + _OUT(piSent->GetWord(iTargetWord)->GetWordStr());
+					str = str + ReadStrFromCOM(piSent->GetWord(iTargetWord)->GetWordStr());
 				}
 				else
 				if( piRel->TargetItemType == EGroup )
@@ -274,7 +274,7 @@ void CVisualSentences::BuildRels(CString& report)
 					SYNANLib::IGroupPtr piGroup = piRelIt->GetFirmGroup(iTargetGroup);
 					for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
 					{
-						str = str + _OUT(piSent->GetWord(k)->GetWordStr()) + " ";	
+						str = str + ReadStrFromCOM(piSent->GetWord(k)->GetWordStr()) + " ";	
 					}			
 				}
 				str = str + ")";
@@ -313,11 +313,11 @@ void CVisualSynVariant::InitClauseVariant(SYNANLib::IClausePtr& piClause, int Cl
 			for(int k = 0 ; k < piClauseVariant->GetUnit(i)->GetSimplePrepsCount(); k++ )
 			{
 				CString str = "Ob:";
-				str.Format(_T(" %s"), _OUT(piClauseVariant->GetUnit(i)->GetSimplePrepStr(k)));
+				str.Format(_T(" %s"), ReadStrFromCOM(piClauseVariant->GetUnit(i)->GetSimplePrepStr(k)));
 				unit.m_strOborotsNum += str;					
 			}
 			
-			unit.m_strGrammems = _OUT(piClauseVariant->GetUnit(i)->GetGrammemsStr());
+			unit.m_strGrammems = ReadStrFromCOM(piClauseVariant->GetUnit(i)->GetGrammemsStr());
 			unit.m_iHommonyNum = piClauseVariant->GetUnit(i)->GetActiveHomonymNum();
 			unit.m_iWordNum = piClauseVariant->GetUnit(i)->GetWordNum();
 		}

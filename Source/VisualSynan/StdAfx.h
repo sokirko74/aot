@@ -13,8 +13,6 @@
 #import "../Lemmatizer/Lemmatizer.tlb"
 #import "../graphan/graphan.tlb"
 #include "../common/utilit.h"
+#include "../common/COM/windows_unicode.h"
 #include <tchar.h>
 #include <map>
-extern CString _OUT(BSTR t);
-extern CString _IN(CString s);
-extern std::string WstrToUtf8Str(const std::wstring& wstr);

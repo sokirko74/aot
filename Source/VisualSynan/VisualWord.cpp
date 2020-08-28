@@ -29,7 +29,7 @@ BOOL CVisualWord::Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSen
 {
 	try
 	{
-		m_strWord = _OUT(piWord->GetWordStr());
+		m_strWord = ReadStrFromCOM(piWord->GetWordStr());
 		if (piWord->bDeleted == TRUE)
 			m_strWord = "[" + m_strWord + "]";
 		m_bInTermin = piWord->IsInThesaurusEntry;
@@ -44,9 +44,9 @@ BOOL CVisualWord::Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSen
 			SYNANLib::IHomonymPtr piHomonym = piWord->GetHomonym(i);
 
 			CSynHomonym* pHomonym = new CSynHomonym;
-			pHomonym->m_strLemma = _OUT(piHomonym->GetLemma());
-			pHomonym->m_strCommonGrammems = _OUT(piHomonym->CommonGrammemsStr);
-			pHomonym->m_strPOS = _OUT(piHomonym->GetPOSStr());
+			pHomonym->m_strLemma = ReadStrFromCOM(piHomonym->GetLemma());
+			pHomonym->m_strCommonGrammems = ReadStrFromCOM(piHomonym->CommonGrammemsStr);
+			pHomonym->m_strPOS = ReadStrFromCOM(piHomonym->GetPOSStr());
 
 			
 			
@@ -60,7 +60,7 @@ BOOL CVisualWord::Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSen
 				if (OborotId != -1)
 				{
 					CString str;
-					str.Format(_T("Ob: %s"), _OUT(piSentence->GetOborotStrByOborotId(OborotId)));
+					str.Format(_T("Ob: %s"), ReadStrFromCOM(piSentence->GetOborotStrByOborotId(OborotId)));
 					pHomonym->m_strOborotsNum += str; 
 				};
 			}
@@ -79,7 +79,7 @@ BOOL CVisualWord::Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSen
 				{
 					CString str = ":";
 					int OborotId = piHomonym->GetOborDictIdOfSimplePrep(k);
-					str.Format(_T(" %s"), _OUT(piSentence->GetOborotStrByOborotId(OborotId)));
+					str.Format(_T(" %s"), ReadStrFromCOM(piSentence->GetOborotStrByOborotId(OborotId)));
 					pHomonym->m_strSomeDescr += str; 
 				}
 				pHomonym->m_strSomeDescr += ")"; 
@@ -278,7 +278,7 @@ void CVisualWord::ResetSubjAndPred()
 
 BOOL CVisualWord::GetActiveHomDescr(CString& strLemma,CString& strGramChar)
 {
-	strLemma = _IN( ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strLemma ); 
+	strLemma = ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strLemma; 
 	
 	strGramChar = m_strActiveGrammems;
 	strGramChar = ((CSynHomonym*)m_arrHomonyms.GetAt(m_iActiveHomonym))->m_strCommonGrammems + " "+strGramChar;
@@ -294,7 +294,6 @@ BOOL CVisualWord::GetActiveHomDescr(CString& strLemma,CString& strGramChar)
 	strGramChar += ss;
 
 	strGramChar += m_strSomeDescr;
-	strGramChar = _IN(strGramChar);
 	return TRUE;
 }
 
