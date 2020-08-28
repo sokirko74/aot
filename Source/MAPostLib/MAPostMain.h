@@ -69,6 +69,7 @@ class CMAPost  : public CPostMorphInteface
 	std::string          m_DURNOVOGramCode;
 	std::list<CPostLemWord>	m_Words;
     
+	bool is_russian_numeral( std::string& word) const;
 
 public:
 	CMAPost();
@@ -83,7 +84,6 @@ public:
     CLineIter PassSpaces(CLineIter it);
     CLineIter BackSpaces(CLineIter it);
     CLineIter NextNotSpace(CLineIter it);
-
 
 protected:
 	const CLemmatizer*			m_pRusLemmatizer;
