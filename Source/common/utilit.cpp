@@ -2516,6 +2516,8 @@ void CTestCaseBase::write_test_cases(std::ostream& outp) const {
 }
 
 
+#if __cplusplus > 201402L
+
 // "c:/*.txt" -> c:/a.txt, c:/b.txt
 std::vector<std::string> list_path_by_file_mask(std::string filemask)
 {
@@ -2540,3 +2542,4 @@ std::string join_string(const std::vector<std::string>& items, const std::string
 	}
 	return result;
 }
+#endif

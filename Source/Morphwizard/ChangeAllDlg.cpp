@@ -99,7 +99,7 @@ void CChangeAllDlg::updateParadigmList()
 				m_found_paradigms[i]->second.m_AccentModelNo);
 		m_list.InsertItem(count,s);
 
-		std::string Lemma = m_wizard.get_lemm_std::string(m_found_paradigms[i]);
+		std::string Lemma = m_wizard.get_lemm_string(m_found_paradigms[i]);
 		std::string PrefixSet = m_wizard.get_prefix_set( m_found_paradigms[i] );
 		if (!PrefixSet.empty())
 			Lemma = PrefixSet+'|'+Lemma;

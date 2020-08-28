@@ -152,6 +152,7 @@ IF (MSVC)
         #must be compiled 32bit, since we have only 32-bit tcl80.lib
         if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
             add_subdirectory (RossDev)
+            add_subdirectory (Morphwizard)
         endif()
     endif()
 

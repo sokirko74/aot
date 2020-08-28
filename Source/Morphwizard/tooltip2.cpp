@@ -69,10 +69,12 @@ BOOL CToolTip2::Show(const CPoint& rCurrentPoint)
 //Close the tooltip
 void CToolTip2::Close()
 {
-	ASSERT(this != NULL );
-	ASSERT(m_hWnd != NULL );
+	if (m_hWnd) {
+		ASSERT(this != NULL);
+		ASSERT(m_hWnd != NULL);
 
-	ShowWindow(SW_HIDE); //Hide tooltip
+		ShowWindow(SW_HIDE); //Hide tooltip
+	}
 	m_bShowStatus = FALSE;
 }
 

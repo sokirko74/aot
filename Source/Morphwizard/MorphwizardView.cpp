@@ -376,7 +376,7 @@ void CMorphwizardView::ShowFoundParadigms()
 
 		m_FoundList.InsertItem(i, s.c_str() );
 
-		std::string Lemma = GetWizard()->get_lemm_std::string_with_accents(found_paradigms[i]);
+		std::string Lemma = GetWizard()->get_lemm_string_with_accents(found_paradigms[i]);
 		std::string PrefixSet = GetWizard()->get_prefix_set( found_paradigms[i] );
 		if (!PrefixSet.empty())
 			Lemma = PrefixSet+'|'+Lemma;
@@ -386,7 +386,7 @@ void CMorphwizardView::ShowFoundParadigms()
 		s = GetWizard()->get_pos_string(found_paradigms[i]) + " " + GetWizard()->get_grammem_string(found_paradigms[i]);
 		m_FoundList.SetItemText(i, FindGrammemsColumn, s.c_str());
 			
-		s = GetWizard()->get_common_grammems_std::string(found_paradigms[i]);
+		s = GetWizard()->get_common_grammems_string(found_paradigms[i]);
 		m_FoundList.SetItemText(i, FindTypeGrammemsColumn, s.c_str());
 
 		m_FoundList.m_ToolTips.push_back(GetWizard()->m_FlexiaModels[FlexiaModelNo].m_Comments);
@@ -500,7 +500,7 @@ void CMorphwizardView::OnRemove()
 }
 
 
-class IsLessForPredict : public binary_function<bool, const size_t&, const size_t&> 
+class IsLessForPredict  
 {
 	
 	CMorphwizardView* m_pView;
@@ -519,8 +519,8 @@ public:
 		{
 			case PredictGrammemsColumn: 
 				{
-					std::string s1 = W->get_pos_std::string_and_grammems(S1.m_SourceLemmaAncode);
-					std::string s2 = W->get_pos_std::string_and_grammems(S2.m_SourceLemmaAncode);
+					std::string s1 = W->get_pos_string_and_grammems(S1.m_SourceLemmaAncode);
+					std::string s2 = W->get_pos_string_and_grammems(S2.m_SourceLemmaAncode);
 					if ( s1 == s2) return S1.m_Frequence > S2.m_Frequence;
 					else
 						return s1 < s2;
@@ -602,7 +602,7 @@ void CMorphwizardView::OnPredict()
 			const CPredictSuffix& S = *GetWizard()->m_CurrentPredictedParadigms[ind];
 			const CFlexiaModel& P = GetWizard()->m_FlexiaModels[S.m_FlexiaModelNo];
 
-			m_PredictedList.InsertItem(i, GetWizard()->get_pos_std::string_and_grammems(S.m_SourceLemmaAncode).c_str() );
+			m_PredictedList.InsertItem(i, GetWizard()->get_pos_string_and_grammems(S.m_SourceLemmaAncode).c_str() );
 			m_PredictedList.SetItemText(i, PredictTypeDictColumn, GetWizard()->get_grammem_string(S.m_SourceCommonAncode).c_str());
 			m_PredictedList.SetItemText(i, PredictLemmaColumn, S.m_SourceLemma.c_str());
 			m_PredictedList.SetItemText(i, PredictFreqColumnNo, Format("%i", S.m_Frequence).c_str());
@@ -675,7 +675,7 @@ bool CMorphwizardView::OpenExistingParadigm( lemma_iterator_t it, bool bRunAccen
 			return false;
 
 		std::string save_common_grammems, save_slf, save_prefixes;
-		save_slf = GetWizard()->get_slf_std::string(it, save_common_grammems, save_prefixes, 50);
+		save_slf = GetWizard()->get_slf_string(it, save_common_grammems, save_prefixes, 50);
 
 		CSLFDocument* pDocument = NewSLFDocument();
 		pDocument->m_Paradigm = it->second;
@@ -722,7 +722,7 @@ void CMorphwizardView::OnToolsSaveListFile()
 
 	for( int i=0; i<found_paradigms.size(); i++ )
 	{
-		std::string lemma = GetWizard()->get_lemm_std::string_with_accents(found_paradigms[i]);
+		std::string lemma = GetWizard()->get_lemm_string_with_accents(found_paradigms[i]);
 		std::string PrefixSet = GetWizard()->get_prefix_set( found_paradigms[i] );
 		if (!PrefixSet.empty())
 			lemma = PrefixSet+'|'+lemma;
@@ -806,7 +806,7 @@ void CMorphwizardView::OnToolsExport()
 		for  (long i=0;  i <found_paradigms.size(); i++) 
 		{
 			CDumpParadigm P;
-			P.m_SlfStr = GetWizard()->get_slf_std::string(found_paradigms[i], P.m_TypeGrammemsStr, P.m_PrefixesStr, 50);
+			P.m_SlfStr = GetWizard()->get_slf_string(found_paradigms[i], P.m_TypeGrammemsStr, P.m_PrefixesStr, 50);
 			
 			if (found_paradigms[i]->second.m_PrefixSetNo != UnknownPrefixSetNo)
 				P.m_PrefixesStr = GetWizard()->get_prefix_set(found_paradigms[i]);
@@ -1191,7 +1191,7 @@ void CMorphwizardView::OnToolsSetParaNo()
 
 		
 		std::string new_flexia = new_par.get_first_flex();
-		std::string lemma = GetWizard()->get_lemm_std::string(found_paradigms[i]);
+		std::string lemma = GetWizard()->get_lemm_string(found_paradigms[i]);
 		std::string lemma_suffix = lemma.substr(lemma.length() - new_flexia.length());
 
 		if (new_flexia == lemma_suffix)

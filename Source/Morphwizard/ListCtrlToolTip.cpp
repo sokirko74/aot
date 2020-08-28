@@ -70,9 +70,9 @@ void CListCtrlToolTip::ShowToolTip(CPoint point)
 	
 }
 
-void CListCtrlToolTip::SetToolTipText(LPCTSTR std::string, CPoint point)
+void CListCtrlToolTip::SetToolTipText(LPCTSTR string, CPoint point)
 {
-	m_strToolTipText = std::string;
+	m_strToolTipText = string;
 
 	ShowToolTip(point);
 }

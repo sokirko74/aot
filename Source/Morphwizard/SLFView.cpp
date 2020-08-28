@@ -656,7 +656,7 @@ void CSLFView::OnBnClickedChangeAll()
 				const CFlexiaModel &old_par = GetWizard()->m_FlexiaModels[found_paradigms[i]->second.m_FlexiaModelNo];
 
 				std::string new_flexia = new_par.get_first_flex();
-				std::string lemma = GetWizard()->get_lemm_std::string(found_paradigms[i]);
+				std::string lemma = GetWizard()->get_lemm_string(found_paradigms[i]);
 				std::string lemma_suffix = lemma.substr(lemma.length() - new_flexia.length());
 
 				if (new_flexia == lemma_suffix)

@@ -15,6 +15,11 @@
 
 #include "assert.h"
 
+template <class _Ty>
+const _Ty& my_max(const _Ty& _Left, const _Ty& _Right) {
+	return _Left < _Right ? _Right : _Left;
+}
+
 //----------------------------------------------------------------------------
 // COperationMeter abstract class
 //----------------------------------------------------------------------------
@@ -67,13 +72,14 @@ public:
 
 	void SetStep( DWORD step = 0)
 	{
-		m_step = (step==0 || step>=m_maxPos) ? std::max(m_maxPos/50,(DWORD)1) : step;
+		auto a = my_max(m_maxPos / 50, (DWORD)1);
+		m_step = (step==0 || step>=m_maxPos) ? a : step;
 	}
 
 	void SetStepCount( DWORD count )
 	{
 		assert(count>0);
-		m_step = std::max(m_maxPos/count,(DWORD)1);
+		m_step = my_max(m_maxPos/count,(DWORD)1);
 	}
 
 	bool AddPos( DWORD pos  = 1)

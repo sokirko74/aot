@@ -12,6 +12,7 @@ Hinweis: © 2001 by Christian Rodemeyer
 #include <AFXPRIV.H>
 #include <algorithm>
 #include <vector>
+#include <Winuser.h>
 
 #ifdef DETECT_MEMORY_LEAK
 #define new DEBUG_NEW

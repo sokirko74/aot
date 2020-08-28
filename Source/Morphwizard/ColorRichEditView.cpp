@@ -286,7 +286,7 @@ CString CColorRichEditView::GetText() const
 	SP.m_pBuffer = new char[TextLen*2];
 	EDITSTREAM es;
 	es.dwCookie = (DWORD) &SP;
-	es.pfnCallback = MyStreamOutCallback; 
+	es.pfnCallback = (EDITSTREAMCALLBACK) MyStreamOutCallback;
 	GetRichEditCtrl().StreamOut(SF_TEXT|SF_UNICODE, es);
 	char* buf = new char[TextLen+1];
 	if (!WideCharToMultiByte(GetCodePage(), 0, (WCHAR*)SP.m_pBuffer, TextLen, buf, TextLen, NULL, NULL))
@@ -322,7 +322,7 @@ void  CColorRichEditView::SetText(const CString& S)
 	SP.m_Position = 0;
 	EDITSTREAM es;
 	es.dwCookie = (DWORD) &SP;
-	es.pfnCallback = MyStreamInCallback; 
+	es.pfnCallback = (EDITSTREAMCALLBACK)MyStreamInCallback;
 	SP.m_BufferLength *= 2;
 	GetRichEditCtrl().StreamIn(SF_TEXT|SF_UNICODE, es);
 };
