@@ -22,12 +22,16 @@ std::string FindByNumber(QWORD Number)
 	return "";
 };
 
-std::string FindByNumber(QWORD Number, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
+std::string FindByNumber(QWORD Number, NumberFormEnum formType)
 {
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
-		if( Number == NumeralToNumber[i].m_Number)
-			return IsOrdinal == 0 ? NumeralToNumber[i].m_Cardinal :
-				   IsOrdinal == 1 ? NumeralToNumber[i].m_Ordinal : NumeralToNumber[i].m_GenitForm;
+		if (Number == NumeralToNumber[i].m_Number) {
+			switch (formType) {
+				case nfeCardinal: return NumeralToNumber[i].m_Cardinal;	
+				case nfeOridnal: return NumeralToNumber[i].m_Ordinal;
+				case nfeGenitiv: return NumeralToNumber[i].m_GenitForm;
+			}
+		}
 	return "";
 };
 
@@ -66,57 +70,60 @@ double GetNounNumeral(const std::string& word)
 	return -1;
 };
 
-std::string spellout_number_ru(QWORD x, BYTE IsOrdinal) // 0 - no , 1 - yes, 10 - yes, for thousands
+// не используется пока
+std::string spellout_number_ru(QWORD x,  NumberFormEnum formType)
 {	 
-	if (x == 0) return IsOrdinal ? _R("НУЛЕВОЙ") : _R("НОЛЬ");
+	if (x == 0) 
+		return formType == nfeCardinal ? _R("НОЛЬ")  : _R("НУЛЕВОЙ");
 	if (x < 20)
-		return FindByNumber(x, IsOrdinal);
+		return FindByNumber(x, formType);
 	if (x < 100) {
 		if (x % 10 == 0)
-			return FindByNumber(x, IsOrdinal);
+			return FindByNumber(x, formType);
 		else
-			return FindByNumber((x / 10)*10) + " " + FindByNumber(x % 10, IsOrdinal);
+			return FindByNumber((x / 10)*10) + " " + FindByNumber(x % 10, formType);
 	}
 	if (x < 1000) {
 		if (x % 100 == 0)
-			return FindByNumber(x, IsOrdinal);
+			return FindByNumber(x, formType);
 		else
-			return FindByNumber(x / 100 * 100) + " " + spellout_number_ru(x % 100, IsOrdinal);
+			return FindByNumber(x / 100 * 100) + " " + spellout_number_ru(x % 100, formType);
 	}
 	if (x < 1000000) {
 		if (x % 1000 == 0)
 			if (x % 10000 == 1000 && (x % 100000) / 10000 != 1) {
-				std::string s1 = (x % 1000000 != 1000 ? spellout_number_ru((x / 10000) * 10, IsOrdinal * 10) + " " : "");
-				std::string s2 = (IsOrdinal == 0 ? _R("ОДНА ТЫСЯЧА") : _R("ОДНОТЫСЯЧНЫЙ"));
+				std::string s1 = (x % 1000000 != 1000 ? spellout_number_ru((x / 10000) * 10, nfeGenitiv) + " " : "");
+				std::string s2 = (formType == nfeCardinal ? _R("ОДНА ТЫСЯЧА") : _R("ОДНОТЫСЯЧНЫЙ"));
 				return s1 + s2;
 			}
 			else
-			if (IsOrdinal==0)
+			if (formType == nfeCardinal)
 				if ( x % 10000 != 0 && x % 10000 < 5000 && (x % 100000)/10000 != 1) 
-					return (x % 10000 == 2000 ? (x % 1000000 != 2000 ? spellout_number_ru((x / 10000)*10, IsOrdinal) + " " : "") + _R("ДВЕ") : 
-					spellout_number_ru(x / 1000, IsOrdinal)) + _R(" ТЫСЯЧИ");
-				else return spellout_number_ru(x / 1000, IsOrdinal) + _R(" ТЫСЯЧ");
-			else return spellout_number_ru(x / 1000 , IsOrdinal*10) + _R("ТЫСЯЧНЫЙ");
+					return (x % 10000 == 2000 ? (x % 1000000 != 2000 ? spellout_number_ru((x / 10000)*10, formType) + " " : "") + _R("ДВЕ") :
+					spellout_number_ru(x / 1000, formType)) + _R(" ТЫСЯЧИ");
+				else return spellout_number_ru(x / 1000, formType) + _R(" ТЫСЯЧ");
+			else 
+				return spellout_number_ru(x / 1000 , nfeGenitiv) + _R("ТЫСЯЧНЫЙ");
 		else
-			return spellout_number_ru((x / 1000) * 1000, 0) + " " +
-						spellout_number_ru(x % 1000, IsOrdinal);
+			return spellout_number_ru((x / 1000) * 1000, nfeCardinal) + " " +
+						spellout_number_ru(x % 1000, formType);
 	}
 	for(int p=2; p<6; p++)
 	if (x < 1000*pow(1000,p)) {
 		QWORD Q = pow(1000,p);
 		std::string m = FindByNumber(Q);
 		if (x % Q == 0)
-			if ( x % (10*Q) == Q ) return spellout_number_ru(x / Q , IsOrdinal*10) + 
-				(IsOrdinal==0 ? " " + m : m + _R("НЫЙ"));
+			if ( x % (10*Q) == Q ) return spellout_number_ru(x / Q , nfeGenitiv) +
+				(formType == nfeCardinal ? " " + m : m + _R("НЫЙ"));
 			else
-			if (IsOrdinal==0)
+			if (formType  == nfeCardinal)
 				if ( x % (10*Q) != 0 && x % (10*Q) < 5*Q && (x % (100*Q))/(10*Q) != 1) 
-					return  spellout_number_ru(x / Q, IsOrdinal) + " " + m + _R("А"); //МИЛЛИОНА
-				else return spellout_number_ru(x / Q, IsOrdinal) + " " + m + _R("ОВ"); //МИЛЛИОНОВ
-			else return spellout_number_ru(x / Q , IsOrdinal*10) + m + _R("НЫЙ"); //МИЛЛИОНЫЙ
+					return  spellout_number_ru(x / Q, formType) + " " + m + _R("А"); //МИЛЛИОНА
+				else return spellout_number_ru(x / Q, formType) + " " + m + _R("ОВ"); //МИЛЛИОНОВ
+			else return spellout_number_ru(x / Q , nfeGenitiv) + m + _R("НЫЙ"); //МИЛЛИОНЫЙ
 		else
-			return spellout_number_ru((x / Q) * Q, 0) + " " +
-						spellout_number_ru(x % Q, IsOrdinal);
+			return spellout_number_ru((x / Q) * Q, nfeCardinal) + " " +
+						spellout_number_ru(x % Q, formType);
 	}
 	#ifdef WIN32
 		return Format("%I64i", x);

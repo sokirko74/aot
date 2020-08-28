@@ -1,6 +1,12 @@
 #pragma once
 #include  "utilit.h"
 
+enum NumberFormEnum {
+	nfeCardinal = 0,
+	nfeOridnal = 1,
+	nfeGenitiv = 2
+};
+
 struct CNumeralToNumber
 {
 	std::string	m_Cardinal; // _"два"
@@ -70,5 +76,4 @@ extern int IsAdverbRule(const std::string& Lemma);
 extern double GetCardinalNumeral(const std::string& word);
 extern double GetOrdinalNumeral(const std::string& word);
 extern double GetNounNumeral(const std::string& word);
-extern std::string spellout_number_ru(QWORD x, BYTE IsOrdinal); // 0 - no , 1 - yes, 10 - yes, for thousands
-
+extern std::string spellout_number_ru(QWORD x, NumberFormEnum formType);

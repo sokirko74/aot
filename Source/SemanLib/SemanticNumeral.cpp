@@ -243,7 +243,7 @@ static bool ConvertOneWordOrdinalNumeral(const std::string& InputOrdinal, string
 	if (Word == InputOrdinal) {
 		return false;
 	}
-	QWORD lastRes = GetOrdinalNumeral(Word);
+	double lastRes = GetOrdinalNumeral(Word);
 	if (lastRes >= 1000)  //"тысячный" или "миллионный"
 		result = IntToStr(PrefixNumber * lastRes);
 	else
