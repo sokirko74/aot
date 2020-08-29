@@ -111,73 +111,61 @@
                 {
                     "name": "",
                     "source": {
-                        "node_id": 1,
                         "words": "MUA: И"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 0,
                         "words": "ЗОЛОТО"
                     }
                 },
                 {
                     "name": "",
                     "source": {
-                        "node_id": 1,
                         "words": "MUA: И"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 2,
                         "words": "СЕРЕБРО"
                     }
                 },
                 {
                     "name": "",
                     "source": {
-                        "node_id": 4,
                         "words": "MUA: И"
                     },
                     "syntax_rel": "ОДНОР_ПРИЛ",
                     "target": {
-                        "node_id": 3,
                         "words": "КРАСИВЕЕ"
                     }
                 },
                 {
                     "name": "",
                     "source": {
-                        "node_id": 4,
                         "words": "MUA: И"
                     },
                     "syntax_rel": "ОДНОР_ПРИЛ",
                     "target": {
-                        "node_id": 5,
                         "words": "MUA: ДОРОЖЕ"
                     }
                 },
                 {
                     "name": "",
                     "source": {
-                        "node_id": 5,
                         "words": "MUA: ДОРОЖЕ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 1,
-                        "words": "MUA: И"
-                    }
-                },
-                {
-                    "name": "",
-                    "source": {
-                        "node_id": 5,
-                        "words": "MUA: ДОРОЖЕ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 6,
                         "words": "БРОНЗЫ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "words": "MUA: ДОРОЖЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "MUA: И"
                     }
                 }
             ]
@@ -265,49 +253,41 @@
                 {
                     "name": "SUB",
                     "source": {
-                        "node_id": 1,
                         "words": "ЛЮБЛЮ"
                     },
                     "syntax_rel": "подл",
                     "target": {
-                        "node_id": 0,
                         "words": "Я"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "words": "MUA: БОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "ВАСЮ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "words": "MUA: БОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "ПЕТЮ"
                     }
                 },
                 {
                     "name": "CONTEN",
                     "source": {
-                        "node_id": 1,
                         "words": "ЛЮБЛЮ"
                     },
                     "syntax_rel": "п_доп",
                     "target": {
-                        "node_id": 3,
                         "words": "MUA: БОЛЬШЕ"
-                    }
-                },
-                {
-                    "name": "",
-                    "source": {
-                        "node_id": 3,
-                        "words": "MUA: БОЛЬШЕ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 2,
-                        "words": "ПЕТЮ"
-                    }
-                },
-                {
-                    "name": "",
-                    "source": {
-                        "node_id": 3,
-                        "words": "MUA: БОЛЬШЕ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 4,
-                        "words": "ВАСЮ"
                     }
                 }
             ]
@@ -405,63 +385,53 @@
             ],
             "relations": [
                 {
-                    "name": "AGENT",
-                    "source": {
-                        "node_id": 1,
-                        "words": "ПЕЛ"
-                    },
-                    "syntax_rel": "подл",
-                    "target": {
-                        "node_id": 4,
-                        "words": "MUA: ДОЛЬШЕ"
-                    }
-                },
-                {
                     "name": "QUANTIT",
                     "source": {
-                        "node_id": 3,
                         "words": "РАЗА"
                     },
                     "syntax_rel": "ЧИСЛ_СУЩ",
                     "target": {
-                        "node_id": 2,
                         "words": "2"
-                    }
-                },
-                {
-                    "name": "",
-                    "source": {
-                        "node_id": 4,
-                        "words": "MUA: ДОЛЬШЕ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 0,
-                        "words": "Я"
                     }
                 },
                 {
                     "name": "VALUE",
                     "source": {
-                        "node_id": 4,
                         "words": "MUA: ДОЛЬШЕ"
                     },
                     "syntax_rel": "к_доп",
                     "target": {
-                        "node_id": 3,
                         "words": "РАЗА"
                     }
                 },
                 {
                     "name": "",
                     "source": {
-                        "node_id": 4,
                         "words": "MUA: ДОЛЬШЕ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 5,
                         "words": "ТЕБЯ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "words": "MUA: ДОЛЬШЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "Я"
+                    }
+                },
+                {
+                    "name": "AGENT",
+                    "source": {
+                        "words": "ПЕЛ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "words": "MUA: ДОЛЬШЕ"
                     }
                 }
             ]
@@ -577,75 +547,63 @@
             ],
             "relations": [
                 {
+                    "name": "",
+                    "source": {
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "АССИГНОВАНИЯ"
+                    }
+                },
+                {
+                    "name": "",
+                    "source": {
+                        "words": "MUA: И"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "ГРАНТЫ"
+                    }
+                },
+                {
+                    "name": "QUANTIT",
+                    "source": {
+                        "words": "РАЗА"
+                    },
+                    "syntax_rel": "ЧИСЛ_СУЩ",
+                    "target": {
+                        "words": "2"
+                    }
+                },
+                {
                     "name": "PROPERT",
                     "source": {
-                        "node_id": 1,
                         "words": "АССИГНОВАНИЯ"
                     },
                     "syntax_rel": "ПРИЛ_СУЩ",
                     "target": {
-                        "node_id": 0,
                         "words": "БЮДЖЕТНЫЕ"
                     }
                 },
                 {
                     "name": "",
                     "source": {
-                        "node_id": 2,
-                        "words": "MUA: И"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 1,
-                        "words": "АССИГНОВАНИЯ"
-                    }
-                },
-                {
-                    "name": "",
-                    "source": {
-                        "node_id": 2,
-                        "words": "MUA: И"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 3,
-                        "words": "ГРАНТЫ"
-                    }
-                },
-                {
-                    "name": "",
-                    "source": {
-                        "node_id": 4,
                         "words": "MUA: БУДУТ-БОЛЬШЕ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 2,
-                        "words": "MUA: И"
+                        "words": "РАЗА"
                     }
                 },
                 {
                     "name": "",
                     "source": {
-                        "node_id": 4,
                         "words": "MUA: БУДУТ-БОЛЬШЕ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 6,
-                        "words": "РАЗА"
-                    }
-                },
-                {
-                    "name": "QUANTIT",
-                    "source": {
-                        "node_id": 6,
-                        "words": "РАЗА"
-                    },
-                    "syntax_rel": "ЧИСЛ_СУЩ",
-                    "target": {
-                        "node_id": 5,
-                        "words": "2"
+                        "words": "MUA: И"
                     }
                 }
             ]

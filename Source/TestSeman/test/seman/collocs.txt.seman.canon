@@ -100,61 +100,51 @@
                 {
                     "name": "PROPERT",
                     "source": {
-                        "node_id": 2,
                         "words": "ПРИЕЗДОМ"
                     },
                     "syntax_rel": "ПРИЛ_СУЩ",
                     "target": {
-                        "node_id": 0,
                         "words": "СВОИМ"
                     }
                 },
                 {
                     "name": "PROPERT",
                     "source": {
-                        "node_id": 2,
                         "words": "ПРИЕЗДОМ"
                     },
                     "syntax_rel": "ПРИЛ_СУЩ",
                     "target": {
-                        "node_id": 1,
                         "words": "НЕОЖИДАННЫМ"
-                    }
-                },
-                {
-                    "name": "METHOD",
-                    "source": {
-                        "node_id": 4,
-                        "words": "ЗАСТАЛ ВРАСПЛОХ"
-                    },
-                    "syntax_rel": "к_доп",
-                    "target": {
-                        "node_id": 2,
-                        "words": "ПРИЕЗДОМ"
                     }
                 },
                 {
                     "name": "SUB",
                     "source": {
-                        "node_id": 4,
                         "words": "ЗАСТАЛ ВРАСПЛОХ"
                     },
                     "syntax_rel": "подл",
                     "target": {
-                        "node_id": 3,
                         "words": "ОН"
                     }
                 },
                 {
                     "name": "OBJ",
                     "source": {
-                        "node_id": 4,
                         "words": "ЗАСТАЛ ВРАСПЛОХ"
                     },
                     "syntax_rel": "п_доп",
                     "target": {
-                        "node_id": 5,
                         "words": "МЕНЯ"
+                    }
+                },
+                {
+                    "name": "METHOD",
+                    "source": {
+                        "words": "ЗАСТАЛ ВРАСПЛОХ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "words": "ПРИЕЗДОМ"
                     }
                 }
             ]
@@ -299,85 +289,71 @@
                 {
                     "name": "PROPERT",
                     "source": {
-                        "node_id": 1,
                         "words": "ПОГОДА"
                     },
                     "syntax_rel": "ПРИЛ_СУЩ",
                     "target": {
-                        "node_id": 0,
                         "words": "ПЛОХАЯ"
                     }
                 },
                 {
                     "name": "SUB",
                     "source": {
-                        "node_id": 2,
                         "words": "СВЕЛА НА НЕТ"
                     },
                     "syntax_rel": "подл",
                     "target": {
-                        "node_id": 1,
                         "words": "ПОГОДА"
                     }
                 },
                 {
                     "name": "CONTEN",
                     "source": {
-                        "node_id": 2,
                         "words": "СВЕЛА НА НЕТ"
                     },
                     "syntax_rel": "п_доп",
                     "target": {
-                        "node_id": 4,
                         "words": "ПРЕИМУЩЕСТВА"
                     }
                 },
                 {
                     "name": "PROPERT",
                     "source": {
-                        "node_id": 4,
                         "words": "ПРЕИМУЩЕСТВА"
                     },
                     "syntax_rel": "ПРИЛ_СУЩ",
                     "target": {
-                        "node_id": 3,
                         "words": "ВСЕ"
-                    }
-                },
-                {
-                    "name": "THESAME",
-                    "source": {
-                        "node_id": 5,
-                        "words": "КОТОРЫЕ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 4,
-                        "words": "ПРЕИМУЩЕСТВА"
-                    }
-                },
-                {
-                    "name": "S-ACT",
-                    "source": {
-                        "node_id": 7,
-                        "words": "БЫЛИ"
-                    },
-                    "syntax_rel": "подл",
-                    "target": {
-                        "node_id": 5,
-                        "words": "КОТОРЫЕ"
                     }
                 },
                 {
                     "name": "F-ACT",
                     "source": {
-                        "node_id": 7,
                         "words": "БЫЛИ"
                     },
                     "syntax_rel": "к_доп",
                     "target": {
-                        "node_id": 6,
                         "words": "НАС"
+                    }
+                },
+                {
+                    "name": "S-ACT",
+                    "source": {
+                        "words": "БЫЛИ"
+                    },
+                    "syntax_rel": "подл",
+                    "target": {
+                        "words": "КОТОРЫЕ"
+                    }
+                },
+                {
+                    "name": "THESAME",
+                    "source": {
+                        "words": "КОТОРЫЕ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "ПРЕИМУЩЕСТВА"
                     }
                 }
             ]
@@ -391,12 +367,10 @@
                 {
                     "name": "SUB",
                     "source": {
-                        "node_id": 2,
                         "words": "СКАЗАТЬ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 0,
                         "words": "КОГО"
                     }
                 }
@@ -483,63 +457,53 @@
             ],
             "relations": [
                 {
-                    "name": "SUB",
-                    "source": {
-                        "node_id": 1,
-                        "words": "ХВАТИЛО ДУХУ (НЕ)"
-                    },
-                    "syntax_rel": "к_доп",
-                    "target": {
-                        "node_id": 0,
-                        "words": "КОГО"
-                    }
-                },
-                {
-                    "name": "CONTEN",
-                    "source": {
-                        "node_id": 1,
-                        "words": "ХВАТИЛО ДУХУ (НЕ)"
-                    },
-                    "syntax_rel": "к_доп",
-                    "target": {
-                        "node_id": 2,
-                        "words": "СКАЗАТЬ"
-                    }
-                },
-                {
-                    "name": "SUB",
-                    "source": {
-                        "node_id": 2,
-                        "words": "СКАЗАТЬ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 0,
-                        "words": "КОГО"
-                    }
-                },
-                {
                     "name": "ADR",
                     "source": {
-                        "node_id": 2,
                         "words": "СКАЗАТЬ"
                     },
                     "syntax_rel": "к_доп",
                     "target": {
-                        "node_id": 3,
                         "words": "ЕМУ"
                     }
                 },
                 {
                     "name": "THEME",
                     "source": {
-                        "node_id": 2,
                         "words": "СКАЗАТЬ"
                     },
                     "syntax_rel": "к_доп",
                     "target": {
-                        "node_id": 4,
                         "words": "ЭТОМ"
+                    }
+                },
+                {
+                    "name": "SUB",
+                    "source": {
+                        "words": "ХВАТИЛО ДУХУ (НЕ)"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "words": "КОГО"
+                    }
+                },
+                {
+                    "name": "CONTEN",
+                    "source": {
+                        "words": "ХВАТИЛО ДУХУ (НЕ)"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "words": "СКАЗАТЬ"
+                    }
+                },
+                {
+                    "name": "SUB",
+                    "source": {
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "КОГО"
                     }
                 }
             ]
@@ -553,12 +517,10 @@
                 {
                     "name": "SUB",
                     "source": {
-                        "node_id": 2,
                         "words": "ПОПЫТАТЬ СЧАСТЬЯ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 0,
                         "words": "ОН"
                     }
                 }
@@ -632,49 +594,41 @@
                 {
                     "name": "AGENT",
                     "source": {
-                        "node_id": 1,
                         "words": "ОТПРАВЛЯЕТСЯ"
                     },
                     "syntax_rel": "подл",
                     "target": {
-                        "node_id": 0,
                         "words": "ОН"
                     }
                 },
                 {
                     "name": "AIM",
                     "source": {
-                        "node_id": 1,
                         "words": "ОТПРАВЛЯЕТСЯ"
                     },
                     "syntax_rel": "к_доп",
                     "target": {
-                        "node_id": 2,
                         "words": "ПОПЫТАТЬ СЧАСТЬЯ"
-                    }
-                },
-                {
-                    "name": "SUB",
-                    "source": {
-                        "node_id": 2,
-                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 0,
-                        "words": "ОН"
                     }
                 },
                 {
                     "name": "LOK",
                     "source": {
-                        "node_id": 2,
                         "words": "ПОПЫТАТЬ СЧАСТЬЯ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 3,
                         "words": "ЛОНДОНЕ"
+                    }
+                },
+                {
+                    "name": "SUB",
+                    "source": {
+                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "ОН"
                     }
                 }
             ]

@@ -52,24 +52,20 @@
                 {
                     "name": "SUB",
                     "source": {
-                        "node_id": 1,
                         "words": "МЫЛА"
                     },
                     "syntax_rel": "подл",
                     "target": {
-                        "node_id": 0,
                         "words": "МАМА"
                     }
                 },
                 {
                     "name": "OBJ",
                     "source": {
-                        "node_id": 1,
                         "words": "МЫЛА"
                     },
                     "syntax_rel": "п_доп",
                     "target": {
-                        "node_id": 2,
                         "words": "РАМУ"
                     }
                 }
@@ -188,75 +184,63 @@
             ],
             "relations": [
                 {
-                    "name": "TIME",
-                    "source": {
-                        "node_id": 2,
-                        "words": "ВЫШЕЛ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 0,
-                        "words": "ВТОРНИК"
-                    }
-                },
-                {
                     "name": "SUB",
                     "source": {
-                        "node_id": 2,
                         "words": "ВЫШЕЛ"
                     },
                     "syntax_rel": "подл",
                     "target": {
-                        "node_id": 1,
                         "words": "Я"
                     }
                 },
                 {
                     "name": "TRG-PNT",
                     "source": {
-                        "node_id": 2,
                         "words": "ВЫШЕЛ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 3,
                         "words": "ДВОР"
                     }
                 },
                 {
-                    "name": "THESAME",
+                    "name": "TIME",
                     "source": {
-                        "node_id": 4,
-                        "words": "КОТОРЫЙ"
+                        "words": "ВЫШЕЛ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 3,
-                        "words": "ДВОР"
-                    }
-                },
-                {
-                    "name": "CONTEN",
-                    "source": {
-                        "node_id": 6,
-                        "words": "ЛЮБИЛ (НЕ)"
-                    },
-                    "syntax_rel": "п_доп",
-                    "target": {
-                        "node_id": 4,
-                        "words": "КОТОРЫЙ"
+                        "words": "ВТОРНИК"
                     }
                 },
                 {
                     "name": "SUB",
                     "source": {
-                        "node_id": 6,
                         "words": "ЛЮБИЛ (НЕ)"
                     },
                     "syntax_rel": "подл",
                     "target": {
-                        "node_id": 5,
                         "words": "Я"
+                    }
+                },
+                {
+                    "name": "CONTEN",
+                    "source": {
+                        "words": "ЛЮБИЛ (НЕ)"
+                    },
+                    "syntax_rel": "п_доп",
+                    "target": {
+                        "words": "КОТОРЫЙ"
+                    }
+                },
+                {
+                    "name": "THESAME",
+                    "source": {
+                        "words": "КОТОРЫЙ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "words": "ДВОР"
                     }
                 }
             ]

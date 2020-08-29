@@ -80,9 +80,9 @@ struct LessRelation {
     LessRelation(const CRusSemStructure& semStr) : SemStr(semStr) {
     }
     bool operator () (const CRusSemRelation& x1, const CRusSemRelation& x2) const {
-        if (x1.m_SourceNodeNo != x2.m_SourceNodeNo)
-            return x1.m_SourceNodeNo < x2.m_SourceNodeNo;
-        return x1.m_TargetNodeNo < x2.m_TargetNodeNo;
+        auto a1 = x1.m_Valency.m_RelationStr + " " + SemStr.GetNodeStr1(x1.m_SourceNodeNo) + " " + SemStr.GetNodeStr1(x1.m_SourceNodeNo);
+        auto a2 = x1.m_Valency.m_RelationStr + " " + SemStr.GetNodeStr1(x1.m_SourceNodeNo) + " " + SemStr.GetNodeStr1(x1.m_SourceNodeNo);
+        return a1 < a2;
     }
 };
 
@@ -98,12 +98,10 @@ nlohmann::json getRelations(const CRusSemStructure& semStr, const std::vector<CR
             {   "name",  r.m_Valency.m_RelationStr },
             {   "target", {
                     {"words", semStr.GetNodeStr1(targetNodeNo)},
-                    {"node_id", targetNodeNo}
                 }
             },
             {   "source", {
                     {"words", semStr.GetNodeStr1(sourceNodeNo)},
-                    {"node_id", sourceNodeNo}
                 }
             },
             {    "syntax_rel", r.m_SyntacticRelation }
