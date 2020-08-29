@@ -122,6 +122,18 @@
                     }
                 },
                 {
+                    "name": "METHOD",
+                    "source": {
+                        "node_id": 4,
+                        "words": "ЗАСТАЛ ВРАСПЛОХ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 2,
+                        "words": "ПРИЕЗДОМ"
+                    }
+                },
+                {
                     "name": "SUB",
                     "source": {
                         "node_id": 4,
@@ -143,18 +155,6 @@
                     "target": {
                         "node_id": 5,
                         "words": "МЕНЯ"
-                    }
-                },
-                {
-                    "name": "METHOD",
-                    "source": {
-                        "node_id": 4,
-                        "words": "ЗАСТАЛ ВРАСПЛОХ"
-                    },
-                    "syntax_rel": "к_доп",
-                    "target": {
-                        "node_id": 2,
-                        "words": "ПРИЕЗДОМ"
                     }
                 }
             ]
@@ -345,15 +345,15 @@
                     }
                 },
                 {
-                    "name": "F-ACT",
+                    "name": "THESAME",
                     "source": {
-                        "node_id": 7,
-                        "words": "БЫЛИ"
+                        "node_id": 5,
+                        "words": "КОТОРЫЕ"
                     },
-                    "syntax_rel": "к_доп",
+                    "syntax_rel": "",
                     "target": {
-                        "node_id": 6,
-                        "words": "НАС"
+                        "node_id": 4,
+                        "words": "ПРЕИМУЩЕСТВА"
                     }
                 },
                 {
@@ -369,15 +369,15 @@
                     }
                 },
                 {
-                    "name": "THESAME",
+                    "name": "F-ACT",
                     "source": {
-                        "node_id": 5,
-                        "words": "КОТОРЫЕ"
+                        "node_id": 7,
+                        "words": "БЫЛИ"
                     },
-                    "syntax_rel": "",
+                    "syntax_rel": "к_доп",
                     "target": {
-                        "node_id": 4,
-                        "words": "ПРЕИМУЩЕСТВА"
+                        "node_id": 6,
+                        "words": "НАС"
                     }
                 }
             ]
@@ -483,30 +483,6 @@
             ],
             "relations": [
                 {
-                    "name": "ADR",
-                    "source": {
-                        "node_id": 2,
-                        "words": "СКАЗАТЬ"
-                    },
-                    "syntax_rel": "к_доп",
-                    "target": {
-                        "node_id": 3,
-                        "words": "ЕМУ"
-                    }
-                },
-                {
-                    "name": "THEME",
-                    "source": {
-                        "node_id": 2,
-                        "words": "СКАЗАТЬ"
-                    },
-                    "syntax_rel": "к_доп",
-                    "target": {
-                        "node_id": 4,
-                        "words": "ЭТОМ"
-                    }
-                },
-                {
                     "name": "SUB",
                     "source": {
                         "node_id": 1,
@@ -540,6 +516,30 @@
                     "target": {
                         "node_id": 0,
                         "words": "КОГО"
+                    }
+                },
+                {
+                    "name": "ADR",
+                    "source": {
+                        "node_id": 2,
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 3,
+                        "words": "ЕМУ"
+                    }
+                },
+                {
+                    "name": "THEME",
+                    "source": {
+                        "node_id": 2,
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "node_id": 4,
+                        "words": "ЭТОМ"
                     }
                 }
             ]
@@ -654,18 +654,6 @@
                     }
                 },
                 {
-                    "name": "LOK",
-                    "source": {
-                        "node_id": 2,
-                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
-                    },
-                    "syntax_rel": "",
-                    "target": {
-                        "node_id": 3,
-                        "words": "ЛОНДОНЕ"
-                    }
-                },
-                {
                     "name": "SUB",
                     "source": {
                         "node_id": 2,
@@ -675,6 +663,18 @@
                     "target": {
                         "node_id": 0,
                         "words": "ОН"
+                    }
+                },
+                {
+                    "name": "LOK",
+                    "source": {
+                        "node_id": 2,
+                        "words": "ПОПЫТАТЬ СЧАСТЬЯ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 3,
+                        "words": "ЛОНДОНЕ"
                     }
                 }
             ]

@@ -188,6 +188,18 @@
             ],
             "relations": [
                 {
+                    "name": "TIME",
+                    "source": {
+                        "node_id": 2,
+                        "words": "ВЫШЕЛ"
+                    },
+                    "syntax_rel": "",
+                    "target": {
+                        "node_id": 0,
+                        "words": "ВТОРНИК"
+                    }
+                },
+                {
                     "name": "SUB",
                     "source": {
                         "node_id": 2,
@@ -212,27 +224,15 @@
                     }
                 },
                 {
-                    "name": "TIME",
+                    "name": "THESAME",
                     "source": {
-                        "node_id": 2,
-                        "words": "ВЫШЕЛ"
+                        "node_id": 4,
+                        "words": "КОТОРЫЙ"
                     },
                     "syntax_rel": "",
                     "target": {
-                        "node_id": 0,
-                        "words": "ВТОРНИК"
-                    }
-                },
-                {
-                    "name": "SUB",
-                    "source": {
-                        "node_id": 6,
-                        "words": "ЛЮБИЛ (НЕ)"
-                    },
-                    "syntax_rel": "подл",
-                    "target": {
-                        "node_id": 5,
-                        "words": "Я"
+                        "node_id": 3,
+                        "words": "ДВОР"
                     }
                 },
                 {
@@ -248,15 +248,15 @@
                     }
                 },
                 {
-                    "name": "THESAME",
+                    "name": "SUB",
                     "source": {
-                        "node_id": 4,
-                        "words": "КОТОРЫЙ"
+                        "node_id": 6,
+                        "words": "ЛЮБИЛ (НЕ)"
                     },
-                    "syntax_rel": "",
+                    "syntax_rel": "подл",
                     "target": {
-                        "node_id": 3,
-                        "words": "ДВОР"
+                        "node_id": 5,
+                        "words": "Я"
                     }
                 }
             ]

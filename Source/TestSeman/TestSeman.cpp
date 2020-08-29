@@ -1,4 +1,4 @@
-#include "../SemanLib/SemStructureBuilder.h"
+#include "../SemanLib/semStructureBuilder.h"
 #include "../common/argparse.h"
 #include "../SemanLib/VisualGraph.h"
 #include "../common/json.h"
@@ -10,14 +10,14 @@ void MyGlobalErrorMessage(const std::string &s) {
 
 }
 
-std::string GetGramInfo(const CRusSemStructure& SS, poses_mask_t Poses, QWORD Grammems) {
+std::string GetGramInfo(const CRusSemStructure& semStr, poses_mask_t Poses, QWORD Grammems) {
     std::string Result;
     for (size_t i = 0; i < sizeof(Poses) * 8; i++)
         if ((1 << i) & Poses) {
-            Result += (const char *) SS.m_pData->GetRusGramTab()->GetPartOfSpeechStr(i);
+            Result += (const char *) semStr.m_pData->GetRusGramTab()->GetPartOfSpeechStr(i);
             Result += " ";
         }
-    Result += SS.m_pData->GetRusGramTab()->GrammemsToStr(Grammems);
+    Result += semStr.m_pData->GetRusGramTab()->GrammemsToStr(Grammems);
     return Result;
 }
 
@@ -46,31 +46,31 @@ int InitDicts(CSemStructureBuilder& SemBuilder)
 }
 
 
-nlohmann::json getNodeInfo(const CRusSemStructure& SS, int nodeIndex) {
-    const CRusSemNode& Node = SS.m_Nodes[nodeIndex];
+nlohmann::json getNodeInfo(const CRusSemStructure& semStr, int nodeIndex) {
+    const CRusSemNode& Node = semStr.m_Nodes[nodeIndex];
     nlohmann::json words = nlohmann::json::array();
 
     for (auto& w : Node.m_Words) {
         words.push_back({
             {"word", w.m_Word},
             {"lemma", w.m_Lemma},
-            {"inner morph", GetGramInfo(SS, w.m_Poses, w.GetAllGrammems())}
+            {"inner morph", GetGramInfo(semStr, w.m_Poses, w.GetAllGrammems())}
             });
     }
     nlohmann::json res = {
         {"words", words},
         {"index", nodeIndex},
-        {"morph", GetGramInfo(SS, Node.GetNodePoses(), Node.GetGrammems())},
-        {"interps", SS.GetNodeDictInterps(nodeIndex)}
+        {"morph", GetGramInfo(semStr, Node.GetNodePoses(), Node.GetGrammems())},
+        {"interps", semStr.GetNodeDictInterps(nodeIndex)}
     };
     if (Node.m_PrepWordNo >= 0) {
-        res["preposition"] = SS.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord;
+        res["preposition"] = semStr.m_piSent->m_Words[Node.m_PrepWordNo].m_strWord;
     }
     if (!Node.m_AntecedentStr.empty()) {
         res["anteceden"] = Node.m_AntecedentStr;
     }
-    if (Node.m_Words.empty() || Node.m_Words[0].m_Word != SS.GetNodeStr1(nodeIndex)) {
-        res["node_str"] = SS.GetNodeStr1(nodeIndex);
+    if (Node.m_Words.empty() || Node.m_Words[0].m_Word != semStr.GetNodeStr1(nodeIndex)) {
+        res["node_str"] = semStr.GetNodeStr1(nodeIndex);
     }
     return res;
 };
@@ -78,7 +78,6 @@ nlohmann::json getNodeInfo(const CRusSemStructure& SS, int nodeIndex) {
 struct LessRelation {
     const CRusSemStructure& SemStr;
     LessRelation(const CRusSemStructure& semStr) : SemStr(semStr) {
-
     }
     bool operator () (const CRusSemRelation& x1, const CRusSemRelation& x2) const {
         if (x1.m_SourceNodeNo != x2.m_SourceNodeNo)
@@ -87,23 +86,23 @@ struct LessRelation {
     }
 };
 
-nlohmann::json getRelations(const CRusSemStructure& SemStr, const std::vector<CRusSemRelation>& rels) {
+nlohmann::json getRelations(const CRusSemStructure& semStr, const std::vector<CRusSemRelation>& rels) {
     nlohmann::json result = nlohmann::json::array();
     auto sortedRels = rels;
-    sort(sortedRels.begin(), sortedRels.end(), LessRelation(SemStr));
-    for (auto& r : rels) {
+    sort(sortedRels.begin(), sortedRels.end(), LessRelation(semStr));
+    for (auto& r : sortedRels) {
         long targetNodeNo = r.m_Valency.m_Direction == C_A && !r.m_bReverseRel ? r.m_SourceNodeNo : r.m_TargetNodeNo;
         long sourceNodeNo = !(r.m_Valency.m_Direction == C_A && !r.m_bReverseRel) ? r.m_SourceNodeNo
             : r.m_TargetNodeNo;
         nlohmann::json rel = {
             {   "name",  r.m_Valency.m_RelationStr },
             {   "target", {
-                    {"words", SemStr.GetNodeStr1(targetNodeNo)},
+                    {"words", semStr.GetNodeStr1(targetNodeNo)},
                     {"node_id", targetNodeNo}
                 }
             },
             {   "source", {
-                    {"words", SemStr.GetNodeStr1(sourceNodeNo)},
+                    {"words", semStr.GetNodeStr1(sourceNodeNo)},
                     {"node_id", sourceNodeNo}
                 }
             },
@@ -114,19 +113,19 @@ nlohmann::json getRelations(const CRusSemStructure& SemStr, const std::vector<CR
     return result;
 }
 
-nlohmann::json getNodes(const CRusSemStructure& SS) {
+nlohmann::json getNodes(const CRusSemStructure& semStr) {
     auto r = nlohmann::json::array();
-    for (int i = 0; i < SS.m_Nodes.size(); i++) {
-        r.push_back(getNodeInfo(SS, i));
+    for (int i = 0; i < semStr.m_Nodes.size(); i++) {
+        r.push_back(getNodeInfo(semStr, i));
     }
     return r;
 }
 
-nlohmann::json PrintRelationsToText(const CRusSemStructure& SS) {
+nlohmann::json PrintRelationsToText(const CRusSemStructure& semStr) {
     nlohmann::json result = {
-        {"nodes", getNodes(SS)},
-        {"relations", getRelations(SS, SS.m_Relations)},
-        {"aux relations", getRelations(SS, SS.m_DopRelations)}
+        {"nodes", getNodes(semStr)},
+        {"relations", getRelations(semStr, semStr.m_Relations)},
+        {"aux relations", getRelations(semStr, semStr.m_DopRelations)}
     };
     ConvertToUtfRecursive(result, morphRussian);
     return result;
