@@ -21,8 +21,8 @@ extern std::string ArticleStringByType(ArticleEnum t) {
 		case ZeroArticle: return "";
 		case DefArticle: return "the";
 		case IndefArticle: return "a";
-		case UnknownArticle: return "";
 	}
+	return "";
 }
 
 void update_article(const CSemPattern& P, CEngSemNode& N)
