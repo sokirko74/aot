@@ -1,7 +1,7 @@
 [
     {
         "comments": "",
-        "input": "﻿$200 тыс.",
+        "input": "$200 тыс.",
         "result": "Two hundred thousand dollars."
     },
     {

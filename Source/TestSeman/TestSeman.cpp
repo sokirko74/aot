@@ -75,9 +75,22 @@ nlohmann::json getNodeInfo(const CRusSemStructure& SS, int nodeIndex) {
     return res;
 };
 
+struct LessRelation {
+    const CRusSemStructure& SemStr;
+    LessRelation(const CRusSemStructure& semStr) : SemStr(semStr) {
 
-nlohmann::json getRelations(const CRusSemStructure& SS, const std::vector<CRusSemRelation>& rels) {
+    }
+    bool operator () (const CRusSemRelation& x1, const CRusSemRelation& x2) const {
+        if (x1.m_SourceNodeNo != x2.m_SourceNodeNo)
+            return x1.m_SourceNodeNo < x2.m_SourceNodeNo;
+        return x1.m_TargetNodeNo < x2.m_TargetNodeNo;
+    }
+};
+
+nlohmann::json getRelations(const CRusSemStructure& SemStr, const std::vector<CRusSemRelation>& rels) {
     nlohmann::json result = nlohmann::json::array();
+    auto sortedRels = rels;
+    sort(sortedRels.begin(), sortedRels.end(), LessRelation(SemStr));
     for (auto& r : rels) {
         long targetNodeNo = r.m_Valency.m_Direction == C_A && !r.m_bReverseRel ? r.m_SourceNodeNo : r.m_TargetNodeNo;
         long sourceNodeNo = !(r.m_Valency.m_Direction == C_A && !r.m_bReverseRel) ? r.m_SourceNodeNo
@@ -85,12 +98,12 @@ nlohmann::json getRelations(const CRusSemStructure& SS, const std::vector<CRusSe
         nlohmann::json rel = {
             {   "name",  r.m_Valency.m_RelationStr },
             {   "target", {
-                    {"words", SS.GetNodeStr1(targetNodeNo)},
+                    {"words", SemStr.GetNodeStr1(targetNodeNo)},
                     {"node_id", targetNodeNo}
                 }
             },
             {   "source", {
-                    {"words", SS.GetNodeStr1(sourceNodeNo)},
+                    {"words", SemStr.GetNodeStr1(sourceNodeNo)},
                     {"node_id", sourceNodeNo}
                 }
             },
