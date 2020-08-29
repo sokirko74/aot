@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(RusSynanLib)
 
-add_library(RusSynanLib
+add_library(${PROJECT_NAME}
 Adverbs.cpp
 AnalyticalForms.cpp
 BaseRules.cpp
@@ -46,7 +46,8 @@ similar_numerals.cpp
 )
 
 
-target_link_libraries(RusSynanLib
+target_link_libraries(${PROJECT_NAME}
     SynCommonLib
 )
 
+target_precompile_headers(${PROJECT_NAME} PUBLIC StdSynan.h)

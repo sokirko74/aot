@@ -9,7 +9,40 @@
 #include "../RmlThesLib/RmlThesConsts.h"
 #include "../AgramtabLib/EngGramTab.h"
 
+EThesType GetThesTypeByStr(const std::string& strDBName)
+{
+	if (strDBName == "RML_THES_LOC") return LocThes;
+	if (strDBName == "RML_THES_FIN") return FinThes;
+	if (strDBName == "RML_THES_OMNI") return OmniThes;
+	if (strDBName == "RML_THES_COMP") return CompThes;
+	return	NoneThes;
+}
 
+//=======================
+CTermin::CTermin()
+{
+	m_pModel = 0;
+};
+
+bool CTermin::operator<(const CTermin& term) const
+{
+	assert(size() > 0);
+	return strcmp((*this)[0], term[0]) < 0;
+}
+
+std::string CTermin::GetTerminStr() const
+{
+	std::string res;
+	for (int i = 0; i < size(); i++)
+	{
+		res += (*this)[i];
+		res += " ";
+	}
+	return res;
+
+}
+
+//========================
 
 CThesaurusForSyntax::CThesaurusForSyntax(const CSyntaxOpt* Opt)
 {
@@ -24,7 +57,7 @@ CThesaurusForSyntax::~CThesaurusForSyntax()
 		delete m_pEngGramTab;
 };
 
-CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
+CThesaurus* CThesaurusForSyntax::LoadThesaurus(std::string ThesName) const
 {
 	CThesaurus* T = new CThesaurus;
 	if (!T) return 0;
@@ -42,58 +75,26 @@ CThesaurus* CThesaurusForSyntax::LoadThesaurus(const char* ThesName) const
 	return T;
 };
 
-bool CThesaurusForSyntax::ReadThesaurusForSyntax(const char* strDBName, const CThesaurus* Thes, StringHashSet& p_vectorAccost)
+const CTermin& CThesaurusForSyntax::GetTermin(int i) const
 {
-	try
-	{
-
-
-		EThesType eThesType;
-		eThesType = GetThesTypeByStr(strDBName);
-		if (eThesType == NoneThes)
-			return false;
-
-
-
-		if (!strcmp(strDBName, "RML_THES_OMNI"))
-		{
-			try
-			{
-				for (auto i : Thes->QueryLowerTermins("PROF", morphRussian) )
-				{
-					std::string terminStr = Thes->m_Termins[i].m_TerminStr;
-					RmlMakeLower(terminStr, GetOpt()->m_Language);
-					p_vectorAccost.insert(terminStr);
-				};
-			}
-			catch (...)
-			{
-				ErrorMessage("SynAn", "Probably, RMLTHESLib::QueryLowerTermins function failed!");
-			}
-		}
-		//nim
-
-		bool bRes;
-
-
-		bRes = ReadModels(*Thes, eThesType);
-		if (!bRes)
-		{
-			ErrorMessage(Format("Cannot read models for %s", Thes->m_Name.c_str()));
-			return false;
-		};
-
-		bRes = ReadTermins(Thes, eThesType);
-
-		return bRes;
-	}
-	catch (...)
-	{
-		return false;
-	}
-	return false;
+	return m_Termins[i];
 }
 
+const CVectorOfTermins* CThesaurusForSyntax::GetTermins() const
+{
+	return &m_Termins;
+}
+
+
+void CThesaurusForSyntax::ReadThesaurusForSyntax(std::string strDBName, const CThesaurus* Thes)
+{
+	EThesType eThesType;
+	eThesType = GetThesTypeByStr(strDBName);
+	if (eThesType == NoneThes)
+		throw CExpc (Format("%s is unknown thesaurus", strDBName.c_str()));
+	ReadModels(*Thes, eThesType);
+	ReadTermins(Thes, eThesType);
+}
 
 
 void CThesaurusForSyntax::SortIndexes()
@@ -128,7 +129,7 @@ bool CThesaurusForSyntax::ReadOneTermin(const CThesaurus* piThes, const CInnerTe
 	return true;
 }
 
-bool CThesaurusForSyntax::ReadTermins(const CThesaurus* piThes, EThesType eThesType)
+void CThesaurusForSyntax::ReadTermins(const CThesaurus* piThes, EThesType eThesType)
 {
 	const std::vector<CGroups>& Models = m_AllThesModels.find(eThesType)->second;
 	int termId = (int)m_Termins.size();
@@ -159,7 +160,6 @@ bool CThesaurusForSyntax::ReadTermins(const CThesaurus* piThes, EThesType eThesT
 			++termId;
 		}
 	}
-	return true;
 }
 
 
@@ -168,10 +168,8 @@ bool InitWordScheme(const CSyntaxOpt* Opt, CSynPlmLine& WordScheme, const CAtomG
 	return true;
 }
 
-bool CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType)
+void CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType)
 {
-
-
 	size_t ModelNo = 0;
 	std::string Name = Thes.m_Name;
 	try {
@@ -235,9 +233,7 @@ bool CThesaurusForSyntax::ReadModels(const CThesaurus& Thes, EThesType eThesType
 	}
 	catch (...)
 	{
-		ErrorMessage("Synan", Format("Cannot read models for %s ModelNo=%i", Thes.m_Name.c_str(), ModelNo));
-		return false;
+		throw CExpc(Format("Cannot read models for %s ModelNo=%i", Thes.m_Name.c_str(), ModelNo));
 	};
-	return true;
 }
 

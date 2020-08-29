@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(GerSynanLib)
 
-add_library(GerSynanLib
+add_library(${PROJECT_NAME}
 GerAnalytical.cpp
 GerBaseRules.cpp
 GerBuildInitialClauses.cpp
@@ -17,7 +17,8 @@ GerThesaurus.cpp
 GerWord.cpp
 )
 
-target_link_libraries(GerSynanLib
+target_link_libraries(${PROJECT_NAME}
     SynCommonLib
 )
 
+target_precompile_headers(${PROJECT_NAME} PUBLIC GerSynan.h)

@@ -100,9 +100,9 @@ public:
 
     void OutputErrorString(std::string strMsg) const;
 
-    bool LoadTermins(const CDictionary *piOborDic);
+    void LoadTermins(const CDictionary *piOborDic);
 
-    bool LoadTerminsForOneThesaurus(const char *ThesName);
+    void LoadTerminsForOneThesaurus(std::string ThesName);
 
     const CThesaurusForSyntax* GetThesaurus() const { return m_pThesaurus.get(); }
     virtual CThesaurusForSyntax* NewThesaurus(const CSyntaxOpt* opt) = 0;

@@ -1,10 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
-// ==========  Dialing Syntax Analysis (www.aot.ru)
-// ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
-
-
-#ifndef thesaurus_for_syntax_h
- #define thesaurus_for_syntax_h
+#pragma once
 
 #include "stdafx.h"
 #include "Group.h"
@@ -27,33 +21,13 @@ public:
 	int				m_TerminId;
 	EThesType		m_ThesType;
 
-	CTermin() 
-	{
-		m_pModel = 0;
-	};
-
-	bool operator<(const CTermin& term) const
-	{ 
-		assert( size() > 0);
-		return strcmp((*this)[0], term[0]) < 0;
-	}
-
-	std::string GetTerminStr() const
-	{
-		std::string res;
-		for(int i = 0 ; i < size() ; i++)
-		{
-			res += (*this)[i];
-			res += " ";
-		}
-		return res;
-
-	}
+	CTermin();
+	bool operator<(const CTermin& term) const;
+	std::string GetTerminStr() const;
 };
 
 
 typedef std::vector<CTermin> CVectorOfTermins;
-
 
 
 class CTerminSort_less
@@ -92,14 +66,6 @@ protected:
 
 
 
-inline EThesType GetThesTypeByStr(const std::string& strDBName)
-{
-	if (strDBName == "RML_THES_LOC") return LocThes;
-	if (strDBName == "RML_THES_FIN") return FinThes;
-	if (strDBName == "RML_THES_OMNI") return OmniThes;
-	if (strDBName == "RML_THES_COMP") return CompThes;
-	return	NoneThes;
-}
 
 class CSyntaxOpt;
 
@@ -115,18 +81,12 @@ public:
 	CThesaurusForSyntax(const CSyntaxOpt* Opt);
 	virtual ~CThesaurusForSyntax();
 
-	CThesaurus* LoadThesaurus(const char* ThesName) const;
+	CThesaurus* LoadThesaurus(std::string ThesName) const;
 
-	bool ReadThesaurusForSyntax(const char* ThesName, const CThesaurus* Thes, StringHashSet& p_vectorAccost);
-	bool ReadTermins(const CThesaurus* piThes, EThesType eThesType);
-	bool ReadModels(const CThesaurus& piThes, EThesType eThesType);
+	void ReadThesaurusForSyntax(std::string ThesName, const CThesaurus* Thes);
+	const CTermin& GetTermin(int i) const;
+	const CVectorOfTermins* GetTermins() const;
 	void SortIndexes();
-	const CTermin& GetTermin(int i) const
-	{ return m_Termins[i]; }
-
-	const CVectorOfTermins* GetTermins() const 
-	{ return &m_Termins; }
-
 
 protected:
 	
@@ -136,9 +96,9 @@ protected:
 
 	virtual void AssignMainGroupsToModel(CGroups& model, const CInnerModel& piModel) = 0;
 	bool ReadOneTermin(const CThesaurus* piThes, const CInnerTermin& inputTerm, CTermin& outTerm) const;
+	void ReadTermins(const CThesaurus* piThes, EThesType eThesType);
+	void ReadModels(const CThesaurus& piThes, EThesType eThesType);
 };
 
 
-
-
-#endif
+extern  EThesType GetThesTypeByStr(const std::string& strDBName);

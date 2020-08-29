@@ -107,38 +107,49 @@ const CThesaurus *CSyntaxOpt::GetThesByThesId(UINT ThesId) const {
     return m_LocThes.get();
 };
 
-bool CSyntaxOpt::LoadTerminsForOneThesaurus(const char *ThesName) {
+void CSyntaxOpt::LoadTerminsForOneThesaurus(std::string ThesName) {
     auto& P = GetThesPointerByThesId(GetThesTypeByStr(ThesName));
 
     if (P.get() == nullptr) {
         P.reset(m_pThesaurus->LoadThesaurus(ThesName));
     }
 
-    if (!P.get()) return false;
+    if (!P.get()) {
+        throw CExpc ("cannot initialize thesaurus pointer");
+    }
 
-    return m_pThesaurus->ReadThesaurusForSyntax(ThesName, P.get(), m_pProfessions->m_vectorDatItems);
+    m_pThesaurus->ReadThesaurusForSyntax(ThesName, P.get());
 };
 
-bool CSyntaxOpt::LoadTermins(const CDictionary *piOborDic) {
-    try {
-        if (m_bEnableLocThesaurus)
-            LoadTerminsForOneThesaurus("RML_THES_LOC");
+StringHashSet CollectLowerTerms(const CThesaurus* Thes, std::string conceptStr, MorphLanguageEnum lang)
+{
+    StringHashSet lowerTerms;
+    for (auto i : Thes->QueryLowerTermins("PROF", lang))
+    {
+        std::string terminStr = Thes->m_Termins[i].m_TerminStr;
+        RmlMakeLower(terminStr, lang);
+        lowerTerms.insert(terminStr);
+    };
+    return lowerTerms;
+}
 
-        if (m_bEnableFinThesaurus)
-            LoadTerminsForOneThesaurus("RML_THES_FIN");
+void CSyntaxOpt::LoadTermins(const CDictionary *piOborDic) {
+    if (m_bEnableLocThesaurus)
+        LoadTerminsForOneThesaurus("RML_THES_LOC");
 
-        if (m_bEnableCompThesaurus)
-            LoadTerminsForOneThesaurus("RML_THES_COMP");
+    if (m_bEnableFinThesaurus)
+        LoadTerminsForOneThesaurus("RML_THES_FIN");
 
-        if (m_bEnableOmniThesaurus)
-            LoadTerminsForOneThesaurus("RML_THES_OMNI");
+    if (m_bEnableCompThesaurus)
+        LoadTerminsForOneThesaurus("RML_THES_COMP");
 
-        m_pThesaurus->SortIndexes();
+    if (m_bEnableOmniThesaurus) {
+        LoadTerminsForOneThesaurus("RML_THES_OMNI");
+        auto& thes = GetThesPointerByThesId(GetThesTypeByStr("RML_THES_OMNI"));
+        m_pProfessions->m_vectorDatItems = CollectLowerTerms(thes.get(), "PROF", m_Language);
     }
-    catch (...) {
-        return false;
-    }
-    return true;
+
+    m_pThesaurus->SortIndexes();
 }
 
 
@@ -181,7 +192,7 @@ bool CSyntaxOpt::InitializeOptions() {
         }
 
     }
-    catch (CExpc &) {
+    catch (CExpc&) {
         OutputErrorString("Failed to find registry entry for oborot dictionary");
         return false;
     }
@@ -191,9 +202,13 @@ bool CSyntaxOpt::InitializeOptions() {
     }
 
     m_pThesaurus.reset(NewThesaurus(this));
+    try {
+        LoadTermins(GetOborDictionary());
+    }
+    catch (CExpc c) {
+        OutputErrorString(c.m_strCause.c_str());
+    }
 
-    if (!LoadTermins(GetOborDictionary()))
-        OutputErrorString("Failed to load Thesaurus");
 
     if (!InitOptionsLanguageSpecific())
         return false;
