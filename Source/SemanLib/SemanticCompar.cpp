@@ -140,7 +140,7 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 			 // удаляем отношение, которое было построено по валенностям
 			 long RelNo = FindFirstRelation(CompNodeNo, k);
 			 if (RelNo != -1)
-				 EraseRelation(RelNo);
+				 EraseRelation(RelNo, "OutcomingOf_CHEM_Obor");
 			 AddRelation(CRusSemRelation(CValency(), CompNodeNo, k, ""));
 			 m_Relations[m_Relations.size() - 1].m_SemFets = SemFets;
 			 break;
@@ -405,7 +405,7 @@ try {
 				};
 			};
 
-
+			rml_TRACE("make node %i mna (chem oboorot)\n",  CompNodeNo);
 			m_Nodes[CompNodeNo].m_NodeType = MNA;
 			m_Nodes[CompNodeNo].m_MNAType =	CHEMOborot;
 			break;

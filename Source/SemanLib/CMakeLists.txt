@@ -39,6 +39,7 @@ TranslatorHolder.cpp
 Valency.cpp
 stdafx.cpp
 VisualGraph.cpp
+SemanticWeightComponents.cpp
 )
 
 target_link_libraries(SemanLib

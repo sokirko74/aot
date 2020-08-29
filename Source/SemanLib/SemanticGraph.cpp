@@ -140,22 +140,16 @@ long CSemanticStructure::GetIncomingRelationsCount(long NodeNo, bool UseUse) con
 void CSemanticStructure::PrintRelations() const
 {
 	rml_TRACE("\n\nRelations : \n");
-
 	for (size_t i = 0; i < GetRelationsSize(); i++)
 	{
-		std::string Label = GetRelation(i)->m_Valency.m_RelationStr;
-		std::string Q = Format("%s %s ", GetNodeStr1(GetRelation(i)->m_SourceNodeNo).c_str(), Label.c_str());
-		{
-			std::string  W = Format(" %s %s ", GetNodeStr1(GetRelation(i)->m_TargetNodeNo).c_str(), (GetRelation(i)->m_bRelUse ? " used" : " unused"));
-			Q += W;
-		};
-		Q += " SF = " + GetSemFetsInOneStr(GetRelation(i)->m_SemFets);
-		Q += std::string("\n");
-
-		rml_TRACE(Q.c_str());
+		auto r = GetRelation(i);
+		std::string l = Format("%s %s ", GetNodeStr1(r->m_SourceNodeNo).c_str(), r->m_Valency.m_RelationStr.c_str());
+		l += Format(" %s %s ", GetNodeStr1(r->m_TargetNodeNo).c_str(), (r->m_bRelUse ? " used" : " unused"));;
+		l += " SF = " + GetSemFetsInOneStr(r->m_SemFets);
+		l += " SynR = \"" + r->m_SyntacticRelation + "\" ";
+		l += std::string("\n");
+		rml_TRACE(l.c_str());
 	};
-
-
 };
 
 void CSemanticStructure::FindRelations(long NodeNo1, long NodeNo2, std::vector<long>& Rels) const
@@ -239,19 +233,19 @@ void CSemanticStructure::DeleteDubleRelations()
 				&& (GetRelation(i)->m_Valency == GetRelation(k)->m_Valency)
 				)
 			{
-				EraseRelation(k);
+				EraseRelation(k, "make relations unique");
 				k--;
 			};
 
 
 };
 
-void CSemanticStructure::DeleteRelations(std::vector<long>& Rels)
+void CSemanticStructure::DeleteRelations(std::vector<long>& Rels, const char* cause)
 {
 	if (Rels.size() == 0) return;
 	sort(Rels.begin(), Rels.end());
 	for (long i = Rels.size() - 1; i >= 0; i--)
-		EraseRelation(Rels[i]);
+		EraseRelation(Rels[i], cause);
 };
 
 
@@ -411,7 +405,7 @@ void CSemanticStructure::DelNode(long NodeNo)
 			|| (GetRelation(k)->m_SourceNodeNo == NodeNo)
 			)
 		{
-			EraseRelation(k);
+			EraseRelation(k, "delete node");
 			k--;
 			continue;
 

@@ -446,7 +446,7 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine (CSemPattern& P,  CSynReal
 
 bool CRusSemStructure::IsHumanName (const CRusSemNode& N)  const
 {
-    return		(N.m_SynGroupTypeStr == NAMES)
+    return		(N.m_SynGroupTypeStr == NAMES_STR)
 		   ||	N.HasOneGrammem(rSurName) 
 	       ||	N.HasOneGrammem(rName);
 };
@@ -524,7 +524,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 			return false;
 
 	if ( P.HasSemFet("KEY") )	  
-		if (m_Nodes[NodeNo].m_SynGroupTypeStr == KEYB)
+		if (m_Nodes[NodeNo].m_SynGroupTypeStr == KEYB_STR)
 			return true;
 
 	if  (P.m_PatternValency.m_RelationStr == "NAME")    
@@ -1002,7 +1002,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 		&& (   (isdigit((BYTE) m_Nodes[NodeNo].m_Words[0].m_Word[0]))
 		|| (m_Nodes[NodeNo].m_Words[0].m_ILE)
 		|| (m_Nodes[NodeNo].m_bQuoteMarks)
-		|| (    (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_NUMERAL)
+		|| (    (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_NUMERAL_STR)
 		&& (m_Nodes[NodeNo].m_Words.size() > 0)
 		&& (m_Nodes[NodeNo].m_Words[0].m_Word == "N")
 		)
@@ -1623,7 +1623,7 @@ void CRusSemStructure::HeuristicsLocative(long ClauseNo)
 	  {
 		   std::vector<long> Rels;
 		   FindRelations (VerbNodeNo, NodeNo, Rels);
-		   DeleteRelations(Rels);
+		   DeleteRelations(Rels, "HeuristicsLocative");
 		   UpdateBlockedRelations();
 	  };
 

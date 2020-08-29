@@ -191,7 +191,7 @@ long CRusSemStructure::FindLocHost (long NodeNo, long ClauseNo)
 		bool bProject = IsProjectedNew (SetTagToClause(ClauseNo));
 
 		for (long j = SaveRelSize; j < m_Relations.size(); )
-			EraseRelation(SaveRelSize);
+			EraseRelation(SaveRelSize, "FindLocHost delete relation");
 
 		if (bProject) 
 			return HypotNodes[i].m_NodeNo; 

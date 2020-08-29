@@ -243,7 +243,7 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
          else    
 		  {
 			 // удаляем субъектную стрелку, которая не  согласовалась со словом _R("САМ")
-			 EraseRelation(R.m_Rels[l]); 
+			 EraseRelation(R.m_Rels[l], "InsertSAMNode");
 			 // получаем новый набор выходящих отношений
 			 R = GetIncomingRelations(i, false);
 			 l=-1;
@@ -408,7 +408,7 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 	нужно удалить отношения и узлы, которые помечены к удалению
 	в функции ApplyClauseRules 
 	*/
-	DelRelsToDelete();
+	DelRelsToDelete("from ConnectClausesForLexVariantCombination");
 	DelNodesToDelete();
 	AssertValidGraph();
 
@@ -729,17 +729,17 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 				rml_TRACE ("Lex variant(ClauseNo = %i) =  %i, Collocation set = %i(of %i)\n", 
 					ClauseNo, LexVariantInCurrSetCollocNo+1,  
 					CurrSetCollocHypNo+1, m_ClauseSetCollocHyps[ClauseNo].size());
-				rml_TRACE ("Вес лучшего варианта дерева %i\n", V.GetBestTreeWeight());
+				rml_TRACE ("Best tree weight %i\n", V.GetBestTreeWeight());
+				rml_TRACE("Variant weight components:\n %s\n", V.m_BestValue.GetStrOfNotNull().c_str());
+				rml_TRACE("Is clause connected: %i\n", IsConnectedClause(ClauseNo));
+
 				ClauseVar.m_BestLexVariants.push_back(V);
-				rml_TRACE ("Связноть  клаузы %i\n", IsConnectedClause(ClauseNo));
 				CopyLexVar(InitialLexVariant);
 				LexVariantInCurrSetCollocNo++;
-				/*
-				если лексических вариантов больше 100, тогда надо выходить
-				по паническим причинам
-				*/
-				if (LexVariantInCurrSetCollocNo > 100)
+				if (LexVariantInCurrSetCollocNo > 100) {
+					rml_TRACE("too many lexical varints, panic exit\n");
 					break;
+				}
 
 				
 			} // конец цикла
@@ -813,7 +813,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 
 	rml_TRACE  ("=================================================\n");
-	rml_TRACE  ("===  Запись лучшего варианта  %i ===\n", m_ClauseVariantsCombinationNo);
+	rml_TRACE  ("===  Writing the best variant N  %i ===\n", m_ClauseVariantsCombinationNo);
 
 	if (BestCombNo != -1)
 	{
@@ -865,7 +865,6 @@ long CRusSemStructure::GetStructureWeight()
 		{
 		   CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
 		   Weight += W.GetBestTreeWeight1(!IsConn);
-		   //rml_TRACE("%d %s\n", W.GetBestTreeWeight1(!IsConn), W.m_BestValue.GetStr().c_str());
 		 };
 	};
 
@@ -1062,7 +1061,7 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 	};
 
-	rml_TRACE ("Номер набора синтаксических вариантов клаузы %i (из %i)\n", m_ClauseVariantsCombinationNo+1, Variants.size());
+	rml_TRACE ("ClauseVariantsCombinationNo %i (out of %i)\n", m_ClauseVariantsCombinationNo + 1, Variants.size());
 	m_ClauseCombinationVariantsCount = Variants.size();
 	m_Nodes.clear();
 	return true;

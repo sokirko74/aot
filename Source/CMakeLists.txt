@@ -30,7 +30,7 @@ include_directories(${RML}/Source/contrib/nlohmann)
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
     message ("compile debug")
     if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g -D_DEBUG")
     endif()
 
     enable_testing()

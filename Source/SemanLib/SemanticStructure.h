@@ -487,7 +487,7 @@ public:
 	virtual		  CSemRelation*	GetRelation(int RelNo)		  = 0;
 	virtual int					GetRelationsSize()		const = 0;
 	void				ReverseRelation(int iRel)   { swap(GetRelation(iRel)->m_TargetNodeNo, GetRelation(iRel)->m_SourceNodeNo); }
-	virtual void				EraseRelation(int RelNo)		=0; 
+	virtual void				EraseRelation(int RelNo, const char* cause)		=0; 
 	virtual void				GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color) = 0;
 
 	
@@ -528,7 +528,7 @@ public:
 	// выдает первое дополнительное отношение (случайное) между NodeNo1 и NodeNo2
 	long			FindDopFirstRelation (long NodeNo1, long NodeNo2) const;
 	// удаляет отношения Rels
-	void			DeleteRelations(std::vector<long>& Rels);
+	void			DeleteRelations(std::vector<long>& Rels, const char* cause);
 	// переносит все отношения, инцидентные узлу FromNode,  к узлу ToNode
 	void			MoveRelations(long FromNode, long ToNode);		
 	// переносит все входящие отношения в узел FromNode  к узлу ToNode
@@ -593,7 +593,7 @@ public:
 
 	// то же с отношениями
 	void			SetRelsToDeleteFalse ();
-	void			DelRelsToDelete();
+	void			DelRelsToDelete(const char* cause);
 
 	// выдает самый ближайший узел слева (который отстоит не более, чем на десять слов)
 	long			FindLeftClosestNode(size_t NodeNo) const;
@@ -745,18 +745,19 @@ class IsLessByMinWordNo
 template<class T>
 void FreeWordNo (T& Node, long WordNo)
 {
-	   if (Node.IsWordContainer())
-		 for (long i=0;i < Node.m_Words.size();i++)
-			 if (Node.m_Words[i].m_WordNo >=  WordNo)
-				 Node.m_Words[i].m_WordNo++;
+	if (Node.IsWordContainer())
+		for (auto& w : Node.m_Words)
+			if (w.m_WordNo >=  WordNo)
+				w.m_WordNo++;
 
 };
 
 template<class T>
 void	ResetAllReachedFlags(T& SemStr)
 {
-	for(int i = 0 ; i < SemStr.m_Nodes.size(); i++ )
-		SemStr.m_Nodes[i].m_bReached = false;
+	for (auto& n : SemStr.m_Nodes) {
+		n.m_bReached = false;
+	}
 }
 
 
@@ -769,11 +770,11 @@ template <class T>
 void MoveDopRelationsBack(T& SemStr)
 {
     SemStr.m_DopRelations.clear();
-	for(int i = 0 ; i < SemStr.m_Relations.size() ; i++ )
+	for(size_t i = 0 ; i < SemStr.m_Relations.size() ; i++ )
 		if(SemStr.m_Relations[i].m_bDopRelation) 
 		{
 			SemStr.m_DopRelations.push_back(SemStr.m_Relations[i]);
-			SemStr.EraseRelation(i);
+			SemStr.EraseRelation(i, "MoveDopRelationsBack");
 			i--;
 		}		
 	
@@ -781,17 +782,17 @@ void MoveDopRelationsBack(T& SemStr)
 extern bool IsLocSemRel (const std::string& S);
 extern void SetSpacesAndRegisterInSentence (std::string& str, MorphLanguageEnum Langua);
 
-const  std::string SIMILAR_NUMERALS = _R("ОДНОР_ЧИСЛ");
-const  std::string NUMERALS = _R("КОЛИЧ");
-const  std::string C_NUMERALS = _R("СЛОЖ_ЧИСЛ");
-const  std::string KEYB = _R("КЛВ");
-const  std::string WEB_ADDR = _R("ЭЛ_АДРЕС");
-const  std::string NAMES = _R("ФИО");
-const  std::string NUMERAL_NOUN = _R("ЧИСЛ_СУЩ");
-const  std::string NOUN_ADJ = _R("ПРИЛ_СУЩ");
-const  std::string NOUN_NUMERAL = _R("СУЩ_ЧИСЛ");
-const  std::string NUMERAL_ADVERB = _R("НАР_ЧИСЛ_СУЩ");
-const  std::string SELECTIVE_GR = _R("ЭЛЕКТ_ИГ");
+const  std::string SIMILAR_NUMERALS_STR = _R("ОДНОР_ЧИСЛ");
+const  std::string NUMERALS_STR = _R("КОЛИЧ");
+const  std::string C_NUMERALS_STR = _R("СЛОЖ_ЧИСЛ");
+const  std::string KEYB_STR = _R("КЛВ");
+const  std::string WEB_ADDR_STR = _R("ЭЛ_АДРЕС");
+const  std::string NAMES_STR = _R("ФИО");
+const  std::string NUMERAL_NOUN_STR = _R("ЧИСЛ_СУЩ");
+const  std::string NOUN_ADJ_STR = _R("ПРИЛ_СУЩ");
+const  std::string NOUN_NUMERAL_STR = _R("СУЩ_ЧИСЛ");
+const  std::string NUMERAL_ADVERB_STR = _R("НАР_ЧИСЛ_СУЩ");
+const  std::string SELECTIVE_GR_STR = _R("ЭЛЕКТ_ИГ");
 const size_t MaxValsCount = 15;
 
 

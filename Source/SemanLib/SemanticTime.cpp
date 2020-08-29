@@ -153,9 +153,9 @@ bool CRusSemStructure::CheckTimeNumeral(long NodeNo, std::string GramFet) const
 	if (isdigit((unsigned char)GramFet[GramFet.length() - 1]))
 		Length = GramFet[GramFet.length() - 1] - '0';
 
-	return   ((m_Nodes[NodeNo].m_SynGroupTypeStr == SIMILAR_NUMERALS)
-		|| (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERALS)
-		|| (m_Nodes[NodeNo].m_SynGroupTypeStr == C_NUMERALS) // например, "через 2,5 месяца"
+	return   ((m_Nodes[NodeNo].m_SynGroupTypeStr == SIMILAR_NUMERALS_STR)
+		|| (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERALS_STR)
+		|| (m_Nodes[NodeNo].m_SynGroupTypeStr == C_NUMERALS_STR) // например, "через 2,5 месяца"
 		|| (m_Nodes[NodeNo].IsPrimitive() && isdigit((unsigned char)m_Nodes[NodeNo].m_Words[0].m_Word[0]))
 		|| (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS(NodeNo, NUMERAL))
 		|| (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS(NodeNo, NUMERAL_P))

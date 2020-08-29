@@ -113,6 +113,11 @@ CSemNode::CSemNode()
 	m_bOrgName = false;
 	m_bProper = false;
 	m_SemCategory = scLabel;
+	m_bReached = false;
+	m_Tag = -1;
+	m_TerminId = -1;
+	m_ThesaurusId = -1;
+	m_AbstractNodeId = -1;
 };
 
 // удаляет из оператор из  m_RelOperators
@@ -565,7 +570,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 			Res += Format("$GT($main,graph) set $nds(%i) -label \"%s\" -type rectangle -x 0 -y 0\1", i, nodeStr.c_str());
 			Res += Format("foreach p [$GT($main,graph) get $nds(%i) -ports] {lappend values [lindex $p 0]}\1", i);
 
-			if (GetNode(i).m_SynGroupTypeStr != KEYB)
+			if (GetNode(i).m_SynGroupTypeStr != KEYB_STR)
 			{
 				std::string Q = GetMorphologyOfNode(i);
 				if (GetNode(i).IsWordContainer())
@@ -1362,12 +1367,13 @@ void CSemanticStructure::SetRelsToDeleteFalse()
 	for (long i = 0; i < GetRelationsSize(); i++)
 		GetRelation(i)->m_bToDelete = false;
 };
-void CSemanticStructure::DelRelsToDelete()
+
+void CSemanticStructure::DelRelsToDelete(const char* cause)
 {
 	for (long i = 0; i < GetRelationsSize(); i++)
 		if (GetRelation(i)->m_bToDelete)
 		{
-			EraseRelation(i);
+			EraseRelation(i, cause);
 			i--;
 		};
 };

@@ -476,13 +476,13 @@ bool CEngSynthes::try_simple_group(int node_no)
 	std::string str;
 	CEngSemNode &node = Node(node_no);
 
-	if(node.m_SynGroupTypeStr == WEB_ADDR)
+	if(node.m_SynGroupTypeStr == WEB_ADDR_STR)
 	{
 		for(int i = 0; i < node.GetWordsSize(); i++){
 			str += node.GetWord(i).m_Word;
 		}
 	}
-	else if(node.m_SynGroupTypeStr == NAMES)
+	else if(node.m_SynGroupTypeStr == NAMES_STR)
 	{
 		int i = 0;
 		for(; i < node.GetWordsSize(); i++)

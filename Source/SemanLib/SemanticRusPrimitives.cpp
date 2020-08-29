@@ -47,11 +47,17 @@ int		CRusSemStructure::GetRelationsSize() const
 	return m_Relations.size();
 };
 
-void	CRusSemStructure::EraseRelation(int RelNo) 	 
+void	CRusSemStructure::EraseRelation(int RelNo, const char* cause)
 {
 	m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_IncomRelsCount--;
 	std::string Label = m_Relations[RelNo].m_Valency.m_RelationStr;
-	rml_TRACE("%s", Format ("Delete relation %s %s %s\n",  GetNodeStr1(GetRelation(RelNo)->m_SourceNodeNo).c_str(), Label.c_str(), GetNodeStr1(GetRelation(RelNo)->m_TargetNodeNo).c_str()).c_str());
+	
+	rml_TRACE("%s", Format ("Delete relation %s %s %s, cause: \"%s\"\n",  
+		GetNodeStr1(GetRelation(RelNo)->m_SourceNodeNo).c_str(), 
+		Label.c_str(), 
+		GetNodeStr1(GetRelation(RelNo)->m_TargetNodeNo).c_str(),
+		cause
+	).c_str());
 	m_Relations.erase(m_Relations.begin()+RelNo);
 
 };
@@ -646,12 +652,12 @@ CRelSet CRusSemStructure::GetIncomingRelations (long NodeNo, bool UseUse) const
 
 
 
-void CRusSemStructure::DeleteRelSet(CRelSet& R)
+void CRusSemStructure::DeleteRelSet(CRelSet& R, const char* cause)
 {
 	if (R.m_RelsCount == 0) return;
 	sort (R.m_Rels, R.m_Rels+R.m_RelsCount);
 	for (long i=R.m_RelsCount - 1; i >= 0; i--)
-			 EraseRelation(R.m_Rels[i]);
+			 EraseRelation(R.m_Rels[i], cause);
 };
 
 
@@ -874,11 +880,11 @@ bool CRusSemStructure::IsSimpleNounGroupUnderPrep(long NodeNo) const
 						|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("КОТОРЫЙ"))
 						)
 				)
-					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_ADJ)
-					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_NUMERAL)
-					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERAL_NOUN)
-					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERAL_ADVERB)
-					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == SELECTIVE_GR);
+					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_ADJ_STR)
+					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_NUMERAL_STR)
+					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERAL_NOUN_STR)
+					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERAL_ADVERB_STR)
+					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == SELECTIVE_GR_STR);
 };
 
 

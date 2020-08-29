@@ -438,7 +438,7 @@ void CRusSemStructure::ConvertRusNumeralsToArabic()
 
 	//	А теперь основной цикл ...
 	for (auto& node : m_Nodes) {
-		if (   (node.m_SynGroupTypeStr == NUMERALS)
+		if (   (node.m_SynGroupTypeStr == NUMERALS_STR)
 			|| (node.IsPrimitive() && HasRichPOS(node, NUMERAL))
 			|| (node.IsPrimitive() && HasRichPOS(node, NUMERAL_P))
 			|| FullAdjWithNumeralPrefix(node)

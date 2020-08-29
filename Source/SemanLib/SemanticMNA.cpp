@@ -676,9 +676,9 @@ void CRusSemStructure::DeleteMNAWithOneChild(long ClauseNo)
 			   || (m_Nodes[NodeNo].m_MNAType != CHEMOborot) 
 			 )
 		  {
-		     EraseRelation(Rels[0]);
+		     EraseRelation(Rels[0], "DeleteMNAWithOneChild");
 			 CRelSet R = GetIncomingRelations(NodeNo, false);
-			 DeleteRelSet(R);
+			 DeleteRelSet(R, "from DeleteMNAWithOneChild");
 		  };
 
 	};

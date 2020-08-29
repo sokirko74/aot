@@ -527,7 +527,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			}
 		}
 
-	   DelRelsToDelete();
+	   DelRelsToDelete("ConvertClosedCollocToOpen");
 
 	// вставим узлы 
 	    CEngSemNode OldCollocNode = m_Nodes[iEngNode];

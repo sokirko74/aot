@@ -291,7 +291,7 @@ public:
     virtual const CSemRelation*	GetRelation(int RelNo) const {return &(m_Relations[RelNo]);}
 	virtual		  CSemRelation*	GetRelation(int RelNo)		 {return &(m_Relations[RelNo]);}
 	virtual int					GetRelationsSize() const {return m_Relations.size();};
-	virtual void				EraseRelation(int RelNo) {m_Relations.erase(m_Relations.begin() +RelNo);};
+	virtual void				EraseRelation(int RelNo, const char* cause) {m_Relations.erase(m_Relations.begin() +RelNo);};
 
 	virtual void GetColorAndWidthOfRelation(int RelNo,float& Width,std::string& Color);
 

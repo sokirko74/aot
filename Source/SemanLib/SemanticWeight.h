@@ -1,10 +1,6 @@
-#if !defined(semantic_weight)
-#define semantic_weight
+#pragma once 
 
-#pragma warning (disable : 4786)
-
-
-
+// semantic weight: the less the better, the min is the best
 
 struct TreeVariantValueCoefs {
 	// =========   безусловные оценки (те, которые не используются для сортировки древесных вариантов)
@@ -155,43 +151,17 @@ struct TreeVariantValue {
 
 const WORD Unhosted = 0xffff;
 const WORD MustBeIgnored = 0xffff-1;
+
 class CTreeVariant 
 {
 	// the size of m_TreeRels can really be more than 256 on some sentences
 	std::vector<WORD>	m_TreeRels;
-	size_t			m_Size;	
 public:
-	CTreeVariant()
-	{ 
-		m_TreeRels.reserve(100);
-		m_Size = 0;
-	};
-	void AddRel(WORD RelNo)
-	{
-		m_TreeRels.push_back(RelNo);
-		m_Size++;
-	};
-	void SetRel(WORD RelNo, WORD Value)
-	{
-		assert (RelNo < m_Size);
-		m_TreeRels[RelNo] = Value;
-	};
-	void DeleteLast()
-	{
-		assert (m_Size > 0);
-		m_TreeRels.erase(m_TreeRels.begin() +m_Size-1);
-		m_Size--;
-	};
-
-	WORD GetRel(WORD RelNo) const
-	{
-		return m_TreeRels[RelNo];
-	};
-
-	size_t GetRelsCount() const 
-	{
-		return m_Size; // for the speed 
-	};
+	void AddRel(WORD RelNo);
+	void SetRel(WORD RelNo, WORD Value);
+	void DeleteLast();
+	WORD GetRel(WORD RelNo) const;
+	size_t GetRelsCount() const;
 };
 
 /*
@@ -210,41 +180,12 @@ struct CTreeOfLexVariantWeight {
 	long   TreeVariantCount;
 	long   AllRelationsCount;
 
-	long GetBestTreeWeight() const 
-	{
-		if ( TreeVariantCount == 0) return 1000;
-		return m_BestValue.GetTreeWeight(); 
-			    
-	};
-
-    long GetBestTreeWeight1(bool CheckConnected = true) const 
-	{
-		if ( TreeVariantCount == 0) return 1000;
-		return    m_BestValue.GetWeight1(CheckConnected);
-			    
-
-	};
-	void  CopyTreeOfLexVariantWeight(const CTreeOfLexVariantWeight& X)
-	{
-		m_SetCollocHypNo = X.m_SetCollocHypNo;
-		m_LexVariantNo = X.m_LexVariantNo;
-	    m_BestValue = X.m_BestValue;
-		TreeVariantCount = X.TreeVariantCount;
-	    AllRelationsCount = X.AllRelationsCount;
-	};
-
-
-
-
-    bool operator == ( const CTreeOfLexVariantWeight& X ) const
-    {
-		return GetBestTreeWeight() == X.GetBestTreeWeight();
-	};
-
-	bool operator < ( const CTreeOfLexVariantWeight& X ) const
-    {
-		return GetBestTreeWeight() < X.GetBestTreeWeight();
-	};
+	long GetBestTreeWeight() const;
+	long GetBestTreeWeight1(bool CheckConnected = true) const;
+	void  CopyTreeOfLexVariantWeight(const CTreeOfLexVariantWeight& X);
+	bool operator == (const CTreeOfLexVariantWeight& X) const;
+	bool operator < (const CTreeOfLexVariantWeight& X) const;
+    
 };
 
 struct  CSyntaxClauseVariant {
@@ -270,11 +211,8 @@ struct  CSyntaxClauseVariant {
 
 
 
-
-
 typedef std::vector<CTreeOfLexVariantWeight> CLexVariantWeightVector;
 typedef std::pair<CTreeVariant, TreeVariantValue> TreeAndValue;
 typedef std::vector<TreeAndValue> TreeAndValueVector;
 
 
-#endif

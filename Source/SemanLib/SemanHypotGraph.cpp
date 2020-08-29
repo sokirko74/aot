@@ -624,7 +624,7 @@ void CRusSemStructure::BuildCircumsChains(long ClauseNo)
 		CSemanticStructure::GetIncomingRelations(NextNodeNo, Rels, false);
 		if (Rels.size() == 0) continue;
 		CSynRealization	SynReal = m_Relations[Rels[0]].m_SynReal;
-		DeleteRelations(Rels);
+		DeleteRelations(Rels, "BuildCircumsChains cause");
 		AddRelation(CRusSemRelation(CValency("SPECIF", A_C), NodeNo, NextNodeNo, ""));
 		m_Relations.back().m_SynReal = SynReal;
 	};

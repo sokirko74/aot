@@ -74,7 +74,7 @@ void CRusSemStructure::DeleteLongRelations (long ClauseNo, long MaxRelationLeaps
 		   if (!bOnlyNouns || m_Relations[i].m_Valency.m_RossHolder->IsGenitiv(m_Relations[i].m_SynReal.m_Cortege.m_DomItemNos[1]))
 			   if ( m_Relations[i].m_LeapsCount > MaxRelationLeapsCount)
 			   {
-			     EraseRelation(i);
+			     EraseRelation(i, "too long relation");
 				 i--;
 			   };
 };

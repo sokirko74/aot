@@ -975,8 +975,8 @@ bool CEngSemStructure::InterpretWithPlugArticles(long RusNodeNo,CEnglishEquivMap
 	CEngInterp EngEquiv;
 	EngEquiv.m_DictType = Aoss;
 	EngEquiv.m_UnitNo  = ErrUnitNo;
-	if (RusStr.GetNode(RusNodeNo).m_SynGroupTypeStr == NAMES) return false;
-	if (RusStr.GetNode(RusNodeNo).m_SynGroupTypeStr == KEYB) return false;
+	if (RusStr.GetNode(RusNodeNo).m_SynGroupTypeStr == NAMES_STR) return false;
+	if (RusStr.GetNode(RusNodeNo).m_SynGroupTypeStr == KEYB_STR) return false;
 
 	// числительные
 	if (		RusStr.GetNode(RusNodeNo).IsPrimitive() 

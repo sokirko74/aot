@@ -37,7 +37,7 @@ void CRusSemStructure::ApplyTerminSemStrForOneRel(std::string RelationStr, long 
 			Rels.erase(Rels.begin() + i);
 		else
 			i++;
-	DeleteRelations(Rels);
+	DeleteRelations(Rels, "from ApplyTerminSemStrForOneRel");
 
 	//  удаляем все отношения, которые идут в Nd1 кроме тех, что идут из MUA 
 	CRelSet R = GetIncomingRelations(Nd1, false);
@@ -46,12 +46,12 @@ void CRusSemStructure::ApplyTerminSemStrForOneRel(std::string RelationStr, long 
 			R.Erase(i);
 		else
 			i++;
-	DeleteRelSet(R);
+	DeleteRelSet(R, "from InterpretOrganisations");
 
 
 	// удаляем отношение, идущее из Nd1 в Nd2, если такое было
 	FindRelations(Nd1, Nd2, Rels);
-	DeleteRelations(Rels);
+	DeleteRelations(Rels, "from ApplyTerminSemStrForOneRel");
 
 	// создаем новое отношение 
 	CValency V(RelationStr, A_C, RossHolder);

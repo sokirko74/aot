@@ -236,7 +236,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 	newRel.m_Position = ">>";
 	newRel.m_PosType = FromAlgorithmPosType;
 	m_Relations.push_back(newRel); // Сopul->Word
-	EraseRelation(iMCopRel);
+	EraseRelation(iMCopRel, "ApplyModalCopulRule");
 }
 
 /////////////////////////////////////////////////////////////////////////////

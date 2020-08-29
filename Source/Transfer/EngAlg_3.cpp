@@ -201,7 +201,7 @@ void CEngSemStructure::ApplyComparativeRule(int iEngNode)
 		newRel.m_PosType = FromAlgorithmPosType;
 		m_Relations.push_back(newRel);
 		m_Relations[inRels[0]].m_TargetNodeNo = m_Relations[iRelSubj].m_TargetNodeNo;
-		EraseRelation(iRelSubj);
+		EraseRelation(iRelSubj, "from ApplyComparativeRule");
 		return;
 	}
 

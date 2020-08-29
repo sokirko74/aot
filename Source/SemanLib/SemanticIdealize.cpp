@@ -141,7 +141,7 @@ long CRusSemStructure::Idealize ()
 					};
 					if (i == R.m_RelsCount) continue;
 					long ParentNodeNo = m_Relations[R.m_Rels[i]].m_SourceNodeNo;
-					EraseRelation(R.m_Rels[i]);
+					EraseRelation(R.m_Rels[i], "idealize");
 					MoveRelations(ParentNodeNo, NodeNo);
 					DelNode(ParentNodeNo);
 				};

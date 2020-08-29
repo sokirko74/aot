@@ -462,37 +462,39 @@ std::string	CreateTempFileName()
 
 };
 
-#ifdef WIN32
-	#ifdef _DEBUG
-		static std::ofstream logger;
-	#endif
+#ifdef _DEBUG
+    static std::ofstream logger;
 #endif
 
 void rml_TRACE( const char* format, ... )
 {
+#ifdef _DEBUG
 
-#ifdef WIN32
-	#ifdef _DEBUG
-		if (!format) {
-			return;
-		}
+        if (!format) {
+            return;
+        }
+        va_list arglst;
+        char buffer[2000];
+        if (strlen (format) >  200)
+        {
+            #ifdef WIN32
+                OutputDebugString("!!!!! too long debug line!!!");
+            #endif
+            return;
+        };
+        va_start( arglst, format );
+        vsprintf(buffer, format, arglst);
+        va_end( arglst );
+
+        #ifdef WIN32
+            OutputDebugString(buffer);
+        #endif
+
 		if (!logger.is_open()) {
-			logger.open("trace.log");
+			logger.open("trace.log", std::ios::binary);
 		}
-		va_list arglst;
-		char buffer[2000];
-		if (strlen (format) >  200)
-		{
-			OutputDebugString("!!!!! too long debug line!!!");
-			return;
-		};
-		va_start( arglst, format );
-		vsprintf(buffer, format, arglst);
-		va_end( arglst );
-		OutputDebugString(buffer);
-		logger << buffer;
+		logger << convert_to_utf8(buffer, morphRussian)	;
 		logger.flush();
-	#endif
 #endif
 };
 

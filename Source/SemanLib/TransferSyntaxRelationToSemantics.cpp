@@ -66,7 +66,7 @@ void CRusSemStructure::ApplySynStr (long ClauseNo)
 						&& (m_Relations[j].m_SourceNodeNo == m_SynRelations[l].m_TargetNodeNo)
 						)
 					{
-						EraseRelation(j);
+						EraseRelation(j, "from ApplySynStr");
 						j--;
 						break;
 					};
@@ -100,7 +100,7 @@ void CRusSemStructure::ApplySynStr (long ClauseNo)
 						};
 
 
-					DeleteRelSet(R);
+					DeleteRelSet(R, "from IsPragmaticallyStrongSynRel");
 					if	(!RelFound)
 					{
 						if (!m_Nodes[m_SynRelations[SynRels[l]].m_SourceNodeNo].IsWordContainer())

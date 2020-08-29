@@ -655,7 +655,7 @@ public:
     const CSemRelation*	GetRelation(int RelNo) const;
 	CSemRelation*		GetRelation(int RelNo);
 	int					GetRelationsSize() const;
-	void				EraseRelation(int RelNo);
+	void				EraseRelation(int RelNo, const char* cause);
 	void				AddRelation(const CRusSemRelation& R);
 	void				GetColorAndWidthOfRelation(int RelNo, float& Width, std::string& Color);
 	// перечень всех дополнительных отношений, найденных в предложении
@@ -1027,6 +1027,8 @@ public:
 	
 
 	// ========  Оценка деревьев
+	// подфункция GetTreeByConnectedComponents
+	long			SetBestVariant(const std::vector<TreeAndValueVector>& VarAndVals, const long HypotCount, const long TopConnectedComponentsCount);
 	// основная функция - строит лучшие деревья на графе гипотетических связей  (изначальный граф может быть не связан)
  	long			GetTreeByConnectedComponents (size_t ClauseNo, TreeVariantValue& ResultValue);
 	// помечает все компоненты связности разными тагами (CSemNode::m_TagId)
@@ -1371,7 +1373,7 @@ public:
 		// функция, которая выдает входящие отношения без использования new
 		CRelSet			GetIncomingRelations (long NodeNo, bool UseUse) const;
 		// удаляет отношения Rels
-		void			DeleteRelSet(CRelSet& R);
+		void			DeleteRelSet(CRelSet& R, const char* cause);
 		// проверяет, что в одном из значений GF-главного после двоеточия стоит константа ItemStr (син. роль)
 		bool			HasGramFetAfterColon (long NodeNo, std::string ItemStr)  const;
 		//выдает узлы, которые заполнили валентности узла  NodeNo в порядке, заданном в валентной структуре
