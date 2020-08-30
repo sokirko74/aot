@@ -639,10 +639,10 @@ long CRusSemStructure::MovePrepNodeToRelationForMainTimeGroups()
 						V = BuildTheVariant(ClauseNo);
 						//PrintRelations();
 						//PrintNodes();
-						V.m_BestValue.SAMNodeViolation = !bCheckSAMNode;
+						V.m_BestValue.SetWeight(SAMNodeViolation, !bCheckSAMNode);
 						V.m_LexVariantNo = LexVariantInCurrSetCollocNo;
 						V.m_SetCollocHypNo = CurrSetCollocHypNo;
-						V.m_BestValue.CollocsCount = m_ClauseSetCollocHyps[ClauseNo][V.m_SetCollocHypNo].size();
+						V.m_BestValue.SetWeight(CollocsCount, m_ClauseSetCollocHyps[ClauseNo][V.m_SetCollocHypNo].size());
 						V.CopyLexVar(*this);
 
 						

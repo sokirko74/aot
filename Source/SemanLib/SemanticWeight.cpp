@@ -1,199 +1,146 @@
 #include "stdafx.h"
 #include "SemanticRusStructure.h"
 #include "LexFuncts.h"
+#include "SemanticWeight.h"
 
 
+struct TreeVariantDefaultValue {
+	SemantiWeightComponentEnum Type;
+	std::string Name;
+	double DefaultValue;
+	WeightType WeightType;
+};
 
+static const std::vector<size_t> dummy = { 1,2,3 };
 
-TreeVariantValueCoefs::TreeVariantValueCoefs()
-{
-	ValencyDisorderCoef = 10;
-	DirectDisagreeCoef = 10;
-	ConnectedComponentsCountCoef = 100;
-	SemFetDisagreeCoef = 20;
-	ProjectnessCoefCoef = 80;
-	LexFetAgreeCountCoef = 20;
-	AgreeWithSyntaxTopCoefCoef = 20;
-	TopAgreeWithSyntaxCriteriaCoef = -10;
-	RelationsLengthCoef = 2;
-	MNAViolationsCountCoef = 50;
-	SemRelPOSViolationsCountCoef = 5;
-	OnlyCommaBetweenViolationsCountCoef = 20;
-	SubjectPredicateViolationsCountCoef = 50;
-	CommaBetweenBrothersExceptMNAViolationsCountCoef = 100;
-	OptionalValencyPenaltyCoef = 30;
-	CopulViolationsCountCoef = 100;
-	InstrAgentRelsCountCoef = 5;
-	LexFunctsCountCoef = -30;
-	GramRestrViolationsCountCoef = 100;
-	CollocsCountCoef = -15;
-	OborotAdverbialCountCoef = -10;
-	MaxRelationLeapsCount = 2;
-	ObligatoryValencyViolationCoef = 10;
-	ColloquialInterpsCoef = 10;
-	CorporaGleicheCoef = -2;
-	PassiveValencyPenaltyCoef = 1;
-	SemFetAgreeMNACoef = -30;
-	WordWeightCoef = -1;
-	MiscSemAgreeCoef = -10;
-	PrichastieCoef = 10;
+static const std::vector<TreeVariantDefaultValue> AllComponents = {
+	{ConnectedComponentsCount, "ConnectedComponentsCount", 10000, WeightType::Weight1},
+	{ProjectnessViolation, "ProjectnessViolation", 400, WeightType::Weight1},
+	{DirectDisagree, "DirectDisagree", 10, WeightType::Weight1},
+	{SemFetDisagree, "SemFetDisagree", 0.15, WeightType::Weight2},
+	{LexFetAgreeCount, "LexFetAgreeCount", -20, WeightType::Weight1},
+	{RelationsLength, "RelationsLength", 0.1, WeightType::Weight1},
+	{SemRelPOSViolationsCount, "SemRelPOSViolationsCount", 5, WeightType::Weight1},
+	{OptionalValencyPenalty, "OptionalValencyPenalty", 90, WeightType::Weight2},
+	{InstrAgentRelsCount, "InstrAgentRelsCount", 0.05, WeightType::Weight2},
+	{ValencyDisorder, "ValencyDisorder", 7, WeightType::Weight1},  
+	{CommaBetweenBrothersExceptMNAViolationsCount, "CommaBetweenBrothersExceptMNAViolationsCount", 100, WeightType::Weight1},
+	{OnlyCommaBetweenViolationsCount, "OnlyCommaBetweenViolationsCount", 60, WeightType::Weight1},
+	{AgreeWithSyntaxTop, "AgreeWithSyntaxTop", -20, WeightType::Weight3},
+	{TopAgreeWithSyntaxCriteria, "TopAgreeWithSyntaxCriteria", -10, WeightType::Weight3},
+	{SubjectPredicateViolationsCount, "SubjectPredicateViolationsCount", 100, WeightType::Weight1},
+	{GramRestrViolationsCount, "GramRestrViolationsCount", 100, WeightType::Weight1},
+	{MNAViolationsCount, "MNAViolationsCount", 200, WeightType::Weight1},
+	{CopulViolationsCount, "CopulViolationsCount", 100, WeightType::Weight1},
+	{CollocsCount, "CollocsCount", -15, WeightType::Weight1},
+	{OborotAdverbialCount, "OborotAdverbialCount", -10, WeightType::Weight1},
+	{LexFunctsCount, "LexFunctsCount", -50, WeightType::Weight2},
+	{ObligatoryValencyViolation, "ObligatoryValencyViolation", 50, WeightType::Weight2},
+	{ColloquialInterps, "ColloquialInterps", 60, WeightType::Weight1},
+	{CorporaGleiche, "CorporaGleiche", -2, WeightType::Weight1},
+	{PassiveValencyPenalty, "PassiveValencyPenalty", 1, WeightType::Weight1},
+	{SemFetAgreeMNACount, "SemFetAgreeMNACount", -30, WeightType::Weight1},
+	{WordWeightCount, "WordWeightCount", -0.01, WeightType::Weight1},
+	{MiscSemAgree, "MiscSemAgree", -20, WeightType::Weight1},
+	{PrichastieWithoutActantsCount, "PrichastieWithoutActantsCount", 10, WeightType::Weight1},
+	{SAMNodeViolation, "SAMNodeViolation", 1000, WeightType::Weight1},
+	{PanicMode, "PanicMode", 1000, WeightType::Weight1},
 };
 
 
 
-bool TreeVariantValueCoefs::ReadOneCoef(const char* s)
-{
-	if (sscanf(s, "ValencyDisorderCoef %i", &ValencyDisorderCoef) == 1)  return true;
-	if (sscanf(s, "DirectDisagreeCoef %i", &DirectDisagreeCoef) == 1)  return true;
-	if (sscanf(s, "ConnectedComponentsCountCoef %i", &ConnectedComponentsCountCoef) == 1)  return true;
-	if (sscanf(s, "SemFetDisagreeCoef %i", &SemFetDisagreeCoef) == 1)  return true;
-	if (sscanf(s, "ProjectnessCoefCoef%i", &ProjectnessCoefCoef) == 1)  return true;
-	if (sscanf(s, "LexFetAgreeCountCoef %i", &LexFetAgreeCountCoef) == 1)  return true;
-	if (sscanf(s, "AgreeWithSyntaxTopCoefCoef %i", &AgreeWithSyntaxTopCoefCoef) == 1)  return true;
-	if (sscanf(s, "TopAgreeWithSyntaxCriteriaCoef %i", &TopAgreeWithSyntaxCriteriaCoef) == 1)  return true;
-	if (sscanf(s, "RelationsLengthCoef %i", &RelationsLengthCoef) == 1)  return true;
-	if (sscanf(s, "MNAViolationsCountCoef %i", &MNAViolationsCountCoef) == 1)  return true;
-	if (sscanf(s, "SemRelPOSViolationsCountCoef %i", &SemRelPOSViolationsCountCoef) == 1)  return true;
-	if (sscanf(s, "OnlyCommaBetweenViolationsCountCoef %i", &OnlyCommaBetweenViolationsCountCoef) == 1)  return true;
-	if (sscanf(s, "SubjectPredicateViolationsCountCoef %i", &SubjectPredicateViolationsCountCoef) == 1)  return true;
-	if (sscanf(s, "CommaBetweenBrothersExceptMNAViolationsCountCoef %i", &CommaBetweenBrothersExceptMNAViolationsCountCoef) == 1)  return true;
-	if (sscanf(s, "OptionalValencyPenaltyCoef %i", &OptionalValencyPenaltyCoef) == 1)  return true;
-	if (sscanf(s, "CopulViolationsCountCoef %i", &CopulViolationsCountCoef) == 1)  return true;
-	if (sscanf(s, "InstrAgentRelsCountCoef %i", &InstrAgentRelsCountCoef) == 1)  return true;
-	if (sscanf(s, "LexFunctsCountCoef %i", &LexFunctsCountCoef) == 1)  return true;
-	if (sscanf(s, "GramRestrViolationsCountCoef %i", &GramRestrViolationsCountCoef) == 1)  return true;
-	if (sscanf(s, "CollocsCountCoef %i", &CollocsCountCoef) == 1)  return true;
-	if (sscanf(s, "OborotAdverbialCountCoef %i", &OborotAdverbialCountCoef) == 1)  return true;
-	if (sscanf(s, "MaxRelationLeapsCount %i", &MaxRelationLeapsCount) == 1)  return true;
-	if (sscanf(s, "ObligatoryValencyViolationCoef %i", &ObligatoryValencyViolationCoef) == 1)  return true;
-	if (sscanf(s, "ColloquialInterpsCoef %i", &ColloquialInterpsCoef) == 1)  return true; ;
-	if (sscanf(s, "CorporaGleicheCoef %i", &CorporaGleicheCoef) == 1)  return true; ;
-	if (sscanf(s, "PassiveValencyPenaltyCoef %i", &PassiveValencyPenaltyCoef) == 1)  return true; ;
-	if (sscanf(s, "SemFetAgreeMNACoef %i", &SemFetAgreeMNACoef) == 1)  return true; ;
-	if (sscanf(s, "WordWeightCoef %i", &WordWeightCoef) == 1)  return true; ;
-	if (sscanf(s, "MiscSemAgreeCoef %i", &MiscSemAgreeCoef) == 1)  return true; ;
-	if (sscanf(s, "PrichastieCoef %i", &PrichastieCoef) == 1)  return true; ;
+const std::string& GetStringBySemantiWeightComponent(SemantiWeightComponentEnum t) {
+	return AllComponents[t].Name;
+}
 
-
-
-	return false;
-};
-
-std::string TreeVariantValueCoefs::GetCoefsString() const 
-{
-	std::string s =
-		Format("ConnectedComponentsCount = %f\n", (double)ConnectedComponentsCountCoef) +
-		Format("ProjectnessViolation = %f\n", (double)ProjectnessCoefCoef) +
-		Format("DirectDisagree = %f\n", (double)DirectDisagreeCoef) +
-		Format("SemFetDisagree = %f\n", (double)SemFetDisagreeCoef) +
-		Format("LexFetAgreeCount = %f\n", (double)LexFetAgreeCountCoef) +
-		Format("RelationsLength = %f\n", (double)RelationsLengthCoef) +
-		Format("SemRelPOSViolationsCount = %f\n", (double)SemRelPOSViolationsCountCoef) +
-		Format("OptionalValencyPenalty = %f\n", (double)OptionalValencyPenaltyCoef) +
-		Format("InstrAgentRelsCount = %f\n", (double)InstrAgentRelsCountCoef) +
-		Format("ValencyDisorder = %f\n", (double)ValencyDisorderCoef) +
-		Format("CommaBetweenBrothersExceptMNAViolationsCount = %f\n", (double)CommaBetweenBrothersExceptMNAViolationsCountCoef) +
-		Format("OnlyCommaBetweenViolationsCount = %f\n", (double)OnlyCommaBetweenViolationsCountCoef) +
-		Format("AgreeWithSyntaxTop = %f\n", (double)AgreeWithSyntaxTopCoefCoef) +
-		Format("TopAgreeWithSyntaxCriteria = %f\n", (double)TopAgreeWithSyntaxCriteriaCoef) +
-		Format("SubjectPredicateViolationsCount = %f\n", (double)SubjectPredicateViolationsCountCoef) +
-		Format("GramRestrViolationsCount = %f\n", (double)GramRestrViolationsCountCoef) +
-		Format("MNAViolationsCount = %f\n", (double)MNAViolationsCountCoef) +
-		Format("CopulViolationsCount = %f\n", (double)CopulViolationsCountCoef) +
-		Format("CollocsCount = %f\n", (double)CollocsCountCoef) +
-		Format("OborotAdverbialCount = %f\n", (double)OborotAdverbialCountCoef) +
-		Format("LexFunctsCount = %f\n", (double)LexFunctsCountCoef) +
-		Format("ObligatoryValencyViolation = %f\n", (double)ObligatoryValencyViolationCoef) +
-		Format("ColloquialInterps = %f\n", (double)ColloquialInterpsCoef) +
-		Format("CorporaGleiche = %f\n", (double)CorporaGleicheCoef) +
-		Format("PassiveValencyPenalty = %f\n", (double)PassiveValencyPenaltyCoef) +
-		Format("SemFetAgreeMNACount = %f\n", (double)SemFetAgreeMNACoef) +
-		Format("WordWeightCount = %f\n", (double)WordWeightCoef) +
-		Format("MiscSemAgree = %f\n", (double)MiscSemAgreeCoef) +
-		Format("PrichastieWithoutActantsCount = %f\n", (double)PrichastieCoef) +
-		Format("SAMNodeViolation = 1000.000000\n") +
-		Format("PanicMode = 1000.000000\n");
-	return s;
+SemantiWeightComponentEnum GetSemantiWeightComponentByString(const std::string& s) {
+	for (auto i : AllComponents) {
+		if (i.Name == s) {
+			return i.Type;
+		}
+	}
+	throw CExpc("bad semantic weight component %s ", s.c_str());
 }
 
 
+TreeVariantValueCoefs::TreeVariantValueCoefs() {
+	size_t s = AllComponents.size();
+	assert(s == SemantiWeightComponentSize);
+	long i = 0; 
+	for (const auto& c : AllComponents) {
+		Coefs.push_back(c.DefaultValue);
+		assert((long)c.Type == i);
+		++i;
+	}
+}
+
+
+
+void TreeVariantValueCoefs::ReadOneCoef(std::string  s)
+{
+	Trim(s);
+	size_t i = s.find(" ");
+	if (i == string::npos) {
+		throw CExpc("cannot find space in \"%s\" while reading semantic coefficient", s.c_str());
+	}
+	auto t = GetSemantiWeightComponentByString(s.substr(0, i));
+	s = s.substr(i);
+	Trim(s);
+	Coefs[t] = atof(s.c_str());
+
+	// just not to store junk values
+	assert(Coefs[t] > -1000);
+	assert(Coefs[t] <= 20000);
+};
+
+std::string TreeVariantValueCoefs::GetCoefsString() const {
+	std::vector<std::string> items;
+	for (const auto& a : AllComponents) {
+		auto s = Format("%s=%f", a.Name.c_str(), Coefs[a.Type]);
+		items.push_back(s);
+	}
+	return join_string(items, "\n");
+}
+
+//============================
+
+
+void TreeVariantValue::SetCoefs(const TreeVariantValueCoefs* coefs) {
+	Coefs = coefs;
+}
+
 TreeVariantValue& TreeVariantValue :: operator = (const TreeVariantValue& X)
 {
-	Panic = X.Panic;
-	ValencyDisorder = X.ValencyDisorder;
-	ValencyMiss = X.ValencyMiss;
-	DirectDisagree = X.DirectDisagree;
-	ConnectedComponentsCount = X.ConnectedComponentsCount;
-	SemFetDisagree = X.SemFetDisagree;
-	ProjectnessCoef = X.ProjectnessCoef;
-	LexFetAgreeCount = X.LexFetAgreeCount;
-	AgreeWithSyntaxTopCoef = X.AgreeWithSyntaxTopCoef;
-	TopAgreeWithSyntaxCriteria = X.TopAgreeWithSyntaxCriteria;
-	RelationsLength = X.RelationsLength;
-	MNAViolationsCount = X.MNAViolationsCount;
-	SemRelPOSViolationsCount = X.SemRelPOSViolationsCount;
-	OnlyCommaBetweenViolationsCount = X.OnlyCommaBetweenViolationsCount;
-	SubjectPredicateViolationsCount = X.SubjectPredicateViolationsCount;
-	CommaBetweenBrothersExceptMNAViolationsCount = X.CommaBetweenBrothersExceptMNAViolationsCount;
-	OptionalValencyCount = X.OptionalValencyCount;
-	CopulViolationsCount = X.CopulViolationsCount;
-	InstrAgentRelsCount = X.InstrAgentRelsCount;
-	LexFunctsCount = X.LexFunctsCount;
-	GramRestrViolationsCount = X.GramRestrViolationsCount;
-	CollocsCount = X.CollocsCount;
-	SAMNodeViolation = X.SAMNodeViolation;
-	OborotAdverbialCount = X.OborotAdverbialCount;
-	ObligatoryValencyViolationCount = X.ObligatoryValencyViolationCount;
-	ColloquialInterpsCount = X.ColloquialInterpsCount;
-	CorporaGleicheCount = X.CorporaGleicheCount;
-	PassiveValencyCount = X.PassiveValencyCount;
-	SemFetAgreeMNACount = X.SemFetAgreeMNACount;
-	WordWeightCount = X.WordWeightCount;
-	MiscSemAgreeCount = X.MiscSemAgreeCount;
-	PrichastieWithoutActantsCount = X.PrichastieWithoutActantsCount;
 	Coefs = X.Coefs;
-
+	Weights = X.Weights;
 	return *this;
 };
 
-
-
 void TreeVariantValue::Init()
 {
-	Coefs = 0;
-	ValencyDisorder = 0;
-	ValencyMiss = 0;
-	DirectDisagree = 0;
-	SemFetDisagree = 0;
-	ConnectedComponentsCount = 0;
-	AgreeWithSyntaxTopCoef = 0;
-	TopAgreeWithSyntaxCriteria = 0;
-	RelationsLength = 0;
-	MNAViolationsCount = 0;
-	SemRelPOSViolationsCount = 0;
-	Panic = false;
-	OnlyCommaBetweenViolationsCount = 0;
-	SubjectPredicateViolationsCount = 0;
-	CommaBetweenBrothersExceptMNAViolationsCount = 0;
-	OptionalValencyCount = 0;
-	LexFetAgreeCount = 0;
-	ProjectnessCoef = 0;
-	CopulViolationsCount = 0;
-	InstrAgentRelsCount = 0;
-	LexFunctsCount = 0;
-	GramRestrViolationsCount = 0;
-	CollocsCount = 0;
-	SAMNodeViolation = false;
-	OborotAdverbialCount = 0;
-	ObligatoryValencyViolationCount = 0;
-	ColloquialInterpsCount = 0;
-	CorporaGleicheCount = 0;
-	PassiveValencyCount = 0;
-	SemFetAgreeMNACount = 0;
-	WordWeightCount = 0;
-	MiscSemAgreeCount = 0;
-	PrichastieWithoutActantsCount = 0;
+	Coefs = nullptr;
+	Weights.resize(AllComponents.size(), 0);
 };
+
+void TreeVariantValue::SetWeight(SemantiWeightComponentEnum w, long value) {
+	Weights[w] = value;
+}
+
+long TreeVariantValue::GetSingleWeight(SemantiWeightComponentEnum w) const {
+	return Weights[w];
+}
+
+bool TreeVariantValue::IsPanic() const {
+	return Weights[PanicMode] > 0;
+}
+
+void TreeVariantValue::SetPanic() {
+	Weights[PanicMode] = 1;
+}
+
+long TreeVariantValue::GetWeightCoef(SemantiWeightComponentEnum w) const {
+	return Coefs->Coefs[w];
+}
 
 TreeVariantValue::TreeVariantValue(const TreeVariantValueCoefs* _Coefs)
 {
@@ -218,180 +165,71 @@ bool TreeVariantValue::operator < (const TreeVariantValue& X) const
 
 
 
+long TreeVariantValue::GetWeightByType(WeightType weightType, bool  checkConnect, bool checkWordWeight)  const {
+	assert(Coefs);
+	double weight = 0.0;
+	for (const auto& a : AllComponents) {
+		if (!checkWordWeight && a.Type == WordWeightCount) continue;
+		if (!checkConnect && a.Type == ConnectedComponentsCount) continue;
+		if (a.WeightType == weightType) {
+			weight += (double)Weights[a.Type] * Coefs->Coefs[a.Type];
+		}
+	}
+	return (long)weight;
 
-
-long TreeVariantValue::GetWordWeight()  const
-{
-	return WordWeightCount * Coefs->WordWeightCoef / 100;
 }
 
-long TreeVariantValue::GetWeight1(bool  CheckConnect)  const
+long TreeVariantValue::GetWeight1(bool  checkConnect, bool checkWordWeight)  const
 {
-	assert(Coefs);
-	long s1 = ValencyDisorder * Coefs->ValencyDisorderCoef
-		+ DirectDisagree * Coefs->DirectDisagreeCoef
-		+ ProjectnessCoef * Coefs->ProjectnessCoefCoef
-		+ LexFetAgreeCount * Coefs->LexFetAgreeCountCoef
-		+ MNAViolationsCount * Coefs->MNAViolationsCountCoef
-		+ SemRelPOSViolationsCount * Coefs->SemRelPOSViolationsCountCoef
-		+ OnlyCommaBetweenViolationsCount * Coefs->OnlyCommaBetweenViolationsCountCoef
-		+ SubjectPredicateViolationsCount * Coefs->SubjectPredicateViolationsCountCoef;
-	long s2 = CommaBetweenBrothersExceptMNAViolationsCount * Coefs->CommaBetweenBrothersExceptMNAViolationsCountCoef
-		+ (Panic ? 1000 : 0)
-		+ ConnectedComponentsCount * ((CheckConnect) ? Coefs->ConnectedComponentsCountCoef : 0)
-		+ CopulViolationsCount * Coefs->CopulViolationsCountCoef
-		+ GramRestrViolationsCount * Coefs->GramRestrViolationsCountCoef
-		+ CollocsCount * Coefs->CollocsCountCoef
-		+ OborotAdverbialCount * Coefs->OborotAdverbialCountCoef
-		+ ColloquialInterpsCount * Coefs->ColloquialInterpsCoef;
-	long s3 = SAMNodeViolation * 1000
-		+ CorporaGleicheCount * Coefs->CorporaGleicheCoef
-		+ PassiveValencyCount * Coefs->PassiveValencyPenaltyCoef
-		+ SemFetAgreeMNACount * Coefs->SemFetAgreeMNACoef
-		+ GetWordWeight()
-		+ PrichastieWithoutActantsCount * Coefs->PrichastieCoef
-		+ RelationsLength * Coefs->RelationsLengthCoef / 100
-		+ MiscSemAgreeCount * Coefs->MiscSemAgreeCoef;
-	return s1 + s2 + s3;
+	return GetWeightByType(WeightType::Weight1, checkConnect, checkWordWeight);
 };
-
 
 long TreeVariantValue::GetWeight2()  const
 {
-	assert(Coefs);
-	return
-		SemFetDisagree * Coefs->SemFetDisagreeCoef / 100
-
-		+ OptionalValencyCount * Coefs->OptionalValencyPenaltyCoef
-		+ LexFunctsCount * Coefs->LexFunctsCountCoef
-		+ InstrAgentRelsCount * Coefs->InstrAgentRelsCountCoef / 100
-		+ ObligatoryValencyViolationCount * Coefs->ObligatoryValencyViolationCoef;
-
-
+	return GetWeightByType(WeightType::Weight2, false, false);
 };
 
-long TreeVariantValue::GetWeight3(bool  CheckConnect)  const
+long TreeVariantValue::GetWeight3()  const
 {
-	assert(Coefs);
-	return
-		AgreeWithSyntaxTopCoef * Coefs->AgreeWithSyntaxTopCoefCoef
-		+ TopAgreeWithSyntaxCriteria * Coefs->TopAgreeWithSyntaxCriteriaCoef;
+	return GetWeightByType(WeightType::Weight3, false, false);
 };
 
-long TreeVariantValue::GetTreeWeight()  const
+long TreeVariantValue::GetTreeWeight(bool  checkConnect, bool checkWordWeight)  const
 {
-	assert(Coefs);
-	return   GetWeight1()
-		+ GetWeight2()
-		+ GetWeight3();
-
+	return   GetWeight1(checkConnect, checkWordWeight) + GetWeight2() + GetWeight3();
 };
 
 std::string TreeVariantValue::GetStr()  const
 {
-	std::string Q = Format("ValencyDisorder=%i;\nDirectDisagree=%i;\nSemFetDisagree=%i;\nConnectedComponents=%i;\nProjectnessCoef=%i;\nLexFetAgree=%i;\nAgreeWithSyntaxTop=%i;\nTopAgreeWithSyntaxCriteria=%i\nSemRelPOSViolations=%i;\nMNAViolations=%i;\nOnlyCommaBetweenViolations=%i;\nRelationsLength=%i;\nSubjectPredicateViolations=%i;\nOptionalValencyCount=%i;\nCopulViolations=%i;\nInstrAgentRels=%i;\nLexFuncts=%i;\nGramRestrViolations=%i;\nCollocs=%i\n OborotAdverbial=%i\nObligatoryValencyViolation=%i\nColloquialInterps=%i\nCorporaGleicheCount=%i\nPassiveValencyCount=%i\nSemFetAgreeMNACount=%i WordWeightCount=%i MiscSemAgreeCount=%i",
-		ValencyDisorder, DirectDisagree, SemFetDisagree, ConnectedComponentsCount, ProjectnessCoef, LexFetAgreeCount, AgreeWithSyntaxTopCoef, TopAgreeWithSyntaxCriteria, SemRelPOSViolationsCount, MNAViolationsCount, OnlyCommaBetweenViolationsCount, RelationsLength, SubjectPredicateViolationsCount, OptionalValencyCount, CopulViolationsCount, InstrAgentRelsCount, LexFunctsCount, GramRestrViolationsCount, CollocsCount, OborotAdverbialCount, ObligatoryValencyViolationCount, ColloquialInterpsCount, CorporaGleicheCount, PassiveValencyCount, SemFetAgreeMNACount, WordWeightCount, MiscSemAgreeCount);
-	return Q;
+	std::vector<std::string> items;
+	for (const auto& a : AllComponents) {
+		items.push_back(Format("%s=%ld;", a.Name.c_str(), Weights[a.Type]));
+	}
+	return join_string(items, "\n");
 };
 
 
 std::string TreeVariantValue::GetStrOfNotNull()  const
 {
-	std::string Result;
-	if (ValencyDisorder > 0)  Result += Format("ValencyDisorder=%i\n", ValencyDisorder);
-	if (DirectDisagree > 0)  Result += Format("DirectDisagree=%i\n", DirectDisagree);
-	if (SemFetDisagree > 0)  Result += Format("SemFetDisagree=%i\n", SemFetDisagree);
-
-	if (ConnectedComponentsCount > 0)  Result += Format("ConnectedComponentsCount=%i\n", ConnectedComponentsCount);
-	if (ProjectnessCoef > 0)  Result += Format("ProjectnessCoef=%i\n", ProjectnessCoef);
-	if (LexFetAgreeCount > 0)  Result += Format("LexFetAgreeCount=%i\n", LexFetAgreeCount);
-
-
-	if (AgreeWithSyntaxTopCoef > 0)  Result += Format("AgreeWithSyntaxTopCoef=%i\n", AgreeWithSyntaxTopCoef);
-	if (TopAgreeWithSyntaxCriteria > 0)  Result += Format("TopAgreeWithSyntaxCriteria=%i\n", TopAgreeWithSyntaxCriteria);
-	if (SemRelPOSViolationsCount > 0)  Result += Format("SemRelPOSViolationsCount=%i\n", SemRelPOSViolationsCount);
-
-
-	if (MNAViolationsCount > 0)  Result += Format("MNAViolationsCount=%i\n", MNAViolationsCount);
-	if (OnlyCommaBetweenViolationsCount > 0)  Result += Format("OnlyCommaBetweenViolationsCount=%i\n", OnlyCommaBetweenViolationsCount);
-	if (RelationsLength > 0)  Result += Format("RelationsLength=%i\n", RelationsLength);
-
-	if (SubjectPredicateViolationsCount > 0)  Result += Format("SubjectPredicateViolationsCount=%i\n", SubjectPredicateViolationsCount);
-	if (OptionalValencyCount > 0)  Result += Format("OptionalValencyCount=%i\n", OptionalValencyCount);
-	if (CopulViolationsCount > 0)  Result += Format("CopulViolationsCount=%i\n", CopulViolationsCount);
-
-	if (InstrAgentRelsCount > 0)  Result += Format("InstrAgentRelsCount=%i\n", InstrAgentRelsCount);
-	if (LexFunctsCount > 0)  Result += Format("LexFunctsCount=%i\n", LexFunctsCount);
-	if (GramRestrViolationsCount > 0)  Result += Format("GramRestrViolationsCount=%i\n", GramRestrViolationsCount);
-
-
-	if (CollocsCount > 0)  Result += Format("CollocsCount=%i\n", CollocsCount);
-	if (OborotAdverbialCount > 0)  Result += Format("OborotAdverbialCount=%i\n", OborotAdverbialCount);
-	if (ObligatoryValencyViolationCount > 0)  Result += Format("ObligatoryValencyViolationCount=%i\n", ObligatoryValencyViolationCount);
-
-	if (ColloquialInterpsCount > 0)  Result += Format("ColloquialInterpsCount=%i\n", ColloquialInterpsCount);
-	if (CorporaGleicheCount > 0)  Result += Format("CorporaGleicheCount=%i\n", CorporaGleicheCount);
-	if (PassiveValencyCount > 0)  Result += Format("PassiveValencyCount=%i\n", PassiveValencyCount);
-
-	if (SemFetAgreeMNACount > 0)  Result += Format("SemFetAgreeMNACount=%i\n", SemFetAgreeMNACount);
-	if (WordWeightCount > 0)  Result += Format("WordWeightCount=%i\n", WordWeightCount);
-	if (CommaBetweenBrothersExceptMNAViolationsCount > 0)  Result += Format("CommaBetweenBrothersExceptMNAViolationsCount=%i\n", CommaBetweenBrothersExceptMNAViolationsCount);
-
-	if (MiscSemAgreeCount > 0)  Result += Format("MiscSemAgreeCount=%i\n", MiscSemAgreeCount);
-
-	if (PrichastieWithoutActantsCount > 0)  Result += Format("PrichastieWithoutActantsCount=%i\n", PrichastieWithoutActantsCount);
-
-	return Result;
+	std::vector<std::string> items;
+	for (const auto& a : AllComponents) {
+		if (Weights[a.Type] != 0) {
+			items.push_back(Format("%s=%ld;", a.Name.c_str(), Weights[a.Type]));
+		}
+	}
+	return join_string(items, "\n");
 };
 
 
-std::string TreeVariantValue::GetDifference(const TreeVariantValue& X)  const
+std::string TreeVariantValue::GetDifference(const TreeVariantValue& _X)  const
 {
-	std::string Result;
-	if (X.ValencyDisorder != ValencyDisorder)  Result += Format("ValencyDisorder=%i (%i)\n", ValencyDisorder, X.ValencyDisorder);
-	if (X.DirectDisagree != DirectDisagree)  Result += Format("DirectDisagree=%i (%i)\n", DirectDisagree, X.DirectDisagree);
-	if (X.SemFetDisagree != SemFetDisagree)  Result += Format("SemFetDisagree=%i (%i)\n", SemFetDisagree, X.SemFetDisagree);
-
-	if (X.ConnectedComponentsCount != ConnectedComponentsCount)  Result += Format("ConnectedComponentsCount=%i (%i)\n", ConnectedComponentsCount, X.ConnectedComponentsCount);
-	if (X.ProjectnessCoef != ProjectnessCoef)  Result += Format("ProjectnessCoef=%i (%i)\n", ProjectnessCoef, X.ProjectnessCoef);
-	if (X.LexFetAgreeCount != LexFetAgreeCount)  Result += Format("LexFetAgreeCount=%i (%i)\n", LexFetAgreeCount, X.LexFetAgreeCount);
-
-
-	if (X.AgreeWithSyntaxTopCoef != X.AgreeWithSyntaxTopCoef)  Result += Format("AgreeWithSyntaxTopCoef=%i (%i)\n", AgreeWithSyntaxTopCoef, X.AgreeWithSyntaxTopCoef);
-	if (X.TopAgreeWithSyntaxCriteria != TopAgreeWithSyntaxCriteria)  Result += Format("TopAgreeWithSyntaxCriteria=%i (%i)\n", TopAgreeWithSyntaxCriteria, X.TopAgreeWithSyntaxCriteria);
-	if (X.SemRelPOSViolationsCount != X.SemRelPOSViolationsCount)  Result += Format("SemRelPOSViolationsCount=%i (%i)\n", SemRelPOSViolationsCount, X.SemRelPOSViolationsCount);
-
-
-	if (X.MNAViolationsCount != X.MNAViolationsCount)  Result += Format("MNAViolationsCount=%i (%i)\n", MNAViolationsCount, X.MNAViolationsCount);
-	if (X.OnlyCommaBetweenViolationsCount != X.OnlyCommaBetweenViolationsCount)  Result += Format("OnlyCommaBetweenViolationsCount=%i (%i)\n", OnlyCommaBetweenViolationsCount, X.OnlyCommaBetweenViolationsCount);
-	if (X.RelationsLength != RelationsLength)  Result += Format("RelationsLength=%i (%i)\n", RelationsLength, X.RelationsLength);
-
-	if (X.SubjectPredicateViolationsCount != SubjectPredicateViolationsCount)  Result += Format("SubjectPredicateViolationsCount=%i (%i)\n", SubjectPredicateViolationsCount, X.SubjectPredicateViolationsCount);
-	if (X.OptionalValencyCount != OptionalValencyCount)  Result += Format("OptionalValencyCount=%i (%i)\n", OptionalValencyCount, X.OptionalValencyCount);
-	if (X.CopulViolationsCount != CopulViolationsCount)  Result += Format("CopulViolationsCount=%i (%i)\n", CopulViolationsCount, X.CopulViolationsCount);
-
-	if (X.InstrAgentRelsCount != InstrAgentRelsCount)  Result += Format("InstrAgentRelsCount=%i (%i)\n", InstrAgentRelsCount, X.InstrAgentRelsCount);
-	if (X.LexFunctsCount != LexFunctsCount)  Result += Format("LexFunctsCount=%i (%i)\n", LexFunctsCount, X.LexFunctsCount);
-	if (X.GramRestrViolationsCount != X.GramRestrViolationsCount)  Result += Format("GramRestrViolationsCount=%i (%i)\n", GramRestrViolationsCount, X.GramRestrViolationsCount);
-
-
-	if (X.CollocsCount != CollocsCount)  Result += Format("CollocsCount=%i (%i)\n", CollocsCount, X.CollocsCount);
-	if (X.OborotAdverbialCount != OborotAdverbialCount)  Result += Format("OborotAdverbialCount=%i (%i)\n", OborotAdverbialCount, X.OborotAdverbialCount);
-	if (X.ObligatoryValencyViolationCount != X.ObligatoryValencyViolationCount)  Result += Format("ObligatoryValencyViolationCount=%i (%i)\n", ObligatoryValencyViolationCount, X.ObligatoryValencyViolationCount);
-
-	if (X.ColloquialInterpsCount != ColloquialInterpsCount)  Result += Format("ColloquialInterpsCount=%i (%i)\n", ColloquialInterpsCount, X.ColloquialInterpsCount);
-	if (X.CorporaGleicheCount != CorporaGleicheCount)  Result += Format("CorporaGleicheCount=%i (%i)\n", CorporaGleicheCount, X.CorporaGleicheCount);
-	if (X.PassiveValencyCount != PassiveValencyCount)  Result += Format("PassiveValencyCount=%i (%i)\n", PassiveValencyCount, X.PassiveValencyCount);
-
-	if (X.SemFetAgreeMNACount != SemFetAgreeMNACount)  Result += Format("SemFetAgreeMNACount=%i (%i)\n", SemFetAgreeMNACount, X.SemFetAgreeMNACount);
-	if (X.WordWeightCount != WordWeightCount)  Result += Format("WordWeightCount=%i (%i)\n", WordWeightCount, X.WordWeightCount);
-	if (X.CommaBetweenBrothersExceptMNAViolationsCount != X.CommaBetweenBrothersExceptMNAViolationsCount)  Result += Format("CommaBetweenBrothersExceptMNAViolationsCount=%i (%i)\n", CommaBetweenBrothersExceptMNAViolationsCount, X.CommaBetweenBrothersExceptMNAViolationsCount);
-
-	if (X.MiscSemAgreeCount != MiscSemAgreeCount)  Result += Format("MiscSemAgreeCount=%i (%i)\n", MiscSemAgreeCount, X.MiscSemAgreeCount);
-
-	if (X.PrichastieWithoutActantsCount != PrichastieWithoutActantsCount)  Result += Format("PrichastieWithoutActantsCount=%i (%i)\n", PrichastieWithoutActantsCount, X.PrichastieWithoutActantsCount);
-
-	return Result;
+	std::vector<std::string> items;
+	for (const auto& a : AllComponents) {
+		if (Weights[a.Type] != _X.Weights[a.Type]) {
+			items.push_back(Format("%s: %ld != (%ld);", a.Name.c_str(), Weights[a.Type], _X.Weights[a.Type]));
+		}
+	}
+	return join_string(items, "\n");
 };
 
 
@@ -424,15 +262,15 @@ size_t CTreeVariant::GetRelsCount() const
 
 
 //=================
-long CTreeOfLexVariantWeight::GetBestTreeWeight() const {
+long CTreeOfLexVariantWeight::GetBestTreeWeight(bool  checkConnect, bool checkWordWeight) const {
 	if (TreeVariantCount == 0) return 1000;
-	return m_BestValue.GetTreeWeight();
+	return m_BestValue.GetTreeWeight(checkConnect, checkWordWeight);
 }
 
-long CTreeOfLexVariantWeight::GetBestTreeWeight1(bool CheckConnected) const
+long CTreeOfLexVariantWeight::GetBestTreeWeight1(bool  checkConnect, bool checkWordWeight) const
 {
 	if (TreeVariantCount == 0) return 1000;
-	return    m_BestValue.GetWeight1(CheckConnected);
+	return  m_BestValue.GetWeight1(checkConnect, checkWordWeight);
 
 
 };

@@ -553,7 +553,7 @@ void CRusSemStructure::CopyDopRelationsExceptAnaphor()
 {
 
 	for(int i = 0 ; i < m_DopRelations.size() ; i++ )
-		if (    (m_DopRelations[i].m_SyntacticRelation != _R("анафора")) 
+		if (    (m_DopRelations[i].m_SyntacticRelation != "anaphora_relation")
 			 && (m_DopRelations[i].m_SyntacticRelation != "ModalCopul") 
 		   )
 		{

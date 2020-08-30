@@ -2522,7 +2522,7 @@ long CRusSemStructure::CreateDefaultSubjectFromPreviousClause()
 
 			// уменьшаем вес этого варианта предложения, поскольку мы нанли подлежащее
 			if (!m_AlreadyBuiltClauseVariants.empty() && !m_AlreadyBuiltClauseVariants[0].m_BestLexVariants.empty())
-				Bonus -= m_AlreadyBuiltClauseVariants[0].m_BestLexVariants[0].m_BestValue.Coefs->ObligatoryValencyViolationCoef;
+				Bonus -= m_AlreadyBuiltClauseVariants[0].m_BestLexVariants[0].m_BestValue.GetWeightCoef(ObligatoryValencyViolation);
 		};
 		PrevSubjNodeNo = SubjNodeNo;
 	};
@@ -2554,7 +2554,7 @@ long CRusSemStructure::CreateDefaultSubjectFromPreviousClause()
 
 				// уменьшаем вес этого варианта предложения, поскольку мы нанли подлежащее
 				if (!m_AlreadyBuiltClauseVariants.empty() && !m_AlreadyBuiltClauseVariants[0].m_BestLexVariants.empty())
-					Bonus -= m_AlreadyBuiltClauseVariants[0].m_BestLexVariants[0].m_BestValue.Coefs->ObligatoryValencyViolationCoef;
+					Bonus -= m_AlreadyBuiltClauseVariants[0].m_BestLexVariants[0].m_BestValue.GetWeightCoef(ObligatoryValencyViolation);
 
 				InsertNodeAsSubject(Roots[0], CreatePronounByLemma(Lemma));
 			};

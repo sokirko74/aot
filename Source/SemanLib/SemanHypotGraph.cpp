@@ -819,8 +819,12 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 			bool Result = ApplyGramRestr(ClauseNo);
 			if (!m_bLastTry)
 			{
-				if (!Result) return false;
-				if (!FindComparWithNoActantAndCheck(ClauseNo)) return false;
+				if (!Result) {
+					return false;
+				}
+				if (!FindComparWithNoActantAndCheck(ClauseNo)) {
+					return false;
+				}
 			};
 
 		}
@@ -993,7 +997,7 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 
 
 			// уничтожаю длинные отношения,  длина которых превышает указанную пользователем (MaxRelationLeapsCount)
-			DeleteLongRelations(ClauseNo, m_SemCoefs.MaxRelationLeapsCount, true);
+			DeleteLongRelations(ClauseNo, MaxRelationLeapsCount, true);
 
 
 			// если мы разбираем очень сложную (Complexity(K) > 1.9) клаузу, то 

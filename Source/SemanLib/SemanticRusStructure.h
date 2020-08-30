@@ -1061,7 +1061,7 @@ public:
 	// выдает количество отношений, не прошедших  проверка всех отношений по SF
 	long			GetSemFetDisagreeCount (long Tag);
 	// проверяет, что текущая вершина проходит  по синтаксическим критериям 
-	bool			TopAgreeWithSyntaxCriteria (long Tag);
+	bool			GetTopAgreeWithSyntaxCriteria (long Tag);
 	// помечает отношения, которые не согласованы с частью речи узла, в который оно входит
 	void			MarkSemRelPOSViolations();
 	// выдает число отношений, которые не согласованы с частью речи узла, в который оно входит 
@@ -1155,7 +1155,7 @@ public:
 		  if (It == m_AlreadyBuiltClauseVariants.end()) return -1;
 		  return It - m_AlreadyBuiltClauseVariants.begin();
 	  };
-		bool          AgreeWithSyntaxTop (long Tag)  const;
+		bool          GetAgreeWithSyntaxTop (long Tag)  const;
 
 		long          IsLexFetAgree(long NodeNo) const;
 		long          GetLexFetAgreeCount(long Tag);

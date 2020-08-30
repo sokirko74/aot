@@ -4,65 +4,65 @@
 
 long CRusSemStructure::GetAnaphoricRelationsCount(long Tag)
 {
-  size_t Result =0;
+	size_t Result = 0;
 
-  for (size_t i = 0;  i < m_DopRelations.size(); i++)
-   if (HasTag(m_DopRelations[i].m_SourceNodeNo, Tag))
-    if (m_DopRelations[i].m_bRelUse)
- 	 if (m_DopRelations[i].m_SyntacticRelation == _R("анафора"))
-	 		Result++;
+	for (size_t i = 0; i < m_DopRelations.size(); i++)
+		if (HasTag(m_DopRelations[i].m_SourceNodeNo, Tag))
+			if (m_DopRelations[i].m_bRelUse)
+				if (m_DopRelations[i].m_SyntacticRelation == "anaphora_relation")
+					Result++;
 
-  return Result; 
+	return Result;
 };
 
 
 
 bool CRusSemStructure::IsInLexVariant(long ClauseNo, long NodeNo)
 {
-  return    m_Nodes[NodeNo].IsWordContainer()
-         && IsInClause(NodeNo, ClauseNo)
-		 ;
+	return    m_Nodes[NodeNo].IsWordContainer()
+		&& IsInClause(NodeNo, ClauseNo)
+		;
 };
 
 
 void CRusSemStructure::InitLexVariant(size_t ClauseNo)
 {
-  for (size_t NodeNo = 0;  NodeNo < m_Nodes.size(); NodeNo++)
-    if (IsInLexVariant(ClauseNo, NodeNo))
-		   m_Nodes[NodeNo].ResetCurrInterp();
+	for (size_t NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
+		if (IsInLexVariant(ClauseNo, NodeNo))
+			m_Nodes[NodeNo].ResetCurrInterp();
 
 };
 
 // процедура, которая выбирает все варианты, причем если где-это был выбран вариант Х,  
 // то во всех последующих вариантах выбирается этот же Х, если это возможно
-static void GetLexVariants(  const std::vector<CDictUnitInterpVector>&  Parents, 
-						   CDictUnitInterpVector&   V,
-						   std::vector<CDictUnitInterpVector>&  Variants, 
-						   long       Position)
-{ 
+static void GetLexVariants(const std::vector<CDictUnitInterpVector>& Parents,
+	CDictUnitInterpVector& V,
+	std::vector<CDictUnitInterpVector>& Variants,
+	long       Position)
+{
 	if (Variants.size() > 20000) return;
 	if (Position < V.size())
 	{
 
-		size_t i=0;
-		for (; i< Parents[Position].size(); i++)
-			{
-				size_t k=0;
-				for(; k < Position; k++)
-					if (V[k] ==  Parents[Position][i])
-						break;
-				if (k < Position) break;
-			};
+		size_t i = 0;
+		for (; i < Parents[Position].size(); i++)
+		{
+			size_t k = 0;
+			for (; k < Position; k++)
+				if (V[k] == Parents[Position][i])
+					break;
+			if (k < Position) break;
+		};
 		if (i == Parents[Position].size())
-			for (size_t i=0; i< Parents[Position].size(); i++)
+			for (size_t i = 0; i < Parents[Position].size(); i++)
 			{
 				V[Position] = Parents[Position][i];
-				GetLexVariants(Parents, V, Variants, Position+1);
+				GetLexVariants(Parents, V, Variants, Position + 1);
 			}
 		else
 		{
 			V[Position] = Parents[Position][i];
-			GetLexVariants(Parents, V, Variants, Position+1);
+			GetLexVariants(Parents, V, Variants, Position + 1);
 		}
 	}
 	else
@@ -71,9 +71,9 @@ static void GetLexVariants(  const std::vector<CDictUnitInterpVector>&  Parents,
 };
 
 
-bool CRusSemStructure ::  SetLexVariant(size_t ClauseNo, size_t& LexVariantInCurrSetCollocNo, size_t& CurrSetCollocHypNo)
+bool CRusSemStructure::SetLexVariant(size_t ClauseNo, size_t& LexVariantInCurrSetCollocNo, size_t& CurrSetCollocHypNo)
 {
-StartPoint :
+StartPoint:
 
 	CRusSemClause& C = m_Clauses[ClauseNo];
 	std::vector<CRusSemNode> SaveNodes = m_Nodes;
@@ -89,14 +89,14 @@ StartPoint :
 	std::vector<CDictUnitInterpVector> Parents;
 
 
-	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++)
+	for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
 		if (IsInLexVariant(ClauseNo, NodeNo))
-			if (!m_Nodes[NodeNo].GetInterps().empty()) 
+			if (!m_Nodes[NodeNo].GetInterps().empty())
 			{
-				Parents.push_back(CDictUnitInterpVector()); 
+				Parents.push_back(CDictUnitInterpVector());
 				m_Nodes[NodeNo].ResetCurrInterp();
-				for (size_t k=0; k < m_Nodes[NodeNo].GetInterps().size(); k++)
-					Parents[Parents.size() -1].push_back(m_Nodes[NodeNo].GetInterps()[k]);
+				for (size_t k = 0; k < m_Nodes[NodeNo].GetInterps().size(); k++)
+					Parents[Parents.size() - 1].push_back(m_Nodes[NodeNo].GetInterps()[k]);
 
 			}
 
@@ -108,8 +108,8 @@ StartPoint :
 
 	// если текущий вариант последний для текущего C.m_SetCollocHyps[m_CurrSetCollocHypNo],
 	// перейти к следующему множеству словосочетаний
-	if (LexVariantInCurrSetCollocNo >= Variants.size()) 
-		if (CurrSetCollocHypNo+1 == m_ClauseSetCollocHyps[ClauseNo].size())
+	if (LexVariantInCurrSetCollocNo >= Variants.size())
+		if (CurrSetCollocHypNo + 1 == m_ClauseSetCollocHyps[ClauseNo].size())
 		{
 			PopClausesNodeReferences();
 			return false;
@@ -118,7 +118,7 @@ StartPoint :
 		{
 			CurrSetCollocHypNo++;
 			LexVariantInCurrSetCollocNo = 0;
-			m_Nodes = SaveNodes;  
+			m_Nodes = SaveNodes;
 			m_SynRelations = SaveSynRelations;
 			RestoreClausesNodeReferences();
 			goto StartPoint;
@@ -131,13 +131,13 @@ StartPoint :
 	size_t k = 0;
 	CDictUnitInterpVector& V = Variants[LexVariantInCurrSetCollocNo];
 
-	for (long NodeNo=0; NodeNo < m_Nodes.size(); NodeNo++)
+	for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
 		if (IsInLexVariant(ClauseNo, NodeNo))
-			if (!m_Nodes[NodeNo].GetInterps().empty()) 
+			if (!m_Nodes[NodeNo].GetInterps().empty())
 			{
 				bool b = m_Nodes[NodeNo].SetCurrInterp(V[k]);
-				assert (b);
-				k++;		 
+				assert(b);
+				k++;
 			}
 
 	return true;
@@ -146,16 +146,16 @@ StartPoint :
 void CRusSemStructure::DeleteSAMNode(long ClauseNo, CRusSemNode& SamNode)
 {
 	SamNode.m_Words.clear();
-	for (long i=0; i < m_Nodes.size(); i++)
-		if ( IsInClause(i, ClauseNo) )
+	for (long i = 0; i < m_Nodes.size(); i++)
+		if (IsInClause(i, ClauseNo))
 			if (m_Nodes[i].IsPrimitive() && CanBeDeleted(i))
-				if  (    HasGramFetAfterColon (i, _R("нар")) 
-					&& HasRichPOS (i, PRONOUN_P)
+				if (HasGramFetAfterColon(i, _R("нар"))
+					&& HasRichPOS(i, PRONOUN_P)
 					)
 
 					if (GetSynRelationsCount(i) == 0)
 					{
-						SamNode =  m_Nodes[i];
+						SamNode = m_Nodes[i];
 						DelNode(i);
 						break;
 					}
@@ -163,31 +163,31 @@ void CRusSemStructure::DeleteSAMNode(long ClauseNo, CRusSemNode& SamNode)
 
 /*
   Эта функция проверяет, что  для слов "сам" и "один" выбрана правильная интерпретация.
-  Если  интерпретация равна GF = *:нар, тогда она должна  применяться только для случая 
+  Если  интерпретация равна GF = *:нар, тогда она должна  применяться только для случая
   "Он сделал это сам.", когда "сам" не подчинено именной группе.
-  Если интерпретация содеджит GF = *:c_опр, тогда она может быть использована только 
-  для случая "Сам директор сказал это".  Если  интерпретация для "сам" и "один" не соответствуется  
+  Если интерпретация содеджит GF = *:c_опр, тогда она может быть использована только
+  для случая "Сам директор сказал это".  Если  интерпретация для "сам" и "один" не соответствуется
   входному син. представлению, тогда данному лексическому варианту приписывается штраф.
 */
 bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 {
-	for (long i=0; i < m_Nodes.size(); i++)
-		if ( IsInClause(i, ClauseNo) )
+	for (long i = 0; i < m_Nodes.size(); i++)
+		if (IsInClause(i, ClauseNo))
 			if (m_Nodes[i].IsPrimitive())
 			{
-				if  (    HasGramFetAfterColon (i, _R("нар")) 
-					&& HasRichPOS (i, PRONOUN_P)
+				if (HasGramFetAfterColon(i, _R("нар"))
+					&& HasRichPOS(i, PRONOUN_P)
 					)
 				{
-					if ( HasIncomingNotWeakSynRelation (i) )  return false;
+					if (HasIncomingNotWeakSynRelation(i))  return false;
 				};
 
-				if  ( HasGramFetAfterColon (i, _R("с_опр")) )
-					if  ( m_Nodes[i].IsPrimitive() )
-						if (    m_Nodes[i].IsLemma(_R("ОДИН"))
-							||  m_Nodes[i].IsLemma(_R("САМ"))
-							)  
-							if ( !HasIncomingNotWeakSynRelation (i) )
+				if (HasGramFetAfterColon(i, _R("с_опр")))
+					if (m_Nodes[i].IsPrimitive())
+						if (m_Nodes[i].IsLemma(_R("ОДИН"))
+							|| m_Nodes[i].IsLemma(_R("САМ"))
+							)
+							if (!HasIncomingNotWeakSynRelation(i))
 								return false;
 			};
 
@@ -196,64 +196,69 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 
 
 /*
-Функция вставляет узел _R("сам") или "один" и проводит отношения ASPECT к нему для всех потециальных подлежащих. Если ни одного отношения не удалось провести, 
+Функция вставляет узел _R("сам") или "один" и проводит отношения ASPECT к нему для всех потециальных подлежащих. Если ни одного отношения не удалось провести,
  тогда возвращаем ложь.
  Между подлежащим и узлом сам проверяется согласование.
 */
 bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
 {
-  /*
-    если ничего вставлять не надо, выйдем с истиной 
-  */
-  if (SamNode.m_Words.size() == 0) return true;
+	/*
+	  если ничего вставлять не надо, выйдем с истиной
+	*/
+	if (SamNode.m_Words.size() == 0) return true;
 
-  long SamNodeNo = InsertNode (SamNode);
-  bool bResult = false;
+	long SamNodeNo = InsertNode(SamNode);
+	bool bResult = false;
 
-  for (long i=0; i < m_Nodes.size(); i++)
-   if ( IsInClause(i, ClauseNo) )
-   {
-	   CRelSet R = GetIncomingRelations(i, false);
-	   for (long l=0; l < R.m_RelsCount; l++)
-		if ( m_Relations[R.m_Rels[l]].m_SyntacticRelation == _R("подл") )
-			// проверяем согласование по числу/роду
-		  if (    (   (   (_QM(rPlural) | _QM(rSingular))
-			            & SamNode.GetGrammems()
-			            & m_Nodes[m_Relations[R.m_Rels[l]].m_SourceNodeNo].GetGrammems()
-					  )> 0
-				  )
-               && ( ( (   rAllGenders 
-			          & m_Nodes[m_Relations[R.m_Rels[l]].m_SourceNodeNo].GetGrammems()
-					  & SamNode.GetGrammems() ) > 0
-			         )
-			      || (
-			          (  rAllGenders 
-			          & m_Nodes[m_Relations[R.m_Rels[l]].m_SourceNodeNo].GetGrammems())  == 0
-			        )
-				  )
-			 )
-		  {	
-			AddRelation(CRusSemRelation(CValency("ASPECT", A_C), m_Relations[R.m_Rels[l]].m_SourceNodeNo,    SamNodeNo,   ""));			
-			// оно должно быть реверсивным, чтобы не отличаться от простых 
-			// наречий, чтобы занять правильное место в англ. предложении.
-			m_Relations[m_Relations.size()-1].m_bReverseRel = true;
-			m_DopRelations.push_back(CRusSemRelation(CValency("THESAME", A_C),  SamNodeNo,  m_Relations[R.m_Rels[l]].m_TargetNodeNo,  _R("анафора")));			
-			bResult = true;
-		  }
-         else    
-		  {
-			 // удаляем субъектную стрелку, которая не  согласовалась со словом _R("САМ")
-			 EraseRelation(R.m_Rels[l], "InsertSAMNode");
-			 // получаем новый набор выходящих отношений
-			 R = GetIncomingRelations(i, false);
-			 l=-1;
-		  };
-	};
-		  
- return bResult;	
+	for (long i = 0; i < m_Nodes.size(); i++)
+		if (IsInClause(i, ClauseNo))
+		{
+			CRelSet R = GetIncomingRelations(i, false);
+			for (long l = 0; l < R.m_RelsCount; l++)
+				if (m_Relations[R.m_Rels[l]].m_SyntacticRelation == _R("подл"))
+					// проверяем согласование по числу/роду
+					if ((((_QM(rPlural) | _QM(rSingular))
+						& SamNode.GetGrammems()
+						& m_Nodes[m_Relations[R.m_Rels[l]].m_SourceNodeNo].GetGrammems()
+						) > 0
+						)
+						&& (((rAllGenders
+							& m_Nodes[m_Relations[R.m_Rels[l]].m_SourceNodeNo].GetGrammems()
+							& SamNode.GetGrammems()) > 0
+							)
+							|| (
+								(rAllGenders
+									& m_Nodes[m_Relations[R.m_Rels[l]].m_SourceNodeNo].GetGrammems()) == 0
+								)
+							)
+						)
+					{
+						AddRelation(CRusSemRelation(CValency("ASPECT", A_C), m_Relations[R.m_Rels[l]].m_SourceNodeNo, SamNodeNo, ""));
+						// оно должно быть реверсивным, чтобы не отличаться от простых 
+						// наречий, чтобы занять правильное место в англ. предложении.
+						m_Relations[m_Relations.size() - 1].m_bReverseRel = true;
+						m_DopRelations.push_back(
+							CRusSemRelation(
+								CValency("THESAME", A_C),
+								SamNodeNo,
+								m_Relations[R.m_Rels[l]].m_TargetNodeNo,
+								"anaphora_relation"));
+						bResult = true;
+					}
+					else
+					{
+						// удаляем субъектную стрелку, которая не  согласовалась со словом _R("САМ")
+						EraseRelation(R.m_Rels[l], "InsertSAMNode");
+						// получаем новый набор выходящих отношений
+						R = GetIncomingRelations(i, false);
+						l = -1;
+					};
+		};
+
+	return bResult;
 };
 
-long Count =0;
+long Count = 0;
 void CRusSemStructure::ConnectClausesForLexVariantCombination()
 {
 
@@ -268,7 +273,7 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 	AssertValidGraph();
 
-	for (long ClauseNo =0; ClauseNo < m_Clauses.size(); ClauseNo++)
+	for (long ClauseNo = 0; ClauseNo < m_Clauses.size(); ClauseNo++)
 	{
 
 
@@ -288,41 +293,41 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 		WordNo совпадает с WordNo какого-то узла текущей клаузы.
 		*/
 		/*
-		ClauseNo может отличаться от I.m_BuiltClauseNo, поскольку сохраненная 
+		ClauseNo может отличаться от I.m_BuiltClauseNo, поскольку сохраненная
 		клаузы могла быть построена в варианте, где произошло объединение клауз
 		*/
 		long SaveClauseNo = I.m_BuiltClauseNo;
-		m_Nodes.erase(m_Nodes.begin() +m_Clauses[ClauseNo].m_BeginNodeNo, m_Nodes.begin() +m_Clauses[ClauseNo].m_EndNodeNo);
+		m_Nodes.erase(m_Nodes.begin() + m_Clauses[ClauseNo].m_BeginNodeNo, m_Nodes.begin() + m_Clauses[ClauseNo].m_EndNodeNo);
 
-		m_Nodes.insert(m_Nodes.begin() + m_Clauses[ClauseNo].m_BeginNodeNo, 
-			W.m_Nodes.begin() + W.m_Clauses[SaveClauseNo].m_BeginNodeNo, 
+		m_Nodes.insert(m_Nodes.begin() + m_Clauses[ClauseNo].m_BeginNodeNo,
+			W.m_Nodes.begin() + W.m_Clauses[SaveClauseNo].m_BeginNodeNo,
 			W.m_Nodes.begin() + W.m_Clauses[SaveClauseNo].m_EndNodeNo);
 
 
 		// копируем отношения
 		long SaveStartNode = W.m_Clauses[SaveClauseNo].m_BeginNodeNo;
-		long SaveLength =  W.m_Clauses[SaveClauseNo].GetNodesCount();
+		long SaveLength = W.m_Clauses[SaveClauseNo].GetNodesCount();
 		long StartNode = m_Clauses[ClauseNo].m_BeginNodeNo;
 		long Length = m_Clauses[ClauseNo].GetNodesCount();
-		long Delta = StartNode - SaveStartNode; 
+		long Delta = StartNode - SaveStartNode;
 
 		//W.IncrementNodeRef(W.m_Clauses[SaveClauseNo].m_BeginNodeNo, Delta);
 		/*
 		добавим Delta ко всем узлам (не только к узлам клаузы и узлам идущим после них)
 		Если мы изменим индексы отношений только для этйо клаузы,
 		тогжа появится отношения, которое не принадлежит данной клаузы, но его
-		могут указыать на узлы данной клаузы 
+		могут указыать на узлы данной клаузы
 		*/
 		W.IncrementNodeRef(0, Delta);
 		W.m_Clauses[SaveClauseNo].IncrementNodesReferences(Delta);
-		m_Relations.insert(m_Relations.end(), W.m_Relations.begin(),W.m_Relations.end());
-		m_DopRelations.insert(m_DopRelations.end(), W.m_DopRelations.begin(),W.m_DopRelations.end());
-		m_LexFuncts.insert(m_LexFuncts.end(), W.m_LexFuncts.begin(),W.m_LexFuncts.end());
-		m_Clauses[ClauseNo] = W.m_Clauses[SaveClauseNo]; 
+		m_Relations.insert(m_Relations.end(), W.m_Relations.begin(), W.m_Relations.end());
+		m_DopRelations.insert(m_DopRelations.end(), W.m_DopRelations.begin(), W.m_DopRelations.end());
+		m_LexFuncts.insert(m_LexFuncts.end(), W.m_LexFuncts.begin(), W.m_LexFuncts.end());
+		m_Clauses[ClauseNo] = W.m_Clauses[SaveClauseNo];
 		m_Clauses[ClauseNo].m_CurrLexVariantNo = CurrLexVariant;
-		for (long i=0; i < m_Clauses.size();i++)
-			if (m_Clauses[i].m_BeginNodeNo >  m_Clauses[ClauseNo].m_BeginNodeNo)
-				m_Clauses[i].IncrementNodesReferences(SaveLength-Length);
+		for (long i = 0; i < m_Clauses.size(); i++)
+			if (m_Clauses[i].m_BeginNodeNo > m_Clauses[ClauseNo].m_BeginNodeNo)
+				m_Clauses[i].IncrementNodesReferences(SaveLength - Length);
 
 
 
@@ -333,13 +338,13 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 		m_Nodes[W.m_SynRelations[j].m_SourceNodeNo] и
 		m_Nodes[W.m_SynRelations[j].m_TargetNodeNo]
 		*/
-		for  (long j =0; j < 	W.m_SynRelations.size(); j++)
-			if  (    (W.m_SynRelations[j].m_SourceNodeNo < m_Clauses[ClauseNo].m_EndNodeNo)
+		for (long j = 0; j < W.m_SynRelations.size(); j++)
+			if ((W.m_SynRelations[j].m_SourceNodeNo < m_Clauses[ClauseNo].m_EndNodeNo)
 				&& (W.m_SynRelations[j].m_TargetNodeNo < m_Clauses[ClauseNo].m_EndNodeNo)
 				&& (m_Clauses[ClauseNo].m_BeginNodeNo <= W.m_SynRelations[j].m_SourceNodeNo)
 				&& (m_Clauses[ClauseNo].m_BeginNodeNo <= W.m_SynRelations[j].m_TargetNodeNo)
 				)
-				m_SynRelations.push_back(W.m_SynRelations[j]);	
+				m_SynRelations.push_back(W.m_SynRelations[j]);
 
 
 		//*    
@@ -347,24 +352,24 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 		/*
 		см. выше замечание о слияние клауз и о неравенсте номеров клауз
 		*/
-		for (long i=m_Clauses[ClauseNo].m_BeginNodeNo;i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
+		for (long i = m_Clauses[ClauseNo].m_BeginNodeNo; i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
 			m_Nodes[i].m_ClauseNo = ClauseNo;
 
 		AssertValidGraph();
 		//*	 
-		std::string Q = Format 
-			("===== Clause %i ==== \n LexVariantCount = %i\n %s \n Weight = %i, %s \n", 
-			ClauseNo, 
+		std::string Q = Format
+		("===== Clause %i ==== \n LexVariantCount = %i\n %s \n Weight = %i, %s \n",
+			ClauseNo,
 			I.m_BestLexVariants.size(),
-			W.m_BestValue.Panic ? "Panic" : "All checked",
-			W.GetBestTreeWeight(), 
-			(W.m_BestValue.ProjectnessCoef == 1) ? "not projected" : "projected");
+			W.m_BestValue.IsPanic() ? "Panic" : "All checked",
+			W.GetBestTreeWeight(),
+			(W.m_BestValue.GetSingleWeight(ProjectnessViolation) == 1) ? "not projected" : "projected");
 		m_ClausePropertiesProtocol += Q;
 		if (m_Clauses[ClauseNo].m_BestPO != "")
-			m_ClausePropertiesProtocol += Format("DOMAIN = %s\n",m_Clauses[ClauseNo].m_BestPO.c_str());
+			m_ClausePropertiesProtocol += Format("DOMAIN = %s\n", m_Clauses[ClauseNo].m_BestPO.c_str());
 
 
-		Q = Format ("\n === Clause %i === \n",ClauseNo);
+		Q = Format("\n === Clause %i === \n", ClauseNo);
 		m_WeightProtocol += Q;
 		m_WeightProtocol += W.m_BestValue.GetStrOfNotNull();
 		//*
@@ -378,27 +383,27 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 	ProcessIsolatedParticipleAnd();
 
-	CLexVariant InitialLexVariant (*this);
+	CLexVariant InitialLexVariant(*this);
 
 	// устаналиваем обычный режим построения межклаузных связей
-	m_ClauseConnectionType  = ProminentClauseRules;
+	m_ClauseConnectionType = ProminentClauseRules;
 
 	// три попытки соединить клаузы
 	// 1 попытка
-	ApplyClauseRules( 1);
+	ApplyClauseRules(1);
 
 	// 2 попытка
 	if (GetClauseRelationCount() != m_Clauses.size() - 1)
 	{
-		CopyLexVar (InitialLexVariant);
+		CopyLexVar(InitialLexVariant);
 		ApplyClauseRules(m_Clauses.size());
 	};
 
 	// 3 попытка
 	if (GetClauseRelationCount() != m_Clauses.size() - 1)
 	{
-		CopyLexVar (InitialLexVariant);
-		m_ClauseConnectionType	    = AllPossibleClauseRules;
+		CopyLexVar(InitialLexVariant);
+		m_ClauseConnectionType = AllPossibleClauseRules;
 		ApplyClauseRules(m_Clauses.size());
 
 	};
@@ -406,7 +411,7 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 	/*
 	нужно удалить отношения и узлы, которые помечены к удалению
-	в функции ApplyClauseRules 
+	в функции ApplyClauseRules
 	*/
 	DelRelsToDelete("from ConnectClausesForLexVariantCombination");
 	DelNodesToDelete();
@@ -419,52 +424,52 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 
 CLexVariant CRusSemStructure::BuildTheVariant(long ClauseNo)
 {
-try 
-{
-	CLexVariant V;
-
-	V.m_BestValue.Coefs = &m_SemCoefs;
-
-	m_Relations.clear();
-
-	// узел, содежащий лемму "САМ",удаленный на время построения дерева
-	CRusSemNode SamNode;
-	DeleteSAMNode(ClauseNo, SamNode);
-
-	bool HypotGraphResult = BuildHypotRelationsGraph(ClauseNo);
-
-	AssertValidGraph();
-
-	PrintRelations();
-
-
-	if  ( m_PanicTreeVariantCount > 0)
+	try
 	{
-		V.AllRelationsCount =  m_Relations.size();
-		V.TreeVariantCount = GetTreeByConnectedComponents(ClauseNo, V.m_BestValue);
+		CLexVariant V;
+
+		V.m_BestValue.SetCoefs(&m_SemCoefs);
+
+		m_Relations.clear();
+
+		// узел, содежащий лемму "САМ",удаленный на время построения дерева
+		CRusSemNode SamNode;
+		DeleteSAMNode(ClauseNo, SamNode);
+
+		bool HypotGraphResult = BuildHypotRelationsGraph(ClauseNo);
+
+		AssertValidGraph();
+
+		PrintRelations();
+
+
+		if (m_PanicTreeVariantCount > 0)
+		{
+			V.AllRelationsCount = m_Relations.size();
+			V.TreeVariantCount = GetTreeByConnectedComponents(ClauseNo, V.m_BestValue);
+		}
+
+		if (!HypotGraphResult)
+		{
+			V.m_BestValue.SetPanic();
+		};
+
+
+		/*
+			если  не удалось вставить узел "сам", значит мы получили еще один разрыв
+		*/
+		if (!InsertSAMNode(ClauseNo, SamNode))
+			V.m_BestValue.SetWeight(ConnectedComponentsCount, V.m_BestValue.GetSingleWeight(ConnectedComponentsCount) + 1);
+
+		V.m_BestValue.SetWeight(LexFunctsCount, CountLexFunctsInOneClause(ClauseNo));
+		V.m_BestValue.SetWeight(GramRestrViolationsCount, 0);
+		return V;
 	}
-
-	if (!HypotGraphResult)
+	catch (...)
 	{
-	  V.m_BestValue.Panic = true;
+		ErrorMessage("BuildTheVariant Failed");
+		throw;
 	};
-
- 
-	/*
-		если  не удалось вставить узел "сам", значит мы получили еще один разрыв
-	*/
-	if (!InsertSAMNode(ClauseNo, SamNode))
-		V.m_BestValue.ConnectedComponentsCount++;
-		  
-	V.m_BestValue.LexFunctsCount = CountLexFunctsInOneClause(ClauseNo);
-	V.m_BestValue.GramRestrViolationsCount = 0;
-	return V;
-}
-catch (...)
-{
-	 ErrorMessage ("BuildTheVariant Failed");
-	 throw;
-};
 };
 
 
@@ -472,23 +477,23 @@ catch (...)
 //восстанавливаем леммы НИКТО, НИЧТО, НИСКОЛЬКО, НИКАКОЙ,
 // если они были записаны разрывно, типа "ни о чем"
 
-void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
+void UnitDisruptedConjunctions(CRusSemStructure& R, long ClauseNo)
 {
 	for (long i = R.m_Clauses[ClauseNo].m_BeginNodeNo; i < R.m_Clauses[ClauseNo].m_EndNodeNo; i++)
 		if (R.m_Nodes[i].IsLemmaList({ _R("КТО"),_R("ЧТО"),_R("СКОЛЬКО"),_R("КАКОЙ") }))
 		{
-			//_R("НИ") может стоять контактно или быть разделено предлогом 
-			if  (     (i > 0)
-					&& R.m_Nodes[i-1].IsWordForm(_R("НИ"))
-					&& R.CanBeDeleted(i-1)
+			//"НИ" может стоять контактно или быть разделено предлогом 
+			if ((i > 0)
+				&& R.m_Nodes[i - 1].IsWordForm(_R("НИ"))
+				&& R.CanBeDeleted(i - 1)
 				)
-				R.DelNode(i-1);
+				R.DelNode(i - 1);
 			else
-				if  (     (i > 1)
-						&& R.m_Nodes[i-2].IsWordForm(_R("НИ"))
-						&& R.CanBeDeleted(i-2)
+				if ((i > 1)
+					&& R.m_Nodes[i - 2].IsWordForm(_R("НИ"))
+					&& R.CanBeDeleted(i - 2)
 					)
-					  R.DelNode(i-2);
+					R.DelNode(i - 2);
 				else
 					continue;
 			// только что удалили узел
@@ -497,16 +502,16 @@ void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
 
 			CRusSemWord& W = R.m_Nodes[i].m_Words[0];
 			W.m_Lemma = _R("НИ") + W.m_Lemma;
-			W.m_ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, W.m_Lemma,  0);
+			W.m_ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, W.m_Lemma, 0);
 			R.m_Nodes[i].DelAllInterps();
 
 			std::string UnitStr = W.m_Lemma;
 			EngRusMakeLower(UnitStr);
-			WORD UnitNo  = R.GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
+			WORD UnitNo = R.GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 			if (UnitNo != ErrUnitNo)
 				for (long j = UnitNo; UnitStr == R.GetRoss(Ross)->GetEntryStr(j); j++)
-					if (R.GramFetAgreeWithPoses (*R.GetRossHolder(Ross), j, W))
-						R.m_Nodes[i].AddInterp( CDictUnitInterp(R.GetRossHolder(Ross),Ross, j, false, false) );
+					if (R.GramFetAgreeWithPoses(*R.GetRossHolder(Ross), j, W))
+						R.m_Nodes[i].AddInterp(CDictUnitInterp(R.GetRossHolder(Ross), Ross, j, false, false));
 
 		};
 
@@ -514,7 +519,7 @@ void UnitDisruptedConjunctions (CRusSemStructure& R, long ClauseNo)
 };
 
 // проходит по макисмальным узлам, подсоединяя частицу "не", "только" к первому слева узлу.
-void CRusSemStructure::InitRelationOperators (long ClauseNo)
+void CRusSemStructure::InitRelationOperators(long ClauseNo)
 {
 	UnitDisruptedConjunctions(*this, ClauseNo);
 	//if (m_Clauses[ClauseNo].GetNodesCount() == 0)
@@ -523,15 +528,15 @@ void CRusSemStructure::InitRelationOperators (long ClauseNo)
 	SetNodeToDeleteFalse();
 
 	// префиксные операторы
-	for (long i=m_Clauses[ClauseNo].m_BeginNodeNo; i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
+	for (long i = m_Clauses[ClauseNo].m_BeginNodeNo; i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
 	{
 		// префиксных операторов может быть много
 		StringVector PrefixRelOperators;
-		long k=i;
+		long k = i;
 		for (; (k < m_Clauses[ClauseNo].m_EndNodeNo) && CanBePrefixRelationOperator(k); k++)
-			if (		!m_Nodes[k].IsTimeRossNode() 
-					&&	(m_Nodes[k].m_MNAType != RepeatMNA) 
-					&&	CanBeDeleted(k)
+			if (!m_Nodes[k].IsTimeRossNode()
+				&& (m_Nodes[k].m_MNAType != RepeatMNA)
+				&& CanBeDeleted(k)
 				// двойной союз "ни ..., ни" не является оператором, хотя одиночный "ни" - оператор
 				)
 			{
@@ -541,15 +546,15 @@ void CRusSemStructure::InitRelationOperators (long ClauseNo)
 
 		// добавляем префиксные операторы, если  они были найдены, и после них был  найден
 		// хотя бы одно слово, не явл. преф. оператором ( к-й узел)
-		if (k <  m_Clauses[ClauseNo].m_EndNodeNo)
+		if (k < m_Clauses[ClauseNo].m_EndNodeNo)
 		{
-			for (long l=0; l <  PrefixRelOperators.size(); l++)
-				m_Nodes[k].m_RelOperators.push_back(PrefixRelOperators[l]); 
+			for (long l = 0; l < PrefixRelOperators.size(); l++)
+				m_Nodes[k].m_RelOperators.push_back(PrefixRelOperators[l]);
 		}
 		else
 		{
 
-			for (long j=i; j < k; j++)
+			for (long j = i; j < k; j++)
 				m_Nodes[j].m_bToDelete = false;
 
 
@@ -560,8 +565,8 @@ void CRusSemStructure::InitRelationOperators (long ClauseNo)
 
 	// постфиксные операторы
 	long MainNodeNo = 0; // главное слово - к которому  будет добавляться операторы
-	for (long i=m_Clauses[ClauseNo].m_BeginNodeNo+1; i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
-		if ( CanBePostfixRelationOperator(i)  )
+	for (long i = m_Clauses[ClauseNo].m_BeginNodeNo + 1; i < m_Clauses[ClauseNo].m_EndNodeNo; i++)
+		if (CanBePostfixRelationOperator(i))
 		{
 			m_Nodes[MainNodeNo].m_RelOperators.push_back(m_Nodes[i].m_Words[0].m_Lemma);
 			m_Nodes[i].m_bToDelete = true;
@@ -573,17 +578,17 @@ void CRusSemStructure::InitRelationOperators (long ClauseNo)
 };
 
 
-static void GetIndexedVariants(const std::vector<CLexVariantWeightVector>&  Parents, 
-									   VectorLong&   V,
-							  std::vector<VectorLong>&  Variants, 
-								long       Position)
-{ 
+static void GetIndexedVariants(const std::vector<CLexVariantWeightVector>& Parents,
+	VectorLong& V,
+	std::vector<VectorLong>& Variants,
+	long       Position)
+{
 	if (Variants.size() > 10000) return;
 	if (Position < V.size())
-		for (long i=0; i< Parents[Position].size(); i++)
+		for (long i = 0; i < Parents[Position].size(); i++)
 		{
 			V[Position] = i;
-			GetIndexedVariants(Parents, V, Variants, Position+1);
+			GetIndexedVariants(Parents, V, Variants, Position + 1);
 		}
 	else
 		Variants.push_back(V);
@@ -592,78 +597,65 @@ static void GetIndexedVariants(const std::vector<CLexVariantWeightVector>&  Pare
 
 // returns the weight of the best tree variant
 
-long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
+long CRusSemStructure::FindSituationsForClauseVariantCombination()
 {
 	const long constMinStructureWeight = 1000000;
 	m_bHasConjBut = false;
-   //::MessageBox(0, "111", "111", MB_OK);
-
-  	StartTimer("Syntax interpretation",0);
+	StartTimer("Syntax interpretation", 0);
 	try {
-      BuildSemNodesBySyntax();
+		BuildSemNodesBySyntax();
 	}
 	catch (...)
 	{
 		ErrorMessage(_R("Ошибка в интерпретации синтаксиса"));
-	    throw;
+		throw;
 	};
 
 
 	if (m_Nodes.size() == 0) return constMinStructureWeight;
 
-	#ifdef _DEBUG
-		PrintLemNodes();
-		AssertValidGraph();
-	#endif
+#ifdef _DEBUG
+	PrintLemNodes();
+	AssertValidGraph();
+#endif
 	EndTimer("Syntax interpretation");
 
-	rml_TRACE ("=================================================\n");
-	rml_TRACE ("===  FindSituationsForClauseVariantCombination %i===\n",  m_ClauseVariantsCombinationNo);
+	rml_TRACE("=================================================\n");
+	rml_TRACE("===  FindSituationsForClauseVariantCombination %i===\n", m_ClauseVariantsCombinationNo);
 
 	ProcessParticipleAndInTheFirstClause();
-	
+
 	m_ClauseSetCollocHyps.clear();
 	m_ClauseSetCollocHyps.resize(m_Clauses.size());
-//*
-
 
 	// создаем архивные места для морф. вариантов клауз
-    for (long ClauseNo =0; ClauseNo < m_Clauses.size(); ClauseNo++)
-    {
+	for (long ClauseNo = 0; ClauseNo < m_Clauses.size(); ClauseNo++)
+	{
 		m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo = FindAlreadyBuiltClauseVariant(ClauseNo);
 		if (m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo == -1)
 		{
 
 			m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo = m_AlreadyBuiltClauseVariants.size();
-			CSemClauseVariantResult ClauseVar (m_Clauses[ClauseNo].m_SyntaxClauseNo, m_Clauses[ClauseNo].m_ClauseVariantNo, m_Clauses[ClauseNo].m_AddedClauses);
+			CSemClauseVariantResult ClauseVar(m_Clauses[ClauseNo].m_SyntaxClauseNo, m_Clauses[ClauseNo].m_ClauseVariantNo, m_Clauses[ClauseNo].m_AddedClauses);
 			ClauseVar.m_BuiltClauseNo = ClauseNo;
 			m_AlreadyBuiltClauseVariants.push_back(ClauseVar);
 		};
 	};
 
-    for (long ClauseNo =0; ClauseNo < m_Clauses.size(); ClauseNo++)
-    {
-
+	for (long ClauseNo = 0; ClauseNo < m_Clauses.size(); ClauseNo++)
+	{
 		if (m_bShouldBeStopped) return constMinStructureWeight;
-		
-     
-		
-
-
-
 		CSemClauseVariantResult& ClauseVar = m_AlreadyBuiltClauseVariants[m_Clauses[ClauseNo].m_AlreadyBuiltClauseVariantNo];
 		if (ClauseVar.m_bNew)
 		{
-
 			BuildTimeNodes(ClauseNo);
-
 			InterpretRepeatConj(ClauseNo);
 
 			// InitRelationOperators должен стоять до  поиска словосочетаний, но
 			// после поиска разрывных союзов, иначе не будет собираться группа типы
 			// "не красивую, но новую  маму", где "не" неправильно подсоединится к "красивую"
 			InitRelationOperators(ClauseNo);
-			
+
 			InterpretPrepNouns(ClauseNo);
 
 			InterpretSelectiveRelations(ClauseNo);
@@ -673,63 +665,59 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 			ReadThesInterps(ClauseNo);
 
-		    FindConceptFetsFromArticles(ClauseNo);
+			FindConceptFetsFromArticles(ClauseNo);
 
 
 			DealInvitatoryMoodBeforeTree(ClauseNo);
 
 			FindCollocsHyps(ClauseNo);
 
-			InitLexVariant(ClauseNo); 
+			InitLexVariant(ClauseNo);
 
 			CLexVariant InitialLexVariant;
 			InitialLexVariant.CopyLexVar(*this);
 
 			// здесь начинается инициализация морфологического варината
 			ClauseVar.m_bNew = false;
-			m_InterfaceClauseNo ++;
+			m_InterfaceClauseNo++;
 
 			ZaplataCompar2(ClauseNo);
-			
+
 
 			size_t LexVariantInCurrSetCollocNo = 0;
 			size_t CurrSetCollocHypNo = 0;
-			
+
 
 			// цикл по всем лексическим вариантам 
 			for (;;)
 			{
 				if (m_bShouldBeStopped) return constMinStructureWeight;
-		  
-		  
-				if (!SetLexVariant(ClauseNo, LexVariantInCurrSetCollocNo, CurrSetCollocHypNo)) 
-				{ 
+
+
+				if (!SetLexVariant(ClauseNo, LexVariantInCurrSetCollocNo, CurrSetCollocHypNo))
+				{
 					CopyLexVar(InitialLexVariant);
-					break; 
+					break;
 				};
 
-	      
-
 				bool bCheckSAMNode = CheckSAMNode(ClauseNo);
-
-		  
 				CLexVariant V = BuildTheVariant(ClauseNo);
 				PrintRelations();
 				PrintNodes();
-				ClauseVar.m_NodesCount  += m_Clauses[ClauseNo].GetNodesCount();
+				ClauseVar.m_NodesCount += m_Clauses[ClauseNo].GetNodesCount();
 				ClauseVar.m_PanicRelationsCount += V.AllRelationsCount;
-				V.m_BestValue.SAMNodeViolation = !bCheckSAMNode;
+				V.m_BestValue.SetWeight(SAMNodeViolation, !bCheckSAMNode);
 				V.m_LexVariantNo = LexVariantInCurrSetCollocNo;
-				V.m_SetCollocHypNo = CurrSetCollocHypNo; 
-				V.m_BestValue.CollocsCount = m_ClauseSetCollocHyps[ClauseNo][CurrSetCollocHypNo].size();
+				V.m_SetCollocHypNo = CurrSetCollocHypNo;
+				V.m_BestValue.SetWeight(CollocsCount, m_ClauseSetCollocHyps[ClauseNo][CurrSetCollocHypNo].size());
 				V.CopyLexVar(*this);
 
-			   
-				rml_TRACE ("CLause %i\n", ClauseNo);
-				rml_TRACE ("Lex variant(ClauseNo = %i) =  %i, Collocation set = %i(of %i)\n", 
-					ClauseNo, LexVariantInCurrSetCollocNo+1,  
-					CurrSetCollocHypNo+1, m_ClauseSetCollocHyps[ClauseNo].size());
-				rml_TRACE ("Best tree weight %i\n", V.GetBestTreeWeight());
+
+				rml_TRACE("CLause %i\n", ClauseNo);
+				rml_TRACE("Lex variant(ClauseNo = %i) =  %i, Collocation set = %i(of %i)\n",
+					ClauseNo, LexVariantInCurrSetCollocNo + 1,
+					CurrSetCollocHypNo + 1, m_ClauseSetCollocHyps[ClauseNo].size());
+				rml_TRACE("Best tree weight %i\n", V.GetBestTreeWeight());
 				rml_TRACE("Variant weight components:\n %s\n", V.m_BestValue.GetStrOfNotNull().c_str());
 				rml_TRACE("Is clause connected: %i\n", IsConnectedClause(ClauseNo));
 
@@ -741,62 +729,61 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 					break;
 				}
 
-				
+
 			} // конец цикла
 
-	  	 // уничтожение плохих вариантов
-			sort (ClauseVar.m_BestLexVariants.begin(),ClauseVar.m_BestLexVariants.end());
-			for ( long i=0; i < ClauseVar.m_BestLexVariants.size(); )
-				if ( ClauseVar.m_BestLexVariants[i].GetBestTreeWeight() > ClauseVar.m_BestLexVariants[0].GetBestTreeWeight() )
-					ClauseVar.m_BestLexVariants.erase(ClauseVar.m_BestLexVariants.begin() +i );
+		 // уничтожение плохих вариантов
+			sort(ClauseVar.m_BestLexVariants.begin(), ClauseVar.m_BestLexVariants.end());
+			for (long i = 0; i < ClauseVar.m_BestLexVariants.size(); )
+				if (ClauseVar.m_BestLexVariants[i].GetBestTreeWeight() > ClauseVar.m_BestLexVariants[0].GetBestTreeWeight())
+					ClauseVar.m_BestLexVariants.erase(ClauseVar.m_BestLexVariants.begin() + i);
 				else
 					i++;
 
 		}
-	 
-	
-	
+
+
+
 	}
-    
-//*
+
 	long BestCombNo = -1;
 	std::vector<VectorLong> Variants;
-	rml_TRACE ("=================================================\n");
-	rml_TRACE  ("===  Connecting clauses   %i ===\n", m_ClauseVariantsCombinationNo);
-	m_InterfaceClauseNo ++;
+	rml_TRACE("=================================================\n");
+	rml_TRACE("===  Connecting clauses   %i ===\n", m_ClauseVariantsCombinationNo);
+	m_InterfaceClauseNo++;
 
 	// построение связного варианта
 	VectorLong V;
-	
+
 	V.resize(m_Clauses.size());
 	std::vector<CLexVariantWeightVector> Parents;
-	for (long i=0; i <m_Clauses.size(); i++)
+	for (long i = 0; i < m_Clauses.size(); i++)
 	{
 		long k = m_Clauses[i].m_AlreadyBuiltClauseVariantNo;
 		CLexVariantWeightVector V;
-		for (long j=0; j  < m_AlreadyBuiltClauseVariants[k].m_BestLexVariants.size(); j++)
+		for (long j = 0; j < m_AlreadyBuiltClauseVariants[k].m_BestLexVariants.size(); j++)
 			V.push_back(m_AlreadyBuiltClauseVariants[k].m_BestLexVariants[j]);
 		Parents.push_back(V);
 	};
-	GetIndexedVariants(Parents, V,Variants, 0); 
+	GetIndexedVariants(Parents, V, Variants, 0);
 
-	
+
 	long MinWeight = constMinStructureWeight;
-	
+
 	CLexVariant InitialLexVariant;
 	InitialLexVariant.CopyLexVar(*this);
 
-	for (long i=0; i  < Variants.size(); i++) 
-    {
+	for (long i = 0; i < Variants.size(); i++)
+	{
 		if (m_bShouldBeStopped) return constMinStructureWeight;
-   
-		for (long ClauseNo=0; ClauseNo <m_Clauses.size(); ClauseNo++)
+
+		for (long ClauseNo = 0; ClauseNo < m_Clauses.size(); ClauseNo++)
 		{
-			m_Clauses[ClauseNo].m_CurrLexVariantNo =  Variants[i][ClauseNo];
+			m_Clauses[ClauseNo].m_CurrLexVariantNo = Variants[i][ClauseNo];
 		};
 
 
-		ConnectClausesForLexVariantCombination ();
+		ConnectClausesForLexVariantCombination();
 
 		long Weight = GetStructureWeight();
 		if (Weight < MinWeight)
@@ -812,17 +799,17 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 	AssertValidGraph();
 
 
-	rml_TRACE  ("=================================================\n");
-	rml_TRACE  ("===  Writing the best variant N  %i ===\n", m_ClauseVariantsCombinationNo);
+	rml_TRACE("=================================================\n");
+	rml_TRACE("===  Writing the best variant N  %i ===\n", m_ClauseVariantsCombinationNo);
 
 	if (BestCombNo != -1)
 	{
-		for (long ClauseNo=0; ClauseNo <m_Clauses.size(); ClauseNo++)
-			m_Clauses[ClauseNo].m_CurrLexVariantNo =  Variants[BestCombNo][ClauseNo];
+		for (long ClauseNo = 0; ClauseNo < m_Clauses.size(); ClauseNo++)
+			m_Clauses[ClauseNo].m_CurrLexVariantNo = Variants[BestCombNo][ClauseNo];
 
-		ConnectClausesForLexVariantCombination ();
- 
-		BuildAnaphoricRels(); 
+		ConnectClausesForLexVariantCombination();
+
+		BuildAnaphoricRels();
 
 		auto w1 = GetStructureWeight();
 		long w2 = Idealize();
@@ -833,8 +820,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 	}
 	else
 		return constMinStructureWeight;
-	
- 
+
 };
 
 
@@ -844,61 +830,58 @@ long CRusSemStructure::GetStructureWeight()
 
 	long Weight = 0;
 
-	for (size_t i =0; i < m_Clauses.size(); i++)
+	for (size_t i = 0; i < m_Clauses.size(); i++)
 	{
 		/*
-			когда дублируются морф. варианты, может возникнуть ситуация, когда 
+			когда дублируются морф. варианты, может возникнуть ситуация, когда
 			m_Clauses[i].m_AlreadyBuiltClauseVariantNo не проинициализирован, тогда
 			такой вариант надо пропускать (дать очень большой штраф)
 		*/
 		if (m_Clauses[i].m_AlreadyBuiltClauseVariantNo == -1)
 		{
-			 return  100000;
+			return  100000;
 		};
 
-		if ( m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants.empty() )
+		if (m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants.empty())
 			Weight += 10000;
 		else
 		{
-		   CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
-		   auto w = W.GetBestTreeWeight1(!IsConn);
-		   rml_TRACE("clause no %zu, weight1=%ld\n", i, w);
-		   rml_TRACE("%s\n", W.m_BestValue.GetStrOfNotNull().c_str());
-		   Weight += w;
-		 };
+			CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
+			auto w = W.GetBestTreeWeight1(!IsConn, true);
+			rml_TRACE("clause no %zu, weight1=%ld\n", i, w);
+			rml_TRACE("%s\n", W.m_BestValue.GetStrOfNotNull().c_str());
+			Weight += w;
+		};
 	};
 
 	long Tag = SetTagToSentence();
-	long SemanticVolume = GetSemanticVolume(Tag);  
-	long RelsCount = GetUseRelationsCount();  
+	long SemanticVolume = GetSemanticVolume(Tag);
+	long RelsCount = GetUseRelationsCount();
 	TreeVariantValue Summa;
-	Summa.Coefs = &m_SemCoefs;
+	Summa.SetCoefs(&m_SemCoefs);
 	// перевычисляем те оценки, которые относятся к отношениям ( 5 оценок )
-	Summa.SemFetDisagree = RelsCount ? GetSemFetDisagreeCount(Tag)*1000 / RelsCount : 0;
-	Summa.LexFetAgreeCount = RelsCount ? GetLexFetAgreeCount(Tag)*1000 / RelsCount : 0;
-	Summa.OptionalValencyCount = GetOptionalValenciesCount(Tag);
-	Summa.InstrAgentRelsCount = SemanticVolume ? GetInstrAgentRelsCount(Tag)*1000  / SemanticVolume : 0;
-	Summa.CorporaGleicheCount = GetCorporaGleicheCount(Tag);
-    if (Summa.CorporaGleicheCount == 1)
-	  Summa.CorporaGleicheCount = 0;
+	Summa.SetWeight(SemFetDisagree, RelsCount ? GetSemFetDisagreeCount(Tag) * 1000 / RelsCount : 0);
+	Summa.SetWeight(LexFetAgreeCount, RelsCount ? GetLexFetAgreeCount(Tag) * 1000 / RelsCount : 0);
+	Summa.SetWeight(OptionalValencyPenalty, GetOptionalValenciesCount(Tag));
+	Summa.SetWeight(InstrAgentRelsCount, SemanticVolume ? GetInstrAgentRelsCount(Tag) * 1000 / SemanticVolume : 0);
+	Summa.SetWeight(CorporaGleiche, GetCorporaGleicheCount(Tag));
+	if (Summa.GetSingleWeight(CorporaGleiche) == 1)
+		Summa.SetWeight(CorporaGleiche, 0);
 
 	// вообще не будем учитывать оценку по длине связей на межклаузном уровне 
 	// точнее, ее надо учесть, но вычислять расстояние в клаузах, а не в словах. 
 	// Пока просто не будем учитывать.
-	Summa.RelationsLength = 0;
-
-
-	// это нужно сделать, но я забыл зачем?
-    Summa.ObligatoryValencyViolationCount = GetObligatoryValencyViolation(Tag);
+	Summa.SetWeight(RelationsLength, 0);
+	Summa.SetWeight(ObligatoryValencyViolation, GetObligatoryValencyViolation(Tag));
 
 	// нужно сделать, поскольку под лексические функции подводятся, например, разрывные союзы.
-	Summa.LexFunctsCount = m_LexFuncts.size();
-    UpdateBlockedRelations();
+	Summa.SetWeight(LexFunctsCount, m_LexFuncts.size());
+	UpdateBlockedRelations();
 	if (!IsConn)
-       if (RelsCount == 0)
-		   Summa.RelationsLength = 0;
-	   else
-		   Summa.RelationsLength = SemanticVolume ? GetRelationsLength(Tag)*1000/RelsCount : 0;
+		if (RelsCount == 0)
+			Summa.SetWeight(RelationsLength, 0);
+		else
+			Summa.SetWeight(RelationsLength, SemanticVolume ? GetRelationsLength(Tag) * 1000 / RelsCount : 0);
 
 	auto w = Summa.GetTreeWeight();
 	rml_TRACE("clause component weights:\n");
@@ -906,13 +889,12 @@ long CRusSemStructure::GetStructureWeight()
 	rml_TRACE("add weight by components for cross clause relations %ld to the main weight (%ld)\n", w, Weight);
 	Weight += w;
 
-
 	w = GetAnaphoricRelationsCount(Tag) * 5;
 	if (w != 0) {
 		Weight -= w;
 		rml_TRACE("decrease clause weight by anaphoric rels: -%ld\n", w);
 	}
-	//rml_TRACE("%s\n", Summa.GetStr().c_str());
+
 	/*
 	 если были использованы недостоверные межклаузные  связи, тогда
 	 нужно дать штраф этой структуре
@@ -927,50 +909,50 @@ struct CClauseComplexity
 {
 	long      m_ClauseNo;
 	float     m_Complexity;
-	CClauseComplexity (long      ClauseNo, float     Complexity)
+	CClauseComplexity(long      ClauseNo, float     Complexity)
 	{
-	  m_ClauseNo = ClauseNo;
-	  m_Complexity = Complexity;
+		m_ClauseNo = ClauseNo;
+		m_Complexity = Complexity;
 	};
 	std::string GetStr()
 	{
-	   return Format ("Clause=%i, Complexity=%.2f",
-		   m_ClauseNo, m_Complexity );
+		return Format("Clause=%i, Complexity=%.2f",
+			m_ClauseNo, m_Complexity);
 	};
 };
 
 std::string CRusSemStructure::GetClauseComplexitiesStr()
 {
-   std::vector<CClauseComplexity> ComplexClauses;
-   for (long j=0;j <m_AlreadyBuiltClauseVariants.size(); j++)
-   {
-	   
-	   long i=0;
-	   for (; i< ComplexClauses.size(); i++)
-		   if (ComplexClauses[i].m_ClauseNo == m_AlreadyBuiltClauseVariants[j].m_SyntaxClauseNo)
-			   break;
+	std::vector<CClauseComplexity> ComplexClauses;
+	for (long j = 0; j < m_AlreadyBuiltClauseVariants.size(); j++)
+	{
 
-       if (i == ComplexClauses.size())
-	   {
-		   double Value = 0;
-		   long  Count = 0;
-		   for (long i=0; i<m_AlreadyBuiltClauseVariants.size(); i++)
-		     if (m_AlreadyBuiltClauseVariants[i].m_SyntaxClauseNo == m_AlreadyBuiltClauseVariants[j].m_SyntaxClauseNo)
-			 {
-				 if (m_AlreadyBuiltClauseVariants[i].m_NodesCount > 0)
-					Value += (double)m_AlreadyBuiltClauseVariants[i].m_PanicRelationsCount/(double)m_AlreadyBuiltClauseVariants[i].m_NodesCount;
-				 Count++;
-			 };
+		long i = 0;
+		for (; i < ComplexClauses.size(); i++)
+			if (ComplexClauses[i].m_ClauseNo == m_AlreadyBuiltClauseVariants[j].m_SyntaxClauseNo)
+				break;
 
-          if (Count > 0)
-			  ComplexClauses.push_back(CClauseComplexity(m_AlreadyBuiltClauseVariants[j].m_SyntaxClauseNo, Value/Count));
-	   };
+		if (i == ComplexClauses.size())
+		{
+			double Value = 0;
+			long  Count = 0;
+			for (long i = 0; i < m_AlreadyBuiltClauseVariants.size(); i++)
+				if (m_AlreadyBuiltClauseVariants[i].m_SyntaxClauseNo == m_AlreadyBuiltClauseVariants[j].m_SyntaxClauseNo)
+				{
+					if (m_AlreadyBuiltClauseVariants[i].m_NodesCount > 0)
+						Value += (double)m_AlreadyBuiltClauseVariants[i].m_PanicRelationsCount / (double)m_AlreadyBuiltClauseVariants[i].m_NodesCount;
+					Count++;
+				};
 
-   };
-   std::string Result;
-   for (long j=0;j < ComplexClauses.size();j++)
-	   Result += ComplexClauses[j].GetStr() + std::string("\n");
-   return Result;
+			if (Count > 0)
+				ComplexClauses.push_back(CClauseComplexity(m_AlreadyBuiltClauseVariants[j].m_SyntaxClauseNo, Value / Count));
+		};
+
+	};
+	std::string Result;
+	for (long j = 0; j < ComplexClauses.size(); j++)
+		Result += ComplexClauses[j].GetStr() + std::string("\n");
+	return Result;
 
 };
 
@@ -979,41 +961,39 @@ std::string CRusSemStructure::GetClauseComplexitiesStr()
 
 bool  CRusSemStructure::ReadAuxiliaryArticles()
 {
-   if ( GetRoss(Ross) == NULL) return false;
+	if (GetRoss(Ross) == NULL) return false;
 
-   WORD UnitNo = GetRossHolder(Ross)->LocateUnit(_R("_коэф").c_str(),1);
-   if (UnitNo == ErrUnitNo) return false;
+	WORD UnitNo = GetRossHolder(Ross)->LocateUnit("_semantic_weight_components", 1);
+	if (UnitNo == ErrUnitNo) {
+		throw CExpc("cannot find entry _semantic_weight_components in Ross");
+	}
 
-   if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
-	  for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i<= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
-	  {
-		TCortege C = GetCortege(GetRoss(Ross), i);
-		std::string S = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
-		Trim(S);
-		if (!m_SemCoefs.ReadOneCoef (S.c_str()))
-		  {
-			  ErrorMessage (std::string(S) + std::string(" is not recognized as a semantic coefficient"));
-		  };
-	  };
-   rml_TRACE("Semantic coefs:\n %s\n", m_SemCoefs.GetCoefsString().c_str());
-   UnitNo = GetRossHolder(Ross)->LocateUnit("_weak_syn_rel",1);
-   if (UnitNo == ErrUnitNo) return false;
-   m_WeakSynRels.clear();
-
-   if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
-	  for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i<= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
-	  {
-   		long ItemNo = GetCortege(GetRoss(Ross),i).m_DomItemNos[0];
-		if (ItemNo != -1)
+	if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
+		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
 		{
-          std::string OneSynRel =  GetRossHolder(Ross)->GetDomItemStrInner(ItemNo);
-		  m_WeakSynRels.push_back(OneSynRel);
+			TCortege C = GetCortege(GetRoss(Ross), i);
+			std::string s = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+			m_SemCoefs.ReadOneCoef(s);
 		};
-	  };
+	rml_TRACE("Semantic coefs:\n %s\n", m_SemCoefs.GetCoefsString().c_str());
+	UnitNo = GetRossHolder(Ross)->LocateUnit("_weak_syn_rel", 1);
+	if (UnitNo == ErrUnitNo) return false;
+	m_WeakSynRels.clear();
 
-   sort(m_WeakSynRels.begin(), m_WeakSynRels.end());
+	if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
+		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
+		{
+			long ItemNo = GetCortege(GetRoss(Ross), i).m_DomItemNos[0];
+			if (ItemNo != -1)
+			{
+				std::string OneSynRel = GetRossHolder(Ross)->GetDomItemStrInner(ItemNo);
+				m_WeakSynRels.push_back(OneSynRel);
+			};
+		};
 
-   return true;
+	sort(m_WeakSynRels.begin(), m_WeakSynRels.end());
+
+	return true;
 
 };
 
@@ -1022,9 +1002,9 @@ bool CRusSemStructure::GetClauseVariantCombination()
 	std::vector<VectorLong> Parents;
 	Parents.resize(m_piSent->GetPrimitiveClausesCount());
 	m_AllClausesVariants = 0;
-	for (long i=0; i < Parents.size(); i++)
+	for (long i = 0; i < Parents.size(); i++)
 	{
-		for (long k=0; k < m_piSent->GetPrimitiveClause(i)->m_SynVariants.size(); k++)
+		for (long k = 0; k < m_piSent->GetPrimitiveClause(i)->m_SynVariants.size(); k++)
 		{
 			Parents[i].push_back(k);
 			m_AllClausesVariants++;
@@ -1039,10 +1019,10 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 	//GetClauseVariantCombinations(Variants);
 
-	if (m_ClauseVariantsCombinationNo  >= Variants.size()) return false;
+	if (m_ClauseVariantsCombinationNo >= Variants.size()) return false;
 	m_Clauses.clear();
 	m_Clauses.resize(m_piSent->GetPrimitiveClausesCount());
-	for (long i=0; i < m_Clauses.size(); i++)
+	for (long i = 0; i < m_Clauses.size(); i++)
 	{
 		const CClause* pClause = m_piSent->GetPrimitiveClause(i);
 		m_Clauses[i].m_ClauseVariantNo = Variants[m_ClauseVariantsCombinationNo][i];
@@ -1068,7 +1048,7 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 	};
 
-	rml_TRACE ("ClauseVariantsCombinationNo %i (out of %i)\n", m_ClauseVariantsCombinationNo + 1, Variants.size());
+	rml_TRACE("ClauseVariantsCombinationNo %i (out of %i)\n", m_ClauseVariantsCombinationNo + 1, Variants.size());
 	m_ClauseCombinationVariantsCount = Variants.size();
 	m_Nodes.clear();
 	return true;
@@ -1081,11 +1061,11 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 	try {
 		m_AllClausesVariants = 0;
 		ClearTimers();
-		StartTimer("All time",0);
+		StartTimer("All time", 0);
 
 		if (!ReadAuxiliaryArticles())
 		{
-			ErrorMessage ("Cannot read ross auxiliary articles");
+			ErrorMessage("Cannot read ross auxiliary articles");
 			return  -1;
 		};
 
@@ -1094,7 +1074,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_MemRelations.clear();
 		m_MemNodes.clear();
 
-		StartTimer("Syntax interpretation",0);
+		StartTimer("Syntax interpretation", 0);
 
 		m_AlreadyBuiltClauseVariants.clear();
 
@@ -1105,9 +1085,9 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_IndexedSemFets.push_back("SOC");
 
 		m_bLastTry = false;
-		m_piSent =	m_pData->GetSynan()->m_vectorSents[SentNo];
+		m_piSent = m_pData->GetSynan()->m_vectorSents[SentNo];
 		m_ClauseCombinationVariantsCount = 0;
-		m_bShouldBeStopped = false; 
+		m_bShouldBeStopped = false;
 
 
 
@@ -1121,7 +1101,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		long BestClauseVariantsCombinationNo = 0;
 		long BestClauseVariantsCombinationWeight = 100000;
 
-		bool  bTooSlow = false;    
+		bool  bTooSlow = false;
 		double WordsPerSecond = 0;
 		size_t ProcessedVariantsCount = 0;
 		if (m_UserClauseVariantsCombinationNo != -1)
@@ -1130,29 +1110,29 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 			m_ClauseVariantsCombinationNo = -1;
 		}
 		else
-			for (m_ClauseVariantsCombinationNo = 0; GetClauseVariantCombination() ; m_ClauseVariantsCombinationNo++)
+			for (m_ClauseVariantsCombinationNo = 0; GetClauseVariantCombination(); m_ClauseVariantsCombinationNo++)
 			{
 				ProcessedVariantsCount++;
 				m_ClausePropertiesProtocol = "";
 				if (m_bShouldBeStopped) return -1;
-				StartTimer("FindSituationsForClauseVariantCombination",0);
+				StartTimer("FindSituationsForClauseVariantCombination", 0);
 				long Weight = FindSituationsForClauseVariantCombination();
 
 				if (m_bShouldBeStopped) return -1;
 
 
-				rml_TRACE ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
-				rml_TRACE ("VariantWeght %i = %i \n", m_ClauseVariantsCombinationNo, Weight);
-				rml_TRACE ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
+				rml_TRACE("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
+				rml_TRACE("VariantWeght %i = %i \n", m_ClauseVariantsCombinationNo, Weight);
+				rml_TRACE("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
 
-				if (Weight  < BestClauseVariantsCombinationWeight)
+				if (Weight < BestClauseVariantsCombinationWeight)
 				{
 					BestClauseVariantsCombinationNo = m_ClauseVariantsCombinationNo;
 					BestClauseVariantsCombinationWeight = Weight;
 				};
 
 				double AllTicks = EndTimer("FindSituationsForClauseVariantCombination");
-				WordsPerSecond =  (AllTicks == 0) ?  0 : (double)(m_Nodes.size())  / (AllTicks/CLOCKS_PER_SEC);
+				WordsPerSecond = (AllTicks == 0) ? 0 : (double)(m_Nodes.size()) / (AllTicks / CLOCKS_PER_SEC);
 
 #ifndef _DEBUG
 
@@ -1160,13 +1140,13 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 				В релизной  версии, если  скорость меньше, чем полсекунды на слово,
 				тогда надо выходить.
 				*/
-				if ( (WordsPerSecond < 0.5) &&  (WordsPerSecond > 0))
+				if ((WordsPerSecond < 0.5) && (WordsPerSecond > 0))
 				{
 					bTooSlow = true;
 					break;
 				};
-				
-				if (ProcessedVariantsCount >  100)
+
+				if (ProcessedVariantsCount > 100)
 				{
 					bTooSlow = true;
 					break;
@@ -1177,12 +1157,12 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 			};
 
 
-		if (m_ClauseVariantsCombinationNo - 1 ==  BestClauseVariantsCombinationNo)
+		if (m_ClauseVariantsCombinationNo - 1 == BestClauseVariantsCombinationNo)
 			m_ClauseVariantsCombinationNo = BestClauseVariantsCombinationNo;
 		else
 		{
 			m_ClauseVariantsCombinationNo = BestClauseVariantsCombinationNo;
-			rml_TRACE ("--------------------------------------------------------------\n");
+			rml_TRACE("--------------------------------------------------------------\n");
 			GetClauseVariantCombination();
 
 			m_bLastTry = true;
@@ -1195,41 +1175,41 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		ConvertParticipleTreeToClause();
 
 		std::string S = Format("Sentence length: %i\n Dictionary request count: %i\n Best clause : %i (out of  %i)\n",
-			m_piSent->m_Words.size(), Queries.size(), BestClauseVariantsCombinationNo+1, m_ClauseCombinationVariantsCount);
+			m_piSent->m_Words.size(), Queries.size(), BestClauseVariantsCombinationNo + 1, m_ClauseCombinationVariantsCount);
 
 		EndTimer("All time");
 
 
 
-		m_TimeStatictics =    std::string(GetStrRepresentation().c_str()) + S;
+		m_TimeStatictics = std::string(GetStrRepresentation().c_str()) + S;
 
-		m_TimeStatictics += GetClauseComplexitiesStr()+std::string("\n");
+		m_TimeStatictics += GetClauseComplexitiesStr() + std::string("\n");
 
 		S = Format("==========\n Sentence weight: %i\n", BestClauseVariantsCombinationWeight);
-		m_ClausePropertiesProtocol +=  S;
+		m_ClausePropertiesProtocol += S;
 		S = Format("UserProhibitedLexVars.size : %i\n", m_UserProhibitedLexVars.size());
-		m_ClausePropertiesProtocol +=  S;
+		m_ClausePropertiesProtocol += S;
 		S = Format("WordsPerSecond =  %10.0f\n", WordsPerSecond);
 		if (bTooSlow)
 		{
 			S += _R("Выход по скорости !!!!\n");
 		};
 
-		m_ClausePropertiesProtocol +=  S;
+		m_ClausePropertiesProtocol += S;
 
 
 
 
 
 		m_ClauseVariantsStatistics = "";
-		for (long j=0;j <m_AlreadyBuiltClauseVariants.size(); j++)
-			m_ClauseVariantsStatistics += m_AlreadyBuiltClauseVariants[j].GetStr() + std::string ("\n");
+		for (long j = 0; j < m_AlreadyBuiltClauseVariants.size(); j++)
+			m_ClauseVariantsStatistics += m_AlreadyBuiltClauseVariants[j].GetStr() + std::string("\n");
 
 		return  BestClauseVariantsCombinationWeight;
 	}
-	catch  (...)
+	catch (...)
 	{
-		ErrorMessage ("long CRusSemStructure::FindSituations(size_t) Failed");
+		ErrorMessage("long CRusSemStructure::FindSituations(size_t) Failed");
 		throw;
 	};
 };
@@ -1238,24 +1218,24 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 
 bool CRusSemStructure::GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo, std::string& Graph)
 {
-	try 
+	try
 	{
-		CMyTimeSpanHolder			GlobalSpan; 
+		CMyTimeSpanHolder			GlobalSpan;
 		m_pData->MakeSyntaxStr(utf8text.c_str(), GlobalSpan);
 		if (m_pData->GetSynan()->m_vectorSents.empty())
 			return false;
-		m_piSent =	m_pData->GetSynan()->m_vectorSents[0];
+		m_piSent = m_pData->GetSynan()->m_vectorSents[0];
 		if (ClauseVarNo != -1)
-		   m_ClauseVariantsCombinationNo = ClauseVarNo;
+			m_ClauseVariantsCombinationNo = ClauseVarNo;
 		else
-		   m_ClauseVariantsCombinationNo = 0;
+			m_ClauseVariantsCombinationNo = 0;
 		GetClauseVariantCombination();
 		m_pData->InitializeIndices();
 		BuildSemNodesBySyntax();
 		m_TimeStatictics = Format("Sentence length: %i\n ClauseCombinationVariantsCount: %i\n",
-			m_piSent->m_Words.size(),  m_ClauseCombinationVariantsCount);
+			m_piSent->m_Words.size(), m_ClauseCombinationVariantsCount);
 
-		Graph =  GetTclSyntaxGraph ();
+		Graph = GetTclSyntaxGraph();
 
 		return true;
 	}
@@ -1268,8 +1248,8 @@ bool CRusSemStructure::GetSyntaxTreeByText(std::string utf8text, int ClauseVarNo
 bool CRusSemStructure::SetLemmasToReplace(std::string LemmasToReplace)
 {
 	m_SynthLemmaToReplace.clear();
-	
-	RmlMakeUpper(LemmasToReplace,morphRussian);
+
+	RmlMakeUpper(LemmasToReplace, morphRussian);
 	StringTokenizer tok(LemmasToReplace.c_str(), ";");
 	while (tok())
 	{
@@ -1278,10 +1258,10 @@ bool CRusSemStructure::SetLemmasToReplace(std::string LemmasToReplace)
 		std::string OnePair = tok.val();
 		if (sscanf(OnePair.c_str(), "%[^/]/%[^/]", lemma1, lemma2) != 2)
 			return false;
-		std::string lem1=lemma1;
+		std::string lem1 = lemma1;
 		Trim(lem1);
 		if (lem1.empty()) return false;
-		std::string lem2=lemma2;
+		std::string lem2 = lemma2;
 		Trim(lem2);
 		if (lem2.empty()) return false;
 		m_SynthLemmaToReplace[lem1] = lem2;

@@ -555,39 +555,11 @@ ISA     =  ANIM ORG
            SITUAT AUTHORIT
            EMPL GEOGR
 ============
-TITLE        = _коэф
+TITLE        = _semantic_weight_components
 SENSE       = 1
 AUTHOR       = user
 REDACT       = alex
 TIME_CREATE       = 22/9/4 17:55:37
-STRUCT_WEIGHT=  ValencyDisorderCoef 7
-           DirectDisagreeCoef 10
-           ConnectedComponentsCountCoef 10000
-           SemFetDisagreeCoef 15
-           ProjectnessCoefCoef 400
-           LexFetAgreeCountCoef -20
-           AgreeWithSyntaxTopCoefCoef -20
-           TopAgreeWithSyntaxCriteriaCoef -10
-           RelationsLengthCoef 10
-           MNAViolationsCountCoef 200
-           SemRelPOSViolationsCountCoef 5
-           OnlyCommaBetweenViolationsCountCoef 60
-           SubjectPredicateViolationsCountCoef 100
-           CommaBetweenBrothersExceptMNAViolationsCountCoef 100
-           OptionalValencyPenaltyCoef 90
-           CopulViolationsCountCoef 100
-           InstrAgentRelsCountCoef 5
-           LexFunctsCountCoef -50
-           GramRestrViolationsCountCoef 100
-           CollocsCountCoef -15
-           OborotAdverbialCountCoef -10
-           MaxRelationLeapsCount 4
-           ObligatoryValencyViolationCoef 50
-           ColloquialInterpsCoef 60
-           CorporaGleicheCoef -2
-           PassiveValencyPenaltyCoef 1
-           SemFetAgreeMNACoef -30
-           MiscSemAgreeCoef -20
 ============
 TITLE        = абзац
 SENSE       = 1
