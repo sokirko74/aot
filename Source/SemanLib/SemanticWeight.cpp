@@ -36,7 +36,7 @@ static const std::vector<TreeVariantDefaultValue> AllComponents = {
 	{OborotAdverbialCount, "OborotAdverbialCount", -10, WeightType::Weight1},
 	{LexFunctsCount, "LexFunctsCount", -50, WeightType::Weight2},
 	{ObligatoryValencyViolation, "ObligatoryValencyViolation", 50, WeightType::Weight1},
-	{ColloquialInterps, "ColloquialInterps", 50, WeightType::Weight1},
+	{ColloquialInterps, "ColloquialInterps", 60, WeightType::Weight1},
 	{CorporaGleiche, "CorporaGleiche", -2, WeightType::Weight1},
 	{PassiveValencyPenalty, "PassiveValencyPenalty", 1, WeightType::Weight1},
 	{SemFetAgreeMNACount, "SemFetAgreeMNACount", -30, WeightType::Weight1},
