@@ -356,9 +356,9 @@ void CRusSemStructure::ConnectClausesForLexVariantCombination()
 			("===== Clause %i ==== \n LexVariantCount = %i\n %s \n Weight = %i, %s \n", 
 			ClauseNo, 
 			I.m_BestLexVariants.size(),
-			W.m_BestValue.Panic ? "Panic" : "All checked",
+			W.m_BestValue.IsPanic() ? "Panic" : "All checked",
 			W.GetBestTreeWeight(), 
-			(W.m_BestValue.ProjectnessCoef == 1) ? "not projected" : "projected");
+			(W.m_BestValue.GetSingleWeight(ProjectnessViolation) == 1) ? "not projected" : "projected");
 		m_ClausePropertiesProtocol += Q;
 		if (m_Clauses[ClauseNo].m_BestPO != "")
 			m_ClausePropertiesProtocol += Format("DOMAIN = %s\n",m_Clauses[ClauseNo].m_BestPO.c_str());
@@ -423,7 +423,7 @@ try
 {
 	CLexVariant V;
 
-	V.m_BestValue.Coefs = &m_SemCoefs;
+	V.m_BestValue.SetCoefs(&m_SemCoefs);
 
 	m_Relations.clear();
 
@@ -446,7 +446,7 @@ try
 
 	if (!HypotGraphResult)
 	{
-	  V.m_BestValue.Panic = true;
+		V.m_BestValue.SetPanic();
 	};
 
  
@@ -454,10 +454,10 @@ try
 		если  не удалось вставить узел "сам", значит мы получили еще один разрыв
 	*/
 	if (!InsertSAMNode(ClauseNo, SamNode))
-		V.m_BestValue.ConnectedComponentsCount++;
+		V.m_BestValue.SetWeight(ConnectedComponentsCount, V.m_BestValue.GetSingleWeight(ConnectedComponentsCount)  + 1);
 		  
-	V.m_BestValue.LexFunctsCount = CountLexFunctsInOneClause(ClauseNo);
-	V.m_BestValue.GramRestrViolationsCount = 0;
+	V.m_BestValue.SetWeight(LexFunctsCount, CountLexFunctsInOneClause(ClauseNo));
+	V.m_BestValue.SetWeight(GramRestrViolationsCount, 0);
 	return V;
 }
 catch (...)
@@ -718,10 +718,10 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 				PrintNodes();
 				ClauseVar.m_NodesCount  += m_Clauses[ClauseNo].GetNodesCount();
 				ClauseVar.m_PanicRelationsCount += V.AllRelationsCount;
-				V.m_BestValue.SAMNodeViolation = !bCheckSAMNode;
+				V.m_BestValue.SetWeight(SAMNodeViolation, !bCheckSAMNode);
 				V.m_LexVariantNo = LexVariantInCurrSetCollocNo;
 				V.m_SetCollocHypNo = CurrSetCollocHypNo; 
-				V.m_BestValue.CollocsCount = m_ClauseSetCollocHyps[ClauseNo][CurrSetCollocHypNo].size();
+				V.m_BestValue.SetWeight(CollocsCount, m_ClauseSetCollocHyps[ClauseNo][CurrSetCollocHypNo].size());
 				V.CopyLexVar(*this);
 
 			   
@@ -872,33 +872,33 @@ long CRusSemStructure::GetStructureWeight()
 	long SemanticVolume = GetSemanticVolume(Tag);  
 	long RelsCount = GetUseRelationsCount();  
 	TreeVariantValue Summa;
-	Summa.Coefs = &m_SemCoefs;
+	Summa.SetCoefs(&m_SemCoefs);
 	// перевычисляем те оценки, которые относятся к отношениям ( 5 оценок )
-	Summa.SemFetDisagree = RelsCount ? GetSemFetDisagreeCount(Tag)*1000 / RelsCount : 0;
-	Summa.LexFetAgreeCount = RelsCount ? GetLexFetAgreeCount(Tag)*1000 / RelsCount : 0;
-	Summa.OptionalValencyCount = GetOptionalValenciesCount(Tag);
-	Summa.InstrAgentRelsCount = SemanticVolume ? GetInstrAgentRelsCount(Tag)*1000  / SemanticVolume : 0;
-	Summa.CorporaGleicheCount = GetCorporaGleicheCount(Tag);
-    if (Summa.CorporaGleicheCount == 1)
-	  Summa.CorporaGleicheCount = 0;
+	Summa.SetWeight(SemFetDisagree, RelsCount ? GetSemFetDisagreeCount(Tag)*1000 / RelsCount : 0);
+	Summa.SetWeight(LexFetAgreeCount, RelsCount ? GetLexFetAgreeCount(Tag)*1000 / RelsCount : 0);
+	Summa.SetWeight(OptionalValencyPenalty, GetOptionalValenciesCount(Tag));
+	Summa.SetWeight(InstrAgentRelsCount, SemanticVolume ? GetInstrAgentRelsCount(Tag)*1000  / SemanticVolume : 0);
+	Summa.SetWeight(CorporaGleiche, GetCorporaGleicheCount(Tag));
+    if (Summa.GetSingleWeight(CorporaGleiche) == 1)
+	  Summa.SetWeight(CorporaGleiche, 0);
 
 	// вообще не будем учитывать оценку по длине связей на межклаузном уровне 
 	// точнее, ее надо учесть, но вычислять расстояние в клаузах, а не в словах. 
 	// Пока просто не будем учитывать.
-	Summa.RelationsLength = 0;
+	Summa.SetWeight(RelationsLength,  0);
 
 
 	// это нужно сделать, но я забыл зачем?
-    Summa.ObligatoryValencyViolationCount = GetObligatoryValencyViolation(Tag);
+    Summa.SetWeight(ObligatoryValencyViolation, GetObligatoryValencyViolation(Tag));
 
 	// нужно сделать, поскольку под лексические функции подводятся, например, разрывные союзы.
-	Summa.LexFunctsCount = m_LexFuncts.size();
+	Summa.SetWeight(LexFunctsCount, m_LexFuncts.size());
     UpdateBlockedRelations();
 	if (!IsConn)
        if (RelsCount == 0)
-		   Summa.RelationsLength = 0;
+		   Summa.SetWeight(RelationsLength, 0);
 	   else
-		   Summa.RelationsLength = SemanticVolume ? GetRelationsLength(Tag)*1000/RelsCount : 0;
+		   Summa.SetWeight(RelationsLength,  SemanticVolume ? GetRelationsLength(Tag)*1000/RelsCount : 0);
 
 	Weight += Summa.GetTreeWeight();
 
@@ -974,19 +974,17 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 {
    if ( GetRoss(Ross) == NULL) return false;
 
-   WORD UnitNo = GetRossHolder(Ross)->LocateUnit(_R("_коэф").c_str(),1);
-   if (UnitNo == ErrUnitNo) return false;
+   WORD UnitNo = GetRossHolder(Ross)->LocateUnit("_semantic_weight_components", 1);
+   if (UnitNo == ErrUnitNo) {
+	   throw CExpc("cannot find entry _semantic_weight_components in Ross");
+   }
 
    if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
 	  for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i<= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
 	  {
 		TCortege C = GetCortege(GetRoss(Ross), i);
-		std::string S = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
-		Trim(S);
-		if (!m_SemCoefs.ReadOneCoef (S.c_str()))
-		  {
-			  ErrorMessage (std::string(S) + std::string(" is not recognized as a semantic coefficient"));
-		  };
+		std::string s = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		m_SemCoefs.ReadOneCoef(s);
 	  };
 
    UnitNo = GetRossHolder(Ross)->LocateUnit("_weak_syn_rel",1);

@@ -114,7 +114,7 @@ long CRusSemStructure::GetOnlyCommaBetweenViolationsCount(long Tag)
 //========================================================
 //========================================================
 // проверка того, что найденное семантикой  подлежащее равно синтаксическому подлежащему 
-bool CRusSemStructure::AgreeWithSyntaxTop(long Tag) const
+bool CRusSemStructure::GetAgreeWithSyntaxTop(long Tag) const
 {
 	long ClauseNo = -1;
 	for (size_t i = 0; i < m_Nodes.size(); i++)
@@ -751,7 +751,7 @@ long CRusSemStructure::GetSemFetDisagreeCount(long Tag)
 
 //=======================================
 // проверка того, что семантическая вершина клаузы удовлетворяет синтаксическим критериям 
-bool CRusSemStructure::TopAgreeWithSyntaxCriteria(long Tag)
+bool CRusSemStructure::GetTopAgreeWithSyntaxCriteria(long Tag)
 {
 	for (size_t i = 0; i < m_Nodes.size(); i++)
 		if (HasTag(i, Tag))

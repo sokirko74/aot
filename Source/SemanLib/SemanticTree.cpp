@@ -548,7 +548,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 	{
 		ErrorMessage(_R("PanicRelationsCount для одной клаузы больше 250. Это очень сложный граф."));
 		VarAndVals.resize(1);
-		VarAndVals[0].second.Panic = true;
+		VarAndVals[0].second.SetPanic();
 		throw;
 		//return;
 	};
@@ -575,7 +575,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 			if (HypotVariantCount > 200000)
 			{
 				VarAndVals.resize(1);
-				VarAndVals[0].second.Panic = true;
+				VarAndVals[0].second.SetPanic();
 				return;
 			};
 
@@ -594,7 +594,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 	if (HypotVariantCount == 0)
 	{
 		VarAndVals.resize(1);
-		VarAndVals[0].second.Panic = true;
+		VarAndVals[0].second.SetPanic();
 	};
 
 	std::vector<CTreeVariant>  Variants;
@@ -607,7 +607,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 	if (Variants.size() > m_PanicTreeVariantCount * 100)
 	{
 		VarAndVals.resize(Variants.size());
-		VarAndVals[0].second.Panic = true;
+		VarAndVals[0].second.SetPanic();
 		return;
 	};
 
@@ -681,7 +681,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 
 	if (GoodVariantCount > m_PanicTreeVariantCount)
 	{
-		VarAndVals[0].second.Panic = true;
+		VarAndVals[0].second.SetPanic();
 		return;
 	};
 
@@ -695,7 +695,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 		{
 			SetTreeVariant(Variants[VarNo]);
 			ValueTreeVariant(VarAndVals[l].second, Tag);
-			VarAndVals[l].second.ConnectedComponentsCount = 1;
+			VarAndVals[l].second.SetWeight(ConnectedComponentsCount, 1);
 			VarAndVals[l].first = Variants[VarNo];
 			l++;
 		};
@@ -742,8 +742,10 @@ long CRusSemStructure::SetBestVariant(const std::vector<TreeAndValueVector>& Var
 	for (size_t i = 0; i < WeightAndPositions.size(); i++)
 	{
 		long weight = 0;
-		for (size_t k = 0; k < TopConnectedComponentsCount; k++) {
-			weight += VarAndVals[k][variants[i * TopConnectedComponentsCount + k]].second.GetTreeWeight();
+		for (size_t k = 0; k < TopConnectedComponentsCount; k++) { 
+			auto& v = VarAndVals[k][variants[i * TopConnectedComponentsCount + k]].second;
+			weight += v.GetTreeWeight();
+			rml_TRACE("variant %zu, component %zu, props:\n %s\n", i, k, v.GetStrOfNotNull().c_str());
 		}
 		WeightAndPositions[i] = {weight, i};
 	};
@@ -818,7 +820,7 @@ TryWithoutLongRelationsLabel:
 
 	if (TopConnectedComponentsCount == 0)  // это возможно, если ввести одно слова "сам" или "один", которое удаляется при некоторых значениях
 	{
-		ResultValue.Panic = true;
+		ResultValue.SetPanic();
 		if (FirstConjNode.m_Words.size() > 0)
 			InsertNode(FirstConjNode);
 		EndTimer("All tree building time");
@@ -837,9 +839,9 @@ TryWithoutLongRelationsLabel:
 	for (size_t i = 0; i < TopConnectedComponentsCount; i++)
 	{
 		GetTree(i, VarAndVals[i]);
-		if (VarAndVals[i][0].second.Panic)
+		if (VarAndVals[i][0].second.IsPanic())
 		{
-			ResultValue.Panic = true;
+			ResultValue.SetPanic();
 			EndTimer("All tree building time");
 			if (FirstConjNode.m_Words.size() > 0)
 				InsertNode(FirstConjNode);
@@ -893,7 +895,7 @@ TryWithoutLongRelationsLabel:
 	ValueTreeVariant(ResultValue, TagClause);
 	ValueTreeVariantAdditional(ResultValue, TagClause);
 
-	ResultValue.ConnectedComponentsCount = GetConnectedComponentsCount(TagClause);
+	ResultValue.SetWeight(ConnectedComponentsCount, GetConnectedComponentsCount(TagClause));
 
 	// вставляет союз в начало клаузы, если таковый был удален перед этим
 	if (FirstConjNode.m_Words.size() > 0)
@@ -967,52 +969,51 @@ void CRusSemStructure::ValueTreeVariant(TreeVariantValue& Value, long Tag)
 {
 	long SemanticVolume = GetSemanticVolume(Tag);
 	long RelsCount = GetUseRelationsCount();
-	Value.Coefs = &m_SemCoefs;
+	Value.SetCoefs(&m_SemCoefs);
 
-	Value.ValencyDisorder = GetValencyDisorderCount(Tag);
+	Value.SetWeight(ValencyDisorder, GetValencyDisorderCount(Tag));
 
 	//  оценка отношений 
 	StartTimer("SF checking", 2);
-	Value.SemFetDisagree = RelsCount ? GetSemFetDisagreeCount(Tag) * 1000 / RelsCount : 0;
+	Value.SetWeight(SemFetDisagree, RelsCount ? GetSemFetDisagreeCount(Tag) * 1000 / RelsCount : 0);
 	EndTimer("SF checking");
 	// должно идти после GetSemFetDisagreeCount
 	// другие оценки
 	StartTimer("Tree estimation_1", 2);
-	Value.OptionalValencyCount = GetOptionalValenciesCount(Tag);
-	Value.LexFetAgreeCount = RelsCount ? GetLexFetAgreeCount(Tag) * 1000 / RelsCount : 0;
-	Value.RelationsLength = SemanticVolume ? GetRelationsLength(Tag) * 1000 / SemanticVolume : 0;
-	Value.InstrAgentRelsCount = SemanticVolume ? GetInstrAgentRelsCount(Tag) * 1000 / SemanticVolume : 0;
+	Value.SetWeight(OptionalValencyPenalty, GetOptionalValenciesCount(Tag));
+	Value.SetWeight(LexFetAgreeCount, RelsCount ? GetLexFetAgreeCount(Tag) * 1000 / RelsCount : 0);
+	Value.SetWeight(RelationsLength, SemanticVolume ? GetRelationsLength(Tag) * 1000 / SemanticVolume : 0);
+	Value.SetWeight(InstrAgentRelsCount, SemanticVolume ? GetInstrAgentRelsCount(Tag) * 1000 / SemanticVolume : 0);
 	EndTimer("Tree estimation_1");
 	// другие оценки
 	StartTimer("Projectivity checking", 2);
-	Value.ProjectnessCoef = IsProjectedNew(Tag) ? 0 : 1;
+	Value.SetWeight(ProjectnessViolation, IsProjectedNew(Tag) ? 0 : 1);
 	EndTimer("Projectivity checking");
 
 	StartTimer("Tree estimation_2", 2);
-	Value.AgreeWithSyntaxTopCoef = AgreeWithSyntaxTop(Tag) ? 1 : 0;
-	Value.TopAgreeWithSyntaxCriteria = TopAgreeWithSyntaxCriteria(Tag) ? 1 : 0;
-	Value.MNAViolationsCount = GetMNAViolationsCount(Tag);
-	Value.SemFetAgreeMNACount = GetSemFetAgreeMNACount(Tag);
-	Value.SemRelPOSViolationsCount = GetSemRelPOSViolationsCount(Tag);
-	Value.OnlyCommaBetweenViolationsCount = GetOnlyCommaBetweenViolationsCount(Tag);
-	Value.SubjectPredicateViolationsCount = GetSubjectPredicateViolationsCount(Tag);
-	Value.CommaBetweenBrothersExceptMNAViolationsCount = GetCommaBetweenBrothersExceptMNAViolationsCount(Tag);
-	Value.CopulViolationsCount = GetCopulViolationsCount(Tag);
-	Value.CorporaGleicheCount = 0;
-	Value.ObligatoryValencyViolationCount = GetObligatoryValencyViolation(Tag);
-	Value.MiscSemAgreeCount = GetMiscSemAgreeCount(Tag);
-	Value.PrichastieWithoutActantsCount = GetPrichastieWithoutActants(Tag);
-
-	Value.PassiveValencyCount = GetPassiveValencyCount(Tag);
+	Value.SetWeight(AgreeWithSyntaxTop, GetAgreeWithSyntaxTop(Tag) ? 1 : 0);
+	Value.SetWeight(TopAgreeWithSyntaxCriteria, GetTopAgreeWithSyntaxCriteria(Tag) ? 1 : 0);
+	Value.SetWeight(MNAViolationsCount, GetMNAViolationsCount(Tag));
+	Value.SetWeight(SemFetAgreeMNACount, GetSemFetAgreeMNACount(Tag));
+	Value.SetWeight(SemRelPOSViolationsCount, GetSemRelPOSViolationsCount(Tag));
+	Value.SetWeight(OnlyCommaBetweenViolationsCount, GetOnlyCommaBetweenViolationsCount(Tag));
+	Value.SetWeight(SubjectPredicateViolationsCount, GetSubjectPredicateViolationsCount(Tag));
+	Value.SetWeight(CommaBetweenBrothersExceptMNAViolationsCount, GetCommaBetweenBrothersExceptMNAViolationsCount(Tag));
+	Value.SetWeight(CopulViolationsCount, GetCopulViolationsCount(Tag));
+	Value.SetWeight(CorporaGleiche, 0);
+	Value.SetWeight(ObligatoryValencyViolation, GetObligatoryValencyViolation(Tag));
+	Value.SetWeight(MiscSemAgree, GetMiscSemAgreeCount(Tag));
+	Value.SetWeight(PrichastieWithoutActantsCount, GetPrichastieWithoutActants(Tag));
+	Value.SetWeight(PassiveValencyPenalty, GetPassiveValencyCount(Tag));
 	EndTimer("Tree estimation_2");
 
 };
 
 void CRusSemStructure::ValueTreeVariantAdditional(TreeVariantValue& Value, long Tag)
 {
-	Value.ColloquialInterpsCount = GetColloquialInterpsCount(Tag);
-	Value.OborotAdverbialCount = GetOborAdverbialCount(Tag);
-	Value.WordWeightCount = GetWordWeightSumma(Tag);
+	Value.SetWeight(ColloquialInterps, GetColloquialInterpsCount(Tag));
+	Value.SetWeight(OborotAdverbialCount, GetOborAdverbialCount(Tag));
+	Value.SetWeight(WordWeightCount, GetWordWeightSumma(Tag));
 };
 
 
@@ -1034,7 +1035,7 @@ struct CAntecedentHypot
 	};
 	long GetWeightOfAntHypot() const
 	{
-		return m_Distance + m_Variant.GetBestTreeWeight() - m_Variant.m_BestValue.GetWordWeight();
+		return m_Distance + m_Variant.GetBestTreeWeight() - m_Variant.m_BestValue.GetSingleWeight(WordWeightCount);
 	};
 	bool operator == (const CAntecedentHypot& X) const
 	{

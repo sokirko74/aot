@@ -1,132 +1,106 @@
 #pragma once 
 
+const long MaxRelationLeapsCount = 4;
+
 // semantic weight: the less the better, the min is the best
-
-struct TreeVariantValueCoefs {
-	// =========   безусловные оценки (те, которые не используются для сортировки древесных вариантов)
-	// число компонент связностей
-	long ConnectedComponentsCountCoef;
+enum SemantiWeightComponentEnum : long {
+	ConnectedComponentsCount = 0,
 	// проективно дерево или нет 
-	long ProjectnessCoefCoef;
-
+	ProjectnessViolation,
 	// =========   оценки качества отношений  (эти оценки делятся на общее количество отношений)
 	// количество отношений, нарущающих предпочтительное направление 
-    long DirectDisagreeCoef;
+	DirectDisagree,
 	//  число отношений, прошедших проверку на SF
-	long SemFetDisagreeCoef;
+	SemFetDisagree,
 	//  сколько отношений прощло согласование по LEX
-	long LexFetAgreeCountCoef;
+	LexFetAgreeCount,
 	//  общая длина отношений в словах
-	long RelationsLengthCoef;
+	RelationsLength,
 	//	количество отношений, которые втыкаются в узлы, часть речи которых не соответсвует природе отношений
-	long SemRelPOSViolationsCountCoef;
+	SemRelPOSViolationsCount,
 	//  число отношений, которые взяты либо не из РОССа, либо из добавочных статей
-	long OptionalValencyPenaltyCoef;
+	OptionalValencyPenalty,
 	//  число отношений, которые синтаксически выражаются творительным и которые получены не из статей, 
 	//  а из пассивной трансформации (такие отношения считаются немного хуже обычных)
-	long InstrAgentRelsCountCoef;
-
-
+	InstrAgentRelsCount,
 	// =========   порядок в тексте
 	// количество узлов, которые нарушают порядок, указанный в CSemNode::m_ValsLayout
-	long ValencyDisorderCoef;
+	ValencyDisorder,
 	// запрещено,  чтобы между двумя сыновьями одного узла, которые не является МНА-оператором,  стояла  одна запятая
-    long CommaBetweenBrothersExceptMNAViolationsCountCoef;
+	CommaBetweenBrothersExceptMNAViolationsCount,
 	// количество отношений, между узлами которых находится только одна запятая, а этого быть не должно
-	long OnlyCommaBetweenViolationsCountCoef;
-
-
+	OnlyCommaBetweenViolationsCount,
 	// =========   синтаксические критерии
 	//  совпала ли вершина структуры с синтаксическим сказуемым
-	long AgreeWithSyntaxTopCoefCoef;
+	AgreeWithSyntaxTop,
 	//  может ли текущая вершина быть вершиной по синт. ее свойствам
 	// (например, личные местоимения не могут)
-	long TopAgreeWithSyntaxCriteriaCoef;
+	TopAgreeWithSyntaxCriteria,
 	// проверка согласования подлежащего и сказуемого
-	long SubjectPredicateViolationsCountCoef;
+	SubjectPredicateViolationsCount,
 	// нарушения согласования с полем RESTR
-	long GramRestrViolationsCountCoef;
-
-	
+	GramRestrViolationsCount,
 	// ========   лексические критерии (для конкретных случаев)
 	// число операторов однородности, которые имеют только одну стрелку (это плохо!) 	
-	long MNAViolationsCountCoef;
+	MNAViolationsCount,
 	//  число копульных узлов, у которых число валентностей не равно двум
-	long CopulViolationsCountCoef;
+	CopulViolationsCount,
 	//  количество словосочетаний
-	long CollocsCountCoef;
+	CollocsCount,
 	//  количество оборотоов с GF = ОБСТ_ГР
-	long OborotAdverbialCountCoef;
+	OborotAdverbialCount,
 	//  количество лексических функций
-	long LexFunctsCountCoef;
-	//  максимальная длина в синтаксических деревьях
-	long MaxRelationLeapsCount;
+	LexFunctsCount,
 	//  отсутствие обязательной
-	long ObligatoryValencyViolationCoef;
-    //  число узлов с DOMAIN = разг
-	long ColloquialInterpsCoef;
-    //  число узлов, у которых одинаковые DOMAIN =/= общ
-	long CorporaGleicheCoef;
-    //  число узлов, у которых одинаковые DOMAIN =/= общ
-	long PassiveValencyPenaltyCoef;
-//  число операторов однородностей (MUA), у которых все члены имеют хотя бы одну	// общую  SF
-	long SemFetAgreeMNACoef;
-    //  Сумма WordWeight 
-	long WordWeightCoef;
+	ObligatoryValencyViolation,
+	//  число узлов с DOMAIN = разг
+	ColloquialInterps,
+	//  число узлов, у которых одинаковые DOMAIN =/= общ
+	CorporaGleiche,
+	//  число узлов, у которых одинаковые DOMAIN =/= общ
+	PassiveValencyPenalty,
+	//  число операторов однородностей (MUA), у которых все члены имеют хотя бы одну	// общую  SF
+	SemFetAgreeMNACount,
+	//  Сумма WordWeight 
+	WordWeightCount,
 	// некоторые семантические проверки, которые повышают вес
-	long MiscSemAgreeCoef;
+	MiscSemAgree,
 	// если у причастия  нет актантов будем понижать ему вес, 
 	// чтобы выбралось прилагательное или существительное 
-	long PrichastieCoef;
+	PrichastieWithoutActantsCount,
+	//
+	SAMNodeViolation,
+	//
+	PanicMode,
+	//
+	SemantiWeightComponentSize
+};
+extern const std::string& GetStringBySemantiWeightComponent(SemantiWeightComponentEnum t);
+extern SemantiWeightComponentEnum GetSemantiWeightComponentByString(const std::string& s);
 
-
+struct TreeVariantValueCoefs {
+	std::vector<double> Coefs;
 	TreeVariantValueCoefs();
-	
-    bool ReadOneCoef (const char * s);
-
-
+    void ReadOneCoef (std::string s);
 };
 
-struct TreeVariantValue {
-	bool Panic;
-	long ValencyDisorder;
-    long ValencyMiss;
-    long DirectDisagree;
-	long ConnectedComponentsCount;
-	long SemFetDisagree;
-	long ProjectnessCoef;
-	long LexFetAgreeCount;
-	long AgreeWithSyntaxTopCoef;
-	long TopAgreeWithSyntaxCriteria;
-	long RelationsLength;
-	long MNAViolationsCount;
-	long SemRelPOSViolationsCount;
-	long OnlyCommaBetweenViolationsCount;
-	long SubjectPredicateViolationsCount;
-    long CommaBetweenBrothersExceptMNAViolationsCount;
-	long OptionalValencyCount;
-	long CopulViolationsCount;
-	long InstrAgentRelsCount;
-	long LexFunctsCount;
-	long GramRestrViolationsCount;
-	long CollocsCount;
-	bool SAMNodeViolation;
-	long OborotAdverbialCount;
-	long ObligatoryValencyViolationCount;
-	long ColloquialInterpsCount;
-	long CorporaGleicheCount;
-	long PassiveValencyCount;
-	long SemFetAgreeMNACount;
-	long WordWeightCount;
-	long MiscSemAgreeCount;
-	long PrichastieWithoutActantsCount;
-	const TreeVariantValueCoefs*  Coefs;
 
+enum struct WeightType {
+	Weight1,
+	Weight2,
+	Weight3
+};
 
+class TreeVariantValue {
+	const TreeVariantValueCoefs* Coefs;
+	std::vector<long> Weights;
+	long GetWeightByType(bool  CheckConnect, WeightType weightType)  const;
+public:
 	TreeVariantValue& operator = (const TreeVariantValue& X);
 	void Init();
-	TreeVariantValue(const TreeVariantValueCoefs* _Coefs);
+	TreeVariantValue(const TreeVariantValueCoefs* coefs);
 	TreeVariantValue();
+	void SetCoefs(const TreeVariantValueCoefs* coefs);
 	
 
 	// все, кроме оценок качества отношений и ObligatoryValencyViolationCount
@@ -138,15 +112,16 @@ struct TreeVariantValue {
 	long GetWeight3(bool  CheckConnect = true)  const;
 	// Общая функция оценок
 	long GetTreeWeight()  const;
-
-	long	GetWordWeight()  const;
-
-    bool operator == ( const TreeVariantValue& X ) const;
+	bool operator == ( const TreeVariantValue& X ) const;
 	bool operator < ( const TreeVariantValue& X ) const;
 	std::string	GetStr() const;
 	std::string	GetStrOfNotNull() const;
 	std::string	GetDifference(const TreeVariantValue& X) const;
-	
+	void SetWeight(SemantiWeightComponentEnum w, long value);
+	long GetSingleWeight(SemantiWeightComponentEnum w) const;
+	long GetWeightCoef(SemantiWeightComponentEnum w) const;
+	bool IsPanic() const;
+	void SetPanic();
 };
 
 const WORD Unhosted = 0xffff;
