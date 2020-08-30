@@ -66,8 +66,11 @@ SemantiWeightComponentEnum GetSemantiWeightComponentByString(const std::string& 
 TreeVariantValueCoefs::TreeVariantValueCoefs() {
 	size_t s = AllComponents.size();
 	assert(s == SemantiWeightComponentSize);
+	long i = 0; 
 	for (const auto& c : AllComponents) {
 		Coefs.push_back(c.DefaultValue);
+		assert((long)c.Type == i);
+		++i;
 	}
 }
 
@@ -89,6 +92,17 @@ void TreeVariantValueCoefs::ReadOneCoef(std::string  s)
 	assert(Coefs[t] > -1000);
 	assert(Coefs[t] <= 20000);
 };
+
+std::string TreeVariantValueCoefs::GetCoefsString() const {
+	std::vector<std::string> items;
+	for (const auto& a : AllComponents) {
+		auto s = Format("%s=%f", a.Name.c_str(), Coefs[a.Type]);
+		items.push_back(s);
+	}
+	return join_string(items, "\n");
+}
+
+//============================
 
 
 void TreeVariantValue::SetCoefs(const TreeVariantValueCoefs* coefs) {

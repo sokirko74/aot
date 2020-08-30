@@ -986,6 +986,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 		std::string s = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		m_SemCoefs.ReadOneCoef(s);
 	  };
+   rml_TRACE("Semantic Coefs:\n %s\n", m_SemCoefs.GetCoefsString().c_str());
 
    UnitNo = GetRossHolder(Ross)->LocateUnit("_weak_syn_rel",1);
    if (UnitNo == ErrUnitNo) return false;
