@@ -819,8 +819,12 @@ bool CRusSemStructure::BuildHypotRelationsGraph(size_t ClauseNo)
 			bool Result = ApplyGramRestr(ClauseNo);
 			if (!m_bLastTry)
 			{
-				if (!Result) return false;
-				if (!FindComparWithNoActantAndCheck(ClauseNo)) return false;
+				if (!Result) {
+					return false;
+				}
+				if (!FindComparWithNoActantAndCheck(ClauseNo)) {
+					return false;
+				}
 			};
 
 		}

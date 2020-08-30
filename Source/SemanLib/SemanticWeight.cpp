@@ -19,7 +19,7 @@ static const std::vector<TreeVariantDefaultValue> AllComponents = {
 	{DirectDisagree, "DirectDisagree", 10, WeightType::Weight1},
 	{SemFetDisagree, "SemFetDisagree", 0.15, WeightType::Weight2},
 	{LexFetAgreeCount, "LexFetAgreeCount", -20, WeightType::Weight1},
-	{RelationsLength, "RelationsLength", 0.01, WeightType::Weight1},
+	{RelationsLength, "RelationsLength", 0.1, WeightType::Weight1},
 	{SemRelPOSViolationsCount, "SemRelPOSViolationsCount", 5, WeightType::Weight1},
 	{OptionalValencyPenalty, "OptionalValencyPenalty", 90, WeightType::Weight2},
 	{InstrAgentRelsCount, "InstrAgentRelsCount", 0.05, WeightType::Weight2},

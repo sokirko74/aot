@@ -822,15 +822,12 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 		ConnectClausesForLexVariantCombination ();
  
-		if (m_ClauseVariantsCombinationNo == 95)
-		{
-			int uu =0;
-		}
 		BuildAnaphoricRels(); 
 
-		long Improvements = Idealize();
-
-		return GetStructureWeight() + Improvements;
+		auto w1 = GetStructureWeight();
+		long w2 = Idealize();
+		rml_TRACE("clause combination weight = %ld(main weight) + %ld(idealize weight)\n", w1, w2);
+		return w1 + w2;
 
 
 	}
@@ -900,7 +897,10 @@ long CRusSemStructure::GetStructureWeight()
 	   else
 		   Summa.SetWeight(RelationsLength,  SemanticVolume ? GetRelationsLength(Tag)*1000/RelsCount : 0);
 
-	Weight += Summa.GetTreeWeight();
+	auto w = Summa.GetTreeWeight();
+	rml_TRACE("clause component weights:");
+	rml_TRACE(Summa.GetStrOfNotNull().c_str());
+	Weight += w;
 
 
 
