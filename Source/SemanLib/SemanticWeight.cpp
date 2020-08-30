@@ -228,23 +228,23 @@ long TreeVariantValue::GetWordWeight()  const
 long TreeVariantValue::GetWeight1(bool  CheckConnect)  const
 {
 	assert(Coefs);
-	return   ValencyDisorder * Coefs->ValencyDisorderCoef
+	long s1 = ValencyDisorder * Coefs->ValencyDisorderCoef
 		+ DirectDisagree * Coefs->DirectDisagreeCoef
 		+ ProjectnessCoef * Coefs->ProjectnessCoefCoef
 		+ LexFetAgreeCount * Coefs->LexFetAgreeCountCoef
 		+ MNAViolationsCount * Coefs->MNAViolationsCountCoef
 		+ SemRelPOSViolationsCount * Coefs->SemRelPOSViolationsCountCoef
 		+ OnlyCommaBetweenViolationsCount * Coefs->OnlyCommaBetweenViolationsCountCoef
-		+ SubjectPredicateViolationsCount * Coefs->SubjectPredicateViolationsCountCoef
-		+ CommaBetweenBrothersExceptMNAViolationsCount * Coefs->CommaBetweenBrothersExceptMNAViolationsCountCoef
+		+ SubjectPredicateViolationsCount * Coefs->SubjectPredicateViolationsCountCoef;
+	long s2 = CommaBetweenBrothersExceptMNAViolationsCount * Coefs->CommaBetweenBrothersExceptMNAViolationsCountCoef
 		+ (Panic ? 1000 : 0)
 		+ ConnectedComponentsCount * ((CheckConnect) ? Coefs->ConnectedComponentsCountCoef : 0)
 		+ CopulViolationsCount * Coefs->CopulViolationsCountCoef
 		+ GramRestrViolationsCount * Coefs->GramRestrViolationsCountCoef
 		+ CollocsCount * Coefs->CollocsCountCoef
 		+ OborotAdverbialCount * Coefs->OborotAdverbialCountCoef
-		+ ColloquialInterpsCount * Coefs->ColloquialInterpsCoef
-		+ SAMNodeViolation * 1000
+		+ ColloquialInterpsCount * Coefs->ColloquialInterpsCoef;
+	long s3 = SAMNodeViolation * 1000
 		+ CorporaGleicheCount * Coefs->CorporaGleicheCoef
 		+ PassiveValencyCount * Coefs->PassiveValencyPenaltyCoef
 		+ SemFetAgreeMNACount * Coefs->SemFetAgreeMNACoef
@@ -252,6 +252,7 @@ long TreeVariantValue::GetWeight1(bool  CheckConnect)  const
 		+ PrichastieWithoutActantsCount * Coefs->PrichastieCoef
 		+ RelationsLength * Coefs->RelationsLengthCoef / 100
 		+ MiscSemAgreeCount * Coefs->MiscSemAgreeCoef;
+	return s1 + s2 + s3;
 };
 
 
