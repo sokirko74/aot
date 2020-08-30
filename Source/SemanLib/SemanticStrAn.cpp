@@ -861,7 +861,10 @@ long CRusSemStructure::GetStructureWeight()
 		else
 		{
 		   CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
-		   Weight += W.GetBestTreeWeight1(!IsConn);
+		   auto w = W.GetBestTreeWeight1(!IsConn);
+		   rml_TRACE("clause no %zu, weight1=%ld\n", i, w);
+		   rml_TRACE("%s\n", W.m_BestValue.GetStrOfNotNull().c_str());
+		   Weight += w;
 		 };
 	};
 
