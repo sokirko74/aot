@@ -861,8 +861,11 @@ long CRusSemStructure::GetStructureWeight()
 		else
 		{
 		   CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
-		   Weight += W.GetBestTreeWeight1(!IsConn);
-		 };
+		   auto w = W.GetBestTreeWeight1(!IsConn);
+		   rml_TRACE("clause no %zu, weight1=%ld", i, w);
+		   rml_TRACE("%s\n", W.m_BestValue.GetStrOfNotNull());
+		   Weight += w;
+		};
 	};
 
 	long Tag = SetTagToSentence();
@@ -883,9 +886,6 @@ long CRusSemStructure::GetStructureWeight()
 	// точнее, ее надо учесть, но вычислять расстояние в клаузах, а не в словах. 
 	// Пока просто не будем учитывать.
 	Summa.SetWeight(RelationsLength,  0);
-
-
-	// это нужно сделать, но я забыл зачем?
     Summa.SetWeight(ObligatoryValencyViolation, GetObligatoryValencyViolation(Tag));
 
 	// нужно сделать, поскольку под лексические функции подводятся, например, разрывные союзы.
@@ -900,12 +900,17 @@ long CRusSemStructure::GetStructureWeight()
 	auto w = Summa.GetTreeWeight();
 	rml_TRACE("clause component weights:");
 	rml_TRACE(Summa.GetStrOfNotNull().c_str());
+	rml_TRACE("add weight by components for cross clause relations %ld to the main weight (%ld)\n", w, Weight);
 	Weight += w;
 
 
 
-	Weight -= GetAnaphoricRelationsCount(Tag) * 5;
-	//rml_TRACE("%s\n", Summa.GetStr().c_str());
+	w = GetAnaphoricRelationsCount(Tag) * 5;
+	if (w != 0) {
+		Weight -= w;
+		rml_TRACE("decrease clause weight by anaphoric rels: -%ld\n", w);
+	}
+
 	/*
 	 если были использованы недостоверные межклаузные  связи, тогда
 	 нужно дать штраф этой структуре
