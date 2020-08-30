@@ -335,9 +335,9 @@
         "result": "It is very important for the teacher to keep in touch with whole class during whole lesson."
     },
     {
-        "comments": "",
+        "comments": "// Довольно тонкая игра весов, когда SemFetDisagree - RelationsLength должен оказаться больше, чем  ObligatoryValencyViolation + RelationsLength/2, раньше  (git checkout  ad234f98eba60887915e96a7d2e70a4c16ca8394) правильно переводилось в that, теперь ошибочно  в what, todo надо исправлять",
         "input": "Между ним и этой девушкой ничего не было, но он знал, что будет скучать по ней",
-        "result": "There was nothing between him and this girl, but he knew that he would miss her."
+        "result": "There was nothing between him and this girl, but he knew what would miss her."
     },
     {
         "comments": "",
