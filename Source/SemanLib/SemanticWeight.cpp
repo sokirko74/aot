@@ -11,7 +11,7 @@ struct TreeVariantDefaultValue {
 	WeightType WeightType;
 };
 
-//static const std::vector<size_t> dummy = { 1,2,3 };
+static const std::vector<size_t> dummy = { 1,2,3 };
 
 static const std::vector<TreeVariantDefaultValue> AllComponents = {
 	{ConnectedComponentsCount, "ConnectedComponentsCount", 10000, WeightType::Weight1},
@@ -165,38 +165,38 @@ bool TreeVariantValue::operator < (const TreeVariantValue& X) const
 
 
 
-long TreeVariantValue::GetWeightByType(bool  CheckConnect, WeightType weightType)  const {
+long TreeVariantValue::GetWeightByType(WeightType weightType, bool  checkConnect, bool checkWordWeight)  const {
 	assert(Coefs);
 	double weight = 0.0;
 	for (const auto& a : AllComponents) {
-		if (CheckConnect || a.Type != ConnectedComponentsCount) {
-			if (a.WeightType == weightType) {
-				weight += (double)Weights[a.Type] * Coefs->Coefs[a.Type];
-			}
+		if (!checkWordWeight && a.Type == WordWeightCount) continue;
+		if (!checkConnect && a.Type == ConnectedComponentsCount) continue;
+		if (a.WeightType == weightType) {
+			weight += (double)Weights[a.Type] * Coefs->Coefs[a.Type];
 		}
 	}
 	return (long)weight;
 
 }
 
-long TreeVariantValue::GetWeight1(bool  CheckConnect)  const
+long TreeVariantValue::GetWeight1(bool  checkConnect, bool checkWordWeight)  const
 {
-	return GetWeightByType(CheckConnect, WeightType::Weight1);
+	return GetWeightByType(WeightType::Weight1, checkConnect, checkWordWeight);
 };
 
 long TreeVariantValue::GetWeight2()  const
 {
-	return GetWeightByType(true, WeightType::Weight2);
+	return GetWeightByType(WeightType::Weight2, false, false);
 };
 
-long TreeVariantValue::GetWeight3(bool  CheckConnect)  const
+long TreeVariantValue::GetWeight3()  const
 {
-	return GetWeightByType(true, WeightType::Weight3);
+	return GetWeightByType(WeightType::Weight3, false, false);
 };
 
-long TreeVariantValue::GetTreeWeight()  const
+long TreeVariantValue::GetTreeWeight(bool  checkConnect, bool checkWordWeight)  const
 {
-	return   GetWeight1() + GetWeight2() + GetWeight3();
+	return   GetWeight1(checkConnect, checkWordWeight) + GetWeight2() + GetWeight3();
 };
 
 std::string TreeVariantValue::GetStr()  const
@@ -262,15 +262,15 @@ size_t CTreeVariant::GetRelsCount() const
 
 
 //=================
-long CTreeOfLexVariantWeight::GetBestTreeWeight() const {
+long CTreeOfLexVariantWeight::GetBestTreeWeight(bool  checkConnect, bool checkWordWeight) const {
 	if (TreeVariantCount == 0) return 1000;
-	return m_BestValue.GetTreeWeight();
+	return m_BestValue.GetTreeWeight(checkConnect, checkWordWeight);
 }
 
-long CTreeOfLexVariantWeight::GetBestTreeWeight1(bool CheckConnected) const
+long CTreeOfLexVariantWeight::GetBestTreeWeight1(bool  checkConnect, bool checkWordWeight) const
 {
 	if (TreeVariantCount == 0) return 1000;
-	return    m_BestValue.GetWeight1(CheckConnected);
+	return  m_BestValue.GetWeight1(checkConnect, checkWordWeight);
 
 
 };

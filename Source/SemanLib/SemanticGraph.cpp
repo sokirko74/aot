@@ -692,7 +692,7 @@ long CSemanticStructure::GetAnaphoraTarget(long NodeNo) const
 {
 	for (size_t i = 0; i < GetDopRelationsSize(); i++)
 		if (GetDopRelation(i)->m_SourceNodeNo == NodeNo)
-			if (GetDopRelation(i)->m_SyntacticRelation == _R("анафора"))
+			if (GetDopRelation(i)->m_SyntacticRelation == "anaphora_relation")
 				return GetDopRelation(i)->m_TargetNodeNo;
 	return -1;
 };

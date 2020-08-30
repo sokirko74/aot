@@ -9,7 +9,7 @@ long CRusSemStructure::GetAnaphoricRelationsCount(long Tag)
   for (size_t i = 0;  i < m_DopRelations.size(); i++)
    if (HasTag(m_DopRelations[i].m_SourceNodeNo, Tag))
     if (m_DopRelations[i].m_bRelUse)
- 	 if (m_DopRelations[i].m_SyntacticRelation == _R("анафора"))
+ 	 if (m_DopRelations[i].m_SyntacticRelation == "anaphora_relation")
 	 		Result++;
 
   return Result; 
@@ -237,7 +237,12 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
 			// оно должно быть реверсивным, чтобы не отличаться от простых 
 			// наречий, чтобы занять правильное место в англ. предложении.
 			m_Relations[m_Relations.size()-1].m_bReverseRel = true;
-			m_DopRelations.push_back(CRusSemRelation(CValency("THESAME", A_C),  SamNodeNo,  m_Relations[R.m_Rels[l]].m_TargetNodeNo,  _R("анафора")));			
+			m_DopRelations.push_back(
+				CRusSemRelation(
+					CValency("THESAME", A_C),  
+					SamNodeNo,  
+					m_Relations[R.m_Rels[l]].m_TargetNodeNo,  
+					"anaphora_relation"));
 			bResult = true;
 		  }
          else    
@@ -861,7 +866,7 @@ long CRusSemStructure::GetStructureWeight()
 		else
 		{
 		   CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
-		   auto w = W.GetBestTreeWeight1(!IsConn);
+		   auto w = W.GetBestTreeWeight1(!IsConn, true);
 		   rml_TRACE("clause no %zu, weight1=%ld\n", i, w);
 		   rml_TRACE("%s\n", W.m_BestValue.GetStrOfNotNull().c_str());
 		   Weight += w;

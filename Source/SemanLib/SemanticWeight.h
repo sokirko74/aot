@@ -95,7 +95,7 @@ enum struct WeightType {
 class TreeVariantValue {
 	const TreeVariantValueCoefs* Coefs;
 	std::vector<long> Weights;
-	long GetWeightByType(bool  CheckConnect, WeightType weightType)  const;
+	long GetWeightByType(WeightType weightType, bool  checkConnect, bool checkWordWeight)  const;
 public:
 	TreeVariantValue& operator = (const TreeVariantValue& X);
 	void Init();
@@ -105,14 +105,14 @@ public:
 	
 
 	// все, кроме оценок качества отношений и ObligatoryValencyViolationCount
-	long GetWeight1(bool  CheckConnect = true)  const;
+	long GetWeight1(bool  checkConnect = true, bool checkWordWeight=true)  const;
 
 	// оценки качества отношений + ObligatoryValencyViolationCount
 	long GetWeight2()  const;
 	// синтаксические оценки
-	long GetWeight3(bool  CheckConnect = true)  const;
+	long GetWeight3()  const;
 	// Общая функция оценок
-	long GetTreeWeight()  const;
+	long GetTreeWeight(bool  checkConnect = true, bool checkWordWeight = true)  const;
 	bool operator == ( const TreeVariantValue& X ) const;
 	bool operator < ( const TreeVariantValue& X ) const;
 	std::string	GetStr() const;
@@ -156,8 +156,8 @@ struct CTreeOfLexVariantWeight {
 	long   TreeVariantCount;
 	long   AllRelationsCount;
 
-	long GetBestTreeWeight() const;
-	long GetBestTreeWeight1(bool CheckConnected = true) const;
+	long GetBestTreeWeight(bool  checkConnect=true, bool checkWordWeight = true) const;
+	long GetBestTreeWeight1(bool  checkConnect = true, bool checkWordWeight = true) const;
 	void  CopyTreeOfLexVariantWeight(const CTreeOfLexVariantWeight& X);
 	bool operator == (const CTreeOfLexVariantWeight& X) const;
 	bool operator < (const CTreeOfLexVariantWeight& X) const;

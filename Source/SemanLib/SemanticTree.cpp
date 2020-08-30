@@ -1035,7 +1035,7 @@ struct CAntecedentHypot
 	};
 	long GetWeightOfAntHypot() const
 	{
-		return m_Distance + m_Variant.GetBestTreeWeight() - m_Variant.m_BestValue.GetSingleWeight(WordWeightCount);
+		return m_Distance + m_Variant.GetBestTreeWeight(true, false);
 	};
 	bool operator == (const CAntecedentHypot& X) const
 	{
@@ -1083,7 +1083,7 @@ void CRusSemStructure::FindPossibleAntecedents()
 	m_SentenceCount++;
 
 }
-//#pragma optimize( "", off ) 
+
 void CRusSemStructure::BuildAnaphoricRels()
 {
 	// необходимо получить пересечение SF уже сейчас, иначе личные местоимения
@@ -1185,30 +1185,23 @@ void CRusSemStructure::BuildAnaphoricRels()
 			};
 
 
-			// оценка гипотез
 			sort(Hypots.begin(), Hypots.end());
-			if (Hypots.size() > 1)
-			{
-				std::string s = Hypots[0].m_Variant.m_BestValue.GetDifference(Hypots[1].m_Variant.m_BestValue);
-				int u = 0;
+
+			if (Hypots[0].m_NodeNo != -1) {
+				rml_TRACE ("Set anaphora node %s for %s \n", GetNodeStr(Hypots[0].m_NodeNo).c_str(), GetNodeStr(NodeNo).c_str());
+				for (size_t i = 1; i < Hypots.size(); i++) {
+					rml_TRACE("diff to the best anaphoric candidate (node=%s):\n%s\n",
+						GetNodeStr(Hypots[i].m_NodeNo).c_str(),
+						Hypots[i].m_Variant.m_BestValue.GetDifference(Hypots[0].m_Variant.m_BestValue).c_str());
+				}
 			}
-			//printf ("Node:%s\n", GetNodeStr(NodeNo).c_str());
-			for (size_t i = 0; i < Hypots.size(); i++)
-			{
-				//printf ("\tHypot:%s %i\n", GetNodeStr(Hypots[i].m_Node).c_str(), Hypots[i].m_Distance);
-				//if ( i >0 )
-				//printf ("\t\tdiff with prev:%s\n", Hypots[i].m_Variant.m_BestValue.GetDifference(Hypots[i-1].m_Variant.m_BestValue).c_str());
-
-			}
-
-
 
 			m_Nodes[NodeNo].m_AntecedentStr = Format("%s[%i]", GetNodeStr((const CSemNode&)Hypots[0].m_Node).c_str(), Hypots[0].m_Distance);
 
 			if (Hypots[0].m_NodeNo != -1)
 			{
 				// построение отношения
-				CRusSemRelation R(CValency("THESAME", A_C, GetRossHolder(Ross)), NodeNo, Hypots[0].m_NodeNo, _R("анафора"));
+				CRusSemRelation R(CValency("THESAME", A_C, GetRossHolder(Ross)), NodeNo, Hypots[0].m_NodeNo, "anaphora_relation");
 				m_DopRelations.push_back(R);
 
 
@@ -1223,11 +1216,6 @@ void CRusSemStructure::BuildAnaphoricRels()
 
 		};
 };
-
-
-//#pragma optimize( "", on) 
-
-
 
 
 CRusSemNode CreateDummyNode(long WordNo, const CSemanticsHolder* pData)
