@@ -822,15 +822,12 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination(  )
 
 		ConnectClausesForLexVariantCombination ();
  
-		if (m_ClauseVariantsCombinationNo == 95)
-		{
-			int uu =0;
-		}
 		BuildAnaphoricRels(); 
 
-		long Improvements = Idealize();
-
-		return GetStructureWeight() + Improvements;
+		auto w1 = GetStructureWeight();
+		long w2 = Idealize();
+		rml_TRACE("clause combination weight = %ld(main weight) + %ld(idealize weight)\n", w1, w2);
+		return w1 + w2;
 
 
 	}
@@ -900,11 +897,18 @@ long CRusSemStructure::GetStructureWeight()
 	   else
 		   Summa.RelationsLength = SemanticVolume ? GetRelationsLength(Tag)*1000/RelsCount : 0;
 
-	Weight += Summa.GetTreeWeight();
+	auto w = Summa.GetTreeWeight();
+	rml_TRACE("clause component weights:\n");
+	rml_TRACE(Summa.GetStrOfNotNull().c_str());
+	rml_TRACE("add weight by components for cross clause relations %ld to the main weight (%ld)\n", w, Weight);
+	Weight += w;
 
 
-
-	Weight -= GetAnaphoricRelationsCount(Tag) * 5;
+	w = GetAnaphoricRelationsCount(Tag) * 5;
+	if (w != 0) {
+		Weight -= w;
+		rml_TRACE("decrease clause weight by anaphoric rels: -%ld\n", w);
+	}
 	//rml_TRACE("%s\n", Summa.GetStr().c_str());
 	/*
 	 если были использованы недостоверные межклаузные  связи, тогда
