@@ -988,7 +988,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 			  ErrorMessage (std::string(S) + std::string(" is not recognized as a semantic coefficient"));
 		  };
 	  };
-
+   rml_TRACE("Semantic coefs:\n %s\n", m_SemCoefs.GetCoefsString().c_str());
    UnitNo = GetRossHolder(Ross)->LocateUnit("_weak_syn_rel",1);
    if (UnitNo == ErrUnitNo) return false;
    m_WeakSynRels.clear();

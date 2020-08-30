@@ -83,7 +83,7 @@ struct TreeVariantValueCoefs {
 	TreeVariantValueCoefs();
 	
     bool ReadOneCoef (const char * s);
-
+	std::string GetCoefsString() const;
 
 };
 

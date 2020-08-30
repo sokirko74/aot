@@ -79,6 +79,43 @@ bool TreeVariantValueCoefs::ReadOneCoef(const char* s)
 	return false;
 };
 
+std::string TreeVariantValueCoefs::GetCoefsString() const 
+{
+	std::string s =
+		Format("ConnectedComponentsCount = %f\n", (double)ConnectedComponentsCountCoef) +
+		Format("ProjectnessViolation = %f\n", (double)ProjectnessCoefCoef) +
+		Format("DirectDisagree = %f\n", (double)DirectDisagreeCoef) +
+		Format("SemFetDisagree = %f\n", (double)SemFetDisagreeCoef) +
+		Format("LexFetAgreeCount = %f\n", (double)LexFetAgreeCountCoef) +
+		Format("RelationsLength = %f\n", (double)RelationsLengthCoef) +
+		Format("SemRelPOSViolationsCount = %f\n", (double)SemRelPOSViolationsCountCoef) +
+		Format("OptionalValencyPenalty = %f\n", (double)OptionalValencyPenaltyCoef) +
+		Format("InstrAgentRelsCount = %f\n", (double)InstrAgentRelsCountCoef) +
+		Format("ValencyDisorder = %f\n", (double)ValencyDisorderCoef) +
+		Format("CommaBetweenBrothersExceptMNAViolationsCount = %f\n", (double)CommaBetweenBrothersExceptMNAViolationsCountCoef) +
+		Format("OnlyCommaBetweenViolationsCount = %f\n", (double)OnlyCommaBetweenViolationsCountCoef) +
+		Format("AgreeWithSyntaxTop = %f\n", (double)AgreeWithSyntaxTopCoefCoef) +
+		Format("TopAgreeWithSyntaxCriteria = %f\n", (double)TopAgreeWithSyntaxCriteriaCoef) +
+		Format("SubjectPredicateViolationsCount = %f\n", (double)SubjectPredicateViolationsCountCoef) +
+		Format("GramRestrViolationsCount = %f\n", (double)GramRestrViolationsCountCoef) +
+		Format("MNAViolationsCount = %f\n", (double)MNAViolationsCountCoef) +
+		Format("CopulViolationsCount = %f\n", (double)CopulViolationsCountCoef) +
+		Format("CollocsCount = %f\n", (double)CollocsCountCoef) +
+		Format("OborotAdverbialCount = %f\n", (double)OborotAdverbialCountCoef) +
+		Format("LexFunctsCount = %f\n", (double)LexFunctsCountCoef) +
+		Format("ObligatoryValencyViolation = %f\n", (double)ObligatoryValencyViolationCoef) +
+		Format("ColloquialInterps = %f\n", (double)ColloquialInterpsCoef) +
+		Format("CorporaGleiche = %f\n", (double)CorporaGleicheCoef) +
+		Format("PassiveValencyPenalty = %f\n", (double)PassiveValencyPenaltyCoef) +
+		Format("SemFetAgreeMNACount = %f\n", (double)SemFetAgreeMNACoef) +
+		Format("WordWeightCount = %f\n", (double)WordWeightCoef) +
+		Format("MiscSemAgree = %f\n", (double)MiscSemAgreeCoef) +
+		Format("PrichastieWithoutActantsCount = %f\n", (double)PrichastieCoef) +
+		Format("SAMNodeViolation = 1000.000000\n") +
+		Format("PanicMode = 1000.000000\n");
+	return s;
+}
+
 
 TreeVariantValue& TreeVariantValue :: operator = (const TreeVariantValue& X)
 {
