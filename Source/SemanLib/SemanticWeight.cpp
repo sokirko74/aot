@@ -35,7 +35,7 @@ static const std::vector<TreeVariantDefaultValue> AllComponents = {
 	{CollocsCount, "CollocsCount", -15, WeightType::Weight1},
 	{OborotAdverbialCount, "OborotAdverbialCount", -10, WeightType::Weight1},
 	{LexFunctsCount, "LexFunctsCount", -50, WeightType::Weight2},
-	{ObligatoryValencyViolation, "ObligatoryValencyViolation", 50, WeightType::Weight1},
+	{ObligatoryValencyViolation, "ObligatoryValencyViolation", 50, WeightType::Weight2},
 	{ColloquialInterps, "ColloquialInterps", 60, WeightType::Weight1},
 	{CorporaGleiche, "CorporaGleiche", -2, WeightType::Weight1},
 	{PassiveValencyPenalty, "PassiveValencyPenalty", 1, WeightType::Weight1},
@@ -183,7 +183,6 @@ long TreeVariantValue::GetWeight1(bool  CheckConnect)  const
 {
 	return GetWeightByType(CheckConnect, WeightType::Weight1);
 };
-
 
 long TreeVariantValue::GetWeight2()  const
 {
