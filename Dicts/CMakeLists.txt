@@ -1,5 +1,7 @@
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/BinDict)
+
 macro (CompileSimpleGrammar name grmFile tableFile)
     add_custom_target( 
         ${name}
