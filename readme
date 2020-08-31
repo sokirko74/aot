@@ -18,7 +18,7 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 ==============  Prerequisites    ========================
 0.   Install cmake (at least 3.5) from https://cmake.org/download/
 
-1.  g++ 8.0 or higher or 
+1.  g++ 9.0 or higher or 
 
 2. You need flex and bison to build projects after Morphology (Synan and Seman)
     For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect

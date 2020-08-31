@@ -1,4 +1,4 @@
-#include "../SemanLib/semStructureBuilder.h"
+#include "../SemanLib/SemStructureBuilder.h"
 #include "../common/argparse.h"
 #include "../SemanLib/VisualGraph.h"
 #include "../common/json.h"
