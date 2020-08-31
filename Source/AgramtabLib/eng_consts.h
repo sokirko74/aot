@@ -2,7 +2,11 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko, Dmitry Pankratov
 
-#pragma once
+// I cannot use this directive, when this file is included in a WINDOWS COM IDL
+//#pragma once 
+
+#ifndef eng_consts_h
+#define eng_consts_h
 
  enum EnglishPartOfSpeechEnum
  {
@@ -65,3 +69,5 @@ enum EnglishGrammemsEnum {
         eOrganisation = 33,
 		EnglishGrammemsCount = 34
  };
+
+#endif

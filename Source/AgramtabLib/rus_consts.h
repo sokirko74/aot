@@ -2,7 +2,12 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko, Dmitry Pankratov
 
-#pragma once
+
+// I cannot use this directive, when this file is included in a WINDOWS COM IDL
+//#pragma once 
+
+#ifndef rus_consts_h
+#define rus_consts_h
 
 enum RussianPartOfSpeechEnum
 {
@@ -131,6 +136,4 @@ enum RussianClauseTypeEnum  {
 	RUSSIAN_CLAUSE_TYPE_COUNT = 12
 };
 
-
-// Стандартное согласование между двумя именами  по  числу и падежу
-	
+#endif	

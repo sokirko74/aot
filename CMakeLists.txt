@@ -1,7 +1,12 @@
 project(aot)
 
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
-cmake_minimum_required(VERSION 3.5)
+
+macro (declare_cmake_min_version)
+    cmake_minimum_required(VERSION 3.16)
+endmacro(declare_cmake_min_version)
+
+declare_cmake_min_version()
 
 set(BUILD_DICTS 1)  # build dicts by default, disable it in CMakeLists.my if you want
 set(BUILD_COM 0)    # do not build COM-objects by default

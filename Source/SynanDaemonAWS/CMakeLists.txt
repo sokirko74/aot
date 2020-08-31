@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+declare_cmake_min_version()
 set(CMAKE_CXX_STANDARD 11)
 project(SynanDaemonAWS LANGUAGES CXX)
 

@@ -1,7 +1,10 @@
 // #pragma once  is not enough since this file is included from agramtab.idl
 
-#ifndef __GerGramTab_FWD_DEFINED__
-#pragma once 
+// I cannot use this directive, when this file is included in a WINDOWS COM IDL
+//#pragma once 
+
+#ifndef ger_consts_h
+#define ger_consts_h
 
 enum GermanPartOfSpeechEnum
 {
