@@ -8,7 +8,7 @@ struct TreeVariantDefaultValue {
 	SemantiWeightComponentEnum Type;
 	std::string Name;
 	double DefaultValue;
-	WeightType WeightType;
+	WeightType _WeightType;
 };
 
 static const std::vector<size_t> dummy = { 1,2,3 };
@@ -171,7 +171,7 @@ long TreeVariantValue::GetWeightByType(WeightType weightType, bool  checkConnect
 	for (const auto& a : AllComponents) {
 		if (!checkWordWeight && a.Type == WordWeightCount) continue;
 		if (!checkConnect && a.Type == ConnectedComponentsCount) continue;
-		if (a.WeightType == weightType) {
+		if (a._WeightType == weightType) {
 			weight += (double)Weights[a.Type] * Coefs->Coefs[a.Type];
 		}
 	}
