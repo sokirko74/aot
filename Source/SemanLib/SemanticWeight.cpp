@@ -221,12 +221,12 @@ std::string TreeVariantValue::GetStrOfNotNull()  const
 };
 
 
-std::string TreeVariantValue::GetDifference(const TreeVariantValue& _X)  const
+std::string TreeVariantValue::GetDifference(const TreeVariantValue& v)  const
 {
 	std::vector<std::string> items;
 	for (const auto& a : AllComponents) {
-		if (Weights[a.Type] != _X.Weights[a.Type]) {
-			items.push_back(Format("%s: %ld != (%ld);", a.Name.c_str(), Weights[a.Type], _X.Weights[a.Type]));
+		if (Weights[a.Type] != v.Weights[a.Type]) {
+			items.push_back(Format("%s: %ld != (%ld);", a.Name.c_str(), Weights[a.Type], v.Weights[a.Type]));
 		}
 	}
 	return join_string(items, "\n");
