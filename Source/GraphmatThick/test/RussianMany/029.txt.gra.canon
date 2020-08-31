@@ -5,4 +5,4 @@
 Е                               6 1 RLE AA
 Ц                               8 1 RLE AA SENT_END
                                 9 11 DEL SPC
-¶                               20 2 DEL EOLN CS?
+¶                               20 1 DEL EOLN CS?

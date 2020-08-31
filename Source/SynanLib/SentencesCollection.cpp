@@ -138,7 +138,7 @@ bool CSentencesCollection::ReadAndProcessSentences(const CPlmLineCollection *piP
 
     for (size_t LineNo = 0; LineNo < LinesCount;) {
         if (m_bEnableProgressBar)
-            printf("%i of %i       \r", LineNo, LinesCount);
+            printf("%zu of %zu       \r", LineNo, LinesCount);
 
         CSentence *S = m_pSyntaxOptions->NewSentence();
         if (!S) {
@@ -221,7 +221,7 @@ bool CSentencesCollection::ReadAndProcessSentences(const CPlmLineCollection *piP
         printf("Time : %i\n", seconds);
         printf("Count of tokens : %i\n", LinesCount);
         if (seconds > 0)
-            printf("The speed is %zu tokens pro second\n", LinesCount / seconds);
+            printf("The speed is %zu tokens pro second\n", (size_t)(LinesCount / seconds));
     };
     return true;
 }

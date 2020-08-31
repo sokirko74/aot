@@ -3,6 +3,6 @@ Bill                            0 4 LLE Aa NAM? FAM1
 J                               5 1 LLE AA
 .                               6 1 PUN
 Bush                            8 4 LLE Aa NAM? SENT_END FAM2
-¶¶¶¶¶                           12 10 DEL EOLN CS?
-Bill                            22 4 LLE Aa NAM? FAM1
-Bush                            27 4 LLE Aa NAM? CS? SENT_END FAM2
+¶¶¶¶¶                           12 5 DEL EOLN CS?
+Bill                            17 4 LLE Aa NAM? FAM1
+Bush                            22 4 LLE Aa NAM? CS? SENT_END FAM2
