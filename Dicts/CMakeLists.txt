@@ -1,3 +1,5 @@
+declare_cmake_min_version()
+
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/BinDict)

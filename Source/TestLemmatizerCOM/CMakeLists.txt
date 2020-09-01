@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
-
+declare_cmake_min_version()
 
 add_executable(TestLemmatizerCOM
     TestLemmatizerCOM.cpp
