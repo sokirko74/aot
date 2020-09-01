@@ -76,13 +76,13 @@ bool CheckFileAppendRights(const char* fileName) {
 	}
 }
 
-void TRMLHttpServer::LogMessage(const std::string &t) {
+void TRMLHttpServer::LogMessage(const char* t) {
 	try {
 		struct tm today = RmlGetCurrentTime();
 		char tmpbuf[255];
 		FILE *fp = fopen(TRMLHttpServer::LogFileName.c_str(), "a");
 		strftime(tmpbuf, 255, "%d%B%Y %H:%M:%S", &today);
-		fprintf(fp, "%s > %s\n", tmpbuf, t.c_str());
+		fprintf(fp, "%s > %s\n", tmpbuf, t);
 		fclose(fp);
 	}
 	catch (...) {
@@ -111,7 +111,7 @@ void TRMLHttpServer::Initialize(std::uint16_t srvPort, DaemonLogModeEnum logMode
 	if (!CheckFileAppendRights(LogFileName.c_str())) {
 		throw CExpc(Format("Cannot write to log file \"%s\" \n", LogFileName.c_str()));
 	}
-	LogMessage(Format("initialize daemon at port %s:%i", myIP.c_str(), SrvPort));
+	LogMessage(Format("initialize daemon at port %s:%i", myIP.c_str(), SrvPort).c_str());
 
 	InitSockets();
 	Server = TInnerServer(evhttp_start(myIP.c_str(), SrvPort), &evhttp_free);

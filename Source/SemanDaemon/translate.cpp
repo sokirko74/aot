@@ -18,21 +18,21 @@ void TSemanHttpServer::Load() {
 	} 
 	catch (...)
 	{
-		LogMessage(Format("Error in Constructor: %s\n",(const char*)SemBuilder.m_RusStr.m_pData->m_LastError.c_str()));
+		LogMessage(Format("Error in Constructor: %s\n",(const char*)SemBuilder.m_RusStr.m_pData->m_LastError.c_str()).c_str());
 		throw;
 	}
 }
 
 
 std::string TSemanHttpServer::Translate(const std::string& russian, const std::string &po) {
-	std::string eng = SemBuilder.TranslateRussianText(russian, po, LogMessage); {
+	std::string eng = SemBuilder.TranslateRussianText(russian, po, LogMessage); 
 	return Format("{\"translation\": \"%s\"}", eng.c_str());
 }
 
 std::string TSemanHttpServer::BuildRusGraph(const std::string& russian, const std::string &po)
 {
 	try {
-		LogMessage("Build Graph: " + russian);
+		LogMessage(Format("Build Graph: &%s", russian.c_str()).c_str());
 		
 		std::string res;
 		std::string graphStr;

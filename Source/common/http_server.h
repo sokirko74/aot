@@ -1,10 +1,10 @@
 #include "utilit.h"
 
-#include "../contrib/libevent/include/evhttp.h"
+#include <evhttp.h>
 
 #include <memory>
 
-typedef void (*TLogFunction)(const std::string&);
+typedef void (*TLogFunction)(const char*);
 
 enum DaemonLogModeEnum {
 	dlmQuiet = 0,
@@ -35,7 +35,7 @@ public:
 	void OnHttpRequest(evhttp_request *req);
 	virtual std::string OnParsedRequest(TDaemonParsedRequest& request) = 0;
 
-	static void LogMessage(const std::string &t);
+	static void LogMessage(const char* t);
 };
 
 
