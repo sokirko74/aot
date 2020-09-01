@@ -8,7 +8,6 @@ target_link_libraries(${PROJECT_NAME}
     LemmatizerLib
 )
 
-add_dependencies (${PROJECT_NAME} TestLem)
 
 macro (TestMorphGen lang path)
     get_filename_component(base_name ${path} NAME)
@@ -16,20 +15,14 @@ macro (TestMorphGen lang path)
     message (${folder})
     add_test(
         NAME MorphGen_${lang}_${base_name}_0 
-        COMMAND MorphGen --input ${base_name} --output-folder . --postfix-len 5 --min-freq 3
+        COMMAND MorphGen --input ${base_name} --output-folder . --postfix-len 5 --min-freq 3  --test-word дума
         WORKING_DIRECTORY  ${folder}
     )
                             
 
     add_test(
         NAME MorphGen_${lang}_${base_name}_1
-        COMMAND TestLem --RML ${folder} --language ${lang} --input test.txt --output test.txt.morph
-        WORKING_DIRECTORY  ${folder}
-    )
-
-    add_test(
-        NAME MorphGen_${lang}_${base_name}_2
-        COMMAND ${CMAKE_COMMAND} -E compare_files  test.txt.morph test.txt.morph.canon
+        COMMAND ${CMAKE_COMMAND} -E compare_files  test_word.morph test_word.morph.canon
         WORKING_DIRECTORY  ${folder}
     )
 endmacro(TestMorphGen)

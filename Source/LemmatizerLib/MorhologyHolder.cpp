@@ -234,3 +234,74 @@ CFormInfo CMorphologyHolder::id_to_paradigm(long id) const
 	return Res;
 }
 
+
+std::string CMorphologyHolder::GetGrammems(const char* tab_str) {
+	QWORD G;
+	m_pGramTab->GetGrammems(tab_str, G);
+	std::string s = m_pGramTab->GrammemsToStr(G);
+	if (!s.empty() && (s[s.length() - 1] == ','))
+		s.erase(s.length() - 1);
+	return s;
+}
+
+std::string CMorphologyHolder::PrintMorphInfoUtf8(std::string Form, bool printIds, bool printForms, bool sortParadigms)
+{
+	bool bCapital = is_upper_alpha((BYTE)Form[0], m_CurrentLanguage);
+
+	std::vector<CFormInfo> Paradigms;
+	m_pLemmatizer->CreateParadigmCollection(false, Form, bCapital, true, Paradigms);
+
+	std::vector<std::string> Results;
+	for (int i = 0; i < Paradigms.size(); i++) {
+		std::string Result;
+		const CFormInfo& F = Paradigms[i];
+		Result += F.m_bFound ? "+ " : "- ";
+
+		Result += F.GetWordForm(0) + " ";
+
+		{
+			std::string GramCodes = F.GetSrcAncode();
+			BYTE PartOfSpeech = m_pGramTab->GetPartOfSpeech(GramCodes.c_str());
+			Result += m_pGramTab->GetPartOfSpeechStr(PartOfSpeech) + std::string(" ");
+
+			std::string CommonAncode = F.GetCommonAncode();
+			Result += Format("%s ", (CommonAncode.empty()) ? "" : GetGrammems(CommonAncode.c_str()).c_str());
+
+			for (long i = 0; i < GramCodes.length(); i += 2) {
+				if (i > 0)
+					Result += ";";
+				Result += Format("%s", GetGrammems(GramCodes.c_str() + i).c_str());
+			}
+
+		}
+
+		if (printIds)
+			Result += Format(" %i", F.GetParadigmId());
+
+		BYTE Accent = F.GetSrcAccentedVowel();
+		if (Accent != 0xff)
+			Result += Format(" %s'%s", Form.substr(0, Accent + 1).c_str(), Form.substr(Accent + 1).c_str());
+
+		if (printForms) {
+			Result += " ";
+			for (int k = 0; k < F.GetCount(); k++) {
+				if (k > 0)
+					Result += ",";
+				Result += Paradigms[i].GetWordForm(k);
+			};
+		};
+		Results.push_back(Result);
+	};
+
+	if (sortParadigms) {
+		std::sort(Results.begin(), Results.end());
+	};
+	std::string Result;
+	for (int i = 0; i < Results.size(); i++) {
+		if (i > 0)
+			Result += "\t";
+		Result += Results[i] + "\n";
+	}
+	return convert_to_utf8(Result, m_CurrentLanguage);
+};
+

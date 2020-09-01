@@ -2,6 +2,7 @@
 #include "../LemmatizerLib/Predict.h"
 #include "../MorphWizardLib/wizard.h"
 #include "../LemmatizerLib/MorphDictBuilder.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 
 #include "../common/utilit.h"
 #include "../common/argparse.h"
@@ -41,12 +42,23 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 	parser.AddArgument("--output-folder", "output folder");
 	parser.AddArgument("--postfix-len", "postfix len");
 	parser.AddArgument("--min-freq", "min freq");
+	parser.AddArgument("--test-word", "print word info after dictionary building", true);
 	parser.AddOption("--allow-russian-jo");
 	parser.AddOption("--allow-russian-jejo");
 	parser.Parse(argc, argv);
 }
 
-
+int Lemmatize(MorphLanguageEnum langua, std::string& word) {
+	CMorphologyHolder Holder;
+	if (!Holder.LoadLemmatizer(langua)) {
+		std::cerr << "Cannot load morphology\n";
+		return 1;
+	}
+	word = convert_from_utf8(word.c_str(), Holder.m_CurrentLanguage);
+	std::ofstream outp("test_word.morph", std::ios::binary);
+	outp << Holder.PrintMorphInfoUtf8(word, false, false, true) << "\n";
+	return 0;
+}
 
 int main(int argc, const char* argv[])
 {
@@ -74,7 +86,7 @@ int main(int argc, const char* argv[])
 		return 1;
 	};
 
-
+	MorphLanguageEnum wizardLangua;
 	try{
 
 		//  adding "/" to the end of  OutputPath
@@ -91,6 +103,7 @@ int main(int argc, const char* argv[])
 		MorphoWizard Wizard;
 		std::string WizardFilename = argv[1];
 		Wizard.load_wizard(args.Retrieve("input").c_str(), "guest", false);
+		wizardLangua = Wizard.m_Language;
 		if (!bAllowRussianJo)
 		{
 			std::cerr << "prepare_for_RML\n";
@@ -152,7 +165,10 @@ int main(int argc, const char* argv[])
 		std::cerr << "Can not Generate,  general exception\n";
 		return 1;
 	}
-
+	if (args.Exists("test-word")) {
+		SetEnvVariable("RML", args.Retrieve("output-folder"));
+		Lemmatize(wizardLangua, args.Retrieve("test-word"));
+	}
 	std::cerr << "exit with success\n";
 	return 0;
 }

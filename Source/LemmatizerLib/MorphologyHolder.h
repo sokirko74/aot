@@ -13,6 +13,7 @@
 
 class CMorphologyHolder
 {
+	std::string GetGrammems(const char* tab_str);	
 public:
 	bool							m_bTimeStatis;
 	MorphLanguageEnum				m_CurrentLanguage;
@@ -32,6 +33,8 @@ public:
 	void		string_to_ids(const char *str, DwordVector &ids, bool bNorm) const;
 	std::string		id_to_string(long id) const;
 	CFormInfo		id_to_paradigm(long id) const;
+	std::string PrintMorphInfoUtf8(std::string Form, bool printIds, bool printForms, bool sortParadigms);
+
 };
 
 
