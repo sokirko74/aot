@@ -314,3 +314,4 @@ inline bool endswith(const std::string& main, const std::string& suffix) {
 }
 extern std::vector<std::string> list_path_by_file_mask(std::string filemask);
 extern std::string join_string(const std::vector<std::string>& items, const std::string& delimiter);
+void SetEnvVariable(std::string varname, std::string value);

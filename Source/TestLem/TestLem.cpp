@@ -20,6 +20,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <locale.h>
+#include <cstdlib>
 
 bool bPrintIds = true;
 bool bPrintForms = false;
@@ -146,6 +147,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--sort");
     parser.AddOption("--forms");
     parser.AddOption("--morphan");
+    parser.AddArgument("--RML", "set env variable RML before running", true);
     parser.AddOption("--speed-test", "attention, input file must be in a single-byte encoding");
     parser.AddOption("--echo");
     parser.Parse(argc, argv);
@@ -162,6 +164,9 @@ int main(int argc, const char **argv) {
     bool bEchoInput = args.Exists("echo");
     
 	std::cerr << "Loading..\n";
+    if (args.Exists("RML")) {
+        SetEnvVariable("RML", args.Retrieve("RML"));
+    }
     if (!Holder.LoadLemmatizer(language)) {
         std::cerr << "Cannot load morphology\n";
         return 1;

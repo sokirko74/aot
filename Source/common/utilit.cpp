@@ -760,6 +760,17 @@ std::string GetRmlVariable()
 }
 
 
+void SetEnvVariable(std::string varname, std::string value)
+{
+	
+	#ifdef WIN32
+		_putenv(Format("%s=%s", varname.c_str(), value.c_str()).c_str());
+	#else
+		putenv(Format("%s=%s", varname.c_str(), value.c_str()).c_str());
+	#endif
+	assert(getenv(varname.c_str()) == value);
+}
+
 const char RML_REGISTRY_FILENAME[] = "rml.ini";
 
 

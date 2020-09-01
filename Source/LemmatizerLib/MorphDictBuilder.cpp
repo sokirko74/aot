@@ -1,4 +1,4 @@
-// ==========  This file is under  LGPL, the GNU Lesser General Public Licence
+// =====	=====  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Lemmatizer (www.aot.ru), 
 // ==========  Copyright by Alexey Sokirko (2004)
 
@@ -91,16 +91,15 @@ void  CMorphDictBuilder::GenerateUnitedFlexModels(const MorphoWizard& Wizard)
 		throw CExpc ("Cannot be more than %i flexia models\n", MaxFlexiaModelsCount-1); 
 	};
 
-	for( size_t ModelNo=0; ModelNo < Wizard.m_FlexiaModels.size(); ModelNo++ )
+	for(auto p : Wizard.m_FlexiaModels)
 	{
-		CFlexiaModel p = Wizard.m_FlexiaModels[ModelNo];
 		m_NPSs.push_back(GetPredictionPartOfSpeech(Wizard.get_pos_string(p.get_first_code()), 
 													Wizard.m_Language));
 		m_ModelInfo.push_back(std::vector<bool>(p.m_Flexia.size(), true));
 
 		if ( p.m_Flexia.size() >=  MaxNumberFormsInOneParadigm)
 		{
-			throw CExpc ("Error: flexia No %zu contains more than %i forms. !\n", ModelNo, MaxNumberFormsInOneParadigm);
+			throw CExpc ("Error: flexia %s contains more than %i forms. !\n", p.ToString().c_str(), MaxNumberFormsInOneParadigm);
 		};
 
 		for (size_t i=0; i <p.m_Flexia.size(); i++)
@@ -225,13 +224,13 @@ void  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 		LemmaNo++;
 	};
 
-	fprintf (stderr,"Lemma %i/%i  RegisterSize=%i   \n", LemmaNo, Wizard.m_LemmaToParadigm.size(), RegisterSize);
+	fprintf (stderr,"Lemma %zu/%u  RegisterSize=%i   \n", LemmaNo, Wizard.m_LemmaToParadigm.size(), RegisterSize);
 
 	if (LemmaNo >  0xffffff)
 	{
 		throw CExpc("Cannot be more than 0xffffff lemmas"); 
 	};
-	fprintf (stderr,"Count of word forms =  %i \n", FormsCount);
+	fprintf (stderr,"Count of word forms =  %zu\n", FormsCount);
 	
 	GetFormBuilder()->ClearRegister();
 	fprintf(stderr, "ConvertBuildRelationsToRelations for word forms...  \n");
