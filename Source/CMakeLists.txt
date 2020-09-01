@@ -12,7 +12,7 @@ IF (WIN32)
     SET (BISON_TOOL ${WIN_FLEX_FOLDER}/win_bison) 
 ELSE (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
-    SET (CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -pthread -lstdc++fs ")
+    SET (CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -pthread -lstdc++fs -static")
     SET (FLEX_TOOL flex) 
     SET (BISON_TOOL bison) 
 ENDIF()
@@ -22,10 +22,11 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 #http server 
 if(BUILD_HTTP_SERVERS)
-    message ("include_directories contrib/libevent/include" )
-    include_directories(contrib/libevent/include)
+    #include_directories(contrib/libevent/include)
     #find_package(Libevent REQUIRED PATHS contrib/libevent)
     find_package(Libevent REQUIRED)
+    message ("LIBEVENT_INCLUDE =  ${LIBEVENT_INCLUDE_DIR}" )
+    message ("LIBEVENT_LIBRARY =  ${LIBEVENT_LIBRARY}" )
 ENDIF()
 
 #json
