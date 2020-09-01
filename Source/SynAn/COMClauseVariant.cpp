@@ -1,8 +1,15 @@
 #include "stdafx.h"
-#include "Synan_i.h"
 #include "COMClauseVariant.h"
 #include "COMGroup.h"
 #include "COMClauseType.h"
+
+
+const	CSyntaxOpt* CCOMClauseVariant::GetOptions()  const
+{
+	assert(m_pClause);
+	assert(m_pClause->m_pSent);
+	return  m_pClause->m_pSent->m_pSyntaxOptions;
+};
 
 
 BOOL CCOMClauseVariant::InitSynVariant(const CClause* pClause, CSVI pSynVar)

@@ -2,6 +2,22 @@
 #include "stdafx.h"
 #include "Synan_i.h"
 #include "COMClauseType.h"
+#include "../common/utilit.h"
+#include "../SynCommonLib/MorphVariant.h"
+
+BOOL CCOMClauseType::Init(const SClauseType* pType, const CSyntaxOpt* pOptions)
+{
+	if (!pType)
+		return FALSE;
+	m_pOptions = pOptions;
+	m_pType = pType;
+	return TRUE;
+}
+
+const CSyntaxOpt* CCOMClauseType::GetOpt() const
+{
+	return m_pOptions;
+};
 
 
 STDMETHODIMP CCOMClauseType::get_Type(int *pVal)

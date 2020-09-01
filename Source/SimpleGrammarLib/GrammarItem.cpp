@@ -1,5 +1,6 @@
 #include "SimpleGrammarLib.h"
 #include "GrammarItem.h"
+#include "../AgramtabLib/agramtab_.h"
 
 //==========================================
 void	CMorphPattern::CopyFrom(const CMorphPattern& P)

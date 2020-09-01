@@ -23,12 +23,6 @@ import "ocidl.idl";
  Generally, the dependency forest can be considered as an alternative way to access syntax structure.
  */
 
-/** \example ../TestSynanCOM/TestSynanCOM.cpp  */
-/** \example ../common/COMSyntaxHolder.cpp   */
-/** \example ../common/COMSyntaxHolder.h  */
-/** \example ../common/utilit.h  */
-/** \example ../common/util_classes.h */
-/** \example ../common/utilit.cpp  */
 
 	interface IClauseVariant;
 	interface IGroup;
@@ -469,8 +463,6 @@ library SYNANLib
 {
 	importlib("stdole32.tlb");
 	importlib("stdole2.tlb");
-	#include "../AgramtabLib/rus_consts.h"
-	#include "../AgramtabLib/ger_consts.h"
 
 
 	[	

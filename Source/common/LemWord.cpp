@@ -1,6 +1,7 @@
 #include "LemWord.h"
 #include "gra_descr_primitives.h"
 #include "../AgramtabLib/rus_consts.h"
+#include "../AgramtabLib/agramtab_.h"
 
 
 CLemWord::CLemWord() 

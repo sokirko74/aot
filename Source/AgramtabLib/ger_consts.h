@@ -1,10 +1,10 @@
 // #pragma once  is not enough since this file is included from agramtab.idl
 
-// I cannot use this directive, when this file is included in a WINDOWS COM IDL
-//#pragma once 
+#pragma once 
 
-#ifndef ger_consts_h
-#define ger_consts_h
+// this file is included in a WINDOWS COM IDL,that's why we have to also reuse generated ifdef
+#ifndef __AGRAMTABLib_LIBRARY_DEFINED__
+#ifndef __SYNANLib_LIBRARY_DEFINED__
 
 enum GermanPartOfSpeechEnum
 {
@@ -145,4 +145,5 @@ enum GermanClauseTypeEnum {
 	GERMAN_CLAUSE_TYPE_COUNT = 3
 };
 
+#endif
 #endif

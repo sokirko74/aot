@@ -1,5 +1,6 @@
 #include "MAPostMain.h"
 #include "../common/rus_numerals.h"
+#include "../AgramtabLib/agramtab_.h"
 
 
 bool CMAPost::is_russian_numeral(std::string& word) const {

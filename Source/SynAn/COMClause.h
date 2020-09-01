@@ -1,26 +1,20 @@
-// COMClause.h : Declaration of the CCOMClause
-
-#ifndef __COM_CLAUSE_H_
-#define __COM_CLAUSE_H_
+#pragma once 
 
 #include "resource.h"       // main symbols
 #include "StdAfx.h"
 #include "ComClauseVariant.h"
 #include "Synan_i.h"
-/////////////////////////////////////////////////////////////////////////////
-// CCOMClause
+
+class CClause;
+class CSyntaxOpt;
+
 class ATL_NO_VTABLE CCOMClause : 
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMClause, &CLSID_Clause>,
 	public IDispatchImpl<IClause, &IID_IClause, &LIBID_SYNANLib>
 {
 public:
-	CCOMClause()
-	{		
-		m_pClause = NULL;
-	}
-
-
+	CCOMClause();
 
 DECLARE_REGISTRY_RESOURCEID(IDR_CLAUSE)
 
@@ -44,23 +38,11 @@ public:
 	STDMETHOD(get_Description)(/*[out, retval]*/ BSTR *pVal);
 	STDMETHOD(get_ClauseRoots)(/*[in]*/long lNum, /*[out, retval]*/ IClauseRoot* *pVal);
 	STDMETHOD(get_ClauseRootsCount)(/*[out, retval]*/ long *pVal);
-	BOOL Init( const CClause* pClause, const CSentence* pSentence)
-	{
-		if( !pClause)
-			return FALSE;
-
-		m_pClause = pClause;		
-		return TRUE;
-	}
-	const CSyntaxOpt* GetOpt() const
-	{
-		return m_pClause->m_pSent->GetOpt();
-	};
-
+	BOOL Init(const CClause* pClause, const CSentence* pSentence);
+	const CSyntaxOpt* GetOpt() const;
+	
 protected:
 	const CClause* m_pClause;	
 	SClauseType m_ClauseEmptyType;
 
 };
-
-#endif //__CLAUSE_H_

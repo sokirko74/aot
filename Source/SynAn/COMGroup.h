@@ -1,14 +1,11 @@
-// COMGroup.h : Declaration of the CCOMGroup
-
-#ifndef __GROUP_H_
-#define __GROUP_H_
-
+#pragma once 
 
 #include "resource.h"       // main symbols
-#include "../SynCommonLib/SyntaxInit.h"
-#include "../SynCommonLib/Group.h"
-/////////////////////////////////////////////////////////////////////////////
-// CCOMGroup
+#include "Synan_i.h"
+
+class CSyntaxOpt;
+class CGroup;
+
 class ATL_NO_VTABLE CCOMGroup : 
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMGroup, &CLSID_Group>,
@@ -40,26 +37,12 @@ public:
 	STDMETHOD(get_MainWord)(/*[out, retval]*/ long *pVal);
 
 
-	BOOL Init(const CGroup* pGroup,	const CSyntaxOpt*	pOptions)
-	{
-		if( !pGroup )
-			return FALSE;
-
-		m_pGroup = pGroup;
-		m_pOptions = pOptions;
-
-		return TRUE;
-	}
+	BOOL Init(const CGroup* pGroup, const CSyntaxOpt* pOptions);
 
 protected:
 	const CGroup* m_pGroup;
 	const CSyntaxOpt*		m_pOptions;
-
-	const CSyntaxOpt* GetOpt() const
-	{
-		return m_pOptions;
-	};
-
+	const CSyntaxOpt* GetOpt() const;
 };
 
-#endif //__GROUP_H_
+

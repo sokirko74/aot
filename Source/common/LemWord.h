@@ -1,5 +1,4 @@
-#ifndef lemword_h
- #define lemword_h
+#pragma once 
 
 #include "Homonym.h"
 #include "PlmLine.h"
@@ -112,6 +111,3 @@ public:
     QWORD   GetGrammems() const;
     bool    HasAnalyticalBe() const;
 };
-
-
-#endif

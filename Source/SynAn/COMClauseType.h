@@ -1,14 +1,12 @@
-// COMClauseType.h : Declaration of the CCOMClauseType
+#pragma once 
 
-#ifndef __COMCLAUSETYPE_H_
-#define __COMCLAUSETYPE_H_
-
-#include "resource.h"       // main symbols
-#include "../SynCommonLib/Clause.h"
+#include "resource.h"
 #include "Synan_i.h"
 
-/////////////////////////////////////////////////////////////////////////////
-// CCOMClauseType
+struct SClauseType;
+class CSyntaxOpt;
+
+
 class ATL_NO_VTABLE CCOMClauseType : 
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMClauseType, &CLSID_ClauseRoot>,
@@ -43,19 +41,7 @@ public:
 	STDMETHOD(get_RootHomonymNo)(/*[out, retval]*/ long *pVal);
 	STDMETHOD(get_RootWordNo)(/*[out, retval]*/ long *pVal);
 	STDMETHOD(get_Type)(/*[out, retval]*/ int *pVal);
-	BOOL Init(const SClauseType* pType, const CSyntaxOpt*	pOptions)
-	{
-		if( !pType )
-			return FALSE;
-		m_pOptions = pOptions;
-		m_pType = pType;
-		return TRUE;
-	}
-	const CSyntaxOpt* GetOpt() const
-	{
-		return m_pOptions;
-	};
-
+	BOOL Init(const SClauseType* pType, const CSyntaxOpt* pOptions);
+	const CSyntaxOpt* GetOpt() const;
 };
 
-#endif //__COMCLAUSETYPE_H_

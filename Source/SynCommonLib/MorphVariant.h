@@ -2,10 +2,8 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef SynVariant_h
-#define SynVariant_h
+#pragma once 
 
-#include "stdafx.h"
 #include "Group.h"
 
 #include "../SimpleGrammarLib/InputSymbol.h"
@@ -188,5 +186,3 @@ typedef std::list<CMorphVariant>::const_iterator	CSVI;
 typedef std::list<CMorphVariant>::iterator			SVI;
 
 
-
-#endif

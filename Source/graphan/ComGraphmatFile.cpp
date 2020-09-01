@@ -21,7 +21,7 @@ STDMETHODIMP CComGraphmatFile::HasDescr(UINT LineNo, UINT D, BOOL* result)
 
 STDMETHODIMP CComGraphmatFile::GetLineCount(UINT *Count)
 {
-	*Count  = GetUnits().size();
+	*Count  = (UINT)GetUnits().size();
 	return S_OK;
 }
 

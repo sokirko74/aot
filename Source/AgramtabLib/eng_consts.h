@@ -2,11 +2,12 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko, Dmitry Pankratov
 
-// I cannot use this directive, when this file is included in a WINDOWS COM IDL
-//#pragma once 
+#pragma once
 
-#ifndef eng_consts_h
-#define eng_consts_h
+// this file is included in a WINDOWS COM IDL,that's why we have to reuse generated constants 
+#ifndef __AGRAMTABLib_LIBRARY_DEFINED__
+#ifndef __SYNANLib_LIBRARY_DEFINED__
+
 
  enum EnglishPartOfSpeechEnum
  {
@@ -70,4 +71,5 @@ enum EnglishGrammemsEnum {
 		EnglishGrammemsCount = 34
  };
 
+#endif
 #endif

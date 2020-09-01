@@ -1,17 +1,13 @@
-// COMClauseVariant.h : Declaration of the CCOMClauseVariant
-
-#ifndef __CLAUSEVARIANT_H_
-#define __CLAUSEVARIANT_H_
+#pragma once 
 
 #include "StdAfx.h"
-#include "resource.h"       // main symbols
-#include "../SynCommonLib/Clause.h"
+#include "resource.h"      
 #include "Unit.h"
 
 
+class CClause;
+class CSyntaxOpt;
 
-/////////////////////////////////////////////////////////////////////////////
-// CCOMClauseVariant
 class ATL_NO_VTABLE CCOMClauseVariant : 
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMClauseVariant, &CLSID_ClauseVariant>,
@@ -47,17 +43,8 @@ public:
 private:	
 	const CClause*	m_pClause;
 	SClauseType	m_ClauseTypeOfThisSynVar;
-
-	const	CSyntaxOpt*	GetOptions()  const
-	{
-			assert (m_pClause);
-			assert (m_pClause->m_pSent);
-			return  m_pClause->m_pSent->m_pSyntaxOptions;
-	};
-
+	const	CSyntaxOpt* GetOptions()  const;
 
 public:
 	STDMETHOD(get_VariantWeight)(int* pVal);
 };
-
-#endif //__CLAUSEVARIANT_H_

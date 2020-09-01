@@ -1,32 +1,16 @@
-// COMHomonym.h : Declaration of the CCOMHomonym
-
-#ifndef __COM_HOMONYM_H_
-#define __COM_HOMONYM_H_
+#pragma once 
 
 #include "resource.h"       // main symbols
 #include "Synan_i.h"
-#include "../SynCommonLib/Word.h"
-#include "StdAfx.h"
-#include "../SynCommonLib/SyntaxInit.h"
 
-/////////////////////////////////////////////////////////////////////////////
-// CCOMHomonym
 class ATL_NO_VTABLE CCOMHomonym : 
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMHomonym, &CLSID_Homonym>,
 	public IDispatchImpl<IHomonym, &IID_IHomonym, &LIBID_SYNANLib>
 {
 public:
-	CCOMHomonym()
-	{
-		m_pHomonym = 0;
-	};
-	
-	~CCOMHomonym()
-	{
-		if (m_pHomonym != 0)
-			delete m_pHomonym;
-	};
+	CCOMHomonym();
+	~CCOMHomonym();
 
 DECLARE_REGISTRY_RESOURCEID(IDR_HOMONYM)
 
@@ -56,13 +40,7 @@ public:
 	STDMETHOD(get_ParadigmID)( long *pVal);
 	STDMETHOD(get_GramDescriptionStr)( BSTR *pVal);
 
-	BOOL Init(const CSynHomonym& pHom, CSentence* pSent)
-	{
-		m_pHomonym = new CSynHomonym(pSent);
-		*m_pHomonym = pHom;
-		m_pSent = pSent;
-		return TRUE;
-	};
+	BOOL Init(const CSynHomonym& pHom, CSentence* pSent);
 	
 
 protected:
@@ -71,5 +49,3 @@ protected:
 	const CSyntaxOpt* GetOpt() const;
 
 };
-
-#endif //__HOMONYM_H_

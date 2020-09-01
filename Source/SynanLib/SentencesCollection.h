@@ -9,6 +9,9 @@
 #include "../common/utilit.h"
 
 
+class CPlmLineCollection;
+class CSentence;
+
 class CSentencesCollection  
 {
 public:

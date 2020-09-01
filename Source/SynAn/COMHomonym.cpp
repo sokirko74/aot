@@ -3,6 +3,29 @@
 #include "comdef.h"
 #include "COMHomonym.h"
 #include "COMSentence.h"
+#include "../SynCommonLib/SyntaxInit.h"
+#include "../SynCommonLib/Word.h"
+
+
+CCOMHomonym::CCOMHomonym()
+{
+	m_pHomonym = 0;
+};
+
+CCOMHomonym::~CCOMHomonym()
+{
+	if (m_pHomonym != 0)
+		delete m_pHomonym;
+};
+
+BOOL CCOMHomonym::Init(const CSynHomonym& pHom, CSentence* pSent)
+{
+	m_pHomonym = new CSynHomonym(pSent);
+	*m_pHomonym = pHom;
+	m_pSent = pSent;
+	return TRUE;
+};
+
 
 const CSyntaxOpt* CCOMHomonym::GetOpt() const
 {

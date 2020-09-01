@@ -3,7 +3,7 @@
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
 #include "MAPostMain.h"
-
+#include "../AgramtabLib/agramtab_.h"
 
 CPostMorphInteface* NewRussianPostMorph(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab)
 {

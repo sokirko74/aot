@@ -1,7 +1,4 @@
-// COMWord.h : Declaration of the CCOMWord
-
-#ifndef __WORD_H_
-#define __WORD_H_
+#pragma once 
 
 #include "resource.h"       // main symbols
 #include "ComHomonym.h"
@@ -10,19 +7,16 @@
 #include "COMClauseVariant.h"
 
 
-/////////////////////////////////////////////////////////////////////////////
-// CCOMWord
-class ATL_NO_VTABLE CCOMWord : 
+class CSynWord;
+class CSentence;
+
+class ATL_NO_VTABLE CCOMWord :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMWord, &CLSID_Word>,
 	public IDispatchImpl<IWord, &IID_IWord, &LIBID_SYNANLib>
 {
 public:
-	CCOMWord()
-	{
-		m_pWord = NULL;
-		m_iWordNum = -1;
-	}
+	CCOMWord();
 
 DECLARE_REGISTRY_RESOURCEID(IDR_WORD)
 
@@ -53,15 +47,7 @@ public:
 	STDMETHOD(get_IsInThesaurusEntry)(/*[out, retval]*/ BOOL *pVal);
 
 	IHomonym* GetHomonymByClauseVar(CCOMClauseVariant* pVar);
-	BOOL Init(const CSynWord* pWord, int iWordNum, CSentence*  pSent)
-	{
-		if( !pWord )
-			return FALSE;
-		m_pWord = pWord;
-		m_iWordNum = iWordNum;
-		m_pSent = pSent;
-		return TRUE;
-	};
+	BOOL Init(const CSynWord* pWord, int iWordNum, CSentence* pSent);
 
 protected:	
 	const CSynWord* m_pWord;
@@ -70,6 +56,4 @@ protected:
 
 public:
 };
-
-#endif //__WORD_H_
 

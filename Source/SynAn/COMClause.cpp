@@ -1,9 +1,27 @@
-// COMClause.cpp : Implementation of CCOMClause
-
 #include "stdafx.h"
 #include "COMClauseType.h"
 #include "COMGroup.h"
 #include "COMClause.h"
+
+CCOMClause::CCOMClause()
+{
+	m_pClause = NULL;
+}
+
+BOOL CCOMClause::Init(const CClause* pClause, const CSentence* pSentence)
+{
+	if (!pClause)
+		return FALSE;
+
+	m_pClause = pClause;
+	return TRUE;
+}
+
+const CSyntaxOpt* CCOMClause::GetOpt() const
+{
+	return m_pClause->m_pSent->GetOpt();
+};
+
 
 
 STDMETHODIMP CCOMClause::get_FirstWord(long *pVal)

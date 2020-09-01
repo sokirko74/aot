@@ -1,23 +1,14 @@
 // COMSentencesCollection.cpp : Implementation of CCOMSentencesCollection
 
 #include "stdafx.h"
-#include "Synan_i.h"
 #include "COMSentencesCollection.h"
 #include "../Lemmatizer/ComPlmLineCollection.h"
-//#import "../../bin/Lemmatizer.tlb"
 #include "../Lemmatizer/Lemmatizer_i.h"
+#include "../SynanLib/SentencesCollection.h"
+#include "../SynCommonLib/SyntaxInit.h"
 
 
 
-/////////////////////////////////////////////////////////////////////////////
-
-/*STDMETHODIMP CCOMSentencesCollection::SetThesaurus(UINT ThesId, IUnknown *Thes)
-{
-	CComThesaurus*p = reinterpret_cast<CComThesaurus*>(Thes);
-	CSentencesCollection::SetThesaurus (ThesId, p);
-	return S_OK;
-}
-*/
 STDMETHODIMP CCOMSentencesCollection::SetLemmatizer(IUnknown *Interf)
 {
 	CSentencesCollection::SetLemmatizer(  reinterpret_cast<CCOMLemmatizerRussian*>(Interf) );

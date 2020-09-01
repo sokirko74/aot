@@ -3,6 +3,25 @@
 #include "Synan_i.h"
 #include "COMWord.h"
 
+CCOMWord::CCOMWord()
+{
+	m_pWord = NULL;
+	m_iWordNum = -1;
+}
+
+
+BOOL CCOMWord::Init(const CSynWord* pWord, int iWordNum, CSentence* pSent)
+{
+	if (!pWord)
+		return FALSE;
+	m_pWord = pWord;
+	m_iWordNum = iWordNum;
+	m_pSent = pSent;
+	return TRUE;
+};
+
+
+
 
 STDMETHODIMP CCOMWord::get_WordStr(BSTR *pVal)
 {

@@ -2,9 +2,10 @@
 // ==========  Dialing Posmorphological Module (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
-#pragma warning(disable:4786) 
 #include "../common/util_classes.h"
 #include "PlmLine.h"
+#include "../AgramtabLib/agramtab_.h"
+
 
 CPlmLine::CPlmLine ()
 {

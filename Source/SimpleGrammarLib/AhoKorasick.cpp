@@ -441,9 +441,9 @@ bool CTrieHolder::Save(std::string GrammarFileName) const
 		ErrorMessage (Format("Cannot open %s", PrecompiledFile.c_str()));
 		return false;
 	};
-	fprintf(fp, "%i\n", m_Nodes.size());
+	fprintf(fp, "%zu\n", m_Nodes.size());
 	if (!WriteVectorInner(fp, m_Nodes)) return false;
-	fprintf(fp, "%i\n", m_Children.size());
+	fprintf(fp, "%zu\n", m_Children.size());
 	if (!WriteVectorInner(fp, m_Children)) return false;
 	fclose(fp);
 	return true;

@@ -1,9 +1,28 @@
-// COMGroup.cpp : Implementation of CCOMGroup
-
 #include "stdafx.h"
 #include "comdef.h"
-#include "Synan_i.h"
 #include "COMGroup.h"
+//#include "Synan_i.h"
+#include "../SynCommonLib/SyntaxInit.h"
+#include "../SynCommonLib/Group.h"
+
+
+BOOL CCOMGroup::Init(const CGroup* pGroup, const CSyntaxOpt* pOptions)
+{
+	if (!pGroup)
+		return FALSE;
+
+	m_pGroup = pGroup;
+	m_pOptions = pOptions;
+
+	return TRUE;
+}
+
+const CSyntaxOpt* CCOMGroup::GetOpt() const
+{
+	return m_pOptions;
+};
+
+
 
 
 STDMETHODIMP CCOMGroup::get_TypeStr(BSTR* pVal)

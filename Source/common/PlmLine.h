@@ -2,11 +2,10 @@
 // ==========  Dialing Posmorphological Module (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (2003-2004)
 
-#ifndef __PLMLINE_H_
-#define __PLMLINE_H_
+#pragma once 
 
 #include "../common/Graspace.h"
-#include "../AgramtabLib/agramtab_.h"
+class  CAgramtab;
 
 enum MainTokenTypeEnum {RLE=0, LLE=1, NUM=2, NUM_CHAR=3, PUNCTUAT=4, ROMAN_NUM=5, OTHER_TOKEN_TYPE=6};
 
@@ -71,7 +70,3 @@ public:
 };
 
 
-
-
-
-#endif

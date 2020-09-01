@@ -1,18 +1,13 @@
-// COMSentencesCollection.h : Declaration of the CCOMSentencesCollection
-
-#ifndef __COM_SENTENCESCOLLECTION_H_
-#define __COM_SENTENCESCOLLECTION_H_
-
+#pragma once
 
 #include "resource.h"       // main symbols
 #include "Synan_i.h"
 #include "COMSentence.h"
-#include "../SynanLib/SentencesCollection.h"
 #include <windows.h>
+#include "../SynanLib/SentencesCollection.h" 
 
 
-/////////////////////////////////////////////////////////////////////////////
-// CCOMSentencesCollection
+class CSentencesCollection;
 class ATL_NO_VTABLE CCOMSentencesCollection : 
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCOMSentencesCollection, &CLSID_SentencesCollection>,
@@ -52,4 +47,3 @@ public:
 	STDMETHOD(put_EnableProgressBar)(BOOL newVal);
 };
 
-#endif //__SENTENCESCOLLECTION_H_

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Synan_i.h"
+//#include "Synan_i.h"
 #include "COMSentence.h"
 #include "COMWord.h"
 

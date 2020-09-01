@@ -2,8 +2,7 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef homonym_h
- #define homonym_h
+#pragma once 
 
 enum EGraPairType {Date, WebAddr, Oborot, Keyb,  GermanDividedCompound, UnknownPairType };
 
@@ -72,5 +71,3 @@ public:
 	
 	
 };
-
-#endif
