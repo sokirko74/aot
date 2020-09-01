@@ -1,7 +1,7 @@
 #include "../SemanLib/VisualGraph.h"
 #include "translate.h"
 
-#include "..common/json.h"
+#include "../common/json.h"
 #include <assert.h>
 
 void TSemanHttpServer::Load() {

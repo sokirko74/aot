@@ -6,6 +6,7 @@ add_executable (SynanDaemon
     JVisualSynAnParamBuilder.cpp
     Main.cpp
     SynanDmn.cpp
+    ../common/http_server.cpp
 )
 
 target_link_libraries(SynanDaemon 

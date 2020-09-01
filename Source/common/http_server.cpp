@@ -174,7 +174,7 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		if (query == nullptr) {
 			throw CExpc("cannot find query");
 		}
-		std::string inputQuery = convert_from_utf(query, langua);
+		std::string inputQuery = convert_from_utf8(query, langua);
 		Trim(inputQuery);
 		if (inputQuery.empty()) {
 			throw CExpc("Empty input query");

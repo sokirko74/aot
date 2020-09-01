@@ -3,8 +3,8 @@
 
 #include "../SynanLib/SyntaxHolder.h"
 #include "../LemmatizerLib/Morphan.h"
-#include <common/BigramsReader.h>
-#include <common/json.h>
+#include "../common/BigramsReader.h"
+#include "../common/json.h"
 
 
 CSyntaxHolder RussianSyntaxHolder;

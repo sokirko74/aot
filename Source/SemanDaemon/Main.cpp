@@ -1,7 +1,7 @@
 #include "translate.h"
 
-#include <common/utilit.h>
-#include <common/argparse.h>
+#include "../common/utilit.h"
+#include "../common/argparse.h"
 
 
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {

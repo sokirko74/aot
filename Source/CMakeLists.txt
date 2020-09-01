@@ -17,11 +17,15 @@ ELSE (WIN32)
     SET (BISON_TOOL bison) 
 ENDIF()
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
+
 #http server 
 if(BUILD_HTTP_SERVERS)
     message ("include_directories contrib/libevent/include" )
     include_directories(contrib/libevent/include)
-    find_package(libevent REQUIRED PATHS contrib/libevent)
+    #find_package(Libevent REQUIRED PATHS contrib/libevent)
+    find_package(Libevent REQUIRED)
 ENDIF()
 
 #json
@@ -104,7 +108,6 @@ if(BUILD_HTTP_SERVERS)
 endif()
 
 if (BUILD_COM) 
-    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
     find_package(IDL REQUIRED)
 endif()
 
