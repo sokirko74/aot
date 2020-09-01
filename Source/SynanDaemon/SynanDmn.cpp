@@ -23,8 +23,10 @@ std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
     if (!sortMode) {
         throw CExpc("sortMode is not specified");
     }
+    std::string wordForm = request.Query;
+    wordForm = convert_from_utf8(wordForm.c_str(), request.Langua);
 
-    return GetConnectedWords(request.Query, minBigramsFreq, directBigrams, sortMode, request.Langua);
+    return GetConnectedWords(wordForm, minBigramsFreq, directBigrams, sortMode, request.Langua);
 }
 
 const CMorphologyHolder *GetMorphHolder(MorphLanguageEnum l) {
@@ -43,7 +45,9 @@ const CMorphologyHolder *GetMorphHolder(MorphLanguageEnum l) {
 std::string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
     bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
     const CMorphologyHolder *Holder = GetMorphHolder(request.Langua);
-    return LemmatizeJson(request.Query, Holder, withParadigms);
+    std::string wordForm = request.Query;
+    wordForm = convert_from_utf8(wordForm.c_str(), Holder->m_CurrentLanguage);
+    return LemmatizeJson(wordForm, Holder, withParadigms);
 };
 
 
