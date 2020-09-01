@@ -48,7 +48,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 	parser.Parse(argc, argv);
 }
 
-int Lemmatize(MorphLanguageEnum langua, std::string& word) {
+int Lemmatize(MorphLanguageEnum langua, std::string word) {
 	CMorphologyHolder Holder;
 	if (!Holder.LoadLemmatizer(langua)) {
 		std::cerr << "Cannot load morphology\n";

@@ -762,11 +762,13 @@ std::string GetRmlVariable()
 
 void SetEnvVariable(std::string varname, std::string value)
 {
-	
 	#ifdef WIN32
 		_putenv(Format("%s=%s", varname.c_str(), value.c_str()).c_str());
 	#else
-		putenv(Format("%s=%s", varname.c_str(), value.c_str()).c_str());
+		char buffer[1024];
+		auto s = Format("%s=%s", varname.c_str(), value.c_str());
+		strcpy(buffer, s.c_str());
+		putenv(buffer);
 	#endif
 	assert(getenv(varname.c_str()) == value);
 }
