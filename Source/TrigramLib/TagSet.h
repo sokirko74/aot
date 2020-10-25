@@ -10,7 +10,7 @@ struct CTag
 	std::string			m_Name;
 	std::vector<std::string>	m_Lemmas;
 	BYTE			m_Pos;
-	QWORD			m_Grammems;
+	uint64_t			m_Grammems;
 	
 
 	CTag();
@@ -34,7 +34,7 @@ public:
 
 	CTag			GetBestSuitedTag (const CTag& A) const;
 	std::vector<CTag>	DecipherTagStr (std::string TagStr, const CAgramtab* pAgramtab) const;
-	CTag			GetTagFromAncode(const CAgramtab* pAgramtab, const char* Ancode, QWORD CommonGrammems, const std::string& Lemma) const;
+	CTag			GetTagFromAncode(const CAgramtab* pAgramtab, const char* Ancode, uint64_t CommonGrammems, const std::string& Lemma) const;
 };
 
 

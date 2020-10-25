@@ -2,7 +2,7 @@
 #include "SemanticRusStructure.h"
 
 
-static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word, QWORD OldGrammems)
+static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word, uint64_t OldGrammems)
 {
 	
 	Word.m_Word = Word.m_Lemma;
@@ -30,14 +30,14 @@ static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word,
 	for (long k=0; k < Paradigm.GetCount(); k++)
 	{
 		std::string  AnCode = Paradigm.GetAncode(k);
-		QWORD currGrammems;
+		uint64_t currGrammems;
 		A->GetGrammems(AnCode.c_str(), currGrammems);
-		QWORD Intersection = currGrammems & OldGrammems;
+		uint64_t Intersection = currGrammems & OldGrammems;
  		std::string debug = A->GrammemsToStr(Intersection);
 		size_t SizeOfIntersection = 0;
 
 		{
-			for (size_t i=0; i <sizeof(QWORD)*8; i++)
+			for (size_t i=0; i <sizeof(uint64_t)*8; i++)
 				if (_QM(i) & Intersection)
 					SizeOfIntersection++;
 		}
@@ -53,7 +53,7 @@ static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word,
 
 };
 
-static void GenerateCoordinatedNodes(CRusSemStructure& R, int RelNo, 	QWORD NewGrammems, 	QWORD OldGrammems)
+static void GenerateCoordinatedNodes(CRusSemStructure& R, int RelNo, 	uint64_t NewGrammems, 	uint64_t OldGrammems)
 {
 	const CRusSemRelation& Rel = R.m_Relations[RelNo];
 	std::vector<long> SubNodes;
@@ -78,7 +78,7 @@ static void GenerateCoordinatedNodes(CRusSemStructure& R, int RelNo, 	QWORD NewG
 			)
 		{
 			CRusSemWord& W = Target.m_Words[Target.m_MainWordNo];
-			QWORD Grammems = (W.GetAllGrammems() & ~rAllGenders & ~rAllAnimative);
+			uint64_t Grammems = (W.GetAllGrammems() & ~rAllGenders & ~rAllAnimative);
 			Grammems |= rAllGenders & NewGrammems;
 			Grammems |= rAllAnimative & NewGrammems;
 			GetMaxSimilarWordForm(R,  W, Grammems);
@@ -86,7 +86,7 @@ static void GenerateCoordinatedNodes(CRusSemStructure& R, int RelNo, 	QWORD NewG
 	};
 }
 
-static void GeneratePredicateBySubject(CRusSemStructure& R, int RelNo, 	QWORD NewGrammems, 	QWORD OldGrammems)
+static void GeneratePredicateBySubject(CRusSemStructure& R, int RelNo, 	uint64_t NewGrammems, 	uint64_t OldGrammems)
 {
 	const CRusSemRelation& Rel = R.m_Relations[RelNo];
 	CRusSemNode& PredNode = R.m_Nodes[Rel.m_SourceNodeNo];
@@ -100,7 +100,7 @@ static void GeneratePredicateBySubject(CRusSemStructure& R, int RelNo, 	QWORD Ne
 				)
 		)
 	{
-		QWORD Grammems = (W.GetAllGrammems() & ~rAllGenders & ~rAllNumbers);
+		uint64_t Grammems = (W.GetAllGrammems() & ~rAllGenders & ~rAllNumbers);
 		Grammems |= rAllGenders & NewGrammems;
 		Grammems |= rAllNumbers & NewGrammems;
 		GetMaxSimilarWordForm(R,  W, Grammems);
@@ -110,7 +110,7 @@ static void GeneratePredicateBySubject(CRusSemStructure& R, int RelNo, 	QWORD Ne
 				||	( (rAllNumbers & NewGrammems) != (rAllNumbers & OldGrammems))
 			)
 		{
-			QWORD Grammems = (W.GetAllGrammems() & ~rAllPersons & ~rAllNumbers);
+			uint64_t Grammems = (W.GetAllGrammems() & ~rAllPersons & ~rAllNumbers);
 			Grammems |= rAllPersons & NewGrammems;
 			Grammems |= rAllNumbers & NewGrammems;
 			GetMaxSimilarWordForm(R,  W, Grammems);
@@ -122,8 +122,8 @@ static void GeneratePredicateBySubject(CRusSemStructure& R, int RelNo, 	QWORD Ne
 
 static void GenerateNewWordFormAndAdjustCoordination (CRusSemStructure& R, int NodeNo, int WordNo)
 {
-	QWORD NewGrammems;
-	QWORD OldGrammems;
+	uint64_t NewGrammems;
+	uint64_t OldGrammems;
 	{
 		CRusSemNode& Node = R.m_Nodes[NodeNo];
 		OldGrammems = Node.m_Words[WordNo].GetAllGrammems();

@@ -173,7 +173,7 @@ char* str_compose(const char *fmt, ...){
 
 
 /* returns true if ok */
-bool GetGrammems (jni_dictionary& dic, const char* tab_str, QWORD& grammems){
+bool GetGrammems (jni_dictionary& dic, const char* tab_str, uint64_t& grammems){
 	return dic.pAgramtab->GetGrammems(tab_str, grammems);
 }
 
@@ -236,12 +236,12 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, std::string
 		rus_pos pos=(rus_pos)PartOfSpeech;
 
 		std::string CommonAncode=F.GetCommonAncode();
-		QWORD grammems=0;
-		QWORD grammems1;
+		uint64_t grammems=0;
+		uint64_t grammems1;
 		bool ok=GetGrammems(dic, CommonAncode.c_str(), grammems1);
 		if(ok)grammems=grammems1;
 		for (long i=0; i < GramCodes.length(); i+=2){
-			QWORD grammems2;
+			uint64_t grammems2;
 			bool ok2=GetGrammems(dic, GramCodes.c_str()+i, grammems2);
 			if(ok2)grammems|=grammems2;
 		}
@@ -260,7 +260,7 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, std::string
 			return NULL;
 		}
 		for (int i = GrammemsCountInLanguage-1; i>=0; i--){
-			if ((((QWORD)1)<<i) & grammems){
+			if ((((uint64_t)1)<<i) & grammems){
 				env->CallStaticVoidMethod(clazz, method_grammemSetAddGrammem, grammemset, (jint)(rus_grammems)i);
 				if(env->ExceptionOccurred()){
 					//paradigmset is a local ref, no need to release.

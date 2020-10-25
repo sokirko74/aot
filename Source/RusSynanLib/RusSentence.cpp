@@ -239,7 +239,7 @@ void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, std::string psAn
 
         std::string n_code;
         BYTE iPos;
-        QWORD iGrm;
+        uint64_t iGrm;
         strPos += " ";
         strPos += strHelpGr;
         bool Result = Agramtab->ProcessPOSAndGrammems(strPos.c_str(), iPos, iGrm);
@@ -266,7 +266,7 @@ void CRusSentence::DisruptPronounPredik() {
             && m_Words[i + 2].FindLemma(_R("ЧТО"))
             && ihom != -1
                 ) {
-            QWORD lOldGrammems = m_Words[i + 2].m_Homonyms[ihom].m_iGrammems;
+            uint64_t lOldGrammems = m_Words[i + 2].m_Homonyms[ihom].m_iGrammems;
             m_Words[i + 2].m_Homonyms.clear();
             CSynHomonym Hom_nechego(this);
             CreateHomonymFor_NECHEGO(Hom_nechego, GetOpt()->m_lPradigmID_NECHEGO, GetOpt()->m_Gramcode_NECHEGO,
@@ -365,13 +365,13 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause &C, SVI pSynVar) {
     CGroup *GrpWithSubj = const_cast<CGroup *>( C.GetLastHost(iSbj, pSynVar));
     const CGroup *GrpWithPredk = C.GetLastHost(iPrdk, pSynVar);
 
-    QWORD ipredk_gram = 0;
+    uint64_t ipredk_gram = 0;
     if (!GrpWithPredk)
         ipredk_gram = pSynVar->m_SynUnits[pSynVar->m_iPredk].m_iGrammems;
     else
         ipredk_gram = GrpWithPredk->GetGrammems();
 
-    QWORD isubj_gram = 0;
+    uint64_t isubj_gram = 0;
     if (!GrpWithSubj)
         isubj_gram = pSynVar->m_SynUnits[pSynVar->GetFirstSubject()].m_iGrammems;
     else
@@ -380,7 +380,7 @@ void ChangeSubjAndItsGroupGrammemsInClause(CClause &C, SVI pSynVar) {
     std::string debug = C.GetOpt()->GetGramTab()->GrammemsToStr(isubj_gram);
     debug = C.GetOpt()->GetGramTab()->GrammemsToStr(ipredk_gram);
     //if( isubj_gram & rAllGenders & ipredk_gram == 0) return; //разный род
-    QWORD new_subj_grammems = (ipredk_gram & isubj_gram & rAllNumbers) | _QM(rNominativ);
+    uint64_t new_subj_grammems = (ipredk_gram & isubj_gram & rAllNumbers) | _QM(rNominativ);
     debug = C.GetOpt()->GetGramTab()->GrammemsToStr(new_subj_grammems);
     if (!(new_subj_grammems & rAllNumbers)) new_subj_grammems |= rAllNumbers;
     int GT = GrpWithSubj ? GrpWithSubj->m_GroupType : -1;
@@ -743,10 +743,10 @@ void CRusSentence::CloneHomonymsForOborots() {
                     b += m_Words[j].m_strUpperWord.length();
                     std::string GramFet = title.substr(b + 1, title.find(")") - b - 1);
                     uint32_t Pose;
-                    QWORD Grammems;
+                    uint64_t Grammems;
                     {
                         Trim(GramFet);
-                        QWORD G;
+                        uint64_t G;
                         BYTE Pos;
                         const CAgramtab *R = GetOpt()->GetGramTab();
                         if (R->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G)) {

@@ -36,7 +36,7 @@ long CEngVerbTense::GetPersonGrammemsIfCan(CEngSemNode& EngNode)
 	CFormInfo p;
 	bool bRes = helper.GetEngLemmatizer()->CreateParadigmFromID(EngWord.m_ParadigmId, p);
 	assert (bRes);
-	QWORD gr;
+	uint64_t gr;
 	helper.GetEngGramTab()->GetGrammems(p.GetAncode(0).c_str(), gr);
 	if ((gr & eAllPersons) == 0)
 		if (    (helper.GetEngGramTab()->GetPartOfSpeech(p.GetAncode(0).c_str())  == eNOUN)

@@ -45,12 +45,12 @@ void CSynPlmLine::SetFlag (PlmLineFlagEnum PlmLineFlag)
 
 
 
-QWORD CSynPlmLine :: GetGrammems () const
+uint64_t CSynPlmLine :: GetGrammems () const
 {
 	return m_Grammems;
 };
 
-void CSynPlmLine :: SetGrammems (QWORD value) 
+void CSynPlmLine :: SetGrammems (uint64_t value) 
 {
 	m_Grammems = value;
 };

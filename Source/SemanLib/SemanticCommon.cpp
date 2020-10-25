@@ -63,27 +63,27 @@ bool CSemWord::IsRusSubstPronounP() const
 		|| (m_Lemma == _R("ОДИН"));
 };
 
-QWORD		CSemWord::GetAllGrammems() const
+uint64_t		CSemWord::GetAllGrammems() const
 {
 	return m_FormGrammems | m_TypeGrammems;
 }
 
-QWORD		CSemWord::GetFormGrammems() const
+uint64_t		CSemWord::GetFormGrammems() const
 {
 	return m_FormGrammems;
 }
 
-void		CSemWord::SetFormGrammems(QWORD g)
+void		CSemWord::SetFormGrammems(uint64_t g)
 {
 	m_FormGrammems = g;
 }
 
-QWORD		CSemWord::GetTypeGrammems() const
+uint64_t		CSemWord::GetTypeGrammems() const
 {
 	return m_TypeGrammems;
 }
 
-void		CSemWord::SetTypeGrammems(QWORD g)
+void		CSemWord::SetTypeGrammems(uint64_t g)
 {
 	m_TypeGrammems = g;
 }
@@ -340,12 +340,12 @@ bool	CSemNode::IsPassiveVerb() const
 	return   I->m_bPassiveForm;
 };
 
-QWORD	CSemNode::GetGrammems() const
+uint64_t	CSemNode::GetGrammems() const
 {
 	return m_Grammems;
 }
 
-void	CSemNode::SetGrammems(QWORD g)
+void	CSemNode::SetGrammems(uint64_t g)
 {
 	m_Grammems = g;
 }
@@ -368,17 +368,17 @@ poses_mask_t CSemNode::GetNodePoses() const
 
 
 
-void CSemNode::AddGrammems(QWORD  grammems)
+void CSemNode::AddGrammems(uint64_t  grammems)
 {
 	SetGrammems(GetGrammems() | grammems);
 };
 
-void CSemNode::DeleteGrammems(QWORD grammems)
+void CSemNode::DeleteGrammems(uint64_t grammems)
 {
 	SetGrammems(GetGrammems() & ~grammems);
 };
 
-bool	CSemNode::HasGrammems(QWORD grammems) const
+bool	CSemNode::HasGrammems(uint64_t grammems) const
 {
 	return (grammems & m_Grammems) == grammems;
 };
@@ -493,9 +493,9 @@ inline long ConvertGramRestrToGrammems(std::string t)
 
 
 // возвращает множество наборов граммем, которые разрешено иметь данному узлу
-std::vector<QWORD> CSemanticStructure::GetGramRestr(const CSemNode& W)
+std::vector<uint64_t> CSemanticStructure::GetGramRestr(const CSemNode& W)
 {
-	std::vector<QWORD> GrammemsSet;
+	std::vector<uint64_t> GrammemsSet;
 
 	if (W.GetUnitNo() != ErrUnitNo)
 		if (!GetRoss(W.GetType())->IsEmptyArticle(W.GetUnitNo()))
@@ -506,7 +506,7 @@ std::vector<QWORD> CSemanticStructure::GetGramRestr(const CSemNode& W)
 					std::string GramFet = WriteToString(GetRoss(W.GetType()), (char*)(GetRoss(W.GetType())->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 					Trim(GramFet);
 					uint32_t Pose;
-					QWORD Grammems;
+					uint64_t Grammems;
 					m_pData->GetCustomGrammems(GramFet, Grammems, Pose);
 					GrammemsSet.push_back(Grammems);
 				};
@@ -967,9 +967,9 @@ std::string CSemanticStructure::GetTxtGraph()
 
 
 
-QWORD	CSemanticStructure::GetOneIndexedSemFet(const std::vector<std::string>& _SemFets, bool bInlcudeLowerHierarcy, bool	bInlcudeHigherHierarcy)
+uint64_t	CSemanticStructure::GetOneIndexedSemFet(const std::vector<std::string>& _SemFets, bool bInlcudeLowerHierarcy, bool	bInlcudeHigherHierarcy)
 {
-	QWORD Result = 0;
+	uint64_t Result = 0;
 	std::vector<std::string> SemFets = _SemFets;
 
 	if (bInlcudeLowerHierarcy)
@@ -983,7 +983,7 @@ QWORD	CSemanticStructure::GetOneIndexedSemFet(const std::vector<std::string>& _S
 	for (int k = 0; k < SemFets.size(); k++)
 	{
 		std::vector<std::string>::const_iterator It = find(m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFets[k]);
-		QWORD Num = It - m_IndexedSemFets.begin();
+		uint64_t Num = It - m_IndexedSemFets.begin();
 		assert(Num < 64);
 		if (It == m_IndexedSemFets.end())
 			m_IndexedSemFets.push_back(SemFets[k]);
@@ -994,22 +994,22 @@ QWORD	CSemanticStructure::GetOneIndexedSemFet(const std::vector<std::string>& _S
 
 };
 
-std::vector<QWORD> CSemanticStructure::GetIndexedSemFets(const CSemPattern& P, bool bInlcudeLowerHierarcy, bool	bInlcudeHigherHierarcy)
+std::vector<uint64_t> CSemanticStructure::GetIndexedSemFets(const CSemPattern& P, bool bInlcudeLowerHierarcy, bool	bInlcudeHigherHierarcy)
 {
-	QWORD DomensSemFet = 0;
+	uint64_t DomensSemFet = 0;
 	/*
 	в DomensSemFet находятся все SF, которые обозначают предметные области FIN, SOC  (пока их только две)
 	*/
 	//assert (m_IndexedSemFets[2] == "FIN");//assert (m_IndexedSemFets[3] == "SOC");  
-	for (QWORD j = 2; j < 4; j++)
+	for (uint64_t j = 2; j < 4; j++)
 		DomensSemFet |= _QM(j);
 
 
-	std::vector<QWORD> Result;
+	std::vector<uint64_t> Result;
 
 	for (int i = 0; i < P.m_ActantSemFets.size(); i++)
 	{
-		QWORD OneSemFetsSet = GetOneIndexedSemFet(P.m_ActantSemFets[i], bInlcudeLowerHierarcy, bInlcudeHigherHierarcy);
+		uint64_t OneSemFetsSet = GetOneIndexedSemFet(P.m_ActantSemFets[i], bInlcudeLowerHierarcy, bInlcudeHigherHierarcy);
 
 		/*
 		надо добавить SF FIN,SOC (предметных областей), если предметных областей в SF не указано      Например, если SF=SITUAT и bInlcudeLowerHierarcy=true, тогда
@@ -1026,7 +1026,7 @@ std::vector<QWORD> CSemanticStructure::GetIndexedSemFets(const CSemPattern& P, b
 };
 
 
-bool CSemanticStructure::GleicheSemFet(const std::vector<QWORD>& SemFets1, const std::vector<QWORD>& SemFets2, bool bInclusion) const
+bool CSemanticStructure::GleicheSemFet(const std::vector<uint64_t>& SemFets1, const std::vector<uint64_t>& SemFets2, bool bInclusion) const
 {
 	// если не приписана SF, то считаем, что у слова может быть любая SF
 	// например, слову "большой"  SF1 не приписана	
@@ -1054,12 +1054,12 @@ bool CSemanticStructure::GleicheSemFet(const std::vector<QWORD>& SemFets1, const
 
 
 
-std::vector<std::string> CSemanticStructure::GetSemFetStr(QWORD SemFet) const
+std::vector<std::string> CSemanticStructure::GetSemFetStr(uint64_t SemFet) const
 {
 	std::vector<std::string> Res;
 	for (long k = 0; k < 64; k++)
 	{
-		QWORD Value = _QM(k);
+		uint64_t Value = _QM(k);
 		if ((Value & SemFet) > 0)
 		{
 			Res.push_back(m_IndexedSemFets[k]);
@@ -1069,7 +1069,7 @@ std::vector<std::string> CSemanticStructure::GetSemFetStr(QWORD SemFet) const
 };
 
 
-std::string CSemanticStructure::GetSemFetsInOneStr(const std::vector<QWORD>& SemFets) const
+std::string CSemanticStructure::GetSemFetsInOneStr(const std::vector<uint64_t>& SemFets) const
 {
 	std::string Result;
 	for (long i = 0; i < SemFets.size(); i++)
@@ -1095,7 +1095,7 @@ bool  CSemanticStructure::HasSemFet(const CSemNode& Node, const std::string& Sem
 
 	if (It == m_IndexedSemFets.end()) return false;
 
-	QWORD Num = It - m_IndexedSemFets.begin();
+	uint64_t Num = It - m_IndexedSemFets.begin();
 
 	bool Result = Node.m_NodeSemFets.size() > 0;
 
@@ -1108,13 +1108,13 @@ bool  CSemanticStructure::HasSemFet(const CSemNode& Node, const std::string& Sem
 };
 
 
-bool  CSemanticStructure::HasSemFetPro(const std::vector<QWORD>& SemFets, const std::string& SemFet) const
+bool  CSemanticStructure::HasSemFetPro(const std::vector<uint64_t>& SemFets, const std::string& SemFet) const
 {
 	std::vector<std::string>::const_iterator It = find(m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
 
 	if (It == m_IndexedSemFets.end()) return false;
 
-	QWORD Num = It - m_IndexedSemFets.begin();
+	uint64_t Num = It - m_IndexedSemFets.begin();
 
 	assert(m_IndexedSemFets[0] == "NEG"); assert(m_IndexedSemFets[1] == "CAUS");
 	for (long i = 0; i < SemFets.size(); i++)
@@ -1576,7 +1576,7 @@ long CSemanticStructure::FindLeftClosestNode(size_t NodeNo) const
 void  CSemanticStructure::AddSemFet(CSemNode& Node, const std::string& SemFet)
 {
 	std::vector<std::string>::const_iterator It = find(m_IndexedSemFets.begin(), m_IndexedSemFets.end(), SemFet);
-	QWORD Num = It - m_IndexedSemFets.begin();
+	uint64_t Num = It - m_IndexedSemFets.begin();
 	assert(Num < 64);
 	if (It == m_IndexedSemFets.end())
 		m_IndexedSemFets.push_back(SemFet);
@@ -1636,7 +1636,7 @@ bool CSemanticStructure::IsConnected()
 
 
 
-long CSemanticStructure::FindAbstractPlugArticle(DictTypeEnum type, QWORD Grammems, poses_mask_t Poses, long ClauseType) const
+long CSemanticStructure::FindAbstractPlugArticle(DictTypeEnum type, uint64_t Grammems, poses_mask_t Poses, long ClauseType) const
 {
 
 	const std::vector<CAbstractArticle>& AbstractArticles = *m_pData->GetAbstractArticles(type);

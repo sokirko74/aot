@@ -9,7 +9,7 @@ class CLemWord
 	// graphematical descriptors in one std::string (without some binary flags that could be restored by CLemWord::BuildGraphemDescr() )
 	
 
-    QWORD   m_GraDescrs;
+    uint64_t   m_GraDescrs;
     int		ProcessGraphematicalDescriptors(const char* LineStr);
 public:
 
@@ -108,6 +108,6 @@ public:
     std::string  GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const;
     std::string BuildGraphemDescr ()  const;
     poses_mask_t GetPoses() const;
-    QWORD   GetGrammems() const;
+    uint64_t   GetGrammems() const;
     bool    HasAnalyticalBe() const;
 };

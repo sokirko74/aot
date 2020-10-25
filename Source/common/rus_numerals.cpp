@@ -4,7 +4,7 @@ std::string IntToStr (double i)
 {
 	if (i == 1.5) return "1.5";
 	char s[55];
-	QWORD  _i = i;
+	uint64_t  _i = i;
 	#ifdef WIN32
 		_i64toa(_i, s, 10);
 	#else
@@ -14,7 +14,7 @@ std::string IntToStr (double i)
 	return s;
 };
 
-std::string FindByNumber(QWORD Number)
+std::string FindByNumber(uint64_t Number)
 {
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
 		if( Number == NumeralToNumber[i].m_Number)
@@ -22,7 +22,7 @@ std::string FindByNumber(QWORD Number)
 	return "";
 };
 
-std::string FindByNumber(QWORD Number, NumberFormEnum formType)
+std::string FindByNumber(uint64_t Number, NumberFormEnum formType)
 {
 	for(int i = 0 ; i < NumeralToNumberCount ; i++ )
 		if (Number == NumeralToNumber[i].m_Number) {
@@ -71,7 +71,7 @@ double GetNounNumeral(const std::string& word)
 };
 
 // не используется пока
-std::string spellout_number_ru(QWORD x,  NumberFormEnum formType)
+std::string spellout_number_ru(uint64_t x,  NumberFormEnum formType)
 {	 
 	if (x == 0) 
 		return formType == nfeCardinal ? _R("НОЛЬ")  : _R("НУЛЕВОЙ");
@@ -110,7 +110,7 @@ std::string spellout_number_ru(QWORD x,  NumberFormEnum formType)
 	}
 	for(int p=2; p<6; p++)
 	if (x < 1000*pow(1000,p)) {
-		QWORD Q = pow(1000,p);
+		uint64_t Q = pow(1000,p);
 		std::string m = FindByNumber(Q);
 		if (x % Q == 0)
 			if ( x % (10*Q) == Q ) return spellout_number_ru(x / Q , nfeGenitiv) +

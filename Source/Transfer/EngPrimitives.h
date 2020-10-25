@@ -1,7 +1,7 @@
 #if !defined(eng_primitives)
 	#define eng_primitives
 
-std::string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form);
+std::string GetPronounEnglishFormByGrammems(uint64_t Grammems, bool self_form);
 void TransferTimeGrammems (const CSemNode& RusNode, CEngSemNode& EngNode, const std::string& CallingFunc);
 void TransferNumberGrammems (const CSemNode& RusNode, CEngSemWord& EngWord);
 void TransferPersonGrammems (const CSemNode& RusNode,  CEngSemWord& EngWord);

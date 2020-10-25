@@ -48,8 +48,8 @@ protected:
 public:
     std::unique_ptr<SDatItems> m_pProfessions;
     // special constants
-    QWORD m_PluralMask;
-    QWORD m_SingularMask;
+    uint64_t m_PluralMask;
+    uint64_t m_SingularMask;
     int m_SimilarNPGroupType;
     int m_GenNounGroupType;
     int m_PrepNounGroupType;
@@ -66,7 +66,7 @@ public:
     int m_RusParenthesis;
     int m_Preposition;
     int m_Conjunction;
-    QWORD m_IndeclinableMask;
+    uint64_t m_IndeclinableMask;
     int m_InfintiveClauseType;
 
 

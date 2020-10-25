@@ -14,9 +14,9 @@ extern std::string MixedDeclAssignFunction2(const CAgramtab*,  const std::string
 extern std::string MixedDeclAssignFunction3(const CAgramtab*,  const std::string&, const std::string&, const std::string&);
 extern std::string StrongDeclAssignFunction(const CAgramtab*,  const std::string&, const std::string&);
 extern std::string RussianCaseNumberGender(const CAgramtab* pGramTab,  const std::string& adj, const std::string& common_noun_grm, const std::string& noun);
-extern bool	 HasOnlyOneCase(const CAgramtab*,  const std::string&, const poses_mask_t&, const QWORD&);
-extern bool	 HasGrammem(const CAgramtab*,  const std::string&, const poses_mask_t&, const QWORD& );
-extern bool	 HasOneGrammem(const CAgramtab*,  const std::string&, const poses_mask_t&, const QWORD& );
+extern bool	 HasOnlyOneCase(const CAgramtab*,  const std::string&, const poses_mask_t&, const uint64_t&);
+extern bool	 HasGrammem(const CAgramtab*,  const std::string&, const poses_mask_t&, const uint64_t& );
+extern bool	 HasOneGrammem(const CAgramtab*,  const std::string&, const poses_mask_t&, const uint64_t& );
 extern std::string CommonCase(const CAgramtab*,  const std::string&, const std::string&);
 
 

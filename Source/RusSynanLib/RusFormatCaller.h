@@ -68,7 +68,7 @@ enum ESynRules {
 
 class CRusFormatCaller : public CFormatCaller
 {
-	bool gleiche_for_big_numbers(int i_noun, int i_number, QWORD& new_group_grammems);
+	bool gleiche_for_big_numbers(int i_noun, int i_number, uint64_t& new_group_grammems);
 	int can_start_number_noun_group(int StartWordNo) const;
 	bool format_for_number_noun_private(CGroup& G);
 	bool format_for_noun_number_private(CGroup& G);
@@ -157,7 +157,7 @@ public:
 
 	bool CanConnectSimilar(const CSynPlmLine& L) const;
 	
-	bool gleiche_for_plural_numbers(int i_noun, int i_number, QWORD& new_group_grammems, bool small_number);
+	bool gleiche_for_plural_numbers(int i_noun, int i_number, uint64_t& new_group_grammems, bool small_number);
 	bool gleiche_noun_numeral_for_approx(int i_noun, int i_num);
 	bool is_Pronoun_P_in_similar_groups(const CGroup& G);
 	bool format_for_noun_adj_postposition(CGroup& G);

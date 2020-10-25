@@ -137,7 +137,7 @@ static bool loadDat(std::string &name)
 		grm += " ";
 		grm += sgrm;
 		BYTE pos;
-		QWORD gra;
+		uint64_t gra;
 		BSTR code;
 		if( !Holder.m_pGramTab->ProcessPOSAndGrammemsIfCan(grm.c_str(),&pos,&gra) ||
 			!Holder.m_pGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(pos,gra,&code) )

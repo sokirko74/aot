@@ -129,7 +129,7 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
         if (k == EndNodeNo) continue;
         long ChemNodeNo = k;
 		//получаем SF1 компаратива из РОСС		
-		std::vector<QWORD> SemFets = GetSemFetsOfFirstValency(CompNodeNo);
+		std::vector<uint64_t> SemFets = GetSemFetsOfFirstValency(CompNodeNo);
 
 		for (k=ChemNodeNo+1; k < EndNodeNo; k++)
            if (     IsAdverbial(k)
@@ -390,7 +390,7 @@ try {
 			};
 
 			//получаем SF1 компаратива из РОСС		
-			std::vector<QWORD> SemFets =	GetSemFetsOfFirstValency(CompNodeNo);
+			std::vector<uint64_t> SemFets =	GetSemFetsOfFirstValency(CompNodeNo);
 
 			for	(long l=0; l	< ChildNodes.size(); l++)
 			{

@@ -89,7 +89,7 @@ const CAgramtab* translate_helper::GetGramTab (MorphLanguageEnum langua) const
 
 
 // создаем форму по ParadigmId и eng_grammems, если eng_grammems == 0, возвращает лемму
-std::string translate_helper::create_form_by_id(long Id, QWORD eng_grammems) const
+std::string translate_helper::create_form_by_id(long Id, uint64_t eng_grammems) const
 {
 	int j;
 	CFormInfo Paradigm;
@@ -184,7 +184,7 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 	};
 
 
-	QWORD eng_grammems = EngWord.GetAllGrammems();
+	uint64_t eng_grammems = EngWord.GetAllGrammems();
 	std::string prefix;
 
 	if (!EngWord.m_bDoNotChangeForm)
@@ -358,7 +358,7 @@ bool translate_helper::has_not_english_comparative(long Id) const
 	assert (bRes);
 	for(int j = 0; j < p.GetCount(); j++)
 	{
-		QWORD gr;
+		uint64_t gr;
 		GetEngGramTab()->GetGrammems(p.GetAncode(j).c_str(), gr );
 		if(gr & _QM( eComparativ))
 		{
@@ -561,7 +561,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 		if (pos != -1)
 			if( GramTab->GetPartOfSpeech(Paradigm.GetAncode(0).c_str()) != pos) continue;
 
-		QWORD g;
+		uint64_t g;
 		GramTab->GetGrammems(Paradigm.GetAncode(0).c_str(), g);
 		if ( (( g& _QM(eProper))>0) == bProper)
 			AgreedWithProper = Paradigm.GetParadigmId();
@@ -579,7 +579,7 @@ long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::stri
 //--------------------------------------------------------------------------------
 // выдает независимые от формы граммемы для слова
 
-QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  std::string norm,  UINT pos, bool bProper) const
+uint64_t  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  std::string norm,  UINT pos, bool bProper) const
 {
 	long ParadigmID = GetParadigmIdByLemma(langua, norm, pos, bProper);
 
@@ -594,7 +594,7 @@ QWORD  translate_helper::GetFixedGrammemsByLemma(MorphLanguageEnum langua,  std:
 	std::string ancode = Paradigm.GetAncode(0);
 	const CAgramtab* pGramTab = GetGramTab(langua);
 
-	QWORD grammems = pGramTab->GetAllGrammems(ancode.c_str());
+	uint64_t grammems = pGramTab->GetAllGrammems(ancode.c_str());
 
 	for( int i=1; i<Paradigm.GetCount(); i++ )
 	{

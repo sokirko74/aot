@@ -77,7 +77,7 @@ bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGram
 		for (k = 0; k < P.GetCount(); k++)
 		{
 			std::string AnCode = P.GetAncode(k);
-			QWORD Grammems;
+			uint64_t Grammems;
 			if (!Agramtab->GetGrammems(AnCode.c_str(), Grammems))
 				throw CExpc("Bad ancode in  BuildGenitFormOfCardinal");
 			if ((Grammems & _QM(rGenitiv)) > 0)
@@ -252,7 +252,7 @@ static bool ConvertOneWordOrdinalNumeral(const std::string& InputOrdinal, string
 };
 
 
-double ConvertNumeralByOrderRecursive(std::vector<CRusSemWord>::const_iterator Start, std::vector<CRusSemWord>::const_iterator End, QWORD Order)
+double ConvertNumeralByOrderRecursive(std::vector<CRusSemWord>::const_iterator Start, std::vector<CRusSemWord>::const_iterator End, uint64_t Order)
 {
 	std::string OrderStr = FindByNumber(Order);
 	std::string Result;

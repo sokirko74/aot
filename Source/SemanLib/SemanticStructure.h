@@ -54,9 +54,9 @@ class CSemWord
 {
 
 	// граммемы, которые приписаны слову
-	QWORD          m_FormGrammems;
+	uint64_t          m_FormGrammems;
 	// общие граммемы, которые приписаны слову
-	QWORD          m_TypeGrammems;
+	uint64_t          m_TypeGrammems;
 
 public:	 
 	// прописная или строчная буква
@@ -107,11 +107,11 @@ public:
 	// проверка, что часть речи POS принадлежит  данному слову 
 	virtual bool   HasPOS (size_t POS) const = 0;
 	bool		 IsRusSubstPronounP () const;
-	QWORD		GetAllGrammems() const;
-	QWORD		GetFormGrammems() const;
-	void		SetFormGrammems(QWORD);
-	QWORD		GetTypeGrammems() const;
-	void		SetTypeGrammems(QWORD);
+	uint64_t		GetAllGrammems() const;
+	uint64_t		GetFormGrammems() const;
+	void		SetFormGrammems(uint64_t);
+	uint64_t		GetTypeGrammems() const;
+	void		SetTypeGrammems(uint64_t);
 	void		AddFormGrammem(int g);
 };
 
@@ -128,7 +128,7 @@ struct CSynRealization
     CRossInterp				m_Conj;
 
 	// граммемы отношения или узла
-	QWORD                   m_Grammems;
+	uint64_t                   m_Grammems;
 
 	// предлог или союз, который не был найден в оборотах, но он был прописан в статье.
 	//  Такой предлог или союз пишется прямо в строку.
@@ -176,7 +176,7 @@ struct  CInterpNodeInfo  {
 	// сем. категория ( LABL, LABL.OBJ, LABL.SIT, REL)	
 	SemCategoryEnum	m_SemCategory;
 	//SF узла
-	std::vector<QWORD>	m_NodeSemFets;
+	std::vector<uint64_t>	m_NodeSemFets;
 	// предметные области узла
 	StringVector  m_POs;
 	bool			m_ThesAbbrForm;
@@ -207,7 +207,7 @@ struct  CInterpNodeInfo  {
 class CSemNode : public CInterpNodeInfo
 {
 	// внешние граммемы группы 
-	QWORD			m_Grammems;
+	uint64_t			m_Grammems;
 
 protected:
 	// все словарные интерпретации узла  
@@ -329,14 +329,14 @@ public:
 
 	// дает  номер статьи для текущей интерпреции
     WORD	GetUnitNo() const;
-	QWORD	GetGrammems() const;
-	void	SetGrammems(QWORD g);
+	uint64_t	GetGrammems() const;
+	void	SetGrammems(uint64_t g);
 	void	ModifyGramCodes(std::string GramCodes, bool andwords, const CRusGramTab *R);
 	void	AddOneGrammem(int g);
 	bool	HasOneGrammem(int g) const;
-	bool	HasGrammems(QWORD g) const;
-	void	AddGrammems(QWORD  grammems);
-	void	DeleteGrammems(QWORD grammems);
+	bool	HasGrammems(uint64_t g) const;
+	void	AddGrammems(uint64_t  grammems);
+	void	DeleteGrammems(uint64_t grammems);
 
 	// выдает части речи, которые приписаны главному слову узла
 	poses_mask_t GetNodePoses() const;
@@ -369,7 +369,7 @@ struct CSemRelation : public CSimpleBinaryRelation{
 	StringVector		m_LexFets;
 
 	//SF отношения
-	std::vector<QWORD>	m_SemFets;
+	std::vector<uint64_t>	m_SemFets;
 
 	bool			m_bDopRelation;
 
@@ -612,7 +612,7 @@ public:
 	bool			HasSemFetOrLower (const CSemNode& Node, const std::string& SemFet) const;
 	// проходит по всем дизъюнктам, если в дизъюнкте отстутствует CAUS и NEG,    
 	// и присутствует SemFet, тогда выдает истину
-	bool			HasSemFetPro (const std::vector<QWORD>& SemFets, const std::string& SemFet) const;
+	bool			HasSemFetPro (const std::vector<uint64_t>& SemFets, const std::string& SemFet) const;
     bool			HasSemFetPro (const CSemNode& Node, const std::string& SemFet) const;
 	// проверяет, что в одном из значений поля FieldStr стоит константа ItemStr из домена DomStr
 	bool HasItem (DictTypeEnum DictTy,  WORD UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
@@ -621,17 +621,17 @@ public:
 	// перевод  интерпретацию открытого словосочетания в строковое представление
 	std::string			OpenCollocInterpToStr(const COpenCollocInterp& I)  const;
 	//выдает граммемы, полученные из поля RESTR для текущей словарной интерпретации
-	std::vector<QWORD>	GetGramRestr(const CSemNode& W);
+	std::vector<uint64_t>	GetGramRestr(const CSemNode& W);
 	// проверяет согласование по SF
-	bool			GleicheSemFet(const std::vector<QWORD>& SemFets1, const std::vector<QWORD>& SemFets2, bool bInclusion) const;
+	bool			GleicheSemFet(const std::vector<uint64_t>& SemFets1, const std::vector<uint64_t>& SemFets2, bool bInclusion) const;
 	// индексирует один этаж (один дизъюнкт)
-	QWORD			GetOneIndexedSemFet (const std::vector<std::string>& SemFet, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy = false);
+	uint64_t			GetOneIndexedSemFet (const std::vector<std::string>& SemFet, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy = false);
 	// индексирует SF
-	std::vector<QWORD> GetIndexedSemFets (const CSemPattern& P, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy);
+	std::vector<uint64_t> GetIndexedSemFets (const CSemPattern& P, bool bInlcudeLowerHierarcy,  bool	bInlcudeHigherHierarcy);
 	// выдает представление SF как вектор строк
-	std::vector<std::string>	GetSemFetStr (QWORD SemFet) const;
+	std::vector<std::string>	GetSemFetStr (uint64_t SemFet) const;
 	// выдает строковое представление SF
-	std::string			GetSemFetsInOneStr (const std::vector<QWORD>& SemFets) const;
+	std::string			GetSemFetsInOneStr (const std::vector<uint64_t>& SemFets) const;
 	// проверяет, есть ли в статье AL1, если есть, то выдает его 
 	SEngEquiv		GetAL1Value(int NodeNo) const;
    // по словарной статье предлога или союза выдает семантическое отношение, которое они выражает
@@ -698,7 +698,7 @@ public:
 	// ====================   работа с валентностями
 	//инициализация валентностей из текущей словарной интерпретации
 	void		InitVals(CSemNode& Node);
-	long        FindAbstractPlugArticle (DictTypeEnum type, QWORD Grammems, poses_mask_t Poses, long ClauseType) const;
+	long        FindAbstractPlugArticle (DictTypeEnum type, uint64_t Grammems, poses_mask_t Poses, long ClauseType) const;
 	void        FindAbstractAdditionArticle (DictTypeEnum type, const CSemNode& Node, std::vector<long>& Articles,  bool IsClauseSyntaxRoot, long ClauseType);
 	void		AddAbstractAdditionVals (DictTypeEnum type, CSemNode& Node, const std::vector<long>& Articles);
 

@@ -237,7 +237,7 @@ bool CTagSet::BuildDefaultTags(const CAgramtab* pAgramtab)
 	return true;
 }
 
-BYTE GetUnionSize(const QWORD& d1, const QWORD& d2)
+BYTE GetUnionSize(const uint64_t& d1, const uint64_t& d2)
 {
 	BYTE Result = 0;
 	for (long k=0;k < 64; k++)
@@ -312,7 +312,7 @@ std::vector<CTag> CTagSet::DecipherTagStr (std::string TagStr, const CAgramtab* 
 
 
 
- CTag CTagSet::GetTagFromAncode(const CAgramtab* pAgramtab, const char* Ancode, QWORD CommonGrammems, const std::string& Lemma) const
+ CTag CTagSet::GetTagFromAncode(const CAgramtab* pAgramtab, const char* Ancode, uint64_t CommonGrammems, const std::string& Lemma) const
 {
 	CTag T;
 	pAgramtab->GetGrammems(Ancode, T.m_Grammems);

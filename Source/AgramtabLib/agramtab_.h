@@ -10,7 +10,7 @@ struct CAgramtabLine
 {
 	 CAgramtabLine (size_t SourceLineNo);
 	 BYTE			m_PartOfSpeech;
-	 QWORD			m_Grammems;
+	 uint64_t			m_Grammems;
 	 size_t			m_SourceLineNo;
 };
 
@@ -45,7 +45,7 @@ class CAgramtab {
 	virtual bool GleicheSubjectPredicate(const char* gram_code1, const char* gram_code2) const = 0;
 	virtual bool GleicheGenderNumber(const char* gram_code1, const char* gram_code2) const = 0;
 	virtual const size_t GetClauseTypesCount() const = 0;
-	virtual bool  ProcessPOSAndGrammems (const char* tab_str, BYTE& PartOfSpeech,  QWORD& grammems) const;
+	virtual bool  ProcessPOSAndGrammems (const char* tab_str, BYTE& PartOfSpeech,  uint64_t& grammems) const;
 
 	/*
 		IsStrongClauseRoot is a function which returns true iff part of speech this can occur only
@@ -62,13 +62,13 @@ class CAgramtab {
 	virtual bool is_morph_participle (poses_mask_t poses) const = 0;
 	virtual bool is_morph_pronoun (poses_mask_t poses) const = 0;
 	virtual bool is_morph_pronoun_adjective(poses_mask_t poses) const = 0;
-	virtual bool is_left_noun_modifier  (poses_mask_t poses, QWORD grammems) const = 0;
+	virtual bool is_left_noun_modifier  (poses_mask_t poses, uint64_t grammems) const = 0;
 	virtual bool is_numeral (poses_mask_t poses) const = 0;
 	virtual bool is_verb_form (poses_mask_t poses) const  = 0;
 	virtual bool is_infinitive(poses_mask_t poses) const  = 0;
 	virtual bool is_morph_predk(poses_mask_t poses) const  = 0;
 	virtual bool is_morph_adv(poses_mask_t poses) const  = 0;
-	virtual bool is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const = 0;
+	virtual bool is_morph_personal_pronoun (poses_mask_t poses, uint64_t grammems) const = 0;
 	virtual bool is_morph_article(poses_mask_t poses)  const = 0;
 
 	virtual bool IsSimpleParticle(const char* lemma, poses_mask_t poses) const  = 0;
@@ -77,37 +77,37 @@ class CAgramtab {
 
 	virtual bool GleicheCase(const char* gram_code_noun, const char* gram_code_adj) const = 0;
 	virtual bool GleicheCaseNumber(const char* gram_code1, const char* gram_code2) const  = 0;
-	virtual QWORD GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const  = 0;
+	virtual uint64_t GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const  = 0;
 	
 	bool	LoadFromRegistry ();
 	bool	LoadFromRegistryAndCheck ();
 	int		AreEqualPartOfSpeech (const char *grm1, const char* grm2) ;
-	bool	ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  QWORD* grammems) const;
-	char*	grammems_to_str (QWORD grammems, char* out_buf) const;
-	bool	FindGrammems (const char* gram_codes, QWORD grammems) const;
-	bool	GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, std::string& gramcodes)  const;
-	bool	GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, QWORD& Grammems) const;
-	std::string  GrammemsToStr(QWORD grammems) const;
+	bool	ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  uint64_t* grammems) const;
+	char*	grammems_to_str (uint64_t grammems, char* out_buf) const;
+	bool	FindGrammems (const char* gram_codes, uint64_t grammems) const;
+	bool	GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, uint64_t grammems, std::string& gramcodes)  const;
+	bool	GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, uint64_t& Grammems) const;
+	std::string  GrammemsToStr(uint64_t grammems) const;
 	std::string  GetTabStringByGramCode(const char* gram_code) const;
 	BYTE	GetPartOfSpeech(const char* gram_code) const;
 	
-	QWORD	GetAllGrammems(const char *gram_code) const;
+	uint64_t	GetAllGrammems(const char *gram_code) const;
 	size_t	GetSourceLineNo(const char* gram_code) const;
-	QWORD	GetAllGrammemsThatContains(const char *gram_code) const;
-	bool	GetGrammems(const char* gram_code, QWORD& grammems)  const;
+	uint64_t	GetAllGrammemsThatContains(const char *gram_code) const;
+	bool	GetGrammems(const char* gram_code, uint64_t& grammems)  const;
 	BYTE	GetFirstPartOfSpeech(const poses_mask_t poses) const;
 	
-	std::string	GetAllPossibleAncodes(BYTE pos, QWORD grammems) const;
-	std::string	GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const;
-    QWORD Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
+	std::string	GetAllPossibleAncodes(BYTE pos, uint64_t grammems) const;
+	std::string	GetGramCodes(BYTE pos, uint64_t grammems, GrammemCompare CompareFunc)const;
+    uint64_t Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
 	std::string GleicheAncode1 (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const;
 	std::string GleicheAncode1 (GrammemCompare CompareFunc, std::string gram_codes1, std::string gram_codes2) const;
 	std::string GleicheAncode1 (GrammemCompare CompareFunc, std::string GramCodes1, std::string GramCodes2, std::string& GramCodes1pair) const;
 	std::string UniqueGramCodes(std::string gram_codes) const;
-	std::string FilterGramCodes(const std::string& gram_codes, QWORD grammems1, QWORD grammems2) const;
-    std::string FilterGramCodes(QWORD breaks, std::string gram_codes, QWORD g1) const;
+	std::string FilterGramCodes(const std::string& gram_codes, uint64_t grammems1, uint64_t grammems2) const;
+    std::string FilterGramCodes(uint64_t breaks, std::string gram_codes, uint64_t g1) const;
     bool CheckGramCode(const char* gram_code) const;
-    virtual bool FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, QWORD& grammems) const {assert(false); return false;};
-    virtual QWORD ChangeGleicheAncode1(GrammemCompare, const std::string& ,  std::string&, const QWORD ) const {assert(false); return 0;};
+    virtual bool FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, uint64_t& grammems) const {assert(false); return false;};
+    virtual uint64_t ChangeGleicheAncode1(GrammemCompare, const std::string& ,  std::string&, const uint64_t ) const {assert(false); return 0;};
 };
 

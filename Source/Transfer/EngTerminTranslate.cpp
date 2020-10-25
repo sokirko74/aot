@@ -77,7 +77,7 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 		AllLemmas += " ";
 		AllLemmas +=  lemma;
 		const CAtomGroup& atom = piModel.m_AtomGroups[i];
-		QWORD grammems =  atom.m_Grammems;
+		uint64_t grammems =  atom.m_Grammems;
 		BYTE  pos =  atom.m_PartOfSpeech;
 		
 		if( SynItem.m_Flags & siPlural ) 

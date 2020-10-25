@@ -33,7 +33,7 @@ protected:
 	void process_homonym(SYNANLib::IHomonymPtr piHom, SYNANLib::ISyntaxUnitPtr piUnit, SYNANLib::IWordPtr piWord, std::set<std::string>& result_inters);
 	std::string process_gram_homonym(std::string lemma, long paradigm_id, const std::string& ancode, SYNANLib::IWordPtr piWord);
 	long  process_oborot(SYNANLib::ISentencePtr piSent, SYNANLib::IClausePtr piClause, long iUnit, SYNANLib::IClauseVariantPtr piVar, std::string& result);
-	std::string GetLemma(std::string lemma, BYTE pos, long ParadigmID, SYNANLib::IWordPtr piWord, QWORD lexema_grammems, std::string ancode);
+	std::string GetLemma(std::string lemma, BYTE pos, long ParadigmID, SYNANLib::IWordPtr piWord, uint64_t lexema_grammems, std::string ancode);
 	bool try_to_process_hyphen_word(SYNANLib::IWordPtr piWord, std::string& sRes);
 	bool hasSecondCase(long paradigm_id, std::string strForm, BYTE eCase);
 	int get_index_in_paradigm(SYNANLib::IWordPtr piWord, LEMMATIZERLib::IParadigmPtr piPard, const std::string& str_ancode);

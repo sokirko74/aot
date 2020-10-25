@@ -11,7 +11,7 @@ enum MorphSearchStatus {FoundInDictionary=1, NotFoundInDictionary=2, AnyStatus=3
 struct CMorphPattern
 {
 	MorphSearchStatus	m_SearchStatus;				
-	QWORD				m_Grammems;
+	uint64_t				m_Grammems;
 	size_t				m_Poses;
 	std::string				m_GrmAttribute;
 

@@ -26,7 +26,7 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 	for (long k=0; k < Info.GetCount(); k++)
 	{
 		std::string Ancode = Info.GetAncode(k);
-		QWORD  g = GetRusGramTab()->GetAllGrammems(Ancode.c_str());
+		uint64_t  g = GetRusGramTab()->GetAllGrammems(Ancode.c_str());
 		if (  g & _QM(rSingular) )
 			if ( g & _QM(rGenitiv) )
 			{

@@ -92,7 +92,7 @@ bool CRusSentence::find_subj_and_predic_noun_with_dash(CMorphVariant& synVariant
 		};
 
 		size_t GroupNo = synVariant.m_vectorGroups.get_maximal_group_no(UnitNo);
-		QWORD Grammems = H.m_iGrammems;
+		uint64_t Grammems = H.m_iGrammems;
 		if (GroupNo != -1)
 			Grammems = synVariant.m_vectorGroups.GetGroups()[GroupNo].GetGrammems();
 
@@ -191,7 +191,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 		return false;
 
 
-	QWORD grammems = SubjHom.m_iGrammems;
+	uint64_t grammems = SubjHom.m_iGrammems;
 	if (gr_num != -1)
 		grammems = synVariant.m_vectorGroups.GetGroups()[gr_num].GetGrammems();
 		
@@ -623,7 +623,7 @@ bool CRusSentence::find_subj(CMorphVariant& synVariant, int predk)
 					const CSynUnit& U = synVariant.m_SynUnits[k];
 					if (U.m_Type == EClause) continue;
 					const CSynHomonym& H = m_Words[U.m_SentPeriod.m_iFirstWord].m_Homonyms[U.m_iHomonymNum];
-				   	QWORD grammems = H.m_iGrammems;
+				   	uint64_t grammems = H.m_iGrammems;
 					int GroupNo = synVariant.m_vectorGroups.get_minimal_group(k);
 					if (GroupNo != -1)
 						grammems = synVariant.m_vectorGroups.GetGroups()[GroupNo].GetGrammems();

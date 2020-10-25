@@ -463,7 +463,7 @@ void CDemoDlg::OnButtonFind()
 				std::string type_ancode = (const char*)piParadigm->TypeAncode;
 				if (!type_ancode.empty())
 				{
-					QWORD grammems = piAgram->GetGrammems(type_ancode.c_str());
+					uint64_t grammems = piAgram->GetGrammems(type_ancode.c_str());
 					result = ReadStrFromCOM(piAgram->GrammemsToStr(grammems));
 					m_ctrlResults.SetItemText(i, COLUMN_TYPE, result);
 				}
@@ -493,7 +493,7 @@ void CDemoDlg::OnButtonFind()
 						oldpart = newpart;
 						result += oldpart + " ";
 					}
-					QWORD grammems = piAgram->GetGrammems(onecode.c_str());
+					uint64_t grammems = piAgram->GetGrammems(onecode.c_str());
 					CString out_grammems = ReadStrFromCOM(piAgram->GrammemsToStr(grammems));
 					if (out_grammems.GetLength() > 0)
 						out_grammems += "; ";

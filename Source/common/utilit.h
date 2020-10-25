@@ -37,10 +37,8 @@
 #pragma warning  (disable : 4251)
 #pragma warning  (disable : 4996)
 		
-//using namespace std;
 
 typedef unsigned char BYTE;
-typedef uint64_t QWORD;
 
 #ifdef WIN32
 	#include  <io.h>
@@ -50,7 +48,7 @@ typedef uint64_t QWORD;
 	#include  <unistd.h>
 	typedef unsigned int	uint32_t;	
 	typedef unsigned short	WORD;
-	typedef unsigned int	UINT;
+	//typedef unsigned int	UINT;
 	const   unsigned int _MAX_PATH = 512;
 #endif
 
@@ -59,12 +57,12 @@ typedef std::unordered_set<std::string> StringHashSet;
 typedef std::set<std::string> StringSet;
 typedef std::vector<uint32_t> DwordVector;
 
-inline QWORD GetMaxQWORD ()
+inline uint64_t GetMaxQWORD ()
 {
 	#ifdef WIN32
 		return  0xffffffffffffffff;
 	#else
-		return  0xffffffffffffffffULL;
+		return std::numeric_limits<uint64_t>::max()
 	#endif
 };
 
@@ -79,7 +77,7 @@ struct	troika : public std::pair<T1, T2>
 };
 
 
-typedef QWORD file_off_t;
+typedef uint64_t file_off_t;
 
 class CExpc
 {
@@ -275,17 +273,17 @@ T& GerEngRusMakeUpperTemplate (T& word, MorphLanguageEnum Langua, size_t Len )
 };	
 
 
-//  QWORD mask
-#define _QM(X) (((QWORD)1)<<(X))
+//  uint64_t mask
+#define _QM(X) (((uint64_t)1)<<(X))
 
 typedef  uint32_t poses_mask_t;
 
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 
 
-extern QWORD pow(QWORD x,int y);
+extern uint64_t pow(uint64_t x,int y);
 
-extern int CountBits(QWORD value);
+extern int CountBits(uint64_t value);
 extern size_t FindFloatingPoint(const char* str);
 
 inline std::string _R(const char* buffer) {

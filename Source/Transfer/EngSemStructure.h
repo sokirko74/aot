@@ -37,11 +37,11 @@ enum EngVerbTenseEnum
 };
 
 
-const QWORD eAllPersons = _QM(eFirstPerson) | _QM(eSecondPerson) | _QM(eThirdPerson);
-const QWORD	eAllNumbers = _QM(eSingular) | _QM(ePlural);
-const QWORD eAllGenders   = _QM(eMasculinum) | _QM(eFeminum);
-const QWORD eAllVerbForms   = _QM(eInfinitive) | _QM(ePastIndef)  | _QM(ePastParticiple) | _QM(eGerund);
-const QWORD eAllDegrees   = _QM(eComparativ) | _QM(eSupremum);
+const uint64_t eAllPersons = _QM(eFirstPerson) | _QM(eSecondPerson) | _QM(eThirdPerson);
+const uint64_t	eAllNumbers = _QM(eSingular) | _QM(ePlural);
+const uint64_t eAllGenders   = _QM(eMasculinum) | _QM(eFeminum);
+const uint64_t eAllVerbForms   = _QM(eInfinitive) | _QM(ePastIndef)  | _QM(ePastParticiple) | _QM(eGerund);
+const uint64_t eAllDegrees   = _QM(eComparativ) | _QM(eSupremum);
 
 
 
@@ -157,12 +157,12 @@ public:
 
 	bool				m_bNotUseTo;
 
-	void SetGrammemsRich(QWORD g);
-	QWORD GetGrammemsRich() const;
+	void SetGrammemsRich(uint64_t g);
+	uint64_t GetGrammemsRich() const;
 	void AddOneGrammemRich(int g);
-	void AddGrammemsRich(QWORD  grammems);
+	void AddGrammemsRich(uint64_t  grammems);
 	bool HasGrammemRich(int g) const;
-	void DeleteGrammemsRich(QWORD g);
+	void DeleteGrammemsRich(uint64_t g);
 	
 
 	CEngSemNode();
@@ -610,7 +610,7 @@ public:
 	// проверяет, что  все выходящие отношения имеют название RelationStr
 	bool			CheckAllOutcomingRelationsIfAnyExists (long NodeNo, std::string RelationStr) const;
 	// провереят, что у  узла есть выходящая валентность в узел с валентностями Grammems
-	bool			HasOutRelationByGrammems(long NodeNo, QWORD Grammems) const;
+	bool			HasOutRelationByGrammems(long NodeNo, uint64_t Grammems) const;
 	// проверяет, что у  узла есть выходящее отношение, идущее в примитивный узел, который содержит слово  Word
 	int				GetOutRelationByWord(long NodeNo, std::string Word) const;
 	// проверяет, что у  узла есть выходящее отношение, идущее в узел, которому приписана  часть речи POS
@@ -632,7 +632,7 @@ public:
 	"the sooner, the better". Здесь используются поля POSi, которые 
 	устанавливают позиции актантов i-го актанта.
 	*/
-	void				SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, std::string Position);
+	void				SetPositionOfChildrenByGrammems (long NodeNo, uint64_t Grammems, std::string Position);
 	void				SetPositionsFromConj ();
 	void				SetSelectiveRelations();
 	long				FindNodeByLeafId (long NodeNo, int LeafId) const;

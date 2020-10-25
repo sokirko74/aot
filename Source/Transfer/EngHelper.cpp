@@ -34,7 +34,7 @@ BYTE CEngSemStructure::GetPosFromPosBit(size_t Pos) const
 void CEngSemStructure::ReadMorphFromMainGF(WORD UnitNo, DictTypeEnum type, CSemWord& SemWord) const
 {
 	BYTE pos;
-	QWORD Grammems;
+	uint64_t Grammems;
 
     std::string UnitStr = GetRoss(type)->GetEntryStr(UnitNo);
 	assert (UnitStr.length() > 0);

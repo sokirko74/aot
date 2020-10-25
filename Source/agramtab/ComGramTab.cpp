@@ -43,14 +43,14 @@ STDMETHODIMP CComGramTab::GetPartOfSpeech(BSTR gram_code, BYTE* result)
 
 STDMETHODIMP CComGramTab::GetGrammems(BSTR gram_code, unsigned hyper *result)
 {
-	QWORD r;
+	uint64_t r;
 	m_pAgramtab->GetGrammems(_IN(gram_code).c_str(), r);
 	*result = r;
 	return S_OK;
 }
 
 
-STDMETHODIMP CComGramTab::GrammemsToStr(QWORD grammems, BSTR *result)
+STDMETHODIMP CComGramTab::GrammemsToStr(uint64_t grammems, BSTR *result)
 {
 	char szGrammems[32*5];
 	m_pAgramtab->grammems_to_str(grammems, szGrammems);
@@ -78,7 +78,7 @@ STDMETHODIMP CComGramTab::HaveEqualPartOfSpeech(BSTR gram_code1, BSTR gram_code2
 	return S_OK;
 }
 
-STDMETHODIMP CComGramTab::ProcessPOSAndGrammems(BSTR in, BYTE *PartOfSpeech, QWORD *Grammems)
+STDMETHODIMP CComGramTab::ProcessPOSAndGrammems(BSTR in, BYTE *PartOfSpeech, uint64_t *Grammems)
 {
 	if (!m_pAgramtab->ProcessPOSAndGrammems (_IN(in).c_str(), *PartOfSpeech, *Grammems))
 		return E_FAIL;
@@ -127,7 +127,7 @@ STDMETHODIMP CComGramTab::GleicheSubjectPredicate(BSTR gram_code1, BSTR gram_cod
 
 
 
-STDMETHODIMP CComGramTab::GetAllGrammems(BSTR gram_code, QWORD *result)
+STDMETHODIMP CComGramTab::GetAllGrammems(BSTR gram_code, uint64_t *result)
 {
 	*result = m_pAgramtab->GetAllGrammems(_IN(gram_code).c_str());
 	return S_OK;
@@ -136,7 +136,7 @@ STDMETHODIMP CComGramTab::GetAllGrammems(BSTR gram_code, QWORD *result)
 
 
 
-STDMETHODIMP CComGramTab::FindGrammem(BSTR gram_codes, QWORD grammems, BOOL *result)
+STDMETHODIMP CComGramTab::FindGrammem(BSTR gram_codes, uint64_t grammems, BOOL *result)
 {
 	*result = m_pAgramtab->FindGrammems(_IN(gram_codes).c_str(), grammems) ? TRUE : FALSE;
 	return S_OK;
@@ -187,7 +187,7 @@ STDMETHODIMP CComGramTab::GetClauseNameByType(long type, BSTR *bstrName)
 	return S_OK;
 }
 
-STDMETHODIMP CComGramTab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, BSTR *gramcodes, BOOL* bRes)
+STDMETHODIMP CComGramTab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, uint64_t grammems, BSTR *gramcodes, BOOL* bRes)
 {
 	std::string str;
 	*bRes = m_pAgramtab->GetGramCodeByGrammemsAndPartofSpeechIfCan(Pos, grammems, str);

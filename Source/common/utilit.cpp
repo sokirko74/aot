@@ -2424,13 +2424,13 @@ std::string BuildRMLPath (const char* s)
     return path;
 }
 
-QWORD pow(QWORD x,int y)
+uint64_t pow(uint64_t x,int y)
 {
 	if(x>1&&y>100) return 0;
 	return y==0 || x==1 ? 1 : x*pow(x,y-1);
 }
 
-int CountBits(QWORD value)
+int CountBits(uint64_t value)
 {
 	int count = 0;
 	for (int i=0; i < 64; i++)

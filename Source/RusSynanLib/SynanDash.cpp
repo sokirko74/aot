@@ -253,7 +253,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		if ( Noun_Nom.size() > 0 && Eto.size() > 0 )
 		{
-			QWORD tormoz = _QM(rNeutrum) |  _QM(rSingular) |  _QM(rNominativ); 
+			uint64_t tormoz = _QM(rNeutrum) |  _QM(rSingular) |  _QM(rNominativ); 
 			for (int k = 0; k < Eto.size() && k < Noun_Nom.size(); k++)
 				//  без "тормоза" во фразе "это облако" восстановится тире
 				if	(!m_Words[Noun_Nom[k]].GetSynHomonym(0).HasSetOfGrammemsExact(tormoz) )

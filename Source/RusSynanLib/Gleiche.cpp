@@ -224,7 +224,7 @@ bool CRusFormatCaller::format_for_noun_groups (CGroup& G)
 		if ( !bAdjShouldBeInNominativOrGenitiv )
 		{
 			//  проверяем согласование между прилагательным и существительным
-			QWORD CommonGrams = GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(), sent[MainWordNo].GetGramcodes()); 
+			uint64_t CommonGrams = GetGramTab()->GleicheGenderNumberCase(Wi.m_type_gram_code, Wi.GetGramcodes(), sent[MainWordNo].GetGramcodes()); 
 			if (!CommonGrams)
 				if	(		NounGroupNo != -1 
 						&& GetGroups()[NounGroupNo].m_GroupType == NUMERAL_NOUN

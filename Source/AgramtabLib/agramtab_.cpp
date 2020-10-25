@@ -26,7 +26,7 @@ CAgramtabLine :: CAgramtabLine (size_t SourceLineNo)
 };
 
 
-bool CAgramtab::GetGrammems(const char* gram_code, QWORD& grammems)  const
+bool CAgramtab::GetGrammems(const char* gram_code, uint64_t& grammems)  const
 {
 	grammems = 0;
 	if (gram_code == 0) return false;
@@ -43,14 +43,14 @@ bool CAgramtab::GetGrammems(const char* gram_code, QWORD& grammems)  const
 	return  true;
 };
 
-std::string   CAgramtab::GrammemsToStr(QWORD grammems) const 
+std::string   CAgramtab::GrammemsToStr(uint64_t grammems) const 
 {
 	char szGrammems[64*5];
 	grammems_to_str(grammems, szGrammems);
 	return szGrammems;
 }
 
-bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, BYTE& PartOfSpeech, QWORD& grammems)  const
+bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, BYTE& PartOfSpeech, uint64_t& grammems)  const
 {
 	if (strlen(line_in_gramtab) > 300) return false;
 
@@ -98,7 +98,7 @@ bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, BYTE& Part
 	return true;
 };
 
-bool  CAgramtab::ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  QWORD* grammems) const
+bool  CAgramtab::ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  uint64_t* grammems) const
 {
 	return ProcessPOSAndGrammems(tab_str, *PartOfSpeech, *grammems);
 };
@@ -206,8 +206,8 @@ bool CAgramtab :: ReadAndCheck (const char * FileName)
 		for (WORD i=0; i<GetMaxGrmCount(); i++) 
 		if ( (GetLine(i) != NULL)  && (s2i(debug) != i))
 		{
-			QWORD g1 = GetLine(i)->m_Grammems;
-			QWORD g2 = GetLine(s2i(debug))->m_Grammems;
+			uint64_t g1 = GetLine(i)->m_Grammems;
+			uint64_t g2 = GetLine(s2i(debug))->m_Grammems;
 			if( (g1 == g2) && (GetLine(i)->m_PartOfSpeech == GetLine(s2i(debug))->m_PartOfSpeech) )
 			{
 				printf ("a double found %s (%s)", debug, i2s(i).c_str());
@@ -222,7 +222,7 @@ bool CAgramtab :: ReadAndCheck (const char * FileName)
 };
 
 
-bool CAgramtab ::GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, QWORD& Grammems) const
+bool CAgramtab ::GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, uint64_t& Grammems) const
 {
 	size_t len = strlen((const char*)AnCodes);
 	if (len == 0) return false;
@@ -261,7 +261,7 @@ int CAgramtab :: AreEqualPartOfSpeech (const char *grm1, const char* grm2)
 
 
 
-char* CAgramtab :: grammems_to_str (QWORD grammems, char* out_buf) const
+char* CAgramtab :: grammems_to_str (uint64_t grammems, char* out_buf) const
 {
 	out_buf[0] = 0;
 	size_t GrammemsCount = GetGrammemsCount();
@@ -275,7 +275,7 @@ char* CAgramtab :: grammems_to_str (QWORD grammems, char* out_buf) const
 };
 
 
-bool CAgramtab :: FindGrammems (const char* gram_codes, QWORD grammems) const
+bool CAgramtab :: FindGrammems (const char* gram_codes, uint64_t grammems) const
 {
   for (size_t l=0; l<strlen(gram_codes); l+=2)
 		if ( (GetLine(s2i(gram_codes+l))->m_Grammems & grammems) == grammems)
@@ -284,7 +284,7 @@ bool CAgramtab :: FindGrammems (const char* gram_codes, QWORD grammems) const
   return false;	
 };
 
-bool CAgramtab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, std::string& gramcodes) const
+bool CAgramtab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, uint64_t grammems, std::string& gramcodes) const
 {
 
 
@@ -340,18 +340,18 @@ size_t CAgramtab::GetSourceLineNo(const char* gram_code) const
 }
 
 
-QWORD CAgramtab::GetAllGrammems(const char *gram_code) const
+uint64_t CAgramtab::GetAllGrammems(const char *gram_code) const
 {
 	if (gram_code == 0) return 0;
 	if (!strcmp(gram_code, "??")) return 0; 
 
 	size_t len = strlen (gram_code);
     
-	QWORD grammems = 0;
+	uint64_t grammems = 0;
 
 	for (size_t l=0; l<len; l+=2)
 	{
-		QWORD G =   GetLine(s2i(gram_code+l))->m_Grammems;
+		uint64_t G =   GetLine(s2i(gram_code+l))->m_Grammems;
 		grammems |= G;
 	};
 
@@ -394,7 +394,7 @@ BYTE CAgramtab::GetFirstPartOfSpeech(const poses_mask_t poses) const
 	return Count;
 };
 
-std::string	CAgramtab::GetAllPossibleAncodes(BYTE pos, QWORD grammems)const
+std::string	CAgramtab::GetAllPossibleAncodes(BYTE pos, uint64_t grammems)const
 {
 	std::string Result;
 	for (WORD i=0; i<GetMaxGrmCount(); i++) 
@@ -410,7 +410,7 @@ std::string	CAgramtab::GetAllPossibleAncodes(BYTE pos, QWORD grammems)const
 };
 
 //Generate GramCodes for grammems with CompareFunc
-std::string	CAgramtab::GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare CompareFunc)const
+std::string	CAgramtab::GetGramCodes(BYTE pos, uint64_t grammems, GrammemCompare CompareFunc)const
 {
 	std::string Result;
 	CAgramtabLine L0(0);
@@ -428,9 +428,9 @@ std::string	CAgramtab::GetGramCodes(BYTE pos, QWORD grammems, GrammemCompare Com
 	return Result;
 };
 
-QWORD CAgramtab::Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
+uint64_t CAgramtab::Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
 {
-	QWORD grammems = 0;
+	uint64_t grammems = 0;
 	if (!gram_codes1) return false;
 	if (!gram_codes2) return false;
 	if (!strcmp(gram_codes1, "??")) return false;
@@ -519,7 +519,7 @@ std::string CAgramtab::UniqueGramCodes(std::string gram_codes) const
 	return Result;
 }
 
-std::string CAgramtab::FilterGramCodes(const std::string& gram_codes, QWORD grammems1, QWORD grammems2) const
+std::string CAgramtab::FilterGramCodes(const std::string& gram_codes, uint64_t grammems1, uint64_t grammems2) const
 {
 	std::string result;
 	if (gram_codes == "??") {
@@ -527,17 +527,17 @@ std::string CAgramtab::FilterGramCodes(const std::string& gram_codes, QWORD gram
 	}
 	for (size_t l = 0; l < gram_codes.length(); l += 2)
 	{
-		QWORD ancode_grammems = GetLine(s2i(gram_codes.c_str() + l))->m_Grammems;
+		uint64_t ancode_grammems = GetLine(s2i(gram_codes.c_str() + l))->m_Grammems;
 		if ( !(ancode_grammems & ~grammems1) ||  !(ancode_grammems & ~grammems2) )
 			result.append(gram_codes.c_str() + l,2);
 	}
  	return result;
 }	
 
-std::string CAgramtab::FilterGramCodes(QWORD breaks, std::string gram_codes, QWORD g1) const
+std::string CAgramtab::FilterGramCodes(uint64_t breaks, std::string gram_codes, uint64_t g1) const
 {
 	std::string Result;
-	QWORD BR [] = {rAllCases, rAllNumbers, rAllGenders, rAllAnimative, rAllPersons, rAllTimes};
+	uint64_t BR [] = {rAllCases, rAllNumbers, rAllGenders, rAllAnimative, rAllPersons, rAllTimes};
 	const char * gram_codes1 = gram_codes.c_str();
 	if (!strcmp(gram_codes1, "??")) return gram_codes1;
 	size_t len1 = strlen(gram_codes1);
@@ -547,7 +547,7 @@ std::string CAgramtab::FilterGramCodes(QWORD breaks, std::string gram_codes, QWO
 		bool R = true;
 		for(int i = 0 ; i < (sizeof BR)/(sizeof BR[0]) && R; i++ )
 		{
-			QWORD g2 = l1->m_Grammems;
+			uint64_t g2 = l1->m_Grammems;
 			if(breaks & BR[i])
 				R &= ((BR[i] & g1 & g2) > 0 || !(BR[i] & g1) || !(BR[i] & g2));
 		}
@@ -584,7 +584,7 @@ std::string  CAgramtab::GetTabStringByGramCode(const char* gram_code) const
     if (!gram_code || gram_code[0] == '?')
         return "";
 	BYTE POS = GetPartOfSpeech(gram_code);
-	QWORD Grammems;
+	uint64_t Grammems;
 	GetGrammems(gram_code, Grammems);
 	char buffer[256];
 	grammems_to_str(Grammems, buffer);

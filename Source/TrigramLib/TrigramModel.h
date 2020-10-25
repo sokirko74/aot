@@ -26,7 +26,7 @@ typedef float prob_t;
 
 const WORD UnknownTag = 0xffff;
 
-typedef QWORD trigram_integer_t;
+typedef uint64_t trigram_integer_t;
 //typedef int trigram_integer_t;
 
 struct CLexProb 
@@ -273,7 +273,7 @@ public:
 	bool lemmatize_file(std::string FileName) ;
 	bool CheckTagsForFormInfo(const std::vector<CTag>& Tags, const CFormInfo& F) const;
 	std::string GetParticipleLemma(const CFormInfo& F) const;
-    bool FindGramTabLineInTags(const std::vector<CTag>& Tags, poses_mask_t Poses, QWORD AllGrammems) const;
+    bool FindGramTabLineInTags(const std::vector<CTag>& Tags, poses_mask_t Poses, uint64_t AllGrammems) const;
 #endif
 
 	bool write_dictionary_binary(const std::map<std::string, std::vector<CLexProb> >& Dictionary) const;

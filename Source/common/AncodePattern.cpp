@@ -73,7 +73,7 @@ std::string CAncodePattern::GetGrammemsByAncodes() const
 	}
 	for (int i = 0; i < m_GramCodes.length(); i += 2)
 	{
-		QWORD g;
+		uint64_t g;
         if (!GetGramTab()->GetGrammems(m_GramCodes.c_str()+i, g))
 		{
 				assert (false);
@@ -92,7 +92,7 @@ bool CAncodePattern::DeleteAncodesByGrammemIfCan(BYTE Grammem)
     for (int j=0; j < m_GramCodes.length(); j+=2) 
 	    if (m_GramCodes[j] != '?')
 	    {
-		    QWORD Grammems;
+		    uint64_t Grammems;
 		    GetGramTab()->GetGrammems ( m_GramCodes.c_str() + j, Grammems);
 		    if (   (Grammems & _QM(Grammem)) == 0 )
 			      GramCodes += std::string(m_GramCodes.c_str() + j, 2);
@@ -104,10 +104,10 @@ bool CAncodePattern::DeleteAncodesByGrammemIfCan(BYTE Grammem)
     return true;
 }
 
-bool CAncodePattern::ModifyGrammems(QWORD Grammems, poses_mask_t Poses)
+bool CAncodePattern::ModifyGrammems(uint64_t Grammems, poses_mask_t Poses)
 {
 	std::string strOldGramcodes = m_GramCodes;	
-	QWORD  savegrammems = m_iGrammems;	
+	uint64_t  savegrammems = m_iGrammems;	
 	poses_mask_t saveposes = m_iPoses;
 	m_iGrammems = 0;
 	m_iPoses = 0;
@@ -120,7 +120,7 @@ bool CAncodePattern::ModifyGrammems(QWORD Grammems, poses_mask_t Poses)
     else
 	for (size_t j=0; j < strOldGramcodes.length(); j+=2)
 	{
-			QWORD CurrGrammems = 0;		
+			uint64_t CurrGrammems = 0;		
 			bool b = GetGramTab()->GetGrammems(strOldGramcodes.c_str() + j, CurrGrammems);
 			assert (b);
 			if (!b)
@@ -176,7 +176,7 @@ bool CAncodePattern::InitAncodePattern()
 	{
 		for (size_t j=0; j < m_GramCodes.length(); j+=2)
 		{
-				QWORD CurrGrammems = 0;		
+				uint64_t CurrGrammems = 0;		
 				bool b = GetGramTab()->GetGrammems(m_GramCodes.c_str() + j, CurrGrammems);
 				assert (b);
 				if (!b)
@@ -204,7 +204,7 @@ bool CAncodePattern::InitAncodePattern()
 		//добавляем граммкод аббр в m_TypeGrammems,а все полные формы аббр будут в FormGramCodes
 		for (size_t j=0; j < m_CommonGramCode.length(); j+=2)
 		{
-				QWORD CurrGrammems = 0;		
+				uint64_t CurrGrammems = 0;		
 				bool b = GetGramTab()->GetGrammems(m_CommonGramCode.c_str() + j, CurrGrammems);
 				assert (b);
 				if (!b)

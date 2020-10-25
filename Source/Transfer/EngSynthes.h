@@ -3,7 +3,7 @@
 #include "EngSemStructure.h"
 
 struct CGrammemsAnalyzer {
-	QWORD        m_Grammems;
+	uint64_t        m_Grammems;
 
 	CGrammemsAnalyzer ();
 	int			GetNumber () const;

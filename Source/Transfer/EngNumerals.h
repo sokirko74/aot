@@ -14,7 +14,7 @@ inline std::string spellout_ordinal_number(double y)
 	const char tens[][10] ={ "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy","eighty", "ninety" };
 	const char thousands[][10] = { " thousand", " million", " billion", " trillion" };
 	const char hundred[] = " hundred";
-	QWORD x = (QWORD)y;
+	uint64_t x = (uint64_t)y;
      
 
 	if (x < 10)

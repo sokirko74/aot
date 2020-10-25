@@ -1227,7 +1227,7 @@ bool CEngSynthes::try_oneself_node(int node_no)
 
 	long AntecedentNodeNo = E.GetEquNode(node_no);
  
-	QWORD Grammems = 0;
+	uint64_t Grammems = 0;
 	
     if (AntecedentNodeNo != -1)
 	{
@@ -1257,7 +1257,7 @@ bool CEngSynthes::try_oneself_node(int node_no)
 
 	    if ((Grammems & eAllGenders) == 0)
 		{
-			QWORD debug = (eAllGenders & AntecedentNode->GetGrammemsRich());
+			uint64_t debug = (eAllGenders & AntecedentNode->GetGrammemsRich());
 			Grammems |= (eAllGenders & AntecedentNode->GetGrammemsRich());
 		}
 

@@ -1159,7 +1159,7 @@ bool FindAntecedentForRelativePronoun(CSentence &C, int iClauseNum, int MainClau
                         // transfering  number from the antecedent to the relative pronoun
                         //  if there is no ambiguity.
                         {
-                            QWORD Grammems = 0;
+                            uint64_t Grammems = 0;
                             //  take grammems  from the word
                             for (size_t i = 0; i < pWord.m_Homonyms.size(); i++)
                                 Grammems |= pWord.m_Homonyms[i].m_iGrammems;

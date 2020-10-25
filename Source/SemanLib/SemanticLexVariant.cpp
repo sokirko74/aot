@@ -89,7 +89,7 @@ bool CRusSemStructure::VerbCanBeWithoutReflexiveSuffix(std::string Lemma) const
 };
 std::string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const 
 {
-	QWORD Grammems = _QM(rMasculinum) | _QM(rSingular) | _QM(rNominativ);
+	uint64_t Grammems = _QM(rMasculinum) | _QM(rSingular) | _QM(rNominativ);
 	if (W.HasOneGrammem(rActiveVoice))
 		Grammems |= _QM(rActiveVoice);
 	if (W.HasOneGrammem(rPassiveVoice))
@@ -110,7 +110,7 @@ std::string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const
 	for (; k < Paradigm.GetCount(); k++)
 	{
 		std::string  AnCode = Paradigm.GetAncode(k);
-		QWORD currGrammems;
+		uint64_t currGrammems;
 		m_pData->GetRusGramTab()->GetGrammems(AnCode.c_str(), currGrammems);
 		if ( (Grammems & currGrammems) == Grammems)
 				  break;
@@ -1259,7 +1259,7 @@ CRusSemNode Create_EST_Node(CRusSemStructure& R, long ClauseNo)
 
    std::string GramCodes = ParadigmCollection[i].GetSrcAncode();
    CRusSemWord SemWord(-1, _R("БЫТЬ"));
-   QWORD dummy = R.m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
+   uint64_t dummy = R.m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
    SemWord.SetFormGrammems( dummy );
    SemWord.m_Poses = 1 << VERB;
    SemWord.m_Word = _R("есть");
@@ -1456,7 +1456,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 
 
 	std::string GramCodes;
-	QWORD Grammems = 0;
+	uint64_t Grammems = 0;
 	long Poses = 0;
 	
 
@@ -1468,16 +1468,16 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 			std::string strPos;
 
 			//  Граммемы вспомогательного глагола
-			QWORD VerbGrammems;
+			uint64_t VerbGrammems;
 			piRusGramTab->GetGrammems(AuxVerb->m_GramCodes.c_str()+i, VerbGrammems);;
 			//  Граммемы смысловой части
-			QWORD MainGrammems;
+			uint64_t MainGrammems;
 			piRusGramTab->GetGrammems(m_Nodes[MainVerbNodeNo].m_GramCodes.c_str()+j, MainGrammems);
 
 			BYTE POS = piRusGramTab->GetPartOfSpeech(m_Nodes[MainVerbNodeNo].m_GramCodes.c_str()+j);
 
 			//  Полученные общие граммемы и части речи
-			QWORD CurrentGrammems = 0;
+			uint64_t CurrentGrammems = 0;
 			size_t CurrentPoses = 0;
 
 			
@@ -1600,7 +1600,7 @@ void CRusSemStructure::CreateVerbAnalyticalForm( long AuxVerbNodeNo)
 
 
 			BYTE iPos;
-			QWORD iGrm;
+			uint64_t iGrm;
 			strPos += " ";
 			strPos += piRusGramTab->GrammemsToStr(CurrentGrammems);
 			piRusGramTab->ProcessPOSAndGrammems(strPos.c_str(), iPos, iGrm); 
@@ -1731,7 +1731,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 				const CRusGramTab *R = (CRusGramTab*)piRel.GetOpt()->GetGramTab();
 				if( piRel.m_Relation.m_GramCodes != "" && m_SynRelations.back().m_SynRelName!=_R("НАР_ЧИСЛ_СУЩ"))
 					m_Nodes[TargetNodeNo].m_GramCodes = piRel.m_Relation.m_GramCodes; //ЧИСЛ
-				QWORD RelGr = piRel.m_Relation.m_iGrammems;
+				uint64_t RelGr = piRel.m_Relation.m_iGrammems;
 				if( !(RelGr& rAllGenders) ) 
 					RelGr |= m_Nodes[SourceNodeNo].GetGrammems() & rAllGenders;
 				m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0, _R("ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел"),

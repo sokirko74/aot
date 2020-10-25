@@ -25,7 +25,7 @@ const CEngPronounParadigm g_OnePronounParadigm[] =
 };
 
 
-std::string GetPronounEnglishFormByGrammems(QWORD Grammems, bool self_form)
+std::string GetPronounEnglishFormByGrammems(uint64_t Grammems, bool self_form)
 {
 	for (long i=0; i < sizeof(g_OnePronounParadigm) / sizeof (CEngPronounParadigm); i++)
 		if  (   (Grammems & g_OnePronounParadigm[i].m_EngGrammems)  == g_OnePronounParadigm[i].m_EngGrammems)

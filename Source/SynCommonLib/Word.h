@@ -135,7 +135,7 @@ public:
 	
 	size_t	GetHomonymsCount() const	{ return m_Homonyms.size(); }
 	bool	InitializePlmLine(CSynPlmLine& pPlmWord, int HomonymNo) const;
-	CSynHomonym CloneHomonymByAnotherHomonym(const CSynHomonym* pHomonym, QWORD iGrammems, BYTE iTagID) const;
+	CSynHomonym CloneHomonymByAnotherHomonym(const CSynHomonym* pHomonym, uint64_t iGrammems, BYTE iTagID) const;
 
 	const CSynHomonym& GetSynHomonym(int i) const	{ return m_Homonyms[i]; }
 	CSynHomonym& GetSynHomonym(int i) 	{ return m_Homonyms[i]; }

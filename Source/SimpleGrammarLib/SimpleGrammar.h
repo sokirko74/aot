@@ -56,7 +56,7 @@ typedef std::string AssignType3(const CAgramtab *, const std::string &, const st
 
 typedef bool CheckType1(const bool);
 
-typedef bool CheckType3(const CAgramtab *, const std::string &, const size_t &, const QWORD &);
+typedef bool CheckType3(const CAgramtab *, const std::string &, const size_t &, const uint64_t &);
 
 struct CAttribAndId {
     CMorphPattern m_MorphPattern;

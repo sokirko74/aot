@@ -221,7 +221,7 @@ StringVector CTranslatorHolder::GetAspVerb(std::string Verb, bool IsPerfective) 
 
         for (int i = 0; i < ParadigmCollection.size(); i++)
             if (GetRusGramTab()->GetPartOfSpeech(ParadigmCollection[i].GetSrcAncode().c_str()) == INFINITIVE) {
-                QWORD common_grm;
+                uint64_t common_grm;
 
                 GetRusGramTab()->GetGrammems(ParadigmCollection[i].GetCommonAncode().c_str(), common_grm);
 

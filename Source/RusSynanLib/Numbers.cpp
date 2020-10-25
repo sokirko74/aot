@@ -9,14 +9,14 @@
 
 
 
-bool check_number_noun_coordination(const QWORD& number_grammems, const CSynPlmLine& Noun, const CAgramtab* piRusGramTab )
+bool check_number_noun_coordination(const uint64_t& number_grammems, const CSynPlmLine& Noun, const CAgramtab* piRusGramTab )
 {
 	if (!Noun.GetGramcodes()) return false;
 	if (!(Noun.GetGrammems() & (1<<rPlural))) return false;
 
 	for(int i = 0 ; i < strlen(Noun.GetGramcodes()) ; i += 2 )
 	{
-		QWORD gram;
+		uint64_t gram;
 		piRusGramTab->GetGrammems(Noun.GetGramcodes()+i, gram);
 		if (gram & (1<<rPlural))
 		{
@@ -238,7 +238,7 @@ size_t get_number_with_this_case(const CSynPlmLine& L,RussianGrammemsEnum Case, 
 	if (!L.GetGramcodes()) return 0;
 	for(int i = 0 ; i < strlen(L.GetGramcodes()) ; i += 2 )
 	{
-		QWORD gram;
+		uint64_t gram;
 		piRusGramTab->GetGrammems(L.GetGramcodes()+i, gram);
 		if( gram & _QM(Case))
 		{
@@ -443,7 +443,7 @@ bool CRusFormatCaller::format_for_both(CGroup& G)
 }
 
 
-bool CRusFormatCaller::gleiche_for_big_numbers(int i_noun, int i_number, QWORD& new_group_grammems)
+bool CRusFormatCaller::gleiche_for_big_numbers(int i_noun, int i_number, uint64_t& new_group_grammems)
 {
 	bool arabicNumber = sent[i_number].HasFlag(fl_digit);
 	int i_first_noun = get_maximal_group(i_noun).m_iLastWord;
@@ -469,14 +469,14 @@ bool CRusFormatCaller::gleiche_for_big_numbers(int i_noun, int i_number, QWORD& 
 		*/
 		bool number_can_be_nom_or_acc = (sent[i_number].GetGrammems() | _QM(rNominativ) | _QM(rAccusativ)) > 0;
 		bool nom_case = number_can_be_nom_or_acc && noun_can_be_pl_gen;
-		QWORD common_cases = (NP.GetGrammems() & sent[i_number].GetGrammems() & rAllCases);
+		uint64_t common_cases = (NP.GetGrammems() & sent[i_number].GetGrammems() & rAllCases);
 		bool gleiche_case = (common_cases & ~_QM(rNominativ)) > 0; // убираем "пять девочки"
 		if (!nom_case && !gleiche_case) {
 			return false;
 		}
 		Gi.m_GramCodes = "";
-		QWORD new_grm = NP.GetGrammems() & ~rAllCases;
-		QWORD cases = 0;
+		uint64_t new_grm = NP.GetGrammems() & ~rAllCases;
+		uint64_t cases = 0;
 		if (nom_case)
 		{
 			new_grm |= _QM(rGenitiv) | _QM(rNominativ) | _QM(rAccusativ);
@@ -489,7 +489,7 @@ bool CRusFormatCaller::gleiche_for_big_numbers(int i_noun, int i_number, QWORD& 
 		new_group_grammems = new_grm;
 	}
 	else {
-		QWORD cases = 0;
+		uint64_t cases = 0;
 		if (NP.GetGrammems() & _QM(rIndeclinable)) {
 			cases = rAllCases; // 5 пальто
 		}
@@ -499,7 +499,7 @@ bool CRusFormatCaller::gleiche_for_big_numbers(int i_noun, int i_number, QWORD& 
 		}
 		else {
 			// 5 руками
-			QWORD noun_cases = 0;
+			uint64_t noun_cases = 0;
 			if (noun_gram_codes.empty()) {
 				noun_cases = NP.GetGrammems() & rAllCases;
 			}
@@ -516,7 +516,7 @@ bool CRusFormatCaller::gleiche_for_big_numbers(int i_noun, int i_number, QWORD& 
 		if (cases == 0) {
 			return false;
 		}
-		QWORD new_grm = (NP.GetGrammems() & ~rAllCases) | cases;
+		uint64_t new_grm = (NP.GetGrammems() & ~rAllCases) | cases;
 		sent[i_noun].SetGrammems(new_grm);
 		new_group_grammems = new_grm;
 	}
@@ -530,10 +530,10 @@ new_group_grammems - новые граммемы  группы(ЧИCЛ-СУЩ).
 */
 
 
-bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, QWORD& new_group_grammems, bool small_number)
+bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, uint64_t& new_group_grammems, bool small_number)
 {
 	int i_last_noun, i_number_group;
-	QWORD	noun_grammems , number_grammems;
+	uint64_t	noun_grammems , number_grammems;
 
 	int i_first_noun = get_maximal_group(i_noun).m_iLastWord ;
 
@@ -578,7 +578,7 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, QWOR
 
 		if (word == _R("2") ||  word == _R("3") || word == _R("4") ) {
 			// "2 мальчика"
-			QWORD cases = 0;
+			uint64_t cases = 0;
 			if (noun_grammems & _QM(rGenitiv)) {
 				cases |= _QM(rAccusativ) | _QM(rNominativ);
 			}
@@ -734,7 +734,7 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, QWOR
 bool CRusFormatCaller::format_for_number_noun_private(CGroup& G)
 {
 	bool small_number = is_small_number_group(G.m_iFirstWord);
-	QWORD grammems = G.GetGrammems();
+	uint64_t grammems = G.GetGrammems();
 	const CGroup& G1 = get_maximal_group(G.m_iFirstWord);
 
 	int i = get_main_word(G.m_iFirstWord);
@@ -759,7 +759,7 @@ bool CRusFormatCaller::format_for_number_noun_private(CGroup& G)
 bool CRusFormatCaller::format_for_noun_number_private(CGroup& G)
 {
 	const CGroup& G1 = get_maximal_group(G.m_iFirstWord);
-	QWORD grammems = G.GetGrammems();
+	uint64_t grammems = G.GetGrammems();
 	if (G1.m_iLastWord + 1 >= sent.size()) return false;
 	const CGroup& G2 = get_maximal_group(G1.m_iLastWord + 1);
 	bool small_number = is_small_number_group(G2.m_iFirstWord);
@@ -800,7 +800,7 @@ bool CRusFormatCaller::format_for_noun_number_private(CGroup& G)
 			)
 			return false;
 	};
-	QWORD number_grammems;
+	uint64_t number_grammems;
 	if (NumberG.size() == 1)
 	{
 		number_grammems = Num.GetGrammems();
@@ -1061,7 +1061,7 @@ bool CRusFormatCaller::gleiche_noun_numeral_for_approx(int i_noun, int i_number)
     if( noun_gr != -1 )
         return false;
 
-    QWORD noun_grammems = sent[i_noun].GetGrammems();
+    uint64_t noun_grammems = sent[i_noun].GetGrammems();
 
     i_number = get_main_word(i_number);
     i_last_number = get_maximal_group(i_number).m_iLastWord;

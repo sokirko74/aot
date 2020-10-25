@@ -5,7 +5,7 @@
 const size_t MaxNPSize = 100;
 
 
-inline bool MixedGleiche (QWORD noun, QWORD adj) 
+inline bool MixedGleiche (uint64_t noun, uint64_t adj) 
 {	
 	if (	((adj & _QM(gAdjektiveMitUnbestimmte)) == 0) 
 		&&	((adj & _QM(gPossessiv)) == 0) 	
@@ -15,7 +15,7 @@ inline bool MixedGleiche (QWORD noun, QWORD adj)
 	return     GenderNumberCaseGerman(noun, adj);
 };
 
-inline bool WeakGleiche (QWORD noun, QWORD adj) 
+inline bool WeakGleiche (uint64_t noun, uint64_t adj) 
 {	
 	if ((adj & _QM(gAdjektiveMitBestimmte)) == 0) 
 		return false;
@@ -23,7 +23,7 @@ inline bool WeakGleiche (QWORD noun, QWORD adj)
 	return     GenderNumberCaseGerman(noun, adj);
 };
 
-inline bool SoloGleiche (QWORD noun, QWORD adj) 
+inline bool SoloGleiche (uint64_t noun, uint64_t adj) 
 {	
 	if ((adj & _QM(gAdjektiveOhneArtikel)) == 0) 
 		return false;
@@ -82,7 +82,7 @@ bool CGerFormatCaller::format_for_det_adj_nomen (CGroup& G)
 	
 
 	const CGroup& H = get_maximal_group(i);
-	QWORD PrepositionGrammems;
+	uint64_t PrepositionGrammems;
 	bool bPrepositionArticle  =		(H.m_iFirstWord > 0) 
 								&&	IsPrepositionArticle(sent[H.m_iFirstWord-1].m_word_upper, PrepositionGrammems);
 
@@ -139,7 +139,7 @@ bool CGerFormatCaller::format_for_det_adj_nomen (CGroup& G)
 	{
 		size_t k = LeftModifiers[j];
 
-		QWORD CurrGleiche;
+		uint64_t CurrGleiche;
 
 		if ( IstZahlWort(Wk) )
 		{

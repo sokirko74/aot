@@ -161,7 +161,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 	if (Format->m_GleicheCase)
 		for (long VarNo = 0; VarNo < Variants.size(); VarNo++)
 		{
-			QWORD Grammems = rAllCases | rAllNumbers;
+			uint64_t Grammems = rAllCases | rAllNumbers;
 			for (long i = 0; i < Variants[VarNo].size(); i++)
 			{
 				Grammems &= Variants[VarNo].m_VectorItems[i]->m_iGrammems;

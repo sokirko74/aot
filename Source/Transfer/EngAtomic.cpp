@@ -98,7 +98,7 @@ bool CEngSemNode::IsLemma(std::string Lemma) const
 };
 
 
-void CEngSemNode::SetGrammemsRich(QWORD g)	
+void CEngSemNode::SetGrammemsRich(uint64_t g)	
 { 
 	if (m_MainWordNo ==-1)
 		SetGrammems(g);
@@ -106,7 +106,7 @@ void CEngSemNode::SetGrammemsRich(QWORD g)
 		m_Words[m_MainWordNo].SetFormGrammems( g );
 };
 
-QWORD CEngSemNode::GetGrammemsRich() const
+uint64_t CEngSemNode::GetGrammemsRich() const
 { 
 	return m_MainWordNo ==-1 ? GetGrammems() : m_Words[m_MainWordNo].GetAllGrammems();
 };
@@ -119,7 +119,7 @@ void CEngSemNode::AddOneGrammemRich(int g)
 		m_Words[m_MainWordNo].SetFormGrammems ( m_Words[m_MainWordNo].GetFormGrammems() | _QM(g));
 
 };
-void CEngSemNode::AddGrammemsRich(QWORD  grammems)
+void CEngSemNode::AddGrammemsRich(uint64_t  grammems)
 {
 	SetGrammemsRich(GetGrammemsRich() | grammems);
 };
@@ -133,7 +133,7 @@ bool CEngSemNode::HasGrammemRich(int g) const
 
 };
 
-void CEngSemNode::DeleteGrammemsRich(QWORD g)
+void CEngSemNode::DeleteGrammemsRich(uint64_t g)
 {
 	if (m_MainWordNo == -1)
 		SetGrammems(GetGrammems() & ~g);

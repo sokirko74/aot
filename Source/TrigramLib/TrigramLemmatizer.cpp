@@ -36,15 +36,15 @@ bool InitMorphologySystem(CTrigramModel& M)
 
 bool CTrigramModel::CheckTagsForFormInfo(const std::vector<CTag>& Tags, const CFormInfo& F) const
 {
-	QWORD CommonGrammems = 0;
+	uint64_t CommonGrammems = 0;
 	m_pAgramtab->GetGrammems(F.GetCommonAncode().c_str(), CommonGrammems);
 	std::string SrcAncode = F.GetSrcAncode();
     BYTE SrcPoS = m_pAgramtab->GetPartOfSpeech(SrcAncode.c_str());
-    QWORD Grammems = m_pAgramtab->GetAllGrammems(SrcAncode.c_str());
+    uint64_t Grammems = m_pAgramtab->GetAllGrammems(SrcAncode.c_str());
     return    FindGramTabLineInTags(Tags, 1<<SrcPoS, Grammems | CommonGrammems);
 }
 
-bool CTrigramModel::FindGramTabLineInTags(const std::vector<CTag>& Tags, poses_mask_t Poses, QWORD AllGrammems) const
+bool CTrigramModel::FindGramTabLineInTags(const std::vector<CTag>& Tags, poses_mask_t Poses, uint64_t AllGrammems) const
 {
     for (int j=0; j < Tags.size(); j++)
 	{
@@ -88,16 +88,16 @@ std::string CTrigramModel::GetParticipleLemma(const CFormInfo& F) const
 	BYTE SrcPoS = m_pAgramtab->GetPartOfSpeech(SrcAncode.c_str());
 	if (SrcPoS != PARTICIPLE) return "";
 
-	QWORD CommonGrammems = 0;
+	uint64_t CommonGrammems = 0;
     m_pAgramtab->GetGrammems(F.GetCommonAncode().c_str(), CommonGrammems);
 
 	
-	QWORD G = m_pAgramtab->GetAllGrammems(SrcAncode.c_str()) | CommonGrammems;
+	uint64_t G = m_pAgramtab->GetAllGrammems(SrcAncode.c_str()) | CommonGrammems;
 	for (WORD k=0; k < F.GetCount(); k++)
 	{
 		BYTE PoS = m_pAgramtab->GetPartOfSpeech(F.GetAncode(k).c_str());
 		if (PoS != PARTICIPLE) continue;
-		QWORD G_curr = m_pAgramtab->GetAllGrammems(F.GetAncode(k).c_str()) | CommonGrammems;
+		uint64_t G_curr = m_pAgramtab->GetAllGrammems(F.GetAncode(k).c_str()) | CommonGrammems;
 		if (G_curr & _QM(rSingular))
 			if (G_curr & _QM(rNominativ))
 				if (G_curr & _QM(rMasculinum))
@@ -258,7 +258,7 @@ void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const std::string& W
 				&&	!FormInfos[i].m_bFound
 			) // игнорируем однобуквенные предсказанные слова
 			continue;
-		QWORD CommonGrammems = 0;
+		uint64_t CommonGrammems = 0;
         m_pAgramtab->GetGrammems(FormInfos[i].GetCommonAncode().c_str(), CommonGrammems);
 		std::string  Ancodes = FormInfos[i].GetSrcAncode();
 		std::string Lemma = FormInfos[i].GetWordForm(0);

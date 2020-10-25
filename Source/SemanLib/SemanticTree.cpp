@@ -1100,7 +1100,7 @@ void CRusSemStructure::BuildAnaphoricRels()
 	for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
 		if (m_Nodes[NodeNo].IsAnaphoricPronoun())
 		{
-			QWORD Grammems = ((rAllNumbers | rAllGenders) & m_Nodes[NodeNo].m_Words[0].GetAllGrammems());
+			uint64_t Grammems = ((rAllNumbers | rAllGenders) & m_Nodes[NodeNo].m_Words[0].GetAllGrammems());
 			std::vector<CAntecedentHypot> Hypots;
 			std::vector<long>  BrotherNodes;
 			GetBrothers(NodeNo, BrotherNodes, false);

@@ -285,7 +285,7 @@ void CRusSemStructure::ApplySubordinationCases ()
 
 			if (CaseItemNo == -1) continue;
 
-			QWORD Grammems = GetCaseGrammem(RossHolder, CaseItemNo);
+			uint64_t Grammems = GetCaseGrammem(RossHolder, CaseItemNo);
 
 			// если у глагола есть отрицание, и он  валентен на п_доп, тогда 
 			// он может управлять как номинативом, так и генитивом
@@ -420,8 +420,8 @@ void CRusSemStructure::ApplySubordinationSemfets ()
 			&& (m_Relations[MainRelNo].m_Valency.m_UnitNo != ErrUnitNo)
 		   )
 		{
-			const std::vector<QWORD>& SemFetsRel =  m_Relations[MainRelNo].m_SemFets;
-			std::vector<QWORD> SemFetsNode = m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_NodeSemFets;
+			const std::vector<uint64_t>& SemFetsRel =  m_Relations[MainRelNo].m_SemFets;
+			std::vector<uint64_t> SemFetsNode = m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_NodeSemFets;
 			if (!SemFetsRel.empty())
 				if (	   SemFetsNode.empty()
 						|| m_Nodes[m_Relations[RelNo].m_TargetNodeNo].IsAnaphoricPronoun()

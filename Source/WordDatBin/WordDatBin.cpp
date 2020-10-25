@@ -24,7 +24,7 @@ static std::vector<std::pair<uint32_t, uint32_t> > ww;
 struct CStatInfo {
     std::string m_Lemma;
     BYTE m_Pos;
-    QWORD m_Grammems;
+    uint64_t m_Grammems;
     uint32_t m_Freq;
 
     bool operator<(const CStatInfo &s) const {
@@ -154,7 +154,7 @@ static bool loadDat(std::istream &ifs) {
             std::string anc = Pagadigm.GetAncode(0);
             if (I.m_Pos != MorphHolderRus.m_pGramTab->GetPartOfSpeech(anc.c_str())) continue;
             if (I.m_Grammems != 0) {
-                QWORD g = MorphHolderRus.m_pGramTab->GetAllGrammems(common_anc.c_str()) |
+                uint64_t g = MorphHolderRus.m_pGramTab->GetAllGrammems(common_anc.c_str()) |
                           MorphHolderRus.m_pGramTab->GetAllGrammems(anc.c_str());
                 if ((g & I.m_Grammems) != I.m_Grammems)
                     continue;

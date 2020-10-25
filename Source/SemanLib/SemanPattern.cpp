@@ -885,7 +885,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 				 )
 				 )
 				{
-					QWORD Grammems  = m_Nodes[NodeNo].GetGrammems();
+					uint64_t Grammems  = m_Nodes[NodeNo].GetGrammems();
 
 					// "много домов" ( у узла "домов" граммема - им, мн, 
 					// а у слова "домов" - рд, мн.)

@@ -44,7 +44,7 @@ public:
 	bool	m_bHyphenWord;
 	bool	m_bMorphName;	
 	bool	m_bMorphSurname;
-	QWORD	m_Grammems;	
+	uint64_t	m_Grammems;	
 	BYTE	m_Pos;	
 
 

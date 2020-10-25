@@ -57,7 +57,7 @@ static void  AssignGroupMainGroup(CGroups& model, const size_t GroupNo, const CI
 	assert (GroupNo < model.GetGroups().size());
 
 	CPeriod m_MainGroup(-1,-1);
-	QWORD iGrammems;
+	uint64_t iGrammems;
 
 	//чтобы найти главное слово у ИГ нужно смотреть на отношения
 	if	(			(model.GetGroups()[GroupNo].m_GroupType == NOUN_GR)

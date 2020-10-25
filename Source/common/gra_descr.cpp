@@ -77,11 +77,11 @@ const char* GetDescriptorStr(int DescriptorNo)
 
 
 
-QWORD parse_gra_descriptors ( const char * s, std::string& unparsed)
+uint64_t parse_gra_descriptors ( const char * s, std::string& unparsed)
 {
     unparsed = "";
     StringTokenizer tok (s, "\t\r\n ");
-    QWORD Res = 0;
+    uint64_t Res = 0;
     while (tok())
     {
         const char * d =  tok.val();

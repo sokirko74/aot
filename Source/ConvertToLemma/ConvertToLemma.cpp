@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 	fprintf (stderr, "ColumnNo  = %i\n", ColumnNo );
 	std::string strPOS = Argv[2];
 	poses_mask_t PatternPoses = 0;
-	QWORD PatternGrammems = 0;
+	uint64_t PatternGrammems = 0;
 	if (strPOS != "*")
 	{
 		StringTokenizer tok(strPOS.c_str(), "|");
@@ -179,7 +179,7 @@ int main(int argc, char *argv[])
 				for (size_t uu=0; uu < Ancodes.size(); uu += 2)
 					Poses |= 1 << Holder.m_pGramTab->GetPartOfSpeech(Ancodes.c_str() + uu);
 
-				QWORD Grams = Holder.m_pGramTab->GetAllGrammems(Ancodes.c_str());
+				uint64_t Grams = Holder.m_pGramTab->GetAllGrammems(Ancodes.c_str());
 				std::string CommonAncode = Paradigm.GetCommonAncode();
 				if (!CommonAncode.empty())
 					Grams |= Holder.m_pGramTab->GetAllGrammems(CommonAncode.c_str());
@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 
 						if (bPrintGrammems)
 						{
-							QWORD gr;
+							uint64_t gr;
 							Holder.m_pGramTab->GetGrammems(Ancodes.c_str(), gr);
 							Norm +=		Format("\t %s %s", 
 											Holder.m_pGramTab->GetPartOfSpeechStr(Holder.m_pGramTab->GetPartOfSpeech(Ancodes.c_str())),
@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
 						{
 							if (!CommonAncode.empty())
 							{
-								QWORD cg;
+								uint64_t cg;
 								Holder.m_pGramTab->GetGrammems(CommonAncode.c_str(), cg);
 								CommonAncode = Holder.m_pGramTab->GrammemsToStr(cg);
 							}

@@ -69,7 +69,7 @@ std::string PrepArticles[PrepArticlesCount] = { "AM","ANS","AUFS","BEIM","DURCHS
 _G("FÜRS"), "HINTERM","HINTERS","IM","INS","UMS","VOM","VORM","VORS","ZUM","ZUR" };
 
 
-bool IsPrepositionArticle(const char* WordUpper, QWORD& Grammems)
+bool IsPrepositionArticle(const char* WordUpper, uint64_t& Grammems)
 {
 	if (!WordUpper) return false;
 	Grammems = (_QM(gSingular) | gAllGenders);

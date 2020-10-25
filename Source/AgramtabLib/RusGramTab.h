@@ -26,16 +26,16 @@ public:
 	size_t		s2i(const char* s)  const;
 	std::string		i2s(WORD i) const;
 
-	bool		ProcessPOSAndGrammems(const char* tab_str, BYTE& PartOfSpeech, QWORD& grammems) const;
+	bool		ProcessPOSAndGrammems(const char* tab_str, BYTE& PartOfSpeech, uint64_t& grammems) const;
 	const char* GetRegistryString() const;
 
 	bool GleicheCase(const char* gram_code_noun, const char* gram_code_adj) const;
 	bool GleicheCaseNumber(const char* gram_code1, const char* gram_code2) const;
-	QWORD GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const;
+	uint64_t GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const;
 
 	bool GleicheGenderNumber(const char* gram_code1, const char* gram_code2) const;
 	bool ConflictGenderNumber(const char* gram_code1, const char* gram_code2) const;//with absent grammems check, less strict than GleicheGenderNumber
-	bool ConflictGrammems(QWORD g1, QWORD g2, QWORD breaks) const;//with absent grammems check, less strict than GleicheGenderNumber
+	bool ConflictGrammems(uint64_t g1, uint64_t g2, uint64_t breaks) const;//with absent grammems check, less strict than GleicheGenderNumber
 	bool GleicheSubjectPredicate(const char* gram_code1, const char* gram_code2) const;
 	long GetClauseTypeByName(const char* TypeName) const;
 
@@ -50,19 +50,19 @@ public:
 	bool is_morph_participle(poses_mask_t poses) const;
 	bool is_morph_pronoun(poses_mask_t poses) const;
 	bool is_morph_pronoun_adjective(poses_mask_t poses) const;
-	bool is_left_noun_modifier(poses_mask_t poses, QWORD grammems) const;
+	bool is_left_noun_modifier(poses_mask_t poses, uint64_t grammems) const;
 	bool is_numeral(poses_mask_t poses) const;
 	bool is_verb_form(poses_mask_t poses) const;
 	bool is_infinitive(poses_mask_t poses) const;
 	bool is_morph_predk(poses_mask_t poses) const;
 	bool is_morph_adv(poses_mask_t poses) const;
 	bool is_morph_article(poses_mask_t poses) const;
-	bool is_morph_personal_pronoun(poses_mask_t poses, QWORD grammems) const;
+	bool is_morph_personal_pronoun(poses_mask_t poses, uint64_t grammems) const;
 	bool IsSimpleParticle(const char* lemma, poses_mask_t poses) const;
 	bool IsSynNoun(poses_mask_t poses, const char* Lemma) const;
 	bool IsStandardParamAbbr(const char* WordStrUpper) const;
-	bool FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, QWORD& grammems) const override;
-	QWORD ChangeGleicheAncode1(GrammemCompare CompareFunc, const std::string& wordGramCodes, std::string& groupGramCodes, const QWORD wordGrammems) const override;
+	bool FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, uint64_t& grammems) const override;
+	uint64_t ChangeGleicheAncode1(GrammemCompare CompareFunc, const std::string& wordGramCodes, std::string& groupGramCodes, const uint64_t wordGrammems) const override;
 };
 
 extern bool GenderNumberCaseRussian(const CAgramtabLine* l1, const CAgramtabLine* l2);

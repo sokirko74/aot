@@ -82,12 +82,12 @@ void CGroup::Reset()
 
 
 
-void CGroup::SetGrammems(QWORD Grammems)
+void CGroup::SetGrammems(uint64_t Grammems)
 {
 	grammems = Grammems;
 }
 
-void CGroup::SetGrammems(QWORD Grammems, const char * GramCodes)
+void CGroup::SetGrammems(uint64_t Grammems, const char * GramCodes)
 {
 	grammems = Grammems;
 	m_GramCodes = std::string(GramCodes);
@@ -98,7 +98,7 @@ void CGroup::SetGrammems(CSynPlmLine W)
 	m_GramCodes = std::string(W.GetGramcodes());
 }
 
-QWORD CGroup::GetGrammems() const
+uint64_t CGroup::GetGrammems() const
 {
 	return grammems;
 }
@@ -350,7 +350,7 @@ const CGroup* CGroups :: get_maximal_group_ptr(size_t WordNo)  const
 
 
 
-void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD grammems, QWORD breaks)
+void   CGroups::change_words_in_group_grammems(const CPeriod& group, uint64_t grammems, uint64_t breaks)
 {	
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
 		{
@@ -380,7 +380,7 @@ bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const std:
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
 	{
         std::string groupGramCodes = std::string(gramcodes);
-        QWORD grammems = R->ChangeGleicheAncode1(CompareFunc, std::string(sent[i].GetGramcodes()),  groupGramCodes, sent[i].GetGrammems()); 
+        uint64_t grammems = R->ChangeGleicheAncode1(CompareFunc, std::string(sent[i].GetGramcodes()),  groupGramCodes, sent[i].GetGrammems()); 
 		if (groupGramCodes=="") { 
             isok = false; 
             continue; 
@@ -393,7 +393,7 @@ bool   CGroups::change_words_in_group_gramcodes(const CPeriod& group, const std:
 	return isok;
 }
 
-void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD grammems) //для добавления рода к СЛОЖ_ЧИСЛ
+void   CGroups::change_words_in_group_grammems(const CPeriod& group, uint64_t grammems) //для добавления рода к СЛОЖ_ЧИСЛ
 {
 	for(int i = group.m_iFirstWord ; i <= group.m_iLastWord ; i++ )
 	{
@@ -402,7 +402,7 @@ void   CGroups::change_words_in_group_grammems(const CPeriod& group, QWORD gramm
 	};
 }
 
-void   CGroups::change_group_grammems(CGroup& group, QWORD grammems, QWORD breaks)
+void   CGroups::change_group_grammems(CGroup& group, uint64_t grammems, uint64_t breaks)
 {
 	group.SetGrammems(group.GetGrammems() & (grammems | ~breaks));
 }
@@ -435,7 +435,7 @@ const CGroup& CGroups :: get_maximal_subgroup (size_t GroupNo, size_t WordNo)  c
 
 
 
-QWORD CGroups :: get_group_grammems(size_t WordNo) const
+uint64_t CGroups :: get_group_grammems(size_t WordNo) const
 {
  int i = get_maximal_group_no_without_clause(WordNo);	
  if (i != -1)
@@ -597,7 +597,7 @@ void CGroups::Reset()
 }
 
 
-void CGroups::SetGrammems(int WordNo, QWORD Grammems, const char* Gramcodes)
+void CGroups::SetGrammems(int WordNo, uint64_t Grammems, const char* Gramcodes)
 {
 	sent[WordNo].SetGrammems(Grammems);
 	sent[WordNo].SetGramcodes(Gramcodes);

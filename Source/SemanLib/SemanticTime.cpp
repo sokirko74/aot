@@ -190,7 +190,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot& Hypot, CTimeUnit& TimeUnit, 
 		else
 		{
 			uint32_t Pose;
-			QWORD  Grammems;
+			uint64_t  Grammems;
 			m_pData->GetCustomGrammems(GramFet, Grammems, Pose);;
 
 			// если это сокращенная форма, то нужно вернуть истину, если согласовано по числу
@@ -293,8 +293,8 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree(CNodeHypotVector& V, CTimeUnit& U)
 			S = S.substr(j + 1, S.length() - j);
 			TrimLeft(S);
 			long ItemNo = GetRossHolder(Ross)->GetItemNoByItemStr(S, "D_CASE");
-			QWORD Grammems = GetCaseGrammem(GetRossHolder(Ross), ItemNo);
-			QWORD Grm = m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].GetGrammems();
+			uint64_t Grammems = GetCaseGrammem(GetRossHolder(Ross), ItemNo);
+			uint64_t Grm = m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].GetGrammems();
 
 			for (long j = 0; j < V.size(); j++)
 				if (V[j].m_bShouldBeNumeral_P && !m_Nodes[V[j].m_NodeNo].HasPOS(NUMERAL_P))
@@ -388,7 +388,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 				Period[PlaceNo].m_NodeNo = NodeNo + PlaceNo + SimilarNumeralLength;
 				if (Period[PlaceNo].m_NodeNo >= m_Clauses[ClauseNo].m_EndNodeNo) break;
 				if (!CheckOneTimeWord(m_pData->m_TimeUnits[TimeUnitNo], Period, PlaceNo, AbbrFunctNo)) break;
-				QWORD Numbers;
+				uint64_t Numbers;
 				if (AbbrFunctNo == -1)
 					Numbers = rAllNumbers;
 				else

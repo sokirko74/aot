@@ -86,7 +86,7 @@ public:
 	bool is_numeral(const CSynPlmLine& L) const;
 	bool is_infinitive(const CSynPlmLine& L) const;
 	bool is_morph_pronoun_adjective(const CSynPlmLine& L) const;
-	int		check_first_part_of_prep_noun (const CGroup& G, QWORD& depend_cases, int PREP_NOUN_GROUP_TYPE) const;
+	int		check_first_part_of_prep_noun (const CGroup& G, uint64_t& depend_cases, int PREP_NOUN_GROUP_TYPE) const;
 	
 
 	void	ChangeGroupType(CGroup& G, int NewGroupType);

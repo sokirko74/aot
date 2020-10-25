@@ -53,7 +53,7 @@ struct CBuildingUnit
 	int			m_MaxUsedHomonymNo; 
 	int			m_ChildClauseNo;
 	//  this presupposes that one word cannot have more than 64 homonym
-	QWORD		m_BestHomonyms;
+	uint64_t		m_BestHomonyms;
 };
 
 

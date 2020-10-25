@@ -48,10 +48,10 @@ struct  COborotForSyntax
 	EConjType	m_ConjType;
 
 	// all cases from the entry field GF2 
-	QWORD m_DependCases;
+	uint64_t m_DependCases;
 
 	// a union of all possible COborotForSyntax::m_DependCases with the same Content field 
-	QWORD m_AllPossibleDependCases;
+	uint64_t m_AllPossibleDependCases;
 
 
     COborotForSyntax ();

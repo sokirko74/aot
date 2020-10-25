@@ -144,7 +144,7 @@ public:
     // сначала лежат IsWordContainer(),потом IsAbstract(), и для каждой клаузы отдельно
     bool operator < (const CRusSemNode& Node) const;
 	bool IsAnaphoricPronoun () const;
-	QWORD GetInnerGrammems() const;
+	uint64_t GetInnerGrammems() const;
 	bool IsLemma(std::string Lemma) const;
 	bool IsWordForm(std::string WordForm) const;
 	bool IsLemmaList(const std::vector<std::string>& lemmas) const;
@@ -161,7 +161,7 @@ public:
 	CDictUnitInterp			 m_Interp;
 	long					 m_PrepsCount;
 	long					 m_FirstPrepUnitNo;
-	QWORD					 m_Grammems;
+	uint64_t					 m_Grammems;
 	//случай, когда этот узел участвовал в построении отношений
 	std::set<long>				 m_Cases;
 	CMemNode () {
@@ -826,7 +826,7 @@ public:
 	bool			TryClauseSimpleComma (long ClauseRuleNo, long ClauseNo1, long ClauseNo2);
 	long			GetClauseCoordSimpleConj (long ClauseNo1) const;
 	// выдает граммемы числа и лица по сказуемому и подлежащему (если последнее есть)
-	QWORD			GetPersonAndNumberGrammemsOfPredicate (long NodeNo);
+	uint64_t			GetPersonAndNumberGrammemsOfPredicate (long NodeNo);
 	bool            TryClauseCoordSimpleConj (long ClauseRuleNo, long ClauseNo1, long ClauseNo2);
 	// ищет союзное слово в начале клаузы, если находит, тогда выдает номер узла
 	long			GetConjWordFromClause (long ClauseNo) const;
@@ -905,7 +905,7 @@ public:
 //  выдает число операторов однородностей (MUA), у которых все члены имеют хотя бы одну	// общую  SF
 	long			GetSemFetAgreeMNACount(long Tag);
 	// выдает грамматическую модель члена однородного ряда по самому правому потомку
-	void			GetMNAPattern(size_t NodeNo, long& Poses, QWORD& Grammems) const;
+	void			GetMNAPattern(size_t NodeNo, long& Poses, uint64_t& Grammems) const;
 	// выдает грамматическую модель члена однородного ряда, построенную по самому правому потомку
 	long			GetFirstMNAMemberIfHas(long NodeNo) const;
 	// набор всех отношений, идущих из оператора однородности NodeNo
@@ -996,7 +996,7 @@ public:
 	void			InterpretOrganisations (long ClauseNo);
 	// уничтожение  всех аношкинских кодов у узла, в которые не входят граммемы  Grammems,
 	// и соответ. модификация слота  m_Grammems у узла.
-	void			DeleteAllGramCodesWithoutTheGrammems (CRusSemNode& N, QWORD Grammems);
+	void			DeleteAllGramCodesWithoutTheGrammems (CRusSemNode& N, uint64_t Grammems);
 	// усечение морфологической информации в соотв. с полеми RESTR текущей словарной интерпретации
 	bool			ApplyGramRestr (size_t ClauseNo);
 	//  инициализация матрицы позиционных условий
@@ -1237,7 +1237,7 @@ public:
 		bool			dfs_to_test_unique_relation (size_t NodeNo, size_t RelNo);
 		std::string			GetClauseTreeForTcl();
 		// получает SF1 узла NodeNo		
-		std::vector<QWORD> GetSemFetsOfFirstValency(long NodeNo);
+		std::vector<uint64_t> GetSemFetsOfFirstValency(long NodeNo);
 		// проверяет, что чразу перед узлм стоит запятая
 	    bool			HasCommaBefore (size_t NodeNo) const;
         // строит аналитическую превосходную степень

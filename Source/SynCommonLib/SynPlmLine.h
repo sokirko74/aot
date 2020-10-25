@@ -50,7 +50,7 @@ class CSynPlmLine
 	uint32_t					m_Flags;
 
 	// a union of all possible grammems, which is built by m_gramcodes
-	QWORD					m_Grammems; 
+	uint64_t					m_Grammems; 
 	std::string				    m_gramcodes;
 
 
@@ -66,7 +66,7 @@ public:
 	WORD					m_DisruptOborotId;
 
 	// все падежи из возможных, которыми управляет предлог, вошедший  в предложную группу
-	QWORD					m_FoundPrepDependCases;
+	uint64_t					m_FoundPrepDependCases;
 
 	
 	const char*				m_type_gram_code;
@@ -88,12 +88,12 @@ public:
 	bool	is_morph_noun () const;
 	bool	is_syn_noun() const;
 	bool	HasFlag (PlmLineFlagEnum Flag)  const;
-	QWORD	GetGrammems () const;
+	uint64_t	GetGrammems () const;
 	size_t	GetPoses () const;
     bool    HasPOS (BYTE POS) const;
 
     void	SetFlag (PlmLineFlagEnum PlmLineFlag);
-	void	SetGrammems (QWORD value);
+	void	SetGrammems (uint64_t value);
 	void	SetGramcodes (std::string value);
 	
 	const char*  GetGramcodes () const;

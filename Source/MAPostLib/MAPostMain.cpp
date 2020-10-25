@@ -446,7 +446,7 @@ bool CMAPost::HasParadigmOfFormAndPoses(std::string WordForm, poses_mask_t Poses
 	{
 		std::string AnCode = Paradigms[k].GetSrcAncode();
 		BYTE POS = m_pRusGramTab->GetPartOfSpeech(AnCode.c_str());
-		QWORD Grams;
+		uint64_t Grams;
 		m_pRusGramTab->GetGrammems(AnCode.c_str(), Grams);
 		if (Poses & (1 << POS))
 			return true;
@@ -702,7 +702,7 @@ void CMAPost::SemiNouns()
 			for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++)
 			{
 				CHomonym* pH = W.GetHomonym(HomNo);
-				QWORD Grammems;
+				uint64_t Grammems;
 				std::string GramCodes;
 
 				bool SingularGenitivFound = false;
@@ -722,7 +722,7 @@ void CMAPost::SemiNouns()
 
 							if (Grammems & _QM(rGenitiv))
 							{
-								QWORD Gram = Grammems & ~_QM(rGenitiv);
+								uint64_t Gram = Grammems & ~_QM(rGenitiv);
 								// добавляем винительный  и именительный мн. числа, если нашли родительный
 								if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(POS, Gram | _QM(rNominativ), NewGramCode))
 									GramCodes += NewGramCode;
@@ -1484,7 +1484,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 			{
 				for (size_t j = 0; j < Paradigms[k].GetCount(); j++)
 				{
-					QWORD g;
+					uint64_t g;
 					m_pRusGramTab->GetGrammems(Paradigms[k].GetAncode((WORD)j).c_str(), g);
 					if ((g & _QM(rPatronymic))
 						&& (g & _QM(rNominativ))

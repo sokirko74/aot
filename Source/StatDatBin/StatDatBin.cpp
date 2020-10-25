@@ -97,7 +97,7 @@ static bool loadDat(std::istream &ifs) {
         grm += " ";
         grm += sgrm;
         BYTE pos;
-        QWORD gra;
+        uint64_t gra;
         std::string def;
         if (!MorphHolder.m_pGramTab->ProcessPOSAndGrammemsIfCan(grm.c_str(), &pos, &gra)
             || !MorphHolder.m_pGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(pos, gra, def)) {

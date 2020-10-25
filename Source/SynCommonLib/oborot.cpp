@@ -157,7 +157,7 @@ void  COborDic::MergeCasesOfSimililarSimplePreps()
 	{
 		//const std::string&  debug  = it->first;
 		std::vector<int>& article_nums = it->second;
-		QWORD _cases = 0;
+		uint64_t _cases = 0;
 		
 		for(i=0; i < article_nums.size() ; i++)		
 			_cases |= m_Entries[article_nums[i]].m_DependCases;

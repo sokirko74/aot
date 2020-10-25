@@ -57,7 +57,7 @@ CFixedColloc::CFixedColloc(std::string LemmaStr,	long MainWordNo,	std::string In
 			{
 				int k = Item.find("]");
 				std::string POS = Item.substr(i+1, k - i - 1);
-				QWORD dummy;
+				uint64_t dummy;
 				m_piRusGramTab->ProcessPOSAndGrammems(POS.c_str(),L.m_POS, dummy);
 				L.m_Lemma = Item.substr(0, i);
 			}
@@ -133,7 +133,7 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 	
 		//получаем из морфологии код НЕУБИВАЙМЕНЯ (неизменяеммое существительное всех родов)
 		BYTE POS;
-		QWORD Grammems;
+		uint64_t Grammems;
 		if (    !m_pRusGramTab->ProcessPOSAndGrammemsIfCan(_R(" С мр,жр,ср,мн,ед,им,рд,дт,вн,тв,пр").c_str(),&POS, &Grammems) 
 			 || !m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (POS, Grammems, m_DURNOVOGramCode)
 		   )

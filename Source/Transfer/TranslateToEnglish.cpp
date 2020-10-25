@@ -271,7 +271,7 @@ void  CEngSemStructure::InitSyntaxRelations ()
 			m_Relations[i].m_SyntacticRelation = "obj";
 };
 
-void  CEngSemStructure::SetPositionOfChildrenByGrammems (long NodeNo, QWORD Grammems, std::string Position)
+void  CEngSemStructure::SetPositionOfChildrenByGrammems (long NodeNo, uint64_t Grammems, std::string Position)
 {
 	std::vector<long> outRels;
 	GetOutcomingRelations(NodeNo,outRels);	
@@ -315,7 +315,7 @@ void  CEngSemStructure::SetPositionsFromConj ()
 					std::string GrammemsStr = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[0]);
 					GrammemsStr = "NOUN " + GrammemsStr;
 					BYTE POS;
-					QWORD Grammems;
+					uint64_t Grammems;
 					bool b = m_pData->GetEngGramTab()->ProcessPOSAndGrammemsIfCan(GrammemsStr.c_str(), &POS, &Grammems);
 					if (!b) continue;
 					std::string Position = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[1]);

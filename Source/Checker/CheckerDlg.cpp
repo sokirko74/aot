@@ -626,7 +626,7 @@ std::string GetGramInfo(IGramTabPtr  A, IParadigmPtr& F)
 	for (long i = 0; i < tab_str.length(); i += 2)
 	{
 
-		QWORD G = A->GetGrammems(_bstr_t(tab_str.c_str() + i));
+		uint64_t G = A->GetGrammems(_bstr_t(tab_str.c_str() + i));
 		Result += (const char*)A->GrammemsToStr(G) + std::string(";");
 	};
 	return Result;

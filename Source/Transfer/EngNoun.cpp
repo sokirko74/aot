@@ -217,7 +217,7 @@ bool CEngSynthes::lemma_is_demonstrative_pronoun (std::string Lemma) const
 
 		if( E.m_pData->GetEngGramTab()->GetPartOfSpeech(AnCode.c_str()) == ePN_ADJ) 
 		{
-			QWORD g;
+			uint64_t g;
 			bool bRes = E.m_pData->GetEngGramTab()->GetGrammems(AnCode.c_str(), g);
 			assert (bRes);
 			if( g & _QM(eDemonstrativePronoun)) 

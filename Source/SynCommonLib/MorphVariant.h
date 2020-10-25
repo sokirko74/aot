@@ -69,7 +69,7 @@ struct CSynUnit : public CAncodePattern
 	CPeriod					m_SentPeriod;
 
 	// all cases, which can be used between a preposition and a subordinated NP (used only for Russian1)
-	QWORD					m_FoundPrepDependCases;
+	uint64_t					m_FoundPrepDependCases;
 
 	// the index of a clause type if m_Type==EClause
 	int						m_iClauseTypeNum;

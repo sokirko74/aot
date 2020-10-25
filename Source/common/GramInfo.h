@@ -10,7 +10,7 @@ struct CGramInfo
 	//! the part of speech mask  (SUB, ART,ADJ...)
 	uint32_t				m_PartOfSpeechMask;
 	//! morphological features (plu, sig, nom...)
-	QWORD				m_Grammems;
+	uint64_t				m_Grammems;
 
 	CGramInfo () {
 		m_PartOfSpeechMask = 0;
@@ -18,7 +18,7 @@ struct CGramInfo
 		m_Language = morphUnknown;
 
 	};
-	CGramInfo (MorphLanguageEnum Language, uint32_t PartOfSpeechMask, QWORD Grammems)
+	CGramInfo (MorphLanguageEnum Language, uint32_t PartOfSpeechMask, uint64_t Grammems)
 	{ 
 		m_PartOfSpeechMask = PartOfSpeechMask;
 	    m_Grammems = Grammems;

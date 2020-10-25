@@ -9,7 +9,7 @@
 // bei mir
 bool CGerFormatCaller::format_for_preps (CGroup& G)
 {
-	 QWORD depend_cases;	
+	 uint64_t depend_cases;	
 	 int j = check_first_part_of_prep_noun (G, depend_cases, gPREP_NOUN);
 	 if (j == -1 ) return false;
 
@@ -28,7 +28,7 @@ bool CGerFormatCaller::format_for_preps (CGroup& G)
 
 	const CGroup& MaxGrp = get_maximal_group(k);
 
-	QWORD grammems;
+	uint64_t grammems;
 	if( i_group != -1 )
 		grammems = GetGroups()[i_group].GetGrammems();
 	else	

@@ -356,7 +356,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			if( !poses[j].empty() )
 			{
 				BYTE pos;
-				QWORD grm;
+				uint64_t grm;
 				if( m_pData->GetEngGramTab()->ProcessPOSAndGrammemsIfCan(poses[j].c_str(),&pos,&grm) )
 				{
 					newNode.m_Words[0].m_Poses = _QM(pos);
@@ -566,7 +566,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			
 			if (newRels[k].m_SyntacticRelation == "numeral_transfer")
 			{
-				QWORD  TargetGrammems  = m_Nodes[newRels[k].m_TargetNodeNo].GetGrammemsRich();
+				uint64_t  TargetGrammems  = m_Nodes[newRels[k].m_TargetNodeNo].GetGrammemsRich();
 				TargetGrammems &=  ~eAllNumbers;
 				TargetGrammems |=  eAllNumbers & m_Nodes[newRels[k].m_SourceNodeNo].GetGrammemsRich();
 				continue;
@@ -891,7 +891,7 @@ void CEngSemStructure::AddFixedGrammemsToNode()
 		std::string lemma = engWord.m_Lemma;
 		BYTE pos = GetOnePOS(engWord.m_Poses);
 		if (lemma.length() == 0) continue;
-		QWORD grammems = helper.GetFixedGrammemsByLemma(morphEnglish, lemma, pos,bProper);
+		uint64_t grammems = helper.GetFixedGrammemsByLemma(morphEnglish, lemma, pos,bProper);
 
 		/*
 		  число не может быть словообразовательной граммемой

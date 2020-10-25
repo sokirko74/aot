@@ -10,7 +10,7 @@ void MyGlobalErrorMessage(const std::string &s) {
 
 }
 
-std::string GetGramInfo(const CRusSemStructure& semStr, poses_mask_t Poses, QWORD Grammems) {
+std::string GetGramInfo(const CRusSemStructure& semStr, poses_mask_t Poses, uint64_t Grammems) {
     std::string Result;
     for (size_t i = 0; i < sizeof(Poses) * 8; i++)
         if ((1 << i) & Poses) {

@@ -71,9 +71,9 @@ const CNumeralToNumber NumeralToNumber[NumeralToNumberCount+1] =
 extern const CNumeralToNumber NumeralToNumber[];
 
 extern std::string IntToStr (double i);
-extern std::string FindByNumber(QWORD Number);
+extern std::string FindByNumber(uint64_t Number);
 extern int IsAdverbRule(const std::string& Lemma);
 extern double GetCardinalNumeral(const std::string& word);
 extern double GetOrdinalNumeral(const std::string& word);
 extern double GetNounNumeral(const std::string& word);
-extern std::string spellout_number_ru(QWORD x, NumberFormEnum formType);
+extern std::string spellout_number_ru(uint64_t x, NumberFormEnum formType);

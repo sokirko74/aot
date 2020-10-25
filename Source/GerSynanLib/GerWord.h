@@ -17,7 +17,7 @@
 
 extern bool is_article_for_weak_declination(const CSynHomonym& H);
 extern bool is_article_for_mixed_declination(const CSynHomonym& H);
-extern bool IsPrepositionArticle(const char* WordUpper, QWORD& Grammems);
+extern bool IsPrepositionArticle(const char* WordUpper, uint64_t& Grammems);
 
 
 #endif // !defined(AFX_WORD_H__79995343_E12C_11D2_8BE2_00105A68ADF3__INCLUDED_)

@@ -360,7 +360,7 @@ void MorphoWizard::load_gramtab() {
     m_TypeGrammemsList.clear();
     std::string CommonAncodes = m_pGramTab->GetAllPossibleAncodes(UnknownPartOfSpeech, 0);
     for (size_t i = 0; i < CommonAncodes.length(); i += 2) {
-        QWORD G;
+        uint64_t G;
         m_pGramTab->GetGrammems(CommonAncodes.c_str() + i, G);
         std::string q = m_pGramTab->GrammemsToStr(G);
         m_TypeGrammemsList.push_back(q);
@@ -986,7 +986,7 @@ void MorphoWizard::find_ancodes(const std::string &ancodes, std::vector<lemma_it
 //----------------------------------------------------------------------------
 void MorphoWizard::find_lemm_by_grammem(const std::string &pos_and_grammems, std::vector<lemma_iterator_t> &res) {
     BYTE pos;
-    QWORD gra;
+    uint64_t gra;
     /*{	// processing type grammems for example "РЎ Р»РѕРє | РѕРґ,
         int u = pos_and_grammems.find("|");
         if (u != std::string::npos)
@@ -1086,7 +1086,7 @@ std::string MorphoWizard::get_grammem_string(const std::string &code) const {
     std::string res;
     for (int i = 0; i < code.size(); i += 2) {
         if (i) res += ";";
-        QWORD grams;
+        uint64_t grams;
         m_pGramTab->GetGrammems(code.substr(i, 2).c_str(), grams);
         res += m_pGramTab->GrammemsToStr(grams);
 
@@ -1104,15 +1104,15 @@ std::string MorphoWizard::get_common_grammems_string(const_lemma_iterator_t it) 
     std::string s = it->second.GetCommonAncodeIfCan();
     if (s.empty()) return "";
 
-    QWORD grams;
+    uint64_t grams;
     m_pGramTab->GetGrammems(s.c_str(), grams);
     return m_pGramTab->GrammemsToStr(grams);
 }
 
 //----------------------------------------------------------------------------
 //  get union of type and form grammems of the input lemma
-QWORD MorphoWizard::get_all_lemma_grammems(const_lemma_iterator_t it) const {
-    QWORD grams = 0;
+uint64_t MorphoWizard::get_all_lemma_grammems(const_lemma_iterator_t it) const {
+    uint64_t grams = 0;
     std::string s = it->second.GetCommonAncodeIfCan();
     if (!s.empty())
         grams = m_pGramTab->GetAllGrammems(s.c_str());
@@ -1288,7 +1288,7 @@ void MorphoWizard::get_wordforms(const_lemma_iterator_t it, StringVector &forms)
 
 bool MorphoWizard::slf2ancode(const std::string slf_line, std::string &gramcode) const {
     BYTE pos;
-    QWORD gra;
+    uint64_t gra;
 
     if (!m_pGramTab->ProcessPOSAndGrammemsIfCan(slf_line.c_str(), &pos, &gra)
         || !m_pGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(pos, gra, gramcode)
@@ -2517,7 +2517,7 @@ MorphoWizard::ReadNextParadigmFromFile(FILE *fp, CDumpParadigm &P, int &line_no,
 //----------------------------------------------------------------------------
 bool MorphoWizard::Filter(std::string flt_str, std::vector<lemma_iterator_t> &found_paradigms) const {
     BYTE pos;
-    QWORD grm;
+    uint64_t grm;
     if (!m_pGramTab->ProcessPOSAndGrammemsIfCan(flt_str.c_str(), &pos, &grm)
         && !m_pGramTab->ProcessPOSAndGrammemsIfCan(std::string("* " + flt_str).c_str(), &pos, &grm)
             ) {

@@ -63,7 +63,7 @@ class CGraLine
 
 	// длина строки unit
     BYTE		ulen;             
-	QWORD		m_Descriptors;
+	uint64_t		m_Descriptors;
     WORD		m_Status;
 	uint32_t		m_InputOffset;
 
@@ -76,7 +76,7 @@ public:
 	const char* GetToken() const {return unit; };
 	BYTE GetScreenLength() const {return slen;};
 	uint32_t GetInputOffset() const {return m_InputOffset;};
-	QWORD GetDescriptors() const {return m_Descriptors; };
+	uint64_t GetDescriptors() const {return m_Descriptors; };
 
 	bool IsNotPrint  () const;
 	// we leave these function in the header, since VC doesn't want to make them inline

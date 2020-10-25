@@ -25,7 +25,7 @@ void get_id(CMorphologyHolder& morphHolder, std::string str, DwordVector &res, b
 		UINT part = morphHolder.m_pGramTab->GetPartOfSpeech(Paradigm.GetSrcAncode().c_str());
 		if(part != INFINITIVE)
 			continue;
-		QWORD gr = morphHolder.m_pGramTab->GetAllGrammems(Paradigm.GetCommonAncode().c_str());
+		uint64_t gr = morphHolder.m_pGramTab->GetAllGrammems(Paradigm.GetCommonAncode().c_str());
 		bool is_perfective = (gr & _QM(rPerfective)) != 0;
 		bool is_nonperfective = (gr & _QM(rNonPerfective)) != 0;
 		std::string norm = Paradigm.GetWordForm(0);

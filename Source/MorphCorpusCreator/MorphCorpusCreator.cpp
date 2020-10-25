@@ -491,7 +491,7 @@ void CMorphCorpusCreator::AddAccent(std::string& lemma, int ParadigmID)
 	lemma += lemma_save.substr(iPos);		
 }
 
-std::string CMorphCorpusCreator::GetLemma(std::string lemma, BYTE Pos, long ParadigmID, SYNANLib::IWordPtr piWord, QWORD lexema_grammems, std::string ancode)
+std::string CMorphCorpusCreator::GetLemma(std::string lemma, BYTE Pos, long ParadigmID, SYNANLib::IWordPtr piWord, uint64_t lexema_grammems, std::string ancode)
 {	
 	RmlMakeLower(lemma, m_CurrentLanguage);
 
@@ -620,7 +620,7 @@ std::string CMorphCorpusCreator::process_gram_homonym(std::string lemma, long pa
 	BYTE pos = m_pGramTab->GetPartOfSpeech(ancode.c_str());
 	std::string strPos = m_pGramTab->GetPartOfSpeechStr(pos);
 	std::string str_word = (const char*)piWord->WordStr;
-	QWORD grammems = 0;
+	uint64_t grammems = 0;
 
 	if( !ancode.empty() )
 		grammems = m_pGramTab->GetGrammems(ancode.c_str());

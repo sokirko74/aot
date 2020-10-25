@@ -326,7 +326,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo)
 	std::vector<std::string>::const_iterator It = find(m_IndexedSemFets.begin(), m_IndexedSemFets.end(), std::string("IDENT"));
 	if (It != m_IndexedSemFets.end())
 	{
-		QWORD Num = It - m_IndexedSemFets.begin();
+		uint64_t Num = It - m_IndexedSemFets.begin();
 		for (long i = 0; i < m_Nodes[NodeNo].m_NodeSemFets.size(); i++)
 			if ((_QM(Num) & m_Nodes[NodeNo].m_NodeSemFets[i]) > 0)
 				m_Nodes[NodeNo].m_NodeSemFets[i] &= ~_QM(Num);
@@ -384,13 +384,13 @@ void CRusSemStructure::InitPOs(long ClauseNo)
 
 
 
-void CRusSemStructure::DeleteAllGramCodesWithoutTheGrammems(CRusSemNode& N, QWORD Grammems)
+void CRusSemStructure::DeleteAllGramCodesWithoutTheGrammems(CRusSemNode& N, uint64_t Grammems)
 {
 	N.SetGrammems(0);
 	for (long l = 0; l < N.m_GramCodes.length(); l += 2)
 	{
 		std::string S = N.m_GramCodes.substr(l, 2);
-		QWORD grams;
+		uint64_t grams;
 		m_pData->GetRusGramTab()->GetGrammems(S.c_str(), grams);
 		if ((grams & Grammems) == 0)
 		{
@@ -417,9 +417,9 @@ bool CRusSemStructure::ApplyGramRestr(size_t ClauseNo)
 			if (m_Nodes[i].IsWordContainer())
 				if (m_Nodes[i].m_MainWordNo != -1)
 				{
-					QWORD OldGrammems = m_Nodes[i].GetGrammems();
+					uint64_t OldGrammems = m_Nodes[i].GetGrammems();
 					if (ErrUnitNo == m_Nodes[i].GetUnitNo()) continue;
-					std::vector<QWORD>  GrammemsSet = GetGramRestr(m_Nodes[i]);
+					std::vector<uint64_t>  GrammemsSet = GetGramRestr(m_Nodes[i]);
 					if (GrammemsSet.empty()) continue;
 					// пока проверяем только первый кортеж, поскольку пока поле RESTR одиночное 
 

@@ -120,7 +120,7 @@ void CSynWord::Reset()
 }
 
 
-CSynHomonym CSynWord::CloneHomonymByAnotherHomonym(const CSynHomonym* pHomonym, QWORD iGrammems, BYTE iTagID) const 
+CSynHomonym CSynWord::CloneHomonymByAnotherHomonym(const CSynHomonym* pHomonym, uint64_t iGrammems, BYTE iTagID) const 
 {
 	CSynHomonym hom = *pHomonym;
 	if( iTagID == UnknownPartOfSpeech )

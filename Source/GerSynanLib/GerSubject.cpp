@@ -278,7 +278,7 @@ void CGerSentence::BuildSubjAndPredRelation(CMorphVariant& synVariant,long RootW
 	if (synVariant.m_Subjects.size() == 1)
 	{
 		CSynUnit& SubjUnit = synVariant.m_SynUnits[synVariant.GetFirstSubject()];		
-		QWORD Grammems = (SubjUnit.m_iGrammems & ~gAllCases) | _QM(gNominativ);
+		uint64_t Grammems = (SubjUnit.m_iGrammems & ~gAllCases) | _QM(gNominativ);
         SubjUnit.ModifyGrammems( Grammems );
 	}
 

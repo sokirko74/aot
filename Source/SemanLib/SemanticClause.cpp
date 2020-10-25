@@ -568,7 +568,7 @@ bool CRusSemStructure::TryClauseConjWord(long ClauseRuleNo, long ClauseNo1, long
 				std::string q = Lemma.substr(i + 1, Lemma.find(")") - i - 1);
 				Lemma.erase(i);
 				Trim(Lemma);
-				QWORD dummy;
+				uint64_t dummy;
 				m_pData->GetCustomGrammems(q, dummy, Poses);
 			};
 
@@ -816,10 +816,10 @@ long  CRusSemStructure::GetClauseCoordSimpleConj(long ClauseNo) const
 };
 
 // выдает граммемы числа и лица по сказуемому и подлежащему (если последнее есть)
-QWORD CRusSemStructure::GetPersonAndNumberGrammemsOfPredicate(long NodeNo)
+uint64_t CRusSemStructure::GetPersonAndNumberGrammemsOfPredicate(long NodeNo)
 {
 	long Subj = GetRusSubj(NodeNo);
-	QWORD Grammems = m_Nodes[NodeNo].GetGrammems() & rAllNumbers;
+	uint64_t Grammems = m_Nodes[NodeNo].GetGrammems() & rAllNumbers;
 	/*
 	 берем лицо от подлежащего, если подлежащее есть
 	*/
@@ -888,7 +888,7 @@ bool CRusSemStructure::TryClauseCoordSimpleConj(long ClauseRuleNo, long ClauseNo
 		long Subj2 = GetRusSubj(PredicNodeNo2);
 		if ((Subj1 == -1) || (Subj2 == -1))
 		{
-			QWORD Grams = (GetPersonAndNumberGrammemsOfPredicate(PredicNodeNo1)
+			uint64_t Grams = (GetPersonAndNumberGrammemsOfPredicate(PredicNodeNo1)
 				& GetPersonAndNumberGrammemsOfPredicate(PredicNodeNo2));
 
 			if (((Grams & rAllPersons) == 0)
@@ -1106,7 +1106,7 @@ CRusSemNode  CRusSemStructure::CreatePronounByLemma(std::string Lemma)
 	P->CreateParadigmCollection(true, Lemma, false, false, ParadigmCollection);
 	assert(!ParadigmCollection.empty());
 	std::string GramCodes = ParadigmCollection[0].GetSrcAncode();
-	QWORD Grammems = m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
+	uint64_t Grammems = m_pData->GetRusGramTab()->GetAllGrammems(GramCodes.c_str());
 
 
 	CRusSemWord SemWord(-1, Lemma);

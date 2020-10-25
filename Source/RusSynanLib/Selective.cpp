@@ -9,8 +9,8 @@
 struct CSelectiveWord
 {
 	std::string m_Lemma;
-	QWORD		m_Numder;		
-	CSelectiveWord (const std::string& Lemma, QWORD Numder)
+	uint64_t		m_Numder;		
+	CSelectiveWord (const std::string& Lemma, uint64_t Numder)
 	{
 		m_Lemma = Lemma;
 		m_Numder = Numder;
@@ -130,7 +130,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 	G.m_iLastWord = prep_gr.m_iLastWord;
 	G.m_GroupType = SELECTIVE_GR;
 	//проверяем род и удаляем лишние граммемы
-	QWORD LWGen = sent[G.m_iLastWord].GetGrammems() & rAllGenders;
+	uint64_t LWGen = sent[G.m_iLastWord].GetGrammems() & rAllGenders;
 	if( (sent[G.m_iFirstWord].GetGrammems() & rAllGenders)>0 && LWGen>0 &&
 		((sent[G.m_iFirstWord].GetGrammems() & rAllGenders & LWGen) == 0) )
 		return false;

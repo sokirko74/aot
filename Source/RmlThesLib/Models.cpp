@@ -52,7 +52,7 @@ bool CThesaurus::LoadAtomicGroups(std::string Buff, CInnerModel &M) {
         std::string SynGroup = q;
         Trim(SynGroup);
         CAtomGroup G;
-        QWORD dummy = 0;
+        uint64_t dummy = 0;
 
         if (SynGroup == "DSC")
             G.m_bDigCmpl = true;

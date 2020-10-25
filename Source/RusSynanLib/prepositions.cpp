@@ -16,7 +16,7 @@
 bool CRusFormatCaller::format_for_preps_adj (CGroup& G)
 {
 	// падежи предлога 
-	QWORD depend_cases;	
+	uint64_t depend_cases;	
 	// стоит ли на первом месте предлог?
 	int j = check_first_part_of_prep_noun (G, depend_cases, PREP_NOUN);
 	// не стоит - выходим
@@ -74,7 +74,7 @@ bool CRusFormatCaller::format_for_preps_adj (CGroup& G)
 
 bool CRusFormatCaller::format_for_preps (CGroup& G)
 {
-	 QWORD depend_cases;	
+	 uint64_t depend_cases;	
 	 int j = check_first_part_of_prep_noun (G, depend_cases, PREP_NOUN);
 	 if (j == -1 ) return false;
 
@@ -116,7 +116,7 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 		) 
 		return false; 
 
-	QWORD grammems;
+	uint64_t grammems;
 	if( i_group != -1 )
 	{
 		grammems = GetGroups()[i_group].GetGrammems();

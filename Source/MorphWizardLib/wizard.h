@@ -212,7 +212,7 @@ public:
 	std::string					get_base_string	(const_lemma_iterator_t it)   const;
 	std::string					get_grammem_string  (const std::string &code) const;
 	std::string					get_grammem_string  (lemma_iterator_t it)  const;
-	QWORD					get_all_lemma_grammems	(const_lemma_iterator_t it) const;
+	uint64_t					get_all_lemma_grammems	(const_lemma_iterator_t it) const;
 	std::string					get_common_grammems_string(const_lemma_iterator_t it) const;
 	std::string					get_prefix_set(const_lemma_iterator_t it) const;
 	std::string					get_pos_string_and_grammems	(const std::string &code) const;

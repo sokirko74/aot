@@ -387,7 +387,7 @@ bool CRusSemStructure::DealWithNodePrepS(long NodeNo)
 
 // функция, которая дает ограничения на валентность для однородного ряда
 // именных групп.
-void CRusSemStructure::GetMNAPattern(size_t NodeNo, long& Poses, QWORD& Grammems) const
+void CRusSemStructure::GetMNAPattern(size_t NodeNo, long& Poses, uint64_t& Grammems) const
 {
 	Grammems = 0;
 	Poses = 0;
@@ -482,7 +482,7 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 	   )
 	{
 		long  PatternPoses;
-		QWORD Grammems;
+		uint64_t Grammems;
 		GetMNAPattern(NodeNo, PatternPoses, Grammems);
 		bool bAdjMNA = HasOutcomingSynRelation(NodeNo,_R("ОДНОР_ПРИЛ"));
 		
@@ -557,11 +557,11 @@ void CRusSemStructure::BuildMNAOutcoming(long ClauseNo)
 
 
 
-std::vector<QWORD> CRusSemStructure::GetSemFetsOfFirstValency(long NodeNo)
+std::vector<uint64_t> CRusSemStructure::GetSemFetsOfFirstValency(long NodeNo)
 {
 	//получаем SF1 из РОСС  	 
 	
-	std::vector<QWORD> SemFets;
+	std::vector<uint64_t> SemFets;
 	if (   (m_Nodes[NodeNo].m_Vals.size() > 0)
 		&& (m_Nodes[NodeNo].GetType() != NoneRoss)
 		)

@@ -127,7 +127,7 @@ bool CEngGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
 	return  false;
 };
 
-bool CEngGramTab::is_left_noun_modifier (poses_mask_t poses, QWORD grammems) const
+bool CEngGramTab::is_left_noun_modifier (poses_mask_t poses, uint64_t grammems) const
 {
 	return     false;
 }
@@ -160,7 +160,7 @@ bool CEngGramTab::is_morph_adv(poses_mask_t poses) const
 	return false; 
 }
 
-bool CEngGramTab::is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const
+bool CEngGramTab::is_morph_personal_pronoun (poses_mask_t poses, uint64_t grammems) const
 {
 	return		false;
 };
@@ -196,7 +196,7 @@ bool CEngGramTab::GleicheCaseNumber(const char* gram_code1, const char* gram_cod
 {
 	return false;
 };
-QWORD CEngGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const 
+uint64_t CEngGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const 
 {
 	return 0;
 };

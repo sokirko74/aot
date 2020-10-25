@@ -116,7 +116,7 @@ bool CEngSemStructure::CheckAllOutcomingRelationsIfAnyExists (long NodeNo, std::
 
 
 
-bool CEngSemStructure::HasOutRelationByGrammems(long NodeNo, QWORD Grammems) const
+bool CEngSemStructure::HasOutRelationByGrammems(long NodeNo, uint64_t Grammems) const
 {
 	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);

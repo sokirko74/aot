@@ -111,7 +111,7 @@ int GetDeterminerHomonym(const CGerSentence& S, size_t WordNo, int LastUnusedSta
 	for (size_t i=0; i<W.m_Homonyms.size(); i++)
 	{
 		const CSynHomonym& H = W.m_Homonyms[i];
-		QWORD dummy;
+		uint64_t dummy;
 		if	(		is_article_for_weak_declination(H)
 				||	is_article_for_mixed_declination(H)
 				||	IsPrepositionArticle(W.m_strUpperWord.c_str(), dummy)

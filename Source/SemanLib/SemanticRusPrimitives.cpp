@@ -1021,7 +1021,7 @@ bool CRusSemNode::IsAnaphoricPronoun () const
 		);
 };
 
-QWORD CRusSemNode::GetInnerGrammems() const
+uint64_t CRusSemNode::GetInnerGrammems() const
 {
 	if (m_MainWordNo == -1)
 		return GetGrammems();

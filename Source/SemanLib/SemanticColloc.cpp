@@ -138,7 +138,7 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 	{
 		TCortege& C = P.m_GramCorteges[GramCortegeNo];
 		uint32_t Pose;
-		QWORD Grammems;
+		uint64_t Grammems;
 		std::string GramFet = WriteToString(GetRoss(CollocRoss), (char*)(GetRoss(CollocRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 		Trim(GramFet);
 		m_pData->GetCustomGrammems(GramFet, Grammems, Pose);

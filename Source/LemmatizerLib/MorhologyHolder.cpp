@@ -236,7 +236,7 @@ CFormInfo CMorphologyHolder::id_to_paradigm(long id) const
 
 
 std::string CMorphologyHolder::GetGrammems(const char* tab_str) {
-	QWORD G;
+	uint64_t G;
 	m_pGramTab->GetGrammems(tab_str, G);
 	std::string s = m_pGramTab->GrammemsToStr(G);
 	if (!s.empty() && (s[s.length() - 1] == ','))

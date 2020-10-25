@@ -764,7 +764,7 @@ void BuildZuForms(CGerSentence &C)
 		W.DeleteMarkedHomonymsBeforeClauses();
 		W.m_strWord =  "zu-"+W.m_strWord;
 
-		QWORD g = (gAllVerbClasses & W.m_Homonyms[0].m_iGrammems) |  _QM(gZuVerbForm);
+		uint64_t g = (gAllVerbClasses & W.m_Homonyms[0].m_iGrammems) |  _QM(gZuVerbForm);
         std::string NewGramCodes;
 		if (!C.GetGerGramTab()->GetGramCodeByGrammemsAndPartofSpeechIfCan(gVER, g, NewGramCodes))
 		{

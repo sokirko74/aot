@@ -79,7 +79,7 @@ public:
 	
 	void SetData(const CSemanticsHolder* pData);
 	
-	std::string create_form_by_id(long EngId, QWORD eng_grammems) const;
+	std::string create_form_by_id(long EngId, uint64_t eng_grammems) const;
 	std::string create_norm_by_id(long RusId) const;
 	
 
@@ -94,7 +94,7 @@ public:
 	void transliterate(CEngSemWord& EngWord);
 	
 	long GetParadigmIdByLemma(MorphLanguageEnum langua,  std::string str, UINT pos = -1, bool bProper=false) const;
-	QWORD GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, UINT pos, bool bProper) const;
+	uint64_t GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, UINT pos, bool bProper) const;
 
 	const CRossHolder* GetRossHolder (DictTypeEnum type) const;
 	const CLemmatizer* GetRusLemmatizer () const;

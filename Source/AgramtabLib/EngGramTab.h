@@ -58,13 +58,13 @@ public:
 	bool is_morph_participle (poses_mask_t poses) const;
 	bool is_morph_pronoun (poses_mask_t poses) const;
 	bool is_morph_pronoun_adjective(poses_mask_t poses) const;
-	bool is_left_noun_modifier  (poses_mask_t poses, QWORD grammems) const;
+	bool is_left_noun_modifier  (poses_mask_t poses, uint64_t grammems) const;
 	bool is_numeral (poses_mask_t poses) const;
 	bool is_verb_form (poses_mask_t poses) const;
 	bool is_infinitive(poses_mask_t poses) const;
 	bool is_morph_predk(poses_mask_t poses) const;
 	bool is_morph_adv(poses_mask_t poses) const;
-	bool is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const;
+	bool is_morph_personal_pronoun (poses_mask_t poses, uint64_t grammems) const;
 	bool is_morph_article(poses_mask_t poses) const;
 
 	bool IsSimpleParticle(const char* lemma, poses_mask_t poses) const;
@@ -72,7 +72,7 @@ public:
 	bool IsStandardParamAbbr (const char* WordStrUpper) const;
 	bool GleicheCase(const char* gram_code_noun, const char* gram_code_adj) const;
 	bool GleicheCaseNumber(const char* gram_code1, const char* gram_code2) const;
-	QWORD GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const;
+	uint64_t GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const;
 	
 
 

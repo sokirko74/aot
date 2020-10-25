@@ -180,8 +180,8 @@ bool CGerGramTab::GleicheGenderNumber(const char* gram_code1, const char* gram_c
 
 bool SubjectPredicateGerman(const CAgramtabLine* subj_l, const CAgramtabLine* verb_l)
 {
-    const QWORD& subj = subj_l->m_Grammems;
-    const QWORD& verb = verb_l->m_Grammems;
+    const uint64_t& subj = subj_l->m_Grammems;
+    const uint64_t& verb = verb_l->m_Grammems;
 
 	if(    !( subj & _QM(gNominativ)) 
 	  )
@@ -192,8 +192,8 @@ bool SubjectPredicateGerman(const CAgramtabLine* subj_l, const CAgramtabLine* ve
 	
 
 
-	QWORD Persons12 = _QM(gErstePerson) | _QM(gZweitePerson);
-	QWORD gAllNumbers1 = ( _QM(gPlural) | _QM(gSingular) );
+	uint64_t Persons12 = _QM(gErstePerson) | _QM(gZweitePerson);
+	uint64_t gAllNumbers1 = ( _QM(gPlural) | _QM(gSingular) );
 	if (		( subj & Persons12)
 			||	(verb & Persons12)
 		)
@@ -257,7 +257,7 @@ bool CGerGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
 	return	   ( poses & (1 <<gPRO_BEG  )) != 0	;
 };
 
-bool CGerGramTab::is_left_noun_modifier (poses_mask_t poses, QWORD grammems) const
+bool CGerGramTab::is_left_noun_modifier (poses_mask_t poses, uint64_t grammems) const
 {
 	if (poses & (1 <<gZAL )) return true;
 	if (!(grammems & gAllCases)) return false;
@@ -298,7 +298,7 @@ bool CGerGramTab::is_morph_adv(poses_mask_t poses) const
 	return  ( poses & (1 <<gADV )) != 0;
 }
 
-bool CGerGramTab::is_morph_personal_pronoun (poses_mask_t poses, QWORD grammems) const
+bool CGerGramTab::is_morph_personal_pronoun (poses_mask_t poses, uint64_t grammems) const
 {
 	return		false;
 };
@@ -340,8 +340,8 @@ bool CGerGramTab::GleicheCaseNumber(const char* gram_code1, const char* gram_cod
 
 bool GenderNumberCaseGerman (const CAgramtabLine* noun_l, const CAgramtabLine* adj_l ) 
 {	
-    const QWORD& noun = noun_l->m_Grammems;
-    const QWORD& adj = adj_l->m_Grammems;
+    const uint64_t& noun = noun_l->m_Grammems;
+    const uint64_t& adj = adj_l->m_Grammems;
 	return     ((gAllCases  & noun & adj) > 0) 
 		    	 &&	((gAllNumbers & noun & adj) > 0) 
 		         && (    ((gAllGenders & noun & adj) > 0)
@@ -351,7 +351,7 @@ bool GenderNumberCaseGerman (const CAgramtabLine* noun_l, const CAgramtabLine* a
 };
 
 
-QWORD CGerGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun,const char* gram_code_noun, const char* gram_code_adj) const 
+uint64_t CGerGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun,const char* gram_code_noun, const char* gram_code_adj) const 
 {
 	return  Gleiche(GenderNumberCaseGerman, gram_code_noun, gram_code_adj);
 };
@@ -430,27 +430,27 @@ std::string CommonCase(const CAgramtab* pGramTab, const std::string& noun1, cons
 };
 
 
-bool HasOnlyOneCase(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
+bool HasOnlyOneCase(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const uint64_t& Grammems)
 {
 	poses_mask_t oPoses;
-	QWORD  oGrammems;
+	uint64_t  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return  (oGrammems & gAllCases) == Grammems;
 };
 
-bool HasGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
+bool HasGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const uint64_t& Grammems)
 {
 	poses_mask_t oPoses;
-	QWORD  oGrammems;
+	uint64_t  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return		((oGrammems & Grammems) == Grammems)
 		&&		((oPoses & poses) == poses);
 };
 
-bool HasOneGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const QWORD& Grammems)
+bool HasOneGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const uint64_t& Grammems)
 {
 	poses_mask_t oPoses;
-	QWORD  oGrammems;
+	uint64_t  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return		(oGrammems & Grammems) > 0;
 };
@@ -480,7 +480,7 @@ std::string ConvertToPlural(const CAgramtab* pGramTab,  const std::string& s)
 		else
 			if (L->m_Grammems & _QM(gSingular) ) 
 			{
-				QWORD q = (L->m_Grammems & ~_QM(gSingular)) | _QM(gPlural);
+				uint64_t q = (L->m_Grammems & ~_QM(gSingular)) | _QM(gPlural);
 				Result += pGramTab->GetAllPossibleAncodes(L->m_PartOfSpeech, q);
 			};
 	};

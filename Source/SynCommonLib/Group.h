@@ -60,7 +60,7 @@ struct CClauseRelation
 
 struct CRelation : public CPeriod 
 {
-		QWORD		m_iGrammems;
+		uint64_t		m_iGrammems;
 		std::string		m_GramCodes;
 		EUnitType	m_SourceType;
 		EUnitType	m_TargetType;
@@ -102,7 +102,7 @@ typedef std::vector<int> CIntVector;
 class CGroup : public CTypedPeriod
 {
 	// grammems of the group, they can be  differ from the grammems of the main word 
-	QWORD			grammems;
+	uint64_t			grammems;
 
 public:
 
@@ -147,9 +147,9 @@ public:
 	//CGroup& operator =(const CGroup& src_group);
 	
 
-	QWORD GetGrammems() const;
-	void SetGrammems(QWORD Grammems);
-	void SetGrammems(QWORD Grammems, const char * GramCodes);
+	uint64_t GetGrammems() const;
+	void SetGrammems(uint64_t Grammems);
+	void SetGrammems(uint64_t Grammems, const char * GramCodes);
 	void SetGrammems(CSynPlmLine W);
 };
 
@@ -219,7 +219,7 @@ public:
 	const CGroup*		get_maximal_group_ptr(size_t WordNo)  const;
 	const CGroup&		get_atomic_group(size_t WordNo)  const;
 	bool				has_sub_clauses(size_t GroupNo)  const;
-	QWORD				get_group_grammems(size_t WordNo) const;
+	uint64_t				get_group_grammems(size_t WordNo) const;
 	void				get_full_sentence(std::string& str_sent) const;
 	bool				is_noun_group (const CGroup& G) const;
 
@@ -228,15 +228,15 @@ public:
 	bool				is_only_comma_with_pronoun_p_in_group(const CGroup& G) const;
 
 	// changers
-	void	change_words_in_group_grammems(const CPeriod& group, QWORD grammems, QWORD breaks);
+	void	change_words_in_group_grammems(const CPeriod& group, uint64_t grammems, uint64_t breaks);
 	bool    change_words_in_group_gramcodes(const CPeriod& group, const std::string& gramcodes, GrammemCompare CompareFunc);
-	void	change_words_in_group_grammems(const CPeriod& group, QWORD grammems);
-	void	change_group_grammems(CGroup& group, QWORD grammems, QWORD breaks);
+	void	change_words_in_group_grammems(const CPeriod& group, uint64_t grammems);
+	void	change_group_grammems(CGroup& group, uint64_t grammems, uint64_t breaks);
 	void	BuildSimilarSynRels(CGroup& G,int iGroupNum);
 	void	create_syn_rel(CGroup& new_group, int iSource, int iTarget, EGroupType type);
 	void	AddWord(const CSynPlmLine& C);
 	void	Reset();
-	void	SetGrammems(int WordNo, QWORD Grammems, const char* Gramcodes);
+	void	SetGrammems(int WordNo, uint64_t Grammems, const char* Gramcodes);
 	void	SetMainWordNo(CGroup& G);
 	void	BuildDefaultSynrels(size_t GroupNo);
 	void	BuildAutomaticSynrels();

@@ -29,11 +29,11 @@ void	CHomonym::SetLemma(std::string Lemma)
 
 
 
-bool	CHomonym::HasSetOfGrammemsExact(QWORD Grammems) const
+bool	CHomonym::HasSetOfGrammemsExact(uint64_t Grammems) const
 {
 	for (int i = 0; i < GetGramCodes().length(); i += 2)
 	{
-		QWORD g;
+		uint64_t g;
 		if (!GetGramTab()->GetGrammems(GetGramCodes().c_str()+i, g))
 		{
 				assert (false);

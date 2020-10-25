@@ -164,11 +164,11 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 
 
 
-void CSemanticsHolder::GetCustomGrammems (std::string GramFet, QWORD& Grammems, uint32_t& Pose)
+void CSemanticsHolder::GetCustomGrammems (std::string GramFet, uint64_t& Grammems, uint32_t& Pose)
 {
 	assert(GetRusGramTab() != 0);
 	Trim(GramFet);
-	QWORD G;
+	uint64_t G;
 	BYTE Pos;
 	if (GetRusGramTab()->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G))
 	{
@@ -822,7 +822,7 @@ UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, std::str
 	{
 		std::string Form = Paradigm.GetWordForm(k);
 		std::string AnCode = Paradigm.GetAncode(k);
-		QWORD Grammems;
+		uint64_t Grammems;
         BYTE POS;
         GetRusGramTab()->ProcessPOSAndGrammems(AnCode.c_str(), POS, Grammems );
 

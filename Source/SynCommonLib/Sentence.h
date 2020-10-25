@@ -236,7 +236,7 @@ public:
 	bool		RuleForUnitingEmptyClauseWithStrongLeftBorder(int iClauseNum);
 
 
-	bool		ModifyGrammems(CAncodePattern& P, QWORD Grammems);
+	bool		ModifyGrammems(CAncodePattern& P, uint64_t Grammems);
 
 	void		BuildGLRGroupsInClause(CClause& pClause);
 	void		BuildGLRGroupsInSentence();

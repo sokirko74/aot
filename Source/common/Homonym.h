@@ -51,7 +51,7 @@ public:
 		return m_strLemma < hom.m_strLemma;	
 	}
 
-	bool	HasSetOfGrammemsExact(QWORD Grammems) const;
+	bool	HasSetOfGrammemsExact(uint64_t Grammems) const;
 	bool	IsOb1() const;
 	bool	IsOb2() const;
 	bool	IsIsOb() const;

@@ -634,7 +634,7 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 	bool	        ReadAbstractArticles(DictTypeEnum type);
 	bool            BuildOborottos ();
-	void            GetCustomGrammems (std::string GramFet, QWORD& Grammems, uint32_t& Pose);
+	void            GetCustomGrammems (std::string GramFet, uint64_t& Grammems, uint32_t& Pose);
 
 	bool			InitializeIndices();
 

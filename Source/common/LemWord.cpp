@@ -441,9 +441,9 @@ poses_mask_t  CLemWord::GetPoses() const
 	return Poses;
 }
 
-QWORD CLemWord::GetGrammems() const
+uint64_t CLemWord::GetGrammems() const
 {
-    QWORD G = 0;
+    uint64_t G = 0;
 	for(int i = 0 ; i < GetHomonymsCount(); i++)
         G |= GetHomonym(i)->m_iGrammems;
 	return G;

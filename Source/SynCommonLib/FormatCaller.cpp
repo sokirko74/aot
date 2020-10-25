@@ -392,7 +392,7 @@ int CFormatCaller::FindEndOfExpression(int StartWordNo) const
 
 };
 
-int CFormatCaller::check_first_part_of_prep_noun (const CGroup& G, QWORD& depend_cases, int PREP_NOUN_GROUP_TYPE) const 
+int CFormatCaller::check_first_part_of_prep_noun (const CGroup& G, uint64_t& depend_cases, int PREP_NOUN_GROUP_TYPE) const 
 {
 	
 	if( get_maximal_group(G.m_iFirstWord).m_GroupType == PREP_NOUN_GROUP_TYPE )
