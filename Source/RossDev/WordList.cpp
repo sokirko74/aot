@@ -153,7 +153,7 @@ tm Str2Tm(CString TimeStr)
 };
 
 
-std::string CWordList::GetEntryStr(WORD UnitNo) const
+std::string CWordList::GetEntryStr(uint16_t UnitNo) const
 {
 	if (!GetDocument()->IsThesRoss())
 		return GetRoss()->GetEntryStr(UnitNo);
@@ -187,7 +187,7 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 	if (GetUnitsSize() == 0) return;
 	char s[10];
 	CString S;
-	WORD UnitNo = GetUnitNo(pItem->iItem);
+	uint16_t UnitNo = GetUnitNo(pItem->iItem);
 	std::string entry_str;
 	if (pItem->mask & LVIF_TEXT) //valid text buffer?
 	{
@@ -282,7 +282,7 @@ void CWordList::BuildIndex()
 	m_Index.clear();
 
 
-	WORD UnitsSize = GetUnitsSize();
+	uint16_t UnitsSize = GetUnitsSize();
 	for (size_t i = 0; i < UnitsSize; i++)
 	{
 		CIndex I;
@@ -371,7 +371,7 @@ void CWordList::OnClose()
 	CSizeFormView::OnClose();
 }
 
-bool CWordList::SetArticle(WORD UnitNo, CString Value)
+bool CWordList::SetArticle(uint16_t UnitNo, CString Value)
 {
 	CTempArticle A;
 	A.m_pRoss = GetRoss();
@@ -398,7 +398,7 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 
 		if (Sheet.DoModal() == IDOK)
 		{
-			WORD UnitNo;
+			uint16_t UnitNo;
 			if (Sheet.GetPageCount() == 4)
 			{
 				CString Article = ((CNewRefArticles*)Sheet.GetPage(3))->m_ResultString;
@@ -517,7 +517,7 @@ void CWordList::OnContextMenu(CWnd* pWnd, CPoint point)
 
 void CWordList::SetSelected(bool Value)
 {
-	WORD UnitsSize = GetUnitsSize();
+	uint16_t UnitsSize = GetUnitsSize();
 	for (size_t i = 0; i < UnitsSize; i++)
 		GetRoss()->GetUnits()[GetUnitNo(i)].m_bSelected = Value;
 
@@ -538,7 +538,7 @@ void CWordList::OnDeselectAllWords()
 
 void CWordList::OnInvertAllWords()
 {
-	WORD UnitsSize = GetUnitsSize();
+	uint16_t UnitsSize = GetUnitsSize();
 	for (size_t i = 0; i < UnitsSize; i++)
 	{
 		bool R = !GetRoss()->GetUnits()[GetUnitNo(i)].m_bSelected;
@@ -566,11 +566,11 @@ void CWordList::SetCursor(int i)
 }
 
 struct LessByUnitNo {
-	bool operator() (const CIndex& C1, const WORD& UnitNo)  const
+	bool operator() (const CIndex& C1, const uint16_t& UnitNo)  const
 	{
 		return C1.UnitNo < UnitNo;
 	};
-	bool operator() (const WORD& UnitNo, const CIndex& C2)  const
+	bool operator() (const uint16_t& UnitNo, const CIndex& C2)  const
 	{
 		return UnitNo < C2.UnitNo;
 	};
@@ -590,8 +590,8 @@ void CWordList::OnChangeLemmaLocator()
 	UpdateData(TRUE);
 	if (!GetDocument()->IsThesRoss())
 	{
-		WORD i = GetRoss()->UnitsLowerBound((const char*)m_LemmaLocator);
-		WORD k = lower_bound(m_Index.begin(), m_Index.end(), i, LessByUnitNo()) - m_Index.begin();
+		uint16_t i = GetRoss()->UnitsLowerBound((const char*)m_LemmaLocator);
+		uint16_t k = lower_bound(m_Index.begin(), m_Index.end(), i, LessByUnitNo()) - m_Index.begin();
 		SetCursor(k);
 	}
 	else
@@ -611,7 +611,7 @@ void CWordList::OnWordlistDel()
 	// TODO: Add your control notification handler code here
 	if (!GlobalPocketAndArticleDocTempalteAreEmpty(GetDocument())) return;
 
-	WORD UnitNo;
+	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
 	CString S;
 	S.Format("Delete entry %s%i ?", GetEntryStr(UnitNo).c_str(), GetRoss()->GetUnitMeanNum(UnitNo));
@@ -637,7 +637,7 @@ void CWordList::OnSetFilter()
 void CWordList::OnSetSelectedButton()
 {
 	// TODO: Add your control notification handler code here
-	WORD UnitNo;
+	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
 	bool b = GetRoss()->GetUnits()[UnitNo].m_bSelected;
 	GetRoss()->GetUnits()[UnitNo].m_bSelected = !b;
@@ -652,7 +652,7 @@ void CWordList::OnWordlistArticleBtn()
 	// получения ссылки на текущуь словарную статью
 	try
 	{
-		WORD UnitNo;
+		uint16_t UnitNo;
 		if (!GetSelectedUnitNo(UnitNo)) return;
 		GlobalOpenArticle(GetDocument(), UnitNo);
 	}
@@ -709,7 +709,7 @@ void CWordList::OnSaveRossToTxt()
 	SaveRossToTxt(D.GetPathName());
 };
 
-CDocument* CWordList::FindArticle(WORD UnitNo)
+CDocument* CWordList::FindArticle(uint16_t UnitNo)
 {
 	CDocTemplate* templ = GetRossArticleTemplate();
 	POSITION pos = templ->GetFirstDocPosition();
@@ -731,7 +731,7 @@ CDocument* CWordList::FindArticle(WORD UnitNo)
 void CWordList::OnSearchByArticle()
 {
 	CWaitCursor C;
-	WORD UnitNo;
+	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
 	std::vector<CRossPocketItem> UnitNos;
 
@@ -882,7 +882,7 @@ void CWordList::OnChangeTitle()
 {
 	if (!GlobalPocketAndArticleDocTempalteAreEmpty(GetDocument())) return;
 
-	WORD UnitNo;
+	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
 	CString UnitStr = GetRoss()->GetEntryStr(UnitNo).c_str();
 	int i = GetRoss()->LocateUnit((const char*)UnitStr, 2);
@@ -913,7 +913,7 @@ void CWordList::OnChangeTitle()
 
 void CWordList::OnComments()
 {
-	WORD UnitNo;
+	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
 	if (GetDocument()->m_ReadOnly) return;
 
@@ -945,7 +945,7 @@ void CWordList::OnMenuitem32788()
 	GlobalOpenHierarchy(GetDocument(), SemRel);
 }
 
-void CWordList::BuildVals(std::vector<Valency>& Vals, WORD UnitNo)
+void CWordList::BuildVals(std::vector<Valency>& Vals, uint16_t UnitNo)
 {
 	Vals.clear();
 	if (GetRoss()->IsEmptyArticle(UnitNo)) return;
@@ -1236,7 +1236,7 @@ void CWordList::OnArticleAppend()
 {
 	try
 	{
-		WORD MainUnitNo;
+		uint16_t MainUnitNo;
 		if (!GetSelectedUnitNo(MainUnitNo)) return;
 
 		CTempArticle A1;
@@ -1252,7 +1252,7 @@ void CWordList::OnArticleAppend()
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
-			WORD UnitNo = GetUnitNo(i);
+			uint16_t UnitNo = GetUnitNo(i);
 			if (MainUnitNo == UnitNo) continue;
 			A2.ReadFromDictionary(UnitNo, false, false);
 
@@ -1297,7 +1297,7 @@ void CWordList::OnDelAllSelected()
 
 		for (int i = 0; i < UnitNos.size(); i++)
 		{
-			WORD UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr, UnitNos[i].MeanNum);
+			uint16_t UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr, UnitNos[i].MeanNum);
 			GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
 
 		};
@@ -1466,7 +1466,7 @@ void CWordList::OnSelectDownward()
 
 	for (size_t i = m_WordList.GetNextSelectedItem(pos); i < m_WordList.GetItemCount(); i++)
 	{
-		WORD UnitNo = GetUnitNo(i);
+		uint16_t UnitNo = GetUnitNo(i);
 		GetRoss()->GetUnits()[UnitNo].m_bSelected = true;
 	};
 	Update();
@@ -1495,7 +1495,7 @@ void CWordList::OnEmptyArticles()
 
 		for (int i = 0; i < UnitNos.size(); i++)
 		{
-			WORD UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr, UnitNos[i].MeanNum);
+			uint16_t UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr, UnitNos[i].MeanNum);
 			GetRoss()->ClearUnit(UnitNo);
 
 		};
@@ -1566,7 +1566,7 @@ void CWordList::OnFindWrongRefs()
 void CWordList::UpdateCurrentPos()
 {
 	POSITION pos = m_WordList.GetFirstSelectedItemPosition();
-	WORD UnitNo;
+	uint16_t UnitNo;
 	if (pos != 0)
 	{
 		UnitNo = m_WordList.GetNextSelectedItem(pos);

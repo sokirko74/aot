@@ -34,7 +34,7 @@ struct CLexicalFunctionField {
 	// номер значения для m_Lemma
 	char			m_MeanNum;
 	// номер словарной статьи в словаре для <m_Lemma,m_MeanNum>
-	WORD			m_LexFunctWordUnitNo;
+	uint16_t			m_LexFunctWordUnitNo;
 	// предлог, с помощью которого слово-параметр управляет словом-ситуацией 
 	CRossInterp		m_Prep;
 
@@ -222,19 +222,19 @@ public:
    // проверят все значения поля
    bool					HasFullFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0) const;
    void					GetFieldValues(std::string strFieldName, long UnitNo, std::vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
-   bool					HasItem (WORD UnitNo, const std::string FieldStr, const std::string ItemStr, const std::string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
+   bool					HasItem (uint16_t UnitNo, const std::string FieldStr, const std::string ItemStr, const std::string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
    
 
 
-	bool				HasCX (WORD UnitNo, const std::string CX, const std::string DomStr) const;
-	WORD				LocateUnit (const char* UnitStr, BYTE MeanNum) const;
+	bool				HasCX (uint16_t UnitNo, const std::string CX, const std::string DomStr) const;
+	uint16_t				LocateUnit (const char* UnitStr, BYTE MeanNum) const;
 	const char*			GetDomItemStrInner (long ItemNo) const;
 	// читает поле AUX, возвращает номер главного слова
 	long				GetDopFields(long UnitNo, std::vector<CDopField>& DopFields) const;
 	bool				GetVal(long UnitNo, CValency& V) const;
 	void				GetLexFuncts (size_t UnitNo,  std::vector<CLexicalFunctionField>& OutVector, DictTypeEnum type = NoneRoss, const CRossHolder* pRossHolderObor = NULL) const;
 	// по словарной статье предлога или союза выдает семантическое отношение, которое они выражает
-	CValency			GetSemRelOfPrepOrConj(WORD UnitNo) const;
+	CValency			GetSemRelOfPrepOrConj(uint16_t UnitNo) const;
 	long				GetSemMainWordFromArticle (long UnitNo) const;
 
 	// проверяет, что ItemNo принадлежит домену Д_ГГ_уточн

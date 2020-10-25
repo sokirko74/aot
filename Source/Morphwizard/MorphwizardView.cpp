@@ -896,7 +896,7 @@ try {
 					}
 					else
 					{
-						WORD SessionNo = GetWizard()->RegisterSession(P.m_Session);
+						uint16_t SessionNo = GetWizard()->RegisterSession(P.m_Session);
 						GetWizard()->add_lemma(P.m_SlfStr, P.m_TypeGrammemsStr, P.m_PrefixesStr, line_no_err, SessionNo);
 					};
 
@@ -1161,7 +1161,7 @@ void CMorphwizardView::OnToolsSetParaNo()
 		return;
 	};
 	POSITION pos = m_FoundList.GetFirstSelectedItemPosition();		
-	WORD ParadigmNo = 0;
+	uint16_t ParadigmNo = 0;
 	if(pos != 0)
 	{
 		size_t index = m_FoundList.GetNextSelectedItem(pos);

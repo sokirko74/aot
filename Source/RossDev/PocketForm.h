@@ -11,14 +11,14 @@
 // CPocketForm dialog
 struct CRossPocketItem 
 {
-	WORD	 m_UnitNo;
+	uint16_t	 m_UnitNo;
 	CRossDoc* m_pRossDoc;
 	CRossPocketItem()
 	{
 	   m_UnitNo = ErrUnitNo;
 	   m_pRossDoc = 0;;
     };
-	CRossPocketItem(WORD	 UnitNo, CRossDoc* pRossDoc)
+	CRossPocketItem(uint16_t	 UnitNo, CRossDoc* pRossDoc)
 	{
 	   m_UnitNo = UnitNo;
 	   m_pRossDoc = pRossDoc;
@@ -34,7 +34,7 @@ public:
 
 	std::vector<CRossPocketItem> m_PocketItems;
 	CString m_Title;
-	bool GetSelectedUnitNo (WORD& UnitNo)
+	bool GetSelectedUnitNo (uint16_t& UnitNo)
 	{
  		POSITION pos = m_WordList.GetFirstSelectedItemPosition();
 

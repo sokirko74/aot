@@ -22,8 +22,8 @@ const int MaxNumDom = 10;
 
 struct CRossDevTextField
 {
-	WORD  StartPosition;
-	WORD  EndPosition;
+	uint16_t  StartPosition;
+	uint16_t  EndPosition;
 	uint32_t StartLine;
 	uint32_t EndLine;
 

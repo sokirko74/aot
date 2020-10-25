@@ -60,13 +60,13 @@ struct CAccentModel
 //----------------------------------------------------------------------------
 
 const size_t CommonAncodeSize = 2;
-const WORD UnknownParadigmNo = 0xffff-1;
-const WORD UnknownAccentModelNo = 0xffff-1;
+const uint16_t UnknownParadigmNo = 0xffff-1;
+const uint16_t UnknownAccentModelNo = 0xffff-1;
 
 struct CLemmaInfo
 {
-	WORD	m_FlexiaModelNo;
-	WORD	m_AccentModelNo;
+	uint16_t	m_FlexiaModelNo;
+	uint16_t	m_AccentModelNo;
 	char	m_CommonAncode[CommonAncodeSize];
 
 	CLemmaInfo()

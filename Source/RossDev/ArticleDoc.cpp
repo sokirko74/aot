@@ -179,7 +179,7 @@ void _AfxFontConvertLOG2OLE(CDC& dc, LOGFONT& from, COleFont& to)
 
 
 
-BOOL CArticleDoc::OpenArticle(WORD  UnitNo, CRossDoc* pRossDoc)
+BOOL CArticleDoc::OpenArticle(uint16_t  UnitNo, CRossDoc* pRossDoc)
 {
 	m_UnitNo = UnitNo;
 	m_pRossDoc = pRossDoc;

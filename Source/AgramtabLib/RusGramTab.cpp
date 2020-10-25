@@ -132,7 +132,7 @@ const char* CRusGramTab::GetRegistryString() const
 
 
 
-BYTE	CRusGramTab::GetPartOfSpeechesCount() const
+part_of_speech_t	CRusGramTab::GetPartOfSpeechesCount() const
 {
 	return RUSSIAN_PART_OF_SPEECH_COUNT;
 };
@@ -142,7 +142,7 @@ size_t CRusGramTab::GetMaxGrmCount() const
 	return rMaxGrmCount;
 }
 
-const char* CRusGramTab::GetPartOfSpeechStr(BYTE i) const
+const char* CRusGramTab::GetPartOfSpeechStr(part_of_speech_t i) const
 {
 	return RussianPartOfSpeech[i].c_str();
 };
@@ -172,7 +172,7 @@ size_t CRusGramTab::s2i(const char* s)  const
 	return  (unsigned char)s[0] * 0x100 + (unsigned char)s[1] - rStartUp;
 };
 
-std::string CRusGramTab::i2s(WORD i) const
+std::string CRusGramTab::i2s(uint16_t i) const
 {
 	i += rStartUp;
 	char res[3];
@@ -185,7 +185,7 @@ std::string CRusGramTab::i2s(WORD i) const
 
 
 
-bool CRusGramTab::ProcessPOSAndGrammems(const char* tab_str, BYTE& PartOfSpeech, uint64_t& grammems) const
+bool CRusGramTab::ProcessPOSAndGrammems(const char* tab_str, part_of_speech_t& PartOfSpeech, grammems_mask_t& grammems) const
 {
 	if (!CAgramtab::ProcessPOSAndGrammems(tab_str, PartOfSpeech, grammems)) return false;
 
@@ -255,8 +255,8 @@ inline bool PersonNumber(const CAgramtabLine* l1, const CAgramtabLine* l2)
 // Стандартное согласование между подлежащим и сказуемым
 inline bool SubjectPredicate(const CAgramtabLine* subj_l, const CAgramtabLine* verb_l)
 {
-	const uint64_t& subj = subj_l->m_Grammems;
-	const uint64_t& verb = verb_l->m_Grammems;
+	const grammems_mask_t& subj = subj_l->m_Grammems;
+	const grammems_mask_t& verb = verb_l->m_Grammems;
 
 	if (!(subj & _QM(rNominativ))
 		)
@@ -321,8 +321,8 @@ inline bool Case(const CAgramtabLine* l1, const CAgramtabLine* l2)
 // если существительное одушевленное
 bool GenderNumberCaseAnimRussian(const CAgramtabLine* l1, const CAgramtabLine* l2)
 {
-	const uint64_t& gram_noun = l1->m_Grammems;
-	const uint64_t& gram_adj = l2->m_Grammems;
+	const grammems_mask_t& gram_noun = l1->m_Grammems;
+	const grammems_mask_t& gram_adj = l2->m_Grammems;
 
 	return			((rAllCases & gram_noun & gram_adj) > 0)
 		&& ((rAllNumbers & gram_noun & gram_adj) > 0)
@@ -339,8 +339,8 @@ bool GenderNumberCaseAnimRussian(const CAgramtabLine* l1, const CAgramtabLine* l
 // если существительное неодушевленное
 bool GenderNumberCaseNotAnimRussian(const CAgramtabLine* l1, const CAgramtabLine* l2)
 {
-	const uint64_t& gram_noun = l1->m_Grammems;
-	const uint64_t& gram_adj = l2->m_Grammems;
+	const grammems_mask_t& gram_noun = l1->m_Grammems;
+	const grammems_mask_t& gram_adj = l2->m_Grammems;
 
 	return			((rAllCases & gram_noun & gram_adj) > 0)
 		&& ((rAllNumbers & gram_noun & gram_adj) > 0)
@@ -358,8 +358,8 @@ bool GenderNumberCaseNotAnimRussian(const CAgramtabLine* l1, const CAgramtabLine
 //  (для местоимений, например, "все это было хорошо")
 bool GenderNumberCaseRussian(const CAgramtabLine* l1, const CAgramtabLine* l2)
 {
-	const uint64_t& gram_noun = l1->m_Grammems;
-	const uint64_t& gram_adj = l2->m_Grammems;
+	const grammems_mask_t& gram_noun = l1->m_Grammems;
+	const grammems_mask_t& gram_adj = l2->m_Grammems;
 
 	return			((rAllCases & gram_noun & gram_adj) > 0)
 		&& ((rAllNumbers & gram_noun & gram_adj) > 0)
@@ -371,8 +371,8 @@ bool GenderNumberCaseRussian(const CAgramtabLine* l1, const CAgramtabLine* l2)
 
 bool FiniteFormCoordRussian(const CAgramtabLine* l1, const CAgramtabLine* l2)
 {
-	const uint64_t& verb1 = l1->m_Grammems;
-	const uint64_t& verb2 = l2->m_Grammems;
+	const grammems_mask_t& verb1 = l1->m_Grammems;
+	const grammems_mask_t& verb2 = l2->m_Grammems;
 
 	// жил и был
 	if (verb1 & verb2 & rAllNumbers)
@@ -411,7 +411,7 @@ bool FiniteFormCoordRussian(const CAgramtabLine* l1, const CAgramtabLine* l2)
 + примерить его цилиндр;
 + все это
 */
-uint64_t CRusGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const
+grammems_mask_t CRusGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const
 {
 	if ((common_gram_code_noun == 0)
 		|| !strcmp(common_gram_code_noun, "??")
@@ -448,9 +448,9 @@ bool CRusGramTab::ConflictGenderNumber(const char* gram_code1, const char* gram_
 {
 	return  Gleiche(GenderNumber0, gram_code1, gram_code2) == 0;
 }
-bool CRusGramTab::ConflictGrammems(uint64_t g1, uint64_t g2, uint64_t breaks) const
+bool CRusGramTab::ConflictGrammems(grammems_mask_t g1, grammems_mask_t g2, grammems_mask_t breaks) const
 {
-	uint64_t BR[] = { rAllCases, rAllNumbers, rAllGenders };
+	grammems_mask_t BR[] = { rAllCases, rAllNumbers, rAllGenders };
 	bool R = true;
 	for (int i = 0; i < (sizeof BR) / (sizeof BR[0]) && R; i++)
 	{
@@ -509,7 +509,7 @@ const char* CRusGramTab::GetClauseNameByType(long type) const
 /*
 	истина для предикативных типов клауз.
 */
-bool CRusGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
+bool CRusGramTab::IsStrongClauseRoot(const part_of_speech_mask_t poses) const
 {
 	return		(poses & (1 << VERB))
 		|| (poses & (1 << ADVERB_PARTICIPLE)) // субъект деепричастия  совпадлает с субъектом
@@ -549,7 +549,7 @@ bool CRusGramTab::is_small_number(const char* lemma) const
 }
 
 
-bool CRusGramTab::IsMorphNoun(poses_mask_t poses)  const
+bool CRusGramTab::IsMorphNoun(part_of_speech_mask_t poses)  const
 {
 	return  (poses & (1 << NOUN));
 };
@@ -557,31 +557,31 @@ bool CRusGramTab::IsMorphNoun(poses_mask_t poses)  const
 
 
 
-bool CRusGramTab::is_morph_adj(poses_mask_t poses) const
+bool CRusGramTab::is_morph_adj(part_of_speech_mask_t poses) const
 {
 	return		(poses & (1 << ADJ_FULL))
 		|| (poses & (1 << ADJ_SHORT));
 };
 
-bool CRusGramTab::is_morph_participle(poses_mask_t poses) const
+bool CRusGramTab::is_morph_participle(part_of_speech_mask_t poses) const
 {
 	return  (poses & (1 << PARTICIPLE))
 		|| (poses & (1 << PARTICIPLE_SHORT));
 };
 
-bool CRusGramTab::is_morph_pronoun(poses_mask_t poses) const
+bool CRusGramTab::is_morph_pronoun(part_of_speech_mask_t poses) const
 {
 	return  (poses & (1 << PRONOUN)) != 0;
 };
 
 
-bool CRusGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
+bool CRusGramTab::is_morph_pronoun_adjective(part_of_speech_mask_t poses) const
 {
 	return  (poses & (1 << PRONOUN_P)) != 0;
 };
 
 
-bool CRusGramTab::is_left_noun_modifier(poses_mask_t poses, uint64_t grammems) const
+bool CRusGramTab::is_left_noun_modifier(part_of_speech_mask_t poses, grammems_mask_t grammems) const
 {
 	return     (poses & (1 << ADJ_FULL))
 		|| (poses & (1 << NUMERAL_P))
@@ -590,12 +590,12 @@ bool CRusGramTab::is_left_noun_modifier(poses_mask_t poses, uint64_t grammems) c
 }
 
 
-bool CRusGramTab::is_numeral(poses_mask_t poses) const
+bool CRusGramTab::is_numeral(part_of_speech_mask_t poses) const
 {
 	return  (poses & (1 << NUMERAL)) != 0;
 };
 
-bool CRusGramTab::is_verb_form(poses_mask_t poses) const
+bool CRusGramTab::is_verb_form(part_of_speech_mask_t poses) const
 {
 	return     is_morph_participle(poses)
 		|| (poses & (1 << VERB))
@@ -605,24 +605,24 @@ bool CRusGramTab::is_verb_form(poses_mask_t poses) const
 
 
 
-bool CRusGramTab::is_infinitive(poses_mask_t poses) const
+bool CRusGramTab::is_infinitive(part_of_speech_mask_t poses) const
 {
 	return (poses & (1 << INFINITIVE)) != 0;
 }
 
-bool CRusGramTab::is_morph_predk(poses_mask_t poses) const
+bool CRusGramTab::is_morph_predk(part_of_speech_mask_t poses) const
 {
 	return (poses & (1 << PREDK)) ||
 		(poses & (1 << PRONOUN_PREDK));
 }
 
-bool CRusGramTab::is_morph_adv(poses_mask_t poses) const
+bool CRusGramTab::is_morph_adv(part_of_speech_mask_t poses) const
 {
 	return (poses & (1 << ADV)) != 0;
 }
 
 
-bool CRusGramTab::is_morph_personal_pronoun(poses_mask_t poses, uint64_t grammems) const
+bool CRusGramTab::is_morph_personal_pronoun(part_of_speech_mask_t poses, grammems_mask_t grammems) const
 {
 	return		 (poses & (1 << PRONOUN)) != 0
 		&& (grammems & (_QM(rFirstPerson) | _QM(rSecondPerson) | _QM(rThirdPerson)));
@@ -633,7 +633,7 @@ bool CRusGramTab::is_morph_personal_pronoun(poses_mask_t poses, uint64_t grammem
 const size_t  ParticleCount = 8;
 const static std::string Particles[ParticleCount] = { _R("ЛИ"),_R("ЖЕ"),_R("БЫ"),_R("УЖ"),_R("ТОЛЬКО"), _R("Ж"), _R("Б"), _R("ЛЬ") };
 
-bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
+bool CRusGramTab::IsSimpleParticle(const char* lemma, part_of_speech_mask_t poses) const
 {
 	if (!lemma) return false;
 	if (!(poses & (1 << PARTICLE))) return false;
@@ -676,7 +676,7 @@ bool CRusGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 
 	1 марта 2001 года, Сокирко
 */
-bool CRusGramTab::IsSynNoun(poses_mask_t poses, const char* lemma) const
+bool CRusGramTab::IsSynNoun(part_of_speech_mask_t poses, const char* lemma) const
 {
 	return   IsMorphNoun(poses)
 		|| (poses & (1 << PRONOUN))
@@ -706,12 +706,12 @@ bool CRusGramTab::IsStandardParamAbbr(const char* WordStrUpper) const
 }
 
 
-bool CRusGramTab::is_morph_article(poses_mask_t poses)  const
+bool CRusGramTab::is_morph_article(part_of_speech_mask_t poses)  const
 {
 	return  false;
 };
 
-bool CRusGramTab::FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, uint64_t& grammems) const
+bool CRusGramTab::FilterNounNumeral(std::string& gcNoun, const std::string& gcNum, grammems_mask_t& grammems) const
 {
 	if (gcNoun.length() == 2 || !(grammems & rAllCases)) return false;
 	GleicheAncode1(CaseNumberGender0, gcNum,
@@ -727,11 +727,11 @@ std::string RussianCaseNumberGender(const CAgramtab* pGramTab, const std::string
 	return "";
 };
 
-uint64_t CRusGramTab::ChangeGleicheAncode1(GrammemCompare CompareFunc, const std::string& wordGramCodes, std::string& groupGramCodes, const uint64_t wordGrammems) const
+grammems_mask_t CRusGramTab::ChangeGleicheAncode1(GrammemCompare CompareFunc, const std::string& wordGramCodes, std::string& groupGramCodes, const grammems_mask_t wordGrammems) const
 {
 	groupGramCodes = GleicheAncode1(CompareFunc, FilterGramCodes(wordGramCodes, ~_QM(rIndeclinable), 0), groupGramCodes);
 	if (groupGramCodes == "") { return 0; }
-	const uint64_t gramFilter = rAllCases | rAllGenders | rAllTimes | rAllPersons | rAllAnimative;
+	const grammems_mask_t gramFilter = rAllCases | rAllGenders | rAllTimes | rAllPersons | rAllAnimative;
 	return 	wordGrammems & ~(gramFilter) | GetAllGrammems(groupGramCodes.c_str());
 }
 

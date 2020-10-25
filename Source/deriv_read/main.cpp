@@ -74,7 +74,7 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 	for(int i = 0; i < rec_vec.size(); i++){
 		rec &r = rec_vec[i];
 		//out << r.w1.c_str() << "\t" << r.w2.c_str() << '\t';
-		UINT index = std::lower_bound(rest_vec.begin(), rest_vec.end(), r.r) - rest_vec.begin();
+		uint32_t index = std::lower_bound(rest_vec.begin(), rest_vec.end(), r.r) - rest_vec.begin();
 		//out << index << endl;
 
 		DwordVector id1, id2;
@@ -82,9 +82,9 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 		MorphHolderRus.string_to_ids(r.w2.c_str(), id2, true);
 		for(int i1 = 0; i1 < id1.size(); i1++)
 			for(int i2 = 0; i2 < id2.size(); i2++){
-				out.write((char*)&(id1[i1]), sizeof(UINT));
-				out.write((char*)&(id2[i2]), sizeof(UINT));
-				out.write((char*)&index, sizeof(UINT));
+				out.write((char*)&(id1[i1]), sizeof(uint32_t));
+				out.write((char*)&(id2[i2]), sizeof(uint32_t));
+				out.write((char*)&index, sizeof(uint32_t));
 				pair_count++;
 			//	cout << r.w1.c_str() << " " << r.w2.c_str() << " "
 			//		<< id1[i1] << " " << id2[i2] << endl;
@@ -111,9 +111,9 @@ index -- индекс афикса.
 */
 class AfixDerivDict{
 	struct deriv_pair{
-		UINT id1, id2;
-		UINT index;
-		deriv_pair(UINT a, UINT b, UINT i = 0)
+		uint32_t id1, id2;
+		uint32_t index;
+		deriv_pair(uint32_t a, uint32_t b, uint32_t i = 0)
 			:id1(a),  id2(b), index(i){}
 		struct Less1{
 			bool operator()(const deriv_pair &p1, const deriv_pair &p2) const{
@@ -134,7 +134,7 @@ protected:
 public:
 	//! read the database
 	AfixDerivDict(std::istream &in){
-		UINT pref_size;
+		uint32_t pref_size;
 		in >> pref_size;
 		pref.reserve(pref_size);
 		int i;
@@ -145,10 +145,10 @@ public:
 		}
 		while(in.get() != 0);
 		while(true){
-			UINT id1, id2, index;
-			in.read((char*)&id1, sizeof(UINT));
-			in.read((char*)&id2, sizeof(UINT));
-			in.read((char*)&index, sizeof(UINT));
+			uint32_t id1, id2, index;
+			in.read((char*)&id1, sizeof(uint32_t));
+			in.read((char*)&id2, sizeof(uint32_t));
+			in.read((char*)&index, sizeof(uint32_t));
 			if(in.eof()) break;
 			vec1.push_back(deriv_pair(id1, id2, index));
 		}
@@ -158,7 +158,7 @@ public:
 	}
 
 	//! find target by source. Return number of found targets.
-	size_t SourceToTarget(UINT id, DwordVector &ids, DwordVector &afixes){
+	size_t SourceToTarget(uint32_t id, DwordVector &ids, DwordVector &afixes){
 		std::pair<Iter, Iter> range = std::equal_range
 			(vec1.begin(), vec1.end(), deriv_pair(id, 0), deriv_pair::Less1());
 
@@ -170,7 +170,7 @@ public:
 	}
 
 	//! find source by target. Return number of found sources.
-	size_t TargetToSource(UINT id, DwordVector &ids, DwordVector &afixes){
+	size_t TargetToSource(uint32_t id, DwordVector &ids, DwordVector &afixes){
 		std::pair<Iter, Iter> range = std::equal_range
 			(vec2.begin(), vec2.end(), deriv_pair(0, id), deriv_pair::Less2());
 		for(Iter it = range.first; it != range.second; ++it){
@@ -228,7 +228,7 @@ public:
 	}
 };
 
-void create_nest(UINT id, std::set<UINT> &id_set, AfixDerivDict &d1, AfixDerivDict &d2)
+void create_nest(uint32_t id, std::set<uint32_t> &id_set, AfixDerivDict &d1, AfixDerivDict &d2)
 {
 	size_t size = id_set.size();
 	id_set.insert(id);

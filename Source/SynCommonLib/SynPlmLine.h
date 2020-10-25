@@ -63,7 +63,7 @@ public:
     void InitSynPlmLine (const CSynWord*, const CSynHomonym*);
 
 	// an ID of oborot for disruptive conjunction which should be inited by CFormatCaller::create_disrupt_conj_group
-	WORD					m_DisruptOborotId;
+	uint16_t					m_DisruptOborotId;
 
 	// все падежи из возможных, которыми управляет предлог, вошедший  в предложную группу
 	uint64_t					m_FoundPrepDependCases;
@@ -90,7 +90,7 @@ public:
 	bool	HasFlag (PlmLineFlagEnum Flag)  const;
 	uint64_t	GetGrammems () const;
 	size_t	GetPoses () const;
-    bool    HasPOS (BYTE POS) const;
+    bool    HasPOS (part_of_speech_t POS) const;
 
     void	SetFlag (PlmLineFlagEnum PlmLineFlag);
 	void	SetGrammems (uint64_t value);

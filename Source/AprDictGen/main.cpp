@@ -33,7 +33,7 @@ bool init_dicts()
 
 
 
-void make_bin(std::string &r, std::string &rc, std::string &e, std::string &ec, UINT d[5], std::ostream &out)
+void make_bin(std::string &r, std::string &rc, std::string &e, std::string &ec, uint32_t d[5], std::ostream &out)
 {
 	DwordVector r_id = MorphHolderRus.GetParadigmIdsByNormAndAncode(r, rc);
 	DwordVector e_id = MorphHolderEng.GetParadigmIdsByNormAndAncode(e, ec);
@@ -47,8 +47,8 @@ void make_bin(std::string &r, std::string &rc, std::string &e, std::string &ec, 
 	//		printf ("%s %s is not found in the morph. dictionary!\n",e.c_str(), ec.c_str());
 	for(int i = 0; i < r_id.size(); i++){
 		for(int j = 0; j < e_id.size(); j++){
-			out.write((char*)&(r_id[i]), sizeof(UINT));
-			out.write((char*)&(e_id[j]), sizeof(UINT));
+			out.write((char*)&(r_id[i]), sizeof(uint32_t));
+			out.write((char*)&(e_id[j]), sizeof(uint32_t));
 			unsigned char D[5];
 			for(int k = 0; k < 5; k++) D[k] = d[k];
 			out.write((char*)D, 5);
@@ -116,7 +116,7 @@ int main(int argc, char ** argv)
 				std::string rc = tok.next_token();
 				std::string e = tok.next_token();
 				std::string ec = tok.next_token();
-				UINT d[5];
+				uint32_t d[5];
 				if (sscanf(tok.get_rest(),"%i %i %i %i %i", &d[0], &d[1], &d[2], &d[3], &d[4]) != 5)
 				{
 					fprintf (stderr," Bad format at line %s (line no = %i)\n", buffer, LineNo);

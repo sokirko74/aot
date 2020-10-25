@@ -11,23 +11,23 @@
 
 
 
-const WORD stSpace		 = 1;
-const WORD stEOLN		 = 2;
-const WORD stGrouped  = 4;
-const WORD stAbbreviation       = 8;
-const WORD stNotPrint   = 16;
-const WORD stParagraphChar  = 64;
-const WORD stEnglishName = 128;
+const uint16_t stSpace		 = 1;
+const uint16_t stEOLN		 = 2;
+const uint16_t stGrouped  = 4;
+const uint16_t stAbbreviation       = 8;
+const uint16_t stNotPrint   = 16;
+const uint16_t stParagraphChar  = 64;
+const uint16_t stEnglishName = 128;
 
-const WORD stKeyModifier = 256;
-const WORD stPunct     = 512;
-const WORD stElectronicAddress  = 1024;
+const uint16_t stKeyModifier = 256;
+const uint16_t stPunct     = 512;
+const uint16_t stElectronicAddress  = 1024;
 
-const WORD stTextAreaEnd      = 2048;
-const WORD stSingleSpaceAfter = 4096;
-const WORD stIdent       = 8192 ;
-const WORD stParagraphTag      = 8192*2 ;
-const WORD stPageBreak      = 8192*4 ;
+const uint16_t stTextAreaEnd      = 2048;
+const uint16_t stSingleSpaceAfter = 4096;
+const uint16_t stIdent       = 8192 ;
+const uint16_t stParagraphTag      = 8192*2 ;
+const uint16_t stPageBreak      = 8192*4 ;
 
 
 class CGraphmatFile;
@@ -35,10 +35,10 @@ class CGraphmatFile;
 
 struct  CGraphemOborot {
 	std::string m_UnitStr;
-	WORD m_UnitNo;
+	uint16_t m_UnitNo;
 	// статья имеет RESTR = fixed !
 	bool m_bFixedFet;		
-	std::vector<WORD> m_TokenIds;
+	std::vector<uint16_t> m_TokenIds;
 
 	bool operator == (const std::string& s)
 	{
@@ -64,7 +64,7 @@ class CGraLine
 	// длина строки unit
     BYTE		ulen;             
 	uint64_t		m_Descriptors;
-    WORD		m_Status;
+    uint16_t		m_Status;
 	uint32_t		m_InputOffset;
 
 	size_t		LengthUntilDelimiters (const char *s, const CGraphmatFile* G);
@@ -122,7 +122,7 @@ public:
 	void DelDes(Descriptors d);
 	void SetDes(Descriptors d);  
 	void MakeSpaces(size_t SpacesLength);
-	void AddStatus(WORD add_state);
+	void AddStatus(uint16_t add_state);
 	void AddLength(const CGraLine& L);
 	void SetToken(const char*);
 	size_t		ReadWord (size_t Offset, const CGraphmatFile* G, uint32_t& PageNumber);

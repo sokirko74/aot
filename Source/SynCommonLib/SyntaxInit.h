@@ -29,7 +29,7 @@ struct SDatItems {
 
 
 class CSyntaxOpt {
-    std::unique_ptr<CThesaurus>& GetThesPointerByThesId(UINT ThesId);
+    std::unique_ptr<CThesaurus>& GetThesPointerByThesId(uint32_t ThesId);
 
 protected:
     CAgramtab* m_piGramTab;
@@ -96,7 +96,7 @@ public:
 
     bool ReadListFile(const std::string& FileName, StringHashSet& C);
 
-    const CThesaurus *GetThesByThesId(UINT ThesId) const;
+    const CThesaurus *GetThesByThesId(uint32_t ThesId) const;
 
     void OutputErrorString(std::string strMsg) const;
 

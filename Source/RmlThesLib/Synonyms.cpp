@@ -18,13 +18,17 @@ inline bool IsLessByConcept(const CSynonym& _X1, const CSynonym& _X2)
 
 
 
-void  CThesaurus::GetConceptsByTextEntryId(long TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const
+void  CThesaurus::GetConceptsByTextEntryId(uint32_t TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const
 {
 	Concepts.clear();
 	CSynonym S;
 	S.m_TextEntryId = TextEntryId;
 	for (
-		std::vector<CSynonym>::const_iterator It = lower_bound(m_SynonymsByTextEntry.begin(), m_SynonymsByTextEntry.end(), S, IsLessByTextEntry);
+		std::vector<CSynonym>::const_iterator It = lower_bound(
+			m_SynonymsByTextEntry.begin(), 
+			m_SynonymsByTextEntry.end(), 
+			S, 
+			IsLessByTextEntry);
 		!(It == m_SynonymsByTextEntry.end()) && (It->m_TextEntryId == TextEntryId);
 		It++
 		)
@@ -33,7 +37,7 @@ void  CThesaurus::GetConceptsByTextEntryId(long TextEntryId, std::vector<thesaur
 	}
 };
 
-void  CThesaurus::GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<long>& TextEntries) const
+void  CThesaurus::GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<uint32_t>& TextEntries) const
 {
 	TextEntries.clear();
 	CSynonym S;

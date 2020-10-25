@@ -19,7 +19,7 @@ struct asp_pair
 
 	asp_pair()		{};
 
-	asp_pair(UINT n, UINT p)
+	asp_pair(uint32_t n, uint32_t p)
 		:NonPerf(n), Perf(p){}
 	struct Less1{
 		bool operator()(const asp_pair &p1, const asp_pair &p2) const{
@@ -51,9 +51,9 @@ public:
 	CAspPairDict();
 	bool Load();
 	//!Get Perfective verbs by NonPerfective one. Return number of such verbs.
-	size_t nonperf2perf(UINT nonperf, DwordVector &res) const;
+	size_t nonperf2perf(uint32_t nonperf, DwordVector &res) const;
 	//!Get NonPerfective verbs by Perfective one. Return number of such verbs.
-	size_t perf2nonperf(UINT perf, DwordVector &res) const;
+	size_t perf2nonperf(uint32_t perf, DwordVector &res) const;
 
 };
 

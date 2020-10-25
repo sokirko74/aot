@@ -10,7 +10,7 @@ const	uint32_t	AuthorNameSize = 20;
 const	BYTE	MaxNumAct = 7;
 
 // ошибочный номер словарного входа 
-const	WORD	ErrUnitNo  = 65000;
+const	uint16_t	ErrUnitNo  = 65000;
 const	uint32_t	EntryStrSize = 40;
 
 // Исходный материал доменов

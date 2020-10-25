@@ -26,7 +26,7 @@ void export_dict(std::string fileName, std::string folder) {
 	CTempArticle A;
 	A.m_pRoss = &Dict;
 
-	for (WORD i = 0; i < Dict.m_Units.size(); i++)
+	for (uint16_t i = 0; i < Dict.m_Units.size(); i++)
 	{
 		A.ReadFromDictionary(i, true, true);
 		outf << "============\n" << Dict.GetUnitTextHeader(i);

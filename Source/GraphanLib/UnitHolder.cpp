@@ -17,7 +17,7 @@ CUnitHolder::CUnitHolder()
 
 
 
-void CUnitHolder::SetState (size_t LB, size_t HB, WORD state) 
+void CUnitHolder::SetState (size_t LB, size_t HB, uint16_t state) 
 {
 	for (size_t i=LB; i<HB; i++)
 		m_Units[i].AddStatus(state);
@@ -393,7 +393,7 @@ void	CUnitHolder::AddUnit(const CGraLine& NewLine)
 void	CUnitHolder::ClearPairDescriptors(size_t StartLineNo, size_t EndLineNo)
 {
 	for (size_t LineNo=StartLineNo; LineNo<EndLineNo; LineNo++)
-		for (size_t des=0; des<64; des++)
+		for (uint8_t des=0; des<64; des++)
 			if (des != OSentEnd)
 			if (HasDescr(LineNo, des))
 			if (IsFirstMemberOfPairDesciptor((Descriptors)des))

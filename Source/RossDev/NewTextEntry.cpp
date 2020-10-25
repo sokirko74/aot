@@ -71,7 +71,7 @@ LRESULT CNewTextEntry::OnWizardNext()
 	   AfxMessageBox ("The text entry cannot be empty");
 	   return -1;
    };
-   WORD UnitNo = GetRoss()->LocateUnit ((const char*)m_UnitStr,MeanNum);
+   uint16_t UnitNo = GetRoss()->LocateUnit ((const char*)m_UnitStr,MeanNum);
    if (UnitNo  != ErrUnitNo)
    {
 	   if (::MessageBox(0, "An entry with the same name already exists. Add a new sense?", "Message Box", MB_OKCANCEL) != IDOK)

@@ -12,7 +12,7 @@ STDMETHODIMP CComSemNode::get_DictType(idlDictTypeEnum *pVal)
 
 
 
-STDMETHODIMP CComSemNode::get_UnitNo(WORD *pVal)
+STDMETHODIMP CComSemNode::get_UnitNo(uint16_t *pVal)
 {
 	*pVal = m_pNode->GetUnitNo();
 	return S_OK;

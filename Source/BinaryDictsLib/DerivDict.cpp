@@ -7,7 +7,7 @@
 
 bool CDerivDictonary::LoadFromFile(FILE* fp)
 {
-	UINT pref_size;
+	uint32_t pref_size;
 	fscanf (fp, "%i\n",&pref_size);
 	if (pref_size == 0) return false;
 	pref.reserve(pref_size);
@@ -23,10 +23,10 @@ bool CDerivDictonary::LoadFromFile(FILE* fp)
 
 	while(true)
 	{
-		UINT id1, id2, index;
-		fread((char*)&id1, 1, sizeof(UINT), fp);
-		fread((char*)&id2, 1, sizeof(UINT), fp);
-		fread((char*)&index, 1, sizeof(UINT), fp);
+		uint32_t id1, id2, index;
+		fread((char*)&id1, 1, sizeof(uint32_t), fp);
+		fread((char*)&id2, 1, sizeof(uint32_t), fp);
+		fread((char*)&index, 1, sizeof(uint32_t), fp);
 		if(feof(fp)) break;
 		vec1.push_back(deriv_pair(id1, id2, index));
 	}
@@ -36,7 +36,7 @@ bool CDerivDictonary::LoadFromFile(FILE* fp)
 	return true;
 }
 
-size_t CDerivDictonary::SourceToTarget(UINT id, DwordVector &ids, DwordVector &afixes) const
+size_t CDerivDictonary::SourceToTarget(uint32_t id, DwordVector &ids, DwordVector &afixes) const
 {
 	afixes.clear();
 	ids.clear();
@@ -52,7 +52,7 @@ size_t CDerivDictonary::SourceToTarget(UINT id, DwordVector &ids, DwordVector &a
 }
 
 //! find source by target. Return number of found sources.
-size_t CDerivDictonary::TargetToSource(UINT id, DwordVector &ids, DwordVector &afixes) const
+size_t CDerivDictonary::TargetToSource(uint32_t id, DwordVector &ids, DwordVector &afixes) const
 {
 	afixes.clear();
 	ids.clear();

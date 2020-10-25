@@ -38,15 +38,15 @@ public:
 	
 	std::string	GetSrcNorm() const; 
 	// returns the weight of a word form 
-	int		GetHomonymWeightWithForm(WORD pos) const; 
+	int		GetHomonymWeightWithForm(uint16_t pos) const; 
 	// returns the weight of this word 
 	int		GetWordWeight() const;
 
-	std::string	GetAncode(WORD pos) const;
-	std::string	GetWordForm (WORD pos) const;
+	std::string	GetAncode(uint16_t pos) const;
+	std::string	GetWordForm (uint16_t pos) const;
 	std::string	GetSrcAncode() const;
 	int		GetHomonymWeight() const;
-	BYTE	GetAccentedVowel(WORD pos) const;
+	BYTE	GetAccentedVowel(uint16_t pos) const;
 	BYTE	GetSrcAccentedVowel() const;
 	std::string	GetCommonAncode() const;
 	char	GetLemSign() const; 

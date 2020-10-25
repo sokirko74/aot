@@ -282,7 +282,7 @@ int CThesaurus::GetTerminIdBySingleWord(std::string WordStr) const
 	return -1;
 }
 
-thesaurus_concept_set_t CThesaurus::QueryTopConcepts(UINT TextEntryId) const
+thesaurus_concept_set_t CThesaurus::QueryTopConcepts(uint32_t TextEntryId) const
 {
 	std::vector<thesaurus_concept_t> conceptsFromTextEntry;
 	GetConceptsByTextEntryId(TextEntryId, conceptsFromTextEntry);
@@ -328,7 +328,7 @@ thesaurus_termin_set_t CThesaurus::QueryLowerTermins(const std::string& conceptS
 	bool IsEnglish = lang == morphEnglish;
 	for (auto i : lowerConcepts)
 	{
-		std::vector<long> TextEntries;
+		std::vector<uint32_t> TextEntries;
 		GetTextEntriesByConcept(i, TextEntries);
 		for (auto k : TextEntries)
 		{

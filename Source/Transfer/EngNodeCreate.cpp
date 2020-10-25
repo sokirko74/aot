@@ -201,8 +201,8 @@ void CEngSemStructure::CreateEnglNode(CEngInterp UnitInterp, CEngSemNode& engNod
 			semWord.m_pData = m_pData;	
 			if( semWord.m_Poses == 0)
 			{
-				BYTE rus_pos =  GetOnePOS(rusNode.GetWord(i).m_Poses);
-				semWord.m_Poses = EngPOSByRusPOS(rus_pos,rusNode.GetWord(i).m_Lemma);
+				part_of_speech_t rus_pos =  GetOnePOS(rusNode.GetWord(i).m_Poses);
+				semWord.m_Poses = EngPOSesByRusPOS(rus_pos,rusNode.GetWord(i).m_Lemma);
 			}
 			engNode.m_Words.push_back(semWord);
 		}		

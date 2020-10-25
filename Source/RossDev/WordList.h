@@ -22,10 +22,10 @@
 
 
 struct CRossDevTermin {
-	WORD   m_UnitNo;
+	uint16_t   m_UnitNo;
 	std::string m_TerminStr;
 
-	CRossDevTermin(WORD UnitNo, std::string TerminStr) {
+	CRossDevTermin(uint16_t UnitNo, std::string TerminStr) {
 		m_TerminStr = TerminStr;
 		m_UnitNo = UnitNo;
 	};
@@ -37,7 +37,7 @@ struct CRossDevTermin {
 
 };
 struct Valency {
-     WORD ValNo;
+     uint16_t ValNo;
 	 bool   A_C;
  	 bool operator==(const Valency& X) const
 			{return       (ValNo == X.ValNo) 
@@ -54,7 +54,7 @@ struct TreeNode;
 struct TreeNode{
 	std::vector<Valency>  Vals;
 	std::vector<TreeNode> SubItems;
-	std::vector<WORD> UnitNos;
+	std::vector<uint16_t> UnitNos;
 
 
 	bool operator==(const std::vector<Valency>& _Vals) const
@@ -108,7 +108,7 @@ struct TreeNode{
 
 class CIndex {
 	public:
-		WORD UnitNo;
+		uint16_t UnitNo;
 		tm     modif_tm;
 
 		bool operator < (const CIndex &C) const 
@@ -183,20 +183,20 @@ public:
 	bool IsFiltered() const
 	{ return (m_Menu.GetMenuState(IDR_SET_FILTER, MF_BYCOMMAND) & MF_CHECKED) > 0; };
 
-	WORD GetUnitNo (WORD i) const
+	uint16_t GetUnitNo (uint16_t i) const
 	{
 		if (m_Termins.empty())
 		  return m_Index[i].UnitNo;
 		else
 			return m_Termins[i].m_UnitNo;
 	}
-	std::string GetEntryStr(WORD UnitNo) const;
-	WORD GetUnitsSize () const
+	std::string GetEntryStr(uint16_t UnitNo) const;
+	uint16_t GetUnitsSize () const
 	{
 	    return IsFiltered() ? GetRoss()->GetSelectedUnitsSize() : GetRoss()->GetUnitsSize();
 	};
 
-	bool GetSelectedUnitNo (WORD& UnitNo) const
+	bool GetSelectedUnitNo (uint16_t& UnitNo) const
 	{
  		POSITION pos = m_WordList.GetFirstSelectedItemPosition();
 
@@ -235,9 +235,9 @@ public:
     void Update();
 	void SetSelected (bool Value);
 	void SetCursor (int i);
-	CDocument* FindArticle (WORD UnitNo);
-	bool       SetArticle(WORD UnitNo, CString Value);
-	void       BuildVals (std::vector<Valency>& Vals, WORD UnitNo);
+	CDocument* FindArticle (uint16_t UnitNo);
+	bool       SetArticle(uint16_t UnitNo, CString Value);
+	void       BuildVals (std::vector<Valency>& Vals, uint16_t UnitNo);
 	bool       PocketAndArticleDocTempalteAreEmpty();
 	void	   UpdateCurrentPos();
 	void	   SaveRossToTxt(CString FileName) const;

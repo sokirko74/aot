@@ -29,7 +29,7 @@ public:
 
 
   CSemPattern ();
-  void		InitSemPattern(const CRossHolder* pRossDoc, WORD UnitNo, BYTE LeafId, BYTE BracketLeafId);
+  void		InitSemPattern(const CRossHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId);
   long		GetSynRel(long CortegeNo) const;
   long		GetSynFet(long CortegeNo) const;
   // то же, что и предыдущие две функции, но выдаются строки

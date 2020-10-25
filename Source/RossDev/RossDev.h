@@ -114,7 +114,7 @@ inline  CDocTemplate* GetSemanticStructureTemplate ()
 };
 
 
-inline bool GlobalOpenArticle(CRossDoc*  pRossDoc, WORD UnitNo)
+inline bool GlobalOpenArticle(CRossDoc*  pRossDoc, uint16_t UnitNo)
 {
 	CDocument* pDocument = GetRossArticleTemplate()->CreateNewDocument();
     ASSERT_VALID(pDocument);

@@ -141,7 +141,7 @@ void CEngSemStructure::ChangeNegWord(int iEngNode)
 			  std::string UnitStr = LexFuncts[i].m_Lemma;
 			  EngRusMakeLower(UnitStr);
 			  BYTE MeanNum = ( LexFuncts[i].m_MeanNum != -1)  ? LexFuncts[i].m_MeanNum : 1;
-			  WORD UnitNo = GetRoss(m_Nodes[iEngNode].GetType())->LocateUnit(UnitStr.c_str(),MeanNum);
+			  uint16_t UnitNo = GetRoss(m_Nodes[iEngNode].GetType())->LocateUnit(UnitStr.c_str(),MeanNum);
 			  if( UnitNo == ErrUnitNo )	
 				  continue;
 			  CDictUnitInterp interp;

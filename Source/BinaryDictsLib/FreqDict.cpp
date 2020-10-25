@@ -49,12 +49,12 @@ bool CFreqDict::Load(std::string _path)
 
 
 // выдает частоту перевода русской леммы RusParadigmId в английскую лемму EngParadigmId
-WORD CFreqDict::GetFreq(uint32_t EngParadigmId, uint32_t RusParadigmId) const
+uint16_t CFreqDict::GetFreq(uint32_t EngParadigmId, uint32_t RusParadigmId) const
 {
 	// TODO: Add your implementation code here
 	typedef std::vector<CParadigmPairAndFreq>::const_iterator Iter;
 	std::pair<Iter, Iter> range = std::equal_range(word_vec.begin(), word_vec.end(), CParadigmPairAndFreq(EngParadigmId, RusParadigmId, 0));
-	WORD freq = 0;
+	uint16_t freq = 0;
 	for(Iter it = range.first; it != range.second; ++it){
 		freq += range.first->m_Freq;
 	}

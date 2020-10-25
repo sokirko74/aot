@@ -62,7 +62,7 @@ void CRusSentence::InitHomonymMorphInfo (CSynHomonym& H)
 	
 };
 
-const UINT SmallNumbersCount = 5;
+const uint32_t SmallNumbersCount = 5;
 std::string SmallNumbers[SmallNumbersCount] = {
 	_R("ДВА"), _R("ТРИ"), _R("ЧЕТЫРЕ"), _R("ОБА"), _R("ПОЛТОРА")
 };

@@ -87,7 +87,7 @@ void CGriIni::OnPaint()
 			rect.right,rect.bottom);
 	rgn2.CombineRgn(&rgn1,&rgn2,RGN_OR);
 
-	WORD pBits[8] = { 0x55,0xAA,0x55,0xAA,0x55,0xAA,0x55,0xAA };
+	uint16_t pBits[8] = { 0x55,0xAA,0x55,0xAA,0x55,0xAA,0x55,0xAA };
 	CBitmap bitmap;
 	bitmap.CreateBitmap(8,8,1,1,pBits);
 	CBrush  shadow(&bitmap);

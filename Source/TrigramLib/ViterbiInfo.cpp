@@ -7,40 +7,40 @@ CViterbiInfo::CViterbiInfo ()
     m_SecondMaximum = std::make_pair (-MAXPROB, UnknownTag);
 };
 
-void CViterbiInfo::SetProb(WORD i,  WORD j, prob_t  value) 
+void CViterbiInfo::SetProb(uint16_t i,  uint16_t j, prob_t  value) 
 {
 	m_Probs[std::make_pair(i,j)] = value;
 };
-prob_t CViterbiInfo::GetProb(WORD i,  WORD j) const
+prob_t CViterbiInfo::GetProb(uint16_t i,  uint16_t j) const
 {
-	std::map<std::pair<WORD,WORD>, prob_t>::const_iterator it = m_Probs.find(std::make_pair(i,j));
+	std::map<std::pair<uint16_t,uint16_t>, prob_t>::const_iterator it = m_Probs.find(std::make_pair(i,j));
 	if (it == m_Probs.end()) 
 		return -MAXPROB;
 	else
 		return it->second;
 };
 
-void CViterbiInfo::SetTagRef(WORD i,  WORD j, WORD TagRef) 
+void CViterbiInfo::SetTagRef(uint16_t i,  uint16_t j, uint16_t TagRef) 
 {
 	m_TagRefs[std::make_pair(i,j)] = TagRef;
 };
 
-WORD CViterbiInfo::GetTagRef(WORD i,  WORD j) const
+uint16_t CViterbiInfo::GetTagRef(uint16_t i,  uint16_t j) const
 {
-    std::map<std::pair<WORD,WORD>, WORD>::const_iterator it = m_TagRefs.find(std::make_pair(i,j));
+    std::map<std::pair<uint16_t,uint16_t>, uint16_t>::const_iterator it = m_TagRefs.find(std::make_pair(i,j));
 	if (it == m_TagRefs.end()) 
 		return UnknownTag;
 	else
 		return it->second;
 };
 
-const std::map<std::pair<WORD,WORD>, prob_t>&  CViterbiInfo::GetAllProbs() const
+const std::map<std::pair<uint16_t,uint16_t>, prob_t>&  CViterbiInfo::GetAllProbs() const
 {
 	return m_Probs;	
 }
 
 /*
-void  CViterbiInfo::UpdateMaximum(prob_t prob, WORD tag) 
+void  CViterbiInfo::UpdateMaximum(prob_t prob, uint16_t tag) 
 {
     m_Maximums.insert(std::make_pair(prob,tag));
 }
@@ -49,14 +49,14 @@ bool  CViterbiInfo::IsAmbig()  const
     return m_Maximums.size() > 1;
 }
 
-std::pair<prob_t, WORD>  CViterbiInfo::GetFirstMaximum()  const
+std::pair<prob_t, uint16_t>  CViterbiInfo::GetFirstMaximum()  const
 {
     return *m_Maximums.rbegin();
 }
 
-std::pair<prob_t, WORD>  CViterbiInfo::GetSecondMaximum()  const
+std::pair<prob_t, uint16_t>  CViterbiInfo::GetSecondMaximum()  const
 {
-    std::set< std::pair<prob_t, WORD> >::const_reverse_iterator it = m_Maximums.rbegin();
+    std::set< std::pair<prob_t, uint16_t> >::const_reverse_iterator it = m_Maximums.rbegin();
     for (it++;  it!= m_Maximums.rend(); it++)
        if (it->second != m_Maximums.rbegin()->second)
               break;
@@ -66,7 +66,7 @@ std::pair<prob_t, WORD>  CViterbiInfo::GetSecondMaximum()  const
         return *it;
 }*/
 
-void  CViterbiInfo::UpdateMaximum(prob_t prob, WORD tag) 
+void  CViterbiInfo::UpdateMaximum(prob_t prob, uint16_t tag) 
 {
     if (prob >m_FirstMaximum.first)
     {
@@ -88,12 +88,12 @@ bool  CViterbiInfo::IsAmbig()  const
     return m_SecondMaximum.second != UnknownTag;
 }
 
-std::pair<prob_t, WORD>  CViterbiInfo::GetFirstMaximum()  const
+std::pair<prob_t, uint16_t>  CViterbiInfo::GetFirstMaximum()  const
 {
     return m_FirstMaximum;
 }
 
-std::pair<prob_t, WORD>  CViterbiInfo::GetSecondMaximum()  const
+std::pair<prob_t, uint16_t>  CViterbiInfo::GetSecondMaximum()  const
 {
     return m_SecondMaximum;
 }

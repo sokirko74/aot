@@ -374,7 +374,7 @@ bool   TRoss::ClearUnits()
 	return true;
 }
 
-void   TRoss::ClearUnit(WORD UnitNo)
+void   TRoss::ClearUnit(uint16_t UnitNo)
 {
 	if (!m_Units[UnitNo].HasEmptyArticle())
 		DelCorteges(m_Units[UnitNo].m_StartCortegeNo, m_Units[UnitNo].m_LastCortegeNo + 1);
@@ -394,7 +394,7 @@ void  TRoss::DelUnit(std::vector<CStructEntry>::iterator It)
 	m_Units.erase(It);
 };
 
-WORD TRoss::LocateUnit(const char* EntryStr, int MeanNum) const
+uint16_t TRoss::LocateUnit(const char* EntryStr, int MeanNum) const
 {
 	CStructEntry T(EntryStr, MeanNum);
 	std::vector<CStructEntry>::const_iterator It = lower_bound(m_Units.begin(), m_Units.end(), T);
@@ -404,21 +404,21 @@ WORD TRoss::LocateUnit(const char* EntryStr, int MeanNum) const
 };
 
 
-WORD     TRoss::GetSelectedUnitNo(WORD i) const
+uint16_t     TRoss::GetSelectedUnitNo(uint16_t i) const
 {
 	i++;
 
-	WORD k = 0;
+	uint16_t k = 0;
 
 	for (; (i > 0) && (k < m_Units.size()); k++)
 		if (m_Units[k].m_bSelected)
 			i--;
 	return k - 1;
 };
-WORD	TRoss::GetSelectedUnitsSize() const
+uint16_t	TRoss::GetSelectedUnitsSize() const
 {
-	WORD  i = 0;
-	WORD  k = 0;
+	uint16_t  i = 0;
+	uint16_t  k = 0;
 	for (; k < m_Units.size(); k++)
 		if (m_Units[k].m_bSelected)
 			i++;
@@ -427,17 +427,17 @@ WORD	TRoss::GetSelectedUnitsSize() const
 };
 
 
-WORD    TRoss::InsertUnit(CStructEntry& T)
+uint16_t    TRoss::InsertUnit(CStructEntry& T)
 {
 	std::vector<CStructEntry>::iterator It = lower_bound(m_Units.begin(), m_Units.end(), T);
 	T.m_EntryId = (m_UnitComments.size() == 0) ? 1 : m_UnitComments[m_UnitComments.size() - 1].m_EntryId + 1;
-	WORD res = It - m_Units.begin();
+	uint16_t res = It - m_Units.begin();
 	m_Units.insert(It, T);
 	InsertUnitComment(T.m_EntryId);
 	return res;
 };
 
-WORD   TRoss::InsertUnit(const char* EntryStr, BYTE MeanNum)
+uint16_t   TRoss::InsertUnit(const char* EntryStr, BYTE MeanNum)
 {
 	CStructEntry T;
 	T.m_MeanNum = MeanNum;
@@ -455,7 +455,7 @@ static void   EstablishOneToOneCorrespondenceBetweenEntriesAndComments(TRoss& R)
 	for (size_t i = 0; i < R.m_Units.size(); i++)
 	{
 		R.m_Units[i].m_EntryId = i;
-		R.InsertUnitComment((WORD)i);
+		R.InsertUnitComment((uint16_t)i);
 	};
 };
 
@@ -563,13 +563,13 @@ bool   TRoss::ReadUnitComments()
 	return true;
 };
 
-WORD    TRoss::InsertUnitComment(WORD EntryId)
+uint16_t    TRoss::InsertUnitComment(uint16_t EntryId)
 {
 	try {
 		TUnitComment C;
 		C.m_EntryId = EntryId;
 		std::vector<TUnitComment>::iterator Ic = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), C);
-		WORD No = Ic - m_UnitComments.begin();
+		uint16_t No = Ic - m_UnitComments.begin();
 		m_UnitComments.insert(Ic, C);
 		return No;
 	}
@@ -580,7 +580,7 @@ WORD    TRoss::InsertUnitComment(WORD EntryId)
 	};
 };
 
-TUnitComment* TRoss::GetCommentsByUnitId(WORD EntryId)
+TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)
 {
 	std::vector<TUnitComment>::iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
 	assert((It != m_UnitComments.end())
@@ -589,7 +589,7 @@ TUnitComment* TRoss::GetCommentsByUnitId(WORD EntryId)
 	return &(*It);
 };
 
-const TUnitComment* TRoss::GetCommentsByUnitId(WORD EntryId)   const
+const TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)   const
 {
 	std::vector<TUnitComment>::const_iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
 	assert((It != m_UnitComments.end())
@@ -1009,7 +1009,7 @@ bool CDictionary::Load(const char* Path)
 };
 
 
-void TRoss::SetUnitCommentStr(WORD UnitNo, const char* Str)
+void TRoss::SetUnitCommentStr(uint16_t UnitNo, const char* Str)
 {
 	TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
 	int l = strlen(Str);
@@ -1019,7 +1019,7 @@ void TRoss::SetUnitCommentStr(WORD UnitNo, const char* Str)
 	C->Comments[l] = 0;
 }
 
-void TRoss::SetUnitAuthor(WORD UnitNo, const char* Author)
+void TRoss::SetUnitAuthor(uint16_t UnitNo, const char* Author)
 {
 	int l = strlen(Author);
 	if (l > AuthorNameSize - 1)
@@ -1037,7 +1037,7 @@ tm Str2Tm(std::string TimeStr)
 };
 
 
-void TRoss::SetUnitModifTimeStr(WORD UnitNo, const char* TimeStr)
+void TRoss::SetUnitModifTimeStr(uint16_t UnitNo, const char* TimeStr)
 {
 	try {
 		TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
@@ -1049,7 +1049,7 @@ void TRoss::SetUnitModifTimeStr(WORD UnitNo, const char* TimeStr)
 	};
 }
 
-void TRoss::SetUnitEditor(WORD UnitNo, const char* Editor)
+void TRoss::SetUnitEditor(uint16_t UnitNo, const char* Editor)
 {
 	try
 	{
@@ -1062,7 +1062,7 @@ void TRoss::SetUnitEditor(WORD UnitNo, const char* Editor)
 	};
 }
 
-std::string TRoss::GetUnitModifTimeStr(WORD UnitNo) const
+std::string TRoss::GetUnitModifTimeStr(uint16_t UnitNo) const
 {
 	try {
 		char tmpbuf[128];
@@ -1081,7 +1081,7 @@ std::string TRoss::GetUnitModifTimeStr(WORD UnitNo) const
 	};
 }
 
-std::string TRoss::GetUnitTextHeader(WORD UnitNo) const
+std::string TRoss::GetUnitTextHeader(uint16_t UnitNo) const
 {
 	std::string R;
 	const CStructEntry& U = m_Units[UnitNo];
@@ -1162,17 +1162,17 @@ const char* CDictionary::GetDomItemStrInner(int ItemNo) const
 	return TRoss::GetDomItemStr(m_DomItems[ItemNo]);
 };
 
-bool CDictionary::IsEmptyArticle(WORD UnitNo) const
+bool CDictionary::IsEmptyArticle(uint16_t UnitNo) const
 {
 	return m_Units[UnitNo].HasEmptyArticle();
 };
 
-int CDictionary::GetUnitStartPos(WORD UnitNo) const
+int CDictionary::GetUnitStartPos(uint16_t UnitNo) const
 {
 	return m_Units[UnitNo].m_StartCortegeNo;
 };
 
-int CDictionary::GetUnitEndPos(WORD UnitNo) const
+int CDictionary::GetUnitEndPos(uint16_t UnitNo) const
 {
 	return  m_Units[UnitNo].m_LastCortegeNo;
 };
@@ -1198,22 +1198,22 @@ const char* CDictionary::GetDomItemStr(int ItemNo) const
 	return  (ItemNo == -1) ? NULL : GetDomItemStrInner(ItemNo);
 }
 
-std::string	CDictionary::GetEntryStr(WORD EntryNo) const
+std::string	CDictionary::GetEntryStr(uint16_t EntryNo) const
 {
 	return m_Units[EntryNo].m_EntryStr;
 };
 
-std::string	CDictionary::GetEntryStrUtf8(WORD EntryNo) const
+std::string	CDictionary::GetEntryStrUtf8(uint16_t EntryNo) const
 {
 	return convert_to_utf8(m_Units[EntryNo].m_EntryStr, this->m_Language);
 };
 
-BYTE		CDictionary::GetUnitMeanNum(WORD EntryNo) const
+BYTE		CDictionary::GetUnitMeanNum(uint16_t EntryNo) const
 {
 	return m_Units[EntryNo].m_MeanNum;
 };
 
-bool CDictionary::IncludeArticle(WORD UnitNo, std::string ArticleUtf8) const
+bool CDictionary::IncludeArticle(uint16_t UnitNo, std::string ArticleUtf8) const
 {
 	CTempArticle A1;
 	A1.m_pRoss = const_cast<CDictionary*>(this);
@@ -1442,7 +1442,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 		};
 
 
-	WORD UnitNo = LocateUnit(Lemma.c_str(), MeanNum);
+	uint16_t UnitNo = LocateUnit(Lemma.c_str(), MeanNum);
 
 	if (UnitNo != ErrUnitNo) {
 		return true;
@@ -1494,7 +1494,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 	return true;
 };
 
-void CDictionary::SetUnitCurrentTime(WORD UnitNo)
+void CDictionary::SetUnitCurrentTime(uint16_t UnitNo)
 {
 	TUnitComment* C = GetCommentsByUnitId(GetUnits()[UnitNo].m_EntryId);
 	C->modif_tm = RmlGetCurrentTime();
@@ -1525,7 +1525,7 @@ bool CDictionary::AddField(std::string FieldStr)
 }
 
 
-std::string CDictionary::GetUnitEditor(WORD UnitNo) const
+std::string CDictionary::GetUnitEditor(uint16_t UnitNo) const
 {
 	try
 	{
@@ -1539,7 +1539,7 @@ std::string CDictionary::GetUnitEditor(WORD UnitNo) const
 	return "";
 }
 
-void  CDictionary::SetUnitStr(WORD UnitNo, const char* UnitStr)
+void  CDictionary::SetUnitStr(uint16_t UnitNo, const char* UnitStr)
 {
 	strcpy(m_Units[UnitNo].m_EntryStr, UnitStr);
 	sort(m_Units.begin(), m_Units.end());

@@ -164,19 +164,19 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 
 
 
-void CSemanticsHolder::GetCustomGrammems (std::string GramFet, uint64_t& Grammems, uint32_t& Pose)
+void CSemanticsHolder::GetCustomGrammems (std::string GramFet, grammems_mask_t& Grammems, part_of_speech_mask_t& Poses)
 {
 	assert(GetRusGramTab() != 0);
 	Trim(GramFet);
-	uint64_t G;
-	BYTE Pos;
+	grammems_mask_t G;
+	part_of_speech_t Pos;
 	if (GetRusGramTab()->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G))
 	{
 		Grammems = G;
 		if (Pos == VERB)
-			Pose  = (1<<VERB) | (1<<INFINITIVE) | (1 << ADVERB_PARTICIPLE) | (1 << PARTICIPLE) | (1 << PARTICIPLE_SHORT);
+			Poses = (1<<VERB) | (1<<INFINITIVE) | (1 << ADVERB_PARTICIPLE) | (1 << PARTICIPLE) | (1 << PARTICIPLE_SHORT);
 		else
-			Pose  = (1<<(size_t)Pos);
+			Poses = (((part_of_speech_mask_t)1) << Pos);
 	}
 	else
 	{
@@ -184,12 +184,12 @@ void CSemanticsHolder::GetCustomGrammems (std::string GramFet, uint64_t& Grammem
 		if (GetRusGramTab()->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G) )
 		{
 			Grammems = G;
-			Pose  = 0xffffffff;
+			Poses = 0xffffffff;
 		}
 		else
 		{
-			Grammems = 0xffffffff;
-			Pose  = 0xffffffff;
+			Grammems = GetMaxQWORD();
+			Poses = 0xffffffff;
 		};
 
 	};
@@ -345,7 +345,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		 if (FieldStr == "PREP")
 		 {
              std::string Prep = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
-		     WORD PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
+		     uint16_t PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
              if (PrepNo == ErrUnitNo) 
 			 {
 				 std::string Q =Format ("Preposition %s in unit %s cannot be found in the dictionary", Prep.c_str(), GetRoss(TimeRoss)->GetEntryStr(UnitNo).c_str());
@@ -571,7 +571,7 @@ bool LexFunValueComp(const SLexFunIndexes& arg1, const SLexFunIndexes& arg2)
 
 const char OborotDels[] = " \t";
 
-bool BuildByFieldContents(std::string s, WORD UnitNo, std::vector<CUnitContent>& Vect)
+bool BuildByFieldContents(std::string s, uint16_t UnitNo, std::vector<CUnitContent>& Vect)
 {
 	size_t i = s.find("(");
 	if (i == s.npos) 
@@ -786,7 +786,7 @@ void CSemanticsHolder::GetPrepsFromArticle (const CDictionary* Ross, long UnitNo
 		 )
 	  {
          std::string Prep = (const char*)Ross->GetDomItemStr(Ross->GetCortegeItem(i,0));
-		 WORD PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
+		 uint16_t PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(),1);
          if (PrepNo != ErrUnitNo) 
 			 Preps.push_back (CDictUnitInterp(OborRoss, PrepNo));
 	  };
@@ -802,7 +802,7 @@ void CSemanticsHolder::GetPrepsFromArticle (const CDictionary* Ross, long UnitNo
 	"красивый" (ПРИЛ) -> "красиво" (НАР)
 	"лучше" (ПРИЛ) -> "хорошо" (НАР)
 */
-UINT CSemanticsHolder::GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, std::string AdjWordForm)
+uint32_t CSemanticsHolder::GetAdverbWith_O_ByAdjective (uint32_t AdjParadigmId, std::string AdjWordForm)
 {
 	std::string AdvLemma;	
 

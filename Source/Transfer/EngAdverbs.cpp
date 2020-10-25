@@ -46,7 +46,7 @@ bool CEngSemStructure::dir_obj_is_long(int NodeNo) const
 
 CAdvPosType get_adv_pos_kind(const CEngSemNode& Node)
 {
-	WORD unit_no = Node.GetUnitNo();
+	uint16_t unit_no = Node.GetUnitNo();
 	DictTypeEnum ross = Node.GetType();
 
 	if(ross == TimeRoss || Node.IsTimeRossNode()) return adv_time;
@@ -161,7 +161,7 @@ void CEngSemStructure::HandleAdverbPositions(long NodeNo)
 		long InRelNo = adv_rels[i];
 		
 		DictTypeEnum type = node.GetType();
-		WORD         unit = node.GetUnitNo();
+		uint16_t         unit = node.GetUnitNo();
 		
 		if(node.IsTimeRossNode())
 		{

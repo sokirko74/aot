@@ -63,7 +63,7 @@ bool CThesaurus::LoadAtomicGroups(std::string Buff, CInnerModel &M) {
         else
             return false;
 
-        G.m_Grammems = (int) dummy;
+        G.m_Grammems = dummy;
 
         M.m_AtomGroups.push_back(G);
     };

@@ -4,7 +4,7 @@
 
 	
 
-WORD CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo);
+uint16_t CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo);
 
 
 //===============================================================================
@@ -13,7 +13,7 @@ CRossInterp::CRossInterp() {
 	m_UnitNo = ErrUnitNo;
 };
 
-CRossInterp::CRossInterp(DictTypeEnum DictType, WORD UnitNo)  {
+CRossInterp::CRossInterp(DictTypeEnum DictType, uint16_t UnitNo)  {
 	m_DictType = DictType;
 	m_UnitNo = UnitNo;
 };
@@ -35,7 +35,7 @@ CDictUnitInterp::CDictUnitInterp()  : CRossInterp() {
 	m_TerminId = -1;
 };
 
-CDictUnitInterp::CDictUnitInterp (DictTypeEnum   DictType,	WORD UnitNo) 
+CDictUnitInterp::CDictUnitInterp (DictTypeEnum   DictType,	uint16_t UnitNo) 
 	: 		CRossInterp(DictType, UnitNo)
 {
 	m_bPassiveForm = false;
@@ -44,7 +44,7 @@ CDictUnitInterp::CDictUnitInterp (DictTypeEnum   DictType,	WORD UnitNo)
 };
 
 
-CDictUnitInterp::CDictUnitInterp (const  CRossHolder* RossDoc, DictTypeEnum   DictType,	WORD UnitNo, bool bNegativeForm, bool bPassiveForm)
+CDictUnitInterp::CDictUnitInterp (const  CRossHolder* RossDoc, DictTypeEnum   DictType,	uint16_t UnitNo, bool bNegativeForm, bool bPassiveForm)
 {
 	m_DictType = DictType;
 	m_UnitNo = UnitNo;
@@ -68,14 +68,14 @@ bool CDictUnitInterp::operator == ( const CDictUnitInterp& X ) const
 	return (X.m_DictType == m_DictType) && (X.m_UnitNo == m_UnitNo);
 };
 
-WORD  CDictUnitInterp::GetSemCorrectUnitNo () const 
+uint16_t  CDictUnitInterp::GetSemCorrectUnitNo () const 
 {
 	return  (m_AOReference.m_UnitNo != ErrUnitNo) ? m_AOReference.m_UnitNo : m_UnitNo;
 };
 
 
 // иначе выдает ErrUnitNo.
-WORD CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
+uint16_t CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
 {
  if (UnitNo == ErrUnitNo) return ErrUnitNo;
  if (!RossDoc->GetRoss()->IsEmptyArticle(UnitNo))

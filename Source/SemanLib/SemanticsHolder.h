@@ -120,7 +120,7 @@ struct  CObor {
 	// поле TITLЕ	
 	std::string	m_UnitStr;
 	// номер слованой статьи
-	WORD    m_UnitNo;
+	uint16_t    m_UnitNo;
  	
     // подчинительный союз-оборот
 	bool m_bRusSubConj;
@@ -320,7 +320,7 @@ struct CEngUnitNoToRusUnit
 	// номер значения русской словарной статьи
 	BYTE    m_RusMeanNum;
 	// номер словарной статьи в АОССе
-	WORD	m_EngUnitNo;	
+	uint16_t	m_EngUnitNo;	
 
 	CEngUnitNoToRusUnit()
 	{
@@ -518,7 +518,7 @@ struct CTimeUnit {
 struct CUnitContent 
 {
 	std::string m_UnitStr;
-	WORD   m_UnitNo;
+	uint16_t   m_UnitNo;
 	bool operator == (const CUnitContent& X ) const
 	{
 		return (X.m_UnitNo == m_UnitNo);
@@ -634,13 +634,13 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 	bool	        ReadAbstractArticles(DictTypeEnum type);
 	bool            BuildOborottos ();
-	void            GetCustomGrammems (std::string GramFet, uint64_t& Grammems, uint32_t& Pose);
+	void            GetCustomGrammems (std::string GramFet, grammems_mask_t& Grammems, part_of_speech_mask_t & Pose);
 
 	bool			InitializeIndices();
 
 
 	void			GetPrepsFromArticle (const CDictionary* pRoss, long UnitNo, BYTE LeafId, BYTE BracketLeafId, std::vector<CRossInterp>& Preps);
-	UINT			GetAdverbWith_O_ByAdjective (UINT AdjParadigmId, std::string AdjWordForm);
+	uint32_t		GetAdverbWith_O_ByAdjective (uint32_t AdjParadigmId, std::string AdjWordForm);
 
 	// =========  словосочетания
 // добавляет отдельный элемент поля CONTENT в глобальный перечень всех отдельных элементов поля CONTENT	

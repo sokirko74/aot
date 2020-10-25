@@ -10,9 +10,9 @@
 #include <string>
 
 
-static BYTE GetTagFromStr(const CAgramtab& A, const char* tab_str) 
+static part_of_speech_t GetTagFromStr(const CAgramtab& A, const char* tab_str) 
 {
-    for (BYTE i = 0; i < A.GetPartOfSpeechesCount(); i++)
+    for (part_of_speech_t i = 0; i < A.GetPartOfSpeechesCount(); i++)
 			if  (!strcmp(tab_str, A.GetPartOfSpeechStr(i)))
 		  	 return i;
      
@@ -26,7 +26,7 @@ CAgramtabLine :: CAgramtabLine (size_t SourceLineNo)
 };
 
 
-bool CAgramtab::GetGrammems(const char* gram_code, uint64_t& grammems)  const
+bool CAgramtab::GetGrammems(const char* gram_code, grammems_mask_t& grammems)  const
 {
 	grammems = 0;
 	if (gram_code == 0) return false;
@@ -43,14 +43,14 @@ bool CAgramtab::GetGrammems(const char* gram_code, uint64_t& grammems)  const
 	return  true;
 };
 
-std::string   CAgramtab::GrammemsToStr(uint64_t grammems) const 
+std::string   CAgramtab::GrammemsToStr(grammems_mask_t grammems) const 
 {
 	char szGrammems[64*5];
 	grammems_to_str(grammems, szGrammems);
 	return szGrammems;
 }
 
-bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, BYTE& PartOfSpeech, uint64_t& grammems)  const
+bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, part_of_speech_t& PartOfSpeech, grammems_mask_t& grammems)  const
 {
 	if (strlen(line_in_gramtab) > 300) return false;
 
@@ -98,7 +98,7 @@ bool CAgramtab :: ProcessPOSAndGrammems (const char* line_in_gramtab, BYTE& Part
 	return true;
 };
 
-bool  CAgramtab::ProcessPOSAndGrammemsIfCan (const char* tab_str, BYTE* PartOfSpeech,  uint64_t* grammems) const
+bool  CAgramtab::ProcessPOSAndGrammemsIfCan (const char* tab_str, part_of_speech_t* PartOfSpeech,  grammems_mask_t* grammems) const
 {
 	return ProcessPOSAndGrammems(tab_str, *PartOfSpeech, *grammems);
 };
@@ -203,11 +203,11 @@ bool CAgramtab :: ReadAndCheck (const char * FileName)
 		};
 
 
-		for (WORD i=0; i<GetMaxGrmCount(); i++) 
+		for (uint16_t i=0; i<GetMaxGrmCount(); i++) 
 		if ( (GetLine(i) != NULL)  && (s2i(debug) != i))
 		{
-			uint64_t g1 = GetLine(i)->m_Grammems;
-			uint64_t g2 = GetLine(s2i(debug))->m_Grammems;
+			grammems_mask_t g1 = GetLine(i)->m_Grammems;
+			grammems_mask_t g2 = GetLine(s2i(debug))->m_Grammems;
 			if( (g1 == g2) && (GetLine(i)->m_PartOfSpeech == GetLine(s2i(debug))->m_PartOfSpeech) )
 			{
 				printf ("a double found %s (%s)", debug, i2s(i).c_str());
@@ -222,7 +222,7 @@ bool CAgramtab :: ReadAndCheck (const char * FileName)
 };
 
 
-bool CAgramtab ::GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, uint64_t& Grammems) const
+bool CAgramtab ::GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, grammems_mask_t& Grammems) const
 {
 	size_t len = strlen((const char*)AnCodes);
 	if (len == 0) return false;
@@ -261,7 +261,7 @@ int CAgramtab :: AreEqualPartOfSpeech (const char *grm1, const char* grm2)
 
 
 
-char* CAgramtab :: grammems_to_str (uint64_t grammems, char* out_buf) const
+char* CAgramtab :: grammems_to_str (grammems_mask_t grammems, char* out_buf) const
 {
 	out_buf[0] = 0;
 	size_t GrammemsCount = GetGrammemsCount();
@@ -275,7 +275,7 @@ char* CAgramtab :: grammems_to_str (uint64_t grammems, char* out_buf) const
 };
 
 
-bool CAgramtab :: FindGrammems (const char* gram_codes, uint64_t grammems) const
+bool CAgramtab :: FindGrammems (const char* gram_codes, grammems_mask_t grammems) const
 {
   for (size_t l=0; l<strlen(gram_codes); l+=2)
 		if ( (GetLine(s2i(gram_codes+l))->m_Grammems & grammems) == grammems)
@@ -284,11 +284,11 @@ bool CAgramtab :: FindGrammems (const char* gram_codes, uint64_t grammems) const
   return false;	
 };
 
-bool CAgramtab::GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, uint64_t grammems, std::string& gramcodes) const
+bool CAgramtab::GetGramCodeByGrammemsAndPartofSpeechIfCan(part_of_speech_t Pos, grammems_mask_t grammems, std::string& gramcodes) const
 {
 
 
-	 for (WORD i=0; i<GetMaxGrmCount(); i++) 
+	 for (uint16_t i=0; i<GetMaxGrmCount(); i++) 
 	  if (GetLine(i) != NULL) 
 	  {
 		if( (GetLine(i)->m_Grammems == grammems) && (GetLine(i)->m_PartOfSpeech == Pos) )
@@ -311,7 +311,7 @@ bool CAgramtab::CheckGramCode(const char* gram_code) const
 }
 
 
-BYTE CAgramtab::GetPartOfSpeech(const char* gram_code) const
+part_of_speech_t CAgramtab::GetPartOfSpeech(const char* gram_code) const
 {
 	if (gram_code == 0) return UnknownPartOfSpeech;
     if (*gram_code == 0) return UnknownPartOfSpeech;
@@ -340,18 +340,18 @@ size_t CAgramtab::GetSourceLineNo(const char* gram_code) const
 }
 
 
-uint64_t CAgramtab::GetAllGrammems(const char *gram_code) const
+grammems_mask_t CAgramtab::GetAllGrammems(const char *gram_code) const
 {
 	if (gram_code == 0) return 0;
 	if (!strcmp(gram_code, "??")) return 0; 
 
 	size_t len = strlen (gram_code);
     
-	uint64_t grammems = 0;
+	grammems_mask_t grammems = 0;
 
 	for (size_t l=0; l<len; l+=2)
 	{
-		uint64_t G =   GetLine(s2i(gram_code+l))->m_Grammems;
+		grammems_mask_t G =   GetLine(s2i(gram_code+l))->m_Grammems;
 		grammems |= G;
 	};
 
@@ -384,20 +384,20 @@ bool CAgramtab::LoadFromRegistryAndCheck ()
 };
 
 
-BYTE CAgramtab::GetFirstPartOfSpeech(const poses_mask_t poses) const
+part_of_speech_t CAgramtab::GetFirstPartOfSpeech(const part_of_speech_mask_t poses) const
 {
-	BYTE Count = GetPartOfSpeechesCount();
-	for (BYTE i = 0; i < Count; i++)
+	part_of_speech_t Count = GetPartOfSpeechesCount();
+	for (part_of_speech_t i = 0; i < Count; i++)
 		if (( poses & (1 <<i )) != 0)
 			return i;
 
 	return Count;
 };
 
-std::string	CAgramtab::GetAllPossibleAncodes(BYTE pos, uint64_t grammems)const
+std::string	CAgramtab::GetAllPossibleAncodes(part_of_speech_t pos, grammems_mask_t grammems)const
 {
 	std::string Result;
-	for (WORD i=0; i<GetMaxGrmCount(); i++) 
+	for (uint16_t i=0; i<GetMaxGrmCount(); i++) 
 		if (GetLine(i) != 0)
 		{
 			const CAgramtabLine* L =  GetLine(i);
@@ -410,13 +410,13 @@ std::string	CAgramtab::GetAllPossibleAncodes(BYTE pos, uint64_t grammems)const
 };
 
 //Generate GramCodes for grammems with CompareFunc
-std::string	CAgramtab::GetGramCodes(BYTE pos, uint64_t grammems, GrammemCompare CompareFunc)const
+std::string	CAgramtab::GetGramCodes(part_of_speech_t pos, grammems_mask_t grammems, GrammemCompare CompareFunc)const
 {
 	std::string Result;
 	CAgramtabLine L0(0);
 	L0.m_PartOfSpeech = pos;
 	L0.m_Grammems = grammems;
-	for (WORD i=0; i<GetMaxGrmCount(); i++) 
+	for (uint16_t i=0; i<GetMaxGrmCount(); i++) 
 		if (GetLine(i) != 0)
 		{
 			const CAgramtabLine* L =  GetLine(i);
@@ -428,9 +428,9 @@ std::string	CAgramtab::GetGramCodes(BYTE pos, uint64_t grammems, GrammemCompare 
 	return Result;
 };
 
-uint64_t CAgramtab::Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
+grammems_mask_t CAgramtab::Gleiche (GrammemCompare CompareFunc, const char* gram_codes1, const char* gram_codes2) const
 {
-	uint64_t grammems = 0;
+	grammems_mask_t grammems = 0;
 	if (!gram_codes1) return false;
 	if (!gram_codes2) return false;
 	if (!strcmp(gram_codes1, "??")) return false;
@@ -519,7 +519,7 @@ std::string CAgramtab::UniqueGramCodes(std::string gram_codes) const
 	return Result;
 }
 
-std::string CAgramtab::FilterGramCodes(const std::string& gram_codes, uint64_t grammems1, uint64_t grammems2) const
+std::string CAgramtab::FilterGramCodes(const std::string& gram_codes, grammems_mask_t grammems1, grammems_mask_t grammems2) const
 {
 	std::string result;
 	if (gram_codes == "??") {
@@ -527,17 +527,17 @@ std::string CAgramtab::FilterGramCodes(const std::string& gram_codes, uint64_t g
 	}
 	for (size_t l = 0; l < gram_codes.length(); l += 2)
 	{
-		uint64_t ancode_grammems = GetLine(s2i(gram_codes.c_str() + l))->m_Grammems;
+		grammems_mask_t ancode_grammems = GetLine(s2i(gram_codes.c_str() + l))->m_Grammems;
 		if ( !(ancode_grammems & ~grammems1) ||  !(ancode_grammems & ~grammems2) )
 			result.append(gram_codes.c_str() + l,2);
 	}
  	return result;
 }	
 
-std::string CAgramtab::FilterGramCodes(uint64_t breaks, std::string gram_codes, uint64_t g1) const
+std::string CAgramtab::FilterGramCodes(grammems_mask_t breaks, std::string gram_codes, grammems_mask_t g1) const
 {
 	std::string Result;
-	uint64_t BR [] = {rAllCases, rAllNumbers, rAllGenders, rAllAnimative, rAllPersons, rAllTimes};
+	grammems_mask_t BR [] = {rAllCases, rAllNumbers, rAllGenders, rAllAnimative, rAllPersons, rAllTimes};
 	const char * gram_codes1 = gram_codes.c_str();
 	if (!strcmp(gram_codes1, "??")) return gram_codes1;
 	size_t len1 = strlen(gram_codes1);
@@ -547,7 +547,7 @@ std::string CAgramtab::FilterGramCodes(uint64_t breaks, std::string gram_codes, 
 		bool R = true;
 		for(int i = 0 ; i < (sizeof BR)/(sizeof BR[0]) && R; i++ )
 		{
-			uint64_t g2 = l1->m_Grammems;
+			grammems_mask_t g2 = l1->m_Grammems;
 			if(breaks & BR[i])
 				R &= ((BR[i] & g1 & g2) > 0 || !(BR[i] & g1) || !(BR[i] & g2));
 		}
@@ -583,8 +583,8 @@ std::string  CAgramtab::GetTabStringByGramCode(const char* gram_code) const
 {
     if (!gram_code || gram_code[0] == '?')
         return "";
-	BYTE POS = GetPartOfSpeech(gram_code);
-	uint64_t Grammems;
+	part_of_speech_t POS = GetPartOfSpeech(gram_code);
+	grammems_mask_t Grammems;
 	GetGrammems(gram_code, Grammems);
 	char buffer[256];
 	grammems_to_str(Grammems, buffer);

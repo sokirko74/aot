@@ -58,7 +58,7 @@ void	NodeHelper::get_out_clause_rel(int node, std::vector<long> &res)
 
 
 
-bool NodeHelper::node_has_poses(int node_no, UINT eng_poses) const
+bool NodeHelper::node_has_poses(int node_no, part_of_speech_mask_t eng_poses) const
 {
 	if(E.m_Nodes[node_no].IsAbstract()) return false;
 	const CEngSemNode &node = E.m_Nodes[node_no];
@@ -115,7 +115,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &
 {
 	DictTypeEnum dict_kind = (node).GetType();
 	if (dict_kind == NoneRoss) return false;
-	WORD unit_no = (node).GetUnitNo();
+	uint16_t unit_no = (node).GetUnitNo();
 	if(node.IsThesNode())
 	{
 		int ThesId = node.m_Colloc.GetThesInterp().m_ThesaurusId;
@@ -145,7 +145,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &
 }
 
 
-bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, WORD unit_no, 
+bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, uint16_t unit_no, 
 	const std::string &field, const std::string &value, int leaf, int leaf2) const
 {
 	if(unit_no == ErrUnitNo) return false;
@@ -179,7 +179,7 @@ bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, WORD unit_no,
 
 
 
-void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, WORD unit_no, const std::string &field, 
+void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, uint16_t unit_no, const std::string &field, 
 				 StringVector &res, int max_items) const
 {
 	std::vector<TCortege> vec;

@@ -426,7 +426,7 @@ int ShowArticle (ClientData clienData,
 	try {
 		CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
 		DictTypeEnum Type = (DictTypeEnum)atoi (argv[2]);
-		WORD UnitNo  = atoi (argv[3]);
+		uint16_t UnitNo  = atoi (argv[3]);
 		CRossDoc* RossDoc = Doc->GetView()->FindRossDoc(Type);
 		if (RossDoc)
 		{

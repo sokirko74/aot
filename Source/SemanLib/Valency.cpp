@@ -20,7 +20,7 @@ CValency::CValency  ()
 };
 
 
-CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossHolder* Ross, WORD UnitNo)
+CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossHolder* Ross, uint16_t UnitNo)
 {
 	m_Direction  =  (C.m_DomItemNos[1] ==	MainWordVarNo) ? C_A : A_C;
 	m_RelationStr	= Ross->GetDomItemStrInner(C.m_DomItemNos[0]);
@@ -43,7 +43,7 @@ CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossH
 	m_RelationId = -1;
 };
 
-CValency::CValency  (std::string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross, BYTE LeafId, BYTE BracketLeafId, WORD UnitNo)
+CValency::CValency  (std::string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross, BYTE LeafId, BYTE BracketLeafId, uint16_t UnitNo)
 {
 	m_RelationStr = RelationStr;
 	m_Direction = Direction;

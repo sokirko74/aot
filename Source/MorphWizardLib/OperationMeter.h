@@ -11,6 +11,9 @@
 
 #ifndef  WIN32
 	typedef  const char* LPCSTR;
+#else
+	#define NOMINMAX 
+	#include "windows.h"
 #endif
 
 #include "assert.h"
@@ -31,7 +34,7 @@ public:
 	uint32_t GetMaxPos() const 						{ return m_maxPos; } 
 	uint32_t GetPos() const 							{ return m_curPos; } 
 	
-	bool SetMaxPos( uint32_t pos, uint32_t count = 50 )
+	bool SetMaxPos(uint32_t pos, uint32_t count=50 )
 	{
 		if( pos!=m_maxPos && pos>=0 || m_curPos!=0 ) 
 		{

@@ -18,7 +18,7 @@ N  -- число
 афикс1
 ...
 афиксN
-Потом стоит символ 0 и далее в бинарном виде идут тройки UINTов
+Потом стоит символ 0 и далее в бинарном виде идут тройки uint32_tов
 id1 id2 index
 
 id1 и id2 -- ParadigmId слов из пары. 
@@ -37,9 +37,9 @@ class CDerivDictonary
 {
 	struct deriv_pair
 	{
-		UINT id1, id2;
-		UINT index;
-		deriv_pair(UINT a, UINT b, UINT i = 0)
+		uint32_t id1, id2;
+		uint32_t index;
+		deriv_pair(uint32_t a, uint32_t b, uint32_t i = 0)
 			:id1(a),  id2(b), index(i){}
 		struct Less1{
 			bool operator()(const deriv_pair &p1, const deriv_pair &p2) const{
@@ -67,9 +67,9 @@ public:
 
 	bool Load(int TypeDict);
 	//! find target by source. Return number of found targets.
-	size_t SourceToTarget(UINT id, DwordVector &ids, DwordVector &afixes) const;
+	size_t SourceToTarget(uint32_t id, DwordVector &ids, DwordVector &afixes) const;
 	//! find source by target. Return number of found sources.
-	size_t TargetToSource(UINT id, DwordVector &ids, DwordVector &afixes) const;
+	size_t TargetToSource(uint32_t id, DwordVector &ids, DwordVector &afixes) const;
 	//! Number of afixes
 	size_t AfixCount() const;
 

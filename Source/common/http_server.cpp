@@ -16,7 +16,7 @@ std::string TRMLHttpServer::LogFileName;
 #ifdef WIN32
 void InitSocketsWindows() {
 
-	WORD wVersionRequested;
+	uint16_t wVersionRequested;
 	WSADATA wsaData;
 	int err;
 

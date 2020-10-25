@@ -12,14 +12,14 @@
 
 struct CPredictWord 
 {
-	WORD					m_ItemNo;
-	WORD					m_Freq;
+	uint16_t					m_ItemNo;
+	uint16_t					m_Freq;
 	int						m_LemmaInfoNo;
-	WORD					m_nps; 
+	uint16_t					m_nps; 
 	
 
 
-	CPredictWord(WORD Freq, int LemmaInfoNo,WORD nps, WORD ItemNo)
+	CPredictWord(uint16_t Freq, int LemmaInfoNo,uint16_t nps, uint16_t ItemNo)
 		: m_Freq(Freq),m_LemmaInfoNo(LemmaInfoNo),m_nps(nps),m_ItemNo(ItemNo)
 	{
 
@@ -59,8 +59,8 @@ typedef std::map<CModelPostfix, size_t > Postfix2FreqMap;
 void AddElem(	Flex2WordMap& svMapRaw, 
 				const std::string &Postfix, 
 				int LemmaInfoNo, 
-				const WORD nps,
-				const WORD ItemNo,
+				const uint16_t nps,
+				const uint16_t ItemNo,
 				Postfix2FreqMap& ModelFreq, 
 				const std::vector<CLemmaInfoAndLemma>&	LemmaInfos
 				)
@@ -237,7 +237,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 				continue;
 
 		std::string pos = wizard.get_pos_string(paradigm.get_first_code());
-		WORD nps =  GetPredictionPartOfSpeech(pos, wizard.m_Language);
+		uint16_t nps =  GetPredictionPartOfSpeech(pos, wizard.m_Language);
 		if (nps == UnknownPartOfSpeech)
 			continue;
 
@@ -250,7 +250,7 @@ bool CMorphDictBuilder::GenPredictIdx(const MorphoWizard& wizard, int PostfixLen
 			std::string wordform = base + flexia;
 			if (wordform.length() < PostfixLength) continue;
 			std::string Postfix = wordform.substr(wordform.length() - PostfixLength);
-			AddElem(svMapRaw, Postfix, lin, nps, (WORD)i, Postfix2Freq, m_LemmaInfos);
+			AddElem(svMapRaw, Postfix, lin, nps, (uint16_t)i, Postfix2Freq, m_LemmaInfos);
 		}
 		
 	}

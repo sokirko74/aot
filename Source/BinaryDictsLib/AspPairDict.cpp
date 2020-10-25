@@ -11,10 +11,10 @@
 /**
 This class is a storage of Aspect Pairs database.
 The database is a binary file of the following structure:
-UINT -- number of pairs
-UINT UINT -- first pair
+uint32_t -- number of pairs
+uint32_t uint32_t -- first pair
 .........
-UINT UINT -- last pair
+uint32_t uint32_t -- last pair
 
 First index in pair is ParadigmId of NonPerfective verb, the second index - 
 is ParadigmId of Perfective verb.
@@ -76,7 +76,7 @@ bool CAspPairDict::Load()
 
 //--------------
 //!Get Perfective verbs by NonPerfective one. Return number of such verbs.
-size_t CAspPairDict::nonperf2perf(UINT nonperf, DwordVector &res)const 
+size_t CAspPairDict::nonperf2perf(uint32_t nonperf, DwordVector &res)const 
 {
 	res.clear();
 
@@ -90,7 +90,7 @@ size_t CAspPairDict::nonperf2perf(UINT nonperf, DwordVector &res)const
 }
 //--------------
 //!Get NonPerfective verbs by Perfective one. Return number of such verbs.
-size_t CAspPairDict::perf2nonperf(UINT perf, DwordVector &res) const 
+size_t CAspPairDict::perf2nonperf(uint32_t perf, DwordVector &res) const 
 {
 	res.clear();
 

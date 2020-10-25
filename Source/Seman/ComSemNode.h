@@ -47,7 +47,7 @@ public:
 	STDMETHOD(get_Words)(/*[in]*/ long pos, /*[out, retval]*/ IComSemWord* *pVal);
 	STDMETHOD(get_WordsCount)(/*[out, retval]*/ long *pVal);
 	STDMETHOD(get_Poses)(/*[out, retval]*/ long *pVal);
-	STDMETHOD(get_UnitNo)(/*[out, retval]*/ WORD *pVal);
+	STDMETHOD(get_UnitNo)(/*[out, retval]*/ uint16_t *pVal);
 	STDMETHOD(get_DictType)(/*[out, retval]*/ idlDictTypeEnum *pVal);
 	STDMETHOD(get_RelOperatorsCount)(int* pVal);
 	STDMETHOD(get_RelOperators)(int Index, BSTR* pVal);

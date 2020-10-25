@@ -393,9 +393,9 @@ void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_p
 		size_t ModelNo;
 		size_t PrefixNo;
 		DecodeMorphAutomatInfo(i, ModelNo, ItemNo, PrefixNo);
-		A.m_ItemNo = (WORD)ItemNo;
-		A.m_ModelNo = (WORD)ModelNo;
-		A.m_PrefixNo = (WORD)PrefixNo;
+		A.m_ItemNo = (uint16_t)ItemNo;
+		A.m_ModelNo = (uint16_t)ModelNo;
+		A.m_PrefixNo = (uint16_t)PrefixNo;
 		Infos.push_back(A);
 	};
 
@@ -447,8 +447,8 @@ void	CMorphAutomat::GetInnerMorphInfos (const std::string& Text, size_t TextPos,
 
 uint32_t CMorphAutomat::EncodeMorphAutomatInfo (size_t ModelNo, size_t ItemNo, size_t PrefixNo) const 
 {
-	return			(((uint32_t)((WORD)((uint32_t)(ModelNo) & 0xffff))) << 18)
-				|	(((uint32_t)((WORD)((uint32_t)(ItemNo) & 0xffff))) << 9)
+	return			(((uint32_t)((uint16_t)((uint32_t)(ModelNo) & 0xffff))) << 18)
+				|	(((uint32_t)((uint16_t)((uint32_t)(ItemNo) & 0xffff))) << 9)
 				|	PrefixNo;
 
 };

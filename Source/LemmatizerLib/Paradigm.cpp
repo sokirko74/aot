@@ -166,7 +166,7 @@ std::string CFormInfo::GetSrcNorm() const
 	return result;
 }
 
-int CFormInfo::GetHomonymWeightWithForm(WORD pos) const 
+int CFormInfo::GetHomonymWeightWithForm(uint16_t pos) const 
 {
 	assert (IsValid());
 	if (!IsValid()) return 0;
@@ -202,7 +202,7 @@ std::string  CFormInfo::GetSrcAncode() const
 	return GetFlexiaModel().m_Flexia[m_InnerAnnot.m_ItemNo].m_Gramcode;
 }
 
-std::string CFormInfo::GetAncode(WORD pos) const 
+std::string CFormInfo::GetAncode(uint16_t pos) const 
 {
 	assert (IsValid());
 	if (!IsValid()) return "";
@@ -212,7 +212,7 @@ std::string CFormInfo::GetAncode(WORD pos) const
 
 
 
-std::string CFormInfo::GetWordForm (WORD pos) const 
+std::string CFormInfo::GetWordForm (uint16_t pos) const 
 {
 	assert (IsValid());
 	if (!IsValid()) return "";
@@ -249,7 +249,7 @@ int  CFormInfo::GetHomonymWeight() const
 	return m_InnerAnnot.m_nWeight;
 }
 
-BYTE	CFormInfo::GetAccentedVowel(WORD pos) const
+BYTE	CFormInfo::GetAccentedVowel(uint16_t pos) const
 {
 	if (!m_bFound) return UnknownAccent;
 	assert (IsValid());

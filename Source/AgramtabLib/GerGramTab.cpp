@@ -113,11 +113,11 @@ CGerGramTab :: ~CGerGramTab()
 			delete GetLine(i);
 }
 
-BYTE CGerGramTab::GetPartOfSpeechesCount() const { 
+part_of_speech_t CGerGramTab::GetPartOfSpeechesCount() const { 
 	return GERMAN_PART_OF_SPEECH_COUNT;
 };
 
-const char* CGerGramTab::GetPartOfSpeechStr(BYTE i) const { 
+const char* CGerGramTab::GetPartOfSpeechStr(part_of_speech_t i) const { 
 		return GermanPartOfSpeech[i].c_str();
 };
 
@@ -180,8 +180,8 @@ bool CGerGramTab::GleicheGenderNumber(const char* gram_code1, const char* gram_c
 
 bool SubjectPredicateGerman(const CAgramtabLine* subj_l, const CAgramtabLine* verb_l)
 {
-    const uint64_t& subj = subj_l->m_Grammems;
-    const uint64_t& verb = verb_l->m_Grammems;
+    const grammems_mask_t& subj = subj_l->m_Grammems;
+    const grammems_mask_t& verb = verb_l->m_Grammems;
 
 	if(    !( subj & _QM(gNominativ)) 
 	  )
@@ -192,8 +192,8 @@ bool SubjectPredicateGerman(const CAgramtabLine* subj_l, const CAgramtabLine* ve
 	
 
 
-	uint64_t Persons12 = _QM(gErstePerson) | _QM(gZweitePerson);
-	uint64_t gAllNumbers1 = ( _QM(gPlural) | _QM(gSingular) );
+	grammems_mask_t Persons12 = _QM(gErstePerson) | _QM(gZweitePerson);
+	grammems_mask_t gAllNumbers1 = ( _QM(gPlural) | _QM(gSingular) );
 	if (		( subj & Persons12)
 			||	(verb & Persons12)
 		)
@@ -212,7 +212,7 @@ bool CGerGramTab::GleicheSubjectPredicate(const char* subj, const char* pred) co
 	return  Gleiche(SubjectPredicateGerman, subj, pred) != 0;
 }
 
-bool CGerGramTab::IsStrongClauseRoot(const poses_mask_t poses) const
+bool CGerGramTab::IsStrongClauseRoot(const part_of_speech_mask_t poses) const
 {
 	return		(poses & (1<<gVER)) != 0;
 };
@@ -229,35 +229,35 @@ bool CGerGramTab::is_month (const char* lemma) const
 	return false;
 };
 
-bool CGerGramTab::IsMorphNoun (poses_mask_t poses)  const
+bool CGerGramTab::IsMorphNoun (part_of_speech_mask_t poses)  const
 {
 	return  ( ( poses & ( 1 << gSUB)   ) >0)
 		 || ( ( poses & ( 1 << gEIG)   ) >0);
 };
 
-bool CGerGramTab::is_morph_adj (poses_mask_t poses) const
+bool CGerGramTab::is_morph_adj (part_of_speech_mask_t poses) const
 {
 	return  ( poses & (1 <<gADJ  )) >0 ;
 };
 
-bool CGerGramTab::is_morph_participle (poses_mask_t poses) const
+bool CGerGramTab::is_morph_participle (part_of_speech_mask_t poses) const
 {
 	return  ( poses & (1 <<gPA1  ))
 			|| ( poses & (1 << gPA2  ));
 };
  
-bool CGerGramTab::is_morph_pronoun (poses_mask_t poses) const
+bool CGerGramTab::is_morph_pronoun (part_of_speech_mask_t poses) const
 {
 	return  ( poses & (1 <<gPRONOMEN  )) != 0;
 };
 
 
-bool CGerGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
+bool CGerGramTab::is_morph_pronoun_adjective(part_of_speech_mask_t poses) const
 {
 	return	   ( poses & (1 <<gPRO_BEG  )) != 0	;
 };
 
-bool CGerGramTab::is_left_noun_modifier (poses_mask_t poses, uint64_t grammems) const
+bool CGerGramTab::is_left_noun_modifier (part_of_speech_mask_t poses, grammems_mask_t grammems) const
 {
 	if (poses & (1 <<gZAL )) return true;
 	if (!(grammems & gAllCases)) return false;
@@ -269,12 +269,12 @@ bool CGerGramTab::is_left_noun_modifier (poses_mask_t poses, uint64_t grammems) 
 }
 
 
-bool CGerGramTab::is_numeral (poses_mask_t poses) const
+bool CGerGramTab::is_numeral (part_of_speech_mask_t poses) const
 { 
 	return  false;
 };
 
-bool CGerGramTab::is_verb_form (poses_mask_t poses) const
+bool CGerGramTab::is_verb_form (part_of_speech_mask_t poses) const
 {
 	return 
 			is_morph_participle(poses) 
@@ -283,27 +283,27 @@ bool CGerGramTab::is_verb_form (poses_mask_t poses) const
 
 
 
-bool CGerGramTab::is_infinitive(poses_mask_t poses) const
+bool CGerGramTab::is_infinitive(part_of_speech_mask_t poses) const
 {
 	return false; 
 }
 
-bool CGerGramTab::is_morph_predk(poses_mask_t poses) const
+bool CGerGramTab::is_morph_predk(part_of_speech_mask_t poses) const
 {
 	return false;
 }
 
-bool CGerGramTab::is_morph_adv(poses_mask_t poses) const
+bool CGerGramTab::is_morph_adv(part_of_speech_mask_t poses) const
 {
 	return  ( poses & (1 <<gADV )) != 0;
 }
 
-bool CGerGramTab::is_morph_personal_pronoun (poses_mask_t poses, uint64_t grammems) const
+bool CGerGramTab::is_morph_personal_pronoun (part_of_speech_mask_t poses, grammems_mask_t grammems) const
 {
 	return		false;
 };
 
-bool CGerGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
+bool CGerGramTab::IsSimpleParticle(const char* lemma, part_of_speech_mask_t poses) const
 {
 	return false;
 }
@@ -311,7 +311,7 @@ bool CGerGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 
 
 
-bool CGerGramTab::IsSynNoun(poses_mask_t poses, const char* Lemma) const
+bool CGerGramTab::IsSynNoun(part_of_speech_mask_t poses, const char* Lemma) const
 {
 	return			is_morph_pronoun(poses)
 			||		IsMorphNoun(poses);
@@ -340,8 +340,8 @@ bool CGerGramTab::GleicheCaseNumber(const char* gram_code1, const char* gram_cod
 
 bool GenderNumberCaseGerman (const CAgramtabLine* noun_l, const CAgramtabLine* adj_l ) 
 {	
-    const uint64_t& noun = noun_l->m_Grammems;
-    const uint64_t& adj = adj_l->m_Grammems;
+    const grammems_mask_t& noun = noun_l->m_Grammems;
+    const grammems_mask_t& adj = adj_l->m_Grammems;
 	return     ((gAllCases  & noun & adj) > 0) 
 		    	 &&	((gAllNumbers & noun & adj) > 0) 
 		         && (    ((gAllGenders & noun & adj) > 0)
@@ -351,12 +351,12 @@ bool GenderNumberCaseGerman (const CAgramtabLine* noun_l, const CAgramtabLine* a
 };
 
 
-uint64_t CGerGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun,const char* gram_code_noun, const char* gram_code_adj) const 
+grammems_mask_t CGerGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun,const char* gram_code_noun, const char* gram_code_adj) const 
 {
 	return  Gleiche(GenderNumberCaseGerman, gram_code_noun, gram_code_adj);
 };
 
-bool CGerGramTab::is_morph_article(poses_mask_t poses)  const 
+bool CGerGramTab::is_morph_article(part_of_speech_mask_t poses)  const 
 {
 	return  ( poses & (1 <<gART  )) != 0;
 };
@@ -430,27 +430,27 @@ std::string CommonCase(const CAgramtab* pGramTab, const std::string& noun1, cons
 };
 
 
-bool HasOnlyOneCase(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const uint64_t& Grammems)
+bool HasOnlyOneCase(const CAgramtab* pGramTab,  const std::string& Ancodes, const part_of_speech_mask_t& poses, const grammems_mask_t& Grammems)
 {
-	poses_mask_t oPoses;
-	uint64_t  oGrammems;
+	part_of_speech_mask_t oPoses;
+	grammems_mask_t  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return  (oGrammems & gAllCases) == Grammems;
 };
 
-bool HasGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const uint64_t& Grammems)
+bool HasGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const part_of_speech_mask_t& poses, const grammems_mask_t& Grammems)
 {
-	poses_mask_t oPoses;
-	uint64_t  oGrammems;
+	part_of_speech_mask_t oPoses;
+	grammems_mask_t  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return		((oGrammems & Grammems) == Grammems)
 		&&		((oPoses & poses) == poses);
 };
 
-bool HasOneGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const poses_mask_t& poses, const uint64_t& Grammems)
+bool HasOneGrammem(const CAgramtab* pGramTab,  const std::string& Ancodes, const part_of_speech_mask_t& poses, const grammems_mask_t& Grammems)
 {
-	poses_mask_t oPoses;
-	uint64_t  oGrammems;
+	part_of_speech_mask_t oPoses;
+	grammems_mask_t  oGrammems;
 	pGramTab->GetPartOfSpeechAndGrammems((BYTE*)Ancodes.c_str(),  oPoses, oGrammems);
 	return		(oGrammems & Grammems) > 0;
 };
@@ -480,7 +480,7 @@ std::string ConvertToPlural(const CAgramtab* pGramTab,  const std::string& s)
 		else
 			if (L->m_Grammems & _QM(gSingular) ) 
 			{
-				uint64_t q = (L->m_Grammems & ~_QM(gSingular)) | _QM(gPlural);
+				grammems_mask_t q = (L->m_Grammems & ~_QM(gSingular)) | _QM(gPlural);
 				Result += pGramTab->GetAllPossibleAncodes(L->m_PartOfSpeech, q);
 			};
 	};

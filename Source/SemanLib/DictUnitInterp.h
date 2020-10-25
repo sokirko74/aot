@@ -9,9 +9,9 @@ struct  CRossInterp
 	// тип словаря 
 	DictTypeEnum   m_DictType;
 	// номер словарной статьи или id термина
-	WORD		   m_UnitNo;
+	uint16_t		   m_UnitNo;
 	CRossInterp();
-	CRossInterp(DictTypeEnum DictType, WORD UnitNo);
+	CRossInterp(DictTypeEnum DictType, uint16_t UnitNo);
 	bool operator == ( const CRossInterp& X ) const;
 	CRossInterp& operator = ( const CRossInterp& X );
 };
@@ -36,11 +36,11 @@ struct  CDictUnitInterp : public CRossInterp {
 	
 
 	CDictUnitInterp();
-	CDictUnitInterp (DictTypeEnum   DictType,	WORD UnitNo);
-	CDictUnitInterp (const  CRossHolder* RossDoc, DictTypeEnum   DictType,	WORD UnitNo, bool bNegativeForm, bool bPassiveForm);
+	CDictUnitInterp (DictTypeEnum   DictType,	uint16_t UnitNo);
+	CDictUnitInterp (const  CRossHolder* RossDoc, DictTypeEnum   DictType,	uint16_t UnitNo, bool bNegativeForm, bool bPassiveForm);
 	CDictUnitInterp ( const CRossInterp& X );
 	bool operator == ( const CDictUnitInterp& X ) const;
-	WORD  GetSemCorrectUnitNo () const;
+	uint16_t  GetSemCorrectUnitNo () const;
 };
 
 

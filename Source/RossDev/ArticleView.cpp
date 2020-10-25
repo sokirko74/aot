@@ -655,7 +655,7 @@ void CMyEditCtrl::OnLButtonDblClk( UINT nFlags,  CPoint point )
 	while( pos )
 	{
 		CRossDoc* pDoc = (CRossDoc*)pRossDocTemplate->GetNextDoc(pos);	
-  		WORD UnitNo = pDoc->GetRoss()->LocateUnit((const char*)Word, MeanNum);
+  		uint16_t UnitNo = pDoc->GetRoss()->LocateUnit((const char*)Word, MeanNum);
 		if (UnitNo != ErrUnitNo) 
 		{
 			GlobalOpenArticle (pDoc, UnitNo);

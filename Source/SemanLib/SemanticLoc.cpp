@@ -109,7 +109,7 @@ ENG (1) = in
 
 
 
-std::string    GetPO (const CDictionary* Ross, WORD UnitNo, long POFieldNo)
+std::string    GetPO (const CDictionary* Ross, uint16_t UnitNo, long POFieldNo)
 {
   if (UnitNo != ErrUnitNo)
   for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= Ross->GetUnitEndPos(UnitNo); i++)
@@ -237,7 +237,7 @@ void    CRusSemStructure :: PutLocRelations(long ClauseNo)
 long  CRusSemStructure :: GetLocInterp(std::string UnitStr, bool& NegativeForm) const
 {
   NegativeForm = false;
-  WORD UnitNo = GetRossHolder(LocRoss)->LocateUnit(UnitStr.c_str(), 1);
+  uint16_t UnitNo = GetRossHolder(LocRoss)->LocateUnit(UnitStr.c_str(), 1);
   if (UnitNo == ErrUnitNo)
 	 if (UnitStr.substr(0,2) == _R("не"))
 		 {

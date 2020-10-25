@@ -74,7 +74,7 @@ void CPocketForm::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 	// TODO: Add your control notification handler code here
 	LV_ITEM* pItem= &(pDispInfo)->item;
 	char s[100];
-	WORD UnitNo = m_PocketItems[pItem->iItem].m_UnitNo;
+	uint16_t UnitNo = m_PocketItems[pItem->iItem].m_UnitNo;
 	CRossDoc* RossDoc = m_PocketItems[pItem->iItem].m_pRossDoc;
 	if (pItem->mask & LVIF_TEXT) //valid text buffer?
 	{  switch(pItem->iSubItem){
@@ -97,7 +97,7 @@ void CPocketForm::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 void CPocketForm::OnButton1() 
 {
 	// TODO: Add your control notification handler code here
-    WORD UnitNo;
+    uint16_t UnitNo;
 	if (!GetSelectedUnitNo (UnitNo)) return;
 	GlobalOpenArticle (m_PocketItems[UnitNo].m_pRossDoc, m_PocketItems[UnitNo].m_UnitNo);
 }

@@ -525,7 +525,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 		if(node.GetType() == NoneRoss)
 			continue;
 		DictTypeEnum type = node.GetType();
-		WORD unit = node.GetUnitNo();
+		uint16_t unit = node.GetUnitNo();
 		if(node.IsTimeRossNode())
 		{
 			type = TimeRoss;

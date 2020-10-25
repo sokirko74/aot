@@ -11,7 +11,7 @@
 
 
 
-std::string get_field(CRossHolder*  RossHolder, WORD UnitNo, std::string Field, BYTE LeafId, BYTE BracketLeafId, BYTE LevelId)
+std::string get_field(CRossHolder*  RossHolder, uint16_t UnitNo, std::string Field, BYTE LeafId, BYTE BracketLeafId, BYTE LevelId)
 {
  if (UnitNo ==  ErrUnitNo) return "";
  BYTE FieldNo = RossHolder->GetRoss()->GetFieldNoByFieldStr(Field.c_str());
@@ -35,7 +35,7 @@ std::string get_field(CRossHolder*  RossHolder, WORD UnitNo, std::string Field, 
 std::string tr_by_ross_simple(CRossHolder*  RossHolder, std::string UnitStr)
 {
 	EngRusMakeLower(UnitStr);
-	WORD UnitNo = RossHolder->GetRoss()->LocateUnit(UnitStr.c_str(), 1);
+	uint16_t UnitNo = RossHolder->GetRoss()->LocateUnit(UnitStr.c_str(), 1);
 	if(UnitNo == ErrUnitNo) return "";
 	return get_field(RossHolder,UnitNo, "ENG", 0, 0, ErrUChar);
 }
@@ -141,7 +141,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 		if (res.size())
 		 if (res.find("_") != -1)
 		 {
-			WORD UnitNo = GetRoss(EngCollocRoss)->LocateUnit(res.c_str(), 1);
+			uint16_t UnitNo = GetRoss(EngCollocRoss)->LocateUnit(res.c_str(), 1);
 			if(UnitNo == ErrUnitNo) 
 				res = "";
 			else
@@ -164,7 +164,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 				return RusNode.GetWord(0).m_Word;
 		}
 
-		UINT grammems = 0;
+		grammems_mask_t grammems = 0;
 		if(is_pl) grammems |= ePlural;
 
         long ParadigmId = helper.GetParadigmIdByLemma(morphRussian, RusNode.GetWord(0).m_Lemma,  0);

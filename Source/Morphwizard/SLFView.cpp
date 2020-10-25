@@ -506,7 +506,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 	Trim(s);
 	if (s.empty()) return;
 
-	WORD ParadigmNo;
+	uint16_t ParadigmNo;
 	if( isdigit((BYTE)s[0]))
 	{
 		ParadigmNo = atoi(s.c_str());
@@ -613,8 +613,8 @@ void CSLFView::OnBnClickedChangeAll()
 		}
 	}
 
-	WORD ParadigmNo = GetDocument()->m_Paradigm.m_FlexiaModelNo;
-	WORD AccentMdlNo = GetDocument()->m_Paradigm.m_AccentModelNo;
+	uint16_t ParadigmNo = GetDocument()->m_Paradigm.m_FlexiaModelNo;
+	uint16_t AccentMdlNo = GetDocument()->m_Paradigm.m_AccentModelNo;
 	ASSERT(ParadigmNo<GetWizard()->m_FlexiaModels.size());
 
 	std::vector<lemma_iterator_t> found_paradigms;

@@ -15,7 +15,7 @@ struct CThesSynRelation {
 
 struct CAtomGroup {
 	BYTE m_PartOfSpeech;
-	UINT m_Grammems;
+	uint64_t m_Grammems;
 	int  m_LanguageId;
     bool m_bDigCmpl;
 	CAtomGroup ()

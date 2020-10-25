@@ -569,7 +569,7 @@ inline bool AreEqual (const std::vector<TCortege10>& L1,  const std::vector<TCor
 };
 
 
-void CTempArticle::ReadFromDictionary(WORD UnitNo, bool VisualOrder, bool ReadOnly)
+void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool ReadOnly)
 {
 	m_UnitNo = UnitNo;
 	m_ReadOnly = ReadOnly ? true : false;

@@ -64,7 +64,7 @@ CTrigramModel::~CTrigramModel ()
 };
 
 
-WORD CTrigramModel::find_tag(const std::string &t) const 
+uint16_t CTrigramModel::find_tag(const std::string &t) const 
 { 
 	assert (!t.empty());
 	size_t debug = m_RegisteredTags.size();
@@ -75,14 +75,14 @@ WORD CTrigramModel::find_tag(const std::string &t) const
 		return  it - m_RegisteredTags.begin(); 
 }
 
-WORD CTrigramModel::register_tag(const std::string& t)
+uint16_t CTrigramModel::register_tag(const std::string& t)
 {
-	WORD i = find_tag(t);
+	uint16_t i = find_tag(t);
 
 	if (i == UnknownTag) 
 	{
 		m_RegisteredTags.push_back(t);
-		i = (WORD)m_RegisteredTags.size() - 1;
+		i = (uint16_t)m_RegisteredTags.size() - 1;
 	};
 
 	return i;
@@ -91,22 +91,22 @@ WORD CTrigramModel::register_tag(const std::string& t)
 
 
 /* ------------------------------------------------------------ */
-int CTrigramModel::ngram_index(WORD t1) const
+int CTrigramModel::ngram_index(uint16_t t1) const
 {	
 	return t1;
 }
 
-int CTrigramModel::ngram_index(WORD t1, WORD t2) const
+int CTrigramModel::ngram_index(uint16_t t1, uint16_t t2) const
 {	
 	return t1*m_TagsCount+t2;
 }
 
-trigram_integer_t CTrigramModel::ngram_index(WORD t1, WORD t2, WORD t3) const
+trigram_integer_t CTrigramModel::ngram_index(uint16_t t1, uint16_t t2, uint16_t t3) const
 {	
 	return (t1*m_TagsCount+t2)*m_TagsCount+t3;
 }
 
-void CTrigramModel::set_ngram(size_t n, WORD t1, WORD t2, WORD t3, int value) 
+void CTrigramModel::set_ngram(size_t n, uint16_t t1, uint16_t t2, uint16_t t3, int value) 
 {
 	assert (m_TagsCount != UnknownTag);
 
@@ -120,7 +120,7 @@ void CTrigramModel::set_ngram(size_t n, WORD t1, WORD t2, WORD t3, int value)
 }
 
 
-size_t CTrigramModel::GetTrigram(WORD t1, WORD t2, WORD t3)  const
+size_t CTrigramModel::GetTrigram(uint16_t t1, uint16_t t2, uint16_t t3)  const
 {
 	// для скорости проверим сначала биграммы, если биграммы пусты, тогда
 	// и триграмма пуста
@@ -140,7 +140,7 @@ size_t CTrigramModel::GetTrigram(WORD t1, WORD t2, WORD t3)  const
 
 
 
-prob_t		CTrigramModel::BuildSmoothedProb(WORD PrevPrevTag, WORD PrevTag, WORD CurrTag) const
+prob_t		CTrigramModel::BuildSmoothedProb(uint16_t PrevPrevTag, uint16_t PrevTag, uint16_t CurrTag) const
 {
 	prob_t inv_not= 1.0/(prob_t)m_TagsCount;
 	int BucketNo = m_Buckets[ngram_index(PrevPrevTag, PrevTag)];
@@ -226,7 +226,7 @@ CLambdas CTrigramModel::compute_lambdas_for_one_bucket(PMap::const_iterator star
 			if (f12 < 0) continue;
 			int f2 = m_Unigrams[ngram_index(H.j)]-1;
 
-			for (WORD k=START_AT_TAG; k<m_TagsCount; k++)
+			for (uint16_t k=START_AT_TAG; k<m_TagsCount; k++)
 			{
 								
 				prob_t q[3]={0.0, 0.0, 0.0};
@@ -277,11 +277,11 @@ CLambdas CTrigramModel::compute_lambdas_for_one_bucket(PMap::const_iterator star
 
 // вычисляет знаменатель в формуле v(h) = c(h) / |{w : c(h,w) > 0}|
 // That is we take the average count over non-zero counts for trigrams.
-int CTrigramModel::compute_bucket_denominator(WORD i, WORD j, int& TrigramsCount)
+int CTrigramModel::compute_bucket_denominator(uint16_t i, uint16_t j, int& TrigramsCount)
 {
 	std::map<size_t,int> TrigramCount2Count;
 	TrigramsCount = 0;
-	for (WORD k=START_AT_TAG; k<m_TagsCount; k++)
+	for (uint16_t k=START_AT_TAG; k<m_TagsCount; k++)
 	{
 		size_t f123 = GetTrigram(i, j, k);
 		if (f123 == 0) continue;
@@ -399,7 +399,7 @@ bool CTrigramModel::compute_bucketed_lambdas()
 
 
 //#pragma optimize( "", off )
-void  CTrigramModel::get_tags_from_annots(const std::vector<CXmlMorphAnnot>& Annots, std::set<WORD>& tags, const std::string& WordStr) const
+void  CTrigramModel::get_tags_from_annots(const std::vector<CXmlMorphAnnot>& Annots, std::set<uint16_t>& tags, const std::string& WordStr) const
 {
     size_t good_annots_count = 0;
     for (size_t i=0; i < Annots.size(); i++)
@@ -407,7 +407,7 @@ void  CTrigramModel::get_tags_from_annots(const std::vector<CXmlMorphAnnot>& Ann
         std::string TagStr = Annots[i].BuildRusCorpAnnot();
         if (!TagStr.empty())
         {   
-            WORD Tag = find_tag(TagStr);
+            uint16_t Tag = find_tag(TagStr);
             if (Tag != UnknownTag)
             {
                 tags.insert(Tag);
@@ -469,7 +469,7 @@ CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 	{
 		//fprintf (stderr, "Empty word!\n");
         R.m_pFoundWord = 0;
-		for (WORD i=0; i < m_TagsCount; i++)
+		for (uint16_t i=0; i < m_TagsCount; i++)
 			R.m_PossibleWordTags.insert(i);
 		return R;
 	}
@@ -512,7 +512,7 @@ CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 		{
             for (size_t  i=0; i < m_RegisteredTags.size();i++)
 				if (startswith(m_RegisteredTags[i], _R("ЧИСЛ"))) {
-					R.m_PossibleWordTags.insert((WORD)i);
+					R.m_PossibleWordTags.insert((uint16_t)i);
 				}
 
             if (R.m_PossibleWordTags.empty())
@@ -536,7 +536,7 @@ CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 				fprintf (stderr, "No information for word %s\n",WordStr.c_str());
 			for (size_t i=0; i < std::min((size_t)200, m_TagsOrderedByUnigrams.size()); i++)
 			{
-				WORD tagno = m_TagsOrderedByUnigrams[i];
+				uint16_t tagno = m_TagsOrderedByUnigrams[i];
 				std::string tag = m_RegisteredTags[tagno];
 				if (tag.length()> 1 || !ispunct((unsigned char)tag[0]))
 					R.m_PossibleWordTags.insert(tagno);
@@ -550,7 +550,7 @@ CDictionarySearch CTrigramModel::find_word(const std::string& WordStr) const
 
 
 
-prob_t CTrigramModel::GetSmoothedLexProb(const CDictionarySearch& DS, WORD PrevTag, WORD CurrTag) const
+prob_t CTrigramModel::GetSmoothedLexProb(const CDictionarySearch& DS, uint16_t PrevTag, uint16_t CurrTag) const
 {
 	//see Thede and Harper for explanation of lexical smoothing for second-order HMM 
 	prob_t N2 = 0;
@@ -625,11 +625,11 @@ void CTrigramModel::dump_transition_probs()
 {
 	assert (m_TagsCount != UnknownTag );
 
-	for (WORD  i=0; i<m_TagsCount; i++)
+	for (uint16_t  i=0; i<m_TagsCount; i++)
 	{
-		for (WORD j=0; j<m_TagsCount; j++)
+		for (uint16_t j=0; j<m_TagsCount; j++)
 		{
-			for (WORD k=0; k<m_TagsCount; k++)
+			for (uint16_t k=0; k<m_TagsCount; k++)
 			{
 				trigram_integer_t index=ngram_index(i, j, k);
 				fprintf(stdout, "tp(%s,%s => %s)=%12.11e\n",
@@ -676,7 +676,7 @@ bool CTrigramModel::adjusting_homonyms_coef(std::string FileName) const
 		SentNo++;
 		std::vector<std::string> words;
 		std::vector<CWordIntepretation> tags;
-		std::vector<WORD> refs;
+		std::vector<uint16_t> refs;
 
 		StringTokenizer tok(buffer, " \t\r\n");
 		for (size_t i=0; tok(); i++)
@@ -689,7 +689,7 @@ bool CTrigramModel::adjusting_homonyms_coef(std::string FileName) const
 			}
 			else
 			{
-				WORD ti=find_tag(t);
+				uint16_t ti=find_tag(t);
 				if (ti == UnknownTag) 
 				{
 					fprintf (stderr, "unknown tag \"%s\" LineNo=%i\n", t.c_str(), SentNo);
@@ -710,7 +710,7 @@ bool CTrigramModel::adjusting_homonyms_coef(std::string FileName) const
 		for (size_t i=0; i<words.size(); i++)
 		{
 			
-			WORD ref = refs[i];
+			uint16_t ref = refs[i];
 			if (tags[i].m_TagId2 == UnknownTag)
 				not_amb++;
 
@@ -755,7 +755,7 @@ bool CTrigramModel::adjusting_homonyms_coef(std::string FileName) const
 
 void CTrigramModel::print_tag_set() const
 {
-	for (WORD i=0;i<m_RegisteredTags.size(); i++)
+	for (uint16_t i=0;i<m_RegisteredTags.size(); i++)
 	{
 		printf ("%s %i\n",  
 			m_RegisteredTags[i].c_str(), 
@@ -912,7 +912,7 @@ bool CTrigramModel::DisambiguateRusCorpXml(std::vector<CXmlToken>& Words)  const
     for (size_t WordNo=0; WordNo < Words.size(); WordNo++)	
     {
         CXmlToken& W = Words[WordNo];
-        WORD besttag = tags[WordNo].m_TagId1;
+        uint16_t besttag = tags[WordNo].m_TagId1;
         size_t i=0;
         std::vector<CXmlMorphAnnot> NewAnnots;
         for (;  i <W.m_Annots.size(); i++)
@@ -920,7 +920,7 @@ bool CTrigramModel::DisambiguateRusCorpXml(std::vector<CXmlToken>& Words)  const
             std::string TagStr = W.m_Annots[i].BuildRusCorpAnnot();
             if (!TagStr.empty())
             {
-                WORD tag = find_tag(TagStr);
+                uint16_t tag = find_tag(TagStr);
                 if (tag == besttag)
                     NewAnnots.push_back(W.m_Annots[i]);
             }

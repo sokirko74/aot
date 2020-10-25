@@ -102,7 +102,7 @@ protected:
 	int Count() const	{ return m_Words.size(); };
 
 	std::string		GetSimilarNumAncode (const std::string&  Lemma, const std::string&  Flexia, bool IsNoun);
-	bool		HasParadigmOfFormAndPoses(std::string WordForm, poses_mask_t Poses) const;
+	bool		HasParadigmOfFormAndPoses(std::string WordForm, part_of_speech_mask_t Poses) const;
 	bool		NounHasObviousPluralContext(CLineIter it);
     
 
@@ -151,7 +151,7 @@ protected:
 	void Rule_ChangePatronymicLemmas();
 	void Rule_Interjections();
     bool FilterPostMorphWords();
-    bool FilterOnePostLemWord(CPostLemWord& W, WORD tagid, WORD tagid2) const;
+    bool FilterOnePostLemWord(CPostLemWord& W, uint16_t tagid, uint16_t tagid2) const;
     void Rule_TwoPredicates();
     void SolveAmbiguityUsingRuleForTwoPredicates(CLineIter start, CLineIter end);
     bool SetFioFormat (const CFIOFormat* Format, CLineIter it); 

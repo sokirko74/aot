@@ -27,9 +27,9 @@ public:
 
 	CUnitHolder();
 	// graphematical descriptors
-	void	SetState (size_t LB, size_t HB, WORD state);
+	void	SetState (size_t LB, size_t HB, uint16_t state);
 	void	SetDes(size_t x, Descriptors des);
-	bool	HasDescr (size_t i, int descr)  const	{ return (m_Units[i].GetDescriptors() & _QM (descr)) > 0; }
+	bool	HasDescr (size_t i, graph_descr_t descr)  const	{ return (m_Units[i].GetDescriptors() & _QM (descr)) > 0; }
 
 
 	// group graphematical descriptors

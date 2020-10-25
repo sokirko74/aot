@@ -99,7 +99,7 @@ public:
 	};
 
 	
-	std::map<WORD, std::vector<WORD> >		m_OborottosFirstWordIndex;
+	std::map<uint16_t, std::vector<uint16_t> >		m_OborottosFirstWordIndex;
 	std::vector<CGraphemOborot>			m_Oborottos;
 	StringVector					m_OborotTokens;
 	

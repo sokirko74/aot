@@ -235,12 +235,12 @@ std::string TreeVariantValue::GetDifference(const TreeVariantValue& v)  const
 
 //===================
 
-void CTreeVariant::AddRel(WORD RelNo)
+void CTreeVariant::AddRel(uint16_t RelNo)
 {
 	m_TreeRels.push_back(RelNo);
 };
 
-void CTreeVariant::SetRel(WORD RelNo, WORD Value)
+void CTreeVariant::SetRel(uint16_t RelNo, uint16_t Value)
 {
 	m_TreeRels[RelNo] = Value;
 };
@@ -250,7 +250,7 @@ void CTreeVariant::DeleteLast()
 	m_TreeRels.erase(m_TreeRels.begin() + m_TreeRels.size() - 1);
 };
 
-WORD CTreeVariant::GetRel(WORD RelNo) const
+uint16_t CTreeVariant::GetRel(uint16_t RelNo) const
 {
 	return m_TreeRels[RelNo];
 };

@@ -242,7 +242,7 @@ void CMAPost::Odnobuk()
 		if (W.HasOborot1() != W.HasOborot2()) continue;// "т.е." - это оборот, его обрабатывать не надо
 
 
-		const poses_mask_t poses = (1 << PREP) | (1 << CONJ) | (1 << INTERJ) | (1 << PARTICLE);
+		const part_of_speech_mask_t poses = (1 << PREP) | (1 << CONJ) | (1 << INTERJ) | (1 << PARTICLE);
 		// данное слово может являться  только предлогом, союзом, междометием или частицей
 		if (W.GetPoses() & ~poses) continue;//?? "по Б.Татарской улице"
 		CLineIter next_it = it;
@@ -437,7 +437,7 @@ void CMAPost::PronounP_Pronoun_Homonymy()
 };
 
 // выдает по форме и части речи парадигму
-bool CMAPost::HasParadigmOfFormAndPoses(std::string WordForm, poses_mask_t Poses) const
+bool CMAPost::HasParadigmOfFormAndPoses(std::string WordForm, part_of_speech_mask_t Poses) const
 {
 	std::vector<CFormInfo> Paradigms;
 	m_pRusLemmatizer->CreateParadigmCollection(false, WordForm, false, false, Paradigms);
@@ -1485,7 +1485,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 				for (size_t j = 0; j < Paradigms[k].GetCount(); j++)
 				{
 					uint64_t g;
-					m_pRusGramTab->GetGrammems(Paradigms[k].GetAncode((WORD)j).c_str(), g);
+					m_pRusGramTab->GetGrammems(Paradigms[k].GetAncode((uint16_t)j).c_str(), g);
 					if ((g & _QM(rPatronymic))
 						&& (g & _QM(rNominativ))
 						&& (g & _QM(rSingular))
@@ -1575,7 +1575,7 @@ void CMAPost::Rule_TwoPredicates()
 
 
 
-bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, WORD tagid1, WORD tagid2) const
+bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, uint16_t tagid1, uint16_t tagid2) const
 {
 	std::vector<CTag> Tags = m_TrigramModel.m_TagSet.DecipherTagStr(m_TrigramModel.m_RegisteredTags[tagid1], m_pRusGramTab);
 	if (tagid2 != UnknownTag)

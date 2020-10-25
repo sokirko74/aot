@@ -16,7 +16,7 @@ bool IsEmptyOrInfinitive(const CClause* P)
 bool CRusSentence::RuleForSimilarNounGroupClauses(int iClauseNum, int MinCountOfSimilarMembers)
 {
 	CClause* pClauseFirst = &GetClause(iClauseNum);
-	WORD ClauseFirstFirstWord =   pClauseFirst->m_iFirstWord;
+	uint16_t ClauseFirstFirstWord =   pClauseFirst->m_iFirstWord;
 
 	int iWord = pClauseFirst->m_iFirstWord;
 

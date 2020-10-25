@@ -33,7 +33,7 @@ long CSemPattern::GetSynRel(long CortegeNo) const
 	return m_pRossDoc->GetSynRel(m_GramCorteges[CortegeNo]); 
 };
 
-void CSemPattern::InitSemPattern(const CRossHolder* pRossDoc, WORD UnitNo, BYTE LeafId, BYTE BracketLeafId)
+void CSemPattern::InitSemPattern(const CRossHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId)
 {
 	m_PatternValency.m_LeafId =  LeafId;
 	m_PatternValency.m_BracketLeafId = BracketLeafId;
@@ -109,7 +109,7 @@ bool CSemPattern::LoadSemFromDict()
 	assert (m_PatternValency.m_RossHolder != 0);
 	const CDictionary* Ross = m_PatternValency.m_RossHolder->GetRoss();
 	m_ActantSemFets.clear ();
-	WORD UnitNo = m_PatternValency.m_UnitNo;
+	uint16_t UnitNo = m_PatternValency.m_UnitNo;
 	//assert  (UnitNo !=  ErrUnitNo);
 	if (UnitNo ==  ErrUnitNo) 
 		return false;
@@ -159,7 +159,7 @@ bool CSemPattern::LoadGramFromDict()
 
 	assert (m_PatternValency.m_RossHolder != 0);
 	const CDictionary* Ross = m_PatternValency.m_RossHolder->GetRoss();
-	WORD UnitNo = m_PatternValency.m_UnitNo;
+	uint16_t UnitNo = m_PatternValency.m_UnitNo;
 	assert  (UnitNo !=  ErrUnitNo);
 	if (UnitNo ==  ErrUnitNo) 
 		return false;

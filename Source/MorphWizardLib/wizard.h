@@ -12,15 +12,15 @@
 //----------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------
-const WORD UnknownSessionNo = 0xffff-1;
-const WORD UnknownPrefixSetNo = 0xffff-1;
+const uint16_t UnknownSessionNo = 0xffff-1;
+const uint16_t UnknownPrefixSetNo = 0xffff-1;
 const BYTE UnknownAccent = 0xff;	// не менять - уже проставлено в mrd
 
 // Nick [17/Dec/2003]
-const WORD AnyParadigmNo = 0xffff;
-const WORD AnyAccentModelNo = 0xffff;
-const WORD AnySessionNo = 0xffff;
-const WORD AnyPrefixSetNo = 0xffff;
+const uint16_t AnyParadigmNo = 0xffff;
+const uint16_t AnyAccentModelNo = 0xffff;
+const uint16_t AnySessionNo = 0xffff;
+const uint16_t AnyPrefixSetNo = 0xffff;
 const BYTE AnyAccent = 0xff-1;
 extern const char* AnyCommonAncode;
 
@@ -30,13 +30,13 @@ extern const char* AnyCommonAncode;
 //----------------------------------------------------------------------------
 struct CParadigmInfo : public CLemmaInfo
 {
-	WORD	m_SessionNo;
-	WORD	m_PrefixSetNo;
+	uint16_t	m_SessionNo;
+	uint16_t	m_PrefixSetNo;
 	BYTE	m_AuxAccent;
 	bool	m_bToDelete;
 
 	CParadigmInfo();
-	CParadigmInfo(WORD ParadigmNo, WORD AccentModelNo, WORD SessionNo, BYTE AuxAccent, const char* CommonAncode, WORD PrefixSetNo);
+	CParadigmInfo(uint16_t ParadigmNo, uint16_t AccentModelNo, uint16_t SessionNo, BYTE AuxAccent, const char* CommonAncode, uint16_t PrefixSetNo);
 	bool operator == (const CParadigmInfo& X) const;
 
 	static CParadigmInfo	AnyParadigmInfo();				// Nick [17/Dec/2003]
@@ -53,7 +53,7 @@ typedef LemmaMap::const_iterator const_lemma_iterator_t;
 //----------------------------------------------------------------------------
 struct CPredictSuffix
 {
-	WORD	m_FlexiaModelNo;
+	uint16_t	m_FlexiaModelNo;
 	std::string	m_Suffix;
 
 	//  grammatical code of the lemma
@@ -201,7 +201,7 @@ public:
 	void	MakeReadOnly();
 	void	CreatePredictIndex();
 	void	pack();
-	WORD	GetCurrentSessionNo() const;
+	uint16_t	GetCurrentSessionNo() const;
 	size_t	del_dup_lemm();
 
 	//===============  simple  primitives for ancode  and lemma iterator =========
@@ -228,14 +228,14 @@ public:
 	void find_lemm_by_user(std::string username, std::vector<lemma_iterator_t> &res);
 	void find_wordforms(std::string lemm, std::vector<lemma_iterator_t> &res);
 	void find_ancodes(const std::string &ancode, std::vector<lemma_iterator_t> &res);
-	void find_lemm_by_prdno(WORD no, std::vector<lemma_iterator_t> &res);
+	void find_lemm_by_prdno(uint16_t no, std::vector<lemma_iterator_t> &res);
 	void find_lemm_by_accent_model(int no, std::vector<lemma_iterator_t> &res);
 	
 	void find_lemm_by_prd_info( const CParadigmInfo& info, std::vector<lemma_iterator_t> &res);
 
 	//============ Main functions for editing dictionary ====================
 	// Mrd -> Slf (Converting from dictionary to text representation)
-	std::string	mrd_to_slf(const std::string &lemm, const CFlexiaModel&p, WORD AccentModelNo, BYTE AuxAccent, int line_size) const;
+	std::string	mrd_to_slf(const std::string &lemm, const CFlexiaModel&p, uint16_t AccentModelNo, BYTE AuxAccent, int line_size) const;
 	// Slf -> Mrd (Converting from text to dictionary representation)
 	void	slf_to_mrd(const std::string &s, std::string &lemm, CFlexiaModel& FlexiaModel, CAccentModel& AccentModel, BYTE& AuxAccent, int& line_no_err) const;
 	void	check_paradigm(long line_no);
@@ -244,12 +244,12 @@ public:
 	std::string	get_slf_string	(lemma_iterator_t it, std::string &dict, std::string& Prefixes, int line_size = 79);
 	void	get_wordforms(const_lemma_iterator_t it, StringVector& forms) const;
 	std::string	create_slf_from_predicted(int PredictParadigmNo,  std::string &dict, int line_size = 79) const;
-	CParadigmInfo	add_lemma(const std::string &slf, std::string common_grammems, const std::string& prefixes, int& line_no_err, WORD SessionNo = UnknownSessionNo); 
+	CParadigmInfo	add_lemma(const std::string &slf, std::string common_grammems, const std::string& prefixes, int& line_no_err, uint16_t SessionNo = UnknownSessionNo); 
 	void	set_to_delete_false();
 	void	delete_checked_lemms();
 	void	clear_predicted_paradigms();
-	bool	change_prd_info(CParadigmInfo& I, const std::string& Lemma, WORD NewParadigmNo, WORD newAccentModelNo, bool keepOldAccents );
-	std::string	show_differences_in_two_paradigms(WORD FlexiaModelNo1, WORD FlexiaModelNo2) const;
+	bool	change_prd_info(CParadigmInfo& I, const std::string& Lemma, uint16_t NewParadigmNo, uint16_t newAccentModelNo, bool keepOldAccents );
+	std::string	show_differences_in_two_paradigms(uint16_t FlexiaModelNo1, uint16_t FlexiaModelNo2) const;
 	
 	bool	slf2ancode(const std::string slf_line, std::string& gramcode) const;
 	bool	check_common_grammems(std::string common_grammems) const;
@@ -268,15 +268,15 @@ public:
 	void	EndSession();
 	std::string  GetUserName() const;
 	void	StartLastSessionOfUser(std::string user_name);
-	WORD	RegisterSession(const CMorphSession& S);
+	uint16_t	RegisterSession(const CMorphSession& S);
     bool    Filter(std::string flt_str, std::vector<lemma_iterator_t>& found_paradigms) const;
 private:
-	BYTE	_GetReverseVowelNo( const std::string& form, WORD accentModelNo, WORD formInd ) const;
-	void	SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, std::string& form) const;
-	std::string	get_prefix_set_str(WORD PrefixSetNo) const;
+	BYTE	_GetReverseVowelNo( const std::string& form, uint16_t accentModelNo, uint16_t formInd ) const;
+	void	SetAccent(uint16_t AccentModelNo, BYTE AuxAccent, int FormNo, std::string& form) const;
+	std::string	get_prefix_set_str(uint16_t PrefixSetNo) const;
 	void	ReadOnePrefixSet(std::string PrefixSet, std::set<std::string>& Result) const;
 	void	ReadPrefixSets (std::ifstream& mrdFile);
-	WORD	AddPrefixSet(std::string PrefixSetStr);
+	uint16_t	AddPrefixSet(std::string PrefixSetStr);
 
 	
 	

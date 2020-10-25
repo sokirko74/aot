@@ -31,7 +31,7 @@ BYTE CEngSemStructure::GetPosFromPosBit(size_t Pos) const
 	return 0;
 }
 
-void CEngSemStructure::ReadMorphFromMainGF(WORD UnitNo, DictTypeEnum type, CSemWord& SemWord) const
+void CEngSemStructure::ReadMorphFromMainGF(uint16_t UnitNo, DictTypeEnum type, CSemWord& SemWord) const
 {
 	BYTE pos;
 	uint64_t Grammems;
@@ -152,7 +152,7 @@ std::string CEngSemStructure::GetItemStr(long lItemNo, DictTypeEnum type /* = Ao
 	return std::string((const char*)GetRoss(type)->GetDomItemStr(lItemNo));
 }
 
-UINT CEngSemStructure::EngPOSByRusPOS(UINT rus_pos, std::string lemma)
+part_of_speech_mask_t CEngSemStructure::EngPOSesByRusPOS(part_of_speech_t rus_pos, std::string lemma)
 {
 	switch(rus_pos)
 	{
@@ -559,7 +559,7 @@ void CEngSemStructure::FilLexFunctRel()
 }
 
 
-bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, WORD UnitNo) const
+bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, uint16_t UnitNo) const
 {
     if (!RossHolder || (UnitNo == ErrUnitNo)) return false;
 	std::vector<TCortege> corteges;

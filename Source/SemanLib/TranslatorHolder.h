@@ -18,7 +18,7 @@ class CRossHolder;
 const char g_strRegRusOborDicPath[]    = "Software\\Dialing\\Obor\\DictPath"; 	 
 const char g_strAgramTabRegPath[]      = "Software\\Dialing\\Lemmatizer\\Russian\\Rgramtab";
 const long UnknownParadigmId = -1;
-const BYTE UnknownPOS = 0xff;
+const part_of_speech_t UnknownPOS = 0xff;
 
 /*анадлогичное перечисление в seman.idl*/
 enum DictTypeEnum   { Ross=0, LocRoss=1, CollocRoss=2, TimeRoss=3, OborRoss=4, Aoss=5, EngCollocRoss=6, EngObor=7, FinRoss=8, CompRoss=9, OmniRoss=10, NoneRoss=11 };
@@ -118,8 +118,8 @@ public:
     StringVector GetAspVerb (std::string Verb, bool IsPerfective);
 	void ErrorMessage (std::string Mess);
 	bool MakeSyntaxStr(const char* text, CMyTimeSpanHolder& GlobalSpan);
-	uint32_t GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, std::string WordForm, poses_mask_t Poses, std::string& ResultLemma) const;
-	uint32_t  GetFirstParadigmId (const MorphLanguageEnum langua, std::string WordForm,  poses_mask_t Poses) const;
+	uint32_t GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, std::string WordForm, part_of_speech_mask_t Poses, std::string& ResultLemma) const;
+	uint32_t  GetFirstParadigmId (const MorphLanguageEnum langua, std::string WordForm,  part_of_speech_mask_t Poses) const;
 	std::string GetThesPath(int ThesId) const;
 	const CDictionary* GetRusOborots() const;
 

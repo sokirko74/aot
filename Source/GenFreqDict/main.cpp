@@ -141,7 +141,7 @@ size_t write_other_small_dict_pair(const small_dict_t& small_dict, const small_d
 		out.write((char*)&(id), sizeof(uint32_t));
 		id = rp.GetParadigmId();
 		out.write((char*)&(id), sizeof(uint32_t));
-		WORD  freq = 5;
+		uint16_t  freq = 5;
 		out.write((char*)&(freq), sizeof(unsigned short));
 
 		std::string rus = MorphHolderRus.id_to_string(shira_it->first);
@@ -219,7 +219,7 @@ size_t write_out_file(const long maxFreq, const std::map<word_pair, int>& word_m
 		out.write((char*)&(it->first.e), sizeof(uint32_t));
 		out.write((char*)&(it->first.r), sizeof(uint32_t));
 
-		WORD freq = it->second;
+		uint16_t freq = it->second;
 		/*
 		  частота не должна превышать  USHRT_MAX, поэтому
 		  нужно нормализовать частоту

@@ -21,7 +21,7 @@ class CTempArticle
 public:
 	char					m_EntryStr[EntryStrSize];
 	BYTE					m_MeanNum;
-	WORD					m_UnitNo;
+	uint16_t					m_UnitNo;
 	bool						m_ReadOnly;
 	std::vector<CTextField>		m_Fields;
 	CDictionary*				m_pRoss;
@@ -45,7 +45,7 @@ public:
 	bool		BuildCortegeList();
 	bool		WriteToDictionary();
 	bool		IsModified() const;
-	void		ReadFromDictionary(WORD UnitNo, bool VisualOrder, bool ReadOnly);
+	void		ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool ReadOnly);
 	const std::string& GetArticleStr();
 	std::string GetArticleStrUtf8(bool check=false);
 	

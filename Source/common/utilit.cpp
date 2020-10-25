@@ -11,27 +11,29 @@
 //  for mkdir
 #ifdef WIN32
 	#include <direct.h>
+	#define NOMINMAX 
+	#include "windows.h"
 #else
 	#include <sys/stat.h>
 #endif
 
-const WORD fWordDelim = 1;
-const WORD RusUpper = 2;
-const WORD RusLower = 4;
-const WORD GerUpper = 8;
-const WORD GerLower = 16;
-const WORD EngUpper = 32;
-const WORD EngLower = 64;
-const WORD OpnBrck = 128;
-const WORD ClsBrck = 256;
-const WORD UpRomDigits = 512;
-const WORD LwRomDigits = 1024;
-const WORD LatinVowel = 2048;
-const WORD RussianVowel = 4096;
-const WORD URL_CHAR = 8192;
+const uint16_t fWordDelim = 1;
+const uint16_t RusUpper = 2;
+const uint16_t RusLower = 4;
+const uint16_t GerUpper = 8;
+const uint16_t GerLower = 16;
+const uint16_t EngUpper = 32;
+const uint16_t EngLower = 64;
+const uint16_t OpnBrck = 128;
+const uint16_t ClsBrck = 256;
+const uint16_t UpRomDigits = 512;
+const uint16_t LwRomDigits = 1024;
+const uint16_t LatinVowel = 2048;
+const uint16_t RussianVowel = 4096;
+const uint16_t URL_CHAR = 8192;
 
 
-const WORD ASCII[256] = {
+const uint16_t ASCII[256] = {
 /*null (nul)*/                                     fWordDelim,
 /*start of heading (soh)*/                         fWordDelim,
 /*start of text (stx)*/                            fWordDelim,

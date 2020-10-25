@@ -32,8 +32,8 @@ public:
 
   // словоформа - глагольная форма, которая заканчивается на "ся", "сь" 
   bool IsReflexiveVerb () const;
-  UINT GetRusRichPoses () const;
-  bool   HasPOS (size_t POS) const;
+  uint32_t GetRusRichPoses () const;
+  bool   HasPOS (part_of_speech_t POS) const;
   bool IsEqualMorph  (const CRusSemWord& W) const;
 };
 
@@ -117,7 +117,7 @@ public:
 	BYTE			m_IncomRelsCount; 
 
 
-	UINT			m_RichPoses;
+	uint32_t		m_RichPoses;
 
 	bool			m_bQuestionWord;
 	std::string			m_AntecedentStr;
@@ -131,7 +131,7 @@ public:
     // проверяет, стоит ли сразу же после последнего слова узла запятая
 	bool HaveCommaAfter() const;
     // дает  номер статьи для текущей интерпреции для проверки SF
-	WORD         GetSemCorrectUnitNo() const;
+	uint16_t         GetSemCorrectUnitNo() const;
 	// проверяет, что валентности не являются несовместными
 	// (здесь используется слот m_RelationId, в котором хранится уникальный номер валентности
 	// в графе, который строит функция СRusSemStructure::IndexRelations)
@@ -531,13 +531,13 @@ struct  CSemClauseVariantResult : public CSyntaxClauseVariant {
 };
 const int MaxRelSet = 100;
 struct CRelSet {
- WORD	 m_Rels[MaxRelSet];
+ uint16_t	 m_Rels[MaxRelSet];
  BYTE	 m_RelsCount;
  CRelSet () 
  {
 	 m_RelsCount = 0;
  }
- void Add (WORD RelNo)
+ void Add (uint16_t RelNo)
  {
 	 assert(m_RelsCount < MaxRelSet-1);
 	 // в Release просто не будем добавлять отношения, если их слишком много
@@ -545,7 +545,7 @@ struct CRelSet {
 		 return;
 	 m_Rels[m_RelsCount++] = RelNo;
  };
- void Insert (WORD No, WORD RelNo)
+ void Insert (uint16_t No, uint16_t RelNo)
  {
 	 //assert(m_RelsCount < MaxRelSet-1);
 	 // в Release просто не будем добавлять отношения, если их слишком много
@@ -557,7 +557,7 @@ struct CRelSet {
 	 m_RelsCount++;
 	 m_Rels[No] = RelNo;
  };
- void  Erase (WORD No)
+ void  Erase (uint16_t No)
  {
 	 //assert (No < m_RelsCount);
 	 for (long i = No; i < m_RelsCount-1 ; i++)
@@ -985,9 +985,9 @@ public:
 	// получение словарных интерпретаций из тезауруса
     void			GetThesInterps(std::string UnitStr, const CRusSemWord& W, const CThesaurus* Thes, DictTypeEnum	 DictType, CRusSemNode& N) const;
 	// выдает номер статьи в тезауруссном РОССе по  номеру термина
-	WORD			GetArticleByModel (long TerminId, int ThesaurusId) const;
+	uint16_t			GetArticleByModel (long TerminId, int ThesaurusId) const;
 	// выдает словарные интерпретации в РОССе без приставок
-	WORD			GetInterpWithoutPrefix (CRusSemWord& W) const;
+	uint16_t			GetInterpWithoutPrefix (CRusSemWord& W) const;
 	// Инициализация валентностей в текущей слов. интерпретации
 	bool			InitValsRussian(long NodeNo);
 	// Инициализация DOMAIN
@@ -1020,7 +1020,7 @@ public:
 	// проходит по всем значениям GFi и запускает CheckPatternGramFetLine
 	bool			IsPattern (CSemPattern& P, size_t NodeNo, std::string& SyntacticRelation, CSynRealization& SynRealization);
 	// загружаем пассивную валентность слова (с учетом только помет ("стр"))
-	bool          LoadFromDictForPassive(WORD UnitNo, BYTE LeafId, BYTE BracketLeafId, CSemPattern& P);
+	bool          LoadFromDictForPassive(uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId, CSemPattern& P);
 	// удаление длинных связей 
 	void			DeleteLongRelations (long ClauseNo, long MaxRelationLeapsCount, bool bOnlyNouns);
 	
@@ -1292,7 +1292,7 @@ public:
 		// вызывает функцию GetDopFields, строит по результатпм m_ThesSemRelations
 		long			AddThesSemRelations(const CRossHolder* Dict, long UnitNo, long StartNodeNo);
 		// выдает номер словарной статьи по ID термина
-		WORD			GetUnitNoByTerminId(DictTypeEnum   DictType,	long TerminId) const;
+		uint16_t			GetUnitNoByTerminId(DictTypeEnum   DictType,	long TerminId) const;
 		// переводит тире в клаузе типа "тире" в глагол "есть"
 		void			ProcessDashClauses();
 		bool	IsQuestionClause(long ClauseNo) const 

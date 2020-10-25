@@ -53,7 +53,7 @@ bool CSynHomonym::CompareWithPredefinedWords(const SDatItems& DatItems) const
 
 
 //===============================================
-//================= CLASS WORD ==================
+//================= CLASS uint16_t ==================
 //===============================================
 
 CSynWord::CSynWord(CSentence* pSent) 

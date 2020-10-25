@@ -54,11 +54,11 @@ CEngGramTab :: ~CEngGramTab()
 		};
 };
 
-BYTE CEngGramTab::GetPartOfSpeechesCount() const { 
+part_of_speech_t CEngGramTab::GetPartOfSpeechesCount() const { 
 	return ENGLISH_PART_OF_SPEECH_COUNT;
 };
 
-const char* CEngGramTab::GetPartOfSpeechStr(BYTE i) const { 
+const char* CEngGramTab::GetPartOfSpeechStr(part_of_speech_t i) const { 
 	return EnglishPartOfSpeech[i].c_str();
 };
 
@@ -86,7 +86,7 @@ bool CEngGramTab::GleicheSubjectPredicate(const char* gram_code1, const char* gr
 }
 
 
-bool CEngGramTab::IsStrongClauseRoot(const poses_mask_t poses)  const
+bool CEngGramTab::IsStrongClauseRoot(const part_of_speech_mask_t poses)  const
 {
 	return	false;
 };
@@ -102,70 +102,70 @@ bool CEngGramTab::is_month (const char* lemma) const
 	return false;
 };
 
-bool CEngGramTab::IsMorphNoun (poses_mask_t poses)  const
+bool CEngGramTab::IsMorphNoun (part_of_speech_mask_t poses)  const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_morph_adj (poses_mask_t poses) const
+bool CEngGramTab::is_morph_adj (part_of_speech_mask_t poses) const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_morph_participle (poses_mask_t poses) const
+bool CEngGramTab::is_morph_participle (part_of_speech_mask_t poses) const
 {
 	return  false;
 };
  
-bool CEngGramTab::is_morph_pronoun (poses_mask_t poses) const
+bool CEngGramTab::is_morph_pronoun (part_of_speech_mask_t poses) const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_morph_pronoun_adjective(poses_mask_t poses) const
+bool CEngGramTab::is_morph_pronoun_adjective(part_of_speech_mask_t poses) const
 {
 	return  false;
 };
 
-bool CEngGramTab::is_left_noun_modifier (poses_mask_t poses, uint64_t grammems) const
+bool CEngGramTab::is_left_noun_modifier (part_of_speech_mask_t poses, grammems_mask_t grammems) const
 {
 	return     false;
 }
 
 
-bool CEngGramTab::is_numeral (poses_mask_t poses) const
+bool CEngGramTab::is_numeral (part_of_speech_mask_t poses) const
 { 
 	return  false;
 };
 
-bool CEngGramTab::is_verb_form (poses_mask_t poses) const
+bool CEngGramTab::is_verb_form (part_of_speech_mask_t poses) const
 {
 	return     false;
 };
 
 
 
-bool CEngGramTab::is_infinitive(poses_mask_t poses) const
+bool CEngGramTab::is_infinitive(part_of_speech_mask_t poses) const
 {
 	return false; 
 }
 
-bool CEngGramTab::is_morph_predk(poses_mask_t poses) const
+bool CEngGramTab::is_morph_predk(part_of_speech_mask_t poses) const
 {
 	return false;
 }
 
-bool CEngGramTab::is_morph_adv(poses_mask_t poses) const
+bool CEngGramTab::is_morph_adv(part_of_speech_mask_t poses) const
 {
 	return false; 
 }
 
-bool CEngGramTab::is_morph_personal_pronoun (poses_mask_t poses, uint64_t grammems) const
+bool CEngGramTab::is_morph_personal_pronoun (part_of_speech_mask_t poses, grammems_mask_t grammems) const
 {
 	return		false;
 };
 
-bool CEngGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
+bool CEngGramTab::IsSimpleParticle(const char* lemma, part_of_speech_mask_t poses) const
 {
 	return false;
 }
@@ -176,7 +176,7 @@ bool CEngGramTab::IsSimpleParticle(const char* lemma, poses_mask_t poses) const
 
 
 
-bool CEngGramTab::IsSynNoun(poses_mask_t poses, const char* Lemma) const
+bool CEngGramTab::IsSynNoun(part_of_speech_mask_t poses, const char* Lemma) const
 {
 	return false;
 };
@@ -196,12 +196,12 @@ bool CEngGramTab::GleicheCaseNumber(const char* gram_code1, const char* gram_cod
 {
 	return false;
 };
-uint64_t CEngGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const 
+grammems_mask_t CEngGramTab::GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const 
 {
 	return 0;
 };
 
-bool CEngGramTab::is_morph_article(poses_mask_t poses)  const 
+bool CEngGramTab::is_morph_article(part_of_speech_mask_t poses)  const 
 {
 	return false;
 };

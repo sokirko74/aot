@@ -188,7 +188,7 @@ void CGraLine::SetDes(Descriptors d) {
 };
 
 
-void CGraLine::AddStatus(WORD add_state) {
+void CGraLine::AddStatus(uint16_t add_state) {
     m_Status |= add_state;
 };
 

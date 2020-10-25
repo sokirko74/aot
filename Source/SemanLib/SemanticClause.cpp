@@ -562,13 +562,13 @@ bool CRusSemStructure::TryClauseConjWord(long ClauseRuleNo, long ClauseNo1, long
 		{
 			std::string Lemma = m_Nodes[ConjNodeNo].m_LexFunctFields[l].m_Lemma;
 			int i = Lemma.find("(");
-			uint32_t Poses = 0;
+			part_of_speech_mask_t Poses = 0;
 			if (i != -1)
 			{
 				std::string q = Lemma.substr(i + 1, Lemma.find(")") - i - 1);
 				Lemma.erase(i);
 				Trim(Lemma);
-				uint64_t dummy;
+				grammems_mask_t dummy;
 				m_pData->GetCustomGrammems(q, dummy, Poses);
 			};
 
@@ -663,7 +663,7 @@ bool CRusSemStructure::TryClauseConjWord(long ClauseRuleNo, long ClauseNo1, long
 		находим тогда удаляем ее, например
 		"я думал о том, почему ты мне надоел"
 		*/
-		WORD O_UnitNo = GetRoss(OborRoss)->LocateUnit(_R("о+П").c_str(), 1);
+		uint16_t O_UnitNo = GetRoss(OborRoss)->LocateUnit(_R("о+П").c_str(), 1);
 		std::vector<long> Nodes;
 		GetOutcomingNodes(NodeNo, Nodes, false);
 		for (long j = 0; j < Nodes.size(); j++)

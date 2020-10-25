@@ -117,7 +117,7 @@ public:
 	 CEngSemWord();
 	 CEngSemWord (const CSemWord& X);
 	// принадлежит ли данная часть речи набору частей речи, который приписан слову?
-	 virtual bool   HasPOS (size_t POS) const;
+	 virtual bool   HasPOS (part_of_speech_t POS) const;
 };
 
 enum ArticleCauseEnum {	ArticleFromDict, ArticleFromOrdNum, ZeroArticleForProperNames, 
@@ -128,7 +128,7 @@ enum ArticleCauseEnum {	ArticleFromDict, ArticleFromOrdNum, ZeroArticleForProper
                         IndefByModalVerb, UnknownArticleCause};
 
 extern std::string GetArticleCauseHistory (const std::vector<ArticleCauseEnum>& t);
-extern BYTE GetOnePOS(long poses);
+extern part_of_speech_t GetOnePOS(part_of_speech_mask_t poses);
 enum ArticleEnum { 
 	ZeroArticle, 
 	DefArticle, 
@@ -170,7 +170,7 @@ public:
 	void Init ();
 
 	EngVerbTenseEnum GetTense() const;
-	BYTE GetPos() const;
+	part_of_speech_t GetPos() const;
 	bool IsLemma(std::string Lemma) const;
 
 	void SetArticle(ArticleEnum s, ArticleCauseEnum cause);
@@ -345,7 +345,7 @@ public:
 	bool Rule_TranslateRelWithPrepField(int iRusActant,long RelationNo, int iEngNode);
 
 	int  NumPrepPhr(const std::vector<TCortege>& GramCorteges, DictTypeEnum type);
-	void ReadMorphFromMainGF(WORD UnitNo, DictTypeEnum type, CSemWord& Word) const;
+	void ReadMorphFromMainGF(uint16_t UnitNo, DictTypeEnum type, CSemWord& Word) const;
 	void InitEngWordAndLemma(CEngSemWord& semWord, std::string strEngLemma) const;
 
 	typedef std::map< std::string,std::vector<SGramCortegesAndType> > SemRelToGramCortegeMap_t;
@@ -377,7 +377,7 @@ public:
 	void InitEngVals(CEngSemNode& Node);
 
 	bool AddGXiFromLexFunOperWord(long LexFunctWordUnitNo, CSemPattern& semPattern1, int iValNum, int iOperNum);
-	UINT EngPOSByRusPOS(UINT rus_pos, std::string lemma);
+	part_of_speech_mask_t EngPOSesByRusPOS(part_of_speech_t rus_pos, std::string lemma);
 	int InterpretRusNodeAndItsChildren( CEnglishEquivMap& mapRNodeToENode, int iRusNode);
 	int InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int iRusNode, std::vector<long>& RusRelsToEngRels, int& iSubjRel);
 
@@ -529,7 +529,7 @@ public:
 	void					SetInterpreted (long RusNodeNo);
 
 	// является ли статья UnitNo заглушечной
-	bool					IsPlugArticle(const CRossHolder* RossHolder, WORD UnitNo) const;
+	bool					IsPlugArticle(const CRossHolder* RossHolder, uint16_t UnitNo) const;
 	bool					IsValFromRossArticle(const CSemRelation& semRel) const;
 
     // переводит тайм-группу (на вход подается главный узел группы)
@@ -614,7 +614,7 @@ public:
 	// проверяет, что у  узла есть выходящее отношение, идущее в примитивный узел, который содержит слово  Word
 	int				GetOutRelationByWord(long NodeNo, std::string Word) const;
 	// проверяет, что у  узла есть выходящее отношение, идущее в узел, которому приписана  часть речи POS
-	bool			HasOutRelationByPoses(long NodeNo, poses_mask_t Pos) const;
+	bool			HasOutRelationByPoses(long NodeNo, part_of_speech_mask_t Pos) const;
 
 	// переводит аббревиатурные формы теримнов
 	void			translate_abbr_termin_node(int MainNodeNo);	

@@ -163,7 +163,7 @@ bool CRusSemStructure::ContainsSemCopul(long NodeNo) const
 	if (Interp == 0) return false;
 	if (Interp->m_DictType != Ross) return false;
 	if (HasSemFet(m_Nodes[NodeNo], "Copul")) return true;
-	WORD UnitNo = Interp->m_UnitNo;
+	uint16_t UnitNo = Interp->m_UnitNo;
 	if (UnitNo ==  ErrUnitNo) 
 		return false;
 
@@ -642,8 +642,8 @@ void  CRusSemStructure::ProcessAllowableLexVars (std::string LexVarsStr)
 CRelSet CRusSemStructure::GetIncomingRelations (long NodeNo, bool UseUse) const 
 {
   CRelSet R;
-  WORD RelsCount = m_Relations.size();
-  for (WORD i = 0; i < RelsCount; i++)
+  uint16_t RelsCount = m_Relations.size();
+  for (uint16_t i = 0; i < RelsCount; i++)
    if (!UseUse || m_Relations[i].m_bRelUse) 
      if (m_Relations[i].m_TargetNodeNo == NodeNo)
 		 R.Add(i);
@@ -954,7 +954,7 @@ bool CRusSemNode::HaveCommaAfter() const { return HasPostPunct(',');	};
 
 
 // дает  номер статьи для текущей интерпреции для проверки SF
-WORD         CRusSemNode::GetSemCorrectUnitNo() const 
+uint16_t         CRusSemNode::GetSemCorrectUnitNo() const 
 { 
 	return (m_CurrInterp == -1)  ? ErrUnitNo : m_Interps[m_CurrInterp].GetSemCorrectUnitNo();
 };
@@ -1115,9 +1115,9 @@ bool CRusSemWord::IsReflexiveVerb () const
 			&& HasReflexiveSuffix(m_Word);
 };
 
-UINT CRusSemWord::GetRusRichPoses () const
+part_of_speech_mask_t CRusSemWord::GetRusRichPoses () const
 {
-    UINT Poses = m_Poses;
+	part_of_speech_mask_t Poses = m_Poses;
 
 	if (m_Lemma == _R("ЛИ"))
 		Poses &= ~(1 << CONJ);
@@ -1133,7 +1133,7 @@ UINT CRusSemWord::GetRusRichPoses () const
 	return Poses;
 };
 
-bool   CRusSemWord::HasPOS (size_t POS) const
+bool   CRusSemWord::HasPOS (part_of_speech_t POS) const
 {
 	return  (GetRusRichPoses()  & 1<<POS) > 0;
 };

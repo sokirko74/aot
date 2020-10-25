@@ -125,18 +125,18 @@ public:
 	void SetPanic();
 };
 
-const WORD Unhosted = 0xffff;
-const WORD MustBeIgnored = 0xffff-1;
+const uint16_t Unhosted = 0xffff;
+const uint16_t MustBeIgnored = 0xffff-1;
 
 class CTreeVariant 
 {
 	// the size of m_TreeRels can really be more than 256 on some sentences
-	std::vector<WORD>	m_TreeRels;
+	std::vector<uint16_t>	m_TreeRels;
 public:
-	void AddRel(WORD RelNo);
-	void SetRel(WORD RelNo, WORD Value);
+	void AddRel(uint16_t RelNo);
+	void SetRel(uint16_t RelNo, uint16_t Value);
 	void DeleteLast();
-	WORD GetRel(WORD RelNo) const;
+	uint16_t GetRel(uint16_t RelNo) const;
 	size_t GetRelsCount() const;
 };
 

@@ -237,7 +237,7 @@ void CreateLockFile(CString FileName)
 		fprintf (fp,"Time = %s\r\n", CTime::GetCurrentTime().Format( "%H : %M" )); 
 		CString UserName = getenv("USERNAME");
         if (!UserName.IsEmpty())
-			fprintf (fp, "UserName = %s \r\n", UserName);
+			fprintf (fp, "UserName = %s \r\n", (const char*)UserName);
 
 	}
 	catch (...) {

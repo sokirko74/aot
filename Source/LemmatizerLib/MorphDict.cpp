@@ -45,8 +45,8 @@ void    CMorphDict::GetLemmaInfos(const std::string& Text, size_t TextPos, std::
 		size_t textStartPos = TextPos + m_Prefixes[annot.m_PrefixNo].length() + M.m_PrefixStr.length();
 		std::string Base = m_Prefixes[annot.m_PrefixNo] + Text.substr(textStartPos, textLength - textStartPos - M.m_FlexiaStr.length());
 
-		auto& start = m_LemmaInfos.begin() + m_ModelsIndex[annot.m_ModelNo];
-		auto& end = m_LemmaInfos.begin() + m_ModelsIndex[annot.m_ModelNo + 1];
+		auto start = m_LemmaInfos.begin() + m_ModelsIndex[annot.m_ModelNo];
+		auto end = m_LemmaInfos.begin() + m_ModelsIndex[annot.m_ModelNo + 1];
 
 		std::vector<CLemmaInfoAndLemma>::const_iterator it =
 			lower_bound(start, end, Base.c_str(), m_SearchInfoLess);

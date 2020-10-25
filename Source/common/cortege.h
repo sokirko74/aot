@@ -91,7 +91,7 @@ public:
 				 && HasEqualItems (X, _MaxNumDom);
 	};
 
-	bool IsEqualWithWildCard(const TBasicCortege& X, WORD EmptyDomItem, BYTE _MaxNumDom) const
+	bool IsEqualWithWildCard(const TBasicCortege& X, uint16_t EmptyDomItem, BYTE _MaxNumDom) const
 	{  
 		if    (!(   (m_FieldNo  == X.m_FieldNo)  
 			 && (      (m_LevelId == ErrUChar)

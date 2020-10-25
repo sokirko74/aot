@@ -2,7 +2,7 @@
 #include "EngSemStructure.h"
 
 
-BYTE GetOnePOS(long poses)
+part_of_speech_t GetOnePOS(part_of_speech_mask_t poses)
 {
 	for(int i = 0 ; i < 32 ; i++ )
 		if( poses & (1 << i))
@@ -33,10 +33,12 @@ void CEngSemWord::Init()
 	SetTense(zero_tn, "Constructor");
 
 };
+
 CEngSemWord::CEngSemWord() : CSemWord()	 
 {
 	Init();	 
 };
+
 CEngSemWord::CEngSemWord (const CSemWord& X)
 {
 	*((CSemWord*)this) = X;
@@ -44,7 +46,7 @@ CEngSemWord::CEngSemWord (const CSemWord& X)
 };
     
   // принадлежит ли данная часть речи набору частей речи, который приписан слову?
-bool   CEngSemWord::HasPOS (size_t POS) const 
+bool   CEngSemWord::HasPOS (part_of_speech_t POS) const
 {
 	return (m_Poses & (1<<POS)) > 0;
 };

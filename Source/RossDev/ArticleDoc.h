@@ -18,7 +18,7 @@ public:
    CRossDoc*   m_pRossDoc;
    std::vector<CString> m_Lines;
 
-   WORD  m_UnitNo;
+   uint16_t  m_UnitNo;
    CTempArticle m_Article;
    bool m_WasSaved ;
    
@@ -35,7 +35,7 @@ public:
    std::string GetArticleErrorStr() const;
 
 
-   BOOL    OpenArticle (WORD UnitNo, CRossDoc* pRossDoc);
+   BOOL    OpenArticle (uint16_t UnitNo, CRossDoc* pRossDoc);
    CDictionary* GetRoss () {return m_pRossDoc->GetRoss();}
            bool Markout ();
 		   bool AddCortegeToVector (std::vector<TCortege10>& L, CRossDevTextField& F);

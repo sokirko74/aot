@@ -24,15 +24,15 @@
 typedef float prob_t;
 #define MAXPROB FLT_MAX
 
-const WORD UnknownTag = 0xffff;
+const uint16_t UnknownTag = 0xffff;
 
 typedef uint64_t trigram_integer_t;
 //typedef int trigram_integer_t;
 
 struct CLexProb 
 {
-	WORD	m_PrevTag;
-	WORD	m_Tag;
+	uint16_t	m_PrevTag;
+	uint16_t	m_Tag;
 	uint32_t	m_Count;
 	CLexProb()
 	{
@@ -40,7 +40,7 @@ struct CLexProb
 		m_PrevTag = UnknownTag;
 		m_Count = 0;
 	};
-	CLexProb(WORD PrevTag, WORD Tag, uint32_t Count)
+	CLexProb(uint16_t PrevTag, uint16_t Tag, uint32_t Count)
 	{
 		m_PrevTag = PrevTag;
 		m_Tag = Tag ;
@@ -73,8 +73,8 @@ struct CTrigramWord
 
 struct CWordIntepretation 
 {	
-	WORD	m_TagId1;
-	WORD	m_TagId2;
+	uint16_t	m_TagId1;
+	uint16_t	m_TagId2;
 	CWordIntepretation()
 	{
 		m_TagId1 =  UnknownTag;
@@ -92,7 +92,7 @@ struct CLambdas{
 struct CDictionarySearch 
 {
 	const CTrigramWord*     m_pFoundWord;
-	std::set<WORD>		        m_PossibleWordTags;
+	std::set<uint16_t>		        m_PossibleWordTags;
 };
 
 
@@ -109,27 +109,27 @@ class CViterbiInfo
 {
 private:
 	
-    std::map<std::pair<WORD,WORD>, prob_t>			m_Probs;
-	std::map<std::pair<WORD,WORD>, WORD>			m_TagRefs;
-	std::pair<prob_t, WORD> 		m_FirstMaximum;
-	std::pair<prob_t, WORD> 		m_SecondMaximum;
+    std::map<std::pair<uint16_t,uint16_t>, prob_t>			m_Probs;
+	std::map<std::pair<uint16_t,uint16_t>, uint16_t>			m_TagRefs;
+	std::pair<prob_t, uint16_t> 		m_FirstMaximum;
+	std::pair<prob_t, uint16_t> 		m_SecondMaximum;
 
 public:
-	std::set<WORD>						m_LexicalProbs;
+	std::set<uint16_t>						m_LexicalProbs;
     
     
 	
 
 	CViterbiInfo ();
-    void SetProb(WORD i,  WORD j, prob_t  value);
-	prob_t GetProb(WORD i,  WORD j) const;
-	void SetTagRef(WORD i,  WORD j, WORD TagRef);
-    WORD GetTagRef(WORD i,  WORD j) const;
-	const std::map<std::pair<WORD,WORD>, prob_t>&  GetAllProbs() const;
-    void  UpdateMaximum(prob_t prob, WORD tag);
+    void SetProb(uint16_t i,  uint16_t j, prob_t  value);
+	prob_t GetProb(uint16_t i,  uint16_t j) const;
+	void SetTagRef(uint16_t i,  uint16_t j, uint16_t TagRef);
+    uint16_t GetTagRef(uint16_t i,  uint16_t j) const;
+	const std::map<std::pair<uint16_t,uint16_t>, prob_t>&  GetAllProbs() const;
+    void  UpdateMaximum(prob_t prob, uint16_t tag);
     bool  IsAmbig()  const;
-	std::pair<prob_t, WORD>  GetFirstMaximum()  const;
-	std::pair<prob_t, WORD>  GetSecondMaximum()  const;
+	std::pair<prob_t, uint16_t>  GetFirstMaximum()  const;
+	std::pair<prob_t, uint16_t>  GetSecondMaximum()  const;
 };
 
 const 	int	START_AT_TAG  = 1;
@@ -146,17 +146,17 @@ class CTrigramModel
 	// структура используется для построения бакетов 
 	struct CSingleHistory
 	{
-		WORD i;
-		WORD j;
+		uint16_t i;
+		uint16_t j;
 		int  m_TrigramsCount;
 	};
 	typedef std::map<int, std::vector< CSingleHistory >  >  PMap;
 	typedef std::map<size_t, prob_t>  BMap;
 
     // serializable
-	WORD					m_TagsCount; // == m_RegisteredTags.size()
+	uint16_t					m_TagsCount; // == m_RegisteredTags.size()
 	std::vector<int>			m_Unigrams;      /* uni-, bi- and trigram counts */
-	std::vector<WORD>		m_TagsOrderedByUnigrams;      /* uni-, bi- and trigram counts */
+	std::vector<uint16_t>		m_TagsOrderedByUnigrams;      /* uni-, bi- and trigram counts */
 	std::vector<int>			m_Bigrams;      /* uni-, bi- and trigram counts */
 	std::map<trigram_integer_t,int>		m_Trigrams;
     int					m_TypeCounts[3];        /* uni-, bi- and trigram type counts */
@@ -185,27 +185,27 @@ class CTrigramModel
 	
 
 	
-	void	set_ngram(size_t n, WORD t1, WORD t2, WORD t3, int value);
-	int ngram_index(WORD t1) const;
-	int ngram_index(WORD t1, WORD t2) const;
-	trigram_integer_t ngram_index(WORD t1, WORD t2, WORD t3) const;
+	void	set_ngram(size_t n, uint16_t t1, uint16_t t2, uint16_t t3, int value);
+	int ngram_index(uint16_t t1) const;
+	int ngram_index(uint16_t t1, uint16_t t2) const;
+	trigram_integer_t ngram_index(uint16_t t1, uint16_t t2, uint16_t t3) const;
 
-	WORD find_tag(const std::string &t) const; 
-	WORD register_tag(const std::string& t);
+	uint16_t find_tag(const std::string &t) const; 
+	uint16_t register_tag(const std::string& t);
 	bool CheckLemma(std::string Word, std::string TagStr1, std::string TagStr2) const;
-	int				compute_bucket_denominator(WORD i, WORD j, int& TrigramsCount);
+	int				compute_bucket_denominator(uint16_t i, uint16_t j, int& TrigramsCount);
 	CLambdas		compute_lambdas_for_one_bucket(PMap::const_iterator start_it, PMap::const_iterator end_it);
-	prob_t			GetSmoothedProb(WORD PrevPrevTag, WORD PrevTag, WORD CurrTag) const;
+	prob_t			GetSmoothedProb(uint16_t PrevPrevTag, uint16_t PrevTag, uint16_t CurrTag) const;
 	void			ViterbiForward(const std::vector<std::string>& words, std::vector<CViterbiInfo>& Triplet, const std::vector<CViterbiInfo>& RevTriplet) const;
 	void			ViterbiBackward(const std::vector<std::string>& words, const std::vector<CViterbiInfo>& Triplet, std::vector<CWordIntepretation>& tags) const;
-	size_t			GetTrigram(WORD t1, WORD t2, WORD t3)  const;
-	void			get_tags_from_lemmatizer_but_not_preps(const std::string& WordStr, std::set<WORD>& tags) const;
+	size_t			GetTrigram(uint16_t t1, uint16_t t2, uint16_t t3)  const;
+	void			get_tags_from_lemmatizer_but_not_preps(const std::string& WordStr, std::set<uint16_t>& tags) const;
 	CDictionarySearch		find_word(const std::string& WordStr) const;
-	prob_t					GetSmoothedLexProb(const CDictionarySearch& DS, WORD PrevTag, WORD CurrTag) const;
+	prob_t					GetSmoothedLexProb(const CDictionarySearch& DS, uint16_t PrevTag, uint16_t CurrTag) const;
 	bool					LoadSynanForThisSentence(const std::vector<std::string>& words) const;
 	std::set<std::string>				GetLemmaSetByTagAndWordStr(std::string Word, std::string TagStr, bool bOnlyWithMaxWeight) const;
 	
-	prob_t					BuildSmoothedProb(WORD PrevPrevTag, WORD PrevTag, WORD CurrTag) const;
+	prob_t					BuildSmoothedProb(uint16_t PrevPrevTag, uint16_t PrevTag, uint16_t CurrTag) const;
 	bool					TagRawTexts(std::string FileName);
 	bool					TagRawText(std::string FileName);
 	
@@ -273,7 +273,7 @@ public:
 	bool lemmatize_file(std::string FileName) ;
 	bool CheckTagsForFormInfo(const std::vector<CTag>& Tags, const CFormInfo& F) const;
 	std::string GetParticipleLemma(const CFormInfo& F) const;
-    bool FindGramTabLineInTags(const std::vector<CTag>& Tags, poses_mask_t Poses, uint64_t AllGrammems) const;
+    bool FindGramTabLineInTags(const std::vector<CTag>& Tags, part_of_speech_mask_t Poses, uint64_t AllGrammems) const;
 #endif
 
 	bool write_dictionary_binary(const std::map<std::string, std::vector<CLexProb> >& Dictionary) const;
@@ -283,10 +283,10 @@ public:
     bool SaveBinary();
     bool ReadBinary();
     bool DisambiguateRusCorpXml(std::vector<CXmlToken>& Words) const;
-    void get_tags_from_annots(const std::vector<CXmlMorphAnnot>& Annots, std::set<WORD>& tags, const std::string& WordStr) const;
+    void get_tags_from_annots(const std::vector<CXmlMorphAnnot>& Annots, std::set<uint16_t>& tags, const std::string& WordStr) const;
     
 	bool viterbi(const std::vector<std::string>& words, std::vector<CWordIntepretation>& tags) const;
-    void BuildReverseLexProb(const std::vector<std::string>& words, std::vector<std::map<WORD,prob_t> >& RevLexProbs) const;
+    void BuildReverseLexProb(const std::vector<std::string>& words, std::vector<std::map<uint16_t,prob_t> >& RevLexProbs) const;
 	
 }; 
 

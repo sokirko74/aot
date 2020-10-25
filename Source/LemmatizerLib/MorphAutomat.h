@@ -71,9 +71,9 @@ struct CMorphAutomRelation
 struct CAutomAnnotationInner
 {
 	// these members are read from the automat
-	WORD	m_ModelNo;
-	WORD	m_ItemNo;
-	WORD	m_PrefixNo;
+	uint16_t	m_ModelNo;
+	uint16_t	m_ItemNo;
+	uint16_t	m_PrefixNo;
 
 	// these members are calculated later
 	int		m_LemmaInfoNo;

@@ -139,7 +139,7 @@ bool CGraphmatFile::DealAsteriskBullet (size_t LB, size_t HB)
 
 }
 
-bool DealIndention  (CGraphmatFile& G, size_t i, size_t Offset, const std::vector<WORD>& LeftMargins)
+bool DealIndention  (CGraphmatFile& G, size_t i, size_t Offset, const std::vector<uint16_t>& LeftMargins)
 {
 	if (i == 0) return true;
 	if ( G.GetUnits()[i].IsSoft()) return true;
@@ -270,7 +270,7 @@ void CGraphmatFile::DealOborotto(size_t  HB)
 {
 
 	std::string s;
-	std::vector<WORD> OborotIds;
+	std::vector<uint16_t> OborotIds;
 	OborotIds.resize(HB);
 
 	int i=1;
@@ -392,7 +392,7 @@ int CGraphmatFile::DealReferences (size_t i,size_t HB)
 const size_t MaxLeftMargin = 300;
 
 
-void MapCorrectMinSpace (const CGraphmatFile& G, size_t LB, size_t HB, WORD& FuzzyMinSpace, WORD& MinSpace, int& NumOfFilledLines, const std::vector<WORD>& gLeftMargins )
+void MapCorrectMinSpace (const CGraphmatFile& G, size_t LB, size_t HB, uint16_t& FuzzyMinSpace, uint16_t& MinSpace, int& NumOfFilledLines, const std::vector<uint16_t>& gLeftMargins )
 {
 	size_t					LeftMargins [MaxLeftMargin];
 
@@ -425,7 +425,7 @@ void MapCorrectMinSpace (const CGraphmatFile& G, size_t LB, size_t HB, WORD& Fuz
 	for (k=0; k<MaxLeftMargin; k++)
 	if (LeftMargins[k] > (NumOfFilledLines/100))
 			{
-				FuzzyMinSpace = (WORD)k;	 
+				FuzzyMinSpace = (uint16_t)k;	 
 				break;
 			};
 
@@ -658,9 +658,9 @@ int CGraphmatFile::DealFIO (size_t i,size_t HB)
 
 
 
-void CalculateLMarg (const CGraphmatFile& G, std::vector<WORD>& gLeftMargins)
+void CalculateLMarg (const CGraphmatFile& G, std::vector<uint16_t>& gLeftMargins)
 {
-	WORD lm = 0;
+	uint16_t lm = 0;
 	gLeftMargins.resize(G.GetUnits().size());
 	size_t HB = G.GetUnits().size();
 	for (size_t i=1; i<HB; i++)
@@ -1120,11 +1120,11 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 
 	int NumOfFilledLines = 0;   //  число непустых строк
 
-	WORD		FuzzyMinSpace;  /* This variable is the fuzzy min left margin.
+	uint16_t		FuzzyMinSpace;  /* This variable is the fuzzy min left margin.
 	It is used to determine indentions  of the text
 	when the text is more than BigTextLengthInFilledLines */
 
-	WORD		MinSpace = 100;    /* This variable is the min left margin
+	uint16_t		MinSpace = 100;    /* This variable is the min left margin
 	of the whole text, it will be used for
 	determintation of indentions. */
 
@@ -1144,7 +1144,7 @@ int CGraphmatFile::InitContextDescriptors (size_t LB, size_t HB)
 
 
 	//  === Смещение от левого края =====
-	std::vector<WORD> gLeftMargins;
+	std::vector<uint16_t> gLeftMargins;
 	try{
 		CalculateLMarg(*this, gLeftMargins);
 	}

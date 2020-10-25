@@ -44,7 +44,7 @@ bool CTrigramModel::CheckTagsForFormInfo(const std::vector<CTag>& Tags, const CF
     return    FindGramTabLineInTags(Tags, 1<<SrcPoS, Grammems | CommonGrammems);
 }
 
-bool CTrigramModel::FindGramTabLineInTags(const std::vector<CTag>& Tags, poses_mask_t Poses, uint64_t AllGrammems) const
+bool CTrigramModel::FindGramTabLineInTags(const std::vector<CTag>& Tags, part_of_speech_mask_t Poses, uint64_t AllGrammems) const
 {
     for (int j=0; j < Tags.size(); j++)
 	{
@@ -93,7 +93,7 @@ std::string CTrigramModel::GetParticipleLemma(const CFormInfo& F) const
 
 	
 	uint64_t G = m_pAgramtab->GetAllGrammems(SrcAncode.c_str()) | CommonGrammems;
-	for (WORD k=0; k < F.GetCount(); k++)
+	for (uint16_t k=0; k < F.GetCount(); k++)
 	{
 		BYTE PoS = m_pAgramtab->GetPartOfSpeech(F.GetAncode(k).c_str());
 		if (PoS != PARTICIPLE) continue;
@@ -245,7 +245,7 @@ bool CTrigramModel::InitDicts ()
 };
 
 
-void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const std::string& WordStr, std::set<WORD>& tags) const
+void  CTrigramModel::get_tags_from_lemmatizer_but_not_preps(const std::string& WordStr, std::set<uint16_t>& tags) const
 {
 	if (!CheckLanguage(WordStr,m_Language)) return; 
 	std::vector<CFormInfo> FormInfos;

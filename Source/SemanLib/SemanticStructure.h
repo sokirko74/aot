@@ -23,7 +23,7 @@ struct CRossQuery {
 	// в какой  словарь
 	DictTypeEnum	m_TypeEnum;
 	// из какой статьи
-    WORD			m_UnitNo;
+    uint16_t			m_UnitNo;
 	// про какое поле
 	std::string			m_FieldStr;
 	// для какого номер актанта
@@ -38,7 +38,7 @@ struct CRossQuery {
 	bool			m_Result; 
 
 	CRossQuery (DictTypeEnum  TypeEnum,
-		    WORD UnitNo,	
+		    uint16_t UnitNo,	
 			std::string FieldStr,
 			std::string ItemStr,
 			std::string DomStr,
@@ -54,9 +54,9 @@ class CSemWord
 {
 
 	// граммемы, которые приписаны слову
-	uint64_t          m_FormGrammems;
+	grammems_mask_t          m_FormGrammems;
 	// общие граммемы, которые приписаны слову
-	uint64_t          m_TypeGrammems;
+	grammems_mask_t          m_TypeGrammems;
 
 public:	 
 	// прописная или строчная буква
@@ -71,7 +71,7 @@ public:
 	// добавочный номер парадигмы в морф. словаре (для приложений типа "муж-алкоголик")
 	long           m_AdditParadigmId;
 	// части речи, которые приписаны слову 
-	poses_mask_t   m_Poses;
+	part_of_speech_mask_t   m_Poses;
 	// номер слова в синтаксическом представлении
 	long           m_WordNo;
 	// Полные эквиваленты слова, здесь обычно лежит 
@@ -105,14 +105,14 @@ public:
 	bool HasOneGrammem(int grammem) const;
 	bool operator == ( const long& X ) const;
 	// проверка, что часть речи POS принадлежит  данному слову 
-	virtual bool   HasPOS (size_t POS) const = 0;
+	virtual bool   HasPOS (part_of_speech_t POS) const = 0;
 	bool		 IsRusSubstPronounP () const;
-	uint64_t		GetAllGrammems() const;
-	uint64_t		GetFormGrammems() const;
-	void		SetFormGrammems(uint64_t);
-	uint64_t		GetTypeGrammems() const;
-	void		SetTypeGrammems(uint64_t);
-	void		AddFormGrammem(int g);
+	grammems_mask_t		GetAllGrammems() const;
+	grammems_mask_t		GetFormGrammems() const;
+	void		SetFormGrammems(grammems_mask_t);
+	grammems_mask_t		GetTypeGrammems() const;
+	void		SetTypeGrammems(grammems_mask_t);
+	void		AddFormGrammem(grammem_t g);
 };
 
 
@@ -128,7 +128,7 @@ struct CSynRealization
     CRossInterp				m_Conj;
 
 	// граммемы отношения или узла
-	uint64_t                   m_Grammems;
+	grammems_mask_t             m_Grammems;
 
 	// предлог или союз, который не был найден в оборотах, но он был прописан в статье.
 	//  Такой предлог или союз пишется прямо в строку.
@@ -145,7 +145,7 @@ struct CSynRealization
 
 	void SetEmpty();
     // проверяет, приписан ли узлу предлог PrepNo
-	bool HasThePrep (WORD UnitNo) const;
+	bool HasThePrep (uint16_t UnitNo) const;
 
 };
 
@@ -207,7 +207,7 @@ struct  CInterpNodeInfo  {
 class CSemNode : public CInterpNodeInfo
 {
 	// внешние граммемы группы 
-	uint64_t			m_Grammems;
+	grammems_mask_t			m_Grammems;
 
 protected:
 	// все словарные интерпретации узла  
@@ -299,13 +299,13 @@ public:
     // проверяет, приписан ли узлу хотя бы один предлог
 	bool	HasSomePrep () const;
     // проверяет, приписан ли узлу предлог PrepNo
-	bool	HasThePrep (WORD UnitNo) const;
+	bool	HasThePrep (uint16_t UnitNo) const;
 
 	bool	IsTimeRossNode() const;
 	bool	IsMainTimeRossNode() const;
 	bool	IsThesNode() const;
 	bool	IsTrueLocNode() const;
-	bool	HasPOS (size_t POS) const;
+	bool	HasPOS (part_of_speech_t POS) const;
 	bool	IsComma() const;
 	bool	IsLemma(std::string Lemma) const;
 	// проверяет, что данный узел является пассивным глаголом
@@ -328,18 +328,18 @@ public:
 	long	GetCurrInterpNo() const;
 
 	// дает  номер статьи для текущей интерпреции
-    WORD	GetUnitNo() const;
-	uint64_t	GetGrammems() const;
-	void	SetGrammems(uint64_t g);
+    uint16_t	GetUnitNo() const;
+	grammems_mask_t	GetGrammems() const;
+	void	SetGrammems(grammems_mask_t g);
 	void	ModifyGramCodes(std::string GramCodes, bool andwords, const CRusGramTab *R);
 	void	AddOneGrammem(int g);
 	bool	HasOneGrammem(int g) const;
-	bool	HasGrammems(uint64_t g) const;
-	void	AddGrammems(uint64_t  grammems);
-	void	DeleteGrammems(uint64_t grammems);
+	bool	HasGrammems(grammems_mask_t g) const;
+	void	AddGrammems(grammems_mask_t  grammems);
+	void	DeleteGrammems(grammems_mask_t grammems);
 
 	// выдает части речи, которые приписаны главному слову узла
-	poses_mask_t GetNodePoses() const;
+	part_of_speech_mask_t GetNodePoses() const;
 
 };
 
@@ -583,8 +583,8 @@ public:
 	bool			IsInfinitiveOrMNAInfinitive(int iNode) const;
 
 	// проверяет часть речи узла
-	bool	HasPOS (const CSemNode& N, size_t POS) const;
-    bool	HasPOS (size_t NodeNo, size_t POS) const;
+	bool	HasPOS (const CSemNode& N, part_of_speech_t POS) const;
+    bool	HasPOS (size_t NodeNo, part_of_speech_t POS) const;
 	bool	IsVerbForm(const CSemNode& Node) const;
 	// ставит всем узлам m_bToDelete = false
 	void			SetNodeToDeleteFalse ();
@@ -601,9 +601,9 @@ public:
 
     //======================    работа со словарными интерпретациями
     // выдает набор частей речи по GF-главному статьи UnitNo
-	poses_mask_t    GetPosesFromRusArticle(CRossHolder& Ross,WORD UnitNo) const;
+	part_of_speech_mask_t    GetPosesFromRusArticle(CRossHolder& Ross,uint16_t UnitNo) const;
 	// проверяет согласование словарной статьи UnitNo со словом W по частям речи 
-	bool			GramFetAgreeWithPoses (CRossHolder& Ross,WORD UnitNo, const CSemWord& W ) const;
+	bool			GramFetAgreeWithPoses (CRossHolder& Ross,uint16_t UnitNo, const CSemWord& W ) const;
 	// проверяет, что в одном из значений поля CAT стоит константа Type		(семантическая категория)
 	bool			HasSemType (const CSemNode& Node, std::string Type) const;
 	// проверяет, что в одном из значений поля SF-главное стоит константа SemFet (семантическая х-ка)
@@ -615,13 +615,13 @@ public:
 	bool			HasSemFetPro (const std::vector<uint64_t>& SemFets, const std::string& SemFet) const;
     bool			HasSemFetPro (const CSemNode& Node, const std::string& SemFet) const;
 	// проверяет, что в одном из значений поля FieldStr стоит константа ItemStr из домена DomStr
-	bool HasItem (DictTypeEnum DictTy,  WORD UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
+	bool HasItem (DictTypeEnum DictTy,  uint16_t UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
 	// перевод  словарную интерпретацию в строковое представление
 	std::string			InterpToStr(std::vector<CDictUnitInterp>::const_iterator I)  const;
 	// перевод  интерпретацию открытого словосочетания в строковое представление
 	std::string			OpenCollocInterpToStr(const COpenCollocInterp& I)  const;
 	//выдает граммемы, полученные из поля RESTR для текущей словарной интерпретации
-	std::vector<uint64_t>	GetGramRestr(const CSemNode& W);
+	std::vector<grammems_mask_t>	GetGramRestr(const CSemNode& W);
 	// проверяет согласование по SF
 	bool			GleicheSemFet(const std::vector<uint64_t>& SemFets1, const std::vector<uint64_t>& SemFets2, bool bInclusion) const;
 	// индексирует один этаж (один дизъюнкт)
@@ -698,7 +698,7 @@ public:
 	// ====================   работа с валентностями
 	//инициализация валентностей из текущей словарной интерпретации
 	void		InitVals(CSemNode& Node);
-	long        FindAbstractPlugArticle (DictTypeEnum type, uint64_t Grammems, poses_mask_t Poses, long ClauseType) const;
+	long        FindAbstractPlugArticle (DictTypeEnum type, grammems_mask_t Grammems, part_of_speech_mask_t Poses, long ClauseType) const;
 	void        FindAbstractAdditionArticle (DictTypeEnum type, const CSemNode& Node, std::vector<long>& Articles,  bool IsClauseSyntaxRoot, long ClauseType);
 	void		AddAbstractAdditionVals (DictTypeEnum type, CSemNode& Node, const std::vector<long>& Articles);
 

@@ -10,29 +10,16 @@ class CEngSemNode;
 struct translate_option_t{
 private:
 	std::string	force_lemm;
-	int	force_pos;
-	UINT	force_grammems;
-	bool	has_grammems;
 public:
 	void	set_force_lemm(const char *str) {force_lemm = str;}
 	bool	has_force_lemm()		{return !force_lemm.empty();}
 	std::string&	get_force_lemm()		{return force_lemm;}
 
-	void	set_force_pos(int pos)		{force_pos = pos;}
-	bool	has_force_pos()			{return force_pos != -1;}
-	int	get_force_pos()			{return force_pos;}
-
-	void	set_force_grammems(UINT gr)	{force_grammems = gr; has_grammems = true;}
-	bool	has_force_grammems()		{return has_grammems;}
-	UINT	get_force_grammems()		{return force_grammems;}
-
-
 	// options for dual freq
 	const CFreqDict* dual_freq_dict;
 	long dual_id1, dual_id2;
 
-	translate_option_t()
-		:has_grammems(false),
+	translate_option_t():
 		dual_freq_dict(0)
 	{}
 
@@ -79,7 +66,7 @@ public:
 	
 	void SetData(const CSemanticsHolder* pData);
 	
-	std::string create_form_by_id(long EngId, uint64_t eng_grammems) const;
+	std::string create_form_by_id(long EngId, grammems_mask_t eng_grammems) const;
 	std::string create_norm_by_id(long RusId) const;
 	
 
@@ -89,12 +76,12 @@ public:
 	void synthesize(CEngSemWord& EngWord) const;
 	void synthesize_by_node(CEngSemNode& Node) const;
 
-    void translate_id(long id, std::vector<long> &res, poses_mask_t Poses) const;
+    void translate_id(long id, std::vector<long> &res, part_of_speech_mask_t Poses) const;
 
 	void transliterate(CEngSemWord& EngWord);
 	
-	long GetParadigmIdByLemma(MorphLanguageEnum langua,  std::string str, UINT pos = -1, bool bProper=false) const;
-	uint64_t GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, UINT pos, bool bProper) const;
+	long GetParadigmIdByLemma(MorphLanguageEnum langua,  std::string str, part_of_speech_t pos, bool bProper=false) const;
+	grammems_mask_t GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, part_of_speech_t pos, bool bProper) const;
 
 	const CRossHolder* GetRossHolder (DictTypeEnum type) const;
 	const CLemmatizer* GetRusLemmatizer () const;

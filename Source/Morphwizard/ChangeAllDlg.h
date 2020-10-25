@@ -14,7 +14,7 @@ public:
 	int m_usedAccentModel;
 
 	CChangeAllDlg( const MorphoWizard& wizard, const std::vector<lemma_iterator_t>& found_paradigms, 
-		WORD oldAccentModelNo, WORD newAccentModelNo, CWnd* pParent = NULL);   // standard constructor
+		uint16_t oldAccentModelNo, uint16_t newAccentModelNo, CWnd* pParent = NULL);   // standard constructor
 
 	virtual ~CChangeAllDlg();
 

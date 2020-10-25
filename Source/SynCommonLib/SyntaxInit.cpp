@@ -78,7 +78,7 @@ bool GetRegString(std::string key, std::string &value) {
     return true;
 }
 
-std::unique_ptr<CThesaurus>& CSyntaxOpt::GetThesPointerByThesId(UINT ThesId) {
+std::unique_ptr<CThesaurus>& CSyntaxOpt::GetThesPointerByThesId(uint32_t ThesId) {
     switch (ThesId) {
         case LocThes :
             return m_LocThes;
@@ -93,7 +93,7 @@ std::unique_ptr<CThesaurus>& CSyntaxOpt::GetThesPointerByThesId(UINT ThesId) {
 
 };
 
-const CThesaurus *CSyntaxOpt::GetThesByThesId(UINT ThesId) const {
+const CThesaurus *CSyntaxOpt::GetThesByThesId(uint32_t ThesId) const {
     switch (ThesId) {
         case LocThes :
             return m_LocThes.get();

@@ -74,7 +74,7 @@ public:
     bool    HasGrammem(BYTE Grammem) const;
 	int		GetHomonymByGrammem(BYTE grammem) const;
 	int		GetHomonymByPOSandGrammem(BYTE POS, BYTE grammem) const;
-    int     GetHomonymByPosesandGrammem(poses_mask_t Poses, BYTE grammem) const;
+    int     GetHomonymByPosesandGrammem(part_of_speech_mask_t Poses, BYTE grammem) const;
 	bool	IsWordUpper(const char* s)	const  {return m_strUpperWord == s; };
 
 	void	SetAllOtherHomsDel(int iHom);
@@ -107,7 +107,7 @@ public:
     std::string  GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)  const;
     std::string  GetDebugString(const CHomonym* pHomonym, bool bFirstHomonym)  const;
     std::string BuildGraphemDescr ()  const;
-    poses_mask_t GetPoses() const;
+    part_of_speech_mask_t GetPoses() const;
     uint64_t   GetGrammems() const;
     bool    HasAnalyticalBe() const;
 };

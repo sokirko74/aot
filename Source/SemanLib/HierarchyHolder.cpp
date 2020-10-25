@@ -88,7 +88,7 @@ void CHierarchyHolder::WriteToRoss(std::string Entry)
 {
 
 	std::string EntryName = (m_Type == SemFet) ? _R("_иерархСХ") : _R("_иерархСО");
-	WORD UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
+	uint16_t UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo != ErrUnitNo)
 		GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
 	UnitNo = GetRoss()->InsertUnit(EntryName.c_str(), 1);
@@ -142,7 +142,7 @@ void CHierarchyHolder::ReadFromRoss( bool WithoutView )
 	Nodes.clear();
 	Relations.clear();
 	std::string EntryName = (m_Type == SemFet) ? _R("_иерархСХ") : _R("_иерархСО");
-	WORD UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
+	uint16_t UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo == ErrUnitNo) return;
 	{
   	CTempArticle A;
@@ -328,7 +328,7 @@ const int MaxLevelId = 30;
 
 // проверяет что все SF актанта с номером LeafId равны  ItemStr или 
 // ниже по иерархии
-bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc)
+bool SemFetActantIsEqualOrLower (CRossHolder* Ross, uint16_t Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc)
 {
 	long ItemNo = Ross->GetRoss()->GetItemNoByItemStr (ItemStr, Ross->SemFetDomNo);
 	assert (ItemNo != -1);

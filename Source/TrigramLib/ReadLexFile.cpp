@@ -63,7 +63,7 @@ bool CTrigramModel::read_dictionary_text_file(std::map<std::string,  std::vector
 		while ( tok () )
 		{
 			std::string tag1 = tok.val();
-			WORD PrevTag = find_tag(tag1 );
+			uint16_t PrevTag = find_tag(tag1 );
 			if (PrevTag == UnknownTag)
 			{	
 				fprintf(stderr, "invalid tag \"%s\" (%s:%i)\n", tag1.c_str(), m_DictionaryFile.c_str(), line_no); 
@@ -75,7 +75,7 @@ bool CTrigramModel::read_dictionary_text_file(std::map<std::string,  std::vector
 				return false;
 			};
 			std::string tag2 = tok.val();
-			WORD CurrTag = find_tag(tag2 );
+			uint16_t CurrTag = find_tag(tag2 );
 			if (CurrTag == UnknownTag)
 			{	
 				fprintf(stderr, "invalid tag \"%s\" (%s:%i)\n", tag2.c_str(), m_DictionaryFile.c_str(), line_no); 

@@ -104,11 +104,11 @@ bool CAncodePattern::DeleteAncodesByGrammemIfCan(BYTE Grammem)
     return true;
 }
 
-bool CAncodePattern::ModifyGrammems(uint64_t Grammems, poses_mask_t Poses)
+bool CAncodePattern::ModifyGrammems(uint64_t Grammems, part_of_speech_mask_t Poses)
 {
 	std::string strOldGramcodes = m_GramCodes;	
 	uint64_t  savegrammems = m_iGrammems;	
-	poses_mask_t saveposes = m_iPoses;
+	part_of_speech_mask_t saveposes = m_iPoses;
 	m_iGrammems = 0;
 	m_iPoses = 0;
 	m_GramCodes = "";

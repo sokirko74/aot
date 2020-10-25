@@ -594,7 +594,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 		long theId = vectorAPredlog[i].m_BracketLeafId - 1;
 		if( theId >= vectorEngEquivs.size() ) continue;
 		std::string strAOP = GetCortegeStr(rusNode.GetType(),vectorAPredlog[i]);
-		WORD UnitNo = GetRoss(OborRoss)->LocateUnit(strAOP.c_str(), 1);
+		uint16_t UnitNo = GetRoss(OborRoss)->LocateUnit(strAOP.c_str(), 1);
 		if ( !rusNode.HasThePrep(UnitNo)) continue;
 		vecGoodByAPredlog.push_back(theId);
 	}
@@ -674,7 +674,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 				continue;
 
 			std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
-			uint64_t Grammems;
+			grammems_mask_t Grammems;
 			uint32_t Pose;
 
 			m_pData->GetCustomGrammems(strGrammems,Grammems,Pose);
@@ -724,8 +724,8 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 						continue;
 
 					std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0], DictType);
-					uint32_t Pose;
-					uint64_t Grammems;
+					part_of_speech_mask_t Pose;
+					grammems_mask_t Grammems;
 					m_pData->GetCustomGrammems(strGrammems,Grammems,Pose);
 					if( Pose==0 && Grammems==-1 )
 						continue;
@@ -933,12 +933,12 @@ void CEngSemStructure::FindEngWords(std::vector<CEngInterp>& resEngUnits, std::v
 				{
 					CEngSemWord  Dummy;
 					ReadMorphFromMainGF(UnitNo, EngDictTypes[j], Dummy);
-					BYTE engPos = GetOnePOS(Dummy.m_Poses);
+					part_of_speech_t engPos = GetOnePOS(Dummy.m_Poses);
 //Gri !!!!!
 // это место где need переходит в have
 					if( engPos == UnknownPOS )
 						continue;
-					if( !( (1 << engPos) & (EngPOSByRusPOS(GetOnePOS(vectorEngEquivs[i].m_RusPoses),"") )) )
+					if( !( (1 << engPos) & (EngPOSesByRusPOS(GetOnePOS(vectorEngEquivs[i].m_RusPoses),"") )) )
 						continue;
 //gri
 				}

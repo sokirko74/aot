@@ -162,8 +162,8 @@ CParadigmInfo::CParadigmInfo() : CLemmaInfo() {
     m_PrefixSetNo = UnknownPrefixSetNo;
 };
 
-CParadigmInfo::CParadigmInfo(WORD ParadigmNo, WORD AccentModelNo, WORD SessionNo, BYTE AuxAccent,
-                             const char *CommonAncode, WORD PrefixSetNo) {
+CParadigmInfo::CParadigmInfo(uint16_t ParadigmNo, uint16_t AccentModelNo, uint16_t SessionNo, BYTE AuxAccent,
+                             const char *CommonAncode, uint16_t PrefixSetNo) {
     m_FlexiaModelNo = ParadigmNo;
     m_bToDelete = false;
     m_AccentModelNo = AccentModelNo;
@@ -371,9 +371,9 @@ void MorphoWizard::load_gramtab() {
 
 };
 
-WORD MorphoWizard::GetCurrentSessionNo() const {
-    assert(m_SessionNo < (WORD) m_Sessions.size());
-    return (WORD) m_SessionNo;
+uint16_t MorphoWizard::GetCurrentSessionNo() const {
+    assert(m_SessionNo < (uint16_t) m_Sessions.size());
+    return (uint16_t) m_SessionNo;
 }
 
 bool MorphoWizard::StartSession(std::string user_name) {
@@ -586,7 +586,7 @@ void MorphoWizard::ReadLemmas(std::ifstream &mrdFile) {
 
     for (size_t num = 0; num < count; num++) {
         int ParadigmNo, AccentModelNo, SessionNo, AuxAccent = UnknownAccent;
-        WORD PrefixSetNo = UnknownPrefixSetNo;
+        uint16_t PrefixSetNo = UnknownPrefixSetNo;
         std::string lemm, CommonAncode, PrefixSetNoStr;
         std::string line;
 
@@ -710,7 +710,7 @@ void MorphoWizard::save_mrd() {
 
     outp << m_PrefixSets.size() << "\n";
     for (size_t i = 0; i < m_PrefixSets.size(); i++) {
-        outp << str_to_utf8(get_prefix_set_str((WORD)i)) << "\n";
+        outp << str_to_utf8(get_prefix_set_str((uint16_t)i)) << "\n";
     }
 
     outp << m_LemmaToParadigm.size() << "\n";
@@ -965,17 +965,17 @@ void MorphoWizard::find_ancodes(const std::string &ancodes, std::vector<lemma_it
         m_pMeter->SetInfo("Finding ancodes...");
     }
 
-    std::vector<WORD> prdno;
+    std::vector<uint16_t> prdno;
 
     for (size_t i = 0; i < m_FlexiaModels.size(); i++)
         for (size_t l = 0; l < ancodes.size(); l += 2)
             if (m_FlexiaModels[i].has_ancode(ancodes.substr(l, 2)))
-                prdno.push_back((WORD) i);
+                prdno.push_back((uint16_t) i);
 
     sort(prdno.begin(), prdno.end());
 
     for (lemma_iterator_t i2 = m_LemmaToParadigm.begin(); i2 != m_LemmaToParadigm.end(); i2++) {
-        WORD pno = i2->second.m_FlexiaModelNo;
+        uint16_t pno = i2->second.m_FlexiaModelNo;
         if (binary_search(prdno.begin(), prdno.end(), pno))
             res.push_back(i2);
 
@@ -1023,12 +1023,12 @@ void MorphoWizard::find_lemm_by_accent_model(int AccentModelNo, std::vector<lemm
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding lemmas...");
     }
-    std::set<WORD> Models;
+    std::set<uint16_t> Models;
     if (AccentModelNo == -1) {
         for (size_t k = 0; k < m_AccentModels.size(); k++)
             if (find(m_AccentModels[k].m_Accents.begin(), m_AccentModels[k].m_Accents.end(), UnknownAccent) !=
                 m_AccentModels[k].m_Accents.end())
-                Models.insert((WORD) k);
+                Models.insert((uint16_t) k);
     } else
         Models.insert(AccentModelNo);
 
@@ -1042,7 +1042,7 @@ void MorphoWizard::find_lemm_by_accent_model(int AccentModelNo, std::vector<lemm
 
 
 //----------------------------------------------------------------------------
-void MorphoWizard::find_lemm_by_prdno(WORD prdno, std::vector<lemma_iterator_t> &res) {
+void MorphoWizard::find_lemm_by_prdno(uint16_t prdno, std::vector<lemma_iterator_t> &res) {
     if (!!m_pMeter) {
         m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
         m_pMeter->SetInfo("Finding lemmas...");
@@ -1161,13 +1161,13 @@ const CMorphSession &MorphoWizard::get_session(int SessionNo) const {
 
 //----------------------------------------------------------------------------
 void MorphoWizard::remove_lemm(lemma_iterator_t it) {
-    WORD paradigm_num = it->second.m_FlexiaModelNo;
+    uint16_t paradigm_num = it->second.m_FlexiaModelNo;
     CFlexiaModel &p = m_FlexiaModels[paradigm_num];
     log(it->first, p, false);
     m_LemmaToParadigm.erase(it);
 }
 
-std::string MorphoWizard::get_prefix_set_str(WORD PrefixSetNo) const {
+std::string MorphoWizard::get_prefix_set_str(uint16_t PrefixSetNo) const {
     std::string Result;
     const std::set<std::string> &PS = m_PrefixSets[PrefixSetNo];
     assert(!PS.empty());
@@ -1217,7 +1217,7 @@ BYTE TransferReverseVowelNoToCharNo(const std::string &form, BYTE AccentCharNo, 
 };
 
 
-void MorphoWizard::SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, std::string &form) const {
+void MorphoWizard::SetAccent(uint16_t AccentModelNo, BYTE AuxAccent, int FormNo, std::string &form) const {
     if (AccentModelNo == UnknownAccentModelNo) return;
     assert(FormNo < m_AccentModels[AccentModelNo].m_Accents.size());
     int u = TransferReverseVowelNoToCharNo(form, m_AccentModels[AccentModelNo].m_Accents[FormNo], m_Language);
@@ -1234,7 +1234,7 @@ void MorphoWizard::SetAccent(WORD AccentModelNo, BYTE AuxAccent, int FormNo, std
 };
 
 
-std::string MorphoWizard::mrd_to_slf(const std::string &lemm, const CFlexiaModel &p, WORD AccentModelNo, BYTE AuxAccent,
+std::string MorphoWizard::mrd_to_slf(const std::string &lemm, const CFlexiaModel &p, uint16_t AccentModelNo, BYTE AuxAccent,
                                 int line_size) const {
     std::string res;
     std::string base;
@@ -1518,13 +1518,13 @@ void MorphoWizard::log(const std::string &lemm, const CFlexiaModel &p, bool is_a
     log((is_added ? "+ " : "- ") + lemm + " " + p.ToString());
 }
 
-WORD AddAccentModel(MorphoWizard &C, const CAccentModel &AccentModel) {
-    WORD AccentModelNo = UnknownAccentModelNo;
+uint16_t AddAccentModel(MorphoWizard &C, const CAccentModel &AccentModel) {
+    uint16_t AccentModelNo = UnknownAccentModelNo;
     if (!AccentModel.m_Accents.empty()) {
         std::vector<CAccentModel>::iterator accent_it = find(C.m_AccentModels.begin(), C.m_AccentModels.end(), AccentModel);
         if (accent_it == C.m_AccentModels.end()) {
             //  a new accent model should be added
-            AccentModelNo = (WORD) C.m_AccentModels.size();
+            AccentModelNo = (uint16_t) C.m_AccentModels.size();
             if (AccentModelNo == UnknownAccentModelNo)
                 throw CExpc("Too many accent models");
 
@@ -1536,14 +1536,14 @@ WORD AddAccentModel(MorphoWizard &C, const CAccentModel &AccentModel) {
     return AccentModelNo;
 };
 
-WORD AddFlexiaModel(MorphoWizard &C, const CFlexiaModel &FlexiaModel) {
-    WORD ParadigmNo;
+uint16_t AddFlexiaModel(MorphoWizard &C, const CFlexiaModel &FlexiaModel) {
+    uint16_t ParadigmNo;
     // finding Paradigm No
     std::vector<CFlexiaModel>::iterator pit = find(C.m_FlexiaModels.begin(), C.m_FlexiaModels.end(), FlexiaModel);
 
     if (pit == C.m_FlexiaModels.end()) {
         //  a new paradigm should be added
-        ParadigmNo = (WORD) C.m_FlexiaModels.size();
+        ParadigmNo = (uint16_t) C.m_FlexiaModels.size();
         if (ParadigmNo == 0xffff)
             throw CExpc("Too many paradigms");
 
@@ -1555,7 +1555,7 @@ WORD AddFlexiaModel(MorphoWizard &C, const CFlexiaModel &FlexiaModel) {
 };
 
 
-WORD MorphoWizard::AddPrefixSet(std::string PrefixSetStr) {
+uint16_t MorphoWizard::AddPrefixSet(std::string PrefixSetStr) {
     Trim(PrefixSetStr);
 
     if (PrefixSetStr.empty())
@@ -1568,11 +1568,11 @@ WORD MorphoWizard::AddPrefixSet(std::string PrefixSetStr) {
         throw CExpc("Cannot add empty prefix set");
 
 
-    WORD Result;
+    uint16_t Result;
     std::vector<std::set<std::string> >::iterator pit = find(m_PrefixSets.begin(), m_PrefixSets.end(), PrefixSet);
     if (pit == m_PrefixSets.end()) {
         //  a new prefix std::set should be added
-        Result = (WORD) m_PrefixSets.size();
+        Result = (uint16_t) m_PrefixSets.size();
         if (Result == 0xffff)
             throw CExpc("Too many prefix sets");
 
@@ -1590,7 +1590,7 @@ WORD MorphoWizard::AddPrefixSet(std::string PrefixSetStr) {
 //----------------------------------------------------------------------------
 CParadigmInfo
 MorphoWizard::add_lemma(const std::string &slf, std::string common_grammems, const std::string &prefixes, int &line_no_err,
-                        WORD SessionNo) {
+                        uint16_t SessionNo) {
     std::string lemm;
     CFlexiaModel FlexiaModel;
     CAccentModel AccentModel;
@@ -1603,9 +1603,9 @@ MorphoWizard::add_lemma(const std::string &slf, std::string common_grammems, con
             throw CExpc(Format("Wrong common grammems  \"%s\"", common_grammems.c_str()));
 
 
-    WORD ParadigmNo = AddFlexiaModel(*this, FlexiaModel);
-    WORD AccentModelNo = AddAccentModel(*this, AccentModel);
-    WORD PrefixSetNo = AddPrefixSet(prefixes);
+    uint16_t ParadigmNo = AddFlexiaModel(*this, FlexiaModel);
+    uint16_t AccentModelNo = AddAccentModel(*this, AccentModel);
+    uint16_t PrefixSetNo = AddPrefixSet(prefixes);
 
     if (SessionNo == UnknownSessionNo)
         SessionNo = GetCurrentSessionNo();
@@ -1668,7 +1668,7 @@ size_t MorphoWizard::del_dup_lemm() {
                 break;
             if (i1->second == i2->second) {
                 std::string dbg_str = i2->first;
-                WORD dbg_num = i2->second.m_FlexiaModelNo;
+                uint16_t dbg_num = i2->second.m_FlexiaModelNo;
                 m_LemmaToParadigm.erase(i2);
                 num++;
                 i1 = m_LemmaToParadigm.begin();
@@ -1847,9 +1847,9 @@ void MorphoWizard::pack() {
 
     {
         log("finding all used flexia and accent modleys");
-        std::set<WORD> UsedFlexiaModels;
-        std::set<WORD> UsedAccentModels;
-        std::set<WORD> UsedPrefixSets;
+        std::set<uint16_t> UsedFlexiaModels;
+        std::set<uint16_t> UsedAccentModels;
+        std::set<uint16_t> UsedPrefixSets;
         for (lemma_iterator_t lemm_it = m_LemmaToParadigm.begin(); lemm_it != m_LemmaToParadigm.end(); lemm_it++) {
             UsedFlexiaModels.insert(lemm_it->second.m_FlexiaModelNo);
             UsedAccentModels.insert(lemm_it->second.m_AccentModelNo);
@@ -1860,7 +1860,7 @@ void MorphoWizard::pack() {
         log("creating new flexia models without unused items");
         std::vector<CFlexiaModel> NewParadigms;
         for (size_t i = 0; i < m_FlexiaModels.size(); i++)
-            if (UsedFlexiaModels.find((WORD) i) != UsedFlexiaModels.end()) {
+            if (UsedFlexiaModels.find((uint16_t) i) != UsedFlexiaModels.end()) {
 
                 size_t j = 0;
 
@@ -1881,7 +1881,7 @@ void MorphoWizard::pack() {
         log("creating new accent models without unused items");
         std::vector<CAccentModel> NewAccentModels;
         for (size_t k = 0; k < m_AccentModels.size(); k++)
-            if (UsedAccentModels.find((WORD) k) != UsedAccentModels.end()) {
+            if (UsedAccentModels.find((uint16_t) k) != UsedAccentModels.end()) {
                 NewAccentModels.push_back(m_AccentModels[k]);
                 OldAccentModelsToNewAccentModels[k] = NewAccentModels.size() - 1;
             }
@@ -1890,7 +1890,7 @@ void MorphoWizard::pack() {
         log("creating new prefix sets");
         std::vector<std::set<std::string> > NewPrefixSets;
         for (size_t i = 0; i < m_PrefixSets.size(); i++)
-            if (UsedPrefixSets.find((WORD) i) != UsedPrefixSets.end()) {
+            if (UsedPrefixSets.find((uint16_t) i) != UsedPrefixSets.end()) {
                 NewPrefixSets.push_back(m_PrefixSets[i]);
                 OldPrefixSetsToNewPrefixSets[i] = NewPrefixSets.size() - 1;
             }
@@ -1905,7 +1905,7 @@ void MorphoWizard::pack() {
         std::map<int, int>::const_iterator flex_it = OldFlexiaModelsToNewFlexiaModels.find(lemm_it->second.m_FlexiaModelNo);
         assert(flex_it != OldFlexiaModelsToNewFlexiaModels.end());
 
-        WORD AccentModelNo = lemm_it->second.m_AccentModelNo;
+        uint16_t AccentModelNo = lemm_it->second.m_AccentModelNo;
         if (AccentModelNo != UnknownAccentModelNo) {
             std::map<int, int>::const_iterator accent_it = OldAccentModelsToNewAccentModels.find(
                     lemm_it->second.m_AccentModelNo);
@@ -1913,7 +1913,7 @@ void MorphoWizard::pack() {
             AccentModelNo = accent_it->second;
         };
 
-        WORD PrefixSetNo = lemm_it->second.m_PrefixSetNo;
+        uint16_t PrefixSetNo = lemm_it->second.m_PrefixSetNo;
         if (PrefixSetNo != UnknownPrefixSetNo) {
             std::map<int, int>::const_iterator prefix_set_it = OldPrefixSetsToNewPrefixSets.find(PrefixSetNo);
             assert(prefix_set_it != OldPrefixSetsToNewPrefixSets.end());
@@ -1951,7 +1951,7 @@ void MorphoWizard::pack() {
 
 //----------------------------------------------------------------------------
 bool MorphoWizard::change_prd_info(CParadigmInfo &I, const std::string &Lemma,
-                                   WORD NewFlexiaModelNo, WORD newAccentModelNo, bool keepOldAccents) {
+                                   uint16_t NewFlexiaModelNo, uint16_t newAccentModelNo, bool keepOldAccents) {
     if (NewFlexiaModelNo >= m_FlexiaModels.size()
         || (newAccentModelNo >= m_AccentModels.size()
             && newAccentModelNo != UnknownAccentModelNo
@@ -1995,8 +1995,8 @@ bool MorphoWizard::change_prd_info(CParadigmInfo &I, const std::string &Lemma,
                     break;
 
 
-            int accOld = _GetReverseVowelNo(NewWordForm, I.m_AccentModelNo, (WORD) k);
-            int accNew = _GetReverseVowelNo(NewWordForm, newAccentModelNo, (WORD) i);
+            int accOld = _GetReverseVowelNo(NewWordForm, I.m_AccentModelNo, (uint16_t) k);
+            int accNew = _GetReverseVowelNo(NewWordForm, newAccentModelNo, (uint16_t) i);
             int acc;
             if (keepOldAccents)
                 acc = (accOld == UnknownAccent ? accNew : accOld);
@@ -2033,7 +2033,7 @@ std::string MorphoWizard::get_predict_src_file_path(int mode) const {
 };
 
 //----------------------------------------------------------------------------
-std::string MorphoWizard::show_differences_in_two_paradigms(WORD FlexiaModelNo1, WORD FlexiaModelNo2) const {
+std::string MorphoWizard::show_differences_in_two_paradigms(uint16_t FlexiaModelNo1, uint16_t FlexiaModelNo2) const {
     std::string s1 = mrd_to_slf("-", m_FlexiaModels[FlexiaModelNo1], UnknownAccentModelNo, UnknownAccent, 79);;
     std::string s2 = mrd_to_slf("-", m_FlexiaModels[FlexiaModelNo2], UnknownAccentModelNo, UnknownAccent, 79);;
 
@@ -2314,7 +2314,7 @@ BYTE MorphoWizard::GetLemmaAccent(const_lemma_iterator_t it) const {
 }
 
 //----------------------------------------------------------------------------
-BYTE MorphoWizard::_GetReverseVowelNo(const std::string &form, WORD accentModelNo, WORD formInd) const {
+BYTE MorphoWizard::_GetReverseVowelNo(const std::string &form, uint16_t accentModelNo, uint16_t formInd) const {
     if (accentModelNo == UnknownAccentModelNo || accentModelNo >= m_AccentModels.size()
         || formInd >= m_AccentModels[accentModelNo].m_Accents.size())
         return UnknownAccent;
@@ -2483,13 +2483,13 @@ bool CDumpParadigm::SaveToFile(FILE *fp) const {
     return true;
 };
 
-WORD MorphoWizard::RegisterSession(const CMorphSession &S) {
+uint16_t MorphoWizard::RegisterSession(const CMorphSession &S) {
     if (S.IsEmpty()) return UnknownSessionNo;
 
     std::vector<CMorphSession>::const_iterator it = find(m_Sessions.begin(), m_Sessions.end(), S);
     if (it == m_Sessions.end()) {
         m_Sessions.push_back(S);
-        return (WORD) m_Sessions.size() - 1;
+        return (uint16_t) m_Sessions.size() - 1;
 
     } else
         return it - m_Sessions.begin();

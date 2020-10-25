@@ -343,10 +343,10 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 				engNode.SetGrammemsRich( 0 );
 				engNode.RusNode = iRusNode; 
 				TransferGrammems (RusStr.GetNode(iRusNode), engNode, "InterpretOneNode");
-				// инициализируем части речи с помомощью функции EngPOSByRusPOS
+				// инициализируем части речи с помомощью функции EngPOSesByRusPOS
 				for (long i=0; i < engNode.m_Words.size(); i++ )
 				{
-					engNode.m_Words[i].m_Poses = EngPOSByRusPOS(GetOnePOS(RusStr.GetNode(iRusNode).GetWord(i).m_Poses), RusStr.GetNode(iRusNode).GetWord(i).m_Lemma);
+					engNode.m_Words[i].m_Poses = EngPOSesByRusPOS(GetOnePOS(RusStr.GetNode(iRusNode).GetWord(i).m_Poses), RusStr.GetNode(iRusNode).GetWord(i).m_Lemma);
 				}
 
 			}
@@ -653,7 +653,7 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 		{
 			if( vectorEngEquivs[k].m_iMeanNum==10 ) 
 				vectorEngEquivs[k].m_iMeanNum = 1;
-			WORD EngUnitNo = GetRoss(EngObor)->LocateUnit(vectorEngEquivs[k].m_StrEngWord.c_str(),vectorEngEquivs[k].m_iMeanNum);
+			uint16_t EngUnitNo = GetRoss(EngObor)->LocateUnit(vectorEngEquivs[k].m_StrEngWord.c_str(),vectorEngEquivs[k].m_iMeanNum);
 			if( EngUnitNo != ErrUnitNo )
 			{
 				CDictUnitInterp I(EngObor,EngUnitNo);

@@ -3,7 +3,7 @@
 #include "EngSemStructure.h"
 
 struct CGrammemsAnalyzer {
-	uint64_t        m_Grammems;
+	grammems_mask_t       m_Grammems;
 
 	CGrammemsAnalyzer ();
 	int			GetNumber () const;
@@ -95,7 +95,7 @@ struct NodeHelper{
 	const CEngSemRelation&     Rel(int rel)	const		{return E.m_Relations[rel];}
     // проверяет, что у узла есть указанные eng_poses,  и у его
 	// русского исходника есть rus_poses
-	bool node_has_poses(int node, UINT eng_poses) const;
+	bool node_has_poses(int node, uint32_t eng_poses) const;
 	bool node_is_verb(int node_no) const;
 	bool node_is_noun(int node_no) const;
 	bool node_is_numeral(int node_no) const;	
@@ -105,12 +105,12 @@ struct NodeHelper{
 	bool is_subj_rel(int rel) const	{return E.IsSubj(E.m_Relations[rel]);}
  
    // проверяет, что у поля  field есть значение  value
-	bool FieldContainsValue(const CRossHolder* RossHolder, WORD UnitNo, 
+	bool FieldContainsValue(const CRossHolder* RossHolder, uint16_t UnitNo, 
 		const std::string &field, const std::string &value, int leaf = 0, int leaf2 = 0) const;
 	// проверяет, что у словарной интерпретации узла в поле  field есть значение  value
 	bool FieldContainsValue(const CEngSemNode& node, const std::string &field, const std::string &value, int leaf = 0, int leaf2 = 0) const;
     // две предыдущих функции вызывают GetFieldValues
-	void GetFieldValues(DictTypeEnum StructDict, WORD UnitNo, const std::string &field, 
+	void GetFieldValues(DictTypeEnum StructDict, uint16_t UnitNo, const std::string &field, 
 		StringVector &res, int max_items = 10000) const;
 
 

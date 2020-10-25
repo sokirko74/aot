@@ -21,7 +21,7 @@ const size_t MaxItemStr = 100;
 // ссылки на словaрную статью, лежащую в массиве Ross :: Cortege
 const int InitialStartPos = 5000000;
 const int InitialEndPos = -1;
-// Индекс  - WORD
+// Индекс  - uint16_t
 class CStructEntry {
 public:
 	int		m_EntryId;
@@ -147,16 +147,16 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	void	BuildUnits();
-	WORD	GetUnitsSize() const { return (WORD)m_Units.size();	};
+	uint16_t	GetUnitsSize() const { return (uint16_t)m_Units.size();	};
 	bool	ClearUnits();
-	void	ClearUnit(WORD UnitNo);
+	void	ClearUnit(uint16_t UnitNo);
 	void	DelUnit(std::vector<CStructEntry>::iterator It);
-	WORD	LocateUnit (const char * EntryStr, int MeanNum) const;
-	WORD    GetSelectedUnitNo (WORD i) const;
-	WORD	GetSelectedUnitsSize() const;
-	WORD    InsertUnit (CStructEntry& T);
-	WORD	InsertUnit(const char* EntryStr, BYTE MeanNum);
-	WORD    UnitsLowerBound(const char* EntryStr)  const 
+	uint16_t	LocateUnit (const char * EntryStr, int MeanNum) const;
+	uint16_t    GetSelectedUnitNo (uint16_t i) const;
+	uint16_t	GetSelectedUnitsSize() const;
+	uint16_t    InsertUnit (CStructEntry& T);
+	uint16_t	InsertUnit(const char* EntryStr, BYTE MeanNum);
+	uint16_t    UnitsLowerBound(const char* EntryStr)  const 
 	{ 
 		return lower_bound(m_Units.begin() , m_Units.end(), CStructEntry(EntryStr, 1)) - m_Units.begin();
 	};
@@ -167,9 +167,9 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	bool			ReadUnitComments();
-	WORD			InsertUnitComment (WORD m_EntryId);
-	TUnitComment*			GetCommentsByUnitId(WORD m_EntryId); 
-	const TUnitComment*		GetCommentsByUnitId(WORD EntryId)   const;
+	uint16_t			InsertUnitComment (uint16_t m_EntryId);
+	TUnitComment*			GetCommentsByUnitId(uint16_t m_EntryId); 
+	const TUnitComment*		GetCommentsByUnitId(uint16_t EntryId)   const;
 
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -205,12 +205,12 @@ public:
     const char* GetRedactFieldName() const;
 
 
-	void SetUnitCommentStr(WORD UnitNo, const char* Str);
-	void SetUnitAuthor(WORD UnitNo, const char* Author);
-	void SetUnitModifTimeStr(WORD UnitNo, const char* TimeStr);
-	void SetUnitEditor(WORD UnitNo, const char* Editor);
-	std::string GetUnitModifTimeStr(WORD UnitNo) const;
-	std::string GetUnitTextHeader(WORD UnitNo) const;
+	void SetUnitCommentStr(uint16_t UnitNo, const char* Str);
+	void SetUnitAuthor(uint16_t UnitNo, const char* Author);
+	void SetUnitModifTimeStr(uint16_t UnitNo, const char* TimeStr);
+	void SetUnitEditor(uint16_t UnitNo, const char* Editor);
+	std::string GetUnitModifTimeStr(uint16_t UnitNo) const;
+	std::string GetUnitTextHeader(uint16_t UnitNo) const;
 
 	bool	ReadConfig();
 
@@ -248,24 +248,24 @@ public:
 	BYTE		GetCortegeLeafId(size_t i) const;
 	BYTE		GetCortegeBracketLeafId(size_t i) const;
 	const char* GetDomItemStrInner(int ItemNo) const;
-	bool		IsEmptyArticle(WORD UnitNo) const;
-	int			GetUnitStartPos(WORD UnitNo) const;
-	int			GetUnitEndPos(WORD UnitNo) const;
+	bool		IsEmptyArticle(uint16_t UnitNo) const;
+	int			GetUnitStartPos(uint16_t UnitNo) const;
+	int			GetUnitEndPos(uint16_t UnitNo) const;
 	BYTE		GetFieldNoByFieldStr(const char* Str) const;
 	BYTE		GetDomItemDomNo (int ItemNo) const;
 	int			GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const;
 	const char*	GetDomItemStr(int ItemNo) const;
-	std::string	GetEntryStr (WORD EntryNo) const;
-	std::string	GetEntryStrUtf8(WORD EntryNo) const;
-	BYTE		GetUnitMeanNum(WORD EntryNo) const;
-	bool		IncludeArticle(WORD UnitNo, std::string Article) const;
+	std::string	GetEntryStr (uint16_t EntryNo) const;
+	std::string	GetEntryStrUtf8(uint16_t EntryNo) const;
+	BYTE		GetUnitMeanNum(uint16_t EntryNo) const;
+	bool		IncludeArticle(uint16_t UnitNo, std::string Article) const;
 
 	bool		Load(const char* Path);
 	bool		ImportFromText(std::string FileName, int StartEntry,std::string& Messages);
-	void		SetUnitCurrentTime(WORD UnitNo);
+	void		SetUnitCurrentTime(uint16_t UnitNo);
 	bool		AddField(std::string FieldStr);
-	std::string		GetUnitEditor(WORD UnitNo) const;
-	void		SetUnitStr(WORD UnitNo, const char*  UnitStr);
+	std::string		GetUnitEditor(uint16_t UnitNo) const;
+	void		SetUnitStr(uint16_t UnitNo, const char*  UnitStr);
 	
 
 };	

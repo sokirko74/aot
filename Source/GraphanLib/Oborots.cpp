@@ -12,23 +12,23 @@ const char OborotDels[] = " \t";
 
 
 // search the longest oborot, which starts from FirstGraLineNo 
-size_t  CGraphmatFile :: FindOborotto (size_t FirstGraLineNo, size_t HB, short& ResultOborotNo, std::vector<WORD>& OborotIds) const
+size_t  CGraphmatFile :: FindOborotto (size_t FirstGraLineNo, size_t HB, short& ResultOborotNo, std::vector<uint16_t>& OborotIds) const
 {
 	ResultOborotNo = -1;
 	
 	if ( GetUnits()[FirstGraLineNo].IsGrouped() ) return FirstGraLineNo;
 	
 	size_t MaxEndLineNo =  FirstGraLineNo;
-	typedef std::map<WORD, std::vector<WORD> > PMap;
+	typedef std::map<uint16_t, std::vector<uint16_t> > PMap;
 	PMap::const_iterator it = m_pDicts->m_OborottosFirstWordIndex.find(OborotIds[FirstGraLineNo]);
 	
 	if (it == m_pDicts->m_OborottosFirstWordIndex.end())
 		return FirstGraLineNo;
 
-	const std::vector<WORD>& Oborots = it->second;
+	const std::vector<uint16_t>& Oborots = it->second;
 	size_t OborotsCount = Oborots.size();
 	
-	for (WORD OborotNo = 0; OborotNo < OborotsCount; OborotNo++)
+	for (uint16_t OborotNo = 0; OborotNo < OborotsCount; OborotNo++)
 	{
 		const CGraphemOborot& O = m_pDicts->m_Oborottos[ Oborots[OborotNo] ];
 		int OborotWordsCount = O.m_TokenIds.size();
@@ -203,7 +203,7 @@ void BuildOborottosIndex (CGraphanDicts& C)
 				it--;
 			};
 
-			WORD id = it - AllUnsortedTokens.begin();
+			uint16_t id = it - AllUnsortedTokens.begin();
 			C.m_Oborottos[OborotNo].m_TokenIds.push_back(id);
 
 		};
@@ -211,7 +211,7 @@ void BuildOborottosIndex (CGraphanDicts& C)
 
 	C.m_OborotTokens = AllUnsortedTokens;
 	sort(C.m_OborotTokens.begin(),C.m_OborotTokens.end());
-	std::vector<WORD> T;
+	std::vector<uint16_t> T;
 	T.resize( C.m_OborotTokens.size() );
 	for (size_t i=0; i < AllUnsortedTokens.size(); i++)
 		T[i] = lower_bound(C.m_OborotTokens.begin(),C.m_OborotTokens.end(), AllUnsortedTokens[i]) - C.m_OborotTokens.begin();
@@ -222,7 +222,7 @@ void BuildOborottosIndex (CGraphanDicts& C)
 			C.m_Oborottos[OborotNo].m_TokenIds[k] = T[ C.m_Oborottos[OborotNo].m_TokenIds[k] ];
 
 		assert (!C.m_Oborottos[OborotNo].m_TokenIds.empty());
-		C.m_OborottosFirstWordIndex[ C.m_Oborottos[OborotNo].m_TokenIds[0] ].push_back((WORD)OborotNo);
+		C.m_OborottosFirstWordIndex[ C.m_Oborottos[OborotNo].m_TokenIds[0] ].push_back((uint16_t)OborotNo);
 	};
 
 };

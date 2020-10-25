@@ -62,7 +62,7 @@ public:
 
 private:
 	void make_string();
-	void CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, std::string& AuxVerbs, UINT& MainVerbGrammems) const;
+	void CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, std::string& AuxVerbs, grammems_mask_t& MainVerbGrammems) const;
 
 	bool		is_be_verb() const;
 	bool		has_not();

@@ -16,7 +16,7 @@ public:
 	uint64_t			m_iGrammems;
 	char			m_LemSign;
 	std::string			m_CommonGramCode;
-	poses_mask_t    m_iPoses;
+	part_of_speech_mask_t    m_iPoses;
     bool            m_bUnkGramcodes;
 			
 	// all single preposition interpretations
@@ -28,7 +28,7 @@ public:
 	bool	HasGrammem(BYTE gram) const;
 	bool	HasPos(BYTE pos) const;
 	std::string	GetGrammemsByAncodes() const;
-	bool	ModifyGrammems(uint64_t Grammems, poses_mask_t Poses=0xffffffff);
+	bool	ModifyGrammems(uint64_t Grammems, part_of_speech_mask_t Poses=0xffffffff);
 	bool	InitAncodePattern();
     void    SetMorphUnknown();
     bool    DeleteAncodesByGrammemIfCan(BYTE Grammem);

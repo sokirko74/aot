@@ -889,7 +889,7 @@ void CEngSemStructure::AddFixedGrammemsToNode()
 			bProper = RusStr.GetNode(engNode.RusNode).m_bProper;
 
 		std::string lemma = engWord.m_Lemma;
-		BYTE pos = GetOnePOS(engWord.m_Poses);
+		part_of_speech_t pos = GetOnePOS(engWord.m_Poses);
 		if (lemma.length() == 0) continue;
 		uint64_t grammems = helper.GetFixedGrammemsByLemma(morphEnglish, lemma, pos,bProper);
 

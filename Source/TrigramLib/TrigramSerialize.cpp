@@ -127,7 +127,7 @@ bool CTrigramModel::ReadBinary()
         }
 
         fclose (fp);
-        m_TagsCount  = (WORD)m_RegisteredTags.size();
+        m_TagsCount  = (uint16_t)m_RegisteredTags.size();
     }
     {
         std::string filename = Path + "/unigrams.bin";

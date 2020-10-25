@@ -8,9 +8,9 @@
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 #ifdef WIN32
-	#define NOMINMAX 
-	#include "windows.h"
-	#include "winuser.h"
+	//#define NOMINMAX 
+	//#include "windows.h"
+	//#include "winuser.h"
 #endif
 
 #include  "single_byte_encoding.h"
@@ -46,9 +46,6 @@ typedef unsigned char BYTE;
 	
 #else
 	#include  <unistd.h>
-	typedef unsigned int	uint32_t;	
-	typedef unsigned short	WORD;
-	//typedef unsigned int	UINT;
 	const   unsigned int _MAX_PATH = 512;
 #endif
 
@@ -62,7 +59,7 @@ inline uint64_t GetMaxQWORD ()
 	#ifdef WIN32
 		return  0xffffffffffffffff;
 	#else
-		return std::numeric_limits<uint64_t>::max()
+	    return std::numeric_limits<uint64_t>::max();
 	#endif
 };
 
@@ -273,10 +270,15 @@ T& GerEngRusMakeUpperTemplate (T& word, MorphLanguageEnum Langua, size_t Len )
 };	
 
 
+
+typedef  uint8_t part_of_speech_t;
+typedef  uint8_t grammem_t;
+typedef  uint8_t graph_descr_t;
+typedef  uint32_t part_of_speech_mask_t;
+typedef  uint64_t grammems_mask_t;
+
 //  uint64_t mask
 #define _QM(X) (((uint64_t)1)<<(X))
-
-typedef  uint32_t poses_mask_t;
 
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 

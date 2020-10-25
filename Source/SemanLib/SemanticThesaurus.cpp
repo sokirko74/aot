@@ -126,7 +126,7 @@ bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CRoss
 	return m_ThesSemRelations.size() > SaveDopRelationsCount;
 };
 
-WORD CRusSemStructure::GetArticleByModel(long TerminId, int ThesaurusId) const
+uint16_t CRusSemStructure::GetArticleByModel(long TerminId, int ThesaurusId) const
 {
 	const CThesaurus* Thes = m_pData->GetThes(ThesaurusId);
 	int No = Thes->GetTerminNoByTextEntryId(TerminId);
@@ -251,7 +251,7 @@ void CRusSemStructure::ApplyTerminSemStr(long ClauseNo)
 
 
 
-WORD CRusSemStructure::GetUnitNoByTerminId(DictTypeEnum   DictType, long TerminId) const
+uint16_t CRusSemStructure::GetUnitNoByTerminId(DictTypeEnum   DictType, long TerminId) const
 {
 	const CRossHolder* Dict = GetRossHolder(DictType);
 	if (Dict == 0) return ErrUnitNo;
@@ -315,7 +315,7 @@ void CRusSemStructure::GetThesInterps(std::string UnitStr, const CRusSemWord& W,
 		if (!W.HasPOS(M.m_AtomGroups[0].m_PartOfSpeech))  return;
 
 		//  добавление статьи, если она есть
-		WORD UnitNo = GetUnitNoByTerminId(DictType, TerminId);
+		uint16_t UnitNo = GetUnitNoByTerminId(DictType, TerminId);
 		if (UnitNo == ErrUnitNo)  return;
 
 		CDictUnitInterp I(GetRossHolder(DictType), DictType, UnitNo, false, false);
@@ -387,7 +387,7 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 			{
 				const CRossHolder* RossDoc = GetRossHolder(m_Nodes[i].GetInterps()[j].m_DictType);
 				const CDictionary* Ross = RossDoc->GetRoss();
-				WORD UnitNo = m_Nodes[i].GetInterps()[j].m_UnitNo;
+				uint16_t UnitNo = m_Nodes[i].GetInterps()[j].m_UnitNo;
 				if (!Ross->IsEmptyArticle(UnitNo))
 					for (size_t j = Ross->GetUnitStartPos(UnitNo); j <= Ross->GetUnitEndPos(UnitNo); j++)
 					{
@@ -414,12 +414,12 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 
 struct CTerminItem {
 	// номер элемента в термине 
-	UINT m_ItemNo;
+	uint32_t m_ItemNo;
 	/*
 	при загрузке английских терминов m_TextItemId - WordNo;
 	при загрузке разделенных русских m_TextItemId - NodeNo;
 	*/
-	UINT m_TextItemId;
+	uint32_t m_TextItemId;
 	bool m_bSelected;
 	CTerminItem()
 	{
@@ -430,7 +430,7 @@ struct CTerminItem {
 
 struct CSemanTermin {
 	long m_ThesaurusId;
-	UINT m_TerminNo;
+	uint32_t m_TerminNo;
 	std::vector<CTerminItem> m_TermItems;
 	long	m_TextItemsCount;
 	long	m_TerminId;
@@ -629,7 +629,7 @@ void CRusSemStructure::FindDividedTermins()
 
 			std::vector<CDopField> DopFields;
 			T.m_TerminId = Thes->m_Termins[T.m_TerminNo].m_TerminId;
-			WORD UnitNo = GetUnitNoByTerminId(GetRossIdByThesId(T.m_ThesaurusId), T.m_TerminId);
+			uint16_t UnitNo = GetUnitNoByTerminId(GetRossIdByThesId(T.m_ThesaurusId), T.m_TerminId);
 			if (UnitNo == ErrUnitNo) continue;
 			long MainItemNo = GetRossHolder(GetRossIdByThesId(T.m_ThesaurusId))->GetDopFields(UnitNo, DopFields);
 

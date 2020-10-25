@@ -63,31 +63,32 @@ bool CSemWord::IsRusSubstPronounP() const
 		|| (m_Lemma == _R("ОДИН"));
 };
 
-uint64_t		CSemWord::GetAllGrammems() const
+grammems_mask_t CSemWord::GetAllGrammems() const
 {
 	return m_FormGrammems | m_TypeGrammems;
 }
 
-uint64_t		CSemWord::GetFormGrammems() const
+grammems_mask_t		CSemWord::GetFormGrammems() const
 {
 	return m_FormGrammems;
 }
 
-void		CSemWord::SetFormGrammems(uint64_t g)
+void		CSemWord::SetFormGrammems(grammems_mask_t g)
 {
 	m_FormGrammems = g;
 }
 
-uint64_t		CSemWord::GetTypeGrammems() const
+grammems_mask_t		CSemWord::GetTypeGrammems() const
 {
 	return m_TypeGrammems;
 }
 
-void		CSemWord::SetTypeGrammems(uint64_t g)
+void		CSemWord::SetTypeGrammems(grammems_mask_t g)
 {
 	m_TypeGrammems = g;
 }
-void		CSemWord::AddFormGrammem(int g)
+
+void		CSemWord::AddFormGrammem(grammem_t g)
 {
 	m_FormGrammems |= _QM(g);
 };
@@ -216,7 +217,7 @@ const CDictUnitInterp* CSemNode::GetInterp() const
 };
 
 // дает  номер статьи для текущей интерпреции
-WORD   CSemNode::GetUnitNo() const
+uint16_t   CSemNode::GetUnitNo() const
 {
 	return (m_CurrInterp == -1) ? ErrUnitNo : m_Interps[m_CurrInterp].m_UnitNo;
 };
@@ -282,7 +283,7 @@ bool CSemNode::HasSomePrep() const
 };
 
 // проверяет, приписан ли узлу предлог PrepNo
-bool CSemNode::HasThePrep(WORD UnitNo) const
+bool CSemNode::HasThePrep(uint16_t UnitNo) const
 {
 	return m_SynReal.HasThePrep(UnitNo);
 };
@@ -316,7 +317,7 @@ bool  CSemNode::IsTrueLocNode() const
 			|| GetWord(0).HasPOS(ADV)
 			);
 };
-bool   CSemNode::HasPOS(size_t POS) const
+bool   CSemNode::HasPOS(part_of_speech_t POS) const
 {
 	if (m_MainWordNo == -1) return false;
 	return GetWord(m_MainWordNo).HasPOS(POS);
@@ -360,7 +361,7 @@ bool	CSemNode::HasOneGrammem(int g) const
 	return (m_Grammems & _QM(g)) > 0;
 };
 
-poses_mask_t CSemNode::GetNodePoses() const
+part_of_speech_mask_t CSemNode::GetNodePoses() const
 {
 	if (m_MainWordNo == -1) return 0;
 	return  GetWord(m_MainWordNo).m_Poses;
@@ -1234,7 +1235,7 @@ bool CSemanticStructure::CheckGroupBeginAndCase(std::string ItemStr, size_t Node
 				return false;
 		};
 
-	WORD DictPrepNo = GetRossHolder(OborRoss)->LocateUnit(ItemStr.c_str(), 1);
+	uint16_t DictPrepNo = GetRossHolder(OborRoss)->LocateUnit(ItemStr.c_str(), 1);
 	for (PrepNo = 0; PrepNo < N.m_SynReal.m_Preps.size(); PrepNo++)
 		if (DictPrepNo == N.m_SynReal.m_Preps[PrepNo].m_UnitNo)
 			return true;
@@ -1636,7 +1637,7 @@ bool CSemanticStructure::IsConnected()
 
 
 
-long CSemanticStructure::FindAbstractPlugArticle(DictTypeEnum type, uint64_t Grammems, poses_mask_t Poses, long ClauseType) const
+long CSemanticStructure::FindAbstractPlugArticle(DictTypeEnum type, uint64_t Grammems, part_of_speech_mask_t Poses, long ClauseType) const
 {
 
 	const std::vector<CAbstractArticle>& AbstractArticles = *m_pData->GetAbstractArticles(type);
@@ -1770,7 +1771,7 @@ void CSemanticStructure::AddAbstractAdditionVals(DictTypeEnum type, CSemNode& No
 
 };
 
-bool CSemanticStructure::HasItem(DictTypeEnum DictTy, WORD UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const
+bool CSemanticStructure::HasItem(DictTypeEnum DictTy, uint16_t UnitNo, const std::string& FieldStr, const std::string& ItemStr, const std::string& DomStr, BYTE LeafId, BYTE BracketLeafId)  const
 {
 	CRossQuery Q(DictTy, UnitNo, FieldStr, ItemStr, DomStr, LeafId, BracketLeafId);
 	std::vector<CRossQuery>::const_iterator It = find(Queries.begin(), Queries.end(), Q);
@@ -1782,11 +1783,11 @@ bool CSemanticStructure::HasItem(DictTypeEnum DictTy, WORD UnitNo, const std::st
 };
 
 // проверяет часть речи узла
-bool   CSemanticStructure::HasPOS(const CSemNode& N, size_t POS) const
+bool   CSemanticStructure::HasPOS(const CSemNode& N, part_of_speech_t POS) const
 {
 	return (N.m_MainWordNo != -1) && N.GetWord(N.m_MainWordNo).HasPOS(POS);
 };
-bool   CSemanticStructure::HasPOS(size_t NodeNo, size_t POS) const
+bool   CSemanticStructure::HasPOS(size_t NodeNo, part_of_speech_t POS) const
 {
 	return HasPOS(GetNode(NodeNo), POS);
 };
@@ -1826,7 +1827,7 @@ const char* GetStrByCategory(SemCategoryEnum t)
 //==========================================
 
 CRossQuery::CRossQuery(DictTypeEnum  TypeEnum,
-	WORD UnitNo,
+	uint16_t UnitNo,
 	std::string FieldStr,
 	std::string ItemStr,
 	std::string DomStr,
@@ -1867,7 +1868,7 @@ void CSynRealization::SetEmpty()
 };
 
 // проверяет, приписан ли узлу предлог PrepNo
-bool CSynRealization::HasThePrep(WORD UnitNo) const
+bool CSynRealization::HasThePrep(uint16_t UnitNo) const
 {
 	for (long i = 0; i < m_Preps.size(); i++)
 		if (m_Preps[i].m_UnitNo == UnitNo)
@@ -1999,7 +2000,7 @@ bool			CSemanticStructure::HasSemType(const CSemNode& Node, std::string Type) co
 	return (Node.GetType() != NoneRoss) && HasItem(Node.GetType(), Node.GetUnitNo(), "CAT", Type, "D_CAT", 0, 0);
 };
 
-bool			CSemanticStructure::GramFetAgreeWithPoses(CRossHolder& Ross, WORD UnitNo, const CSemWord& W) const
+bool			CSemanticStructure::GramFetAgreeWithPoses(CRossHolder& Ross, uint16_t UnitNo, const CSemWord& W) const
 {
 	return (W.m_Poses & GetPosesFromRusArticle(Ross, UnitNo)) > 0;
 };

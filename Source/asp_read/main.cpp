@@ -22,7 +22,7 @@ void get_id(CMorphologyHolder& morphHolder, std::string str, DwordVector &res, b
 	{
 		const CFormInfo Paradigm = ParadigmCollection[i];
 		if(!Paradigm.m_bFound) continue;
-		UINT part = morphHolder.m_pGramTab->GetPartOfSpeech(Paradigm.GetSrcAncode().c_str());
+		uint32_t part = morphHolder.m_pGramTab->GetPartOfSpeech(Paradigm.GetSrcAncode().c_str());
 		if(part != INFINITIVE)
 			continue;
 		uint64_t gr = morphHolder.m_pGramTab->GetAllGrammems(Paradigm.GetCommonAncode().c_str());

@@ -16,7 +16,7 @@ struct CValency
 		long              m_RelationId;
         BYTE              m_LeafId;
 		BYTE              m_BracketLeafId;
-		WORD              m_UnitNo;
+		uint16_t              m_UnitNo;
 		bool              m_IsAddition;
 		const CRossHolder*      m_RossHolder;
 		bool              m_InstrAgent;
@@ -33,7 +33,7 @@ struct CValency
 		bool IsFromDict () const;
 		bool operator == ( const CValency& X) const;
 		
-		CValency (std::string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross = 0, BYTE LeafId = 0, BYTE BracketLeafId = 0, WORD UnitNo = ErrUnitNo);
+		CValency (std::string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross = 0, BYTE LeafId = 0, BYTE BracketLeafId = 0, uint16_t UnitNo = ErrUnitNo);
 		CValency();
 		CValency(	const TCortege C, 
 					const long MainWordVarNo, 

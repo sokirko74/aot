@@ -144,7 +144,7 @@ int CEngSemStructure::GetOutRelationByWord(long NodeNo, std::string Word) const
 }
 
 
-bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, poses_mask_t  Poses) const
+bool CEngSemStructure::HasOutRelationByPoses(long NodeNo, part_of_speech_mask_t  Poses) const
 {
 	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo,rels);
@@ -434,7 +434,7 @@ void  CEngSemStructure::InitArticleField ()
 		if (j < OutRels.size()) continue;
 		// NP с предлогом of
 		PrintNodes();
-		WORD UnitNo = GetRoss(EngObor)->LocateUnit("of",1);
+		uint16_t UnitNo = GetRoss(EngObor)->LocateUnit("of",1);
 		std::vector<long> OutAllRels;
 		GetOutcomingRelations(NodeNo, OutAllRels, false);
   		for (j =0; j < OutAllRels.size();j++)

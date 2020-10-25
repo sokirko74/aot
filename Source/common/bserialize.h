@@ -71,18 +71,18 @@ inline size_t restore_from_bytes(BYTE &i, const BYTE *buf) {
 };
 
 
-// ============== WORD =====================
-inline size_t get_size_in_bytes(const WORD &t) {
+// ============== uint16_t =====================
+inline size_t get_size_in_bytes(const uint16_t &t) {
     return 2;
 };
 
-inline size_t save_to_bytes(const WORD &i, BYTE *buf) {
-    *((WORD *) buf) = i;
+inline size_t save_to_bytes(const uint16_t &i, BYTE *buf) {
+    *((uint16_t *) buf) = i;
     return get_size_in_bytes(i);
 };
 
-inline size_t restore_from_bytes(WORD &i, const BYTE *buf) {
-    i = *((WORD *) buf);
+inline size_t restore_from_bytes(uint16_t &i, const BYTE *buf) {
+    i = *((uint16_t *) buf);
     return get_size_in_bytes(i);
 };
 

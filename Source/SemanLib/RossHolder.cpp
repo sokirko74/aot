@@ -112,7 +112,7 @@ bool CRossHolder::InitConsts()
 	return true;
 };
 
-bool CRossHolder::HasCX (WORD UnitNo, const std::string CX, const std::string DomStr) const 
+bool CRossHolder::HasCX (uint16_t UnitNo, const std::string CX, const std::string DomStr) const 
 {
 	return HasItem (UnitNo, "SF", CX, DomStr,0,0);
 };
@@ -321,7 +321,7 @@ void CRossHolder::GetSimpleFieldItemsFromArticle (long UnitNo, std::string Field
 // имя домена, в котором сначала ищется	константа ItemStr. 
 // Работает	немного	быстрее	CRossHolder::HasFieldValue,	поскольку вся работа со	строками 
 // вынесена	за пределы основного цикла
-bool CRossHolder::HasItem (WORD	UnitNo,	const std::string FieldStr, const std::string	ItemStr, const std::string DomStr, BYTE LeafId, BYTE	BracketLeafId) const
+bool CRossHolder::HasItem (uint16_t	UnitNo,	const std::string FieldStr, const std::string	ItemStr, const std::string DomStr, BYTE LeafId, BYTE	BracketLeafId) const
 {
 	if (UnitNo == ErrUnitNo)  return false;
 	BYTE DomNo = GetRoss()->GetDomenNoByDomStr(DomStr.c_str());
@@ -341,7 +341,7 @@ bool CRossHolder::HasItem (WORD	UnitNo,	const std::string FieldStr, const std::s
 	return false;
 };
 
-WORD CRossHolder::LocateUnit (const char* UnitStr, BYTE	MeanNum) const
+uint16_t CRossHolder::LocateUnit (const char* UnitStr, BYTE	MeanNum) const
 {
 	return GetRoss()->LocateUnit(UnitStr, MeanNum);
 };
@@ -458,7 +458,7 @@ void CRossHolder::GetLexFuncts (size_t UnitNo,  std::vector<CLexicalFunctionFiel
 };
 
 
-CValency CRossHolder::GetSemRelOfPrepOrConj(WORD  UnitNo) const
+CValency CRossHolder::GetSemRelOfPrepOrConj(uint16_t  UnitNo) const
 {
 	if (     (UnitNo != ErrUnitNo) 
 	     &&  (!GetRoss()->IsEmptyArticle(UnitNo)) 

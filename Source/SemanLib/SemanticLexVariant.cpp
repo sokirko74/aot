@@ -11,7 +11,7 @@ const int PrefixesCount = 2;
 const CProductivePrefix Prefixes[PrefixesCount] = { {_R("АВИА"), _R("АВИА")},{_R("АЭРО"), _R("АВИА")} };
 
 
-poses_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,WORD UnitNo) const
+part_of_speech_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder& Ross,uint16_t UnitNo) const
 {
 	StringVector GramFets;
     Ross.GetSimpleFieldItemsFromArticle (UnitNo, "GF", 0, 0, GramFets);
@@ -123,14 +123,14 @@ std::string CRusSemStructure::GetNormOfParticiple (const CRusSemWord& W) const
 
 
 
-WORD CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
+uint16_t CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
 {
 	for (long i=0; i < PrefixesCount; i++)
 	  if  (W.m_Lemma.substr(0, Prefixes[i].m_Prefix.length()) == Prefixes[i].m_Prefix) 
 	  {
 		 std::string UnitStr=  W.m_Lemma.substr(Prefixes[i].m_Prefix.length());
 		 EngRusMakeLower(UnitStr);
-		 WORD UnitNo  = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
+		 uint16_t UnitNo  = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 		 if (UnitNo == ErrUnitNo)  continue;
 
 		 uint32_t ParadigmId = m_pData->GetFirstParadigmId(morphRussian, UnitStr,  W.m_Poses);
@@ -198,7 +198,7 @@ void CRusSemStructure::InitInterps (CRusSemWord&	W, bool	PassiveForm, long Claus
 		// ищем	словарную статью в РОССе по	лемме
 		// Например, обеспокоенный
 		std::string UnitStr;
-		WORD UnitNo	= ErrUnitNo;
+		uint16_t UnitNo	= ErrUnitNo;
 		if (   //( W.m_Poses & (1	<< PARTICIPLE) ) 
 			 ( W.m_Poses & (1	<< PARTICIPLE_SHORT) ) 
 			)

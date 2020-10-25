@@ -13,7 +13,7 @@ const char FieldDelimiter[] = "#";
 
 struct COborot 
 {
-	WORD m_UnitNo;
+	uint16_t m_UnitNo;
 	// m_OborotId is a unique ID  which was attached to each oborot in this  thesaurus
 	// we cannot store in thesaurus OborotNo (m_UnitNo) since OborotNo changes every time when user inserts a new record to the beginning
 	long m_OborotId;
@@ -38,11 +38,11 @@ const int siPlural = 32;
 
 
 struct CInnerSynItem {
- WORD   m_TerminNo;
+ uint16_t   m_TerminNo;
  std::string m_ItemStr;
  int    m_Flags : 8;
- WORD   m_OborotId;
- WORD   m_OborotNo;
+ uint16_t   m_OborotId;
+ uint16_t   m_OborotNo;
  BYTE   m_ItemPos;
  CInnerSynItem()
  {
@@ -76,8 +76,8 @@ struct CInnerTermin {
 
 struct CSynonym {
 	thesaurus_concept_t		m_ConceptId;
-	int		m_TextEntryId;
-	UINT    m_DomainMask;
+	uint32_t	m_TextEntryId;
+	uint32_t    m_DomainMask;
 	CSynonym ()	{};
 
 };
@@ -139,8 +139,8 @@ public:
 	int	 GetModelNoByModelId (long ModelId) const;
 	bool LoadTermins (std::string FileName);
 
-	void GetConceptsByTextEntryId(long TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const;
-	void GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<long>& TextEntries) const;
+	void GetConceptsByTextEntryId(uint32_t TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const;
+	void GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<uint32_t>& TextEntries) const;
 	bool LoadSynonyms (std::string FileName);
 
 	
@@ -161,7 +161,7 @@ public:
 	bool	IsA(uint32_t TextEntryId, std::string ConceptStr) const;
 	void	QueryEnglishTranslations(uint32_t TextEntryId, std::vector<int>& CurrentEnglishTermins) const;
 	int		GetTerminIdBySingleWord(std::string WordStr) const;
-	thesaurus_concept_set_t		QueryTopConcepts(UINT TextEntryId) const;
+	thesaurus_concept_set_t		QueryTopConcepts(uint32_t TextEntryId) const;
 	uint32_t	QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const;
 	thesaurus_termin_set_t QueryLowerTermins(const std::string& conceptStr, MorphLanguageEnum lang) const;
 	int		FindAbbr(const std::string& str) const;

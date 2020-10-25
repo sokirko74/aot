@@ -9,7 +9,7 @@ class IsGreaterByUnigrams {
 public:
 	const std::vector<int>&			m_Unigrams;
 	IsGreaterByUnigrams(const std::vector<int>& Unigrams): m_Unigrams(Unigrams) {};
-	bool operator () (const WORD& i1, const WORD& i2) const 
+	bool operator () (const uint16_t& i1, const uint16_t& i2) const 
 	{
 		return m_Unigrams[i1] > m_Unigrams[i2];
 	}
@@ -44,7 +44,7 @@ bool CTrigramModel::register_tags_from_ngram_file()
         }
 	};
 
-	m_TagsCount = (WORD)m_RegisteredTags.size();
+	m_TagsCount = (uint16_t)m_RegisteredTags.size();
 	fprintf (stderr, "found %d tags in \"%s\"\n", m_TagsCount-1, m_NgramFile.c_str());
     return true;
 }
@@ -71,7 +71,7 @@ bool CTrigramModel::read_ngram_file()
 
 
 	int lno = 0;
-	WORD t[3]={0, 0, 0};
+	uint16_t t[3]={0, 0, 0};
     char buffer[1024];
     while (fgets(buffer, 1024, fp))
     {
@@ -121,7 +121,7 @@ bool CTrigramModel::read_ngram_file()
 		m_TypeCounts[0], m_TokenCounts[0], m_TypeCounts[1], m_TokenCounts[1], m_TypeCounts[2], m_TokenCounts[2]);
 
 	m_TagsOrderedByUnigrams.resize(m_TagsCount);
-	for (WORD i=0;i < m_TagsCount; i++)
+	for (uint16_t i=0;i < m_TagsCount; i++)
 		m_TagsOrderedByUnigrams[i] = i;
 	sort (m_TagsOrderedByUnigrams.begin(), m_TagsOrderedByUnigrams.end(), IsGreaterByUnigrams(m_Unigrams));
 	
@@ -138,13 +138,13 @@ void CTrigramModel::compute_counts_for_boundary()
 
 	/* we don't start at zero because of the boundary tags */
 	
-	for (WORD i=1; i<m_TagsCount; i++)
+	for (uint16_t i=1; i<m_TagsCount; i++)
 	{
 		int bx, xb, bx_=0;
 		//fprintf(stdout, "\r[%i/%i]      ",i,m_TagsCount);
 
 		bx = xb = m_Unigrams[ ngram_index(i) ];
-		WORD j=1;
+		uint16_t j=1;
 		for (; j<m_TagsCount; j++)
 		{ 
 			int bxy, xyb;
@@ -154,7 +154,7 @@ void CTrigramModel::compute_counts_for_boundary()
 
 			bxy = xyb = m_Bigrams[ ngram_index(i, j) ];
 			if (bxy > 0) // если bxy = 0, тогда следующий цикл не будет осмысленным
-			for (WORD k=1; k<m_TagsCount; k++)
+			for (uint16_t k=1; k<m_TagsCount; k++)
 			{
 				bxy-= (int)GetTrigram( k, i, j );
 				xyb-= (int)GetTrigram( i, j, k );

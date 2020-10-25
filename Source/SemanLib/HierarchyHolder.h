@@ -85,7 +85,7 @@ public:
 
 
 
-extern bool SemFetActantIsEqualOrLower (CRossHolder* Ross, WORD Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc);
+extern bool SemFetActantIsEqualOrLower (CRossHolder* Ross, uint16_t Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc);
 // добавляет в SemFets все SF, которые стоят ниже по иерархии 
 extern void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, std::vector<std::string>& SemFets);
 // добавляет в SemFets все SF, которые стоят выше по иерархии 

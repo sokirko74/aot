@@ -218,7 +218,7 @@ void CEngVerbTense::make_string()
 	S.Res(m_VerbNodeNo).rel_operator = "";
 
 
-	UINT grammems;
+	grammems_mask_t grammems;
 	if(m_pVerbMainWord->m_bDoNotChangeForm)
 		m_Tense = zero_tn;
 
@@ -299,7 +299,7 @@ void CEngVerbTense::make_string()
 // функция по времени Tense, выдает набор вспомогательных глаглов, которые должны 
 // стоять до основного глагола. Еще функция вылдает граммемы, в которые нужно поставить
 // основной глагол.
-void CEngVerbTense::CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, std::string& AuxVerbs, UINT& MainVerbGrammems) const
+void CEngVerbTense::CreateAuxVerbsThatStandBeforeMain(EngVerbTenseEnum Tense, std::string& AuxVerbs, grammems_mask_t& MainVerbGrammems) const
 {
 	MainVerbGrammems = 0;
 

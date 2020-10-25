@@ -13,7 +13,7 @@
 // Если  значение GFi(j)  начинается со строки "(стр)", то это означает, что эту грамматическую характеристику
 // нужно использовать только для пассивной валентности.
 
-bool CRusSemStructure::LoadFromDictForPassive(WORD UnitNo, BYTE LeafId, BYTE BracketLeafId, CSemPattern& P)
+bool CRusSemStructure::LoadFromDictForPassive(uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId, CSemPattern& P)
 {
 	assert (UnitNo != ErrUnitNo);
 
@@ -40,7 +40,7 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 {
 	if (m_Nodes[NodeNo].GetType() != Ross) return;
 
-	WORD UnitNo = m_Nodes[NodeNo].GetUnitNo();
+	uint16_t UnitNo = m_Nodes[NodeNo].GetUnitNo();
 
 	assert (UnitNo != ErrUnitNo);
 
@@ -1535,7 +1535,7 @@ void CRusSemStructure::FindReverseActantForPreps(size_t ClauseNo)
 		  CSemPattern P;
 		  P.m_SourceNo = NodeNo;
 		  P.m_pRossDoc = GetRossHolder(OborRoss);
-		  WORD PrepUnitNo = m_Nodes[NodeNo].m_SynReal.m_Preps[0].m_UnitNo;
+		  uint16_t PrepUnitNo = m_Nodes[NodeNo].m_SynReal.m_Preps[0].m_UnitNo;
 		  // загружаем первую валентность предлога - это пассивная валентность
 		  P.InitSemPattern(P.m_pRossDoc, PrepUnitNo, 1, 0);
 		  P.LoadGramFromDict();

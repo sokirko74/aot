@@ -30,7 +30,7 @@ class CGraphmatFile : public CUnitHolder {
 
     bool DealAbbrev(size_t StartPos, size_t EndPos);
 
-    size_t FindOborotto(size_t i, size_t HB, short &OborotNo, std::vector<WORD> &OborortIds) const;
+    size_t FindOborotto(size_t i, size_t HB, short &OborotNo, std::vector<uint16_t> &OborortIds) const;
 
     void DealOborotto(size_t HB);
 

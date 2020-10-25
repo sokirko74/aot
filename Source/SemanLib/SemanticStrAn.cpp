@@ -507,7 +507,7 @@ void UnitDisruptedConjunctions(CRusSemStructure& R, long ClauseNo)
 
 			std::string UnitStr = W.m_Lemma;
 			EngRusMakeLower(UnitStr);
-			WORD UnitNo = R.GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
+			uint16_t UnitNo = R.GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 			if (UnitNo != ErrUnitNo)
 				for (long j = UnitNo; UnitStr == R.GetRoss(Ross)->GetEntryStr(j); j++)
 					if (R.GramFetAgreeWithPoses(*R.GetRossHolder(Ross), j, W))
@@ -963,7 +963,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 {
 	if (GetRoss(Ross) == NULL) return false;
 
-	WORD UnitNo = GetRossHolder(Ross)->LocateUnit("_semantic_weight_components", 1);
+	uint16_t UnitNo = GetRossHolder(Ross)->LocateUnit("_semantic_weight_components", 1);
 	if (UnitNo == ErrUnitNo) {
 		throw CExpc("cannot find entry _semantic_weight_components in Ross");
 	}
