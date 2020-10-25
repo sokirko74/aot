@@ -182,7 +182,7 @@ void CThesaurus::dfs(thesaurus_concept_t conceptId, RelationEnum relationType, s
 };
 
 
-bool CThesaurus::IsA(DWORD TextEntryId, std::string ConceptStr) const
+bool CThesaurus::IsA(uint32_t TextEntryId, std::string ConceptStr) const
 {
 	thesaurus_concept_t conceptId = GetConceptIdByConceptStr(ConceptStr.c_str());
 	if (conceptId == UnknownConceptId) return   false;
@@ -213,7 +213,7 @@ bool IsEnglishModel(const CInnerModel& M)
 
 };
 
-void CThesaurus::QueryEnglishTranslations(DWORD TextEntryId, std::vector<int>& CurrentEnglishTermins) const
+void CThesaurus::QueryEnglishTranslations(uint32_t TextEntryId, std::vector<int>& CurrentEnglishTermins) const
 {
 	CurrentEnglishTermins.clear();
 	std::vector<thesaurus_concept_t> ConceptsFromTextEntry;
@@ -303,7 +303,7 @@ thesaurus_concept_set_t CThesaurus::QueryTopConcepts(UINT TextEntryId) const
 
 
 
-DWORD CThesaurus::QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const
+uint32_t CThesaurus::QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const
 {
 	CurrentTerminItems.clear();
 	CInnerSynItem I;

@@ -21,9 +21,9 @@ class CSentence;
 
 
 struct SDatItems {
-    DWORD m_Poses;
+    uint32_t m_Poses;
     StringHashSet m_vectorDatItems;
-    SDatItems(DWORD Poses) { m_Poses = Poses; };
+    SDatItems(uint32_t Poses) { m_Poses = Poses; };
 
 };
 

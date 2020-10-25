@@ -199,7 +199,7 @@ void  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 				WordForm += GetFormBuilder()->m_AnnotChar;
 				{
 					FormsCount++;
-					DWORD info = 	GetFormBuilder()->EncodeMorphAutomatInfo(ModelNo, ItemNo, (*pPrefixVector)[PrefixNo]);
+					uint32_t info = 	GetFormBuilder()->EncodeMorphAutomatInfo(ModelNo, ItemNo, (*pPrefixVector)[PrefixNo]);
 
 					{	// checking encoding
 						size_t checkModelNo, checkItemNo,checkPrefixNo;

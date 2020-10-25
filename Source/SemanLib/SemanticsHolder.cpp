@@ -164,7 +164,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 
 
 
-void CSemanticsHolder::GetCustomGrammems (std::string GramFet, QWORD& Grammems, DWORD& Pose)
+void CSemanticsHolder::GetCustomGrammems (std::string GramFet, QWORD& Grammems, uint32_t& Pose)
 {
 	assert(GetRusGramTab() != 0);
 	Trim(GramFet);

@@ -31,10 +31,10 @@ public:
 	void	Create(const CLemmatizer*	pParent, const CAutomAnnotationInner& A, const std::string& InputWordForm, bool bFound);
 	void	Copy(const CFormInfo& from);
 	void	AttachLemmatizer(const CLemmatizer* parent);
-	bool	SetParadigmId(DWORD newVal);
+	bool	SetParadigmId(uint32_t newVal);
 
-	DWORD	GetParadigmId() const;
-	DWORD	GetCount () const;
+	uint32_t	GetParadigmId() const;
+	uint32_t	GetCount () const;
 	
 	std::string	GetSrcNorm() const; 
 	// returns the weight of a word form 

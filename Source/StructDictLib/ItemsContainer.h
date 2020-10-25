@@ -19,14 +19,14 @@ struct TDomNoItemStr {
 
 struct TDomItem 
 {
-	DWORD	m_Data;
+	uint32_t	m_Data;
 	BYTE	m_DomNo;
 
-	DWORD	GetItemStrNo() const
+	uint32_t	GetItemStrNo() const
 	{
 		return m_Data & ~(0xff<<24);
 	};
-	void	SetItemStrNo(DWORD Value) 
+	void	SetItemStrNo(uint32_t Value) 
 	{
 		m_Data &= (0xff<<24);
 		m_Data |= Value;

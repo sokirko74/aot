@@ -106,7 +106,7 @@ bool CDerivDictonary::Load(int TypeDict)
 }
 
 
-const std::string& CDerivDictonary::GetAffixStr(DWORD index) const
+const std::string& CDerivDictonary::GetAffixStr(uint32_t index) const
 {
 	return pref[index];
 }

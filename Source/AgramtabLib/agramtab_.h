@@ -86,7 +86,7 @@ class CAgramtab {
 	char*	grammems_to_str (QWORD grammems, char* out_buf) const;
 	bool	FindGrammems (const char* gram_codes, QWORD grammems) const;
 	bool	GetGramCodeByGrammemsAndPartofSpeechIfCan(BYTE Pos, QWORD grammems, std::string& gramcodes)  const;
-	bool	GetPartOfSpeechAndGrammems(const BYTE* AnCodes, DWORD& Poses, QWORD& Grammems) const;
+	bool	GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, QWORD& Grammems) const;
 	std::string  GrammemsToStr(QWORD grammems) const;
 	std::string  GetTabStringByGramCode(const char* gram_code) const;
 	BYTE	GetPartOfSpeech(const char* gram_code) const;

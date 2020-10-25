@@ -18,8 +18,8 @@ CBinaryDictionary BinaryDictionary;
 
 
 struct word_pair{
-	DWORD e, r;
-	word_pair(DWORD a, DWORD b)
+	uint32_t e, r;
+	word_pair(uint32_t a, uint32_t b)
 		:e(a), r(b){}
 	bool operator < (const word_pair &p) const{
 		if(e < p.e) return true;
@@ -28,7 +28,7 @@ struct word_pair{
 	}
 };
 
-typedef std::set<std::pair<DWORD, DWORD> > small_dict_t;
+typedef std::set<std::pair<uint32_t, uint32_t> > small_dict_t;
 
 //--------------------------------------------------------------------------------
 void init_dicts()
@@ -137,10 +137,10 @@ size_t write_other_small_dict_pair(const small_dict_t& small_dict, const small_d
 
 		if (t_pos == 0xff) continue;
 
-		DWORD id = ep.GetParadigmId();
-		out.write((char*)&(id), sizeof(DWORD));
+		uint32_t id = ep.GetParadigmId();
+		out.write((char*)&(id), sizeof(uint32_t));
 		id = rp.GetParadigmId();
-		out.write((char*)&(id), sizeof(DWORD));
+		out.write((char*)&(id), sizeof(uint32_t));
 		WORD  freq = 5;
 		out.write((char*)&(freq), sizeof(unsigned short));
 
@@ -216,8 +216,8 @@ size_t write_out_file(const long maxFreq, const std::map<word_pair, int>& word_m
 	{
 		std::string rus = MorphHolderRus.id_to_string(it->first.r);
 		std::string eng = MorphHolderEng.id_to_string(it->first.e);
-		out.write((char*)&(it->first.e), sizeof(DWORD));
-		out.write((char*)&(it->first.r), sizeof(DWORD));
+		out.write((char*)&(it->first.e), sizeof(uint32_t));
+		out.write((char*)&(it->first.r), sizeof(uint32_t));
 
 		WORD freq = it->second;
 		/*

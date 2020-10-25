@@ -128,9 +128,9 @@ struct CWorkRule {
 };
 
 struct CPrecompiledWorkRule {
-    DWORD m_LeftPart;
-    DWORD m_MetaGroupIndexNo;
-    DWORD m_SynMainItemNo;
+    uint32_t m_LeftPart;
+    uint32_t m_MetaGroupIndexNo;
+    uint32_t m_SynMainItemNo;
 };
 
 

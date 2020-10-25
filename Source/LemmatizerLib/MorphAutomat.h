@@ -16,9 +16,9 @@ struct CMorphAutomNode
 	//  the highest bit of CMorphAutomNode::m_Data contains final/not final flag;
 	//  the rest is an index to CMorphAutomat::m_Relations (an index 
 	//   to the place where the first child is)
-	DWORD							m_Data;
+	uint32_t							m_Data;
 
-	DWORD	GetChildrenStart()  const
+	uint32_t	GetChildrenStart()  const
 	{
 		return m_Data&(0x80000000-1); 
 	};
@@ -26,7 +26,7 @@ struct CMorphAutomNode
 	{
 		return (m_Data&0x80000000) > 0; 
 	};
-	void	SetChildrenStart(DWORD v) 
+	void	SetChildrenStart(uint32_t v) 
 	{
 		m_Data = (0x80000000&m_Data)|v;  
 	};
@@ -45,9 +45,9 @@ struct CMorphAutomRelation
 	//  the highest byte of CMorphAutomRelation::m_Data contains relational char;
 	//  the rest is an index to CMorphAutomat::m_Nodes 
 
-	DWORD							m_Data;
+	uint32_t							m_Data;
 
-	DWORD	GetChildNo()  const
+	uint32_t	GetChildNo()  const
 	{
 		return m_Data & 0xffffff; 
 	};
@@ -56,7 +56,7 @@ struct CMorphAutomRelation
 		return m_Data>>24; 
 	};
 
-	void	SetChildNo(DWORD v) 
+	void	SetChildNo(uint32_t v) 
 	{
 		m_Data = (0xff000000&m_Data)|v;  
 	};
@@ -79,11 +79,11 @@ struct CAutomAnnotationInner
 	int		m_LemmaInfoNo;
 	int		m_nWeight;
 
-	DWORD GetParadigmId() const 
+	uint32_t GetParadigmId() const 
 	{
 		return (m_PrefixNo<<23) | m_LemmaInfoNo;  
 	}
-	void SplitParadigmId(DWORD value) 
+	void SplitParadigmId(uint32_t value) 
 	{
 		m_PrefixNo = value>>23;
 		m_LemmaInfoNo = value&0x7fffff;
@@ -108,8 +108,8 @@ public:
 
 	void	CheckABCWithAnnotator(const std::string& WordForm) const;
 	bool	CheckABCWithoutAnnotator(const std::string& WordForm) const;
-	std::string	EncodeIntToAlphabet(DWORD v) const;
-	DWORD	DecodeFromAlphabet(const std::string& v) const;
+	std::string	EncodeIntToAlphabet(uint32_t v) const;
+	uint32_t	DecodeFromAlphabet(const std::string& v) const;
 	std::string	GetCriticalNounLetterPack() const;
 	CABCEncoder(MorphLanguageEnum Language, BYTE AnnotChar);
 
@@ -149,8 +149,8 @@ public:
 	int		NextNode(int NodeNo, BYTE Child) const;
 	size_t	GetChildrenCount(size_t NodeNo)  const;
 	const CMorphAutomNode& GetNode(int NodeNo) const { return m_pNodes[NodeNo];} ;
-	DWORD	EncodeMorphAutomatInfo (size_t ModelNo, size_t ItemNo, size_t PrefixNo) const;
-	void	DecodeMorphAutomatInfo (DWORD Info, size_t& ModelNo, size_t& ItemNo, size_t& PrefixNo) const;
+	uint32_t	EncodeMorphAutomatInfo (size_t ModelNo, size_t ItemNo, size_t PrefixNo) const;
+	void	DecodeMorphAutomatInfo (uint32_t Info, size_t& ModelNo, size_t& ItemNo, size_t& PrefixNo) const;
 	std::string	GetFirstResult (const std::string& Text) const;
 	
 };

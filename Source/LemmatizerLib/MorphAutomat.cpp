@@ -51,7 +51,7 @@ std::string CABCEncoder::GetCriticalNounLetterPack() const
 	return std::string(MinimalPredictionSuffix, m_AnnotChar);
 }
 
-std::string CABCEncoder::EncodeIntToAlphabet(DWORD v) const
+std::string CABCEncoder::EncodeIntToAlphabet(uint32_t v) const
 {
 	std::string Result;
 	if (v == 0)
@@ -69,7 +69,7 @@ std::string CABCEncoder::EncodeIntToAlphabet(DWORD v) const
 	return Result;
 };
 
-DWORD CABCEncoder::DecodeFromAlphabet(const std::string& v) const
+uint32_t CABCEncoder::DecodeFromAlphabet(const std::string& v) const
 {
 	size_t len = v.length();
 	int c = 1;
@@ -388,7 +388,7 @@ void	CMorphAutomat::GetAllMorphInterpsRecursive (int NodeNo, std::string& curr_p
 	if (N.IsFinal())
 	{
 		CAutomAnnotationInner A;
-		DWORD i = DecodeFromAlphabet(curr_path);
+		uint32_t i = DecodeFromAlphabet(curr_path);
 		size_t ItemNo;
 		size_t ModelNo;
 		size_t PrefixNo;
@@ -445,15 +445,15 @@ void	CMorphAutomat::GetInnerMorphInfos (const std::string& Text, size_t TextPos,
 	//sort(Infos.begin(),Infos.end());
 };
 
-DWORD CMorphAutomat::EncodeMorphAutomatInfo (size_t ModelNo, size_t ItemNo, size_t PrefixNo) const 
+uint32_t CMorphAutomat::EncodeMorphAutomatInfo (size_t ModelNo, size_t ItemNo, size_t PrefixNo) const 
 {
-	return			(((DWORD)((WORD)((DWORD)(ModelNo) & 0xffff))) << 18)
-				|	(((DWORD)((WORD)((DWORD)(ItemNo) & 0xffff))) << 9)
+	return			(((uint32_t)((WORD)((uint32_t)(ModelNo) & 0xffff))) << 18)
+				|	(((uint32_t)((WORD)((uint32_t)(ItemNo) & 0xffff))) << 9)
 				|	PrefixNo;
 
 };
 
-void CMorphAutomat::DecodeMorphAutomatInfo (DWORD Info, size_t& ModelNo, size_t& ItemNo, size_t& PrefixNo) const 
+void CMorphAutomat::DecodeMorphAutomatInfo (uint32_t Info, size_t& ModelNo, size_t& ItemNo, size_t& PrefixNo) const 
 {
 	ModelNo = Info >>18;
 	ItemNo  = (0x3FFFF&Info) >>9;

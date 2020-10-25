@@ -80,7 +80,7 @@ public:
 	void	GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* OutBuffer, bool bUsePrediction) const;
 	//std::string	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital) const;
 	bool	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital, char* OutBuffer, size_t MaxBufferSize, bool bUsePrediction) const;
-	bool	CreateParadigmFromID(DWORD id, CFormInfo& Result) const;
+	bool	CreateParadigmFromID(uint32_t id, CFormInfo& Result) const;
 	bool	ProcessHyphenWords(CGraphmatFile* piGraphmatFile) const;
 
 

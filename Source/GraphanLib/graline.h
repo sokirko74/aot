@@ -48,7 +48,7 @@ struct  CGraphemOborot {
 
 
 
-const DWORD UnknownPageNumber  = 0xffffffff;
+const uint32_t UnknownPageNumber  = 0xffffffff;
 
 class CGraLine  
 {
@@ -65,7 +65,7 @@ class CGraLine
     BYTE		ulen;             
 	QWORD		m_Descriptors;
     WORD		m_Status;
-	DWORD		m_InputOffset;
+	uint32_t		m_InputOffset;
 
 	size_t		LengthUntilDelimiters (const char *s, const CGraphmatFile* G);
 
@@ -75,7 +75,7 @@ public:
 	BYTE GetTokenLength() const { return ulen; };
 	const char* GetToken() const {return unit; };
 	BYTE GetScreenLength() const {return slen;};
-	DWORD GetInputOffset() const {return m_InputOffset;};
+	uint32_t GetInputOffset() const {return m_InputOffset;};
 	QWORD GetDescriptors() const {return m_Descriptors; };
 
 	bool IsNotPrint  () const;
@@ -125,7 +125,7 @@ public:
 	void AddStatus(WORD add_state);
 	void AddLength(const CGraLine& L);
 	void SetToken(const char*);
-	size_t		ReadWord (size_t Offset, const CGraphmatFile* G, DWORD& PageNumber);
+	size_t		ReadWord (size_t Offset, const CGraphmatFile* G, uint32_t& PageNumber);
 	bool IsSingleSpaceToDelete() const;
 };
 

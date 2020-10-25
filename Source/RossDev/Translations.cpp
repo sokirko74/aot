@@ -93,7 +93,7 @@ BOOL CTranslations::OnSetActive()
 
 			for (size_t k = 0;  k < Pairs.get_Count(); k++)
 			{
-				DWORD Id =  Pairs.GetId(k);
+				uint32_t Id =  Pairs.GetId(k);
 				CFormInfo Prd;
 				bool bRes = GetSemBuilder().m_RusStr.m_pData->GetEngLemmatizer()->CreateParadigmFromID(Id, Prd);
 				if (!bRes) 

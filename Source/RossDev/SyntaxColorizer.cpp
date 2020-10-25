@@ -42,7 +42,7 @@ CSyntaxColorizer::CSyntaxColorizer()
 
 
 
-void CSyntaxColorizer::InitializeParser(IsKeyWordFunction Func, DWORD UserData)
+void CSyntaxColorizer::InitializeParser(IsKeyWordFunction Func, uint32_t UserData)
 {
 	IsKeyWord = Func;
 	m_UserData = UserData;

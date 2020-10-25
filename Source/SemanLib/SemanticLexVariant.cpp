@@ -133,7 +133,7 @@ WORD CRusSemStructure::GetInterpWithoutPrefix (CRusSemWord& W) const
 		 WORD UnitNo  = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 		 if (UnitNo == ErrUnitNo)  continue;
 
-		 DWORD ParadigmId = m_pData->GetFirstParadigmId(morphRussian, UnitStr,  W.m_Poses);
+		 uint32_t ParadigmId = m_pData->GetFirstParadigmId(morphRussian, UnitStr,  W.m_Poses);
 		 if (ParadigmId == UnknownParadigmId) continue;
  		 W.m_Lemma =  UnitStr;
 		 W.m_GraphDescrs += " " + Prefixes[i].m_GraDescr;

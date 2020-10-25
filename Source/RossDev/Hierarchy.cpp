@@ -160,7 +160,7 @@ void CHierarchyView::OnInitialUpdate()
 void SwitchGraph(const char* tkname);
 
 
-BOOL CHierarchyView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
+BOOL CHierarchyView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
 {
 	// TODO: Add your specialized code here and/or call the base class
    char s[2000];

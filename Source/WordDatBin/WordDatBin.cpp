@@ -19,13 +19,13 @@
 
 CMorphologyHolder MorphHolderRus;
 
-static std::vector<std::pair<DWORD, DWORD> > ww;
+static std::vector<std::pair<uint32_t, uint32_t> > ww;
 
 struct CStatInfo {
     std::string m_Lemma;
     BYTE m_Pos;
     QWORD m_Grammems;
-    DWORD m_Freq;
+    uint32_t m_Freq;
 
     bool operator<(const CStatInfo &s) const {
         if (m_Lemma != s.m_Lemma)

@@ -405,7 +405,7 @@ void  CPlmLine::SetMorphUnknown()
 	m_ParadigmId = "-1";
 };
 
-void  CPlmLine::SetMorph(char MorphSign, const std::string& CommonAncode, const DWORD& ParadigmId)
+void  CPlmLine::SetMorph(char MorphSign, const std::string& CommonAncode, const uint32_t& ParadigmId)
 {
 	m_CommonGramCode = CommonAncode.empty() ? "??" : CommonAncode;
 	m_MorphSign = MorphSign;

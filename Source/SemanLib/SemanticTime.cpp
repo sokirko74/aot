@@ -189,7 +189,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot& Hypot, CTimeUnit& TimeUnit, 
 		}
 		else
 		{
-			DWORD Pose;
+			uint32_t Pose;
 			QWORD  Grammems;
 			m_pData->GetCustomGrammems(GramFet, Grammems, Pose);;
 

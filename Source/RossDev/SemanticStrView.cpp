@@ -110,7 +110,7 @@ void SwitchGraph(const char* tkname)
 };
 
 extern int TclWindowCounter;
-BOOL CSemanticStrView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
+BOOL CSemanticStrView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
 {
 	// TODO: Add your specialized code here and/or call the base class
    m_Menu.LoadMenu(IDR_ROSSDETYPE);

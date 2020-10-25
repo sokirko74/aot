@@ -8,8 +8,8 @@
 #include "../common/utilit.h"
 
 
-typedef	DWORD id_type;
-const DWORD data_length = 5;
+typedef	uint32_t id_type;
+const uint32_t data_length = 5;
 
 struct WordPair{
 
@@ -39,7 +39,7 @@ public:
 	long GetDirectId(long index) const;
 	long GetIndirectId(long index) const;
 
-	bool GetFlag(long pair_index, long flag_index, std::string& text, bool is_direct, DWORD& flag) const;
+	bool GetFlag(long pair_index, long flag_index, std::string& text, bool is_direct, uint32_t& flag) const;
 	
 
 	CBinaryDictionary();

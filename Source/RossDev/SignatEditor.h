@@ -47,7 +47,7 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	DWORD m_OrderNo;
+	uint32_t m_OrderNo;
 	CString m_Name;
 };
 

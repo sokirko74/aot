@@ -96,7 +96,7 @@ LRESULT CPosChoicer::OnWizardNext()
 						std::vector<LONG> Perfs;
 						for (size_t i = 0; i < m_ParadigmCollection.size(); i++)
 						{
-							std::vector<DWORD> ResVector;
+							std::vector<uint32_t> ResVector;
 							GetSemBuilder().m_RusStr.m_pData->m_AspDict.nonperf2perf(m_ParadigmCollection[i].GetParadigmId(), ResVector);
 							for(size_t k = 0; k < ResVector.size(); k++)
 								Perfs.push_back(ResVector[k]);

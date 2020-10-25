@@ -40,7 +40,7 @@ class CMDITabs : public CTabCtrl
 public:
   CMDITabs();
 
-  void Create(CFrameWnd* pMainFrame, DWORD dwStyle = MT_BOTTOM|MT_IMAGES);
+  void Create(CFrameWnd* pMainFrame, uint32_t dwStyle = MT_BOTTOM|MT_IMAGES);
   void Update(); // sync the tabctrl with all views
 
   void SetMinViews(int minViews) {m_minViews = minViews;}

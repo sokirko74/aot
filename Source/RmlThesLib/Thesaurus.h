@@ -158,11 +158,11 @@ public:
 	bool	ReadThesaurusFromDisk();
 	bool	ReadRelationsFromDisk();
 	bool	SetDatabase(std::string DatabaseName);
-	bool	IsA(DWORD TextEntryId, std::string ConceptStr) const;
-	void	QueryEnglishTranslations(DWORD TextEntryId, std::vector<int>& CurrentEnglishTermins) const;
+	bool	IsA(uint32_t TextEntryId, std::string ConceptStr) const;
+	void	QueryEnglishTranslations(uint32_t TextEntryId, std::vector<int>& CurrentEnglishTermins) const;
 	int		GetTerminIdBySingleWord(std::string WordStr) const;
 	thesaurus_concept_set_t		QueryTopConcepts(UINT TextEntryId) const;
-	DWORD	QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const;
+	uint32_t	QueryTerminItem(const std::string& ItemStr, std::vector<int>& CurrentTerminItems) const;
 	thesaurus_termin_set_t QueryLowerTermins(const std::string& conceptStr, MorphLanguageEnum lang) const;
 	int		FindAbbr(const std::string& str) const;
 	void	SetDicts(MorphLanguageEnum MainLanguage, const CDictionary* OborDic, const CAgramtab* MainGramtab, const CAgramtab* EngGramtab);

@@ -164,10 +164,10 @@ void CMDITabs::OnPaint()
   if (GetItemCount() == 0) return; // do nothing
 
   // cache some system colors
-  DWORD shadow  = ::GetSysColor(COLOR_3DSHADOW);
-  DWORD dark    = ::GetSysColor(COLOR_3DDKSHADOW);
-  DWORD hilight = ::GetSysColor(COLOR_3DHILIGHT);
-  DWORD light   = ::GetSysColor(COLOR_3DLIGHT);
+  uint32_t shadow  = ::GetSysColor(COLOR_3DSHADOW);
+  uint32_t dark    = ::GetSysColor(COLOR_3DDKSHADOW);
+  uint32_t hilight = ::GetSysColor(COLOR_3DHILIGHT);
+  uint32_t light   = ::GetSysColor(COLOR_3DLIGHT);
 
   // Special preparations for spin-buttons (in case there are more tabs than fit into the window)
   // extend borders and prevent system from overdrawing our new pixels
@@ -269,7 +269,7 @@ void CMDITabs::OnNcPaint()
   ::ReleaseDC(m_hWnd, hdc);
 }
 
-void CMDITabs::Create(CFrameWnd* pMainFrame, DWORD dwStyle)
+void CMDITabs::Create(CFrameWnd* pMainFrame, uint32_t dwStyle)
 {
   m_bTop = (dwStyle & MT_TOP);
   m_minViews = (dwStyle & MT_HIDEWLT2VIEWS) ? 2 : 1;

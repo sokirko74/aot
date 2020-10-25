@@ -268,7 +268,7 @@ void CSLFView::OnInitialUpdate()
 	GetRichEditCtrl().SetDlgCtrlID(IDC_RICHEDIT21);
 	m_pRichView->m_Colorizer.InitializeParser(IsKeyWord, (void*)this);
 	
-	DWORD op = ECO_AUTOVSCROLL|ECO_AUTOHSCROLL|ECO_NOHIDESEL|ECO_WANTRETURN;
+	uint32_t op = ECO_AUTOVSCROLL|ECO_AUTOHSCROLL|ECO_NOHIDESEL|ECO_WANTRETURN;
 	
 
 	GetRichEditCtrl().SetOptions(ECOOP_SET, op);

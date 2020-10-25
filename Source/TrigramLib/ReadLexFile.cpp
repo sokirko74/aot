@@ -113,9 +113,9 @@ bool CTrigramModel::write_dictionary_binary(const std::map<std::string, std::vec
 
     std::string SizesFile = m_DictionaryFile + ".sizes";
     {
-        std::vector<DWORD> v;
+        std::vector<uint32_t> v;
         for (std::map<std::string,  std::vector<CLexProb> >::const_iterator it = Dictionary.begin(); it != Dictionary.end(); it++)
-            v.push_back( (DWORD)it->second.size() );
+            v.push_back( (uint32_t)it->second.size() );
         if (!WriteVector(SizesFile, v))
             return false;
     }
@@ -134,7 +134,7 @@ bool CTrigramModel::write_dictionary_binary(const std::map<std::string, std::vec
 
 bool CTrigramModel::read_dictionary_binary()
 {
-    std::vector<DWORD> sizes;
+    std::vector<uint32_t> sizes;
     ReadVector(m_DictionaryFile + ".sizes", sizes);
     ReadVector(m_DictionaryFile + ".interps", m_LexProbs);
 
@@ -149,7 +149,7 @@ bool CTrigramModel::read_dictionary_binary()
         while (fgets(buffer,  2*1024, fp))
         {
             rtrim (buffer);
-            DWORD size = sizes[no];
+            uint32_t size = sizes[no];
             CTrigramWord btw;
             btw.m_Length = size;
             btw.m_StartOffset = offset;

@@ -152,7 +152,7 @@ BOOL CGridCtrl::RegisterWindowClass()
     return TRUE;
 }
 
-BOOL CGridCtrl::Create(const RECT& rect, CWnd* pParentWnd, UINT nID, DWORD dwStyle)
+BOOL CGridCtrl::Create(const RECT& rect, CWnd* pParentWnd, UINT nID, uint32_t dwStyle)
 {
     ASSERT(pParentWnd->GetSafeHwnd());
 
@@ -2731,7 +2731,7 @@ void CGridCtrl::OnEditCell(int nRow, int nCol, UINT nChar)
     Item.col = nCol;
     if (!GetItem(&Item)) return;
 
-    DWORD dwStyle = ES_LEFT;
+    uint32_t dwStyle = ES_LEFT;
     if (Item.nFormat & DT_RIGHT) dwStyle = ES_RIGHT;
     else if (Item.nFormat & DT_CENTER) dwStyle = ES_CENTER;
 

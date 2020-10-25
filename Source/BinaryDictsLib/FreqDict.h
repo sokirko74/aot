@@ -9,6 +9,6 @@ class CFreqDict
 public:
 	CFreqDict();
 	bool Load(std::string  path);
-	WORD GetFreq(DWORD EngParadigmId, DWORD RusParadigmId) const;
+	WORD GetFreq(uint32_t EngParadigmId, uint32_t RusParadigmId) const;
 	
 };

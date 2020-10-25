@@ -502,35 +502,35 @@ long CRossHolder::GetSemMainWordFromArticle (long UnitNo) const
 
 
 // проверяет, что ItemNo принадлежит домену Д_ГГ_уточн
-bool CRossHolder::IsVerbFet (DWORD ItemNo) const
+bool CRossHolder::IsVerbFet (uint32_t ItemNo) const
 {
 	if ( VerbFetDomNo == ErrUChar) return false;
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == VerbFetDomNo ? true : false;
 };
 // проверяет, что ItemNo принадлежит домену D_SYN_REL
-bool CRossHolder::IsSynRel (DWORD ItemNo) const
+bool CRossHolder::IsSynRel (uint32_t ItemNo) const
 {
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == SynRelDomNo ? true : false;
 };
 
 // проверяет, что ItemNo принадлежит домену D_1
-bool CRossHolder::IsLemGroupBegining (DWORD ItemNo) const
+bool CRossHolder::IsLemGroupBegining (uint32_t ItemNo) const
 {
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == LemGroupBeginingDomNo ? true : false;
 };
 
 // проверяет, что ItemNo принадлежит домену D_GROUPS
-bool CRossHolder::IsSynGroup (DWORD ItemNo) const
+bool CRossHolder::IsSynGroup (uint32_t ItemNo) const
 {
 	if (ItemNo ==  0xffffffff) return false;
 	return GetRoss()->GetDomItemDomNo(ItemNo) == SynGroupDomNo ? true : false;
 };
 
 // проверяет, что ItemNo принадлежит домену D_POSITION
-bool CRossHolder::IsPosition (DWORD ItemNo) const
+bool CRossHolder::IsPosition (uint32_t ItemNo) const
 {
 	if ( PositionDomNo == ErrUChar) return false;
 	if (ItemNo ==  0xffffffff) return false;

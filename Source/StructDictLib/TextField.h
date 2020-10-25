@@ -13,8 +13,8 @@ struct CTextField
 	BYTE  FieldNo;
 	BYTE  LeafId;
 	BYTE  BracketLeafId;
-	DWORD StartLine;
-	DWORD EndLine;
+	uint32_t StartLine;
+	uint32_t EndLine;
 
 	CTextField() {};
 	CTextField (BYTE _FieldNo, BYTE _LeafId, BYTE _BracketLeafId)

@@ -89,7 +89,7 @@ void CColorRichEditView::SetAccentByIndex(int ind)
 		while (wordStart > 0 && !isspace((BYTE) Paradigm[wordStart]))
 			wordStart--;
 	};
-	DWORD wordEnd = ind;
+	uint32_t wordEnd = ind;
 
 	while (wordEnd < Paradigm.GetLength() && !isspace((BYTE)Paradigm.GetAt(wordEnd) ))
 		wordEnd++;
@@ -132,7 +132,7 @@ void CColorRichEditView::SetAccentFromThisLineToTheEndofParadigm()
 	CString Paradigm = GetText();
 	int line_no = re.LineFromChar(lineInd);
 	lineInd += line_no; // delete '\r'
-	DWORD wordEnd = lineInd;
+	uint32_t wordEnd = lineInd;
 	while (wordEnd < Paradigm.GetLength() && !isspace((BYTE)Paradigm.GetAt(wordEnd) ))
 		wordEnd++;
 	int acc= Paradigm.Find("'",lineInd);
@@ -213,7 +213,7 @@ struct CStringAndPosition
 	int m_Position;
 };
 
-static DWORD CALLBACK MyStreamOutCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
+static uint32_t CALLBACK MyStreamOutCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
 {
    CString* pString = (CString*) dwCookie;
    for (size_t  i=0; i < cb; i+=2)
@@ -222,7 +222,7 @@ static DWORD CALLBACK MyStreamOutCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb
    return 0;
 }
 
-static DWORD CALLBACK MyStreamInCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
+static uint32_t CALLBACK MyStreamInCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
 {
    CStringAndPosition* pString = (CStringAndPosition*) dwCookie;
    size_t  Char_no = 0;
@@ -243,7 +243,7 @@ static DWORD CALLBACK MyStreamInCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb,
 }
 */
 
-static DWORD CALLBACK MyStreamOutCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
+static uint32_t CALLBACK MyStreamOutCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
 {
 	CStringAndPosition* pString = (CStringAndPosition*) dwCookie;
 	for (size_t  i=0; i < cb; i++)
@@ -254,7 +254,7 @@ static DWORD CALLBACK MyStreamOutCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb
 	return 0;
 }
 
-static DWORD CALLBACK MyStreamInCallback(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
+static uint32_t CALLBACK MyStreamInCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
 {
    CStringAndPosition* pString = (CStringAndPosition*) dwCookie;
    size_t  Char_no = 0;
@@ -285,7 +285,7 @@ CString CColorRichEditView::GetText() const
 	CStringAndPosition SP;
 	SP.m_pBuffer = new char[TextLen*2];
 	EDITSTREAM es;
-	es.dwCookie = (DWORD) &SP;
+	es.dwCookie = (uint32_t) &SP;
 	es.pfnCallback = (EDITSTREAMCALLBACK) MyStreamOutCallback;
 	GetRichEditCtrl().StreamOut(SF_TEXT|SF_UNICODE, es);
 	char* buf = new char[TextLen+1];
@@ -321,7 +321,7 @@ void  CColorRichEditView::SetText(const CString& S)
 
 	SP.m_Position = 0;
 	EDITSTREAM es;
-	es.dwCookie = (DWORD) &SP;
+	es.dwCookie = (uint32_t) &SP;
 	es.pfnCallback = (EDITSTREAMCALLBACK)MyStreamInCallback;
 	SP.m_BufferLength *= 2;
 	GetRichEditCtrl().StreamIn(SF_TEXT|SF_UNICODE, es);

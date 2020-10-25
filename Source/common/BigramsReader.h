@@ -2,8 +2,8 @@
 #include "../common/bserialize.h"
 
 struct CBigramInfo {
-    DWORD WordIndex;
-    DWORD BigramsFreq;
+    uint32_t WordIndex;
+    uint32_t BigramsFreq;
 };
 
 inline size_t get_size_in_bytes (const CBigramInfo& t)

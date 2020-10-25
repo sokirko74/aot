@@ -7,18 +7,18 @@
 #include  "utilit.h"
 #include  <fstream>
 
-// ============== DWORD =====================
-inline size_t get_size_in_bytes(const DWORD &t) {
-    return sizeof(DWORD);
+// ============== uint32_t =====================
+inline size_t get_size_in_bytes(const uint32_t &t) {
+    return sizeof(uint32_t);
 };
 
-inline size_t save_to_bytes(const DWORD &i, BYTE *buf) {
-    *((DWORD *) buf) = i;
+inline size_t save_to_bytes(const uint32_t &i, BYTE *buf) {
+    *((uint32_t *) buf) = i;
     return get_size_in_bytes(i);
 }
 
-inline size_t restore_from_bytes(DWORD &i, const BYTE *buf) {
-    i = *((DWORD *) buf);
+inline size_t restore_from_bytes(uint32_t &i, const BYTE *buf) {
+    i = *((uint32_t *) buf);
     return get_size_in_bytes(i);
 };
 

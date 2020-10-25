@@ -415,11 +415,11 @@ bool CTrigramModel::TagRawText(std::string FileName)
 	std::vector<CWordIntepretation> tags;
 	
 
-	for (DWORD LineNo=1; LineNo < TokensCount; LineNo++)
+	for (uint32_t LineNo=1; LineNo < TokensCount; LineNo++)
 	{
 		tokens.clear();
 		tags.clear();
-		DWORD LineNoEnd=LineNo;
+		uint32_t LineNoEnd=LineNo;
 		for (; LineNoEnd < TokensCount; LineNoEnd++)
 		{
 			if (IsToken(m_Graphan.GetUnit(LineNoEnd)) )
@@ -565,7 +565,7 @@ std::vector<std::string> CTrigramModel::get_tokens_from_graphan(std::string Inpu
 	
 	
 	
-	for (DWORD LineNo=1; LineNo < TokensCount; LineNo++)
+	for (uint32_t LineNo=1; LineNo < TokensCount; LineNo++)
 	{
 		if (IsToken(m_Graphan.GetUnit(LineNo)) )
 		{
@@ -584,11 +584,11 @@ bool CTrigramModel::tagging_string_with_end_of_sents(std::string InputStr, std::
 	std::vector<std::string> tokens;
 	std::vector<CWordIntepretation> tags;
 	
-	for (DWORD LineNo=1; LineNo < TokensCount; LineNo++)
+	for (uint32_t LineNo=1; LineNo < TokensCount; LineNo++)
 	{
 		tokens.clear();
 		tags.clear();
-		DWORD LineNoEnd=LineNo;
+		uint32_t LineNoEnd=LineNo;
 		for (; LineNoEnd < TokensCount; LineNoEnd++)
 		{
 			if (IsToken(m_Graphan.GetUnit(LineNoEnd)) )

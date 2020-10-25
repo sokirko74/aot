@@ -63,7 +63,7 @@ void CSizeFormView::Dump(CDumpContext& dc) const
 // CSizeFormView message handlers
 
 BOOL CSizeFormView::Create(LPCTSTR /*lpszClassName*/, LPCTSTR /*lpszWindowName*/,
-    DWORD dwRequestedStyle, const RECT& rect, CWnd* pParentWnd, UINT nID,
+    uint32_t dwRequestedStyle, const RECT& rect, CWnd* pParentWnd, UINT nID,
     CCreateContext* pContext)
 {
     ASSERT(pParentWnd != NULL);

@@ -83,7 +83,7 @@ void CReportView::Dump(CDumpContext& dc) const
 	CMenu				 m_Menu;	
 	CWnd* m_pParentWnd;
 	CReportView() :CRichEditView() {};
-	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL)
+	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL)
 	{
 	   BOOL Result = 	CRichEditView::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext);
 	   m_Menu.LoadMenu(IDR_ROSSDETYPE);

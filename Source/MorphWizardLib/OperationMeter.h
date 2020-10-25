@@ -28,10 +28,10 @@ class COperationMeterRML
 public:
 	virtual ~COperationMeterRML()						{}
 
-	DWORD GetMaxPos() const 						{ return m_maxPos; } 
-	DWORD GetPos() const 							{ return m_curPos; } 
+	uint32_t GetMaxPos() const 						{ return m_maxPos; } 
+	uint32_t GetPos() const 							{ return m_curPos; } 
 	
-	bool SetMaxPos( DWORD pos, DWORD count = 50 )
+	bool SetMaxPos( uint32_t pos, uint32_t count = 50 )
 	{
 		if( pos!=m_maxPos && pos>=0 || m_curPos!=0 ) 
 		{
@@ -49,7 +49,7 @@ public:
 		return false;
 	}
 
-	bool SetPos( DWORD pos )
+	bool SetPos( uint32_t pos )
 	{
 		if( pos!=m_curPos && pos<=m_maxPos )
 		{
@@ -64,25 +64,25 @@ public:
 		return false;
 	}
 
-	DWORD GetStep() const 							
+	uint32_t GetStep() const 							
 	{ 
 		assert(m_step!=0 && m_step<=m_maxPos); 
 		return m_step; 
 	} 
 
-	void SetStep( DWORD step = 0)
+	void SetStep( uint32_t step = 0)
 	{
-		auto a = my_max(m_maxPos / 50, (DWORD)1);
+		auto a = my_max(m_maxPos / 50, (uint32_t)1);
 		m_step = (step==0 || step>=m_maxPos) ? a : step;
 	}
 
-	void SetStepCount( DWORD count )
+	void SetStepCount( uint32_t count )
 	{
 		assert(count>0);
-		m_step = my_max(m_maxPos/count,(DWORD)1);
+		m_step = my_max(m_maxPos/count,(uint32_t)1);
 	}
 
-	bool AddPos( DWORD pos  = 1)
+	bool AddPos( uint32_t pos  = 1)
 	{
 		assert(pos>0);
 		return SetPos(pos+m_curPos);
@@ -90,18 +90,18 @@ public:
 	
 	virtual void SetInfo( LPCSTR info )		{}
 	
-	//__declspec(property(get=GetMaxPos,	put=SetMaxPos))		DWORD 	MaxPos;
-	//__declspec(property(get=GetPos,		put=SetPos))		DWORD 	Pos;
+	//__declspec(property(get=GetMaxPos,	put=SetMaxPos))		uint32_t 	MaxPos;
+	//__declspec(property(get=GetPos,		put=SetPos))		uint32_t 	Pos;
 protected:
 	COperationMeterRML()		: m_maxPos(0), m_curPos(0), m_step(0), m_pos(0) {}
 	
 	virtual	void UpdateMaxPos()=0;
 	virtual	void UpdatePos()=0;
 private:
-	DWORD 	m_maxPos;
-	DWORD 	m_curPos;
-	DWORD 	m_pos;
-	DWORD	m_step;
+	uint32_t 	m_maxPos;
+	uint32_t 	m_curPos;
+	uint32_t 	m_pos;
+	uint32_t	m_step;
 
 };
 

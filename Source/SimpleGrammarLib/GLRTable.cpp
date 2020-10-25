@@ -251,7 +251,7 @@ const CSLRCellWork& CGLRTable::GetCell(size_t  StateNo, size_t SymbolNo)  const
 	return m_WorkTable[StateNo*m_WorkLineSize+SymbolNo];
 };
 
-DWORD CGLRTable::GetReduceRuleEnd(size_t  StateNo, size_t SymbolNo)  const
+uint32_t CGLRTable::GetReduceRuleEnd(size_t  StateNo, size_t SymbolNo)  const
 {
 	if (StateNo*m_WorkLineSize + SymbolNo + 1 == m_WorkTable.size())
 		return m_ReduceRuleSets.size();

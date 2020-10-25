@@ -42,7 +42,7 @@ bool CLemmatizer::CheckABC(const std::string& WordForm) const
 	return m_pFormAutomat->CheckABCWithoutAnnotator(WordForm);
 };
 
-bool CLemmatizer::CreateParadigmFromID(DWORD id, CFormInfo& Result) const 
+bool CLemmatizer::CreateParadigmFromID(uint32_t id, CFormInfo& Result) const 
 {
 	Result.AttachLemmatizer(this);
 	return Result.SetParadigmId(id);
@@ -168,7 +168,7 @@ void CLemmatizer::GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* O
 	std::vector<CAutomAnnotationInner>	FindResults;
 	LemmatizeWord(InputWordStr, capital, bUsePrediction, FindResults, true);
 	size_t Count = FindResults.size();
-	for (DWORD i=0; i < Count; i++)
+	for (uint32_t i=0; i < Count; i++)
 	{
 		const CAutomAnnotationInner& A = FindResults[i];
 		const CFlexiaModel& M = m_FlexiaModels[A.m_ModelNo];
@@ -202,7 +202,7 @@ bool CLemmatizer::GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool ca
 
 	size_t Count = FindResults.size();
 	size_t  OutLen = 0;
-	for (DWORD i=0; i < Count; i++)
+	for (uint32_t i=0; i < Count; i++)
 	{
 		const CAutomAnnotationInner& A = FindResults[i];
 		const CFlexiaModel& M = m_FlexiaModels[A.m_ModelNo];

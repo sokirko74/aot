@@ -33,7 +33,7 @@ struct CTrieNode
 	int						m_Parent;
 	TerminalSymbolType		m_IncomingSymbol;
 	int						m_GrammarRuleNo;
-	DWORD					m_ChildrenIndex;
+	uint32_t					m_ChildrenIndex;
 	BYTE					m_Depth;
 	CTrieNode();
 };

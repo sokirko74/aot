@@ -707,27 +707,6 @@ void AddFile(const char* MainFile, const char* ToAdd)
 
 };
 
-#ifdef WIN32
-    #include <windows.h>
-	std::string TryReadRMLFromRegistry()
-	{
-		HKEY hKeyResult; 
-		LONG res; 
-		res = RegOpenKeyEx( HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",  0, KEY_ALL_ACCESS, &hKeyResult ); 
-		if(res != ERROR_SUCCESS)
-			throw CExpc("Error! Environment variable \"RML\"is not std::set!");
-		else
-		{ 
-			char buf[512]; 
-			DWORD dwBytes = sizeof(buf); 
-			res = RegQueryValueEx( hKeyResult, "RML", 0, NULL, reinterpret_cast <PBYTE> (buf), &dwBytes); 
-			if(res != ERROR_SUCCESS) 
-				throw CExpc("Error! Environment variable \"RML\"is not std::set!");
-			return buf;
-		}
-	} 
-#endif
-
 std::string GetRmlVariable()
 {
 	const char* rml = getenv("RML");
@@ -736,12 +715,7 @@ std::string GetRmlVariable()
 		s = rml;
 	else
 	{
-		#ifndef WIN32
-			throw CExpc("Error! Environment variable \"RML\"is not std::set!");
-		#else
-			s = TryReadRMLFromRegistry();
-		#endif
-		
+		throw CExpc("Error! Environment variable \"RML\"is not std::set!");
 	}
 	 
 	Trim(s);
@@ -1822,7 +1796,7 @@ void CShortStringHolder::ReadShortStringHolder(std::string filename)
 
 	FILE* fp = fopen(filename.c_str(), "rb");
 	if (!fp) return;
-	DWORD Count;
+	uint32_t Count;
 	fread ((void *)&Count, 1, sizeof(Count), fp);
 	try {
 		m_Buffer.clear();
@@ -1838,7 +1812,7 @@ void CShortStringHolder::ReadShortStringHolder(std::string filename)
 
 	reserve(Count);
 	int Offset = 0;
-	for (DWORD i=0; i < Count; i++)
+	for (uint32_t i=0; i < Count; i++)
 	{
 		CShortString R(m_Buffer.begin()+Offset);
 		push_back(R);
@@ -1854,7 +1828,7 @@ bool CShortStringHolder::CreateFromSequence(T begin, T end)
 {
 	
 	m_Buffer.clear();
-	DWORD Count = 0;
+	uint32_t Count = 0;
 	for (; begin != end; begin++)
 	{
 		size_t length = begin->length();
@@ -1875,7 +1849,7 @@ bool CShortStringHolder::CreateFromSequence(T begin, T end)
 	
 	size_t Offset = 0;
 	clear();
-	for (DWORD i=0; i < Count; i++)
+	for (uint32_t i=0; i < Count; i++)
 	{
 		CShortString R(m_Buffer.begin()+Offset);
 		push_back(R);
@@ -1902,8 +1876,8 @@ bool CShortStringHolder::WriteShortStringHolder(const std::string& FileName) con
 	if (!fp)	return false;
 	try
 	{
-        assert (size() < std::numeric_limits<DWORD>::max());
-        DWORD nLength = size();
+        assert (size() < std::numeric_limits<uint32_t>::max());
+        uint32_t nLength = size();
 		if (fwrite((void*)&nLength, sizeof(nLength), 1,  fp) != 1)
 		{
 				fclose(fp);
@@ -2151,7 +2125,7 @@ bool  ReadTimeOutFromRegistry (bool bReadFromLocalFile, int& TimeOut)
 
 
 
-static const DWORD arrdwCrc32Table[256] =
+static const uint32_t arrdwCrc32Table[256] =
 {
 	0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA,
 	0x076DC419, 0x706AF48F, 0xE963A535, 0x9E6495A3,
@@ -2223,9 +2197,9 @@ static const DWORD arrdwCrc32Table[256] =
 };
 
 
-DWORD StringCrc32(const char* szString)
+uint32_t StringCrc32(const char* szString)
 {
-	DWORD dwCrc32 = 0xFFFFFFFF;
+	uint32_t dwCrc32 = 0xFFFFFFFF;
 
 	while(*szString != '\0')
 	{
@@ -2381,18 +2355,18 @@ bool RemoveWithPrint (const std::string& FileName)
 
 size_t HashValue(const char *pc) 
 {
-    static const DWORD mask[sizeof(DWORD)] = {
+    static const uint32_t mask[sizeof(uint32_t)] = {
         0x00000000, 0x000000FF, 0x0000FFFF, 0x00FFFFFF
     };
     size_t len =     strlen(pc);
     size_t h = len;
-    size_t i = len / sizeof(DWORD);
-    const DWORD *c = (const DWORD *)pc;
+    size_t i = len / sizeof(uint32_t);
+    const uint32_t *c = (const uint32_t *)pc;
 
     while (i--)
         h ^= *c++;
 
-    i = len % sizeof(DWORD);
+    i = len % sizeof(uint32_t);
     if (i > 0)
         h ^= (*c & mask[i]); 
 

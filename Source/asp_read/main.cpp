@@ -66,7 +66,7 @@ int main(int argc, char ** argv)
 
 	try
 	{
-		std::vector<std::pair<DWORD, DWORD>> pairs;
+		std::vector<std::pair<uint32_t, uint32_t>> pairs;
 
 		{	// reading
 

@@ -63,7 +63,7 @@ class CDerivDictonary
 	bool LoadFromFile(FILE* fp);
 
 public:
-	const std::string& GetAffixStr(DWORD index) const;
+	const std::string& GetAffixStr(uint32_t index) const;
 
 	bool Load(int TypeDict);
 	//! find target by source. Return number of found targets.

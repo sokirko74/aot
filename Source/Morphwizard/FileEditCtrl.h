@@ -55,7 +55,7 @@ public:
     CFECFileDialog(BOOL bOpenFileDialog, // TRUE for FileOpen, FALSE for FileSaveAs
         LPCTSTR lpszDefExt = NULL,
         LPCTSTR lpszFileName = NULL,
-        DWORD dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+        uint32_t dwFlags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
         LPCTSTR lpszFilter = NULL,
         CWnd* pParentWnd = NULL);
 
@@ -111,10 +111,10 @@ public:
     virtual ~CFileEditCtrl();                   // destructor
 
 // Overrides
-    virtual BOOL Create(DWORD dwFlags,          // FEC_* flags
-                        DWORD dwExStyle,        // WS_EX_* styles
+    virtual BOOL Create(uint32_t dwFlags,          // FEC_* flags
+                        uint32_t dwExStyle,        // WS_EX_* styles
                         LPCTSTR lpszWindowName, // initial text
-                        DWORD dwStyle,          // WS_* and ES_* styles
+                        uint32_t dwStyle,          // WS_* and ES_* styles
                         const RECT& rect,       // control's size and position
                         CWnd* pParentWnd,       // control's parent window
                         UINT nID);              // control's ID
@@ -126,17 +126,17 @@ public:
 // User functions
     BROWSEINFO* GetBrowseInfo() const;      // returns a pointer to the internal BROWSEINFO structure
     int GetButtonWidth();                   // returns the width, in pixels, of the browse button
-    DWORD GetFlags();                       // returns the control's functionality
+    uint32_t GetFlags();                       // returns the control's functionality
     CString GetNextPathName(POSITION &pos); // get the file at pos and then update pos
     OPENFILENAME* GetOpenFileName() const;  // returns a pointer to the internal OPENFILENAME structure
     POSITION GetStartPosition();            // get the starting position for GetNextPathName()
-    BOOL ModifyFlags(DWORD remove, DWORD add); // modifies the control's functionality
+    BOOL ModifyFlags(uint32_t remove, uint32_t add); // modifies the control's functionality
     int SetButtonWidth(int width = -1);     // sets the width of the browse button (-1 is use default width)
     void SetClientTipText(CString text);    // sets the text for the client area tooltip
-    BOOL SetFlags(DWORD dwFlags);           // sets the control's functionality
+    BOOL SetFlags(uint32_t dwFlags);           // sets the control's functionality
 
 #ifdef AFX_PJAIMAGE_H__F15965B0_B05A_11D4_B625_A1459D96AB20__INCLUDED_
-    BOOL SetButtonImage(HANDLE hImage, DWORD PJAIFlags, COLORREF Transparent = CLR_DEFAULT); // std::set the image for the browse button
+    BOOL SetButtonImage(HANDLE hImage, uint32_t PJAIFlags, COLORREF Transparent = CLR_DEFAULT); // std::set the image for the browse button
 #endif
 
 protected:
@@ -179,12 +179,12 @@ protected:
 
 // member variables
 private:
-	DWORD            ImageDrawFlags;        // button image flags
+	uint32_t            ImageDrawFlags;        // button image flags
     BOOL             m_bAutoDelete;         // delete this in PostNCDestroy() handler?
-    DWORD            m_bButtonLeft;         // browse button on left side of control?
+    uint32_t            m_bButtonLeft;         // browse button on left side of control?
     BOOL             m_bMouseCaptured;      // button has captured the mouse?
     BOOL             m_bTextChanged;        // window text has changed since last time FillBuffers() was called
-    DWORD            m_dwFlags;             // control flags - do not access this member directly, use GetFlags() instead
+    uint32_t            m_dwFlags;             // control flags - do not access this member directly, use GetFlags() instead
     CStringArray     m_Files;               // file names
     int              m_nButtonState;        // current button state (up, down, or disabled)
     int              m_nButtonWidth;        // the width of the button (-1 is default)
@@ -223,8 +223,8 @@ typedef struct tagFEC_NOTIFY {
 /////////////////////////////////////////////////////////////////////////////
 // DDV_/DDX_FileEditCtrl functions
 void DDV_FileEditCtrl (CDataExchange *pDX, int nIDC);   // verify that the file/folder entered exists
-void DDX_FileEditCtrl (CDataExchange *pDX, int nIDC, CFileEditCtrl &rCFEC, DWORD dwFlags); // setup the control
-void DDX_FileEditCtrl (CDataExchange *pDX, int nIDC, CString& rStr, DWORD dwFlags);        // setup the control
+void DDX_FileEditCtrl (CDataExchange *pDX, int nIDC, CFileEditCtrl &rCFEC, uint32_t dwFlags); // setup the control
+void DDX_FileEditCtrl (CDataExchange *pDX, int nIDC, CString& rStr, uint32_t dwFlags);        // setup the control
 
 /////////////////////////////////////////////////////////////////////////////
 // FECFolderProc callback function used by SHBrowseForFolder function

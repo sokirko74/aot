@@ -194,7 +194,7 @@ StringVector CTranslatorHolder::GetAspVerb(long ParadigmId, bool IsPerfective) {
     if (!m_AspDictEnabled) return Res;
 
 
-    std::vector<DWORD> ResVector;
+    std::vector<uint32_t> ResVector;
 
     if (!IsPerfective)
         m_AspDict.nonperf2perf(ParadigmId, ResVector);
@@ -249,7 +249,7 @@ void CTranslatorHolder::ErrorMessage(std::string Mess) {
 };
 
 
-DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum langua, std::string WordForm, poses_mask_t Poses,
+uint32_t CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum langua, std::string WordForm, poses_mask_t Poses,
                                                     std::string &ResultLemma) const {
     const CLemmatizer *L = GetLemmatizer(langua);
     const CAgramtab *G = GetGramTab(langua);
@@ -282,7 +282,7 @@ DWORD CTranslatorHolder::GetFirstParadigmIdAndLemma(const MorphLanguageEnum lang
 };
 
 
-DWORD CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, std::string Lemma, poses_mask_t Poses) const {
+uint32_t CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, std::string Lemma, poses_mask_t Poses) const {
     const CLemmatizer *L = GetLemmatizer(langua);
     const CAgramtab *G = GetGramTab(langua);
 

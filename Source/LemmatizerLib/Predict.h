@@ -15,7 +15,7 @@
 struct  CPredictTuple 
 {
 	WORD							m_ItemNo;
-	DWORD							m_LemmaInfoNo;
+	uint32_t							m_LemmaInfoNo;
 	BYTE							m_PartOfSpeechNo;
 };
 

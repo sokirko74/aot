@@ -742,7 +742,7 @@ void CRusSentence::CloneHomonymsForOborots() {
                 if (b != -1) {
                     b += m_Words[j].m_strUpperWord.length();
                     std::string GramFet = title.substr(b + 1, title.find(")") - b - 1);
-                    DWORD Pose;
+                    uint32_t Pose;
                     QWORD Grammems;
                     {
                         Trim(GramFet);

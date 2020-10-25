@@ -105,7 +105,7 @@ Tcl_Interp* theInterp = 0;
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CALLBACK TclTimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
+void CALLBACK TclTimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, uint32_t dwTime)
 {
 	int ok = TRUE;
 	while (ok) {
@@ -509,15 +509,15 @@ void CRossDevApp::OnFileOpen()
 
 
 
-DWORD CALLBACK EditStreamCallbackFromString(
-	DWORD dwCookie, // application-defined value
+uint32_t CALLBACK EditStreamCallbackFromString(
+	uint32_t dwCookie, // application-defined value
 	LPBYTE pbBuff,  // pointer to a buffer
 	LONG cb,        // number of bytes to read or write
 	LONG* pcb       // pointer to number of bytes transferred
 )
 {
 	CString* S = (CString*)dwCookie;
-	DWORD l = S->GetLength();
+	uint32_t l = S->GetLength();
 	*pcb = (cb < l) ? cb : l;
 	if (*pcb > 0)
 	{
@@ -546,7 +546,7 @@ bool GlobalOpenReport(CString S, CString Name)
 
 	S = Name + CString("\r\n\r\n") + S;
 	/*EDITSTREAM es;
-	es.dwCookie = (DWORD)&S;
+	es.dwCookie = (uint32_t)&S;
 	es.pfnCallback = EditStreamCallbackFromString;
 	C.StreamIn(SF_TEXT,   es);*/
 

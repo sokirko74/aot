@@ -7,7 +7,7 @@
 
 /*
 	CStaticVectorMap is a class for storing and retrieving a std::vector of T by a key.
-	The key is of DWORD and there should be no holes between two neighbour keys. i.e.  
+	The key is of uint32_t and there should be no holes between two neighbour keys. i.e.  
 	for each i key[i]+1 = key[i+1].  
 */
 template	<class T>
@@ -16,7 +16,7 @@ class CStaticVectorMap
 	// the keys, each item points to the beginning of the std::vector. For example,  
 	// "m_Keys[i] = j" means that the std::vector No i starts from j position.
 	// One "CStaticVectorMap" stores  m_Keys.size() vectors.
-	std::vector<	DWORD > m_Keys;
+	std::vector<	uint32_t > m_Keys;
 
 	// the base of the index 
 	std::vector< T >		m_Base;
@@ -25,25 +25,25 @@ public:
 	typedef typename std::vector<T>::const_iterator const_iter_t;
 	
 	
-	const_iter_t	GetVectorEnd (DWORD VectorNo) const
+	const_iter_t	GetVectorEnd (uint32_t VectorNo) const
 	{
 		return (	VectorNo+1 == m_Keys.size() )
 				?		m_Base.end()	
 					:	m_Base.begin() + m_Keys[VectorNo + 1];
 	}
-	const_iter_t	GetVectorBegin (DWORD VectorNo) const
+	const_iter_t	GetVectorBegin (uint32_t VectorNo) const
 	{
 		assert(VectorNo < m_Keys.size());
 		return  m_Base.begin() + m_Keys[VectorNo];
 	}
-	DWORD	GetVectorLength (DWORD VectorNo) const
+	uint32_t	GetVectorLength (uint32_t VectorNo) const
 	{
 		const_iter_t begin = GetVectorBegin(VectorNo);
 		const_iter_t end = GetVectorEnd(VectorNo);
 		return  end - begin;
 	}
 
-	DWORD	size() const 
+	uint32_t	size() const 
 	{
 		return m_Keys.size();
 	}
@@ -57,7 +57,7 @@ public:
 	{
 		m_Keys.resize( src.size() );
 		m_Base.clear();
-		for (DWORD i = 0; i < src.size(); i++)
+		for (uint32_t i = 0; i < src.size(); i++)
 		{
 			m_Keys[i] = m_Base.size();
 			m_Base.insert(m_Base.end(), src[i].begin(), src[i].end());
@@ -74,14 +74,14 @@ public:
 			if (!fp)
 				return false;
 
-			DWORD Length;
-			fread ((void *)&Length, 1, sizeof(DWORD), fp);
+			uint32_t Length;
+			fread ((void *)&Length, 1, sizeof(uint32_t), fp);
 			assert(Length > 0);
 			m_Keys.clear();
 			ReadVectorInner(fp, m_Keys, Length);
 			
 			
-			fread ((void *)&Length, 1, sizeof(DWORD), fp);
+			fread ((void *)&Length, 1, sizeof(uint32_t), fp);
 			m_Base.clear();
 			ReadVectorInner(fp, m_Base, Length);
 
@@ -102,12 +102,12 @@ public:
 			if (!fp)
 				return(false);
 
-			DWORD nCount = m_Keys.size();
-			fwrite((void *)&nCount, sizeof(DWORD), 1, fp);
+			uint32_t nCount = m_Keys.size();
+			fwrite((void *)&nCount, sizeof(uint32_t), 1, fp);
 			WriteVectorInner(fp, m_Keys);
 
 			nCount = m_Base.size();
-			fwrite ((void *)&nCount, sizeof(DWORD), 1, fp);
+			fwrite ((void *)&nCount, sizeof(uint32_t), 1, fp);
 			WriteVectorInner(fp, m_Base);
 
 			fclose(fp);
@@ -124,12 +124,12 @@ public:
 		return m_Base.size();
 	};
 
-	bool GetKeyByBaseNo(DWORD BaseNo, DWORD& KeyNo, DWORD& DataNo) const
+	bool GetKeyByBaseNo(uint32_t BaseNo, uint32_t& KeyNo, uint32_t& DataNo) const
 	{
 		KeyNo = 0;
 		if (BaseNo != 0) 
 		{
-			std::vector<DWORD>::const_iterator it = lower_bound(m_Keys.begin(), m_Keys.end(), BaseNo);
+			std::vector<uint32_t>::const_iterator it = lower_bound(m_Keys.begin(), m_Keys.end(), BaseNo);
 			if (it == m_Keys.begin()) return false;
 			if (it == m_Keys.end()) return false;
 			if (BaseNo < *it) it--;

@@ -14,8 +14,8 @@
 
 struct asp_pair
 {
-	DWORD NonPerf;
-	DWORD Perf;
+	uint32_t NonPerf;
+	uint32_t Perf;
 
 	asp_pair()		{};
 

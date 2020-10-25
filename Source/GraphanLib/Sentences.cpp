@@ -67,7 +67,7 @@ static bool CheckComma (CGraphmatFile& F, size_t Sent1No, size_t Sent2No)
 
 */
 
-static void SetSentMarkers (CGraphmatFile& F, const size_t PreviousSentEnd, const size_t NewSentStart , BYTE& SentenceOpenBracket, bool& bSentenceQuotationMarks, DWORD& StartSentenceOffset)
+static void SetSentMarkers (CGraphmatFile& F, const size_t PreviousSentEnd, const size_t NewSentStart , BYTE& SentenceOpenBracket, bool& bSentenceQuotationMarks, uint32_t& StartSentenceOffset)
 {	
 	if (PreviousSentEnd >= NewSentStart)
 	{
@@ -175,7 +175,7 @@ void CGraphmatFile::DealSentBreaker ()
 	/*
 		the byte offset of the start sentence. It used to limit the size of sentences.
 	*/
-	DWORD StartSentenceOffset = 0;
+	uint32_t StartSentenceOffset = 0;
 
 	/*
 	 count of sentences (= end of sentences)

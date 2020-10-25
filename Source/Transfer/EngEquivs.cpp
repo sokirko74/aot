@@ -675,7 +675,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 
 			std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
 			QWORD Grammems;
-			DWORD Pose;
+			uint32_t Pose;
 
 			m_pData->GetCustomGrammems(strGrammems,Grammems,Pose);
 
@@ -724,7 +724,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 						continue;
 
 					std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0], DictType);
-					DWORD Pose;
+					uint32_t Pose;
 					QWORD Grammems;
 					m_pData->GetCustomGrammems(strGrammems,Grammems,Pose);
 					if( Pose==0 && Grammems==-1 )

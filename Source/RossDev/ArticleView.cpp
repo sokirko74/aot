@@ -497,7 +497,7 @@ BOOL CArticleView::PreCreateWindow(CREATESTRUCT& cs)
 	return CSizeFormView::PreCreateWindow(cs);
 }
 
-bool IsKeyWordArticle (const CString& word, COLORREF& C, DWORD Data)
+bool IsKeyWordArticle (const CString& word, COLORREF& C, uint32_t Data)
 {
 	CArticleView* V = (CArticleView*)Data;
 	CRossDoc* RossDoc = V->GetRossDoc();
@@ -588,7 +588,7 @@ void CArticleView::OnInitialUpdate()
 	m_FldScroll.ShowWindow (SW_HIDE);
     m_RichEdit.SetFocus();
 
-	m_Colorizer.InitializeParser(IsKeyWordArticle, (DWORD)this);
+	m_Colorizer.InitializeParser(IsKeyWordArticle, (uint32_t)this);
 
 	long mask = m_RichEdit.GetEventMask();
 	m_RichEdit.SetEventMask(mask |= ENM_CHANGE );

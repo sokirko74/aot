@@ -48,7 +48,7 @@ typedef uint64_t QWORD;
 	
 #else
 	#include  <unistd.h>
-	typedef unsigned int	DWORD;	
+	typedef unsigned int	uint32_t;	
 	typedef unsigned short	WORD;
 	typedef unsigned int	UINT;
 	const   unsigned int _MAX_PATH = 512;
@@ -57,7 +57,7 @@ typedef uint64_t QWORD;
 typedef std::vector<std::string> StringVector;
 typedef std::unordered_set<std::string> StringHashSet;
 typedef std::set<std::string> StringSet;
-typedef std::vector<DWORD> DwordVector;
+typedef std::vector<uint32_t> DwordVector;
 
 inline QWORD GetMaxQWORD ()
 {
@@ -148,7 +148,7 @@ extern std::string&	Trim (std::string& str);
 extern void		rml_TRACE( const char* format, ... );
 extern bool		LoadFileToString(std::string FileName, std::string& Result);
 extern void		SqueezeSpacesAndDeleteEoln(std::string& s);
-extern DWORD	StringCrc32(const char* szString);
+extern uint32_t	StringCrc32(const char* szString);
 
 const BYTE	UnknownPartOfSpeech		= 0xff;
 const int	UnknownSyntaxElement = 0xffff;
@@ -278,7 +278,7 @@ T& GerEngRusMakeUpperTemplate (T& word, MorphLanguageEnum Langua, size_t Len )
 //  QWORD mask
 #define _QM(X) (((QWORD)1)<<(X))
 
-typedef  DWORD poses_mask_t;
+typedef  uint32_t poses_mask_t;
 
 enum RegisterEnum {AnyRegister=0, LowLow=1, UpLow=2, UpUp=3};
 

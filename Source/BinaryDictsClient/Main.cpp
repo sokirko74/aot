@@ -222,7 +222,7 @@ int main()
 					
 					//!!! получаем флаг
 					std::string fl_str;
-					DWORD flag = pairs.GetFlag(j, fl, fl_str);
+					uint32_t flag = pairs.GetFlag(j, fl, fl_str);
 					std::cout << " " << convert_to_utf8(fl_str.c_str(), morphRussian) ;
 				}
 				std::cout << std::endl;				

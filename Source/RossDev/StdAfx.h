@@ -24,8 +24,8 @@ struct CRossDevTextField
 {
 	WORD  StartPosition;
 	WORD  EndPosition;
-	DWORD StartLine;
-	DWORD EndLine;
+	uint32_t StartLine;
+	uint32_t EndLine;
 
 	BYTE  FieldNo;
 	BYTE  LeafId;

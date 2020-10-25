@@ -33,14 +33,14 @@ struct CLexProb
 {
 	WORD	m_PrevTag;
 	WORD	m_Tag;
-	DWORD	m_Count;
+	uint32_t	m_Count;
 	CLexProb()
 	{
 		m_Tag = UnknownTag;
 		m_PrevTag = UnknownTag;
 		m_Count = 0;
 	};
-	CLexProb(WORD PrevTag, WORD Tag, DWORD Count)
+	CLexProb(WORD PrevTag, WORD Tag, uint32_t Count)
 	{
 		m_PrevTag = PrevTag;
 		m_Tag = Tag ;

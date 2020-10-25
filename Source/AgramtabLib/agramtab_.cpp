@@ -222,7 +222,7 @@ bool CAgramtab :: ReadAndCheck (const char * FileName)
 };
 
 
-bool CAgramtab ::GetPartOfSpeechAndGrammems(const BYTE* AnCodes, DWORD& Poses, QWORD& Grammems) const
+bool CAgramtab ::GetPartOfSpeechAndGrammems(const BYTE* AnCodes, uint32_t& Poses, QWORD& Grammems) const
 {
 	size_t len = strlen((const char*)AnCodes);
 	if (len == 0) return false;

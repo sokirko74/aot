@@ -118,8 +118,8 @@ public:
     StringVector GetAspVerb (std::string Verb, bool IsPerfective);
 	void ErrorMessage (std::string Mess);
 	bool MakeSyntaxStr(const char* text, CMyTimeSpanHolder& GlobalSpan);
-	DWORD GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, std::string WordForm, poses_mask_t Poses, std::string& ResultLemma) const;
-	DWORD  GetFirstParadigmId (const MorphLanguageEnum langua, std::string WordForm,  poses_mask_t Poses) const;
+	uint32_t GetFirstParadigmIdAndLemma (const MorphLanguageEnum langua, std::string WordForm, poses_mask_t Poses, std::string& ResultLemma) const;
+	uint32_t  GetFirstParadigmId (const MorphLanguageEnum langua, std::string WordForm,  poses_mask_t Poses) const;
 	std::string GetThesPath(int ThesId) const;
 	const CDictionary* GetRusOborots() const;
 

@@ -505,7 +505,7 @@ std::vector<QWORD> CSemanticStructure::GetGramRestr(const CSemNode& W)
 					const TCortege& C = GetCortege(GetRoss(W.GetType()), i);
 					std::string GramFet = WriteToString(GetRoss(W.GetType()), (char*)(GetRoss(W.GetType())->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 					Trim(GramFet);
-					DWORD Pose;
+					uint32_t Pose;
 					QWORD Grammems;
 					m_pData->GetCustomGrammems(GramFet, Grammems, Pose);
 					GrammemsSet.push_back(Grammems);

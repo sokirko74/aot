@@ -22,7 +22,7 @@ Thread::~Thread()
 	Destroy();   
 }
 
-BOOL Thread::Create(DWORD dwCreateFlags)
+BOOL Thread::Create(uint32_t dwCreateFlags)
 {
 	//re-initialize not allowed
 	ASSERT(!IsValid());
@@ -135,14 +135,14 @@ int Thread::GetPriority() const
 	return FALSE;
 }
 
-DWORD Thread::Suspend()	const
+uint32_t Thread::Suspend()	const
 {	
 	if (IsValid())
 		return ::SuspendThread(m_handle);  
 	return FALSE;
 }
 
-DWORD Thread::Resume() const
+uint32_t Thread::Resume() const
 {	
 	if (IsValid())
 		return ::ResumeThread(m_handle);

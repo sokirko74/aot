@@ -11,11 +11,11 @@ class CWorkGrammar;
 
 struct CGLRRuleInfo 
 {
-	DWORD	m_RuleId;
-	DWORD	m_RuleLength;
-	DWORD	m_LeftPart;
-	DWORD	m_SynMainItemNo;
-	DWORD	m_RuleFeaturesNo;
+	uint32_t	m_RuleId;
+	uint32_t	m_RuleLength;
+	uint32_t	m_LeftPart;
+	uint32_t	m_SynMainItemNo;
+	uint32_t	m_RuleFeaturesNo;
 	void	Init(const CWorkRule*);
 	bool operator < (const CGLRRuleInfo& X) const
 	{
@@ -39,7 +39,7 @@ struct CSLRCellBuild
 struct CSLRCellWork 
 {
 	bool						m_bShift;
-	DWORD						m_ReduceRulesSetStart;
+	uint32_t						m_ReduceRulesSetStart;
 	int							m_GotoLine;
 	
 };
@@ -61,7 +61,7 @@ class CGLRTable
 public:
 	const CWorkGrammar*					m_pWorkGrammar;
 	std::vector<CGLRRuleInfo>				m_RuleInfos;
-	std::vector<DWORD>						m_ReduceRuleSets;
+	std::vector<uint32_t>						m_ReduceRuleSets;
 	
 	
 
@@ -75,7 +75,7 @@ public:
 	bool SaveOldGLRTable(std::string FileName) const;
 
 	const CSLRCellWork& GetCell(size_t  StateNo, size_t SymbolNo) const;
-	DWORD GetReduceRuleEnd(size_t  StateNo, size_t SymbolNo)  const;
+	uint32_t GetReduceRuleEnd(size_t  StateNo, size_t SymbolNo)  const;
 };
 
 

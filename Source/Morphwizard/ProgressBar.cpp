@@ -98,7 +98,7 @@ BOOL CProgressBar::Create(LPCTSTR strMessage, int nSize /*=100*/,
 	if (!pStatusBar)
 		return FALSE;
 
-	DWORD dwStyle = WS_CHILD|WS_VISIBLE;
+	uint32_t dwStyle = WS_CHILD|WS_VISIBLE;
 #ifdef PBS_SMOOTH	 
 	if (bSmooth)
 		dwStyle |= PBS_SMOOTH;

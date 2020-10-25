@@ -24,7 +24,7 @@ struct CDomen  {
   BYTE Parts[MaxDomensUnionSize];
   BYTE PartsSize;
   int   DropDownCount;
-  DWORD Color;
+  uint32_t Color;
   char* m_DomainItemsBuffer;
   int    m_DomainItemsBufferLength;
   TItemContainer*  m_pParent;

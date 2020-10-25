@@ -104,8 +104,8 @@ void ReadBigrams(std::string BigramsFileName, std::vector<CWordInfo> &wordInfos)
             throw CExpc("Cannot find word \"%s\" in at line %zu\n", w2, linesCount);
         }
         size_t word2 = curr_it - wordInfos.begin();
-        wordInfos[word1].m_Bigrams1.push_back({(DWORD)word2, (DWORD)bigramFreq});
-        wordInfos[word2].m_Bigrams2.push_back({(DWORD)word1, (DWORD)bigramFreq});
+        wordInfos[word1].m_Bigrams1.push_back({(uint32_t)word2, (uint32_t)bigramFreq});
+        wordInfos[word2].m_Bigrams2.push_back({(uint32_t)word1, (uint32_t)bigramFreq});
     }
     fprintf(stderr, "read %zu bigrams\n", linesCount);
 }

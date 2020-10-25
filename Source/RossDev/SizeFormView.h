@@ -29,7 +29,7 @@ public:
     // ClassWizard generated virtual function overrides
     //{{AFX_VIRTUAL(CSizeFormView)
     public:
-    virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwRequestedStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext);
+    virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwRequestedStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext);
 
     //}}AFX_VIRTUAL
 

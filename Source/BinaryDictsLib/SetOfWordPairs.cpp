@@ -36,7 +36,7 @@ long  CSetOfWordPairs::GetId(long index) const
 
 long CSetOfWordPairs::GetFlag(long pair_index, long flag_index, std::string& text) const
 {
-	DWORD Res;
+	uint32_t Res;
 	dict->GetFlag(begin+pair_index, flag_index, text, is_direct, Res);
 	return Res;
 }

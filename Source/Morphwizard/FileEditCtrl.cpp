@@ -247,14 +247,14 @@ IMPLEMENT_DYNAMIC(CFileEditCtrl, CEdit)
 //    when it's window is destroyed (in CFileEditCtrl::PostNCDestroy).
 //    The only time this should be used is when the control is
 //    created dynamicly in the
-//    DDX_FileEditCtrl(CDataExchange*,int,CString&,DWORD) function.
+//    DDX_FileEditCtrl(CDataExchange*,int,CString&,uint32_t) function.
 //
 /////////////////////////////////////////////////////////////////////////////
 
 CFileEditCtrl::CFileEditCtrl(BOOL bAutoDelete /* = FALSE */)
 {
     m_bAutoDelete       = bAutoDelete;
-    m_bButtonLeft       = (DWORD)~0;  // 0xFFFFFFFF
+    m_bButtonLeft       = (uint32_t)~0;  // 0xFFFFFFFF
     m_bMouseCaptured    = FALSE;
     m_bTextChanged      = TRUE;
     m_dwFlags           = 0;
@@ -389,7 +389,7 @@ void CFileEditCtrl::ButtonClicked()
     }
 
     BOOL bResult = FALSE;
-    DWORD Flags = GetFlags();
+    uint32_t Flags = GetFlags();
 
     if (Flags & FEC_FOLDER)
         bResult = FECBrowseForFolder();
@@ -428,10 +428,10 @@ void CFileEditCtrl::ButtonClicked()
 //
 /////////////////////////////////////////////////////////////////////////////
 
-BOOL CFileEditCtrl::Create(DWORD dwFlags,
-                           DWORD dwExStyle,
+BOOL CFileEditCtrl::Create(uint32_t dwFlags,
+                           uint32_t dwExStyle,
                            LPCTSTR lpszWindowName,
-                           DWORD dwStyle,
+                           uint32_t dwStyle,
                            const RECT& rect,
                            CWnd* pParentWnd,
                            UINT nID) 
@@ -753,7 +753,7 @@ void CFileEditCtrl::DrawDots(CDC *pDC, COLORREF CR, int nOffset /* = 0 */)
 
 void CFileEditCtrl::ExpandWildCards(const CString &FileName)
 {
-    DWORD Flags = GetFlags();
+    uint32_t Flags = GetFlags();
     if (!(Flags & FEC_WILDCARDS) || FileName.FindOneOf(_T("*?")) == -1)
     {   // wildcards not permitted or not found
         AddFile(FileName);
@@ -903,7 +903,7 @@ BOOL CFileEditCtrl::FECOpenFile()
         {
             _tcscpy(lpstrDirectory, GetNextPathName(pos));
             
-            DWORD attrib = GetFileAttributes(lpstrDirectory);
+            uint32_t attrib = GetFileAttributes(lpstrDirectory);
             if (((attrib != 0xFFFFFFFF) && (!(attrib & FILE_ATTRIBUTE_DIRECTORY)))
                 || ((attrib == 0xFFFFFFFF) && (!(m_pCFileDialog->m_ofn.Flags & OFN_FILEMUSTEXIST))))
                 // if ((file exists && is not a folder) || (does not exist && does not have to exist))
@@ -1019,7 +1019,7 @@ void CFileEditCtrl::FillBuffers()
         *temp = 0;
         temp--;
     }
-    DWORD dwFlags = GetFlags();
+    uint32_t dwFlags = GetFlags();
     CString File;
     if (dwFlags & FEC_FOLDER)
     {
@@ -1133,9 +1133,9 @@ int CFileEditCtrl::GetButtonWidth()
 //
 /////////////////////////////////////////////////////////////////////////////
 
-DWORD CFileEditCtrl::GetFlags()
+uint32_t CFileEditCtrl::GetFlags()
 {
-    DWORD Flags = m_dwFlags;
+    uint32_t Flags = m_dwFlags;
     if (m_pCFileDialog)
     {   // coordinate the FEC_* flags with the OFN_* flags
         if (m_pCFileDialog->m_ofn.Flags & OFN_NODEREFERENCELINKS)
@@ -1185,7 +1185,7 @@ CString CFileEditCtrl::GetNextPathName(POSITION &pos)
     _tfullpath(ReturnString.GetBuffer(_MAX_PATH), Temp, _MAX_PATH); // get absolute path from any relative paths
     ReturnString.ReleaseBuffer();
     
-    DWORD Flags = GetFlags();
+    uint32_t Flags = GetFlags();
     
     if (Flags & FEC_FILE)
     {
@@ -1283,7 +1283,7 @@ BOOL CFileEditCtrl::GetValidFolder(LPTSTR Path)
     BOOL valid = TRUE;
     int pos = -1;
     do {
-        DWORD attrib = GetFileAttributes(buffer);
+        uint32_t attrib = GetFileAttributes(buffer);
         if (attrib != 0xffffffff && (attrib & FILE_ATTRIBUTE_DIRECTORY))
         {
             // the path is a valid folder
@@ -1324,9 +1324,9 @@ BOOL CFileEditCtrl::GetValidFolder(LPTSTR Path)
 //
 /////////////////////////////////////////////////////////////////////////////
 
-BOOL CFileEditCtrl::ModifyFlags(DWORD remove, DWORD add)
+BOOL CFileEditCtrl::ModifyFlags(uint32_t remove, uint32_t add)
 {
-    DWORD Flags = GetFlags();
+    uint32_t Flags = GetFlags();
     Flags &= ~remove;
     Flags |= add;
     return SetFlags(Flags);
@@ -1389,7 +1389,7 @@ void CFileEditCtrl::OnDropFiles(HDROP hDropInfo)
 #endif
     ASSERT(szSeparator.GetLength() == 1);       // must be one character only
     szSeparator += _T(" ");
-    DWORD Flags = GetFlags();
+    uint32_t Flags = GetFlags();
 
     UINT nDropCount = DragQueryFile(hDropInfo, 0xffffffff, NULL, 0);
     if (nDropCount && ((Flags & FEC_FOLDER) || ((Flags & FEC_FILE) && !(Flags & FEC_MULTIPLE))))
@@ -1817,7 +1817,7 @@ void CFileEditCtrl::OnNcPaint()
 {
     if (m_nButtonState & BTN_FLAT)
     {
-        DWORD style = GetStyle();
+        uint32_t style = GetStyle();
         if (style & WS_DISABLED || style & ES_READONLY)
         {   // draw the flat border
             CRect WindowRect;
@@ -1953,7 +1953,7 @@ void CFileEditCtrl::OnSize(UINT nType, int cx, int cy)
 
 BOOL CFileEditCtrl::OnTTNNeedText(UINT, NMHDR *pTTTStruct, LRESULT *)
 {
-    DWORD Flags = GetFlags();
+    uint32_t Flags = GetFlags();
     TOOLTIPTEXT* pTTT = ((TOOLTIPTEXT*)pTTTStruct);
     if ((Flags & FEC_BUTTONTIP) && pTTT->hdr.idFrom == ID_BUTTONTIP)
     {
@@ -2123,7 +2123,7 @@ BOOL CFileEditCtrl::ScreenPointInButtonRect(CPoint point)
 /////////////////////////////////////////////////////////////////////////////
 
 #ifdef AFX_PJAIMAGE_H__F15965B0_B05A_11D4_B625_A1459D96AB20__INCLUDED_
-    BOOL CFileEditCtrl::SetButtonImage(HANDLE hImage, DWORD PJAIFlags, COLORREF Transparent/* = CLR_DEFAULT*/)
+    BOOL CFileEditCtrl::SetButtonImage(HANDLE hImage, uint32_t PJAIFlags, COLORREF Transparent/* = CLR_DEFAULT*/)
     {
         BOOL ret = FALSE;
         if (m_pButtonImage)
@@ -2212,7 +2212,7 @@ void CFileEditCtrl::SetClientTipText(CString text)
 //
 /////////////////////////////////////////////////////////////////////////////
 
-BOOL CFileEditCtrl::SetFlags(DWORD dwFlags)
+BOOL CFileEditCtrl::SetFlags(uint32_t dwFlags)
 {
     m_bTextChanged = TRUE;
 
@@ -2376,7 +2376,7 @@ void DDV_FileEditCtrl(CDataExchange *pDX, int nIDC)
     {
         CString szMessage;
         CString szFile = pFEC->GetNextPathName(pos);
-        DWORD dwAttribute = GetFileAttributes(szFile);
+        uint32_t dwAttribute = GetFileAttributes(szFile);
         if (dwAttribute == 0xFFFFFFFF)          // GetFileAttributes() failed
         {                                       // does not exist
             szMessage.Format(FEC_IDS_NOTEXIST, szFile);
@@ -2419,7 +2419,7 @@ void DDV_FileEditCtrl(CDataExchange *pDX, int nIDC)
 //
 /////////////////////////////////////////////////////////////////////////////
 
-void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CString& rStr, DWORD dwFlags)
+void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CString& rStr, uint32_t dwFlags)
 {
     CWnd *pWnd = pDX->m_pDlgWnd->GetDlgItem(nIDC);
     ASSERT(pWnd);
@@ -2489,7 +2489,7 @@ void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CString& rStr, DWORD dwFlags
 //
 /////////////////////////////////////////////////////////////////////////////
 
-void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CFileEditCtrl &rCFEC, DWORD dwFlags)
+void DDX_FileEditCtrl(CDataExchange *pDX, int nIDC, CFileEditCtrl &rCFEC, uint32_t dwFlags)
 {
     ASSERT(pDX->m_pDlgWnd->GetDlgItem(nIDC));
     if (rCFEC.m_hWnd == NULL)                   // not yet subclassed
@@ -2545,7 +2545,7 @@ tagFEC_NOTIFY::tagFEC_NOTIFY (CFileEditCtrl *FEC, UINT code)
 IMPLEMENT_DYNAMIC(CFECFileDialog, CFileDialog)
 
 CFECFileDialog::CFECFileDialog(BOOL bOpenFileDialog, LPCTSTR lpszDefExt, LPCTSTR lpszFileName,
-                               DWORD dwFlags, LPCTSTR lpszFilter, CWnd* pParentWnd) :
+                               uint32_t dwFlags, LPCTSTR lpszFilter, CWnd* pParentWnd) :
 CFileDialog(bOpenFileDialog, lpszDefExt, lpszFileName, dwFlags, lpszFilter, pParentWnd)
 {
 }

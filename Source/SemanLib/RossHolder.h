@@ -238,15 +238,15 @@ public:
 	long				GetSemMainWordFromArticle (long UnitNo) const;
 
 	// проверяет, что ItemNo принадлежит домену Д_ГГ_уточн
-	bool				IsVerbFet (DWORD ItemNo) const;
+	bool				IsVerbFet (uint32_t ItemNo) const;
 	// проверяет, что ItemNo принадлежит домену D_SYN_REL
-	bool				IsSynRel (DWORD ItemNo) const;
+	bool				IsSynRel (uint32_t ItemNo) const;
 	// проверяет, что ItemNo принадлежит домену D_1
-	bool				IsLemGroupBegining (DWORD ItemNo) const;
+	bool				IsLemGroupBegining (uint32_t ItemNo) const;
 	// проверяет, что ItemNo принадлежит домену D_GROUPS
-	bool				IsSynGroup (DWORD ItemNo) const;
+	bool				IsSynGroup (uint32_t ItemNo) const;
 	// проверяет, что ItemNo принадлежит домену D_POSITION
-	bool				IsPosition (DWORD ItemNo) const;
+	bool				IsPosition (uint32_t ItemNo) const;
 	// выдает номер первой константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 	// (Значение до запятой)
 	long				GetSynRel(const  TCortege& C) const;

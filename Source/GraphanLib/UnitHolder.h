@@ -16,7 +16,7 @@ class CUnitHolder
 	std::vector<BYTE>			m_InputBuffer;
 
 	std::map<size_t, short>		m_FoundOborots;
-	std::map<size_t, DWORD>		m_FoundPageBreaks;
+	std::map<size_t, uint32_t>		m_FoundPageBreaks;
 public:
 	const std::vector<CGraLine>& GetUnits() const	{ return m_Units; 	};
 	CGraLine& GetUnit(size_t UnitNo);
@@ -74,11 +74,11 @@ public:
 	void	AddUnit(const CGraLine& NewLine);
 	const char*	GetUnitBufferStart() const;
 	const char*	GetUnitUpperBufferStart() const;
-	const char*	GetUppercaseToken(DWORD LineNo) const;
-	std::string		GetToken(DWORD LineNo) const;
+	const char*	GetUppercaseToken(uint32_t LineNo) const;
+	std::string		GetToken(uint32_t LineNo) const;
 	size_t		GetTokensCount() const;
-	DWORD		GetTokenInputOffset(DWORD LineNo) const;
-	BYTE		GetTokenLength(DWORD LineNo) const;
+	uint32_t		GetTokenInputOffset(uint32_t LineNo) const;
+	BYTE		GetTokenLength(uint32_t LineNo) const;
 
 
 
@@ -93,8 +93,8 @@ public:
 	void	SetOborotNo(size_t LineNo, short OborotNo);
 	short	GetOborotNo(size_t LineNo) const;
 
-	void	SetPageNumber(size_t LineNo, DWORD PageNumber);
-	DWORD	GetPageNumber(size_t LineNo) const;
+	void	SetPageNumber(size_t LineNo, uint32_t PageNumber);
+	uint32_t	GetPageNumber(size_t LineNo) const;
 };
 
 

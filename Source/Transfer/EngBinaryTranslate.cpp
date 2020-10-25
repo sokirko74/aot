@@ -436,7 +436,7 @@ void translate_helper::translate_id(long Id, std::vector<long> &res, poses_mask_
 	std::vector<long> rus_vec;
 	rus_vec.push_back(Id);
 	int i;
-	std::vector<DWORD> ResVector;
+	std::vector<uint32_t> ResVector;
 	m_pData->m_AspDict.nonperf2perf(Id, ResVector);
 	for(i = 0; i < ResVector.size(); i++)
 		rus_vec.push_back(ResVector[i]);

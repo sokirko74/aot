@@ -47,7 +47,7 @@ class CSynWord;
 
 class CSynPlmLine
 {
-	DWORD					m_Flags;
+	uint32_t					m_Flags;
 
 	// a union of all possible grammems, which is built by m_gramcodes
 	QWORD					m_Grammems; 

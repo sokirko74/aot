@@ -15,20 +15,20 @@
 #endif // _MSC_VER > 1000
 
 
-typedef bool (*IsKeyWordFunction)(const CString& word, COLORREF& C, DWORD Data);
+typedef bool (*IsKeyWordFunction)(const CString& word, COLORREF& C, uint32_t Data);
 
 class CSyntaxColorizer  
 {
 public:
 	CSyntaxColorizer();
 	void Colorize(CRichEditCtrl *pCtrl, long StartChar, long nEndChar);
-	void InitializeParser(IsKeyWordFunction Func, DWORD UserData);
+	void InitializeParser(IsKeyWordFunction Func, uint32_t UserData);
 
 
 protected:
 	CHARFORMAT m_cfDefault;
 	bool Alphas[256];
-	DWORD		m_UserData;
+	uint32_t		m_UserData;
 	IsKeyWordFunction IsKeyWord;
 };
 

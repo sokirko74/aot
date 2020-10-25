@@ -3,15 +3,15 @@
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 #pragma once 
 
-const	DWORD	MaxDomensUnionSize = 20;
+const	uint32_t	MaxDomensUnionSize = 20;
 	
-const	DWORD	AuthorNameSize = 20;
+const	uint32_t	AuthorNameSize = 20;
 // максимальное число актантов 
 const	BYTE	MaxNumAct = 7;
 
 // ошибочный номер словарного входа 
 const	WORD	ErrUnitNo  = 65000;
-const	DWORD	EntryStrSize = 40;
+const	uint32_t	EntryStrSize = 40;
 
 // Исходный материал доменов
 const	BYTE	dsUnion = 'O';

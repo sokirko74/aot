@@ -303,7 +303,7 @@ size_t CGraLine::LengthUntilDelimiters(const char *s, const CGraphmatFile *G) {
 
 
 // читает из буфера b в структуру L
-size_t CGraLine::ReadWord(size_t Offset, const CGraphmatFile *G, DWORD &PageNumber) {
+size_t CGraLine::ReadWord(size_t Offset, const CGraphmatFile *G, uint32_t &PageNumber) {
     PageNumber = UnknownPageNumber;
     const char *s;
     const char *In = (const char *) &(G->GetInputBuffer()[0]);

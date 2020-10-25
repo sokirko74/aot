@@ -218,7 +218,7 @@ public:
     DECLARE_DYNCREATE(CGridCtrl)
 
     BOOL Create(const RECT& rect, CWnd* parent, UINT nID,
-                DWORD dwStyle = WS_CHILD | WS_BORDER | WS_TABSTOP | WS_VISIBLE);
+                uint32_t dwStyle = WS_CHILD | WS_BORDER | WS_TABSTOP | WS_VISIBLE);
     BOOL SubclassWindow(HWND hWnd);
 
 // Attributes
@@ -424,7 +424,7 @@ protected:
     CPoint      m_LeftClickDownPoint, m_LastMousePoint;
     CCellID     m_LeftClickDownCell, m_SelectionStartCell;
 #ifdef USE_SELECTION_MAPS
-    CMap<DWORD,DWORD, CCellID, CCellID&> m_SelectedCellMap, m_PrevSelectedCellMap;
+    CMap<uint32_t,uint32_t, CCellID, CCellID&> m_SelectedCellMap, m_PrevSelectedCellMap;
 #else
     CArray<CCellID, CCellID&> m_SelectedCells, m_PrevSelectedCells;
 #endif

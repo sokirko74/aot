@@ -65,7 +65,7 @@ public:
 	const std::string&  GetUpperWord() const;
 	const std::string&   GetCommonGramCode() const;
 	void			SetMorphUnknown();
-	void			SetMorph(char MorphSign, const std::string& CommonAncode, const DWORD& ParadigmId);
+	void			SetMorph(char MorphSign, const std::string& CommonAncode, const uint32_t& ParadigmId);
 	
 };
 

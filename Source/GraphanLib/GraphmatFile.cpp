@@ -168,7 +168,7 @@ void CGraphmatFile :: GraphmatMain ()
 		CGraLine NewLine;
 			
 		NewLine.SetToken(GetUnitBufferStart() + CurrOutBufOffset);
-		DWORD	PageNumber;
+		uint32_t	PageNumber;
 		InputOffset = NewLine.ReadWord(InputOffset,this, PageNumber);
 			
 		//  ignore single spaces in order to save memory

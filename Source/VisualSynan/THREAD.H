@@ -29,14 +29,14 @@ public:
 	Thread();
 	virtual ~Thread();
 
-	virtual BOOL Create(DWORD dwCreateFlags = 0);
+	virtual BOOL Create(uint32_t dwCreateFlags = 0);
 	virtual BOOL Destroy();
 
 	BOOL SetPriority(int nPriority) const;
 	int  GetPriority() const;
 
-	DWORD Suspend() const;
-	DWORD Resume() const;
+	uint32_t Suspend() const;
+	uint32_t Resume() const;
 
 	HANDLE GetHandle() const
 	{	return m_handle;  }

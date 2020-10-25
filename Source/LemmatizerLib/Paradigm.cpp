@@ -91,7 +91,7 @@ const CFlexiaModel& CFormInfo::GetFlexiaModel() const
 	return m_pParent->m_FlexiaModels[I.m_LemmaInfo.m_FlexiaModelNo];
 };
 
-DWORD CFormInfo::GetParadigmId() const 
+uint32_t CFormInfo::GetParadigmId() const 
 {
 	assert (IsValid());
 	if (!IsValid()) return -1;
@@ -121,7 +121,7 @@ char CFormInfo::GetLemSign() const
 
 
 
-bool  CFormInfo::SetParadigmId(DWORD newVal) 
+bool  CFormInfo::SetParadigmId(uint32_t newVal) 
 {
 	assert (m_pParent);
 	{
@@ -146,7 +146,7 @@ bool  CFormInfo::SetParadigmId(DWORD newVal)
 	return true;
 }
 
-DWORD  CFormInfo::GetCount () const 
+uint32_t  CFormInfo::GetCount () const 
 {
 	assert (IsValid());
 	if (!IsValid()) return 0;
