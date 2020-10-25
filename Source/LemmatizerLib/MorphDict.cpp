@@ -65,7 +65,6 @@ void    CMorphDict::GetLemmaInfos(const std::string& Text, size_t TextPos, std::
 };
 
 
-
 void    CMorphDict::PredictBySuffix(const std::string& Text, size_t& TextPos, size_t MinimalPredictSuffixlen, std::vector<CAutomAnnotationInner>& Infos) const
 {
 	size_t Count = Text.length();

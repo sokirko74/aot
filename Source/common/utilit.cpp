@@ -1786,19 +1786,15 @@ bool  IsLessShortString::operator ()(const CShortString& Item1,	const CShortStri
 	return strcmp(Item1.GetString(), Item2.GetString()) < 0;
 }
 
-
-
-
-
-
 void CShortStringHolder::ReadShortStringHolder(std::string filename)
 {
 	clear();
-	file_off_t BufferSize = (int)FileSize(filename.c_str()) - sizeof(size_t);
+	uint32_t Count;
+	size_t BufferSize = (size_t)FileSize(filename.c_str()) - sizeof(Count);
 
 	FILE* fp = fopen(filename.c_str(), "rb");
 	if (!fp) return;
-	uint32_t Count;
+	
 	fread ((void *)&Count, 1, sizeof(Count), fp);
 	try {
 		m_Buffer.clear();
@@ -1818,7 +1814,7 @@ void CShortStringHolder::ReadShortStringHolder(std::string filename)
 	{
 		CShortString R(m_Buffer.begin()+Offset);
 		push_back(R);
-		Offset +=   R.GetLength() + 2;
+		Offset +=   R.GetLength() + 2; // 1 byte for length and 1 byte for 0 in the end
 	};
 	
 
