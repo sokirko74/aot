@@ -163,3 +163,6 @@ IF (MSVC)
 
 ENDIF()
 
+if (BUILD_LEMMATIZER_PYTHON)
+   add_subdirectory (lemmatizer_python) 
+ENDIF()

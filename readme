@@ -42,6 +42,10 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 7. To run Windows GUI Rossdev.exe and MorphWizard you must set Russian everywhere in Region Setting.
 
+8. To compile lemmatizer_python 
+    8.1 one must install swig (swig.org) and adjust path in lemmatizer_python/CMakeLists.txt
+    8.2 and install python3 (with  debug binaries https://stackoverflow.com/questions/35250175/i-cannot-find-python35-d-lib)
+
 =================   Compilation =======================
   export RML=/home/sokirko/RML
   export CXX=/usr/bin/g++
