@@ -29,6 +29,14 @@ if(BUILD_HTTP_SERVERS)
     message ("LIBEVENT_LIBRARY =  ${LIBEVENT_LIBRARY}" )
 ENDIF()
 
+if (BUILD_LEMMATIZER_PYTHON)
+  if  (WIN32)
+  else()
+        message ("use -fPIC")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+   endif()
+endif()
+
 #json
 include_directories(${RML}/Source/contrib/nlohmann)
 
@@ -163,3 +171,6 @@ IF (MSVC)
 
 ENDIF()
 
+if (BUILD_LEMMATIZER_PYTHON)
+   add_subdirectory (lemmatizer_python) 
+endif()
