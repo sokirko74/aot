@@ -110,8 +110,8 @@ std::string rClauseTypes[] =
 
 CRusGramTab::CRusGramTab()
 {
-    assert(sizeof(Grammems) / sizeof(std::string) == RussianGrammemsCount);
-    assert(sizeof(RussianPartOfSpeech) / sizeof(std::string) == RUSSIAN_PART_OF_SPEECH_COUNT);
+    assert(sizeof(Grammems) / sizeof(TMorphConstant) == RussianGrammemsCount);
+    assert(sizeof(RussianPartOfSpeech) / sizeof(TMorphConstant) == RUSSIAN_PART_OF_SPEECH_COUNT);
     assert(sizeof(rClauseTypes) / sizeof(std::string) == RUSSIAN_CLAUSE_TYPE_COUNT);
     
     for (size_t i = 0; i < GetMaxGrmCount(); i++) {
