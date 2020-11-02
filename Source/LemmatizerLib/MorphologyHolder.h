@@ -21,6 +21,7 @@ public:
 	CAgramtab*						m_pGramTab;
 	CLemmatizer*					m_pLemmatizer;
 	CGraphmatFile					m_Graphan;
+	bool                            m_bUsePrediction;
 
 	CMorphologyHolder();
 	~CMorphologyHolder();

@@ -589,7 +589,7 @@ void TItemContainer::WriteFieldsJson() const {
 */
 bool TItemContainer::WriteFields() const {
     FILE *fp = fopen(FieldsFile.c_str(), "wb");
-    fprintf(fp, "%i\r\n", Fields.size());
+    fprintf(fp, "%lu\r\n", Fields.size());
     for (size_t i = 0; i < Fields.size(); i++) {
         fprintf(fp, "%i;%zu;%s;%c;%s;%i\r\n",
                 Fields[i].FieldId,
@@ -718,7 +718,7 @@ bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, B
 
 bool TItemContainer::WriteDomens() const {
     FILE *domens = fopen(DomensFile.c_str(), "wb");
-    fprintf(domens, "%u\r\n", m_Domens.size());
+    fprintf(domens, "%lu\r\n", m_Domens.size());
     for (size_t k = 0; k < m_Domens.size(); k++)
         fprintf(domens, "%i;%i;%i;%s;%c;%i;%i;%i;%s\r\n",
                 m_Domens[k].DomId,

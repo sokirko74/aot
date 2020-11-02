@@ -2174,7 +2174,7 @@ bool MorphoWizard::attach_form_prefixes_to_bases() {
         }
     }
 
-    printf("%i/%i\n", Count, Size);
+    printf("%li/%li\n", Count, Size);
 
     if (!bFound) return true;
 

@@ -13,25 +13,14 @@
 
 CMorphologyHolder Holder;
 
-int fact(int n) {
-    if (n < 0){ /* This should probably return an error, but this is simpler */
-        return 0;
-    }
-    if (n == 0) {
-        return 1;
-    }
-    else {
-        /* testing for overflow would be a good idea here */
-        return n * fact(n-1);
-    }
-}
 
-bool load_morphology(int language) {
+bool load_morphology(int language, bool use_prediction) {
     if (!Holder.LoadLemmatizer((MorphLanguageEnum)language)) {
         std::cerr << "Cannot load morphology\n";
         return false;
     }
     Holder.m_pGramTab->m_bUseNationalConstants = false;
+    Holder.m_bUsePrediction = use_prediction;
     return true;
 }
 
@@ -46,15 +35,15 @@ std::string synthesize(std::string word_form, std::string part_of_speech_and_gra
     part_of_speech_t partOfSpeech;
     grammems_mask_t grammems;
     if (!Holder.m_pGramTab->ProcessPOSAndGrammemsIfCan(part_of_speech_and_grammems.c_str(), &partOfSpeech, &grammems)) {
-        return "{'forms':'', 'error': 'cannot process part_of_speech_and_grammems'}";
+        return "{\"forms\":[], \"error\": \"cannot process part_of_speech_and_grammems\"}";
     }
     std::vector<CFormInfo>	paradigms;
     Holder.m_pLemmatizer->CreateParadigmCollection(false, 
                         word_form, 
                         is_upper_alpha((unsigned char)word_form[0], 
-                        Holder.m_CurrentLanguage), true, paradigms);
+                        Holder.m_CurrentLanguage), Holder.m_bUsePrediction, paradigms);
     if (paradigms.empty()) {
-        return "{'forms':'', 'error': 'word form not found'}";
+        return "{\"forms\":[], \"error\": \"word form not found\"}";
     };
     std::vector<std::string> found_forms;
     for (auto& p : paradigms) {
@@ -66,10 +55,10 @@ std::string synthesize(std::string word_form, std::string part_of_speech_and_gra
             std::string gramCodes = p.GetAncode(i) + p.GetCommonAncode();
             grammems_mask_t form_mask = Holder.m_pGramTab->GetAllGrammems(gramCodes.c_str());
             if ((form_mask & grammems) == grammems) {
-                found_forms.push_back(convert_to_utf8(p.GetWordForm(i), Holder.m_CurrentLanguage));
+                found_forms.push_back( std::string("\"") + convert_to_utf8(p.GetWordForm(i), Holder.m_CurrentLanguage) + std::string("\"") );
             }
         }
     }
-    return std::string("{'forms':'") + join_string(found_forms,";") + std::string("'}");
+    return std::string("{\"forms\": [") + join_string(found_forms,",") + std::string("]}");
 
 }

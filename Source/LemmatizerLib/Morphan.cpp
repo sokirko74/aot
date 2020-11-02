@@ -318,7 +318,12 @@ bool GetParadigmCollection(std::string WordForm, std::vector<CFormInfo>&	Paradig
 	try
 	{
 		if (Holder->m_pLemmatizer == 0) return false;
-		Holder->m_pLemmatizer->CreateParadigmCollection(false, WordForm, IsUpper((unsigned char)WordForm[0], Holder->m_CurrentLanguage), true, Paradigms);
+		Holder->m_pLemmatizer->CreateParadigmCollection(false,
+                                                  WordForm,
+                                                  IsUpper((unsigned char)WordForm[0],
+                                                          Holder->m_CurrentLanguage),
+                                                          Holder->m_bUsePrediction,
+                                                          Paradigms);
 	}
 	catch (...)
 	{

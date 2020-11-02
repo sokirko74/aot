@@ -9,6 +9,7 @@ CMorphologyHolder::CMorphologyHolder()
 	m_pLemmatizer = 0;
 	m_pGramTab = 0;
 	m_bTimeStatis = false;
+    m_bUsePrediction = true;
 };
 
 CMorphologyHolder::~CMorphologyHolder()
@@ -132,7 +133,7 @@ bool CMorphologyHolder::GetMorphology(std::string str, bool bFile, int& CountOfW
 			fprintf (stderr,"CountOfWords = %i\n",CountOfWords);
 
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
-			fprintf(stderr,"Graphan: Ticks = %i Speed = %6.0f\n", t2-t1, speed );
+			fprintf(stderr,"Graphan: Ticks = %li Speed = %6.0f\n", t2-t1, speed );
 		};
 
 		// ============  Morphology =======================
@@ -152,7 +153,7 @@ bool CMorphologyHolder::GetMorphology(std::string str, bool bFile, int& CountOfW
 		{
 			t2 = clock();
 			double speed =  ((double)CountOfWords)/((t2-t1)/((double)CLOCKS_PER_SEC));
-			fprintf(stderr,"Morphology: Ticks = %i Speed = %6.0f\n", t2-t1, speed );
+			fprintf(stderr,"Morphology: Ticks = %li Speed = %6.0f\n", t2-t1, speed );
 		};
 		m_Graphan.FreeTable();
 		return true;

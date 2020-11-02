@@ -224,7 +224,7 @@ void  CMorphDictBuilder::CreateAutomat(const MorphoWizard& Wizard)
 		LemmaNo++;
 	};
 
-	fprintf (stderr,"Lemma %zu/%u  RegisterSize=%i   \n", LemmaNo, Wizard.m_LemmaToParadigm.size(), RegisterSize);
+	fprintf (stderr,"Lemma %lu/%lu  RegisterSize=%li   \n", LemmaNo, Wizard.m_LemmaToParadigm.size(), RegisterSize);
 
 	if (LemmaNo >  0xffffff)
 	{

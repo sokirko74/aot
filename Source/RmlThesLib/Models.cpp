@@ -83,7 +83,7 @@ bool CThesaurus::LoadGroups(std::string Buff, CInnerModel &M) {
         char s[200];
         G.m_First = 1000; // gcc 8.0: sscanf does not work with this initialization
         G.m_Last = 1000;
-        if (sscanf(SynGroup.c_str(), "%[^(](%i,%i)", s, &G.m_First, &G.m_Last) != 3)
+        if (sscanf(SynGroup.c_str(), "%[^(](%li,%li)", s, &G.m_First, &G.m_Last) != 3)
             return false;
 
         assert (G.m_First >= 0  && G.m_First < 100);

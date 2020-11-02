@@ -2,8 +2,7 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko, Andrey Putrin
 
-#ifndef __LEMMATIZERS_H_
-#define __LEMMATIZERS_H_
+#pragma once
 
 #pragma warning (disable : 4786)
 
@@ -57,9 +56,6 @@ public:
 	bool					m_bUseStatistic;
 	bool					m_bAllowRussianJo;
 
-	
-	
-	
 	CLemmatizer(MorphLanguageEnum Language);
 	virtual ~CLemmatizer();
 
@@ -78,20 +74,12 @@ public:
 	//  main interfaces
 	bool	CreateParadigmCollection(bool bNorm, std::string& WordStr, bool capital, bool bUsePrediction, std::vector<CFormInfo>& Result) const;
 	void	GetAllAncodesQuick(const BYTE* WordForm, bool capital, BYTE* OutBuffer, bool bUsePrediction) const;
-	//std::string	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital) const;
 	bool	GetAllAncodesAndLemmasQuick(std::string& InputWordStr, bool capital, char* OutBuffer, size_t MaxBufferSize, bool bUsePrediction) const;
 	bool	CreateParadigmFromID(uint32_t id, CFormInfo& Result) const;
 	bool	ProcessHyphenWords(CGraphmatFile* piGraphmatFile) const;
-
-
-
 };
 
 
-
-
-
-/////////////////////////////////////////////////////////////////////////////
 class CLemmatizerRussian : public CLemmatizer
 {
 public:
@@ -110,10 +98,6 @@ public:
 	
 };
 
-
-
-/////////////////////////////////////////////////////////////////////////////
-
 class  CLemmatizerGerman: public CLemmatizer
 {
 	void FilterSrc(std::string& src) const;
@@ -122,9 +106,3 @@ public:
 	virtual ~CLemmatizerGerman() {};
 	
 };
-
-
-
-
-
-#endif //__LEMMATIZERS_H_

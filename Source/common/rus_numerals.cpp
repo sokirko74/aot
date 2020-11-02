@@ -8,7 +8,7 @@ std::string IntToStr (double i)
 	#ifdef WIN32
 		_i64toa(_i, s, 10);
 	#else
-			sprintf (s, "%Ld", _i);
+			sprintf (s, "%ld", _i);
 	#endif
 
 	return s;
