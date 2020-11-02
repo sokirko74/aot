@@ -116,6 +116,7 @@ static bool  ProcessAgramtabLine (CAgramtab& A, const char* tab_str,  size_t Lin
 CAgramtab :: CAgramtab () 
 { 
 	m_bInited = false;
+	m_bUseNationalConstants = true;
 };
 
 

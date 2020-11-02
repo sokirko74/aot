@@ -31,6 +31,7 @@ bool load_morphology(int language) {
         std::cerr << "Cannot load morphology\n";
         return false;
     }
+    Holder.m_pGramTab->m_bUseNationalConstants = false;
     return true;
 }
 

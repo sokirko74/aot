@@ -25,6 +25,7 @@ class CAgramtab {
    public :
 	bool	m_bInited;
 	MorphLanguageEnum  m_Language;
+	bool m_bUseNationalConstants;
 
 	CAgramtab ();
     virtual ~CAgramtab ();
