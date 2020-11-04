@@ -2137,7 +2137,7 @@ bool MorphoWizard::attach_form_prefixes_to_bases() {
     for (lemma_iterator_t it = m_LemmaToParadigm.begin(); it != m_LemmaToParadigm.end(); it++) {
         Count++;
         if (!(Count % 1000))
-            printf("%i/%i  \r", Count, Size);
+            printf("%li/%li  \r", Count, Size);
 
         if (binary_search(ModelsWithPrefixes.begin(), ModelsWithPrefixes.end(), it->second.m_FlexiaModelNo)) {
             bFound = true;

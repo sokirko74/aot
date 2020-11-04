@@ -236,7 +236,7 @@ CFormInfo CMorphologyHolder::id_to_paradigm(long id) const
 }
 
 
-std::string CMorphologyHolder::GetGrammems(const char* tab_str) {
+std::string CMorphologyHolder::GetGrammems(const char* tab_str) const {
 	uint64_t G;
 	m_pGramTab->GetGrammems(tab_str, G);
 	std::string s = m_pGramTab->GrammemsToStr(G);
@@ -245,7 +245,7 @@ std::string CMorphologyHolder::GetGrammems(const char* tab_str) {
 	return s;
 }
 
-std::string CMorphologyHolder::PrintMorphInfoUtf8(std::string Form, bool printIds, bool printForms, bool sortParadigms)
+std::string CMorphologyHolder::PrintMorphInfoUtf8(std::string Form, bool printIds, bool printForms, bool sortParadigms) const
 {
 	bool bCapital = is_upper_alpha((BYTE)Form[0], m_CurrentLanguage);
 
@@ -305,4 +305,39 @@ std::string CMorphologyHolder::PrintMorphInfoUtf8(std::string Form, bool printId
 	}
 	return convert_to_utf8(Result, m_CurrentLanguage);
 };
+
+inline  bool IsUpper(int x, MorphLanguageEnum Langua)
+{
+	return is_upper_alpha(x, Langua);
+};
+
+bool CMorphologyHolder::GetParadigmCollection(std::string WordForm, std::vector<CFormInfo>&	Paradigms) const {
+	if (WordForm.length() == 0)	{
+		return false;
+	};
+
+	try
+	{
+		if (m_pLemmatizer == nullptr) return false;
+		m_pLemmatizer->CreateParadigmCollection(false,
+                                                  WordForm,
+                                                  IsUpper((unsigned char)WordForm[0],
+                                                          m_CurrentLanguage),
+                                                          m_bUsePrediction,
+                                                          Paradigms);
+	}
+	catch (...)
+	{
+		return false;;
+	};
+	return true;
+};
+
+bool CMorphologyHolder::IsInDictionary(std::string WordForm) const {
+	std::vector<CFormInfo>	Paradigms;
+	if (!GetParadigmCollection(WordForm, Paradigms)) {
+		return false;
+	};
+	return !Paradigms.empty();
+}
 

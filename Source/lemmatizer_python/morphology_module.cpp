@@ -1,6 +1,4 @@
-﻿/* File: example.c */
-
-#include "morphology_module.h"
+﻿#include "morphology_module.h"
 #include "../common/utilit.h"
 #include "../common/argparse.h"
 #include "../AgramtabLib/RusGramTab.h"
@@ -8,7 +6,6 @@
 #include "../AgramtabLib/GerGramTab.h"
 #include "../LemmatizerLib/Lemmatizers.h"
 #include "../LemmatizerLib/Paradigm.h"
-#include "../LemmatizerLib/Morphan.h"
 #include "../LemmatizerLib/MorphologyHolder.h"
 
 CMorphologyHolder Holder;
@@ -26,7 +23,12 @@ bool load_morphology(int language, bool use_prediction) {
 
 std::string lemmatize_json(std::string word_form, bool allForms) {
     word_form = convert_from_utf8(word_form.c_str(), Holder.m_CurrentLanguage);
-    return LemmatizeJson(word_form.c_str(), &Holder, allForms, true, true);
+    return Holder.LemmatizeJson(word_form.c_str(), allForms, true, true);
+}
+
+bool is_in_dictionary(std::string word_form) {
+    word_form = convert_from_utf8(word_form.c_str(), Holder.m_CurrentLanguage);
+    return Holder.IsInDictionary(word_form);
 }
 
 std::string synthesize(std::string word_form, std::string part_of_speech_and_grammems) {

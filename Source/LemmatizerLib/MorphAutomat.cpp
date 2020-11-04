@@ -266,11 +266,11 @@ bool CMorphAutomat::Save(std::string AutomatFileName) const
 			ErrorMessage (Format("CMorphAutomat::Save, cannot write to %s", AutomatFileName.c_str()));
 			return false;
 		};
-		fprintf(fp, "%i\n", m_NodesCount);
+		fprintf(fp, "%li\n", m_NodesCount);
 		if (fwrite(m_pNodes, sizeof(CMorphAutomNode),m_NodesCount, fp) != m_NodesCount)
 			return  false;
 
-		fprintf(fp, "%i\n", m_RelationsCount);
+		fprintf(fp, "%li\n", m_RelationsCount);
 		if (fwrite(m_pRelations, sizeof(CMorphAutomRelation),m_RelationsCount, fp) != m_RelationsCount)
 			return  false;
 		

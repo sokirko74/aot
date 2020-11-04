@@ -9,7 +9,6 @@
 #include "../AgramtabLib/GerGramTab.h"
 #include "../LemmatizerLib/Lemmatizers.h"
 #include "../LemmatizerLib/Paradigm.h"
-#include "../LemmatizerLib/Morphan.h"
 #include "../LemmatizerLib/MorphologyHolder.h"
 
 #include <iostream>
@@ -64,6 +63,7 @@ void CheckSpeed(std::istream& inputStream, std::ostream& output) {
 };
 
 
+
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "input file in utf8");
@@ -115,7 +115,7 @@ int main(int argc, const char **argv) {
 
         try {
             if (args.Exists("morphan")) {
-                result = LemmatizeJson(s.c_str(), &Holder, printForms, true, true);
+                result = Holder.LemmatizeJson(s.c_str(), printForms, true, true);
             }
             else {
                 result = Holder.PrintMorphInfoUtf8(s, printIds, printForms, sortParadigms);

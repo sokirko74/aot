@@ -2,7 +2,7 @@
 #include "SynanDmn.h"
 
 #include "../SynanLib/SyntaxHolder.h"
-#include "../LemmatizerLib/Morphan.h"
+#include "../LemmatizerLib/MorphologyHolder.h"
 #include "../common/BigramsReader.h"
 #include "../common/json.h"
 
@@ -47,7 +47,7 @@ std::string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
     const CMorphologyHolder *Holder = GetMorphHolder(request.Langua);
     std::string wordForm = request.Query;
     wordForm = convert_from_utf8(wordForm.c_str(), Holder->m_CurrentLanguage);
-    return LemmatizeJson(wordForm, Holder, withParadigms);
+    return Holder->LemmatizeJson(wordForm, withParadigms);
 };
 
 

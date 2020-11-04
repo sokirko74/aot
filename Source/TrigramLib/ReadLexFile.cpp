@@ -56,7 +56,7 @@ bool CTrigramModel::read_dictionary_text_file(std::map<std::string,  std::vector
 		}
 		if (Dictionary.find(WordStr) != Dictionary.end())
 		{
-			fprintf(stderr, "duplicate dictionary entry \"%s\" (%s:%i)\n", WordStr.c_str(), m_DictionaryFile.c_str(), line_no);
+			fprintf(stderr, "duplicate dictionary entry \"%s\" (%s:%li)\n", WordStr.c_str(), m_DictionaryFile.c_str(), line_no);
 			return false;
 		};
 		
@@ -66,24 +66,24 @@ bool CTrigramModel::read_dictionary_text_file(std::map<std::string,  std::vector
 			uint16_t PrevTag = find_tag(tag1 );
 			if (PrevTag == UnknownTag)
 			{	
-				fprintf(stderr, "invalid tag \"%s\" (%s:%i)\n", tag1.c_str(), m_DictionaryFile.c_str(), line_no); 
+				fprintf(stderr, "invalid tag \"%s\" (%s:%li)\n", tag1.c_str(), m_DictionaryFile.c_str(), line_no); 
 				return false;
 			}
 			if (!tok ())
 			{
-				fprintf(stderr, "can't find the second tag (%s:%i)\n", m_DictionaryFile.c_str(), line_no);
+				fprintf(stderr, "can't find the second tag (%s:%li)\n", m_DictionaryFile.c_str(), line_no);
 				return false;
 			};
 			std::string tag2 = tok.val();
 			uint16_t CurrTag = find_tag(tag2 );
 			if (CurrTag == UnknownTag)
 			{	
-				fprintf(stderr, "invalid tag \"%s\" (%s:%i)\n", tag2.c_str(), m_DictionaryFile.c_str(), line_no); 
+				fprintf(stderr, "invalid tag \"%s\" (%s:%li)\n", tag2.c_str(), m_DictionaryFile.c_str(), line_no); 
 				return false;
 			}
 			if (!tok ())
 			{
-				fprintf(stderr, "can't find tag count (%s:%i)\n", m_DictionaryFile.c_str(), line_no);
+				fprintf(stderr, "can't find tag count (%s:%li)\n", m_DictionaryFile.c_str(), line_no);
 				return false;
 			};
 

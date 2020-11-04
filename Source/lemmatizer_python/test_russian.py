@@ -18,5 +18,5 @@ if __name__ == '__main__':
     assert len(answer['forms']) > 0
     assert answer['forms'][0] == "МАМЫ"
 
-    answer = json.loads(aot.synthesize("бай-тал", "N sg,gen"))
+    answer = json.loads(aot.synthesize("ббай-тал", "N sg,gen"))
     assert len(answer['forms']) == 0 # no prediction in load_morphology
