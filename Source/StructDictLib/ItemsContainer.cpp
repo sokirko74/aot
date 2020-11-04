@@ -485,7 +485,7 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
     ClearFields();
     FILE *fp = fopen(FieldsFile.c_str(), "rb");
     int FieldsCount;
-    fscanf(fp, "%u\r\n", &FieldsCount);
+    fscanf(fp, "%u\n", &FieldsCount);
     Fields.resize(FieldsCount);
 
     if (FieldsCount >= ErrUChar) {
@@ -501,7 +501,7 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
 
             int SignatCount;
             fgets(s, 255, fp);
-            if (sscanf(s, "%u;%u;%[^;];%c;%[^;];%u\r\n",
+            if (sscanf(s, "%u;%u;%[^;];%c;%[^;];%u\n",
                        &Fields[FieldNo].FieldId,
                        &SignatCount,
                        Fields[FieldNo].FieldStr,
@@ -509,8 +509,7 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
                        q,
                        &Fields[FieldNo].OrderId) != 6) {
                 fclose(fp);
-                m_LastError = std::string("Cannot read lineError") + std::string(s);
-                //printf ("Error!");
+                m_LastError = Format("Cannot read file %s line: %s", FieldsFile.c_str(), s);
                 return false;
             };
             Fields[FieldNo].IsApplicToActant = strcmp(q, "FALSE") != 0;
@@ -589,9 +588,9 @@ void TItemContainer::WriteFieldsJson() const {
 */
 bool TItemContainer::WriteFields() const {
     FILE *fp = fopen(FieldsFile.c_str(), "wb");
-    fprintf(fp, "%lu\r\n", Fields.size());
+    fprintf(fp, "%lu\n", Fields.size());
     for (size_t i = 0; i < Fields.size(); i++) {
-        fprintf(fp, "%i;%zu;%s;%c;%s;%i\r\n",
+        fprintf(fp, "%i;%zu;%s;%c;%s;%i\n",
                 Fields[i].FieldId,
                 Fields[i].m_Signats.size(),
                 Fields[i].FieldStr,
@@ -599,9 +598,9 @@ bool TItemContainer::WriteFields() const {
                 Fields[i].IsApplicToActant ? "TRUE" : "FALSE",
                 Fields[i].OrderId);
         for (size_t k = 0; k < Fields[i].m_Signats.size(); k++)
-            fprintf(fp, "%i;%i;%s;%s\r\n", Fields[i].m_Signats[k].SignatId, Fields[i].m_Signats[k].OrderNo,
+            fprintf(fp, "%i;%i;%s;%s\n", Fields[i].m_Signats[k].SignatId, Fields[i].m_Signats[k].OrderNo,
                     Fields[i].m_Signats[k].FormatStr, Fields[i].m_Signats[k].FormatName);
-        fprintf(fp, "\r\n");
+        fprintf(fp, "\n");
     };
     fclose(fp);
     return true;
@@ -718,9 +717,9 @@ bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, B
 
 bool TItemContainer::WriteDomens() const {
     FILE *domens = fopen(DomensFile.c_str(), "wb");
-    fprintf(domens, "%lu\r\n", m_Domens.size());
+    fprintf(domens, "%lu\n", m_Domens.size());
     for (size_t k = 0; k < m_Domens.size(); k++)
-        fprintf(domens, "%i;%i;%i;%s;%c;%i;%i;%i;%s\r\n",
+        fprintf(domens, "%i;%i;%i;%s;%c;%i;%i;%i;%s\n",
                 m_Domens[k].DomId,
                 m_Domens[k].ItemsCount,
                 m_Domens[k].DropDownCount,
