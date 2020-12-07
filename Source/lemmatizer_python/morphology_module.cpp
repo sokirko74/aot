@@ -26,7 +26,7 @@ std::string lemmatize_json(std::string word_form, bool allForms) {
     return Holder.LemmatizeJson(word_form.c_str(), allForms, true, true);
 }
 
-bool is_in_dictionary(std::string word_form) {
+    bool is_in_dictionary(std::string word_form) {
     word_form = convert_from_utf8(word_form.c_str(), Holder.m_CurrentLanguage);
     return Holder.IsInDictionary(word_form);
 }
