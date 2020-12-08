@@ -20,10 +20,9 @@ function AddQuery(tr, w1, w2) {
 	q +=  '|| "' + l1 + " " + l2 + '"';
 	q +=  '|| "' + l1 + " " + w2 + '"';
 	q +=  '|| "' + w1 + " " + l2 + '"';
-    q = UnicodeToWin1251(q);
-
+    
     var link  = document.createElement('a');
-    link.href = 'http://www.aot.ru/cgi-bin/search.cgi?CorpusName=server&TemplateFile=..%2Fwwwroot%2Fsearch1.html&MoreButton=еще&Timeout=100&SearchText=' + q;
+    link.href = '/cgi-bin/ddc_search_cgi.py?search_text=' + q;
     link.appendChild(document.createTextNode("context"));
     var td = tr.insertCell();
     td.appendChild(link);

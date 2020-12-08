@@ -1,8 +1,8 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python2.7
 # -*- coding: utf-8 -*-
 
-import sys
-import cgi
+# this script is for Zenon hosting that uses Freebsd and python 2.7
+
 import cgitb
 
 if __name__ == '__main__':

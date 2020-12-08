@@ -49,18 +49,6 @@
                       <td height="1"><img src="images/transparent.gif" width="1" height="1"></td>
                       <td height="1" bgcolor="#000000"><img src="images/transparent.gif" width="1" height="1"></td>
                     </tr>
-
-
-                    <tr> 
-                      <td width="20">&nbsp;</td>
-                      <td width="150">&nbsp;&nbsp;<a href="/onlinedemo.html" class="a">онлайн 
-                        демо</a></td>
-                    </tr>
-
-                    <tr> 
-                      <td width="20" height="1"><img src="images/transparent.gif" width="1" height="1"></td>
-                      <td width="150" height="1" bgcolor="#000000"><img src="images/transparent.gif" width="1" height="1"></td>
-                    </tr>
                     <tr> 
                       <td width="20">&nbsp;</td>
                       <td width="150">&nbsp;&nbsp;<a href="download.php" class="a">скачать</a></td>
@@ -77,26 +65,10 @@
                       <td width="20" height="1"><img src="images/transparent.gif" width="1" height="1"></td>
                       <td width="150" height="1" bgcolor="#000000"><img src="images/transparent.gif" width="1" height="1"></td>
                     </tr>
-
                     <tr> 
                       <td width="20">&nbsp;</td>
-                      <td width="150">&nbsp;&nbsp;<a href="http://www.aot.ru/product.html" class="a">цены</a></td>
-                    </tr>
-                    <tr> 
-                      <td width="20" height="1"><img src="images/transparent.gif" width="1" height="1"></td>
-                      <td width="150" height="1" bgcolor="#000000"><img src="images/transparent.gif" width="1" height="1"></td>
-                    </tr>
-                    <tr> 
-                      <td width="20">&nbsp;</td>
-                      <td width="150" bgcolor="#000000">&nbsp;&nbsp;<a href="/search.html" class="a"><font color="#FFFFFF">поиск</font></a></td>
-                    </tr>
-                    <tr> 
-                      <td width="20" height="1"><img src="images/transparent.gif" width="1" height="1"></td>
-                      <td width="150" height="1" bgcolor="#000000"><img src="images/transparent.gif" width="1" height="1"></td>
-                    </tr>
-                    <tr> 
-                      <td width="20">&nbsp;</td>
-                      <td width="150">&nbsp;&nbsp;<a href="mailto:sokirko@yandex.ru" class="a">контакт</a></td>
+                      <td width="150">&nbsp;&nbsp;<a href="/onlinedemo.html" class="a">онлайн 
+                        демо</a></td>
                     </tr>
                     <tr> 
                       <td width="20" height="1"><img src="images/transparent.gif" width="1" height="1"></td>
@@ -110,41 +82,27 @@
 <p>&nbsp;</p>
                         <table width="540" border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                            <td class="titleblack">Поиск</td>
+                            <td class="titleblack">Поиск по библиотеке Мошкова <font size=small> (версия 2006 года, 844 млн. токенов) </font></td>
                             <td align="right"><a href="#top" class="titleblack" title="наверх">^</a></td>
                           </tr>
                         </table>
                         <br>
                         <br>
                                                 
-                        <table width="540" border="0" cellspacing="0" cellpadding="3">
 
-                          <form method="POST" action="../cgi-bin/ddc_search">
-                            <tr>
-                              <td class="textsmall">Строка поиска:</td>
-                            </tr>
-                            <tr>
-                              <td><input type="text" name = SearchText value=""  size="36">
-                                <input type="submit" action="cgi-bin/ddc_search" method="post" value="Искать" name="B1">
-                                <a  href="/concor.html">Помощь</a></td>
-                            </tr>
-                            <tr>
-							<input type="hidden" name="TemplateFile" value = "../wwwroot/search.html" >	
+<table width="540" border="0" cellspacing="0" cellpadding="3">
 
-                              <td class="textsmall">Место поиска:</td>
-                            </tr>
-                            <tr>
-                              <td>
-				<input type="radio" value= DialingDocsCorpora  checked name="CorpusName"> Site 
-                                <input type="hidden" name="LastHitNo" value = $HitNo0 >
-                              <input type="hidden" name="LastQuery" value = $LastQuery > 
-			             <br><br>
-                              <!--ResultText-->
-			     </td>
-                            </tr>
-                          </form>
+<form method="POST" action="../cgi-bin/ddc_search_cgi.py">
+	<tr> <input type="text"  size="36" name="search_text"> &nbsp;
+         <input type="submit" value="Search" name="New"> &nbsp;
+         <a  href="/concor.html">Помощь</a>
+	</tr>
+	<tr>
+	<!--result_text-->
+	</tr>
+</form>
+</table>
 
-                        </table>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p></td>
                     </tr>
@@ -155,7 +113,7 @@
                 <td valign="bottom">&nbsp;</td>
                 <td align="right" valign="bottom"><table border="0" cellspacing="5" cellpadding="0">
                     <tr> 
-                      <td align="right"><font color="#999999" size="1">Разработка 
+                      <td align="right"><font color="#999999" size="1">Дизайн 
                         <a href="mailto:simple@mosk.ru"><font color="#999999">DiP</font></a>.<br>
                         &copy; 2003 <a href="http://www.aot.ru/"><font color="#999999">АОТ</font></a>. 
                         Все права защищены.</font></td>
