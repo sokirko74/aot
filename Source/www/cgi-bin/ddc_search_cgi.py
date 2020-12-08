@@ -17,6 +17,8 @@ DDC_CORPUS_NAME = "server"
 DDC_TEXT_ENCODING = 'windows-1251'
 HITS_PER_PAGE = 10
 TEMPLATE_FILE = os.path.join(os.path.dirname(__file__), "../wwwroot/search_ddc.html")
+if not os.path.exists(TEMPLATE_FILE):
+    TEMPLATE_FILE = os.path.join(os.path.dirname(__file__), "../www/search_ddc.html")
 SELF_WEB_LINK = "/cgi-bin/" + os.path.basename(__file__)
 
 def print_error(err):

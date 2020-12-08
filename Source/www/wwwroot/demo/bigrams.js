@@ -20,7 +20,7 @@ function AddQuery(tr, w1, w2) {
 	q +=  '|| "' + l1 + " " + l2 + '"';
 	q +=  '|| "' + l1 + " " + w2 + '"';
 	q +=  '|| "' + w1 + " " + l2 + '"';
-    
+
     var link  = document.createElement('a');
     link.href = '/cgi-bin/ddc_search_cgi.py?search_text=' + q;
     link.appendChild(document.createTextNode("context"));
