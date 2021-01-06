@@ -18,7 +18,6 @@
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
 #ifdef _WIN32
 LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
-#pragma code_page(1251)
 #endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
@@ -173,7 +172,7 @@ END
 
 IDD_TOOL_DELANC DIALOG  0, 0, 186, 95
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Удалить анкод для списка лемм"
+CAPTION "Delete ancobe for lemm list"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "Proceed",IDOK,64,74,50,14
@@ -372,7 +371,7 @@ END
 // RT_MANIFEST
 //
 
-IDR_MANIFEST            RT_MANIFEST             "res\\Morphwizard.manifest"
+//IDR_MANIFEST            RT_MANIFEST             "res\\Morphwizard.manifest"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -503,15 +502,6 @@ END
 
 
 /////////////////////////////////////////////////////////////////////////////
-// German (Germany) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
-#ifdef _WIN32
-LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
-#pragma code_page(1252)
-#endif //_WIN32
-
-/////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
 //
@@ -569,18 +559,7 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // German (Germany) resources
-/////////////////////////////////////////////////////////////////////////////
 
-
-/////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -716,10 +695,6 @@ BEGIN
     VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
 END
 
-#endif    // English (U.S.) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
 
 #ifndef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -732,8 +707,8 @@ END
 #define _AFX_NO_PROPERTY_RESOURCES
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-LANGUAGE 25, 1
-#pragma code_page(1251)
+//LANGUAGE 25, 1
+//#pragma code_page(1251)
 #include "res\Morphwizard.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"         // Standard components
 #endif
