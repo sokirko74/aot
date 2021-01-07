@@ -579,7 +579,7 @@ BEGIN
 
     // second line
     CONTROL         "lemma",IDC_RFIND_LEM,"Button",BS_AUTORADIOBUTTON | WS_GROUP,47,47,37,10
-    CONTROL         "grammem",IDC_RFIND_GRM,"Button",BS_AUTORADIOBUTTON,90, 47,44,10
+    CONTROL         "pos+grammem",IDC_RFIND_GRM,"Button",BS_AUTORADIOBUTTON,90,47,54,10
     CONTROL         "user", IDC_FIND_BY_USERNAME, "Button", BS_AUTORADIOBUTTON, 140, 47, 27, 9
     CONTROL         "word form",IDC_WORD_FORM,"Button",BS_AUTORADIOBUTTON, 73,47,45,10
     CONTROL         "gramcode",IDC_FIND_BY_GRAMCODE,"Button", BS_AUTORADIOBUTTON,224,47,45,9

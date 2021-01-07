@@ -122,6 +122,7 @@
 #define IDC_MIN_FREQ_STATIC             1081
 #define IDC_SUF_STATIC				    1082
 #define IDC_SUF_EDIT                    1083
+#define IDC_TOOL_TIP                    1084
 
 #define ID_FIND_PARADIGM                32772
 #define ID_SAVE_LIST_FILE               32774

@@ -23,7 +23,6 @@ DlgLogin.cpp
 FileEditCtrl.cpp
 GriIni.cpp
 InputBox.cpp
-ListCtrlToolTip.cpp
 MDITabs.cpp
 MainFrm.cpp
 Morphwizard.cpp
@@ -36,8 +35,8 @@ SLFDocument.cpp
 SLFView.cpp
 SyntaxColorizer.cpp
 stdafx.cpp
-tooltip2.cpp
 Morphwizard.rc
+QueryHistory.cpp
 )
 
 

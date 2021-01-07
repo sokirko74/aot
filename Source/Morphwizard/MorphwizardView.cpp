@@ -158,65 +158,6 @@ CMorphwizardDoc* CMorphwizardView::GetDocument() const {
 #endif //_DEBUG
 
 
-const int HISTORY_SIZE=10;
-const int PROFILE_SECTION_LENGTH = 10000;
-const TCHAR PROFILE_PATH[] = _T("morphwizard.ini");
-
-void CMorphwizardView::LoadHistory()
-{
-	CString strProfileString;
-	CString strKey;
-	TCHAR strSection[PROFILE_SECTION_LENGTH];
-	int iLen = ::GetPrivateProfileSection(_T("History"), strSection, PROFILE_SECTION_LENGTH, PROFILE_PATH);
-	if (iLen != 0)
-	{
-		int iSeparatorPos = 0;
-		int iPos = 0;
-		while(iPos < iLen)
-		{
-			strProfileString = CString(strSection + iPos);
-			iSeparatorPos = strProfileString.Find('=');
-			ASSERT(iSeparatorPos != -1);
-			strKey = strProfileString.Left(iSeparatorPos);
-			m_LastQueries.push_back(strKey);
-			iPos += strProfileString.GetLength() + 1;
-		}
-	}
-}
-
-void CMorphwizardView::SaveHistory()
-{
-	::WritePrivateProfileSection(_T("History"), _T(""), PROFILE_PATH);
-
-	std::list<CString>::iterator pos = m_LastQueries.begin();
-	int i = 1;
-	while(pos != m_LastQueries.end())
-	{
-		CString strKey;
-		strKey.Format(_T("Query%d"), i);
-		CString strVal = *pos;
-		if (!::WritePrivateProfileString(_T("History"), strVal, strKey, PROFILE_PATH))
-			break;
-		pos++;
-		i++;
-	}
-}
-
-void CMorphwizardView::ChangeHistory(CString query)
-{
-	if (!m_LastQueries.empty())
-		if (m_LastQueries.front() == query)
-			return;
-
-	m_LastQueries.push_front(query);
-	if (m_LastQueries.size() > HISTORY_SIZE)
-		m_LastQueries.pop_back();	
-	UpdateData(FALSE);
-}
-
-
-
-
 const size_t PredictGrammemsColumn = 0;
 const size_t PredictTypeDictColumn = 1;
 const size_t PredictLemmaColumn = 2;
@@ -287,8 +228,6 @@ void CMorphwizardView::OnInitialUpdate()
 
 	m_MinimalFrequence = 2;
 	m_bOnlyMainPartOfSpeeches = TRUE;
-
-
 	UpdateData(FALSE);
 	
 }
@@ -344,7 +283,7 @@ void CMorphwizardView::FilterFoundParadigms()
 
 void CMorphwizardView::ShowFoundParadigms() 
 {
-	m_FoundList.clear();
+	m_FoundList.DeleteAllItems();
 	
 	for( int i=0; i<found_paradigms.size(); i++ )
 	{
@@ -365,10 +304,6 @@ void CMorphwizardView::ShowFoundParadigms()
 			
 		s = GetWizard()->get_common_grammems_string(found_paradigms[i]);
 		m_FoundList.SetItemText(i, FindTypeGrammemsColumn, FromInnerEncoding(s));
-
-		std::string comments = GetWizard()->m_FlexiaModels[FlexiaModelNo].m_Comments;
-		m_FoundList.m_ToolTips.push_back(FromInnerEncoding(comments));
-
 	}
 
 	char ch[1024];
@@ -388,6 +323,7 @@ void CMorphwizardView::OnFind()
 		m_FindWhat.GetWindowText(find_what);
 		if (find_what == "") return;
 		ChangeHistory(find_what);
+		UpdateData(FALSE);
 		std::string find_what_rml = ToInnerEncoding(find_what);
 
 		CWizardProgressMeter meter(*GetWizard());
@@ -554,7 +490,7 @@ void CMorphwizardView::OnPredict()
 		m_FoundList.DeleteAllItems();
 		std::vector<lemma_iterator_t> curr_found_paradigms;
 
-		m_PredictedList.clear();
+		m_PredictedList.DeleteAllItems();
 
 		CString predict_what;
 		CString prefix;
@@ -601,7 +537,6 @@ void CMorphwizardView::OnPredict()
 			m_PredictedList.SetItemText(i, PredictIndexColumnNo, IntToStr(ind));
 			m_PredictedList.SetItemText(i, PredictParadigmColumnNo, IntToStr(S.m_FlexiaModelNo));
 			m_PredictedList.SetItemText(i, PredictLemmaPrefixColumnNo,  FromInnerEncoding(S.m_PrefixSetStr));
-			m_PredictedList.m_ToolTips.push_back(FromInnerEncoding(P.m_Comments));
 		}
 		OnFind();
 		m_PredictWhat.SetFocus();

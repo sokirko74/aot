@@ -1,14 +1,8 @@
-// MorphwizardView.h : interface of the CMorphwizardView class
-//
-
-#ifndef AFX_MORHWIZARDVIEW
-#define AFX_MORHWIZARDVIEW
-
+#pragma once
 
 #include "afxcmn.h"
 #include "afxwin.h"
-#include "list"
-#include "ListCtrlToolTip.h"
+#include "QueryHistory.h"
 
 #define WM_NEXT_NONACCENTED_PARA (WM_USER + 1)
 
@@ -19,7 +13,7 @@ class CMorphwizardDoc;
 
 
 //----------------------------------------------------------------------------
-class CMorphwizardView : public CFormView
+class CMorphwizardView : public CFormView, public CQueryHistory
 {
 
 	std::vector<lemma_iterator_t> found_paradigms;
@@ -28,15 +22,12 @@ class CMorphwizardView : public CFormView
 	bool			m_inFilter;
 	HICON			m_hIcon;
 	int				m_ControlMargin;
-	std::list<CString>	m_LastQueries;
+	
 
 
 	void	ShowFoundParadigms();
 	void	FilterFoundParadigms();
 	int		GetPredictOrderId(const CPredictSuffix& S)  const;
-	void	LoadHistory();
-	void	SaveHistory();
-	void	ChangeHistory(CString query);
 	int		PlaceSimpleControl(int id, int x, int y);
 
 protected: // create from serialization only
@@ -53,8 +44,6 @@ public:
 	void echo(CString s);
 	CMenu   m_Menu;
 	
-	
-
 	CMorphwizardDoc* GetDocument() const;
 	MorphoWizard* GetWizard();
 	CSLFDocument* NewSLFDocument ();
@@ -63,8 +52,8 @@ public:
 public:
 	enum { IDD = IDD_MORHWIZARD_VIEW };
 	CComboBox			m_FindWhat;
-	CListCtrlToolTip	m_FoundList;
-	CListCtrlToolTip	m_PredictedList;
+	CListCtrl			m_FoundList;
+	CListCtrl			m_PredictedList;
 	CEdit				m_PredictWhat;
 	CEdit				m_StatusCtrl;
 	CString				m_Status;
@@ -154,7 +143,4 @@ inline CMorphwizardDoc* CMorphwizardView::GetDocument() const
    { return reinterpret_cast<CMorphwizardDoc*>(m_pDocument); }
 
 #endif
-
-
-#endif //AFX_MORHWIZARDVIEW
 
