@@ -43,11 +43,11 @@ END_MESSAGE_MAP()
 // CInputBox message handlers
 
 
-bool InputBox (const char* Caption, std::string& OutBuffer)
+bool InputBox (CString Caption, CString& OutBuffer)
 {
 	CInputBox* C =  new CInputBox(0);
 	C->m_Caption = Caption; 
-	C->m_Edit = OutBuffer.c_str();
+	C->m_Edit = OutBuffer;
 	bool bResult = (C->DoModal() == IDOK);
 	OutBuffer = C->m_Edit;
 	delete C;

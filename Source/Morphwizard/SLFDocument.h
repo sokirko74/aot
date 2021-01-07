@@ -39,8 +39,8 @@ public:
 	virtual BOOL DoFileSave();
 	virtual void OnCloseDocument( );
 	CSLFView* GetSLFView();
-	CString GetSavedLemma();
-	CString GetLemma() const;
+	std::string GetSavedLemma();
+	std::string GetLemma() const;
 	std::string	GetBase()  const;
 	BOOL	OpenDiffDialog ();
 	BOOL	OpenParadigm( bool runAccentWizard=false );

@@ -1,5 +1,3 @@
-// Morphwizard.cpp : Defines the class behaviors for the application.
-//
 
 #include "stdafx.h"
 #include "Morphwizard.h"
@@ -177,8 +175,8 @@ void CMorphwizardApp::OnAppAbout()
 void CMorphwizardApp::AddToRecentFileList(LPCTSTR lpszPathName)
 {
 	
-	std::string q = lpszPathName;
-	if (q.find("mwz") == std::string::npos)
+	CString q = lpszPathName;
+	if (q.Find(_T("mwz")) == -1)
 		return;
 
 	CWinApp::AddToRecentFileList(lpszPathName);

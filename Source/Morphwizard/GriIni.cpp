@@ -45,7 +45,7 @@ BOOL CGriIni::Init(CWnd *pWnd)
 	sy = (GetSystemMetrics(SM_CYSCREEN) - dy)/2;
 //
 	if( !CWnd::CreateEx(WS_EX_TOOLWINDOW,
-		AfxRegisterWndClass(0),"",WS_POPUP,
+		AfxRegisterWndClass(0),_T(""),WS_POPUP,
 		sx,sy,dx,dy,
 		pWnd->GetSafeHwnd(),NULL,NULL) )
 	{

@@ -55,7 +55,7 @@ BOOL CMorphwizardDoc::DoFileSave()
 {
 	if (GetWizard()->m_ReadOnly)
 	{
-		AfxMessageBox ("Wizard is readonly, cannot be saved");
+		AfxMessageBox (_T("Wizard is readonly, cannot be saved"));
 		return TRUE;
 	};
 	
@@ -67,7 +67,7 @@ BOOL CMorphwizardDoc::DoFileSave()
 	}
 	catch(CExpc e)
 	{
-		AfxMessageBox(e.m_strCause.c_str());
+		AfxMessageBox(GetWizard()->FromRMLEncoding (e.m_strCause).c_str());
 		return FALSE;
 	}
 	return TRUE;
@@ -92,7 +92,9 @@ void CMorphwizardDoc::Serialize(CArchive& ar)
 		CGriIni cIni;
 		cIni.Init();
 		CWizardProgressMeter meter(m_Wizard);
-		GetWizard()->load_wizard(ar.GetFile()->GetFilePath(), dlgLogin.m_name);
+		GetWizard()->load_wizard(
+			utf16_to_utf8((const TCHAR *)ar.GetFile()->GetFilePath()).c_str(), 
+			utf16_to_utf8((const TCHAR*)dlgLogin.m_name).c_str());
 		SetInputLanguage(GetWizard()->m_Language);
 		cIni.Exit();
 	}
@@ -212,7 +214,7 @@ BOOL CMorphwizardDoc::SaveModified()
 		{
 			m_slfDocs.GetNextAssoc(pos,doc,doc1);
 			if( doc->IsModified() )
-				s += doc->GetLemma() + ",\n";
+				s += CString(m_Wizard.FromRMLEncoding(doc->GetLemma()).c_str()) + _T(",\n");
 		}
 	}
 

@@ -39,9 +39,9 @@ const MorphoWizard*	CSLFDocument::GetWizard() const
 	return m_pParent->GetWizard();
 };
 //----------------------------------------------------------------------------
-CString CSLFDocument::GetSavedLemma() 
+std::string CSLFDocument::GetSavedLemma() 
 {
-	StringTokenizer t (m_SaveParadigmText," ");
+	StringTokenizer t (m_pParent->ToInnerEncoding(m_SaveParadigmText).c_str()," ");
 	
 	if (t())
 	{
@@ -53,9 +53,9 @@ CString CSLFDocument::GetSavedLemma()
 }
 
 //----------------------------------------------------------------------------
-CString CSLFDocument::GetLemma() const
+std::string CSLFDocument::GetLemma() const
 {
-	StringTokenizer t (m_ParadigmText," ");
+	StringTokenizer t (m_pParent->ToInnerEncoding(m_ParadigmText).c_str(), " ");
 
 	if (t())
 	{
@@ -67,14 +67,14 @@ CString CSLFDocument::GetLemma() const
 
 		RmlMakeUpper(Lemma, GetWizard()->m_Language);
 
-		return Lemma.c_str();
+		return Lemma;
 	}
 	return "";
 }
 
 std::string CSLFDocument::GetBase()  const 
 {
-	std::string Lemma = (const char*)GetLemma();
+	std::string Lemma = GetLemma();
 	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
 	{
 		const CFlexiaModel &old_par = GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo];
@@ -123,7 +123,7 @@ BOOL CSLFDocument::IsModified()
 	// while an editor for this  lemma is still open. In this case we should  say to the user
 	// that this paradigm "was modified" and propose to insert it into the dictionary.
 	std::vector<lemma_iterator_t> res;
-	GetWizard()->find_lemm((const char*)GetSavedLemma(), false, res);
+	GetWizard()->find_lemm(GetSavedLemma(), false, res);
 	for (size_t i=0; i<res.size(); i++)
 		if (res[i]->second == m_SaveParadigm)
 			return FALSE;
@@ -142,8 +142,8 @@ BOOL CSLFDocument::SaveModified()
 	if (!m_ParadigmText.IsEmpty())
 	try
     {
-		std::string slf  = (const char*)m_ParadigmText;
-		std::string common_grammems  = (const char*)m_CommonGrammems;
+		std::string slf  = m_pParent->ToInnerEncoding(m_ParadigmText);
+		std::string common_grammems  = m_pParent->ToInnerEncoding(m_CommonGrammems);
 		
 		std::string lemm;
 
@@ -156,7 +156,7 @@ BOOL CSLFDocument::SaveModified()
 			if (!GetWizard()->check_common_grammems(common_grammems))
 				throw CExpc("Bad type grammems");
 
-			if (!GetWizard()->check_prefixes((const char*)m_Prefixes))
+			if (!GetWizard()->check_prefixes(m_pParent->ToInnerEncoding(m_Prefixes)))
 				throw CExpc("Bad prefixes");
 
 		}
@@ -166,7 +166,7 @@ BOOL CSLFDocument::SaveModified()
 		if (!m_SaveParadigmText.IsEmpty())
 		{
 			std::vector<lemma_iterator_t> res;
-			GetWizard()->find_lemm((const char*)GetSavedLemma(), false, res);
+			GetWizard()->find_lemm(GetSavedLemma(), false, res);
 			for (size_t i=0; i<res.size(); i++)
 				if (res[i]->second == m_SaveParadigm)
 				{
@@ -177,13 +177,20 @@ BOOL CSLFDocument::SaveModified()
 
 
 		// writing
-		m_Paradigm = GetWizard()->add_lemma((const char*)m_ParadigmText, (const char*)m_CommonGrammems, (const char*)m_Prefixes, m_GotoLine);
+		std::string paradigm = m_pParent->ToInnerEncoding(m_ParadigmText);
+		m_Paradigm = GetWizard()->add_lemma(
+			paradigm, 
+			m_pParent->ToInnerEncoding(m_CommonGrammems), 
+			m_pParent->ToInnerEncoding(m_Prefixes), 
+			m_GotoLine);
 
 		update_saved_paradigm(); //  [4/Dec/2003]
 	}
 	catch(CExpc& e)
 	{
-		switch (AfxMessageBox (Format("%s at line %i\nExit without save?", e.m_strCause.c_str(), m_GotoLine  ).c_str(), MB_OKCANCEL) )
+		auto mess = Format("%s at line %i\nExit without save?", e.m_strCause.c_str(), m_GotoLine);
+
+		switch (AfxMessageBox (GetWizard()->FromRMLEncoding(mess).c_str(), MB_OKCANCEL) )
 		{
 		   case IDCANCEL:return FALSE;  	  	   
 		   case IDOK: return TRUE;
@@ -218,10 +225,10 @@ void CSLFDocument::update_saved_paradigm()
 	m_SaveCommonGrammems = m_CommonGrammems;	
 	m_SavePrefixes = m_Prefixes;	
 	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
-		m_ParadigmComments = GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo].m_Comments.c_str();	
+		m_ParadigmComments = GetWizard()->FromRMLEncoding(GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo].m_Comments).c_str();
 
 	if (m_ParadigmText.GetLength() > 0)
-		SetPathName(GetSavedLemma());
+		SetPathName(GetWizard()->FromRMLEncoding(GetSavedLemma()).c_str());
 }
 
 //----------------------------------------------------------------------------
@@ -241,7 +248,7 @@ BOOL CSLFDocument::OpenParadigm( bool runAccentWizard )
 
 	ASSERT_VALID(pFrame);
 
-	SetPathName("new paradigm");
+	SetPathName(_T("new paradigm"));
 
 	update_saved_paradigm(); // Nick [4/Dec/2003]
 
@@ -279,7 +286,7 @@ BOOL CSLFDocument::OpenDiffDialog ()
 		return FALSE;
 	}
 	ASSERT_VALID(pFrame);
-	SetPathName("Diff dialog");
+	SetPathName(_T("Diff dialog"));
 	GetDocTemplate()->InitialUpdateFrame(pFrame, this, TRUE);
 	
 	if( !pFrame->IsZoomed() ) 
@@ -323,7 +330,7 @@ BOOL CSLFDocument::CanCloseFrame(CFrameWnd* pFrame)
 		view->UpdateData();
 		if( IsModified() )
 		{
-			if (AfxMessageBox ("Exit without save?", MB_OKCANCEL) == IDCANCEL)
+			if (AfxMessageBox (_T("Exit without save?"), MB_OKCANCEL) == IDCANCEL)
 				return FALSE;        
 		}
 		return TRUE;

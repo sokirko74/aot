@@ -2,8 +2,16 @@ declare_cmake_min_version()
 
 project(Morphwizard)
 
-add_definitions(-D_AFXDLL)
-set(CMAKE_MFC_FLAG 2)
+
+
+# MFC compiled shared
+set(CMAKE_MFC_FLAG 2) 
+
+add_link_options(/ENTRY:wWinMainCRTStartup) 
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /utf-8 /D _AFXDLL /D _UNICODE /D UNICODE " )
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /utf-8 /D _AFXDLL /D _UNICODE /D UNICODE" )
+message("CMAKE_CXX_FLAGS_DEBUG = ${CMAKE_CXX_FLAGS_DEBUG}")
 
 add_executable (${PROJECT_NAME} WIN32
 AccentWizardDlg.cpp
@@ -26,7 +34,6 @@ ParadigmDifferences.cpp
 ProgressBar.cpp
 SLFDocument.cpp
 SLFView.cpp
-SizeFormView.cpp
 SyntaxColorizer.cpp
 stdafx.cpp
 tooltip2.cpp

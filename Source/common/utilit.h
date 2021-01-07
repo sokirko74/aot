@@ -7,12 +7,6 @@
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
-#ifdef WIN32
-	//#define NOMINMAX 
-	//#include "windows.h"
-	//#include "winuser.h"
-#endif
-
 #include  "single_byte_encoding.h"
 
 #include  <assert.h>
@@ -219,6 +213,8 @@ extern std::string&  EngRusMakeUpper (std::string& word);
 extern char*  EngRusMakeUpper (char* word);
 std::string convert_from_utf8(const char *utf8str, const MorphLanguageEnum langua);
 std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum langua);
+std::wstring utf8_to_utf16(const std::string& str);
+std::string utf16_to_utf8(const std::wstring& str);
 
 
 

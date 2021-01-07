@@ -25,7 +25,6 @@ private:
 	bool	m_redrawInProcess;
 	void	SetAccentFromThisLineToTheEndofParadigm();
 	void	SetAccentByIndex(int ind);
-	UINT	GetCodePage() const; 
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);

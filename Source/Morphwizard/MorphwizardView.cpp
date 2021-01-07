@@ -12,10 +12,7 @@
 
 #include "ProgressBar.h"
 #include "AccentWizardDlg.h"
-
-#ifdef DETECT_MEMORY_LEAK
-#define new DEBUG_NEW
-#endif
+#include "InputBox.h"
 
 //----------------------------------------------------------------------------
 CDocTemplate* GetTemplate( CString Name )
@@ -40,9 +37,9 @@ CDocTemplate* GetTemplate( CString Name )
 // CMorphwizardView
 //----------------------------------------------------------------------------
 
-IMPLEMENT_DYNCREATE(CMorphwizardView, CSizeFormView)
+IMPLEMENT_DYNCREATE(CMorphwizardView, CFormView)
 
-BEGIN_MESSAGE_MAP(CMorphwizardView, CSizeFormView)
+BEGIN_MESSAGE_MAP(CMorphwizardView, CFormView)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_FIND, OnFind)
 	ON_BN_CLICKED(IDC_REMOVE, OnRemove)
@@ -82,33 +79,29 @@ BEGIN_MESSAGE_MAP(CMorphwizardView, CSizeFormView)
 	ON_MESSAGE(WM_NEXT_NONACCENTED_PARA, OnNextNonAccentedPara)
 	ON_UPDATE_COMMAND_UI(ID_TOOLS_SAVE_LIST_FILE, OnUpdateToolsSaveListFile)
 	ON_BN_CLICKED(IDC_SET_PRD_COMMENTS, OnBnClickedSetPrdComments)
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 void CMorphwizardView::DoDataExchange(CDataExchange* pDX)
 {
 	CView::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CMorphwizardView)
 	DDX_Control(pDX, IDC_PREDICTED_LIST, m_PredictedList);
 	DDX_Control(pDX, IDC_PREDICT_WHAT, m_PredictWhat);
 	DDX_Control(pDX, IDC_FIND_WHAT, m_FindWhat);
 	DDX_Control(pDX, IDC_STATUS, m_StatusCtrl);
 	DDX_Text(pDX, IDC_STATUS, m_Status);
-
-	//}}AFX_DATA_MAP
 	DDX_Text(pDX, IDC_MINIMAL_FREQUENCE, m_MinimalFrequence);
 	DDX_Check(pDX, IDC_ONLY_MAIN_PART_OF_SPEECHES, m_bOnlyMainPartOfSpeeches);
 	DDX_Control(pDX, IDC_FOUND_LIST2, m_FoundList);
-
-
-	DDX_Text(pDX, IDC_EDIT1, m_PredictSuffLength);
+	DDX_Text(pDX, IDC_SUF_EDIT, m_PredictSuffLength);
 	DDV_MinMaxInt(pDX, m_PredictSuffLength, 2, 5);
 
 	//  init history
 	m_FindWhat.ResetContent();
-	std::list<std::string>::iterator pos = m_LastQueries.begin();
+	std::list<CString>::iterator pos = m_LastQueries.begin();
 	while (pos != m_LastQueries.end())
 	{
-			m_FindWhat.AddString(pos->c_str());
+			m_FindWhat.AddString(*pos);
 			pos++;
 	}
 	m_FindWhat.SetCurSel(0);
@@ -116,13 +109,12 @@ void CMorphwizardView::DoDataExchange(CDataExchange* pDX)
 
 }
 
-//----------------------------------------------------------------------------
-CMorphwizardView::CMorphwizardView() :
- CSizeFormView(CMorphwizardView::IDD)
+CMorphwizardView::CMorphwizardView() :CFormView(CMorphwizardView::IDD)
 	 , m_PredictSuffLength(2)
 {
 	 m_SortPredictColumn = -1;
 	 LoadHistory();
+	 m_ControlMargin = 10;
 }
 
 CMorphwizardView::~CMorphwizardView()
@@ -135,10 +127,6 @@ MorphoWizard* CMorphwizardView::GetWizard()
 	return  &(GetDocument()->m_Wizard);
 };
 
-BOOL CMorphwizardView::PreCreateWindow(CREATESTRUCT& cs)
-{
-	return CSizeFormView::PreCreateWindow(cs);
-}
 
 // CMorphwizardView drawing
 
@@ -162,8 +150,8 @@ void CMorphwizardView::Dump(CDumpContext& dc) const
 	CView::Dump(dc);
 }
 
-CMorphwizardDoc* CMorphwizardView::GetDocument() const // non-debug version is inline
-{
+CMorphwizardDoc* CMorphwizardView::GetDocument() const {
+	// non-debug version is inline
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CMorphwizardDoc)));
 	return (CMorphwizardDoc*)m_pDocument;
 }
@@ -172,14 +160,14 @@ CMorphwizardDoc* CMorphwizardView::GetDocument() const // non-debug version is i
 
 const int HISTORY_SIZE=10;
 const int PROFILE_SECTION_LENGTH = 10000;
-const char PROFILE_PATH[] = "morphwizard.ini";
+const TCHAR PROFILE_PATH[] = _T("morphwizard.ini");
 
 void CMorphwizardView::LoadHistory()
 {
 	CString strProfileString;
 	CString strKey;
-	char strSection[PROFILE_SECTION_LENGTH];
-	int iLen = ::GetPrivateProfileSection("History", strSection, PROFILE_SECTION_LENGTH, PROFILE_PATH);
+	TCHAR strSection[PROFILE_SECTION_LENGTH];
+	int iLen = ::GetPrivateProfileSection(_T("History"), strSection, PROFILE_SECTION_LENGTH, PROFILE_PATH);
 	if (iLen != 0)
 	{
 		int iSeparatorPos = 0;
@@ -190,7 +178,7 @@ void CMorphwizardView::LoadHistory()
 			iSeparatorPos = strProfileString.Find('=');
 			ASSERT(iSeparatorPos != -1);
 			strKey = strProfileString.Left(iSeparatorPos);
-			m_LastQueries.push_back((const char*)strKey);
+			m_LastQueries.push_back(strKey);
 			iPos += strProfileString.GetLength() + 1;
 		}
 	}
@@ -198,23 +186,23 @@ void CMorphwizardView::LoadHistory()
 
 void CMorphwizardView::SaveHistory()
 {
-	::WritePrivateProfileSection("History", "", PROFILE_PATH);
+	::WritePrivateProfileSection(_T("History"), _T(""), PROFILE_PATH);
 
-	std::list<std::string>::iterator pos = m_LastQueries.begin();
+	std::list<CString>::iterator pos = m_LastQueries.begin();
 	int i = 1;
 	while(pos != m_LastQueries.end())
 	{
 		CString strKey;
-		strKey.Format("Query%d", i);
-		CString strVal = pos->c_str();
-		if (!::WritePrivateProfileString("History", strVal, strKey, PROFILE_PATH))
+		strKey.Format(_T("Query%d"), i);
+		CString strVal = *pos;
+		if (!::WritePrivateProfileString(_T("History"), strVal, strKey, PROFILE_PATH))
 			break;
 		pos++;
 		i++;
 	}
 }
 
-void CMorphwizardView::ChangeHistory(std::string query)
+void CMorphwizardView::ChangeHistory(CString query)
 {
 	if (!m_LastQueries.empty())
 		if (m_LastQueries.front() == query)
@@ -247,7 +235,7 @@ const size_t FindTypeGrammemsColumn = 3;
 
 void CMorphwizardView::OnInitialUpdate() 
 {
-	CSizeFormView::OnInitialUpdate(); 
+	CFormView::OnInitialUpdate(); 
 
 	// sizing 
 	int GlobalX = ::GetSystemMetrics(SM_CXSCREEN);
@@ -257,22 +245,20 @@ void CMorphwizardView::OnInitialUpdate()
 	GetParent()->SetWindowPos(NULL, (GlobalX-DlgWidth)/2, (GlobalY-DlgHeight)/2-60, DlgWidth, DlgHeight, SWP_SHOWWINDOW|SWP_NOZORDER);
 	GetParent()->ShowWindow(SW_MAXIMIZE); // Nick [12/Dec/2003]
 	
-	m_PredictedList.InsertColumn(PredictGrammemsColumn,"Grammems",LVCFMT_LEFT, 90);
-	m_PredictedList.InsertColumn(PredictTypeDictColumn,"Type",LVCFMT_LEFT, 35);
-	m_PredictedList.InsertColumn(PredictLemmaColumn,"Source lemma",LVCFMT_LEFT, 90);
-	m_PredictedList.InsertColumn(PredictFreqColumnNo,"Freq",LVCFMT_LEFT, 50);
-	m_PredictedList.InsertColumn(PredictIndexColumnNo,"Innernumber", LVCFMT_LEFT, 0);
-	m_PredictedList.InsertColumn(PredictParadigmColumnNo,"ParadigmNo", LVCFMT_LEFT, 50);
-	m_PredictedList.InsertColumn(PredictLemmaPrefixColumnNo,"Prefix", LVCFMT_LEFT, 50);
+	m_PredictedList.InsertColumn(PredictGrammemsColumn,_T("Grammems"),LVCFMT_LEFT, 90);
+	m_PredictedList.InsertColumn(PredictTypeDictColumn,_T("Type"),LVCFMT_LEFT, 35);
+	m_PredictedList.InsertColumn(PredictLemmaColumn,_T("Source lemma"),LVCFMT_LEFT, 90);
+	m_PredictedList.InsertColumn(PredictFreqColumnNo,_T("Freq"),LVCFMT_LEFT, 50);
+	m_PredictedList.InsertColumn(PredictIndexColumnNo,_T("Innernumber"), LVCFMT_LEFT, 0);
+	m_PredictedList.InsertColumn(PredictParadigmColumnNo, _T("ParadigmNo"), LVCFMT_LEFT, 50);
+	m_PredictedList.InsertColumn(PredictLemmaPrefixColumnNo, _T("Prefix"), LVCFMT_LEFT, 50);
 	m_PredictedList.SetExtendedStyle(LVS_EX_FULLROWSELECT);  
 
-	m_FoundList.InsertColumn(FindParadigmColumnNo,"ParadigmNo",LVCFMT_LEFT, 50);
-	m_FoundList.InsertColumn(FindLemmaColumn,"Lemma",LVCFMT_LEFT, 130);
-	m_FoundList.InsertColumn(FindGrammemsColumn,"Grammems",LVCFMT_LEFT, 210);
-	m_FoundList.InsertColumn(FindTypeGrammemsColumn,"Type",LVCFMT_LEFT, 210);
+	m_FoundList.InsertColumn(FindParadigmColumnNo,_T("ParadigmNo"),LVCFMT_LEFT, 50);
+	m_FoundList.InsertColumn(FindLemmaColumn, _T("Lemma"),LVCFMT_LEFT, 130);
+	m_FoundList.InsertColumn(FindGrammemsColumn, _T("Grammems"),LVCFMT_LEFT, 210);
+	m_FoundList.InsertColumn(FindTypeGrammemsColumn, _T("Type"),LVCFMT_LEFT, 210);
 	m_FoundList.SetExtendedStyle(LVS_EX_FULLROWSELECT);  
-	//m_FoundList.AddTip(0, "Tip1");
-	//m_FoundList.AddTip(1, "Tip2");
 
 	
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
@@ -298,12 +284,6 @@ void CMorphwizardView::OnInitialUpdate()
 	{
 		GetDescendantWindow(IDC_READONLY_IMAGE)->ShowWindow(SW_HIDE);
 	}
-	else
-	{
-		//GetDlgItem(IDC_REMOVE)->ShowWindow(SW_HIDE);
-		//GetDlgItem(IDC_ADD)->ShowWindow(SW_HIDE);
-		//GetDlgItem(IDC_EDIT)->SetWindowText("VIEW");
-	}
 
 	m_MinimalFrequence = 2;
 	m_bOnlyMainPartOfSpeeches = TRUE;
@@ -311,8 +291,6 @@ void CMorphwizardView::OnInitialUpdate()
 
 	UpdateData(FALSE);
 	
-//	CMorphwizardApp* App = (CMorphwizardApp*)AfxGetApp();
-//	App->m_PointerCount[this] = 0;
 }
 
 HCURSOR CMorphwizardView::OnQueryDragIcon()
@@ -329,7 +307,7 @@ void CMorphwizardView::FilterFoundParadigms()
 {
 	CString tmp;
 	GetDlgItem(IDC_FILTER)->GetWindowText(tmp);
-	std::string flt_str = (LPCTSTR)tmp;
+	std::string flt_str = ToInnerEncoding(tmp);
 	Trim(flt_str);
 	if( flt_str.empty() ) return;
 	std::string common_ancode;
@@ -371,25 +349,25 @@ void CMorphwizardView::ShowFoundParadigms()
 	for( int i=0; i<found_paradigms.size(); i++ )
 	{
 		int FlexiaModelNo = found_paradigms[i]->second.m_FlexiaModelNo;
-		std::string s = Format("%i (%i)", FlexiaModelNo,
-			found_paradigms[i]->second.m_AccentModelNo);
-
-		m_FoundList.InsertItem(i, s.c_str() );
+		CString S;
+		S.Format(_T("%i (%i)"), FlexiaModelNo,found_paradigms[i]->second.m_AccentModelNo);
+		m_FoundList.InsertItem(i, S );
 
 		std::string Lemma = GetWizard()->get_lemm_string_with_accents(found_paradigms[i]);
 		std::string PrefixSet = GetWizard()->get_prefix_set( found_paradigms[i] );
 		if (!PrefixSet.empty())
 			Lemma = PrefixSet+'|'+Lemma;
 		RmlMakeLower(Lemma, GetWizard()->m_Language);
-		m_FoundList.SetItemText(i, FindLemmaColumn, Lemma.c_str());
+		m_FoundList.SetItemText(i, FindLemmaColumn, FromInnerEncoding(Lemma));
 
-		s = GetWizard()->get_pos_string(found_paradigms[i]) + " " + GetWizard()->get_grammem_string(found_paradigms[i]);
-		m_FoundList.SetItemText(i, FindGrammemsColumn, s.c_str());
+		auto s = GetWizard()->get_pos_string(found_paradigms[i]) + " " + GetWizard()->get_grammem_string(found_paradigms[i]);
+		m_FoundList.SetItemText(i, FindGrammemsColumn, FromInnerEncoding(s));
 			
 		s = GetWizard()->get_common_grammems_string(found_paradigms[i]);
-		m_FoundList.SetItemText(i, FindTypeGrammemsColumn, s.c_str());
+		m_FoundList.SetItemText(i, FindTypeGrammemsColumn, FromInnerEncoding(s));
 
-		m_FoundList.m_ToolTips.push_back(GetWizard()->m_FlexiaModels[FlexiaModelNo].m_Comments);
+		std::string comments = GetWizard()->m_FlexiaModels[FlexiaModelNo].m_Comments;
+		m_FoundList.m_ToolTips.push_back(FromInnerEncoding(comments));
 
 	}
 
@@ -409,13 +387,14 @@ void CMorphwizardView::OnFind()
 		CString find_what;
 		m_FindWhat.GetWindowText(find_what);
 		if (find_what == "") return;
-		ChangeHistory((const char*)find_what);
+		ChangeHistory(find_what);
+		std::string find_what_rml = ToInnerEncoding(find_what);
 
 		CWizardProgressMeter meter(*GetWizard());
 
 		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_WORD_FORM)==IDC_RFIND_LEM)
 		{
-			std::string s = find_what;
+			std::string s = find_what_rml;
 			RmlMakeUpper(s, GetWizard()->m_Language);
 			Trim(s);
 			char ch = s[0];
@@ -437,11 +416,11 @@ void CMorphwizardView::OnFind()
 		}
 	//
 		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_WORD_FORM)==IDC_RFIND_GRM)
-			GetWizard()->find_lemm_by_grammem((const char *)find_what, found_paradigms);
+			GetWizard()->find_lemm_by_grammem(find_what_rml, found_paradigms);
 
 		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_WORD_FORM)==IDC_WORD_FORM)
 		{
-			std::string s = find_what;
+			std::string s = find_what_rml;
 			// нельзя применять  RmlMakeUpper из-за "*"
 			if (GetWizard()->IsGerman())
 				GerMakeUpper(s);
@@ -453,13 +432,11 @@ void CMorphwizardView::OnFind()
 		//  findinsg by gramcode
 		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_FIND_BY_GRAMCODE)==IDC_FIND_BY_GRAMCODE)
 		{
-			std::string s = find_what;
-			GetWizard()->find_ancodes(s.c_str(), found_paradigms);
+			GetWizard()->find_ancodes(find_what_rml.c_str(), found_paradigms);
 		};
 		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_FIND_BY_USERNAME)==IDC_FIND_BY_USERNAME)
 		{
-			std::string s = find_what;
-			GetWizard()->find_lemm_by_user(s.c_str(), found_paradigms);
+			GetWizard()->find_lemm_by_user(find_what_rml.c_str(), found_paradigms);
 		};
 		
 
@@ -557,6 +534,18 @@ public:
 
 };
 
+std::string CMorphwizardView::ToInnerEncoding(CString strText) const 
+{
+	std::wstring wstr((LPCTSTR)strText);
+	return GetDocument()->m_Wizard.ToRMLEncoding(wstr);
+}
+
+CString CMorphwizardView::FromInnerEncoding(std::string s) const
+{
+	return GetDocument()->m_Wizard.FromRMLEncoding(s).c_str();
+}
+
+
 void CMorphwizardView::OnPredict() 
 {
 	try
@@ -571,22 +560,22 @@ void CMorphwizardView::OnPredict()
 		CString prefix;
 
 		m_PredictWhat.GetWindowText(predict_what);
-		std::string Lemma = predict_what;
-		int i = predict_what.Find("#");
+		std::string Lemma = ToInnerEncoding(predict_what);
+		int i = predict_what.Find(_T("#"));
 		
 		if (i != -1)
 		{
 			prefix = predict_what.Mid(0, i);
 			predict_what = predict_what.Mid(i+1);
-			Lemma = prefix+predict_what;
+			Lemma = ToInnerEncoding(prefix+predict_what);
 		};
 
 		GetWizard()->find_lemm(Lemma.c_str(), false, curr_found_paradigms);
 		if (!curr_found_paradigms.empty())
-			AfxMessageBox ("The dictionary contains already this word!");
+			AfxMessageBox (_T("The dictionary contains already this word!"));
 
 
-		GetWizard()->predict_lemm((const char*)predict_what, m_PredictSuffLength, m_MinimalFrequence, m_bOnlyMainPartOfSpeeches==TRUE);
+		GetWizard()->predict_lemm(ToInnerEncoding(predict_what), m_PredictSuffLength, m_MinimalFrequence, m_bOnlyMainPartOfSpeeches==TRUE);
 		if (GetWizard()->m_CurrentPredictedParadigms.empty())
 		{
 			ErrorMessage("No variants found");
@@ -602,14 +591,17 @@ void CMorphwizardView::OnPredict()
 			const CPredictSuffix& S = *GetWizard()->m_CurrentPredictedParadigms[ind];
 			const CFlexiaModel& P = GetWizard()->m_FlexiaModels[S.m_FlexiaModelNo];
 
-			m_PredictedList.InsertItem(i, GetWizard()->get_pos_string_and_grammems(S.m_SourceLemmaAncode).c_str() );
-			m_PredictedList.SetItemText(i, PredictTypeDictColumn, GetWizard()->get_grammem_string(S.m_SourceCommonAncode).c_str());
-			m_PredictedList.SetItemText(i, PredictLemmaColumn, S.m_SourceLemma.c_str());
-			m_PredictedList.SetItemText(i, PredictFreqColumnNo, Format("%i", S.m_Frequence).c_str());
-			m_PredictedList.SetItemText(i, PredictIndexColumnNo,  Format("%i", ind).c_str() );
-			m_PredictedList.SetItemText(i, PredictParadigmColumnNo,  Format("%i", S.m_FlexiaModelNo).c_str() );
-			m_PredictedList.SetItemText(i, PredictLemmaPrefixColumnNo,  S.m_PrefixSetStr.c_str() );
-			m_PredictedList.m_ToolTips.push_back(P.m_Comments);
+			m_PredictedList.InsertItem(i, 
+				FromInnerEncoding(GetWizard()->get_pos_string_and_grammems(S.m_SourceLemmaAncode)) );
+			m_PredictedList.SetItemText(i, 
+						PredictTypeDictColumn, 
+						FromInnerEncoding(GetWizard()->get_grammem_string(S.m_SourceCommonAncode)));
+			m_PredictedList.SetItemText(i, PredictLemmaColumn, FromInnerEncoding(S.m_SourceLemma));
+			m_PredictedList.SetItemText(i, PredictFreqColumnNo, IntToStr(S.m_Frequence));
+			m_PredictedList.SetItemText(i, PredictIndexColumnNo, IntToStr(ind));
+			m_PredictedList.SetItemText(i, PredictParadigmColumnNo, IntToStr(S.m_FlexiaModelNo));
+			m_PredictedList.SetItemText(i, PredictLemmaPrefixColumnNo,  FromInnerEncoding(S.m_PrefixSetStr));
+			m_PredictedList.m_ToolTips.push_back(FromInnerEncoding(P.m_Comments));
 		}
 		OnFind();
 		m_PredictWhat.SetFocus();
@@ -649,9 +641,9 @@ void CMorphwizardView::OnAdd()
 			size_t ind = m_PredictedList.GetNextSelectedItem(pos);
 			CString S = m_PredictedList.GetItemText(ind, PredictIndexColumnNo);
 			std::string common_grammems;
-			pDocument->m_ParadigmText = GetWizard()->create_slf_from_predicted(atoi(S), common_grammems, 50).c_str();
-			pDocument->m_CommonGrammems = common_grammems.c_str();
-			int i = predict_what.Find("|");
+			pDocument->m_ParadigmText = FromInnerEncoding(GetWizard()->create_slf_from_predicted(_wtoi(S), common_grammems, 50));
+			pDocument->m_CommonGrammems = FromInnerEncoding(common_grammems);
+			int i = predict_what.Find(_T("|"));
 			if (i != -1)
 				pDocument->m_Prefixes =  predict_what.Mid(0, i);
 		}
@@ -679,9 +671,9 @@ bool CMorphwizardView::OpenExistingParadigm( lemma_iterator_t it, bool bRunAccen
 
 		CSLFDocument* pDocument = NewSLFDocument();
 		pDocument->m_Paradigm = it->second;
-		pDocument->m_ParadigmText = save_slf.c_str();
-		pDocument->m_CommonGrammems = save_common_grammems.c_str();
-		pDocument->m_Prefixes = save_prefixes.c_str();
+		pDocument->m_ParadigmText = FromInnerEncoding(save_slf);
+		pDocument->m_CommonGrammems = FromInnerEncoding(save_common_grammems);
+		pDocument->m_Prefixes = FromInnerEncoding(save_prefixes);
 
 		pDocument->OpenParadigm(bRunAccentWizard);
 		return true;
@@ -716,9 +708,9 @@ void CMorphwizardView::OnEdit()
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnToolsSaveListFile() 
 {
-   	CFileDialog D(FALSE, "txt", "wordlist.txt");
+   	CFileDialog D(FALSE, _T("txt"), _T("wordlist.txt"));
 	if (D.DoModal() != IDOK) return;
-	FILE * fp = fopen (D.GetPathName(),"wb");
+	FILE * fp = fopen (utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "wb");
 
 	for( int i=0; i<found_paradigms.size(); i++ )
 	{
@@ -788,18 +780,18 @@ void CMorphwizardView::OnKillfocusFindWhat()
 void CMorphwizardView::OnToolsExport() 
 {
 	try {
-   		CFileDialog D(FALSE, "slf", "paradigms.slf");
+   		CFileDialog D(FALSE, _T("slf"), _T("paradigms.slf"));
 		if (D.DoModal() != IDOK) return;
-		FILE * fp = fopen (D.GetPathName(),"wb");
+		FILE * fp = fopen (utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "wb");
 		if (!fp) 
 		{
-			AfxMessageBox ("Cannot open file");
+			AfxMessageBox (_T("Cannot open file"));
 			return;
 		};
 		
 		CProgressMeterRML meter;
 		meter.SetMaxPos(found_paradigms.size(),100);
-		CString info = "Exporting " + D.GetPathName() + "..."; 
+		CString info = _T("Exporting ") + D.GetPathName() + _T("..."); 
 		meter.SetInfo(info);
 
 		GetWizard()->set_to_delete_false();
@@ -825,12 +817,12 @@ void CMorphwizardView::OnToolsExport()
 		}
 		fclose (fp);
 
-		if (::MessageBox (0,"Delete all exported paradigms?","MorphWizard",MB_YESNO   ) == IDYES)
+		if (::MessageBox (0,_T("Delete all exported paradigms?"), _T("MorphWizard"), MB_YESNO   ) == IDYES)
 		  GetWizard()->delete_checked_lemms();
 	}
    catch (...)
    {
-	   			AfxMessageBox ("some error has occured");
+	   			AfxMessageBox (_T("some error has occured"));
    };
 
     
@@ -843,29 +835,29 @@ void CMorphwizardView::OnToolsImport()
 	CString PathName;
 
 try {
-   	CFileDialog D(TRUE, "slf", "paradigms.slf",OFN_ALLOWMULTISELECT|OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT);
-	char file_buffer[10000];
+   	CFileDialog D(TRUE, _T("slf"), _T("paradigms.slf"),OFN_ALLOWMULTISELECT|OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT);
+	TCHAR file_buffer[10000];
 	file_buffer[0] = 0;
 	D.m_ofn.lpstrFile = file_buffer;
 	D.m_ofn.nMaxFile = 10000;
 	if (D.DoModal() != IDOK) return;
 	POSITION pos = D.GetStartPosition();
 	if (pos == 0) return;
-	bool bTestMode = ::MessageBox (0,"Test it or import?","MorphWizard",MB_YESNO   ) == IDYES;
+	bool bTestMode = ::MessageBox (0, _T("Test it or import?"), _T("MorphWizard"), MB_YESNO   ) == IDYES;
 	
 	GetWizard()->m_bFullTrace = false;
 	PathName = D.GetNextPathName(pos);
 	while  (true) // all selected files 
 	{
 
-		FILE * fp = fopen (PathName,"r");
+		FILE * fp = fopen (utf16_to_utf8((const TCHAR*)PathName).c_str(), "r");
 		if (!fp) 
 		{
-			AfxMessageBox ("Cannot open file");
+			AfxMessageBox (_T("Cannot open file"));
 			return;
 		};
 				
-		GetWizard()->log (std::string("import file ") + (const char*)PathName);
+		GetWizard()->log (std::string("import file ") + ToInnerEncoding(PathName));
 				
 		CProgressMeterRML meter;
 		meter.SetFileMaxPos(fp);
@@ -904,11 +896,11 @@ try {
 				}
 				catch (CExpc C)
 				{
-					Errors += Format("%s (%s:%i) \n", C.m_strCause.c_str(), (const char*)PathName, P.m_FirstSlfLineNo+line_no_err);
+					Errors += Format("%s (%s:%i) \n", C.m_strCause.c_str(), (const TCHAR*)PathName, P.m_FirstSlfLineNo+line_no_err);
 				}
 				catch  (...) 
 				{
-					Errors += Format("error at %s:%i \n", (const char*)PathName, P.m_FirstSlfLineNo+line_no_err);
+					Errors += Format("error at %s:%i \n", (const TCHAR*)PathName, P.m_FirstSlfLineNo+line_no_err);
 				};
 					
 			}
@@ -917,14 +909,14 @@ try {
 		if (!Errors.empty())
 		{
 			try {
-				std::string ErrorFile = MakeFName((const char*)PathName, "err");
+				std::string ErrorFile = MakeFName(ToInnerEncoding(PathName).c_str(), "err");
 				FILE * fp = fopen (ErrorFile.c_str(), "w");
 				fprintf (fp, "%s",Errors.c_str());
 				fclose(fp);
 				ErrorMessage(Format("Errors were written to file %s",  ErrorFile.c_str()));
 			} 
 			catch (...){
-				AfxMessageBox ("Cannot write errors to paradigms.err ");
+				AfxMessageBox (_T("Cannot write errors to paradigms.err "));
 			}
 		}
 		else
@@ -950,12 +942,12 @@ catch (...)
 void CMorphwizardView::OnToolsSelectByFile() 
 {
 	// TODO: Add your command handler code here
-   	CFileDialog D(TRUE, "slf", "paradigms.txt");
+   	CFileDialog D(TRUE, _T("slf"), _T("paradigms.txt"));
 	if (D.DoModal() != IDOK) return;
-	FILE * fp = fopen (D.GetPathName(),"rb");
+	FILE * fp = fopen (utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "rb");
 	if (!fp) 
 	{
-		AfxMessageBox ("Cannot open file");
+		AfxMessageBox (_T("Cannot open file"));
 		return;
 	};
 	char buf[1000];
@@ -964,14 +956,14 @@ void CMorphwizardView::OnToolsSelectByFile()
 	found_paradigms.clear();
 	while  (fgets(buf, 1000, fp)) 
 	{
-		std::string Line = buf;
+		std::string Line = convert_from_utf8(buf, GetWizard()->m_Language);
 		Trim(Line);
 		if (Line.empty()) continue;
 		StringTokenizer tok (Line.c_str(), ";");
 		if (!tok())
 		{
 			std::string mess = std::string("cannot get lemma from ") + buf + std::string("; The format should be <Lemma>;<TypeGrammems>;<MorphPattern>");
-			AfxMessageBox (mess.c_str());
+			AfxMessageBox (FromInnerEncoding(mess));
 			break;
 		};
 		std::string Lemma = tok.val();
@@ -981,7 +973,7 @@ void CMorphwizardView::OnToolsSelectByFile()
 		if (!tok())
 		{
 			std::string mess = std::string("cannot get type grammem ") + buf + std::string("; The format should be <Lemma> <PartofSpeech> <Grammems>");
-			AfxMessageBox (mess.c_str());
+			AfxMessageBox (FromInnerEncoding(mess));
 			break;
 		};
 		std::string TypeAncode;
@@ -992,7 +984,7 @@ void CMorphwizardView::OnToolsSelectByFile()
 				if (!GetWizard()->slf2ancode(grams, TypeAncode )) 
 				{
 					std::string mess = std::string("cannot process type grammems ") + grams;
-					AfxMessageBox (mess.c_str());
+					AfxMessageBox (FromInnerEncoding(mess));
 					break;
 				};
 		};
@@ -1001,7 +993,7 @@ void CMorphwizardView::OnToolsSelectByFile()
 		if (!tok())
 		{
 			std::string mess = std::string("cannot get morphological pattern ") + buf + std::string("; The format should be <Lemma>;<TypeGrammems>;<MorphPattern>");
-			AfxMessageBox (mess.c_str());
+			AfxMessageBox (FromInnerEncoding(mess));
 			break;
 		};
 		std::string FirstCode;
@@ -1011,7 +1003,7 @@ void CMorphwizardView::OnToolsSelectByFile()
 			if (!GetWizard()->slf2ancode(PosStr,FirstCode )) 
 			{
 				std::string mess = std::string("cannot process morph. pattern ") + PosStr;
-				AfxMessageBox (mess.c_str());
+				AfxMessageBox (FromInnerEncoding(mess));
 				break;
 			};
 		};
@@ -1048,18 +1040,17 @@ void CMorphwizardView::OnToolsSelectByFile()
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnReadonlyImage() 
 {
-	// TODO: Add your control notification handler code here
-    CString FileName = GetWizard()->get_lock_file_name().c_str();
-	if (access((const char*)FileName, 0) != -1)
+    auto FileName = GetWizard()->get_lock_file_name();
+	if (access(FileName.c_str(), 0) != -1)
 	{
 	    char s [1000];
 		CString Mess;
-        FILE* fp =  fopen (FileName, "r");
+        FILE* fp =  fopen (FileName.c_str(), "r");
 		if (!fp) return;
 		while (fgets(s, 1000, fp))
 			Mess += s;
 		fclose(fp);
-		::MessageBox (0, Mess, "Lock Information", MB_OK);
+		::MessageBox (0, Mess, _T("Lock Information"), MB_OK);
 	}
 }
 
@@ -1128,13 +1119,13 @@ void CMorphwizardView::OnKillfocusPredictWhat()
 
 void CMorphwizardView::OnToolsPackMrd() 
 {
-	CGriIni cIni("Packing...");;
+	CGriIni cIni(_T("Packing..."));;
 	cIni.Init(this);
 	{
 		CWizardProgressMeter meter(*GetWizard());
 		GetWizard()->pack();
 	}
-	AfxMessageBox ("Packing is finished!");
+	AfxMessageBox (_T("Packing is finished!"));
 }
 
 BOOL CMorphwizardView::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1150,7 +1141,7 @@ void CMorphwizardView::OnNMDblclkFoundList2(NMHDR *pNMHDR, LRESULT *pResult)
 }
 
 //----------------------------------------------------------------------------
-extern bool InputBox (const char* Caption, std::string& OutBuffer);		
+
 
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnToolsSetParaNo()
@@ -1168,16 +1159,18 @@ void CMorphwizardView::OnToolsSetParaNo()
 		assert(index < found_paradigms.size());
 		ParadigmNo = found_paradigms[index]->second.m_FlexiaModelNo;
 	}
-	std::string s = Format("%i",ParadigmNo);
-	if ( !InputBox("Input paradigm No:", s) ) return;
-	ParadigmNo = atoi(s.c_str());
+	CString s;
+	s.Format(_T("%i"), ParadigmNo);
+	if ( !InputBox(_T("Input paradigm No:"), s) ) return;
+	ParadigmNo = _ttoi(s);
 	if (ParadigmNo >= GetWizard()->m_FlexiaModels.size())
 	{
 			ErrorMessage(Format("Paradigm no %i is not found",ParadigmNo));
 			return;
 	}
-	std::string Warn = Format("The program ascribes all found words to paradigm %i . Continue?", ParadigmNo);
-	if  (::MessageBox (0, Warn.c_str(),"MorphWizard",MB_OKCANCEL   ) != IDOK )
+	CString Warn;
+	Warn.Format(_T("The program ascribes all found words to paradigm %i . Continue?"), ParadigmNo);
+	if  (::MessageBox (0, Warn, _T("MorphWizard"), MB_OKCANCEL   ) != IDOK )
 		return;
 
 	const CFlexiaModel &new_par = GetWizard()->m_FlexiaModels[ParadigmNo];
@@ -1274,13 +1267,6 @@ void CMorphwizardView::OnToolsShowparadigmdifferences()
 	pDocument->OpenDiffDialog();
 }
 
-/*
-void CMorphwizardView::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
-{
-	CSizeFormView::OnActivate(nState, pWndOther, bMinimized);
-	SetInputLanguage(GetWizard()->m_Language);
-}
-*/
 
 void CMorphwizardView::OnUpdateToolsExport(CCmdUI *pCmdUI)
 {
@@ -1315,9 +1301,6 @@ void CMorphwizardView::OnUpdateToolsAccentWizard(CCmdUI *pCmdUI)
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnToolsAccentWizard()
 {
-	if( !m_pFreqDict ) 
-		m_pFreqDict = new FreqDict;
-
 	CAccentWizardDlg dlg(*this);
 	if( dlg.DoModal()==IDOK )
 	{
@@ -1353,50 +1336,10 @@ lemma_iterator_t CMorphwizardView::FindNonAccentedPara( bool partialAccentedPara
 void CMorphwizardView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView)
 {
 	SetInputLanguage(GetWizard()->m_Language);
-	CSizeFormView::OnActivateView(bActivate, pActivateView, pDeactiveView);
+	CFormView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 
 
-//////////////////////////////////////////////////////////////////////////////
-// FreqDict class implementation
-//////////////////////////////////////////////////////////////////////////////
-bool FreqDict::Load( const CString&  fileName, int minFreq )
-{
-	if( fileName==m_fileName && minFreq==m_minFreq ) 
-		return false;
-
-	try
-	{
-		CStdioFile file;
-		if( file.Open(fileName,CFile::modeRead) ) 
-		{
-			CString line;
-			file.ReadString(line);
-			file.ReadString(line);
-			file.ReadString(line);
-			while( file.ReadString(line) ) 
-			{
-				FreqWord word;
-				int i = line.Find(" ");
-				if( i<0 ) continue;
-				word.freq = atoi((line.Left(i)).Trim());
-				static_cast<std::string&>(word) = (LPCSTR)line.Mid(i+1);
-				Trim(word);
-				if( !!word ) 
-					m_words.push_back(word);
-			}
-		}
-
-		if( !m_words.empty() ) 
-			return true;
-	}
-	catch( ... ) 
-	{
-	}
-	m_fileName.Empty();
-	m_words.clear();
-	return false;
-}
 
 
 void CMorphwizardView::OnBnClickedSetPrdComments()
@@ -1411,6 +1354,86 @@ void CMorphwizardView::OnBnClickedSetPrdComments()
 	};
 	size_t index = m_FoundList.GetNextSelectedItem(pos);
 	int ModelNo = found_paradigms[index]->second.m_FlexiaModelNo;
-	std::string Caption = Format("Input comments to paradigm No:%i", ModelNo);
-	InputBox(Caption.c_str(), GetWizard()->m_FlexiaModels[ModelNo].m_Comments);
+	CString Caption;
+	Caption.Format(_T("Input comments to paradigm No:%i"), ModelNo);
+	InputBox(Caption, FromInnerEncoding(GetWizard()->m_FlexiaModels[ModelNo].m_Comments));
+}
+
+
+int CMorphwizardView::PlaceSimpleControl(int id, int x, int y) {
+	GetDlgItem(id)->SetWindowPos(&wndBottom, x, y, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE);
+	CRect r;
+	GetDlgItem(id)->GetWindowRect(&r);
+	x += r.Width() + m_ControlMargin;
+	return x;
+}
+
+void CMorphwizardView::OnSize(UINT nType, int cx, int cy)
+{
+	if (!m_FindWhat || cx < 0 || cy < 0 || !m_FindWhat.m_hWnd) {
+		CFormView::OnSize(nType, cx, cy);
+		return;
+	}		
+	int row_height = 40;
+	int margin = m_ControlMargin;
+	int center = (int)(cx / 2);
+	int center_plus_margin = center + 2 * margin;
+	int panel_width = (cx - 3 * margin) / 2;
+	int panel_height = cy - 2 * margin - row_height;
+	GetDlgItem(IDC_GROUP_BOX_EDIT)->SetWindowPos(&wndBottom, margin,         margin, panel_width, panel_height, SWP_SHOWWINDOW);
+	GetDlgItem(IDC_GROUP_BOX_ADD)->SetWindowPos(&wndBottom, center + margin, margin, panel_width, panel_height, SWP_SHOWWINDOW);
+
+	// 1st line 
+	int x = 2 * margin;
+	int y = 3 * margin;
+	x = PlaceSimpleControl(IDC_FIND, x, y);
+	x = PlaceSimpleControl(IDC_FIND_WHAT, x, y);
+
+	x = PlaceSimpleControl(IDC_PREDICT, center_plus_margin, y);
+	x = PlaceSimpleControl(IDC_PREDICT_WHAT, x, y);
+	x = PlaceSimpleControl(IDC_READONLY_IMAGE, cx-50, y);
+	
+	// 2nd line
+	x = 2 * margin;
+	y +=  margin + row_height;
+	x = PlaceSimpleControl(IDC_RFIND_LEM, x, y);
+	x = PlaceSimpleControl(IDC_RFIND_GRM, x, y);
+	x = PlaceSimpleControl(IDC_FIND_BY_USERNAME, x, y);
+	x = PlaceSimpleControl(IDC_WORD_FORM, x, y);
+	x = PlaceSimpleControl(IDC_FIND_BY_GRAMCODE, x, y);
+
+	x = PlaceSimpleControl(IDC_MIN_FREQ_STATIC, center_plus_margin, y);
+	x = PlaceSimpleControl(IDC_MINIMAL_FREQUENCE, x, y);
+	x = PlaceSimpleControl(IDC_SUF_STATIC, x, y);
+	x = PlaceSimpleControl(IDC_SUF_EDIT, x, y);
+
+	// 3th line
+	x = 2 * margin;
+	y +=  margin + row_height;
+	int list_height = cy - 4 * row_height - 8 * margin; 
+	int list_width = (cx - 6 * margin) / 2;
+	
+	GetDlgItem(IDC_FOUND_LIST2)->SetWindowPos   (&wndBottom, x,                   y, list_width, list_height, SWP_SHOWWINDOW);
+	GetDlgItem(IDC_PREDICTED_LIST)->SetWindowPos(&wndBottom, center_plus_margin, y, list_width, list_height, SWP_SHOWWINDOW);
+	
+	// 4th line 
+	x = 2 * margin;
+	y += margin + list_height;
+
+	x = PlaceSimpleControl(IDC_REMOVE, x, y);
+	x = PlaceSimpleControl(IDC_EDIT, x, y);
+	x = PlaceSimpleControl(IDC_SET_PRD_COMMENTS, x, y);
+	x = PlaceSimpleControl(IDC_FILTER_STATIC, x, y);
+	x = PlaceSimpleControl(IDC_FILTER, x, y);
+
+
+	x = PlaceSimpleControl(IDC_ADD, center_plus_margin, y);
+	x = PlaceSimpleControl(IDC_ONLY_MAIN_PART_OF_SPEECHES, x, y);
+
+	// 5th line
+	x = margin;
+	y += margin + row_height;
+	GetDlgItem(IDC_STATUS)->SetWindowPos(&wndBottom, x, y, cx - 2 * margin, row_height, SWP_SHOWWINDOW);
+
+	CFormView::OnSize(nType, cx, cy);
 }

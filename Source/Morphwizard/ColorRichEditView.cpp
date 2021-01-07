@@ -93,13 +93,13 @@ void CColorRichEditView::SetAccentByIndex(int ind)
 
 	while (wordEnd < Paradigm.GetLength() && !isspace((BYTE)Paradigm.GetAt(wordEnd) ))
 		wordEnd++;
-	int accOld = Paradigm.Find("'",wordStart);
+	int accOld = Paradigm.Find(_T("'"), wordStart);
 	if( accOld>=0  && accOld < wordEnd) 
 	{
 		if( accOld<ind ) --ind;
 		Paradigm.Delete(accOld);
 	}
-	Paradigm.Insert(ind+1,"'");
+	Paradigm.Insert(ind+1,_T("'"));
 	SetText(Paradigm);
 	
 }
@@ -125,6 +125,16 @@ void CColorRichEditView::OnInitialUpdate()
 //----------------------------------------------------------------------------
 
 
+std::vector<CString> StringSplit(CString sFrom, CString delim) {
+	int i = 0;
+	std::vector<CString> saItems;
+	for (CString sItem = sFrom.Tokenize(delim, i); i >= 0; sItem = sFrom.Tokenize(delim, i))
+	{
+		saItems.push_back(sItem);
+	}
+	return saItems;
+}
+
 void CColorRichEditView::SetAccentFromThisLineToTheEndofParadigm()
 {
 	CRichEditCtrl& re = GetRichEditCtrl();
@@ -135,35 +145,28 @@ void CColorRichEditView::SetAccentFromThisLineToTheEndofParadigm()
 	uint32_t wordEnd = lineInd;
 	while (wordEnd < Paradigm.GetLength() && !isspace((BYTE)Paradigm.GetAt(wordEnd) ))
 		wordEnd++;
-	int acc= Paradigm.Find("'",lineInd);
+	int acc= Paradigm.Find(_T("'"), lineInd);
 	if ( (acc <= 0) || (acc >=wordEnd)) return; 
-	StringTokenizer tok((const char*)Paradigm, "\r\n");
-	int curr_line_no = 0;
 	CString NewParadigm;
-	while (tok())
+	auto lines = StringSplit(Paradigm, "\r\n");
+	for (int i = 0; i < lines.size(); ++i)
 	{
-		curr_line_no++;
-		if (curr_line_no  <= line_no+1) 
+		int space_index = lines[i].FindOneOf(_T(" \t"));
+		if ((i  <= line_no+1) || (space_index == -1))
 		{
-			NewParadigm += tok.val();
-			NewParadigm += "\r\n";
-			continue;
+			NewParadigm += lines[i];
 		}
 		else
 		{
-			StringTokenizer tk(tok.val(), " \t\r\n");
-			if (tk())
-			{
-				std::string wrd = tk.val();
-				int ind = wrd.find("'");
-				if (ind != std::string::npos)
-					wrd.erase(ind,1);
-				wrd.insert(acc-lineInd, "'");
-				NewParadigm += CString(wrd.c_str())+CString(" ")+CString(tk.get_rest())+CString("\r\n");
+			CString wrd = lines[i].Mid(0, space_index);
+			int ind = wrd.Find(_T("'"));
+			if (ind != -1) {
+				wrd.Delete(ind, 1);
 			}
-			else
-				NewParadigm += tok.val()+CString("\r\n");
+			wrd.Insert(acc - lineInd, _T("'"));
+			NewParadigm += wrd + CString(_T(" ")) + lines[i].Mid(space_index);
 		};
+		NewParadigm += CString("\r\n");
 	};
 
 	SetText(NewParadigm);
@@ -188,141 +191,15 @@ BOOL CColorRichEditView::PreTranslateMessage(MSG* pMsg)
 	return CRichEditView::PreTranslateMessage(pMsg);
 }
 
-struct CStringAndPosition
-{
-	char*	m_pBuffer;
-	int		m_BufferLength;
-	int		m_Position;
-	CStringAndPosition()
-	{
-		m_Position =0;
-		m_pBuffer =0;
-
-	};
-	~CStringAndPosition()
-	{
-		if (m_pBuffer)
-			delete m_pBuffer;
-	};
-};
-
-/*
-struct CStringAndPosition
-{
-	CString m_String;
-	int m_Position;
-};
-
-static uint32_t CALLBACK MyStreamOutCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
-{
-   CString* pString = (CString*) dwCookie;
-   for (size_t  i=0; i < cb; i+=2)
-	*pString += pbBuff[i];
-   *pcb = cb;
-   return 0;
-}
-
-static uint32_t CALLBACK MyStreamInCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
-{
-   CStringAndPosition* pString = (CStringAndPosition*) dwCookie;
-   size_t  Char_no = 0;
-   assert((cb%2) == 0);		
-
-
-   while ((Char_no < cb)&& (pString->m_Position < pString->m_String.GetLength()))
-   {
-		pbBuff[Char_no] = pString->m_String.GetAt(pString->m_Position);
-		Char_no++;
-		pbBuff[Char_no] = 0;
-		Char_no++;
-		pString->m_Position++;
-   };
-   *pcb = Char_no;
-
-   return 0;
-}
-*/
-
-static uint32_t CALLBACK MyStreamOutCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
-{
-	CStringAndPosition* pString = (CStringAndPosition*) dwCookie;
-	for (size_t  i=0; i < cb; i++)
-	{
-		pString->m_pBuffer[pString->m_Position++] = pbBuff[i];
-	};
-	*pcb = cb;
-	return 0;
-}
-
-static uint32_t CALLBACK MyStreamInCallback(uint32_t dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb)
-{
-   CStringAndPosition* pString = (CStringAndPosition*) dwCookie;
-   size_t  Char_no = 0;
-   
-   while ((Char_no < cb)&& (pString->m_Position < pString->m_BufferLength))
-   {
-		pbBuff[Char_no] = pString->m_pBuffer[pString->m_Position];
-		Char_no++;
-		pString->m_Position++;
-   };
-   *pcb = Char_no;
-
-   return 0;
-}
-
-UINT	CColorRichEditView::GetCodePage() const
-{
-	if (m_morphWizard.m_Language == morphRussian)
-		return 1251;
-	else
-		return 1252;
-};
-// converting diacritic marks
 CString CColorRichEditView::GetText() const
 {
-	CRichEditCtrl& re = GetRichEditCtrl();
-	int TextLen = re.GetTextLength();
-	CStringAndPosition SP;
-	SP.m_pBuffer = new char[TextLen*2];
-	EDITSTREAM es;
-	es.dwCookie = (uint32_t) &SP;
-	es.pfnCallback = (EDITSTREAMCALLBACK) MyStreamOutCallback;
-	GetRichEditCtrl().StreamOut(SF_TEXT|SF_UNICODE, es);
-	char* buf = new char[TextLen+1];
-	if (!WideCharToMultiByte(GetCodePage(), 0, (WCHAR*)SP.m_pBuffer, TextLen, buf, TextLen, NULL, NULL))
-	{
-		ErrorMessage ("WideCharToMultiByte failed");
-	};
-	buf[TextLen] =0;
-	CString S = buf;
-	delete buf;
-	return S;
+	CString s;
+	GetRichEditCtrl().GetWindowText(s);
+	return s;
 };
 
-
-// converting diacritic marks
 void  CColorRichEditView::SetText(const CString& S)
 {
-	CStringAndPosition SP;
-	SP.m_BufferLength = MultiByteToWideChar(GetCodePage(), 0,(const char*)S, S.GetLength(), NULL, NULL);
-	SP.m_pBuffer = new char[SP.m_BufferLength*2+1];
-	memset(SP.m_pBuffer,0, SP.m_BufferLength*2+1);
-	int debug = S.GetLength();
-	assert (debug  == SP.m_BufferLength);
-	if (S.GetLength()>0)
-	{
-		if (!MultiByteToWideChar(GetCodePage(), 0, (const char*)S, S.GetLength(), (WCHAR*)SP.m_pBuffer, SP.m_BufferLength))
-		{
-			ErrorMessage ("MultiByteToWideChar failed");
-		};
-	}
-	
-				
-
-	SP.m_Position = 0;
-	EDITSTREAM es;
-	es.dwCookie = (uint32_t) &SP;
-	es.pfnCallback = (EDITSTREAMCALLBACK)MyStreamInCallback;
-	SP.m_BufferLength *= 2;
-	GetRichEditCtrl().StreamIn(SF_TEXT|SF_UNICODE, es);
+	GetRichEditCtrl().SetSel(-1, -1);
+	GetRichEditCtrl().ReplaceSel(S);
 };

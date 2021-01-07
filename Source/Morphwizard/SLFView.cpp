@@ -7,15 +7,11 @@
 #include "SLFDocument.h"
 #include "MorphwizardView.h"
 #include "ChangeAllDlg.h"
+#include "InputBox.h"
 
 
 
-
-//////////////////////////////////////////////////////////////////////////////
-// CSLFView class implementation
-//////////////////////////////////////////////////////////////////////////////
-
-IMPLEMENT_DYNCREATE(CSLFView, CSizeFormView)
+IMPLEMENT_DYNCREATE(CSLFView, CFormView)
 
 CSLFView::CSLFView() :
  CFormView(CSLFView::IDD)
@@ -38,6 +34,17 @@ CSLFDocument* CSLFView::GetDocument()
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CSLFDocument)));
 	return (CSLFDocument*)m_pDocument;
 }
+
+
+std::string CSLFView::ToInnnerEncoding(CString str)  const {
+	return ((CSLFDocument*)m_pDocument)->m_pParent->ToInnerEncoding(str);
+}
+
+CString CSLFView::FromInnerEncoding(std::string s) const
+{
+	return ((CSLFDocument*)m_pDocument)->m_pParent->FromInnerEncoding(s);
+}
+
 
 //----------------------------------------------------------------------------
 // CSLFView diagnostics
@@ -74,7 +81,7 @@ void CSLFView::DoDataExchangeTypeGrammems(bool bSaveAndValidate)
 		if (nIndex == CB_ERR)
 		{
 			if (m_TypeGrammemsList.GetCount() != 0)
-				ErrorMessage (std::string("Bad type grammems: ")+(const char*)GetDocument()->m_CommonGrammems);
+				AfxMessageBox (CString("Bad type grammems: ") + GetDocument()->m_CommonGrammems);
 		}
 		else
 		{
@@ -127,7 +134,7 @@ void CSLFView::DoDataExchange(CDataExchange* pDX)
 			DDX_Text(pDX, IDC_PRD_NO, i);
 			i = GetDocument()->m_Paradigm.m_AccentModelNo;
 			DDX_Text(pDX, IDC_ACC_MDL_NO, i);
-			DDX_Text(pDX, IDC_BASE, CString(GetDocument()->GetBase().c_str()));
+			DDX_Text(pDX, IDC_BASE, FromInnerEncoding(GetDocument()->GetBase()));
 		
 		}
 	}
@@ -157,7 +164,7 @@ bool IsKeyWord (const CString& word, COLORREF& C, void* Data)
 {
 	try {
 		CSLFView* V = (CSLFView*)Data;
-		std::string w = (const char*)word;
+		std::string w = V->ToInnnerEncoding(word);
 		
 		// part of speech?
 		if (std::binary_search(V->GetWizard()->get_poses().begin(), V->GetWizard()->get_poses().end(), w) )
@@ -229,12 +236,12 @@ void CSLFView::set_lists()
 {
 	const StringVector &poses = GetWizard()->get_poses();
 	for(size_t i = 0; i < poses.size(); i++){
-		m_PosList.AddString(poses[i].c_str());
+		m_PosList.AddString(FromInnerEncoding(poses[i]));
 	}
 	const StringVector &grammems = GetWizard()->get_grammems();
 	for(size_t i = 0; i < grammems.size(); i++){
 		std::string s = grammems[i]+ ",";
-		m_GramList.AddString(s.c_str());
+		m_GramList.AddString(FromInnerEncoding(s));
 	}
 
 	const StringVector& type_grammems = GetWizard()->get_type_grammems();
@@ -242,9 +249,9 @@ void CSLFView::set_lists()
 	{
 		std::string s = type_grammems[i];
 
-		m_TypeGrammemsList.AddString(s.c_str());
+		m_TypeGrammemsList.AddString(FromInnerEncoding(s));
 	}
-	m_TypeGrammemsList.AddString("");
+	m_TypeGrammemsList.AddString(_T(""));
 
 	SetComboBoxWidth(&m_TypeGrammemsList);
 	DoDataExchangeTypeGrammems(false);
@@ -334,9 +341,6 @@ void CSLFView::ChangeSize(UINT nType, int cx, int cy)
 		int wr = 230,	// ширина панели справа от RichEdit
 			d=8,		// расстояние между контролами
 			h = 25;		// высота строк ввода
-
-		/*if( GetWizard()->m_ReadOnly ) 
-			wr = d;*/
 
 		if( cx/2<wr ) wr=cx/2;
 		int wl = cx - wr;
@@ -468,19 +472,17 @@ BOOL CSLFView::OnHelpInfo(HELPINFO* pHelpInfo)
 }
 
 
-extern bool InputBox (const char* Caption, std::string& OutBuffer);
-
 void CSLFView::OnBnClickedAddPrefix()
 {
 	UpdateData();
-	std::string prefix;
-	if ( !InputBox("Input prefix:", prefix) )
+	CString prefix;
+	if ( !InputBox(_T("Input prefix:"), prefix) )
 		return;
 
-	std::string sprfix = prefix;
+	std::string sprfix = ToInnnerEncoding(prefix);
 	if (sprfix.empty()) return;
 	std::string new_slf;
-	StringTokenizer T(GetDocument()->m_ParadigmText, "\n");
+	StringTokenizer T(ToInnnerEncoding(GetDocument()->m_ParadigmText).c_str(), "\n");
 	while (T())
 	{
 		std::string Line = T.val();
@@ -498,10 +500,11 @@ void CSLFView::OnBnClickedAddPrefix()
 void CSLFView::OnBnClickedChangeParadigm()
 {
 	UpdateData();
-	std::string s;
-	if ( !InputBox("Input prototype lemma or paradigm number: ", s) )
+	CString ss;
+	if ( !InputBox(_T("Input prototype lemma or paradigm number: "), ss) )
 		return;
-	
+	std::string s = ToInnnerEncoding(ss);
+
 	RmlMakeUpper(s, GetWizard()->m_Language);
 	Trim(s);
 	if (s.empty()) return;
@@ -528,7 +531,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 			return;
 	}
 
-	std::string Lemma = (const char*)GetDocument()->GetLemma();
+	std::string Lemma = GetDocument()->GetLemma();
 
 	const CFlexiaModel &new_par = GetWizard()->m_FlexiaModels[ParadigmNo];
 	if (GetDocument()->m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
@@ -546,7 +549,8 @@ void CSLFView::OnBnClickedChangeParadigm()
 		};
 	};
 	GetWizard()->change_prd_info(GetDocument()->m_Paradigm, Lemma,  ParadigmNo,UnknownParadigmNo,true);
-	GetDocument()->m_ParadigmText = GetWizard()->mrd_to_slf(Lemma.c_str(), new_par, GetDocument()->m_Paradigm.m_AccentModelNo, GetDocument()->m_Paradigm.m_AuxAccent, 50).c_str();	
+	auto paradigm = GetWizard()->mrd_to_slf(Lemma.c_str(), new_par, GetDocument()->m_Paradigm.m_AccentModelNo, GetDocument()->m_Paradigm.m_AuxAccent, 50);
+	GetDocument()->m_ParadigmText = GetWizard()->FromRMLEncoding(paradigm).c_str();
 	UpdateData(FALSE);
 	m_pRichView->RedrawLines();
 	
@@ -598,7 +602,6 @@ void CSLFView::OnBnClickedChangeAll()
 	UpdateData();
 
 	CParadigmInfo paraOld = GetDocument()->m_SaveParadigm;
-	CString lemmaOld = GetDocument()->GetSavedLemma();
 
 	if( GetDocument()->IsModified() )
 	{
@@ -626,7 +629,7 @@ void CSLFView::OnBnClickedChangeAll()
 		for( int i=0; i<found_paradigms.size(); ++i ) 
 		{
 			if( found_paradigms[i]->second==GetDocument()->m_Paradigm 
-				&& found_paradigms[i]->first==std::string(GetDocument()->GetSavedLemma()) ) 
+				&& found_paradigms[i]->first==GetDocument()->GetSavedLemma() ) 
 			{
 				found_paradigms.erase(found_paradigms.begin()+i);
 				break;
@@ -719,45 +722,44 @@ void CSLFView::OnBnClickedFixAccentBtn()
 
 	CString text;
 	re.GetWindowText(text);
-	int lineCount = text.Replace("\r\n","\n");
+	int lineCount = text.Replace(_T("\r\n"), _T("\n"));
 
 	CString t = text.Mid(nStartChar);
-	int acc = t.FindOneOf(" '\n");
+	int acc = t.FindOneOf(_T(" '\n"));
 	if( acc<=0 || t[acc]!='\'' 
 		|| !is_lower_vowel(t[acc-1],GetWizard()->m_Language) ) 
 	{
-//		if( !hasSel ) re.SetSel(nStart,nStart);
 		return; 
 	}
 
 	if( hasSel ) 
 		re.SetSel(nStartChar,nEndChar);
 
-	StringTokenizer	tok(text,"\n");
-	CStringArray lines;
-	while( tok() ) lines.Add(tok.val());
+	StringTokenizer	tok(ToInnnerEncoding(text).c_str(), "\n");
+	std::vector<std::string> lines;
+	while( tok() ) lines.push_back(tok.val());
 
-//	ASSERT(lineEnd<=lines.GetSize());
-	if( lineEnd>lines.GetSize() )
-		lineEnd = lines.GetSize();
+
+	if( lineEnd > lines.size() )
+		lineEnd = lines.size();
 
 	int badAccCount=0;
 	int i=lineStart+1;
 	for( ; i<lineEnd; ++i ) 
 	{
-		int e = lines[i].Find(" ");
+		int e = lines[i].find(" ");
 		if( e<=0 ) continue;
 
-		int a = lines[i].Find("'");
+		int a = lines[i].find("'");
 		if( a<e && a>0 && a!=acc 
-			&& is_lower_vowel(lines[i].GetAt(a-1),GetWizard()->m_Language) )
+			&& is_lower_vowel(lines[i][a-1], GetWizard()->m_Language) )
 			++badAccCount;
 	}
 
 	CString s;
 	if( badAccCount>0 ) 
 	{
-		s.Format("Reset accents in %d wordforms?",badAccCount);
+		s.Format(_T("Reset accents in %d wordforms?"),badAccCount);
 		if( MessageBox(s,NULL,MB_YESNO)==IDYES )
 			badAccCount = 0;
 	}
@@ -767,20 +769,20 @@ void CSLFView::OnBnClickedFixAccentBtn()
 
 	CRichEditRedrawer redrawer(*m_pRichView);
 
-	for( i=lineStart+1; i<lineEnd; ++i )
+	for(int i=lineStart+1; i<lineEnd; ++i )
 	{
-		int e = lines[i].Find(" ");
+		int e = lines[i].find(" ");
 		if( e<=0 ) continue;
 
-		s = lines[i];
-		int a = lines[i].Find("'");
+		std::string s = lines[i];
+		int a = lines[i].find("'");
 		bool bChange=false;
 		if( a<e && a>=0 )
 		{
 			if( (badAccCount==0 && a!=acc) || a==0 || 
 				!is_lower_vowel(s[a-1],GetWizard()->m_Language) )
 			{
-				s.Delete(a);
+				s.erase(a, 1);
 				a = -1;
 				bChange = true;
 			}
@@ -788,7 +790,7 @@ void CSLFView::OnBnClickedFixAccentBtn()
 
 		if( a==-1 && is_lower_vowel(s[acc-1],GetWizard()->m_Language) ) 
 		{
-			s.Insert(acc,'\'');
+			s.insert(acc, 1, '\'');
 			bChange = true;
 		}
 
@@ -801,7 +803,7 @@ void CSLFView::OnBnClickedFixAccentBtn()
 				nEndChar = re.GetTextLength();
 
 			re.SetSel(nStartChar,nEndChar);
-			re.ReplaceSel(s);
+			re.ReplaceSel(FromInnerEncoding(s));
 			redrawer.RedrawLine(i);
 		}
 	}

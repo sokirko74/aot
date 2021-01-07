@@ -44,8 +44,8 @@ BOOL CChangeAllDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	m_list.InsertColumn(0,"Model No");
-	m_list.InsertColumn(1,"Paradigms");
+	m_list.InsertColumn(0, _T("Model No"));
+	m_list.InsertColumn(1, _T("Paradigms"));
 	CRect r;
 	m_list.GetWindowRect(&r);
 	m_list.SetColumnWidth(0,r.Width()/4);
@@ -95,7 +95,7 @@ void CChangeAllDlg::updateParadigmList()
 			&& m_found_paradigms[i]->second.m_AccentModelNo!= m_oldAccentModelNo )
 			continue;
 
-		s.Format("%d (%d)",m_found_paradigms[i]->second.m_FlexiaModelNo,
+		s.Format(_T("%d (%d)"), m_found_paradigms[i]->second.m_FlexiaModelNo,
 				m_found_paradigms[i]->second.m_AccentModelNo);
 		m_list.InsertItem(count,s);
 
@@ -104,12 +104,12 @@ void CChangeAllDlg::updateParadigmList()
 		if (!PrefixSet.empty())
 			Lemma = PrefixSet+'|'+Lemma;
 		RmlMakeLower(Lemma, m_wizard.m_Language);
-		m_list.SetItemText(count, 1, Lemma.c_str());
+		m_list.SetItemText(count, 1, m_wizard.FromRMLEncoding(Lemma).c_str());
 
 		++count;
 	}
 
-	s.Format("Paradigms: %d",count);
+	s.Format(_T("Paradigms: %d"), count);
 	LVCOLUMN col;
 	col.cchTextMax = s.GetLength();
 	col.pszText = s.GetBuffer(s.GetLength());

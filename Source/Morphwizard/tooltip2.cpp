@@ -34,7 +34,7 @@ BOOL CToolTip2::Create(CWnd* pParentWnd)
 
 	m_pParentWnd = pParentWnd;
 	//Create font
-	m_font.CreateFont(15, 0, 0, 0, FW_REGULAR, 0, 0, 0, 0, 0, 0, 0, 0, "MS Sans Serif");
+	m_font.CreateFont(15, 0, 0, 0, FW_REGULAR, 0, 0, 0, 0, 0, 0, 0, 0, _T("MS Sans Serif"));
 	CRect rectInitialSize(0,0,0,0);//Initial Window size. Will be dynamically changed later.
 	return CreateEx(WS_EX_TOOLWINDOW , NULL, NULL,WS_POPUP |  WS_CHILD | WS_CLIPSIBLINGS,
 		rectInitialSize,pParentWnd, NULL, NULL);

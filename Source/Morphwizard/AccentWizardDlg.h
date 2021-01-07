@@ -1,7 +1,6 @@
 #pragma once
 
 #include "FileEditCtrl.h"
-#include "smart_ptr.h"
 #include "afxcmn.h"
 #include "MorphwizardView.h"
 #include <afxtempl.h>

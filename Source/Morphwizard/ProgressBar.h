@@ -102,9 +102,9 @@ BOOL PeekAndPump();
 class CProgressMeterRML: public CFileMeterRML
 {
 public:
-	CProgressMeterRML() : m_bar("",100,100,TRUE)	{}
+	CProgressMeterRML() : m_bar(_T(""),100,100,TRUE)	{}
 
-	virtual void SetInfo( LPCSTR info )	{ m_bar.SetText(info); }
+	virtual void SetInfo( LPCTSTR info )	{ m_bar.SetText(info); }
 protected:
 	virtual	void UpdateMaxPos()			{ m_bar.SetRange(0,GetMaxPos()); }
 	virtual	void UpdatePos()			{ m_bar.SetPos(GetPos()); PeekAndPump(); }
@@ -117,9 +117,9 @@ class CWizardProgressMeter: public MorphWizardMeter
 {
 public:
 	CWizardProgressMeter( MorphoWizard& wizard ) 
-		: MorphWizardMeter(wizard), m_bar("",100,100,TRUE)	{}
+		: MorphWizardMeter(wizard), m_bar(_T(""),100,100,TRUE)	{}
 
-	virtual void SetInfo( LPCSTR info )	{ m_bar.SetText(info); }
+	virtual void SetInfo( LPCTSTR info )	{ m_bar.SetText(info); }
 protected:
 	virtual	void UpdateMaxPos()			{ m_bar.SetRange(0,GetMaxPos()); }
 	virtual	void UpdatePos()			{ m_bar.SetPos(GetPos()); PeekAndPump(); }

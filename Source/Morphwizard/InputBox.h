@@ -1,19 +1,8 @@
-#if !defined(AFX_INPUTBOX_H__0AA09789_C726_11D2_A6E4_A290D9000000__INCLUDED_)
-#define AFX_INPUTBOX_H__0AA09789_C726_11D2_A6E4_A290D9000000__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
-// InputBox.h : header file
-//
-
-/////////////////////////////////////////////////////////////////////////////
-// CInputBox dialog
 #include "resource.h"
 
 class CInputBox : public CDialog
 {
-// Construction
 public:
 	CInputBox(CWnd* pParent = NULL);   // standard constructor
 
@@ -44,9 +33,5 @@ protected:
 };
 
 
-extern bool InputBox (const char* Caption, std::string& OutBuffer);
+extern bool InputBox (CString Caption, CString& OutBuffer);
 
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_INPUTBOX_H__0AA09789_C726_11D2_A6E4_A290D9000000__INCLUDED_)

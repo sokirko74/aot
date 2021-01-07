@@ -116,6 +116,13 @@
 #define IDC_ADD_PREFIX                  1057
 #define IDC_CHANGE_PARADIGM             1059
 #define IDC_READONLY_IMAGE              1077
+#define IDC_FILTER_STATIC               1078
+#define IDC_GROUP_BOX_ADD               1079
+#define IDC_GROUP_BOX_EDIT              1080
+#define IDC_MIN_FREQ_STATIC             1081
+#define IDC_SUF_STATIC				    1082
+#define IDC_SUF_EDIT                    1083
+
 #define ID_FIND_PARADIGM                32772
 #define ID_SAVE_LIST_FILE               32774
 #define ID_TOOLS_SAVE_LIST_FILE         32774

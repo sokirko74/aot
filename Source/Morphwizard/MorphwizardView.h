@@ -6,8 +6,6 @@
 
 
 #include "afxcmn.h"
-#include "SizeFormView.h"
-#include "smart_ptr.h"
 #include "afxwin.h"
 #include "list"
 #include "ListCtrlToolTip.h"
@@ -17,11 +15,11 @@
 //----------------------------------------------------------------------------
 class CSLFDocument;
 class CMorphwizardDoc;
-class FreqDict;
+
 
 
 //----------------------------------------------------------------------------
-class CMorphwizardView : public CSizeFormView
+class CMorphwizardView : public CFormView
 {
 
 	std::vector<lemma_iterator_t> found_paradigms;
@@ -29,7 +27,8 @@ class CMorphwizardView : public CSizeFormView
 	bool			m_inPredict;
 	bool			m_inFilter;
 	HICON			m_hIcon;
-	std::list<std::string>	m_LastQueries;
+	int				m_ControlMargin;
+	std::list<CString>	m_LastQueries;
 
 
 	void	ShowFoundParadigms();
@@ -37,7 +36,8 @@ class CMorphwizardView : public CSizeFormView
 	int		GetPredictOrderId(const CPredictSuffix& S)  const;
 	void	LoadHistory();
 	void	SaveHistory();
-	void	ChangeHistory(std::string query);
+	void	ChangeHistory(CString query);
+	int		PlaceSimpleControl(int id, int x, int y);
 
 protected: // create from serialization only
 	CMorphwizardView();
@@ -58,7 +58,7 @@ public:
 	CMorphwizardDoc* GetDocument() const;
 	MorphoWizard* GetWizard();
 	CSLFDocument* NewSLFDocument ();
-
+	
 // Operations
 public:
 	enum { IDD = IDD_MORHWIZARD_VIEW };
@@ -76,7 +76,8 @@ public:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 	virtual void OnInitialUpdate();
 	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	std::string ToInnerEncoding(CString strText) const;
+	CString FromInnerEncoding(std::string s) const;
 protected:
 
 // Implementation
@@ -126,6 +127,7 @@ protected:
 	afx_msg void OnUpdateToolsSetParaNo(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateToolsAccentWizard(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateToolsSaveListFile(CCmdUI *pCmdUI);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
 	afx_msg LRESULT OnNextNonAccentedPara( WPARAM wp, LPARAM lp );
 	afx_msg void OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd);
@@ -140,39 +142,11 @@ protected:
 
 	bool m_partialAccentedPara;
 public:
-	master_ptr<FreqDict>	m_pFreqDict;
 	
 	int m_PredictSuffLength;
 	afx_msg void OnBnClickedSetPrdComments();
 };
 
-
-//----------------------------------------------------------------------------
-// for AccentWizard
-//----------------------------------------------------------------------------
-class FreqDict
-{
-	struct FreqWord: std::string
-	{
-		int freq;
-		bool operator !() const	{ return empty() || freq<=0; }
-	};
-public:
-	FreqDict( CFileMeterRML* pMeter=NULL ) : m_pMeter(pMeter), m_minFreq(2)	{}
-
-	bool operator!() const						{ return  m_words.empty(); }
-	const int GetWordCount() const					{ return  m_words.size(); }
-	const std::string& GetWord( int index ) const	{ return m_words[index]; }
-	int GetFrequency( int index ) const			{ return m_words[index].freq; }
-	bool Load( const CString&  fileName, int minFreq=2 );
-	int GetMinFrequency() const					{ return m_minFreq; }
-	const CString&	GetFileName() const			{ return m_fileName; }
-private:
-	std::vector<FreqWord>		m_words;
-	init_ptr<CFileMeterRML>		m_pMeter;
-	CString		m_fileName;
-	int			m_minFreq;
-};
 
 //----------------------------------------------------------------------------
 #ifndef _DEBUG  // debug version in MorphwizardView.cpp

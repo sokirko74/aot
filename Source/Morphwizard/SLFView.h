@@ -30,6 +30,8 @@ public:
 	CRichEditCtrl& GetRichEditCtrl();
 	void ChangeSize(UINT nType, int cx, int cy);
 	void set_lists();
+	std::string ToInnnerEncoding(CString str) const;
+	CString FromInnerEncoding(std::string s) const;
 
 #ifdef _DEBUG
 	virtual void AssertValid() const;

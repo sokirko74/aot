@@ -1,12 +1,11 @@
 #pragma once
 
-#include "SizeFormView.h"
 #include "../MorphWizardLib/wizard.h"
 class CSLFDocument;
 
 // CParadigmDifferences form view
 
-class CParadigmDifferences : public CSizeFormView
+class CParadigmDifferences : public CFormView
 {
 	DECLARE_DYNCREATE(CParadigmDifferences)
 

@@ -15,30 +15,12 @@
 #define CLR_BKGRD_MODIFIED			RGB(210,200,220)
 #define CLR_BKGRD_UNKNOWN_ACCENT	RGB(255,230,230)
 
-#ifdef DETECT_MEMORY_LEAK
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CSyntaxColorizer::CSyntaxColorizer()
 {
-	for (int i = 0; i < 256; i++)
-		Alphas[i] = is_alpha(i) || isdigit(i) || (i == '_');
-
 	ZeroMemory(&m_cfDefault,sizeof(m_cfDefault));
 
 	m_cfDefault.dwMask = CFM_CHARSET | CFM_FACE | CFM_SIZE | CFM_OFFSET | CFM_COLOR 
 		| CFM_BACKCOLOR;
-/*
-	m_cfDefault.dwMask ^= CFM_ITALIC ^ CFM_BOLD ^ CFM_STRIKEOUT ^ CFM_UNDERLINE
-		^CFM_ANIMATION ^CFM_KERNING ^CFM_LCID ^CFM_REVAUTHOR ^CFM_SPACING ^CFM_STYLE
-		^CFM_UNDERLINETYPE ^CFM_WEIGHT;
-*/
 	m_cfDefault.dwEffects = CFE_AUTOBACKCOLOR;
 
 	m_cfDefault.yHeight = 200; //10pts * 20 twips/point = 200 twips
@@ -46,7 +28,7 @@ CSyntaxColorizer::CSyntaxColorizer()
 	m_cfDefault.bPitchAndFamily = FIXED_PITCH | FF_MODERN;
 	m_cfDefault.yOffset = 0;
 	m_cfDefault.crTextColor = CLR_PLAIN;
-	strcpy(m_cfDefault.szFaceName,"Courier New");
+	wcscpy(m_cfDefault.szFaceName, _T("Courier New"));
 	m_cfDefault.crBackColor = CLR_BKGRD;
 	m_cfDefault.cbSize = sizeof(m_cfDefault);
 
@@ -58,11 +40,16 @@ void CSyntaxColorizer::InitializeParser(IsKeyWordFunction Func, void* UserData)
 	m_UserData = UserData;
 }
 
+bool is_alpha_digit(TCHAR c) 
+{
+	return ::_istalpha(c) || c == '_';
+}
+
 void CSyntaxColorizer::Colorize( CRichEditCtrl *pCtrl, int lineIndex, bool bModified ) 
 {
 	CString SourceText;
 	pCtrl->GetWindowText(SourceText);
-	int k = SourceText.Replace("\r\n", "\n");
+	int k = SourceText.Replace(_T("\r\n"), _T("\n"));
 	
 	long nStartChar=0, nEndChar=SourceText.GetLength();
 	
@@ -89,7 +76,7 @@ void CSyntaxColorizer::Colorize( CRichEditCtrl *pCtrl, int lineIndex, bool bModi
 
 	for( int wordStart=nStartChar; wordStart<nEndChar; )
 	{
-		int lineEnd = SourceText.Find("\n",wordStart);
+		int lineEnd = SourceText.Find(_T("\n"), wordStart);
 		if( lineEnd==-1 || lineEnd>nEndChar ) lineEnd=nEndChar;
 		// пропускаем пробелы в начале строки
 		for( ; wordStart<lineEnd && SourceText[wordStart]==' '; ++wordStart );
@@ -119,12 +106,11 @@ void CSyntaxColorizer::Colorize( CRichEditCtrl *pCtrl, int lineIndex, bool bModi
 	cf.dwEffects = 0;
 
 	const size_t MaxKeyWordLen = 50;
-	char buffer[MaxKeyWordLen+1];
-
+	TCHAR buffer[MaxKeyWordLen+1];
 	for (long x = nStartChar; x < nEndChar; x++)
 	{
 		long end = x;
-		for (; ((end - x) < MaxKeyWordLen) &&  Alphas[(unsigned char) SourceText.GetAt(end) ]; end++)
+		for (; ((end - x) < MaxKeyWordLen) && is_alpha_digit(SourceText.GetAt(end)); end++)
 			buffer[end - x] = SourceText.GetAt(end);
 
 		if (end == x) 
@@ -132,7 +118,7 @@ void CSyntaxColorizer::Colorize( CRichEditCtrl *pCtrl, int lineIndex, bool bModi
 
 		if ( (end - x) >= MaxKeyWordLen)
 		{
-			while (Alphas[(unsigned char) SourceText.GetAt(end) ])
+			while (is_alpha_digit(SourceText.GetAt(end)))
 				end++;
 		}
 		else

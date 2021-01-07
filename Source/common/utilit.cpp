@@ -7,6 +7,8 @@
 #include <codecvt>
 #include <locale>
 #include <filesystem>
+#include <iostream>
+#include <sstream>
 
 //  for mkdir
 #ifdef WIN32
@@ -2473,6 +2475,74 @@ std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum lang
 	}
 }
 
+std::wstring UTF8toUTF16Win32(const std::string& utf8)
+{
+	std::wstring utf16;
+	int len = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, NULL, 0);
+	if (len > 0)
+	{
+		utf16.resize(len);
+		wchar_t* ptr = &utf16[0];
+		if (ptr) MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, ptr, len);
+	}
+	return utf16;
+}
+
+
+std::wstring utf8_to_utf16(const std::string& str) {
+#ifdef WIN32
+	return UTF8toUTF16Win32(str);
+#else
+	std::wstring_convert<std::codecvt_utf8_utf16<char16_t> > converter;
+	return converter.from_bytes(str);
+
+#endif
+}
+
+std::string WstrToUtf8StrWin32(const std::wstring& wstr)
+{
+	std::string retStr;
+	if (!wstr.empty())
+	{
+		int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
+
+		if (sizeRequired > 0)
+		{
+			std::vector<char> utf8String(sizeRequired);
+			int bytesConverted = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(),
+				-1, &utf8String[0], utf8String.size(), NULL,
+				NULL);
+			if (bytesConverted != 0)
+			{
+				retStr = &utf8String[0];
+			}
+			else
+			{
+				std::stringstream err;
+				err << __FUNCTION__
+					<< " std::string WstrToUtf8Str failed to convert wstring '"
+					<< wstr.c_str() << L"'";
+				throw std::runtime_error(err.str());
+			}
+		}
+	}
+	return retStr;
+}
+
+
+std::string utf16_to_utf8(const std::wstring& wstr) {
+	
+#ifdef WIN32
+	// I cannot compile converting with wstring_convert under Visual Studio.
+	// Remember, that codecvt_utf8_utf16  is deprecated in C++17
+	return WstrToUtf8StrWin32(wstr);
+#else
+	std::u16string u16str(wstr.begin(), wstr.end());
+	std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t > converter;
+	std::string s =  converter.to_bytes(u16str.c_str());
+	return s;
+#endif
+}
 
 void CTestCaseBase::read_test_cases(std::istream& inp) {
 	TestCases.clear();
@@ -2529,4 +2599,3 @@ std::string join_string(const std::vector<std::string>& items, const std::string
 	}
 	return result;
 }
-//#endif

@@ -105,7 +105,7 @@ void CMDITabs::Update()
   }
 
   TCITEM item;
-  char text[256];
+  TCHAR text[256];
   item.pszText = text;
 
   int i = GetItemCount();
@@ -281,9 +281,9 @@ void CMDITabs::Create(CFrameWnd* pMainFrame, uint32_t dwStyle)
   HWND wnd = ::GetTopWindow(*pMainFrame);
   for (; wnd; wnd = ::GetNextWindow(wnd, GW_HWNDNEXT))
   {
-    char wndClass[32];
+    TCHAR wndClass[32];
     ::GetClassName(wnd, wndClass, 32);
-    if (strncmp(wndClass, "MDIClient", 32) == 0) break;
+    if (wcsncmp(wndClass, _T("MDIClient"), 32) == 0) break;
   }
   m_mdiClient = wnd;
 

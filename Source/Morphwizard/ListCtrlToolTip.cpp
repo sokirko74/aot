@@ -131,7 +131,7 @@ LRESULT CListCtrlToolTip::OnMouseHover(WPARAM wParam, LPARAM lParam)
 	int		nItem = ItemFromPoint(point);
 	if (nItem == -1) return 0;
 	if ( nItem < m_ToolTips.size() )
-			SetToolTipText(m_ToolTips[nItem].c_str(), point);
+			SetToolTipText(m_ToolTips[nItem], point);
 
     return 0;
 }

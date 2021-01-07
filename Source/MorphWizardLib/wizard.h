@@ -1,5 +1,4 @@
-#ifndef _INCL_WIZARD_H
-#define _INCL_WIZARD_H
+#pragma once 
 
 #pragma warning(disable:4786)
 #pragma warning(disable:4503)
@@ -8,15 +7,11 @@
 #include "FormInfo.h"
 #include "OperationMeter.h"
 
-//----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
 
-//----------------------------------------------------------------------------
 const uint16_t UnknownSessionNo = 0xffff-1;
 const uint16_t UnknownPrefixSetNo = 0xffff-1;
 const BYTE UnknownAccent = 0xff;	// не менять - уже проставлено в mrd
 
-// Nick [17/Dec/2003]
 const uint16_t AnyParadigmNo = 0xffff;
 const uint16_t AnyAccentModelNo = 0xffff;
 const uint16_t AnySessionNo = 0xffff;
@@ -270,6 +265,9 @@ public:
 	void	StartLastSessionOfUser(std::string user_name);
 	uint16_t	RegisterSession(const CMorphSession& S);
     bool    Filter(std::string flt_str, std::vector<lemma_iterator_t>& found_paradigms) const;
+	
+	std::string ToRMLEncoding(std::wstring strText) const;
+	std::wstring FromRMLEncoding(std::string s) const;
 private:
 	BYTE	_GetReverseVowelNo( const std::string& form, uint16_t accentModelNo, uint16_t formInd ) const;
 	void	SetAccent(uint16_t AccentModelNo, BYTE AuxAccent, int FormNo, std::string& form) const;
@@ -297,4 +295,3 @@ private:
 
 extern BYTE  TransferReverseVowelNoToCharNo( const std::string& form, BYTE AccentCharNo, MorphLanguageEnum Language);
 
-#endif // _INCL_WIZARD_H

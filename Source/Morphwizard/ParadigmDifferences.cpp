@@ -8,10 +8,10 @@
 
 // CParadigmDifferences
 
-IMPLEMENT_DYNCREATE(CParadigmDifferences, CSizeFormView)
+IMPLEMENT_DYNCREATE(CParadigmDifferences, CFormView)
 
 CParadigmDifferences::CParadigmDifferences()
-	: CSizeFormView(CParadigmDifferences::IDD)
+	: CFormView(CParadigmDifferences::IDD)
 	, m_Results(_T(""))
 	, m_Paradigm1(-1)
 	, m_Paradigm2(-1)
@@ -30,7 +30,7 @@ void CParadigmDifferences::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_PARAD_2, m_Paradigm2);
 }
 
-BEGIN_MESSAGE_MAP(CParadigmDifferences, CSizeFormView)
+BEGIN_MESSAGE_MAP(CParadigmDifferences, CFormView)
 	ON_BN_CLICKED(ID_ANALYSE, OnBnClickedAnalyse)
 	ON_BN_CLICKED(IDCANCEL, OnBnClickedCancel)
 	ON_WM_ACTIVATE()
@@ -91,6 +91,5 @@ void CParadigmDifferences::OnBnClickedCancel()
 
 void CParadigmDifferences::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 {
-	CSizeFormView::OnActivate(nState, pWndOther, bMinimized);
-	SetInputLanguage(GetWizard()->m_Language);
+	CFormView::OnActivate(nState, pWndOther, bMinimized);
 }

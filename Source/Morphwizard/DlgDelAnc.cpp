@@ -60,7 +60,7 @@ BOOL CDlgDelAnc::OnInitDialog()
 void CDlgDelAnc::OnBrowse() 
 {
 	CFileDialog dlgOpen(TRUE,NULL,NULL,
-		OFN_FILEMUSTEXIST|OFN_HIDEREADONLY,"All files(*.*)|*.*||");
+		OFN_FILEMUSTEXIST|OFN_HIDEREADONLY,_T("All files(*.*)|*.*||"));
 	if( dlgOpen.DoModal() != IDOK )
 		return;
 	m_file = dlgOpen.GetPathName();

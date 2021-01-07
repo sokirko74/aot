@@ -211,11 +211,6 @@ bool CParadigmInfo::IsAnyEqual(const CParadigmInfo &X) const {
 }
 
 
-//==============================================================================
-//	Р”Р°РЅРЅС‹Р№ РєР»Р°СЃСЃ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РјРѕСЂС„РѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ СЃР»РѕРІР°СЂСЏ.
-//	РЈРјРµРµРµС‚ Р·Р°РіСЂСѓР·РёС‚СЊ СЃР»РѕРІР°СЂСЊ, РЅР°Р№С‚Рё/РѕС‚СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ/СѓРґР°Р»РёС‚СЊ/РґРѕР±Р°РІРёС‚СЊ СЃР»РѕРІРѕС„РѕСЂРјСѓ,
-//	СЃРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ РІ СЃР»РѕРІР°СЂРµ.
-
 
 MorphoWizard::MorphoWizard()
         : m_bLoaded(false),
@@ -280,11 +275,6 @@ void MorphoWizard::load_string_vector(const std::string &name, StringVector &res
     }
 }
 
-
-//	Р·Р°РіСЂСѓР¶Р°РµС‚ *.mwz С„Р°Р№Р».
-//	РџСЂРёРјРµСЂ С„Р°Р№Р»Р°:
-
-//# СЂСѓСЃСЃРєР°СЏ РјРѕСЂС„РѕР»РѕРіРёСЏ
 //MRD_FILE 	L:\MORPH.COM\SOURCE\RUS_SRC\morphs.mrd
 //LANG	        RUSSIAN
 //USERS       user1, user2, user3
@@ -617,6 +607,10 @@ void MorphoWizard::ReadLemmas(std::ifstream &mrdFile) {
 
 
 
+//	Загружает *.mrd file.
+//---------------------------------------------------
+//	Описание формата *.mrd.
+
 //	file: paradigm_number
 //		paradigm |
 //		...	 } paradigm_number times
@@ -626,21 +620,21 @@ void MorphoWizard::ReadLemmas(std::ifstream &mrdFile) {
 //		...	  } base_number times
 //		base PNUM |
 //	paradigm: DICT_TYPE DEPR form ...
-//	base: РЅРµРёР·РјРµРЅСЏРµРјР°СЏ С‡Р°СЃС‚СЊ СЃР»РѕРІР°, РёР»Рё # РµСЃР»Рё РЅРµРёР·РјРµРЅСЏРµРјР°СЏ С‡Р°СЃС‚СЊ РїСѓСЃС‚Р°СЏ
-//	DICT_TYPE: С‚РёРї СЃР»РѕРІР°СЂСЏ, РѕРґРЅР° Р±СѓРєРІР°
-//	DEPR: РѕРґРЅР° Р±СѓРєРІР° (РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РІСЃРµРіРґР° '#')
+//	base: неизменяемая часть слова, или # если неизменяемая часть пустая
+//	DICT_TYPE: тип словаря, одна буква
+//	DEPR: одна буква (не используется, всегда '#')
 //	form: % FLEX * ancode ...
 //
-//	PNUM - РЅРѕРјРµСЂ РїР°СЂР°РґРёРіРёС‹, РЅР°С‡РёРЅР°СЏ СЃ 0
+//	PNUM - номер парадигиы, начиная с 0
 //	
-//	FLEX: РѕРєРѕРЅС‡Р°РЅРёРµ.
+//	FLEX: окончание.
 //
-//	РџРµСЂРІРѕРµ РѕРєРѕРЅС‡Р°РЅРёРµ - РѕРєРѕРЅС‡Р°РЅРёРµ РЅРѕСЂРјР°Р»СЊРЅРѕР№ С„РѕСЂРјС‹.
-//	РћСЃС‚Р°Р»СЊРЅС‹Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅС‹ РїРѕ Р°Р»С„Р°РІРёС‚Сѓ.
-//	Р’РЅСѓС‚СЂРё РѕРґРЅРѕР№ С„РѕСЂРјС‹ Р°РЅРєРѕРґС‹ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅС‹ РїРѕ Р°Р»С„Р°РІРёС‚Сѓ
-//	(СЃРЅР°С‡Р°Р»Р° РјР°Р»РµРЅСЊРєРёРµ Р±СѓРєРІС‹, РїРѕС‚РѕРј Р±РѕР»СЊС€РёРµ)
+//	Первое окончание - окончание нормальной формы.
+//	Остальные окончания отсортированы по алфавиту.
+//	Внутри одной формы анкоды отсортированы по алфавиту
+//	(сначала маленькие буквы, потом большие)
 
-//	РџСЂРѕР±РµР»Р° РІРЅСѓС‚СЂРё РїР°СЂР°РґРёРіРјС‹ РЅРµС‚.
+//	Пробела внутри парадигмы нет.
 //---------------------------------------------------
 void MorphoWizard::load_mrd(bool guest, bool bCreatePrediction) {
     m_ReadOnly = guest || (access(get_lock_file_name().c_str(), 0) != -1);
@@ -2542,4 +2536,14 @@ bool MorphoWizard::Filter(std::string flt_str, std::vector<lemma_iterator_t> &fo
         filter_paradigms.swap(found_paradigms);
     }
     return true;
+}
+
+std::string MorphoWizard::ToRMLEncoding(std::wstring strText) const
+{
+    return convert_from_utf8(utf16_to_utf8(strText).c_str(), m_Language);
+}
+
+std::wstring MorphoWizard::FromRMLEncoding(std::string s) const
+{
+    return utf8_to_utf16(convert_to_utf8(s, m_Language));
 }
