@@ -162,9 +162,12 @@ IF (MSVC)
     endif()
 
     if(BUILD_WINDOWS_GUI)
-        #must be compiled 32bit, since we have only 32-bit tcl80.lib
+        
         if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
+            #must be compiled 32bit, since we have only 32-bit tcl80.lib
             add_subdirectory (RossDev)
+            
+            # obsolete mdi tabs cannot be comppiled under 64
             add_subdirectory (Morphwizard)
         endif()
     endif()

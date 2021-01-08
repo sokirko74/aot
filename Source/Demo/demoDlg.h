@@ -59,7 +59,7 @@ protected:
 	bool m_bGerAgramLoaded;	
 	AGRAMTABLib::IGramTabPtr		GetGramTabByLanguage(int Lang);
 	LEMMATIZERLib::ILemmatizerPtr	GetLemmatizerByLanguage(int Lang);
-	const char* CDemoDlg::GetStrByLanguage(int Lang);
+	const TCHAR* CDemoDlg::GetStrByLanguage(int Lang);
 	// Generated message map functions
 	//{{AFX_MSG(CDemoDlg)
 	virtual BOOL OnInitDialog();

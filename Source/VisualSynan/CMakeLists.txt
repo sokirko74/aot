@@ -26,7 +26,6 @@ VisualWord.cpp
 WaitDlg.cpp
 WaitThread.cpp
 ../common/COM/COMSyntaxHolder.cpp
-../common/COM/windows_unicode.cpp
 )
 
 add_definitions(-D_AFXDLL)
@@ -38,6 +37,7 @@ add_dependencies(${PROJECT_NAME}
     SynAn
     Lemmatizer
     graphan
+    MAPost
 )
 
 target_link_libraries(${PROJECT_NAME}

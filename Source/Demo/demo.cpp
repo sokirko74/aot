@@ -6,7 +6,7 @@
 #include "demoDlg.h"
 #include "Splash.h"
 #include "../common/utilit.h"
-#include "../common/COM/windows_unicode.h"
+#include "../common/windows_unicode.h"
 
 
 

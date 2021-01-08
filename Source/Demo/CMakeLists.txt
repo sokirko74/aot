@@ -13,11 +13,11 @@ add_executable (${PROJECT_NAME} WIN32
     demo.cpp
     demo.rc
     demoDlg.cpp
-    ../common/COM/windows_unicode.cpp
 )
 
 add_dependencies(${PROJECT_NAME} 
     Lemmatizer
+    agramtab
 )
 
 target_link_libraries(${PROJECT_NAME}

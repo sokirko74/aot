@@ -275,12 +275,12 @@ LEMMATIZERLib::ILemmatizerPtr CDemoDlg::GetLemmatizerByLanguage(int Lang)
 	return 0;
 };
 
-const char* CDemoDlg::GetStrByLanguage(int Lang)
+const TCHAR* CDemoDlg::GetStrByLanguage(int Lang)
 {
 	switch (Lang) {
-		case morphRussian:  return "Rus";
-		case morphEnglish:  return "Eng";
-		case morphGerman:  return  "Ger";
+		case morphRussian:  return _T("Rus");
+		case morphEnglish:  return _T("Eng");
+		case morphGerman:  return  _T("Ger");
 	};
 	assert (false);
 	return 0;
@@ -430,7 +430,7 @@ void CDemoDlg::OnButtonFind()
 			   if (i == piParadigmCollection->Count) break;
  			   piParadigm = piParadigmCollection->Item[i];
 			};
-			m_ctrlResults.InsertItem(i, UTF8toUTF16(GetStrByLanguage(Lang)));
+			m_ctrlResults.InsertItem(i, GetStrByLanguage(Lang));
 			m_ctrlResults.SetItemText(i, COLUMN_STATUS, piParadigm->Founded ? _T("Found"): _T("Predicted"));
 			bFoundSomething |= (piParadigm->Founded == TRUE);
 			if (piParadigm->Founded)
@@ -486,7 +486,7 @@ void CDemoDlg::OnButtonFind()
 				for (int j = 0; j < srccode.GetLength(); j+=2)
 				{
 					std::wstring onecode = srccode.Mid(j, 2);
-					BYTE POS = piAgram->GetPartOfSpeech(WstrToUtf8Str(onecode).c_str());
+					BYTE POS = piAgram->GetPartOfSpeech(utf16_to_utf8(onecode).c_str());
 					auto newpart = ReadStrFromCOM (piAgram->GetPartOfSpeechStr(POS));
 					if (oldpart != newpart)
 					{
