@@ -87,9 +87,7 @@
 #define IDC_EDIT_ALL_NONACCENTED_PARA   1024
 #define IDC_PRED_HINT                   1026
 #define IDC_MAXIMAL                     1031
-#define IDC_RFIND_LEM                   1034
-#define IDC_RFIND_GRM                   1035
-#define IDC_WORD_FORM                   1036
+
 #define IDC_BROWSE                      1037
 #define IDC_ANCODE                      1038
 #define IDC_RADIO1                      1039
@@ -105,8 +103,6 @@
 #define IDC_PARADIGM_TITLE              1048
 #define IDC_RESULTS                     1048
 #define IDC_FILE                        1049
-#define IDC_FIND_BY_GRAMCODE            1050
-#define IDC_FIND_BY_USERNAME            1051
 #define IDC_CUSTOM1                     1052
 #define IDC_RICHEDIT21                  1053
 #define IDC_MINIMAL_FREQUENCE           1054
@@ -122,7 +118,22 @@
 #define IDC_MIN_FREQ_STATIC             1081
 #define IDC_SUF_STATIC				    1082
 #define IDC_SUF_EDIT                    1083
-#define IDC_TOOL_TIP                    1084
+#define ID_TOOLS_SET_ACCENT_MODEL_NO    1084
+
+
+// radio button, mfc use teh first and the last buttons to get radio button value
+#define IDC_FIRST_BUTTON_SEARCH_TYPE    1090
+#define IDC_RFIND_LEM                   1090
+#define IDC_RFIND_GRM                   1091
+#define IDC_WORD_FORM                   1092
+#define IDC_FIND_BY_GRAMCODE            1093
+#define IDC_FIND_BY_USERNAME            1094
+#define IDC_FIND_BY_ACCENT_MODEL        1095
+#define IDC_FIND_BY_PARADIGM_NO         1096
+#define IDC_LAST_BUTTON_SEARCH_TYPE     1096
+#define DUMMY1     1097
+#define DUMMY2     1098
+
 
 #define ID_FIND_PARADIGM                32772
 #define ID_SAVE_LIST_FILE               32774

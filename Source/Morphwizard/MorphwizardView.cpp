@@ -33,10 +33,6 @@ CDocTemplate* GetTemplate( CString Name )
 }
 
 
-//----------------------------------------------------------------------------
-// CMorphwizardView
-//----------------------------------------------------------------------------
-
 IMPLEMENT_DYNCREATE(CMorphwizardView, CFormView)
 
 BEGIN_MESSAGE_MAP(CMorphwizardView, CFormView)
@@ -68,16 +64,11 @@ BEGIN_MESSAGE_MAP(CMorphwizardView, CFormView)
 	ON_COMMAND(ID_TOOLS_EXPORT, OnToolsExport)
 	ON_COMMAND(ID_TOOLS_PACK_MRD, OnToolsPackMrd)
 	ON_COMMAND(ID_TOOLS_SETPARADIGMNO, OnToolsSetParaNo)
+	ON_COMMAND(ID_TOOLS_SET_ACCENT_MODEL_NO, OnToolsSetAccentModelNo)
 	ON_COMMAND(ID_TOOLS_SELECT_BY_FILE, OnToolsSelectByFile)
 	ON_COMMAND(ID_TOOLS_SHOW_PARA_DIFF, OnToolsShowparadigmdifferences)
 	ON_COMMAND(ID_TOOLS_ACCENTWIZARD, OnToolsAccentWizard)
-	ON_UPDATE_COMMAND_UI(ID_TOOLS_EXPORT, OnUpdateToolsExport)
-	ON_UPDATE_COMMAND_UI(ID_TOOLS_IMPORT, OnUpdateToolsImport)
-	ON_UPDATE_COMMAND_UI(ID_TOOLS_PACK_MRD, OnUpdateToolsPackMrd)
-	ON_UPDATE_COMMAND_UI(ID_TOOLS_SET_PARA_NO, OnUpdateToolsSetParaNo)
-	ON_UPDATE_COMMAND_UI(ID_TOOLS_ACCENTWIZARD, OnUpdateToolsAccentWizard)
 	ON_MESSAGE(WM_NEXT_NONACCENTED_PARA, OnNextNonAccentedPara)
-	ON_UPDATE_COMMAND_UI(ID_TOOLS_SAVE_LIST_FILE, OnUpdateToolsSaveListFile)
 	ON_BN_CLICKED(IDC_SET_PRD_COMMENTS, OnBnClickedSetPrdComments)
 	ON_WM_SIZE()
 END_MESSAGE_MAP()
@@ -128,16 +119,12 @@ MorphoWizard* CMorphwizardView::GetWizard()
 };
 
 
-// CMorphwizardView drawing
-
 void CMorphwizardView::OnDraw(CDC* /*pDC*/)
 {
 	CMorphwizardDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 }
 
-
-// CMorphwizardView diagnostics
 
 #ifdef _DEBUG
 void CMorphwizardView::AssertValid() const
@@ -321,68 +308,58 @@ void CMorphwizardView::OnFind()
 
 		CString find_what;
 		m_FindWhat.GetWindowText(find_what);
+		find_what.Trim();
 		if (find_what == "") return;
 		ChangeHistory(find_what);
 		UpdateData(FALSE);
 		std::string find_what_rml = ToInnerEncoding(find_what);
+		Trim(find_what_rml);
 
 		CWizardProgressMeter meter(*GetWizard());
-
-		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_WORD_FORM)==IDC_RFIND_LEM)
-		{
-			std::string s = find_what_rml;
-			RmlMakeUpper(s, GetWizard()->m_Language);
-			Trim(s);
-			char ch = s[0];
-			if( '0'<=ch && ch<='9' )
-			{
-				int prdno = atoi(s.c_str());
-				GetWizard()->find_lemm_by_prdno(prdno,found_paradigms);
+		int typeSearch = GetCheckedRadioButton(IDC_FIRST_BUTTON_SEARCH_TYPE, IDC_LAST_BUTTON_SEARCH_TYPE);
+		switch (typeSearch) {
+		case IDC_RFIND_LEM:
+			RmlMakeUpper(find_what_rml, GetWizard()->m_Language);
+			GetWizard()->find_lemm(find_what_rml.c_str(), false, found_paradigms);
+			break;
+		case IDC_FIND_BY_PARADIGM_NO:
+			if (iswdigit(find_what[0])) {
+				GetWizard()->find_lemm_by_prdno(atoi(find_what_rml.c_str()), found_paradigms);
 			}
-			else
-			{
-				if (s.substr(0,7) == "ACCENT=")
-				{
-					int accent_model_no = atoi(s.c_str()+7);
-					GetWizard()->find_lemm_by_accent_model(accent_model_no, found_paradigms);
-				}
-				else
-					GetWizard()->find_lemm(s.c_str(), false, found_paradigms);
-			};
-		}
-	//
-		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_WORD_FORM)==IDC_RFIND_GRM)
+			break;
+		case IDC_RFIND_GRM:
 			GetWizard()->find_lemm_by_grammem(find_what_rml, found_paradigms);
-
-		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_WORD_FORM)==IDC_WORD_FORM)
-		{
-			std::string s = find_what_rml;
+			break;
+		case IDC_WORD_FORM:
 			// нельзя применять  RmlMakeUpper из-за "*"
 			if (GetWizard()->IsGerman())
-				GerMakeUpper(s);
+				GerMakeUpper(find_what_rml);
 			else
-				EngRusMakeUpper(s);
-			GetWizard()->find_wordforms(s.c_str(), found_paradigms);
-		};
-
-		//  findinsg by gramcode
-		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_FIND_BY_GRAMCODE)==IDC_FIND_BY_GRAMCODE)
-		{
+				EngRusMakeUpper(find_what_rml);
+			GetWizard()->find_wordforms(find_what_rml.c_str(), found_paradigms);
+			break;
+		case IDC_FIND_BY_GRAMCODE:
 			GetWizard()->find_ancodes(find_what_rml.c_str(), found_paradigms);
-		};
-		if(GetCheckedRadioButton(IDC_RFIND_LEM,IDC_FIND_BY_USERNAME)==IDC_FIND_BY_USERNAME)
-		{
+			break;
+		case IDC_FIND_BY_USERNAME:
 			GetWizard()->find_lemm_by_user(find_what_rml.c_str(), found_paradigms);
-		};
-		
+			break;
+		case IDC_FIND_BY_ACCENT_MODEL:
+			if (iswdigit(find_what[0])) {
+				GetWizard()->find_lemm_by_accent_model(atoi(find_what_rml.c_str()), found_paradigms);
+			}
+			break;
+		}
 
-	// proceed filter std::string
 		FilterFoundParadigms();
 		ShowFoundParadigms();
 	}
 	catch (CExpc C)
 	{
 		ErrorMessage(C.m_strCause);
+	}
+	catch (...) {
+		AfxMessageBox(_T("Search failed"));
 	}
 }
 
@@ -1076,10 +1053,6 @@ void CMorphwizardView::OnNMDblclkFoundList2(NMHDR *pNMHDR, LRESULT *pResult)
 	*pResult = 0;
 }
 
-//----------------------------------------------------------------------------
-
-
-//----------------------------------------------------------------------------
 void CMorphwizardView::OnToolsSetParaNo()
 {
 	if (found_paradigms.empty()) 
@@ -1135,6 +1108,57 @@ void CMorphwizardView::OnToolsSetParaNo()
 	if (ErrorsCount > 0)
 	{
 		ErrorMessage (Format("This last operation cannot change lemma in %i cases.", ErrorsCount));
+	};
+	ShowFoundParadigms();
+}
+
+void CMorphwizardView::OnToolsSetAccentModelNo()
+{
+	if (found_paradigms.empty())
+	{
+		ErrorMessage("Cannot set accent model to an empty found list");
+		return;
+	};
+	POSITION pos = m_FoundList.GetFirstSelectedItemPosition();
+	uint16_t accentModeldNo = 0;
+	if (pos != 0)
+	{
+		size_t index = m_FoundList.GetNextSelectedItem(pos);
+		assert(index < found_paradigms.size());
+		accentModeldNo = found_paradigms[index]->second.m_AccentModelNo;
+	}
+	CString s;
+	s.Format(_T("%i"), accentModeldNo);
+	if (!InputBox(_T("Input accent model No:"), s)) return;
+	accentModeldNo = _ttoi(s);
+	if (accentModeldNo >= GetWizard()->m_AccentModels.size())
+	{
+		ErrorMessage(Format("accent model no %i is not found", accentModeldNo));
+		return;
+	}
+	std::set< std::pair<uint16_t, uint16_t> > flexia_model_to_accent_model;
+	for (auto const& p : GetWizard()->m_LemmaToParadigm) {
+		auto flex_and_accent = std::pair<uint16_t, uint16_t>(p.second.m_FlexiaModelNo, p.second.m_AccentModelNo);
+		flexia_model_to_accent_model.insert(flex_and_accent);
+	}
+
+	for (auto const& p: found_paradigms) {
+		auto flexia_model_no = p->second.m_FlexiaModelNo;
+		auto p = std::pair<uint16_t, uint16_t>(flexia_model_no, accentModeldNo);
+		if (flexia_model_to_accent_model.find(p) == flexia_model_to_accent_model.end()) {
+			ErrorMessage(Format("This operation would set accent model no %i to a word with flexia model no %i, this association is unknown. The operation was canceled ", accentModeldNo, flexia_model_no));
+			return;
+		}
+	}
+
+	CString Warn;
+	Warn.Format(_T("The program ascribes all found words to accent model %i . Continue?"), accentModeldNo);
+	if (::MessageBox(0, Warn, _T("MorphWizard"), MB_OKCANCEL) != IDOK)
+		return;
+
+
+	for (auto & p : found_paradigms) {
+		p->second.m_AccentModelNo = accentModeldNo;
 	};
 	ShowFoundParadigms();
 }
@@ -1203,36 +1227,6 @@ void CMorphwizardView::OnToolsShowparadigmdifferences()
 	pDocument->OpenDiffDialog();
 }
 
-
-void CMorphwizardView::OnUpdateToolsExport(CCmdUI *pCmdUI)
-{
-	//pCmdUI->Enable(!GetWizard()->m_ReadOnly);
-}
-
-void CMorphwizardView::OnUpdateToolsImport(CCmdUI *pCmdUI)
-{
-	// pCmdUI->Enable(!GetWizard()->m_ReadOnly);
-}
-
-void CMorphwizardView::OnUpdateToolsPackMrd(CCmdUI *pCmdUI)
-{
-	//pCmdUI->Enable(!GetWizard()->m_ReadOnly);
-}
-
-void CMorphwizardView::OnUpdateToolsSetParaNo(CCmdUI *pCmdUI)
-{
-	//pCmdUI->Enable(!GetWizard()->m_ReadOnly);
-}
-
-void CMorphwizardView::OnUpdateToolsSaveListFile(CCmdUI *pCmdUI)
-{
-	//pCmdUI->Enable(m_FoundList.GetItemCount()>0);
-}
-
-void CMorphwizardView::OnUpdateToolsAccentWizard(CCmdUI *pCmdUI)
-{
-	//pCmdUI->Enable(!GetWizard()->m_ReadOnly);
-}
 
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnToolsAccentWizard()
@@ -1337,6 +1331,9 @@ void CMorphwizardView::OnSize(UINT nType, int cx, int cy)
 	x = PlaceSimpleControl(IDC_FIND_BY_USERNAME, x, y);
 	x = PlaceSimpleControl(IDC_WORD_FORM, x, y);
 	x = PlaceSimpleControl(IDC_FIND_BY_GRAMCODE, x, y);
+	x = PlaceSimpleControl(IDC_FIND_BY_ACCENT_MODEL, x, y);
+	x = PlaceSimpleControl(IDC_FIND_BY_PARADIGM_NO, x, y);
+	
 
 	x = PlaceSimpleControl(IDC_MIN_FREQ_STATIC, center_plus_margin, y);
 	x = PlaceSimpleControl(IDC_MINIMAL_FREQUENCE, x, y);
@@ -1370,6 +1367,11 @@ void CMorphwizardView::OnSize(UINT nType, int cx, int cy)
 	x = margin;
 	y += margin + row_height;
 	GetDlgItem(IDC_STATUS)->SetWindowPos(&wndBottom, x, y, cx - 2 * margin, row_height, SWP_SHOWWINDOW);
+
+	if (!GetWizard()->m_ReadOnly)
+	{
+		GetDescendantWindow(IDC_READONLY_IMAGE)->ShowWindow(SW_HIDE);
+	}
 
 	CFormView::OnSize(nType, cx, cy);
 }

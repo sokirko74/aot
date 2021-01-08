@@ -135,6 +135,7 @@ BEGIN
         MENUITEM "Delete ancode in paradigms",  ID_TOOLS_DEL_ANCODE
         MENUITEM "Pack",                        ID_TOOLS_PACK_MRD
         MENUITEM "Set Paradigm No",             ID_TOOLS_SET_PARA_NO
+        MENUITEM "Set Accent Model No",         ID_TOOLS_SET_ACCENT_MODEL_NO
         MENUITEM "Show paradigm differences",   ID_TOOLS_SHOW_PARA_DIFF
         MENUITEM "Accent Wizard",               ID_TOOLS_ACCENTWIZARD
     END
@@ -583,6 +584,10 @@ BEGIN
     CONTROL         "user", IDC_FIND_BY_USERNAME, "Button", BS_AUTORADIOBUTTON, 140, 47, 27, 9
     CONTROL         "word form",IDC_WORD_FORM,"Button",BS_AUTORADIOBUTTON, 73,47,45,10
     CONTROL         "gramcode",IDC_FIND_BY_GRAMCODE,"Button", BS_AUTORADIOBUTTON,224,47,45,9
+    CONTROL         "accent model", IDC_FIND_BY_ACCENT_MODEL, "Button", BS_AUTORADIOBUTTON, 244, 47, 45, 9
+    CONTROL         "paradigm no", IDC_FIND_BY_PARADIGM_NO, "Button", BS_AUTORADIOBUTTON, 264, 47, 55, 9
+        
+
     LTEXT           "Min. frequence:", IDC_MIN_FREQ_STATIC, 309, 46, 50, 8
     EDITTEXT        IDC_MINIMAL_FREQUENCE, 365, 44, 40, 14, ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "Suffix Length:", IDC_SUF_STATIC, 419, 47, 44, 8

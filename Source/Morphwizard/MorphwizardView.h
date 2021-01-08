@@ -109,13 +109,8 @@ protected:
 	afx_msg void OnToolsShowparadigmdifferences();
 	afx_msg void OnToolsSelectByFile();
 	afx_msg void OnToolsSetParaNo();
+	afx_msg void OnToolsSetAccentModelNo();
 	afx_msg void OnToolsAccentWizard();
-	afx_msg void OnUpdateToolsExport(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateToolsImport(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateToolsPackMrd(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateToolsSetParaNo(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateToolsAccentWizard(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateToolsSaveListFile(CCmdUI *pCmdUI);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 
 	afx_msg LRESULT OnNextNonAccentedPara( WPARAM wp, LPARAM lp );

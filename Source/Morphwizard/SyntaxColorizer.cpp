@@ -28,7 +28,7 @@ CSyntaxColorizer::CSyntaxColorizer()
 	m_cfDefault.bPitchAndFamily = FIXED_PITCH | FF_MODERN;
 	m_cfDefault.yOffset = 0;
 	m_cfDefault.crTextColor = CLR_PLAIN;
-	wcscpy(m_cfDefault.szFaceName, _T("Courier New"));
+	_tcscpy(m_cfDefault.szFaceName, _T("Courier New"));
 	m_cfDefault.crBackColor = CLR_BKGRD;
 	m_cfDefault.cbSize = sizeof(m_cfDefault);
 

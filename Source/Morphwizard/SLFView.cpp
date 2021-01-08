@@ -697,43 +697,43 @@ void CSLFView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeac
 //----------------------------------------------------------------------------
 void CSLFView::OnBnClickedFixAccentBtn()
 {
-	CRichEditCtrl& re = GetRichEditCtrl();
+	CRichEditCtrl& richEdit = GetRichEditCtrl();
 	long nStartChar, nEndChar;
-	re.GetSel(nStartChar,nEndChar);
-	int lineStart=0, lineEnd=re.GetLineCount()-1;
+	richEdit.GetSel(nStartChar,nEndChar);
+	int lineStart=0, lineEnd=richEdit.GetLineCount()-1;
 	bool hasSel = (nEndChar>=0 && nEndChar!=nStartChar);
 	if( hasSel ) 
 	{
-		lineStart = re.LineFromChar(nStartChar);
-		lineEnd = re.LineFromChar(nEndChar-1)+1;
-		nStartChar = re.LineIndex(lineStart);
-		nEndChar = re.LineIndex(lineEnd);
+		lineStart = richEdit.LineFromChar(nStartChar);
+		lineEnd = richEdit.LineFromChar(nEndChar-1)+1;
+		nStartChar = richEdit.LineIndex(lineStart);
+		nEndChar = richEdit.LineIndex(lineEnd);
 		if( nEndChar==-1 ) 
-			nEndChar = re.GetTextLength();
+			nEndChar = richEdit.GetTextLength();
 	}
 	else
 	{
 		nStartChar = 0;
-		nEndChar = re.GetTextLength();
+		nEndChar = richEdit.GetTextLength();
 	}
 
 	if( lineEnd-lineStart<1 )
 		return;
 
 	CString text;
-	re.GetWindowText(text);
+	richEdit.GetWindowText(text);
 	int lineCount = text.Replace(_T("\r\n"), _T("\n"));
 
 	CString t = text.Mid(nStartChar);
 	int acc = t.FindOneOf(_T(" '\n"));
 	if( acc<=0 || t[acc]!='\'' 
-		|| !is_lower_vowel(t[acc-1],GetWizard()->m_Language) ) 
+		|| !is_lower_vowel(GetWizard()->ToRMLEncoding((const TCHAR*)t)[acc-1], GetWizard()->m_Language) )
 	{
 		return; 
 	}
 
 	if( hasSel ) 
-		re.SetSel(nStartChar,nEndChar);
+		richEdit.SetSel(nStartChar, nEndChar);
 
 	StringTokenizer	tok(ToInnnerEncoding(text).c_str(), "\n");
 	std::vector<std::string> lines;
@@ -765,7 +765,7 @@ void CSLFView::OnBnClickedFixAccentBtn()
 	}
 
 	if( hasSel ) 
-		re.SetSel(nStartChar,nStartChar);
+		richEdit.SetSel(nStartChar,nStartChar);
 
 	CRichEditRedrawer redrawer(*m_pRichView);
 
@@ -797,13 +797,13 @@ void CSLFView::OnBnClickedFixAccentBtn()
 		if( bChange ) 
 		{
 			s += "\r\n";
-			nStartChar = re.LineIndex(i);
-			nEndChar = re.LineIndex(i+1);
+			nStartChar = richEdit.LineIndex(i);
+			nEndChar = richEdit.LineIndex(i+1);
 			if( nEndChar==-1 ) 
-				nEndChar = re.GetTextLength();
+				nEndChar = richEdit.GetTextLength();
 
-			re.SetSel(nStartChar,nEndChar);
-			re.ReplaceSel(FromInnerEncoding(s));
+			richEdit.SetSel(nStartChar,nEndChar);
+			richEdit.ReplaceSel(FromInnerEncoding(s));
 			redrawer.RedrawLine(i);
 		}
 	}

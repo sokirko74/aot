@@ -200,6 +200,9 @@ CString CColorRichEditView::GetText() const
 
 void  CColorRichEditView::SetText(const CString& S)
 {
+	GetRichEditCtrl().SetSel(0, -1);
+	GetRichEditCtrl().Clear();
+
 	GetRichEditCtrl().SetSel(-1, -1);
 	GetRichEditCtrl().ReplaceSel(S);
 };

@@ -283,7 +283,7 @@ void CMDITabs::Create(CFrameWnd* pMainFrame, uint32_t dwStyle)
   {
     TCHAR wndClass[32];
     ::GetClassName(wnd, wndClass, 32);
-    if (wcsncmp(wndClass, _T("MDIClient"), 32) == 0) break;
+    if (_tcsncmp(wndClass, _T("MDIClient"), 32) == 0) break;
   }
   m_mdiClient = wnd;
 

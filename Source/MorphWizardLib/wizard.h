@@ -126,7 +126,7 @@ public:
 
 	std::vector<std::set<std::string> >	m_PrefixSets;
 
-	// the multimap from lemma to paradigms (the most largest list)
+	// the multimap from lemma to paradigms (the largest list)
 	LemmaMap				m_LemmaToParadigm;
 
 
