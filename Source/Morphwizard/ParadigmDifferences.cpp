@@ -68,7 +68,7 @@ void CParadigmDifferences::OnBnClickedAnalyse()
 			return;
 	}
 	std::string s = GetWizard()->show_differences_in_two_paradigms(m_Paradigm1,m_Paradigm2);
-	m_Results = s.c_str();
+	m_Results = GetWizard()->FromRMLEncoding(s).c_str();
 	UpdateData(FALSE);
 }
 

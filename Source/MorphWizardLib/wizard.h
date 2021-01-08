@@ -5,6 +5,7 @@
 #include "../common/utilit.h"
 #include "../AgramtabLib/agramtab_.h"
 #include "FormInfo.h"
+#include "DumpParadigm.h"
 #include "OperationMeter.h"
 
 
@@ -80,20 +81,6 @@ struct CPredictSuffix
 };
 
 //----------------------------------------------------------------------------
-struct CMorphSession
-{
-	std::string		m_UserName;
-	std::string		m_SessionStart;
-	std::string		m_LastSessionSave;
-
-	bool operator  == (const  CMorphSession& X) const;
-	bool		ReadFromString(const std::string& s);
-	std::string		ToString() const;
-	void		SetEmpty();
-	bool		IsEmpty() const;
-};
-
-//----------------------------------------------------------------------------
 class MorphWizardMeter;
 
 const int MinPredictSuffixLength = 2;
@@ -101,21 +88,6 @@ const int MaxPredictSuffixLength = 5;
 
 typedef std::set<CPredictSuffix> predict_container_t;
 
-struct CDumpParadigm 
-{
-	std::string			m_TypeGrammemsStr;
-	std::string			m_PrefixesStr;
-	std::string			m_SlfStr;
-	std::string			m_AuthorStr;
-	CMorphSession	m_Session;
-	int				m_FirstSlfLineNo;
-
-
-	void	SetEmpty();
-	bool	ReadFromFile(FILE* fp, int& line_no, bool& bError, std::string& Errors);
-	bool	SaveToFile(FILE* fp) const;
-	bool	SaveHeaderToFile(FILE* fp) const;
-};
 
 //----------------------------------------------------------------------------
 class MorphoWizard : public CMorphWizardBase
@@ -258,7 +230,6 @@ public:
 	bool	HasUnknownAccents( lemma_iterator_t it ) const;
 	bool	IsPartialAccented( lemma_iterator_t it ) const;
 	BYTE	GetLemmaAccent( const_lemma_iterator_t it ) const;
-	bool	ReadNextParadigmFromFile(FILE* fp, CDumpParadigm& P, int& line_no, bool& bError, std::string& Errors) const;
 	bool	StartSession(std::string user_name);
 	void	EndSession();
 	std::string  GetUserName() const;

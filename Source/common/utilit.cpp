@@ -2517,6 +2517,7 @@ std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum lang
 				}
 			}
 		}
+		return std::string("");
 	}
 #else //UNUX
 

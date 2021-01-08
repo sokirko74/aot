@@ -663,7 +663,7 @@ void CMorphwizardView::OnToolsSaveListFile()
 			+ GetWizard()->get_pos_string(found_paradigms[i]) 
 			+ " " 
 			+ GetWizard()->get_grammem_string(found_paradigms[i]);
-		fprintf (fp, "%s\n", s.c_str());
+		fprintf (fp, "%s\n", convert_to_utf8(s, GetWizard()->m_Language).c_str());
 			
 	}
     fclose (fp);
@@ -732,7 +732,7 @@ void CMorphwizardView::OnToolsExport()
 		GetWizard()->set_to_delete_false();
 		for  (long i=0;  i <found_paradigms.size(); i++) 
 		{
-			CDumpParadigm P;
+			CDumpParadigm P(GetWizard());
 			P.m_SlfStr = GetWizard()->get_slf_string(found_paradigms[i], P.m_TypeGrammemsStr, P.m_PrefixesStr, 50);
 			
 			if (found_paradigms[i]->second.m_PrefixSetNo != UnknownPrefixSetNo)
@@ -804,8 +804,8 @@ try {
 		std::string Errors;
 		line_no = 0;
 		bool bError;
-		CDumpParadigm P;
-		while  (GetWizard()->ReadNextParadigmFromFile(fp, P, line_no, bError, Errors)) 
+		CDumpParadigm P(GetWizard());
+		while  (P.ReadNextParadigmFromFile(fp, line_no, bError, Errors)) 
 		{
 			if (!bError)
 			{
@@ -856,7 +856,8 @@ try {
 		}
 		else
 		{
-			ErrorMessage(Format("Successfully %s %i paradigms from \"%s\"" , bTestMode? "tested":"imported", ParadigmCount, PathName), "Confirmation");
+			auto mess = Format("Successfully %s %i paradigms from \"%s\"", bTestMode ? "tested" : "imported", ParadigmCount, PathName);
+			ErrorMessage("Confirmation", mess);
 		};
 		if (pos == 0) break;
 		PathName = D.GetNextPathName(pos);
