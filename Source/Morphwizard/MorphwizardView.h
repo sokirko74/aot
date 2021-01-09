@@ -22,7 +22,7 @@ class CMorphwizardView : public CFormView, public CQueryHistory
 	bool			m_inFilter;
 	HICON			m_hIcon;
 	int				m_ControlMargin;
-	
+
 
 
 	void	ShowFoundParadigms();
@@ -32,23 +32,23 @@ class CMorphwizardView : public CFormView, public CQueryHistory
 
 protected: // create from serialization only
 	CMorphwizardView();
-	
+
 	DECLARE_DYNCREATE(CMorphwizardView)
 
 
 
-// Attributes
+	// Attributes
 public:
 	int		m_SortPredictColumn;
 
 	void echo(CString s);
 	CMenu   m_Menu;
-	
+
 	CMorphwizardDoc* GetDocument() const;
 	MorphoWizard* GetWizard();
-	CSLFDocument* NewSLFDocument ();
-	
-// Operations
+	CSLFDocument* NewSLFDocument();
+
+	// Operations
 public:
 	enum { IDD = IDD_MORHWIZARD_VIEW };
 	CComboBox			m_FindWhat;
@@ -60,8 +60,8 @@ public:
 	long				m_MinimalFrequence;
 	BOOL				m_bOnlyMainPartOfSpeeches;
 
-// Overrides
-	public:
+	// Overrides
+public:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 	virtual void OnInitialUpdate();
 	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
@@ -69,7 +69,7 @@ public:
 	CString FromInnerEncoding(std::string s) const;
 protected:
 
-// Implementation
+	// Implementation
 public:
 	virtual ~CMorphwizardView();
 #ifdef _DEBUG
@@ -80,7 +80,7 @@ public:
 
 protected:
 	afx_msg HCURSOR OnQueryDragIcon();
-	
+
 	afx_msg void OnRemove();
 	afx_msg void OnPredict();
 	afx_msg void OnAdd();
@@ -93,7 +93,7 @@ protected:
 	afx_msg void OnSetfocusPredictWhat();
 	afx_msg void OnKillfocusPredictWhat();
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
-	afx_msg void OnNMDblclkFoundList2(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnNMDblclkFoundList2(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnFindParadigm();
 	afx_msg void OnEditCopy();
 	afx_msg void OnEditCut();
@@ -101,32 +101,33 @@ protected:
 	afx_msg void OnEnKillfocusFilter();
 	afx_msg void OnEnSetfocusFilter();
 	afx_msg void OnHelpHelp();
-	afx_msg void OnLvnColumnclickFoundList2(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnColumnclickFoundList2(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnToolsPackMrd();
 	afx_msg void OnToolsSaveListFile();
 	afx_msg void OnToolsExport();
 	afx_msg void OnToolsImport();
 	afx_msg void OnToolsShowparadigmdifferences();
+	afx_msg void OnToolsShowAccentDifferences();
 	afx_msg void OnToolsSelectByFile();
 	afx_msg void OnToolsSetParaNo();
 	afx_msg void OnToolsSetAccentModelNo();
 	afx_msg void OnToolsAccentWizard();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 
-	afx_msg LRESULT OnNextNonAccentedPara( WPARAM wp, LPARAM lp );
+	afx_msg LRESULT OnNextNonAccentedPara(WPARAM wp, LPARAM lp);
 	afx_msg void OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd);
 
-	bool	OpenExistingParadigm( lemma_iterator_t it, bool bRunAccentWizard=false );
-	lemma_iterator_t FindNonAccentedPara( bool partialAccentedPara );
+	bool	OpenExistingParadigm(lemma_iterator_t it, bool bRunAccentWizard = false);
+	lemma_iterator_t FindNonAccentedPara(bool partialAccentedPara);
 
-// Generated message map functions
+	// Generated message map functions
 	DECLARE_MESSAGE_MAP()
 protected:
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 
 	bool m_partialAccentedPara;
 public:
-	
+
 	int m_PredictSuffLength;
 	afx_msg void OnBnClickedSetPrdComments();
 };
@@ -135,7 +136,9 @@ public:
 //----------------------------------------------------------------------------
 #ifndef _DEBUG  // debug version in MorphwizardView.cpp
 inline CMorphwizardDoc* CMorphwizardView::GetDocument() const
-   { return reinterpret_cast<CMorphwizardDoc*>(m_pDocument); }
+{
+	return reinterpret_cast<CMorphwizardDoc*>(m_pDocument);
+}
 
 #endif
 

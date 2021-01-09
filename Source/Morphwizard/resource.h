@@ -19,7 +19,7 @@
 #define IDR_SLF_TYPE                    130
 #define ID_HELP_HELP                    131
 #define IDD_PARAD_DIFF                  131
-#define IDR_DIFF_TYPE                   131
+#define IDR_FLEXIA_MODEL_DIFF_TYPE      131
 #define IDD_INPUTBOX                    132
 #define ID_TOOLS_SHOW_PARA_DIFF         132
 #define IDD_TOOL_DELANC                 133
@@ -88,6 +88,7 @@
 #define IDC_PRED_HINT                   1026
 #define IDC_MAXIMAL                     1031
 
+
 #define IDC_BROWSE                      1037
 #define IDC_ANCODE                      1038
 #define IDC_RADIO1                      1039
@@ -134,6 +135,14 @@
 #define DUMMY1     1097
 #define DUMMY2     1098
 
+#define IDD_ACCENT_MODEL_DIFF                     1032
+#define IDC_ACCENT_MODEL_1                        1033
+#define IDC_ACCENT_MODEL_2                        1034
+#define IDC_DIFF_RESULTS                          1035
+#define ID_ANALYSE_ACCENT_DIFF                    1036
+#define ID_SHOW_ACCENT_MODEL_DIFF         1037
+
+#define IDR_ACCENT_DIFF_TYPE         1038
 
 #define ID_FIND_PARADIGM                32772
 #define ID_SAVE_LIST_FILE               32774

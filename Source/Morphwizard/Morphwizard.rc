@@ -137,6 +137,7 @@ BEGIN
         MENUITEM "Set Paradigm No",             ID_TOOLS_SET_PARA_NO
         MENUITEM "Set Accent Model No",         ID_TOOLS_SET_ACCENT_MODEL_NO
         MENUITEM "Show paradigm differences",   ID_TOOLS_SHOW_PARA_DIFF
+        MENUITEM "Show accent model differences", ID_SHOW_ACCENT_MODEL_DIFF
         MENUITEM "Accent Wizard",               ID_TOOLS_ACCENTWIZARD
     END
     POPUP "&Window"
@@ -218,10 +219,22 @@ BEGIN
     LTEXT           "Paradigm No 1:",IDC_STATIC,38,22,50,8
     EDITTEXT        IDC_PARAD_2,229,19,40,14,ES_AUTOHSCROLL | ES_NUMBER
     LTEXT           "Paradigm No 2:",IDC_STATIC,173,23,50,8
-    EDITTEXT        IDC_RESULTS,21,41,312,155,ES_MULTILINE | ES_AUTOVSCROLL | 
+    PUSHBUTTON      "Analyze",ID_ANALYSE,345,23,50,14
+    EDITTEXT        IDC_RESULTS,21,41,512,155,ES_MULTILINE | ES_AUTOVSCROLL | 
                     ES_AUTOHSCROLL | ES_NOHIDESEL | ES_READONLY | 
                     ES_WANTRETURN | WS_VSCROLL
-    PUSHBUTTON      "Analyze",ID_ANALYSE,345,52,50,14
+END
+
+IDD_ACCENT_MODEL_DIFF DIALOGEX 0, 0, 410, 218
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_BORDER | WS_SYSMENU
+EXSTYLE WS_EX_CONTROLPARENT
+BEGIN
+EDITTEXT        IDC_ACCENT_MODEL_1, 99, 19, 40, 14, ES_AUTOHSCROLL | ES_NUMBER
+LTEXT           "Accent Model 1:", IDC_STATIC, 38, 22, 50, 8
+EDITTEXT        IDC_ACCENT_MODEL_2, 229, 19, 40, 14, ES_AUTOHSCROLL | ES_NUMBER
+LTEXT           "Accent Model 2:", IDC_STATIC, 173, 23, 50, 8
+PUSHBUTTON      "Analyze", ID_ANALYSE_ACCENT_DIFF, 345, 19, 50, 14
+EDITTEXT        IDC_DIFF_RESULTS, 21, 41, 612, 155, ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_NOHIDESEL | ES_READONLY | ES_WANTRETURN | WS_VSCROLL
 END
 
 IDD_CHANGE_ALL_DLG DIALOGEX 0, 0, 187, 251
@@ -381,7 +394,8 @@ BEGIN
     IDR_MAIN_FRAME          "Morphwizard"
     IDR_MorphwizardTYPE     "\nMorphWizard\nMorphWizard\nMorphWizard(*.mwz)\n.mwz\nMorphWizard.Doc\nMorphWizard Document"
     IDR_SLF_TYPE            "\nSLF\nSLF\nSLF Document(*.slf)\n.slf\nMorphWizard.slf\nSLF Document"
-    IDR_DIFF_TYPE           "\nSLF\nSLF\nDIFF Document(*.diff)\n.slf\nMorphWizard.diff\nDIff Document"
+    IDR_FLEXIA_MODEL_DIFF_TYPE   "\nSLF\nSLF\nDIFF Document(*.diff)\n.slf\nMorphWizard.diff\nDIff Document"
+    IDR_ACCENT_DIFF_TYPE         "\nSLF\nSLF\nDIFF Document(*.diff)\n.slf\nMorphWizard.accent_diff\nDIff Document"
 END
 
 STRINGTABLE 

@@ -11,6 +11,7 @@
 #include "SLFDocument.h"
 #include "SLFView.h"
 #include "ParadigmDifferences.h"
+#include "AccentModelDiff.h"
 
 #ifdef DETECT_MEMORY_LEAK
 #define new DEBUG_NEW
@@ -30,13 +31,13 @@ END_MESSAGE_MAP()
 
 
 
-class CMWZCommandLineInfo  : public CCommandLineInfo
+class CMWZCommandLineInfo : public CCommandLineInfo
 {
 public:
 
-	CMWZCommandLineInfo () : CCommandLineInfo () {
+	CMWZCommandLineInfo() : CCommandLineInfo() {
 	};
-	
+
 	virtual void ParseParam(const TCHAR* pszParam, BOOL bFlag, BOOL bLast)
 	{
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
@@ -67,7 +68,7 @@ BOOL CMorphwizardApp::InitInstance()
 	//InitCommonControls();
 
 
-	AfxInitRichEdit2 ();
+	AfxInitRichEdit2();
 
 	CWinApp::InitInstance();
 
@@ -95,10 +96,16 @@ BOOL CMorphwizardApp::InitInstance()
 		RUNTIME_CLASS(CSLFView));
 	AddDocTemplate(pDocTemplate);
 
-	pDocTemplate = new CMultiDocTemplate(IDR_DIFF_TYPE,
+	pDocTemplate = new CMultiDocTemplate(IDR_FLEXIA_MODEL_DIFF_TYPE,
 		RUNTIME_CLASS(CSLFDocument),
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
 		RUNTIME_CLASS(CParadigmDifferences));
+	AddDocTemplate(pDocTemplate);
+
+	pDocTemplate = new CMultiDocTemplate(IDR_ACCENT_DIFF_TYPE,
+		RUNTIME_CLASS(CSLFDocument),
+		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+		RUNTIME_CLASS(CAccentModelDiff));
 	AddDocTemplate(pDocTemplate);
 
 	// create main MDI Frame window
@@ -138,7 +145,7 @@ class CAboutDlg : public CDialog
 public:
 	CAboutDlg();
 
-// Dialog Data
+	// Dialog Data
 	enum { IDD = IDD_ABOUTBOX };
 
 protected:
@@ -174,7 +181,7 @@ void CMorphwizardApp::OnAppAbout()
 
 void CMorphwizardApp::AddToRecentFileList(LPCTSTR lpszPathName)
 {
-	
+
 	CString q = lpszPathName;
 	if (q.Find(_T("mwz")) == -1)
 		return;
@@ -185,32 +192,24 @@ void CMorphwizardApp::AddToRecentFileList(LPCTSTR lpszPathName)
 
 void CMorphwizardApp::OnHelpHelp()
 {
-		AfxGetApp()->WinHelp(IDH_LOADING);
+	AfxGetApp()->WinHelp(IDH_LOADING);
 }
 
 //----------------------------------------------------------------------------
-void SetInputLanguage( MorphLanguageEnum lang )
+void SetInputLanguage(MorphLanguageEnum lang)
 {
-	//  Keyboard switching is disabled because it makes me nervous.  Alexey Sokirko
-	
-
-	UINT kbdFlags = KLF_ACTIVATE;//|KLF_REORDER|KLF_SUBSTITUTE_OK|KLF_NOTELLSHELL;
-	HKL hkl=0;
-	switch( lang ) 
-	{
-	case morphRussian:
-		//hkl=::LoadKeyboardLayout(_T("00000419"),kbdFlags);				//Russian
-		::SetThreadLocale(MAKELCID(MAKELANGID(LANG_RUSSIAN,SUBLANG_DEFAULT),SORT_DEFAULT));
-		break;
-	case morphGerman:	
-		/*if( (hkl=::LoadKeyboardLayout(_T("00000407"),kbdFlags))==0 )	//German (Standard)
-			hkl=::LoadKeyboardLayout(_T("00000007"),kbdFlags);			//German (neutral)*/
-		::SetThreadLocale(MAKELCID(MAKELANGID(LANG_GERMAN,SUBLANG_DEFAULT),SORT_DEFAULT));
-		break;
-	case morphEnglish:	
-	default: 
-		/*if( (hkl=::LoadKeyboardLayout(_T("00000409"),kbdFlags))==0 )	//English (United States)
-			hkl=::LoadKeyboardLayout(_T("00000009"),kbdFlags);			//English (neutral)*/
-		::SetThreadLocale(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_DEFAULT),SORT_DEFAULT));
-	}
+	/*	UINT kbdFlags = KLF_ACTIVATE;//|KLF_REORDER|KLF_SUBSTITUTE_OK|KLF_NOTELLSHELL;
+		HKL hkl=0;
+		switch( lang )
+		{
+		case morphRussian:
+			::SetThreadLocale(MAKELCID(MAKELANGID(LANG_RUSSIAN,SUBLANG_DEFAULT),SORT_DEFAULT));
+			break;
+		case morphGerman:
+			::SetThreadLocale(MAKELCID(MAKELANGID(LANG_GERMAN,SUBLANG_DEFAULT),SORT_DEFAULT));
+			break;
+		case morphEnglish:
+		default:
+			::SetThreadLocale(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_DEFAULT),SORT_DEFAULT));
+		}*/
 }

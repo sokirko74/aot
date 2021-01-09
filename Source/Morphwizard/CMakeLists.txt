@@ -34,6 +34,7 @@ SyntaxColorizer.cpp
 stdafx.cpp
 Morphwizard.rc
 QueryHistory.cpp
+AccentModelDiff.cpp
 )
 
 

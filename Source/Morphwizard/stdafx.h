@@ -50,3 +50,13 @@ inline std::string GetLastErrorAsString()
 
 	return message;
 }
+
+inline std::vector<CString> StringSplit(CString sFrom, CString delim) {
+	int i = 0;
+	std::vector<CString> saItems;
+	for (CString sItem = sFrom.Tokenize(delim, i); i >= 0; sItem = sFrom.Tokenize(delim, i))
+	{
+		saItems.push_back(sItem);
+	}
+	return saItems;
+}

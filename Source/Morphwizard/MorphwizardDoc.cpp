@@ -125,10 +125,12 @@ bool CMorphwizardDoc::HasModifiedSlf() const
 		while( !!pos ) 
 		{
 			m_slfDocs.GetNextAssoc(pos,doc,doc1);
-			doc->GetSLFView()->UpdateData();
+			if (doc->GetSLFView() != nullptr) {
+				doc->GetSLFView()->UpdateData();
 
-			if( doc->IsModified() )
-				return true;
+				if (doc->IsModified())
+					return true;
+			}
 		}
 	}
 	catch ( ... )

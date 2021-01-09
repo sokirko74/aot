@@ -75,7 +75,7 @@ void CAccentModelDiff::OnBnClickedAnalyse()
 		// search a real word
 		if (p.second.m_AccentModelNo == m_AccentModel1 || p.second.m_AccentModelNo == m_AccentModel2) {
 			base = p.first;
-			flexia_model = p.second.m_FlexiaModelNo;
+			flexia_model_no = p.second.m_FlexiaModelNo;
 			break;
 		}
 	}
@@ -84,12 +84,12 @@ void CAccentModelDiff::OnBnClickedAnalyse()
 			m_AccentModel1, m_AccentModel2));
 		return;
 	}
-	const CFlexiaModel& p = GetWizard()->m_FlexiaModels[flexia_model_no];
-	CString s1 = GetWizard()->FromRMLEncoding(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel1, UnknownAccent, 79));
-	CString s2 = GetWizard()->FromRMLEncoding(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel2, UnknownAccent, 79));
+	const CFlexiaModel& flexia_model = GetWizard()->m_FlexiaModels[flexia_model_no];
+	CString s1 = GetWizard()->FromRMLEncoding(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel1, UnknownAccent, 79)).c_str();
+	CString s2 = GetWizard()->FromRMLEncoding(GetWizard()->mrd_to_slf(base, flexia_model, m_AccentModel2, UnknownAccent, 79)).c_str();
 	auto lines1 = StringSplit(s1, "\r\n");
 	auto lines2 = StringSplit(s2, "\r\n");
-	m_Results = "Different accents:\n";
+	m_Results = "Different accents:\r\n";
 	if (lines1.size() != lines2.size()) {
 		ErrorMessage("Failed");
 		return;
@@ -97,7 +97,7 @@ void CAccentModelDiff::OnBnClickedAnalyse()
 	for (size_t i = 0; i < lines1.size(); ++i) {
 		if (lines1[i] != lines2[i]) {
 			CString s;
-			s.Format("%s != %s\ ", lines1[i], lines2[i])
+			s.Format(_T("%s != %s\r\n"), lines1[i], lines2[i]);
 			m_Results += s;
 		}
 	}
