@@ -38,8 +38,8 @@ class CAgramtab {
 	virtual const char*   GetPartOfSpeechStr(part_of_speech_t i) const = 0;
 	virtual size_t GetGrammemsCount()  const = 0;
 	virtual const char*   GetGrammemStr(size_t i) const = 0;
-	virtual size_t s2i(const char * s ) const = 0;
-	virtual std::string i2s(uint16_t i) const = 0;
+	virtual size_t GramcodeToLineIndex(const char * s ) const = 0;
+	virtual std::string LineIndexToGramcode(uint16_t i) const = 0;
 	virtual const char* GetRegistryString() const = 0;
 	virtual long GetClauseTypeByName(const char* TypeName) const = 0;
 	virtual const char* GetClauseNameByType(long type) const  = 0;

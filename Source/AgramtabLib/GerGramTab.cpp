@@ -469,7 +469,7 @@ std::string ConvertToPlural(const CAgramtab* pGramTab,  const std::string& s)
 	std::string Result;
 	for (size_t i=0; i < s.length();i+=2)
 	{
-		const CAgramtabLine* L =   pGramTab->GetLine(pGramTab->s2i(s.c_str()+i));
+		const CAgramtabLine* L =   pGramTab->GetLine(pGramTab->GramcodeToLineIndex(s.c_str()+i));
 		if (!L) continue;
 		if (L->m_Grammems & _QM(gPlural) ) 
 		{

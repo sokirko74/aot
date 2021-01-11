@@ -24,9 +24,9 @@ public:
 	size_t GetMaxGrmCount() const;
 	CAgramtabLine*& GetLine(size_t LineNo) { return Lines[LineNo]; }
 	const CAgramtabLine* GetLine(size_t LineNo) const {return Lines[LineNo];}
-	size_t s2i(const char * s ) const { return  (unsigned char) s[0]*0x100+(unsigned char) s[1] - gStartUp;};
+	size_t GramcodeToLineIndex(const char * s ) const { return  (unsigned char) s[0]*0x100+(unsigned char) s[1] - gStartUp;};
 
-	std::string i2s(uint16_t i) const
+	std::string LineIndexToGramcode(uint16_t i) const
 	{ 
 		i += gStartUp;
 		char res[3];

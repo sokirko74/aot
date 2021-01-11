@@ -23,8 +23,8 @@ public:
 	size_t			GetMaxGrmCount() const;
 	CAgramtabLine*& GetLine(size_t LineNo);
 	const CAgramtabLine* GetLine(size_t LineNo) const;
-	size_t		s2i(const char* s)  const;
-	std::string		i2s(uint16_t i) const;
+	size_t		GramcodeToLineIndex(const char* s)  const;
+	std::string		LineIndexToGramcode(uint16_t i) const;
 
 	bool		ProcessPOSAndGrammems(const char* tab_str, part_of_speech_t& PartOfSpeech, grammems_mask_t& grammems) const;
 	const char* GetRegistryString() const;
