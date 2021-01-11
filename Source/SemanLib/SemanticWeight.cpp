@@ -4,56 +4,44 @@
 #include "SemanticWeight.h"
 
 
-struct TreeVariantDefaultValue {
-	SemantiWeightComponentEnum Type;
-	std::string Name;
-	double DefaultValue;
-	WeightType _WeightType;
-};
-
-static const std::vector<size_t> dummy = { 1,2,3 };
-
-static const std::vector<TreeVariantDefaultValue> AllComponents = {
-	{ConnectedComponentsCount, "ConnectedComponentsCount", 10000, WeightType::Weight1},
-	{ProjectnessViolation, "ProjectnessViolation", 400, WeightType::Weight1},
-	{DirectDisagree, "DirectDisagree", 10, WeightType::Weight1},
-	{SemFetDisagree, "SemFetDisagree", 0.15, WeightType::Weight2},
-	{LexFetAgreeCount, "LexFetAgreeCount", -20, WeightType::Weight1},
-	{RelationsLength, "RelationsLength", 0.1, WeightType::Weight1},
-	{SemRelPOSViolationsCount, "SemRelPOSViolationsCount", 5, WeightType::Weight1},
-	{OptionalValencyPenalty, "OptionalValencyPenalty", 90, WeightType::Weight2},
-	{InstrAgentRelsCount, "InstrAgentRelsCount", 0.05, WeightType::Weight2},
-	{ValencyDisorder, "ValencyDisorder", 7, WeightType::Weight1},  
-	{CommaBetweenBrothersExceptMNAViolationsCount, "CommaBetweenBrothersExceptMNAViolationsCount", 100, WeightType::Weight1},
-	{OnlyCommaBetweenViolationsCount, "OnlyCommaBetweenViolationsCount", 60, WeightType::Weight1},
-	{AgreeWithSyntaxTop, "AgreeWithSyntaxTop", -20, WeightType::Weight3},
-	{TopAgreeWithSyntaxCriteria, "TopAgreeWithSyntaxCriteria", -10, WeightType::Weight3},
-	{SubjectPredicateViolationsCount, "SubjectPredicateViolationsCount", 100, WeightType::Weight1},
-	{GramRestrViolationsCount, "GramRestrViolationsCount", 100, WeightType::Weight1},
-	{MNAViolationsCount, "MNAViolationsCount", 200, WeightType::Weight1},
-	{CopulViolationsCount, "CopulViolationsCount", 100, WeightType::Weight1},
-	{CollocsCount, "CollocsCount", -15, WeightType::Weight1},
-	{OborotAdverbialCount, "OborotAdverbialCount", -10, WeightType::Weight1},
-	{LexFunctsCount, "LexFunctsCount", -50, WeightType::Weight2},
-	{ObligatoryValencyViolation, "ObligatoryValencyViolation", 50, WeightType::Weight2},
-	{ColloquialInterps, "ColloquialInterps", 60, WeightType::Weight1},
-	{CorporaGleiche, "CorporaGleiche", -2, WeightType::Weight1},
-	{PassiveValencyPenalty, "PassiveValencyPenalty", 1, WeightType::Weight1},
-	{SemFetAgreeMNACount, "SemFetAgreeMNACount", -30, WeightType::Weight1},
-	{WordWeightCount, "WordWeightCount", -0.01, WeightType::Weight1},
-	{MiscSemAgree, "MiscSemAgree", -20, WeightType::Weight1},
-	{PrichastieWithoutActantsCount, "PrichastieWithoutActantsCount", 10, WeightType::Weight1},
-	{SAMNodeViolation, "SAMNodeViolation", 1000, WeightType::Weight1},
-	{PanicMode, "PanicMode", 1000, WeightType::Weight1},
+void  TreeVariantValueCoefs::InitAllComponents() {
+	AllComponents = {
+		{ConnectedComponentsCount, "ConnectedComponentsCount", 10000, WeightType::Weight1},
+		{ProjectnessViolation, "ProjectnessViolation", 400, WeightType::Weight1},
+		{DirectDisagree, "DirectDisagree", 10, WeightType::Weight1},
+		{SemFetDisagree, "SemFetDisagree", 0.15, WeightType::Weight2},
+		{LexFetAgreeCount, "LexFetAgreeCount", -20, WeightType::Weight1},
+		{RelationsLength, "RelationsLength", 0.1, WeightType::Weight1},
+		{SemRelPOSViolationsCount, "SemRelPOSViolationsCount", 5, WeightType::Weight1},
+		{OptionalValencyPenalty, "OptionalValencyPenalty", 90, WeightType::Weight2},
+		{InstrAgentRelsCount, "InstrAgentRelsCount", 0.05, WeightType::Weight2},
+		{ValencyDisorder, "ValencyDisorder", 7, WeightType::Weight1},
+		{CommaBetweenBrothersExceptMNAViolationsCount, "CommaBetweenBrothersExceptMNAViolationsCount", 100, WeightType::Weight1},
+		{OnlyCommaBetweenViolationsCount, "OnlyCommaBetweenViolationsCount", 60, WeightType::Weight1},
+		{AgreeWithSyntaxTop, "AgreeWithSyntaxTop", -20, WeightType::Weight3},
+		{TopAgreeWithSyntaxCriteria, "TopAgreeWithSyntaxCriteria", -10, WeightType::Weight3},
+		{SubjectPredicateViolationsCount, "SubjectPredicateViolationsCount", 100, WeightType::Weight1},
+		{GramRestrViolationsCount, "GramRestrViolationsCount", 100, WeightType::Weight1},
+		{MNAViolationsCount, "MNAViolationsCount", 200, WeightType::Weight1},
+		{CopulViolationsCount, "CopulViolationsCount", 100, WeightType::Weight1},
+		{CollocsCount, "CollocsCount", -15, WeightType::Weight1},
+		{OborotAdverbialCount, "OborotAdverbialCount", -10, WeightType::Weight1},
+		{LexFunctsCount, "LexFunctsCount", -50, WeightType::Weight2},
+		{ObligatoryValencyViolation, "ObligatoryValencyViolation", 50, WeightType::Weight2},
+		{ColloquialInterps, "ColloquialInterps", 60, WeightType::Weight1},
+		{CorporaGleiche, "CorporaGleiche", -2, WeightType::Weight1},
+		{PassiveValencyPenalty, "PassiveValencyPenalty", 1, WeightType::Weight1},
+		{SemFetAgreeMNACount, "SemFetAgreeMNACount", -30, WeightType::Weight1},
+		{WordWeightCount, "WordWeightCount", -0.01, WeightType::Weight1},
+		{MiscSemAgree, "MiscSemAgree", -20, WeightType::Weight1},
+		{PrichastieWithoutActantsCount, "PrichastieWithoutActantsCount", 10, WeightType::Weight1},
+		{SAMNodeViolation, "SAMNodeViolation", 1000, WeightType::Weight1},
+		{PanicMode, "PanicMode", 1000, WeightType::Weight1},
+	};
 };
 
 
-
-const std::string& GetStringBySemantiWeightComponent(SemantiWeightComponentEnum t) {
-	return AllComponents[t].Name;
-}
-
-SemantiWeightComponentEnum GetSemantiWeightComponentByString(const std::string& s) {
+SemantiWeightComponentEnum TreeVariantValueCoefs::GetSemantiWeightComponentByString(const std::string& s) const {
 	for (auto i : AllComponents) {
 		if (i.Name == s) {
 			return i.Type;
@@ -64,6 +52,7 @@ SemantiWeightComponentEnum GetSemantiWeightComponentByString(const std::string& 
 
 
 TreeVariantValueCoefs::TreeVariantValueCoefs() {
+	InitAllComponents();
 	size_t s = AllComponents.size();
 	assert(s == SemantiWeightComponentSize);
 	long i = 0; 
@@ -95,7 +84,7 @@ void TreeVariantValueCoefs::ReadOneCoef(std::string  s)
 
 std::string TreeVariantValueCoefs::GetCoefsString() const {
 	std::vector<std::string> items;
-	for (const auto& a : AllComponents) {
+	for (const auto& a : TreeVariantValueCoefs::AllComponents) {
 		auto s = Format("%s=%f", a.Name.c_str(), Coefs[a.Type]);
 		items.push_back(s);
 	}
@@ -116,11 +105,6 @@ TreeVariantValue& TreeVariantValue :: operator = (const TreeVariantValue& X)
 	return *this;
 };
 
-void TreeVariantValue::Init()
-{
-	Coefs = nullptr;
-	Weights.resize(AllComponents.size(), 0);
-};
 
 void TreeVariantValue::SetWeight(SemantiWeightComponentEnum w, long value) {
 	Weights[w] = value;
@@ -144,13 +128,15 @@ long TreeVariantValue::GetWeightCoef(SemantiWeightComponentEnum w) const {
 
 TreeVariantValue::TreeVariantValue(const TreeVariantValueCoefs* _Coefs)
 {
-	Init();
 	Coefs = _Coefs;
+	Weights.resize(SemantiWeightComponentSize, 0);
 
 };
+
 TreeVariantValue::TreeVariantValue()
 {
-	Init();
+	Coefs = nullptr;
+	Weights.resize(SemantiWeightComponentSize, 0);
 };
 
 bool TreeVariantValue::operator == (const TreeVariantValue& X) const
@@ -168,7 +154,7 @@ bool TreeVariantValue::operator < (const TreeVariantValue& X) const
 long TreeVariantValue::GetWeightByType(WeightType weightType, bool  checkConnect, bool checkWordWeight)  const {
 	assert(Coefs);
 	double weight = 0.0;
-	for (const auto& a : AllComponents) {
+	for (const auto& a : Coefs->AllComponents) {
 		if (!checkWordWeight && a.Type == WordWeightCount) continue;
 		if (!checkConnect && a.Type == ConnectedComponentsCount) continue;
 		if (a._WeightType == weightType) {
@@ -202,7 +188,7 @@ long TreeVariantValue::GetTreeWeight(bool  checkConnect, bool checkWordWeight)  
 std::string TreeVariantValue::GetStr()  const
 {
 	std::vector<std::string> items;
-	for (const auto& a : AllComponents) {
+	for (const auto& a : Coefs->AllComponents) {
 		items.push_back(Format("%s=%ld;", a.Name.c_str(), Weights[a.Type]));
 	}
 	return join_string(items, "\n");
@@ -212,7 +198,7 @@ std::string TreeVariantValue::GetStr()  const
 std::string TreeVariantValue::GetStrOfNotNull()  const
 {
 	std::vector<std::string> items;
-	for (const auto& a : AllComponents) {
+	for (const auto& a : Coefs->AllComponents) {
 		if (Weights[a.Type] != 0) {
 			items.push_back(Format("%s=%ld;", a.Name.c_str(), Weights[a.Type]));
 		}
@@ -224,7 +210,7 @@ std::string TreeVariantValue::GetStrOfNotNull()  const
 std::string TreeVariantValue::GetDifference(const TreeVariantValue& v)  const
 {
 	std::vector<std::string> items;
-	for (const auto& a : AllComponents) {
+	for (const auto& a : Coefs->AllComponents) {
 		if (Weights[a.Type] != v.Weights[a.Type]) {
 			items.push_back(Format("%s: %ld != (%ld);", a.Name.c_str(), Weights[a.Type], v.Weights[a.Type]));
 		}

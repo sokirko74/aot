@@ -75,16 +75,6 @@ enum SemantiWeightComponentEnum : long {
 	//
 	SemantiWeightComponentSize
 };
-extern const std::string& GetStringBySemantiWeightComponent(SemantiWeightComponentEnum t);
-extern SemantiWeightComponentEnum GetSemantiWeightComponentByString(const std::string& s);
-
-struct TreeVariantValueCoefs {
-	std::vector<double> Coefs;
-	TreeVariantValueCoefs();
-    void ReadOneCoef (std::string s);
-	std::string GetCoefsString() const;
-};
-
 
 enum struct WeightType {
 	Weight1,
@@ -92,13 +82,34 @@ enum struct WeightType {
 	Weight3
 };
 
+struct TreeVariantDefaultValue {
+	SemantiWeightComponentEnum Type;
+	std::string Name;
+	double DefaultValue;
+	WeightType _WeightType;
+};
+
+class TreeVariantValueCoefs {	
+	SemantiWeightComponentEnum GetSemantiWeightComponentByString(const std::string& s) const;
+	void  InitAllComponents();
+	
+public:
+	std::vector<TreeVariantDefaultValue> AllComponents;
+	std::vector<double> Coefs;
+	
+
+	TreeVariantValueCoefs();
+    void ReadOneCoef (std::string s);
+	std::string GetCoefsString() const;
+};
+
+
 class TreeVariantValue {
 	const TreeVariantValueCoefs* Coefs;
 	std::vector<long> Weights;
 	long GetWeightByType(WeightType weightType, bool  checkConnect, bool checkWordWeight)  const;
 public:
 	TreeVariantValue& operator = (const TreeVariantValue& X);
-	void Init();
 	TreeVariantValue(const TreeVariantValueCoefs* coefs);
 	TreeVariantValue();
 	void SetCoefs(const TreeVariantValueCoefs* coefs);
