@@ -38,6 +38,7 @@ void CMorphDict::InitAutomat(CMorphAutomat* pFormAutomat)
 void    CMorphDict::GetLemmaInfos(const std::string& Text, size_t TextPos, std::vector<CAutomAnnotationInner>& Infos) const
 {
 	const size_t textLength = Text.length();
+	std::vector<CAutomAnnotationInner> additInfos;
 	for (CAutomAnnotationInner& annot : Infos)
 	{
 		const CFlexiaModel& F = m_FlexiaModels[annot.m_ModelNo];
@@ -48,20 +49,25 @@ void    CMorphDict::GetLemmaInfos(const std::string& Text, size_t TextPos, std::
 		auto start = m_LemmaInfos.begin() + m_ModelsIndex[annot.m_ModelNo];
 		auto end = m_LemmaInfos.begin() + m_ModelsIndex[annot.m_ModelNo + 1];
 
-		std::vector<CLemmaInfoAndLemma>::const_iterator it =
-			lower_bound(start, end, Base.c_str(), m_SearchInfoLess);
+		auto pair_it = equal_range(start, end, Base.c_str(), m_SearchInfoLess);
+		size_t size = pair_it.second - pair_it.first;
 
-
-		assert(it != m_LemmaInfos.end());
+		assert(pair_it.first != m_LemmaInfos.end());
 		{
-			int LemmaStrNo = it->m_LemmaStrNo;
+			int LemmaStrNo = pair_it.first->m_LemmaStrNo;
 			assert(Base == m_Bases[LemmaStrNo].GetString());
 		}
+		
+		annot.m_LemmaInfoNo = pair_it.first - m_LemmaInfos.begin();
 
-		annot.m_LemmaInfoNo = it - m_LemmaInfos.begin();
+		for (decltype(pair_it.first) it = pair_it.first + 1; it != pair_it.second; ++it) {
+			CAutomAnnotationInner new_annot = annot;
+			annot.m_LemmaInfoNo = it - m_LemmaInfos.begin();
+			additInfos.emplace_back(new_annot);
+		}
 
 	};
-
+	Infos.insert(Infos.end(), additInfos.begin(), additInfos.end());
 };
 
 
