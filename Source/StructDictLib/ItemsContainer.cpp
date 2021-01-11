@@ -350,7 +350,7 @@ bool TItemContainer::WriteDomItems() const {
     fclose(fp);
 
 
-    fp = fopen(ItemsFile.c_str(), "w");
+    fp = fopen(ItemsFile.c_str(), "wb");
     for (size_t k = 0; k < m_Domens.size(); k++) {
         fprintf(fp, "%s;%i\n",
                 m_Domens[k].DomStr,

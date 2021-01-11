@@ -997,6 +997,32 @@
                                         "morph_info": "ИНФИНИТИВ дст,; "
                                     }
                                 ]
+                            },
+                            {
+                                "clause_type": "ПРЕДК",
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "удобно думать"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "БЫТЬ",
+                                        "modified_grammems": "дст,прш,ср,ед,",
+                                        "morph_info": "Г дст,прш,ср,ед,; "
+                                    },
+                                    {
+                                        "lemma": "УДОБНО",
+                                        "modified_grammems": "нст,",
+                                        "morph_info": "ПРЕДК нст,; "
+                                    },
+                                    {
+                                        "lemma": "ДУМАТЬ",
+                                        "modified_grammems": "дст,",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 2,
@@ -17584,6 +17610,37 @@
                                         "morph_info": "С мр,пр,мн,; "
                                     }
                                 ]
+                            },
+                            {
+                                "clause_type": "ДПР",
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "о детях"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ДУМАТЬ",
+                                        "modified_grammems": "дст,нст,",
+                                        "morph_info": "ДЕЕПРИЧАСТИЕ дст,нст,; "
+                                    },
+                                    {
+                                        "lemma": "О",
+                                        "modified_grammems": "",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
+                                        "lemma": "РЕБЕНОК",
+                                        "modified_grammems": "мр,пр,мн,",
+                                        "morph_info": "С мр,пр,мн,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 9,
@@ -17593,6 +17650,42 @@
                     {
                         "antecedent": "дом",
                         "good_synvars": [
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "КОТОРЫЙ",
+                                        "modified_grammems": "но,од,мр,вн,им,ед,",
+                                        "morph_info": "МС-П но,од,мр,им,ед,; но,мр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ОН",
+                                        "modified_grammems": "3л,мр,им,ед,",
+                                        "morph_info": "МС 3л,мр,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПОСТРОИТЬ",
+                                        "modified_grammems": "дст,прш,мр,ед,",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
                             {
                                 "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],
@@ -17771,6 +17864,38 @@
                     },
                     {
                         "good_synvars": [
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [],
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "modified_grammems": "1л,им,ед,",
+                                        "morph_info": "МС 1л,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ДУМАТЬ",
+                                        "modified_grammems": "дст,1л,нст,ед,",
+                                        "morph_info": "Г дст,1л,нст,ед,; "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [],
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "modified_grammems": "1л,им,ед,",
+                                        "morph_info": "МС 1л,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ДУМАТЬ",
+                                        "modified_grammems": "дст,1л,нст,ед,",
+                                        "morph_info": "Г дст,1л,нст,ед,; "
+                                    }
+                                ]
+                            },
                             {
                                 "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],

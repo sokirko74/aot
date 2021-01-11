@@ -5,8 +5,9 @@
 #include "../common/argparse.h"
 #include <fstream>
 
-// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ <DataFile> (пїЅпїЅ. StatTxtDat)
-// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ <pid,form-num,weight> пїЅ пїЅпїЅпїЅпїЅ "r*homoweight.bin"
+// StatDatBin <InDataFile> <-F | -C | -L> [Output Directory]
+// Подгружает данные из файла <DataFile> (см. StatTxtDat)
+// Записывает триады <pid,form-num,weight> в файл "r*homoweight.bin"
 
 struct CGroup {
     int pid;
@@ -15,10 +16,10 @@ struct CGroup {
 
     CGroup() : pid(0), anc("") {}
 
-    friend bool operator<(const CGroup &x, const CGroup &y);
+    friend bool operator<(const CGroup& x, const CGroup& y);
 };
 
-bool operator<(const CGroup &x, const CGroup &y) {
+bool operator<(const CGroup& x, const CGroup& y) {
     if (x.anc < y.anc)
         return (1);
     if (x.anc > y.anc)
@@ -36,17 +37,17 @@ typedef troika<int, int, int> _homonode_t;
 typedef std::vector<_homonode_t> _homoresults_t;
 
 struct less4homonode : public std::less<_homonode_t> {
-    bool operator()(const _homonode_t &x, const _homonode_t &y) const {
+    bool operator()(const _homonode_t& x, const _homonode_t& y) const {
         return (x.first == y.first
-                ? x.second < y.second
-                : x.first < y.first);
+            ? x.second < y.second
+            : x.first < y.first);
     }
 };
 
 static _homoresults_t homonweight;
 CMorphologyHolder MorphHolder;
 
-static void addLines(std::string &str, tagLines &lines) {
+static void addLines(std::string& str, tagLines& lines) {
     std::pair<tagHomon::iterator, bool> res;
     res = homon.insert(tagHomon::value_type(str, lines));
     if (!res.second) {
@@ -54,7 +55,7 @@ static void addLines(std::string &str, tagLines &lines) {
     }
 }
 
-static bool loadDat(std::istream &ifs) {
+static bool loadDat(std::istream& ifs) {
     std::string str;
     tagLines lines;
 
@@ -92,7 +93,7 @@ static bool loadDat(std::istream &ifs) {
             val = atoi(sgrm.c_str());
             sgrm.erase();
         }
-//
+        //
         std::string grm = spos;
         grm += " ";
         grm += sgrm;
@@ -105,7 +106,7 @@ static bool loadDat(std::istream &ifs) {
             continue;
         }
 
-//
+        //
         if (str.empty() && swrd == "*")
             continue;
         if (swrd != "*") {
@@ -125,7 +126,7 @@ static bool loadDat(std::istream &ifs) {
 
         int k = 0;
         for (; k < ParadigmCollection.size(); k++) {
-            const CFormInfo &Pagadigm = ParadigmCollection[k];
+            const CFormInfo& Pagadigm = ParadigmCollection[k];
             CGroup group;
             group.pid = Pagadigm.GetParadigmId();
             group.anc = Pagadigm.GetAncode(0);
@@ -153,7 +154,7 @@ static bool loadDat(std::istream &ifs) {
             return false;
         }
     }
-//
+    //
     if (!str.empty() && lines.size() > 0)
         addLines(str, lines);
     std::cout << "done" << std::endl;
@@ -188,7 +189,7 @@ static bool saveBin(std::string name) {
     return true;
 }
 
-void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
+void initArgParser(int argc, const char** argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "input file");
     parser.AddArgument("--output", "output file");
@@ -196,7 +197,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.Parse(argc, argv);
 }
 
-int main(int argc, const char **argv) {
+int main(int argc, const char** argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
     if (!MorphHolder.LoadGraphanAndLemmatizer(args.GetLanguage())) {

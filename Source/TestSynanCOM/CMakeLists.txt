@@ -6,6 +6,7 @@ add_executable (${PROJECT_NAME}
 )
 
 add_dependencies(${PROJECT_NAME}
+    agramtab
     SynAn
     Lemmatizer
     MAPost

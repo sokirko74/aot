@@ -34,6 +34,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /utf-8 /D _UNICODE /D UNICODE" )
 
 
 add_dependencies(${PROJECT_NAME} 
+    agramtab
     SynAn
     Lemmatizer
     graphan
