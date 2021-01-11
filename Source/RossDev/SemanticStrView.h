@@ -1,16 +1,6 @@
-// graphtest3View.h : interface of the CSemanticStrView class
-//
-/////////////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_GRAPHTEST4VIEW_H__6DD15255_FD3E_11D2_8719_B8D0AF764170__INCLUDED_)
-#define AFX_GRAPHTEST4VIEW_H__6DD15255_FD3E_11D2_8719_B8D0AF764170__INCLUDED_
-
-#if _MSC_VER >= 1000
 #pragma once
-#endif // _MSC_VER >= 1000
 
 #include "stdafx.h"
-#include <tk.h>
 #include "SemanticStrDoc.h"
 
 
@@ -18,33 +8,26 @@ class  CRusSemStructure;
 
 class CSemanticStrView : public CView
 {
-
-protected: // create from serialization only
+	CTclTkWrapper& m_TclInterp;
+	void SwitchMainTkWindow();
+protected: 
 	DECLARE_DYNCREATE(CSemanticStrView)
 
 // Attributes
 private: 
 	CString					m_Title;
 	CMenu					m_Menu;	
-	// слоты для рисования графов
-	
-	Tk_Window            m_tkwin;
-	HWND                 m_tkhwnd;
-
 public:
-	CString              m_tkname;
+	CTopTkWindow m_TopTKWindow;
 	CSemanticStrView();
 	~CSemanticStrView();
 	
-	CSemanticStrDoc*	GetDoc();
+	CSemanticStrDoc*    GetDoc();
 	void				BuildTclGraph(CString Graph);
 	void				ShowGraph();
 	void				OpenAllRosses();
 	void				PasteClipboard();
 	CRossDoc*			FindRossDoc(DictTypeEnum RossType);
-      
-
-	
 
 // Operations
 public:
@@ -54,7 +37,7 @@ public:
 	//{{AFX_VIRTUAL(CSemanticStrView)
 	public:
 	virtual void OnDraw(CDC* pDC);
-	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
+	//virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
 	protected:
 	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
@@ -67,9 +50,6 @@ private:
 	void	GetJavaGraph();
 public:
 	
-	
-	
-	
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -81,6 +61,7 @@ protected:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnDestroy();
+	afx_msg BOOL OnCreate(LPCREATESTRUCT lpCreateStruct);
 	
 	//}}AFX_MSG
 
@@ -92,10 +73,3 @@ protected:
 };
 
 
-
-/////////////////////////////////////////////////////////////////////////////
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Developer Studio will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_GRAPHTEST3VIEW_H__6DD15255_FD3E_11D2_8719_B8D0AF764170__INCLUDED_)

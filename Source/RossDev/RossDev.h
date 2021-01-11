@@ -11,19 +11,19 @@
 #include "HierarchyDoc.h"
 #include "afxrich.h"
 #include "../SemanLib/SemStructureBuilder.h"
+#include <tcl.h>
+#include "TckTkWrapper.h"
 
-
-
-
-/////////////////////////////////////////////////////////////////////////////
-// CRossDevApp:
-// See RossDev.cpp for the implementation of this class
 
 
 class CRossDevApp : public CWinApp
 {
+	void CreateTclCommand(char* name, Tcl_CmdProc proc);
 public:
 	CSemStructureBuilder	m_SemBuilder;
+	CTclTkWrapper			m_TclInterp;
+	CString					m_TclClassWnd;
+
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	CRossDevApp();
 	~CRossDevApp();
@@ -58,6 +58,9 @@ public:
 	afx_msg void OnMinimizeAllDicts();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	CString GetNormalizedRossPath(DictTypeEnum RossType) const;
+	CRossDoc* FindRossDoc(DictTypeEnum RossType);
 };
 
 inline  CDocTemplate* GetTemplate (CString Name)
@@ -207,7 +210,7 @@ T* FindDoc (char*  tkname, CDocTemplate* Template)
 		{
 		 D =  (T*)Template->GetNextDoc(p);
 		 if (!D) break;
-		 if (D->GetView()->m_tkname == CString(tkname))
+		 if (D->GetView()->m_TopTKWindow.m_tkname == std::string(tkname))
 		 {
 			 break;
 		 };

@@ -19,8 +19,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-extern Tcl_Interp* theInterp;
-
 /////////////////////////////////////////////////////////////////////////////
 // CSemanticStrView
 
@@ -32,37 +30,37 @@ BEGIN_MESSAGE_MAP(CSemanticStrView, CView)
 	ON_WM_SIZE()
 	ON_WM_ERASEBKGND()
 	ON_WM_DESTROY()
+	ON_WM_CREATE()
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 END_MESSAGE_MAP()
 
 
 
-/////////////////////////////////////////////////////////////////////////////
-// CSemanticStrView construction/destruction
-
-CSemanticStrView::CSemanticStrView() //!: m_EngStr(*(CSemanticStructure*)this)
+CSemanticStrView::CSemanticStrView() :  m_TclInterp(((CRossDevApp*)AfxGetApp())->m_TclInterp)
 {
-	// TODO: add construction code here
-    m_tkwin=0;
-	m_tkhwnd=0; 	
-//!  m_EngStr.SetAutoDeleteRossHolders(false);
-
 }
 
-
-
-void CSemanticStrView::OnDraw(CDC* pDC)
-{
-	CSemanticStrDoc* pDoc = GetDoc();
-	ASSERT_VALID(pDoc);
-
-	// TODO: add draw code for native data here
-}
 CSemanticStrDoc* CSemanticStrView::GetDoc() // non-debug version is inline
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CSemanticStrDoc)));
 	return (CSemanticStrDoc*)m_pDocument;
+}
+
+
+BOOL CSemanticStrView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	m_TopTKWindow = m_TclInterp.UseTopWindow(m_hWnd);
+	SwitchMainTkWindow();
+	m_TclInterp.RunTcl("source $env(GRAPHLET_DIR)/lib/graphscript/ross/semstruct.tcl");
+	m_TclInterp.RunTcl("initialize_graphic $main");
+	CView::OnCreate(lpCreateStruct);
+	return TRUE;
+}
+
+
+void CSemanticStrView::OnDraw(CDC* pDC)
+{
 }
 
 
@@ -82,121 +80,43 @@ void CSemanticStrView::Dump(CDumpContext& dc) const
 
 #endif //_DEBUG
 
-/////////////////////////////////////////////////////////////////////////////
-// CSemanticStrView message handlers
-
-
-
-
-
-
-
-
 void CSemanticStrView::ShowGraph() 
 {
-	char s[200];
-	sprintf (s, "$GT($main,graph) draw");
-    Tcl_Eval(theInterp,s);
+	m_TclInterp.RunTcl("$GT($main,graph) draw");
 };
 
 
-void SwitchGraph(const char* tkname) 
+void CSemanticStrView::SwitchMainTkWindow()
 {
-	char s[2000];
-
-    sprintf (s, "set main %s", (const char*)tkname);
-    int retcode = Tcl_Eval(theInterp,s);
-
+	m_TclInterp.RunTcl(Format("set main %s", m_TopTKWindow.m_tkname.c_str()));
 };
 
-extern int TclWindowCounter;
-BOOL CSemanticStrView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
+
+/*BOOL CSemanticStrView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, uint32_t dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext) 
 {
-	// TODO: Add your specialized code here and/or call the base class
    m_Menu.LoadMenu(IDR_ROSSDETYPE);
    pParentWnd->SetMenu( &m_Menu );
-   char s[2000];
    CRect R = rect;
-   //R.right = rect.right + 100;
    pParentWnd->SetWindowPos(0, 120, 120, 840, 500,0);
 	
    BOOL ok = CWnd::Create(lpszClassName, lpszWindowName, dwStyle, R, pParentWnd, nID, pContext);
 
    if (ok) {
-
-		int retcode;
-		CString winhnd, cmd;
-
-		m_tkname.Format(".tk%d",++TclWindowCounter);   // name this window .tk1 .tk2 etc
-
-		winhnd.Format("0x%08X",m_hWnd);
-		cmd.Format("toplevel %s -use %s",m_tkname,winhnd);
-        strcpy (s, cmd);
-		retcode = Tcl_Eval(theInterp,s);
-		if (retcode!=TCL_OK) {
-			Tcl_SetResult(theInterp,"Cannot create TK child window",TCL_VOLATILE);
-			return ok;
-		}
-
-		Tk_Window tkmain = Tk_MainWindow(theInterp);
-		if (tkmain) {
-			
-			//get the tk window token
-			strcpy (s, m_tkname);
-			m_tkwin = Tk_NameToWindow(theInterp, s, tkmain);
-			Tcl_DoOneEvent(TCL_ALL_EVENTS|TCL_DONT_WAIT);   //force window creation
-			
-			// get the HWND
-			cmd.Format("winfo id %s",m_tkname);
-			strcpy (s, cmd);
-			retcode = Tcl_Eval(theInterp,s);
-			if (retcode==TCL_OK) {
-				int i;
-				retcode = Tcl_GetInt(theInterp,theInterp->result,&i);
-				if (retcode==TCL_OK) {
-				  m_tkhwnd = (HWND)i;
-				}
-			}
-			SwitchGraph(m_tkname);
-
-			CString cmd;
-            cmd.Format("source $env(GRAPHLET_DIR)/lib/graphscript/ross/semstruct.tcl");
-            strcpy (s, cmd);
-            retcode = Tcl_Eval(theInterp,s);
-	        if (retcode!=TCL_OK) {
-				AfxMessageBox (theInterp->result);
-				return FALSE;
-			};
-
-            cmd.Format("initialize_graphic $main");
-            strcpy (s, cmd);
-            retcode = Tcl_Eval(theInterp,s);
-	        if (retcode!=TCL_OK) {
-				AfxMessageBox (theInterp->result);
-				return FALSE;
-			};
-
-			
-
-		}
 	}
 	return ok;
 	
-}
+}*/
 
 void CSemanticStrView::OnSize(UINT nType, int cx, int cy) 
 {
 	CView::OnSize(nType, cx, cy);
 
-	if (m_tkwin) {
+	if (m_TopTKWindow.m_tkwin) {
 		CRect clrect;
 		GetClientRect(clrect);
-		Tk_MoveResizeWindow(m_tkwin,0,0,clrect.Width(),clrect.Height());
-		char s[2000];
-		sprintf (s, "$GT($main,canvas) configure -height %u -width %u", clrect.Height(), clrect.Width()-100);;
-		Tcl_Eval(theInterp,s);
-		Tcl_Eval(theInterp,"ResizeChildControls");
-
+		Tk_MoveResizeWindow(m_TopTKWindow.m_tkwin, 0,0,clrect.Width(),clrect.Height());
+		m_TclInterp.RunTcl(Format("$GT($main,canvas) configure -height %u -width %u", clrect.Height(), clrect.Width() - 100));
+		m_TclInterp.RunTcl("ResizeChildControls");
 	}
 	
 }
@@ -212,67 +132,29 @@ CSemanticStrView::~CSemanticStrView()
 
 void CSemanticStrView::OnDestroy() 
 {
-    CString cmd;
-	cmd.Format("destroy %s",m_tkname);
-	char s[1000];
-	strcpy (s, cmd);
-	Tcl_Eval(theInterp,s);
-
+	m_TclInterp.RunTcl(Format("destroy %s", m_TopTKWindow.m_tkname.c_str()));
 	CView::OnDestroy();
-	
-	// TODO: Add your message handler code here
-
 }
 
 LRESULT CSemanticStrView::WindowProc(UINT message, WPARAM wParam, LPARAM lParam) 
 {
 	// pass some messages thru to Tk child window
-	if (m_tkhwnd) {
+	if (m_TopTKWindow.m_tkhwnd) {
 		switch (message) {
-			case WM_KEYDOWN: ::SendMessage(m_tkhwnd,message,wParam,lParam); break;
-			case WM_KEYUP: ::SendMessage(m_tkhwnd,message,wParam,lParam); break;
+			case WM_KEYDOWN: ::SendMessage(m_TopTKWindow.m_tkhwnd,message,wParam,lParam); break;
+			case WM_KEYUP: ::SendMessage(m_TopTKWindow.m_tkhwnd,message,wParam,lParam); break;
 			case WM_CHAR:
             case WM_COPY:
 			case WM_CLEAR:
 			case WM_CUT: 
 			case WM_GETTEXT: 
-			case WM_SETFOCUS: ::SendMessage(m_tkhwnd,message,wParam,lParam); break;
+			case WM_SETFOCUS: ::SendMessage(m_TopTKWindow.m_tkhwnd,message,wParam,lParam); break;
 				
 				break;
 		}
 	}
 
 	return CView::WindowProc(message, wParam, lParam);
-}
-
-std::string WstrToUtf8Str(const std::wstring& wstr)
-{
-	std::string retStr;
-	if (!wstr.empty())
-	{
-		int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
-
-		if (sizeRequired > 0)
-		{
-			std::vector<char> utf8String(sizeRequired);
-			int bytesConverted = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(),
-				-1, &utf8String[0], utf8String.size(), NULL,
-				NULL);
-			if (bytesConverted != 0)
-			{
-				retStr = &utf8String[0];
-			}
-			else
-			{
-				std::stringstream err;
-				err << __FUNCTION__
-					<< " std::string WstrToUtf8Str failed to convert wstring '"
-					<< wstr.c_str() << L"'";
-				throw std::runtime_error(err.str());
-			}
-		}
-	}
-	return retStr;
 }
 
 
@@ -293,7 +175,7 @@ void CSemanticStrView::PasteClipboard()
 
 	CopyMemory( wstr, hMem, GlobalSize(hMem));
 	wstr[GlobalSize(hMem)] = 0;
-	std::string utf8 = WstrToUtf8Str(wstr);
+	std::string utf8 = utf16_to_utf8(std::wstring(wstr));
 	std::string str1251 = convert_from_utf8(utf8.c_str(), morphRussian);
     CString Q = str1251.c_str();
 	char cmd[5200];
@@ -307,8 +189,12 @@ void CSemanticStrView::PasteClipboard()
 			cmd[l+1] = 0; };
 
     strcat (cmd, "\"");
-    if (Tcl_Eval(theInterp,cmd)!=0)
-		AfxMessageBox ("Cannot set value");
+	try {
+		m_TclInterp.RunTcl(cmd);
+	}
+	catch (CExpc c) {
+		AfxMessageBox("Cannot set value");
+	}
 	CloseClipboard();
 
 }
@@ -316,8 +202,7 @@ void CSemanticStrView::PasteClipboard()
 void CSemanticStrView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView) 
 {
 	// TODO: Add your specialized code here and/or call the base class
-	SwitchGraph(m_tkname); 
-	//GetParent()->SetMenu( &m_Menu );
+	SwitchMainTkWindow();
 	
 	CView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 	CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
@@ -345,6 +230,7 @@ static void log(std::string  s)
 	fprintf (fp, "%s\n", s.c_str());
 	fclose(fp);
 }
+
 void CSemanticStrView::BuildTclGraph(CString S)
 {  
    log (std::string("\nBuildTclGraphn"));
@@ -363,9 +249,10 @@ void CSemanticStrView::BuildTclGraph(CString S)
 		if (!q) break;
 		*q = 0;
 		assert (strlen(s) > 0) ;
-		int retcode = Tcl_Eval(theInterp,s);
-		if (retcode != 0) 
-		{
+		try {
+			m_TclInterp.RunTcl(s);
+		}
+		catch (CExpc e) {
 			char q[5000];
 			sprintf (q, "Cannot interpret TCL Code \"%s\". Proceed?", s);
 			int Result = ::MessageBox(0, q, "Seman", MB_YESNO);
@@ -427,7 +314,7 @@ int ShowArticle (ClientData clienData,
 		CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
 		DictTypeEnum Type = (DictTypeEnum)atoi (argv[2]);
 		uint16_t UnitNo  = atoi (argv[3]);
-		CRossDoc* RossDoc = Doc->GetView()->FindRossDoc(Type);
+		CRossDoc* RossDoc = ((CRossDevApp*)AfxGetApp())->FindRossDoc(Type);
 		if (RossDoc)
 		{
 			if (UnitNo >= RossDoc->GetRoss()->GetUnitsSize())  return TCL_OK;
@@ -736,23 +623,12 @@ int Update    (ClientData clienData,
 			   int argc, char* argv[])
 
 {
-/*	FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate())->GetView()->Update();
-*/
 	return TCL_OK;
 };
 
 
-
-CString CSemanticStrView::GetNormalizedRossPath(DictTypeEnum RossType) const
-{
-	CAllRossesHolder* Trans = GetSemBuilder().m_RusStr.m_pData;
-	const CString _strPathName  = Trans->GetRossPath(RossType).c_str();
-	CString strPathName = _strPathName;
-	CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-	strPathName.MakeLower();
-	assert(pRossDocTemplate);
-	strPathName.Replace('/','\\');
-	return strPathName;
+CString		CSemanticStrView::GetNormalizedRossPath(DictTypeEnum RossType) const {
+	return ((CRossDevApp*)AfxGetApp())->GetNormalizedRossPath(RossType);
 }
 
 
@@ -820,7 +696,12 @@ void  CSemanticStrView::OpenAllRosses()
 
 void  CSemanticStrView::GetJavaGraph()
 {
-	int retcode = Tcl_Eval(theInterp,"GetJavaGraph");
-	std::string s = theInterp->result;
-	TRACE (s.c_str());
+	try {
+		m_TclInterp.RunTcl("GetJavaGraph");
+		std::string s = m_TclInterp.TclInterp->result;
+		TRACE(s.c_str());
+	}
+	catch (CExpc c) {
+		AfxMessageBox("failed");
+	}
 };

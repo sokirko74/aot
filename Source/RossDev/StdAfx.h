@@ -15,7 +15,7 @@
 #include "../SemanLib/TranslatorHolder.h"
 #include "../SemanLib/RossHolder.h"
 #include "RossDev.h"
-
+#include "TckTkWrapper.h"
 	
 const int MaxNumDom = 10;
 

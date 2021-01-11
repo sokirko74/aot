@@ -32,7 +32,7 @@ public:
      	POSITION pos = GetFirstViewPosition();
 		return (CHierarchyView*)GetNextView( pos );
 	};
-	virtual void CreateNode(const char* name, POINT p, bool WithoutView);
+	virtual void CreateNode(const char* name, CNodePlace p, bool WithoutView);
 	virtual void CreateRelation(int node1, int node2, bool bWork, bool WithoutView);
 	
     CString  GetNewNode(CString Nodes);

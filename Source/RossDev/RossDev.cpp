@@ -99,12 +99,6 @@ CRossDevApp::~CRossDevApp()
 CRossDevApp theApp;
 
 
-
-
-Tcl_Interp* theInterp = 0;
-
-/////////////////////////////////////////////////////////////////////////////
-
 void CALLBACK TclTimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	int ok = TRUE;
@@ -120,86 +114,6 @@ void InitError()
 }
 
 
-
-/////////////////////////////////////////////////////////////////////////////
-int InitTclTk(Tcl_Interp* interp)
-{
-	CString cmd;
-	int retcode;
-	cmd.Format("set tcl_library \"%s/Bin/Lib/tcl8.0\"", GetRmlVariable().c_str());
-	char s[200];
-	strcpy(s, cmd);
-	retcode = Tcl_Eval(interp, s);
-	if (retcode != TCL_OK) {
-		CString Q;
-		Q.Format("Cannot run %s", cmd);
-		AfxMessageBox(Q);
-		InitError();
-		return retcode;
-	}
-
-	if (Tcl_Init(interp) == TCL_ERROR)
-	{
-
-		ErrorMessage(Format("Tcl_Init failed:\n%s\n", Tcl_GetStringResult(interp)));
-		return retcode;
-	}
-
-
-
-	Tcl_Eval(interp, "info library");
-	int len = strlen(interp->result);
-
-
-	cmd.Format("source \"%s/Bin/Lib/tcl8.0/init.tcl\"", GetRmlVariable().c_str());
-
-
-
-	strcpy(s, cmd);
-	retcode = Tcl_Eval(interp, s);
-	if (retcode != TCL_OK) {
-		CString Q;
-		Q.Format("Cannot load %s", cmd);
-		AfxMessageBox(Q);
-		InitError();
-		return retcode;
-	}
-
-
-	// Tk init
-	int tkmajor = 0, tkminor = 0;
-	LPSTR tclversion = interp->result + (len - 3);
-	sscanf(tclversion, "%d.%d", &tkmajor, &tkminor);
-
-	if (tkmajor < 8) {
-		return TCL_ERROR;
-	}
-
-	CString tkversion;
-	tkversion.Format("%d.%d", tkmajor, tkminor);
-
-
-
-	CString tklibpath;
-	tklibpath.Format("%s/Bin/Lib/tk%d.%d", GetRmlVariable().c_str(), tkmajor, tkminor);
-
-	cmd.Format("set tk_library \"%s\"", tklibpath);
-	strcpy(s, cmd);
-	Tcl_Eval(interp, s);
-
-	Tk_Init(interp);
-
-	retcode = Tcl_Eval(interp, "wm withdraw .");
-
-
-	//cmd.Format("set $env(GRAPHLET_DIR) \"C:/Rml/Bin/Lib/graphlet\"");
-	cmd.Format("set env(GRAPHLET_DIR) \"%s/Bin/Lib/graphlet\"", GetRmlVariable().c_str());
-	strcpy(s, cmd);
-	retcode = Tcl_Eval(interp, s);
-
-
-	return TCL_OK;
-}
 
 /////////////////////////////////////////////////////////////////////////////
 // The one and only CRossDevApp object
@@ -226,41 +140,26 @@ extern int GetOtherRelations(ClientData clienData, Tcl_Interp* interp, int argc,
 extern int ShowArticle(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int ShowMessageMicrosoftWindows(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 
-/////////////////////////////////////////////////////////////////////////////
-// CRossDevApp initialization
+void CRossDevApp::CreateTclCommand(char* name, Tcl_CmdProc proc) {
+	Tcl_CreateCommand(m_TclInterp.TclInterp, name, proc, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 
-CString TclClassWnd;
-
-
-
+}
 
 BOOL CRossDevApp::InitInstance()
 {
-	/*	if (_putenv("TCL_LIBRARY=C:/Rml/Bin/Lib/tcl8.0"))
-		{
-			ErrorMessage ("Cannot set environment variable TCL_LIBRARY");
-			return FALSE;
-		}
-		if (_putenv("TK_LIBRARY=C:/Rml/Bin/Lib/tk8.0"))
-		{
-			ErrorMessage ("Cannot set environment variable TK_LIBRARY");
-			return FALSE;
-		}
-		if (_putenv("GRAPHLET_DIR=C:/Rml/Bin/Lib/graphlet"))
-		{
-			ErrorMessage ("Cannot set environment variable GRAPHLET_DIR");
-			return FALSE;
-		}
-	*/
 	m_OnlyRoss = false;
-	Tcl_SetServiceMode(TCL_SERVICE_ALL);
-	theInterp = Tcl_CreateInterp();
-	InitTclTk(theInterp);
 
-
-	TclClassWnd = AfxRegisterWndClass(CS_NOCLOSE | CS_PARENTDC | CS_DBLCLKS);
-
-
+	try {
+		Tcl_SetServiceMode(TCL_SERVICE_ALL);
+		m_TclInterp.InitializeTcl();
+		m_TclInterp.InitializeTk();
+		m_TclClassWnd = AfxRegisterWndClass(CS_NOCLOSE | CS_PARENTDC | CS_DBLCLKS);
+		m_TclInterp.RunTcl("wm withdraw .");
+		m_TclInterp.RunTcl(Format("set env(GRAPHLET_DIR) \"%s/Bin/Lib/graphlet\"", GetRmlVariable().c_str()));
+	}
+	catch (CExpc e) {
+		AfxMessageBox(e.m_strCause.c_str());
+	}
 
 	// CG: The following block was added by the Splash Screen component.
 	{
@@ -296,6 +195,7 @@ BOOL CRossDevApp::InitInstance()
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
 		RUNTIME_CLASS(CWordList));
 	AddDocTemplate(pDocTemplate);
+
 
 
 	pDocTemplate = new CMultiDocTemplate(
@@ -362,8 +262,6 @@ BOOL CRossDevApp::InitInstance()
 		return TRUE;
 	}
 
-
-
 	// The main window has been initialized, so show and update it.
 	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
 	pMainFrame->UpdateWindow();
@@ -388,45 +286,32 @@ BOOL CRossDevApp::InitInstance()
 	};
 
 
+	try {
+		SetTimer(NULL, 42, 10, TclTimerProc);
+		CreateTclCommand("SaveToRossdev", SaveToRossdev);
+		CreateTclCommand("GetNewNode", GetNewNode);
+		CreateTclCommand("Update", Update);
+		CreateTclCommand("FindSituations", FindSituations);
+		CreateTclCommand("TranslateToEnglish", TranslateToEnglish);
+		CreateTclCommand("PasteClipboard", PasteClipboard);
+		CreateTclCommand("ShowMessageMicrosoftWindows", ShowMessageMicrosoftWindows);
+		CreateTclCommand("BuildSentence", BuildSentence);
+		CreateTclCommand("SyntRusSentence", SyntRusSentence);
 
-	SetTimer(NULL, 42, 10, TclTimerProc);
-	Tcl_CreateCommand(theInterp, "SaveToRossdev", SaveToRossdev, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "GetNewNode", GetNewNode, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "Update", Update, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "FindSituations", FindSituations, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "TranslateToEnglish", TranslateToEnglish, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "PasteClipboard", PasteClipboard, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "ShowMessageMicrosoftWindows", ShowMessageMicrosoftWindows, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "BuildSentence", BuildSentence, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "SyntRusSentence", SyntRusSentence, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
+		CreateTclCommand("SaveSentence", SaveSentence);
+		CreateTclCommand("ClearSavedSentences", ClearSavedSentences);
+		CreateTclCommand("AnswerBySavedSentences", AnswerBySavedSentences);
 
-	Tcl_CreateCommand(theInterp, "SaveSentence", SaveSentence, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "ClearSavedSentences", ClearSavedSentences, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "AnswerBySavedSentences", AnswerBySavedSentences, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-
-	Tcl_CreateCommand(theInterp, "CreateSynStr", CreateSynStr, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "GetOtherRelations", GetOtherRelations, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-	Tcl_CreateCommand(theInterp, "ShowArticle", ShowArticle, (ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-
-
-
-
-	CString cmd;
-	cmd.Format("source \"$env(GRAPHLET_DIR)/lib/graphscript/ross/init_gra.tcl\"");
-	char s[300];
-	strcpy(s, cmd);
-	int retcode = Tcl_Eval(theInterp, s);
-	if (retcode != TCL_OK)
-	{
-		CString Q;
-		Q.Format("Cannot source %s \n %s", s, theInterp->result);
-		AfxMessageBox(Q);
-	};
-
-
-	if (cmdInfo.bSeman)
-		OnSemAn();
-
+		CreateTclCommand("CreateSynStr", CreateSynStr);
+		CreateTclCommand("GetOtherRelations", GetOtherRelations);
+		CreateTclCommand("ShowArticle", ShowArticle);
+		m_TclInterp.RunTcl(Format("source \"$env(GRAPHLET_DIR)/lib/graphscript/ross/init_gra.tcl\""));
+		if (cmdInfo.bSeman)
+			OnSemAn();
+	}
+	catch (CExpc e) {
+		AfxMessageBox(e.m_strCause.c_str());
+	}
 
 	return TRUE;
 
@@ -502,13 +387,6 @@ void CRossDevApp::OnFileOpen()
 
 }
 
-
-
-
-
-
-
-
 DWORD CALLBACK EditStreamCallbackFromString(
 	DWORD dwCookie, // application-defined value
 	LPBYTE pbBuff,  // pointer to a buffer
@@ -535,24 +413,15 @@ bool GlobalOpenReport(CString S, CString Name)
 	CDocTemplate* T = GetReportTemplate();
 	CReportDoc* pDocument = (CReportDoc*)T->CreateNewDocument();
 	ASSERT_VALID(pDocument);
-
-
 	T->InitialUpdateFrame(T->CreateNewFrame(pDocument, NULL), pDocument, TRUE);
 	pDocument->m_bRTF = false;
 	CRichEditCtrl& C = pDocument->GetView()->GetRichEditCtrl();
 	pDocument->SetTitle(Name);
-
-
-
 	S = Name + CString("\r\n\r\n") + S;
-
 	C.SetWindowText(S);
 	pDocument->InitFonts();
-
 	return true;
 };
-
-
 
 
 BOOL CRossDevApp::PreTranslateMessage(MSG* pMsg)
@@ -582,7 +451,7 @@ BOOL CRossDevApp::OnIdle(LONG lCount)
 		{
 			ResetEvent(m_hEventMinusListReport);
 			((CFrameWnd*)((CRossDevApp*)AfxGetApp())->m_pMainWnd)->SetMessageText("");
-			GlobalOpenReport(m_strMinusListReport, 
+			GlobalOpenReport(m_strMinusListReport,
 				"List of all lemmas that were not found in the dictionary");
 
 		};
@@ -593,8 +462,6 @@ BOOL CRossDevApp::OnIdle(LONG lCount)
 
 void CRossDevApp::OnSemAn()
 {
-
-
 	if (m_OnlyRoss)
 	{
 		AfxMessageBox("Seman is disabled because of switch  -onlyross ");
@@ -715,4 +582,40 @@ void CRossDevApp::OnMinimizeAllDicts()
 		CMDIChildWnd* Wnd = (CMDIChildWnd*)pView->GetParent();
 		Wnd->ShowWindow(SW_MINIMIZE);
 	};
+}
+
+
+CString CRossDevApp::GetNormalizedRossPath(DictTypeEnum RossType) const
+{
+	CAllRossesHolder* Trans = m_SemBuilder.m_RusStr.m_pData;
+	const CString _strPathName = Trans->GetRossPath(RossType).c_str();
+	CString strPathName = _strPathName;
+	CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
+	strPathName.MakeLower();
+	assert(pRossDocTemplate);
+	strPathName.Replace('/', '\\');
+	return strPathName;
+}
+
+CRossDoc* CRossDevApp::FindRossDoc(DictTypeEnum RossType)
+{
+	CString strPathName = GetNormalizedRossPath(RossType);
+
+	CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
+	assert(pRossDocTemplate);
+
+	CDocument* pDoc;
+	POSITION pos = pRossDocTemplate->GetFirstDocPosition();
+	while (pos)
+	{
+		pDoc = pRossDocTemplate->GetNextDoc(pos);
+		CString strPathNameDoc = pDoc->GetPathName();
+		strPathNameDoc.MakeLower();
+		if (strPathNameDoc == strPathName)
+		{
+			return (CRossDoc*)pDoc;
+		}
+	}
+
+	return 0;
 }

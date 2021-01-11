@@ -58,7 +58,7 @@ WordList.cpp
 font.cpp
 picture.cpp
 rowcursor.cpp
-)
+ )
 
 
 target_link_libraries(${PROJECT_NAME}
@@ -71,6 +71,8 @@ target_link_libraries(${PROJECT_NAME}
     ${PROJECT_SOURCE_DIR}/../tcl_source/tcl80.lib
     ${PROJECT_SOURCE_DIR}/../tk_source/tk80.lib
 )
+
+add_subdirectory("tests")
 
 target_precompile_headers(${PROJECT_NAME} PUBLIC stdafx.h)
 

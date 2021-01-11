@@ -932,18 +932,37 @@ void CWordList::OnComments()
 
 inline bool GlobalOpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
 {
-	CDocument* pDocument = GetHierarchyTemplate()->CreateNewDocument();
-	ASSERT_VALID(pDocument);
-	((CHierarchyDoc*)pDocument)->OpenHierarchy(pRossDoc, Type);
-	return true;
+	if (pRossDoc == nullptr) {
+		AfxMessageBox("please, open the main Russian dictionary");
+		return false;
+	}
+	else {
+		CDocument* pDocument = GetHierarchyTemplate()->CreateNewDocument();
+		ASSERT_VALID(pDocument);
+		try {
+			((CHierarchyDoc*)pDocument)->OpenHierarchy(pRossDoc, Type);
+		}
+		catch (CExpc e) {
+			AfxMessageBox(e.m_strCause.c_str());
+		}
+		return true;
+	}
 };
 
 
 // иерархия отношений
 void CWordList::OnMenuitem32788()
 {
-	GlobalOpenHierarchy(GetDocument(), SemRel);
+	CRossDoc* pRossDoc = ((CRossDevApp*)AfxGetApp())->FindRossDoc(Ross);
+	GlobalOpenHierarchy(pRossDoc, SemRel);
 }
+
+void CWordList::OnSemFet()
+{
+	CRossDoc* pRossDoc = ((CRossDevApp*)AfxGetApp())->FindRossDoc(Ross);
+	GlobalOpenHierarchy(pRossDoc, SemFet);
+}
+
 
 void CWordList::BuildVals(std::vector<Valency>& Vals, uint16_t UnitNo)
 {
@@ -1059,11 +1078,6 @@ void CWordList::OnValencies()
 	};
 };
 
-void CWordList::OnSemFet()
-{
-	// TODO: Add your command handler code here
-	GlobalOpenHierarchy(GetDocument(), SemFet);
-}
 
 struct CFieldValue {
 	TCortege cortege;
