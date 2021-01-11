@@ -40,39 +40,6 @@ GenFreqDictConv (../../Texts/freq_fin.txt ${PROJECT_SOURCE_DIR}/../BinDict/freq_
 GenFreqDictConv (../../Texts/freq_hud.txt ${PROJECT_SOURCE_DIR}/../BinDict/freq_hud.bin)
 
 
-macro (StatDatBinRun lang Source Topic)
-    set (BinData ${PROJECT_SOURCE_DIR}/../Morph/${lang}/${Topic}homoweight.bin)
-    list(APPEND AllBinFiles ${BinData})
-    add_custom_command(
-        OUTPUT ${BinData}
-        COMMAND StatDatBin --input ${Source} --language ${lang} --output ${BinData}
-        DEPENDS StatDatBin ${Source}
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        COMMENT "Convert ${Source} to the binary format"
-        VERBATIM
-    )
-endmacro(StatDatBinRun)
-
-macro (WordDatBinRun lang Source Topic)
-    set (BinData ${PROJECT_SOURCE_DIR}/../Morph/${lang}/${Topic}wordweight.bin)
-    list(APPEND AllBinFiles ${BinData})
-    add_custom_command(
-        OUTPUT ${BinData}
-        COMMAND WordDatBin --input ${Source} --language ${lang} --output ${BinData}
-        DEPENDS WordDatBin ${Source}
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        COMMENT "Convert ${Source} to the binary format"
-        VERBATIM
-    )
-endmacro(WordDatBinRun)
-
-foreach (Topic l c f)
-    StatDatBinRun (Russian StatData.rus ${Topic} ) 
-    StatDatBinRun (German  StatData.ger ${Topic} ) 
-    WordDatBinRun (Russian WordData.txt ${Topic} )
-endforeach (Topic)
-
-
 add_custom_target( 
     BinDicts
     SOURCES ${AllBinFiles}
