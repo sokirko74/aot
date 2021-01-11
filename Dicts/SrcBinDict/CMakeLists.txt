@@ -6,8 +6,8 @@ macro (Convertor BinaryConvertor Source BinData)
         OUTPUT ${BinData}
         COMMAND pwd
         COMMAND ${BinaryConvertor} ${Source} ${BinData}
-        #DEPENDS ${BinaryConvertor} ${Source}
-        DEPENDS ${Source}
+        #DEPENDS ${BinaryConvertor} ${Source} 
+        DEPENDS ${Source} MorphDicts
         COMMENT "${BinaryConvertor} ${Source} ${BinData}"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         VERBATIM

@@ -4,23 +4,23 @@ declare_cmake_min_version()
 project(MorphAllLanguages)
 
 macro (RunMorphGen langua)
-    set( target_name "${langua}Morph")
     set( folder  ${PROJECT_SOURCE_DIR}/${langua} )
 
     add_custom_target(
         "MorphGen_on_${langua}"
-        SOURCES ${folder}/morph.bases ${folder}/morph.annot ${folder}/morph.forms_autom
+         SOURCES ${folder}/morph.bases ${folder}/morph.annot ${folder}/morph.forms_autom
     )
 
     add_custom_command(
-        OUTPUT morph.bases morph.annot morph.forms_autom
+        OUTPUT ${folder}/morph.bases ${folder}/morph.annot ${folder}/morph.forms_autom
         COMMAND MorphGen --input project.mwz --output-folder . --postfix-len 5 --min-freq 3
-        DEPENDS MorphGen morphs.mrd project.mwz gramtab.tab
+        DEPENDS MorphGen ${folder}/morphs.mrd ${folder}/project.mwz ${folder}/gramtab.tab
         COMMENT "Convert Morphology ${langua}"                 
         WORKING_DIRECTORY ${folder}
         VERBATIM
     )
 endmacro()
+
 
 macro (StatDatBinRun langua Topic)
     set (Src ${PROJECT_SOURCE_DIR}/../SrcBinDict/StatData.${langua})
@@ -28,7 +28,7 @@ macro (StatDatBinRun langua Topic)
     add_custom_command(
         OUTPUT ${Trg}
         COMMAND StatDatBin --input ${Src} --language ${langua} --output ${Trg}
-        DEPENDS StatDatBin ${Src} "MorphGen_on_${langua}"
+        DEPENDS StatDatBin ${Src} "${PROJECT_SOURCE_DIR}/${langua}/morph.bases"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "Convert ${Src} to the binary format"
         VERBATIM
@@ -41,7 +41,7 @@ macro (WordDatBinRun langua Topic)
     add_custom_command(
         OUTPUT ${Trg}
         COMMAND WordDatBin --input ${Src} --language ${langua} --output ${Trg}
-        DEPENDS WordDatBin ${Src} "MorphGen_on_${langua}"
+        DEPENDS WordDatBin ${Src} "${PROJECT_SOURCE_DIR}/${langua}/morph.bases"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "Convert ${Source} to the binary format"
         VERBATIM
@@ -50,7 +50,7 @@ endmacro()
 
 
 macro (CreateAllMorphBinFiles langua)
-    
+    set( folder  ${PROJECT_SOURCE_DIR}/${langua} )    
     RunMorphGen (${langua})
     
     foreach (Topic l c f)
@@ -61,9 +61,8 @@ macro (CreateAllMorphBinFiles langua)
     add_custom_target(
         "${langua}_Morph"
         SOURCES ${folder}/morph.bases ${folder}/chomoweight.bin ${folder}/lhomoweight.bin ${folder}/fhomoweight.bin ${folder}/cwordweight.bin ${folder}/lwordweight.bin ${folder}/fwordweight.bin
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        WORKING_DIRECTORY ${folder}
     )
-
 endmacro()
 
 CreateAllMorphBinFiles(Russian)
