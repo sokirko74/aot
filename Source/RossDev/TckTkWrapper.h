@@ -1,8 +1,9 @@
 #pragma once
+#include <windows.h>
 #include "../common/utilit.h"
 #include <tcl.h>
 #include <tk.h>
-#include <windows.h>
+
 
 struct CTopTkWindow {
 	std::string   m_tkname;

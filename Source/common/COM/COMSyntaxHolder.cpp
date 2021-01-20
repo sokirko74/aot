@@ -157,7 +157,9 @@ BOOL CCOMSyntaxHolder::BuildBeforeSyntax(std::string str, BOOL bFile, BOOL bWrit
 	try {
 
 		log_path = GetRegistryString("Software\\Dialing\\Logs\\Main");
-		log_path += "/";
+		if (!endswith(log_path, "/")) {
+			log_path += "/";
+		}
 	}
 	catch (...) {
 	};

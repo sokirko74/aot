@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 	std::cout << "Found Units " << Count << "\n";
 
 	// print all words which are written in Russian ABC
-	std::ofstream outp(inputFile + ".tokens");
+	std::ofstream outp(inputFile + ".tokens", std::ios::binary);
 	for (size_t i = 0; i < Count; i++) {
 		if (piGraphan->HasDescr(i, GRAPHANLib::ORLE) == TRUE)
 		{

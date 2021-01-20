@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 	std::ifstream inp(inputFile);
 	assert(inp.is_open());
 
-	std::ofstream outp(inputFile + ".lemma");
+	std::ofstream outp(inputFile + ".lemma", std::ios::binary);
 	assert(outp.is_open());
 
 	// lemmatizing a word in utf8

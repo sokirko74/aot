@@ -158,7 +158,7 @@ int main(int argc, char* argv[])
 		std::ifstream  inp(inputFileName);
 		assert(inp.is_open());
 		
-		std::ofstream  outp(inputFileName + ".seman");
+		std::ofstream  outp(inputFileName + ".seman", std::ios::binary);
 		assert(outp.is_open());
 		std::string s;
 		while (std::getline(inp, s))
