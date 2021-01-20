@@ -16,9 +16,9 @@ Russian website (Russian documents) is www.aot.ru.
 More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 ==============  Prerequisites    ========================
-0.   Install cmake (at least 3.5) from https://cmake.org/download/
-
-1.  g++ 9.0 or higher or  Microsoft Visual Studio 2019
+0.   Install cmake (at least 3.5) from https://cmake.org/download/ and gzip (cygwin)
+ 
+1.  g++ 9.0 or higher or  Microsoft Visual Studio 2019 
 
 2. You need flex and bison to build projects after Morphology (Synan and Seman)
     sudo apt install flex bison
