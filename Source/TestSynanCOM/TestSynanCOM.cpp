@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 		// printing all syntax groups
 
 		// going through all sentences
-		std::ofstream outp(inputFile + ".synan");
+		std::ofstream outp(inputFile + ".synan", std::ios::binary);
 
 		for(int i = 0 ; i < SyntaxHolder.m_piSentCollection->SentencesCount ; i++ )
 		{

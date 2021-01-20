@@ -18,15 +18,27 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 ==============  Prerequisites    ========================
 0.   Install cmake (at least 3.5) from https://cmake.org/download/
 
-1.  g++ 9.0 or higher or 
+1.  g++ 9.0 or higher or  Microsoft Visual Studio 2019
 
 2. You need flex and bison to build projects after Morphology (Synan and Seman)
-    For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
+    sudo apt install flex bison
+
+2.1 For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
+     mkdir RML/external
+     mkdir RML/external/winflex
+     cd RML/external/winflex
+     wget https://sourceforge.net/projects/winflexbison/files/win_flex_bison-2.5.24.zip/download
+     unzip win_flex_bison-2.5.24.zip
+    
 
 3. To build lemmatizer_python(switched off by default) you need swig and python-dev,
-    for windows I used 
+  3.1  for windows I used 
     https://sourceforge.net/projects/swig/files/swigwin/swigwin-3.0.12/swigwin-3.0.12.zip/download
     https://www.python.org/downloads/release/python-2715/
+  3.2 To compile lemmatizer_python you need also 
+    8.1 one must install swig (swig.org) and adjust path in lemmatizer_python/CMakeLists.txt
+    8.2 and install python3 (with  debug binaries https://stackoverflow.com/questions/35250175/i-cannot-find-python35-d-lib)
+
  
 5. To compile HTTP-daemons please install libevent 
         https://github.com/libevent/libevent:
@@ -42,9 +54,6 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 
 7. To run Windows GUI Rossdev.exe and MorphWizard you must set Russian everywhere in Region Setting.
 
-8. To compile lemmatizer_python 
-    8.1 one must install swig (swig.org) and adjust path in lemmatizer_python/CMakeLists.txt
-    8.2 and install python3 (with  debug binaries https://stackoverflow.com/questions/35250175/i-cannot-find-python35-d-lib)
 
 =================   Compilation =======================
   export RML=/home/sokirko/RML
