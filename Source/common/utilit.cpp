@@ -2522,16 +2522,18 @@ std::string convert_to_utf8(const std::string& str, const MorphLanguageEnum lang
 #else //UNUX
 
 	std::wstring utf8_to_utf16(const std::string& str) {
-		std::wstring_convert<std::codecvt_utf8_utf16<char16_t> > converter;
-		return converter.from_bytes(str);
+		assert (false);
+		//std::wstring_convert<std::codecvt_utf8_utf16<char16_t> > converter;
+		//return converter.from_bytes(str);
 	}
 
 
 	std::string utf16_to_utf8(const std::wstring& wstr) {
-		std::u16string u16str(wstr.begin(), wstr.end());
-		std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t > converter;
-		std::string s =  converter.to_bytes(u16str.c_str());
-		return s;
+		assert (false);
+		//std::u16string u16str(wstr.begin(), wstr.end());
+		//std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t > converter;
+		//std::string s =  converter.to_bytes(u16str.c_str());
+		//return s;
 	}
 
 #endif 
