@@ -50,6 +50,9 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
    6.6  ./configure --disable-openssl
    6.7  make & sudo make install
 
+   or
+   sudo apt install libevent-dev
+  
 6. To compile COM-objects you need to run Visual Studio as administrator.
 
 7. To run Windows GUI Rossdev.exe and MorphWizard you must set Russian everywhere in Region Setting.
