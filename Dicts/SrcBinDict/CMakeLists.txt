@@ -4,7 +4,6 @@ macro (Convertor BinaryConvertor Source BinData)
     list(APPEND AllBinFiles ${BinData})
     add_custom_command(
         OUTPUT ${BinData}
-        COMMAND pwd
         COMMAND ${BinaryConvertor} ${Source} ${BinData}
         #DEPENDS ${BinaryConvertor} ${Source} 
         DEPENDS ${Source} MorphDicts
