@@ -1,11 +1,11 @@
 // MAPostCOM.cpp : Implementation of CCOMMAPost
 #include "StdAfx.h"
-#include "..\Agramtab\ComGramTab.h"
+#include "windows\Agramtab\ComGramTab.h"
 #include "MAPost_i.h"
 #include "MAPostCOM.h"
 #include "morph_dict/common/utilit.h"
 #include "morph_dict/LemmatizerBaseLib/rus_numerals.h"
-#include "../../Lemmatizer/ComPlmLineCollection.h"
+#include "windows/Lemmatizer/ComPlmLineCollection.h"
 #import "..\Lemmatizer\Lemmatizer.tlb"
 
 // language specific 

@@ -9,7 +9,7 @@
 #include <string>
 #include <iostream>
 #include <io.h>
-#import "../../graphan/graphan.tlb"
+#import "windows/graphan/graphan.tlb"
 #include <assert.h>
 
 int main(int argc, char* argv[])

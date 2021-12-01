@@ -8,7 +8,7 @@ class CCOMMAPost;
 
 
 #include "resource.h"       // main symbols
-#include "../../MAPostLib/PostMorphInterface.h"
+#include "synan/MAPostLib/PostMorphInterface.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CCOMMAPost

@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <assert.h>
-#import "../../Lemmatizer/Lemmatizer.tlb"
+#import "windows/Lemmatizer/Lemmatizer.tlb"
 
 
 int main(int argc, char* argv[])

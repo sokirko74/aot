@@ -18,8 +18,8 @@ Relations:
 #include <iostream>
 #include <fstream>
 #include "assert.h"
-#import "../agramtab/agramtab.tlb"
-#import "../../Seman/seman.tlb"
+#import "windows/agramtab/agramtab.tlb"
+#import "windows/Seman/seman.tlb"
 
 AGRAMTABLib::IGramTabPtr piRusGramTab;
 

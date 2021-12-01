@@ -4,7 +4,7 @@
 
 */
 
-#include "../../common/COM/COMSyntaxHolder.h"
+#include "windows/common/COMSyntaxHolder.h"
 #include "morph_dict/common/utilit.h"
 #include <fstream>
 
