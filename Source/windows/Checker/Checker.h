@@ -14,7 +14,7 @@
 
 #include "resource.h"		// main symbols
 
-#import "../../Lemmatizer/Lemmatizer.tlb"
+#import "../Lemmatizer/Lemmatizer.tlb"
 
 using namespace LEMMATIZERLib;
 

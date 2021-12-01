@@ -9,7 +9,7 @@
 #endif // _MSC_VER > 1000
 
 
-#import "../../Lemmatizer/Lemmatizer.tlb"
+#import "../Lemmatizer/Lemmatizer.tlb"
 #import "../agramtab/agramtab.tlb"
 
 /////////////////////////////////////////////////////////////////////////////

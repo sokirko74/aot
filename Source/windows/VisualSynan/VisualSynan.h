@@ -16,7 +16,7 @@
 
 
 
-#include "../../common/COM/COMSyntaxHolder.h"
+#include "windows/common/COMSyntaxHolder.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CVisualSynanApp:

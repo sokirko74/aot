@@ -2,9 +2,9 @@ declare_cmake_min_version()
 
 project(GraphmatThick)
 
-add_executable (GraphmatThick GraphmatThick.cpp)
+add_executable (${PROJECT_NAME} GraphmatThick.cpp)
 
-target_link_libraries(GraphmatThick 
+target_link_libraries(${PROJECT_NAME} 
     GraphanLib
 )
 
@@ -13,12 +13,12 @@ macro (GraphTest lang filename)
     add_test(
         NAME Graphan_${lang}_${base_name} 
         COMMAND GraphmatThick --language ${lang} --input-file ${filename} --output-file ${filename}.gra
-        WORKING_DIRECTORY ../../..
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     )
     add_test(
         NAME Graphan_${lang}_${base_name}_cmp
         COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.gra ${filename}.gra.canon
-        WORKING_DIRECTORY ../../..
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     )
 endmacro(GraphTest)
 

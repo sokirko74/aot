@@ -13,13 +13,13 @@ macro (TestLemLang lang filename optional_morphan_arg)
     add_test(
         NAME Morphan_${lang}_${base_name} 
         COMMAND TestLem --echo  ${optional_morphan_arg} --no-ids --forms --language ${lang} --input ${filename} --output ${filename}.morph
-        WORKING_DIRECTORY ../../..
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     )
 
     add_test(
         NAME Morphan_${lang}_${base_name}_cmp
         COMMAND ${CMAKE_COMMAND} -E compare_files  ${filename}.morph ${filename}.morph.canon
-        WORKING_DIRECTORY ../../..
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     )
 endmacro(TestLemLang)
 

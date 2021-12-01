@@ -9,9 +9,9 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 
-#import "windows/SynAn/Synan.tlb"
-#import "windows/Lemmatizer/Lemmatizer.tlb"
-#import "windows/graphan/graphan.tlb"
+#import "../SynAn/Synan.tlb"
+#import "../Lemmatizer/Lemmatizer.tlb"
+#import "../graphan/graphan.tlb"
 #include "morph_dict/common/utilit.h"
 #include "morph_dict/common/windows_unicode.h"
 #include <tchar.h>

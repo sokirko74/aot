@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MorphWizardLib/wizard.h"
+#include "morph_dict/MorphWizardLib/wizard.h"
 class CSLFDocument;
 
 class CAccentModelDiff : public CFormView

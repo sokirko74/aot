@@ -3,9 +3,9 @@ declare_cmake_min_version()
 project(TestSemanCOM)
 
 
-add_executable (TestSemanCOM TestSeman.cpp)
+add_executable (${PROJECT_NAME} TestSeman.cpp)
 
-add_dependencies(TestSemanCOM  
+add_dependencies(${PROJECT_NAME}  
     Seman
     SynAn
     Lemmatizer
@@ -17,11 +17,11 @@ add_dependencies(TestSemanCOM
 add_test(
     NAME Seman_COM_Russian 
     COMMAND TestSemanCOM test/Russian/text.txt
-    WORKING_DIRECTORY .
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )
 
 add_test(
     NAME Seman_COM_Russian_cmp
     COMMAND ${CMAKE_COMMAND} -E compare_files test/Russian/canon.seman test/Russian/text.txt.seman
-    WORKING_DIRECTORY .
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )

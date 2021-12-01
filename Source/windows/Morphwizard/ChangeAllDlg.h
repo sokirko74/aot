@@ -1,7 +1,7 @@
 #pragma once
 #include "afxcmn.h"
 #include "afxwin.h"
-#include "../MorphWizardLib/wizard.h"
+#include "morph_dict/MorphWizardLib/wizard.h"
 
 // CChangeAllDlg dialog
 

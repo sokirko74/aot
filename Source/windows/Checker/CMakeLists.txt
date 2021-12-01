@@ -9,7 +9,7 @@ add_executable (${PROJECT_NAME} WIN32
         GriThrPB.cpp
         ProceedDlg.cpp
         StdAfx.cpp
-        ../../common/COM/COMSyntaxHolder.cpp
+        ../common/COMSyntaxHolder.cpp
         Checker.rc
 )
 

@@ -25,7 +25,7 @@ add_executable (${PROJECT_NAME} WIN32
         VisualWord.cpp
         WaitDlg.cpp
         WaitThread.cpp
-        ../../common/COM/COMSyntaxHolder.cpp
+        ../common/COMSyntaxHolder.cpp
 )
 
 add_definitions(-D_AFXDLL)

@@ -10,9 +10,9 @@
 #endif // _MSC_VER > 1000
 
 #include "StdAfx.h"
-#include "../../common/cortege.h"
+#include "common/cortege.h"
 class CWordlist;
-#include "../../SemanLib/RossHolder.h"
+#include "seman/SemanLib/RossHolder.h"
 
 struct CRossDevTextField;
 

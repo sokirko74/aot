@@ -3,14 +3,14 @@
 #ifndef __AFXWIN_H__
 	#error include 'stdafx.h' before including this file for PCH
 #endif
-#include "../../common/cortege.h"
+#include "common/cortege.h"
 #include "RossDoc.h"
 #include "ArticleDoc.h"
 #include "PocketForm.h"
-#include "../../SemanLib/HierarchyHolder.h"
+#include "seman/SemanLib/HierarchyHolder.h"
 #include "HierarchyDoc.h"
 #include "afxrich.h"
-#include "../../SemanLib/SemStructureBuilder.h"
+#include "seman/SemanLib/SemStructureBuilder.h"
 #include <tcl.h>
 #include "TckTkWrapper.h"
 

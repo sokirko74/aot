@@ -12,7 +12,7 @@
 
 #pragma warning(disable: 4786)
 #include "morph_dict/common/utilit.h"
-#include "../../common/COM/COMSyntaxHolder.h"
+#include "windows/common/COMSyntaxHolder.h"
 #include "afxwin.h"
 #include "list"
 
