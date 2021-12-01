@@ -1,7 +1,7 @@
 #ifndef __MorphXMLtoken_h
 #define __MorphXMLtoken_h
 
-#include "../common/utilit.h"
+#include "morph_dict/common/utilit.h"
 
 const std::string XmlPunctType = "pun";
 const std::string XmlWordType = "w";

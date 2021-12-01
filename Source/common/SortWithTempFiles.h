@@ -1,7 +1,7 @@
 #ifndef sort_with_temp_files_h
 #define sort_with_temp_files_h
 
-#include  "bserialize.h"
+#include  "morph_dict/common/bserialize.h"
 
 
 const size_t SortBufferSize = 100000000;

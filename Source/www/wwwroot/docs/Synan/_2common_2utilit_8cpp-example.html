@@ -304,48 +304,12 @@
         <span class="keywordflow">return</span> (access(FName, 0) == 0);
 }
 
-file_off_t FileSize (<span class="keyword">const</span> <span class="keywordtype">char</span> *filename)
-{
-        FILE * fp = fopen (filename,<span class="stringliteral">"rb"</span>);
-        <span class="keywordflow">if</span> (fp == NULL) <span class="keywordflow">return</span> 0;
-        <span class="keywordflow">if</span> (!FSeek(fp, 0,  SEEK_END)) <span class="keywordflow">throw</span> CExpc (Format(<span class="stringliteral">"Cannot move to the begining of the file: %s"</span>, filename));;
-
-        file_off_t size = FTell (fp);
-        fclose (fp);
-        <span class="keywordflow">return</span> size;
-}
 
 <span class="preprocessor">#ifdef WIN32</span>
 <span class="preprocessor"></span>        <span class="keyword">extern</span> <span class="stringliteral">"C"</span> <span class="keywordtype">int</span> __cdecl _fseeki64(FILE *, __int64, <span class="keywordtype">int</span>);
         <span class="keyword">extern</span> <span class="stringliteral">"C"</span> __int64 __cdecl _ftelli64(FILE *);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>
-<span class="keywordtype">bool</span> FSeek(FILE* fp, file_off_t pos, <span class="keywordtype">int</span> origin)
-{
-        
-<span class="preprocessor">        #ifdef USE_FSEEK32</span>
-<span class="preprocessor"></span>                <span class="keywordflow">return</span> fseek(fp, pos, origin) == 0;
-<span class="preprocessor">        #else</span>
-<span class="preprocessor"></span><span class="preprocessor">                #ifdef WIN32</span>
-<span class="preprocessor"></span>                        <span class="keywordflow">return</span> _fseeki64(fp, pos, origin) == 0;
-<span class="preprocessor">                #else</span>
-<span class="preprocessor"></span>                        <span class="keywordflow">return</span> fseeko(fp, pos, origin) == 0;
-<span class="preprocessor">                #endif</span>
-<span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<span class="preprocessor"></span>}
-
-file_off_t FTell(FILE* fp)
-{
-<span class="preprocessor">        #ifdef USE_FSEEK32</span>
-<span class="preprocessor"></span>                <span class="keywordflow">return</span> ftell(fp);
-<span class="preprocessor">        #else</span>
-<span class="preprocessor"></span><span class="preprocessor">                #ifdef WIN32</span>
-<span class="preprocessor"></span>                        <span class="keywordflow">return</span> _ftelli64(fp) ;
-<span class="preprocessor">                #else</span>
-<span class="preprocessor"></span>                        <span class="keywordflow">return</span> ftello(fp);
-<span class="preprocessor">                #endif</span>
-<span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<span class="preprocessor"></span>}
 
 
 void(*GlobalErrorMessage)(<span class="keyword">const</span> string&amp;) = 0;
@@ -2249,19 +2213,6 @@ BYTE wk[] = {128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,
         0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B, 0x2D02EF8D,
 };
 
-
-DWORD StringCrc32(<span class="keyword">const</span> <span class="keywordtype">char</span>* szString)
-{
-        DWORD dwCrc32 = 0xFFFFFFFF;
-
-        <span class="keywordflow">while</span>(*szString != <span class="charliteral">'\0'</span>)
-        {
-                dwCrc32 = ((dwCrc32) &gt;&gt; 8) ^ arrdwCrc32Table[((<span class="keywordtype">unsigned</span> char)*szString) ^ ((dwCrc32) &amp; 0x000000FF)];
-                szString++;
-        }
-
-        <span class="keywordflow">return</span> ~dwCrc32;
-}
 
 <span class="comment">// ====================   StringTokenizer =======================</span>
 <span class="keywordtype">bool</span> StringTokenizer::is_delim(<span class="keywordtype">char</span> ch)<span class="keyword"> const</span>

@@ -1,10 +1,10 @@
 #include "LemWord.h"
 #include "Homonym.h"
-#include "util_classes.h"
-#include "../AgramtabLib/agramtab_.h"
-#include "../LemmatizerLib/Lemmatizers.h"
+#include "morph_dict/common/util_classes.h"
+#include "morph_dict/AgramtabLib/agramtab_.h"
+#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
 
-CHomonym::CHomonym(const	CAgramtab* pGramTab):CAncodePattern(pGramTab)
+CHomonym::CHomonym(const CAgramtab* pGramTab):CAncodePattern(pGramTab)
 {
 	m_iCmpnLen = 0;
 	m_bCmplLem = false;

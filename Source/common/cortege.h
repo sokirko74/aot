@@ -7,8 +7,8 @@
  #define cortege_h
 
 #include <assert.h>
-#include "../common/utilit.h"
-#include "../common/bserialize.h"
+#include "morph_dict/common/utilit.h"
+#include "morph_dict/common/bserialize.h"
 
 const BYTE ErrUChar	= 254;
 

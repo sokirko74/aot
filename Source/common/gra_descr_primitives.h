@@ -1,4 +1,4 @@
-#include "utilit.h"
+#include "morph_dict/common/utilit.h"
 #include "gra_descr.h"
 extern bool IsFirstMemberOfPairDesciptor(Descriptors d);
 extern bool IsSecondMemberOfPairDesciptor(Descriptors d);

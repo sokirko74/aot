@@ -1,4 +1,0 @@
-[FNAME] -> [TOKEN filename="firstname.txt"];
-[FAMILY] -> [TOKEN filename="family.txt"];
-[PNAME] -> [FNAME] [FAMILY]; %% "Kai Zimmer"
-

@@ -3,6 +3,7 @@ project(aot_cpp_sources)
 set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 declare_cmake_min_version()
 
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 set (CMAKE_CXX_STANDARD 17)
 
 IF (WIN32)
@@ -22,14 +23,6 @@ ENDIF()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 
-#http server 
-if(BUILD_HTTP_SERVERS)
-    #include_directories(contrib/libevent/include)
-    #find_package(Libevent REQUIRED PATHS contrib/libevent)
-    find_package(Libevent REQUIRED)
-    message ("LIBEVENT_INCLUDE =  ${LIBEVENT_INCLUDE_DIR}" )
-    message ("LIBEVENT_LIBRARY =  ${LIBEVENT_LIBRARY}" )
-ENDIF()
 
 if (BUILD_LEMMATIZER_PYTHON)
   if  (WIN32)
@@ -58,124 +51,23 @@ else()
 endif()
 
 
-add_subdirectory (contrib/iconv_subset)
-
 add_subdirectory (tinyxml)
 add_subdirectory (common)
-add_subdirectory (PCRE)
-
-add_subdirectory (StructDictLib)
-add_subdirectory (StructDictLoader)
-add_subdirectory (AgramtabLib)
-add_subdirectory (GraphanLib)
-add_subdirectory (RmlThesLib)
-add_subdirectory (GraphmatThick)
-add_subdirectory (MorphWizardLib)
-add_subdirectory (LemmatizerLib)
-add_subdirectory (TestLem)
-add_subdirectory (FileLem)
-add_subdirectory (MorphGen)
-
-if ($JAVA_INCLUDES)  # not tested under cmake
-    add_subdirectory (JNIMorphAPI)
-    add_subdirectory (JNIMorphAPITest)
-endif()
-
-add_subdirectory (Bigrams)
-add_subdirectory (BinaryDictsClient)
-add_subdirectory (BinaryDictsLib)
-add_subdirectory (AprDictGen)
-add_subdirectory (asp_read)
-add_subdirectory (GenFreqDict)
-add_subdirectory (StatDatBin)
-add_subdirectory (WordDatBin)
-add_subdirectory (deriv_read)
-add_subdirectory (ConvertTrigramBinary)
-add_subdirectory (Trigram)
-add_subdirectory (TrigramLib)
-add_subdirectory (TrigramRusCorporaXml)
-add_subdirectory (CheckGramTab)
-
-add_subdirectory (GerPostMorph)
-add_subdirectory (MAPostLib)
-add_subdirectory (TestMapost)
-add_subdirectory (SimpleGrammarLib)
-add_subdirectory (SimpleGrammarPrecompiled)
-
-add_subdirectory (EngSynanLib)
-add_subdirectory (GerSynanLib)
-add_subdirectory (RusSynanLib)
-add_subdirectory (SynCommonLib)
-add_subdirectory (SynanLib)
-add_subdirectory (TestSynan)
-
-add_subdirectory (SemanLib)
-add_subdirectory (TestSeman)
-add_subdirectory (Transfer)
-
-if(BUILD_HTTP_SERVERS)
-    add_subdirectory (SynanDaemon)
-    add_subdirectory (SemanDaemon)
-endif()
-
-if (BUILD_COM) 
-    find_package(IDL REQUIRED)
-endif()
-
+add_subdirectory (morph_dict)
+add_subdirectory (dicts)
+add_subdirectory (graphan)
+add_subdirectory (morphan)
+add_subdirectory (synan)
+add_subdirectory (seman)
 
 IF (MSVC)
-    macro(CopyAndRegsvr Project)
-        add_custom_command(
-            TARGET ${Project}
-            POST_BUILD        
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${OutDir}${Project}.dll ${CMAKE_SOURCE_DIR}/Bin
-            COMMAND echo "regsvr32 /s ${CMAKE_SOURCE_DIR}/Bin/${Project}.dll (need admin rights))"
-            COMMAND regsvr32 /s ${CMAKE_SOURCE_DIR}/Bin/${Project}.dll
-            VERBATIM
-        )
-    endmacro()
-
-    macro(CopyExe Project)
-        add_custom_command(
-            TARGET ${Project}
-            POST_BUILD        
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${OutDir}${Project}.exe ${CMAKE_SOURCE_DIR}/Bin
-            VERBATIM
-        )
-    endmacro()
-
-    if (BUILD_COM)
-        message ("compile COM-objects for Microsoft Windows")
-        add_subdirectory (agramtab)
-        add_subdirectory (graphan)
-        add_subdirectory (Lemmatizer)
-        add_subdirectory (MAPost)
-        add_subdirectory (SynAn)
-        add_subdirectory (Seman)
-        add_subdirectory (TestCOMGraphan)
-        add_subdirectory (TestLemmatizerCOM)
-        add_subdirectory (TestSemanCOM)
-        add_subdirectory (TestSynanCOM)
-        if(BUILD_WINDOWS_GUI)
-            add_subdirectory (VisualSynan)
-            add_subdirectory (Demo)
-            add_subdirectory (Checker)
-        endif()
-    endif()
-
-    if(BUILD_WINDOWS_GUI)
-        
-        if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
-            #must be compiled 32bit, since we have only 32-bit tcl80.lib
-            add_subdirectory (RossDev)
-            
-            # obsolete mdi tabs cannot be comppiled under 64
-            add_subdirectory (Morphwizard)
-        endif()
-    endif()
-
+    add_subdirectory (windows)
 ENDIF()
 
+if(BUILD_HTTP_SERVERS)
+    add_subdirectory (www)
+endif()
+
 if (BUILD_LEMMATIZER_PYTHON)
-   add_subdirectory (lemmatizer_python) 
+   add_subdirectory (morphan/lemmatizer_python)
 endif()

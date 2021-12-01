@@ -10,13 +10,13 @@ enum EGraPairType {Date, WebAddr, Oborot, Keyb,  GermanDividedCompound, UnknownP
 
 class CFormInfo;
 
-#include "AncodePattern.h"
+#include "morph_dict/AgramtabLib/AncodePattern.h"
 
 class CHomonym : public CAncodePattern
 {
     
 public:
-	// morphology
+	// morph_dict
 	std::string	m_strLemma;
 
 	// corpus frequence information

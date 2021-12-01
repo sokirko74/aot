@@ -9,7 +9,7 @@ endmacro(declare_cmake_min_version)
 declare_cmake_min_version()
 
 set(BUILD_DICTS 1)  # build dicts by default, disable it in CMakeLists.my if you want
-set(BUILD_COM 0)    # do not build COM-objects by default
+set(BUILD_COM 0)    # do not build windows-objects by default
 set(BUILD_HTTP_SERVERS 0) # do not build http-servers by default  (you need to make libevent to build it)
 set(BUILD_WINDOWS_GUI 0) # do not build microsoft windows gui by default
 

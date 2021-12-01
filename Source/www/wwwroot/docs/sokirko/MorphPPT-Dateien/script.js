@@ -61,7 +61,7 @@ function HideMenu() { if( frames["PPTSld"] && PPTSld.document.all.item("ctxtmenu
 function IsWin( name ) { return window.name == name }
 function IsNts() { return IsWin("PPTNts") }
 function IsSldOrNts() { return( IsWin("PPTSld")||IsWin("PPTNts") ) }
-function SupportsPPTAnimation() { return( navigator.platform == "Win32" && navigator.appVersion.indexOf("Windows")>0 ) }
+function SupportsPPTAnimation() { return( navigator.platform == "Win32" && navigator.appVersion.indexOf("windows")>0 ) }
 function SupportsPPTHTML()
 {
 	var appVer=navigator.appVersion, msie=appVer.indexOf("MSIE "), ver=0

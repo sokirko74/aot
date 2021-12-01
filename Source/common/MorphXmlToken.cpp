@@ -1,5 +1,5 @@
 #include  "MorphXmlToken.h"
-#include  "util_classes.h"
+#include  "morph_dict/common/util_classes.h"
 #include <set>
 
 void	CXmlMorphAnnot::GetAsSetOfProperties(std::vector<std::string>& Result)  const

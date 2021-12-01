@@ -1,5 +1,5 @@
-#include "../common/utilit.h"
-#include "../common/bserialize.h"
+#include "morph_dict/common/utilit.h"
+#include "morph_dict/common/bserialize.h"
 
 struct CBigramInfo {
     uint32_t WordIndex;

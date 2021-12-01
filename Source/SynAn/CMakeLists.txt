@@ -1,50 +1,19 @@
-﻿project (SynAn)
+declare_cmake_min_version()
 
-add_subdirectory (synan_idl)
+add_subdirectory (ConvertTrigramBinary)
+add_subdirectory (Trigram)
+add_subdirectory (TrigramLib)
+add_subdirectory (TrigramRusCorporaXml)
+add_subdirectory (GerPostMorph)
+add_subdirectory (MAPostLib)
+add_subdirectory (TestMapost)
+add_subdirectory (SimpleGrammarLib)
+add_subdirectory (SimpleGrammarPrecompiled)
 
-list (APPEND LIB_DEPENDS 
-    SynCommonLib
-    SynanLib
-    lemmatizer_idl
-    graphan_idl
-    mapost_idl
-    synan_idl
-)
- 
-
-add_library(${PROJECT_NAME} SHARED
-COMClause.cpp
-COMClauseType.cpp
-COMClauseVariant.cpp
-COMGroup.cpp
-COMHomonym.cpp
-COMSentence.cpp
-COMSentencesCollection.cpp
-COMWord.cpp
-ComRelation.cpp
-ComRelationIterator.cpp
-StdAfx.cpp
-SynAn.cpp
-SynAn.rc
-Unit.cpp
-COMClauseType.rgs
-Clause.rgs
-ClauseVariant.rgs
-Group.rgs
-Homonym.rgs
-Relation.rgs
-RelationsIterator.rgs
-Sentence.rgs
-SentencesCollection.rgs
-SynAn.def
-Unit.rgs
-Word.rgs
-)
-
-
-target_link_libraries(${PROJECT_NAME}
-    ${LIB_DEPENDS}
-)
-
-CopyAndRegsvr(${PROJECT_NAME})
+add_subdirectory (EngSynanLib)
+add_subdirectory (GerSynanLib)
+add_subdirectory (RusSynanLib)
+add_subdirectory (SynCommonLib)
+add_subdirectory (SynanLib)
+add_subdirectory (TestSynan)
 

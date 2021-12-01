@@ -1,4 +1,4 @@
-#include "util_classes.h"
+#include "morph_dict/common/util_classes.h"
 #include "gra_descr.h"
 
 const int ODesLen    = 9;                   /* the length of unit's descriptor */
