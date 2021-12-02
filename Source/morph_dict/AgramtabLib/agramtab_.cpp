@@ -120,10 +120,10 @@ CAgramtab::CAgramtab()
 };
 
 
-
 void CAgramtab::Read(const char* FileName)
 {
-    if (FileName == NULL) return;
+    if (FileName == nullptr)
+        throw CExpc("file name is missing in gramtab");
 
     for (size_t i = 0; i < GetMaxGrmCount(); i++)
         GetLine(i) = 0;
@@ -142,78 +142,16 @@ void CAgramtab::Read(const char* FileName)
 
         CAgramtabLine* pAgramtabLine = new CAgramtabLine(LineNo);
         size_t gram_index = GramcodeToLineIndex(s.c_str());
-        // a double can  occur
+
         if (GetLine(gram_index)) {
-            delete GetLine(gram_index);
+            throw CExpc(Format("line %s in  %s contains a dublicate gramcode", FileName, s));
         }
         GetLine(gram_index) = pAgramtabLine;
-        ProcessAgramtabLine(*this, s.c_str(), gram_index);
+        if (!ProcessAgramtabLine(*this, s.c_str(), gram_index)) {
+            throw CExpc(Format("fail on line %s file %s", s.c_str(), FileName));
+        }
     }
     m_bInited = true;
-};
-
-
-bool CAgramtab::ReadAndCheck(const char* FileName)
-{
-    for (size_t i = 0; i < GetMaxGrmCount(); i++)
-        GetLine(i) = 0;
-
-
-    FILE* fp = fopen(FileName, "r");
-    if (!fp)
-    {
-        printf("cannot open gram table %s", FileName);
-        return false;
-    };
-
-
-    char buff[300];
-    size_t LineNo = 0;
-    while (fgets(buff, 300, fp))
-    {
-        LineNo++;
-        char* s = buff;
-        for (; isspace((unsigned char)*s); s++);
-        if (!*s) continue;
-        if (!strncmp(s, "//", 2)) continue;
-
-        CAgramtabLine* pAgramtabLine = new CAgramtabLine(LineNo);
-
-        char debug[200];
-        strcpy(debug, s);
-        if (GetLine(GramcodeToLineIndex(s)))
-        {
-            printf("a double found %s", debug);
-            return false;
-        };
-
-
-        GetLine(GramcodeToLineIndex(s)) = pAgramtabLine;
-        bool bResult = ProcessAgramtabLine(*this, buff, GramcodeToLineIndex(s));
-
-        if (!bResult)
-        {
-            printf("cannot process %s", debug);
-            return false;
-        };
-
-
-        for (uint16_t i = 0; i < GetMaxGrmCount(); i++)
-            if ((GetLine(i) != NULL) && (GramcodeToLineIndex(debug) != i))
-            {
-                grammems_mask_t g1 = GetLine(i)->m_Grammems;
-                grammems_mask_t g2 = GetLine(GramcodeToLineIndex(debug))->m_Grammems;
-                if ((g1 == g2) && (GetLine(i)->m_PartOfSpeech == GetLine(GramcodeToLineIndex(debug))->m_PartOfSpeech))
-                {
-                    printf("a double found %s (%s)", debug, LineIndexToGramcode(i).c_str());
-                    return false;
-                };
-            }
-
-    }
-
-    fclose(fp);
-    return true;
 };
 
 
@@ -356,19 +294,6 @@ void CAgramtab::LoadFromRegistry()
 {
     Read(::GetRegistryString(GetRegistryString()).c_str());
 };
-
-bool CAgramtab::LoadFromRegistryAndCheck()
-{
-    try
-    {
-        return ReadAndCheck(::GetRegistryString(GetRegistryString()).c_str());
-    }
-    catch (...)
-    {
-        return false;
-    };
-};
-
 
 part_of_speech_t CAgramtab::GetFirstPartOfSpeech(const part_of_speech_mask_t poses) const
 {

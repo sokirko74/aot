@@ -12,3 +12,5 @@ target_link_libraries(AgramtabLib
         morphology_common
 )
 
+add_subdirectory (tests/CheckGramTab)
+
