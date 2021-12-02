@@ -18,7 +18,6 @@ add_library(LemmatizerBaseLib
 
 target_link_libraries(LemmatizerBaseLib
         AgramtabLib
-        PCRE
         MorphWizardLib
         )
 

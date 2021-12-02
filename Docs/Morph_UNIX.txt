@@ -12,18 +12,6 @@ The Russian  lexicon is based upon Zaliznyak's Dictionary .
 The German lexicon is based upon Morphy system (http://www-psycho.uni-paderborn.de/lezius/).
 The English  lexicon is based upon Wordnet.
 
-The project uses a regular expression library "PCRE" (Perl Compatible Regular Expressions).
-We test compilation only with version 6.4. Other versions were not tested. 
-One should download this version  from the official site and install it 
-to the default place. If you do not want to install it or you do not have enough
-rights to do it, then you should  create two environment variables: 
-	1.  RML_PCRE_LIB, that  points to PCRE library directory, where
-libpcre.a and libpcrecpp.a should be located, for example:
-	export RML_PCRE_LIB=~/RML/contrib/pcre-6.4/.libs
-    2  RML_PCRE_INCLUDE, that points to PCRE include catalog, 
-where "pcrecpp.h" is located, for example
-    export RML_PCRE_INCLUDE=~/RML/contrib/pcre-6.4
-
 
 The system has been developed under Windows 2000 (MS VS 6.0), but
 has also been compiled and run under Linux(GCC).  It should work with

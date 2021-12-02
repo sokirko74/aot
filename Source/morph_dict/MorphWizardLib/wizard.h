@@ -192,6 +192,7 @@ public:
 	//  ===========   find procedures ================
 	void find_lemm_by_grammem(const std::string& pos_and_grammems, std::vector<lemma_iterator_t>& res);
 	void find_lemm(std::string lemm, bool bCheckLemmaPrefix, std::vector<lemma_iterator_t>& res);
+	void find_lemm_by_regex(std::string pattern, bool bCheckLemmaPrefix, std::vector<lemma_iterator_t>& res);
 	void find_lemm_by_user(std::string username, std::vector<lemma_iterator_t>& res);
 	void find_wordforms(std::string lemm, std::vector<lemma_iterator_t>& res);
 	void find_ancodes(const std::string& ancode, std::vector<lemma_iterator_t>& res);

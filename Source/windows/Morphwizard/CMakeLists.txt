@@ -40,7 +40,6 @@ add_executable (${PROJECT_NAME} WIN32
 
 target_link_libraries(${PROJECT_NAME}
     aot_common
-    PCRE
     MorphWizardLib
 )
 

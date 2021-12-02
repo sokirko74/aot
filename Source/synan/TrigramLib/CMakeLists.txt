@@ -14,7 +14,7 @@ add_library(TrigramLib
         stdafx.cpp
 )
 
-target_compile_definitions(PCRE PUBLIC -DUSE_TRIGRAM_LEMMATIZER)
+target_compile_definitions(TrigramLib PUBLIC -DUSE_TRIGRAM_LEMMATIZER)
 
 target_link_libraries(TrigramLib
     LemmatizerLib

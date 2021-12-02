@@ -10,7 +10,6 @@ add_library(LemmatizerLib
 target_link_libraries(LemmatizerLib
     AgramtabLib
     LemmatizerBaseLib
-    PCRE
     GraphanLib
     MorphWizardLib
 )

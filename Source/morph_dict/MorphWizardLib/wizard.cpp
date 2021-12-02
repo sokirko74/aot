@@ -3,11 +3,10 @@
 #include "morph_dict/AgramtabLib/EngGramTab.h"
 #include "morph_dict/AgramtabLib/RusGramTab.h"
 #include "morph_dict/AgramtabLib/GerGramTab.h"
-#include "morph_dict/PCRE/pcre_rml.h"
 
 #include <fstream>
 #include <sstream>
-
+#include <regex>
 //----------------------------------------------------------------------------
 const char* AnyCommonAncode = " ";
 
@@ -357,7 +356,6 @@ void MorphoWizard::StartLastSessionOfUser(std::string user_name) {
 bool MorphoWizard::load_static(MorphLanguageEnum langua) {
 	m_Language = langua;
 	if (m_pGramTab) delete m_pGramTab;
-	RmlPcreMakeTables(m_PcreCharacterTables, m_Language);
 	load_gramtab();
 	m_LanguageStr = GetStringByLanguage(langua);
 	return true;
@@ -390,8 +388,6 @@ void MorphoWizard::load_wizard(const char* path, const char* user_name, bool bCr
 	if (m_pGramTab) delete m_pGramTab;
 	if (!GetLanguageByString(lang, m_Language))
 		throw CExpc("Unknown language: " + lang);
-
-	RmlPcreMakeTables(m_PcreCharacterTables, m_Language);
 
 	load_gramtab();
 
@@ -688,7 +684,16 @@ void MorphoWizard::save_mrd() {
 };
 
 
-//----------------------------------------------------------------------------
+void MorphoWizard::find_lemm_by_regex(std::string pattern, bool bCheckLemmaPrefix, std::vector<lemma_iterator_t>& res) {
+	std::regex word_regex(pattern);
+	for (lemma_iterator_t it = m_LemmaToParadigm.begin(); it != m_LemmaToParadigm.end(); it++) {
+		if (std::regex_search(it->first, word_regex)) {
+			res.push_back(it);
+		}
+		if (!!m_pMeter) m_pMeter->AddPos();
+	}
+}
+
 void MorphoWizard::find_lemm(std::string lemm, bool bCheckLemmaPrefix, std::vector<lemma_iterator_t>& res) {
 	if (!!m_pMeter) {
 		m_pMeter->SetMaxPos(m_LemmaToParadigm.size());
@@ -697,21 +702,14 @@ void MorphoWizard::find_lemm(std::string lemm, bool bCheckLemmaPrefix, std::vect
 
 	// search a regular expression
 	if ((lemm.length() > 2) && (lemm[0] == '/') && (lemm[lemm.length() - 1] == '/')) {
-		std::string pattern = lemm.substr(1, lemm.length() - 2);
-		RML_RE re(pattern, m_PcreCharacterTables);;;
-		if (re.error() != "") {
-			ErrorMessage(re.error());
-			return;
+		try {
+			find_lemm_by_regex(lemm.substr(1, lemm.length() - 2), bCheckLemmaPrefix, res);
 		}
-
-		for (lemma_iterator_t it = m_LemmaToParadigm.begin(); it != m_LemmaToParadigm.end(); it++) {
-			if (re.PartialMatch(it->first))
-				res.push_back(it);
-
-			if (!!m_pMeter) m_pMeter->AddPos();
+		catch (std::regex_error e) {
+			ErrorMessage(e.what());
 		}
 		return;
-	}
+	}	
 
 	int pos_acc = lemm.rfind('\'');
 	if (pos_acc > 0) {
@@ -860,27 +858,24 @@ void MorphoWizard::find_wordforms(std::string wordform, std::vector<lemma_iterat
 	else
 		pattern = wordform.substr(1, wordform.length() - 2);
 
+	try {
+		std::regex word_regex(pattern);
 
-	RML_RE re(pattern, m_PcreCharacterTables);;
-	if (re.error() != "") {
-		ErrorMessage(re.error());
-		return;
-	}
-
-
-	StringVector wordforms;
-	for (lemma_iterator_t it = m_LemmaToParadigm.begin(); it != m_LemmaToParadigm.end(); it++) {
-		get_wordforms(it, wordforms);
-		for (int i = 0; i < wordforms.size(); i++) {
-			if (re.PartialMatch(wordforms[i])) {
-				res.push_back(it);
-				break;
+		StringVector wordforms;
+		for (lemma_iterator_t it = m_LemmaToParadigm.begin(); it != m_LemmaToParadigm.end(); it++) {
+			get_wordforms(it, wordforms);
+			for (int i = 0; i < wordforms.size(); i++) {
+				if (std::regex_search(wordforms[i], word_regex)) {
+					res.push_back(it);
+					break;
+				}
 			}
+			if (!!m_pMeter) m_pMeter->AddPos();
 		}
-		if (!!m_pMeter) m_pMeter->AddPos();
-
 	}
-
+	catch (std::regex_error r) {
+		ErrorMessage(r.what());
+	}
 }
 
 /*

@@ -24,7 +24,6 @@ endif()
 
 add_subdirectory (contrib/iconv_subset)
 add_subdirectory (common)
-add_subdirectory (PCRE)
 add_subdirectory (AgramtabLib)
 add_subdirectory (MorphWizardLib)
 add_subdirectory (LemmatizerBaseLib)

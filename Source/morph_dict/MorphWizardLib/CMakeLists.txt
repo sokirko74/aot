@@ -10,7 +10,6 @@ add_library(MorphWizardLib
 )
 
 target_link_libraries(MorphWizardLib
-    PCRE
     AgramtabLib
 )
 
