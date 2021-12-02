@@ -13,26 +13,6 @@
 CMorphanHolder MorphHolderRus;
 CMorphanHolder MorphHolderEng;
 
-
-#pragma warning(disable:4786)
-//----------------------------------------------------------------------------------------
-bool init_dicts()
-{
-	if (!MorphHolderRus.LoadLemmatizer(morphRussian))
-	{
-		fprintf(stderr, "cannot load Russian morph_dict\n");
-		return false;
-	}
-	if (!MorphHolderEng.LoadLemmatizer(morphEnglish))
-	{
-		fprintf(stderr, "cannot load English morph_dict\n");
-		return false;
-	}
-	return true;
-}
-
-
-
 void make_bin(std::string &r, std::string &rc, std::string &e, std::string &ec, uint32_t d[5], std::ostream &out)
 {
 	DwordVector r_id = MorphHolderRus.GetParadigmIdsByNormAndAncode(r, rc);
@@ -96,8 +76,8 @@ int main(int argc, char ** argv)
 			else
 			  out.open(argv[2]);
 
-			if (!init_dicts())
-				return 1;
+            MorphHolderRus.LoadLemmatizer(morphRussian);
+            MorphHolderEng.LoadLemmatizer(morphEnglish);
 
 			int i = 0;
 			FILE * fp = fopen(argv[1],"r");

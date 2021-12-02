@@ -58,14 +58,11 @@ int main(int argc, char ** argv)
 		return 1;
 	}
 
-	if (!morphHolderRus.LoadLemmatizer(morphRussian))
-	{
-		std::cerr << "cannot load Russian morph_dict\n";
-		return 1;
-	}
 
 	try
 	{
+        morphHolderRus.LoadLemmatizer(morphRussian);
+
 		std::vector<std::pair<uint32_t, uint32_t>> pairs;
 
 		{	// reading

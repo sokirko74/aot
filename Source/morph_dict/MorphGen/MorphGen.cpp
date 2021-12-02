@@ -35,16 +35,14 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.Parse(argc, argv);
 }
 
-int Lemmatize(MorphLanguageEnum langua, std::string word) {
+
+bool Lemmatize(MorphLanguageEnum langua, std::string word) {
     CMorphanHolder Holder;
-    if (!Holder.LoadLemmatizer(langua)) {
-        std::cerr << "Cannot load morph_dict\n";
-        return 1;
-    }
+    Holder.LoadLemmatizer(langua);
     word = convert_from_utf8(word.c_str(), Holder.m_CurrentLanguage);
     std::ofstream outp("test_word.morph", std::ios::binary);
     outp << Holder.PrintMorphInfoUtf8(word, false, false, true) << "\n";
-    return 0;
+    return false;
 }
 
 int main(int argc, const char* argv[])
@@ -154,7 +152,9 @@ int main(int argc, const char* argv[])
 	}
     if (args.Exists("test-word")) {
         SetEnvVariable("RML", args.Retrieve("output-folder"));
-        Lemmatize(wizardLangua, args.Retrieve("test-word"));
+        if (!Lemmatize(wizardLangua, args.Retrieve("test-word"))) {
+            return 1;
+        }
     }
 	std::cerr << "exit with success\n";
 	return 0;

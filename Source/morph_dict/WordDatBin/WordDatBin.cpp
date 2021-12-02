@@ -188,11 +188,8 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
-    if (!MorphHolderRus.LoadLemmatizer(args.GetLanguage())) {
-        fprintf(stderr, "cannot load morph_dict holder\n");
-        return 1;
-    }
     try {
+        MorphHolderRus.LoadLemmatizer(args.GetLanguage());
         if (loadDat(args.GetInputStream()))
             if (saveBin(args.CloseOutputStreamAndGetName()))
                 return 0;

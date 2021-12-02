@@ -249,14 +249,10 @@ void create_nest(uint32_t id, std::set<uint32_t> &id_set, AfixDerivDict &d1, Afi
 int main(int argc, char **argv)
 {
 	assert(argc == 3);
-	if (!MorphHolderRus.LoadLemmatizer(morphRussian))
-	{
-		fprintf(stderr, "cannot load Russian morph_dict\n");
-		return 1;
-	}
 
 	try
 	{
+        MorphHolderRus.LoadLemmatizer(morphRussian)
 		std::ifstream suff(argv[1]);
 		assert(suff.is_open());
 		fprintf (stderr,"Opening outfile %s\n", argv[2]);

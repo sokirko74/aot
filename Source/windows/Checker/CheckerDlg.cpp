@@ -343,8 +343,8 @@ BOOL CCheckerDlg::InitCom()
 void CCheckerDlg::ExitCom()
 {
 	piSeman = NULL;
-	m_GerSyntaxHolder.DeleteProcessors();
-	m_RusSyntaxHolder.DeleteProcessors();
+	m_GerSyntaxHolder.DeleteMorphDicts();
+	m_RusSyntaxHolder.DeleteMorphDicts();
 	CoUninitialize();
 }
 

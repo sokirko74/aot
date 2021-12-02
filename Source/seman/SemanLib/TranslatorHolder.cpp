@@ -123,8 +123,7 @@ bool CTranslatorHolder::InitAspDict() {
 bool CTranslatorHolder::Init() {
     std::vector<double> ts;
     clock_t m_TimeSpan = clock();
-    if (!m_EngHolder.LoadLemmatizer(morphEnglish))
-        return false;
+    m_EngHolder.LoadLemmatizer(morphEnglish);
     fprintf(stderr, "morphEnglish %f\n", (double) (clock() - m_TimeSpan));
     m_TimeSpan = clock();
     if (!m_RusHolder.LoadSyntax(morphRussian))

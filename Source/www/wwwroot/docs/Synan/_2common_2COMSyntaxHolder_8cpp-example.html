@@ -17,7 +17,7 @@ CCOMSyntaxHolder::CCOMSyntaxHolder()
 
 CCOMSyntaxHolder::~CCOMSyntaxHolder()
 {
-        DeleteProcessors();
+        DeleteMorphDicts();
 };
 
 
@@ -259,7 +259,7 @@ BOOL CCOMSyntaxHolder::GetSentencesFromSynAn(string str, BOOL bFile, BOOL bWrite
         <span class="keywordflow">return</span> BuildSyntax(bSaveIntermResults);
 }
 
-<span class="keywordtype">void</span> CCOMSyntaxHolder::DeleteProcessors()
+<span class="keywordtype">void</span> CCOMSyntaxHolder::DeleteMorphDicts()
 {
         m_piLemmatizer = NULL;  
         m_pGramTab = NULL;      

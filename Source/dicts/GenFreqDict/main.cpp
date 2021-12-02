@@ -33,16 +33,11 @@ typedef std::set<std::pair<uint32_t, uint32_t> > small_dict_t;
 //--------------------------------------------------------------------------------
 void init_dicts()
 {
-	if (!MorphHolderRus.LoadLemmatizer(morphRussian))
-		throw CExpc( "cannot load Russian morphologyn");
-	if (!MorphHolderEng.LoadLemmatizer(morphEnglish))
-		throw CExpc( "cannot load English morph_dict\n");
-	
+	MorphHolderRus.LoadLemmatizer(morphRussian);
+	MorphHolderEng.LoadLemmatizer(morphEnglish);
 	if (!BinaryDictionary.Load())
 		throw CExpc( "cannot load binary dictionary\n");
-
 	std::cerr << "dictionaries are loaded" << std::endl;
-
 }
 
 small_dict_t read_small_dict(const char* filename) {

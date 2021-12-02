@@ -209,7 +209,7 @@ void CVisualSynanApp::OnAppAbout()
 int CVisualSynanApp::ExitInstance() 
 {
 	CloseHandle(CWaitThread::m_hEventKill);
-	m_SyntaxHolder.DeleteProcessors();
+	m_SyntaxHolder.DeleteMorphDicts();
 	CoUninitialize();
 	return CWinApp::ExitInstance();
 }

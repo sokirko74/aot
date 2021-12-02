@@ -27,9 +27,7 @@ int main(int argc, const char **argv) {
     WorkGrammar.m_Language = args.GetLanguage();
 
     CMorphanHolder Holder;
-    if (!Holder.LoadLemmatizer(WorkGrammar.m_Language))
-        return 1;
-
+    Holder.LoadLemmatizer(WorkGrammar.m_Language);
     std::string GrammarFileName = args.Retrieve("input");
 
     char currdir[256];

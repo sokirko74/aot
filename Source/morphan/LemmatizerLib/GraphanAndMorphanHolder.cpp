@@ -68,7 +68,7 @@ CGraphanAndMorphanHolder::CGraphanAndMorphanHolder()
 
 CGraphanAndMorphanHolder::~CGraphanAndMorphanHolder()
 {
-	DeleteProcessors();
+    DeleteMorphDicts();
 };
 
 
@@ -76,20 +76,22 @@ bool CGraphanAndMorphanHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua
 {
 	try
 	{
-		DeleteProcessors();
+        DeleteMorphDicts();
 		m_Graphan.FreeDicts();
 		m_Graphan.m_Language = langua;
         if (!m_Graphan.LoadDicts())
-		{	
+		{
 			ErrorMessage("Cannot load graphan\n");
 			return false;
 		}
-        if (! LoadLemmatizer(langua) )
-            return false;
+        LoadLemmatizer(langua);
         m_PlmLines.m_pLemmatizer = m_pLemmatizer;
-
         return true;
 	}
+    catch (CExpc e) {
+        ErrorMessage(e.m_strCause);
+        return false;
+    }
 	catch(...)
 	{
 		return false;

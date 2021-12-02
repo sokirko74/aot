@@ -67,16 +67,9 @@ int main()
 		long tt;
 		std::cout << "Please wait ..." << std::endl;
 		tt = -clock();
-		if (!RussianHolder.LoadLemmatizer(morphRussian))
-		{
-			std::cerr << "Cannot load Russian morph_dict" << std::endl;
-			return 1;
-		}
-		if (!EnglishHolder.LoadLemmatizer(morphEnglish))
-		{
-			std::cerr << "Cannot load English morph_dict" << std::endl;
-			return 1;
-		}
+		RussianHolder.LoadLemmatizer(morphRussian);
+		EnglishHolder.LoadLemmatizer(morphEnglish);
+
 		tt += clock();
 		std::cout << "Loaded two lemmatizers at " << tt << " tiks" << std::endl; //"\r";
 

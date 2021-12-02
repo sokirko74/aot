@@ -15,6 +15,7 @@ class CMorphanHolder
 protected:
 	std::string GetGrammems(const char* tab_str) const;
 	bool GetParadigmCollection(std::string WordForm, std::vector<CFormInfo>& Paradigms) const;
+    void CreateMorphDicts(MorphLanguageEnum langua);
 public:
 	MorphLanguageEnum				m_CurrentLanguage;
 	CAgramtab*						m_pGramTab;
@@ -24,8 +25,8 @@ public:
 	CMorphanHolder();
 	~CMorphanHolder();
 
-    bool LoadLemmatizer(MorphLanguageEnum langua);
-	void DeleteProcessors();
+    void LoadLemmatizer(MorphLanguageEnum langua);
+	void DeleteMorphDicts();
 	DwordVector GetParadigmIdsByNormAndAncode(std::string &str, const std::string &code) const;
 	void		string_to_ids(const char *str, DwordVector &ids, bool bNorm) const;
 	std::string		id_to_string(long id) const;

@@ -1,15 +1,15 @@
 #include "JVisualSynAnParamBuilder.h"
 #include "SynanDmn.h"
 
-#include "../SynanLib/SyntaxHolder.h"
-#include "../../LemmatizerLib/MorphologyHolder.h"
+#include "synan/SynanLib/SyntaxHolder.h"
+#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
 #include "common/BigramsReader.h"
 #include "morph_dict/common/json.h"
 
 
 CSyntaxHolder RussianSyntaxHolder;
 CSyntaxHolder GermanSyntaxHolder;
-CMorphologyHolder EnglishMorphHolder;
+CMorphanHolder EnglishMorphHolder;
 
 
 std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
@@ -29,7 +29,7 @@ std::string TSynanHttpServer::ProcessBigrams(TDaemonParsedRequest &request) {
     return GetConnectedWords(wordForm, minBigramsFreq, directBigrams, sortMode, request.Langua);
 }
 
-const CMorphologyHolder *GetMorphHolder(MorphLanguageEnum l) {
+const CMorphanHolder *GetMorphHolder(MorphLanguageEnum l) {
     switch (l) {
         case morphRussian:
             return &RussianSyntaxHolder;
@@ -44,7 +44,7 @@ const CMorphologyHolder *GetMorphHolder(MorphLanguageEnum l) {
 
 std::string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
     bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
-    const CMorphologyHolder *Holder = GetMorphHolder(request.Langua);
+    const CMorphanHolder *Holder = GetMorphHolder(request.Langua);
     std::string wordForm = request.Query;
     wordForm = convert_from_utf8(wordForm.c_str(), Holder->m_CurrentLanguage);
     return Holder->LemmatizeJson(wordForm, withParadigms);
@@ -72,9 +72,7 @@ void TSynanHttpServer::LoadSynan(bool loadBigrams) {
     };
 
     TRMLHttpServer::LogMessage("Loading English Morphology\n");
-    if (!EnglishMorphHolder.LoadGraphanAndLemmatizer(morphEnglish)) {
-        throw CExpc("cannot load English Morphology\n");
-    };
+    EnglishMorphHolder.LoadLemmatizer(morphEnglish);
 
     if (loadBigrams) {
         std::string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";

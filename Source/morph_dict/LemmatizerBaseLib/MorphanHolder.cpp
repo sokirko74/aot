@@ -14,12 +14,37 @@ CMorphanHolder::CMorphanHolder()
 
 CMorphanHolder::~CMorphanHolder()
 {
-	DeleteProcessors();
+    DeleteMorphDicts();
 };
 
-void CMorphanHolder::DeleteProcessors()
+void CMorphanHolder::CreateMorphDicts(MorphLanguageEnum langua)
 {
-	if (m_pLemmatizer) 
+    if (langua == morphRussian)
+    {
+        m_pGramTab = new CRusGramTab;
+        m_pLemmatizer = new CLemmatizerRussian;
+    }
+    else
+    if (langua == morphGerman)
+    {
+        m_pGramTab = new CGerGramTab;
+        m_pLemmatizer = new CLemmatizerGerman;
+    }
+    else
+    if (langua == morphEnglish)
+    {
+        m_pGramTab = new CEngGramTab;
+        m_pLemmatizer = new CLemmatizerEnglish;
+    }
+    else
+    {
+        throw CExpc("unsupported language");
+    };
+};
+
+void CMorphanHolder::DeleteMorphDicts()
+{
+	if (m_pLemmatizer)
 	{
 		delete m_pLemmatizer;
 		m_pLemmatizer = 0;
@@ -32,52 +57,20 @@ void CMorphanHolder::DeleteProcessors()
 
 };
 
-bool CMorphanHolder::LoadLemmatizer(MorphLanguageEnum langua)
+void CMorphanHolder::LoadLemmatizer(MorphLanguageEnum langua)
 {
-    try {
-        DeleteProcessors();
-		if (langua == morphRussian)
-		{
-			m_pGramTab = new CRusGramTab;
-			m_pLemmatizer = new CLemmatizerRussian;
-		}
-		else
-			if (langua == morphGerman)
-			{
-				m_pGramTab = new CGerGramTab;
-				m_pLemmatizer = new CLemmatizerGerman;
-			}
-			else
-			if (langua == morphEnglish)
-			{
-				m_pGramTab = new CEngGramTab;
-				m_pLemmatizer = new CLemmatizerEnglish;
-			}
-			else
-			{
-				ErrorMessage ("unsupported language");
-				return false;
-			};
-		std::string strError;
-		if (!m_pLemmatizer->LoadDictionariesRegistry(strError))
-		{
-			ErrorMessage(strError);
-			return false;
-		};
-		if (!m_pGramTab->LoadFromRegistry())
-		{	
-			ErrorMessage("Cannot load gramtab\n");
-			return false;
-		};
-
-		m_CurrentLanguage = langua;
-		return true;
-	}
-	catch(...)
-	{
-		return false;
-	};
-
+    DeleteMorphDicts();
+    CreateMorphDicts(langua);
+    std::string strError;
+    if (!m_pLemmatizer->LoadDictionariesRegistry(strError))
+    {
+        throw CExpc(strError);
+    };
+    if (!m_pGramTab->LoadFromRegistry())
+    {
+        throw CExpc("Cannot load gramtab\n");
+    };
+    m_CurrentLanguage = langua;
 }
 
 
