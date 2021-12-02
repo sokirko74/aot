@@ -39,7 +39,7 @@ public:
 
 
 	void LoadFromRoss(CDictionary* piRossDict);
-	bool InitOptionsLanguageSpecific();
+	void InitOptionsLanguageSpecific();
 
 	bool IsSimilarGroup (int type) const;
 	bool IsGroupWithoutWeight(int GroupType, const char* cause) const;

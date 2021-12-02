@@ -36,12 +36,7 @@ int main(int argc, char **argv)
 	};
 	fprintf (stderr, "Loading dictionaries \n");
 	CGraphanAndMorphanHolder Holder;
-	if (!Holder.LoadGraphanAndLemmatizer(Language))
-	{
-		fprintf (stderr, "Cannot load  %s morph_dict of \n", argv[1]);
-		return 1;
-	};
-
+	Holder.LoadGraphanAndLemmatizer(Language);
 
 	
 	const char* FileName = argv[2];

@@ -79,7 +79,7 @@ static bool initCom()
 
 static void exitCom()
 {
-	Holder.DeleteMorphDicts();
+	Holder.DeleteProcessors();
 	CoUninitialize();
 }
 

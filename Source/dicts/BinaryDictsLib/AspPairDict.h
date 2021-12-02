@@ -49,7 +49,7 @@ class CAspPairDict
 
 public:
 	CAspPairDict();
-	bool Load();
+	void Load();
 	//!Get Perfective verbs by NonPerfective one. Return number of such verbs.
 	size_t nonperf2perf(uint32_t nonperf, DwordVector &res) const;
 	//!Get NonPerfective verbs by Perfective one. Return number of such verbs.

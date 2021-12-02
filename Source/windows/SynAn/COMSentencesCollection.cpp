@@ -18,10 +18,14 @@ STDMETHODIMP CCOMSentencesCollection::SetLemmatizer(IUnknown *Interf)
 STDMETHODIMP CCOMSentencesCollection::InitializeProcesser()
 {
 	if (!m_pSyntaxOptions) return E_FAIL;
-
-	if (!CSentencesCollection::InitializeProcesser())
-			return E_FAIL;		
-	return S_OK;
+	try {
+		CSentencesCollection::InitializeProcesser();
+		return S_OK;
+	}
+	catch (CExpc e)
+	{
+		return E_FAIL;
+	}
 }
 
 STDMETHODIMP CCOMSentencesCollection::ProcessData(IUnknown *piPlmLine)

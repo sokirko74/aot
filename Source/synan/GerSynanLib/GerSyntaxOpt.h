@@ -25,7 +25,7 @@ public:
 	void DestroyOptions ();
 
 
-	bool InitOptionsLanguageSpecific();
+	void InitOptionsLanguageSpecific();
 
 
 	bool IsSimilarGroup (int type) const;

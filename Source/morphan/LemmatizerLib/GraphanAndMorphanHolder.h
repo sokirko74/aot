@@ -18,7 +18,7 @@ public:
 	~CGraphanAndMorphanHolder();
 
 	bool GetMorphology(std::string str, bool bFile, int& CountOfWords);
-    bool LoadGraphanAndLemmatizer(MorphLanguageEnum langua);
+    void LoadGraphanAndLemmatizer(MorphLanguageEnum langua);
 };
 
 extern bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmatFile);

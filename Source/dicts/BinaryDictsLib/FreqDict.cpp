@@ -35,16 +35,14 @@ CFreqDict::CFreqDict()
 {
 }
 
-bool CFreqDict::Load(std::string _path)
+void CFreqDict::Load(std::string _path)
 {
 	// TODO: Add your implementation code here
 	ReadVector(_path, word_vec);
 	if (word_vec.empty())
-		return false;
+		throw CExpc(Format("cannot read freqs from %s", _path.c_str()));
 
 	std::sort(word_vec.begin(), word_vec.end());
-
-	return true;
 }
 
 

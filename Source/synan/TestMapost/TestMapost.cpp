@@ -33,38 +33,42 @@ int main(int argc, const char **argv) {
     initArgParser(argc, argv, args);
     MorphLanguageEnum  language = args.GetLanguage();
     CSyntaxHolder H;
-    if (!H.LoadSyntax(args.GetLanguage())) {
-        std::cerr << "initialization error\n";
-        return 1;
-    };
-    H.m_pPostMorph->m_bHumanFriendlyOutput = !args.Exists("print-ancodes");
-    std::vector <std::pair<std::string, std::string> > file_pairs;
+    try {
+        H.LoadSyntax(args.GetLanguage());
 
-    if (args.Exists("input-file-mask")) {
-        auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
-        for (auto filename : file_names) {
-            file_pairs.push_back({ filename, filename + ".mapost" });
-        }
-    }
-    else {
-        file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file") });
-    }
+        H.m_pPostMorph->m_bHumanFriendlyOutput = !args.Exists("print-ancodes");
+        std::vector <std::pair<std::string, std::string> > file_pairs;
 
-    for (auto& p : file_pairs) {
-        int dummy;
-        if (!H.GetMorphology(p.first, true, dummy)) {
-            return 1;
+        if (args.Exists("input-file-mask")) {
+            auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
+            for (auto filename : file_names) {
+                file_pairs.push_back({ filename, filename + ".mapost" });
+            }
         }
+        else {
+            file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file") });
+        }
+
+        for (auto& p : file_pairs) {
+            int dummy;
+            if (!H.GetMorphology(p.first, true, dummy)) {
+                return 1;
+            }
 
 #ifdef _DEBUG
-        H.m_PlmLines.SaveToFile("before.lem");
+            H.m_PlmLines.SaveToFile("before.lem");
 #endif
 
-        CPlmLineCollection MapostPlmLines;
-        if (!H.RunMapost(MapostPlmLines)) {
-            return 1;
+            CPlmLineCollection MapostPlmLines;
+            if (!H.RunMapost(MapostPlmLines)) {
+                return 1;
+            }
+            MapostPlmLines.SaveToFile(p.second);
         }
-        MapostPlmLines.SaveToFile(p.second);
+    }
+    catch (CExpc e) {
+        std::cerr << e.m_strCause << "\n";
+        return 1;
     }
     return 0;
 }

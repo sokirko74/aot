@@ -82,17 +82,14 @@ static std::string GetSyntaxFilePath()
 
 
 
-bool CGerSyntaxOpt :: InitOptionsLanguageSpecific()
+void CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 {
-	if (!m_piGramTab->LoadFromRegistry()) {
-		return false;
-	}
+	m_piGramTab->LoadFromRegistry();
 
 	//  reading adjektives
 	std::string strFileName = GetSyntaxFilePath()+"adj_prp.txt";
-	if (!ReadListFile (strFileName, m_AdjPrp))
-		return false;
-	
+	ReadListFile(strFileName, m_AdjPrp);
+
 	// reading formats
 	strFileName = GetSyntaxFilePath()+"gformats.grm";
 	m_FormatsGrammar.m_Language = morphGerman;
@@ -100,12 +97,8 @@ bool CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 	m_FormatsGrammar.m_SourceGrammarFile = strFileName;
 	if (!LoadGrammarForGLR(m_FormatsGrammar, true, false))
 	{
-		ErrorMessage(  Format("Cannot load %s\n", strFileName.c_str()));
-		return false;
+		throw  CExpc(Format("Cannot load %s\n", strFileName.c_str()));
 	};
-	
-	
-	return true;
 }
 
 

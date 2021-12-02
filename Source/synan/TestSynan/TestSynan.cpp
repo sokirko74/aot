@@ -213,23 +213,21 @@ int main(int argc, const char** argv) {
     initArgParser(argc, argv, args);
 
     CSyntaxHolder H;
-    if (!H.LoadSyntax(args.GetLanguage())) {
-        std::cerr << "initialization error\n";
-        return 1;
-    };
-    std::cerr << "ok\n";
-    std::vector <std::pair<std::string, std::string> > file_pairs;
-
-    if (args.Exists("input-file-mask")) {
-        auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
-        for (auto filename : file_names) {
-            file_pairs.push_back({filename, filename  + ".synan"});
-        }
-    }
-    else {
-        file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file")});
-    }
     try {
+        H.LoadSyntax(args.GetLanguage());
+
+        std::cerr << "ok\n";
+        std::vector <std::pair<std::string, std::string> > file_pairs;
+
+        if (args.Exists("input-file-mask")) {
+            auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
+            for (auto filename : file_names) {
+                file_pairs.push_back({filename, filename  + ".synan"});
+            }
+        }
+        else {
+            file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file")});
+        }
         for (auto& p : file_pairs) {
             std::cerr << p.first << "\n";
             CTestCaseBase base;
@@ -244,6 +242,10 @@ int main(int argc, const char** argv) {
             std::ofstream outp(p.second, std::ios::binary);
             base.write_test_cases(outp);
         }
+    }
+    catch (CExpc e) {
+        std::cerr << e.m_strCause << "\n";
+        return 1;
     }
     catch (...) {
         std::cerr << "an exception occurred!\n";

@@ -199,40 +199,36 @@ void CMorphAutomat::BuildChildrenCache()
 	
 };
 
-
-
-
-bool CMorphAutomat::Load(std::string AutomatFileName)
+void CMorphAutomat::Load(std::string AutomatFileName)
 {
 	Clear();
 	
 	FILE * fp = fopen(AutomatFileName.c_str(), "rb");
 	if (!fp)
 	{
-		ErrorMessage (Format("Cannot open %s", AutomatFileName.c_str()));
-		return false;
+		throw CExpc(Format("Cannot open %s", AutomatFileName.c_str()));
 	};
 	
 	char buffer [256];
-	if (!fgets(buffer, 256, fp)) return false;
+	if (!fgets(buffer, 256, fp)) throw CExpc("cannt read nodes count");
 	m_NodesCount = atoi(buffer);
-	if (!m_NodesCount) return false;
+	if (!m_NodesCount) throw CExpc("nodes count cannot be 0");
 
 	assert (m_pNodes == 0);
 	
 	m_pNodes  = new CMorphAutomNode[m_NodesCount];
 	assert (m_pNodes != 0);
 	if (fread(m_pNodes, sizeof(CMorphAutomNode),m_NodesCount, fp) != m_NodesCount)
-		return  false;
+		throw CExpc(Format("Cannot read m_pNodes from %s", AutomatFileName.c_str()));;
 	
 
-	if (!fgets(buffer, 256, fp)) return false;
+	if (!fgets(buffer, 256, fp)) throw CExpc("cannot read relations count");
 	m_RelationsCount = atoi(buffer);
 	assert (m_pRelations == 0);
 	m_pRelations  = new CMorphAutomRelation[m_RelationsCount];
 	assert (m_pRelations != 0);
 	if (fread(m_pRelations, sizeof(CMorphAutomRelation),m_RelationsCount, fp) != m_RelationsCount)
-		return  false;
+		throw CExpc(Format("Cannot read m_pRelations from %s", AutomatFileName.c_str()));;
 	
 
 	{
@@ -241,19 +237,11 @@ bool CMorphAutomat::Load(std::string AutomatFileName)
 		if (memcmp(Alphabet2Code,m_Alphabet2Code, 256*sizeof(int)) )
 		{
 			std::string err = Format("%s alphabet has changed; cannot load morph automat", GetStringByLanguage(m_Language).c_str());
-			ErrorMessage(err);
-			return false;
+			throw CExpc(err);
 		};
 	};
-
-
 	fclose(fp);
-
-
-	
 	BuildChildrenCache();
-
-	return true;
 };
 
 bool CMorphAutomat::Save(std::string AutomatFileName) const

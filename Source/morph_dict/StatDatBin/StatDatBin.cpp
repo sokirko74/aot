@@ -203,7 +203,7 @@ int main(int argc, const char** argv) {
 
     try {
         MorphHolder.LoadLemmatizer(args.GetLanguage());
-        //
+
         if (loadDat(args.GetInputStream())) {
             if (saveBin(args.CloseOutputStreamAndGetName()))
                 return 0;

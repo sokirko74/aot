@@ -11,15 +11,11 @@
 
 STDMETHODIMP CCOMLemmatizer::LoadDictionariesRegistry() 
 {	
-	std::string strError;
-	m_pLemmatizer->LoadDictionariesRegistry(strError);
-	if (	m_pLemmatizer->m_bLoaded )
-	{
+	try {
+		m_pLemmatizer->LoadDictionariesRegistry();
 		return S_OK;
 	}
-	else
-	{
-		//ErrorMessage ("This is a special version for Andrey Soloninkin <sol@nd.ru>, who failed to use this library on WinMe"); 
+	catch (CExpc e) {
 		return E_FAIL;
 	}
 };

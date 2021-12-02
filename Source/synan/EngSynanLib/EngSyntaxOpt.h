@@ -10,7 +10,7 @@ public:
 	void DestroyOptions ();
 
 
-	bool InitOptionsLanguageSpecific();
+	void InitOptionsLanguageSpecific();
 
 	bool IsSimilarGroup (int type) const;
 	bool IsGroupWithoutWeight(int GroupType, const char* cause) const;

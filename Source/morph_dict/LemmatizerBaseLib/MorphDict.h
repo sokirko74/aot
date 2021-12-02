@@ -82,7 +82,7 @@ public:
 	void	InitAutomat(CMorphAutomat*	pFormAutomat);
 
 	//  loading & saving
-	bool	Load(std::string GrammarFileName);
+	void	Load(std::string GrammarFileName);
 	bool	Save(std::string GrammarFileName) const;
 	
 	

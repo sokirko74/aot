@@ -2,8 +2,8 @@
 //
 
 #include "morph_dict/common/util_classes.h"
-#include "graphan/GraphanLib/GraphmatFile.h"
-#include "synan/TrigramLib/TrigramModel.h"
+#include "../../GraphanLib/GraphmatFile.h"
+#include "../../../TrigramLib/TrigramModel.h"
 #include "MergeFiles.h"
 
 #include <string>

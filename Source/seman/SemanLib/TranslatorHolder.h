@@ -89,14 +89,10 @@ public:
 	CFreqDict				m_FinFreq;
 	CFreqDict				m_AdjNounDualFreq;
 	CAspPairDict			m_AspDict;
-	bool                    m_AspDictEnabled;
 	long					m_LastUpdateTime;
 	bool					m_bSilentMode;
 	std::string					m_LastError;
 
-	
-
-	bool                    m_BinaryDictEnabled;
 	const CLemmatizer* GetRusLemmatizer () const;
 	const CLemmatizer* GetEngLemmatizer () const;
 	const CLemmatizer* GetLemmatizer (MorphLanguageEnum langua) const;
@@ -108,11 +104,7 @@ public:
 	std::string					GetThesStr (int ThesId) const ;
 	
 	void InitThesaurus(int ThesId);
-	bool Init();
-	bool InitAspDict();
-	bool InitBinaryDictionary();
-	
-	
+	void Init();
 
 	StringVector GetAspVerb (long ParadigmId, bool IsPerfective);
     StringVector GetAspVerb (std::string Verb, bool IsPerfective);

@@ -14,37 +14,12 @@ CMorphanHolder::CMorphanHolder()
 
 CMorphanHolder::~CMorphanHolder()
 {
-    DeleteMorphDicts();
+	DeleteProcessors();
 };
 
-void CMorphanHolder::CreateMorphDicts(MorphLanguageEnum langua)
+void CMorphanHolder::DeleteProcessors()
 {
-    if (langua == morphRussian)
-    {
-        m_pGramTab = new CRusGramTab;
-        m_pLemmatizer = new CLemmatizerRussian;
-    }
-    else
-    if (langua == morphGerman)
-    {
-        m_pGramTab = new CGerGramTab;
-        m_pLemmatizer = new CLemmatizerGerman;
-    }
-    else
-    if (langua == morphEnglish)
-    {
-        m_pGramTab = new CEngGramTab;
-        m_pLemmatizer = new CLemmatizerEnglish;
-    }
-    else
-    {
-        throw CExpc("unsupported language");
-    };
-};
-
-void CMorphanHolder::DeleteMorphDicts()
-{
-	if (m_pLemmatizer)
+	if (m_pLemmatizer) 
 	{
 		delete m_pLemmatizer;
 		m_pLemmatizer = 0;
@@ -57,22 +32,45 @@ void CMorphanHolder::DeleteMorphDicts()
 
 };
 
-void CMorphanHolder::LoadLemmatizer(MorphLanguageEnum langua)
+void CMorphanHolder::CreateMorphDicts(MorphLanguageEnum langua) 
 {
-    DeleteMorphDicts();
-    CreateMorphDicts(langua);
-    std::string strError;
-    if (!m_pLemmatizer->LoadDictionariesRegistry(strError))
+    if (langua == morphRussian)
     {
-        throw CExpc(strError);
-    };
-    if (!m_pGramTab->LoadFromRegistry())
-    {
-        throw CExpc("Cannot load gramtab\n");
-    };
-    m_CurrentLanguage = langua;
+        m_pGramTab = new CRusGramTab;
+        m_pLemmatizer = new CLemmatizerRussian;
+    }
+    else
+        if (langua == morphGerman)
+        {
+            m_pGramTab = new CGerGramTab;
+            m_pLemmatizer = new CLemmatizerGerman;
+        }
+        else
+            if (langua == morphEnglish)
+            {
+                m_pGramTab = new CEngGramTab;
+                m_pLemmatizer = new CLemmatizerEnglish;
+            }
+            else
+            {
+                throw CExpc("unsupported language");
+            };
 }
 
+void CMorphanHolder::LoadLemmatizer(MorphLanguageEnum langua, std::string custom_folder)
+{
+        DeleteProcessors();
+        CreateMorphDicts(langua);
+        if (custom_folder.empty()) {
+            m_pLemmatizer->LoadDictionariesRegistry();
+            m_pGramTab->LoadFromRegistry();
+        }
+        else {
+            m_pLemmatizer->LoadDictionariesFromPath(custom_folder);
+            m_pGramTab->Read(MakePath(custom_folder, m_pGramTab->GramtabFileName).c_str());
+        }
+		m_CurrentLanguage = langua;
+}
 
 DwordVector CMorphanHolder::GetParadigmIdsByNormAndAncode(std::string &str, const std::string &code) const
 {

@@ -1,5 +1,5 @@
 #include "JVisualSynAnParamBuilder.h"
-#include "synan/SynanLib/SyntaxHolder.h"
+#include "../SynanLib/SyntaxHolder.h"
 #include "morph_dict/common/json.h"
 
 struct SGroup

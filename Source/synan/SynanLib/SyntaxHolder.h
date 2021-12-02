@@ -17,7 +17,7 @@ public:
 	~CSyntaxHolder();
 
 	bool RunMapost(CPlmLineCollection& mapostPlmLines);
-	bool LoadSyntax(MorphLanguageEnum langua);
+	void LoadSyntax(MorphLanguageEnum langua);
 	bool GetSentencesFromSynAn(std::string str, bool bFile);
 	
 	std::string  GetClauseTypeDescr(const CClause& C, int ClauseTypeNo) const;

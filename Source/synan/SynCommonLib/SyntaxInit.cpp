@@ -33,16 +33,14 @@ void CSyntaxOpt::DestroyOptions() {
     m_pProfessions.reset(nullptr);
 };
 
-bool CSyntaxOpt::ReadListFile(const std::string &FileName, StringHashSet& C) {
+void CSyntaxOpt::ReadListFile(const std::string &FileName, StringHashSet& C) {
 
     std::ifstream inp(FileName.c_str());
     if (!inp.is_open() ) {
-        OutputErrorString(Format("Can't open file \'%s\'.", FileName.c_str()));
-        return false;
+        throw CExpc(Format("Can't open file \'%s\'.", FileName.c_str()));
     }
 
     std::string s;
-
     while (std::getline(inp, s)) {
         int i = s.find("//");
         if (i != std::string::npos)
@@ -52,7 +50,6 @@ bool CSyntaxOpt::ReadListFile(const std::string &FileName, StringHashSet& C) {
         if (!s.empty())
             C.insert(s);
     };
-    return true;
 };
 
 void CSyntaxOpt::OutputErrorString(std::string strMsg) const {
@@ -156,64 +153,40 @@ void CSyntaxOpt::LoadTermins(const CDictionary *piOborDic) {
 const char g_strRusRegOborDicPath[] = "Software\\Dialing\\Obor\\DictPath";
 const char g_strGerRegOborDicPath[] = "Software\\Dialing\\GerObor\\DictPath";
 
-bool CSyntaxOpt::InitializeOptions() {
+void CSyntaxOpt::InitializeOptions() {
     m_pProfessions.reset(new SDatItems(0xffff));     //NOUN
 
     if (GetLemmatizer() == nullptr) {
         auto pLem = NewLemmatizer();
-        std::string strError;
-        if (!pLem->LoadDictionariesRegistry(strError)) return false;
+        pLem->LoadDictionariesRegistry();
         m_piLemmatizer.reset(pLem);
         SetLemmatizerWeak(pLem);
     };
 
 
     //loading obor.dic
-    try {
-        m_pOborDic.reset(NewOborDic(this));
+    m_pOborDic.reset(NewOborDic(this));
 
-        if (GetOborDictionary() == nullptr) {
-            std::string strPath;
-            auto pOborDictionary = new CDictionary;
-            if (m_Language == morphRussian)
-                strPath = GetRegistryString(g_strRusRegOborDicPath);
-            else
-                strPath = GetRegistryString(g_strGerRegOborDicPath);
+    if (GetOborDictionary() == nullptr) {
+        std::string strPath;
+        auto pOborDictionary = new CDictionary;
+        if (m_Language == morphRussian)
+            strPath = GetRegistryString(g_strRusRegOborDicPath);
+        else
+            strPath = GetRegistryString(g_strGerRegOborDicPath);
 
-            pOborDictionary->Load(strPath.c_str());
+        pOborDictionary->Load(strPath.c_str());
 
-            m_piOborDictionary.reset(pOborDictionary);
-            m_piOborDictionaryWeak = pOborDictionary;
-        }
-
-        if (!m_pOborDic->ReadOborots(m_piOborDictionaryWeak)) {
-            OutputErrorString("Failed to load \"StructDict.dll\"");
-            return false;
-        }
-
-    }
-    catch (CExpc&) {
-        OutputErrorString("Failed to find registry entry for oborot dictionary");
-        return false;
-    }
-    catch (...) {
-        OutputErrorString("Failed to load \"StructDict.dll\" (Obor.dic)");
-        return false;
+        m_piOborDictionary.reset(pOborDictionary);
+        m_piOborDictionaryWeak = pOborDictionary;
     }
 
+    if (!m_pOborDic->ReadOborots(m_piOborDictionaryWeak)) {
+        throw CExpc("Failed read oborots");
+    }
     m_pThesaurus.reset(NewThesaurus(this));
-    try {
-        LoadTermins(GetOborDictionary());
-    }
-    catch (CExpc c) {
-        OutputErrorString(c.m_strCause.c_str());
-    }
-
-
-    if (!InitOptionsLanguageSpecific())
-        return false;
-
-    return true;
+    LoadTermins(GetOborDictionary());
+    InitOptionsLanguageSpecific();
 };
 
 const char *CSyntaxOpt::GetGroupNameByIndex(long lType) const {

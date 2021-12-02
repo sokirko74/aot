@@ -18,47 +18,34 @@ CSyntaxHolder::~CSyntaxHolder()
 };
 
 
-bool CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
+void CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 {
-	try{
-		LoadGraphanAndLemmatizer(langua);
+	LoadGraphanAndLemmatizer(langua);
 
-        assert (!m_pPostMorph);
+    assert (!m_pPostMorph);
 
-		if (langua == morphRussian)
-			m_pPostMorph = NewRussianPostMorph(m_pLemmatizer, m_pGramTab);
-		else
-			m_pPostMorph = NewGermanPostMorph(m_pLemmatizer, m_pGramTab);
+	if (langua == morphRussian)
+		m_pPostMorph = NewRussianPostMorph(m_pLemmatizer, m_pGramTab);
+	else
+		m_pPostMorph = NewGermanPostMorph(m_pLemmatizer, m_pGramTab);
 		
-		if (!m_pPostMorph)
-		{
-			ErrorMessage ("Cannot load postmorphology\n");				
-			return false;
-		}
-
-		m_Synan.CreateOptions(langua);
-
-		if (langua == morphGerman)
-		{
-				m_Synan.SetEnableAllThesauri(false);
-		}
-
-		m_Synan.SetOborDic(m_Graphan.GetOborDic());
-		m_Synan.SetLemmatizer(m_pLemmatizer);
-		if (!m_Synan.InitializeProcesser())
-		{
-			fprintf (stderr, "Cannot load synan\n");				
-			return false;
-		};
-
-		m_CurrentLanguage = langua;
-		return true;
-
-	}
-	catch(...)
+	if (!m_pPostMorph)
 	{
-		return false;
-	};
+		throw CExpc("Cannot load postmorphology\n");				
+	}
+
+	m_Synan.CreateOptions(langua);
+
+	if (langua == morphGerman)
+	{
+			m_Synan.SetEnableAllThesauri(false);
+	}
+
+	m_Synan.SetOborDic(m_Graphan.GetOborDic());
+	m_Synan.SetLemmatizer(m_pLemmatizer);
+	m_Synan.InitializeProcesser();
+
+	m_CurrentLanguage = langua;
 };
 
 

@@ -68,8 +68,14 @@ STDMETHODIMP CComGramTab::GetPartOfSpeechStr(BYTE PartOfSpeech, BSTR *result)
 
 STDMETHODIMP CComGramTab::Load()
 {
-	if (!m_pAgramtab->LoadFromRegistry()) return E_FAIL;
-	return S_OK;
+	try {
+		m_pAgramtab->LoadFromRegistry();
+		return S_OK;
+	}
+	catch (CExpc e) {
+		return E_FAIL;
+	}
+	
 }
 
 STDMETHODIMP CComGramTab::HaveEqualPartOfSpeech(BSTR gram_code1, BSTR gram_code2, BOOL* result)

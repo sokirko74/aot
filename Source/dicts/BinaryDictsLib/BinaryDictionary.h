@@ -43,6 +43,6 @@ public:
 	bool HavePair (long id1, long id2) const;
 	CSetOfWordPairs TranslateIndirect(long id) const;
 	CSetOfWordPairs TranslateDirect(long id) const;
-	bool Load();
+	void Load();
 	long GetFlagCount() const;
 };

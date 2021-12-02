@@ -94,7 +94,7 @@ public:
 
     bool IsValid() const;
 
-    bool ReadListFile(const std::string& FileName, StringHashSet& C);
+    void ReadListFile(const std::string& FileName, StringHashSet& C);
 
     const CThesaurus *GetThesByThesId(uint32_t ThesId) const;
 
@@ -119,9 +119,9 @@ public:
     const COborDic *GetOborDic() const { return m_pOborDic.get();};
     virtual COborDic * NewOborDic(const CSyntaxOpt* opt) = 0;
 
-    bool InitializeOptions();
+    void InitializeOptions();
 
-    virtual bool InitOptionsLanguageSpecific() = 0;
+    virtual void InitOptionsLanguageSpecific() = 0;
 
     const char *GetGroupNameByIndex(long lType) const;
 

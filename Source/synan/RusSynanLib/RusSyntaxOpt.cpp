@@ -187,92 +187,47 @@ static std::string GetSyntaxFilePath()
 };
 
 
-bool CRusSyntaxOpt :: InitOptionsLanguageSpecific()
+void CRusSyntaxOpt :: InitOptionsLanguageSpecific()
 {
-	if (!m_piGramTab->LoadFromRegistry()) {
-		return false;
-	}
-
+	m_piGramTab->LoadFromRegistry();
 	
 	//loading ross
-	try
-	{			
-		CDictionary piRossDict;	
-		std::string strPath = GetRegistryString( g_strRegRossDicPath );
-		if (!piRossDict.Load(strPath.c_str())) return false;
-		LoadFromRoss(&piRossDict);
-	
-	}
-	catch(CExpc& )
-	{
-		char strMsg[400];
-		sprintf(strMsg, "Failed to find registry entry %s", g_strRegRossDicPath);
-		OutputErrorString("Clause Builder");
-		return false;			
-	}
-	catch(...)
-	{			
-		OutputErrorString("Failed to load Ross");	
-		return false;
-	}
-
-	
-
-	
+	CDictionary piRossDict;	
+	std::string strPath = GetRegistryString( g_strRegRossDicPath );
+	if (!piRossDict.Load(strPath.c_str())) 
+		throw CExpc(Format("cannot load Ross %s", strPath.c_str()));
+	LoadFromRoss(&piRossDict);
 	std::string Path = GetSyntaxFilePath();
-  	if (!ReadListFile (Path+"comp_adv.dat", m_CompAdvList))
-		return false;
-	
-	if (!ReadListFile (Path+"noun_num.dat", m_NounNumList))
-		return false;
-
-	if (!ReadListFile (Path+"num_pr.dat", m_NumberAdverbsList))
-		return false;
-
+	ReadListFile(Path + "comp_adv.dat", m_CompAdvList);
+	ReadListFile (Path+"noun_num.dat", m_NounNumList);
+	ReadListFile(Path + "num_pr.dat", m_NumberAdverbsList);
 	
 	VerbsThatCanSubdueInfinitive = new SDatItems(_QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));	
-	if (!ReadListFile (Path+"verbs_with_inf.txt", VerbsThatCanSubdueInfinitive->m_vectorDatItems))
-		return false;
+	ReadListFile(Path + "verbs_with_inf.txt", VerbsThatCanSubdueInfinitive->m_vectorDatItems);
 
 	m_pVerbsWithInstrObj = new SDatItems(_QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));	
-	if (!ReadListFile (Path+"verbs_with_inf.txt", m_pVerbsWithInstrObj->m_vectorDatItems))
-		return false;
-	
+	ReadListFile(Path + "verbs_with_inf.txt", m_pVerbsWithInstrObj->m_vectorDatItems);
     if (m_pProfessions->m_vectorDatItems.empty())
     {
         // read it from file if thesaurus is disabled
-	    if (!ReadListFile (Path+"profes.txt", m_pProfessions->m_vectorDatItems))
-		    return false;
+		ReadListFile(Path + "profes.txt", m_pProfessions->m_vectorDatItems);
     }
 
+	std::vector<CFormInfo> Paradigms;
+	std::string h = _R("нечего");
+	GetLemmatizer()->CreateParadigmCollection(true, h, false, false, Paradigms);
 
-	try
+	for (long k=0; k < Paradigms.size(); k++)
 	{
-		std::vector<CFormInfo> Paradigms;
-		std::string h = _R("нечего");
-		GetLemmatizer()->CreateParadigmCollection(true, h, false, false, Paradigms);
-
-		for (long k=0; k < Paradigms.size(); k++)
+		std::string AnCode = Paradigms[k].GetAncode(0);
+		BYTE POS = GetGramTab()->GetPartOfSpeech(AnCode.c_str() );
+		if  (POS == PRONOUN_PREDK)
 		{
-		  std::string AnCode = Paradigms[k].GetAncode(0);
-		  BYTE POS = GetGramTab()->GetPartOfSpeech(AnCode.c_str() );
-		  if  (POS == PRONOUN_PREDK)
-		  {
-			m_lPradigmID_NECHEGO = Paradigms[k].GetParadigmId();
-			m_Gramcode_NECHEGO = Paradigms[k].GetAncode(0);
-			break;
-		  };
+		m_lPradigmID_NECHEGO = Paradigms[k].GetParadigmId();
+		m_Gramcode_NECHEGO = Paradigms[k].GetAncode(0);
+		break;
 		};
-
-
-	}
-	catch (...)
-	{
-
-	}
-
-
-	return true;
+	};
 }
 
 

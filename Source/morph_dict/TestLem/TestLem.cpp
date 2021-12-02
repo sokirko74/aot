@@ -87,8 +87,8 @@ int main(int argc, const char **argv) {
     if (args.Exists("RML")) {
         SetEnvVariable("RML", args.Retrieve("RML"));
     }
+    
 
-    std::string s;
     try {
         Holder.LoadLemmatizer(language);
 
@@ -96,27 +96,28 @@ int main(int argc, const char **argv) {
             CheckSpeed(args.GetInputStream(), args.GetOutputStream());
             return 0;
         };
-        std::cerr << "Input a word..\n";
 
+        std::cerr << "Input a word..\n";
+        std::string s;
         while (getline(args.GetInputStream(), s)) {
             Trim(s);
             if (s.empty()) break;
-            if (bEchoInput) {
-                args.GetOutputStream() << s << "\t";
-            }
-            s = convert_from_utf8(s.c_str(), language);
-            std::string result;
+		    if (bEchoInput) {
+			    args.GetOutputStream() << s << "\t";
+		    }
+		    s = convert_from_utf8(s.c_str(), language);
+		    std::string result;
 
                 if (args.Exists("morphan")) {
                     result = Holder.LemmatizeJson(s.c_str(), printForms, true, true);
                 }
                 else {
                     result = Holder.PrintMorphInfoUtf8(s, printIds, printForms, sortParadigms);
-
+                
                 }
                 args.GetOutputStream() << result << "\n";
-        }
-	};
+    	};
+    }
     catch (CExpc c) {
         std::cerr << c.m_strCause << "\n";
         exit(1);

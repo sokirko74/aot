@@ -252,7 +252,8 @@ int main(int argc, char **argv)
 
 	try
 	{
-        MorphHolderRus.LoadLemmatizer(morphRussian)
+		MorphHolderRus.LoadLemmatizer(morphRussian);
+
 		std::ifstream suff(argv[1]);
 		assert(suff.is_open());
 		fprintf (stderr,"Opening outfile %s\n", argv[2]);

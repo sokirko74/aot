@@ -340,19 +340,18 @@ std::string CBinaryDictionary::get_dict_path() const
 }
 
 
-bool CBinaryDictionary::Load()
+void CBinaryDictionary::Load()
 {
 	fprintf (stderr, "Reading binary dict from %s\n", get_dict_path().c_str());
 	ReadVector(get_dict_path(),eng_vec);
 	if (eng_vec.empty())
-		return false;
+		throw CExpc(Format("binary dict %s is empty", get_dict_path().c_str()));
 
 	std::sort(eng_vec.begin(), eng_vec.end(), LessEng1);
 
 
 	rus_vec = eng_vec;;
 	std::sort(rus_vec.begin(), rus_vec.end(), LessRus1);
-	return true;
 }
 
 

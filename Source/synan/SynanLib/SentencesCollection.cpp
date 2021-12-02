@@ -59,14 +59,8 @@ bool CSentencesCollection::CreateOptions(MorphLanguageEnum langua) {
     return true;
 }
 
-bool CSentencesCollection::InitializeProcesser() {
-    try {
-        if (!m_pSyntaxOptions->InitializeOptions()) return false;
-    }
-    catch (...) {
-        return false;
-    }
-    return true;
+void CSentencesCollection::InitializeProcesser() {
+    m_pSyntaxOptions->InitializeOptions();
 }
 
 

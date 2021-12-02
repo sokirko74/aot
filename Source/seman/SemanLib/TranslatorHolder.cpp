@@ -25,7 +25,6 @@ std::string CTranslatorHolder::GetThesPath(int ThesId) const {
 
 CTranslatorHolder::CTranslatorHolder() {
 
-    m_BinaryDictEnabled = true;
     m_LastUpdateTime = 0;
     m_bSilentMode = false;
 }
@@ -96,93 +95,21 @@ std::string CTranslatorHolder::GetThesStr(int ThesId) const {
     };
 };
 
-
-bool CTranslatorHolder::InitBinaryDictionary() {
-    try {
-        m_BinaryDictEnabled = m_BinaryDict.Load();
-    }
-    catch (...) {
-        m_BinaryDictEnabled = false;
-        ErrorMessage("Cannot load binary dictionary");
-    };
-    return m_BinaryDictEnabled;
-};
-
-bool CTranslatorHolder::InitAspDict() {
-    try {
-        m_AspDictEnabled = m_AspDict.Load();
-    }
-    catch (...) {
-        m_AspDictEnabled = false;
-        ErrorMessage(_R("Cannot load словарь видовых  пар"));
-    };
-    return m_AspDictEnabled;
-
-};
-
-bool CTranslatorHolder::Init() {
-    std::vector<double> ts;
-    clock_t m_TimeSpan = clock();
+void CTranslatorHolder::Init() {
     m_EngHolder.LoadLemmatizer(morphEnglish);
-    fprintf(stderr, "morphEnglish %f\n", (double) (clock() - m_TimeSpan));
-    m_TimeSpan = clock();
-    if (!m_RusHolder.LoadSyntax(morphRussian))
-        return false;
-    fprintf(stderr, "morphRussian %f\n", (double) (clock() - m_TimeSpan));
-    m_TimeSpan = clock();
-    if (!InitAspDict()) {
-        ErrorMessage("Cannot load asp dict");
-        return false;
-    }
-
-    try {
-
-
-        if (!m_CompFreq.Load(GetRegistryString(g_strFreqCompPath))) {
-            ErrorMessage("Cannot load CompFreq");
-            return false;
-        };
-
-
-        if (!m_FinFreq.Load(GetRegistryString(g_strFreqFinPath))) {
-            ErrorMessage("Cannot load FinFreq");
-            return false;
-        };
-
-
-        if (!m_HudFreq.Load(GetRegistryString(g_strFreqHudPath))) {
-            ErrorMessage("Cannot load HudFreq");
-            return false;;
-        };
-
-
-    }
-    catch (...) {
-        ErrorMessage("Cannot load some freq-dicts");
-        return false;;
-    };
-
-
-    if (!InitBinaryDictionary()) {
-        return false;
-    };
-
-
-    try {
-        m_AdjNounDualFreq.Load(GetRegistryString(g_strAdjNounDualFreqPath));
-    }
-    catch (...) {
-        ErrorMessage("Cannot load English ADJ-NOUN dict");
-        return false;;
-    };
-
-    return true;
+    m_RusHolder.LoadSyntax(morphRussian);
+    m_AspDict.Load();
+    m_CompFreq.Load(GetRegistryString(g_strFreqCompPath));
+    m_FinFreq.Load(GetRegistryString(g_strFreqFinPath));
+    m_HudFreq.Load(GetRegistryString(g_strFreqHudPath));
+    m_BinaryDict.Load();
+    // data is lost (probably I can find it on some old CDs
+    // m_AdjNounDualFreq.Load(GetRegistryString(g_strAdjNounDualFreqPath));
 }
 
 
 StringVector CTranslatorHolder::GetAspVerb(long ParadigmId, bool IsPerfective) {
     StringVector Res;
-    if (!m_AspDictEnabled) return Res;
 
 
     std::vector<uint32_t> ResVector;

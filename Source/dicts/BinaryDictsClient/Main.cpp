@@ -75,32 +75,22 @@ int main()
 
 		//!!! Создаем и загружаем словарь
 		tt = -clock();
-		if (!Dict.Load())
-		{
-			std::cerr << "Cannot create dictionary" << std::endl;
-			return 1;
-		}
+		Dict.Load();
+
 		std::cerr << "Number of pairs in the dictionary: " << Dict.eng_vec.size() << std::endl;
 		
 
-		if (!CompFreq.Load(GetRegistryString(g_strFreqCompPath).c_str()))
-		{
-			std::cerr << "Cannot load CompFreq" << std::endl;
-			return 1;
-		}
-		if (!FinFreq.Load(GetRegistryString(g_strFreqFinPath).c_str() ))
-		{
-			std::cerr << "Cannot load FinFreq" << std::endl;
-			return 1;
-		}
-		if (!HudFreq.Load(GetRegistryString(g_strFreqHudPath).c_str()))
-		{
-			std::cerr << "Cannot load HudFreq" << std::endl;
-			return 1;
-		}
+		CompFreq.Load(GetRegistryString(g_strFreqCompPath));
+		FinFreq.Load(GetRegistryString(g_strFreqFinPath));
+		HudFreq.Load(GetRegistryString(g_strFreqHudPath));
 		tt += clock();
 		std::cout << "Loaded Dictionary at " << tt << " ticks" << std::endl;
-	}catch(...){
+	}
+	catch (CExpc e) {
+		std::cerr << "An error occured" << e.m_strCause << std::endl;
+		return 1;
+	}
+	catch(...){
 		std::cerr << "An error occured" << std::endl;
 		return 1;
 	}

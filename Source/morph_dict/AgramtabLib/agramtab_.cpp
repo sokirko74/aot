@@ -121,20 +121,16 @@ CAgramtab::CAgramtab()
 
 
 
-bool CAgramtab::Read(const char* FileName)
+void CAgramtab::Read(const char* FileName)
 {
-    if (FileName == NULL) return true;
+    if (FileName == NULL) return;
 
     for (size_t i = 0; i < GetMaxGrmCount(); i++)
         GetLine(i) = 0;
 
     std::ifstream inp(FileName);
-    assert(inp.is_open());
-
     if (!inp.is_open())
-        return false;
-
-
+        throw CExpc(Format("cannot open %s", FileName));
     size_t LineNo = 0;;
     std::string line;
     while (std::getline(inp, line))
@@ -153,9 +149,7 @@ bool CAgramtab::Read(const char* FileName)
         GetLine(gram_index) = pAgramtabLine;
         ProcessAgramtabLine(*this, s.c_str(), gram_index);
     }
-
     m_bInited = true;
-    return true;
 };
 
 
@@ -358,17 +352,9 @@ grammems_mask_t CAgramtab::GetAllGrammems(const char* gram_code) const
     return grammems;
 }
 
-bool CAgramtab::LoadFromRegistry()
+void CAgramtab::LoadFromRegistry()
 {
-    try
-    {
-        Read(::GetRegistryString(GetRegistryString()).c_str());
-        return true;
-    }
-    catch (...)
-    {
-        return false;
-    };
+    Read(::GetRegistryString(GetRegistryString()).c_str());
 };
 
 bool CAgramtab::LoadFromRegistryAndCheck()

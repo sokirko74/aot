@@ -22,7 +22,7 @@ public:
 	bool									m_bLogProcessedSentence;
 
 	bool CreateOptions(MorphLanguageEnum langua);
-	bool InitializeProcesser();
+	void InitializeProcesser();
 	bool ProcessData(const CPlmLineCollection* piPlmLine);
 	void ClearSentences();
 	void ClearOptions();

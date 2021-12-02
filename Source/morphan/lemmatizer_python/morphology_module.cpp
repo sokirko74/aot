@@ -12,15 +12,12 @@ CMorphologyHolder Holder;
 
 
 bool load_morphology(int language, bool use_prediction) {
-    try {
-        Holder.LoadLemmatizer((MorphLanguageEnum) language);
-        Holder.m_pGramTab->m_bUseNationalConstants = false;
-        Holder.m_bUsePrediction = use_prediction;
-    }
-    catch (CExpc e) {
-        std::cerr << "Cannot load morphology\n";
+    if (!Holder.LoadLemmatizer((MorphLanguageEnum)language)) {
+        std::cerr << "Cannot load morph_dict\n";
         return false;
     }
+    Holder.m_pGramTab->m_bUseNationalConstants = false;
+    Holder.m_bUsePrediction = use_prediction;
     return true;
 }
 

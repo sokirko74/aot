@@ -19,10 +19,10 @@ struct CAgramtabLine
 typedef bool(*GrammemCompare)(const CAgramtabLine* l1, const CAgramtabLine* l2);
 
 class CAgramtab {
-	bool Read (const char *FileName);
 	bool ReadAndCheck (const char * FileName);
 
    public :
+	   const std::string GramtabFileName = "gramtab.tab";
 	bool	m_bInited;
 	MorphLanguageEnum  m_Language;
 	bool m_bUseNationalConstants;
@@ -80,7 +80,8 @@ class CAgramtab {
 	virtual bool GleicheCaseNumber(const char* gram_code1, const char* gram_code2) const  = 0;
 	virtual grammems_mask_t GleicheGenderNumberCase(const char* common_gram_code_noun, const char* gram_code_noun, const char* gram_code_adj) const  = 0;
 	
-	bool	LoadFromRegistry ();
+	void	Read(const char* FileName);
+	void	LoadFromRegistry ();
 	bool	LoadFromRegistryAndCheck ();
 	int		AreEqualPartOfSpeech (const char *grm1, const char* grm2) ;
 	bool	ProcessPOSAndGrammemsIfCan (const char* tab_str, part_of_speech_t* PartOfSpeech,  grammems_mask_t* grammems) const;

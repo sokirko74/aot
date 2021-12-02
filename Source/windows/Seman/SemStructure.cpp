@@ -18,9 +18,13 @@ CSemStructure::~CSemStructure()
 
 STDMETHODIMP CSemStructure::InitPresemanDicts()
 {
-	if (!m_RusStr.m_pData->Init()) 
-		return E_FAIL; 
-	return S_OK;
+	try {
+		m_RusStr.m_pData->Init();
+		return S_OK;
+	}
+	catch (CExpc e) {
+		return E_FAIL;
+	}
 }
 
 STDMETHODIMP CSemStructure::InitSemanDicts()	

@@ -20,28 +20,13 @@ std::string GetGramInfo(const CRusSemStructure& semStr, part_of_speech_mask_t Po
     return Result;
 }
 
-
-int InitDicts(CSemStructureBuilder& SemBuilder)
+void InitDicts(CSemStructureBuilder& SemBuilder)
 {
-    try {
-        std::cerr << "initialize presemantic dictionaries...\n";
-        if (!SemBuilder.m_RusStr.m_pData->Init()) {
-            std::cerr << "cannot initialize presemantic dictionaries.\n";
-            return 1;
-        }
-        SemBuilder.m_RusStr.m_pData->Initialize();
-        SemBuilder.m_RusStr.m_pData->InitializeIndices();
-        SemBuilder.m_bShouldBuildTclGraph = false;
-    }
-    catch (CExpc c) {
-        std::cerr << c.m_strCause << "\n";
-        return 1;
-    }
-    catch (...) {
-        std::cerr << "general initialize exception";
-        return 1;
-    }
-    return 0;
+    std::cerr << "initialize presemantic dictionaries...\n";
+    SemBuilder.m_RusStr.m_pData->Init();
+    SemBuilder.m_RusStr.m_pData->Initialize();
+    SemBuilder.m_RusStr.m_pData->InitializeIndices();
+    SemBuilder.m_bShouldBuildTclGraph = false;
 }
 
 
@@ -203,33 +188,41 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
 }
 
 
-int main(int argc, const char *argv[]) {
+int main(int argc, const char* argv[]) {
     static CSemStructureBuilder SemBuilder;
     ArgumentParser args;
     initArgParser(argc, argv, args);
+    try {
+        GlobalErrorMessage = MyGlobalErrorMessage;
+        std::cerr << "init dicts ... (wait one minute)\n";
+        InitDicts(SemBuilder);
+        SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
 
-    GlobalErrorMessage = MyGlobalErrorMessage;
-    std::cerr << "init dicts ... (wait one minute)\n";
-    if (InitDicts(SemBuilder) != 0) {
+        std::vector <std::pair<std::string, std::string> > file_pairs;
+        if (args.Exists("input-file-mask")) {
+            auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
+            for (auto filename : file_names) {
+                file_pairs.push_back({ filename, filename + ".seman" });
+            }
+        }
+        else {
+            file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file") });
+        }
+
+        for (auto& p : file_pairs) {
+            processOneFile(SemBuilder, args.Exists("visual"), args.Exists("translate"), p.first, p.second);
+        }
+        std::cerr << "normal exit\n";
+    }
+    catch (CExpc e) {
+        std::cerr << e.m_strCause << "\n";
         return 1;
     }
-    SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
+    catch (...) {
+        std::cerr << "general exception\n";
+        return 1;
+    };
 
-    std::vector <std::pair<std::string, std::string> > file_pairs;
-    if (args.Exists("input-file-mask")) {
-        auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
-        for (auto filename : file_names) {
-            file_pairs.push_back({ filename, filename + ".seman" });
-        }
-    }
-    else {
-        file_pairs.push_back({ args.Retrieve("input-file"), args.Retrieve("output-file") });
-    }
-
-    for (auto& p : file_pairs) {
-        processOneFile(SemBuilder, args.Exists("visual"), args.Exists("translate"), p.first, p.second);
-    }
-    std::cerr << "normal exit\n";
     return 0;
 }
 

@@ -287,9 +287,7 @@ void MorphoWizard::load_gramtab() {
 	};
 
 
-	if (!pGramTab->LoadFromRegistry()) {
-		throw CExpc("Cannot load gramtab");
-	};
+	pGramTab->LoadFromRegistry();
 
 	m_pGramTab = pGramTab;
 

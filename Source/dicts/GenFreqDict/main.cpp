@@ -35,8 +35,7 @@ void init_dicts()
 {
 	MorphHolderRus.LoadLemmatizer(morphRussian);
 	MorphHolderEng.LoadLemmatizer(morphEnglish);
-	if (!BinaryDictionary.Load())
-		throw CExpc( "cannot load binary dictionary\n");
+	BinaryDictionary.Load();
 	std::cerr << "dictionaries are loaded" << std::endl;
 }
 

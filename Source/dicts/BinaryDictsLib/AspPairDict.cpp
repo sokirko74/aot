@@ -52,25 +52,14 @@ CAspPairDict::CAspPairDict()
 }
 
 
-bool CAspPairDict::Load()
+void CAspPairDict::Load()
 {
-	
-	try {
-		std::string Path = GetRegistryString("Software\\Dialing\\RUSSIAN_ASPECT_DICT\\DictPath");
-
-		ReadVector(Path, pair_vec1);
-		if (pair_vec1.size() == 0) return false;
-		pair_vec2 = pair_vec1;
-		std::sort(pair_vec1.begin(), pair_vec1.end(), asp_pair::Less1());
-		std::sort(pair_vec2.begin(), pair_vec2.end(), asp_pair::Less2());
-
-		return true;
-	}
-	catch (...)
-	{
-		return false;	
-	};
-	
+	std::string Path = GetRegistryString("Software\\Dialing\\RUSSIAN_ASPECT_DICT\\DictPath");
+	ReadVector(Path, pair_vec1);
+	if (pair_vec1.size() == 0) throw CExpc(Format("cannot read %s", Path.c_str()));
+	pair_vec2 = pair_vec1;
+	std::sort(pair_vec1.begin(), pair_vec1.end(), asp_pair::Less1());
+	std::sort(pair_vec2.begin(), pair_vec2.end(), asp_pair::Less2());
 }
 
 

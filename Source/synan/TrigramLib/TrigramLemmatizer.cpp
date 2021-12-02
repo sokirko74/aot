@@ -13,20 +13,11 @@ bool InitMorphologySystem(CTrigramModel& M)
 	std::string langua_str = GetStringByLanguage(M.m_Language);
 	M.m_pLemmatizerPrivate = new T;
     
-	std::string strError;
-	if (!M.m_pLemmatizerPrivate->LoadDictionariesRegistry(strError))
-	{
-   		fprintf (stderr, "Cannot load %s  morphological dictionary\n", langua_str.c_str());
-		return false;
-	};
+	M.m_pLemmatizerPrivate->LoadDictionariesRegistry();
     M.m_pLemmatizer = M.m_pLemmatizerPrivate;
 
 	M.m_pAgramtabPrivate = new Y;
-	if (!M.m_pAgramtabPrivate->LoadFromRegistry())
-	{
-   		fprintf (stderr, "Cannot load %s  gramtab\n", langua_str.c_str() );
-		return false;
-	};
+	M.m_pAgramtabPrivate->LoadFromRegistry();
     M.m_pAgramtab = M.m_pAgramtabPrivate;
 	return true;
 };

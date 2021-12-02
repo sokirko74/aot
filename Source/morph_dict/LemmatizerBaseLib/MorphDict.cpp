@@ -150,18 +150,14 @@ static size_t getCount(std::ifstream& mrdFile, const char* sectionName) {
 	return atoi(line.c_str());
 }
 
-bool CMorphDict::Load(std::string GrammarFileName)
+void CMorphDict::Load(std::string GrammarFileName)
 {
-	//fprintf (stderr," open %s\n", GrammarFileName.c_str());
-	if (!m_pFormAutomat->Load(MakeFName(GrammarFileName, "forms_autom")))
-		return false;
-
+	m_pFormAutomat->Load(MakeFName(GrammarFileName, "forms_autom"));
 	std::string PrecompiledFile = MakeFName(GrammarFileName, "annot");
 	std::ifstream annotFile(PrecompiledFile, std::ios::binary);
 	if (!annotFile.is_open())
 	{
-		ErrorMessage(Format("Cannot open %s", PrecompiledFile.c_str()));
-		return false;
+		throw CExpc(Format("Cannot open %s", PrecompiledFile.c_str()));
 	};
 	ReadFlexiaModels(annotFile);
 	ReadAccentModels(annotFile);
@@ -172,7 +168,7 @@ bool CMorphDict::Load(std::string GrammarFileName)
 		for (size_t num = 0; num < count; num++)
 		{
 			std::string q;
-			if (!getline(annotFile, q)) return false;
+			if (!getline(annotFile, q)) throw CExpc("cannot read annots");
 			Trim(q);
 			assert(!q.empty());
 			m_Prefixes.push_back(q);
@@ -193,10 +189,7 @@ bool CMorphDict::Load(std::string GrammarFileName)
 	}
 
 	m_Bases.ReadShortStringHolder(MakeFName(GrammarFileName, "bases"));
-
 	CreateModelsIndex();
-
-	return true;
 };
 
 bool CMorphDict::Save(std::string GrammarFileName) const

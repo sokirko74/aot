@@ -56,12 +56,9 @@ void CEngSyntaxOpt::DestroyOptions ()
 };
 
 
-bool CEngSyntaxOpt :: InitOptionsLanguageSpecific()
+void CEngSyntaxOpt :: InitOptionsLanguageSpecific()
 {
-	if (!m_piGramTab->LoadFromRegistry()) {
-		return false;
-	}
-	return true;
+	m_piGramTab->LoadFromRegistry();
 }
 
 
