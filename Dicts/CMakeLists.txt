@@ -27,20 +27,14 @@ endmacro(CompileSimpleGrammar)
 add_subdirectory (Obor)
 add_subdirectory (GerObor)
 add_subdirectory (EngObor)
-
 add_subdirectory (Aoss)
 add_subdirectory (Ross)
 add_subdirectory (Collocs)
 add_subdirectory (EngCollocs)
 add_subdirectory (TimeRoss)
-
-add_subdirectory (Morph)
-
 add_subdirectory (Trigram)
-
 add_subdirectory (GerSynan)
 add_subdirectory (SimpleGrammar)
-
 add_subdirectory (SrcBinDict)
 
 add_custom_target ( 
