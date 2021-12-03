@@ -1,4 +1,3 @@
-[submodule "morph_dict"]
+[submodule "Source/morph_dict"]
 	path = Source/morph_dict
 	url = https://github.com/sokirko74/morph_dict
-	
