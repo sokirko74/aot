@@ -2,7 +2,7 @@
 
 //  a header for windows MFC Unicode projects only (VisualSynan and demo.exe)
 
-#include "utilit.h"
+#include "morph_dict/common/utilit.h"
 #include <afxwin.h>
 #include <comutil.h>
 
