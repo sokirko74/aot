@@ -24,16 +24,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 
 
-if (BUILD_LEMMATIZER_PYTHON)
-  if  (WIN32)
-  else()
-        message ("use -fPIC")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-   endif()
-endif()
-
 #json
-include_directories(${RML}/Source/contrib/nlohmann)
+#include_directories(${RML}/Source/contrib/nlohmann)
 
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")

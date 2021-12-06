@@ -6,7 +6,7 @@
 #include "demoDlg.h"
 #include "Splash.h"
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/common/windows_unicode.h"
+#include "windows/common/windows_unicode.h"
 
 
 

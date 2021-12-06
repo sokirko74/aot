@@ -13,6 +13,6 @@
 #import "../Lemmatizer/Lemmatizer.tlb"
 #import "../graphan/graphan.tlb"
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/common/windows_unicode.h"
+#include "windows/common/windows_unicode.h"
 #include <tchar.h>
 #include <map>
