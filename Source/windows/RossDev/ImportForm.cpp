@@ -163,7 +163,6 @@ void CImportForm::OnRun()
 		return;
 	};
 
-	SetRegistryString( g_strRegLastFile,  (const char*)m_FileName);
 	SaveToFile(m_MainRichEdit, m_FileName);
 
 	m_ProtocolRichEdit.SetSel(0, -1);
