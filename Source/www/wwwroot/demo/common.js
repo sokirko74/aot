@@ -1,7 +1,7 @@
 ﻿///var host = "www.aot.ru";
 //var host = "localhost";
-export var SynanDaemonUrl = 'http://185.237.97.32:8080?dummy=1';
-export var SemanDaemonUrl = 'http://185.237.97.32:8081?dummy=1';
+export var SynanDaemonUrl = 'http://63.250.59.227:8080?dummy=1';
+export var SemanDaemonUrl = 'http://63.250.59.227:8081?dummy=1';
 
 
 export const TableBorderStyle  = '1px solid black';
