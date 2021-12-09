@@ -1,7 +1,8 @@
  server {
-    #server_name test.aot.ru;
+    server_name aot.ru;
     #server_name 63.250.59.227;
-    server_name localhost;
+    #server_name localhost;
+    
     root /home/sokirko/RML/Source/www/wwwroot;
     index  index.html;
     client_max_body_size 5m;
