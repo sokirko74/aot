@@ -23,7 +23,7 @@ CTrieNode::CTrieNode()
 
 void CTrieHolder::PrintChildren(size_t NodeNo) const
 {	
-	printf("%i", NodeNo);
+	std::cout <<  NodeNo;
 	/*if (!m_TerminatedPeriods.empty())
 	{
 		printf(" Lengths=");	
@@ -35,8 +35,8 @@ void CTrieHolder::PrintChildren(size_t NodeNo) const
 	};*/
 
 	if (m_Nodes[NodeNo].m_FailureFunction != -1)
-		printf(" failure(%i) ", m_Nodes[NodeNo].m_FailureFunction);
-	printf(" -> ");
+		std::cout << " failure(" << m_Nodes[NodeNo].m_FailureFunction << ")";
+	std::cout << " -> ";
 	
 
 	size_t i=0;
@@ -46,10 +46,10 @@ void CTrieHolder::PrintChildren(size_t NodeNo) const
 		const CTrieRelation& p = GetChildren(NodeNo)[i];
 		SymbolInformationType::const_iterator it = m_pSymbolInformation->find(p.m_RelationChar);
 		assert (it != m_pSymbolInformation->end());
-		printf("%i %s,", p.m_ChildNo, it->second.c_str() );
+		std::cout << p.m_ChildNo << " " << it->second << ",";
 	};
 
-	printf("\n");
+	std::cout << "\n";
 
 	for (; i<Count; i++)
 		PrintChildren(GetChildren(NodeNo)[i].m_ChildNo);

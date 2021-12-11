@@ -94,7 +94,7 @@ bool CTrigramModel::read_dictionary_text_file(std::map<std::string,  std::vector
 		Dictionary[WordStr] = wd;
 	}
 
-	fprintf(stderr,"read %d entries (type/token) from dictionary\n",Dictionary.size());
+	std::cerr << "read " << Dictionary.size() << " entries (type/token) from dictionary\n";
 	fclose (fp);
 
 	return true;
