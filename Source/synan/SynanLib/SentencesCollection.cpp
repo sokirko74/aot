@@ -210,12 +210,12 @@ bool CSentencesCollection::ReadAndProcessSentences(const CPlmLineCollection *piP
     if (m_bEnableProgressBar) {
         time_t t2;
         time(&t2);
-        printf("Finish             \n");
+        std::cout << "Finish             \n";
         int seconds = t2 - t1;
-        printf("Time : %i\n", seconds);
-        printf("Count of tokens : %i\n", LinesCount);
+        std::cout << "Time : " << seconds << "\n";
+        std::cout << "Count of tokens : " << LinesCount << "\n";
         if (seconds > 0)
-            printf("The speed is %zu tokens pro second\n", (size_t)(LinesCount / seconds));
+            std::cout << "The speed is " << LinesCount / seconds << " tokens pro second\n";
     };
     return true;
 }
