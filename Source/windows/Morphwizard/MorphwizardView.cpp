@@ -13,6 +13,7 @@
 #include "ProgressBar.h"
 #include "AccentWizardDlg.h"
 #include "InputBox.h"
+#include <fstream>
 
 //----------------------------------------------------------------------------
 CDocTemplate* GetTemplate(CString Name)
@@ -165,14 +166,14 @@ void CMorphwizardView::OnInitialUpdate()
 	GetParent()->SetWindowPos(NULL, (GlobalX - DlgWidth) / 2, (GlobalY - DlgHeight) / 2 - 60, DlgWidth, DlgHeight, SWP_SHOWWINDOW | SWP_NOZORDER);
 	GetParent()->ShowWindow(SW_MAXIMIZE); // Nick [12/Dec/2003]
 
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::Grammems, _T("Grammems"), LVCFMT_LEFT, 90);
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::TypeDict, _T("Type"), LVCFMT_LEFT, 35);
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::Lemma, _T("Source lemma"), LVCFMT_LEFT, 90);
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::Freq, _T("Freq"), LVCFMT_LEFT, 50);
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::Index, _T("Innernumber"), LVCFMT_LEFT, 0);
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::Paradigm, _T("ParadigmNo"), LVCFMT_LEFT, 50);
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::LemmaPrefix, _T("Prefix"), LVCFMT_LEFT, 50);
-	m_PredictedList.InsertColumn(TLemmPredictSortEnum::FormsCount, _T("Forms Count"), LVCFMT_LEFT, 40);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::Grammems, _T("Grammems"), LVCFMT_LEFT, 90);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::TypeDict, _T("Type"), LVCFMT_LEFT, 35);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::Lemma, _T("Source lemma"), LVCFMT_LEFT, 90);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::Freq, _T("Freq"), LVCFMT_LEFT, 50);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::Index, _T("Innernumber"), LVCFMT_LEFT, 0);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::Paradigm, _T("ParadigmNo"), LVCFMT_LEFT, 50);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::LemmaPrefix, _T("Prefix"), LVCFMT_LEFT, 50);
+	m_PredictedList.InsertColumn((int)TLemmPredictSortEnum::FormsCount, _T("Forms Count"), LVCFMT_LEFT, 40);
 	m_PredictedList.SetExtendedStyle(LVS_EX_FULLROWSELECT);
 
 	m_FoundList.InsertColumn(FindParadigmColumnNo, _T("ParadigmNo"), LVCFMT_LEFT, 50);
@@ -438,20 +439,20 @@ void CMorphwizardView::OnPredict()
 
 		for (size_t i = 0; i < m_PredictedParadigms.size(); i++)
 		{
-			const CPredictSuffix& S = *m_PredictedParadigms[i];
+			const CPredictSuffix& S = m_PredictedParadigms[i];
 			const CFlexiaModel& P = GetWizard()->m_FlexiaModels[S.m_FlexiaModelNo];
 
 			m_PredictedList.InsertItem(i,
 				FromInnerEncoding(GetWizard()->get_pos_string_and_grammems(S.m_SourceLemmaAncode)));
 			m_PredictedList.SetItemText(i,
-				PredictTypeDictColumn,
+				(int)TLemmPredictSortEnum::TypeDict,
 				FromInnerEncoding(GetWizard()->get_grammem_string(S.m_SourceCommonAncode)));
-			m_PredictedList.SetItemText(i, PredictLemmaColumn, FromInnerEncoding(S.m_SourceLemma));
-			m_PredictedList.SetItemText(i, PredictFreqColumnNo, IntToStr(S.m_Frequence));
-			m_PredictedList.SetItemText(i, PredictIndexColumnNo, IntToStr(i));
-			m_PredictedList.SetItemText(i, PredictParadigmColumnNo, IntToStr(S.m_FlexiaModelNo));
-			m_PredictedList.SetItemText(i, PredictLemmaPrefixColumnNo, FromInnerEncoding(S.m_PrefixSetStr));
-			m_PredictedList.SetItemText(i, PredictFormsCountColumnNo, IntToStr(P.m_Flexia.size()));
+			m_PredictedList.SetItemText(i, (int)TLemmPredictSortEnum::Lemma, FromInnerEncoding(S.m_SourceLemma));
+			m_PredictedList.SetItemText(i, (int)TLemmPredictSortEnum::Freq, IntToStr(S.m_Frequence));
+			m_PredictedList.SetItemText(i, (int)TLemmPredictSortEnum::Index, IntToStr(i));
+			m_PredictedList.SetItemText(i, (int)TLemmPredictSortEnum::Paradigm, IntToStr(S.m_FlexiaModelNo));
+			m_PredictedList.SetItemText(i, (int)TLemmPredictSortEnum::LemmaPrefix, FromInnerEncoding(S.m_PrefixSetStr));
+			m_PredictedList.SetItemText(i, (int)TLemmPredictSortEnum::FormsCount, IntToStr(P.m_Flexia.size()));
 		}
 		OnFind();
 		m_PredictWhat.SetFocus();
@@ -489,10 +490,10 @@ void CMorphwizardView::OnAdd()
 		else
 		{
 			size_t ind = m_PredictedList.GetNextSelectedItem(pos);
-			CString S = m_PredictedList.GetItemText(ind, PredictIndexColumnNo);
-			auto slf = GetWizard()->create_slf_for_lemm(m_LemmaToPredict, m_PredictedParadigms[ind]->m_FlexiaModelNo, 50);
+			CString S = m_PredictedList.GetItemText(ind, (int)TLemmPredictSortEnum::Index);
+			auto slf = GetWizard()->create_slf_for_lemm(m_LemmaToPredict, m_PredictedParadigms[ind].m_FlexiaModelNo, 50);
 			pDocument->m_ParadigmText = FromInnerEncoding(slf);
-			std::string common_grammems = GetWizard()->get_grammem_string(m_PredictedParadigms[ind]->m_SourceCommonAncode.c_str());
+			std::string common_grammems = GetWizard()->get_grammem_string(m_PredictedParadigms[ind].m_SourceCommonAncode.c_str());
 			pDocument->m_CommonGrammems = FromInnerEncoding(common_grammems);
 			int i = predict_what.Find(_T("|"));
 			if (i != -1)
@@ -635,8 +636,8 @@ void CMorphwizardView::OnToolsExport()
 	try {
 		CFileDialog D(FALSE, _T("slf"), _T("paradigms.slf"));
 		if (D.DoModal() != IDOK) return;
-		FILE* fp = fopen(utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "wb");
-		if (!fp)
+		std::ofstream fp(utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), std::ios::binary);
+		if (!fp.is_open())
 		{
 			AfxMessageBox(_T("Cannot open file"));
 			return;
@@ -661,14 +662,13 @@ void CMorphwizardView::OnToolsExport()
 
 			if (found_paradigms[i]->second.m_SessionNo != UnknownSessionNo)
 				P.m_Session = GetWizard()->get_session(found_paradigms[i]->second.m_SessionNo);
-
-			P.SaveToFile(fp);
+			fp << P.ToString();
 
 			found_paradigms[i]->second.m_bToDelete = true;
 
 			meter.AddPos();
 		}
-		fclose(fp);
+		fp.close();
 
 		if (::MessageBox(0, _T("Delete all exported paradigms?"), _T("MorphWizard"), MB_YESNO) == IDYES)
 			GetWizard()->delete_checked_lemms();

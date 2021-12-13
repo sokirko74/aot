@@ -22,7 +22,7 @@ class CMorphwizardView : public CFormView, public CQueryHistory
 	bool			m_inFilter;
 	HICON			m_hIcon;
 	int				m_ControlMargin;
-	std::vector<const CPredictSuffix*> m_PredictedParadigms;
+	std::vector<CPredictSuffix> m_PredictedParadigms;
 	std::string m_LemmaToPredict;
 
 
