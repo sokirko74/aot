@@ -662,7 +662,7 @@ void CMorphwizardView::OnToolsExport()
 
 			if (found_paradigms[i]->second.m_SessionNo != UnknownSessionNo)
 				P.m_Session = GetWizard()->get_session(found_paradigms[i]->second.m_SessionNo);
-			fp << P.ToString();
+			fp << P.ToStringUtf8();
 
 			found_paradigms[i]->second.m_bToDelete = true;
 

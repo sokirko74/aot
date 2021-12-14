@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	FILE * fp = fopen (FileName, "r");
 	if (!fp)
 	{
-		printf ("  Cannot open %s \n", FileName );
+		std::cout << "  Cannot open " << FileName << "\n";
 		return 1;
 	};
 	char buffer[1024];
@@ -52,20 +52,16 @@ int main(int argc, char **argv)
 		std::string f = buffer;
 		Trim(f);
 		int CountOfWords;
-		printf ("  Reading %s \n", f.c_str());
+		std::cout << "Reading " << f <<  "\n";
 		if (!Holder.GetMorphology(f,true, CountOfWords)) 
 		{
-			printf ("  Cannot process %s \n", f.c_str() );
+			std::cout << "  Cannot process " << f << "\n";
 			continue;
 		};
-		printf ("  Found %li items\n", Holder.m_PlmLines.m_PlmItems.size() );
-		//  morph_dict
-		//  save
+		std::cout << "Found " << Holder.m_PlmLines.m_PlmItems.size() <<" items\n";
 		std::string LemFile = MakeFName(f, "lem");
-		printf ( "  Save to %s\n", LemFile.c_str() );
+		std::cout << "Save to " << LemFile  << "\n";
 		Holder.m_PlmLines.SaveToFile(LemFile);
 	};
-
-
 	return 0;
 }
