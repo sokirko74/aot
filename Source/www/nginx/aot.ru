@@ -1,5 +1,5 @@
  server {
-    server_name aot.ru;
+    server_name .aot.ru;
     #server_name 63.250.59.227;
     #server_name localhost;
     
@@ -30,7 +30,8 @@
     #fastcgi_param SCRIPT_FILENAME  /usr/lib$fastcgi_script_name;
   }
 
-    listen 80; # managed by Certbot
 
+    listen 80 ; 
 }
+
 
