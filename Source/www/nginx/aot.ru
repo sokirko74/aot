@@ -1,5 +1,5 @@
  server {
-    server_name .aot.ru;
+    server_name www.aot.ru aot.ru;
     #server_name 63.250.59.227;
     #server_name localhost;
     
@@ -34,4 +34,8 @@
     listen 80 ; 
 }
 
-
+#server {
+#  server_name www.aot.ru
+#  listen 443 ssl;
+#  return 404;
+#}
