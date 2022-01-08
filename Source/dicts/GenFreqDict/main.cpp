@@ -87,9 +87,9 @@ small_dict_t read_small_dict(const char* filename) {
 		// лемматизируем
 
 		clock_t     ltime1 = clock();
-		DwordVector r_id, e_id;
-		MorphHolderRus.string_to_ids(r.c_str(), r_id, true);
-		MorphHolderEng.string_to_ids(e.c_str(), e_id, true);
+		DwordVector r_id = MorphHolderRus.GetLemmaIds(r);
+		DwordVector e_id = MorphHolderEng.GetLemmaIds(e);
+
 		clock_t ltime2 = clock();
 
 		for (int R = 0; R < r_id.size(); R++)

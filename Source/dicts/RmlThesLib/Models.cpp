@@ -97,20 +97,22 @@ bool CThesaurus::LoadGroups(std::string Buff, CInnerModel &M) {
     return true;
 };
 
-bool CThesaurus::LoadModels(std::string FileName) {
+void CThesaurus::LoadModels(std::string FileName) {
     m_Models.clear();
-    FILE *fp = fopen(FileName.c_str(), "r");
-    if (!fp) return false;
-    char buff[2000];
-    if (!fgets(buff, 2000, fp))
-        return false;
-    std::string Header = buff;
+    std::ifstream ifs(FileName);
+    if (!ifs.is_open()) {
+        throw CExpc("cannot open %s", FileName.c_str());
+    }
+    std::string line;
+    if (!getline(ifs, line))
+        throw CExpc("cannot read header from %s", FileName.c_str());
+    std::string Header = line;
     Trim(Header);
     if (Header != "FreqCollocTypeId;Length;AtomGroups;Relations;Examples;Enabled;LoadTextForm;LanguageId;Groups;")
-        return false;
-    while (fgets(buff, 2000, fp)) {
+        throw CExpc("bad header in %s", FileName.c_str());
+    while (getline(ifs, line)) {
         CInnerModel M;
-        std::string innerStr = convert_from_utf8(buff, m_MainLanguage);
+        std::string innerStr = convert_from_utf8(line.c_str(), m_MainLanguage);
         StringTokenizer Line(innerStr.c_str(), FieldDelimiter);
         int i = 0;
         while (true) {
@@ -119,7 +121,7 @@ bool CThesaurus::LoadModels(std::string FileName) {
             std::string Field = s;
             if (Field[0] == '"') {
                 if (Field[Field.length() - 1] != '"')
-                    return false;
+                    throw CExpc("bad format in %s", FileName.c_str());
                 Field.erase(0, 1);
                 Field.erase(Field.length() - 1, 1);
 
@@ -128,20 +130,25 @@ bool CThesaurus::LoadModels(std::string FileName) {
             if (i == 0)
                 M.m_ModelId = atoi(Field.c_str());
             else if (i == 2) {
-                if (!LoadAtomicGroups(Field, M)) return false;
+                if (!LoadAtomicGroups(Field, M)) {
+                    throw CExpc("LoadAtomicGroups failed in %s, line %s", FileName.c_str(), 
+                        line.c_str());
+                }
             } else if (i == 3) {
-                if (!LoadModelRelations(Field, M)) return false;
+                if (!LoadModelRelations(Field, M)) {
+                    throw CExpc("LoadModelRelations failed in %s", FileName.c_str());
+                }
             } else if (i == 8) {
-                if (!LoadGroups(Field, M)) return false;
+                if (!LoadGroups(Field, M)) {
+                    throw CExpc("LoadGroups failed in %s", FileName.c_str());
+                }
             };
 
             i++;
         };
         m_Models.push_back(M);
     };
-    fclose(fp);
 
-    return true;
 }
 
 

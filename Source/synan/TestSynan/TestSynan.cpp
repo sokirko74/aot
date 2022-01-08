@@ -3,6 +3,7 @@
 #include "../SynanLib/SyntaxHolder.h"
 #include "morph_dict/common/util_classes.h"
 #include "morph_dict/common/argparse.h"
+#include <filesystem>
 
 std::vector<std::string> GetAnanlytForms(const CSentence &Sentence) {
     std::vector<std::string>  result;
@@ -203,6 +204,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddArgument("--input-file", "input file", true);
     parser.AddArgument("--output-file", "output file", true);
     parser.AddArgument("--input-file-mask", "c:/*.txt", true);
+    parser.AddArgument("--output-folder", "", true);
     parser.AddArgument("--language", "language");
     parser.Parse(argc, argv);
 }
@@ -222,7 +224,12 @@ int main(int argc, const char** argv) {
         if (args.Exists("input-file-mask")) {
             auto file_names = list_path_by_file_mask(args.Retrieve("input-file-mask"));
             for (auto filename : file_names) {
-                file_pairs.push_back({filename, filename  + ".synan"});
+                auto outputFilename = filename + ".synan";
+                if (args.Exists("output-folder")) {
+                    auto p = std::filesystem::path(args.Retrieve("output-folder")) / outputFilename;
+                    outputFilename = p.string();
+                }
+                file_pairs.push_back({filename, outputFilename });
             }
         }
         else {

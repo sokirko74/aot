@@ -7,3 +7,4 @@ add_executable (asp_read main.cpp)
 target_link_libraries(asp_read 
     LemmatizerLib
 )
+add_subdirectory (AspTest)

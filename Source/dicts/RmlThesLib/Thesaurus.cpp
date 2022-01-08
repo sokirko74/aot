@@ -37,11 +37,7 @@ bool CThesaurus::ReadThesaurusFromDisk()
 	if (!m_pEngGramTab) return false;
 	if (m_MainLanguage == morphUnknown) return false;
 
-	if (!LoadModels(m_Directory + "/StatThes/FreqCollocTypes.txt"))
-	{
-		ErrorMessage("Cannot Load models " + m_Directory + "/StatThes/FreqCollocTypes.txt");
-		return false;
-	};
+	LoadModels(m_Directory + "/StatThes/FreqCollocTypes.txt");
 
 	std::string OborotsFileName = (m_MainLanguage == morphGerman) ?
 		m_Directory + "/StatThes/GerOborots.txt" : m_Directory + "/StatThes/RusOborots.txt";

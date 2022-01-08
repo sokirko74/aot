@@ -129,7 +129,7 @@ public:
 
 	CThesaurus();
 	~CThesaurus();
-	bool LoadModels (std::string FileName);
+	void LoadModels (std::string FileName);
 	bool LoadAtomicGroups (std::string Buff, CInnerModel& M);
 	bool LoadModelRelations (std::string Buff, CInnerModel& M);
 	bool LoadGroups (std::string Buff, CInnerModel& M);

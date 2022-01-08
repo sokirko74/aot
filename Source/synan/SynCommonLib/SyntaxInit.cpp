@@ -185,8 +185,8 @@ void CSyntaxOpt::InitializeOptions() {
         throw CExpc("Failed read oborots");
     }
     m_pThesaurus.reset(NewThesaurus(this));
-    LoadTermins(GetOborDictionary());
     InitOptionsLanguageSpecific();
+    LoadTermins(GetOborDictionary());
 };
 
 const char *CSyntaxOpt::GetGroupNameByIndex(long lType) const {

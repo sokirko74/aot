@@ -41,7 +41,7 @@ macro (ConvertStructDict name)
     )
 
     add_custom_command(
-        OUTPUT ${PROJECT_SOURCE_DIR}/units.bin
+        OUTPUT ${PROJECT_SOURCE_DIR}/units.bin ${PROJECT_SOURCE_DIR}/cortege.bin ${PROJECT_SOURCE_DIR}/comments.bin
         COMMAND StructDictLoader FromTxt ross.txt  .
         DEPENDS StructDictLoader ross.txt
         COMMENT "Convert StructDict for ${name} to the binary format"
@@ -53,11 +53,12 @@ endmacro(ConvertStructDict)
 
 enable_testing()
 
+add_subdirectory (Source)
+
 if (BUILD_DICTS)
     message ("build dicts...")
     add_subdirectory (Dicts)
     add_subdirectory (Thes)
 endif()
 
-add_subdirectory (Source)
 

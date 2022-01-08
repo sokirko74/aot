@@ -1057,56 +1057,6 @@
                                         "morph_info": " "
                                     }
                                 ]
-                            },
-                            {
-                                "clause_type": "EMPTY",
-                                "groups": [
-                                    {
-                                        "type": "ПГ",
-                                        "words": "С которой"
-                                    },
-                                    {
-                                        "type": "ПГ",
-                                        "words": "с Любецкой"
-                                    }
-                                ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "-",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    },
-                                    {
-                                        "lemma": "С",
-                                        "modified_grammems": "",
-                                        "morph_info": "ПРЕДЛ ; "
-                                    },
-                                    {
-                                        "lemma": "КОТОРЫЙ",
-                                        "modified_grammems": "но,од,жр,тв,рд,ед,",
-                                        "morph_info": "МС-П но,од,жр,рд,ед,; но,од,жр,дт,ед,; но,од,жр,тв,ед,; но,од,жр,пр,ед,; "
-                                    },
-                                    {
-                                        "lemma": "?",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    },
-                                    {
-                                        "lemma": "С",
-                                        "modified_grammems": "",
-                                        "morph_info": "ПРЕДЛ ; "
-                                    },
-                                    {
-                                        "lemma": "ЛЮБЕЦКОЙ",
-                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
-                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; "
-                                    },
-                                    {
-                                        "lemma": "?",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    }
-                                ]
                             }
                         ],
                         "last": 6,

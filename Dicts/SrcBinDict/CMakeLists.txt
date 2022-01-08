@@ -1,12 +1,18 @@
 project (SrcBinDict)
 
+#if(TARGET MorphDicts) 
+#else()
+#    message(FATAL_ERROR  "cannot find MorphDicts target, rewrite your cmake files" )
+#endif()
+set(MorphBinDicts ${PROJECT_SOURCE_DIR}/../Morph/English/morph.bases ${PROJECT_SOURCE_DIR}/../Morph/Russian/morph.bases ${PROJECT_SOURCE_DIR}/../Morph/German/morph.bases)
+
 macro (Convertor BinaryConvertor Source BinData)
     list(APPEND AllBinFiles ${BinData})
     add_custom_command(
         OUTPUT ${BinData}
         COMMAND ${BinaryConvertor} ${Source} ${BinData}
         #DEPENDS ${BinaryConvertor} ${Source} 
-        DEPENDS ${Source} MorphDicts
+        DEPENDS ${Source} ${MorphBinDicts}
         COMMENT "${BinaryConvertor} ${Source} ${BinData}"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         VERBATIM
@@ -18,8 +24,6 @@ Convertor(asp_read ASP.txt ${PROJECT_SOURCE_DIR}/../BinDict/asp_dict.bin)
 Convertor(deriv_read troiki_suff ${PROJECT_SOURCE_DIR}/../BinDict/deriv_suff.bin)
 Convertor(deriv_read troiki_pref ${PROJECT_SOURCE_DIR}/../BinDict/deriv_pref.bin)
 
-#not used
-#Convertor(GenSynDict synonyms.txt ${PROJECT_SOURCE_DIR}/../BinDict/synonyms.bin)
 
 
 macro (GenFreqDictConv Source BinData)
@@ -27,7 +31,7 @@ macro (GenFreqDictConv Source BinData)
     add_custom_command(
         OUTPUT ${BinData}
         COMMAND GenFreqDict ${Source} ${BinData} shira.txt
-        DEPENDS GenFreqDict ${Source} shira.txt ../BinDict/dict.bin
+        DEPENDS GenFreqDict ${Source} shira.txt ../BinDict/dict.bin ${MorphBinDicts}
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "GenFreqDict ${Source} ${BinData} shira.txt" 
         VERBATIM
@@ -44,5 +48,8 @@ add_custom_target(
     SOURCES ${AllBinFiles}
 )
 
-
+add_test(
+    NAME AspTest
+    COMMAND AspTest
+)
 
