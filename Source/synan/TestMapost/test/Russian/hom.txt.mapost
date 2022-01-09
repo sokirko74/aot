@@ -9,9 +9,11 @@
   сорока  33 6  RLE aa  + СОРОКА * но, С жр,им,ед,
   сорока  33 6  RLE aa  + СОРОК  ЧИСЛ рд, ЧИСЛ дт, ЧИСЛ тв, ЧИСЛ пр,
 прилетела  40 9  RLE aa SENT_END  + ПРИЛЕТЕТЬ * нп,св, Г дст,прш,жр,ед,
-ПОД  51 3  RLE AA SENT_END EXPR1 EXPR2 EXPR_NO387 + ПОД  ПРЕДЛ 
+ПОД  51 3  RLE AA SENT_END EXPR1 EXPR2 EXPR_NO387 + ПОДА * фам,од, С мр-жр,жр,мр,рд,мн, С мр-жр,жр,мр,вн,мн,
+  ПОД  51 3  RLE AA SENT_END EXPR1 EXPR2 EXPR_NO387 + ПОД  ПРЕДЛ 
   ПОД  51 3  RLE AA SENT_END EXPR1 EXPR2 EXPR_NO387 + ПОД * дфст,но, С аббр,0,мр,зв,пр,тв,вн,дт,рд,им,ед,
-Под  56 3  RLE Aa NAM? SENT_END EXPR1 EXPR2 EXPR_NO387 + ПОД  ПРЕДЛ 
+Под  56 3  RLE Aa NAM? SENT_END EXPR1 EXPR2 EXPR_NO387 + ПОДА * фам,од, С мр-жр,жр,мр,рд,мн, С мр-жр,жр,мр,вн,мн,
+  Под  56 3  RLE Aa NAM? SENT_END EXPR1 EXPR2 EXPR_NO387 + ПОД  ПРЕДЛ 
 орел  61 4  RLE aa SENT_END  + ОРЕЛ * од, С мр,им,ед,
 Орел  67 4  RLE Aa NAM? SENT_END  + ОРЕЛ * од, С мр,им,ед,
   Орел  67 4  RLE Aa NAM? SENT_END  + ОРЕЛ * дфст,лок,но, С мр,им,ед, С мр,вн,ед,
