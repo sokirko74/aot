@@ -17634,37 +17634,6 @@
                                         "morph_info": "С мр,пр,мн,; "
                                     }
                                 ]
-                            },
-                            {
-                                "clause_type": "ДПР",
-                                "groups": [
-                                    {
-                                        "type": "ПГ",
-                                        "words": "о детях"
-                                    }
-                                ],
-                                "syn_units": [
-                                    {
-                                        "lemma": ",",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    },
-                                    {
-                                        "lemma": "ДУМАТЬ",
-                                        "modified_grammems": "дст,нст,",
-                                        "morph_info": "ДЕЕПРИЧАСТИЕ дст,нст,; "
-                                    },
-                                    {
-                                        "lemma": "О",
-                                        "modified_grammems": "",
-                                        "morph_info": "ПРЕДЛ ; "
-                                    },
-                                    {
-                                        "lemma": "РЕБЕНОК",
-                                        "modified_grammems": "мр,пр,мн,",
-                                        "morph_info": "С мр,пр,мн,; "
-                                    }
-                                ]
                             }
                         ],
                         "last": 9,
@@ -17674,42 +17643,6 @@
                     {
                         "antecedent": "дом",
                         "good_synvars": [
-                            {
-                                "clause_type": "ГЛ_ЛИЧН",
-                                "groups": [],
-                                "syn_units": [
-                                    {
-                                        "lemma": ",",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    },
-                                    {
-                                        "lemma": "КОТОРЫЙ",
-                                        "modified_grammems": "но,од,мр,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,мр,им,ед,; но,мр,вн,ед,; "
-                                    },
-                                    {
-                                        "lemma": "ОН",
-                                        "modified_grammems": "3л,мр,им,ед,",
-                                        "morph_info": "МС 3л,мр,им,ед,; "
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    },
-                                    {
-                                        "lemma": "ПОСТРОИТЬ",
-                                        "modified_grammems": "дст,прш,мр,ед,",
-                                        "morph_info": "Г дст,прш,мр,ед,; "
-                                    },
-                                    {
-                                        "lemma": ".",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    }
-                                ]
-                            },
                             {
                                 "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],
@@ -17848,7 +17781,7 @@
                         "src_grm": "дст,пе,св,прш,мр,ед,",
                         "src_lemma": "ПОСТРОИТЬ",
                         "trg": "думая",
-                        "trg_grm": "дст,нп,нс,нст,",
+                        "trg_grm": "дст,пе,нс,нст,",
                         "trg_lemma": "ДУМАТЬ"
                     }
                 ],
@@ -17888,38 +17821,6 @@
                     },
                     {
                         "good_synvars": [
-                            {
-                                "clause_type": "ГЛ_ЛИЧН",
-                                "groups": [],
-                                "syn_units": [
-                                    {
-                                        "lemma": "Я",
-                                        "modified_grammems": "1л,им,ед,",
-                                        "morph_info": "МС 1л,им,ед,; "
-                                    },
-                                    {
-                                        "lemma": "ДУМАТЬ",
-                                        "modified_grammems": "дст,1л,нст,ед,",
-                                        "morph_info": "Г дст,1л,нст,ед,; "
-                                    }
-                                ]
-                            },
-                            {
-                                "clause_type": "ГЛ_ЛИЧН",
-                                "groups": [],
-                                "syn_units": [
-                                    {
-                                        "lemma": "Я",
-                                        "modified_grammems": "1л,им,ед,",
-                                        "morph_info": "МС 1л,им,ед,; "
-                                    },
-                                    {
-                                        "lemma": "ДУМАТЬ",
-                                        "modified_grammems": "дст,1л,нст,ед,",
-                                        "morph_info": "Г дст,1л,нст,ед,; "
-                                    }
-                                ]
-                            },
                             {
                                 "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [],
@@ -18060,7 +17961,7 @@
                         "gramrel": "",
                         "name": "ПОДЛ",
                         "src": "думаю",
-                        "src_grm": "дст,нп,нс,1л,нст,ед,",
+                        "src_grm": "дст,пе,нс,1л,нст,ед,",
                         "src_lemma": "ДУМАТЬ",
                         "trg": "Я",
                         "trg_grm": "1л,им,ед,",
@@ -18100,7 +18001,7 @@
                         "gramrel": "",
                         "name": "ВВОДН_КЛАУЗА",
                         "src": "думаю",
-                        "src_grm": "дст,нп,нс,1л,нст,ед,",
+                        "src_grm": "дст,пе,нс,1л,нст,ед,",
                         "src_lemma": "ДУМАТЬ",
                         "trg": "наверно",
                         "trg_grm": "",
