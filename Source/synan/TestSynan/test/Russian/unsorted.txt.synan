@@ -15498,7 +15498,7 @@
                         "src_grm": "",
                         "src_lemma": "В",
                         "trg": "проде",
-                        "trg_grm": "но,мр,пр,ед,",
+                        "trg_grm": "дфст,орг,но,мр,пр,ед,",
                         "trg_lemma": "ПРОД"
                     },
                     {
@@ -24089,12 +24089,81 @@
                                 "clause_type": "ГЛ_ЛИЧН",
                                 "groups": [
                                     {
-                                        "type": "ГЕНИТ_ИГ",
-                                        "words": "которою Биой"
+                                        "type": "ОДНОР_ИГ",
+                                        "words": "выдумкой , которою"
                                     },
                                     {
+                                        "type": "ПРИЛ_СУЩ",
+                                        "words": "свою фразу"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "оправдать свою фразу"
+                                    },
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "хотел оправдать свою фразу"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "БЫЛЬ",
+                                        "modified_grammems": "жр,пр,вн,дт,рд,им,ед,мн,",
+                                        "morph_info": "С жр,рд,ед,; жр,дт,ед,; жр,пр,ед,; жр,им,мн,; жр,вн,мн,; "
+                                    },
+                                    {
+                                        "lemma": "ВЫДУМКА",
+                                        "modified_grammems": "жр,тв,ед,",
+                                        "morph_info": "С жр,тв,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "КОТОРА",
+                                        "modified_grammems": "жр,тв,ед,",
+                                        "morph_info": "С жр,тв,ед,; "
+                                    },
+                                    {
+                                        "lemma": "БИА",
+                                        "modified_grammems": "имя,жр,тв,ед,",
+                                        "morph_info": "С имя,жр,тв,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ХОТЕТЬ",
+                                        "modified_grammems": "дст,прш,мр,ед,",
+                                        "morph_info": "Г дст,прш,мр,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ОПРАВДАТЬ",
+                                        "modified_grammems": "дст,",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "СВОЙ",
+                                        "modified_grammems": "но,од,жр,вн,ед,",
+                                        "morph_info": "МС-П но,од,жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ФРАЗА",
+                                        "modified_grammems": "жр,вн,ед,",
+                                        "morph_info": "С жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [
+                                    {
                                         "type": "ОДНОР_ИГ",
-                                        "words": "выдумкой , которою Биой"
+                                        "words": "выдумкой , которою"
                                     },
                                     {
                                         "type": "ПРИЛ_СУЩ",
@@ -24188,16 +24257,6 @@
                         "trg": "оправдать",
                         "trg_grm": "дст,пе,св,",
                         "trg_lemma": "ОПРАВДАТЬ"
-                    },
-                    {
-                        "gramrel": "но,жр,тв,ед,",
-                        "name": "ГЕНИТ_ИГ",
-                        "src": "которою",
-                        "src_grm": "но,жр,тв,ед,",
-                        "src_lemma": "КОТОРА",
-                        "trg": "Биой",
-                        "trg_grm": "но,ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
-                        "trg_lemma": "БИОЙ"
                     },
                     {
                         "gramrel": "дст,пе,св,",
@@ -33191,8 +33250,68 @@
                                     },
                                     {
                                         "lemma": "ОТТТУДА",
-                                        "modified_grammems": "жр,им,ед,",
-                                        "morph_info": "С жр,им,ед,; "
+                                        "modified_grammems": "указат,",
+                                        "morph_info": "Н указат,; "
+                                    },
+                                    {
+                                        "lemma": "ТАК",
+                                        "modified_grammems": "указат,",
+                                        "morph_info": "Н указат,; "
+                                    },
+                                    {
+                                        "lemma": "БЫСТРО",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "смогли выбраться"
+                                    },
+                                    {
+                                        "type": "НАР_НАР",
+                                        "words": "так быстро"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "КАК",
+                                        "modified_grammems": "",
+                                        "morph_info": "СОЮЗ ; "
+                                    },
+                                    {
+                                        "lemma": "ОНИ",
+                                        "modified_grammems": "3л,им,мн,",
+                                        "morph_info": "МС 3л,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": "СМОЧЬ",
+                                        "modified_grammems": "дст,прш,мн,",
+                                        "morph_info": "Г дст,прш,мн,; "
+                                    },
+                                    {
+                                        "lemma": "ВЫБРАТЬСЯ",
+                                        "modified_grammems": "дст,",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "ОТТТУДА",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; "
                                     },
                                     {
                                         "lemma": "ТАК",
@@ -33251,8 +33370,68 @@
                                     },
                                     {
                                         "lemma": "ОТТТУДА",
-                                        "modified_grammems": "жр,им,ед,",
-                                        "morph_info": "С жр,им,ед,; "
+                                        "modified_grammems": "указат,",
+                                        "morph_info": "Н указат,; "
+                                    },
+                                    {
+                                        "lemma": "ТАК",
+                                        "modified_grammems": "указат,",
+                                        "morph_info": "Н указат,; "
+                                    },
+                                    {
+                                        "lemma": "БЫСТРО",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "смогли выбраться"
+                                    },
+                                    {
+                                        "type": "НАР_НАР",
+                                        "words": "так быстро"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "КАК",
+                                        "modified_grammems": "вопр,",
+                                        "morph_info": "Н вопр,; "
+                                    },
+                                    {
+                                        "lemma": "ОНИ",
+                                        "modified_grammems": "3л,им,мн,",
+                                        "morph_info": "МС 3л,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": "СМОЧЬ",
+                                        "modified_grammems": "дст,прш,мн,",
+                                        "morph_info": "Г дст,прш,мн,; "
+                                    },
+                                    {
+                                        "lemma": "ВЫБРАТЬСЯ",
+                                        "modified_grammems": "дст,",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "ОТТТУДА",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; "
                                     },
                                     {
                                         "lemma": "ТАК",
@@ -33311,8 +33490,68 @@
                                     },
                                     {
                                         "lemma": "ОТТТУДА",
-                                        "modified_grammems": "жр,им,ед,",
-                                        "morph_info": "С жр,им,ед,; "
+                                        "modified_grammems": "указат,",
+                                        "morph_info": "Н указат,; "
+                                    },
+                                    {
+                                        "lemma": "ТАК",
+                                        "modified_grammems": "указат,",
+                                        "morph_info": "Н указат,; "
+                                    },
+                                    {
+                                        "lemma": "БЫСТРО",
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "смогли выбраться"
+                                    },
+                                    {
+                                        "type": "НАР_НАР",
+                                        "words": "так быстро"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "КАК",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
+                                    },
+                                    {
+                                        "lemma": "ОНИ",
+                                        "modified_grammems": "3л,им,мн,",
+                                        "morph_info": "МС 3л,им,мн,; "
+                                    },
+                                    {
+                                        "lemma": "СМОЧЬ",
+                                        "modified_grammems": "дст,прш,мн,",
+                                        "morph_info": "Г дст,прш,мн,; "
+                                    },
+                                    {
+                                        "lemma": "ВЫБРАТЬСЯ",
+                                        "modified_grammems": "дст,",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "ОТТТУДА",
+                                        "modified_grammems": "ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,",
+                                        "morph_info": "С ср,жр,мр,пр,тв,вн,дт,рд,им,ед,мн,; "
                                     },
                                     {
                                         "lemma": "ТАК",
