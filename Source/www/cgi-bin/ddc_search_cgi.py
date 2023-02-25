@@ -6,21 +6,27 @@ import cgitb
 import json
 import os
 from urllib.parse import urlencode
+import logging
+
+RML = os.path.join(os.path.dirname(__file__), "../../..")
+
+logging.basicConfig(filename=os.path.join(RML, 'logs', "ddc_search.log"),
+                    level=logging.INFO, format='%(asctime)s %(message)s')
 
 DDC_SERVER_ADDRESS_HOST = "195.70.213.239"
 DDC_SERVER_ADDRESS_PORT = 80
 DDC_CORPUS_NAME = "server"
 DDC_TEXT_ENCODING = 'windows-1251'
 HITS_PER_PAGE = 10
-TEMPLATE_FILE = os.path.join(os.path.dirname(__file__), "../wwwroot/search_ddc.html")
+TEMPLATE_FILE = os.path.join(RML, "Source/www/wwwroot/search_ddc.html")
 if not os.path.exists(TEMPLATE_FILE):
-    TEMPLATE_FILE = os.path.join(os.path.dirname(__file__), "../www/search_ddc.html")
+    TEMPLATE_FILE = os.path.join(RML, "Source/www/search_ddc.html")
 SELF_WEB_LINK = "/cgi-bin/" + os.path.basename(__file__)
 BYTEORDER = 'little'
 
 
 def print_error(err):
-    print (err + "\n")
+    logging.error(err)
 
 
 def send_query (socket_conn, query, start_hit_no, result_limit):
@@ -59,22 +65,21 @@ def recieve_hits (socket_conn):
         encoded_res = decode_bytes(res)
         answer = json.loads(encoded_res)
         if answer['nstatus_'] != 0:
-            print_error("network error id={}".format(answer['nstatus_']))
+            logging.error("network error id={}".format(answer['nstatus_']))
             return
         if answer['istatus_'] != 0:
-            print_error("internal_error={}".format(answer['istatus_']))
+            logging.error("internal_error={}".format(answer['istatus_']))
             return
         return answer
     except Exception as exp:
-        print_error("server answer is in a bad format, exception= {}".format(exp))
-        return
+        logging.error("server answer is in a bad format, exception= {}".format(exp))
 
 
 PUNCTUATION_WITHOUT_SPACES_BEFORE = {'.', ',', ';', ':', '!', '?'}
 
 
 def print_ddc_result(template_file_name, query, answer, start_hit_no):
-    with open (template_file_name, "r") as inp:
+    with open(template_file_name, "r") as inp:
         template_str = inp.read()
 
     hits_html  = u"<br/><br/> Sentences: {}-{} out of {}".format(
@@ -104,21 +109,22 @@ def print_ddc_result(template_file_name, query, answer, start_hit_no):
     template_str = template_str.replace ("<!--result_text-->", hits_html)
     query = query.replace('"', '&quot;')
     template_str = template_str.replace ('name="search_text">', u'name="search_text" value="{}">'.format(query))
-    print (template_str)
+    print(template_str)
 
 
 if __name__ == '__main__':
     cgitb.enable()
     print ("Content-Type: text/html")
-    print ("")
+    print("")
 
     try:
         form = cgi.FieldStorage()
-        query = form.getvalue('search_text').strip()
-        start_hit_no = form.getvalue('start_hit_no', 0)
-
         #query = u"мама"
         #start_hit_no = 0
+
+        query = form.getvalue('search_text', 'мама').strip()
+        start_hit_no = form.getvalue('start_hit_no', 0)
+        logging.info("query={}, start_hit_no={}".format(query, start_hit_no))
 
         socket_conn = socket.create_connection((DDC_SERVER_ADDRESS_HOST, DDC_SERVER_ADDRESS_PORT), 100)
         send_query(socket_conn, query, start_hit_no, HITS_PER_PAGE)
@@ -126,4 +132,5 @@ if __name__ == '__main__':
         if answer is not None:
             print_ddc_result(TEMPLATE_FILE, query, answer, start_hit_no)
     except Exception as exp:
+        logging.error(exp)
         print(exp)
