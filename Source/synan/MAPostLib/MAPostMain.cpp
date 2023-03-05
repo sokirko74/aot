@@ -135,6 +135,7 @@ void CMAPost::RunRules()
 		Rule_ChangePatronymicLemmas();
 
 		OtherRules();
+
 	}
 	catch (...)
 	{

@@ -204,7 +204,7 @@
                                         "morph_info": "С рд,мн,; "
                                     },
                                     {
-                                        "lemma": "МАЛЕНЬКИЙ",
+                                        "lemma": "МАЛЫЙ",
                                         "modified_grammems": "но,од,ср,ед,",
                                         "morph_info": "КР_ПРИЛ но,од,ср,ед,; "
                                     }
@@ -237,8 +237,8 @@
                                     },
                                     {
                                         "lemma": "МАЛО",
-                                        "modified_grammems": "",
-                                        "morph_info": "Н ; "
+                                        "modified_grammems": "вн,им,",
+                                        "morph_info": "ЧИСЛ им,; вн,; "
                                     }
                                 ]
                             },
@@ -253,8 +253,8 @@
                                     },
                                     {
                                         "lemma": "МАЛО",
-                                        "modified_grammems": "вн,им,",
-                                        "morph_info": "ЧИСЛ им,; вн,; "
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
                                     }
                                 ]
                             }

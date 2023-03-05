@@ -405,7 +405,7 @@
                             "word": "ХВАТИЛО"
                         },
                         {
-                            "inner morph": "С од,мр,дт,ед,",
+                            "inner morph": "С но,мр,дт,ед,",
                             "lemma": "ДУХ",
                             "word": "ДУХУ"
                         }
@@ -457,16 +457,6 @@
             ],
             "relations": [
                 {
-                    "name": "ADR",
-                    "source": {
-                        "words": "СКАЗАТЬ"
-                    },
-                    "syntax_rel": "к_доп",
-                    "target": {
-                        "words": "ЕМУ"
-                    }
-                },
-                {
                     "name": "THEME",
                     "source": {
                         "words": "СКАЗАТЬ"
@@ -474,6 +464,16 @@
                     "syntax_rel": "к_доп",
                     "target": {
                         "words": "ЭТОМ"
+                    }
+                },
+                {
+                    "name": "ADR",
+                    "source": {
+                        "words": "СКАЗАТЬ"
+                    },
+                    "syntax_rel": "к_доп",
+                    "target": {
+                        "words": "ЕМУ"
                     }
                 },
                 {

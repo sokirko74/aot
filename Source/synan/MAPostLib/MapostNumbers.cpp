@@ -8,14 +8,10 @@ bool CMAPost::is_russian_numeral(std::string& word) const {
 	m_pRusLemmatizer->CreateParadigmCollection(false, word, false, false, Paradigms);
 	for (auto& p : Paradigms)
 	{
-		std::string Form = p.GetWordForm(0);
-		for (int i = NumeralToNumberCount; i >= 0; i--) {
-			if (NumeralToNumber[i].m_Cardinal == Form || NumeralToNumber[i].m_Ordinal == Form)
-			{
-				return true;
-			}
+		auto form = p.GetWordForm(0);
+		if (RussianNumerals.CheckIsNumeral(form)) {
+			return true;
 		}
-		break; 
 	}
 	return false;
 }
@@ -61,8 +57,6 @@ std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::st
 
 
 };
-
-
 
 
 void CMAPost::Cifrdef()
@@ -139,35 +133,40 @@ void CMAPost::Cifrdef()
 			continue;
 		}
 		//  Идем с  конца ищем числительное, которое максимально совпадает с конца с числительным во входном тексте.
-		int i = NumeralToNumberCount + (NumWordForm == "0" ? 0 : -1); //включая ноль
 		std::string NumWordForm2 = NumWordForm;
 		while (atoi(NumWordForm2.c_str()) >= 1000 && NumWordForm2.substr(NumWordForm2.length() - 3) == "000")
 			NumWordForm2 = NumWordForm2.substr(0, NumWordForm2.length() - 3);
-		for (; i >= 0; i--)
+
+		const CNumeralToNumber* numeral = nullptr;
+		for (auto& n: RussianNumerals.GetAllNumeralReverse())
 		{
+			if (n.m_Number == 0 && NumWordForm != "0") {
+				continue;
+			}
 			std::string NumValue;
 			if (W.HasDes(ORoman))
-				NumValue = NumeralToNumber[i].m_RomanNumber;
+				NumValue = n.m_RomanNumber;
 			else
-				NumValue = IntToStr(NumeralToNumber[i].m_Number);
+				NumValue = DoubleToStr(n.m_Number);
 
-			if (NumValue.length() > 0)
-				if (NumWordForm2.length() >= NumValue.length())
-					if (NumValue == NumWordForm2.substr(NumWordForm2.length() - NumValue.length()))
-						break;
+			if (NumValue.length() > 0 && endswith(NumWordForm2, NumValue))
+			{
+				numeral = &n;
+				break;
+			}
 		};
-		if (i < 0)  continue;
+		if (numeral == nullptr)  continue;
 
 		EngRusMakeLower(Flexia);
-		std::string AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Cardinal, Flexia, NumeralToNumber[i].m_bNoun);
+		std::string AnCodes = GetSimilarNumAncode(numeral->m_Cardinal, Flexia, numeral->m_bNoun);
 		if (AnCodes.empty() && Flexia != "")
-			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun);
-		if (NumeralToNumber[i].m_Cardinal == _R("ОДИН")) {
+			AnCodes = GetSimilarNumAncode(numeral->m_Ordinal, Flexia, numeral->m_bNoun);
+		if (numeral->m_Cardinal == _R("ОДИН")) {
 			AnCodes = _R("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"); //все грамкоды с родом
 		}
 		std::string AnCodes0 = AnCodes; //числ
 		if (NumWordForm != "0") {
-			AnCodes = GetSimilarNumAncode(NumeralToNumber[i].m_Ordinal, Flexia, NumeralToNumber[i].m_bNoun);
+			AnCodes = GetSimilarNumAncode(numeral->m_Ordinal, Flexia, numeral->m_bNoun);
 		}
 		if (Flexia == "") {
 			// 1. удаляем грамкоды множес. числа
@@ -269,3 +268,4 @@ void CMAPost::Cifrdef()
 	};
 
 };
+

@@ -23,16 +23,19 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
 2. You need flex and bison to build projects after Morphology (Synan and Seman)
     sudo apt install flex bison
 
-2.1 For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
+2.2  For Windows install cygwin (wget, gzip) and add cygwin bin to PATH
+
+2.3 For windows I used flex and bison from https://sourceforge.net/projects/winflexbison/?source=typ_redirect
      mkdir RML/external
      mkdir RML/external/winflex
      cd RML/external/winflex
      wget https://sourceforge.net/projects/winflexbison/files/win_flex_bison-2.5.24.zip/download
      unzip win_flex_bison-2.5.24.zip
+   or build it from sources https://github.com/lexxmark/winflexbison
     
 
 
-5. To compile HTTP-daemons please install libevent 
+3. To compile HTTP-daemons please install libevent 
         https://github.com/libevent/libevent:
    6.1. download source archive from  https://libevent.org/ , for example 
    6.2  wget https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/c
@@ -45,12 +48,15 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
    or
    sudo apt install libevent-dev
   
-6. To compile COM-objects you need to run Visual Studio as administrator.
+4. To compile COM-objects you need to run Visual Studio as administrator.
 
-7. To run Windows GUI Rossdev.exe and MorphWizard you must set Russian everywhere in Region Setting.
+5. To run Windows GUI Rossdev.exe and MorphWizard you must set Russian everywhere in Region Setting.
 
+6. git clone git@github.com/aot.git --recursive RML
 
-=================   Compilation =======================
+7. nder Windows follow  https://learn.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-170
+
+=================   Compilation under Linux =======================
   export RML=/home/sokirko/RML
   export CXX=/usr/bin/g++
   export CC=/usr/bin/gcc
@@ -60,5 +66,8 @@ More detail about Morphology dicts is here: Docs/Morph_UNIX.txt
   cmake ..
    // or with debug 
    // cmake .. -DCMAKE_BUILD_TYPE=Debug 
+   // or to compile MorphWizard or Rossdev
+   // cmake .. -A Win32
   make
   make DESTDIR=$RML install
+

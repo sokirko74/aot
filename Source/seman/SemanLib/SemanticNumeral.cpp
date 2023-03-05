@@ -5,182 +5,15 @@ static StringVector GenitFormsOfCardinal;
 
 
 
-// порождает по числительному генитивный вариант.
-// например, два=>двух
-// это генитивный вариант используется в слвоах типа "двухламповый"
-bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGramTab* Agramtab)
-{
-	GenitFormsOfCardinal.clear();
-	for (int i = 0; i < NumeralToNumberCount; i++)
-	{
-		if (NumeralToNumber[i].m_Number == 0)
-		{
-			GenitFormsOfCardinal.push_back(_R("НУЛЬ"));
-			continue;
-		};
-		if (NumeralToNumber[i].m_Number == 1)
-		{
-			GenitFormsOfCardinal.push_back(_R("ОДНО"));
-			continue;
-		};
-		if (NumeralToNumber[i].m_Number == 100)
-		{
-			GenitFormsOfCardinal.push_back(_R("СТО"));
-			continue;
-		};
-		if (NumeralToNumber[i].m_Number == 1000)
-		{
-			GenitFormsOfCardinal.push_back(_R("ТЫСЯЧЕ"));
-			continue;
-		};
-		if (NumeralToNumber[i].m_Number == 1000000)
-		{
-			GenitFormsOfCardinal.push_back(_R("МИЛЛИОНО"));
-			continue;
-		};
-		if (NumeralToNumber[i].m_Number == 1000000000)
-		{
-			GenitFormsOfCardinal.push_back(_R("МИЛЛИАРДНО"));
-			continue;
-		};
-		if (NumeralToNumber[i].m_Number == 1000000000000.0)
-		{
-			GenitFormsOfCardinal.push_back(_R("ТРИЛЛИОНО"));
-			continue;
-		};
-		if (NumeralToNumber[i].m_Number == 1000000000000000.0)
-		{
-			GenitFormsOfCardinal.push_back(_R("КВАДРИЛЛИОНО"));
-			continue;
-		};
-		std::vector<CFormInfo> ParadigmCollection;
-		std::string WordForm = NumeralToNumber[i].m_Cardinal;
-		piRusLemmatizer->CreateParadigmCollection(true, WordForm, false, false, ParadigmCollection);
-		// ищем числительное
-		long k = 0;
-		for (; k < ParadigmCollection.size(); k++)
-		{
-			std::string AnCode = ParadigmCollection[k].GetAncode(0);
-			BYTE POS = Agramtab->GetPartOfSpeech(AnCode.c_str());
-			if (NumeralToNumber[i].m_bNoun)
-			{
-				if (POS == NOUN)
-					break;
-			}
-			else
-				if (POS == NUMERAL)
-					break;
-		};
-		assert(k < ParadigmCollection.size());
-		const CFormInfo& P = ParadigmCollection[k];
-		// ищем родительный падеж
-		for (k = 0; k < P.GetCount(); k++)
-		{
-			std::string AnCode = P.GetAncode(k);
-			uint64_t Grammems;
-			if (!Agramtab->GetGrammems(AnCode.c_str(), Grammems))
-				throw CExpc("Bad ancode in  BuildGenitFormOfCardinal");
-			if ((Grammems & _QM(rGenitiv)) > 0)
-				break;
-		};
-		assert(k < P.GetCount());
-		GenitFormsOfCardinal.push_back(P.GetWordForm(k));
-	};
-	return true;
-};
-
-
-
-double GetGenitFormNumeral(std::string word)
-{
-	for (size_t i = 0; i < GenitFormsOfCardinal.size(); i++)
-		if (word == GenitFormsOfCardinal[i])
-			return NumeralToNumber[i].m_Number;
-	return -1;
-};
-
-
-// выдает длину максимального префикса слова word, который совпадает с одним из 
-// генитивных вариантов числительного.
-// Если такого генитивного  варианта не было обнаружено, то 
-// проверяются некоторые фонетические  варианты  этих префиксов.
-int GetNumeralPrefixGenitForm(std::string word, int& maxPrefixLength)
-{
-	maxPrefixLength = -1;
-	long NumLine = -1;
-
-
-	for (int i = 0; i < GenitFormsOfCardinal.size(); i++)
-	{
-		long len = GenitFormsOfCardinal[i].length();
-		if (len > maxPrefixLength)
-			if (startswith(word, GenitFormsOfCardinal[i]))
-			{
-				NumLine = i;
-				maxPrefixLength = len;
-			};
-	};
-
-	if (maxPrefixLength < 3)
-		if (startswith(word, _R("ДВУ"))) // двуногий
-		{
-			NumLine = 2;
-			maxPrefixLength = 3;
-			assert(NumeralToNumber[NumLine].m_Number == 2);
-		};
-
-	if (maxPrefixLength < 5)
-		if (startswith(word, _R("ДВУХЪ"))) // двухъярусный
-		{
-			NumLine = 2;
-			maxPrefixLength = 5;
-			assert(NumeralToNumber[NumLine].m_Number == 2);
-		};
-
-	if (maxPrefixLength < 5)
-		if (startswith(word, _R("ТРЕХЪ"))) // трехъярусный
-		{
-			NumLine = 3;
-			maxPrefixLength = 5;
-			assert(NumeralToNumber[NumLine].m_Number == 3);
-		};
-
-	if (maxPrefixLength < 8)
-		if (startswith(word, _R("ЧЕТЫРЕХЪ"))) // четырехъярусный
-		{
-			NumLine = 4;
-			maxPrefixLength = 8;
-			assert(NumeralToNumber[NumLine].m_Number == 4);
-		};
-
-	if (maxPrefixLength < 4)
-		if (startswith(word, _R("ОДНО"))) // одноэтажный
-		{
-			NumLine = 0;
-			maxPrefixLength = 4;
-			assert(NumeralToNumber[NumLine].m_Number == 1);
-		};
-
-	if (maxPrefixLength < 4)
-		if (startswith(word, _R("НУЛЬ"))) // нульмодемный
-		{
-			NumLine = NumeralToNumberCount;
-			maxPrefixLength = 4;
-			assert(NumeralToNumber[NumLine].m_Number == 0);
-		};
-
-	return NumLine;
-};
-
 double FindInTable(std::string word)
 {
-	double Result = GetOrdinalNumeral(word);
+	double Result = RussianNumerals.GetOrdinalNumeral(word);
 	if (Result == -1)
 	{
-		Result = GetCardinalNumeral(word);
+		Result = RussianNumerals.GetCardinalNumeral(word);
 
 		if (Result == -1)
-			Result = GetNounNumeral(word);
+			Result = RussianNumerals.GetNounNumeral(word);
 	};
 	return Result;
 };
@@ -211,7 +44,7 @@ double ConvertNumeralByTable(std::vector<CRusSemWord>::const_iterator Start, std
 
 		// порядок должен уменьшаться 
 		// например "сто двадцать шесть" - нормально, а "шесть двадцать сто" - нет
-		long CurrLength = IntToStr(Res).length();
+		long CurrLength = DoubleToStr(Res).length();
 		if (CurrLength >= LastLength)	  return -1;
 		LastLength = CurrLength;
 
@@ -224,7 +57,7 @@ double ConvertNumeralByTable(std::vector<CRusSemWord>::const_iterator Start, std
 
 static bool ConvertOneWordOrdinalNumeral(const std::string& InputOrdinal, string& result)
 {
-	result = IntToStr(GetOrdinalNumeral(InputOrdinal));
+	result = DoubleToStr(RussianNumerals.GetOrdinalNumeral(InputOrdinal));
 	if (result != "-1") {
 		return true;
 	}
@@ -234,27 +67,27 @@ static bool ConvertOneWordOrdinalNumeral(const std::string& InputOrdinal, string
 	for (;;)
 	{
 		int PrefixLength = -1;
-		int LineNo = GetNumeralPrefixGenitForm(Word, PrefixLength);
-		if (LineNo == -1) break;
-		Word.erase(0, PrefixLength);
-		PrefixNumber += (long)NumeralToNumber[LineNo].m_Number;
+		auto prefix = RussianNumerals.FindAdjPrefix(Word);
+		if (prefix == nullptr) break;
+		Word.erase(0, prefix->Prefix.length());
+		PrefixNumber += (long)prefix->Parent->m_Number;
 	};
 
 	if (Word == InputOrdinal) {
 		return false;
 	}
-	double lastRes = GetOrdinalNumeral(Word);
+	double lastRes = RussianNumerals.GetOrdinalNumeral(Word);
 	if (lastRes >= 1000)  //"тысячный" или "миллионный"
-		result = IntToStr(PrefixNumber * lastRes);
+		result = DoubleToStr(PrefixNumber * lastRes);
 	else
-		result = IntToStr(PrefixNumber) + '#' + Word;
+		result = DoubleToStr(PrefixNumber) + '#' + Word;
 	return true;
 };
 
 
 double ConvertNumeralByOrderRecursive(std::vector<CRusSemWord>::const_iterator Start, std::vector<CRusSemWord>::const_iterator End, uint64_t Order)
 {
-	std::string OrderStr = FindByNumber(Order);
+	std::string OrderStr = RussianNumerals.FindByNumber(Order);
 	std::string Result;
 	if (Order == 1)
 	{
@@ -281,12 +114,15 @@ bool FullAdjWithNumeralPrefix(const CRusSemNode& Node)
 {
 	if (!Node.IsPrimitive()) return false;
 	if (!Node.m_Words[0].HasPOS(ADJ_FULL)) return false;
-	int dummy;
-	if (GetNumeralPrefixGenitForm(Node.m_Words[0].m_Word, dummy) == -1) return false;
+	if (RussianNumerals.FindAdjPrefix(Node.m_Words[0].m_Word) == nullptr) {
+		return false;
+	}
 	if (Node.m_Words[0].m_Word.substr(0, 3) == _R("СТО"))
 	{
 		std::string Word = Node.m_Words[0].m_Word.substr(3);
-		if (GetNumeralPrefixGenitForm(Word, dummy) != -1) return true;
+		if (RussianNumerals.FindAdjPrefix(Word) != nullptr) {
+			return true;
+		}
 	};
 	if ((Node.m_Words[0].m_Word.substr(0, 3) == _R("СТО"))
 		|| (Node.m_Words[0].m_Word.substr(0, 4) == _R("ОДНО"))
@@ -330,12 +166,11 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 	};
 
 	std::string  ConvertedWord;
-	int dummy;
 	if ((node.IsPrimitive())
 		&& (node.m_Words[0].HasPOS(NUMERAL_P)
 			|| (
 				node.m_Words[0].HasPOS(ADJ_FULL)
-				&& (GetNumeralPrefixGenitForm(node.m_Words[0].m_Word, dummy) != -1)
+				&& (RussianNumerals.FindAdjPrefix(node.m_Words[0].m_Word) != nullptr)
 				)
 			)
 		)
@@ -371,7 +206,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 					float Res = FindInTable(node.m_Words[i].m_Lemma);
 					if (Res != -1)
 					{
-						node.m_Words[i].m_Word = IntToStr(Res);;
+						node.m_Words[i].m_Word = DoubleToStr(Res);;
 						node.m_Words[i].m_Lemma = "";
 						node.m_Words[i].m_ParadigmId = -1;
 					};
@@ -379,7 +214,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 				};
 			return;
 		};
-		ConvertedWord = IntToStr(number);
+		ConvertedWord = DoubleToStr(number);
 	}
 
 	std::string  ConvertedWordHyphen = "-1";
@@ -389,7 +224,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 		node.m_Words[0].m_Lemma = LemmaAfterHyphen;
 		double number;
 		if (ConvertRusNumeral(node, number)) {
-			ConvertedWordHyphen = IntToStr(number);
+			ConvertedWordHyphen = DoubleToStr(number);
 		}
 	};
 
@@ -477,10 +312,10 @@ void CRusSemStructure::NumeralAdverbRule()
 		{
 			std::string Word = m_Nodes[NumNodeNo].m_Words[0].m_Word;
 			EngRusMakeUpper(Word);
-			long NumeralValue = IsAdverbRule(Word);
+			long NumeralValue = RussianNumerals.IsAdverbRule(Word);
 			if (NumeralValue == -1)  continue;
 			m_Nodes[NumNodeNo].m_Words[0].m_Lemma = "";
-			m_Nodes[NumNodeNo].m_Words[0].m_Word = IntToStr(NumeralValue);
+			m_Nodes[NumNodeNo].m_Words[0].m_Word = DoubleToStr(NumeralValue);
 			m_Nodes[NumNodeNo].m_Words[0].m_ParadigmId = -1;
 			m_Nodes[NumNodeNo].SetMainWordNo(0);
 

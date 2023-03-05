@@ -780,7 +780,7 @@ bool CRusFormatCaller::format_for_noun_number_private(CGroup& G)
 	if (is_numeral(Num))
 	{
 		//  с числительными "МНОГО" или "МАЛО" не надо образовывать АППРОКС_ИГ
-		if (GetCardinalNumeral(Num.get_lemma()) == -1 && !Num.HasFlag(fl_digit))
+		if (RussianNumerals.GetCardinalNumeral(Num.get_lemma()) == -1 && !Num.HasFlag(fl_digit))
 			return false;
 	}
 	else

@@ -1416,9 +1416,6 @@ std::string CSemanticStructure::GetOtherRelations()
 };
 
 
-extern bool BuildGenitFormOfCardinal(const CLemmatizer* piRusLemmatizer, const CRusGramTab* Agramtab);
-
-
 bool CSemanticsHolder::InitializeIndices()
 {
 	// проверка того, что хотя бы один словарь был изменен
@@ -1532,12 +1529,6 @@ bool CSemanticsHolder::InitializeIndices()
 		return false;
 	};
 
-
-	if (!BuildGenitFormOfCardinal(GetRusLemmatizer(), GetRusGramTab()))
-	{
-		ErrorMessage("BuildGenitFormOfCardinal failed");
-		return false;
-	};
 
 	if (!BuildCollocs())
 	{

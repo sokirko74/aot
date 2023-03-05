@@ -43,6 +43,5 @@ target_link_libraries(${PROJECT_NAME}
     MorphWizardLib
 )
 
-CopyExe(${PROJECT_NAME})
 
 

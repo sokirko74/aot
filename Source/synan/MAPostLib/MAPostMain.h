@@ -133,7 +133,7 @@ protected:
 	void Rule_CHTO_ZA();
 	void Rule_VOT_UZHE();
 	void Rule_Fio();
-
+	
 	bool CanBeDubleDelimiter(CLineIter it);
 	void InsertComma(CLineIter it);
 	void Rule_UnknownNames();
