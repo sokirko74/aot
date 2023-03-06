@@ -72,7 +72,7 @@
     {
         "comments": "",
         "input": "Если она сработает правильно, вас спросят, хотите ли вы послать, отредактировать, прервать или внести в список сообщение, над которым вы работаете.",
-        "result": "If it works correctly you will be asked whether you want to send, to abort to edit or to list a message at which you work."
+        "result": "If it works correctly you will be asked whether you want to send, to edit, to abort or to list a message at which you work."
     },
     {
         "comments": "",
@@ -522,7 +522,7 @@
     {
         "comments": "",
         "input": "он был больше похож на учителя, чем на сторожа.",
-        "result": "He was similar to the teacher more than the guards."
+        "result": "He was similar to the teacher more than the guard."
     },
     {
         "comments": "",
@@ -682,7 +682,7 @@
     {
         "comments": "",
         "input": "Следователь объясняет специалисту его права и обязанности и предупреждает об ответственности за отказ или уклонение от выполнения своих обязанностей.",
-        "result": "The coroner explains his right and duties to the specialist and refusal or the deviation of the execution of one's duties warn against responsibility."
+        "result": "The coroner explains his right and duties to the specialist and warns against responsibility for refusal or the deviation of the execution of his duties."
     },
     {
         "comments": "",

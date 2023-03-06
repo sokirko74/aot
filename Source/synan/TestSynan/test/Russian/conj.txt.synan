@@ -389,14 +389,14 @@
                                 ],
                                 "syn_units": [
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "БЕЛОРУСС",
@@ -409,14 +409,14 @@
                                         "morph_info": " "
                                     },
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ВЕЛИКОРОСС",
@@ -429,14 +429,14 @@
                                         "morph_info": " "
                                     },
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "КАЗАК",
@@ -449,14 +449,14 @@
                                         "morph_info": " "
                                     },
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ГРУЗИН",
@@ -469,14 +469,14 @@
                                         "morph_info": " "
                                     },
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "КАЛМЫК",
@@ -489,14 +489,14 @@
                                         "morph_info": " "
                                     },
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "КРЫМСКИЙ",
@@ -514,14 +514,14 @@
                                         "morph_info": " "
                                     },
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "РУСИН",
@@ -534,14 +534,14 @@
                                         "morph_info": " "
                                     },
                                     {
-                                        "lemma": "ТОТ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
+                                        "lemma": "ТО",
+                                        "modified_grammems": "",
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЛИ",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "УКРАИНЕЦ",
@@ -1505,7 +1505,7 @@
                                     {
                                         "lemma": "ТАК",
                                         "modified_grammems": "",
-                                        "morph_info": "ЧАСТ ; "
+                                        "morph_info": "СОЮЗ ; "
                                     },
                                     {
                                         "lemma": "ЧИТАТЬ",
@@ -1587,7 +1587,7 @@
                                     {
                                         "lemma": "ТАК",
                                         "modified_grammems": "",
-                                        "morph_info": "СОЮЗ ; "
+                                        "morph_info": "ЧАСТ ; "
                                     },
                                     {
                                         "lemma": "ЧИТАТЬ",
@@ -1897,74 +1897,6 @@
                                 "groups": [
                                     {
                                         "type": "ОДНОР_ИГ",
-                                        "words": "ботинки , пальто , печь"
-                                    },
-                                    {
-                                        "type": "ПРЯМ_ДОП",
-                                        "words": "шить ботинки , пальто , печь"
-                                    },
-                                    {
-                                        "type": "ПЕР_ГЛАГ_ИНФ",
-                                        "words": "хочу шить ботинки , пальто , печь"
-                                    },
-                                    {
-                                        "type": "ПРИДАТ_ОПР",
-                                        "words": "хлеб , который посеял"
-                                    }
-                                ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "Я",
-                                        "modified_grammems": "1л,им,ед,",
-                                        "morph_info": "МС 1л,им,ед,; "
-                                    },
-                                    {
-                                        "lemma": "ХОТЕТЬ",
-                                        "modified_grammems": "дст,1л,нст,ед,",
-                                        "morph_info": "Г дст,1л,нст,ед,; "
-                                    },
-                                    {
-                                        "lemma": "ШИТЬ",
-                                        "modified_grammems": "дст,",
-                                        "morph_info": "ИНФИНИТИВ дст,; "
-                                    },
-                                    {
-                                        "lemma": "БОТИНОК",
-                                        "modified_grammems": "мр,вн,им,мн,",
-                                        "morph_info": "С мр,им,мн,; мр,вн,мн,; "
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    },
-                                    {
-                                        "lemma": "ПАЛЬТО",
-                                        "modified_grammems": "ср,пр,тв,вн,дт,рд,им,ед,",
-                                        "morph_info": "С ср,им,ед,; ср,рд,ед,; ср,дт,ед,; ср,вн,ед,; ср,тв,ед,; ср,пр,ед,; "
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    },
-                                    {
-                                        "lemma": "ПЕЧЬ",
-                                        "modified_grammems": "жр,вн,им,ед,",
-                                        "morph_info": "С жр,им,ед,; жр,вн,ед,; "
-                                    },
-                                    {
-                                        "lemma": "ХЛЕБ",
-                                        "modified_grammems": "мр,вн,им,ед,",
-                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
-                                    }
-                                ]
-                            },
-                            {
-                                "clause_type": "ГЛ_ЛИЧН",
-                                "groups": [
-                                    {
-                                        "type": "ОДНОР_ИГ",
                                         "words": "ботинки , пальто"
                                     },
                                     {
@@ -2035,6 +1967,74 @@
                                         "morph_info": "С мр,им,ед,; мр,вн,ед,; "
                                     }
                                 ]
+                            },
+                            {
+                                "clause_type": "ГЛ_ЛИЧН",
+                                "groups": [
+                                    {
+                                        "type": "ОДНОР_ИГ",
+                                        "words": "ботинки , пальто , печь"
+                                    },
+                                    {
+                                        "type": "ПРЯМ_ДОП",
+                                        "words": "шить ботинки , пальто , печь"
+                                    },
+                                    {
+                                        "type": "ПЕР_ГЛАГ_ИНФ",
+                                        "words": "хочу шить ботинки , пальто , печь"
+                                    },
+                                    {
+                                        "type": "ПРИДАТ_ОПР",
+                                        "words": "хлеб , который посеял"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "Я",
+                                        "modified_grammems": "1л,им,ед,",
+                                        "morph_info": "МС 1л,им,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ХОТЕТЬ",
+                                        "modified_grammems": "дст,1л,нст,ед,",
+                                        "morph_info": "Г дст,1л,нст,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ШИТЬ",
+                                        "modified_grammems": "дст,",
+                                        "morph_info": "ИНФИНИТИВ дст,; "
+                                    },
+                                    {
+                                        "lemma": "БОТИНОК",
+                                        "modified_grammems": "мр,вн,им,мн,",
+                                        "morph_info": "С мр,им,мн,; мр,вн,мн,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПАЛЬТО",
+                                        "modified_grammems": "ср,пр,тв,вн,дт,рд,им,ед,",
+                                        "morph_info": "С ср,им,ед,; ср,рд,ед,; ср,дт,ед,; ср,вн,ед,; ср,тв,ед,; ср,пр,ед,; "
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "modified_grammems": "",
+                                        "morph_info": " "
+                                    },
+                                    {
+                                        "lemma": "ПЕЧЬ",
+                                        "modified_grammems": "жр,вн,им,ед,",
+                                        "morph_info": "С жр,им,ед,; жр,вн,ед,; "
+                                    },
+                                    {
+                                        "lemma": "ХЛЕБ",
+                                        "modified_grammems": "мр,вн,им,ед,",
+                                        "morph_info": "С мр,им,ед,; мр,вн,ед,; "
+                                    }
+                                ]
                             }
                         ],
                         "last": 11,
@@ -2059,62 +2059,12 @@
                         "src": "хочу",
                         "src_grm": "дст,пе,нс,1л,нст,ед,",
                         "src_lemma": "ХОТЕТЬ",
-                        "trg": "шить",
-                        "trg_grm": "дст,пе,нс,",
-                        "trg_lemma": "ШИТЬ"
-                    },
-                    {
-                        "gramrel": "дст,пе,нс,",
-                        "name": "ПРЯМ_ДОП",
-                        "src": "шить",
-                        "src_grm": "дст,пе,нс,",
-                        "src_lemma": "ШИТЬ",
                         "trg": ",",
                         "trg_grm": "",
                         "trg_lemma": ","
                     },
                     {
-                        "gramrel": "но,вн,",
-                        "name": "ОДНОР_ИГ",
-                        "src": ",",
-                        "src_grm": "",
-                        "src_lemma": ",",
-                        "trg": "ботинки",
-                        "trg_grm": "но,мр,вн,им,мн,",
-                        "trg_lemma": "БОТИНОК"
-                    },
-                    {
-                        "gramrel": "но,вн,",
-                        "name": "ОДНОР_ИГ",
-                        "src": ",",
-                        "src_grm": "",
-                        "src_lemma": ",",
-                        "trg": "пальто",
-                        "trg_grm": "0,но,ср,пр,тв,вн,дт,рд,им,ед,",
-                        "trg_lemma": "ПАЛЬТО"
-                    },
-                    {
-                        "gramrel": "но,вн,",
-                        "name": "ОДНОР_ИГ",
-                        "src": ",",
-                        "src_grm": "",
-                        "src_lemma": ",",
-                        "trg": ",",
-                        "trg_grm": "",
-                        "trg_lemma": ","
-                    },
-                    {
-                        "gramrel": "но,вн,",
-                        "name": "ОДНОР_ИГ",
-                        "src": ",",
-                        "src_grm": "",
-                        "src_lemma": ",",
-                        "trg": "печь",
-                        "trg_grm": "но,жр,вн,им,ед,",
-                        "trg_lemma": "ПЕЧЬ"
-                    },
-                    {
-                        "gramrel": "но,мр,вн,им,ед,",
+                        "gramrel": "но,мр,вн,ед,",
                         "name": "ПРИДАТ_ОПР",
                         "src": "хлеб",
                         "src_grm": "но,мр,вн,им,ед,",
@@ -2122,6 +2072,36 @@
                         "trg": "посеял",
                         "trg_grm": "дст,пе,св,прш,мр,ед,",
                         "trg_lemma": "ПОСЕЯТЬ"
+                    },
+                    {
+                        "gramrel": "дст,пе,нс,",
+                        "name": "ПРЯМ_ДОП",
+                        "src": "печь",
+                        "src_grm": "дст,пе,нс,",
+                        "src_lemma": "ПЕЧЬ",
+                        "trg": "хлеб",
+                        "trg_grm": "но,мр,вн,им,ед,",
+                        "trg_lemma": "ХЛЕБ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_ИНФ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "шить",
+                        "trg_grm": "дст,пе,нс,",
+                        "trg_lemma": "ШИТЬ"
+                    },
+                    {
+                        "gramrel": "",
+                        "name": "ОДНОР_ИНФ",
+                        "src": ",",
+                        "src_grm": "",
+                        "src_lemma": ",",
+                        "trg": "печь",
+                        "trg_grm": "дст,пе,нс,",
+                        "trg_lemma": "ПЕЧЬ"
                     },
                     {
                         "gramrel": "",

@@ -7,8 +7,8 @@
 
 
 
-typedef CSmallVector<CHomonym*, 5> SmallHomonymsVec;
-typedef CSmallVector<CLineIter, 5> SmallWordsVec;
+typedef std::vector<CHomonym*> HomonymVector;
+typedef std::vector<CLineIter> InputWordVector;
 
 
 enum FioItemTypeEnum { fiName, fiSurname, fiMiddle, fiAbbr, fiStop, fiRoman, fiProbName, fiString, fiOrdinal };
@@ -70,24 +70,6 @@ struct CFIOFormat
 };
 
 
-static void GetCommonVariants(const std::vector<SmallHomonymsVec>& Parents,
-	SmallHomonymsVec& V,
-	std::vector<SmallHomonymsVec>& Variants,
-	long       Position)
-{
-	if (Variants.size() > 1000) return;
-	if (Position < V.size())
-		for (long i = 0; i < Parents[Position].size(); i++)
-		{
-			V.m_VectorItems[Position] = Parents[Position].m_VectorItems[i];
-			GetCommonVariants(Parents, V, Variants, Position + 1);
-		}
-	else
-		Variants.push_back(V);
-
-};
-
-
 static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& Word, const CHomonym* pH)
 {
 	if (Word.HasDes(OFAM1) || Word.HasDes(OFAM2))    return false;
@@ -124,62 +106,100 @@ bool IsPartOfNonSingleOborot(const CHomonym* pH)
 	return pH->m_bOborot1 != pH->m_bOborot2;
 }
 
+bool get_next_variant(const std::vector<HomonymVector>& base, std::vector<size_t>& cur_variant) {
+
+	if (cur_variant.empty()) {
+		cur_variant.resize(base.size(), 0);
+		return true;
+	}
+	assert(base.size() == cur_variant.size());
+
+	for (size_t i = 0; i < cur_variant.size(); ++i) {
+		if (cur_variant[i] + 1 < base[i].size()) {
+			++cur_variant[i];
+			return true;
+		}
+		cur_variant[i] = 0;
+	}
+	return false;
+}
+
 bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 {
-	std::vector<SmallHomonymsVec> Hypots;
-	SmallWordsVec FioWords;
-
-	Hypots.resize(Format->m_FioItems.size());
-
-	int CountOfVariants = 1;
-	for (long ItemNo = 0; ItemNo < Format->m_FioItems.size() && it != m_Words.end(); ItemNo++, it = NextNotSpace(it))
+	std::vector<HomonymVector> Hypots;
+	InputWordVector FioWords;
+	size_t variants_count = 1;
+	for (auto& fio_item: Format->m_FioItems)
 	{
-		FioWords.Add(it);
 		CPostLemWord& W = *it;
-
+		HomonymVector homs;
 		for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++)
 		{
 			CHomonym* pH = W.GetHomonym(HomNo);
 			// иначе "Т.Е. ОТКАЗАТЬСЯ" будет ФИО
 			if (IsPartOfNonSingleOborot(pH)) return false;
 
-			if (IsPartFio(*this, Format->m_FioItems[ItemNo], W, pH))
-				Hypots[ItemNo].Add(pH);
+			if (IsPartFio(*this, fio_item, W, pH)) {
+				homs.push_back(pH);
+			}
 		};
-		if (Hypots[ItemNo].empty()) return false;
-		CountOfVariants *= Hypots[ItemNo].size();
+		if (homs.empty()) {
+			return false;
+		}
+		variants_count *= homs.size();
+		Hypots.push_back(homs);
+		FioWords.push_back(it);
+
+		it = NextNotSpace(it);
+		if (it == m_Words.end()) {
+			break;
+		}
 	};
 
 	if (FioWords.size() != Format->m_FioItems.size()) return false; // не достроилось
+	assert(FioWords.size() == Hypots.size());
 
-	SmallHomonymsVec V; // текущий вариант 
-	std::vector<SmallHomonymsVec> Variants;
-	Variants.reserve(CountOfVariants);
-	V.m_ItemsCount = Hypots.size();
-	GetCommonVariants(Hypots, V, Variants, 0);
-
-	if (Format->m_GleicheCase)
-		for (long VarNo = 0; VarNo < Variants.size(); VarNo++)
+	std::vector<size_t> best_var;
+	if (!Format->m_GleicheCase) {
+		best_var.resize(Hypots.size(), 0);
+	}
+	else {
+	std::vector<size_t> cur_variant;
+		size_t processed_vars_count = 0;
+		int max_variant_weight = -1;
+		while (get_next_variant(Hypots, cur_variant))
 		{
 			uint64_t Grammems = rAllCases | rAllNumbers;
-			for (long i = 0; i < Variants[VarNo].size(); i++)
+			for (size_t i = 0; i < cur_variant.size(); ++i)
 			{
-				Grammems &= Variants[VarNo].m_VectorItems[i]->m_iGrammems;
+				Grammems &= Hypots[i][cur_variant[i]]->m_iGrammems;
 			};
-			if ((Grammems & rAllCases) == 0 || (Grammems & rAllNumbers) == 0)
+			int variant_weight = 0;
+			if ((Grammems & rAllCases) && (Grammems & rAllNumbers))
 			{
-				Variants.erase(Variants.begin() + VarNo);
-				VarNo--;
+				variant_weight = 1;
 			};
-
+			if ((Grammems & rAllCases) && (Grammems & _QM(rSingular)))
+			{
+				variant_weight = 2;
+			};
+			if (variant_weight > max_variant_weight) {
+				max_variant_weight = variant_weight;
+				best_var = cur_variant;
+			}
+ 			processed_vars_count++;
+			if (processed_vars_count > 1000) {
+				break;;
+			}
 		};
+	}
 
-	if (Variants.empty()) return false;
-
+	if (best_var.empty()) return false;
+	
 	for (size_t i = 0; i < FioWords.size(); i++)
 	{
 		CPostLemWord& W = *FioWords[i];
-		CHomonym* pH = Variants[0].m_VectorItems[i];
+		CHomonym* pH = Hypots[i][best_var[i]];
 		W.SetHomonymsDel(true);
 		pH->m_bDelete = false;
 		pH->DeleteOborotMarks(); // удаляем однословные оборотыб (многословных там быть не может)
@@ -195,7 +215,6 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 				FioWords.back()->AddDes(OSentEnd);
 		}
 	}
-
 	// ставим графем. пометы
 	FioWords[0]->AddDes(OFAM1);
 	FioWords.back()->AddDes(OFAM2);
