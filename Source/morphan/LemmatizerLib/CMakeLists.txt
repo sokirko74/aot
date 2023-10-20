@@ -5,6 +5,9 @@ project(LemmatizerLib)
 add_library(LemmatizerLib
         PLMLineCollection.cpp
         GraphanAndMorphanHolder.cpp
+        GraphanAndMorphanHolder.h
+        PLMLineCollection.h
+
 )
 
 target_link_libraries(LemmatizerLib

@@ -7,7 +7,19 @@ set(my_SOURCES
         MorphXmlToken.cpp
         PlmLine.cpp
         gra_descr.cpp
-        )
+        BigramsReader.h
+        Chunk.h
+        cortege.h
+        gra_descr.h
+        gra_descr_primitives.h
+        Graspace.h
+        Homonym.h
+        http_server.h
+        LemWord.h
+        MorphXmlToken.h
+        PlmLine.h
+
+)
 
 if (COMPILE_WITH_HTTP)
     set(my_SOURCES ${my_SOURCES} http_server.cpp)

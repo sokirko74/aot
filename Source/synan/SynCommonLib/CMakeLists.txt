@@ -19,6 +19,16 @@ add_library(SynCommonLib
         RelationsIterator.cpp
         SyntaxInit.cpp
         oborot.cpp
+        Clause.h
+        FormatCaller.h
+        Group.h
+        oborot.h
+        Period.h
+        stdafx.h
+        SyntaxInit.h
+        ThesaurusForSyntax.h
+        MorphVariant.h
+        Word.h
 )
 
 target_link_libraries(SynCommonLib

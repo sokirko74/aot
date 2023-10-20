@@ -31,6 +31,14 @@ add_library(Transfer
         TransTense.cpp
         TranseClause.cpp
         TranslateToEnglish.cpp
+        EngBinaryTranslate.h
+        EngNumerals.h
+        EngPrimitives.h
+        EngSemStructure.h
+        EngSynthes.h
+        EngVerbTense.h
+        StdAfx.h
+
 )
 
 target_link_libraries(Transfer

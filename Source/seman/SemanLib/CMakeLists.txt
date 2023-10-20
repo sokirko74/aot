@@ -40,6 +40,21 @@ add_library(SemanLib
         stdafx.cpp
         VisualGraph.cpp
         SemanticWeightComponents.cpp
+        AllRossesHolder.h
+        DictUnitInterp.h
+        HierarchyHolder.h
+        LexFuncts.h
+        RossHolder.h
+        SemanticRusStructure.h
+        SemanticsHolder.h
+        SemanticStructure.h
+        SemanticWeight.h
+        SemPattern.h
+        SemStructureBuilder.h
+        stdafx.h
+        TranslatorHolder.h
+        Valency.h
+        VisualGraph.h
 )
 
 target_link_libraries(SemanLib
