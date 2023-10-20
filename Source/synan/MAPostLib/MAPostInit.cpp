@@ -21,8 +21,7 @@ CPostMorphInteface* NewRussianPostMorph(const CLemmatizer* RusLemmatizer, const 
 CMAPost::CMAPost()
 {
 	m_Language = morphRussian;
-    m_bUseTrigrams = false;
-	m_LogFileName = "";
+    m_LogFileName = "";
 	m_bCanChangeInputText = true;
     m_bHumanFriendlyOutput = false;
 
@@ -138,13 +137,6 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 			return false;
 		};
 	    
-        std::string TrigramConfig = GetRegistryString("TrigramConfig");
-        if (!TrigramConfig.empty())
-        {
-            m_bUseTrigrams = true;    
-            m_TrigramModel.InitModelFromConfigAndBuildTagset(BuildRMLPath(TrigramConfig.c_str()), m_pRusLemmatizer, m_pRusGramTab, true);
-            m_TrigramModel.ReadBinary();
-        }
 	}
 	catch(CExpc c)
 	{

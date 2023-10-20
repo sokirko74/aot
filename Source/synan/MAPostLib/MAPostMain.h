@@ -17,8 +17,7 @@
 #include "morphan/LemmatizerLib/PLMLineCollection.h"
 #include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
 #include "morph_dict/AgramtabLib/rus_consts.h"
-#include "synan/TrigramLib/TrigramModel.h"
-#include "list"       
+#include "list"
 
 struct CFixedColloc
 {
@@ -86,8 +85,6 @@ protected:
 	const CLemmatizer*			m_pRusLemmatizer;
 	const CAgramtab*			m_pRusGramTab;
 	std::vector<CFixedColloc>        m_FixedCollocs;
-    CTrigramModel               m_TrigramModel;
-	bool                        m_bUseTrigrams;
 
 	
 

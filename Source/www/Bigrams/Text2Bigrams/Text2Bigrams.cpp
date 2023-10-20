@@ -3,16 +3,13 @@
 
 #include "morph_dict/common/util_classes.h"
 #include "graphan/GraphanLib/GraphmatFile.h"
-#include "synan/TrigramLib/TrigramModel.h"
 #include "MergeFiles.h"
 
 #include <string>
-
-#ifndef WIN32
-	#include <syslog.h>
-	#include <sys/wait.h>
-	#include <sys/signal.h>
-#endif
+#include <list>
+#include <syslog.h>
+#include <sys/wait.h>
+#include <sys/signal.h>
 
 
 void PrintUsageAndExit()
@@ -30,9 +27,6 @@ void PrintUsageAndExit()
 	fprintf (stderr,"\t      (by default it is 1000000)\n");
 	fprintf (stderr,"\t   if [--only-words] is specified then the program stores ignores all punctuation marks\n");
 	fprintf (stderr,"\t   if [--hmm-config s] is specified then the program uses HMM specified in s as a preprocessor\n");
-	
-	
-
 	exit(1);
 	
 };
@@ -115,18 +109,6 @@ interp_t GetTokensBySentences(CGraphmatFile& Graphan)
 	return Result;
 };
 
-interp_t GetLemmasFromHMM(const interp_t& Tokens, const CTrigramModel& M)
-{
-	interp_t Result;
-	std::vector<std::string> lemmas;
-	for (interp_t::const_iterator it = Tokens.begin(); it != Tokens.end(); it++)
-	{
-		M.lemmatize_sentence(*it, lemmas);
-		Result.push_back(lemmas);
-	}
-
-	return Result;
-};
 
 interp_t DeletePunctuationMarks(const interp_t& Tokens)
 {
@@ -233,11 +215,7 @@ int BuildBigrams(int argc, char* argv[])
 	};
 try 
 {
-	CTrigramModel HMM;
-	if (bUseHMM) {
-		HMM.InitModelFromConfigAndBuildTagset(HmmConfigFile);
-    }
-	
+
 	CGraphmatFile Graphan;
 	Graphan.m_Language = Langua;
 	
@@ -294,8 +272,6 @@ try
 			Graphan.LoadFileToGraphan(InputFileName);
 			size_t TokensCount = Graphan.GetUnits().size();
 			interp_t Tokens =  GetTokensBySentences(Graphan);
-			if  (bUseHMM)
-				Tokens = GetLemmasFromHMM(Tokens, HMM);
 
 			if (bOnlyWords)
 				Tokens = DeletePunctuationMarks(Tokens);

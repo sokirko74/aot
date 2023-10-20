@@ -9,6 +9,5 @@ add_executable (Text2Bigrams
 
 target_link_libraries(Text2Bigrams
     GraphanLib
-    TrigramLib
 )
 add_subdirectory (testing)

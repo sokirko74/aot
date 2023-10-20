@@ -3,9 +3,7 @@
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
 #include "MAPostMain.h"
-#include "common/PlmLine.h"
 #include "morph_dict/common/utilit.h"
-#include "synan/TrigramLib/TrigramModel.h"
 #include "morph_dict/AgramtabLib/RusGramTab.h"
 
 void CMAPost::log(std::string s)
@@ -32,9 +30,6 @@ void CMAPost::RunRules()
 	try
 	{
 		Rule_TwoPredicates();
-
-		if (m_bUseTrigrams)
-			FilterPostMorphWords();
 
 		log("Rule_FilterProperName");
 		Rule_FilterProperName();
@@ -1576,80 +1571,3 @@ void CMAPost::Rule_TwoPredicates()
 
 
 
-bool CMAPost::FilterOnePostLemWord(CPostLemWord& W, uint16_t tagid1, uint16_t tagid2) const
-{
-	std::vector<CTag> Tags = m_TrigramModel.m_TagSet.DecipherTagStr(m_TrigramModel.m_RegisteredTags[tagid1], m_pRusGramTab);
-	if (tagid2 != UnknownTag)
-	{
-		std::vector<CTag> Tags2 = m_TrigramModel.m_TagSet.DecipherTagStr(m_TrigramModel.m_RegisteredTags[tagid2], m_pRusGramTab);
-		Tags.insert(Tags.end(), Tags2.begin(), Tags2.end());
-	}
-
-	std::set<std::string> Lemmas;
-	for (size_t i = 0; i < W.GetHomonymsCount(); i++)
-	{
-		CHomonym* pH = W.GetHomonym(i);
-		bool goodHomonym = m_TrigramModel.FindGramTabLineInTags(Tags, pH->m_iPoses, pH->m_iGrammems | pH->m_TypeGrammems);
-		if ((pH->m_iPoses & (_QM(PRONOUN_PREDK) | _QM(PREDK) | _QM(PARTICLE) | _QM(PREP) | _QM(CONJ))) > 0) {
-			goodHomonym = true; // Trigram is bad for auxiliary parts of speech
-		}
-		if (pH->m_iGrammems & _QM(rImpersonal)) {
-			goodHomonym = true; // Ни у кого не хватило духу сказать ему об этом
-		}
-		if (goodHomonym) {
-			Lemmas.insert(pH->m_strLemma);
-		}
-		else {
-			pH->m_bDelete = true;
-		}
-	}
-	for (size_t i = 0; i < W.GetHomonymsCount(); i++)
-	{
-		CHomonym* pH = W.GetHomonym(i);
-		if (Lemmas.find(pH->m_strLemma) == Lemmas.end()) {
-			pH->m_bDelete = true;
-		}
-	}
-	W.SafeDeleteMarkedHomonyms();
-	return true;
-}
-
-bool CMAPost::FilterPostMorphWords()
-{
-	std::vector<std::string> tokens;
-	std::vector<CWordIntepretation> tags;
-	std::list<CPostLemWord>::iterator sent_start = m_Words.begin();
-	for (std::list<CPostLemWord>::iterator it = m_Words.begin(); it != m_Words.end(); )
-	{
-		if (it->HasDes(OSentEnd) || (tokens.size() > 150))
-		{
-			tokens.push_back(it->m_strWord);
-			if (!m_TrigramModel.viterbi(tokens, tags))
-				return false;
-			size_t WordNo = 0;
-			it++;
-			for (std::list<CPostLemWord>::iterator it2 = sent_start; it2 != it; it2++)
-			{
-				assert(WordNo < tags.size());
-				CPostLemWord& w = *it2;
-				if (w.GetHomonymsCount() > 1) {
-					FilterOnePostLemWord(w, tags[WordNo].m_TagId1, tags[WordNo].m_TagId2);
-				}
-				WordNo++;
-			}
-
-
-
-			tokens.clear();
-			tags.clear();
-			sent_start = it;
-		}
-		else
-		{
-			tokens.push_back(it->m_strWord);
-			it++;
-		}
-
-	}
-	return true;
-}

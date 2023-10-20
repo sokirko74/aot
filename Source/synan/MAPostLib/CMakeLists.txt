@@ -10,9 +10,6 @@ add_library(MAPostLib
         MapostNumbers.cpp
 )
 
-target_link_libraries(MAPostLib
-    TrigramLib
-)
 
 if (BUILD_DICTS)
     add_dependencies (MAPostLib MorphDicts TrigramData)

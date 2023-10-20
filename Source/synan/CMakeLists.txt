@@ -1,9 +1,5 @@
 declare_cmake_min_version()
 
-add_subdirectory (ConvertTrigramBinary)
-add_subdirectory (Trigram)
-add_subdirectory (TrigramLib)
-add_subdirectory (TrigramRusCorporaXml)
 add_subdirectory (GerPostMorph)
 add_subdirectory (MAPostLib)
 add_subdirectory (TestMapost)
