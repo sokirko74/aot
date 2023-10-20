@@ -1,15 +1,9 @@
-// GraphmatThick.cpp : Defines the entry point for the console application.
-//
-
-#include "morph_dict/common/util_classes.h"
 #include "graphan/GraphanLib/GraphmatFile.h"
 #include "MergeFiles.h"
 
 #include <string>
 #include <list>
-#include <syslog.h>
 #include <sys/wait.h>
-#include <sys/signal.h>
 
 
 void PrintUsageAndExit()

@@ -5,6 +5,8 @@ project(SynanLib)
 add_library(SynanLib
         SentencesCollection.cpp
         SyntaxHolder.cpp
+        SentencesCollection.h
+        SyntaxHolder.h
 )
 
 target_link_libraries(SynanLib

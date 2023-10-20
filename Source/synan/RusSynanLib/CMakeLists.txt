@@ -43,6 +43,18 @@ add_library(${PROJECT_NAME}
         similar_infs.cpp
         similar_noun_groups.cpp
         similar_numerals.cpp
+        FormatCallerInit.h
+        HomonymsKiller.h
+        RusClause.h
+        RusFormatCaller.h
+        RusGroup.h
+        RusOborot.h
+        RusPlmLine.h
+        RusSentence.h
+        RusSyntaxOpt.h
+        RusThesaurus.h
+        RusWord.h
+        StdSynan.h
 )
 
 

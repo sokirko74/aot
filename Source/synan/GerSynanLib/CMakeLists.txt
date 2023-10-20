@@ -15,6 +15,15 @@ add_library(${PROJECT_NAME}
         GerSyntaxOpt.cpp
         GerThesaurus.cpp
         GerWord.cpp
+        GerClause.h
+        GerFormatCaller.h
+        GerGroup.h
+        GerOborot.h
+        GerSentence.h
+        GerSynan.h
+        GerSyntaxOpt.h
+        GerThesaurus.h
+        GerWord.h
 )
 
 target_link_libraries(${PROJECT_NAME}

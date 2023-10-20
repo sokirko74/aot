@@ -8,6 +8,11 @@ add_library(EngSynanLib
         EngSentence.cpp
         EngSyntaxOpt.cpp
         stdafx.cpp
+        EngFormatCaller.h
+        EngOborDic.h
+        EngSentence.h
+        EngSyntaxOpt.h
+        StdAfx.h
 )
 
 target_link_libraries(EngSynanLib

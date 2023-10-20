@@ -20,6 +20,15 @@ add_library(SimpleGrammarLib
         SourceGrammarParser.cpp
 		${PROJECT_SOURCE_DIR}/chunker_yacc.cpp
 		${PROJECT_SOURCE_DIR}/chunker_lex.cpp
+        AhoKorasick.h
+        GLR.h
+        GLRTable.h
+        GrammarItem.h
+        InputSymbol.h
+		LR-items.h
+		my_stl.h
+		SimpleGrammar.h
+		SimpleGrammarLib.h
 )
 
 target_link_libraries(SimpleGrammarLib

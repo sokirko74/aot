@@ -8,6 +8,9 @@ add_library(MAPostLib
         MAPostMain.cpp
         PostLemWord.cpp
         MapostNumbers.cpp
+        MAPostMain.h
+        PostMorphInterface.h
+        PostLemWord.h
 )
 
 
