@@ -1383,7 +1383,6 @@ public:
 		// выдает все узлы клаузы, в которые не входит ни одного отношения, за исключением тех узлов, что помечены CSemNode::m_bToDelete
 		void			GetClauseRootsWithoutDeleted (size_t ClauseNo, std::vector<long>& Nodes) const;
 		void			DelNode(long NodeNo);
-		void			PrintMemRelations() const;
 		// выдает нормальную форму причастия (мр, ед)
 		std::string			GetNormOfParticiple (const CRusSemWord& W) const;
 

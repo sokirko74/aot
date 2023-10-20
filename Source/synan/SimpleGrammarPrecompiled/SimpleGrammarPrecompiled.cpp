@@ -59,7 +59,10 @@ int main(int argc, const char **argv) {
 #ifdef WIN32
     _chdir(currdir);
 #else
-    chdir(currdir);
+    if (chdir(currdir) != 0) {
+        std::cerr << "Cannot chdir to  " << currdir << "\n";
+        return 1;
+    }
 #endif
 
     if (!WorkGrammar.SavePrecompiled(GrammarFileName)) {

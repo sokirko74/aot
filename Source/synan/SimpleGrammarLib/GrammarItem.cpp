@@ -95,7 +95,7 @@ bool CMorphPattern::FromString(const std::string& line)
 	#ifdef WIN32
 		if (sscanf(line.c_str(),  "%I64i %i %i %[^\x1]", &m_Grammems, &m_Poses, &iStatus,buff1) != 4) return false;
 	#else
-		if (sscanf(line.c_str(),  "%lli %i %i %[^\x1]", &m_Grammems,&m_Poses, &iStatus, buff1) != 4) return false;
+		if (sscanf(line.c_str(),  "%lli %li %i %[^\x1]", &m_Grammems, &m_Poses, &iStatus, buff1) != 4) return false;
 	#endif
 
 	m_GrmAttribute = buff1;
