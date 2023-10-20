@@ -43,7 +43,6 @@ else()
 endif()
 
 
-add_subdirectory (tinyxml)
 add_subdirectory (common)
 add_subdirectory (morph_dict)
 add_subdirectory (dicts)

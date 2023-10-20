@@ -4,7 +4,6 @@ set(my_SOURCES
         BigramsReader.cpp
         Homonym.cpp
         LemWord.cpp
-        MorphXmlToken.cpp
         PlmLine.cpp
         gra_descr.cpp
         BigramsReader.h
@@ -16,7 +15,6 @@ set(my_SOURCES
         Homonym.h
         http_server.h
         LemWord.h
-        MorphXmlToken.h
         PlmLine.h
 
 )
