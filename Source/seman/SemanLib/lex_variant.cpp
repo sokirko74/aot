@@ -1427,7 +1427,7 @@ long CRusSemStructure::GetClauseSyntaxTop(long ClauseNo) const
 
 void CRusSemStructure::BuildSemNodesBySyntax() 
 {
-  	rml_TRACE ("starting BuildSemNodesBySyntax\n");	
+  	LOGV <<"starting BuildSemNodesBySyntax";	
 	m_SynRelations.clear();
 	m_SynClauseRels.clear();
 	m_Relations.clear();

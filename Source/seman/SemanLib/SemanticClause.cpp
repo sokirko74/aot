@@ -2286,7 +2286,7 @@ void CRusSemStructure::ApplyClauseRules(long GapSize)
 	catch (...)
 	{
 		ErrorMessage("ApplyClauseRules failed");
-		rml_TRACE("ApplyClauseRules failed");
+		LOGE << "ApplyClauseRules failed";
 		throw;
 	};
 

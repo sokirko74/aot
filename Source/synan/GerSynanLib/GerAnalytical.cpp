@@ -335,7 +335,7 @@ bool UniteLeftAndRightPart(CGerSentence& C, const CDividedUnionInfo Info)
 	std::string dump = AuxWord.m_strWord + " " +W.m_strWord;
 	if (Info.m_RAP.size() == 2)
 		dump += " "+C.m_Words[Info.m_RAP.m_iLastWord].m_strWord;
-	rml_TRACE("divided analytical form \"%s\" was created\n", dump.c_str());
+	LOGV << "divided analytical form \"" << dump << "\" was created";
 
 	return true;
 };
@@ -634,7 +634,7 @@ void UnitNormalCompactAnalyticalForms(CGerSentence &C, int StartWordNo, int Last
 		dump = C.m_Words[i-1].m_strWord+ " "+dump;
 
 	};
-	rml_TRACE("compact analytical form \"%s\" was created\n", dump.c_str());
+	LOGV << "compact analytical form \"" << dump << "\" was created";
 	
 
 };

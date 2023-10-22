@@ -85,11 +85,10 @@ void  CSemPattern::InsertReverseSynOToTheBegining()
 
 void CSemPattern::TracePattern () const
 {
-	std::string Q = Format ("%s\n",m_PatternValency.m_RelationStr.c_str());
-	rml_TRACE (Q.c_str());
+	LOGV << m_PatternValency.m_RelationStr;
 	for (size_t i=0; i< m_GramCorteges.size(); i++)
 	{
-		Q = "";
+		std::string Q = "";
 		for (size_t k=0; k<3; k++)
 			if (m_GramCorteges[i].m_DomItemNos[k] != -1)
 			{
@@ -97,7 +96,7 @@ void CSemPattern::TracePattern () const
 				Q += std::string (" ") + S;
 			};
 	     Q += std::string ("\n");
-		 rml_TRACE (Q.c_str());
+		 LOGV << Q;
 	};
 };
 
@@ -115,7 +114,6 @@ bool CSemPattern::LoadSemFromDict()
 		return false;
 
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
-	//rml_TRACE  ("Load pattern of %s\n", Ross->GetEntryStr(UnitNo).c_str());
 	long EnfCortegeNo = Ross->GetUnitEndPos(UnitNo);
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)
@@ -166,7 +164,6 @@ bool CSemPattern::LoadGramFromDict()
 	
 
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
-	//rml_TRACE  ("Load pattern of %s\n", Ross->GetEntryStr(UnitNo).c_str());
 	long EnfCortegeNo = Ross->GetUnitEndPos(UnitNo);
 
 

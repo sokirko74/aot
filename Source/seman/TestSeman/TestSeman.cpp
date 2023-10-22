@@ -130,6 +130,7 @@ nlohmann::json PrintRelationsAsToJavascript(const CSemStructureBuilder& SemBuild
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input-file", "input file", true);
+    parser.AddArgument("--log-level", "log level", true);
     parser.AddArgument("--output-file", "output file", true);
     parser.AddArgument("--input-file-mask", "c:/*.txt", true);
     parser.AddOption("--visual", "print visual graph (for javascript)");
@@ -193,14 +194,14 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
 
 int main(int argc, const char* argv[]) {
     CSemStructureBuilder SemBuilder;
-    init_plog("test_seman.log");
-    PLOGD << "start logging";
+    PLOGI << "start logging";
 
     ArgumentParser args;
     initArgParser(argc, argv, args);
+    init_plog(args.GetLogLevel(), "test_seman.log");
     try {
         GlobalErrorMessage = MyGlobalErrorMessage;
-        PLOGD << "init dicts ... (wait one minute)";
+        PLOGI << "init dicts ... (wait one minute)";
         InitDicts(SemBuilder);
         SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
 

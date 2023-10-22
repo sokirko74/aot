@@ -126,13 +126,13 @@ bool CRusSemStructure::GetAgreeWithSyntaxTop(long Tag) const
 	long SubjectNodeNo = (m_Clauses[ClauseNo].m_SubjectWordNo == -1) ? -1 : FindNodeByWordNo(m_Clauses[ClauseNo].m_SubjectWordNo, ClauseNo);
 
 	if (SubjectNodeNo != -1) {
-		rml_TRACE("check node %i is syntax subject\n", SubjectNodeNo);
+		LOGV << "check node " << SubjectNodeNo  << " is syntax subject";
 		for (auto relNo : m_Nodes[SubjectNodeNo].m_InRels)
 		{
 			if (HasTag(m_Relations[relNo].m_SourceNodeNo, Tag))
 				if (m_Relations[relNo].m_bRelUse)
 					if (m_Relations[relNo].m_SyntacticRelation != _R("подл")) {
-						rml_TRACE("found rel %s, so it is not a subject relation\n", m_Relations[relNo].m_SyntacticRelation.c_str());
+						LOGV << "found rel "<< m_Relations[relNo].m_SyntacticRelation << ", so it is not a subject relation";
 						return false;
 					}
 		};

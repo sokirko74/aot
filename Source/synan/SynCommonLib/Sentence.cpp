@@ -34,13 +34,10 @@ void CSentence::OutputErrorString(std::string s) const {
 };
 
 void CSentence::TraceClauses() const {
-#ifdef _DEBUG
     for (int i = 0; i<m_Clauses.size();i++)
     {
-        rml_TRACE("%s ", m_Clauses[i].GetTraceStr().c_str());
+        LOGV << m_Clauses[i].GetTraceStr() << " ";
     };
-    rml_TRACE("\n");
-#endif
 };
 
 
@@ -130,7 +127,7 @@ bool CSentence::IsValid() const {
             const CMorphVariant &C = *j;
             if (j->m_ClauseTypeNo != -1) {
                 if (j->m_ClauseTypeNo >= m_Clauses[i].m_vectorTypes.size()) {
-                    rml_TRACE("Synvariant N % in clause %s contains bad pointer to clause type\n", SynVarNo,
+                    LOGV.printf("Synvariant N % in clause %s contains bad pointer to clause type", SynVarNo,
                               m_Clauses[i].GetTraceStr().c_str());
                     assert(false);
                     return false;
@@ -150,14 +147,13 @@ bool CSentence::IsValid() const {
                     }
                     if (H.m_iClauseTypeNum != -1) {
                         if (H.m_iClauseTypeNum >= m_Clauses[ClauseNo].m_vectorTypes.size()) {
-                            rml_TRACE("Unit N %  in clause %s contains bad pointer to clause type\n", k,
-                                      m_Clauses[i].GetTraceStr().c_str());
+                            LOGE << "Unit N " << k << " in clause " << m_Clauses[i].GetTraceStr() << " contains bad pointer to clause type";
                             assert(false);
                             return false;
                         };
                     };
                     if (C.GetFirstSubject() == k) {
-                        rml_TRACE("Bad pointer to subject in Clause No %i (it cannot point to a subclause)\n", i);
+                        LOGE << "Bad pointer to subject in Clause No " << i << "it cannot point to a subclause)";
                         assert(false);
                         return false;
                     };
@@ -165,8 +161,7 @@ bool CSentence::IsValid() const {
                     WordNo = H.m_SentPeriod.m_iLastWord + 1;
                 } else {
                     if (H.m_iHomonymNum > m_Words[WordNo].m_Homonyms.size()) {
-                        rml_TRACE("Unit N %  in clause %s contains bad pointer to homonyms\n", k,
-                                  m_Clauses[i].GetTraceStr().c_str());
+                        LOGE << "Unit N " << k << " in clause " << m_Clauses[i].GetTraceStr() << " contains bad pointer to homonyms";
                         assert(false);
                         return false;
                     };
@@ -182,8 +177,7 @@ bool CSentence::IsValid() const {
     for (int WordNo = 0; WordNo < m_Words.size(); WordNo++)
         for (int i = 0; i < m_Words[WordNo].m_MainVerbs.size(); i++)
             if (m_Words[WordNo].m_MainVerbs[i] >= m_Words.size()) {
-                rml_TRACE("Bad link to the main verb (%i) from word %s\n", m_Words[WordNo].m_MainVerbs[i],
-                          m_Words[WordNo].m_strWord.c_str());
+                LOGE << "Bad link to the main verb (" << m_Words[WordNo].m_MainVerbs[i] << ") from word" << m_Words[WordNo].m_strWord;
                 assert(false);
                 return false;
             };
@@ -691,7 +685,7 @@ bool CSentence::EncloseClauseAsWord(int iWhat, int iWhere) {
     CClause *pPrimWhere = &GetClause(iWhere);
     assert(pPrimWhere);
 
-    rml_TRACE("enclose %s into %s\n", pPrimWhat->GetTraceStr().c_str(), pPrimWhere->GetTraceStr().c_str());
+    LOGV << "enclose "<< pPrimWhat->GetTraceStr() << " into " << pPrimWhere->GetTraceStr();
 
 
     CPeriod PeriodPrimWhere = *pPrimWhere;
@@ -800,7 +794,7 @@ bool CSentence::CreateEnclosedNotStrongClause(int MainClauseNo, int iFWrd, int i
 
     // creating subclause and building groups for it
     pNewClause.m_vectorTypes.push_back(ClType);
-    rml_TRACE("create clause %s\n", pNewClause.GetTraceStr().c_str());
+    LOGV << "create clause " << pNewClause.GetTraceStr();
     CClause &TheAddedClause = AddClause(pNewClause);
 
     if (GetOpt()->m_Language == morphGerman)
@@ -835,7 +829,7 @@ bool CSentence::RunClauseRule(const CClauseRule *it, int iClauseNum) {
     bool bResult = (this->*rule)(iClauseNum);
 
     if (bResult)
-        rml_TRACE("Rule %s has changed the structure\n", it->m_Description.c_str());
+        LOGV << "Rule " << it->m_Description << " has changed the structure";
 
     return bResult;
 }
@@ -964,7 +958,7 @@ CClause &CSentence::UniteClauses(int iLeftClause, int iRightClause, ParametersSo
 
     assert (pOldClauseL->m_iLastWord + 1 == pOldClauseR->m_iFirstWord);
 
-    rml_TRACE("unite %s with %s\n", pOldClauseL->GetTraceStr().c_str(), pOldClauseR->GetTraceStr().c_str());
+    LOGV << "unite " << pOldClauseL->GetTraceStr() << " with " << pOldClauseR->GetTraceStr();
 
     CClause newClause(pOldClauseR->m_pSent, pOldClauseL->m_iFirstWord, pOldClauseR->m_iLastWord);
 

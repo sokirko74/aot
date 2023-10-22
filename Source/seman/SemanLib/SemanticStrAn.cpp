@@ -620,8 +620,8 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 #endif
 	EndTimer("Syntax interpretation");
 
-	rml_TRACE("=================================================\n");
-	rml_TRACE("===  FindSituationsForClauseVariantCombination %i===\n", m_ClauseVariantsCombinationNo);
+	LOGV << "=================================================";
+	LOGV << "===  FindSituationsForClauseVariantCombination " <<  m_ClauseVariantsCombinationNo;
 
 	ProcessParticipleAndInTheFirstClause();
 
@@ -713,19 +713,19 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 				V.CopyLexVar(*this);
 
 
-				rml_TRACE("CLause %i\n", ClauseNo);
-				rml_TRACE("Lex variant(ClauseNo = %i) =  %i, Collocation set = %i(of %i)\n",
+				LOGV << "CLause " << ClauseNo;
+				LOGV.printf("Lex variant(ClauseNo = %i) =  %i, Collocation set = %i(of %i)",
 					ClauseNo, LexVariantInCurrSetCollocNo + 1,
 					CurrSetCollocHypNo + 1, m_ClauseSetCollocHyps[ClauseNo].size());
-				rml_TRACE("Best tree weight %i\n", V.GetBestTreeWeight());
-				rml_TRACE("Variant weight components:\n %s\n", V.m_BestValue.GetStrOfNotNull().c_str());
-				rml_TRACE("Is clause connected: %i\n", IsConnectedClause(ClauseNo));
+				LOGV << "Best tree weight " << V.GetBestTreeWeight();
+				LOGV << "Variant weight components: %s" << V.m_BestValue.GetStrOfNotNull();
+				LOGV <<"Is clause connected: " << IsConnectedClause(ClauseNo);
 
 				ClauseVar.m_BestLexVariants.push_back(V);
 				CopyLexVar(InitialLexVariant);
 				LexVariantInCurrSetCollocNo++;
 				if (LexVariantInCurrSetCollocNo > 100) {
-					rml_TRACE("too many lexical varints, panic exit\n");
+					LOGV << "too many lexical varints, panic exit";
 					break;
 				}
 
@@ -748,8 +748,8 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 
 	long BestCombNo = -1;
 	std::vector<VectorLong> Variants;
-	rml_TRACE("=================================================\n");
-	rml_TRACE("===  Connecting clauses   %i ===\n", m_ClauseVariantsCombinationNo);
+	LOGV << "================================================";
+	LOGV << "===  Connecting clauses  " << m_ClauseVariantsCombinationNo;
 	m_InterfaceClauseNo++;
 
 	// построение связного варианта
@@ -799,8 +799,8 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 	AssertValidGraph();
 
 
-	rml_TRACE("=================================================\n");
-	rml_TRACE("===  Writing the best variant N  %i ===\n", m_ClauseVariantsCombinationNo);
+	LOGV << "=================================================";
+	LOGV << "===  Writing the best variant N " << m_ClauseVariantsCombinationNo;
 
 	if (BestCombNo != -1)
 	{
@@ -813,7 +813,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 
 		auto w1 = GetStructureWeight();
 		long w2 = Idealize();
-		rml_TRACE("clause combination weight = %ld(main weight) + %ld(idealize weight)\n", w1, w2);
+		LOGV << "clause combination weight = " << w1 << "(main weight) + " << w2 << "(idealize weight)";
 		return w1 + w2;
 
 
@@ -848,8 +848,8 @@ long CRusSemStructure::GetStructureWeight()
 		{
 			CTreeOfLexVariantWeight W = m_AlreadyBuiltClauseVariants[m_Clauses[i].m_AlreadyBuiltClauseVariantNo].m_BestLexVariants[m_Clauses[i].m_CurrLexVariantNo];
 			auto w = W.GetBestTreeWeight1(!IsConn, true);
-			rml_TRACE("clause no %zu, weight1=%ld\n", i, w);
-			rml_TRACE("%s\n", W.m_BestValue.GetStrOfNotNull().c_str());
+			LOGV << "clause no " << i << " weight1 = " <<  w;
+			LOGV << W.m_BestValue.GetStrOfNotNull();
 			Weight += w;
 		};
 	};
@@ -884,15 +884,15 @@ long CRusSemStructure::GetStructureWeight()
 			Summa.SetWeight(RelationsLength, SemanticVolume ? GetRelationsLength(Tag) * 1000 / RelsCount : 0);
 
 	auto w = Summa.GetTreeWeight();
-	rml_TRACE("clause component weights:\n");
-	rml_TRACE(Summa.GetStrOfNotNull().c_str());
-	rml_TRACE("add weight by components for cross clause relations %ld to the main weight (%ld)\n", w, Weight);
+	LOGV << "clause component weights:";
+	LOGV << Summa.GetStrOfNotNull();
+	LOGV << "add weight by components for cross clause relations " << w << " to the main weight(" << Weight << ")";
 	Weight += w;
 
 	w = GetAnaphoricRelationsCount(Tag) * 5;
 	if (w != 0) {
 		Weight -= w;
-		rml_TRACE("decrease clause weight by anaphoric rels: -%ld\n", w);
+		LOGV << "decrease clause weight by anaphoric rels: -" << w;
 	}
 
 	/*
@@ -975,7 +975,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 			std::string s = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
 			m_SemCoefs.ReadOneCoef(s);
 		};
-	rml_TRACE("Semantic coefs:\n %s\n", m_SemCoefs.GetCoefsString().c_str());
+	LOGV << "Semantic coefs: " <<  m_SemCoefs.GetCoefsString();
 	UnitNo = GetRossHolder(Ross)->LocateUnit("_weak_syn_rel", 1);
 	if (UnitNo == ErrUnitNo) return false;
 	m_WeakSynRels.clear();
@@ -1048,7 +1048,7 @@ bool CRusSemStructure::GetClauseVariantCombination()
 
 	};
 
-	rml_TRACE("ClauseVariantsCombinationNo %i (out of %i)\n", m_ClauseVariantsCombinationNo + 1, Variants.size());
+	LOGV << "ClauseVariantsCombinationNo " << m_ClauseVariantsCombinationNo + 1 << " (out of " << Variants.size() << ")";
 	m_ClauseCombinationVariantsCount = Variants.size();
 	m_Nodes.clear();
 	return true;
@@ -1121,9 +1121,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 				if (m_bShouldBeStopped) return -1;
 
 
-				rml_TRACE("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
-				rml_TRACE("VariantWeght %i = %i \n", m_ClauseVariantsCombinationNo, Weight);
-				rml_TRACE("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\n");
+				LOGV <<"VariantWeght " << m_ClauseVariantsCombinationNo << " = " << Weight;
 
 				if (Weight < BestClauseVariantsCombinationWeight)
 				{
@@ -1162,7 +1160,6 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		else
 		{
 			m_ClauseVariantsCombinationNo = BestClauseVariantsCombinationNo;
-			rml_TRACE("--------------------------------------------------------------\n");
 			GetClauseVariantCombination();
 
 			m_bLastTry = true;

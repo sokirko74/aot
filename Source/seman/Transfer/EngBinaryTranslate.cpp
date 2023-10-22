@@ -97,7 +97,7 @@ std::string translate_helper::create_form_by_id(long Id, grammems_mask_t eng_gra
 
 
 	int count = Paradigm.GetCount();
-	rml_TRACE("lemma %s try to find a word form with grammems %s\n", Paradigm.GetSrcNorm().c_str(), GetEngGramTab()->GrammemsToStr(eng_grammems).c_str());
+	LOGV << "lemma %s try to find a word form with grammems " << Paradigm.GetSrcNorm().c_str(), GetEngGramTab()->GrammemsToStr(eng_grammems);
 	for (j = 0; j < count; j++)
 	{
 		if (GetEngGramTab()->FindGrammems(Paradigm.GetAncode(j).c_str(), eng_grammems))

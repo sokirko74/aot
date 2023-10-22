@@ -1315,11 +1315,7 @@ void CRusSemStructure::TryPatternOnNodes(size_t NodeNo, size_t ClauseNo, CSemPat
 			)
 		{
 			StartTimer("TryPatternOnNodes",2);
-#if Trace == 1
-			rml_TRACE (GetNodeStr(NodeNo).c_str());
-			rml_TRACE (" <--?--> ");
-			rml_TRACE (GetNodeStr(i).c_str());
-#endif
+			LOGV << GetNodeStr(NodeNo) << " <-- ? --> " << GetNodeStr(i);
 
 			bool Result = false;
 
@@ -1363,9 +1359,7 @@ void CRusSemStructure::TryPatternOnNodes(size_t NodeNo, size_t ClauseNo, CSemPat
 			}
 
 			EndTimer("TryPatternOnNodes");
-#if Trace == 1
-			rml_TRACE (" => %s\n", Result ? "success" : "failed");
-#endif
+			LOGV << " result =  " <<  Result;
 		};
 
 
@@ -1422,11 +1416,7 @@ void CRusSemStructure::FindActants(size_t NodeNo)
 {
 	CSemPattern P;
 	size_t ClauseNo = m_Nodes[NodeNo].m_ClauseNo;
-#if Trace == 1
-	rml_TRACE ("\n");
-	rml_TRACE (GetNodeStr(NodeNo).c_str());
-	rml_TRACE ("\n");
-#endif
+	LOGV << GetNodeStr(NodeNo);
 
 	for (size_t ValencyNo = 0; ValencyNo < m_Nodes[NodeNo].m_Vals.size(); ValencyNo++ )
 		if (!ValencyIsOccupiedByLexFunct(*this, NodeNo, ValencyNo))

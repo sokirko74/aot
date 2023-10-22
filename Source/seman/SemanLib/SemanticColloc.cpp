@@ -237,7 +237,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	// проверка GF(i)
 	for (long i=0; i<AllHyps.size();)
 	{
-		rml_TRACE ("check GF(*) for %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		LOGV << "check GF(*) for " << GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo);
 		long k=0;
 		for (; k < AllHyps[i].m_Coords.size(); k++)
 			if (!CheckCollocItemGramFet(
@@ -257,7 +257,7 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 	// проверка SYNREP
 	for (long i=0; i<AllHyps.size();i++)
 	{
-		rml_TRACE ("check SYNREP for %s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		LOGV << "check SYNREP for " << GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo);
 		const CColloc& C = m_pData->m_RusCollocs[AllHyps[i].m_CollocNo];
 		for (long j=0; j <  C.m_Rels.size(); j++)
 			if (C.m_Rels[j].m_SynRelName == _R("ПРИЛ_СУЩ"))
@@ -282,9 +282,9 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 
 
 
-	rml_TRACE ("Hypots of collocations for clause: %i\n", ClauseNo);
+	LOGV << "Hypots of collocations for clause: " << ClauseNo;
 	for (long i=0; i<AllHyps.size();i++)
-		rml_TRACE ("%s\n",GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo).c_str());
+		LOGV  << GetRoss(CollocRoss)->GetEntryStr(m_pData->m_RusCollocs[AllHyps[i].m_CollocNo].UnitNo);
 
 	// получение всех подмножеств множества гипотез для условных словосочетаний
 	std::vector<std::vector<int> > subsets;

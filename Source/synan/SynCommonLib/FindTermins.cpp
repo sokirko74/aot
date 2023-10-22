@@ -315,7 +315,7 @@ void CSentence::FindTermins()
 				if( bFound )
 				{
 					const CTermin& T = (*pTermins)[*termin_index_iter];
-					rml_TRACE("Found termin \"%s\"\n", T.m_strTermin);
+					LOGV << "Found termin " << T.m_strTermin;
 					m_vectorTermins.push_back( SFoundTermin(T.m_pModel, T.m_ThesType, T.m_TerminId, j, j + TerminWordCount - 1) );
 					if (TerminWordCount > 1)
 						DeleteMarkedHomonymsAndFIOForTermins(m_Words, j, j + TerminWordCount);

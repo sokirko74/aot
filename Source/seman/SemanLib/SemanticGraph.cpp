@@ -139,7 +139,7 @@ long CSemanticStructure::GetIncomingRelationsCount(long NodeNo, bool UseUse) con
 
 void CSemanticStructure::PrintRelations() const
 {
-	rml_TRACE("\n\nRelations : \n");
+	LOGV << "Relations:";
 	for (size_t i = 0; i < GetRelationsSize(); i++)
 	{
 		auto r = GetRelation(i);
@@ -148,7 +148,7 @@ void CSemanticStructure::PrintRelations() const
 		l += " SF = " + GetSemFetsInOneStr(r->m_SemFets);
 		l += " SynR = \"" + r->m_SyntacticRelation + "\" ";
 		l += std::string("\n");
-		rml_TRACE(l.c_str());
+		LOGV << l;
 	};
 };
 
@@ -329,27 +329,25 @@ std::string  CSemanticStructure::GetNodeLemStr(size_t NodeNo) const
 
 void CSemanticStructure::PrintNodes() const
 {
-	rml_TRACE("\n\nNodes : \n");
+	LOGV << "Nodes:";
 
 	for (size_t i = 0; i < GetNodesSize(); i++)
 	{
-		rml_TRACE(GetNodeStr1(i).c_str());
+		LOGV << GetNodeStr1(i);
 
-		rml_TRACE(Format(" GF = %s %s", GetNodePosesStr(i).c_str(),
-			m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems()).c_str()).c_str());
+		LOGV << " GF = " << GetNodePosesStr(i) << " " << 
+			m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems());
 
 		std::string Q = Format(" ClauseNo = %i ", GetNode(i).m_ClauseNo);
-		rml_TRACE(Q.c_str());
-		if (GetNode(i).GetType() == LocRoss) rml_TRACE(" geo");
-		if (GetNode(i).m_bReached) rml_TRACE(" reached");
-		if (GetNode(i).m_bToDelete) rml_TRACE(" to_delete");
-		rml_TRACE(" TagId=%i", GetNode(i).m_Tag);
+		LOGV << Q;
+		if (GetNode(i).GetType() == LocRoss) LOGV <<" geo";
+		if (GetNode(i).m_bReached) LOGV <<" reached";
+		if (GetNode(i).m_bToDelete) LOGV << " to_delete";
+		LOGV << " TagId=" << GetNode(i).m_Tag;
 		if (GetNode(i).IsWordContainer())
-			rml_TRACE(" (MinWordNo=%i, MaxWordNo=%i)", GetNode(i).GetMinWordNo(), GetNode(i).GetMaxWordNo());
-		if (GetNode(i).m_bToDelete) rml_TRACE(" to_delete");
-		Q = " SF = " + GetSemFetsInOneStr(GetNode(i).m_NodeSemFets);
-		rml_TRACE(Q.c_str());
-		rml_TRACE("\n");
+			LOGV.printf(" (MinWordNo=%i, MaxWordNo=%i)", GetNode(i).GetMinWordNo(), GetNode(i).GetMaxWordNo());
+		if (GetNode(i).m_bToDelete) LOGV << " to_delete";
+		LOGV << " SF = "  << GetSemFetsInOneStr(GetNode(i).m_NodeSemFets);
 	};
 
 
@@ -370,30 +368,21 @@ std::string CSemanticStructure::GetNodePosesStr(long NodeNo) const
 
 void CSemanticStructure::PrintLemNodes() const
 {
-	rml_TRACE("\n\nNodes : \n");
+	LOGV << "Nodes: ";
 
 	for (size_t i = 0; i < GetNodesSize(); i++)
 	{
-		rml_TRACE(GetNodeLemStr(i).c_str());
-		rml_TRACE(Format(" ClauseNo = %i ", GetNode(i).m_ClauseNo).c_str());
-		if (GetNode(i).GetType() == LocRoss) rml_TRACE(" geo");
-		if (GetNode(i).GetType() == OborRoss) rml_TRACE(" obor");
+		LOGV << GetNodeLemStr(i);
+		LOGV << " ClauseNo = " <<  GetNode(i).m_ClauseNo;
+		if (GetNode(i).GetType() == LocRoss) LOGV << " geo";
+		if (GetNode(i).GetType() == OborRoss) LOGV << " obor";
 		std::string Q = Format(" GF = %s %s", GetNodePosesStr(i).c_str(),
 			m_pData->GetRusGramTab()->GrammemsToStr(GetNode(i).GetGrammems()).c_str());
-		rml_TRACE(Q.c_str());
-
-		rml_TRACE("\n");
+		LOGV << Q;
 	};
 
 
 };
-
-
-
-
-
-
-
 
 
 void CSemanticStructure::DelNode(long NodeNo)

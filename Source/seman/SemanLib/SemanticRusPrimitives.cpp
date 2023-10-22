@@ -52,12 +52,12 @@ void	CRusSemStructure::EraseRelation(int RelNo, const char* cause)
 	m_Nodes[m_Relations[RelNo].m_TargetNodeNo].m_IncomRelsCount--;
 	std::string Label = m_Relations[RelNo].m_Valency.m_RelationStr;
 	
-	rml_TRACE("%s", Format ("Delete relation %s %s %s, cause: \"%s\"\n",  
+	LOGV.printf("Delete relation %s %s %s, cause: \"%s\"\n",  
 		GetNodeStr1(GetRelation(RelNo)->m_SourceNodeNo).c_str(), 
 		Label.c_str(), 
 		GetNodeStr1(GetRelation(RelNo)->m_TargetNodeNo).c_str(),
 		cause
-	).c_str());
+	);
 	m_Relations.erase(m_Relations.begin()+RelNo);
 
 };

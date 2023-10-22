@@ -267,7 +267,7 @@ void CRusSentence::BuildAnalyticalVerbForms()
 					m_Words[iBe].m_MainVerbs.push_back( v_AnalyticalFormVars[k].iWordNum );
 					{
 						std::string dump =  m_Words[iBe].m_strWord  + " " + m_Words[v_AnalyticalFormVars[k].iWordNum].m_strWord;
-						rml_TRACE("analytical form \"%s\" was created\n", dump.c_str());
+						LOGV << "analytical form \"" << dump << "\" was created";
 					};
 
 					{ // удалить все омонимы, кроме глагола

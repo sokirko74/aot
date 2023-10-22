@@ -483,7 +483,7 @@ bool CGerSentence::BuildClauses()
 	m_bPanicMode = IsPanicSentence();
 	if (m_bPanicMode)
 	{
-		rml_TRACE("!!!!!!!!!!  Entering panic mode !!!!!!!!!!!1\n");
+		LOGV << "!!!!!!!!!!  Entering panic mode !!!!!!!!!!!1";
 	};
 
 	BuildGLRGroupsInSentence();

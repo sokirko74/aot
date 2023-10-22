@@ -35,7 +35,7 @@ bool CClause::KillHomonymsCoverage( )
 			pSynVar++;
 	};
 
-	rml_TRACE ("KillHomonymsCoverage left only %i from %i synvariants in %s\n", m_SynVariants.size(), VarsCount, GetTraceStr().c_str());
+	LOGV.printf("KillHomonymsCoverage left only %i from %i synvariants in %s", m_SynVariants.size(), VarsCount, GetTraceStr().c_str());
 
 	
 	//  удаляем все омонимы, который не входят в оставшиеся варианты

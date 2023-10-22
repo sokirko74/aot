@@ -306,7 +306,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		  long PlaceNo2 = atoi(GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[2]));
 		  if (!PlaceNo1 || !PlaceNo2) continue;
 		  std::string SynGrp = GetRossHolder(TimeRoss)->GetDomItemStrInner(C.m_DomItemNos[0]);
-		  rml_TRACE  (SynGrp.c_str());
+		  LOGV << SynGrp;
 	      U.m_Rels.push_back(CSynRelation(PlaceNo1-1, PlaceNo2-1, SynGrp));
 	  };
 
@@ -935,7 +935,7 @@ bool CSemanticsHolder::BuildColloc (std::string ContentFieldStr, int CollocUnitN
 			  F = GetRossHolder(CollocRoss)->GetDomItemStrInner(Cort.m_DomItemNos[2]);
 			  long PlaceNo2 = F[1] - '0' - 1;
 			  std::string SynGrp = GetRossHolder(CollocRoss)->GetDomItemStrInner(Cort.m_DomItemNos[0]);
-			  rml_TRACE  (SynGrp.c_str());
+			  LOGV << SynGrp;
 			  if  (    (PlaceNo1 >= C.Items.size())
 				    ||  (PlaceNo2 >= C.Items.size())
 				  )

@@ -594,7 +594,7 @@ void CClause::BuildSynVariants()
 		m_pSent->ChooseClauseType(m_vectorTypes, synVariant);
 	};
 
-	rml_TRACE("BuildSynVariants found %i variants for %s\n",m_SynVariants.size(), GetTraceStr().c_str() );
+	LOGV <<"BuildSynVariants found " << m_SynVariants.size() << " variants for " << GetTraceStr();
 }
 
 
@@ -682,7 +682,7 @@ bool CClause::BuildGroupsAndSynVariants(CFormatCaller& FormatCaller)
 			
 			AssignVariantWeight(synVariant);
 			TranslateFormatCallerGroups(synVariant);
-			rml_TRACE("m_iWeight = %d\n", synVariant.m_iWeight);
+			LOGV << "m_iWeight = " << synVariant.m_iWeight;
 			AssignSynVariantsGrammems(synVariant, FormatCaller);
 			AssignOborotMarksToDisruptConj(FormatCaller, synVariant);
 		}
@@ -1086,7 +1086,7 @@ void CClause::DeleteHomonym(int iW,int  iH)
 	
 	assert ( m_pSent->m_Words[iW].m_Homonyms.size() > 1);
 	
-	rml_TRACE("Delete homonym \"%s\" from Word \"%s\"(Only %i homonyms left)(InOborot=%s)\n", 
+	LOGV.printf("Delete homonym \"%s\" from Word \"%s\"(Only %i homonyms left)(InOborot=%s)", 
 		m_pSent->m_Words[iW].m_Homonyms[iH].m_strLemma.c_str(), 
 		m_pSent->m_Words[iW].m_strWord.c_str(), 
 		m_pSent->m_Words[iW].m_Homonyms.size(),
@@ -1403,7 +1403,7 @@ void CClause::DeleteClauseTypeInHostClause(CClause* FirstHost,  int TypeNo)
 				C.m_iClauseTypeNum--;
 		pSynVar++;
 	};
-	rml_TRACE ("DeleteClauseTypeInHostClause left only %i from %i synvariants in %s\n", FirstHost->m_SynVariants.size(), VarsCount, FirstHost->GetTraceStr().c_str());
+	LOGV.printf("DeleteClauseTypeInHostClause left only %i from %i synvariants in %s", FirstHost->m_SynVariants.size(), VarsCount, FirstHost->GetTraceStr().c_str());
 
 };
 

@@ -509,7 +509,7 @@ void TestEquality(const std::vector<CTreeVariant>& Variants)
 		for (size_t VarNo1 = VarNo + 1; VarNo1 < Variants.size(); VarNo1++)
 			if (AreEqual(Variants[VarNo], Variants[VarNo1]))
 			{
-				rml_TRACE("error !!!\n");
+				LOGV << "error !!!";
 			};
 
 };
@@ -745,13 +745,13 @@ long CRusSemStructure::SetBestVariant(const std::vector<TreeAndValueVector>& Var
 		for (size_t k = 0; k < TopConnectedComponentsCount; k++) { 
 			auto& v = VarAndVals[k][variants[i * TopConnectedComponentsCount + k]].second;
 			weight += v.GetTreeWeight();
-			rml_TRACE("variant %zu, component %zu, props:\n %s\n", i, k, v.GetStrOfNotNull().c_str());
+			LOGV << "variant " << i <<", component  " << k << ", props:" << v.GetStrOfNotNull();
 		}
 		WeightAndPositions[i] = {weight, i};
 	};
 
 
-	rml_TRACE("sort %zu tree variants to find the best\n", WeightAndPositions.size());
+	LOGV << "sort " << WeightAndPositions.size()  <<" tree variants to find the best";
 	sort(WeightAndPositions.begin(), WeightAndPositions.end());
 
 	size_t varIndex = 0;
@@ -759,13 +759,13 @@ long CRusSemStructure::SetBestVariant(const std::vector<TreeAndValueVector>& Var
 		size_t varRatingIndex = 0;
 		if (m_UserTreeVariantNo < WeightAndPositions.size() && m_UserTreeVariantNo >= 0) {
 			varRatingIndex = m_UserTreeVariantNo;
-			rml_TRACE("set user tree variant position=%zu\n", m_UserTreeVariantNo);
+			LOGV << "set user tree variant position=" <<  m_UserTreeVariantNo;
 		}
 		{
 			auto weight = WeightAndPositions[varRatingIndex].first;
-			rml_TRACE("preliminary tree variant weight=%zu\n", weight);
+			LOGV << "preliminary tree variant weight=" << weight;
 			if (varRatingIndex + 1 < WeightAndPositions.size() && (weight == WeightAndPositions[varRatingIndex + 1].first)) {
-				rml_TRACE("variant ambiguity found\n");
+				LOGV << "variant ambiguity found";
 			}
 		}
 		varIndex = WeightAndPositions[varRatingIndex].second;
@@ -1188,9 +1188,9 @@ void CRusSemStructure::BuildAnaphoricRels()
 			sort(Hypots.begin(), Hypots.end());
 
 			if (Hypots[0].m_NodeNo != -1) {
-				rml_TRACE ("Set anaphora node %s for %s \n", GetNodeStr(Hypots[0].m_NodeNo).c_str(), GetNodeStr(NodeNo).c_str());
+				LOGV << "Set anaphora node "<< GetNodeStr(Hypots[0].m_NodeNo)  <<" for " << GetNodeStr(NodeNo);
 				for (size_t i = 1; i < Hypots.size(); i++) {
-					rml_TRACE("diff to the best anaphoric candidate (node=%s):\n%s\n",
+					LOGV.printf("diff to the best anaphoric candidate (node=%s):%s",
 						GetNodeStr(Hypots[i].m_NodeNo).c_str(),
 						Hypots[i].m_Variant.m_BestValue.GetDifference(Hypots[0].m_Variant.m_BestValue).c_str());
 				}

@@ -405,7 +405,7 @@ try {
 				};
 			};
 
-			rml_TRACE("make node %i mna (chem oboorot)\n",  CompNodeNo);
+			LOGV << "make node " << CompNodeNo  << " mna(chem oboorot)";
 			m_Nodes[CompNodeNo].m_NodeType = MNA;
 			m_Nodes[CompNodeNo].m_MNAType =	CHEMOborot;
 			break;
