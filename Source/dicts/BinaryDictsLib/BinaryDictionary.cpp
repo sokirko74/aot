@@ -342,7 +342,7 @@ std::string CBinaryDictionary::get_dict_path() const
 
 void CBinaryDictionary::Load()
 {
-	fprintf (stderr, "Reading binary dict from %s\n", get_dict_path().c_str());
+	LOGD << "Reading binary dict from %s " << get_dict_path();
 	ReadVector(get_dict_path(),eng_vec);
 	if (eng_vec.empty())
 		throw CExpc(Format("binary dict %s is empty", get_dict_path().c_str()));

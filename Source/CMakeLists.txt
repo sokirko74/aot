@@ -24,8 +24,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 
 
-#json
-#include_directories(${RML}/Source/contrib/nlohmann)
+include_directories(morph_dict/contrib/plog)
 
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")

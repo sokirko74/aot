@@ -22,7 +22,7 @@ std::string GetGramInfo(const CRusSemStructure& semStr, part_of_speech_mask_t Po
 
 void InitDicts(CSemStructureBuilder& SemBuilder)
 {
-    std::cerr << "initialize presemantic dictionaries...\n";
+    PLOGD << "initialize presemantic dictionaries...";
     SemBuilder.m_RusStr.m_pData->Init();
     SemBuilder.m_RusStr.m_pData->Initialize();
     SemBuilder.m_RusStr.m_pData->InitializeIndices();
@@ -157,24 +157,27 @@ nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, b
 
     }
     catch (CExpc e) {
-        std::cerr << "an exception occurred: " << e.m_strCause << "\n";
+        PLOGE << "an exception occurred: " << e.m_strCause;
         throw;
     }
     catch (...) {
-        std::cerr << "an exception occurred, sentence " << inputText << "\n";
+        PLOGE << "an exception occurred, sentence " << inputText;
         throw;
     };
 
 }
 
 void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, string inputFile, string outputFile) {
-    std::cerr << inputFile << "\n";
+    PLOGD << inputFile;
     CTestCaseBase base;
     std::ifstream inp(inputFile);
+    if (!inp.good()) {
+        throw CExpc("cannot read %s", inputFile.c_str());
+    }
     base.read_test_cases(inp);
     for (auto& t : base.TestCases) {
         if (t.Text.length() > 1050) {
-            std::cerr << "skip the sentence of " << t.Text.length() << " chars (too long)\n";
+            PLOGD << "skip the sentence of " << t.Text.length() << " chars (too long)\n";
             continue;
         }
         if (t.Text.empty()) {
@@ -189,12 +192,15 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
 
 
 int main(int argc, const char* argv[]) {
-    static CSemStructureBuilder SemBuilder;
+    CSemStructureBuilder SemBuilder;
+    init_plog("test_seman.log");
+    PLOGD << "start logging";
+
     ArgumentParser args;
     initArgParser(argc, argv, args);
     try {
         GlobalErrorMessage = MyGlobalErrorMessage;
-        std::cerr << "init dicts ... (wait one minute)\n";
+        PLOGD << "init dicts ... (wait one minute)";
         InitDicts(SemBuilder);
         SemBuilder.m_RusStr.m_pData->GetSynan()->SetKillHomonymsMode(CoverageKillHomonyms);
 
@@ -212,14 +218,14 @@ int main(int argc, const char* argv[]) {
         for (auto& p : file_pairs) {
             processOneFile(SemBuilder, args.Exists("visual"), args.Exists("translate"), p.first, p.second);
         }
-        std::cerr << "normal exit\n";
+        PLOGD << "normal exit\n";
     }
     catch (CExpc e) {
-        std::cerr << e.m_strCause << "\n";
+        PLOGE << e.m_strCause << "\n";
         return 1;
     }
     catch (...) {
-        std::cerr << "general exception\n";
+        PLOGE << "general exception\n";
         return 1;
     };
 

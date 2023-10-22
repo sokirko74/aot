@@ -13,7 +13,7 @@ add_library(SemanLib
         SemStructureBuilder.cpp
         SemanHypotGraph.cpp
         SemanPattern.cpp
-        SemanticAnswer.cpp
+        "answers.cpp"
         SemanticClause.cpp
         SemanticColloc.cpp
         SemanticCommon.cpp
@@ -22,7 +22,7 @@ add_library(SemanLib
         SemanticIdealize.cpp
         SemanticLength.cpp
         SemanticLexFuncts.cpp
-        SemanticLexVariant.cpp
+        "lex_variant.cpp"
         SemanticLoc.cpp
         SemanticMNA.cpp
         SemanticNumeral.cpp
@@ -55,7 +55,7 @@ add_library(SemanLib
         TranslatorHolder.h
         Valency.h
         VisualGraph.h
-)
+ "analytical.cpp")
 
 target_link_libraries(SemanLib
     SynanLib

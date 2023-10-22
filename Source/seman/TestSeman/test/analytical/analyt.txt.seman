@@ -1,0 +1,77 @@
+[
+    {
+        "comments": "",
+        "input": "Мы были взволнованы",
+        "result": "We were affected."
+    },
+    {
+        "comments": "",
+        "input": "Джону было достаточно приключений",
+        "result": "John had enough adventures."
+    },
+    {
+        "comments": "",
+        "input": "я стану в два раза  выше тебя.",
+        "result": "I will stand over you two times."
+    },
+    {
+        "comments": "",
+        "input": "мне было некогда даже подумать о городе",
+        "result": "I had no time even to think about town."
+    },
+    {
+        "comments": "",
+        "input": "Мне надо сказать вам несколько слов",
+        "result": "I have to tell you several words."
+    },
+    {
+        "comments": "",
+        "input": "мне больше нечего добавить",
+        "result": "I have nothing else to add."
+    },
+    {
+        "comments": "",
+        "input": "Хрущев был смещен с должности",
+        "result": "Khrushchev was demoted."
+    },
+    {
+        "comments": "",
+        "input": "Она была красива",
+        "result": "She was beautiful."
+    },
+    {
+        "comments": "",
+        "input": "Мне будет интересно",
+        "result": "It will be interesting for me."
+    },
+    {
+        "comments": "",
+        "input": "Принципы будут важнее денег",
+        "result": "The principles will be more important than money."
+    },
+    {
+        "comments": "",
+        "input": "У меня нет больше надежды.",
+        "result": "I have no more hope."
+    },
+    {
+        "comments": "",
+        "input": "он был одет по-восточному",
+        "result": "He was dressed in east fashion."
+    },
+    {
+        "comments": "",
+        "input": "мне это было полезным",
+        "result": "It was useful to me."
+    },
+    {
+        "comments": "",
+        "input": "эти вещи мне окажутся очень полезными в будущем.",
+        "result": "These things will prove very useful to me in future."
+    },
+    {
+        "comments": "",
+        "input": "он предопределен  свыше",
+        "result": "He is predetermined from above."
+    }
+]
