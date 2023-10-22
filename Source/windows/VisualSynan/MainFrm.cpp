@@ -46,6 +46,9 @@ CMainFrame::CMainFrame()
 
 CMainFrame::~CMainFrame()
 {
+	CSyntaxHolder& Holder = ((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder;
+	Holder.ClearHolder();
+
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -123,11 +126,14 @@ void CMainFrame::OnBuildFromFile()
 	m_pWaitThread->CreateThread();
 }
 
+MorphLanguageEnum GlobalLanguage;
+
 void CMainFrame::OnReinitializeSyntax() 
 {	
 	CWaitCursor r;
-	CCOMSyntaxHolder& Holder = ((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder;
-	Holder.LoadSyntaxModule(Holder.m_CurrentLanguage);
+	CSyntaxHolder& Holder = ((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder;
+	Holder.ClearHolder();
+	Holder.LoadSyntax(GlobalLanguage);
 }
 
 
@@ -168,10 +174,12 @@ LRESULT CMainFrame::OnProcessTxtFile(WPARAM, LPARAM)
 	return 0;
 }
 
+
 bool CMainFrame::LoadSyntaxByLanguage(MorphLanguageEnum t) 
 {
-	if (!((CVisualSynanApp*)AfxGetApp())->m_SyntaxHolder.LoadSyntax(t)) return false;
-
+	GlobalLanguage = t;
+	OnReinitializeSyntax();
+	
 	int index_rus = m_wndToolBar.CommandToIndex(ID_RUSSIAN_SYNTAX);
 	int index_ger = m_wndToolBar.CommandToIndex(ID_GERMAN_SYNTAX);
 	int style = m_wndToolBar.GetButtonStyle(index_rus);
@@ -187,3 +195,9 @@ bool CMainFrame::LoadSyntaxByLanguage(MorphLanguageEnum t)
 	}
 	return true;
 };
+
+CString FromRMLEncode(std::string s)
+{
+	return utf8_to_utf16(convert_to_utf8(s, GlobalLanguage)).c_str();
+}
+

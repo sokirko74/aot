@@ -234,8 +234,8 @@ void CVisualSynanView::OnContextMenu(CWnd*, CPoint point)
 			CString strLemma;
 			for(int i = 0 ; i < m_pHomonymsArray->GetSize() ; i++)
 			{
-				strLemma = ((CSynHomonym*)m_pHomonymsArray->GetAt(i))->m_strLemma;
-				CString grm = ((CSynHomonym*)m_pHomonymsArray->GetAt(i))->m_strCommonGrammems;
+				strLemma = ((CVisualHomonym*)m_pHomonymsArray->GetAt(i))->m_strLemma;
+				CString grm = ((CVisualHomonym*)m_pHomonymsArray->GetAt(i))->m_strCommonGrammems;
 				if (!grm.IsEmpty())
 					strLemma += " " + grm;;
 				menu.AppendMenu(MF_STRING | MF_ENABLED,ID_HOMONYMS_MENU_ITEM + i, strLemma);

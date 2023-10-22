@@ -17,17 +17,15 @@ CVisualGroup::CVisualGroup()
 }
 
 
-BOOL CVisualGroup::Init(SYNANLib::IGroupPtr& piGroup)
+BOOL CVisualGroup::Init(const CClause& clause, const CGroup& piGroup)
 {
 	
-	m_iFirstWord = piGroup->GetFirstWord();
-	m_iLastWord = piGroup->GetLastWord();
-	m_strDescription = ReadStrFromCOM(piGroup->TypeStr);
+	m_iFirstWord = piGroup.m_iFirstWord;
+	m_iLastWord = piGroup.m_iLastWord;
+	m_strDescription = FromRMLEncode(clause.GetOpt()->GetGroupNameByIndex(piGroup.m_GroupType));
 	m_strDescription.MakeLower();
 	return TRUE;
 }
-
-
 
 
 

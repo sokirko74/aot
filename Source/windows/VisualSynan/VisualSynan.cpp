@@ -131,9 +131,14 @@ BOOL CVisualSynanApp::InitInstance()
 	CVisualSynanCommandLineInfo cmdInfo;
 	ParseCommandLine(cmdInfo);
 
-	if (!pMainFrame->LoadSyntaxByLanguage(cmdInfo.m_Language))
+	try {
+		if (!pMainFrame->LoadSyntaxByLanguage(cmdInfo.m_Language))
+			return FALSE;
+	}
+	catch (CExpc ex) {
+		AfxMessageBox(CString(ex.m_strCause.c_str()));
 		return FALSE;
-
+	}
 
 	if( !cmdInfo.m_strFileName.IsEmpty() )
 		pMainFrame->m_bNewDoc = FALSE;

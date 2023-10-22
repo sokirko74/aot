@@ -1,6 +1,3 @@
-// ChildFrm.cpp : implementation of the CChildFrame class
-//
-
 #include "StdAfx.h"
 #include "VisualSynan.h"
 #include "MainFrm.h"
@@ -15,8 +12,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-/////////////////////////////////////////////////////////////////////////////
-// CChildFrame
 
 IMPLEMENT_DYNCREATE(CChildFrame, CMDIChildWnd)
 
@@ -32,18 +27,11 @@ BEGIN_MESSAGE_MAP(CChildFrame, CMDIChildWnd)
 	ON_COMMAND(ID_BUILD_RELS, OnBuildRels)
 	ON_COMMAND(IDM_KILLHOM, OnKillHom)
 	ON_COMMAND(ID_SHOW_MESSAGES, OnShowMessages)
-	ON_COMMAND(ID_FILE_SHOWGRAPHEMATICSRESULTS, OnFileShowgraphematicsresults)
-	ON_COMMAND(ID_FILE_SHOWMORPHOLOGYRESULTS, OnFileShowmorphologyresults)
-	ON_COMMAND(ID_FILE_SHOWPOSTMORPH, OnFileShowpostmorph)
 
 	
 
 	//}}AFX_MSG_MAP
-	ON_COMMAND(ID_FILE_SHOWPOSTMORPH, OnFileShowpostmorph)
 END_MESSAGE_MAP()
-
-/////////////////////////////////////////////////////////////////////////////
-// CChildFrame construction/destruction
 
 CChildFrame::CChildFrame()
 {
@@ -68,9 +56,6 @@ BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 
-
-/////////////////////////////////////////////////////////////////////////////
-// CChildFrame diagnostics
 
 #ifdef _DEBUG
 void CChildFrame::AssertValid() const
@@ -207,12 +192,12 @@ void CChildFrame::OnKillHom()
 	CVisualSynanApp *pApp = (CVisualSynanApp *)AfxGetApp();
 
 	CDlgHom dlg(this);
-	dlg.m_type = pApp->m_SyntaxHolder.m_piSentCollection->KillHomonymsMode;
+	dlg.m_type = pApp->m_SyntaxHolder.m_Synan.GetOpt()->m_KillHomonymsMode;
 	
 	if( dlg.DoModal() != IDOK )
 		return;
 
-	pApp->m_SyntaxHolder.m_piSentCollection->KillHomonymsMode = dlg.m_type;
+	pApp->m_SyntaxHolder.m_Synan.SetKillHomonymsMode((KillHomonymsEnum)dlg.m_type);
 }
 
 
@@ -224,7 +209,7 @@ void CChildFrame::OnShowMessages()
 	CVisualSynanApp *pApp = (CVisualSynanApp *)AfxGetApp();
 
 	bShowMessages = !bShowMessages;
-	pApp->m_SyntaxHolder.m_piSentCollection->SilentMode = !bShowMessages;
+	pApp->m_SyntaxHolder.m_Synan.put_SilentMode(!bShowMessages);
 	CMenu* pMenu = GetParent()->GetParent()->GetMenu();
 	if (bShowMessages)
 	  pMenu->CheckMenuItem (ID_SHOW_MESSAGES,	MF_BYCOMMAND  | MF_CHECKED );
@@ -233,52 +218,5 @@ void CChildFrame::OnShowMessages()
 	
 }
 
-void CChildFrame::OnFileShowgraphematicsresults()
-{
-	CVisualSynanApp *pApp = (CVisualSynanApp *)AfxGetApp();
-	CString report;
-	for (size_t  i = 0 ; i < pApp->m_SyntaxHolder.m_piGraphan->GetLineCount(); i++)
-	{
-		report += (const char*)pApp->m_SyntaxHolder.m_piGraphan->GetLine(i);
-		report += "\n";
-	};
-	GlobalOpenReport(report, "Graphan");
-}
-
-void ShowPlmLines (std::string  Name, LEMMATIZERLib::IPLMLineCollectionPtr piMorphPlmLines)
-{
-	CString report;
-	for (size_t  k = 0; k < piMorphPlmLines->Count; k++)
-	{
-		std::string q = (const char*)piMorphPlmLines->Item[k]; 
-		//  delete some unuseful spaces...
-		int ii  = q.find_first_not_of(' ');
-		if (ii != std::string::npos)
-		{
-			ii  = q.find_first_of(' ', ii);
-			int end = 0;
-			if (ii != std::string::npos)
-				end  = q.find_first_not_of(' ', ii);
-			q.erase(ii+1, end-ii-1);
-
-		}
-		report += q.c_str();
-		report += "\n";
-	};
-	GlobalOpenReport(report, Name.c_str());
-
-};
 
 
-void CChildFrame::OnFileShowmorphologyresults()
-{
-	CVisualSynanApp *pApp = (CVisualSynanApp *)AfxGetApp();
-	ShowPlmLines("Morphology", pApp->m_SyntaxHolder.m_piAfterMorphPlmLines);
-}
-
-void CChildFrame::OnFileShowpostmorph()
-{
-	CVisualSynanApp *pApp = (CVisualSynanApp *)AfxGetApp();
-	ShowPlmLines("Postmorphology", pApp->m_SyntaxHolder.m_piBeforeSyntaxPlmLines);
-	
-}

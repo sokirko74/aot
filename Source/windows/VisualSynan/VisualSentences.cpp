@@ -3,6 +3,8 @@
 #include "VisualSynan.h"
 #include "WaitThread.h"
 #include <atlbase.h>
+#include "synan/SynCommonLib/RelationsIterator.h"
+
 
 CComModule _Module;
 
@@ -22,23 +24,15 @@ CVisualSentences::~CVisualSentences()
 
 
 
-BOOL CVisualSentences::FillSentencesArray(SYNANLib::ISentencesCollectionPtr& piSentCollection)
+BOOL CVisualSentences::FillSentencesArray(const CSentencesCollection& coll)
 {
-	BOOL bRes = TRUE;
 	try
 	{
-		
-		CVisualSentence* pVisualSentence;
-		BOOL bRes = TRUE;		
-		int iSentCount = piSentCollection->GetSentencesCount();
-
-		for(int i = 0 ; i < iSentCount ; i++ )
+		for(const auto& s: coll.m_vectorSents)
 		{			
-			SYNANLib::ISentencePtr piSentence;
-			piSentence = piSentCollection->GetSentence(i);
-			pVisualSentence = new CVisualSentence;
-			bRes = pVisualSentence->Init(piSentence);
-			m_arrSentences.Add(pVisualSentence);
+			CVisualSentence * vs = new CVisualSentence;
+			vs->Init(*s);
+			m_arrSentences.Add(vs);
 		}
 	}
 	catch(...)
@@ -46,7 +40,7 @@ BOOL CVisualSentences::FillSentencesArray(SYNANLib::ISentencesCollectionPtr& piS
 		return FALSE;
 	}
 
-return bRes;
+	return TRUE;
 }
 
 
@@ -182,47 +176,33 @@ void CVisualSentences::BuildRels(CString& report)
 	try
 	{
 
-		SYNANLib::ISentencesCollectionPtr piSentCollection = ((CVisualSynanApp*)::AfxGetApp())->m_SyntaxHolder.m_piSentCollection;
+		auto& piSentCollection = ((CVisualSynanApp*)::AfxGetApp())->m_SyntaxHolder.m_Synan;
 
 		
-		for(int i = 0 ; i < piSentCollection->SentencesCount ; i++ )
+		for(auto& piSent: piSentCollection.m_vectorSents)
 		{
 			
-			//file << "Sentence № " << i << endl;
 			report += "Sentence № ";
-			CString ss;
-			ss.Format(_T("%d "), i);
-			report += ss;
 			report += "\n";
 			
-			SYNANLib::IRelationsIteratorPtr piRelIt;
-			SYNANLib::ISentencePtr piSent = piSentCollection->Sentence[i];
+			CRelationsIterator iter;
+			iter.SetSentence(piSent);
+			for(int j = 0 ; j < piSent->GetClausesCount(); j++ )		
+				iter.AddClauseNoAndVariantNo(j , 0);
 
-			for(int l = 0 ; l < piSent->GetPrimitiveClausesCount() ; l++ )
-			{
-				int i1 = piSent->GetPrimitiveClause(l)->GetFirstWord();
-				int i2 = piSent->GetPrimitiveClause(l)->GetLastWord();
-			}
-
-
-			piRelIt = piSent->CreateRelationsIterator();
-			for(int j = 0 ; j < piSent->ClausesCount ; j++ )		
-				piRelIt->AddClauseNoAndVariantNo(j , 0);
-
-			piRelIt->BuildRelations();
+			iter.BuildRelations();
 
 			report += "Firm groups: " ;
 			report += "\n";
 
-			for(int j = 0 ; j < piRelIt->FirmGroupsCount ; j++ )
+			for(const CGroup& g: iter.GetFirmGroups())
 			{
 				CString str;
-				SYNANLib::IGroupPtr& piGroup = piRelIt->GetFirmGroup(j);
-				str += ReadStrFromCOM(piGroup->TypeStr);
+				str += FromRMLEncode(piSent->GetOpt()->GetGroupNameByIndex(g.m_GroupType));
 				str += "(";
-				for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
+				for(int k = g.m_iFirstWord ; k <= g.m_iLastWord; k++ )
 				{
-					str = str + ReadStrFromCOM(piSent->GetWord(k)->GetWordStr()) + " ";					
+					str = str + FromRMLEncode(piSent->GetWords()[k].m_strWord) + " ";
 				}
 
 				str += ")";
@@ -234,48 +214,39 @@ void CVisualSentences::BuildRels(CString& report)
 			report += "Relations: " ;
 			report += "\n";
 
-			for(int j = 0 ; j < piRelIt->RelationsCount ; j++ )
+			for(const CSynOutputRelation& piRel: iter.GetRelations())
 			{
 				CString str;
-				SYNANLib::IRelationPtr piRel;
-				piRel = piRelIt->Relation[j];
-				str += ReadStrFromCOM(piRel->GetName());
+				str += FromRMLEncode(piSent->GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type));
 				str += "(";
 
-				if( piRel->SourceItemType == EWord )
+				if( piRel.m_iSourceGroup == -1 )
 				{
-					int iSourceWord = piRel->GetSourceItemNo();
-					int iClause = piSent->GetWord(iSourceWord)->GetClauseNo();
-					str = str + ReadStrFromCOM(piSent->GetWord(iSourceWord)->GetWordStr());					
+					int iSourceWord = piRel.m_Relation.m_iFirstWord;
+					str = str + FromRMLEncode(piSent->GetWords()[iSourceWord].m_strWord);
 				}
 				else
-				if( piRel->SourceItemType == EGroup )
 				{
-					int iSourceGroup =  piRel->GetSourceItemNo();
-					SYNANLib::IGroupPtr piGroup = piRelIt->GetFirmGroup(iSourceGroup);
-					for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
+					const CGroup& piGroup = iter.GetFirmGroups()[piRel.m_iSourceGroup];
+					for(int k = piGroup.m_iFirstWord; k <= piGroup.m_iLastWord ; k++ )
 					{
-						str = str + ReadStrFromCOM(piSent->GetWord(k)->GetWordStr()) + " ";	
+						str = str + FromRMLEncode(piSent->GetWords()[k].m_strWord) + " ";
 					}
 				}
 
 				str += " -> ";
 
-				if( piRel->TargetItemType == EWord )
+				if (piRel.m_iTargetGroup == -1)
 				{
-					int iTargetWord = piRel->GetTargetItemNo();
-					int iClause = piSent->GetWord(iTargetWord)->GetClauseNo();
-					str = str + ReadStrFromCOM(piSent->GetWord(iTargetWord)->GetWordStr());
+					str = str + FromRMLEncode(piSent->GetWords()[piRel.m_Relation.m_iLastWord].m_strWord);
 				}
 				else
-				if( piRel->TargetItemType == EGroup )
 				{
-					int iTargetGroup =  piRel->GetTargetItemNo();
-					SYNANLib::IGroupPtr piGroup = piRelIt->GetFirmGroup(iTargetGroup);
-					for(int k = piGroup->FirstWord ; k <= piGroup->LastWord ; k++ )
+					const CGroup& piGroup = iter.GetFirmGroups()[piRel.m_iTargetGroup];
+					for (int k = piGroup.m_iFirstWord; k <= piGroup.m_iLastWord; k++)
 					{
-						str = str + ReadStrFromCOM(piSent->GetWord(k)->GetWordStr()) + " ";	
-					}			
+						str = str + FromRMLEncode(piSent->GetWords()[k].m_strWord) + " ";
+					}
 				}
 				str = str + ")";
 
@@ -295,31 +266,47 @@ void CVisualSentences::BuildRels(CString& report)
 
 
 
-void CVisualSynVariant::InitClauseVariant(SYNANLib::IClausePtr& piClause, int ClauseVariantNo)
+void CVisualSynVariant::InitClauseVariant(const CClause& piClause, int ClauseVariantNo)
 {
-	SYNANLib::IClauseVariantPtr& piClauseVariant  = piClause->GetClauseVariant(ClauseVariantNo);
-	for(int i = 0 ; i < piClauseVariant->GetUnitsCount() ; i++ )
+	CSVI pSynVar   = piClause.GetSynVariantByNo(ClauseVariantNo);
+	if (!piClause.IsValidCSVI(pSynVar))
+		return;
+
+	for(auto in_unit: pSynVar->m_SynUnits)
 	{
 		SUnit unit;
 
-		unit.m_Type = (EUnitType)piClauseVariant->GetUnit(i)->GetType();
+		unit.m_Type = in_unit.m_Type;
 		if( unit.m_Type == EClause )
 		{
-			unit.m_iClauseNum = piClauseVariant->GetUnit(i)->GetClauseNum();
-			unit.m_iClauseTypeNum = piClauseVariant->GetUnit(i)->GetActiveClauseTypeNum();
+			int iClauseNum = piClause.m_pSent->FindClauseIndexByPeriod(in_unit.m_SentPeriod);
+			if (iClauseNum == -1) {
+				continue;
+			}
+			unit.m_iClauseNum = iClauseNum;
+			unit.m_iClauseTypeNum = in_unit.m_iClauseTypeNum;
 		}
 		else
 		{
-			for(int k = 0 ; k < piClauseVariant->GetUnit(i)->GetSimplePrepsCount(); k++ )
+			for(const auto& prep_no: in_unit.m_SimplePrepNos)
 			{
-				CString str = "Ob:";
-				str.Format(_T(" %s"), ReadStrFromCOM(piClauseVariant->GetUnit(i)->GetSimplePrepStr(k)));
+				CString str = "Ob: ";
+				str += FromRMLEncode(piClause.GetOpt()->GetOborDic()->m_Entries[prep_no].m_OborotEntryStr);
 				unit.m_strOborotsNum += str;					
 			}
 			
-			unit.m_strGrammems = ReadStrFromCOM(piClauseVariant->GetUnit(i)->GetGrammemsStr());
-			unit.m_iHommonyNum = piClauseVariant->GetUnit(i)->GetActiveHomonymNum();
-			unit.m_iWordNum = piClauseVariant->GetUnit(i)->GetWordNum();
+			std::string s = in_unit.GetGrammemsByAncodes();
+			if (in_unit.m_Type == EWord)
+			{
+				auto& H = piClause.GetWords()[in_unit.m_SentPeriod.m_iFirstWord].m_Homonyms[in_unit.m_iHomonymNum];
+				if (H.m_bPassive)
+					s = "PASSIVE " + s;
+				if (in_unit.m_bReflexive)
+					s = "REFLEXIVE " + s;
+			};
+			unit.m_strGrammems = FromRMLEncode(s);
+			unit.m_iHommonyNum = in_unit.m_iHomonymNum;
+			unit.m_iWordNum = in_unit.m_SentPeriod.m_iFirstWord;
 		}
 		
 
@@ -327,38 +314,33 @@ void CVisualSynVariant::InitClauseVariant(SYNANLib::IClausePtr& piClause, int Cl
 
 	}
 
-	m_iClauseTypeNum = piClauseVariant->ClauseRootNo;
+	m_iClauseTypeNum = pSynVar->m_ClauseTypeNo;
 
 
-	for(int i = 0 ; i < piClauseVariant->GetGroupsCount() ; i++ )
+	for(const CGroup& g: pSynVar->m_vectorGroups.GetGroups())
 	{
 		CVisualGroup Group;
-		Group.Init(piClauseVariant->GetGroup(i));
+		Group.Init(piClause, g);
 		m_Groups.push_back(Group);
 	}		
 
 	
 	
-	if (piClauseVariant->Predicate != -1)
+	if (pSynVar->m_iPredk != -1)
 	{
 		//  convert predicate to sentence coordinates
-		int predk  = piClauseVariant->Predicate;
-		ASSERT(predk < piClauseVariant->GetUnitsCount());
-		ASSERT(piClauseVariant->GetUnit(predk)->GetType() == EWord);
-		m_iPredk = piClauseVariant->GetUnit(predk)->GetWordNum();
+		m_iPredk = pSynVar->GetSentenceCoordinates(pSynVar->m_iPredk).m_iFirstWord;
 	}
 
 
 	//  convert subjects to sentence coordinates
 	m_Subjects.clear();
-	for (size_t i=0; i <  piClauseVariant->SubjectsCount; i++)
+	for (auto subj: pSynVar->m_Subjects)
 	{
-		int subj = piClauseVariant->Subjects[i];
-		ASSERT(piClauseVariant->GetUnit(subj)->GetType() == EWord);
-		ASSERT(subj < piClauseVariant->GetUnitsCount());
-		m_Subjects.push_back(piClauseVariant->GetUnit(subj)->GetWordNum());
+		auto subj1 = pSynVar->GetSentenceCoordinates(subj).m_iFirstWord;
+		m_Subjects.push_back(subj1);
 	};
 
-	m_Weight = piClauseVariant->VariantWeight;
+	m_Weight = pSynVar->m_iWeight;
 }
 

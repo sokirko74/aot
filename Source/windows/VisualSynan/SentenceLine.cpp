@@ -1,7 +1,3 @@
-// SentenceLine.cpp: implementation of the CSentenceLine class.
-//
-//////////////////////////////////////////////////////////////////////
-
 #include "StdAfx.h"
 #include "VisualSynan.h"
 #include "SentenceLine.h"

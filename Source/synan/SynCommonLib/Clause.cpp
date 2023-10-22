@@ -1547,3 +1547,33 @@ const CSVI CClause::GetSynVariantByNo(long lVarNum) const
 
 	return  pSynVar;
 }
+
+std::string CClause::GetClauseDescr() const
+{
+	std::string S;
+	for (auto& c: m_vectorConjs)
+	{
+		int iConjIndex = c.m_index;
+
+		switch (c.m_FromWhere)
+		{
+		case FROM_OBOR_DIC:
+		{
+			S += "\"";
+			S += GetOpt()->GetOborDic()->m_Entries[iConjIndex].m_OborotEntryStr;
+			S += "\"";
+			break;
+		}
+		case FROM_SUB_CONJ:
+		{
+			S += GetOpt()->GetOborDic()->GetSubConjs()[iConjIndex];
+			break;
+		}
+
+		}
+		S += " ";
+	}
+	if (IsRelative())
+		S = "Relative " + S;
+	return S;
+}

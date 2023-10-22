@@ -36,7 +36,7 @@ struct SClauseType
 	EClauseType			m_Type;
 	CWordAndHomonym		m_Root;
 
-std::set<CInputSymbol>	m_AutomatSymbolInterpetation;
+	std::set<CInputSymbol>	m_AutomatSymbolInterpetation;
 
 	SClauseType(EClauseType Type, int iNodeIndex, int iHomNum)
 	{

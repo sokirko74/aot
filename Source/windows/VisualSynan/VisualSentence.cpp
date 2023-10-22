@@ -26,7 +26,7 @@ CVisualSentence::~CVisualSentence()
 }
 
 
-BOOL CVisualSentence::Init(SYNANLib::ISentencePtr& piSentence)
+BOOL CVisualSentence::Init(const CSentence& piSentence)
 {
 	BOOL bRes;
 
@@ -258,14 +258,13 @@ void CVisualSentence::PrintLine(CDC *pDC, int iLine, int& iOffset)
 	}
 }
 
-
-BOOL CVisualSentence::ReadClauses(SYNANLib::ISentencePtr& piSentence)
+BOOL CVisualSentence::ReadClauses(const CSentence& piSentence)
 {
 
 	int ClauseNo = 0;
 	try
 	{
-		int iClausesCount = piSentence->GetClausesCount();
+		int iClausesCount = piSentence.GetClausesCount();
 
 		if( !m_arrWords.GetSize() )
 			return FALSE;
@@ -274,7 +273,7 @@ BOOL CVisualSentence::ReadClauses(SYNANLib::ISentencePtr& piSentence)
 		{
 
 			CVisualClause* pClause = new CVisualClause;
-			SYNANLib::IClausePtr piClause = piSentence->GetClause(ClauseNo);
+			const CClause piClause = piSentence.GetClause(ClauseNo);
 
 			pClause->SetWordsArray(&m_arrWords);
 
@@ -301,21 +300,14 @@ BOOL CVisualSentence::ReadClauses(SYNANLib::ISentencePtr& piSentence)
 	return TRUE;
 }
 
-BOOL CVisualSentence::ReadWords(SYNANLib::ISentencePtr& piSentence)
+BOOL CVisualSentence::ReadWords(const CSentence& piSentence)
 {
 	try
 	{
-		BOOL bRes = TRUE;
-		long lWordCount;
-		lWordCount = piSentence->GetWordsNum();
-		SYNANLib::IWordPtr piWord;
-		CVisualWord* pVisualWord;
-
-		for(int i = 0 ; i < lWordCount ; i++)
+		for(const auto& w: piSentence.GetWords())
 		{
-			piWord = piSentence->GetWord(i);
-			pVisualWord = new CVisualWord;
-			bRes = pVisualWord->Init(piWord, piSentence);
+			auto pVisualWord = new CVisualWord;
+			BOOL bRes = pVisualWord->Init(w, piSentence);
 			if( !bRes)
 				return FALSE;
 			m_arrWords.Add(pVisualWord);

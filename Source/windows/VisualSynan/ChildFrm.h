@@ -65,10 +65,6 @@ protected:
 	CFont m_Font;
 
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg void OnFileShowgraphematicsresults();
-	afx_msg void OnFileShowmorphologyresults();
-	afx_msg void OnFileShowpostmorph();
 };
 
 /////////////////////////////////////////////////////////////////////////////

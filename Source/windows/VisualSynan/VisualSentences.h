@@ -1,10 +1,7 @@
-#ifndef _VisualSentences
-	#define _VisualSentences
-
-
-#define COM_NO_WINDOWS_H
+#pragma once
 
 #include "SentenceLine.h"
+#include "../../synan/SynanLib/SentencesCollection.h"
 
 
 typedef std::vector<CSentenceLine> CSentLineVector;
@@ -45,11 +42,7 @@ public:
 	BOOL GetActiveHomDescr(int m_iActiveSentenceTT,int m_iActiveWordTT,CString& strLemma,CString& strGramChar);
 	CSize GetSentencesSize();	
 	BOOL PrintSentences(CDC* pDC, CRect& rectForDrawing, int iOffset);
-	void SetPlmFile(CString strPlmFile)
-	{
-		m_strPlmFile = strPlmFile;
-	}	
-	BOOL FillSentencesArray(SYNANLib::ISentencesCollectionPtr& piSentCollection);
+	BOOL FillSentencesArray(const  CSentencesCollection& piSentCollection);
 
 protected:
 	
@@ -92,7 +85,7 @@ public:
 	{ return m_iSpaceBetweenLinesG; };
 	BOOL PrintSentences(CDC* pDC);
 	BOOL FillActiveGroupsArray(BOOL bUseGroupID);
-	BOOL Init(SYNANLib::ISentencePtr& piSentence);
+	BOOL Init(const CSentence& piSentence);
 	BOOL PointInSentRect(CPoint& point) { return m_SentRect.PtInRect(point); };
 	BOOL GetHomonymsArray(CPoint& point,CPtrArray** pHomonymsArray, int* iActiveWord);
 	BOOL GetActiveHomDescr(int iActiveWord,CString& strLemma,CString& strGramChar);
@@ -115,8 +108,8 @@ public:
 
 protected:
 
-	BOOL ReadWords(SYNANLib::ISentencePtr& piSentence);
-	BOOL ReadClauses(SYNANLib::ISentencePtr& piSentence);
+	BOOL ReadWords(const CSentence& piSentence);
+	BOOL ReadClauses(const  CSentence& piSentence);
 	std::vector<CVisualClause*> m_arrClauses;
 	CPtrArray m_arrWords;
 	int m_iMaxClauseGroupLevel;
@@ -189,7 +182,7 @@ struct CVisualGroup : public CVisualPeriod
 
 
 	CVisualGroup();
-	BOOL Init(SYNANLib::IGroupPtr& piGroup);
+	BOOL Init(const CClause& clause, const CGroup& piGroup);
 	BOOL CalculateCoordinates(CDC* pDC, CPoint& pointLeftLeg, CPoint& poitRightLeg, int top, int iWidth, BOOL bOnDifferentLines, COLORREF Color,int iLine);
 	void PrintGroupPart(CDC* pDC, int i, int iOffset = 0);
 };
@@ -244,7 +237,7 @@ public:
 		m_iPredk = -1;		
 	};	
 
-	void InitClauseVariant(SYNANLib::IClausePtr& piClause, int ClauseVariantNo);
+	void InitClauseVariant(const CClause& piClause, int ClauseVariantNo);
 
 	bool operator==(const std::vector<SUnit> vectorUnits) const
 	{
@@ -282,7 +275,7 @@ public:
 	};
 
 	~CClauseType () {};
-	BOOL Init(SYNANLib::IClauseRootPtr piClauseType);
+	BOOL Init(const CClause& clause, const SClauseType& piClauseType);
 	BOOL HasHom(int iHom)
 	{
 		for(int i = 0 ; i <  m_arrHomNum.GetSize() ; i++ )
@@ -307,7 +300,7 @@ friend class CVisualSentence;
 public:
 	CVisualClause();
 	~CVisualClause();
-	BOOL InitVisualClause(SYNANLib::IClausePtr& piClause);
+	BOOL InitVisualClause(const CClause& piClause);
 	BOOL CalculateClauseGroupCoordinates(CDC* pDC,int iWidth,BOOL bShowGroups, int& iLine);
 	BOOL FillActiveGroupsArray(BOOL bUseGroupID, std::map<int, int>& mapClauseNumTypeNum, int iClauseNum);
 	
@@ -348,16 +341,16 @@ protected:
 	int		m_Weight;
 };
 
-class CSynHomonym : public CObject
+class CVisualHomonym : public CObject
 {
 public:
 
-	CSynHomonym()
+	CVisualHomonym()
 	{
 		m_bSubj = FALSE;
 		m_bPredk = FALSE;
 	}
-	~CSynHomonym()
+	~CVisualHomonym()
 	{
 	}
 	BOOL m_bPredk;
@@ -381,7 +374,7 @@ public:
 	CVisualWord();
 	~CVisualWord();
 
-	BOOL Init(SYNANLib::IWordPtr& piWord, SYNANLib::ISentencePtr& piSentence);
+	BOOL Init(const CSynWord& piWord, const CSentence& piSentence);
 	int GetWordLen(CDC* pDC);
 	int GetWordHight(CDC* pDC);
 	int PrintWord(CDC* pDC,int iX, int iY);
@@ -424,4 +417,3 @@ CPartOfGrArc* NewGroupArcPart(long color, int line, CPoint start, CPoint end,ETy
 int  AssignPeriodLevel(std::vector<CVisualGroup*>& pPeriodArr);
 bool PeriodsCompare_sort(const CVisualPeriod* pPeriod1, const CVisualPeriod* pPeriod2 );
 
-#endif //_VisualSentences

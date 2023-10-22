@@ -46,40 +46,35 @@ void CVisualClause::SetActiveType(int iType)
 
 }
 
-BOOL CVisualClause::InitVisualClause(SYNANLib::IClausePtr& piClause)
+BOOL CVisualClause::InitVisualClause(const CClause& piClause)
 {
 	try
 	{
 		assert (m_pWordsArr);
 
-		m_iFirstWord = piClause->GetFirstWord();
-		m_iLastWord = piClause->GetLastWord();
+		m_iFirstWord = piClause.m_iFirstWord;
+		m_iLastWord = piClause.m_iLastWord;
 
 		{
-			int RelWordNo = piClause->RelativeWord;
+			int RelWordNo = piClause.m_RelativeWord.m_WordNo;
 			if (RelWordNo != -1)
 			{
 				CVisualWord* RelativeWord = (CVisualWord*)m_pWordsArr->GetAt(RelWordNo);
-				RelativeWord->m_ReferenceWordNo  = piClause->AntecedentWord;
+				RelativeWord->m_ReferenceWordNo  = piClause.m_AntecedentWordNo;
 			};
 		};
-		m_strConjsName = ReadStrFromCOM(piClause->GetDescription());
-		int iTypeCount = piClause->GetClauseRootsCount();
-
+		m_strConjsName = FromRMLEncode(piClause.GetClauseDescr());
 		BOOL bFirst = TRUE;
-	
 		CString strPrev("");
 		int iPrev = -2;
-		for(int i = 0 ; i < iTypeCount ; i++)
+		for(size_t i = 0; i < piClause.m_vectorTypes.size(); ++i)
 		{
-			
-			SYNANLib::IClauseRootPtr piType = piClause->GetClauseRoots(i);
-
-			int iWordNum = piType->RootWordNo;
+			const auto& t = piClause.m_vectorTypes[i];
+			int iWordNum = t.m_Root.m_WordNo;
 
 			CClauseType* pType = new CClauseType;
 
-			if( !pType->Init(piType) )
+			if( !pType->Init(piClause, t) )
 				return FALSE;
 
 			strPrev = pType->m_strName;
@@ -100,7 +95,7 @@ BOOL CVisualClause::InitVisualClause(SYNANLib::IClausePtr& piClause)
 		}
 
 		if( bFirst )
-			m_iActiveType = iTypeCount - 1;
+			m_iActiveType = piClause.m_vectorTypes.size() - 1;
 	}
 	catch(...)
 	{
@@ -111,11 +106,7 @@ BOOL CVisualClause::InitVisualClause(SYNANLib::IClausePtr& piClause)
 	try
 	{
 		SetActiveType(m_iActiveType);
-
-
-
-		ASSERT(piClause->GetVariantsCount() > 0);
-		for(int  i = 0 ; i < piClause->GetVariantsCount() ; i++ )
+		for(int  i = 0 ; i < piClause.m_SynVariants.size() ; i++ )
 		{
 			CVisualSynVariant SynVar;
 			SynVar.InitClauseVariant(piClause, i);
@@ -149,7 +140,7 @@ void CVisualClause::SetBestHomonyms()
 			pWord = (CVisualWord*)m_pWordsArr->GetAt(SynVar.m_vectorUnits[i].m_iWordNum);
 			pWord->m_iActiveHomonym = SynVar.m_vectorUnits[i].m_iHommonyNum;
 			pWord->m_strActiveGrammems = SynVar.m_vectorUnits[i].m_strGrammems;
-			CSynHomonym* pHom = ((CSynHomonym*)pWord->m_arrHomonyms.GetAt(pWord->m_iActiveHomonym));
+			CVisualHomonym* pHom = ((CVisualHomonym*)pWord->m_arrHomonyms.GetAt(pWord->m_iActiveHomonym));
 			if( !SynVar.m_vectorUnits[i].m_strOborotsNum.IsEmpty() )
 				pWord->m_strSomeDescr = SynVar.m_vectorUnits[i].m_strOborotsNum;
 			else
@@ -239,7 +230,7 @@ BOOL CVisualClause::FillActiveGroupsArray(BOOL bUseGroupID, std::map<int, int>& 
 			CVisualWord* pWord = (CVisualWord*)m_pWordsArr->GetAt(SynVar.m_vectorUnits[k].m_iWordNum);
 			pWord->m_strActiveGrammems = SynVar.m_vectorUnits[k].m_strGrammems;
 
-			CSynHomonym* pHom = ((CSynHomonym*)pWord->m_arrHomonyms.GetAt(SynVar.m_vectorUnits[k].m_iHommonyNum));
+			CVisualHomonym* pHom = ((CVisualHomonym*)pWord->m_arrHomonyms.GetAt(SynVar.m_vectorUnits[k].m_iHommonyNum));
 			if( !SynVar.m_vectorUnits[k].m_strOborotsNum.IsEmpty() )
 				pWord->m_strSomeDescr = SynVar.m_vectorUnits[k].m_strOborotsNum;
 			else
@@ -252,17 +243,17 @@ BOOL CVisualClause::FillActiveGroupsArray(BOOL bUseGroupID, std::map<int, int>& 
 	if (SynVar.m_iPredk != -1)
 	{
 		pWord = (CVisualWord*)m_pWordsArr->GetAt(SynVar.m_iPredk);
-		CSynHomonym* pHom = (CSynHomonym*)pWord->m_arrHomonyms.GetAt(pWord->m_iActiveHomonym);
+		CVisualHomonym* pHom = (CVisualHomonym*)pWord->m_arrHomonyms.GetAt(pWord->m_iActiveHomonym);
 		pHom->m_bPredk = TRUE;
 		for (size_t l=0; l<  pWord->m_MainVerbs.size(); l++)
 		{
 			CVisualWord* pWord1 = (CVisualWord*)m_pWordsArr->GetAt(pWord->m_MainVerbs[l]);
-			CSynHomonym* pHom1 = (CSynHomonym*)pWord1->m_arrHomonyms.GetAt(pWord1->m_iActiveHomonym);
+			CVisualHomonym* pHom1 = (CVisualHomonym*)pWord1->m_arrHomonyms.GetAt(pWord1->m_iActiveHomonym);
 			pHom1->m_bPredk = TRUE;
 			for (size_t l1=0; l1<  pWord1->m_MainVerbs.size(); l1++)
 			{
 				CVisualWord* pWord2 = (CVisualWord*)m_pWordsArr->GetAt(pWord1->m_MainVerbs[l1]);
-				CSynHomonym* pHom2 = (CSynHomonym*)pWord2->m_arrHomonyms.GetAt(pWord2->m_iActiveHomonym);
+				CVisualHomonym* pHom2 = (CVisualHomonym*)pWord2->m_arrHomonyms.GetAt(pWord2->m_iActiveHomonym);
 				pHom2->m_bPredk = TRUE;
 			};
 			
@@ -272,7 +263,7 @@ BOOL CVisualClause::FillActiveGroupsArray(BOOL bUseGroupID, std::map<int, int>& 
 	for (size_t j=0; j < SynVar.m_Subjects.size(); j++)
 	{
 		pWord = (CVisualWord*)m_pWordsArr->GetAt(SynVar.m_Subjects[j] );
-		CSynHomonym* pHom = (CSynHomonym*)pWord->m_arrHomonyms.GetAt(pWord->m_iActiveHomonym);
+		CVisualHomonym* pHom = (CVisualHomonym*)pWord->m_arrHomonyms.GetAt(pWord->m_iActiveHomonym);
 		pHom->m_bSubj = TRUE;
 	};
 
@@ -337,10 +328,6 @@ bool PeriodsCompare_sort(const CVisualPeriod* pPeriod1, const CVisualPeriod* pPe
 }
 
 
-
-
-
-
 //!!! can be applied only to the sorted array of CVisualPeriod
 int  AssignPeriodLevel(std::vector<CVisualGroup*>& pPeriodArr)
 {
@@ -399,13 +386,20 @@ int  AssignPeriodLevel(std::vector<CVisualGroup*>& pPeriodArr)
 }
 
 
-BOOL CClauseType::Init(SYNANLib::IClauseRootPtr piClauseType)
+BOOL CClauseType::Init(const CClause& clause, const SClauseType& piClauseType)
 {
 	try
 	{
-		m_arrHomNum.Add(piClauseType->RootHomonymNo);
-		m_iWordNum = piClauseType->RootWordNo;
-		m_strName = ReadStrFromCOM(piClauseType->GetDescription());
+		m_arrHomNum.Add(piClauseType.m_Root.m_HomonymNo);
+		m_iWordNum = piClauseType.m_Root.m_WordNo;
+
+		std::string str;
+		if (piClauseType.m_Type == UnknownSyntaxElement)
+			str = "EMPTY";
+		else {
+			str = clause.GetOpt()->GetGramTab()->GetClauseNameByType((long)piClauseType.m_Type);
+		}
+		m_strName = FromRMLEncode(str);
 	}
 	catch(...)
 	{
