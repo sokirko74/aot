@@ -30,13 +30,7 @@ if (BUILD_COM)
     add_subdirectory (agramtab)
     add_subdirectory (graphan)
     add_subdirectory (Lemmatizer)
-    add_subdirectory (MAPost)
-    add_subdirectory (SynAn)
-    add_subdirectory (Seman)
     add_subdirectory (TestLemmatizerCOM)
-    if(BUILD_WINDOWS_GUI)
-        add_subdirectory (Demo)
-    endif()
 endif()
 
 if(BUILD_WINDOWS_GUI)
@@ -52,6 +46,6 @@ if(BUILD_WINDOWS_GUI)
     endif()
 
     add_subdirectory (VisualSynan)
-
+    add_subdirectory (Demo)
 endif()
 

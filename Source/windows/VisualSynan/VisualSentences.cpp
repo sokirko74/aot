@@ -2,7 +2,6 @@
 #include "VisualSentences.h"
 #include "VisualSynan.h"
 #include "WaitThread.h"
-#include <atlbase.h>
 #include "synan/SynCommonLib/RelationsIterator.h"
 
 

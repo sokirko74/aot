@@ -1,23 +1,8 @@
-// demoDlg.h : header file
-//
-
-#if !defined(AFX_DEMODLG_H__59A50E5C_1A5C_11D3_9CCC_00105A68BAF2__INCLUDED_)
-#define AFX_DEMODLG_H__59A50E5C_1A5C_11D3_9CCC_00105A68BAF2__INCLUDED_
-
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
-
-
-#import "../Lemmatizer/Lemmatizer.tlb"
-#import "../agramtab/agramtab.tlb"
-
-/////////////////////////////////////////////////////////////////////////////
-// CDemoDlg dialog
+#pragma once 
+#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
 
 class CDemoDlg : public CDialog
 {
-// Construction
 public:
 	CDemoDlg(CWnd* pParent = NULL);	// standard constructor
 	virtual ~CDemoDlg();	
@@ -45,21 +30,13 @@ public:
 protected:
 	CToolTipCtrl*					m_pToolTip;
 	HICON	m_hIcon;
-	LEMMATIZERLib::ILemmatizerPtr	m_piRussian;
-	LEMMATIZERLib::ILemmatizerPtr	m_piEnglish;
-	LEMMATIZERLib::ILemmatizerPtr	m_piGerman;
-	AGRAMTABLib::IGramTabPtr		m_piRussianAgram;
-	AGRAMTABLib::IGramTabPtr		m_piEnglishAgram;
-	AGRAMTABLib::IGramTabPtr		m_piGermanAgram;
-	bool m_bRussianLoaded; 
-	bool m_bEnglishLoaded;
-	bool m_bGermanLoaded;
-	bool m_bEngAgramLoaded;	
-	bool m_bRusAgramLoaded;	
-	bool m_bGerAgramLoaded;	
-	AGRAMTABLib::IGramTabPtr		GetGramTabByLanguage(int Lang);
-	LEMMATIZERLib::ILemmatizerPtr	GetLemmatizerByLanguage(int Lang);
-	const TCHAR* CDemoDlg::GetStrByLanguage(int Lang);
+	CMorphanHolder	m_piRussian;
+	CMorphanHolder	m_piEnglish;
+	CMorphanHolder	m_piGerman;
+	CMorphanHolder& GetHolder(MorphLanguageEnum Lang);
+	const CAgramtab* GetGramTabByLanguage(MorphLanguageEnum Lang);
+	const CLemmatizer* GetLemmatizerByLanguage(MorphLanguageEnum Lang);
+	bool BuildParadigmsForOneLanguage(MorphLanguageEnum langua, CString src_str, bool OnlyDigits);
 	// Generated message map functions
 	//{{AFX_MSG(CDemoDlg)
 	virtual BOOL OnInitDialog();
@@ -75,7 +52,3 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_DEMODLG_H__59A50E5C_1A5C_11D3_9CCC_00105A68BAF2__INCLUDED_)

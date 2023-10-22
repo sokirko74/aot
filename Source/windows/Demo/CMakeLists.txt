@@ -13,15 +13,18 @@ add_executable (${PROJECT_NAME} WIN32
         demo.cpp
         demo.rc
         demoDlg.cpp
-)
+        Splash.h
+        StdAfx.h
+        demo.h
+        demoDlg.h
+        resource.h
 
-add_dependencies(${PROJECT_NAME} 
-    Lemmatizer
-    agramtab
 )
 
 target_link_libraries(${PROJECT_NAME}
-    aot_common
+      LemmatizerLib
+      AgramtabLib
+
 )
 
 CopyExe(${PROJECT_NAME})
