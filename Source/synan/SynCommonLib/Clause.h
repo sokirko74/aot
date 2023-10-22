@@ -188,6 +188,7 @@ public:
 	void	TranslateFormatCallerGroups(CMorphVariant& V);
     int     SynVarToPrmClForLastWord(int UnitNo) const;
     int     SynVarToPrmClForFirstWord(int UnitNo)  const;
+	std::string GetClauseDescr() const;
 };
 
 

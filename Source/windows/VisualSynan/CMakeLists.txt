@@ -25,7 +25,22 @@ add_executable (${PROJECT_NAME} WIN32
         VisualWord.cpp
         WaitDlg.cpp
         WaitThread.cpp
-        ../common/COMSyntaxHolder.cpp
+        ChildFrm.h
+        DlgHom.h
+        MainFrm.h
+        ReportDoc.h
+        SentenceLine.h
+        Splash.h
+        StdAfx.h
+        SynReport.h
+        SynanWrapper.h
+        VisualSentences.h
+        VisualSynan.h
+        VisualSynanDoc.h
+        VisualSynanView.h
+        WaitDlg.h
+        WaitThread.h
+        
 )
 
 add_definitions(-D_AFXDLL)
@@ -33,19 +48,11 @@ set(CMAKE_MFC_FLAG 2)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /utf-8 /D _UNICODE /D UNICODE" )
 
 
-add_dependencies(${PROJECT_NAME} 
-    agramtab
-    SynAn
-    Lemmatizer
-    graphan
-    MAPost
-)
 
-target_link_libraries(${PROJECT_NAME}
-    aot_common
+target_link_libraries(${PROJECT_NAME} 
+    SynCommonLib
+    SynanLib
 )
-
-CopyExe(${PROJECT_NAME})
 
 
 if (BUILD_DICTS)

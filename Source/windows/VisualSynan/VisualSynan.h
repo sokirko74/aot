@@ -1,32 +1,15 @@
 // VisualSynan.h : main header file for the VISUALSYNAN application
 //
 
-#if !defined(AFX_VISUALSYNAN_H__1C505B37_C4B2_11D2_8BB6_00105A68ADF3__INCLUDED_)
-#define AFX_VISUALSYNAN_H__1C505B37_C4B2_11D2_8BB6_00105A68ADF3__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
-#ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
-#endif
-
-#include "Resource.h"       // main symbols
-
-
-
-#include "windows/common/COMSyntaxHolder.h"
-
-/////////////////////////////////////////////////////////////////////////////
-// CVisualSynanApp:
-// See VisualSynan.cpp for the implementation of this class
-//
+#include "Resource.h"       
+#include "synan/SynanLib/SyntaxHolder.h"
 
 class CVisualSynanApp : public CWinApp
 {
 public:
-	CCOMSyntaxHolder	m_SyntaxHolder;
+	CSyntaxHolder	m_SyntaxHolder;
 	
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
@@ -49,10 +32,3 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-
-/////////////////////////////////////////////////////////////////////////////
-
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
-
-#endif // !defined(AFX_VISUALSYNAN_H__1C505B37_C4B2_11D2_8BB6_00105A68ADF3__INCLUDED_)

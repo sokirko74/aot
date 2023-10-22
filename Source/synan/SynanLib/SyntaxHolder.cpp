@@ -17,6 +17,16 @@ CSyntaxHolder::~CSyntaxHolder()
 
 };
 
+void CSyntaxHolder::ClearHolder() {
+	if (m_pPostMorph) {
+		delete m_pPostMorph;
+		m_pPostMorph = nullptr;
+	}
+	m_Synan.ClearSentences();
+	m_Synan.ClearOptions();
+}
+
+
 
 void CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 {

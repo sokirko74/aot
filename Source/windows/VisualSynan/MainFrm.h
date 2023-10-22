@@ -31,6 +31,7 @@ public:
 public:
 	CString GetFileWithThisFilter(CString strFilter);
 	BOOL m_bNewDoc;
+	
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CMainFrame)

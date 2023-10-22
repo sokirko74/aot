@@ -26,5 +26,5 @@ target_link_libraries(${PROJECT_NAME}
     ${LIB_DEPENDS}
 )
 
-CopyAndRegsvr(${PROJECT_NAME})
+#CopyAndRegsvr(${PROJECT_NAME})
 

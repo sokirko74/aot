@@ -1,11 +1,9 @@
-// CG: This file was added by the Splash Screen component.
-// Splash.cpp : implementation file
-//
 
 #include "StdAfx.h"  // e. g. stdafx.h
 #include "Resource.h"  // e.g. resource.h
 
 #include "Splash.h"  // e.g. splash.h
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

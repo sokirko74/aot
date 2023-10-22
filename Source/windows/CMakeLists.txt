@@ -38,9 +38,7 @@ if (BUILD_COM)
     add_subdirectory (TestSemanCOM)
     add_subdirectory (TestSynanCOM)
     if(BUILD_WINDOWS_GUI)
-        add_subdirectory (VisualSynan)
         add_subdirectory (Demo)
-        add_subdirectory (Checker)
     endif()
 endif()
 
@@ -55,5 +53,8 @@ if(BUILD_WINDOWS_GUI)
         # obsolete mdi tabs cannot be comppiled under 64
         add_subdirectory (Morphwizard)
     endif()
+
+    add_subdirectory (VisualSynan)
+
 endif()
 
