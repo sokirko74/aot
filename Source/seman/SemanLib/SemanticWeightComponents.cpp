@@ -869,20 +869,22 @@ bool CRusSemStructure::CheckSubjectPredicateRelation(long SubjNodeNo, long PredN
 	*/
 
 
-	for (size_t i = 0; i < m_Nodes[SubjNodeNo].m_OutRels.size(); i++)
+	for (auto& rel_no: m_Nodes[SubjNodeNo].m_OutRels)
 	{
-		long RelNo = m_Nodes[SubjNodeNo].m_OutRels[i];
-		if (!m_Relations[RelNo].m_bRelUse) continue;
-		long NodeNo = m_Relations[RelNo].m_TargetNodeNo;
+		if (!m_Relations[rel_no].m_bRelUse) continue;
+		long NodeNo = m_Relations[rel_no].m_TargetNodeNo;
 		if (HasRichPOS(NodeNo, NUMERAL)
 			&& m_Nodes[NodeNo].IsPrimitive()
 			&& (atoi(m_Nodes[NodeNo].m_Words[0].m_Word.c_str()) > 1)
 			)
 			return true;
 	};
+	auto target_gram_codes = m_Nodes[PredNodeNo].m_GramCodes;
+	if (target_gram_codes.empty() and m_Nodes[PredNodeNo].GetWordsSize() > 0) {
+		target_gram_codes = m_Nodes[PredNodeNo].m_Words[0].m_GramCodes;
+	}
 
-
-	return m_pData->GetRusGramTab()->GleicheSubjectPredicate(m_Nodes[SubjNodeNo].m_GramCodes.c_str(), m_Nodes[PredNodeNo].m_GramCodes.c_str());
+	return m_pData->GetRusGramTab()->GleicheSubjectPredicate(m_Nodes[SubjNodeNo].m_GramCodes.c_str(), target_gram_codes.c_str());
 
 };
 

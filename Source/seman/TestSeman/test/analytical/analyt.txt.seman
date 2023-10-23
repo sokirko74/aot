@@ -66,12 +66,17 @@
     },
     {
         "comments": "",
-        "input": "эти вещи мне окажутся очень полезными в будущем.",
-        "result": "These things will prove very useful to me in future."
+        "input": "эти вещи мне окажутся очень полезными.",
+        "result": "These things will prove very useful to me."
     },
     {
         "comments": "",
         "input": "он предопределен  свыше",
         "result": "He is predetermined from above."
+    },
+    {
+        "comments": "",
+        "input": "он знал, что будет скучать по ней",
+        "result": "He knew what would miss it."
     }
 ]

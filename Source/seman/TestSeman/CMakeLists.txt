@@ -54,6 +54,7 @@ endmacro()
 
 
 TestSemanMacro(Russian test/seman "")
+TestSemanMacro(Russian test/analytical --translate)
 TestSemanMacro(Russian test/translate --translate)
 TestSemanMacro(Russian test/long --translate)
 
