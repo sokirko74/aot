@@ -1,0 +1,726 @@
+{
+    "aa": {
+        "p": "ADJECTIVE",
+        "g": [],
+        "f": 25131,
+        "l": "NEW"
+    },
+    "ab": {
+        "p": "ADJECTIVE",
+        "g": [
+            "comp"
+        ],
+        "f": 1968,
+        "l": "NEWER"
+    },
+    "ac": {
+        "p": "ADJECTIVE",
+        "g": [
+            "sup"
+        ],
+        "f": 2019,
+        "l": "BEST"
+    },
+    "xi": {
+        "p": "NUMERAL",
+        "g": [],
+        "f": 35,
+        "l": "ONE"
+    },
+    "cb": {
+        "p": "NUMERAL",
+        "g": [
+            "comp"
+        ],
+        "f": 1,
+        "l": "MORE"
+    },
+    "cc": {
+        "p": "NUMERAL",
+        "g": [
+            "sup"
+        ],
+        "f": 1,
+        "l": "MOST"
+    },
+    "ad": {
+        "p": "ADJECTIVE",
+        "g": [
+            "prop"
+        ],
+        "f": 565,
+        "l": "RUSSIAN"
+    },
+    "ba": {
+        "p": "ADVERB",
+        "g": [],
+        "f": 3057,
+        "l": "NORMALLY"
+    },
+    "bb": {
+        "p": "ADVERB",
+        "g": [
+            "comp"
+        ],
+        "f": 15,
+        "l": "MORE"
+    },
+    "bc": {
+        "p": "ADVERB",
+        "g": [
+            "sup"
+        ],
+        "f": 15,
+        "l": "MOST"
+    },
+    "va": {
+        "p": "VERB",
+        "g": [
+            "inf"
+        ],
+        "f": 10835,
+        "l": "WORK"
+    },
+    "vb": {
+        "p": "VERB",
+        "g": [
+            "prsa",
+            "sg",
+            "3"
+        ],
+        "f": 10852,
+        "l": "WORKS"
+    },
+    "vc": {
+        "p": "VERB",
+        "g": [
+            "pasa"
+        ],
+        "f": 11071,
+        "l": "MADE"
+    },
+    "vd": {
+        "p": "VERB",
+        "g": [
+            "pp"
+        ],
+        "f": 11118,
+        "l": "BROKEN"
+    },
+    "ve": {
+        "p": "VERB",
+        "g": [
+            "ing"
+        ],
+        "f": 10968,
+        "l": "DOING"
+    },
+    "vf": {
+        "p": "MOD",
+        "g": [
+            "inf"
+        ],
+        "f": 6,
+        "l": "CAN"
+    },
+    "vh": {
+        "p": "MOD",
+        "g": [
+            "pasa"
+        ],
+        "f": 4,
+        "l": "COULD"
+    },
+    "ta": {
+        "p": "VBE",
+        "g": [
+            "inf"
+        ],
+        "f": 1,
+        "l": "BE"
+    },
+    "tb": {
+        "p": "VBE",
+        "g": [
+            "prsa",
+            "sg",
+            "1"
+        ],
+        "f": 1,
+        "l": "AM"
+    },
+    "td": {
+        "p": "VBE",
+        "g": [
+            "prsa",
+            "sg",
+            "3"
+        ],
+        "f": 1,
+        "l": "IS"
+    },
+    "te": {
+        "p": "VBE",
+        "g": [
+            "prsa",
+            "pl"
+        ],
+        "f": 1,
+        "l": "ARE"
+    },
+    "tf": {
+        "p": "VBE",
+        "g": [
+            "ing"
+        ],
+        "f": 1,
+        "l": "BEING"
+    },
+    "tg": {
+        "p": "VBE",
+        "g": [
+            "pasa",
+            "sg"
+        ],
+        "f": 1,
+        "l": "WAS"
+    },
+    "ti": {
+        "p": "VBE",
+        "g": [
+            "pasa",
+            "pl"
+        ],
+        "f": 1,
+        "l": "WERE"
+    },
+    "tj": {
+        "p": "VBE",
+        "g": [
+            "pp"
+        ],
+        "f": 1,
+        "l": "BEEN"
+    },
+    "tk": {
+        "p": "VBE",
+        "g": [
+            "fut",
+            "1",
+            "sg"
+        ],
+        "f": 1,
+        "l": "WILL"
+    },
+    "tl": {
+        "p": "VBE",
+        "g": [
+            "fut",
+            "sg",
+            "pl",
+            "1",
+            "2",
+            "3"
+        ],
+        "f": 1,
+        "l": "WILL"
+    },
+    "tm": {
+        "p": "VBE",
+        "g": [
+            "if",
+            "sg",
+            "1",
+            "2"
+        ],
+        "f": 2,
+        "l": "WAS"
+    },
+    "tn": {
+        "p": "VBE",
+        "g": [
+            "if",
+            "sg",
+            "3"
+        ],
+        "f": 1,
+        "l": "WAS"
+    },
+    "to": {
+        "p": "VBE",
+        "g": [
+            "if",
+            "pl"
+        ],
+        "f": 1,
+        "l": "WERE"
+    },
+    "pa": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "nom"
+        ],
+        "f": 3,
+        "l": "WHO"
+    },
+    "pb": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "obj"
+        ],
+        "f": 3,
+        "l": "WHOM"
+    },
+    "pc": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "nom",
+            "sg",
+            "1"
+        ],
+        "f": 1,
+        "l": "I"
+    },
+    "pd": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "obj",
+            "sg",
+            "1"
+        ],
+        "f": 1,
+        "l": "ME"
+    },
+    "pe": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "nom",
+            "2"
+        ],
+        "f": 6,
+        "l": "YOU"
+    },
+    "pf": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "obj",
+            "2"
+        ],
+        "f": 6,
+        "l": "YOU"
+    },
+    "pg": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "nom",
+            "sg",
+            "3"
+        ],
+        "f": 4,
+        "l": "HE"
+    },
+    "ph": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "obj",
+            "sg",
+            "3"
+        ],
+        "f": 4,
+        "l": "IT"
+    },
+    "pi": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "nom",
+            "pl",
+            "1"
+        ],
+        "f": 1,
+        "l": "WE"
+    },
+    "pk": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "obj",
+            "pl",
+            "1"
+        ],
+        "f": 1,
+        "l": "US"
+    },
+    "pl": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "nom",
+            "pl",
+            "3"
+        ],
+        "f": 1,
+        "l": "THEY"
+    },
+    "pm": {
+        "p": "PN",
+        "g": [
+            "pers",
+            "obj",
+            "pl",
+            "3"
+        ],
+        "f": 1,
+        "l": "THEM"
+    },
+    "da": {
+        "p": "PN",
+        "g": [
+            "ref",
+            "sg"
+        ],
+        "f": 8,
+        "l": "ITSELF"
+    },
+    "db": {
+        "p": "PN",
+        "g": [
+            "ref",
+            "pl"
+        ],
+        "f": 3,
+        "l": "OURSELVES"
+    },
+    "ea": {
+        "p": "PN_ADJ",
+        "g": [
+            "poss"
+        ],
+        "f": 8,
+        "l": "MY"
+    },
+    "eb": {
+        "p": "PN_ADJ",
+        "g": [
+            "poss",
+            "pred"
+        ],
+        "f": 8,
+        "l": "HIS"
+    },
+    "ec": {
+        "p": "PN_ADJ",
+        "g": [
+            "dem",
+            "sg"
+        ],
+        "f": 3,
+        "l": "ONE"
+    },
+    "ed": {
+        "p": "PN_ADJ",
+        "g": [
+            "dem",
+            "pl"
+        ],
+        "f": 3,
+        "l": "ONES"
+    },
+    "ee": {
+        "p": "PN_ADJ",
+        "g": [],
+        "f": 14,
+        "l": "ANY"
+    },
+    "ef": {
+        "p": "PRON",
+        "g": [],
+        "f": 22,
+        "l": "AS"
+    },
+    "na": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "sg"
+        ],
+        "f": 57838,
+        "l": "table"
+    },
+    "nb": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "pl"
+        ],
+        "f": 59055,
+        "l": "tables"
+    },
+    "fa": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "poss"
+        ],
+        "f": 0,
+	"l": "more interesting"
+    },
+    "nc": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "mass",
+            "uncount",
+            "sg"
+        ],
+	"c": "nouns which can be mass  and uncount",
+        "f": 19,
+        "l": "SILK"
+    },
+    "fb": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "mass",
+            "uncount",
+            "poss"
+        ],
+        "f": 0
+    },
+    "ne": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "mass",
+            "sg"
+        ],
+        "f": 150,
+        "l": "ALE"
+    },
+    "ng": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "mass",
+            "pl"
+        ],
+        "f": 169,
+        "l": "ALES"
+    },
+    "fc": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "mass",
+            "poss"
+        ],
+        "f": 0
+    },
+    "ni": {
+        "p": "NOUN",
+        "g": [
+            "narr",
+            "uncount",
+            "sg"
+        ],
+        "f": 1925,
+        "l": "MS"
+    },
+    "oa": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "m",
+            "sg"
+        ],
+        "f": 661,
+        "l": "AD"
+    },
+    "ob": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "m",
+            "pl"
+        ],
+        "f": 661,
+        "l": "ADS"
+    },
+    "fd": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "m",
+            "poss"
+        ],
+        "f": 0
+    },
+    "oc": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "f",
+            "sg"
+        ],
+        "f": 597,
+        "l": "DI"
+    },
+    "od": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "f",
+            "pl"
+        ],
+        "f": 596,
+        "l": "DIS"
+    },
+    "fe": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "f",
+            "poss"
+        ],
+        "f": 0
+    },
+    "oe": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "m",
+            "f",
+            "sg"
+        ],
+        "f": 106,
+        "l": "EM"
+    },
+    "of": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "m",
+            "f",
+            "pl"
+        ],
+        "f": 105,
+        "l": "EMS"
+    },
+    "ff": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "m",
+            "f",
+            "poss"
+        ],
+        "f": 0
+    },
+    "ga": {
+        "p": "NOUN",
+        "g": [
+            "prop"
+        ],
+        "f": 2166,
+        "l": "OB"
+    },
+    "fg": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "poss"
+        ],
+        "f": 0
+    },
+    "xa": {
+        "p": "CONJ",
+        "g": [],
+        "f": 79,
+        "l": "AN"
+    },
+    "xb": {
+        "p": "INT",
+        "g": [],
+        "f": 348,
+        "l": "O"
+    },
+    "xc": {
+        "p": "PREP",
+        "g": [],
+        "f": 140,
+        "l": "A"
+    },
+    "xd": {
+        "p": "PART",
+        "g": [],
+        "f": 6,
+        "l": "NO"
+    },
+    "xf": {
+        "p": "ARTICLE",
+        "g": [],
+        "f": 3,
+        "l": "A"
+    },
+    "xp": {
+        "p": "ORDNUM",
+        "g": [],
+        "f": 30,
+        "l": "FIFTH"
+    },
+    "yc": {
+        "p": "POSS",
+        "g": [
+            "plsq"
+        ],
+        "f": 2,
+        "l": "'S"
+    },
+    "yd": {
+        "p": "POSS",
+        "g": [
+            "plsgs"
+        ],
+        "f": 2,
+        "l": "'"
+    },
+    "xx": {
+        "p": "NOUN",
+        "g": [
+            "prop",
+            "sg",
+            "pl"
+        ],
+        "f": 1,
+        "l": "DURNOVO"
+    },
+    "za": {
+        "p": "",
+        "g": [
+            "geo"
+        ],
+        "f": 0
+    },
+    "zb": {
+        "p": "",
+        "g": [
+            "name"
+        ],
+        "f": 0
+    },
+    "zc": {
+        "p": "",
+        "g": [
+            "org"
+        ],
+        "f": 0
+    }
+}

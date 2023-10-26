@@ -122,9 +122,9 @@ gramtab:
     In mrd-files we use ancodes to refer to a  morphological pattern.
 
 	Here is the list of all gramtab-files:
-	* Russian - $Rml/Dicts/Morph/rgramtab.tab
-	* German  - $Rml/Dicts/Morph/ggramtab.tab
-	* English - $Rml/Dicts/Morph/egramtab.tab
+	* Russian - $Rml/Dicts/Morph/gramtab.json
+	* German  - $Rml/Dicts/Morph/gramtab.json
+	* English - $Rml/Dicts/Morph/gramtab.json
 
 
 
