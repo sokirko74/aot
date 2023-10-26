@@ -16,7 +16,7 @@ void CMAPost::log(std::string s)
 			m_LogFileName = "";
 			return;
 		};
-		fprintf(fp, "%s\n", s.c_str());
+		fprintf(fp, "%s\n", s.c_str()),
 		fclose(fp);
 	}
 	catch (...) {
@@ -993,7 +993,7 @@ void CMAPost::Rule_QuoteMarks()
 
 
 /*
-приписывает всем ИЛЕ морфологическую интерпретаций НЕУБИВАЙМЕНЯ
+приписывает всем ИЛЕ морфологическую интерпретаций
 */
 void CMAPost::Rule_ILE()
 {
@@ -1007,8 +1007,6 @@ void CMAPost::Rule_ILE()
 			pNew->SetMorphUnknown();
 			pNew->m_strLemma = W.m_strUpperWord;
 			pNew->m_CommonGramCode = _R("Фа");
-			//if ( W.HasDes(OUp) ) 
-			//	pNew->m_CommonGramCode += _R("аоатац");//m_DURNOVOGramCode;
 			pNew->SetGramCodes(m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
 			pNew->InitAncodePattern();
 		}
@@ -1335,14 +1333,15 @@ void CMAPost::Rule_ExpandIndeclinableGramcodes()
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
 
+		auto all_noun_ancodes = m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, nullptr);
 		//ЦБ      С ср,0 -> C ср,им  ср,вн ср,дт
 		for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++) {
 			if (W.GetHomonym(HomNo)->HasPos(NOUN) && W.GetHomonym(HomNo)->HasGrammem(rIndeclinable) && !W.GetHomonym(HomNo)->HasGrammem(rInitialism))
 			{
 				CHomonym* pH = W.GetHomonym(HomNo);
 				pH->m_CommonGramCode += pH->GetGramCodes();
-				pH->SetGramCodes(m_pRusGramTab->GleicheAncode1(GenderNumber0,
-					m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0), pH->GetGramCodes()));  //rAllNumbers, AnCodes, _QM(rSingular));
+				auto ancodes = m_pRusGramTab->GleicheAncode1(GenderNumber0, all_noun_ancodes, pH->GetGramCodes());
+				pH->SetGramCodes(ancodes);
 			}
 		}
 	}

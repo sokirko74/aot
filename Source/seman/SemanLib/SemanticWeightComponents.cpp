@@ -880,7 +880,7 @@ bool CRusSemStructure::CheckSubjectPredicateRelation(long SubjNodeNo, long PredN
 			return true;
 	};
 	auto target_gram_codes = m_Nodes[PredNodeNo].m_GramCodes;
-	if (target_gram_codes.empty() and m_Nodes[PredNodeNo].GetWordsSize() > 0) {
+	if (target_gram_codes.empty() && m_Nodes[PredNodeNo].GetWordsSize() > 0) {
 		target_gram_codes = m_Nodes[PredNodeNo].m_Words[0].m_GramCodes;
 	}
 

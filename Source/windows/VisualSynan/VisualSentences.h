@@ -23,8 +23,6 @@ typedef std::pair<int, int>		CIntPair;
 
 class CVisualSentence;
 
-const char g_strAgramTabRegPath[] = "Software\\Dialing\\Lemmatizer\\Russian\\Rgramtab";
-
 class CVisualSentences
 {
 public:

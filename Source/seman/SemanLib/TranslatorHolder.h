@@ -16,7 +16,6 @@ enum LanguageEnum { Russian, English};
 class CRossHolder;
 
 const char g_strRegRusOborDicPath[]    = "Software\\Dialing\\Obor\\DictPath"; 	 
-const char g_strAgramTabRegPath[]      = "Software\\Dialing\\Lemmatizer\\Russian\\Rgramtab";
 const long UnknownParadigmId = -1;
 const part_of_speech_t UnknownPOS = 0xff;
 

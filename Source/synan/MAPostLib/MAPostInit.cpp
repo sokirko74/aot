@@ -126,17 +126,8 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 		};
 
 	
-		//получаем из морфологии код НЕУБИВАЙМЕНЯ (неизменяеммое существительное всех родов)
-		BYTE POS;
-		uint64_t Grammems;
-		if (    !m_pRusGramTab->ProcessPOSAndGrammemsIfCan(_R(" С мр,жр,ср,мн,ед,им,рд,дт,вн,тв,пр").c_str(),&POS, &Grammems) 
-			 || !m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan (POS, Grammems, m_DURNOVOGramCode)
-		   )
-		{
-			ErrorMessage ("MAPOST", _R("Cannot parse std::string for НЕУБИВАЙМЕНЯ"));
-			return false;
-		};
-	    
+		m_DURNOVOGramCode = m_pRusLemmatizer->GetPlugNounGramCode();
+    
 	}
 	catch(CExpc c)
 	{

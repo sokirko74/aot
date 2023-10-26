@@ -8,7 +8,7 @@ void PrintUsageAndExit()
 {
 		fprintf (stderr, "Usage: ConvertToLemma <input >output Language ColumnNo (P|\"*\") [-unk][-form] [-unamb]\n");
 		fprintf (stderr, "where Language can be Russian, German, English\n");
-		fprintf (stderr, "where P is a part of speech and grammems from gramtab.tab \n");
+		fprintf (stderr, "where P is a part of speech and grammems from gramtab.json \n");
 		fprintf (stderr, "if -unk is switched on then it prints only lines with unrecognized words\n");
 		fprintf (stderr, " otherwise the program prints lines with all possible possible morph, interpretation\n");
 		fprintf (stderr, "if -form is switched on then the program searches input words not only as lemmas but also as word forms\n");
