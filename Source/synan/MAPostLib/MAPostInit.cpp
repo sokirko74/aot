@@ -126,7 +126,7 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 		};
 
 	
-		m_DURNOVOGramCode = m_pRusLemmatizer->GetPlugNounGramCode();
+		m_DURNOVOGramCode = m_pRusGramTab->GetPlugNouInfo().m_GramCode;
     
 	}
 	catch(CExpc c)
