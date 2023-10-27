@@ -18,7 +18,6 @@
 #include "morphan/LemmatizerLib/PLMLineCollection.h"
 
 #include "morph_dict/AgramtabLib/agramtab_.h"
-#include "dicts/RmlThesLib/Thesaurus.h"
 #include "dicts/StructDictLib/Ross.h"
 
 

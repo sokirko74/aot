@@ -105,12 +105,27 @@ class CThesaurus
 	std::unordered_map<thesaurus_concept_t, std::string>		m_ConceptId2Name;
 	std::unordered_map<std::string, thesaurus_concept_t>		m_ConceptName2Id;
 	void dfs(thesaurus_concept_t conceptId, RelationEnum relationType, thesaurus_concept_set_t& concepts) const;
+	void LoadModels(std::string FileName);
+	bool LoadAtomicGroups(std::string Buff, CInnerModel& M);
+	bool LoadModelRelations(std::string Buff, CInnerModel& M);
+	bool LoadGroups(std::string Buff, CInnerModel& M);
+	bool LoadOborots(std::string FileName);
+	int	 GetModelNoByModelId(long ModelId) const;
+	bool LoadTermins(std::string FileName);
+	void GetConceptsByTextEntryId(uint32_t TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const;
+	void GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<uint32_t>& TextEntries) const;
+	bool LoadSynonyms(std::string FileName);
+	thesaurus_concept_t	 GetConceptIdByConceptStr(const std::string& ConceptStr) const;
+	bool LoadConcepts(std::string FileName);
+	bool LoadRelats(std::string FileName);
+
+	bool LoadSynItems(std::string FileName);
+
+	std::string			m_Directory;
+	bool			m_bDontLoad;
 
 public:
-	std::string			m_TestDebug;
-	bool			m_bDontLoad;
 	std::string			m_Name;
-	std::string			m_Directory;
 	MorphLanguageEnum m_MainLanguage;
     std::vector<CInnerModel>	m_Models;
 	const CAgramtab*	m_pEngGramTab;
@@ -125,34 +140,10 @@ public:
 	std::vector<CInnerSynItem>	m_SynItems;
 	String2Int				m_AbbrForms2TerminNo;
 	
-	
 
 	CThesaurus();
 	~CThesaurus();
-	void LoadModels (std::string FileName);
-	bool LoadAtomicGroups (std::string Buff, CInnerModel& M);
-	bool LoadModelRelations (std::string Buff, CInnerModel& M);
-	bool LoadGroups (std::string Buff, CInnerModel& M);
 
-	bool LoadOborots (std::string FileName);
-
-	int	 GetModelNoByModelId (long ModelId) const;
-	bool LoadTermins (std::string FileName);
-
-	void GetConceptsByTextEntryId(uint32_t TextEntryId, std::vector<thesaurus_concept_t>& Concepts) const;
-	void GetTextEntriesByConcept(thesaurus_concept_t ConceptId, std::vector<uint32_t>& TextEntries) const;
-	bool LoadSynonyms (std::string FileName);
-
-	
-	thesaurus_concept_t	 GetConceptIdByConceptStr (const std::string& ConceptStr) const;
-	std::string GetConceptStrById(const thesaurus_concept_t& id) const;
-	bool LoadConcepts (std::string FileName);
-
-	bool LoadRelats (std::string FileName);
-	
-	int  GetTerminNoByTextEntryId(long TextEntryId) const;
-
-	bool LoadSynItems(std::string FileName);
 
 	// main methods
 	bool	ReadThesaurusFromDisk();
@@ -166,4 +157,7 @@ public:
 	thesaurus_termin_set_t QueryLowerTermins(const std::string& conceptStr, MorphLanguageEnum lang) const;
 	int		FindAbbr(const std::string& str) const;
 	void	SetDicts(MorphLanguageEnum MainLanguage, const CDictionary* OborDic, const CAgramtab* MainGramtab, const CAgramtab* EngGramtab);
+	void  SetDirectory(std::string directory);
+	std::string GetConceptStrById(const thesaurus_concept_t& id) const;
+	int  GetTerminNoByTextEntryId(long TextEntryId) const;
 };

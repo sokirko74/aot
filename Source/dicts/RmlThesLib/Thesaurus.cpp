@@ -125,8 +125,10 @@ bool CThesaurus::SetDatabase(std::string DatabaseName)
 	return true;
 }
 
-
-
+void CThesaurus::SetDirectory(std::string directory) {
+	m_bDontLoad = false;
+	m_Directory = directory;
+}
 
 struct IsLessByConcept1 {
 

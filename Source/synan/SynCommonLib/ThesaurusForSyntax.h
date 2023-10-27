@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "Group.h"
+#include "dicts/RmlThesLib/Thesaurus.h"
 
 
 typedef std::vector<const char*> CVectorOfStrings;

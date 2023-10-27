@@ -9,4 +9,4 @@ add_library(RmlThesLib
         Termins.cpp
         ThesOborots.cpp
         Thesaurus.cpp
-)
+ )

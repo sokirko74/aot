@@ -56,10 +56,10 @@ bool CThesaurus::LoadAtomicGroups(std::string Buff, CInnerModel &M) {
 
         if (SynGroup == "DSC")
             G.m_bDigCmpl = true;
-        else if (m_pMainGramTab->ProcessPOSAndGrammemsIfCan(SynGroup.c_str(), &G.m_PartOfSpeech, &dummy))
-            G.m_LanguageId = m_MainLanguage;
         else if (m_pEngGramTab->ProcessPOSAndGrammemsIfCan(SynGroup.c_str(), &G.m_PartOfSpeech, &dummy))
             G.m_LanguageId = morphEnglish;
+        else if (m_pMainGramTab->ProcessPOSAndGrammemsIfCan(SynGroup.c_str(), &G.m_PartOfSpeech, &dummy))
+            G.m_LanguageId = m_MainLanguage;
         else
             return false;
 
@@ -130,6 +130,7 @@ void CThesaurus::LoadModels(std::string FileName) {
             if (i == 0)
                 M.m_ModelId = atoi(Field.c_str());
             else if (i == 2) {
+                std::string models = Field;
                 if (!LoadAtomicGroups(Field, M)) {
                     throw CExpc("LoadAtomicGroups failed in %s, line %s", FileName.c_str(), 
                         line.c_str());

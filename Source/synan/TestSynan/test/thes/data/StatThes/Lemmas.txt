@@ -1,0 +1,1 @@
+TextEntryId;LemmaPos;LemmaStr;IsLemma;IsOb1;IsOb2;OborotId;UpLw;UpUp;IsPlural;
