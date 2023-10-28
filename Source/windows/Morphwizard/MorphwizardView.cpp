@@ -709,7 +709,7 @@ void CMorphwizardView::OnToolsImport()
 				return;
 			};
 
-			GetWizard()->log(std::string("import file ") + ToInnerEncoding(PathName));
+			LOGI << "import file " << PathName;
 
 			CProgressMeterRML meter;
 			meter.SetFileMaxPos(fp);
@@ -1197,7 +1197,6 @@ lemma_iterator_t CMorphwizardView::FindNonAccentedPara(bool partialAccentedPara)
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView)
 {
-	SetInputLanguage(GetWizard()->m_Language);
 	CFormView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 

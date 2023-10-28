@@ -680,7 +680,6 @@ void CSLFView::OnBnClickedChangeAll()
 //----------------------------------------------------------------------------
 void CSLFView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView)
 {
-	SetInputLanguage(GetWizard()->m_Language);
 	CFormView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 

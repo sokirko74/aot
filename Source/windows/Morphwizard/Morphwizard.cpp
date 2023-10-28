@@ -34,12 +34,15 @@ END_MESSAGE_MAP()
 class CMWZCommandLineInfo : public CCommandLineInfo
 {
 public:
-
-	CMWZCommandLineInfo() : CCommandLineInfo() {
+	
+	CMWZCommandLineInfo() : CCommandLineInfo(){
 	};
 
 	virtual void ParseParam(const TCHAR* pszParam, BOOL bFlag, BOOL bLast)
 	{
+		if (CString(pszParam) == "disable-predict") {
+			((CMorphwizardApp*)AfxGetApp())->UsePredict = false;
+		}
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
 	};
 };
@@ -49,6 +52,7 @@ public:
 
 CMorphwizardApp::CMorphwizardApp()
 {
+	UsePredict = true;
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
@@ -195,21 +199,3 @@ void CMorphwizardApp::OnHelpHelp()
 	AfxGetApp()->WinHelp(IDH_LOADING);
 }
 
-//----------------------------------------------------------------------------
-void SetInputLanguage(MorphLanguageEnum lang)
-{
-	/*	UINT kbdFlags = KLF_ACTIVATE;//|KLF_REORDER|KLF_SUBSTITUTE_OK|KLF_NOTELLSHELL;
-		HKL hkl=0;
-		switch( lang )
-		{
-		case morphRussian:
-			::SetThreadLocale(MAKELCID(MAKELANGID(LANG_RUSSIAN,SUBLANG_DEFAULT),SORT_DEFAULT));
-			break;
-		case morphGerman:
-			::SetThreadLocale(MAKELCID(MAKELANGID(LANG_GERMAN,SUBLANG_DEFAULT),SORT_DEFAULT));
-			break;
-		case morphEnglish:
-		default:
-			::SetThreadLocale(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_DEFAULT),SORT_DEFAULT));
-		}*/
-}

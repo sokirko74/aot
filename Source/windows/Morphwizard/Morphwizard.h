@@ -16,6 +16,7 @@
 class CMorphwizardApp : public CWinApp
 {
 public:
+	bool UsePredict;
 //	map<void*, int> m_PointerCount;
 	CMorphwizardApp();
 
@@ -34,4 +35,3 @@ extern CMorphwizardApp theApp;
 
 CDocTemplate* GetTemplate( CString Name );
 
-extern void SetInputLanguage( MorphLanguageEnum lang );

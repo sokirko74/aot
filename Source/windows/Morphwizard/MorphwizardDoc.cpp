@@ -95,9 +95,8 @@ void CMorphwizardDoc::Serialize(CArchive& ar)
 		GetWizard()->load_wizard(
 			utf16_to_utf8((const TCHAR *)ar.GetFile()->GetFilePath()).c_str(), 
 			utf16_to_utf8((const TCHAR*)dlgLogin.m_name).c_str(),
-			true,
+			((CMorphwizardApp*)AfxGetApp())->UsePredict,
 			false);
-		SetInputLanguage(GetWizard()->m_Language);
 		cIni.Exit();
 	}
 }
@@ -203,7 +202,7 @@ void CMorphwizardDoc::OnCloseDocument()
 
 	CDocument::OnCloseDocument();
 
-	SetInputLanguage(morphEnglish);
+	
 }
 
 //----------------------------------------------------------------------------
