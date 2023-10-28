@@ -8,8 +8,6 @@ Hinweis: © 2001 by Christian Rodemeyer
 \****************************************************************************/
 #pragma once
 
-#ifndef __MDITABS_H
-#define __MDITABS_H
 
 /****************************************************************************\
  EMDITabStyles: Styles for customizing the appeareance of CMDITabs
@@ -18,7 +16,6 @@ enum EMDITabStyles
 {
   MT_BOTTOM        = 0x0000, // places tabs at bottom (default)
   MT_TOP           = 0x0001, // place tabs at top
-  MT_IMAGES        = 0x0002, // show images
   MT_HIDEWLT2VIEWS = 0x0004, // Hide Tabs when less than two views are open (default is one view)
   MT_TOOLTIPS      = 0x0008, // not implemented (a tooltip can appear about a tab) 
   MT_BUTTONS       = 0x0010, // not implemented (show tabs as buttons)
@@ -40,7 +37,7 @@ class CMDITabs : public CTabCtrl
 public:
   CMDITabs();
 
-  void Create(CFrameWnd* pMainFrame, uint32_t dwStyle = MT_BOTTOM|MT_IMAGES);
+  void Create(CFrameWnd* pMainFrame, uint32_t dwStyle = MT_BOTTOM);
   void Update(); // sync the tabctrl with all views
 
   void SetMinViews(int minViews) {m_minViews = minViews;}
@@ -49,9 +46,7 @@ private:
   HWND       m_mdiClient;
   int        m_height;
   int        m_width;
-  CImageList m_images;
   int        m_minViews; // minimum number of views 
-  bool       m_bImages;
   bool       m_bTop;
 
 public:
@@ -78,4 +73,3 @@ protected:
   DECLARE_MESSAGE_MAP()
 };
 
-#endif

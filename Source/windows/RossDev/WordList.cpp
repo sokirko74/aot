@@ -101,7 +101,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_NOTIFY(NM_DBLCLK, IDC_WORDLIST_GRID, OnDblclkWordlistGrid)
 	ON_COMMAND(ID_MENUITEM32804, OnSelectDownward)
 	ON_COMMAND(ID_MENUITEM32805, OnEmptyArticles)
-	ON_BN_CLICKED(IDC_READONLY_IMAGE, OnReadonlyImage)
 	ON_COMMAND(ID_FIND_BY_STR, OnFindByString)
 	ON_COMMAND(ID_FIND_WRONG_REFS, OnFindWrongRefs)
 	ON_NOTIFY(NM_CLICK, IDC_WORDLIST_GRID, OnClickWordlistGrid)
@@ -1545,22 +1544,6 @@ void CWordList::OnReload()
 
 };
 
-void CWordList::OnReadonlyImage()
-{
-	CString FileName = GetDocument()->GetLockFileName().c_str();
-	if (access((const char*)FileName, 0) != -1)
-	{
-		char s[1000];
-		CString Mess;
-		FILE* fp = fopen(FileName, "r");
-		if (!fp) return;
-		while (fgets(s, 1000, fp))
-			Mess += s;
-		fclose(fp);
-		::MessageBox(0, Mess, "Lock Information", MB_OK);
-
-	};
-}
 void CWordList::OnFindByString()
 {
 	CFindByStrDlg FindByStrDlg(this, GetDocument());

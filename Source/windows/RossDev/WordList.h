@@ -297,7 +297,6 @@ protected:
 	afx_msg void OnDblclkWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnSelectDownward();
 	afx_msg void OnEmptyArticles();
-	afx_msg void OnReadonlyImage();
 	afx_msg void OnFindByString();
 	afx_msg void OnFindWrongRefs();
 	afx_msg void OnClickWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult);

@@ -89,7 +89,6 @@ protected:
 	afx_msg void OnEdit();
 	afx_msg void OnSetfocusFindWhat();
 	afx_msg void OnKillfocusFindWhat();
-	afx_msg void OnReadonlyImage();
 	afx_msg void OnColumnclickPredictedList(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDblclkPredictedList(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnSetfocusPredictWhat();

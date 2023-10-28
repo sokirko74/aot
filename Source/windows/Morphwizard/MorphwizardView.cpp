@@ -44,7 +44,6 @@ BEGIN_MESSAGE_MAP(CMorphwizardView, CFormView)
 	ON_BN_CLICKED(IDC_EDIT, OnEdit)
 	ON_EN_SETFOCUS(IDC_FIND_WHAT, OnSetfocusFindWhat)
 	ON_EN_KILLFOCUS(IDC_FIND_WHAT, OnKillfocusFindWhat)
-	ON_BN_CLICKED(IDC_READONLY_IMAGE, OnReadonlyImage)
 	ON_NOTIFY(LVN_COLUMNCLICK, IDC_PREDICTED_LIST, OnColumnclickPredictedList)
 	ON_NOTIFY(NM_DBLCLK, IDC_PREDICTED_LIST, OnDblclkPredictedList)
 	ON_EN_SETFOCUS(IDC_PREDICT_WHAT, OnSetfocusPredictWhat)
@@ -892,22 +891,6 @@ void CMorphwizardView::OnToolsSelectByFile()
 }
 
 //----------------------------------------------------------------------------
-void CMorphwizardView::OnReadonlyImage()
-{
-	auto FileName = GetWizard()->get_lock_file_name();
-	if (access(FileName.c_str(), 0) != -1)
-	{
-		char s[1000];
-		CString Mess;
-		FILE* fp = fopen(FileName.c_str(), "r");
-		if (!fp) return;
-		while (fgets(s, 1000, fp))
-			Mess += s;
-		fclose(fp);
-		::MessageBox(0, Mess, _T("Lock Information"), MB_OK);
-	}
-}
-
 
 /////////////////////////////////////////////////////////////////////////////
 bool IsLessByParadigmNo(const lemma_iterator_t& _X1, const lemma_iterator_t& _X2)
