@@ -7,6 +7,7 @@
 #include "SemanticWeight.h"
 #include "synan/SynCommonLib/RelationsIterator.h"
 
+#include <stack>
 
 
 

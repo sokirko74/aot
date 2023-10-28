@@ -7,6 +7,23 @@
 #include  "../../common/gra_descr_primitives.h"
 
 
+/* сравнивает строки с помощью предиката IsSuperEqualChar */
+// возращает true, если строки одинаковы
+bool strscmp(const char* s1, const char* s2, size_t l, MorphLanguageEnum langua)
+{
+	for (;
+		((l > 0)
+			&& IsSuperEqualChar((BYTE)*s1, (BYTE)*s2, langua)
+			&& *s1
+			&& *s2
+			);
+			s1++, s2++, l--
+		);
+	//если обе строки закончились
+	return (!*s1 && !*s2);
+}
+
+
 //=======================================================
 //==========            CUnitHolder         =============
 //=======================================================

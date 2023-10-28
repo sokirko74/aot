@@ -29,6 +29,17 @@ const CSelectiveWord g_strSelectiveWords[g_iSelectiveWordsCount] =
 	CSelectiveWord(_R("ЛЮБОЙ"), rAllNumbers)   
 };
 
+// todo: may be it can be replaced with nonzero check
+int CountBits(uint64_t value)
+{
+	int count = 0;
+	for (int i = 0; i < 64; i++)
+	{
+		count += (value >> i) & 1;
+	}
+	return count;
+}
+
 /*
  Например:
   многие из этих людей

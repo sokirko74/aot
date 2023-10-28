@@ -15,7 +15,7 @@
 #include "GraphmatFile.h"
 #include "Consent.h"
 
-
+#include <stack>
 
 
 bool  ParagraphTagBeforeGraph (const CGraphmatFile& C, size_t i, size_t HB) 

@@ -6,6 +6,8 @@
 #include "assert.h"
 #include "HTMLConv.h"
 
+#include <stack>
+
 /*
  * Return offset...
  */

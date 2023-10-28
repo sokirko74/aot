@@ -3,18 +3,7 @@
 // ==========  Copyright by Alexey Sokirko (1996-2001)
 
 
-#ifndef StdAfxGraphan
-#define StdAfxGraphan
-
-#ifdef WIN32
-
- #if _MSC_VER > 1000
- #pragma once
- #endif // _MSC_VER > 1000
- 
- #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from windows headers
-
-#endif
+#pragma once 
 
 #pragma warning (disable  : 4530)
 #pragma warning (disable  : 4786)
@@ -26,4 +15,4 @@
 
 #include "dicts/StructDictLib/Ross.h"
 
-#endif 
+extern bool	strscmp(const char* s1, const char* s2, size_t l, MorphLanguageEnum langua);

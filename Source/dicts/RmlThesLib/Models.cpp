@@ -56,6 +56,7 @@ bool CThesaurus::LoadAtomicGroups(std::string Buff, CInnerModel &M) {
 
         if (SynGroup == "DSC")
             G.m_bDigCmpl = true;
+        // one model can contain patterns from different languages 
         else if (m_pEngGramTab->ProcessPOSAndGrammemsIfCan(SynGroup.c_str(), &G.m_PartOfSpeech, &dummy))
             G.m_LanguageId = morphEnglish;
         else if (m_pMainGramTab->ProcessPOSAndGrammemsIfCan(SynGroup.c_str(), &G.m_PartOfSpeech, &dummy))
@@ -97,6 +98,16 @@ bool CThesaurus::LoadGroups(std::string Buff, CInnerModel &M) {
     return true;
 };
 
+std::string& strip_quotes(std::string& s) {
+    if (!s.empty() && s[0] == '"') {
+        s.erase(0, 1);
+    }
+    if (!s.empty() && s.back() == '"') {
+        s.erase(s.length() - 1, 1);
+    }
+    return s;
+}
+
 void CThesaurus::LoadModels(std::string FileName) {
     m_Models.clear();
     std::ifstream ifs(FileName);
@@ -110,43 +121,25 @@ void CThesaurus::LoadModels(std::string FileName) {
     Trim(Header);
     if (Header != "FreqCollocTypeId;Length;AtomGroups;Relations;Examples;Enabled;LoadTextForm;LanguageId;Groups;")
         throw CExpc("bad header in %s", FileName.c_str());
+
     while (getline(ifs, line)) {
         CInnerModel M;
-        std::string innerStr = convert_from_utf8(line.c_str(), m_MainLanguage);
-        StringTokenizer Line(innerStr.c_str(), FieldDelimiter);
-        int i = 0;
-        while (true) {
-            const char *s = Line();
-            if (s == 0) break;
-            std::string Field = s;
-            if (Field[0] == '"') {
-                if (Field[Field.length() - 1] != '"')
-                    throw CExpc("bad format in %s", FileName.c_str());
-                Field.erase(0, 1);
-                Field.erase(Field.length() - 1, 1);
+        auto innerStr = convert_from_utf8(line.c_str(), m_MainLanguage);
+        auto fields = split_string(innerStr, FieldDelimiter[0]);
+        M.m_ModelId = atoi(fields[0].c_str());
 
-            };
+        if (!LoadAtomicGroups(strip_quotes(fields[2]), M)) {
+            throw CExpc("LoadAtomicGroups failed in %s, line %s", FileName.c_str(),
+                line.c_str());
+        }
 
-            if (i == 0)
-                M.m_ModelId = atoi(Field.c_str());
-            else if (i == 2) {
-                std::string models = Field;
-                if (!LoadAtomicGroups(Field, M)) {
-                    throw CExpc("LoadAtomicGroups failed in %s, line %s", FileName.c_str(), 
-                        line.c_str());
-                }
-            } else if (i == 3) {
-                if (!LoadModelRelations(Field, M)) {
-                    throw CExpc("LoadModelRelations failed in %s", FileName.c_str());
-                }
-            } else if (i == 8) {
-                if (!LoadGroups(Field, M)) {
-                    throw CExpc("LoadGroups failed in %s", FileName.c_str());
-                }
-            };
+        if (!LoadModelRelations(strip_quotes(fields[3]), M)) {
+            throw CExpc("LoadModelRelations failed in %s", FileName.c_str());
+        }
 
-            i++;
-        };
+        if (!LoadGroups(strip_quotes(fields[8]), M)) {
+            throw CExpc("LoadGroups failed in %s", FileName.c_str());
+        }
         m_Models.push_back(M);
     };
 
