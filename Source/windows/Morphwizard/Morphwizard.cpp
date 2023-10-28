@@ -13,6 +13,11 @@
 #include "ParadigmDifferences.h"
 #include "AccentModelDiff.h"
 
+#include <plog/Initializers/ConsoleInitializer.h>
+#include <plog/Log.h>
+#include <plog/Initializers/RollingFileInitializer.h>
+
+
 #ifdef DETECT_MEMORY_LEAK
 #define new DEBUG_NEW
 #endif
@@ -46,6 +51,35 @@ public:
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
 	};
 };
+
+class MwzLogFormatter
+{
+public:
+	static plog::util::nstring header()
+	{
+		return plog::util::nstring();
+	}
+
+	static plog::util::nstring format(const plog::Record& record)
+	{
+		tm t;
+		plog::util::localtime_s(&t, &record.getTime().time);
+
+		plog::util::nostringstream ss;
+		ss << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_hour << PLOG_NSTR(":") << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_min << PLOG_NSTR(":") << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_sec << PLOG_NSTR(".") << std::setfill(PLOG_NSTR('0')) << std::setw(3) << static_cast<int> (record.getTime().millitm) << PLOG_NSTR(" ");
+		ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << severityToString(record.getSeverity()) << PLOG_NSTR(" ");
+		//ss << PLOG_NSTR("[") << record.getTid() << PLOG_NSTR("] ");
+		ss << PLOG_NSTR("[") << record.getFunc() << PLOG_NSTR("@") << record.getLine() << PLOG_NSTR("] ");
+		ss << record.getMessage() << PLOG_NSTR("\n");
+		return ss.str();
+	}
+};
+
+
+static plog::ConsoleAppender<MwzLogFormatter> consoleAppender;
+void init_wizard_log(plog::Severity severity, std::string log_path) {
+	plog::init<MwzLogFormatter>(severity, log_path.c_str()).addAppender(&consoleAppender);
+}
 
 
 // CMorphwizardApp construction
@@ -136,6 +170,7 @@ BOOL CMorphwizardApp::InitInstance()
 //	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
 	pMainFrame->UpdateWindow();
+	init_wizard_log(plog::verbose, "wizard.log");
 
 	return TRUE;
 }
