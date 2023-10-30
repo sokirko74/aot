@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SemanticRusStructure.h"
-#include "morph_dict/LemmatizerBaseLib/rus_numerals.h"
+#include "morph_dict/lemmatizer_base_lib/rus_numerals.h"
 static StringVector GenitFormsOfCardinal;
 
 

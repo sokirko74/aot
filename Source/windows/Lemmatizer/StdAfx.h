@@ -23,7 +23,7 @@
 extern CComModule _Module;
 #include <atlcom.h>
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
 
 

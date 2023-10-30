@@ -1,6 +1,4 @@
-#if !defined(semantic_str_h)
-#define semantic_str_h
-
+#pragma once
 #pragma warning (disable : 4786)
 
 #include "morph_dict/common/utilit.h"
@@ -8,8 +6,8 @@
 #include "dicts/StructDictLib/Ross.h"
 #include "SemanticsHolder.h"
 #include "SemPattern.h"
-#include "morph_dict/AgramtabLib/rus_consts.h"
-#include "morph_dict/AgramtabLib/eng_consts.h"
+#include "morph_dict/agramtab/RusGramTab.h"
+#include "morph_dict/agramtab/EngGramTab.h"
 
  
 typedef std::vector<long> VectorLong;
@@ -796,6 +794,3 @@ const  std::string SELECTIVE_GR_STR = _R("ЭЛЕКТ_ИГ");
 const size_t MaxValsCount = 15;
 
 
-
-
-#endif

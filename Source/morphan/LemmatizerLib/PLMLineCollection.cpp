@@ -2,7 +2,7 @@
 // ==========  Dialing Lemmatizer (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko, Andrey Putrin
 
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 #include "PLMLineCollection.h"
 #include <fstream>
 

@@ -8,8 +8,8 @@
 #include <ctime>
 #include <set>
 #include "morph_dict/common/util_classes.h"
-#include "morph_dict/AgramtabLib/eng_consts.h"
-#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
+#include "morph_dict/agramtab/EngGramTab.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 #include "dicts/BinaryDictsLib/BinaryDictionary.h"
 
 CMorphanHolder MorphHolderRus;

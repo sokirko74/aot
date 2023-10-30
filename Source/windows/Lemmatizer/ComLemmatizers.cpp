@@ -6,7 +6,7 @@
 #include "ComLemmatizers.h"
 #include "ComParadigm.h"
 #include "Lemmatizer_i.h"
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
 
 STDMETHODIMP CCOMLemmatizer::LoadDictionariesRegistry() 

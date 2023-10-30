@@ -9,7 +9,7 @@
 #include "assert.h"
 #include "SynPlmLine.h"
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
-#include "morph_dict/AgramtabLib/ger_consts.h"
+#include "morph_dict/agramtab/GerGramTab.h"
 
 
 //===============================================

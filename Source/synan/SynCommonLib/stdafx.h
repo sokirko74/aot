@@ -14,10 +14,10 @@
 #define MAX_WORD_LEN                    100
 
 #pragma warning (disable : 4786)
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 #include "morphan/LemmatizerLib/PLMLineCollection.h"
 
-#include "morph_dict/AgramtabLib/agramtab_.h"
+#include "morph_dict/agramtab/agramtab_.h"
 #include "dicts/StructDictLib/Ross.h"
 
 

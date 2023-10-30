@@ -1,5 +1,5 @@
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
-#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 #ifdef WIN32
 #include <direct.h> // _getcwd

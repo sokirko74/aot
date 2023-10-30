@@ -4,7 +4,7 @@
 #pragma once 
 
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/AgramtabLib/agramtab_.h"
+#include "morph_dict/agramtab/agramtab_.h"
 #include "dicts/StructDictLib/Ross.h"
 #include "Models.h"
 #include <map>       

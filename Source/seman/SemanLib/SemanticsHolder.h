@@ -5,7 +5,7 @@
 #if !defined(Semanticsolder_H)
 #define Semanticsolder_H
 #include "AllRossesHolder.h"
-#include "morph_dict/AgramtabLib/GramInfo.h"
+#include "morph_dict/agramtab/GramInfo.h"
 
 
 // частичная словарная интерпретация 

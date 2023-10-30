@@ -4,7 +4,7 @@
 
 #include "morph_dict/common/util_classes.h"
 #include "PlmLine.h"
-#include "morph_dict/AgramtabLib/agramtab_.h"
+#include "morph_dict/agramtab/agramtab_.h"
 
 
 CPlmLine::CPlmLine ()

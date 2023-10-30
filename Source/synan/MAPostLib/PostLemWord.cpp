@@ -1,5 +1,5 @@
 #include "PostLemWord.h"
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
 
 CPostLemWord::CPostLemWord(const CAgramtab* pGramTab):m_pGramTab(pGramTab)

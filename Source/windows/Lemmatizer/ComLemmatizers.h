@@ -6,7 +6,7 @@
 #ifndef __COMLEMMATIZERS_H_
 #define __COMLEMMATIZERS_H_
 
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 #include "ComParadigm.h"
 
 #pragma warning (disable : 4250)

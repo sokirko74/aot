@@ -10,7 +10,7 @@ enum EGraPairType {Date, WebAddr, Oborot, Keyb,  GermanDividedCompound, UnknownP
 
 class CFormInfo;
 
-#include "morph_dict/AgramtabLib/AncodePattern.h"
+#include "morph_dict/agramtab/AncodePattern.h"
 
 class CHomonym : public CAncodePattern
 {

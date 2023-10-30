@@ -1,8 +1,8 @@
 #include "LemWord.h"
 #include "Homonym.h"
 #include "morph_dict/common/util_classes.h"
-#include "morph_dict/AgramtabLib/agramtab_.h"
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
+#include "morph_dict/agramtab/agramtab_.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
 
 CHomonym::CHomonym(const CAgramtab* pGramTab):CAncodePattern(pGramTab)
 {

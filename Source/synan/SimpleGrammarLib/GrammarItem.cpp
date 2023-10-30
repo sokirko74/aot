@@ -1,6 +1,6 @@
 #include "SimpleGrammarLib.h"
 #include "GrammarItem.h"
-#include "morph_dict/AgramtabLib/agramtab_.h"
+#include "morph_dict/agramtab/agramtab_.h"
 
 //==========================================
 void	CMorphPattern::CopyFrom(const CMorphPattern& P)

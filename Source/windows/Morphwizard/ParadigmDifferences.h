@@ -1,6 +1,6 @@
 #pragma once
 
-#include "morph_dict/MorphWizardLib/wizard.h"
+#include "morph_dict/morph_wizard/wizard.h"
 class CSLFDocument;
 
 // CParadigmDifferences form view

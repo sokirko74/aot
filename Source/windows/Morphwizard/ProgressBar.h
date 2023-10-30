@@ -37,7 +37,7 @@
 #ifndef _INCLUDE_PROGRESSBAR_H_
 #define _INCLUDE_PROGRESSBAR_H_
 
-#include "morph_dict/MorphWizardLib/Wizard.h"
+#include "morph_dict/morph_wizard/Wizard.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CProgressBar -  status bar progress control

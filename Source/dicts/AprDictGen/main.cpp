@@ -8,7 +8,7 @@
 #include <ctime>
 
 #include "morph_dict/common/util_classes.h"
-#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 CMorphanHolder MorphHolderRus;
 CMorphanHolder MorphHolderEng;

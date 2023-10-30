@@ -16,7 +16,7 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 #include "morph_dict/common/util_classes.h"
-#include "morph_dict/MorphWizardLib/wizard.h"
+#include "morph_dict/morph_wizard/wizard.h"
 #include "HELPIDS.H"
 #include <afxrich.h>
 

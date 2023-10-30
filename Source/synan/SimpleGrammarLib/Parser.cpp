@@ -1,6 +1,6 @@
 #include  "SimpleGrammarLib.h"
 #include "SimpleGrammar.h"
-#include "morph_dict/AgramtabLib/GerGramTab.h"
+#include "morph_dict/agramtab/GerGramTab.h"
 
 
 const size_t MaxAutomatSymbolInterpetation = 10;

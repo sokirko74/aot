@@ -7,7 +7,7 @@
 #include "Group.h"
 
 #include "synan/SimpleGrammarLib/InputSymbol.h"
-#include "morph_dict/AgramtabLib/AncodePattern.h"
+#include "morph_dict/agramtab/AncodePattern.h"
 
 typedef  std::vector<int>  CIntVector;
 typedef	 std::pair<int, int> CIntPair;

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 #include <utility>
 
 

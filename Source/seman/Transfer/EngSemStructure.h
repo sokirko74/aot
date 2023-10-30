@@ -3,7 +3,7 @@
 
 
 #include "seman/SemanLib/SemanticStructure.h"
-#include "morph_dict/AgramtabLib/eng_consts.h"
+#include "morph_dict/agramtab/EngGramTab.h"
 #include "EngBinaryTranslate.h"
 
 enum EngVerbTenseEnum

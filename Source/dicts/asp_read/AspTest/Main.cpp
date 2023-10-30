@@ -1,5 +1,5 @@
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 #include  "dicts/BinaryDictsLib/AspPairDict.h"
 
 #include <iostream>

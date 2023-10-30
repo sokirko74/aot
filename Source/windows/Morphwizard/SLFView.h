@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "morph_dict/MorphWizardLib/wizard.h"
+#include "morph_dict/morph_wizard/wizard.h"
 #include "ColorRichEditView.h"
 #include "resource.h"
 #include "afxwin.h"

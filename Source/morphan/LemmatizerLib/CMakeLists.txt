@@ -12,8 +12,8 @@ add_library(LemmatizerLib
 
 target_link_libraries(LemmatizerLib
     AgramtabLib
-    LemmatizerBaseLib
+    lemmatizer_base_lib
     GraphanLib
-    MorphWizardLib
+    morph_wizard_lib
 )
 

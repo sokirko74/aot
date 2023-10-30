@@ -3,7 +3,7 @@
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
 #include "StdSynan.h"
-#include "morph_dict/LemmatizerBaseLib/rus_numerals.h"
+#include "morph_dict/lemmatizer_base_lib/rus_numerals.h"
 #include "RusFormatCaller.h"
 
 

@@ -4,7 +4,7 @@
 
 #include "MAPostMain.h"
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/AgramtabLib/RusGramTab.h"
+#include "morph_dict/agramtab/RusGramTab.h"
 
 void CMAPost::log(std::string s)
 {

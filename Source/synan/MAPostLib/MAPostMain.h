@@ -15,8 +15,8 @@
 
 
 #include "morphan/LemmatizerLib/PLMLineCollection.h"
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
-#include "morph_dict/AgramtabLib/rus_consts.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
+#include "morph_dict/agramtab/RusGramTab.h"
 #include "list"
 
 struct CFixedColloc

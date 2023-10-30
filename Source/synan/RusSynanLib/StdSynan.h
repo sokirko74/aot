@@ -6,7 +6,7 @@
 #include "synan/SynCommonLib/stdafx.h"
 #include "RusSyntaxOpt.h"
 #include "RusPlmLine.h"
-#include "morph_dict/AgramtabLib/rus_consts.h"
+#include "morph_dict/agramtab/RusGramTab.h"
 
 
 

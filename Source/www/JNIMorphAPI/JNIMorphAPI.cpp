@@ -27,11 +27,11 @@
 #include <malloc.h>
 
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/AgramtabLib/RusGramTab.h"
-#include "morph_dict/AgramtabLib/EngGramTab.h"
-#include "morph_dict/AgramtabLib/GerGramTab.h"
-#include "morph_dict/LemmatizerBaseLib/Lemmatizers.h"
-#include "morph_dict/LemmatizerBaseLib/Paradigm.h"
+#include "morph_dict/agramtab/RusGramTab.h"
+#include "morph_dict/agramtab/EngGramTab.h"
+#include "morph_dict/agramtab/GerGramTab.h"
+#include "morph_dict/lemmatizer_base_lib/Lemmatizers.h"
+#include "morph_dict/lemmatizer_base_lib/Paradigm.h"
 
 //jni infrastructure stuff
 static jclass setClazz=0;

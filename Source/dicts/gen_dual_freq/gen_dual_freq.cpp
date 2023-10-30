@@ -12,7 +12,7 @@
 
 #include "morph_dict/common/util_classes.h"
 #include "../FreqDictionary/ParadigmPairFreq.h"
-#include "morph_dict/AgramtabLib/eng_consts.h"
+#include "morph_dict/agramtab/eng_consts.h"
 #include "../common/MorphologyHolder.h"
 
 CMorphologyHolder MorphHolderRus;

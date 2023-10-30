@@ -12,7 +12,7 @@
 #include "StdSynan.h"
 #include "RusOborot.h"
 #include "synan/SynCommonLib/SyntaxInit.h"
-#include "morph_dict/AgramtabLib/RusGramTab.h"
+#include "morph_dict/agramtab/RusGramTab.h"
 
 
 class CRusSyntaxOpt :  public CSyntaxOpt

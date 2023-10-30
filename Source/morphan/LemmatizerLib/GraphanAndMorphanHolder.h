@@ -5,7 +5,7 @@
 #include "morph_dict/common/utilit.h"
 #include "PLMLineCollection.h"
 #include "graphan/GraphanLib/GraphmatFile.h"
-#include "morph_dict/LemmatizerBaseLib/MorphanHolder.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 class CGraphanAndMorphanHolder: public CMorphanHolder
 {

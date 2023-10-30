@@ -4,7 +4,7 @@
 
 #include "Sentence.h"
 #include "FormatCaller.h"
-#include "morph_dict/AgramtabLib/rus_consts.h"
+#include "morph_dict/agramtab/RusGramTab.h"
 
 
 class CWord_eq

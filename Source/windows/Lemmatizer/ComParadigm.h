@@ -10,7 +10,7 @@
 #include "atlcom.h"
 #include "comdef.h"
 
-#include "morph_dict/LemmatizerBaseLib/Paradigm.h"
+#include "morph_dict/lemmatizer_base_lib/Paradigm.h"
 #include "lemmatizer_resource.h"       // main symbols
 
 
