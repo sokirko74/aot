@@ -324,8 +324,9 @@ void CRusSemStructure::ApplySubordinationCases ()
 			std::string gcNoun = NounN.m_Words[NounN.m_MainWordNo].m_GramCodes;
 			std::string gc4 = NumN.m_GramCodes;
 			if(gc4.length() == 2 && gcNoun.length() == 2) continue;
-			gc4 = R->GleicheAncode1(CaseNumberGender0, gc4, 
-				R->GetGramCodes(NUMERAL, NounN.GetGrammems() & (rAllCases|rAllGenders), CaseGender),
+			gc4 = R->GleicheAncode1(CaseNumberGender0, gc4,
+                                    R->GetAllGramCodes(NUMERAL, NounN.GetGrammems() & (rAllCases | rAllGenders),
+                                                       CaseGender),
 				gcNoun);
 			NumN.ModifyGramCodes(gc4 , 3, R);
 			NounN.ModifyGramCodes(gcNoun , 2, R);

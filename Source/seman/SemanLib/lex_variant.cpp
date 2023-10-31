@@ -1506,7 +1506,7 @@ void CRusSemStructure::BuildSemNodesBySyntax()
 				if( !(RelGr& rAllGenders) ) 
 					RelGr |= m_Nodes[SourceNodeNo].GetGrammems() & rAllGenders;
 				m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0, _R("ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел"),
-					R->GetGramCodes(NOUN, RelGr, CaseNumberGender0));
+                                                                      R->GetAllGramCodes(NOUN, RelGr, CaseNumberGender0));
 				m_Nodes[SourceNodeNo].SetGrammems(RelGr);
 				m_Nodes[TargetNodeNo].SetGrammems(RelGr); //m_Nodes[TargetNodeNo].GetGrammems() & ~(rAllCases|rAllGenders|rAllPersons|rAllAnimative) | 
 			}

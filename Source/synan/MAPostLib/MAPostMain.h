@@ -63,6 +63,7 @@ class CMAPost  : public CPostMorphInteface
 {
 	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
 	std::string          m_DURNOVOGramCode;
+    std::set<std::string> m_AbbrIndeclGramCodes;
 	std::list<CPostLemWord>	m_Words;
     
 	bool is_russian_numeral( std::string& word) const;
@@ -85,13 +86,6 @@ protected:
 	const CLemmatizer*			m_pRusLemmatizer;
 	const CAgramtab*			m_pRusGramTab;
 	std::vector<CFixedColloc>        m_FixedCollocs;
-
-	
-
-	std::string			m_LogFileName;
-
-	
-
 	void RunRules();
 	int Count() const	{ return m_Words.size(); };
 
@@ -138,7 +132,6 @@ protected:
 	void Rule_Abbreviation();
 	// по-восточному
 	void Rule_AdverbFromAdjectives();
-	void log(std::string s);
 	void SaveToFile(std::string s);
 	CLineIter AddCollocation(CLineIter start_it, CLineIter end_it, CLineIter main_it, bool HasEndtSent,  int CollocNo);
 	void Rule_FilterProperName();

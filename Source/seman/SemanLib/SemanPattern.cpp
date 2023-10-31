@@ -707,7 +707,7 @@ bool CRusSemStructure::CheckPatternGramFetLine (CSemPattern& P,  CSynRealization
 						&& m_pData->GetRusGramTab()->ConflictGenderNumber(m_Nodes[P.m_SourceNo].m_GramCodes.c_str(),m_Nodes[NodeNo].m_GramCodes.c_str()))
 						|| (m_Nodes[NodeNo].m_NodeType == MNA && ((m_Nodes[P.m_SourceNo].GetGrammems() & rAllNumbers) == _QM(rSingular) ) ) )
 						)
-							//m_Nodes[NodeNo].m_NodeType == MNA ? m_pData->GetRusGramTab()->GetGramCodes(NOUN, _QM(rPlural) | _QM(rNominativ), CaseNumber).c_str()
+							//m_Nodes[NodeNo].m_NodeType == MNA ? m_pData->GetRusGramTab()->GetAllGramCodes(NOUN, _QM(rPlural) | _QM(rNominativ), CaseNumber).c_str()
 							//: 
 						return false;
 					bool xx = m_Nodes[NodeNo].m_NodeType == MNA ;

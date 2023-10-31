@@ -6,121 +6,76 @@
 #include "morph_dict/common/utilit.h"
 #include "morph_dict/agramtab/RusGramTab.h"
 
-void CMAPost::log(std::string s)
-{
-	if (m_LogFileName == "")  return;
-	try {
-		FILE* fp = fopen(m_LogFileName.c_str(), "a");
-		if (!fp)
-		{
-			m_LogFileName = "";
-			return;
-		};
-		fprintf(fp, "%s\n", s.c_str()),
-		fclose(fp);
-	}
-	catch (...) {
-	};
-
-}
-
-
 void CMAPost::RunRules()
 {
 	try
 	{
 		Rule_TwoPredicates();
 
-		log("Rule_FilterProperName");
 		Rule_FilterProperName();
 
-		log("Rule_AdverbFromAdjectives");
 		Rule_AdverbFromAdjectives();
 
-		log("Odnobuk");
 		Odnobuk();
 
 
 		if (m_bCanChangeInputText)
 		{
-			log("Cifrdef");
 			Cifrdef();
 
-			log("ILeDefLe");
 			ILeDefLe();
 
 		}
 
-		log("ParticipleAndVerbInOneForm");
 		ParticipleAndVerbInOneForm();
 
-		log("PronounP_Pronoun_Homonymy");
 		PronounP_Pronoun_Homonymy();
 
 
 		if (m_bCanChangeInputText)
 		{
-			log("FixedCollocations");
 			FixedCollocations();
 		};
 
-		log("CorrectOborots");
 		CorrectOborots();
 
-		log("SemiAdjectives");
 		SemiAdjectives();
 
-		log("Interjections");
 		Rule_Interjections();
 
-		log("SemiNouns");
 		SemiNouns();
 
-		log("Rule_UZHE");
 		Rule_UZHE();
 
-		log("Rule_Ideclinable");
 		Rule_Ideclinable();
 
-		log("Rule_DeadPlurals");
 		Rule_DeadPlurals();
 
-		log("Rule_RelationalAdjective");
 		Rule_RelationalAdjective();
 
-		log("Rule_Fio");
 		Rule_Fio();
-
 
 		if (m_bCanChangeInputText)
 		{
-			log("Rule_QuoteMarks");
 			Rule_QuoteMarks();
 		};
 
-		log("Rule_ILE");
 		Rule_ILE();
 
 		if (m_bCanChangeInputText)
 		{
-			log("Rule_KAK_MOZHNO");
 			Rule_KAK_MOZHNO();
 
-			log("Rule_Redublication");
 			Rule_Redublication();
 
-			log("Rule_CHTO_ZA");
 			Rule_CHTO_ZA();
 
-			log("Rule_VOT_UZHE");
 			Rule_VOT_UZHE();
 
 		};
 
-		log("Rule_UnknownNames");
 		Rule_UnknownNames();
 
-		log("Rule_SOROK");
 		Rule_SOROK();
 
 		Rule_ExpandIndeclinableGramcodes();
@@ -546,11 +501,13 @@ void CMAPost::OtherRules()
 		next_it++;
 		if (it != m_Words.begin())
 		{
+            // рассказ о ели  (удаляем омоним "есть" после предлога)
 			prev_it--;
 			if (W.HasPos(VERB) && W.GetHomonymsCount() > 0 && (*prev_it).GetHomonymsCount() == 1 && (*prev_it).HasPos(PREP))
 				for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++)
-					if (W.GetHomonym(HomNo)->HasPos(VERB))
+					if (W.GetHomonym(HomNo)->HasPos(VERB)) {
 						W.EraseHomonym(HomNo);
+                    }
 		}
 		if (W.HasDes(ONumChar) && is_alpha((BYTE)W.m_strWord[0]) && W.GetPoses() == 0)
 		{
@@ -558,8 +515,8 @@ void CMAPost::OtherRules()
 			CHomonym* pNew = W.AddNewHomonym();
 			pNew->SetMorphUnknown();
 			pNew->m_strLemma = W.m_strUpperWord;
-			pNew->m_CommonGramCode = _R("Фа");
-			pNew->SetGramCodes(m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
+			pNew->m_CommonGramCode = m_pRusGramTab->GetInanimIndeclNoumGramCode();
+			pNew->SetGramCodes(m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));
 			pNew->InitAncodePattern();
 			W.AddDes(is_alpha((BYTE)W.m_strWord[0], morphEnglish) ? OLLE : ORLE);
 		}
@@ -835,6 +792,7 @@ void CMAPost::Rule_Ideclinable()
 				std::string NewGramCode;
 				if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(NOUN, pH->m_iGrammems & ~_QM(rPlural), NewGramCode))
 				{
+                    LOGV << "apply Rule_Ideclinable to " <<  convert_to_utf8(W.m_strUpperWord, m_Language);
 					pH->SetGramCodes(NewGramCode);
 					pH->InitAncodePattern();
 				}
@@ -1002,12 +960,14 @@ void CMAPost::Rule_ILE()
 		CPostLemWord& W = *it;
 		if (W.HasDes(OLLE))
 		{
+            LOGV << "apply Rule_ILE to " << convert_to_utf8(W.m_strWord, m_Language);
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
 			pNew->SetMorphUnknown();
 			pNew->m_strLemma = W.m_strUpperWord;
-			pNew->m_CommonGramCode = _R("Фа");
-			pNew->SetGramCodes(m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
+			pNew->m_CommonGramCode = m_pRusGramTab->GetInanimIndeclNoumGramCode();
+            auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);
+			pNew->SetGramCodes(codes);//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
 			pNew->InitAncodePattern();
 		}
 	};
@@ -1333,7 +1293,7 @@ void CMAPost::Rule_ExpandIndeclinableGramcodes()
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
 
-		auto all_noun_ancodes = m_pRusGramTab->GetGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, nullptr);
+		auto all_noun_ancodes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, nullptr);
 		//ЦБ      С ср,0 -> C ср,им  ср,вн ср,дт
 		for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++) {
 			if (W.GetHomonym(HomNo)->HasPos(NOUN) && W.GetHomonym(HomNo)->HasGrammem(rIndeclinable) && !W.GetHomonym(HomNo)->HasGrammem(rInitialism))

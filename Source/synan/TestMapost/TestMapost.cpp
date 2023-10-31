@@ -25,12 +25,15 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddArgument("--output-file", "specify file for tokens table", true);
     parser.AddArgument("--input-file-mask", "c:/*.txt", true);
     parser.AddOption("--print-ancodes");
+    parser.AddArgument("--log-level", "log level", true);
+
     parser.Parse(argc, argv);
 }
 
 int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
+    init_plog(args.GetLogLevel(), "mapost_test.log");
     MorphLanguageEnum  language = args.GetLanguage();
     CSyntaxHolder H;
     try {

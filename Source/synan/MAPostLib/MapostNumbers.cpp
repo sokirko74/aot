@@ -211,6 +211,7 @@ void CMAPost::Cifrdef()
 			if (it != spec_it)
 			{
 				CPostLemWord& W2 = *spec_it;
+                LOGV << "apply Cifrdef to  " <<  convert_to_utf8(W2.m_strWord, m_Language);
 				std::vector<CFormInfo> Paradigms;
 				W2.DeleteOborotMarks();
 				W2.AddDes(ORLE);
@@ -218,8 +219,8 @@ void CMAPost::Cifrdef()
 				W2.DeleteAllHomonyms();
 				CHomonym* pH = W2.AddNewHomonym();
 				pH->SetMorphUnknown();
-				pH->m_CommonGramCode = _R("Фа");
-				pH->SetGramCodes(_R("ао"));
+				pH->m_CommonGramCode = m_pRusGramTab->GetInanimIndeclNoumGramCode();
+				pH->SetGramCodes(m_pRusGramTab->GetMasAbbrNounGramCode());
 				if (W2.m_strWord == "%")
 				{
 					W2.m_strUpperWord = W2.m_strWord = _R("ПРОЦ");

@@ -63,9 +63,8 @@ bool CSyntaxHolder::RunMapost(CPlmLineCollection& mapostPlmLines)
 {
 	if (!m_pPostMorph->ProcessData(&m_PlmLines))
 	{
-		fprintf(stderr, "  Cannot process Mapost\n");
+		LOGE <<  "  Cannot process Mapost";
 		return false;
-
 	};
 	mapostPlmLines.m_PlmItems.clear();
 	mapostPlmLines.m_pLemmatizer = m_PlmLines.m_pLemmatizer;

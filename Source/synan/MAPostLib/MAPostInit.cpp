@@ -21,14 +21,8 @@ CPostMorphInteface* NewRussianPostMorph(const CLemmatizer* RusLemmatizer, const 
 CMAPost::CMAPost()
 {
 	m_Language = morphRussian;
-    m_LogFileName = "";
-	m_bCanChangeInputText = true;
+    m_bCanChangeInputText = true;
     m_bHumanFriendlyOutput = false;
-
-	#ifdef _DEBUG
-		m_LogFileName = "mapost.log";
-	#endif
-
 }
 
 CMAPost::~CMAPost()
@@ -127,7 +121,8 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 
 	
 		m_DURNOVOGramCode = m_pRusGramTab->GetPlugNouInfo().m_GramCode;
-    
+        //m_pRusGramTab->GetAllGramCodes(NOUN, _QM(rIndeclinable) | _QM(rInitialism))
+
 	}
 	catch(CExpc c)
 	{
