@@ -262,7 +262,7 @@ bool CSynWord::IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I)
     if (I.m_TokenType == RLE)
         if (!HasDes(ORLE))
             return false;
-    if (I.m_TokenType == NUM)
+    if (I.m_TokenType == NUM_TOKEN)
         if (!HasDes(ODigits))
             return false;
     if (I.m_TokenType == PUNCTUAT)

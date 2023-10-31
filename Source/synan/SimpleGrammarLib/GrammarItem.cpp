@@ -312,7 +312,7 @@ bool	CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 				m_TokenType = PUNCTUAT;
 			else
 			if (isdigit((BYTE)m_Token[0]))
-				m_TokenType = NUM;
+				m_TokenType = NUM_TOKEN;
 			else
 			if (Language == morphRussian)
 			{

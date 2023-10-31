@@ -292,7 +292,7 @@ std::string CPlmLine :: GetStr ()  const
 	{
 		MainTokenTypeEnum t = m_TokenType;
 		if (t == ROMAN_NUM)
-			t = NUM;
+			t = NUM_TOKEN;
 		Result += " ";
 		Result += TokenTypeToString(t);
 		Result += " ";
@@ -417,7 +417,7 @@ std::string TokenTypeToString(const MainTokenTypeEnum & t)
 	switch (t){
 		case RLE : return "RLE";
 		case LLE : return "LLE";
-		case NUM : return "DC";
+		case NUM_TOKEN : return "DC";
 		case ROMAN_NUM : return "ROMAN";
 		case NUM_CHAR : return "DSC";
 		case PUNCTUAT : return "PUN";
@@ -429,7 +429,7 @@ MainTokenTypeEnum StringToTokenType(const  std::string& t)
 {
 	if (t == "RLE")	return RLE;
 	if (t == "LLE")	return LLE;
-	if (t == "DC")	return NUM;
+	if (t == "DC")	return NUM_TOKEN;
 	if (t == "ROMAN")	return ROMAN_NUM;
 	if (t == "DSC")	return NUM_CHAR;
 	if (t == "PUN")	return PUNCTUAT;

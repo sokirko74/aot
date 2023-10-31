@@ -127,6 +127,9 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
         }
         assert (m_AbbrIndeclGramCodes.size() == 6);
 
+         m_NumWithGendersGramCodes = m_pRusGramTab->GetAllGramCodes(NUMERAL,  0, AnyGender);
+         assert (m_NumWithGendersGramCodes.length() == 18*2);
+
 	}
 	catch(CExpc c)
 	{
@@ -135,6 +138,7 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 	}
 	catch(...)
 	{
+        LOGE << "unknown exception in mapost";
 		return false;		
 	}
 	return true;

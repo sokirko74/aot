@@ -164,7 +164,7 @@ void CMAPost::Cifrdef()
 		if (AnCodes.empty() && Flexia != "")
 			AnCodes = GetSimilarNumAncode(numeral->m_Ordinal, Flexia, numeral->m_bNoun);
 		if (numeral->m_Cardinal == _R("ОДИН")) {
-			AnCodes = _R("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч"); //все грамкоды с родом
+			AnCodes = m_NumWithGendersGramCodes; //все грамкоды с родом
 		}
 		std::string AnCodes0 = AnCodes; //числ
 		if (NumWordForm != "0") {

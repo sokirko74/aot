@@ -217,7 +217,7 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 	
 	G.m_iLastWord += get_maximal_group_size(G.m_iLastWord)-1;
 	const CGroup& MainGroup = get_maximal_group(G.m_iFirstWord);
-	change_words_in_group_gramcodes(get_maximal_group(k), GetOpt()->m_MasSingNomNounGramCode, CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
+	change_words_in_group_gramcodes(get_maximal_group(k), GetOpt()->m_MasSingNomNounGramCode, CaseNumberGender0);
 	if(!strcmp(Wk.get_word(), "№") &&  is_numeral(sent[k+1])) //я вышел из дома № 26
 	{
 		Wk.SetGramcodes( GetOpt()->m_MasSingNomNounGramCode );
@@ -853,7 +853,7 @@ bool CRusFormatCaller::format_for_odin_group(CGroup& G)
 
 	if( sent[i_number].HasFlag(fl_digit) ) // до 81 унции
 	{
-		std::string num_grc = R->GetAllGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender); //"эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэчасЙш"; //ЧИСЛ мр..ср им("один");рд;..пр
+		std::string num_grc = R->GetAllGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender);
 		std::string noun_pair =  _R("ааабавагадаегагбгвгггдгееаебевегедее"); //С мр..ср им,ед("дом");рд,ед;..;пр,ед
 		R->GleicheAncode1(CaseNumberGender0, noun_pair.c_str(), new_grc.c_str(), num_grc);
 		num_grc = R->UniqueGramCodes(R->GleicheAncode1(CaseNumberGender0, num_grc.c_str(), R->UniqueGramCodes(sent[i_number].GetGramcodes())));
