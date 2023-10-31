@@ -46,10 +46,12 @@ std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::st
 	{
 		std::string Form = P.GetWordForm(k);
 		EngRusMakeLower(Form);
-		if (IsNoun && Form != h && std::string(_R("ао,ап,ат,ау,ац,ач,аъ")).find(P.GetAncode(k)) != std::string::npos) // 1000 - не аббр, "свыше 1000 человек"
+		if (IsNoun && Form != h && m_AbbrIndeclGramCodes.find(P.GetAncode(k)) != m_AbbrIndeclGramCodes.end())
+            // 1000 - не аббр, "свыше 1000 человек"
 			continue;
+
 		if (Form.length() > Flexia.length())
-			if (Flexia == "" || Flexia == Form.substr(Form.length() - Flexia.length()))
+			if (Flexia == "" || endswith(Form, Flexia))
 				AnCodes += P.GetAncode(k);
 	};
 

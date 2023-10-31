@@ -121,7 +121,11 @@ bool	CMAPost::Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab
 
 	
 		m_DURNOVOGramCode = m_pRusGramTab->GetPlugNouInfo().m_GramCode;
-        //m_pRusGramTab->GetAllGramCodes(NOUN, _QM(rIndeclinable) | _QM(rInitialism))
+        auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, _QM(rIndeclinable) | _QM(rInitialism), GrammemsInclusion);
+        for (size_t i = 0;  i < codes.length(); i+=2) {
+            m_AbbrIndeclGramCodes.insert(codes.substr(i, 2));
+        }
+        assert (m_AbbrIndeclGramCodes.size() == 6);
 
 	}
 	catch(CExpc c)
