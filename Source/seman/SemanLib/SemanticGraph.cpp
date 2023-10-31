@@ -258,9 +258,9 @@ void CSemanticStructure::DeleteRelations(std::vector<long>& Rels, const char* ca
 //====================================================================
 
 
-std::string  CSemanticStructure::GetNodeStr1(size_t NodeNo, size_t MaxLength) const
+std::string  CSemanticStructure::GetNodeStr1(size_t NodeNo) const
 {
-	std::string Q = GetNodeStr(NodeNo, MaxLength);
+	std::string Q = GetNodeStr(NodeNo, 65000);
 	if (GetNode(NodeNo).IsAbstract())
 		return Format("%s%u", Q.c_str(), NodeNo);
 	else 
@@ -274,8 +274,6 @@ std::string  CSemanticStructure::GetNodeStr(const CSemNode& N, size_t MaxLength)
 	if (N.m_NodeType == ModalCopul) return "ModalCopul";
 	if (N.m_NodeType == SJA) return _R("СЯ");
 	if (N.m_NodeType == Situat) return "SIT";
-	int WordsCount = N.GetWordsSize();
-
 
 	for (size_t i = 0; i < N.GetWordsSize(); i++)
 		if (!N.GetWord(i).IsQuoteMark())
@@ -298,6 +296,7 @@ std::string  CSemanticStructure::GetNodeStr(const CSemNode& N, size_t MaxLength)
 
 	return S;
 };
+
 std::string  CSemanticStructure::GetNodeStr(size_t NodeNo, size_t MaxLength) const
 {
 	const CSemNode& N = GetNode(NodeNo);

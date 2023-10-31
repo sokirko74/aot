@@ -2,12 +2,43 @@
 #include "morph_dict/common/argparse.h"
 #include "seman/SemanLib/VisualGraph.h"
 
+#include <plog/Initializers/RollingFileInitializer.h>
+#include <plog/Initializers/ConsoleInitializer.h>
+
+
 extern void (*GlobalErrorMessage)(const std::string &);
 
 void MyGlobalErrorMessage(const std::string &s) {
     throw CExpc(s);
 
 }
+
+class MyFormatter
+{
+public:
+    static plog::util::nstring header()
+    {
+        return plog::util::nstring();
+    }
+
+    static plog::util::nstring format(const plog::Record& record)
+    {
+        plog::util::nostringstream ss;
+        ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << severityToString(record.getSeverity()) << PLOG_NSTR(" ");
+        ss << PLOG_NSTR("[") << record.getFunc() << PLOG_NSTR("@") << record.getLine() << PLOG_NSTR("] ");
+        ss << convert_to_utf8(record.getMessage(), morphRussian) << PLOG_NSTR("\n");
+        return ss.str();
+    }
+};
+
+
+void init_plog_seman(plog::Severity severity, std::string filename) {
+    if (std::filesystem::exists(filename)) {
+        std::filesystem::remove(filename);
+    }
+    plog::init<MyFormatter>(severity, filename.c_str());
+}
+
 
 std::string GetGramInfo(const CRusSemStructure& semStr, part_of_speech_mask_t Poses, uint64_t Grammems) {
     std::string Result;
@@ -194,11 +225,11 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
 
 int main(int argc, const char* argv[]) {
     CSemStructureBuilder SemBuilder;
-    PLOGI << "start logging";
 
     ArgumentParser args;
     initArgParser(argc, argv, args);
-    init_plog(args.GetLogLevel(), "test_seman.log");
+    init_plog_seman(args.GetLogLevel(), "test_seman.log");
+
     try {
         GlobalErrorMessage = MyGlobalErrorMessage;
         PLOGI << "init dicts ... (wait one minute)";
