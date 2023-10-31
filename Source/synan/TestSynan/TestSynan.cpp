@@ -206,6 +206,8 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddArgument("--input-file-mask", "c:/*.txt", true);
     parser.AddArgument("--output-folder", "", true);
     parser.AddArgument("--language", "language");
+    parser.AddArgument("--log-level", "log level", true);
+
     parser.Parse(argc, argv);
 }
 
@@ -213,6 +215,7 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int main(int argc, const char** argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
+    init_plog(args.GetLogLevel(), "synan_test.log");
 
     CSyntaxHolder H;
     try {

@@ -217,12 +217,11 @@ bool CRusFormatCaller::format_for_noun_num (CGroup& G)
 	
 	G.m_iLastWord += get_maximal_group_size(G.m_iLastWord)-1;
 	const CGroup& MainGroup = get_maximal_group(G.m_iFirstWord);
-	change_words_in_group_gramcodes(get_maximal_group(k), _R("аа"), CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
-	if(!strcmp(Wk.get_word(), "№") &&  is_numeral(sent[k+1])) //я вышел из дома №26
+	change_words_in_group_gramcodes(get_maximal_group(k), GetOpt()->m_MasSingNomNounGramCode, CaseNumberGender0); //GetGramTab()->FilterGramCodes("эжэзэиэйэкэлэмэнэоэпэрэсэтэуэфэхэцэч", 0, 0)
+	if(!strcmp(Wk.get_word(), "№") &&  is_numeral(sent[k+1])) //я вышел из дома № 26
 	{
-		Wk.SetGramcodes( _R("аа") );
-
-		change_words_in_group_gramcodes(get_maximal_group(k+1), _R("аа"), CaseNumberGender0); 
+		Wk.SetGramcodes( GetOpt()->m_MasSingNomNounGramCode );
+		change_words_in_group_gramcodes(get_maximal_group(k+1), GetOpt()->m_MasSingNomNounGramCode, CaseNumberGender0);
 	}
 	G.m_MainGroup = MainGroup;
 	G.SetGrammems( Wi.GetGrammems() );  

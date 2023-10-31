@@ -1,12 +1,7 @@
 // ==========  This file is under  LGPL, the GNU Lesser General Public Licence
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
-
-#ifndef rus_syntax_init_h
-#define rus_syntax_init_h
-
-#pragma warning(disable:4786)
-
+#pragma  once
 
 
 #include "StdSynan.h"
@@ -20,7 +15,9 @@ class CRusSyntaxOpt :  public CSyntaxOpt
 public:
 	long m_lPradigmID_NECHEGO;
 	std::string m_Gramcode_NECHEGO;
-	
+
+    std::string m_MasSingNomNounGramCode;
+
 	SDatItems* AdvAdj;
 	SDatItems* SynDependOnAdj;
 	SDatItems* SynDependOnAdv;
@@ -74,8 +71,4 @@ FROM_COMPAR,			DIR_OBJ_REV,			INSTR_OBJ
        
 } rGroupTypeEnum;
 
-
-
-
-#endif
 
