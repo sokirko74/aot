@@ -33,8 +33,8 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
-    init_plog(args.GetLogLevel(), "mapost_test.log");
     MorphLanguageEnum  language = args.GetLanguage();
+    init_plog(args.GetLogLevel(), "mapost_test.log", false, language);
     CSyntaxHolder H;
     try {
         H.LoadSyntax(args.GetLanguage());

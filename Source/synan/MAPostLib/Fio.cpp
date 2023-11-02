@@ -218,6 +218,7 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 	// ставим графем. пометы
 	FioWords[0]->AddDes(OFAM1);
 	FioWords.back()->AddDes(OFAM2);
+    LOGV << "create OFAM1 and OFAM2 for " << FioWords[0]->m_strWord << " ... "  << FioWords.back()->m_strWord;
 
 	return true;
 

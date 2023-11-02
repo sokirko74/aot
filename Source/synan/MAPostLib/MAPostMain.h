@@ -63,6 +63,7 @@ class CMAPost  : public CPostMorphInteface
 {
 	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
 	std::string          m_DURNOVOGramCode;
+    std::string          m_ProductiveNounGramCodes;
     std::set<std::string> m_AbbrIndeclGramCodes;
     std::string m_NumWithGendersGramCodes;
 	std::list<CPostLemWord>	m_Words;
