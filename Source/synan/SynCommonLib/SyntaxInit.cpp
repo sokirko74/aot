@@ -58,23 +58,6 @@ void CSyntaxOpt::OutputErrorString(std::string strMsg) const {
 }
 
 
-bool GetRegString(std::string key, std::string &value) {
-    try {
-        value = GetRegistryString(key);
-        if (value.empty())
-            throw CExpc("");
-    }
-    catch (CExpc &) {
-        char strMsg[400];
-        strcpy(strMsg, "Failed to read registry entry ");
-        strcat(strMsg, key.c_str());
-        ErrorMessage("SynAn", strMsg);
-        return false;
-    }
-
-    return true;
-}
-
 std::unique_ptr<CThesaurus>& CSyntaxOpt::GetThesPointerByThesId(uint32_t ThesId) {
     switch (ThesId) {
         case LocThes :

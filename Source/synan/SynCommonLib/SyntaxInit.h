@@ -78,10 +78,6 @@ public:
     KillHomonymsEnum m_KillHomonymsMode;
     bool m_bSilentMode;
 
-    size_t m_EmptyGroupType;
-    size_t m_EmptyClauseType;
-
-
     mutable std::vector <std::string> m_SyntaxGroupTypes;
 
     CWorkGrammar m_FormatsGrammar;
@@ -125,10 +121,6 @@ public:
 
     const char *GetGroupNameByIndex(long lType) const;
 
-    const size_t GetGroupTypesCount() const {
-        return m_SyntaxGroupTypes.size();
-    };
-
     int GetGroupTypebyName(const char *TypeName) const;
 
     virtual bool is_firm_group(int GroupType) const = 0;
@@ -142,13 +134,8 @@ public:
 };
 
 
-bool GetRegString(std::string key, std::string &value);
-
 inline bool has_item(const StringHashSet& C, const char* item) {
     if (!item) return false;
     return C.find(item) != C.end();
 };
 
-inline bool has_item(const StringHashSet& C, const std::string& item) {
-    return C.find(item) != C.end();
-};

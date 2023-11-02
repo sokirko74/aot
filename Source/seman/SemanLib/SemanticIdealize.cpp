@@ -314,22 +314,24 @@ void CRusSemStructure::ApplySubordinationCases ()
 			m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllNumbers);
 			m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rSingular);
 		};
+
 	// число, падеж числительных
-	for (long i=0;  i < m_Relations.size(); i++)
-		if	(		(m_Relations[i].m_Valency.m_RelationStr == "QUANTIT") )
+	for (auto& r: m_Relations)
+		if	(r.m_Valency.m_RelationStr == "QUANTIT")
 		{
-			const CRusGramTab *R = (CRusGramTab*)m_piSent->GetOpt()->GetGramTab();
-			CRusSemNode& NounN = m_Nodes[m_Relations[i].m_SourceNodeNo];
-			CRusSemNode& NumN = m_Nodes[m_Relations[i].m_TargetNodeNo];
+			const CRusGramTab *pGramTab = (CRusGramTab*)m_piSent->GetOpt()->GetGramTab();
+			CRusSemNode& NounN = m_Nodes[r.m_SourceNodeNo];
+			CRusSemNode& NumN = m_Nodes[r.m_TargetNodeNo];
 			std::string gcNoun = NounN.m_Words[NounN.m_MainWordNo].m_GramCodes;
 			std::string gc4 = NumN.m_GramCodes;
-			if(gc4.length() == 2 && gcNoun.length() == 2) continue;
-			gc4 = R->GleicheAncode1(CaseNumberGender0, gc4,
-                                    R->GetAllGramCodes(NUMERAL, NounN.GetGrammems() & (rAllCases | rAllGenders),
-                                                       CaseGender),
-				gcNoun);
-			NumN.ModifyGramCodes(gc4 , 3, R);
-			NounN.ModifyGramCodes(gcNoun , 2, R);
+			if (gc4.length() == 2 && gcNoun.length() == 2) continue;
+			gc4 = pGramTab->GleicheAncode3(
+                    CaseNumberGender0,
+                    gc4,
+                    pGramTab->GetAllGramCodes(NUMERAL, NounN.GetGrammems() & (rAllCases | rAllGenders), CaseGender),
+				    gcNoun);
+			NumN.ModifyGramCodes(gc4 , 3, pGramTab);
+			NounN.ModifyGramCodes(gcNoun , 2, pGramTab);
 		};
 	
    // если русское подлежащее было неизменяемым, а в него идет стрелка  от сказуемого, 

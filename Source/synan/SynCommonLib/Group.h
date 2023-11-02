@@ -2,9 +2,7 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef group_h
- #define group_h
-
+#pragma once
 
 #include "SynPlmLine.h"
 
@@ -214,20 +212,16 @@ public:
 	const CGroup&		get_maximal_subgroup (size_t GroupNo, size_t WordNo)  const; 		   
 	const CGroup&		get_maximal_subgroup (const CPeriod& group, size_t WordNo)  const; 		   
 	size_t				get_maximal_group_size(size_t WordNo)  const;
-	int					get_maximal_group_no_without_clause(size_t WordNo)  const;
-	const CGroup&		get_maximal_group(size_t WordNo)  const;
-	const CGroup*		get_maximal_group_ptr(size_t WordNo)  const;
-	const CGroup&		get_atomic_group(size_t WordNo)  const;
-	bool				has_sub_clauses(size_t GroupNo)  const;
-	uint64_t				get_group_grammems(size_t WordNo) const;
-	void				get_full_sentence(std::string& str_sent) const;
+
+    const CGroup&		get_maximal_group(size_t WordNo)  const;
+
+    void				get_full_sentence(std::string& str_sent) const;
 	bool				is_noun_group (const CGroup& G) const;
 
 	
 	bool				is_only_comma_delimited(const CGroup& G) const;
-	bool				is_only_comma_with_pronoun_p_in_group(const CGroup& G) const;
 
-	// changers
+    // changers
 	void	change_words_in_group_grammems(const CPeriod& group, uint64_t grammems, uint64_t breaks);
 	bool    change_words_in_group_gramcodes(const CPeriod& group, const std::string& gramcodes, GrammemCompare CompareFunc);
 	void	change_words_in_group_grammems(const CPeriod& group, uint64_t grammems);
@@ -242,9 +236,3 @@ public:
 	void	BuildAutomaticSynrels();
 	void	ResizeAtomicDummy(size_t Number);
 };
-
-//extern int get_maximal_group_no(std::vector<CGroup>::const_iterator begin, std::vector<CGroup>::const_iterator end, size_t WordNo);
-
-
-
-#endif
