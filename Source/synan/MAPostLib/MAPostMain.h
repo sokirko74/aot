@@ -3,9 +3,7 @@
 // ==========  Copyright by Dmitry Pankratov, Alexey Sokirko (1999-2002)
 
 
-#ifndef __MAPOST_MAIN_H_
-#define __MAPOST_MAIN_H_
-
+#pragma once
 
 
 #include "morph_dict/common/util_classes.h"
@@ -63,7 +61,6 @@ class CMAPost  : public CPostMorphInteface
 {
 	//грамматический код ДУРНОВО (неизменяеммое существительное всех родов)
 	std::string          m_DURNOVOGramCode;
-    std::string          m_ProductiveNounGramCodes;
     std::set<std::string> m_AbbrIndeclGramCodes;
     std::string m_NumWithGendersGramCodes;
 	std::list<CPostLemWord>	m_Words;
@@ -86,7 +83,7 @@ public:
 
 protected:
 	const CLemmatizer*			m_pRusLemmatizer;
-	const CAgramtab*			m_pRusGramTab;
+	const CRusGramTab*			m_pRusGramTab;
 	std::vector<CFixedColloc>        m_FixedCollocs;
 	void RunRules();
 	int Count() const	{ return m_Words.size(); };
@@ -146,13 +143,4 @@ protected:
     bool SetFioFormat (const CFIOFormat* Format, CLineIter it); 
 
 };
-
-
-
-
-
-
-#endif //__MAPOST_H_
-
-
 

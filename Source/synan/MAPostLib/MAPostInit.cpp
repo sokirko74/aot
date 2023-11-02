@@ -93,24 +93,13 @@ bool CMAPost::ReadCollocs() {
 };
 
 
-unsigned int count_of_bits(grammems_mask_t n)
-{
-    unsigned int count = 0;
-    while (n) {
-        count += n & 1;
-        n >>= 1;
-    }
-    return count;
-}
-
 bool CMAPost::Init(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab) {
     try {
-        m_pRusGramTab = RusGramTab;
+        m_pRusGramTab = reinterpret_cast<const CRusGramTab*>(RusGramTab);
         m_pRusLemmatizer = RusLemmatizer;
         if (!ReadCollocs()) {
             return false;
         };
-
 
         m_DURNOVOGramCode = m_pRusGramTab->GetPlugNouInfo().m_GramCode;
         auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, _QM(rIndeclinable) | _QM(rInitialism), GrammemsInclusion);
@@ -122,23 +111,6 @@ bool CMAPost::Init(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab
         m_NumWithGendersGramCodes = m_pRusGramTab->GetAllGramCodes(NUMERAL, 0, AnyGender);
         assert (m_NumWithGendersGramCodes.length() == 18 * 2);
 
-        // todo: move it to Russian agramtab library
-        m_ProductiveNounGramCodes = "";
-        for (uint16_t i = 0; i < m_pRusGramTab->GetMaxGrmCount(); i++) {
-            auto *l = m_pRusGramTab->GetLine(i);
-            if (l == nullptr) continue;
-            if ((l->m_PartOfSpeech == NOUN) && (count_of_bits(l->m_Grammems) == 3)) {
-                if ((l->m_Grammems & rAllGenders) && (l->m_Grammems & rAllCases) && (l->m_Grammems & rAllNumbers)) {
-                    if ((l->m_Grammems & _QM(rVocativ)) == 0) {
-                        std::string ancode = m_pRusGramTab->LineIndexToGramcode(i);
-                        m_ProductiveNounGramCodes += ancode;
-                        //LOGV << "productive noun  " << m_pRusGramTab->GetTabStringByGramCode(ancode.c_str());
-                    }
-                }
-
-            }
-        }
-        assert (m_ProductiveNounGramCodes.length() == 72); //72 = 6 cases * 2 numbers * 3 genders * 2 chars
     }
     catch(CExpc c)
     {

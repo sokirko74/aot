@@ -1293,14 +1293,13 @@ void CMAPost::Rule_ExpandIndeclinableGramcodes()
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
 
-        //auto all_noun_ancodes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, nullptr);
 		//ЦБ      С ср,0 -> C ср,им  ср,вн ср,дт
 		for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++) {
 			if (W.GetHomonym(HomNo)->HasPos(NOUN) && W.GetHomonym(HomNo)->HasGrammem(rIndeclinable) && !W.GetHomonym(HomNo)->HasGrammem(rInitialism))
 			{
 				CHomonym* pH = W.GetHomonym(HomNo);
 				pH->m_CommonGramCode += pH->GetGramCodes();
-				auto ancodes = m_pRusGramTab->GleicheAncode1(GenderNumber0, m_ProductiveNounGramCodes, pH->GetGramCodes());
+				auto ancodes = m_pRusGramTab->GleicheAncode1(GenderNumber0, m_pRusGramTab->GetProductiveNounGramCodes(), pH->GetGramCodes());
                 LOGV  << "set gramcodes " << ancodes << " to " << W.m_strWord;
 				pH->SetGramCodes(ancodes);
 			}
