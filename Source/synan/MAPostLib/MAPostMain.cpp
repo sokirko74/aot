@@ -515,7 +515,7 @@ void CMAPost::OtherRules()
 			CHomonym* pNew = W.AddNewHomonym();
 			pNew->SetMorphUnknown();
 			pNew->m_strLemma = W.m_strUpperWord;
-			pNew->m_CommonGramCode = m_pRusGramTab->GetInanimIndeclNoumGramCode();
+			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
 			pNew->SetGramCodes(m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));
 			pNew->InitAncodePattern();
 			W.AddDes(is_alpha((BYTE)W.m_strWord[0], morphEnglish) ? OLLE : ORLE);
@@ -965,9 +965,9 @@ void CMAPost::Rule_ILE()
 			CHomonym* pNew = W.AddNewHomonym();
 			pNew->SetMorphUnknown();
 			pNew->m_strLemma = W.m_strUpperWord;
-			pNew->m_CommonGramCode = m_pRusGramTab->GetInanimIndeclNoumGramCode();
+			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
             auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);
-			pNew->SetGramCodes(codes);//m_DURNOVOGramCode;//"Йшааабавагадаеажазаиайакаласгагбгвгггдгегжгзгигйгкглеаебевегедееежезеиейекелижизииийикил";
+			pNew->SetGramCodes(codes);
 			pNew->InitAncodePattern();
 		}
 	};
@@ -1299,7 +1299,7 @@ void CMAPost::Rule_ExpandIndeclinableGramcodes()
 			{
 				CHomonym* pH = W.GetHomonym(HomNo);
 				pH->m_CommonGramCode += pH->GetGramCodes();
-				auto ancodes = m_pRusGramTab->GleicheAncode1(GenderNumber0, m_pRusGramTab->GetProductiveNounGramCodes(), pH->GetGramCodes());
+				auto ancodes = m_pRusGramTab->GleicheAncode1(GenderNumber0, m_pRusGramTab->GramCodes().m_ProductiveNoun, pH->GetGramCodes());
                 LOGV  << "set gramcodes " << ancodes << " to " << W.m_strWord;
 				pH->SetGramCodes(ancodes);
 			}

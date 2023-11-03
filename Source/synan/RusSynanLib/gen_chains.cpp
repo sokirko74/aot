@@ -69,7 +69,6 @@ bool CRusFormatCaller::format_for_gen_chains (CGroup& G)
 
 	change_group_grammems((CGroup&)RightGroup, _QM(rGenitiv), rAllCases);
 	sent[RightGroup.m_MainWordNo].SetGrammems(sent[RightGroup.m_MainWordNo].GetGrammems() & ~rAllCases | _QM(rGenitiv));
-	//change_words_in_group_grammems((CGroup&)RightGroup, _QM(rGenitiv), rAllCases);
 	if (Wk.HasFlag(fl_ambiguous)) return false;
 	
 
@@ -112,7 +111,6 @@ bool CRusFormatCaller::format_for_from_compar (CGroup& G)
 
 	 // нельзя у подч. существительного убивать все падежи, кроме род. из-за примера 
 	 // "Она мечтала побыстрее его женить."
-	 // !!!! change_words_in_group_grammems(H, (1<<rGenitiv), rAllCases);  
 
 	 G.m_MainGroup = P;
 	 G.m_iLastWord = H.m_iLastWord;

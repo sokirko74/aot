@@ -942,24 +942,16 @@ bool CFormatCaller::is_left_noun_modifier (const CSynPlmLine& L) const
 			||	L.HasFlag(fl_digit);;
 };
 
-
-
-bool CFormatCaller::is_morph_noun(const CSynPlmLine& L) const
-{
-	return GetOpt()->GetGramTab()->IsMorphNoun(L.GetPoses());
-};
 bool CFormatCaller::is_syn_noun(const CSynPlmLine& L) const
 {
 	return L.is_syn_noun();
 };
+
 bool CFormatCaller::is_morph_adj(const CSynPlmLine& L) const
 {
 	return GetOpt()->GetGramTab()->is_morph_adj(L.GetPoses());
 };
-bool CFormatCaller::is_morph_article(const CSynPlmLine& L) const
-{
-	return GetOpt()->GetGramTab()->is_morph_article(L.GetPoses());
-};
+
 bool CFormatCaller::is_morph_adv(const CSynPlmLine& L) const
 {
 	return GetOpt()->GetGramTab()->is_morph_adv(L.GetPoses());

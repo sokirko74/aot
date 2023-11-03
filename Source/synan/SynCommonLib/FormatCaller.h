@@ -2,8 +2,7 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef syn_anal_h
- #define syn_anal_h
+#pragma once
 
 
 #include "Group.h"
@@ -62,22 +61,17 @@ public:
 	
 
 	//  common formats from graphematics
-	
 	bool	format_for_web_addr(CGroup& G);
 	bool	format_for_keyb(CGroup& G);
 	bool	format_for_FAM1_FAM2(CGroup& G);
 	bool	format_for_oborots(CGroup& G);
-
-	
 	const	CGroup* create_disrupt_conj_group(CGroup& G, const CGroup* pFirstGr, const CGroup* pSecondGr, bool pbSearchSubGroups);
 	bool	create_repeating_disrupt_conj(CGroup& G, const SDoubleConj& pConj);
 	bool	format_for_disrupt_conj(CGroup& G);
 
-	bool is_morph_noun(const CSynPlmLine& L) const;
 	bool is_syn_noun(const CSynPlmLine& L) const;
 	bool is_morph_adj(const CSynPlmLine& L) const;
-	bool is_morph_article(const CSynPlmLine& L) const;
-	bool is_morph_adv(const CSynPlmLine& L) const;
+    bool is_morph_adv(const CSynPlmLine& L) const;
 	bool is_morph_participle(const CSynPlmLine& L) const;
 	bool is_morph_predk(const CSynPlmLine& L) const;
 	bool is_verb_form(const CSynPlmLine& L) const;
@@ -86,21 +80,16 @@ public:
 	bool is_numeral(const CSynPlmLine& L) const;
 	bool is_infinitive(const CSynPlmLine& L) const;
 	bool is_morph_pronoun_adjective(const CSynPlmLine& L) const;
-	int		check_first_part_of_prep_noun (const CGroup& G, uint64_t& depend_cases, int PREP_NOUN_GROUP_TYPE) const;
+	int	check_first_part_of_prep_noun (const CGroup& G, uint64_t& depend_cases, int PREP_NOUN_GROUP_TYPE) const;
 	
 
 	void	ChangeGroupType(CGroup& G, int NewGroupType);
 
 protected:	  
 	virtual int		GetRuleByGroupTypeForThesaurus(int GroupType) const = 0;
-	void			change_if_has_obor_inside(CGroup& group, std::vector<CPeriod>& oborots);
 	int				FindEndOfExpression(int StartWordNo) const;
 
 };
-
-
-
-
 
 
 #define W1 sent[G.m_iFirstWord]
@@ -110,9 +99,3 @@ protected:
 #define Wk sent[k]
 #define Wj sent[j]
 
-
-
-
-
-
-#endif

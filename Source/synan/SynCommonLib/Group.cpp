@@ -275,7 +275,7 @@ const CGroup &CGroups::get_maximal_group(size_t WordNo) const {
 
 void CGroups::change_words_in_group_grammems(const CPeriod &group, uint64_t grammems, uint64_t breaks) {
     for (int i = group.m_iFirstWord; i <= group.m_iLastWord; i++) {
-        CGroup &Gi = ((CGroup &) get_maximal_group(i));
+        CGroup& Gi = ((CGroup &) get_maximal_group(i));
 
         if (Gi.m_MainWordNo == i && Gi.m_bRussianNounNumeralGroup) //имеют зависимые грамкоды
         {
@@ -312,14 +312,6 @@ bool CGroups::change_words_in_group_gramcodes(const CPeriod &group, const std::s
         m_AtomicGroups[i].SetGrammems(grammems);
     };
     return isok;
-}
-
-void CGroups::change_words_in_group_grammems(const CPeriod &group, uint64_t grammems) //для добавления рода к СЛОЖ_ЧИСЛ
-{
-    for (int i = group.m_iFirstWord; i <= group.m_iLastWord; i++) {
-        sent[i].SetGrammems(grammems);
-        m_AtomicGroups[i].SetGrammems(sent[i].GetGrammems());
-    };
 }
 
 void CGroups::change_group_grammems(CGroup &group, uint64_t grammems, uint64_t breaks) {

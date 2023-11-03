@@ -224,8 +224,8 @@ public:
     // changers
 	void	change_words_in_group_grammems(const CPeriod& group, uint64_t grammems, uint64_t breaks);
 	bool    change_words_in_group_gramcodes(const CPeriod& group, const std::string& gramcodes, GrammemCompare CompareFunc);
-	void	change_words_in_group_grammems(const CPeriod& group, uint64_t grammems);
-	void	change_group_grammems(CGroup& group, uint64_t grammems, uint64_t breaks);
+
+    void	change_group_grammems(CGroup& group, uint64_t grammems, uint64_t breaks);
 	void	BuildSimilarSynRels(CGroup& G,int iGroupNum);
 	void	create_syn_rel(CGroup& new_group, int iSource, int iTarget, EGroupType type);
 	void	AddWord(const CSynPlmLine& C);

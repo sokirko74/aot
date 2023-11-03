@@ -777,18 +777,18 @@ bool CRusFormatCaller::format_for_odin_group(CGroup &G) {
     if (!is_noun_group(NP))
         return false;
 
-    const CRusGramTab *R = (CRusGramTab *) GetGramTab();
-    std::string new_grc = R->UniqueGramCodes(R->GleicheAncode1(0, sent[i_noun].GetGramcodes(),
-                                                               (R->GetAllGramCodes(NOUN, rAllCases | _QM(rSingular),
-                                                                                   CaseNumber)).c_str()));
-    if (new_grc == "" || sent[i_number].HasFlag(fl_digit) && sent[i_noun].is_month())
+    auto R = GetRusGramTab();
+    std::string new_grc = R->UniqueGramCodes(
+            R->GleicheAncode1(0, sent[i_noun].GetGramcodes(),
+                 (R->GetAllGramCodes(NOUN, rAllCases | _QM(rSingular),
+                 CaseNumber))));
+
+    if (new_grc.empty() || sent[i_number].HasFlag(fl_digit) && sent[i_noun].is_month())
         return false;
 
     if (sent[i_number].HasFlag(fl_digit)) // до 81 унции
     {
-        std::string num_grc = R->GetAllGramCodes(NUMERAL, rAllCases | rAllGenders, CaseGender);
-        std::string noun_pair = _R("ааабавагадаегагбгвгггдгееаебевегедее"); //С мр..ср им,ед("дом");рд,ед;..;пр,ед
-        R->GleicheAncode3(CaseNumberGender0, noun_pair, new_grc, num_grc);
+        auto num_grc = R->GleicheAncode1(CaseNumberGender0, R->GramCodes().m_GenderNumeral, new_grc);
         num_grc = R->UniqueGramCodes(
                         R->GleicheAncode1(
                              CaseNumberGender0,

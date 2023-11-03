@@ -1323,7 +1323,7 @@ void CRusSemStructure::CreateSemNodesBySynttaxRelations() {
                         RelGr |= m_Nodes[SourceNodeNo].GetGrammems() & rAllGenders;
                     auto rel_ancodes = R->GetAllGramCodes(NOUN, RelGr, CaseNumberGender0);
                     m_Nodes[SourceNodeNo].m_GramCodes = R->GleicheAncode1(0,
-                                                                          R->GetProductiveNounGramCodes(),
+                                                                          R->GramCodes().m_ProductiveNoun,
                                                                           rel_ancodes);
                     LOGV << "NUMBER_NOUN: set gramcodes " << m_Nodes[SourceNodeNo].m_GramCodes <<
                     " relation gramcode = " << rel_ancodes <<

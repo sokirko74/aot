@@ -77,7 +77,7 @@ public:
 	~CRusFormatCaller(){};
 
 	const CRusSyntaxOpt* GetOpt() const {  return (const CRusSyntaxOpt*)CFormatCaller::GetOpt(); };
-	
+    const CRusGramTab* GetRusGramTab() const {  return (const CRusGramTab*)GetOpt()->GetGramTab(); };
 
 
 	int		GetRuleByGroupTypeForThesaurus(int GroupType) const;

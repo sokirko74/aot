@@ -229,7 +229,9 @@ int main(int argc, const char** argv) {
             for (auto filename : file_names) {
                 auto outputFilename = filename + ".synan";
                 if (args.Exists("output-folder")) {
-                    auto p = std::filesystem::path(args.Retrieve("output-folder")) / outputFilename;
+                    auto base_name = std::filesystem::path(outputFilename).filename();
+                    auto p = std::filesystem::path(args.Retrieve("output-folder")) / base_name;
+                    //PLOGD <<  "set output file " << p;
                     outputFilename = p.string();
                 }
                 file_pairs.push_back({filename, outputFilename });
@@ -249,6 +251,7 @@ int main(int argc, const char** argv) {
                     t.Result = GetResultBySyntax(H.m_Synan, *H.m_pGramTab);
                 }
             }
+            //PLOGD <<  "write output file " << p.second;
             std::ofstream outp(p.second, std::ios::binary);
             base.write_test_cases(outp);
         }

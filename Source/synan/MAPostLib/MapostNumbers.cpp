@@ -164,7 +164,7 @@ void CMAPost::Cifrdef()
 		if (AnCodes.empty() && Flexia != "")
 			AnCodes = GetSimilarNumAncode(numeral->m_Ordinal, Flexia, numeral->m_bNoun);
 		if (numeral->m_Cardinal == _R("ОДИН")) {
-			AnCodes = m_NumWithGendersGramCodes; //все грамкоды с родом
+			AnCodes =  m_pRusGramTab->GramCodes().m_GenderNumeral;
 		}
 		std::string AnCodes0 = AnCodes; //числ
 		if (NumWordForm != "0") {
@@ -221,8 +221,8 @@ void CMAPost::Cifrdef()
 				W2.DeleteAllHomonyms();
 				CHomonym* pH = W2.AddNewHomonym();
 				pH->SetMorphUnknown();
-				pH->m_CommonGramCode = m_pRusGramTab->GetInanimIndeclNoumGramCode();
-				pH->SetGramCodes(m_pRusGramTab->GetMasAbbrNounGramCode());
+				pH->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
+				pH->SetGramCodes(m_pRusGramTab->GramCodes().m_MasAbbrNoun);
 				if (W2.m_strWord == "%")
 				{
 					W2.m_strUpperWord = W2.m_strWord = _R("ПРОЦ");
