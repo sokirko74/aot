@@ -855,41 +855,6 @@ int CRusFormatCaller::can_start_number_noun_group(int StartWordNo) const {
     return k;
 };
 
-bool CRusFormatCaller::format_standard_param_abbr(CGroup &G) {
-    /*
-    Не используется: аббр отрабатываются как и все сущ.
-
-    В случаях типа "20 км" или "триста кг"(?)  группе приписатть все падежи,
-    потому что вычислять их слишком сложно
-    */
-    int k = can_start_number_noun_group(G.m_iFirstWord);
-
-    if (k == -1) return false;
-
-    if (!sent[k].HasFlag(fl_standard_param_abbr))
-        return false;
-    const CRusGramTab *R = (CRusGramTab *) GetGramTab();
-    G.SetGrammems(Wk.GetGrammems() & (rAllCases | rAllGenders) |
-                  (sent[k - 1].HasFlag(fl_russian_odin) ? _QM(rSingular) : _QM(rPlural)));
-    G.m_GramCodes = R->GleicheAncode1(0,
-                                      _R("ааабавагадаеасажазаиайакалгагбгвгггдгеЙшгжгзгигйгкглеаебевегедееежезеиейекел"),
-                                      R->GetAllGramCodes(NOUN, G.GetGrammems(), CaseNumberGender));
-
-    G.m_Cause = "Numeral group + abbreviation";
-
-
-    set_noun_numeral_group_type(G, NUMERAL_NOUN);
-
-    const CGroup &MainGroup = get_maximal_group(k);
-
-    G.m_iLastWord = MainGroup.m_iLastWord;
-
-    G.m_MainGroup = MainGroup;
-
-    create_syn_rel(G, get_main_word_in_group(MainGroup), get_main_word(G.m_iFirstWord), NUMERAL_NOUN);
-
-    return true;
-};
 
 bool CRusFormatCaller::format_for_number_noun(CGroup &G) {
     if (has_item(GetOpt()->m_NumberAdverbsList, W1.get_lemma()))

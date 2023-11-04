@@ -2,9 +2,7 @@
 // ==========  Dialing Syntax Analysis (www.aot.ru)
 // ==========  Copyright by Dmitry Pankratov, Igor Nozhov, Alexey Sokirko
 
-#ifndef rus_format_caller
- #define rus_format_caller
-
+#pragma once
 
 #include "RusGroup.h"
 #include "RusSyntaxOpt.h"
@@ -105,7 +103,6 @@ public:
 	bool format_for_noun_adjunct_group(CGroup& G);
 
 	size_t search_for_similar_noun_groups (const CGroup& FirstGroup, CGroup& G);
-	bool format_for_similar_nouns(CGroup& G);
 
 	bool format_for_comp_adv (CGroup& G);
 	bool format_for_adv_adj(CGroup& G);
@@ -121,19 +118,11 @@ public:
 	bool format_for_approx_noun_prep(CGroup& G); 
 	bool is_small_number_group (size_t WordNo);
 
-	bool format_for_DT1_DT2 (CGroup& G);
-	bool format_for_month_and_year (CGroup& G);
-	bool format_for_standart_date (CGroup& G);
-	bool format_for_year(CGroup& G);
-	bool format_for_dates	 (CGroup& G); 
-
-	bool format_for_number_adverb (CGroup& G); 
-	bool format_standard_param_abbr(CGroup& G);
+	bool format_for_number_adverb (CGroup& G);
 	bool format_for_number_noun (CGroup& G);
 	bool format_for_selective_groups(CGroup& G);
 
 	bool  format_for_rank_surname (CGroup& G);
-	bool  find_db_main_group (CGroup& G);	 
 	bool  format_for_preps_adj (CGroup& G);
 	bool  format_for_preps (CGroup& G);
 	bool  format_for_prep_IZ (CGroup& G);
@@ -188,12 +177,4 @@ inline bool CanNumeralBeNoun(const char* s)
 		|| s == _R("ДЕСЯТЕРО")
 		|| s == _R("ОБА");
 };
-
-
-
-
-
-
-
-#endif
 

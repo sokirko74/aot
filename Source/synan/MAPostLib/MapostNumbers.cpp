@@ -175,7 +175,7 @@ void CMAPost::Cifrdef()
 			// можно просто не удалять, тогда будет очень много вариантов на синтаксисе (чистая оптимизация)
 			//2. добавил условие для примера  "в 1960 годы", где порядковое существительное 1960 стоит в отчетливом множественном числе
 			if (W.m_strWord.length() != 4) { // "1960"
-				AnCodes = m_pRusGramTab->FilterGramCodes(rAllNumbers, AnCodes, _QM(rSingular));
+				AnCodes = m_pRusGramTab->FilterGramCodes1(AnCodes, _QM(rSingular), 0);
 			}
 		}
 		if (FindFloatingPoint(NumWordForm.c_str()) != -1 || AnCodes0 == AnCodes)

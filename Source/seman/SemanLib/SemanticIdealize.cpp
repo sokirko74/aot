@@ -305,14 +305,14 @@ void CRusSemStructure::ApplySubordinationCases ()
 	};
 
 	// полтора рубля - здесь нужно изменить мн. на ед.
-	for (long i=0;  i < m_Relations.size(); i++)
-		if	(		(m_Relations[i].m_Valency.m_RelationStr == "QUANTIT")		  
-				&&	m_Nodes[m_Relations[i].m_TargetNodeNo].IsPrimitive()
-				&&	(m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Word == "1.5")
+    for (auto& r: m_Relations)
+		if	(		(r.m_Valency.m_RelationStr == "QUANTIT")
+				&&	m_Nodes[r.m_TargetNodeNo].IsPrimitive()
+				&&	(m_Nodes[r.m_TargetNodeNo].m_Words[0].m_Word == "1.5")
 			)
 		{
-			m_Nodes[m_Relations[i].m_SourceNodeNo].DeleteGrammems ( rAllNumbers);
-			m_Nodes[m_Relations[i].m_SourceNodeNo].AddOneGrammem ( rSingular);
+			m_Nodes[r.m_SourceNodeNo].DeleteGrammems ( rAllNumbers);
+			m_Nodes[r.m_SourceNodeNo].AddOneGrammem ( rSingular);
 		};
 
 	// число, падеж числительных
@@ -323,15 +323,23 @@ void CRusSemStructure::ApplySubordinationCases ()
 			CRusSemNode& NounN = m_Nodes[r.m_SourceNodeNo];
 			CRusSemNode& NumN = m_Nodes[r.m_TargetNodeNo];
 			std::string gcNoun = NounN.m_Words[NounN.m_MainWordNo].m_GramCodes;
-			std::string gc4 = NumN.m_GramCodes;
-			if (gc4.length() == 2 && gcNoun.length() == 2) continue;
-			gc4 = pGramTab->GleicheAncode3(
+			if (NumN.m_GramCodes.length() == 2 && gcNoun.length() == 2) continue;
+            grammems_mask_t cases_genders = NounN.GetGrammems() & (rAllCases | rAllGenders);
+
+            auto gc_num_new = pGramTab->GleicheAncode1(
                     CaseNumberGender0,
-                    gc4,
-                    pGramTab->GetAllGramCodes(NUMERAL, NounN.GetGrammems() & (rAllCases | rAllGenders), CaseGender),
-				    gcNoun);
-			NumN.ModifyGramCodes(gc4 , 3, pGramTab);
-			NounN.ModifyGramCodes(gcNoun , 2, pGramTab);
+                    NumN.m_GramCodes,
+                    pGramTab->GetAllGramCodes(NUMERAL, cases_genders, CaseGender));
+            LOGV << "idealize quantit set gramcodes = " << gc_num_new << " to " << GetNodeStr(NumN);
+
+            std::string gc_noun_new = pGramTab->FindGramCodesContaining(gcNoun, cases_genders);
+            if (gc_noun_new.empty()) {
+                gc_noun_new = gcNoun;
+            }
+            LOGV << "idealize quantit set gramcodes = " << gc_noun_new << " to " << GetNodeStr(NounN);
+
+            NumN.ModifyGramCodes(gc_num_new, 3, pGramTab);
+			NounN.ModifyGramCodes(gc_noun_new, 2, pGramTab);
 		};
 	
    // если русское подлежащее было неизменяемым, а в него идет стрелка  от сказуемого, 

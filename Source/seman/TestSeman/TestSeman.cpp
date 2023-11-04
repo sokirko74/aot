@@ -27,7 +27,11 @@ public:
         ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << severityToString(record.getSeverity()) << PLOG_NSTR(" ");
         ss << PLOG_NSTR("[") << record.getFunc() << PLOG_NSTR("@") << record.getLine() << PLOG_NSTR("] ");
         ss << convert_to_utf8(record.getMessage(), morphRussian) << PLOG_NSTR("\n");
-        return ss.str();
+        auto mess = ss.str();
+        if (record.getSeverity() != plog::Severity::verbose) {
+            std::cerr << mess << "\n";
+        }
+        return mess;
     }
 };
 
@@ -200,13 +204,14 @@ nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, b
 }
 
 void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, string inputFile, string outputFile) {
-    PLOGD << inputFile;
+    PLOGI << "process " << inputFile;
     CTestCaseBase base;
     std::ifstream inp(inputFile);
     if (!inp.good()) {
         throw CExpc("cannot read %s", inputFile.c_str());
     }
     base.read_test_cases(inp);
+    size_t cnt = 0;
     for (auto& t : base.TestCases) {
         if (t.Text.length() > 1050) {
             PLOGD << "skip the sentence of " << t.Text.length() << " chars (too long)\n";
@@ -215,8 +220,10 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
         if (t.Text.empty()) {
             continue;
         }
+        cnt += 1;
         t.Result = processText(SemBuilder, printVisual, printTranslation, t.Text);
     }
+    PLOGI << "processed " << cnt << " sentences";
     std::ofstream outp(outputFile, std::ios::binary);
     base.write_test_cases(outp);
 
