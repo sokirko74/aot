@@ -215,11 +215,12 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int main(int argc, const char** argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
-    init_plog(args.GetLogLevel(), "synan_test.log");
+    auto langua = args.GetLanguage();
+    init_plog(args.GetLogLevel(), "synan_test.log", true, langua);
 
     CSyntaxHolder H;
     try {
-        H.LoadSyntax(args.GetLanguage());
+        H.LoadSyntax(langua);
 
         std::cerr << "ok\n";
         std::vector <std::pair<std::string, std::string> > file_pairs;

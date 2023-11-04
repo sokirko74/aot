@@ -673,7 +673,7 @@ bool CClause::BuildGroupsAndSynVariants(CFormatCaller& FormatCaller)
 
 			CreateGroupsForTermins(*this, FormatCaller, synVariant);
 
-			//main syntax analise		
+			//main syntax analyse
 			FormatCaller.main_analyse();
 			FormatCaller.BuildAutomaticSynrels();
 

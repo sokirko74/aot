@@ -778,8 +778,9 @@ bool CRusFormatCaller::format_for_odin_group(CGroup &G) {
         return false;
 
     auto R = GetRusGramTab();
+    std::string noun_grc = sent[i_noun].GetGramcodes();
     std::string new_grc = R->UniqueGramCodes(
-            R->GleicheAncode1(0, sent[i_noun].GetGramcodes(),
+            R->GleicheAncode1(0, noun_grc,
                  (R->GetAllGramCodes(NOUN, rAllCases | _QM(rSingular),
                  CaseNumber))));
 
@@ -810,7 +811,9 @@ bool CRusFormatCaller::format_for_odin_group(CGroup &G) {
     } else if (!GetGramTab()->GleicheGenderNumberCase(sent[i_noun].m_type_gram_code, sent[i_noun].GetGramcodes(),
                                                       sent[i_number].GetGramcodes())) {
         G.SetGrammems(sent[i_noun].GetGrammems() & sent[i_number].GetGrammems());
+        G.m_OtherGroup = get_maximal_group(i_number);
         change_words_in_group_grammems(G, G.GetGrammems(), (rAllNumbers | rAllCases));
+
     } else
         return false;
 
