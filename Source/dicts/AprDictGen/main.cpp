@@ -15,7 +15,7 @@ CMorphanHolder MorphHolderRus;
 CMorphanHolder MorphHolderEng;
 
 
-DwordVector GetParadigmIdsByNormAndAncode(CMorphanHolder& holder, std::string &str, int part_of_speech)
+DwordVector GetParadigmIdsByNormAndPos(CMorphanHolder& holder, std::string &str, int part_of_speech)
 {
     std::vector<CFormInfo> ParadigmCollection;
     DwordVector res;
@@ -31,25 +31,21 @@ DwordVector GetParadigmIdsByNormAndAncode(CMorphanHolder& holder, std::string &s
         }
     }
 
-    //if (res.empty() && ParadigmCollection.size() == 1)  {
-    //    res.push_back(ParadigmCollection[0].GetParadigmId());
-    //}
-
     return res;
 }
 
 void make_bin(std::string &r, std::string &e, BYTE d[5], std::ostream &out) {
     auto pos_r = get_simplified_part_of_speech(d[0], morphRussian);
     auto pos_e = get_simplified_part_of_speech(d[0], morphEnglish);
-    DwordVector r_id = GetParadigmIdsByNormAndAncode(MorphHolderRus, r, pos_r);
-    DwordVector e_id = GetParadigmIdsByNormAndAncode(MorphHolderEng, e, pos_e);
+    DwordVector r_id = GetParadigmIdsByNormAndPos(MorphHolderRus, r, pos_r);
+    DwordVector e_id = GetParadigmIdsByNormAndPos(MorphHolderEng, e, pos_e);
     if (pos_r == ADJ_FULL  && e_id.empty()) {
         // московский -> Moscow
-        e_id = GetParadigmIdsByNormAndAncode(MorphHolderEng, e, eNOUN);
+        e_id = GetParadigmIdsByNormAndPos(MorphHolderEng, e, eNOUN);
     }
     if (pos_r == NOUN  && r_id.empty()) {
         // клиентский -> client
-        r_id = GetParadigmIdsByNormAndAncode(MorphHolderRus, r, ADJ_FULL);
+        r_id = GetParadigmIdsByNormAndPos(MorphHolderRus, r, ADJ_FULL);
     }
 
     for (auto id1:  r_id) {
@@ -86,8 +82,8 @@ int main(int argc, char **argv) {
                 return 0;
             }
             auto r = items[0];
-            auto e = items[2];
-            BYTE d[5];
+            auto e = items[1];
+            BYTE d[data_length];
             for (size_t i = 2; i < items.size(); ++i) {
                 int u = atoi(items[i].c_str());
                 assert(0 < u < 256);
