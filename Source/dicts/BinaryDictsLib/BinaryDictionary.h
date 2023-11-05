@@ -19,30 +19,29 @@ struct WordPair {
 
 class CSetOfWordPairs;
 
+extern part_of_speech_t get_simplified_part_of_speech(BYTE flag, MorphLanguageEnum langua);
 
-/////////////////////////////////////////////////////////////////////////////
-// CBinaryDictionary
-class CBinaryDictionary 
+
+class CBinaryDictionary
 {
+    std::vector<WordPair> eng_vec;
+    std::vector<WordPair> rus_vec;
+    std::unordered_set<BYTE> bad_labels;
 public:
 
-	//--------------------------------------
-	std::vector<WordPair> eng_vec;
-	std::vector<WordPair> rus_vec;
-	//--------------------------------------
 	std::string get_dict_path() const;
 	friend class CSetOfWordPairs;
 
 	long GetDirectId(long index) const;
 	long GetIndirectId(long index) const;
 
-	bool GetFlag(long pair_index, long flag_index, std::string& text, bool is_direct, uint32_t& flag) const;
-	
+    part_of_speech_t GetSimplifiedPartOfSpeech(long pair_index, bool is_direct) const;
+    bool IsNormalLanguage(long pair_index, bool is_direct) const;
+
 
 	CBinaryDictionary();
 	bool HavePair (long id1, long id2) const;
 	CSetOfWordPairs TranslateIndirect(long id) const;
 	CSetOfWordPairs TranslateDirect(long id) const;
 	void Load();
-	long GetFlagCount() const;
 };

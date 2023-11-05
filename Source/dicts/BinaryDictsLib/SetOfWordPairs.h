@@ -21,11 +21,10 @@ public:
 
 	CSetOfWordPairs();
 
-// ISetOfWordPairs
-public:
-	long GetFlag(long pair_index, long flag_index, std::string& text) const;
 	long GetId(long index) const;
 	long get_Count() const;
+    bool IsNormalLanguage(long pair_index) const;
+    part_of_speech_t GetSimplifiedPartOfSpeech(long pair_index) const;
 };
 
 #endif //__SETOFWORDPAIRS_H_

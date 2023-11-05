@@ -77,7 +77,7 @@ int main()
 		tt = -clock();
 		Dict.Load();
 
-		std::cerr << "Number of pairs in the dictionary: " << Dict.eng_vec.size() << std::endl;
+        //std::cerr << "Number of pairs in the dictionary: " << Dict.eng_vec.size() << std::endl;
 		
 
 		CompFreq.Load(GetRegistryString(g_strFreqCompPath));
@@ -96,8 +96,6 @@ int main()
 	}
 
 	bool Direct = false;
-	//!!! число флагов 
-	int flag_count = Dict.GetFlagCount();
 	while(true){
 		std::cout << ">> ";
 		int i;
@@ -196,25 +194,13 @@ int main()
 					std::cout << CompFreq.GetFreq(id1, id2) << " ";
 					std::cout << FinFreq.GetFreq(id1, id2) << " ";
 					std::cout << HudFreq.GetFreq(id1, id2) << ") ";
-
-
 				}
 
 				std::cout << " --";
-				for(int fl = 0; fl < flag_count; fl++){
-					
-					//!!! получаем флаг
-					std::string fl_str;
-					uint32_t flag = pairs.GetFlag(j, fl, fl_str);
-					std::cout << " " << convert_to_utf8(fl_str.c_str(), morphRussian) ;
-				}
-				std::cout << std::endl;				
+				std::cout << std::endl;
 			}
 			std::cout << std::endl;
 		}
 	}
-
-	//!!! уничтожаем словарь
-
 }
 

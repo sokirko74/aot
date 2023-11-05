@@ -1,44 +1,17 @@
 #include "StdAfx.h"
 #include "EngBinaryTranslate.h"
 #include "dicts/BinaryDictsLib/SetOfWordPairs.h"
-#include "dicts/AprRead/all_labels.h"
+#include "dicts/BinaryDictsLib/BinaryDictionary.h"
 
-
-int find_label(const std::string& label)
-{
-	for (int i = 0; i < GetTransLabelsCount(); i++) {
-		if (GetTransLabels()[i].str == label) {
-			return i;
-		}
-	}
-	return -1;
-}
 
 
 translate_helper::translate_helper()
 {
 	flush();
-
 }
 
 void translate_helper::init_private_lists()
 {
-	m_bad_flags_arr.clear();
-	m_bad_flags_arr.push_back(find_label(_R("сл")));
-	m_bad_flags_arr.push_back(find_label(_R("бран")));
-	m_bad_flags_arr.push_back(find_label(_R("вульг")));
-	m_bad_flags_arr.push_back(find_label(_R("груб")));
-	m_bad_flags_arr.push_back(find_label(_R("жарг")));
-	m_bad_flags_arr.push_back(find_label(_R("ирон")));
-	m_bad_flags_arr.push_back(find_label(_R("неприст")));
-	m_bad_flags_arr.push_back(find_label(_R("презр")));
-	m_bad_flags_arr.push_back(find_label(_R("прост")));
-	m_bad_flags_arr.push_back(find_label(_R("редк")));
-	m_bad_flags_arr.push_back(find_label(_R("разг")));
-	m_bad_flags_arr.push_back(find_label(_R("уст")));
-	m_bad_flags_arr.push_back(find_label(_R("фольк")));
-	sort(m_bad_flags_arr.begin(), m_bad_flags_arr.end());
-
 	init_list_from_ross(GetRossHolder(Aoss), "_an_article_exception", except_vec);
 };
 
@@ -53,12 +26,6 @@ const CRossHolder* translate_helper::GetRossHolder(DictTypeEnum type) const
 	return m_pData->GetRossHolder(type);
 }
 
-
-
-const CLemmatizer* translate_helper::GetRusLemmatizer() const
-{
-	return m_pData->GetRusLemmatizer();
-}
 
 const CLemmatizer* translate_helper::GetEngLemmatizer() const
 {
@@ -83,11 +50,7 @@ const CAgramtab* translate_helper::GetGramTab(MorphLanguageEnum langua) const
 	return m_pData->GetGramTab(langua);
 }
 
-
-
-
-
-// создаем форму по ParadigmId и eng_grammems, если eng_grammems == 0, возвращает лемму
+// создаем форму по ParadigmId и eng_grammems, е`сл`и eng_grammems == 0, возвращает лемму
 std::string translate_helper::create_form_by_id(long Id, grammems_mask_t eng_grammems) const
 {
 	int j;
@@ -430,7 +393,6 @@ const CThesaurus* translate_helper::GetThes(int ThesId)  const
 
 void translate_helper::translate_id(long Id, std::vector<long>& res, part_of_speech_mask_t RusPoses) const
 {
-
 	// получение всех видовых пар данного слова, если это глагол,
 	std::vector<long> rus_vec;
 	rus_vec.push_back(Id);
@@ -444,43 +406,27 @@ void translate_helper::translate_id(long Id, std::vector<long>& res, part_of_spe
 	for (i = 0; i < ResVector.size(); i++)
 		rus_vec.push_back(ResVector[i]);
 
-
-
-
-	for (int r = 0; r < rus_vec.size(); r++) {
-		Id = rus_vec[r];
-
+	for (auto& rus_paradigm_id:  rus_vec) {
 		// переводим с помощью бинарного словаря
-		CSetOfWordPairs p = m_pData->m_BinaryDict.TranslateIndirect(Id);
+		CSetOfWordPairs p = m_pData->m_BinaryDict.TranslateIndirect(rus_paradigm_id);
 		int count = p.get_Count();
 		// идем по всем эквивалентам
 		for (i = 0; i < count; i++)
 		{
-			bool ok = true;
-			std::string b;
-			// если найден флаг, который считается  "плохим", то 
-			// пропускаем этот перевод
-			for (int j = 4; j <= 7 && j < m_pData->m_BinaryDict.GetFlagCount(); j++)
-			{
-				int flag = p.GetFlag(i, j, b);
-				if (binary_search(m_bad_flags_arr.begin(), m_bad_flags_arr.end(), flag))
-				{
-					ok = false;
-					break;
-				}
-			}
-			// проверяем, что если мы имеем дело с глаголом, то 
-			// перевод должен помечен глагольной пометой (1)
-			bool has_verb_flag = p.GetFlag(i, 0, b) == 1;
-			if (((RusPoses & (1 << VERB))
-				|| (RusPoses & (1 << INFINITIVE))
-				)
-				&& !has_verb_flag
-				)
-				ok = false;
+            // если найден флаг, который считается  "плохим", то
+            // пропускаем этот перевод
+			if (!p.IsNormalLanguage(i)) {
+                continue;
+            }
 
-			if (ok)
-				res.push_back(p.GetId(i));
+			// проверяем, что если мы имеем дело с глаголом, то
+			// перевод должен помечен глагольной пометой (1)
+			if (((RusPoses & (1 << VERB)) || (RusPoses & (1 << INFINITIVE)))
+				&& (p.GetSimplifiedPartOfSpeech(i) != eVERB)
+				)
+                continue;
+
+            res.push_back(p.GetId(i));
 		}
 		// если все переводы были отвергнуты, то считаем, что все переводы подходят
 		if (count > 0 && res.empty()) {
@@ -521,11 +467,6 @@ void translate_helper::translate_id(long Id, std::vector<long>& res, part_of_spe
 	freq_vec[2] = &m_pData->m_HudFreq;
 	sort(res.begin(), res.end(), FreqDictLess(Id, freq_vec, text_kind));
 }
-
-
-
-
-
 
 //--------------------------------------------------------------------------------
 // выдает по строке все леммы из морфологического словаря нужной части речи

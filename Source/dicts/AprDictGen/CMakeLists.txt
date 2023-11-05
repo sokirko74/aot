@@ -4,8 +4,9 @@ project(AprDictGen)
 
 add_executable (AprDictGen main.cpp)
 
-target_link_libraries(AprDictGen 
+target_link_libraries(AprDictGen
     LemmatizerLib
+        BinaryDictsLib
 )
 
 if (BUILD_DICTS)

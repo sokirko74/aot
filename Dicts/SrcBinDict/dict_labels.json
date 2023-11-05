@@ -1,0 +1,1060 @@
+{
+    " ": {
+        "type": "LI_NONE",
+        "original_id": 95,
+        "rml_id": 0
+    },
+    "a": {
+        "type": "LI_PART_OF_SPEECH",
+        "original_id": 23959,
+        "rml_id": 1
+    },
+    "adv": {
+        "type": "LI_PART_OF_SPEECH",
+        "original_id": 2761,
+        "rml_id": 2
+    },
+    "cj": {
+        "type": "LI_NONE",
+        "original_id": 95,
+        "rml_id": 3
+    },
+    "compar": {
+        "type": "LI_NONE",
+        "original_id": 26,
+        "rml_id": 4
+    },
+    "conj": {
+        "type": "LI_NONE",
+        "original_id": 12,
+        "rml_id": 5
+    },
+    "corr": {
+        "type": "LI_NONE",
+        "original_id": 8,
+        "rml_id": 6
+    },
+    "emph": {
+        "type": "LI_NONE",
+        "original_id": 10,
+        "rml_id": 7
+    },
+    "indef": {
+        "type": "LI_NONE",
+        "original_id": 20,
+        "rml_id": 8
+    },
+    "int": {
+        "type": "LI_NONE",
+        "original_id": 340,
+        "rml_id": 9
+    },
+    "inter": {
+        "type": "LI_NONE",
+        "original_id": 15,
+        "rml_id": 10
+    },
+    "n": {
+        "type": "LI_PART_OF_SPEECH",
+        "original_id": 61317,
+        "rml_id": 11
+    },
+    "num": {
+        "type": "LI_NONE",
+        "original_id": 28,
+        "rml_id": 12
+    },
+    "p": {
+        "type": "LI_NONE",
+        "original_id": 947,
+        "rml_id": 13
+    },
+    "part": {
+        "type": "LI_NONE",
+        "original_id": 5,
+        "rml_id": 14
+    },
+    "pass": {
+        "type": "LI_NONE",
+        "original_id": 146,
+        "rml_id": 15
+    },
+    "past": {
+        "type": "LI_NONE",
+        "original_id": 429,
+        "rml_id": 16
+    },
+    "pers": {
+        "type": "LI_NONE",
+        "original_id": 16,
+        "rml_id": 17
+    },
+    "phr": {
+        "type": "LI_NONE",
+        "original_id": 2015,
+        "rml_id": 18
+    },
+    "pl": {
+        "type": "LI_PL",
+        "original_id": 4318,
+        "rml_id": 19
+    },
+    "poss": {
+        "type": "LI_NONE",
+        "original_id": 13,
+        "rml_id": 20
+    },
+    "predic": {
+        "type": "LI_PREDIC",
+        "original_id": 175,
+        "rml_id": 21
+    },
+    "pref": {
+        "type": "LI_NONE",
+        "original_id": 84,
+        "rml_id": 22
+    },
+    "prep": {
+        "type": "LI_NONE",
+        "original_id": 157,
+        "rml_id": 23
+    },
+    "pres": {
+        "type": "LI_NONE",
+        "original_id": 5,
+        "rml_id": 24
+    },
+    "pron": {
+        "type": "LI_NONE",
+        "original_id": 84,
+        "rml_id": 25
+    },
+    "refl": {
+        "type": "LI_NONE",
+        "original_id": 104,
+        "rml_id": 26
+    },
+    "rel": {
+        "type": "LI_NONE",
+        "original_id": 16,
+        "rml_id": 27
+    },
+    "sing": {
+        "type": "LI_SINGLE",
+        "original_id": 89,
+        "rml_id": 28
+    },
+    "suff": {
+        "type": "LI_NONE",
+        "original_id": 177,
+        "rml_id": 29
+    },
+    "superl": {
+        "type": "LI_NONE",
+        "original_id": 17,
+        "rml_id": 30
+    },
+    "v": {
+        "type": "LI_PART_OF_SPEECH",
+        "original_id": 12836,
+        "rml_id": 31
+    },
+    "ав": {
+        "type": "LI_THEME",
+        "original_id": 789,
+        "rml_id": 32
+    },
+    "австрал": {
+        "type": "LI_LANG",
+        "original_id": 287,
+        "rml_id": 33
+    },
+    "авт": {
+        "type": "LI_THEME",
+        "original_id": 314,
+        "rml_id": 34
+    },
+    "амер": {
+        "type": "LI_LANG",
+        "original_id": 6760,
+        "rml_id": 35
+    },
+    "анат": {
+        "type": "LI_NONE",
+        "original_id": 1017,
+        "rml_id": 36
+    },
+    "антр": {
+        "type": "LI_NONE",
+        "original_id": 32,
+        "rml_id": 37
+    },
+    "араб": {
+        "type": "LI_LANG",
+        "original_id": 69,
+        "rml_id": 38
+    },
+    "артикля": {
+        "type": "LI_NONE",
+        "original_id": 7,
+        "rml_id": 39
+    },
+    "арх": {
+        "type": "LI_NONE",
+        "original_id": 1335,
+        "rml_id": 40
+    },
+    "археол": {
+        "type": "LI_NONE",
+        "original_id": 55,
+        "rml_id": 41
+    },
+    "архит": {
+        "type": "LI_NONE",
+        "original_id": 452,
+        "rml_id": 42
+    },
+    "астр": {
+        "type": "LI_NONE",
+        "original_id": 533,
+        "rml_id": 43
+    },
+    "афр": {
+        "type": "LI_NONE",
+        "original_id": 7,
+        "rml_id": 44
+    },
+    "бакт": {
+        "type": "LI_NONE",
+        "original_id": 36,
+        "rml_id": 45
+    },
+    "банк": {
+        "type": "LI_NONE",
+        "original_id": 10,
+        "rml_id": 46
+    },
+    "библ": {
+        "type": "LI_NONE",
+        "original_id": 342,
+        "rml_id": 47
+    },
+    "биол": {
+        "type": "LI_THEME",
+        "original_id": 1357,
+        "rml_id": 48
+    },
+    "биохим": {
+        "type": "LI_THEME",
+        "original_id": 219,
+        "rml_id": 49
+    },
+    "бирж": {
+        "type": "LI_NONE",
+        "original_id": 90,
+        "rml_id": 50
+    },
+    "бот": {
+        "type": "LI_NONE",
+        "original_id": 3262,
+        "rml_id": 51
+    },
+    "бран": {
+        "type": "LI_NONE",
+        "original_id": 11,
+        "norm": false,
+        "rml_id": 52
+    },
+    "бум": {
+        "type": "LI_NONE",
+        "original_id": 12,
+        "rml_id": 53
+    },
+    "бухг": {
+        "type": "LI_NONE",
+        "original_id": 39,
+        "rml_id": 54
+    },
+    "вет": {
+        "type": "LI_NONE",
+        "original_id": 153,
+        "rml_id": 55
+    },
+    "вм": {
+        "type": "LI_NONE",
+        "original_id": 35,
+        "rml_id": 56
+    },
+    "воен": {
+        "type": "LI_THEME",
+        "original_id": 3093,
+        "rml_id": 57
+    },
+    "возвр": {
+        "type": "LI_NONE",
+        "original_id": 6,
+        "rml_id": 58
+    },
+    "возвыш": {
+        "type": "LI_NONE",
+        "original_id": 142,
+        "rml_id": 59
+    },
+    "вор": {
+        "type": "LI_THEME",
+        "original_id": 74,
+        "rml_id": 60
+    },
+    "вульг": {
+        "type": "LI_NONE",
+        "original_id": 5,
+        "norm": false,
+        "rml_id": 61
+    },
+    "вчт": {
+        "type": "LI_THEME",
+        "original_id": 533,
+        "rml_id": 62
+    },
+    "гавайск": {
+        "type": "LI_LANG",
+        "original_id": 5,
+        "rml_id": 63
+    },
+    "гельм": {
+        "type": "LI_NONE",
+        "original_id": 22,
+        "rml_id": 64
+    },
+    "геогр": {
+        "type": "LI_THEME",
+        "original_id": 3011,
+        "rml_id": 65
+    },
+    "геод": {
+        "type": "LI_NONE",
+        "original_id": 45,
+        "rml_id": 66
+    },
+    "геол": {
+        "type": "LI_THEME",
+        "original_id": 1094,
+        "rml_id": 67
+    },
+    "геральд": {
+        "type": "LI_NONE",
+        "original_id": 197,
+        "rml_id": 68
+    },
+    "гидр": {
+        "type": "LI_THEME",
+        "original_id": 69,
+        "rml_id": 69
+    },
+    "голл": {
+        "type": "LI_LANG",
+        "original_id": 9,
+        "rml_id": 70
+    },
+    "горн": {
+        "type": "LI_THEME",
+        "original_id": 779,
+        "rml_id": 71
+    },
+    "греч": {
+        "type": "LI_LANG",
+        "original_id": 289,
+        "rml_id": 72
+    },
+    "груб": {
+        "type": "LI_NONE",
+        "original_id": 127,
+        "norm": false,
+        "rml_id": 73
+    },
+    "детск": {
+        "type": "LI_NONE",
+        "original_id": 60,
+        "rml_id": 74
+    },
+    "диал": {
+        "type": "LI_NONE",
+        "original_id": 1034,
+        "rml_id": 75
+    },
+    "дип": {
+        "type": "LI_NONE",
+        "original_id": 56,
+        "rml_id": 76
+    },
+    "дор": {
+        "type": "LI_THEME",
+        "original_id": 134,
+        "rml_id": 77
+    },
+    "др.-греч": {
+        "type": "LI_LANG",
+        "original_id": 78,
+        "rml_id": 78
+    },
+    "др.-евр": {
+        "type": "LI_LANG",
+        "original_id": 8,
+        "rml_id": 79
+    },
+    "др.-рим": {
+        "type": "LI_LANG",
+        "original_id": 80,
+        "rml_id": 80
+    },
+    "египт": {
+        "type": "LI_LANG",
+        "original_id": 8,
+        "rml_id": 81
+    },
+    "ж.-д": {
+        "type": "LI_THEME",
+        "original_id": 247,
+        "rml_id": 82
+    },
+    "жарг": {
+        "type": "LI_NONE",
+        "original_id": 735,
+        "norm": false,
+        "rml_id": 83
+    },
+    "жив": {
+        "type": "LI_NONE",
+        "original_id": 111,
+        "rml_id": 84
+    },
+    "звукоподр": {
+        "type": "LI_NONE",
+        "original_id": 28,
+        "rml_id": 85
+    },
+    "зоол": {
+        "type": "LI_NONE",
+        "original_id": 2123,
+        "rml_id": 86
+    },
+    "инд": {
+        "type": "LI_LANG",
+        "original_id": 161,
+        "rml_id": 87
+    },
+    "информ": {
+        "type": "LI_THEME",
+        "original_id": 98,
+        "rml_id": 88
+    },
+    "ирл": {
+        "type": "LI_LANG",
+        "original_id": 73,
+        "rml_id": 89
+    },
+    "ирон": {
+        "type": "LI_PRAGMA",
+        "original_id": 231,
+        "norm": false,
+        "rml_id": 90
+    },
+    "иск": {
+        "type": "LI_THEME",
+        "original_id": 189,
+        "rml_id": 91
+    },
+    "исп": {
+        "type": "LI_LANG",
+        "original_id": 107,
+        "rml_id": 92
+    },
+    "ист": {
+        "type": "LI_THEME",
+        "original_id": 2840,
+        "rml_id": 93
+    },
+    "ит": {
+        "type": "LI_LANG",
+        "original_id": 131,
+        "rml_id": 94
+    },
+    "ихт": {
+        "type": "LI_NONE",
+        "original_id": 6,
+        "rml_id": 95
+    },
+    "канад": {
+        "type": "LI_LANG",
+        "original_id": 62,
+        "rml_id": 96
+    },
+    "канц": {
+        "type": "LI_PRAGMA",
+        "original_id": 27,
+        "rml_id": 97
+    },
+    "карт": {
+        "type": "LI_THEME",
+        "original_id": 211,
+        "rml_id": 98
+    },
+    "кино": {
+        "type": "LI_NONE",
+        "original_id": 383,
+        "rml_id": 99
+    },
+    "кит": {
+        "type": "LI_LANG",
+        "original_id": 21,
+        "rml_id": 100
+    },
+    "книжн": {
+        "type": "LI_PRAGMA",
+        "original_id": 2906,
+        "rml_id": 101
+    },
+    "кож": {
+        "type": "LI_NONE",
+        "original_id": 25,
+        "rml_id": 102
+    },
+    "ком": {
+        "type": "LI_NONE",
+        "original_id": 352,
+        "rml_id": 103
+    },
+    "косв": {
+        "type": "LI_NONE",
+        "original_id": 9,
+        "rml_id": 104
+    },
+    "косм": {
+        "type": "LI_THEME",
+        "original_id": 175,
+        "rml_id": 105
+    },
+    "кул": {
+        "type": "LI_THEME",
+        "original_id": 139,
+        "rml_id": 106
+    },
+    "ласк": {
+        "type": "LI_PRAGMA",
+        "original_id": 29,
+        "rml_id": 107
+    },
+    "лат": {
+        "type": "LI_LANG",
+        "original_id": 576,
+        "rml_id": 108
+    },
+    "лес": {
+        "type": "LI_THEME",
+        "original_id": 75,
+        "rml_id": 109
+    },
+    "лингв": {
+        "type": "LI_THEME",
+        "original_id": 552,
+        "rml_id": 110
+    },
+    "лит": {
+        "type": "LI_NONE",
+        "original_id": 208,
+        "rml_id": 111
+    },
+    "лог": {
+        "type": "LI_NONE",
+        "original_id": 161,
+        "rml_id": 112
+    },
+    "малайск": {
+        "type": "LI_LANG",
+        "original_id": 5,
+        "rml_id": 113
+    },
+    "мат": {
+        "type": "LI_THEME",
+        "original_id": 959,
+        "rml_id": 114
+    },
+    "мед": {
+        "type": "LI_THEME",
+        "original_id": 2923,
+        "rml_id": 115
+    },
+    "метал": {
+        "type": "LI_THEME",
+        "original_id": 370,
+        "rml_id": 116
+    },
+    "метеор": {
+        "type": "LI_NONE",
+        "original_id": 215,
+        "rml_id": 117
+    },
+    "мин": {
+        "type": "LI_NONE",
+        "original_id": 596,
+        "rml_id": 118
+    },
+    "миф": {
+        "type": "LI_THEME",
+        "original_id": 434,
+        "rml_id": 119
+    },
+    "мор": {
+        "type": "LI_THEME",
+        "original_id": 1861,
+        "rml_id": 120
+    },
+    "муз": {
+        "type": "LI_NONE",
+        "original_id": 757,
+        "rml_id": 121
+    },
+    "нем": {
+        "type": "LI_LANG",
+        "original_id": 102,
+        "rml_id": 122
+    },
+    "неодобр": {
+        "type": "LI_PRAGMA",
+        "original_id": 181,
+        "rml_id": 123
+    },
+    "неправ": {
+        "type": "LI_NONE",
+        "original_id": 24,
+        "rml_id": 124
+    },
+    "неприст": {
+        "type": "LI_NONE",
+        "original_id": 23,
+        "norm": false,
+        "rml_id": 125
+    },
+    "несовр": {
+        "type": "LI_NONE",
+        "original_id": 19,
+        "rml_id": 126
+    },
+    "новозел": {
+        "type": "LI_LANG",
+        "original_id": 26,
+        "rml_id": 127
+    },
+    "образн": {
+        "type": "LI_PRAGMA",
+        "original_id": 7,
+        "rml_id": 128
+    },
+    "океан": {
+        "type": "LI_THEME",
+        "original_id": 13,
+        "rml_id": 129
+    },
+    "опт": {
+        "type": "LI_NONE",
+        "original_id": 158,
+        "rml_id": 130
+    },
+    "офиц": {
+        "type": "LI_PRAGMA",
+        "original_id": 41,
+        "rml_id": 131
+    },
+    "охот": {
+        "type": "LI_THEME",
+        "original_id": 150,
+        "rml_id": 132
+    },
+    "палеонт": {
+        "type": "LI_NONE",
+        "original_id": 71,
+        "rml_id": 133
+    },
+    "парл": {
+        "type": "LI_NONE",
+        "original_id": 73,
+        "rml_id": 134
+    },
+    "пед": {
+        "type": "LI_THEME",
+        "original_id": 10,
+        "rml_id": 135
+    },
+    "перс": {
+        "type": "LI_LANG",
+        "original_id": 25,
+        "rml_id": 136
+    },
+    "полигр": {
+        "type": "LI_NONE",
+        "original_id": 723,
+        "rml_id": 137
+    },
+    "полит": {
+        "type": "LI_THEME",
+        "original_id": 228,
+        "rml_id": 138
+    },
+    "полит.-эк": {
+        "type": "LI_NONE",
+        "original_id": 14,
+        "rml_id": 139
+    },
+    "польск": {
+        "type": "LI_LANG",
+        "original_id": 7,
+        "rml_id": 140
+    },
+    "португ": {
+        "type": "LI_LANG",
+        "original_id": 9,
+        "rml_id": 141
+    },
+    "поэт": {
+        "type": "LI_NONE",
+        "original_id": 1150,
+        "rml_id": 142
+    },
+    "презр": {
+        "type": "LI_NONE",
+        "original_id": 166,
+        "norm": false,
+        "rml_id": 143
+    },
+    "пренебр": {
+        "type": "LI_PRAGMA",
+        "original_id": 369,
+        "rml_id": 144
+    },
+    "прост": {
+        "type": "LI_NONE",
+        "original_id": 280,
+        "norm": false,
+        "rml_id": 145
+    },
+    "проф": {
+        "type": "LI_NONE",
+        "original_id": 331,
+        "rml_id": 146
+    },
+    "психиатр": {
+        "type": "LI_NONE",
+        "original_id": 23,
+        "rml_id": 147
+    },
+    "психол": {
+        "type": "LI_THEME",
+        "original_id": 204,
+        "rml_id": 148
+    },
+    "пчел": {
+        "type": "LI_NONE",
+        "original_id": 16,
+        "rml_id": 149
+    },
+    "радио": {
+        "type": "LI_NONE",
+        "original_id": 359,
+        "rml_id": 150
+    },
+    "разг": {
+        "type": "LI_PRAGMA",
+        "original_id": 7577,
+        "norm": false,
+        "rml_id": 151
+    },
+    "реакт": {
+        "type": "LI_NONE",
+        "original_id": 40,
+        "rml_id": 152
+    },
+    "редк": {
+        "type": "LI_PRAGMA",
+        "original_id": 3684,
+        "norm": false,
+        "rml_id": 153
+    },
+    "рел": {
+        "type": "LI_THEME",
+        "original_id": 448,
+        "rml_id": 154
+    },
+    "рим": {
+        "type": "LI_LANG",
+        "original_id": 57,
+        "rml_id": 155
+    },
+    "ритор": {
+        "type": "LI_NONE",
+        "original_id": 40,
+        "rml_id": 156
+    },
+    "русск": {
+        "type": "LI_LANG",
+        "original_id": 139,
+        "rml_id": 157
+    },
+    "рыб": {
+        "type": "LI_THEME",
+        "original_id": 49,
+        "rml_id": 158
+    },
+    "с.-х": {
+        "type": "LI_THEME",
+        "original_id": 1234,
+        "rml_id": 159
+    },
+    "сад": {
+        "type": "LI_NONE",
+        "original_id": 64,
+        "rml_id": 160
+    },
+    "санскр": {
+        "type": "LI_LANG",
+        "original_id": 22,
+        "rml_id": 161
+    },
+    "св": {
+        "type": "LI_THEME",
+        "original_id": 34,
+        "rml_id": 162
+    },
+    "сканд": {
+        "type": "LI_LANG",
+        "original_id": 18,
+        "rml_id": 163
+    },
+    "сл": {
+        "type": "LI_NONE",
+        "original_id": 3241,
+        "norm": false,
+        "rml_id": 164
+    },
+    "собир": {
+        "type": "LI_NONE",
+        "original_id": 426,
+        "rml_id": 165
+    },
+    "социол": {
+        "type": "LI_NONE",
+        "original_id": 35,
+        "rml_id": 166
+    },
+    "спец": {
+        "type": "LI_THEME",
+        "original_id": 3052,
+        "rml_id": 167
+    },
+    "спорт": {
+        "type": "LI_THEME",
+        "original_id": 1348,
+        "rml_id": 168
+    },
+    "стат": {
+        "type": "LI_NONE",
+        "original_id": 52,
+        "rml_id": 169
+    },
+    "стил": {
+        "type": "LI_NONE",
+        "original_id": 47,
+        "rml_id": 170
+    },
+    "стих": {
+        "type": "LI_THEME",
+        "original_id": 165,
+        "rml_id": 171
+    },
+    "стр": {
+        "type": "LI_THEME",
+        "original_id": 545,
+        "rml_id": 172
+    },
+    "страх": {
+        "type": "LI_NONE",
+        "original_id": 27,
+        "rml_id": 173
+    },
+    "студ": {
+        "type": "LI_NONE",
+        "original_id": 41,
+        "rml_id": 174
+    },
+    "театр": {
+        "type": "LI_NONE",
+        "original_id": 344,
+        "rml_id": 175
+    },
+    "текст": {
+        "type": "LI_NONE",
+        "original_id": 436,
+        "rml_id": 176
+    },
+    "тел": {
+        "type": "LI_NONE",
+        "original_id": 28,
+        "rml_id": 177
+    },
+    "тех": {
+        "type": "LI_THEME",
+        "original_id": 3357,
+        "rml_id": 178
+    },
+    "тлв": {
+        "type": "LI_THEME",
+        "original_id": 208,
+        "rml_id": 179
+    },
+    "топ": {
+        "type": "LI_NONE",
+        "original_id": 50,
+        "rml_id": 180
+    },
+    "тур": {
+        "type": "LI_LANG",
+        "original_id": 24,
+        "rml_id": 181
+    },
+    "унив": {
+        "type": "LI_THEME",
+        "original_id": 114,
+        "rml_id": 182
+    },
+    "уст": {
+        "type": "LI_NONE",
+        "original_id": 1730,
+        "norm": false,
+        "rml_id": 183
+    },
+    "фарм": {
+        "type": "LI_NONE",
+        "original_id": 182,
+        "rml_id": 184
+    },
+    "физ": {
+        "type": "LI_THEME",
+        "original_id": 1305,
+        "rml_id": 185
+    },
+    "физиол": {
+        "type": "LI_NONE",
+        "original_id": 382,
+        "rml_id": 186
+    },
+    "филос": {
+        "type": "LI_THEME",
+        "original_id": 368,
+        "rml_id": 187
+    },
+    "фин": {
+        "type": "LI_NONE",
+        "original_id": 246,
+        "rml_id": 188
+    },
+    "фольк": {
+        "type": "LI_THEME",
+        "original_id": 54,
+        "norm": false,
+        "rml_id": 189
+    },
+    "фото": {
+        "type": "LI_THEME",
+        "original_id": 210,
+        "rml_id": 190
+    },
+    "фр": {
+        "type": "LI_LANG",
+        "original_id": 635,
+        "rml_id": 191
+    },
+    "хим": {
+        "type": "LI_THEME",
+        "original_id": 1467,
+        "rml_id": 192
+    },
+    "хинди": {
+        "type": "LI_LANG",
+        "original_id": 15,
+        "rml_id": 193
+    },
+    "церк": {
+        "type": "LI_NONE",
+        "original_id": 730,
+        "rml_id": 194
+    },
+    "шахм": {
+        "type": "LI_THEME",
+        "original_id": 58,
+        "rml_id": 195
+    },
+    "школ": {
+        "type": "LI_THEME",
+        "original_id": 122,
+        "rml_id": 196
+    },
+    "шотл": {
+        "type": "LI_LANG",
+        "original_id": 940,
+        "rml_id": 197
+    },
+    "шутл": {
+        "type": "LI_NONE",
+        "original_id": 622,
+        "rml_id": 198
+    },
+    "эвф": {
+        "type": "LI_NONE",
+        "original_id": 101,
+        "rml_id": 199
+    },
+    "эк": {
+        "type": "LI_THEME",
+        "original_id": 385,
+        "rml_id": 200
+    },
+    "эл": {
+        "type": "LI_THEME",
+        "original_id": 532,
+        "rml_id": 201
+    },
+    "элк": {
+        "type": "LI_THEME",
+        "original_id": 179,
+        "rml_id": 202
+    },
+    "эмоц.-усил": {
+        "type": "LI_PRAGMA",
+        "original_id": 271,
+        "rml_id": 203
+    },
+    "энт": {
+        "type": "LI_NONE",
+        "original_id": 397,
+        "rml_id": 204
+    },
+    "этн": {
+        "type": "LI_NONE",
+        "original_id": 11,
+        "rml_id": 205
+    },
+    "южно-афр": {
+        "type": "LI_LANG",
+        "original_id": 52,
+        "rml_id": 206
+    },
+    "юр": {
+        "type": "LI_THEME",
+        "original_id": 2037,
+        "rml_id": 207
+    },
+    "яп": {
+        "type": "LI_LANG",
+        "original_id": 45,
+        "rml_id": 208
+    }
+}

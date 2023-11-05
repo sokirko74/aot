@@ -1,10 +1,6 @@
-// SetOfWordPairs.cpp : Implementation of CSetOfWordPairs
 #include "stdafx.h"
 #include "SetOfWordPairs.h"
 #include "BinaryDictionary.h"
-
-
-// PUT_LABELS_ARRAY
 
 
 CSetOfWordPairs::CSetOfWordPairs()
@@ -34,10 +30,11 @@ long  CSetOfWordPairs::GetId(long index) const
 		: dict->GetIndirectId(begin+index);
 }
 
-long CSetOfWordPairs::GetFlag(long pair_index, long flag_index, std::string& text) const
+bool CSetOfWordPairs::IsNormalLanguage(long pair_index) const
 {
-	uint32_t Res;
-	dict->GetFlag(begin+pair_index, flag_index, text, is_direct, Res);
-	return Res;
+	return dict->IsNormalLanguage(begin + pair_index, is_direct);
 }
 
+part_of_speech_t CSetOfWordPairs::GetSimplifiedPartOfSpeech(long pair_index) const {
+    return dict->GetSimplifiedPartOfSpeech(begin + pair_index, is_direct);
+}

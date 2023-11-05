@@ -55,7 +55,7 @@ public:
 		TEXT_HUD
 	}text_kind;
 
-    // прочесть заново списки  m_bad_flags_arr и except_vec
+    // прочесть заново списки   except_vec
 	void init_private_lists();
 
 	// конструктор
@@ -84,8 +84,8 @@ public:
 	grammems_mask_t GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, part_of_speech_t pos, bool bProper) const;
 
 	const CRossHolder* GetRossHolder (DictTypeEnum type) const;
-	const CLemmatizer* GetRusLemmatizer () const;
-	const CLemmatizer* GetEngLemmatizer () const;
+
+    const CLemmatizer* GetEngLemmatizer () const;
 	const CLemmatizer* GetLemmatizer (MorphLanguageEnum langua) const;
 	const CRusGramTab* GetRusGramTab () const;
 	const CEngGramTab* GetEngGramTab () const;
@@ -95,8 +95,6 @@ public:
 	
 
 private:
-	// флаги из словаря БАРС, которые помечают слова, которыми лучше не переводить
-	std::vector<int>    m_bad_flags_arr;
 	// список исключений, перед которыми нужно ставить ратикль "an",  а не "a"
 	StringVector except_vec;
 
