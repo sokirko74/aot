@@ -26,7 +26,7 @@ DwordVector GetParadigmIdsByNormAndPos(CMorphanHolder& holder, std::string &str,
     {
         if (!p.m_bFound) return res;
         auto code = p.GetAncode(0).substr(0, 2);
-        if (holder.m_pGramTab->GetFirstPartOfSpeech(code.c_str()) == part_of_speech)  {
+        if (holder.m_pGramTab->GetPartOfSpeech(code.c_str()) == part_of_speech)  {
             res.push_back(p.GetParadigmId());
         }
     }

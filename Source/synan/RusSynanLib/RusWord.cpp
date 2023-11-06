@@ -104,7 +104,7 @@ void CRusSentence::InitHomonymLanguageSpecific(CSynHomonym& H, const CLemWord* p
             };
     };
 
-    if( (H.m_strLemma == _R("ОДИН")) &&   GetRusGramTab()->GetFirstPartOfSpeech(H.GetGramCodes().c_str()) == NUMERAL)
+    if( (H.m_strLemma == _R("ОДИН")) &&   GetRusGramTab()->GetPartOfSpeech(H.GetGramCodes().c_str()) == NUMERAL)
         H.m_bRussianOdin = true;
 };
 
