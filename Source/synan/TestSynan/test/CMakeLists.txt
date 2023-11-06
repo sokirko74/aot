@@ -19,7 +19,7 @@ macro (TestSynanMacro lang test_directory)
         get_filename_component(base_name ${input_file} NAME)
         set (canon ${test_directory_in_project}/${base_name}.synan)
         set (res ${test_directory_in_build}/${base_name}.synan)
-        message("compare ${canon} to  ${res}")
+        #message("compare ${canon} to  ${res}")
 
         add_test(
             NAME Synan_${lang}_${base_name}_cmp

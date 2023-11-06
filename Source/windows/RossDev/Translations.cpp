@@ -83,7 +83,7 @@ BOOL CTranslations::OnSetActive()
 		}
 	};
 
-	flag_count = Dict.GetFlagCount();
+	//flag_count = Dict.GetFlagCount();
 
 	for (size_t i = 0; i <  RusLemmas.size(); i++)
 	{
@@ -105,7 +105,7 @@ BOOL CTranslations::OnSetActive()
 				CString Q = Prd.GetWordForm(0).c_str();
 
 				//!!! получаем флаг
-				std::string t;
+				/*std::string t;
 				int POS = Pairs.GetFlag(k, 0, t);
 				if (   ((P->PartOfSpeech == NOUN) &&  (POS != 0 ))
 					|| ((P->PartOfSpeech == INFINITIVE) &&  (POS != 1 ))
@@ -119,7 +119,7 @@ BOOL CTranslations::OnSetActive()
 					Pairs.GetFlag(k, fl, t);
 					if (t.length() > 0)
 						Q +=  CString (" ") + CString(t.c_str());
-				}
+				}*/
 				m_List.AddString(Q);
 			};
 		};
