@@ -454,13 +454,21 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
         SemWord.SetFormGrammems((SemWord.GetFormGrammems() & ~_QM(rPastTense)) | _QM(rPresentTense));
     };
 
-    if (!HasAuxiliaryPOS(SemWord.m_Lemma))
+    if (!HasAuxiliaryPOS(SemWord.m_Lemma)) {
         if (SemWord.m_ParadigmId != -1) {
             CFormInfo Paradigm;
             bool bRes = m_pData->GetRusLemmatizer()->CreateParadigmFromID(SemWord.m_ParadigmId, Paradigm);
             assert (bRes);
             SemWord.m_WordWeight = Paradigm.GetWordWeight();
         };
+    } else {
+        if (SemWord.m_Lemma == _R("ОН") ) {
+            SemWord.m_WordWeight = 100; //WordWeightCountCoef is -0.01
+        }
+        if (SemWord.m_Lemma == _R("ОНО") ) {
+            SemWord.m_WordWeight = 5;
+        }
+    }
 
     if (SemWord.HasOneGrammem(rPerfective))
         SemWord.m_WordEquals = m_pData->GetAspVerb(SemWord.m_ParadigmId, true);

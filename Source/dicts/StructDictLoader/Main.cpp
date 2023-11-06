@@ -77,11 +77,11 @@ int main(int argc, char** argv)
 	}
 	catch (CExpc c)
 	{
-		std::cerr << c.m_strCause << std::endl;
+		std::cerr << convert_to_utf8(c.m_strCause, morphRussian) << std::endl;
 	}
 	catch (const std::exception& ex)
 	{
-		std::cerr << ex.what() << std::endl;
+		std::cerr << convert_to_utf8(ex.what(), morphRussian) << std::endl;
 	}
 
 

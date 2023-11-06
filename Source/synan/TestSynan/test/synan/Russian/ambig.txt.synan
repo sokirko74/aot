@@ -195,22 +195,6 @@
                     {
                         "good_synvars": [
                             {
-                                "clause_type": "КР_ПРИЛ",
-                                "groups": [],
-                                "syn_units": [
-                                    {
-                                        "lemma": "ДЕНЬГИ",
-                                        "modified_grammems": "рд,мн,",
-                                        "morph_info": "С рд,мн,; "
-                                    },
-                                    {
-                                        "lemma": "МАЛЕНЬКИЙ",
-                                        "modified_grammems": "но,од,ср,ед,",
-                                        "morph_info": "КР_ПРИЛ но,од,ср,ед,; "
-                                    }
-                                ]
-                            },
-                            {
                                 "clause_type": "ПРЕДК",
                                 "groups": [],
                                 "syn_units": [
@@ -223,6 +207,22 @@
                                         "lemma": "МАЛО",
                                         "modified_grammems": "нст,",
                                         "morph_info": "ПРЕДК нст,; "
+                                    }
+                                ]
+                            },
+                            {
+                                "clause_type": "КР_ПРИЛ",
+                                "groups": [],
+                                "syn_units": [
+                                    {
+                                        "lemma": "ДЕНЬГИ",
+                                        "modified_grammems": "рд,мн,",
+                                        "morph_info": "С рд,мн,; "
+                                    },
+                                    {
+                                        "lemma": "МАЛЫЙ",
+                                        "modified_grammems": "но,од,ср,ед,",
+                                        "morph_info": "КР_ПРИЛ но,од,ср,ед,; "
                                     }
                                 ]
                             },

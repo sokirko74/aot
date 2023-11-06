@@ -461,8 +461,8 @@
                                     },
                                     {
                                         "lemma": "МНОГО",
-                                        "modified_grammems": "вн,им,",
-                                        "morph_info": "ЧИСЛ им,; вн,; "
+                                        "modified_grammems": "",
+                                        "morph_info": "Н ; "
                                     }
                                 ]
                             },
@@ -492,8 +492,8 @@
                                     },
                                     {
                                         "lemma": "МНОГО",
-                                        "modified_grammems": "",
-                                        "morph_info": "Н ; "
+                                        "modified_grammems": "вн,им,",
+                                        "morph_info": "ЧИСЛ им,; вн,; "
                                     }
                                 ]
                             }
@@ -725,9 +725,9 @@
                                 "groups": [],
                                 "syn_units": [
                                     {
-                                        "lemma": "ОТЧЕГО",
-                                        "modified_grammems": "вопр,",
-                                        "morph_info": "Н вопр,; "
+                                        "lemma": "ОТЧИЙ",
+                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,",
+                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; "
                                     },
                                     {
                                         "lemma": "И",
@@ -746,9 +746,9 @@
                                 "groups": [],
                                 "syn_units": [
                                     {
-                                        "lemma": "ОТЧЕГО",
-                                        "modified_grammems": "вопр,",
-                                        "morph_info": "Н вопр,; "
+                                        "lemma": "ОТЧИЙ",
+                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,",
+                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; "
                                     },
                                     {
                                         "lemma": "И",
@@ -767,9 +767,9 @@
                                 "groups": [],
                                 "syn_units": [
                                     {
-                                        "lemma": "ОТЧИЙ",
-                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,",
-                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; "
+                                        "lemma": "ОТЧЕГО",
+                                        "modified_grammems": "вопр,",
+                                        "morph_info": "Н вопр,; "
                                     },
                                     {
                                         "lemma": "И",
@@ -788,9 +788,9 @@
                                 "groups": [],
                                 "syn_units": [
                                     {
-                                        "lemma": "ОТЧИЙ",
-                                        "modified_grammems": "но,од,ср,мр,вн,рд,ед,",
-                                        "morph_info": "П но,од,мр,рд,ед,; од,мр,вн,ед,; но,од,ср,рд,ед,; "
+                                        "lemma": "ОТЧЕГО",
+                                        "modified_grammems": "вопр,",
+                                        "morph_info": "Н вопр,; "
                                     },
                                     {
                                         "lemma": "И",
