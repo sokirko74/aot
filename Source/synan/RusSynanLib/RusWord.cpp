@@ -68,49 +68,44 @@ std::string SmallNumbers[SmallNumbersCount] = {
 };
 
 
-void InitSmallNumberSlot(CSynHomonym& H, const CLemWord* pWord)
-{
-	int iLen = pWord->m_strWord.length();
-	assert(iLen > 0);
-    H.m_bSmallNumber =    pWord->HasDes(ODigits)
-	                  && (    pWord->m_strWord[iLen - 1] == '2' 
-					       || pWord->m_strWord[iLen - 1] == '3'
-						   || pWord->m_strWord[iLen - 1] == '4')
-						   && FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
-	H.m_bRussianOdin =	 pWord->HasDes(ODigits)
-					&&	pWord->m_strWord[iLen - 1] == '1'
-					//  может заканчиваться на 01, 21,31,41,51,61,71,81,91, но не на 11
-					&&	(		(iLen == 1) 
-							||	(pWord->m_strWord[iLen - 2] != '1')
-						)
-						&& FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
-
-	
-	if( (iLen > 1) && pWord->HasDes(ODigits) )
-		if(pWord->m_strWord[iLen - 2] == '1')
-			H.m_bSmallNumber = false;
-
-	if( !pWord->HasDes(ODigits ))
-	{
-		for (long  i=0; i<SmallNumbersCount; i++)
-		  if (	H.IsLemma(SmallNumbers[i]) // m_strLemma может быть равна "один-два",
-			  || (   (H.m_strLemma.find('-') != std::string::npos) // например, "один-два дня", тогда надо сравнивать с последним числительным
-				  && (SmallNumbers[i].length() < H.m_strLemma.length())
-				  && (SmallNumbers[i] == H.m_strLemma.substr(H.m_strLemma.find('-') + 1))
-				 )
-			  )
-		  {
-				H.m_bSmallNumber = true;
-		  };
-	};
-
-	if( (H.m_strLemma == _R("ОДИН")) &&  H.GetGramCodes()[0] == _R("э")[0])
-		H.m_bRussianOdin = true;
-}
-
 void CRusSentence::InitHomonymLanguageSpecific(CSynHomonym& H, const CLemWord* pWord)
 {
-	InitSmallNumberSlot(H, pWord);
+    int iLen = pWord->m_strWord.length();
+    assert(iLen > 0);
+    H.m_bSmallNumber =    pWord->HasDes(ODigits)
+                          && (    pWord->m_strWord[iLen - 1] == '2'
+                                  || pWord->m_strWord[iLen - 1] == '3'
+                                  || pWord->m_strWord[iLen - 1] == '4')
+                          && FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
+    H.m_bRussianOdin =	 pWord->HasDes(ODigits)
+                           &&	pWord->m_strWord[iLen - 1] == '1'
+                           //  может заканчиваться на 01, 21,31,41,51,61,71,81,91, но не на 11
+                           &&	(		(iLen == 1)
+                                          ||	(pWord->m_strWord[iLen - 2] != '1')
+                           )
+                           && FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
+
+
+    if( (iLen > 1) && pWord->HasDes(ODigits) )
+        if(pWord->m_strWord[iLen - 2] == '1')
+            H.m_bSmallNumber = false;
+
+    if( !pWord->HasDes(ODigits ))
+    {
+        for (long  i=0; i<SmallNumbersCount; i++)
+            if (	H.IsLemma(SmallNumbers[i]) // m_strLemma может быть равна "один-два",
+                    || (   (H.m_strLemma.find('-') != std::string::npos) // например, "один-два дня", тогда надо сравнивать с последним числительным
+                           && (SmallNumbers[i].length() < H.m_strLemma.length())
+                           && (SmallNumbers[i] == H.m_strLemma.substr(H.m_strLemma.find('-') + 1))
+                    )
+                    )
+            {
+                H.m_bSmallNumber = true;
+            };
+    };
+
+    if( (H.m_strLemma == _R("ОДИН")) &&   GetRusGramTab()->GetFirstPartOfSpeech(H.GetGramCodes().c_str()) == NUMERAL)
+        H.m_bRussianOdin = true;
 };
 
 
