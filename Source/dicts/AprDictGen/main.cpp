@@ -50,7 +50,7 @@ void make_bin(std::string &r, std::string &e, BYTE d[5], std::ostream &out) {
 
     for (auto id1:  r_id) {
         for (auto id2: e_id) {
-            std::cout << convert_to_utf8(r, morphRussian) << " " << e << " " << id1 << " " << id2 << "\n";
+            //std::cout << convert_to_utf8(r, morphRussian) << " " << e << " " << id1 << " " << id2 << "\n";
             out.write((char *) &(id1), sizeof(uint32_t));
             out.write((char *) &(id2), sizeof(uint32_t));
             out.write((char *) d, 5);
