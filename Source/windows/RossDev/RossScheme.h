@@ -41,11 +41,9 @@ protected:
 	//{{AFX_MSG(CRossScheme)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnEditDomain();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnHdnItemdblclickList1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedSaveToFiles();
 	afx_msg void OnBnClickedLoadConstFromFiles();
 };

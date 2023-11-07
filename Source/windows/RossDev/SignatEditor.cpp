@@ -57,8 +57,7 @@ void CSignatEditor::OnAdd()
 	// TODO: Add your control notification handler code here
 	if (m_AvailDoms.GetCurSel() == LB_ERR) return;
 	long DomNo = m_AvailDoms.GetItemData(m_AvailDoms.GetCurSel());
-	CString Item = (const char*)GetRoss()->m_Domens[DomNo].DomStr;
-	m_SignatDoms.AddString(Item);
+	m_SignatDoms.AddString(GetRoss()->m_Domens[DomNo].GetDomStr().c_str());
 }
 
 void CSignatEditor::OnDelete() 
@@ -88,12 +87,12 @@ BOOL CSignatEditor::OnInitDialog()
 	for (size_t i=0; i<GetRoss()->m_Domens.size(); i++)
 	{
 		const CDomen&  D = GetRoss()->m_Domens[i];
-		if (D.Source != dsSystem)
+		if (D.GetDomainSource() != dsSystem)
 		{
-			std::string DomStr =  D.DomStr;
+			std::string DomStr = D.GetDomStr();
 			if (DomStr == "D_") continue;
 			int nPos;
-			if (!D.IsDelim)
+			if (!D.DomainIsDelim())
 			{
 				nPos = m_AvailDoms.AddString(DomStr.c_str());
 			}

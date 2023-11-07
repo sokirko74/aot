@@ -869,7 +869,7 @@ void CWordList::OnStatistic()
 	{
 		CString Q;
 		BYTE DomNo = GetRoss()->GetDomItemDomNo(V[k].ItemNo);
-		CString DomStr = GetRoss()->m_Domens[DomNo].DomStr;
+		CString DomStr = GetRoss()->m_Domens[DomNo].GetDomStr().c_str();
 		Q.Format("%-16s %-5s %-20s %-5s %i \r\n", DomStr, "|", (const char*)GetRoss()->GetDomItemStr(V[k].ItemNo), "|", V[k].Freq);
 		S += Q;
 	};

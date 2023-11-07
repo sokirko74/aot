@@ -4,7 +4,6 @@
 #include "StdAfx.h"
 #include "resource.h"
 #include "RossScheme.h"
-#include "BasicDomenEdit.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -37,8 +36,6 @@ void CRossScheme::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CRossScheme, CDialog)
 	//{{AFX_MSG_MAP(CRossScheme)
-	ON_BN_CLICKED(IDC_BUTTON1, OnEditDomain)
-	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, OnHdnItemdblclickList1)
 	ON_BN_CLICKED(IDC_SAVE_TO_FILES, OnBnClickedSaveToFiles)
 	//}}AFX_MSG_MAP
 	
@@ -56,7 +53,7 @@ BOOL CRossScheme::OnInitDialog()
 	m_ListCtrl.InsertColumn( 0,"Name", LVCFMT_LEFT, 150);
 	for (size_t i=0; i<GetRoss()->m_Domens.size(); i++)
 	{
-		int nPos = m_ListCtrl.InsertItem(i, GetRoss()->m_Domens[i].DomStr,0);
+		int nPos = m_ListCtrl.InsertItem(i, GetRoss()->m_Domens[i].GetDomStr().c_str(), 0);
 		m_ListCtrl.SetItemData(nPos, i);
 	};
 
@@ -66,30 +63,6 @@ BOOL CRossScheme::OnInitDialog()
 
 
 
-void CRossScheme::OnEditDomain() 
-{
-	// TODO: Add your control notification handler code here
-    POSITION pos =  m_ListCtrl.GetFirstSelectedItemPosition();
-    if (pos == NULL)
-	{
-		AfxMessageBox ("No object selected!");  
-		return;
-	};
-
-	int nPos = m_ListCtrl.GetNextSelectedItem(pos);
-    CBasicDomainEdit dlg (m_pRossDoc, m_ListCtrl.GetItemData(nPos), true);
-    dlg.DoModal();
-
-}
-
-
-
-void CRossScheme::OnHdnItemdblclickList1(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMHEADER phdr = reinterpret_cast<LPNMHEADER>(pNMHDR);
-	OnEditDomain();
-	*pResult = 0;
-}
 
 void CRossScheme::OnBnClickedSaveToFiles()
 {
@@ -104,7 +77,7 @@ void CRossScheme::OnBnClickedSaveToFiles()
 		const CDomen& D = GetRoss()->m_Domens[i];
 		if (D.IsFree) continue;
 		
-		std::string FileName = Path + (const char*)D.DomStr + std::string(".txt");
+		std::string FileName = Path + D.GetDomStr() + std::string(".txt");
 		FILE* fp = fopen (FileName.c_str(), "w");
 		for (size_t k = 0; k < D.m_DomainItemsBufferLength; k++)
 			fprintf (fp, "%s\n", (const char*)D.m_DomainItemsBuffer[k]);
@@ -135,7 +108,7 @@ void CRossScheme::OnBnClickedLoadConstFromFiles()
 		const CDomen& D = GetRoss()->m_Domens[i];
 		if (D.IsFree) continue;
 		
-		std::string FileName = Path + (const char*)D.DomStr + std::string(".txt");
+		std::string FileName = Path + D.GetDomStr() + std::string(".txt");
 		FILE* fp = fopen (FileName.c_str(), "r");
 		if (!fp) continue;
 		char buffer[100];

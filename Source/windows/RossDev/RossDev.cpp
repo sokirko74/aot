@@ -122,7 +122,7 @@ void InitError()
 
 extern LRESULT CALLBACK NodeWindowFunc(HWND, UINT, WPARAM, LPARAM);
 extern int SaveToRossdev(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
-extern int GetNewNode(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
+//extern int GetNewNode(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int Update(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int FindSituations(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
 extern int TranslateToEnglish(ClientData clienData, Tcl_Interp* interp, int argc, char* argv[]);
@@ -289,7 +289,7 @@ BOOL CRossDevApp::InitInstance()
 	try {
 		SetTimer(NULL, 42, 10, TclTimerProc);
 		CreateTclCommand("SaveToRossdev", SaveToRossdev);
-		CreateTclCommand("GetNewNode", GetNewNode);
+		//CreateTclCommand("GetNewNode", GetNewNode);
 		CreateTclCommand("Update", Update);
 		CreateTclCommand("FindSituations", FindSituations);
 		CreateTclCommand("TranslateToEnglish", TranslateToEnglish);

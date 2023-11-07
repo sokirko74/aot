@@ -12,7 +12,7 @@ endif()
 add_executable (${PROJECT_NAME} WIN32
         ArticleDoc.cpp
         ArticleView.cpp
-        BasicDomenEdit.cpp
+        
         ChildFrm.cpp
         CntrItem.cpp
         FieldEditor.cpp

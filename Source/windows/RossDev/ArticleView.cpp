@@ -509,7 +509,7 @@ bool IsKeyWordArticle (const CString& word, COLORREF& C, uint32_t Data)
 	std::vector<TBaseDomItem>::const_iterator It = lower_bound (RossDoc->m_BasicDomItems.begin(), RossDoc->m_BasicDomItems.end(), I);
     if (    (It == RossDoc->m_BasicDomItems.end())
 		|| !(*It == I)
-		|| (  CString(RossDoc->GetRoss()->m_Domens[It->DomNo].DomStr) == CString("D_1"))) // если это не элемент метаязыка
+		|| (  RossDoc->GetRoss()->m_Domens[It->DomNo].GetDomStr() == "D_1")) // если это не элемент метаязыка
 	{
 		if (IsRossEntry(word))
 		{

@@ -35,7 +35,6 @@ public:
 	virtual void CreateNode(const char* name, CNodePlace p, bool WithoutView);
 	virtual void CreateRelation(int node1, int node2, bool bWork, bool WithoutView);
 	
-    CString  GetNewNode(CString Nodes);
 
 
 // Overrides

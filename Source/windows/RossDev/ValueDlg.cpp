@@ -136,7 +136,7 @@ void CValueDlg::DrawControls ()
 	  m_Edits[i].m_hWnd = 0;
 
 	  // рисуем название
-	  std::string LabelStr = GetRoss()->m_Domens[DomNo].DomStr;
+	  std::string LabelStr = GetRoss()->m_Domens[DomNo].GetDomStr();
 	  if (LabelStr.substr(0,2) == "D_")
 		  LabelStr.erase(0,2);
 
@@ -151,7 +151,7 @@ void CValueDlg::DrawControls ()
 		  m_Lists[i].Create(WS_VSCROLL|CBS_AUTOHSCROLL|WS_VISIBLE|CBS_SORT|CBS_DROPDOWNLIST, ControlRect, this, i);
            
 		  std::vector<BYTE> DomNos;
-		  if (GetRoss()->m_Domens[DomNo].Source == dsUnion)
+		  if (GetRoss()->m_Domens[DomNo].GetDomainSource() == dsUnion)
 			  for (size_t j=0; j<GetRoss()->m_Domens[DomNo].PartsSize; j++)
 			    DomNos.push_back(GetRoss()->m_Domens[DomNo].Parts[j]);  
 		  else

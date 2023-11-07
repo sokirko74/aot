@@ -559,7 +559,7 @@ void CRossDoc::BuildBasicDomItems()
     for (size_t i=0; i<GetRoss()->m_Domens.size(); i++)
 	{
 		std::vector<CDomainParam>::iterator It = find(m_DomainParams.begin(), m_DomainParams.end(), 
-			GetRoss()->m_Domens[i].DomStr);
+			GetRoss()->m_Domens[i].GetDomStr().c_str());
 		if (It == m_DomainParams.end())
 			m_DomParamsPtr[i]  = ErrUChar;
 		else
@@ -574,8 +574,8 @@ void CRossDoc::BuildBasicDomItems()
 	{
 		 BYTE DomNo  = GetRoss()->GetDomItemDomNo(i);
 
-  	     if (		(GetRoss()->m_Domens[DomNo].Source == dsMetaText)
-				|| (GetRoss()->m_Domens[DomNo].Source == dsExpres)
+  	     if (		(GetRoss()->m_Domens[DomNo].GetDomainSource() == dsMetaText)
+				|| (GetRoss()->m_Domens[DomNo].GetDomainSource() == dsExpres)
 			 )
 		 { 
 			if (DomNo  == GetRoss()->FieldDomNo)

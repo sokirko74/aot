@@ -3,7 +3,6 @@
 
 #include "StdAfx.h"
 #include "morph_dict/common/utilit.h"
-#include "BasicDomenEdit.h"
 #include "HierarchyDoc.h"
 #include "Hierarchy.h"
 
@@ -79,57 +78,22 @@ int SaveToRossdev(ClientData clienData,
     return TCL_OK;
 };
 
-int GetNewNode(ClientData clienData,
-    Tcl_Interp* interp,
-    int argc,
-    char* argv[])
-{
-    if (argc == 3)
-    {
-        CHierarchyDoc* D = FindDoc<CHierarchyDoc>(argv[2], GetHierarchyTemplate());
-        if (D)
-        {
-            strcpy(interp->result, D->GetNewNode(argv[1]));
-        };
-    };
-    return TCL_OK;
-};
-
-
-CString  CHierarchyDoc::GetNewNode(CString Nodes)
-{
-    std::vector<CString> UsedItems;
-    while (!Nodes.IsEmpty())
-    {
-        CString Q = Nodes.SpanExcluding(" ");
-        Nodes = Nodes.Right(Nodes.GetLength() - Q.GetLength() - 1);
-        if (!Q.IsEmpty())
-            UsedItems.push_back(Q);
-        Nodes.TrimLeft();
-    };
-
-    bool  SecondDomain = (m_Type == SemFet) && (::MessageBox(0, "You are going to add a SF (yes - SF; no - SEMR", "Message Box", MB_YESNO) == IDNO);
-
-    LONG ItemNo;
-
-    if (!SecondDomain)
-    {
-        CBasicDomainEdit dlg((CRossDoc*)m_pRossDoc, GetDomNo(), false, &UsedItems, &ItemNo);
-        if (dlg.DoModal() != IDOK)
-            return CString("");
-    }
-    else
-    {
-        CBasicDomainEdit dlg((CRossDoc*)m_pRossDoc, GetRoss()->GetDomenNoByDomStr("D_SEM_REL"), false, &UsedItems, &ItemNo);
-        if (dlg.DoModal() != IDOK)
-            return CString("");
-    };
-
-    if (ItemNo == -1)
-        return CString("");
-
-    return CString((const char*)GetRoss()->GetDomItemStr(ItemNo));
-}
+//int GetNewNode(ClientData clienData,
+//    Tcl_Interp* interp,
+//    int argc,
+//    char* argv[])
+//{
+//    if (argc == 3)
+//    {
+//        CHierarchyDoc* D = FindDoc<CHierarchyDoc>(argv[2], GetHierarchyTemplate());
+//        if (D)
+//        {
+//            strcpy(interp->result, D->GetNewNode(argv[1]));
+//        };
+//    };
+//    return TCL_OK;
+//};
+//
 
 
 
