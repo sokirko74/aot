@@ -462,6 +462,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
             SemWord.m_WordWeight = Paradigm.GetWordWeight();
         };
     } else {
+        // todo: delete it after sorting by word/hom weights
         if (SemWord.m_Lemma == _R("ОН") ) {
             SemWord.m_WordWeight = 100; //WordWeightCountCoef is -0.01
         }

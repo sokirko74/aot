@@ -9,34 +9,59 @@
 #include "StructDictConsts.h"
 
 
-
 class TItemContainer;
+
 const int DomStrSize = 100;
 
-struct CDomen  {
-  int  DomId;
-  char DomStr[DomStrSize];
-  char Format[255];
-  char Source;
-  bool IsDelim;
-  bool IsFree;
-  uint16_t ItemsCount;
-  BYTE Parts[MaxDomensUnionSize];
-  BYTE PartsSize;
-  int   DropDownCount;
-  uint32_t Color;
-  char* m_DomainItemsBuffer;
-  int    m_DomainItemsBufferLength;
-  TItemContainer*  m_pParent;
-  int 	  m_StartDomItem;
-  int 	  m_EndDomItem;
-  BYTE    m_DomNo;
-  bool    m_bFreed;
+class CDomen {
+    int DomId;
+    std::string DomStr;
+    char Format[255];
+    char Source;
+    bool IsDelim;
+    uint16_t ItemsCount;
+    int DropDownCount;
+    uint32_t Color;
+    TItemContainer *m_pParent;
+    BYTE m_DomNo;
+    bool m_bFreed;
 
+public:
+    bool IsFree;
+    BYTE Parts[MaxDomensUnionSize];
+    BYTE PartsSize;
+    int m_StartDomItem;
+    int m_EndDomItem;
+    char *m_DomainItemsBuffer;
+    int m_DomainItemsBufferLength;
 
-  CDomen ();
-  ~CDomen ();
-  int AddItem (const char* s, int Length);
-  void DelItem (int Offset, int Length);
-  bool IsEmpty () const;
+    CDomen();
+
+    ~CDomen();
+
+    int AddItem(const char *s, int Length);
+
+    void DelItem(int Offset, int Length);
+
+    bool IsEmpty() const;
+
+    bool IsFreedDomain() const;
+
+    const char* GetDomainItemsBuffer() const;
+
+    const std::string& GetDomStr() const;
+
+    char GetDomainSource() const;
+
+    bool DomainIsDelim() const {return IsDelim; };
+
+    bool ReadFromStr(TItemContainer* parent, BYTE domNO, const std::string& line);
+
+    void MakeFree();
+
+    void WriteDomainToStream(FILE* fp) const;
+
+    int GetDropDownCount() const {return DropDownCount;};
+
+    int GetGuiColor() const {return Color;};
 };

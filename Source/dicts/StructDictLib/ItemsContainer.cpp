@@ -15,41 +15,6 @@
 //=============== CDomen =========================
 //==================================================
 
-CDomen::CDomen() {
-    m_DomainItemsBuffer = 0;
-    m_DomainItemsBufferLength = 0;
-    m_StartDomItem = -1;
-    m_EndDomItem = -1;
-    m_bFreed = false;
-}
-
-int CDomen::AddItem(const char *s, int Length) {
-    m_DomainItemsBufferLength += Length + 1;
-    m_DomainItemsBuffer = (char *) realloc(m_DomainItemsBuffer, m_DomainItemsBufferLength);
-    memcpy(m_DomainItemsBuffer + m_DomainItemsBufferLength - Length - 1, s, Length);
-    m_DomainItemsBuffer[m_DomainItemsBufferLength - 1] = 0;
-    return m_DomainItemsBufferLength - Length - 1;
-}
-
-void CDomen::DelItem(int Offset, int Length) {
-    memmove(m_DomainItemsBuffer + Offset, m_DomainItemsBuffer + Offset + Length + 1, m_DomainItemsBufferLength - (Offset + Length + 1));
-    m_DomainItemsBufferLength -= Length + 1;
-    m_DomainItemsBuffer = (char *) realloc(m_DomainItemsBuffer, m_DomainItemsBufferLength);
-    m_EndDomItem--;
-    if (m_DomainItemsBufferLength == 0) {
-        m_StartDomItem = -1;
-        m_EndDomItem = -1;
-    };
-};
-
-CDomen::~CDomen() {
-    if (m_DomainItemsBuffer != 0)
-        free(m_DomainItemsBuffer);
-};
-
-bool CDomen::IsEmpty() const {
-    return m_StartDomItem == -1;
-};
 
 //==================================================
 //==================================================
@@ -75,9 +40,15 @@ TItemContainer::TItemContainer() {
     m_Language = morphRussian;
 };
 
+const char*	TItemContainer::GetDomItemStr(const TDomItem& Item) const
+{
+    assert (!m_Domens[Item.GetDomNo()].IsFreedDomain());
+    return m_Domens[Item.GetDomNo()].GetDomainItemsBuffer() + Item.GetItemStrNo();
+};
+
 BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr) const {
     for (BYTE i = 0; i < m_Domens.size(); i++)
-        if (!strcmp(m_Domens[i].DomStr, DomStr))
+        if (m_Domens[i].GetDomStr() == DomStr)
             return i;
 
     return ErrUChar;
@@ -107,7 +78,7 @@ int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, BYTE DomNo) c
 
     TDomNoItemStr I = { ItemStr, DomNo };
     const CDomen &D = m_Domens[I.DomNo];
-    if (D.Source == dsUnion) {
+    if (D.GetDomainSource() == dsUnion) {
         int Res = -1;
 
         for (size_t i = 0; i < D.PartsSize; i++) {
@@ -117,13 +88,13 @@ int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, BYTE DomNo) c
 
         return Res;
     } else {
-        if (D.IsDelim)
+        if (D.DomainIsDelim())
             if (   (ItemStr.length() != 1)
-                || (D.m_DomainItemsBufferLength == 0)
-                || !strchr(D.m_DomainItemsBuffer, ItemStr[0])
+                || (D.GetDomainItemsBuffer() == 0)
+                || !strchr(D.GetDomainItemsBuffer(), ItemStr[0])
                )
                 return -1;
-        std::vector<TDomItem>::const_iterator U = lower_bound(m_DomItems.begin(), m_DomItems.end(), I,
+        auto U = lower_bound(m_DomItems.begin(), m_DomItems.end(), I,
                                                          IsLessByNotStableItemStrNew(this));
         if ((U == m_DomItems.end())
             || !AreEqualDomItems(*U, I)
@@ -138,7 +109,9 @@ int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, BYTE DomNo) c
 bool TItemContainer::InitDomensConsts() {
 
     ActantsDomNo = GetDomenNoByDomStr("D_ACTANTS");
-    if (ActantsDomNo == ErrUChar) return false;
+    if (ActantsDomNo == ErrUChar) {
+        throw CExpc("cannot find domain D_ACTANTS");
+    }
 
     LexDomNo = GetDomenNoByDomStr("D_RLE");
     if (LexDomNo == ErrUChar) return false;
@@ -180,7 +153,7 @@ void TItemContainer::UpdateConstDomens() {
                 if (m_DomItems[k].GetItemStrLen() > 0)
                     WildCardDomItemNo = k;
 
-        if (D.Source == dsUnion)
+        if (D.GetDomainSource() == dsUnion)
             for (int k = D.m_StartDomItem; k < D.m_EndDomItem; k++) {
                 BYTE DomNo = GetDomenNoByDomStr(GetDomItemStr(m_DomItems[k]));
                 D.Parts[D.PartsSize++] = DomNo;
@@ -212,44 +185,15 @@ bool TItemContainer::BuildDomens(char *LastReadLine) {
     };
 
     m_Domens.clear();
-
-
     for (size_t k = 0; k < DomensCount; k++) {
         CDomen T;
-        m_Domens.push_back(T);
         if (!fgets(buffer, 255, domens)) {
             return false;
         }
         strcpy(LastReadLine, buffer);
         rtrim(buffer);
-        StringTokenizer tok(buffer, ";");
-        tok();
-        m_Domens[k].DomId = atoi(tok.val());
-        tok();
-        m_Domens[k].ItemsCount = atoi(tok.val());
-        tok();
-        m_Domens[k].DropDownCount = atoi(tok.val());
-        tok();
-        strcpy(m_Domens[k].DomStr, tok.val());
-        if (!tok()) return false;
-        if (strlen(tok.val()) == 0) return false;
-        m_Domens[k].Source = tok.val()[0];
-        tok();
-        m_Domens[k].IsDelim = (atoi(tok.val()) == -1) ? true : false;
-        tok();
-        m_Domens[k].IsFree = (atoi(tok.val()) == -1) ? true : false;
-        tok();
-        m_Domens[k].Color = atoi(tok.val());
-
-        m_Domens[k].PartsSize = 0;
-        // может быть равен нулю
-        m_Domens[k].Format[0] = 0;
-        if (m_Domens[k].Source == dsExpres) {
-            tok();
-            strcpy(m_Domens[k].Format, tok.val());
-        }
-        m_Domens[k].m_pParent = this;
-        m_Domens[k].m_DomNo = (BYTE) k;
+        T.ReadFromStr(this, m_Domens.size(), buffer);
+        m_Domens.push_back(T);
 
     }
     // закрываем файл
@@ -297,8 +241,8 @@ bool TItemContainer::BuildDomItems() {
             std::string q = buffer;
             StringTokenizer tok(q.c_str(), ";");
             if (!tok()) return false;
-            assert (tok.val() == std::string(m_Domens[k].DomStr));
-            if (tok.val() != std::string(m_Domens[k].DomStr))
+            assert (tok.val() == m_Domens[k].GetDomStr());
+            if (tok.val() != m_Domens[k].GetDomStr())
                 return false;
 
             m_Domens[k].m_DomainItemsBufferLength = tok() ? atoi(tok.val()) : 0;
@@ -326,16 +270,11 @@ bool TItemContainer::BuildDomItems() {
        free example domens, m_bDontLoadExamples is switched on
     */
     if (m_bDontLoadExamples) {
-        for (size_t k = 0; k < m_Domens.size(); k++)
-            if (!strcmp(m_Domens[k].DomStr, "D_EXM")
-                || !strcmp(m_Domens[k].DomStr, "D_THES")
-                    ) {
-                free(m_Domens[k].m_DomainItemsBuffer);
-                m_Domens[k].m_DomainItemsBuffer = 0;
-                m_Domens[k].m_bFreed = true;
+        for (auto& d: m_Domens) {
+            if (d.GetDomStr() == "D_EXM" || d.GetDomStr() == "D_THES") {
+                d.MakeFree();
             };
-
-
+        }
     };
     UpdateConstDomens();
 
@@ -353,7 +292,7 @@ bool TItemContainer::WriteDomItems() const {
     fp = fopen(ItemsFile.c_str(), "wb");
     for (size_t k = 0; k < m_Domens.size(); k++) {
         fprintf(fp, "%s;%i\n",
-                m_Domens[k].DomStr,
+                m_Domens[k].GetDomStr().c_str(),
                 m_Domens[k].m_DomainItemsBufferLength);
         fwrite(m_Domens[k].m_DomainItemsBuffer, 1, m_Domens[k].m_DomainItemsBufferLength, fp);
         fprintf(fp, "\n");
@@ -672,7 +611,7 @@ bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, B
             m_LastError = Format("Домен %s  не объявлен в таблице доменов (формат функции %s)!", DomStr, Name);
             return false;
         };
-        if (m_Domens[DomenNo].Source == dsSystem) {
+        if (m_Domens[DomenNo].GetDomainSource() == dsSystem) {
             m_LastError = Format(
                     "Домен %s  объявлен как системный. Такие домены нельзя использовать в сигнатурах(формат функции %s)!",
                     DomStr, Name);
@@ -680,8 +619,7 @@ bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, B
         };
 
         Sgn.DomsWithDelims.push_back(TSignatItem(DomenNo, IsMult));
-        if (m_Domens[DomenNo].IsDelim
-                ) {
+        if (m_Domens[DomenNo].DomainIsDelim()) {
             strcat(Sgn.sFrmt, " ");
             if (!m_Domens[DomenNo].IsEmpty()) {
                 strcat(Sgn.sFrmt, m_Domens[DomenNo].m_DomainItemsBuffer);
@@ -718,18 +656,9 @@ bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, B
 bool TItemContainer::WriteDomens() const {
     FILE *domens = fopen(DomensFile.c_str(), "wb");
     fprintf(domens, "%lu\n", m_Domens.size());
-    for (size_t k = 0; k < m_Domens.size(); k++)
-        fprintf(domens, "%i;%i;%i;%s;%c;%i;%i;%i;%s\n",
-                m_Domens[k].DomId,
-                m_Domens[k].ItemsCount,
-                m_Domens[k].DropDownCount,
-                m_Domens[k].DomStr,
-                m_Domens[k].Source,
-                m_Domens[k].IsDelim ? -1 : 0,
-                m_Domens[k].IsFree ? -1 : 0,
-                m_Domens[k].Color,
-                m_Domens[k].Format[0] ? m_Domens[k].Format : "");
-
+    for (auto& d: m_Domens) {
+        d.WriteDomainToStream(domens);
+    }
     fclose(domens);
     return true;
 }

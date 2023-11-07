@@ -87,12 +87,7 @@ public :
 
 	TItemContainer();
 
-	const char*			 GetDomItemStr(const TDomItem& Item) const 
-	{
-		 assert (!m_Domens[Item.GetDomNo()].m_bFreed);
-		 return m_Domens[Item.GetDomNo()].m_DomainItemsBuffer+Item.GetItemStrNo();
-	};
-
+	const char*			 GetDomItemStr(const TDomItem& Item) const;
 	void 			ErrorMessage (std::string s ) const;
 	bool			InitDomensConsts();
 	int				GetItemNoByItemStr (const std::string&  ItemStr, BYTE DomNo) const;

@@ -5,6 +5,7 @@ add_library(StructDictLib
         Ross.cpp
         StdRoss.cpp
         TempArticle.cpp
+        Domen.cpp
 )
 
 target_link_libraries(StructDictLib

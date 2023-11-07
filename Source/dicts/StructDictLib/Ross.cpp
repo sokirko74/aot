@@ -162,88 +162,56 @@ TRoss::~TRoss()
 	ClearCorteges();
 }
 
+void MakePathAndCheck(const std::string path, const std::string fileName, std::string& fullPath) {
+    fullPath = MakePath(path, fileName);
+    if (!FileExists(fullPath.c_str())) {
+        throw CExpc("File does not exist " + fullPath);
+    }
+}
 
-bool TRoss::LoadOnlyConstants(const char* _RossPath)
+
+void TRoss::LoadOnlyConstants(const char* _RossPath)
 {
 	RossPath = _RossPath;
-	if (!MakePathAndCheck(RossPath, "config.txt", ConfigFile))
-	{
-		m_LastError = "cannot find config.txt";
-		return false;
-	};
-
-	if (!MakePathAndCheck(RossPath, "domitems.bin", DomItemsTextFile))
-	{
-		m_LastError = "cannot find domitems.txt";
-		return false;
-	};
-
-	if (!MakePathAndCheck(RossPath, "items.bin", ItemsFile))
-	{
-		m_LastError = "cannot find items.txt";
-		return false;
-	};
-
-
-	if (!MakePathAndCheck(RossPath, "domains.bin", DomensFile))
-	{
-		m_LastError = "cannot find domains.txt";
-		return false;
-	};
-	if (!MakePathAndCheck(RossPath, "fields.bin", FieldsFile))
-	{
-		m_LastError = "cannot find fields.txt";
-		return false;
-	};
+	MakePathAndCheck(RossPath, "config.txt", ConfigFile);
+	MakePathAndCheck(RossPath, "domitems.bin", DomItemsTextFile);
+	MakePathAndCheck(RossPath, "items.bin", ItemsFile);
+	MakePathAndCheck(RossPath, "domains.bin", DomensFile);
+	MakePathAndCheck(RossPath, "fields.bin", FieldsFile);
 
 	if (!ReadConfig())
 	{
-		m_LastError = " Cannot parse config ";
-		return false;
+		throw CExpc("Cannot parse struct_dict config ");
 	};
 
 	{
 		char LastReadLine[1000];
 		if (!BuildDomens(LastReadLine))
 		{
-			m_LastError = Format(" Cannot build domens: the last read line=%s", LastReadLine);
-			return false;
+            throw CExpc(" Cannot build domens: the last read line=%s", LastReadLine);
 		}
 	};
 
 	if (!BuildDomItems())
 	{
-		m_LastError = "Cannot build domitems";
-		return false;
+		throw CExpc("Cannot build domitems");
 	};
 
 	if (!BuildFields(m_MaxNumDom))
 	{
-		return false;
+        throw CExpc("Cannot build fields");
 	};
 	CortegeFile = MakePath(RossPath, "cortege.bin");
 	UnitsFile = MakePath(RossPath, "units.bin");
 	UnitCommentsFile = MakePath(RossPath, "comments.bin");
-
-	return true;
 };
 
 bool TRoss::FullLoad(const char* _RossPath)
 {
-	if (!LoadOnlyConstants(_RossPath))
-		return false;
+	LoadOnlyConstants(_RossPath);
 
-	if (!MakePathAndCheck(RossPath, "cortege.bin", CortegeFile))
-	{
-		m_LastError = "cannot find cortege.bin";
-		return false;
-	};
-	if (!MakePathAndCheck(RossPath, "units.bin", UnitsFile))
-	{
-		m_LastError = "cannot find units.bin";
-		return false;
-	};
-
+	MakePathAndCheck(RossPath, "cortege.bin", CortegeFile);
+	MakePathAndCheck(RossPath, "units.bin", UnitsFile);
 	BuildUnits();
 
 	if (!BuildCorteges())
@@ -540,11 +508,7 @@ bool   TRoss::ReadUnitComments()
 
 	UnitCommentsFile[0] = 0;
 
-	if (!MakePathAndCheck(RossPath, "comments.bin", UnitCommentsFile))
-	{
-		ErrorMessage("Cannot find comments.bin or comments.txt");
-		return false;
-	};
+	MakePathAndCheck(RossPath, "comments.bin", UnitCommentsFile);
 	if (!IsBinFile(UnitCommentsFile)) return false;
 
 
@@ -662,7 +626,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE Sig
 	{
 		BYTE DomNo = Sgn.DomsWithDelims[i].m_DomNo;
 		bool IsMult = Sgn.DomsWithDelims[i].m_IsMult;
-		bool IsDelim = m_Domens[DomNo].IsDelim;
+		bool IsDelim = m_Domens[DomNo].DomainIsDelim();
 		bool FlagLastItem = (i == Sgn.DomsWithDelims.size() - 1);
 		char Delim[10];
 		Delim[0] = 0;
@@ -670,7 +634,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE Sig
 		bool FlagNextDelim = false;
 		if (!FlagLastItem)
 			if ((i < Sgn.DomsWithDelims.size() - 1)
-				&& m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].IsDelim
+				&& m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].DomainIsDelim()
 				&& !m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].IsEmpty()
 				)
 				FlagNextDelim = true;
@@ -698,7 +662,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE Sig
 				в D_ENGL
 		*/
 		if (IsRussian(ItemStr))
-			if (!strcmp(m_Domens[DomNo].DomStr, "D_ENGL"))
+			if (m_Domens[DomNo].GetDomStr() == "D_ENGL")
 				return false;
 
 
@@ -921,7 +885,7 @@ bool   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo, int& ItemNo)
 void TRoss::DelDomItem(int ItemNo)
 {
 	// константы системных доменов не могут встречаться в словарных статьях
-	if (m_Domens[m_DomItems[ItemNo].GetDomNo()].Source != dsSystem)
+	if (m_Domens[m_DomItems[ItemNo].GetDomNo()].GetDomainSource() != dsSystem)
 		for (size_t i = 0; i < m_Units.size(); i++)
 			if (!m_Units[i].HasEmptyArticle())
 			{

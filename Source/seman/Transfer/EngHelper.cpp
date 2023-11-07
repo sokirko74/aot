@@ -15,7 +15,7 @@ bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cor
 	for(int i = 0 ; i < Signat.DomsWithDelims.size() ; i++ )
 	{
 		const TSignatItem& SignatItem = Signat.DomsWithDelims[i];
-		std::string strDom = GetRoss(DictType)->m_Domens[SignatItem.m_DomNo].DomStr;
+		std::string strDom = GetRoss(DictType)->m_Domens[SignatItem.m_DomNo].GetDomStr();
 		if( strDom != domens[i] )
 			return false;
 	}

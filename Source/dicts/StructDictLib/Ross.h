@@ -138,7 +138,7 @@ public:
 	TRoss (BYTE MaxNumDom);
 	~TRoss ();
 	bool	FullLoad(const char* _RossPath);
-	bool	LoadOnlyConstants(const char* _RossPath);
+	void	LoadOnlyConstants(const char* _RossPath);
 	bool	Save ();
 
 

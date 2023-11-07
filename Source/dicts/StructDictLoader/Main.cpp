@@ -41,10 +41,8 @@ void import_dict(std::string fileName, std::string folder) {
 		throw CExpc("Cannot read %s", fileName.c_str());
 	};
 
-	if (!Dict.LoadOnlyConstants(folder.c_str()))
-	{
-		throw CExpc("Cannot load an empty dictionary from %s", folder.c_str());
-	};
+	Dict.LoadOnlyConstants(folder.c_str());
+
 	Dict.m_bShouldSaveComments = true;
 
 	std::string Messages;

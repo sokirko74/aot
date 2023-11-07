@@ -54,7 +54,7 @@ std::string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,in
 			return strPrep;
 
 		long DomNo = Signat.Doms[0];
-		if( std::string(pRossDoc->GetRoss()->m_Domens[DomNo].DomStr) == "D_1" )
+		if( pRossDoc->GetRoss()->m_Domens[DomNo].GetDomStr() == "D_1" )
 		{
 			std::string strPattern = (const char*)pRossDoc->GetRoss()->GetDomItemStr(vectorCortege[i].m_DomItemNos[0]);
 			long PrepNo;
