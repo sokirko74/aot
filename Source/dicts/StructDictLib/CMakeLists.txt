@@ -6,7 +6,8 @@ add_library(StructDictLib
         StdRoss.cpp
         TempArticle.cpp
         Domen.cpp
-       "Field.cpp")
+        Field.cpp
+)
 
 target_link_libraries(StructDictLib
     aot_common
