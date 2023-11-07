@@ -40,14 +40,14 @@ int main(int argc, const char **argv) {
     char currdir[256];
 #ifdef WIN32
     _getcwd(currdir, 256);
-    _chdir(GetPathByFile(GrammarFileName).c_str());
+    _chdir(GetParentPath(GrammarFileName).c_str());
 #else
     getcwd(currdir, 256);
-    chdir(GetPathByFile(GrammarFileName).c_str());
+    chdir(GetParentPath(GrammarFileName).c_str());
 #endif
 
     WorkGrammar.m_pGramTab = Holder.m_pGramTab;
-    WorkGrammar.m_SourceGrammarFile = GrammarFileName.substr(GetPathByFile(GrammarFileName).length());
+    WorkGrammar.m_SourceGrammarFile = GrammarFileName.substr(GetParentPath(GrammarFileName).length());
 
     bool bResult = LoadGrammarForGLR(WorkGrammar, false, bPrintRules);
 

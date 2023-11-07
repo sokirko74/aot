@@ -81,8 +81,8 @@ int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, BYTE DomNo) c
     if (D.GetDomainSource() == dsUnion) {
         int Res = -1;
 
-        for (size_t i = 0; i < D.PartsSize; i++) {
-            Res = GetItemNoByItemStr(ItemStr, D.Parts[i]);
+        for (auto& dom_no: D.GetParts()) {
+            Res = GetItemNoByItemStr(ItemStr, dom_no);
             if (Res != -1) break;
         }
 
@@ -158,6 +158,7 @@ void TItemContainer::UpdateConstDomens() {
                 BYTE DomNo = GetDomenNoByDomStr(GetDomItemStr(m_DomItems[k]));
                 D.Parts[D.PartsSize++] = DomNo;
                 assert (D.PartsSize < MaxDomensUnionSize);
+                assert(D.GetParts()[D.PartsSize - 1] == DomNo);
             }
     };
 
@@ -165,41 +166,25 @@ void TItemContainer::UpdateConstDomens() {
 
 
 bool TItemContainer::BuildDomens(char *LastReadLine) {
-    size_t DomensCount;
-    strcpy(LastReadLine, "<no_line>");
-    char buffer[255];
-    FILE *domens = fopen(DomensFile.c_str(), "rb");
-
-    if (!domens) {
-        strcpy(LastReadLine, "cannot open file!");
-        return false;
+    std::ifstream inp;
+    inp.open(DomensFile);
+    if (!inp.good()) {
+        throw CExpc("cannot open file %s", DomensFile.c_str());
     }
-    fgets(buffer, 255, domens);
-    DomensCount = atoi(buffer);
-
-    // не превосходит  максимального индекса
-    if ((DomensCount == 0) || (DomensCount >= ErrUChar)) {
-        strcpy(LastReadLine, "cannot parse the first line!");
-        fclose(domens);
-        return false;
-    };
-
-    m_Domens.clear();
-    for (size_t k = 0; k < DomensCount; k++) {
+    auto domains = nlohmann::json::parse(inp);
+    std::unordered_map<std::string, BYTE>  doms_idents;
+    for (auto d: domains) {
+        size_t dom_no = m_Domens.size();
         CDomen T;
-        if (!fgets(buffer, 255, domens)) {
-            return false;
-        }
-        strcpy(LastReadLine, buffer);
-        rtrim(buffer);
-        T.ReadFromStr(this, m_Domens.size(), buffer);
-        m_Domens.push_back(T);
-
+        T.ReadFromJson(this, dom_no, d);
+        m_Domens.emplace_back(T);
+        doms_idents[T.GetDomStr()] = dom_no;
     }
-    // закрываем файл
-    fclose(domens);
-
-
+    for (auto& d : m_Domens) {
+        d.InitDomainParts(doms_idents);
+    }
+   
+    
     return InitDomensConsts();
 }
 
@@ -654,12 +639,17 @@ bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, B
 };
 
 bool TItemContainer::WriteDomens() const {
-    FILE *domens = fopen(DomensFile.c_str(), "wb");
-    fprintf(domens, "%lu\n", m_Domens.size());
-    for (auto& d: m_Domens) {
-        d.WriteDomainToStream(domens);
+    std::ofstream outf(DomensFile);
+    if (!outf.is_open())
+    {
+        throw CExpc("Cannot write to %s", DomensFile.c_str());
+    };
+    auto domains = nlohmann::json::array();
+    for (auto& d : m_Domens) {
+        domains.push_back(d.WriteToJson());
     }
-    fclose(domens);
+    outf << domains.dump(4);
+    outf.close();
     return true;
 }
 

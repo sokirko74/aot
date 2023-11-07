@@ -351,7 +351,7 @@ bool	CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 
 	if (Name == "filename")
 	{
-		Value = GetPathByFile(SourceFileName) + Value;
+		Value = GetParentPath(SourceFileName) + Value;
 		if (m_TokenType == OTHER_TOKEN_TYPE)
 				m_TokenType = (Language == morphRussian) ? RLE : LLE;
 	}
@@ -474,5 +474,5 @@ std::string CGrammarItem::GetFullFileName(const std::string& GrammarFileName) co
 {
 	std::map<std::string,std::string>::const_iterator it = m_Attributes.find("filename");
 	if (it == m_Attributes.end())  return "";
-	return GetPathByFile(GrammarFileName)+it->second;
+	return GetParentPath(GrammarFileName)+it->second;
 };

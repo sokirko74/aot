@@ -68,7 +68,7 @@ void CRossScheme::OnBnClickedSaveToFiles()
 {
 	CFileDialog  D (FALSE, 0,"D_", OFN_NOVALIDATE);
 	if (!D.DoModal()) return;
-	std::string Path = GetPathByFile((const char*)D.GetPathName());
+	std::string Path = GetParentPath((const char*)D.GetPathName());
 	
 	size_t i=0;
 
@@ -101,7 +101,7 @@ void CRossScheme::OnBnClickedLoadConstFromFiles()
 {
 	CFileDialog  D (TRUE, 0,"D_", OFN_NOVALIDATE);
 	if (!D.DoModal()) return;
-	std::string Path = GetPathByFile((const char*)D.GetPathName());
+	std::string Path = GetParentPath((const char*)D.GetPathName());
 	if  (Path.empty()) return;
 	for (size_t i=0; i<GetRoss()->m_Domens.size(); i++)
 	{

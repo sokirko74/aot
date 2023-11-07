@@ -152,8 +152,8 @@ void CValueDlg::DrawControls ()
            
 		  std::vector<BYTE> DomNos;
 		  if (GetRoss()->m_Domens[DomNo].GetDomainSource() == dsUnion)
-			  for (size_t j=0; j<GetRoss()->m_Domens[DomNo].PartsSize; j++)
-			    DomNos.push_back(GetRoss()->m_Domens[DomNo].Parts[j]);  
+			  for (auto p: <GetRoss()->m_Domens[DomNo].GetParts())
+			    DomNos.push_back(p->GetDomNo());  
 		  else
 		       DomNos.push_back(DomNo);
 

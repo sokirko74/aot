@@ -176,7 +176,7 @@ void TRoss::LoadOnlyConstants(const char* _RossPath)
 	MakePathAndCheck(RossPath, "config.txt", ConfigFile);
 	MakePathAndCheck(RossPath, "domitems.bin", DomItemsTextFile);
 	MakePathAndCheck(RossPath, "items.bin", ItemsFile);
-	MakePathAndCheck(RossPath, "domains.bin", DomensFile);
+	MakePathAndCheck(RossPath, "domains.json", DomensFile);
 	MakePathAndCheck(RossPath, "fields.bin", FieldsFile);
 
 	if (!ReadConfig())

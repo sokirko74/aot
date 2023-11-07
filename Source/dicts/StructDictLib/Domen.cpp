@@ -77,10 +77,10 @@ char CDomen::GetDomainSource() const {
 
     PartsSize = 0;
     // может быть равен нулю
-    Format[0] = 0;
+    DomainFormat[0] = 0;
     if (Source == dsExpres) {
         tok();
-        strcpy(Format, tok.val());
+        strcpy(DomainFormat, tok.val());
     }
     m_pParent = parent;
     m_DomNo = domNO;
@@ -103,6 +103,37 @@ void CDomen::WriteDomainToStream(FILE* fp) const {
             IsDelim ? -1 : 0,
             IsFree ? -1 : 0,
             Color,
-            Format[0] ? Format : "");
+            DomainFormat[0] ? DomainFormat : "");
 
 }
+nlohmann::json CDomen::WriteToJson()  const {
+    nlohmann::json js;
+    js["dom_ident"] = DomStr;
+    js["category"] = Source;
+    js["is_delim"] = IsDelim;
+    js["is_free"] = IsFree;
+    if (!DomainParts.empty())
+        js["parts"] = DomainParts;
+    return js;
+    
+}
+
+void CDomen::ReadFromJson(TItemContainer* parent, BYTE domNO, nlohmann::json& js) {
+    js.at("dom_ident").get_to(DomStr);
+    js.at("category").get_to(Source);
+    js.at("is_delim").get_to(IsDelim);
+    js.at("is_free").get_to(IsFree);
+    if (js.find("parts") != js.end()) {
+        js.at("parts").get_to(DomainParts);
+    }
+ 
+}
+
+void CDomen::InitDomainParts(const std::unordered_map<std::string, BYTE>& ident2ptr) {
+    DomainPartPtrs.clear();
+
+    for (const auto& ident : DomainParts) {
+        DomainPartPtrs.push_back(ident2ptr.at(ident));
+    }
+}
+

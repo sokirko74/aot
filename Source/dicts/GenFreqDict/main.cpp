@@ -240,7 +240,7 @@ int  mymain(int argc, char **argv)
 
 	std::cerr << "Parsing aligned sentences\n";
 	std::string file_list = argv[1];
-	std::string mainFolder = GetPathByFile(file_list.c_str());
+	std::string mainFolder = GetParentPath(file_list.c_str());
 
 	const char *out_str = argv[2];
 	out.open(out_str, std::ios::binary);
