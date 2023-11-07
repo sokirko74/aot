@@ -1,3 +1,0 @@
-FreqCollocTypeId;Length;AtomGroups;Relations;Examples;Enabled;LoadTextForm;LanguageId;Groups;
-1#3#"ART;PA2;SUB;"#"subord(1,3);subord(1,2);"#""#TRUE#FALSE#3#"DET_ADJ_SUB(1,3);"#
-2#3#"ART;ADJ;SUB;"#"subord(3,1);subord(3,2);"#""#TRUE#FALSE#3#"DET_ADJ_SUB(1,3);"#

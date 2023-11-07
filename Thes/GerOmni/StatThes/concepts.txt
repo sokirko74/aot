@@ -1,3 +1,0 @@
-ConceptId;ConceptStr;ShortComments;
-100000#"ORG"#""#
-100001#"DIE VEREINTEN NATIONEN"#""#

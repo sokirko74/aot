@@ -11,10 +11,6 @@
 #include "LessDomItem.h"
 #include "morph_dict/common/util_classes.h"
 
-//=================================================
-//=============== CDomen =========================
-//==================================================
-
 
 //==================================================
 //==================================================
@@ -377,7 +373,7 @@ BYTE TItemContainer::GetFieldNoByFieldStrInner(const char *FieldStr) const {
 
 
     for (; k < Fields.size(); k++)
-        if (!strcmp(Fields[k].FieldStr, FieldStr))
+        if (Fields[k].FieldStr == FieldStr)
             break;
 
     if (k == Fields.size())
@@ -396,129 +392,37 @@ bool TItemContainer::ClearFields() {
 }
 
 
+
 bool TItemContainer::BuildFields(BYTE MaxNumDom) {
     ClearFields();
-    FILE *fp = fopen(FieldsFile.c_str(), "rb");
-    int FieldsCount;
-    fscanf(fp, "%u\n", &FieldsCount);
-    Fields.resize(FieldsCount);
-
-    if (FieldsCount >= ErrUChar) {
-        fclose(fp);
-        return false;
-    };
-    BYTE FieldNo = 0;
-    try {
-        for (FieldNo = 0; FieldNo < FieldsCount; FieldNo++) {
-
-            char s[255];
-            char q[30];
-
-            int SignatCount;
-            fgets(s, 255, fp);
-            if (sscanf(s, "%u;%u;%[^;];%c;%[^;];%u\n",
-                       &Fields[FieldNo].FieldId,
-                       &SignatCount,
-                       Fields[FieldNo].FieldStr,
-                       &Fields[FieldNo].TypeRes,
-                       q,
-                       &Fields[FieldNo].OrderId) != 6) {
-                fclose(fp);
-                m_LastError = Format("Cannot read file %s line: %s", FieldsFile.c_str(), s);
-                return false;
-            };
-            Fields[FieldNo].IsApplicToActant = strcmp(q, "FALSE") != 0;
-
-
-            //printf ("%s\n", Fields[FieldNo].FieldStr);
-
-
-            for (BYTE i = 0; i < SignatCount; i++) {
-                fgets(s, 255, fp);
-                CSignat Signat;
-                assert (strlen(s) > 0);
-                rtrim(s);
-                StringTokenizer tok(s, ";");
-                tok();
-                Signat.SignatId = atoi(tok.val());
-                tok();
-                Signat.OrderNo = atoi(tok.val());
-                tok();
-                assert (strlen(tok.val()) < 255);
-                strcpy(Signat.FormatStr, tok.val());
-                tok();
-                assert (strlen(tok.val()) < 255);
-                strcpy(Signat.FormatName, tok.val());
-                Fields[FieldNo].m_Signats.push_back(Signat);
-            };
-
-            fgets(s, 255, fp);
-
-        };
-        fclose(fp);
-
+    
+    std::ifstream inp;
+    inp.open(FieldsFile);
+    if (!inp.good()) {
+        throw CExpc("cannot open file %s", FieldsFile.c_str());
     }
-    catch (...) {
-        //printf ("errror!!!\n");
-        m_LastError = std::string("Error in field ") + std::string(Fields[FieldNo].FieldStr);
-        return false;
-    };
-
-
+    auto fields = nlohmann::json::parse(inp);
+    for (auto f : fields) {
+        CField F;
+        F.ReadFromJson(f);
+        Fields.emplace_back(F);
+    }
+    
     return BuildFormats(MaxNumDom);
 }
 
-/* todo: use more json serialization
 
-void TItemContainer::WriteFieldsJson() const {
+bool TItemContainer::WriteFields() const {
     auto fields = nlohmann::json::array();
     for (auto f : Fields) {
-        nlohmann::json signats = nlohmann::json::array();
-        for (auto s : f.m_Signats) {
-            nlohmann::json signat = {
-                {"id", s.SignatId},
-                {"order", s.OrderNo},
-                {"format", s.FormatStr},
-                {"name", s.FormatName},
-            };
-            signats.push_back(signat);
-        }
-
-        nlohmann::json field = {
-            {"id", f.FieldId},
-            {"name", f.FieldStr},
-            {"type", f.TypeRes},
-            {"actant", f.IsApplicToActant},
-            {"order", f.OrderId},
-            {"signats", signats},
-        };
-        fields.push_back(field);
-
+        fields.push_back(f.GetFieldJson());
     };
-    std::ofstream outf(FieldsFile);
+
+    std::ofstream outf(MakeFName(FieldsFile, "json"));
     outf << fields.dump(4);
     outf.close();
-
-};
-*/
-bool TItemContainer::WriteFields() const {
-    FILE *fp = fopen(FieldsFile.c_str(), "wb");
-    fprintf(fp, "%lu\n", Fields.size());
-    for (size_t i = 0; i < Fields.size(); i++) {
-        fprintf(fp, "%i;%zu;%s;%c;%s;%i\n",
-                Fields[i].FieldId,
-                Fields[i].m_Signats.size(),
-                Fields[i].FieldStr,
-                Fields[i].TypeRes,
-                Fields[i].IsApplicToActant ? "TRUE" : "FALSE",
-                Fields[i].OrderId);
-        for (size_t k = 0; k < Fields[i].m_Signats.size(); k++)
-            fprintf(fp, "%i;%i;%s;%s\n", Fields[i].m_Signats[k].SignatId, Fields[i].m_Signats[k].OrderNo,
-                    Fields[i].m_Signats[k].FormatStr, Fields[i].m_Signats[k].FormatName);
-        fprintf(fp, "\n");
-    };
-    fclose(fp);
     return true;
+    
 };
 
 
@@ -540,8 +444,8 @@ bool TItemContainer::BuildFormats(BYTE MaxNumDom) {
             };
 
         for (k = 0; k < Fields[FieldNo].m_Signats.size(); k++)
-            if (!BuildOneFieldFormat(Fields[FieldNo].m_Signats[k], Fields[FieldNo].m_Signats[k].FormatStr,
-                                     Fields[FieldNo].FieldStr, MaxNumDom))
+            if (!BuildOneFieldFormat(Fields[FieldNo].m_Signats[k], Fields[FieldNo].m_Signats[k].FormatStr.c_str(),
+                                     Fields[FieldNo].FieldStr.c_str(), MaxNumDom))
                 return false;;
 
         if (!UpdateSignatsOfTheFieldInCorteges(FieldNo, Signats)) {
@@ -558,7 +462,7 @@ bool TItemContainer::BuildFormats(BYTE MaxNumDom) {
 };
 
 
-bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, BYTE MaxNumDom) {
+bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, const char *Frmt, const char *Name, BYTE MaxNumDom) {
     char DomStr[100];
     char _Frmt[255];
     strcpy(_Frmt, Frmt);

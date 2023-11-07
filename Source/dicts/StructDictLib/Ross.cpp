@@ -177,7 +177,7 @@ void TRoss::LoadOnlyConstants(const char* _RossPath)
 	MakePathAndCheck(RossPath, "domitems.bin", DomItemsTextFile);
 	MakePathAndCheck(RossPath, "items.bin", ItemsFile);
 	MakePathAndCheck(RossPath, "domains.json", DomensFile);
-	MakePathAndCheck(RossPath, "fields.bin", FieldsFile);
+	MakePathAndCheck(RossPath, "fields.json", FieldsFile);
 
 	if (!ReadConfig())
 	{
@@ -1469,11 +1469,6 @@ bool CDictionary::AddField(std::string FieldStr)
 {
 	if (FieldStr.empty())
 		FieldStr = _R("_");
-	if (FieldStr.length() + 1 >= FieldStrLen)
-	{
-		ErrorMessage("Field is too long");
-		return false;
-	};
 	int ItemNo;
 	if (!TRoss::InsertDomItem(FieldStr.c_str(), FieldDomNo, ItemNo))
 	{
@@ -1482,8 +1477,7 @@ bool CDictionary::AddField(std::string FieldStr)
 	};
 
 	CField T;
-	T.FieldId = 0;
-	strcpy(T.FieldStr, FieldStr.c_str());
+	T.FieldStr = FieldStr;
 	Fields.push_back(T);
 	return true;
 }

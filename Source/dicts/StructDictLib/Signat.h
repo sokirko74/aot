@@ -2,10 +2,7 @@
 // ==========  Dialing Structural Dictionary (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 
-
-#ifndef __SIGNAT_H_
-#define __SIGNAT_H_
-
+#pragma once
 
 #include "morph_dict/common/utilit.h"
 
@@ -23,8 +20,7 @@ struct TSignatItem  {
 		m_DomNo = 0;
 	};
 };
-const size_t MaxFormatNameLen = 254;
-const size_t MaxFormatStrLen = 254;
+
 struct CSignat 
 {
    char   sFrmt[512];
@@ -32,9 +28,8 @@ struct CSignat
    std::vector<TSignatItem>  DomsWithDelims;  
    std::vector<BYTE>  Doms; 
    
-   char   FormatStr[255];
-   char   FormatName[255];
-   int    SignatId;
+   std::string  FormatStr;
+   std::string   FormatName;
    int    OrderNo;
 
    bool operator==(const CSignat& X) const
@@ -45,7 +40,3 @@ struct CSignat
 
 };
 
-
-
-
-#endif //__SIGNAT_H_

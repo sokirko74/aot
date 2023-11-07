@@ -1,0 +1,404 @@
+[
+    {
+        "category": 77,
+        "dom_ident": "D_",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_RLE",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_GRAFEM_DESC",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_COLON",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_LF",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_GRAM_FUNCT",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_OPN",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_SEM_REL",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_NUMBERS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_COMMA",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_ENCYC_FUNC",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_THES",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_SF",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_COLLOC",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_CAT",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_ENGL",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_CLS",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_FIELDS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_SYN_REL",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_PART_OF_SPEECH",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_GROUPS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_CASE",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_PREP_COLLOC",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_PLUS",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_DASH",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_ACTANTS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_HYPHEN",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_PERCENT",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_DOMAIN",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_RESHETKA",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_FULL_STOP",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_GENDER",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_CONJ",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_BOOL",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_ABBR",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_NUMBER",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_PREP",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 67,
+        "dom_ident": "D_1",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 79,
+        "dom_ident": "D_START_PHR",
+        "is_delim": false,
+        "is_free": false,
+        "parts": [
+            "D_CONJ",
+            "D_PREP",
+            "D_PREP_COLLOC",
+            "D_WORDFORM"
+        ]
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_WORDFORM",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_UNDERLINE",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 67,
+        "dom_ident": "D_CASE_NUMBER",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_VP_SPECIF",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 79,
+        "dom_ident": "D_PHR_SPECIF",
+        "is_delim": false,
+        "is_free": false,
+        "parts": [
+            "D_CASE",
+            "D_CASE_MUA",
+            "D_CASE_NUMBER",
+            "D_CASE_POS",
+            "D_GRAFEM_DESC",
+            "D_GROUPS",
+            "D_PART_OF_SPEECH",
+            "D_VP_SPECIF"
+        ]
+    },
+    {
+        "category": 79,
+        "dom_ident": "D_SYN_FUNCT",
+        "is_delim": false,
+        "is_free": false,
+        "parts": [
+            "D_GROUPS",
+            "D_SYN_REL"
+        ]
+    },
+    {
+        "category": 67,
+        "dom_ident": "D_GF_MAIN",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 79,
+        "dom_ident": "D_CASE_PLUS",
+        "is_delim": false,
+        "is_free": false,
+        "parts": [
+            "D_CASE",
+            "D_CASE_MUA",
+            "D_CASE_NUMBER",
+            "D_CASE_POS"
+        ]
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_TYPE",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_EXCL_MARK",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 79,
+        "dom_ident": "D_RLE_PLUS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_MUA",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 79,
+        "dom_ident": "D_CONJ_PLUS",
+        "is_delim": false,
+        "is_free": false,
+        "parts": [
+            "D_CONJ",
+            "D_GRAFEM_DESC"
+        ]
+    },
+    {
+        "category": 67,
+        "dom_ident": "D_CASE_MUA",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 67,
+        "dom_ident": "D_CASE_POS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_EXM",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_CONDIT",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_INFERENCE",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_SLASH",
+        "is_delim": true,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_SYN_ACTANTS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_POSITION",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_GRAMMEMS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_TITLE",
+        "is_delim": false,
+        "is_free": true
+    }
+]

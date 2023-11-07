@@ -53,6 +53,18 @@ void import_dict(std::string fileName, std::string folder) {
 	Dict.Save();
 }
 
+void build_fields_json(std::string fileName) {
+	CDictionary Dict;
+	auto folder = GetParentPath(fileName);
+	//MakePathAndCheck(folder, "config.txt", Dict.ConfigFile);
+	//MakePathAndCheck(folder, "fields.bin", Dict.FieldsFile);
+
+
+	Dict.ReadConfig();
+	Dict.BuildFields(Dict.m_MaxNumDom);
+	//Dict.WriteFieldsJson();
+
+}
 
 int main(int argc, char** argv)
 {
@@ -61,6 +73,7 @@ int main(int argc, char** argv)
 	}
 
 	std::string action = argv[1];
+	printf("action = %s", action.c_str());
 
 	try {
 		if (action == "FromTxt")
@@ -71,9 +84,10 @@ int main(int argc, char** argv)
 		{
 			export_dict(argv[2], argv[3]);
 		}
-		//else if (action == "domain_json") {
-		//	build_domains_json(argv[2]);
-		//}
+		else if (action == "build_fields_json") {
+			printf("build_fields_json\n");
+			build_fields_json(argv[2]);
+		}
 		else {
 			PrintUsage();
 			return -1;

@@ -107,9 +107,8 @@ public :
 	bool		ClearFields ();
 	bool		BuildFields(BYTE MaxNumDom);
 	bool		WriteFields() const;
-	void		WriteFieldsJson() const;
 	bool		BuildFormats(BYTE MaxNumDom);
-	bool		BuildOneFieldFormat (CSignat& Sgn, char* Frmt, char* Name, BYTE MaxNumDom);
+	bool		BuildOneFieldFormat (CSignat& Sgn, const char* Frmt, const char* Name, BYTE MaxNumDom);
 	virtual bool	UpdateSignatsOfTheFieldInCorteges (BYTE FieldNo, std::vector<CSignat>& Signats)= 0; 
 	bool		WriteDomens () const;
 	size_t		GetDomItemsSize() const {return m_DomItems.size();};

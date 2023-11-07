@@ -1,0 +1,280 @@
+[
+    {
+        "actant": false,
+        "name": "EXM",
+        "order": 10,
+        "signats": [
+            {
+                "format": "D_EXM",
+                "name": "_ИЛЛ",
+                "order": 10
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "CAT",
+        "order": 80,
+        "signats": [
+            {
+                "format": "D_CAT",
+                "name": "_КА",
+                "order": 0
+            }
+        ],
+        "type": 70
+    },
+    {
+        "actant": true,
+        "name": "GF",
+        "order": 100,
+        "signats": [
+            {
+                "format": "D_BOOL ",
+                "name": "---",
+                "order": 5
+            },
+            {
+                "format": "D_FIELDS D_OPN D_NUMBERS D_CLS",
+                "name": "Д_ПОЛЕАКТАНТ",
+                "order": 8
+            },
+            {
+                "format": "D_FIELDS D_OPN D_CLS",
+                "name": "Д_ПОЛЕ",
+                "order": 9
+            },
+            {
+                "format": "D_GF_MAIN",
+                "name": "Главное слово",
+                "order": 10
+            },
+            {
+                "format": "D_PART_OF_SPEECH",
+                "name": "Роль",
+                "order": 20
+            },
+            {
+                "format": "D_SYN_REL D_COLON D_1",
+                "name": "Роль+Словоформа",
+                "order": 50
+            },
+            {
+                "format": "D_SYN_REL D_COLON D_PHR_SPECIF",
+                "name": "Роль+CЛСЧ",
+                "order": 60
+            },
+            {
+                "format": "D_GRAFEM_DESC",
+                "name": "Полож+Уточн",
+                "order": 80
+            },
+            {
+                "format": "D_GROUPS",
+                "name": "Полож",
+                "order": 90
+            },
+            {
+                "format": "D_PART_OF_SPEECH D_GRAMMEMS",
+                "name": "Роль+УточнГруппа",
+                "order": 120
+            },
+            {
+                "format": "D_1 ",
+                "name": "---",
+                "order": 130
+            }
+        ],
+        "type": 70
+    },
+    {
+        "actant": false,
+        "name": "RESTR",
+        "order": 160,
+        "signats": [
+            {
+                "format": "D_NUMBER D_EXCL_MARK",
+                "name": "ОГРН_1",
+                "order": 0
+            }
+        ],
+        "type": 79
+    },
+    {
+        "actant": true,
+        "name": "SF",
+        "order": 170,
+        "signats": [
+            {
+                "format": "D_FIELDS D_OPN D_NUMBERS D_CLS",
+                "name": "ПОЛЕ_АКТАНТА",
+                "order": 8
+            },
+            {
+                "format": "D_FIELDS D_OPN D_CLS",
+                "name": "ПОЛЕ",
+                "order": 9
+            },
+            {
+                "format": "D_SEM_REL",
+                "name": "СО",
+                "order": 10
+            },
+            {
+                "format": "D_SF",
+                "name": "СХ",
+                "order": 20
+            },
+            {
+                "format": "D_LF D_OPN D_RLE D_NUMBERS D_CLS",
+                "name": "ЛФ+ЛЕ+ЗНАЧ",
+                "order": 30
+            },
+            {
+                "format": "D_LF D_OPN D_RLE D_CLS",
+                "name": "ЛФ+ЛЕ",
+                "order": 40
+            },
+            {
+                "format": "D_LF",
+                "name": "ЛФ",
+                "order": 50
+            }
+        ],
+        "type": 70
+    },
+    {
+        "actant": false,
+        "name": "VAL",
+        "order": 190,
+        "signats": [
+            {
+                "format": "D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS",
+                "name": "ВАЛ_1",
+                "order": 0
+            },
+            {
+                "format": "D_SEM_REL D_OPN  D_ACTANTS D_COMMA D_ACTANTS D_CLS",
+                "name": "ВАЛ_2",
+                "order": 1
+            },
+            {
+                "format": "D_EXCL_MARK D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS ",
+                "name": "---",
+                "order": 2
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "AUX",
+        "order": 3100,
+        "signats": [
+            {
+                "format": "D_SEM_REL D_OPN D_ACTANTS D_COMMA D_ACTANTS D_CLS",
+                "name": "_ДОП",
+                "order": 1
+            },
+            {
+                "format": "D_SEM_REL D_OPN D_ACTANTS D_COMMA D_RLE_PLUS D_CLS",
+                "name": "_ДОП_СЛОВО",
+                "order": 2
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "LF",
+        "order": 3110,
+        "signats": [
+            {
+                "format": "D_LF D_COLON D_ENGL ",
+                "name": "---",
+                "order": 8
+            },
+            {
+                "format": "D_LF D_COLON D_ENGL D_1 ",
+                "name": "---",
+                "order": 9
+            },
+            {
+                "format": "D_LF  D_COLON D_PREP D_PLUS D_CASE",
+                "name": "Предлог+падеж",
+                "order": 10
+            },
+            {
+                "format": "D_LF  D_COLON D_RLE D_1",
+                "name": "ЛЕ+предлог+падеж",
+                "order": 11
+            },
+            {
+                "format": "D_LF  D_COLON D_RLE D_CASE",
+                "name": "ЛЕ+падеж",
+                "order": 12
+            },
+            {
+                "format": "D_LF D_COLON D_RLE D_NUMBERS",
+                "name": "Двоеточие+ЛЕ+Знач",
+                "order": 20
+            },
+            {
+                "format": "D_LF D_COLON D_RLE_PLUS",
+                "name": "Двоеточие+ЛЕ",
+                "order": 30
+            },
+            {
+                "format": "D_LF D_DASH D_RLE_PLUS",
+                "name": "Черта+ЛЕ",
+                "order": 40
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": true,
+        "name": "LEX",
+        "order": 240,
+        "signats": [
+            {
+                "format": "D_TITLE ",
+                "name": "ЗГЛ",
+                "order": 10
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "DETERM",
+        "order": 0,
+        "signats": [
+            {
+                "format": "D_ENGL ",
+                "name": "Артикль",
+                "order": 1
+            },
+            {
+                "format": "D_BOOL ",
+                "name": "no_name",
+                "order": 2
+            }
+        ],
+        "type": 79
+    },
+    {
+        "actant": false,
+        "name": "COMM",
+        "order": 0,
+        "signats": [
+            {
+                "format": "D_EXM",
+                "name": "--",
+                "order": 1
+            }
+        ],
+        "type": 77
+    }
+]

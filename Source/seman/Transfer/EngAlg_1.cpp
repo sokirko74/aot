@@ -293,7 +293,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 			TCortege C = GetCortege(GetRoss(type),j);
 			if (C.m_BracketLeafId > 0) continue;
 			if (C.m_LeafId > 0) continue;
-			std::string field = (const char*)GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
+			std::string field = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
 			if(	field == "PREP" )
 			{
 				vec.push_back(C);

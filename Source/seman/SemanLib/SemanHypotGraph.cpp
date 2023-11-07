@@ -325,8 +325,7 @@ void CRusSemStructure::InitPOs(long ClauseNo) {
                 if (UnitNo != ErrUnitNo)
                     if (!pRoss->IsEmptyArticle(UnitNo))
                         for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitEndPos(UnitNo); i++)
-                            if ((const char *) pRoss->Fields[pRoss->GetCortegeFieldNo(i)].FieldStr ==
-                                std::string("DOMAIN")) {
+                            if (pRoss->Fields[pRoss->GetCortegeFieldNo(i)].FieldStr == "DOMAIN") {
                                 TCortege C = GetCortege(pRoss, i);
                                 if (C.m_DomItemNos[0] == -1) continue;
                                 std::string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);

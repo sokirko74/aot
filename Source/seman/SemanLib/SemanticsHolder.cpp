@@ -87,7 +87,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 		 for (size_t i = GetRoss(type)->GetUnitStartPos(UnitNo); i<= GetRoss(type)->GetUnitEndPos(UnitNo); i++)
 		 {
 			TCortege C = GetCortege(GetRoss(type), i);
-			std::string FieldStr = (const char*)GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
+			std::string FieldStr = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
 			if  ( FieldStr == "TYP" ) 
 			{
 				std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
@@ -274,7 +274,7 @@ bool CSemanticsHolder::InitTimeUnits()
 	  //незаполненное поле?
 	  if (C.m_DomItemNos[0] == -1) continue;
 	  // строю массив U.m_Places по полю CONTENT
-	  std::string FieldStr = (const char*)GetRoss(TimeRoss)->Fields[C.m_FieldNo].FieldStr;
+	  std::string FieldStr = GetRoss(TimeRoss)->Fields[C.m_FieldNo].FieldStr;
       if (    (FieldStr == "CONTENT") 
 	       && (C.m_LeafId == 0) 
 		   && (C.m_BracketLeafId == 0) 
@@ -922,7 +922,7 @@ bool CSemanticsHolder::BuildColloc (std::string ContentFieldStr, int CollocUnitN
 		  //незаполненное поле?
 		  if (Cort.m_DomItemNos[0] == -1) continue;
 		  // строю массив U.m_Places по полю CONTENT
-		  std::string FieldStr = (const char*)GetRoss(CollocRoss)->Fields[Cort.m_FieldNo].FieldStr;
+		  std::string FieldStr = GetRoss(CollocRoss)->Fields[Cort.m_FieldNo].FieldStr;
 
 		  // инициализирую перечень всех необходимых синтаксических отношений их поля SYNREP
 		  if (    (FieldStr == "SYNR") 
