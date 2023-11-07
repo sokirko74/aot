@@ -53,39 +53,6 @@ char CDomen::GetDomainSource() const {
     return Source;
 }
 
- bool CDomen::ReadFromStr(TItemContainer* parent, BYTE domNO, const std::string& line) {
-    StringTokenizer tok(line.c_str(), ";");
-    tok();
-    DomId = atoi(tok.val());
-    tok();
-    ItemsCount = atoi(tok.val());
-    tok();
-    DropDownCount = atoi(tok.val());
-    tok();
-    DomStr = tok.val();
-    assert (!DomStr.empty());
-
-    if (!tok()) return false;
-    if (strlen(tok.val()) == 0) return false;
-    Source = tok.val()[0];
-    tok();
-    IsDelim = (atoi(tok.val()) == -1) ? true : false;
-    tok();
-    IsFree = (atoi(tok.val()) == -1) ? true : false;
-    tok();
-    Color = atoi(tok.val());
-
-    PartsSize = 0;
-    // может быть равен нулю
-    DomainFormat[0] = 0;
-    if (Source == dsExpres) {
-        tok();
-        strcpy(DomainFormat, tok.val());
-    }
-    m_pParent = parent;
-    m_DomNo = domNO;
-    return true;
-}
 
 void CDomen::MakeFree() {
     free(m_DomainItemsBuffer);
@@ -93,19 +60,7 @@ void CDomen::MakeFree() {
     m_bFreed = true;
 }
 
-void CDomen::WriteDomainToStream(FILE* fp) const {
-    fprintf(fp, "%i;%i;%i;%s;%c;%i;%i;%i;%s\n",
-            DomId,
-            ItemsCount,
-            DropDownCount,
-            DomStr.c_str(),
-            Source,
-            IsDelim ? -1 : 0,
-            IsFree ? -1 : 0,
-            Color,
-            DomainFormat[0] ? DomainFormat : "");
 
-}
 nlohmann::json CDomen::WriteToJson()  const {
     nlohmann::json js;
     js["dom_ident"] = DomStr;

@@ -146,20 +146,11 @@ void TItemContainer::UpdateConstDomens() {
     for (size_t i = 0; i < m_Domens.size(); i++) {
         CDomen &D = m_Domens[i];
 
-        D.PartsSize = 0;
-
         if (i == EmptyDomNo)
             for (int k = D.m_StartDomItem; k < D.m_EndDomItem; k++)
                 if (m_DomItems[k].GetItemStrLen() > 0)
                     WildCardDomItemNo = k;
 
-        if (D.GetDomainSource() == dsUnion)
-            for (int k = D.m_StartDomItem; k < D.m_EndDomItem; k++) {
-                BYTE DomNo = GetDomenNoByDomStr(GetDomItemStr(m_DomItems[k]));
-                D.Parts[D.PartsSize++] = DomNo;
-                assert (D.PartsSize < MaxDomensUnionSize);
-                assert(D.GetParts()[D.PartsSize - 1] == DomNo);
-            }
     };
 
 };
@@ -568,7 +559,7 @@ bool TItemContainer::BuildFormats(BYTE MaxNumDom) {
 
 
 bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, char *Frmt, char *Name, BYTE MaxNumDom) {
-    char DomStr[DomStrSize];
+    char DomStr[100];
     char _Frmt[255];
     strcpy(_Frmt, Frmt);
     Sgn.sFrmt[0] = 0;

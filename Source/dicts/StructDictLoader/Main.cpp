@@ -53,38 +53,7 @@ void import_dict(std::string fileName, std::string folder) {
 	Dict.Save();
 }
 
-/*
-void build_domains_json(std::string fileName) {
-	CDictionary Dict;
-	auto folder = GetParentPath(fileName);
 
-	if (!Dict.Load(folder.c_str()) || !Dict.ReadUnitComments())
-	{
-		throw CExpc("Cannot load dictionary from %s", folder.c_str());
-	};
-
-	auto js_path  = MakePath(folder, "domains.json");
-
-	std::ofstream outf(js_path);
-	if (!outf.is_open())
-	{
-		throw CExpc("Cannot write to %s", js_path.c_str());
-	};
-	auto domains = nlohmann::json::array();
-	for (size_t i = 0; i < Dict.m_Domens.size(); ++i) {
-		for (size_t k = 0; k < Dict.m_Domens[i].PartsSize; ++k) {
-			auto dom_str = Dict.m_Domens[Dict.m_Domens[i].Parts[k]].GetDomStr();
-			std::cout << "part " << dom_str << "\n";
-			Dict.m_Domens[i].DomainParts.push_back(dom_str);
-		}
-		auto js = Dict.m_Domens[i].WriteToJson();
-		domains.push_back(js);
-	}
-	outf << domains.dump(4);
-
-}
-
-*/
 int main(int argc, char** argv)
 {
 	if (argc != 4) {

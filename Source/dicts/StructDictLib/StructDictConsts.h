@@ -3,8 +3,7 @@
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 #pragma once 
 
-const	uint32_t	MaxDomensUnionSize = 20;
-	
+
 const	uint32_t	AuthorNameSize = 20;
 // максимальное число актантов 
 const	BYTE	MaxNumAct = 7;
