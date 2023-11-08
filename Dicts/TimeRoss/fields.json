@@ -6,8 +6,7 @@
         "signats": [
             {
                 "format": "D_EXM",
-                "name": "_ИЛЛ",
-                "order": 10
+                "signat_id": 0
             }
         ],
         "type": 77
@@ -19,8 +18,7 @@
         "signats": [
             {
                 "format": "D_CAT",
-                "name": "_КА",
-                "order": 0
+                "signat_id": 0
             }
         ],
         "type": 70
@@ -32,48 +30,39 @@
         "signats": [
             {
                 "format": "D_FIELDS D_OPN D_NUMBERS D_CLS",
-                "name": "Д_ПОЛЕАКТАНТ",
-                "order": 8
+                "signat_id": 0
             },
             {
                 "format": "D_FIELDS D_OPN D_CLS",
-                "name": "Д_ПОЛЕ",
-                "order": 9
+                "signat_id": 1
             },
             {
                 "format": "D_GF_MAIN",
-                "name": "Главное слово",
-                "order": 10
+                "signat_id": 2
             },
             {
                 "format": "D_PART_OF_SPEECH",
-                "name": "Роль",
-                "order": 20
+                "signat_id": 3
             },
             {
                 "format": "D_GRAMMEMS+",
-                "name": "11",
-                "order": 30
+                "signat_id": 4
             },
             {
                 "format": "D_PART_OF_SPEECH D_GRAMMEMS+",
-                "name": "12",
-                "order": 40
+                "signat_id": 5
             },
             {
                 "format": "D_GRAFEM_DESC",
-                "name": "Полож+Уточн",
-                "order": 80
+                "signat_id": 6
             },
             {
                 "format": "D_SYN_REL D_COLON D_GROUPS",
-                "name": "Полож",
-                "order": 90
+                "signat_id": 7
             },
             {
                 "format": "D_POSITION D_SYN_REL D_COLON D_GROUPS",
-                "name": "ПОЛОж",
-                "order": 100
+                "signat_id": 8
             }
         ],
         "type": 70
@@ -85,38 +74,31 @@
         "signats": [
             {
                 "format": "D_FIELDS D_OPN D_NUMBERS D_CLS",
-                "name": "ПОЛЕ_АКТАНТА",
-                "order": 8
+                "signat_id": 0
             },
             {
                 "format": "D_FIELDS D_OPN D_CLS",
-                "name": "ПОЛЕ",
-                "order": 9
+                "signat_id": 1
             },
             {
                 "format": "D_SEM_REL",
-                "name": "СО",
-                "order": 10
+                "signat_id": 2
             },
             {
                 "format": "D_SF",
-                "name": "СХ",
-                "order": 20
+                "signat_id": 3
             },
             {
                 "format": "D_LF D_OPN D_RLE D_NUMBERS D_CLS",
-                "name": "ЛФ+ЛЕ+ЗНАЧ",
-                "order": 30
+                "signat_id": 4
             },
             {
                 "format": "D_LF D_OPN D_RLE D_CLS",
-                "name": "ЛФ+ЛЕ",
-                "order": 40
+                "signat_id": 5
             },
             {
                 "format": "D_LF",
-                "name": "ЛФ",
-                "order": 50
+                "signat_id": 6
             }
         ],
         "type": 70
@@ -128,18 +110,15 @@
         "signats": [
             {
                 "format": "D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS",
-                "name": "ВАЛ_1",
-                "order": 0
+                "signat_id": 0
             },
             {
                 "format": "D_SEM_REL D_OPN  D_ACTANTS D_COMMA D_ACTANTS D_CLS",
-                "name": "ВАЛ_2",
-                "order": 1
+                "signat_id": 1
             },
             {
                 "format": "D_SEM_REL D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS",
-                "name": "ВАЛ_3",
-                "order": 2
+                "signat_id": 2
             }
         ],
         "type": 77
@@ -151,13 +130,11 @@
         "signats": [
             {
                 "format": "D_SEM_REL D_OPN D_ACTANTS D_COMMA D_ACTANTS D_CLS",
-                "name": "_ДОП",
-                "order": 1
+                "signat_id": 0
             },
             {
                 "format": "D_SEM_REL D_OPN D_ACTANTS D_COMMA D_RLE_PLUS D_CLS",
-                "name": "_ДОП_СЛОВО",
-                "order": 2
+                "signat_id": 1
             }
         ],
         "type": 77
@@ -169,33 +146,27 @@
         "signats": [
             {
                 "format": "D_LF  D_COLON D_PREP D_PLUS D_CASE",
-                "name": "Предлог+падеж",
-                "order": 10
+                "signat_id": 0
             },
             {
                 "format": "D_LF  D_COLON D_RLE D_1",
-                "name": "ЛЕ+предлог+падеж",
-                "order": 11
+                "signat_id": 1
             },
             {
                 "format": "D_LF  D_COLON D_RLE D_CASE",
-                "name": "ЛЕ+падеж",
-                "order": 12
+                "signat_id": 2
             },
             {
                 "format": "D_LF D_COLON D_RLE D_NUMBERS",
-                "name": "Двоеточие+ЛЕ+Знач",
-                "order": 20
+                "signat_id": 3
             },
             {
                 "format": "D_LF D_COLON D_RLE_PLUS",
-                "name": "Двоеточие+ЛЕ",
-                "order": 30
+                "signat_id": 4
             },
             {
                 "format": "D_LF D_DASH D_RLE_PLUS",
-                "name": "Черта+ЛЕ",
-                "order": 40
+                "signat_id": 5
             }
         ],
         "type": 77
@@ -207,13 +178,11 @@
         "signats": [
             {
                 "format": "D_TITLE D_NUMBERS ",
-                "name": "ОДНО_СЛОВО",
-                "order": 0
+                "signat_id": 0
             },
             {
                 "format": "D_CONTAIN",
-                "name": "АНГЛ",
-                "order": 1
+                "signat_id": 1
             }
         ],
         "type": 70
@@ -225,18 +194,15 @@
         "signats": [
             {
                 "format": "D_1",
-                "name": "ПРЕДЛОГ",
-                "order": 1
+                "signat_id": 0
             },
             {
                 "format": "D_RLE_PLUS D_SLASH D_CONDIT",
-                "name": "ПРЕДЛОГ_УСЛОВИЕ",
-                "order": 2
+                "signat_id": 1
             },
             {
                 "format": "D_RLE_PLUS",
-                "name": "ТЕКСТ",
-                "order": 10
+                "signat_id": 2
             }
         ],
         "type": 77
@@ -248,13 +214,11 @@
         "signats": [
             {
                 "format": "D_NUMBERS ",
-                "name": "ЛЕ_ПЛЮС",
-                "order": 10
+                "signat_id": 0
             },
             {
                 "format": "D_TITLE ",
-                "name": "---",
-                "order": 20
+                "signat_id": 1
             }
         ],
         "type": 70
@@ -266,8 +230,7 @@
         "signats": [
             {
                 "format": "D_EXM",
-                "name": "КОММ",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 77
@@ -279,8 +242,7 @@
         "signats": [
             {
                 "format": "D_NUMBERS",
-                "name": "АЛГОРИТМ",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 77
@@ -292,8 +254,7 @@
         "signats": [
             {
                 "format": "D_GROUPS D_OPN D_NUMBERS D_COMMA D_NUMBERS D_CLS",
-                "name": "СИНП",
-                "order": 10
+                "signat_id": 0
             }
         ],
         "type": 77
@@ -305,8 +266,7 @@
         "signats": [
             {
                 "format": "D_ENGL",
-                "name": "АНГ",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 70
@@ -318,13 +278,11 @@
         "signats": [
             {
                 "format": "D_GRAMMEMS D_BOOL D_POINTER  D_ENGL_TENSE",
-                "name": "__",
-                "order": 1
+                "signat_id": 0
             },
             {
                 "format": "D_BOOL",
-                "name": "__",
-                "order": 2
+                "signat_id": 1
             }
         ],
         "type": 77
@@ -336,8 +294,7 @@
         "signats": [
             {
                 "format": "D_1",
-                "name": "___",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 70
@@ -349,8 +306,7 @@
         "signats": [
             {
                 "format": "D_NUMBERS",
-                "name": "__",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 79
@@ -362,8 +318,7 @@
         "signats": [
             {
                 "format": "D_GRAM_FUNCT D_OPN D_RLE_PLUS D_CLS",
-                "name": "ПРОИЗВ_1",
-                "order": 0
+                "signat_id": 0
             }
         ],
         "type": 77
@@ -375,8 +330,7 @@
         "signats": [
             {
                 "format": "D_CONTAIN",
-                "name": "__",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 79
@@ -388,8 +342,7 @@
         "signats": [
             {
                 "format": "D_ENGL",
-                "name": "_",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 70
@@ -401,8 +354,7 @@
         "signats": [
             {
                 "format": "D_ENGL",
-                "name": "__",
-                "order": 10
+                "signat_id": 0
             }
         ],
         "type": 77
@@ -414,13 +366,11 @@
         "signats": [
             {
                 "format": "D_ENGL_TENSE",
-                "name": "__",
-                "order": 1
+                "signat_id": 0
             },
             {
                 "format": "D_TYPE ",
-                "name": "свобод-жестк",
-                "order": 2
+                "signat_id": 1
             }
         ],
         "type": 79
@@ -432,13 +382,11 @@
         "signats": [
             {
                 "format": "D_PART_OF_SPEECH",
-                "name": "АГХ",
-                "order": 1
+                "signat_id": 0
             },
             {
                 "format": "D_GRAFEM_DESC",
-                "name": "__",
-                "order": 2
+                "signat_id": 1
             }
         ],
         "type": 77
@@ -450,8 +398,7 @@
         "signats": [
             {
                 "format": "D_GRAMMEMS D_BOOL D_POINTER D_ENGL_TENSE ",
-                "name": "русаврем",
-                "order": 1
+                "signat_id": 0
             }
         ],
         "type": 77
