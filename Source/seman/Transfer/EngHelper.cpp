@@ -8,7 +8,7 @@ std::string g_PersPronouns[g_PersPronounsCount] = {_R("Я"),_R("ТЫ"),_R("ОН"
 
 bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const
 {
-	const CSignat& Signat = GetRoss(DictType)->Fields[cortege.m_FieldNo].m_Signats[cortege.GetSignatNo()];
+	const CSignat& Signat = GetRoss(DictType)->GetSignat(cortege);
 	if( Signat.DomsWithDelims.size() != domens.size() )
 		return false;
 

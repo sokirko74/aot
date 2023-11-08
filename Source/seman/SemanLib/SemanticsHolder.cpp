@@ -86,11 +86,11 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 	  {
 		 for (size_t i = GetRoss(type)->GetUnitStartPos(UnitNo); i<= GetRoss(type)->GetUnitEndPos(UnitNo); i++)
 		 {
-			TCortege C = GetCortege(GetRoss(type), i);
+			TCortege C = GetCortegeCopy(GetRoss(type), i);
 			std::string FieldStr = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
 			if  ( FieldStr == "TYP" ) 
 			{
-				std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+				std::string S = WriteToString(GetRoss(type),  C);
 				Trim(S);
 				if (S == _R("ДОБАВЛЕНИЕ"))
 					A.m_Type = atAdditionArticle;
@@ -110,14 +110,14 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 				if  (FieldStr == "GF" ) 
 				{
 				  CGramInfo I;
-				  std::string GramFet = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+				  std::string GramFet = WriteToString(GetRoss(type),  C);
 				  GetCustomGrammems(GramFet, I.m_Grammems, I.m_PartOfSpeechMask);
 				  A.m_GramInfos.push_back(I);
 				};
 				
 				if  ( FieldStr == "CLAUSE") 
 				{
-					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type),  C);
 					Trim(S);
 					long  Type =  GetRusGramTab()->GetClauseTypeByName(S.c_str());
 					A.m_ClauseTypes.push_back (Type);
@@ -125,20 +125,20 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 
 				if  ( FieldStr == "CAT" ) 
 				{
-					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type),  C);
 					Trim(S);
 					A.m_SemTypes.push_back(S);
 				};
 				if  ( FieldStr == "SF" ) 
 				{
-					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type),  C);
 					Trim(S);
 					A.m_SemFets.push_back(S);
 				};
 
 				if  ( FieldStr == "LEX" ) 
 				{
-					std::string S = WriteToString(GetRoss(type), (char*)(GetRoss(type)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string S = WriteToString(GetRoss(type),  C);
 					Trim(S);
 					A.m_LexFets.push_back(S);
 				};
@@ -270,7 +270,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		// по словарной статье 
 	for (size_t i = GetRoss(TimeRoss)->GetUnitStartPos(UnitNo); i<= GetRoss(TimeRoss)->GetUnitEndPos(UnitNo); i++)
 	{
-	  TCortege C = GetCortege(GetRoss(TimeRoss), i);
+	  TCortege C = GetCortegeCopy(GetRoss(TimeRoss), i);
 	  //незаполненное поле?
 	  if (C.m_DomItemNos[0] == -1) continue;
 	  // строю массив U.m_Places по полю CONTENT
@@ -421,7 +421,7 @@ bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, std::vector<CEngUni
 			if( RusFieldNo == GetRoss(type)->GetCortegeFieldNo(j) )
 			{
 				CEngUnitNoToRusUnit Item;
-				TCortege C = GetCortege (GetRoss(type), j);
+				TCortege C = GetCortegeCopy (GetRoss(type), j);
 				if( C.m_DomItemNos[0] == -1 )
 					continue;
 
@@ -639,7 +639,7 @@ bool BuildContensField(const CDictionary* Dict, std::vector<CUnitContent>& Vect)
 			if( Dict->Fields[FieldNo].FieldStr == strField )
 			{
 				TCortege cortege;
-				cortege = GetCortege(Dict, i);
+				cortege = GetCortegeCopy(Dict, i);
 				std::string s = (const char*)Dict->GetDomItemStr(cortege.m_DomItemNos[0]); 
 				if (!BuildByFieldContents(s, j, Vect) )
 					return false;
@@ -918,7 +918,7 @@ bool CSemanticsHolder::BuildColloc (std::string ContentFieldStr, int CollocUnitN
 		// по словарной статье 
 		for (size_t j = GetRoss(CollocRoss)->GetUnitStartPos(CollocUnitNo); j <= GetRoss(CollocRoss)->GetUnitEndPos(CollocUnitNo); j++)
 		{
-		  TCortege Cort = GetCortege(GetRoss(CollocRoss), j);
+		  TCortege Cort = GetCortegeCopy(GetRoss(CollocRoss), j);
 		  //незаполненное поле?
 		  if (Cort.m_DomItemNos[0] == -1) continue;
 		  // строю массив U.m_Places по полю CONTENT
@@ -1016,7 +1016,7 @@ bool CSemanticsHolder::BuildCollocs()
 					&&	(GetRoss(CollocRoss)->GetCortegeLeafId(i) == 0) 
 				)
 			{
-				if (!BuildColloc (GetRossHolder(CollocRoss)->GetDomItemStrInner(GetCortege(GetRoss(CollocRoss), i).m_DomItemNos[0]), UnitNo) )
+				if (!BuildColloc (GetRossHolder(CollocRoss)->GetDomItemStrInner(GetCortegeCopy(GetRoss(CollocRoss), i).m_DomItemNos[0]), UnitNo) )
 					return false;
 
 				break;

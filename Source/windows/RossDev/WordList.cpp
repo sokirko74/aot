@@ -6,11 +6,8 @@
 #include "morph_dict/common/utilit.h"
 #include "MainFrm.h"
 #include "ArticleDoc.h"
-#include "FieldList.h"
 #include "PocketForm.h"
-#include "SchemeRossChoicer.h"
 #include "PosChoicer.h"
-#include "ImportForm.h"
 #include "Translations.h"
 #include "NewArticleWizard.h"
 #include "NewTextEntry.h"
@@ -82,7 +79,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_BN_CLICKED(IDC_WORDLIST_ARTICLE_BTN, OnWordlistArticleBtn)
 	ON_COMMAND(IDR_SAVE_ROSS_TO_TXT, OnSaveRossToTxt)
 	ON_COMMAND(ID_SEARCH_BY_ARTICLE, OnSearchByArticle)
-	ON_COMMAND(IDR_SCHEME_ROSS, OnShowScheme)
 	ON_COMMAND(IDR_STATISTIC, OnStatistic)
 	ON_BN_CLICKED(IDC_CHANGE_TITLE, OnChangeTitle)
 	ON_COMMAND(ID_MENUITEM32786, OnComments)
@@ -92,7 +88,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_COMMAND(ID_STATISTIC_FIELD_VALUE, OnStatisticFieldValue)
 	ON_COMMAND(ID_SORT_BY_LEMMA, OnSortByLemma)
 	ON_COMMAND(ID_SORT_BY_DATEANDTIME, OnSortByDateAndTime)
-	ON_COMMAND(ID_MENUITEM32784, OnImport)
 	ON_COMMAND(IDD_APPENDARTICLE, OnArticleAppend)
 	ON_COMMAND(IDR_DEL_ALL_SELECTED, OnDelAllSelected)
 	ON_BN_CLICKED(IDC_SET_AUTHOR, OnSetAuthor)
@@ -106,7 +101,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_NOTIFY(NM_CLICK, IDC_WORDLIST_GRID, OnClickWordlistGrid)
 	ON_COMMAND(IDD_EXPORT_ALL_DICTS, OnExportAllDicts)
 	ON_COMMAND(EMPTY_ALL_DICTS, OnEmptyAllDicts)
-	ON_COMMAND(ID_IMPORT_ALL_DICTS, OnImportAllDicts)
 	ON_COMMAND(ID_DEL_TEXT_DOMENS, OnDelTextDomains)
 	ON_COMMAND(ID_RELOAD, OnReload)
 	ON_WM_LBUTTONUP()
@@ -762,17 +756,6 @@ void CWordList::OnSearchByArticle()
 };
 
 
-void CWordList::OnShowScheme()
-{
-	if (!GlobalPocketAndArticleDocTempalteAreEmpty(GetDocument())) return;
-
-	SchemeRossChoicer dlg(GetDocument());
-	dlg.DoModal();
-	GetDocument()->BuildBasicDomItems();
-
-};
-
-
 struct CStatis {
 	BYTE  DomNo;
 	LONG  ItemNo;
@@ -1147,8 +1130,8 @@ void CWordList::OnStatisticFieldValue()
 
 		CString Q;
 		Q.Format("%-16s %-5s %-30s %-5s %-16i\r\n",
-			(const char*)GetRoss()->Fields[V[i].FieldNo].FieldStr, "|",
-			WriteToString(GetRoss(), (char*)GetRoss()->Fields[FieldNo].m_Signats[V[i].cortege.GetSignatNo()].sFrmt, V[i].cortege).c_str(), "|", V[i].freq);
+			GetRoss()->Fields[V[i].FieldNo].FieldStr.c_str(), "|",
+			WriteToString(GetRoss(), V[i].cortege).c_str(), "|", V[i].freq);
 		S += Q;
 	};
 
@@ -1215,16 +1198,6 @@ void CWordList::UpdateIndex()
 		qsort(&(*(m_Index.begin())), m_Index.size(), sizeof(CIndex), CompareIndex);
 	};
 
-};
-
-
-
-
-void CWordList::OnImport()
-{
-	CImportForm dlg(GetDocument());
-	dlg.DoModal();
-	Update();
 };
 
 
@@ -1449,7 +1422,7 @@ void CWordList::OnGXiStatistics()
 	{
 		CString S;
 		BYTE FieldNo = GxiStatisticVector[j].m_GXi.m_FieldNo;
-		CString CortegeStr = WriteToString(GetRoss(), (char*)GetRoss()->Fields[FieldNo].m_Signats[GxiStatisticVector[j].m_GXi.GetSignatNo()].sFrmt, GxiStatisticVector[j].m_GXi).c_str();
+		CString CortegeStr = WriteToString(GetRoss(), GxiStatisticVector[j].m_GXi).c_str();
 
 		S.Format("%-16s %-5s %-20s %-5s %i ", GxiStatisticVector[j].m_SemRelName, "|", CortegeStr, "|", GxiStatisticVector[j].m_num);
 		for (int k = 0; k < GxiStatisticVector[j].Units.size(); k++)
@@ -1745,37 +1718,6 @@ void CWordList::OnEmptyAllDicts()
 
 };
 
-void CWordList::OnImportAllDicts()
-{
-	if (!UnlockAllDicts()) return;
-	char Folder[1000];
-	FGetDirectory(Folder, this->m_hWnd);
-
-
-	try {
-		CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-		POSITION pos = pRossDocTemplate->GetFirstDocPosition();
-		int RossNo = 0;
-		while (pos)
-		{
-			CDocument* pDoc = pRossDocTemplate->GetNextDoc(pos);
-			POSITION pos1 = pDoc->GetFirstViewPosition();
-			if (pos1 == 0) return;
-
-			CWordList* pView = (CWordList*)pDoc->GetNextView(pos1);
-			CImportForm dlg((CRossDoc*)pDoc);
-			dlg.m_FileName.Format("%s\\ross%i.txt", Folder, RossNo++);
-			if (dlg.DoModal() != IDOK) return;
-			pView->Update();
-		};
-	}
-	catch (...)
-	{
-		AfxMessageBox("An exception occured!");
-	};
-
-
-};
 
 void CWordList::OnDelTextDomains()
 {

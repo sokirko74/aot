@@ -118,7 +118,7 @@ bool CSemPattern::LoadSemFromDict()
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)
 	{
-		TCortege C = GetCortege(Ross,i);
+		TCortege C = GetCortegeCopy(Ross,i);
 
 		if (     (C.m_FieldNo == m_PatternValency.m_RossHolder->SemFetFieldNo) 
 			&& (C.m_LeafId == m_PatternValency.m_LeafId) 
@@ -169,7 +169,7 @@ bool CSemPattern::LoadGramFromDict()
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)
 	{
-		TCortege C = GetCortege(Ross,i);
+		TCortege C = GetCortegeCopy(Ross,i);
 		if	(		(C.m_LeafId != m_PatternValency.m_LeafId) 
 				||	(C.m_BracketLeafId != m_PatternValency.m_BracketLeafId) 
 			)

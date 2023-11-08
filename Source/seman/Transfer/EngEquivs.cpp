@@ -295,7 +295,7 @@ void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, 
 			{
 				long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 				if(	FieldStr == GetRoss(type)->Fields[FieldNo].FieldStr )
-					vectorAgx.push_back(GetCortege(GetRoss(type),i));
+					vectorAgx.push_back(GetCortegeCopy(GetRoss(type),i));
 			}
 }
 

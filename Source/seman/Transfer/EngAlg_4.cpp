@@ -62,7 +62,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 		long FieldNo = GetRoss(Etype)->GetCortegeFieldNo(i);
 		if(	std::string("LF") != GetRoss(Etype)->Fields[FieldNo].FieldStr )
 			continue;
-		cortege = GetCortege(GetRoss(Etype),i);
+		cortege = GetCortegeCopy(GetRoss(Etype),i);
 		if( cortege.m_DomItemNos[0]==-1 )
 			continue;
 		std::string ident = GetRoss(Etype)->GetDomItemStr(cortege.m_DomItemNos[0]);
@@ -186,7 +186,7 @@ bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		if(	std::string("SYNR") == GetRoss(type)->Fields[FieldNo].FieldStr )
-			vecSINO.push_back(GetCortege(GetRoss(type),i));
+			vecSINO.push_back(GetCortegeCopy(GetRoss(type),i));
 	}
 
 	return( vecSINO.size()>0 );
@@ -201,7 +201,7 @@ void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		if(	std::string("PREP") == GetRoss(type)->Fields[FieldNo].FieldStr )
-			vecSPrp.push_back(GetCortege(GetRoss(type),i));
+			vecSPrp.push_back(GetCortegeCopy(GetRoss(type),i));
 	}
 }
 
@@ -214,7 +214,7 @@ void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		if(	std::string("DETERM") == GetRoss(type)->Fields[FieldNo].FieldStr )
-			vecSArt.push_back(GetCortege(GetRoss(type),i));
+			vecSArt.push_back(GetCortegeCopy(GetRoss(type),i));
 	}
 }
 long CEngSemStructure::FindNodeByLeafId (long NodeNo, int LeafId) const
@@ -241,7 +241,7 @@ void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,std::vector<TCortege>
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		std::string tmp = GetRoss(type)->Fields[FieldNo].FieldStr;
 		if(	std::string("GF") == GetRoss(type)->Fields[FieldNo].FieldStr )
-			vecSGxi.push_back(GetCortege(GetRoss(type),i));
+			vecSGxi.push_back(GetCortegeCopy(GetRoss(type),i));
 	}
 }
 
@@ -544,7 +544,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			if (newRels[k].m_SyntacticRelation == "poss")
 			{
 				try{
-				  CTempArticle A;
+				  CTempArticle A(GetRoss(Aoss)->m_MaxNumDom);
 				  A.m_pRoss = const_cast<CDictionary*> (GetRoss(Aoss));
 				  A.ReadFromUtf8String("GF*     = *  NP_poss");
 				  TCortege C = A.GetCortege(0);	

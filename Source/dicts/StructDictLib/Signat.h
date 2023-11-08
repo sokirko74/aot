@@ -6,6 +6,8 @@
 
 #include "morph_dict/common/utilit.h"
 
+class TItemContainer;
+
 struct TSignatItem  {
 	BYTE m_DomNo;
 	bool m_IsMult;
@@ -21,22 +23,21 @@ struct TSignatItem  {
 	};
 };
 
-struct CSignat 
+class  CSignat
 {
-   char   sFrmt[512];
-   char   sFrmtWithotSpaces[512];
-   std::vector<TSignatItem>  DomsWithDelims;  
-   std::vector<BYTE>  Doms; 
+public:
+	// serialized
+	BYTE    SignatId;
+	std::string  FormatStr;
+
+	//runtime
+	std::string   sFrmt;
+	std::string   sFrmtWithotSpaces;
+    std::vector<TSignatItem>  DomsWithDelims;  
+    std::vector<BYTE>  Doms; 
    
-   std::string  FormatStr;
-   std::string   FormatName;
-   int    OrderNo;
-
-   bool operator==(const CSignat& X) const
-			{return     OrderNo == X.OrderNo; }
-
-   bool operator<(const CSignat& X) const
-	 { return   (OrderNo < X.OrderNo); }
-
+   
+    void BuildSignatFormat(const TItemContainer* parent, BYTE MaxNumDom, std::string fieldStr);
+	const char* GetFrmt() const;
 };
 

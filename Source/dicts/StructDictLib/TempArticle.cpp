@@ -3,13 +3,14 @@
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 
 #include "StdRoss.h"
+#include "Ross.h"
 #include "StructDictConsts.h"
 #include "TempArticle.h"
 #include "morph_dict/common/util_classes.h"
 
 
 
-CTempArticle::CTempArticle()
+CTempArticle::CTempArticle (BYTE MaxNumDom):  TCortegeContainer(MaxNumDom)
 {
 	m_pRoss = NULL;
 	m_ReadOnly = false;
@@ -20,7 +21,7 @@ CTempArticle::CTempArticle()
 
 const TCortege10& CTempArticle::GetRossCortege (size_t i) const
 {
-	const TCortege10& C = *m_pRoss->GetCortege(i);
+	const TCortege10& C = *m_pRoss->_GetCortege(i);
 	return C;
 };
 
@@ -32,7 +33,7 @@ size_t CTempArticle::GetCortegesSize ()const
   		else
 				return m_pRoss->m_Units[m_UnitNo].m_LastCortegeNo -  m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo + 1;
 	else
-		return m_Corteges.size();
+		return _GetCortegesSize();
 };
 
 const TCortege10& CTempArticle::GetCortege (size_t i)  const
@@ -40,7 +41,7 @@ const TCortege10& CTempArticle::GetCortege (size_t i)  const
 		if (m_ReadOnly)
 			return GetRossCortege(m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo+i);
 		else
-			return m_Corteges[i];
+			return *_GetCortege(i);
 };
 
 
@@ -86,10 +87,10 @@ bool CTempArticle::AddArticle(const CTempArticle *Article)
 		size_t i=0;
 		for (; i< GetCortegesSize(); i++)
 			if (GetCortege(i).EqualCortege(Article->GetCortege(k), m_pRoss->m_MaxNumDom)  )
-			 break;
+				break;
 
-	        if (i == GetCortegesSize())
-			m_Corteges.push_back(Article->GetCortege(k));
+	    if (i == GetCortegesSize())
+			_AddCortege(Article->GetCortege(k));
 	};
 
 	if (!CheckCortegeVector()) return false;
@@ -156,8 +157,8 @@ bool   CTempArticle::PutCortegeOnTheRigthPosition (const TCortege10& C)
 
        
     // Добавление  к списку значений
-	m_Corteges.insert(m_Corteges.begin()+i, C);
-
+	_InsertCortege(i, C);
+	
 	return true;
 };
 
@@ -377,7 +378,7 @@ for (size_t i= F.StartLine; i <= F.EndLine; i++)
 	if ((C.m_LevelId == 0) &&  (m_pRoss->Fields[F.FieldNo].TypeRes == frFormula))
 			C.m_LevelId = 1; 
 
-	 m_Corteges.push_back(C);
+	_AddCortege(C);
 };
 
 return true;
@@ -400,7 +401,7 @@ bool CTempArticle::CheckCortegeVector ()
 
 
 		size_t k=0;
-		for (; k < m_pRoss->Fields[GetCortege(i).m_FieldNo].m_Signats[GetCortege(i).GetSignatNo()].Doms.size(); k++) 
+		for (; k < m_pRoss->GetSignat(GetCortege(i)).Doms.size(); k++) 
 			if  (GetCortege(i).GetItem(k) == -1)
 			{
 				m_LastError = "Empty field";
@@ -542,38 +543,13 @@ inline bool SplitFldName (std::string& FldName, BYTE& LeafId, BYTE& BracketLeafI
 
 
 
-inline bool IsPartOf (const std::vector<TCortege10>& L1,  const std::vector<TCortege10>& L2, bool UseWildCards, int EmptyDomItemNo, BYTE MaxNumDom)
-{
-  for (size_t i=0; i<L1.size(); i++)
-  {
-	size_t k=0;
-	 
-	for (; k < L2.size(); k++)
-		  if (    (    !UseWildCards
-			        && (L1[i].EqualCortege(L2[k], MaxNumDom)))
-				|| (    UseWildCards
-			         && L1[i].IsEqualWithWildCard(L2[k], EmptyDomItemNo, MaxNumDom)
-				   )
-			 ) 
-			  break;
-
-      if (k == L2.size())
-		  return false;
-  };
-  return true;
-};
-
-inline bool AreEqual (const std::vector<TCortege10>& L1,  const std::vector<TCortege10>& L2, int MaxNumDom)
-{
-	return IsPartOf (L1, L2, false,0, MaxNumDom) && IsPartOf (L2, L1, false, 0, MaxNumDom);
-};
 
 
 void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool ReadOnly)
 {
 	m_UnitNo = UnitNo;
 	m_ReadOnly = ReadOnly ? true : false;
-	m_Corteges.clear();
+	ClearCorteges();
 	const CStructEntry& U  =  m_pRoss->GetUnits()[UnitNo];
 	strcpy (m_EntryStr,U.m_EntryStr);
 	m_MeanNum = U.m_MeanNum;
@@ -586,7 +562,7 @@ void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool Re
 				if (VisualOrder)
 					PutCortegeOnTheRigthPosition (GetRossCortege(i));
 				else
-					m_Corteges.push_back(GetRossCortege(i));
+					_AddCortege(GetRossCortege(i));
 
 }
 
@@ -689,13 +665,13 @@ bool CTempArticle::BuildCortegeList()
 		return false;
 	};
 	size_t DomItemCount = m_pRoss->m_DomItems.size();
-	m_Corteges.clear();
+	ClearCorteges();
 
 
 	for (size_t i=0; i < m_Fields.size(); i++)
 	if  (!AddCortegeToVector (m_Fields[i]))
 	{
-		m_Corteges.clear();
+		ClearCorteges();
 		return false;
 	};
 
@@ -705,11 +681,11 @@ bool CTempArticle::BuildCortegeList()
 	*/
 	if (DomItemCount != m_pRoss->m_DomItems.size() )
 	{
-		m_Corteges.clear();
+		ClearCorteges();
 		for (size_t i=0; i < m_Fields.size(); i++)
 		if  (!AddCortegeToVector (m_Fields[i]))
 		{
-			m_Corteges.clear();
+			ClearCorteges();
 			return false;
 		}
 
@@ -737,14 +713,7 @@ bool CTempArticle::WriteToDictionary()
 
 	Units[m_UnitNo].m_StartCortegeNo = m_pRoss->_GetCortegesSize();
 
-	int i = 0;
-
-	for (; i<GetCortegesSize(); i++)
-	{
-		TCortege10 C;
-		C = GetCortege(i);
-		m_pRoss->_AddCortege(C);
-	};
+	m_pRoss->ConcatOtherContainer(*this);
 
 
 	Units[m_UnitNo].m_LastCortegeNo = m_pRoss->_GetCortegesSize()-1;
@@ -763,18 +732,19 @@ bool CTempArticle::WriteToDictionary()
 bool CTempArticle::IsModified() const
 {
 
-    std::vector<TCortege10> SavedArticle;
+	CTempArticle saved(m_MaxNumDom);
+	saved.m_pRoss = m_pRoss;
+
 	int StartPos = m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo;
 	int EndPos   = m_pRoss->m_Units[m_UnitNo].m_LastCortegeNo;
 
 	if (!m_pRoss->m_Units[m_UnitNo].HasEmptyArticle() )
       for (size_t i=StartPos; i <= EndPos; i++)
 	  {
-			SavedArticle.push_back(GetRossCortege(i));
+		  saved._AddCortege(GetRossCortege(i));
 	  };
-
-	return !AreEqual (m_Corteges, SavedArticle, m_pRoss->m_MaxNumDom);
-
+	bool equal = IsPartOf(&saved, false) && saved.IsPartOf(this, false);
+	return !equal;
 }
 
 const std::string& CTempArticle::GetArticleStr() 

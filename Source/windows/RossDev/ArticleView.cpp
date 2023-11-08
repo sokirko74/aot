@@ -1,13 +1,7 @@
-// ArticleView.cpp : implementation file
-//
 
 #include "StdAfx.h"
 #include "ArticleView.h"
 #include "ArticleDoc.h"
-#include "FieldList.h"
-#include "ValueDlg.h"
-#include "SetEditor.h"
-#include "FormulaEditor.h"
 #include "morph_dict/common/utilit.h"
 
 
@@ -55,9 +49,7 @@ BEGIN_MESSAGE_MAP(CArticleView, CSizeFormView)
 	//{{AFX_MSG_MAP(CArticleView)
 	ON_BN_CLICKED(IDC_ARTICLEVIEW_MARKUP, OnArticleviewMarkup)
 	ON_BN_CLICKED(IDC_ARTICLEVIEW_TEXTBTN, OnArticleviewTextbtn)
-	ON_BN_CLICKED(IDC_ADD_BUTTON, OnAddButton)
 	ON_BN_CLICKED(IDC_ARTICLE_VIEW_DEL_FIELD, OnArticleViewDelField)
-	ON_BN_CLICKED(IDC_ARTICLE_FORM_VALUE, OnArticleFormValue)
 	ON_EN_CHANGE(IDC_RICHEDIT21, OnChangeRichedit1)
 	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
 	ON_COMMAND(ID_EDIT_PASTE, OnEditPaste)
@@ -162,49 +154,6 @@ void CArticleView::OnArticleviewTextbtn()
 
 
 
-void CArticleView::OnAddButton() 
-{
-    SetFocusToField (m_FldScroll.GetScrollLimit());
-	AddOrInsertRossField (m_FldScroll.GetScrollLimit(),fnAdd);
-};
-
-
-void CArticleView::AddOrInsertRossField (int nPos, ActionType fnAction) 
-{
-	// TODO: Add your control notification handler code here
-	std::vector <CRossDevTextField> ResultList;
-	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
-		
-
-	CFieldList dlg (GetRossDoc(), ResultList );
-	if (dlg.DoModal() != IDOK) return;
-	
-	for (int i=0; i < ResultList.size(); i++)
-	{
-		 CRossDevTextField F = ResultList[i];
-		 CString S;
-		 S.Format ("%-8s= ", ConstructFldName (GetRoss(), F.FieldNo, F.LeafId, F.BracketLeafId));
-		 int CharIndex;
-		 if (fnAction == fnAdd)
-		{	
-				nPos = A.m_Fields.size();
-				CharIndex = m_RichEdit.GetTextLength();
-			}
-		 else
-		 {
-			 CharIndex = m_RichEdit.LineIndex(nPos);
-		 };
-		 m_RichEdit.SetSel(CharIndex, CharIndex);
-		 m_RichEdit.ReplaceSel(S);
-
- 		 ((CArticleDoc*)GetDocument())->Markout();
-		 SetFocusToField (nPos);
-		 m_FldScroll.SetScrollRange (0, m_FldScroll.GetScrollLimit() + 1);
-		 m_FldScroll.SetScrollPos(nPos);
-	};
-
-}
-
 void CArticleView::SelectLine ( long LineNo )
 {
 	long nStartChar = m_RichEdit.LineIndex(LineNo);
@@ -255,48 +204,6 @@ void CArticleView::OnArticleViewDelField()
 	DelField(m_FldScroll.GetScrollPos());
 }
 
-void CArticleView::EditOneValue(CRossDevTextField& F)
-{
-	std::vector<TCortege> L; //старое значение
-	TCortege NewValue; //новое  значение
-
-	CArticleDoc* D =  (CArticleDoc*)GetDocument();
-	try
-	{
-		D->AddCortegeToVector ( L, F);
-	}
-	catch (...)
-	{  
-		L.clear();
-		
-
-  	};
-	if (L.size() == 0)
-	{
-		TCortege C;
-		C.m_FieldNo = F.FieldNo;
-		C.m_LeafId = F.LeafId;
-		C.m_BracketLeafId = F.BracketLeafId;
-		C.m_SignatNo = 0;
-		C.m_LevelId = 0;
-		L.push_back(C);
-	};
-
-	CValueDlg Dlg (GetRossDoc(), L[0], NewValue);
-	try 
-	{
-	  if (Dlg.DoModal() != IDOK) return;
-	}
-	catch (...)
-	{
-		return;
-	};
-
-	std::string Q = WriteToString(GetRoss(), GetRoss()->Fields[NewValue.m_FieldNo].m_Signats[NewValue.GetSignatNo()].sFrmt, NewValue);
-	CString S;
-	S.Format ( NewValue.GetFieldFormat(), ConstructFldName(GetRoss(), F.FieldNo, F.LeafId, F.BracketLeafId), Q.c_str());
-	m_RichEdit.ReplaceSel(S);
-};
 
 void CArticleView::InsertLine (int LineNo, const CString& S)
 {
@@ -323,7 +230,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege10>& L, size_t nPos)
 	// сначала записываем первую строку, т.к. она сильно отличается от всех
 	if (L.size() > 0)
 	{
-		std::string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[0].m_FieldNo].m_Signats[L[0].GetSignatNo()].sFrmt, L[0]);
+		std::string Q = WriteToString(GetRoss(), L[0]);
 		LevelId = L[0].m_LevelId;
 		if ( LevelId == 1 )  
 		{
@@ -343,7 +250,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege10>& L, size_t nPos)
 
 	for (size_t i=1; i<L.size(); i++)
 	{
-		std::string Q = WriteToString(GetRoss(), GetRoss()->Fields[L[i].m_FieldNo].m_Signats[L[i].GetSignatNo()].sFrmt, L[i]);
+		std::string Q = WriteToString(GetRoss(), L[i]);
 		// cмотри выше Положение о выравнивании
 		if (L[i].m_LevelId > LevelId)
 		{
@@ -369,77 +276,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege10>& L, size_t nPos)
 	((CArticleDoc*)GetDocument())->Markout();
 };
 
-void CArticleView::EditFormulaValue (int nPos, char TypeRes)
-{
-	std::vector<TCortege> OldList; //старое значение
-	std::vector<TCortege> NewList;
-	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
-	CRossDevTextField F(	A.m_Fields[nPos].FieldNo, A.m_Fields[nPos].LeafId, A.m_Fields[nPos].BracketLeafId);
-	
 
-	CArticleDoc* D =  (CArticleDoc*)GetDocument();
-	try
-	{
-		D->AddCortegeToVector ( OldList,  F);
-	}
-	catch (...)
-	{
-   	    
-	};
-
-
-    if (TypeRes == frMany)
-	{
-		CSetEditor dlg (GetRossDoc(), OldList, NewList, F);
-		if (dlg.DoModal() != IDOK) return;
-	}
-	else
-	{
-		CFormulaEditor dlg (GetRossDoc(), OldList, NewList, F);
-		if (dlg.DoModal() != IDOK) return;
-	};
-	  
-
-     WriteToEdit(NewList, nPos );
-};
-
-
-void CArticleView::EditValue(int nPos)
-{
-	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
-	CRossDevTextField F(	A.m_Fields[nPos].FieldNo, A.m_Fields[nPos].LeafId, A.m_Fields[nPos].BracketLeafId);
-	BYTE Type = GetRoss()->Fields[F.FieldNo].TypeRes;
-	switch (Type) {
-      case frOne     : EditOneValue (F); break;
-	  case frMany    :
-	  case frFormula : EditFormulaValue (nPos,GetRoss()->Fields[F.FieldNo].TypeRes); break;
-	};
-  
-};
-
-void CArticleView::OnArticleFormValue() 
-{
-	// TODO: Add your control notification handler code here
-	try 
-	{
-		const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
-
-		if (!A.m_Fields.empty()) 
-		{
-			int nPos = m_FldScroll.GetScrollPos();
-			if (nPos >= A.m_Fields.size())
-				nPos = A.m_Fields.size() - 1;
-			SetFocusToField (nPos);
-			EditValue (nPos);
-			SetFocusToField (nPos);
-		};
-	}
-	catch (...)
-	{
-		AfxMessageBox ("Some error occured");
-	};
-
-} 
 
 
 

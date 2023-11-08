@@ -128,7 +128,7 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 				{
 					{
 						char OutBuffer[1000];
-						piOborDic->CortegeToStr(*piOborDic->GetCortege(i), OutBuffer);
+						piOborDic->CortegeToStr(*piOborDic->_GetCortege(i), OutBuffer);
 						oborot.m_GrammarFeature = OutBuffer;
 						Trim(oborot.m_GrammarFeature);
 						if (oborot.m_GrammarFeature == _R("НАР"))

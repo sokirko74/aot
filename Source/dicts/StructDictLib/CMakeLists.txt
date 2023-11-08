@@ -7,6 +7,21 @@ add_library(StructDictLib
         TempArticle.cpp
         Domen.cpp
         Field.cpp
+        Signat.cpp
+        CortegeContainer.cpp
+  
+        CortegeContainer.h
+        Domen.h
+        Field.h
+        ItemsContainer.h
+        LessDomItem.h
+        Ross.h
+        Signat.h
+        StdRoss.h
+        StructDictConsts.h
+        TempArticle.h
+        TextField.h
+
 )
 
 target_link_libraries(StructDictLib

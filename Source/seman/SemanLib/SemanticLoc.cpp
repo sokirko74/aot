@@ -115,7 +115,7 @@ std::string    GetPO (const CDictionary* Ross, uint16_t UnitNo, long POFieldNo)
   for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= Ross->GetUnitEndPos(UnitNo); i++)
    if    ( (Ross->GetCortegeFieldNo(i) == POFieldNo) 
 		 )
-			return (const char*)Ross->GetDomItemStr(GetCortege(Ross,i).m_DomItemNos[0]);
+			return (const char*)Ross->GetDomItemStr(GetCortegeCopy(Ross,i).m_DomItemNos[0]);
 
    return std::string(_R("общ"));
 };

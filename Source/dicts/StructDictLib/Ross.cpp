@@ -58,88 +58,6 @@ inline size_t restore_from_bytes(CStructEntry& i, const BYTE* buf)
 	return get_size_in_bytes(i) + 3;
 };
 
-//=========================================================
-//============           TCortegeContainer     ============
-//=========================================================
-
-TCortegeContainer::TCortegeContainer(BYTE MaxNumDom)
-{
-	m_MaxNumDom = MaxNumDom;
-};
-
-TCortege10* TCortegeContainer::GetCortege(size_t i)
-{
-	if (m_MaxNumDom == 3)
-		return (TCortege10*)(&m_Corteges3[i]);
-	else
-		return (TCortege10*)(&(m_Corteges10[i]));
-};
-
-const TCortege10* TCortegeContainer::GetCortege(size_t i)  const
-{
-	if (m_MaxNumDom == 3)
-		return (TCortege10*)(&m_Corteges3[i]);
-	else
-		return (TCortege10*)(&(m_Corteges10[i]));
-};
-
-void  TCortegeContainer::_AddCortege(const TCortege10& C)
-{
-	if (m_MaxNumDom == 3)
-	{
-		TBasicCortege<3> Q;
-		Q = C;
-		m_Corteges3.push_back(Q);;
-	}
-	else
-		m_Corteges10.push_back(C);;
-};
-
-
-size_t  TCortegeContainer::_GetCortegesSize()  const
-{
-	if (m_MaxNumDom == 3)
-		return  m_Corteges3.size();
-	else
-		return  m_Corteges10.size();
-};
-
-void TCortegeContainer::ClearCorteges()
-{
-	if (m_MaxNumDom == 3)
-		m_Corteges3.clear();
-	else
-		m_Corteges10.clear();
-
-};
-
-void TCortegeContainer::EraseCorteges(size_t start, size_t last)
-{
-	if (m_MaxNumDom == 3)
-		m_Corteges3.erase(m_Corteges3.begin() + start, m_Corteges3.begin() + last);
-	else
-		m_Corteges10.erase(m_Corteges10.begin() + start, m_Corteges10.begin() + last);
-};
-
-void TCortegeContainer::WriteCorteges(const char* CortegeFile) const
-{
-	if (m_MaxNumDom == 3)
-		WriteVector<CortegeType3>(CortegeFile, m_Corteges3);
-	else
-		WriteVector<CortegeType10>(CortegeFile, m_Corteges10);
-};
-
-void TCortegeContainer::ReadCorteges(const char* CortegeFile)
-{
-	if (m_MaxNumDom == 3)
-	{
-		ReadVector<CortegeType3>(CortegeFile, m_Corteges3);
-	}
-	else
-		ReadVector<CortegeType10>(CortegeFile, m_Corteges10);
-};
-
-
 
 
 //=========================================================
@@ -573,19 +491,6 @@ bool   TRoss::BuildCorteges()
 	return true;
 }
 
-bool TRoss::UpdateSignatsOfTheFieldInCorteges(BYTE FieldNo, std::vector<CSignat>& Signats)
-{
-	for (size_t j = 0; j < _GetCortegesSize(); j++)
-		if (GetCortege(j)->m_FieldNo == FieldNo)
-		{
-			std::vector<CSignat>::iterator it = find(Signats.begin(), Signats.end(), Fields[FieldNo].m_Signats[GetCortege(j)->GetSignatNo()]);
-
-			GetCortege(j)->SetSignatNo(it - Signats.begin());
-			if (GetCortege(j)->GetSignatNo() == Fields[FieldNo].m_Signats.size())
-				return false;
-		};
-	return true;
-};
 
 void TRoss::DelCorteges(size_t start, size_t last)
 {
@@ -613,10 +518,9 @@ struct TItemStr
 };
 
 
-bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE SignatNo)
+bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CSignat& Sgn)
 {
 	int CurrItemNo = 0;
-	CSignat& Sgn = Fields[C.m_FieldNo].m_Signats[SignatNo];
 
 	std::vector<TItemStr> ItemStrVec;
 	const char* q = s;
@@ -665,19 +569,6 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE Sig
 			if (m_Domens[DomNo].GetDomStr() == "D_ENGL")
 				return false;
 
-
-		/*if (DomNo == ActantsDomNo)
-		{
-			if (   (strlen (ItemStr) == 2)
-				&& (ItemStr[0] == (unsigned char)'A')
-				&&  isdigit(ItemStr[1]))
-				ItemStr[0] = (unsigned char)'А';
-
-			if  (		(strlen (ItemStr) == 1)
-					&&  (ItemStr[0] == (unsigned char)'C')
-				)
-				ItemStr[0] = (unsigned char)'С';
-		};*/
 
 		// #### Получение в строку q остатка строки для дальнейшей обработки
 		q += ItemStrLen;
@@ -751,18 +642,16 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, BYTE Sig
 };
 
 
-bool   TRoss::ReadFromStr(const char* s, TCortege10& C)
+bool   TRoss::ReadFromStr(const char* str, TCortege10& C)
 {
-	int i = 0;
-
-	for (; i < Fields[C.m_FieldNo].m_Signats.size(); i++)
-		if (ReadFromStrWithOneSignatura(s, C, i))
+	for (const auto& s : Fields[C.m_FieldNo].m_Signats)
+		if (ReadFromStrWithOneSignatura(str, C, s))
 		{
-			C.SetSignatNo(i);
-			break;
+			C.SetSignatId(s.SignatId);
+			return true;
 		};
 
-	return i < Fields[C.m_FieldNo].m_Signats.size();
+	return false;
 };
 
 
@@ -805,9 +694,15 @@ void TRoss::WriteToStr(const int* Items, const char* Frmt, char* OutBuffer) cons
 
 void TRoss::CortegeToStr(const TCortege10& C, char* OutBuffer) const
 {
-	const CField& F = Fields[C.m_FieldNo];
-	WriteToStr(C.m_DomItemNos, F.m_Signats[C.GetSignatNo()].sFrmt, OutBuffer);
+	WriteToStr(C.m_DomItemNos, GetSignat(C).GetFrmt(), OutBuffer);
 };
+
+
+const CSignat& TRoss::GetSignat(const TCortege10& C) const {
+	const CField& f = Fields[C.m_FieldNo];
+	BYTE signat_no = f.SignatId2SignatNo[C.GetSignatId()];
+	return f.m_Signats[signat_no];
+}
 
 
 inline bool IsTitle(const char* s)
@@ -874,8 +769,8 @@ bool   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo, int& ItemNo)
 	m_DomItems.insert(It, D);
 	for (i = 0; i < _GetCortegesSize(); i++)
 		for (size_t k = 0; k < m_MaxNumDom; k++)
-			if (GetCortege(i)->GetItem(k) >= ItemNo)
-				GetCortege(i)->SetItem(k, GetCortege(i)->GetItem(k) + 1);
+			if (_GetCortege(i)->GetItem(k) >= ItemNo)
+				_GetCortege(i)->SetItem(k, _GetCortege(i)->GetItem(k) + 1);
 
 	return true;;
 };
@@ -892,15 +787,15 @@ void TRoss::DelDomItem(int ItemNo)
 				for (size_t k = m_Units[i].m_StartCortegeNo; k <= m_Units[i].m_LastCortegeNo; k++)
 				{
 					for (size_t j = 0; j < m_MaxNumDom; j++)
-						if (GetCortege(k)->GetItem(j) == ItemNo)
+						if (_GetCortege(k)->GetItem(j) == ItemNo)
 						{
-							if (GetCortege(k)->m_LevelId > 0)
+							if (_GetCortege(k)->m_LevelId > 0)
 								for (size_t l = m_Units[i].m_StartCortegeNo; l <= m_Units[i].m_LastCortegeNo; l++)
-									if ((GetCortege(l)->m_FieldNo == GetCortege(k)->m_FieldNo)
-										&& (GetCortege(l)->m_LeafId == GetCortege(k)->m_LeafId)
-										&& (GetCortege(l)->m_LevelId > GetCortege(k)->m_LevelId)
+									if ((_GetCortege(l)->m_FieldNo == _GetCortege(k)->m_FieldNo)
+										&& (_GetCortege(l)->m_LeafId == _GetCortege(k)->m_LeafId)
+										&& (_GetCortege(l)->m_LevelId > _GetCortege(k)->m_LevelId)
 										)
-										GetCortege(l)->m_LevelId--;
+										_GetCortege(l)->m_LevelId--;
 
 							DelCorteges(k, k + 1);
 							if (m_Units[i].m_StartCortegeNo == m_Units[i].m_LastCortegeNo)
@@ -946,10 +841,10 @@ void TRoss::DelDomItem(int ItemNo)
 
 	for (i = 0; i < _GetCortegesSize(); i++)
 		for (size_t j = 0; j < m_MaxNumDom; j++)
-			if (GetCortege(i)->GetItem(j) != -1
-				&& GetCortege(i)->GetItem(j) > ItemNo
+			if (_GetCortege(i)->GetItem(j) != -1
+				&& _GetCortege(i)->GetItem(j) > ItemNo
 				)
-				GetCortege(i)->SetItem(j, GetCortege(i)->GetItem(j) - 1);
+				_GetCortege(i)->SetItem(j, _GetCortege(i)->GetItem(j) - 1);
 
 	m_DomItems.erase(m_DomItems.begin() + ItemNo);
 };
@@ -1108,16 +1003,16 @@ std::vector<CStructEntry>& CDictionary::GetUnits()
 };
 BYTE CDictionary::GetCortegeFieldNo(size_t i) const
 {
-	return GetCortege(i)->m_FieldNo;
+	return _GetCortege(i)->m_FieldNo;
 
 };
 BYTE CDictionary::GetCortegeLeafId(size_t i) const
 {
-	return GetCortege(i)->m_LeafId;
+	return _GetCortege(i)->m_LeafId;
 };
 BYTE CDictionary::GetCortegeBracketLeafId(size_t i) const
 {
-	return GetCortege(i)->m_BracketLeafId;
+	return _GetCortege(i)->m_BracketLeafId;
 
 };
 
@@ -1154,7 +1049,7 @@ BYTE CDictionary::GetDomItemDomNo(int ItemNo) const
 
 int	CDictionary::GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const
 {
-	return	GetCortege(CortegeNo)->GetItem(PositionInCortege);
+	return	_GetCortege(CortegeNo)->GetItem(PositionInCortege);
 };
 
 const char* CDictionary::GetDomItemStr(int ItemNo) const
@@ -1179,11 +1074,11 @@ BYTE		CDictionary::GetUnitMeanNum(uint16_t EntryNo) const
 
 bool CDictionary::IncludeArticle(uint16_t UnitNo, std::string ArticleUtf8) const
 {
-	CTempArticle A1;
+	CTempArticle A1(m_MaxNumDom);
 	A1.m_pRoss = const_cast<CDictionary*>(this);
 	A1.ReadFromDictionary(UnitNo, false, true);
 
-	CTempArticle A2;
+	CTempArticle A2(m_MaxNumDom);
 	A2.m_pRoss = const_cast<CDictionary*>(this);
 	A2.ReadFromUtf8String(ArticleUtf8.c_str());
 	A2.MarkUp();
@@ -1415,7 +1310,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 		UnitNo = InsertUnit(Lemma.c_str(), MeanNum);
 	}
 
-	CTempArticle A1;
+	CTempArticle A1(m_MaxNumDom);
 	A1.m_pRoss = this;
 	if (UnitNo != ErrUnitNo)
 		A1.ReadFromDictionary(UnitNo, false, false);
@@ -1424,7 +1319,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 	for (int i = RealStart + 1; i < last; i++)
 		NewArticle += L[i].m_Line + std::string("\n");
 
-	CTempArticle A2;
+	CTempArticle A2(m_MaxNumDom);
 	try
 	{
 		if ( !A1.ReadFromUtf8String(convert_to_utf8(NewArticle, m_Language).c_str()) )

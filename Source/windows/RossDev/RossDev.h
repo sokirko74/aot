@@ -49,7 +49,6 @@ public:
 	afx_msg void OnAppAbout();
 	afx_msg void OnFileSave();
 	afx_msg void OnFileOpen();
-	afx_msg void OnImport();
 	afx_msg void OnSemfet();
 	afx_msg void OnAppExit();
 	afx_msg void OnSemAn();
@@ -169,7 +168,7 @@ class CRossDoc;
 
 inline CString ConstructFldName (const CDictionary* pIRossForSyntax, BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId)
 {
-	CString S((char*)pIRossForSyntax->Fields[FieldNo].FieldStr);
+	CString S(pIRossForSyntax->Fields[FieldNo].FieldStr.c_str());
 
 	if (LeafId == ErrUChar)
       S += "*";

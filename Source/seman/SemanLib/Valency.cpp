@@ -28,7 +28,7 @@ CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossH
 	assert ( S.length() >	1 );
 	assert(isdigit ((unsigned	char)S[1]) );
 	m_LeafId = S[1] -	'0';
-	S	= Ross->GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt;
+	S	= Ross->GetRoss()->GetSignat(C).GetFrmt();
 	m_bOptional =	S.find("?")	!= -1;
 	m_bObligatory	= S.find("!") != -1;
 	m_bObligatoryBecauseFirst	= false;

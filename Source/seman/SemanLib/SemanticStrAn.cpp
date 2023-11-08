@@ -971,8 +971,8 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 	if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
 		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
 		{
-			TCortege C = GetCortege(GetRoss(Ross), i);
-			std::string s = WriteToString(GetRoss(Ross), (char*)(GetRoss(Ross)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+			TCortege C = GetCortegeCopy(GetRoss(Ross), i);
+			std::string s = WriteToString(GetRoss(Ross),  C);
 			m_SemCoefs.ReadOneCoef(s);
 		};
 	LOGV << "Semantic coefs: " <<  m_SemCoefs.GetCoefsString();
@@ -983,7 +983,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 	if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
 		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
 		{
-			long ItemNo = GetCortege(GetRoss(Ross), i).m_DomItemNos[0];
+			long ItemNo = GetCortegeCopy(GetRoss(Ross), i).m_DomItemNos[0];
 			if (ItemNo != -1)
 			{
 				std::string OneSynRel = GetRossHolder(Ross)->GetDomItemStrInner(ItemNo);

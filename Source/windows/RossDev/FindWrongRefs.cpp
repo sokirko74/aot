@@ -70,7 +70,7 @@ try{
 		  {
 			TCortege C = GetCortege(m_pActiveRossDoc->GetRoss(), k);
 			if (C.m_FieldNo != EngFieldNo) continue;
-			std::string Q = WriteToString(m_pActiveRossDoc->GetRoss(), m_pActiveRossDoc->GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt, C);
+			std::string Q = WriteToString(m_pActiveRossDoc->GetRoss(),  C);
 			if (   (Q.find("TR")!=-1) 
 				|| (Q.find("PR")!=-1) 
 				|| (Q.find("SR")!=-1)

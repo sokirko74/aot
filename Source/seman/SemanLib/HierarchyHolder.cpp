@@ -92,7 +92,7 @@ void CHierarchyHolder::WriteToRoss(std::string Entry)
 	if (UnitNo != ErrUnitNo)
 		GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
 	UnitNo = GetRoss()->InsertUnit(EntryName.c_str(), 1);
-	CTempArticle A;
+	CTempArticle A(GetRoss()->m_MaxNumDom);
 	A.m_pRoss = const_cast<CDictionary*>(GetRoss());
 	A.ReadFromDictionary(UnitNo, true, false);
 	A.ReadFromUtf8String(Entry.c_str());
@@ -148,7 +148,7 @@ void CHierarchyHolder::ReadFromRoss(bool WithoutView)
 		return;
 	}
 
-	CTempArticle A;
+	CTempArticle A(GetRoss()->m_MaxNumDom);
 
 	A.m_pRoss = const_cast<CDictionary*>(GetRoss());
 	A.ReadFromDictionary(UnitNo, true, false);
@@ -341,7 +341,7 @@ bool SemFetActantIsEqualOrLower(CRossHolder* Ross, uint16_t Host, BYTE LeafId, B
 		{
 
 			Found = true;
-			TCortege C = GetCortege(Ross->GetRoss(), i);
+			TCortege C = GetCortegeCopy(Ross->GetRoss(), i);
 			if ((ItemNo != C.m_DomItemNos[0])
 				&& !IsEqualOrHigherInHierarchy(Ross, ItemNo, Ross, C.m_DomItemNos[0], pHierarchyDoc)
 				)

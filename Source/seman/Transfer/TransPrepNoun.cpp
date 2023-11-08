@@ -49,7 +49,7 @@ std::string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,in
 	for( int i = 0 ; i < vectorCortege.size() ; i++ )
 	{
 
-		CSignat& Signat = pRossDoc->GetRoss()->Fields[vectorCortege[i].m_FieldNo].m_Signats[vectorCortege[i].GetSignatNo()];
+		const CSignat& Signat = pRossDoc->GetRoss()->GetSignat(vectorCortege[i]);
 		if( Signat.Doms.size() != 3 )
 			return strPrep;
 

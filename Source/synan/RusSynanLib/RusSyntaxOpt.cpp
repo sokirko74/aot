@@ -120,17 +120,17 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
         SynDependOnAdv = new SDatItems(_QM(ADV));
         SynDependOnAdj = new SDatItems(_QM(ADV));
 
-        CTempArticle A1;
+        CTempArticle A1(piRossDict->m_MaxNumDom);
         BuildArticleFromUtf8String(piRossDict, "GF = * НАР:нар_опр", A1);
 
-        CTempArticle A2;
+        CTempArticle A2(piRossDict->m_MaxNumDom);
         BuildArticleFromUtf8String(piRossDict, "GF1 = * X!:НАР", A2);
 
-        CTempArticle A3;
+        CTempArticle A3(piRossDict->m_MaxNumDom);
         BuildArticleFromUtf8String(piRossDict, "GF1 = * X!:ПРИЛ", A3);
 
 
-        CTempArticle A;
+        CTempArticle A(piRossDict->m_MaxNumDom);
         A.m_pRoss = piRossDict;
 
         for (i = 0; i < iSize; i++) {

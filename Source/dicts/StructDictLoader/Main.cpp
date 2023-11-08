@@ -2,15 +2,9 @@
 #include "morph_dict/common/util_classes.h"
 #include "dicts/StructDictLib/Ross.h"
 #include "dicts/StructDictLib/TempArticle.h"
+#include "morph_dict/common/argparse.h"
 
-void PrintUsage()
-{
-	std::cout << "StructDict Loader\n";
-	std::cout << "This program converts text version of structural dictionary to binary\n";
-	std::cout << "Usage: StructDictLoader <ToTxt|FromTxt> <Inputfile> <OutputCatalog>\n";
-	std::cout << "Example: StructDictLoader ToTxt ross.txt c:/rml/dicts/ross \n";
-	exit(-1);
-};
+
 
 void export_dict(std::string fileName, std::string folder) {
 	CDictionary Dict;
@@ -24,7 +18,7 @@ void export_dict(std::string fileName, std::string folder) {
 		throw CExpc("Cannot write to %s", fileName.c_str());
 	};
 
-	CTempArticle A;
+	CTempArticle A(Dict.m_MaxNumDom);
 	A.m_pRoss = &Dict;
 
 	for (uint16_t i = 0; i < Dict.m_Units.size(); i++)
@@ -66,30 +60,35 @@ void build_fields_json(std::string fileName) {
 
 }
 
-int main(int argc, char** argv)
+void initArgParser(int argc, const char** argv, ArgumentParser& parser) {
+	parser.AddOption("--help");
+	parser.AddArgument("--action", "action", true);
+	parser.AddArgument("--input-file", "input file", true);
+	parser.AddArgument("--output-file", "input file", true);
+	parser.AddArgument("--output-ross-folder", "output file", true);
+	parser.AddArgument("--input-ross-folder", "c:/*.txt", true);
+	parser.AddArgument("--log-level", "log level", true);
+	parser.Parse(argc, argv);
+}
+
+int main(int argc, const char** argv)
 {
-	if (argc != 4) {
-		PrintUsage();
-	}
-
-	std::string action = argv[1];
-	printf("action = %s", action.c_str());
-
+	ArgumentParser args;
+	initArgParser(argc, argv, args);
+	init_plog(args.GetLogLevel(), "struct_dict_load.log");
+	std::string action = args.Retrieve("action");
 	try {
-		if (action == "FromTxt")
+		if (action == "from_txt")
 		{
-			import_dict(argv[2], argv[3]);
+			auto inp = args.Retrieve("input-file");
+			import_dict(inp, args.Retrieve("output-ross-folder"));
 		}
-		else if (action == "ToTxt")
+		else if (action == "to_txt")
 		{
-			export_dict(argv[2], argv[3]);
-		}
-		else if (action == "build_fields_json") {
-			printf("build_fields_json\n");
-			build_fields_json(argv[2]);
+			export_dict(args.Retrieve("output-file"), args.Retrieve("input-ross-folder"));
 		}
 		else {
-			PrintUsage();
+			LOGE << "bad action " << action;
 			return -1;
 		}
 	}

@@ -3,20 +3,23 @@
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 
 
-#ifndef _TEMPARTICLE_H_
-#define _TEMPARTICLE_H_
+#pragma once
 
-#include "Ross.h"       // main symbols
-#include "TextField.h"       // main symbols
+#include "TextField.h"
+#include "CortegeContainer.h"
+#include "../../common/cortege.h"
 
+class CDictionary;
 
-class CTempArticle 
+class CTempArticle : public TCortegeContainer
 {
 	std::string					m_ArticleStr;
 	const TCortege10& GetRossCortege(size_t i) const;
 	std::string		ConstructFldName(BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
 	bool		PutCortegeOnTheRigthPosition(const TCortege10& C);
 	bool		ArticleToText();
+
+//	std::vector<TCortege10>		m_Corteges;
 
 public:
 	char					m_EntryStr[EntryStrSize];
@@ -26,10 +29,9 @@ public:
 	std::vector<CTextField>		m_Fields;
 	CDictionary*				m_pRoss;
 	
-	std::vector<TCortege10>		m_Corteges;
 	std::string				m_LastError;
 	int						m_ErrorLine;
-	CTempArticle();
+	CTempArticle (BYTE MaxNumDom);
 	
 
 
@@ -51,4 +53,3 @@ public:
 	
 };
 
-#endif

@@ -1,4 +1,5 @@
 #include "Field.h"
+#include "../../common/cortege.h"
 
 CField& CField::operator = (const CField& _F)
 {
@@ -14,9 +15,8 @@ nlohmann::json CField::GetFieldJson() const {
     nlohmann::json signats = nlohmann::json::array();
     for (auto s : m_Signats) {
         nlohmann::json signat = {
-            {"order", s.OrderNo},
+            {"signat_id", s.SignatId},
             {"format", s.FormatStr},
-            {"name", s.FormatName},
         };
         signats.push_back(signat);
     }
@@ -34,6 +34,8 @@ nlohmann::json CField::GetFieldJson() const {
 
 
 void CField::ReadFromJson(nlohmann::json& js) {
+    SignatId2SignatNo.resize(UnknownSignatId, UnknownSignatId);
+
     js.at("name").get_to(FieldStr);
     js.at("type").get_to(TypeRes);
     js.at("actant").get_to(IsApplicToActant);
@@ -41,9 +43,12 @@ void CField::ReadFromJson(nlohmann::json& js) {
     m_Signats.clear();
     for (auto s : js.at("signats")) {
         CSignat S;
-        s.at("order").get_to(S.OrderNo);
+        s.at("signat_id").get_to(S.SignatId);
         s.at("format").get_to(S.FormatStr);
-        s.at("name").get_to(S.FormatName);
         m_Signats.push_back(S);
+        if (SignatId2SignatNo[S.SignatId] != UnknownSignatId) {
+            throw CExpc("Signats must have unique identifiers; Field = " + FieldStr);
+        }
+        SignatId2SignatNo[S.SignatId] = m_Signats.size() - 1;
     };
 }

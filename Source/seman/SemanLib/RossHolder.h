@@ -260,9 +260,9 @@ public:
 
 
 
-inline TCortege GetCortege (const CDictionary* Ross, size_t CortegeNo)
+inline TCortege GetCortegeCopy (const CDictionary* Ross, size_t CortegeNo)
 {
-	TCortege G = *Ross->GetCortege(CortegeNo);
+	TCortege G = *Ross->_GetCortege(CortegeNo);
 
 	long i=0;
 	for (; i < Ross->m_MaxNumDom; i++)
@@ -279,7 +279,7 @@ inline TCortege GetCortege (const CDictionary* Ross, size_t CortegeNo)
 };
 
 
-extern std::string WriteToString  (const CDictionary* Ross, const char* Frmt, const TCortege10& C);
+extern std::string WriteToString  (const CDictionary* Ross, const TCortege10& C);
 
 
 template <int size>

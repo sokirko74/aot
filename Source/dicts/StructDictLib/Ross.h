@@ -2,9 +2,7 @@
 // ==========  Dialing Structural Dictionary (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 
-#ifndef ROSS_H
- #define ROSS_H
-#pragma warning  (disable : 4530)
+#pragma once 
 
 #include "morph_dict/common/utilit.h"
 
@@ -12,6 +10,7 @@
 
 
 #include "ItemsContainer.h"
+#include "CortegeContainer.h"
 
 
 const int NullItemId = 1;
@@ -92,32 +91,6 @@ public:
 };	  
 
 
-class TCortegeContainer 
-{
-  typedef TBasicCortege<3> CortegeType3;
-  typedef TBasicCortege<10> CortegeType10;
-
-  std::vector<CortegeType3>      m_Corteges3;
-  std::vector<CortegeType10>     m_Corteges10;
-public :
-  BYTE m_MaxNumDom;
-
-  TCortegeContainer(BYTE MaxNumDom);
-  TCortege10*		GetCortege (size_t i);
-  const TCortege10*	GetCortege (size_t i)  const;
-
-  void		_AddCortege(const TCortege10& C);
-  size_t	_GetCortegesSize ()  const;
-  void		ClearCorteges();
-  void		EraseCorteges (size_t start, size_t last);
-  void		WriteCorteges (const char* CortegeFile) const;
-  void		ReadCorteges (const char* CortegeFile);
- 
-};
-
-
-
-
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
 	std::string UnitsFile;
@@ -177,7 +150,6 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	bool			BuildCorteges();
-	virtual bool	UpdateSignatsOfTheFieldInCorteges (BYTE FieldNo, std::vector<CSignat>& Signats);
 	void			DelCorteges (size_t start, size_t last);
 						 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -185,10 +157,11 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-	bool	ReadFromStrWithOneSignatura (const char* s, TCortege10& C, BYTE SignatNo);
+	bool	ReadFromStrWithOneSignatura (const char* s, TCortege10& C, const CSignat& Sgn);
 	bool	ReadFromStr (const char* s, TCortege10& C);
 	void	WriteToStr (const int* Items, const char* Frmt, char* OutBuffer) const;
 	void	CortegeToStr (const TCortege10& C, char* OutBuffer) const;
+	const CSignat& GetSignat(const TCortege10& C) const;
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// +++++++++++++      Перечни констант  ++++++++++++++
@@ -269,8 +242,3 @@ public:
 	
 
 };	
-
-
-
-
-#endif

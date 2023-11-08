@@ -127,8 +127,9 @@ const char* CRossHolder::GetDomItemStrInner (long ItemNo) const
 
 
 
-std::string WriteToString (const CDictionary* Ross, const char* Frmt, const TCortege10& C)
+std::string WriteToString (const CDictionary* Ross,  const TCortege10& C)
 {
+	const char* Frmt = Ross->GetSignat(C).GetFrmt();
 	BYTE	Counter	 = 0 ;
 	std::string Result  =	"";
 	BYTE	BufferLen =	0;
@@ -238,7 +239,7 @@ void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, std::vec
 				&&	(LeafId	== GetRoss()->GetCortegeLeafId(i))
 				&&	(BracketLeafId == GetRoss()->GetCortegeBracketLeafId(i))
 				)
-				vectorCorteges.push_back(GetCortege(GetRoss(),i));		
+				vectorCorteges.push_back(GetCortegeCopy(GetRoss(),i));		
 		}
 }
 
@@ -268,7 +269,7 @@ bool CRossHolder::HasFullFieldValue(std::string strFieldName, std::string	strVal
 	for(int	i =	0 ;	i <	corteges.size()	; i++ )
 	{
 		TCortege& C	= corteges[i];
-		std::string FullFieldValue =	WriteToString(GetRoss(), (char*)(GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		std::string FullFieldValue = WriteToString(GetRoss(), C);
 		Trim(FullFieldValue);
 		if (FullFieldValue == strValue)	return true;
 	}
@@ -291,8 +292,8 @@ void CRossHolder::GetFullFieldItemsFromArticle (long UnitNo, std::string	FieldSt
 			&& (GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId)	
 		 )
 	  {
-		 const TCortege& C = GetCortege(GetRoss(), i);
-		 std::string	FullFieldValue = WriteToString(GetRoss(), (char*)(GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		 const TCortege& C = GetCortegeCopy(GetRoss(), i);
+		 std::string	FullFieldValue = WriteToString(GetRoss(),  C);
 		 Items.push_back (FullFieldValue);
 	  };
 };
@@ -357,7 +358,7 @@ long  CRossHolder::GetDopFields(long UnitNo, std::vector<CDopField>&	DopFields) 
   for (size_t k=GetRoss()->GetUnitStartPos(UnitNo);	k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
 	 if	(DopFldName	== GetRoss()->GetCortegeFieldNo(k))
 	 {
-		 TCortege C	= GetCortege(GetRoss(),	k);
+		 TCortege C	= GetCortegeCopy(GetRoss(),	k);
 		 if	(	(C.m_DomItemNos[0] == -1)
 			 ||	(C.m_DomItemNos[1] == -1)
 			 ||	(C.m_DomItemNos[2] == -1)
@@ -397,7 +398,7 @@ bool CRossHolder::GetVal(long UnitNo, CValency& V) const
  for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i<= GetRoss()->GetUnitEndPos(UnitNo); i++)
 	  if ( GetRoss()->GetCortegeFieldNo(i) ==  ValFieldNo )
 	  {
-		  V = CValency (GetCortege(GetRoss(),i), MainWordVarNo, this);
+		  V = CValency (GetCortegeCopy(GetRoss(),i), MainWordVarNo, this);
 		  return true;
 	  };
  return false; 
@@ -465,7 +466,7 @@ CValency CRossHolder::GetSemRelOfPrepOrConj(uint16_t  UnitNo) const
 	  )
      for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i<= GetRoss()->GetUnitEndPos(UnitNo); i++)
 	  if ( GetRoss()->GetCortegeFieldNo(i) ==  ValFieldNo )
-        return  CValency (GetDomItemStrInner(GetCortege(GetRoss(),i).m_DomItemNos[0]), A_C, this);
+        return  CValency (GetDomItemStrInner(GetCortegeCopy(GetRoss(),i).m_DomItemNos[0]), A_C, this);
 
 	return CValency("ACT", A_C);
 };

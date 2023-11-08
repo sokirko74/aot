@@ -174,7 +174,7 @@ bool CRusSemStructure::ContainsSemCopul(long NodeNo) const
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EndCortegeNo; i++)
 	{
-		TCortege C = GetCortege(Ross,i);
+		TCortege C = GetCortegeCopy(Ross,i);
 		if	(		(C.m_LeafId > 0) 
 				&&	(C.m_FieldNo == pHolder->GramFetFieldNo) 
 				&&	C.m_DomItemNos[0] != -1 

@@ -175,7 +175,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot& Hypot, CTimeUnit& TimeUnit, 
 	for (Hypot.m_GramCortegeNo = 0; Hypot.m_GramCortegeNo < P.m_GramCorteges.size(); Hypot.m_GramCortegeNo++)
 	{
 		TCortege& C = P.m_GramCorteges[Hypot.m_GramCortegeNo];
-		std::string GramFet = WriteToString(GetRoss(TimeRoss), (char*)(GetRoss(TimeRoss)->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+		std::string GramFet = WriteToString(GetRoss(TimeRoss),  C);
 		Trim(GramFet);
 
 		if (GramFet.substr(0, 2) == _R("ЦК"))

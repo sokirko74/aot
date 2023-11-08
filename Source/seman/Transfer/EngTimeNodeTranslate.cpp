@@ -22,7 +22,7 @@ std::string get_field(CRossHolder*  RossHolder, uint16_t UnitNo, std::string Fie
 	  if (     (RossHolder->GetRoss()->GetCortegeFieldNo(i) == FieldNo) 
 		    && (RossHolder->GetRoss()->GetCortegeLeafId(i) == LeafId) 
 			&& (RossHolder->GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId) 
-			&& ( (LevelId == ErrUChar) || (RossHolder->GetRoss()->GetCortege(i)->m_LevelId == LevelId) )
+			&& ( (LevelId == ErrUChar) || (RossHolder->GetRoss()->_GetCortege(i)->m_LevelId == LevelId) )
 		 )
 	  {
          return (const char*)RossHolder->GetRoss()->GetDomItemStr(RossHolder->GetRoss()->GetCortegeItem(i,0));

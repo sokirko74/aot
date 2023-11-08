@@ -278,7 +278,6 @@ protected:
 	afx_msg void OnWordlistArticleBtn();
 	afx_msg void OnSaveRossToTxt();
     afx_msg void OnSearchByArticle();
-	afx_msg void OnShowScheme();
 	afx_msg void OnStatistic();
 	afx_msg void OnChangeTitle();
 	afx_msg void OnComments();
@@ -288,7 +287,6 @@ protected:
 	afx_msg void OnStatisticFieldValue();
 	afx_msg void OnSortByLemma();
 	afx_msg void OnSortByDateAndTime();
-	afx_msg void OnImport();
 	afx_msg void OnArticleAppend();
 	afx_msg void OnDelAllSelected();
 	afx_msg void OnSetAuthor();

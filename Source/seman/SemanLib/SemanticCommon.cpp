@@ -464,7 +464,7 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 		if (!pRossDoc->GetRoss()->IsEmptyArticle(UnitNo))
 			for (size_t i = pRossDoc->GetRoss()->GetUnitStartPos(UnitNo); i <= pRossDoc->GetRoss()->GetUnitEndPos(UnitNo); i++)
 			{
-				TCortege C = GetCortege(pRossDoc->GetRoss(), i);
+				TCortege C = GetCortegeCopy(pRossDoc->GetRoss(), i);
 				if (C.m_FieldNo == pRossDoc->ValFieldNo && Node.m_Vals.size() < MaxValsCount)
 				{
 					Node.m_Vals.push_back(CValency(C, pRossDoc->MainWordVarNo, pRossDoc, UnitNo));
@@ -503,8 +503,8 @@ std::vector<uint64_t> CSemanticStructure::GetGramRestr(const CSemNode& W)
 			for (size_t i = GetRoss(W.GetType())->GetUnitStartPos(W.GetUnitNo()); i <= GetRoss(W.GetType())->GetUnitEndPos(W.GetUnitNo()); i++)
 				if (GetRoss(W.GetType())->GetCortegeFieldNo(i) == GetRossHolder(W.GetType())->GramRestrFieldNo)
 				{
-					const TCortege& C = GetCortege(GetRoss(W.GetType()), i);
-					std::string GramFet = WriteToString(GetRoss(W.GetType()), (char*)(GetRoss(W.GetType())->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					const TCortege& C = GetCortegeCopy(GetRoss(W.GetType()), i);
+					std::string GramFet = WriteToString(GetRoss(W.GetType()), C);
 					Trim(GramFet);
 					uint32_t Pose;
 					uint64_t Grammems;
@@ -745,7 +745,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 				{
 					TCortege C = GetRelation(i)->m_SynReal.m_Cortege;
 					const CRossHolder* RossHolder = GetRelation(i)->m_Valency.m_RossHolder;
-					std::string GramFet = WriteToString(RossHolder->GetRoss(), (char*)(RossHolder->GetRoss()->Fields[C.m_FieldNo].m_Signats[C.GetSignatNo()].sFrmt), C);
+					std::string GramFet = WriteToString(RossHolder->GetRoss(), C);
 					Props += "GF";
 					Props += LeafIdStr;
 					Props += " = ";

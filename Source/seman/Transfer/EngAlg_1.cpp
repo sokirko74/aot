@@ -290,7 +290,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 		std::vector<TCortege> vec;
 		for( int j=GetRoss(type)->GetUnitStartPos(unit); j<=GetRoss(type)->GetUnitEndPos(unit); j++ )
 		{
-			TCortege C = GetCortege(GetRoss(type),j);
+			TCortege C = GetCortegeCopy(GetRoss(type),j);
 			if (C.m_BracketLeafId > 0) continue;
 			if (C.m_LeafId > 0) continue;
 			std::string field = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;

@@ -81,7 +81,7 @@ uint16_t CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
  if (!RossDoc->GetRoss()->IsEmptyArticle(UnitNo))
   for (size_t i = RossDoc->GetRoss()->GetUnitStartPos(UnitNo); i<= RossDoc->GetRoss()->GetUnitEndPos(UnitNo); i++)
 	{
-	    TCortege C = GetCortege(RossDoc->GetRoss(),i);
+	    TCortege C = GetCortegeCopy(RossDoc->GetRoss(),i);
 		if ( C.m_FieldNo ==  RossDoc->SemFetFieldNo )
 		{
 			if (C.m_DomItemNos[0] == RossDoc->A0LexFunctNo)

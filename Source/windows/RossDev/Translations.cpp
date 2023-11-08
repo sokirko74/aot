@@ -71,8 +71,6 @@ BOOL CTranslations::OnSetActive()
 	const CRusGramTab* A = GetSemBuilder().m_RusStr.m_pData->GetRusGramTab();
 	RusLemmas.clear();
 
-	int flag_count;
-
 	for (int i =0; i<m_ParadigmCollection.size(); i++)
 	{
 		const CFormInfo& FormInfo = m_ParadigmCollection[i];

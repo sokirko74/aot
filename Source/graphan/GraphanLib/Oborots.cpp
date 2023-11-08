@@ -245,11 +245,13 @@ void  CGraphanDicts :: BuildOborottos ()
 				for (; k <= GetOborDic()->GetUnitEndPos(i); k++)
 					if (GetOborDic()->GetCortegeFieldNo(k) == GetOborDic()->GetFieldNoByFieldStr("RESTR"))
 						if (GetOborDic()->GetCortegeItem(k,0) != -1)
-					{
-						std::string G = (const char*)GetOborDic()->GetDomItemStr(GetOborDic()->GetCortegeItem(k,0));
-						if (strcmp(G.c_str(),"fixed") == 0)
-						HasFixedFet = true;
-					};
+						{
+							auto item_no = GetOborDic()->GetCortegeItem(k, 0);
+							std::string G = (const char*)GetOborDic()->GetDomItemStr(item_no);
+							if (G == "fixed") {
+								HasFixedFet = true;
+							}
+						};
 
 				for (k=GetOborDic()->GetUnitStartPos(i); k <= GetOborDic()->GetUnitEndPos(i); k++)
 					if (GetOborDic()->GetCortegeFieldNo(k) == GetOborDic()->GetFieldNoByFieldStr("CONTENT"))

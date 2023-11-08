@@ -402,13 +402,15 @@ bool TItemContainer::BuildFields(BYTE MaxNumDom) {
         throw CExpc("cannot open file %s", FieldsFile.c_str());
     }
     auto fields = nlohmann::json::parse(inp);
-    for (auto f : fields) {
+    for (auto f_js : fields) {
         CField F;
-        F.ReadFromJson(f);
+        F.ReadFromJson(f_js);
+        for (auto& s : F.m_Signats) {
+            s.BuildSignatFormat(this, MaxNumDom, F.FieldStr);
+        }
         Fields.emplace_back(F);
     }
     
-    return BuildFormats(MaxNumDom);
 }
 
 
@@ -423,114 +425,6 @@ bool TItemContainer::WriteFields() const {
     outf.close();
     return true;
     
-};
-
-
-bool TItemContainer::BuildFormats(BYTE MaxNumDom) {
-    BYTE FieldNo = 0;
-    for (FieldNo = 0; FieldNo < Fields.size(); FieldNo++) {
-        std::vector<CSignat> Signats = Fields[FieldNo].m_Signats;
-
-        sort(Signats.begin(), Signats.end());
-
-        BYTE k = 0;
-
-        for (; k < Fields[FieldNo].m_Signats.size(); k++)
-            if ((k + 1 < Fields[FieldNo].m_Signats.size())
-                && (Signats[k].OrderNo == Signats[k + 1].OrderNo)) {
-                m_LastError = "Signats must have unique OrderNo; Field = ";
-                m_LastError += Fields[FieldNo].FieldStr;
-                return false;
-            };
-
-        for (k = 0; k < Fields[FieldNo].m_Signats.size(); k++)
-            if (!BuildOneFieldFormat(Fields[FieldNo].m_Signats[k], Fields[FieldNo].m_Signats[k].FormatStr.c_str(),
-                                     Fields[FieldNo].FieldStr.c_str(), MaxNumDom))
-                return false;;
-
-        if (!UpdateSignatsOfTheFieldInCorteges(FieldNo, Signats)) {
-            m_LastError = "удален формат, который присут. в словаре; Field = ";
-            m_LastError += Fields[FieldNo].FieldStr;
-            return false;
-        };
-
-
-        sort(Fields[FieldNo].m_Signats.begin(), Fields[FieldNo].m_Signats.end());
-    };
-
-    return true;
-};
-
-
-bool TItemContainer::BuildOneFieldFormat(CSignat &Sgn, const char *Frmt, const char *Name, BYTE MaxNumDom) {
-    char DomStr[100];
-    char _Frmt[255];
-    strcpy(_Frmt, Frmt);
-    Sgn.sFrmt[0] = 0;
-    Sgn.sFrmtWithotSpaces[0] = 0;
-    Sgn.DomsWithDelims.clear();
-    Sgn.Doms.clear();
-    if (_Frmt[0] == 0) {
-        m_LastError = Format("В формате поля  %s оставлены пустые строки!", Name);
-        return false;
-    };
-
-    // FunRec.Doms. В конце переменная DomMeanNum должна содержать число
-    // значимых доменов.
-    StringTokenizer tok(_Frmt, " ");
-
-    while (tok()) {
-        strcpy(DomStr, tok.val());
-        bool IsMult = (strlen(DomStr) > 0)
-                      && ((unsigned char) DomStr[strlen(DomStr) - 1] == '+');
-        if (IsMult)
-            DomStr[strlen(DomStr) - 1] = 0;
-
-        BYTE DomenNo = GetDomenNoByDomStr(DomStr);
-        if (DomenNo == ErrUChar) {
-            m_LastError = Format("Домен %s  не объявлен в таблице доменов (формат функции %s)!", DomStr, Name);
-            return false;
-        };
-        if (m_Domens[DomenNo].GetDomainSource() == dsSystem) {
-            m_LastError = Format(
-                    "Домен %s  объявлен как системный. Такие домены нельзя использовать в сигнатурах(формат функции %s)!",
-                    DomStr, Name);
-            return false;
-        };
-
-        Sgn.DomsWithDelims.push_back(TSignatItem(DomenNo, IsMult));
-        if (m_Domens[DomenNo].DomainIsDelim()) {
-            strcat(Sgn.sFrmt, " ");
-            if (!m_Domens[DomenNo].IsEmpty()) {
-                strcat(Sgn.sFrmt, m_Domens[DomenNo].m_DomainItemsBuffer);
-                strcat(Sgn.sFrmtWithotSpaces, m_Domens[DomenNo].m_DomainItemsBuffer);
-            }
-        } else {
-            strcat(Sgn.sFrmt, " %s");
-            strcat(Sgn.sFrmtWithotSpaces, "%s");
-
-
-            if (Sgn.Doms.size() == MaxNumDom) {
-                m_LastError = Format("Функция %s   Число значимых доменов  не может превышать %i!", Name, MaxNumDom);
-                return false;
-            }
-            if (IsMult) {
-                DomenNo = GetDomenNoByDomStr("D_MULT");
-                if (DomenNo == ErrUChar) {
-                    m_LastError = Format(
-                            "Домен D_MULT  не объявлен в таблице доменов, а функции %s используется оператор повтора(+)!",
-                            DomStr, Name);
-                    return false;
-                };
-            };
-
-            Sgn.Doms.push_back(DomenNo);
-
-        };
-
-    };
-
-    return true;
 };
 
 bool TItemContainer::WriteDomens() const {

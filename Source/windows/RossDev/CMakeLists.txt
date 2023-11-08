@@ -15,17 +15,16 @@ add_executable (${PROJECT_NAME} WIN32
         
         ChildFrm.cpp
         CntrItem.cpp
-        FieldEditor.cpp
         FieldList.cpp
-        FieldsListEditor.cpp
+        
         FindByStrDlg.cpp
         FindWrongRefs.cpp
         FldScroll.cpp
-        FormulaEditor.cpp
-        GridCtrl.cpp
+        
+        
         Hierarchy.cpp
         HierarchyDoc.cpp
-        ImportForm.cpp
+        
         InputBox.cpp
         MainFrm.cpp
         NewArticleWizard.cpp
@@ -43,17 +42,16 @@ add_executable (${PROJECT_NAME} WIN32
         RossDev.rgs
         RossDoc.cpp
         RossScheme.cpp
-        SchemeRossChoicer.cpp
+        
         SemanticStrDoc.cpp
         SemanticStrView.cpp
-        SetEditor.cpp
-        SignatEditor.cpp
+        
         SizeFormView.cpp
         Splash.cpp
         StdAfx.cpp
         SyntaxColorizer.cpp
         Translations.cpp
-        ValueDlg.cpp
+        
         WordList.cpp
         font.cpp
         picture.cpp

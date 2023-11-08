@@ -67,11 +67,6 @@ public:
 	CDictionary* GetRoss ();
 	CRossDoc*  GetRossDoc ();
 	void   	GotoLastField();
-	void   	AddOrInsertRossField (int nPos, ActionType fnAction);
-	bool   	GetFieldList (std::vector<CRossDevTextField>& Result, std::vector<CRossDevTextField>& Prohibited);
-	void   	EditValue(int nPos);
-	void   	EditOneValue(CRossDevTextField& F);
-	void   	EditFormulaValue (int nPos, char TypeRes);
 	void	WriteToEdit (std::vector<TCortege10>& L, size_t nPos);
 	void	DelField(size_t nPos);
 
@@ -99,9 +94,7 @@ protected:
 	afx_msg void OnArticleformClose();
 	afx_msg void OnArticleviewMarkup();
 	afx_msg void OnArticleviewTextbtn();
-	afx_msg void OnAddButton();
 	afx_msg void OnArticleViewDelField();
-	afx_msg void OnArticleFormValue();
 	afx_msg void OnChangeRichedit1();
 	afx_msg void OnEditCopy();
 	afx_msg void OnEditPaste();

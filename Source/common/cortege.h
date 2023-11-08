@@ -2,15 +2,14 @@
 // ==========  Dialing Structural Dictionary (www.aot.ru)
 // ==========  Copyright by Alexey Sokirko (1998-2002)
 
-
-#ifndef cortege_h
- #define cortege_h
+#pragma once
 
 #include <assert.h>
 #include "morph_dict/common/utilit.h"
 #include "morph_dict/common/bserialize.h"
 
 const BYTE ErrUChar	= 254;
+const BYTE UnknownSignatId = 16;
 
 struct TCortege10;
 
@@ -18,15 +17,21 @@ const char _FieldFormat[] = "%-8s= %s";
 const char _FieldFormatEqual[] = "%-8s== %s";
 
 
+
 template <int MaxNumDom>
-struct TBasicCortege {
+class TBasicCortege {
+
+protected:
+	BYTE m_SignatIdAndEqualFlag;  // reference to Ross :: Fields[m_FieldNo].m_Signats
+
+
 public:
-	BYTE m_FieldNo;      // индекс в массиве Ross :: Fields
-	BYTE m_SignatNo;  // индекс в массиве Ross :: Fields[FunNo].m_Signats
+	BYTE m_FieldNo;      // reference to Ross :: Fields
 	BYTE m_LevelId;
 	BYTE m_LeafId;
 	BYTE m_BracketLeafId;
 	int  m_DomItemNos[MaxNumDom];  
+
 
 	int GetItem  (size_t index)  const
 	{
@@ -41,31 +46,32 @@ public:
 
 	TBasicCortege()
 	{
-	  for (size_t i=0; i< MaxNumDom;i++)
-		  SetItem(i,-1);
-	  m_SignatNo = 0;
-	  m_FieldNo = ErrUChar;
-	  m_LeafId = 0;
-	  m_BracketLeafId = 0;
-	};
-	BYTE GetSignatNo()  const
-	{
-	  return (m_SignatNo  & (~128)) ;
+		for (size_t i = 0; i < MaxNumDom;i++)
+			SetItem(i, -1);
+		m_SignatIdAndEqualFlag = UnknownSignatId;
+		m_FieldNo = ErrUChar;
+		m_LeafId = 0;
+		m_BracketLeafId = 0;
 	};
 
-	void SetSignatNo(BYTE SignatNo) 
+	BYTE GetSignatId()  const
 	{
-	  m_SignatNo = SignatNo | (128 & m_SignatNo);
+	  return m_SignatIdAndEqualFlag & ~128;
+	};
+
+	void SetSignatId(BYTE SignatId) 
+	{
+		m_SignatIdAndEqualFlag = SignatId | (128 & m_SignatIdAndEqualFlag);
 	};
 
 	bool IsEqual() const
 	{
-	   return (m_SignatNo  & 128) > 0 ;
+		return (m_SignatIdAndEqualFlag & 128) > 0;
 	};
 
 	void SetEqual()
 	{
-	   m_SignatNo  |=  128;
+		m_SignatIdAndEqualFlag |= 128;
 	};
 	const  char* GetFieldFormat() const
 	{
@@ -84,7 +90,7 @@ public:
 	bool EqualCortege(const TBasicCortege& X, BYTE _MaxNumDom)  const 
 	{  
 	  return    (m_FieldNo  == X.m_FieldNo)  
-	             && (m_SignatNo == X.m_SignatNo)
+	             && (m_SignatIdAndEqualFlag == X.m_SignatIdAndEqualFlag)
 				 && (m_LevelId  == X.m_LevelId)
 				 && (m_LeafId   == X.m_LeafId)
 				 && (m_BracketLeafId   == X.m_BracketLeafId)
@@ -125,12 +131,57 @@ public:
 		m_LeafId = X.m_LeafId;
 		m_BracketLeafId = X.m_BracketLeafId;
 		m_LevelId = X.m_LevelId;
-		m_SignatNo = X.m_SignatNo;
+		SetSignatId(X.GetSignatId());
+		if (X.IsEqual()) {
+			SetEqual();
+		}
+
 		for (int i =0; i < MaxNumDom; i++)
 			SetItem(i, X.GetItem(i));
 
 		return *this;
 	};
+
+	size_t get_size_in_bytes() const {
+		return	::get_size_in_bytes(m_FieldNo)
+			+ ::get_size_in_bytes(m_SignatIdAndEqualFlag)
+			+ ::get_size_in_bytes(m_LevelId)
+			+ ::get_size_in_bytes(m_LeafId)
+			+ ::get_size_in_bytes(m_BracketLeafId)
+			+ ::get_size_in_bytes(m_DomItemNos[0]) * MaxNumDom
+			;
+
+	}
+
+	size_t save_to_bytes(BYTE* buf) const
+	{
+		buf += ::save_to_bytes(m_FieldNo, buf);
+		buf += ::save_to_bytes(m_SignatIdAndEqualFlag, buf);
+		buf += ::save_to_bytes(m_LevelId, buf);
+		buf += ::save_to_bytes(m_LeafId, buf);
+		buf += ::save_to_bytes(m_BracketLeafId, buf);
+
+		for (int j = 0; j < MaxNumDom; j++)
+			buf += ::save_to_bytes(m_DomItemNos[j], buf);
+
+		return get_size_in_bytes();
+	};
+
+
+	size_t restore_from_bytes (const BYTE* buf)
+	{
+		buf += ::restore_from_bytes(m_FieldNo, buf);
+		buf += ::restore_from_bytes(m_SignatIdAndEqualFlag, buf);
+		buf += ::restore_from_bytes(m_LevelId, buf);
+		buf += ::restore_from_bytes(m_LeafId, buf);
+		buf += ::restore_from_bytes(m_BracketLeafId, buf);
+		for (int j = 0; j < MaxNumDom; j++)
+			buf += ::restore_from_bytes(m_DomItemNos[j], buf);
+
+		return get_size_in_bytes();
+	};
+
+
 
 };
 
@@ -138,52 +189,20 @@ public:
 template <int MaxNumDom>
 size_t get_size_in_bytes (const TBasicCortege<MaxNumDom>& t)
 {
-
-	return	get_size_in_bytes(t.m_FieldNo) 
-			+ get_size_in_bytes(t.m_SignatNo) 
-			+ get_size_in_bytes(t.m_LevelId) 
-			+ get_size_in_bytes(t.m_LeafId) 
-			+ get_size_in_bytes(t.m_BracketLeafId) 
-			+ get_size_in_bytes(t.m_DomItemNos[0])*MaxNumDom
-            + 3; 
+	return	t.get_size_in_bytes();
 };
 
 template <int MaxNumDom>
 size_t save_to_bytes(const TBasicCortege<MaxNumDom>& i, BYTE* buf)
 {
-    // We have five bytes to serialize, do some byte shifting magic
-    // in order to round it to 8 bytes (multiple of 4, needed on SPARC).
-    
-    int a = i.m_FieldNo << 24 | i.m_SignatNo << 16 | i.m_LevelId << 8
-          | i.m_LeafId;
-    int b = i.m_BracketLeafId;
-    
-    buf += save_to_bytes(a, buf);
-    buf += save_to_bytes(b, buf);
-
-	for (int j = 0;  j < MaxNumDom; j++)
-		buf += save_to_bytes(i.m_DomItemNos[j], buf);
-
-	return get_size_in_bytes(i);
+	return i.save_to_bytes(buf);
 };
 
 
 template <int MaxNumDom>
 size_t restore_from_bytes(TBasicCortege<MaxNumDom>& i, const BYTE* buf)
 {
-    int a, b;
-    buf += restore_from_bytes(a, buf);
-    buf += restore_from_bytes(b, buf);
-	i.m_FieldNo = a >> 24;
-	i.m_SignatNo = (a >> 16) & 0xFF;
-    i.m_LevelId = (a >> 8) & 0xFF;
-    i.m_LeafId = a & 0xFF;
-    i.m_BracketLeafId = b;
-    
-	for (int j = 0;  j < MaxNumDom; j++)
-		buf += restore_from_bytes(i.m_DomItemNos[j], buf);
-
-	return get_size_in_bytes(i);
+	return i.restore_from_bytes(buf);
 };
 
 
@@ -191,33 +210,42 @@ size_t restore_from_bytes(TBasicCortege<MaxNumDom>& i, const BYTE* buf)
 
 struct TCortege10 : public TBasicCortege<10> 
 {
+	
 	TCortege10()
 	{
-		for (size_t i=0; i< 10;i++)
-			SetItem(i,-1);
-		m_SignatNo = 0;
+		for (size_t i = 0; i < 10;i++)
+			SetItem(i, -1);
+		m_SignatIdAndEqualFlag = UnknownSignatId;
 		m_FieldNo = ErrUChar;
 		m_LeafId = 0;
 		m_BracketLeafId = 0;
+		
 	};
 
-	TCortege10 (const TBasicCortege<3>& X)
+	/*TCortege10(const TBasicCortege<3>& X)
 	{
 		m_FieldNo = X.m_FieldNo;
 		m_LeafId = X.m_LeafId;
 		m_BracketLeafId =  X.m_BracketLeafId;
 		m_LevelId = X.m_LevelId;
-		m_SignatNo = X.m_SignatNo;
+		SetSignatId(X.GetSignatId());
+		if (X.IsEqual()) {
+			SetEqual();
+		}
 		for (int i =0; i < 3; i++)
 			SetItem(i, X.GetItem(i));
-	};
+	};*/
+
 	TCortege10 (const TBasicCortege<10>& X)
 	{
 		m_FieldNo = X.m_FieldNo;
 		m_LeafId = X.m_LeafId;
 		m_BracketLeafId = X.m_BracketLeafId;
 		m_LevelId = X.m_LevelId;
-		m_SignatNo = X.m_SignatNo;
+		SetSignatId(X.GetSignatId());
+		if (X.IsEqual()) {
+			SetEqual();
+		}
 		for (int i =0; i < 10; i++)
 			SetItem(i, X.GetItem(i));
 	};
@@ -225,10 +253,3 @@ struct TCortege10 : public TBasicCortege<10>
 
 };
 
-
-
-
-
-
-
-#endif

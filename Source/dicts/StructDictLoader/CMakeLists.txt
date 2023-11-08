@@ -19,13 +19,13 @@ macro (ImportExportMacro folder)
 
     add_test(
         NAME StructDictLoader_2fromtxt_${folder} 
-        COMMAND ${PROJECT_NAME} FromTxt ross.txt .
+        COMMAND ${PROJECT_NAME} --action from_txt --input-file ross.txt --output-ross-folder .
         WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}/${folder}
     )
 
     add_test(
         NAME StructDictLoader_3totxt_${folder} 
-        COMMAND ${PROJECT_NAME} ToTxt ross.txt.new .
+        COMMAND ${PROJECT_NAME} --action to_txt  --input-ross-folder . --output-file ross.txt.new
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/${folder}
     )
 
