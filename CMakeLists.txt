@@ -43,7 +43,7 @@ macro (ConvertStructDict name)
     add_custom_command(
         OUTPUT ${PROJECT_SOURCE_DIR}/units.bin ${PROJECT_SOURCE_DIR}/cortege.bin ${PROJECT_SOURCE_DIR}/comments.bin
         COMMAND StructDictLoader --action from_txt --input-file ross.txt  --output-ross-folder .
-        DEPENDS StructDictLoader ross.txt
+        DEPENDS StructDictLoader ross.txt fields.json domains.json
         COMMENT "Convert StructDict for ${name} to the binary format"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         VERBATIM
