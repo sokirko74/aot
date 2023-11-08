@@ -393,7 +393,7 @@ bool TItemContainer::ClearFields() {
 
 
 
-bool TItemContainer::BuildFields(BYTE MaxNumDom) {
+void TItemContainer::BuildFields(BYTE MaxNumDom) {
     ClearFields();
     
     std::ifstream inp;

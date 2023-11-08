@@ -21,7 +21,7 @@ CTempArticle::CTempArticle (BYTE MaxNumDom):  TCortegeContainer(MaxNumDom)
 
 const TCortege10& CTempArticle::GetRossCortege (size_t i) const
 {
-	const TCortege10& C = *m_pRoss->_GetCortege(i);
+	const TCortege10& C = *m_pRoss->GetCortegePtr(i);
 	return C;
 };
 
@@ -41,7 +41,7 @@ const TCortege10& CTempArticle::GetCortege (size_t i)  const
 		if (m_ReadOnly)
 			return GetRossCortege(m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo+i);
 		else
-			return *_GetCortege(i);
+			return *GetCortegePtr(i);
 };
 
 

@@ -262,7 +262,7 @@ public:
 
 inline TCortege GetCortegeCopy (const CDictionary* Ross, size_t CortegeNo)
 {
-	TCortege G = *Ross->_GetCortege(CortegeNo);
+	TCortege G = *Ross->GetCortegePtr(CortegeNo);
 
 	long i=0;
 	for (; i < Ross->m_MaxNumDom; i++)

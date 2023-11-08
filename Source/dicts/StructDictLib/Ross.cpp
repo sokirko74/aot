@@ -115,10 +115,7 @@ void TRoss::LoadOnlyConstants(const char* _RossPath)
 		throw CExpc("Cannot build domitems");
 	};
 
-	if (!BuildFields(m_MaxNumDom))
-	{
-        throw CExpc("Cannot build fields");
-	};
+	BuildFields(m_MaxNumDom);
 	CortegeFile = MakePath(RossPath, "cortege.bin");
 	UnitsFile = MakePath(RossPath, "units.bin");
 	UnitCommentsFile = MakePath(RossPath, "comments.bin");
@@ -769,8 +766,8 @@ bool   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo, int& ItemNo)
 	m_DomItems.insert(It, D);
 	for (i = 0; i < _GetCortegesSize(); i++)
 		for (size_t k = 0; k < m_MaxNumDom; k++)
-			if (_GetCortege(i)->GetItem(k) >= ItemNo)
-				_GetCortege(i)->SetItem(k, _GetCortege(i)->GetItem(k) + 1);
+			if (GetCortegePtr(i)->GetItem(k) >= ItemNo)
+                GetCortegePtr(i)->SetItem(k, GetCortegePtr(i)->GetItem(k) + 1);
 
 	return true;;
 };
@@ -787,15 +784,15 @@ void TRoss::DelDomItem(int ItemNo)
 				for (size_t k = m_Units[i].m_StartCortegeNo; k <= m_Units[i].m_LastCortegeNo; k++)
 				{
 					for (size_t j = 0; j < m_MaxNumDom; j++)
-						if (_GetCortege(k)->GetItem(j) == ItemNo)
+						if (GetCortegePtr(k)->GetItem(j) == ItemNo)
 						{
-							if (_GetCortege(k)->m_LevelId > 0)
+							if (GetCortegePtr(k)->m_LevelId > 0)
 								for (size_t l = m_Units[i].m_StartCortegeNo; l <= m_Units[i].m_LastCortegeNo; l++)
-									if ((_GetCortege(l)->m_FieldNo == _GetCortege(k)->m_FieldNo)
-										&& (_GetCortege(l)->m_LeafId == _GetCortege(k)->m_LeafId)
-										&& (_GetCortege(l)->m_LevelId > _GetCortege(k)->m_LevelId)
+									if ((GetCortegePtr(l)->m_FieldNo == GetCortegePtr(k)->m_FieldNo)
+										&& (GetCortegePtr(l)->m_LeafId == GetCortegePtr(k)->m_LeafId)
+										&& (GetCortegePtr(l)->m_LevelId > GetCortegePtr(k)->m_LevelId)
 										)
-										_GetCortege(l)->m_LevelId--;
+                                        GetCortegePtr(l)->m_LevelId--;
 
 							DelCorteges(k, k + 1);
 							if (m_Units[i].m_StartCortegeNo == m_Units[i].m_LastCortegeNo)
@@ -841,10 +838,10 @@ void TRoss::DelDomItem(int ItemNo)
 
 	for (i = 0; i < _GetCortegesSize(); i++)
 		for (size_t j = 0; j < m_MaxNumDom; j++)
-			if (_GetCortege(i)->GetItem(j) != -1
-				&& _GetCortege(i)->GetItem(j) > ItemNo
+			if (GetCortegePtr(i)->GetItem(j) != -1
+                && GetCortegePtr(i)->GetItem(j) > ItemNo
 				)
-				_GetCortege(i)->SetItem(j, _GetCortege(i)->GetItem(j) - 1);
+                GetCortegePtr(i)->SetItem(j, GetCortegePtr(i)->GetItem(j) - 1);
 
 	m_DomItems.erase(m_DomItems.begin() + ItemNo);
 };
@@ -1003,16 +1000,16 @@ std::vector<CStructEntry>& CDictionary::GetUnits()
 };
 BYTE CDictionary::GetCortegeFieldNo(size_t i) const
 {
-	return _GetCortege(i)->m_FieldNo;
+	return GetCortegePtr(i)->m_FieldNo;
 
 };
 BYTE CDictionary::GetCortegeLeafId(size_t i) const
 {
-	return _GetCortege(i)->m_LeafId;
+	return GetCortegePtr(i)->m_LeafId;
 };
 BYTE CDictionary::GetCortegeBracketLeafId(size_t i) const
 {
-	return _GetCortege(i)->m_BracketLeafId;
+	return GetCortegePtr(i)->m_BracketLeafId;
 
 };
 
@@ -1049,7 +1046,7 @@ BYTE CDictionary::GetDomItemDomNo(int ItemNo) const
 
 int	CDictionary::GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const
 {
-	return	_GetCortege(CortegeNo)->GetItem(PositionInCortege);
+	return GetCortegePtr(CortegeNo)->GetItem(PositionInCortege);
 };
 
 const char* CDictionary::GetDomItemStr(int ItemNo) const

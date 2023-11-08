@@ -6,7 +6,7 @@ TCortegeContainer::TCortegeContainer(BYTE MaxNumDom)
 	m_MaxNumDom = MaxNumDom;
 };
 
-TCortege10* TCortegeContainer::_GetCortege(size_t i)
+TCortege10* TCortegeContainer::GetCortegePtr(size_t i)
 {
 	if (m_MaxNumDom == 3)
 		return (TCortege10*)(&m_Corteges3[i]);
@@ -14,7 +14,7 @@ TCortege10* TCortegeContainer::_GetCortege(size_t i)
 		return (TCortege10*)(&(m_Corteges10[i]));
 };
 
-const TCortege10* TCortegeContainer::_GetCortege(size_t i)  const
+const TCortege10* TCortegeContainer::GetCortegePtr(size_t i)  const
 {
 	if (m_MaxNumDom == 3)
 		return (TCortege10*)(&m_Corteges3[i]);
@@ -39,7 +39,7 @@ void  TCortegeContainer::ConcatOtherContainer(const TCortegeContainer& other)
 	for (int i=0; i < other._GetCortegesSize(); i++)
 	{
 		TCortege10 C;
-		C = *other._GetCortege(i);
+		C = *other.GetCortegePtr(i);
 		_AddCortege(C);
 	};
 

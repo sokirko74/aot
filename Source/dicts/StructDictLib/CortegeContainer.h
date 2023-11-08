@@ -22,8 +22,8 @@ public:
 
 	TCortegeContainer(BYTE MaxNumDom);
 
-	TCortege10* _GetCortege(size_t i);
-	const TCortege10* _GetCortege(size_t i)  const;
+	TCortege10* GetCortegePtr(size_t i);
+	const TCortege10* GetCortegePtr(size_t i)  const;
 
 
 	size_t	_GetCortegesSize()  const;

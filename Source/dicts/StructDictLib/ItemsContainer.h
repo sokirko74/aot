@@ -105,7 +105,7 @@ public :
 	bool		CanBeRusColloc  (const char*  s) const;
 	BYTE		GetFieldNoByFieldStrInner (const char* FieldStr) const; 
 	bool		ClearFields ();
-	bool		BuildFields(BYTE MaxNumDom);
+	void		BuildFields(BYTE MaxNumDom);
 	bool		WriteFields() const;
 	bool		WriteDomens () const;
 	size_t		GetDomItemsSize() const {return m_DomItems.size();};
