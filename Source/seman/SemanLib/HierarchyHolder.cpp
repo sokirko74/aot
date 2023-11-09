@@ -158,7 +158,7 @@ void CHierarchyHolder::ReadFromRoss(bool WithoutView)
 	if ((NodeFieldNo == ErrUChar) || (RelFieldNo == ErrUChar)) return;
 	for (long i = 0; i < A.GetCortegesSize(); i++)
 	{
-		TCortege C = A.GetCortege(i);
+		TCortege10 C = A.GetCortege(i);
 		if ((C.m_FieldNo == NodeFieldNo)
 			&& (C.m_DomItemNos[0] != -1)
 			&& (C.m_DomItemNos[1] != -1)
@@ -341,7 +341,7 @@ bool SemFetActantIsEqualOrLower(CRossHolder* Ross, uint16_t Host, BYTE LeafId, B
 		{
 
 			Found = true;
-			TCortege C = GetCortegeCopy(Ross->GetRoss(), i);
+			TCortege10 C = GetCortegeCopy(Ross->GetRoss(), i);
 			if ((ItemNo != C.m_DomItemNos[0])
 				&& !IsEqualOrHigherInHierarchy(Ross, ItemNo, Ross, C.m_DomItemNos[0], pHierarchyDoc)
 				)

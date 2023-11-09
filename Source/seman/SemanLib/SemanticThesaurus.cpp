@@ -391,7 +391,7 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 				if (!Ross->IsEmptyArticle(UnitNo))
 					for (size_t j = Ross->GetUnitStartPos(UnitNo); j <= Ross->GetUnitEndPos(UnitNo); j++)
 					{
-						TCortege C = GetCortegeCopy(Ross, j);
+						TCortege10 C = GetCortegeCopy(Ross, j);
 						std::string FieldStr = Ross->Fields[C.m_FieldNo].FieldStr;
 						if ((FieldStr == "LEX")
 							|| (FieldStr == "MANLEX")

@@ -68,7 +68,7 @@ try{
 		size_t k = m_pActiveRossDoc->GetRoss()->GetUnitStartPos(UnitNo);
 		for (; k <= m_pActiveRossDoc->GetRoss()->GetUnitEndPos(UnitNo); k++)
 		  {
-			TCortege C = GetCortege(m_pActiveRossDoc->GetRoss(), k);
+			TCortege10 C = GetCortege(m_pActiveRossDoc->GetRoss(), k);
 			if (C.m_FieldNo != EngFieldNo) continue;
 			std::string Q = WriteToString(m_pActiveRossDoc->GetRoss(),  C);
 			if (   (Q.find("TR")!=-1) 

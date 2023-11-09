@@ -11,7 +11,6 @@
 const BYTE ErrUChar	= 254;
 const BYTE UnknownSignatId = 16;
 
-struct TCortege10;
 
 const char _FieldFormat[] = "%-8s= %s";
 const char _FieldFormatEqual[] = "%-8s== %s";
@@ -21,7 +20,6 @@ const char _FieldFormatEqual[] = "%-8s== %s";
 template <int MaxNumDom>
 class TBasicCortege {
 
-protected:
 	BYTE m_SignatIdAndEqualFlag;  // reference to Ross :: Fields[m_FieldNo].m_Signats
 
 
@@ -35,12 +33,12 @@ public:
 
 	int GetItem  (size_t index)  const
 	{
-		assert (index<MaxNumDom);
+		assert (index < MaxNumDom);
 		return m_DomItemNos[index];
 	};
 	int SetItem  (size_t index, long Value) 
 	{
-		assert (index<MaxNumDom);
+		assert (index < MaxNumDom);
 		return m_DomItemNos[index] =  Value;
 	};
 
@@ -64,7 +62,7 @@ public:
 		m_SignatIdAndEqualFlag = SignatId | (128 & m_SignatIdAndEqualFlag);
 	};
 
-	bool IsEqual() const
+	bool IsUsedForInclusion() const
 	{
 		return (m_SignatIdAndEqualFlag & 128) > 0;
 	};
@@ -73,9 +71,10 @@ public:
 	{
 		m_SignatIdAndEqualFlag |= 128;
 	};
+
 	const  char* GetFieldFormat() const
 	{
-	  return IsEqual() ? _FieldFormatEqual : _FieldFormat;
+	  return IsUsedForInclusion() ? _FieldFormatEqual : _FieldFormat;
 
 	};
 
@@ -132,7 +131,7 @@ public:
 		m_BracketLeafId = X.m_BracketLeafId;
 		m_LevelId = X.m_LevelId;
 		SetSignatId(X.GetSignatId());
-		if (X.IsEqual()) {
+		if (X.IsUsedForInclusion()) {
 			SetEqual();
 		}
 
@@ -205,51 +204,6 @@ size_t restore_from_bytes(TBasicCortege<MaxNumDom>& i, const BYTE* buf)
 	return i.restore_from_bytes(buf);
 };
 
-
-
-
-struct TCortege10 : public TBasicCortege<10> 
-{
-	
-	TCortege10()
-	{
-		for (size_t i = 0; i < 10;i++)
-			SetItem(i, -1);
-		m_SignatIdAndEqualFlag = UnknownSignatId;
-		m_FieldNo = ErrUChar;
-		m_LeafId = 0;
-		m_BracketLeafId = 0;
-		
-	};
-
-	/*TCortege10(const TBasicCortege<3>& X)
-	{
-		m_FieldNo = X.m_FieldNo;
-		m_LeafId = X.m_LeafId;
-		m_BracketLeafId =  X.m_BracketLeafId;
-		m_LevelId = X.m_LevelId;
-		SetSignatId(X.GetSignatId());
-		if (X.IsEqual()) {
-			SetEqual();
-		}
-		for (int i =0; i < 3; i++)
-			SetItem(i, X.GetItem(i));
-	};*/
-
-	TCortege10 (const TBasicCortege<10>& X)
-	{
-		m_FieldNo = X.m_FieldNo;
-		m_LeafId = X.m_LeafId;
-		m_BracketLeafId = X.m_BracketLeafId;
-		m_LevelId = X.m_LevelId;
-		SetSignatId(X.GetSignatId());
-		if (X.IsEqual()) {
-			SetEqual();
-		}
-		for (int i =0; i < 10; i++)
-			SetItem(i, X.GetItem(i));
-	};
-
-
-};
+typedef TBasicCortege<3> TCortege3;
+typedef TBasicCortege<10> TCortege10;
 

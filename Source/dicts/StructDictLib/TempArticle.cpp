@@ -439,7 +439,7 @@ bool CTempArticle::CheckCortegeVector ()
 			for (k=0; k<GetCortegesSize(); k++)
 			{
 				if (    (i!= k)
-					&& (GetCortege(i).EqualCortege(GetCortege(k), m_pRoss->m_MaxNumDom))
+					&& (GetCortegePtr(i)->EqualCortege(GetCortege(k), m_pRoss->m_MaxNumDom))
 					&& (m_pRoss->Fields[GetCortege(i).m_FieldNo].TypeRes == frOne)
 					)
 				{

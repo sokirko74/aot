@@ -532,7 +532,7 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 			unit = node.m_Colloc.GetRossInterp().m_UnitNo;
 		}
 
-		std::vector<TCortege> vec;
+		std::vector<TCortege10> vec;
 		GetRossHolder(type)->GetFieldValues("RUSETENSE",unit,vec);
 		if( vec.size() == 0 )
 			continue;

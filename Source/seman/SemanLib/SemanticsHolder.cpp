@@ -86,7 +86,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 	  {
 		 for (size_t i = GetRoss(type)->GetUnitStartPos(UnitNo); i<= GetRoss(type)->GetUnitEndPos(UnitNo); i++)
 		 {
-			TCortege C = GetCortegeCopy(GetRoss(type), i);
+			TCortege10 C = GetCortegeCopy(GetRoss(type), i);
 			std::string FieldStr = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
 			if  ( FieldStr == "TYP" ) 
 			{
@@ -105,7 +105,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 			if  ( FieldStr == "VAL" ) 
   			  A.m_Vals.push_back(CValency (C, GetRossHolder(type)->MainWordVarNo, GetRossHolder(type)));
 			
-			if (C.IsEqual())
+			if (C.IsUsedForInclusion())
 			{
 				if  (FieldStr == "GF" ) 
 				{
@@ -270,7 +270,7 @@ bool CSemanticsHolder::InitTimeUnits()
 		// по словарной статье 
 	for (size_t i = GetRoss(TimeRoss)->GetUnitStartPos(UnitNo); i<= GetRoss(TimeRoss)->GetUnitEndPos(UnitNo); i++)
 	{
-	  TCortege C = GetCortegeCopy(GetRoss(TimeRoss), i);
+	  TCortege10 C = GetCortegeCopy(GetRoss(TimeRoss), i);
 	  //незаполненное поле?
 	  if (C.m_DomItemNos[0] == -1) continue;
 	  // строю массив U.m_Places по полю CONTENT
@@ -421,7 +421,7 @@ bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, std::vector<CEngUni
 			if( RusFieldNo == GetRoss(type)->GetCortegeFieldNo(j) )
 			{
 				CEngUnitNoToRusUnit Item;
-				TCortege C = GetCortegeCopy (GetRoss(type), j);
+				TCortege10 C = GetCortegeCopy (GetRoss(type), j);
 				if( C.m_DomItemNos[0] == -1 )
 					continue;
 
@@ -638,7 +638,7 @@ bool BuildContensField(const CDictionary* Dict, std::vector<CUnitContent>& Vect)
 			long FieldNo = Dict->GetCortegeFieldNo(i);		
 			if( Dict->Fields[FieldNo].FieldStr == strField )
 			{
-				TCortege cortege;
+				TCortege10 cortege;
 				cortege = GetCortegeCopy(Dict, i);
 				std::string s = (const char*)Dict->GetDomItemStr(cortege.m_DomItemNos[0]); 
 				if (!BuildByFieldContents(s, j, Vect) )
@@ -918,7 +918,7 @@ bool CSemanticsHolder::BuildColloc (std::string ContentFieldStr, int CollocUnitN
 		// по словарной статье 
 		for (size_t j = GetRoss(CollocRoss)->GetUnitStartPos(CollocUnitNo); j <= GetRoss(CollocRoss)->GetUnitEndPos(CollocUnitNo); j++)
 		{
-		  TCortege Cort = GetCortegeCopy(GetRoss(CollocRoss), j);
+		  TCortege10 Cort = GetCortegeCopy(GetRoss(CollocRoss), j);
 		  //незаполненное поле?
 		  if (Cort.m_DomItemNos[0] == -1) continue;
 		  // строю массив U.m_Places по полю CONTENT

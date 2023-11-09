@@ -631,7 +631,7 @@ void CRusSemStructure::BuildMNAIncoming(long ClauseNo)
 				   if (m_Relations[m_Nodes[i].m_OutRels[j]].m_Valency.IsFromDict())
 				   {
 					  const CRossHolder* RossHolder =  m_Relations[m_Nodes[i].m_OutRels[j]].m_Valency.m_RossHolder;
-					  const TCortege& C = m_Relations[m_Nodes[i].m_OutRels[j]].m_SynReal.m_Cortege;
+					  const TCortege10& C = m_Relations[m_Nodes[i].m_OutRels[j]].m_SynReal.m_Cortege;
 					  bool IsPrepCortege =     RossHolder->IsLemGroupBegining(RossHolder->GetSynFet(C)) 
 											|| (RossHolder->GetSynRel(C) == RossHolder->AdverbialGrpNo);
 					  if (!IsPrepCortege && m_Nodes[NodeNo].HasSomePrep()) continue;

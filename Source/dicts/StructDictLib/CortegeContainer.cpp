@@ -26,7 +26,7 @@ void  TCortegeContainer::_AddCortege(const TCortege10& C)
 {
 	if (m_MaxNumDom == 3)
 	{
-		TBasicCortege<3> Q;
+		TCortege3 Q;
 		Q = C;
 		m_Corteges3.push_back(Q);;
 	}
@@ -87,19 +87,19 @@ void TCortegeContainer::EraseCorteges(size_t start, size_t last)
 void TCortegeContainer::WriteCorteges(const char* CortegeFile) const
 {
 	if (m_MaxNumDom == 3)
-		WriteVector<CortegeType3>(CortegeFile, m_Corteges3);
+		WriteVector<TCortege3>(CortegeFile, m_Corteges3);
 	else
-		WriteVector<CortegeType10>(CortegeFile, m_Corteges10);
+		WriteVector<TCortege10>(CortegeFile, m_Corteges10);
 };
 
 void TCortegeContainer::ReadCorteges(const char* CortegeFile)
 {
 	if (m_MaxNumDom == 3)
 	{
-		ReadVector<CortegeType3>(CortegeFile, m_Corteges3);
+		ReadVector<TCortege3>(CortegeFile, m_Corteges3);
 	}
 	else
-		ReadVector<CortegeType10>(CortegeFile, m_Corteges10);
+		ReadVector<TCortege10>(CortegeFile, m_Corteges10);
 };
 
 

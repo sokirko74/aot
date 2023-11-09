@@ -20,7 +20,7 @@ CValency::CValency  ()
 };
 
 
-CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossHolder* Ross, uint16_t UnitNo)
+CValency  :: CValency  (const TCortege10 C, const	long MainWordVarNo,	const CRossHolder* Ross, uint16_t UnitNo)
 {
 	m_Direction  =  (C.m_DomItemNos[1] ==	MainWordVarNo) ? C_A : A_C;
 	m_RelationStr	= Ross->GetDomItemStrInner(C.m_DomItemNos[0]);

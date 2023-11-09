@@ -150,7 +150,7 @@ bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, uint16_t unit
 {
 	if(unit_no == ErrUnitNo) return false;
 	if (RossHolder == 0) return false;
-	std::vector<TCortege> vec;
+	std::vector<TCortege10> vec;
 	StringTokenizer tok(value.c_str(), " \t");
 	StringVector value_vec;
 	while(tok()) value_vec.push_back(tok.val());
@@ -182,7 +182,7 @@ bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, uint16_t unit
 void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, uint16_t unit_no, const std::string &field, 
 				 StringVector &res, int max_items) const
 {
-	std::vector<TCortege> vec;
+	std::vector<TCortege10> vec;
 	E.GetRossHolder(dict_kind)->GetFieldValues(field.c_str(), unit_no, vec);
 	for(int i = 0; i < vec.size(); i++){
 		std::string value;

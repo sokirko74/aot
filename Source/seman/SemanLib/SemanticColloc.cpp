@@ -136,7 +136,7 @@ bool CRusSemStructure::CheckCollocItemGramFet(long CollocNo, long ItemNo, long N
 	long GramCortegeNo=0;
 	for (; GramCortegeNo < P.m_GramCorteges.size(); GramCortegeNo++)
 	{
-		TCortege& C = P.m_GramCorteges[GramCortegeNo];
+		TCortege10& C = P.m_GramCorteges[GramCortegeNo];
 		part_of_speech_mask_t Pose;
 		grammems_mask_t Grammems;
 		std::string GramFet = WriteToString(GetRoss(CollocRoss),  C);

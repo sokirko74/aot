@@ -1,17 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
 // Интерпретация связей
-// FillVectorOfGramCortegeAndType()
-// GetGramCortegesAndTypeFromRel()
-// GetGramCortegeType()
-// FillSemRelToGramCortegeMap()
-// CreateCortege()
-// AddSemRelToGramCortege()
 
 #include "StdAfx.h"
 
-/////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::FillVectorOfGramCortegeAndType(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV,std::vector<TCortege>&  GramCorteges, DictTypeEnum type)
+void CEngSemStructure::FillVectorOfGramCortegeAndType(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV,std::vector<TCortege10>&  GramCorteges, DictTypeEnum type)
 {
 	for( int i=0; i<GramCorteges.size(); i++ )
 	{
@@ -57,7 +50,7 @@ void CEngSemStructure::GetGramCortegesAndTypeFromRel(std::vector<SGramCortegesAn
 	else
 		iEngNode = semRel.m_SourceNodeNo;
 
-	std::vector<TCortege> GramCorteges;
+	std::vector<TCortege10> GramCorteges;
 	if( semRel.m_bInterpreted && !semRel.m_Pattern.IsEmpty() )
 	{
 		GramCorteges = semRel.m_Pattern.m_GramCorteges;
@@ -244,7 +237,7 @@ EGramCortegeType CEngSemStructure::GetGramCortegeType(std::string& gram_str)
 
 /////////////////////////////////////////////////////////////////////////////
 
-EGramCortegeType CEngSemStructure::GetGramCortegeType(TCortege& cortege, DictTypeEnum type)
+EGramCortegeType CEngSemStructure::GetGramCortegeType(TCortege10& cortege, DictTypeEnum type)
 {
 	if( cortege.m_DomItemNos[0] == -1 )
 		return UnknownGram;
@@ -276,9 +269,9 @@ AddSemRelToGramCortege("MULTI", CreateCortege("of+NP", "D_1"));
 
 /////////////////////////////////////////////////////////////////////////////
 
-TCortege CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen)
+TCortege10 CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen)
 {
-	TCortege cortege;
+	TCortege10 cortege;
 	cortege.m_DomItemNos[0] = GetRoss(Aoss)->GetItemNoByItemStr(strGX, 
 							GetRoss(Aoss)->GetDomenNoByDomStr(strDomen.c_str()));
 	cortege.m_DomItemNos[1] = -1;
@@ -288,7 +281,7 @@ TCortege CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen
 /////////////////////////////////////////////////////////////////////////////
 
 
-void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege cortege)
+void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege10 cortege)
 {
 	if( cortege.m_DomItemNos[0] == -1 )
 		return;

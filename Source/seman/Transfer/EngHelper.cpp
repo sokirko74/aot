@@ -6,7 +6,7 @@ const int g_PersPronounsCount = 5;
 std::string g_PersPronouns[g_PersPronounsCount] = {_R("Я"),_R("ТЫ"),_R("ОН"),_R("ОНА"), _R("ОНО")};
 
 
-bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const
+bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege10& cortege, DictTypeEnum   DictType ) const
 {
 	const CSignat& Signat = GetRoss(DictType)->GetSignat(cortege);
 	if( Signat.DomsWithDelims.size() != domens.size() )
@@ -59,7 +59,7 @@ void CEngSemStructure::ReadMorphFromMainGF(uint16_t UnitNo, DictTypeEnum type, C
 			return;
 	};
 
-	std::vector<TCortege> corteges;
+	std::vector<TCortege10> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	if( corteges.size() == 0 )
 		return;
@@ -222,7 +222,7 @@ void CEngSemStructure::GetIncomingRelationsInThisClause(int iNode, std::vector<l
 	}
 }
 
-bool CEngSemStructure::HasThisGX(const std::vector<TCortege>& gramCorteges, std::string value, DictTypeEnum type) const
+bool CEngSemStructure::HasThisGX(const std::vector<TCortege10>& gramCorteges, std::string value, DictTypeEnum type) const
 {
 	if( type == NoneRoss )
 		return false;
@@ -240,7 +240,7 @@ bool CEngSemStructure::HasThisGX(const std::vector<TCortege>& gramCorteges, std:
 	return false;	
 }
 
-std::string CEngSemStructure::GetCortegeStr(DictTypeEnum type, const TCortege& cortege) const
+std::string CEngSemStructure::GetCortegeStr(DictTypeEnum type, const TCortege10& cortege) const
 {
 	if( type == NoneRoss )
 		return "";
@@ -451,7 +451,7 @@ bool CEngSemStructure::FindSubjPattern(const CEngSemNode& N, CSemPattern& Result
 
 bool CEngSemStructure::SetSubjPattern(CEngSemRelation& semRel)
 {	
-	TCortege T;
+	TCortege10 T;
 	const CRossHolder* R = semRel.m_Valency.m_RossHolder;
 	if (R == 0)  return false;
 	T.m_DomItemNos[0] = R->EnglSubjSynONo;
@@ -562,7 +562,7 @@ void CEngSemStructure::FilLexFunctRel()
 bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, uint16_t UnitNo) const
 {
     if (!RossHolder || (UnitNo == ErrUnitNo)) return false;
-	std::vector<TCortege> corteges;
+	std::vector<TCortege10> corteges;
 	RossHolder->GetFieldValues(std::string("TYP"), UnitNo, corteges);
 	for(int i = 0 ; i < corteges.size() ; i++ )
 	{

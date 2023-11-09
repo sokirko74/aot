@@ -221,7 +221,7 @@ public:
    bool					HasFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0  ) const;
    // проверят все значения поля
    bool					HasFullFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0) const;
-   void					GetFieldValues(std::string strFieldName, long UnitNo, std::vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
+   void					GetFieldValues(std::string strFieldName, long UnitNo, std::vector<TCortege10>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
    bool					HasItem (uint16_t UnitNo, const std::string FieldStr, const std::string ItemStr, const std::string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
    
 
@@ -249,20 +249,20 @@ public:
 	bool				IsPosition (uint32_t ItemNo) const;
 	// выдает номер первой константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 	// (Значение до запятой)
-	long				GetSynRel(const  TCortege& C) const;
+	long				GetSynRel(const  TCortege10& C) const;
 	// выдает номер второй константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 	// (Значение после запятой)1
-	long				GetSynFet(const  TCortege& C) const;
-	long				IsCompAdjCortege(const  TCortege& C) const;
+	long				GetSynFet(const  TCortege10& C) const;
+	long				IsCompAdjCortege(const  TCortege10& C) const;
 
 };
 
 
 
 
-inline TCortege GetCortegeCopy (const CDictionary* Ross, size_t CortegeNo)
+inline TCortege10 GetCortegeCopy (const CDictionary* Ross, size_t CortegeNo)
 {
-	TCortege G = *Ross->GetCortegePtr(CortegeNo);
+	TCortege10 G = *Ross->GetCortegePtr(CortegeNo);
 
 	long i=0;
 	for (; i < Ross->m_MaxNumDom; i++)

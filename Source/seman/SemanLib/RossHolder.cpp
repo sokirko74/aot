@@ -229,7 +229,7 @@ bool CRossHolder::InitDomainsConsts()
 
 
 // По полю выдает набор	кортежей, которые ему приписано
-void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, std::vector<TCortege>& vectorCorteges, BYTE LeafId, BYTE BracketLeafId) const	
+void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, std::vector<TCortege10>& vectorCorteges, BYTE LeafId, BYTE BracketLeafId) const	
 {
 	if (UnitNo == ErrUnitNo)	return;
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
@@ -248,7 +248,7 @@ void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, std::vec
 // Проверяет, стоит	ли на первом месте одного из кортежей поля strFieldName	константа strValue
 bool CRossHolder::HasFieldValue(std::string strFieldName, std::string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
-	std::vector<TCortege> corteges;
+	std::vector<TCortege10> corteges;
 	GetFieldValues(strFieldName, UnitNo, corteges, LeafId);
 	for(int	i =	0 ;	i <	corteges.size()	; i++ )
 	{
@@ -263,12 +263,12 @@ bool CRossHolder::HasFieldValue(std::string strFieldName, std::string	strValue, 
 // Проверяет, является ли одним	из значений	поля strFieldName константа	strValue
 bool CRossHolder::HasFullFieldValue(std::string strFieldName, std::string	strValue, long UnitNo, BYTE	LeafId /*= 0  */, BYTE BracketLeafId) const
 {
-	std::vector<TCortege> corteges;
+	std::vector<TCortege10> corteges;
 	GetFieldValues(strFieldName, UnitNo, corteges, LeafId);
 	Trim(strValue);
 	for(int	i =	0 ;	i <	corteges.size()	; i++ )
 	{
-		TCortege& C	= corteges[i];
+		TCortege10& C	= corteges[i];
 		std::string FullFieldValue = WriteToString(GetRoss(), C);
 		Trim(FullFieldValue);
 		if (FullFieldValue == strValue)	return true;
@@ -292,7 +292,7 @@ void CRossHolder::GetFullFieldItemsFromArticle (long UnitNo, std::string	FieldSt
 			&& (GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId)	
 		 )
 	  {
-		 const TCortege& C = GetCortegeCopy(GetRoss(), i);
+		 const TCortege10& C = GetCortegeCopy(GetRoss(), i);
 		 std::string	FullFieldValue = WriteToString(GetRoss(),  C);
 		 Items.push_back (FullFieldValue);
 	  };
@@ -358,7 +358,7 @@ long  CRossHolder::GetDopFields(long UnitNo, std::vector<CDopField>&	DopFields) 
   for (size_t k=GetRoss()->GetUnitStartPos(UnitNo);	k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
 	 if	(DopFldName	== GetRoss()->GetCortegeFieldNo(k))
 	 {
-		 TCortege C	= GetCortegeCopy(GetRoss(),	k);
+		 TCortege10 C	= GetCortegeCopy(GetRoss(),	k);
 		 if	(	(C.m_DomItemNos[0] == -1)
 			 ||	(C.m_DomItemNos[1] == -1)
 			 ||	(C.m_DomItemNos[2] == -1)
@@ -540,7 +540,7 @@ bool CRossHolder::IsPosition (uint32_t ItemNo) const
 
 // выдает номер первой константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 // (Значение до запятой)
-long	CRossHolder::GetSynRel(const  TCortege& C) const
+long	CRossHolder::GetSynRel(const  TCortege10& C) const
 {
 	return (IsPosition(C.m_DomItemNos[0]) || IsVerbFet(C.m_DomItemNos[0]))
 		? C.m_DomItemNos[1] : C.m_DomItemNos[0];
@@ -548,14 +548,14 @@ long	CRossHolder::GetSynRel(const  TCortege& C) const
 
 // выдает номер второй константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 // (Значение после запятой)1
-long CRossHolder::GetSynFet(const  TCortege& C) const 
+long CRossHolder::GetSynFet(const  TCortege10& C) const 
 {
    return IsPosition(C.m_DomItemNos[0]) || IsVerbFet(C.m_DomItemNos[0]) 
 	   ? C.m_DomItemNos[2] : C.m_DomItemNos[1];
 };
 
 
-long	CRossHolder::IsCompAdjCortege(const  TCortege& C) const
+long	CRossHolder::IsCompAdjCortege(const  TCortege10& C) const
 {
    long ItemNo = GetSynFet(C);
    return  (ItemNo != -1) 

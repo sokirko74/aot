@@ -78,7 +78,7 @@ bool CEngSemStructure::HasNeg(long UnitNo, DictTypeEnum type )
 {
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
-	std::vector<TCortege> corteges;
+	std::vector<TCortege10> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	bool bFound = false;
 
@@ -104,7 +104,7 @@ bool CEngSemStructure::HasQuest(long UnitNo, DictTypeEnum type )
 {
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
-	std::vector<TCortege> corteges;
+	std::vector<TCortege10> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	bool bFound = false;
 
@@ -287,10 +287,10 @@ void  CEngSemStructure::RefineEngCollocPreps()
 		if( type!=EngCollocRoss )
 			continue;
 		int unit = m_Nodes[i].GetUnitNo();
-		std::vector<TCortege> vec;
+		std::vector<TCortege10> vec;
 		for( int j=GetRoss(type)->GetUnitStartPos(unit); j<=GetRoss(type)->GetUnitEndPos(unit); j++ )
 		{
-			TCortege C = GetCortegeCopy(GetRoss(type),j);
+			TCortege10 C = GetCortegeCopy(GetRoss(type),j);
 			if (C.m_BracketLeafId > 0) continue;
 			if (C.m_LeafId > 0) continue;
 			std::string field = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
@@ -492,7 +492,7 @@ void CEngSemStructure::ApplyALG_AL1(int iEngNode)
 // это появилось из-за ">> Х! : ИГ"
 
 bool CEngSemStructure::CompareCortegeItems(const CRossHolder* RossHolder,
-										   const TCortege &X,const TCortege &Y) const
+										   const TCortege10 &X,const TCortege10 &Y) const
 {
 	int iX = 0;
 	while( RossHolder->IsPosition(X.m_DomItemNos[iX]) && iX<10 )

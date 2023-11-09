@@ -743,7 +743,7 @@ void CWordList::OnSearchByArticle()
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 		if (GetUnitNo(i) != UnitNo)
 		{
-			std::vector<TCortege> L2;
+			std::vector<TCortege10> L2;
 			A2.ReadFromDictionary(GetUnitNo(i), false, true);
 			if (A1.IsPartOf(&A2, true))
 				UnitNos.push_back(CRossPocketItem(GetUnitNo(i), GetDocument()));
@@ -1062,15 +1062,15 @@ void CWordList::OnValencies()
 
 
 struct CFieldValue {
-	TCortege cortege;
+	TCortege10 cortege;
 	BYTE FieldNo;
 	int      freq;
 	BYTE	 m_MaxNumDom;
 
 	bool operator==(const CFieldValue& X) const
 	{
-		TCortege C = cortege;
-		TCortege XX = X.cortege;
+		TCortege10 C = cortege;
+		TCortege10 XX = X.cortege;
 		return		(FieldNo == X.FieldNo)
 			&& C.HasEqualItems(XX, m_MaxNumDom);
 	}
@@ -1347,11 +1347,11 @@ void CWordList::OnSelectByAuthor()
 struct GxiStatistic
 {
 	CString		m_SemRelName;
-	TCortege	m_GXi;
+	TCortege10	m_GXi;
 	int			m_num;
 	BYTE		m_MaxNumDom;
 	std::vector<long> Units;
-	GxiStatistic(CString SemRelName, TCortege GXi, long UnitNo, BYTE MaxNumDom)
+	GxiStatistic(CString SemRelName, TCortege10 GXi, long UnitNo, BYTE MaxNumDom)
 	{
 		m_SemRelName = SemRelName;
 		m_GXi = GXi;

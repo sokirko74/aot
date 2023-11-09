@@ -5,11 +5,11 @@
 
 class TCortegeContainer
 {
-	typedef TBasicCortege<3> CortegeType3;
-	typedef TBasicCortege<10> CortegeType10;
+	//typedef TBasicCortege<3> CortegeType3;
+	//typedef TBasicCortege<10> CortegeType10;
 
-	std::vector<CortegeType3>      m_Corteges3;
-	std::vector<CortegeType10>     m_Corteges10;
+	std::vector<TCortege3>      m_Corteges3;
+	std::vector<TCortege10>     m_Corteges10;
 protected:
 	void	_AddCortege(const TCortege10& C);
 	void   _InsertCortege(size_t index, const TCortege10& C);

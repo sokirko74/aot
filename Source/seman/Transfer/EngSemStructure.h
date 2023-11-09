@@ -216,7 +216,7 @@ struct SWeightToCortege
 {
 	SWeightToCortege()
 	{	m_Weight = 0; }
-	TCortege m_GramCortege;
+	TCortege10 m_GramCortege;
 	int m_Weight;
 
 	bool operator< (const SWeightToCortege& X) const
@@ -230,9 +230,9 @@ struct SWeightToCortege
 	std::vector<SWeightToCortege> m_WeightGramCorteges;
 	EGramCortegeType m_Type;
 
-	std::vector<TCortege> GetCorteges()
+	std::vector<TCortege10> GetCorteges()
 	{
-		std::vector<TCortege> corteges;
+		std::vector<TCortege10> corteges;
 		for( int i = 0 ; i < m_WeightGramCorteges.size() ; i++ )
 			corteges.push_back(m_WeightGramCorteges[i].m_GramCortege);
 		return corteges;
@@ -334,40 +334,40 @@ public:
 	std::string GetItemStr(long lItemNo, DictTypeEnum type /*= Aoss*/) const ;
 	void TranslateOneActant( int iRel,  int iEngNode);
 	void TranslateActants( int iEngNode, int iClause);
-	std::string GetPrep(const TCortege& cortege, DictTypeEnum type);
+	std::string GetPrep(const TCortege10& cortege, DictTypeEnum type);
 	std::string HasParticularPrepInField( CRossHolder* pLocRossDoc,int  iRusActant,CEngSemNode&  engActantm);
 	
 
-	bool Rule_TranslatePoss( int iRusActant, long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode);
-	bool Rule_TranslateObj( int iRusActant, long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode);
-	bool Rule_TranslateSubj( int iRusActant, long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode);
-	bool Rule_TranslatePrepNounGroup( int iRusActant, long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode);
+	bool Rule_TranslatePoss( int iRusActant, long RelationNo, const std::vector<TCortege10>& GramCorteges, int iEngNode);
+	bool Rule_TranslateObj( int iRusActant, long RelationNo, const std::vector<TCortege10>& GramCorteges, int iEngNode);
+	bool Rule_TranslateSubj( int iRusActant, long RelationNo, const std::vector<TCortege10>& GramCorteges, int iEngNode);
+	bool Rule_TranslatePrepNounGroup( int iRusActant, long RelationNo, const std::vector<TCortege10>& GramCorteges, int iEngNode);
 	bool Rule_TranslateRelWithPrepField(int iRusActant,long RelationNo, int iEngNode);
 
-	int  NumPrepPhr(const std::vector<TCortege>& GramCorteges, DictTypeEnum type);
+	int  NumPrepPhr(const std::vector<TCortege10>& GramCorteges, DictTypeEnum type);
 	void ReadMorphFromMainGF(uint16_t UnitNo, DictTypeEnum type, CSemWord& Word) const;
 	void InitEngWordAndLemma(CEngSemWord& semWord, std::string strEngLemma) const;
 
 	typedef std::map< std::string,std::vector<SGramCortegesAndType> > SemRelToGramCortegeMap_t;
-	EGramCortegeType GetGramCortegeType(TCortege& cortege, DictTypeEnum type);
+	EGramCortegeType GetGramCortegeType(TCortege10& cortege, DictTypeEnum type);
 	
 	SemRelToGramCortegeMap_t m_SemRelToGramCortegeMap;
 	void FillSemRelToGramCortegeMap();
 	typedef std::pair<std::string, std::string> StringPair;
-	void FillVectorOfGramCortegeAndType(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV,std::vector<TCortege>& GramCortegesm, DictTypeEnum type );
+	void FillVectorOfGramCortegeAndType(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV,std::vector<TCortege10>& GramCortegesm, DictTypeEnum type );
 	std::string BuildSentence();
 
 	std::vector< pair<std::string, std::string> > m_SemRelEquivs;
 	void FillSemRelEquivs();
 
-	bool Rule_TranslateInfinitive( int iRusActant, long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode);
+	bool Rule_TranslateInfinitive( int iRusActant, long RelationNo, const std::vector<TCortege10>& GramCorteges, int iEngNode);
 	bool MakeDeverbative( int iRusActant, int iEngActant, CEngSemNode& engNode);
-	bool HasGerund(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type );
-	bool HasToPlusInf(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type );
-	bool HasInf(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type );
-	bool HasItem(const std::vector<TCortege>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, std::string strItem);
-	bool HasItem(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type, std::string strItem);
-	std::string GetGerundPrep(const TCortege& cortege, DictTypeEnum type );
+	bool HasGerund(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type );
+	bool HasToPlusInf(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type );
+	bool HasInf(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type );
+	bool HasItem(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, std::string strItem);
+	bool HasItem(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type, std::string strItem);
+	std::string GetGerundPrep(const TCortege10& cortege, DictTypeEnum type );
 
 
 	bool IsSubj (const CEngSemRelation& Rel) const ;
@@ -400,8 +400,8 @@ public:
 	translate_helper helper;
 	bool init_helper();
 	void CreateEngClauses();
-	TCortege CreateCortege(std::string strGX, std::string strDomen);	
-	void AddSemRelToGramCortege(std::string semRel, TCortege cortege);
+	TCortege10 CreateCortege(std::string strGX, std::string strDomen);	
+	void AddSemRelToGramCortege(std::string semRel, TCortege10 cortege);
 	EGramCortegeType GetGramCortegeType(std::string& gram_str);
 	void GetGramCortegesAndTypeFromRel(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV, CEngSemRelation& semRel);
 	void GetIncomingRelationsInThisClause(int iNode, std::vector<long>& IncomeRels) const;
@@ -420,7 +420,7 @@ public:
 	void GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vectorEngEquivs, int RusUnitNo, DictTypeEnum   DictType  = Ross, int iRusNode = -1) const; 
 	void GetEngEquivsFromRusArticle_test(std::vector< SEngEquiv >& vectorEngEquivs, int RusUnitNo, DictTypeEnum   DictType) const; 
 	void IntersectEngEquivs(std::vector< SEngEquiv >& vectorEngEquivsFromRusArticle, std::vector<CEngInterp>& vectorEngEquivsFromAoss );
-	bool HasThisGX(const std::vector<TCortege>& gramCorteges, std::string value, DictTypeEnum type) const;
+	bool HasThisGX(const std::vector<TCortege10>& gramCorteges, std::string value, DictTypeEnum type) const;
 	void ChangeClauseNo(int oldClauseNo, int newClauseNo);
 
 	bool Init();
@@ -445,7 +445,7 @@ public:
 	void AddFixedGrammemsToNode();
 	
 	bool CompareCortegeItems(const CRossHolder* RossHolder,
-		const TCortege &X,const TCortege &Y) const;
+		const TCortege10 &X,const TCortege10 &Y) const;
 
 	bool HasALG(DictTypeEnum type, long UnitNo, std::string strAlg);
 	
@@ -476,10 +476,10 @@ public:
 
 	void ApplyInvitatoryRule(int iEngNode);
 
-	bool GetSINO(DictTypeEnum type,long unit,std::vector<TCortege>& vecSINO) const;
-	void GetSPrp(DictTypeEnum type,long unit,std::vector<TCortege>& vecSPrp) const;
-	void GetSArt(DictTypeEnum type,long unit,std::vector<TCortege>& vecSArt) const;
-	void GetSGxi(DictTypeEnum type,long unit,std::vector<TCortege>& vecSGxi) const;
+	bool GetSINO(DictTypeEnum type,long unit,std::vector<TCortege10>& vecSINO) const;
+	void GetSPrp(DictTypeEnum type,long unit,std::vector<TCortege10>& vecSPrp) const;
+	void GetSArt(DictTypeEnum type,long unit,std::vector<TCortege10>& vecSArt) const;
+	void GetSGxi(DictTypeEnum type,long unit,std::vector<TCortege10>& vecSGxi) const;
 	void ConvertClosedCollocToOpen();
 
 	bool IsQuestionClause(long ClauseNo) const { assert(false); return false; }
@@ -493,7 +493,7 @@ public:
 	SEngEquiv GetV0Value(const CSemNode& rusActant);
 	void SetPositionOfActantInColloc(CEngSemRelation& engRel, CSemPattern& semPattern, int iEngNode);
 	void CreateBeSemNode(CEngSemNode& semNode, int& iSubjPattern , int& iObjPattern );
-	bool CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const; 
+	bool CheckDomensForCortege(StringVector& domens, TCortege10& cortege, DictTypeEnum   DictType ) const; 
 	BYTE GetPosFromPosBit(size_t Pos) const;
 	bool IsSubjPattern(const CEngSemRelation& Rel ) const ;
 	void CreateEnglNodeForEngObor(long UnitNo, CEngSemNode& engNode) const;
@@ -501,15 +501,15 @@ public:
 	bool IsSubConj(CRossInterp interp);
 	bool SetSimpleEngPrep(std::string prep, int iNode, int iRel);
 
-	void GetAFieldVector(std::string FieldStr, DictTypeEnum type, std::vector<TCortege>& vectorAGX, long UnitNo) const;
+	void GetAFieldVector(std::string FieldStr, DictTypeEnum type, std::vector<TCortege10>& vectorAGX, long UnitNo) const;
 	
 	
 	
-	std::string GetCortegeStr(DictTypeEnum type, const TCortege& cortege) const;
+	std::string GetCortegeStr(DictTypeEnum type, const TCortege10& cortege) const;
 	bool IsGramFet(const CEngSemRelation& Rel , const std::string strPattern) const;
 	bool HasGramFet(const CEngSemRelation& Rel, const std::string strPattern) const;
 	bool IsObjPattern(const CEngSemRelation& Rel ) const;
-	std::string GetConj(const std::vector<TCortege>& GramCorteges, DictTypeEnum type);
+	std::string GetConj(const std::vector<TCortege10>& GramCorteges, DictTypeEnum type);
 	void HideCopul();
 	void FindEngWords(std::vector<CEngInterp>& resEngUnits, std::vector< SEngEquiv >& vectorEngEquivs, std::vector<DictTypeEnum> EngDictTypes);
 	void CreateHaveSemNode(CEngSemNode& newNode, int& iSubjPattern , int& iObjPattern, int iMeanNum=1 );
