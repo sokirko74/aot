@@ -1261,7 +1261,7 @@ bool CRusSemStructure::TryTestTree(std::string s)
 			if (!Node1 || !Node2) return false;
 			if (Node1 == Node2) return false;
 			Trim(RelStr);
-			if (RelStr.find(" ") != -1) return false;
+			if (RelStr.find(" ") != string::npos) return false;
 			Relations.push_back(CRusSemRelation(CValency(RelStr, C_A), Node1 - 1, Node2 - 1, ""));
 			CountRels++;
 		};

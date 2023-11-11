@@ -302,7 +302,6 @@ protected:
 	afx_msg void OnExportAllDicts();
 	afx_msg void OnEmptyAllDicts();
 	afx_msg void OnImportAllDicts();
-	afx_msg void OnDelTextDomains();
 	afx_msg void OnAllDictEntries();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

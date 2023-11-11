@@ -18,8 +18,7 @@ void export_dict(std::string fileName, std::string folder) {
 		throw CExpc("Cannot write to %s", fileName.c_str());
 	};
 
-	CTempArticle A(Dict.m_MaxNumDom);
-	A.m_pRoss = &Dict;
+	CTempArticle A(&Dict);
 
 	for (uint16_t i = 0; i < Dict.m_Units.size(); i++)
 	{

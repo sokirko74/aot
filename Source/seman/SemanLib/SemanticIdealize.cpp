@@ -235,22 +235,23 @@ void CRusSemStructure::ApplySubordinationCases() {
 
         if (m_Relations[MainRelNo].m_Valency.IsFromDict()) {
             TCortege10 &C = m_Relations[MainRelNo].m_SynReal.m_Cortege;
-            if (C.m_DomItemNos[1] == -1) continue;
+            if (C.is_null(1)) continue;
             const CRossHolder *RossHolder = m_Relations[MainRelNo].m_Valency.m_RossHolder;
-            long CaseItemNo = -1;
-            if (!IsCase(RossHolder, RossHolder->GetSynFet(C))) {
+            dom_item_id_t CaseItemNo = EmptyDomItemId;
+            
+            if (!RossHolder->IsCase(RossHolder->GetSynFet(C))) {
 
                 if (RossHolder->IsLemGroupBegining(RossHolder->GetSynFet(C))) {
-                    std::string s = RossHolder->GetDomItemStrInner(RossHolder->GetSynFet(C));
+                    std::string s = RossHolder->GetDomItemStrWrapper(RossHolder->GetSynFet(C));
                     int j = s.find("+");
-                    if (j == -1) continue;
+                    if (j == string::npos) continue;
                     s.erase(0, j + 1);
-                    CaseItemNo = RossHolder->GetItemNoByItemStr(s, "D_CASE");
+                    CaseItemNo = RossHolder->GetItemNoByItemStr1(s, RossHolder->CaseDomNo);
                 }
             } else
                 CaseItemNo = RossHolder->GetSynFet(C);
 
-            if (CaseItemNo == -1) continue;
+            if (is_null(CaseItemNo)) continue;
 
             uint64_t Grammems = GetCaseGrammem(RossHolder, CaseItemNo);
 
@@ -352,7 +353,7 @@ void CRusSemStructure::ApplySubordinationCases() {
             const CRossHolder *RossHolder = R.m_Valency.m_RossHolder;
             const TCortege10 &C = R.m_SynReal.m_Cortege;
             long SynFet = RossHolder->GetSynFet(R.m_SynReal.m_Cortege);
-            if (!IsCase(RossHolder, SynFet)) continue;
+            if (!RossHolder->IsCase(SynFet)) continue;
             long CaseGrammems = GetCaseGrammem(RossHolder, SynFet);
             if ((CaseGrammems & rAllNumbers) == 0) continue;
             CRusSemNode &Target = m_Nodes[m_Relations[i].m_TargetNodeNo];
@@ -454,11 +455,13 @@ void CRusSemStructure::ApplySubordinationSemfets() {
 мешать мне уйти -> SUB(я,уйти)я дам тебе посмотреть -> SUB(ты,посмотреть)он просил тебя уехать -> SUB(ты,уехать)
 */
 
-bool HasSynFet(const CSemPattern &P, long ItemNo) {
+bool HasSynFet(const CSemPattern &P, dom_item_id_t item_id) {
 
-    for (long i = 0; i < P.m_GramCorteges.size(); i++)
-        if (P.GetSynFet(i) == ItemNo)
+    for (auto& c : P.m_GramCorteges) {
+        auto syn_fet = P.GetRossHolder()->GetSynFet(c);
+        if (!is_null(syn_fet) && c.GetItem(syn_fet) == item_id)
             return true;
+    }
 
     return false;
 

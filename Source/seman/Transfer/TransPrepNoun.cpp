@@ -10,21 +10,21 @@ std::string CEngSemStructure::GetPrep(const TCortege10& cortege, DictTypeEnum ty
 	std::string strPrep;
 	strPrep.erase();
 
-	if( cortege.m_DomItemNos[0] == -1 )
+	if( cortege.is_null(0))
 		return strPrep;
 
-	std::string str = GetItemStr(cortege.m_DomItemNos[0], type);
+	std::string str = GetItemStr(cortege.GetItem(0), type);
 	
 
-	if( (iNum = str.find("+")) != -1 )
+	if( (iNum = str.find("+")) != string::npos )
 	{		
 		strPrep = str.substr(0, iNum);
 	}
 	else
-		if( cortege.m_DomItemNos[1] != -1 )
+		if( !cortege.is_null(1))
 		{
-			str = GetItemStr(cortege.m_DomItemNos[1], type);
-			if( (iNum = str.find("+")) != -1 )
+			str = GetItemStr(cortege.GetItem(1), type);
+			if( (iNum = str.find("+")) != string::npos )
 				strPrep = str.substr(0, iNum);
 		}
 
@@ -50,20 +50,20 @@ std::string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,in
 	{
 
 		const CSignat& Signat = pRossDoc->GetRoss()->GetSignat(vectorCortege[i]);
-		if( Signat.Doms.size() != 3 )
+		if( Signat.GetDomsWoDelims().size() != 3 )
 			return strPrep;
 
-		long DomNo = Signat.Doms[0];
+		long DomNo = Signat.GetDomsWoDelims()[0];
 		if( pRossDoc->GetRoss()->m_Domens[DomNo].GetDomStr() == "D_1" )
 		{
-			std::string strPattern = (const char*)pRossDoc->GetRoss()->GetDomItemStr(vectorCortege[i].m_DomItemNos[0]);
+			std::string strPattern = pRossDoc->GetRoss()->GetDomItemStr(vectorCortege[i].GetItem(0));
 			long PrepNo;
 			if( RusStr.CheckGroupBeginAndCase(strPattern, iRusActant, PrepNo) )
 			{
 
-				int prepItemNo = vectorCortege[i].m_DomItemNos[2];
-				if( prepItemNo != -1)
-					return (const char*)pRossDoc->GetRoss()->GetDomItemStr(prepItemNo);
+				dom_item_id_t prepItemNo = vectorCortege[i].GetItem(2);
+				if( !is_null(prepItemNo))
+					return pRossDoc->GetRoss()->GetDomItemStr(prepItemNo);
 			}
 		}
 	}
@@ -132,10 +132,10 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 	if( GramCorteges.size()==0 )
 		return false;
 //
-	int iPrepPhr = NumPrepPhr(GramCorteges, engNode.GetType());
+	auto iPrepPhr = NumPrepPhr(GramCorteges, engNode.GetType());
 	//если нет PREP_PHR то берем первый попавшийся предлог( вообще лучше сначала свериться с Путринским переводом и выбрать 
 	//тот предлого, который тот вернет( если ок один из тех, что в АОССе))
-	if( iPrepPhr==-1 )
+	if( iPrepPhr == nullptr )
 	{
 		std::string strPrep = GetPrep(GramCorteges[0], engNode.GetType());
 
@@ -149,7 +149,7 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 	//если есть PREP_PHR, то выбрать ничего не можем - переводим синтаксисом	
 	else
 	{
-		semEngRel.m_SynReal.m_Cortege = GramCorteges[iPrepPhr]; 
+		semEngRel.m_SynReal.m_Cortege = *iPrepPhr;
 		return true;
 	}
 
@@ -159,17 +159,15 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 
 
 
-int CEngSemStructure::NumPrepPhr(const std::vector<TCortege10>& GramCorteges, DictTypeEnum type)
+const TCortege10* CEngSemStructure::NumPrepPhr(const std::vector<TCortege10>& GramCorteges, DictTypeEnum type) const
 {
 	if( type == NoneRoss)
-		return false;
-	for( int i=0; i<GramCorteges.size(); i++ )
+		return nullptr;
+	for(auto& c: GramCorteges)
 	{
-		const TCortege10& cortege = GramCorteges[i];
-		if( (GetItemStr(cortege.m_DomItemNos[0], type) == "PREP_PHR") && (cortege.m_DomItemNos[1] == -1) )
-			return i;
+		if( (GetItemStr(c.GetItem(0), type) == "PREP_PHR") && c.is_null(1) )
+			return &c;
 	}
-
-	return -1;	
+	return nullptr;	
 }
 

@@ -1,5 +1,4 @@
-#ifndef RossHolder_H
-#define RossHolder_H
+#pragma once
 
 #include "morph_dict/common/utilit.h"
 #include "common/cortege.h"
@@ -10,7 +9,6 @@
 
 
 const int MaxWordLen = 32;
-
 
 
 // значени поля AUX, например, SUB (С1, С2)
@@ -60,6 +58,9 @@ class CRossHolder {
 
 	CDictionary			m_Ross;
 
+	void InitFieldsAndDomains();
+	bool InitDomainsConsts();
+
 public:
    BYTE                 ValFieldNo;
    BYTE                 RefFieldNo;
@@ -69,130 +70,121 @@ public:
    BYTE                 LexFetFieldNo;
    BYTE                 ObligLexFetFieldNo;
    BYTE                 ArticleFieldNo;
-   BYTE                 ActDomNo;
+   BYTE                 LexFunctFieldNo;
    BYTE                 SemFetFieldNo;
    BYTE                 NESOVMFieldNo;
 
+   //константы доменов
+   BYTE ActantsDomNo;
+   BYTE LexDomNo;
+   BYTE LexPlusDomNo;
+   BYTE CollocDomNo;
+   BYTE AbbrDomNo;
+   BYTE FieldDomNo;
+   BYTE SemFetDomNo;
+   BYTE SemRelDomNo;
+   BYTE LexFunctDomNo;
+   BYTE CaseDomNo;
+   BYTE CaseNumberDomNo;
+   BYTE ActDomNo;
+   BYTE MNADomNo;
+   BYTE SynRelDomNo;
+   BYTE SynGroupDomNo;
+   BYTE LemGroupBeginingDomNo;
+   BYTE PositionDomNo;
+   BYTE VerbFetDomNo;
+
    // лексические функции 
-   BYTE                 A0LexFunctNo;
-   BYTE                 S0LexFunctNo;
+   dom_item_id_t A0LexFunctNo;
+   dom_item_id_t S0LexFunctNo;
 
 
    // синтаксические отношения 
-   int IndirObjSynONo; //к_доп
-   int ReverseSynONo; //X! // пассивная валентность на именную группу
-   int UncoordAttrSynONo; //нс_опр
-   int CoordAttrSynONo; //с_опр
-   int DirectObjSynONo; //п_доп
-   int SubjSynONo; //подл
-   int EnglSubjSynONo; //subj
-   int ParatAttrSynONo; //прим_опр
-   int FromPredicSynONo; //отпредик
-   int PostSpecifSynONo; //уточн
+   dom_item_id_t IndirObjSynONo; //к_доп
+   dom_item_id_t ReverseSynONo; //X! // пассивная валентность на именную группу
+   dom_item_id_t UncoordAttrSynONo; //нс_опр
+   dom_item_id_t CoordAttrSynONo; //с_опр
+   dom_item_id_t DirectObjSynONo; //п_доп
+   dom_item_id_t SubjSynONo; //подл
+   dom_item_id_t EnglSubjSynONo; //subj
+   dom_item_id_t ParatAttrSynONo; //прим_опр
+   dom_item_id_t FromPredicSynONo; //отпредик
+   dom_item_id_t PostSpecifSynONo; //уточн
 
 
    // уточнения групп 
-	  int QuoteMarkNo;
-	  int ILENo;
-	  int InfinitiveNo;
-	  int NegativeNo;
-	  int PassiveNo;
+   dom_item_id_t QuoteMarkNo;
+   dom_item_id_t ILENo;
+   dom_item_id_t InfinitiveNo;
+   dom_item_id_t NegativeNo;
+   dom_item_id_t PassiveNo;
 
 	  // части речи 
-	  int AdjNo;
-	  int AdvNo;
-	  int PossPronNo;
-	  int NumeralNo;
+   dom_item_id_t AdjNo;
+   dom_item_id_t AdvNo;
+   dom_item_id_t PossPronNo;
+   dom_item_id_t NumeralNo;
+         
 
-	  // константы полей
-	  BYTE SemFeatureNo; 
-	  BYTE LexDerivationNo;  
-	  BYTE LemmaVariantsNo;  
-	  BYTE LexFuncsNo;  
-	  BYTE GramFeatureNo;
-	  BYTE LinkNo;
-
-	  //константы доменов
-	  BYTE ActantsDomNo;
-	  BYTE LexDomNo;
-	  BYTE LexPlusDomNo;
-	  BYTE CollocDomNo;
-	  BYTE AbbrDomNo;
-	  BYTE FieldDomNo;
-	  BYTE EmptyDomNo;
-	  BYTE SemFetDomNo;
-	  BYTE SemRelDomNo;
-	  BYTE LexFunctDomNo;
-      
-
-	  // константы main GF 
-	  int AdvAdjMainNo;
-	  int NounMainNo;
-	  int VerbMainNo;
-	  int AdjMainNo;
-	  int PronMainNo;
+	// константы main GF 
+   dom_item_id_t AdvAdjMainNo;
+   dom_item_id_t NounMainNo;
+   dom_item_id_t VerbMainNo;
+   dom_item_id_t AdjMainNo;
+   dom_item_id_t PronMainNo;
 
 
-	  // синтаксичесикие  группы 
-	  int ClauseGrpNo;
-	  int NounGrpNo;
-	  int AdverbialGrpNo;
-      int VerbGrpNo;
-	  int 	CopulNo;
-	  int 	ModalCopulNo;
+	// синтаксичесикие  группы 
+   dom_item_id_t ClauseGrpNo;
+   dom_item_id_t NounGrpNo;
+   dom_item_id_t AdverbialGrpNo;
+   dom_item_id_t VerbGrpNo;
+   dom_item_id_t	CopulNo;
+   dom_item_id_t	ModalCopulNo;
 
 
-	  // графеты
-	  int NumerComplexNo;
-	  int NumerSymbComplexNo;
-	  int HyphenNo;
+	// графеты
+   dom_item_id_t NumerComplexNo;
+   dom_item_id_t NumerSymbComplexNo;
+   dom_item_id_t HyphenNo;
 	  
   	  
-	  // падежи
-	  int NominativeNo;
-	  int InstrumentalisNo;
-	  int InstrumentalisAdjNo;
-	  int GenitivNo;
-	  int DativNo;
-	  int VocativNo;
-	  int AccusativNo;
-	  int NominativePluralisNo;
-	  int InstrumentalisPluralisNo;
-	  int GenitivPluralisNo;
-	  int DativPluralisNo;
-	  int VocativPluralisNo;
-	  int AccusativPluralisNo;
+	// падежи
+   dom_item_id_t NominativeNo;
+   dom_item_id_t InstrumentalisNo;
+   dom_item_id_t InstrumentalisAdjNo;
+   dom_item_id_t GenitivNo;
+   dom_item_id_t DativNo;
+   dom_item_id_t VocativNo;
+   dom_item_id_t AccusativNo;
+   dom_item_id_t NominativePluralisNo;
+   dom_item_id_t InstrumentalisPluralisNo;
+   dom_item_id_t GenitivPluralisNo;
+   dom_item_id_t DativPluralisNo;
+   dom_item_id_t VocativPluralisNo;
+   dom_item_id_t AccusativPluralisNo;
 
-	  int NominativeSingularNo;
-	  int InstrumentalisSingularNo;
-	  int GenitivSingularNo;
-	  int DativSingularNo;
-	  int VocativSingularNo;
-	  int AccusativSingularNo;
-	  bool IsGenitiv (int ItemNo) const 
-	  {
-		  if (ItemNo == -1) return false;
-		  return    (ItemNo== GenitivSingularNo) 
-			     || (ItemNo== GenitivPluralisNo) 
-				 || (ItemNo== GenitivNo);
-	  };
+   dom_item_id_t NominativeSingularNo;
+   dom_item_id_t InstrumentalisSingularNo;
+   dom_item_id_t GenitivSingularNo;
+   dom_item_id_t DativSingularNo;
+   dom_item_id_t VocativSingularNo;
+   dom_item_id_t AccusativSingularNo;
 
-
-  
+	bool IsGenitiv (dom_item_id_t ItemNo) const
+	{
+		return     (ItemNo == GenitivSingularNo)
+				|| (ItemNo == GenitivPluralisNo)
+				|| (ItemNo == GenitivNo);
+	};
+	 
 
 
-   BYTE                 SelfLabelNo;
-   BYTE                 LexFunctFieldNo;
-   int                 MainWordVarNo;
-   int                 MNANo;
-   BYTE                 MNADomNo;
-   BYTE                 SynRelDomNo;
-   BYTE                 SynGroupDomNo;
-   BYTE                 LemGroupBeginingDomNo;
-   BYTE                 PositionDomNo;
-   BYTE                 VerbFetDomNo;
-   int                 S_And_InstrNo;
-   int					RightDirectionNo;
+	dom_item_id_t   SelfLabelNo;
+	dom_item_id_t   MainWordVarNo;
+	dom_item_id_t   MNANo;
+	dom_item_id_t   S_And_InstrNo;
+	dom_item_id_t RightDirectionNo;
 
    std::string               m_DictName;
    std::string               m_DictPath;
@@ -206,10 +198,14 @@ public:
    CDictionary* GetRoss () {return &m_Ross;}
    const CDictionary* GetRoss () const {return &m_Ross;}
    bool			OpenRossHolder (const std::string strPathName, bool bDontLoadExamples);
-   long         GetItemNoByItemStr(const std::string& ItemStr, const char* DomStr) const ;
-   bool         InitDomainsConsts();
-   
 
+   dom_item_id_t GetItemNoByItemStr(const std::string& ItemStr, const char* DomStr) const ;
+   dom_item_id_t GetItemNoByItemStr1(const std::string& ItemStr, BYTE domNo) const;
+
+   const std::string& GetDomItemStrWrapper(dom_item_id_t item_id) const;
+   const std::string& GetDomItemStrWrapper1(size_t cortege_no, BYTE item_no) const;
+
+   TCortege10 GetCortegeCopy(size_t cortege_no) const;
 	
    bool InitConsts();
    void GetSimpleFieldItemsFromArticle (long UnitNo, std::string FieldStr, BYTE LeafId, BYTE BracketLeafId, StringVector& Items) const;
@@ -228,7 +224,6 @@ public:
 
 	bool				HasCX (uint16_t UnitNo, const std::string CX, const std::string DomStr) const;
 	uint16_t				LocateUnit (const char* UnitStr, BYTE MeanNum) const;
-	const char*			GetDomItemStrInner (long ItemNo) const;
 	// читает поле AUX, возвращает номер главного слова
 	long				GetDopFields(long UnitNo, std::vector<CDopField>& DopFields) const;
 	bool				GetVal(long UnitNo, CValency& V) const;
@@ -238,109 +233,24 @@ public:
 	long				GetSemMainWordFromArticle (long UnitNo) const;
 
 	// проверяет, что ItemNo принадлежит домену Д_ГГ_уточн
-	bool				IsVerbFet (uint32_t ItemNo) const;
+	bool				IsVerbFet (dom_item_id_t item_id) const;
 	// проверяет, что ItemNo принадлежит домену D_SYN_REL
-	bool				IsSynRel (uint32_t ItemNo) const;
+	bool				IsSynRel (dom_item_id_t item_id) const;
 	// проверяет, что ItemNo принадлежит домену D_1
-	bool				IsLemGroupBegining (uint32_t ItemNo) const;
+	bool				IsLemGroupBegining (dom_item_id_t item_id) const;
 	// проверяет, что ItemNo принадлежит домену D_GROUPS
-	bool				IsSynGroup (uint32_t ItemNo) const;
+	bool				IsSynGroup (dom_item_id_t item_id) const;
 	// проверяет, что ItemNo принадлежит домену D_POSITION
-	bool				IsPosition (uint32_t ItemNo) const;
+	bool				IsPosition (dom_item_id_t item_id) const;
 	// выдает номер первой константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 	// (Значение до запятой)
-	long				GetSynRel(const  TCortege10& C) const;
+	dom_item_id_t		GetSynRel(const  TCortege10& C) const;
 	// выдает номер второй константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 	// (Значение после запятой)1
-	long				GetSynFet(const  TCortege10& C) const;
-	long				IsCompAdjCortege(const  TCortege10& C) const;
-
+	dom_item_id_t		GetSynFet(const  TCortege10& C) const;
+	bool				IsCompAdjCortege(const  TCortege10& C) const;
+	bool IsCase(dom_item_id_t item_id) const;
 };
-
-
-
-
-inline TCortege10 GetCortegeCopy (const CDictionary* Ross, size_t CortegeNo)
-{
-	TCortege10 G = *Ross->GetCortegePtr(CortegeNo);
-
-	long i=0;
-	for (; i < Ross->m_MaxNumDom; i++)
-	{
-      long ItemNo = Ross->GetCortegeItem(CortegeNo, i);
-	  G.m_DomItemNos[i] =  ItemNo;
-	  if (ItemNo == -1) break;
-	};
-
-	if (i < 10)
-		G.m_DomItemNos[i] =  -1;
-
-    return G;
-};
-
-
-extern std::string WriteToString  (const CDictionary* Ross, const TCortege10& C);
-
-
-template <int size>
-class short_string
-{
-	char m_buffer[size];
-public:
-	short_string() 
-	{
-	};
-	short_string(const char* buffer) 
-	{
-		int len = strlen (buffer);
-		assert (len < size);
-		strcpy (m_buffer, buffer);
-	};
-	operator char* () 
-	{
-		return m_buffer;
-	};
-	operator const char* () 
-	{
-		return m_buffer;
-	};
-
-	operator std::string () 
-	{
-		return std::string(m_buffer);
-	};
-	operator const std::string () 
-	{
-		return std::string(m_buffer);
-	};
-	bool operator == (const short_string& X)  const
-	{
-		return strcmp (m_buffer, X.m_buffer) == 0;
-	};
-	bool operator < (const short_string& X)  const
-	{
-		return strcmp (m_buffer, X.m_buffer) < 0;
-	};
-
-	short_string operator = (const short_string& X) 
-	{
-		strcpy (m_buffer, X.m_buffer);
-		return *this;
-	};
-	short_string operator = (const std::string& X) 
-	{
-		assert (X.length() < size);
-		strcpy (m_buffer, X.c_str());
-		return *this;
-	};
-
-};
-
-
-
-
-
-extern void rml_LOG( const char* format, ... );
 
 
 template<class _II, class _Ty> inline
@@ -349,5 +259,3 @@ template<class _II, class _Ty> inline
 	  return !(find(It.begin(), It.end(), _V) ==  It.end());
 }
 
-
-#endif

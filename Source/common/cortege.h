@@ -9,6 +9,7 @@
 #include "morph_dict/common/bserialize.h"
 
 const BYTE ErrUChar	= 254;
+
 const BYTE UnknownSignatId = 16;
 
 
@@ -16,6 +17,26 @@ const char _FieldFormat[] = "%-8s= %s";
 const char _FieldFormatEqual[] = "%-8s== %s";
 
 
+typedef uint32_t dom_item_id_t;
+
+const uint32_t EmptyDomItemId = 0xffffffff;
+
+inline BYTE get_dom_no(dom_item_id_t item_id) {
+	return item_id >> 24;
+}
+
+inline uint32_t get_inner_item_index(dom_item_id_t item_id) {
+	return item_id & 0x00ffffff;
+}
+
+inline bool is_null(dom_item_id_t item_id) {
+	return item_id == EmptyDomItemId;
+}
+
+inline dom_item_id_t build_item_id(BYTE dom_no, uint32_t inner_item_index) {
+	return (24 << dom_no) | inner_item_index;
+
+}
 
 template <int MaxNumDom>
 class TBasicCortege {
@@ -28,29 +49,60 @@ public:
 	BYTE m_LevelId;
 	BYTE m_LeafId;
 	BYTE m_BracketLeafId;
-	int  m_DomItemNos[MaxNumDom];  
+	dom_item_id_t  m_DomItemNos[MaxNumDom];
 
 
-	int GetItem  (size_t index)  const
-	{
-		assert (index < MaxNumDom);
-		return m_DomItemNos[index];
-	};
-	int SetItem  (size_t index, long Value) 
-	{
-		assert (index < MaxNumDom);
-		return m_DomItemNos[index] =  Value;
-	};
 
 	TBasicCortege()
 	{
-		for (size_t i = 0; i < MaxNumDom;i++)
-			SetItem(i, -1);
 		m_SignatIdAndEqualFlag = UnknownSignatId;
 		m_FieldNo = ErrUChar;
 		m_LeafId = 0;
 		m_BracketLeafId = 0;
+		for (size_t i = 0; i < MaxNumDom;i++)
+			SetItem(i, EmptyDomItemId);
 	};
+
+	template<int MaxNumDom1>
+	TBasicCortege(const TBasicCortege<MaxNumDom1>& X)
+	{
+		m_FieldNo = X.m_FieldNo;
+		m_LeafId = X.m_LeafId;
+		m_BracketLeafId = X.m_BracketLeafId;
+		m_LevelId = X.m_LevelId;
+		SetSignatId(X.GetSignatId());
+		if (X.IsUsedForInclusion()) {
+			SetEqual();
+		}
+
+		int i = 0;
+		for (; i < min(MaxNumDom1, MaxNumDom); i++)
+			SetItem(i, X.GetItem(i));
+
+		for (; i < MaxNumDom; i++)
+			SetItem(i, EmptyDomItemId);
+	};
+
+	int GetItem(size_t index)  const
+	{
+		assert(index < MaxNumDom);
+		return m_DomItemNos[index];
+	};
+
+	int SetItem(size_t index, dom_item_id_t Value)
+	{
+		assert(index < MaxNumDom);
+		return m_DomItemNos[index] = Value;
+	};
+
+	BYTE GetMaxNumDom() const {
+		return MaxNumDom;
+	}
+
+
+	bool is_null(BYTE i) const {
+		return ::is_null(m_DomItemNos[i]);
+	}
 
 	BYTE GetSignatId()  const
 	{
@@ -96,7 +148,7 @@ public:
 				 && HasEqualItems (X, _MaxNumDom);
 	};
 
-	bool IsEqualWithWildCard(const TBasicCortege& X, uint16_t EmptyDomItem, BYTE _MaxNumDom) const
+	bool IsEqualWithWildCard(const TBasicCortege& X, uint16_t WildCardDomItemNo, BYTE _MaxNumDom) const
 	{  
 		if    (!(   (m_FieldNo  == X.m_FieldNo)  
 			 && (      (m_LevelId == ErrUChar)
@@ -116,29 +168,12 @@ public:
 
 		for (size_t i=0; i< _MaxNumDom;i++)
 		   if (     (GetItem(i)  != X.GetItem(i))
-				&&  (GetItem(i)  != EmptyDomItem)
-				&&  (X.GetItem(i) != EmptyDomItem)
+				&&  (GetItem(i)  != WildCardDomItemNo)
+				&&  (X.GetItem(i) != WildCardDomItemNo)
 			  )
 		   return false; 
 
 		return true;
-	};
-
-	TBasicCortege<MaxNumDom>& operator = (const TBasicCortege<10>& X)
-	{
-		m_FieldNo = X.m_FieldNo;
-		m_LeafId = X.m_LeafId;
-		m_BracketLeafId = X.m_BracketLeafId;
-		m_LevelId = X.m_LevelId;
-		SetSignatId(X.GetSignatId());
-		if (X.IsUsedForInclusion()) {
-			SetEqual();
-		}
-
-		for (int i =0; i < MaxNumDom; i++)
-			SetItem(i, X.GetItem(i));
-
-		return *this;
 	};
 
 	size_t get_size_in_bytes() const {
@@ -179,6 +214,13 @@ public:
 
 		return get_size_in_bytes();
 	};
+
+	void shift_left(BYTE start=0) {
+		for (BYTE k = start; k < MaxNumDom - 1; ++k) {
+			SetItem(k, GetItem(k + 1));
+		}
+		SetItem(MaxNumDom - 1, EmptyDomItemId);
+	}
 
 
 

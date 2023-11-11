@@ -18,20 +18,21 @@ class CTempArticle : public TCortegeContainer
 	std::string		ConstructFldName(BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
 	bool		PutCortegeOnTheRigthPosition(const TCortege10& C);
 	bool		ArticleToText();
+	
+	CDictionary* m_pRoss;
+	bool  m_ReadOnly;
 
-//	std::vector<TCortege10>		m_Corteges;
 
 public:
 	char					m_EntryStr[EntryStrSize];
 	BYTE					m_MeanNum;
 	uint16_t					m_UnitNo;
-	bool						m_ReadOnly;
 	std::vector<CTextField>		m_Fields;
-	CDictionary*				m_pRoss;
 	
 	std::string				m_LastError;
 	int						m_ErrorLine;
-	CTempArticle (BYTE MaxNumDom);
+
+	CTempArticle(CDictionary* pRossDoc);
 	
 
 

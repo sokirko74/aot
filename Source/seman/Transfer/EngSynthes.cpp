@@ -1181,7 +1181,7 @@ void CEngSynthes::find_all_clause_connectors()
 			// проверяем, если союз является разрывным, тогда
 			// нужно выделить вторую часть (после "...") и добавить ее
 			// к главной клаузе
-			if (conj_for_slave.find ("...") != -1)
+			if (conj_for_slave.find ("...") != string::npos)
 			{
 				int j = conj_for_slave.find ("...");
 				conj_for_master = conj_for_slave.substr(j+3);

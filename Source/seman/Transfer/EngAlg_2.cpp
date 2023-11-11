@@ -58,7 +58,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 			for( int i=0; i<outRels.size(); i++ )
 			{
 				int iTrg = m_Relations[outRels[i]].m_TargetNodeNo;
-				if( HasNeg(m_Nodes[iTrg].GetUnitNo(),m_Nodes[iTrg].GetType()) )
+				if( HasNeg(iTrg) )
 				{
 					iMCopRel = outRels[i];
 					break;
@@ -78,7 +78,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		for( int i=0; i<outRels.size(); i++ )
 		{
 			int iTrg = m_Relations[outRels[i]].m_TargetNodeNo;
-			if( HasNeg(m_Nodes[iTrg].GetUnitNo(),m_Nodes[iTrg].GetType()) )
+			if( HasNeg(iTrg) )
 			{
 				iMCopRel = outRels[i];
 				break;
@@ -94,7 +94,7 @@ void CEngSemStructure::ApplyModalCopulRule(int iEngNode)
 		for( int i=0; i<outRels.size(); i++ )
 		{
 			int iTrg = m_Relations[outRels[i]].m_TargetNodeNo;
-			if( HasNeg(m_Nodes[iTrg].GetUnitNo(),m_Nodes[iTrg].GetType()) )
+			if( HasNeg(iTrg) )
 			{
 				iMCopRel = outRels[i];
 				break;
@@ -438,7 +438,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	PrintRelations();
 	for( int i=0; i<outChilds.size(); i++ )
 	{
-		if( HasNeg(m_Nodes[outChilds[i]].GetUnitNo(),m_Nodes[outChilds[i]].GetType()) )
+		if( HasNeg(outChilds[i]) )
 		{
 			negChild = true;
 			break;

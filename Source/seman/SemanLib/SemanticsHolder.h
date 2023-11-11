@@ -659,7 +659,6 @@ class CSemanticsHolder  : public CAllRossesHolder
 
 extern  size_t GetCaseGrammem (const CRossHolder* RossDoc, long ItemNo); 
 extern  size_t GetCaseItemNo (CRossHolder* RossDoc, long GrammemNo);
-extern  bool IsCase (const CRossHolder* RossDoc, long ItemNo);
 
 
 

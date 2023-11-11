@@ -31,7 +31,7 @@ void update_article(const CSemPattern& P, CEngSemNode& N)
 		for (long i=0; i < P.m_ArticleCorteges.size(); i++)
 		{
 			const TCortege10& C = P.m_ArticleCorteges[i];
-			std::string ArticleStr = (const char*)P.m_pRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
+			std::string ArticleStr = P.m_pRossDoc->GetRoss()->GetDomItemStr(C.GetItem(0));
 		    if (ArticleStr != "")
 			{
               if (ArticleStr == "the|NOUN")

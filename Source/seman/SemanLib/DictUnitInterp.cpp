@@ -81,13 +81,13 @@ uint16_t CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
  if (!RossDoc->GetRoss()->IsEmptyArticle(UnitNo))
   for (size_t i = RossDoc->GetRoss()->GetUnitStartPos(UnitNo); i<= RossDoc->GetRoss()->GetUnitEndPos(UnitNo); i++)
 	{
-	    TCortege10 C = GetCortegeCopy(RossDoc->GetRoss(),i);
+	    TCortege10 C = RossDoc->GetCortegeCopy(i);
 		if ( C.m_FieldNo ==  RossDoc->SemFetFieldNo )
 		{
-			if (C.m_DomItemNos[0] == RossDoc->A0LexFunctNo)
+			if (C.GetItem(0) == RossDoc->A0LexFunctNo)
 			{
-				std::string Word = RossDoc->GetDomItemStrInner(C.m_DomItemNos[1]);
-				std::string S =  (C.m_DomItemNos[2] != -1)  ? RossDoc->GetDomItemStrInner(C.m_DomItemNos[2]) : "0";
+				std::string Word = RossDoc->GetDomItemStrWrapper(C.GetItem(1));
+				std::string S =  !C.is_null(2)  ? RossDoc->GetDomItemStrWrapper(C.GetItem(2)) : "0";
 				long MeanNum = atoi(S.c_str());
 				if (MeanNum == 0) MeanNum = 1;
 				long un = RossDoc->LocateUnit(Word.c_str(), MeanNum);

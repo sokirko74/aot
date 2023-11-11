@@ -22,15 +22,16 @@ CValency::CValency  ()
 
 CValency  :: CValency  (const TCortege10 C, const	long MainWordVarNo,	const CRossHolder* Ross, uint16_t UnitNo)
 {
-	m_Direction  =  (C.m_DomItemNos[1] ==	MainWordVarNo) ? C_A : A_C;
-	m_RelationStr	= Ross->GetDomItemStrInner(C.m_DomItemNos[0]);
-	std::string S = Ross->GetDomItemStrInner(C.m_DomItemNos[(m_Direction == A_C) ?	1 :	2]);
+	m_Direction  =  (C.GetItem(1) ==	MainWordVarNo) ? C_A : A_C;
+	m_RelationStr	= Ross->GetDomItemStrWrapper(C.GetItem(0));
+	bool leaf_item_no = (m_Direction == A_C) ? 1 : 2;
+	std::string S = Ross->GetDomItemStrWrapper(C.GetItem(leaf_item_no));
 	assert ( S.length() >	1 );
 	assert(isdigit ((unsigned	char)S[1]) );
 	m_LeafId = S[1] -	'0';
 	S	= Ross->GetRoss()->GetSignat(C).GetFrmt();
-	m_bOptional =	S.find("?")	!= -1;
-	m_bObligatory	= S.find("!") != -1;
+	m_bOptional =	S.find("?")	!= string::npos;
+	m_bObligatory	= S.find("!") != string::npos;
 	m_bObligatoryBecauseFirst	= false;
 
 	

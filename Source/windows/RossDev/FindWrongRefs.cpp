@@ -48,8 +48,7 @@ void CFindWrongRefs::OnOK()
 	// TODO: Add extra validation here
 try{
 	UpdateData(TRUE);
-	CTempArticle A;
-	A.m_pRoss = m_pActiveRossDoc->GetRoss();
+	CTempArticle A(m_pActiveRossDoc->GetRoss());
 	BYTE EngFieldNo = m_pActiveRossDoc->GetRoss()->GetFieldNoByFieldStr((const char*)m_FieldStr);
 
 	std::vector<CRossDoc*> RossDocs;
@@ -70,23 +69,23 @@ try{
 		  {
 			TCortege10 C = GetCortege(m_pActiveRossDoc->GetRoss(), k);
 			if (C.m_FieldNo != EngFieldNo) continue;
-			std::string Q = WriteToString(m_pActiveRossDoc->GetRoss(),  C);
-			if (   (Q.find("TR")!=-1) 
-				|| (Q.find("PR")!=-1) 
-				|| (Q.find("SR")!=-1)
-				|| (Q.find("[")!=-1)
+			std::string Q = m_pActiveRossDoc->GetRoss()->WriteToString(C);
+			if (   (Q.find("TR")!= string::npos) 
+				|| (Q.find("PR")!= string::npos)
+				|| (Q.find("SR")!= string::npos)
+				|| (Q.find("[")!= string::npos)
 			   ) continue;
-			if (C.m_DomItemNos[0] != -1)
+			if (!C.is_null(0))
 			{
-				std::string UnitStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
-				if (UnitStr.find(" ") != -1) continue;
+				std::string UnitStr =  m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.GetItem(0));
+				if (UnitStr.find(" ") != string::npos) continue;
 			};
 
-			if ( (C.m_DomItemNos[0] == -1) ||  (C.m_DomItemNos[1] == -1)) break;
-			std::string MeanNumStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[1]);
+			if ( C.is_null(0) || C.is_null(1)) break;
+			std::string MeanNumStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.GetItem(1));
 			if (MeanNumStr.length() != 1)  break;
 			BYTE MeanNum = MeanNumStr[0] - '0';
-			std::string UnitStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.m_DomItemNos[0]);
+			std::string UnitStr =  (const char*)m_pActiveRossDoc->GetRoss()->GetDomItemStr(C.GetItem(0));
 			int RossDocNo=0;
 			for (; RossDocNo<RossDocs.size();  RossDocNo++)
 			  if (RossDocs[RossDocNo]->GetRoss()->LocateUnit(UnitStr.c_str(), MeanNum)) 

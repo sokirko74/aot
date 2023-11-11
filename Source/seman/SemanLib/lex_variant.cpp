@@ -229,11 +229,11 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
                 for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo);
                      i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++) {
                     if (GetRoss(Ross)->GetCortegeFieldNo(i) == GetRossHolder(Ross)->RefFieldNo) {
-                        TCortege10 C = GetCortegeCopy(GetRoss(Ross), i);
-                        std::string S = GetRossHolder(Ross)->GetDomItemStrInner(C.m_DomItemNos[0]);
+                        TCortege10 C = GetRossHolder(Ross)->GetCortegeCopy(i);
+                        std::string S = GetRossHolder(Ross)->GetDomItemStrWrapper(C.GetItem(0));
                         long MeanNum = -1;
-                        if (C.m_DomItemNos[1] != -1) {
-                            std::string Q = GetRossHolder(Ross)->GetDomItemStrInner(C.m_DomItemNos[1]);
+                        if (!C.is_null(1)) {
+                            std::string Q = GetRossHolder(Ross)->GetDomItemStrWrapper(C.GetItem(1));
                             if (Q.length() == 1) {
                                 MeanNum = Q[0] - '0';
                             };
@@ -482,16 +482,16 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     // Добавляем операторы, которые пришли из морфологии (они были помещены в графеты
     // на Mapostе)
 
-    if (SemWord.m_GraphDescrs.find(_R("#ПОЛУ")) != -1)
+    if (SemWord.m_GraphDescrs.find(_R("#ПОЛУ")) != string::npos)
         N.m_RelOperators.push_back(_R("ПОЛУ"));
 
-    if (SemWord.m_GraphDescrs.find(_R("ЭКС-")) != -1)
+    if (SemWord.m_GraphDescrs.find(_R("ЭКС-")) != string::npos)
         N.m_RelOperators.push_back(_R("ЭКС-"));
 
-    if (SemWord.m_GraphDescrs.find(_R("ВИЦЕ-")) != -1)
+    if (SemWord.m_GraphDescrs.find(_R("ВИЦЕ-")) != string::npos)
         N.m_RelOperators.push_back(_R("ВИЦЕ-"));
 
-    if (SemWord.m_GraphDescrs.find(_R("#КАК_МОЖНО")) != -1) {
+    if (SemWord.m_GraphDescrs.find(_R("#КАК_МОЖНО")) != string::npos) {
         N.m_RelOperators.push_back(_R("КАК_МОЖНО"));
         long ParadigmId = m_pData->GetAdverbWith_O_ByAdjective(SemWord.m_ParadigmId, SemWord.m_Word);
         if (ParadigmId != -1) {
@@ -512,7 +512,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     */
 
     if ((SemWord.m_ParadigmId == -1)
-        && (SemWord.m_Lemma.find("-") != -1)
+        && (SemWord.m_Lemma.find("-") != string::npos)
         && (SemWord.m_Poses == (1 << NOUN))
             ) {
         int i = SemWord.m_Lemma.find("-");
@@ -565,9 +565,9 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     };
 
 
-    N.m_bQuoteMarks = (SemWord.m_GraphDescrs.find(" #QUOTED") != -1);
+    N.m_bQuoteMarks = (SemWord.m_GraphDescrs.find(" #QUOTED") != string::npos);
 
-    if (SemWord.m_GraphDescrs.find(_R("АВИА")) != -1)
+    if (SemWord.m_GraphDescrs.find(_R("АВИА")) != string::npos)
         N.m_RelOperators.push_back(_R("АВИА"));
 
 

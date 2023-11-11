@@ -70,7 +70,7 @@ bool CThesaurus::LoadTermins(std::string FileName)
 		CInnerTermin T;
 		for (char* s = strtok(buff, FieldDelimiter); s; s = strtok(0, FieldDelimiter))
 		{
-			int len = strlen(s);			
+			size_t len = strlen(s);			
 			if (s[0] == '"')
 			{
 				if (s[len - 1] != '"')

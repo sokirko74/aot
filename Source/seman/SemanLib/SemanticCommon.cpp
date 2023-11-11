@@ -464,7 +464,7 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 		if (!pRossDoc->GetRoss()->IsEmptyArticle(UnitNo))
 			for (size_t i = pRossDoc->GetRoss()->GetUnitStartPos(UnitNo); i <= pRossDoc->GetRoss()->GetUnitEndPos(UnitNo); i++)
 			{
-				TCortege10 C = GetCortegeCopy(pRossDoc->GetRoss(), i);
+				TCortege10 C = pRossDoc->GetCortegeCopy(i);
 				if (C.m_FieldNo == pRossDoc->ValFieldNo && Node.m_Vals.size() < MaxValsCount)
 				{
 					Node.m_Vals.push_back(CValency(C, pRossDoc->MainWordVarNo, pRossDoc, UnitNo));
@@ -503,8 +503,8 @@ std::vector<uint64_t> CSemanticStructure::GetGramRestr(const CSemNode& W)
 			for (size_t i = GetRoss(W.GetType())->GetUnitStartPos(W.GetUnitNo()); i <= GetRoss(W.GetType())->GetUnitEndPos(W.GetUnitNo()); i++)
 				if (GetRoss(W.GetType())->GetCortegeFieldNo(i) == GetRossHolder(W.GetType())->GramRestrFieldNo)
 				{
-					const TCortege10& C = GetCortegeCopy(GetRoss(W.GetType()), i);
-					std::string GramFet = WriteToString(GetRoss(W.GetType()), C);
+					const TCortege10& C = GetRossHolder(W.GetType())->GetCortegeCopy(i);
+					std::string GramFet = GetRoss(W.GetType())->WriteToString(C);
 					Trim(GramFet);
 					uint32_t Pose;
 					uint64_t Grammems;
@@ -741,11 +741,11 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 			Props += "\n";
 
 			if (GetRelation(i)->m_Valency.IsFromDict() && (GetRelation(i)->m_Valency.m_UnitNo != ErrUnitNo))
-				if (GetRelation(i)->m_SynReal.m_Cortege.m_DomItemNos[0] != -1)
+				if (!GetRelation(i)->m_SynReal.m_Cortege.is_null(0))
 				{
 					TCortege10 C = GetRelation(i)->m_SynReal.m_Cortege;
 					const CRossHolder* RossHolder = GetRelation(i)->m_Valency.m_RossHolder;
-					std::string GramFet = WriteToString(RossHolder->GetRoss(), C);
+					std::string GramFet = RossHolder->GetRoss()->WriteToString(C);
 					Props += "GF";
 					Props += LeafIdStr;
 					Props += " = ";
@@ -1286,20 +1286,19 @@ SEngEquiv CSemanticStructure::GetAL1Value(int UnitNo) const
 	std::vector<TCortege10> corteges;
 	GetRossHolder(Ross)->GetFieldValues(std::string("SF"), UnitNo, corteges);
 
-	for (int i = 0; i < corteges.size(); i++)
+	for (auto& c: corteges)
 	{
-		int j = 0;
-		if (corteges[i].m_DomItemNos[0] != -1)
+		if (!c.is_null(0))
 		{
-			std::string str1 = GetRossHolder(Ross)->GetDomItemStrInner(corteges[i].m_DomItemNos[0]);
+			std::string str1 = GetRossHolder(Ross)->GetDomItemStrWrapper(c.GetItem(0));
 			if (str1 == "AL1")
-				if (corteges[i].m_DomItemNos[1] != -1)
+				if (!c.is_null(1))
 				{
-					str1 = GetRossHolder(Ross)->GetDomItemStrInner(corteges[i].m_DomItemNos[1]);
+					str1 = GetRossHolder(Ross)->GetDomItemStrWrapper(c.GetItem(1));
 					res.m_StrEngWord = str1;
-					if (corteges[i].m_DomItemNos[2] != -1)
+					if (!c.is_null(2))
 					{
-						std::string meanNum = GetRossHolder(Ross)->GetDomItemStrInner(corteges[i].m_DomItemNos[2]);
+						std::string meanNum = GetRossHolder(Ross)->GetDomItemStrWrapper(c.GetItem(2));
 						res.m_iMeanNum = meanNum[0] - '0';
 					}
 				}
@@ -1593,8 +1592,8 @@ void CSemanticStructure::InitThesSemFet(CSemNode& OutNode, const CSemNode& InNod
 	{
 		std::string conceptStr = Thes->GetConceptStrById(i);
 		Trim(conceptStr);
-		if ((GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SF") != -1)
-			|| (GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SEM_REL") != -1)
+		if (   !is_null(GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SF"))
+			|| !is_null(GetRossHolder(Ross)->GetItemNoByItemStr(conceptStr, "D_SEM_REL"))
 			)
 			AddSemFet(OutNode, conceptStr.c_str());
 	};

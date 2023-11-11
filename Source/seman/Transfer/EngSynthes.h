@@ -105,7 +105,7 @@ struct NodeHelper{
 	bool is_subj_rel(int rel) const	{return E.IsSubj(E.m_Relations[rel]);}
  
    // проверяет, что у поля  field есть значение  value
-	bool FieldContainsValue(const CRossHolder* RossHolder, uint16_t UnitNo, 
+	bool FieldContainsValueInner(DictTypeEnum type, uint16_t UnitNo, 
 		const std::string &field, const std::string &value, int leaf = 0, int leaf2 = 0) const;
 	// проверяет, что у словарной интерпретации узла в поле  field есть значение  value
 	bool FieldContainsValue(const CEngSemNode& node, const std::string &field, const std::string &value, int leaf = 0, int leaf2 = 0) const;

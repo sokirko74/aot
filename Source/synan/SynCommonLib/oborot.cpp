@@ -173,7 +173,7 @@ void COborDic::BuildOborots(int iUnit, const CDictionary* piOborDic, WriteOborFu
 	for (size_t k = piOborDic->GetUnitStartPos(iUnit); k <= piOborDic->GetUnitEndPos(iUnit); k++)
 		  if (piOborDic->GetCortegeFieldNo(k) == piOborDic->GetFieldNoByFieldStr("CONTENT"))
 		  {
-			  std::string q = piOborDic->GetDomItemStr(piOborDic->GetCortegeItem(k,0));			  
+			  std::string q = piOborDic->GetDomItemStr(k, 0);			  
 			  BuildOborot(q, iUnit, WriteOborFunc);
 		  };
 }

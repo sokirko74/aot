@@ -395,13 +395,13 @@ try {
 			for	(long l=0; l	< ChildNodes.size(); l++)
 			{
 				AddRelation(CRusSemRelation(CValency(), CompNodeNo, ChildNodes[l],	 ""));
-				m_Relations[m_Relations.size()	- 1].m_SemFets = SemFets;
+				m_Relations.back().m_SemFets = SemFets;
 				if	(l == 0) //	группа после компаратива, пишем	на эту стрелку 
 					//	к_доп+Р, взятые	как	будто из РОССа
 				{
-					m_Relations[m_Relations.size() - 1].m_SynReal.m_Cortege.m_DomItemNos[0]	= GetRossHolder(Ross)->IndirObjSynONo;
-					m_Relations[m_Relations.size() - 1].m_SynReal.m_Cortege.m_DomItemNos[1]	= GetRossHolder(Ross)->GenitivNo;
-					m_Relations[m_Relations.size() - 1].m_Valency.m_RossHolder = GetRossHolder(Ross);
+					m_Relations.back().m_SynReal.m_Cortege.SetItem(0, GetRossHolder(Ross)->IndirObjSynONo);
+					m_Relations.back().m_SynReal.m_Cortege.SetItem(1, GetRossHolder(Ross)->GenitivNo);
+					m_Relations.back().m_Valency.m_RossHolder = GetRossHolder(Ross);
 				};
 			};
 

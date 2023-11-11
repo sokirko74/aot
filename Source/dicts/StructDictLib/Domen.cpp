@@ -2,47 +2,34 @@
 #include "../../common/util_classes.h"
 
 CDomen::CDomen() {
-    m_DomainItemsBuffer = 0;
-    m_DomainItemsBufferLength = 0;
-    m_StartDomItem = -1;
-    m_EndDomItem = -1;
     m_bFreed = false;
+    m_MaxDomItemId = 0;
 }
 
-int CDomen::AddItem(const char *s, int Length) {
-    m_DomainItemsBufferLength += Length + 1;
-    m_DomainItemsBuffer = (char *) realloc(m_DomainItemsBuffer, m_DomainItemsBufferLength);
-    memcpy(m_DomainItemsBuffer + m_DomainItemsBufferLength - Length - 1, s, Length);
-    m_DomainItemsBuffer[m_DomainItemsBufferLength - 1] = 0;
-    return m_DomainItemsBufferLength - Length - 1;
+dom_item_id_t CDomen::AddItemByEditor(const std::string& item_str) {
+    TDomenItem new_item = { m_MaxDomItemId + 1, item_str };
+    auto it = std::lower_bound(m_DomItems.begin(), m_DomItems.end(), new_item);
+    assert (it == m_DomItems.end() || !(*it == new_item));
+    size_t offset = it - m_DomItems.begin();
+    m_DomItems.insert(it, new_item);
+    ++m_MaxDomItemId;
+    m_ItemId2ItimeIndex.insert(m_ItemId2ItimeIndex.begin() + new_item.InnerDomItemId, offset);
+    assert(m_ItemId2ItimeIndex.size() == m_DomItems.size());
+    assert(GetDomItemStrById(new_item.InnerDomItemId) == item_str);
+    return build_item_id(DomNo, new_item.InnerDomItemId);
+
 }
 
-void CDomen::DelItem(int Offset, int Length) {
-    memmove(m_DomainItemsBuffer + Offset, m_DomainItemsBuffer + Offset + Length + 1, m_DomainItemsBufferLength - (Offset + Length + 1));
-    m_DomainItemsBufferLength -= Length + 1;
-    m_DomainItemsBuffer = (char *) realloc(m_DomainItemsBuffer, m_DomainItemsBufferLength);
-    m_EndDomItem--;
-    if (m_DomainItemsBufferLength == 0) {
-        m_StartDomItem = -1;
-        m_EndDomItem = -1;
-    };
-};
 
 CDomen::~CDomen() {
-    if (m_DomainItemsBuffer != 0)
-        free(m_DomainItemsBuffer);
 };
 
 bool CDomen::IsEmpty() const {
-    return m_StartDomItem == -1;
+    return !m_DomItems.empty();
 };
 
 bool CDomen::IsFreedDomain() const {
     return m_bFreed;
-}
-
-const char* CDomen::GetDomainItemsBuffer() const {
-    return m_DomainItemsBuffer;
 }
 
 const std::string& CDomen::GetDomStr() const {
@@ -55,8 +42,8 @@ char CDomen::GetDomainSource() const {
 
 
 void CDomen::MakeFree() {
-    free(m_DomainItemsBuffer);
-    m_DomainItemsBuffer = 0;
+    m_DomItems.clear();
+    m_ItemId2ItimeIndex.clear();
     m_bFreed = true;
 }
 
@@ -74,6 +61,7 @@ nlohmann::json CDomen::WriteToJson()  const {
 }
 
 void CDomen::ReadFromJson(TItemContainer* parent, BYTE domNO, nlohmann::json& js) {
+    DomNo = domNO;
     js.at("dom_ident").get_to(DomStr);
     js.at("category").get_to(Source);
     js.at("is_delim").get_to(IsDelim);
@@ -92,3 +80,36 @@ void CDomen::InitDomainParts(const std::unordered_map<std::string, BYTE>& ident2
     }
 }
 
+void CDomen::AddFromSerialized(const std::string& line) {
+    auto delim = line.find('\t');
+    uint32_t inner_item_id = atoi(line.substr(0, delim).c_str());
+    if (inner_item_id > m_MaxDomItemId) {
+        m_MaxDomItemId = inner_item_id;
+    }
+    m_DomItems.push_back({ inner_item_id , line.substr(delim + 1) });
+    if (inner_item_id < m_ItemId2ItimeIndex.size()) {
+        m_ItemId2ItimeIndex.resize(m_ItemId2ItimeIndex.size() + 100);
+        m_ItemId2ItimeIndex[inner_item_id] = m_DomItems.size() - 1;
+    }
+}
+
+const std::string& CDomen::GetDomItemStrById(const dom_item_id_t item_id) const {
+    size_t index = m_ItemId2ItimeIndex[get_inner_item_index(item_id)];
+    return  m_DomItems[index].DomItemStr;
+}
+
+
+dom_item_id_t CDomen::GetDomItemIdByStr(const std::string& item_str) const {
+    TDomenItem item = { -1, item_str };
+    auto it = std::lower_bound(m_DomItems.begin(), m_DomItems.end(), item);
+    if (it == m_DomItems.end()) {
+        return EmptyDomItemId;
+    };
+    return build_item_id(DomNo, it->InnerDomItemId);
+}
+
+void CDomen::WriteItemsToStream(std::ofstream& outp) const {
+    for (auto i : m_DomItems) {
+        outp << i.InnerDomItemId << "\t" << i.DomItemStr << "\n";
+    }
+}

@@ -41,7 +41,6 @@ add_executable (${PROJECT_NAME} WIN32
         RossDev.rc
         RossDev.rgs
         RossDoc.cpp
-        RossScheme.cpp
         
         SemanticStrDoc.cpp
         SemanticStrView.cpp

@@ -8,7 +8,6 @@
 #include "morph_dict/common/bserialize.h"
 #include "Ross.h"
 #include "morph_dict/common/util_classes.h"
-#include "LessDomItem.h"
 #include "TempArticle.h"
 
 
@@ -92,7 +91,7 @@ void TRoss::LoadOnlyConstants(const char* _RossPath)
 {
 	RossPath = _RossPath;
 	MakePathAndCheck(RossPath, "config.txt", ConfigFile);
-	MakePathAndCheck(RossPath, "domitems.bin", DomItemsTextFile);
+	MakePathAndCheck(RossPath, "domitems.tsv", DomItemsTextFile);
 	MakePathAndCheck(RossPath, "items.bin", ItemsFile);
 	MakePathAndCheck(RossPath, "domains.json", DomensFile);
 	MakePathAndCheck(RossPath, "fields.json", FieldsFile);
@@ -516,32 +515,33 @@ struct TItemStr
 
 
 bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CSignat& Sgn)
-{
+{ 
 	int CurrItemNo = 0;
 
 	std::vector<TItemStr> ItemStrVec;
 	const char* q = s;
 
-	int i = 0;
-	for (i = 0; i < Sgn.DomsWithDelims.size(); i++)
+	auto doms = Sgn.GetDomsWithDelims();
+	size_t i = 0;
+	for (; i < doms.size(); i++)
 	{
-		BYTE DomNo = Sgn.DomsWithDelims[i].m_DomNo;
-		bool IsMult = Sgn.DomsWithDelims[i].m_IsMult;
+		BYTE DomNo = doms[i].m_DomNo;
+		bool IsMult = doms[i].m_IsMult;
 		bool IsDelim = m_Domens[DomNo].DomainIsDelim();
-		bool FlagLastItem = (i == Sgn.DomsWithDelims.size() - 1);
+		bool FlagLastItem = (i == doms.size() - 1);
 		char Delim[10];
 		Delim[0] = 0;
 
 		bool FlagNextDelim = false;
 		if (!FlagLastItem)
-			if ((i < Sgn.DomsWithDelims.size() - 1)
-				&& m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].DomainIsDelim()
-				&& !m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].IsEmpty()
+			if ((i < doms.size() - 1)
+				&& m_Domens[doms[i + 1].m_DomNo].DomainIsDelim()
+				&& !m_Domens[doms[i + 1].m_DomNo].IsEmpty()
 				)
 				FlagNextDelim = true;
 
 		if (FlagNextDelim)
-			strcat(Delim, m_Domens[Sgn.DomsWithDelims[i + 1].m_DomNo].m_DomainItemsBuffer);
+			strcat(Delim, m_Domens[doms[i + 1].m_DomNo].GetFirstDomStr().c_str());
 
 		if (!FlagLastItem && !FlagNextDelim)
 			strcat(Delim, " ");
@@ -585,7 +585,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CS
 		{
 			StringTokenizer tok(ItemStr, " ,");
 			while (tok())
-				if (GetItemNoByItemStr(tok.val(), DomNo) == -1)
+				if (GetItemIdByItemStr(tok.val(), DomNo) == EmptyDomItemId)
 					return false;
 
 			DomNo = GetDomenNoByDomStr("D_MULT");
@@ -598,13 +598,11 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CS
 			C.SetItem(CurrItemNo, WildCardDomItemNo);
 		}
 		else
-			C.SetItem(CurrItemNo, GetItemNoByItemStr(ItemStr, DomNo));
+			C.SetItem(CurrItemNo, GetItemIdByItemStr(ItemStr, DomNo));
 
 
 
-		if ((!m_Domens[DomNo].IsFree)   // Домен константный
-			&& (DomNo != LexPlusDomNo)
-			&& (C.GetItem(CurrItemNo) == -1))
+		if ( !m_Domens[DomNo].IsFree  && (DomNo != LexPlusDomNo) && C.is_null(CurrItemNo))
 			// Отрицательный результат
 			return false;
 
@@ -617,22 +615,22 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CS
 	};
 
 
-	if (!IsEmptyLine(q) || (i < Sgn.DomsWithDelims.size())) return false;
+	if (!IsEmptyLine(q) || (i < doms.size())) return false;
 
-	for (i = ItemStrVec.size(); i < m_MaxNumDom; i++)
-		C.SetItem(i, -1);
+	for (size_t i = ItemStrVec.size(); i < m_MaxNumDom; i++)
+		C.SetItem(i, EmptyDomItemId);
 
 
 
-	for (i = 0; i < ItemStrVec.size(); i++)
-		if (C.GetItem(i) == -1) // не определено значение
+	for (size_t i = 0; i < ItemStrVec.size(); i++)
+		if (C.is_null(i)) // не определено значение
 		{
-			int ItemNo;
+			dom_item_id_t item_id = InsertDomItem(ItemStrVec[i].ItemStr, Sgn.GetDomsWoDelims()[i]);
 
-			if (!InsertDomItem(ItemStrVec[i].ItemStr, Sgn.Doms[i], ItemNo))
+			if (is_null(item_id))
 				return false;
 
-			C.SetItem(i, ItemNo);
+			C.SetItem(i, item_id);
 		};
 
 	return true;
@@ -652,46 +650,30 @@ bool   TRoss::ReadFromStr(const char* str, TCortege10& C)
 };
 
 
-void TRoss::WriteToStr(const int* Items, const char* Frmt, char* OutBuffer) const
+
+std::string TRoss::WriteToString(const TCortege10& C) const
 {
-
-	BYTE Counter = 0;
-	*OutBuffer = 0;
-	BYTE BufferLen = 0;
-	if (Frmt == 0) return;
-	BYTE len = (BYTE)strlen(Frmt);
-
-
-	for (BYTE i = 0; i < len; i++)
-		if ((Frmt[i] == '%')
-			&& (i + 1 < len)
-			&& (Frmt[i + 1] == 's')
-			)
+	const CSignat& signat = GetSignat(C);
+	auto frmt = signat.GetFrmt();
+	std::string result;
+	BYTE item_index = 0;
+	for (BYTE i = 0; i < frmt.length(); i++) {
+		if ((frmt[i] == '%') && (i + 1 < frmt.length()) && (frmt[i + 1] == 's'))
 		{
-			int ItemId = Items[Counter];
-			if (ItemId != -1)
+			dom_item_id_t itemId = C.GetItem(item_index);
+			BYTE dom_no = signat.GetDomsWoDelims()[item_index];
+			if (!is_null(itemId))
 			{
-				BYTE Len = m_DomItems[ItemId].GetItemStrLen();
-				strncpy(OutBuffer + BufferLen, GetDomItemStr(m_DomItems[ItemId]), Len);
-				Counter++;
-				BufferLen += Len;
+				result += m_Domens[dom_no].GetDomItemStrById(itemId);
+				++item_index;
 			};
 			i++;
 		}
 		else
-			OutBuffer[BufferLen++] = Frmt[i];
+			result += frmt[i];
+	}
+	return result;
 
-	if (Counter == 0)
-	{
-		BufferLen = 0;
-	};
-
-	OutBuffer[BufferLen] = 0;
-}
-
-void TRoss::CortegeToStr(const TCortege10& C, char* OutBuffer) const
-{
-	WriteToStr(C.m_DomItemNos, GetSignat(C).GetFrmt(), OutBuffer);
 };
 
 
@@ -713,21 +695,19 @@ inline bool IsTitle(const char* s)
 
 };
 
-bool   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo, int& ItemNo)
+dom_item_id_t   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo)
 {
 	if (DomNo == TitleDomNo)
 		if (!IsTitle(ItemStr))
 		{
-			m_LastError = Format("Warning! Cannot add \"%s\" to title domen!", ItemStr);
-			return false;
+			throw CExpc("Warning! Cannot add \"%s\" to title domen!", ItemStr);
 		};
 
 
 	if (DomNo == LexDomNo)
 		if (!IsStandardRusLexeme(ItemStr))
 		{
-			m_LastError = Format("Warning! Cannot add \"%s\" to lexeme domen!", ItemStr);
-			return false;
+			throw CExpc("Warning! Cannot add \"%s\" to lexeme domen!", ItemStr);
 		};
 
 	if (DomNo == LexPlusDomNo)
@@ -735,115 +715,11 @@ bool   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo, int& ItemNo)
 		DomNo = GetDomNoForLePlus(ItemStr);
 		if (DomNo == ErrUChar)
 		{
-			m_LastError = Format("Warning! Cannot add \"%s\" to the extended lexeme domen!", ItemStr);
-			return false;
+			throw CExpc("Warning! Cannot add \"%s\" to the extended lexeme domen!", ItemStr);
 		};
 	};
 
-	TDomItem D;
-	D.SetDomNo(DomNo);
-	D.SetItemStrLen((BYTE)strlen(ItemStr));
-	D.SetItemStrNo(m_Domens[D.GetDomNo()].AddItem(ItemStr, D.GetItemStrLen()));
-	std::vector<TDomItem>::iterator It = lower_bound(m_DomItems.begin(), m_DomItems.end(), D, IsLessByItemStrNew(this));
-	ItemNo = (int)(It - m_DomItems.begin());
-	if (m_Domens[DomNo].IsEmpty())
-	{
-		m_Domens[DomNo].m_StartDomItem = ItemNo;
-		m_Domens[DomNo].m_EndDomItem = ItemNo + 1;
-	}
-	else
-		m_Domens[DomNo].m_EndDomItem++;
-
-	size_t i = 0;
-
-	for (; i < m_Domens.size(); i++)
-		if (m_Domens[i].m_StartDomItem > ItemNo)
-		{
-			m_Domens[i].m_StartDomItem++;
-			m_Domens[i].m_EndDomItem++;
-		};
-
-	m_DomItems.insert(It, D);
-	for (i = 0; i < _GetCortegesSize(); i++)
-		for (size_t k = 0; k < m_MaxNumDom; k++)
-			if (GetCortegePtr(i)->GetItem(k) >= ItemNo)
-                GetCortegePtr(i)->SetItem(k, GetCortegePtr(i)->GetItem(k) + 1);
-
-	return true;;
-};
-
-
-
-void TRoss::DelDomItem(int ItemNo)
-{
-	// константы системных доменов не могут встречаться в словарных статьях
-	if (m_Domens[m_DomItems[ItemNo].GetDomNo()].GetDomainSource() != dsSystem)
-		for (size_t i = 0; i < m_Units.size(); i++)
-			if (!m_Units[i].HasEmptyArticle())
-			{
-				for (size_t k = m_Units[i].m_StartCortegeNo; k <= m_Units[i].m_LastCortegeNo; k++)
-				{
-					for (size_t j = 0; j < m_MaxNumDom; j++)
-						if (GetCortegePtr(k)->GetItem(j) == ItemNo)
-						{
-							if (GetCortegePtr(k)->m_LevelId > 0)
-								for (size_t l = m_Units[i].m_StartCortegeNo; l <= m_Units[i].m_LastCortegeNo; l++)
-									if ((GetCortegePtr(l)->m_FieldNo == GetCortegePtr(k)->m_FieldNo)
-										&& (GetCortegePtr(l)->m_LeafId == GetCortegePtr(k)->m_LeafId)
-										&& (GetCortegePtr(l)->m_LevelId > GetCortegePtr(k)->m_LevelId)
-										)
-                                        GetCortegePtr(l)->m_LevelId--;
-
-							DelCorteges(k, k + 1);
-							if (m_Units[i].m_StartCortegeNo == m_Units[i].m_LastCortegeNo)
-							{
-								m_Units[i].m_StartCortegeNo = InitialStartPos;
-								m_Units[i].m_LastCortegeNo = InitialEndPos;
-								goto EmptyArticle;
-							};
-
-							m_Units[i].m_LastCortegeNo--;
-							k--;
-							break;
-						};
-
-				};
-
-			EmptyArticle:;
-			};
-
-
-	int ItemStrLen = m_DomItems[ItemNo].GetItemStrLen();
-
-	m_Domens[m_DomItems[ItemNo].GetDomNo()].DelItem(m_DomItems[ItemNo].GetItemStrNo(), ItemStrLen);
-
-	int i = 0;
-
-	for (; i < m_Domens.size(); i++)
-		if (m_Domens[i].m_StartDomItem > ItemNo)
-		{
-			m_Domens[i].m_StartDomItem--;
-			m_Domens[i].m_EndDomItem--;
-		};
-
-
-
-	for (i = 0; i < m_DomItems.size(); i++)
-		if (m_DomItems[i].GetDomNo() == m_DomItems[ItemNo].GetDomNo())
-			if (m_DomItems[i].GetItemStrNo() > m_DomItems[ItemNo].GetItemStrNo())
-			{
-				int uu = m_DomItems[i].GetItemStrNo();
-				m_DomItems[i].SetItemStrNo(uu - (ItemStrLen + 1));
-			};
-
-	for (i = 0; i < _GetCortegesSize(); i++)
-		for (size_t j = 0; j < m_MaxNumDom; j++)
-			if (GetCortegePtr(i)->GetItem(j) != -1
-                && GetCortegePtr(i)->GetItem(j) > ItemNo
-				)
-                GetCortegePtr(i)->SetItem(j, GetCortegePtr(i)->GetItem(j) - 1);
-
-	m_DomItems.erase(m_DomItems.begin() + ItemNo);
+	return  m_Domens[DomNo].AddItemByEditor(ItemStr);
 };
 
 
@@ -998,26 +874,6 @@ std::vector<CStructEntry>& CDictionary::GetUnits()
 {
 	return m_Units;
 };
-BYTE CDictionary::GetCortegeFieldNo(size_t i) const
-{
-	return GetCortegePtr(i)->m_FieldNo;
-
-};
-BYTE CDictionary::GetCortegeLeafId(size_t i) const
-{
-	return GetCortegePtr(i)->m_LeafId;
-};
-BYTE CDictionary::GetCortegeBracketLeafId(size_t i) const
-{
-	return GetCortegePtr(i)->m_BracketLeafId;
-
-};
-
-const char* CDictionary::GetDomItemStrInner(int ItemNo) const
-{
-	return TRoss::GetDomItemStr(m_DomItems[ItemNo]);
-};
-
 bool CDictionary::IsEmptyArticle(uint16_t UnitNo) const
 {
 	return m_Units[UnitNo].HasEmptyArticle();
@@ -1038,21 +894,22 @@ BYTE	CDictionary::GetFieldNoByFieldStr(const char* Str) const
 	return  TRoss::GetFieldNoByFieldStrInner(Str);
 };
 
-BYTE CDictionary::GetDomItemDomNo(int ItemNo) const
-{
-	return m_DomItems[ItemNo].m_DomNo;
+
+
+const std::string& CDictionary::GetDomItemStr(dom_item_id_t item_id) const {
+	if (is_null(item_id)) {
+		return "";
+	}
+	else {
+		BYTE dom_no = get_dom_no(item_id);
+		return m_Domens[dom_no].GetDomItemStrById(item_id);
+	}
 }
 
-
-int	CDictionary::GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const
-{
-	return GetCortegePtr(CortegeNo)->GetItem(PositionInCortege);
-};
-
-const char* CDictionary::GetDomItemStr(int ItemNo) const
-{
-	return  (ItemNo == -1) ? NULL : GetDomItemStrInner(ItemNo);
+const std::string& CDictionary::GetDomItemStr(long cortegeNo, BYTE positionInCortege) const {
+	return GetDomItemStr(GetCortegeItem(cortegeNo, positionInCortege));
 }
+
 
 std::string	CDictionary::GetEntryStr(uint16_t EntryNo) const
 {
@@ -1071,12 +928,10 @@ BYTE		CDictionary::GetUnitMeanNum(uint16_t EntryNo) const
 
 bool CDictionary::IncludeArticle(uint16_t UnitNo, std::string ArticleUtf8) const
 {
-	CTempArticle A1(m_MaxNumDom);
-	A1.m_pRoss = const_cast<CDictionary*>(this);
+	CTempArticle A1(const_cast<CDictionary*>(this));
 	A1.ReadFromDictionary(UnitNo, false, true);
 
-	CTempArticle A2(m_MaxNumDom);
-	A2.m_pRoss = const_cast<CDictionary*>(this);
+	CTempArticle A2(const_cast<CDictionary*>(this));
 	A2.ReadFromUtf8String(ArticleUtf8.c_str());
 	A2.MarkUp();
 	A2.BuildCortegeList();
@@ -1192,7 +1047,6 @@ bool CDictionary::ImportFromText(std::string FileName, int StartEntry, std::stri
 	size_t start = 0;
 	size_t last = 0;
 	size_t NumOfGoodArt = 0;
-	size_t SaveDomItemCount = GetDomItemsSize();
 
 
 	for (int i = 0; i < NumOfArt; i++)
@@ -1210,7 +1064,6 @@ bool CDictionary::ImportFromText(std::string FileName, int StartEntry, std::stri
 	};
 
 	Messages += Format("Number of loaded entries: %i\n", NumOfGoodArt);
-	Messages += Format("Number of new constants: %i\n", GetDomItemsSize() - SaveDomItemCount);
 	return ErrorsCount == 0;
 }
 
@@ -1307,8 +1160,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 		UnitNo = InsertUnit(Lemma.c_str(), MeanNum);
 	}
 
-	CTempArticle A1(m_MaxNumDom);
-	A1.m_pRoss = this;
+	CTempArticle A1(this);
 	if (UnitNo != ErrUnitNo)
 		A1.ReadFromDictionary(UnitNo, false, false);
 
@@ -1316,7 +1168,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 	for (int i = RealStart + 1; i < last; i++)
 		NewArticle += L[i].m_Line + std::string("\n");
 
-	CTempArticle A2(m_MaxNumDom);
+	CTempArticle A2(this);
 	try
 	{
 		if ( !A1.ReadFromUtf8String(convert_to_utf8(NewArticle, m_Language).c_str()) )
@@ -1357,22 +1209,6 @@ void CDictionary::SetUnitCurrentTime(uint16_t UnitNo)
 }
 
 
-bool CDictionary::AddField(std::string FieldStr)
-{
-	if (FieldStr.empty())
-		FieldStr = _R("_");
-	int ItemNo;
-	if (!TRoss::InsertDomItem(FieldStr.c_str(), FieldDomNo, ItemNo))
-	{
-		ErrorMessage(m_LastError);
-		return false;
-	};
-
-	CField T;
-	T.FieldStr = FieldStr;
-	Fields.push_back(T);
-	return true;
-}
 
 
 std::string CDictionary::GetUnitEditor(uint16_t UnitNo) const

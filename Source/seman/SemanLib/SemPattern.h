@@ -30,8 +30,8 @@ public:
 
   CSemPattern ();
   void		InitSemPattern(const CRossHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId);
-  long		GetSynRel(long CortegeNo) const;
-  long		GetSynFet(long CortegeNo) const;
+  dom_item_id_t		GetSynRel(long CortegeNo) const;
+  dom_item_id_t		GetSynFet(long CortegeNo) const;
   // то же, что и предыдущие две функции, но выдаются строки
   std::string	GetSynFetStr(long CortegeNo) const;
   std::string	GetSynRelStr(long CortegeNo) const;

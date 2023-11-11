@@ -681,7 +681,7 @@ void translate_helper::init_list_from_ross(const CRossHolder* RossHolder, const 
 			if ((RossHolder->GetRoss()->GetCortegeFieldNo(i) == RossHolder->LexFetFieldNo)
 				)
 			{
-				std::string Item = (const char*)RossHolder->GetRoss()->GetDomItemStr(RossHolder->GetRoss()->GetCortegeItem(i, 0));
+				std::string Item = RossHolder->GetRoss()->GetDomItemStr(i, 0);
 				EngRusMakeLower(Item);
 				res.push_back(Item);
 			};

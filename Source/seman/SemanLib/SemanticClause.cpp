@@ -563,7 +563,7 @@ bool CRusSemStructure::TryClauseConjWord(long ClauseRuleNo, long ClauseNo1, long
 			std::string Lemma = m_Nodes[ConjNodeNo].m_LexFunctFields[l].m_Lemma;
 			int i = Lemma.find("(");
 			part_of_speech_mask_t Poses = 0;
-			if (i != -1)
+			if (i != string::npos)
 			{
 				std::string q = Lemma.substr(i + 1, Lemma.find(")") - i - 1);
 				Lemma.erase(i);

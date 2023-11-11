@@ -133,7 +133,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &
 		long eng_termin_id = piTermPtr.m_TerminId;
 		S = Format("%i",eng_termin_id);
 		unit_no = Dict->GetRoss()->LocateUnit(S.c_str(), 1);
-		return FieldContainsValue(Dict, unit_no, field, value, leaf, leaf2);
+		return FieldContainsValueInner(GetRossIdByThesId(ThesId), unit_no, field, value, leaf, leaf2);
 	}
 	else 
 		if(node.m_Colloc.m_CollocSource == RossType)
@@ -141,36 +141,25 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &
 		dict_kind = node.m_Colloc.GetRossInterp().m_DictType;
 		unit_no = node.m_Colloc.GetRossInterp().m_UnitNo;
 	}
-	return FieldContainsValue(E.GetRossHolder(dict_kind), unit_no, field, value, leaf, leaf2);
+	return FieldContainsValueInner(dict_kind, unit_no, field, value, leaf, leaf2);
 }
 
 
-bool NodeHelper::FieldContainsValue(const CRossHolder* RossHolder, uint16_t unit_no, 
+bool NodeHelper::FieldContainsValueInner(DictTypeEnum type, uint16_t unit_no,
 	const std::string &field, const std::string &value, int leaf, int leaf2) const
 {
 	if(unit_no == ErrUnitNo) return false;
-	if (RossHolder == 0) return false;
+	if (type == NoneRoss) return false;
 	std::vector<TCortege10> vec;
-	StringTokenizer tok(value.c_str(), " \t");
-	StringVector value_vec;
-	while(tok()) value_vec.push_back(tok.val());
-
 	try{
-		RossHolder->GetFieldValues(field.c_str(), unit_no, vec, leaf);
+		E.GetRossHolder(type)->GetFieldValues(field.c_str(), unit_no, vec, leaf);
 	}catch(...){
 		return false;
 	}
-	for(int i = 0; i < vec.size(); i++){
-//		if(vec[i].GetBracketLeafId() != leaf2) continue;
-		StringVector field_vec;
-		for(int j = 0; vec[i].m_DomItemNos[j] != -1; j++){
-			field_vec.push_back((const char*)RossHolder->GetRoss()->GetDomItemStr(vec[i].m_DomItemNos[j]));
-		}
-		if(search(field_vec.begin(), field_vec.end(), 
-			value_vec.begin(), value_vec.end())
-			!= field_vec.end())
+	for(const auto& c: vec) {
+		if (E.HasStringInCortege(type, c, value)) {
 			return true;
-
+		}
 	}
 	return false;
 
@@ -184,11 +173,12 @@ void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, uint16_t unit_no, const 
 {
 	std::vector<TCortege10> vec;
 	E.GetRossHolder(dict_kind)->GetFieldValues(field.c_str(), unit_no, vec);
-	for(int i = 0; i < vec.size(); i++){
+	for(auto& c: vec) {
 		std::string value;
-		for(int j = 0; vec[i].m_DomItemNos[j] != -1; j++){
-			if(j || j > max_items) break;
-			value += (const char*)E.GetRoss(dict_kind)->GetDomItemStr(vec[i].m_DomItemNos[j]);
+		for(int j = 0; c.GetMaxNumDom(); j++) {
+			if (c.is_null(j)) break;
+			if (j || j > max_items) break;
+			value += E.GetRoss(dict_kind)->GetDomItemStr(c.GetItem(j));
 		}
 		res.push_back(value);
 	}

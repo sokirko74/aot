@@ -159,7 +159,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 	std::string LemmaAfterHyphen;
 	int pos = node.m_Words[0].m_Lemma.find("-");
 
-	if (pos != -1)
+	if (pos != string::npos)
 	{
 		LemmaAfterHyphen = node.m_Words[0].m_Word.substr(pos + 1);
 		node.m_Words[0].m_Lemma = node.m_Words[0].m_Lemma.substr(0, pos);
@@ -180,7 +180,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 		}
 		int j = ConvertedWord.find('#');
 
-		if (j != -1) // по этой же схеме идут числительные "двухтысячный", которые не обрабатывется в этом if
+		if (j != string::npos) // по этой же схеме идут числительные "двухтысячный", которые не обрабатывется в этом if
 		{
 			int len = ConvertedWord.length() - j - 1;
 			node.m_Words[0].m_Lemma.erase(0, node.m_Words[0].m_Lemma.length() - len);

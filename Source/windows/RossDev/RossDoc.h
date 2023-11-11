@@ -154,7 +154,6 @@ public:
     void    BuildBasicDomItems();
 	CString SerializeInner(CArchive& ar);
 	void	MakeReadOnly() ;
-	void	DelTextDomains();
 
 #ifdef _DEBUG
 	virtual void AssertValid() const;

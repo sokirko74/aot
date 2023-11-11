@@ -779,6 +779,61 @@ bool CRusSemStructure::GetTopAgreeWithSyntaxCriteria(long Tag)
 
 
 //=======================================
+// todo: refactor or replace with std::string
+template <int size>
+class short_string
+{
+	char m_buffer[size];
+public:
+	short_string()
+	{
+	};
+	short_string(const char* buffer)
+	{
+		int len = strlen(buffer);
+		assert(len < size);
+		strcpy(m_buffer, buffer);
+	};
+	operator char* ()
+	{
+		return m_buffer;
+	};
+	operator const char* ()
+	{
+		return m_buffer;
+	};
+
+	operator std::string()
+	{
+		return std::string(m_buffer);
+	};
+	operator const std::string()
+	{
+		return std::string(m_buffer);
+	};
+	bool operator == (const short_string& X)  const
+	{
+		return strcmp(m_buffer, X.m_buffer) == 0;
+	};
+	bool operator < (const short_string& X)  const
+	{
+		return strcmp(m_buffer, X.m_buffer) < 0;
+	};
+
+	short_string operator = (const short_string& X)
+	{
+		strcpy(m_buffer, X.m_buffer);
+		return *this;
+	};
+	short_string operator = (const std::string& X)
+	{
+		assert(X.length() < size);
+		strcpy(m_buffer, X.c_str());
+		return *this;
+	};
+
+};
+
 typedef short_string<40> string40;
 long CRusSemStructure::IsLexFetAgree(long NodeNo) const
 {

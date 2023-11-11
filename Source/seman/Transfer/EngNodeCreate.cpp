@@ -9,20 +9,20 @@ void CEngSemStructure::InitEngWordAndLemma(CEngSemWord& semWord, std::string str
 	std::string strPosleLog;
 	std::string strLemma;
 	if (strEngLemma != "#oneself")
-	if (( ii = strEngLemma.find("#oneself")) != -1)
+	if (( ii = strEngLemma.find("#oneself")) != string::npos)
 	{
 		semWord.m_OneselfStr = "#oneself";
 		strEngLemma.erase (ii, 8);
 	};
 
 	if (strEngLemma != "#one's")
-	if (( ii = strEngLemma.find("#one's")) != -1)
+	if (( ii = strEngLemma.find("#one's")) != string::npos)
 	{
 		semWord.m_OneselfStr = "#one's";
 		strEngLemma.erase (ii, 6);
 	};
 
-	if( (ii = strEngLemma.find("_")) != -1 )
+	if( (ii = strEngLemma.find("_")) != string::npos )
 	{
 		int len  = strEngLemma.length();
 		strPosleLog = strEngLemma.substr(ii+1);
@@ -103,7 +103,7 @@ void CEngSemStructure::CreateEnglNodeForEngColloc(long UnitNo, CEngSemNode& engN
 	engNode.m_MainWordNo = 0;
 	if( corteges.size() > 0 )
 	{
-		int SemMainWord =   GetItemStr(corteges[0].m_DomItemNos[0], EngCollocRoss)[0] - '0';
+		int SemMainWord =   GetItemStr(corteges[0].GetItem(0), EngCollocRoss)[0] - '0';
 		assert( word_nums.size() >= SemMainWord);
 		assert( word_nums[SemMainWord - 1] != -1 );
 		engNode.m_MainWordNo = word_nums[SemMainWord - 1];
@@ -355,8 +355,8 @@ void CEngSemStructure::SetPositionOfActantInColloc(CEngSemRelation& engRel, CSem
 		return;
 	
 	if( !semPattern.m_GramCorteges.empty() )
-	  if( GetRossHolder(EngCollocRoss)->IsPosition(semPattern.m_GramCorteges[0].m_DomItemNos[0]) )
-	     engRel.m_Position = GetItemStr(semPattern.m_GramCorteges[0].m_DomItemNos[0], type);
+	  if( GetRossHolder(EngCollocRoss)->IsPosition(semPattern.m_GramCorteges[0].GetItem(0)) )
+	     engRel.m_Position = GetItemStr(semPattern.m_GramCorteges[0].GetItem(0), type);
 		
 }
 

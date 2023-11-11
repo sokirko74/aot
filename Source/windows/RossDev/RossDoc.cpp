@@ -607,38 +607,6 @@ void CRossDoc::BuildBasicDomItems()
 	GetRossHolder()->InitConsts();
 };
 
-void CRossDoc::DelTextDomains()
-{
-	size_t count = GetRoss()->GetDomItemsSize();
-	std::vector<BYTE> DomNos;
-	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_RLE"));
-	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_COLLOC"));
-	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_ENGL"));
-	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_ABBR"));
-	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_EXM"));
-	DomNos.push_back(GetRoss()->GetDomenNoByDomStr("D_THES"));
-
-
-	size_t i = 0;
-	try {
-		for (; i<count; i++)
-		{
-			BYTE DomNo  = GetRoss()->GetDomItemDomNo(i);
-
-			if (find (DomNos.begin(),DomNos.end(),DomNo) == DomNos.end()) continue;
-
-			GetRoss()->DelDomItem (i); 
-			count--;
-			i--;
-		};
-	}
-	catch (...)
-	{
-		AfxMessageBox ("an exception occured");
-	}
-	SetModifiedFlag();
-
-}
 
 
 

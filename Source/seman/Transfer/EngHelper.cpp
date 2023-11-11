@@ -9,12 +9,12 @@ std::string g_PersPronouns[g_PersPronounsCount] = {_R("Я"),_R("ТЫ"),_R("ОН"
 bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege10& cortege, DictTypeEnum   DictType ) const
 {
 	const CSignat& Signat = GetRoss(DictType)->GetSignat(cortege);
-	if( Signat.DomsWithDelims.size() != domens.size() )
+	if( Signat.GetDomsWithDelims().size() != domens.size() )
 		return false;
 
-	for(int i = 0 ; i < Signat.DomsWithDelims.size() ; i++ )
+	for(int i = 0 ; i < Signat.GetDomsWithDelims().size() ; i++ )
 	{
-		const TSignatItem& SignatItem = Signat.DomsWithDelims[i];
+		const TSignatItem& SignatItem = Signat.GetDomsWithDelims()[i];
 		std::string strDom = GetRoss(DictType)->m_Domens[SignatItem.m_DomNo].GetDomStr();
 		if( strDom != domens[i] )
 			return false;
@@ -63,7 +63,7 @@ void CEngSemStructure::ReadMorphFromMainGF(uint16_t UnitNo, DictTypeEnum type, C
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	if( corteges.size() == 0 )
 		return;
-	if( corteges[0].m_DomItemNos[0] == -1 )  
+	if( corteges[0].is_null(0))  
 		return;
 	bool bFound = false;
 	std::string strVal = GetCortegeStr(type, corteges[0]).c_str();
@@ -75,7 +75,7 @@ void CEngSemStructure::ReadMorphFromMainGF(uint16_t UnitNo, DictTypeEnum type, C
 	};
 	
 	int ii;
-	if( (ii = strVal.find(":")) != -1 )
+	if( (ii = strVal.find(":")) != string::npos )
 		strVal.erase(ii);
 
 	if(!strVal.empty())
@@ -107,7 +107,17 @@ bool CEngSemStructure::HasThisLexFunc(std::string LexFunctName, CRossInterp Unit
 }
 
 
-
+bool CEngSemStructure::HasStringInCortege(DictTypeEnum type, TCortege10 cortege, const std::string& str) const {
+	for (int i = 0; i < cortege.GetMaxNumDom(); ++i) {
+		if (cortege.is_null(i)) {
+			break;
+		}
+		if (GetItemStr(cortege.GetItem(i), type) == str) {
+			return true;
+		}
+	}
+	return false;
+}
 
 bool CEngSemStructure::HasCopul(std::vector<CValency>& Vals, std::string strRusVal)
 {
@@ -120,14 +130,10 @@ bool CEngSemStructure::HasCopul(std::vector<CValency>& Vals, std::string strRusV
 			CSemPattern semPattern;
 			semPattern.InitSemPattern(GetRossHolder(t), Vals[i].m_UnitNo, Vals[i].m_LeafId, Vals[i].m_BracketLeafId);
 			semPattern.LoadGramFromDict();
-			for( int j = 0 ; j < semPattern.m_GramCorteges.size() ; j++ )
+			for( auto& c: semPattern.m_GramCorteges)
 			{
-				int k = 0;
-				while( semPattern .m_GramCorteges[j].m_DomItemNos[k] != -1)
-				{
-					if( GetItemStr(semPattern .m_GramCorteges[j].m_DomItemNos[k], t) == "Copul" ) 
-						return true;	
-					k++;
+				if (HasStringInCortege(t, c, "Copul")) {
+					return true;
 				}
 			}
 		}
@@ -142,14 +148,14 @@ bool CEngSemStructure::HasALG(DictTypeEnum type, long UnitNo, std::string strAlg
 	return GetRossHolder(type)->HasFieldValue(std::string("ALG"), strAlg,  UnitNo);
 }
 
-std::string CEngSemStructure::GetItemStr(long lItemNo, DictTypeEnum type /* = Aoss*/) const
+std::string CEngSemStructure::GetItemStr(dom_item_id_t item_id, DictTypeEnum type /* = Aoss*/) const
 {
 	if( type == NoneRoss )
 		return std::string();
 
-	if( lItemNo == -1 )
+	if( is_null(item_id) )
 		return std::string();
-	return std::string((const char*)GetRoss(type)->GetDomItemStr(lItemNo));
+	return GetRoss(type)->GetDomItemStr(item_id);
 }
 
 part_of_speech_mask_t CEngSemStructure::EngPOSesByRusPOS(part_of_speech_t rus_pos, std::string lemma)
@@ -226,15 +232,11 @@ bool CEngSemStructure::HasThisGX(const std::vector<TCortege10>& gramCorteges, st
 {
 	if( type == NoneRoss )
 		return false;
-	for(int i = 0 ; i < gramCorteges.size() ; i++ )
+	for(auto c: gramCorteges)
 	{
-		int j = 0;
-		while( gramCorteges[i].m_DomItemNos[j] != -1)
-		{
-			if( GetItemStr(gramCorteges[i].m_DomItemNos[j], type) == value ) 
-				return true;	
-			j++;
-		}	
+		if (HasStringInCortege(type, c, value)) {
+			return true;
+		}
 	}
 
 	return false;	
@@ -245,10 +247,11 @@ std::string CEngSemStructure::GetCortegeStr(DictTypeEnum type, const TCortege10&
 	if( type == NoneRoss )
 		return "";
 	std::string strRes;
-	int i = 0;
-	while(cortege.m_DomItemNos[i] != -1 )
-	{
-		strRes += GetItemStr(cortege.m_DomItemNos[i], type);
+	for (int i = 0; i < cortege.GetMaxNumDom(); ++i) {
+		if (cortege.is_null(i)) {
+			break;
+		}
+		strRes += GetItemStr(cortege.GetItem(i), type);
 		strRes += " ";
 		i++;
 	}
@@ -283,14 +286,10 @@ bool CEngSemStructure::HasGramFet(const CEngSemRelation& Rel, const std::string 
 	const CSemPattern& semPattern = Rel.m_Pattern;
 
 	DictTypeEnum type = m_pData->GetTypeByRossHolder(Rel.m_Valency.m_RossHolder);
-	for( int i=0; i<semPattern.m_GramCorteges.size(); i++ )
+	for( auto& c: semPattern.m_GramCorteges)
 	{
-		int j = 0;
-		while( semPattern.m_GramCorteges[i].GetItem(j) != -1 )
-		{
-			if( GetItemStr(semPattern.m_GramCorteges[i].m_DomItemNos[j],type) == strPattern )
-				return true;
-			j++;
+		if (HasStringInCortege(type, c, strPattern)) {
+			return true;
 		}
 	}
 	return false;
@@ -301,22 +300,11 @@ bool CEngSemStructure::HasGramFet(const CEngSemRelation& Rel, const std::string 
 */
 bool CEngSemStructure::IsGramFet(const CEngSemRelation& Rel, const std::string strPattern) const
 {
-	const CSemPattern& semPattern = Rel.m_Pattern;
-
 	if (Rel.m_Valency.m_RossHolder == 0) return false;
 
 	DictTypeEnum type = m_pData->GetTypeByRossHolder(Rel.m_Valency.m_RossHolder);
 
-	int j = 0;
-
-	while( Rel.m_SynReal.m_Cortege.GetItem(j) != -1 )
-	{
-		if( GetItemStr(Rel.m_SynReal.m_Cortege.GetItem(j),type) == strPattern )
-			return true;
-		j++;
-	}
-
-	return false;
+	return HasStringInCortege(type, Rel.m_SynReal.m_Cortege, strPattern);
 }
 
 
@@ -397,17 +385,9 @@ bool CEngSemStructure::SetSimpleEngPrep(std::string strPrep, int iNode, int iRel
 
 bool CEngSemStructure::HasSubjAsFirstValency(const CEngSemNode& N)
 {
-	if (N.m_Patterns.size() == 0) return false;
-	if (N.m_Patterns[0].m_GramCorteges.size() == 0) return false;
-
-	DictTypeEnum type = N.GetType();
-	if (type == NoneRoss) return false;
-
-	for (int j = 0; ( N.m_Patterns[0].m_GramCorteges[0].GetItem(j) != -1 ); j++)
-		if( GetItemStr(N.m_Patterns[0].m_GramCorteges[0].GetItem(j),type) == "subj" )
-			return true;
-
-	return false;
+	if (N.m_Patterns.empty()) return false;
+	if (N.m_Patterns[0].m_GramCorteges.empty()) return false;
+	return HasStringInCortege(N.GetType(), N.m_Patterns[0].m_GramCorteges[0], "subj");
 };
 
 /*
@@ -419,28 +399,22 @@ bool CEngSemStructure::FindSubjPattern(const CEngSemNode& N, CSemPattern& Result
 	DictTypeEnum type = N.GetType();
 	if (type == NoneRoss) return false;
 
-	for (int i =0; i<N.m_Patterns.size(); i++)
+	for (auto& p: N.m_Patterns)
 	{
-		if (N.m_Patterns[i].m_GramCorteges.size() == 0) continue;
-
-		for (int j = 0; ( N.m_Patterns[i].m_GramCorteges[0].GetItem(j) != -1 ); j++)
-			if( GetItemStr(N.m_Patterns[i].m_GramCorteges[0].GetItem(j),type) == "subj" )
-			{
-				Result = N.m_Patterns[i];
-				return true;
-			};
+		if (p.m_GramCorteges.empty()) continue;
+		if (HasStringInCortege(type, p.m_GramCorteges[0], "subj")) {
+			Result = p;
+			return true;
+		}
 	};
 
-	for (int i =0; i<N.m_CopulPatterns.size(); i++)
+	for (auto& p : N.m_CopulPatterns)
 	{
-		if (N.m_CopulPatterns[i].m_GramCorteges.size() == 0) continue;
-
-		for (int j = 0; ( N.m_CopulPatterns[i].m_GramCorteges[0].GetItem(j) != -1 ); j++)
-			if( GetItemStr(N.m_CopulPatterns[i].m_GramCorteges[0].GetItem(j),type) == "subj" )
-			{
-				Result = N.m_CopulPatterns[i];
-				return true;
-			};
+		if (p.m_GramCorteges.empty()) continue;
+		if (HasStringInCortege(type, p.m_GramCorteges[0], "subj")) {
+			Result = p;
+			return true;
+		}
 	};
 
 	return false;
@@ -451,11 +425,11 @@ bool CEngSemStructure::FindSubjPattern(const CEngSemNode& N, CSemPattern& Result
 
 bool CEngSemStructure::SetSubjPattern(CEngSemRelation& semRel)
 {	
-	TCortege10 T;
 	const CRossHolder* R = semRel.m_Valency.m_RossHolder;
 	if (R == 0)  return false;
-	T.m_DomItemNos[0] = R->EnglSubjSynONo;
-	T.m_DomItemNos[1] = -1;
+
+	TCortege10 T;
+	T.SetItem(0, R->EnglSubjSynONo);
 	T.m_FieldNo = R->GramFetFieldNo;
 	T.m_LeafId = semRel.m_Valency.m_LeafId;
 	semRel.m_SynReal.m_Cortege = T;
@@ -564,11 +538,11 @@ bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, uint16_t Un
     if (!RossHolder || (UnitNo == ErrUnitNo)) return false;
 	std::vector<TCortege10> corteges;
 	RossHolder->GetFieldValues(std::string("TYP"), UnitNo, corteges);
-	for(int i = 0 ; i < corteges.size() ; i++ )
+	for(auto& c: corteges)
 	{
-			if( corteges[i].m_DomItemNos[0] != -1 )
-				if( std::string(_R("ЗАГЛУШКА")) == (const char*)RossHolder->GetRoss()->GetDomItemStr(corteges[i].m_DomItemNos[0])  )
-					return true;
+		if( !c.is_null(0) )
+			if( std::string(_R("ЗАГЛУШКА")) == RossHolder->GetRoss()->GetDomItemStr(c.GetItem(0))  )
+				return true;
 	}
 	return false;
 }

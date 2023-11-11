@@ -132,17 +132,17 @@ bool CRusSemStructure::InitValsRussian(long NodeNo) {
             if (!pRoss->IsEmptyArticle(UnitNo))
                 for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitEndPos(UnitNo); i++)
                     if (pRoss->GetCortegeFieldNo(i) == RossDoc->NESOVMFieldNo) {
-                        TCortege10 C = GetCortegeCopy(pRoss, i);
-                        if (C.m_DomItemNos[0] == -1) continue;
-                        std::string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
+                        TCortege10 C = RossDoc->GetCortegeCopy(i);
+                        if (C.is_null(0)) continue;
+                        std::string S = RossDoc->GetDomItemStrWrapper(C.GetItem(0));
                         if (S.length() != 2) continue;
                         if (S[0] != 'A') continue;
                         long ValNo1 = S[1] - '0';
                         if (ValNo1 == 0) continue;
                         ValNo1--;
                         if (ValNo1 >= m_Nodes[NodeNo].m_Vals.size()) continue;
-                        if (C.m_DomItemNos[1] == -1) continue;
-                        S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[1]);
+                        if (C.is_null(1)) continue;
+                        S = RossDoc->GetDomItemStrWrapper(C.GetItem(1));
                         if (S.length() != 2) continue;
                         if (S[0] != 'A') continue;
                         long ValNo2 = S[1] - '0';
@@ -174,7 +174,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo) {
                 for (int k = 0; k < P.m_ActantSemFets[i].size(); k++)
                     if (((std::string(P.m_ActantSemFets[i][k]) != "Copul")
                          && !IsParameterOfAdjOrAdv(std::string(P.m_ActantSemFets[i][k]))
-                         && (GetRossHolder(Ross)->GetItemNoByItemStr(P.m_ActantSemFets[i][k], "D_LF") != -1)
+                         && !is_null(GetRossHolder(Ross)->GetItemNoByItemStr(P.m_ActantSemFets[i][k], "D_LF"))
                         )
                         || (P.m_ActantSemFets[i][k] == "REL") // SF=REL только мешает
                             ) {
@@ -326,9 +326,9 @@ void CRusSemStructure::InitPOs(long ClauseNo) {
                     if (!pRoss->IsEmptyArticle(UnitNo))
                         for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitEndPos(UnitNo); i++)
                             if (pRoss->Fields[pRoss->GetCortegeFieldNo(i)].FieldStr == "DOMAIN") {
-                                TCortege10 C = GetCortegeCopy(pRoss, i);
-                                if (C.m_DomItemNos[0] == -1) continue;
-                                std::string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
+                                TCortege10 C = RossDoc->GetCortegeCopy(i);
+                                if (C.is_null(0)) continue;
+                                std::string S = RossDoc->GetDomItemStrWrapper(C.GetItem(0));
                                 if (S != _R("общ"))
                                     m_Nodes[NodeNo].m_POs.push_back(S);
                             };
@@ -412,8 +412,8 @@ bool CRusSemStructure::BuildAnalyticalSupelative() {
     static const std::vector<std::string> adverbs = {_R("НАИБОЛЕЕ"), _R("НАИМЕНЕЕ"), _R("САМЫЙ")};
     for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
         if (m_Nodes[NodeNo].IsLemmaList(adverbs)) {
-            long SynHost = GetSynHost(NodeNo);
-            if (SynHost == -1) continue;
+            dom_item_id_t SynHost = GetSynHost(NodeNo);
+            if (is_null(SynHost)) continue;
             // отметаем случай "на самом деле"
             if (!HasRichPOS(SynHost, ADJ_FULL)
                 && !HasRichPOS(SynHost, PARTICIPLE)

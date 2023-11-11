@@ -175,7 +175,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot& Hypot, CTimeUnit& TimeUnit, 
 	for (Hypot.m_GramCortegeNo = 0; Hypot.m_GramCortegeNo < P.m_GramCorteges.size(); Hypot.m_GramCortegeNo++)
 	{
 		TCortege10& C = P.m_GramCorteges[Hypot.m_GramCortegeNo];
-		std::string GramFet = WriteToString(GetRoss(TimeRoss),  C);
+		std::string GramFet = GetRoss(TimeRoss)->WriteToString( C);
 		Trim(GramFet);
 
 		if (GramFet.substr(0, 2) == _R("ЦК"))
@@ -195,7 +195,7 @@ bool CRusSemStructure::CheckTimeGramFet(CNodeHypot& Hypot, CTimeUnit& TimeUnit, 
 
 			// если это сокращенная форма, то нужно вернуть истину, если согласовано по числу
 			if (m_Nodes[Hypot.m_NodeNo].IsPrimitive()
-				&& (m_Nodes[Hypot.m_NodeNo].m_Words[0].m_PostPuncts.find(".") != -1)
+				&& (m_Nodes[Hypot.m_NodeNo].m_Words[0].m_PostPuncts.find(".") != string::npos)
 				&& ((Grammems & rAllNumbers) > 0)
 				)
 				if ((Grammems & Numbers) == 0)
@@ -289,10 +289,10 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree(CNodeHypotVector& V, CTimeUnit& U)
 				return false;
 			std::string S = GetRoss(OborRoss)->GetEntryStr(PrepNo);
 			long j = S.find("+");
-			if (j == -1) return false;
+			if (j == string::npos) return false;
 			S = S.substr(j + 1, S.length() - j);
 			TrimLeft(S);
-			long ItemNo = GetRossHolder(Ross)->GetItemNoByItemStr(S, "D_CASE");
+			dom_item_id_t ItemNo = GetRossHolder(Ross)->GetItemNoByItemStr1(S, GetRossHolder(Ross)->CaseDomNo);
 			uint64_t Grammems = GetCaseGrammem(GetRossHolder(Ross), ItemNo);
 			uint64_t Grm = m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].GetGrammems();
 
@@ -303,7 +303,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree(CNodeHypotVector& V, CTimeUnit& U)
 			/*
 			 для сокращений проверку на ПР_УПР проводить не нужно
 			*/
-			if (m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].m_Words[0].m_PostPuncts.find('.') == -1)
+			if (m_Nodes[V[U.m_Rels[i].m_TargetNodeNo].m_NodeNo].m_Words[0].m_PostPuncts.find('.') == string::npos)
 				if ((Grm & Grammems) != Grammems)
 					return false;
 		}
@@ -332,7 +332,7 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree(CNodeHypotVector& V, CTimeUnit& U)
 void CRusSemStructure::GetTimeInterps(std::string Lemma, std::string WordStr, std::string PostPuncts, CRusSemNode& N) const
 {
 	EngRusMakeLower(Lemma);
-	if (PostPuncts.find('.') != -1)
+	if (PostPuncts.find('.') != string::npos)
 	{
 		std::string WordUpper = WordStr;
 		EngRusMakeUpper(WordUpper);

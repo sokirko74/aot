@@ -1,28 +1,9 @@
-/////////////////////////////////////////////////////////////////////////////
-// Английские алгоритмы 1
-// общие утилиты
-// GetChildNodes()
-// GetAlgNodes()
-// HasNeg()
-// HasQuest()
-// ChangeNegWord()
-// CreateOneselfNodes()
-
-// RefineEngCollocPreps()
-// RefineComparativeMNAwithPreps()
-// RefineUnknownRelsSynRel()
-// CorrectNodeNumByRelNum()
-
-// ApplyALG_AL1()
-
-// CompareCortegeItems()
 
 #include "StdAfx.h"
 
 
 /////////////////////////////////////////////////////////////////////////////
 // Выдает вектор дочерних нод с отслеживанием уникальности
-
 void CEngSemStructure::GetChildNodes(int iNode,std::vector<long> &nodes) const
 {
 	std::vector<long> outRels;
@@ -71,57 +52,41 @@ void CEngSemStructure::GetAlgNodes(std::vector<long> &nodes) const
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////
-// HasNeg() определяет наличие 'Neg'
-
-bool CEngSemStructure::HasNeg(long UnitNo, DictTypeEnum type )
+bool CEngSemStructure::HasStringInGF(int node_no, std::string gf_str ) const
 {
+	long UnitNo = m_Nodes[node_no].GetUnitNo();
+	DictTypeEnum type = m_Nodes[node_no].GetType();
+		
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
 	std::vector<TCortege10> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
-	bool bFound = false;
 
-	if( corteges.size() == 0)
+	if( corteges.empty() )
 		return false;
 
-	int i = 0;
-	while( corteges[0].m_DomItemNos[i] != -1 )
-	{
-		std::string strVal = GetItemStr(corteges[0].m_DomItemNos[i],type);
-		if( strVal.find("Neg") != std::string::npos )
+	for (int i = 0; i < 10; ++i) {
+		if (corteges[0].is_null(i)) {
+			break;
+		}
+		std::string strVal = GetItemStr(corteges[0].GetItem(i), type);
+		if( strVal.find(gf_str) != std::string::npos )
 			return true;
-		i++;
 	}
 
 	return false;
 }
 
-/////////////////////////////////////////////////////////////////////////////
-// HasQuest() определяет наличие 'Quest'
-
-bool CEngSemStructure::HasQuest(long UnitNo, DictTypeEnum type )
+bool CEngSemStructure::HasNeg(int node_no) const
 {
-	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
-		return false;
-	std::vector<TCortege10> corteges;
-	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
-	bool bFound = false;
-
-	if( corteges.size() == 0)
-		return false;
-
-	int i = 0;
-	while( corteges[0].m_DomItemNos[i] != -1 )
-	{
-		std::string strVal = GetItemStr(corteges[0].m_DomItemNos[i],type);
-		if( strVal.find("Quest") != std::string::npos )
-			return true;
-		i++;
-	}
-
-	return false;
+	return HasStringInGF(node_no, "Neg");
 }
+
+bool CEngSemStructure::HasQuest(int node_no) const
+{
+	return HasStringInGF(node_no, "Quest");
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 // ChangeNegWord() меняет отрицательное слово на положительное по LF
@@ -290,7 +255,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 		std::vector<TCortege10> vec;
 		for( int j=GetRoss(type)->GetUnitStartPos(unit); j<=GetRoss(type)->GetUnitEndPos(unit); j++ )
 		{
-			TCortege10 C = GetCortegeCopy(GetRoss(type),j);
+			TCortege10 C = GetRossHolder(type)->GetCortegeCopy(j);
 			if (C.m_BracketLeafId > 0) continue;
 			if (C.m_LeafId > 0) continue;
 			std::string field = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
@@ -495,18 +460,18 @@ bool CEngSemStructure::CompareCortegeItems(const CRossHolder* RossHolder,
 										   const TCortege10 &X,const TCortege10 &Y) const
 {
 	int iX = 0;
-	while( RossHolder->IsPosition(X.m_DomItemNos[iX]) && iX<10 )
+	while( RossHolder->IsPosition(X.GetItem(iX)) && iX<10)
 		iX++;
 	int iY = 0;
-	while( RossHolder->IsPosition(Y.m_DomItemNos[iY]) && iY<10 )
+	while( RossHolder->IsPosition(Y.GetItem(iY)) && iY<10)
 		iY++;
 
 	while( iX<10 && iY<10 )
 	{
-		if( X.m_DomItemNos[iX] != Y.m_DomItemNos[iY] )
+		if( X.GetItem(iX) != Y.GetItem(iY) )
 			return false;
 
-		if (X.m_DomItemNos[iX] == -1) 
+		if (X.is_null(iX)) 
 			break;
 
 		iX++;

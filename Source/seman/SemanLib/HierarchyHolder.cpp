@@ -92,8 +92,7 @@ void CHierarchyHolder::WriteToRoss(std::string Entry)
 	if (UnitNo != ErrUnitNo)
 		GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
 	UnitNo = GetRoss()->InsertUnit(EntryName.c_str(), 1);
-	CTempArticle A(GetRoss()->m_MaxNumDom);
-	A.m_pRoss = const_cast<CDictionary*>(GetRoss());
+	CTempArticle A(const_cast<CDictionary*>(GetRoss()));
 	A.ReadFromDictionary(UnitNo, true, false);
 	A.ReadFromUtf8String(Entry.c_str());
 	A.WriteToDictionary();
@@ -148,9 +147,7 @@ void CHierarchyHolder::ReadFromRoss(bool WithoutView)
 		return;
 	}
 
-	CTempArticle A(GetRoss()->m_MaxNumDom);
-
-	A.m_pRoss = const_cast<CDictionary*>(GetRoss());
+	CTempArticle A(const_cast<CDictionary*>(GetRoss()));
 	A.ReadFromDictionary(UnitNo, true, false);
 	BYTE NodeFieldNo = GetRoss()->GetFieldNoByFieldStr("NODE");
 	BYTE RelFieldNo = GetRoss()->GetFieldNoByFieldStr("ISA");
@@ -160,22 +157,20 @@ void CHierarchyHolder::ReadFromRoss(bool WithoutView)
 	{
 		TCortege10 C = A.GetCortege(i);
 		if ((C.m_FieldNo == NodeFieldNo)
-			&& (C.m_DomItemNos[0] != -1)
-			&& (C.m_DomItemNos[1] != -1)
-			&& (C.m_DomItemNos[2] != -1)
+			&& !C.is_null(0)
+			&& !C.is_null(1)
+			&& !C.is_null(2)
 			)
 		{
 			CNodePlace p;
-			p.y = atoi(m_pRossDoc->GetDomItemStrInner(C.m_DomItemNos[1]));
-			p.x = atoi(m_pRossDoc->GetDomItemStrInner(C.m_DomItemNos[2]));
-			CreateNode(m_pRossDoc->GetDomItemStrInner(C.m_DomItemNos[0]), p, WithoutView);
+			p.y = atoi(m_pRossDoc->GetDomItemStrWrapper(C.GetItem(1)).c_str());
+			p.x = atoi(m_pRossDoc->GetDomItemStrWrapper(C.GetItem(2)).c_str());
+			CreateNode(m_pRossDoc->GetDomItemStrWrapper(C.GetItem(0)).c_str(), p, WithoutView);
 		};
-		if ((C.m_FieldNo == RelFieldNo)
-			&& (C.m_DomItemNos[0] != -1)
-			&& (C.m_DomItemNos[1] != -1)
+		if ((C.m_FieldNo == RelFieldNo) && !C.is_null(0) && !C.is_null(1)
 			)
-			CreateRelation(FindNodeByName(m_pRossDoc->GetDomItemStrInner(C.m_DomItemNos[0])),
-				FindNodeByName(m_pRossDoc->GetDomItemStrInner(C.m_DomItemNos[1])),
+			CreateRelation(FindNodeByName(m_pRossDoc->GetDomItemStrWrapper(C.GetItem(0)).c_str()),
+				FindNodeByName(m_pRossDoc->GetDomItemStrWrapper(C.GetItem(1)).c_str()),
 				true, WithoutView);
 	};
 
@@ -241,7 +236,7 @@ void CHierarchyHolder::SetHierarchyTransitiveClosure()
 void CHierarchyHolder::CreateNode(const char* Name)
 {
 	CHierarchyNode N(Name);
-	N.ItemNo = GetRoss()->GetItemNoByItemStr(Name, GetDomNo());;
+	N.ItemNo = GetRoss()->GetItemIdByItemStr(Name, GetDomNo());;
 	Nodes.push_back(N);
 };
 
@@ -285,17 +280,14 @@ struct LessStringRelation {
 	};
 };
 
-bool IsEqualOrHigherInHierarchy(CRossHolder* HostRoss, long HostItemNo, CRossHolder* SlaveRoss, long SlaveItemNo, CHierarchyHolder* pHierarchyDoc)
+bool IsEqualOrHigherInHierarchy(const std::string& host, const std::string& slave, CHierarchyHolder* pHierarchyDoc)
 {
-	std::string Host = HostRoss->GetDomItemStrInner(HostItemNo);
-	std::string Slave = SlaveRoss->GetDomItemStrInner(SlaveItemNo);
+	if (host == slave) return true;
 
-	if (Host == Slave) return true;
+	std::vector<CStringRelation>::iterator It = lower_bound(pHierarchyDoc->m_TransitiveRels.begin(), pHierarchyDoc->m_TransitiveRels.end(), host, LessStringRelation());
 
-	std::vector<CStringRelation>::iterator It = lower_bound(pHierarchyDoc->m_TransitiveRels.begin(), pHierarchyDoc->m_TransitiveRels.end(), Host, LessStringRelation());
-
-	for (; (It < pHierarchyDoc->m_TransitiveRels.end()) && (It->m_Source == Host); It++)
-		if (It->m_Target == Slave)
+	for (; (It < pHierarchyDoc->m_TransitiveRels.end()) && (It->m_Source == host); It++)
+		if (It->m_Target == slave)
 			return true;
 
 	return false;
@@ -329,8 +321,8 @@ const int MaxLevelId = 30;
 // ниже по иерархии
 bool SemFetActantIsEqualOrLower(CRossHolder* Ross, uint16_t Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc)
 {
-	long ItemNo = Ross->GetRoss()->GetItemNoByItemStr(ItemStr, Ross->SemFetDomNo);
-	assert(ItemNo != -1);
+	dom_item_id_t ItemNo = Ross->GetRoss()->GetItemIdByItemStr(ItemStr, Ross->SemFetDomNo);
+	assert(!is_null(ItemNo));
 	long LastNo = Ross->GetRoss()->GetUnitEndPos(Host);
 	bool Found = false;
 	for (long i = Ross->GetRoss()->GetUnitStartPos(Host); i <= LastNo; i++)
@@ -341,9 +333,10 @@ bool SemFetActantIsEqualOrLower(CRossHolder* Ross, uint16_t Host, BYTE LeafId, B
 		{
 
 			Found = true;
-			TCortege10 C = GetCortegeCopy(Ross->GetRoss(), i);
-			if ((ItemNo != C.m_DomItemNos[0])
-				&& !IsEqualOrHigherInHierarchy(Ross, ItemNo, Ross, C.m_DomItemNos[0], pHierarchyDoc)
+			TCortege10 C = Ross->GetCortegeCopy(i);
+			std::string slave = Ross->GetDomItemStrWrapper(C.GetItem(0));
+			if ((ItemNo != C.GetItem(0))
+				&& !IsEqualOrHigherInHierarchy(ItemStr, slave, pHierarchyDoc)
 				)
 				return false;
 		};

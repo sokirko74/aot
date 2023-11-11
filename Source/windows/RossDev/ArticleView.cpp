@@ -17,7 +17,7 @@ static char THIS_FILE[] = __FILE__;
 
 IMPLEMENT_DYNCREATE(CArticleView, CSizeFormView)
 
-CArticleView::CArticleView( )
+CArticleView::CArticleView()
 	: CSizeFormView(CArticleView::IDD)
 {
 	m_StandardLogFont.lfFaceName[0] = 0;
@@ -230,7 +230,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege10>& L, size_t nPos)
 	// сначала записываем первую строку, т.к. она сильно отличается от всех
 	if (L.size() > 0)
 	{
-		std::string Q = WriteToString(GetRoss(), L[0]);
+		std::string Q = GetRoss()->WriteToString(L[0]);
 		LevelId = L[0].m_LevelId;
 		if ( LevelId == 1 )  
 		{
@@ -250,7 +250,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege10>& L, size_t nPos)
 
 	for (size_t i=1; i<L.size(); i++)
 	{
-		std::string Q = WriteToString(GetRoss(), L[i]);
+		std::string Q = GetRoss()->WriteToString(L[i]);
 		// cмотри выше Положение о выравнивании
 		if (L[i].m_LevelId > LevelId)
 		{

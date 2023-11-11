@@ -101,7 +101,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_NOTIFY(NM_CLICK, IDC_WORDLIST_GRID, OnClickWordlistGrid)
 	ON_COMMAND(IDD_EXPORT_ALL_DICTS, OnExportAllDicts)
 	ON_COMMAND(EMPTY_ALL_DICTS, OnEmptyAllDicts)
-	ON_COMMAND(ID_DEL_TEXT_DOMENS, OnDelTextDomains)
 	ON_COMMAND(ID_RELOAD, OnReload)
 	ON_WM_LBUTTONUP()
 	ON_WM_KEYDOWN()
@@ -366,8 +365,7 @@ void CWordList::OnClose()
 
 bool CWordList::SetArticle(uint16_t UnitNo, CString Value)
 {
-	CTempArticle A;
-	A.m_pRoss = GetRoss();
+	CTempArticle A(GetRoss());
 	A.ReadFromDictionary(UnitNo, true, false);
 	A.ReadFromUtf8String(Value);
 	return A.WriteToDictionary();
@@ -664,8 +662,7 @@ void CWordList::SaveRossToTxt(CString FileName) const
 
 		PrintExportHeader(*this, fp);
 
-		CTempArticle A;
-		A.m_pRoss = GetRoss();
+		CTempArticle A(GetRoss());
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
@@ -734,11 +731,10 @@ void CWordList::OnSearchByArticle()
 		return;
 	};
 
-	CTempArticle A1;
-	A1.m_pRoss = GetRoss();
+	CTempArticle A1(GetRoss());
 	A1.ReadFromDictionary(UnitNo, false, true);
-	CTempArticle A2;
-	A2.m_pRoss = GetRoss();
+
+	CTempArticle A2(GetRoss());
 
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 		if (GetUnitNo(i) != UnitNo)
@@ -833,17 +829,17 @@ void CWordList::OnStatistic()
 
 	for (size_t i = 0; i < GetRoss()->_GetCortegesSize(); i++)
 	{
+		const auto& c = GetCortege(GetRoss(), i);
 		for (size_t k = 0; k < NumDom; k++)
-			if (k != -1)
-			{
-
-				CStatis I;
-				I.ItemNo = GetCortege(GetRoss(), i).m_DomItemNos[k];
-				std::vector<CStatis>::iterator It = lower_bound(V.begin(), V.end(), I);
-				if ((It != V.end())
-					&& (I == *It))
-					It->Freq++;
-			};
+		{
+			if (c.is_null(k)) break;
+			CStatis I;
+			I.ItemNo = c.GetItem(k);
+			std::vector<CStatis>::iterator It = lower_bound(V.begin(), V.end(), I);
+			if ((It != V.end())
+				&& (I == *It))
+				It->Freq++;
+		};
 	};
 
 
@@ -851,7 +847,7 @@ void CWordList::OnStatistic()
 	for (size_t k = 0; k < V.size(); k++)
 	{
 		CString Q;
-		BYTE DomNo = GetRoss()->GetDomItemDomNo(V[k].ItemNo);
+		BYTE DomNo = get_dom_no(V[k].ItemNo);
 		CString DomStr = GetRoss()->m_Domens[DomNo].GetDomStr().c_str();
 		Q.Format("%-16s %-5s %-20s %-5s %i \r\n", DomStr, "|", (const char*)GetRoss()->GetDomItemStr(V[k].ItemNo), "|", V[k].Freq);
 		S += Q;
@@ -954,8 +950,8 @@ void CWordList::BuildVals(std::vector<Valency>& Vals, uint16_t UnitNo)
 		if (GetCortege(GetRoss(), k).m_FieldNo == GetDocument()->GetRossHolder()->ValFieldNo)
 		{
 			Valency V;
-			V.ValNo = GetCortege(GetRoss(), k).m_DomItemNos[0];
-			V.A_C = GetCortege(GetRoss(), k).m_DomItemNos[1] != GetDocument()->GetRossHolder()->SelfLabelNo;
+			V.ValNo = GetCortege(GetRoss(), k).GetItem(0);
+			V.A_C = GetCortege(GetRoss(), k).GetItem(1) != GetDocument()->GetRossHolder()->SelfLabelNo;
 			Vals.push_back(V);
 		};
 };
@@ -1131,7 +1127,7 @@ void CWordList::OnStatisticFieldValue()
 		CString Q;
 		Q.Format("%-16s %-5s %-30s %-5s %-16i\r\n",
 			GetRoss()->Fields[V[i].FieldNo].FieldStr.c_str(), "|",
-			WriteToString(GetRoss(), V[i].cortege).c_str(), "|", V[i].freq);
+			GetRoss()->WriteToString(V[i].cortege).c_str(), "|", V[i].freq);
 		S += Q;
 	};
 
@@ -1225,13 +1221,11 @@ void CWordList::OnArticleAppend()
 		uint16_t MainUnitNo;
 		if (!GetSelectedUnitNo(MainUnitNo)) return;
 
-		CTempArticle A1;
-		A1.m_pRoss = GetRoss();
+		CTempArticle A1(GetRoss());
 		if (MainUnitNo != ErrUnitNo)
 			A1.ReadFromDictionary(MainUnitNo, false, false);
 
-		CTempArticle A2;
-		A2.m_pRoss = GetRoss();
+		CTempArticle A2(GetRoss());
 
 		CString S;
 		if (::MessageBox(this->m_hWnd, "The environment add the current entry to all entries, if there is no intersection by fields. Procees?", "Confirmation", MB_YESNO) == IDNO) return;
@@ -1422,7 +1416,7 @@ void CWordList::OnGXiStatistics()
 	{
 		CString S;
 		BYTE FieldNo = GxiStatisticVector[j].m_GXi.m_FieldNo;
-		CString CortegeStr = WriteToString(GetRoss(), GxiStatisticVector[j].m_GXi).c_str();
+		CString CortegeStr = GetRoss()->WriteToString(GxiStatisticVector[j].m_GXi).c_str();
 
 		S.Format("%-16s %-5s %-20s %-5s %i ", GxiStatisticVector[j].m_SemRelName, "|", CortegeStr, "|", GxiStatisticVector[j].m_num);
 		for (int k = 0; k < GxiStatisticVector[j].Units.size(); k++)
@@ -1719,29 +1713,6 @@ void CWordList::OnEmptyAllDicts()
 };
 
 
-void CWordList::OnDelTextDomains()
-{
-	if (!UnlockAllDicts()) return;
-	try {
-		CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-		POSITION pos = pRossDocTemplate->GetFirstDocPosition();
-		int RossNo = 0;
-		while (pos)
-		{
-			CRossDoc* pDoc = (CRossDoc*)pRossDocTemplate->GetNextDoc(pos);
-			if (pDoc->GetRoss()->_GetCortegesSize() > 0)
-			{
-				AfxMessageBox("Delete all dictionary entries before!");
-				return;
-			};
-			pDoc->DelTextDomains();
-		};
-	}
-	catch (...)
-	{
-		AfxMessageBox("An exception occured!");
-	};
-}
 
 
 struct CDictInterp {

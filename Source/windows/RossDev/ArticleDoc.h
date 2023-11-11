@@ -8,7 +8,7 @@
 class CArticleDoc : public CDocument
 {
 protected: // create from serialization only
-	CArticleDoc();
+	CArticleDoc(CRossDoc* pRossDoc);
 	DECLARE_DYNCREATE(CArticleDoc)
 	
 

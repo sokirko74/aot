@@ -71,7 +71,7 @@ void CRusSemStructure::DeleteLongRelations (long ClauseNo, long MaxRelationLeaps
 		  && (m_Nodes[m_Relations[i].m_TargetNodeNo].m_NodeType != MNA)
 		 )
 		 if (m_Relations[i].m_Valency.IsFromDict() )
-		   if (!bOnlyNouns || m_Relations[i].m_Valency.m_RossHolder->IsGenitiv(m_Relations[i].m_SynReal.m_Cortege.m_DomItemNos[1]))
+		   if (!bOnlyNouns || m_Relations[i].m_Valency.m_RossHolder->IsGenitiv(m_Relations[i].m_SynReal.m_Cortege.GetItem(1)))
 			   if ( m_Relations[i].m_LeapsCount > MaxRelationLeapsCount)
 			   {
 			     EraseRelation(i, "too long relation");

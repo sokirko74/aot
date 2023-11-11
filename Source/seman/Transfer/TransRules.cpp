@@ -166,20 +166,22 @@ bool CEngSemStructure::HasItem(const std::vector<TCortege10>& GramCorteges, long
 
 bool CEngSemStructure::HasItem(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, std::string strItem)
 {
-	for( int i = 0 ; i < GramCorteges.size() ; i++ )
+	for(int i = 0 ; i < GramCorteges.size() ; i++ )
 	{
 		const TCortege10& cortege = GramCorteges[i];
-		if( (GetItemStr(cortege.m_DomItemNos[0], type).find(strItem) != -1) && (cortege.m_DomItemNos[1] == -1) )
+		if( (GetItemStr(cortege.GetItem(0), type).find(strItem) != string::npos) && cortege.is_null(1) )
 		{
 			CortegeNo = i;
 			ItemNo = 0;
 			return true;	
 		}
-		if( (cortege.m_DomItemNos[1] != -1) && (GetItemStr(cortege.m_DomItemNos[1], type).find(strItem) != -1))
-		{
-			CortegeNo = i;
-			ItemNo = 1;
-			return true;	
+		if (!cortege.is_null(1)) {
+			if (GetItemStr(cortege.GetItem(1), type).find(strItem) != string::npos)
+			{
+				CortegeNo = i;
+				ItemNo = 1;
+				return true;
+			}
 		}
 	}
 
@@ -201,16 +203,16 @@ std::string CEngSemStructure::GetConj(const std::vector<TCortege10>& GramCortege
 	if( HasItem(GramCorteges, iCortege, iItem, type, "+sent") || HasItem(GramCorteges, iCortege, iItem, type, "+subj_clause"))
 	{
 		const TCortege10& cortege = GramCorteges[iCortege];
-		std::string strItem = GetItemStr(cortege.m_DomItemNos[iItem], type);
+		std::string strItem = GetItemStr(cortege.GetItem(iItem), type);
 
 		int ii = strItem.find("+sent"); 		
 
-		if( ii != -1)		
+		if( ii != string::npos)		
 			return strItem.substr(0, ii);
 
 		ii = strItem.find("+subj_clause"); 		
 
-		if( ii != -1)		
+		if( ii != string::npos)		
 			return strItem.substr(0, ii);
 
 		
@@ -231,17 +233,17 @@ bool CEngSemStructure::HasInf(const std::vector<TCortege10>& GramCorteges, long&
 
 std::string CEngSemStructure::GetGerundPrep(const TCortege10& cortege, DictTypeEnum type)
 {
-	std::string item = GetItemStr(cortege.m_DomItemNos[0], type);
+	std::string item = GetItemStr(cortege.GetItem(0), type);
 	int i = item.find("+gerund");
-	if( i == -1 )
+	if( i == string::npos )
 	{
-		if( cortege.m_DomItemNos[1] != -1 )
+		if( !cortege.is_null(1) )
 		{
-			item = GetItemStr(cortege.m_DomItemNos[1], type);
+			item = GetItemStr(cortege.GetItem(1), type);
 			i = item.find("+gerund");
 		}
 	}
-	if(i == -1)
+	if(i == string::npos)
 		return "";
 	else
 		return item.substr(0, i);
@@ -482,7 +484,7 @@ bool CEngSemStructure::Rule_TranslateSubj(int iRusActant,long EngRelNo, const st
 		   )
 	  )
 	{
-		  semEngRel.m_SynReal.m_Cortege.SetItem(0, -1);
+		  semEngRel.m_SynReal.m_Cortege.SetItem(0, EmptyDomItemId);
 		  SetSimpleEngPrep("by",-1,EngRelNo);
 		  assert  (!IsSubj(semEngRel));
 		  return true;

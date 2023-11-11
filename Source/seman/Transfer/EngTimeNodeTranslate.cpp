@@ -25,7 +25,7 @@ std::string get_field(CRossHolder*  RossHolder, uint16_t UnitNo, std::string Fie
 			&& ( (LevelId == ErrUChar) || (RossHolder->GetRoss()->GetCortegePtr(i)->m_LevelId == LevelId) )
 		 )
 	  {
-         return (const char*)RossHolder->GetRoss()->GetDomItemStr(RossHolder->GetRoss()->GetCortegeItem(i,0));
+         return RossHolder->GetDomItemStrWrapper1(i,0);
 	  };
 
   return "";

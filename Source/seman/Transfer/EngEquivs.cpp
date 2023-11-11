@@ -295,7 +295,7 @@ void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, 
 			{
 				long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 				if(	FieldStr == GetRoss(type)->Fields[FieldNo].FieldStr )
-					vectorAgx.push_back(GetCortegeCopy(GetRoss(type),i));
+					vectorAgx.push_back(GetRossHolder(type)->GetCortegeCopy(i));
 			}
 }
 
@@ -321,12 +321,12 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<TCortege10> corteges;
 	GetRossHolder(DictType)->GetFieldValues(std::string("ENG"),RusUnitNo,corteges);
 
-	for( int i=0; i<corteges.size(); i++ )
+	for( const auto& c: corteges)
 	{
 		SEngEquiv engEquiv;		
-		if( corteges[i].m_DomItemNos[0] == -1 )
+		if( c.is_null(0))
 			continue;
-		std::string strEngWord = (const char*)GetRoss(DictType)->GetDomItemStr(corteges[i].m_DomItemNos[0]);
+		std::string strEngWord = GetRoss(DictType)->GetDomItemStr(c.GetItem(0));
 //
 		int pos = strEngWord.find("#delete_numeral_prefix");
 		if( pos!=std::string::npos )
@@ -344,14 +344,14 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 		engEquiv.m_StrEngWord = strEngWord;
 
 	
-		if( corteges[i].m_DomItemNos[1] != -1 )
+		if( !c.is_null(1))
 		{
-			std::string meanNum = (const char*)GetRoss(DictType)->GetDomItemStr(corteges[i].m_DomItemNos[1]);
+			std::string meanNum = GetRoss(DictType)->GetDomItemStr(c.GetItem(1));
 			engEquiv.m_iMeanNum = meanNum[0] - '0';
 		}
 
-		if( corteges[i].m_DomItemNos[2] != -1 )
-			engEquiv.m_StrLexFunc = GetRoss(DictType)->GetDomItemStr(corteges[i].m_DomItemNos[2]);
+		if( !c.is_null(2))
+			engEquiv.m_StrLexFunc = GetRoss(DictType)->GetDomItemStr(c.GetItem(2));
 		else
 			engEquiv.m_StrLexFunc = "";
 
@@ -374,15 +374,15 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	GetAFieldVector("ENUMBER", DictType,vectorAnm,RusUnitNo);
 
 	std::vector<long> vecListByAnm;
-	for( int i=0; i<vectorAnm.size(); i++ )
+	for( auto& c: vectorAnm)
 	{
-		if( vectorAnm[i].m_DomItemNos[0] == -1 )
+		if( c.is_null(0) )
 			continue;
-		long theId = vectorAnm[i].m_BracketLeafId - 1;
+		long theId = c.m_BracketLeafId - 1;
 		vecListByAnm.push_back(theId);
 
 		int i1 = atoi(rusWord.m_NumeralPrefix.c_str());
-		std::string strANM = GetCortegeStr(rusNode.GetType(),vectorAnm[i]);
+		std::string strANM = GetCortegeStr(rusNode.GetType(), c);
 		int i2 = atoi(strANM.c_str());
 		if( i1!=i2 )
 			continue;
@@ -393,10 +393,10 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 			vectorEngEquivs = tempEngEquivs;
 			return;
 		}
-	} // vectorAnm.size()
+	} 
 
 // берем те эквиваленты, на которые не ссылается никакое ENUMBER
-	if( vecListByAnm.size()>0 )
+	if( !vecListByAnm.empty() )
 	{
 		for( int i=0; i<vectorEngEquivs.size(); i++ )
 		{
@@ -450,7 +450,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<long> vecGoodByAlx;
 	for( int i=0; i<vectorAlx.size(); i++ )
 	{
-		if( vectorAlx[i].m_DomItemNos[0] == -1 )
+		if( vectorAlx[i].is_null(0)  )
 			continue;
 		long theId = vectorAlx[i].m_BracketLeafId - 1;
 
@@ -531,7 +531,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<long> vecGoodByAop;
 	for( int i=0; i<vectorAop.size(); i++ )
 	{
-		if( vectorAop[i].m_DomItemNos[0] == -1 )
+		if( vectorAop[i].is_null(0) )
 			continue;
 		long theId = vectorAop[i].m_BracketLeafId - 1;
 
@@ -588,7 +588,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<long> vecGoodByAPredlog;
 	for( int i=0; i<vectorAPredlog.size(); i++ )
 	{
-		if( vectorAPredlog[i].m_DomItemNos[0] == -1 )
+		if( vectorAPredlog[i].is_null(0) )
 			continue;
 		if( vectorAPredlog[i].m_LeafId != 0 ) continue;//EPREP должен быть без индекса
 		long theId = vectorAPredlog[i].m_BracketLeafId - 1;
@@ -614,7 +614,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<long> vecGoodByALF;
 	for( int i=0; i<vectorAlf.size(); i++ )
 	{
-		if( vectorAlf[i].m_DomItemNos[0] == -1 )
+		if( vectorAlf[i].is_null(0) )
 			continue;
 		if( vectorAlf[i].m_LeafId != 0 ) continue;//ELF должен быть без индекса
 		long theId = vectorAlf[i].m_BracketLeafId - 1;
@@ -663,7 +663,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<long> vecGoodByAgx;
 	for( int i=0; i<vectorAgx.size(); i++ )
 	{
-		if( vectorAgx[i].m_DomItemNos[0] == -1 )
+		if( vectorAgx[i].is_null(0))
 			continue;
 		long theId = vectorAgx[i].m_BracketLeafId - 1;
 		vecListByAgx.push_back(theId);
@@ -673,7 +673,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 			if( !CheckDomensForCortege(domens,vectorAgx[i],DictType) )
 				continue;
 
-			std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
+			std::string strGrammems = GetItemStr(vectorAgx[i].GetItem(0), DictType);
 			grammems_mask_t Grammems;
 			uint32_t Pose;
 
@@ -723,7 +723,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 					if( semMainWord == -1 )
 						continue;
 
-					std::string strGrammems = GetItemStr(vectorAgx[i].m_DomItemNos[0], DictType);
+					std::string strGrammems = GetItemStr(vectorAgx[i].GetItem(0), DictType);
 					part_of_speech_mask_t Pose;
 					grammems_mask_t Grammems;
 					m_pData->GetCustomGrammems(strGrammems,Grammems,Pose);
@@ -742,7 +742,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 				}
 				else
 				{
-					std::string dbg_str = GetItemStr(vectorAgx[i].m_DomItemNos[0],DictType);
+					std::string dbg_str = GetItemStr(vectorAgx[i].GetItem(0), DictType);
 
 					//проверяем на эквивалентность с тем кортежем, по которому Леша собрал
 
@@ -778,7 +778,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<long> vecGoodByAcx;
 	for( int i=0; i<vectorAcx.size(); i++ )
 	{
-		if( vectorAcx[i].m_DomItemNos[0] == -1 )
+		if( vectorAcx[i].is_null(0))
 			continue;
 		long theId = vectorAcx[i].m_BracketLeafId - 1;
 		vecListByAcx.push_back(theId);

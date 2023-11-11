@@ -25,19 +25,22 @@ struct TSignatItem  {
 
 class  CSignat
 {
+	//runtime
+	std::string   sFrmt;
+	std::vector<TSignatItem>  DomsWithDelims;
+	std::vector<BYTE>  DomsWoDelims;
+
 public:
 	// serialized
 	BYTE    SignatId;
 	std::string  FormatStr;
 
-	//runtime
-	std::string   sFrmt;
 	std::string   sFrmtWithotSpaces;
-    std::vector<TSignatItem>  DomsWithDelims;  
-    std::vector<BYTE>  Doms; 
    
    
     void BuildSignatFormat(const TItemContainer* parent, BYTE MaxNumDom, std::string fieldStr);
-	const char* GetFrmt() const;
+	const std::string& GetFrmt() const;
+	const std::vector<BYTE>& GetDomsWoDelims() const;
+	const std::vector<TSignatItem>& GetDomsWithDelims() const;
 };
 

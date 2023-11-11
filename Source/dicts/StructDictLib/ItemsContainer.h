@@ -11,55 +11,11 @@
 #include "morph_dict/common/bserialize.h"
 
 
-struct TDomNoItemStr {
-	std::string ItemStr;
-    BYTE DomNo;
-};
-
-
-struct TDomItem 
-{
-	uint32_t	m_Data;
-	BYTE	m_DomNo;
-
-	uint32_t	GetItemStrNo() const
-	{
-		return m_Data & ~(0xff<<24);
-	};
-	void	SetItemStrNo(uint32_t Value) 
-	{
-		m_Data &= (0xff<<24);
-		m_Data |= Value;
-	};
-	BYTE	GetItemStrLen() const
-	{
-		return m_Data>>24;
-	};
-	void	SetItemStrLen(BYTE Value) 
-	{
-		m_Data &= ~(0xff<<24);
-		m_Data |= ((size_t)Value<<24);
-	};
-
-	BYTE	GetDomNo() const
-	{
-		return m_DomNo;
-	};
-	void	SetDomNo(BYTE Value) 
-	{
-		m_DomNo = Value;
-	};
-};
-
-
-
-
 class TItemContainer  
 {
 public :
 	MorphLanguageEnum	m_Language;
     std::string RossPath;
-	std::vector<TDomItem>  m_DomItems;
 	std::string DomItemsFile;
 	std::string DomItemsTextFile;
 	std::string ItemsFile;
@@ -78,7 +34,7 @@ public :
 	BYTE CollocDomNo;
 	BYTE AbbrDomNo;
 	BYTE FieldDomNo;
-	BYTE EmptyDomNo;
+	BYTE WildCardDomNo;
 	BYTE IllDomNo;
 	BYTE IntegerDomNo;
 	int WildCardDomItemNo;
@@ -87,13 +43,11 @@ public :
 
 	TItemContainer();
 
-	const char*			 GetDomItemStr(const TDomItem& Item) const;
 	void 			ErrorMessage (std::string s ) const;
 	bool			InitDomensConsts();
-	int				GetItemNoByItemStr (const std::string&  ItemStr, BYTE DomNo) const;
-	int				GetItemNoByItemStr (const std::string&  ItemStr, const char* DomStr) const;
+	dom_item_id_t	GetItemIdByItemStr (const std::string&  ItemStr, BYTE DomNo) const;
+	dom_item_id_t	GetItemIdByItemStr (const std::string&  ItemStr, const char* DomStr) const;
 	BYTE			GetDomenNoByDomStr (const char* DomStr) const;
-	bool			AreEqualDomItems(const TDomItem& Item1, const TDomNoItemStr& Item2) const;
 
 	void			UpdateConstDomens();
 	bool			BuildDomens (char* LastReadLine);
@@ -108,8 +62,10 @@ public :
 	void		BuildFields(BYTE MaxNumDom);
 	bool		WriteFields() const;
 	bool		WriteDomens () const;
-	size_t		GetDomItemsSize() const {return m_DomItems.size();};
 	bool		WriteDomItems() const ;
+	BYTE		GetCortegeFieldNo(size_t i) const;
+	BYTE		GetCortegeLeafId(size_t i) const;
+	BYTE		GetCortegeBracketLeafId(size_t i) const;
 
 
 

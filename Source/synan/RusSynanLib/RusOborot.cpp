@@ -47,7 +47,7 @@ CRusOborDic::CRusOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
 static long GetItemNoByItemStr(const CDictionary* piOborDic, const std::string& ItemStr, const char* _DomStr) 
 {
 	BYTE DomNo = piOborDic->GetDomenNoByDomStr(_DomStr);
-    return piOborDic->GetItemNoByItemStr(ItemStr, DomNo);
+    return piOborDic->GetItemIdByItemStr(ItemStr, DomNo);
 }
 
 
@@ -83,20 +83,23 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 		assert(SubordDisruptPrepItemNo != -1);
 		long PrepItemNo = GetItemNoByItemStr(piOborDic,_R("ПРЕДЛ"), "D_PART_OF_SPEECH");
 		assert(PrepItemNo != -1);
+
+
 		// падежи 
-		long NominativItemNo = GetItemNoByItemStr(piOborDic,_R("И"), "D_CASE");
+		BYTE case_dom_no = piOborDic->GetDomenNoByDomStr("D_CASE");
+		auto NominativItemNo = piOborDic->GetItemIdByItemStr(_R("И"), case_dom_no);
 		assert(NominativItemNo != -1);
-		long GenitivItemNo = GetItemNoByItemStr(piOborDic,_R("Р"), "D_CASE");
+		auto GenitivItemNo = piOborDic->GetItemIdByItemStr(_R("Р"), case_dom_no);
 		assert(GenitivItemNo != -1);
-		long AccusativItemNo = GetItemNoByItemStr(piOborDic,_R("В"), "D_CASE");
+		auto AccusativItemNo = piOborDic->GetItemIdByItemStr(_R("В"), case_dom_no);
 		assert(AccusativItemNo != -1);
-		long DativItemNo = GetItemNoByItemStr(piOborDic,_R("Д"), "D_CASE");
+		auto DativItemNo = piOborDic->GetItemIdByItemStr(_R("Д"), case_dom_no);
 		assert(DativItemNo != -1);
-		long InstrumentalisItemNo = GetItemNoByItemStr(piOborDic, _R("Т"), "D_CASE");
+		auto InstrumentalisItemNo = piOborDic->GetItemIdByItemStr(_R("Т"), case_dom_no);
 		assert(InstrumentalisItemNo != -1);
-		long VocativItemNo = GetItemNoByItemStr(piOborDic, _R("П"), "D_CASE");
+		auto VocativItemNo = piOborDic->GetItemIdByItemStr(_R("П"), case_dom_no);
 		assert(VocativItemNo != -1);
-		long NominativPluralItemNo = GetItemNoByItemStr(piOborDic,_R("И_мн"), "D_CASE");
+		auto NominativPluralItemNo = piOborDic->GetItemIdByItemStr(_R("И_мн"), piOborDic->GetDomenNoByDomStr("D_CASE_NUMBER"));
 
 		
 		
@@ -127,9 +130,7 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 				if (LeafId == 0)
 				{
 					{
-						char OutBuffer[1000];
-						piOborDic->CortegeToStr(*piOborDic->GetCortegePtr(i), OutBuffer);
-						oborot.m_GrammarFeature = OutBuffer;
+						oborot.m_GrammarFeature = piOborDic->WriteToString(*piOborDic->GetCortegePtr(i));
 						Trim(oborot.m_GrammarFeature);
 						if (oborot.m_GrammarFeature == _R("НАР"))
 							oborot.m_GrammarFeature = _R("Н");

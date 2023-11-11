@@ -8,39 +8,14 @@
 #include <algorithm>
 #include <stdio.h>
 #include "ItemsContainer.h"
-#include "LessDomItem.h"
 #include "morph_dict/common/util_classes.h"
 
-
-//==================================================
-//==================================================
-inline size_t get_size_in_bytes(const TDomItem &t) {
-    return get_size_in_bytes(t.m_Data) + get_size_in_bytes(t.m_DomNo);
-
-};
-
-inline size_t save_to_bytes(const TDomItem &i, BYTE *buf) {
-    buf += save_to_bytes(i.m_Data, buf);
-    buf += save_to_bytes(i.m_DomNo, buf);
-    return get_size_in_bytes(i);
-}
-
-inline size_t restore_from_bytes(TDomItem &i, const BYTE *buf) {
-    buf += restore_from_bytes(i.m_Data, buf);
-    buf += restore_from_bytes(i.m_DomNo, buf);
-    return get_size_in_bytes(i);
-}
 
 
 TItemContainer::TItemContainer() {
     m_Language = morphRussian;
 };
 
-const char*	TItemContainer::GetDomItemStr(const TDomItem& Item) const
-{
-    assert (!m_Domens[Item.GetDomNo()].IsFreedDomain());
-    return m_Domens[Item.GetDomNo()].GetDomainItemsBuffer() + Item.GetItemStrNo();
-};
 
 BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr) const {
     for (BYTE i = 0; i < m_Domens.size(); i++)
@@ -50,56 +25,38 @@ BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr) const {
     return ErrUChar;
 };
 
-bool TItemContainer::AreEqualDomItems(const TDomItem &Item1, const TDomNoItemStr &Item2) const {
-    return    (Item2.ItemStr == GetDomItemStr(Item1))
-           && (Item1.GetDomNo() == Item2.DomNo);
-}
-
-
-inline int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, const char *DomStr) const {
-    BYTE DomNo = GetDomenNoByDomStr(DomStr);
-    if (DomNo == ErrUChar) return -1;
-    return GetItemNoByItemStr(ItemStr, DomNo);
-};
-
-int TItemContainer::GetItemNoByItemStr(const std::string& ItemStr, BYTE DomNo) const {
+dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, BYTE DomNo) const {
     if (DomNo == ErrUChar) return -1;
 
     if (DomNo == LexPlusDomNo) {
         DomNo = GetDomNoForLePlus(ItemStr.c_str());
         if (DomNo == ErrUChar) {
-            return -1;
+            return EmptyDomItemId;
         };
     };
 
-    TDomNoItemStr I = { ItemStr, DomNo };
-    const CDomen &D = m_Domens[I.DomNo];
+    const CDomen& D = m_Domens[DomNo];
     if (D.GetDomainSource() == dsUnion) {
-        int Res = -1;
-
-        for (auto& dom_no: D.GetParts()) {
-            Res = GetItemNoByItemStr(ItemStr, dom_no);
-            if (Res != -1) break;
+        for (auto& part_dom_no : D.GetParts()) {
+            auto id = m_Domens[part_dom_no].GetDomItemIdByStr(ItemStr);
+            if (!is_null(id)) {
+                return id;
+            }
         }
-
-        return Res;
-    } else {
-        if (D.DomainIsDelim())
-            if (   (ItemStr.length() != 1)
-                || (D.GetDomainItemsBuffer() == 0)
-                || !strchr(D.GetDomainItemsBuffer(), ItemStr[0])
-               )
-                return -1;
-        auto U = lower_bound(m_DomItems.begin(), m_DomItems.end(), I,
-                                                         IsLessByNotStableItemStrNew(this));
-        if ((U == m_DomItems.end())
-            || !AreEqualDomItems(*U, I)
-                )
-            return -1;
-        else
-            return (int) (U - m_DomItems.begin());
+        return EmptyDomItemId;
+    }
+    else {
+        return m_Domens[DomNo].GetDomItemIdByStr(ItemStr);
     };
 }
+
+
+inline dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, const char *DomStr) const {
+    BYTE DomNo = GetDomenNoByDomStr(DomStr);
+    if (DomNo == ErrUChar) return EmptyDomItemId;
+    return GetItemIdByItemStr(ItemStr, DomNo);
+};
+
 
 
 bool TItemContainer::InitDomensConsts() {
@@ -129,26 +86,16 @@ bool TItemContainer::InitDomensConsts() {
     FieldDomNo = GetDomenNoByDomStr("D_FIELDS");
     if (FieldDomNo == ErrUChar) return false;
 
-    EmptyDomNo = GetDomenNoByDomStr("D_");
-    if (EmptyDomNo == ErrUChar) return false;
+    WildCardDomNo = GetDomenNoByDomStr("D_");
+    if (WildCardDomNo == ErrUChar) return false;
 
     return true;
 };
 
 
-//  перестраивает все константые домены (те, которые могут меняться только 
-// из редактора схемы. Константые домены - это просто не текстовые домены (CDomen::Source != dsText).
 void TItemContainer::UpdateConstDomens() {
-    for (size_t i = 0; i < m_Domens.size(); i++) {
-        CDomen &D = m_Domens[i];
-
-        if (i == EmptyDomNo)
-            for (int k = D.m_StartDomItem; k < D.m_EndDomItem; k++)
-                if (m_DomItems[k].GetItemStrLen() > 0)
-                    WildCardDomItemNo = k;
-
-    };
-
+    assert(!m_Domens[WildCardDomNo].IsEmpty());
+    WildCardDomItemNo = build_item_id(WildCardDomNo, 0);
 };
 
 
@@ -161,7 +108,7 @@ bool TItemContainer::BuildDomens(char *LastReadLine) {
     auto domains = nlohmann::json::parse(inp);
     std::unordered_map<std::string, BYTE>  doms_idents;
     for (auto d: domains) {
-        size_t dom_no = m_Domens.size();
+        BYTE dom_no = (BYTE)m_Domens.size();
         CDomen T;
         T.ReadFromJson(this, dom_no, d);
         m_Domens.emplace_back(T);
@@ -178,100 +125,39 @@ bool TItemContainer::BuildDomens(char *LastReadLine) {
 
 bool TItemContainer::BuildDomItems() {
 
-    m_DomItems.clear();
-
     //  reading domen items
     {
-        FILE *fp = fopen(DomItemsTextFile.c_str(), "rb");
-        if (!fp) return false;
-        int i1, i2;
-        while (fscanf(fp, "%i %i\n", &i1, &i2) == 2) {
-            TDomItem I;
-            I.m_Data = i1;
-            I.m_DomNo = i2;
-            if (i2 >= 255) return false;
-            m_DomItems.push_back(I);
-
-        }
-        fclose(fp);
-    }
-
-    //  reading domens
-    {
-        FILE *fp = fopen(ItemsFile.c_str(), "r");
-        if (!fp) return false;
-
-        for (size_t k = 0; k < m_Domens.size(); k++) {
-            char buffer[513];
-            /*
-                при добавлении новых доменов файл Items получается  неполным
-                (там нет добавленных доменов), поэтому  следующий fgets
-                на добавленном домене вернет false
-            */
-            if (!fgets(buffer, 512, fp)) break;
-            //std::string q = convert_from_utf(buffer, m_Language);
-            std::string q = buffer;
-            StringTokenizer tok(q.c_str(), ";");
-            if (!tok()) return false;
-            assert (tok.val() == m_Domens[k].GetDomStr());
-            if (tok.val() != m_Domens[k].GetDomStr())
-                return false;
-
-            m_Domens[k].m_DomainItemsBufferLength = tok() ? atoi(tok.val()) : 0;
-            if (m_Domens[k].m_DomainItemsBufferLength == 0)
-                m_Domens[k].m_DomainItemsBuffer = 0;
+        std::ifstream  inp;
+        inp.open(DomItemsTextFile);
+        std::string line; 
+        BYTE  dom_no = -1;
+        while (std::getline(inp, line)) {
+            if (startswith(line, "-1\t")) {
+                const char* dom_str = line.c_str() + 3;
+                dom_no = GetDomenNoByDomStr(dom_str);
+                if (dom_no == ErrUChar) {
+                    throw CExpc("bad domain name %s", dom_str);
+                }
+            }
             else {
-                m_Domens[k].m_DomainItemsBuffer = (char *) malloc(m_Domens[k].m_DomainItemsBufferLength);
-                fread(m_Domens[k].m_DomainItemsBuffer, 1, m_Domens[k].m_DomainItemsBufferLength, fp);
-            };
-            fgets(buffer, 512, fp);
-        };
-        fclose(fp);
+                m_Domens[dom_no].AddFromSerialized(line);
+            }
+        }
     }
 
-    //  initializing domens
-    for (int i = 0; i < m_DomItems.size(); i++) {
-        CDomen &D = m_Domens[m_DomItems[i].GetDomNo()];
-        if (D.m_StartDomItem == -1)
-            D.m_StartDomItem = i;
-        if (i + 1 > D.m_EndDomItem)
-            D.m_EndDomItem = i + 1;
-    };
-
-    /*
-       free example domens, m_bDontLoadExamples is switched on
-    */
-    if (m_bDontLoadExamples) {
-        for (auto& d: m_Domens) {
-            if (d.GetDomStr() == "D_EXM" || d.GetDomStr() == "D_THES") {
-                d.MakeFree();
-            };
-        }
-    };
     UpdateConstDomens();
 
     return true;
 }
 
 bool TItemContainer::WriteDomItems() const {
-    FILE *fp = fopen(DomItemsTextFile.c_str(), "wb");
-    for (size_t i = 0; i < m_DomItems.size(); i++) {
-        fprintf(fp, "%i %i\n", m_DomItems[i].m_Data, m_DomItems[i].m_DomNo);
-    };
-    fclose(fp);
-
-
-    fp = fopen(ItemsFile.c_str(), "wb");
-    for (size_t k = 0; k < m_Domens.size(); k++) {
-        fprintf(fp, "%s;%i\n",
-                m_Domens[k].GetDomStr().c_str(),
-                m_Domens[k].m_DomainItemsBufferLength);
-        fwrite(m_Domens[k].m_DomainItemsBuffer, 1, m_Domens[k].m_DomainItemsBufferLength, fp);
-        fprintf(fp, "\n");
-    };
-    fclose(fp);
-
-
+    std::ofstream outp;
+    outp.open(DomItemsTextFile);
+    for (auto d : m_Domens) {
+        outp << "-1\t" << d.GetDomStr() << "\n";
+        d.WriteItemsToStream(outp);
+    }
+    outp.close();
     return true;
 };
 
@@ -446,3 +332,20 @@ bool TItemContainer::WriteDomens() const {
 void TItemContainer::ErrorMessage(std::string s) const {
     ::ErrorMessage(RossPath, s);
 };
+
+BYTE TItemContainer::GetCortegeFieldNo(size_t i) const
+{
+    if (m_Max)
+    return GetCortegePtr(i)->m_FieldNo;
+
+};
+BYTE TItemContainer::GetCortegeLeafId(size_t i) const
+{
+    return GetCortegePtr(i)->m_LeafId;
+};
+BYTE TItemContainer::GetCortegeBracketLeafId(size_t i) const
+{
+    return GetCortegePtr(i)->m_BracketLeafId;
+
+};
+

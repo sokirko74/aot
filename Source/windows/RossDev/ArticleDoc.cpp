@@ -32,11 +32,9 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CArticleDoc construction/destruction
 
-CArticleDoc::CArticleDoc()
+CArticleDoc::CArticleDoc(CRossDoc* pRossDoc): m_pRossDoc(pRossDoc), m_Article(pRossDoc)
 {
 
-	//  m_MessageKiller = new CMessageBoxKillerThread (AfxGetApp()->m_pMainWnd->m_hWnd);
-	//  m_MessageKiller->CreateThread();
 
 }
 
@@ -301,7 +299,7 @@ bool CArticleDoc::AddCortegeToVector(std::vector<TCortege10>& L, CRossDevTextFie
 		if ((C.m_FieldNo == F.FieldNo)
 			&& (C.m_LeafId == F.LeafId)
 			&& (C.m_BracketLeafId == F.BracketLeafId)
-			&& (C.m_DomItemNos[0] != -1))
+			&& !C.is_null(0))
 			L.push_back(C);
 	};
 

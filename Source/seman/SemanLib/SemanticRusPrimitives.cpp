@@ -174,11 +174,11 @@ bool CRusSemStructure::ContainsSemCopul(long NodeNo) const
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EndCortegeNo; i++)
 	{
-		TCortege10 C = GetCortegeCopy(Ross,i);
+		TCortege10 C = pHolder->GetCortegeCopy(i);
 		if	(		(C.m_LeafId > 0) 
 				&&	(C.m_FieldNo == pHolder->GramFetFieldNo) 
-				&&	C.m_DomItemNos[0] != -1 
-				&&	(pHolder->GetDomItemStrInner(C.m_DomItemNos[0]) == "Copul")
+				&&	!C.is_null(0) 
+				&&	(pHolder->GetDomItemStrWrapper(C.GetItem(0)) == "Copul")
 			)
 			return true;
 	}
@@ -599,14 +599,14 @@ void  CRusSemStructure::ProcessAllowableLexVars (std::string LexVarsStr)
 	for (long i=0; i < InterpsAndValue.size(); i++)
 	{
 		int pos = InterpsAndValue[i].find (" ");
-		if (pos == -1) continue;
+		if (pos == string::npos) continue;
 		CRossInterpAndLemma I;
 		I.m_Lemma = InterpsAndValue[i].substr(0, pos);
 		Trim(I.m_Lemma);
 		InterpsAndValue[i].erase(0, pos+1);
 
 		pos = InterpsAndValue[i].find_last_of (" ");
-		if (pos == -1) continue;
+		if (pos == string::npos) continue;
 		long State = atoi ( InterpsAndValue[i].substr(pos).c_str());
 		if (State != 0) continue;
 		std::string s = InterpsAndValue[i].substr(0, pos);
@@ -617,7 +617,7 @@ void  CRusSemStructure::ProcessAllowableLexVars (std::string LexVarsStr)
 		if (s[s.length()-1] == '}') s.erase(s.length()-1);
 
 		pos = s.find (":");
-		if (pos == -1) continue;
+		if (pos == string::npos) continue;
 		std::string DictStr = s.substr (0, pos);
 		
 		I.m_DictType = m_pData->GetTypeByStr(DictStr);
@@ -676,7 +676,7 @@ bool CRusSemStructure::HasGramFetAfterColon (long NodeNo, std::string ItemStr)  
      int c = GramFets[i].find_first_of(":");
 	 std::string q = GramFets[i].substr(c+1);
 	 Trim(q);
-     if ((c != -1) && (q == ItemStr)) return true;
+     if ((c != string::npos) && (q == ItemStr)) return true;
   };
   return false;
 };
@@ -1195,8 +1195,8 @@ TCortege10 GetSubjCortege (const CRossHolder* RossDoc)
 		  C.m_FieldNo = RossDoc->GramFetFieldNo;
 		  C.m_LeafId = 1;
 		  C.m_LevelId = 0;
-		  C.m_DomItemNos[0] = RossDoc->SubjSynONo;
-		  C.m_DomItemNos[1] = RossDoc->NominativeNo;
+		  C.SetItem(0, RossDoc->SubjSynONo);
+		  C.SetItem(1, RossDoc->NominativeNo);
 		  return C;
 };
 
@@ -1206,8 +1206,8 @@ TCortege10 GetInstrObj (const CRossHolder* RossDoc)
 		  C.m_FieldNo = RossDoc->GramFetFieldNo;
 		  C.m_LeafId = 2;
 		  C.m_LevelId = 0;
-		  C.m_DomItemNos[0] = RossDoc->IndirObjSynONo;
-		  C.m_DomItemNos[1] = RossDoc->InstrumentalisNo;
+		  C.SetItem(0, RossDoc->IndirObjSynONo);
+		  C.SetItem(1, RossDoc->InstrumentalisNo);
 		  return C;
 };
 

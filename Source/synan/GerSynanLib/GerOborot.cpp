@@ -21,7 +21,7 @@ CGerOborDic::CGerOborDic(const CSyntaxOpt* Opt) : COborDic(Opt)
 static long GetItemNoByItemStr(const CDictionary* piOborDic, const std::string& ItemStr, const char* _DomStr) 
 {
 	BYTE DomNo = piOborDic->GetDomenNoByDomStr(_DomStr);
-    return piOborDic->GetItemNoByItemStr(ItemStr, DomNo);
+    return piOborDic->GetItemIdByItemStr(ItemStr, DomNo);
 }
 
 bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
@@ -78,14 +78,15 @@ bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 		long ZahlwortItemNo = GetItemNoByItemStr(piOborDic,"ZAL", "D_PART_OF_SPEECH");
 		
 
+		BYTE case_dom_no = piOborDic->GetDomenNoByDomStr("D_CASE");
 		// cases
-		long NominativItemNo = GetItemNoByItemStr(piOborDic,"N", "D_CASE");
+		auto NominativItemNo = piOborDic->GetItemIdByItemStr("N", case_dom_no);
 		assert(NominativItemNo != -1);
-		long GenitivItemNo = GetItemNoByItemStr(piOborDic,"G", "D_CASE");
+		auto GenitivItemNo = piOborDic->GetItemIdByItemStr("G", case_dom_no);
 		assert(GenitivItemNo != -1);
-		long AccusativItemNo = GetItemNoByItemStr(piOborDic,"A", "D_CASE");
+		auto AccusativItemNo = piOborDic->GetItemIdByItemStr("A", case_dom_no);
 		assert(AccusativItemNo != -1);
-		long DativItemNo = GetItemNoByItemStr(piOborDic,"D", "D_CASE");
+		auto DativItemNo = piOborDic->GetItemIdByItemStr("D", case_dom_no);
 		assert(DativItemNo != -1);
 
 		for(int UnitNo = 0 ; UnitNo < iSize ; UnitNo++ )

@@ -538,12 +538,12 @@ EngVerbTenseEnum CEngSemStructure::handle_AVREM_field(long RelNodeNo,bool bEngSt
 			continue;
 		for( long j=0; j<vec.size(); j++ )
 		{
-           if(vec[j].m_DomItemNos[0] == -1) 
+           if(vec[j].is_null(0)) 
 			   continue; 
-		   if(vec[j].m_DomItemNos[2] == -1) 
+		   if(vec[j].is_null(2)) 
 			   continue; 
-		   std::string s0 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[0]);
-		   std::string s2 = (const char*)GetRoss(type)->GetDomItemStr(vec[j].m_DomItemNos[2]);
+		   std::string s0 = GetRoss(type)->GetDomItemStr(vec[j].GetItem(0));
+		   std::string s2 = GetRoss(type)->GetDomItemStr(vec[j].GetItem(2));
 		   AVREM_values.push_back(std::make_pair(s0,s2));
 		}
 	}

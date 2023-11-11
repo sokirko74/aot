@@ -205,7 +205,7 @@ void CRusSemStructure::ReadThesInterps(long ClauseNo)
 				size_t i = Dict->GetRoss()->GetUnitStartPos(UnitNo);
 
 				for (; i <= Dict->GetRoss()->GetUnitEndPos(UnitNo); i++)
-					if (GetCortegeCopy(Dict->GetRoss(), i).m_FieldNo == Dict->ValFieldNo)
+					if (Dict->GetCortegeCopy(i).m_FieldNo == Dict->ValFieldNo)
 						break;
 
 				if (i <= Dict->GetRoss()->GetUnitEndPos(UnitNo))
@@ -391,14 +391,14 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 				if (!Ross->IsEmptyArticle(UnitNo))
 					for (size_t j = Ross->GetUnitStartPos(UnitNo); j <= Ross->GetUnitEndPos(UnitNo); j++)
 					{
-						TCortege10 C = GetCortegeCopy(Ross, j);
+						TCortege10 C = RossDoc->GetCortegeCopy(j);
 						std::string FieldStr = Ross->Fields[C.m_FieldNo].FieldStr;
 						if ((FieldStr == "LEX")
 							|| (FieldStr == "MANLEX")
 							|| (FieldStr == "ELEX")
 							)
 						{
-							std::string S = RossDoc->GetDomItemStrInner(C.m_DomItemNos[0]);
+							std::string S = RossDoc->GetDomItemStrWrapper(C.GetItem(0));
 							EngRusMakeUpper(S);
 							if ((S.length() > 0)
 								&& (S[0] == '#')

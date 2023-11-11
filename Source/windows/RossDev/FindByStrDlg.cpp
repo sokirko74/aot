@@ -83,8 +83,7 @@ try{
 	for (int RossDocNo=0; RossDocNo<RossDocs.size();  RossDocNo++)
 	{
 		CRossDoc* pRossDoc = RossDocs[RossDocNo];
-		CTempArticle A;
-		A.m_pRoss  = pRossDoc->GetRoss();
+		CTempArticle A(pRossDoc->GetRoss());
 		size_t UnitNo; 
 		
 		try{

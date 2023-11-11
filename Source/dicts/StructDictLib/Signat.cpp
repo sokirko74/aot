@@ -5,15 +5,23 @@
 #include "../../common/cortege.h"
 
 
-const char* CSignat::GetFrmt() const {
-    return sFrmt.c_str();
+const std::string& CSignat::GetFrmt() const {
+    return sFrmt;
+}
+
+const std::vector<BYTE>& CSignat::GetDomsWoDelims() const {
+    return DomsWoDelims;
+}
+
+const std::vector<TSignatItem>& CSignat::GetDomsWithDelims() const {
+    return DomsWithDelims;
 }
 
 void CSignat::BuildSignatFormat(const TItemContainer* parent, BYTE MaxNumDom, std::string field_name) {
     sFrmt = "";
     sFrmtWithotSpaces = "";
     DomsWithDelims.clear();
-    Doms.clear();
+    DomsWoDelims.clear();
     if (SignatId >= UnknownSignatId) {
         throw CExpc("signat id (%i) cannot be more than %i", SignatId, UnknownSignatId);
     }
@@ -46,8 +54,8 @@ void CSignat::BuildSignatFormat(const TItemContainer* parent, BYTE MaxNumDom, st
         if (D.DomainIsDelim()) {
             sFrmt += " ";
             if (!D.IsEmpty()) {
-                sFrmt += D.m_DomainItemsBuffer;
-                sFrmtWithotSpaces += D.m_DomainItemsBuffer;
+                sFrmt += D.GetFirstDomStr();
+                sFrmtWithotSpaces += D.GetFirstDomStr();
             }
         }
         else {
@@ -55,7 +63,7 @@ void CSignat::BuildSignatFormat(const TItemContainer* parent, BYTE MaxNumDom, st
             sFrmtWithotSpaces += "%s";
 
 
-            if (Doms.size() == MaxNumDom) {
+            if (DomsWoDelims.size() == MaxNumDom) {
                 throw CExpc("Функция %s   Число значимых доменов  не может превышать %i!", field_name.c_str(), MaxNumDom);
             }
             if (is_mult) {
@@ -67,7 +75,7 @@ void CSignat::BuildSignatFormat(const TItemContainer* parent, BYTE MaxNumDom, st
                 };
             };
 
-            Doms.push_back(domenNo);
+            DomsWoDelims.push_back(domenNo);
 
         };
 

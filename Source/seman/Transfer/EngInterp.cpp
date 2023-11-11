@@ -221,7 +221,7 @@ int CEngSemStructure::GetReverseRelValNo(const CSemRelation& rusRel,CEngSemNode&
 			return( i );
 	}
 
-	return( -1 );
+	return -1;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -593,7 +593,7 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 	// надо обнулить кортеж, а то будут считать, что это отношение пришло из англ. словарей,
 	// а кортеж на самом деле пришел из русского словаря 
 	
-	Result.m_Cortege.m_DomItemNos[0] = -1;
+	Result.m_Cortege.SetItem(0, EmptyDomItemId);
 	
 
 	for( int i=0; i<RusSynReal.m_Preps.size(); i++ )

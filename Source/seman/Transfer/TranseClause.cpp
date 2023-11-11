@@ -593,8 +593,8 @@ void CEngSemStructure::ClauseRelRule_Kotoryj(int iRelNum)
 		const CSemRelation& relToKotoryj = *RusStr.GetRelation(m_Relations[iRelToKotoryj].m_RusRel);
 		if( relToKotoryj.m_Valency.m_RossHolder )
 		{
-			if( (relToKotoryj.m_SynReal.m_Cortege.m_DomItemNos[0] == relToKotoryj.m_Valency.m_RossHolder->IndirObjSynONo) &&
-				(relToKotoryj.m_SynReal.m_Cortege.m_DomItemNos[1] == relToKotoryj.m_Valency.m_RossHolder->GenitivNo) )
+			if( (relToKotoryj.m_SynReal.m_Cortege.GetItem(0) == relToKotoryj.m_Valency.m_RossHolder->IndirObjSynONo) &&
+				(relToKotoryj.m_SynReal.m_Cortege.GetItem(1) == relToKotoryj.m_Valency.m_RossHolder->GenitivNo) )
 			{
 				CEngSemNode newNode;
 				CreateSimpleEnglNodeByOldNode("whose",newNode,0,true,m_Nodes[engSemRel.m_SourceNodeNo]);

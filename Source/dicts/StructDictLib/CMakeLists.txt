@@ -14,7 +14,7 @@ add_library(StructDictLib
         Domen.h
         Field.h
         ItemsContainer.h
-        LessDomItem.h
+        
         Ross.h
         Signat.h
         StdRoss.h

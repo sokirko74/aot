@@ -307,18 +307,16 @@ void  CEngSemStructure::SetPositionsFromConj()
 				for (long j = 0; j < Corteges.size(); j++)
 				{
 					TCortege10 C = Corteges[j];
-					if ((C.m_DomItemNos[0] == -1)
-						|| (C.m_DomItemNos[1] == -1)
-						)
+					if ( C.is_null(0) || C.is_null(1) )
 						continue;
 
-					std::string GrammemsStr = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[0]);
+					std::string GrammemsStr = GetRossHolder(EngObor)->GetDomItemStrWrapper(C.GetItem(0));
 					GrammemsStr = "NOUN " + GrammemsStr;
 					part_of_speech_t POS;
 					grammems_mask_t Grammems;
 					bool b = m_pData->GetEngGramTab()->ProcessPOSAndGrammemsIfCan(GrammemsStr.c_str(), &POS, &Grammems);
 					if (!b) continue;
-					std::string Position = GetRossHolder(EngObor)->GetDomItemStrInner(C.m_DomItemNos[1]);
+					std::string Position = GetRossHolder(EngObor)->GetDomItemStrWrapper(C.GetItem(1));
 					long NodeNo = (LeafId == 0) ? m_Relations[i].m_SourceNodeNo : m_Relations[i].m_TargetNodeNo;
 					SetPositionOfChildrenByGrammems(NodeNo, Grammems, Position);
 				};

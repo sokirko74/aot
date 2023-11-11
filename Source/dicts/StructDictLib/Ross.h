@@ -99,6 +99,7 @@ class TRoss  : public TCortegeContainer, public TItemContainer
 	std::string ConfigFile;
 	
 
+
 public:
 	BYTE					m_MaxMeanNum;
 	std::string					m_DictName;
@@ -159,16 +160,14 @@ public:
 
 	bool	ReadFromStrWithOneSignatura (const char* s, TCortege10& C, const CSignat& Sgn);
 	bool	ReadFromStr (const char* s, TCortege10& C);
-	void	WriteToStr (const int* Items, const char* Frmt, char* OutBuffer) const;
-	void	CortegeToStr (const TCortege10& C, char* OutBuffer) const;
+	std::string	WriteToString (const TCortege10& C) const;
 	const CSignat& GetSignat(const TCortege10& C) const;
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// +++++++++++++      Перечни констант  ++++++++++++++
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	bool	InsertDomItem (const char* ItemStr, BYTE DomNo, int& ItemNo);
-	void	DelDomItem	(int ItemNo);
+	dom_item_id_t	InsertDomItem (const char* ItemStr, BYTE DomNo);
 
 	const char* GetTitleFieldName() const;
 	const char* GetSenseFieldName() const;
@@ -217,17 +216,17 @@ public:
 
 	CDictionary();
 	
-	BYTE		GetCortegeFieldNo(size_t i) const;
-	BYTE		GetCortegeLeafId(size_t i) const;
-	BYTE		GetCortegeBracketLeafId(size_t i) const;
-	const char* GetDomItemStrInner(int ItemNo) const;
 	bool		IsEmptyArticle(uint16_t UnitNo) const;
 	int			GetUnitStartPos(uint16_t UnitNo) const;
 	int			GetUnitEndPos(uint16_t UnitNo) const;
 	BYTE		GetFieldNoByFieldStr(const char* Str) const;
-	BYTE		GetDomItemDomNo (int ItemNo) const;
-	int			GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const;
-	const char*	GetDomItemStr(int ItemNo) const;
+	dom_item_id_t GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const;
+
+	const std::string& GetDomItemStr(dom_item_id_t item_id) const;
+	const std::string& GetDomItemStr(long CortegeNo, BYTE PositionInCortege) const;
+
+	
+
 	std::string	GetEntryStr (uint16_t EntryNo) const;
 	std::string	GetEntryStrUtf8(uint16_t EntryNo) const;
 	BYTE		GetUnitMeanNum(uint16_t EntryNo) const;
@@ -236,7 +235,6 @@ public:
 	bool		Load(const char* Path);
 	bool		ImportFromText(std::string FileName, int StartEntry,std::string& Messages);
 	void		SetUnitCurrentTime(uint16_t UnitNo);
-	bool		AddField(std::string FieldStr);
 	std::string		GetUnitEditor(uint16_t UnitNo) const;
 	void		SetUnitStr(uint16_t UnitNo, const char*  UnitStr);
 	

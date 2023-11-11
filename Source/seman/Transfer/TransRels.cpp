@@ -239,15 +239,15 @@ EGramCortegeType CEngSemStructure::GetGramCortegeType(std::string& gram_str)
 
 EGramCortegeType CEngSemStructure::GetGramCortegeType(TCortege10& cortege, DictTypeEnum type)
 {
-	if( cortege.m_DomItemNos[0] == -1 )
+	if( cortege.is_null(0))
 		return UnknownGram;
-	std::string gram_str = GetItemStr(cortege.m_DomItemNos[0], type);
+	std::string gram_str = GetItemStr(cortege.GetItem(0), type);
 	EGramCortegeType CortegeType = GetGramCortegeType(gram_str);
 	if( CortegeType == UnknownGram)
 	{
-		if( cortege.m_DomItemNos[1] != -1 )
+		if( !cortege.is_null(1))
 		{
-			gram_str = GetItemStr(cortege.m_DomItemNos[1], type);
+			gram_str = GetItemStr(cortege.GetItem(1), type);
 			CortegeType = GetGramCortegeType(gram_str);
 		}
 	}
@@ -272,9 +272,8 @@ AddSemRelToGramCortege("MULTI", CreateCortege("of+NP", "D_1"));
 TCortege10 CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen)
 {
 	TCortege10 cortege;
-	cortege.m_DomItemNos[0] = GetRoss(Aoss)->GetItemNoByItemStr(strGX, 
-							GetRoss(Aoss)->GetDomenNoByDomStr(strDomen.c_str()));
-	cortege.m_DomItemNos[1] = -1;
+	auto item_id = GetRoss(Aoss)->GetItemIdByItemStr(strGX, GetRoss(Aoss)->GetDomenNoByDomStr(strDomen.c_str()));
+	cortege.SetItem(0, item_id);
 	return cortege;
 }
 
@@ -283,7 +282,7 @@ TCortege10 CEngSemStructure::CreateCortege(std::string strGX, std::string strDom
 
 void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege10 cortege)
 {
-	if( cortege.m_DomItemNos[0] == -1 )
+	if( cortege.is_null(0))
 		return;
 
 	SGramCortegesAndType	GramCortegesAndType;
