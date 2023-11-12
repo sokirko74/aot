@@ -6,7 +6,7 @@
 #include "dicts/StructDictLib/StructDictConsts.h"
 
 enum Valency_Direction { A_C, C_A};
-typedef TCortege10 TCortege10;
+typedef TCortege TCortege;
 
 class CRossHolder;
 struct CValency 
@@ -35,7 +35,7 @@ struct CValency
 		
 		CValency (std::string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross = 0, BYTE LeafId = 0, BYTE BracketLeafId = 0, uint16_t UnitNo = ErrUnitNo);
 		CValency();
-		CValency(	const TCortege10 C, 
+		CValency(	const TCortege C, 
 					const long MainWordVarNo, 
 					const CRossHolder* Ross, 
 					unsigned short UnitNo = ErrUnitNo

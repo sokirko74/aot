@@ -96,7 +96,7 @@ void CEngSemStructure::CreateEnglNodeForEngColloc(long UnitNo, CEngSemNode& engN
 		}
 	}
 
-	std::vector<TCortege10> corteges;
+	std::vector<TCortege> corteges;
 	
 	corteges.clear();
 	GetRossHolder(EngCollocRoss)->GetFieldValues("ROOT", UnitNo, corteges);

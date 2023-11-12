@@ -11,6 +11,7 @@
 
 #include "ItemsContainer.h"
 #include "CortegeContainer.h"
+#include "DictConfig.h"
 
 
 const int NullItemId = 1;
@@ -90,18 +91,18 @@ public:
      
 };	  
 
-
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
 	std::string UnitsFile;
 	std::string CortegeFile;
 	std::string UnitCommentsFile;
-	std::string ConfigFile;
-	
 
+protected:
+
+	TDictConfig Config;
 
 public:
-	BYTE					m_MaxMeanNum;
+
 	std::string					m_DictName;
 	
 	std::vector<CStructEntry>	m_Units;
@@ -109,7 +110,7 @@ public:
 	bool					m_bShouldSaveComments;
 
 
-	TRoss (BYTE MaxNumDom);
+	TRoss ();
 	~TRoss ();
 	bool	FullLoad(const char* _RossPath);
 	void	LoadOnlyConstants(const char* _RossPath);
@@ -158,10 +159,10 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-	bool	ReadFromStrWithOneSignatura (const char* s, TCortege10& C, const CSignat& Sgn);
-	bool	ReadFromStr (const char* s, TCortege10& C);
-	std::string	WriteToString (const TCortege10& C) const;
-	const CSignat& GetSignat(const TCortege10& C) const;
+	bool	ReadFromStrWithOneSignatura (const char* s, TCortege& C, const CSignat& Sgn);
+	bool	ReadFromStr (const char* s, TCortege& C);
+	std::string	WriteToString (const TCortege& C) const;
+	const CSignat& GetSignat(const TCortege& C) const;
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// +++++++++++++      Перечни констант  ++++++++++++++
@@ -184,7 +185,7 @@ public:
 	std::string GetUnitModifTimeStr(uint16_t UnitNo) const;
 	std::string GetUnitTextHeader(uint16_t UnitNo) const;
 
-	bool	ReadConfig();
+	
 
 };
 
@@ -208,10 +209,6 @@ class CDictionary : public TRoss
 
 public:
 	
-	/*
-		By default  TCortegeContainer::m_MaxNumDom is equal to 3.
-		Before invoking TRoss::Load it can be adjusted.
-	*/
 	std::vector<CStructEntry>& GetUnits();
 
 	CDictionary();
@@ -220,7 +217,6 @@ public:
 	int			GetUnitStartPos(uint16_t UnitNo) const;
 	int			GetUnitEndPos(uint16_t UnitNo) const;
 	BYTE		GetFieldNoByFieldStr(const char* Str) const;
-	dom_item_id_t GetCortegeItem(long CortegeNo, BYTE PositionInCortege) const;
 
 	const std::string& GetDomItemStr(dom_item_id_t item_id) const;
 	const std::string& GetDomItemStr(long CortegeNo, BYTE PositionInCortege) const;

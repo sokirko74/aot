@@ -1437,7 +1437,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 		for (long k = 0; k < Paradigms.size(); k++)
 			if (Paradigms[k].GetSrcAncode() == pH->GetGramCodes())
 			{
-				for (size_t j = 0; j < Paradigms[k].GetCount(); j++)
+				for (uint16_t j = 0; j < Paradigms[k].GetCount(); j++)
 				{
 					uint64_t g;
 					m_pRusGramTab->GetGrammems(Paradigms[k].GetAncode((uint16_t)j).c_str(), g);

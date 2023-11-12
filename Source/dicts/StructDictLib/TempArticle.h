@@ -9,14 +9,13 @@
 #include "CortegeContainer.h"
 #include "../../common/cortege.h"
 
-class CDictionary;
 
 class CTempArticle : public TCortegeContainer
 {
 	std::string					m_ArticleStr;
-	const TCortege10& GetRossCortege(size_t i) const;
+	const TCortege& GetRossCortege(size_t i) const;
 	std::string		ConstructFldName(BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
-	bool		PutCortegeOnTheRigthPosition(const TCortege10& C);
+	bool		PutCortegeOnTheRigthPosition(const TCortege& C);
 	bool		ArticleToText();
 	
 	CDictionary* m_pRoss;
@@ -32,12 +31,10 @@ public:
 	std::string				m_LastError;
 	int						m_ErrorLine;
 
-	CTempArticle(CDictionary* pRossDoc);
+	CTempArticle(CDictionary* pRossDoc=nullptr);
 	
-
-
 	size_t				GetCortegesSize () const;
-	const TCortege10&	GetCortege (size_t i)  const;
+	const TCortege&	GetCortege (size_t i)  const;
 	bool		IsPartOf(const CTempArticle *Article, bool UseWildCards) const;
 	int			IntersectByFields(const CTempArticle *Article) const;
 	bool		AddArticle(const CTempArticle *Article);

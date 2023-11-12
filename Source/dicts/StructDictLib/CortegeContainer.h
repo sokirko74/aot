@@ -5,30 +5,30 @@
 
 class TCortegeContainer
 {
-	std::vector<TCortege3>      m_Corteges3;
-	std::vector<TCortege10>     m_Corteges10;
+	std::vector<TCortege>     m_Corteges;
 	
 
 protected:
-	void	_AddCortege3(const TCortege3& C);
-	void	_AddCortege10(const TCortege10& C);
-	void	_AddCortege(const TCortegeContainer& other, size_t cortege_no);
-
-	void   _InsertCortege(size_t index, const TCortege10& C);
+	void	_AddCortege(const TCortege& C);
+	void   _InsertCortege(size_t index, const TCortege& C);
 	void		EraseCorteges(size_t start, size_t last);
 	void		ClearCorteges();
+
 	void		WriteCorteges(const char* CortegeFile) const;
 	void		ReadCorteges(const char* CortegeFile);
 public:
-	BYTE m_MaxNumDom;
+	TCortegeContainer();
 
-	TCortegeContainer(BYTE MaxNumDom);
-
-	TCortege10 GetCortegeCopy(size_t i);
+	TCortege GetCortegeCopy(size_t i) const;
+	const TCortege& GetCortege(size_t i) const ;
 
 
 	size_t	_GetCortegesSize()  const;
 	void  ConcatOtherContainer(const TCortegeContainer& other);
+
+	BYTE		GetCortegeFieldNo(size_t i) const;
+	BYTE		GetCortegeLeafId(size_t i) const;
+	BYTE		GetCortegeBracketLeafId(size_t i) const;
 
 };
 

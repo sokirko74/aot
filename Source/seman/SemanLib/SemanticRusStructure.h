@@ -1766,9 +1766,9 @@ extern void GetCommonVariants(const std::vector<VectorLong> &Parents,
 
 extern bool IsBetween(const CRusSemNode &Node, const CRusSemNode &LowerBound, const CRusSemNode &UpperBound);
 
-extern TCortege10 GetSubjCortege(const CRossHolder *RossDoc);
+extern TCortege GetSubjCortege(const CRossHolder *RossDoc);
 
-extern TCortege10 GetInstrObj(const CRossHolder *RossDoc);
+extern TCortege GetInstrObj(const CRossHolder *RossDoc);
 
 // максимально расстояние от начала клаузы, на котором может находиться  союзное слово,
 // например, "Я знаю дом, в подвале которого нет  мышей"

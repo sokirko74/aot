@@ -6,7 +6,7 @@ const int g_PersPronounsCount = 5;
 std::string g_PersPronouns[g_PersPronounsCount] = {_R("Я"),_R("ТЫ"),_R("ОН"),_R("ОНА"), _R("ОНО")};
 
 
-bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege10& cortege, DictTypeEnum   DictType ) const
+bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const
 {
 	const CSignat& Signat = GetRoss(DictType)->GetSignat(cortege);
 	if( Signat.GetDomsWithDelims().size() != domens.size() )
@@ -59,7 +59,7 @@ void CEngSemStructure::ReadMorphFromMainGF(uint16_t UnitNo, DictTypeEnum type, C
 			return;
 	};
 
-	std::vector<TCortege10> corteges;
+	std::vector<TCortege> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 	if( corteges.size() == 0 )
 		return;
@@ -107,8 +107,8 @@ bool CEngSemStructure::HasThisLexFunc(std::string LexFunctName, CRossInterp Unit
 }
 
 
-bool CEngSemStructure::HasStringInCortege(DictTypeEnum type, TCortege10 cortege, const std::string& str) const {
-	for (int i = 0; i < cortege.GetMaxNumDom(); ++i) {
+bool CEngSemStructure::HasStringInCortege(DictTypeEnum type, TCortege cortege, const std::string& str) const {
+	for (int i = 0; i < MaxNumDom; ++i) {
 		if (cortege.is_null(i)) {
 			break;
 		}
@@ -228,7 +228,7 @@ void CEngSemStructure::GetIncomingRelationsInThisClause(int iNode, std::vector<l
 	}
 }
 
-bool CEngSemStructure::HasThisGX(const std::vector<TCortege10>& gramCorteges, std::string value, DictTypeEnum type) const
+bool CEngSemStructure::HasThisGX(const std::vector<TCortege>& gramCorteges, std::string value, DictTypeEnum type) const
 {
 	if( type == NoneRoss )
 		return false;
@@ -242,12 +242,12 @@ bool CEngSemStructure::HasThisGX(const std::vector<TCortege10>& gramCorteges, st
 	return false;	
 }
 
-std::string CEngSemStructure::GetCortegeStr(DictTypeEnum type, const TCortege10& cortege) const
+std::string CEngSemStructure::GetCortegeStr(DictTypeEnum type, const TCortege& cortege) const
 {
 	if( type == NoneRoss )
 		return "";
 	std::string strRes;
-	for (int i = 0; i < cortege.GetMaxNumDom(); ++i) {
+	for (int i = 0; i < MaxNumDom; ++i) {
 		if (cortege.is_null(i)) {
 			break;
 		}
@@ -428,7 +428,7 @@ bool CEngSemStructure::SetSubjPattern(CEngSemRelation& semRel)
 	const CRossHolder* R = semRel.m_Valency.m_RossHolder;
 	if (R == 0)  return false;
 
-	TCortege10 T;
+	TCortege T;
 	T.SetItem(0, R->EnglSubjSynONo);
 	T.m_FieldNo = R->GramFetFieldNo;
 	T.m_LeafId = semRel.m_Valency.m_LeafId;
@@ -536,7 +536,7 @@ void CEngSemStructure::FilLexFunctRel()
 bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, uint16_t UnitNo) const
 {
     if (!RossHolder || (UnitNo == ErrUnitNo)) return false;
-	std::vector<TCortege10> corteges;
+	std::vector<TCortege> corteges;
 	RossHolder->GetFieldValues(std::string("TYP"), UnitNo, corteges);
 	for(auto& c: corteges)
 	{

@@ -86,7 +86,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 		{
 			for (size_t i = GetRoss(type)->GetUnitStartPos(UnitNo); i <= GetRoss(type)->GetUnitEndPos(UnitNo); i++)
 			{
-				TCortege10 C = GetRossHolder(type)->GetCortegeCopy( i);
+				TCortege C = GetRossHolder(type)->GetCortegeCopy( i);
 				std::string FieldStr = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
 				if (FieldStr == "TYP")
 				{
@@ -270,7 +270,7 @@ bool CSemanticsHolder::InitTimeUnits()
 				// по словарной статье 
 				for (size_t i = GetRoss(TimeRoss)->GetUnitStartPos(UnitNo); i <= GetRoss(TimeRoss)->GetUnitEndPos(UnitNo); i++)
 				{
-					TCortege10 C = GetRossHolder(TimeRoss)->GetCortegeCopy(i);
+					TCortege C = GetRossHolder(TimeRoss)->GetCortegeCopy(i);
 					//незаполненное поле?
 					if (C.is_null(0)) continue;
 					// строю массив U.m_Places по полю CONTENT
@@ -421,7 +421,7 @@ bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, std::vector<CEngUni
 			if (RusFieldNo == GetRoss(type)->GetCortegeFieldNo(j))
 			{
 				CEngUnitNoToRusUnit Item;
-				TCortege10 C = GetRossHolder(type)->GetCortegeCopy(j);
+				TCortege C = GetRossHolder(type)->GetCortegeCopy(j);
 				if (C.is_null(0))
 					continue;
 
@@ -482,18 +482,18 @@ bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, std::vector
 		{
 			if (SXFieldNo == pRoss->GetCortegeFieldNo(i))
 			{
-				long itemLexFunValue;
-				dom_item_id_t itemLF = pRoss->GetCortegeItem(i, 0);
+				dom_item_id_t itemLexFunValue;
+				dom_item_id_t itemLF = pRoss->GetCortege(i).GetItem(0);
 				if (get_dom_no(itemLF) == LFDomNo)
 				{
-					itemLexFunValue = pRoss->GetCortegeItem(i, 1);
+					itemLexFunValue = pRoss->GetCortege(i).GetItem(1);
 					if (!is_null(itemLexFunValue))
 					{
 						std::string strRusVerb = pRoss->GetDomItemStr(itemLexFunValue);
 						SLexFunIndexes LexFunIndex;
 						LexFunIndex.m_LexFun = pRoss->GetDomItemStr(itemLF);
 						LexFunIndex.m_LexFunArg.m_UnitStr = strRusVerb;
-						dom_item_id_t item = pRoss->GetCortegeItem(i, 2);
+						dom_item_id_t item = pRoss->GetCortege(i).GetItem(2);
 						if (get_dom_no(item) == DigDomNo)
 						{
 							LexFunIndex.m_LexFunArg.m_MeanNum = pRoss->GetDomItemStr(item)[0] - '0';
@@ -506,17 +506,17 @@ bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, std::vector
 			}
 			if (LFFieldNo == pRoss->GetCortegeFieldNo(i))
 			{
-				dom_item_id_t itemLF = pRoss->GetCortegeItem(i, 0);
+				dom_item_id_t itemLF = pRoss->GetCortege(i).GetItem(0);
 				if (get_dom_no(itemLF) == LFDomNo)
 				{
-					dom_item_id_t itemLexFunValue = pRoss->GetCortegeItem(i, 1);
+					dom_item_id_t itemLexFunValue = pRoss->GetCortege(i).GetItem(1);
 					if (!is_null(itemLexFunValue))
 					{
 						std::string strRusVerb = pRoss->GetDomItemStr(itemLexFunValue);
 						SLexFunIndexes LexFunIndex;
 						LexFunIndex.m_LexFun = pRoss->GetDomItemStr(itemLF);
 						LexFunIndex.m_LexFunValue.m_UnitStr = strRusVerb;
-						dom_item_id_t item = pRoss->GetCortegeItem(i, 2);
+						dom_item_id_t item = pRoss->GetCortege(i).GetItem(2);
 						if (get_dom_no(item) == DigDomNo)
 						{
 							LexFunIndex.m_LexFunValue.m_MeanNum = pRoss->GetDomItemStr(item)[0] - '0';
@@ -783,7 +783,7 @@ void CSemanticsHolder::GetPrepsFromArticle(const CDictionary* Ross, long UnitNo,
 				&& (Ross->GetCortegeBracketLeafId(i) == BracketLeafId)
 				)
 			{
-				std::string Prep = Ross->GetDomItemStr(Ross->GetCortegeItem(i, 0));
+				std::string Prep = Ross->GetDomItemStr(Ross->GetCortege(i).GetItem( 0));
 				uint16_t PrepNo = GetRossHolder(OborRoss)->LocateUnit(Prep.c_str(), 1);
 				if (PrepNo != ErrUnitNo)
 					Preps.push_back(CDictUnitInterp(OborRoss, PrepNo));
@@ -868,7 +868,7 @@ bool IsConditional(const CRossHolder& RossDoc, long UnitNo)
 		long UnitEndPos = RossDoc.GetRoss()->GetUnitEndPos(UnitNo);
 		for (size_t i = RossDoc.GetRoss()->GetUnitStartPos(UnitNo); i <= UnitEndPos; i++)
 			if (RossDoc.GetRoss()->GetCortegeFieldNo(i) == FieldNo)
-				if (!is_null(RossDoc.GetRoss()->GetCortegeItem(i, 0)))
+				if (!RossDoc.GetRoss()->GetCortege(i).is_null(0))
 				{
 					std::string s = RossDoc.GetDomItemStrWrapper1(i, 0);
 					if (s == _R("УСЛ")) return true;
@@ -916,7 +916,7 @@ bool CSemanticsHolder::BuildColloc(std::string ContentFieldStr, int CollocUnitNo
 			// по словарной статье 
 			for (size_t j = GetRoss(CollocRoss)->GetUnitStartPos(CollocUnitNo); j <= GetRoss(CollocRoss)->GetUnitEndPos(CollocUnitNo); j++)
 			{
-				TCortege10 Cort = GetRossHolder(CollocRoss)->GetCortegeCopy(j);
+				TCortege Cort = GetRossHolder(CollocRoss)->GetCortegeCopy(j);
 				//незаполненное поле?
 				if (Cort.is_null(0)) continue;
 				// строю массив U.m_Places по полю CONTENT

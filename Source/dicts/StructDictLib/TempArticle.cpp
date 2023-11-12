@@ -10,7 +10,7 @@
 
 
 
-CTempArticle::CTempArticle(CDictionary* pRoss) : TCortegeContainer(m_pRoss->m_MaxNumDom)
+CTempArticle::CTempArticle(CDictionary* pRoss) : TCortegeContainer()
 {
 	m_pRoss = pRoss;
 	m_ReadOnly = false;
@@ -19,11 +19,12 @@ CTempArticle::CTempArticle(CDictionary* pRoss) : TCortegeContainer(m_pRoss->m_Ma
 }
 
 
-const TCortege10& CTempArticle::GetRossCortege(size_t i) const
+
+const TCortege& CTempArticle::GetRossCortege(size_t i) const
 {
-	const TCortege10& C = *m_pRoss->GetCortegePtr(i);
-	return C;
+	return m_pRoss->GetCortege(i);
 };
+
 
 size_t CTempArticle::GetCortegesSize() const
 {
@@ -36,12 +37,13 @@ size_t CTempArticle::GetCortegesSize() const
 		return _GetCortegesSize();
 };
 
-const TCortege10& CTempArticle::GetCortege(size_t i)  const
+
+const TCortege& CTempArticle::GetCortege(size_t i)  const
 {
 	if (m_ReadOnly)
 		return GetRossCortege(m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo + i);
 	else
-		return *GetCortegePtr(i);
+		return TCortegeContainer::GetCortege(i);
 };
 
 
@@ -62,6 +64,7 @@ std::string CTempArticle::ConstructFldName(BYTE FieldNo, BYTE LeafId, BYTE Brack
 	return s;
 };
 
+
 int CTempArticle::IntersectByFields(const CTempArticle* Article) const
 {
 
@@ -78,6 +81,7 @@ int CTempArticle::IntersectByFields(const CTempArticle* Article) const
 	return sum;
 }
 
+
 bool CTempArticle::AddArticle(const CTempArticle* Article)
 {
 	assert(!m_ReadOnly);
@@ -86,11 +90,11 @@ bool CTempArticle::AddArticle(const CTempArticle* Article)
 	{
 		size_t i = 0;
 		for (; i < GetCortegesSize(); i++)
-			if (GetCortege(i).EqualCortege(Article->GetCortege(k), m_pRoss->m_MaxNumDom))
+			if (GetCortege(i).EqualCortege(Article->GetCortege(k)))
 				break;
 
 		if (i == GetCortegesSize())
-			_AddCortege(Article, k);
+			_AddCortege(Article->GetCortege(k));
 	};
 
 	if (!CheckCortegeVector()) return false;
@@ -108,12 +112,12 @@ bool CTempArticle::IsPartOf(const CTempArticle* Article, bool UseWildCards) cons
 
 		for (; k < Article->GetCortegesSize(); k++) {
 			if (UseWildCards) {
-				if (GetCortege(i).IsEqualWithWildCard(Article->GetCortege(k), m_pRoss->WildCardDomItemNo, m_pRoss->m_MaxNumDom)) {
+				if (GetCortege(i).IsEqualWithWildCard(Article->GetCortege(k), m_pRoss->WildCardDomItemNo)) {
 					break;
 				}
 			}
 			else {
-				if (GetCortege(i).EqualCortege(Article->GetCortege(k), m_pRoss->m_MaxNumDom)) {
+				if (GetCortege(i).EqualCortege(Article->GetCortege(k))) {
 					break;
 				}
 			}
@@ -138,7 +142,8 @@ inline int  VisualFieldOrder(BYTE LeafId, BYTE BracketLeafId, int OrderId)
 		return OrderId + MaxOfTheFirstPart + LeafId * MaxOfTheFirstPart + BracketLeafId;
 }
 
-bool   CTempArticle::PutCortegeOnTheRigthPosition(const TCortege10& C)
+
+bool   CTempArticle::PutCortegeOnTheRigthPosition(const TCortege& C)
 {
 	// Номер места получим в переменной i. Вначале переменная i равна нулю.
   // Проходим все поля, у которых порядок меньше порядка текущего поля
@@ -183,7 +188,7 @@ bool CTempArticle::ArticleToText()
 
 	for (size_t i = 0; i < GetCortegesSize(); i++)
 	{
-		TCortege10 C = GetCortege(i);
+		TCortege C = GetCortege(i);
 		RightPart[0] = 0;
 
 		// смена текущей функции - значит, смена уровня
@@ -361,7 +366,7 @@ bool CTempArticle::AddCortegeToVector(CTextField& F)
 
 		};
 
-		TCortege10 C;
+		TCortege C;
 
 		C.m_FieldNo = F.FieldNo;
 		C.m_LeafId = F.LeafId;
@@ -384,13 +389,8 @@ bool CTempArticle::AddCortegeToVector(CTextField& F)
 		if ((C.m_LevelId == 0) && (m_pRoss->Fields[F.FieldNo].TypeRes == frFormula))
 			C.m_LevelId = 1;
 
-		if (m_MaxNumDom == 10) {
-			_AddCortege10(C);
-		}
-		else {
-			TCortege3 C3(C);
-			_AddCortege3(C3);
-		}
+		_AddCortege(C);
+		
 	};
 
 	return true;
@@ -412,8 +412,8 @@ bool CTempArticle::CheckCortegeVector()
 		};
 
 
-		size_t k = 0;
-		for (; k < m_pRoss->GetSignat(GetCortege(i)).GetDomsWoDelims().size(); k++)
+		
+		for (BYTE k = 0; k < m_pRoss->GetSignat(GetCortege(i)).GetDomsWoDelims().size(); k++)
 			if (GetCortege(i).is_null(k))
 			{
 				m_LastError = "Empty field";
@@ -423,7 +423,7 @@ bool CTempArticle::CheckCortegeVector()
 		std::string FldName = ConstructFldName(GetCortege(i).m_FieldNo, GetCortege(i).m_LeafId, GetCortege(i).m_BracketLeafId);
 
 		bool FoundPrevLevelId = !(GetCortege(i).m_LevelId > 1 && (GetCortege(i).m_LevelId != ErrUChar));
-		for (k = 0; k < GetCortegesSize(); k++)
+		for (size_t k = 0; k < GetCortegesSize(); k++)
 			if ((i != k)
 				&& (GetCortege(i).m_FieldNo == GetCortege(k).m_FieldNo)
 				&& (GetCortege(i).m_LeafId == GetCortege(k).m_LeafId)
@@ -448,10 +448,10 @@ bool CTempArticle::CheckCortegeVector()
 		};
 
 
-		for (k = 0; k < GetCortegesSize(); k++)
+		for (size_t k = 0; k < GetCortegesSize(); k++)
 		{
 			if ((i != k)
-				&& (GetCortegePtr(i)->EqualCortege(GetCortege(k), m_pRoss->m_MaxNumDom))
+				&& (GetCortege(i).EqualCortege(GetCortege(k)))
 				&& (m_pRoss->Fields[GetCortege(i).m_FieldNo].TypeRes == frOne)
 				)
 			{
@@ -463,7 +463,7 @@ bool CTempArticle::CheckCortegeVector()
 		};
 
 
-		if (strcmp(FldName.c_str(), "VAL") == 0)
+		if (FldName == "VAL")
 		{
 			char q[200] = "\0";
 
@@ -574,7 +574,7 @@ void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool Re
 				if (VisualOrder)
 					PutCortegeOnTheRigthPosition(GetRossCortege(i));
 				else
-					_AddCortege(*m_pRoss, i);
+					_AddCortege(m_pRoss->GetCortege(i));
 
 }
 
@@ -738,17 +738,19 @@ bool CTempArticle::IsModified() const
 	if (!m_pRoss->m_Units[m_UnitNo].HasEmptyArticle())
 		for (size_t i = StartPos; i <= EndPos; i++)
 		{
-			saved._AddCortege(*m_pRoss, i);
+			saved._AddCortege(m_pRoss->GetCortege(i));
 		};
 	bool equal = IsPartOf(&saved, false) && saved.IsPartOf(this, false);
 	return !equal;
 }
+
 
 const std::string& CTempArticle::GetArticleStr()
 {
 	ArticleToText();
 	return m_ArticleStr;
 }
+
 
 std::string CTempArticle::GetArticleStrUtf8(bool check)
 {

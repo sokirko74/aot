@@ -570,39 +570,26 @@ void CRossDoc::BuildBasicDomItems()
  
 	GetRoss()->UpdateConstDomens();
 
-	for (int i=0; i<GetRoss()->GetDomItemsSize(); i++)
+	for (BYTE dom_no=0; dom_no < GetRoss()->m_Domens.size(); dom_no++)
 	{
-		 BYTE DomNo  = GetRoss()->GetDomItemDomNo(i);
-
-  	     if (		(GetRoss()->m_Domens[DomNo].GetDomainSource() == dsMetaText)
-				|| (GetRoss()->m_Domens[DomNo].GetDomainSource() == dsExpres)
-			 )
+		const CDomen& D = GetRoss()->m_Domens[dom_no];
+  	     if ((D.GetDomainSource() == dsMetaText) || (D.GetDomainSource() == dsExpres))
 		 { 
-			if (DomNo  == GetRoss()->FieldDomNo)
-				continue;
-			TBaseDomItem I;
-			strcpy (I.ItemStr,GetRoss()->GetDomItemStr(i));
-			I.DomNo = GetRoss()->GetDomItemDomNo(i);
-			m_BasicDomItems.push_back(I);
-
+			for (auto s : D.GetAllStrings()) {
+				m_BasicDomItems[s] = dom_no;
+			}
 		 };
 	}
-	sort (m_BasicDomItems.begin(), m_BasicDomItems.end());
 
 	//  adding all fields to m_Fields
-	for (int i=0; i < GetRoss()->Fields.size(); i++)
+	for (auto& f: GetRoss()->Fields)
 	{
-		const CField& F = GetRoss()->Fields[i];
-		m_Fields.push_back(F.FieldStr);
-		if  (F.IsApplicToActant)
+		m_Fields.insert(f.FieldStr);
+		if  (f.IsApplicToActant)
 			for (size_t k=1; k < MaxNumAct+1; k++)
-				m_Fields.push_back(Format("%s%i", F.FieldStr, k));
+				m_Fields.insert(Format("%s%i", f.FieldStr, k));
 
 	};
-
-	sort ( m_Fields.begin(), m_Fields.end() );
-
-	
 
 	GetRossHolder()->InitConsts();
 };

@@ -302,11 +302,11 @@ void  CEngSemStructure::SetPositionsFromConj()
 		{
 			for (long LeafId = 0; LeafId < 2; LeafId++)
 			{
-				std::vector<TCortege10> Corteges;
+				std::vector<TCortege> Corteges;
 				GetRossHolder(EngObor)->GetFieldValues("POS", conj.m_UnitNo, Corteges, 1, 0);
 				for (long j = 0; j < Corteges.size(); j++)
 				{
-					TCortege10 C = Corteges[j];
+					TCortege C = Corteges[j];
 					if ( C.is_null(0) || C.is_null(1) )
 						continue;
 

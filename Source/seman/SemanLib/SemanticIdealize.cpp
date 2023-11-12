@@ -234,7 +234,7 @@ void CRusSemStructure::ApplySubordinationCases() {
         if (m_Nodes[m_Relations[MainRelNo].m_TargetNodeNo].HasOneGrammem(rComparative)) continue;
 
         if (m_Relations[MainRelNo].m_Valency.IsFromDict()) {
-            TCortege10 &C = m_Relations[MainRelNo].m_SynReal.m_Cortege;
+            TCortege &C = m_Relations[MainRelNo].m_SynReal.m_Cortege;
             if (C.is_null(1)) continue;
             const CRossHolder *RossHolder = m_Relations[MainRelNo].m_Valency.m_RossHolder;
             dom_item_id_t CaseItemNo = EmptyDomItemId;
@@ -351,7 +351,7 @@ void CRusSemStructure::ApplySubordinationCases() {
         if (m_Relations[i].m_Valency.IsFromDict()) {
             const CRusSemRelation &R = m_Relations[i];
             const CRossHolder *RossHolder = R.m_Valency.m_RossHolder;
-            const TCortege10 &C = R.m_SynReal.m_Cortege;
+            const TCortege &C = R.m_SynReal.m_Cortege;
             long SynFet = RossHolder->GetSynFet(R.m_SynReal.m_Cortege);
             if (!RossHolder->IsCase(SynFet)) continue;
             long CaseGrammems = GetCaseGrammem(RossHolder, SynFet);

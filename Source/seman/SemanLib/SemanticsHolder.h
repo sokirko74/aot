@@ -429,7 +429,7 @@ enum AbstractArticleEnum  {  atEmptyType, atArticlePlug, atAdditionArticle };
 struct CAbstractArticle {
    long               m_UnitNo;
    std::string            m_UnitStr;
-   std::vector<TCortege10> m_Article;
+   std::vector<TCortege> m_Article;
    std::vector<CGramInfo>  m_GramInfos;
    std::vector<long>       m_ClauseTypes;
    AbstractArticleEnum m_Type;

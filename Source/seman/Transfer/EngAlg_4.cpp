@@ -56,7 +56,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 // достаем из статьи значение лексической функции
 	std::string EngWord = "";
 	int    MeanNum = -1;
-	TCortege10 cortege;
+	TCortege cortege;
 	for( int i=GetRoss(Etype)->GetUnitStartPos(Eunit); i<=GetRoss(Etype)->GetUnitEndPos(Eunit); i++ )
 	{
 		long FieldNo = GetRoss(Etype)->GetCortegeFieldNo(i);
@@ -177,7 +177,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 /////////////////////////////////////////////////////////////////////////////
 // служебные функции для ConvertClosedCollocToOpen()
 
-bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,std::vector<TCortege10>& vecSINO) const
+bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,std::vector<TCortege>& vecSINO) const
 {
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
@@ -192,7 +192,7 @@ bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	return( vecSINO.size()>0 );
 }
 
-void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,std::vector<TCortege10>& vecSPrp) const
+void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,std::vector<TCortege>& vecSPrp) const
 {
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
@@ -205,7 +205,7 @@ void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	}
 }
 
-void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,std::vector<TCortege10>& vecSArt) const
+void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,std::vector<TCortege>& vecSArt) const
 {
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
@@ -231,7 +231,7 @@ long CEngSemStructure::FindNodeByLeafId (long NodeNo, int LeafId) const
 	return -1;
 };
 
-void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,std::vector<TCortege10>& vecSGxi) const
+void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,std::vector<TCortege>& vecSGxi) const
 {
 	assert( type == EngCollocRoss );
 	assert( unit != ErrUnitNo );
@@ -269,7 +269,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		if( nWords==1 )
 			continue;
 
-		std::vector<TCortege10> vecSINO;
+		std::vector<TCortege> vecSINO;
 		if( !GetSINO(type,UnitNo,vecSINO) )
 			continue;
 
@@ -279,7 +279,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			FreeWordNo(curWNo+j);
 
 // загрузим артикли
-		std::vector<TCortege10> vecSArt;
+		std::vector<TCortege> vecSArt;
 		GetSArt(type,UnitNo,vecSArt);
 		std::vector<ArticleEnum> articles(nWords, UnknownArticle);
 
@@ -295,7 +295,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 // загрузим части речи
-		std::vector<TCortege10> vecSGxi;
+		std::vector<TCortege> vecSGxi;
 		GetSGxi(type,UnitNo,vecSGxi);
 		StringVector poses;
 		for( int j=0; j<nWords; j++ )
@@ -309,7 +309,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 				continue;
 			int t = 0;
 			std::string res = "";
-			for (size_t t = 0; t < vecSGxi[k].GetMaxNumDom(); ++t) 
+			for (size_t t = 0; t < MaxNumDom; ++t) 
 			{
 				if (vecSGxi[k].is_null(t)) break;
 				if( t == 1 )
@@ -416,7 +416,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 		}
 
 // загрузим предлоги
-		std::vector<TCortege10> vecSPrp;
+		std::vector<TCortege> vecSPrp;
 		GetSPrp(type,UnitNo,vecSPrp);
 		StringVector preps;
 		for( int j=0; j<nWords; j++ )
@@ -546,7 +546,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 				try{
 				  CTempArticle A(const_cast<CDictionary*> (GetRoss(Aoss)));
 				  A.ReadFromUtf8String("GF*     = *  NP_poss");
-				  TCortege10 C = A.GetCortege(0);	
+				  TCortege C = A.GetCortege(0);	
 				  newRels[k].m_SynReal.m_Cortege = C;		
 				}
 				catch (...) 

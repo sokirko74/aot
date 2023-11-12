@@ -43,7 +43,7 @@ inline size_t restore_from_bytes(CStructEntry& i, const BYTE* buf)
 	buf += restore_from_bytes(i.m_EntryId, buf);
 	memcpy(i.m_EntryStr, buf, EntryStrSize);
 	buf += EntryStrSize;
-
+	
 	// m_MeanNum is padded to 4 bytes
 	int meanNum;
 	buf += restore_from_bytes(meanNum, buf);
@@ -62,12 +62,11 @@ inline size_t restore_from_bytes(CStructEntry& i, const BYTE* buf)
 //=========================================================
 //============           TRoss                 ============
 //=========================================================
-TRoss::TRoss(BYTE MaxNumDom) : TCortegeContainer(MaxNumDom)
+
+TRoss::TRoss() 
 {
 	m_bShouldSaveComments = false;
 	m_bDontLoadExamples = false;
-	m_MaxMeanNum = 7;
-
 };
 
 
@@ -90,16 +89,12 @@ void MakePathAndCheck(const std::string path, const std::string fileName, std::s
 void TRoss::LoadOnlyConstants(const char* _RossPath)
 {
 	RossPath = _RossPath;
-	MakePathAndCheck(RossPath, "config.txt", ConfigFile);
+	Config.ReadConfig(RossPath);
 	MakePathAndCheck(RossPath, "domitems.tsv", DomItemsTextFile);
 	MakePathAndCheck(RossPath, "items.bin", ItemsFile);
 	MakePathAndCheck(RossPath, "domains.json", DomensFile);
 	MakePathAndCheck(RossPath, "fields.json", FieldsFile);
 
-	if (!ReadConfig())
-	{
-		throw CExpc("Cannot parse struct_dict config ");
-	};
 
 	{
 		char LastReadLine[1000];
@@ -114,11 +109,12 @@ void TRoss::LoadOnlyConstants(const char* _RossPath)
 		throw CExpc("Cannot build domitems");
 	};
 
-	BuildFields(m_MaxNumDom);
+	BuildFields();
 	CortegeFile = MakePath(RossPath, "cortege.bin");
 	UnitsFile = MakePath(RossPath, "units.bin");
 	UnitCommentsFile = MakePath(RossPath, "comments.bin");
 };
+
 
 bool TRoss::FullLoad(const char* _RossPath)
 {
@@ -137,6 +133,7 @@ bool TRoss::FullLoad(const char* _RossPath)
 	return true;
 }
 
+
 bool  TRoss::Save()
 {
 	if (m_bShouldSaveComments)
@@ -151,58 +148,6 @@ bool  TRoss::Save()
 
 };
 
-bool	TRoss::ReadConfig()
-{
-	std::string Config;
-	{
-		FILE* fp = fopen(ConfigFile.c_str(), "rb");
-		if (!fp) return false;
-		char buffer[1024];
-		while (fgets(buffer, 1024, fp))
-			Config += buffer;
-		fclose(fp);
-	};
-
-	StringTokenizer lines(Config.c_str(), "\n\r");
-	while (lines())
-	{
-		std::string Line = lines.val();
-		Trim(Line);
-		if (Line.empty()) continue;
-		StringTokenizer Items(Line.c_str(), " \t\n\r");
-
-		std::string Field = Items.next_token();
-		std::string Value = Items.next_token();
-		if (Field.empty() || Value.empty()) return  false;
-		if (Field == "MaxNumDom")
-		{
-			m_MaxNumDom = atoi(Value.c_str());
-			if ((m_MaxNumDom != 3)
-				&& (m_MaxNumDom != 10)
-				)
-				return false;
-		}
-		else
-			if (Field == "MaxMeanNum")
-			{
-				int u = atoi(Value.c_str());
-				if ((u < 1)
-					|| (u > 15)
-					)
-					return false;
-				m_MaxMeanNum = u;
-			}
-			else
-				if (Field == "DictName")
-				{
-					m_DictName = Value;
-				}
-				else
-					return false;
-	};
-
-	return true;
-};
 
 
 const char* TRoss::GetTitleFieldName() const
@@ -276,6 +221,7 @@ void  TRoss::DelUnit(std::vector<CStructEntry>::iterator It)
 	m_Units.erase(It);
 };
 
+
 uint16_t TRoss::LocateUnit(const char* EntryStr, int MeanNum) const
 {
 	CStructEntry T(EntryStr, MeanNum);
@@ -284,6 +230,7 @@ uint16_t TRoss::LocateUnit(const char* EntryStr, int MeanNum) const
 	if (!(T == *It)) return ErrUnitNo;
 	return It - m_Units.begin();
 };
+
 
 
 uint16_t     TRoss::GetSelectedUnitNo(uint16_t i) const
@@ -297,6 +244,8 @@ uint16_t     TRoss::GetSelectedUnitNo(uint16_t i) const
 			i--;
 	return k - 1;
 };
+
+
 uint16_t	TRoss::GetSelectedUnitsSize() const
 {
 	uint16_t  i = 0;
@@ -319,6 +268,7 @@ uint16_t    TRoss::InsertUnit(CStructEntry& T)
 	return res;
 };
 
+
 uint16_t   TRoss::InsertUnit(const char* EntryStr, BYTE MeanNum)
 {
 	CStructEntry T;
@@ -327,23 +277,6 @@ uint16_t   TRoss::InsertUnit(const char* EntryStr, BYTE MeanNum)
 	T.m_AuthorStr[0] = 0;
 	return TRoss::InsertUnit(T);
 }
-
-
-
-static void   EstablishOneToOneCorrespondenceBetweenEntriesAndComments(TRoss& R)
-{
-	assert(!R.m_Units.empty());
-	R.m_UnitComments.clear();
-	for (size_t i = 0; i < R.m_Units.size(); i++)
-	{
-		R.m_Units[i].m_EntryId = i;
-		R.InsertUnitComment((uint16_t)i);
-	};
-};
-
-
-
-
 
 inline size_t get_size_in_bytes(const tm& t)
 {
@@ -416,6 +349,7 @@ inline size_t restore_from_bytes(TUnitComment& i, const BYTE* buf)
 };
 
 
+
 bool   TRoss::ReadUnitComments()
 {
 	m_UnitComments.clear();
@@ -429,17 +363,12 @@ bool   TRoss::ReadUnitComments()
 	ReadVector<TUnitComment>(UnitCommentsFile, m_UnitComments);
 	sort(m_UnitComments.begin(), m_UnitComments.end());
 
-	//  handle the error with comments in some previous versions
-	if (m_UnitComments.size() != m_Units.size())
-	{
-		EstablishOneToOneCorrespondenceBetweenEntriesAndComments(*this);
-	};
-
 	assert(m_UnitComments.size() == m_Units.size());
 
 	m_bShouldSaveComments = true;
 	return true;
 };
+
 
 uint16_t    TRoss::InsertUnitComment(uint16_t EntryId)
 {
@@ -458,6 +387,7 @@ uint16_t    TRoss::InsertUnitComment(uint16_t EntryId)
 	};
 };
 
+
 TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)
 {
 	std::vector<TUnitComment>::iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
@@ -466,6 +396,7 @@ TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)
 	);
 	return &(*It);
 };
+
 
 const TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)   const
 {
@@ -514,7 +445,7 @@ struct TItemStr
 };
 
 
-bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CSignat& Sgn)
+bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSignat& Sgn)
 { 
 	int CurrItemNo = 0;
 
@@ -617,12 +548,12 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CS
 
 	if (!IsEmptyLine(q) || (i < doms.size())) return false;
 
-	for (size_t i = ItemStrVec.size(); i < m_MaxNumDom; i++)
+	for (size_t i = ItemStrVec.size(); i < MaxNumDom; i++)
 		C.SetItem(i, EmptyDomItemId);
 
 
 
-	for (size_t i = 0; i < ItemStrVec.size(); i++)
+	for (BYTE i = 0; i < ItemStrVec.size(); i++)
 		if (C.is_null(i)) // не определено значение
 		{
 			dom_item_id_t item_id = InsertDomItem(ItemStrVec[i].ItemStr, Sgn.GetDomsWoDelims()[i]);
@@ -637,7 +568,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege10& C, const CS
 };
 
 
-bool   TRoss::ReadFromStr(const char* str, TCortege10& C)
+bool   TRoss::ReadFromStr(const char* str, TCortege& C)
 {
 	for (const auto& s : Fields[C.m_FieldNo].m_Signats)
 		if (ReadFromStrWithOneSignatura(str, C, s))
@@ -650,8 +581,7 @@ bool   TRoss::ReadFromStr(const char* str, TCortege10& C)
 };
 
 
-
-std::string TRoss::WriteToString(const TCortege10& C) const
+std::string TRoss::WriteToString(const TCortege& C) const
 {
 	const CSignat& signat = GetSignat(C);
 	auto frmt = signat.GetFrmt();
@@ -677,7 +607,7 @@ std::string TRoss::WriteToString(const TCortege10& C) const
 };
 
 
-const CSignat& TRoss::GetSignat(const TCortege10& C) const {
+const CSignat& TRoss::GetSignat(const TCortege& C) const {
 	const CField& f = Fields[C.m_FieldNo];
 	BYTE signat_no = f.SignatId2SignatNo[C.GetSignatId()];
 	return f.m_Signats[signat_no];
@@ -867,13 +797,15 @@ TUnitComment::TUnitComment(int _UnitId)
 //==================== CDictionary    ===============================
 //===================================================================
 
-CDictionary::CDictionary() : TRoss(3)
+CDictionary::CDictionary() : TRoss()
 {
 }
+
 std::vector<CStructEntry>& CDictionary::GetUnits()
 {
 	return m_Units;
 };
+
 bool CDictionary::IsEmptyArticle(uint16_t UnitNo) const
 {
 	return m_Units[UnitNo].HasEmptyArticle();
@@ -907,7 +839,7 @@ const std::string& CDictionary::GetDomItemStr(dom_item_id_t item_id) const {
 }
 
 const std::string& CDictionary::GetDomItemStr(long cortegeNo, BYTE positionInCortege) const {
-	return GetDomItemStr(GetCortegeItem(cortegeNo, positionInCortege));
+	return GetDomItemStr(GetCortege(cortegeNo).GetItem(positionInCortege));
 }
 
 
@@ -1099,7 +1031,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 		AddMessage(Format("Cannot read field %s", Field).c_str(), L[start].m_SourceLineNo + 1, Messages);
 		return false;
 	}
-	if ((m_MaxMeanNum == 1) && (MeanNum > 1))
+	if ((Config.MaxMeanNum == 1) && (MeanNum > 1))
 	{
 		AddMessage("No different senses are possible  for this dictionary", L[start].m_SourceLineNo + 1, Messages);
 		return false;

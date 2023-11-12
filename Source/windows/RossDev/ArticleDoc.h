@@ -8,13 +8,12 @@
 class CArticleDoc : public CDocument
 {
 protected: // create from serialization only
-	CArticleDoc(CRossDoc* pRossDoc);
+	CArticleDoc();
 	DECLARE_DYNCREATE(CArticleDoc)
 	
 
 // Attributes
 public:
-   CWinThread* m_MessageKiller;
    CRossDoc*   m_pRossDoc;
    std::vector<CString> m_Lines;
 
@@ -38,7 +37,7 @@ public:
    BOOL    OpenArticle (uint16_t UnitNo, CRossDoc* pRossDoc);
    CDictionary* GetRoss () {return m_pRossDoc->GetRoss();}
            bool Markout ();
-		   bool AddCortegeToVector (std::vector<TCortege10>& L, CRossDevTextField& F);
+		   bool AddCortegeToVector (std::vector<TCortege>& L, CRossDevTextField& F);
    virtual void SetTitle(LPCTSTR lpszTitle);
    virtual BOOL SaveModified(); 
    virtual BOOL DoFileSave();

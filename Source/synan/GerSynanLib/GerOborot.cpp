@@ -101,11 +101,11 @@ bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 		    if (piOborDic->IsEmptyArticle(UnitNo) == false)
 			for( int i = piOborDic->GetUnitStartPos(UnitNo) ; i <= piOborDic->GetUnitEndPos(UnitNo) ; i++)
 			{
-				if (GramFetFieldNo != piOborDic->GetCortegeFieldNo(i)) 
+				if (GramFetFieldNo != piOborDic->GetCortege(i).m_FieldNo) 
 					continue;
-				BYTE LeafId = piOborDic->GetCortegeLeafId(i);
-				long Item0 = piOborDic->GetCortegeItem(i,0);
-				long Item1 = piOborDic->GetCortegeItem(i,1);
+				BYTE LeafId = piOborDic->GetCortege(i).m_LeafId;
+				dom_item_id_t Item0 = piOborDic->GetCortege(i).GetItem(0);
+				dom_item_id_t Item1 = piOborDic->GetCortege(i).GetItem(1);
 				if (LeafId == 0)
 				{
 					if ( SimplePrepItemNo == Item0)

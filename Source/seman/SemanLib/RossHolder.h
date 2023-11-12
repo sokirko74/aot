@@ -205,7 +205,7 @@ public:
    const std::string& GetDomItemStrWrapper(dom_item_id_t item_id) const;
    const std::string& GetDomItemStrWrapper1(size_t cortege_no, BYTE item_no) const;
 
-   TCortege10 GetCortegeCopy(size_t cortege_no) const;
+   TCortege GetCortegeCopy(size_t cortege_no) const;
 	
    bool InitConsts();
    void GetSimpleFieldItemsFromArticle (long UnitNo, std::string FieldStr, BYTE LeafId, BYTE BracketLeafId, StringVector& Items) const;
@@ -217,7 +217,7 @@ public:
    bool					HasFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0  ) const;
    // проверят все значения поля
    bool					HasFullFieldValue(std::string strFieldName, std::string strValue, long UnitNo, BYTE LeafId = 0, BYTE BracketLeafId = 0) const;
-   void					GetFieldValues(std::string strFieldName, long UnitNo, std::vector<TCortege10>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
+   void					GetFieldValues(std::string strFieldName, long UnitNo, std::vector<TCortege>& vectorCorteges, BYTE  LeafId = 0, BYTE BracketLeafId = 0 ) const;
    bool					HasItem (uint16_t UnitNo, const std::string FieldStr, const std::string ItemStr, const std::string DomStr, BYTE LeafId, BYTE BracketLeafId)  const;
    
 
@@ -244,11 +244,11 @@ public:
 	bool				IsPosition (dom_item_id_t item_id) const;
 	// выдает номер первой константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 	// (Значение до запятой)
-	dom_item_id_t		GetSynRel(const  TCortege10& C) const;
+	dom_item_id_t		GetSynRel(const  TCortege& C) const;
 	// выдает номер второй константы, из CortegeNo-го кортежа массиве m_GramCorteges 
 	// (Значение после запятой)1
-	dom_item_id_t		GetSynFet(const  TCortege10& C) const;
-	bool				IsCompAdjCortege(const  TCortege10& C) const;
+	dom_item_id_t		GetSynFet(const  TCortege& C) const;
+	bool				IsCompAdjCortege(const  TCortege& C) const;
 	bool IsCase(dom_item_id_t item_id) const;
 };
 

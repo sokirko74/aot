@@ -115,10 +115,6 @@
             {
                 "format": "D_SEM_REL D_OPN  D_ACTANTS D_COMMA D_ACTANTS D_CLS",
                 "signat_id": 1
-            },
-            {
-                "format": "D_SEM_REL D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS",
-                "signat_id": 2
             }
         ],
         "type": 77

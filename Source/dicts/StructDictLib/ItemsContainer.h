@@ -59,13 +59,10 @@ public :
 	bool		CanBeRusColloc  (const char*  s) const;
 	BYTE		GetFieldNoByFieldStrInner (const char* FieldStr) const; 
 	bool		ClearFields ();
-	void		BuildFields(BYTE MaxNumDom);
+	void		BuildFields();
 	bool		WriteFields() const;
 	bool		WriteDomens () const;
 	bool		WriteDomItems() const ;
-	BYTE		GetCortegeFieldNo(size_t i) const;
-	BYTE		GetCortegeLeafId(size_t i) const;
-	BYTE		GetCortegeBracketLeafId(size_t i) const;
 
 
 

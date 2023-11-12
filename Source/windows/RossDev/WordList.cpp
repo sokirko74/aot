@@ -79,7 +79,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_BN_CLICKED(IDC_WORDLIST_ARTICLE_BTN, OnWordlistArticleBtn)
 	ON_COMMAND(IDR_SAVE_ROSS_TO_TXT, OnSaveRossToTxt)
 	ON_COMMAND(ID_SEARCH_BY_ARTICLE, OnSearchByArticle)
-	ON_COMMAND(IDR_STATISTIC, OnStatistic)
 	ON_BN_CLICKED(IDC_CHANGE_TITLE, OnChangeTitle)
 	ON_COMMAND(ID_MENUITEM32786, OnComments)
 	ON_COMMAND(ID_MENUITEM32788, OnMenuitem32788)
@@ -92,7 +91,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_COMMAND(IDR_DEL_ALL_SELECTED, OnDelAllSelected)
 	ON_BN_CLICKED(IDC_SET_AUTHOR, OnSetAuthor)
 	ON_COMMAND(ID_SELECT_AUTHOR, OnSelectByAuthor)
-	ON_COMMAND(IDR_GXI_STATISTICS, OnGXiStatistics)
 	ON_NOTIFY(NM_DBLCLK, IDC_WORDLIST_GRID, OnDblclkWordlistGrid)
 	ON_COMMAND(ID_MENUITEM32804, OnSelectDownward)
 	ON_COMMAND(ID_MENUITEM32805, OnEmptyArticles)
@@ -739,7 +737,7 @@ void CWordList::OnSearchByArticle()
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 		if (GetUnitNo(i) != UnitNo)
 		{
-			std::vector<TCortege10> L2;
+			std::vector<TCortege> L2;
 			A2.ReadFromDictionary(GetUnitNo(i), false, true);
 			if (A1.IsPartOf(&A2, true))
 				UnitNos.push_back(CRossPocketItem(GetUnitNo(i), GetDocument()));
@@ -767,94 +765,6 @@ struct CStatis {
 	}
 };
 
-void CWordList::OnStatistic()
-{
-	CWaitCursor C;
-	CRossDoc* pRossDoc = GetDocument();
-	std::vector<CStatis> V;
-	char s[200];
-	s[0] = 0;
-	if (!InputBox("Input domain name (* - akk constant domain):", s, 200))
-		return;
-	CString Q(s);
-	Q.TrimLeft();
-	Q.TrimRight();
-	if (Q[0] == '*')
-		for (size_t i = 0; i < pRossDoc->m_BasicDomItems.size(); i++)
-		{
-			CStatis S;
-			S.ItemNo = GetRoss()->GetItemNoByItemStr(pRossDoc->m_BasicDomItems[i].ItemStr, pRossDoc->m_BasicDomItems[i].DomNo);
-			S.Freq = 0;
-			if (S.ItemNo != -1)
-				V.push_back(S);
-		}
-	else
-	{
-		BYTE DomNo = GetRoss()->GetDomenNoByDomStr((const char*)Q);
-		if (DomNo == ErrUChar)
-		{
-			AfxMessageBox("No such domen");
-			return;
-		};
-		for (size_t i = 0; i < GetRoss()->GetDomItemsSize(); i++)
-		{
-			if (GetRoss()->GetDomItemDomNo(i) == DomNo)
-			{
-				CStatis S;
-				S.ItemNo = i;
-				S.DomNo = DomNo;
-				S.Freq = 0;
-				V.push_back(S);
-			};
-		};
-
-	};
-
-	s[0] = 0;
-	char caption[200];
-	sprintf(caption,
-		"Enter the number of tuple elements to compare (1..%i)", GetRoss()->m_MaxNumDom);
-	if (!InputBox(caption, s, 200))
-		return;
-
-	size_t NumDom = atoi(s);
-	if (NumDom > MaxNumDom)
-	{
-		AfxMessageBox("The value is too great");
-		return;
-	};
-
-
-	sort(V.begin(), V.end());
-
-	for (size_t i = 0; i < GetRoss()->_GetCortegesSize(); i++)
-	{
-		const auto& c = GetCortege(GetRoss(), i);
-		for (size_t k = 0; k < NumDom; k++)
-		{
-			if (c.is_null(k)) break;
-			CStatis I;
-			I.ItemNo = c.GetItem(k);
-			std::vector<CStatis>::iterator It = lower_bound(V.begin(), V.end(), I);
-			if ((It != V.end())
-				&& (I == *It))
-				It->Freq++;
-		};
-	};
-
-
-	CString S = "Domain Constant Frequency\n";
-	for (size_t k = 0; k < V.size(); k++)
-	{
-		CString Q;
-		BYTE DomNo = get_dom_no(V[k].ItemNo);
-		CString DomStr = GetRoss()->m_Domens[DomNo].GetDomStr().c_str();
-		Q.Format("%-16s %-5s %-20s %-5s %i \r\n", DomStr, "|", (const char*)GetRoss()->GetDomItemStr(V[k].ItemNo), "|", V[k].Freq);
-		S += Q;
-	};
-
-	GlobalOpenReport(S, "Constant Frequency");
-}
 
 void CWordList::OnChangeTitle()
 {
@@ -947,11 +857,11 @@ void CWordList::BuildVals(std::vector<Valency>& Vals, uint16_t UnitNo)
 	Vals.clear();
 	if (GetRoss()->IsEmptyArticle(UnitNo)) return;
 	for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
-		if (GetCortege(GetRoss(), k).m_FieldNo == GetDocument()->GetRossHolder()->ValFieldNo)
+		if (GetRoss()->GetCortege(k).m_FieldNo == GetDocument()->GetRossHolder()->ValFieldNo)
 		{
 			Valency V;
-			V.ValNo = GetCortege(GetRoss(), k).GetItem(0);
-			V.A_C = GetCortege(GetRoss(), k).GetItem(1) != GetDocument()->GetRossHolder()->SelfLabelNo;
+			V.ValNo = GetRoss()->GetCortege(k).GetItem(0);
+			V.A_C = GetRoss()->GetCortege(k).GetItem(1) != GetDocument()->GetRossHolder()->SelfLabelNo;
 			Vals.push_back(V);
 		};
 };
@@ -1058,22 +968,21 @@ void CWordList::OnValencies()
 
 
 struct CFieldValue {
-	TCortege10 cortege;
+	TCortege cortege;
 	BYTE FieldNo;
 	int      freq;
-	BYTE	 m_MaxNumDom;
 
 	bool operator==(const CFieldValue& X) const
 	{
-		TCortege10 C = cortege;
-		TCortege10 XX = X.cortege;
+		TCortege C = cortege;
+		TCortege XX = X.cortege;
 		return		(FieldNo == X.FieldNo)
-			&& C.HasEqualItems(XX, m_MaxNumDom);
+			&& C.HasEqualItems(XX);
 	}
 
 	bool operator<	(const CFieldValue& X) const
 	{
-		return  (FieldNo < X.FieldNo) && !cortege.HasEqualItems(X.cortege, m_MaxNumDom);
+		return  (FieldNo < X.FieldNo) && !cortege.HasEqualItems(X.cortege);
 	}
 
 };
@@ -1100,16 +1009,15 @@ void CWordList::OnStatisticFieldValue()
 	for (size_t i = 0; i < GetRoss()->_GetCortegesSize(); i++)
 	{
 		if ((FieldNo != ErrUChar)
-			&& (GetCortege(GetRoss(), i).m_FieldNo != FieldNo)
+			&& (GetRoss()->GetCortege(i).m_FieldNo != FieldNo)
 			)
 			continue;
 
 
 		CFieldValue Value;
-		Value.cortege = GetCortege(GetRoss(), i);
+		Value.cortege = GetRoss()->GetCortege(i);
 		Value.freq = 1;
-		Value.FieldNo = GetCortege(GetRoss(), i).m_FieldNo;
-		Value.m_MaxNumDom = GetRoss()->m_MaxNumDom;
+		Value.FieldNo = GetRoss()->GetCortege(i).m_FieldNo;
 		std::vector<CFieldValue>::iterator It = find(V.begin(), V.end(), Value);
 		if (It == V.end())
 			V.push_back(Value);
@@ -1341,11 +1249,11 @@ void CWordList::OnSelectByAuthor()
 struct GxiStatistic
 {
 	CString		m_SemRelName;
-	TCortege10	m_GXi;
+	TCortege	m_GXi;
 	int			m_num;
 	BYTE		m_MaxNumDom;
 	std::vector<long> Units;
-	GxiStatistic(CString SemRelName, TCortege10 GXi, long UnitNo, BYTE MaxNumDom)
+	GxiStatistic(CString SemRelName, TCortege GXi, long UnitNo, BYTE MaxNumDom)
 	{
 		m_SemRelName = SemRelName;
 		m_GXi = GXi;
@@ -1369,66 +1277,9 @@ struct GxiStatistic
 	}
 	bool operator==(const GxiStatistic& GX) const
 	{
-		return (m_SemRelName == GX.m_SemRelName) && m_GXi.HasEqualItems(GX.m_GXi, m_MaxNumDom);
+		return (m_SemRelName == GX.m_SemRelName) && m_GXi.HasEqualItems(GX.m_GXi);
 	};
 
-};
-
-void CWordList::OnGXiStatistics()
-{
-	std::vector<GxiStatistic> GxiStatisticVector;
-	for (size_t i = 0; i < GetUnitsSize(); i++)
-	{
-		size_t UnitNo = GetUnitNo(i);
-		if (GetRoss()->IsEmptyArticle(UnitNo)) continue;
-
-		std::vector<CValency> Vals;
-		for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
-			if (GetRoss()->GetCortegeFieldNo(k) == GetDocument()->GetRossHolder()->ValFieldNo)
-				Vals.push_back(CValency(GetCortege(GetRoss(), k), GetDocument()->GetRossHolder()->MainWordVarNo, GetDocument()->GetRossHolder()));
-
-
-		for (int k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
-		{
-			if (GetRoss()->GetCortegeFieldNo(k) != GetDocument()->GetRossHolder()->GramFetFieldNo) break;
-
-			int ValencyNo = GetRoss()->GetCortegeLeafId(k) - 1;
-			if ((ValencyNo < 0) || (ValencyNo >= Vals.size())) break;
-			GxiStatistic GX(Vals[ValencyNo].m_RelationStr.c_str(), GetCortege(GetRoss(), k), UnitNo, GetRoss()->m_MaxNumDom);
-			std::vector<GxiStatistic>::iterator It = find(GxiStatisticVector.begin(), GxiStatisticVector.end(), GX);
-			if (It == GxiStatisticVector.end())
-				GxiStatisticVector.push_back(GX);
-			else
-			{
-				It->m_num++;
-				It->Units.push_back(UnitNo);
-			};
-
-		};
-
-
-	};
-
-
-	sort(GxiStatisticVector.begin(), GxiStatisticVector.end());
-	CString Protocol;
-	for (int j = 0; j < GxiStatisticVector.size(); j++)
-	{
-		CString S;
-		BYTE FieldNo = GxiStatisticVector[j].m_GXi.m_FieldNo;
-		CString CortegeStr = GetRoss()->WriteToString(GxiStatisticVector[j].m_GXi).c_str();
-
-		S.Format("%-16s %-5s %-20s %-5s %i ", GxiStatisticVector[j].m_SemRelName, "|", CortegeStr, "|", GxiStatisticVector[j].m_num);
-		for (int k = 0; k < GxiStatisticVector[j].Units.size(); k++)
-		{
-			S += GetEntryStr(GxiStatisticVector[j].Units[k]).c_str();
-			S += "  ";
-		}
-		S += "\r\n";
-		Protocol += S;
-	}
-
-	GlobalOpenReport(Protocol, "Frequence of GFi");
 };
 
 

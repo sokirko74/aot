@@ -4,7 +4,7 @@
 
 
 
-std::string CEngSemStructure::GetPrep(const TCortege10& cortege, DictTypeEnum type)
+std::string CEngSemStructure::GetPrep(const TCortege& cortege, DictTypeEnum type)
 {
 	int iNum = 0;
 	std::string strPrep;
@@ -42,7 +42,7 @@ std::string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,in
 		return strPrep;
 
 	long UnitNo = rusActant.GetUnitNo();
-	std::vector<TCortege10> vectorCortege;
+	std::vector<TCortege> vectorCortege;
 
 	pRossDoc->GetFieldValues("PREP", UnitNo, vectorCortege);
 
@@ -98,7 +98,7 @@ bool CEngSemStructure::Rule_TranslateRelWithPrepField( int iRusActant, long Rela
 }
 
 
-bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelNo, const std::vector<TCortege10>& GramCorteges, int iEngNode)
+bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelNo, const std::vector<TCortege>& GramCorteges, int iEngNode)
 {
 	CEngSemRelation& semEngRel  = m_Relations[EngRelNo];
 	assert(iRusActant != -1 );
@@ -159,7 +159,7 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 
 
 
-const TCortege10* CEngSemStructure::NumPrepPhr(const std::vector<TCortege10>& GramCorteges, DictTypeEnum type) const
+const TCortege* CEngSemStructure::NumPrepPhr(const std::vector<TCortege>& GramCorteges, DictTypeEnum type) const
 {
 	if( type == NoneRoss)
 		return nullptr;

@@ -100,7 +100,7 @@ const std::string& CDomen::GetDomItemStrById(const dom_item_id_t item_id) const 
 
 
 dom_item_id_t CDomen::GetDomItemIdByStr(const std::string& item_str) const {
-    TDomenItem item = { -1, item_str };
+    TDomenItem item = { EmptyDomItemId, item_str };
     auto it = std::lower_bound(m_DomItems.begin(), m_DomItems.end(), item);
     if (it == m_DomItems.end()) {
         return EmptyDomItemId;
@@ -112,4 +112,12 @@ void CDomen::WriteItemsToStream(std::ofstream& outp) const {
     for (auto i : m_DomItems) {
         outp << i.InnerDomItemId << "\t" << i.DomItemStr << "\n";
     }
+}
+
+std::vector<std::string>  CDomen::GetAllStrings() const {
+    std::vector<std::string> r;
+    for (auto i : m_DomItems) {
+        r.push_back(i.DomItemStr);
+    }
+    return r;
 }

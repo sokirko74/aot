@@ -25,7 +25,7 @@ void CEngSemStructure::InitEngVals(CEngSemNode& Node)
 		if (semPattern.m_GramCorteges.empty())
 		{
 			// Добавляем пустой кортеж, если в статье не было найдено GFi
-			semPattern.m_GramCorteges.push_back(TCortege10());
+			semPattern.m_GramCorteges.push_back(TCortege());
 		};
 
 		Node.m_Patterns.push_back(semPattern);
@@ -604,7 +604,7 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 		assert(prep_int.m_DictType == OborRoss);
 		std::vector<SEngEquiv> vectorEngEquivs;
 		
-		std::vector<TCortege10> vectorACX;
+		std::vector<TCortege> vectorACX;
 		
 		std::string strACX;
 		std::vector<std::string> SemFets;

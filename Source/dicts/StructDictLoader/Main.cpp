@@ -46,18 +46,16 @@ void import_dict(std::string fileName, std::string folder) {
 	Dict.Save();
 }
 
-void build_fields_json(std::string fileName) {
-	CDictionary Dict;
-	auto folder = GetParentPath(fileName);
-	//MakePathAndCheck(folder, "config.txt", Dict.ConfigFile);
-	//MakePathAndCheck(folder, "fields.bin", Dict.FieldsFile);
-
-
-	Dict.ReadConfig();
-	Dict.BuildFields(Dict.m_MaxNumDom);
-	//Dict.WriteFieldsJson();
-
-}
+//void build_fields_json(std::string fileName) {
+//	CDictionary Dict;
+//	auto folder = GetParentPath(fileName);
+//	
+//
+//	Dict.ReadConfig();
+//	Dict.BuildFields(Dict.m_MaxNumDom);
+//	//Dict.WriteFieldsJson();
+//
+//}
 
 void initArgParser(int argc, const char** argv, ArgumentParser& parser) {
 	parser.AddOption("--help");

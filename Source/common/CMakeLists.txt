@@ -16,6 +16,7 @@ set(my_SOURCES
         http_server.h
         LemWord.h
         PlmLine.h
+        cortege.cpp
 )
 
 if (COMPILE_WITH_HTTP)

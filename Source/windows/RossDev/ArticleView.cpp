@@ -214,7 +214,7 @@ void CArticleView::InsertLine (int LineNo, const CString& S)
 	parse();
 };
 
-void CArticleView::WriteToEdit (std::vector<TCortege10>& L, size_t nPos)
+void CArticleView::WriteToEdit (std::vector<TCortege>& L, size_t nPos)
 {
 	const CTempArticle& A = ((CArticleDoc*)GetDocument())->m_Article;
 	if (A.m_Fields.size() == 1)
@@ -339,14 +339,10 @@ bool IsKeyWordArticle (const CString& word, COLORREF& C, uint32_t Data)
 	CArticleView* V = (CArticleView*)Data;
 	CRossDoc* RossDoc = V->GetRossDoc();
 	
-	
-	TBaseDomItem I;
-	if (word.GetLength() > EntryStrSize - 1) return false;
-	strcpy (I.ItemStr,  (const char*)word);
-	std::vector<TBaseDomItem>::const_iterator It = lower_bound (RossDoc->m_BasicDomItems.begin(), RossDoc->m_BasicDomItems.end(), I);
-    if (    (It == RossDoc->m_BasicDomItems.end())
-		|| !(*It == I)
-		|| (  RossDoc->GetRoss()->m_Domens[It->DomNo].GetDomStr() == "D_1")) // если это не элемент метаязыка
+	auto it = RossDoc->m_BasicDomItems.find(std::string(word));
+
+    if (    (it == RossDoc->m_BasicDomItems.end())
+		|| (  RossDoc->GetRoss()->m_Domens[it->second].GetDomStr() == std::string("D_1"))) // если это не элемент метаязыка
 	{
 		if (IsRossEntry(word))
 		{
@@ -357,19 +353,16 @@ bool IsKeyWordArticle (const CString& word, COLORREF& C, uint32_t Data)
 	else
 	{
 		
-		BYTE no = RossDoc->m_DomParamsPtr[It->DomNo];
+		BYTE no = RossDoc->m_DomParamsPtr[it->second];
 		if (no == ErrUChar) return 0;
 		C = RossDoc->m_DomainParams[no].Color;
 		return true;
 	};
 
-	StringVector::const_iterator field_it = lower_bound (RossDoc->m_Fields.begin(), RossDoc->m_Fields.end(), I.ItemStr);
-	if (		(field_it != RossDoc->m_Fields.end())
-			&&	(*field_it == I.ItemStr)
-		)
+	auto field_it = RossDoc->m_Fields.find(std::string(word));
+	if 	(field_it != RossDoc->m_Fields.end())
 	{
 		C = RGB(90,90,90);
-
 		return true;
 	};
 	return false;

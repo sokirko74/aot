@@ -11,7 +11,6 @@
 #include "morph_dict/common/util_classes.h"
 
 
-
 TItemContainer::TItemContainer() {
     m_Language = morphRussian;
 };
@@ -279,7 +278,7 @@ bool TItemContainer::ClearFields() {
 
 
 
-void TItemContainer::BuildFields(BYTE MaxNumDom) {
+void TItemContainer::BuildFields() {
     ClearFields();
     
     std::ifstream inp;
@@ -333,19 +332,4 @@ void TItemContainer::ErrorMessage(std::string s) const {
     ::ErrorMessage(RossPath, s);
 };
 
-BYTE TItemContainer::GetCortegeFieldNo(size_t i) const
-{
-    if (m_Max)
-    return GetCortegePtr(i)->m_FieldNo;
-
-};
-BYTE TItemContainer::GetCortegeLeafId(size_t i) const
-{
-    return GetCortegePtr(i)->m_LeafId;
-};
-BYTE TItemContainer::GetCortegeBracketLeafId(size_t i) const
-{
-    return GetCortegePtr(i)->m_BracketLeafId;
-
-};
 

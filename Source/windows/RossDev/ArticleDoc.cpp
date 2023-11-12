@@ -32,7 +32,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CArticleDoc construction/destruction
 
-CArticleDoc::CArticleDoc(CRossDoc* pRossDoc): m_pRossDoc(pRossDoc), m_Article(pRossDoc)
+CArticleDoc::CArticleDoc(): m_Article(nullptr)
 {
 
 
@@ -181,6 +181,7 @@ BOOL CArticleDoc::OpenArticle(uint16_t  UnitNo, CRossDoc* pRossDoc)
 {
 	m_UnitNo = UnitNo;
 	m_pRossDoc = pRossDoc;
+	m_Article = CTempArticle(pRossDoc->GetRoss());
 
 	BOOL bAutoDelete = m_bAutoDelete;
 	m_bAutoDelete = FALSE;   // don't destroy if something goes wrong
@@ -206,7 +207,6 @@ BOOL CArticleDoc::OpenArticle(uint16_t  UnitNo, CRossDoc* pRossDoc)
 	// Инициализация  CArticleView
 	CArticleView* View = GetArticleView();
 
-	m_Article.m_pRoss = GetRoss();
 	m_Article.ReadFromDictionary(UnitNo, true, false);
 
 	std::string Article = m_Article.GetArticleStrUtf8();
@@ -288,14 +288,14 @@ BOOL CArticleDoc::SaveModified()
 };
 
 
-bool CArticleDoc::AddCortegeToVector(std::vector<TCortege10>& L, CRossDevTextField& F)
+bool CArticleDoc::AddCortegeToVector(std::vector<TCortege>& L, CRossDevTextField& F)
 {
 
 	std::vector<CString>  Lines;
 	size_t Count = m_Article.GetCortegesSize();
 	for (size_t i = 0; i < Count; i++)
 	{
-		const TCortege10& C = m_Article.GetCortege(i);
+		const TCortege& C = m_Article.GetCortege(i);
 		if ((C.m_FieldNo == F.FieldNo)
 			&& (C.m_LeafId == F.LeafId)
 			&& (C.m_BracketLeafId == F.BracketLeafId)

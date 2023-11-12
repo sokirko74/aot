@@ -132,7 +132,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo) {
             if (!pRoss->IsEmptyArticle(UnitNo))
                 for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitEndPos(UnitNo); i++)
                     if (pRoss->GetCortegeFieldNo(i) == RossDoc->NESOVMFieldNo) {
-                        TCortege10 C = RossDoc->GetCortegeCopy(i);
+                        TCortege C = RossDoc->GetCortegeCopy(i);
                         if (C.is_null(0)) continue;
                         std::string S = RossDoc->GetDomItemStrWrapper(C.GetItem(0));
                         if (S.length() != 2) continue;
@@ -326,7 +326,7 @@ void CRusSemStructure::InitPOs(long ClauseNo) {
                     if (!pRoss->IsEmptyArticle(UnitNo))
                         for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitEndPos(UnitNo); i++)
                             if (pRoss->Fields[pRoss->GetCortegeFieldNo(i)].FieldStr == "DOMAIN") {
-                                TCortege10 C = RossDoc->GetCortegeCopy(i);
+                                TCortege C = RossDoc->GetCortegeCopy(i);
                                 if (C.is_null(0)) continue;
                                 std::string S = RossDoc->GetDomItemStrWrapper(C.GetItem(0));
                                 if (S != _R("общ"))

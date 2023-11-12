@@ -59,7 +59,7 @@ bool CEngSemStructure::HasStringInGF(int node_no, std::string gf_str ) const
 		
 	if( (UnitNo == ErrUnitNo) || (type == NoneRoss ) )
 		return false;
-	std::vector<TCortege10> corteges;
+	std::vector<TCortege> corteges;
 	GetRossHolder(type)->GetFieldValues(std::string("GF"),UnitNo,corteges);
 
 	if( corteges.empty() )
@@ -252,10 +252,10 @@ void  CEngSemStructure::RefineEngCollocPreps()
 		if( type!=EngCollocRoss )
 			continue;
 		int unit = m_Nodes[i].GetUnitNo();
-		std::vector<TCortege10> vec;
+		std::vector<TCortege> vec;
 		for( int j=GetRoss(type)->GetUnitStartPos(unit); j<=GetRoss(type)->GetUnitEndPos(unit); j++ )
 		{
-			TCortege10 C = GetRossHolder(type)->GetCortegeCopy(j);
+			TCortege C = GetRossHolder(type)->GetCortegeCopy(j);
 			if (C.m_BracketLeafId > 0) continue;
 			if (C.m_LeafId > 0) continue;
 			std::string field = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
@@ -457,7 +457,7 @@ void CEngSemStructure::ApplyALG_AL1(int iEngNode)
 // это появилось из-за ">> Х! : ИГ"
 
 bool CEngSemStructure::CompareCortegeItems(const CRossHolder* RossHolder,
-										   const TCortege10 &X,const TCortege10 &Y) const
+										   const TCortege &X,const TCortege &Y) const
 {
 	int iX = 0;
 	while( RossHolder->IsPosition(X.GetItem(iX)) && iX<10)

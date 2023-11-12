@@ -16,17 +16,6 @@ class CWordlist;
 
 struct CRossDevTextField;
 
-struct TBaseDomItem {
-	char ItemStr[100];
-	BYTE DomNo;
-
-	bool operator==(const TBaseDomItem& X) const
-	{return     strcmp (ItemStr, X.ItemStr) == 0; }
-
-    bool operator<(const TBaseDomItem& X) const
-	  { return  strcmp (ItemStr, X.ItemStr) < 0; }
-};
-
 
 struct CDomainParam {
 	CString DomStr;
@@ -146,8 +135,8 @@ public:
 
 // Implementation
 public:
-    std::vector<TBaseDomItem> m_BasicDomItems;
-	StringVector		m_Fields;
+    std::unordered_map<std::string, BYTE> m_BasicDomItems;
+	std::set<std::string>		m_Fields;
 
 	
 	virtual ~CRossDoc();

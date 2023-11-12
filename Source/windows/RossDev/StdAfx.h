@@ -17,8 +17,6 @@
 #include "RossDev.h"
 #include "TckTkWrapper.h"
 	
-const int MaxNumDom = 10;
-
 
 struct CRossDevTextField
 {

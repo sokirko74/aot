@@ -262,14 +262,15 @@ void CTrieHolder::Create(const std::set< CWorkRule >& Patterns, const SymbolInfo
 	fprintf (stderr, "CreateTrie\n");
 	time(&t1) ;
 	CreateTrie(Patterns);
-	time(&t2);fprintf (stderr, "Seconds = %zu\n",  t2-t1);
+	time(&t2);
+	std::cerr << "Seconds = " << t2 - t1 << "\n";
 
 	
-	//PrintChildren(0);
-	fprintf (stderr, "InitFailureFunction\n");
+	std::cerr << "InitFailureFunction\n";
 	time(&t1) ;
 	InitFailureFunction();
-	time(&t2);fprintf (stderr, "Seconds = %zu\n",  t2-t1);
+	time(&t2);
+	std::cerr << "Seconds = " << t2 - t1 << "\n";
 
 	
 	

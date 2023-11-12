@@ -12,13 +12,13 @@ public:
   // валентность, для этого актанта, взятая из поля VAL
   CValency				m_PatternValency;
   // GFi для этого актанита
-  std::vector<TCortege10>	m_GramCorteges;
+  std::vector<TCortege>	m_GramCorteges;
   // LEXi для этого актанита
   StringVector		m_LexFets;
   // MANLEXi для этого актанита
   StringVector		m_ObligLexFets;
   // DETERMi для этого актанита
-  std::vector<TCortege10>	m_ArticleCorteges;
+  std::vector<TCortege>	m_ArticleCorteges;
   // направление, в котором следует искать этот актант (см. домен D_POSITION)
   std::string				m_Direction;
   // SFi для этого актанита

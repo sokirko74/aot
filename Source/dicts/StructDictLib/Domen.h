@@ -74,4 +74,6 @@ public:
     dom_item_id_t GetDomItemIdByStr(const std::string& item_str) const;
 
     void WriteItemsToStream(std::ofstream& outp) const;
+
+    std::vector<std::string>  GetAllStrings() const;
 };

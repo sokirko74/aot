@@ -243,8 +243,8 @@ void  CGraphanDicts :: BuildOborottos ()
 				bool HasFixedFet = false;
 				size_t k = GetOborDic()->GetUnitStartPos(i);
 				for (; k <= GetOborDic()->GetUnitEndPos(i); k++)
-					if (GetOborDic()->GetCortegeFieldNo(k) == GetOborDic()->GetFieldNoByFieldStr("RESTR"))
-						if (GetOborDic()->GetCortegeItem(k,0) != -1)
+					if (GetOborDic()->GetCortege(k).m_FieldNo == GetOborDic()->GetFieldNoByFieldStr("RESTR"))
+						if (!GetOborDic()->GetCortege(k).is_null(0))
 						{
 							std::string G = GetOborDic()->GetDomItemStr(k, 0);
 							if (G == "fixed") {
@@ -253,7 +253,7 @@ void  CGraphanDicts :: BuildOborottos ()
 						};
 
 				for (k=GetOborDic()->GetUnitStartPos(i); k <= GetOborDic()->GetUnitEndPos(i); k++)
-					if (GetOborDic()->GetCortegeFieldNo(k) == GetOborDic()->GetFieldNoByFieldStr("CONTENT"))
+					if (GetOborDic()->GetCortege(k).m_FieldNo == GetOborDic()->GetFieldNoByFieldStr("CONTENT"))
 					{
 						std::string q = GetOborDic()->GetDomItemStr(k,0);
 						BuildOborot(q, i, HasFixedFet);

@@ -229,7 +229,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
                 for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo);
                      i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++) {
                     if (GetRoss(Ross)->GetCortegeFieldNo(i) == GetRossHolder(Ross)->RefFieldNo) {
-                        TCortege10 C = GetRossHolder(Ross)->GetCortegeCopy(i);
+                        TCortege C = GetRossHolder(Ross)->GetCortegeCopy(i);
                         std::string S = GetRossHolder(Ross)->GetDomItemStrWrapper(C.GetItem(0));
                         long MeanNum = -1;
                         if (!C.is_null(1)) {

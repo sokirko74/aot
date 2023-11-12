@@ -22,7 +22,7 @@ add_library(StructDictLib
         TempArticle.h
         TextField.h
 
-)
+ "DictConfig.h" "DictConfig.cpp")
 
 target_link_libraries(StructDictLib
     aot_common

@@ -158,17 +158,17 @@ bool CEngSemStructure::MakeDeverbative( int iRusActant, int iEngActant, CEngSemN
 }
 
 
-bool CEngSemStructure::HasItem(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type, std::string strItem)
+bool CEngSemStructure::HasItem(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type, std::string strItem)
 {
 	int ItemNo;
 	return HasItem(GramCorteges, CortegeNo, ItemNo, type, strItem);
 }
 
-bool CEngSemStructure::HasItem(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, std::string strItem)
+bool CEngSemStructure::HasItem(const std::vector<TCortege>& GramCorteges, long& CortegeNo, int& ItemNo, DictTypeEnum type, std::string strItem)
 {
 	for(int i = 0 ; i < GramCorteges.size() ; i++ )
 	{
-		const TCortege10& cortege = GramCorteges[i];
+		const TCortege& cortege = GramCorteges[i];
 		if( (GetItemStr(cortege.GetItem(0), type).find(strItem) != string::npos) && cortege.is_null(1) )
 		{
 			CortegeNo = i;
@@ -188,7 +188,7 @@ bool CEngSemStructure::HasItem(const std::vector<TCortege10>& GramCorteges, long
 	return false;
 }
 
-bool CEngSemStructure::HasGerund(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type)
+bool CEngSemStructure::HasGerund(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type)
 {
 	if( type == NoneRoss )
 		return false;
@@ -196,13 +196,13 @@ bool CEngSemStructure::HasGerund(const std::vector<TCortege10>& GramCorteges, lo
 	return HasItem(GramCorteges, CortegeNo, type, "gerund");
 }
 
-std::string CEngSemStructure::GetConj(const std::vector<TCortege10>& GramCorteges, DictTypeEnum type)
+std::string CEngSemStructure::GetConj(const std::vector<TCortege>& GramCorteges, DictTypeEnum type)
 {
 	long iCortege;
 	int iItem;
 	if( HasItem(GramCorteges, iCortege, iItem, type, "+sent") || HasItem(GramCorteges, iCortege, iItem, type, "+subj_clause"))
 	{
-		const TCortege10& cortege = GramCorteges[iCortege];
+		const TCortege& cortege = GramCorteges[iCortege];
 		std::string strItem = GetItemStr(cortege.GetItem(iItem), type);
 
 		int ii = strItem.find("+sent"); 		
@@ -220,18 +220,18 @@ std::string CEngSemStructure::GetConj(const std::vector<TCortege10>& GramCortege
 	return "";
 }
 
-bool CEngSemStructure::HasToPlusInf(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type)
+bool CEngSemStructure::HasToPlusInf(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type)
 {
 	return HasItem(GramCorteges, CortegeNo, type, "to+inf");
 }
 
 
-bool CEngSemStructure::HasInf(const std::vector<TCortege10>& GramCorteges, long& CortegeNo, DictTypeEnum type)
+bool CEngSemStructure::HasInf(const std::vector<TCortege>& GramCorteges, long& CortegeNo, DictTypeEnum type)
 {
 	return HasItem(GramCorteges, CortegeNo, type, "+inf");
 }
 
-std::string CEngSemStructure::GetGerundPrep(const TCortege10& cortege, DictTypeEnum type)
+std::string CEngSemStructure::GetGerundPrep(const TCortege& cortege, DictTypeEnum type)
 {
 	std::string item = GetItemStr(cortege.GetItem(0), type);
 	int i = item.find("+gerund");
@@ -249,7 +249,7 @@ std::string CEngSemStructure::GetGerundPrep(const TCortege10& cortege, DictTypeE
 		return item.substr(0, i);
 }
 
-bool CEngSemStructure::Rule_TranslateInfinitive( int iRusActant, long RelationNo, const std::vector<TCortege10>& GramCorteges, int iEngNode)
+bool CEngSemStructure::Rule_TranslateInfinitive( int iRusActant, long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode)
 {
 	CEngSemRelation& semEngRel = m_Relations[RelationNo];
 	CEngSemNode& engNode = m_Nodes[iEngNode];
@@ -351,7 +351,7 @@ bool CEngSemStructure::Rule_TranslateInfinitive( int iRusActant, long RelationNo
 
 /////////////////////////////////////////////////////////////////////////////
 
-bool CEngSemStructure::Rule_TranslatePoss(int iRusActant,long RelationNo, const std::vector<TCortege10>& GramCorteges, int iEngNode)
+bool CEngSemStructure::Rule_TranslatePoss(int iRusActant,long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode)
 {
 	CEngSemRelation& semEngRel = m_Relations[RelationNo];
 
@@ -415,7 +415,7 @@ bool CEngSemStructure::Rule_TranslatePoss(int iRusActant,long RelationNo, const 
 
 /////////////////////////////////////////////////////////////////////////////
 
-bool CEngSemStructure::Rule_TranslateObj(int iRusActant,long EngRelNo, const std::vector<TCortege10>& GramCorteges, int iEngNode)
+bool CEngSemStructure::Rule_TranslateObj(int iRusActant,long EngRelNo, const std::vector<TCortege>& GramCorteges, int iEngNode)
 {
 	CEngSemRelation& semEngRel  = m_Relations[EngRelNo];
 	const CSemNode& rusActant = RusStr.GetNode(iRusActant);
@@ -456,7 +456,7 @@ bool CEngSemStructure::Rule_TranslateObj(int iRusActant,long EngRelNo, const std
 
 /////////////////////////////////////////////////////////////////////////////
 
-bool CEngSemStructure::Rule_TranslateSubj(int iRusActant,long EngRelNo, const std::vector<TCortege10>& GramCorteges, int iEngNode)
+bool CEngSemStructure::Rule_TranslateSubj(int iRusActant,long EngRelNo, const std::vector<TCortege>& GramCorteges, int iEngNode)
 {
 	CEngSemRelation& semEngRel  = m_Relations[EngRelNo];
 	const CSemNode& rusActant = RusStr.GetNode(iRusActant);

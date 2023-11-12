@@ -174,7 +174,7 @@ bool CRusSemStructure::ContainsSemCopul(long NodeNo) const
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EndCortegeNo; i++)
 	{
-		TCortege10 C = pHolder->GetCortegeCopy(i);
+		TCortege C = pHolder->GetCortegeCopy(i);
 		if	(		(C.m_LeafId > 0) 
 				&&	(C.m_FieldNo == pHolder->GramFetFieldNo) 
 				&&	!C.is_null(0) 
@@ -1189,9 +1189,9 @@ bool IsBetween (const CRusSemNode& Node, const CRusSemNode& LowerBound, const CR
 			 && Node.GetMinWordNo()		  < UpperBound.GetMinWordNo();
 };
 
-TCortege10 GetSubjCortege (const CRossHolder* RossDoc)
+TCortege GetSubjCortege (const CRossHolder* RossDoc)
 {
-          TCortege10 C;
+          TCortege C;
 		  C.m_FieldNo = RossDoc->GramFetFieldNo;
 		  C.m_LeafId = 1;
 		  C.m_LevelId = 0;
@@ -1200,9 +1200,9 @@ TCortege10 GetSubjCortege (const CRossHolder* RossDoc)
 		  return C;
 };
 
-TCortege10 GetInstrObj (const CRossHolder* RossDoc)
+TCortege GetInstrObj (const CRossHolder* RossDoc)
 {
-          TCortege10 C;
+          TCortege C;
 		  C.m_FieldNo = RossDoc->GramFetFieldNo;
 		  C.m_LeafId = 2;
 		  C.m_LevelId = 0;

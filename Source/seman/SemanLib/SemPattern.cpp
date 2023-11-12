@@ -49,15 +49,15 @@ dom_item_id_t CSemPattern::GetSynFet(long CortegeNo) const
 
 std::string  CSemPattern::GetSynFetStr(long cortege_no) const
 {
-	auto c = m_pRossDoc->GetRoss()->GetCortegePtr(cortege_no);
-	dom_item_id_t item_id = m_pRossDoc->GetSynFet(*c);
+	auto c = m_pRossDoc->GetRoss()->GetCortege(cortege_no);
+	dom_item_id_t item_id = m_pRossDoc->GetSynFet(c);
 	return  m_pRossDoc->GetDomItemStrWrapper(item_id);
 };
 
 std::string  CSemPattern::GetSynRelStr(long cortege_no) const
 {
-	auto c = m_pRossDoc->GetRoss()->GetCortegePtr(cortege_no);
-	auto item_id = m_pRossDoc->GetSynRel(*c);
+	auto c = m_pRossDoc->GetRoss()->GetCortege(cortege_no);
+	auto item_id = m_pRossDoc->GetSynRel(c);
 	return  m_pRossDoc->GetDomItemStrWrapper(item_id);
 };
 
@@ -120,7 +120,7 @@ bool CSemPattern::LoadSemFromDict()
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)
 	{
-		TCortege10 C = m_PatternValency.m_RossHolder->GetCortegeCopy(i);
+		TCortege C = m_PatternValency.m_RossHolder->GetCortegeCopy(i);
 
 		if (     (C.m_FieldNo == m_PatternValency.m_RossHolder->SemFetFieldNo) 
 			&& (C.m_LeafId == m_PatternValency.m_LeafId) 
@@ -171,7 +171,7 @@ bool CSemPattern::LoadGramFromDict()
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)
 	{
-		TCortege10 C = m_PatternValency.m_RossHolder->GetCortegeCopy(i);
+		TCortege C = m_PatternValency.m_RossHolder->GetCortegeCopy(i);
 		if	(		(C.m_LeafId != m_PatternValency.m_LeafId) 
 				||	(C.m_BracketLeafId != m_PatternValency.m_BracketLeafId) 
 			)

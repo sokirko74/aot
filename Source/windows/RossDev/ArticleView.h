@@ -67,7 +67,7 @@ public:
 	CDictionary* GetRoss ();
 	CRossDoc*  GetRossDoc ();
 	void   	GotoLastField();
-	void	WriteToEdit (std::vector<TCortege10>& L, size_t nPos);
+	void	WriteToEdit (std::vector<TCortege>& L, size_t nPos);
 	void	DelField(size_t nPos);
 
 // Overrides

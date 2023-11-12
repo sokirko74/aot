@@ -147,7 +147,7 @@ struct CSynRealization {
     long m_CortegeNo;
 
     // сохраненный кортеж  CSemPattern::m_GramCorteges[m_CortegeNo]
-    TCortege10 m_Cortege;
+    TCortege m_Cortege;
 
     // добавлено для статьи "не ранее", в которой используется специальная константа А1(НЕ)
     std::string m_AlgStr;

@@ -971,7 +971,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 	if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
 		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
 		{
-			TCortege10 C = GetRossHolder(Ross)->GetCortegeCopy(i);
+			TCortege C = GetRossHolder(Ross)->GetCortegeCopy(i);
 			std::string s = GetRoss(Ross)->WriteToString(C);
 			m_SemCoefs.ReadOneCoef(s);
 		};

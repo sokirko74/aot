@@ -1,3 +1,4 @@
-MaxNumDom 3
-MaxMeanNum 7
-DictName GerOborots
+{
+	"MaxNumDom": 3,
+	"DictName": "GerOborots"
+}

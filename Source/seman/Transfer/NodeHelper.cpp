@@ -150,7 +150,7 @@ bool NodeHelper::FieldContainsValueInner(DictTypeEnum type, uint16_t unit_no,
 {
 	if(unit_no == ErrUnitNo) return false;
 	if (type == NoneRoss) return false;
-	std::vector<TCortege10> vec;
+	std::vector<TCortege> vec;
 	try{
 		E.GetRossHolder(type)->GetFieldValues(field.c_str(), unit_no, vec, leaf);
 	}catch(...){
@@ -171,11 +171,11 @@ bool NodeHelper::FieldContainsValueInner(DictTypeEnum type, uint16_t unit_no,
 void NodeHelper::GetFieldValues(DictTypeEnum dict_kind, uint16_t unit_no, const std::string &field, 
 				 StringVector &res, int max_items) const
 {
-	std::vector<TCortege10> vec;
+	std::vector<TCortege> vec;
 	E.GetRossHolder(dict_kind)->GetFieldValues(field.c_str(), unit_no, vec);
 	for(auto& c: vec) {
 		std::string value;
-		for(int j = 0; c.GetMaxNumDom(); j++) {
+		for(int j = 0; MaxNumDom; j++) {
 			if (c.is_null(j)) break;
 			if (j || j > max_items) break;
 			value += E.GetRoss(dict_kind)->GetDomItemStr(c.GetItem(j));

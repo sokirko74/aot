@@ -30,7 +30,7 @@ void update_article(const CSemPattern& P, CEngSemNode& N)
 	try{
 		for (long i=0; i < P.m_ArticleCorteges.size(); i++)
 		{
-			const TCortege10& C = P.m_ArticleCorteges[i];
+			const TCortege& C = P.m_ArticleCorteges[i];
 			std::string ArticleStr = P.m_pRossDoc->GetRoss()->GetDomItemStr(C.GetItem(0));
 		    if (ArticleStr != "")
 			{

@@ -4,7 +4,7 @@
 #include "StdAfx.h"
 
 
-void CEngSemStructure::FillVectorOfGramCortegeAndType(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV,std::vector<TCortege10>&  GramCorteges, DictTypeEnum type)
+void CEngSemStructure::FillVectorOfGramCortegeAndType(std::vector<SGramCortegesAndType>& GramCortegesAndTypeV,std::vector<TCortege>&  GramCorteges, DictTypeEnum type)
 {
 	for( int i=0; i<GramCorteges.size(); i++ )
 	{
@@ -50,7 +50,7 @@ void CEngSemStructure::GetGramCortegesAndTypeFromRel(std::vector<SGramCortegesAn
 	else
 		iEngNode = semRel.m_SourceNodeNo;
 
-	std::vector<TCortege10> GramCorteges;
+	std::vector<TCortege> GramCorteges;
 	if( semRel.m_bInterpreted && !semRel.m_Pattern.IsEmpty() )
 	{
 		GramCorteges = semRel.m_Pattern.m_GramCorteges;
@@ -237,7 +237,7 @@ EGramCortegeType CEngSemStructure::GetGramCortegeType(std::string& gram_str)
 
 /////////////////////////////////////////////////////////////////////////////
 
-EGramCortegeType CEngSemStructure::GetGramCortegeType(TCortege10& cortege, DictTypeEnum type)
+EGramCortegeType CEngSemStructure::GetGramCortegeType(TCortege& cortege, DictTypeEnum type)
 {
 	if( cortege.is_null(0))
 		return UnknownGram;
@@ -269,9 +269,9 @@ AddSemRelToGramCortege("MULTI", CreateCortege("of+NP", "D_1"));
 
 /////////////////////////////////////////////////////////////////////////////
 
-TCortege10 CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen)
+TCortege CEngSemStructure::CreateCortege(std::string strGX, std::string strDomen)
 {
-	TCortege10 cortege;
+	TCortege cortege;
 	auto item_id = GetRoss(Aoss)->GetItemIdByItemStr(strGX, GetRoss(Aoss)->GetDomenNoByDomStr(strDomen.c_str()));
 	cortege.SetItem(0, item_id);
 	return cortege;
@@ -280,7 +280,7 @@ TCortege10 CEngSemStructure::CreateCortege(std::string strGX, std::string strDom
 /////////////////////////////////////////////////////////////////////////////
 
 
-void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege10 cortege)
+void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege cortege)
 {
 	if( cortege.is_null(0))
 		return;
@@ -299,7 +299,7 @@ void CEngSemStructure::AddSemRelToGramCortege(std::string semRel, TCortege10 cor
 				int p = 0 ;
 				for(; p < (*it).second[i].m_WeightGramCorteges.size() ; p++ )
 				{
-					if( (*it).second[i].m_WeightGramCorteges[p].m_GramCortege.HasEqualItems(cortege, 3 ) )
+					if( (*it).second[i].m_WeightGramCorteges[p].m_GramCortege.HasEqualItems(cortege) )
 					{
 						(*it).second[i].m_WeightGramCorteges[p].m_Weight++;
 						break;

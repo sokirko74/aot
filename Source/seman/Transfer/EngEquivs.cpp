@@ -285,7 +285,7 @@ void CEngSemStructure::IntersectEngEquivs(std::vector<SEngEquiv >& vectorEngEqui
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, std::vector<TCortege10>& vectorAgx, long UnitNo) const
+void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, std::vector<TCortege>& vectorAgx, long UnitNo) const
 {
 	if( type == NoneRoss)
 		return;
@@ -318,7 +318,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	if( DictType == NoneRoss )
 		return;
 //
-	std::vector<TCortege10> corteges;
+	std::vector<TCortege> corteges;
 	GetRossHolder(DictType)->GetFieldValues(std::string("ENG"),RusUnitNo,corteges);
 
 	for( const auto& c: corteges)
@@ -370,7 +370,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	std::vector<SEngEquiv> tempEngEquivs;
 	
 // обработка ENUMBER
-	std::vector<TCortege10> vectorAnm;
+	std::vector<TCortege> vectorAnm;
 	GetAFieldVector("ENUMBER", DictType,vectorAnm,RusUnitNo);
 
 	std::vector<long> vecListByAnm;
@@ -412,7 +412,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	}
 
 // обработка EDOMAIN
-	std::vector<TCortege10> vectorApo;
+	std::vector<TCortege> vectorApo;
 	GetAFieldVector("EDOMAIN", DictType,vectorApo,RusUnitNo);
 	long ClauseNo = RusStr.GetNode(iRusNode).m_ClauseNo;
 	std::string tema = RusStr.GetClausePO(ClauseNo);
@@ -444,7 +444,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 
 
 // обработка ELEX
-	std::vector<TCortege10> vectorAlx;
+	std::vector<TCortege> vectorAlx;
 	GetAFieldVector("ELEX", DictType,vectorAlx,RusUnitNo);
 
 	std::vector<long> vecGoodByAlx;
@@ -525,7 +525,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 
 	
 // обработка EOPERATOR
-	std::vector<TCortege10> vectorAop;
+	std::vector<TCortege> vectorAop;
 	GetAFieldVector("EOPERATOR", DictType,vectorAop,RusUnitNo);
 
 	std::vector<long> vecGoodByAop;
@@ -582,7 +582,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 
 
 	// обработка EPREP
-	std::vector<TCortege10> vectorAPredlog;
+	std::vector<TCortege> vectorAPredlog;
 	GetAFieldVector("EPREP",DictType,vectorAPredlog,RusUnitNo);
 
 	std::vector<long> vecGoodByAPredlog;
@@ -608,7 +608,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	}
 
 	// обработка ELF
-	std::vector<TCortege10> vectorAlf;
+	std::vector<TCortege> vectorAlf;
 	GetAFieldVector("ELF", DictType,vectorAlf,RusUnitNo);
 
 	std::vector<long> vecGoodByALF;
@@ -656,7 +656,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	StringVector domens;
 	domens.push_back("D_GRAMMEMS");
 
-	std::vector<TCortege10> vectorAgx;
+	std::vector<TCortege> vectorAgx;
 	GetAFieldVector("EGF", DictType,vectorAgx,RusUnitNo);
 
 	std::vector<long> vecListByAgx;
@@ -771,7 +771,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 	} // vectorAgx.size()
 
 // обработка ESF
-	std::vector<TCortege10> vectorAcx;
+	std::vector<TCortege> vectorAcx;
 	GetAFieldVector("ESF", DictType,vectorAcx,RusUnitNo);
 
 	std::vector<long> vecListByAcx;

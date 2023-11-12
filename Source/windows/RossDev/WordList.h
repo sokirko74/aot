@@ -85,7 +85,7 @@ struct TreeNode{
        CString Line;
        for (size_t i =0; i < Vals.size(); i++)
 	   { CString Q;
-	     Q.Format("%s (%s) ", (const char*)Ross->GetDomItemStr(Vals[i].ValNo), (Vals[i].A_C) ? "A,C": "C,A");
+	     Q.Format("%s (%s) ", Ross->GetDomItemStr(Vals[i].ValNo).c_str(), (Vals[i].A_C) ? "A,C" : "C,A");
 		 Line += Q;
 	   };
 	   return Line;
@@ -291,7 +291,6 @@ protected:
 	afx_msg void OnDelAllSelected();
 	afx_msg void OnSetAuthor();
 	afx_msg void OnSelectByAuthor();
-	afx_msg void OnGXiStatistics();
 	afx_msg void OnDblclkWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnSelectDownward();
 	afx_msg void OnEmptyArticles();

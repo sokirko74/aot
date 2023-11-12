@@ -102,8 +102,7 @@ void CRusSyntaxOpt::DestroyOptions() {
 };
 
 
-void BuildArticleFromUtf8String(CDictionary *piRossDict, std::string s, CTempArticle &A1) {
-    A1.m_pRoss = piRossDict;
+static void BuildArticleFromUtf8String(CDictionary *piRossDict, std::string s, CTempArticle &A1) {
     A1.ReadFromUtf8String(s.c_str());
     A1.MarkUp();
     A1.BuildCortegeList();
@@ -131,7 +130,6 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
 
 
         CTempArticle A(piRossDict);
-        A.m_pRoss = piRossDict;
 
         for (i = 0; i < iSize; i++) {
             A.ReadFromDictionary(i, false, true);

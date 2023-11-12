@@ -99,9 +99,9 @@ void  CRusSemStructure::InitPassivePattern(size_t NodeNo, BYTE ValencyNo, CSemPa
 
 
 
-inline TCortege10 GetFullGleicheRightCortege(const CRossHolder* RossDoc, BYTE LeafId)
+inline TCortege GetFullGleicheRightCortege(const CRossHolder* RossDoc, BYTE LeafId)
 {
-	TCortege10 C;
+	TCortege C;
 	C.m_FieldNo = RossDoc->GramFetFieldNo;;
 	C.m_LeafId = LeafId;
 	C.m_LevelId = 0;
@@ -296,7 +296,7 @@ bool CRusSemStructure::CheckPatternReverseGramFetLine(CSemPattern& P, CSynRealiz
 {
 	long SynFet = P.GetSynFet(SynRealization.m_CortegeNo);
 	std::string SynFetStr = P.GetSynFetStr(SynRealization.m_CortegeNo);
-	TCortege10& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
+	TCortege& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
 
 	if (m_Nodes[P.m_SourceNo].m_bFullGleiche
 		|| HasRichPOS(P.m_SourceNo, ADV)
@@ -505,7 +505,7 @@ bool CRusSemStructure::CheckPatternGramFetLine(CSemPattern& P, CSynRealization& 
 {
 	SynRealization.SetEmpty();
 
-	TCortege10& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
+	TCortege& C = P.m_GramCorteges[SynRealization.m_CortegeNo];
 
 
 	if (P.m_pRossDoc->IsVerbFet(C.GetItem(0)))
