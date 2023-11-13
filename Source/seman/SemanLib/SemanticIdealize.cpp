@@ -82,7 +82,7 @@ long CRusSemStructure::Idealize() {
                     if (!(N.m_Words[0].m_Lemma == _R("ОН"))
                         && !(N.m_Words[0].m_Lemma == _R("ОНА"))
                         && !(N.HasOneGrammem(rAnimative) && N.HasOneGrammem(rNonAnimative))
-                            )
+                        )
                         continue;
                     N.DeleteGrammems(_QM(rAnimative) | _QM(rNonAnimative));
                     if (HasSemFetOrLower(N, "ANIM"))
@@ -101,11 +101,11 @@ long CRusSemStructure::Idealize() {
             if (m_Nodes[m_Relations[i].m_TargetNodeNo].IsPrimitive())
                 if (m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Lemma == _R("КАК")) {
                     if (HasRichPOS(m_Relations[i].m_SourceNodeNo, ADJ_SHORT))
-                        m_Relations[i].m_SyntacticRelation = _R("НАР_ПРИЛ");
+                        m_Relations[i].m_SyntacticRelation = "НАР_ПРИЛ";
                     if (HasRichPOS(m_Relations[i].m_SourceNodeNo, PREDK))
-                        m_Relations[i].m_SyntacticRelation = _R("НАР_ПРЕДИК");
+                        m_Relations[i].m_SyntacticRelation = "НАР_ПРЕДИК";
                     if (HasRichPOS(m_Relations[i].m_SourceNodeNo, ADV))
-                        m_Relations[i].m_SyntacticRelation = _R("НАР_НАР");
+                        m_Relations[i].m_SyntacticRelation = "НАР_НАР";
                 };
 
 
@@ -179,7 +179,7 @@ void CRusSemStructure::ConvertVSE2_toOperator() {
         if (R.m_RelsCount != 1) continue;
         long nd = m_Relations[R.m_Rels[0]].m_SourceNodeNo;
         if (!IsVerbForm(m_Nodes[nd])) continue;
-        m_Nodes[nd].m_RelOperators.push_back(_R("ПРОДОЛЖ"));
+        m_Nodes[nd].m_RelOperators.push_back("ПРОДОЛЖ");
         if (CanBeDeleted(NodeNo)) {
             DelNode(NodeNo);
             NodeNo--;
@@ -191,27 +191,27 @@ void CRusSemStructure::ConvertVSE2_toOperator() {
 void CRusSemStructure::InterpretAdjNounGroupsAfter() {
     // меняем направление стрелки для отношений ЧИСЛ_СУЩ, ПРИЛ_СУЩ
     for (long i = 0; i < m_Relations.size(); i++)
-        if ((m_Relations[i].m_SyntacticRelation == _R("ЧИСЛ_СУЩ"))
-            || (m_Relations[i].m_SyntacticRelation == _R("АППРОКС_ИГ"))
-            || (m_Relations[i].m_SyntacticRelation == _R("НАР_ЧИСЛ_СУЩ"))
+        if ((m_Relations[i].m_SyntacticRelation == "ЧИСЛ_СУЩ")
+            || (m_Relations[i].m_SyntacticRelation == "АППРОКС_ИГ")
+            || (m_Relations[i].m_SyntacticRelation == "НАР_ЧИСЛ_СУЩ")
                 ) {
             // swap(m_Relations[i].m_SourceNodeNo, m_Relations[i].m_TargetNodeNo);
             m_Relations[i].m_Valency.m_Direction = A_C;
             if (m_Relations[i].m_Valency.m_RelationStr.empty())
                 m_Relations[i].m_Valency.m_RelationStr = "QUANTIT";
-        } else if ((m_Relations[i].m_SyntacticRelation == _R("ПРИЛ_СУЩ"))
-                   || (m_Relations[i].m_SyntacticRelation == _R("НАР_ПРИЛ"))
-                   || (m_Relations[i].m_SyntacticRelation == _R("МОДИФ_ПРИЛ"))
+        } else if ((m_Relations[i].m_SyntacticRelation == "ПРИЛ_СУЩ")
+                   || (m_Relations[i].m_SyntacticRelation == "НАР_ПРИЛ")
+                   || (m_Relations[i].m_SyntacticRelation == "МОДИФ_ПРИЛ")
                 ) {
             //swap(m_Relations[i].m_SourceNodeNo, m_Relations[i].m_TargetNodeNo);
             m_Relations[i].m_Valency.m_Direction = A_C;
             if (m_Relations[i].m_Valency.m_RelationStr.empty())
                 m_Relations[i].m_Valency.m_RelationStr = "PROPERT";
-        } else if ((m_Relations[i].m_SyntacticRelation == _R("ОДНОР_ПРИЛ"))) {
+        } else if ((m_Relations[i].m_SyntacticRelation == "ОДНОР_ПРИЛ")) {
             m_Nodes[m_Relations[i].m_SourceNodeNo].m_NodeType = MNA;
             m_Nodes[m_Relations[i].m_SourceNodeNo].m_MNAType = SimpleMNA;
 
-        } else if (m_Relations[i].m_SyntacticRelation == _R("НАРЕЧ_ГЛАГОЛ")) {
+        } else if (m_Relations[i].m_SyntacticRelation == "НАРЕЧ_ГЛАГОЛ") {
             if (m_Relations[i].m_Valency.m_RelationStr.empty())
                 m_Relations[i].m_Valency.m_RelationStr = "ASPECT";
         };
@@ -257,7 +257,7 @@ void CRusSemStructure::ApplySubordinationCases() {
 
             // если у глагола есть отрицание, и он  валентен на п_доп, тогда
             // он может управлять как номинативом, так и генитивом
-            if (m_Nodes[m_Relations[MainRelNo].m_SourceNodeNo].HasRelOperator(_R("НЕ")))
+            if (m_Nodes[m_Relations[MainRelNo].m_SourceNodeNo].HasRelOperator("НЕ"))
                 if (RossHolder->GetSynRel(C) == RossHolder->DirectObjSynONo)
                     Grammems = _QM(rAccusativ) | _QM(rGenitiv);
             // запускаем удаление анкодов, только если  внешние и внутренние граммемы равны,
@@ -588,7 +588,7 @@ void CRusSemStructure::FindQuestionClauses() {
                 std::vector<long> Nodes;
                 GetClauseRootsWithoutDeleted(i, Nodes);
                 if (Nodes.size() != 1) continue;
-                if (!m_Nodes[Nodes[0]].HasRelOperator(_R("НИ"))) continue;
+                if (!m_Nodes[Nodes[0]].HasRelOperator("НИ")) continue;
                 m_Clauses[i].m_bQuestion = true;
                 m_Nodes[Nodes[0]].m_RelOperators.push_back("no_matter");
                 m_Clauses[i].m_HasParticleBY = false;
@@ -624,7 +624,7 @@ void CRusSemStructure::FindQuestionClauses() {
 
         for (long i = 0; i < m_Clauses.size(); i++)
             if ((m_Clauses[i].m_ClauseRuleNo != -1)
-                && (m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name == _R("сочинение"))
+                && (m_ClauseRules[m_Clauses[i].m_ClauseRuleNo].m_Name == "сочинение")
                     )
                 for (long j = 0; j < SimilClauses.size(); j++)
                     if (m_Clauses[i].m_HostClause == SimilClauses[j])
@@ -719,7 +719,7 @@ void CRusSemStructure::ConvertParticipleTreeToClause() {
                 };
                 m_Clauses.back().m_HostClause = ClauseNo;
                 for (i = 0; i < m_ClauseRules.size(); i++)
-                    if (m_ClauseRules[i].m_Name == _R("причастный оборот")) {
+                    if (m_ClauseRules[i].m_Name == "причастный оборот") {
                         m_Clauses.back().m_ClauseRuleNo = i;
                         break;
                     };

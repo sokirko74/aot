@@ -935,7 +935,7 @@ std::string CEngSynthes::collect_results(int node)
     if (Res(node).m_bParenth)
 		res = " , " + res + " , ";
 
-    if (Node(node).HasRelOperator(_R("КАК_МОЖНО")))
+    if (Node(node).HasRelOperator("КАК_МОЖНО"))
 	{
 		res  = " as "+ res + " as possible ";
 	};
@@ -1379,10 +1379,10 @@ void CEngSynthes::handle_rel_operators(int node, bool with_no)
 		res_node = Rel(in_rel).m_SourceNodeNo;
 
 	if(with_no)
-	if(HasRelOperator(node, _R("НЕ")))		Res(res_node).rel_operator += "not ";
+	if(HasRelOperator(node, "НЕ"))		Res(res_node).rel_operator += "not ";
 
-	if(HasRelOperator(node, _R("ДАЖЕ")))	Res(res_node).rel_operator += "even ";
-	if(HasRelOperator(node, _R("ТОЛЬКО")))
+	if(HasRelOperator(node, "ДАЖЕ"))	Res(res_node).rel_operator += "even ";
+	if(HasRelOperator(node, "ТОЛЬКО"))
 		Res(res_node).rel_operator += "only ";
 }
 

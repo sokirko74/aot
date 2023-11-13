@@ -15,57 +15,21 @@ enum FioItemTypeEnum { fiName, fiSurname, fiMiddle, fiAbbr, fiStop, fiRoman, fiP
 struct CFIOItem {
 	FioItemTypeEnum m_fiType;
 	std::string			m_ItemStr;
+	CFIOItem(FioItemTypeEnum fiType) : m_fiType(fiType) {};
+	CFIOItem(FioItemTypeEnum fiType, std::string itemStr) : m_fiType(fiType), m_ItemStr() {};
 };
 
 
 struct CFIOFormat
 {
-	std::string m_FormatStr;
 	bool   m_GleicheCase;
 	std::vector<CFIOItem> m_FioItems;
 	CFIOFormat() {};
 
-	CFIOFormat(std::string  FormatStr, bool GleicheCase)
+	CFIOFormat(std::vector< CFIOItem> fio_items, bool GleicheCase)
 	{
-		m_FormatStr = FormatStr;
+		m_FioItems = fio_items;
 		m_GleicheCase = GleicheCase;
-		StringTokenizer tok(FormatStr.c_str(), " ");
-		while (tok())
-		{
-			std::string s = tok.val();
-			FioItemTypeEnum t;
-			if (s == _R("ИМЯ"))
-				t = fiName;
-			else
-				if (s == _R("ФАМИЛИЯ"))
-					t = fiSurname;
-				else
-					if (s == _R("ОТЧЕСТВО"))
-						t = fiMiddle;
-					else
-						if (s == _R("ИНИЦИАЛ"))
-							t = fiAbbr;
-						else
-							if (s == _R("ТОЧКА"))
-								t = fiStop;
-							else
-								if (s == _R("РИМСК_ЦК"))
-									t = fiRoman;
-								else
-									if (s == _R("ИМ?"))
-										t = fiProbName;
-									else
-										if (s == _R("ПОРЯД_ЧИСЛ"))
-											t = fiOrdinal;
-										else
-										{
-											t = fiString;
-										};
-			CFIOItem I;
-			I.m_fiType = t;
-			I.m_ItemStr = s;
-			m_FioItems.push_back(I);
-		};
 	};
 };
 
@@ -238,20 +202,22 @@ bool CMAPost::SetFioFormat(const CFIOFormat* Format, CLineIter it)
 
 void CMAPost::Rule_Fio()
 {
-	std::vector<CFIOFormat> FioFormats;
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ ОТЧЕСТВО ФАМИЛИЯ"), true));
-	FioFormats.push_back(CFIOFormat(_R("ФАМИЛИЯ ИМЯ ОТЧЕСТВО"), true));
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ ФАМИЛИЯ"), true));
-	FioFormats.push_back(CFIOFormat(_R("ФАМИЛИЯ ИМЯ"), true));
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ ОТЧЕСТВО"), true));
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ ИМЯ ИМ?"), false)); // Эрих Мария Ремарк
-	FioFormats.push_back(CFIOFormat(_R("ИНИЦИАЛ ТОЧКА ИНИЦИАЛ ТОЧКА ФАМИЛИЯ"), false)); // М.Горбачев
-	FioFormats.push_back(CFIOFormat(_R("ИНИЦИАЛ ТОЧКА ФАМИЛИЯ"), false)); // М.Горбачев
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ ИМЯ РИМСК_ЦК"), false)); // Иоанн Павел II
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ РИМСК_ЦК"), false)); // Александр II
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ ПОРЯД_ЧИСЛ"), true)); // Александр Второй
-	FioFormats.push_back(CFIOFormat(_R("ИМЯ ИМЯ ПОРЯД_ЧИСЛ"), false)); // Иоанн Павел Второй
-	FioFormats.push_back(CFIOFormat(_R("ДОН ЖУАН"), false)); // Дон Жуан
+	std::vector<CFIOFormat> FioFormats = {
+		{ { fiName, fiMiddle, fiSurname }, true },
+		{ { fiName, fiMiddle, fiSurname }, true},
+		{ { fiSurname, fiName, fiMiddle }, true},
+		{ { fiName, fiSurname }, true},
+		{ { fiSurname, fiName }, true},
+		{ { fiName, fiMiddle }, true},
+		{ { fiName, fiName, fiProbName }, false}, // Эрих Мария Ремарк
+		{ { fiAbbr, fiStop, fiAbbr, fiStop, fiSurname }, false}, // М.Горбачев
+		{ { fiAbbr, fiStop, fiSurname }, false}, // М.Горбачев
+		{ { fiName, fiName, fiRoman }, false}, // Иоанн Павел II
+		{ { fiName, fiRoman }, false}, // Александр II
+		{ { fiName, fiOrdinal }, true}, // Александр Второй
+		{ { fiName, fiName, fiOrdinal}, false}, // Иоанн Павел Второй
+		{ { {fiString, _R("ДОН")}, { fiString, _R("ЖУАН") } }, false } // Дон Жуан
+	};
 
 
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)

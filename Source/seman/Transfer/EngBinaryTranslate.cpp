@@ -231,16 +231,16 @@ void add_rel_operators(CEngSemNode& Node)
 	// добавление стандартных префиксов
 	if (Node.m_RelOperators.size() > 0)
 		for (long i = Node.m_RelOperators.size() - 1; i >= 0; i--)
-			if (Node.m_RelOperators[i] == _R("АВИА"))
+			if (Node.m_RelOperators[i] == "АВИА")
 				Node.m_Words[WordNo].m_Word = "aero" + Node.m_Words[WordNo].m_Word;
 			else
-				if (Node.m_RelOperators[i] == _R("ВИЦЕ-"))
+				if (Node.m_RelOperators[i] == "ВИЦЕ-")
 					Node.m_Words[WordNo].m_Word = "vice-" + Node.m_Words[WordNo].m_Word;
 				else
-					if (Node.m_RelOperators[i] == _R("ЭКС-"))
+					if (Node.m_RelOperators[i] == "ЭКС-")
 						Node.m_Words[WordNo].m_Word = "ex-" + Node.m_Words[WordNo].m_Word;
 					else
-						if (Node.m_RelOperators[i] == _R("ПОЛУ"))
+						if (Node.m_RelOperators[i] == "ПОЛУ")
 						{
 							if (Node.GetPos() == eADJ)
 								Node.m_Words[WordNo].m_Word = "semi" + Node.m_Words[WordNo].m_Word;
@@ -249,7 +249,7 @@ void add_rel_operators(CEngSemNode& Node)
 						}
 						else
 							/* переводим фразу "все больше людей"-> "more and more people"*/
-							if ((Node.m_RelOperators[i] == _R("ПРОДОЛЖ"))
+							if ((Node.m_RelOperators[i] == "ПРОДОЛЖ")
 								&& (Node.HasGrammemRich(eComparativ))
 								)
 							{
@@ -291,7 +291,7 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 	// отрубаем множественное число у конструкций типа half an hour, чтобы
 	// не получилось half hours.
 	if (Node.GetPos() == eNOUN)
-		if (Node.HasRelOperator(_R("ПОЛУ")))
+		if (Node.HasRelOperator("ПОЛУ"))
 		{
 			Node.AddOneGrammemRich(eSingular);
 			Node.DeleteGrammemsRich(_QM(ePlural));

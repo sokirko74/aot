@@ -426,7 +426,7 @@ void  CEngSemStructure::InitArticleField ()
 
 		 // ЭЛЕКТ_ИГ
 		for (j =0; j < OutRels.size();j++)
-		  if ( m_Relations[OutRels[j]].m_SyntacticRelation == _R("ЭЛЕКТ_ИГ") )
+		  if ( m_Relations[OutRels[j]].m_SyntacticRelation == "ЭЛЕКТ_ИГ" )
 		  {
 			  m_Nodes[NodeNo].SetArticle(DefArticle, DefArticleBecauseOfNominalSupplement);
 			  break;

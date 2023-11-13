@@ -51,7 +51,6 @@ public:
 	STDMETHOD(get_HomonymWeight)(/*[out, retval]*/ int *pVal);
 	STDMETHOD(get_WordWeight)(/*[out, retval]*/ int *pVal);
 	STDMETHOD(get_Accent)(DWORD pos, BYTE* pVal);
-	STDMETHOD(get_BaseLength)(UINT* pVal);
 	STDMETHOD(get_LemmaPrefixLength)(int* pVal);
 };
 

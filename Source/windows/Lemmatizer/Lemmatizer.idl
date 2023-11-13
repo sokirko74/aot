@@ -32,7 +32,6 @@ typedef enum {	idlRussian = 1, idlEnglish = 2, idlGerman = 3} idlMorphLanguageEn
 		[propget, id(11), helpstring("property WordWeight")] HRESULT WordWeight([out, retval] int *pVal);
 		[propget, id(12), helpstring("property HomonymWeightWithForm")] HRESULT HomonymWeightWithForm([in] DWORD pos, [out, retval] int *pVal);
 		[propget, id(13), helpstring("property Accent")] HRESULT Accent([in] DWORD pos, [out, retval] BYTE* pVal);
-		[propget, id(14), helpstring("property BaseLength")] HRESULT BaseLength([out, retval] UINT* pVal);
 		[propget, id(15), helpstring("property LemmaPrefixLength")] HRESULT LemmaPrefixLength([out, retval] int* pVal);
 	};
 

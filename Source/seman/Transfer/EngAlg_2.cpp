@@ -459,7 +459,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	if( negChild )
 	{
 		m_Nodes[iNewNode].RusNode = m_Nodes[iEngNode].RusNode;
-		m_Nodes[iNewNode].m_RelOperators.push_back(_R("НЕ"));
+		m_Nodes[iNewNode].m_RelOperators.push_back("НЕ");
 	}
 	
 	DelNode(iEngNode);
@@ -567,7 +567,7 @@ void CEngSemStructure::ApplyBeRule(int iEngNode)
 
 void CEngSemStructure::ApplyKeepRule(int iEngNode)
 {
-	if (!m_Nodes[iEngNode].HasRelOperator(_R("ПРОДОЛЖ"))) return;
+	if (!m_Nodes[iEngNode].HasRelOperator("ПРОДОЛЖ")) return;
 	int iRusNode = m_Nodes[iEngNode].RusNode;
 	if( iRusNode == -1 )
 		return;
@@ -578,7 +578,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 		return;
 
    // если VERB с отрицанием...
-	if( m_Nodes[iEngNode].HasRelOperator(_R("НЕ")) )
+	if( m_Nodes[iEngNode].HasRelOperator("НЕ") )
 	{
 		CEngSemNode newNode;
 		CreateSimpleEnglNode("still",newNode,0,true);
@@ -661,7 +661,7 @@ void CEngSemStructure::ApplyKeepRule(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			break;
-		if( m_Nodes[iNode].HasRelOperator(_R("НЕ")) )
+		if( m_Nodes[iNode].HasRelOperator("НЕ") )
 			break;
 		if( !GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("GF","VERB",m_Nodes[iNode].GetUnitNo()) )
 			continue;
@@ -803,7 +803,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			return;
-		if( m_Nodes[iNode].HasRelOperator(_R("НЕ")) )
+		if( m_Nodes[iNode].HasRelOperator("НЕ") )
 			return;
 	}
 
@@ -858,7 +858,7 @@ void CEngSemStructure::ApplyALG_compl_obj(int iEngNode)
 			continue;
 		if( GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("SF","MODL",m_Nodes[iNode].GetUnitNo()) )			
 			break;
-		if( m_Nodes[iNode].HasRelOperator(_R("НЕ")) )
+		if( m_Nodes[iNode].HasRelOperator("НЕ") )
 			break;
 		if( !GetRossHolder(m_Nodes[iNode].GetType())->HasFieldValue("GF","VERB",m_Nodes[iNode].GetUnitNo()) )
 			continue;

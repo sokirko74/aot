@@ -1,0 +1,910 @@
+-1	D_
+0	*
+-1	D_GRAFEM_DESC
+0	ДЕФ
+1	ЗПТ
+2	ЦБК
+3	ЦК
+4	двтч
+5	квч
+-1	D_COLON
+0	:
+-1	D_LF
+0	A0
+1	A1
+2	A2
+3	A3
+4	Abbr
+5	Adv0
+6	Adv1
+7	Adv2
+8	Adv3
+9	AntiBon
+10	AntiMagn
+11	AntiReal
+12	AntiReal1
+13	AntiReal2
+14	AntiVer
+15	Bon
+16	Caus
+17	Caus1Func0
+18	Caus1Func1
+19	Caus1Manif
+20	Caus1Oper1
+21	Caus1Oper2
+22	Caus2Func0
+23	Caus2Func2
+24	Caus2Oper2
+25	Caus3Oper3
+26	CausFunc
+27	CausFunc0
+28	CausFunc1
+29	CausFunc2
+30	CausIncep
+31	CausLiqu
+32	CausLoc
+33	CausMagn
+34	CausManif
+35	CausOper1
+36	CausOper2
+37	CausOper3
+38	CausVer
+39	Centr
+40	Copul
+41	Culm
+42	Fin
+43	FinCaus
+44	FinFunc0
+45	FinOper1
+46	FinOper2
+47	Func
+48	Func0
+49	Func1
+50	Func2
+51	Func3
+52	Incep
+53	IncepCaus
+54	IncepFunc0
+55	IncepFunc1
+56	IncepLabor21
+57	IncepOper1
+58	IncepOper2
+59	IncepOper3
+60	Labor
+61	Labor12
+62	Labor13
+63	Labor21
+64	Liqu
+65	Liqu1Func0
+66	Liqu1Func1
+67	Liqu1Labor13
+68	Liqu1Oper1
+69	Liqu1Oper2
+70	Liqu2Func0
+71	Liqu2Oper2
+72	LiquFunc0
+73	LiquFunc1
+74	LiquMagn
+75	LiquOper1
+76	LiquOper2
+77	LiquOper3
+78	Loc
+79	Magn
+80	MoveLoc
+81	Oper
+82	Oper1
+83	Oper2
+84	Oper3
+85	OperCaus
+86	Perm2Oper1
+87	PermFunc0
+88	PermOper1
+89	Pred0
+90	Real
+91	Real1
+92	Real2
+93	Real3
+94	S0
+95	S1
+96	S2
+97	S3
+98	S4
+99	S_res
+100	V0
+101	Ver
+-1	D_OPN
+0	(
+-1	D_SEM_REL
+0	ACT
+1	ACTUAL
+2	ADR
+3	AFTER
+4	AGENT
+5	AIM
+6	ALIKE
+7	AND
+8	AS
+9	ASPECT
+10	ATTR
+11	AUTHOR
+12	BELNG
+13	C-AGENT
+14	CAUSE
+15	COMP
+16	COND
+17	CONTEN
+18	DATE
+19	DEGREE
+20	EQL
+21	ESTIM
+22	F-ACT
+23	FOR
+24	FORM
+25	FUNCT
+26	IDENT
+27	IN-ACCORD
+28	IN-DIRECT
+29	INCLUDING
+30	INSTEAD
+31	INSTR
+32	ISCONNECTED
+33	LOCK_forward
+34	LOC_dist
+35	LOC_nea
+36	LOK
+37	MATER
+38	MEAN
+39	MEDIATOR
+40	METHOD
+41	MODL
+42	MORE
+43	MUA
+44	MULTI
+45	NAME
+46	NO_AIM
+47	OBJ
+48	OBJ.RESLT
+49	OPERAT
+50	OR
+51	PACIEN
+52	PARAM
+53	PART
+54	PROPERT
+55	PURP
+56	QUANTIT
+57	QUANTOR
+58	REFERENT
+59	REPRES
+60	RESLT
+61	RESTR
+62	S-ACT
+63	SCALE
+64	SIMULT
+65	SPEC
+66	SPHERE
+67	SRC
+68	SRC-PNT
+69	SUB
+70	THEME
+71	THESAME
+72	TIME
+73	TOGETHER
+74	TRG-PNT
+75	TYPE-OF
+76	UNIT
+77	VALUE
+-1	D_NUMBERS
+0	1
+1	2
+2	3
+3	4
+4	5
+5	6
+6	7
+7	8
+8	9
+-1	D_COMMA
+0	,
+-1	D_SF
+0	ABSTR
+1	ADM
+2	ANIM
+3	ARTEF
+4	AUTHORIT
+5	CAUS
+6	CHG
+7	CLAS
+8	COLLEC
+9	COMMUNIC
+10	CONTNR
+11	DEV
+12	DIREC
+13	EMOT
+14	EMPL
+15	ERD
+16	ESTIM
+17	EXISTE
+18	FIN
+19	FLUI
+20	GEOGR
+21	INF
+22	INTEL
+23	KEY
+24	MEDINF
+25	MOV
+26	MULT
+27	NATIO
+28	NEG
+29	ORG
+30	P-DEV
+31	PERCPT
+32	PERIO
+33	PHENOM
+34	PROC
+35	PROF
+36	REL
+37	SET-DEMAN
+38	SITUAT
+39	SOC
+40	SOFTW
+41	SOLIDUS
+42	STAT
+43	SUBST
+44	THINGN
+-1	D_CAT
+0	LAB
+1	LAB.OB
+2	LAB.PROP
+3	LAB.SIT
+4	RELAT
+-1	D_ENGL
+0	FЬR das
+1	an das
+2	an dem
+3	auf das
+4	bei dem
+5	durch das
+6	hinter das
+7	hinter dem
+8	in das
+9	in dem
+10	um das
+11	unter das
+12	unter dem
+13	von dem
+14	vor das
+15	vor dem
+16	zu dem
+17	zu der
+18	ЬBER das
+19	ЬBER dem
+-1	D_CLS
+0	)
+-1	D_FIELDS
+0	DERIV
+-1	D_SYN_REL
+0	obj
+1	subj
+-1	D_PART_OF_SPEECH
+0	ADJ
+1	ADV
+2	DISKONT_KON
+3	INJ
+4	KON_neb
+5	KON_unt
+6	PRP
+7	SCHALTWORT
+8	SUB
+9	VER
+10	ZAL
+-1	D_GROUPS
+0	NP
+1	SENT
+2	SUBCLAUSE
+3	VP
+-1	D_CASE
+0	A
+1	D
+2	G
+3	N
+-1	D_PREP_COLLOC
+0	в адрес
+1	в виде
+2	в вопросе о
+3	в должности
+4	в должность
+5	в защиту
+6	в значении
+7	в качестве
+8	в количестве
+9	в направлении
+10	в области
+11	в объеме
+12	в отношении
+13	в поддержку
+14	в пользу
+15	в порядке
+16	в пределах
+17	в размере
+18	в рамках
+19	в распоряжение
+20	в редакции
+21	в результате
+22	в руки
+23	в связи с
+24	в системе
+25	в случае
+26	в соответствие с
+27	в соответствии с
+28	в составе
+29	в сравнении с
+30	в сторону
+31	в сумме
+32	в сфере
+33	в течение
+34	в форме
+35	в ходе
+36	в целях
+37	вместе с
+38	во время
+39	во имя
+40	для целей
+41	до сведения
+42	достоинством в
+43	за время
+44	за номером
+45	за пределами
+46	за пределы
+47	за счет
+48	из числа
+49	исходя из
+50	на базе
+51	на верность
+52	на должности
+53	на должность
+54	на имя
+55	на момент
+56	на основании
+57	на основе
+58	на период
+59	на пост
+60	на посту
+61	на прием к
+62	на срок
+63	на стороне
+64	на сумму
+65	на сумму в
+66	на счет
+67	на тему
+68	на тему о
+69	на территорию
+70	на уровне
+71	на условиях
+72	на участке
+73	на фундаменте
+74	начиная с
+75	не в пользу
+76	одновременно с
+77	от имени
+78	по вопросам
+79	по вопросам о
+80	по вопросу
+81	по вопросу о
+82	по делам
+83	по делу о
+84	по маршруту
+85	по месту
+86	по направлению к
+87	по обвинению в
+88	по отношению к
+89	по поводу
+90	по причине
+91	по проблеме
+92	по сравнению с
+93	по ставке
+94	по цене
+95	под залог
+96	под руководством
+97	под эгидой
+98	при помощи
+99	с дивидендом
+100	с должности
+101	с помощью
+102	с поста
+103	с просьбой
+104	с просьбой о
+105	с требованием
+106	с учетом
+107	с целью
+108	со стороны
+109	со счета
+110	сравнительно с
+111	сроком на
+112	стоимостью в
+113	тиражом в
+-1	D_PLUS
+0	+
+-1	D_DASH
+0	|
+-1	D_ACTANTS
+0	A1(A1)
+1	А1
+2	А1(НЕ)
+3	А1+С
+4	А2
+5	А2+С
+6	А3
+7	А4
+8	А5
+9	А6
+10	А7
+11	ОтсутА2
+12	С
+13	С+А1
+14	С+А2
+-1	D_HYPHEN
+0	-
+-1	D_PERCENT
+0	%
+-1	D_RESHETKA
+0	#
+-1	D_FULL_STOP
+0	.
+-1	D_GENDER
+0	М/Ж
+-1	D_CONJ
+0	dass
+-1	D_BOOL
+0	+
+1	-
+-1	D_NUMBER
+0	fixed
+1	pl
+2	sg
+-1	D_START_PHR
+0	D_CONJ
+1	D_PREP
+2	D_PREP_COLLOC
+3	D_WORDFORM
+-1	D_UNDERLINE
+0	_
+-1	D_VP_SPECIF
+0	inf
+-1	D_PHR_SPECIF
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+4	D_GRAFEM_DESC
+5	D_GROUPS
+6	D_PART_OF_SPEECH
+7	D_VP_SPECIF
+-1	D_SYN_FUNCT
+0	D_GROUPS
+1	D_SYN_REL
+-1	D_CASE_PLUS
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+-1	D_EXCL_MARK
+0	!
+-1	D_RLE_PLUS
+0	D_ABBR
+1	D_COLLOC
+2	D_RLE
+-1	D_MUA
+0	МНА
+-1	D_CONJ_PLUS
+0	D_CONJ
+1	D_GRAFEM_DESC
+-1	D_CASE_POS
+0	Т_ПРИЛ
+-1	D_EXM
+0	Als ich noch zur Schule ging, hatte ich viel mehr Freizeit.
+1	Anstatt sich zu bedanken, beleidigte er den Helfer
+2	Er kauft entweder ein Auto oder ein Fahrrad.
+3	Er kauft teils Autos, teils Fahrrдder.
+4	Es gab zwar ein paar Gefechte, aber keinen nennenswerten Widerstand.
+5	Es gab zwar ein paar Gefechte, aber offenbar keinen nennenswerten Widerstand.
+6	Ich habe die Prufung bestanden, da ich gut vorbereitet war.
+7	Ich lerne die Vokabeln, damit ich den morgigen Test bestehe.
+8	Ich mache das, um dich zu besuchen.
+9	Ich wei?, dass du klug bist
+10	Ich weiЯ, dass du klug bist
+11	Nunmehr wurde ein Dekret unterzeichnet als Staatsgebiet erklart wird.
+12	Sie mussen, bevor sie zum Verkauf gelangen, einer amtlichen Prufung unterzogen werden
+13	die Bank vorlaufig geschlossen zu bleiben habe, bis die Aufstellung des Status vollendet ist.
+14	du kannst bleiben, s. du willst
+15	du kannst mitkommen, falls du Lust hast
+16	ein paar Gefechte
+17	er fragte sie, ob sie noch kдme
+18	er hat blondes Haar, w. seine Geschwister alle dunkelhaarig sind
+19	er hat das Paket nicht mitgenommen, o. ich ihn darum gebeten hatte
+20	er hat viel Geld sparen kцnnen, indem er einen Teil der Arbeit selbst gemacht hat
+21	er ist wieder gesund, s. mir bekannt ist
+22	er studiert Mathematik, insofern  es fur seine Arbeit notwendig ist
+23	es kam, w. ich es erwartet hatte
+24	es vergingen drei Stunden, ehe wir landen konnten
+25	i. das zutrifft, werden wir intervenieren
+26	ich rufe an, s. ich zu Hause bin
+27	indes er seine Arbeit fertig machte, gingen die anderen spazieren
+28	insofern das zutrifft, werden wir intervenieren
+29	n. ich gegessen hatte, legte ich mich eine Weile hin
+30	s. du Fieber hast, musst du im Bett liegen
+31	s. er die Firma leitet, sind alle zufrieden
+32	s. er kam, brachte er Blumen mit
+33	sich ein wenig oeffnen
+34	sie ist o. sehr begabt
+35	sie ist so traurig, w. ihr Vater gestorben ist
+36	sie nahm Platz, o. gefragt zu haben
+37	sie nimmt die Einladung gern an, z. sie allein ist
+38	so Gott will, sehen wir uns bald wieder
+39	w. es dir recht ist, trete ich sofort zurьck
+40	w. sie verreist waren, hat man bei ihnen eingebrochen.
+41	wenn ein Teil bis zu den Zaehnen bewaffnet ist und ein anderer wehrlos
+42	wenn ein Teil bis zu den Zahnen bewaffnet ist und ein anderer wehrlos
+43	wenn es dir recht ist, trete ich sofort zurьck
+44	wir kommen morgen, s. es euch passt
+-1	D_CONDIT
+0	*CX2=inf -Eng. Gerund
+1	*ГХ2 = 1 сущ - adj
+2	C>A1
+3	А1<С
+4	ГХ1=наст|буд
+5	ГХ2 = 1 ГЛАГ
+6	ГХ2 = 1 сущ
+7	ГХ2 = 1 сущ *например, при всем том уважении
+8	ГХ2 = 1 числит
+9	ГХ2 =(1) ИГ, СХ2 =(1) ОДУШ (
+10	ГХ2 =1 ИГ, СХ2 =1 ОДУШ
+11	Л1<С
+12	ЛХ1 = лестница
+13	ЛХ2=лестница
+14	ЛХ2=часовая стрелка
+15	ПрагмХ = кино
+16	ПрагмХ = книж
+17	ПрагмХ = книжн
+18	ПрагмХ = разг
+19	ПрагмХ=Спорт
+20	ПрагмХ=Фин
+21	ПрагмХ=кино
+22	ПрагмХ=книж
+23	ПрагмХ=книж|офиц
+24	ПрагмХ=книжн
+25	ПрагмХ=книжн|науч|офиц
+26	ПрагмХ=морск.
+27	ПрагмХ=офиц
+28	ПрагмХ=разг
+29	ПрагмХ=устар.
+30	СХ = 1 ОДУШ
+31	СХ = 1 ПРЕДИК
+32	СХ1 = 1 В-НАПР
+33	СХ1 = 1 НЕОД
+34	СХ1 = 1 ОДУШ
+35	СХ1 = 1 ПРЕДИК
+36	СХ1=СХ2=ДЕЙСТВ
+37	СХ1=СХ2=Действ
+38	СХ1=говор
+39	СХ2  = 1 ОДУШ
+40	СХ2  = 1 ПРЕДМ
+41	СХ2 = 1 ЛИЦО
+42	СХ2 = 1 Н-ТРЕБ
+43	СХ2 = 1 НАУКА
+44	СХ2 = 1 НЕОД
+45	СХ2 = 1 ОДУШ
+46	СХ2 = 1 ПРЕДИК
+47	СХ2=1 ЛИЦО
+48	СХ=В-НАПР
+49	переводит целиком выражение "с участием присяжных
+50	переводит целиком выражение "с участием присяжных заседателей"
+51	русское сущ становится прил
+52	такой последовательности:
+-1	D_INFERENCE
+0	МНА ( А2 , А1 )
+1	МНА , А2 , А1
+2	МНА{А1,А2}
+3	МНА{А1,А2}
+4	МНУ{А1,А2}
+5	ОБ ( А2 , изменить )
+6	ОДНОВР(А2,А1)
+7	ОДНОВР(А2,А1) \ СХ1=СХ2=ДЕЙСТВ
+8	СОДЕРЖ ( А1 , изменить )
+-1	D_SLASH
+0	\
+-1	D_SYN_ACTANTS
+0	а1
+1	а1+с
+2	а2
+3	а2+с
+4	с
+5	с+а1
+6	с+а2
+-1	D_POSITION
+0	-
+1	<
+2	<<
+3	>
+4	>>
+5	^
+-1	D_QUES_MARK
+0	?
+-1	D_CONTAIN
+0	(dass | daЯ)
+1	, wenn nicht sogar
+2	AB
+3	ABSEITS
+4	ABZЬGLICH
+5	ALS
+6	AM
+7	AN
+8	ANGESICHTS
+9	ANHAND
+10	ANLДЯLICH
+11	ANS
+12	ANSTATT
+13	ANSTELLE
+14	AUF
+15	AUFGRUND
+16	AUFS
+17	AUFSEITEN
+18	AUS
+19	AUSGANGS
+20	AUЯER
+21	AUЯERHALB
+22	BEI
+23	BEIDERSEITS
+24	BEIM
+25	BEZЬGLICH
+26	BINNEN
+27	BIS
+28	DANK
+29	DIESSEITS
+30	DURCH
+31	DURCHS
+32	EINGANGS
+33	EINSCHLIEЯLICH
+34	ENTGEGEN
+35	ENTLANG
+36	ENTSPRECHEND
+37	EXKLUSIVE
+38	FERN
+39	FЬR
+40	FЬRS
+41	GEGEN
+42	GEGENЬBER
+43	GEMДЯ
+44	GEN
+45	GLEICH
+46	HINSICHTLICH
+47	HINTER
+48	HINTERA
+49	HINTERM
+50	IM
+51	IN
+52	INFOLGE
+53	INKLUSIVE
+54	INMITTEN
+55	INNERHALB
+56	INS
+57	JE
+58	JENSEITS
+59	KONTRA
+60	KRAFT
+61	LAUT
+62	LДNGS
+63	LДNGSSEITS
+64	MANGELS
+65	MIT
+66	MITSAMT
+67	MITTELS
+68	NACH
+69	NAHE
+70	NEBEN
+71	NEBST
+72	NДCHST
+73	OBERHALB
+74	OHNE
+75	PER
+76	PLUS
+77	PRO
+78	SAMT
+79	SEIT
+80	SEITENS
+81	SEITLICH
+82	SEITWДRTS
+83	STATT
+84	TROTZ
+85	UM
+86	UMS
+87	UNGEACHTET
+88	UNTER
+89	UNTERHALB
+90	UNTERM
+91	UNTERS
+92	UNWEIT
+93	VERSUS
+94	VIA
+95	VOM
+96	VON
+97	VOR
+98	VORBEHALTLICH
+99	VORM
+100	VORS
+101	WEGEN
+102	WIDER
+103	WДHREND
+104	ZEIT
+105	ZU
+106	ZUFOLGE
+107	ZUGUNSTEN
+108	ZULIEBE
+109	ZUM
+110	ZUR
+111	ZUUNGUNSTEN
+112	ZUWIDER
+113	ZUZЬGLICH
+114	ZWECKS
+115	ZWISCHEN
+116	ab
+117	aber
+118	abseits
+119	abzьglich
+120	als
+121	am
+122	an
+123	angesichts
+124	anhand
+125	anlдЯlich
+126	ans
+127	anstatt
+128	anstelle
+129	antwortlich
+130	auf
+131	aufgrund
+132	aufs
+133	aufseiten
+134	aus
+135	ausgangs
+136	auЯer
+137	auЯerhalb
+138	bei
+139	beiderseits
+140	beim
+141	bevor
+142	bezьglich
+143	binnen
+144	bis
+145	bis zu
+146	da
+147	damit
+148	dank
+149	dass | daЯ
+150	diesseits
+151	durch
+152	durchs
+153	ehe
+154	ein biЯchen
+155	ein paar
+156	ein wenig
+157	eingangs
+158	einschlieЯlich
+159	entgegen
+160	entlang
+161	entsprechend
+162	entweder  ... oder
+163	exklusive
+164	falls
+165	fern
+166	fьr
+167	fьrs
+168	gegen
+169	gegenьber
+170	gemдЯ
+171	gen
+172	gleich
+173	hinsichtlich
+174	hinter
+175	hintera
+176	hinterm
+177	im
+178	in
+179	indem
+180	indes | indessen
+181	infolge
+182	inklusive
+183	inmitten
+184	innerhalb
+185	ins
+186	insofern
+187	insofern | insoweit
+188	insoweit(|als)
+189	je
+190	jenseits
+191	kontra
+192	kraft
+193	kurz nach
+194	kurz vor
+195	laut
+196	lдngs
+197	lдngsseits
+198	mangels
+199	mit
+200	mitsamt
+201	mittels
+202	nach
+203	nachdem
+204	nahe
+205	neben
+206	nebst
+207	nдchst
+208	ob
+209	oberhalb
+210	obwohl | obgleich | obschon | obzwar
+211	obwohl | obgleich | obschon | obzwar | wenngleich
+212	obwohl | obgleich | obschon | obzwar | wenngleich | wennschon
+213	oder
+214	offenbar
+215	ohne
+216	per
+217	plus
+218	pro
+219	samt
+220	seit
+221	seit | seitdem
+222	seitens
+223	seitlich
+224	seitwдrts
+225	so
+226	sobald | sowie
+227	sofern
+228	solange
+229	sooft
+230	soweit | soviel
+231	statt
+232	teils  ... teils
+233	trotz
+234	um
+235	ums
+236	und
+237	ungeachtet
+238	unter
+239	unterhalb
+240	unterm
+241	unters
+242	unweit
+243	versus
+244	via
+245	vom
+246	von
+247	vor
+248	vorbehaltlich
+249	vorm
+250	vors
+251	wegen
+252	weil
+253	wenn
+254	wider
+255	wie
+256	wohingegen
+257	wдhrend
+258	zeit
+259	zu
+260	zufolge
+261	zugunsten
+262	zuliebe
+263	zum
+264	zumal
+265	zur
+266	zuungunsten
+267	zuwider
+268	zuzьglich
+269	zwar  ... aber
+270	zwecks
+271	zwischen
+272	ЬBER
+273	ЬBERM
+274	ЬBERS
+275	ьber
+276	ьberm
+277	ьbers

@@ -1,0 +1,3199 @@
+-1	D_
+0	*
+-1	D_GRAFEM_DESC
+0	ДЕФ
+1	ЗПТ
+2	ЦБК
+3	ЦК
+4	двтч
+5	квч
+-1	D_COLON
+0	:
+-1	D_LF
+0	A0
+1	A1
+2	A2
+3	A3
+4	Abbr
+5	Adv0
+6	Adv1
+7	Adv2
+8	Adv3
+9	Anti
+10	AntiBon
+11	AntiMagn
+12	AntiReal
+13	AntiReal1
+14	AntiReal2
+15	AntiVer
+16	Bon
+17	Caus
+18	Caus1Func0
+19	Caus1Func1
+20	Caus1Manif
+21	Caus1Oper1
+22	Caus1Oper2
+23	Caus2Func0
+24	Caus2Func1
+25	Caus2Func2
+26	Caus2Oper2
+27	Caus3Oper3
+28	CausFunc
+29	CausFunc0
+30	CausFunc1
+31	CausFunc2
+32	CausIncep
+33	CausLiqu
+34	CausLoc
+35	CausMagn
+36	CausManif
+37	CausOper1
+38	CausOper2
+39	CausOper3
+40	Centr
+41	Copul
+42	Culm
+43	Fin
+44	FinCaus
+45	FinFunc0
+46	FinOper1
+47	FinOper2
+48	Func
+49	Func0
+50	Func1
+51	Func2
+52	Func3
+53	Incep
+54	IncepCaus
+55	IncepFunc0
+56	IncepFunc1
+57	IncepLabor21
+58	IncepOper1
+59	IncepOper2
+60	IncepOper3
+61	Labor
+62	Labor12
+63	Labor13
+64	Labor21
+65	Liqu
+66	Liqu1Func0
+67	Liqu1Func1
+68	Liqu1Labor13
+69	Liqu1Oper1
+70	Liqu1Oper2
+71	Liqu2Func0
+72	Liqu2Oper2
+73	LiquFunc0
+74	LiquFunc1
+75	LiquMagn
+76	LiquOper1
+77	LiquOper2
+78	LiquOper3
+79	Loc
+80	Magn
+81	MoveLoc
+82	Oper
+83	Oper1
+84	Oper2
+85	Oper3
+86	OperCaus
+87	Perm2Oper1
+88	PermFunc0
+89	PermOper1
+90	Pred0
+91	Real
+92	Real1
+93	Real2
+94	Real3
+95	S0
+96	S1
+97	S2
+98	S3
+99	S4
+100	S_res
+101	V0
+102	Ver
+-1	D_GRAM_FUNCT
+0	АББР
+1	ГЛ
+2	КР
+3	НАР
+4	ОТР
+5	ПРЕВ
+6	ПРИД
+7	ПРИЛ
+8	СОВ
+9	СРАВН
+10	СУЩ
+11	ЧАСТ
+-1	D_OPN
+0	(
+-1	D_SEM_REL
+0	ACT
+1	ACTUAL
+2	ADR
+3	AFTER
+4	AGENT
+5	AIM
+6	ALIKE
+7	AS
+8	ASPECT
+9	ATTR
+10	AUTHOR
+11	BELNG
+12	C-AGENT
+13	CAUSE
+14	COMP
+15	COND
+16	CONTEN
+17	DATE
+18	DEGREE
+19	EQL
+20	ESTIM
+21	F-ACT
+22	FOR
+23	FORM
+24	FUNCT
+25	IDENT
+26	IN-ACCORD
+27	IN-DIRECT
+28	INCLUDING
+29	INSTEAD
+30	INSTR
+31	ISCONNECTED
+32	LOCK_forward
+33	LOC_dist
+34	LOC_nea
+35	LOK
+36	MATER
+37	MEAN
+38	MEDIATOR
+39	METHOD
+40	MODL
+41	MORE
+42	MUA
+43	MULTI
+44	NAME
+45	NO_AIM
+46	OBJ
+47	OBJ.RESLT
+48	OPERAT
+49	OR
+50	PACIEN
+51	PARAM
+52	PART
+53	PROPERT
+54	PURP
+55	QUANTIT
+56	QUANTOR
+57	REFERENT
+58	REPRES
+59	RESLT
+60	RESTR
+61	S-ACT
+62	SCALE
+63	SIMULT
+64	SPEC
+65	SPHERE
+66	SRC
+67	SRC-PNT
+68	SUB
+69	THEME
+70	THESAME
+71	TIME
+72	TOGETHER
+73	TRG-PNT
+74	TYPE-OF
+75	UNIT
+76	VALUE
+-1	D_NUMBERS
+0	1
+1	2
+2	3
+3	4
+4	5
+5	6
+6	7
+7	8
+8	9
+-1	D_COMMA
+0	,
+-1	D_ENCYC_FUNC
+0	Anti
+1	CAP
+2	MULT
+3	Mesur
+4	Param
+5	SING
+6	БОЛ_РАЗ
+7	ВЫШЕ_ГЕО
+8	ЖИТЕЛЬ
+9	ИСХ-Т
+10	КОН-Т
+11	НИЖЕ_ГЕО
+12	СОСТОИТ
+13	ЧАСТЬ
+-1	D_SF
+0	ABSTR
+1	ADM
+2	AKTIO
+3	ANIM
+4	ANYTH
+5	ARTEF
+6	AUTHORIT
+7	CAUS
+8	CHG
+9	CLAS
+10	COLLEC
+11	COMMUNIC
+12	CONTNR
+13	DAMAG
+14	DEF
+15	DEV
+16	DIREC
+17	EMOT
+18	EMPL
+19	ENERG
+20	ERD
+21	EXISTE
+22	EXTENS
+23	FIN
+24	FLUI
+25	GEOGR
+26	GOOD
+27	INF
+28	INTEL
+29	LEGISL
+30	MEASUR
+31	MEDINF
+32	MOV
+33	MULT
+34	NATIO
+35	NEG
+36	ORG
+37	P-DEV
+38	PERCPT
+39	PERIO
+40	PREDIC
+41	PROC
+42	PROF
+43	PRON
+44	QUANT
+45	SITUAT
+46	SOC
+47	SOLIDUS
+48	SPAC
+49	STAT
+50	SUBST
+51	THINGN
+-1	D_CAT
+0	ASP
+1	GEO
+2	LABL
+3	LABL.OBJ
+4	LABL.PROPERT
+5	LABL.SIT
+6	OPER
+7	PRONO
+8	RELAT
+-1	D_ENGL
+0	(, )i.e.
+1	(, )that is to say(, )
+2	> V
+3	> V S
+4	a propos
+5	agin
+6	amidst
+7	amongst
+8	and after that
+9	aneath
+10	as though
+11	at all costs
+12	barring
+13	basing on
+14	begin
+15	betwixt
+16	by consent of
+17	by means of \ SF2 = 1 НЕОД
+18	by means of \ СХ2 = 1 НЕОД
+19	by rotation
+20	by the assistance of
+21	completely
+22	cross
+23	due to
+24	during
+25	end
+26	excepting
+27	for instance
+28	frae
+29	gainst
+30	in respect to
+31	in short
+32	in the interest of
+33	in this context
+34	in this instance
+35	in time
+36	interesting
+37	meantime
+38	meanwhile
+39	mongst
+40	nigh
+41	on any account
+42	on the eve of
+43	on to
+44	on_any_account
+45	owing to the fact that
+46	perhaps
+47	provided that
+48	roughly
+49	sine
+50	so \ C>A1
+51	so as to
+52	that is to say
+53	thereat
+54	this way (|:)
+55	thru
+56	toward
+57	unlike
+58	upon
+59	very close to
+60	with respect to
+61	withal
+-1	D_CLS
+0	)
+-1	D_FIELDS
+0	SF
+-1	D_SYN_REL
+0	DEGREE
+1	FREQ
+2	MANNER
+3	NP_attr
+4	PLACE
+5	SENT
+6	TIME
+7	X!
+8	obj
+9	obj_pl
+10	obj_sg
+11	subj
+12	subj_pl
+13	subj_sg
+-1	D_PART_OF_SPEECH
+0	ADJ
+1	ADV
+2	CHAR
+3	COMPAR
+4	CONJ
+5	CONJ_DISRUPT
+6	INTER
+7	NOUN
+8	NOUN: count
+9	NOUN: mass
+10	NUM
+11	PARENTH
+12	PART
+13	PREP
+14	SOJUZ
+15	SUBORD
+16	SUBORD_DISRUPT
+17	SUPER
+18	VERB
+19	VERB: cont
+20	VERB: pasa
+21	VERB: perf
+22	VERB: prsa
+23	VERB_MODL
+-1	D_GROUPS
+0	Copul
+1	DISRUPT
+2	NP
+3	NP'
+4	NP_pl
+5	NP_poss
+6	NP_sg
+7	Neg
+8	PN_poss
+9	PP
+10	dir_sp
+11	inter + sent
+12	sent
+13	sent_pasa
+14	sub_clause
+15	subj_clause
+16	text
+17	ОБСТ_ГР
+-1	D_CASE
+0	В
+1	Д
+2	И
+3	П
+4	Т
+-1	D_PLUS
+0	+
+-1	D_DASH
+0	|
+-1	D_ACTANTS
+0	A1
+1	A2
+2	A3
+3	C
+-1	D_HYPHEN
+0	-
+1	-
+-1	D_PERCENT
+0	%
+-1	D_DOMAIN
+0	воен
+1	геогр
+2	информ
+3	культура
+4	наука
+5	общ
+6	полит
+7	социо
+8	фин
+9	эконом
+10	юр
+-1	D_RESHETKA
+0	#
+-1	D_FULL_STOP
+0	.
+-1	D_GENDER
+0	М/Ж
+-1	D_CONJ
+0	as
+1	as if
+2	rather than
+3	than
+4	that
+5	until
+6	where
+-1	D_BOOL
+0	+
+1	-
+-1	D_NUMBER
+0	ед
+1	мн
+-1	D_PREP
+0	about
+1	after
+2	against
+3	along
+4	among
+5	around
+6	as
+7	at
+8	between
+9	by
+10	concerning
+11	down
+12	down to
+13	for
+14	from
+15	in
+16	into
+17	like
+18	of
+19	off
+20	on
+21	on to
+22	out
+23	out of
+24	over
+25	regarding
+26	through
+27	to
+28	together
+29	toward
+30	towards
+31	under
+32	up
+33	upon
+34	with
+-1	D_1
+0	about+NP
+1	after+NP
+2	against+NP
+3	along+NP
+4	among+NP
+5	around+NP
+6	as if+sent
+7	as+ADJ
+8	as+NP
+9	as+NP'
+10	at+NP
+11	between+NP_pl
+12	by+NP
+13	by+gerund
+14	concerning+NP
+15	down to+NP
+16	down+NP
+17	for+NP
+18	for+NP'
+19	for+gerund
+20	from+NP
+21	from+gerund
+22	in+NP
+23	in+NP'
+24	in+gerund
+25	into+NP
+26	into+NP_pl
+27	like+NP
+28	like+gerund
+29	of+NP
+30	of+gerund
+31	off+NP
+32	on to+NP
+33	on+NP
+34	out of+NP
+35	over+NP
+36	rather than+NP
+37	rather than+gerund
+38	regarding+NP
+39	that+sent
+40	that+subj_clause
+41	through+NP
+42	to be+ADJ
+43	to be+NP
+44	to+NP
+45	to+NP_pl
+46	to+inf
+47	together+NP
+48	toward+NP
+49	towards+NP
+50	under+NP
+51	until+sent
+52	up+NP
+53	upon+NP
+54	where+sent
+55	with+NP
+-1	D_START_PHR
+0	D_CONJ
+1	D_PREP
+2	D_PREP_COLLOC
+3	D_WORDFORM
+-1	D_WORDFORM
+0	to
+1	to be
+-1	D_UNDERLINE
+0	_
+-1	D_CASE_NUMBER
+0	В_мн
+1	И_мн
+2	Р_ед
+3	Р_мн
+4	Т_мн
+-1	D_VP_SPECIF
+0	Cont
+1	gerund
+2	inf
+3	it
+4	not_cont
+5	not_fut
+6	not_fut_past
+7	not_perf_cont
+8	pasa
+9	pass
+10	past_prf
+11	perf
+12	predic
+13	present
+-1	D_PHR_SPECIF
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+4	D_GRAFEM_DESC
+5	D_GROUPS
+6	D_PART_OF_SPEECH
+7	D_VP_SPECIF
+-1	D_SYN_FUNCT
+0	D_GROUPS
+1	D_SYN_REL
+-1	D_GF_MAIN
+0	ADV:DEGREE
+1	ADV:FREQ
+2	ADV:MANNER
+3	ADV:Neg
+4	ADV:PLACE
+5	ADV:SENT
+6	ADV:TIME
+7	CONJ:DISRUPT
+8	NOUN:Neg
+9	PART:Neg
+10	ГЛ:ГГ
+11	ПРЕДК:ГГ
+12	ПРИЛ:ТЕКСТ
+13	ПРИЛ:с_опр
+14	ПРИЧ:с_опр
+15	СОЮЗ:--
+16	СУЩ:ИГ
+17	ЧАСТ:--
+-1	D_CASE_PLUS
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+-1	D_TYPE
+0	ЛЕ
+-1	D_EXCL_MARK
+0	!
+-1	D_RLE_PLUS
+0	D_ABBR
+1	D_COLLOC
+2	D_RLE
+-1	D_MUA
+0	МНА
+-1	D_CONJ_PLUS
+0	D_CONJ
+1	D_GRAFEM_DESC
+-1	D_CASE_MUA
+0	МНА_В_и
+1	МНА_И_ДЕФ
+2	МНА_Р_и
+3	МНА_Т_и
+-1	D_CASE_POS
+0	Т_ПРИЛ
+-1	D_EXM
+0	"Давай хотя бы попробуем", - ответила Хелен.
+1	"Клубом необычных профессий".
+2	"ПОЗi=comp:begin" - некий костыль, который означает,
+3	"Это очень выдающийся дом, - сказал он, - с точки зрения английской,
+4	"видеть", эти две ступени соответствуют требованиям.
+5	"не" при нем не переводится
+6	"с тех пор и до сих пор" или "с того времени всегда"
+7	"с тех пор и до сих пор" или "с того времени всегда";
+8	(1) и (1а) несколько отличается от других примеров - это не модальность, а
+9	(не винилом), и оставьте сохнуть минимум на 72 часа, пока зеркало не
+10	1. Здесь опять нужно аккуратно разбираться, так как сравниваются две ИГ, а
+11	2  OPER
+12	2  ОПЕР
+13	2 Из-за примеров 2 и 3 внесено SF2 = 2 TIME, но на самом деле там
+14	2 Из-за примеров 2 и 3 внесено СХ2 = 2 ВРЕМЯ, но на самом деле там
+15	46-й годовщины их независимости, что их разделенная страна близка к
+16	46th independence anniversary, that their divided country was close
+17	5.25 за этот год.
+18	90 per cent of the pollees were in favour of it -
+19	90% опрошенных высказались за это
+20	<...> a brief biography is also often included by way of
+21	A caring and just society must depend on public and
+22	A family, let us say, spend their entire life in suburbia.  -
+23	A mental health orientation places greater emphasis on the former to
+24	A police force is selecting new recruits with the help of
+25	A second demonstration cruise is planned in Korean waters
+26	A strong wind was blowing across the platform in the direction of the
+27	A useful method is to have frames, i.e. sentences with
+28	A useful method is to have frames, that is sentences with
+29	Alexei thought that it was on the whole foolish to remain where he
+30	All it does is to raise the price of things we buy from abroad. -
+31	All this, of course, in the eyes of the sagacious, was
+32	Although they tried hard, they did not succeed. -
+33	Among guests were two actors. -
+34	And of all my acquaintanceships the most intimate and,
+35	And then the interference came. -
+36	Animal rights activists have been bailed on condition that they do
+37	Applications in form of a full CV with names and addresses of two
+38	As I am here, I'd better stay. —
+39	As far as I can judge this is correct. -
+40	As regards his suggestion I was non-committal. -
+41	As we rode, the rock seemed to heighten. -
+42	At last the hour arrived. -
+43	At night the whole family slept in a rough shelter <...> at the edge
+44	At the moment of impact, the tail of the lizard breaks away
+45	At the same time, for many women it can also mark a new beginning. -
+46	At this moment the stout old man with white whiskers looked
+47	Barbarossa's troops subdue the Roman mob at the time of his
+48	Baxter. -
+49	Britain's withdrawal from India or France's loss of Algeria <...>
+50	Burkin could not sleep for a long while. -
+51	But even Helen Huntingdon doesn't seek independence in order
+52	But the day before he boarded the plane the pleasure
+53	By the end of the day half of us were footsore. -
+54	By the same token, I shall use the word `style' only
+55	By the way, I'm Martin Barre, but sometimes I'm an owl. -
+56	Come and see me before you leave. -
+57	Constructional forms already described have been intricate in detail
+58	Convertible debt is to be displayed separately from other liabilities. -
+59	DMs original idea was that anyone could find something brilliant to
+60	Due to fog the train arrived late. -
+61	During one service, whilst he was preaching, three J.P.s and several
+62	Each man will be paid according to his ability. -
+63	Ever since the mysterious visit we always returned to it
+64	Except for you I would be dead. -
+65	Except for your presence I should be bored. -
+66	First of all you have to listen until you hear the silence <...> -
+67	First of all, be sure of one thing. -
+68	First of all, children were likely to protest about
+69	Following the lecture the meeting was open to discussion. -
+70	For many years fast-food restaurants have served meals
+71	For now, he had other things to think about. -
+72	For once his wit failed him. -
+73	For what purpose was this building erected? -
+74	From the point of view of an engineer wanting to make a machine that
+75	Germanys agree on spy swap in sign of improving relations. -
+76	Give me the chair please. -
+77	Gladstone's own books. -
+78	Gloucester. -
+79	Go at once, otherwise you will miss the train. -
+80	Good books come about as the result of hard work -
+81	Good bye!
+82	He acted contrary to my wishes. -
+83	He allegedly lost consciousness. -
+84	He closed the window so that the child might not
+85	He discovered the virtues of the Gladstone Library at Hawarden
+86	He felt no fear, for he was a brave man. —
+87	He gave the robber in charge of the police. -
+88	He gets as much money as you. -
+89	He gets less than one third of the total number. -
+90	He has as many children as you. -
+91	He has enough money to do him till the end of the year. -
+92	He indicated a diagnostic panel, where several red lights had begun
+93	He is by no means a wicked man. -
+94	He loved her in spite of her little frailties. -
+95	He made a report on the subject of baptism. -
+96	He made it clear that he did not agree. -
+97	He may come and go at will. -
+98	He passed out on the way home. -
+99	He passed out on the way to hospital. -
+100	He stepped aside so that I might pass. -
+101	He takes English lessons on Mondays and Fridays as well. -
+102	He walked first of all towards the place where he and Christian had
+103	He was murdered one day after he told Lebanese, on the eve of their
+104	He went upstairs into the best rooms only on rare occasions. -
+105	Her curls peeped out from under her hat. -
+106	His accounts of the two symphonies and Falstaff have all these
+107	His conventional soul quailed within him at the thought of
+108	His note-book was open in front of him and his helmet was on
+109	However, over three quarters of this business was initiated by
+110	I am also a big Jennifer Capriati fan, because of her
+111	I asked you, in the name of Almighty God, to stop
+112	I cannot, however, approve of it —
+113	I did it on the strength of your promise. -
+114	I drove away slowly and then came to the corner of Union and
+115	I fear that I cannot come. -
+116	I had felt certain that the session had gone well, yet nevertheless
+117	I had regarded his presence as an encumbrance to the expedition ,
+118	I have heard it said that they were built by Iron Age men in honour
+119	I have lived at Sofino and been farming for a long time
+120	I have my own opinion upon that point -
+121	I reached the station after the train had left. -
+122	I remarked for the first time the humble fluting. -
+123	I respect him though I don't like him. -
+124	I saw him there first of all and then he told me they were going to
+125	I shan't come, unless you really want me to. —
+126	I was not afraid at all. -
+127	I went there, too. -
+128	If I am wrong, you are at least not absolutely right. —
+129	If I don't work, then we have nothing. -
+130	If I were the swan, I'd be gone. -
+131	If you come, you will see him. -
+132	Imagine first of all that our cities become as dim as these Eastern
+133	In addition to sliding along the floor Steg
+134	In addition, one citizen cannot benefit from the successful formal
+135	In case of intervention our people will not sit back
+136	In comparison to groups who have come since then, they look
+137	In conclusion, the main findings from the project can be summarised
+138	In fact, his second wife outlived him by a quarter of a
+139	In other cases people don't even have homes to lose. -
+140	In other respects, however, this is a cogent and sensible account. -
+141	In other words, he should have treated the media business as being
+142	In particular women discovered they were treated with rare attention
+143	In reality these terms have been interpreted in a number of different
+144	In that connection she became involved in the Headmaster's plans to
+145	In the country, as a rule, they unbosom themselves to their
+146	In the end I gave in and reluctantly mounted the narrow stairs. -
+147	In the meantime, I changed my mind. -
+148	In view of recent developments, we do not think this
+149	Interestingly enough, a few weeks later, Benjamin
+150	Is he, by any chance, behind this scheme? —
+151	It applies in exactly the same way in the case of a breach of
+152	It could be argued that such a strategy was in any case unnecessary. -
+153	It has been tweaking at my conscience ever since. -
+154	It varies a great deal depending on the district council. -
+155	It was a strange clicking noise in the distance not unlike
+156	It was late, so we went home. -
+157	It was ten minutes to nine when he returned. -
+158	It will be useful in conclusion to look at some incidents which
+159	It would be difficult to substantiate Lenin's theory of
+160	Italy meanwhile <...> negotiated to come into the war on
+161	J.P. и несколько солдат с целью арестовать Ричарда Бэкстера.
+162	Just as we were about to leave, Frank Dick called me to
+163	Labour just wanted power at any price and they'll say anything
+164	Later on in my career, again in the press, he called me a `sheltered
+165	Lord Taylor's main point is to suggest that judges
+166	Make the invitations in the shape of a skull and crossbones and place
+167	Many of Cameroon's finest journalists now work abroad. -
+168	Mark's stage system is as follows: The guitar goes, via a Sony
+169	Maybe we shall meet him somewhere. —
+170	More often than not, browsing is presented to the user
+171	Most of them, she observed, were Asian or Caribbean, in contrast to
+172	Mr Ram said that in the interests of press freedom he was
+173	My stomach started to churn as soon as we left port. -
+174	No doubt he will come. -
+175	No-one after all would believe Kylie <...> would shed her
+176	Nor do I believe in obstructing democracy: that is why I
+177	North Korea had made immense progress with the assistance of the
+178	Nothing interesting has happened since we parted. -
+179	Now , in this case , the bone is certainly not the forearm, and you
+180	OPER
+181	OPER, так как надо знать, по сравнению с чем остальные.
+182	Of course we'll find one that you like. -
+183	On no account should the bed have wheels -
+184	On the right stretched a row of hillocks which disappeared
+185	One way or another you'll be mine. -
+186	Our shop has too many goods on hand. -
+187	People whose own names she was no long certain of called out her name
+188	Please sign below in confirmation of receipt of the packaging. -
+189	Principles are more important than money.
+190	Russians. -
+191	Seal all surfaces with at least two coats of gloss paint (not vinyl),
+192	Shareholders have been promised unchanged total dividends of not less
+193	She gazed at the pages as Carolyn read, as if she could see the
+194	She had bid her old mistress farewell the day before. -
+195	She looked at me with more than faint distaste. -
+196	She says she is nothing like that in reality. -
+197	She shouted at them twice as often and the dogs in response yelped
+198	She wants to eat and drink.
+199	She wants to eat or drink.
+200	Should this be the case, I will let you know soon. -
+201	Smith, and all 1,950 staff, will remain intact. -
+202	So what can we do now? -
+203	Sometimes such attitudes are secondary to a patient's current mood
+204	Soviet Union. -
+205	Stephen Brown P. -
+206	Still we must believe in love, just as we must believe in free will
+207	Such a notice states that the planning permission lapses after the
+208	Take me for example. -
+209	Take my script and pencil for now. -
+210	The French army was then in a state of paralysis. -
+211	The Japanese version of the product was developed by
+212	The Prime Minister appeared at the end of the broadcast to
+213	The advantages more than balance the disadvantages. -
+214	The boy was crying because he was hungry. -
+215	The car stopped alongside the kerb. -
+216	The court had heard that the baby died from terrible injuries
+217	The day before the seminar, some 500 people attended
+218	The diver came up at last. -
+219	The existing management, headed by chairman <...> Mike
+220	The firm supplies goods on deferred payments. -
+221	The first of my revelations, at any rate, shall be
+222	The hearing was in chambers and is reported with consent of Sir
+223	The house is close to the station. -
+224	The internal state of the organism is monitored by
+225	The market at the moment appears to be on the threshold of a new era
+226	The patient often learns to undress by himself long
+227	The regulation and growth of cells was much more complicated than
+228	The road back towards the shops and bars melts into water,
+229	The same goes for the avoidance of earth loops <...> -
+230	The sentence is translated without regard to the
+231	The ships then set out to return to base at speed of 10km/h. at 8 p.m. -
+232	The sooner the better. -
+233	The student should not assume facts contrary to those stated
+234	The tamarin will be preserved, in all probability, only if
+235	The very best thing, to my mind, would be to explain
+236	There are difficulties in respect of the wording. -
+237	There are many comparable examples in the psychological sphere, as
+238	There are two methods by which text may be input to a computer for
+239	There is no doubt that we were wrong from the start. -
+240	There were seven people in the car, let alone three dogs. -
+241	There's at least an hour or so of sunshine left. -
+242	They have no money for necessities, let alone for luxuries. -
+243	They referred in that connection to their arguments with regard to
+244	They run one computer in turns. -
+245	They were eighteen in number. -
+246	This consideration has resulted in continuation of the same
+247	This in turn makes them cheaper and small enough to fit the average
+248	This month's choice in particular rates very highly among my all-time
+249	This paper has a circulation of more than a million. -
+250	This statement is difficult to refute or accept on the base of
+251	This writer was in fashion at the beginning of the
+252	Today, his novels -- always popular with the reading public -- are
+253	Trafalgar Square. -
+254	Tuck had many other film and TV roles including
+255	VAL потом заменить, вероятно, на AFTER (А2, А1)
+256	Waiting <...> for the lift he told himself that he was no more
+257	We arrived together with our host. -
+258	We contribute food and clothing for the relief of the
+259	We don't want to live in the same place as the residents. -
+260	We fight in defence of peace. -
+261	We hope to enlighten them in regard to the discoveries
+262	We must stop here since it is impossible to go on. -
+263	We refused to argue again in the light of past events. -
+264	We usually go to the same place as our friends. -
+265	We walked as far as the post office. -
+266	What he lacked in physical size he more than made up
+267	While adequate in other respects, diesel fuel sold in Britain is high
+268	While there's life there's hope. -
+269	Winnie-the-Pooh lived under the name of Sanders. -
+270	Wireless system, to a Pete Cornish Control unit. -
+271	With payment by results, in the absence of an answer, GP pay is going
+272	Yet nevertheless, this well-regarded manager occasionally succumbs to
+273	You don't mind if I lie down here next to your bed? -
+274	You know, on the whole the police prefer not to make fools of
+275	You might as well say that the Nelson Column was not at all
+276	You've come here with the same purpose as I did. -
+277	Your composition is good except for a few spelling
+278	`In response, the demonstrators began to chant `We won't leave'. -
+279	`It is a very remarkable house,' he says, `from the point
+280	`Let's at least try it,' Helen replied. -
+281	`Postman's Knock' with Spike Milligan which has
+282	`a third force', namely the active citizen. -
+283	a draft at twenty days for 500 —
+284	a public meeting in Buncrana organized by the DUC. -
+285	acquaintance with Luganovitch. -
+286	address. - Заявления в виде полного CV с именами и адресами двух
+287	all orders are executed in succession -
+288	and allow to dry for at least 72 hours before the mirror is fixed. -
+289	and objective truth. -
+290	and psychological implications that Ukrainian independence has for
+291	and she smiled and nodded by way of general response. -
+292	and understanding. -
+293	as silent spectators. -
+294	as to that book I don't like it —
+295	as: -
+296	athlete' who kept away from the main opposition. -
+297	attractiveness <...> -
+298	before he can manage to dress. -
+299	bikini top in presence of the blond bombshell and frolic in the
+300	blanks to be filled in. -
+301	broken wrists and multiple bruising.  -
+302	but simple in general outline <...>. -
+303	but, as a matter of fact , I am now well convinced that his power of
+304	by default when the system fails to provide an exact match. -
+305	can `see', these two stages are adequate. -
+306	can cling to the walls and ceiling Spiderman-style. -
+307	can see for yourself that this is a single membrane hanging upon a
+308	castanets. -
+309	catch cold. -
+310	century. -
+311	comp и ставить им позицию begin.
+312	concerned with the Club of Queer Trades. -
+313	context. -
+314	contract by the seller. -
+315	coronation. -
+316	create within the limits of their (in) competence. -
+317	current research evidence. -
+318	endurance is as great as my own . -
+319	events unfolding there. -
+320	ever since I left the University. -
+321	every case individually without attempting to
+322	expectations. -
+323	expiration of a specified period... -
+324	favourites. -
+325	films. -
+326	for some reason in every one of them he had always to have
+327	from its body. -
+328	generalize . -
+329	gooseberries. -
+330	guests. -
+331	gut issues, such as jobs and housing -
+332	have translated into highly successful films. -
+333	he didn't go to the theatre, however —
+334	he held the book upside down
+335	he held the book with this
+336	however, this is not common —
+337	illuminate the way in which symbolism operates in the religion. -
+338	imperialism as applied to the British Empire. -
+339	in connection with literary uses of language. -
+340	in no way could he discover her address -
+341	in sheer drive and determination. -
+342	in sulphur apparently. -
+343	in the distance behind the village. -
+344	in the problem for the purpose of giving the examiner a piece of
+345	including three skull fractures measuring 10 inches in total, two
+346	information for which he did not ask. -
+347	introduction. -
+348	invite marriage guidance counsellors to present several sex education
+349	involved than he would be in any other case. -
+350	it most likely that he will not come  -
+351	it was clearly one of the drinking - places of the animals -
+352	just like any other. -
+353	loch, accompanied by a cold <...> driving rain. -
+354	made during our research. -
+355	market makers and banks rather than on behalf of clients. -
+356	means of receptors, mostly situated in the brain stem. -
+357	might и смысловым глаголом.
+358	mistakes. -
+359	more widely known than ever, thanks to the fact that their plots <...>
+360	near Chester, a <...> library founded on the basis of Mr
+361	no matter how [where] —
+362	no matter what —
+363	not attend any hunt meetings in England or Wales. -
+364	objection of another citizen; he must object in due time himself. -
+365	of Megan, a Celtic goddess. -
+366	of intellectual popularity. -
+367	of oncogenes have been discovered in experiments using retroviruses <...> -
+368	of the forest.-
+369	of the reunion was tinged with sorrow. -
+370	of view of English, not only of Wiltshire architecture. -
+371	offering The Hindu's reports to rival newspapers. -
+372	on disposable plates. -
+373	one side and gave me a blistering reprimand. -
+374	oppose repression and the state of emergency. -
+375	originally believed, and so far more than 40 different types
+376	pilot schemes. -
+377	pocket <...> -
+378	premonitory of that melancholy and farcical day when his
+379	private provision - and, in the words of John Patten,
+380	procedures with some minor modifications for the second phase of
+381	qualities in full measure, and yet in the symphonies every movement's
+382	quite straight. -
+383	recently been shown on TV. -
+384	referees should be sent to the Personnel Department at the above
+385	refugees. -
+386	remarried...-
+387	send me to Tidworth. -
+388	sent_pasa = глагольная форма в придаточном: pasa; если требуется
+389	should pass sentence with an eye to the public's
+390	single bone , and therefore that it cannot belong to a bat. -
+391	so you have come after all! —
+392	soldiers burst into the chapel with the purpose of arresting Richard
+393	speed, heading in the direction of the first three canisters. -
+394	state; in other cases they are long-standing and firmly established. -
+395	step advisable. -
+396	structure is well conveyed. -
+397	such fantastic trespass. -
+398	than 5.25p this year. -
+399	thanks to the oppressive dry heat. -
+400	the AT&T Co subsidiary in co-operation with Microsoft. -
+401	the Sergeant started up the jeep and we entered the cornfield at
+402	the detriment of the latter. -
+403	the machine shop where the majority had been white. -
+404	the pressure, and subordinates bear the brunt: -
+405	the purpose of recognition. -
+406	the residence requirement. -
+407	the side of the Allies. -
+408	the sort of thing that was likely to be set up in
+409	the table. -
+410	their parents' departure. -
+411	them on the door instead of balloons. -
+412	themselves. -
+413	they were coming up the street to meet us -
+414	tied their horses <...> -
+415	time a day -
+416	to be skewed. -
+417	to blink in confirmation of his words. -
+418	to freely give it up again. -
+419	to get it. -
+420	to peace. -
+421	to tell the truth, the most agreeable to me was my
+422	to translate on an average five pages a day -
+423	tormenting me and punishing me. -
+424	towns. -
+425	twice as loudly. -
+426	up. -
+427	videos showing them the kind of incidents they might have to tackle. -
+428	waited anxiously to hear officially, but nothing happened. -
+429	warn of further turmoil <...> -
+430	was while there was an armed trooper to guard the two women. -
+431	waves, unless they were an `item.' -
+432	ways.  -
+433	we're in the process of redecorating the flat -
+434	well as in the domain of physical disorder.  -
+435	were easy in comparison with the profound political
+436	with an express salvo as regards certain named rights -
+437	with some misgivings. -
+438	with the participation of other CCOP member-countries. -
+439	wits actually deserted him in open court. -
+440	wooden pattens such as the Lapps use -
+441	zoos throughout the world cooperate in breeding programmes. -
+442	А потом начались помехи.
+443	Акционерам были обещаны неизменные общие дивиденды числом не менее
+444	Алексей подумал, что это в общем глупо оставаться там, пока есть
+445	Бенджамин женился снова.
+446	Большинство из них, как она увидела, были азиаты или карибы, в
+447	Борцы за права животных были отпущены на поруки при условии, что они
+448	Боюсь, что не смогу прийти.
+449	Брауна П.
+450	Будучи удовлетворительным в других случаях, дизельное топливо, которе
+451	Буркин долго не мог заснуть.
+452	Было бы полезно в заключение посмотреть на некоторые побочные
+453	Было бы трудно обосновать империалистическую теорию Ленина
+454	Было поздно, поэтому мы пошли домой.
+455	В дальнейшем на протяжении моей карьеры, снова в прессе он называл
+456	В данном случае кость не имеет ничего общего с костью предплечья , и
+457	В деревне же обыкновенно они изливают душу перед своими
+458	В заключение основные итоги проекта могут быть суммированы как:
+459	В иных случаях у людей даже нет дома, чтобы терять. [...]
+460	В конце концов я уступил и неохотно поднялся по узким степнькам.
+461	В машине было семь человек, не считая трёх собак.
+462	В момент удара хвост ящерицы отрывается от тела.
+463	В остальном, однако, это убедительный и разумный доклад.
+464	В ответ демонстранты начали скандировать "Мы не уйдем".
+465	В придачу к скольжению по полу Стег умеет цепляться за стены и
+466	В связи с этим она оказалась вовлечена в планы директора школы
+467	В связи с этим они обратились к своим аргументам относительно
+468	В случае интервенции наш народ не останется
+469	В случае чего я дам вам знать вскорости.
+470	В таком объявлении говорится, что планирующееся разрешение становится
+471	В течение многих лет в кафе самообслуживания блюда
+472	В то же время для многих женщин это может означать начало нового
+473	В то же мгновение полный старик с седыми бакенбардами
+474	В частности, женщины обADVужили, что к ним относятся с небольшим
+475	ВАЛ потом заменить, вероятно, на ПОСЛЕ (А2, А1)
+476	Ввиду последних событий мы считаем этот шаг
+477	Винни-Пух жил под именем Сандерс.
+478	Внесена по OPER из-за сложной семантики "не менее а1" = "а1 или более
+479	Внесена по OPERAT из-за сложной семантики "не более а1" = "а1 или менее
+480	Внесена по ОПЕР из-за сложной семантики "не менее а1" = "а1 или более
+481	Внесена по ОПЕРАТ из-за сложной семантики "не более а1" = "а1 или менее
+482	Внесено также в OPER, так как требуется установить, по сравнению с чем "иной".
+483	Внесено также в ОПЕР, так как требуется установить, по сравнению с чем "иной".
+484	Внутреннее состояние организма контролируется при
+485	Во время одной службы, пока он sentоведовал, в часовню ворвались три
+486	Во всяком случае, первый из моих рассказов связан с
+487	Возьмите меня, например.
+488	Возьмите мою рукопись и карандаш пока что.
+489	Войска Барбароссы подавляют толпу во время его коронации.
+490	Вопреки моим ожиданиям всё прошло хорошо.
+491	Все приказания выполнятся в порядке очередности
+492	Все это делается для того, чтобы повысить цену на вещи, которые мы
+493	Все это, конечно, в глазах людей проницательных означало,
+494	Второй показательный круиз планируется провести в Корейских водах
+495	Вы знаете, в общем полиция не любит, когда из них делают дураков.
+496	Вы пришли сюда затем же, зачем и я.
+497	Выбор этого месяца, в частности, очень высоко котируется среди того,
+498	Г-н Рэм сказал, что в интересах свободы печати он предоставляет
+499	Германии соглашаются на обмен шпионами в знак улучшения отношений.
+500	Главная мысль лорда Тэйлора была в том, чтобы посоветовать
+501	Гладстона.
+502	Дайте мне стул, пожалуйста.
+503	Добавлена по OPER, так как семантика этого оборота (и ряда других
+504	Добавлена по ОПЕР, так как семантика этого оборота (и ряда других
+505	Добавлено в OPER, так как нужно устанавливать, "в итоге чего именно"
+506	Добавлено в ОПЕР, так как нужно устанавливать, "в итоге чего именно"
+507	Дом находится близко от вокзала.
+508	Дорога обратно к магазинам и барам постепенно переходит в воду из-за
+509	Достаточно интересно, что спустя несколько недель
+510	Достоинства вполне покрывают недостатки.
+511	Другими словами, ему следовало бы относиться к медиа-бизнесу как к
+512	Его душа, привыкшая во всем следовать правилам приличия,
+513	Его записная книжка была раскрыта перед ним, его шлем лежал на столе.
+514	Его описание обеих симфоний и Фальстафа обладают всеми этими
+515	Если бы не ваше присутствие, мне было бы скучно.
+516	Если бы не вы, я бы погиб.
+517	Если бы я был лебедем, я бы улетел.
+518	Если вы придёте, вы увидите его.
+519	Если так можно, конечно.
+520	Если я не буду работать, то у нас не будет ничего.
+521	Есть два метода заложить текст в компьютер с целью распознания.
+522	Есть еще конверсивное значение (за мной)!
+523	Есть ли способ задать это ограничение
+524	Есть много примеров для сравнения в области психологии, равно как и
+525	Еще много чего.
+526	Её локоны выбивались из-под шляпы.
+527	За день до семинара около пятисот человек пришли на
+528	Заботливое и справедливое общество должно зависеть от
+529	Зайдите ко мне, прежде чем уедете.
+530	Замажьте все поверхности как минимум двумя слоями глянцевой краски
+531	Зачем было возведено это здание?
+532	И из всех знакомств самым основательным и, правду
+533	Игрунка будут разводить, по всей вероятности, только в том
+534	Из ASP переведено в OPER, из ВВОДН в ЧАСТ.
+535	Из АСП переведено в ОПЕР, из ВВОДН в ЧАСТ.
+536	Из категории ASP переведено в категорию OPER, так как синтаксис не помогает
+537	Из категории АСП переведено в категорию ОПЕР, так как синтаксис не помогает
+538	Изначальная идея ДМ заключалась в том, что каждый мог найти
+539	Имеются трудности в отношении формулировки.
+540	Иногда такие положения вторичны по отношению к текущему состоянию
+541	Исходная статья оставлена, т.к. я, кажется не знаю примеров на двухвалентный
+542	Их было числом восемнадцать.
+543	К RELAT прибавлено OPER, из PARENTH переведено в СОЧ_СОЮЗы.
+544	К ОТНОШ прибавлено ОПЕР, из PARENTH переведено в СОЧ_СОЮЗы.
+545	К концу дня половина из нас натёрла себе ноги.
+546	Каждому рабочему будут платить в соответствии с его
+547	Как раз когда мы собирались уходить, Фрэнк Дик отозвал меня в сторону
+548	Как только мы вышли в море, меня замутило
+549	Как-то надо указать, что происходит нечто одновременно с
+550	Когда он вернулся, было уже без десяти девять.
+551	Конвертируемые облигации следует выставить отдельно от других
+552	Конечно, мы найдем такую, как тебе нравится.
+553	Краткая биография PARTICо включается в качестве введения.
+554	Кроме того, я буду использовать слово "стиль" только
+555	Кстати, я Мартин Барр, но иногда я сова.
+556	Лугановичем.
+557	Люди, чьи имена она точно не помнила, окликали ее по имени, и она
+558	Мальчик плакал, потому что хотел есть.
+559	Машина остановилась у тротуара.
+560	Между тем Италия вела переговоры о том, чтобы вступить
+561	Между тем я передумал.
+562	Многие из лучших журналистов Камеруна сейчас работают
+563	Может вставляться даже между предлогом и именной группой.
+564	Может вставляться между вспомогательным и главным глаголом.
+565	Можно было спорить, что такая стратегия была бы в любом случае
+566	Мы боремся в защиту мира.
+567	Мы в процессе переоформления квартиры.
+568	Мы должны остановиться здесь, так как дальше идти
+569	Мы дошли до почты.
+570	Мы жертвуем продукты питания и одежду в помощь беженцам.
+571	Мы надеемся проинформировать их относительно открытий,
+572	Мы не хотим жить там же, где резиденты.
+573	Мы обычно ездим туда же, куда и наши друзья.
+574	Мы отказались снова спорить в свете прошлых событий.
+575	Мы по-прежнему должны верить в любовь, равно как должны верить в
+576	Мы приехали одновременно с нашим хозяином.
+577	Мы, может быть, его где-нибудь встретим.
+578	На самом деле, его вторая жена пережила его на четверть
+579	На самом деле, эти термины были проинтерпретированы большим
+580	На этот раз он не нашёл остроумного ответа.
+581	Наверху же, в парадных комнатах, он бывал редко.
+582	Надо уточнить, что этот оборот ставится как правило между
+583	Наконец водолаз появился на поверхности.
+584	Наконец час настал.
+585	Насколько я могу судить, это правильно.
+586	Не он, случайно, выдвинул этот план?
+587	Не уверена, что ENG подходит для всех случаев.
+588	Не уверена, что АНГ подходит для всех случаев.
+589	Несмотря на то, что они прилагали все усилия, им не
+590	Несомненно, мы были не правы с самого начала.
+591	Ничего, если я лягу тут рядом с твоей кроватью?
+592	Но даже Хелен Хантингтон не ищет независимости с тем, чтобы опять
+593	Но за день до того, как он сел на самолет, удовольствие
+594	Ночью вся семья спала в неуютном прибежище на краю леса.
+595	Нынешнее управление во главе с председателем Майком Смитом и
+596	ОПЕР
+597	ОПЕР, так как надо знать, по сравнению с чем остальные.
+598	Однако более трех четвертей этого бизнеса были начаты скорее
+599	Однако тут нужно специальное правило (собственно, как и должно быть при ОПЕРе), чтобы
+600	Ожидая лифта, он сказал себе, что он не более увлечен, чем мог быть в
+601	Он будто бы потерял сознание.
+602	Он был убит через день после того, как он сказал ливанцам, накануне
+603	Он дал понять, что не согласен.
+604	Он закрыл окно, чтобы ребёнок не простудился.
+605	Он зарабатывает столько же, сколько и ты.
+606	Он любил её, несмотря на её маленькие слабости.
+607	Он может приходить и уходить, когда захочет.
+608	Он не испытывал страха, так как был храбрым человеком.
+609	Он обADVужил достоинства Библиотеки Гладстона в Хейуордене около
+610	Он отдал грабителя под надзор полиции.
+611	Он отошёл (в сторону), чтобы я мог пройти.
+612	Он получает меньше одной трети от общего числа.
+613	Он поступил вопреки моим желаниям.
+614	Он пошел прежде всего к тому месту, где они с Кристианом привязали
+615	Он сделал доклад на тему баптизма.
+616	Он совсем не злой человек.
+617	Он указал на диагностическую панель, где несколько красных огоньков
+618	Он умер по дороге в больницу.
+619	Он умер по дороге домой.
+620	Он, конечно, придет.
+621	Она говорит, что, на самом деле, она совсем другая.
+622	Она кричала на них в два раза чаще, а собаки в ответ выли вдвое
+623	Она попрощалась со своей старой хозяйкой накануне.
+624	Она посмотрела на меня с нескрываемым неудовольствием.
+625	Она уставилась на страницы, пока Кэролин читала, как будто могла
+626	Они работают на одном компьютере по очереди.
+627	Опять преобразования как у слов с семантикой взаимности.
+628	Опять-таки соответствия.
+629	Ориентация на душевное здоровье уделяет больше внимание прежнему в
+630	Остался по меньшей мере час, пока солнце не ушло.
+631	Откуда-то издали до нас донеслось странное потрескивание,
+632	Отнесено мною к CONJам. Второй конъюнкт закрывается запятой.
+633	Отнесено также к категории OPER, так как ADVечия такого рода служат для
+634	Отнесено также к категории OPER, так как не очень тривиально устанавливается,
+635	Отнесено также к категории OPER, так как требуются преобразования СемПа с
+636	Отнесено также к категории ОПЕР, так как ADVечия такого рода служат для
+637	Отнесено также к категории ОПЕР, так как не очень тривиально устанавливается,
+638	Отнесено также к категории ОПЕР, так как требуются преобразования СемПа с
+639	Отправляйтесь немедленно, иначе опоздаете на поезд.
+640	Паттена, "третьей силы", а именно активных граждан.
+641	Пациент часто научается раздеваться задолго до того,
+642	Первым я увидел там его, и тогда он сказал мне, что они собираются
+643	Переведено в OPER, так как, во-первых, PARTICица, во-вторых - так как требуется
+644	Переведено в ОПЕР, так как, во-первых, PARTICица, во-вторых - так как требуется
+645	Переведено из ПРЕДЛ в СОЧ_СОЮЗы, добавлена категория OPER, так как А1
+646	Переведено из ПРЕДЛ в СОЧ_СОЮЗы, добавлена категория ОПЕР, так как А1
+647	Переведено из категории RELAT в категорию ASP с сохранением пометы OPER,
+648	Переведено из категории ОТНОШ в категорию АСП с сохранением пометы ОПЕР,
+649	Платя по итогам, в отсутствие ответа, GP будут наказаны.
+650	Плюс ко всему, один гражданин не может извлечь выгоду из успешного
+651	По мере того как мы ехали, нам казалось, что скала
+652	По поводу VAL для перенесения в BSIT см. след. статью.
+653	По поводу ВАЛ для перенесения в ЭСИТ см. след. статью.
+654	По сравнению с группами, которые пришли с тех пор, они выглядят
+655	Под предлогом болезни он не вышел на работу.
+656	Поезд прибыл с опозданием из-за тумана.
+657	Пожалуйста, распишитесь внизу в подтверждение получения упаковки.
+658	Пока живу - надеюсь.
+659	Пока что ему было над чем подумать над другим.
+660	Полезный метод - иметь рамки, т.е. предложения с
+661	Полезный метод - иметь рамки, то есть предложения с
+662	Полицейские силы выбирают новых сотрудников при помощи видеозаписей,
+663	Помнить про should.
+664	После загадочного посещения мы стали с опаской возвращаться
+665	После лекции состоялось обсуждение.
+666	После того как мы расстались, не произошло ничего
+667	Потом корабли отправились в 8 часов вечера со скоростью 10 км/ч.
+668	Почему-то в каждой из них непременно был крыжовник.
+669	Представь себе прежде всего, что все наши городы стали такими же
+670	Прежде всего будь уверен в одном.
+671	Прежде всего вам следует прислушаться, пока вы не услышите тишину.
+672	Прежде всего дети, возможно, протестовали против отъезда родителей.
+673	Премьер-министр появился в конце передачи, чтобы
+674	Прибавлена по OPER (ранее содержавшаяся в SF), так как может
+675	Прибавлена по ОПЕР (ранее содержавшаяся в СХ), так как может
+676	Притом никто бы не поверил, что Кайли могла сбросить верх от бикини в
+677	Пусть я ошибаюсь, но и вы не совсем правы.
+678	Рабочие просто хотели во что бы то ни стало получить власть, и они
+679	Раз я уже здесь, я лучше останусь.
+680	Разобраться.
+681	Регуляция и рост клеток был гораздо сложнее, чем считалось изначально,
+682	Рынок в настоящий момент оказывается в преддверии новой эры
+683	С таким  же  успехом можно сказать, что  колонна Нельсона -
+684	С тех пор я испытываю угрызения совести.
+685	С точки зрения инженера, который хочет сделать машину, которая может
+686	Сontrary to my expectations all went well. -
+687	Самое лучшее, по-моему, - это объяснять каждый случай
+688	Свой маленький рост он с избытком компенсировал
+689	Сделайте приглашения в форме черепа и скрещенных костей и приделайте
+690	Сегодня его романы - постоянно популярные у читающей публики - еще
+691	Семья, скажем, проводит всю жизнь в пригороде.
+692	Сержант завел джип, и мы въехали на кукурузное поле на скорости
+693	Сильный ветер дул на платформе по направлению к озеру вместе с
+694	Следует обратить внимание на might.
+695	Следует отметить как-то элемент значения ever, а именно
+696	Следует подумать насчет разделения статей "(|, )в самом
+697	Следует помнить про as for example.
+698	Слушания проходили в палатах и передаются с согласия сэра Стивена
+699	См 2 - не уверена, что выделяется запятой (Был какой-то класс единиц скорее в
+700	Сочинение у вас хорошее, если не считать нескольких
+701	Союза.
+702	Справа тянулся и потом исчезал далеко за селом ряд холмов.
+703	Среди гостей были два актёра.
+704	Студенту не следует принимать факты, идущие вразрез с теми, которые
+705	Ступенчатая система Марка выглядит следующим образом: гитара идет
+706	Суд услышал, что ребенок умер от ужасных травм включая три черепных
+707	Так или иначе ты будешь моей.
+708	Так что же мы можем сейчас сделать?
+709	Тем не менее, этот уважаемый менеджер иногда не выдерживает
+710	Тираж этой газеты превышает миллион.
+711	То же правило, что и для взаимных глаголов.
+712	То же происходит и во избежание вспучивания земли.
+713	У Северной Кореи был огромный прогресс при содействии Советского
+714	У Така было много других ролей в кино- и телефильмах,
+715	У кровати ни в коем случае не должно быть колес
+716	У меня на этот счет особое мнение.
+717	У нашего магазина в наличии слишком много товаров.
+718	У него столько же детей, сколько и у тебя.
+719	У них нет денег на самое необходимое, не говоря уже о предметах
+720	Уже описанные структурные формы были сложными в деталях, но
+721	Уточнить.
+722	Уход Британии из Индии или потеря Францией Алжира были легкими по
+723	Фирма поставляет товары на льготных условиях.
+724	Фраза переведена без учёта контекста.
+725	Французская армия была тогда в состоянии полной
+726	Хорошие книги появляются в результате большой работы
+727	Чаще всего обзор предлагается пользователю по умолчанию, когда
+728	Чем скорее, тем лучше.
+729	Честера, библиотеки, созданной на основе личных книг мистера
+730	Что касается его предложения, то я не сказал ничего определённого.
+731	Этих денег ему хватит до конца года.
+732	Это применяется так же в случаях нарушения контракта со стороны
+733	Это сильно различается в зависимости от совета округа.
+734	Это соображение последовало в продолжение тех же процедур с
+735	Это утверждение трудно опровергнуть или принять, основываясь на
+736	Это, в свою очередь, делает их дешевле и достаточно маленькими, чтобы
+737	Этот "свой" должно бы разобратся общим алгоритмом
+738	Этот писатель был в моде в начале века.
+739	Я был уверен, что слушания прошли хорошо, и все же нервно ждал,
+740	Я впервые заметил жалкие жолобки.
+741	Я живу в Софьине и занимаюсь хозяйством уже давно, с тех
+742	Я медленно отъехал, а затем оказался на углу Юнбона и Глустера.
+743	Я не приду, разве что вы очень этого захотите.
+744	Я нисколько не испугался.
+745	Я приехал на вокзал после того, как поезд ушёл.
+746	Я просил вас во имя всемогущего Господа прекратить
+747	Я рассматривал его присутствие как помеху экспедиции, но, на самом
+748	Я сделал это исходя из вашего обещания.
+749	Я слышал, что они были построены людьми Железного века в честь Меган,
+750	Я также большой поклонник Дженнифер Каприати из-за ее
+751	Я также не верю в демократию как преграду: вот почему я против
+752	Я тоже пошел туда.
+753	Я уважаю его, хоть он мне и не нравится.
+754	Японский продукт был разработан дочерней компании AT&T
+755	а не только Уилтширской архитектуры".
+756	а1".
+757	а1". Надо подумать, стоит ли оставлять MODL в SF.
+758	а1". Надо подумать, стоит ли оставлять МОДЛ в СХ.
+759	беспомощности.
+760	более известны, чем когда-либо, благодаря тому, что их сюжеты были
+761	в войну на стороне союзников.
+762	в направлении первых трех канистр.
+763	в отдельности, не пытаясь обобщать.
+764	в связи с использованием языка в литературе.
+765	в сотрудничестве с компанией Майкрософт.
+766	в сфере физических расстройств.
+767	в том числе "Стук почтальона" со Спайком Маллиганом,
+768	в установленные сроки.
+769	века.
+770	взглянул вверх.
+771	видеть события, которые там разворачивались.
+772	влияние на религию.
+773	вниманием и пониманием.
+774	вооруженный полицейский, который охраняет обеих женщин.
+775	вполне обычно.
+776	время дня
+777	все 1950 сотрудников останутся на своих местах.
+778	вы можете убедиться собственными глазами в наличии всего лишь одной
+779	вычисляется очень нетривиально.
+780	глагол be, ставить were
+781	гнетущей сухой жары.
+782	гостями.
+783	громче.
+784	давления, и подчиненные несут основную тяжесть:
+785	деле(|, )" и "(|, )на самом деле(|, )"
+786	деле, сейчас у меня сильное убеждение, что он так же вынослив, как и
+787	деревянные лыжи, такие, которыми пользуются лапландцы
+788	добрую волю и объективную истину.
+789	за границей.
+790	заседании суда.
+791	застынет.
+792	значит, вы всё-таки пришли!
+793	и всё же он не пошёл в театр
+794	и устроил мне большой выговор.
+795	изложена.
+796	интеллектуальной популярности.
+797	интересного.
+798	исключительной напористостью и решительностью.
+799	их к двери вместо воздушных шариков.
+800	к себе в лагерь.
+801	как [где] бы ни было
+802	как он сможет одеваться.
+803	качествами в полной мере, и структура каждой части в симфониях хорошо
+804	квалификацией.
+805	кельтской богини.
+806	количеством разных способов.
+807	конъюнкт сзади ограничен запятой.
+808	которые имеет для России независимость Украины.
+809	которые показывают им разные виды ситуаций, с которыми им придется
+810	который был недавно показан по ТВ.
+811	лошадей.
+812	любом другом случае.
+813	меня "обеспеченным атлетом", который увиливает от главного
+814	миру.
+815	многократных избиваний.
+816	может вставляться даже между предлогом и ИГ
+817	может вставляться между be и предикативом
+818	момента), и нужны правила для описания этого.
+819	мучить и наказывать меня.
+820	на Трафальгарской площади.
+821	надо отражать, что параметр этот носит относительный характер - возможно даже, что эта
+822	напоминающее мелкую дробь кастаньет .
+823	наречие, в 2 - скорее вводн. Три последних оборота не переводила в PRONO, так как надо
+824	наречие, в 2 - скорее вводн. Три последних оборота не переводила в МЕСТ, так как надо
+825	насущные проблемы, такие как занятость и жильё
+826	начале словаря, которые выделяются запятыми только в начале предложения.).В 1 - скорее
+827	начали мигать в подтверждение его слов.
+828	не будут присутствовать на охоте в Англии и Уэльсе.
+829	не был их "номер".
+830	не потерять эту семантическую связь.
+831	невозможно.
+832	недействительным по истечении оговоренного периода.
+833	ненужной.
+834	неполноты второго конъюнкта. Кроме того (ср. пример 2), надо указать, что второй
+835	несколькими незначительными изменениями для второй фазы пробных схем.
+836	несколько оборотов такого рода - ср. "в иных случаях (2)".)
+837	несколько обучающих фильмов о сексе.
+838	несмотря ни на что; что бы ни было
+839	нецелесообразным.
+840	о которой он не просил.
+841	оборот "в наличии" с теми характеристиками, которые в ней указаны. Поэтому сделала свою
+842	обороты тоже.
+843	обоснованные.
+844	обстоятельства, которые проливают свет на то, как символизм оказывает
+845	общем и частном обеспечении - и, говоря словами Джона
+846	обязательств.
+847	однословных единиц и оборотов с ни(-) - усиление отрицания.) НЕ знаю, облегчит ли это
+848	он занимается английским по понедельникам, а также по
+849	он никак не мог узнать ее адрес
+850	они шли по улице нам навстречу
+851	описанным до того.
+852	орфографических ошибок.
+853	от воссоединения смешалось с грустью.
+854	отличие от магазина продуктов техники, где большинство было белое.
+855	отрицанием.
+856	очевидно , звери приходили сюда на водопой
+857	пациента; в остальных случаях они долго длящиеся и твердо
+858	переводить в среднем пять страниц в день
+859	перелома, размеров 10 дюймов в общем объеме, два переломанных запястья и
+860	перепонки .
+861	по какому параметру производится сравнение. Кроме того, надо предусмотреть, что в СемПе
+862	подавались на тарелках одноразового использования.
+863	подойти по размеру к среднему карману.
+864	покупаем из-за границы.
+865	положены в основу очень успешных фильмов.
+866	пор, как кончил в университете.
+867	послать меня в Тидворт.
+868	посредстве рецепторов, в большинстве своем
+869	построению правильного СемПа для PREPожения с этим словом - нужно специальное
+870	потолок, как человек-паук.
+871	потребоваться найти по тексту (или еще где), что значит "установленные"
+872	правила вычисления первого конъюнкта по SF2 и восстановления синтаксической
+873	правила вычисления первого конъюнкта по СХ2 и восстановления синтаксической
+874	правило. Сходу понятно, что задействовано актуальное членение.
+875	предупредить о грядущих беспорядках.
+876	преобразования СемПа, так как надо искать, "остальное" пр сравнению с чем. (Есть
+877	при участии других стран - участниц CCOP.
+878	привлекательности.
+879	пригласить членов совета руководства брака, чтобы они показали
+880	применительно к Британской Империи.
+881	присутствии светловолосой красотки и резвиться в волнах, если б это
+882	программы по размножению животных.
+883	продавца.
+884	продают в Великобритании, явно имеет большой процент серы.
+885	продумать, должна ли эта помета сочетаться с другими или заменять их.
+886	простыми в общих чертах.
+887	противостояния.
+888	публичный митинг в Банкране, организованный DUC.
+889	пустыми местами, которые надо заполнить.
+890	пятницам.
+891	равнодушным зрителем.
+892	развертывается: :неплохих результатов по сравнению с прошлым годом = неплохих
+893	разум совсем покинет судью на каком-нибудь открытом
+894	расставление приоритетов в тексте, типа "во-первых", или "начнем с того, что". В этом случае
+895	результатов по сравнению с результатами прошлого года.
+896	репортажи
+897	репрессий и чрезвычайного положения.
+898	роскоши.
+899	с А2 соотносились строки GF2 и SF2, но я их убрала, так как а2 нет в SYNR.
+900	с А2 соотносились строки ГХ2 и СХ2, но я их убрала, так как а2 нет в СИНО.
+901	свободно отказаться от нее.
+902	сделанных нами в ходе исследовательской работы.
+903	синтаксический анализ, но на GF1 есть ограничение - ГГ может быть только с отрицанием.
+904	синтаксический анализ, но на ГХ1 есть ограничение - ГГ может быть только с отрицанием.
+905	синтаксический хозяин - ГГ.
+906	система не может предоставить точное совпадение.
+907	скажут все что угодно, лишь бы завладеть ею.
+908	сказать, самым приятным для меня было знакомство с
+909	скорее всего он не придет
+910	следует отправлять в отдел кадров по адресу, указанному выше.
+911	случае, если зоопарки по всему миру объединятся в
+912	со специальной оговоркой в отношении некоторых
+913	совсем не тот памятник,  который  следовало воздвигнуть
+914	содрогнулась при мысли о столь чудовищном вторжении в
+915	создателями рынка и банками, чем от лица клиентов.
+916	сосредоточенных в стволе мозга.
+917	сравнению с глубокими политическими и психологическими смыслами,
+918	ставится в конце предложения.
+919	становится всё выше и выше.
+920	статью.
+921	столкнуться.
+922	судьям объявлять приговор исходя из ожиданий публики.
+923	так как эта семантическая связь может бить довольно далеко, и главное, требовать
+924	таким образом более 40 различных видов онкогенов были открыты
+925	тем не менее, это случается не так часто
+926	тратта сроком на двадцать дней на сумму пятьсот фунтов
+927	требований по проживанию.
+928	тусклыми, как эти восточные города.
+929	удалось добиться своего.
+930	указаны в задаче, чтобы предоставить экзаменатору информацию,
+931	улыбалась и кивала, как будто отвечала им всем.
+932	упомянутых прав
+933	упорядочивания событий относительно момента, о котором идет речь (до или после этого
+934	устанавливать, с какой другой ситуацией соотносит "все же" описываемую ситуацию.
+935	установления кореферентности для таких слов, - надо велеть ему лезть и в
+936	ущерб позднему.
+937	фактах текущих исследований.
+938	формального протеста другого гражданина; он должен сам подать протест
+939	характеристика применима к А1 только по сравнению с А2 - ср., например, (3) - возможно,
+940	холодным дождем.
+941	чему угодно другому.
+942	через беспроволочную систему Сони, в блок управления Пита Корниша.
+943	что касается этой книги, то мне она не нравится
+944	что она вовсе не выглядела бы молодо, если бы не внешность ее сестры.
+945	что скоро наступит тот печальный и нелепый день, когда
+946	что у i-го актанта надо искать  подчиненные узлы с граммемой
+947	что я считаю лучшим на все времена.
+948	что-нибудь блестящее для создания в пределах своей (не)компетентности.
+949	чтобы услышать официально, но ничего не произошло.
+950	чужие владения.
+951	экспериментально с использованием ретровирусов.
+952	эта ЧАСТ ведет себя как ВВОДН и отделяется запятой.
+953	этапа.
+954	я, однако, не могу этого одобрить
+955	я.
+-1	D_BASIC_SIT
+0	АВТОР,,А2, ЭС1
+1	ЛОК, ? где-то па дистаации), А?
+2	ЛОК, КВН-Т, А1
+3	ОЦЕНКА
+4	ОЦЕНКА  С, А1
+-1	D_ALGORITHM
+0	$oneself
+1	AL1
+2	AL2
+3	AL3
+4	AL4
+5	AL4_2
+6	AL5
+7	AL6
+8	AL7
+9	AL8
+10	AL_neg
+11	AL_no
+12	pass(А3)
+-1	D_POSITION
+0	<
+1	<<
+2	>
+3	>>
+4	^
+-1	D_GRAMMEMS
+0	*
+1	comp
+2	буд
+3	нст
+4	прш
+-1	D_TITLE
+0	(, )скажем(, )
+1	(, )такой как
+2	(, )такой, какой
+3	(, )такой, который
+4	(без | безо)
+5	(в | во)
+6	(в добавок к | вдобавок к)+Д
+7	(в придачу к | впридачу к)+Д
+8	(в разрез с | вразрез с)+Т
+9	(в|на) самом деле(|, )
+10	(в|на) самом деле(|,)
+11	(над | надо)
+12	(не взирая на | невзирая на)+В
+13	(от | ото)
+14	(хотя | хоть) (бы | б)
+15	o+П
+16	upwards
+17	ИЛЛ They run one computer in turns -
+18	Они работают на одном компьютере по очереди
+19	Шалтай_Балтай_сидел_на_стене
+20	а затем
+21	а именно
+22	а именно (|:|,)
+23	а потом
+24	а также
+25	а_затем
+26	а_именно
+27	а_потом
+28	а_также
+29	абы
+30	аж
+31	без
+32	без учета+Р
+33	без+Р
+34	без_сомнения
+35	без_учета+Р
+36	благодаря
+37	благодаря тому, что
+38	благодаря+Д
+39	благодаря_тому_что
+40	близ
+41	близко к
+42	близко к+Д
+43	близко от
+44	близко_к+Д
+45	близко_от
+46	более
+47	более чем
+48	более_чем
+49	будто
+50	будто бы
+51	будто_бы
+52	в
+53	в (|самый) канун+Р
+54	в адрес
+55	в ведение+Р
+56	в виде
+57	в виде исключения
+58	в виде+Р
+59	в границах
+60	в дальнейшем
+61	в данном случае
+62	в данный момент
+63	в действительности
+64	в дополнение к
+65	в других случаях
+66	в зависимости от того
+67	в зависимости от того,
+68	в зависимости от+Р
+69	в заключение
+70	в защиту+Р
+71	в знак+Р
+72	в интересах+Р
+73	в иных случаях
+74	в итоге
+75	в канун+Р
+76	в качестве+Р
+77	в конечном счете
+78	в конце концов
+79	в конце+Р
+80	в любом другом случае
+81	в любом случае
+82	в момент+Р
+83	в наличии
+84	в направлении+Р
+85	в настоящее время
+86	в начале+Р
+87	в нескольких шагах от+Р
+88	в области+Р
+89	в общем
+90	в общем объеме
+91	в общем,
+92	в общих чертах
+93	в ожидании
+94	в ожидании+Р
+95	в основном
+96	в остальном
+97	в остальных случаях
+98	в ответ
+99	в ответ на это
+100	в отличие от
+101	в отличие от+Р
+102	в отношении
+103	в отношении+Р
+104	в отсутствие+Р
+105	в первый раз
+106	в плане
+107	в подтверждение+Р
+108	в полной мере
+109	в пользу
+110	в пользу+Р
+111	в помощь+Д
+112	в порядке очередности
+113	в преддверии+Р
+114	в пределах+Р
+115	в придачу к+Д
+116	в присутствии+Р
+117	в продолжение
+118	в продолжение+Р
+119	в противном случае
+120	в противовес
+121	в процессе+Р
+122	в рамках+Р
+123	в расчете на то
+124	в расчете на то,
+125	в расчете на+В
+126	в редких случаях
+127	в результате
+128	в результате+Р
+129	в свете+Р
+130	в свою очередь
+131	в связи с
+132	в связи с этим
+133	в связи с+Т
+134	в середине+Р
+135	в силу
+136	в силу того, что
+137	в случае отсутствия
+138	в случае чего
+139	в случае+Р
+140	в случаях
+141	в случаях+Р
+142	в соответствии с+Т
+143	в сопровождении+Р
+144	в состоянии+Р
+145	в сотрудничестве с
+146	в сотрудничестве с+Т
+147	в сочетании с+Т
+148	в сравнении с
+149	в сравнении с+Т
+150	в среднем
+151	в срок
+152	в сторону+Р
+153	в сущности
+154	в сфере
+155	в сфере+Р
+156	в таком случае
+157	в течение
+158	в течение+Р
+159	в то время (|,) как
+160	в то время как
+161	в то же время
+162	в том числе
+163	в тот же момент
+164	в указанном случае
+165	в установленные сроки
+166	в ущерб+Р
+167	в форме+Р
+168	в ходе+Р
+169	в целом
+170	в целях+Р
+171	в частности
+172	в честь+Р
+173	в числе+Р
+174	в этом случае
+175	в этот момент
+176	в+В
+177	в+П
+178	в-восьмых
+179	в-девятых
+180	в-десятых
+181	в-пятых
+182	в-седьмых
+183	в-третьих
+184	в-шестых
+185	в_административном_порядке
+186	в_адрес+Р
+187	в_безналичной_форме
+188	в_ведение+Р
+189	в_видах+Р
+190	в_виде
+191	в_виде+Р
+192	в_виде_исключения
+193	в_границах
+194	в_дальнейшем
+195	в_данном_случае
+196	в_данный_момент
+197	в_действительности
+198	в_добровольном_порядке
+199	в_дополнение_к
+200	в_дополнение_к+Д
+201	в_других_случаях
+202	в_зависимости_от+Р
+203	в_зависимости_от_того
+204	в_заключение
+205	в_защиту+Р
+206	в_знак+Р
+207	в_значительной_степени
+208	в_интересах+Р
+209	в_иных_случаях
+210	в_исключительных_случаях
+211	в_итоге
+212	в_итоге+Р
+213	в_канун+Р
+214	в_качестве+Р
+215	в_конечном_счете
+216	в_контакте_с+Т
+217	в_конце+Р
+218	в_конце_концов
+219	в_лице+Р
+220	в_любом_другом_случае
+221	в_любом_случае
+222	в_момент+Р
+223	в_наличии
+224	в_наличной_и_безналичной_форме
+225	в_направлении+Р
+226	в_настоящее_время
+227	в_начале+Р
+228	в_необходимых_случаях
+229	в_нескольких_шагах_от+Р
+230	в_области+Р
+231	в_общем
+232	в_общем_объеме
+233	в_общих_чертах
+234	в_ожидании
+235	в_ожидании+Р
+236	в_основном
+237	в_остальном
+238	в_остальных_случаях
+239	в_ответ
+240	в_ответ_на+В
+241	в_ответ_на_это
+242	в_отличие_от
+243	в_отличие_от+Р
+244	в_отношении
+245	в_отношении+Р
+246	в_отсутствие+Р
+247	в_первоочередном_порядке
+248	в_первую_очередь
+249	в_первый_раз
+250	в_плане
+251	в_поддержку+Р
+252	в_подтверждение+Р
+253	в_полной_мере
+254	в_пользу
+255	в_пользу+Р
+256	в_помощь+Д
+257	в_порядке_очередности
+258	в_порядке_подчиненности
+259	в_преддверии+Р
+260	в_пределах+Р
+261	в_придачу_к+Д
+262	в_присутствии+Р
+263	в_продолжение
+264	в_продолжение+Р
+265	в_противном_случае
+266	в_противовес
+267	в_противовес+Д
+268	в_процессе+Р
+269	в_размере+Р
+270	в_рамках+Р
+271	в_расчете_на+В
+272	в_расчете_на_то
+273	в_редких_случаях
+274	в_результате
+275	в_результате+Р
+276	в_свете+Р
+277	в_свою_очередь
+278	в_связи_с
+279	в_связи_с+Т
+280	в_связи_с_этим
+281	в_середине+Р
+282	в_силу
+283	в_силу_того_,_что
+284	в_следующей_редакции
+285	в_следующем_порядке
+286	в_случае+Р
+287	в_случае_отсутствия
+288	в_случае_чего
+289	в_случаях
+290	в_случаях+Р
+291	в_соответствии_с+Т
+292	в_сопровождении+Р
+293	в_состоянии+Р
+294	в_сотрудничестве_с+Т
+295	в_сочетании_с+Т
+296	в_сравнении_с
+297	в_сравнении_с+Т
+298	в_среднем
+299	в_срок
+300	в_сторону+Р
+301	в_судебном_порядке
+302	в_сущности
+303	в_сфере
+304	в_сфере+Р
+305	в_счет+Р
+306	в_таком_случае
+307	в_течение
+308	в_течение+Р
+309	в_то_время_как
+310	в_то_же_время
+311	в_том_числе
+312	в_тот_же_момент
+313	в_указанном_случае
+314	в_указанных_случаях
+315	в_установленном_порядке
+316	в_установленные_сроки
+317	в_ущерб+Д
+318	в_ущерб+Р
+319	в_форме+Р
+320	в_ходе+Р
+321	в_целом
+322	в_целях+Р
+323	в_частности
+324	в_честь+Р
+325	в_числе+Р
+326	в_этом_случае
+327	в_этот_момент
+328	вблизи от+Р
+329	вблизи+Р
+330	вблизи_от+Р
+331	вверх_по+Д
+332	ввиду отсутствия
+333	ввиду того, что
+334	ввиду+Р
+335	ввиду_отсутствия
+336	ввиду_того_,_что
+337	ввиду_того_что
+338	вдали
+339	вдали от+Р
+340	вдали_от+Р
+341	вдобавок к+Д
+342	вдобавок_к+Д
+343	вдоль
+344	вдоль по
+345	вдоль_по
+346	ведь
+347	верхом на+П
+348	верхом_на+П
+349	включая+В
+350	вместе с
+351	вместе с тем
+352	вместе_с
+353	вместе_с+Т
+354	вместе_с_тем
+355	вместо
+356	вместо того (|,) чтобы
+357	вместо того чтобы
+358	вместо+Р
+359	вместо_того_чтобы
+360	вне
+361	вне+Р
+362	вне_зависимости_от+Р
+363	вне_рамок+Р
+364	вниз по
+365	вниз по+Д
+366	вниз_по
+367	вниз_по+Д
+368	внутри+Р
+369	внутрь+Р
+370	во взаимодействии с+Т
+371	во время
+372	во время+Р
+373	во время, когда
+374	во всех остальных случаях
+375	во всех случаях
+376	во всяком случае
+377	во главе с+Т
+378	во избежание+Р
+379	во имя+Р
+380	во что бы то ни стало
+381	во-вторых
+382	во-первых
+383	во_взаимодействии_с+Т
+384	во_время
+385	во_время+Р
+386	во_время_,_когда
+387	во_всех_остальных_случаях
+388	во_всех_случаях
+389	во_всяком_случае
+390	во_главе_с+Т
+391	во_избежание+Р
+392	во_изменение+Р
+393	во_имя+Р
+394	во_исполнение+Р
+395	во_что_бы_то_ни_стало
+396	вовремя
+397	возле
+398	возле+Р
+399	возможно
+400	вокруг+Р
+401	вообще
+402	вопреки
+403	вопреки+Д
+404	вот почему
+405	вот_почему
+406	вот_уже_как
+407	впервые
+408	впереди от+Р
+409	впереди_от+Р
+410	вплотную к+Д
+411	вплотную_к+Д
+412	вплоть_до+Р
+413	впоследствии
+414	впритык к+Д
+415	впритык_к+Д
+416	вразрез с+Т
+417	вразрез_с+Т
+418	вроде+Р
+419	вроде_бы
+420	все же
+421	все равно как
+422	все равно что
+423	все так же
+424	все-таки
+425	все_же
+426	все_равно_как
+427	все_равно_что
+428	все_так_же
+429	вслед за+Т
+430	вслед_за+Т
+431	вследствие этого
+432	вследствие_этого
+433	главное
+434	главным_образом
+435	давно
+436	давным-давно
+437	даже
+438	далеко
+439	далеко от
+440	далеко_от
+441	действительно
+442	для
+443	для того чтобы
+444	для того(|,) чтобы
+445	для того, чтобы
+446	для целей
+447	для+Р
+448	для_того_,_чтобы
+449	для_того_чтобы
+450	для_целей
+451	для_целей+Р
+452	до
+453	до конца+Р
+454	до того, как
+455	до+Р
+456	до_конца+Р
+457	до_свидания
+458	до_того_,_как
+459	долго
+460	долгое время
+461	долгое_время
+462	дополнительно к+Д
+463	дополнительно_к+Д
+464	другими словами
+465	другими словами(,| -)
+466	другими_словами
+467	если
+468	если (не)...(то|так)
+469	если бы не
+470	если...то
+471	если_бы
+472	если_бы...то
+473	если_бы_не
+474	если_бы_не...то
+475	если_не...то
+476	если_не_..._то
+477	за
+478	за вычетом
+479	за границей
+480	за день до того
+481	за день до того как
+482	за день до того, как
+483	за день до+Р
+484	за исключением
+485	за исключением+Р
+486	за неимением
+487	за неимением+Р
+488	за пределами
+489	за пределами страны
+490	за пределами+Р
+491	за рубежом
+492	за то что
+493	за+В
+494	за+Т
+495	за_вычетом
+496	за_границей
+497	за_день_до+Р
+498	за_день_до_того
+499	за_день_до_того_как
+500	за_исключением
+501	за_исключением+Р
+502	за_неимением
+503	за_неимением+Р
+504	за_пределами
+505	за_пределами+Р
+506	за_пределами_страны
+507	за_рубежом
+508	за_то_что
+509	задолго до
+510	задолго до того как
+511	задолго до того, как
+512	задолго_до
+513	задолго_до_того_как
+514	затем же ... зачем
+515	затем_же...зачем
+516	зачем
+517	и
+518	и тогда
+519	и_так_далее
+520	и_тогда
+521	из числа
+522	из+Р
+523	из-за
+524	из-за границы
+525	из-за рубежа
+526	из-за того, что
+527	из-за этого
+528	из-за+Р
+529	из-за_границы
+530	из-за_рубежа
+531	из-за_того_,_что
+532	из-за_того_что
+533	из-за_этого
+534	из-под
+535	из-под+Р
+536	из_за+Р
+537	из_числа
+538	издали
+539	или
+540	или ... или
+541	или...или
+542	именно
+543	иначе
+544	интересно
+545	исключая+В
+546	исключительно
+547	исходя из
+548	исходя из+Р
+549	исходя_из
+550	исходя_из+Р
+551	к борту
+552	к концу+Р
+553	к примеру
+554	к тому же
+555	к+Д
+556	к_борту
+557	к_концу+Р
+558	к_примеру
+559	к_счастью
+560	к_тому же
+561	кажется
+562	как
+563	как будто
+564	как если бы
+565	как минимум
+566	как правило
+567	как продолжение
+568	как раз когда
+569	как свидетельство
+570	как следствие
+571	как...так и
+572	как...так_и
+573	как_..._так_и
+574	как_будто
+575	как_говорится
+576	как_если_бы
+577	как_минимум
+578	как_правило
+579	как_продолжение
+580	как_раз
+581	как_раз_когда
+582	как_свидетельство
+583	как_следствие
+584	как_следствие+Р
+585	как_только
+586	каким_образом
+587	касательно
+588	касательно+Р
+589	когда
+590	коль скоро
+591	коль_скоро
+592	конечно
+593	конечно же
+594	конечно_же
+595	конкретно
+596	конкретно:
+597	короче говоря
+598	кроме
+599	кроме того
+600	кроме+Р
+601	кроме_того
+602	кстати
+603	ли...ли
+604	либо...либо
+605	лишь
+606	между прочим
+607	между тем
+608	между+Т
+609	между_тем
+610	менее
+611	менее чем
+612	менее_чем
+613	мимо
+614	мимо+Р
+615	минимум
+616	минус+И
+617	может_быть
+618	мол
+619	на базе+Р
+620	на борту+Р
+621	на выгодных условиях
+622	на краю+Р
+623	на льготной основе
+624	на льготных условиях
+625	на момент+Р
+626	на основании+Р
+627	на основе+Р
+628	на протяжении
+629	на самом деле
+630	на сей раз
+631	на случай
+632	на стороне
+633	на тему+Р
+634	на этот раз
+635	на этот счет
+636	на+В
+637	на+П
+638	на_базе+Р
+639	на_борту+Р
+640	на_вид
+641	на_выгодных_условиях
+642	на_краю+Р
+643	на_льготной_основе
+644	на_льготных_условиях
+645	на_манер+Р
+646	на_момент+Р
+647	на_основании+Р
+648	на_основе+Р
+649	на_протяжении
+650	на_самом_деле
+651	на_сей_раз
+652	на_случай
+653	на_стороне
+654	на_стороне+Р
+655	на_тему+Р
+656	на_этот_раз
+657	на_этот_счет
+658	навстречу+Д
+659	над
+660	над+Т
+661	назло
+662	накануне
+663	накануне+Р
+664	наконец
+665	налично
+666	наперекор+Д
+667	например
+668	напротив
+669	напротив+Р
+670	наравне с
+671	наравне_с
+672	наравне_с+Т
+673	наряду_с_этим
+674	насколько
+675	настолько
+676	начиная с+Р
+677	начиная_с+Р
+678	не без+Р
+679	не более чем
+680	не более+Р
+681	не в пользу
+682	не говоря (|уже) о+П
+683	не говоря о+П
+684	не менее
+685	не менее чем
+686	не считая
+687	не считая+Р
+688	не то (что|чтобы)...(но|а)
+689	не только...но (и)
+690	не...а
+691	не_ читая
+692	не_..._а
+693	не_без+Р
+694	не_более
+695	не_более+Р
+696	не_более_чем
+697	не_в_пользу
+698	не_говоря_о+П
+699	не_менее
+700	не_менее_чем
+701	не_считая
+702	не_считая+Р
+703	не_то_чтобы...но
+704	не_то_чтобы_..._но
+705	не_только...но_и
+706	не_только_..._но_и
+707	невзирая на
+708	невзирая_на
+709	невзирая_на+В
+710	недалеко от
+711	недалеко от+Р
+712	недалеко_от
+713	недалеко_от+Р
+714	независимо_от+Р
+715	незадолго до
+716	незадолго_до
+717	незадолго_до+Р
+718	несмотря на
+719	несмотря на то
+720	несмотря на то что
+721	несмотря на то,
+722	несмотря на то, что
+723	несмотря на+В
+724	несмотря_на
+725	несмотря_на+В
+726	несмотря_на_то,
+727	несмотря_на_то_что
+728	ни в коем случае
+729	ни за что
+730	ни...ни
+731	ни_в_коем_случае
+732	ни_за_что
+733	ниже
+734	ниже+Р
+735	никак
+736	никоим образом
+737	никоим_образом
+738	нисколько
+739	ничуть
+740	но
+741	о
+742	о+В
+743	о+П
+744	обязательно
+745	однако
+746	одним_словом
+747	одновременно с+Т
+748	одновременно_с+Т
+749	около
+750	около+Р
+751	от
+752	от имени+Р
+753	от лица
+754	от+Р
+755	от_имени+Р
+756	от_лица
+757	отдельно от+Р
+758	отдельно_от+Р
+759	относительно
+760	относительно+Р
+761	очевидно
+762	перед
+763	перед тем как
+764	перед тем, как
+765	перед+Т
+766	перед_тем_,_как
+767	плюс+И
+768	по
+769	по всей вероятности
+770	по делу о+П
+771	по дороге
+772	по другую сторону
+773	по желанию
+774	по истечении+Р
+775	по какой-то причине
+776	по крайней мере
+777	по меньшей мере
+778	по мере того как
+779	по мере того(|,) как
+780	по мнению
+781	по направлению к
+782	по обеим сторонам
+783	по отношению к
+784	по отношению к+Д
+785	по очереди
+786	по поводу+Р
+787	по поручению
+788	по порядку
+789	по правде говоря
+790	по причине
+791	по причине+Р
+792	по пути
+793	по пути к+Д
+794	по пути+ПГ
+795	по сравнению с
+796	по сравнению с+Т
+797	по сути дела
+798	по умолчанию
+799	по ходу
+800	по+Д
+801	по+П
+802	по-моему
+803	по_адресу+Р
+804	по_вопросам+Р
+805	по_всей_вероятности
+806	по_делу_о+П
+807	по_дороге
+808	по_другую_сторону
+809	по_желанию
+810	по_имени+И
+811	по_исполнении+Р
+812	по_истечении+Р
+813	по_какой-то_причине
+814	по_крайней_мере
+815	по_меньшей_мере
+816	по_мере+Р
+817	по_мере_того_как
+818	по_месту_жительства
+819	по_мнению
+820	по_направлению_к
+821	по_направлению_к+Д
+822	по_обеим_сторонам
+823	по_отношению_к
+824	по_отношению_к+Д
+825	по_очереди
+826	по_поводу+Р
+827	по_поручению
+828	по_поручению+Р
+829	по_порядку
+830	по_правде_говоря
+831	по_представлению+Р
+832	по_предъявлении+Р
+833	по_причине
+834	по_причине+Р
+835	по_просьбе+Р
+836	по_пути+ПГ
+837	по_пути_к+Д
+838	по_собственному_желанию
+839	по_совести
+840	по_совету+Р
+841	по_согласованию_с+Т
+842	по_справедливости
+843	по_сравнению_с
+844	по_сравнению_с+Т
+845	по_сути_дела
+846	по_сходству_с+Т
+847	по_умолчанию
+848	по_ходу
+849	поверх
+850	под
+851	под видом
+852	под конец
+853	под надзор
+854	под предлогом+Р
+855	под руководством
+856	под+Т
+857	под_видом
+858	под_видом+Р
+859	под_именем+И
+860	под_конец
+861	под_надзор
+862	под_предлогом+Р
+863	под_руководством
+864	подле
+865	подле+Р
+866	подобно тому как
+867	подобно тому(|,) как
+868	подобно+Д
+869	подобно_тому_как
+870	пожалуйста
+871	позади
+872	позади+Р
+873	позднее
+874	пока
+875	пока что
+876	пока_что
+877	полностью
+878	понятно
+879	поперек+Р
+880	поскольку
+881	после
+882	после того как
+883	после того, как
+884	после этого
+885	после+Р
+886	после_того_как
+887	после_этого
+888	посреди
+889	посреди+Р
+890	потому (|,) что
+891	потому что
+892	потому_что
+893	почему-то
+894	почти
+895	поэтому
+896	правду сказать
+897	правду_сказать
+898	прежде всего
+899	прежде чем
+900	прежде_всего
+901	прежде_чем
+902	при
+903	при мысли о том
+904	при мысли о том,
+905	при мысли о+П
+906	при наличии+Р
+907	при ориентации на
+908	при отсутствии+Р
+909	при помощи+Р
+910	при посредстве+Р
+911	при содействии
+912	при содействии+Р
+913	при том что
+914	при том, что
+915	при условии
+916	при условии, (если|что)
+917	при участии
+918	при участии+Р
+919	при+П
+920	при_виде+Р
+921	при_всем_том
+922	при_мысли_о+П
+923	при_мысли_о_том
+924	при_наличии+Р
+925	при_необходимости
+926	при_ориентации_на
+927	при_отсутствии+Р
+928	при_поддержке+Р
+929	при_помощи+Р
+930	при_посредстве+Р
+931	при_содействии
+932	при_содействии+Р
+933	при_том_,_что
+934	при_условии
+935	при_условии+Р
+936	при_участии
+937	при_участии+Р
+938	при_этом
+939	применительно к+Д
+940	применительно_к+Д
+941	примерно
+942	примерно+И
+943	принимая во внимание
+944	принимая во внимание+В
+945	принимая_во_внимание
+946	принимая_во_внимание+В
+947	про
+948	про+В
+949	против
+950	против+Р
+951	прямо
+952	пусть...но
+953	путем+Р
+954	равно как
+955	равно_как
+956	ради
+957	ради+Р
+958	раз
+959	разве_что
+960	раньше, чем
+961	раньше_,_чем
+962	редко
+963	рядом с+Т
+964	рядом_с+Т
+965	с
+966	с (тех|той) (пор|поры) как
+967	с (тех|той) (пор|поры), как
+968	с одобрения
+969	с помощью
+970	с разрешения+Р
+971	с таким же успехом
+972	с тем чтобы
+973	с тем(|,) чтобы
+974	с тем, чтобы
+975	с тех (самых) пор
+976	с тех пор
+977	с тех пор как
+978	с того (самого) времени
+979	с того времени
+980	с того времени, как
+981	с точки зрения+Р
+982	с участием
+983	с учетом
+984	с целью
+985	с целью+Р
+986	с+Р
+987	с+Т
+988	с_использованием+Р
+989	с_одобрения
+990	с_помощью
+991	с_помощью+Р
+992	с_привлечением+Р
+993	с_применением+Р
+994	с_разрешения+Р
+995	с_таким_же_успехом
+996	с_тем_чтобы
+997	с_тех_пор
+998	с_тех_пор_как
+999	с_того_времени
+1000	с_того_времени_,_как
+1001	с_точки_зрения+Р
+1002	с_участием
+1003	с_участием+Р
+1004	с_учетом
+1005	с_учетом+Р
+1006	с_целью
+1007	с_целью+Р
+1008	скажем
+1009	сколь
+1010	скорее всего
+1011	скорее_всего
+1012	следующим образом
+1013	следующим_образом
+1014	словно
+1015	случаем
+1016	случайно
+1017	слыхать
+1018	снизу_у+Р
+1019	со своей стороны
+1020	со своей стороны,
+1021	со скоростью+Р
+1022	со_своей_стороны
+1023	со_скоростью+Р
+1024	собственно
+1025	совместно с+Т
+1026	совместно_с+Т
+1027	согласно
+1028	согласно+Д
+1029	соответственно+Д
+1030	соответствующим_образом
+1031	справа
+1032	сравнительно с
+1033	сравнительно_с
+1034	сразу
+1035	среди
+1036	среди+Р
+1037	средь+Р
+1038	сроком_на+В
+1039	стало_быть
+1040	столь
+1041	столько же...сколько
+1042	столько_же...сколько
+1043	столько_же_..._сколько
+1044	т.е.
+1045	так
+1046	так же как
+1047	так же, как
+1048	так как
+1049	так что
+1050	так_же_,_как
+1051	так_и_так
+1052	так_или_иначе
+1053	так_как
+1054	так_себе
+1055	так_что
+1056	таким образом
+1057	таким_образом
+1058	такой как
+1059	такой какой
+1060	такой который
+1061	такой_как
+1062	такой_какой
+1063	такой_который
+1064	там же ... где
+1065	там_же...где
+1066	тем временем
+1067	тем не менее
+1068	тем_временем
+1069	тем_не_менее
+1070	то есть
+1071	то...то
+1072	то_есть
+1073	тоже
+1074	только
+1075	точнее
+1076	точнее:
+1077	точно
+1078	туда же ... куда
+1079	туда_же...куда
+1080	у
+1081	у борта
+1082	у+Р
+1083	у_борта
+1084	учитывая
+1085	франко
+1086	хотя
+1087	хотя ( |и)...(но|а|да)
+1088	хотя бы
+1089	хотя...зато
+1090	хотя_бы
+1091	хотя_и...но
+1092	хотя_и_..._но
+1093	центрально по отношению к+Д
+1094	центрально_по_отношению_к+Д
+1095	цу
+1096	цыяц ус
+1097	цыяц ус к
+1098	часом
+1099	чем
+1100	чем...тем
+1101	чем_..._тем
+1102	через
+1103	через+В
+1104	через+Р
+1105	числом
+1106	что
+1107	что касается
+1108	что_касается
+1109	что_касается...то
+1110	чтобы
+1111	чуть позже
+1112	чуть_позже
+1113	ыйй цув
+1114	якобы
+1115	ясно
+-1	D_CONTAIN
+0	$sametime
+1	$time
+2	(, )i.e.
+3	(,| )as a matter of fact,
+4	(,| )as a rule,
+5	(,| )at any rate,
+6	(,| )in this case,
+7	(,| )let us say,
+8	(,| )should this be the case,
+9	(,| )that is
+10	(,| )to my mind,
+11	(,| )to tell the truth,
+12	(though|although) ... yet
+13	(without|beyond) (|a|any) doubt
+14	(with|by) consent of
+15	(| - |, )thanks to the fact that
+16	(| right) up to
+17	(|, )for example(|, )
+18	(|, )in all probability(|, )
+19	(|, )in fact(|, )
+20	(|, )of course(|, )
+21	(|, )such as
+22	(|, )thanks to
+23	(|ever) since (|then)
+24	(|yet) nevertheless
+25	, either ... or
+26	, or ... or
+27	Humpty Dumpty sat on the wall
+28	OPER
+29	a
+30	abaft
+31	aboard
+32	about
+33	above
+34	above all
+35	abroad
+36	absent
+37	accompanied by
+38	according to
+39	according to inhabitancy
+40	according to representation to
+41	according to the scale of ranks
+42	across
+43	addressing to
+44	adown
+45	after
+46	after all
+47	after the expiration of
+48	after the manner of
+49	against
+50	all the same as
+51	all the same that
+52	allegedly
+53	aloft
+54	along
+55	alongside
+56	although
+57	amid
+58	among
+59	and
+60	and so
+61	and so on
+62	and then
+63	anear
+64	anent
+65	anigh
+66	anti
+67	around
+68	as
+69	as a result of
+70	as applied to
+71	as far as
+72	as follows (|:)
+73	as if
+74	as many ... as
+75	as much ... as
+76	as regards
+77	as soon as
+78	as the result of
+79	as they speak
+80	as to
+81	as well
+82	aslant
+83	astride
+84	at
+85	at all
+86	at any price
+87	at last
+88	at least
+89	at once
+90	at speed of
+91	at that time
+92	at the end of
+93	at the first place
+94	at the moment of
+95	at the same time,
+96	at the thought of
+97	at the time of
+98	at this moment
+99	at will
+100	athwart
+101	atop
+102	atour
+103	bar
+104	because
+105	because of
+106	before
+107	behind
+108	below
+109	beneath
+110	beside
+111	beside this
+112	besides
+113	between
+114	beyond
+115	both ... and
+116	but
+117	by
+118	by administrative means
+119	by any chance
+120	by default
+121	by means of
+122	by no means
+123	by the end of
+124	by the similarity of
+125	by the similarity with
+126	by the way
+127	by way of
+128	by way of exception
+129	by written order
+130	called
+131	chez
+132	circa
+133	close to
+134	con
+135	concerning
+136	considering
+137	contacting with
+138	contra
+139	contrary to
+140	coram
+141	cum
+142	dehors
+143	depending on
+144	despite
+145	down
+146	down to
+147	due to
+148	due to the advice of
+149	durante
+150	during
+151	eighthly
+152	en
+153	ere
+154	especially
+155	et cetera
+156	etc.
+157	even
+158	ever since
+159	ex
+160	exactly
+161	exceeding the limits of
+162	except
+163	except for
+164	executing
+165	failing
+166	fifthly
+167	first of all(|,)
+168	following
+169	for
+170	for a long (while|time)
+171	for all
+172	for now(|,)
+173	for once
+174	for some reason
+175	for the avoidance of
+176	for the first time
+177	for the purpose of
+178	for the relief of
+179	for the sake of
+180	for what
+181	fortunately
+182	fourthly
+183	from
+184	from abroad
+185	from the point of view of
+186	from under
+187	generally
+188	generally speaking
+189	gin
+190	given
+191	good bye
+192	having executed
+193	having seen
+194	having showed
+195	headed by
+196	however
+197	if
+198	if ... then
+199	if not ... then
+200	in
+201	in a state of
+202	in a word
+203	in addition to
+204	in answer to
+205	in any case
+206	in any other case
+207	in case of
+208	in case of necessity
+209	in cash and by written order
+210	in charge of
+211	in co-operation with
+212	in comparison to
+213	in comparison with
+214	in conclusion
+215	in concord with
+216	in confirmation of
+217	in connection with
+218	in continuation of
+219	in contrast to
+220	in defence of
+221	in due time
+222	in favour of
+223	in form of
+224	in front of
+225	in full measure
+226	in general outline
+227	in honour of
+228	in legal form
+229	in number
+230	in order to
+231	in other cases
+232	in other cases(|,)
+233	in other respects
+234	in other words
+235	in particular
+236	in person of
+237	in reality
+238	in respect of
+239	in response(|,)
+240	in sign of
+241	in spite of
+242	in succession
+243	in suppport for
+244	in that connection
+245	in the absence of
+246	in the beginning of
+247	in the case of
+248	in the case of need
+249	in the direction of
+250	in the distance
+251	in the domain of
+252	in the end
+253	in the established order
+254	in the first play
+255	in the following order
+256	in the following variant
+257	in the interests of
+258	in the light of
+259	in the listed cases
+260	in the meantime
+261	in the middle of
+262	in the name of
+263	in the presence of
+264	in the process of
+265	in the same place ... as
+266	in the shape of
+267	in the view of
+268	in the whole
+269	in total
+270	in turn
+271	in turns
+272	in view of
+273	including
+274	instead of
+275	inter
+276	into
+277	involving
+278	irrespective of
+279	irrespectively to
+280	it is most likely that
+281	just as
+282	later on
+283	less
+284	less than
+285	let alone
+286	like
+287	long ago
+288	long before
+289	maybe
+290	meeting the demand of
+291	mid
+292	midmost
+293	midst
+294	minus
+295	more than
+296	namely
+297	near
+298	neath
+299	neither ... nor
+300	next
+301	next to
+302	ninthly
+303	no doubt
+304	no matter
+305	not ... but
+306	not less than
+307	not more than
+308	not only ... but (|also)
+309	not that ... but
+310	notwithstanding
+311	of
+312	off
+313	omitting
+314	on
+315	on an average
+316	on any account
+317	on behalf of
+318	on condition that
+319	on deferred payments
+320	on hand
+321	on no account
+322	on privileged conditions
+323	on rare occasions
+324	on the base of
+325	on the basis of
+326	on the edge of
+327	on the eve of
+328	on the right
+329	on the side of
+330	on the strength of
+331	on the subject of
+332	on the threshold of
+333	on the way
+334	on the way to
+335	on the whole
+336	on voluntary basis
+337	one way or another
+338	only
+339	onto
+340	or
+341	otherwise
+342	out
+343	out of
+344	outside
+345	outwith
+346	over
+347	past
+348	pendent
+349	pending
+350	please
+351	plus
+352	quoad
+353	rather than
+354	re
+355	really
+356	regarding
+357	respecting
+358	round
+359	sans
+360	save
+361	saving
+362	secondly
+363	seeing
+364	seemingly
+365	separately from
+366	seventhly
+367	similar to
+368	since
+369	sixthly
+370	so
+371	so that
+372	so-so
+373	sometimes ... sometimes
+374	taking (...|) into account
+375	tenthly
+376	than
+377	that
+378	that is why
+379	the ... the
+380	the day before
+381	thence
+382	they say
+383	thirdly
+384	though
+385	through
+386	throughout
+387	thwart
+388	till
+389	till the end of
+390	to
+391	to change
+392	to meet
+393	to the detriment of
+394	to the questions of
+395	to the same place ... as
+396	to the tune of
+397	together with
+398	too
+399	touching
+400	towards
+401	under
+402	under conditions of
+403	under the name of
+404	under the pretext of
+405	underneath
+406	unless
+407	unlike
+408	until
+409	unto
+410	up
+411	upon
+412	upon that point
+413	upside down
+414	using
+415	versus
+416	via
+417	vice
+418	wanting
+419	when
+420	whether ... or
+421	while
+422	with
+423	with an eye to
+424	with support of
+425	with the assistance of
+426	with the help of
+427	with the participation of
+428	with the purpose of
+429	with the same purpose ... as
+430	with this
+431	within
+432	within the limits of
+433	without
+434	without regard (for | to)
+435	ОПЕР

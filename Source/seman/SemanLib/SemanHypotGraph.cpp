@@ -329,20 +329,20 @@ void CRusSemStructure::InitPOs(long ClauseNo) {
                                 TCortege C = RossDoc->GetCortegeCopy(i);
                                 if (C.is_null(0)) continue;
                                 std::string S = RossDoc->GetDomItemStrWrapper(C.GetItem(0));
-                                if (S != _R("общ"))
+                                if (S != "общ")
                                     m_Nodes[NodeNo].m_POs.push_back(S);
                             };
 
             };
 
             if (IsThesCorpora(m_Nodes[NodeNo], LocRoss))
-                m_Nodes[NodeNo].m_POs.push_back(_R("геогр"));
+                m_Nodes[NodeNo].m_POs.push_back("геогр");
 
             if (IsThesCorpora(m_Nodes[NodeNo], FinRoss))
-                m_Nodes[NodeNo].m_POs.push_back(_R("фин"));
+                m_Nodes[NodeNo].m_POs.push_back("фин");
 
             if (IsThesCorpora(m_Nodes[NodeNo], CompRoss))
-                m_Nodes[NodeNo].m_POs.push_back(_R("информ"));
+                m_Nodes[NodeNo].m_POs.push_back("информ");
 
 
         }
@@ -443,7 +443,7 @@ void CRusSemStructure::CalculateBestCorporaLabel(size_t ClauseNo) {
       если  пользователь выбрал  предметную область (=/= "общ"), тогда это приравниваем
       тому  случаю, когда одно слово с этой предметной областью вошли в предложение
     */
-    if (m_PO != _R("общ"))
+    if (m_PO != "общ")
         POs.push_back(pair<std::string, int>(m_PO, 1));
 
     for (size_t NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
@@ -463,7 +463,7 @@ void CRusSemStructure::CalculateBestCorporaLabel(size_t ClauseNo) {
             m_Clauses[ClauseNo].m_BestPONodesCount = POs[i].second;
             m_Clauses[ClauseNo].m_BestPO = POs[i].first;
         };
-    if (m_Clauses[ClauseNo].m_BestPO == _R("общ")) {
+    if (m_Clauses[ClauseNo].m_BestPO == "общ") {
         m_Clauses[ClauseNo].m_BestPO = "";
         m_Clauses[ClauseNo].m_BestPONodesCount = 0;
     };
@@ -483,7 +483,7 @@ void CRusSemStructure::ProcessEveryIdents(long ClauseNo) {
      */
 
     for (long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo + 1; NodeNo < m_Clauses[ClauseNo].m_EndNodeNo - 1; NodeNo++)
-        if (HasOutcomingSynRelation(NodeNo, _R("СУЩ_ЧИСЛ"), NodeNo - 1)
+        if (HasOutcomingSynRelation(NodeNo, "СУЩ_ЧИСЛ", NodeNo - 1)
             && HasRichPOS(NodeNo - 1, NOUN)
                 ) {
             AddRelation(CRusSemRelation(CValency("IDENT", A_C), NodeNo - 1, NodeNo, ""));
@@ -497,7 +497,7 @@ void CRusSemStructure::BuildIZCHORelation(long ClauseNo) {
     for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
         if (IsInClause(NodeNo, ClauseNo))
             if (m_Nodes[NodeNo].IsPrimitive())
-                if (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ЕЩЕ")) {
+                if (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЕЩЕ") {
                     long q = FindRightClosestNode(NodeNo);
                     if (q == -1) continue;
                     if (m_Nodes[q].m_Words.size() == 0) continue;

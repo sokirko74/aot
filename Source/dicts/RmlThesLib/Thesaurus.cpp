@@ -6,14 +6,6 @@
 #include "StdRmlThes.h"
 #include "Thesaurus.h"
 
-/////////////////////////////////////////////////////////////////////////////
-// CThesaurus
-template<class _II, class _Ty> inline
-bool _find(_II It, const _Ty& _V)
-{
-	return !(find(It.begin(), It.end(), _V) == It.end());
-}
-
 
 CThesaurus::CThesaurus()
 {

@@ -7,8 +7,8 @@ struct CProductivePrefix {
 };
 
 const int PrefixesCount = 2;
-const CProductivePrefix Prefixes[PrefixesCount] = {{_R("АВИА"), _R("АВИА")},
-                                                   {_R("АЭРО"), _R("АВИА")}};
+const CProductivePrefix Prefixes[PrefixesCount] = {{_R("АВИА"), "АВИА"},
+                                                   {_R("АЭРО"), "АВИА"}};
 
 
 part_of_speech_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder &Ross, uint16_t UnitNo) const {
@@ -19,31 +19,31 @@ part_of_speech_mask_t CSemanticStructure::GetPosesFromRusArticle(CRossHolder &Ro
     for (long i = 0; i < GramFets.size(); i++) {
         std::string S = GramFets[i].substr(0, GramFets[i].find_first_of(":"));
 
-        if (S == _R("СУЩ"))
+        if (S == "СУЩ")
             ret_poses |= (1 << NOUN);
-        else if (S == _R("МС"))
+        else if (S == "МС")
             ret_poses |= (1 << PRONOUN);
-        else if ((S == _R("МЕСТОИМ")) || (S == _R("МС-П")) || (S == _R("ПРИТ_МЕСТМ")))
+        else if ((S == "МЕСТОИМ") || (S == "МС-П") || (S == "ПРИТ_МЕСТМ"))
             ret_poses |= (1 << PRONOUN_P);
-        else if (S == _R("НАР"))
+        else if (S == "НАР")
             ret_poses |= (1 << ADV);
-        else if (S == _R("ЧАСТ"))
+        else if (S == "ЧАСТ")
             ret_poses |= (1 << PARTICLE);
-        else if (S == _R("ПРЕДК"))
+        else if (S == "ПРЕДК")
             ret_poses |= (1 << PREDK) | (1 << PRONOUN_PREDK);
-        else if (S == _R("ГЛ"))
+        else if (S == "ГЛ")
             ret_poses |= ((1 << VERB) |
                           (1 << ADVERB_PARTICIPLE) |
                           (1 << PARTICIPLE) |
                           (1 << PARTICIPLE_SHORT) |
                           (1 << INFINITIVE));
-        else if (S == _R("ПРИЛ"))
+        else if (S == "ПРИЛ")
             ret_poses |= ((1 << ADJ_FULL)
                           | (1 << ADJ_SHORT)
                           | (1 << PARTICIPLE)
                           | (1 << PARTICIPLE_SHORT)
             );
-        else if (S == _R("ЧИСЛ"))
+        else if (S == "ЧИСЛ")
             ret_poses |= ((1 << NUMERAL_P) | (1 << NUMERAL));
         else {
             ErrorMessage(std::string("Unknown POS ") + std::string(GramFets[i])
@@ -133,21 +133,13 @@ uint16_t CRusSemStructure::GetInterpWithoutPrefix(CRusSemWord &W) const {
 */
 bool CRusSemStructure::BuildWordWithoutFemineSuffix(std::string &Word) const {
     std::string NewWord;
-    if ((Word.length() > 8)
-        && (Word.substr(Word.length() - 8) == _R("тельница"))
-            )
+    if (endswith(Word, _R("тельница")))
         NewWord = Word.substr(0, Word.length() - 4);
-    else if ((Word.length() > 4)
-             && (Word.substr(Word.length() - 4) == _R("ница"))
-            )
+    else if (endswith(Word, _R("ница")))
         NewWord = Word.substr(0, Word.length() - 2) + _R("к");
-    else if ((Word.length() > 3)
-             && (Word.substr(Word.length() - 3) == _R("ица"))
-            )
+    else if (endswith(Word, _R("ица")))
         NewWord = Word.substr(0, Word.length() - 2) + _R("к");
-    else if ((Word.length() > 4)
-             && (Word.substr(Word.length() - 4) == _R("стка"))
-            )
+    else if (endswith(Word, _R("стка")))
         NewWord = Word.substr(0, Word.length() - 2);
     else
         return false;
@@ -347,8 +339,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
 
     }
     catch (...) {
-        ErrorMessage(_R("Ошибка словарной	интерпретации"));
-        throw;
+        throw CExpc("Bad dict interpretation");
     };
 };
 
@@ -482,17 +473,17 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     // Добавляем операторы, которые пришли из морфологии (они были помещены в графеты
     // на Mapostе)
 
-    if (SemWord.m_GraphDescrs.find(_R("#ПОЛУ")) != string::npos)
-        N.m_RelOperators.push_back(_R("ПОЛУ"));
+    if (SemWord.m_GraphDescrs.find("#ПОЛУ") != string::npos)
+        N.m_RelOperators.push_back("ПОЛУ");
 
-    if (SemWord.m_GraphDescrs.find(_R("ЭКС-")) != string::npos)
-        N.m_RelOperators.push_back(_R("ЭКС-"));
+    if (SemWord.m_GraphDescrs.find("ЭКС-") != string::npos)
+        N.m_RelOperators.push_back("ЭКС-");
 
-    if (SemWord.m_GraphDescrs.find(_R("ВИЦЕ-")) != string::npos)
-        N.m_RelOperators.push_back(_R("ВИЦЕ-"));
+    if (SemWord.m_GraphDescrs.find("ВИЦЕ-") != string::npos)
+        N.m_RelOperators.push_back("ВИЦЕ-");
 
-    if (SemWord.m_GraphDescrs.find(_R("#КАК_МОЖНО")) != string::npos) {
-        N.m_RelOperators.push_back(_R("КАК_МОЖНО"));
+    if (SemWord.m_GraphDescrs.find("#КАК_МОЖНО") != string::npos) {
+        N.m_RelOperators.push_back("КАК_МОЖНО");
         long ParadigmId = m_pData->GetAdverbWith_O_ByAdjective(SemWord.m_ParadigmId, SemWord.m_Word);
         if (ParadigmId != -1) {
             CFormInfo Paradigm;
@@ -567,8 +558,8 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
 
     N.m_bQuoteMarks = (SemWord.m_GraphDescrs.find(" #QUOTED") != string::npos);
 
-    if (SemWord.m_GraphDescrs.find(_R("АВИА")) != string::npos)
-        N.m_RelOperators.push_back(_R("АВИА"));
+    if (SemWord.m_GraphDescrs.find("АВИА") != string::npos)
+        N.m_RelOperators.push_back("АВИА");
 
 
     // если у краткого прилагательного  нет граммем времени,
@@ -796,7 +787,7 @@ void CRusSemStructure::InterpretPrepNouns(long ClauseNo) {
 void CRusSemStructure::InterpretSelectiveRelations(long ClauseNo) {
     for (long RelNo = 0; RelNo < m_SynRelations.size(); RelNo++)
         if (m_Nodes[m_SynRelations[RelNo].m_SourceNodeNo].m_ClauseNo == ClauseNo)
-            if (m_SynRelations[RelNo].m_SynRelName == _R("ЭЛЕКТ_ИГ")) {
+            if (m_SynRelations[RelNo].m_SynRelName == "ЭЛЕКТ_ИГ") {
                 long NumeralNode = m_SynRelations[RelNo].m_SourceNodeNo;
                 long NounNode = m_SynRelations[RelNo].m_TargetNodeNo;
 
@@ -824,7 +815,7 @@ void CRusSemStructure::InterpretRepeatConj(long ClauseNo) {
     */
     for (long i = 0; i < m_SynRelations.size(); i++)
         if (m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_ClauseNo == ClauseNo)
-            if (m_SynRelations[i].m_SynRelName == _R("ОТСОЮЗ")) {
+            if (m_SynRelations[i].m_SynRelName == "ОТСОЮЗ") {
                 long Word1 = m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_Words[0].m_SynWordNo;
                 long Word2 = m_Nodes[m_SynRelations[i].m_TargetNodeNo].m_Words[0].m_SynWordNo;
                 // отсоюзное всегда идет слева направо
@@ -852,7 +843,7 @@ void CRusSemStructure::InterpretRepeatConj(long ClauseNo) {
             GetOutcomingSynRelations(NodeNo, Rels);
             std::vector<long> Nodes;
             for (long i = 0; i < Rels.size();)
-                if (m_SynRelations[Rels[i]].m_SynRelName == _R("ОТСОЮЗ")) {
+                if (m_SynRelations[Rels[i]].m_SynRelName == "ОТСОЮЗ") {
                     Nodes.push_back(m_SynRelations[Rels[i]].m_TargetNodeNo);
                     i++;
                 } else
@@ -1002,8 +993,8 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree(long ClauseNo) {
 
         if (DAVAI_NodeNo == m_Clauses[ClauseNo].m_EndNodeNo) break;
         if (CanBeDeleted(DAVAI_NodeNo)) {
-            if (!m_Nodes[RootNodeNo].HasRelOperator(_R("_мягк_пригласит_наклонение")))
-                m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_мягк_пригласит_наклонение"));
+            if (!m_Nodes[RootNodeNo].HasRelOperator("_мягк_пригласит_наклонение"))
+                m_Nodes[RootNodeNo].m_RelOperators.push_back("_мягк_пригласит_наклонение");
             MoveSynRelations(DAVAI_NodeNo, RootNodeNo);
             DelNode(DAVAI_NodeNo);
         }
@@ -1018,8 +1009,8 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree(long ClauseNo) {
 
         if (DAVAI_NodeNo == m_Clauses[ClauseNo].m_EndNodeNo) break;
         if (CanBeDeleted(DAVAI_NodeNo)) {
-            if (!m_Nodes[RootNodeNo].HasRelOperator(_R("_пригласит_наклонение")))
-                m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
+            if (!m_Nodes[RootNodeNo].HasRelOperator("_пригласит_наклонение"))
+                m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
             MoveSynRelations(DAVAI_NodeNo, RootNodeNo);
             DelNode(DAVAI_NodeNo);
         }
@@ -1038,8 +1029,8 @@ void CRusSemStructure::DealInvitatoryMoodBeforeTree(long ClauseNo) {
             && (word.substr(word.length() - 2, 2) != _R("ТЕ"))
                 )
             break;
-        if (!m_Nodes[RootNodeNo].HasRelOperator(_R("_пригласит_наклонение")))
-            m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
+        if (!m_Nodes[RootNodeNo].HasRelOperator("_пригласит_наклонение"))
+            m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
         return;
     };
 
@@ -1056,10 +1047,10 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree() {
         if (RootNodeNo == -1) continue;;
         // проверка, что в мягком пригл. наклон заполнена первая валентносто, иначе конвертируем
         //
-        if (m_Nodes[RootNodeNo].HasRelOperator(_R("_мягк_пригласит_наклонение"))) {
+        if (m_Nodes[RootNodeNo].HasRelOperator("_мягк_пригласит_наклонение")) {
             if (GetRusSubj(RootNodeNo) == -1) {
-                m_Nodes[RootNodeNo].DelRelOperator(_R("_мягк_пригласит_наклонение"));
-                m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
+                m_Nodes[RootNodeNo].DelRelOperator("_мягк_пригласит_наклонение");
+                m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
             };
         } else {
             // четвертый случай  пригласительной конструкции
@@ -1071,7 +1062,7 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree() {
                         if (GetRusSubj(RootNodeNo) == -1)
                             if (HasSemFet(m_Nodes[RootNodeNo], "MOV"))
                                 if (GetSubordConjFromTheBegining(ClauseNo) == 0)
-                                    m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
+                                    m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
 
             // пятый случай пригласительной конструкции
             if (m_Nodes[RootNodeNo].HasGrammems(_QM(rFirstPerson) | _QM(rSingular) | _QM(rImperative))
@@ -1079,13 +1070,13 @@ void CRusSemStructure::DealInvitatoryMoodAfterTree() {
 
                     )
                 if (m_Clauses[ClauseNo].m_ClauseRuleNo != -1)
-                    if (m_ClauseRules[m_Clauses[ClauseNo].m_ClauseRuleNo].m_Name == _R("сочинение")) {
+                    if (m_ClauseRules[m_Clauses[ClauseNo].m_ClauseRuleNo].m_Name == "сочинение") {
                         std::vector<long> Rels;
                         GetIncomingClauseRelations(ClauseNo, Rels);
                         if (Rels.size() == 1)
                             if (m_Nodes[m_Relations[Rels[0]].m_SourceNodeNo].HasRelOperator(
-                                    _R("_пригласит_наклонение")))
-                                m_Nodes[RootNodeNo].m_RelOperators.push_back(_R("_пригласит_наклонение"));
+                                    "_пригласит_наклонение"))
+                                m_Nodes[RootNodeNo].m_RelOperators.push_back("_пригласит_наклонение");
                     };
 
         };
@@ -1321,7 +1312,7 @@ void CRusSemStructure::CreateSemNodesBySynttaxRelations() {
                         m_Nodes[m_SynRelations.back().m_SourceNodeNo].AddOneGrammem(rGenitiv);
 
                 //случай ЧИСЛ_СУЩ
-                if (m_SynRelations.back().m_SynRelName.find(_R("ЧИСЛ_СУЩ")) != std::string::npos
+                if (m_SynRelations.back().m_SynRelName.find("ЧИСЛ_СУЩ") != std::string::npos
                     || piRel.m_Relation.type == 25) //NOUN_NUMERAL_APPROX
                 {
                     const CRusGramTab *R = (CRusGramTab *) piRel.GetOpt()->GetGramTab();
@@ -1373,7 +1364,7 @@ void CRusSemStructure::CreateSimilarInfinitives() {
                             && (m_Nodes[i - 1].m_ClauseNo == m_Nodes[i].m_ClauseNo)
                             && (m_Nodes[i - 1].GetMinWordNo() + 1 == m_Nodes[i].GetMinWordNo())
                                 ) {
-                            m_SynRelations.push_back(CSynRelation(i, i + 1, _R("ОДНОР")));
+                            m_SynRelations.push_back(CSynRelation(i, i + 1, "ОДНОР"));
                             continue;
                         };
 
@@ -1453,18 +1444,18 @@ void CRusSemStructure::BuildSemNodesBySyntax() {
             m_Nodes[i].AddGrammems(rAllNumbers);
 
     for (size_t i = 0; i < m_Nodes.size(); i++)
-        m_Nodes[i].m_bCompAdj = IsCompAdj(i) || HasSynRelation(i, _R("АНАТ_СРАВН"));
+        m_Nodes[i].m_bCompAdj = IsCompAdj(i) || HasSynRelation(i, "АНАТ_СРАВН");
 
     /*
     перевешиваем графету КАК_МОЖНО во фразе
     "как можно более простым языком" со слова "более" на "простой",
     */
     for (size_t i = 0; i < m_SynRelations.size(); i++)
-        if (m_SynRelations[i].m_SynRelName == _R("АНАТ_СРАВН"))
-            if (m_Nodes[m_SynRelations[i].m_TargetNodeNo].HasRelOperator(_R("КАК_МОЖНО")) &&
+        if (m_SynRelations[i].m_SynRelName == "АНАТ_СРАВН")
+            if (m_Nodes[m_SynRelations[i].m_TargetNodeNo].HasRelOperator("КАК_МОЖНО") &&
                 CanBeDeleted(m_SynRelations[i].m_TargetNodeNo)) {
-                m_Nodes[m_SynRelations[i].m_TargetNodeNo].DelRelOperator(_R("КАК_МОЖНО"));
-                m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_RelOperators.push_back(_R("КАК_МОЖНО"));
+                m_Nodes[m_SynRelations[i].m_TargetNodeNo].DelRelOperator("КАК_МОЖНО");
+                m_Nodes[m_SynRelations[i].m_SourceNodeNo].m_RelOperators.push_back("КАК_МОЖНО");
                 DelNode(m_SynRelations[i].m_TargetNodeNo);
             };
 

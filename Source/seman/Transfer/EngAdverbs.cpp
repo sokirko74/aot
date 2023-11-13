@@ -80,14 +80,14 @@ void EnrichPositionsByAdvKind (CAdvPosType adv_kind, StringVector& Positions)
 			if(!_find(Positions, "VA"))
 			{
 				Positions.push_back("AV");
-				Positions.push_back(_R("НAV"));
+				Positions.push_back("НAV");
 			};
 			break;
 		case adv_freq:
 			if (Positions.size() == 0)
 			{
 				Positions.push_back("BA");
-				Positions.push_back(_R("НAV"));
+				Positions.push_back("НAV");
 				Positions.push_back("AV");
 				Positions.push_back("HAB");
 			};

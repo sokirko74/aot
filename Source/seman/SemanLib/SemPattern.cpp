@@ -134,7 +134,7 @@ bool CSemPattern::LoadSemFromDict()
 			std::string s = m_PatternValency.m_RossHolder->GetDomItemStrWrapper(C.GetItem(0));
 			if (C.m_LevelId - 1 >= m_ActantSemFets.size())
 			{
-				std::string mess = _R("Ошибка нумерации SF в статье ");
+				std::string mess = "Bad field SF";
 				mess += Ross->GetEntryStr(UnitNo);
 				ErrorMessage (mess);
 			}

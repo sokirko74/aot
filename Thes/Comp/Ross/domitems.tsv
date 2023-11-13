@@ -1,0 +1,918 @@
+-1	D_
+0	*
+-1	D_RLE
+0	административный
+1	администрировать
+2	адресный
+3	аппаратный
+4	архитектурный
+5	библиотечный
+6	дисковый
+7	именной
+8	иметь
+9	интерфейсный
+10	использовать
+11	компьютерный
+12	мощный
+13	нажимать
+14	носить
+15	программный
+16	процессорный
+17	разрабатывать
+18	содержать
+19	создавать
+20	специфицировать
+21	стирать
+22	удалять
+23	удерживать
+24	файловый
+25	форматный
+26	шинный
+-1	D_GRAFEM_DESC
+0	ДЕФ
+1	ЗПТ
+2	ИЛЕ
+3	ЦБК
+4	ЦК
+5	двтч
+6	квч
+-1	D_COLON
+0	:
+-1	D_LF
+0	A0
+1	A1
+2	A2
+3	A3
+4	AL1
+5	Abbr
+6	Adv0
+7	Adv1
+8	Adv2
+9	Adv3
+10	AntiBon
+11	AntiMagn
+12	AntiReal
+13	AntiReal1
+14	AntiReal2
+15	AntiVer
+16	Bon
+17	Caus
+18	Caus1Func0
+19	Caus1Func1
+20	Caus1Manif
+21	Caus1Oper1
+22	Caus1Oper2
+23	Caus2Func0
+24	Caus2Func2
+25	Caus2Oper2
+26	Caus3Oper3
+27	CausFunc
+28	CausFunc0
+29	CausFunc1
+30	CausFunc2
+31	CausIncep
+32	CausLiqu
+33	CausLoc
+34	CausMagn
+35	CausManif
+36	CausOper1
+37	CausOper2
+38	CausOper3
+39	Centr
+40	Copul
+41	Culm
+42	Fin
+43	FinCaus
+44	FinFunc0
+45	FinOper1
+46	FinOper2
+47	Func
+48	Func0
+49	Func1
+50	Func2
+51	Func3
+52	Incep
+53	IncepCaus
+54	IncepFunc0
+55	IncepFunc1
+56	IncepLabor21
+57	IncepOper1
+58	IncepOper2
+59	IncepOper3
+60	Labor
+61	Labor12
+62	Labor13
+63	Labor21
+64	Liqu
+65	Liqu1Func0
+66	Liqu1Func1
+67	Liqu1Labor13
+68	Liqu1Oper1
+69	Liqu1Oper2
+70	Liqu2Func0
+71	Liqu2Oper2
+72	LiquFunc0
+73	LiquFunc1
+74	LiquMagn
+75	LiquOper1
+76	LiquOper2
+77	LiquOper3
+78	Loc
+79	Magn
+80	MoveLoc
+81	Oper
+82	Oper1
+83	Oper2
+84	Oper3
+85	OperCaus
+86	Perm2Oper1
+87	PermFunc0
+88	PermOper1
+89	Pred0
+90	Real
+91	Real1
+92	Real2
+93	Real3
+94	S0
+95	S1
+96	S2
+97	S3
+98	S4
+99	S_res
+100	V0
+101	Ver
+-1	D_GRAM_FUNCT
+0	АББР
+1	ГЛ
+2	КР
+3	НАР
+4	ОТР
+5	ПРЕВ
+6	ПРИД
+7	ПРИЛ
+8	СОВ
+9	СОКР
+10	СОКР_мн
+11	СРАВН
+12	СУЩ
+13	ЧАСТ
+-1	D_OPN
+0	(
+-1	D_SEM_REL
+0	ACT
+1	ACTUAL
+2	ADR
+3	AFTER
+4	AGENT
+5	AIM
+6	ALIKE
+7	AS
+8	ASPECT
+9	ATTR
+10	AUTHOR
+11	BELNG
+12	C-AGENT
+13	CAUSE
+14	COMP
+15	COND
+16	CONTEN
+17	DATE
+18	DEGREE
+19	EQL
+20	ESTIM
+21	F-ACT
+22	FOR
+23	FORM
+24	FUNCT
+25	IDENT
+26	IN-ACCORD
+27	IN-DIRECT
+28	INCLUDING
+29	INSTEAD
+30	INSTR
+31	ISCONNECTED
+32	LOK
+33	MATER
+34	MEANS
+35	MEDIATOR
+36	MODL
+37	MORE
+38	MUA
+39	MULTI
+40	NAME
+41	OBJ
+42	OBJ.RESLT
+43	OPERAT
+44	OR
+45	PACIEN
+46	PARAM
+47	PART
+48	PROPERT
+49	PURP
+50	QUANTIT
+51	QUANTOR
+52	REPRES
+53	RESLT
+54	RESTR
+55	S-ACT
+56	SCALE
+57	SIMULT
+58	SPEC
+59	SPHERE
+60	SRC
+61	SRC-PNT
+62	SUB
+63	THEME
+64	THESAME
+65	TIME
+66	TOGETHER
+67	TRG-PNT
+68	TYPE-OF
+69	UNIT
+70	VALUE
+71	WITH
+-1	D_NUMBERS
+0	1
+1	2
+2	3
+3	4
+4	5
+5	6
+6	7
+7	8
+8	9
+-1	D_COMMA
+0	,
+-1	D_ENCYC_FUNC
+0	Anti
+1	CAP
+2	MULT
+3	Mesur
+4	Param
+5	SING
+6	БОЛ_РАЗ
+7	ВЫШЕ_ГЕО
+8	ЖИТЕЛЬ
+9	ИСХ-Т
+10	КОН-Т
+11	НИЖЕ_ГЕО
+12	ПРИНАДЛ
+13	СОСТОИТ
+14	ЧАСТЬ
+-1	D_SF
+0	ABSTR
+1	ADM
+2	AKTIO
+3	ANIM
+4	ANYTH
+5	APP
+6	ARTEF
+7	AUTHORIT
+8	CAUS
+9	CHG
+10	CLAS
+11	COLLEC
+12	COMMUNIC
+13	CONTNR
+14	DAMAG
+15	DEF
+16	DEV
+17	DIREC
+18	EMOT
+19	EMPL
+20	ENERG
+21	ERD
+22	EXISTE
+23	EXTENS
+24	FIN
+25	FLUI
+26	GEOGR
+27	GOOD
+28	INF
+29	INTEL
+30	KEY
+31	LEGISL
+32	MEASUR
+33	MEDINF
+34	MOV
+35	MULT
+36	NATIO
+37	NEG
+38	ORG
+39	P-DEV
+40	PERCPT
+41	PERIO
+42	PHENOM
+43	PREDIC
+44	PROC
+45	PROF
+46	PRON
+47	QUANT
+48	SET-DEMAN
+49	SITUAT
+50	SOC
+51	SOFTW
+52	SOLIDUS
+53	SPAC
+54	STAT
+55	SUBST
+56	THINGN
+-1	D_CAT
+0	ASP
+1	GEO
+2	LABL
+3	LABL.OBJ
+4	LABL.PROPERT
+5	LABL.SIT
+6	OPER
+7	PRONO
+8	RELAT
+-1	D_ENGL
+0	code
+1	computer
+2	contain
+3	create
+4	delete
+5	develop
+6	have
+7	hit
+8	open
+9	press
+10	program
+11	receive
+12	receive 1
+13	send
+14	send 1
+15	srtike
+16	use
+-1	D_CLS
+0	)
+-1	D_SYN_REL
+0	DEGREE
+1	FREQ
+2	MANNER
+3	NP_attr
+4	PLACE
+5	SENT
+6	TIME
+7	X!
+8	obj
+9	obj_pl
+10	obj_sg
+11	subj
+12	subj_pl
+13	subj_sg
+14	к_доп
+15	нар_опр
+16	нс_опр
+17	отпредик
+18	п_доп
+19	подл
+20	прим_опр
+21	прям_речь
+22	с_опр
+23	уточн
+-1	D_PART_OF_SPEECH
+0	ADJ
+1	ADV
+2	CHAR
+3	COMPAR
+4	INTER
+5	NOUN
+6	NUM
+7	PART
+8	SUPER
+9	VERB
+10	VERB_MODL
+11	ВОПР
+12	ГЛ
+13	МЕСТОИМ
+14	НАР
+15	ПРЕДК
+16	ПРЕДЛ
+17	ПРИЛ
+18	ПРИТ_МЕСТ
+19	ПРИЧ
+20	СОЮЗ
+21	СУЩ
+22	ЧАСТ
+23	ЧИСЛ
+-1	D_GROUPS
+0	Copul
+1	NP
+2	NP'
+3	NP_pl
+4	NP_poss
+5	NP_sg
+6	PN_poss
+7	dir_sp
+8	sent
+9	sub_clause
+10	subj_clause
+11	ВОПР
+12	ГГ
+13	ГГ_прш
+14	ИГ
+15	ОБСТ_ГР
+16	ОГ
+17	ПРИД_ПР
+18	ТЕКСТ
+-1	D_CASE
+0	В
+1	Д
+2	И
+3	П
+4	Р
+5	Т
+-1	D_PREP_COLLOC
+0	по продаже
+1	по размещению
+-1	D_PLUS
+0	+
+-1	D_DASH
+0	|
+-1	D_ACTANTS
+0	A1
+1	A2
+2	A3
+3	A4
+4	A5
+5	A6
+6	A7
+7	C
+8	C1
+9	C2
+10	C3
+11	C4
+12	C5
+13	C6
+14	C7
+15	C8
+-1	D_HYPHEN
+0	-
+-1	D_PERCENT
+0	%
+-1	D_DOMAIN
+0	воен
+1	геогр
+2	информ
+3	культура
+4	наука
+5	общ
+6	полит
+7	разг
+8	социо
+9	фин
+10	эконом
+11	юр
+-1	D_RESHETKA
+0	#
+-1	D_FULL_STOP
+0	.
+-1	D_GENDER
+0	М/Ж
+-1	D_CONJ
+0	что
+1	чтобы
+-1	D_BOOL
+0	+
+1	-
+-1	D_NUMBER
+0	ед
+1	мн
+-1	D_PREP
+0	*
+-1	D_1
+0	*+В
+1	*+Д
+2	*+П
+3	*+Р
+4	*+Т
+5	about+NP
+6	after+NP
+7	against+NP
+8	along+NP
+9	among+NP
+10	around+NP
+11	as if+sent
+12	as+ADJ
+13	as+NP
+14	as+NP'
+15	at+NP
+16	between+NP_pl
+17	by+NP
+18	by+gerund
+19	concerning+NP
+20	down to+NP
+21	down+NP
+22	for+NP
+23	for+NP'
+24	for+gerund
+25	from+NP
+26	from+gerund
+27	in+NP
+28	in+NP'
+29	in+gerund
+30	into+NP
+31	into+NP_pl
+32	like+NP
+33	like+gerund
+34	of+NP
+35	of+gerund
+36	off+NP
+37	on to+NP
+38	on+NP
+39	out of+NP
+40	over+NP
+41	rather than+NP
+42	rather than+gerund
+43	regarding+NP
+44	that+sent
+45	that+subj_clause
+46	through+NP
+47	to be+ADJ
+48	to be+NP
+49	to+NP
+50	to+NP_pl
+51	to+inf
+52	together+NP
+53	toward+NP
+54	towards+NP
+55	under+NP
+56	until+sent
+57	up+NP
+58	upon+NP
+59	where+sent
+60	with+NP
+61	без+Р
+62	в адрес+Р
+63	в виде+Р
+64	в вопросе о+П
+65	в должности+Р
+66	в должность+Р
+67	в защиту+Р
+68	в значении+Р
+69	в качестве+Р
+70	в количестве+Р
+71	в направлении+Р
+72	в области+Р
+73	в объеме+Р
+74	в отношении+Р
+75	в поддержку+Р
+76	в пользу+Р
+77	в порядке+Р
+78	в пределах+Р
+79	в размере+Р
+80	в рамках+Р
+81	в распоряжение+Р
+82	в редакции+Р
+83	в результате+Р
+84	в руки+Р
+85	в связи с+Т
+86	в системе+Р
+87	в системе+Р_мн
+88	в случае+Р
+89	в соответствие с+Т
+90	в соответствии с+Т
+91	в составе+Р
+92	в составе+двтч
+93	в сравнении с+Т
+94	в сторону+Р
+95	в сумме+Р
+96	в сфере+Р
+97	в течение+Р
+98	в форме+Р
+99	в ходе+Р
+100	в целях+Р
+101	в+В
+102	в+П
+103	внутрь+Р
+104	во время+Р
+105	во имя+Р
+106	вокруг+Р
+107	вследствие+Р
+108	для целей+Р
+109	для+Р
+110	до сведения+Р
+111	до+Р
+112	достоинством в+В
+113	за время+Р
+114	за номером+ЦК
+115	за пределами+Р
+116	за пределы+Р
+117	за счет+Р
+118	за+В
+119	за+Т
+120	из числа+Р
+121	из+Р
+122	из-за+Р
+123	из-под+Р
+124	имени+Р
+125	исходя из+Р
+126	к+Д
+127	как+ИГ
+128	марки+И
+129	между+МНА_Р_и
+130	между+МНА_Т_и
+131	между+Т
+132	между+Т_мн
+133	на базе+Р
+134	на верность+Д
+135	на должности+Р
+136	на должность+Р
+137	на имя+Р
+138	на момент+Р
+139	на основании+Р
+140	на основе+Р
+141	на период+Р
+142	на пост+Р
+143	на посту+Р
+144	на прием к+Д
+145	на срок+И
+146	на стороне+Р
+147	на сумму в+В
+148	на сумму+И
+149	на счет+Р
+150	на тему о+П
+151	на тему+Р
+152	на тему+двтч
+153	на тему+квч
+154	на территорию+Р
+155	на уровне+Р
+156	на уровне+Р_мн
+157	на условиях+Р
+158	на участке+ИГ
+159	на фундаменте+Р
+160	на+В
+161	на+В_мн
+162	на+МНА_В_и
+163	на+П
+164	над+Т
+165	начиная с+Р
+166	номер+ЦБК
+167	номер+ЦК
+168	о+П
+169	от имени+Р
+170	от+Р
+171	относительно+Р
+172	перед+Т
+173	по вопросам о+П
+174	по вопросам+Р
+175	по вопросу о+П
+176	по вопросу+Р
+177	по делам+Р
+178	по делу о+П
+179	по маршруту+ИГ
+180	по маршруту+ИГ
+181	по месту+Р
+182	по направлению к+Д
+183	по обвинению в+П
+184	по отношению к+Д
+185	по поводу+Р
+186	по причине+Р
+187	по проблеме+Р
+188	по продаже+Р
+189	по размещению+Р
+190	по сравнению с+Т
+191	по ставке+Р
+192	по цене+И
+193	по+В
+194	по+Д
+195	под залог+Р
+196	под руководством+Р
+197	под эгидой+Р
+198	под+В
+199	под+Т
+200	после+Р
+201	посредством+Р
+202	при помощи+Р
+203	при+П
+204	против+Р
+205	путем+Р
+206	ради+Р
+207	с дивидендом+И
+208	с должности+Р
+209	с помощью+Р
+210	с поста+Р
+211	с просьбой о+П
+212	с просьбой+инф
+213	с требованием+Р
+214	с требованием+инф
+215	с учетом+Р
+216	с целью+Р
+217	с целью+инф
+218	с+В
+219	с+Р
+220	с+Т
+221	силами+Р
+222	со стороны+Р
+223	со счета+Р
+224	сравнительно с+Т
+225	среди+Р
+226	сроком на+В
+227	стоимостью в+В
+228	стоимостью+И
+229	тиражом в+В
+230	тиражом+И
+231	у+Р
+232	через+В
+233	что+ГГ
+234	чтобы+ГГ
+235	чтобы+ГГ_прш
+-1	D_START_PHR
+0	D_CONJ
+1	D_PREP
+2	D_PREP_COLLOC
+3	D_WORDFORM
+-1	D_UNDERLINE
+0	_
+-1	D_CASE_NUMBER
+0	В_мн
+1	И_мн
+2	Р_ед
+3	Р_мн
+4	Т_мн
+-1	D_VP_SPECIF
+0	1л
+1	2л
+2	3л
+3	буд
+4	дпр
+5	инф
+6	личн
+7	наст
+8	прош
+9	прч
+10	стр
+-1	D_PHR_SPECIF
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+4	D_GRAFEM_DESC
+5	D_GROUPS
+6	D_PART_OF_SPEECH
+7	D_VP_SPECIF
+-1	D_SYN_FUNCT
+0	D_GROUPS
+1	D_SYN_REL
+-1	D_GF_MAIN
+0	ГЛ:ГГ
+1	МЕСТОИМ:с_опр
+2	НАР:ВОПР
+3	НАР:ОБСТ_ГР
+4	НАР:нар_опр
+5	ПРЕДК:ГГ
+6	ПРЕДЛ:--
+7	ПРИЛ:ВОПР
+8	ПРИЛ:ТЕКСТ
+9	ПРИЛ:с_опр
+10	ПРИЧ:с_опр
+11	СОЮЗ:--
+12	СУЩ:ВОПР
+13	СУЩ:ИГ
+14	ЧАСТ:--
+-1	D_CASE_PLUS
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+-1	D_TYPE
+0	ЛЕ
+-1	D_EXCL_MARK
+0	!
+-1	D_RLE_PLUS
+0	D_ABBR
+1	D_COLLOC
+2	D_RLE
+-1	D_MUA
+0	МНА
+-1	D_CONJ_PLUS
+0	D_CONJ
+1	D_GRAFEM_DESC
+-1	D_CASE_MUA
+0	МНА_В_и
+1	МНА_И_ДЕФ
+2	МНА_Р_и
+3	МНА_Т_и
+-1	D_CASE_POS
+0	Т_ПРИЛ
+-1	D_EXM
+0	- Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+1	- Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+2	- антивирусная программа Касперского
+3	- программа format
+4	8086 processor address space - адресное пространство процессора 8086
+5	Anti-viral program by Kaspersky
+6	D key -
+7	Drive name - имя диска
+8	E-MAIL SYSTEM - система электронноы почты
+9	Esc key - клавиша Esc
+10	ISA bus - шина ISA
+11	Linux can turn any 386 or 486 PC into a workstation
+12	Linux kernel -
+13	Linux может любой 386 или 486 персональный компьютер превратить в рабочую станцию
+14	The important thing is / usr / src / linux ,
+15	a large file library of GIF - format -
+16	address bus - адресная шина
+17	archive file - архивный файл
+18	code2  - код-индекс с VAL IDENT
+19	code2  - код-индекс с ВАЛ ИДЕНТ
+20	disk a: - диск a:
+21	e-mail address - адрес электронной почты
+22	file in GIF format - файл в формате GIF
+23	folder nam - имя директории
+24	format program
+25	hard disk 126.4Gb - жесткий диск 126.4Gb
+26	ide controller
+27	in the directory /pub/Linux/system/Mail - в каталоге /pub/Linux/system/Mail
+28	libraries of documents  -
+29	library to install -
+30	m key  -
+31	network address - адрес в сети
+32	open file readme.txt & than close it - откройте файл readme.txt и закройте его
+33	processoer architecture - архитектура процессора
+34	processor IPPII-400MHz - процессор IPPII-400MHz
+35	scsi interface - интерфейс scsi
+36	system bus - системная шина
+37	system file - системный файл
+38	text editor Elm - текстовый редактор Elm
+39	text processor Elm - текстовый процессор Elm
+40	the Net and your computer are hardier than you think , so relax .
+41	the user can have multiple terminal windows on the screen at once -
+42	vga card
+43	videoadapter svga
+44	videocard svga
+45	which contains the source code for the Linux kernel -
+46	Сеть и ваш компьютер прочнее, чем вы думаете, так что успокойтесь
+47	адрес в сети
+48	адрес электронной почты
+49	адресная шина
+50	адресное пространство процессора 80386
+51	антивирусная программа Касперского
+52	архивный файл
+53	архитектура процессора
+54	библиотека файлов формата GIF
+55	библиотеки документов
+56	библиотеку файлов формата GIF
+57	в каталоге /pub/Linux/system/Mail
+58	в этом случае ваш IP адрес будет тот же самый
+59	важная вещь , это / usr / src / linux ,
+60	видеоадаптер svga
+61	видеокарта svga
+62	диск a:
+63	жесткий диск 126.4Gb
+64	имя директории
+65	имя диска
+66	инсталлируемая библиотека
+67	интерфейс scsi
+68	карта vga
+69	клавиша Esc
+70	клавиша m
+71	комбинация клавиш control-c
+72	комбинация клавиш control-c - control-c keystroke
+73	контроллер ide
+74	контроллер дисков
+75	модель для одиночного английского существительного
+76	модель для одиночного существительного
+77	мой адрес не дом и не улица
+78	откройте файл readme.txt и закройте его
+79	пользователь может одновременно иметь на экране несколько окон
+80	почтовый адрес
+81	программа format
+82	процессор IPPII-400MHz
+83	сетевой адрес
+84	символ D
+85	системная шина
+86	системный файл
+87	содержащий исходные коды ядра Linux
+88	спецификация протокола
+89	текстовый процессор Elm
+90	текстовый редактор Elm
+91	файл в формате GIF
+92	шина ISA
+93	ядро Линукса
+-1	D_BASIC_SIT
+0	АВТОР,,А2, ЭС1
+1	ЛОК, ? где-то па дистаации), А?
+2	ЛОК, КВН-Т, А1
+3	ОЦЕНКА
+4	ОЦЕНКА  С, А1
+5	СТАД, ДОН-Т, С
+-1	D_ASPECT
+0	нс
+1	св
+-1	D_TITLE
+0	e-mail
+1	internet
+2	memory
+3	microprocessor
+4	network
+5	processor
+6	интернет
+7	клавиша
+8	микропроцессор
+9	операционная система
+10	память
+11	процессор
+12	сеть

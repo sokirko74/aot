@@ -479,15 +479,15 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 
 inline long ConvertGramRestrToGrammems(std::string t)
 {
-	if (t == _R("ед"))
+	if (t == "ед")
 		return _QM(rSingular);
-	if (t == _R("мн"))
+	if (t == "мн")
 		return _QM(rPlural);
-	if (t == _R("1л"))
+	if (t == "1л")
 		return _QM(rFirstPerson);
-	if (t == _R("2л"))
+	if (t == "2л")
 		return _QM(rSecondPerson);
-	if (t == _R("3л"))
+	if (t == "3л")
 		return _QM(rThirdPerson);
 	return 0;
 };
@@ -1227,7 +1227,7 @@ bool CSemanticStructure::CheckGroupBeginAndCase(std::string ItemStr, size_t Node
 {
 	const CSemNode& N = GetNode(NodeNo);
 	if (ItemStr.length() > 3)
-		if (ItemStr.substr(ItemStr.length() - 3) == _R("_мн"))
+		if (ItemStr.substr(ItemStr.length() - 3) == "_мн")
 		{
 			if (!N.HasOneGrammem(rPlural)
 				&& (N.m_NodeType != MNA)
@@ -1266,11 +1266,11 @@ bool    CSemanticStructure::HasLocPrepInBegining(size_t NodeNo) const
 bool CSemanticStructure::IsRusSubj(int iRel) const
 {
 	if (GetRelation(iRel)->
-		m_SyntacticRelation == _R("подл"))
+		m_SyntacticRelation == "подл")
 		return true;
 	long iRusSynRel = GetSynRelBySemRel(iRel);
 	if (iRusSynRel != -1)
-		if (GetSynRels()[iRusSynRel].m_SynRelName == _R("ПОДЛ"))
+		if (GetSynRels()[iRusSynRel].m_SynRelName == "ПОДЛ")
 			return true;
 	return false;
 }

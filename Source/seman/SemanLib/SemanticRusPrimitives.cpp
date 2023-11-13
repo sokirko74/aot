@@ -129,7 +129,7 @@ const long			CRusSemStructure::GetSemClausesCount() const
 
 bool  CRusSemStructure::IsOptional(long RelNo) const 
 {
-  if (m_Relations[RelNo].m_SyntacticRelation == _R("врем_группа")) return false;
+  if (m_Relations[RelNo].m_SyntacticRelation == "врем_группа") return false;
 
   return  m_Relations[RelNo].m_Valency.m_bOptional;
 };
@@ -241,7 +241,7 @@ bool CRusSemStructure::IsPostSpecifAdjNode(long NodeNo) const
 {
 	CRelSet R = GetIncomingRelations(NodeNo, false);
 	if (R.m_RelsCount != 1) return false;
-return    (GetRelation(R.m_Rels[0])->m_Valency.m_RelationStr == "PROPERT")		   && (GetRelation(R.m_Rels[0])->m_SyntacticRelation == _R("уточн"));
+return    (GetRelation(R.m_Rels[0])->m_Valency.m_RelationStr == "PROPERT")		   && (GetRelation(R.m_Rels[0])->m_SyntacticRelation == "уточн");
 };
 
 
@@ -543,9 +543,9 @@ std::string CRusSemStructure::GetMorphologyOfNode(long NodeNo) const
 bool	CRusSemStructure::IsParenthesis (long NodeNo) const
 {
 	  return          (m_Nodes[NodeNo].GetType() != NoneRoss) 
-			   && (   HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF",_R("ВВОДН"), "D_PART_OF_SPEECH",0,0)
-				   || HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF",_R("ВВОДН"), "D_GROUPS",0,0)
-				   || HasGramFetAfterColon (NodeNo, _R("ВВОДН"))
+			   && (   HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","ВВОДН", "D_PART_OF_SPEECH",0,0)
+				   || HasItem (m_Nodes[NodeNo].GetType(),m_Nodes[NodeNo].GetUnitNo(),"GF","ВВОДН", "D_GROUPS",0,0)
+				   || HasGramFetAfterColon (NodeNo, "ВВОДН")
 				  );
 };
 

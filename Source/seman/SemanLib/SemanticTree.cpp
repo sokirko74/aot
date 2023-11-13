@@ -546,7 +546,7 @@ void CRusSemStructure::GetTree(long Tag, TreeAndValueVector& VarAndVals)
 {
 	if (m_Relations.size() > 250)
 	{
-		ErrorMessage(_R("PanicRelationsCount для одной клаузы больше 250. Это очень сложный граф."));
+		ErrorMessage("PanicRelationsCount для одной клаузы больше 250. Это очень сложный граф.");
 		VarAndVals.resize(1);
 		VarAndVals[0].second.SetPanic();
 		throw;
@@ -1300,7 +1300,7 @@ long CRusSemStructure::GetColloquialInterpsCount(long Tag) const
 
 	for (size_t i = 0; i < m_Nodes.size(); i++)
 		if (HasTag(i, Tag))
-			if (find(m_Nodes[i].m_POs.begin(), m_Nodes[i].m_POs.end(), _R("разг")) != m_Nodes[i].m_POs.end())
+			if (find(m_Nodes[i].m_POs.begin(), m_Nodes[i].m_POs.end(), "разг") != m_Nodes[i].m_POs.end())
 				Result++;
 
 	return Result;

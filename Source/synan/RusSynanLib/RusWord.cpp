@@ -31,14 +31,12 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 			if ( g & _QM(rGenitiv) )
 			{
 				std::string Form = Info.GetWordForm(k);
-				int l = Form.length();
-				if (l < 3) return false;
 				if (bMasc)
-					return		(Form.substr(l-3) == _R("ЕГО"))
-							||	(Form.substr(l-3) == _R("ОГО"));
+					return		endswith(Form, _R("ЕГО"))
+							||  endswith(Form, _R("ОГО"));
 				else
-					return		(Form.substr(l-2) == _R("ОЙ"))
-							||	(Form.substr(l-2) == _R("ЕЙ"));
+					return		endswith(Form, _R("ОЙ"))
+							|| endswith(Form, _R("ЕЙ"));
 			};
 	};
 	return false;		

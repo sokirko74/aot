@@ -78,7 +78,8 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 		auto SubordConjItemNo = GetItemNoByItemStr(piOborDic, "ПОДЧ_СОЮЗ", "D_PART_OF_SPEECH");
 		auto CoordConjItemNo = GetItemNoByItemStr(piOborDic, "СОЧ_СОЮЗ", "D_PART_OF_SPEECH");
 		auto SimplePrepItemNo = GetItemNoByItemStr(piOborDic, "ПРОСТ_ПРЕДЛ", "D_PART_OF_SPEECH");
-		auto CoordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic,"СОЧ_РАЗРЫВ_СОЮЗ", "D_PART_OF_SPEECH");		long SubordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic,_R("ПОДЧ_РАЗРЫВ_СОЮЗ"), "D_PART_OF_SPEECH");
+		auto CoordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic,"СОЧ_РАЗРЫВ_СОЮЗ", "D_PART_OF_SPEECH");		
+		auto SubordDisruptPrepItemNo = GetItemNoByItemStr(piOborDic, "ПОДЧ_РАЗРЫВ_СОЮЗ", "D_PART_OF_SPEECH");
 		auto PrepItemNo = GetItemNoByItemStr(piOborDic,"ПРЕДЛ", "D_PART_OF_SPEECH");
 
 		BYTE case_dom_no = piOborDic->GetDomenNoByDomStr("D_CASE");
@@ -94,7 +95,7 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 		
 
 		// уточнения ГГ
-		auto InfinitiveItemNo = GetItemNoByItemStr(piOborDic,_R("инф"), "D_VP_SPECIF");
+		auto InfinitiveItemNo = GetItemNoByItemStr(piOborDic,"инф", "D_VP_SPECIF");
 
 
 		for(int UnitNo = 0 ; UnitNo < iSize ; UnitNo++ )
@@ -120,8 +121,8 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 					{
 						oborot.m_GrammarFeature = piOborDic->WriteToString(piOborDic->GetCortege(i));
 						Trim(oborot.m_GrammarFeature);
-						if (oborot.m_GrammarFeature == _R("НАР"))
-							oborot.m_GrammarFeature = _R("Н");
+						if (oborot.m_GrammarFeature == "НАР")
+							oborot.m_GrammarFeature = "Н";
 
 					};
 					//nim : вводный оборот, проверить GF=ВВОДН

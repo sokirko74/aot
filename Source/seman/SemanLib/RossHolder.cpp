@@ -87,7 +87,7 @@ bool CRossHolder::InitConsts()
 
 	S_And_InstrNo = EmptyDomItemId;
 	if (LemGroupBeginingDomNo != ErrUChar)
-		S_And_InstrNo = GetItemNoByItemStr1(_R("с+Т"), LemGroupBeginingDomNo);
+		S_And_InstrNo = GetItemNoByItemStr1("с+Т", LemGroupBeginingDomNo);
 	return true;
 };
 
@@ -124,54 +124,54 @@ dom_item_id_t CRossHolder::GetItemNoByItemStr(const std::string& ItemStr, const	
 
 bool CRossHolder::InitDomainsConsts()
 {
-	SelfLabelNo = GetItemNoByItemStr1(_R("C"), ActDomNo);
+	SelfLabelNo = GetItemNoByItemStr1("C", ActDomNo);
 
-	AdvAdjMainNo = GetItemNoByItemStr(_R("НАР:нар_опр"), "D_GF_MAIN");
-	NounMainNo = GetItemNoByItemStr(_R("СУЩ:ИГ"), "D_GF_MAIN");
-	VerbMainNo = GetItemNoByItemStr(_R("ГЛ:ГГ"), "D_GF_MAIN");
-	AdjMainNo = GetItemNoByItemStr(_R("ПРИЛ:с_опр"), "D_GF_MAIN");
-	PronMainNo = GetItemNoByItemStr(_R("МЕСТОИМ:с_опр"), "D_GF_MAIN");
-	ClauseGrpNo = GetItemNoByItemStr(_R("ПРИД_ПР"), "D_GROUPS");
-	NounGrpNo = GetItemNoByItemStr(_R("ИГ"), "D_GROUPS");
-	AdverbialGrpNo = GetItemNoByItemStr(_R("ОБСТ_ГР"), "D_GROUPS");
-	VerbGrpNo = GetItemNoByItemStr(_R("ГГ"), "D_GROUPS");
+	AdvAdjMainNo = GetItemNoByItemStr("НАР:нар_опр", "D_GF_MAIN");
+	NounMainNo = GetItemNoByItemStr("СУЩ:ИГ", "D_GF_MAIN");
+	VerbMainNo = GetItemNoByItemStr("ГЛ:ГГ", "D_GF_MAIN");
+	AdjMainNo = GetItemNoByItemStr("ПРИЛ:с_опр", "D_GF_MAIN");
+	PronMainNo = GetItemNoByItemStr("МЕСТОИМ:с_опр", "D_GF_MAIN");
+	ClauseGrpNo = GetItemNoByItemStr("ПРИД_ПР", "D_GROUPS");
+	NounGrpNo = GetItemNoByItemStr("ИГ", "D_GROUPS");
+	AdverbialGrpNo = GetItemNoByItemStr("ОБСТ_ГР", "D_GROUPS");
+	VerbGrpNo = GetItemNoByItemStr("ГГ", "D_GROUPS");
 	CopulNo = GetItemNoByItemStr("Copul", "D_GROUPS");
 	ModalCopulNo = GetItemNoByItemStr("ModalCopul", "D_GROUPS");
-	NumerComplexNo = GetItemNoByItemStr(_R("ЦК"), "D_GRAFEM_DESC");
-	NumerSymbComplexNo = GetItemNoByItemStr(_R("ЦБК"), "D_GRAFEM_DESC");
-	HyphenNo = GetItemNoByItemStr(_R("ДЕФ"), "D_GRAFEM_DESC");
-	AdvNo = GetItemNoByItemStr(_R("НАР"), "D_PART_OF_SPEECH");
-	AdjNo = GetItemNoByItemStr(_R("ПРИЛ"), "D_PART_OF_SPEECH");
-	NumeralNo = GetItemNoByItemStr(_R("ЧИСЛ"), "D_PART_OF_SPEECH");
-	PossPronNo = GetItemNoByItemStr(_R("ПРИТ_МЕСТМ"), "D_PART_OF_SPEECH");
+	NumerComplexNo = GetItemNoByItemStr("ЦК", "D_GRAFEM_DESC");
+	NumerSymbComplexNo = GetItemNoByItemStr("ЦБК", "D_GRAFEM_DESC");
+	HyphenNo = GetItemNoByItemStr("ДЕФ", "D_GRAFEM_DESC");
+	AdvNo = GetItemNoByItemStr("НАР", "D_PART_OF_SPEECH");
+	AdjNo = GetItemNoByItemStr("ПРИЛ", "D_PART_OF_SPEECH");
+	NumeralNo = GetItemNoByItemStr("ЧИСЛ", "D_PART_OF_SPEECH");
+	PossPronNo = GetItemNoByItemStr("ПРИТ_МЕСТМ", "D_PART_OF_SPEECH");
 
 	NominativeNo = GetItemNoByItemStr1("И", CaseDomNo);
-	InstrumentalisNo = GetItemNoByItemStr1(_R("Т"), CaseDomNo);
-	GenitivNo = GetItemNoByItemStr1(_R("Р"), CaseDomNo);
-	DativNo = GetItemNoByItemStr1(_R("Д"), CaseDomNo);
-	VocativNo = GetItemNoByItemStr1(_R("П"), CaseDomNo);
-	AccusativNo = GetItemNoByItemStr1(_R("В"), CaseDomNo);
-	NominativePluralisNo = GetItemNoByItemStr1(_R("И_мн"), CaseNumberDomNo);
-	InstrumentalisPluralisNo = GetItemNoByItemStr1(_R("Т_мн"), CaseNumberDomNo);
-	GenitivPluralisNo = GetItemNoByItemStr1(_R("Р_мн"), CaseNumberDomNo);
-	DativPluralisNo = GetItemNoByItemStr1(_R("Д_мн"), CaseNumberDomNo);
-	VocativPluralisNo = GetItemNoByItemStr1(_R("П_мн"), CaseNumberDomNo);
+	InstrumentalisNo = GetItemNoByItemStr1("Т", CaseDomNo);
+	GenitivNo = GetItemNoByItemStr1("Р", CaseDomNo);
+	DativNo = GetItemNoByItemStr1("Д", CaseDomNo);
+	VocativNo = GetItemNoByItemStr1("П", CaseDomNo);
+	AccusativNo = GetItemNoByItemStr1("В", CaseDomNo);
+	NominativePluralisNo = GetItemNoByItemStr1("И_мн", CaseNumberDomNo);
+	InstrumentalisPluralisNo = GetItemNoByItemStr1("Т_мн", CaseNumberDomNo);
+	GenitivPluralisNo = GetItemNoByItemStr1("Р_мн", CaseNumberDomNo);
+	DativPluralisNo = GetItemNoByItemStr1("Д_мн", CaseNumberDomNo);
+	VocativPluralisNo = GetItemNoByItemStr1("П_мн", CaseNumberDomNo);
 
-	NominativeSingularNo = GetItemNoByItemStr1(_R("И_ед"), CaseNumberDomNo);
-	InstrumentalisSingularNo = GetItemNoByItemStr1(_R("Т_ед"), CaseNumberDomNo);
-	GenitivSingularNo = GetItemNoByItemStr1(_R("Р_ед"), CaseNumberDomNo);
-	DativSingularNo = GetItemNoByItemStr1(_R("Д_ед"), CaseNumberDomNo);
-	VocativSingularNo = GetItemNoByItemStr1(_R("П_ед"), CaseNumberDomNo);
-	AccusativSingularNo = GetItemNoByItemStr1(_R("В_ед"), CaseNumberDomNo);
-	AccusativPluralisNo = GetItemNoByItemStr1(_R("В_мн"), CaseNumberDomNo);
+	NominativeSingularNo = GetItemNoByItemStr1("И_ед", CaseNumberDomNo);
+	InstrumentalisSingularNo = GetItemNoByItemStr1("Т_ед", CaseNumberDomNo);
+	GenitivSingularNo = GetItemNoByItemStr1("Р_ед", CaseNumberDomNo);
+	DativSingularNo = GetItemNoByItemStr1("Д_ед", CaseNumberDomNo);
+	VocativSingularNo = GetItemNoByItemStr1("П_ед", CaseNumberDomNo);
+	AccusativSingularNo = GetItemNoByItemStr1("В_ед", CaseNumberDomNo);
+	AccusativPluralisNo = GetItemNoByItemStr1("В_мн", CaseNumberDomNo);
 
-	InstrumentalisAdjNo = GetItemNoByItemStr(_R("Т_ПРИЛ"), "D_CASE_POS");
-	InfinitiveNo = GetItemNoByItemStr(_R("инф"), "D_VP_SPECIF");
-	NegativeNo = GetItemNoByItemStr(_R("отр"), "D_VP_SPECIF");
-	PassiveNo = GetItemNoByItemStr(_R("стр"), "D_VP_SPECIF");
-	QuoteMarkNo = GetItemNoByItemStr(_R("квч"), "D_GRAFEM_DESC");
-	ILENo = GetItemNoByItemStr(_R("ИЛЕ"), "D_GRAFEM_DESC");
-	A0LexFunctNo = GetItemNoByItemStr1(_R("A0"), LexFunctDomNo);
+	InstrumentalisAdjNo = GetItemNoByItemStr("Т_ПРИЛ", "D_CASE_POS");
+	InfinitiveNo = GetItemNoByItemStr("инф", "D_VP_SPECIF");
+	NegativeNo = GetItemNoByItemStr("отр", "D_VP_SPECIF");
+	PassiveNo = GetItemNoByItemStr("стр", "D_VP_SPECIF");
+	QuoteMarkNo = GetItemNoByItemStr("квч", "D_GRAFEM_DESC");
+	ILENo = GetItemNoByItemStr("ИЛЕ", "D_GRAFEM_DESC");
+	A0LexFunctNo = GetItemNoByItemStr1("A0", LexFunctDomNo);
 	S0LexFunctNo = GetItemNoByItemStr1("S0", LexFunctDomNo);
 	RightDirectionNo = GetItemNoByItemStr(">", "D_POSITION");
 
@@ -494,7 +494,7 @@ bool	CRossHolder::IsCompAdjCortege(const  TCortege& C) const
 {
 	dom_item_id_t item_id = GetSynFet(C);
 	return  !is_null(item_id)
-		&& (GetDomItemStrWrapper(item_id) == _R("сравн"));
+		&& (GetDomItemStrWrapper(item_id) == "сравн");
 };
 
 bool CRossHolder::IsCase(dom_item_id_t item_id) const {

@@ -11,13 +11,13 @@ void CRusSemStructure::FindPragmaticallyStrongSynRel ()
 
 		// если из узла выходит более двух стрелок с однородным отношением,
 		// тогда таким отношениям можно доверять
-		if (m_SynRelations[RelNo].m_SynRelName.substr(0,5) == _R("ОДНОР"))
+		if (startswith(m_SynRelations[RelNo].m_SynRelName, "ОДНОР"))
 		{
 			std::vector<long> Rels;
 			GetOutcomingSynRelations(m_SynRelations[RelNo].m_SourceNodeNo, Rels);
 			long Count =0;
 			for (long i=0;i < Rels.size(); i++) 
-				if(m_SynRelations[Rels[i]].m_SynRelName.substr(0,5) == _R("ОДНОР"))
+				if(startswith(m_SynRelations[Rels[i]].m_SynRelName, "ОДНОР"))
 					Count++;
 			if (Count > 2)
 				m_SynRelations[RelNo].m_bPragmaticallyStrong = true;
@@ -39,7 +39,7 @@ bool CRusSemStructure::IsPragmaticallyStrongSynRel (long RelNo) const
 	/*
 	сравнитлеьное числитлеьное "больше" может выполнять роль MUA, а не только заполнять  валентсноть QUANTIT	
 	*/
-	if  (m_SynRelations[RelNo].m_SynRelName == _R("НАР_ЧИСЛ_СУЩ"))
+	if  (m_SynRelations[RelNo].m_SynRelName == "НАР_ЧИСЛ_СУЩ")
 	{
 		if (   m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm(_R("БОЛЬШЕ"))			
 			|| m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm(_R("МЕНЬШЕ"))  
@@ -107,14 +107,14 @@ void CRusSemStructure::ApplySynStr (long ClauseNo)
 							continue;
 
 						std::string  SemRelStr;
-						if (SynRelStr ==	_R("ЧИСЛ_СУЩ"))
+						if (SynRelStr ==	"ЧИСЛ_СУЩ")
 							SemRelStr =	"QUANTIT";		   
 
 						CRusSemRelation NewRelation(CValency(SemRelStr,	A_C), m_SynRelations[SynRels[l]].m_SourceNodeNo, i,	m_SynRelations[SynRels[l]].m_SynRelName);
 
-						if	(			SynRelStr == _R("ПРИЛ_СУЩ") 
-								||		SynRelStr == _R("ЧИСЛ_СУЩ") 
-								||		SynRelStr == _R("ПРИЧ_СУЩ") // можно что-нибудь еще добавить... 	
+						if	(			SynRelStr == "ПРИЛ_СУЩ" 
+								||		SynRelStr == "ЧИСЛ_СУЩ" 
+								||		SynRelStr == "ПРИЧ_СУЩ" // можно что-нибудь еще добавить... 	
 							)
 						{
 							NewRelation.m_bReverseRel = true;

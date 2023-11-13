@@ -129,7 +129,7 @@ void CEngVerbTense::make_verb_form()
 		SetNumber(2);
 
 
-	if(GetNumber() == 1 && S.FieldContainsValue(E.m_Nodes[m_VerbNodeNo], "RESTR", _R("ед !")))
+	if(GetNumber() == 1 && S.FieldContainsValue(E.m_Nodes[m_VerbNodeNo], "RESTR", "ед !"))
 	  SetNumber(1);
 
 	// если подлежащее - местоимение ед. ч., у которого прописано лицо =/= 3л.
@@ -374,7 +374,7 @@ bool		CEngVerbTense::is_be_verb() const
 
 bool		CEngVerbTense::has_not()
 {
-	return S.E.m_Nodes[m_VerbNodeNo].HasRelOperator(_R("НЕ"));
+	return S.E.m_Nodes[m_VerbNodeNo].HasRelOperator("НЕ");
 }
 
 

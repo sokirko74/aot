@@ -149,7 +149,7 @@ void CRusSemStructure::DeleteSAMNode(long ClauseNo, CRusSemNode& SamNode)
 	for (long i = 0; i < m_Nodes.size(); i++)
 		if (IsInClause(i, ClauseNo))
 			if (m_Nodes[i].IsPrimitive() && CanBeDeleted(i))
-				if (HasGramFetAfterColon(i, _R("нар"))
+				if (HasGramFetAfterColon(i, "нар")
 					&& HasRichPOS(i, PRONOUN_P)
 					)
 
@@ -175,14 +175,14 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 		if (IsInClause(i, ClauseNo))
 			if (m_Nodes[i].IsPrimitive())
 			{
-				if (HasGramFetAfterColon(i, _R("нар"))
+				if (HasGramFetAfterColon(i, "нар")
 					&& HasRichPOS(i, PRONOUN_P)
 					)
 				{
 					if (HasIncomingNotWeakSynRelation(i))  return false;
 				};
 
-				if (HasGramFetAfterColon(i, _R("с_опр")))
+				if (HasGramFetAfterColon(i, "с_опр"))
 					if (m_Nodes[i].IsPrimitive())
 						if (m_Nodes[i].IsLemma(_R("ОДИН"))
 							|| m_Nodes[i].IsLemma(_R("САМ"))
@@ -215,7 +215,7 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
 		{
 			CRelSet R = GetIncomingRelations(i, false);
 			for (long l = 0; l < R.m_RelsCount; l++)
-				if (m_Relations[R.m_Rels[l]].m_SyntacticRelation == _R("подл"))
+				if (m_Relations[R.m_Rels[l]].m_SyntacticRelation == "подл")
 					// проверяем согласование по числу/роду
 					if ((((_QM(rPlural) | _QM(rSingular))
 						& SamNode.GetGrammems()
@@ -247,7 +247,7 @@ bool CRusSemStructure::InsertSAMNode(long ClauseNo, CRusSemNode& SamNode)
 					}
 					else
 					{
-						// удаляем субъектную стрелку, которая не  согласовалась со словом _R("САМ")
+						// удаляем субъектную стрелку, которая не  согласовалась со словом "САМ"
 						EraseRelation(R.m_Rels[l], "InsertSAMNode");
 						// получаем новый набор выходящих отношений
 						R = GetIncomingRelations(i, false);
@@ -607,7 +607,7 @@ long CRusSemStructure::FindSituationsForClauseVariantCombination()
 	}
 	catch (...)
 	{
-		ErrorMessage(_R("Ошибка в интерпретации синтаксиса"));
+		ErrorMessage("Ошибка в интерпретации синтаксиса");
 		throw;
 	};
 
@@ -1097,7 +1097,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		m_InterfaceClauseNo = 0;
 
 
-		EndTimer(_R("Syntax interpretation"));
+		EndTimer("Syntax interpretation");
 		long BestClauseVariantsCombinationNo = 0;
 		long BestClauseVariantsCombinationWeight = 100000;
 
@@ -1189,7 +1189,7 @@ long CRusSemStructure::FindSituations(size_t SentNo)
 		S = Format("WordsPerSecond =  %10.0f\n", WordsPerSecond);
 		if (bTooSlow)
 		{
-			S += _R("Выход по скорости !!!!\n");
+			S += "Выход по скорости !!!!\n";
 		};
 
 		m_ClausePropertiesProtocol += S;

@@ -321,7 +321,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 		if( engNode.m_MainWordNo >= 0 )
 		{
 			if (AVREM_Tense != zero_tn) 
-				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,_R("по полю RUSETENSE"));
+				engNode.m_Words[engNode.m_MainWordNo].SetTense(AVREM_Tense,"field RUSETENSE");
 			CorrectTenseByDictVerbFeatures(engNode); // "RESTR" "not_cont"
 		}
 	}
@@ -362,7 +362,7 @@ int CEngSemStructure::InterpretOneNode( CEnglishEquivMap& mapRNodeToENode, int i
 	}
 
 	if( engNode.GetType()!=NoneRoss && engNode.GetUnitNo()!=ErrUnitNo &&
-		GetRossHolder(engNode.GetType())->HasFieldValue("RESTR",_R("ед"),engNode.GetUnitNo()) )
+		GetRossHolder(engNode.GetType())->HasFieldValue("RESTR", "ед",engNode.GetUnitNo()) )
 	{
 		engNode.DeleteGrammemsRich( eAllNumbers );
 		engNode.AddOneGrammemRich( eSingular );
@@ -663,9 +663,9 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 		}
 		
 		
-		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc==_R("А1(НЕ)") )
+		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc== "А1(НЕ)" )
 			Result.m_AlgStr = vectorEngEquivs[0].m_StrLexFunc;
-		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc==_R("А2(НЕ)") )
+		if( vectorEngEquivs.size()==1 && vectorEngEquivs[0].m_StrLexFunc== "А2(НЕ)" )
 			Result.m_AlgStr = vectorEngEquivs[0].m_StrLexFunc;
 			
 	}

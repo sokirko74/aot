@@ -908,17 +908,17 @@ extern bool IsLocSemRel(const std::string &S);
 
 extern void SetSpacesAndRegisterInSentence(std::string &str, MorphLanguageEnum Langua);
 
-const std::string SIMILAR_NUMERALS_STR = _R("ОДНОР_ЧИСЛ");
-const std::string NUMERALS_STR = _R("КОЛИЧ");
-const std::string C_NUMERALS_STR = _R("СЛОЖ_ЧИСЛ");
-const std::string KEYB_STR = _R("КЛВ");
-const std::string WEB_ADDR_STR = _R("ЭЛ_АДРЕС");
-const std::string NAMES_STR = _R("ФИО");
-const std::string NUMERAL_NOUN_STR = _R("ЧИСЛ_СУЩ");
-const std::string NOUN_ADJ_STR = _R("ПРИЛ_СУЩ");
-const std::string NOUN_NUMERAL_STR = _R("СУЩ_ЧИСЛ");
-const std::string NUMERAL_ADVERB_STR = _R("НАР_ЧИСЛ_СУЩ");
-const std::string SELECTIVE_GR_STR = _R("ЭЛЕКТ_ИГ");
+const std::string SIMILAR_NUMERALS_STR = "ОДНОР_ЧИСЛ";
+const std::string NUMERALS_STR = "КОЛИЧ";
+const std::string C_NUMERALS_STR = "СЛОЖ_ЧИСЛ";
+const std::string KEYB_STR = "КЛВ";
+const std::string WEB_ADDR_STR = "ЭЛ_АДРЕС";
+const std::string NAMES_STR = "ФИО";
+const std::string NUMERAL_NOUN_STR = "ЧИСЛ_СУЩ";
+const std::string NOUN_ADJ_STR = "ПРИЛ_СУЩ";
+const std::string NOUN_NUMERAL_STR = "СУЩ_ЧИСЛ";
+const std::string NUMERAL_ADVERB_STR = "НАР_ЧИСЛ_СУЩ";
+const std::string SELECTIVE_GR_STR = "ЭЛЕКТ_ИГ";
 const size_t MaxValsCount = 15;
 
 

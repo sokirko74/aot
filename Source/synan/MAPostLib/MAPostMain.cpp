@@ -571,7 +571,7 @@ void CMAPost::SemiAdjectives()
 		for (int i = 0; i < W.GetHomonymsCount(); i++)
 			W.GetHomonym(i)->m_strLemma.erase(0, 4);
 		// установка графематической пометы
-		W.m_UnparsedGraphemDescriptorsStr += _R(" #ПОЛУ ");
+		W.m_UnparsedGraphemDescriptorsStr += " #ПОЛУ ";
 	};
 };
 
@@ -648,7 +648,7 @@ void CMAPost::SemiNouns()
 
 
 		// установка графематической пометы
-		W.m_UnparsedGraphemDescriptorsStr += _R(" #ПОЛУ ");
+		W.m_UnparsedGraphemDescriptorsStr += " #ПОЛУ ";
 
 		// установка граммем
 		if (bChangeToPlural)
@@ -960,7 +960,7 @@ void CMAPost::Rule_ILE()
 		CPostLemWord& W = *it;
 		if (W.HasDes(OLLE))
 		{
-            LOGV << "apply Rule_ILE to " << convert_to_utf8(W.m_strWord, m_Language);
+            LOGV << "apply Rule_ILE to " << W.m_strWord;
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
 			pNew->SetMorphUnknown();
@@ -1006,7 +1006,7 @@ void CMAPost::Rule_KAK_MOZHNO()
 		//оставляем только омоним [П сравн]
 		compar_it->SetAllOtherHomsDel(iHom);
 		compar_it->DeleteMarkedHomonymsBeforeClauses();
-		compar_it->m_UnparsedGraphemDescriptorsStr += _R(" #КАК_МОЖНО ");
+		compar_it->m_UnparsedGraphemDescriptorsStr += " #КАК_МОЖНО ";
 		m_Words.erase(it);
 		m_Words.erase(mozno_it);
 		it = compar_it;
@@ -1068,7 +1068,6 @@ void CMAPost::Rule_Redublication()
 			while (itt != last_it)
 				itt = m_Words.erase(itt);
 			m_Words.erase(last_it);
-			W.m_UnparsedGraphemDescriptorsStr += _R(" #РЕДУПЛ ");
 			if (bHasEndOfSent)
 				W.AddDes(OSentEnd);
 		}

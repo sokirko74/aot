@@ -177,12 +177,12 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, bool printTranslation, std::string inputText) {
     try {
         if (printTranslation) {
-            auto s = SemBuilder.TranslateRussianText(inputText, _R("общ"), nullptr);
+            auto s = SemBuilder.TranslateRussianText(inputText, "общ", nullptr);
             return convert_to_utf8(s, morphRussian); //остаются недопереведенные слова
         }
         else {
             std::string dummy;
-            SemBuilder.FindSituations(inputText, 0, _R("общ"), 20000, -1, "", dummy);
+            SemBuilder.FindSituations(inputText, 0, "общ", 20000, -1, "", dummy);
             if (printVisual) {
                 return PrintRelationsAsToJavascript(SemBuilder);
             }

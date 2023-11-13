@@ -213,7 +213,7 @@ void CMAPost::Cifrdef()
 			if (it != spec_it)
 			{
 				CPostLemWord& W2 = *spec_it;
-                LOGV << "apply Cifrdef to  " <<  convert_to_utf8(W2.m_strWord, m_Language);
+                LOGV << "apply Cifrdef to  " <<  W2.m_strWord;
 				std::vector<CFormInfo> Paradigms;
 				W2.DeleteOborotMarks();
 				W2.AddDes(ORLE);

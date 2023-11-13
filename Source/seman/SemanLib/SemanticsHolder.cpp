@@ -92,10 +92,10 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 				{
 					std::string S = GetRoss(type)->WriteToString(C);
 					Trim(S);
-					if (S == _R("ДОБАВЛЕНИЕ"))
+					if (S == "ДОБАВЛЕНИЕ")
 						A.m_Type = atAdditionArticle;
 					else
-						if (S == _R("ЗАГЛУШКА"))
+						if (S == "ЗАГЛУШКА")
 							A.m_Type = atArticlePlug;
 						else
 							A.m_Type = atEmptyType;
@@ -180,7 +180,7 @@ void CSemanticsHolder::GetCustomGrammems(std::string GramFet, grammems_mask_t& G
 	}
 	else
 	{
-		GramFet = _R("С ") + GramFet;
+		GramFet = "С " + GramFet;
 		if (GetRusGramTab()->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G))
 		{
 			Grammems = G;
@@ -253,8 +253,8 @@ bool CSemanticsHolder::InitTimeUnits()
 {
 	// инициализация констант 
 	BYTE GramFunctDomNo = GetRoss(TimeRoss)->GetDomenNoByDomStr("D_GRAM_FUNCT");
-	dom_item_id_t AbbrFunctName = GetRoss(TimeRoss)->GetItemIdByItemStr(_R("СОКР"), GramFunctDomNo);
-	dom_item_id_t AbbrFunctPluralName = GetRoss(TimeRoss)->GetItemIdByItemStr(_R("СОКР_мн"), GramFunctDomNo);
+	dom_item_id_t AbbrFunctName = GetRoss(TimeRoss)->GetItemIdByItemStr("СОКР", GramFunctDomNo);
+	dom_item_id_t AbbrFunctPluralName = GetRoss(TimeRoss)->GetItemIdByItemStr("СОКР_мн", GramFunctDomNo);
 	m_TimeAbbrPairs.clear();
 	m_TimeUnits.clear();
 
@@ -292,7 +292,7 @@ bool CSemanticsHolder::InitTimeUnits()
 						)
 					{
 						std::string Contents = GetRossHolder(TimeRoss)->GetDomItemStrWrapper(C.GetItem(0));
-						if (Contents == _R("свобод"))
+						if (Contents == "свобод")
 							U.m_bCanFillNotTimeValency = true;
 					};
 
@@ -713,31 +713,31 @@ bool  CSemanticsHolder::BuildOborottos()
 		{
 			CObor O;
 			O.m_UnitStr = GetRoss(OborRoss)->GetEntryStr(UnitNo);
-			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", _R("ПОДЧ_СОЮЗ"), "D_PART_OF_SPEECH", 0, 0))
+			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ПОДЧ_СОЮЗ", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusSubConj = true;
 
-			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "RESTR", _R("подл"), "D_VP_SPECIF", 0, 0))
+			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "RESTR", "подл", "D_VP_SPECIF", 0, 0))
 				O.m_bRusSubConjCanBeAfterSubject = true;
 
-			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", _R("СОЧ_СОЮЗ"), "D_PART_OF_SPEECH", 0, 0))
+			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "СОЧ_СОЮЗ", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusCoordConj = true;
 
-			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", _R("ПРЕДЛ"), "D_PART_OF_SPEECH", 0, 0)
-				|| GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", _R("ПРОСТ_ПРЕДЛ"), "D_PART_OF_SPEECH", 0, 0)
+			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ПРЕДЛ", "D_PART_OF_SPEECH", 0, 0)
+				|| GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ПРОСТ_ПРЕДЛ", "D_PART_OF_SPEECH", 0, 0)
 				)
 				O.m_bRusOborPrep = true;
 
-			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", _R("НАР"), "D_PART_OF_SPEECH", 0, 0)
+			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "НАР", "D_PART_OF_SPEECH", 0, 0)
 				&& GetRossHolder(OborRoss)->HasItem(UnitNo, "SF", "MODL", "D_SEM_REL", 0, 0))
 				O.m_bRusModalOborAdverbial = true;
 
-			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", _R("ВВОДН"), "D_PART_OF_SPEECH", 0, 0))
+			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ВВОДН", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusIntrExpr = true;
 
 			if (GetRoss(OborRoss)->IncludeArticle(UnitNo, "GF = * НАР : УСИЛ"))
 				O.m_bRusNegOborAdverbial = true;
 
-			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", _R("НАР"), "D_PART_OF_SPEECH", 0, 0))
+			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "НАР", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusOborAdverbial = true;
 
 			Oborottos.push_back(O);
@@ -871,8 +871,8 @@ bool IsConditional(const CRossHolder& RossDoc, long UnitNo)
 				if (!RossDoc.GetRoss()->GetCortege(i).is_null(0))
 				{
 					std::string s = RossDoc.GetDomItemStrWrapper1(i, 0);
-					if (s == _R("УСЛ")) return true;
-					assert(s == _R("БЕЗУСЛ"));
+					if (s == "УСЛ") return true;
+					assert(s == "БЕЗУСЛ");
 					return false;
 				};
 

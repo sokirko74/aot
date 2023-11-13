@@ -106,13 +106,6 @@ STDMETHODIMP CCOMParadigm::get_Accent(DWORD pos, BYTE* pVal)
 	return S_OK;
 }
 
-STDMETHODIMP CCOMParadigm::get_BaseLength(UINT* pVal)
-{
-	*pVal = m_InputWordBase.length();
-	
-	return S_OK;
-}
-
 STDMETHODIMP CCOMParadigm::get_LemmaPrefixLength(int* pVal)
 {
 	

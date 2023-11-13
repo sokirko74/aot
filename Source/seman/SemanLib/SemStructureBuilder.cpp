@@ -197,7 +197,7 @@ std::string  CSemStructureBuilder::Answer()
 	std::string Result;
 
 	if (!m_RusStr.SemanticAnswer(Result, m_SavedSentences))
-		Result = _R("Я не знаю");
+		Result = "I do not know";
 		
 	return Result;
 }

@@ -541,7 +541,7 @@ bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, uint16_t Un
 	for(auto& c: corteges)
 	{
 		if( !c.is_null(0) )
-			if( std::string(_R("ЗАГЛУШКА")) == RossHolder->GetRoss()->GetDomItemStr(c.GetItem(0))  )
+			if( std::string("ЗАГЛУШКА") == RossHolder->GetRoss()->GetDomItemStr(c.GetItem(0))  )
 				return true;
 	}
 	return false;

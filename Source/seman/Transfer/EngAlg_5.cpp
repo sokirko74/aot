@@ -253,8 +253,8 @@ void CEngSemStructure::ApplyInvitatoryRule(int iEngNode)
 	if( m_Nodes[iEngNode].m_MainWordNo==-1 )
 		return;
 
-	std::string strSoft = _R("_мягк_пригласит_наклонение");
-	std::string strHard = _R("_пригласит_наклонение");
+	std::string strSoft = "_мягк_пригласит_наклонение";
+	std::string strHard = "_пригласит_наклонение";
 	
 	bool bSoft = m_Nodes[iEngNode].HasRelOperator(strSoft);
 	bool bHard = m_Nodes[iEngNode].HasRelOperator(strHard);
@@ -402,14 +402,14 @@ void CEngSemStructure::RefineSynRealMarks(int iEngNode)
 {
 	CEngSemNode& engNode = m_Nodes[iEngNode];
 
-	if( engNode.m_SynReal.m_AlgStr != _R("А1(НЕ)") )
+	if( engNode.m_SynReal.m_AlgStr != "А1(НЕ)" )
 		return;
 
 	std::vector<long> inRels;
 	GetIncomingRelations(iEngNode,inRels,false);
 	for( int i=0; i<inRels.size(); i++ )
 	{
-		m_Nodes[m_Relations[inRels[i]].m_SourceNodeNo].m_RelOperators.push_back(_R("НЕ"));
+		m_Nodes[m_Relations[inRels[i]].m_SourceNodeNo].m_RelOperators.push_back("НЕ");
 	}
 }
 

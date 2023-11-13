@@ -1005,7 +1005,7 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 	size_t RealStart = start;
 	if (L.size() == 1) return false;
 	std::string S;
-	if (GetValue(L[RealStart].m_Line, _R("Дескриптор"), S)) {
+	if (GetValue(L[RealStart].m_Line, "Дескриптор", S)) {
 		RealStart++;
 	}
 

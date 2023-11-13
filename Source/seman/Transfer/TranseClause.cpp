@@ -29,8 +29,8 @@ bool CEngSemStructure::IsSubConj(CRossInterp interp)
 {
 	if( interp.m_DictType != OborRoss)
 		return false;
-	bool bIf     = GetRossHolder(interp.m_DictType)->HasFieldValue(std::string("GF"),std::string(_R("ПОДЧ_СОЮЗ")),interp.m_UnitNo);
-	bool bIfThen = GetRossHolder(interp.m_DictType)->HasFieldValue(std::string("GF"),std::string(_R("ПОДЧ_РАЗРЫВ_СОЮЗ")),interp.m_UnitNo);
+	bool bIf     = GetRossHolder(interp.m_DictType)->HasFieldValue("GF", "ПОДЧ_СОЮЗ", interp.m_UnitNo);
+	bool bIfThen = GetRossHolder(interp.m_DictType)->HasFieldValue("GF","ПОДЧ_РАЗРЫВ_СОЮЗ", interp.m_UnitNo);
 	return( bIf || bIfThen );
 }
 
@@ -279,7 +279,7 @@ void CEngSemStructure::ClauseRelRule_SubConj(int iRelNum)
 			return;
 		const CSemNode& rusNode = RusStr.GetNode(iRusNode);
 		std::string rus_str = GetCortegeStr(rusNode.GetType(),rusSemRel.m_SynReal.m_Cortege);
-		bool bRusInf = (rus_str.find(_R("инф"))!=std::string::npos );
+		bool bRusInf = (rus_str.find("инф")!=std::string::npos );
 
 		std::vector<SGramCortegesAndType> GramCortegesAndTypeV;	
 		GetGramCortegesAndTypeFromRel(GramCortegesAndTypeV, engSemRel);

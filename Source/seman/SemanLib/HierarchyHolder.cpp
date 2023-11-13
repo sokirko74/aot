@@ -87,7 +87,7 @@ CHierarchyHolder::~CHierarchyHolder()
 void CHierarchyHolder::WriteToRoss(std::string Entry)
 {
 
-	std::string EntryName = (m_Type == SemFet) ? _R("_иерархСХ") : _R("_иерархСО");
+	std::string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
 	uint16_t UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo != ErrUnitNo)
 		GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
@@ -140,7 +140,7 @@ void CHierarchyHolder::ReadFromRoss(bool WithoutView)
 	// TODO: add loading code here
 	Nodes.clear();
 	Relations.clear();
-	std::string EntryName = (m_Type == SemFet) ? _R("_иерархСХ") : _R("_иерархСО");
+	std::string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
 	uint16_t UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo == ErrUnitNo) {
 		ErrorMessage(Format("cannot read %s", convert_to_utf8(EntryName, morphRussian).c_str()));

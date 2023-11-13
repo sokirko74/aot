@@ -95,7 +95,7 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 		 )
 	  {
 			  if ( !m_Nodes[i-1].IsWordForm(_R("ВСЕ")) ) continue;
-	  		  m_Nodes[i].m_RelOperators.push_back(_R("ПРОДОЛЖ"));
+	  		  m_Nodes[i].m_RelOperators.push_back("ПРОДОЛЖ");
 			  DelNode(i-1);
 			  i--;
 	  }
@@ -268,7 +268,7 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 {
    if (m_Clauses[ClauseNo].m_ClauseSyntaxTop != -1)
-   if (    m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].HasRelOperator(_R("НЕ")) 
+   if (    m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].HasRelOperator("НЕ") 
 	    || m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].IsLemma (_R("НЕТ"))
 	  )
    for (long CompNodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  CompNodeNo <   m_Clauses[ClauseNo].m_EndNodeNo; CompNodeNo++)
@@ -285,7 +285,7 @@ void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 например, "больше воды" - здесь, когда есть связь QUANTIT,  у "воды" внешние граммемы "им,вн",а поскольку связь QUANTIT разрывается, внешние граммемы нужно приравнять				 внутренним
 				*/
 
-				assert (m_SynRelations[Rels[0]].m_SynRelName == _R("НАР_ЧИСЛ_СУЩ"));
+				assert (m_SynRelations[Rels[0]].m_SynRelName == "НАР_ЧИСЛ_СУЩ");
 				CRusSemNode& NounNode = m_Nodes[m_SynRelations[Rels[0]].m_SourceNodeNo];
 				assert (NounNode.IsWordContainer());
 				assert (NounNode.m_MainWordNo != -1);
@@ -323,7 +323,7 @@ try {
 							||	HasRichPOS (NodeNo, PREDK) // "у	меня нет больше	 надежды"
 						)
 					{
-						AddRelation(CRusSemRelation(CValency("ACT",A_C), NodeNo, CompNodeNo,  _R("чистое_обстоятельство")));			
+						AddRelation(CRusSemRelation(CValency("ACT",A_C), NodeNo, CompNodeNo,  "чистое_обстоятельство"));			
 					};
 		}
 

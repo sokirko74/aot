@@ -281,8 +281,6 @@ void CRusSentence::DisruptPronounPredik() {
 }
 
 
-const long CommonNounPrefixesCount = 2;
-const std::string CommonNounPrefixes[CommonNounPrefixesCount] = {_R("ВИЦЕ-"), _R("ЭКС-")};
 
 
 void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, std::string psAncode, std::string sLem, std::string TypeAncode) {
@@ -301,41 +299,41 @@ void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, std::string psAn
 
 void CRusSentence::CutPrefixEksAndVize() {
 
+    const std::set<std::string> all_prefixes = { _R("ВИЦЕ-"), _R("ЭКС-") };
+
     for (int ii = 0; ii < m_Words.size(); ii++) {
-        std::string Word = m_Words[ii].m_strUpperWord;
-        std::vector<int> Prefixes;
-        for (long i = 0; i < CommonNounPrefixesCount; i++)
-            if (CommonNounPrefixes[i] == Word.substr(0, CommonNounPrefixes[i].length())) {
-                Prefixes.push_back(i);
-                Word.erase(0, CommonNounPrefixes[i].length());
-                i = -1;
-                if (Word.empty()) break;
-            };
-        if (Prefixes.empty()) continue;
+        std::string word = m_Words[ii].m_strUpperWord;
+        std::vector<std::string> prefixes;
+        
+        for (size_t i = 0; i < 2; ++i) {
+            size_t hyphen = word.find('-');
+            if (hyphen == std::string::npos) break;
+            auto prefix = word.substr(0, hyphen);
+            if (!_find(all_prefixes, prefix)) break;
+            prefixes.push_back(prefix);
+        }
+        if (prefixes.empty()) continue;
 
 
         std::vector<CFormInfo> Paradigms;
-        GetOpt()->GetLemmatizer()->CreateParadigmCollection(false, Word, false, false, Paradigms);
+        GetOpt()->GetLemmatizer()->CreateParadigmCollection(false, word, false, false, Paradigms);
 
-        if (Paradigms.size() < 1) continue;
+        if (Paradigms.empty()) continue;
 
         std::vector<CSynHomonym> vec_Homonyms;
-        for (long k = 0; k < Paradigms.size(); k++) {
-            long lParadigm = Paradigms[k].GetParadigmId();
-            std::string TypeAncode = Paradigms[k].GetCommonAncode();
-            std::string sGramatCode = Paradigms[k].GetSrcAncode();
-            std::string sLemma = Paradigms[k].GetWordForm(0);
+        for (auto& p : Paradigms) {
+            std::string sLemma = p.GetWordForm(0);
             if (!binary_search(GetOpt()->m_pProfessions->m_vectorDatItems.begin(),
                                GetOpt()->m_pProfessions->m_vectorDatItems.end(), sLemma))
                 continue;
             CSynHomonym NewHom(this);
-            CreateHomonymFor_EksVice(NewHom, lParadigm, sGramatCode, sLemma, TypeAncode);
+            CreateHomonymFor_EksVice(NewHom, p.GetParadigmId(), p.GetSrcAncode(), sLemma, p.GetCommonAncode());
             vec_Homonyms.push_back(NewHom);
         }
 
-        if (vec_Homonyms.size() > 0) {
-            for (long i = 0; i < Prefixes.size(); i++) {
-                m_Words[ii].m_UnparsedGraphemDescriptorsStr += " " + CommonNounPrefixes[Prefixes[i]];
+        if (!vec_Homonyms.empty()) {
+            for (auto p: prefixes) {
+                m_Words[ii].m_UnparsedGraphemDescriptorsStr += " " + convert_to_utf8(p, morphRussian);
             };
 
             m_Words[ii].m_Homonyms.clear();

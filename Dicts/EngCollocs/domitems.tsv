@@ -1,0 +1,1135 @@
+-1	D_
+0	*
+-1	D_GRAFEM_DESC
+0	ДЕФ
+1	ЗПТ
+2	ЦБК
+3	ЦК
+4	двтч
+5	квч
+-1	D_COLON
+0	:
+-1	D_LF
+0	A0
+1	A1
+2	A2
+3	A3
+4	Abbr
+5	Adv0
+6	Adv1
+7	Adv2
+8	Adv3
+9	AntiBon
+10	AntiMagn
+11	AntiReal
+12	AntiReal1
+13	AntiReal2
+14	AntiVer
+15	Bon
+16	Caus
+17	Caus1Func0
+18	Caus1Func1
+19	Caus1Manif
+20	Caus1Oper1
+21	Caus1Oper2
+22	Caus2Func0
+23	Caus2Func1
+24	Caus2Func2
+25	Caus2Oper2
+26	Caus3Oper3
+27	CausFunc
+28	CausFunc0
+29	CausFunc1
+30	CausFunc2
+31	CausIncep
+32	CausLiqu
+33	CausLoc
+34	CausMagn
+35	CausManif
+36	CausOper1
+37	CausOper2
+38	CausOper3
+39	Centr
+40	Copul
+41	Culm
+42	Fin
+43	FinCaus
+44	FinFunc0
+45	FinOper1
+46	FinOper2
+47	Func
+48	Func0
+49	Func1
+50	Func2
+51	Func3
+52	Incep
+53	IncepCaus
+54	IncepFunc0
+55	IncepFunc1
+56	IncepLabor21
+57	IncepOper1
+58	IncepOper2
+59	IncepOper3
+60	Labor
+61	Labor12
+62	Labor13
+63	Labor21
+64	Liqu
+65	Liqu1Func0
+66	Liqu1Func1
+67	Liqu1Labor13
+68	Liqu1Oper1
+69	Liqu1Oper2
+70	Liqu2Func0
+71	Liqu2Oper2
+72	LiquFunc0
+73	LiquFunc1
+74	LiquMagn
+75	LiquOper1
+76	LiquOper2
+77	LiquOper3
+78	Loc
+79	Magn
+80	MoveLoc
+81	Oper
+82	Oper1
+83	Oper2
+84	Oper3
+85	OperCaus
+86	Perm2Oper1
+87	PermFunc0
+88	PermOper1
+89	Pred0
+90	Real
+91	Real1
+92	Real2
+93	Real3
+94	S0
+95	S1
+96	S2
+97	S3
+98	S4
+99	S_res
+100	V0
+101	Ver
+-1	D_GRAM_FUNCT
+0	АББР
+1	ГЛ
+2	КР
+3	НАР
+4	ОТР
+5	ПРЕВ
+6	ПРИД
+7	ПРИЛ
+8	СОВ
+9	СРАВН
+10	СУЩ
+11	ЧАСТ
+-1	D_OPN
+0	(
+-1	D_SEM_REL
+0	ACT
+1	ACTUAL
+2	ADR
+3	AFTER
+4	AGENT
+5	AIM
+6	ALIKE
+7	AS
+8	ASPECT
+9	ATTR
+10	AUTHOR
+11	BELNG
+12	C-AGENT
+13	CAUSE
+14	COMP
+15	COND
+16	CONTEN
+17	DATE
+18	DEGREE
+19	EQL
+20	ESTIM
+21	F-ACT
+22	FOR
+23	FORM
+24	FUNCT
+25	IDENT
+26	IN-ACCORD
+27	IN-DIRECT
+28	INCLUDING
+29	INSTEAD
+30	INSTR
+31	ISCONNECTED
+32	LOCK_forward
+33	LOC_dist
+34	LOC_nea
+35	LOK
+36	MATER
+37	MEAN
+38	MEDIATOR
+39	METHOD
+40	MODL
+41	MORE
+42	MUA
+43	MULTI
+44	NAME
+45	NO_AIM
+46	OBJ
+47	OBJ.RESLT
+48	OPERAT
+49	OR
+50	PACIEN
+51	PARAM
+52	PART
+53	PROPERT
+54	PURP
+55	QUANTIT
+56	QUANTOR
+57	REFERENT
+58	REPRES
+59	RESLT
+60	RESTR
+61	S-ACT
+62	SCALE
+63	SIMULT
+64	SPEC
+65	SPHERE
+66	SRC
+67	SRC-PNT
+68	SUB
+69	THEME
+70	THESAME
+71	TIME
+72	TOGETHER
+73	TRG-PNT
+74	TYPE-OF
+75	UNIT
+76	VALUE
+77	WITH
+-1	D_NUMBERS
+0	1
+1	2
+2	3
+3	4
+4	5
+5	6
+6	7
+7	8
+8	9
+-1	D_COMMA
+0	,
+-1	D_ENCYC_FUNC
+0	Anti
+1	CAP
+2	MULT
+3	Mesur
+4	Param
+5	SING
+6	БОЛ_РАЗ
+7	ВЫШЕ_ГЕО
+8	ЖИТЕЛЬ
+9	ИСХ-Т
+10	КОН-Т
+11	НИЖЕ_ГЕО
+12	СОСТОИТ
+13	ЧАСТЬ
+-1	D_SF
+0	ABSTR
+1	ADM
+2	AKTIO
+3	ANIM
+4	ANYTH
+5	ARTEF
+6	AUTHORIT
+7	CAUS
+8	CHG
+9	CLAS
+10	COLLEC
+11	COMMUNIC
+12	CONTNR
+13	DAMAG
+14	DEF
+15	DEV
+16	DIREC
+17	EMOT
+18	EMPL
+19	ENERG
+20	ERD
+21	EXISTE
+22	EXTENS
+23	FIN
+24	FLUI
+25	GEOGR
+26	GOOD
+27	INF
+28	INTEL
+29	MEASUR
+30	MEDINF
+31	MOV
+32	MULT
+33	NATIO
+34	NEG
+35	ORG
+36	P-DEV
+37	PERCPT
+38	PERIO
+39	PHENOM
+40	PREDIC
+41	PROC
+42	PROF
+43	PRON
+44	QUANT
+45	REL
+46	SET-DEMAN
+47	SITUAT
+48	SOC
+49	SOLIDUS
+50	SPAC
+51	STAD
+52	STAT
+53	SUBST
+54	THINGN
+-1	D_CAT
+0	ASP
+1	GEO
+2	LABL
+3	LABL.OBJ
+4	LABL.PROPERT
+5	LABL.SIT
+6	OPER
+7	PRONO
+8	RELAT
+-1	D_ENGL
+0	-
+1	> V
+2	a lot
+3	according_to
+4	at
+5	be angry
+6	be appeased
+7	be beside oneself with rage
+8	before
+9	begin
+10	break one's head
+11	by
+12	down
+13	end
+14	find place
+15	get mad
+16	go
+17	go crazy
+18	in
+19	into
+20	nowhere 1
+21	of
+22	on
+23	out_of
+24	out_of 1
+25	seek_fortune
+26	sit
+27	the
+28	to
+29	with
+-1	D_CLS
+0	)
+-1	D_SYN_REL
+0	DEGREE
+1	FREQ
+2	MANNER
+3	NP_attr
+4	PLACE
+5	PREP_PHR
+6	Quest
+7	SENT
+8	TIME
+9	X!
+10	art_def
+11	art_indef
+12	attr
+13	aux_verb
+14	coll
+15	dir_obj
+16	eq
+17	indir_obj
+18	inf
+19	neg
+20	numeral_transfer
+21	obj
+22	obj_pl
+23	obj_sg
+24	poss
+25	prep_NP
+26	subj
+27	subj_pl
+28	subj_sg
+-1	D_PART_OF_SPEECH
+0	ADJ
+1	ADV
+2	CHAR
+3	COMPAR
+4	INTER
+5	NOUN
+6	NUM
+7	PARENTH
+8	PART
+9	PN
+10	POSS_PN
+11	PREP
+12	SUPER
+13	VBE
+14	VERB
+15	VERB_MODL
+-1	D_GROUPS
+0	Copul
+1	NP
+2	NP'
+3	NP_pl
+4	NP_poss
+5	NP_sg
+6	Neg
+7	PARENTH
+8	PN_poss
+9	dir_sp
+10	sent
+11	sub_clause
+12	subj_clause
+13	ОБСТ_ГР
+-1	D_CASE
+0	В
+1	Д
+2	И
+3	П
+4	Т
+-1	D_PLUS
+0	+
+-1	D_DASH
+0	|
+-1	D_ACTANTS
+0	A1
+1	A2
+2	A3
+3	A4
+4	A5
+5	A6
+6	A7
+7	C
+8	C1
+9	C2
+10	C3
+11	C4
+12	C5
+13	C6
+14	C7
+-1	D_HYPHEN
+0	-
+-1	D_PERCENT
+0	%
+-1	D_DOMAIN
+0	воен
+1	геогр
+2	информ
+3	культура
+4	наука
+5	общ
+6	полит
+7	социо
+8	фин
+9	эконом
+10	юр
+-1	D_RESHETKA
+0	#
+-1	D_FULL_STOP
+0	.
+-1	D_GENDER
+0	М/Ж
+-1	D_CONJ
+0	and
+1	as
+2	as if
+3	rather than
+4	than
+5	that
+6	until
+7	where
+-1	D_BOOL
+0	+
+1	-
+-1	D_NUMBER
+0	ед
+1	мн
+-1	D_PREP
+0	about
+1	after
+2	against
+3	along
+4	among
+5	around
+6	as
+7	at
+8	between
+9	by
+10	concerning
+11	down
+12	down to
+13	for
+14	from
+15	in
+16	into
+17	like
+18	of
+19	off
+20	on
+21	on to
+22	out
+23	out of
+24	over
+25	regarding
+26	through
+27	to
+28	together
+29	toward
+30	towards
+31	under
+32	up
+33	upon
+34	with
+-1	D_1
+0	about+NP
+1	about+gerund
+2	after+NP
+3	against+NP
+4	along+NP
+5	among+NP
+6	and+NP
+7	around+NP
+8	as if+sent
+9	as+ADJ
+10	as+NP
+11	as+NP'
+12	at+NP
+13	at+gerund
+14	between+NP_pl
+15	by+NP
+16	by+gerund
+17	concerning+NP
+18	down to+NP
+19	down+NP
+20	for+NP
+21	for+NP'
+22	for+gerund
+23	from+NP
+24	from+gerund
+25	in+NP
+26	in+NP'
+27	in+gerund
+28	into+NP
+29	into+NP_pl
+30	like+NP
+31	like+gerund
+32	of+NP
+33	of+gerund
+34	off+NP
+35	on to+NP
+36	on+NP
+37	out of+NP
+38	over+NP
+39	rather than+NP
+40	rather than+gerund
+41	regarding+NP
+42	that+sent
+43	that+subj_clause
+44	through+NP
+45	to be+ADJ
+46	to be+NP
+47	to+NP
+48	to+NP_pl
+49	to+inf
+50	together+NP
+51	toward+NP
+52	towards+NP
+53	under+NP
+54	until+sent
+55	up+NP
+56	upon+NP
+57	where+sent
+58	with+NP
+59	with+gerund
+-1	D_START_PHR
+0	D_CONJ
+1	D_PREP
+2	D_PREP_COLLOC
+3	D_WORDFORM
+-1	D_WORDFORM
+0	to
+1	to be
+-1	D_UNDERLINE
+0	_
+-1	D_CASE_NUMBER
+0	В_мн
+1	И_мн
+2	Р_ед
+3	Р_мн
+4	Т_мн
+-1	D_VP_SPECIF
+0	fut
+1	gerund
+2	inf
+3	it
+4	not_cont
+5	not_perf_cont
+6	pass
+7	past
+8	predic
+9	pres
+-1	D_PHR_SPECIF
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+4	D_GRAFEM_DESC
+5	D_GROUPS
+6	D_PART_OF_SPEECH
+7	D_VP_SPECIF
+-1	D_SYN_FUNCT
+0	D_GROUPS
+1	D_SYN_REL
+-1	D_GF_MAIN
+0	ADV:DEGREE
+1	ADV:FREQ
+2	ADV:MANNER
+3	ADV:Neg
+4	ADV:PLACE
+5	ADV:Quest
+6	ADV:SENT
+7	ADV:TIME
+8	NOUN:Neg
+9	PART:Neg
+10	PN:Neg
+11	VERB:Neg
+12	ГЛ:ГГ
+13	ПРЕДК:ГГ
+14	ПРИЛ:ТЕКСТ
+15	ПРИЛ:с_опр
+16	ПРИЧ:с_опр
+17	СОЮЗ:--
+18	СУЩ:ИГ
+19	ЧАСТ:--
+-1	D_CASE_PLUS
+0	D_CASE
+1	D_CASE_MUA
+2	D_CASE_NUMBER
+3	D_CASE_POS
+-1	D_TYPE
+0	ЛЕ
+-1	D_EXCL_MARK
+0	!
+-1	D_RLE_PLUS
+0	D_ABBR
+1	D_COLLOC
+2	D_RLE
+-1	D_MUA
+0	МНА
+-1	D_CONJ_PLUS
+0	D_CONJ
+1	D_GRAFEM_DESC
+-1	D_CASE_MUA
+0	МНА_В_и
+1	МНА_И_ДЕФ
+2	МНА_Р_и
+3	МНА_Т_и
+-1	D_CASE_POS
+0	Т_ПРИЛ
+-1	D_EXM
+0	"numeral_transfer ( А1 , С2 )" означает, что
+1	"numeral_transfer ( А1 , С2 )"означает,что
+2	"Я должна овладеть собой", - сказала она себе
+3	According to their information, no one will escape -
+4	Benjamin paused to collect his thoughts. -
+5	Challenger tossed his head and shrugged his heavy
+6	Don't make a public ass of yourself. -
+7	Got so touchy that he assaults anyone who asks questions,
+8	Have fun! -
+9	He emptied the glass, and made an effort to pull
+10	He goes bail for her -
+11	He paused for a moment, and then, raising his voice,
+12	He went to sleep - Он заснул
+13	His behaviour leaves much to be desired. -
+14	How many times do I have to tell you: don't get ahead
+15	I am out of cigarettes — у меня кончились сигареты
+16	I am well
+17	I can do it by myself -
+18	I have no place to go -
+19	I have no time to speak about it -
+20	I must get a grip on myself, she told herself firmly. -
+21	Japan will take America by surprise by storming in early
+22	Japanese investment as Germany or France -
+23	Leeds Polytechnic. -
+24	Leila didn't have the heart to tell him the truth -
+25	No longer able to control my feelings, I poured out
+26	Now we are getting somewhere. -
+27	People always have something in their hearts
+28	Ruth was silent, trying to pull herself together. -
+29	Technology has come on the scene to help firms with
+30	The fate of those people is being decided far away from where they
+31	The gun was put out of action. -
+32	The man at the desk pulled and twisted his spiky
+33	The meeting and Thermal analysis will take place on 7 April 1992 at
+34	There is no time to raise speculative questions -
+35	They were in plain clothes and, in his opinion, drunk -
+36	War is insane and we mustn't go mad with it. -
+37	You can only throw mud at the men who have risked
+38	You'd try the patience of a saint! -
+39	all of these practice management needs. -
+40	an inquiry is now in progress -
+41	and heaves reporters doun the stairs. -
+42	are. -
+43	by reason of …
+44	down the paper presented to him. -
+45	he  keeps in touch with his friends
+46	he often borrows money from me  -
+47	he turned abruptly to the left
+48	he turned to the right
+49	he was born in 1973
+50	himself together. -
+51	if it is all the same to you —
+52	it would be a good thing to make sure of it
+53	make sure the dogs are back in their kennels
+54	moustache for a few moments as he ran his eye up and
+55	no one had the heart to tell him about it -
+56	of yourself! -
+57	one morning and buying Pearl Harbor -
+58	repeated slowly the words. -
+59	she is very rich, you know -
+60	shoulders. -
+61	that they are eager to talk about -
+62	the United Kingdom has attracted five times as much
+63	the gold content of the rouble was increased four times only -
+64	their lives to open new fields to science. -
+65	there is no place for you in our town -
+66	this organisation makes no  progress -
+67	to have it out with smb. — выяснить отношения с кем-л., объясниться с кем-л.
+68	to take one by surprise for its earliness
+69	to try one's luck at the roulette -
+70	try this one more time -
+71	we have enough men to handle this problem -
+72	what was in my heart. -
+73	with love, ANNA
+74	you  have only to read the headings to understand it -
+75	you have no need to go there
+76	Бенджамин остановился, чтобы собраться с мыслями.
+77	Война безумна, и мы не должны сходить с ума от нее.
+78	Встреча и термический анализ будет иметь место 7 апреля 1992 в
+79	Вы способны только поливать грязью людей, которые
+80	Германия или Франция
+81	До того его довели, что он стал буквально кидаться на
+82	Его поведение оставляет желать лучшего.
+83	За те несколько секунд, что потребовались ему, чтобы
+84	Лейле не хватало духу рассказать ему правду
+85	Мистер Уолдрон умолк на секунду, а затем, повысив
+86	Мне некогда разговаривать об этом
+87	Мне некуда идти
+88	Не в силах более держать себя в руках, я вывалил то,
+89	Не стройте из себя дурака при всем честном народе!
+90	Некогда поднимать отвлеченные вопросы
+91	Он за нее поручился
+92	Он осушил стакан и сделал усилие, чтобы взять себя в
+93	Орудие было выведено из строя.
+94	Политехническом институте Лидса.
+95	Развлекайся!
+96	Рут молчала, пытаясь взять себя в руки.
+97	Сколько раз тебе говорить - никогда не надо забегать
+98	Соединенное Королевство привлекло в пять раз больше инвестиций, чем
+99	Судьба этих людей решается далеко от того места, где они находятся.
+100	Такой выверт.
+101	Теперь мы наконец сдвинулись с места.
+102	Технология появилась на сцене, чтобы помочь фирмам со
+103	Ты и святого выведешь из себя!
+104	У людей всегда бывает на душе что-нибудь такое ,
+105	Челленджер вскинул голову и пожал плечами.
+106	Я хотел выяснить отношения с ним
+107	вам достаточно прочитать заголовки, чтоюы понять это
+108	ведь она очень богата
+109	вперед.
+110	всеми их нуждами в области практического управления.
+111	всех, кто обращается к нему с вопросами, и уже не
+112	голос , с расстановкой повторил свои последние слова.
+113	если вы не возражаете; если это вам безразлично
+114	золотое содержание рубля было увеличено всего в 4 раза
+115	нет ничего удивительного в том, что он не пришел
+116	ни у кого не хватило духу сказать ему об этом
+117	одного репортера спустил с лестницы.
+118	он отомстил за эти слова
+119	он повернул вправо
+120	он резко повернул  влево
+121	он часто берет у меня взаймы
+122	они были просто одеты и, по его мнению, пьяны
+123	по их данным, никто не убежит
+124	попробуй еще раз
+125	попытать счастья в рулетку
+126	пробежать глазами принесенную бумагу, человек за
+127	проблемой
+128	решительно.
+129	рисковали жизнью, завоевывая новые просторы науки.
+130	руки.
+131	сейчас идёт следствие
+132	столом закрутил и подправил свои остроконечные усы.
+133	тебе незачем ходить туда -
+134	тебе нет места в нашем городе
+135	у нас достаточно людей, чтобы справиться с этой
+136	число для name надо брать от первого актанта.
+137	что было у меня на сердце.
+138	что они охотно бы рассказали
+139	эта организация давно остановилась в развитии
+140	я могу это сделать сам
+141	— неплохо было бы и этом убедиться  (see
+142	— проверь, привязаны ли
+-1	D_BASIC_SIT
+0	АВТОР,,А2, ЭС1
+1	ЛОК, ? где-то па дистаации), А?
+2	ЛОК, КВН-Т, А1
+3	ОЦЕНКА
+4	ОЦЕНКА  С, А1
+-1	D_ALGORITHM
+0	$oneself
+1	AL1
+2	AL2
+3	AL3
+4	AL4
+5	AL4_2
+6	AL5
+7	AL6
+8	AL7
+9	AL8
+10	AL_neg
+11	AL_no
+12	AL_there
+13	pass(А3)
+-1	D_POSITION
+0	<
+1	<<
+2	>
+3	>>
+4	^
+-1	D_GRAMMEMS
+0	3
+1	inf
+2	ing
+3	pl
+4	pp
+5	sg
+6	буд
+7	нст
+8	прш
+-1	D_TITLE
+0	безразлично
+1	беречь
+2	больше_нечего
+3	брать_взаймы
+4	брать_себя_в_руки
+5	браться_за_перо
+6	бросать_на_ветер
+7	бросаться_в_глаза
+8	бывать_на_душе
+9	быстродействие
+10	быт
+11	быть_дома
+12	в_раз
+13	вдали
+14	ведь
+15	веселиться
+16	весело
+17	видеофильм
+18	видеться
+19	видно
+20	влево
+21	внести_свой_вклад
+22	внести_свою_лепту
+23	вносить_залог
+24	вносить_свой_вклад
+25	вправо
+26	все_остальное
+27	вступать_в_силу
+28	выбиваться_из_сил
+29	вывести_из_строя
+30	выводить
+31	выводить_из_себя
+32	выводить_из_строя
+33	выводить_из_терпения
+34	выйти_из_строя
+35	выкидывать_из_головы
+36	выполняться
+37	вырисовываться
+38	выставлять_напоказ
+39	выходить_за_рамки
+40	выходить_из_себя
+41	выходить_из_строя
+42	выяснять_отношения
+43	горячо
+44	давать_понять
+45	давать_слово
+46	дать_по_шее
+47	действовать_на_нервы
+48	делать_возможным
+49	делать_честь
+50	держать_себя_в_руках
+51	держать_слово
+52	дешеветь
+53	до_свидания
+54	доводить_до_сведения
+55	дома
+56	дорожать
+57	достаточно
+58	друг_друга
+59	дурно
+60	еще_один
+61	жарко
+62	за_счет
+63	забегать_вперед
+64	забивать_козла
+65	заботиться
+66	зазорно
+67	закусывать_удила
+68	заниматься
+69	застигнуть_врасплох
+70	засыпать
+71	заткнуть_за_пояс
+72	здравствовать
+73	зовут
+74	играть_роль
+75	идти_в_гору
+76	идти_по_стопам
+77	иметь_место
+78	иметь_честь
+79	испускать_дух
+80	исчезать_с_лица_земли
+81	как_нельзя
+82	каково
+83	кончиться
+84	лафа
+85	ломать_голову
+86	меня_зовут
+87	мстить
+88	муторно
+89	на_взгляд
+90	находиться
+91	не_говоря_о
+92	не_хватать_духу
+93	негде
+94	недосуг
+95	незачем
+96	некогда
+97	некуда
+98	немудрено
+99	неохота
+100	непогода
+101	нет_времени
+102	нет_места
+103	нет_ничего_удивительного
+104	неудобно
+105	нехорошо
+106	ни_на_йоту
+107	нипочем
+108	обнажать_голову
+109	образ_жизни
+110	овладевать_собой
+111	оказываться
+112	оставлять_желать_лучшего
+113	оставлять_при_себе
+114	остановиться_в_развитии
+115	отдать_богу_душу
+116	пить
+117	пить_горькую
+118	по_данным
+119	по_мнению
+120	по_причинам
+121	повышать_голос
+122	поддерживать_контакт
+123	пожимать_плечами
+124	пожинать_лавры
+125	позволять_себе
+126	поливать_грязью
+127	полным_ходом
+128	получать_огласку
+129	попадать_в_сети
+130	попытать_счастья
+131	появляться_на_сцене
+132	принимать_меры
+133	принимать_форму
+134	пробегать_глазами
+135	производить_на_свет
+136	происходить
+137	противно
+138	пускать_в_ход
+139	радостно
+140	развлекаться
+141	расправлять_плечи
+142	ровным_счетом_ничего
+143	родиться
+144	сам
+145	самостоятельно
+146	сводить_счеты
+147	свыше
+148	сдвинуться_с_места
+149	сделать_свое_дело
+150	сдерживать_себя
+151	сесть_за_стол
+152	сколько
+153	сложа_руки
+154	сменить_гнев_на_милость
+155	смешно
+156	собираться_с_мыслями
+157	спасибо
+158	спускать_с_лестницы
+159	ставить_на_место
+160	строить_из_себя
+161	сходить_с_ума
+162	удобно
+163	удостовериться
+164	упускать_из_виду
+165	холодно
+166	холодновато
+167	хотеть
+168	хотеться
+169	хоть
+170	худо
+171	целую_
+172	чинить_препятствия
+-1	D_CONTAIN
+0	#one's hand
+1	#oneself
+2	(bother|break) #one's brain
+3	(give|yield) up the spirit
+4	absolutely nothing
+5	according  information
+6	according to _ information
+7	all the rest
+8	all the same
+9	as _ as possible
+10	bare #one's head
+11	be born
+12	be getting somewhere
+13	be home
+14	be in clover
+15	be in progress
+16	be on the drink
+17	be on the rise
+18	be out of
+19	be well
+20	borrow money
+21	breath #one's last gasp
+22	bring life
+23	collect #one's thoughts
+24	come scene
+25	control #one's feelings
+26	do  credit
+27	do #one's bit
+28	do #one's work
+29	draw #one's last breath
+30	drive  #one's wits
+31	each other
+32	expense
+33	fall price
+34	far away
+35	follow footstep
+36	from above
+37	full drive
+38	get a grip
+39	get ahead #oneself
+40	get caught in the toils
+41	get nerve
+42	give point
+43	go bail
+44	go mad
+45	go to sleep
+46	good bye
+47	have #one's heart
+48	have a change of heart
+49	have enough
+50	have fun
+51	have it out
+52	have only to
+53	have the heart
+54	have the honour
+55	heave  stairs
+56	home
+57	how many
+58	how much
+59	if you like
+60	information
+61	keep  #oneself
+62	keep #one's faith
+63	keep in touch
+64	kick over the traces
+65	leave much to be desired
+66	left
+67	let #one's (eye|glance) dwell
+68	lie outside the scope
+69	lose #one's balance
+70	lose sight
+71	love ,
+72	make #one's contribution
+73	make #oneself
+74	make it possible
+75	make known
+76	make no progress
+77	make sure
+78	name be
+79	no need
+80	no place
+81	no time
+82	no wonder
+83	not a jot
+84	not care a straw
+85	not in the mood
+86	not to speak of
+87	nothing else
+88	one more
+89	opinion
+90	pass #one's word
+91	pull #oneself together
+92	put action
+93	put pen to paper
+94	raise #one's voice
+95	reap #one's laurel
+96	reason
+97	remove #one's hat
+98	right
+99	rise price
+100	run #one's eye
+101	see  each other
+102	settle а score
+103	shrug #one's shoulders
+104	shuffle #one's mind
+105	sit table
+106	speak[not]
+107	speed of operation
+108	stand credit
+109	step line
+110	step out of line
+111	straighten #one's shoulder
+112	strike eye
+113	strike head
+114	take  surprise
+115	take air
+116	take place
+117	take revenge
+118	take the liberty
+119	thank you
+120	think nothing
+121	throw  each other
+122	throw mud
+123	times
+124	tire #oneself  walk
+125	try  #one's luck
+126	try patience
+127	way of life
+128	would like
+129	you know
+-1	D_MULT
+0	inf
+1	ing
+2	pl
+3	pl, прш
+4	sg
+5	sg, 3, нст
+6	sg, прш
