@@ -14,7 +14,8 @@ article_parse_error::article_parse_error(const std::string what_arg, int _source
 }
 
 const char* article_parse_error::what() const  {
-	return Format("%s, line no = %i", std::exception::what(), source_line_no).c_str();
+	message = Format("%s, line no = %i", std::exception::what(), source_line_no);
+	return message.c_str();
 }
 
 

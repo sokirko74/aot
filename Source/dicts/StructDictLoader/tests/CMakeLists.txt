@@ -11,6 +11,7 @@ target_link_libraries(${PROJECT_NAME}
 
 add_test(
         NAME StructDictBasicTest 
-        COMMAND StructDictBasic --test-folder ${PROJECT_SOURCE_DIR}
+        COMMAND StructDictBasic
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )
 

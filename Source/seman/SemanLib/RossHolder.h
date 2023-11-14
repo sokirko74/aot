@@ -75,14 +75,7 @@ public:
    BYTE                 NESOVMFieldNo;
 
    //константы доменов
-   BYTE ActantsDomNo;
-   BYTE LexDomNo;
-   BYTE LexPlusDomNo;
-   BYTE CollocDomNo;
-   BYTE AbbrDomNo;
-   BYTE FieldDomNo;
    BYTE SemFetDomNo;
-   BYTE SemRelDomNo;
    BYTE LexFunctDomNo;
    BYTE CaseDomNo;
    BYTE CaseNumberDomNo;

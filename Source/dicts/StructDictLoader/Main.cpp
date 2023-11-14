@@ -1,5 +1,7 @@
 #include "morph_dict/common/utilit.h"
 #include "dicts/StructDictLib/Ross.h"
+#include "dicts/StructDictLib/TempArticle.h"
+
 #include "morph_dict/common/argparse.h"
 
 
@@ -41,11 +43,17 @@ int main(int argc, const char** argv)
 	}
 	catch (CExpc c)
 	{
-		std::cerr << convert_to_utf8(c.m_strCause, morphRussian) << std::endl;
+		LOGE << c.m_strCause << std::endl;
+	}
+	catch (article_parse_error c)
+	{
+		auto a = c.what();
+		LOGE << a << std::endl;
 	}
 	catch (const std::exception& ex)
 	{
-		std::cerr << convert_to_utf8(ex.what(), morphRussian) << std::endl;
+		auto a = ex.what();
+		LOGE << a << std::endl;
 	}
 
 

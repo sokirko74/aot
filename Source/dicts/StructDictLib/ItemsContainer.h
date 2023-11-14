@@ -13,6 +13,10 @@
 
 class TItemContainer  
 {
+
+protected:
+	dom_item_id_t	InsertDomItem(const char* ItemStr, BYTE DomNo);
+
 public :
 	MorphLanguageEnum	m_Language;
     std::string RossPath;
@@ -50,11 +54,8 @@ public :
 	void			UpdateConstDomens();
 	bool			BuildDomens (char* LastReadLine);
 	bool			BuildDomItems ();
-	BYTE			GetDomNoForLePlus ( const char*  s) const;
-	bool			IsStandardRusLexeme (const char* s) const; 
+	BYTE			GetDomNoForLePlus (const std::string& s) const;
 
-	bool		CanBeRusAbbr (const char*  s) const;
-	bool		CanBeRusColloc  (const char*  s) const;
 	BYTE		GetFieldNoByFieldStrInner (const char* FieldStr) const; 
 	bool		ClearFields ();
 	void		BuildFields();

@@ -39,6 +39,8 @@ class CTempArticle;
 
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
+	bool	ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSignat& Sgn);
+
 protected:
 	std::string UnitsFile;
 	std::string CortegeFile;
@@ -58,7 +60,7 @@ public:
 
 	TRoss ();
 	~TRoss ();
-	void	LoadOnlyConstants(const char* _RossPath);
+	void	LoadDictScheme(const char* _RossPath);
 	bool	Save ();
 
 
@@ -103,7 +105,6 @@ public:
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-	bool	ReadFromStrWithOneSignatura (const char* s, TCortege& C, const CSignat& Sgn);
 	bool	ReadFromStr (const char* s, TCortege& C);
 	std::string	WriteToString (const TCortege& C) const;
 	const CSignat& GetSignat(const TCortege& C) const;
@@ -112,7 +113,6 @@ public:
 	// +++++++++++++      Перечни констант  ++++++++++++++
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	dom_item_id_t	InsertDomItem (const char* ItemStr, BYTE DomNo);
 
 	const char* GetTitleFieldName() const;
 	const char* GetSenseFieldName() const;

@@ -40,7 +40,7 @@ void MakePathAndCheck(const std::string path, const std::string fileName, std::s
 }
 
 
-void TRoss::LoadOnlyConstants(const char* _RossPath)
+void TRoss::LoadDictScheme(const char* _RossPath)
 {
 	RossPath = _RossPath;
 	Config.ReadConfig(RossPath);
@@ -401,9 +401,13 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 
 		while (isspace((unsigned  char)q[0])) q++;
 
-		char ItemStr[100];
 		size_t ItemStrLen = IsDelim ? 1 : strcspn(q, Delim);
-		if (ItemStrLen > 99)  return false;
+
+		const size_t max_item_lem = 255;
+		if (ItemStrLen > max_item_lem) {
+			throw article_parse_error(Format("item %s is longer than % bytes", s, max_item_lem).c_str(), 0);
+		}
+		char ItemStr[max_item_lem  + 1];
 		strncpy(ItemStr, q, ItemStrLen);
 		ItemStr[ItemStrLen] = 0;
 		if (!IsDelim) rtrim(ItemStr);
@@ -448,20 +452,17 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 			&& ((unsigned char)ItemStr[0] == '*'))
 		{
 			C.SetItem(CurrItemNo, WildCardDomItemNo);
+			++CurrItemNo;
 		}
-		else
-			C.SetItem(CurrItemNo, GetItemIdByItemStr(ItemStr, DomNo));
-
-
-
-		if ( !m_Domens[DomNo].IsFree  && (DomNo != LexPlusDomNo) && C.is_null(CurrItemNo))
-			// Отрицательный результат
-			return false;
-
-		if (!IsDelim)
-		{
-			ItemStrVec.push_back(ItemStr);
-			CurrItemNo++;
+		else {
+			auto item_id = GetItemIdByItemStr(ItemStr, DomNo);
+			if (!m_Domens[DomNo].IsFree && (DomNo != LexPlusDomNo) && is_null(item_id))
+				return false;
+			if (!IsDelim) {
+				C.SetItem(CurrItemNo, item_id);
+				ItemStrVec.push_back(ItemStr);
+				++CurrItemNo;
+			}
 		};
 
 	};
@@ -535,51 +536,12 @@ const CSignat& TRoss::GetSignat(const TCortege& C) const {
 }
 
 
-inline bool IsTitle(const char* s)
-{
-	if (!s) return false;
-	for (int i = 0; i < strlen(s); i++)
-		if (isdigit((unsigned char)s[i])
-			)
-			return false;
-	return true;
-
-};
-
-dom_item_id_t   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo)
-{
-	if (DomNo == TitleDomNo)
-		if (!IsTitle(ItemStr))
-		{
-			throw CExpc("Warning! Cannot add \"%s\" to title domen!", ItemStr);
-		};
-
-
-	if (DomNo == LexDomNo)
-		if (!IsStandardRusLexeme(ItemStr))
-		{
-			throw CExpc("Warning! Cannot add \"%s\" to lexeme domen!", ItemStr);
-		};
-
-	if (DomNo == LexPlusDomNo)
-	{
-		DomNo = GetDomNoForLePlus(ItemStr);
-		if (DomNo == ErrUChar)
-		{
-			throw CExpc("Warning! Cannot add \"%s\" to the extended lexeme domen!", ItemStr);
-		};
-	};
-
-	return  m_Domens[DomNo].AddItemByEditor(ItemStr);
-};
-
-
 void CDictionary::Load(const char* Path)
 {
 	if (!Path) {
 		throw CExpc("cannot load ross by empty path");
 	}
-	LoadOnlyConstants(Path);
+	LoadDictScheme(Path);
 	MakePathAndCheck(RossPath, "cortege.bin", CortegeFile);
 	MakePathAndCheck(RossPath, "units.bin", UnitsFile);
 	BuildUnits();
@@ -894,7 +856,7 @@ void CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L)
 	}
 	catch (article_parse_error& a)
 	{
-		a.source_line_no += line_no;
+		a.source_line_no += line_no + L[0].m_SourceLineNo;
 		throw;
 	}
 	catch (CExpc& e)
@@ -1000,7 +962,7 @@ void CDictionary::ImportFromTextFile(std::string fileName, std::string folder) {
 	{
 		throw CExpc("Cannot read %s", fileName.c_str());
 	};
-	LoadOnlyConstants(folder.c_str());
+	LoadDictScheme(folder.c_str());
 	m_bShouldSaveComments = true;
 
 	auto articles = get_articles_from_file(fileName);

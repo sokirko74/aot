@@ -430,5 +430,17 @@
             }
         ],
         "type": 70
+    },
+    {
+        "actant": false,
+        "name": "DERIV",
+        "order": 120,
+        "signats": [
+            {
+                "format": "D_GRAM_FUNCT D_OPN D_RLE_PLUS D_CLS",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
     }
 ]

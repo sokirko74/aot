@@ -28,7 +28,7 @@ dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, BYT
     if (DomNo == ErrUChar) return -1;
 
     if (DomNo == LexPlusDomNo) {
-        DomNo = GetDomNoForLePlus(ItemStr.c_str());
+        DomNo = GetDomNoForLePlus(ItemStr);
         if (DomNo == ErrUChar) {
             return EmptyDomItemId;
         };
@@ -159,97 +159,121 @@ bool TItemContainer::WriteDomItems() const {
     return true;
 };
 
+bool IsUnicodeCyrillic(uint16_t u) {
+    return 0x0400 <= u <= 0x04FF;
+}
 
-BYTE TItemContainer::GetDomNoForLePlus(const char *s) const {
-    int Number = atoi(s);
-    if (Number
-        || (!s && (strlen(s) == 1) && (s[0] == '0'))
-            )
+bool IsUnicodeRussianLower(uint16_t u) {
+    return 0x0430 <= u <= 0x0451;
+}
+
+typedef bool (*unicode_check_pred)(uint16_t u);
+
+template <unicode_check_pred C>
+bool CheckUtf8(const std::string& s) {
+    if (s.empty()) {
+        return false;
+    }
+    for (size_t i = 0; i < s.length();)
+    {
+        if ((s[i] & 0xf8) == 0xf0) {
+            return false;
+        }
+        else if ((s[i] & 0xf0) == 0xe0) {
+            return false;
+        }
+        else if ((s[i] & 0xe0) == 0xc0) {
+            uint16_t* u = (uint16_t*)(s.c_str() + i);
+            if (! (C(*u) )) {
+                return false;
+            }
+            i += 2;
+        }
+        else {
+            if ((s[i] != '-') && (s[i] != '/')) {
+                return false;
+            }
+            i += 1;
+        }
+    }
+    return s.back() != '-';
+};
+
+template<unicode_check_pred C>
+bool FindInUtf8(const std::string& s) {
+    if (s.empty()) {
+        return false;
+    }
+    for (size_t i = 0; i < s.length();)
+    {
+        if ((s[i] & 0xf8) == 0xf0) {
+            i += 4;
+        }
+        else if ((s[i] & 0xf0) == 0xe0) {
+            i += 3;
+        }
+        else if ((s[i] & 0xe0) == 0xc0) {
+            uint16_t* u = (uint16_t*)(s.c_str() + i);
+            if (C(*u)) {
+                return true;
+            }
+            i += 2;
+        }
+        else {
+            i += 1;
+        }
+    }
+    return false;
+};
+
+template bool CheckUtf8<IsUnicodeCyrillic>(const std::string& s);
+template bool CheckUtf8<IsUnicodeRussianLower>(const std::string& s);
+template bool FindInUtf8<IsUnicodeCyrillic>(const std::string& s);
+
+static bool Check_D_RLE(const std::string& s) {
+    return CheckUtf8<IsUnicodeCyrillic>(s);
+}
+
+// вопр.
+// км/сек
+static bool CanBeRusAbbr(const std::string& s) {
+    if (s.empty()) {
+        return false;
+    }
+    if (s.back() == '.') {
+        return CheckUtf8<IsUnicodeRussianLower>(s.substr(0, s.length() - 1));
+    }
+    else {
+        return CheckUtf8<IsUnicodeRussianLower>(s);
+    }
+
+}
+
+static bool CanBeRusColloc(const std::string& s) {
+    if ((s.length() < 4) || (s.find(' ') == s.npos && s.find(':') == s.npos))
+        return false;
+
+    return FindInUtf8<IsUnicodeCyrillic>(s);
+};
+
+
+
+BYTE TItemContainer::GetDomNoForLePlus(const std::string& s) const {
+    if (atoi(s.c_str()) || (s.length() == 1) && (s[0] == '0'))
         return IntegerDomNo;
-    else if (IsStandardRusLexeme(s))
+    else if (Check_D_RLE(s))
         return LexDomNo;
     else if (CanBeRusAbbr(s))
         return AbbrDomNo;
     else if (CanBeRusColloc(s))
         return CollocDomNo;
-    else if (!strncmp(s, "D_", 2))
+    else if (startswith(s, "D_"))
         return LexPlusDomNo;
     else
         return ErrUChar;
 };
 
 
-// строка:
-// 1. Cодержащая  только кириллицу;
-// 2. Может включать в себя только один дефис;
-// 3. Может начинаться с большой буквы, но все остальные буквы должны быть
-//    маленькими. 
-bool TItemContainer::IsStandardRusLexeme(const char *s) const {
-    bool FlagHasHyphen = false;
-
-    if ((strlen(s) == 0)
-        || !is_russian_alpha((unsigned char) s[0]))
-        return false;
-
-    for (int i = 1; i < strlen(s); i++)
-        if (((unsigned char) s[i]) == '-')
-            if (FlagHasHyphen)
-                return false;
-            else
-                FlagHasHyphen = true;
-        else
-/* вообще-то в словаре леммы и словоформы  принято писять маленькими буквами,
-но отдельные плохие люди пишут большими, поэтому приходится проверять и те, и другие */
-        if (!is_russian_alpha((unsigned char) s[i]))
-            return false;
-
-    return ((unsigned char) s[strlen(s) - 1]) != '-';
-};
-
-
-inline bool TItemContainer::CanBeRusAbbr(const char *s) const {
-
-    if (strlen(s) == 1)
-        return is_lower_alpha((unsigned char) s[0], m_Language);
-
-
-    if (strlen(s) == 0)
-        return false;
-
-    bool HasUpperAlphaInside = false;
-
-    for (int i = 0; i < strlen(s) - 1; i++) {
-        if (!is_russian_alpha((unsigned char) s[i]) && !islower((unsigned char) s[i]) &&
-            !strchr("-.//", (unsigned char) s[i]))
-            return false;
-
-        HasUpperAlphaInside |= (is_russian_upper((unsigned char) s[i])
-                                || (((unsigned char) s[i]) == '/'))
-                               && (i > 0);
-
-    };
-
-    return HasUpperAlphaInside || (((unsigned char) s[strlen(s) - 1]) == '.');
-}
-
-
-inline bool TItemContainer::CanBeRusColloc(const char *s) const {
-    if ((strlen(s) < 4)
-        || (!strchr(s, ' ')
-            && !strchr(s, ':')
-        )
-            )
-        return false;
-
-    for (int i = 0; i < strlen(s); i++)
-        if (!is_russian_alpha((unsigned char) s[i])
-            && !isdigit((unsigned char) s[i])
-            && !strchr("-/,\\$:;.|()\"~ ", (unsigned char) s[i])
-                )
-            return false;
-
-    return true;
-};
 
 
 BYTE TItemContainer::GetFieldNoByFieldStrInner(const char *FieldStr) const {
@@ -331,4 +355,41 @@ void TItemContainer::ErrorMessage(std::string s) const {
     ::ErrorMessage(RossPath, s);
 };
 
+inline bool IsTitle(const char* s)
+{
+    if (!s) return false;
+    for (int i = 0; i < strlen(s); i++)
+        if (isdigit((unsigned char)s[i])
+            )
+            return false;
+    return true;
 
+};
+
+
+dom_item_id_t   TItemContainer::InsertDomItem(const char* ItemStr, BYTE DomNo)
+{
+    if (DomNo == TitleDomNo)
+        if (!IsTitle(ItemStr))
+        {
+            throw CExpc("Cannot add \"%s\" to title domen!", ItemStr);
+        };
+
+
+    if (DomNo == LexDomNo)
+        if (!Check_D_RLE(ItemStr))
+        {
+            throw CExpc("Cannot add \"%s\" to lexeme domen!", ItemStr);
+        };
+
+    if (DomNo == LexPlusDomNo)
+    {
+        DomNo = GetDomNoForLePlus(ItemStr);
+        if (DomNo == ErrUChar)
+        {
+            throw CExpc("Cannot add \"%s\" to the extended lexeme domen!", ItemStr);
+        };
+    };
+
+    return  m_Domens[DomNo].AddItemByEditor(ItemStr);
+};
