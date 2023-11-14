@@ -3,16 +3,16 @@
 
 CDomen::CDomen() {
     m_bFreed = false;
-    m_MaxDomItemId = 0;
+    m_UnusedDomItemId = 0;
 }
 
 dom_item_id_t CDomen::AddItemByEditor(const std::string& item_str) {
-    TDomenItem new_item = { m_MaxDomItemId + 1, item_str };
+    TDomenItem new_item = { m_UnusedDomItemId, item_str };
     auto it = std::lower_bound(m_DomItems.begin(), m_DomItems.end(), new_item);
     assert (it == m_DomItems.end() || !(*it == new_item));
     size_t offset = it - m_DomItems.begin();
     m_DomItems.insert(it, new_item);
-    ++m_MaxDomItemId;
+    ++m_UnusedDomItemId;
     m_ItemId2ItimeIndex.insert(m_ItemId2ItimeIndex.begin() + new_item.InnerDomItemId, offset);
     assert(m_ItemId2ItimeIndex.size() >= m_DomItems.size());
     assert(GetDomItemStrById(new_item.InnerDomItemId) == item_str);
@@ -83,8 +83,8 @@ void CDomen::InitDomainParts(const std::unordered_map<std::string, BYTE>& ident2
 void CDomen::AddFromSerialized(const std::string& line) {
     auto delim = line.find('\t');
     uint32_t inner_item_id = atoi(line.substr(0, delim).c_str());
-    if (inner_item_id > m_MaxDomItemId) {
-        m_MaxDomItemId = inner_item_id;
+    if (inner_item_id > m_UnusedDomItemId) {
+        m_UnusedDomItemId = inner_item_id + 1;
     }
     m_DomItems.push_back({ inner_item_id , line.substr(delim + 1) });
     if (inner_item_id <= m_ItemId2ItimeIndex.size()) {

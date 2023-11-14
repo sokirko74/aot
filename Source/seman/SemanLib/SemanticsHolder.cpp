@@ -709,10 +709,13 @@ bool  CSemanticsHolder::BuildOborottos()
 	try {
 		Oborottos.clear();
 		size_t count = GetRoss(OborRoss)->GetUnitsSize();
+		CTempArticle A(GetRoss(OborRoss));
+		A.ReadFromUtf8String("GF      = *  НАР : УСИЛ");
+
 		for (size_t UnitNo = 0; UnitNo < count; UnitNo++)
 		{
 			CObor O;
-			O.m_UnitStr = convert_from_utf8(GetRoss(OborRoss)->GetEntryStr(UnitNo), morphRussian);
+			O.m_UnitStr = _R(GetRoss(OborRoss)->GetEntryStr(UnitNo));
 			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ПОДЧ_СОЮЗ", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusSubConj = true;
 
@@ -734,7 +737,7 @@ bool  CSemanticsHolder::BuildOborottos()
 			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ВВОДН", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusIntrExpr = true;
 
-			if (GetRoss(OborRoss)->IncludeArticle(UnitNo, "GF = * НАР : УСИЛ"))
+			if (GetRoss(OborRoss)->IncludesArticle(UnitNo, A))
 				O.m_bRusNegOborAdverbial = true;
 
 			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "НАР", "D_PART_OF_SPEECH", 0, 0))

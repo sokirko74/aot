@@ -541,13 +541,11 @@ inline bool SplitFldName(std::string& FldName, BYTE& LeafId, BYTE& BracketLeafId
 void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool ReadOnly)
 {
 	m_UnitNo = UnitNo;
-	m_ReadOnly = ReadOnly ? true : false;
+	m_ReadOnly = ReadOnly;
 	ClearCorteges();
 	const CStructEntry& U = m_pRoss->GetUnits()[UnitNo];
 	m_EntryStr = U.GetEntryStr();
 	m_MeanNum = U.m_MeanNum;
-
-
 
 	if (!m_ReadOnly)
 		if (!m_pRoss->GetUnits()[UnitNo].HasEmptyArticle())

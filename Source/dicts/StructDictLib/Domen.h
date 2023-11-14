@@ -33,7 +33,7 @@ class CDomen {
     TItemContainer *m_pParent;
     bool m_bFreed;
     std::vector<BYTE> DomainPartPtrs;
-    dom_item_id_t m_MaxDomItemId;
+    dom_item_id_t m_UnusedDomItemId;
     std::vector< TDomenItem> m_DomItems;
     std::vector< size_t>  m_ItemId2ItimeIndex;
 public:

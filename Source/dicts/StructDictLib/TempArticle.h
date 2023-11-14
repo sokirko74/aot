@@ -16,6 +16,8 @@ public:
 	const char* what() const override;
 };
 
+class CDictionary;
+
 class CTempArticle : public TCortegeContainer
 {
 	std::string					m_ArticleStr;

@@ -35,6 +35,8 @@ public:
      
 };	  
 
+class CTempArticle;
+
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
 protected:
@@ -167,7 +169,7 @@ public:
 
 	std::string	GetEntryStr (uint16_t EntryNo) const;
 	BYTE		GetUnitMeanNum(uint16_t EntryNo) const;
-	bool		IncludeArticle(uint16_t UnitNo, std::string Article) const;
+	bool		IncludesArticle(uint16_t UnitNo, const CTempArticle* A) const;
 
 	void		Load(const char* Path);
 	void		SetUnitCurrentTime(uint16_t UnitNo);

@@ -13,7 +13,7 @@ std::string file_to_string(std::string path) {
 	return buffer.str();
 }
 
-bool import_export_test() {
+void import_export_test() {
 	TestName = "import_export_test";
 	auto folder = MakePath(Args.Retrieve("test-folder"), "test1");
 	CDictionary D;
@@ -29,7 +29,7 @@ bool import_export_test() {
 	}
 }
 
-bool search_by_cortege() {
+void search_by_cortege() {
 	TestName = "search_by_cortege";
 	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
 	CDictionary D;
@@ -57,20 +57,23 @@ bool search_by_cortege() {
 	}
 }
 
-bool search_by_article() {
+void search_by_article() {
 	TestName = "search_by_article";
 	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
 	CDictionary D;
 	auto ross_txt = MakePath(folder, "ross.txt");
 	D.ImportFromTextFile(ross_txt, folder);
+	auto unit_no = D.LocateUnit("мама", 1);
+	if (unit_no == ErrUnitNo) {
+		throw CExpc("cannot find мама in the dict");
+	};
 
 	CTempArticle A(&D);
 	A.ReadFromUtf8String("GF      = *  НАР : УСИЛ");
+
 	size_t count = 0;
-	for (auto& unit : D.GetUnits()) {
-		CTempArticle B(&D);
-		B.ReadFromDictionary(unit.m_EntryId, false, true);
-		if (A.IsPartOf(&B, true)) {
+	for (size_t i = 0; i < D.GetUnitsSize(); ++i) {
+		if (D.IncludesArticle(i, &A)) {
 			count++;
 		}
 	}
@@ -78,6 +81,51 @@ bool search_by_article() {
 		throw CExpc("search_article failed, count != 1");
 	}
 
+}
+
+void test_D_ENGL() {
+	TestName = "test_D_ENGL";
+	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
+	CDictionary D;
+	auto ross_txt = MakePath(folder, "ross.txt");
+	D.ImportFromTextFile(ross_txt, folder);
+	bool Russian2Engl;
+	try {
+		CTempArticle A(&D);
+		A.ReadFromUtf8String("TESTFIELD      = * мама");
+		Russian2Engl = true;
+	}
+	catch (article_parse_error a) {
+		Russian2Engl = false;
+	}
+	if (Russian2Engl) {
+		throw CExpc("it is prohibited to insert Russian token to D_ENGL");
+	}
+
+	CTempArticle A1(&D);
+	std::string art_str = "TESTFIELD= 1  testnew";
+	A1.ReadFromUtf8String(art_str.c_str());
+	A1.SetUnitNo(D.InsertUnit("new_entry", 1));
+	A1.WriteToDictionary();
+	
+	CTempArticle A2(&D);
+	A2.ReadFromUtf8String(art_str.c_str());
+	assert(A1.IsPartOf(&A2, true));
+	assert(A2.IsPartOf(&A1, true));
+	size_t count = 0;
+	for (size_t i = 0; i < D.GetUnitsSize(); ++i) {
+		if (D.IncludesArticle(i, &A1)) {
+			count++;
+
+			CTempArticle A3(&D);
+			A3.ReadFromDictionary(i, false, true);
+			auto s = Trim(A1.GetArticleStrUtf8());
+			assert(s == art_str);
+		}
+	}
+	if (count != 1) {
+		throw CExpc("count != 1");
+	}
 }
 
 void initArgParser(int argc, const char** argv, ArgumentParser& parser) {
@@ -92,9 +140,10 @@ int main(int argc, const char** argv)
 	initArgParser(argc, argv, Args);
 	init_plog(Args.GetLogLevel(), "struct_dict_test.log");
 	try {
-		//import_export_test();
-		//search_article();
+		import_export_test();
 		search_by_article();
+		search_by_article();
+		test_D_ENGL();
 	}
 	catch (article_parse_error& a)
 	{

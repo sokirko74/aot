@@ -135,17 +135,17 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
             const std::string &DebugWord = piRossDict->m_Units[i].m_EntryStr;
 
             if (A1.IsPartOf(&A, true)) {
-                std::string dat_item = piRossDict->m_Units[i].m_EntryStr;
+                std::string dat_item = _R(piRossDict->m_Units[i].m_EntryStr);
                 AdvAdj->m_vectorDatItems.insert(dat_item);
             }
 
             if (A2.IsPartOf(&A, true)) {
-                std::string dat_item = piRossDict->m_Units[i].m_EntryStr;
+                std::string dat_item = _R(piRossDict->m_Units[i].m_EntryStr);
                 SynDependOnAdv->m_vectorDatItems.insert(dat_item);
             }
 
             if (A3.IsPartOf(&A, true)) {
-                std::string dat_item = piRossDict->m_Units[i].m_EntryStr;
+                std::string dat_item = _R(piRossDict->m_Units[i].m_EntryStr);
                 SynDependOnAdj->m_vectorDatItems.insert(dat_item);
             }
         }

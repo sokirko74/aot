@@ -418,5 +418,17 @@
             }
         ],
         "type": 77
+    },
+    {
+        "actant": true,
+        "name": "TESTFIELD",
+        "order": 4001,
+        "signats": [
+            {
+                "format": "D_ENGL ",
+                "signat_id": 0
+            }
+        ],
+        "type": 70
     }
 ]

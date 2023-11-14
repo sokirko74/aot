@@ -357,6 +357,16 @@ struct TItemStr
 };
 
 
+bool is_ascii_string(const char* s) {
+	if (!s) return false;
+	for (; *s; ++s) {
+		if (*s < 0) {
+			return false;
+		}
+	}
+	return true;
+}
+
 bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSignat& Sgn)
 { 
 	int CurrItemNo = 0;
@@ -405,8 +415,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 			и пришло русское слово, тогда не будем добавлять его в
 				в D_ENGL
 		*/
-		if (IsRussian(ItemStr))
-			if (m_Domens[DomNo].GetDomStr() == "D_ENGL")
+		if (m_Domens[DomNo].GetDomStr() == "D_ENGL" && !is_ascii_string(ItemStr))
 				return false;
 
 
@@ -503,7 +512,7 @@ std::string TRoss::WriteToString(const TCortege& C) const
 		if ((frmt[i] == '%') && (i + 1 < frmt.length()) && (frmt[i + 1] == 's'))
 		{
 			dom_item_id_t itemId = C.GetItem(item_index);
-			BYTE dom_no = signat.GetDomsWoDelims()[item_index];
+			BYTE dom_no = get_dom_no(itemId);
 			if (!is_null(itemId))
 			{
 				result += m_Domens[dom_no].GetDomItemStrById(itemId);
@@ -757,14 +766,11 @@ BYTE		CDictionary::GetUnitMeanNum(uint16_t EntryNo) const
 	return m_Units[EntryNo].m_MeanNum;
 };
 
-bool CDictionary::IncludeArticle(uint16_t UnitNo, std::string ArticleUtf8) const
+bool CDictionary::IncludesArticle(uint16_t UnitNo, const CTempArticle* part) const
 {
-	CTempArticle A1(const_cast<CDictionary*>(this));
-	A1.ReadFromDictionary(UnitNo, false, true);
-
-	CTempArticle A2(const_cast<CDictionary*>(this));
-	A2.ReadFromUtf8String(ArticleUtf8.c_str());
-	return A2.IsPartOf(&A1, true);
+	CTempArticle Main(const_cast<CDictionary*>(this));
+	Main.ReadFromDictionary(UnitNo, false, true);
+	return part->IsPartOf(&Main, true);
 }
 
 
