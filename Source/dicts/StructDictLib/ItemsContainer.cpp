@@ -49,8 +49,7 @@ dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, BYT
     };
 }
 
-
-inline dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, const char *DomStr) const {
+dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, const char *DomStr) const {
     BYTE DomNo = GetDomenNoByDomStr(DomStr);
     if (DomNo == ErrUChar) return EmptyDomItemId;
     return GetItemIdByItemStr(ItemStr, DomNo);

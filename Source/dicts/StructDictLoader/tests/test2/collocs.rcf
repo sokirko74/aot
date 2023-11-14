@@ -1,0 +1,16 @@
+[Configuration]
+boris
+kcc
+maya
+graf
+masha
+alex Last
+[DomensParams]
+Д_СХ 32768 10
+Д_СЕМ_О 16711680 10
+Д_ЛФ 255 10
+[Options]
+Language Russian
+DoNotLock 1
+DoNotSaveLastUserName 0
+ArticleInitTextMode 1

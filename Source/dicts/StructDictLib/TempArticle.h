@@ -9,6 +9,12 @@
 #include "CortegeContainer.h"
 #include "../../common/cortege.h"
 
+class article_parse_error : public std::exception {
+public:
+	int source_line_no;
+	explicit article_parse_error(const std::string what_arg, int _source_line_no);
+	const char* what() const override;
+};
 
 class CTempArticle : public TCortegeContainer
 {
@@ -17,20 +23,21 @@ class CTempArticle : public TCortegeContainer
 	std::string		ConstructFldName(BYTE FieldNo, BYTE LeafId, BYTE BracketLeafId);
 	bool		PutCortegeOnTheRigthPosition(const TCortege& C);
 	bool		ArticleToText();
-	
+	void		AddCortegeToVector(CTextField& F);
+	void		MarkUp();
+	void		BuildCortegeList();
+	void		CheckCortegeVector();
+
 	CDictionary* m_pRoss;
 	bool  m_ReadOnly;
 
 
 public:
-	char					m_EntryStr[EntryStrSize];
+	std::string				m_EntryStr;
 	BYTE					m_MeanNum;
 	uint16_t					m_UnitNo;
 	std::vector<CTextField>		m_Fields;
 	
-	std::string				m_LastError;
-	int						m_ErrorLine;
-
 	CTempArticle(CDictionary* pRossDoc=nullptr);
 	
 	size_t				GetCortegesSize () const;
@@ -38,16 +45,11 @@ public:
 	bool		IsPartOf(const CTempArticle *Article, bool UseWildCards) const;
 	int			IntersectByFields(const CTempArticle *Article) const;
 	bool		AddArticle(const CTempArticle *Article);
-	bool		AddCortegeToVector (CTextField& F);
-	bool		CheckCortegeVector ();
-	bool		ReadFromUtf8String(const char * s);
-	bool		MarkUp();
-	bool		BuildCortegeList();
-	bool		WriteToDictionary();
+	void		ReadFromUtf8String(const char * s);
+	void		WriteToDictionary();
 	bool		IsModified() const;
 	void		ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool ReadOnly);
-	const std::string& GetArticleStr();
 	std::string GetArticleStrUtf8(bool check=false);
-	
+	void        SetUnitNo(uint16_t UnitNo);
 };
 

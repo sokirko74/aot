@@ -712,7 +712,7 @@ bool  CSemanticsHolder::BuildOborottos()
 		for (size_t UnitNo = 0; UnitNo < count; UnitNo++)
 		{
 			CObor O;
-			O.m_UnitStr = GetRoss(OborRoss)->GetEntryStr(UnitNo);
+			O.m_UnitStr = convert_from_utf8(GetRoss(OborRoss)->GetEntryStr(UnitNo), morphRussian);
 			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ПОДЧ_СОЮЗ", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusSubConj = true;
 

@@ -50,76 +50,6 @@ BOOL CArticleDoc::OnNewDocument()
 }
 
 
-void CArticleDoc::Serialize(CArchive& ar)
-{
-	if (ar.IsStoring())
-	{
-		// TODO: add storing code here
-		m_WasSaved = true;
-
-		if (!Markout())
-		{
-			AfxMessageBox(GetArticleErrorStr().c_str());
-			m_WasSaved = false;
-			return;
-		};
-
-		try {
-
-			m_Article.ReadFromUtf8String(GetArticleView()->GetText());
-			m_Article.WriteToDictionary();
-			if (m_pRossDoc->m_Author != "")
-			{
-				m_pRossDoc->GetRoss()->SetUnitEditor(m_UnitNo, (const char*)m_pRossDoc->m_Author);
-			}
-
-			GetRoss()->SetUnitCurrentTime(m_UnitNo);
-		}
-		catch (...) {
-			CString prompt = GetArticleErrorStr().c_str();
-			if (prompt != "")
-				AfxMessageBox(prompt);
-			else
-				AfxMessageBox("Cannot write article");
-		};
-
-
-		((CWordList*)(m_pRossDoc->GetWordList()))->UpdateIndex();
-		m_pRossDoc->SetModifiedFlag(TRUE);
-		try {
-			CString S = m_pRossDoc->m_Author;
-			if (S == "") S = "user";
-			S += "." + CString(m_pRossDoc->GetRossHolder()->m_DictName.c_str()) + ".log";
-			S = m_pRossDoc->GetRossHolder()->m_DictName.c_str() + S;
-			FILE* fp = fopen(S, "ab");
-			fseek(fp, SEEK_END, 0);
-			fprintf(fp, "============\r\n");
-			fprintf(fp, "%s", GetRoss()->GetUnitTextHeader(m_UnitNo).c_str());
-			try {
-				std::string strPath = GetRegistryString("SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName\\ComputerName");
-				fprintf(fp, "//MachineName = %s \r\n", strPath.c_str());
-				fprintf(fp, "//Date = %s\r\n", (const char*)CTime::GetCurrentTime().Format("%A, %B %d, %Y "));
-				fprintf(fp, "//Time = %s\r\n", (const char*)CTime::GetCurrentTime().Format("%H : %M"));
-				CString UserName = getenv("USERNAME");
-				if (!UserName.IsEmpty())
-					fprintf(fp, "//UserName = %s \r\n", (const char*)UserName);
-
-			}
-			catch (...)
-			{
-			};
-
-			fprintf(fp, "%s", (const char*)GetArticleView()->GetText());
-			fclose(fp);
-		}
-		catch (...) {
-			AfxMessageBox("Cannot write backup");
-		};
-	}
-	else
-	{
-	}
-}
 
 /////////////////////////////////////////////////////////////////////////////
 // CArticleDoc diagnostics
@@ -228,15 +158,6 @@ BOOL CArticleDoc::OpenArticle(uint16_t  UnitNo, CRossDoc* pRossDoc)
 };
 
 
-std::string CArticleDoc::GetArticleErrorStr() const
-{
-	std::string  s = m_Article.m_LastError;
-	if (s.empty()) return s;
-	int ErrorLine = m_Article.m_ErrorLine;
-	if (ErrorLine != -1)
-		s += Format(" (line %i)", ErrorLine);
-	return s;
-};
 BOOL CArticleDoc::SaveModified()
 {
 	CString name;
@@ -250,7 +171,7 @@ BOOL CArticleDoc::SaveModified()
 	}
 	catch (...)
 	{
-		prompt.Format("Unit \"%s\" contains errors (%s) . Exit without save?", name, GetArticleErrorStr().c_str());
+		prompt.Format("Unit \"%s\" contains errors. Exit without save?", name);
 
 		switch (AfxMessageBox(prompt, MB_OKCANCEL))
 		{
@@ -288,23 +209,6 @@ BOOL CArticleDoc::SaveModified()
 };
 
 
-bool CArticleDoc::AddCortegeToVector(std::vector<TCortege>& L, CRossDevTextField& F)
-{
-
-	std::vector<CString>  Lines;
-	size_t Count = m_Article.GetCortegesSize();
-	for (size_t i = 0; i < Count; i++)
-	{
-		const TCortege& C = m_Article.GetCortege(i);
-		if ((C.m_FieldNo == F.FieldNo)
-			&& (C.m_LeafId == F.LeafId)
-			&& (C.m_BracketLeafId == F.BracketLeafId)
-			&& !C.is_null(0))
-			L.push_back(C);
-	};
-
-	return true;
-};
 
 
 bool CArticleDoc::Markout()
@@ -313,27 +217,24 @@ bool CArticleDoc::Markout()
 	try
 	{
 		CString SaveArticleStr = GetArticleView()->GetText();
-		if (m_Article.ReadFromUtf8String(GetArticleView()->GetText()))
-		{
-			std::string  A = m_Article.GetArticleStrUtf8();
-			GetArticleView()->SetText(A.c_str());
+		m_Article.ReadFromUtf8String(GetArticleView()->GetText());
 
-			GetArticleView()->m_FldScroll.SetScrollRange(0, (m_Article.m_Fields.empty() ? 0 : m_Article.m_Fields.size() - 1));
-			//GetArticleView()->m_RichEdit.SetReadOnly(TRUE);
-			GetArticleView()->m_FldScroll.ShowWindow(SW_SHOW);
-			GetArticleView()->m_RichEdit.SetFocus();
-		}
-		else
-		{
-			ErrorMessage(m_Article.m_LastError);
-			return false;
-		}
+		std::string  A = m_Article.GetArticleStrUtf8();
+		GetArticleView()->SetText(A.c_str());
+
+		GetArticleView()->m_FldScroll.SetScrollRange(0, (m_Article.m_Fields.empty() ? 0 : m_Article.m_Fields.size() - 1));
+		GetArticleView()->m_FldScroll.ShowWindow(SW_SHOW);
+		GetArticleView()->m_RichEdit.SetFocus();
 	}
+	catch (article_parse_error a)
+	{
+		AfxMessageBox(a.what())
+		return false;
+	};
 	catch (...)
 	{
 		return false;
-	};
-
+	}
 	return true;
 };
 

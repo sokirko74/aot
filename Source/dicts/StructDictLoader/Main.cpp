@@ -1,61 +1,9 @@
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/common/util_classes.h"
 #include "dicts/StructDictLib/Ross.h"
-#include "dicts/StructDictLib/TempArticle.h"
 #include "morph_dict/common/argparse.h"
 
 
 
-void export_dict(std::string fileName, std::string folder) {
-	CDictionary Dict;
-	if (!Dict.Load(folder.c_str()) || !Dict.ReadUnitComments())
-	{
-		throw CExpc("Cannot load dictionary from %s", folder.c_str());
-	};
-	std::ofstream outf (fileName, std::ios::binary);
-	if (!outf.is_open())
-	{
-		throw CExpc("Cannot write to %s", fileName.c_str());
-	};
-
-	CTempArticle A(&Dict);
-
-	for (uint16_t i = 0; i < Dict.m_Units.size(); i++)
-	{
-		A.ReadFromDictionary(i, true, true);
-		outf << "============\n" << Dict.GetUnitTextHeader(i);
-		outf << A.GetArticleStrUtf8(true);
-	};
-}
-
-void import_dict(std::string fileName, std::string folder) {
-	CDictionary Dict;
-	if (!FileExists(fileName.c_str()))
-	{
-		throw CExpc("Cannot read %s", fileName.c_str());
-	};
-
-	Dict.LoadOnlyConstants(folder.c_str());
-
-	Dict.m_bShouldSaveComments = true;
-
-	std::string Messages;
-	if (!Dict.ImportFromText(fileName, 1, Messages)) {
-		throw CExpc(Messages);
-	}
-	Dict.Save();
-}
-
-//void build_fields_json(std::string fileName) {
-//	CDictionary Dict;
-//	auto folder = GetParentPath(fileName);
-//	
-//
-//	Dict.ReadConfig();
-//	Dict.BuildFields(Dict.m_MaxNumDom);
-//	//Dict.WriteFieldsJson();
-//
-//}
 
 void initArgParser(int argc, const char** argv, ArgumentParser& parser) {
 	parser.AddOption("--help");
@@ -74,15 +22,17 @@ int main(int argc, const char** argv)
 	initArgParser(argc, argv, args);
 	init_plog(args.GetLogLevel(), "struct_dict_load.log");
 	std::string action = args.Retrieve("action");
+	CDictionary Dict;
 	try {
 		if (action == "from_txt")
 		{
 			auto inp = args.Retrieve("input-file");
-			import_dict(inp, args.Retrieve("output-ross-folder"));
+			Dict.ImportFromTextFile(inp, args.Retrieve("output-ross-folder"));
+			Dict.Save();
 		}
 		else if (action == "to_txt")
 		{
-			export_dict(args.Retrieve("output-file"), args.Retrieve("input-ross-folder"));
+			Dict.LoadAndExportDict(args.Retrieve("input-ross-folder"), args.Retrieve("output-file"));
 		}
 		else {
 			LOGE << "bad action " << action;

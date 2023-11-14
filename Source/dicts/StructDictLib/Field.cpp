@@ -51,4 +51,8 @@ void CField::ReadFromJson(nlohmann::json& js) {
         }
         SignatId2SignatNo[S.SignatId] = m_Signats.size() - 1;
     };
+
+    if (m_Signats.size() >= UnknownSignatId) {
+        throw  CExpc("more than %i signats in field %s", UnknownSignatId, FieldStr.c_str());
+    }
 }

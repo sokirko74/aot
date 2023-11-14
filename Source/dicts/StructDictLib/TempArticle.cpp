@@ -8,6 +8,14 @@
 #include "TempArticle.h"
 #include "morph_dict/common/util_classes.h"
 
+article_parse_error::article_parse_error(const std::string what_arg, int _source_line_no) :
+	std::exception(what_arg.c_str()), source_line_no(_source_line_no) {
+
+}
+
+const char* article_parse_error::what() const  {
+	return Format("%s, line no = %i", std::exception::what(), source_line_no).c_str();
+}
 
 
 CTempArticle::CTempArticle(CDictionary* pRoss) : TCortegeContainer()
@@ -15,7 +23,7 @@ CTempArticle::CTempArticle(CDictionary* pRoss) : TCortegeContainer()
 	m_pRoss = pRoss;
 	m_ReadOnly = false;
 	m_UnitNo = ErrUnitNo;
-	m_ErrorLine = -1;
+	
 }
 
 
@@ -97,7 +105,7 @@ bool CTempArticle::AddArticle(const CTempArticle* Article)
 			_AddCortege(Article->GetCortege(k));
 	};
 
-	if (!CheckCortegeVector()) return false;
+	CheckCortegeVector();
 
 	return true;
 }
@@ -280,15 +288,11 @@ std::string GetLine(std::string s, size_t LineNo)
 };
 
 
-bool CTempArticle::AddCortegeToVector(CTextField& F)
+void CTempArticle::AddCortegeToVector(CTextField& F)
 {
-
 	BYTE LevelId = 0;
 
 	bool IsEqual = false;
-
-	m_LastError = "";
-	m_ErrorLine = -1;
 
 	for (size_t i = F.StartLine; i <= F.EndLine; i++)
 	{
@@ -350,17 +354,14 @@ bool CTempArticle::AddCortegeToVector(CTextField& F)
 
 			if (LevelId < 1)
 			{
-				m_LastError = Format("Error: No level number (field %s)", (const char*)FieldStr.c_str());
-				m_ErrorLine = i + 1;
-				return false;
+				auto m = Format("Error: No level number (field %s)", FieldStr.c_str());
+				throw article_parse_error(m, i + 1);
 			};
 
-			if ((LevelId > 40)
-				&& (LevelId != ErrUChar))
+			if ((LevelId > 40) && (LevelId != ErrUChar))
 			{
-				m_LastError = Format("Error: Level number is too large (field %s) ", (const char*)FieldStr.c_str());
-				m_ErrorLine = i + 1;
-				return false;
+				auto m =  Format("Error: Level number is too large (field %s) ", FieldStr.c_str());
+				throw article_parse_error(m, i + 1);
 			};
 
 
@@ -380,9 +381,8 @@ bool CTempArticle::AddCortegeToVector(CTextField& F)
 				C.SetEqual();
 			if (!b)
 			{
-				m_LastError += Format("\nCannot read line  (\"%s\")! ", s.c_str());
-				m_ErrorLine = i + 1;
-				return false;
+				auto m = Format("\nCannot read line  (\"%s\")! ", s.c_str());
+				throw article_parse_error(m, i + 1);
 			}
 		};;
 
@@ -392,35 +392,27 @@ bool CTempArticle::AddCortegeToVector(CTextField& F)
 		_AddCortege(C);
 		
 	};
-
-	return true;
-
 };
 
 
-bool CTempArticle::CheckCortegeVector()
+void CTempArticle::CheckCortegeVector()
 {
 
 	int ActantNo = 1;
 	for (size_t i = 0; i < GetCortegesSize(); i++)
 	{
-		m_ErrorLine = i + 1;
+		std::string FldName = ConstructFldName(GetCortege(i).m_FieldNo, GetCortege(i).m_LeafId, GetCortege(i).m_BracketLeafId);
 		if (GetCortege(i).m_FieldNo == ErrUChar)
 		{
-			m_LastError = "Unknown field ";
-			return false;
+			throw CExpc("Unknown field ");
 		};
-
-
 		
 		for (BYTE k = 0; k < m_pRoss->GetSignat(GetCortege(i)).GetDomsWoDelims().size(); k++)
 			if (GetCortege(i).is_null(k))
 			{
-				m_LastError = "Empty field";
-				return false;
+				throw CExpc("no all values in field %s", FldName.c_str());
 			}
 
-		std::string FldName = ConstructFldName(GetCortege(i).m_FieldNo, GetCortege(i).m_LeafId, GetCortege(i).m_BracketLeafId);
 
 		bool FoundPrevLevelId = !(GetCortege(i).m_LevelId > 1 && (GetCortege(i).m_LevelId != ErrUChar));
 		for (size_t k = 0; k < GetCortegesSize(); k++)
@@ -432,8 +424,7 @@ bool CTempArticle::CheckCortegeVector()
 			{
 				if (m_pRoss->Fields[GetCortege(i).m_FieldNo].TypeRes == frOne)
 				{
-					m_LastError = Format("Field \"%s\" is repeated", FldName.c_str());
-					return false;
+					throw CExpc(Format("Field \"%s\" is repeated", FldName.c_str()));
 				};
 
 				if (!FoundPrevLevelId)
@@ -443,8 +434,7 @@ bool CTempArticle::CheckCortegeVector()
 
 		if (!FoundPrevLevelId)
 		{
-			m_LastError = Format("Bad level numbers in \"%s\"", FldName.c_str());
-			return false;
+			throw CExpc("Bad level numbers in \"%s\"", FldName.c_str());
 		};
 
 
@@ -455,8 +445,7 @@ bool CTempArticle::CheckCortegeVector()
 				&& (m_pRoss->Fields[GetCortege(i).m_FieldNo].TypeRes == frOne)
 				)
 			{
-				m_LastError = Format("Two equal items on one level in \"%s\"", FldName.c_str());
-				return false;
+				throw CExpc("Two equal items on one level in \"%s\"", FldName.c_str());
 			};
 
 
@@ -477,18 +466,13 @@ bool CTempArticle::CheckCortegeVector()
 					|| (isdigit((unsigned char)q[2]) && (ActantNo + '0' != q[2]))
 					)
 				{
-					m_LastError = Format("Error in valency numbering (field \"%s\")", FldName.c_str());
-					return false;
+					throw CExpc("Error in valency numbering (field \"%s\")", FldName.c_str());
 				};
 
 			ActantNo++;
 		};
 
 	}
-
-
-
-	return true;
 }
 
 
@@ -554,16 +538,13 @@ inline bool SplitFldName(std::string& FldName, BYTE& LeafId, BYTE& BracketLeafId
 };
 
 
-
-
-
 void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool ReadOnly)
 {
 	m_UnitNo = UnitNo;
 	m_ReadOnly = ReadOnly ? true : false;
 	ClearCorteges();
 	const CStructEntry& U = m_pRoss->GetUnits()[UnitNo];
-	strcpy(m_EntryStr, U.m_EntryStr);
+	m_EntryStr = U.GetEntryStr();
 	m_MeanNum = U.m_MeanNum;
 
 
@@ -579,30 +560,27 @@ void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool Re
 }
 
 
-bool CTempArticle::ReadFromUtf8String(const char* s)
-{
-	m_ArticleStr = convert_from_utf8(s, m_pRoss->m_Language);
-	DeleteEmptyLines(m_ArticleStr);
-	if (!MarkUp()) return false;
-	if (!BuildCortegeList()) return false;
-	return true;
-}
-
-
-bool  CTempArticle::MarkUp()
+void CTempArticle::ReadFromUtf8String(const char* s)
 {
 	if (m_ReadOnly)
 	{
-		m_LastError = "Article is readonly";
-		m_ErrorLine = -1;
-		return false;
+		throw CExpc("Article is readonly");
 	};
 
+	m_ArticleStr = s;
+	DeleteEmptyLines(m_ArticleStr);
+	MarkUp();
+	BuildCortegeList();
+}
+
+
+void  CTempArticle::MarkUp()
+{
 	m_Fields.clear();
 	size_t LineNo = 0;
 	int  old_eoln = -1;
 	size_t Size = m_ArticleStr.length();
-	if (m_ArticleStr.empty()) return true;
+	if (m_ArticleStr.empty()) return;
 	for (size_t _eoln = 0; _eoln <= Size; _eoln++)
 		if ((_eoln == Size) || (m_ArticleStr[_eoln] == '\n'))
 		{
@@ -634,10 +612,9 @@ bool  CTempArticle::MarkUp()
 				BYTE  FieldNo = m_pRoss->GetFieldNoByFieldStrInner(FldName.c_str());
 				if (FieldNo == ErrUChar)
 				{
-					m_LastError = Format("Field \"%s\"  is not registered", FldName.c_str());
-					m_ErrorLine = LineNo + 1;
+					auto m = Format("Field \"%s\"  is not registered", FldName.c_str());
 					m_Fields.clear();
-					return false;
+					throw article_parse_error(m, LineNo + 1);
 				}
 
 				CTextField T;
@@ -653,55 +630,36 @@ bool  CTempArticle::MarkUp()
 					m_Fields[m_Fields.size() - 1].EndLine++;
 				else
 				{
-					m_LastError = Format("Field \"%s\"  is not registered", FldName.c_str());
-					m_ErrorLine = LineNo + 1;
 					m_Fields.clear();
-					return false;
+					auto m = Format("Field \"%s\"  is not registered", FldName.c_str());
+					throw article_parse_error(m, LineNo + 1);
 
 				};
 
 			LineNo++;
 			old_eoln = _eoln;
 		};
-	return true;
+
 }
 
 
-
-
-bool CTempArticle::BuildCortegeList()
+void CTempArticle::BuildCortegeList()
 {
-	if (m_ReadOnly)
-	{
-		m_LastError = "Article is readonly";
-		return false;
-	};
 	ClearCorteges();
-
-
 	for (auto& f : m_Fields) {
-		if (!AddCortegeToVector(f))
-		{
-			ClearCorteges();
-			return false;
-		};
+		AddCortegeToVector(f);
 	}
-
-
-	return true;
 }
 
 
-bool CTempArticle::WriteToDictionary()
+void  CTempArticle::WriteToDictionary()
 {
 	if (m_ReadOnly)
 	{
-		m_LastError = "Article is readonly";
-		m_ErrorLine = -1;
-		return false;
+		throw CExpc("Article is readonly");
 	};
 
-	if (!CheckCortegeVector()) return false;
+	CheckCortegeVector();
 
 	std::vector<CStructEntry>& Units = m_pRoss->m_Units;
 
@@ -717,14 +675,9 @@ bool CTempArticle::WriteToDictionary()
 
 	if (GetCortegesSize() == 0)
 	{
-		Units[m_UnitNo].m_LastCortegeNo = InitialEndPos;
-		Units[m_UnitNo].m_StartCortegeNo = InitialStartPos;
+		Units[m_UnitNo].MakeEmpty();
 	};
-
-	return true;
 }
-
-
 
 bool CTempArticle::IsModified() const
 {
@@ -745,13 +698,6 @@ bool CTempArticle::IsModified() const
 }
 
 
-const std::string& CTempArticle::GetArticleStr()
-{
-	ArticleToText();
-	return m_ArticleStr;
-}
-
-
 std::string CTempArticle::GetArticleStrUtf8(bool check)
 {
 	if (!ArticleToText()) {
@@ -759,7 +705,11 @@ std::string CTempArticle::GetArticleStrUtf8(bool check)
 			throw CExpc("cannot parse %zu", m_UnitNo);
 		}
 	}
-	return convert_to_utf8(m_ArticleStr, m_pRoss->m_Language);
+	return m_ArticleStr;
+}
+
+void CTempArticle::SetUnitNo(uint16_t UnitNo) {
+	m_UnitNo = UnitNo;
 }
 
 

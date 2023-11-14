@@ -18,7 +18,6 @@ public :
     std::string RossPath;
 	std::string DomItemsFile;
 	std::string DomItemsTextFile;
-	std::string ItemsFile;
 	std::vector <CDomen> m_Domens;
 	std::string DomensFile;
 	std::vector<CField> Fields;
@@ -38,7 +37,6 @@ public :
 	BYTE IllDomNo;
 	BYTE IntegerDomNo;
 	int WildCardDomItemNo;
-	std::string m_LastError;
 
 
 	TItemContainer();

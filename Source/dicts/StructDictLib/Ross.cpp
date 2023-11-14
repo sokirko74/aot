@@ -11,52 +11,6 @@
 #include "TempArticle.h"
 
 
-inline size_t get_size_in_bytes(const CStructEntry& t)
-{
-	BYTE b;
-
-	return get_size_in_bytes(t.m_EntryId) + EntryStrSize + get_size_in_bytes(t.m_MeanNum) +
-		get_size_in_bytes(t.m_StartCortegeNo) + get_size_in_bytes(t.m_LastCortegeNo) + get_size_in_bytes(b) +
-		get_size_in_bytes(t.__dummy) + AuthorNameSize;
-};
-
-inline size_t save_to_bytes(const CStructEntry& i, BYTE* buf)
-{
-	buf += save_to_bytes(i.m_EntryId, buf);
-	memcpy(buf, i.m_EntryStr, EntryStrSize);
-	buf += EntryStrSize;
-
-	// cast to int to pad to 4 bytes (since we write ints
-	// afterwards)
-	buf += save_to_bytes((int)i.m_MeanNum, buf);
-
-	buf += save_to_bytes(i.m_StartCortegeNo, buf);
-	buf += save_to_bytes(i.m_LastCortegeNo, buf);
-	buf += save_to_bytes((BYTE)i.m_bSelected, buf);
-	buf += save_to_bytes(i.__dummy, buf);
-	memcpy(buf, i.m_AuthorStr, AuthorNameSize);
-	return get_size_in_bytes(i) + 3;
-};
-
-inline size_t restore_from_bytes(CStructEntry& i, const BYTE* buf)
-{
-	buf += restore_from_bytes(i.m_EntryId, buf);
-	memcpy(i.m_EntryStr, buf, EntryStrSize);
-	buf += EntryStrSize;
-	
-	// m_MeanNum is padded to 4 bytes
-	int meanNum;
-	buf += restore_from_bytes(meanNum, buf);
-	i.m_MeanNum = meanNum;
-
-	buf += restore_from_bytes(i.m_StartCortegeNo, buf);
-	buf += restore_from_bytes(i.m_LastCortegeNo, buf);
-	buf += restore_from_bytes((BYTE&)i.m_bSelected, buf);
-	buf += restore_from_bytes(i.__dummy, buf);
-	memcpy(i.m_AuthorStr, buf, AuthorNameSize);
-	return get_size_in_bytes(i) + 3;
-};
-
 
 
 //=========================================================
@@ -91,7 +45,6 @@ void TRoss::LoadOnlyConstants(const char* _RossPath)
 	RossPath = _RossPath;
 	Config.ReadConfig(RossPath);
 	MakePathAndCheck(RossPath, "domitems.tsv", DomItemsTextFile);
-	MakePathAndCheck(RossPath, "items.bin", ItemsFile);
 	MakePathAndCheck(RossPath, "domains.json", DomensFile);
 	MakePathAndCheck(RossPath, "fields.json", FieldsFile);
 
@@ -114,24 +67,6 @@ void TRoss::LoadOnlyConstants(const char* _RossPath)
 	UnitsFile = MakePath(RossPath, "units.bin");
 	UnitCommentsFile = MakePath(RossPath, "comments.bin");
 };
-
-
-bool TRoss::FullLoad(const char* _RossPath)
-{
-	LoadOnlyConstants(_RossPath);
-
-	MakePathAndCheck(RossPath, "cortege.bin", CortegeFile);
-	MakePathAndCheck(RossPath, "units.bin", UnitsFile);
-	BuildUnits();
-
-	if (!BuildCorteges())
-	{
-		m_LastError = "Cannot build corteges";
-		return false;
-	}
-
-	return true;
-}
 
 
 bool  TRoss::Save()
@@ -182,16 +117,9 @@ const char* TRoss::GetRedactFieldName() const
 	return "REDACT";
 };
 
-bool IsBinFile(const std::string FileName) {
-	return     (FileName.length() > 3)
-		&& FileName.substr(FileName.length() - 3) == std::string("bin");
-};
-
 void   TRoss::BuildUnits() {
 	ClearUnits();
-
-	if (IsBinFile(UnitsFile))
-		ReadVector<CStructEntry>(UnitsFile, m_Units);
+	ReadVector<CStructEntry>(UnitsFile, m_Units);
 }
 
 
@@ -205,8 +133,7 @@ void   TRoss::ClearUnit(uint16_t UnitNo)
 {
 	if (!m_Units[UnitNo].HasEmptyArticle())
 		DelCorteges(m_Units[UnitNo].m_StartCortegeNo, m_Units[UnitNo].m_LastCortegeNo + 1);
-	m_Units[UnitNo].m_StartCortegeNo = InitialStartPos;
-	m_Units[UnitNo].m_LastCortegeNo = InitialEndPos;
+	m_Units[UnitNo].MakeEmpty();
 }
 
 
@@ -271,11 +198,7 @@ uint16_t    TRoss::InsertUnit(CStructEntry& T)
 
 uint16_t   TRoss::InsertUnit(const char* EntryStr, BYTE MeanNum)
 {
-	CStructEntry T;
-	T.m_MeanNum = MeanNum;
-	strcpy(T.m_EntryStr, EntryStr);
-	T.m_AuthorStr[0] = 0;
-	return TRoss::InsertUnit(T);
+	return TRoss::InsertUnit(CStructEntry(EntryStr, MeanNum));
 }
 
 inline size_t get_size_in_bytes(const tm& t)
@@ -353,18 +276,11 @@ inline size_t restore_from_bytes(TUnitComment& i, const BYTE* buf)
 bool   TRoss::ReadUnitComments()
 {
 	m_UnitComments.clear();
-
 	UnitCommentsFile[0] = 0;
-
 	MakePathAndCheck(RossPath, "comments.bin", UnitCommentsFile);
-	if (!IsBinFile(UnitCommentsFile)) return false;
-
-
 	ReadVector<TUnitComment>(UnitCommentsFile, m_UnitComments);
 	sort(m_UnitComments.begin(), m_UnitComments.end());
-
 	assert(m_UnitComments.size() == m_Units.size());
-
 	m_bShouldSaveComments = true;
 	return true;
 };
@@ -408,14 +324,10 @@ const TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)   const
 };
 
 
-bool   TRoss::BuildCorteges()
+void   TRoss::BuildCorteges()
 {
 	ClearCorteges();
-
-	if (IsBinFile(CortegeFile))
-		ReadCorteges(CortegeFile.c_str());
-
-	return true;
+	ReadCorteges(CortegeFile.c_str());
 }
 
 
@@ -653,21 +565,16 @@ dom_item_id_t   TRoss::InsertDomItem(const char* ItemStr, BYTE DomNo)
 };
 
 
-bool CDictionary::Load(const char* Path)
+void CDictionary::Load(const char* Path)
 {
 	if (!Path) {
-		m_LastError = "cannot load ross by empty path";
-		TItemContainer::ErrorMessage(m_LastError);
-		return false;
+		throw CExpc("cannot load ross by empty path");
 	}
-	if (!FullLoad(Path))
-	{
-		TItemContainer::ErrorMessage(m_LastError);
-		return  false;
-	}
-	else
-		return   true;
-
+	LoadOnlyConstants(Path);
+	MakePathAndCheck(RossPath, "cortege.bin", CortegeFile);
+	MakePathAndCheck(RossPath, "units.bin", UnitsFile);
+	BuildUnits();
+	BuildCorteges();
 };
 
 
@@ -683,11 +590,7 @@ void TRoss::SetUnitCommentStr(uint16_t UnitNo, const char* Str)
 
 void TRoss::SetUnitAuthor(uint16_t UnitNo, const char* Author)
 {
-	int l = strlen(Author);
-	if (l > AuthorNameSize - 1)
-		l = AuthorNameSize - 1;
-	strncpy(m_Units[UnitNo].m_AuthorStr, Author, l);
-	m_Units[UnitNo].m_AuthorStr[l] = 0;
+	m_Units[UnitNo].SetUnitAuthor(Author);
 }
 
 tm Str2Tm(std::string TimeStr)
@@ -749,15 +652,15 @@ std::string TRoss::GetUnitTextHeader(uint16_t UnitNo) const
 	const CStructEntry& U = m_Units[UnitNo];
 	const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
 
-	R += Format("%s        = %s\n", GetTitleFieldName(), U.m_EntryStr);
+	R += Format("%s        = %s\n", GetTitleFieldName(), U.GetEntryStr());
 	R += Format("%s       = %u\n", GetSenseFieldName(), U.m_MeanNum);
 
 	if (C && strlen(C->Comments))
 		R += Format("%s       = %s\n", GetCommFieldName(), C->Comments);
 
 
-	if (strlen(U.m_AuthorStr) > 0)
-		R += Format("%s       = %s\n", GetAuthorFieldName(), U.m_AuthorStr);
+	if (!U.GetAuthorStr().empty())
+		R += Format("%s       = %s\n", GetAuthorFieldName(), U.GetAuthorStr().c_str());
 
 
 	if (C && strlen(C->Editor))
@@ -845,13 +748,9 @@ const std::string& CDictionary::GetDomItemStr(long cortegeNo, BYTE positionInCor
 
 std::string	CDictionary::GetEntryStr(uint16_t EntryNo) const
 {
-	return m_Units[EntryNo].m_EntryStr;
+	return m_Units[EntryNo].GetEntryStr();
 };
 
-std::string	CDictionary::GetEntryStrUtf8(uint16_t EntryNo) const
-{
-	return convert_to_utf8(m_Units[EntryNo].m_EntryStr, this->m_Language);
-};
 
 BYTE		CDictionary::GetUnitMeanNum(uint16_t EntryNo) const
 {
@@ -865,54 +764,11 @@ bool CDictionary::IncludeArticle(uint16_t UnitNo, std::string ArticleUtf8) const
 
 	CTempArticle A2(const_cast<CDictionary*>(this));
 	A2.ReadFromUtf8String(ArticleUtf8.c_str());
-	A2.MarkUp();
-	A2.BuildCortegeList();
 	return A2.IsPartOf(&A1, true);
 }
 
 
 //=============    Import from Text file   ==========================
-
-
-bool IsRubicon(const std::string& S)
-{
-	return S.find("====") != std::string::npos;
-}
-
-
-bool FindRubicon(std::vector<CSourceLine>& L, size_t& pos)
-{
-	while ((pos < L.size())
-		&& (!IsRubicon(L[pos].m_Line))
-		)
-		pos++;
-
-	return pos < L.size();
-}
-
-void DeleteEmptyLines(std::vector<CSourceLine>& L)
-{
-	for (int i = 0; i < L.size(); )
-	{
-		Trim(L[i].m_Line);
-		if (L[i].m_Line.empty())
-			L.erase(L.begin() + i);
-		else
-			i++;
-	};
-};
-
-int NumArt(std::vector<CSourceLine>& L)
-{
-	int Res = 0;
-
-	for (int i = 0; i + 1 < L.size(); i++)
-		if (IsRubicon(L[i].m_Line))
-			Res++;
-
-	return Res;
-};
-
 
 bool GetValue(std::string Pair, std::string FldName, std::string& Value)
 {
@@ -925,194 +781,103 @@ bool GetValue(std::string Pair, std::string FldName, std::string& Value)
 };
 
 
-void CutComments(std::vector<CSourceLine>& L)
+void CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L)
 {
-	for (size_t i = 0; i < L.size(); i++)
-	{
-		int k = L[i].m_Line.find("//");
-		if (k != std::string::npos)
-			L[i].m_Line.erase(k);
-	}
-}
-
-void AddMessage(std::string Message, int LineNo, std::string& Messages)
-{
-	Trim(Message);
-	if (LineNo != -1)
-		Message += Format(" (line %i)", LineNo);
-	Message += "\n";
-	Messages += Message;
-};
-
-
-bool CDictionary::ImportFromText(std::string FileName, int StartEntry, std::string& Messages)
-{
-	Messages = "";
-
-	std::vector<CSourceLine> L;
-	{
-		FILE* fp = fopen(FileName.c_str(), "r");
-		if (!fp)
-		{
-			Messages += Format("Cannot read input file %s\n", FileName.c_str());
-			return false;
-		};
-		char buffer[1000];
-		int CurrentLineNo = 0;
-		while (fgets(buffer, 1000, fp))
-		{
-			std::string S = convert_from_utf8(buffer, m_Language);
-			Trim(S);
-			L.push_back(CSourceLine(S, CurrentLineNo));
-			CurrentLineNo++;
-		};
-		fclose(fp);
-	}
-
-
-	int ErrorsCount = 0;
-
-	CutComments(L);
-	DeleteEmptyLines(L);
-	size_t NumOfArt = NumArt(L);
-	Messages += Format("Number of found entries: %i\n", NumOfArt);
-	size_t start = 0;
-	size_t last = 0;
-	size_t NumOfGoodArt = 0;
-
-
-	for (int i = 0; i < NumOfArt; i++)
-	{
-		if (FindRubicon(L, start))
-			start++;
-		last = start;
-		FindRubicon(L, last);
-		if (i + 1 < StartEntry) continue;
-
-		if (ProcessOneArticle(L, start, last, Messages))
-			NumOfGoodArt++;
-		else
-			ErrorsCount++;
-	};
-
-	Messages += Format("Number of loaded entries: %i\n", NumOfGoodArt);
-	return ErrorsCount == 0;
-}
-
-
-bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int last, std::string& Messages)
-{
-	size_t RealStart = start;
-	if (L.size() == 1) return false;
 	std::string S;
-	if (GetValue(L[RealStart].m_Line, "Дескриптор", S)) {
-		RealStart++;
+	if (L.empty()) {
+		throw article_parse_error("empty struct dict article", 0);
 	}
-
 	std::string Lemma;
+	size_t line_no = 0;
 	const char* Field = GetTitleFieldName();
-	if (!GetValue(L[RealStart].m_Line, Field, Lemma))
+	if (!GetValue(L[line_no].m_Line, Field, Lemma))
 	{
-		AddMessage(Format("Cannot read field %s\n", Field).c_str(), L[start].m_SourceLineNo + 1, Messages);
-		return false;
+		throw article_parse_error("Cannot read field TITLE", L[line_no].m_SourceLineNo);
 	}
-	RealStart++;
 
 	Field = GetSenseFieldName();
-	if (!GetValue(L[RealStart].m_Line, Field, S))
+	line_no += 1;
+	if (!GetValue(L[line_no].m_Line, Field, S))
 	{
-		AddMessage(Format("Cannot read field %s", Field).c_str(), L[start].m_SourceLineNo + 1, Messages);
-		return false;
+		throw article_parse_error("Cannot read field SENSE", L[line_no].m_SourceLineNo);
 	}
 
 	BYTE MeanNum = atoi(S.c_str());
 	if (MeanNum == 0)
 	{
-		AddMessage(Format("Cannot read field %s", Field).c_str(), L[start].m_SourceLineNo + 1, Messages);
-		return false;
+		throw article_parse_error("Cannot read SENSE", L[line_no].m_SourceLineNo);
 	}
 	if ((Config.MaxMeanNum == 1) && (MeanNum > 1))
 	{
-		AddMessage("No different senses are possible  for this dictionary", L[start].m_SourceLineNo + 1, Messages);
-		return false;
+		throw article_parse_error("No different senses are possible  for this dictionary", L[0].m_SourceLineNo);
 	}
 
 	std::string Comments = "";
 	Field = GetCommFieldName();
-	if (RealStart + 1 < L.size())
-		if (GetValue(L[RealStart + 1].m_Line, Field, S))
+	if (line_no + 1 < L.size())
+		if (GetValue(L[line_no + 1].m_Line, Field, S))
 		{
 			Comments = S;
-			RealStart++;
+			line_no++;
 		};
 
 	std::string Author = "";
 	Field = GetAuthorFieldName();
-	if (RealStart + 1 < L.size()) {
-		if (GetValue(L[RealStart + 1].m_Line, Field, S))
+	if (line_no + 1 < L.size()) {
+		if (GetValue(L[line_no + 1].m_Line, Field, S))
 		{
 			Author = S;
-			RealStart++;
+			line_no++;
 		};
 	}
 	std::string ModifTime = "";
 	Field = GetTimeCreatFieldName();
-	if (RealStart + 1 < L.size()) {
-		if (GetValue(L[RealStart + 1].m_Line, Field, S))
+	if (line_no + 1 < L.size()) {
+		if (GetValue(L[line_no + 1].m_Line, Field, S))
 		{
 			ModifTime = S;
-			RealStart++;
+			line_no++;
 		};
 	}
 
 	std::string UnitEditor = "";
 	Field = GetRedactFieldName();
-	if (RealStart + 1 < L.size())
-		if (GetValue(L[RealStart + 1].m_Line, Field, S))
+	if (line_no + 1 < L.size())
+		if (GetValue(L[line_no + 1].m_Line, Field, S))
 		{
 			UnitEditor = S;
-			RealStart++;
+			line_no++;
 		};
 
 	Field = GetTimeCreatFieldName();
-	if (RealStart + 1 < L.size())
-		if (GetValue(L[RealStart + 1].m_Line, Field, S))
+	if (line_no + 1 < L.size())
+		if (GetValue(L[line_no + 1].m_Line, Field, S))
 		{
 			ModifTime = S;
-			RealStart++;
+			line_no++;
 		};
 
 
 	uint16_t UnitNo = LocateUnit(Lemma.c_str(), MeanNum);
 
 	if (UnitNo != ErrUnitNo) {
-		return true;
+		LOGV << "skip existing article " << Lemma;
+		return;
 	}
 	else {
 		UnitNo = InsertUnit(Lemma.c_str(), MeanNum);
+		assert(UnitNo != ErrUnitNo);
 	}
-
-	CTempArticle A1(this);
-	if (UnitNo != ErrUnitNo)
-		A1.ReadFromDictionary(UnitNo, false, false);
-
+	
 	std::string NewArticle;
-	for (int i = RealStart + 1; i < last; i++)
+	for (int i = line_no + 1; i < L.size(); i++)
 		NewArticle += L[i].m_Line + std::string("\n");
 
-	CTempArticle A2(this);
 	try
 	{
-		if ( !A1.ReadFromUtf8String(convert_to_utf8(NewArticle, m_Language).c_str()) )
-		{
-			int LocalLineNo = A1.m_ErrorLine - 1;
-			if (LocalLineNo < 0)
-				LocalLineNo = 0;
-			AddMessage(A1.m_LastError, L[LocalLineNo + start + (RealStart - start)].m_SourceLineNo + 1, Messages);
-			if (A1.m_LastError.empty())
-				Messages += "an error occurred!\n";
-			return false;
-		};
+		CTempArticle A1(this);
+		A1.SetUnitNo(UnitNo);
+		A1.ReadFromUtf8String(NewArticle.c_str());
 		SetUnitCommentStr(UnitNo, Comments.c_str());
 		SetUnitAuthor(UnitNo, Author.c_str());
 		if (ModifTime != "")
@@ -1121,27 +886,87 @@ bool CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L, int start, int 
 			SetUnitEditor(UnitNo, UnitEditor.c_str());
 		A1.WriteToDictionary();
 	}
-	catch (...)
+	catch (article_parse_error& a)
 	{
-		int LocalLineNo = A2.m_ErrorLine - 1;
-		if (LocalLineNo < 0)
-			LocalLineNo = 0;
-		AddMessage(m_LastError, L[LocalLineNo + start + (RealStart - start)].m_SourceLineNo + 1, Messages);
-		return false;
+		a.source_line_no += line_no;
+		throw;
 	}
-
-
-	return true;
+	catch (CExpc& e)
+	{
+		throw article_parse_error(e.m_strCause, L[0].m_SourceLineNo);
+	}
 };
+
+
+static std::vector<std::vector<CSourceLine> > get_articles_from_file(std::string FileName) {
+	std::vector<std::vector<CSourceLine> > articles;
+	std::ifstream inp;
+	inp.open(FileName);
+	if (!inp.good()) {
+		throw CExpc("Cannot read input file %s", FileName.c_str());
+	};
+	size_t line_no = 0;
+	std::string line;
+	std::vector<CSourceLine>  article_lines;
+	while (std::getline(inp, line))
+	{
+		line_no++;
+		int k = line.find("//");
+		if (k != std::string::npos)
+			line.erase(k);
+		Trim(line);
+		CSourceLine l(line, line_no);
+		if (line.empty()) continue;
+
+		if (line.find("====") != std::string::npos) {
+			if (!article_lines.empty()) {
+				articles.push_back(article_lines);
+				article_lines = std::vector<CSourceLine>();
+			}
+		}
+		else {
+			article_lines.push_back(l);
+		}
+	};
+	if (!article_lines.empty()) {
+		articles.push_back(article_lines);
+	}
+	return articles;
+}
+
+
+void CDictionary::LoadAndExportDict(std::string folder, std::string fileName)
+{
+	
+	Load(folder.c_str());
+
+	if (!ReadUnitComments())
+	{
+		throw CExpc("Cannot load dictionary from %s", folder.c_str());
+	};
+	std::ofstream outf(fileName, std::ios::binary);
+	if (!outf.is_open())
+	{
+		throw CExpc("Cannot write to %s", fileName.c_str());
+	};
+
+	CTempArticle A(this);
+
+	for (uint16_t i = 0; i < m_Units.size(); i++)
+	{
+		A.ReadFromDictionary(i, true, true);
+		outf << "============\n" << GetUnitTextHeader(i);
+		outf << A.GetArticleStrUtf8(true);
+	};
+}
+
+
 
 void CDictionary::SetUnitCurrentTime(uint16_t UnitNo)
 {
 	TUnitComment* C = GetCommentsByUnitId(GetUnits()[UnitNo].m_EntryId);
 	C->modif_tm = RmlGetCurrentTime();
 }
-
-
-
 
 std::string CDictionary::GetUnitEditor(uint16_t UnitNo) const
 {
@@ -1159,6 +984,23 @@ std::string CDictionary::GetUnitEditor(uint16_t UnitNo) const
 
 void  CDictionary::SetUnitStr(uint16_t UnitNo, const char* UnitStr)
 {
-	strcpy(m_Units[UnitNo].m_EntryStr, UnitStr);
+	m_Units[UnitNo].SetEntryStr(UnitStr);
+
 	sort(m_Units.begin(), m_Units.end());
+}
+
+void CDictionary::ImportFromTextFile(std::string fileName, std::string folder) {
+	if (!FileExists(fileName.c_str()))
+	{
+		throw CExpc("Cannot read %s", fileName.c_str());
+	};
+	LoadOnlyConstants(folder.c_str());
+	m_bShouldSaveComments = true;
+
+	auto articles = get_articles_from_file(fileName);
+	LOGV << "Number of found entries: " << articles.size();
+	for (auto& a : articles)
+	{
+		ProcessOneArticle(a);
+	};
 }

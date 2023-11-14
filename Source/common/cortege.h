@@ -34,7 +34,7 @@ inline bool is_null(dom_item_id_t item_id) {
 }
 
 inline dom_item_id_t build_item_id(BYTE dom_no, uint32_t inner_item_index) {
-	return (24 << dom_no) | inner_item_index;
+	return ((uint32_t)dom_no << 24) | inner_item_index;
 
 }
 

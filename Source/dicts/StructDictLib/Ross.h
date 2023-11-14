@@ -4,73 +4,17 @@
 
 #pragma once 
 
-#include "morph_dict/common/utilit.h"
-
-#include <time.h>
-
-
+#include "StructEntry.h"
 #include "ItemsContainer.h"
 #include "CortegeContainer.h"
 #include "DictConfig.h"
 
 
-const int NullItemId = 1;
-
-const size_t MaxItemStr = 100;
-
-// ссылки на словaрную статью, лежащую в массиве Ross :: Cortege
-const int InitialStartPos = 5000000;
-const int InitialEndPos = -1;
-// Индекс  - uint16_t
-class CStructEntry {
-public:
-	int		m_EntryId;
-	char	m_EntryStr[EntryStrSize];
-	BYTE	m_MeanNum;
-	int		m_StartCortegeNo;
-	int		m_LastCortegeNo;
-	bool	m_bSelected;
-	// Графематические дескрипторы
-	BYTE	__dummy;
-	char	m_AuthorStr[AuthorNameSize];
+#include "morph_dict/common/utilit.h"
+#include <time.h>
 
 
-	CStructEntry (const char* _Lemma = "\x0", int _MeanNum = 0) 
-	{
-		m_StartCortegeNo  = InitialStartPos;
-		m_LastCortegeNo  = InitialEndPos;
-		size_t l = strlen (_Lemma);
-		if (l < EntryStrSize - 1)
-			strcpy (m_EntryStr, _Lemma);
-		else
-		{
-			strncpy (m_EntryStr, _Lemma, EntryStrSize - 1);
-			m_EntryStr[EntryStrSize - 1] = 0;
-		};
 
-		m_MeanNum = _MeanNum; 
-		m_bSelected = true;
-	}
-
-	bool HasEmptyArticle () const  {return m_StartCortegeNo == InitialStartPos;};
-
-	bool operator==(const CStructEntry& X) const
-	{	
-		return    !strcmp (m_EntryStr, X.m_EntryStr)
-				&& (m_MeanNum == X.m_MeanNum); 
-	}
-
-	bool operator<(const CStructEntry& X) const
-	{ 
-		int i = strcmp (m_EntryStr, X.m_EntryStr);
-		return   (i < 0) 
-			||(    (i == 0)
-			&& (m_MeanNum < X.m_MeanNum)); 
-	}
-
-};	  
-
-//===========================================
 const size_t UnitCommentSize = 100;
 class TUnitComment {
 public:
@@ -93,13 +37,13 @@ public:
 
 class TRoss  : public TCortegeContainer, public TItemContainer  
 {
+protected:
 	std::string UnitsFile;
 	std::string CortegeFile;
 	std::string UnitCommentsFile;
-
-protected:
-
 	TDictConfig Config;
+
+	void BuildCorteges();
 
 public:
 
@@ -112,7 +56,6 @@ public:
 
 	TRoss ();
 	~TRoss ();
-	bool	FullLoad(const char* _RossPath);
 	void	LoadOnlyConstants(const char* _RossPath);
 	bool	Save ();
 
@@ -151,7 +94,6 @@ public:
 	// ++++++++       Словарная статья в виде кортежей ++++
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	bool			BuildCorteges();
 	void			DelCorteges (size_t start, size_t last);
 						 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -205,7 +147,7 @@ struct CSourceLine
 
 class CDictionary : public TRoss
 {
-	bool		ProcessOneArticle(std::vector<CSourceLine>& L, int start, int last, std::string& Messages);
+	void		ProcessOneArticle(std::vector<CSourceLine>& L);
 
 public:
 	
@@ -224,15 +166,14 @@ public:
 	
 
 	std::string	GetEntryStr (uint16_t EntryNo) const;
-	std::string	GetEntryStrUtf8(uint16_t EntryNo) const;
 	BYTE		GetUnitMeanNum(uint16_t EntryNo) const;
 	bool		IncludeArticle(uint16_t UnitNo, std::string Article) const;
 
-	bool		Load(const char* Path);
-	bool		ImportFromText(std::string FileName, int StartEntry,std::string& Messages);
+	void		Load(const char* Path);
 	void		SetUnitCurrentTime(uint16_t UnitNo);
 	std::string		GetUnitEditor(uint16_t UnitNo) const;
 	void		SetUnitStr(uint16_t UnitNo, const char*  UnitStr);
-	
+	void LoadAndExportDict(std::string fileName, std::string folder);
+	void ImportFromTextFile(std::string fileName, std::string folder);
 
 };	

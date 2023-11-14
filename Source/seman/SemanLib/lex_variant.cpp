@@ -203,7 +203,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
             for (long i = 0; i < W.m_WordEquals.size(); i++) {
                 UnitStr = W.m_WordEquals[i];
                 EngRusMakeLower(UnitStr);
-                UnitNo = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
+                UnitNo = GetRossHolder(Ross)->LocateUnit(convert_to_utf8(UnitStr, morphRussian).c_str(), 1);
                 if (UnitNo != ErrUnitNo) break;
             };
 
@@ -245,11 +245,12 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
         };
 
         if (UnitNo != ErrUnitNo)
-            if (!ReferenceFound)
-                for (long i = UnitNo;
-                     i < GetRoss(Ross)->GetUnitsSize() && UnitStr == GetRoss(Ross)->GetEntryStr(i); i++)
+            if (!ReferenceFound) {
+                for (long i = UnitNo; i < GetRoss(Ross)->GetUnitsSize() && GetRoss(Ross)->GetEntryStr(UnitNo) == GetRoss(Ross)->GetEntryStr(i); i++) {
                     if (GramFetAgreeWithPoses(*GetRossHolder(Ross), i, W))
                         N.AddInterp(CDictUnitInterp(GetRossHolder(Ross), Ross, i, false, PassiveForm));
+                }
+            }
 
         if (N.GetInterps().empty()
             && HasReflexiveSuffix(W.m_Lemma)

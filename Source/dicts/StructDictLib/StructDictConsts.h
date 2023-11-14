@@ -10,7 +10,6 @@ const	BYTE	MaxNumAct = 7;
 
 // ошибочный номер словарного входа 
 const	uint16_t	ErrUnitNo  = 65000;
-const	uint32_t	EntryStrSize = 40;
 
 // Исходный материал доменов
 const	BYTE	dsUnion = 'O';

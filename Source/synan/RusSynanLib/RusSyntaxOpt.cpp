@@ -104,8 +104,6 @@ void CRusSyntaxOpt::DestroyOptions() {
 
 static void BuildArticleFromUtf8String(CDictionary *piRossDict, std::string s, CTempArticle &A1) {
     A1.ReadFromUtf8String(s.c_str());
-    A1.MarkUp();
-    A1.BuildCortegeList();
 };
 
 
@@ -120,13 +118,13 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
         SynDependOnAdj = new SDatItems(_QM(ADV));
 
         CTempArticle A1(piRossDict);
-        BuildArticleFromUtf8String(piRossDict, "GF = * НАР:нар_опр", A1);
+        A1.ReadFromUtf8String("GF = * НАР:нар_опр");
 
         CTempArticle A2(piRossDict);
-        BuildArticleFromUtf8String(piRossDict, "GF1 = * X!:НАР", A2);
+        A2.ReadFromUtf8String("GF1 = * X!:НАР");
 
         CTempArticle A3(piRossDict);
-        BuildArticleFromUtf8String(piRossDict, "GF1 = * X!:ПРИЛ", A3);
+        A3.ReadFromUtf8String("GF1 = * X!:ПРИЛ");
 
 
         CTempArticle A(piRossDict);

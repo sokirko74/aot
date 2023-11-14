@@ -23,6 +23,14 @@ struct TSignatItem  {
 	};
 };
 
+
+// 1. CSignat::SignatId is stored in TCortege, 
+// 2. During parsing dictionary articles we read field values from  strings according to the order of signats in fields.json
+//    not to the order of CSignat::SignatId's.
+// 3. CSignat::SignatId can be changed only for an empty dictionary, ie CSignat::SignatId is immutable.
+// 4. One can add a new signat (to the end of the list or inside the list), create a new CSignat::SignatId for not empty dictionaries.
+
+
 class  CSignat
 {
 	//runtime

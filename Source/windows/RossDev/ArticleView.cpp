@@ -84,9 +84,6 @@ void CArticleView::OnArticleformClose()
 }
 
 
-
-
-
 void CArticleView::OnArticleviewMarkup() 
 {
 	try
@@ -99,9 +96,17 @@ void CArticleView::OnArticleviewMarkup()
 		m_FldScroll.SetScrollPos(0,TRUE);
 		parse();
 	}
+	catch (article_parse_error a)
+	{
+		ErrorMessage("Rossdev", a.what());
+	}
+	catch (CExpc a)
+	{
+		ErrorMessage("Rossdev", a.m_strCause);
+	}
 	catch (...)
 	{
-		ErrorMessage( "Rossdev", ((CArticleDoc*)GetDocument())->GetArticleErrorStr());
+		ErrorMessage( "Rossdev", "Unknown error!");
 	};
 	
 }
@@ -183,7 +188,6 @@ void CArticleView::DelField(size_t nPos)
 
 	//  updating windows
 	((CArticleDoc*)GetDocument())->Markout();
-	A.BuildCortegeList();
 
 	//  change scroll bar
 	if (!A.m_Fields.empty())

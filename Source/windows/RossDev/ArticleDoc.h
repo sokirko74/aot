@@ -31,13 +31,12 @@ public:
      	POSITION pos = GetFirstViewPosition();
 		return (CArticleView*)GetNextView( pos );
 	};
-   std::string GetArticleErrorStr() const;
+   
 
 
    BOOL    OpenArticle (uint16_t UnitNo, CRossDoc* pRossDoc);
    CDictionary* GetRoss () {return m_pRossDoc->GetRoss();}
            bool Markout ();
-		   bool AddCortegeToVector (std::vector<TCortege>& L, CRossDevTextField& F);
    virtual void SetTitle(LPCTSTR lpszTitle);
    virtual BOOL SaveModified(); 
    virtual BOOL DoFileSave();
@@ -47,7 +46,6 @@ public:
 	//{{AFX_VIRTUAL(CArticleDoc)
 	public:
 	virtual BOOL OnNewDocument();
-	virtual void Serialize(CArchive& ar);
 	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);
 	//}}AFX_VIRTUAL
 

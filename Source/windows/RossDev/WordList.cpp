@@ -363,10 +363,17 @@ void CWordList::OnClose()
 
 bool CWordList::SetArticle(uint16_t UnitNo, CString Value)
 {
-	CTempArticle A(GetRoss());
-	A.ReadFromDictionary(UnitNo, true, false);
-	A.ReadFromUtf8String(Value);
-	return A.WriteToDictionary();
+	try {
+		CTempArticle A(GetRoss());
+		A.ReadFromDictionary(UnitNo, true, false);
+		A.ReadFromUtf8String(Value);
+		A.WriteToDictionary();
+	}
+	catch (article_parse_error a) {
+		AfxMessageBox(a.what());
+		return false;
+	}
+	return true;
 };
 
 
@@ -435,6 +442,10 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 			SetCursor(UnitNo);
 			GetDocument()->SetModifiedFlag();
 		}
+	}
+	catch (CExpc e)
+	{
+		AfxMessageBox(e.m_ErrorCode);
 	}
 	catch (...)
 	{
@@ -1145,13 +1156,13 @@ void CWordList::OnArticleAppend()
 			A2.ReadFromDictionary(UnitNo, false, false);
 
 			A2.AddArticle(&A1);
-			if (!A2.WriteToDictionary())
-			{
-				AfxMessageBox("Some error has occured");
-				break;
-			}
+			A2.WriteToDictionary();
 		};
 	}
+	catch (article_parse_error a)
+	{
+		AfxMessageBox(a.what());
+	};
 	catch (...)
 	{
 		AfxMessageBox("Some error has occured");

@@ -1,0 +1,422 @@
+[
+    {
+        "actant": false,
+        "name": "EXM",
+        "order": 10,
+        "signats": [
+            {
+                "format": "D_EXM",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "CAT",
+        "order": 80,
+        "signats": [
+            {
+                "format": "D_CAT",
+                "signat_id": 0
+            }
+        ],
+        "type": 70
+    },
+    {
+        "actant": true,
+        "name": "GF",
+        "order": 100,
+        "signats": [
+            {
+                "format": "D_PART_OF_SPEECH",
+                "signat_id": 0
+            },
+            {
+                "format": "D_SYN_FUNCT D_COLON D_PHR_SPECIF",
+                "signat_id": 1
+            },
+            {
+                "format": "D_SYN_FUNCT",
+                "signat_id": 2
+            },
+            {
+                "format": "D_SYN_FUNCT D_COLON D_1",
+                "signat_id": 3
+            },
+            {
+                "format": "D_SYN_FUNCT D_COLON D_WORDFORM",
+                "signat_id": 4
+            },
+            {
+                "format": "D_SYN_FUNCT D_COLON D_GROUPS",
+                "signat_id": 5
+            },
+            {
+                "format": "D_POSITION D_PHR_SPECIF",
+                "signat_id": 6
+            },
+            {
+                "format": "D_POSITION",
+                "signat_id": 7
+            },
+            {
+                "format": "D_PART_OF_SPEECH  D_COLON D_SYN_FUNCT",
+                "signat_id": 8
+            },
+            {
+                "format": "D_POSITION D_SYN_FUNCT D_COLON D_GROUPS",
+                "signat_id": 9
+            },
+            {
+                "format": "D_POSITION D_PART_OF_SPEECH D_COLON D_SYN_FUNCT ",
+                "signat_id": 10
+            }
+        ],
+        "type": 70
+    },
+    {
+        "actant": false,
+        "name": "RESTR",
+        "order": 160,
+        "signats": [
+            {
+                "format": "D_NUMBER D_EXCL_MARK",
+                "signat_id": 0
+            },
+            {
+                "format": "D_VP_SPECIF D_EXCL_MARK ",
+                "signat_id": 1
+            }
+        ],
+        "type": 79
+    },
+    {
+        "actant": true,
+        "name": "SF",
+        "order": 170,
+        "signats": [
+            {
+                "format": "D_FIELDS D_OPN D_NUMBERS D_CLS",
+                "signat_id": 0
+            },
+            {
+                "format": "D_FIELDS D_OPN D_CLS",
+                "signat_id": 1
+            },
+            {
+                "format": "D_SEM_REL",
+                "signat_id": 2
+            },
+            {
+                "format": "D_SF",
+                "signat_id": 3
+            },
+            {
+                "format": "D_LF D_OPN D_RLE D_NUMBERS D_CLS",
+                "signat_id": 4
+            },
+            {
+                "format": "D_LF D_OPN D_RLE D_CLS",
+                "signat_id": 5
+            },
+            {
+                "format": "D_LF",
+                "signat_id": 6
+            }
+        ],
+        "type": 70
+    },
+    {
+        "actant": false,
+        "name": "VAL",
+        "order": 190,
+        "signats": [
+            {
+                "format": "D_QUES_MARK D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS ",
+                "signat_id": 0
+            },
+            {
+                "format": "D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS ",
+                "signat_id": 1
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "AUX",
+        "order": 3100,
+        "signats": [
+            {
+                "format": "D_SEM_REL D_OPN D_ACTANTS D_COMMA D_ACTANTS D_CLS",
+                "signat_id": 0
+            },
+            {
+                "format": "D_SEM_REL D_OPN D_ACTANTS D_COMMA D_RLE_PLUS D_CLS",
+                "signat_id": 1
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "LF",
+        "order": 3110,
+        "signats": [
+            {
+                "format": "D_LF  D_COLON D_PREP D_PLUS D_CASE",
+                "signat_id": 0
+            },
+            {
+                "format": "D_LF  D_COLON D_RLE D_1",
+                "signat_id": 1
+            },
+            {
+                "format": "D_LF  D_COLON D_RLE D_CASE",
+                "signat_id": 2
+            },
+            {
+                "format": "D_LF D_COLON D_RLE D_NUMBERS",
+                "signat_id": 3
+            },
+            {
+                "format": "D_LF D_COLON D_RLE_PLUS",
+                "signat_id": 4
+            },
+            {
+                "format": "D_LF D_DASH D_RLE_PLUS",
+                "signat_id": 5
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "ENG",
+        "order": 3130,
+        "signats": [
+            {
+                "format": "D_TITLE D_NUMBERS",
+                "signat_id": 0
+            },
+            {
+                "format": "D_TITLE D_NUMBERS D_PLUS D_ACTANTS",
+                "signat_id": 1
+            },
+            {
+                "format": "D_TITLE ",
+                "signat_id": 2
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "DOMAIN",
+        "order": 3140,
+        "signats": [
+            {
+                "format": "D_DOMAIN",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "SYN",
+        "order": 3170,
+        "signats": [
+            {
+                "format": "D_1",
+                "signat_id": 0
+            },
+            {
+                "format": "D_RLE_PLUS D_SLASH D_CONDIT",
+                "signat_id": 1
+            },
+            {
+                "format": "D_EXM",
+                "signat_id": 2
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": true,
+        "name": "LEX",
+        "order": 240,
+        "signats": [
+            {
+                "format": "D_RLE_PLUS",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": true,
+        "name": "SYNR",
+        "order": 200,
+        "signats": [
+            {
+                "format": "D_SYN_REL D_OPN D_SYN_ACTANTS D_COMMA  D_SYN_ACTANTS D_CLS",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "COMM",
+        "order": 3200,
+        "signats": [
+            {
+                "format": "D_EXM",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "ALG",
+        "order": 3300,
+        "signats": [
+            {
+                "format": "D_NUMBERS",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "ESF",
+        "order": 0,
+        "signats": [
+            {
+                "format": "D_FIELDS D_OPN D_NUMBERS D_CLS",
+                "signat_id": 0
+            },
+            {
+                "format": "D_FIELDS D_OPN D_CLS",
+                "signat_id": 1
+            },
+            {
+                "format": "D_SEM_REL",
+                "signat_id": 2
+            },
+            {
+                "format": "D_SF",
+                "signat_id": 3
+            },
+            {
+                "format": "D_LF D_OPN D_RLE D_NUMBERS D_CLS",
+                "signat_id": 4
+            },
+            {
+                "format": "D_LF D_OPN D_RLE D_CLS",
+                "signat_id": 5
+            },
+            {
+                "format": "D_LF",
+                "signat_id": 6
+            }
+        ],
+        "type": 70
+    },
+    {
+        "actant": false,
+        "name": "CONTENT",
+        "order": 1,
+        "signats": [
+            {
+                "format": "D_CONTAIN",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": true,
+        "name": "EGF",
+        "order": 1073815480,
+        "signats": [
+            {
+                "format": "D_FIELDS D_OPN D_NUMBERS D_CLS",
+                "signat_id": 0
+            },
+            {
+                "format": "D_FIELDS D_OPN D_CLS",
+                "signat_id": 1
+            },
+            {
+                "format": "D_PART_OF_SPEECH",
+                "signat_id": 2
+            },
+            {
+                "format": "D_SYN_FUNCT",
+                "signat_id": 3
+            },
+            {
+                "format": "D_SYN_FUNCT D_COLON D_PHR_SPECIF",
+                "signat_id": 4
+            },
+            {
+                "format": "D_SYN_FUNCT D_COLON D_1",
+                "signat_id": 5
+            },
+            {
+                "format": "D_SYN_FUNCT D_COLON D_WORDFORM",
+                "signat_id": 6
+            },
+            {
+                "format": "D_POSITION D_PHR_SPECIF",
+                "signat_id": 7
+            },
+            {
+                "format": "D_POSITION",
+                "signat_id": 8
+            }
+        ],
+        "type": 76
+    },
+    {
+        "actant": true,
+        "name": "ELEX",
+        "order": 200,
+        "signats": [
+            {
+                "format": "D_RLE_PLUS",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": false,
+        "name": "EDOMAIN",
+        "order": 0,
+        "signats": [
+            {
+                "format": "D_DOMAIN",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": true,
+        "name": "MANLEX",
+        "order": 4000,
+        "signats": [
+            {
+                "format": "D_RLE ",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    }
+]
