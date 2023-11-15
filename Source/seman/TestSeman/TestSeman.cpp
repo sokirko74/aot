@@ -193,7 +193,7 @@ nlohmann::json processText(CSemStructureBuilder& SemBuilder, bool printVisual, b
 
     }
     catch (CExpc e) {
-        PLOGE << "an exception occurred: " << e.m_strCause;
+        PLOGE << "an exception occurred: " << e.what();
         throw;
     }
     catch (...) {
@@ -260,7 +260,7 @@ int main(int argc, const char* argv[]) {
         PLOGD << "normal exit\n";
     }
     catch (CExpc e) {
-        PLOGE << e.m_strCause << "\n";
+        PLOGE << e.what() << "\n";
         return 1;
     }
     catch (...) {

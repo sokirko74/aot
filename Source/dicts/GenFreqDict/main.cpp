@@ -289,14 +289,14 @@ int  main(int argc, char **argv)
 	{
 		return mymain(argc, argv);
 	}
-	catch (CExpc e)
+	catch (std::exception e)
 	{
-		fprintf (stderr, "exception occurred: %s!\n", e.m_strCause.c_str());
+		std::cerr << "exception occurred: " << e.what() << "\n";
 		return 1;
 	}
 	catch (...)
 	{
-		fprintf (stderr, "some exception occurred!\n");
+		std::cerr << "unkown exception occurred\n";
 		return 1;
 	}
 

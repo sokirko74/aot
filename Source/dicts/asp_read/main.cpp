@@ -108,7 +108,7 @@ int main(int argc, char ** argv)
 	}
 	catch (CExpc e)
 	{
-		std::cerr << "exception occurred:" << e.m_strCause << "\n";
+		std::cerr << "exception occurred:" << e.what() << "\n";
 		return 1;
 	}
 	catch (...)

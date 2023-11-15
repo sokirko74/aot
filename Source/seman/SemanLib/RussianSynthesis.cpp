@@ -119,7 +119,7 @@ std::string SynthRecursive(const CRusSemStructure& R, int NodeNo, bool bRoot)
 		)
 	{
 		std::string UnitStr = R.GetRoss(OborRoss)->GetEntryStr(Node.GetInterp()->m_UnitNo);
-		UnitStr = convert_from_utf8(UnitStr, morphRussian);
+		UnitStr = convert_from_utf8(UnitStr.c_str(), morphRussian);
 		std::string Delim = "...";
 		int index = UnitStr.find(Delim);
 		RmlMakeLower(UnitStr,morphRussian);

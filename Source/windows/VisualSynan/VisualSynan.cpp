@@ -135,8 +135,8 @@ BOOL CVisualSynanApp::InitInstance()
 		if (!pMainFrame->LoadSyntaxByLanguage(cmdInfo.m_Language))
 			return FALSE;
 	}
-	catch (CExpc ex) {
-		AfxMessageBox(CString(ex.m_strCause.c_str()));
+	catch (CExpc e) {
+		AfxMessageBox(CString(e.what()));
 		return FALSE;
 	}
 

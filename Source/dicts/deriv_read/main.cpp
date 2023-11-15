@@ -264,9 +264,9 @@ int main(int argc, char **argv)
 		
 		return 0;
 	}
-	catch (CExpc e)
+	catch (std::exception e)
 	{
-		fprintf (stderr, "exception occurred: %s!\n", e.m_strCause.c_str());
+		fprintf (stderr, "exception occurred: %s!\n", e.what());
 		return 1;
 	}
 	catch (...)

@@ -15,6 +15,10 @@ CRossHolder::~CRossHolder()
 
 };
 
+std::string  CRossHolder::GetDictName() {
+	return m_Ross.GetDictName();
+}
+
 bool CRossHolder::OpenRossHolder(const std::string strPathName, bool bDontLoadExamples)
 {
 	m_LastUpdateTime = 1;
@@ -32,8 +36,7 @@ bool CRossHolder::OpenRossHolder(const std::string strPathName, bool bDontLoadEx
 	*q = 0;
 
 
-	if (!m_Ross.Load(RossDir))
-		return false;
+	m_Ross.Load(RossDir);
 
 	if (!bDontLoadExamples)
 		if (!m_Ross.ReadUnitComments())

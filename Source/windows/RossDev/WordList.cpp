@@ -222,7 +222,7 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 				lstrcpy(pItem->pszText, "");
 			else
 			{
-				lstrcpy(pItem->pszText, GetRoss()->GetUnits()[UnitNo].m_AuthorStr);
+				lstrcpy(pItem->pszText, GetRoss()->GetUnits()[UnitNo].GetAuthorStr().c_str());
 			}
 			break;
 		case 6:
@@ -406,13 +406,6 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 					}
 					else
 					{
-						if (Lemma.GetLength() > EntryStrSize)
-						{
-							CString Q;
-							Q.Format("Cannot add the entry \"%s\", because it is too long", Lemma);
-							AfxMessageBox(Q);
-							return false;
-						};
 						UnitNo = GetRoss()->InsertUnit((const char*)Lemma, 1);
 						GetRoss()->GetUnits()[UnitNo].m_bSelected = IsFiltered();
 						GetRoss()->SetUnitAuthor(UnitNo, (const char*)((CRossDoc*)GetDocument())->m_Author);
@@ -420,14 +413,6 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 						SetArticle(UnitNo, Article);
 						Update();
 					};
-			};
-
-			if (TextEntry.m_UnitStr.GetLength() > EntryStrSize)
-			{
-				CString Q;
-				Q.Format("Cannot add the entry \"%s\", because it is too long", TextEntry.m_UnitStr);
-				AfxMessageBox(Q);
-				return false;
 			};
 
 			BYTE MeanNum = atoi(TextEntry.m_MeanNum);
@@ -445,7 +430,7 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 	}
 	catch (CExpc e)
 	{
-		AfxMessageBox(e.m_ErrorCode);
+		AfxMessageBox(e.what());
 	}
 	catch (...)
 	{
@@ -791,9 +776,9 @@ void CWordList::OnChangeTitle()
 		return;
 	};
 
-	char s[EntryStrSize];
+	char s[1000];
 	strcpy(s, UnitStr);
-	if (!InputBox("Edit entry name:", s, EntryStrSize))
+	if (!InputBox("Edit entry name:", s, 1000))
 		return;
 	if (!strcmp(s, UnitStr)) return;
 
@@ -842,7 +827,7 @@ inline bool GlobalOpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
 			((CHierarchyDoc*)pDocument)->OpenHierarchy(pRossDoc, Type);
 		}
 		catch (CExpc e) {
-			AfxMessageBox(e.m_strCause.c_str());
+			AfxMessageBox(e.what());
 		}
 		return true;
 	}
@@ -1162,12 +1147,12 @@ void CWordList::OnArticleAppend()
 	catch (article_parse_error a)
 	{
 		AfxMessageBox(a.what());
-	};
+	}
 	catch (...)
 	{
 		AfxMessageBox("Some error has occured");
 	};
-	//GlobalOpenReport (S, "Добавление подстатей");
+	
 };
 
 
@@ -1246,7 +1231,7 @@ void CWordList::OnSelectByAuthor()
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 	{
 		size_t u = GetUnitNo(i);
-		CString Author = GetRoss()->GetUnits()[u].m_AuthorStr;
+		CString Author = GetRoss()->GetUnits()[u].GetAuthorStr().c_str();
 		if (Author == CString(s))
 			GetRoss()->GetUnits()[u].m_bSelected = true;
 

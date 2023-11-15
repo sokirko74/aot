@@ -158,7 +158,7 @@ BOOL CRossDevApp::InitInstance()
 		m_TclInterp.RunTcl(Format("set env(GRAPHLET_DIR) \"%s/Bin/Lib/graphlet\"", GetRmlVariable().c_str()));
 	}
 	catch (CExpc e) {
-		AfxMessageBox(e.m_strCause.c_str());
+		AfxMessageBox(e.what());
 	}
 
 	// CG: The following block was added by the Splash Screen component.
@@ -310,7 +310,7 @@ BOOL CRossDevApp::InitInstance()
 			OnSemAn();
 	}
 	catch (CExpc e) {
-		AfxMessageBox(e.m_strCause.c_str());
+		AfxMessageBox(e.what());
 	}
 
 	return TRUE;
@@ -500,9 +500,9 @@ void CRossDevApp::OnSemAn()
 		// открывает все россы	
 		View->OpenAllRosses();
 	}
-	catch (CExpc& C)
+	catch (CExpc& c)
 	{
-		AfxMessageBox(C.m_strCause.c_str());
+		AfxMessageBox(c.what());
 		delete pDocument;
 		return;
 

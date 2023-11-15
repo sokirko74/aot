@@ -159,7 +159,7 @@ int main(int argc, char** argv) {
 	}
 	catch (CExpc& e)
 	{
-		PLOGE << "test = " << TestName << " : " << e.m_strCause;
+		PLOGE << "test = " << TestName << " : " << e.what();
 		return 1;
 	}
 	catch (std::exception& e)

@@ -290,7 +290,7 @@ jobject GetMorphInfo(JNIEnv *env, jclass clazz, jni_dictionary& dic, std::string
 	}
 	return wordresult;
 //	}catch(CExpc e){
-//		char* err=str_compose("C++ exception: CExpc: %s",e.m_strCause.c_str());
+//		char* err=str_compose("C++ exception: CExpc: %s",e.what().c_str());
 //		throwEx(env, err);
 		//paradigmset is a local ref, no need to release.
 		//jbaseForm is a local ref, no need to release.
@@ -396,7 +396,7 @@ JNIEXPORT jobject JNICALL Java_ru_aot_morph_JavaMorphAPI_lookupWordImpl
 		}
 		return GetMorphInfo(env, clazz, dic, s);
 	}catch(CExpc& e){
-		char* err=str_compose("C++ exception: CExpc: %s",e.m_strCause.c_str());
+		char* err=str_compose("C++ exception: CExpc: %s",e.what().c_str());
 		throwEx(env, err);
 		if(chars!=0){free(chars);chars=0;}
 		if(bytes!=NULL){env->ReleaseByteArrayElements(word,bytes,JNI_ABORT);bytes=NULL;}
@@ -484,7 +484,7 @@ JNIEXPORT void JNICALL Java_ru_aot_morph_JavaMorphAPI_initImpl
 		inited=true;
 		return;//ok
 	}catch(CExpc& e){
-		const char* ca=e.m_strCause.c_str();
+		const char* ca=e.what().c_str();
 		char* err=str_compose("C++ exception: CExpc: %s",ca);
 		throwEx(env, err);
 		Java_ru_aot_morph_JavaMorphAPI_closeImpl(env,clazz);
@@ -526,7 +526,7 @@ JNIEXPORT void JNICALL Java_ru_aot_morph_JavaMorphAPI_closeImpl
 		inited=false;
 		return;//ok
 	}catch(CExpc& e){
-		char* err=str_compose("C++ exception: CExpc: %s",e.m_strCause.c_str());
+		char* err=str_compose("C++ exception: CExpc: %s",e.what().c_str());
 		throwEx(env, err);
 		return;
 	}catch(int e){

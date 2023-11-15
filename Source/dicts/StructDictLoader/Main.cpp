@@ -43,7 +43,7 @@ int main(int argc, const char** argv)
 	}
 	catch (CExpc c)
 	{
-		LOGE << c.m_strCause << std::endl;
+		LOGE << c.what() << std::endl;
 	}
 	catch (article_parse_error c)
 	{

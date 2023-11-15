@@ -186,7 +186,7 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		SendReply(req, HTTP_OK, outBuf);
 	}
 	catch (CExpc e) {
-		std::string error = Format("Error: %s, Request: %s\n", e.m_strCause.c_str(), uri);
+		std::string error = Format("Error: %s, Request: %s\n", e.what().c_str(), uri);
 		TRMLHttpServer::LogMessage(error.c_str());
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;

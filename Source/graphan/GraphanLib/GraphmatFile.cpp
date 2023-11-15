@@ -99,10 +99,12 @@ bool CGraphmatFile::LoadDicts ()
 				Path = GetRegistryString("Software\\Dialing\\Obor\\DictPath").c_str();
 			else
 				Path = GetRegistryString("Software\\Dialing\\GerObor\\DictPath").c_str();
-			if (!pDicts->m_pOborDictionary.m_Pointer->Load(Path.c_str() ) )
-			{
+			try {
+				pDicts->m_pOborDictionary.m_Pointer->Load(Path.c_str());
+			}
+			catch (std::exception e) {
 				delete pDicts;
-				m_LastError = "Cannot load oborots";
+				m_LastError = "Cannot load oborots " + std::string(e.what());
 				return false;
 			};
 
@@ -123,9 +125,9 @@ bool CGraphmatFile::LoadDicts ()
 		m_pDicts = pDicts;
 		return true;
 	}
-	catch (CExpc& C)
+	catch (CExpc& c)
 	{
-		m_LastError = C.m_strCause;
+		m_LastError = c.what();
 		return false;
 	}
 	catch (...)

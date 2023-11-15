@@ -87,7 +87,7 @@ int main()
 		std::cout << "Loaded Dictionary at " << tt << " ticks" << std::endl;
 	}
 	catch (CExpc e) {
-		std::cerr << "An error occured" << e.m_strCause << std::endl;
+		std::cerr << "An error occured" << e.what() << std::endl;
 		return 1;
 	}
 	catch(...){

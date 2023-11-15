@@ -31,7 +31,7 @@ int main(int argc, const char **argv) {
         Holder.LoadLemmatizer(WorkGrammar.m_Language);
     }
     catch (CExpc e) {
-        std::cerr << e.m_strCause << "\n";
+        std::cerr << e.what() << "\n";
         return 1;
     }
 

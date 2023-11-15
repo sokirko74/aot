@@ -206,7 +206,7 @@ try
 }
 catch (CExpc e)
 {
-	fprintf (stderr, "exception occurred: %s!\n", e.m_strCause.c_str());
+	fprintf (stderr, "exception occurred: %s!\n", e.what().c_str());
 	return 1;
 }
 catch (...)

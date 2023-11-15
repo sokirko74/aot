@@ -137,7 +137,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 		return true;
 	}
 	catch (CExpc e) {
-		std::cerr << e.m_strCause << "\n";
+		std::cerr << e.what() << "\n";
 		return false;	}
 	catch (...)
 	{

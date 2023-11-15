@@ -96,13 +96,9 @@ void CArticleView::OnArticleviewMarkup()
 		m_FldScroll.SetScrollPos(0,TRUE);
 		parse();
 	}
-	catch (article_parse_error a)
+	catch (std::exception a)
 	{
 		ErrorMessage("Rossdev", a.what());
-	}
-	catch (CExpc a)
-	{
-		ErrorMessage("Rossdev", a.m_strCause);
 	}
 	catch (...)
 	{

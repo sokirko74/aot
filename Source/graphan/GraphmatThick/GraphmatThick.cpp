@@ -37,9 +37,9 @@ int main(int argc, const char* argv[])
 		std::cout  << "Found Units:" <<  Graphan.GetUnits().size() << "\n";
 		return 0;
 	}
-	catch (CExpc C)
+	catch (CExpc c)
 	{
-		std::cerr << "An exception occurred:" << C.m_strCause << "\n";
+		std::cerr << "An exception occurred:" << c.what() << "\n";
 	}
 	catch (...)
 	{

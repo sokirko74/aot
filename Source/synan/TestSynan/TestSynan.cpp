@@ -258,7 +258,7 @@ int main(int argc, const char** argv) {
         }
     }
     catch (CExpc e) {
-        std::cerr << e.m_strCause << "\n";
+        std::cerr << e.what() << "\n";
         return 1;
     }
     catch (...) {

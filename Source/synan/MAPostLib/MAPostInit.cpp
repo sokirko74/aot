@@ -110,9 +110,9 @@ bool CMAPost::Init(const CLemmatizer *RusLemmatizer, const CAgramtab *RusGramTab
 
 
     }
-    catch(CExpc c)
+    catch(std::exception c)
     {
-        ErrorMessage("MAPOST", Format("%s", c.m_strCause.c_str()).c_str());
+        LOGE << c.what();
         return false;
     }
     catch(...)

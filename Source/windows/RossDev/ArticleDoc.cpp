@@ -228,9 +228,9 @@ bool CArticleDoc::Markout()
 	}
 	catch (article_parse_error a)
 	{
-		AfxMessageBox(a.what())
+		AfxMessageBox(a.what());
 		return false;
-	};
+	}
 	catch (...)
 	{
 		return false;

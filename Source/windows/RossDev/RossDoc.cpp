@@ -453,17 +453,7 @@ CString CRossDoc::SerializeInner(CArchive& ar)
 		GetRossHolder()->m_DictPath = DictFileName;
 		GetRossHolder()->m_LastUpdateTime =  Trans->m_LastUpdateTime;
 
-		try
-		{
-			GetRossHolder()->OpenRossHolder(DictFileName.c_str(), false);
-		}
-		catch(...)
-		{
-			std::string error  = "Cannot load "+DictFileName+":"+GetRoss()->m_LastError;
-			TRACE (error.c_str());
-			throw CExpc( error );
-			return "";
-		};
+		GetRossHolder()->OpenRossHolder(DictFileName.c_str(), false);
 
 		if (   !m_ReadOnly && !m_DoNotLock	)
 			CreateLockFile(GetLockFileName().c_str());
@@ -531,7 +521,7 @@ BOOL CRossDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	}
 	catch (CExpc c)
 	{
-       AfxMessageBox  (c.m_strCause.c_str() );
+       AfxMessageBox  (c.what());
 	   return FALSE;
 
 	};

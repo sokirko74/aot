@@ -36,7 +36,7 @@ int	main(int argc, const char **argv) {
 	}
 	catch (CExpc c)
 	{
-		std::cerr << c.m_strCause << "\n";
+		std::cerr << c.what() << "\n";
 		return 1;
 	}
 	catch(...)

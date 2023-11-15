@@ -504,7 +504,7 @@ void CMorphwizardView::OnAdd()
 
 	}
 	catch (CExpc& e) {
-		echo(e.m_strCause.c_str());
+		echo(e.what().c_str());
 	}
 	catch (...) {
 		echo("error");
@@ -533,7 +533,7 @@ bool CMorphwizardView::OpenExistingParadigm(lemma_iterator_t it, bool bRunAccent
 	}
 	catch (CExpc& e)
 	{
-		echo(e.m_strCause.c_str());
+		echo(e.what().c_str());
 	}
 	catch (...)
 	{

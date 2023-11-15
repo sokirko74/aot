@@ -96,8 +96,8 @@ int main(int argc, char **argv) {
         inp.close();
         return 0;
     }
-    catch (CExpc e) {
-        fprintf(stderr, "exception occurred: %s!\n", e.m_strCause.c_str());
+    catch (std::exception e) {
+        fprintf(stderr, "exception occurred: %s!\n", e.what());
         return 1;
     }
     catch (...) {

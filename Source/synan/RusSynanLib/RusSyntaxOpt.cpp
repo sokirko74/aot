@@ -131,31 +131,23 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
 
         for (i = 0; i < iSize; i++) {
             A.ReadFromDictionary(i, false, true);
-
-            const std::string &DebugWord = piRossDict->m_Units[i].m_EntryStr;
-
+            const std::string &word_s8 = _R(piRossDict->m_Units[i].GetEntryStr());
             if (A1.IsPartOf(&A, true)) {
-                std::string dat_item = _R(piRossDict->m_Units[i].m_EntryStr);
-                AdvAdj->m_vectorDatItems.insert(dat_item);
+                AdvAdj->m_vectorDatItems.insert(word_s8);
             }
 
             if (A2.IsPartOf(&A, true)) {
-                std::string dat_item = _R(piRossDict->m_Units[i].m_EntryStr);
-                SynDependOnAdv->m_vectorDatItems.insert(dat_item);
+                SynDependOnAdv->m_vectorDatItems.insert(word_s8);
             }
 
             if (A3.IsPartOf(&A, true)) {
-                std::string dat_item = _R(piRossDict->m_Units[i].m_EntryStr);
-                SynDependOnAdj->m_vectorDatItems.insert(dat_item);
+                SynDependOnAdj->m_vectorDatItems.insert(word_s8);
             }
         }
     }
     catch (...) {
-        char strMsg[200];
-        strcpy(strMsg, "Problems with ROSS, word : \"");
-        strcat(strMsg, piRossDict->m_Units[i].m_EntryStr);
-        strcat(strMsg, "\"");
-        OutputErrorString(strMsg);
+        std::string m = "Problems with ROSS, word : " + piRossDict->m_Units[i].GetEntryStr();
+        OutputErrorString(m);
     }
 }
 
@@ -173,8 +165,7 @@ void CRusSyntaxOpt::InitOptionsLanguageSpecific() {
     //loading ross
     CDictionary piRossDict;
     std::string strPath = GetRegistryString(g_strRegRossDicPath);
-    if (!piRossDict.Load(strPath.c_str()))
-        throw CExpc(Format("cannot load Ross %s", strPath.c_str()));
+    piRossDict.Load(strPath.c_str());
     LoadFromRoss(&piRossDict);
     std::string Path = GetSyntaxFilePath();
     ReadListFile(Path + "comp_adv.dat", m_CompAdvList);

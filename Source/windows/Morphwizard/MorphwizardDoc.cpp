@@ -67,7 +67,7 @@ BOOL CMorphwizardDoc::DoFileSave()
 	}
 	catch(CExpc e)
 	{
-		AfxMessageBox(GetWizard()->FromRMLEncoding (e.m_strCause).c_str());
+		AfxMessageBox(GetWizard()->FromRMLEncoding (e.what()).c_str());
 		return FALSE;
 	}
 	return TRUE;

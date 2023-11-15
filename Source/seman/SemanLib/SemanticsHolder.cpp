@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "dicts/StructDictLib/TempArticle.h"
 #include "SemanticsHolder.h"
 
 
@@ -737,7 +738,7 @@ bool  CSemanticsHolder::BuildOborottos()
 			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ВВОДН", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusIntrExpr = true;
 
-			if (GetRoss(OborRoss)->IncludesArticle(UnitNo, A))
+			if (GetRoss(OborRoss)->IncludesArticle(UnitNo, &A))
 				O.m_bRusNegOborAdverbial = true;
 
 			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "НАР", "D_PART_OF_SPEECH", 0, 0))

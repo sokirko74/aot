@@ -829,7 +829,7 @@ void CDictionary::ProcessOneArticle(std::vector<CSourceLine>& L)
 	}
 	catch (CExpc& e)
 	{
-		throw article_parse_error(e.m_strCause, L[0].m_SourceLineNo);
+		throw article_parse_error(e.what(), L[0].m_SourceLineNo);
 	}
 };
 
