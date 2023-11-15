@@ -264,7 +264,7 @@ void CArticleDoc::SetTitle(LPCTSTR lpszTitle)
 	char s[10];
 	sprintf(s, "%i", GetRoss()->GetUnitMeanNum(m_UnitNo));
 	S += CString(s);
-	S = CString(m_pRossDoc->GetRossHolder()->m_DictName.c_str()) + ":   " + S;
+	S = CString(m_pRossDoc->GetRossHolder()->GetDictName().c_str()) + ":   " + S;
 	CDocument::SetTitle(S);
 }
 

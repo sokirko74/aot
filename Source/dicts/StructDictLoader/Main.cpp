@@ -28,8 +28,8 @@ int main(int argc, const char** argv)
 	try {
 		if (action == "from_txt")
 		{
-			auto inp = args.Retrieve("input-file");
-			Dict.ImportFromTextFile(inp, args.Retrieve("output-ross-folder"));
+			Dict.LoadDictScheme(args.Retrieve("output-ross-folder"));
+			Dict.ImportFromTextFile(args.Retrieve("input-file"));
 			Dict.Save();
 		}
 		else if (action == "to_txt")

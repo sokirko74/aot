@@ -4,7 +4,7 @@
 
 CRossHolder::CRossHolder(CTranslatorHolder* TranslatorHolder)
 {
-	m_DictName = "unknown";
+	GetDictName() = "unknown";
 	m_LastUpdateTime = 0;
 	m_bOwnDictionary = true;
 	m_TranslatorHolder = TranslatorHolder;
@@ -40,7 +40,7 @@ bool CRossHolder::OpenRossHolder(const std::string strPathName, bool bDontLoadEx
 			return false;
 
 	InitConsts();
-	m_DictName = m_Ross.m_DictName;
+	GetDictName() = m_Ross.GetDictName();
 	return true;
 };
 

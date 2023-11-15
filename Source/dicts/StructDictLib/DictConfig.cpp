@@ -17,6 +17,7 @@ void TDictConfig::ReadConfig(std::string folder) {
 	MaxMeanNum = config.value("MaxMeanNum", 7);
 	assert(1 <= MaxMeanNum < 15);
 	DictName = config.at("DictName");
+	DictFolder = folder;
 	
 
 }

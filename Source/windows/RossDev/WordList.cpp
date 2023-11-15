@@ -470,7 +470,7 @@ void CWordList::OnWordlistAdd()
 
 void PrintExportHeader(const CWordList& Parent, FILE* fp)
 {
-	fprintf(fp, "//Export dictionary %s\r\n", Parent.GetRoss()->m_DictName.c_str());
+	fprintf(fp, "//Export dictionary %s\r\n", Parent.GetRoss()->GetDictName().c_str());
 	fprintf(fp, "//Date = %s\r\n", CTime::GetCurrentTime().Format("%A, %B %d, %Y"));
 	fprintf(fp, "//Records count = %i\r\n", Parent.GetUnitsSize());
 	fprintf(fp, "//Filtered = %s\r\n\r\n", (Parent.IsFiltered() ? "yes" : "no"));
@@ -1526,14 +1526,14 @@ bool UnlockAllDicts()
 			while (pView->GetDocument()->m_ReadOnly)
 			{
 				CString S;
-				S.Format("The dictionary %s is locked. Delete lock file !", pView->GetDocument()->GetRossHolder()->m_DictName.c_str());
+				S.Format("The dictionary %s is locked. Delete lock file !", pView->GetDocument()->GetRossHolder()->GetDictName().c_str());
 				if (i == 1)
 					AfxMessageBox(S);
 
 				pView->OnReload();
 				if (i == 1)
 				{
-					S.Format("The dictionary %s is locked. Exit from the procedure!", pView->GetDocument()->GetRossHolder()->m_DictName.c_str());
+					S.Format("The dictionary %s is locked. Exit from the procedure!", pView->GetDocument()->GetRossHolder()->GetDictName().c_str());
 					return false;
 				};
 				i++;
@@ -1667,7 +1667,7 @@ void CWordList::OnAllDictEntries()
 		for (long i = 0; i < AllEntries.size(); i++)
 		{
 			Result += Format("%-40s %s %i\n", AllEntries[i].m_UnitStr.c_str(),
-				AllEntries[i].m_Owner->GetDocument()->GetRossHolder()->m_DictName.c_str(),
+				AllEntries[i].m_Owner->GetDocument()->GetRossHolder()->GetDictName().c_str(),
 				AllEntries[i].m_MeanNum);
 
 		};

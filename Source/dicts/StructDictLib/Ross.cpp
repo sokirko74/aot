@@ -32,6 +32,14 @@ TRoss::~TRoss()
 	ClearCorteges();
 }
 
+const std::string& TRoss::GetDictName() const {
+	return Config.DictName;
+}
+
+const std::string& TRoss::GetDictFolder() const {
+	return Config.DictFolder;
+}
+
 void MakePathAndCheck(const std::string path, const std::string fileName, std::string& fullPath) {
     fullPath = MakePath(path, fileName);
     if (!FileExists(fullPath.c_str())) {
@@ -39,48 +47,41 @@ void MakePathAndCheck(const std::string path, const std::string fileName, std::s
     }
 }
 
+std::string TRoss::GetCortegeFilePath() const {
+	return MakePath(GetDictFolder(), "cortege.bin");
+}
 
-void TRoss::LoadDictScheme(const char* _RossPath)
+std::string TRoss::GetDomItemsFilePath() const {
+	return MakePath(GetDictFolder(), "domitems.tsv");
+}
+
+std::string TRoss::GetUnitsFilePath() const {
+	return MakePath(GetDictFolder(), "units.bin");
+}
+
+std::string TRoss::GetCommentsFilePath() const {
+	return MakePath(GetDictFolder(), "comments.bin");
+}
+
+void TRoss::LoadDictScheme(std::string folder)
 {
-	RossPath = _RossPath;
-	Config.ReadConfig(RossPath);
-	MakePathAndCheck(RossPath, "domitems.tsv", DomItemsTextFile);
-	MakePathAndCheck(RossPath, "domains.json", DomensFile);
-	MakePathAndCheck(RossPath, "fields.json", FieldsFile);
+	Config.ReadConfig(folder);
+	BuildDomens(MakePath(folder, "domains.json"));
+	BuildFields(MakePath(folder, "fields.json"));
 
-
-	{
-		char LastReadLine[1000];
-		if (!BuildDomens(LastReadLine))
-		{
-            throw CExpc(" Cannot build domens: the last read line=%s", LastReadLine);
-		}
-	};
-
-	if (!BuildDomItems())
-	{
-		throw CExpc("Cannot build domitems");
-	};
-
-	BuildFields();
-	CortegeFile = MakePath(RossPath, "cortege.bin");
-	UnitsFile = MakePath(RossPath, "units.bin");
-	UnitCommentsFile = MakePath(RossPath, "comments.bin");
+	BuildDomItems(GetDomItemsFilePath());
 };
 
 
 bool  TRoss::Save()
 {
 	if (m_bShouldSaveComments)
-		WriteVector<TUnitComment>(UnitCommentsFile, m_UnitComments);
+		WriteVector<TUnitComment>(GetCommentsFilePath(), m_UnitComments);
 
-	WriteCorteges(CortegeFile.c_str());
-	WriteVector<CStructEntry>(UnitsFile, m_Units);
-	WriteDomItems();
-	WriteFields();
-	WriteDomens();
+	WriteCorteges(GetCortegeFilePath().c_str());
+	WriteVector<CStructEntry>(GetUnitsFilePath(), m_Units);
+	WriteDomItems(GetDomItemsFilePath());
 	return true;
-
 };
 
 
@@ -119,7 +120,7 @@ const char* TRoss::GetRedactFieldName() const
 
 void   TRoss::BuildUnits() {
 	ClearUnits();
-	ReadVector<CStructEntry>(UnitsFile, m_Units);
+	ReadVector<CStructEntry>(GetUnitsFilePath(), m_Units);
 }
 
 
@@ -276,9 +277,7 @@ inline size_t restore_from_bytes(TUnitComment& i, const BYTE* buf)
 bool   TRoss::ReadUnitComments()
 {
 	m_UnitComments.clear();
-	UnitCommentsFile[0] = 0;
-	MakePathAndCheck(RossPath, "comments.bin", UnitCommentsFile);
-	ReadVector<TUnitComment>(UnitCommentsFile, m_UnitComments);
+	ReadVector<TUnitComment>(GetCommentsFilePath(), m_UnitComments);
 	sort(m_UnitComments.begin(), m_UnitComments.end());
 	assert(m_UnitComments.size() == m_Units.size());
 	m_bShouldSaveComments = true;
@@ -288,46 +287,37 @@ bool   TRoss::ReadUnitComments()
 
 uint16_t    TRoss::InsertUnitComment(uint16_t EntryId)
 {
-	try {
-		TUnitComment C;
-		C.m_EntryId = EntryId;
-		std::vector<TUnitComment>::iterator Ic = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), C);
-		uint16_t No = Ic - m_UnitComments.begin();
-		m_UnitComments.insert(Ic, C);
-		return No;
-	}
-	catch (...)
-	{
-		ErrorMessage("Error in inserting one UnitComment");
-		return 0;
-	};
+	TUnitComment C;
+	C.m_EntryId = EntryId;
+	std::vector<TUnitComment>::iterator Ic = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), C);
+	uint16_t No = Ic - m_UnitComments.begin();
+	m_UnitComments.insert(Ic, C);
+	return No;
 };
 
 
 TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)
 {
-	std::vector<TUnitComment>::iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
-	assert((It != m_UnitComments.end())
-		&& (It->m_EntryId == EntryId)
-	);
-	return &(*It);
+	auto it = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
+	if ((it == m_UnitComments.end()) || (it->m_EntryId != EntryId))
+		throw CExpc("cannot find unit comment by entry id = %i", EntryId);
+	return &(*it);
 };
 
 
 const TUnitComment* TRoss::GetCommentsByUnitId(uint16_t EntryId)   const
 {
-	std::vector<TUnitComment>::const_iterator It = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
-	assert((It != m_UnitComments.end())
-		&& (It->m_EntryId == EntryId)
-	);
-	return &(*It);
+	auto it = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(EntryId));
+	if ((it == m_UnitComments.end()) || (it->m_EntryId != EntryId))
+		throw CExpc("cannot find unit comment by entry id = %i", EntryId);
+	return &(*it);
 };
 
 
 void   TRoss::BuildCorteges()
 {
 	ClearCorteges();
-	ReadCorteges(CortegeFile.c_str());
+	ReadCorteges(GetCortegeFilePath().c_str());
 }
 
 
@@ -542,8 +532,6 @@ void CDictionary::Load(const char* Path)
 		throw CExpc("cannot load ross by empty path");
 	}
 	LoadDictScheme(Path);
-	MakePathAndCheck(RossPath, "cortege.bin", CortegeFile);
-	MakePathAndCheck(RossPath, "units.bin", UnitsFile);
 	BuildUnits();
 	BuildCorteges();
 };
@@ -575,46 +563,26 @@ tm Str2Tm(std::string TimeStr)
 
 void TRoss::SetUnitModifTimeStr(uint16_t UnitNo, const char* TimeStr)
 {
-	try {
-		TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
-		C->modif_tm = Str2Tm(TimeStr);
-	}
-	catch (...)
-	{
-		::ErrorMessage("StructDict", "Error in setting UnitComments");
-	};
+	TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
+	C->modif_tm = Str2Tm(TimeStr);
 }
 
 void TRoss::SetUnitEditor(uint16_t UnitNo, const char* Editor)
 {
-	try
-	{
-		TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
-		strcpy(C->Editor, Editor);
-	}
-	catch (...)
-	{
-		::ErrorMessage("StructDict", "Error in setting UnitEditor");
-	};
+	TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
+	strcpy(C->Editor, Editor);
 }
 
 std::string TRoss::GetUnitModifTimeStr(uint16_t UnitNo) const
 {
-	try {
-		char tmpbuf[128];
-		const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
-		int year = C->modif_tm.tm_year;
-		if (year > 100)
-			year -= 100;
-		sprintf(tmpbuf, "%i/%i/%i %i:%i:%i", C->modif_tm.tm_mday, C->modif_tm.tm_mon + 1, year,
-			C->modif_tm.tm_hour, C->modif_tm.tm_min, C->modif_tm.tm_sec);
-		return tmpbuf;
-	}
-	catch (...)
-	{
-		ErrorMessage("Error in getting UnitComments");
-		return "";
-	};
+	char tmpbuf[128];
+	const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
+	int year = C->modif_tm.tm_year;
+	if (year > 100)
+		year -= 100;
+	sprintf(tmpbuf, "%i/%i/%i %i:%i:%i", C->modif_tm.tm_mday, C->modif_tm.tm_mon + 1, year,
+		C->modif_tm.tm_hour, C->modif_tm.tm_min, C->modif_tm.tm_sec);
+	return tmpbuf;
 }
 
 std::string TRoss::GetUnitTextHeader(uint16_t UnitNo) const
@@ -938,31 +906,21 @@ void CDictionary::SetUnitCurrentTime(uint16_t UnitNo)
 
 std::string CDictionary::GetUnitEditor(uint16_t UnitNo) const
 {
-	try
-	{
-		const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
-		return C->Editor;
-	}
-	catch (...)
-	{
-		ErrorMessage("Error in setting UnitEditor");
-	};
-	return "";
+	const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
+	return C->Editor;
 }
 
 void  CDictionary::SetUnitStr(uint16_t UnitNo, const char* UnitStr)
 {
 	m_Units[UnitNo].SetEntryStr(UnitStr);
-
 	sort(m_Units.begin(), m_Units.end());
 }
 
-void CDictionary::ImportFromTextFile(std::string fileName, std::string folder) {
+void CDictionary::ImportFromTextFile(std::string fileName) {
 	if (!FileExists(fileName.c_str()))
 	{
 		throw CExpc("Cannot read %s", fileName.c_str());
 	};
-	LoadDictScheme(folder.c_str());
 	m_bShouldSaveComments = true;
 
 	auto articles = get_articles_from_file(fileName);

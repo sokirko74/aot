@@ -42,16 +42,19 @@ class TRoss  : public TCortegeContainer, public TItemContainer
 	bool	ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSignat& Sgn);
 
 protected:
-	std::string UnitsFile;
-	std::string CortegeFile;
-	std::string UnitCommentsFile;
 	TDictConfig Config;
 
 	void BuildCorteges();
 
+	std::string GetCortegeFilePath() const ;
+	std::string GetDomItemsFilePath() const;
+	std::string GetUnitsFilePath() const;
+	std::string GetCommentsFilePath() const;
+
 public:
 
-	std::string					m_DictName;
+	const std::string& GetDictName() const;
+	const std::string& GetDictFolder() const;
 	
 	std::vector<CStructEntry>	m_Units;
 	std::vector<TUnitComment>	m_UnitComments;
@@ -60,7 +63,7 @@ public:
 
 	TRoss ();
 	~TRoss ();
-	void	LoadDictScheme(const char* _RossPath);
+	void	LoadDictScheme(std::string folder);
 	bool	Save ();
 
 
@@ -156,7 +159,9 @@ public:
 	std::vector<CStructEntry>& GetUnits();
 
 	CDictionary();
-	
+	void LoadAndExportDict(std::string fileName, std::string folder);
+	void ImportFromTextFile(std::string fileName);
+
 	bool		IsEmptyArticle(uint16_t UnitNo) const;
 	int			GetUnitStartPos(uint16_t UnitNo) const;
 	int			GetUnitEndPos(uint16_t UnitNo) const;
@@ -175,7 +180,5 @@ public:
 	void		SetUnitCurrentTime(uint16_t UnitNo);
 	std::string		GetUnitEditor(uint16_t UnitNo) const;
 	void		SetUnitStr(uint16_t UnitNo, const char*  UnitStr);
-	void LoadAndExportDict(std::string fileName, std::string folder);
-	void ImportFromTextFile(std::string fileName, std::string folder);
 
 };	

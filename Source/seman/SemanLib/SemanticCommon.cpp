@@ -874,7 +874,7 @@ std::string   CSemanticStructure::InterpToStr(std::vector<CDictUnitInterp>::cons
 	const CDictionary* Ross = GetRoss(I->m_DictType);
 
 	std::string Result = Format("%s: %s %i",
-		Ross->m_DictName.c_str(),
+		Ross->GetDictName().c_str(),
 		Ross->GetEntryStr(I->m_UnitNo).c_str(),
 		Ross->GetUnitMeanNum(I->m_UnitNo));
 
@@ -892,7 +892,7 @@ std::string   CSemanticStructure::OpenCollocInterpToStr(const COpenCollocInterp&
 	if (I.m_CollocSource == RossType)
 	{
 		S = Format("%s: %s%i",
-			GetRoss(I.GetRossInterp().m_DictType)->m_DictName.c_str(),
+			GetRoss(I.GetRossInterp().m_DictType)->GetDictName().c_str(),
 			GetRoss(I.GetRossInterp().m_DictType)->GetEntryStr(I.GetRossInterp().m_UnitNo).c_str(),
 			GetRoss(I.GetRossInterp().m_DictType)->GetUnitMeanNum(I.GetRossInterp().m_UnitNo));
 
@@ -931,7 +931,7 @@ std::string CSemanticStructure::GetTxtGraph()
 			}
 			else
 			{
-				std::string RossName = m_pData->GetRoss(GetNode(i).GetType())->m_DictName;
+				std::string RossName = m_pData->GetRoss(GetNode(i).GetType())->GetDictName();
 				int MeanNum = -1;
 
 				if (GetNode(i).GetUnitNo() != ErrUnitNo)

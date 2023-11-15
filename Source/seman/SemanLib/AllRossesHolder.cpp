@@ -194,37 +194,37 @@ DictTypeEnum CAllRossesHolder::GetTypeByRossHolder (const CRossHolder* pHolder) 
 
 DictTypeEnum CAllRossesHolder::GetTypeByStr (std::string DictName)
 {
-	if (DictName == m_RossDoc.m_DictName)
+	if (DictName == m_RossDoc.GetDictName())
 		return Ross;
 	else
-	if (DictName == m_TimeRossDoc.m_DictName)
+	if (DictName == m_TimeRossDoc.GetDictName())
 		return TimeRoss;
 	else
-	if (DictName == m_RusOborDoc.m_DictName)
+	if (DictName == m_RusOborDoc.GetDictName())
 		return OborRoss;
 	else
-	if (DictName == m_RusCollocsDoc.m_DictName)
+	if (DictName == m_RusCollocsDoc.GetDictName())
 		return CollocRoss;
 	else
-	if (DictName == m_EngRossDoc.m_DictName)
+	if (DictName == m_EngRossDoc.GetDictName())
 		return Aoss;
 	else
-	if (DictName == m_EngCollocsRossDoc.m_DictName)
+	if (DictName == m_EngCollocsRossDoc.GetDictName())
 		return EngCollocRoss;
 	else
-	if (DictName == m_EngOborRossDoc.m_DictName)
+	if (DictName == m_EngOborRossDoc.GetDictName())
 		return EngObor;
 	else
-	if (DictName == m_FinThesRossDoc.m_DictName)
+	if (DictName == m_FinThesRossDoc.GetDictName())
 		return FinRoss;
 	else
-	if (DictName == m_OmniThesRossDoc.m_DictName)
+	if (DictName == m_OmniThesRossDoc.GetDictName())
 		return OmniRoss;
 	else
-	if (DictName == m_CompThesRossDoc.m_DictName)
+	if (DictName == m_CompThesRossDoc.GetDictName())
 		return CompRoss;
 	else
-	if (DictName == m_LocThesRossDoc.m_DictName)
+	if (DictName == m_LocThesRossDoc.GetDictName())
 		return LocRoss;
 	else
 		return NoneRoss;

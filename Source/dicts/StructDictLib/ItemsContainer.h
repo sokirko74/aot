@@ -45,23 +45,20 @@ public :
 
 	TItemContainer();
 
-	void 			ErrorMessage (std::string s ) const;
-	bool			InitDomensConsts();
+	void			InitDomensConsts();
 	dom_item_id_t	GetItemIdByItemStr (const std::string&  ItemStr, BYTE DomNo) const;
 	dom_item_id_t	GetItemIdByItemStr (const std::string&  ItemStr, const char* DomStr) const;
-	BYTE			GetDomenNoByDomStr (const char* DomStr) const;
+	BYTE			GetDomenNoByDomStr (const char* DomStr, bool throw_excp=false) const;
 
 	void			UpdateConstDomens();
-	bool			BuildDomens (char* LastReadLine);
-	bool			BuildDomItems ();
+	void			BuildDomens (std::string path);
+	void			BuildDomItems (std::string path);
 	BYTE			GetDomNoForLePlus (const std::string& s) const;
 
 	BYTE		GetFieldNoByFieldStrInner (const char* FieldStr) const; 
 	bool		ClearFields ();
-	void		BuildFields();
-	bool		WriteFields() const;
-	bool		WriteDomens () const;
-	bool		WriteDomItems() const ;
+	void		BuildFields(std::string path);
+	bool		WriteDomItems(std::string path) const ;
 
 
 

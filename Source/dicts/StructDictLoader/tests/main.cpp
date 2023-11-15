@@ -16,26 +16,32 @@ std::string file_to_string(std::string path) {
 	return buffer.str();
 }
 
-TEST_CASE("import_export_test") {
-	auto folder = MakePath(Args.Retrieve("test-folder"), "test1");
+CDictionary LoadScheme(std::string local_folder) {
+	auto folder = MakePath(Args.Retrieve("test-folder"), local_folder);
 	REQUIRE(FileExists(folder.c_str()));
-
 	CDictionary D;
-	auto ross_txt = MakePath(folder, "ross.txt");
-	auto ross_txt_test = MakePath(folder, "ross.txt.new");
-	D.ImportFromTextFile(ross_txt, folder);
+	
+	D.LoadDictScheme(folder);
+	return D;
+}
+
+TEST_CASE("import_export_test") {
+	auto D = LoadScheme("test1");
+	auto ross_txt = MakePath(D.GetDictFolder(), "ross.txt");
+	D.ImportFromTextFile(ross_txt);
 	D.Save();
-	D.LoadAndExportDict(folder, ross_txt_test);
+
+	auto ross_txt_test = "ross.txt.new";
+	D.LoadAndExportDict(D.GetDictFolder(), ross_txt_test);
 	auto canon = file_to_string(ross_txt);
 	auto test = file_to_string(ross_txt_test);
 	CHECK(canon == test);
 }
 
 TEST_CASE("search_by_cortege") {
-	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
-	CDictionary D;
-	auto ross_txt = MakePath(folder, "ross.txt");
-	D.ImportFromTextFile(ross_txt, folder);
+	auto D = LoadScheme("test2");
+	auto ross_txt = MakePath(D.GetDictFolder(), "ross.txt");
+	D.ImportFromTextFile(ross_txt);
 
 	auto item_id1 = D.GetItemIdByItemStr("НАР", "D_PART_OF_SPEECH");
 	CHECK(!is_null(item_id1));
@@ -57,11 +63,9 @@ TEST_CASE("search_by_cortege") {
 }
 
 TEST_CASE("search_by_article") {
-	TestName = "search_by_article";
-	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
-	CDictionary D;
-	auto ross_txt = MakePath(folder, "ross.txt");
-	D.ImportFromTextFile(ross_txt, folder);
+	auto D = LoadScheme("test2");
+	auto ross_txt = MakePath(D.GetDictFolder(), "ross.txt");
+	D.ImportFromTextFile(ross_txt);
 	auto unit_no = D.LocateUnit("мама", 1);
 	REQUIRE(unit_no != ErrUnitNo);
 
@@ -79,11 +83,7 @@ TEST_CASE("search_by_article") {
 }
 
 TEST_CASE ("test_D_ENGL") {
-	TestName = "test_D_ENGL";
-	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
-	CDictionary D;
-	auto ross_txt = MakePath(folder, "ross.txt");
-	D.ImportFromTextFile(ross_txt, folder);
+	CDictionary D = LoadScheme("test2");
 	try {
 		CTempArticle A(&D);
 		A.ReadFromUtf8String("TESTFIELD      = * мама");
@@ -117,10 +117,7 @@ TEST_CASE ("test_D_ENGL") {
 
 
 TEST_CASE("test_read_example") {
-	TestName = "test_read_example";
-	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
-	CDictionary D;
-	D.LoadDictScheme(folder.c_str());
+	CDictionary D = LoadScheme("test2");
 	CTempArticle A1(&D);
 	std::string art_str = "EXM     =  появилась женщина , такая красивая , что они остановились";
 	A1.ReadFromUtf8String(art_str.c_str());
@@ -128,10 +125,7 @@ TEST_CASE("test_read_example") {
 }
 
 TEST_CASE("test_Russian_free_domain") {
-	TestName = "test_Russian_free_domain";
-	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
-	CDictionary D;
-	D.LoadDictScheme(folder.c_str());
+	CDictionary D = LoadScheme("test2");
 	CTempArticle A1(&D);
 	std::string art_str = "DERIV   =  ПРИЛ ( абсолютный )";
 	A1.ReadFromUtf8String(art_str.c_str());
@@ -143,9 +137,7 @@ TEST_CASE("test_Russian_free_domain") {
 }
 
 TEST_CASE("test_field_aux") {
-	auto folder = MakePath(Args.Retrieve("test-folder"), "test2");
-	CDictionary D;
-	D.LoadDictScheme(folder.c_str());
+	CDictionary D = LoadScheme("test2");
 	CTempArticle A1(&D);
 	std::string art_str = "AUX     =  LOK ( A2 , A3 )";
 	A1.ReadFromUtf8String(art_str.c_str());

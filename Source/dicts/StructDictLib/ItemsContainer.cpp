@@ -16,11 +16,13 @@ TItemContainer::TItemContainer() {
 };
 
 
-BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr) const {
+BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr, bool throw_expc) const {
     for (BYTE i = 0; i < m_Domens.size(); i++)
         if (m_Domens[i].GetDomStr() == DomStr)
             return i;
-
+    if (throw_expc) {
+        throw CExpc("cannot find struct dict domeain %s", DomStr);
+    }
     return ErrUChar;
 };
 
@@ -57,37 +59,17 @@ dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, con
 
 
 
-bool TItemContainer::InitDomensConsts() {
+void TItemContainer::InitDomensConsts() {
 
-    ActantsDomNo = GetDomenNoByDomStr("D_ACTANTS");
-    if (ActantsDomNo == ErrUChar) {
-        throw CExpc("cannot find domain D_ACTANTS");
-    }
-
-    LexDomNo = GetDomenNoByDomStr("D_RLE");
-    if (LexDomNo == ErrUChar) return false;
-
-    LexPlusDomNo = GetDomenNoByDomStr("D_RLE_PLUS");
-    if (LexPlusDomNo == ErrUChar) return false;
-
-    IntegerDomNo = GetDomenNoByDomStr("D_INTEGER");
-
-    TitleDomNo = GetDomenNoByDomStr("D_TITLE");
-
-
-    CollocDomNo = GetDomenNoByDomStr("D_COLLOC");
-    if (CollocDomNo == ErrUChar) return false;
-
-    AbbrDomNo = GetDomenNoByDomStr("D_ABBR");
-    if (AbbrDomNo == ErrUChar) return false;
-
-    FieldDomNo = GetDomenNoByDomStr("D_FIELDS");
-    if (FieldDomNo == ErrUChar) return false;
-
-    WildCardDomNo = GetDomenNoByDomStr("D_");
-    if (WildCardDomNo == ErrUChar) return false;
-
-    return true;
+    ActantsDomNo = GetDomenNoByDomStr("D_ACTANTS", true);
+    LexDomNo = GetDomenNoByDomStr("D_RLE", true);
+    LexPlusDomNo = GetDomenNoByDomStr("D_RLE_PLUS", true);
+    IntegerDomNo = GetDomenNoByDomStr("D_INTEGER", true);
+    TitleDomNo = GetDomenNoByDomStr("D_TITLE", true);
+    CollocDomNo = GetDomenNoByDomStr("D_COLLOC", true);
+    AbbrDomNo = GetDomenNoByDomStr("D_ABBR", true);
+    FieldDomNo = GetDomenNoByDomStr("D_FIELDS", true);
+    WildCardDomNo = GetDomenNoByDomStr("D_", true);
 };
 
 
@@ -97,11 +79,11 @@ void TItemContainer::UpdateConstDomens() {
 };
 
 
-bool TItemContainer::BuildDomens(char *LastReadLine) {
+void TItemContainer::BuildDomens(std::string path) {
     std::ifstream inp;
-    inp.open(DomensFile);
+    inp.open(path);
     if (!inp.good()) {
-        throw CExpc("cannot open file %s", DomensFile.c_str());
+        throw CExpc("cannot open file %s", path.c_str());
     }
     auto domains = nlohmann::json::parse(inp);
     std::unordered_map<std::string, BYTE>  doms_idents;
@@ -115,18 +97,15 @@ bool TItemContainer::BuildDomens(char *LastReadLine) {
     for (auto& d : m_Domens) {
         d.InitDomainParts(doms_idents);
     }
-   
-    
-    return InitDomensConsts();
+    InitDomensConsts();
 }
 
 
-bool TItemContainer::BuildDomItems() {
+void TItemContainer::BuildDomItems(std::string path) {
 
-    //  reading domen items
     {
         std::ifstream  inp;
-        inp.open(DomItemsTextFile);
+        inp.open(path);
         std::string line; 
         BYTE  dom_no = -1;
         while (std::getline(inp, line)) {
@@ -145,12 +124,11 @@ bool TItemContainer::BuildDomItems() {
 
     UpdateConstDomens();
 
-    return true;
 }
 
-bool TItemContainer::WriteDomItems() const {
+bool TItemContainer::WriteDomItems(std::string path) const {
     std::ofstream outp;
-    outp.open(DomItemsTextFile);
+    outp.open(path);
     for (auto d : m_Domens) {
         outp << "-1\t" << d.GetDomStr() << "\n";
         d.WriteItemsToStream(outp);
@@ -301,13 +279,13 @@ bool TItemContainer::ClearFields() {
 
 
 
-void TItemContainer::BuildFields() {
+void TItemContainer::BuildFields(std::string path) {
     ClearFields();
     
     std::ifstream inp;
-    inp.open(FieldsFile);
+    inp.open(path);
     if (!inp.good()) {
-        throw CExpc("cannot open file %s", FieldsFile.c_str());
+        throw CExpc("cannot open file %s", path.c_str());
     }
     auto fields = nlohmann::json::parse(inp);
     for (auto f_js : fields) {
@@ -322,38 +300,7 @@ void TItemContainer::BuildFields() {
 }
 
 
-bool TItemContainer::WriteFields() const {
-    auto fields = nlohmann::json::array();
-    for (auto f : Fields) {
-        fields.push_back(f.GetFieldJson());
-    };
 
-    std::ofstream outf(MakeFName(FieldsFile, "json"));
-    outf << fields.dump(4);
-    outf.close();
-    return true;
-    
-};
-
-bool TItemContainer::WriteDomens() const {
-    std::ofstream outf(DomensFile);
-    if (!outf.is_open())
-    {
-        throw CExpc("Cannot write to %s", DomensFile.c_str());
-    };
-    auto domains = nlohmann::json::array();
-    for (auto& d : m_Domens) {
-        domains.push_back(d.WriteToJson());
-    }
-    outf << domains.dump(4);
-    outf.close();
-    return true;
-}
-
-
-void TItemContainer::ErrorMessage(std::string s) const {
-    ::ErrorMessage(RossPath, s);
-};
 
 inline bool IsTitle(const char* s)
 {

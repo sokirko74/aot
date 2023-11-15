@@ -86,7 +86,7 @@ void CPocketForm::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 			 lstrcpy(pItem->pszText, s);            
 			 break;
 		 case 2: 
-			 lstrcpy(pItem->pszText, RossDoc->GetRossHolder()->m_DictName.c_str());            
+			 lstrcpy(pItem->pszText, RossDoc->GetRossHolder()->GetDictName().c_str());            
 			 break;
 
 	};

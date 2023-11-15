@@ -497,7 +497,7 @@ void CRossDoc::Dump(CDumpContext& dc) const
 void CRossDoc::SetTitle(LPCTSTR lpszTitle) 
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CDocument::SetTitle(GetRossHolder()->m_DictName.c_str());
+	CDocument::SetTitle(GetRossHolder()->GetDictName().c_str());
 }
 
 

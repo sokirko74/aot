@@ -8,6 +8,8 @@ struct TDictConfig {
 	
 	int MaxMeanNum;
 
+	std::string DictFolder;
+
 	
 	void ReadConfig(std::string path);
 };

@@ -273,6 +273,7 @@
             "D_CASE_MUA",
             "D_CASE_NUMBER",
             "D_CASE_POS",
+            "D_GENDER",
             "D_GRAFEM_DESC",
             "D_GROUPS",
             "D_PART_OF_SPEECH",
@@ -323,12 +324,7 @@
         "category": 79,
         "dom_ident": "D_RLE_PLUS",
         "is_delim": false,
-        "is_free": false,
-        "parts": [
-            "D_ABBR",
-            "D_COLLOC",
-            "D_RLE"
-        ]
+        "is_free": false
     },
     {
         "category": 77,
@@ -365,26 +361,14 @@
         "is_free": true
     },
     {
-        "category": 84,
-        "dom_ident": "D_CONDIT",
-        "is_delim": false,
-        "is_free": true
-    },
-    {
-        "category": 84,
-        "dom_ident": "D_INFERENCE",
+        "category": -46,
+        "dom_ident": "D_BASIC_SIT",
         "is_delim": false,
         "is_free": true
     },
     {
         "category": 77,
-        "dom_ident": "D_SLASH",
-        "is_delim": true,
-        "is_free": false
-    },
-    {
-        "category": 77,
-        "dom_ident": "D_SYN_ACTANTS",
+        "dom_ident": "D_ASPECT",
         "is_delim": false,
         "is_free": false
     },
@@ -395,21 +379,40 @@
         "is_free": false
     },
     {
+        "category": 77,
+        "dom_ident": "D_GRAMMEMS",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
+        "category": 77,
+        "dom_ident": "D_MORP_PART_OF_SPEECH",
+        "is_delim": false,
+        "is_free": false
+    },
+    {
         "category": 84,
         "dom_ident": "D_TITLE",
         "is_delim": false,
         "is_free": true
     },
     {
-        "category": 77,
-        "dom_ident": "D_QUES_MARK",
-        "is_delim": true,
-        "is_free": false
-    },
-    {
-        "category": -48,
+        "category": 84,
         "dom_ident": "D_CONTAIN",
         "is_delim": false,
         "is_free": true
-    }
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_MULT",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_INTEGER",
+        "is_delim": false,
+        "is_free": true
+    },
+
 ]

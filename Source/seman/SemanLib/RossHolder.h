@@ -179,7 +179,7 @@ public:
 	dom_item_id_t   S_And_InstrNo;
 	dom_item_id_t RightDirectionNo;
 
-   std::string               m_DictName;
+   std::string               GetDictName();
    std::string               m_DictPath;
    long                 m_LastUpdateTime;
 
