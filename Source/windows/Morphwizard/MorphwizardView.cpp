@@ -347,9 +347,9 @@ void CMorphwizardView::OnFind()
 		FilterFoundParadigms();
 		ShowFoundParadigms();
 	}
-	catch (CExpc C)
+	catch (CExpc c)
 	{
-		ErrorMessage(C.m_strCause);
+		ErrorMessage(c.what());
 	}
 	catch (...) {
 		AfxMessageBox(_T("Search failed"));
@@ -504,7 +504,7 @@ void CMorphwizardView::OnAdd()
 
 	}
 	catch (CExpc& e) {
-		echo(e.what().c_str());
+		echo(e.what());
 	}
 	catch (...) {
 		echo("error");
@@ -533,7 +533,7 @@ bool CMorphwizardView::OpenExistingParadigm(lemma_iterator_t it, bool bRunAccent
 	}
 	catch (CExpc& e)
 	{
-		echo(e.what().c_str());
+		echo(e.what());
 	}
 	catch (...)
 	{
@@ -746,9 +746,9 @@ void CMorphwizardView::OnToolsImport()
 
 						meter.SetFilePos();
 					}
-					catch (CExpc C)
+					catch (std::exception c)
 					{
-						Errors += Format("%s (%s:%i) \n", C.m_strCause.c_str(), (const TCHAR*)PathName, P.m_FirstSlfLineNo + line_no_err);
+						Errors += Format("%s (%s:%i) \n", c.what(), (const TCHAR*)PathName, P.m_FirstSlfLineNo + line_no_err);
 					}
 					catch (...)
 					{

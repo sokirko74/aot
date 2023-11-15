@@ -133,10 +133,6 @@
         "order": 190,
         "signats": [
             {
-                "format": "D_QUES_MARK D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS ",
-                "signat_id": 0
-            },
-            {
                 "format": "D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS ",
                 "signat_id": 1
             }
@@ -233,10 +229,6 @@
                 "signat_id": 0
             },
             {
-                "format": "D_RLE_PLUS D_SLASH D_CONDIT",
-                "signat_id": 1
-            },
-            {
                 "format": "D_EXM",
                 "signat_id": 2
             }
@@ -250,18 +242,6 @@
         "signats": [
             {
                 "format": "D_RLE_PLUS",
-                "signat_id": 0
-            }
-        ],
-        "type": 77
-    },
-    {
-        "actant": true,
-        "name": "SYNR",
-        "order": 200,
-        "signats": [
-            {
-                "format": "D_SYN_REL D_OPN D_SYN_ACTANTS D_COMMA  D_SYN_ACTANTS D_CLS",
                 "signat_id": 0
             }
         ],

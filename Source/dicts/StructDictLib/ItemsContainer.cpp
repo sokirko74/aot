@@ -113,7 +113,7 @@ void TItemContainer::BuildDomItems(std::string path) {
                 const char* dom_str = line.c_str() + 3;
                 dom_no = GetDomenNoByDomStr(dom_str);
                 if (dom_no == ErrUChar) {
-                    throw CExpc("bad domain name %s", dom_str);
+                    throw CExpc("bad domain name %s in %s", dom_str, path.c_str());
                 }
             }
             else {

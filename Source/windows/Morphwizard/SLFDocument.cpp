@@ -188,7 +188,7 @@ BOOL CSLFDocument::SaveModified()
 	}
 	catch(CExpc& e)
 	{
-		auto mess = Format("%s at line %i\nExit without save?", e.what().c_str(), m_GotoLine);
+		auto mess = Format("%s at line %i\nExit without save?", e.what(), m_GotoLine);
 
 		switch (AfxMessageBox (GetWizard()->FromRMLEncoding(mess).c_str(), MB_OKCANCEL) )
 		{

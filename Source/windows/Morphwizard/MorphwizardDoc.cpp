@@ -158,9 +158,9 @@ BOOL CMorphwizardDoc::OnOpenDocument(LPCTSTR lpszPathName)
             return FALSE;
 		return TRUE;
 	}
-	catch(CExpc& C)
+	catch(std::exception c)
 	{
-		ErrorMessage("Unexpected  exception : "+ C.m_strCause);
+		ErrorMessage(std::string("Unexpected  exception : ") + c.what());
 		
 	}
 	catch(...)
