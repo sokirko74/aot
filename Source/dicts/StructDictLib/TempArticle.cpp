@@ -188,9 +188,6 @@ bool CTempArticle::ArticleToText()
 	BYTE CurrLeafId = ErrUChar;
 	BYTE CurrBracketLeafId = ErrUChar;
 	BYTE CurrFieldNo = ErrUChar;
-	std::string LeftPart;
-	char RightPart[2000];
-	char Line[2000];
 	std::string S;
 	m_ArticleStr = "";
 
@@ -198,7 +195,7 @@ bool CTempArticle::ArticleToText()
 	for (size_t i = 0; i < GetCortegesSize(); i++)
 	{
 		TCortege C = GetCortege(i);
-		RightPart[0] = 0;
+		std::string right;
 
 		// смена текущей функции - значит, смена уровня
 		if ((CurrLeafId != C.m_LeafId)
@@ -213,38 +210,37 @@ bool CTempArticle::ArticleToText()
 				char s[20];
 				CurrLevelId = C.m_LevelId;
 				if (C.m_LevelId == ErrUChar)
-					strcpy(s, "*");
+					right = "*";
 				else
-					sprintf(s, "%i", C.m_LevelId);
-				strcpy(RightPart, s);
-				strcat(RightPart, " ");
+					right = std::to_string(C.m_LevelId);
+				right += " ";
 			}
 			else
-				strcpy(RightPart, "  ");
+				right = "  ";
 
-		auto s = m_pRoss->WriteToString(C);
-		strcat(RightPart, s.c_str());
+		right  += m_pRoss->WriteToString(C);
 
+		std::string line;
 		// пошло новое поле
 		if ((CurrFieldNo != C.m_FieldNo)
 			|| (CurrLeafId != C.m_LeafId)
 			|| (CurrBracketLeafId != C.m_BracketLeafId)
 			)
 		{
-			LeftPart = ConstructFldName(C.m_FieldNo, C.m_LeafId, C.m_BracketLeafId);
+			auto left = ConstructFldName(C.m_FieldNo, C.m_LeafId, C.m_BracketLeafId);
 
-			sprintf(Line, C.GetFieldFormat(), LeftPart.c_str(), RightPart);
+			line = Format(C.GetFieldFormat(), left.c_str(), right.c_str());
 			CurrLevelId = C.m_LevelId;
 			CurrLeafId = C.m_LeafId;
 			CurrBracketLeafId = C.m_BracketLeafId;
 			CurrFieldNo = C.m_FieldNo;
 		}
-		else
+		else {
 			// продолжается запись значения старого поля
-			sprintf(Line, "%10s%s", " ", RightPart);
+			line = Format("%10s%s", " ", right.c_str());
+		}
 
-		m_ArticleStr += Line;
-		m_ArticleStr += "\n";
+		m_ArticleStr += line + "\n";
 	};
 	return true;
 };
@@ -455,22 +451,24 @@ void CTempArticle::CheckCortegeVector()
 
 		if (FldName == "VAL")
 		{
-			char q[200] = "\0";
-
-			const char* s = m_pRoss->GetDomItemStr(i, 1).c_str();
-			strcat(q, s);
-			s = m_pRoss->GetDomItemStr(i, 2).c_str();
-			strcat(q, s);
-			int l = 0;
-			if (strlen(q) == 3)
-				if ((isdigit((unsigned char)q[1]) && (ActantNo + '0' != q[1]))
-					|| (isdigit((unsigned char)q[2]) && (ActantNo + '0' != q[2]))
-					)
+			dom_item_id_t item1 = GetCortege(i).GetItem(1);
+			dom_item_id_t item2 = GetCortege(i).GetItem(2);
+			if (is_null(item1) || is_null(item2)) {
+				throw CExpc("unfilled valency in field  %s", FldName.c_str());
+			}
+			auto s1 = m_pRoss->GetDomItemStr(item1);
+			auto s2 = m_pRoss->GetDomItemStr(item2);
+			auto s = (s1.length() != 1) ? s1 : s2;
+			if (s1 == "*" || s2 == "*") {
+				ActantNo = -1;
+			}
+			else if (ActantNo != -1) {
+				if (s[1] - '0' != ActantNo)
 				{
 					throw CExpc("Error in valency numbering (field \"%s\")", FldName.c_str());
 				};
-
-			ActantNo++;
+				ActantNo++;
+			}
 		};
 
 	}

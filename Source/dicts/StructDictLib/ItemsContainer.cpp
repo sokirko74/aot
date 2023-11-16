@@ -12,7 +12,7 @@
 
 
 TItemContainer::TItemContainer() {
-    m_Language = morphRussian;
+
 };
 
 
@@ -27,7 +27,7 @@ BYTE TItemContainer::GetDomenNoByDomStr(const char *DomStr, bool throw_expc) con
 };
 
 dom_item_id_t TItemContainer::GetItemIdByItemStr(const std::string& ItemStr, BYTE DomNo) const {
-    if (DomNo == ErrUChar) return -1;
+    if (DomNo == ErrUChar) return EmptyDomItemId;
 
     if (DomNo == LexPlusDomNo) {
         DomNo = GetDomNoForLePlus(ItemStr);
@@ -80,6 +80,7 @@ void TItemContainer::UpdateConstDomens() {
 
 
 void TItemContainer::BuildDomens(std::string path) {
+    m_Domens.clear();
     std::ifstream inp;
     inp.open(path);
     if (!inp.good()) {
@@ -102,12 +103,12 @@ void TItemContainer::BuildDomens(std::string path) {
 
 
 void TItemContainer::BuildDomItems(std::string path) {
-
     {
         std::ifstream  inp;
         inp.open(path);
         std::string line; 
-        BYTE  dom_no = -1;
+        size_t line_no = 1;
+        BYTE  dom_no = ErrUChar;
         while (std::getline(inp, line)) {
             if (startswith(line, "-1\t")) {
                 const char* dom_str = line.c_str() + 3;
@@ -119,6 +120,7 @@ void TItemContainer::BuildDomItems(std::string path) {
             else {
                 m_Domens[dom_no].AddFromSerialized(line);
             }
+            ++line_no;
         }
     }
 

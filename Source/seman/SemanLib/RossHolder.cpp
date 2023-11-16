@@ -53,7 +53,7 @@ void CRossHolder::InitFieldsAndDomains() {
 	SemFetDomNo = GetRoss()->GetDomenNoByDomStr("D_SF");
 	SynGroupDomNo = GetRoss()->GetDomenNoByDomStr("D_GROUPS");
 	LemGroupBeginingDomNo = GetRoss()->GetDomenNoByDomStr("D_1");
-	ActDomNo = GetRoss()->GetDomenNoByDomStr("D_ACTANTS");
+	ActDomNo = GetRoss()->ActantsDomNo;
 	MNADomNo = GetRoss()->GetDomenNoByDomStr("D_MUA");
 	PositionDomNo = GetRoss()->GetDomenNoByDomStr("D_POSITION");
 	VerbFetDomNo = GetRoss()->GetDomenNoByDomStr("D_VP_SPECIF");

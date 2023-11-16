@@ -6,21 +6,6 @@ CDomen::CDomen() {
     m_UnusedDomItemId = 0;
 }
 
-dom_item_id_t CDomen::AddItemByEditor(const std::string& item_str) {
-    TDomenItem new_item = { m_UnusedDomItemId, item_str };
-    auto it = std::lower_bound(m_DomItems.begin(), m_DomItems.end(), new_item);
-    assert (it == m_DomItems.end() || !(*it == new_item));
-    size_t offset = it - m_DomItems.begin();
-    m_DomItems.insert(it, new_item);
-    ++m_UnusedDomItemId;
-    m_ItemId2ItimeIndex.insert(m_ItemId2ItimeIndex.begin() + new_item.InnerDomItemId, offset);
-    assert(m_ItemId2ItimeIndex.size() >= m_DomItems.size());
-    assert(GetDomItemStrById(new_item.InnerDomItemId) == item_str);
-    return build_item_id(DomNo, new_item.InnerDomItemId);
-
-}
-
-
 CDomen::~CDomen() {
 };
 
@@ -43,7 +28,7 @@ char CDomen::GetDomainSource() const {
 
 void CDomen::MakeFree() {
     m_DomItems.clear();
-    m_ItemId2ItimeIndex.clear();
+    m_ItemId2ItemIndex.clear();
     m_bFreed = true;
 }
 
@@ -80,21 +65,9 @@ void CDomen::InitDomainParts(const std::unordered_map<std::string, BYTE>& ident2
     }
 }
 
-void CDomen::AddFromSerialized(const std::string& line) {
-    auto delim = line.find('\t');
-    uint32_t inner_item_id = atoi(line.substr(0, delim).c_str());
-    if (inner_item_id > m_UnusedDomItemId) {
-        m_UnusedDomItemId = inner_item_id + 1;
-    }
-    m_DomItems.push_back({ inner_item_id , line.substr(delim + 1) });
-    if (inner_item_id <= m_ItemId2ItimeIndex.size()) {
-        m_ItemId2ItimeIndex.resize(m_ItemId2ItimeIndex.size() + 100);
-        m_ItemId2ItimeIndex[inner_item_id] = m_DomItems.size() - 1;
-    }
-}
 
 const std::string& CDomen::GetDomItemStrById(const dom_item_id_t item_id) const {
-    size_t index = m_ItemId2ItimeIndex[get_inner_item_index(item_id)];
+    size_t index = m_ItemId2ItemIndex[get_inner_item_index(item_id)];
     return  m_DomItems[index].DomItemStr;
 }
 
@@ -120,4 +93,51 @@ std::vector<std::string>  CDomen::GetAllStrings() const {
         r.push_back(i.DomItemStr);
     }
     return r;
+}
+
+void CDomen::UpdateIndex(uint32_t inner_item_id, size_t offset) {
+    if (inner_item_id >= m_ItemId2ItemIndex.size()) {
+        m_ItemId2ItemIndex.resize(inner_item_id + 100, EmptyDomItemId);
+    }
+    if (m_ItemId2ItemIndex[inner_item_id] != EmptyDomItemId) {
+        int dummy = 0;
+    }
+    assert(m_ItemId2ItemIndex[inner_item_id] == EmptyDomItemId);
+    m_ItemId2ItemIndex[inner_item_id] = offset;
+
+}
+
+void CDomen::AddFromSerialized(const std::string& line) {
+    auto delim = line.find('\t');
+    uint32_t inner_item_id = atoi(line.substr(0, delim).c_str());
+    if (inner_item_id >= m_UnusedDomItemId) {
+        m_UnusedDomItemId = inner_item_id + 1;
+    }
+    std::string new_item_str = line.substr(delim + 1);
+    if (!m_DomItems.empty()) {
+        if (m_DomItems.back().DomItemStr.compare(new_item_str) >= 0) {
+            throw CExpc("bad order in %s: string \"%s\" >= \"%s\" ", DomStr.c_str(), 
+                m_DomItems.back().DomItemStr.c_str(), new_item_str.c_str());
+        }
+    }
+    m_DomItems.push_back({ inner_item_id , new_item_str });
+    UpdateIndex(inner_item_id, m_DomItems.size() - 1);
+}
+
+dom_item_id_t CDomen::AddItemByEditor(const std::string& item_str) {
+    TDomenItem new_item = { m_UnusedDomItemId, item_str };
+    auto it = std::lower_bound(m_DomItems.begin(), m_DomItems.end(), new_item);
+    assert(it == m_DomItems.end() || !(*it == new_item));
+    size_t offset = it - m_DomItems.begin();
+    for (auto& i: m_ItemId2ItemIndex) {
+        if (i != EmptyDomItemId && i >= offset) {
+            ++i;
+        }
+    }
+    m_DomItems.insert(it, new_item);
+    ++m_UnusedDomItemId;
+    UpdateIndex(new_item.InnerDomItemId, offset);
+    assert(GetDomItemStrById(new_item.InnerDomItemId) == item_str);
+    return build_item_id(DomNo, new_item.InnerDomItemId);
+
 }

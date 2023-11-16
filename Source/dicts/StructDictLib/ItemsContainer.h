@@ -18,15 +18,8 @@ protected:
 	dom_item_id_t	InsertDomItem(const char* ItemStr, BYTE DomNo);
 
 public :
-	MorphLanguageEnum	m_Language;
-    std::string RossPath;
-	std::string DomItemsFile;
-	std::string DomItemsTextFile;
 	std::vector <CDomen> m_Domens;
-	std::string DomensFile;
 	std::vector<CField> Fields;
-	std::string FieldsFile;
-	bool	m_bDontLoadExamples;
 	
 
 	//константы доменов

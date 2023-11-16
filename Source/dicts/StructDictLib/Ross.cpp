@@ -20,7 +20,6 @@
 TRoss::TRoss() 
 {
 	m_bShouldSaveComments = false;
-	m_bDontLoadExamples = false;
 };
 
 
@@ -67,9 +66,9 @@ void TRoss::LoadDictScheme(std::string folder)
 {
 	Config.ReadConfig(folder);
 	BuildDomens(MakePath(folder, "domains.json"));
+	BuildDomItems(GetDomItemsFilePath());
 	BuildFields(MakePath(folder, "fields.json"));
 
-	BuildDomItems(GetDomItemsFilePath());
 };
 
 
@@ -336,32 +335,35 @@ void TRoss::DelCorteges(size_t start, size_t last)
 
 
 
-struct TItemStr
-{
-	char ItemStr[100];
-	TItemStr(char* s)
-	{
-		strcpy(ItemStr, s);
-	};
-
-};
 
 
-bool is_ascii_string(const char* s) {
-	if (!s) return false;
-	for (; *s; ++s) {
-		if (*s < 0) {
+bool is_ascii_string(const std::string&  s) {
+	for (auto c: s) {
+		if (c < 0) {
 			return false;
 		}
 	}
 	return true;
 }
 
+bool is_empty_line(const char* t)
+{
+	if (*t == 0) return true;
+
+	while ( (*t != '\r') && (*t != '\n'))
+	{
+		if ((BYTE)t[0] > ' ')
+			return false;
+		t++;
+	}
+
+	return true;
+}
+
+
 bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSignat& Sgn)
 { 
-	int CurrItemNo = 0;
-
-	std::vector<TItemStr> ItemStrVec;
+	std::vector<std::string> item_strs;
 	const char* q = s;
 
 	auto doms = Sgn.GetDomsWithDelims();
@@ -391,16 +393,13 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 
 		while (isspace((unsigned  char)q[0])) q++;
 
-		size_t ItemStrLen = IsDelim ? 1 : strcspn(q, Delim);
+		size_t item_str_len = IsDelim ? 1 : strcspn(q, Delim);
+		std::string item_str(q, q + item_str_len);
+		q += item_str_len;
 
-		const size_t max_item_lem = 255;
-		if (ItemStrLen > max_item_lem) {
-			throw article_parse_error(Format("item %s is longer than % bytes", s, max_item_lem).c_str(), 0);
+		if (!IsDelim) {
+			TrimRight(item_str);
 		}
-		char ItemStr[max_item_lem  + 1];
-		strncpy(ItemStr, q, ItemStrLen);
-		ItemStr[ItemStrLen] = 0;
-		if (!IsDelim) rtrim(ItemStr);
 
 		/*
 			если есть два формата для одного поля:
@@ -409,16 +408,13 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 			и пришло русское слово, тогда не будем добавлять его в
 				в D_ENGL
 		*/
-		if (m_Domens[DomNo].GetDomStr() == "D_ENGL" && !is_ascii_string(ItemStr))
-				return false;
-
-
-		// #### Получение в строку q остатка строки для дальнейшей обработки
-		q += ItemStrLen;
+		if (m_Domens[DomNo].GetDomStr() == "D_ENGL" && !is_ascii_string(item_str)) {
+			return false;
+		}
 
 		//если строка прежедвременно закончилалсь,
 		// то выйти из процедуры с неудачей
-		if (!FlagLastItem && IsEmptyLine(q))  return false;
+		if (!FlagLastItem && is_empty_line(q))  return false;
 
 		/*
 		если данный элемент есть повторение некоторых констант их другого домена
@@ -429,53 +425,51 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 		*/
 		if (IsMult)
 		{
-			StringTokenizer tok(ItemStr, " ,");
+			StringTokenizer tok(item_str.c_str(), " ,");
 			while (tok())
 				if (GetItemIdByItemStr(tok.val(), DomNo) == EmptyDomItemId)
 					return false;
-
+					
 			DomNo = GetDomenNoByDomStr("D_MULT");
 		};
 
 		// #### Поиск найденной  строки в домене
-		if ((strlen(ItemStr) == 1)
-			&& ((unsigned char)ItemStr[0] == '*'))
-		{
-			C.SetItem(CurrItemNo, WildCardDomItemNo);
-			++CurrItemNo;
-		}
-		else {
-			auto item_id = GetItemIdByItemStr(ItemStr, DomNo);
-			if (!m_Domens[DomNo].IsFree && (DomNo != LexPlusDomNo) && is_null(item_id))
-				return false;
-			if (!IsDelim) {
-				C.SetItem(CurrItemNo, item_id);
-				ItemStrVec.push_back(ItemStr);
-				++CurrItemNo;
+		if (!IsDelim) {
+			dom_item_id_t item_id;
+			if (item_str == "*")
+			{
+				item_id = WildCardDomItemNo;
 			}
-		};
-
+			else {
+				item_id = GetItemIdByItemStr(item_str, DomNo);
+				if (!m_Domens[DomNo].IsFree && (DomNo != LexPlusDomNo) && is_null(item_id))
+					return false;
+			};
+			C.SetItem(item_strs.size(), item_id);
+			item_strs.push_back(item_str);
+		}
 	};
+	
+	if (!is_empty_line(q) || (i < doms.size())) return false;
 
-
-	if (!IsEmptyLine(q) || (i < doms.size())) return false;
-
-	for (size_t i = ItemStrVec.size(); i < MaxNumDom; i++)
+	for (size_t i = item_strs.size(); i < MaxNumDom; i++) {
 		C.SetItem(i, EmptyDomItemId);
+	}
 
 
 
-	for (BYTE i = 0; i < ItemStrVec.size(); i++)
+	for (BYTE i = 0; i < item_strs.size(); i++) {
 		if (C.is_null(i)) // не определено значение
 		{
-			dom_item_id_t item_id = InsertDomItem(ItemStrVec[i].ItemStr, Sgn.GetDomsWoDelims()[i]);
+			dom_item_id_t item_id = InsertDomItem(item_strs[i].c_str(), Sgn.GetDomsWoDelims()[i]);
 
 			if (is_null(item_id))
 				return false;
 
 			C.SetItem(i, item_id);
 		};
-
+	}
+		
 	return true;
 };
 
@@ -591,7 +585,7 @@ std::string TRoss::GetUnitTextHeader(uint16_t UnitNo) const
 	const CStructEntry& U = m_Units[UnitNo];
 	const TUnitComment* C = GetCommentsByUnitId(m_Units[UnitNo].m_EntryId);
 
-	R += Format("%s        = %s\n", GetTitleFieldName(), U.GetEntryStr());
+	R += Format("%s        = %s\n", GetTitleFieldName(), U.GetEntryStr().c_str());
 	R += Format("%s       = %u\n", GetSenseFieldName(), U.m_MeanNum);
 
 	if (C && strlen(C->Comments))
@@ -609,7 +603,7 @@ std::string TRoss::GetUnitTextHeader(uint16_t UnitNo) const
 	if (!t.empty())
 		R += Format("%s       = %s\n", GetTimeCreatFieldName(), t.c_str());
 
-	return convert_to_utf8(R, m_Language);
+	return R;
 }
 
 

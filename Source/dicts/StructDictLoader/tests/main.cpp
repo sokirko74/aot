@@ -10,7 +10,8 @@ ArgumentParser Args;
 std::string TestName = "";
 
 std::string file_to_string(std::string path) {
-	std::ifstream t("file.txt");
+	std::ifstream t(path);
+	assert(t.good());
 	std::stringstream buffer;
 	buffer << t.rdbuf();
 	return buffer.str();
@@ -34,6 +35,7 @@ TEST_CASE("import_export_test") {
 	auto ross_txt_test = "ross.txt.new";
 	D.LoadAndExportDict(D.GetDictFolder(), ross_txt_test);
 	auto canon = file_to_string(ross_txt);
+	REQUIRE(canon.length() > 0);
 	auto test = file_to_string(ross_txt_test);
 	CHECK(canon == test);
 }
@@ -136,6 +138,58 @@ TEST_CASE("test_Russian_free_domain") {
 	CHECK(dom_str == "D_RLE");
 }
 
+TEST_CASE("test_good_vals") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	std::string art_str = "VAL = SUB, A1, C\n"
+		"RESLT, A2, C\n"
+		"SRC-PNT, A3, C\n"
+		"TRG-PNT, A4, C\n"
+		"LOK, A5, C\n"
+		"TIME, A6, C\n"
+		"AIM, A7, C\n"
+		;
+	A1.ReadFromUtf8String(art_str.c_str());
+	CHECK(A1.GetCortegesSize() == 7);
+	A1.SetUnitNo(D.InsertUnit("test1", 1));
+	A1.WriteToDictionary();
+
+}
+
+TEST_CASE("test_long_example") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	std::string art_str = "EXM     =  выявить потенциальных лидеров , способных не на словах , а на деле двигать перестройку вперед да";
+	A1.ReadFromUtf8String(art_str.c_str());
+	CHECK(A1.GetCortegesSize() == 1);
+	A1.SetUnitNo(D.InsertUnit("test1", 1));
+	A1.WriteToDictionary();
+
+}
+
+TEST_CASE("test_broken_vals") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	std::string art_str = "VAL = SUB, A2, C";
+	A1.ReadFromUtf8String(art_str.c_str());
+	A1.SetUnitNo(D.InsertUnit("test1", 1));
+	try {
+		A1.WriteToDictionary();
+		CHECK(false);
+	}
+	catch (CExpc c) {
+	}
+}
+
+TEST_CASE("test_masked_vals") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	std::string art_str = "VAL     =  SUB , * , C";
+	A1.ReadFromUtf8String(art_str.c_str());
+	A1.SetUnitNo(D.InsertUnit("test1", 1));
+	A1.WriteToDictionary();
+}
+
 TEST_CASE("test_field_aux") {
 	CDictionary D = LoadScheme("test2");
 	CTempArticle A1(&D);
@@ -144,6 +198,57 @@ TEST_CASE("test_field_aux") {
 	CHECK(A1.GetCortegesSize() == 1);
 }
 
+TEST_CASE("test_add_new") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	std::string new_value = "——new example 1000";
+	std::string art_str = "EXM     =  " + new_value;
+	auto dom_no = D.GetDomenNoByDomStr("D_EXM");
+	CHECK(dom_no != ErrUChar);
+	const CDomen& d = D.m_Domens[dom_no];
+	auto item_id1 = d.GetDomItemIdByStr(new_value);
+	CHECK(is_null(item_id1));
+	A1.ReadFromUtf8String(art_str.c_str());
+	auto item_id2 = d.GetDomItemIdByStr(new_value);
+	CHECK(!is_null(item_id2));
+	auto saved_item_str = d.GetDomItemStrById(item_id2);
+	CHECK(saved_item_str == new_value);
+	std::set<uint32_t> ids;
+	for (auto s : d.GetAllStrings()) {
+		if (s != new_value) {
+			auto id = d.GetDomItemIdByStr(s);
+			CHECK(id != item_id2);
+			CHECK(ids.find(id) == ids.end());
+			ids.insert(id);
+			auto s1 = d.GetDomItemStrById(id);
+			CHECK(s1 == s);
+		}
+	}
+}
+
+TEST_CASE("test_add_new") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	std::string new_value = "——new example 1000";
+	std::string art_str = "EXM     =  " + new_value;
+	auto dom_no = D.GetDomenNoByDomStr("D_EXM");
+	CHECK(dom_no != ErrUChar);
+	const CDomen& d = D.m_Domens[dom_no];
+	auto item_id1 = d.GetDomItemIdByStr(new_value);
+	CHECK(is_null(item_id1));
+	A1.ReadFromUtf8String(art_str.c_str());
+	auto item_id2 = d.GetDomItemIdByStr(new_value);
+	CHECK(!is_null(item_id2));
+	auto saved_item_str = d.GetDomItemStrById(item_id2);
+	CHECK(saved_item_str == new_value);
+	for (auto s : d.GetAllStrings()) {
+		if (s != new_value) {
+			CHECK(d.GetDomItemIdByStr(s) != item_id2);
+		}
+	}
+}
+
+
 int main(int argc, char** argv) {
 	init_plog(plog::Severity::debug, "struct_dict_test.log");
 	doctest::Context context;
@@ -151,16 +256,6 @@ int main(int argc, char** argv) {
 	int res;
 	try {
 		res = context.run(); // run doctest
-	}
-	catch (article_parse_error& a)
-	{
-		PLOGE << "test = " << TestName << " : " << a.what();
-		return 1;
-	}
-	catch (CExpc& e)
-	{
-		PLOGE << "test = " << TestName << " : " << e.what();
-		return 1;
 	}
 	catch (std::exception& e)
 	{

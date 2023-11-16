@@ -35,7 +35,10 @@ class CDomen {
     std::vector<BYTE> DomainPartPtrs;
     dom_item_id_t m_UnusedDomItemId;
     std::vector< TDomenItem> m_DomItems;
-    std::vector< size_t>  m_ItemId2ItimeIndex;
+    std::vector< size_t>  m_ItemId2ItemIndex;
+
+    void UpdateIndex(uint32_t inner_item_id, size_t offset);
+
 public:
     bool IsFree;
 

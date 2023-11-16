@@ -53,10 +53,9 @@ void CSignat::BuildSignatFormat(const TItemContainer* parent, BYTE MaxNumDom, st
         DomsWithDelims.push_back(TSignatItem(domenNo, is_mult));
         if (D.DomainIsDelim()) {
             sFrmt += " ";
-            if (!D.IsEmpty()) {
-                sFrmt += D.GetFirstDomStr();
-                sFrmtWithotSpaces += D.GetFirstDomStr();
-            }
+            assert(!D.IsEmpty());
+            sFrmt += D.GetFirstDomStr();
+            sFrmtWithotSpaces += D.GetFirstDomStr();
         }
         else {
             sFrmt += " %s";
