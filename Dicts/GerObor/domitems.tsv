@@ -1,11 +1,11 @@
 -1	D_
 0	*
+-1	D_RLE
 -1	D_GRAFEM_DESC
 0	ДЕФ
 1	ЗПТ
 2	ЦБК
 3	ЦК
-4	двтч
 5	квч
 -1	D_COLON
 0	:
@@ -112,6 +112,7 @@
 99	S_res
 100	V0
 101	Ver
+-1	D_GRAM_FUNCT
 -1	D_OPN
 0	(
 -1	D_SEM_REL
@@ -205,6 +206,8 @@
 8	9
 -1	D_COMMA
 0	,
+-1	D_ENCYC_FUNC
+-1	D_THES
 -1	D_SF
 0	ABSTR
 1	ADM
@@ -251,6 +254,7 @@
 42	STAT
 43	SUBST
 44	THINGN
+-1	D_COLLOC
 -1	D_CAT
 0	LAB
 1	LAB.OB
@@ -258,7 +262,7 @@
 3	LAB.SIT
 4	RELAT
 -1	D_ENGL
-0	FЬR das
+0	FÜR das
 1	an das
 2	an dem
 3	auf das
@@ -276,8 +280,8 @@
 15	vor dem
 16	zu dem
 17	zu der
-18	ЬBER das
-19	ЬBER dem
+18	ÜBER das
+19	ÜBER dem
 -1	D_CLS
 0	)
 -1	D_FIELDS
@@ -308,120 +312,6 @@
 2	G
 3	N
 -1	D_PREP_COLLOC
-0	в адрес
-1	в виде
-2	в вопросе о
-3	в должности
-4	в должность
-5	в защиту
-6	в значении
-7	в качестве
-8	в количестве
-9	в направлении
-10	в области
-11	в объеме
-12	в отношении
-13	в поддержку
-14	в пользу
-15	в порядке
-16	в пределах
-17	в размере
-18	в рамках
-19	в распоряжение
-20	в редакции
-21	в результате
-22	в руки
-23	в связи с
-24	в системе
-25	в случае
-26	в соответствие с
-27	в соответствии с
-28	в составе
-29	в сравнении с
-30	в сторону
-31	в сумме
-32	в сфере
-33	в течение
-34	в форме
-35	в ходе
-36	в целях
-37	вместе с
-38	во время
-39	во имя
-40	для целей
-41	до сведения
-42	достоинством в
-43	за время
-44	за номером
-45	за пределами
-46	за пределы
-47	за счет
-48	из числа
-49	исходя из
-50	на базе
-51	на верность
-52	на должности
-53	на должность
-54	на имя
-55	на момент
-56	на основании
-57	на основе
-58	на период
-59	на пост
-60	на посту
-61	на прием к
-62	на срок
-63	на стороне
-64	на сумму
-65	на сумму в
-66	на счет
-67	на тему
-68	на тему о
-69	на территорию
-70	на уровне
-71	на условиях
-72	на участке
-73	на фундаменте
-74	начиная с
-75	не в пользу
-76	одновременно с
-77	от имени
-78	по вопросам
-79	по вопросам о
-80	по вопросу
-81	по вопросу о
-82	по делам
-83	по делу о
-84	по маршруту
-85	по месту
-86	по направлению к
-87	по обвинению в
-88	по отношению к
-89	по поводу
-90	по причине
-91	по проблеме
-92	по сравнению с
-93	по ставке
-94	по цене
-95	под залог
-96	под руководством
-97	под эгидой
-98	при помощи
-99	с дивидендом
-100	с должности
-101	с помощью
-102	с поста
-103	с просьбой
-104	с просьбой о
-105	с требованием
-106	с учетом
-107	с целью
-108	со стороны
-109	со счета
-110	сравнительно с
-111	сроком на
-112	стоимостью в
-113	тиражом в
 -1	D_PLUS
 0	+
 -1	D_DASH
@@ -446,6 +336,7 @@
 0	-
 -1	D_PERCENT
 0	%
+-1	D_DOMAIN
 -1	D_RESHETKA
 0	#
 -1	D_FULL_STOP
@@ -457,17 +348,22 @@
 -1	D_BOOL
 0	+
 1	-
+-1	D_ABBR
 -1	D_NUMBER
 0	fixed
 1	pl
 2	sg
+-1	D_PREP
+-1	D_1
 -1	D_START_PHR
 0	D_CONJ
 1	D_PREP
 2	D_PREP_COLLOC
 3	D_WORDFORM
+-1	D_WORDFORM
 -1	D_UNDERLINE
 0	_
+-1	D_CASE_NUMBER
 -1	D_VP_SPECIF
 0	inf
 -1	D_PHR_SPECIF
@@ -482,11 +378,13 @@
 -1	D_SYN_FUNCT
 0	D_GROUPS
 1	D_SYN_REL
+-1	D_GF_MAIN
 -1	D_CASE_PLUS
 0	D_CASE
 1	D_CASE_MUA
 2	D_CASE_NUMBER
 3	D_CASE_POS
+-1	D_TYPE
 -1	D_EXCL_MARK
 0	!
 -1	D_RLE_PLUS
@@ -498,27 +396,37 @@
 -1	D_CONJ_PLUS
 0	D_CONJ
 1	D_GRAFEM_DESC
+-1	D_CASE_MUA
 -1	D_CASE_POS
 0	Т_ПРИЛ
 -1	D_EXM
 0	Als ich noch zur Schule ging, hatte ich viel mehr Freizeit.
 1	Anstatt sich zu bedanken, beleidigte er den Helfer
 2	Er kauft entweder ein Auto oder ein Fahrrad.
-3	Er kauft teils Autos, teils Fahrrдder.
+57	Er kauft teils Autos, teils Fahrrãder.
+3	Er kauft teils Autos, teils Fahrräder.
 4	Es gab zwar ein paar Gefechte, aber keinen nennenswerten Widerstand.
 5	Es gab zwar ein paar Gefechte, aber offenbar keinen nennenswerten Widerstand.
+51	FÜR das
 6	Ich habe die Prufung bestanden, da ich gut vorbereitet war.
 7	Ich lerne die Vokabeln, damit ich den morgigen Test bestehe.
 8	Ich mache das, um dich zu besuchen.
 9	Ich wei?, dass du klug bist
+49	Ich weiß, dass du klug bist
 10	Ich weiЯ, dass du klug bist
 11	Nunmehr wurde ein Dekret unterzeichnet als Staatsgebiet erklart wird.
 12	Sie mussen, bevor sie zum Verkauf gelangen, einer amtlichen Prufung unterzogen werden
+46	an das
+45	an dem
+47	auf das
+48	bei dem
 13	die Bank vorlaufig geschlossen zu bleiben habe, bis die Aufstellung des Status vollendet ist.
 14	du kannst bleiben, s. du willst
 15	du kannst mitkommen, falls du Lust hast
+50	durch das
 16	ein paar Gefechte
-17	er fragte sie, ob sie noch kдme
+56	er fragte sie, ob sie noch kãme
+17	er fragte sie, ob sie noch käme
 18	er hat blondes Haar, w. seine Geschwister alle dunkelhaarig sind
 19	er hat das Paket nicht mitgenommen, o. ich ihn darum gebeten hatte
 20	er hat viel Geld sparen kцnnen, indem er einen Teil der Arbeit selbst gemacht hat
@@ -526,8 +434,12 @@
 22	er studiert Mathematik, insofern  es fur seine Arbeit notwendig ist
 23	es kam, w. ich es erwartet hatte
 24	es vergingen drei Stunden, ehe wir landen konnten
+53	hinter das
+52	hinter dem
 25	i. das zutrifft, werden wir intervenieren
 26	ich rufe an, s. ich zu Hause bin
+55	in das
+54	in dem
 27	indes er seine Arbeit fertig machte, gingen die anderen spazieren
 28	insofern das zutrifft, werden wir intervenieren
 29	n. ich gegessen hatte, legte ich mich eine Weile hin
@@ -540,12 +452,22 @@
 36	sie nahm Platz, o. gefragt zu haben
 37	sie nimmt die Einladung gern an, z. sie allein ist
 38	so Gott will, sehen wir uns bald wieder
-39	w. es dir recht ist, trete ich sofort zurьck
+58	um das
+60	unter das
+59	unter dem
+61	von dem
+63	vor das
+62	vor dem
+39	w. es dir recht ist, trete ich sofort zurück
 40	w. sie verreist waren, hat man bei ihnen eingebrochen.
 41	wenn ein Teil bis zu den Zaehnen bewaffnet ist und ein anderer wehrlos
 42	wenn ein Teil bis zu den Zahnen bewaffnet ist und ein anderer wehrlos
-43	wenn es dir recht ist, trete ich sofort zurьck
+43	wenn es dir recht ist, trete ich sofort zurück
 44	wir kommen morgen, s. es euch passt
+64	zu dem
+65	zu der
+67	ÜBER das
+66	ÜBER dem
 -1	D_CONDIT
 0	*CX2=inf -Eng. Gerund
 1	*ГХ2 = 1 сущ - adj
@@ -596,15 +518,10 @@
 46	СХ2 = 1 ПРЕДИК
 47	СХ2=1 ЛИЦО
 48	СХ=В-НАПР
-49	переводит целиком выражение "с участием присяжных
-50	переводит целиком выражение "с участием присяжных заседателей"
-51	русское сущ становится прил
-52	такой последовательности:
 -1	D_INFERENCE
 0	МНА ( А2 , А1 )
 1	МНА , А2 , А1
 2	МНА{А1,А2}
-3	МНА{А1,А2}
 4	МНУ{А1,А2}
 5	ОБ ( А2 , изменить )
 6	ОДНОВР(А2,А1)
@@ -627,14 +544,16 @@
 3	>
 4	>>
 5	^
+-1	D_TITLE
 -1	D_QUES_MARK
 0	?
 -1	D_CONTAIN
+281	(dass | daß)
 0	(dass | daЯ)
 1	, wenn nicht sogar
 2	AB
 3	ABSEITS
-4	ABZЬGLICH
+4	ABZÜGLICH
 5	ALS
 6	AM
 7	AN
@@ -655,7 +574,7 @@
 22	BEI
 23	BEIDERSEITS
 24	BEIM
-25	BEZЬGLICH
+25	BEZÜGLICH
 26	BINNEN
 27	BIS
 28	DANK
@@ -669,10 +588,10 @@
 36	ENTSPRECHEND
 37	EXKLUSIVE
 38	FERN
-39	FЬR
-40	FЬRS
+39	FÜR
+40	FÜRS
 41	GEGEN
-42	GEGENЬBER
+42	GEGENÜBER
 43	GEMДЯ
 44	GEN
 45	GLEICH
@@ -743,19 +662,20 @@
 110	ZUR
 111	ZUUNGUNSTEN
 112	ZUWIDER
-113	ZUZЬGLICH
+113	ZUZGLICH
 114	ZWECKS
 115	ZWISCHEN
 116	ab
 117	aber
 118	abseits
-119	abzьglich
+119	abzüglich
 120	als
 121	am
 122	an
 123	angesichts
 124	anhand
-125	anlдЯlich
+278	anlãßlich
+125	anläЯlich
 126	ans
 127	anstatt
 128	anstelle
@@ -766,13 +686,15 @@
 133	aufseiten
 134	aus
 135	ausgangs
+279	außer
+280	außerhalb
 136	auЯer
 137	auЯerhalb
 138	bei
 139	beiderseits
 140	beim
 141	bevor
-142	bezьglich
+142	bezüglich
 143	binnen
 144	bis
 145	bis zu
@@ -784,10 +706,12 @@
 151	durch
 152	durchs
 153	ehe
+282	ein bißchen
 154	ein biЯchen
 155	ein paar
 156	ein wenig
 157	eingangs
+283	einschließlich
 158	einschlieЯlich
 159	entgegen
 160	entlang
@@ -796,11 +720,12 @@
 163	exklusive
 164	falls
 165	fern
-166	fьr
-167	fьrs
+166	für
+167	fürs
 168	gegen
-169	gegenьber
-170	gemдЯ
+169	gegenüber
+284	gemãß
+170	gemäЯ
 171	gen
 172	gleich
 173	hinsichtlich
@@ -826,8 +751,10 @@
 193	kurz nach
 194	kurz vor
 195	laut
-196	lдngs
-197	lдngsseits
+285	lãngs
+286	lãngsseits
+196	längs
+197	längsseits
 198	mangels
 199	mit
 200	mitsamt
@@ -837,7 +764,8 @@
 204	nahe
 205	neben
 206	nebst
-207	nдchst
+287	nãchst
+207	nächst
 208	ob
 209	oberhalb
 210	obwohl | obgleich | obschon | obzwar
@@ -854,7 +782,8 @@
 221	seit | seitdem
 222	seitens
 223	seitlich
-224	seitwдrts
+288	seitwãrts
+224	seitwärts
 225	so
 226	sobald | sowie
 227	sofern
@@ -887,7 +816,8 @@
 254	wider
 255	wie
 256	wohingegen
-257	wдhrend
+289	wãhrend
+257	während
 258	zeit
 259	zu
 260	zufolge
@@ -898,13 +828,14 @@
 265	zur
 266	zuungunsten
 267	zuwider
-268	zuzьglich
+268	zuzüglich
 269	zwar  ... aber
 270	zwecks
 271	zwischen
-272	ЬBER
-273	ЬBERM
-274	ЬBERS
-275	ьber
-276	ьberm
-277	ьbers
+272	ÜBER
+273	ÜBERM
+274	ÜBERS
+275	über
+276	überm
+277	übers
+-1	D_INTEGER

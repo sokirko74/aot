@@ -395,4 +395,17 @@
         "is_delim": false,
         "is_free": false
     }
+,
+    {
+        "category": 84,
+        "dom_ident": "D_INTEGER",
+        "is_delim": false,
+        "is_free": true
+    },
+    {
+        "category": 84,
+        "dom_ident": "D_TITLE",
+        "is_delim": false,
+        "is_free": true
+    }
 ]

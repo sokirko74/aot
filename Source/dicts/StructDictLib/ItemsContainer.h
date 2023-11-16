@@ -33,7 +33,8 @@ public :
 	BYTE WildCardDomNo;
 	BYTE IllDomNo;
 	BYTE IntegerDomNo;
-	int WildCardDomItemNo;
+	dom_item_id_t WildCardDomItemNo;
+	BYTE EnglDomNo;
 
 
 	TItemContainer();

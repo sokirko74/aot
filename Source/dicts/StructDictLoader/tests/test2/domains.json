@@ -414,5 +414,11 @@
         "is_delim": false,
         "is_free": true
     }
-
+ ,
+    {
+        "category": 77,
+        "dom_ident": "D_QUES_MARK",
+        "is_delim": true,
+        "is_free": false
+    }
 ]

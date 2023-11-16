@@ -70,6 +70,7 @@ void TItemContainer::InitDomensConsts() {
     AbbrDomNo = GetDomenNoByDomStr("D_ABBR", true);
     FieldDomNo = GetDomenNoByDomStr("D_FIELDS", true);
     WildCardDomNo = GetDomenNoByDomStr("D_", true);
+    EnglDomNo = GetDomenNoByDomStr("D_ENGL", true);
 };
 
 
@@ -211,7 +212,15 @@ template bool CheckUtf8<IsUnicodeRussianLower>(const std::string& s);
 template bool FindInUtf8<IsUnicodeCyrillic>(const std::string& s);
 
 static bool Check_D_RLE(const std::string& s) {
-    return CheckUtf8<IsUnicodeCyrillic>(s);
+    if (s.empty()) {
+        return false;
+    }
+    if (s[0] == '#') {
+        return CheckUtf8<IsUnicodeCyrillic>(s.substr(1));
+    }
+    else {
+        return CheckUtf8<IsUnicodeCyrillic>(s);
+    }
 }
 
 // вопр.

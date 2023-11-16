@@ -19370,7 +19370,7 @@ GF1     = 1  NP_poss
           2  -
 LF      =  Oper1 : shoot 1
            Oper1 : flash 1
-           Oper1 : glance 1 / без дополнения
+           Oper1 : glance 1
 RUS     =  взгляд 2
 ============
 TITLE        = glitter

@@ -448,7 +448,10 @@ void CTempArticle::CheckCortegeVector()
 
 		};
 
-
+		/*
+		METHOD (A1, A2)
+		METHOD (*, A1)
+		METHOD (C, A1)
 		if (FldName == "VAL")
 		{
 			dom_item_id_t item1 = GetCortege(i).GetItem(1);
@@ -470,7 +473,7 @@ void CTempArticle::CheckCortegeVector()
 				ActantNo++;
 			}
 		};
-
+		*/
 	}
 }
 

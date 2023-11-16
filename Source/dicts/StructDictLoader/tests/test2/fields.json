@@ -133,6 +133,10 @@
         "order": 190,
         "signats": [
             {
+                "format": "D_QUES_MARK D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS ",
+                "signat_id": 0
+            },
+            {
                 "format": "D_SEM_REL D_COMMA D_ACTANTS D_COMMA D_ACTANTS ",
                 "signat_id": 1
             }
@@ -418,6 +422,18 @@
         "signats": [
             {
                 "format": "D_GRAM_FUNCT D_OPN D_RLE_PLUS D_CLS",
+                "signat_id": 0
+            }
+        ],
+        "type": 77
+    },
+    {
+        "actant": true,
+        "name": "ELEX",
+        "order": 240,
+        "signats": [
+            {
+                "format": "D_ENGL",
                 "signat_id": 0
             }
         ],

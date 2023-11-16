@@ -372,28 +372,30 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 	{
 		BYTE DomNo = doms[i].m_DomNo;
 		bool IsMult = doms[i].m_IsMult;
-		bool IsDelim = m_Domens[DomNo].DomainIsDelim();
+		const CDomen& D = m_Domens[DomNo];
+		bool IsDelim = D.DomainIsDelim();
 		bool FlagLastItem = (i == doms.size() - 1);
-		char Delim[10];
-		Delim[0] = 0;
+		char delims[10];
+		delims[0] = 0;
 
 		bool FlagNextDelim = false;
-		if (!FlagLastItem)
+		if (!FlagLastItem) {
 			if ((i < doms.size() - 1)
 				&& m_Domens[doms[i + 1].m_DomNo].DomainIsDelim()
 				&& !m_Domens[doms[i + 1].m_DomNo].IsEmpty()
-				)
+				) 
+			{
 				FlagNextDelim = true;
-
-		if (FlagNextDelim)
-			strcat(Delim, m_Domens[doms[i + 1].m_DomNo].GetFirstDomStr().c_str());
+				strcat(delims, m_Domens[doms[i + 1].m_DomNo].GetFirstDomStr().c_str());
+			}
+		}
 
 		if (!FlagLastItem && !FlagNextDelim)
-			strcat(Delim, " ");
+			strcat(delims, " ");
 
 		while (isspace((unsigned  char)q[0])) q++;
 
-		size_t item_str_len = IsDelim ? 1 : strcspn(q, Delim);
+		size_t item_str_len = IsDelim ? 1 : strcspn(q, delims);
 		std::string item_str(q, q + item_str_len);
 		q += item_str_len;
 
@@ -408,7 +410,8 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 			и пришло русское слово, тогда не будем добавлять его в
 				в D_ENGL
 		*/
-		if (m_Domens[DomNo].GetDomStr() == "D_ENGL" && !is_ascii_string(item_str)) {
+		if (DomNo == EnglDomNo && (!startswith(item_str, "#") && !is_ascii_string(item_str)))
+		{
 			return false;
 		}
 
@@ -433,8 +436,13 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 			DomNo = GetDomenNoByDomStr("D_MULT");
 		};
 
-		// #### Поиск найденной  строки в домене
-		if (!IsDelim) {
+		if (IsDelim) {
+			if (D.GetFirstDomStr() != item_str) {
+				return false;
+			}
+		}
+		else {
+			// #### Поиск найденной  строки в домене
 			dom_item_id_t item_id;
 			if (item_str == "*")
 			{
@@ -442,7 +450,7 @@ bool   TRoss::ReadFromStrWithOneSignatura(const char* s, TCortege& C, const CSig
 			}
 			else {
 				item_id = GetItemIdByItemStr(item_str, DomNo);
-				if (!m_Domens[DomNo].IsFree && (DomNo != LexPlusDomNo) && is_null(item_id))
+				if (!D.IsFree && (DomNo != LexPlusDomNo) && is_null(item_id))
 					return false;
 			};
 			C.SetItem(item_strs.size(), item_id);

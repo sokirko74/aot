@@ -6,6 +6,18 @@ AUTHOR       = user
 REDACT       = alex
 TIME_CREATE       = 14/2/1 20:48:59
 ============
+TITLE        = ЧИСЛ_из+Р_ЧИСЛ
+SENSE       = 1
+REDACT       = alex
+TIME_CREATE       = 20/9/2 15:10:42
+CONTENT =  из
+GF      = 1  ПРОСТ_ПРЕДЛ
+SF      = 1  PART
+VAL     =  PART , A2 , A1
+GF1     = 1  ЧИСЛ
+GF2     = 1  ЧИСЛ
+ENG     =  from 1
+============
 TITLE        = Шалтай_Балтай_сидел_на_стене
 SENSE       = 1
 AUTHOR       = graf
@@ -3353,6 +3365,17 @@ SF1     = 1  SITUAT
 GF2     = 1  >> ПРОП
 ENG     =  because 1
 ============
+TITLE        = выше+Р
+SENSE       = 1
+TIME_CREATE       = 14/2/1 20:49:1
+CONTENT =  выше
+GF      = 1  ПРОСТ_ПРЕДЛ
+VAL     =  ACT , A1 , A2
+GF1     = 1  ГГ
+          2  < ИГ
+GF2     = 1  >> Р
+ENG     =  over 1
+============
 TITLE        = главное
 SENSE       = 1
 AUTHOR       = user
@@ -3966,18 +3989,6 @@ ENG     =  from 1
            out_of 1
            out 1
            a 1
-============
-TITLE        = ЧИСЛ_из+Р_ЧИСЛ
-SENSE       = 1
-REDACT       = alex
-TIME_CREATE       = 20/9/2 15:10:42
-CONTENT =  из
-GF      = 1  ПРОСТ_ПРЕДЛ
-SF      = 1  PART
-VAL     =  PART , A2 , A1
-GF1     = 1  ЧИСЛ
-GF2     = 1  ЧИСЛ
-ENG     =  from 1          
 ============
 TITLE        = из-за+Р
 SENSE       = 1
@@ -7838,17 +7849,6 @@ TITLE        = свыше+Р
 SENSE       = 1
 TIME_CREATE       = 14/2/1 20:49:1
 CONTENT =  свыше
-GF      = 1  ПРОСТ_ПРЕДЛ
-VAL     =  ACT , A1 , A2
-GF1     = 1  ГГ
-          2  < ИГ
-GF2     = 1  >> Р
-ENG     =  over 1
-============
-TITLE        = выше+Р
-SENSE       = 1
-TIME_CREATE       = 14/2/1 20:49:1
-CONTENT =  выше
 GF      = 1  ПРОСТ_ПРЕДЛ
 VAL     =  ACT , A1 , A2
 GF1     = 1  ГГ

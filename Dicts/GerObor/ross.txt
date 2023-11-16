@@ -32,10 +32,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = abzьglich+G
+TITLE        = abzüglich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  abzьglich
+CONTENT =  abzüglich
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -104,10 +104,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = anlдЯlich+G
+TITLE        = anlãßlich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  anlдЯlich
+CONTENT =  anlãßlich
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -245,10 +245,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = auЯer+D
+TITLE        = außer+D
 SENSE       = 2
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  auЯer
+CONTENT =  außer
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -256,10 +256,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = auЯer+G
+TITLE        = außer+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  auЯer
+CONTENT =  außer
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -267,10 +267,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = auЯerhalb+G
+TITLE        = außerhalb+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  auЯerhalb
+CONTENT =  außerhalb
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -326,10 +326,10 @@ VAL     =  TIME , А1 , А2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = bezьglich+G
+TITLE        = bezüglich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  bezьglich
+CONTENT =  bezüglich
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -430,8 +430,8 @@ SENSE       = 1
 AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 23/8/3 16:48:51
-CONTENT =  (dass | daЯ)
-EXM     =  Ich weiЯ, dass du klug bist
+CONTENT =  (dass | daß)
+EXM     =  Ich weiß, dass du klug bist
 GF      = 1  KON_unt
 VAL     =  CONTEN , А1 , А2
 GF1     = 1  SENT
@@ -483,12 +483,12 @@ VAL     =  TIME , А1 , А2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = ein biЯchen
+TITLE        = ein bißchen
 SENSE       = 1
 AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 8/4/3 16:42:50
-CONTENT =  ein biЯchen
+CONTENT =  ein bißchen
            ein wenig
 EXM     =  sich ein wenig oeffnen
 RESTR   =  fixed !
@@ -519,10 +519,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = einschlieЯlich+G
+TITLE        = einschließlich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  einschlieЯlich
+CONTENT =  einschließlich
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -607,10 +607,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = fьr+A
+TITLE        = für+A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  fьr
+CONTENT =  für
 GF      = 1  PRP
 SF      = 1  MODL
           2  TIME
@@ -619,11 +619,11 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
 ============
-TITLE        = fьrs+A
+TITLE        = fürs+A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  fьrs
-DERIV   =  FЬR das
+CONTENT =  fürs
+DERIV   =  FÜR das
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -644,10 +644,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> A
 ============
-TITLE        = gegenьber+D
+TITLE        = gegenüber+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  gegenьber
+CONTENT =  gegenüber
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
@@ -656,10 +656,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = gemдЯ+D
+TITLE        = gemãß+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  gemдЯ
+CONTENT =  gemãß
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -953,10 +953,10 @@ GF1     = 1  VP
 GF2     = 1  >> G
           2  >> D
 ============
-TITLE        = lдngs+G
+TITLE        = lãngs+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  lдngs
+CONTENT =  lãngs
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -965,10 +965,10 @@ GF1     = 1  VP
 GF2     = 1  >> G
           2  >> D
 ============
-TITLE        = lдngsseits+G
+TITLE        = lãngsseits+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  lдngsseits
+CONTENT =  lãngsseits
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -1080,10 +1080,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = nдchst+D
+TITLE        = nãchst+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  nдchst
+CONTENT =  nãchst
 GF      = 1  PRP
 SF      = 1  LOK
 VAL     =  LOK , А2 , А1
@@ -1097,7 +1097,7 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 14:32:7
 CONTENT =  ob
-EXM     =  er fragte sie, ob sie noch kдme
+EXM     =  er fragte sie, ob sie noch kãme
 GF      = 1  KON_unt
 VAL     =  CONTEN , А1 , А2
 GF1     = 1  SENT
@@ -1259,10 +1259,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> G
 ============
-TITLE        = seitwдrts+G
+TITLE        = seitwãrts+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  seitwдrts
+CONTENT =  seitwãrts
 GF      = 1  PRP
 SF      = 1  MODL
           2  LOK
@@ -1361,7 +1361,7 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 15/4/3 14:46:26
 CONTENT =  teils  ... teils
-EXM     =  Er kauft teils Autos, teils Fahrrдder.
+EXM     =  Er kauft teils Autos, teils Fahrrãder.
 GF      = 1  DISKONT_KON
 ============
 TITLE        = trotz+G
@@ -1616,7 +1616,7 @@ AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 15:35:1
 CONTENT =  wenn
-EXM     =  wenn es dir recht ist, trete ich sofort zurьck
+EXM     =  wenn es dir recht ist, trete ich sofort zurück
 GF      = 1  KON_unt
 VAL     =  COND , А1 , А2
 GF1     = 1  SENT
@@ -1666,22 +1666,22 @@ VAL     =  COMP , А1 , А2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = wдhrend
+TITLE        = wãhrend
 SENSE       = 1
 AUTHOR       = alex
 REDACT       = alex
 TIME_CREATE       = 20/3/3 15:17:56
-CONTENT =  wдhrend
+CONTENT =  wãhrend
 EXM     =  w. sie verreist waren, hat man bei ihnen eingebrochen.
 GF      = 1  KON_unt
 VAL     =  TIME , А1 , А2
 GF1     = 1  SENT
 GF2     = 1  SUBCLAUSE
 ============
-TITLE        = wдhrend+G
+TITLE        = wãhrend+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  wдhrend
+CONTENT =  wãhrend
 GF      = 1  PRP
 SF      = 1  TIME
 VAL     =  TIME , А2 , А1
@@ -1808,10 +1808,10 @@ GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = zuzьglich+G
+TITLE        = zuzüglich+G
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  zuzьglich
+CONTENT =  zuzüglich
 GF      = 1  PRP
 SF      = 1  MODL
 VAL     =  MODL , А2 , А1
@@ -1852,10 +1852,10 @@ GF1     = 1  VP
 GF2     = 1  >> D
           2  >> A
 ============
-TITLE        = ьber+D/A
+TITLE        = über+D/A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  ьber
+CONTENT =  über
 GF      = 1  PRP
 SF      = 1  TIME
           2  LOK
@@ -1865,22 +1865,22 @@ GF1     = 1  VP
 GF2     = 1  >> D
           2  >> A
 ============
-TITLE        = ьberm+D
+TITLE        = überm+D
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  ьberm
-DERIV   =  ЬBER dem
+CONTENT =  überm
+DERIV   =  ÜBER dem
 GF      = 1  PRP
 VAL     =  CAUSE , А2 , А1
 GF1     = 1  VP
           2  < NP
 GF2     = 1  >> D
 ============
-TITLE        = ьbers+A
+TITLE        = übers+A
 SENSE       = 1
 TIME_CREATE       = 9/3/3 11:55:44
-CONTENT =  ьbers
-DERIV   =  ЬBER das
+CONTENT =  übers
+DERIV   =  ÜBER das
 GF      = 1  PRP
 VAL     =  CAUSE , А2 , А1
 GF1     = 1  VP

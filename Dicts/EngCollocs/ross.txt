@@ -104,7 +104,6 @@ TITLE        = all_the_same
 SENSE       = 1
 AUTHOR       = user
 REDACT       = d
-TIME_CREATE       = 3473408/786433/523788 3737065:251396358:-1236992000
 CONTENT =  all the same
 EXM     =  if it is all the same to you —
            если вы не возражаете; если это вам безразлично

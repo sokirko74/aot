@@ -259,6 +259,7 @@
 12	ПРИНАДЛ
 13	СОСТОИТ
 14	ЧАСТЬ
+-1	D_THES
 -1	D_SF
 0	ABSTR
 1	ADM
@@ -317,6 +318,7 @@
 54	STAT
 55	SUBST
 56	THINGN
+-1	D_COLLOC
 -1	D_CAT
 0	ASP
 1	GEO
@@ -347,6 +349,7 @@
 16	use
 -1	D_CLS
 0	)
+-1	D_FIELDS
 -1	D_SYN_REL
 0	DEGREE
 1	FREQ
@@ -477,6 +480,7 @@
 -1	D_BOOL
 0	+
 1	-
+-1	D_ABBR
 -1	D_NUMBER
 0	ед
 1	мн
@@ -662,7 +666,6 @@
 176	по вопросу+Р
 177	по делам+Р
 178	по делу о+П
-179	по маршруту+ИГ
 180	по маршруту+ИГ
 181	по месту+Р
 182	по направлению к+Д
@@ -724,6 +727,7 @@
 1	D_PREP
 2	D_PREP_COLLOC
 3	D_WORDFORM
+-1	D_WORDFORM
 -1	D_UNDERLINE
 0	_
 -1	D_CASE_NUMBER
@@ -916,3 +920,4 @@
 10	память
 11	процессор
 12	сеть
+-1	D_INTEGER

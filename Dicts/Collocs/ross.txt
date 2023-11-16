@@ -178,7 +178,6 @@ TITLE        = бросаться_в_глаза
 SENSE       = 1
 AUTHOR       = graf
 REDACT       = d
-TIME_CREATE       = 3080192/786433/523588 3409377:1728315654:-1236992000
 ROOT    =  1
 CONTENT =  бросаться _ глаза
 GF      = 1  Г
@@ -1459,16 +1458,18 @@ TIME_CREATE       = 15/5/1 14:24:13
 ROOT    =  2
 EXM     =  Каким образом эта коробка очутилась здесь?
 CONTENT =  какой образ
+GF      = 1  С : ИГ
 CAT     = 1  RELAT
 SF      = 1  METHOD
-VAL     =  METHOD , A2 , A1
-GF(2)   = 1  ед,тв
-SYNR    =  ПРИЛ-СУЩ ( C2 , C1 )
-ENG     =  how 1
+VAL     =  F-ACT , A1 , C
+           S-ACT , A2 , C
 GF1     = 1  < X! : ГГ
           2  > X! : ГГ
-GF      = 1  С : ИГ
+GF(2)   = 1  ед,тв
+SYNR    =  ПРИЛ-СУЩ ( A2 , A1 )
+AUX     =  METHOD ( A2 , A1 )
 TYP     =  БЕЗУСЛ
+ENG     =  how 1
 ============
 TITLE        = кто_угодно
 SENSE       = 1

@@ -408,4 +408,11 @@
         "is_delim": false,
         "is_free": true
     }
+    ,
+    {
+        "category": 84,
+        "dom_ident": "D_INTEGER",
+        "is_delim": false,
+        "is_free": true
+    }
 ]

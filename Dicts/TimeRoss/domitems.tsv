@@ -266,6 +266,7 @@
 12	ПРИНАДЛ
 13	СОСТОИТ
 14	ЧАСТЬ
+-1	D_THES
 -1	D_SF
 0	ABSTR
 1	ADM
@@ -446,6 +447,7 @@
 105	yesterday
 -1	D_CLS
 0	)
+-1	D_FIELDS
 -1	D_SYN_REL
 0	X!
 1	вводн
@@ -499,6 +501,7 @@
 3	П
 4	Р
 5	Т
+-1	D_PREP_COLLOC
 -1	D_PLUS
 0	+
 -1	D_DASH
@@ -540,6 +543,7 @@
 0	.
 -1	D_GENDER
 0	М/Ж
+-1	D_CONJ
 -1	D_BOOL
 0	+
 1	-
@@ -747,6 +751,7 @@
 1	D_PREP
 2	D_PREP_COLLOC
 3	D_WORDFORM
+-1	D_WORDFORM
 -1	D_UNDERLINE
 0	_
 -1	D_CASE_NUMBER
@@ -801,6 +806,7 @@
 0	свобод
 -1	D_EXCL_MARK
 0	!
+-1	D_RLE_PLUS
 -1	D_MUA
 0	МНА
 -1	D_CONJ_PLUS
@@ -1027,6 +1033,8 @@
 210	это не ВГ в случаях типа "Он оказался прав, но как
 211	я долго не играл на пианино
 212	я погрузился  в  хаос  почерков
+-1	D_CONDIT
+-1	D_INFERENCE
 -1	D_SLASH
 0	\
 -1	D_SYN_ACTANTS
@@ -1417,3 +1425,4 @@
 22	рд
 23	рд, ед
 24	ср , дт , ед
+-1	D_INTEGER

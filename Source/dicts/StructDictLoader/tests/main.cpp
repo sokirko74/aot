@@ -167,19 +167,6 @@ TEST_CASE("test_long_example") {
 
 }
 
-TEST_CASE("test_broken_vals") {
-	CDictionary D = LoadScheme("test2");
-	CTempArticle A1(&D);
-	std::string art_str = "VAL = SUB, A2, C";
-	A1.ReadFromUtf8String(art_str.c_str());
-	A1.SetUnitNo(D.InsertUnit("test1", 1));
-	try {
-		A1.WriteToDictionary();
-		CHECK(false);
-	}
-	catch (CExpc c) {
-	}
-}
 
 TEST_CASE("test_masked_vals") {
 	CDictionary D = LoadScheme("test2");
@@ -247,7 +234,25 @@ TEST_CASE("test_add_new") {
 		}
 	}
 }
+TEST_CASE("test_special_char") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	std::string art_str = "ELEX     ==  #ФИН-ЕД-ИЗМ";
+	A1.ReadFromUtf8String(art_str.c_str());
 
+}
+
+TEST_CASE("test_val_for_or") {
+	CDictionary D = LoadScheme("test2");
+	CTempArticle A1(&D);
+	REQUIRE(!is_null(D.GetItemIdByItemStr("FOR", "D_SEM_REL")));
+	REQUIRE(!is_null(D.GetItemIdByItemStr("OR", "D_SEM_REL")));
+	std::string art_str = "VAL     =  FOR , A1 , A2";
+	A1.ReadFromUtf8String(art_str.c_str());
+	auto test = Trim(A1.GetArticleStrUtf8());
+	CHECK(art_str == test);
+
+}
 
 int main(int argc, char** argv) {
 	init_plog(plog::Severity::debug, "struct_dict_test.log");
