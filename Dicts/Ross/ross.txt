@@ -22396,7 +22396,7 @@ SF3     = 1  ORG
           2  COLLEC
           3  MEDINF
 LF      =  Oper1 : осуществлять
-ENG     =  exсlusion 1
+ENG     =  exclusion 1
 ============
 TITLE        = исключение
 SENSE       = 2
@@ -45370,7 +45370,7 @@ GF3     = 1  к_доп : на+В
           2  к_доп : в+В
 AUX     =  LOK ( A2 , A1 )
            LOK ( A3 , A1 )
-ENG     =  move 2С
+ENG     =  move 2
 ============
 TITLE        = перезаключение
 SENSE       = 1
@@ -64373,7 +64373,6 @@ GF1     = 1  к_доп : по+Д
           2  к_доп : на+В
 LF      =  Magn : подробное
 ENG     =  guide 2
-           man pages/ DOMAIN = информ
 SYN     =  справочник
 EXM     =  Руководство по социальным группам новостей
            Руководство на команду shutdown
@@ -66815,7 +66814,7 @@ SF2     = 1  ANIM
           2  INTEL
           3  LOK
 ENG     =  trammel
-           ice    / LEX1 = лед
+           ice
 EXM     =  страх сковывал ему силы
            лед сковал реку
 ============
