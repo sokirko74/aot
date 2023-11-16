@@ -852,7 +852,7 @@ void CWordList::BuildVals(std::vector<Valency>& Vals, uint16_t UnitNo)
 {
 	Vals.clear();
 	if (GetRoss()->IsEmptyArticle(UnitNo)) return;
-	for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
+	for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitLastPos(UnitNo); k++)
 		if (GetRoss()->GetCortege(k).m_FieldNo == GetDocument()->GetRossHolder()->ValFieldNo)
 		{
 			Valency V;

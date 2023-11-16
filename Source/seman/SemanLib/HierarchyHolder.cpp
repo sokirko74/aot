@@ -323,7 +323,7 @@ bool SemFetActantIsEqualOrLower(CRossHolder* Ross, uint16_t Host, BYTE LeafId, B
 {
 	dom_item_id_t ItemNo = Ross->GetRoss()->GetItemIdByItemStr(ItemStr, Ross->SemFetDomNo);
 	assert(!is_null(ItemNo));
-	long LastNo = Ross->GetRoss()->GetUnitEndPos(Host);
+	long LastNo = Ross->GetRoss()->GetUnitLastPos(Host);
 	bool Found = false;
 	for (long i = Ross->GetRoss()->GetUnitStartPos(Host); i <= LastNo; i++)
 		if ((Ross->GetRoss()->GetCortegeLeafId(i) == LeafId)

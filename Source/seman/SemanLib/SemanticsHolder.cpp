@@ -85,7 +85,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 
 		if (!GetRoss(type)->IsEmptyArticle(UnitNo))
 		{
-			for (size_t i = GetRoss(type)->GetUnitStartPos(UnitNo); i <= GetRoss(type)->GetUnitEndPos(UnitNo); i++)
+			for (size_t i = GetRoss(type)->GetUnitStartPos(UnitNo); i <= GetRoss(type)->GetUnitLastPos(UnitNo); i++)
 			{
 				TCortege C = GetRossHolder(type)->GetCortegeCopy( i);
 				std::string FieldStr = GetRoss(type)->Fields[C.m_FieldNo].FieldStr;
@@ -269,7 +269,7 @@ bool CSemanticsHolder::InitTimeUnits()
 
 			if (!GetRoss(TimeRoss)->IsEmptyArticle(UnitNo))
 				// по словарной статье 
-				for (size_t i = GetRoss(TimeRoss)->GetUnitStartPos(UnitNo); i <= GetRoss(TimeRoss)->GetUnitEndPos(UnitNo); i++)
+				for (size_t i = GetRoss(TimeRoss)->GetUnitStartPos(UnitNo); i <= GetRoss(TimeRoss)->GetUnitLastPos(UnitNo); i++)
 				{
 					TCortege C = GetRossHolder(TimeRoss)->GetCortegeCopy(i);
 					//незаполненное поле?
@@ -417,7 +417,7 @@ bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, std::vector<CEngUni
 	if (RusFieldNo == ErrUChar) return false;
 	for (long i = 0; i < UnitsCount; i++)
 	{
-		long EndPos = GetRoss(type)->GetUnitEndPos(i);
+		long EndPos = GetRoss(type)->GetUnitLastPos(i);
 		for (long j = GetRoss(type)->GetUnitStartPos(i); j <= EndPos; j++)
 			if (RusFieldNo == GetRoss(type)->GetCortegeFieldNo(j))
 			{
@@ -478,7 +478,7 @@ bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, std::vector
 
 	for (long j = 0; j < UnitsCount; j++)
 	{
-		int iEndPos = pRoss->GetUnitEndPos(j);
+		int iEndPos = pRoss->GetUnitLastPos(j);
 		for (int i = pRoss->GetUnitStartPos(j); i <= iEndPos; i++)
 		{
 			if (SXFieldNo == pRoss->GetCortegeFieldNo(i))
@@ -633,7 +633,7 @@ bool BuildContensField(const CDictionary* Dict, std::vector<CUnitContent>& Vect)
 	for (long j = 0; j < size; j++)
 	{
 
-		int iEndPos = Dict->GetUnitEndPos(j);
+		int iEndPos = Dict->GetUnitLastPos(j);
 		for (int i = Dict->GetUnitStartPos(j); i <= iEndPos; i++)
 		{
 			long FieldNo = Dict->GetCortegeFieldNo(i);
@@ -781,7 +781,7 @@ void CSemanticsHolder::GetPrepsFromArticle(const CDictionary* Ross, long UnitNo,
 	BYTE FieldNo = Ross->GetFieldNoByFieldStr("PREP");
 
 	if (!Ross->IsEmptyArticle(UnitNo))
-		for (size_t i = Ross->GetUnitStartPos(UnitNo); i <= Ross->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = Ross->GetUnitStartPos(UnitNo); i <= Ross->GetUnitLastPos(UnitNo); i++)
 			if ((Ross->GetCortegeFieldNo(i) == FieldNo)
 				&& (Ross->GetCortegeLeafId(i) == LeafId)
 				&& (Ross->GetCortegeBracketLeafId(i) == BracketLeafId)
@@ -853,7 +853,7 @@ bool FindField(const CDictionary* Ross, long UnitNo, std::string FieldStr)
 
 	if (!Ross->IsEmptyArticle(UnitNo))
 	{
-		long UnitEndPos = Ross->GetUnitEndPos(UnitNo);
+		long UnitEndPos = Ross->GetUnitLastPos(UnitNo);
 		for (size_t i = Ross->GetUnitStartPos(UnitNo); i <= UnitEndPos; i++)
 			if ((Ross->GetCortegeFieldNo(i) == FieldNo)
 				)
@@ -869,7 +869,7 @@ bool IsConditional(const CRossHolder& RossDoc, long UnitNo)
 
 	if (!RossDoc.GetRoss()->IsEmptyArticle(UnitNo))
 	{
-		long UnitEndPos = RossDoc.GetRoss()->GetUnitEndPos(UnitNo);
+		long UnitEndPos = RossDoc.GetRoss()->GetUnitLastPos(UnitNo);
 		for (size_t i = RossDoc.GetRoss()->GetUnitStartPos(UnitNo); i <= UnitEndPos; i++)
 			if (RossDoc.GetRoss()->GetCortegeFieldNo(i) == FieldNo)
 				if (!RossDoc.GetRoss()->GetCortege(i).is_null(0))
@@ -918,7 +918,7 @@ bool CSemanticsHolder::BuildColloc(std::string ContentFieldStr, int CollocUnitNo
 		}
 		if (!GetRoss(CollocRoss)->IsEmptyArticle(CollocUnitNo))
 			// по словарной статье 
-			for (size_t j = GetRoss(CollocRoss)->GetUnitStartPos(CollocUnitNo); j <= GetRoss(CollocRoss)->GetUnitEndPos(CollocUnitNo); j++)
+			for (size_t j = GetRoss(CollocRoss)->GetUnitStartPos(CollocUnitNo); j <= GetRoss(CollocRoss)->GetUnitLastPos(CollocUnitNo); j++)
 			{
 				TCortege Cort = GetRossHolder(CollocRoss)->GetCortegeCopy(j);
 				//незаполненное поле?
@@ -1013,7 +1013,7 @@ bool CSemanticsHolder::BuildCollocs()
 	BYTE ContentsFieldNo = GetRoss(CollocRoss)->GetFieldNoByFieldStr("CONTENT");
 	for (long UnitNo = 0; UnitNo < UnitsCount; UnitNo++)
 		if (!GetRoss(CollocRoss)->IsEmptyArticle(UnitNo))
-			for (size_t i = GetRoss(CollocRoss)->GetUnitStartPos(UnitNo); i <= GetRoss(CollocRoss)->GetUnitEndPos(UnitNo); i++)
+			for (size_t i = GetRoss(CollocRoss)->GetUnitStartPos(UnitNo); i <= GetRoss(CollocRoss)->GetUnitLastPos(UnitNo); i++)
 				if ((GetRoss(CollocRoss)->GetCortegeFieldNo(i) == ContentsFieldNo)
 					&& (GetRoss(CollocRoss)->GetCortegeLeafId(i) == 0)
 					)

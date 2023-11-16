@@ -660,7 +660,7 @@ int CDictionary::GetUnitStartPos(uint16_t UnitNo) const
 	return m_Units[UnitNo].m_StartCortegeNo;
 };
 
-int CDictionary::GetUnitEndPos(uint16_t UnitNo) const
+int CDictionary::GetUnitLastPos(uint16_t UnitNo) const
 {
 	return  m_Units[UnitNo].m_LastCortegeNo;
 };

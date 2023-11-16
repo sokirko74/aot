@@ -196,7 +196,7 @@ inline CString ConstructFldName (const CDictionary* pIRossForSyntax, BYTE FieldN
 
 inline void GetCortegeList (const CDictionary* Ross, std::vector<TCortege>& L, LONG UnitNo)
 {
-  for (size_t i= Ross->GetUnitStartPos(UnitNo); i <= Ross->GetUnitEndPos(UnitNo); i++)
+  for (size_t i= Ross->GetUnitStartPos(UnitNo); i <= Ross->GetUnitLastPos(UnitNo); i++)
 	  L.push_back(Ross->GetCortege(i));
 };
 

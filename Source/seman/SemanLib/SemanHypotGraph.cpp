@@ -130,7 +130,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo) {
 
         if (UnitNo != ErrUnitNo)
             if (!pRoss->IsEmptyArticle(UnitNo))
-                for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitEndPos(UnitNo); i++)
+                for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitLastPos(UnitNo); i++)
                     if (pRoss->GetCortegeFieldNo(i) == RossDoc->NESOVMFieldNo) {
                         TCortege C = RossDoc->GetCortegeCopy(i);
                         if (C.is_null(0)) continue;
@@ -324,7 +324,7 @@ void CRusSemStructure::InitPOs(long ClauseNo) {
                 // читаем поле DOMAIN
                 if (UnitNo != ErrUnitNo)
                     if (!pRoss->IsEmptyArticle(UnitNo))
-                        for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitEndPos(UnitNo); i++)
+                        for (size_t i = pRoss->GetUnitStartPos(UnitNo); i <= pRoss->GetUnitLastPos(UnitNo); i++)
                             if (pRoss->Fields[pRoss->GetCortegeFieldNo(i)].FieldStr == "DOMAIN") {
                                 TCortege C = RossDoc->GetCortegeCopy(i);
                                 if (C.is_null(0)) continue;

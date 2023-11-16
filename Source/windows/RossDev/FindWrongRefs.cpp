@@ -65,7 +65,7 @@ try{
 		if (m_pActiveRossDoc->GetRoss()->IsEmptyArticle(UnitNo) == TRUE) continue;
 
 		size_t k = m_pActiveRossDoc->GetRoss()->GetUnitStartPos(UnitNo);
-		for (; k <= m_pActiveRossDoc->GetRoss()->GetUnitEndPos(UnitNo); k++)
+		for (; k <= m_pActiveRossDoc->GetRoss()->GetUnitLastPos(UnitNo); k++)
 		  {
 			TCortege C = m_pActiveRossDoc->GetRoss()->GetCortege(k);
 			if (C.m_FieldNo != EngFieldNo) continue;
@@ -95,7 +95,7 @@ try{
 			// 
 		 };
 
-		if (k <= m_pActiveRossDoc->GetRoss()->GetUnitEndPos(UnitNo))
+		if (k <= m_pActiveRossDoc->GetRoss()->GetUnitLastPos(UnitNo))
 		{
 			PocketItems.push_back(CRossPocketItem(UnitNo, m_pActiveRossDoc));
 		};

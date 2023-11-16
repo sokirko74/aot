@@ -204,11 +204,11 @@ void CRusSemStructure::ReadThesInterps(long ClauseNo)
 				*/
 				size_t i = Dict->GetRoss()->GetUnitStartPos(UnitNo);
 
-				for (; i <= Dict->GetRoss()->GetUnitEndPos(UnitNo); i++)
+				for (; i <= Dict->GetRoss()->GetUnitLastPos(UnitNo); i++)
 					if (Dict->GetCortegeCopy(i).m_FieldNo == Dict->ValFieldNo)
 						break;
 
-				if (i <= Dict->GetRoss()->GetUnitEndPos(UnitNo))
+				if (i <= Dict->GetRoss()->GetUnitLastPos(UnitNo))
 				{
 					for (long i = 0; i < m_Nodes.size(); i++)
 						if ((m_Nodes[i].m_CollocId == m_Nodes[StartNodeNo].m_CollocId)
@@ -389,7 +389,7 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 				const CDictionary* Ross = RossDoc->GetRoss();
 				uint16_t UnitNo = m_Nodes[i].GetInterps()[j].m_UnitNo;
 				if (!Ross->IsEmptyArticle(UnitNo))
-					for (size_t j = Ross->GetUnitStartPos(UnitNo); j <= Ross->GetUnitEndPos(UnitNo); j++)
+					for (size_t j = Ross->GetUnitStartPos(UnitNo); j <= Ross->GetUnitLastPos(UnitNo); j++)
 					{
 						TCortege C = RossDoc->GetCortegeCopy(j);
 						std::string FieldStr = Ross->Fields[C.m_FieldNo].FieldStr;

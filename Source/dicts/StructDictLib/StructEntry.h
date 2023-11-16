@@ -25,7 +25,7 @@ public:
 	void SetUnitAuthor(std::string s);
 
 	bool HasEmptyArticle() const;
-	void MakeEmpty() const;
+	void MakeEmpty();
 
 	bool operator==(const CStructEntry& X) const;
 	bool operator<(const CStructEntry& X) const;

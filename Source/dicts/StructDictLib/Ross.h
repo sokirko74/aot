@@ -164,7 +164,7 @@ public:
 
 	bool		IsEmptyArticle(uint16_t UnitNo) const;
 	int			GetUnitStartPos(uint16_t UnitNo) const;
-	int			GetUnitEndPos(uint16_t UnitNo) const;
+	int			GetUnitLastPos(uint16_t UnitNo) const;
 	BYTE		GetFieldNoByFieldStr(const char* Str) const;
 
 	const std::string& GetDomItemStr(dom_item_id_t item_id) const;

@@ -254,6 +254,21 @@ TEST_CASE("test_val_for_or") {
 
 }
 
+TEST_CASE("test_empty_article") {
+	CDictionary D = LoadScheme("test2");
+	auto unit_no = D.LocateUnit("test_new", 1);
+	REQUIRE(unit_no == ErrUnitNo);
+	unit_no = D.InsertUnit("test_new", 1);
+	REQUIRE(unit_no != ErrUnitNo);
+
+	CHECK(D.IsEmptyArticle(unit_no));
+	CTempArticle A1(&D);
+	A1.SetUnitNo(unit_no);
+	A1.ReadFromUtf8String("");
+	A1.WriteToDictionary();
+	CHECK(D.IsEmptyArticle(unit_no));
+}
+
 int main(int argc, char** argv) {
 	init_plog(plog::Severity::debug, "struct_dict_test.log");
 	doctest::Context context;

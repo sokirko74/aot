@@ -112,7 +112,7 @@ ENG (1) = in
 std::string    GetPO (const CDictionary* Ross, uint16_t UnitNo, long POFieldNo)
 {
   if (UnitNo != ErrUnitNo)
-  for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= Ross->GetUnitEndPos(UnitNo); i++)
+  for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= Ross->GetUnitLastPos(UnitNo); i++)
    if    ( (Ross->GetCortegeFieldNo(i) == POFieldNo) 
 		 )
 			return Ross->GetDomItemStr(i, 0);

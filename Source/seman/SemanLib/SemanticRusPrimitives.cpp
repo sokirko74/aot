@@ -170,7 +170,7 @@ bool CRusSemStructure::ContainsSemCopul(long NodeNo) const
 	const CRossHolder* pHolder = GetRossHolder(Interp->m_DictType);
 	const CDictionary* Ross = pHolder->GetRoss();
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
-	long EndCortegeNo = Ross->GetUnitEndPos(UnitNo);
+	long EndCortegeNo = Ross->GetUnitLastPos(UnitNo);
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EndCortegeNo; i++)
 	{

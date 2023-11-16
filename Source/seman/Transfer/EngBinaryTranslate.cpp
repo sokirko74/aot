@@ -677,7 +677,7 @@ void translate_helper::init_list_from_ross(const CRossHolder* RossHolder, const 
 	res.clear();
 
 	if (!RossHolder->GetRoss()->IsEmptyArticle(UnitNo))
-		for (size_t i = RossHolder->GetRoss()->GetUnitStartPos(UnitNo); i <= RossHolder->GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = RossHolder->GetRoss()->GetUnitStartPos(UnitNo); i <= RossHolder->GetRoss()->GetUnitLastPos(UnitNo); i++)
 			if ((RossHolder->GetRoss()->GetCortegeFieldNo(i) == RossHolder->LexFetFieldNo)
 				)
 			{

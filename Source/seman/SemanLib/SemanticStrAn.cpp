@@ -969,7 +969,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 	}
 
 	if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
-		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitLastPos(UnitNo); i++)
 		{
 			TCortege C = GetRossHolder(Ross)->GetCortegeCopy(i);
 			std::string s = GetRoss(Ross)->WriteToString(C);
@@ -981,7 +981,7 @@ bool  CRusSemStructure::ReadAuxiliaryArticles()
 	m_WeakSynRels.clear();
 
 	if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
-		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo); i <= GetRoss(Ross)->GetUnitLastPos(UnitNo); i++)
 		{
 			dom_item_id_t ItemNo = GetRossHolder(Ross)->GetCortegeCopy(i).GetItem(0);
 			if (!is_null(ItemNo))

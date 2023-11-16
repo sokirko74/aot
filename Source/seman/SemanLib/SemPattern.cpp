@@ -116,7 +116,7 @@ bool CSemPattern::LoadSemFromDict()
 		return false;
 
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
-	long EnfCortegeNo = Ross->GetUnitEndPos(UnitNo);
+	long EnfCortegeNo = Ross->GetUnitLastPos(UnitNo);
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)
 	{
@@ -166,7 +166,7 @@ bool CSemPattern::LoadGramFromDict()
 	
 
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
-	long EnfCortegeNo = Ross->GetUnitEndPos(UnitNo);
+	long EnfCortegeNo = Ross->GetUnitLastPos(UnitNo);
 
 
 	for (size_t i = Ross->GetUnitStartPos(UnitNo); i<= EnfCortegeNo; i++)

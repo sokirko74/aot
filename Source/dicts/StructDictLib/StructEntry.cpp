@@ -83,9 +83,9 @@ bool CStructEntry::HasEmptyArticle() const {
 	return m_StartCortegeNo == InitialStartPos; 
 };
 
-void CStructEntry::MakeEmpty() const {
-	m_StartCortegeNo == InitialStartPos;
-	m_LastCortegeNo == InitialStartPos;
+void CStructEntry::MakeEmpty()  {
+	m_StartCortegeNo = InitialStartPos;
+	m_LastCortegeNo = InitialStartPos;
 };
 
 void CStructEntry::SetUnitAuthor(std::string s) {

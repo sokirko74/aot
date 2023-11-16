@@ -219,7 +219,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
         if (UnitNo != ErrUnitNo) {
             if (!GetRoss(Ross)->IsEmptyArticle(UnitNo))
                 for (size_t i = GetRoss(Ross)->GetUnitStartPos(UnitNo);
-                     i <= GetRoss(Ross)->GetUnitEndPos(UnitNo); i++) {
+                     i <= GetRoss(Ross)->GetUnitLastPos(UnitNo); i++) {
                     if (GetRoss(Ross)->GetCortegeFieldNo(i) == GetRossHolder(Ross)->RefFieldNo) {
                         TCortege C = GetRossHolder(Ross)->GetCortegeCopy(i);
                         std::string S = GetRossHolder(Ross)->GetDomItemStrWrapper(C.GetItem(0));

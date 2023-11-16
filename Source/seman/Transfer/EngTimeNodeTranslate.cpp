@@ -18,7 +18,7 @@ std::string get_field(CRossHolder*  RossHolder, uint16_t UnitNo, std::string Fie
  if (FieldNo == ErrUChar) return "";
 
  if (!RossHolder->GetRoss()->IsEmptyArticle(UnitNo))
-	for (size_t i = RossHolder->GetRoss()->GetUnitStartPos(UnitNo); i<= RossHolder->GetRoss()->GetUnitEndPos(UnitNo); i++)
+	for (size_t i = RossHolder->GetRoss()->GetUnitStartPos(UnitNo); i<= RossHolder->GetRoss()->GetUnitLastPos(UnitNo); i++)
 	  if (     (RossHolder->GetRoss()->GetCortegeFieldNo(i) == FieldNo) 
 		    && (RossHolder->GetRoss()->GetCortegeLeafId(i) == LeafId) 
 			&& (RossHolder->GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId) 

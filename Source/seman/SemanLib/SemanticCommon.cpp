@@ -462,7 +462,7 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 
 	if (UnitNo != ErrUnitNo)
 		if (!pRossDoc->GetRoss()->IsEmptyArticle(UnitNo))
-			for (size_t i = pRossDoc->GetRoss()->GetUnitStartPos(UnitNo); i <= pRossDoc->GetRoss()->GetUnitEndPos(UnitNo); i++)
+			for (size_t i = pRossDoc->GetRoss()->GetUnitStartPos(UnitNo); i <= pRossDoc->GetRoss()->GetUnitLastPos(UnitNo); i++)
 			{
 				TCortege C = pRossDoc->GetCortegeCopy(i);
 				if (C.m_FieldNo == pRossDoc->ValFieldNo && Node.m_Vals.size() < MaxValsCount)
@@ -500,7 +500,7 @@ std::vector<uint64_t> CSemanticStructure::GetGramRestr(const CSemNode& W)
 
 	if (W.GetUnitNo() != ErrUnitNo)
 		if (!GetRoss(W.GetType())->IsEmptyArticle(W.GetUnitNo()))
-			for (size_t i = GetRoss(W.GetType())->GetUnitStartPos(W.GetUnitNo()); i <= GetRoss(W.GetType())->GetUnitEndPos(W.GetUnitNo()); i++)
+			for (size_t i = GetRoss(W.GetType())->GetUnitStartPos(W.GetUnitNo()); i <= GetRoss(W.GetType())->GetUnitLastPos(W.GetUnitNo()); i++)
 				if (GetRoss(W.GetType())->GetCortegeFieldNo(i) == GetRossHolder(W.GetType())->GramRestrFieldNo)
 				{
 					const TCortege& C = GetRossHolder(W.GetType())->GetCortegeCopy(i);

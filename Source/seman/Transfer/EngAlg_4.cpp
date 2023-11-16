@@ -57,7 +57,7 @@ void CEngSemStructure::AddLexFuncNode(int iEngNode)
 	std::string EngWord = "";
 	int    MeanNum = -1;
 	TCortege cortege;
-	for( int i=GetRoss(Etype)->GetUnitStartPos(Eunit); i<=GetRoss(Etype)->GetUnitEndPos(Eunit); i++ )
+	for( int i=GetRoss(Etype)->GetUnitStartPos(Eunit); i<=GetRoss(Etype)->GetUnitLastPos(Eunit); i++ )
 	{
 		long FieldNo = GetRoss(Etype)->GetCortegeFieldNo(i);
 		if(	std::string("LF") != GetRoss(Etype)->Fields[FieldNo].FieldStr )
@@ -182,7 +182,7 @@ bool CEngSemStructure::GetSINO(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
 
-	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitEndPos(UnitNo); i++ )
+	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitLastPos(UnitNo); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		if(	std::string("SYNR") == GetRoss(type)->Fields[FieldNo].FieldStr )
@@ -197,7 +197,7 @@ void CEngSemStructure::GetSPrp(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
 
-	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitEndPos(UnitNo); i++ )
+	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitLastPos(UnitNo); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		if(	std::string("PREP") == GetRoss(type)->Fields[FieldNo].FieldStr )
@@ -210,7 +210,7 @@ void CEngSemStructure::GetSArt(DictTypeEnum type,long UnitNo,std::vector<TCorteg
 	assert( type == EngCollocRoss );
 	assert( UnitNo != ErrUnitNo );
 
-	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitEndPos(UnitNo); i++ )
+	for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitLastPos(UnitNo); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		if(	std::string("DETERM") == GetRoss(type)->Fields[FieldNo].FieldStr )
@@ -236,7 +236,7 @@ void CEngSemStructure::GetSGxi(DictTypeEnum type,long unit,std::vector<TCortege>
 	assert( type == EngCollocRoss );
 	assert( unit != ErrUnitNo );
 
-	for( int i=GetRoss(type)->GetUnitStartPos(unit); i<=GetRoss(type)->GetUnitEndPos(unit); i++ )
+	for( int i=GetRoss(type)->GetUnitStartPos(unit); i<=GetRoss(type)->GetUnitLastPos(unit); i++ )
 	{
 		long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 		std::string tmp = GetRoss(type)->Fields[FieldNo].FieldStr;

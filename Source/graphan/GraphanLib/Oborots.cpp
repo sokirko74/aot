@@ -232,40 +232,30 @@ void  CGraphanDicts :: BuildOborottos ()
 {
 	std::string OborotStr;
 
-	try { 
+	size_t count = GetOborDic()->GetUnitsSize();
+	BYTE restr_field_no = GetOborDic()->GetFieldNoByFieldStr("RESTR");
+	BYTE content_field_no = GetOborDic()->GetFieldNoByFieldStr("CONTENT");
 
-		size_t count = GetOborDic()->GetUnitsSize();
-
-		for (long i=0; i<count; i++)
-			if (GetOborDic()->IsEmptyArticle(i) == false)
-			{
-
-				bool HasFixedFet = false;
-				size_t k = GetOborDic()->GetUnitStartPos(i);
-				for (; k <= GetOborDic()->GetUnitEndPos(i); k++)
-					if (GetOborDic()->GetCortege(k).m_FieldNo == GetOborDic()->GetFieldNoByFieldStr("RESTR"))
-						if (!GetOborDic()->GetCortege(k).is_null(0))
-						{
-							std::string G = GetOborDic()->GetDomItemStr(k, 0);
-							if (G == "fixed") {
-								HasFixedFet = true;
-							}
-						};
-
-				for (k=GetOborDic()->GetUnitStartPos(i); k <= GetOborDic()->GetUnitEndPos(i); k++)
-					if (GetOborDic()->GetCortege(k).m_FieldNo == GetOborDic()->GetFieldNoByFieldStr("CONTENT"))
-					{
-						std::string q = GetOborDic()->GetDomItemStr(k,0);
-						BuildOborot(q, i, HasFixedFet);
+	for (long i = 0; i < count; i++) {
+		if (GetOborDic()->IsEmptyArticle(i)) continue;
+		bool HasFixedFet = false;
+		for (size_t k = GetOborDic()->GetUnitStartPos(i); k <= GetOborDic()->GetUnitLastPos(i); k++)
+			if (GetOborDic()->GetCortege(k).m_FieldNo == restr_field_no)
+				if (!GetOborDic()->GetCortege(k).is_null(0))
+				{
+					std::string G = GetOborDic()->GetDomItemStr(k, 0);
+					if (G == "fixed") {
+						HasFixedFet = true;
 					}
-			};
+				};
 
+		for (size_t k = GetOborDic()->GetUnitStartPos(i); k <= GetOborDic()->GetUnitLastPos(i); k++)
+			if (GetOborDic()->GetCortege(k).m_FieldNo == content_field_no)
+			{
+				std::string q = _R(GetOborDic()->GetDomItemStr(k, 0));
+				BuildOborot(q, i, HasFixedFet);
+			}
 	}
-	catch (...)
-	{
-		ErrorMessage(Format("Error in oborot \"%s\"", OborotStr.c_str()) );
-
-	};
 
 	BuildOborottosIndex(*this);
 };

@@ -196,7 +196,7 @@ void CRossHolder::GetFieldValues(std::string	strFieldName, long UnitNo, std::vec
 {
 	if (UnitNo == ErrUnitNo)	return;
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
-		for (int i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (int i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 		{
 			if ((strFieldName == GetRoss()->Fields[GetRoss()->GetCortegeFieldNo(i)].FieldStr)
 				&& (LeafId == GetRoss()->GetCortegeLeafId(i))
@@ -249,7 +249,7 @@ void CRossHolder::GetFullFieldItemsFromArticle(long UnitNo, std::string	FieldStr
 	if (FieldNo == ErrUChar) return;
 
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
-		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 			if ((GetRoss()->GetCortegeFieldNo(i) == FieldNo)
 				&& (GetRoss()->GetCortegeLeafId(i) == LeafId)
 				&& (GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId)
@@ -270,7 +270,7 @@ void CRossHolder::GetSimpleFieldItemsFromArticle(long UnitNo, std::string FieldS
 	if (FieldNo == ErrUChar) return;
 
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
-		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 			if ((GetRoss()->GetCortegeFieldNo(i) == FieldNo)
 				&& (GetRoss()->GetCortegeLeafId(i) == LeafId)
 				&& (GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId)
@@ -295,7 +295,7 @@ bool CRossHolder::HasItem(uint16_t	UnitNo, const std::string FieldStr, const std
 	BYTE FieldNo = GetRoss()->GetFieldNoByFieldStr(FieldStr.c_str());
 
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
-		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 			if ((GetRoss()->GetCortegeFieldNo(i) == FieldNo)
 				&& (GetRoss()->GetCortegeLeafId(i) == LeafId)
 				&& (GetRoss()->GetCortegeBracketLeafId(i) == BracketLeafId)
@@ -318,7 +318,7 @@ long  CRossHolder::GetDopFields(long UnitNo, std::vector<CDopField>& DopFields) 
 	std::vector<long> SubItems;
 	BYTE DopFldName = GetRoss()->GetFieldNoByFieldStr("AUX");
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
-		for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitEndPos(UnitNo); k++)
+		for (size_t k = GetRoss()->GetUnitStartPos(UnitNo); k <= GetRoss()->GetUnitLastPos(UnitNo); k++)
 			if (DopFldName == GetRoss()->GetCortegeFieldNo(k))
 			{
 				TCortege C = GetCortegeCopy(k);
@@ -355,7 +355,7 @@ long  CRossHolder::GetDopFields(long UnitNo, std::vector<CDopField>& DopFields) 
 
 bool CRossHolder::GetVal(long UnitNo, CValency& V) const
 {
-	for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+	for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 		if (GetRoss()->GetCortegeFieldNo(i) == ValFieldNo)
 		{
 			V = CValency(GetCortegeCopy(i), MainWordVarNo, this);
@@ -368,7 +368,7 @@ bool CRossHolder::GetVal(long UnitNo, CValency& V) const
 void CRossHolder::GetLexFuncts(size_t UnitNo, std::vector<CLexicalFunctionField>& OutVector, DictTypeEnum type /*NoneRoss*/, const CRossHolder* pRossHolderObor /*= NULL*/)  const
 {
 	if (!GetRoss()->IsEmptyArticle(UnitNo))
-		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 			if (GetRoss()->GetCortegeFieldNo(i) == LexFunctFieldNo)
 			{
 				std::string Lemma = GetDomItemStrWrapper1(i, 1);
@@ -424,7 +424,7 @@ CValency CRossHolder::GetSemRelOfPrepOrConj(uint16_t  UnitNo) const
 	if ((UnitNo != ErrUnitNo)
 		&& (!GetRoss()->IsEmptyArticle(UnitNo))
 		)
-		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 			if (GetRoss()->GetCortegeFieldNo(i) == ValFieldNo)
 				return  CValency(GetDomItemStrWrapper1(i, 0), A_C, this);
 
@@ -437,7 +437,7 @@ long CRossHolder::GetSemMainWordFromArticle(long UnitNo) const
 	BYTE FieldNo = GetRoss()->GetFieldNoByFieldStr("ROOT");
 
 	if (GetRoss()->IsEmptyArticle(UnitNo) == false)
-		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitEndPos(UnitNo); i++)
+		for (size_t i = GetRoss()->GetUnitStartPos(UnitNo); i <= GetRoss()->GetUnitLastPos(UnitNo); i++)
 			if ((GetRoss()->GetCortegeFieldNo(i) == FieldNo)
 				)
 			{

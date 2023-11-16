@@ -79,7 +79,7 @@ uint16_t CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
 {
  if (UnitNo == ErrUnitNo) return ErrUnitNo;
  if (!RossDoc->GetRoss()->IsEmptyArticle(UnitNo))
-  for (size_t i = RossDoc->GetRoss()->GetUnitStartPos(UnitNo); i<= RossDoc->GetRoss()->GetUnitEndPos(UnitNo); i++)
+  for (size_t i = RossDoc->GetRoss()->GetUnitStartPos(UnitNo); i<= RossDoc->GetRoss()->GetUnitLastPos(UnitNo); i++)
 	{
 	    TCortege C = RossDoc->GetCortegeCopy(i);
 		if ( C.m_FieldNo ==  RossDoc->SemFetFieldNo )

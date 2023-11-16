@@ -99,7 +99,7 @@ bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 
 			oborot.m_AllPossibleDependCases = 0;
 		    if (piOborDic->IsEmptyArticle(UnitNo) == false)
-			for( int i = piOborDic->GetUnitStartPos(UnitNo) ; i <= piOborDic->GetUnitEndPos(UnitNo) ; i++)
+			for( int i = piOborDic->GetUnitStartPos(UnitNo) ; i <= piOborDic->GetUnitLastPos(UnitNo) ; i++)
 			{
 				if (GramFetFieldNo != piOborDic->GetCortege(i).m_FieldNo) 
 					continue;

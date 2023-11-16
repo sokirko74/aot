@@ -170,7 +170,7 @@ void  COborDic::MergeCasesOfSimililarSimplePreps()
 
 void COborDic::BuildOborots(int iUnit, const CDictionary* piOborDic, WriteOborFuncType WriteOborFunc)
 {
-	for (size_t k = piOborDic->GetUnitStartPos(iUnit); k <= piOborDic->GetUnitEndPos(iUnit); k++)
+	for (size_t k = piOborDic->GetUnitStartPos(iUnit); k <= piOborDic->GetUnitLastPos(iUnit); k++)
 		  if (piOborDic->GetCortegeFieldNo(k) == piOborDic->GetFieldNoByFieldStr("CONTENT"))
 		  {
 			  std::string q = piOborDic->GetDomItemStr(k, 0);			  

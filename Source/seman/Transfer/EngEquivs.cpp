@@ -291,7 +291,7 @@ void CEngSemStructure::GetAFieldVector(std::string FieldStr, DictTypeEnum type, 
 		return;
 	if (UnitNo != ErrUnitNo)
 		if (!GetRoss(type)->IsEmptyArticle(UnitNo))
-			for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitEndPos(UnitNo); i++ )
+			for( int i=GetRoss(type)->GetUnitStartPos(UnitNo); i<=GetRoss(type)->GetUnitLastPos(UnitNo); i++ )
 			{
 				long FieldNo = GetRoss(type)->GetCortegeFieldNo(i);
 				if(	FieldStr == GetRoss(type)->Fields[FieldNo].FieldStr )

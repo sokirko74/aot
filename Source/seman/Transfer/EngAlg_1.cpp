@@ -253,7 +253,7 @@ void  CEngSemStructure::RefineEngCollocPreps()
 			continue;
 		int unit = m_Nodes[i].GetUnitNo();
 		std::vector<TCortege> vec;
-		for( int j=GetRoss(type)->GetUnitStartPos(unit); j<=GetRoss(type)->GetUnitEndPos(unit); j++ )
+		for( int j=GetRoss(type)->GetUnitStartPos(unit); j<=GetRoss(type)->GetUnitLastPos(unit); j++ )
 		{
 			TCortege C = GetRossHolder(type)->GetCortegeCopy(j);
 			if (C.m_BracketLeafId > 0) continue;
