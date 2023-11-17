@@ -10,17 +10,16 @@
 
 
 
-class CPlmLineCollection
+class CLemmatizedText
 {
 public:
 	StringVector			m_PlmItems;
 	CLemmatizer*			m_pLemmatizer;
 
-	CPlmLineCollection();
-	~CPlmLineCollection();
+	CLemmatizedText();
 
 	bool SaveToFile(std::string filename) const;
-	bool ProcessPlmLines(const CGraphmatFile* piGraphmatFile);
+	void CreateFromTokemized(const CGraphmatFile* piGraphmatFile);
 	
 };
 

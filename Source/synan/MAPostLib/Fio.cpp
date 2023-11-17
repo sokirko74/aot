@@ -41,21 +41,21 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
 	{
 		case fiName:  return pH->HasGrammem(rName);
 		case fiSurname:  return pH->HasGrammem(rSurName) || (Word.m_bFirstUpperAlpha
-			&& (   endswith(pH->m_strLemma, _R("ИЙ"))
-				|| endswith(pH->m_strLemma, _R("АЯ"))
-				|| endswith(pH->m_strLemma, _R("ОВ"))
-				|| endswith(pH->m_strLemma, _R("ОВА"))
+			&& (   endswith(pH->m_strLemma, "ИЙ")
+				|| endswith(pH->m_strLemma, "АЯ")
+				|| endswith(pH->m_strLemma, "ОВ")
+				|| endswith(pH->m_strLemma, "ОВА")
 				));
 		case fiMiddle:  return pH->HasGrammem(rPatronymic);
 
-		case fiAbbr:  return      Word.m_bFirstUpperAlpha
-			&& (Word.m_strWord.size() == 1)
-			&& Word.HasDes(ORLE);
+		case fiAbbr:  return       Word.m_bFirstUpperAlpha
+								&& (Word.m_LettersCount == 1)
+								&& Word.HasDes(ORLE);
 
 		case fiStop:  return Word.m_strWord == ".";
 		case fiRoman:  return Word.HasDes(ORoman);
 		case fiOrdinal:  return pH->HasPos(NUMERAL_P)
-			&& (unsigned char)Word.m_strWord[0] < 224 //отбрасываем "Петр первый" вместо "Петр Первый"
+			&& Word.m_bFirstUpperAlpha //отбрасываем "Петр первый" вместо "Петр Первый"
 			&& !isdigit((BYTE)Word.m_strWord[0]);
 		case fiProbName:  return Word.HasDes(ONam);
 		default:  return pH->m_strLemma == I.m_ItemStr;
@@ -216,9 +216,9 @@ void CMAPost::Rule_Fio()
 		{ { fiName, fiRoman }, false}, // Александр II
 		{ { fiName, fiOrdinal }, true}, // Александр Второй
 		{ { fiName, fiName, fiOrdinal}, false}, // Иоанн Павел Второй
-		{ { {fiString, _R("ДОН")}, { fiString, _R("ЖУАН") } }, false } // Дон Жуан
+		{ { {fiString, "ДОН"}, { fiString, "ЖУАН"} }, false } // Дон Жуан
 	};
-
+	
 
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
@@ -228,6 +228,6 @@ void CMAPost::Rule_Fio()
 				break;
 			}
 	};
-
+	
 };
 

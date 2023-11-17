@@ -62,7 +62,7 @@ int main(int argc, const char **argv) {
             H.m_PlmLines.SaveToFile("before.lem");
 #endif
 
-            CPlmLineCollection MapostPlmLines;
+            CLemmatizedText MapostPlmLines;
             if (!H.RunMapost(MapostPlmLines)) {
                 return 1;
             }

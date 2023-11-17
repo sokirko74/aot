@@ -11,7 +11,7 @@ class CGraphanAndMorphanHolder: public CMorphanHolder
 {
 public:
 	bool							m_bTimeStatis;
-	CPlmLineCollection				m_PlmLines;
+	CLemmatizedText				m_PlmLines;
 	CGraphmatFile					m_Graphan;
 
 	CGraphanAndMorphanHolder();

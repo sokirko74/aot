@@ -157,7 +157,7 @@ public:
 		return m_pSyntaxOptions;
 	};
 
-	bool ReadNextFromPlmLines(const CPlmLineCollection* piPLMLinePtr, size_t& LineNo);
+	bool ReadNextFromPlmLines(const CLemmatizedText* piPLMLinePtr, size_t& LineNo);
 
 	
 	void Reset();

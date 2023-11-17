@@ -68,7 +68,7 @@ CSynWord CreateDash(CSentence* pSent)
 	CSynHomonym NewDashHom (pSent);
 	NewDashHom.SetLemma("-");
 
-    W.SetWordStr("-", pSent->GetOpt()->m_Language);
+    W.SetWordStr("-");
 	W.m_bDash = true;
 	W.AddDes(OPun);
     W.AddDes(OHyp);

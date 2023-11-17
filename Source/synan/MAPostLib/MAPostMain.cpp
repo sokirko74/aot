@@ -96,7 +96,7 @@ void CMAPost::RunRules()
 
 
 
-bool CMAPost::LoadWords(const CPlmLineCollection* piInTextItems)
+bool CMAPost::LoadWords(const CLemmatizedText* piInTextItems)
 {
 	long i = 0;
 	try
@@ -111,7 +111,7 @@ bool CMAPost::LoadWords(const CPlmLineCollection* piInTextItems)
 			{
 				//  reading the first homonym and word's  properties 
 				CPostLemWord Word(m_pRusGramTab);
-				if (!Word.ProcessPlmLineForTheFirstHomonym(strPlmLine, morphRussian, CurrOborotNo))
+				if (!Word.ProcessPlmLineForTheFirstHomonym(strPlmLine, CurrOborotNo))
 					return false;
 
 				Word.m_bHasSpaceBefore = m_Words.empty()
@@ -138,7 +138,7 @@ bool CMAPost::LoadWords(const CPlmLineCollection* piInTextItems)
 	}
 }
 
-bool CMAPost::ProcessData(const CPlmLineCollection* piInTextItems)
+bool CMAPost::ProcessData(const CLemmatizedText* piInTextItems)
 {
 	try
 	{
@@ -188,7 +188,7 @@ void CMAPost::Odnobuk()
 		// однобуквенное слово,  след.- точка
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (W.m_strWord.length() != 1) continue;
+		if (W.m_LettersCount != 1) continue;
 		if (!W.m_bFirstUpperAlpha) continue;
 		if (W.HasOborot1() != W.HasOborot2()) continue;// "т.е." - это оборот, его обрабатывать не надо
 
@@ -229,7 +229,7 @@ void CMAPost::Rule_Interjections()
 			CPostLemWord& W = *it;
 			if (W.HasDes(ORLE))
 			{
-				if (W.m_strUpperWord == _R("А") || W.m_strUpperWord == _R("НО"))
+				if (W.m_strUpperWord == "А" || W.m_strUpperWord == "НО")
 				{
 					if (!bAfterPunctOrSentEnd)
 						W.KillHomonymOfPartOfSpeech(CONJ);
@@ -264,16 +264,23 @@ void CMAPost::ILeDefLe()
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
 		CPostLemWord& W = *it;
-		if (W.m_strWord.length() < 3) continue;
+		if (W.m_LettersCount < 3) continue;
 		int hyp = W.m_strWord.find("-");
 		if (hyp == std::string::npos) continue;
 		// первая часть - латиница, второая - русская
-		if (!is_english_alpha((BYTE)W.m_strWord[0])
-			|| is_russian_alpha((BYTE)W.m_strWord[0]) //   is_english_alpha и is_russian_alpha пересекаются
-			|| !is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1])) continue;
+		if (!is_english_alpha((BYTE)W.m_strWord[0])) {
+			continue;
+		}
 		if (W.IsInOborot()) continue;
 
-		if (W.LemmatizeForm(W.m_strWord.substr(hyp + 1), m_pRusLemmatizer))
+		std::string after_hyp = W.m_strWord.substr(hyp + 1)
+		if (
+			   is_russian_alpha((BYTE)W.m_strWord[0]) //   is_english_alpha и is_russian_alpha пересекаются
+			|| !is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1])) {
+			continue;
+		}
+
+		if (W.LemmatizeFormUtf8(after_hyp, m_pRusLemmatizer))
 			for (int i = 0; i < W.GetHomonymsCount(); i++)
 			{
 				CHomonym* pH = W.GetHomonym(i);
@@ -358,12 +365,12 @@ void CMAPost::PronounP_Pronoun_Homonymy()
 		CPostLemWord& W = *it;
 		if (!W.HasPos(PRONOUN_P) || !W.HasPos(PRONOUN)) continue;
 
-		if ((W.m_strUpperWord == _R("ЭТО"))
-			|| (W.m_strUpperWord == _R("ТО"))
-			|| (W.m_strUpperWord == _R("ИХ"))
-			|| (W.m_strUpperWord == _R("ЕГО"))
-			|| (W.m_strUpperWord == _R("ЕЕ"))
-			|| (W.m_strUpperWord == _R("ЕЁ"))
+		if ((W.m_strUpperWord == "ЭТО")
+			|| (W.m_strUpperWord == "ТО")
+			|| (W.m_strUpperWord == "ИХ")
+			|| (W.m_strUpperWord == "ЕГО")
+			|| (W.m_strUpperWord == "ЕЕ")
+			|| (W.m_strUpperWord == "ЕЁ")
 			)
 			continue;
 
@@ -391,7 +398,7 @@ void CMAPost::PronounP_Pronoun_Homonymy()
 bool CMAPost::HasParadigmOfFormAndPoses(std::string WordForm, part_of_speech_mask_t Poses) const
 {
 	std::vector<CFormInfo> Paradigms;
-	m_pRusLemmatizer->CreateParadigmCollection(false, WordForm, false, false, Paradigms);
+	m_pRusLemmatizer->CreateParadigmCollection(false, _R(WordForm), false, false, Paradigms);
 
 	for (long k = 0; k < Paradigms.size(); k++)
 	{
@@ -562,14 +569,15 @@ void CMAPost::CorrectOborots()
 
 void CMAPost::SemiAdjectives()
 {
+	std::string prefix = "ПОЛУ";
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
 		if (!W.m_bPredicted) continue;
-		if (W.m_strUpperWord.substr(0, 4) != _R("ПОЛУ")) continue;
+		if (!startswith(W.m_strUpperWord, prefix)) continue;
 		for (int i = 0; i < W.GetHomonymsCount(); i++)
-			W.GetHomonym(i)->m_strLemma.erase(0, 4);
+			W.GetHomonym(i)->m_strLemma.erase(0, prefix.length());
 		// установка графематической пометы
 		W.m_UnparsedGraphemDescriptorsStr += " #ПОЛУ ";
 	};
@@ -604,32 +612,25 @@ void CMAPost::SemiAdjectives()
 
 void CMAPost::SemiNouns()
 {
+	std::vector<std::string> prefixes = { "ПОЛУ" , "ПОЛ-" , "ПОЛ" };
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
 		if (!W.m_bPredicted) continue;
 
-		size_t PrefixLen;
+		size_t PrefixLen = 0;
 		bool bChangeToPlural = false;
 		{
-			if (W.m_strUpperWord.substr(0, 4) == _R("ПОЛУ"))
-				PrefixLen = 4;
-			else
-				if (W.m_strUpperWord.substr(0, 4) == _R("ПОЛ-"))
-				{
-					PrefixLen = 4;
-					bChangeToPlural = true;
-				}
-				else
-					if (W.m_strUpperWord.substr(0, 3) == _R("ПОЛ"))
-					{
+			for (size_t i = 0; i < prefixes.size(); ++i) {
+				if (startswith(W.m_strUpperWord, prefixes[i])) {
+					PrefixLen = prefixes[i].length();
+					if (i > 1) {
 						bChangeToPlural = true;
-						PrefixLen = 3;
 					}
-					else
-						continue;
-
+				}
+			}
+			if (PrefixLen == 0)  continue;
 		}
 
 
@@ -723,7 +724,7 @@ void CMAPost::Rule_UZHE()
 	{
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (W.m_strUpperWord != _R("УЖЕ")) continue;
+		if (W.m_strUpperWord != "УЖЕ") continue;
 
 		CLineIter next_it = NextNotSpace(it);
 
@@ -776,7 +777,7 @@ void CMAPost::Rule_Ideclinable()
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
 		if (!W.HasPos(NOUN)) continue;
-		if (!endswith(W.m_strUpperWord, _R("О"))) continue;
+		if (!endswith(W.m_strUpperWord, "О")) continue;
 		for (int i = 0; i < W.GetHomonymsCount(); i++)
 		{
 			CHomonym* pH = W.GetHomonym(i);
@@ -983,22 +984,22 @@ void CMAPost::Rule_KAK_MOZHNO()
 {
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
-		// ищем словоформу _R("как")
+		// ищем словоформу "как"
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (W.m_strUpperWord != _R("КАК")) continue;
+		if (W.m_strUpperWord != "КАК") continue;
 		if (W.HasOborot1() != W.HasOborot2()) continue;// "т.е." - это оборот, его обрабатывать не надо
 
-		// ищем словоформу _R("можно")
+		// ищем словоформу _"можно"
 		CLineIter mozno_it = NextNotSpace(it);
 		if (mozno_it == m_Words.end()) break;
-		if (mozno_it->m_strUpperWord != _R("МОЖНО")) continue;
+		if (mozno_it->m_strUpperWord != "МОЖНО") continue;
 
 		// ищем [П сравн]
 		CLineIter compar_it = NextNotSpace(mozno_it);
 		if (compar_it == m_Words.end()) break;
 		int iHom = compar_it->GetHomonymByGrammem(rComparative);
-		if (compar_it->m_strUpperWord == _R("БОЛЕЕ") || compar_it->m_strUpperWord == _R("МЕНЕЕ"))
+		if (compar_it->m_strUpperWord == "БОЛЕЕ" || compar_it->m_strUpperWord == "МЕНЕЕ")
 			iHom = compar_it->GetHomonymByPOS(ADV);
 		if (iHom == -1) continue;
 		if (compar_it->HasOborot1() != compar_it->HasOborot2()) continue;// "т.е." - это оборот, его обрабатывать не надо
@@ -1019,10 +1020,10 @@ bool CMAPost::CanBeDubleDelimiter(CLineIter it)
 {
 	const std::string& WordForm = it->m_strUpperWord;
 
-	return ((WordForm == _R("ДА"))
+	return ((WordForm == "ДА")
 		|| (WordForm == ",")
-		|| (WordForm == _R("И"))
-		|| (WordForm == _R("-"))
+		|| (WordForm == "И")
+		|| (WordForm == "-")
 		);
 };
 
@@ -1046,7 +1047,7 @@ void CMAPost::Rule_Redublication()
 			CLineIter duble_word = NextNotSpace(delimiter_iter);
 			if (duble_word == m_Words.end()) break;
 			bHasEndOfSent |= duble_word->HasDes(OSentEnd);
-			if (duble_word->m_strUpperWord == _R("НЕ"))
+			if (duble_word->m_strUpperWord == "НЕ")
 			{
 				duble_word = NextNotSpace(duble_word);
 				if (duble_word == m_Words.end()) break;
@@ -1112,12 +1113,12 @@ void CMAPost::Rule_CHTO_ZA()
 	{
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (W.m_strUpperWord != _R("ЧТО")) continue;
+		if (W.m_strUpperWord != "ЧТО") continue;
 		if (W.HasOborot1() != W.HasOborot2())  continue;
 
 		CLineIter za_it = NextNotSpace(it);
 		if (za_it == m_Words.end()) return;
-		if (za_it->m_strUpperWord != _R("ЗА")) continue;
+		if (za_it->m_strUpperWord != "ЗА") continue;
 		if (za_it->HasOborot1() != za_it->HasOborot2())  continue;
 
 		CLineIter noun_it = za_it;
@@ -1145,15 +1146,15 @@ void CMAPost::Rule_CHTO_ZA()
 				if (m_pRusGramTab->GleicheGenderNumberCase(pNoun->m_CommonGramCode.c_str(), pNoun->GetGramCodes().c_str(), Kakoi[0].GetAncode(j).c_str()))
 				{
 					GramCodes += Kakoi[0].GetAncode(j);
-					WordForm = Kakoi[0].GetWordForm(j);
+					WordForm = convert_to_utf8(Kakoi[0].GetWordForm(j), morphRussian);
 				}
 			}
 		W.DeleteAllHomonyms();
 		CHomonym* pNew = W.AddNewHomonym();
 		pNew->SetHomonym(&Kakoi[0]);
 		pNew->SetGramCodes(GramCodes);
-		RmlMakeLower(WordForm, morphRussian);
-		W.SetWordStr(WordForm, morphRussian);
+		MakeLowerUtf8(WordForm);
+		W.SetWordStr(WordForm);
 		W.DeleteOborotMarks();
 		m_Words.erase(za_it);
 	};
@@ -1164,7 +1165,7 @@ void CMAPost::InsertComma(CLineIter it)
 {
 	CPostLemWord P(m_pRusGramTab);
 	int dummy;
-	P.ProcessPlmLineForTheFirstHomonym(", 0 0 PUN", morphRussian, dummy);
+	P.ProcessPlmLineForTheFirstHomonym(", 0 0 PUN", dummy);
 	m_Words.insert(it, P);
 };
 
@@ -1182,11 +1183,11 @@ void CMAPost::Rule_VOT_UZHE()
 	{
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (W.m_strUpperWord != _R("ВОТ")) continue;
+		if (W.m_strUpperWord != "ВОТ") continue;
 
 		CLineIter next_it = NextNotSpace(it);
 		if (next_it == m_Words.end()) return;
-		if (next_it->m_strUpperWord != _R("УЖЕ")) continue;
+		if (next_it->m_strUpperWord != "УЖЕ") continue;
 
 
 		//	дальше десяти слов не надо 
@@ -1194,7 +1195,7 @@ void CMAPost::Rule_VOT_UZHE()
 		int WordCount = 0;
 		for (; (WordCount < 10) && (next_it != m_Words.end()); next_it++)
 		{
-			if (next_it->m_strUpperWord == _R("КАК"))
+			if (next_it->m_strUpperWord == "КАК")
 			{
 				bFound = true;
 				break;
@@ -1209,8 +1210,8 @@ void CMAPost::Rule_VOT_UZHE()
 		P.m_TokenLengthInFile = 0;
 		P.AddDes(ORLE);
 		P.AddDes(OLw);
-		P.LemmatizeForm(_R("прошли"), m_pRusLemmatizer);
-		P.SetWordStr(_R("прошли"), morphRussian);
+		P.LemmatizeFormUtf8("прошли", m_pRusLemmatizer);
+		P.SetWordStr("прошли");
 		m_Words.insert(next_it, P);
 		InsertComma(next_it);
 	};
@@ -1242,8 +1243,8 @@ void CMAPost::Rule_UnknownNames()
 
 
 /*
-	программа ищет словоформу _R("сорок"), если после нее идет
-	числительное, тогда  программа уничтожает омоним _R("сорока") у этой словоформы
+	программа ищет словоформу "сорок", если после нее идет
+	числительное, тогда  программа уничтожает омоним "сорока" у этой словоформы
 	+ триста сорок пятый
 	+ сорок один
 	? триста сорок пятого убили (триста сорок(птиц) убили пятого)
@@ -1263,14 +1264,14 @@ void CMAPost::Rule_SOROK()
 		for (int i = 0; i < W.GetHomonymsCount(); i++)
 		{
 			CHomonym* pH = W.GetHomonym(i);
-			if (pH->m_strLemma == _R("СОРОКА"))
+			if (pH->m_strLemma == "СОРОКА")
 			{
 				CLineIter next_it = NextNotSpace(it);
 				if (next_it == m_Words.end()) return;
 				if (next_it->GetPoses() & ((1 << NUMERAL) | (1 << NUMERAL_P)))
 					pH->m_bDelete = true;
 			}
-			if (pH->m_strLemma == _R("СЕМЬЮ"))
+			if (pH->m_strLemma == "СЕМЬЮ")
 			{
 				CLineIter next_it = NextNotSpace(it);
 				if (next_it == m_Words.end() || !(next_it->GetPoses() & ((1 << NUMERAL) | (1 << NUMERAL_P))))
@@ -1363,10 +1364,10 @@ void CMAPost::Rule_AdverbFromAdjectives()
 	{
 		CPostLemWord& W = *it;
 		if (!W.HasDes(ORLE)) continue;
-		if (!W.m_bPredicted)    continue;
-		if (W.m_strUpperWord.length() < 3) continue;
-		if (W.m_strUpperWord.substr(0, 3) != _R("ПО-")) continue;
-		if (!HasParadigmOfFormAndPoses(W.m_strUpperWord.substr(3), (1 << ADJ_FULL) | (1 << ADJ_SHORT)))
+		if (!W.m_bPredicted) continue;
+		const std::string prefix = "ПО-";
+		if (!startswith(W.m_strUpperWord, prefix)) continue;
+		if (!HasParadigmOfFormAndPoses(W.m_strUpperWord.substr(prefix.length()), (1 << ADJ_FULL) | (1 << ADJ_SHORT)))
 			continue;
 		W.DeleteAllHomonyms();
 		CHomonym* pNew = W.AddNewHomonym();
@@ -1431,7 +1432,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 		CHomonym* pH = W.GetHomonym(HomNo);
 
 		std::vector<CFormInfo> Paradigms;
-		std::string Word = W.m_strWord;
+		std::string Word = _R(W.m_strWord);
 		m_pRusLemmatizer->CreateParadigmCollection(false, Word, true, true, Paradigms);
 		for (long k = 0; k < Paradigms.size(); k++)
 			if (Paradigms[k].GetSrcAncode() == pH->GetGramCodes())
@@ -1446,7 +1447,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 						&& (rAllGenders & g & pH->m_iGrammems)
 						)
 					{
-						pH->m_strLemma = Paradigms[k].GetWordForm(j);
+						pH->m_strLemma = convert_to_utf8(Paradigms[k].GetWordForm(j), morphRussian);
 						break;
 					}
 				};
@@ -1509,7 +1510,7 @@ void CMAPost::Rule_TwoPredicates()
 	for (CLineIter it = m_Words.begin(); it != m_Words.end(); it++)
 	{
 		CPostLemWord& W = *it;
-		if (W.HasDes(OSentEnd) || W.HasDes(OPun) || W.m_strUpperWord == _R("И") || W.m_strUpperWord == _R("ИЛИ"))
+		if (W.HasDes(OSentEnd) || W.HasDes(OPun) || W.m_strUpperWord == "И" || W.m_strUpperWord == "ИЛИ")
 		{
 			CLineIter end_it = it;
 			if (W.HasDes(OSentEnd))

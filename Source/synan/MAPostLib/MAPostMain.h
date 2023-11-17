@@ -72,8 +72,8 @@ public:
 public:
 	
     
-    bool    LoadWords(const CPlmLineCollection *piInTextItems);
-	bool	ProcessData(const CPlmLineCollection *piInTextItems);
+    bool    LoadWords(const CLemmatizedText *piInTextItems);
+	bool	ProcessData(const CLemmatizedText *piInTextItems);
 	bool	Init(const CLemmatizer* RusLemmatizer, const CAgramtab* RusGramTab);
 	CLineIter Remove(CLineIter it, bool bRemoveSpaceAfterDeletedWord);
     CLineIter PassSpaces(CLineIter it);

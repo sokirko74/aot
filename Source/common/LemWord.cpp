@@ -140,7 +140,7 @@ int ParseOborotNo(const std::string& Descriptors)
 };
 
 
-bool CLemWord::ProcessPlmLineForTheFirstHomonym(const char* sPlmLine, MorphLanguageEnum langua, int& OborotNo)
+bool CLemWord::ProcessPlmLineForTheFirstHomonym(const char* sPlmLine, int& OborotNo)
 {
     char buffer[CriticalGraphemLineLength*2];
     assert (strlen(sPlmLine) < CriticalGraphemLineLength*2);
@@ -156,7 +156,7 @@ bool CLemWord::ProcessPlmLineForTheFirstHomonym(const char* sPlmLine, MorphLangu
     char WordBuffer[CriticalTokenLength+1];
     strncpy(WordBuffer, strPlmLine, iFirstFieldLen);
     WordBuffer[iFirstFieldLen] = '\0';
-    SetWordStr(WordBuffer, langua);
+    SetWordStr(WordBuffer);
 
 
     size_t iSomeUnusefulDigitsLen = strspn(strPlmLine + iFirstFieldLen," -1234567890");
@@ -300,6 +300,7 @@ void CLemWord::Reset()
     m_TokenLengthInFile = 0;
 	m_bHasSpaceBefore = false;
 	m_bDeleted = false;
+	m_LettersCount = 0;
 }
 
 
@@ -405,11 +406,13 @@ void CLemWord::DeleteMarkedHomonymsBeforeClauses()
 
 }
 
-void	CLemWord::SetWordStr (std::string NewValue, MorphLanguageEnum langua)
+void	CLemWord::SetWordStr (std::string NewValue)
 {
 	m_strWord = NewValue;
 	m_strUpperWord =  NewValue;
-	RmlMakeUpper(m_strUpperWord, langua);
+	MakeUpperUtf8(m_strUpperWord);
+	m_LettersCount = CountLettersInUtf8(NewValue);
+	
 };
 
 

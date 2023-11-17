@@ -12,12 +12,10 @@ add_library(${PROJECT_NAME} SHARED
         COMLemmatizerEnglish.rgs
         COMLemmatizerGerman.rgs
         COMLemmatizerRussian.rgs
-        COMPLMLineCollection.rgs
         COMParadigm.rgs
         COMParadigmCollection.rgs
         ComLemmatizers.cpp
         ComParadigm.cpp
-        ComPlmLineCollection.cpp
         Lemmatizer.cpp
         Lemmatizer.def
         Lemmatizer.rc

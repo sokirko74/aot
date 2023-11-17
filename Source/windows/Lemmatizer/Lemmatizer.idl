@@ -67,28 +67,6 @@ typedef enum {	idlRussian = 1, idlEnglish = 2, idlGerman = 3} idlMorphLanguageEn
 		[propput, id(15), helpstring("property MaximalPrediction")] HRESULT MaximalPrediction([in] BOOL newVal);
 		[id(20), helpstring("method CheckABC")] HRESULT CheckABC([in] BSTR Word, [out,retval] BOOL* Result);
 	};
-	[
-		object,
-		uuid(1887B706-1CAE-11D3-9CCE-00105A68BAF2),
-		dual,
-		helpstring("IPLMLineCollection Interface"),
-		pointer_default(unique)
-	]
-	interface IPLMLineCollection : IDispatch
-	{
-		[propget, id(DISPID_VALUE), helpstring("property Item")] HRESULT Item([in] long pos, [out, retval] BSTR *pVal);
-		[propput, id(DISPID_VALUE), helpstring("property Item")] HRESULT Item([in] long pos, [in] BSTR newVal);
-		[propget, id(1), helpstring("property Count")] HRESULT Count([out, retval] long *pVal);
-		[id(2), helpstring("method Remove")] HRESULT Remove([in] long pos);
-		[id(4), helpstring("method SaveToFile")] HRESULT SaveToFile([in] BSTR filename);
-		[id(5), helpstring("method ProcessPlmLines")] HRESULT ProcessPlmLines([in] IUnknown* piGraphmatFile);
-		[id(6), helpstring("method AttachLemmatizer")] HRESULT AttachLemmatizer(ILemmatizer* pVal);
-		[id(10), helpstring("method Clear")] HRESULT Clear();
-		[id(11), helpstring("method ProcessHyphenWords")] HRESULT ProcessHyphenWords(IUnknown* piGraphan);
-		[id(12), helpstring("method CopyItems")] HRESULT CopyItems([in]IUnknown* piPlmLinesFrom);
-		[id(13), helpstring("method AddLine")] HRESULT AddLine([in]BSTR newVal);
-		[propget, id(14), helpstring("property Lemmatizer")] HRESULT Lemmatizer([out, retval] IUnknown** pVal);
-	};
 [
 	uuid(CA8CF90E-FBB6-11D2-9C98-00105A68BAF2),
 	version(1.0),

@@ -72,7 +72,7 @@ struct CInputSentence
 	{
 	};
 
-	size_t	ReadSentence (const CPlmLineCollection&	PlmLines, size_t StartLineNo);
+	size_t	ReadSentence (const CLemmatizedText&	PlmLines, size_t StartLineNo);
 	void	AddToResultPlmLinesCollection(std::vector<std::string>& Result) const;
 	size_t	GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo) const;
 
@@ -180,7 +180,7 @@ bool AreEqual(const CPlmLine& L, const CGrammarItem& I)
 };
 
 
-size_t CInputSentence::ReadSentence ( const CPlmLineCollection&	PlmLines, size_t StartLineNo)
+size_t CInputSentence::ReadSentence ( const CLemmatizedText&	PlmLines, size_t StartLineNo)
 {
 	size_t EndLineNo = PlmLines.m_PlmItems.size();
 	assert (StartLineNo < EndLineNo);
@@ -616,7 +616,7 @@ void CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 
 
 
-bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection& PlmLines, const CAgramtab*	pGramTab, std::vector<std::string>& Result, bool bDumpOccurrences) const
+bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CLemmatizedText& PlmLines, const CAgramtab*	pGramTab, std::vector<std::string>& Result, bool bDumpOccurrences) const
 {
 	//printf ("Parsing  file.... \n");
 	remove ("occurrs.txt");

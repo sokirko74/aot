@@ -227,7 +227,7 @@ public:
 
     size_t GetCountOfRoots() const;
 
-    bool ParseFile(ParseMethodEnum ParseMethod, const CPlmLineCollection &PlmLines, const CAgramtab *pGramTab,
+    bool ParseFile(ParseMethodEnum ParseMethod, const CLemmatizedText &PlmLines, const CAgramtab *pGramTab,
                    std::vector<std::string> &Result, bool bDumpOccurrences) const;
 
     void BuildAutomat(std::set<CWorkRule> &EncodedRules);

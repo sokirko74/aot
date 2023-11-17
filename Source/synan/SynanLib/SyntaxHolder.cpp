@@ -59,7 +59,7 @@ void CSyntaxHolder::LoadSyntax(MorphLanguageEnum langua)
 };
 
 
-bool CSyntaxHolder::RunMapost(CPlmLineCollection& mapostPlmLines)
+bool CSyntaxHolder::RunMapost(CLemmatizedText& mapostPlmLines)
 {
 	if (!m_pPostMorph->ProcessData(&m_PlmLines))
 	{
@@ -86,7 +86,7 @@ bool CSyntaxHolder::GetSentencesFromSynAn(std::string utf8str, bool bFile)
 		    m_PlmLines.SaveToFile("before.lem");
         #endif
 
-		CPlmLineCollection MapostPlmLines;
+		CLemmatizedText MapostPlmLines;
 		if (!RunMapost(MapostPlmLines)) {
 			return false;
 		}

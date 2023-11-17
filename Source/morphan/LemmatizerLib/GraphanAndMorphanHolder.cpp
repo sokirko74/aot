@@ -121,11 +121,7 @@ bool CGraphanAndMorphanHolder::GetMorphology(std::string str, bool bFile, int& C
 
 		ProcessHyphenWords(m_pLemmatizer, &m_Graphan);
 
-		if (!m_PlmLines.ProcessPlmLines(&m_Graphan))
-		{
-			fprintf (stderr, "  Cannot get morph. interpretation from Lemmatizer\n");;
-			return false;
-		};
+		m_PlmLines.CreateFromTokemized(&m_Graphan);
 
 		if (m_bTimeStatis) 
 		{

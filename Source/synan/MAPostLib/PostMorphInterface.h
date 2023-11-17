@@ -5,7 +5,7 @@
 #include "morph_dict/common/utilit.h"
 
 using namespace std;
-class CPlmLineCollection;
+class CLemmatizedText;
 
 class CPostMorphInteface
 {
@@ -15,7 +15,7 @@ protected:
 public:
     bool			m_bCanChangeInputText;
 	bool			m_bHumanFriendlyOutput;
-	virtual bool	ProcessData(const CPlmLineCollection *piInTextItems) = 0;
+	virtual bool	ProcessData(const CLemmatizedText *piInTextItems) = 0;
     CPostMorphInteface() : m_Language(morphUnknown) {};
 	virtual ~CPostMorphInteface() {};
     std::string    GetResultPlmLineUtf8(size_t i) const { 

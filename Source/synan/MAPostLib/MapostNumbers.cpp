@@ -5,10 +5,10 @@
 
 bool CMAPost::is_russian_numeral(std::string& word) const {
 	std::vector<CFormInfo> Paradigms;
-	m_pRusLemmatizer->CreateParadigmCollection(false, word, false, false, Paradigms);
+	m_pRusLemmatizer->CreateParadigmCollection(false, _R(word), false, false, Paradigms);
 	for (auto& p : Paradigms)
 	{
-		auto form = p.GetWordForm(0);
+		auto form = convert_to_utf8(p.GetWordForm(0), morphRussian);
 		if (RussianNumerals.CheckIsNumeral(form)) {
 			return true;
 		}
@@ -21,7 +21,7 @@ std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::st
 	if (Lemma.length() == 0) return "";
 	std::vector<CFormInfo> Paradigms;
 	std::string h = Lemma;
-	m_pRusLemmatizer->CreateParadigmCollection(false, h, false, false, Paradigms);
+	m_pRusLemmatizer->CreateParadigmCollection(false, _R(h), false, false, Paradigms);
 	if (Paradigms.size() == 0) return ""; // например, нету в Ё-словаре слова ЧЕТВЕРТЫЙ
 	// ищем числительное
 	long k = 0;
@@ -34,7 +34,7 @@ std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::st
 			if (POS == NOUN)
 				break;
 		}
-		if ((POS == NUMERAL) || (POS == NUMERAL_P) || Lemma == _R("НУЛЕВОЙ"))
+		if ((POS == NUMERAL) || (POS == NUMERAL_P) || Lemma == "НУЛЕВОЙ")
 			break;
 	};
 	assert(k < Paradigms.size());
@@ -44,8 +44,8 @@ std::string CMAPost::GetSimilarNumAncode(const std::string& Lemma, const std::st
 	std::string AnCodes;
 	for (k = 0; k < P.GetCount(); k++)
 	{
-		std::string Form = P.GetWordForm(k);
-		EngRusMakeLower(Form);
+		std::string Form = convert_to_utf8(P.GetWordForm(k), morphRussian);
+		MakeLowerUtf8(Form);
 		if (IsNoun && Form != h && m_AbbrIndeclGramCodes.find(P.GetAncode(k)) != m_AbbrIndeclGramCodes.end())
             // 1000 - не аббр, "свыше 1000 человек"
 			continue;
@@ -103,7 +103,7 @@ void CMAPost::Cifrdef()
 					CHomonym* pNew = W.AddNewHomonym();
 					std::vector<CFormInfo> Paradigms;
 					std::string TmpStr = W.m_strWord.substr(0, hyp);
-					m_pRusLemmatizer->CreateParadigmCollection(false, TmpStr, false, false, Paradigms);
+					m_pRusLemmatizer->CreateParadigmCollection(false, _R(TmpStr), false, false, Paradigms);
 					if (Paradigms.size() > 0) // плутония-238
 					{
 						pNew->m_lPradigmID = Paradigms[0].GetParadigmId();
@@ -159,11 +159,11 @@ void CMAPost::Cifrdef()
 		};
 		if (numeral == nullptr)  continue;
 
-		EngRusMakeLower(Flexia);
+		MakeLowerUtf8(Flexia);
 		std::string AnCodes = GetSimilarNumAncode(numeral->m_Cardinal, Flexia, numeral->m_bNoun);
 		if (AnCodes.empty() && Flexia != "")
 			AnCodes = GetSimilarNumAncode(numeral->m_Ordinal, Flexia, numeral->m_bNoun);
-		if (numeral->m_Cardinal == _R("ОДИН")) {
+		if (numeral->m_Cardinal == "ОДИН") {
 			AnCodes =  m_pRusGramTab->GramCodes().m_GenderNumeral;
 		}
 		std::string AnCodes0 = AnCodes; //числ
@@ -183,11 +183,11 @@ void CMAPost::Cifrdef()
 		if (AnCodes.empty() && AnCodes0.empty())
 		{
 			// "20-летний"
-			if (W.LemmatizeForm(Flexia, m_pRusLemmatizer))
+			if (W.LemmatizeFormUtf8(Flexia, m_pRusLemmatizer))
 			{
 				W.DelDes(ONumChar);
 				W.AddDes(ORLE);
-				W.SetWordStr(NumWordForm + "#" + Flexia, morphRussian);
+				W.SetWordStr(NumWordForm + "#" + Flexia);
 			}
 		}
 		else
@@ -225,23 +225,23 @@ void CMAPost::Cifrdef()
 				pH->SetGramCodes(m_pRusGramTab->GramCodes().m_MasAbbrNoun);
 				if (W2.m_strWord == "%")
 				{
-					W2.m_strUpperWord = W2.m_strWord = _R("ПРОЦ");
-					pH->m_strLemma = _R("ПРОЦЕНТ");
+					W2.m_strUpperWord = W2.m_strWord = "ПРОЦ";
+					pH->m_strLemma = "ПРОЦЕНТ";
 				}
 				else  if (W2.m_strWord == "$")
 				{
 					if (spec_it == prev_it) //$12
 						dollar = prev_it;
-					W2.m_strUpperWord = W2.m_strWord = _R("ДОЛЛ");
-					pH->m_strLemma = _R("ДОЛЛАР");
+					W2.m_strUpperWord = W2.m_strWord = "ДОЛЛ";
+					pH->m_strLemma = "ДОЛЛАР";
 				}
 				else  if (W2.m_strWord == "№")
 				{
 					W2.m_strUpperWord = W2.m_strWord = "№";
-					pH->m_strLemma = _R("НОМЕР");
+					pH->m_strLemma = "НОМЕР";
 					//pH->m_GramCodes = "";
 				}
-				m_pRusLemmatizer->CreateParadigmCollection(true, pH->m_strLemma, true, false, Paradigms);
+				m_pRusLemmatizer->CreateParadigmCollection(true, _R(pH->m_strLemma), true, false, Paradigms);
 				pH->m_lPradigmID = Paradigms[0].GetParadigmId();
 				W2.m_bWord = true;
 				W2.m_bPredicted = false;
@@ -249,8 +249,7 @@ void CMAPost::Cifrdef()
 				pH->InitAncodePattern();
 			}
 			else
-				if (!((next_it != m_Words.end() && (next_it->m_strUpperWord == _R("ЛЕТ")))	// "в течение 2 лет"
-					//|| (it !=  m_Words.begin() && prev_it->HasGrammem(rComparative) && prev_it->HasPos(NUMERAL)) // "совершила более 40 тяжких преступлений"
+				if (!((next_it != m_Words.end() && (next_it->m_strUpperWord == "ЛЕТ"))	// "в течение 2 лет"
 					))
 					if (!AnCodes.empty())  //ЧИСЛ-П
 					{

@@ -350,7 +350,7 @@ void CSentence::AddSynWord(CSynWord &Word) {
     m_Words.push_back(Word);
 }
 
-bool ReadSentence(CSentence &S, const CPlmLineCollection *piPLMLinePtr, size_t &LineNo) {
+bool ReadSentence(CSentence &S, const CLemmatizedText *piPLMLinePtr, size_t &LineNo) {
     S.Reset();
 
     int OborotNo = -1;
@@ -365,7 +365,7 @@ bool ReadSentence(CSentence &S, const CPlmLineCollection *piPLMLinePtr, size_t &
             CSynWord Word(&S);
 
             //  reading the first homonym and word's  properties
-            if (!Word.ProcessPlmLineForTheFirstHomonym(strPlmLine, S.GetOpt()->m_Language, OborotNo))
+            if (!Word.ProcessPlmLineForTheFirstHomonym(strPlmLine, OborotNo))
                 return false;
             Word.m_bHasSpaceBefore = S.m_Words.empty()
                                      || S.m_Words.back().m_GraphematicalUnitOffset + S.m_Words.back().m_strWord.length() <  Word.m_GraphematicalUnitOffset
@@ -394,7 +394,7 @@ It finds the next sentence delimeter, checking that a sentence should have at le
 The function returns false if a parse  error occurs while reading. If no error, the function 
 changes LineNo, which   should point to the end position of the next sentence.
 */
-bool CSentence::ReadNextFromPlmLines(const CPlmLineCollection *piPLMLinePtr, size_t &LineNo) {
+bool CSentence::ReadNextFromPlmLines(const CLemmatizedText *piPLMLinePtr, size_t &LineNo) {
     try {
         //  a cycle till a non-empty sentence is found or  the end is reached
         while (m_Words.empty() && (LineNo < piPLMLinePtr->m_PlmItems.size())) {

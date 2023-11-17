@@ -104,7 +104,7 @@ void CGerSentence::BuildTrennbarePraefixe()
 		std::string Praefix = m_Words[H.m_PrefixWordNo].m_strWord;
 		MainWord.m_TrennbarePraefixWordNo = H.m_PrefixWordNo;
 		MainWord.m_Homonyms[H.m_MainWord.m_HomonymNo].SetLemma(Praefix+MainWord.m_Homonyms[H.m_MainWord.m_HomonymNo].m_strLemma);
-        MainWord.SetWordStr(Praefix + "-" +MainWord.m_strWord, GetOpt()->m_Language);
+        MainWord.SetWordStr(Praefix + "-" +MainWord.m_strWord);
 
 		MainWord.SetAllOtherHomsDel(H.m_MainWord.m_HomonymNo);
 		MainWord.DeleteMarkedHomonymsBeforeClauses();

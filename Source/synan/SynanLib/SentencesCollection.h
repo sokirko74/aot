@@ -9,7 +9,7 @@
 #include "morph_dict/common/utilit.h"
 
 
-class CPlmLineCollection;
+class CLemmatizedText;
 class CSentence;
 
 class CSentencesCollection  
@@ -23,7 +23,7 @@ public:
 
 	bool CreateOptions(MorphLanguageEnum langua);
 	void InitializeProcesser();
-	bool ProcessData(const CPlmLineCollection* piPlmLine);
+	bool ProcessData(const CLemmatizedText* piPlmLine);
 	void ClearSentences();
 	void ClearOptions();
 	void put_SilentMode(bool newVal);
@@ -53,5 +53,5 @@ protected:
 	*/
 	bool	m_bDeleteEqualPrimitiveClauseVariants;
 
-	bool ReadAndProcessSentences(const CPlmLineCollection* piPLMLinePtr);
+	bool ReadAndProcessSentences(const CLemmatizedText* piPLMLinePtr);
 };

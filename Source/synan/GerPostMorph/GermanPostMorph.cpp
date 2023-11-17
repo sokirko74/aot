@@ -48,7 +48,7 @@ bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
 	return true;
 };
 
-bool	CGermanPostMorph::ProcessData(const CPlmLineCollection *piInTextItems)
+bool	CGermanPostMorph::ProcessData(const CLemmatizedText *piInTextItems)
 {
 	
 	//if (!m_PersonGrammar.ParseFile(TrieParsingMethod, *piInTextItems, m_GerGramTab, piOutTextItems))

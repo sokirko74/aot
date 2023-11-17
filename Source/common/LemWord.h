@@ -22,6 +22,8 @@ public:
 	// input word uppercase form 
 	std::string m_strUpperWord;
 
+	size_t m_LettersCount;
+
 	// is graphematical space 
 	bool m_bSpace;
 
@@ -57,7 +59,7 @@ public:
 	
 	void DeleteOborotMarks();
 	bool AddNextHomonym(const char* strPlmLine);
-	bool ProcessPlmLineForTheFirstHomonym(const char* strPlmLine, MorphLanguageEnum langua, int& OborotNo);
+	bool ProcessPlmLineForTheFirstHomonym(const char* strPlmLine,  int& OborotNo);
 	bool HasDes(Descriptors g) const;
     void DelDes(Descriptors g);
     void AddDes(Descriptors g);
@@ -66,7 +68,7 @@ public:
 	
 	
 	
-	void	SetWordStr (std::string NewValue, MorphLanguageEnum langua);
+	void	SetWordStr (std::string NewValue);
 
 	bool	FindLemma(std::string strLemma) const;	
 	int		GetHomonymByPOS(BYTE POS) const;

@@ -22,13 +22,13 @@ bool CThesaurus::LoadModelRelations(std::string Buff, CInnerModel &M) {
 
         std::string Name = s;
         Trim(Name);
-        if (Name == _R("с_опр"))
+        if (Name == "с_опр")
             R.m_Name = Coord;
-        else if (Name == _R("упр"))
+        else if (Name == "упр")
             R.m_Name = Subord;
-        else if (Name == _R("с_соч"))
+        else if (Name == "с_соч")
             R.m_Name = CoordSimilar;
-        else if (Name == _R("деф"))
+        else if (Name == "деф")
             R.m_Name = Hyphen;
         else if (Name == "subord")
             R.m_Name = eSubord;
@@ -124,8 +124,8 @@ void CThesaurus::LoadModels(std::string FileName) {
 
     while (getline(ifs, line)) {
         CInnerModel M;
-        auto innerStr = convert_from_utf8(line.c_str(), m_MainLanguage);
-        auto fields = split_string(innerStr, FieldDelimiter[0]);
+        //auto innerStr = convert_from_utf8(line.c_str(), m_MainLanguage);
+        auto fields = split_string(line, FieldDelimiter[0]);
         M.m_ModelId = atoi(fields[0].c_str());
 
         if (!LoadAtomicGroups(strip_quotes(fields[2]), M)) {

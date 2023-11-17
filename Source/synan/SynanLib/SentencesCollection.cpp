@@ -78,7 +78,7 @@ bool AreEqualByWords(const CMorphVariant &_X1, const CMorphVariant &_X2) {
     return true;
 }
 
-bool CSentencesCollection::ProcessData(const CPlmLineCollection *piPlmLine) {
+bool CSentencesCollection::ProcessData(const CLemmatizedText *piPlmLine) {
     try {
         bool bRes = ReadAndProcessSentences(piPlmLine);
 
@@ -117,7 +117,7 @@ bool CSentencesCollection::ProcessData(const CPlmLineCollection *piPlmLine) {
 }
 
 
-bool CSentencesCollection::ReadAndProcessSentences(const CPlmLineCollection *piPlmLine) {
+bool CSentencesCollection::ReadAndProcessSentences(const CLemmatizedText *piPlmLine) {
     const size_t LinesCount = piPlmLine->m_PlmItems.size();
 
     if (!m_pSyntaxOptions->IsValid())
