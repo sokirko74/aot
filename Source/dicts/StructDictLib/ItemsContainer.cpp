@@ -140,86 +140,16 @@ bool TItemContainer::WriteDomItems(std::string path) const {
     return true;
 };
 
-bool IsUnicodeCyrillic(uint16_t u) {
-    return 0x0400 <= u <= 0x04FF;
-}
-
-bool IsUnicodeRussianLower(uint16_t u) {
-    return 0x0430 <= u <= 0x0451;
-}
-
-typedef bool (*unicode_check_pred)(uint16_t u);
-
-template <unicode_check_pred C>
-bool CheckUtf8(const std::string& s) {
-    if (s.empty()) {
-        return false;
-    }
-    for (size_t i = 0; i < s.length();)
-    {
-        if ((s[i] & 0xf8) == 0xf0) {
-            return false;
-        }
-        else if ((s[i] & 0xf0) == 0xe0) {
-            return false;
-        }
-        else if ((s[i] & 0xe0) == 0xc0) {
-            uint16_t* u = (uint16_t*)(s.c_str() + i);
-            if (! (C(*u) )) {
-                return false;
-            }
-            i += 2;
-        }
-        else {
-            if ((s[i] != '-') && (s[i] != '/')) {
-                return false;
-            }
-            i += 1;
-        }
-    }
-    return s.back() != '-';
-};
-
-template<unicode_check_pred C>
-bool FindInUtf8(const std::string& s) {
-    if (s.empty()) {
-        return false;
-    }
-    for (size_t i = 0; i < s.length();)
-    {
-        if ((s[i] & 0xf8) == 0xf0) {
-            i += 4;
-        }
-        else if ((s[i] & 0xf0) == 0xe0) {
-            i += 3;
-        }
-        else if ((s[i] & 0xe0) == 0xc0) {
-            uint16_t* u = (uint16_t*)(s.c_str() + i);
-            if (C(*u)) {
-                return true;
-            }
-            i += 2;
-        }
-        else {
-            i += 1;
-        }
-    }
-    return false;
-};
-
-template bool CheckUtf8<IsUnicodeCyrillic>(const std::string& s);
-template bool CheckUtf8<IsUnicodeRussianLower>(const std::string& s);
-template bool FindInUtf8<IsUnicodeCyrillic>(const std::string& s);
 
 static bool Check_D_RLE(const std::string& s) {
     if (s.empty()) {
         return false;
     }
     if (s[0] == '#') {
-        return CheckUtf8<IsUnicodeCyrillic>(s.substr(1));
+        return CheckRussianUtf8(s.substr(1));
     }
     else {
-        return CheckUtf8<IsUnicodeCyrillic>(s);
+        return CheckRussianUtf8(s);
     }
 }
 
@@ -230,10 +160,10 @@ static bool CanBeRusAbbr(const std::string& s) {
         return false;
     }
     if (s.back() == '.') {
-        return CheckUtf8<IsUnicodeRussianLower>(s.substr(0, s.length() - 1));
+        return CheckRussianLowerUtf8(s.substr(0, s.length() - 1));
     }
     else {
-        return CheckUtf8<IsUnicodeRussianLower>(s);
+        return CheckRussianLowerUtf8(s);
     }
 
 }
@@ -242,7 +172,7 @@ static bool CanBeRusColloc(const std::string& s) {
     if ((s.length() < 4) || (s.find(' ') == s.npos && s.find(':') == s.npos))
         return false;
 
-    return FindInUtf8<IsUnicodeCyrillic>(s);
+    return ContainsRussianUtf8(s);
 };
 
 

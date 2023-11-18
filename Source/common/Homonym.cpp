@@ -147,11 +147,6 @@ bool CHomonym::ProcessLemmaAndGrammems(const char* CurrStr)
 	return true;
 }
 
-
-
-
-
-
 void CHomonym::DeleteOborotMarks()
 {
 		m_bOborot1 = false;
@@ -172,7 +167,7 @@ void  CHomonym::SetHomonym(const CFormInfo* F)
     m_CommonGramCode   = F->GetCommonAncode();
     m_lPradigmID = F->GetParadigmId();
     m_LemSign = F->GetLemSign();
-    m_strLemma = F->GetWordForm(0);
+    m_strLemma = convert_to_utf8(F->GetWordForm(0), GetGramTab()->m_Language);
     InitAncodePattern();
 }
 

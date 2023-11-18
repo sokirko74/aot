@@ -82,7 +82,7 @@ void CMAPost::Cifrdef()
 		if (W.IsInOborot()) continue;
 
 		// Доллары
-		if (!isdigit((BYTE)W.m_strWord[0]) && !(foundHyp && is_russian_alpha((BYTE)W.m_strWord.back())))
+		if (!isdigit((BYTE)W.m_strWord[0]) && !(foundHyp && CheckRussianUtf8(W.m_strWord.substr(hyp))))
 			if (dollar == prev_it)//$9,4 млрд
 			{
 				if (is_russian_numeral(W.m_strWord)) {
@@ -95,7 +95,7 @@ void CMAPost::Cifrdef()
 				}
 			}
 			else
-				if (isdigit((BYTE)W.m_strWord.back()) && foundHyp && is_russian_alpha((BYTE)W.m_strWord[0]))
+				if (isdigit((BYTE)W.m_strWord.back()) && foundHyp && CheckRussianUtf8(W.m_strWord.substr(0, hyp)))
 				{
 					W.DelDes(ONumChar);
 					W.AddDes(ORLE);
@@ -197,7 +197,7 @@ void CMAPost::Cifrdef()
 			W.AddDes(OLw);
 			W.DeleteAllHomonyms();
 
-			if (!(AnCodes0.empty() || (next_it != m_Words.end() && (next_it->m_strUpperWord == _R("ГГ"))))) // ЧИСЛ
+			if (!(AnCodes0.empty() || (next_it != m_Words.end() && (next_it->m_strUpperWord == "ГГ")))) // ЧИСЛ
 			{
 				CHomonym* pH = W.AddNewHomonym();
 				pH->SetMorphUnknown();

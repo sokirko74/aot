@@ -68,7 +68,7 @@ bool CMAPost::ReadCollocs() {
             std::string LemmaStr;;
             int MainWordNo;
             std::string InterfaceString;
-            StringTokenizer tok(convert_from_utf8(s, m_Language).c_str(), "#");
+            StringTokenizer tok(s, "#");
             int i = 0;
             while (tok()) {
                 std::string q = tok.val();

@@ -115,7 +115,7 @@ bool CMAPost::LoadWords(const CLemmatizedText* piInTextItems)
 					return false;
 
 				Word.m_bHasSpaceBefore = m_Words.empty()
-					|| m_Words.back().m_GraphematicalUnitOffset + m_Words.back().m_strWord.length() < Word.m_GraphematicalUnitOffset
+					|| m_Words.back().m_GraphematicalUnitOffset + m_Words.back().m_LettersCount < Word.m_GraphematicalUnitOffset
 					|| m_Words.back().m_bSpace;
 				m_Words.push_back(Word);
 
@@ -273,10 +273,8 @@ void CMAPost::ILeDefLe()
 		}
 		if (W.IsInOborot()) continue;
 
-		std::string after_hyp = W.m_strWord.substr(hyp + 1)
-		if (
-			   is_russian_alpha((BYTE)W.m_strWord[0]) //   is_english_alpha и is_russian_alpha пересекаются
-			|| !is_russian_alpha((BYTE)W.m_strWord[W.m_strWord.length() - 1])) {
+		std::string after_hyp = W.m_strWord.substr(hyp + 1);
+		if (!CheckRussianUtf8(after_hyp)) {
 			continue;
 		}
 
@@ -516,7 +514,7 @@ void CMAPost::OtherRules()
 						W.EraseHomonym(HomNo);
                     }
 		}
-		if (W.HasDes(ONumChar) && is_alpha((BYTE)W.m_strWord[0]) && W.GetPoses() == 0)
+		if (W.HasDes(ONumChar) &&  W.GetPoses() == 0)
 		{
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
@@ -525,7 +523,7 @@ void CMAPost::OtherRules()
 			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
 			pNew->SetGramCodes(m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));
 			pNew->InitAncodePattern();
-			W.AddDes(is_alpha((BYTE)W.m_strWord[0], morphEnglish) ? OLLE : ORLE);
+			W.AddDes(ContainsRussianUtf8(W.m_strWord) ? ORLE : OLLE);
 		}
 	};
 }
@@ -625,9 +623,10 @@ void CMAPost::SemiNouns()
 			for (size_t i = 0; i < prefixes.size(); ++i) {
 				if (startswith(W.m_strUpperWord, prefixes[i])) {
 					PrefixLen = prefixes[i].length();
-					if (i > 1) {
+					if (prefixes[i] != "ПОЛУ") {
 						bChangeToPlural = true;
 					}
+					break;
 				}
 			}
 			if (PrefixLen == 0)  continue;
@@ -638,7 +637,7 @@ void CMAPost::SemiNouns()
 		{
 			std::string WordForm = it->m_strUpperWord;
 			WordForm.erase(0, PrefixLen);
-			if (WordForm.length() <= 3) continue;
+			if (WordForm.length() <= 6) continue;
 			if (!HasParadigmOfFormAndPoses(WordForm, 1 << POS))
 			{
 				POS = NUMERAL;
@@ -793,7 +792,7 @@ void CMAPost::Rule_Ideclinable()
 				std::string NewGramCode;
 				if (m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(NOUN, pH->m_iGrammems & ~_QM(rPlural), NewGramCode))
 				{
-                    LOGV << "apply Rule_Ideclinable to " <<  convert_to_utf8(W.m_strUpperWord, m_Language);
+                    LOGV << "apply Rule_Ideclinable to " <<  W.m_strUpperWord;
 					pH->SetGramCodes(NewGramCode);
 					pH->InitAncodePattern();
 				}
@@ -1069,6 +1068,7 @@ void CMAPost::Rule_Redublication()
 			while (itt != last_it)
 				itt = m_Words.erase(itt);
 			m_Words.erase(last_it);
+			W.m_UnparsedGraphemDescriptorsStr += " #РЕДУПЛ ";
 			if (bHasEndOfSent)
 				W.AddDes(OSentEnd);
 		}
