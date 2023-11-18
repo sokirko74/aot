@@ -255,7 +255,7 @@ CGroups::CGroups(const CGroups &G) {
 
 void CGroups::get_full_sentence(std::string &str_sent) const {
     for (int i = 0; i < sent.size(); i++)
-        if (sent[i].get_word())
+        if (!sent[i].get_word().empty())
             str_sent += sent[i].get_word() + std::string(" ");
 }
 
@@ -375,11 +375,11 @@ void CGroups::BuildSimilarSynRels(CGroup &G, int iGroupNum) {
 
 
         if (iComma == -1)
-            if (sent[main_word_no].get_word())
-                if (sent[main_word_no].get_word()[0] == ','
-                    || sent[main_word_no].get_word()[0] == '('
-                    || sent[main_word_no].get_word()[0] == ')'
-                    || sent[main_word_no].get_word()[0] == '-'
+            if (!sent[main_word_no].get_word().empty() )
+                if (sent[main_word_no].get_word() == ","
+                    || sent[main_word_no].get_word() == "("
+                    || sent[main_word_no].get_word() == ")"
+                    || sent[main_word_no].get_word() == "-"
                         )
                     iComma = main_word_no;
 

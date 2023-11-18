@@ -247,7 +247,7 @@ void CSentence::FindTermins()
 					
 					if( !strLemma.size() )
 						continue;
-					RmlMakeUpper(strLemma, GetOpt()->m_Language);
+					MakeUpperUtf8(strLemma);
 					pred.SetStringToCompare(strLemma.c_str());					
 
 					// Ищем термины, которые начинаются со слова strLemma

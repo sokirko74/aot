@@ -37,7 +37,7 @@ bool ProcessHyphenWords(const CLemmatizer* lemmatizer, CGraphmatFile* piGraphmat
                 if (lemmatizer->GetLanguage() != piGraphmatFile->GetTokenLanguage(NextWord)) continue;
                 std::string HyphenWord = piGraphmatFile->GetToken(LineNo-1)+"-"+piGraphmatFile->GetToken(NextWord);
 
-                if (lemmatizer->IsInDictionary(HyphenWord,!piGraphmatFile->HasDescr(LineNo-1,OLw)))
+                if (lemmatizer->IsInDictionary(HyphenWord, !piGraphmatFile->HasDescr(LineNo-1,OLw)))
                 {
                     // uniting words LineNo-1, LineNo,  and NextWord
                     piGraphmatFile->MakeOneWord(LineNo-1, NextWord+1);

@@ -25,7 +25,6 @@ bool CThesaurus::LoadOborots(std::string FileName)
 
 	while (std::getline(inp, line))
 	{
-		line = convert_from_utf8(line.c_str(), m_MainLanguage);
 		StringTokenizer tok(line.c_str(), FieldDelimiter);
 		std::vector<std::string> items;
 		while (tok()) {

@@ -41,14 +41,10 @@ const	CSyntaxOpt* CSynHomonym::GetOpt() const
 	return m_pSent->GetOpt(); 
 };
 
-bool CSynHomonym::CompareWithPredefinedWords(const SDatItems& DatItems) const
+bool CSynHomonym::CompareWithPredefinedWords(const CLemmaList& ll) const
 {
-	if (!(DatItems.m_Poses & m_iPoses)) 
-		return false;
-
-	std::string  lowerLemma = m_strLemma;
-	RmlMakeLower(lowerLemma, GetOpt()->m_Language);
-	return has_item(DatItems.m_vectorDatItems, lowerLemma.c_str());
+	return ll.has_lemma_with_poses(m_iPoses, m_strLemma);
+	
 }
 
 

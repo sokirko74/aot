@@ -55,7 +55,7 @@ public:
 	CSynHomonym(const CSentence* pSentence);
 	const	CSyntaxOpt* GetOpt() const;
 	
-	bool	CompareWithPredefinedWords(const SDatItems& arr) const;
+	bool	CompareWithPredefinedWords(const CLemmaList& arr) const;
     
 	
 };

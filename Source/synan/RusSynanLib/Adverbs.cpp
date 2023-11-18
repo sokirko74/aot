@@ -15,7 +15,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 
 	if ( G.m_iFirstWord >= sent.size() - 1)  return false;
 
-    if ( !has_item( GetOpt()->m_CompAdvList, W1.get_word()) ) return false;
+    if ( !GetOpt()->m_CompAdvList.has_lemma(W1.get_word()) ) return false;
 
 	int I = get_minimal_group(G.m_iFirstWord+1);
 
@@ -50,7 +50,7 @@ bool CRusFormatCaller::format_for_comp_adv (CGroup& G)
 
 bool IsUZH_Particle (const CSynPlmLine& W)
 {
-    return W.is_lemma(_R("УЖ")) && W.HasPOS(PARTICLE);
+    return W.is_lemma("УЖ") && W.HasPOS(PARTICLE);
 };
 
 
@@ -131,7 +131,7 @@ bool CRusFormatCaller::format_for_adv_number_adverb (CGroup& G)
 		j = get_next_main_word (j);
 	if (j == sent.size()) return false;
 
-	if (!has_item (GetOpt()->m_NumberAdverbsList, Wj.get_lemma())) 
+	if (!GetOpt()->m_NumberAdverbsList.has_lemma(Wj.get_lemma())) 
 		return false;
 
 	G.m_GroupType = ADV_NUM_ADV;
@@ -161,7 +161,7 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 	if( !is_morph_adv(Wi) )
 		return false;
 
-    if( Wi.has_grammem(rInterrogative))   //*is_word_upper(_R("КАК")) )
+    if( Wi.has_grammem(rInterrogative))
 		return false;
 
 	if( !Wi.can_syn_depend_on_adv() )
@@ -176,7 +176,7 @@ bool CRusFormatCaller::format_for_adv_adv(CGroup& G)
 	if( !is_morph_adv(Wj) )
 		return false;
 
-	if (Wj.is_lemma(_R("УЖ")))
+	if (Wj.is_lemma("УЖ"))
 		return false;
 
      if( Wj.has_grammem(rInterrogative))   
@@ -238,7 +238,7 @@ bool CRusFormatCaller::format_for_adv_verb(CGroup& G)
 	const CGroup& G2 = get_maximal_group(G1.m_iLastWord+1);
     
     const CSynPlmLine& ww = sent[G1.m_MainWordNo];
-	if( GetOpt()->GetOborDic()->FindSubConj (ww.get_lemma_string() ) != -1 )
+	if( GetOpt()->GetOborDic()->FindSubConj (ww.get_lemma() ) != -1 )
 		return false;
 
 	if (G1.m_GroupType == OBOROTS) return false;

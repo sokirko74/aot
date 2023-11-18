@@ -78,7 +78,7 @@ std::vector<int> COborDic::FindAllArticlesForSimplePrep(std::string strPrep) con
 {
 	std::vector<int> v;
 	if (strPrep.empty()) return v;
-	RmlMakeLower(strPrep, GetOpt()->m_Language);
+	MakeLowerUtf8(strPrep);
 
 	CSimplePrepToArticles::const_iterator it = m_mapSimplePrep.find(strPrep);
 
@@ -96,16 +96,13 @@ std::vector<int> COborDic::FindAllArticlesForSimplePrep(std::string strPrep) con
 
 int COborDic::FindSimplePrep(std::string strPrep) const
 {
-	RmlMakeLower(strPrep, GetOpt()->m_Language);
-
-	CSimplePrepToArticles::const_iterator it = m_mapSimplePrep.find(strPrep);
+	MakeLowerUtf8(strPrep);
+	auto it = m_mapSimplePrep.find(strPrep);
 	if( it != m_mapSimplePrep.end() )	
 	{
 		assert(it->second.size() > 0 );
 		return it->second[0];
 	}
-	
-
 	return -1;
 }
 
@@ -187,12 +184,10 @@ void COborDic::TokenizeDoubleConj(std::string s, int OborotNo)
 	bool InFirstPart = true;
 	while( word = token() )
 	{
-		SDoubleConj::string30 s;
-		assert (strlen(word) < MaxConjSize - 1);
-		strcpy (s.m_item, word);
-		RmlMakeUpper (s.m_item, GetOpt()->m_Language);
+		std::string s = word;
+		MakeUpperUtf8(s);
 
-		if( !strcmp(word, "..." ) )
+		if( s == "...")
 			InFirstPart = false;
 		else
 			if (InFirstPart)
@@ -200,7 +195,7 @@ void COborDic::TokenizeDoubleConj(std::string s, int OborotNo)
 			else
 				DoubleConj.m_SecondPart.push_back(s);
 	}	
-
+	assert(!DoubleConj.m_FirstPart.empty());
 	DoubleConj.m_iOborNum = OborotNo;
 	DoubleConj.m_bRepeating = (DoubleConj.m_FirstPart == DoubleConj.m_SecondPart);
 	std::vector<SDoubleConj>::iterator it = lower_bound (m_DisruptConj.begin(), m_DisruptConj.end(), DoubleConj);
@@ -211,7 +206,7 @@ void COborDic::TokenizeDoubleConj(std::string s, int OborotNo)
 
 void  COborDic::WriteSimpleSubConj(std::string s, int OborotNo)
 {
-	RmlMakeUpper (s, GetOpt()->m_Language);
+	MakeUpperUtf8 (s);
 	m_SimpleSubConj.push_back(s);
 }
 

@@ -5,11 +5,11 @@
 void InitCopulList(StringVector& v_CopulList)
 {
 	v_CopulList.clear();
-	v_CopulList.push_back(_R("как"));
-	v_CopulList.push_back(_R("словно"));
-	v_CopulList.push_back(_R("будто"));
-	v_CopulList.push_back(_R("что"));
-	v_CopulList.push_back(_R("точно"));
+	v_CopulList.push_back("как");
+	v_CopulList.push_back("словно");
+	v_CopulList.push_back("будто");
+	v_CopulList.push_back("что");
+	v_CopulList.push_back("точно");
 }
 
 bool HasAdjInNom(const CSynWord& _W)
@@ -131,7 +131,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		int j = pClause.m_iFirstWord;
 		for (; j <= pClause.m_iLastWord; j++)
-			if (	!m_Words[j].GetSynHomonym(0).IsLemma(_R("У"))
+			if (	!m_Words[j].GetSynHomonym(0).IsLemma("У")
 				&&	m_Words[j].GetHomonymByPOS(PREP) != -1 
 				)
 				 break;
@@ -144,7 +144,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		for (j = pClause.m_iFirstWord; j <= pClause.m_iLastWord; j++)
 		{
-			if ( m_Words[j].GetSynHomonym(0).IsLemma(_R("ЭТО"))	)
+			if ( m_Words[j].GetSynHomonym(0).IsLemma("ЭТО")	)
 			{
 				Eto.push_back(j);
 				continue;
@@ -159,7 +159,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 			if ( m_Words[j].GetHomonymsCount() > 1 && !isdigit((BYTE)m_Words[j].m_strWord[0]) ) continue;
 
-			if ( m_Words[j].GetSynHomonym(0).IsLemma(_R("КОТОРЫЙ"))) 
+			if ( m_Words[j].GetSynHomonym(0).IsLemma("КОТОРЫЙ")) 
 				continue;
 
 			if (		HasNounInNom( m_Words[j]) 
@@ -177,7 +177,7 @@ void CRusSentence::TryToRebuildDashInClause()
 				continue;
 			}
 
-			if ( m_Words[j].GetSynHomonym(0).IsLemma(_R("У")) )
+			if ( m_Words[j].GetSynHomonym(0).IsLemma("У") )
 			{
 				Prep_U = j;
 				continue;
@@ -203,7 +203,7 @@ void CRusSentence::TryToRebuildDashInClause()
 		if (0 == Noun_Nom.size() && 0 == Eto.size() && 
 			0 == Adj_Nom.size() && -1 == Prep_U)
 			continue;
-		if ( Vozrast && 0 < Noun_Nom.size() && m_Words[Noun_Nom[0]].m_strUpperWord == _R("ГОД") && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) //ему 21 год
+		if ( Vozrast && 0 < Noun_Nom.size() && m_Words[Noun_Nom[0]].m_strUpperWord == "ГОД" && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) //ему 21 год
 			Noun_Nom.clear();
 
 		if (0 == Noun_Nom.size() && 0 == Eto.size() && 1 == Adj_Nom.size() && -1 == Prep_U) // Глаза красивые.
@@ -233,8 +233,7 @@ void CRusSentence::TryToRebuildDashInClause()
 
 		if (Noun_Nom.size() > 1)
 		{
-			BYTE up_let = m_Words[Noun_Nom[1]].m_strWord[0];
-			if (!is_russian_upper(up_let))
+			if (!m_Words[Noun_Nom[1]].HasDes(OUpLw))
 			{
 				int k = 0;
 				for (; k < Copul_Words.size(); k++)

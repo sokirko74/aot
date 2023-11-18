@@ -1133,7 +1133,7 @@ void CMAPost::Rule_CHTO_ZA()
 
 
 		std::vector<CFormInfo> Kakoi;
-		std::string a = _R("какой");
+		std::string a = "какой";
 		m_pRusLemmatizer->CreateParadigmCollection(true, a, false, false, Kakoi);
 		if (Kakoi.empty()) return;
 
@@ -1249,7 +1249,7 @@ void CMAPost::Rule_UnknownNames()
 	+ сорок один
 	? триста сорок пятого убили (триста сорок(птиц) убили пятого)
 
-	так же для _R("семью"): "иметь семью" - здесь не наречие
+	так же для "семью": "иметь семью" - здесь не наречие
 */
 
 

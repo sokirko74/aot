@@ -99,7 +99,7 @@ void BuildAnalyticalVerbFormsZaplata2(CRusSentence& S, int ClauseNo)
 	int iBe = -1;
 	for (int WordNo = PrCl.m_iFirstWord; WordNo <= PrCl.m_iLastWord; WordNo++)
 	{
-		if (S.m_Words[WordNo].m_strUpperWord ==_R("БЫТЬ"))
+		if (S.m_Words[WordNo].m_strUpperWord == "БЫТЬ")
 		{
 			iBe = WordNo;
 			continue;
@@ -317,8 +317,8 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 {
 	AnalyticHom.clear();
 
-	//с предикативными значениями _R("много") и _R("мало") анал. форм не строить 
-	if ( ( m_Words[iSWrd].FindLemma(_R("МНОГО")) || m_Words[iSWrd].FindLemma(_R("МАЛО")) ) &&
+	//с предикативными значениями "много и "мало" анал. форм не строить 
+	if ( ( m_Words[iSWrd].FindLemma("МНОГО") || m_Words[iSWrd].FindLemma("МАЛО") ) &&
 		 -1 != m_Words[iSWrd].GetHomonymByPOS(PREDK) )	
 		return false;
 
@@ -326,8 +326,8 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 	{
 		const CSynHomonym& VerbHom = m_Words[iVerbWrd].GetSynHomonym(VerbHomNo);
 
-		if (		VerbHom.IsLemma(_R("БЫТЬ"))
-			||	(		VerbHom.IsLemma(_R("СТАТЬ"))
+		if (		VerbHom.IsLemma("БЫТЬ")
+			||	(		VerbHom.IsLemma("СТАТЬ")
 					&&	(		VerbHom.HasPos(VERB) 
 							||	VerbHom.HasPos(INFINITIVE)
 						) 
@@ -339,7 +339,7 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 
 				CSynHomonym ShortFormHom = m_Words[iSWrd].GetSynHomonym(j);
 				if (ShortFormHom.HasPos(INFINITIVE) && ShortFormHom.HasGrammem(rNonPerfective))
-					if (VerbHom.HasGrammem(rFutureTense) || VerbHom.IsLemma(_R("СТАТЬ")))
+					if (VerbHom.HasGrammem(rFutureTense) || VerbHom.IsLemma("СТАТЬ"))
 						AnalyticHom.push_back(j);
 
 				if (        (      ShortFormHom.HasPos(PREDK) 
@@ -361,7 +361,7 @@ bool CRusSentence::IsAnalyticalVerbForm(int iVerbWrd, int iSWrd, int& VerbHomNo,
 				
 				if (ShortFormHom.HasPos(PARTICIPLE_SHORT) || ShortFormHom.HasPos(ADJ_SHORT) )
 				{
-					// _R("была"), _R("стал"), _R("был"), _R("было") ...
+					// "была", "стал", "был", "было" ...
 					if	(		VerbHom.HasGrammem(rSingular) 
 							&&	VerbHom.HasGrammem(rPastTense)
 							&&	ShortFormHom.HasGrammem(rSingular) 

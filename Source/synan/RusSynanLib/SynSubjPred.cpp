@@ -36,7 +36,7 @@ bool	CRusSentence::IsGoodSubject(const CMorphVariant& synVariant, const std::str
 	const CSynWord& SubjWord = m_Words[SubjUnit.m_SentPeriod.m_iFirstWord];
 	const CSynHomonym& SubjHom = SubjWord.m_Homonyms[SubjUnit.m_iHomonymNum];
 
-	if( SubjHom.IsLemma(_R("ЧТО")) )
+	if( SubjHom.IsLemma("ЧТО") )
 		return false;
 
 
@@ -241,7 +241,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 
 	// случай a)
 	// "я знаю, кто пришел", "кто" - неомонимичное союзное слово, может быть только подл.
-	if (strWord == _R("КТО"))
+	if (strWord == "КТО")
 		return true;
 
 
@@ -272,7 +272,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 				  "папа", "мама"
 				*/
 				if(			!(grammems & (rAllCases & ~_QM(rNominativ)))
-						&&	(strWord !=_R("ЧТО"))
+						&&	(strWord !="ЧТО")
 					)
 					return true;
 				else
@@ -287,7 +287,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 				  "стол", "дуб"
 				*/
 				if(	    ( (grammems & rAllCases)  == ( _QM(rNominativ) | _QM(rAccusativ)) ) 
-					&&	(strWord != _R("ЧТО")) 
+					&&	(strWord != "ЧТО") 
 				   )
 					return true;
 				else
@@ -306,7 +306,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 					 есть "что", тогда надо выйти 
 					*/
 					if  (    !bCanBeWhatAsSubj
-						  && (strWord == _R("ЧТО")) 
+						  && (strWord == "ЧТО") 
 						)
 						break;
 					else
@@ -339,7 +339,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 					// если слово не входит в группу, тогда только указаные части речи
 					// могут быть подлежащим, например  
                     if(		 (SubjHom.HasPos(NUMERAL_P ) 
-						||	 CanNumeralBeNoun(SubjHom.m_strLemma.c_str() ) 
+						||	 CanNumeralBeNoun(SubjHom.m_strLemma) 
 						||	 SubjHom.HasPos( ADJ_FULL	) ) && !hasprep //Работал с 1901 до 1921 года
 					  )
 					return true;
@@ -432,7 +432,7 @@ bool CRusSentence::gleiche_subj_pred_for_numerals_as_nouns(const CMorphVariant& 
 	const CSynUnit& SubjUnit = synVariant.m_SynUnits[main_word];
 	const CSynHomonym& SubjHom = m_Words[SubjUnit.m_SentPeriod.m_iFirstWord].m_Homonyms[SubjUnit.m_iHomonymNum];
 
-	if( CanNumeralBeNoun(SubjHom.m_strLemma.c_str()) )
+	if( CanNumeralBeNoun(SubjHom.m_strLemma) )
 		if( SubjHom.HasGrammem(rNominativ) && 
 			PredHom.HasGrammem(rPlural) && 
 			!PredHom.HasGrammem(rFirstPerson) &&
@@ -610,8 +610,8 @@ bool CRusSentence::find_subj(CMorphVariant& synVariant, int predk)
 	 "Леди следует в Париж " - (у слова "леди"  все падежи)
 	 Это нужно, чтобы отличить преликативное употребление от личной формы.
 	*/
-	if (   PredHom.IsLemma(_R("СЛЕДОВАТЬ")) 
-		|| PredHom.IsLemma(_R("КАЗАТЬСЯ")) 
+	if (   PredHom.IsLemma("СЛЕДОВАТЬ") 
+		|| PredHom.IsLemma("КАЗАТЬСЯ") 
 	   )
 	   if (    (PredHom.m_iGrammems  & (_QM(rThirdPerson) | _QM(rSingular) ))//"кажется"
 		    || (PredHom.m_iGrammems  & _QM(rNeutrum)) //"казалось"

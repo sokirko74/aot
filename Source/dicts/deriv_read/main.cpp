@@ -33,25 +33,21 @@ std::vector<rec> suff_vec, pref_vec;
 void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vector<rec> &rec_vec)
 {
 	StringSet little_roots;
-	little_roots.insert(_R("ад"));
-	little_roots.insert(_R("юг"));
-	little_roots.insert(_R("ют"));
-	little_roots.insert(_R("як"));
-	little_roots.insert(_R("ям"));
-    
-	while(true){
-		char Line[1000];
-		in.getline(Line, 1000);
-		std::string s = Line;
-		if(in.eof()) break;
-		StringTokenizer tok(convert_to_utf8(s.c_str(), morphRussian).c_str(), " ;");
+	little_roots.insert("ад");
+	little_roots.insert("юг");
+	little_roots.insert("ют"));
+	little_roots.insert("як");
+	little_roots.insert("ям");
+	std::string line;
+	while(std::getline(in, line){
+		Trim(line);
+		StringTokenizer tok(line.c_str(), ";");
 		std::string left = tok();
-		Trim(left);
-
 		std::string right = tok();
+		Trim(left);
 		Trim(right);
-		if(left.size() < 3 || right.size() < 3){
-			//std::cerr << left.c_str() << '\t' << right.c_str() << std::endl;
+		CountLettersInUtf8()
+		if(CountLettersInUtf8(left) < 3 || CountLettersInUtf8(right) < 3) {
 			if(little_roots.count(left) <= 0) continue;
 		}
 		std::string rest = tok();
@@ -73,9 +69,7 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 	int pair_count = 0;
 	for(int i = 0; i < rec_vec.size(); i++){
 		rec &r = rec_vec[i];
-		//out << r.w1.c_str() << "\t" << r.w2.c_str() << '\t';
 		uint32_t index = std::lower_bound(rest_vec.begin(), rest_vec.end(), r.r) - rest_vec.begin();
-		//out << index << endl;
 
 		DwordVector id1 = MorphHolderRus.GetLemmaIds(r.w1);
 		DwordVector id2 = MorphHolderRus.GetLemmaIds(r.w2);

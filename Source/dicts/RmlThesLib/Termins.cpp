@@ -87,7 +87,7 @@ bool CThesaurus::LoadTermins(std::string FileName)
 			else
 		    if (i==1)
 			{
-				T.m_TerminStr =  convert_from_utf8(s, m_MainLanguage);
+				T.m_TerminStr =  s;
 				Trim(T.m_TerminStr);
 			}
 			else
@@ -96,7 +96,7 @@ bool CThesaurus::LoadTermins(std::string FileName)
    			else
 			   if (i==3)
 				{
-				    T.m_AbbrForm = convert_from_utf8(s, m_MainLanguage);
+				    T.m_AbbrForm = s;
 					Trim(T.m_AbbrForm);
 				}
             i++;

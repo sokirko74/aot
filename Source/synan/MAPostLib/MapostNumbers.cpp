@@ -178,7 +178,7 @@ void CMAPost::Cifrdef()
 				AnCodes = m_pRusGramTab->FilterGramCodes1(AnCodes, _QM(rSingular), 0);
 			}
 		}
-		if (FindFloatingPoint(NumWordForm.c_str()) != -1 || AnCodes0 == AnCodes)
+		if (FindFloatingPoint(NumWordForm) != -1 || AnCodes0 == AnCodes)
 			AnCodes = "";
 		if (AnCodes.empty() && AnCodes0.empty())
 		{

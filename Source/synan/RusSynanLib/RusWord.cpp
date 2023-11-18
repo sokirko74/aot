@@ -17,8 +17,8 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 	if (H.m_strLemma.length() < 3)  return false;
 	if (H.m_lPradigmID == -1) return false;
 	std::string suffix = H.m_strLemma.substr(H.m_strLemma.length()-2);
-	bool bMasc = (suffix == _R("ИЙ")) ||  (suffix == _R("ЫЙ"));
-	bool bFem = (suffix == _R("АЯ")) ||  (suffix == _R("ЯЯ"));
+	bool bMasc = (suffix == "ИЙ") ||  (suffix == "ЫЙ");
+	bool bFem = (suffix == "АЯ") ||  (suffix == "ЯЯ");
 	if (!bMasc && !bFem) return false;
 
 	CFormInfo Info;
@@ -30,13 +30,13 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 		if (  g & _QM(rSingular) )
 			if ( g & _QM(rGenitiv) )
 			{
-				std::string Form = Info.GetWordForm(k);
+				std::string Form = convert_to_utf8(Info.GetWordForm(k), morphRussian);
 				if (bMasc)
-					return		endswith(Form, _R("ЕГО"))
-							||  endswith(Form, _R("ОГО"));
+					return		endswith(Form, "ЕГО")
+							||  endswith(Form, "ОГО");
 				else
-					return		endswith(Form, _R("ОЙ"))
-							|| endswith(Form, _R("ЕЙ"));
+					return		endswith(Form, "ОЙ")
+							|| endswith(Form, "ЕЙ");
 			};
 	};
 	return false;		
@@ -49,20 +49,17 @@ void CRusSentence::InitHomonymMorphInfo (CSynHomonym& H)
 	
 	//сравнение со словниками
 	H.m_bMonth = GetOpt()->GetGramTab()->is_month(H.m_strLemma.c_str());
-	H.m_bAdvAdj = H.CompareWithPredefinedWords(*(GetOpt()->AdvAdj));
-	H.m_bCanSynDependOnAdj = H.CompareWithPredefinedWords(*(GetOpt()->SynDependOnAdj));
-	H.m_bCanSynDependOnAdv = H.CompareWithPredefinedWords(*(GetOpt()->SynDependOnAdv));
-	H.m_bCanSubdueInfinitive = H.CompareWithPredefinedWords(*(GetOpt()->VerbsThatCanSubdueInfinitive));
-	H.m_bCanSubdueInstr = H.CompareWithPredefinedWords(*(GetOpt()->m_pVerbsWithInstrObj));
+	H.m_bAdvAdj = H.CompareWithPredefinedWords(GetOpt()->m_AdvAdj);
+	H.m_bCanSynDependOnAdj = H.CompareWithPredefinedWords(GetOpt()->m_SynDependOnAdj);
+	H.m_bCanSynDependOnAdv = H.CompareWithPredefinedWords(GetOpt()->m_SynDependOnAdv);
+	H.m_bCanSubdueInfinitive = H.CompareWithPredefinedWords(GetOpt()->m_VerbsThatCanSubdueInfinitive);
+	H.m_bCanSubdueInstr = H.CompareWithPredefinedWords(GetOpt()->m_pVerbsWithInstrObj);
 	H.m_bNounHasAdjectiveDeclination = IsAdjDeclination(H);
-
-	
-	
 };
 
 const uint32_t SmallNumbersCount = 5;
 std::string SmallNumbers[SmallNumbersCount] = {
-	_R("ДВА"), _R("ТРИ"), _R("ЧЕТЫРЕ"), _R("ОБА"), _R("ПОЛТОРА")
+	"ДВА", "ТРИ", "ЧЕТЫРЕ", "ОБА", "ПОЛТОРА"
 };
 
 
@@ -74,14 +71,14 @@ void CRusSentence::InitHomonymLanguageSpecific(CSynHomonym& H, const CLemWord* p
                           && (    pWord->m_strWord[iLen - 1] == '2'
                                   || pWord->m_strWord[iLen - 1] == '3'
                                   || pWord->m_strWord[iLen - 1] == '4')
-                          && FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
+                          && FindFloatingPoint(pWord->m_strWord) == -1;
     H.m_bRussianOdin =	 pWord->HasDes(ODigits)
                            &&	pWord->m_strWord[iLen - 1] == '1'
                            //  может заканчиваться на 01, 21,31,41,51,61,71,81,91, но не на 11
                            &&	(		(iLen == 1)
                                           ||	(pWord->m_strWord[iLen - 2] != '1')
                            )
-                           && FindFloatingPoint(pWord->m_strWord.c_str()) == -1;
+                           && FindFloatingPoint(pWord->m_strWord) == -1;
 
 
     if( (iLen > 1) && pWord->HasDes(ODigits) )
@@ -102,7 +99,7 @@ void CRusSentence::InitHomonymLanguageSpecific(CSynHomonym& H, const CLemWord* p
             };
     };
 
-    if( (H.m_strLemma == _R("ОДИН")) &&   GetRusGramTab()->GetPartOfSpeech(H.GetGramCodes().c_str()) == NUMERAL)
+    if( (H.m_strLemma == "ОДИН") &&   GetRusGramTab()->GetPartOfSpeech(H.GetGramCodes().c_str()) == NUMERAL)
         H.m_bRussianOdin = true;
 };
 
@@ -124,16 +121,6 @@ bool CRusSentence::HasNounInNom(const CSynWord& _W  )  const
 	return false; 
 }
 
-
-
-
-
-
-
-
-
-
-
 bool CRusSentence::AllHomonymsArePredicates(const CSynWord& W) const
 {
 	int i = 0;
@@ -147,10 +134,10 @@ bool CRusSentence::AllHomonymsArePredicates(const CSynWord& W) const
 			 continue;
 
 		//глаголы, которые не являются самостоятельным предикатом или суть ан.ф.
-		if (	!Hom.IsLemma(_R("ДАВАТЬ"))
-			&&	!Hom.IsLemma(_R("СТАНОВИТЬСЯ"))
-			&&	!Hom.IsLemma(_R("ОКАЗАТЬСЯ"))
-			&&	!Hom.IsLemma(_R("СТАТЬ"))
+		if (	!Hom.IsLemma("ДАВАТЬ")
+			&&	!Hom.IsLemma("СТАНОВИТЬСЯ")
+			&&	!Hom.IsLemma("ОКАЗАТЬСЯ")
+			&&	!Hom.IsLemma("СТАТЬ")
 			)
 			  break;
 	 }
@@ -158,11 +145,6 @@ bool CRusSentence::AllHomonymsArePredicates(const CSynWord& W) const
 
 	return i == W.m_Homonyms.size();
 }
-
-
-
-
-
 
 bool CRusSentence::WordSchemeEqForThesaurus(const CSynHomonym& Homonym, const CSynPlmLine& word_scheme) const
 {

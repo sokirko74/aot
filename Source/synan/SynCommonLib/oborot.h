@@ -67,26 +67,16 @@ struct  COborotForSyntax
 
 // SDoubleConj is structure to hold a disruptive conjunction, which were read from the
 //  oborot dictionary
-const int MaxConjSize = 30;
 struct SDoubleConj
 {
-	
-	struct string30 {
-		char m_item[MaxConjSize];
-		bool operator == (const string30& X) const
-		{
-			return strcmp(m_item, X.m_item) == 0;
-		};
-	};
-
 	// a reference to COborDic::m_Entries 
 	int				 m_iOborNum;
 
 	// the first part of the conjunction 
-	std::vector<string30> m_FirstPart;
+	std::vector<std::string> m_FirstPart;
 
 	// the second  part of the conjunction 
-	std::vector<string30> m_SecondPart;
+	std::vector<std::string> m_SecondPart;
 	
 	// true, if the second part  is equal to the first, for example
 	// "или ... или" (Russian)
@@ -97,7 +87,7 @@ struct SDoubleConj
 	{
 		assert (m_FirstPart.size() > 0);
 		assert (X.m_FirstPart.size() > 0);
-		return strcmp(m_FirstPart[0].m_item, X.m_FirstPart[0].m_item) < 0;
+		return m_FirstPart[0].compare(X.m_FirstPart[0]) < 0;
 	};
 };
 

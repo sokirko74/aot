@@ -72,7 +72,7 @@ bool CFormatCaller::try_and_step_forward(CFormatCall* FC, CGroup& G, int rule)
 
 		
 		LOGV.printf("%s (%i, %i) (%s, %s) (%s , %s) %s is created", (*FC).m_name.c_str(), G.m_iFirstWord, G.m_iLastWord, //GetOpt()->GetGroupNameByIndex(G.m_GroupType)
-			sent[G.m_iFirstWord].get_word(),sent[G.m_iLastWord].get_word(),
+			sent[G.m_iFirstWord].get_word().c_str(), sent[G.m_iLastWord].get_word().c_str(),
 			GetOpt()->GetGramTab()->GrammemsToStr(  sent[G.m_iFirstWord].GetGrammems() ).c_str(),
 			GetOpt()->GetGramTab()->GrammemsToStr(  sent[G.m_iLastWord].GetGrammems() ).c_str(),
 			GetOpt()->GetGramTab()->GrammemsToStr(  G.GetGrammems() ).c_str());
@@ -200,7 +200,7 @@ int CFormatCaller::main_analyse()
 		std::string strMsg;
 		strMsg += " Failed main_analyse: \n";
 		strMsg += "word: ";
-		if (sent[WordNo].get_word())
+		if (!sent[WordNo].get_word().empty())
 			strMsg += sent[WordNo].get_word();
 
 		strMsg += " \n clause: ";
@@ -455,23 +455,17 @@ bool CFormatCaller::format_for_oborots(CGroup& G)
 struct  DobleConjLess
 {
 	
-	bool operator () (const SDoubleConj& X, const char* word_upper) const 
+	bool operator () (const SDoubleConj& X, const std::string& word_upper) const 
 	{
-			assert (X.m_FirstPart.size() > 0);
-			assert (word_upper);
-			return strcmp(X.m_FirstPart[0].m_item, word_upper) < 0;
+			return X.m_FirstPart[0].compare(word_upper);
 	};
-	bool operator () (const char* word_upper, const SDoubleConj& X ) const 
+	bool operator () (const std::string& word_upper, const SDoubleConj& X ) const
 	{
-			assert (X.m_FirstPart.size() > 0);
-			assert (word_upper);
-			return strcmp(word_upper, X.m_FirstPart[0].m_item) < 0;
+			return word_upper.compare(X.m_FirstPart[0]) < 0;
 	};
 	bool operator () (const SDoubleConj& X1, const SDoubleConj& X2 ) const 
 	{
-			assert (X1.m_FirstPart.size() > 0);
-			assert (X2.m_FirstPart.size() > 0);
-			return strcmp(X1.m_FirstPart[0].m_item, X2.m_FirstPart[0].m_item) < 0;
+			return X1.m_FirstPart[0].compare(X2.m_FirstPart[0]) < 0;
 	};
 
 };
@@ -512,17 +506,18 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 	// ===  end
 
 	// searching for  the first part of a conjunction in GetOpt()->GetOborDic()->m_DisruptConj
-	std::vector<SDoubleConj>::const_iterator it = lower_bound (GetOpt()->GetOborDic()->m_DisruptConj.begin(), GetOpt()->GetOborDic()->m_DisruptConj.end(), sent[G.m_iFirstWord].get_upper_word(),DobleConjLess());
+	auto& conjs = GetOpt()->GetOborDic()->m_DisruptConj;
+	auto it = lower_bound (conjs.begin(), conjs.end(), sent[G.m_iFirstWord].get_upper_word(), DobleConjLess());
 
 	// checking all conjunction with the same first part
 	for ( ;
 		      (it != GetOpt()->GetOborDic()->m_DisruptConj.end())
-		   && sent[G.m_iFirstWord].is_word_upper(it->m_FirstPart[0].m_item);
+		   && sent[G.m_iFirstWord].is_word_upper(it->m_FirstPart[0]);
 		   it++)
 	{		
 		const SDoubleConj& vConj = *it;
 		long CurrWordNo  = G.m_iFirstWord;
-        if ((std::string(vConj.m_FirstPart[0].m_item) == _R("КАК")) && !sent[G.m_iFirstWord].HasPOS(GetOpt()->m_Conjunction))
+        if ((vConj.m_FirstPart[0] == "КАК") && !sent[G.m_iFirstWord].HasPOS(GetOpt()->m_Conjunction))
             break;
 
 		/*
@@ -549,7 +544,7 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 		for (; l < vConj.m_FirstPart.size(); l++)
 		{
 			if (CurrWordNo == sent.size()) break;
-			if ( !sent[CurrWordNo].is_word_upper(vConj.m_FirstPart[l].m_item) )
+			if ( !sent[CurrWordNo].is_word_upper(vConj.m_FirstPart[l]) )
 				break;
 
 
@@ -588,7 +583,7 @@ bool CFormatCaller::format_for_disrupt_conj(CGroup& G)
 		for (l = 0; l < vConj.m_SecondPart.size(); l++)
 		{
 			if (CurrWordNo == sent.size()) break;
-			if ( !sent[CurrWordNo].is_word_upper(vConj.m_SecondPart[l].m_item) )
+			if ( !sent[CurrWordNo].is_word_upper(vConj.m_SecondPart[l]) )
 				break;
 			WordsOfConj.Add(CurrWordNo);
 			CurrWordNo++;
@@ -715,7 +710,7 @@ bool CFormatCaller::create_repeating_disrupt_conj(CGroup& G, const SDoubleConj& 
 		for (; l < pConj.m_FirstPart.size(); l++)
 		{
 			if (CurrWordNo == sent.size()) break;
-			if ( !sent[CurrWordNo].is_word_upper(pConj.m_FirstPart[l].m_item) )
+			if ( !sent[CurrWordNo].is_word_upper(pConj.m_FirstPart[l]) )
 				break;
 			WordsOfConj.Add(CurrWordNo);
 			CurrWordNo++;
@@ -746,7 +741,7 @@ bool CFormatCaller::create_repeating_disrupt_conj(CGroup& G, const SDoubleConj& 
 		long CountMorphEqualGroupPairs = 0;
 		for ( int jj = 1; jj < DisruptGroups.size(); jj++ )
 		{
-			// Function create_disrupt_conj_group checks the morphologically equaluty.
+			// Function create_disrupt_conj_group checks the morphologically equality.
 			// We should compare all groups to the first by part of speech, if an error is found
 			// then break the process of comparing by the last "good" group.
 			if ( !create_disrupt_conj_group(G, DisruptGroups[0], DisruptGroups[jj], true) ) break;

@@ -21,12 +21,12 @@ struct CSelectiveWord
 const int g_iSelectiveWordsCount = 6;
 const CSelectiveWord g_strSelectiveWords[g_iSelectiveWordsCount] =
 {
-	CSelectiveWord(_R("КАКОЙ"), rAllNumbers ),
-	CSelectiveWord(_R("МНОГИЕ"),(1<<rPlural) ),
-	CSelectiveWord(_R("НЕКОТОРЫЕ"), (1<<rPlural)),  // ?*"некоторый  из нас"
-	CSelectiveWord(_R("КАЖДЫЙ"),(1<<rSingular)),  // "???каждые из нас"
-	CSelectiveWord(_R("ОДИН"), rAllNumbers),   
-	CSelectiveWord(_R("ЛЮБОЙ"), rAllNumbers)   
+	CSelectiveWord("КАКОЙ", rAllNumbers ),
+	CSelectiveWord("МНОГИЕ",(1<<rPlural) ),
+	CSelectiveWord("НЕКОТОРЫЕ", (1<<rPlural)),  // ?*"некоторый  из нас"
+	CSelectiveWord("КАЖДЫЙ",(1<<rSingular)),  // "???каждые из нас"
+	CSelectiveWord("ОДИН", rAllNumbers),   
+	CSelectiveWord("ЛЮБОЙ", rAllNumbers)   
 };
 
 // todo: may be it can be replaced with nonzero check
@@ -82,13 +82,9 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 			*/
         if (first_word_plm.HasPOS(ADJ_FULL) )
 		{
-				const char* lemma = first_word_plm.get_lemma();
-				if (first_word_plm.get_lemma() == 0) return false;
-				if( strlen(lemma) < 4)
+				if (!endswith(first_word_plm.get_lemma(), "ШИЙ")) {
 					return false;
-				lemma = lemma + ( strlen(lemma) - 3);
-				if( _R("ШИЙ") != lemma)
-					return false;
+				}
 				next_word = G.m_iFirstWord + 1;
 		}
 		else
@@ -116,7 +112,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 		if( GetGroups()[gr_num].m_GroupType != MODIF_ADJ )
 			return false;
 
-		if( !first_word_plm.is_lemma(_R("САМЫЙ")) )
+		if( !first_word_plm.is_lemma("САМЫЙ") )
 			return false;
 		next_word = GetGroups()[gr_num].m_iLastWord + 1;
 	}
@@ -134,7 +130,7 @@ bool CRusFormatCaller::format_for_selective_groups(CGroup& G)
 	
 	const CGroup& prep_gr = GetGroups()[next_gr_num];
 	if(		(prep_gr.m_GroupType != PREP_NOUN)
-		||	!sent[prep_gr.m_iFirstWord].is_lemma(_R("ИЗ"))
+		||	!sent[prep_gr.m_iFirstWord].is_lemma("ИЗ")
 	  )
 		return false;
 

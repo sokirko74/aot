@@ -69,12 +69,12 @@ int CRusSentence::GetCountOfStrongRoots(const CClause& C, const CMorphVariant& s
 		//глаголы "СТАНОВИТЬСЯ", "ОКАЗАТЬСЯ" суть компоненты аналитических форм
 		if ( C.GetOpt()->GetGramTab()->IsStrongClauseRoot( Hom.m_iPoses ) )
 
-			if (!Hom.IsLemma(_R("ДАВАТЬ"))&&
-				!Hom.IsLemma(_R("СТАНОВИТЬСЯ")) &&
-				!Hom.IsLemma(_R("ОКАЗАТЬСЯ"))&&
-				!Hom.IsLemma(_R("СТАТЬ")) &&
-				!Hom.IsLemma(_R("МНОГО")) &&
-				!Hom.IsLemma(_R("МАЛО")))
+			if (!Hom.IsLemma("ДАВАТЬ")&&
+				!Hom.IsLemma("СТАНОВИТЬСЯ") &&
+				!Hom.IsLemma("ОКАЗАТЬСЯ")&&
+				!Hom.IsLemma("СТАТЬ") &&
+				!Hom.IsLemma("МНОГО") &&
+				!Hom.IsLemma("МАЛО"))
 		{
 				if ( C.m_pSent->FindFirstAuxVerb(iWord) == -1 )
 					iHypPredk++;

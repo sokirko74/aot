@@ -30,7 +30,7 @@ void CSyntaxOpt::DestroyOptions() {
     delete m_piGramTab;
     m_pOborDic.reset(nullptr);
     m_pThesaurus.reset(nullptr);
-    m_pProfessions.reset(nullptr);
+    
 };
 
 void CSyntaxOpt::ReadListFile(const std::string &FileName, StringHashSet& C) {
@@ -46,7 +46,6 @@ void CSyntaxOpt::ReadListFile(const std::string &FileName, StringHashSet& C) {
         if (i != std::string::npos)
             s.erase(i);
         Trim(s);
-        s = convert_from_utf8(s.c_str(), m_Language);
         if (!s.empty())
             C.insert(s);
     };
@@ -107,7 +106,7 @@ StringHashSet CollectLowerTerms(const CThesaurus* Thes, std::string conceptStr, 
     for (auto i : Thes->QueryLowerTermins("PROF", lang))
     {
         std::string terminStr = Thes->m_Termins[i].m_TerminStr;
-        RmlMakeLower(terminStr, lang);
+        MakeLowerUtf8(terminStr);
         lowerTerms.insert(terminStr);
     };
     return lowerTerms;
@@ -126,7 +125,9 @@ void CSyntaxOpt::LoadTermins(const CDictionary *piOborDic) {
     if (m_bEnableOmniThesaurus) {
         LoadTerminsForOneThesaurus("RML_THES_OMNI");
         auto& thes = GetThesPointerByThesId(GetThesTypeByStr("RML_THES_OMNI"));
-        m_pProfessions->m_vectorDatItems = CollectLowerTerms(thes.get(), "PROF", m_Language);
+        for (auto a : CollectLowerTerms(thes.get(), "PROF", m_Language)) {
+            m_Professions.add_lemma(a);
+        }
     }
 
     m_pThesaurus->SortIndexes();
@@ -137,8 +138,7 @@ const char g_strRusRegOborDicPath[] = "Software\\Dialing\\Obor\\DictPath";
 const char g_strGerRegOborDicPath[] = "Software\\Dialing\\GerObor\\DictPath";
 
 void CSyntaxOpt::InitializeOptions() {
-    m_pProfessions.reset(new SDatItems(0xffff));     //NOUN
-
+    
     if (GetLemmatizer() == nullptr) {
         auto pLem = NewLemmatizer();
         pLem->LoadDictionariesRegistry();

@@ -389,7 +389,7 @@ bool CThesaurus::LoadSynItems(std::string FileName)
 				else
 					if (i == 2)
 					{
-						I.m_ItemStr = convert_from_utf8(s, m_MainLanguage);
+						I.m_ItemStr = s;
 						Trim(I.m_ItemStr);
 					}
 					else

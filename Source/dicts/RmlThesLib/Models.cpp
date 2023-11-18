@@ -124,7 +124,6 @@ void CThesaurus::LoadModels(std::string FileName) {
 
     while (getline(ifs, line)) {
         CInnerModel M;
-        //auto innerStr = convert_from_utf8(line.c_str(), m_MainLanguage);
         auto fields = split_string(line, FieldDelimiter[0]);
         M.m_ModelId = atoi(fields[0].c_str());
 

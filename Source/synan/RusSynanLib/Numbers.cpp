@@ -49,13 +49,13 @@ void set_noun_numeral_group_type(CGroup &G, EGroupType type) {
 	20 тыс. (с сокращением)
 */
 bool CRusFormatCaller::format_for_numbers(CGroup &G) {
-    if (!W1.get_word()) return false;
+    if (W1.get_word().empty()) return false;
 
     int i = get_main_word(G.m_iFirstWord);
     int first_main_word = i;
 
     if ((!is_numeral(Wi)  // либо числительное, которое не является наречным числительным
-         || has_item(GetOpt()->m_NumberAdverbsList, Wi.get_lemma()) //"свыше ста пяти человек"
+         || GetOpt()->m_NumberAdverbsList.has_lemma(Wi.get_lemma()) //"свыше ста пяти человек"
         )
         && !HasInSet(g_BigNumerals, Wi.get_lemma())
         // либо большое числительное, которое является  морф. существительным
@@ -155,7 +155,7 @@ bool CRusFormatCaller::format_for_num_complex(CGroup &G) {
     G.m_iLastWord = G.m_iFirstWord + 2;
     if (G.m_iLastWord + 1 < sent.size()) {
         if (sent[G.m_iLastWord + 1].is_month()
-            && (strcmp(W2.get_word(), "-") || !W1.HasPOS(NUMERAL_P) || !W3.HasPOS(NUMERAL_P))) //события 5-24 декабря
+            && (W2.get_word() != "-" || !W1.HasPOS(NUMERAL_P) || !W3.HasPOS(NUMERAL_P))) //события 5-24 декабря
             return false;
     }
 
@@ -192,13 +192,14 @@ bool CRusFormatCaller::format_for_noun_num(CGroup &G) {
     if (!is_numeral(Wk)
         && !Wk.HasPOS(NUMERAL_P)
         && !Wk.HasFlag(fl_digit)
-        && (!Wk.get_word() || strcmp(Wk.get_word(), "№"))
+        && (Wk.get_word() != "№")
             )
         return false;
 
     // запрещаем фразу "дом несколько", поскльку "несколько" - числительное
-    if (has_item(GetOpt()->m_NumberAdverbsList, Wk.get_lemma())) return false;
-    if (!has_item(GetOpt()->m_NounNumList, (!Wi.has_lemma() ? Wi.get_word() : Wi.get_lemma()))
+    if (GetOpt()->m_NumberAdverbsList.has_lemma(Wk.get_lemma())) return false;
+    auto lm = !Wi.has_lemma() ? Wi.get_word() : Wi.get_lemma();
+    if (!GetOpt()->m_NounNumList.has_lemma(lm)
         && !(Wi.has_des(OUpLw) &&
              (Wi.has_des(OLLE) || k == sent.size() - 1 || Wi.has_des(OQuoted) && !sent[k + 1].has_des(OQuoted)) &&
              (i == k - 1) && Wk.HasFlag(fl_digit)))
@@ -209,7 +210,7 @@ bool CRusFormatCaller::format_for_noun_num(CGroup &G) {
     G.m_iLastWord += get_maximal_group_size(G.m_iLastWord) - 1;
     const CGroup &MainGroup = get_maximal_group(G.m_iFirstWord);
     change_words_in_group_gramcodes(get_maximal_group(k), GetOpt()->m_MasSingNomNounGramCode, CaseNumberGender0);
-    if (!strcmp(Wk.get_word(), "№") && is_numeral(sent[k + 1])) //я вышел из дома № 26
+    if (Wk.get_word() == "№" && is_numeral(sent[k + 1])) //я вышел из дома № 26
     {
         Wk.SetGramcodes(GetOpt()->m_MasSingNomNounGramCode);
         change_words_in_group_gramcodes(get_maximal_group(k + 1), GetOpt()->m_MasSingNomNounGramCode,
@@ -251,7 +252,7 @@ bool CRusFormatCaller::format_for_number_adverb(CGroup &G) {
 
     int j = H.m_MainWordNo;
     if (!is_numeral(Wj)) return false;
-    if (!has_item(GetOpt()->m_NumberAdverbsList, Wj.get_lemma()))
+    if (!GetOpt()->m_NumberAdverbsList.has_lemma(Wj.get_lemma()))
         return false;
     if (H.m_iLastWord + 1 >= sent.size())
         return false;
@@ -361,7 +362,7 @@ bool CRusFormatCaller::is_small_number_group(size_t WordNo) {
 
 bool NumberLikeAdj(const CSynPlmLine &L) {
     return L.is_word_upper("1")
-           || L.is_lemma(_R("ОДИН"));
+           || L.is_lemma("ОДИН");
 
 };
 
@@ -384,7 +385,7 @@ bool CRusFormatCaller::format_for_both(CGroup &G) {
 
     int i_number = -1, i_noun = -1;
 
-    if (sent[G.m_iFirstWord].is_lemma(_R("ОБА"))) {
+    if (sent[G.m_iFirstWord].is_lemma("ОБА")) {
         i_number = G.m_iFirstWord;
         if (!sent[G.m_iFirstWord + 1].HasPOS(PRONOUN)
             || !sent[G.m_iFirstWord + 1].has_grammem(rPlural)
@@ -395,7 +396,7 @@ bool CRusFormatCaller::format_for_both(CGroup &G) {
     } else if (sent[G.m_iFirstWord].HasPOS(PRONOUN)
                && sent[G.m_iFirstWord].has_grammem(rPlural)) {
         i_noun = G.m_iFirstWord;
-        if (sent[G.m_iFirstWord + 1].is_lemma(_R("ОБА")))
+        if (sent[G.m_iFirstWord + 1].is_lemma("ОБА"))
             i_number = G.m_iFirstWord + 1;
         else
             return false;
@@ -536,10 +537,10 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, uint
     } else {
         size_t i_last_number = get_maximal_group(i_number).m_iLastWord;
         bool bFirstCase = false;
-        const char *word = sent[i_last_number].get_upper_word();
-        if (!word) return false;
+        auto word = sent[i_last_number].get_upper_word();
+        if (word.empty()) return false;
 
-        if (word == _R("2") || word == _R("3") || word == _R("4")) {
+        if (word == "2" || word == "3" || word == "4") {
             // "2 мальчика"
             uint64_t cases = 0;
             if (noun_grammems & _QM(rGenitiv)) {
@@ -553,9 +554,9 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, uint
                     rAllCases);
             new_group_grammems = _QM(rPlural) | cases;
             return true;
-        } else if (_R("ДВА") == word ||
-                   _R("ОБА") == word ||
-                   _R("ПОЛТОРА") == word
+        } else if ("ДВА" == word ||
+                   "ОБА" == word ||
+                   "ПОЛТОРА" == word
                 ) {
             // мужской и средний рода:
             // существительное должно быть в родительном падеже
@@ -586,9 +587,9 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, uint
                 };
 
             }
-        } else if ((_R("ДВЕ") == word) ||
-                   (_R("ОБЕ") == word) ||
-                   (_R("ПОЛТОРЫ") == word)
+        } else if (("ДВЕ" == word) ||
+                   ("ОБЕ" == word) ||
+                   ("ПОЛТОРЫ" == word)
                 ) {
             //
             if (noun_grammems & _QM(rFeminum))
@@ -616,8 +617,8 @@ bool CRusFormatCaller::gleiche_for_plural_numbers(int i_noun, int i_number, uint
                     bFirstCase = true;
                 }
 
-        } else if (_R("ТРИ") == word ||
-                   _R("ЧЕТЫРЕ") == word) {
+        } else if ("ТРИ" == word ||
+                   "ЧЕТЫРЕ" == word) {
             if ((noun_grammems & _QM(rGenitiv)) &&
                 (noun_grammems & _QM(rSingular))) {
                 change_words_in_group_grammems(
@@ -729,8 +730,8 @@ bool CRusFormatCaller::format_for_noun_number_private(CGroup &G) {
     т.е. больше тысячи нельзя
     */
     if (Num.HasFlag(fl_digit)) {
-        if (!Num.get_word()
-            || strlen(Num.get_word()) > 3 // = "5000"
+        if (
+               Num.get_word().length() > 3 // = "5000"
             || Num.HasPOS(NUMERAL_P)
                 )
             return false;
@@ -860,7 +861,7 @@ int CRusFormatCaller::can_start_number_noun_group(int StartWordNo) const {
 
 
 bool CRusFormatCaller::format_for_number_noun(CGroup &G) {
-    if (has_item(GetOpt()->m_NumberAdverbsList, W1.get_lemma()))
+    if (GetOpt()->m_NumberAdverbsList.has_lemma(W1.get_lemma()))
         return false;
 
     if (sent[G.m_iFirstWord].HasFlag(fl_digit) && sent[G.m_iFirstWord].HasPOS(NUMERAL_P)) // "больше 111 рублей"
@@ -982,12 +983,12 @@ bool CRusFormatCaller::gleiche_noun_numeral_for_approx(int i_noun, int i_number)
         } else {
             size_t i_last_number = get_maximal_group(i_number).m_iLastWord;
             bool already_build = false;
-            const char *word = sent[i_last_number].get_upper_word();
-            if (!word) return false;
+            auto word = sent[i_last_number].get_upper_word();
+            if (word.empty()) return false;
 
-            if (_R("ДВА") == word ||
-                _R("ОБА") == word ||
-                _R("ПОЛТОРА") == word
+            if ("ДВА" == word ||
+                "ОБА" == word ||
+                "ПОЛТОРА" == word
                     ) {
                 if (((noun_grammems & (1 << rMasculinum)) ||
                      (noun_grammems & (1 << rNeutrum))) &&
@@ -995,15 +996,15 @@ bool CRusFormatCaller::gleiche_noun_numeral_for_approx(int i_noun, int i_number)
                     (noun_grammems & (1 << rSingular))) {
                     already_build = true;
                 }
-            } else if (_R("ДВЕ") == word ||
-                       _R("ОБЕ") == word ||
-                       _R("ПОЛТОРЫ") == word) {
+            } else if ("ДВЕ" == word ||
+                       "ОБЕ" == word ||
+                       "ПОЛТОРЫ" == word) {
                 if ((noun_grammems & (1 << rFeminum)) &&
                     (noun_grammems & (1 << rGenitiv)) &&
                     (noun_grammems & (1 << rSingular))) {
                     already_build = true;
                 }
-            } else if (_R("ТРИ") == word || _R("ЧЕТЫРЕ") == word) {
+            } else if ("ТРИ" == word || "ЧЕТЫРЕ" == word) {
                 if ((noun_grammems & (1 << rGenitiv)) &&
                     (noun_grammems & (1 << rSingular))) {
                     already_build = true;

@@ -8,7 +8,7 @@
 
 #include "synan/SynCommonLib/Group.h"
 
-const std::unordered_set<std::string> g_strAdjModif = {_R("САМЫЙ"),_R("ТАКОЙ")};
+const std::unordered_set<std::string> g_strAdjModif = {"САМЫЙ","ТАКОЙ"};
 
 
 

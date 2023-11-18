@@ -9,9 +9,8 @@
 #include <unordered_set>
 
 
-inline bool HasInSet(const std::unordered_set<std::string>& vct, const char* item)
+inline bool HasInSet(const std::unordered_set<std::string>& vct, const std::string& item)
 {
-	if (item == nullptr) return false;
 	return vct.find(item) != vct.end();
 }
 

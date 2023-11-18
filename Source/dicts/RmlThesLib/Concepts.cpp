@@ -41,14 +41,10 @@ bool CThesaurus::LoadConcepts(std::string FileName)
 	};
 
 	while (std::getline(inp, line)) {
-		line = convert_from_utf8(line.c_str(), m_MainLanguage);
 		StringTokenizer tok(line.c_str(), FieldDelimiter);
-		std::vector<std::string> items;
-		while (tok()) {
-			items.push_back(tok.val());
-		}
+		auto items = split_string(line, '#');
 		if (items.size() < 2) {
-			throw CExpc("bad columns number"); 
+			throw CExpc("bad columns number in %s", FileName.c_str());
 		}
 		auto conceptId = atoi(items[0].c_str());
 		auto conceptStr = trim_quotes(items[1]);

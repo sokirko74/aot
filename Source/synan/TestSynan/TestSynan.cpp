@@ -194,7 +194,7 @@ nlohmann::json GetResultBySyntax(const CSentencesCollection &SC, const CAgramtab
         };
         sents.push_back(sent);
     }
-    ConvertToUtfRecursive(sents, A.m_Language);
+    //ConvertToUtfRecursive(sents, A.m_Language);
     return sents;
 };
 

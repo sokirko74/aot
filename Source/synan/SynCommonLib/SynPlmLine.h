@@ -101,12 +101,11 @@ public:
 
 	void	SetPoses (size_t value);
 	void	SetMorphByAncodePattern (const CAncodePattern & P);
-    const char* get_word() const;
-    const char* get_upper_word() const;
-    const char* get_lemma() const;
-	const std::string& get_lemma_string() const;
+    const std::string& get_word() const;
+	const std::string& get_upper_word() const;
+	const std::string& get_lemma() const;
     const COborotForSyntax* get_oborot_ptr() const;
-    int                     get_coord_conj_no() const;
+    int get_coord_conj_no() const;
     const std::vector<int>*      get_simple_preps() const;
     bool has_space_before() const;
     bool can_syn_depend_on_adv() const;

@@ -6,7 +6,9 @@
 
 #include "stdafx.h"
 #include  "ThesaurusForSyntax.h"
+#include  "LemmaList.h"
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
+
 #include "oborot.h"
 #include <memory>
 
@@ -19,13 +21,6 @@ class CAgramtab;
 
 class CSentence;
 
-
-struct SDatItems {
-    uint32_t m_Poses;
-    StringHashSet m_vectorDatItems;
-    SDatItems(uint32_t Poses) { m_Poses = Poses; };
-
-};
 
 
 class CSyntaxOpt {
@@ -46,7 +41,7 @@ protected:
     std::unique_ptr<CThesaurus> m_OmniThes;
 
 public:
-    std::unique_ptr<SDatItems> m_pProfessions;
+    CLemmaList m_Professions;
     // special constants
     uint64_t m_PluralMask;
     uint64_t m_SingularMask;
@@ -134,8 +129,7 @@ public:
 };
 
 
-inline bool has_item(const StringHashSet& C, const char* item) {
-    if (!item) return false;
+inline bool has_item(const StringHashSet& C, const std::string& item) {
     return C.find(item) != C.end();
 };
 

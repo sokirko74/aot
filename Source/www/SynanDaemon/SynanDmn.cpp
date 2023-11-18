@@ -46,7 +46,6 @@ std::string TSynanHttpServer::ProcessMorphology(TDaemonParsedRequest &request) {
     bool withParadigms = evhttp_find_header(&request.headers, "withparadigms") != nullptr;
     const CMorphanHolder *Holder = GetMorphHolder(request.Langua);
     std::string wordForm = request.Query;
-    wordForm = convert_from_utf8(wordForm.c_str(), Holder->m_CurrentLanguage);
     return Holder->LemmatizeJson(wordForm, withParadigms);
 };
 

@@ -94,26 +94,22 @@ bool CSynPlmLine :: HasPOS (BYTE POS) const
 
 bool	CSynPlmLine :: is_single_punct (BYTE c ) const
 {
-	return		get_word()
-			&&	((BYTE)get_word()[0] == c) 
-			&&	(get_word()[1] == 0);
-	
+	return	get_word() == std::string(c, 1);
 }
 
 
 bool CSynPlmLine :: has_lemma() const 
 {
-	return (get_lemma() != 0) &&  (get_lemma()[0] != 0);
+	return !get_lemma().empty();
 };
 
 bool CSynPlmLine :: is_lemma(const std::string& lemma) const 
 {
-	return has_lemma() && lemma == get_lemma();
+	return lemma == get_lemma();
 };
 
 bool CSynPlmLine :: is_word_upper(const std::string& word_upper) const
 {
-	if (get_upper_word() == 0) return false;
 	return word_upper == get_upper_word();
 };
 
@@ -147,26 +143,24 @@ void CSynPlmLine :: InitSynPlmLine (const CSynWord* pActiveWord, const CSynHomon
     m_pActiveHomonym = pActiveHomonym;
 }
 
-const char* CSynPlmLine :: get_word() const
-{
-   return m_pActiveWord ? m_pActiveWord->m_strWord.c_str() : 0;
-}
-
-const char* CSynPlmLine :: get_upper_word() const
-{
-    return m_pActiveWord ? m_pActiveWord->m_strUpperWord.c_str() : 0;
-}
-
-const char* CSynPlmLine :: get_lemma() const
-{
-    return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma.c_str() : 0;
-}
-
 const std::string empty_string;
-const  std::string& CSynPlmLine::get_lemma_string() const
+
+const std::string& CSynPlmLine :: get_word() const
 {
-	return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma : empty_string;
+   return m_pActiveWord ? m_pActiveWord->m_strWord : empty_string;
 }
+
+
+const std::string& CSynPlmLine :: get_upper_word() const
+{
+    return m_pActiveWord ? m_pActiveWord->m_strUpperWord : empty_string;
+}
+
+const std::string& CSynPlmLine :: get_lemma() const
+{
+    return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma : empty_string;
+}
+
 
 const COborotForSyntax* CSynPlmLine :: get_oborot_ptr() const
 {

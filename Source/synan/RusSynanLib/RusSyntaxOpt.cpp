@@ -35,15 +35,7 @@ const std::string rSyntaxGroupTypes[rSyntaxGroupTypesCount] =
 
 CRusSyntaxOpt::CRusSyntaxOpt(MorphLanguageEnum langua) : CSyntaxOpt(langua) {
     m_piGramTab = new CRusGramTab();
-    SynDependOnAdv = NULL;
-    SynDependOnAdj = NULL;
-    m_pVerbsWithInstrObj = NULL;
-
-    AdvAdj = NULL;
-    VerbsThatCanSubdueInfinitive = NULL;
-
     m_lPradigmID_NECHEGO = -1;
-
     m_SimilarNPGroupType = SIMILAR_NOUN_GROUPS;
     m_PluralMask = _QM(rPlural);
     m_SingularMask = _QM(rSingular);
@@ -89,16 +81,6 @@ CThesaurusForSyntax *CRusSyntaxOpt::NewThesaurus(const CSyntaxOpt *opt) {
 
 void CRusSyntaxOpt::DestroyOptions() {
     CSyntaxOpt::DestroyOptions();
-    if (AdvAdj)
-        delete AdvAdj;
-    if (SynDependOnAdj)
-        delete SynDependOnAdj;
-    if (SynDependOnAdv)
-        delete SynDependOnAdv;
-    if (VerbsThatCanSubdueInfinitive)
-        delete VerbsThatCanSubdueInfinitive;
-
-
 };
 
 
@@ -113,9 +95,9 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
     try {
         int iSize = piRossDict->GetUnitsSize();
 
-        AdvAdj = new SDatItems(_QM(ADV));
-        SynDependOnAdv = new SDatItems(_QM(ADV));
-        SynDependOnAdj = new SDatItems(_QM(ADV));
+        m_AdvAdj.set_poses(_QM(ADV));
+        m_SynDependOnAdv.set_poses(_QM(ADV));
+        m_SynDependOnAdj.set_poses(_QM(ADV));
 
         CTempArticle A1(piRossDict);
         A1.ReadFromUtf8String("GF = * НАР:нар_опр");
@@ -131,17 +113,17 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
 
         for (i = 0; i < iSize; i++) {
             A.ReadFromDictionary(i, false, true);
-            const std::string &word_s8 = _R(piRossDict->m_Units[i].GetEntryStr());
+            const std::string& word = piRossDict->m_Units[i].GetEntryStr();
             if (A1.IsPartOf(&A, true)) {
-                AdvAdj->m_vectorDatItems.insert(word_s8);
+                m_AdvAdj.add_lemma(word);
             }
 
             if (A2.IsPartOf(&A, true)) {
-                SynDependOnAdv->m_vectorDatItems.insert(word_s8);
+                m_SynDependOnAdv.add_lemma(word);
             }
 
             if (A3.IsPartOf(&A, true)) {
-                SynDependOnAdj->m_vectorDatItems.insert(word_s8);
+                m_SynDependOnAdj.add_lemma(word);
             }
         }
     }
@@ -168,25 +150,22 @@ void CRusSyntaxOpt::InitOptionsLanguageSpecific() {
     piRossDict.Load(strPath.c_str());
     LoadFromRoss(&piRossDict);
     std::string Path = GetSyntaxFilePath();
-    ReadListFile(Path + "comp_adv.dat", m_CompAdvList);
-    ReadListFile(Path + "noun_num.dat", m_NounNumList);
-    ReadListFile(Path + "num_pr.dat", m_NumberAdverbsList);
 
-    VerbsThatCanSubdueInfinitive = new SDatItems(
-            _QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));
-    ReadListFile(Path + "verbs_with_inf.txt", VerbsThatCanSubdueInfinitive->m_vectorDatItems);
+    m_CompAdvList.read_from_file(MakePath(Path, "comp_adv.dat"));
+    m_NounNumList.read_from_file(MakePath(Path, "noun_num.dat"));
+    m_NumberAdverbsList.read_from_file(MakePath(Path,"num_pr.dat"));
+    m_VerbsThatCanSubdueInfinitive.set_poses( _QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));
+    m_VerbsThatCanSubdueInfinitive.read_from_file(MakePath(Path, "verbs_with_inf.txt"));
 
-    m_pVerbsWithInstrObj = new SDatItems(
-            _QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));
-    ReadListFile(Path + "verbs_with_inf.txt", m_pVerbsWithInstrObj->m_vectorDatItems);
-    if (m_pProfessions->m_vectorDatItems.empty()) {
+    m_pVerbsWithInstrObj.set_poses(_QM(VERB) | _QM(INFINITIVE) | _QM(ADVERB_PARTICIPLE) | _QM(PARTICIPLE_SHORT) | _QM(PARTICIPLE));
+    m_pVerbsWithInstrObj.read_from_file(MakePath(Path,"verbs_with_inf.txt"));
+    if (m_Professions.is_empty_list()) {
         // read it from file if thesaurus is disabled
-        ReadListFile(Path + "profes.txt", m_pProfessions->m_vectorDatItems);
+        m_Professions.read_from_file(MakePath(Path, "profes.txt"));
     }
 
     std::vector<CFormInfo> Paradigms;
-    std::string h = _R("нечего");
-    GetLemmatizer()->CreateParadigmCollection(true, h, false, false, Paradigms);
+    GetLemmatizer()->CreateParadigmCollection(true, _R("нечего"), false, false, Paradigms);
 
     for (auto p: Paradigms) {
         BYTE POS = GetGramTab()->GetPartOfSpeech(p.GetAncode(0).c_str());

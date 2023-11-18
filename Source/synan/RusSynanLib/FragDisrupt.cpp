@@ -378,10 +378,10 @@ bool CRusSentence::CanBeDisruptConjClause (const CClause& pClauseLeft, const CCl
 		for (int ConjNo = 0; ConjNo < m_pSyntaxOptions->GetOborDic()->m_DisruptConj.size(); ConjNo++)
 		{		
 			const SDoubleConj& vConj = m_pSyntaxOptions->GetOborDic()->m_DisruptConj[ConjNo];
-			if ( GetWords()[WordNo1].m_strUpperWord != vConj.m_FirstPart[0].m_item ) continue;
+			if ( GetWords()[WordNo1].m_strUpperWord != vConj.m_FirstPart[0] ) continue;
 			for (long WordNo2=pClauseRight.m_iFirstWord; WordNo2<=pClauseRight.m_iLastWord; WordNo2++)
 			{
-			  if ( GetWords()[WordNo2].m_strUpperWord == vConj.m_SecondPart[0].m_item ) 
+			  if ( GetWords()[WordNo2].m_strUpperWord == vConj.m_SecondPart[0] ) 
 			  return true;
 			};
 		};
@@ -415,7 +415,7 @@ bool CRusSentence::RuleForDisruptConjUnion(int iClauseNum)
 	bool bPredikatConj = false;
 	if (!pClauseLeft.m_vectorTypes.empty())
 		if ( pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo == pClauseLeft.m_iFirstWord )
-			if (GetWords()[pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo].m_strUpperWord == _R("БУДЬ"))
+			if (GetWords()[pClauseLeft.m_vectorTypes[0].m_Root.m_WordNo].m_strUpperWord == "БУДЬ")
 				bPredikatConj = true;
 
 	std::vector<int> Types;
@@ -430,7 +430,7 @@ bool CRusSentence::RuleForDisruptConjUnion(int iClauseNum)
 		if (GetOpt()->m_DisruptConjGroupType == Types[i] )
 		{
 		  /*
-		    если вершина преовй клаузы был _R("будь"), тогда первую клаузу
+		    если вершина преовй клаузы был "будь", тогда первую клаузу
 			надо сдлеать пустыхой, поскольку она вошла в группа разрывных союзов
 			и параметры объед. клаузы нужно брать от второй клаузы
 		  */

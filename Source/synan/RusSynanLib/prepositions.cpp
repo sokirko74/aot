@@ -111,8 +111,8 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 	if (!Wk.is_syn_noun()	)
 	if	(	    is_morph_pronoun_adjective(Wk) 
 			&&  i_group == -1
-			&& !sent[G.m_iFirstWord].is_lemma(_R("ИЗ")) 
-			&& !Wk.is_lemma(_R("КОТОРЫЙ")) 
+			&& !sent[G.m_iFirstWord].is_lemma("ИЗ") 
+			&& !Wk.is_lemma("КОТОРЫЙ") 
 		) 
 		return false; 
 
@@ -139,7 +139,7 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 		if (    i_group != -1  
 			 && (GetGroups()[i_group].m_GroupType == NUMERAL_NOUN) 
 			 && (GetGroups()[i_group].GetGrammems() & _QM(rNominativ ) ) 
-			 && ( sent[G.m_iFirstWord].is_lemma(_R("ПО")) || sent[G.m_iFirstWord].is_lemma(_R("НА")))
+			 && ( sent[G.m_iFirstWord].is_lemma("ПО") || sent[G.m_iFirstWord].is_lemma("НА"))
 			) 
 		;
 		else
@@ -192,7 +192,7 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 bool CRusFormatCaller::format_for_prep_IZ (CGroup& G)
 {
 	const CSynPlmLine& first_word_plm = sent[G.m_iFirstWord];
-	if (!first_word_plm.is_lemma(_R("ИЗ"))) return false;
+	if (!first_word_plm.is_lemma("ИЗ")) return false;
 	return format_for_preps(G);
 };
 

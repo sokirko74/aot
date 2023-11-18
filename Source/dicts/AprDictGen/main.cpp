@@ -19,8 +19,9 @@ DwordVector GetParadigmIdsByNormAndPos(CMorphanHolder& holder, std::string &str,
 {
     std::vector<CFormInfo> ParadigmCollection;
     DwordVector res;
-    if (!holder.m_pLemmatizer->CreateParadigmCollection(true, str, true, false, ParadigmCollection ))
-        throw CExpc(Format("Cannot lemmatize %s", str.c_str()));
+    std::string word_s8 = convert_from_utf8(str, holder.m_CurrentLanguage)
+    if (!holder.m_pLemmatizer->CreateParadigmCollection(true, word_s8, true, false, ParadigmCollection ))
+        throw CExpc("Cannot lemmatize %s", str.c_str());
 
     for(auto& p: ParadigmCollection)
     {
@@ -76,7 +77,7 @@ int main(int argc, char **argv) {
         while (std::getline(inp, line)) {
             line_no++;
             Trim(line);
-            auto items = split_string(convert_from_utf8(line.c_str(), morphRussian), ' ');
+            auto items = split_string(line, ' ');
             if (items.size() != 7) {
                 fprintf(stderr, " Bad format at line %s (line no = %i)\n", line.c_str(), line_no);
                 return 0;

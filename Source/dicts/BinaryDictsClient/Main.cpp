@@ -23,17 +23,6 @@ CFreqDict				HudFreq;
 CFreqDict				CompFreq;
 CFreqDict				FinFreq;
 
-void id_to_string(long id, std::string &str, const CMorphanHolder& Holder)
-{
-	
-	CFormInfo pVal;
-	if (!Holder.m_pLemmatizer->CreateParadigmFromID(id, pVal))
-	{
-		assert(false);
-		return ;
-	}
-	str = pVal.GetWordForm(0);
-}
 
 void string_to_id(const char *str, DwordVector &ids, const CMorphanHolder& Holder)
 {
@@ -107,19 +96,17 @@ int main()
 		if (alt == "")
 			break;
 
-		if((BYTE)alt[0] >= 'a' && (BYTE)alt[0] <= 'z' || (BYTE)alt[0] >= 'A' && (BYTE)alt[0] <= 'Z')
+		if( alt[0] < 128)
 			Direct = true;
-		else
+		else {
 			Direct = false;
-		if (!Direct) 	
 			alt = convert_from_utf8(alt.c_str(), morphRussian);
-
-
+		}
 		{
 			std::string s(alt);
 			size_t slash = s.find('/');
 			if(slash >= 0 && slash < s.size()){
-				std::string eng = s.substr(0,slash);
+				std::string eng = s.substr(0, slash);
 				std::string rus = s.substr(slash+1, s.size());
 				DwordVector e, r;
 				string_to_id(eng.c_str(), e, EnglishHolder);
@@ -172,10 +159,7 @@ int main()
 				//!!! получаем перевод
 				long to_id = pairs.GetId(j);
 				std::string to;
-				id_to_string(to_id, to, TransHolder);
-
-				if (Direct) 	
-					to = convert_to_utf8(to.c_str(), morphRussian);
+				TransHolder.id_to_string(to_id, to);
 
 				CFormInfo TransFormInfo;
 				if (TransHolder.m_pLemmatizer->CreateParadigmFromID(to_id, TransFormInfo))

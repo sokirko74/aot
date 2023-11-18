@@ -9,41 +9,29 @@
 #include <utility>
 
 
-void get_id(CMorphanHolder& morphHolder, std::string str, DwordVector &res, bool is_left)
+void get_id(CMorphanHolder& holder, std::string str, DwordVector &res, bool is_left)
 {
 	
     std::vector<CFormInfo> ParadigmCollection;
 
-	std::string s = str;
-	if (!morphHolder.m_pLemmatizer->CreateParadigmCollection(false, s, false, false,  ParadigmCollection))
-		throw CExpc(Format("Cannot lemmatize %s by Russian lemmatizer" , str.c_str()));
+	std::string word_s8 = convert_from_utf8(str, holder.m_CurrentLanguage);
+	if (!holder.m_pLemmatizer->CreateParadigmCollection(false, word_s8, false, false,  ParadigmCollection))
+		throw CExpc("Cannot lemmatize %s by Russian lemmatizer" , str.c_str());
 
-	for(int i = 0; i < ParadigmCollection.size(); i++)
+	for(auto& p: ParadigmCollection)
 	{
-		const CFormInfo Paradigm = ParadigmCollection[i];
-		if(!Paradigm.m_bFound) continue;
-		uint32_t part = morphHolder.m_pGramTab->GetPartOfSpeech(Paradigm.GetSrcAncode().c_str());
+		if(!p.m_bFound) continue;
+		uint32_t part = holder.m_pGramTab->GetPartOfSpeech(p.GetSrcAncode().c_str());
 		if(part != INFINITIVE)
 			continue;
-		uint64_t gr = morphHolder.m_pGramTab->GetAllGrammems(Paradigm.GetCommonAncode().c_str());
+		uint64_t gr = holder.m_pGramTab->GetAllGrammems(p.GetCommonAncode().c_str());
 		bool is_perfective = (gr & _QM(rPerfective)) != 0;
 		bool is_nonperfective = (gr & _QM(rNonPerfective)) != 0;
-		std::string norm = Paradigm.GetWordForm(0);
-		for(int i = 0; i < norm.size(); i++)
-			norm[i] = norm[i] - _R("А")[0] + _R("а")[0];
-		if(norm != str) continue;
-
-		if(is_perfective && is_nonperfective) 
-		{
-			///std::cerr << "двувидовой:" << str.c_str() << std::endl;
-		}
-		if(!is_perfective && !is_nonperfective) 
-		{
-			//std::cerr << "нет граммемы вида:" << str.c_str() << std::endl;
-		};
-		
+		std::string norm = p.GetWordForm(0);
+		EngRusMakeLower(norm)
+		if (norm != word_s8) continue;
 		if(is_left && is_nonperfective || !is_left && is_perfective)
-			res.push_back(Paradigm.GetParadigmId());
+			res.push_back(p.GetParadigmId());
 	}
 }
 
@@ -71,7 +59,6 @@ int main(int argc, char ** argv)
 			std::string line;
 			while(std::getline(in, line))
 			{
-				line = convert_from_utf8(line.c_str(), morphRussian);
 				Trim(line);
 				if (line.empty()) {
 					continue;

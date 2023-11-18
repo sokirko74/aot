@@ -14,18 +14,18 @@ COborDic* NewOborDicRussian (CSyntaxOpt* Opt)
 };
 
 static const int SubConjsCount = 21;
-static const std::string strSubConjs[SubConjsCount] = {_R("ЧТО"),_R("ЧТОБЫ"),_R("ГДЕ"),_R("КОГДА"),_R("ЕСЛИ"),_R("ЗАЧЕМ"),_R("ОТЧЕГО"),
-														 _R("ПОЧЕМУ"),_R("СКОЛЬКО"),_R("НАСКОЛЬКО"),_R("ЧЕМ"),
-														 _R("ХОТЯ"),_R("КТО"),_R("ПОСКОЛЬКУ"),_R("ПОКА"),_R("КАК"), _R("ОТКУДА"),_R("КУДА"),_R("КОТОРЫЙ"),_R("ЧЕЙ"), _R("ДАБЫ")};
+static const std::string strSubConjs[SubConjsCount] = {"ЧТО","ЧТОБЫ","ГДЕ","КОГДА","ЕСЛИ","ЗАЧЕМ","ОТЧЕГО",
+														 "ПОЧЕМУ","СКОЛЬКО","НАСКОЛЬКО","ЧЕМ",
+														 "ХОТЯ","КТО","ПОСКОЛЬКУ","ПОКА","КАК", "ОТКУДА","КУДА","КОТОРЫЙ","ЧЕЙ", "ДАБЫ"};
 
 
 static const size_t CoordConjTypesCount = 5;
 static const CCoordConjType CoordConjTypes[CoordConjTypesCount] = {
-	{_R("И"), false},
-    {_R("ИЛИ"), false},
-	{_R("ЛИБО"),false},
-	{_R("НО"), true},
-	{_R("А"), true}
+	{"И", false},
+    {"ИЛИ", false},
+	{"ЛИБО",false},
+	{"НО", true},
+	{"А", true}
 };
 
 
@@ -104,7 +104,7 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 			COborotForSyntax oborot;
 			
 			oborot.m_OborotEntryStr = piOborDic->GetEntryStr(UnitNo);
-			EngRusMakeUpper(oborot.m_OborotEntryStr);
+			MakeUpperUtf8(oborot.m_OborotEntryStr);
 
 			oborot.m_AllPossibleDependCases = 0;
 		    if (piOborDic->IsEmptyArticle(UnitNo) == false)
@@ -133,7 +133,7 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 
 					};
 
-					//nim : наречие (_R("заграницей")), проверить GF=НАР
+					//nim : наречие ("заграницей"), проверить GF=НАР
 					if ( AdverbItemNo == Item0)
 
 						oborot.AddPartOfSpeech(ADV);

@@ -46,61 +46,36 @@ small_dict_t read_small_dict(const char* filename) {
 	   "аббат  abbot"
 	 считается, что если пара попала в этот словарь, то у этой
 	 пары хороший вес для перевода.
-	 Параллелльно считаем скорость морфологии7
 	*/
 	small_dict_t smallDictSet;
 
 	std::cerr << "Opening small dictionary\n";
-	std::ifstream SmallDict(filename);
-	assert(SmallDict.is_open());
-	while (true) {
-		char buff[2048];
-		SmallDict.getline(buff, 2047);
-		if (!SmallDict) break;
-		/*
-		  на самом деле, здесь возможны словосочетания
-		  как с русской, так и с англ. стороны
-		  От словосочетания всегда берем только первое слово.
-		*/
-		StringTokenizer tok(convert_from_utf8(buff, morphRussian).c_str(), " \t");
-		StringVector vec;
-		const char* word;
-		while ((word = tok())) vec.push_back(word);
-
-		std::string r, e;
-		if (vec.size() < 2) continue;
-		if (vec.size() == 2) {
-			r = vec[0];
-			e = vec[1];
-		}
-		else {
-
-			r = vec[0];
-			int i = 1;
-			// проходим все русские слова
-			while ((unsigned char)vec[i][0] > 128 && i < vec.size()) i++;
-			if (i == vec.size() - 1)
-				e = vec[i];
-			else continue;
-		}
-
-		// лемматизируем
-
-		clock_t     ltime1 = clock();
+	std::ifstream inp(filename);
+	assert(inp.is_open());
+	std::string line;
+	while (std::getline(inp, line) {
+		auto items = split_string(line, '\t');
+		auto r = items[0];
+		auto e = items[1];
 		DwordVector r_id = MorphHolderRus.GetLemmaIds(r);
 		DwordVector e_id = MorphHolderEng.GetLemmaIds(e);
-
-		clock_t ltime2 = clock();
-
-		for (int R = 0; R < r_id.size(); R++)
-			for (int E = 0; E < e_id.size(); E++)
-				smallDictSet.insert(std::make_pair(r_id[R], e_id[E]));
+		for (auto r : r_id)
+			for (auto e : e_id)
+				smallDictSet.insert(std::make_pair(r, e));
 	}
-	SmallDict.close();
+	inp.close();
 	std::cerr << "Done" << smallDictSet.size() << "\n";
 	return smallDictSet;
 }
 
+
+CFormInfo id_to_paradigm(CMorphanHolder& holder, long id) const
+{
+	CFormInfo Res;
+	if (!holder.m_pLemmatizer->CreateParadigmFromID(id, Res))
+		throw CExpc(Format("cannot get lemma  by id %i", id));
+	return Res;
+}
 
 size_t write_other_small_dict_pair(const small_dict_t& small_dict, const small_dict_t& used_pairs, std::ofstream& out) {
 	/*
@@ -112,8 +87,8 @@ size_t write_other_small_dict_pair(const small_dict_t& small_dict, const small_d
 	for (small_dict_t::iterator shira_it = small_dict.begin(); shira_it != small_dict.end(); ++shira_it)
 	{
 		if (used_pairs.count(*shira_it)) continue;
-		CFormInfo rp = MorphHolderRus.id_to_paradigm(shira_it->first);
-		CFormInfo ep = MorphHolderEng.id_to_paradigm(shira_it->second);
+		CFormInfo rp = id_to_paradigm(MorphHolderRus, shira_it->first);
+		CFormInfo ep = id_to_paradigm(MorphHolderEng, shira_it->second);
 
 		BYTE r_pos = MorphHolderRus.m_pGramTab->GetPartOfSpeech(rp.GetAncode(0).c_str());
 		BYTE e_pos = MorphHolderEng.m_pGramTab->GetPartOfSpeech(ep.GetAncode(0).c_str());
@@ -138,9 +113,7 @@ size_t write_other_small_dict_pair(const small_dict_t& small_dict, const small_d
 		uint16_t  freq = 5;
 		out.write((char*)&(freq), sizeof(unsigned short));
 
-		std::string rus = MorphHolderRus.id_to_string(shira_it->first);
-		std::string eng = MorphHolderEng.id_to_string(shira_it->second);
-
+	
 		written++;
 	}
 	return written;
@@ -151,35 +124,29 @@ void update_word_map_by_file(std::string filename, std::map<word_pair, int>& wor
 	assert(in.is_open());
 	int sent_no = 0;
 	while (true) {
-		char buff[2][4096];
-		in.getline(buff[0], 4095);
-		in.getline(buff[1], 4095);
-		if (!in) break;
+		std::string r_str, e_str;
+		std::getline(in, r_str);
+		std::getline(in, e_str);
+		StringTokenizer r_tok(buff[0], " \t");
+		StringTokenizer e_tok(buff[1], " \t");
+		std::vector<uint32_t> e_id, r_id;
 		const char* word;
-		StringTokenizer r_tok(convert_from_utf8(buff[0], morphRussian).c_str(), " \t");
-		StringTokenizer e_tok(convert_from_utf8(buff[1], morphRussian).c_str(), " \t");
-		std::vector<CFormInfo> e_id, r_id;
 		while ((word = r_tok()))
 		{
-			std::vector<CFormInfo> p;
-			std::string w = word;
-			if (MorphHolderRus.m_pLemmatizer->CreateParadigmCollection(false, w, false, false, p))
-				r_id.insert(r_id.end(), p.begin(), p.end());
-
+			auto ids = MorphHolderRus.GetWordFormIds(word);
+			r_id.insert(r_id.end(), ids.begin(), ids.end());
 		}
 		while ((word = e_tok()))
 		{
-			std::vector<CFormInfo> p;
-			std::string w = word;
-			if (MorphHolderEng.m_pLemmatizer->CreateParadigmCollection(false, w, false, false, p))
-				e_id.insert(e_id.end(), p.begin(), p.end());
+			auto ids = MorphHolderEng.GetWordFormIds(word);
+			e_id.insert(e_id.end(), ids.begin(), ids.end());
 		}
 
-		for (int r = 0; r < r_id.size(); r++)
-			for (int e = 0; e < e_id.size(); e++)
-				if (BinaryDictionary.HavePair(e_id[e].GetParadigmId(), r_id[r].GetParadigmId()))
+		for (auto r : r_id)
+			for (auto e: e_id)
+				if (BinaryDictionary.HavePair(e, r))
 				{
-					word_map[word_pair(e_id[e].GetParadigmId(), r_id[r].GetParadigmId())]++;
+					word_map[word_pair(e, r)]++;
 					break;
 				}
 	}
@@ -208,8 +175,6 @@ size_t write_out_file(const long maxFreq, const std::map<word_pair, int>& word_m
 
 	for (auto it = word_map.begin(); it != word_map.end(); ++it)
 	{
-		std::string rus = MorphHolderRus.id_to_string(it->first.r);
-		std::string eng = MorphHolderEng.id_to_string(it->first.e);
 		out.write((char*)&(it->first.e), sizeof(uint32_t));
 		out.write((char*)&(it->first.r), sizeof(uint32_t));
 

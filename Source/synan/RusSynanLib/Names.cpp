@@ -5,19 +5,11 @@
 #include "StdSynan.h"
 #include "RusFormatCaller.h"
 
-
-
-
-
-
-
-
-
 bool CRusFormatCaller :: format_for_rank_surname (CGroup& G)
 {
     const CGroup& main_gr = get_maximal_group(G.m_iFirstWord);
     int i =  main_gr.m_MainWordNo;
-	if (!Wi.get_lemma()) return false;
+	if (Wi.get_lemma().empty()) return false;
 	if ( !Wi.HasFlag(fl_ranknoun) ) return false;
 	
 	size_t j = main_gr.m_iLastWord+1;
@@ -207,8 +199,8 @@ bool CRusFormatCaller::format_for_anat_compar(CGroup& G)
 	const CGroup& MaxGrp = get_maximal_group(i);
 	if (MaxGrp.m_iFirstWord != MaxGrp.m_iLastWord) return false;
 
-    if (   !Wi.is_word_upper(_R("БОЛЕЕ")) 
-		&& !Wi.is_word_upper(_R("МЕНЕЕ")) 
+    if (   !Wi.is_word_upper("БОЛЕЕ") 
+		&& !Wi.is_word_upper("МЕНЕЕ") 
 	   ) return false;
 	size_t j = i + 1;
 	if (j >= sent.size()) return false;

@@ -6,9 +6,9 @@
 #include "synan/SynCommonLib/SynPlmLine.h"
 
 const std::unordered_set<std::string> g_BigNumerals  = { 
-												_R("МИЛЛИОН"), 
-												_R("МИЛЛИАРД"),
-												_R("ТРИЛЛИОН"),
-												_R("КВАДРИЛЛИОН"),
-												_R("ТЫСЯЧА")
+												"МИЛЛИОН", 
+												"МИЛЛИАРД",
+												"ТРИЛЛИОН",
+												"КВАДРИЛЛИОН",
+												"ТЫСЯЧА"
 												};

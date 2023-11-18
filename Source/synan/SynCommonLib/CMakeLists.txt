@@ -29,7 +29,7 @@ add_library(SynCommonLib
         ThesaurusForSyntax.h
         MorphVariant.h
         Word.h
-)
+ "LemmaList.h" "LemmaList.cpp")
 
 target_link_libraries(SynCommonLib
     LemmatizerLib

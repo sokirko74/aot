@@ -19,8 +19,8 @@ CFormatCaller *CRusSentence::GetNewFormatCaller() const {
 CRusSentence::CRusSentence(const CSyntaxOpt *pSyntaxOptions) : CSentence(pSyntaxOptions) {
     InitClauseVectorRules();
 
-    m_KOTORYI_INDEX = GetOpt()->GetOborDic()->FindSubConj(_R("КОТОРЫЙ"));
-    m_CHEI_INDEX = GetOpt()->GetOborDic()->FindSubConj(_R("ЧЕЙ"));
+    m_KOTORYI_INDEX = GetOpt()->GetOborDic()->FindSubConj("КОТОРЫЙ");
+    m_CHEI_INDEX = GetOpt()->GetOborDic()->FindSubConj("ЧЕЙ");
 
 }
 
@@ -109,7 +109,7 @@ bool CRusSentence::RunSyntaxInClauses(ESynRulesSet type) {
 
 
 void TryBuildVerbLemmaWithKa(CSynWord &W) {
-    if (W.m_strWord.find(_R("-ка")) == std::string::npos) return;
+    if (W.m_strWord.find("-ка") == std::string::npos) return;
 
     for (int i = 0; i < W.m_Homonyms.size(); i++) {
         if (W.m_Homonyms[i].HasPos(VERB))
@@ -183,7 +183,7 @@ void CreateHomonymFor_NECHEGO(CSynHomonym &H, long plPardigmID, std::string psAn
     H.m_lPradigmID = plPardigmID;
 
     H.m_lFreqHom = 1;
-    s = _R("НЕЧЕГО");
+    s = "НЕЧЕГО";
     H.SetLemma(s);
     H.m_iCmpnLen = 6;
     H.m_LemSign = '+';
@@ -261,9 +261,9 @@ void CRusSentence::DisruptPronounPredik() {
         if (m_Words[i + 2].HasOborot1() != m_Words[i + 2].HasOborot2()) continue;
 
         int ihom = m_Words[i + 2].GetHomonymByPOS(PRONOUN);
-        if (m_Words[i].FindLemma(_R("НЕ"))
+        if (m_Words[i].FindLemma("НЕ")
             && m_Words[i + 1].GetHomonymByPOS(PREP) != -1
-            && m_Words[i + 2].FindLemma(_R("ЧТО"))
+            && m_Words[i + 2].FindLemma("ЧТО")
             && ihom != -1
                 ) {
             uint64_t lOldGrammems = m_Words[i + 2].m_Homonyms[ihom].m_iGrammems;
@@ -299,7 +299,7 @@ void CreateHomonymFor_EksVice(CSynHomonym &H, long plPardigmID, std::string psAn
 
 void CRusSentence::CutPrefixEksAndVize() {
 
-    const std::set<std::string> all_prefixes = { _R("ВИЦЕ-"), _R("ЭКС-") };
+    const std::set<std::string> all_prefixes = { "ВИЦЕ-", "ЭКС-" };
 
     for (int ii = 0; ii < m_Words.size(); ii++) {
         std::string word = m_Words[ii].m_strUpperWord;
@@ -316,15 +316,14 @@ void CRusSentence::CutPrefixEksAndVize() {
 
 
         std::vector<CFormInfo> Paradigms;
-        GetOpt()->GetLemmatizer()->CreateParadigmCollection(false, word, false, false, Paradigms);
+        GetOpt()->GetLemmatizer()->CreateParadigmCollection(false, _R(word), false, false, Paradigms);
 
         if (Paradigms.empty()) continue;
 
         std::vector<CSynHomonym> vec_Homonyms;
         for (auto& p : Paradigms) {
-            std::string sLemma = p.GetWordForm(0);
-            if (!binary_search(GetOpt()->m_pProfessions->m_vectorDatItems.begin(),
-                               GetOpt()->m_pProfessions->m_vectorDatItems.end(), sLemma))
+            std::string sLemma = convert_to_utf8(p.GetWordForm(0), morphRussian);
+            if (!GetOpt()->m_Professions.has_lemma(sLemma))
                 continue;
             CSynHomonym NewHom(this);
             CreateHomonymFor_EksVice(NewHom, p.GetParadigmId(), p.GetSrcAncode(), sLemma, p.GetCommonAncode());
@@ -501,7 +500,7 @@ void CRusSentence::DeleteSomeTypesInRelativeClauses() {
 };
 
 bool CRusSentence::IsProfession(const CSynHomonym &H) const {
-    return H.CompareWithPredefinedWords(*GetOpt()->m_pProfessions);
+    return GetOpt()->m_Professions.has_lemma(H.m_strLemma);
 };
 
 bool CRusSentence::BuildClauses() {
@@ -735,7 +734,7 @@ void CRusSentence::CloneHomonymsForOborots() {
             for (int j = i; j < m_Words.size(); j++) {
                 //"судя по многочисленным фак
                 std::string title = GetOpt()->GetOborDic()->m_Entries[m_Words[j].m_Homonyms[0].m_OborotNo].m_OborotEntryStr;
-                EngRusMakeUpper(title);
+                MakeUpperUtf8(title);
                 int b = title.find(m_Words[j].m_strUpperWord + "(");
                 if (b != -1) {
                     b += m_Words[j].m_strUpperWord.length();
@@ -755,7 +754,7 @@ void CRusSentence::CloneHomonymsForOborots() {
                             else
                                 Pose = (1 << (size_t) Pos);
                         } else {
-                            GramFet = _R("С ") + GramFet;
+                            GramFet = "С " + GramFet;
                             if (R->ProcessPOSAndGrammemsIfCan(GramFet.c_str(), &Pos, &G)) {
                                 Grammems = G;
                                 Pose = 0xffffffff;

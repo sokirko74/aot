@@ -134,7 +134,7 @@ bool FullAdjWithNumeralPrefix(const CRusSemNode& Node)
 
 static bool ConvertRusNumeral(const CRusSemNode& Node, double& number)
 {
-	if (Node.m_Words.size() == 1 && (FindFloatingPoint(Node.m_Words[0].m_Word.c_str()) != -1 || Node.m_Words[0].HasOneGrammem(rComparative)))
+	if (Node.m_Words.size() == 1 && (FindFloatingPoint(Node.m_Words[0].m_Word) != -1 || Node.m_Words[0].HasOneGrammem(rComparative)))
 		return false;
 	number =  ConvertNumeralByOrderRecursive(Node.m_Words.begin(), Node.m_Words.end(), 1000000000000);
 	return number != -1;

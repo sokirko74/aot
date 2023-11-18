@@ -18,16 +18,14 @@ public:
 
     std::string m_MasSingNomNounGramCode;
 
-	SDatItems* AdvAdj;
-	SDatItems* SynDependOnAdj;
-	SDatItems* SynDependOnAdv;
-	SDatItems* VerbsThatCanSubdueInfinitive;
-	SDatItems* m_pVerbsWithInstrObj;
-    
-
-	StringHashSet m_CompAdvList;
-	StringHashSet m_NounNumList;//из Dicts\SynAn\noun_num.dat
-	StringHashSet m_NumberAdverbsList;
+	CLemmaList m_AdvAdj;
+	CLemmaList m_SynDependOnAdj;
+	CLemmaList m_SynDependOnAdv;
+	CLemmaList m_VerbsThatCanSubdueInfinitive;
+	CLemmaList m_pVerbsWithInstrObj;
+	CLemmaList m_CompAdvList;
+	CLemmaList m_NounNumList;
+	CLemmaList m_NumberAdverbsList;
 	
 
 

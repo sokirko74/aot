@@ -39,13 +39,13 @@ bool CRusSentence::SetClauseBorderIfThereAreTwoPotentialPredicates(int FWrd, int
 
 		  if (!Hom.HasPos(VERB)) bVerb = false; 	
 
-	      if (Hom.IsLemma(_R("БЫТЬ")) && Hom.HasPos(INFINITIVE) )
+	      if (Hom.IsLemma("БЫТЬ") && Hom.HasPos(INFINITIVE) )
 		  	nBeInf = i;
 
 		  if ( GetOpt()->GetGramTab()->IsStrongClauseRoot(Hom.m_iPoses))
 		  {
 				//не проверяю глагол "стать", т.к. он имеет омоним сущ-ного 
-				if (	Hom.IsLemma(_R("БЫТЬ"))
+				if (	Hom.IsLemma("БЫТЬ")
 					&&!( Hom.HasGrammem(rPresentTense) && Hom.HasPos(VERB) ) )
 				{
 					iBe++;
@@ -53,10 +53,10 @@ bool CRusSentence::SetClauseBorderIfThereAreTwoPotentialPredicates(int FWrd, int
 					break;
 				}
 				//глаголы, которые не являются самостоятельным предикатом или суть ан.ф.
-				if (!Hom.IsLemma(_R("ДАВАТЬ"))&&
-					!Hom.IsLemma(_R("СТАНОВИТЬСЯ")) &&
-					!Hom.IsLemma(_R("ОКАЗАТЬСЯ"))&&
-					!Hom.IsLemma(_R("СТАТЬ")))
+				if (!Hom.IsLemma("ДАВАТЬ")&&
+					!Hom.IsLemma("СТАНОВИТЬСЯ") &&
+					!Hom.IsLemma("ОКАЗАТЬСЯ")&&
+					!Hom.IsLemma("СТАТЬ"))
 					continue;
 
 		  }
