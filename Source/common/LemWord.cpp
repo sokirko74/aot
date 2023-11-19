@@ -522,12 +522,12 @@ std::string CLemWord::GetDebugString(const CHomonym* pHomonym, bool bFirstHomony
     Result += BuildGraphemDescr();
 	if (pHomonym->m_LemSign != 0)
 	{
-        assert (!pHomonym->m_strLemma.empty());
+        assert (!pHomonym->GetLemma().empty());
         assert (!pHomonym->GetGramCodes().empty());
         assert (!pHomonym->m_CommonGramCode.empty());
 
         Result += " " + Format("%c",pHomonym->m_LemSign);
-        Result += " " + pHomonym->m_strLemma;
+        Result += " " + pHomonym->GetLemma();
         Result += " " + pHomonym->GetGramTab()->GetTabStringByGramCode(pHomonym->m_CommonGramCode.c_str());
         for (int i=0; i < pHomonym->GetGramCodes().length(); i+=2)
             Result += " " + pHomonym->GetGramTab()->GetTabStringByGramCode(pHomonym->GetGramCodes().c_str()+i);
@@ -549,11 +549,11 @@ std::string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)
 
 	if (pHomonym->m_LemSign != 0)
 	{
-        assert (!pHomonym->m_strLemma.empty());
+        assert (!pHomonym->GetLemma().empty());
         assert (!pHomonym->GetGramCodes().empty());
         assert (!pHomonym->m_CommonGramCode.empty());
         
-        Result += pHomonym->m_LemSign + pHomonym->m_CommonGramCode + " " + pHomonym->m_strLemma + " " + pHomonym->GetGramCodes() + " ";
+        Result += pHomonym->m_LemSign + pHomonym->m_CommonGramCode + " " + pHomonym->GetLemma() + " " + pHomonym->GetGramCodes() + " ";
         Result +=  Format("%i %i", pHomonym->m_lPradigmID, pHomonym->m_lFreqHom);
 	};
 
@@ -561,7 +561,7 @@ std::string CLemWord :: GetPlmStr (const CHomonym* pHomonym, bool bFirstHomonym)
 };
 
 
-bool CLemWord::HasAnalyticalBe() const
+bool CLemWord::HasAnalyticalBeRus() const
 {
 	// если мы попали на оборот(например, "может быть"), тогда не будем строить здесь анал. форму.
 	if (IsInOborot()) return false;
@@ -571,7 +571,7 @@ bool CLemWord::HasAnalyticalBe() const
 
     for (int i = 0; i < GetHomonymsCount(); i++)
 		if	(		(GetHomonym(i)->HasPos(VERB) || GetHomonym(i)->HasPos(INFINITIVE)) 
-				&& 	( GetHomonym(i)->IsLemma(_R("БЫТЬ").c_str()) || GetHomonym(i)->IsLemma(_R("СТАТЬ")))
+				&& 	( GetHomonym(i)->IsLemma("БЫТЬ") || GetHomonym(i)->IsLemma("СТАТЬ"))
 			)
 			return true;
 		

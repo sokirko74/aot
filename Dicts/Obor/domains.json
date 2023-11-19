@@ -252,12 +252,6 @@
         "is_free": false
     },
     {
-        "category": 67,
-        "dom_ident": "D_CASE_NUMBER",
-        "is_delim": false,
-        "is_free": false
-    },
-    {
         "category": 77,
         "dom_ident": "D_VP_SPECIF",
         "is_delim": false,
@@ -271,7 +265,6 @@
         "parts": [
             "D_CASE",
             "D_CASE_MUA",
-            "D_CASE_NUMBER",
             "D_CASE_POS",
             "D_GRAFEM_DESC",
             "D_GROUPS",
@@ -303,7 +296,6 @@
         "parts": [
             "D_CASE",
             "D_CASE_MUA",
-            "D_CASE_NUMBER",
             "D_CASE_POS"
         ]
     },

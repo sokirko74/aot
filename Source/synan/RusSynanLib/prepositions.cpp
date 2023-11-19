@@ -162,9 +162,13 @@ bool CRusFormatCaller::format_for_preps (CGroup& G)
 		Короче, в предложной группе для личных местоимений он, она, оно
 		выбирать только те, которые начинаются на согласный.
 	*/
-	if (GetGramTab()->is_morph_personal_pronoun(Wk.GetPoses(),Wk.GetGrammems())) 
-		if (is_upper_vowel(Wk.get_upper_word()[0],morphRussian))
+	if (GetGramTab()->is_morph_personal_pronoun(Wk.GetPoses(), Wk.GetGrammems())) {
+		auto& w = Wk.get_upper_word();
+		if (!w.empty() && IsUnicodeUpperRussianVowel(GetFirstUnicodeLetterFromUtf8(w)))
+		{
 			return false;
+		}
+	}
 
 
 	G.m_MainGroup.m_iFirstWord = G.m_iFirstWord;

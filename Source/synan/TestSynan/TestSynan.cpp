@@ -91,7 +91,7 @@ nlohmann::json GetGroups(const CSentence &Sentence, const CAgramtab &A) {
                 if (homIndex != -1) {
                     const CSynHomonym& hom = Sentence.GetWords()[iWord].GetSynHomonym(homIndex);
                     syn_units.push_back({
-                        {"lemma", hom.m_strLemma},
+                        {"lemma", hom.GetLemma()},
                         {"morph_info", hom.GetPartOfSpeechStr() + std::string(" ") + hom.GetGrammemsStr()},
                         {"modified_grammems", A.GrammemsToStr(synVar.m_SynUnits[unitNo].m_iGrammems)}
                         });
@@ -130,7 +130,7 @@ std::string GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &R
         const CMorphVariant *pSynVar = &*Clause.GetSynVariantByNo(0);
         int UnitNo = pSynVar->UnitNoByWordNo(WordNo);
         const CSynUnit &U = pSynVar->m_SynUnits[UnitNo];
-        Lemma = Sentence.GetWords()[WordNo].GetHomonym(U.m_iHomonymNum)->m_strLemma;
+        Lemma = Sentence.GetWords()[WordNo].GetHomonym(U.m_iHomonymNum)->GetLemma();
         return Sentence.GetOpt()->GetGramTab()->GrammemsToStr(U.m_iGrammems | U.m_TypeGrammems);
     }
 }

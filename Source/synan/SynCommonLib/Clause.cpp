@@ -1087,7 +1087,7 @@ void CClause::DeleteHomonym(int iW,int  iH)
 	assert ( m_pSent->m_Words[iW].m_Homonyms.size() > 1);
 	
 	LOGV.printf("Delete homonym \"%s\" from Word \"%s\"(Only %i homonyms left)(InOborot=%s)", 
-		m_pSent->m_Words[iW].m_Homonyms[iH].m_strLemma.c_str(), 
+		m_pSent->m_Words[iW].m_Homonyms[iH].GetLemma().c_str(), 
 		m_pSent->m_Words[iW].m_strWord.c_str(), 
 		m_pSent->m_Words[iW].m_Homonyms.size(),
 		m_pSent->m_Words[iW].m_Homonyms[iH].m_bInOb ? "true" : "false"

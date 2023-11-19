@@ -43,7 +43,7 @@ const	CSyntaxOpt* CSynHomonym::GetOpt() const
 
 bool CSynHomonym::CompareWithPredefinedWords(const CLemmaList& ll) const
 {
-	return ll.has_lemma_with_poses(m_iPoses, m_strLemma);
+	return ll.has_lemma_with_poses(m_iPoses, GetLemma());
 	
 }
 
@@ -78,8 +78,8 @@ void CSynWord::UpdateConjInfo()
 						)
 				)
 
-				m_SubordinateConjNo = GetOpt()->GetOborDic()->FindSubConj(pHomonym.m_strLemma );
-            pHomonym.m_CoordConjNo = m_pSent->GetCoordConjNo(pHomonym.m_strLemma.c_str());
+				m_SubordinateConjNo = GetOpt()->GetOborDic()->FindSubConj(pHomonym.GetLemma() );
+            pHomonym.m_CoordConjNo = m_pSent->GetCoordConjNo(pHomonym.GetLemma().c_str());
 		}
 	}
     m_bSimilarConj = m_pSent->GetCoordConjNo(m_strUpperWord.c_str()) != -1;
@@ -271,10 +271,10 @@ bool CSynWord::IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I)
 
 
 	if (!I.m_Token.empty())
-		if	(			(L.m_strLemma != I.m_Token) // equal lemmas
+		if	(			(L.GetLemma() != I.m_Token) // equal lemmas
 					&&	(		(I.m_Token[0]!= '*') // or equality with right truncation
-							||	(L.m_strLemma.length() <= I.m_Token.length())
-							||	(I.m_Token.substr(1) != L.m_strLemma.substr(L.m_strLemma.length()-I.m_Token.length() + 1)) 
+							||	(L.GetLemma().length() <= I.m_Token.length())
+							||	(I.m_Token.substr(1) != L.GetLemma().substr(L.GetLemma().length()-I.m_Token.length() + 1)) 
 						)
 			)
 			return false;
@@ -283,15 +283,15 @@ bool CSynWord::IsEqualToGrammarItem(const CSynHomonym& L, const CGrammarItem& I)
 	{
 		
 		const StringSet& PossibleLemmas = I.m_pListFile->m_PossibleLemmas;
-		if (PossibleLemmas.find(L.m_strLemma) == PossibleLemmas.end()) // check lemma
-			if	(		(L.m_strLemma == m_strUpperWord) // check the token itself
+		if (PossibleLemmas.find(L.GetLemma()) == PossibleLemmas.end()) // check lemma
+			if	(		(L.GetLemma() == m_strUpperWord) // check the token itself
 					||	!m_bPredicted
 					||	PossibleLemmas.find(m_strUpperWord) == PossibleLemmas.end() 
 				)
 			{
-				int hyphen = L.m_strLemma.find('-'); // check the postfix after the last hyphen, if there is a hyphen 
+				int hyphen = L.GetLemma().find('-'); // check the postfix after the last hyphen, if there is a hyphen 
 				if	(		(hyphen == std::string::npos)
-						|| ( PossibleLemmas.find(L.m_strLemma.substr(hyphen+1)) == PossibleLemmas.end() )
+						|| ( PossibleLemmas.find(L.GetLemma().substr(hyphen+1)) == PossibleLemmas.end() )
 					)
 				return false;
 			};

@@ -23,10 +23,13 @@ CHomonym::CHomonym(const CAgramtab* pGramTab):CAncodePattern(pGramTab)
 
 void	CHomonym::SetLemma(std::string Lemma)
 {
-	GerMakeUpper(Lemma);
+	MakeUpperUtf8(Lemma);
 	m_strLemma = Lemma;
 };
 
+const std::string& CHomonym::GetLemma() const {
+	return m_strLemma;
+}
 
 
 bool	CHomonym::HasSetOfGrammemsExact(uint64_t Grammems) const
@@ -71,7 +74,7 @@ bool CHomonym::IsLemma(const std::string& lemma) const
 
 bool CHomonym::IsSynNoun() const
 {
-	return GetGramTab()->IsSynNoun(m_iPoses, m_strLemma.c_str() );
+	return GetGramTab()->IsSynNoun(m_iPoses, m_strLemma );
 };
 
 bool  CHomonym::IsMorphNoun() const

@@ -32,13 +32,13 @@ bool AreEqual(const CHomonym& L, const CWord& W, const CGrammarItem& I)
 	switch (I.m_Type) {
 		case siGraph:
 						return		I.m_Lemma.empty() // [GRAPH register="AA"];
-								||	(L.m_strLemma == I.m_Lemma); 
+								||	(L.GetLemma() == I.m_Lemma); 
 
 		case siFileList :	
 				{
 					assert (I.m_pListFile != NULL);
 					const StringSet& PossibleLemmas = I.m_pListFile->m_PossibleLemmas;
-					return  PossibleLemmas.find(L.m_strLemma) != PossibleLemmas.end();
+					return  PossibleLemmas.find(L.GetLemma()) != PossibleLemmas.end();
 				}
 
 		case siRomanNumber :	

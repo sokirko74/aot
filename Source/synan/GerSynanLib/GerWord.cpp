@@ -16,9 +16,9 @@ std::unordered_set<std::string> PerfeckAnomalieWords =
 void CGerSentence::InitHomonymMorphInfo (CSynHomonym& H)
 {
     H.InitAncodePattern(  );
-	H.m_bPerfectAnomalie = HasInSet(PerfeckAnomalieWords, H.m_strLemma.c_str()) && H.HasGrammem(gInfinitiv);
+	H.m_bPerfectAnomalie = HasInSet(PerfeckAnomalieWords, H.GetLemma().c_str()) && H.HasGrammem(gInfinitiv);
 	H.m_bInfinitiveConstruction = H.m_bPerfectAnomalie || ( H.IsLemma("BLEIBEN") && !H.HasPos(gSUB));
-	H.m_bAdjWithActiveValency = H.HasPos(gADJ) && GetOpt()->m_AdjPrp.find(H.m_strLemma) != GetOpt()->m_AdjPrp.end();
+	H.m_bAdjWithActiveValency = H.HasPos(gADJ) && GetOpt()->m_AdjPrp.find(H.GetLemma()) != GetOpt()->m_AdjPrp.end();
 };
 
 

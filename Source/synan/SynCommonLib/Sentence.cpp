@@ -543,7 +543,7 @@ void CSentence::AscribeSimplePrepositionInterpretations(BYTE PREP_POS) {
             CSynHomonym &H = m_Words[i].GetSynHomonym(k);
 
             if (H.HasPos(PREP_POS)) {
-                H.m_SimplePrepNos = GetOpt()->GetOborDic()->FindAllArticlesForSimplePrep(H.m_strLemma);
+                H.m_SimplePrepNos = GetOpt()->GetOborDic()->FindAllArticlesForSimplePrep(H.GetLemma());
                 if (H.IsOb1() && H.IsOb2())
                     m_Words[i].DeleteOborotMarks();
             };

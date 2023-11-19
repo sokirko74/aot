@@ -11,7 +11,7 @@ bool CSentence::EqToTermin(const CSynWord& Word,   const std::string& termin, co
 	
 	assert(iHom < Word.m_Homonyms.size());
 	const CSynHomonym& hom = Word.m_Homonyms[iHom];
-	const std::string& strLemma = hom.m_strLemma;
+	const std::string& strLemma = hom.GetLemma();
 	if( !strLemma.size() || !Word.m_strUpperWord[0] )
 		return false;
 
@@ -143,7 +143,7 @@ bool CSentence::FindTerminsHelper(	CWordVector::iterator words,
 	const char* lemma;
 	if(i == 1)
 	{
-		lemma = words->m_Homonyms[0].m_strLemma.c_str();
+		lemma = words->m_Homonyms[0].GetLemma().c_str();
 		lem_len = strlen(lemma);
 	}
 	else
@@ -243,7 +243,7 @@ void CSentence::FindTermins()
 				for(int k = 0 ; k < word.m_Homonyms.size() ; k++ )
 				{
 					CSynHomonym& hom = word.m_Homonyms[k];					
-					std::string strLemma = hom.m_strLemma;
+					std::string strLemma = hom.GetLemma();
 					
 					if( !strLemma.size() )
 						continue;

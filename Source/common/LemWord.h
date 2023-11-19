@@ -111,5 +111,5 @@ public:
     std::string BuildGraphemDescr ()  const;
     part_of_speech_mask_t GetPoses() const;
     uint64_t   GetGrammems() const;
-    bool    HasAnalyticalBe() const;
+    bool    HasAnalyticalBeRus() const;
 };

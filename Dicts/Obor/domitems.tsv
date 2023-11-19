@@ -787,12 +787,6 @@
 10	чествуя
 -1	D_UNDERLINE
 0	_
--1	D_CASE_NUMBER
-0	В_мн
-1	И_мн
-2	Р_ед
-3	Р_мн
-4	Т_мн
 -1	D_VP_SPECIF
 0	fixed
 1	буд

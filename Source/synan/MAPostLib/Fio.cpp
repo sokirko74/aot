@@ -41,10 +41,10 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
 	{
 		case fiName:  return pH->HasGrammem(rName);
 		case fiSurname:  return pH->HasGrammem(rSurName) || (Word.m_bFirstUpperAlpha
-			&& (   endswith(pH->m_strLemma, "ИЙ")
-				|| endswith(pH->m_strLemma, "АЯ")
-				|| endswith(pH->m_strLemma, "ОВ")
-				|| endswith(pH->m_strLemma, "ОВА")
+			&& (   endswith(pH->GetLemma(), "ИЙ")
+				|| endswith(pH->GetLemma(), "АЯ")
+				|| endswith(pH->GetLemma(), "ОВ")
+				|| endswith(pH->GetLemma(), "ОВА")
 				));
 		case fiMiddle:  return pH->HasGrammem(rPatronymic);
 
@@ -58,7 +58,7 @@ static bool IsPartFio(const CMAPost& C, const CFIOItem& I, const CPostLemWord& W
 			&& Word.m_bFirstUpperAlpha //отбрасываем "Петр первый" вместо "Петр Первый"
 			&& !isdigit((BYTE)Word.m_strWord[0]);
 		case fiProbName:  return Word.HasDes(ONam);
-		default:  return pH->m_strLemma == I.m_ItemStr;
+		default:  return pH->GetLemma() == I.m_ItemStr;
 	}
 
 

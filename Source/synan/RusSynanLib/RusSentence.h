@@ -203,7 +203,6 @@ public:
 	void	InitHomonymMorphInfo (CSynHomonym& H);
 	void	InitHomonymLanguageSpecific(CSynHomonym& H, const CLemWord* pWord);
 	bool	HasNounInNom(const CSynWord& _W  ) const;
-	bool	HasAnalyticalBe(const CSynWord& _W)  const;
 	bool	AllHomonymsArePredicates(const CSynWord& W) const;
 
 

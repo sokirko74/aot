@@ -14,10 +14,9 @@ class CFormInfo;
 
 class CHomonym : public CAncodePattern
 {
-    
-public:
-	// morph_dict
 	std::string	m_strLemma;
+
+public:
 
 	// corpus frequence information
 	long m_lFreqHom; 
@@ -63,6 +62,7 @@ public:
 
 	bool	ProcessLemmaAndGrammems(const char* strLemma);
 	void	SetLemma(std::string Lemma);
+	const std::string& GetLemma() const;
 	std::string	GetGrammemsStr() const;
 	
     void    SetMorphUnknown();

@@ -339,7 +339,7 @@ bool CRusSentence::can_be_subject(const CMorphVariant& synVariant, int SubjWordN
 					// если слово не входит в группу, тогда только указаные части речи
 					// могут быть подлежащим, например  
                     if(		 (SubjHom.HasPos(NUMERAL_P ) 
-						||	 CanNumeralBeNoun(SubjHom.m_strLemma) 
+						||	 CanNumeralBeNoun(SubjHom.GetLemma()) 
 						||	 SubjHom.HasPos( ADJ_FULL	) ) && !hasprep //Работал с 1901 до 1921 года
 					  )
 					return true;
@@ -432,7 +432,7 @@ bool CRusSentence::gleiche_subj_pred_for_numerals_as_nouns(const CMorphVariant& 
 	const CSynUnit& SubjUnit = synVariant.m_SynUnits[main_word];
 	const CSynHomonym& SubjHom = m_Words[SubjUnit.m_SentPeriod.m_iFirstWord].m_Homonyms[SubjUnit.m_iHomonymNum];
 
-	if( CanNumeralBeNoun(SubjHom.m_strLemma) )
+	if( CanNumeralBeNoun(SubjHom.GetLemma()) )
 		if( SubjHom.HasGrammem(rNominativ) && 
 			PredHom.HasGrammem(rPlural) && 
 			!PredHom.HasGrammem(rFirstPerson) &&

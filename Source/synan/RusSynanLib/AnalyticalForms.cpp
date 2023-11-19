@@ -173,10 +173,10 @@ void CRusSentence::BuildAnalyticalVerbForms()
 				&&	(FindFirstAuxVerb(WordNo) == -1)
 			)
 		{
-			std::string s_lem = m_Words[WordNo].GetSynHomonym(0).m_strLemma;
+			std::string s_lem = m_Words[WordNo].GetSynHomonym(0).GetLemma();
 			if (m_Words[WordNo].IsInOborot()) continue;
 			//ищем гл. "быть" или "стать"
-			if (m_Words[WordNo].HasAnalyticalBe() && iBe == -1)
+			if (m_Words[WordNo].HasAnalyticalBeRus() && iBe == -1)
 			{
 				iBe = WordNo;
 				continue;

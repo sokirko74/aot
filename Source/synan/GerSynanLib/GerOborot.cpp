@@ -95,7 +95,7 @@ bool CGerOborDic::ReadOborDic (const CDictionary* piOborDic)
 			COborotForSyntax oborot;
 			
 			oborot.m_OborotEntryStr = piOborDic->GetEntryStr(UnitNo);
-			GerMakeUpper(oborot.m_OborotEntryStr);
+			MakeUpperUtf8(oborot.m_OborotEntryStr);
 
 			oborot.m_AllPossibleDependCases = 0;
 		    if (piOborDic->IsEmptyArticle(UnitNo) == false)

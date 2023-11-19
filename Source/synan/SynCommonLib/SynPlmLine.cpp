@@ -94,7 +94,7 @@ bool CSynPlmLine :: HasPOS (BYTE POS) const
 
 bool	CSynPlmLine :: is_single_punct (BYTE c ) const
 {
-	return	get_word() == std::string(c, 1);
+	return	get_word() == std::string(1, c);
 }
 
 
@@ -158,7 +158,7 @@ const std::string& CSynPlmLine :: get_upper_word() const
 
 const std::string& CSynPlmLine :: get_lemma() const
 {
-    return m_pActiveHomonym ? m_pActiveHomonym->m_strLemma : empty_string;
+    return m_pActiveHomonym ? m_pActiveHomonym->GetLemma() : empty_string;
 }
 
 

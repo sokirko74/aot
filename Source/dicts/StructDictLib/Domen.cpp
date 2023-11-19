@@ -61,6 +61,9 @@ void CDomen::InitDomainParts(const std::unordered_map<std::string, BYTE>& ident2
     DomainPartPtrs.clear();
 
     for (const auto& ident : DomainParts) {
+        if (ident2ptr.find(ident) == ident2ptr.end()) {
+            throw CExpc("cannot find a member domain %s in union domain %s", ident.c_str(), DomStr.c_str());
+        }
         DomainPartPtrs.push_back(ident2ptr.at(ident));
     }
 }

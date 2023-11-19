@@ -15,7 +15,7 @@ bool  CRusSentence::CanBeInsideParenthesisOborot(const CSynWord& W) const
     {
         const  CHomonym* pH = W.GetHomonym(i);
         // Только союзы или простые частицы
-        if ( pH->HasPos(CONJ) || GetOpt()->GetGramTab()->IsSimpleParticle(pH->m_strLemma.c_str(), pH->m_iPoses))
+        if ( pH->HasPos(CONJ) || GetOpt()->GetGramTab()->IsSimpleParticle(pH->GetLemma().c_str(), pH->m_iPoses))
             return true;
     }
     return false;

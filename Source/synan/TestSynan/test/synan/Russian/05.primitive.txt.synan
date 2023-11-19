@@ -423,5 +423,57 @@
                 "terms": []
             }
         ]
+    },
+    {
+        "comments": "//в+И_мн",
+        "input": "в гости",
+        "result": [
+            {
+                "analytical": [],
+                "groups": [
+                    {
+                        "good_synvars": [
+                            {
+                                "clause_type": "EMPTY",
+                                "groups": [
+                                    {
+                                        "type": "ПГ",
+                                        "words": "в гости"
+                                    }
+                                ],
+                                "syn_units": [
+                                    {
+                                        "lemma": "В",
+                                        "modified_grammems": "",
+                                        "morph_info": "ПРЕДЛ ; "
+                                    },
+                                    {
+                                        "lemma": "ГОСТЬ",
+                                        "modified_grammems": "мр,им,мн,",
+                                        "morph_info": "С мр,им,мн,; "
+                                    }
+                                ]
+                            }
+                        ],
+                        "last": 1,
+                        "start": 0,
+                        "words": "в гости"
+                    }
+                ],
+                "relations": [
+                    {
+                        "gramrel": "дт,",
+                        "name": "ПГ",
+                        "src": "в",
+                        "src_grm": "",
+                        "src_lemma": "В",
+                        "trg": "гости",
+                        "trg_grm": "од,мр,им,мн,",
+                        "trg_lemma": "ГОСТЬ"
+                    }
+                ],
+                "terms": []
+            }
+        ]
     }
 ]

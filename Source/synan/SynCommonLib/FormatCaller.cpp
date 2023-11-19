@@ -457,7 +457,7 @@ struct  DobleConjLess
 	
 	bool operator () (const SDoubleConj& X, const std::string& word_upper) const 
 	{
-			return X.m_FirstPart[0].compare(word_upper);
+			return X.m_FirstPart[0].compare(word_upper) < 0;
 	};
 	bool operator () (const std::string& word_upper, const SDoubleConj& X ) const
 	{

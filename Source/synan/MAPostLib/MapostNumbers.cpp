@@ -118,7 +118,7 @@ void CMAPost::Cifrdef()
 						pNew->SetGramCodes(m_DURNOVOGramCode);
 						pNew->SetMorphUnknown();
 					}
-					pNew->m_strLemma = W.m_strUpperWord;
+					pNew->SetLemma(W.m_strUpperWord);
 					pNew->InitAncodePattern();
 				}
 				else
@@ -202,7 +202,7 @@ void CMAPost::Cifrdef()
 				CHomonym* pH = W.AddNewHomonym();
 				pH->SetMorphUnknown();
 				pH->SetGramCodes(AnCodes0);
-				pH->m_strLemma = NumWordForm;
+				pH->SetLemma(NumWordForm);
 				pH->InitAncodePattern();
 			}
 			CLineIter spec_it = it;
@@ -226,22 +226,21 @@ void CMAPost::Cifrdef()
 				if (W2.m_strWord == "%")
 				{
 					W2.m_strUpperWord = W2.m_strWord = "ПРОЦ";
-					pH->m_strLemma = "ПРОЦЕНТ";
+					pH->SetLemma("ПРОЦЕНТ");
 				}
 				else  if (W2.m_strWord == "$")
 				{
 					if (spec_it == prev_it) //$12
 						dollar = prev_it;
 					W2.m_strUpperWord = W2.m_strWord = "ДОЛЛ";
-					pH->m_strLemma = "ДОЛЛАР";
+					pH->SetLemma("ДОЛЛАР");
 				}
 				else  if (W2.m_strWord == "№")
 				{
 					W2.m_strUpperWord = W2.m_strWord = "№";
-					pH->m_strLemma = "НОМЕР";
-					//pH->m_GramCodes = "";
+					pH->SetLemma("НОМЕР");
 				}
-				m_pRusLemmatizer->CreateParadigmCollection(true, _R(pH->m_strLemma), true, false, Paradigms);
+				m_pRusLemmatizer->CreateParadigmCollection(true, _R(pH->GetLemma()), true, false, Paradigms);
 				pH->m_lPradigmID = Paradigms[0].GetParadigmId();
 				W2.m_bWord = true;
 				W2.m_bPredicted = false;
@@ -256,7 +255,7 @@ void CMAPost::Cifrdef()
 						CHomonym* pH = W.AddNewHomonym();
 						pH->SetMorphUnknown();
 						pH->SetGramCodes(AnCodes);
-						pH->m_strLemma = NumWordForm;
+						pH->SetLemma(NumWordForm);
 						pH->InitAncodePattern();
 					}
 			if (dollar == prev_it)

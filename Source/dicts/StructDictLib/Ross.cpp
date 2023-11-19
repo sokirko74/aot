@@ -671,10 +671,11 @@ BYTE	CDictionary::GetFieldNoByFieldStr(const char* Str) const
 };
 
 
+const std::string empty_string;
 
 const std::string& CDictionary::GetDomItemStr(dom_item_id_t item_id) const {
 	if (is_null(item_id)) {
-		return "";
+		return empty_string;
 	}
 	else {
 		BYTE dom_no = get_dom_no(item_id);

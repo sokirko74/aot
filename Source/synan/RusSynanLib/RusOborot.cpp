@@ -65,8 +65,6 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 		if(piOborDic == NULL )
 			return false;
 
-		int iSize = piOborDic->GetUnitsSize();
-		m_Entries.reserve(iSize + 1);
 		int fl_conj_t = 0;
 		// части речи
 
@@ -89,43 +87,45 @@ bool CRusOborDic::ReadOborDic (const CDictionary* piOborDic)
 		auto DativItemNo = piOborDic->GetItemIdByItemStr("Д", case_dom_no);
 		auto InstrumentalisItemNo = piOborDic->GetItemIdByItemStr("Т", case_dom_no);
 		auto VocativItemNo = piOborDic->GetItemIdByItemStr("П", case_dom_no);
-		auto NominativPluralItemNo = piOborDic->GetItemIdByItemStr("И_мн", piOborDic->GetDomenNoByDomStr("D_CASE_NUMBER"));
+		auto NominativPluralItemNo = piOborDic->GetItemIdByItemStr("И_мн", case_dom_no);
+		assert(!is_null(NominativPluralItemNo));
 
 		
 		
 
 		// уточнения ГГ
 		auto InfinitiveItemNo = GetItemNoByItemStr(piOborDic,"инф", "D_VP_SPECIF");
+		assert(!is_null(InfinitiveItemNo));
 
-
-		for(int UnitNo = 0 ; UnitNo < iSize ; UnitNo++ )
+		for(int UnitNo = 0 ; UnitNo < piOborDic->GetUnitsSize(); UnitNo++ )
 		{
-			
 			COborotForSyntax oborot;
-			
 			oborot.m_OborotEntryStr = piOborDic->GetEntryStr(UnitNo);
 			MakeUpperUtf8(oborot.m_OborotEntryStr);
-
 			oborot.m_AllPossibleDependCases = 0;
-		    if (piOborDic->IsEmptyArticle(UnitNo) == false)
+			if (piOborDic->IsEmptyArticle(UnitNo)) {
+				m_Entries.push_back(oborot);
+				continue;
+			}
+
 			for( int i = piOborDic->GetUnitStartPos(UnitNo) ; i <= piOborDic->GetUnitLastPos(UnitNo) ; i++)
 			{
-				if (GramFetFieldNo != piOborDic->GetCortegeFieldNo(i)) 
+				const TCortege& c = piOborDic->GetCortege(i);
+				if (GramFetFieldNo != c.m_FieldNo) 
 					continue;
 
-				BYTE LeafId = piOborDic->GetCortegeLeafId(i);
-				dom_item_id_t Item0 = piOborDic->GetCortege(i).GetItem(0);
-				dom_item_id_t Item1 = piOborDic->GetCortege(i).GetItem(1);
+				BYTE LeafId = c.m_LeafId;
+				dom_item_id_t Item0 = c.GetItem(0);
+				dom_item_id_t Item1 = c.GetItem(1);
 				if (LeafId == 0)
 				{
 					{
-						oborot.m_GrammarFeature = piOborDic->WriteToString(piOborDic->GetCortege(i));
+						oborot.m_GrammarFeature = piOborDic->WriteToString(c);
 						Trim(oborot.m_GrammarFeature);
 						if (oborot.m_GrammarFeature == "НАР")
 							oborot.m_GrammarFeature = "Н";
 
 					};
-					//nim : вводный оборот, проверить GF=ВВОДН
 					if ( ParenthesItemNo == Item0)
 					{
 						oborot.AddPartOfSpeech(INP);

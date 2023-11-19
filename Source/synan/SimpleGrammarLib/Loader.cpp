@@ -109,7 +109,7 @@ void CWorkGrammar::Print() const {
 
 void CWorkGrammar::AddToken(CTokenItem I) {
     assert (!I.m_TokenStr.empty());
-    GerMakeUpper(I.m_TokenStr);
+    MakeUpperUtf8(I.m_TokenStr);
 
     I.m_bPunctuation = (ispunct((BYTE) I.m_TokenStr[0]) != 0);
 
@@ -239,7 +239,7 @@ bool CWorkGrammar::CreateTokenList(std::string &ErrorStr) {
                 std::string s = buffer;
                 Trim(s);
                 if (s.empty()) continue;
-                RmlMakeUpper(s, m_Language);
+                MakeUpperUtf8(s);
                 F.m_PossibleLemmas.insert(s);
             };
 

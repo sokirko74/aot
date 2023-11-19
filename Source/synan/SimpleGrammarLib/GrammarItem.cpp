@@ -303,7 +303,7 @@ bool	CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 	if	(Name == "form") 
 	{
 		m_Token = Value;
-		RmlMakeUpper(m_Token, Language);
+		MakeUpperUtf8(m_Token);
 		m_ItemStrId = Value;
 
 		if ( (m_TokenType == OTHER_TOKEN_TYPE) && !m_Token.empty())
@@ -316,7 +316,7 @@ bool	CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 			else
 			if (Language == morphRussian)
 			{
-				if (CheckLanguage(m_Token, Language))
+				if (CheckRussianUtf8(m_Token))
 					m_TokenType = RLE;
 			}
 			else

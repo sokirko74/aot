@@ -14,11 +14,11 @@
 bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 {
 	if (!H.IsMorphNoun()) return false;
-	if (H.m_strLemma.length() < 3)  return false;
+	if (H.GetLemma().length() < 3)  return false;
 	if (H.m_lPradigmID == -1) return false;
-	std::string suffix = H.m_strLemma.substr(H.m_strLemma.length()-2);
-	bool bMasc = (suffix == "ИЙ") ||  (suffix == "ЫЙ");
-	bool bFem = (suffix == "АЯ") ||  (suffix == "ЯЯ");
+	std::string suffix = H.GetLemma().substr(H.GetLemma().length()-2);
+	bool bMasc = endswith(H.GetLemma(), "ИЙ") || endswith(H.GetLemma(), "ЫЙ");
+	bool bFem = endswith(H.GetLemma(), "АЯ") || endswith(H.GetLemma(), "ЯЯ");
 	if (!bMasc && !bFem) return false;
 
 	CFormInfo Info;
@@ -42,13 +42,20 @@ bool CRusSentence::IsAdjDeclination (const CSynHomonym& H) const
 	return false;		
 };
 
+const static std::unordered_set<std::string> MONTHS = {
+	"ЯНВАРЬ", "ФЕВРАЛЬ", "МАРТ",
+	 "АПРЕЛЬ","МАЙ","ИЮНЬ",
+	 "ИЮЛЬ","АВГУСТ","СЕНТЯБРЬ"
+	 ,"ОКТЯБРЬ","НОЯБРЬ","ДЕКАБРЬ" };
+
+
 void CRusSentence::InitHomonymMorphInfo (CSynHomonym& H)
 {
 
     H.InitAncodePattern( );
 	
 	//сравнение со словниками
-	H.m_bMonth = GetOpt()->GetGramTab()->is_month(H.m_strLemma.c_str());
+	H.m_bMonth = _find(MONTHS, H.GetLemma());
 	H.m_bAdvAdj = H.CompareWithPredefinedWords(GetOpt()->m_AdvAdj);
 	H.m_bCanSynDependOnAdj = H.CompareWithPredefinedWords(GetOpt()->m_SynDependOnAdj);
 	H.m_bCanSynDependOnAdv = H.CompareWithPredefinedWords(GetOpt()->m_SynDependOnAdv);
@@ -88,10 +95,10 @@ void CRusSentence::InitHomonymLanguageSpecific(CSynHomonym& H, const CLemWord* p
     if( !pWord->HasDes(ODigits ))
     {
         for (long  i=0; i<SmallNumbersCount; i++)
-            if (	H.IsLemma(SmallNumbers[i]) // m_strLemma может быть равна "один-два",
-                    || (   (H.m_strLemma.find('-') != std::string::npos) // например, "один-два дня", тогда надо сравнивать с последним числительным
-                           && (SmallNumbers[i].length() < H.m_strLemma.length())
-                           && (SmallNumbers[i] == H.m_strLemma.substr(H.m_strLemma.find('-') + 1))
+            if (	H.IsLemma(SmallNumbers[i]) // GetLemma() может быть равна "один-два",
+                    || (   (H.GetLemma().find('-') != std::string::npos) // например, "один-два дня", тогда надо сравнивать с последним числительным
+                           && (SmallNumbers[i].length() < H.GetLemma().length())
+                           && (SmallNumbers[i] == H.GetLemma().substr(H.GetLemma().find('-') + 1))
                     )
                     )
             {
@@ -99,7 +106,7 @@ void CRusSentence::InitHomonymLanguageSpecific(CSynHomonym& H, const CLemWord* p
             };
     };
 
-    if( (H.m_strLemma == "ОДИН") &&   GetRusGramTab()->GetPartOfSpeech(H.GetGramCodes().c_str()) == NUMERAL)
+    if( (H.GetLemma() == "ОДИН") &&   GetRusGramTab()->GetPartOfSpeech(H.GetGramCodes().c_str()) == NUMERAL)
         H.m_bRussianOdin = true;
 };
 

@@ -500,7 +500,7 @@ void CRusSentence::DeleteSomeTypesInRelativeClauses() {
 };
 
 bool CRusSentence::IsProfession(const CSynHomonym &H) const {
-    return GetOpt()->m_Professions.has_lemma(H.m_strLemma);
+    return GetOpt()->m_Professions.has_lemma(H.GetLemma());
 };
 
 bool CRusSentence::BuildClauses() {

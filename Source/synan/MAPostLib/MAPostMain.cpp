@@ -204,7 +204,7 @@ void CMAPost::Odnobuk()
 			W.DeleteOborotMarks();
 			W.DeleteAllHomonyms();
 			CHomonym* pH = W.AddNewHomonym();
-			pH->m_strLemma = W.m_strUpperWord;
+			pH->SetLemma(W.m_strUpperWord);
 			pH->SetMorphUnknown();
 			pH->SetGramCodes(m_DURNOVOGramCode);
 			pH->InitAncodePattern();
@@ -265,13 +265,14 @@ void CMAPost::ILeDefLe()
 	{
 		CPostLemWord& W = *it;
 		if (W.m_LettersCount < 3) continue;
+		if (W.IsInOborot()) continue;
+
 		int hyp = W.m_strWord.find("-");
 		if (hyp == std::string::npos) continue;
 		// первая часть - латиница, второая - русская
-		if (!is_english_alpha((BYTE)W.m_strWord[0])) {
+		if (!CheckEnglishUtf8(W.m_strWord.substr(0, hyp))) {
 			continue;
 		}
-		if (W.IsInOborot()) continue;
 
 		std::string after_hyp = W.m_strWord.substr(hyp + 1);
 		if (!CheckRussianUtf8(after_hyp)) {
@@ -286,7 +287,8 @@ void CMAPost::ILeDefLe()
 				pH->m_LemSign = '-';
 				if (pH->m_CommonGramCode.empty())
 					pH->m_CommonGramCode = "??";
-				pH->m_strLemma.insert(0, W.m_strUpperWord.substr(0, hyp + 1));
+				auto l = pH->GetLemma();
+				pH->SetLemma(l.insert(0, W.m_strUpperWord.substr(0, hyp + 1)));
 			}
 	}
 }
@@ -450,7 +452,7 @@ void CMAPost::FixedCollocations()
 				{
 					const CHomonym* pH = W.GetHomonym(i);
 
-					if ((pH->m_strLemma == C.m_Lemmas[ItemNo].m_Lemma) // проверим лемму
+					if ((pH->GetLemma() == C.m_Lemmas[ItemNo].m_Lemma) // проверим лемму
 						&& ((C.m_Lemmas[ItemNo].m_POS == UnknownPartOfSpeech) // проверим часть речи
 							|| pH->HasPos(C.m_Lemmas[ItemNo].m_POS)
 							)
@@ -481,7 +483,7 @@ void CMAPost::FixedCollocations()
 					main_it->SafeDeleteMarkedHomonyms();
 					assert(main_it->GetHomonymsCount() == 1);
 					// меняем лемму в главное строке
-					main_it->GetHomonym(0)->m_strLemma = C.m_InterfaceString;
+					main_it->GetHomonym(0)->SetLemma(C.m_InterfaceString);
 					m_Words.erase(it, main_it);
 					it = main_it;
 					it++;
@@ -519,7 +521,7 @@ void CMAPost::OtherRules()
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
 			pNew->SetMorphUnknown();
-			pNew->m_strLemma = W.m_strUpperWord;
+			pNew->SetLemma(W.m_strUpperWord);
 			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
 			pNew->SetGramCodes(m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0));
 			pNew->InitAncodePattern();
@@ -574,8 +576,11 @@ void CMAPost::SemiAdjectives()
 		if (!W.HasDes(ORLE)) continue;
 		if (!W.m_bPredicted) continue;
 		if (!startswith(W.m_strUpperWord, prefix)) continue;
-		for (int i = 0; i < W.GetHomonymsCount(); i++)
-			W.GetHomonym(i)->m_strLemma.erase(0, prefix.length());
+		for (int i = 0; i < W.GetHomonymsCount(); i++) {
+			auto l = W.GetHomonym(i)->GetLemma();
+			l.erase(0, prefix.length());
+			W.GetHomonym(i)->SetLemma(l);
+		}
 		// установка графематической пометы
 		W.m_UnparsedGraphemDescriptorsStr += " #ПОЛУ ";
 	};
@@ -964,7 +969,7 @@ void CMAPost::Rule_ILE()
 			W.DeleteAllHomonyms();
 			CHomonym* pNew = W.AddNewHomonym();
 			pNew->SetMorphUnknown();
-			pNew->m_strLemma = W.m_strUpperWord;
+			pNew->SetLemma(W.m_strUpperWord);
 			pNew->m_CommonGramCode = m_pRusGramTab->GramCodes().m_InanimIndeclNoun;
             auto codes = m_pRusGramTab->GetAllGramCodes(NOUN, rAllCases | rAllNumbers | rAllGenders, 0);
 			pNew->SetGramCodes(codes);
@@ -1133,8 +1138,8 @@ void CMAPost::Rule_CHTO_ZA()
 
 
 		std::vector<CFormInfo> Kakoi;
-		std::string a = "какой";
-		m_pRusLemmatizer->CreateParadigmCollection(true, a, false, false, Kakoi);
+		std::string word_s8 = _R("какой");
+		m_pRusLemmatizer->CreateParadigmCollection(true, word_s8, false, false, Kakoi);
 		if (Kakoi.empty()) return;
 
 		std::string GramCodes;
@@ -1264,14 +1269,14 @@ void CMAPost::Rule_SOROK()
 		for (int i = 0; i < W.GetHomonymsCount(); i++)
 		{
 			CHomonym* pH = W.GetHomonym(i);
-			if (pH->m_strLemma == "СОРОКА")
+			if (pH->GetLemma() == "СОРОКА")
 			{
 				CLineIter next_it = NextNotSpace(it);
 				if (next_it == m_Words.end()) return;
 				if (next_it->GetPoses() & ((1 << NUMERAL) | (1 << NUMERAL_P)))
 					pH->m_bDelete = true;
 			}
-			if (pH->m_strLemma == "СЕМЬЮ")
+			if (pH->GetLemma() == "СЕМЬЮ")
 			{
 				CLineIter next_it = NextNotSpace(it);
 				if (next_it == m_Words.end() || !(next_it->GetPoses() & ((1 << NUMERAL) | (1 << NUMERAL_P))))
@@ -1327,7 +1332,7 @@ void CMAPost::Rule_Abbreviation()
 
 		for (int HomNo = 0; HomNo < W.GetHomonymsCount(); HomNo++)
 			if (W.GetHomonym(HomNo)->HasGrammem(rInitialism))
-				if (W.GetHomonymsCount() > 1 && W.GetHomonym(HomNo)->m_strLemma == W.m_strUpperWord) //свыше 50 проц
+				if (W.GetHomonymsCount() > 1 && W.GetHomonym(HomNo)->GetLemma() == W.m_strUpperWord) //свыше 50 проц
 					W.EraseHomonym(HomNo);
 				else
 				{
@@ -1371,7 +1376,7 @@ void CMAPost::Rule_AdverbFromAdjectives()
 			continue;
 		W.DeleteAllHomonyms();
 		CHomonym* pNew = W.AddNewHomonym();
-		pNew->m_strLemma = it->m_strUpperWord;
+		pNew->SetLemma(it->m_strUpperWord);
 		pNew->SetMorphUnknown();
 		std::string NewGramCode;
 		m_pRusGramTab->GetGramCodeByGrammemsAndPartofSpeechIfCan(ADV, 0, NewGramCode);
@@ -1447,7 +1452,7 @@ void CMAPost::Rule_ChangePatronymicLemmas()
 						&& (rAllGenders & g & pH->m_iGrammems)
 						)
 					{
-						pH->m_strLemma = convert_to_utf8(Paradigms[k].GetWordForm(j), morphRussian);
+						pH->SetLemma(convert_to_utf8(Paradigms[k].GetWordForm(j), morphRussian));
 						break;
 					}
 				};
@@ -1473,13 +1478,13 @@ void CMAPost::SolveAmbiguityUsingRuleForTwoPredicates(CLineIter start, CLineIter
 		{
 			CPostLemWord& W = *it;
 			// аналитические  формы еще не собраны, мы не имеем  право убивать омонимы у вспом. глаголов
-			bHasAnalytical = bHasAnalytical || W.HasAnalyticalBe();
+			bHasAnalytical = bHasAnalytical || W.HasAnalyticalBeRus();
 		}
 
 		for (CLineIter it = start; it != end; it++)
 		{
 			CPostLemWord& W = *it;
-			if (W.HasAnalyticalBe() || it == root) continue;
+			if (W.HasAnalyticalBeRus() || it == root) continue;
 
 			if (W.GetHomonymsCount() > 1 && m_pRusGramTab->IsStrongClauseRoot(W.GetPoses()))
 			{
