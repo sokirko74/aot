@@ -67,7 +67,7 @@ void TSynanHttpServer::LoadSynan(bool loadBigrams) {
     GermanSyntaxHolder.LoadSyntax(morphGerman);
 
     TRMLHttpServer::LogMessage("Loading English Morphology\n");
-    EnglishMorphHolder.LoadLemmatizer(morphEnglish);
+    EnglishMorphHolder.LoadMorphology(morphEnglish);
 
     if (loadBigrams) {
         std::string fileName = GetRmlVariable() + "/Dicts/Bigrams/bigrams.txt";

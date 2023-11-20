@@ -123,11 +123,11 @@ BOOL CDemoDlg::OnInitDialog()
 	
 
 //	Lemmatizer init
-	m_piRussian.LoadLemmatizer(morphRussian);
+	m_piRussian.LoadMorphology(morphRussian);
 	m_piRussian.m_pLemmatizer->LoadStatisticRegistry(subjFinance);
 	m_piRussian.m_pLemmatizer->m_bUseStatistic = true;
-	m_piEnglish.LoadLemmatizer(morphEnglish);
-	m_piGerman.LoadLemmatizer(morphGerman);
+	m_piEnglish.LoadMorphology(morphEnglish);
+	m_piGerman.LoadMorphology(morphGerman);
 
 //
 	return TRUE;  // return TRUE  unless you std::set the focus to a control

@@ -78,7 +78,7 @@ struct CGrammarItem
 	bool	ReadFromSourceString(std::string Source, std::string& ErrorStr,  MorphLanguageEnum Language);
 
 
-	bool	AddAttribute(std::string Name, std::string Value, MorphLanguageEnum Language, std::string& ErrorStr, const std::string& SourceFileName);
+	void	AddAttribute(std::string Name, std::string Value, MorphLanguageEnum Language, std::string& ErrorStr, const std::string& SourceFileName);
 	void	CopyNonEmptyWorkAttributesFrom(const CGrammarItem& Item);
 	std::string	toString() const;
 	bool	fromString(std::string& Result);

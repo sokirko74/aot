@@ -69,8 +69,8 @@ int main(int argc, char **argv) {
         std::ofstream out;
         out.open(argv[2], std::ios::binary);
 
-        MorphHolderRus.LoadLemmatizer(morphRussian);
-        MorphHolderEng.LoadLemmatizer(morphEnglish);
+        MorphHolderRus.LoadMorphology(morphRussian);
+        MorphHolderEng.LoadMorphology(morphEnglish);
 
         int line_no = 0;
         std::string line;

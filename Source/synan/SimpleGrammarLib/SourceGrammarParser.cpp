@@ -18,10 +18,7 @@ bool BuildGrammarItem(const CChunkNode* pNode, const CAgramtab* GramTab, MorphLa
 	{
 		for (const auto& a : pNode->m_pAttributes->m_Items)
 		{
-			if (!I.AddAttribute(a->m_Name, a->m_Value, Language, ErrorStr, SourceFileName))
-			{
-				return false;
-			};
+			I.AddAttribute(a->m_Name, a->m_Value, Language, ErrorStr, SourceFileName);
 		};
 
 	};
@@ -198,7 +195,7 @@ bool GetRightPartRecursive(const CChunkSequenceNode* pNode, CWorkGrammar& WorkGr
 
 };
 
-bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkGrammar)
+void ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkGrammar)
 {
 	WorkGrammar.m_EncodedRules.clear();
 	WorkGrammar.m_UniqueGrammarItems.clear();
@@ -206,32 +203,32 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 
 	int RuleId = 1;
 	
-	for (std::list<CChunkRule*>::const_iterator it = ChunkGrammar.m_Rules.begin(); it != ChunkGrammar.m_Rules.end(); it++)
+	for (auto& rule : ChunkGrammar.m_Rules)
 	{
-		
-		const CChunkRule* Rule = *it;
 		CGrammarItem I;
 		std::string ErrorStr;
 		
-		if (!BuildGrammarItem(Rule->m_pLeftHand, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, Rule->m_SourceFileName))
+		if (!BuildGrammarItem(rule->m_pLeftHand, WorkGrammar.m_pGramTab, WorkGrammar.m_Language, I, ErrorStr, rule->m_SourceFileName))
 		{
-			WorkGrammar.LogStream <<  ErrorStr << "at line " << Rule->m_SourceLineNo << " in file " << Rule->m_SourceFileName << "\n";
-			return false;
+			std::ostringstream err;
+			err << ErrorStr << "at line " << rule->m_SourceLineNo << " in file " << rule->m_SourceFileName;
+			throw CExpc(err.str());
 		};
 		size_t LeftPartId = WorkGrammar.GetItemId(I);
 
-		for (std::list<CChunkSequenceNode*>::const_iterator it1 = Rule->m_pRightHand.begin(); it1 != Rule->m_pRightHand.end(); it1++)
+		for (std::list<CChunkSequenceNode*>::const_iterator it1 = rule->m_pRightHand.begin(); it1 != rule->m_pRightHand.end(); it1++)
 		{
-			WorkGrammar.m_RuleFeatures.push_back(Rule->m_FeatureExprs);
+			WorkGrammar.m_RuleFeatures.push_back(rule->m_FeatureExprs);
 			CWorkRule WorkRule;
 			WorkRule.m_LeftPart = LeftPartId;
 			WorkRule.m_RuleId = RuleId;
 			WorkRule.m_RightPart.m_SynMainItemNo = 0xffffffff;
 			WorkRule.m_RuleFeaturesNo = WorkGrammar.m_RuleFeatures.size() - 1;
-			if (!GetRightPartRecursive(*it1, WorkGrammar, WorkRule, ErrorStr, Rule->m_SourceFileName))
+			if (!GetRightPartRecursive(*it1, WorkGrammar, WorkRule, ErrorStr, rule->m_SourceFileName))
 			{
-				WorkGrammar.LogStream <<  ErrorStr << "at line " << Rule->m_SourceLineNo << " in file " << Rule->m_SourceFileName << "\n";
-				return false;
+				std::ostringstream err;
+				err <<  ErrorStr << "at line " << rule->m_SourceLineNo << " in file " << rule->m_SourceFileName << "\n";
+				throw CExpc(err.str());
 			};
 
 			if (WorkRule.m_RightPart.m_SynMainItemNo == 0xffffffff)
@@ -242,61 +239,44 @@ bool ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 		};
 
 	};
-
-	return true;
 };
 
 
-bool BuildWorkGrammar(CWorkGrammar& WorkGrammar, bool bPrintRules)
+void BuildWorkGrammar(CWorkGrammar& WorkGrammar)
 {
-	WorkGrammar.LogStream <<  "reading from the source file " << WorkGrammar.m_SourceGrammarFile << "\n";
+	LOGI <<  "reading from the source file " << WorkGrammar.m_SourceGrammarFile;
 	CChunkParser Parser;
 	Parser.m_pGramTab = WorkGrammar.m_pGramTab;
 	bool bResult = Parser.ParseGrammarInFile(WorkGrammar.m_SourceGrammarFile, "");
 	if (!bResult)
 	{
-		WorkGrammar.LogStream <<  "cannot parse " << WorkGrammar.m_SourceGrammarFile  << "\n";
-		return false;
+		throw CExpc ("cannot parse " + WorkGrammar.m_SourceGrammarFile);
 	};
-	WorkGrammar.LogStream <<  "Number of rules = " << Parser.m_ChunkGrammar.m_Rules.size() << "\n";
-
-	
-	if (!ConvertToWorkGrammar(Parser.m_ChunkGrammar, WorkGrammar))
-		return false;
-
+	LOGI << "Number of rules = " << Parser.m_ChunkGrammar.m_Rules.size();
+		
+	ConvertToWorkGrammar(Parser.m_ChunkGrammar, WorkGrammar);
 	
 	size_t CountOfRoots = WorkGrammar.GetCountOfRoots();
 	if (CountOfRoots == 0)
 	{
-		ErrorMessage("No roots found in simple grammar; exit!\n");
-		return false;
+		throw CExpc("No roots found in simple grammar; exit!");
 	};
 
-	if (bPrintRules)
-		WorkGrammar.Print();
+	WorkGrammar.Print();
 
 	std::string ErrorStr;
-	WorkGrammar.LogStream <<  "creating all variants of nodes from nodes with work attributes\n";
-	if (!WorkGrammar.CreateNodesForNodesWithWorkAttributes(ErrorStr))
-	{
-		ErrorMessage(ErrorStr);
-		return false;
-	};
+	LOGI <<  "creating all variants of nodes from nodes with work attributes";
+	WorkGrammar.CreateNodesForNodesWithWorkAttributes();
+	
+	LOGI <<  "Number of rules = " << WorkGrammar.m_EncodedRules.size();
 
-	WorkGrammar.LogStream <<  "Number of rules = " << WorkGrammar.m_EncodedRules.size() << "\n";
+	LOGI <<  "checking coherence";
+	WorkGrammar.CheckCoherence();
 
-	WorkGrammar.LogStream <<  "checking coherence\n";
-	if (!WorkGrammar.CheckCoherence())
-		return false;
-
-	//printf ("Found roots: %i\n", CountOfRoots);
+	LOGV << "Found roots: " << CountOfRoots;
 
 	
-	if (bPrintRules)
-	{
-		WorkGrammar.Print();
-	};
-	WorkGrammar.LogStream <<  "validation\n";
-	bool bValid = WorkGrammar.IsValid();
-	return bValid;
+	WorkGrammar.Print();
+	
+	WorkGrammar.IsValid();
 };

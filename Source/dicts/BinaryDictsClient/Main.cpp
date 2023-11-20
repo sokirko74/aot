@@ -56,8 +56,8 @@ int main()
 		long tt;
 		std::cout << "Please wait ..." << std::endl;
 		tt = -clock();
-		RussianHolder.LoadLemmatizer(morphRussian);
-		EnglishHolder.LoadLemmatizer(morphEnglish);
+		RussianHolder.LoadMorphology(morphRussian);
+		EnglishHolder.LoadMorphology(morphEnglish);
 
 		tt += clock();
 		std::cout << "Loaded two lemmatizers at " << tt << " tiks" << std::endl; //"\r";

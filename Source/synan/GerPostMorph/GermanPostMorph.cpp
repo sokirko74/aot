@@ -39,7 +39,7 @@ bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
 	m_PersonGrammar.m_pGramTab = GerGramTab;
 	m_PersonGrammar.m_SourceGrammarFile  = FileName;
 
-	if (!LoadGrammarForGLR( m_PersonGrammar, true, false))
+	if (!m_PersonGrammar.LoadGrammarForGLR(true))
 		return false;
 
 

@@ -178,6 +178,15 @@ public:
     std::set<CWorkRule> m_RootPrefixes;
 
     //  a std::set of all second pass symbols (to detect abridged named entities)
+    /*
+     SecondPass is a list for finding all abridged named entities, which are 
+     normally referenced to a full version of a named entity. For example:
+     "Dr. Alexey Sokirko ....  Sokirko". Here "Dr. Alexey Sokirko" is a 
+     full version of a named entity, which should be recognized by the main grammar,
+     and  "Sokirko" is an abriged reference.
+     The list below includes all grammar symbols, which can uniquely refer to 
+     a some full named entity.
+    */
     StringSet m_SecondPassSymbols;
 
 
@@ -191,14 +200,13 @@ public:
 
     bool m_bEnableRootPrefix;
     std::string m_SourceGrammarFile;
-    std::ostream &LogStream;
 
 
-    CWorkGrammar(std::ostream& logStream = std::cerr);
+    CWorkGrammar();
 
     ~CWorkGrammar();
 
-    bool CreateTokenList(std::string &ErrorStr);
+    void CreateTokenList();
 
     size_t GetItemId(const CGrammarItem &I);
 
@@ -232,11 +240,11 @@ public:
 
     void BuildAutomat(std::set<CWorkRule> &EncodedRules);
 
-    bool IsValid() const;
+    void IsValid() const;
 
-    bool SavePrecompiled(std::string GrammarFileName) const;
+    void SavePrecompiled(std::string GrammarFileName) const;
 
-    bool LoadFromPrecompiled();
+    void LoadFromPrecompiled();
 
     void ConvertToPrecompiled(const std::set<CWorkRule> &EncodedRules);
 
@@ -249,7 +257,7 @@ public:
     void Build_FOLLOW_Set();
 
     //  adding a new root is necessary  for building LR(0) item sets
-    bool AugmentGrammar();
+    void AugmentGrammar();
 
     size_t GetNewRoot() const;
 
@@ -257,13 +265,17 @@ public:
 
     void BuildRootPrefixes(size_t PrefixLength);
 
-    bool LoadOptions();
+    void LoadOptions();
 
     int GetFirstRoot() const;
 
-    bool CreateNodesForNodesWithWorkAttributes(std::string &ErrorStr);
+    void CreateNodesForNodesWithWorkAttributes();
 
-    bool CheckCoherence() const;
+    void CheckCoherence() const;
+
+    void LoadGrammarForGLR(bool bUsePrecompiledAutomat);
+
+    void CreatePrecompiledGrammar(MorphLanguageEnum langua, std::string path);
 
 protected:
 
@@ -277,8 +289,5 @@ protected:
 
 };
 
-extern bool ProcessFile(std::string GrammarFileName, std::string TextFileName);
+extern void BuildWorkGrammar(CWorkGrammar &WorkGrammar);
 
-extern bool BuildWorkGrammar(CWorkGrammar &WorkGrammar, bool bPrintRules);
-
-extern bool LoadGrammarForGLR(CWorkGrammar &WorkGrammar, bool bPrecompiledAutomat, bool bPrintRules);

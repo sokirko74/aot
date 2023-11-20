@@ -221,15 +221,14 @@ inline size_t restore_from_bytes(CSLRCellWork& t, const BYTE* buf)
 
 
 
-bool CGLRTable::ConvertAndSaveGLRTable(std::string FileName)
+void CGLRTable::ConvertAndSaveGLRTable(std::string FileName)
 {
 	ConvertBuildCellsToWordCells();
 
 	FILE* fp = fopen (FileName.c_str(), "wb");
 	if (!fp) 
 	{
-		ErrorMessage (Format("Cannot write to %s",FileName.c_str()));
-		return false;
+		throw CExpc ("Cannot write to %s",FileName.c_str());
 	};
 	fprintf (fp, "%zu\n", m_RuleInfos.size());
 	WriteVectorInner(fp, m_RuleInfos);
@@ -241,9 +240,6 @@ bool CGLRTable::ConvertAndSaveGLRTable(std::string FileName)
 	WriteVectorInner(fp, m_ReduceRuleSets);
 
 	fclose(fp);
-
-
-	return true;
 };
 
 const CSLRCellWork& CGLRTable::GetCell(size_t  StateNo, size_t SymbolNo)  const

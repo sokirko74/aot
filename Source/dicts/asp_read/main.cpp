@@ -48,7 +48,7 @@ int main(int argc, char ** argv)
 
 	try
 	{
-		morphHolderRus.LoadLemmatizer(morphRussian);
+		morphHolderRus.LoadMorphology(morphRussian);
 
 		std::vector<std::pair<uint32_t, uint32_t>> pairs;
 

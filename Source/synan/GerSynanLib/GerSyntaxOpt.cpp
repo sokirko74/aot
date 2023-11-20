@@ -95,10 +95,7 @@ void CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 	m_FormatsGrammar.m_Language = morphGerman;
 	m_FormatsGrammar.m_pGramTab = GetGramTab();
 	m_FormatsGrammar.m_SourceGrammarFile = strFileName;
-	if (!LoadGrammarForGLR(m_FormatsGrammar, true, false))
-	{
-		throw  CExpc(Format("Cannot load %s\n", strFileName.c_str()));
-	};
+	m_FormatsGrammar.LoadGrammarForGLR(true);
 }
 
 

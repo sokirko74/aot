@@ -245,7 +245,7 @@ int main(int argc, char **argv)
 
 	try
 	{
-		MorphHolderRus.LoadLemmatizer(morphRussian);
+		MorphHolderRus.LoadMorphology(morphRussian);
 
 		std::ifstream suff(argv[1]);
 		assert(suff.is_open());

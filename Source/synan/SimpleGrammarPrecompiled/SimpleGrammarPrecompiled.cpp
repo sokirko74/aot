@@ -1,5 +1,4 @@
 #include "synan/SimpleGrammarLib/SimpleGrammar.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 #ifdef WIN32
 #include <direct.h> // _getcwd
@@ -10,9 +9,8 @@
 void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
     parser.AddOption("--help");
     parser.AddArgument("--input", "input file");
-    parser.AddArgument("--output", "output file");
     parser.AddArgument("--language", "language");
-    parser.AddOption("--print-rules");
+    parser.AddArgument("--log-level", "log level", true);
     parser.Parse(argc, argv);
 }
 
@@ -20,60 +18,17 @@ void initArgParser(int argc, const char **argv, ArgumentParser& parser) {
 int main(int argc, const char **argv) {
     ArgumentParser args;
     initArgParser(argc, argv, args);
+    init_plog(args.GetLogLevel(), "simple_grammar_precomp.log", false);
 
-    bool bPrintRules = args.Exists("print-rules");
 
-    CWorkGrammar WorkGrammar(args.GetOutputStream());
-    WorkGrammar.m_Language = args.GetLanguage();
-
-    CMorphanHolder Holder;
     try {
-        Holder.LoadLemmatizer(WorkGrammar.m_Language);
+        CWorkGrammar WorkGrammar;
+        WorkGrammar.CreatePrecompiledGrammar(args.GetLanguage(), args.Retrieve("input"));
     }
-    catch (CExpc e) {
+    catch (std::exception e) {
         std::cerr << e.what() << "\n";
         return 1;
     }
-
-    std::string GrammarFileName = args.Retrieve("input");
-
-    char currdir[256];
-#ifdef WIN32
-    _getcwd(currdir, 256);
-    _chdir(GetParentPath(GrammarFileName).c_str());
-#else
-    getcwd(currdir, 256);
-    chdir(GetParentPath(GrammarFileName).c_str());
-#endif
-
-    WorkGrammar.m_pGramTab = Holder.m_pGramTab;
-    WorkGrammar.m_SourceGrammarFile = GrammarFileName.substr(GetParentPath(GrammarFileName).length());
-
-    bool bResult = LoadGrammarForGLR(WorkGrammar, false, bPrintRules);
-
-    if (!bResult) {
-        std::cerr << "Cannot load " << GrammarFileName << "\n";
-        return 1;
-    };
-
-#ifdef WIN32
-    _chdir(currdir);
-#else
-    if (chdir(currdir) != 0) {
-        std::cerr << "Cannot chdir to  " << currdir << "\n";
-        return 1;
-    }
-#endif
-
-    if (!WorkGrammar.SavePrecompiled(GrammarFileName)) {
-        std::cerr << "Cannot save precompiled version of " << GrammarFileName << "\n";
-        return 1;
-    };
-
-    if (!WorkGrammar.m_GLRTable.ConvertAndSaveGLRTable(MakeFName(GrammarFileName, "table"))) {
-        std::cerr << "Cannot save " << GrammarFileName << "\n";
-        return 1;
-    };
 
     return 0;
 }

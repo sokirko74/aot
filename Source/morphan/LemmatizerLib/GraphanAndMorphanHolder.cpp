@@ -81,7 +81,7 @@ void CGraphanAndMorphanHolder::LoadGraphanAndLemmatizer(MorphLanguageEnum langua
 	{	
 		throw CExpc("Cannot load graphan");
 	}
-	LoadLemmatizer(langua);
+	LoadMorphology(langua);
     m_PlmLines.m_pLemmatizer = m_pLemmatizer;
 };
 

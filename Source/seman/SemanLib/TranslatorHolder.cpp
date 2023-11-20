@@ -96,7 +96,7 @@ std::string CTranslatorHolder::GetThesStr(int ThesId) const {
 };
 
 void CTranslatorHolder::Init() {
-    m_EngHolder.LoadLemmatizer(morphEnglish);
+    m_EngHolder.LoadMorphology(morphEnglish);
     m_RusHolder.LoadSyntax(morphRussian);
     m_AspDict.Load();
     m_CompFreq.Load(GetRegistryString(g_strFreqCompPath));

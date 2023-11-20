@@ -1,19 +1,14 @@
-
-#pragma warning(disable:4786)
-#pragma warning(disable:4530)
-
-
 #include  "SimpleGrammarLib.h"
-#include <time.h>
 #include "SimpleGrammar.h"
-//#include "../common/DwdsThesaurus.h"
-#include <sys/stat.h>
 #include "morph_dict/common/bserialize.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
+#include "morph_dict/common/rapidjson.h"
 
-//========================================================================
-//=====================   CWorkGrammar      ==============================
-//========================================================================
-CWorkGrammar::CWorkGrammar(std::ostream& logStream): LogStream (logStream) {
+#include <time.h>
+#include <sys/stat.h>
+
+
+CWorkGrammar::CWorkGrammar() {
     m_GLRTable.m_pWorkGrammar = this;
     m_bEnableRootPrefix = true;
 };
@@ -94,16 +89,10 @@ std::string CWorkGrammar::GetRuleStr(CWRI it) const {
 
 
 void CWorkGrammar::Print() const {
-    //FILE* fp = fopen("log","a");
-    printf("===========\n");
-    //fprintf (fp, "===========\n");
-    int RuleNo = 0;
-    for (CWRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
-        RuleNo++;
-        printf("%zu) %s\n", it->m_RuleId, GetRuleStr(it).c_str());
-        //fprintf (fp, "%i: %s\n", RuleNo, GetRuleStr(it).c_str());
+    LOGV << "===========";
+    for (auto& r: m_EncodedRules) {
+        LOGV << r.m_RuleId << ") " << GetRuleStr(r);
     };
-    //fclose (fp);
 };
 
 
@@ -150,55 +139,39 @@ int CWorkGrammar::FindTokenListByFileName(const std::string &FileName, size_t En
 };
 
 
-bool CWorkGrammar::LoadOptions() {
-    m_SecondPassSymbols.clear();
-    std::string FileName = MakeFName(m_SourceGrammarFile, "opt");
-    LogStream << "loading " << FileName.c_str() << "\n";
-    FILE *fp = fopen(FileName.c_str(), "r");
-    if (!fp) {
-        ErrorMessage(Format("CWorkGrammar::LoadOptions cannot open file %s\n", FileName.c_str()));
-        return false;
-    };
-
-    char buffer[1000];
-    while (fgets(buffer, 1000, fp)) {
-        std::string Line = buffer;
-        size_t i = Line.find("%%");
-        if (i != std::string::npos)
-            Line.erase(i);
-        Trim(Line);
-        if (Line.empty()) continue;
-        StringTokenizer tok(Line.c_str(), "\t ");
-        tok();
-        std::string OptName = tok.val();
-        if (OptName == "SecondPass")
-            while (tok())
-                m_SecondPassSymbols.insert(tok.val());
-        else if (OptName == "DisableRootPrefix") {
-            LogStream << "DisableRootPrefix\n";
-            m_bEnableRootPrefix = false;
-        } else {
-            ErrorMessage(Format("Unknown option in %s: %s \n", FileName.c_str(), Line.c_str()));
-            fclose(fp);
-            return false;
-        };
-
+void CWorkGrammar::LoadOptions() {
+    std::string path = MakeFName(m_SourceGrammarFile, "opt");
+    LOGV << "loading options from " << path.c_str();
+    std::ifstream ifs(path);
+    if (!ifs.is_open()) {
+        throw CExpc("CWorkGrammar::LoadOptions cannot open file %s\n", path.c_str());
     }
-    fclose(fp);
-    LogStream << "Number of second pass symbols : " << m_SecondPassSymbols.size() << "\n";
-    return true;
+    rapidjson::IStreamWrapper isw(ifs);
+    rapidjson::Document d;
+    d.ParseStream(isw);
+
+    
+    for (auto& v : GetArrayFromJson(d, "SecondPass").GetArray()) {
+        m_SecondPassSymbols.insert(v.GetString());
+    }
+    if (!m_SecondPassSymbols.empty()) {
+        LOGV << "Number of second pass symbols : " << m_SecondPassSymbols.size();
+    }
+    if (GetBoolFromJson(d, "DisableRootPrefix")) {
+        LOGV << "DisableRootPrefix";
+        m_bEnableRootPrefix = false;
+    }
+    ifs.close();
 };
 
-bool CWorkGrammar::CreateTokenList(std::string &ErrorStr) {
+void CWorkGrammar::CreateTokenList() {
 
-    //FILE * tokens = fopen ("tokens_dump.txt", "w");
     for (size_t i = 0; i < m_UniqueGrammarItems.size(); i++) {
         CGrammarItem &I = m_UniqueGrammarItems[i];
         std::string FileName = I.GetFullFileName(m_SourceGrammarFile);
         if (!FileName.empty()) {
             if (!FileExists(FileName.c_str())) {
-                ErrorMessage(Format("cannot access %s\n", FileName.c_str()));
-                return false;
+                throw CExpc("cannot access %s\n", FileName.c_str());
             };
 
             int PrevTokList = FindTokenListByFileName(FileName, i);
@@ -229,9 +202,7 @@ bool CWorkGrammar::CreateTokenList(std::string &ErrorStr) {
             assert(fp);
 
             if (!fp) {
-                ErrorMessage(Format("CWorkGrammar::CreateTokenList cannot open %s\n", FileName.c_str()));
-                //fclose(tokens);
-                return false;
+                throw CExpc("CWorkGrammar::CreateTokenList cannot open %s\n", FileName.c_str());
             };
 
             char buffer[1000];
@@ -247,8 +218,6 @@ bool CWorkGrammar::CreateTokenList(std::string &ErrorStr) {
         };
 
     };
-    //fclose(tokens);
-    return true;
 };
 
 
@@ -279,7 +248,7 @@ size_t CWorkGrammar::GetCountOfRoots() const {
             Dump += m_UniqueGrammarItems[i].GetDumpString();
             Dump += ",";
         }
-    LogStream << "Roots : " << Dump.c_str() << "\n";
+    LOGV << "Roots : " << Dump;
 
     return Result;
 };
@@ -316,7 +285,7 @@ void PrintGroups(const CWorkGrammar &Grammar) {
 };
 
 void CWorkGrammar::ConvertToPrecompiled(const std::set<CWorkRule> &EncodedRules) {
-    LogStream << "ConvertToPrecompiled\n";
+    LOGI << "ConvertToPrecompiled";
     m_PrecompiledEncodedRules.clear();
     m_PrecompiledEncodedRules.reserve(EncodedRules.size());
     for (CWRI it = EncodedRules.begin(); it != EncodedRules.end(); it++) {
@@ -331,25 +300,18 @@ void CWorkGrammar::ConvertToPrecompiled(const std::set<CWorkRule> &EncodedRules)
 void CWorkGrammar::BuildAutomat(std::set<CWorkRule> &EncodedRules) {
     CreateAutomatSymbolInformation();
 
-/*	for (CWRI it = EncodedRules.begin(); it!= EncodedRules.end(); it++)
-	{
-		printf("%s\n", GetRuleStr(*it, -1, false).c_str());
-	};*/
-
     m_TrieHolder.Create(EncodedRules, &m_AutomatSymbolInformation);
 }
 
-bool CWorkGrammar::IsValid() const {
-    for (CWRI it = m_EncodedRules.begin(); it != m_EncodedRules.end(); it++) {
-        const CWorkRightRulePart &R = it->m_RightPart;
+void CWorkGrammar::IsValid() const {
+    LOGI << "validation...\n";
+    for (auto& r: m_EncodedRules) {
+        const CWorkRightRulePart &R = r.m_RightPart;
         if (R.m_SynMainItemNo >= R.m_RuleItems.size()) {
 
-            ErrorMessage(Format("%s has no syntax root", GetRuleStr(it).c_str()));
-            return false;
+            throw CExpc("%s has no syntax root", GetRuleStr(r).c_str());
         };
     };
-
-    return true;
 };
 
 void UpdateOld2NewMap(std::map<int, int> &Old2New, size_t &Index, int &MaxNewIndex) {
@@ -413,7 +375,7 @@ For example,
 */
 
 
-bool SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item, std::string &ErrorStr) {
+void SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item) {
     std::vector<CWorkRule> NewRules;
 
     for (WRI it = Grammar.m_EncodedRules.begin(); it != Grammar.m_EncodedRules.end(); it++) {
@@ -446,30 +408,20 @@ bool SolveNodeWithWorkAttributes(CWorkGrammar &Grammar, const CGrammarItem &Item
     };
 
     Grammar.m_EncodedRules.insert(NewRules.begin(), NewRules.end());
-
-    return true;
 };
 
 
-bool CWorkGrammar::CreateNodesForNodesWithWorkAttributes(std::string &ErrorStr) {
+void CWorkGrammar::CreateNodesForNodesWithWorkAttributes() {
 
-    for (size_t i = 0; i < m_UniqueGrammarItems.size(); i++) {
-        CGrammarItem I = m_UniqueGrammarItems[i];
-
-        if (!I.HasAnyOfWorkingAttributes() || !I.m_bMeta)
+    for (auto& i :m_UniqueGrammarItems) {
+        if (!i.HasAnyOfWorkingAttributes() || !i.m_bMeta)
             continue;
-
-        if (!SolveNodeWithWorkAttributes(*this, I, ErrorStr))
-            return false;
-    };
-
-
-    return true;
-
+        SolveNodeWithWorkAttributes(*this, i);
+    }
 };
 
 
-bool CWorkGrammar::CheckCoherence() const {
+void CWorkGrammar::CheckCoherence() const {
     std::set<size_t> AllLeftParts;
     size_t i = 0;
 
@@ -484,14 +436,11 @@ bool CWorkGrammar::CheckCoherence() const {
             const CGrammarItem &I = m_UniqueGrammarItems[id];
             if (I.m_bMeta) {
                 if (AllLeftParts.find(id) == AllLeftParts.end()) {
-                    ErrorMessage(Format("\"%s\" is used , but not defined\n", I.GetDumpString().c_str()));
-                    return false;
+                    throw CExpc("\"%s\" is used , but not defined\n", I.GetDumpString().c_str());
                 };
             };
         };
     };
-
-    return true;
 };
 
 
@@ -516,17 +465,17 @@ inline size_t restore_from_bytes(CPrecompiledWorkRule &t, const BYTE *buf) {
 };
 
 
-bool CWorkGrammar::SavePrecompiled(std::string GrammarFileName) const {
+void CWorkGrammar::SavePrecompiled(std::string GrammarFileName) const {
 
     std::string PrecompiledFile = MakeFName(GrammarFileName, "grammar_precompiled");
+    LOGI << "save to " << PrecompiledFile;
 
     FILE *fp = fopen(PrecompiledFile.c_str(), "wb");
     if (!fp) {
-        LogStream << "Cannot write " << PrecompiledFile.c_str() << "\n";
-        return false;
+        throw CExpc("Cannot write " + PrecompiledFile);
     };
     fprintf(fp, "%i\n", (int) m_Language);
-    fprintf(fp, "%i\n", m_UniqueGrammarItems.size());
+    fprintf(fp, "%zi\n", m_UniqueGrammarItems.size());
 
     for (size_t SymbolNo = 0; SymbolNo < m_UniqueGrammarItems.size(); SymbolNo++) {
         {
@@ -540,27 +489,24 @@ bool CWorkGrammar::SavePrecompiled(std::string GrammarFileName) const {
         fprintf(fp, "%s", m_UniqueGrammarItems[SymbolNo].toString().c_str());
     };
 
-    fprintf(fp, "%i\n", m_PrecompiledEncodedRules.size());
+    fprintf(fp, "%zi\n", m_PrecompiledEncodedRules.size());
     WriteVectorInner(fp, m_PrecompiledEncodedRules);
 
     fclose(fp);
 
     //assert (!m_AutomatSymbolInformation.empty());
     m_TrieHolder.Save(GrammarFileName);
-    return true;
 };
 
 
-bool CWorkGrammar::LoadFromPrecompiled() {
+void CWorkGrammar::LoadFromPrecompiled() {
     time_t t1;
     time(&t1);
     std::string PrecompiledFile = MakeFName(m_SourceGrammarFile, "grammar_precompiled");
-    LogStream << "loading from precompiled grammar " << PrecompiledFile << "\n";
+    LOGI << "loading from precompiled grammar " << PrecompiledFile;
     FILE *fp = fopen(PrecompiledFile.c_str(), "rb");
     if (!fp) {
-        ErrorMessage(Format("Cannot open %s", PrecompiledFile.c_str()));
-        return false;
-
+        throw CExpc("Cannot open %s", PrecompiledFile.c_str());
     };
 
     int Lang;
@@ -576,8 +522,7 @@ bool CWorkGrammar::LoadFromPrecompiled() {
         for (size_t LineNo = 0; LineNo < 7; LineNo++) {
             char buffer[1024];
             if (!fgets(buffer, 1024, fp)) {
-                ErrorMessage(Format("Cannot read %s", PrecompiledFile.c_str()));
-                return false;
+                throw CExpc("Cannot read %s", PrecompiledFile.c_str());
             };
             OneRecord += buffer;
         };
@@ -585,8 +530,7 @@ bool CWorkGrammar::LoadFromPrecompiled() {
         CGrammarItem I;
         bool b = I.fromString(OneRecord);
         if (!b) {
-            ErrorMessage(Format("Cannot read %s in %s", PrecompiledFile.c_str(), OneRecord.c_str()));
-            return false;
+            throw CExpc("Cannot read %s in %s", PrecompiledFile.c_str(), OneRecord.c_str());
         };
         m_UniqueGrammarItems.push_back(I);
 
@@ -594,7 +538,9 @@ bool CWorkGrammar::LoadFromPrecompiled() {
 
     {
         char buffer[256];
-        if (!fgets(buffer, 256, fp)) return false;
+        if (!fgets(buffer, 256, fp)) {
+            throw CExpc("cannot read size for PrecompiledEncodedRules");
+        }
         Count = atoi(buffer);
     };
     m_PrecompiledEncodedRules.clear();
@@ -606,36 +552,28 @@ bool CWorkGrammar::LoadFromPrecompiled() {
 
     assert (!m_AutomatSymbolInformation.empty());
     if (!m_TrieHolder.Load(&m_AutomatSymbolInformation, m_SourceGrammarFile)) {
-        ErrorMessage("Cannot load automat");
-        return false;
+        throw CExpc("Cannot load automat");
     };
 
     time_t t2;
     time(&t2);
-
-    LogStream << "Seconds = " << t2 - t1 << "\n";
-
-
-    return true;
+    LOGV << "Seconds = " << t2 - t1;
 };
 
 // adding a new root non-terminal "NewRoot" and a special 
 // symbol for end of input ("$")
-bool CWorkGrammar::AugmentGrammar() {
+void CWorkGrammar::AugmentGrammar() {
     size_t Count = GetCountOfRoots();
 
     if (Count != 1) {
-        ErrorMessage("A simple grammar should have only one root!");
-        assert (Count == 1);
-        return false;
+        throw CExpc("A simple grammar should have only one root!");
     };
     size_t i = 0;
     for (; i < m_UniqueGrammarItems.size(); i++)
         if ((m_UniqueGrammarItems[i].m_ItemStrId == "NewRoot")
             || (m_UniqueGrammarItems[i].m_ItemStrId == "$")
                 ) {
-            assert (false);
-            return false;
+            throw CExpc("exception in CWorkGrammar::AugmentGrammar!");
         };
 
 
@@ -669,7 +607,6 @@ bool CWorkGrammar::AugmentGrammar() {
     R.m_RightPart.m_RuleItems.push_back(i);
     R.m_RightPart.m_RuleItems.push_back(m_UniqueGrammarItems.size() - 2);
     m_EncodedRules.insert(R);
-    return true;
 };
 
 size_t CWorkGrammar::GetNewRoot() const {
@@ -687,73 +624,63 @@ size_t CWorkGrammar::GetEndOfStreamSymbol() const {
 };
 
 
-bool LoadGrammarForGLR(CWorkGrammar &WorkGrammar, bool bUsePrecompiledAutomat, bool bPrintRules) {
-    if (!BuildWorkGrammar(WorkGrammar, bPrintRules)) {
-        return false;
-    };
-
-    if (!WorkGrammar.LoadOptions())
-        return false;
-
+void CWorkGrammar::LoadGrammarForGLR(bool bUsePrecompiledAutomat) {
+    BuildWorkGrammar(*this);
+    LoadOptions();
     if (bUsePrecompiledAutomat) {
 
-        if (!WorkGrammar.AugmentGrammar()) {
-            return false;
-        };
-        size_t SaveSize = WorkGrammar.m_UniqueGrammarItems.size();
-        if (!WorkGrammar.LoadFromPrecompiled()) return false;
-        if (SaveSize != WorkGrammar.m_UniqueGrammarItems.size()) {
-            WorkGrammar.LogStream << "Number of Symbols in the precompiled  version = " << WorkGrammar.m_UniqueGrammarItems.size()
+        AugmentGrammar();
+
+        size_t SaveSize = m_UniqueGrammarItems.size();
+        LoadFromPrecompiled();
+        if (SaveSize != m_UniqueGrammarItems.size()) {
+            std::ostringstream ss;
+            ss << "Number of Symbols in the precompiled  version = " << m_UniqueGrammarItems.size()
                       << "\n";
-            WorkGrammar.LogStream << "Number of Symbols in the current version = " << SaveSize << "\n";
-            assert (false);
+            ss << "Number of Symbols in the current version = " << SaveSize << "\n";
             //  should  be the same size, the difference means that the precompiled version 
             //  contain a different grammar
-            return false;
+            throw CExpc(ss.str());
         };
 
-        if (!WorkGrammar.m_GLRTable.LoadGLRTable(MakeFName(WorkGrammar.m_SourceGrammarFile, "table"))) {
-            ErrorMessage("Cannot load GLR Table");
-            return false;
+        if (!m_GLRTable.LoadGLRTable(MakeFName(m_SourceGrammarFile, "table"))) {
+            throw CExpc("Cannot load GLR Table");
         };
 
     } else {
-        if (WorkGrammar.m_bEnableRootPrefix) {
+        if (m_bEnableRootPrefix) {
             size_t PrefixSize = 3;
-            WorkGrammar.LogStream << "build RootPrefixes( " << PrefixSize << ")\n";
-            WorkGrammar.BuildRootPrefixes(PrefixSize);
-            WorkGrammar.LogStream << "build automat for prefixes \n";
-            WorkGrammar.BuildAutomat(WorkGrammar.m_RootPrefixes);
-            WorkGrammar.ConvertToPrecompiled(WorkGrammar.m_RootPrefixes);
+            LOGI << "build RootPrefixes( " << PrefixSize << ")\n";
+            BuildRootPrefixes(PrefixSize);
+            LOGI << "build automat for prefixes \n";
+            BuildAutomat(m_RootPrefixes);
+            ConvertToPrecompiled(m_RootPrefixes);
         };
 
-        if (!WorkGrammar.AugmentGrammar()) {
-            return false;
-        };
-
-        WorkGrammar.Build_FIRST_Set();
-        WorkGrammar.Build_FOLLOW_Set();
+        AugmentGrammar();
+        Build_FIRST_Set();
+        Build_FOLLOW_Set();
 
 
-        if (!WorkGrammar.m_GLRTable.BuildGLRTable()) {
-            return false;
+        if (!m_GLRTable.BuildGLRTable()) {
+            throw CExpc ("BuildGLRTable failed");
         };
 
 
     }
-
-
-    {
-        WorkGrammar.LogStream << "create token list for each node\n";
-        std::string ErrorStr;
-
-        if (!WorkGrammar.CreateTokenList(ErrorStr)) {
-            ErrorMessage(ErrorStr);
-            return false;
-        };
-        WorkGrammar.LogStream << "ok\n";
-    };
-
-    return true;
+    LOGI << "create token list for each node";
+    CreateTokenList();
+    LOGI << "all done\n";
 
 };
+
+void CWorkGrammar::CreatePrecompiledGrammar(MorphLanguageEnum langua, std::string path) {
+    m_Language = langua;
+    CMorphanHolder Holder;
+    Holder.LoadOnlyGramtab(m_Language);
+    m_pGramTab = Holder.m_pGramTab;
+    m_SourceGrammarFile = path;
+    LoadGrammarForGLR(false);
+    SavePrecompiled(path);
+    m_GLRTable.ConvertAndSaveGLRTable(MakeFName(path, "table"));
+}

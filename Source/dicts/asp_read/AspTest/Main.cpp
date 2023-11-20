@@ -12,7 +12,7 @@ int main()
 	CAspPairDict d;
 	d.Load();
 	CMorphanHolder RussianHolder;
-	RussianHolder.LoadLemmatizer(morphRussian);
+	RussianHolder.LoadMorphology(morphRussian);
 	auto ids1 = RussianHolder.GetLemmaIds("застигать");
 	auto ids2 = RussianHolder.GetLemmaIds("застигнуть");
 	std::set<uint32_t> perf_ids;

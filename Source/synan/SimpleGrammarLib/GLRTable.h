@@ -70,7 +70,7 @@ public:
 	bool BuildGLRTable();
 	void PrintGLRTable(FILE* fp) const;
 	
-	bool ConvertAndSaveGLRTable(std::string FileName);
+	void ConvertAndSaveGLRTable(std::string FileName);
 	bool LoadGLRTable(std::string FileName);
 	bool SaveOldGLRTable(std::string FileName) const;
 

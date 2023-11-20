@@ -33,8 +33,8 @@ typedef std::set<std::pair<uint32_t, uint32_t> > small_dict_t;
 //--------------------------------------------------------------------------------
 void init_dicts()
 {
-	MorphHolderRus.LoadLemmatizer(morphRussian);
-	MorphHolderEng.LoadLemmatizer(morphEnglish);
+	MorphHolderRus.LoadMorphology(morphRussian);
+	MorphHolderEng.LoadMorphology(morphEnglish);
 	BinaryDictionary.Load();
 	std::cerr << "dictionaries are loaded" << std::endl;
 }
