@@ -1,7 +1,7 @@
 %%  ================  preposition phrases  ==================
 %% in dem Haus
 %% in das Haus
-%% während des folgenden Tages
+%% wÃ¤hrend des folgenden Tages
 
 [PRP_ACC] -> [TOKEN filename="prep_akk.txt" grm="PRP"];
 [PRP_GEN] -> [TOKEN filename="prep_gen.txt" grm="PRP"];
@@ -36,7 +36,7 @@
 %% ===  accusative  =====
 %% ins rote Haus
 
-[COMP_PRP_ACC] -> 'ans'|'aufs'|'durchs'|'fürs'|'hinters'|'ins'|'ums'|'vors';
+[COMP_PRP_ACC] -> 'ans'|'aufs'|'durchs'|'fÃ¼rs'|'hinters'|'ins'|'ums'|'vors';
 
 
 [PP] -> [COMP_PRP_ACC] [NUMBER_EXT]? ([WEAK_NP grm="akk, mas"] | [WEAK_NP grm="akk, neu"]);

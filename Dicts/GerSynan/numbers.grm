@@ -22,15 +22,15 @@
 
 %%  ===============  numeral chunks   ===============
 %% Mindestens 43 Menschen 
-%% ungefähr 2 Franken 
-%% höchstens zwei 
+%% ungefÃ¤hr 2 Franken 
+%% hÃ¶chstens zwei 
 %% bis zu 7 Jahren
 %% etwa sieben Jahren
 %% wenigstens drei Mitgliedern
 %% zirka zwei Milliarden
-%% frühestens drei Monate 
+%% frÃ¼hestens drei Monate 
 
-[NUM-MODIF] -> 	'ungefähr' | 'höchstens' | 'etwa' | 'wenigstens' | 'zirka' | 'frühestens' | 'spätestens' | 'mindestens' | 'rund' ;
+[NUM-MODIF] -> 	'ungefÃ¤hr' | 'hÃ¶chstens' | 'etwa' | 'wenigstens' | 'zirka' | 'frÃ¼hestens' | 'spÃ¤testens' | 'mindestens' | 'rund' ;
 
 [NUM-MODIF] -> 'bis' 'zu';
 

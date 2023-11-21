@@ -33,7 +33,7 @@
 [SPNAME] -> [TITLE]? [FNAME hom="no"] [FAMILY hom="no"];  %% Alexey Sokirko
 [SPNAME] -> [TITLE]? [FNAME hom="yes"]? [FAMILY hom="no"]; %% Kai Sokirko
 [SPNAME] -> [TITLE]? [FNAME hom="no"] [FAMILY hom="yes"]; %% Helmut Kohl
-[SPNAME] -> [TITLE]? [FNAME] 'von' [FAMILY]; %% "Gr¤fin Tita von Hardenberg"
+[SPNAME] -> [TITLE]? [FNAME] 'von' [FAMILY]; %% "GrÂ¤fin Tita von Hardenberg"
 [SPNAME] -> [TITLE] [FNAME] [FAMILY]; %% Dr. Kai Zimmer
 [SPNAME] -> [TITLE]? [FNAME]  [TOKEN type="ROMAN"] '.'; %% "Elisabeth II."
 

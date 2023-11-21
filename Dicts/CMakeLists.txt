@@ -13,7 +13,7 @@ macro (CompileSimpleGrammar name grmFile tableFile)
 
     add_custom_command(
         OUTPUT ${tableFile}
-        COMMAND SimpleGrammarPrecompiled --language German --input ${grmFile} --output -
+        COMMAND SimpleGrammarPrecompiled --language German --input ${grmFile}
         DEPENDS SimpleGrammarPrecompiled ${grmFile}
         COMMENT "Compile ${grmFile} "
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}

@@ -1,4 +1,11 @@
-#include "german_person.grm"
+%% ===========  Include person grammar  ==============
+
+#include "../SimpleGrammar/person.grm"
+%%#include "../SimpleGrammar/example.grm"
+
+
+%% ===========  Include subrules   ==============
+
 #include "prepositions.grm"
 #include "numbers.grm"
 
@@ -365,7 +372,3 @@
 [NP] -> [NP] 'von' [NP grm="dat"];
 
 
-%% tst
-
-
-[NP] -> 'test' 'test';

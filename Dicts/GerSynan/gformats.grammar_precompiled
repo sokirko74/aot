@@ -12,7 +12,7 @@ FNAME
 TOKEN
 0 0 3 null
 0 0 1 2
-;filename ../SimpleGrammar/firstname.txt;
+;filename firstname.txt;
 ]
 [
 1 FAMILY null 6
@@ -26,7 +26,7 @@ FAMILY
 TOKEN
 0 0 3 null
 0 0 1 2
-;filename ../SimpleGrammar/family.txt;
+;filename family.txt;
 ]
 [
 1 ACR null 6
@@ -40,7 +40,7 @@ ACR
 TOKEN
 0 0 3 null
 0 0 1 0
-;filename ../SimpleGrammar/acr.txt;
+;filename acr.txt;
 ]
 [
 1 HUM null 6
@@ -54,7 +54,7 @@ HUM
 TOKEN
 0 0 3 null
 0 0 1 0
-;filename ../SimpleGrammar/hum.txt;
+;filename hum.txt;
 ]
 [
 1 GEO null 6
@@ -68,7 +68,7 @@ GEO
 TOKEN
 0 0 3 null
 0 0 1 0
-;filename ../SimpleGrammar/geo.txt;
+;filename geo.txt;
 ]
 [
 1 GEOADJ null 6
@@ -82,7 +82,7 @@ GEOADJ
 TOKEN
 0 0 3 null
 0 0 1 0
-;filename ../SimpleGrammar/geoadj.txt;
+;filename geoadj.txt;
 ]
 [
 1 Det null 6
@@ -96,7 +96,7 @@ Det
 TOKEN
 0 0 3 null
 0 0 1 0
-;filename ../SimpleGrammar/det.txt;
+;filename det.txt;
 ]
 [
 1 Adj null 6
@@ -390,7 +390,7 @@ PP
 TOKEN
 0 512 3 PRP
 0 0 1 0
-;
+;form bis;
 ]
 [
 0 heute HEUTE 1
@@ -512,7 +512,7 @@ TOKEN
 ;
 ]
 [
-0 fürs FÜRS 1
+0 fÃ¼rs FÃœRS 1
 TOKEN
 0 0 3 null
 0 0 1 0
@@ -600,21 +600,21 @@ ADV_NUMBER
 TOKEN
 0 4 3 ADV
 0 0 1 0
-;
+;form mehr;
 ]
 [
 0 weniger WENIGER 1
 TOKEN
 0 4 3 ADV
 0 0 1 0
-;
+;form weniger;
 ]
 [
 0 viel VIEL 1
 TOKEN
 0 4 3 ADV
 0 0 1 0
-;
+;form viel;
 ]
 [
 0 mehr MEHR 1
@@ -652,14 +652,14 @@ NUM-MODIF
 ;
 ]
 [
-0 ungefähr UNGEFÄHR 1
+0 ungefÃ¤hr UNGEFÃ„HR 1
 TOKEN
 0 0 3 null
 0 0 1 0
 ;
 ]
 [
-0 höchstens HÖCHSTENS 1
+0 hÃ¶chstens HÃ–CHSTENS 1
 TOKEN
 0 0 3 null
 0 0 1 0
@@ -687,14 +687,14 @@ TOKEN
 ;
 ]
 [
-0 frühestens FRÜHESTENS 1
+0 frÃ¼hestens FRÃœHESTENS 1
 TOKEN
 0 0 3 null
 0 0 1 0
 ;
 ]
 [
-0 spätestens SPÄTESTENS 1
+0 spÃ¤testens SPÃ„TESTENS 1
 TOKEN
 0 0 3 null
 0 0 1 0
@@ -761,7 +761,7 @@ ZAL_comma
 TOKEN
 0 1 3 ART
 0 0 1 0
-;
+;form ein;
 ]
 [
 0 , , 4
@@ -950,7 +950,7 @@ EINWOHNER
 TOKEN
 288230376151711744 0 3 ew
 0 0 1 0
-;
+;form *er;
 ]
 [
 1 AP null 6
@@ -1097,7 +1097,7 @@ DER-DET
 TOKEN
 0 1 3 ART
 0 0 1 0
-;
+;form der;
 ]
 [
 0 derselbe DERSELBE 1
@@ -1170,7 +1170,7 @@ ADJ-SEQ
 ;
 ]
 [
-0 übrig ÜBRIG 1
+0 Ã¼brig ÃœBRIG 1
 TOKEN
 0 0 3 null
 0 0 1 0
@@ -1247,7 +1247,7 @@ TOKEN
 ;
 ]
 [
-0 küstenstadt KÜSTENSTADT 1
+0 kÃ¼stenstadt KÃœSTENSTADT 1
 TOKEN
 0 0 3 null
 0 0 1 0
@@ -1289,7 +1289,7 @@ LAST_NP
 ;
 ]
 [
-0 ähnlich ÄHNLICH 1
+0 Ã¤hnlich Ã„HNLICH 1
 TOKEN
 0 0 3 null
 0 0 1 0
@@ -1405,14 +1405,14 @@ TOKEN
 TOKEN
 0 0 3 null
 0 0 0 2
-;filename ../SimpleGrammar/firstname.txt;
+;filename firstname.txt;
 ]
 [
 0 TOKEN null 1
 TOKEN
 0 0 3 null
 0 0 0 2
-;filename ../SimpleGrammar/family.txt;
+;filename family.txt;
 ]
 [
 0 TOKEN null 1
