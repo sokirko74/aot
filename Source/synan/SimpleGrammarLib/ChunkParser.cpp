@@ -63,24 +63,20 @@ bool CChunkParser::ParseGrammar(const char* src)
 bool CChunkParser::ParseGrammarInFile(std::string FileName, std::string RefererFile)
 {	
 	std::string Grammar;
-	if (!LoadFileToString(FileName, Grammar))
+	if (FileExists(FileName.c_str())) {
+		Grammar = LoadFileToString(FileName)
+	}
+	else
 	{
-		bool bResult = false;
 		if (!RefererFile.empty())
 		{
 			FileName = GetParentPath(RefererFile) + FileName;
-			bResult = LoadFileToString(FileName, Grammar);
-		};
-		if (!bResult)
-		{
-			fprintf(stderr, "CChunkParser::ParseGrammarInFile cannot open %s\n", FileName.c_str());
-			return false;
+			Grammar = LoadFileToString(FileName);
 		};
 	}
 	m_CurrentSourceFileName = FileName;
-	fprintf (stderr, "Loading %s\n", m_CurrentSourceFileName.c_str());
+	LOGI << "Loading" <<  m_CurrentSourceFileName;
 	bool bResult = ParseGrammar(Grammar.c_str());
-
 	return bResult;
 };	
 

@@ -178,7 +178,7 @@ BOOL CSLFDocument::SaveModified()
 
 		// writing
 		std::string paradigm = m_pParent->ToInnerEncoding(m_ParadigmText);
-		m_Paradigm = GetWizard()->add_lemma(
+		m_Paradigm = GetWizard()->add_lemma_to_dict(
 			paradigm, 
 			m_pParent->ToInnerEncoding(m_CommonGrammems), 
 			m_pParent->ToInnerEncoding(m_Prefixes), 

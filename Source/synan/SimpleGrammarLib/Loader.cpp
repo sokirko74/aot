@@ -150,16 +150,17 @@ void CWorkGrammar::LoadOptions() {
     rapidjson::Document d;
     d.ParseStream(isw);
 
-    
-    for (auto& v : GetArrayFromJson(d, "SecondPass").GetArray()) {
-        m_SecondPassSymbols.insert(v.GetString());
-    }
-    if (!m_SecondPassSymbols.empty()) {
+    auto a = rapidjson::Pointer("/SecondPass").Get(d);
+    if (a != nullptr) {
+        for (auto& v : a->GetArray()) {
+            m_SecondPassSymbols.insert(v.GetString());
+        }
         LOGV << "Number of second pass symbols : " << m_SecondPassSymbols.size();
     }
-    if (GetBoolFromJson(d, "DisableRootPrefix")) {
+    auto a1 = rapidjson::Pointer("/DisableRootPrefix").Get(d);
+    if (a1) {
         LOGV << "DisableRootPrefix";
-        m_bEnableRootPrefix = false;
+        m_bEnableRootPrefix = !a1->GetBool();
     }
     ifs.close();
 };

@@ -305,41 +305,36 @@ void CMorphwizardView::OnFind()
 		if (find_what == "") return;
 		ChangeHistory(find_what);
 		UpdateData(FALSE);
-		std::string find_what_rml = ToInnerEncoding(find_what);
-		Trim(find_what_rml);
+		std::string find_what_u8 = utf16_to_utf8((wchar_t*)find_what);
+		Trim(find_what_u8);
 
 		CWizardProgressMeter meter(*GetWizard());
 		int typeSearch = GetCheckedRadioButton(IDC_FIRST_BUTTON_SEARCH_TYPE, IDC_LAST_BUTTON_SEARCH_TYPE);
 		switch (typeSearch) {
 		case IDC_RFIND_LEM:
-			RmlMakeUpper(find_what_rml, GetWizard()->m_Language);
-			GetWizard()->find_lemm(find_what_rml.c_str(), false, found_paradigms);
+			found_paradigms = GetWizard()->find_lemm(find_what_u8.c_str(), false);
 			break;
 		case IDC_FIND_BY_PARADIGM_NO:
-			if (iswdigit(find_what[0])) {
-				GetWizard()->find_lemm_by_prdno(atoi(find_what_rml.c_str()), found_paradigms);
+			if (isdigit(find_what_u8[0])) {
+				GetWizard()->find_lemm_by_prdno(atoi(find_what_u8.c_str()), found_paradigms);
 			}
 			break;
 		case IDC_RFIND_GRM:
-			GetWizard()->find_lemm_by_grammem(find_what_rml, found_paradigms);
+			GetWizard()->find_lemm_by_grammem(find_what_u8, found_paradigms);
 			break;
 		case IDC_WORD_FORM:
-			// нельзя применять  RmlMakeUpper из-за "*"
-			if (GetWizard()->IsGerman())
-				GerMakeUpper(find_what_rml);
-			else
-				EngRusMakeUpper(find_what_rml);
-			GetWizard()->find_wordforms(find_what_rml.c_str(), found_paradigms);
+			MakeUpperUtf8(find_what_u8);
+			found_paradigms = GetWizard()->find_wordforms(find_what_u8);
 			break;
 		case IDC_FIND_BY_GRAMCODE:
-			GetWizard()->find_ancodes(find_what_rml.c_str(), found_paradigms);
+			GetWizard()->find_ancodes(find_what_u8, found_paradigms);
 			break;
 		case IDC_FIND_BY_USERNAME:
-			GetWizard()->find_lemm_by_user(find_what_rml.c_str(), found_paradigms);
+			GetWizard()->find_lemm_by_user(find_what_u8, found_paradigms);
 			break;
 		case IDC_FIND_BY_ACCENT_MODEL:
-			if (iswdigit(find_what[0])) {
-				GetWizard()->find_lemm_by_accent_model(atoi(find_what_rml.c_str()), found_paradigms);
+			if (isdigit(find_what_u8[0])) {
+				GetWizard()->find_lemm_by_accent_model(atoi(find_what_u8.c_str()), found_paradigms);
 			}
 			break;
 		}
@@ -385,13 +380,12 @@ void CMorphwizardView::OnRemove()
 
 std::string CMorphwizardView::ToInnerEncoding(CString strText) const
 {
-	std::wstring wstr((LPCTSTR)strText);
-	return GetDocument()->m_Wizard.ToRMLEncoding(wstr);
+	return utf16_to_utf8((LPCTSTR)strText);
 }
 
 CString CMorphwizardView::FromInnerEncoding(std::string s) const
 {
-	return GetDocument()->m_Wizard.FromRMLEncoding(s).c_str();
+	return utf8_to_utf16(s).c_str();
 }
 
 
@@ -572,7 +566,7 @@ void CMorphwizardView::OnToolsSaveListFile()
 		if (!PrefixSet.empty())
 			lemma = PrefixSet + '|' + lemma;
 		RmlMakeLower(lemma, GetWizard()->m_Language);
-		std::string common_grams = "* " + GetWizard()->get_grammem_string(found_paradigms[i]->second.GetCommonAncodeIfCan());
+		std::string common_grams = "* " + GetWizard()->get_grammem_string(found_paradigms[i]->second.GetCommonAncodeCopy());
 
 		std::string s = lemma
 			+ ";"
@@ -656,8 +650,8 @@ void CMorphwizardView::OnToolsExport()
 			if (found_paradigms[i]->second.m_PrefixSetNo != UnknownPrefixSetNo)
 				P.m_PrefixesStr = GetWizard()->get_prefix_set(found_paradigms[i]);
 
-			if (!found_paradigms[i]->second.GetCommonAncodeIfCan().empty())
-				P.m_TypeGrammemsStr = GetWizard()->get_grammem_string(found_paradigms[i]->second.GetCommonAncodeIfCan());
+			if (!found_paradigms[i]->second.GetCommonAncodeCopy().empty())
+				P.m_TypeGrammemsStr = GetWizard()->get_grammem_string(found_paradigms[i]->second.GetCommonAncodeCopy());
 
 			if (found_paradigms[i]->second.m_SessionNo != UnknownSessionNo)
 				P.m_Session = GetWizard()->get_session(found_paradigms[i]->second.m_SessionNo);
@@ -741,7 +735,7 @@ void CMorphwizardView::OnToolsImport()
 						else
 						{
 							uint16_t SessionNo = GetWizard()->RegisterSession(P.m_Session);
-							GetWizard()->add_lemma(P.m_SlfStr, P.m_TypeGrammemsStr, P.m_PrefixesStr, line_no_err, SessionNo);
+							GetWizard()->add_lemma_to_dict(P.m_SlfStr, P.m_TypeGrammemsStr, P.m_PrefixesStr, line_no_err, SessionNo);
 						};
 
 						meter.SetFilePos();
@@ -869,7 +863,7 @@ void CMorphwizardView::OnToolsSelectByFile()
 		{
 			std::string str_pos = GetWizard()->m_FlexiaModels[curr_found_paradigms[i]->second.m_FlexiaModelNo].get_first_code();;
 
-			if (curr_found_paradigms[i]->second.GetCommonAncodeIfCan() == TypeAncode)
+			if (curr_found_paradigms[i]->second.GetCommonAncodeCopy() == TypeAncode)
 				if (FirstCode == str_pos)
 					if (std::find(found_paradigms.begin(), found_paradigms.end(), curr_found_paradigms[i]) == found_paradigms.end())
 					{

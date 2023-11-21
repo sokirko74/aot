@@ -2,7 +2,7 @@ declare_cmake_min_version()
 
 project(StructDictBasic)
 
-add_executable (${PROJECT_NAME} main.cpp)
+add_executable (${PROJECT_NAME} "test_sruct_dict.cpp")
 
 target_link_libraries(${PROJECT_NAME} 
     StructDictLib
