@@ -1,5 +1,6 @@
 declare_cmake_min_version()
 
+add_subdirectory (Bigrams)
 add_subdirectory (GenFreqDict)
 add_subdirectory (StructDictLib)
 add_subdirectory (StructDictLoader)

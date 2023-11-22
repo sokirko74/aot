@@ -3,7 +3,6 @@
 
 #include <string>
 #include <list>
-#include <sys/wait.h>
 
 
 void PrintUsageAndExit()

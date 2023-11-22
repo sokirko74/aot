@@ -10,6 +10,5 @@ if ($JAVA_INCLUDES)  # not tested under cmake
     add_subdirectory (www/JNIMorphAPITest)
 endif()
 
-add_subdirectory (Bigrams)
 add_subdirectory (SynanDaemon)
 add_subdirectory (SemanDaemon)

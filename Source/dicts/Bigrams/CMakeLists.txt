@@ -1,5 +1,17 @@
 declare_cmake_min_version()
-project(Bigrams)
+project(BigramsLib)
+
+add_library(${PROJECT_NAME}
+  BigramsReader.cpp 
+  BigramsReader.h
+)
+
+target_link_libraries(${PROJECT_NAME}
+    aot_common
+)
+
+
+
 
 file(COPY test DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 

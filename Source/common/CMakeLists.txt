@@ -1,12 +1,10 @@
 declare_cmake_min_version()
 
 set(my_SOURCES
-        BigramsReader.cpp
         Homonym.cpp
         LemWord.cpp
         PlmLine.cpp
         gra_descr.cpp
-        BigramsReader.h
         Chunk.h
         cortege.h
         gra_descr.h

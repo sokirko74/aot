@@ -1,7 +1,7 @@
 #include  "BigramsReader.h"
 
 #include "morph_dict/common/bserialize.h"
-#include "morph_dict/common/json.h"
+#include "morph_dict/common/rapidjson.h"
 
 #include  <climits>
 
@@ -233,19 +233,19 @@ std::string GetConnectedWords(std::string Word, int MinBigramsFreq, bool bDirect
     else if (sortMode == "SortByBigramsFreq")
         sort(table.begin(), table.end(), GreaterByBigramsFreq);
 
-    auto result = nlohmann::json::array();
+    rapidjson::Document d;
+    auto result = CJsonObject(d, rapidjson::kArrayType);
     for (auto &a : table) {
-        nlohmann::json b = {
-                {"word1",       a.m_Word1},
-                {"word2",       a.m_Word2},
-                {"wordFreq1",   a.m_WordFreq1},
-                {"wordFreq2",   a.m_WordFreq2},
-                {"bigramsFreq", a.m_BigramsFreq},
-                {"mi",          a.m_MutualInformation}
-        };
-        result.push_back(b);
+        CJsonObject b(d);
+        b.add_string("word1", a.m_Word1);
+        b.add_string("word2", a.m_Word2);
+        b.add_int("wordFreq1", a.m_WordFreq1);
+        b.add_int("wordFreq2", a.m_WordFreq2);
+        b.add_int("bigramsFreq", a.m_BigramsFreq);
+        b.add_double("mi", a.m_MutualInformation);
+        result.push_back(b.get_value());
     }
-    return result.dump();
+    return result.dump_rapidjson();
 }
 
 bool InitializeBigrams(std::string FileName) {

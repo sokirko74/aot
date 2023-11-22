@@ -40,7 +40,7 @@ public:
 	virtual void OnCloseDocument( );
 	CSLFView* GetSLFView();
 	std::string GetSavedLemma();
-	std::string GetLemma() const;
+	std::string GetLemmaUtf8() const;
 	std::string	GetBase()  const;
 	BOOL	OpenDiffDialog ();
 	BOOL	OpenParadigm( bool runAccentWizard=false );

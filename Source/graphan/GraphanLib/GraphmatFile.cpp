@@ -252,7 +252,7 @@ void CGraphmatFile :: LoadFileToGraphan (const std::string&  fileName)
 		if (!FileExists(m_SourceFileName.c_str())) {
 			throw CExpc("Cannot read file %s", m_SourceFileName.c_str());
 		}
-		LoadFileToString(m_SourceFileName, inputText);
+		inputText = LoadFileToString(m_SourceFileName);
 
 	};
 	

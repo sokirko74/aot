@@ -103,8 +103,9 @@ void CChangeAllDlg::updateParadigmList()
 		std::string PrefixSet = m_wizard.get_prefix_set( m_found_paradigms[i] );
 		if (!PrefixSet.empty())
 			Lemma = PrefixSet+'|'+Lemma;
-		RmlMakeLower(Lemma, m_wizard.m_Language);
-		m_list.SetItemText(count, 1, m_wizard.FromRMLEncoding(Lemma).c_str());
+		MakeLowerUtf8(Lemma);
+		CString l = Lemma.c_str();
+		m_list.SetItemText(count, 1, l);
 
 		++count;
 	}

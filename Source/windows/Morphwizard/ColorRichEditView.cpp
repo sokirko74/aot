@@ -82,8 +82,6 @@ void CColorRichEditView::SetAccentByIndex(int ind)
 	int lineInd = re.LineIndex();
 	int line_no = re.LineFromChar(lineInd);
 	ind += line_no; // delete '\r'
-	if(!is_lower_vowel(Paradigm[ind], m_morphWizard.m_Language) )
-		return;
 	int wordStart = ind;
 	{
 		while (wordStart > 0 && !isspace((BYTE) Paradigm[wordStart]))

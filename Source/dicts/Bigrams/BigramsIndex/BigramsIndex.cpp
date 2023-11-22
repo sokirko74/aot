@@ -163,7 +163,7 @@ int main(int argc, char *argv[]) {
         }
         fclose(fp);
     } catch (CExpc e) {
-        fprintf (stderr, "Exception: %s", e.what().c_str());
+        fprintf (stderr, "Exception: %s", e.what());
         return 1;
     }
 

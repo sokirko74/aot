@@ -276,7 +276,7 @@ void CMorphwizardView::ShowFoundParadigms()
 		std::string PrefixSet = GetWizard()->get_prefix_set(found_paradigms[i]);
 		if (!PrefixSet.empty())
 			Lemma = PrefixSet + '|' + Lemma;
-		RmlMakeLower(Lemma, GetWizard()->m_Language);
+		MakeLowerUtf8(Lemma);
 		m_FoundList.SetItemText(i, FindLemmaColumn, FromInnerEncoding(Lemma));
 
 		auto s = GetWizard()->get_pos_string(found_paradigms[i]) + " " + GetWizard()->get_grammem_string(found_paradigms[i]);
@@ -305,7 +305,7 @@ void CMorphwizardView::OnFind()
 		if (find_what == "") return;
 		ChangeHistory(find_what);
 		UpdateData(FALSE);
-		std::string find_what_u8 = utf16_to_utf8((wchar_t*)find_what);
+		std::string find_what_u8 = utf16_to_utf8(std::wstring(find_what));
 		Trim(find_what_u8);
 
 		CWizardProgressMeter meter(*GetWizard());
@@ -395,8 +395,6 @@ void CMorphwizardView::OnPredict()
 	{
 		UpdateData(TRUE);
 		m_FoundList.DeleteAllItems();
-		std::vector<lemma_iterator_t> curr_found_paradigms;
-
 		m_PredictedList.DeleteAllItems();
 
 		CString predict_what;
@@ -413,7 +411,7 @@ void CMorphwizardView::OnPredict()
 			Lemma = ToInnerEncoding(prefix + predict_what);
 		};
 
-		GetWizard()->find_lemm(Lemma.c_str(), false, curr_found_paradigms);
+		auto curr_found_paradigms = GetWizard()->find_lemm(Lemma.c_str(), false);
 		if (!curr_found_paradigms.empty())
 			AfxMessageBox(_T("The dictionary contains already this word!"));
 		m_LemmaToPredict = ToInnerEncoding(predict_what);
@@ -559,23 +557,23 @@ void CMorphwizardView::OnToolsSaveListFile()
 	if (D.DoModal() != IDOK) return;
 	FILE* fp = fopen(utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "wb");
 
-	for (int i = 0; i < found_paradigms.size(); i++)
+	for (auto& p: found_paradigms)
 	{
-		std::string lemma = GetWizard()->get_lemm_string_with_accents(found_paradigms[i]);
-		std::string PrefixSet = GetWizard()->get_prefix_set(found_paradigms[i]);
+		std::string lemma = GetWizard()->get_lemm_string_with_accents(p);
+		std::string PrefixSet = GetWizard()->get_prefix_set(p);
 		if (!PrefixSet.empty())
 			lemma = PrefixSet + '|' + lemma;
-		RmlMakeLower(lemma, GetWizard()->m_Language);
-		std::string common_grams = "* " + GetWizard()->get_grammem_string(found_paradigms[i]->second.GetCommonAncodeCopy());
+		MakeLowerUtf8(lemma);
+		std::string common_grams = "* " + GetWizard()->get_grammem_string(p->second.GetCommonAncodeCopy());
 
 		std::string s = lemma
 			+ ";"
 			+ common_grams
 			+ ";"
-			+ GetWizard()->get_pos_string(found_paradigms[i])
+			+ GetWizard()->get_pos_string(p)
 			+ " "
-			+ GetWizard()->get_grammem_string(found_paradigms[i]);
-		fprintf(fp, "%s\n", convert_to_utf8(s, GetWizard()->m_Language).c_str());
+			+ GetWizard()->get_grammem_string(p);
+		fprintf(fp, "%s\n", s.c_str());
 
 	}
 	fclose(fp);
@@ -726,11 +724,7 @@ void CMorphwizardView::OnToolsImport()
 					{
 						if (bTestMode)
 						{
-							std::string lemm;
-							CFlexiaModel Dummy1;
-							CAccentModel AccentModel;
-							BYTE Dummy;
-							GetWizard()->slf_to_mrd(P.m_SlfStr, lemm, Dummy1, AccentModel, Dummy, line_no_err);
+							GetWizard()->check_slf(P.m_SlfStr, line_no_err);
 						}
 						else
 						{
@@ -788,66 +782,53 @@ void CMorphwizardView::OnToolsImport()
 //----------------------------------------------------------------------------
 void CMorphwizardView::OnToolsSelectByFile()
 {
-	// TODO: Add your command handler code here
 	CFileDialog D(TRUE, _T("slf"), _T("paradigms.txt"));
 	if (D.DoModal() != IDOK) return;
-	FILE* fp = fopen(utf16_to_utf8((const TCHAR*)D.GetPathName()).c_str(), "rb");
-	if (!fp)
-	{
+	std::ifstream inp(D.GetPathName());
+	if (inp.is_open()) {
 		AfxMessageBox(_T("Cannot open file"));
 		return;
 	};
-	char buf[1000];
 	std::string strNotFound;
 	int ParadigmCount = 0;
 	found_paradigms.clear();
-	while (fgets(buf, 1000, fp))
+	std::string line;
+	while (std::getline(inp, line))
 	{
-		std::string Line = convert_from_utf8(buf, GetWizard()->m_Language);
-		Trim(Line);
-		if (Line.empty()) continue;
-		StringTokenizer tok(Line.c_str(), ";");
-		if (!tok())
+		Trim(line);
+		if (line.empty()) continue;
+		auto items = split_string(line, ';');
+		if (items.size() != 3)
 		{
-			std::string mess = std::string("cannot get lemma from ") + buf + std::string("; The format should be <Lemma>;<TypeGrammems>;<MorphPattern>");
+			std::string mess = std::string("cannot get lemma from ") + line + std::string("; The format should be <Lemma>;<TypeGrammems>;<MorphPattern>");
 			AfxMessageBox(FromInnerEncoding(mess));
 			break;
 		};
-		std::string Lemma = tok.val();
+		std::string Lemma = items[0];
+		std::string grams = items[1];
+		std::string PosStr = items[2];
 		Trim(Lemma);
 
-
-		if (!tok())
-		{
-			std::string mess = std::string("cannot get type grammem ") + buf + std::string("; The format should be <Lemma> <PartofSpeech> <Grammems>");
-			AfxMessageBox(FromInnerEncoding(mess));
-			break;
-		};
 		std::string TypeAncode;
 		{
-			std::string grams = tok.val();
 			Trim(grams);
-			if (grams != "*")
-				if (!GetWizard()->slf2ancode(grams, TypeAncode))
+			if (grams != "*") {
+				TypeAncode = GetWizard()->m_pGramTab->GetFirstAncodeByPattern(grams);
+				if (TypeAncode.empty())
 				{
 					std::string mess = std::string("cannot process type grammems ") + grams;
 					AfxMessageBox(FromInnerEncoding(mess));
 					break;
 				};
+			}
 		};
 
 
-		if (!tok())
-		{
-			std::string mess = std::string("cannot get morphological pattern ") + buf + std::string("; The format should be <Lemma>;<TypeGrammems>;<MorphPattern>");
-			AfxMessageBox(FromInnerEncoding(mess));
-			break;
-		};
 		std::string FirstCode;
 		{
-			std::string PosStr = tok.val();
 			Trim(PosStr);
-			if (!GetWizard()->slf2ancode(PosStr, FirstCode))
+			FirstCode = GetWizard()->m_pGramTab->GetFirstAncodeByPattern(PosStr);
+			if (FirstCode.empty())
 			{
 				std::string mess = std::string("cannot process morph. pattern ") + PosStr;
 				AfxMessageBox(FromInnerEncoding(mess));
@@ -855,28 +836,27 @@ void CMorphwizardView::OnToolsSelectByFile()
 			};
 		};
 
-		std::vector<lemma_iterator_t> curr_found_paradigms;
-		RmlMakeUpper(Lemma, GetWizard()->m_Language);
+		MakeUpperUtf8(Lemma);
 		bool bFound = false;
-		GetWizard()->find_lemm(Lemma.c_str(), true, curr_found_paradigms);
-		for (size_t i = 0; i < curr_found_paradigms.size(); i++)
+		auto curr_found_paradigms = GetWizard()->find_lemm(Lemma.c_str(), true);
+		for (auto& r: curr_found_paradigms)
 		{
-			std::string str_pos = GetWizard()->m_FlexiaModels[curr_found_paradigms[i]->second.m_FlexiaModelNo].get_first_code();;
+			std::string str_pos = GetWizard()->m_FlexiaModels[r->second.m_FlexiaModelNo].get_first_code();;
 
-			if (curr_found_paradigms[i]->second.GetCommonAncodeCopy() == TypeAncode)
+			if (r->second.GetCommonAncodeCopy() == TypeAncode)
 				if (FirstCode == str_pos)
-					if (std::find(found_paradigms.begin(), found_paradigms.end(), curr_found_paradigms[i]) == found_paradigms.end())
+					if (std::find(found_paradigms.begin(), found_paradigms.end(), r) == found_paradigms.end())
 					{
-						found_paradigms.push_back(curr_found_paradigms[i]);
+						found_paradigms.push_back(r);
 						bFound = true;
 					};
 		}
 		if (!bFound)
-			strNotFound += Format("Not found: %s\r\n", Line.c_str());
+			strNotFound += Format("Not found: %s\r\n", line.c_str());
 
 
 	};
-	fclose(fp);
+	inp.close();
 
 	FilterFoundParadigms();
 	ShowFoundParadigms();

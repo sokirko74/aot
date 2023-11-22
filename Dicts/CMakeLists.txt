@@ -34,7 +34,6 @@ add_subdirectory (EngCollocs)
 add_subdirectory (TimeRoss)
 add_subdirectory (Trigram)
 add_subdirectory (GerSynan)
-add_subdirectory (SimpleGrammar)
 add_subdirectory (SrcBinDict)
 
 add_custom_target ( 

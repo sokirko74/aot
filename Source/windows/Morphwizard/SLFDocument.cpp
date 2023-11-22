@@ -46,14 +46,14 @@ std::string CSLFDocument::GetSavedLemma()
 	if (t())
 	{
 		std::string Lemma = t.val();
-		RmlMakeUpper(Lemma, GetWizard()->m_Language);
+		MakeUpperUtf8(Lemma);
 		return Lemma.c_str();
 	}
 	return "";
 }
 
 //----------------------------------------------------------------------------
-std::string CSLFDocument::GetLemma() const
+std::string CSLFDocument::GetLemmaUtf8() const
 {
 	StringTokenizer t (m_pParent->ToInnerEncoding(m_ParadigmText).c_str(), " ");
 
@@ -61,11 +61,11 @@ std::string CSLFDocument::GetLemma() const
 	{
 		std::string s = t.val();
 		std::string Lemma;
-		for (size_t i=0; i<s.length(); i++)
-			if ((BYTE)s[i] != '\'')
-				Lemma += s[i];
+		for (auto c : s)
+			if ((BYTE)c != '\'')
+				Lemma += c;
 
-		RmlMakeUpper(Lemma, GetWizard()->m_Language);
+		MakeUpperUtf8(Lemma);
 
 		return Lemma;
 	}
@@ -74,7 +74,7 @@ std::string CSLFDocument::GetLemma() const
 
 std::string CSLFDocument::GetBase()  const 
 {
-	std::string Lemma = GetLemma();
+	std::string Lemma = GetLemmaUtf8();
 	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
 	{
 		const CFlexiaModel &old_par = GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo];
@@ -122,10 +122,9 @@ BOOL CSLFDocument::IsModified()
 	// Since we have a MDI environment,  the saved lemma can be deleted 
 	// while an editor for this  lemma is still open. In this case we should  say to the user
 	// that this paradigm "was modified" and propose to insert it into the dictionary.
-	std::vector<lemma_iterator_t> res;
-	GetWizard()->find_lemm(GetSavedLemma(), false, res);
-	for (size_t i=0; i<res.size(); i++)
-		if (res[i]->second == m_SaveParadigm)
+	auto res = GetWizard()->find_lemm(GetSavedLemma(), false);
+	for (auto& r: res)
+		if (r->second == m_SaveParadigm)
 			return FALSE;
 
 	return TRUE;
@@ -149,10 +148,8 @@ BOOL CSLFDocument::SaveModified()
 
 		//  try to parse a paradigm (waiting for an exception otherwise)
 		{
-			CFlexiaModel Dummy1;
-			CAccentModel AccentModel;
-			BYTE Dummy;
-			GetWizard()->slf_to_mrd (slf, lemm, Dummy1, AccentModel, Dummy, m_GotoLine);
+			GetWizard()->check_slf (slf, m_GotoLine);
+		
 			if (!GetWizard()->check_common_grammems(common_grammems))
 				throw CExpc("Bad type grammems");
 
@@ -165,12 +162,11 @@ BOOL CSLFDocument::SaveModified()
 		// deleting old lemma
 		if (!m_SaveParadigmText.IsEmpty())
 		{
-			std::vector<lemma_iterator_t> res;
-			GetWizard()->find_lemm(GetSavedLemma(), false, res);
-			for (size_t i=0; i<res.size(); i++)
-				if (res[i]->second == m_SaveParadigm)
+			auto res = GetWizard()->find_lemm(GetSavedLemma(), false);
+			for (auto& r: res)
+				if (r->second == m_SaveParadigm)
 				{
-					GetWizard()->remove_lemm(res[i]);
+					GetWizard()->remove_lemm(r);
 					break;
 				};
 		};
@@ -190,7 +186,7 @@ BOOL CSLFDocument::SaveModified()
 	{
 		auto mess = Format("%s at line %i\nExit without save?", e.what(), m_GotoLine);
 
-		switch (AfxMessageBox (GetWizard()->FromRMLEncoding(mess).c_str(), MB_OKCANCEL) )
+		switch (AfxMessageBox (utf8_to_utf16(mess).c_str(), MB_OKCANCEL) )
 		{
 		   case IDCANCEL:return FALSE;  	  	   
 		   case IDOK: return TRUE;
@@ -225,10 +221,10 @@ void CSLFDocument::update_saved_paradigm()
 	m_SaveCommonGrammems = m_CommonGrammems;	
 	m_SavePrefixes = m_Prefixes;	
 	if (m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
-		m_ParadigmComments = GetWizard()->FromRMLEncoding(GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo].m_Comments).c_str();
+		m_ParadigmComments = utf8_to_utf16(GetWizard()->m_FlexiaModels[m_Paradigm.m_FlexiaModelNo].m_Comments).c_str();
 
 	if (m_ParadigmText.GetLength() > 0)
-		SetPathName(GetWizard()->FromRMLEncoding(GetSavedLemma()).c_str());
+		SetPathName(utf8_to_utf16(GetSavedLemma()).c_str());
 }
 
 //----------------------------------------------------------------------------

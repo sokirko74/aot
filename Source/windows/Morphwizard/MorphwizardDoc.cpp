@@ -67,7 +67,7 @@ BOOL CMorphwizardDoc::DoFileSave()
 	}
 	catch(CExpc e)
 	{
-		AfxMessageBox(GetWizard()->FromRMLEncoding (e.what()).c_str());
+		AfxMessageBox(utf8_to_utf16(e.what()).c_str());
 		return FALSE;
 	}
 	return TRUE;
@@ -217,7 +217,7 @@ BOOL CMorphwizardDoc::SaveModified()
 		{
 			m_slfDocs.GetNextAssoc(pos,doc,doc1);
 			if( doc->IsModified() )
-				s += CString(m_Wizard.FromRMLEncoding(doc->GetLemma()).c_str()) + _T(",\n");
+				s += CString(utf8_to_utf16(doc->GetLemmaUtf8()).c_str()) + _T(",\n");
 		}
 	}
 

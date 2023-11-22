@@ -1,4 +1,4 @@
-#include "www/Bigrams/Text2Bigrams/MergeFiles.h"
+#include "../MergeFiles.h"
 #include <streambuf>
 
 std::string read_file(std::string fileName) {

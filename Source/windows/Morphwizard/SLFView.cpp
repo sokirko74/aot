@@ -494,8 +494,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 	if (!InputBox(_T("Input prototype lemma or paradigm number: "), ss))
 		return;
 	std::string s = ToInnnerEncoding(ss);
-
-	RmlMakeUpper(s, GetWizard()->m_Language);
+	MakeUpperUtf8(s);
 	Trim(s);
 	if (s.empty()) return;
 
@@ -506,8 +505,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 	}
 	else
 	{
-		std::vector<lemma_iterator_t> found_paradigms;
-		GetWizard()->find_lemm(s.c_str(), false, found_paradigms);
+		auto found_paradigms = GetWizard()->find_lemm(s.c_str(), false);
 		if (found_paradigms.empty())
 		{
 			ErrorMessage(Format("% is not found", s.c_str()));
@@ -521,7 +519,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 		return;
 	}
 
-	std::string Lemma = GetDocument()->GetLemma();
+	std::string Lemma = GetDocument()->GetLemmaUtf8();
 
 	const CFlexiaModel& new_par = GetWizard()->m_FlexiaModels[ParadigmNo];
 	if (GetDocument()->m_Paradigm.m_FlexiaModelNo != UnknownParadigmNo)
@@ -530,8 +528,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 
 		std::string new_flexia = new_par.get_first_flex();
 		std::string lemma_suffix = Lemma.substr(Lemma.length() - new_flexia.length());
-		RmlMakeUpper(lemma_suffix, GetWizard()->m_Language);
-
+		MakeUpperUtf8(lemma_suffix);
 		if (new_flexia != lemma_suffix)
 		{
 			ErrorMessage("Your choice will change lemma of the edited word. Is is not allowed.");
@@ -540,7 +537,7 @@ void CSLFView::OnBnClickedChangeParadigm()
 	};
 	GetWizard()->change_prd_info(GetDocument()->m_Paradigm, Lemma, ParadigmNo, UnknownParadigmNo, true);
 	auto paradigm = GetWizard()->mrd_to_slf(Lemma.c_str(), new_par, GetDocument()->m_Paradigm.m_AccentModelNo, GetDocument()->m_Paradigm.m_AuxAccent, 50);
-	GetDocument()->m_ParadigmText = GetWizard()->FromRMLEncoding(paradigm).c_str();
+	GetDocument()->m_ParadigmText = utf8_to_utf16(paradigm).c_str();
 	UpdateData(FALSE);
 	m_pRichView->RedrawLines();
 
@@ -686,6 +683,8 @@ void CSLFView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeac
 //----------------------------------------------------------------------------
 void CSLFView::OnBnClickedFixAccentBtn()
 {
+	AfxMessageBox(_T("to be reimplented in utf8..."));
+	/*
 	CRichEditCtrl& richEdit = GetRichEditCtrl();
 	long nStartChar, nEndChar;
 	richEdit.GetSel(nStartChar, nEndChar);
@@ -796,5 +795,6 @@ void CSLFView::OnBnClickedFixAccentBtn()
 			redrawer.RedrawLine(i);
 		}
 	}
+	*/
 }
 
