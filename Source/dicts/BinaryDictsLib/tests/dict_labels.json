@@ -1,0 +1,11 @@
+{
+    "adj": {
+        "type": "LI_PART_OF_SPEECH",
+        "rml_id": 1
+    },
+    "бран": {
+        "type": "LI_NONE",
+        "norm": false,
+        "rml_id": 2
+    }
+}

@@ -71,8 +71,8 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 		rec &r = rec_vec[i];
 		uint32_t index = std::lower_bound(rest_vec.begin(), rest_vec.end(), r.r) - rest_vec.begin();
 
-		DwordVector id1 = MorphHolderRus.GetLemmaIds(r.w1);
-		DwordVector id2 = MorphHolderRus.GetLemmaIds(r.w2);
+		DwordVector id1 = MorphHolderRus.GetLemmaIds(r.w1, true);
+		DwordVector id2 = MorphHolderRus.GetLemmaIds(r.w2, true);
 		for(int i1 = 0; i1 < id1.size(); i1++)
 			for(int i2 = 0; i2 < id2.size(); i2++){
 				out.write((char*)&(id1[i1]), sizeof(uint32_t));

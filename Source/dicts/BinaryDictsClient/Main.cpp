@@ -108,9 +108,8 @@ int main()
 			if(slash >= 0 && slash < s.size()){
 				std::string eng = s.substr(0, slash);
 				std::string rus = s.substr(slash+1, s.size());
-				DwordVector e, r;
-				string_to_id(eng.c_str(), e, EnglishHolder);
-				string_to_id(rus.c_str(), r, RussianHolder);
+				DwordVector e = EnglishHolder.GetLemmaIds(eng);
+				DwordVector r = RussianHolder.GetLemmaIds(rus);
 				for(int i = 0; i < e.size(); i++)
 					for(int j = 0; j < r.size(); j++){
 						if(Dict.HavePair(e[i], r[j])){
@@ -158,8 +157,7 @@ int main()
 			for(j = 0; j < count; j++){
 				//!!! получаем перевод
 				long to_id = pairs.GetId(j);
-				std::string to;
-				TransHolder.id_to_string(to_id, to);
+				std::string to = TransHolder.id_to_string(to_id);
 
 				CFormInfo TransFormInfo;
 				if (TransHolder.m_pLemmatizer->CreateParadigmFromID(to_id, TransFormInfo))

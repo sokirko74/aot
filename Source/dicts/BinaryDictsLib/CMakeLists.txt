@@ -15,3 +15,5 @@ target_link_libraries(BinaryDictsLib
     LemmatizerLib
 )
 
+
+add_subdirectory(tests)

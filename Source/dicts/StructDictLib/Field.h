@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Signat.h"
-#include "morph_dict/common/json.h"
-
+#include "morph_dict/common/rapidjson.h"
 
 
 struct  CField  
@@ -19,7 +18,6 @@ struct  CField
 
 
 	   CField& operator = (const CField& _F);
-       nlohmann::json GetFieldJson() const;
-       void ReadFromJson(nlohmann::json& js);
+       void ReadFromJson(const rapidjson::Value& js);
 };
 

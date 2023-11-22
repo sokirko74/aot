@@ -13,8 +13,8 @@ int main()
 	d.Load();
 	CMorphanHolder RussianHolder;
 	RussianHolder.LoadMorphology(morphRussian);
-	auto ids1 = RussianHolder.GetLemmaIds("застигать");
-	auto ids2 = RussianHolder.GetLemmaIds("застигнуть");
+	auto ids1 = RussianHolder.GetLemmaIds("застигать", false);
+	auto ids2 = RussianHolder.GetLemmaIds("застигнуть", false);
 	std::set<uint32_t> perf_ids;
 	for (auto id1 : ids1) {
 		DwordVector res;

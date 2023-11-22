@@ -33,28 +33,18 @@ void CDomen::MakeFree() {
 }
 
 
-nlohmann::json CDomen::WriteToJson()  const {
-    nlohmann::json js;
-    js["dom_ident"] = DomStr;
-    js["category"] = Source;
-    js["is_delim"] = IsDelim;
-    js["is_free"] = IsFree;
-    if (!DomainParts.empty())
-        js["parts"] = DomainParts;
-    return js;
-    
-}
-
-void CDomen::ReadFromJson(TItemContainer* parent, BYTE domNO, nlohmann::json& js) {
+void CDomen::ReadFromJson(BYTE domNO, const rapidjson::Value& js) {
     DomNo = domNO;
-    js.at("dom_ident").get_to(DomStr);
-    js.at("category").get_to(Source);
-    js.at("is_delim").get_to(IsDelim);
-    js.at("is_free").get_to(IsFree);
-    if (js.find("parts") != js.end()) {
-        js.at("parts").get_to(DomainParts);
+    DomStr = js["dom_ident"].GetString();
+    Source = js["category"].GetInt();
+    IsDelim = js["is_delim"].GetBool();
+    IsFree = js["is_free"].GetBool();
+    DomainParts.clear();
+    if (js.HasMember("parts")) {
+        for (auto& a : js["parts"].GetArray()) {
+            DomainParts.push_back(a.GetString());
+        }
     }
- 
 }
 
 void CDomen::InitDomainParts(const std::unordered_map<std::string, BYTE>& ident2ptr) {

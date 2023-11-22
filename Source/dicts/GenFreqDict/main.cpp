@@ -57,8 +57,8 @@ small_dict_t read_small_dict(const char* filename) {
 		auto items = split_string(line, '\t');
 		auto r = items[0];
 		auto e = items[1];
-		DwordVector r_id = MorphHolderRus.GetLemmaIds(r);
-		DwordVector e_id = MorphHolderEng.GetLemmaIds(e);
+		DwordVector r_id = MorphHolderRus.GetLemmaIds(r, true);
+		DwordVector e_id = MorphHolderEng.GetLemmaIds(e, true);
 		for (auto r : r_id)
 			for (auto e : e_id)
 				smallDictSet.insert(std::make_pair(r, e));

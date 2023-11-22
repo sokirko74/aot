@@ -21,6 +21,8 @@ class CSetOfWordPairs;
 
 extern part_of_speech_t get_simplified_part_of_speech(BYTE flag, MorphLanguageEnum langua);
 
+class CMorphanHolder;
+
 
 class CBinaryDictionary
 {
@@ -43,5 +45,7 @@ public:
 	bool HavePair (long id1, long id2) const;
 	CSetOfWordPairs TranslateIndirect(long id) const;
 	CSetOfWordPairs TranslateDirect(long id) const;
-	void Load();
+	void Load(std::string path="", std::string labels_path ="");
 };
+
+extern void BuildBinaryDict(const CMorphanHolder* rus, const CMorphanHolder* eng, std::string input_path, std::string output_path);

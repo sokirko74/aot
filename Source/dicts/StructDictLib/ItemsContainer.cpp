@@ -87,14 +87,17 @@ void TItemContainer::BuildDomens(std::string path) {
     if (!inp.good()) {
         throw CExpc("cannot open file %s", path.c_str());
     }
-    auto domains = nlohmann::json::parse(inp);
+    rapidjson::Document doc;
+    rapidjson::IStreamWrapper isw(inp);
+    doc.ParseStream(isw);
+
     std::unordered_map<std::string, BYTE>  doms_idents;
-    for (auto d: domains) {
+    for (auto& d: doc.GetArray()) {
         BYTE dom_no = (BYTE)m_Domens.size();
         CDomen T;
-        T.ReadFromJson(this, dom_no, d);
-        m_Domens.emplace_back(T);
+        T.ReadFromJson(dom_no, d);
         doms_idents[T.GetDomStr()] = dom_no;
+        m_Domens.emplace_back(T);
     }
     for (auto& d : m_Domens) {
         d.InitDomainParts(doms_idents);
@@ -228,8 +231,10 @@ void TItemContainer::BuildFields(std::string path) {
     if (!inp.good()) {
         throw CExpc("cannot open file %s", path.c_str());
     }
-    auto fields = nlohmann::json::parse(inp);
-    for (auto f_js : fields) {
+    rapidjson::Document doc;
+    rapidjson::IStreamWrapper isw(inp);
+    doc.ParseStream(isw);
+    for (const auto& f_js : doc.GetArray()) {
         CField F;
         F.ReadFromJson(f_js);
         for (auto& s : F.m_Signats) {

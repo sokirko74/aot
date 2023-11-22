@@ -4,9 +4,10 @@
 #include "morph_dict/common/bserialize.h"
 #include "fstream"
 
-#include "morph_dict/common/json.h"
+#include "morph_dict/common/rapidjson.h"
 #include "morph_dict/agramtab/RusGramTab.h"
 #include "morph_dict/agramtab/EngGramTab.h"
+#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 
 
 inline size_t get_size_in_bytes(const WordPair &t) {
@@ -74,31 +75,41 @@ std::string CBinaryDictionary::get_dict_path() const {
     return std::string(GetRegistryString("Software\\Dialing\\ENGLISH_RUSSIAN_DICT\\DictPath"));
 }
 
-std::unordered_set<BYTE> get_bad_labels() {
-    auto labels_path = GetRegistryString("DictLabels");
+std::unordered_set<BYTE> get_bad_labels(std::string labels_path) {
     LOGD << "Reading binary dict from %s " << labels_path;
     std::ifstream inp;
     inp.open(labels_path);
     if (!inp.good()) {
         throw CExpc("cannot open %s", labels_path.c_str());
     }
-    nlohmann::json js = nlohmann::json::parse(inp);
+    rapidjson::Document doc;
+    rapidjson::IStreamWrapper isw(inp);
+    doc.ParseStream(isw);
+
     std::unordered_set<BYTE> bad_labels;
-    for (auto& [key, val] : js.items()) {
-        if (!val.value("norm", true)) {
-            BYTE id = val["rml_id"];
+    for (auto& it = doc.MemberBegin(); it != doc.MemberEnd(); ++it) {
+        auto& val = it->value;
+        if (val.HasMember("norm") && !val["norm"].GetBool()) {
+            BYTE id = val["rml_id"].GetInt();
             bad_labels.insert(id);
         }
     }
     return bad_labels;
 }
 
-void CBinaryDictionary::Load() {
-    bad_labels = get_bad_labels();
-    LOGD << "Reading binary dict from %s " << get_dict_path();
-    ReadVector(get_dict_path(), eng_vec);
+void CBinaryDictionary::Load(std::string path, std::string labels_path) {
+    if (path.empty()) {
+        path = get_dict_path();
+    }
+    if (labels_path.empty()) {
+        labels_path = GetRegistryString("DictLabels");
+    }
+    bad_labels = get_bad_labels(labels_path);
+
+    LOGD << "Reading binary dict from %s " << path;
+    ReadVector(path, eng_vec);
     if (eng_vec.empty())
-        throw CExpc(Format("binary dict %s is empty", get_dict_path().c_str()));
+        throw CExpc(Format("binary dict %s is empty", path.c_str()));
 
     std::sort(eng_vec.begin(), eng_vec.end(), LessEng1);
 
@@ -133,7 +144,6 @@ bool CBinaryDictionary::IsNormalLanguage(long pair_index, bool is_direct) const 
 }
 
 CSetOfWordPairs CBinaryDictionary::TranslateDirect(long id) const {
-    // TODO: Add your implementation code here
     typedef std::vector<WordPair>::const_iterator iter;
     WordPair wp;
     wp.eng = id;
@@ -177,3 +187,80 @@ bool CBinaryDictionary::HavePair(long id1, long id2) const {
     }
     return false;
 }
+
+
+DwordVector GetParadigmIdsByNormAndPos(const CMorphanHolder& holder, std::string& str, int part_of_speech)
+{
+    std::vector<CFormInfo> ParadigmCollection;
+    DwordVector res;
+    std::string word_s8 = convert_from_utf8(str.c_str(), holder.m_CurrentLanguage);
+        if (!holder.m_pLemmatizer->CreateParadigmCollection(true, word_s8, true, false, ParadigmCollection))
+            throw CExpc("Cannot lemmatize %s", str.c_str());
+
+    for (auto& p : ParadigmCollection)
+    {
+        if (!p.m_bFound) return res;
+        auto code = p.GetAncode(0).substr(0, 2);
+        if (holder.m_pGramTab->GetPartOfSpeech(code.c_str()) == part_of_speech) {
+            res.push_back(p.GetParadigmId());
+        }
+    }
+
+    return res;
+}
+
+void make_bin(const CMorphanHolder* rus, const CMorphanHolder* eng, std::string& r, std::string& e, BYTE d[5], std::ostream& out) {
+    auto pos_r = get_simplified_part_of_speech(d[0], morphRussian);
+    auto pos_e = get_simplified_part_of_speech(d[0], morphEnglish);
+    DwordVector r_id = GetParadigmIdsByNormAndPos(*rus, r, pos_r);
+    DwordVector e_id = GetParadigmIdsByNormAndPos(*eng, e, pos_e);
+    if (pos_r == ADJ_FULL && e_id.empty()) {
+        // московский -> Moscow
+        e_id = GetParadigmIdsByNormAndPos(*eng, e, eNOUN);
+    }
+    if (pos_r == NOUN && r_id.empty()) {
+        // клиентский -> client
+        r_id = GetParadigmIdsByNormAndPos(*rus, r, ADJ_FULL);
+    }
+
+    for (auto id1 : r_id) {
+        for (auto id2 : e_id) {
+            //std::cout << convert_to_utf8(r, morphRussian) << " " << e << " " << id1 << " " << id2 << "\n";
+            out.write((char*)&(id1), sizeof(uint32_t));
+            out.write((char*)&(id2), sizeof(uint32_t));
+            out.write((char*)d, 5);
+        }
+    }
+}
+
+void BuildBinaryDict(const CMorphanHolder* rus, const CMorphanHolder* eng, std::string input_path, std::string output_path) {
+    std::ifstream inp;
+    inp.open(input_path);
+
+    std::ofstream out;
+    out.open(output_path, std::ios::binary);
+
+    int line_no = 0;
+    std::string line;
+    while (std::getline(inp, line)) {
+        line_no++;
+        Trim(line);
+        auto items = split_string(line, ' ');
+        if (items.size() != 7) {
+            throw CExpc(" Bad format at line %s (line no = %i)", line.c_str(), line_no);
+        }
+        auto r = items[0];
+        auto e = items[1];
+        BYTE d[data_length];
+        for (size_t i = 2; i < items.size(); ++i) {
+            int u = atoi(items[i].c_str());
+            assert(0 < u < 256);
+            d[i - 2] = u;
+        }
+        make_bin(rus, eng, r, e, d, out);
+        //if (line_no % 1000 == 0) std::cerr << line_no << '\r';
+    }
+    out.close();
+    inp.close();
+}
+

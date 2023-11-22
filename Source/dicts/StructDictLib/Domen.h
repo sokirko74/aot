@@ -7,8 +7,9 @@
 #include "common/cortege.h"
 
 #include "morph_dict/common/utilit.h"
-#include "morph_dict/common/json.h"
+#include "morph_dict/common/rapidjson.h"
 #include "StructDictConsts.h"
+#include <unordered_map>
 
 
 struct TDomenItem {
@@ -60,9 +61,7 @@ public:
 
     void MakeFree();
 
-    nlohmann::json WriteToJson() const;
-
-    void ReadFromJson(TItemContainer* parent, BYTE domNO, nlohmann::json& js);
+    void ReadFromJson(BYTE domNO, const rapidjson::Value& j);
 
     void InitDomainParts(const std::unordered_map<std::string, BYTE>& ident2ptr);
 
