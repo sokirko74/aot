@@ -406,11 +406,11 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     GetHomonym(ClauseNo, WordNo, H);
 
 
-    std::string S = H.m_strLemma;
+    std::string S = H.GetLemma();
 
     EngRusMakeLower(S);
     unsigned short UnitNo = ErrUnitNo;
-    CRusSemWord SemWord(WordNo, H.m_strLemma);
+    CRusSemWord SemWord(WordNo, H.GetLemma());
     SemWord.m_SynWordNo = WordNo;
     SemWord.m_ParadigmId = H.m_lPradigmID;
     std::string TypeAncode;
@@ -663,7 +663,7 @@ CRusSemNode CRusSemStructure::CreateNode(const CRelationsIterator *RelIt, long G
 
         CSynHomonym H(const_cast<CSentence *> (m_piSent));
         GetHomonym(ClauseNo, j, H);
-        Lemma = H.m_strLemma;
+        Lemma = H.GetLemma();
         CRusSemWord SemWord(j, Lemma);
         SemWord.m_SynWordNo = j;
         SemWord.m_ParadigmId = H.m_lPradigmID;

@@ -224,7 +224,8 @@ void processOneFile(CSemStructureBuilder& SemBuilder, bool printVisual, bool pri
         t.Result = processText(SemBuilder, printVisual, printTranslation, t.Text);
     }
     PLOGI << "processed " << cnt << " sentences";
-    base.write_test_cases(outputFile);
+    std::ofstream outp(outputFile, std::ios::binary);
+    base.write_test_cases(outp);
 
 }
 

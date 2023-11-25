@@ -102,7 +102,7 @@ bool CGraphmatFile::LoadDicts ()
 			try {
 				pDicts->m_pOborDictionary.m_Pointer->Load(Path.c_str());
 			}
-			catch (std::exception e) {
+			catch (std::exception& e) {
 				delete pDicts;
 				m_LastError = "Cannot load oborots " + std::string(e.what());
 				return false;

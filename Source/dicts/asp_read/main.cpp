@@ -14,7 +14,7 @@ void get_id(CMorphanHolder& holder, std::string str, DwordVector &res, bool is_l
 	
     std::vector<CFormInfo> ParadigmCollection;
 
-	std::string word_s8 = convert_from_utf8(str, holder.m_CurrentLanguage);
+	std::string word_s8 = convert_from_utf8(str.c_str(), holder.m_CurrentLanguage);
 	if (!holder.m_pLemmatizer->CreateParadigmCollection(false, word_s8, false, false,  ParadigmCollection))
 		throw CExpc("Cannot lemmatize %s by Russian lemmatizer" , str.c_str());
 
@@ -28,7 +28,7 @@ void get_id(CMorphanHolder& holder, std::string str, DwordVector &res, bool is_l
 		bool is_perfective = (gr & _QM(rPerfective)) != 0;
 		bool is_nonperfective = (gr & _QM(rNonPerfective)) != 0;
 		std::string norm = p.GetWordForm(0);
-		EngRusMakeLower(norm)
+		EngRusMakeLower(norm);
 		if (norm != word_s8) continue;
 		if(is_left && is_nonperfective || !is_left && is_perfective)
 			res.push_back(p.GetParadigmId());

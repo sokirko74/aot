@@ -191,13 +191,13 @@ void TRMLHttpServer::OnHttpRequest(evhttp_request *req) {
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;
 	}
-	catch (std::invalid_argument e) {
+	catch (std::invalid_argument& e) {
 		std::string error = Format("Error: std::string to number conversion failed, Request: %s\n", uri);
 		TRMLHttpServer::LogMessage(error.c_str());
 		SendReply(req, HTTP_BADREQUEST, nullptr);
 		return;
 	}
-	catch (std::exception e) {
+	catch (std::exception& e) {
 		std::string error = Format("Error: %s, Request: %s\n", e.what(), uri);
 		TRMLHttpServer::LogMessage(error.c_str());
 		SendReply(req, HTTP_BADREQUEST, nullptr);

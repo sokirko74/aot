@@ -53,8 +53,11 @@ small_dict_t read_small_dict(const char* filename) {
 	std::ifstream inp(filename);
 	assert(inp.is_open());
 	std::string line;
-	while (std::getline(inp, line) {
+	while (std::getline(inp, line)) {
 		auto items = split_string(line, '\t');
+		if (items.size() != 2) {
+			throw CExpc("bad format in line %s in file %s", line.c_str(), filename);
+		}
 		auto r = items[0];
 		auto e = items[1];
 		DwordVector r_id = MorphHolderRus.GetLemmaIds(r, true);
@@ -69,7 +72,7 @@ small_dict_t read_small_dict(const char* filename) {
 }
 
 
-CFormInfo id_to_paradigm(CMorphanHolder& holder, long id) const
+CFormInfo id_to_paradigm(CMorphanHolder& holder, long id)
 {
 	CFormInfo Res;
 	if (!holder.m_pLemmatizer->CreateParadigmFromID(id, Res))
@@ -123,12 +126,13 @@ void update_word_map_by_file(std::string filename, std::map<word_pair, int>& wor
 	std::ifstream in(filename);
 	assert(in.is_open());
 	int sent_no = 0;
-	while (true) {
-		std::string r_str, e_str;
-		std::getline(in, r_str);
-		std::getline(in, e_str);
-		StringTokenizer r_tok(buff[0], " \t");
-		StringTokenizer e_tok(buff[1], " \t");
+	std::string r_str, e_str;
+	while (std::getline(in, r_str)) {
+		if (!std::getline(in, e_str)) {
+			throw CExpc("cannot read the last English sentence in {}", filename);
+		}
+		StringTokenizer r_tok(r_str.c_str(), " \t");
+		StringTokenizer e_tok(e_str.c_str(), " \t");
 		std::vector<uint32_t> e_id, r_id;
 		const char* word;
 		while ((word = r_tok()))
@@ -254,7 +258,7 @@ int  main(int argc, char **argv)
 	{
 		return mymain(argc, argv);
 	}
-	catch (std::exception e)
+	catch (std::exception& e)
 	{
 		std::cerr << "exception occurred: " << e.what() << "\n";
 		return 1;

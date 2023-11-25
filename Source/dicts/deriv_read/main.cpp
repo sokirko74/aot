@@ -35,18 +35,17 @@ void handle(std::istream &in, std::ostream &out, StringSet &rest_set, std::vecto
 	StringSet little_roots;
 	little_roots.insert("ад");
 	little_roots.insert("юг");
-	little_roots.insert("ют"));
+	little_roots.insert("ют");
 	little_roots.insert("як");
 	little_roots.insert("ям");
 	std::string line;
-	while(std::getline(in, line){
+	while(std::getline(in, line)){
 		Trim(line);
 		StringTokenizer tok(line.c_str(), ";");
 		std::string left = tok();
 		std::string right = tok();
 		Trim(left);
 		Trim(right);
-		CountLettersInUtf8()
 		if(CountLettersInUtf8(left) < 3 || CountLettersInUtf8(right) < 3) {
 			if(little_roots.count(left) <= 0) continue;
 		}
@@ -258,7 +257,7 @@ int main(int argc, char **argv)
 		
 		return 0;
 	}
-	catch (std::exception e)
+	catch (std::exception& e)
 	{
 		fprintf (stderr, "exception occurred: %s!\n", e.what());
 		return 1;

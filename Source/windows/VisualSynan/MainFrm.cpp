@@ -198,6 +198,6 @@ bool CMainFrame::LoadSyntaxByLanguage(MorphLanguageEnum t)
 
 CString FromRMLEncode(std::string s)
 {
-	return utf8_to_utf16(convert_to_utf8(s, GlobalLanguage)).c_str();
+	return utf8_to_utf16(s).c_str();
 }
 

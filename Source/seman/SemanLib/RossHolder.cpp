@@ -99,10 +99,11 @@ bool CRossHolder::HasCX(uint16_t UnitNo, const std::string CX, const std::string
 	return HasItem(UnitNo, "SF", CX, DomStr, 0, 0);
 };
 
+const std::string empty_string;
 const std::string& CRossHolder::GetDomItemStrWrapper(dom_item_id_t item_id) const
 {
 	if (is_null(item_id))
-		return "";
+		return empty_string;
 	else
 		return  m_Ross.GetDomItemStr(item_id);
 };

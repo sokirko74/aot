@@ -44,7 +44,7 @@ BOOL CVisualWord::Init(const CSynWord& piWord, const CSentence& piSentence)
 			const CSynHomonym& piHomonym = piWord.GetSynHomonym(i);
 
 			CVisualHomonym* pHomonym = new CVisualHomonym;
-			pHomonym->m_strLemma = FromRMLEncode(piHomonym.m_strLemma);
+			pHomonym->m_strLemma = FromRMLEncode(piHomonym.GetLemma());
 			pHomonym->m_strCommonGrammems = FromRMLEncode(piSentence.GetOpt()->GetGramTab()->GrammemsToStr(piHomonym.m_TypeGrammems));
 			pHomonym->m_strPOS = FromRMLEncode(piHomonym.GetPartOfSpeechStr());
 

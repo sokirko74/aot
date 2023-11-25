@@ -1570,7 +1570,6 @@
 бумага	document
 бумажник	wallet
 бумажник	pocket­book
-бумажный	
 бумазея	flannelette
 бунт	riot
 бунтовать	riot
@@ -2668,11 +2667,9 @@
 возмещение	compensation
 возмещение	recompense
 возмещение	indemnity
-возможно	it is possible
 возможно	possibly
 возможно	perhaps
 возможно	maybe
-возможно	as	as possible
 возможность	possibility
 возможность	opportunity
 возможность	chance
@@ -4193,7 +4190,6 @@
 гвалт	hubbub
 гвалт	uproar
 гвардеец	guardsman
-гвоздика	
 гвоздика	pink
 гвоздика	carnation
 гвоздика	clove
@@ -4313,7 +4309,6 @@
 глаз	eye
 глазеть	stare
 глазеть	gape
-глазок	
 глазок	spy­hole
 глазурь	icing
 глазурь	glaze
@@ -5745,7 +5740,6 @@
 дребезжать	rattle
 дребезжать	jingle
 древесина	wood
-древко	
 древко	small flag­pole
 древний	ancient
 древний	old
@@ -6007,7 +6001,6 @@
 жалоба	complaint
 жалобный	plaintive
 жалованье	salary
-жаловаться	
 жаловаться	complain
 жалостливый	pitiful
 жалость	pity
@@ -11243,7 +11236,6 @@
 метрополия	parent state
 метрополия	mother country
 мех	fur
-мех	
 мех	wineskin
 механизация	mechanization
 механизировать	mechanize
@@ -12180,7 +12172,6 @@
 наклонный	inclined
 наклонный	sloping
 наковальня	anvil
-наколоть	
 наколоть	pin
 наколоть	prick
 наколоть	chop
@@ -12439,7 +12430,6 @@
 нарочно	on purpose
 нарочно	purposely
 нарочно	for fun
-наружное	
 наружное	for external use
 наружное	not to be taken
 наружность	appearance
@@ -15374,7 +15364,6 @@
 опутывать	entangle
 опухнуть	swell
 опухоль	swelling
-опушка	
 опушка	edge of forest
 опыление	pollination
 опылить	pollinate
@@ -16018,7 +16007,6 @@
 открыться	come to light
 открыться	confide
 открыться	open one's heart
-откуда	where	from
 откуда	whence
 откуда­нибудь	from somewhere or other
 откупорить	uncork
@@ -16771,7 +16759,6 @@
 партер	the stalls
 партизан	partisan
 партизан	guerilla
-партийность	
 партийность	Party­membership
 партийный	Party member of the Party
 партитура	score
@@ -17036,7 +17023,6 @@
 переговорить	discuss
 переговоры	negotiations
 переговоры	talks
-перегон	
 перегон	stage
 перегонка	distillation
 перегореть	burn out
@@ -17589,10 +17575,8 @@
 пианистка	pianist
 пивная	pub
 пивная	tavern
-пиво	beer
 пиво	ale
 пиджак	coat
-пика	
 пика	lance
 пика	spear
 пикантный	piquant
@@ -18963,7 +18947,6 @@
 помесячный	monthly
 помёт	dung
 помёт	excrement
-помёт	
 помёт	litter
 помёт	brood
 помёт	farrow
@@ -19192,7 +19175,6 @@
 поровну	in equal parts
 порог	threshold
 порог	weir
-порода	
 порода	breed
 порода	kind
 порода	rock
@@ -20700,7 +20682,6 @@
 проводить	see smb off
 проводить	conduct
 проводка	wiring
-проводник	
 проводник	guide
 проводник	guard
 проводник	conductor
@@ -22469,7 +22450,6 @@
 распылить	scatter
 распылиться	disperse
 распылиться	get scattered
-рассадить	
 рассадить	plant out
 рассадить	seat
 рассадить	provide seats
@@ -26411,8 +26391,6 @@
 телохранитель	body­guard
 телятина	veal
 телячий	calf calve's
-тем	
-тем	the
 тем	so much the
 тема	subject
 тема	topic
@@ -28258,7 +28236,6 @@
 утрамбовывать	ram
 утрата	loss
 утрачивать	lose
-утренник	
 утренник	matinee
 утрировать	exaggerate
 утро	morning
@@ -30114,7 +30091,6 @@
 ярус	tier
 ярый	ardent
 ясень	ash­tree
-ясли	
 ясно	clearly
 ясный	clear
 ястреб	hawk

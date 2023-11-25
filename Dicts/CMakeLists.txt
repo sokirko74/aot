@@ -38,7 +38,7 @@ add_subdirectory (SrcBinDict)
 
 add_custom_target ( 
     GermanGLRSynan
-    DEPENDS GerNPGLRSynan ExampleGLRSynan PersonGLRSynan
+    DEPENDS GerSynanGrammar GetPostMorphGrammar
 )
 
 

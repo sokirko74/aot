@@ -1,4 +1,4 @@
-#include "german_person.grm"
+#include "person.grm"
 #include "prepositions.grm"
 #include "numbers.grm"
 
