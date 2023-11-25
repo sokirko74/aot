@@ -78,7 +78,6 @@ struct CInputSentence
 
 };
 
-
 struct CInputSentenceGLR : public CInputSentence
 {
 	// this slot should be updated during processing the whole text
@@ -92,10 +91,10 @@ struct CInputSentenceGLR : public CInputSentence
 	CInputSentenceGLR(const CAgramtab*	pGramTab):
 		CInputSentence(pGramTab)	{	};
 
-	void	ProcessRestart (const CWorkGrammar& G, bool bDumpOccurs);
-	void	ProcessFull (const CWorkGrammar& G);
+	void	ProcessRestart (const CWorkGrammar& G);
+	std::vector<CFoundEntity>	ProcessFull (const CWorkGrammar& G);
 	void	DeleteHomonyms (const std::vector< COccurrence>& Occurrences, const CWorkGrammar& WorkGrammar);
-	void	AddDescriptors (const std::vector< COccurrence>& Occurrences, const CWorkGrammar& Grammar, bool bDumpOccurs);
+	void	AddDescriptors (const std::vector< COccurrence>& Occurrences, const CWorkGrammar& Grammar);
 	void	DumpOccurrences (const CWorkGrammar& G, const std::vector< COccurrence>& Occurrences) const;
 	void	BuildTerminalSymbolsByWord(const CWorkGrammar& G, CInputWord& W);
 private:
@@ -227,13 +226,12 @@ size_t CInputSentence::GetOffsetInHomonyms(size_t  StartWordNo, size_t EndWordNo
 	return StartWordNo+Result;
 };
 
-void CInputSentence::AddToResultPlmLinesCollection(std::vector<std::string>& Result) const
+void CInputSentence::AddToResultPlmLinesCollection(std::vector<std::string>& result) const
 {
-	for (size_t i=0; i<m_Words.size(); i++)
-		for (size_t j=0; j < m_Words[i].m_Homonyms.size(); j++)
+	for (auto& w: m_Words)
+		for (auto& h : w.m_Homonyms)
 		{
-			const CPlmLine& L = m_Words[i].m_Homonyms[j];
-			Result.push_back(L.GetStr());
+			result.push_back(h.GetStr());
 		};
 
 };
@@ -268,11 +266,11 @@ void CInputSentenceGLR::BuildTerminalSymbolsByWord(const CWorkGrammar& G, CInput
 		};
 				
 
-		for (size_t j=0; j<W.m_Homonyms.size(); j++)
-			if (AreEqual(W.m_Homonyms[j], I))
+		for (auto& h : W.m_Homonyms)
+			if (AreEqual(h, I))
 			{
-				CInputSymbol N (i,W.m_Homonyms[j].GetGramCodes(), W.m_Homonyms[j].GetCommonGramCode());
-				W.m_Homonyms[j].m_AutomatSymbolInterpetation.Add(N);
+				CInputSymbol N (i, h.GetGramCodes(), h.GetCommonGramCode());
+				h.m_AutomatSymbolInterpetation.Add(N);
 				W.m_AutomatSymbolInterpetationUnion.insert(N);
 			};
 	}
@@ -355,7 +353,7 @@ void CInputSentenceGLR::FindOccurrencesWithTrie (const CWorkGrammar& G, std::vec
 
 
 
-void CInputSentenceGLR::AddDescriptors (const std::vector< COccurrence>& Occurrences, const CWorkGrammar& Grammar, bool bDumpOccurs)
+void CInputSentenceGLR::AddDescriptors (const std::vector< COccurrence>& Occurrences, const CWorkGrammar& Grammar)
 {
 	std::string DumpString;
 	size_t OccurNo = 0;
@@ -380,18 +378,18 @@ void CInputSentenceGLR::AddDescriptors (const std::vector< COccurrence>& Occurre
 				const CSymbolNode&  Node = Output[ Nodes[i] ];
 				std::string GroupName = Grammar.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;
 					
-				if ( bDumpOccurs )
+				IF_PLOG(plog::debug)
 				{ 
-					// dumping 
+					std::string s;
 					if (i > 0)
-						DumpString+= "\t";
+						s += "\t";
 
-					DumpString += Format("%s : ",GroupName.c_str());
+					s += Format("%s : ",GroupName.c_str());
 					for (size_t j=Node.m_InputStart; j < Node.m_InputEnd; j++)
 					{
-						DumpString += Format("%s ",m_Words[StartWordNo+j].GetWord().c_str());
+						s += Format("%s ",m_Words[StartWordNo+j].GetWord().c_str());
 					};
-					DumpString += "\n";
+					PLOGD << s;
 				}
 
 				if (Node.m_InputEnd - Node.m_InputStart <= 1) 
@@ -424,10 +422,10 @@ void CInputSentenceGLR::AddDescriptors (const std::vector< COccurrence>& Occurre
 			std::string WordStr = m_Words[WordNo].GetWord();
 			if (m_AbrigedReferences.find(WordStr) != m_AbrigedReferences.end())
 			{
-				if ( bDumpOccurs )
+				IF_PLOG(plog::debug)
 				{ 
 					std::string GroupName = Grammar.m_UniqueGrammarItems[RootNo].m_ItemStrId;
-					DumpString += Format("%s : %s\n",GroupName.c_str(), WordStr.c_str());
+					PLOGD << GroupName << " : " << WordStr;
 				};
 
 			};
@@ -435,20 +433,6 @@ void CInputSentenceGLR::AddDescriptors (const std::vector< COccurrence>& Occurre
 
 		};
 	};
-
-	if (bDumpOccurs)
-	{
-		FILE* dump_fp = fopen ("occurrences.txt","a");
-		if (!dump_fp) 
-		{
-			fprintf (stderr, "cannot dump occurrences!");
-			return;
-		};
-
-		fprintf(dump_fp, "%s",DumpString.c_str());
-		fclose(dump_fp);
-	};
-
 };
 
 
@@ -489,7 +473,7 @@ void CInputSentenceGLR::ApplyGLR_Parsing (const CWorkGrammar& G, size_t WordNo, 
 };
 
 
-void CInputSentenceGLR::ProcessRestart (const CWorkGrammar& G, bool bDumpOccurs)
+void CInputSentenceGLR::ProcessRestart (const CWorkGrammar& G)
 {
 	// first, we should  find all possible occurrences of prefixes in this sentence
 	// since FindOccurrencesWithTrie works at O(n) then we should try to build from each 
@@ -512,9 +496,6 @@ void CInputSentenceGLR::ProcessRestart (const CWorkGrammar& G, bool bDumpOccurs)
 		CGLRParser& Parser = m_Parsers.back();
 
 		ApplyGLR_Parsing(G, WordNo, Parser);
-
-		//Parser.DumpParser(true);
-
 
 		const std::vector<CSymbolNode>& Output = Parser.m_SymbolNodes;
 		for (size_t i=0; i<Output.size(); i++)
@@ -548,14 +529,14 @@ void CInputSentenceGLR::ProcessRestart (const CWorkGrammar& G, bool bDumpOccurs)
 	DeleteHomonyms(Occurrences, G);
 
 	//  add information to the output results
-	AddDescriptors(Occurrences, G, bDumpOccurs);
+	AddDescriptors(Occurrences, G);
 
 	m_Parsers.clear();
 };
 
 
 extern void GetMaxCoverage (std::vector< COccurrence >& Occurrences);
-void CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
+std::vector<CFoundEntity> CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 {
 	
 	m_Parsers.push_back(CGLRParser());
@@ -565,93 +546,71 @@ void CInputSentenceGLR::ProcessFull (const CWorkGrammar& G)
 	Parser.m_bRobust = true;
 	ApplyGLR_Parsing(G, 0, Parser);
 	//Parser.DumpParser(false);
-
-
-	// get occurrences
 	std::vector< COccurrence > Occurrences;
 	const std::vector<CSymbolNode>& Output = Parser.m_SymbolNodes;
 	for (size_t i=0; i<Output.size(); i++)
 	{
 		if	(G.m_UniqueGrammarItems[Output[i].m_Symbol.m_GrammarSymbolNo].m_bGrammarRoot )
 		{
-			
 			COccurrence  C;
 			C.first = Output[i].m_InputStart;
 			C.second = Output[i].m_InputEnd;
 			C.m_pParser = &(Parser);
 			C.m_GrammarRuleNo = i;
 			Occurrences.push_back(C);
-
 		};
 	};
-
 	
 	GetMaxCoverage(Occurrences);
 
-	// dump
-	FILE * fp = fopen ("test.dump","w");
 	int RootNo = G.GetFirstRoot();
-	for (size_t OccurNo=0; OccurNo < Occurrences.size(); OccurNo++)
+	std::vector<CFoundEntity> result;
+	for (auto& o : Occurrences)
 	{
-			const COccurrence& C = Occurrences[OccurNo];
-			
-			
 			std::vector<size_t> Nodes;
-			C.m_pParser->GetParseNodesRecursiveWithoutSyntaxAmbiguity(C.m_GrammarRuleNo, Nodes, false);
-			for (size_t i=0; i< Nodes.size();i++)
+			o.m_pParser->GetParseNodesRecursiveWithoutSyntaxAmbiguity(o.m_GrammarRuleNo, Nodes, false);
+			for (const auto& n: Nodes)
 			{
-				const CSymbolNode&  Node = C.m_pParser->m_SymbolNodes[ Nodes[i] ];
+				const CSymbolNode&  Node = o.m_pParser->m_SymbolNodes[ n ];
 				std::string GroupName = G.m_UniqueGrammarItems[Node.m_Symbol.m_GrammarSymbolNo].m_ItemStrId;		
-				fprintf (fp, "%s[%zu,%zu); ", GroupName.c_str(), Node.m_InputStart, Node.m_InputEnd);
+				result.push_back({ GroupName , Node.m_InputStart, Node.m_InputEnd });
 			};
-			fprintf (fp, "\n");
 	};
-	fclose (fp);
 
 	m_Parsers.clear();
+	return result;
 };
 
 
-
-
-
-
-bool CWorkGrammar::ParseFile(ParseMethodEnum ParseMethod, const CLemmatizedText& PlmLines, const CAgramtab*	pGramTab, std::vector<std::string>& Result, bool bDumpOccurrences) const
+std::vector<std::string> CWorkGrammar::FilterHomonymsByGrammar(const CLemmatizedText& PlmLines) const
 {
-	//printf ("Parsing  file.... \n");
-	remove ("occurrs.txt");
-	if (PlmLines.m_PlmItems.empty()) return false;
+	assert(m_pGramTab != nullptr);
 	PlmLines.SaveToFile("input.lem");
 	size_t Count = PlmLines.m_PlmItems.size();
-	Result.clear();	
-	Result.push_back(PlmLines.m_PlmItems[0]);
+	std::vector<std::string >  result;
+	result.push_back(PlmLines.m_PlmItems[0]);
 
-	CInputSentenceGLR Sentence(pGramTab);
+	CInputSentenceGLR Sentence(m_pGramTab);
 	
-	for (size_t i=0; i<Count ;)
+	for (size_t i=0; i < Count ;)
 	{		
-		//printf ("%i/%i\r", i, Count);
-
 		i = Sentence.ReadSentence(PlmLines, i);
-
-		for (size_t WordNo=0; WordNo < Sentence.m_Words.size(); WordNo++)
-			Sentence.BuildTerminalSymbolsByWord(*this, Sentence.m_Words[WordNo]);
-
-
-		if (ParseMethod == GLRRestartParsing)
-		{
-			Sentence.ProcessRestart(*this, bDumpOccurrences);
-			Sentence.AddToResultPlmLinesCollection(Result);
-		}
-		else
-		{
-			Sentence.ProcessFull(*this);
-		};
-		
+		for (auto& w: Sentence.m_Words)
+			Sentence.BuildTerminalSymbolsByWord(*this, w);
+		Sentence.ProcessRestart(*this);
+		Sentence.AddToResultPlmLinesCollection(result);
 	};
-
-
-	return true;
+	return result;
 };
+
+std::vector<CFoundEntity> CWorkGrammar::GetFoundOccurrences(const CLemmatizedText& PlmLines) const
+{
+	CInputSentenceGLR Sentence(m_pGramTab);
+	Sentence.ReadSentence(PlmLines, 0); // read only the first sentence
+	for (auto& w : Sentence.m_Words)
+		Sentence.BuildTerminalSymbolsByWord(*this, w);
+	return Sentence.ProcessFull(*this);
+}
+
 
 

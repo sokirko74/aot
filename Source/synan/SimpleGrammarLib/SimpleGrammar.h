@@ -156,6 +156,14 @@ typedef std::set<CWorkRule>::iterator WRI;
 typedef std::vector<TerminalSymbolType> CPrefix;
 typedef std::set<CPrefix> CPrefixSet;
 
+struct CFoundEntity {
+    std::string name;
+    size_t start;
+    size_t end;
+    bool operator == (const CFoundEntity& _X) const
+    { return name == _X.name && start == _X.start && end == _X.end; };
+};
+
 
 class CWorkGrammar {
 public:
@@ -235,14 +243,16 @@ public:
 
     size_t GetCountOfRoots() const;
 
-    bool ParseFile(ParseMethodEnum ParseMethod, const CLemmatizedText &PlmLines, const CAgramtab *pGramTab,
-                   std::vector<std::string> &Result, bool bDumpOccurrences) const;
+    std::vector<std::string> FilterHomonymsByGrammar(const CLemmatizedText &PlmLines) const;
+
+    std::vector<CFoundEntity> GetFoundOccurrences(const CLemmatizedText& PlmLines) const;
+
 
     void BuildAutomat(std::set<CWorkRule> &EncodedRules);
 
     void IsValid() const;
 
-    void SavePrecompiled(std::string GrammarFileName) const;
+    void SavePrecompiled() const;
 
     void LoadFromPrecompiled();
 
@@ -275,7 +285,9 @@ public:
 
     void LoadGrammarForGLR(bool bUsePrecompiledAutomat);
 
-    void CreatePrecompiledGrammar(MorphLanguageEnum langua, std::string path);
+    void CreatePrecompiledGrammar();
+
+    void InitalizeGrammar(const CAgramtab* gramtab, std::string path);
 
 protected:
 

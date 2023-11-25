@@ -1,6 +1,7 @@
 
 #include "GermanPostMorph.h"
-
+#include <filesystem>
+using namespace
 
 CPostMorphInteface* NewGermanPostMorph(const CLemmatizer* GerLemmatizer, const CAgramtab* GerGramTab)
 {
@@ -30,40 +31,17 @@ CGermanPostMorph::~CGermanPostMorph()
 };
 
 bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
-{
-	std::string FileName = GetRegistryString("SimpleGrammar") +"/"+"person.grm";
-	if (access(FileName.c_str(), 04) != 0)
-		FileName = GetRegistryString("SimpleGrammar") +"/"+"example.grm";
-
-	m_PersonGrammar.m_Language = morphGerman;
-	m_PersonGrammar.m_pGramTab = GerGramTab;
-	m_PersonGrammar.m_SourceGrammarFile  = FileName;
-
-	if (!m_PersonGrammar.LoadGrammarForGLR(true))
-		return false;
-
-
+{	std::string path = MakePath(GetRegistryString("GerSynan"), "postmorph.grm");
+	m_PersonGrammar.InitalizeGrammar (GerGramTab, path)
+	m_PersonGrammar.LoadGrammarForGLR( true);
 	m_GerGramTab = GerGramTab;
-
 	return true;
 };
 
 bool	CGermanPostMorph::ProcessData(const CLemmatizedText *piInTextItems)
 {
-	
-	//if (!m_PersonGrammar.ParseFile(TrieParsingMethod, *piInTextItems, m_GerGramTab, piOutTextItems))
-	//	return false;
-
-	// call CreateTokenList to refresh file lists from the disk (only modified files will be refreshed)
 	std::string ErrorMsg;
-	if (!m_PersonGrammar.CreateTokenList(ErrorMsg))
-	{
-		ErrorMessage (ErrorMsg);
-		return false;
-	};
-
-	if (!m_PersonGrammar.ParseFile(GLRRestartParsing, *piInTextItems, m_GerGramTab, m_ResultLemWords, false))
-		return false;
-
-	return true;
+	m_PersonGrammar.CreateTokenList();
+	m_ResultLemWords = m_PersonGrammar.FilterHomonymsByGrammar(GLRRestartParsing, *piInTextItems);
+	return !m_ResultLemWords.empty();
 };

@@ -1,0 +1,2 @@
+[n1] -> [TOKEN register="Aa"]  | 'ähnlich';
+[main] -> [n1 root];

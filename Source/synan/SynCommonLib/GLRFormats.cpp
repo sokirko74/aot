@@ -382,11 +382,10 @@ void CSentence::BuildGLRGroupsInClause(CClause& pClause)
 	pClause.GetBuildingUnits(BuildingUnits);
 
 
-	for (size_t i=0; i < BuildingUnits.size(); i++)
+	for (auto& b: BuildingUnits)
 	{
-		const CBuildingUnit & Unit = BuildingUnits[i];
-		if (Unit.m_ChildClauseNo != -1) 
-			BuildTerminalSymbolsByClause(Unit.m_ChildClauseNo);
+		if (b.m_ChildClauseNo != -1) 
+			BuildTerminalSymbolsByClause(b.m_ChildClauseNo);
 	};
 
 	
@@ -418,10 +417,9 @@ void CSentence::BuildGLRGroupsInSentence()
 	
 	const CWorkGrammar& Grammar = GetOpt()->m_FormatsGrammar;
 
-	for (size_t OccurNo=0; OccurNo<Occurrences.size(); OccurNo++)
+	for (auto& o: Occurrences)
 	{
-		const COccurrence& C = Occurrences[OccurNo];
-		BuildGroupByGLR(Parser, C, Clause, m_GroupsUnion);
+		BuildGroupByGLR(Parser, o, Clause, m_GroupsUnion);
 	};
 
 };

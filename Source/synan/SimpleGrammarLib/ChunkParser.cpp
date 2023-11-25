@@ -64,7 +64,7 @@ bool CChunkParser::ParseGrammarInFile(std::string FileName, std::string RefererF
 {	
 	std::string Grammar;
 	if (FileExists(FileName.c_str())) {
-		Grammar = LoadFileToString(FileName)
+		Grammar = LoadFileToString(FileName);
 	}
 	else
 	{

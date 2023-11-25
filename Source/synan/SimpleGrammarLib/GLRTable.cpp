@@ -263,7 +263,7 @@ bool CGLRTable::LoadGLRTable(std::string FileName)
 	FILE* fp = fopen (FileName.c_str(), "rb");
 	if (!fp) 
 	{
-		ErrorMessage (Format("Cannot read to %s",FileName.c_str()));
+		throw CExpc("Cannot read to %s", FileName.c_str());
 		return false;
 	};
 	size_t count;

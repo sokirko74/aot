@@ -1,4 +1,4 @@
-[FNAME] -> [TOKEN filename="firstname.txt"];
-[FAMILY] -> [TOKEN filename="family.txt"];
-[PNAME] -> [FNAME] [FAMILY]; %% "Kai Zimmer"
+[NOUN] -> [TOKEN filename="noun.txt"];
+[ADJ] -> [TOKEN grm="ADJ"];
+[NP] -> [ADJ] [NOUN]; %% rot Bild
 

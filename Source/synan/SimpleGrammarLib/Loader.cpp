@@ -1,8 +1,8 @@
 #include  "SimpleGrammarLib.h"
 #include "SimpleGrammar.h"
 #include "morph_dict/common/bserialize.h"
-#include "morph_dict/lemmatizer_base_lib/MorphanHolder.h"
 #include "morph_dict/common/rapidjson.h"
+#include "morph_dict/agramtab/agramtab_.h"
 
 #include <time.h>
 #include <sys/stat.h>
@@ -241,17 +241,13 @@ size_t CWorkGrammar::GetCountOfSymbolOnTheRight(CWRI it, size_t ItemNo) const {
 };
 
 size_t CWorkGrammar::GetCountOfRoots() const {
-    size_t Result = 0;
-    std::string Dump;
-    for (size_t i = 0; i < m_UniqueGrammarItems.size(); i++)
-        if (m_UniqueGrammarItems[i].m_bGrammarRoot) {
-            Result++;
-            Dump += m_UniqueGrammarItems[i].GetDumpString();
-            Dump += ",";
+    size_t result = 0;
+    for (auto& i : m_UniqueGrammarItems)
+        if (i.m_bGrammarRoot) {
+            result++;
+            LOGV << "root = " << i.GetDumpString();
         }
-    LOGV << "Roots : " << Dump;
-
-    return Result;
+    return result;
 };
 
 int CWorkGrammar::GetFirstRoot() const {
@@ -466,9 +462,9 @@ inline size_t restore_from_bytes(CPrecompiledWorkRule &t, const BYTE *buf) {
 };
 
 
-void CWorkGrammar::SavePrecompiled(std::string GrammarFileName) const {
+void CWorkGrammar::SavePrecompiled() const {
 
-    std::string PrecompiledFile = MakeFName(GrammarFileName, "grammar_precompiled");
+    std::string PrecompiledFile = MakeFName(m_SourceGrammarFile, "grammar_precompiled");
     LOGI << "save to " << PrecompiledFile;
 
     FILE *fp = fopen(PrecompiledFile.c_str(), "wb");
@@ -495,8 +491,7 @@ void CWorkGrammar::SavePrecompiled(std::string GrammarFileName) const {
 
     fclose(fp);
 
-    //assert (!m_AutomatSymbolInformation.empty());
-    m_TrieHolder.Save(GrammarFileName);
+    m_TrieHolder.Save(m_SourceGrammarFile);
 };
 
 
@@ -564,10 +559,10 @@ void CWorkGrammar::LoadFromPrecompiled() {
 // adding a new root non-terminal "NewRoot" and a special 
 // symbol for end of input ("$")
 void CWorkGrammar::AugmentGrammar() {
-    size_t Count = GetCountOfRoots();
+    size_t roots = GetCountOfRoots();
 
-    if (Count != 1) {
-        throw CExpc("A simple grammar should have only one root!");
+    if (roots != 1) {
+        throw CExpc("Number of roots: %zi, a simple grammar should have only one root!", roots);
     };
     size_t i = 0;
     for (; i < m_UniqueGrammarItems.size(); i++)
@@ -626,6 +621,7 @@ size_t CWorkGrammar::GetEndOfStreamSymbol() const {
 
 
 void CWorkGrammar::LoadGrammarForGLR(bool bUsePrecompiledAutomat) {
+    assert(!m_SourceGrammarFile.empty());
     BuildWorkGrammar(*this);
     LoadOptions();
     if (bUsePrecompiledAutomat) {
@@ -675,13 +671,14 @@ void CWorkGrammar::LoadGrammarForGLR(bool bUsePrecompiledAutomat) {
 
 };
 
-void CWorkGrammar::CreatePrecompiledGrammar(MorphLanguageEnum langua, std::string path) {
-    m_Language = langua;
-    CMorphanHolder Holder;
-    Holder.LoadOnlyGramtab(m_Language);
-    m_pGramTab = Holder.m_pGramTab;
+void CWorkGrammar::InitalizeGrammar(const CAgramtab* gramtab, std::string path) {
+    m_pGramTab = gramtab;
+    m_Language = gramtab->m_Language;
     m_SourceGrammarFile = path;
+}
+
+void CWorkGrammar::CreatePrecompiledGrammar() {
     LoadGrammarForGLR(false);
-    SavePrecompiled(path);
-    m_GLRTable.ConvertAndSaveGLRTable(MakeFName(path, "table"));
+    SavePrecompiled();
+    m_GLRTable.ConvertAndSaveGLRTable(MakeFName(m_SourceGrammarFile, "table"));
 }

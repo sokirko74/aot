@@ -77,7 +77,7 @@ void CGerSyntaxOpt::DestroyOptions ()
 
 static std::string GetSyntaxFilePath()
 {
-	return GetRmlVariable()+"/Dicts/GerSynan/";
+	return GetRegistryString("GerSynan");
 };
 
 
@@ -90,11 +90,8 @@ void CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 	std::string strFileName = GetSyntaxFilePath()+"adj_prp.txt";
 	ReadListFile(strFileName, m_AdjPrp);
 
-	// reading formats
-	strFileName = GetSyntaxFilePath()+"gformats.grm";
-	m_FormatsGrammar.m_Language = morphGerman;
-	m_FormatsGrammar.m_pGramTab = GetGramTab();
-	m_FormatsGrammar.m_SourceGrammarFile = strFileName;
+	strFileName = MakePath(GetSyntaxFilePath(), "synan.grm");
+	m_FormatsGrammar.InitalizeGrammar(GetGramTab(), strFileName);
 	m_FormatsGrammar.LoadGrammarForGLR(true);
 }
 
