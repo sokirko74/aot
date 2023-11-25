@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+
 	CThesaurus* T = new CThesaurus;
 	if (!T) return 0;
 	T->m_MainLanguage = morphRussian;
@@ -31,7 +32,7 @@ int main(int argc, char* argv[])
 	std::string input_directory = argv[1];
 	T->SetDirectory(input_directory);
 	if (!T->ReadThesaurusFromDisk()) return 1;
-	auto canon_path = std::filesystem::path(input_directory) / "atomic_group.canon.txt";
+	auto canon_path = fs::path(input_directory) / "atomic_group.canon.txt";
 	std::ifstream inp;
 	inp.open(canon_path);
 	size_t error_count = 0;
