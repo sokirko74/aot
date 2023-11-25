@@ -1,7 +1,4 @@
-
 #include "GermanPostMorph.h"
-#include <filesystem>
-using namespace
 
 CPostMorphInteface* NewGermanPostMorph(const CLemmatizer* GerLemmatizer, const CAgramtab* GerGramTab)
 {
@@ -31,8 +28,9 @@ CGermanPostMorph::~CGermanPostMorph()
 };
 
 bool	CGermanPostMorph::Init(const CAgramtab* GerGramTab)
-{	std::string path = MakePath(GetRegistryString("GerSynan"), "postmorph.grm");
-	m_PersonGrammar.InitalizeGrammar (GerGramTab, path)
+{	
+	std::string path = MakePath(GetRegistryString("GerSynan"), "postmorph.grm");
+	m_PersonGrammar.InitalizeGrammar(GerGramTab, path);
 	m_PersonGrammar.LoadGrammarForGLR( true);
 	m_GerGramTab = GerGramTab;
 	return true;
@@ -42,6 +40,6 @@ bool	CGermanPostMorph::ProcessData(const CLemmatizedText *piInTextItems)
 {
 	std::string ErrorMsg;
 	m_PersonGrammar.CreateTokenList();
-	m_ResultLemWords = m_PersonGrammar.FilterHomonymsByGrammar(GLRRestartParsing, *piInTextItems);
+	m_ResultLemWords = m_PersonGrammar.FilterHomonymsByGrammar(*piInTextItems);
 	return !m_ResultLemWords.empty();
 };

@@ -19,11 +19,11 @@ int main(int argc, const char **argv) {
 
 
     try {
-        CWorkGrammar WorkGrammar;
+        CWorkGrammar g;
         CMorphanHolder Holder;
         Holder.LoadOnlyGramtab(args.GetLanguage());
-        WorkGrammar.Initialize(Holder.m_pGramTab, args.Retrieve("input"))
-        WorkGrammar.CreatePrecompiledGrammar();
+        g.InitalizeGrammar(Holder.m_pGramTab, args.Retrieve("input"));
+        g.CreatePrecompiledGrammar();
     }
     catch (std::exception& e) {
         std::cerr << e.what() << "\n";

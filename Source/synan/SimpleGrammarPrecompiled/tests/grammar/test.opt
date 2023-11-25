@@ -1,4 +1,4 @@
 {
 	"SecondPass": [ "PNAME" ],
-	"DisableRootPrefix":  false
+	"EnableRootPrefix":  true
 }

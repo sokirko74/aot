@@ -75,22 +75,17 @@ void CGerSyntaxOpt::DestroyOptions ()
 	CSyntaxOpt::DestroyOptions();
 };
 
-static std::string GetSyntaxFilePath()
-{
-	return GetRegistryString("GerSynan");
-};
-
-
-
 void CGerSyntaxOpt :: InitOptionsLanguageSpecific()
 {
 	m_piGramTab->LoadFromRegistry();
 
+	auto synan_directory = GetRegistryString("GerSynan");
+
 	//  reading adjektives
-	std::string strFileName = GetSyntaxFilePath()+"adj_prp.txt";
+	std::string strFileName = (fs::path(synan_directory) / "other_lists/adj_prp.txt").string();
 	ReadListFile(strFileName, m_AdjPrp);
 
-	strFileName = MakePath(GetSyntaxFilePath(), "synan.grm");
+	strFileName = MakePath(synan_directory, "synan.grm");
 	m_FormatsGrammar.InitalizeGrammar(GetGramTab(), strFileName);
 	m_FormatsGrammar.LoadGrammarForGLR(true);
 }

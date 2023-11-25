@@ -99,6 +99,7 @@ chunker : chunk_rule CHUNK_RULE_DELIM
 			CChunkGrammar* pObj = $1;
 			assert (pObj == &_prs->m_ChunkGrammar);
 			CChunkParser P;
+			P.m_pGramTab = _prs->m_pGramTab;
 			if (!P.ParseGrammarInFile(*$3, _prs->m_CurrentSourceFileName))
 				YYABORT;
 			pObj->AddRules(P.m_ChunkGrammar);		
@@ -109,6 +110,7 @@ chunker : chunk_rule CHUNK_RULE_DELIM
 		{
 			CChunkGrammar* pObj = &_prs->m_ChunkGrammar;
 			CChunkParser P;
+			P.m_pGramTab = _prs->m_pGramTab;
 			if (!P.ParseGrammarInFile(*$2, _prs->m_CurrentSourceFileName))
 				YYABORT;
 			pObj->AddRules(P.m_ChunkGrammar);		

@@ -58,15 +58,30 @@ TEST_CASE("check_register") {
 	CHECK(res.empty());
 }
 
+TEST_CASE("check_inclusion") {
+	CWorkGrammar g;
+	compile_grammar("grammar4/test.grm", g);
+	check_first_entity(g, "Rot", { "main", 0, 1 });
+	check_first_entity(g, "Bild Bilds", { "main", 0, 2 });
+}
+
 
 TEST_CASE("grammar_precompiled") {
 	CWorkGrammar g1;
 	g1.InitalizeGrammar(holder.m_pGramTab, "grammar/test.grm");
 	g1.CreatePrecompiledGrammar();
 	
+	auto path = fs::current_path();  // cd to other folder and load grammar
+	auto tmp_path = path / "tmp";
+	if (!fs::exists(tmp_path)) {
+		fs::create_directory("tmp");
+	}
+	fs::current_path(tmp_path);
 	CWorkGrammar g2;
-	g2.InitalizeGrammar(holder.m_pGramTab, "grammar/test.grm");
+	g2.InitalizeGrammar(holder.m_pGramTab, "../grammar/test.grm");
 	g2.LoadGrammarForGLR(true);
+	fs::current_path(path);
+	fs::remove_all(tmp_path);
 }
 
 

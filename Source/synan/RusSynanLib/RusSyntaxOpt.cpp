@@ -136,11 +136,6 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
 
 const char g_strRegRossDicPath[] = "Software\\Dialing\\Ross\\DictPath";
 
-static std::string GetSyntaxFilePath() {
-    return GetRmlVariable() + "/Dicts/SynAn/";
-};
-
-
 void CRusSyntaxOpt::InitOptionsLanguageSpecific() {
     m_piGramTab->LoadFromRegistry();
 
@@ -149,7 +144,8 @@ void CRusSyntaxOpt::InitOptionsLanguageSpecific() {
     std::string strPath = GetRegistryString(g_strRegRossDicPath);
     piRossDict.Load(strPath.c_str());
     LoadFromRoss(&piRossDict);
-    std::string Path = GetSyntaxFilePath();
+    auto rml = fs::path(GetRmlVariable());
+    std::string Path = ( rml / "Dicts" / "SynAn").string();
 
     m_CompAdvList.read_from_file(MakePath(Path, "comp_adv.dat"));
     m_NounNumList.read_from_file(MakePath(Path, "noun_num.dat"));

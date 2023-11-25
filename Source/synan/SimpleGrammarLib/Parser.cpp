@@ -482,15 +482,14 @@ void CInputSentenceGLR::ProcessRestart (const CWorkGrammar& G)
 	FindOccurrencesWithTrie(G, Prefixes);
 
 	std::set<size_t> StartPoints;
-	for (size_t OccurNo =0; OccurNo < Prefixes.size(); OccurNo++)
-		StartPoints.insert(Prefixes[OccurNo].first);
+	for (auto& p : Prefixes)
+		StartPoints.insert(p.first);
 
 
 	std::vector< COccurrence > Occurrences;
 	
-	for (std::set<size_t>::const_iterator it = StartPoints.begin(); it != StartPoints.end(); it++)
+	for (auto& WordNo: StartPoints)
 	{
-		size_t WordNo = *it;
 		m_Parsers.push_back(CGLRParser());
 
 		CGLRParser& Parser = m_Parsers.back();
@@ -513,7 +512,6 @@ void CInputSentenceGLR::ProcessRestart (const CWorkGrammar& G)
 				C.m_pParser = &(Parser);
 				C.m_GrammarRuleNo = i;
 				Occurrences.push_back(C);
-
 			};
 		};
 

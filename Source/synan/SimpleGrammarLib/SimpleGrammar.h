@@ -207,7 +207,7 @@ public:
     CGLRTable m_GLRTable;
 
     bool m_bEnableRootPrefix;
-    std::string m_SourceGrammarFile;
+    std::string m_RootGrammarPath;
 
 
     CWorkGrammar();
@@ -295,8 +295,6 @@ protected:
     void CreateAutomatSymbolInformation();
 
     void Build_MAP_Node_To_FIRST_Set_k(size_t PrefixLength, std::map<size_t, CPrefixSet> &First_k) const;
-
-    int FindTokenListByFileName(const std::string &FileName, size_t EndItemNo);
 
 
 };

@@ -1,0 +1,2 @@
+#include "inc.grm"
+[main] -> [n1 root];

@@ -1,0 +1,3 @@
+[NOUN] -> [TOKEN grm="SUB"];
+[n1] -> [TOKEN grm="ADJ"];
+[n1] -> [NOUN] [NOUN] : has_only_case($2.grm, "gen");

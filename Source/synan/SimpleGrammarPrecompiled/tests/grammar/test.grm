@@ -1,4 +1,4 @@
-[NOUN] -> [TOKEN filename="noun.txt"];
+#include "subfolder/inc.grm"
 [ADJ] -> [TOKEN grm="ADJ"];
 [NP] -> [ADJ] [NOUN]; %% rot Bild
 

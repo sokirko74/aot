@@ -66,6 +66,7 @@ class CTrieHolder
 	void UpdatePossibleOutputSymbolsbyOnState(size_t NodeNo,  std::vector<bool>& PossibleOutputSymbols) const;
 	void CreateTrie(const std::set< CWorkRule >& Patterns);
 	void AddNode(const CTrieNode& T);
+	size_t	GetAlphabetSize() const;
 
 public:
 	
@@ -79,7 +80,6 @@ public:
 	
 
 	//  access members
-	size_t	GetAlphabetSize() const;
 	void	GetOccurrences (const TerminalString& Text, std::vector< COccurrence >& Occurrences) const;
 	void	PrintChildren(size_t NodeNo) const;
 	void	UpdatePossibleOutputSymbols (const std::set<size_t>& CurrentStates, std::vector<bool>& PossibleOutputSymbols) const;

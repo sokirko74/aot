@@ -244,13 +244,13 @@ void ConvertToWorkGrammar(const CChunkGrammar& ChunkGrammar, CWorkGrammar& WorkG
 
 void BuildWorkGrammar(CWorkGrammar& WorkGrammar)
 {
-	LOGI <<  "reading from the source file " << WorkGrammar.m_SourceGrammarFile;
+	LOGI <<  "reading from the root source file " << WorkGrammar.m_RootGrammarPath;
 	CChunkParser Parser;
 	Parser.m_pGramTab = WorkGrammar.m_pGramTab;
-	bool bResult = Parser.ParseGrammarInFile(WorkGrammar.m_SourceGrammarFile, "");
+	bool bResult = Parser.ParseGrammarInFile(WorkGrammar.m_RootGrammarPath, "");
 	if (!bResult)
 	{
-		throw CExpc ("cannot parse " + WorkGrammar.m_SourceGrammarFile);
+		throw CExpc ("cannot parse " + WorkGrammar.m_RootGrammarPath);
 	};
 	LOGI << "Number of rules = " << Parser.m_ChunkGrammar.m_Rules.size();
 		

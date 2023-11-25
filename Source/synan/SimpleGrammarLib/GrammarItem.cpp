@@ -346,6 +346,7 @@ void CGrammarItem::AddAttribute(std::string Name, std::string Value, MorphLangua
 	}
 	else if (Name == "filename")
 	{
+		// SourceFileName  is the file where this grammar item was read from 
 		Value = MakePath(GetParentPath(SourceFileName), Value);
 		if (!FileExists(Value.c_str())) {
 			throw CExpc("file %s does not exist", Value.c_str());
@@ -462,9 +463,3 @@ bool	CGrammarItem::HasAnyOfWorkingAttributes() const
 		);
 };
 
-std::string CGrammarItem::GetFullFileName(const std::string & GrammarFileName) const
-{
-	std::map<std::string, std::string>::const_iterator it = m_Attributes.find("filename");
-	if (it == m_Attributes.end())  return "";
-	return it->second;
-};

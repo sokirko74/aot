@@ -83,8 +83,6 @@ struct CGrammarItem
 	std::string	toString() const;
 	bool	fromString(std::string& Result);
 	bool	HasAnyOfWorkingAttributes() const;
-	std::string	GetFullFileName(const std::string& GrammarFileName) const;
-	
 };
 
 
