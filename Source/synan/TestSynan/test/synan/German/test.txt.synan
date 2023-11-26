@@ -1,65 +1,65 @@
 [
     {
-        "comments": "",
         "input": "Ich gehe nach Hause.",
+        "comments": "",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 4,
+                        "words": "Ich gehe nach Hause .",
                         "good_synvars": [
                             {
-                                "clause_type": "VERBSATZ",
+                                "syn_units": [
+                                    {
+                                        "lemma": "SIE",
+                                        "morph_info": "PRO nom,sin,1,alg,per,; ",
+                                        "modified_grammems": "nom,sin,1,alg,per,"
+                                    },
+                                    {
+                                        "lemma": "GEHEN",
+                                        "morph_info": "VER sin,1,prae,non,; sin,imp,non,; sin,1,kj1,non,; sin,3,kj1,non,; ",
+                                        "modified_grammems": "sin,3,1,prae,imp,kj1,non,"
+                                    },
+                                    {
+                                        "lemma": "NACH",
+                                        "morph_info": "PRP dat,lok,tmp,; ",
+                                        "modified_grammems": "dat,lok,tmp,"
+                                    },
+                                    {
+                                        "lemma": "HAUS",
+                                        "morph_info": "SUB dat,sin,neu,; ",
+                                        "modified_grammems": "dat,sin,neu,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
                                 "groups": [
                                     {
                                         "type": "PP",
                                         "words": "nach Hause"
                                     }
                                 ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "SIE",
-                                        "modified_grammems": "nom,sin,1,alg,per,",
-                                        "morph_info": "PRO nom,sin,1,alg,per,; "
-                                    },
-                                    {
-                                        "lemma": "GEHEN",
-                                        "modified_grammems": "sin,3,1,prae,imp,kj1,non,",
-                                        "morph_info": "VER sin,1,prae,non,; sin,imp,non,; sin,1,kj1,non,; sin,3,kj1,non,; "
-                                    },
-                                    {
-                                        "lemma": "NACH",
-                                        "modified_grammems": "dat,lok,tmp,",
-                                        "morph_info": "PRP dat,lok,tmp,; "
-                                    },
-                                    {
-                                        "lemma": "HAUS",
-                                        "modified_grammems": "dat,sin,neu,",
-                                        "morph_info": "SUB dat,sin,neu,; "
-                                    },
-                                    {
-                                        "lemma": ".",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    }
-                                ]
+                                "clause_type": "VERBSATZ"
                             }
-                        ],
-                        "last": 4,
-                        "start": 0,
-                        "words": "Ich gehe nach Hause ."
+                        ]
                     }
                 ],
                 "relations": [
                     {
-                        "gramrel": "",
-                        "name": "EXPR",
                         "src": "gehe",
-                        "src_grm": "imper,intra,sin,3,1,prae,imp,kj1,non,",
-                        "src_lemma": "GEHEN",
                         "trg": "Ich",
-                        "trg_grm": "nom,sin,1,alg,per,",
-                        "trg_lemma": "SIE"
+                        "name": "EXPR",
+                        "gramrel": "",
+                        "src_lemma": "GEHEN",
+                        "src_grm": "imper,intra,sin,3,1,prae,imp,kj1,non,",
+                        "trg_lemma": "SIE",
+                        "trg_grm": "nom,sin,1,alg,per,"
                     }
                 ],
                 "terms": []
@@ -67,85 +67,70 @@
         ]
     },
     {
-        "comments": "",
         "input": "Du bist ein Idiot.",
+        "comments": "",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 4,
+                        "words": "Du bist ein Idiot .",
                         "good_synvars": [
                             {
-                                "clause_type": "VERBSATZ",
+                                "syn_units": [
+                                    {
+                                        "lemma": "SIE",
+                                        "morph_info": "PRO nom,sin,2,alg,per,; ",
+                                        "modified_grammems": "nom,sin,2,alg,per,"
+                                    },
+                                    {
+                                        "lemma": "SEIN",
+                                        "morph_info": "VER sin,2,prae,aux,; sin,2,prae,non,; ",
+                                        "modified_grammems": "sin,2,prae,aux,non,"
+                                    },
+                                    {
+                                        "lemma": "EIN",
+                                        "morph_info": "ART nom,sin,mas,ind,; nom,sin,neu,ind,; akk,sin,neu,ind,; ",
+                                        "modified_grammems": "akk,nom,sin,neu,mas,ind,"
+                                    },
+                                    {
+                                        "lemma": "IDIOT",
+                                        "morph_info": "SUB nom,sin,mas,; ",
+                                        "modified_grammems": "nom,sin,mas,"
+                                    },
+                                    {
+                                        "lemma": ".",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
                                 "groups": [
                                     {
                                         "type": "MODIF_NP",
                                         "words": "ein Idiot"
                                     }
                                 ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "SIE",
-                                        "modified_grammems": "nom,sin,2,alg,per,",
-                                        "morph_info": "PRO nom,sin,2,alg,per,; "
-                                    },
-                                    {
-                                        "lemma": "SEIN",
-                                        "modified_grammems": "sin,2,prae,aux,non,",
-                                        "morph_info": "VER sin,2,prae,aux,; sin,2,prae,non,; "
-                                    },
-                                    {
-                                        "lemma": "EIN",
-                                        "modified_grammems": "akk,nom,sin,neu,mas,ind,",
-                                        "morph_info": "ART nom,sin,mas,ind,; nom,sin,neu,ind,; akk,sin,neu,ind,; "
-                                    },
-                                    {
-                                        "lemma": "IDIOT",
-                                        "modified_grammems": "nom,sin,mas,",
-                                        "morph_info": "SUB nom,sin,mas,; "
-                                    },
-                                    {
-                                        "lemma": ".",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    }
-                                ]
+                                "clause_type": "VERBSATZ"
                             }
-                        ],
-                        "last": 4,
-                        "start": 0,
-                        "words": "Du bist ein Idiot ."
+                        ]
                     }
                 ],
                 "relations": [
                     {
-                        "gramrel": "",
-                        "name": "EXPR",
                         "src": "bist",
-                        "src_grm": "imper,intra,trans,sin,2,prae,aux,non,",
-                        "src_lemma": "SEIN",
                         "trg": "Du",
-                        "trg_grm": "nom,sin,2,alg,per,",
-                        "trg_lemma": "SIE"
+                        "name": "EXPR",
+                        "gramrel": "",
+                        "src_lemma": "SEIN",
+                        "src_grm": "imper,intra,trans,sin,2,prae,aux,non,",
+                        "trg_lemma": "SIE",
+                        "trg_grm": "nom,sin,2,alg,per,"
                     }
                 ],
                 "terms": []
             }
         ]
-    },
-    {
-        "comments": "",
-        "input": "",
-        "result": null
-    },
-    {
-        "comments": "",
-        "input": "",
-        "result": null
-    },
-    {
-        "comments": "",
-        "input": "",
-        "result": null
     }
 ]

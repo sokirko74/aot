@@ -1,15 +1,34 @@
 [
     {
-        "comments": "",
         "input": "компьютерных банков данных",
+        "comments": "",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 2,
+                        "words": "компьютерных банков данных",
                         "good_synvars": [
                             {
-                                "clause_type": "EMPTY",
+                                "syn_units": [
+                                    {
+                                        "lemma": "КОМПЬЮТЕРНЫЙ",
+                                        "morph_info": "П но,од,рд,мн,; од,вн,мн,; но,од,пр,мн,; ",
+                                        "modified_grammems": "но,од,рд,мн,"
+                                    },
+                                    {
+                                        "lemma": "БАНК",
+                                        "morph_info": "С мр,рд,мн,; ",
+                                        "modified_grammems": "мр,рд,мн,"
+                                    },
+                                    {
+                                        "lemma": "ДАННЫЕ",
+                                        "morph_info": "С рд,мн,; пр,мн,; ",
+                                        "modified_grammems": "пр,рд,мн,"
+                                    }
+                                ],
                                 "groups": [
                                     {
                                         "type": "ПРИЛ_СУЩ",
@@ -20,50 +39,31 @@
                                         "words": "компьютерных банков данных"
                                     }
                                 ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "КОМПЬЮТЕРНЫЙ",
-                                        "modified_grammems": "но,од,рд,мн,",
-                                        "morph_info": "П но,од,рд,мн,; од,вн,мн,; но,од,пр,мн,; "
-                                    },
-                                    {
-                                        "lemma": "БАНК",
-                                        "modified_grammems": "мр,рд,мн,",
-                                        "morph_info": "С мр,рд,мн,; "
-                                    },
-                                    {
-                                        "lemma": "ДАННЫЕ",
-                                        "modified_grammems": "пр,рд,мн,",
-                                        "morph_info": "С рд,мн,; пр,мн,; "
-                                    }
-                                ]
+                                "clause_type": "EMPTY"
                             }
-                        ],
-                        "last": 2,
-                        "start": 0,
-                        "words": "компьютерных банков данных"
+                        ]
                     }
                 ],
                 "relations": [
                     {
-                        "gramrel": "рд,мн,",
-                        "name": "ПРИЛ_СУЩ",
                         "src": "банков",
-                        "src_grm": "но,мр,рд,мн,",
-                        "src_lemma": "БАНК",
                         "trg": "компьютерных",
-                        "trg_grm": "но,од,рд,мн,",
-                        "trg_lemma": "КОМПЬЮТЕРНЫЙ"
+                        "name": "ПРИЛ_СУЩ",
+                        "gramrel": "рд,мн,",
+                        "src_lemma": "БАНК",
+                        "src_grm": "но,мр,рд,мн,",
+                        "trg_lemma": "КОМПЬЮТЕРНЫЙ",
+                        "trg_grm": "но,од,рд,мн,"
                     },
                     {
-                        "gramrel": "рд,мн,",
-                        "name": "ГЕНИТ_ИГ",
                         "src": "банков",
-                        "src_grm": "но,мр,рд,мн,",
-                        "src_lemma": "БАНК",
                         "trg": "данных",
-                        "trg_grm": "но,пр,рд,мн,",
-                        "trg_lemma": "ДАННЫЕ"
+                        "name": "ГЕНИТ_ИГ",
+                        "gramrel": "рд,мн,",
+                        "src_lemma": "БАНК",
+                        "src_grm": "но,мр,рд,мн,",
+                        "trg_lemma": "ДАННЫЕ",
+                        "trg_grm": "но,пр,рд,мн,"
                     }
                 ],
                 "terms": [

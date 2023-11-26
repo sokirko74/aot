@@ -1,33 +1,33 @@
 [
     {
-        "comments": "// \"ах\"  не должно удаляться",
         "input": "Ах ты",
+        "comments": "// \"ах\"  не должно удаляться",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 1,
+                        "words": "Ах ты",
                         "good_synvars": [
                             {
-                                "clause_type": "EMPTY",
-                                "groups": [],
                                 "syn_units": [
                                     {
                                         "lemma": "АХ",
-                                        "modified_grammems": "",
-                                        "morph_info": "МЕЖД ; "
+                                        "morph_info": "МЕЖД ; ",
+                                        "modified_grammems": ""
                                     },
                                     {
                                         "lemma": "ТЫ",
-                                        "modified_grammems": "2л,им,ед,",
-                                        "morph_info": "МС 2л,им,ед,; "
+                                        "morph_info": "МС 2л,им,ед,; ",
+                                        "modified_grammems": "2л,им,ед,"
                                     }
-                                ]
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
                             }
-                        ],
-                        "last": 1,
-                        "start": 0,
-                        "words": "Ах ты"
+                        ]
                     }
                 ],
                 "relations": [],
@@ -36,56 +36,56 @@
         ]
     },
     {
-        "comments": "// запятая в конце",
         "input": "не был,",
+        "comments": "// запятая в конце",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 2,
+                        "words": "не был ,",
                         "good_synvars": [
                             {
-                                "clause_type": "ГЛ_ЛИЧН",
+                                "syn_units": [
+                                    {
+                                        "lemma": "НЕ",
+                                        "morph_info": "ЧАСТ ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "БЫТЬ",
+                                        "morph_info": "Г дст,прш,мр,ед,; ",
+                                        "modified_grammems": "дст,прш,мр,ед,"
+                                    },
+                                    {
+                                        "lemma": ",",
+                                        "morph_info": " ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
                                 "groups": [
                                     {
                                         "type": "ОТР_ФОРМА",
                                         "words": "не был"
                                     }
                                 ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "НЕ",
-                                        "modified_grammems": "",
-                                        "morph_info": "ЧАСТ ; "
-                                    },
-                                    {
-                                        "lemma": "БЫТЬ",
-                                        "modified_grammems": "дст,прш,мр,ед,",
-                                        "morph_info": "Г дст,прш,мр,ед,; "
-                                    },
-                                    {
-                                        "lemma": ",",
-                                        "modified_grammems": "",
-                                        "morph_info": " "
-                                    }
-                                ]
+                                "clause_type": "ГЛ_ЛИЧН"
                             }
-                        ],
-                        "last": 2,
-                        "start": 0,
-                        "words": "не был ,"
+                        ]
                     }
                 ],
                 "relations": [
                     {
-                        "gramrel": "",
-                        "name": "ОТР_ФОРМА",
                         "src": "был",
-                        "src_grm": "дст,нп,нс,прш,мр,ед,",
-                        "src_lemma": "БЫТЬ",
                         "trg": "не",
-                        "trg_grm": "",
-                        "trg_lemma": "НЕ"
+                        "name": "ОТР_ФОРМА",
+                        "gramrel": "",
+                        "src_lemma": "БЫТЬ",
+                        "src_grm": "дст,нп,нс,прш,мр,ед,",
+                        "trg_lemma": "НЕ",
+                        "trg_grm": ""
                     }
                 ],
                 "terms": []
@@ -93,39 +93,39 @@
         ]
     },
     {
-        "comments": "// Тест на обороты",
         "input": "И все-таки",
+        "comments": "// Тест на обороты",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 1,
+                        "words": "И все-таки",
                         "good_synvars": [
                             {
-                                "clause_type": "EMPTY",
+                                "syn_units": [
+                                    {
+                                        "lemma": "И",
+                                        "morph_info": " ; ",
+                                        "modified_grammems": ""
+                                    },
+                                    {
+                                        "lemma": "ВСЕ-ТАКИ",
+                                        "morph_info": " ; ",
+                                        "modified_grammems": ""
+                                    }
+                                ],
                                 "groups": [
                                     {
                                         "type": "ОБОРОТ",
                                         "words": "И все-таки"
                                     }
                                 ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "И",
-                                        "modified_grammems": "",
-                                        "morph_info": " ; "
-                                    },
-                                    {
-                                        "lemma": "ВСЕ-ТАКИ",
-                                        "modified_grammems": "",
-                                        "morph_info": " ; "
-                                    }
-                                ]
+                                "clause_type": "EMPTY"
                             }
-                        ],
-                        "last": 1,
-                        "start": 0,
-                        "words": "И все-таки"
+                        ]
                     }
                 ],
                 "relations": [],
@@ -134,51 +134,51 @@
         ]
     },
     {
-        "comments": "",
         "input": "все лишнее",
+        "comments": "",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 1,
+                        "words": "все лишнее",
                         "good_synvars": [
                             {
-                                "clause_type": "EMPTY",
+                                "syn_units": [
+                                    {
+                                        "lemma": "ВЕСЬ",
+                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; но,од,им,мн,; но,вн,мн,; ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,"
+                                    },
+                                    {
+                                        "lemma": "ЛИШНИЙ",
+                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; ",
+                                        "modified_grammems": "но,од,ср,вн,им,ед,"
+                                    }
+                                ],
                                 "groups": [
                                     {
                                         "type": "ПРИЛ_СУЩ",
                                         "words": "все лишнее"
                                     }
                                 ],
-                                "syn_units": [
-                                    {
-                                        "lemma": "ВЕСЬ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "МС-П но,од,ср,им,ед,; но,од,ср,вн,ед,; но,од,им,мн,; но,вн,мн,; "
-                                    },
-                                    {
-                                        "lemma": "ЛИШНИЙ",
-                                        "modified_grammems": "но,од,ср,вн,им,ед,",
-                                        "morph_info": "П но,од,ср,им,ед,; но,од,ср,вн,ед,; "
-                                    }
-                                ]
+                                "clause_type": "EMPTY"
                             }
-                        ],
-                        "last": 1,
-                        "start": 0,
-                        "words": "все лишнее"
+                        ]
                     }
                 ],
                 "relations": [
                     {
-                        "gramrel": "но,од,ср,вн,им,ед,",
-                        "name": "ПРИЛ_СУЩ",
                         "src": "лишнее",
-                        "src_grm": "но,од,ср,вн,им,ед,",
-                        "src_lemma": "ЛИШНИЙ",
                         "trg": "все",
-                        "trg_grm": "но,од,ср,вн,им,ед,",
-                        "trg_lemma": "ВЕСЬ"
+                        "name": "ПРИЛ_СУЩ",
+                        "gramrel": "но,од,ср,вн,им,ед,",
+                        "src_lemma": "ЛИШНИЙ",
+                        "src_grm": "но,од,ср,вн,им,ед,",
+                        "trg_lemma": "ВЕСЬ",
+                        "trg_grm": "но,од,ср,вн,им,ед,"
                     }
                 ],
                 "terms": []
@@ -186,82 +186,82 @@
         ]
     },
     {
-        "comments": "// с числительными \"МНОГО\" или \"МАЛО\" не надо образовывать АППРОКС_ИГ  ",
         "input": "денег мало",
+        "comments": "// с числительными \"МНОГО\" или \"МАЛО\" не надо образовывать АППРОКС_ИГ  ",
         "result": [
             {
                 "analytical": [],
                 "groups": [
                     {
+                        "start": 0,
+                        "last": 1,
+                        "words": "денег мало",
                         "good_synvars": [
                             {
-                                "clause_type": "ПРЕДК",
-                                "groups": [],
                                 "syn_units": [
                                     {
                                         "lemma": "ДЕНЬГИ",
-                                        "modified_grammems": "рд,мн,",
-                                        "morph_info": "С рд,мн,; "
+                                        "morph_info": "С рд,мн,; ",
+                                        "modified_grammems": "рд,мн,"
                                     },
                                     {
                                         "lemma": "МАЛО",
-                                        "modified_grammems": "нст,",
-                                        "morph_info": "ПРЕДК нст,; "
+                                        "morph_info": "ПРЕДК нст,; ",
+                                        "modified_grammems": "нст,"
                                     }
-                                ]
+                                ],
+                                "groups": [],
+                                "clause_type": "ПРЕДК"
                             },
                             {
-                                "clause_type": "КР_ПРИЛ",
-                                "groups": [],
                                 "syn_units": [
                                     {
                                         "lemma": "ДЕНЬГИ",
-                                        "modified_grammems": "рд,мн,",
-                                        "morph_info": "С рд,мн,; "
+                                        "morph_info": "С рд,мн,; ",
+                                        "modified_grammems": "рд,мн,"
                                     },
                                     {
                                         "lemma": "МАЛЫЙ",
-                                        "modified_grammems": "но,од,ср,ед,",
-                                        "morph_info": "КР_ПРИЛ но,од,ср,ед,; "
+                                        "morph_info": "КР_ПРИЛ но,од,ср,ед,; ",
+                                        "modified_grammems": "но,од,ср,ед,"
                                     }
-                                ]
+                                ],
+                                "groups": [],
+                                "clause_type": "КР_ПРИЛ"
                             },
                             {
-                                "clause_type": "EMPTY",
-                                "groups": [],
                                 "syn_units": [
                                     {
                                         "lemma": "ДЕНЬГИ",
-                                        "modified_grammems": "рд,мн,",
-                                        "morph_info": "С рд,мн,; "
+                                        "morph_info": "С рд,мн,; ",
+                                        "modified_grammems": "рд,мн,"
                                     },
                                     {
                                         "lemma": "МАЛО",
-                                        "modified_grammems": "",
-                                        "morph_info": "Н ; "
+                                        "morph_info": "Н ; ",
+                                        "modified_grammems": ""
                                     }
-                                ]
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
                             },
                             {
-                                "clause_type": "EMPTY",
-                                "groups": [],
                                 "syn_units": [
                                     {
                                         "lemma": "ДЕНЬГИ",
-                                        "modified_grammems": "рд,мн,",
-                                        "morph_info": "С рд,мн,; "
+                                        "morph_info": "С рд,мн,; ",
+                                        "modified_grammems": "рд,мн,"
                                     },
                                     {
                                         "lemma": "МАЛО",
-                                        "modified_grammems": "вн,им,",
-                                        "morph_info": "ЧИСЛ им,; вн,; "
+                                        "morph_info": "ЧИСЛ им,; вн,; ",
+                                        "modified_grammems": "вн,им,"
                                     }
-                                ]
+                                ],
+                                "groups": [],
+                                "clause_type": "EMPTY"
                             }
-                        ],
-                        "last": 1,
-                        "start": 0,
-                        "words": "денег мало"
+                        ]
                     }
                 ],
                 "relations": [],

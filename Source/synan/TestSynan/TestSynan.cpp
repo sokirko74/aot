@@ -5,23 +5,22 @@
 #include "morph_dict/common/argparse.h"
 #include <filesystem>
 
-std::vector<std::string> GetAnanlytForms(const CSentence &Sentence) {
-    std::vector<std::string>  result;
-    for (int WordNo = 0; WordNo < Sentence.m_Words.size(); WordNo++) {
-        const CSynWord &W = Sentence.m_Words[WordNo];
-        if (!W.m_MainVerbs.empty()) {
-            std::string form = W.m_strWord.c_str();
-            for (size_t i = 0; i < W.m_MainVerbs.size(); i++) {
-                form += std::string(" ") + Sentence.m_Words[W.m_MainVerbs[i]].m_strWord;
-
-                const CSynWord &W_1 = Sentence.m_Words[W.m_MainVerbs[i]];
-                for (size_t j = 0; j < W_1.m_MainVerbs.size(); j++)
-                    form += std::string(" ") + Sentence.m_Words[W_1.m_MainVerbs[j]].m_strWord;
+void GetAnanlytForms(const CSentence &Sentence, CJsonObject& out) {
+    CJsonObject arr(out.get_doc(), rapidjson::kArrayType);
+    for (auto& w: Sentence.m_Words) {
+        if (!w.m_MainVerbs.empty()) {
+            std::string form = w.m_strWord;
+            for (auto& m: w.m_MainVerbs) {
+                form += std::string(" ") + Sentence.m_Words[m].m_strWord;
+                for (auto j: Sentence.m_Words[m].m_MainVerbs)
+                    form += std::string(" ") + Sentence.m_Words[j].m_strWord;
             };
-            result.push_back(form);
+            rapidjson::Value s;
+            s.SetString(form.c_str(), out.get_allocator());
+            arr.push_back(s);
         }
     }
-    return result;
+    out.add_member("analytical", arr.get_value());
 }
 
 std::string GetWords(const CSentence &Sentence, const CPeriod &P) {
@@ -34,37 +33,34 @@ std::string GetWords(const CSentence &Sentence, const CPeriod &P) {
     return S;
 }
 
-nlohmann::json GetGroups(const CSentence &Sentence, const CAgramtab &A) {
+void GetGroups(const CSentence &Sentence, const CAgramtab &A, CJsonObject& out) {
     int nClausesCount = Sentence.GetClausesCount();
-    nlohmann::json  clauses = nlohmann::json::array();
+    CJsonObject arr(out.get_doc(), rapidjson::kArrayType);
 
     for (int ClauseNo = 0; ClauseNo < nClausesCount; ClauseNo++) {
         const CClause &Clause = Sentence.GetClause(ClauseNo);
         int nCvar = Clause.m_SynVariants.size();
 
         if (Clause.m_SynVariants.empty()) continue;
-        nlohmann::json clause;
-        clause["start"] = Clause.m_iFirstWord;
-        clause["last"] = Clause.m_iLastWord;
-        clause["words"] =  GetWords(Sentence, Clause);
-        clause["good_synvars"] = nlohmann::json::array();
-
-
+        CJsonObject clause(out.get_doc());
+        clause.add_int("start", Clause.m_iFirstWord);
+        clause.add_int("last",  Clause.m_iLastWord);
+        clause.add_string_copy("words", GetWords(Sentence, Clause));
         if (!Clause.m_RelativeWord.IsEmpty())
         {
-            clause["relative"] = Sentence.m_Words[Clause.m_RelativeWord.m_WordNo].m_strWord;
+            clause.add_string_copy("relative", Sentence.m_Words[Clause.m_RelativeWord.m_WordNo].m_strWord);
         };
         if (Clause.m_AntecedentWordNo != -1)
         {
-            clause["antecedent"] = Sentence.m_Words[Clause.m_AntecedentWordNo].m_strWord;
+            clause.add_string_copy("antecedent",  Sentence.m_Words[Clause.m_AntecedentWordNo].m_strWord);
         };
 
+        
 
         int nVmax = Clause.m_SynVariants.begin()->m_iWeight;
-        for (CSVI pSynVar = Clause.m_SynVariants.begin(); pSynVar != Clause.m_SynVariants.end(); pSynVar++) {
-            if (pSynVar->m_iWeight < nVmax) break;
-
-            const CMorphVariant &synVar = *pSynVar;
+        CJsonObject good_synvars(out.get_doc(), rapidjson::kArrayType);
+        for (auto& synVar: Clause.m_SynVariants) {
+            if (synVar.m_iWeight < nVmax) break;
 
             std::string clauseType = "EMPTY";
             {
@@ -73,44 +69,40 @@ nlohmann::json GetGroups(const CSentence &Sentence, const CAgramtab &A) {
                 if (ClauseType != UnknownSyntaxElement)
                     clauseType = A.GetClauseNameByType(ClauseType);
             }
-            nlohmann::json groups = nlohmann::json::array();
-            for (size_t GroupNo = 0; GroupNo < synVar.m_vectorGroups.GetGroups().size(); GroupNo++) {
-                const CGroup &G = synVar.m_vectorGroups.GetGroups()[GroupNo];
-                groups.push_back({
-                    {"type", Sentence.GetOpt()->GetGroupNameByIndex(G.m_GroupType)},
-                    {"words", GetWords(Sentence, G)},
-                });
+            CJsonObject groups(out.get_doc(), rapidjson::kArrayType);
+            for (auto& g: synVar.m_vectorGroups.GetGroups()) {
+                CJsonObject jq(out.get_doc());
+                jq.add_string_copy("type", Sentence.GetOpt()->GetGroupNameByIndex(g.m_GroupType));
+                jq.add_string_copy("words", GetWords(Sentence, g));
+                groups.push_back(jq.get_value());
+            };           
 
-            };
-            
-
-            auto syn_units = nlohmann::json::array();
+            CJsonObject syn_units(out.get_doc(), rapidjson::kArrayType);
             for (int unitNo = 0; unitNo < synVar.m_SynUnits.size(); unitNo++) {
                 int iWord = synVar.m_SynUnits[unitNo].m_SentPeriod.m_iFirstWord;
                 int homIndex = synVar.GetHomNum(unitNo);
                 if (homIndex != -1) {
                     const CSynHomonym& hom = Sentence.GetWords()[iWord].GetSynHomonym(homIndex);
-                    syn_units.push_back({
-                        {"lemma", hom.GetLemma()},
-                        {"morph_info", hom.GetPartOfSpeechStr() + std::string(" ") + hom.GetGrammemsStr()},
-                        {"modified_grammems", A.GrammemsToStr(synVar.m_SynUnits[unitNo].m_iGrammems)}
-                        });
+                    CJsonObject o(out.get_doc());
+                    o.add_string_copy("lemma", hom.GetLemma());
+                    o.add_string_copy("morph_info", hom.GetPartOfSpeechStr() + std::string(" ") + hom.GetGrammemsStr());
+                    o.add_string_copy("modified_grammems", A.GrammemsToStr(synVar.m_SynUnits[unitNo].m_iGrammems));
+                    syn_units.push_back(o.get_value());
                 }
                 else {
                     //todo: print subclauses
                 }
             }
-            
-            clause["good_synvars"].push_back({
-                {"syn_units", syn_units},
-                {"groups",  groups },
-                {"clause_type", clauseType}
-            });
+            CJsonObject o(out.get_doc());
+            o.add_member("syn_units", syn_units.get_value());
+            o.add_member("groups", groups.get_value());
+            o.add_string_copy("clause_type", clauseType);
+            good_synvars.push_back(o.get_value());
         }
-        clauses.push_back(clause);
+        clause.add_member("good_synvars", good_synvars.get_value());
+        arr.push_back(clause);
     }
-
-    return clauses;
+    out.add_member("groups", arr.get_value());
 }
 
 std::string GetNodeStr(const CSentence &Sentence, const CRelationsIterator &RelIt, int GroupNo, int WordNo) {
@@ -135,67 +127,64 @@ std::string GetNodeGrmStr(const CSentence &Sentence, const CRelationsIterator &R
     }
 }
 
-nlohmann::json GetRelations(const CSentence &Sentence) {
+void GetRelations(const CSentence &Sentence, CJsonObject& out) {
     CRelationsIterator RelIt;
     RelIt.SetSentence(&Sentence);
-    for (int i = 0; i < Sentence.m_vectorPrClauseNo.size(); i++)
-        RelIt.AddClauseNoAndVariantNo(Sentence.m_vectorPrClauseNo[i], 0);
+    for (auto& i: Sentence.m_vectorPrClauseNo)
+        RelIt.AddClauseNoAndVariantNo(i, 0);
     RelIt.BuildRelations();
-    nlohmann::json  rels = nlohmann::json::array();
+    CJsonObject rels(out.get_doc(), rapidjson::kArrayType);
 
-    for (long RelNo = 0; RelNo < RelIt.GetRelations().size(); RelNo++) {
-        const CSynOutputRelation &piRel = RelIt.GetRelations()[RelNo];
-        std::string RelName = Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type);
-        std::string Src = GetNodeStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord);
-        std::string Trg = GetNodeStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord);
+    for (auto& piRel: RelIt.GetRelations()) {
+        CJsonObject o(out.get_doc());
+        o.add_string_copy("src", GetNodeStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord));
+        o.add_string_copy("trg", GetNodeStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord));
+        o.add_string_copy("name", Sentence.GetOpt()->GetGroupNameByIndex(piRel.m_Relation.type));
+        o.add_string_copy("gramrel", Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems));
         std::string SrcLemma, TrgLemma;
         std::string SrcGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iSourceGroup, piRel.m_Relation.m_iFirstWord, SrcLemma);
+        o.add_string_copy("src_lemma", SrcLemma);
+        o.add_string_copy("src_grm", SrcGrm);
+
         std::string TrgGrm = GetNodeGrmStr(Sentence, RelIt, piRel.m_iTargetGroup, piRel.m_Relation.m_iLastWord, TrgLemma);
-        std::string GramRel = Sentence.GetOpt()->GetGramTab()->GrammemsToStr(piRel.m_Relation.m_iGrammems);
-        rels.push_back({
-            {"src", Src},
-            {"trg", Trg},
-            {"name", RelName},
-            {"gramrel", GramRel},
-            {"src_lemma", SrcLemma},
-            {"src_grm", SrcGrm},
-            {"trg_lemma", TrgLemma},
-            {"trg_grm", TrgGrm},
-         });
+        o.add_string_copy("trg_lemma", TrgLemma);
+        o.add_string_copy("trg_grm", TrgGrm);
+
+        rels.push_back(o);
     }
-    return rels;
+    out.add_member("relations", rels.get_value());
 }
 
-nlohmann::json GetThesaurusTerms(const CSentence& Sentence) {
-    nlohmann::json  terms = nlohmann::json::array();
+void GetThesaurusTerms(const CSentence& Sentence, CJsonObject& out) {
+    CJsonObject terms(out.get_doc(), rapidjson::kArrayType);
     for (size_t i = 0; i < Sentence.m_Words.size(); i++) {
         if (Sentence.m_Words[i].m_bFirstWordInTermin) {
             for (size_t k = i; k < Sentence.m_Words.size(); ++k) {
                 if (Sentence.m_Words[k].m_bLastWordInTermin) {
-                    terms.push_back(GetWords(Sentence, CPeriod(i, k)));
+                    rapidjson::Value o;
+                    o.SetString(GetWords(Sentence, CPeriod(i, k)), out.get_allocator());
+                    terms.push_back(o);
                     break;
                 }
             }
             
         }
     }
-    return terms;
+    out.add_member("terms", terms.get_value());
 }
 
-nlohmann::json GetResultBySyntax(const CSentencesCollection &SC, const CAgramtab &A) {
-    nlohmann::json sents = nlohmann::json::array();
+void GetResultBySyntax(const CSentencesCollection& SC, const CAgramtab& A, CJsonObject& out) {
+    CJsonObject sents(out.get_doc(), rapidjson::kArrayType);
     for (size_t nSent = 0; nSent < SC.m_vectorSents.size(); nSent++) {
         const CSentence &Sentence = *SC.m_vectorSents[nSent];
-        nlohmann::json sent = {
-            {"analytical",  GetAnanlytForms(Sentence)},
-            {"groups",  GetGroups(Sentence, A)},
-            {"relations",  GetRelations(Sentence)},
-            {"terms",  GetThesaurusTerms(Sentence)},
-        };
-        sents.push_back(sent);
+        CJsonObject sent(out.get_doc());
+        GetAnanlytForms(Sentence, sent);
+        GetGroups(Sentence, A, sent);
+        GetRelations(Sentence, sent);
+        GetThesaurusTerms(Sentence, sent);
+        sents.push_back(sent.get_value());
     }
-    //ConvertToUtfRecursive(sents, A.m_Language);
-    return sents;
+    out.add_member("result",sents.get_value());
 };
 
 
@@ -246,15 +235,21 @@ int main(int argc, const char** argv) {
             CTestCaseBase base;
             std::ifstream inp(p.first);
             base.read_test_cases(inp);
+            rapidjson::Document d;
+            CJsonObject cases(d, rapidjson::kArrayType);
+
             for (auto& t : base.TestCases) {
                 if (!t.Text.empty()) {
                     H.GetSentencesFromSynAn(t.Text, false);
-                    t.Result = GetResultBySyntax(H.m_Synan, *H.m_pGramTab);
+                    CJsonObject j(d);
+                    j.add_string("input",  t.Text);
+                    j.add_string("comments", t.Comment);
+                    GetResultBySyntax(H.m_Synan, *H.m_pGramTab, j);
+                    cases.push_back(j.get_value());
                 }
             }
-            //PLOGD <<  "write output file " << p.second;
-            std::ofstream outp(p.second, std::ios::binary);
-            base.write_test_cases(outp);
+            PLOGD <<  "write output file " << p.second;
+            cases.dump_rapidjson_pretty(p.second, 4);
         }
     }
     catch (CExpc e) {
