@@ -12,7 +12,7 @@
 #include "StdAfx.h"
 #include "common/cortege.h"
 class CWordlist;
-#include "seman/SemanLib/RossHolder.h"
+#include "seman/SemanLib/struct_dict_holder.h"
 
 struct CRossDevTextField;
 
@@ -37,18 +37,28 @@ struct CDomainParam {
 	    Font.lfQuality = DEFAULT_QUALITY;
 	    Font.lfPitchAndFamily  = DEFAULT_PITCH;
 	    Font.lfCharSet = RUSSIAN_CHARSET;
-	    strcpy(Font.lfFaceName, "FixedSys");
+	    lstrcpy(Font.lfFaceName, L"FixedSys");
 		Color = 0;
 		DropDownCount = 10;
 	};
 
 	void InitFromString (CString Line)
 	{
-		char s[100];
-		char Name[100];
-		strcpy (s,Line);
-		sscanf  (s, "%s %i %i", Name, &Color, &DropDownCount);
-		DomStr = Name;
+		int i = 0; // substring index to extract
+		CString sToken = _T("");
+		while (AfxExtractSubString(sToken, Line, i, ' '))
+		{
+			if (i == 0) {
+				DomStr = sToken;
+			}
+			else if (i == 1) {
+				Color = _ttoi(sToken);
+			}
+			else if (i == 2) {
+				DropDownCount = _ttoi(sToken);
+			}
+			i++;
+		}
 	}
 	bool operator == (CString S) const 
 	{
@@ -66,20 +76,14 @@ struct CDomainParam {
 class CRossDoc : public CDocument
                  
 {
-	bool				m_bRussianFields;
-	CRossHolder			m_ExternalRossHolder;
+	CStructDictHolder			m_ExternalRossHolder;
 	bool				m_bSerialized;
 	DictTypeEnum		m_RossId;
 	bool				m_IsDefault;
-	std::vector<CString>		m_Authors;
 	bool				m_FirstLoadReadonly;
 	bool				m_DoNotLock;
 	bool				m_bDoNotSaveLastUserName;	
 	std::vector<CString>		m_OptionsComments;
-
-
-	void ReadConfig(CArchive& ar, CString& Login);
-	void WriteConfig(CArchive& ar);
 
 protected: // create from serialization only
 	CRossDoc();
@@ -95,7 +99,6 @@ public:
 	CString					m_Author;
 	bool					m_ReadOnly;
 	bool					m_bArticleInitTextMode;
-	LanguageEnum			m_LanguageId;
 
   
 
@@ -105,8 +108,8 @@ public:
 	CDictionary*				GetRoss();
 	const CDictionary*			GetRoss() const;
 
-	CRossHolder*				GetRossHolder();
-	const CRossHolder*			GetRossHolder() const;
+	CStructDictHolder*				GetRossHolder();
+	const CStructDictHolder*			GetRossHolder() const;
 
 	CView*  GetWordList();
 	void SetModifiedFlag( BOOL bModified = TRUE );
@@ -116,6 +119,7 @@ public:
 	const char* GetEnglishFieldName() const;
 	bool		IsThesRoss() const;
 	int			GetThesId() const;
+	DictTypeEnum GetRossType() const;
 	std::string		GetLockFileName()  const;
 	void		RemoveLock() const;
 	
@@ -140,9 +144,9 @@ public:
 
 	
 	virtual ~CRossDoc();
-    void    BuildBasicDomItems();
-	CString SerializeInner(CArchive& ar);
-	void	MakeReadOnly() ;
+    void BuildBasicDomItems();
+	void SerializeInner(CArchive& ar);
+	void MakeReadOnly() ;
 
 #ifdef _DEBUG
 	virtual void AssertValid() const;

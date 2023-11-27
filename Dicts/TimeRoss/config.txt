@@ -1,4 +1,0 @@
-{
-	"MaxNumDom": 3,
-	"DictName": "TimeRoss"
-}

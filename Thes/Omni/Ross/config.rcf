@@ -1,0 +1,7 @@
+{
+	"MaxNumDom": 3,
+	"MaxMeanNum":  1,
+	"DictName": "RML_THES_OMNI",
+	"users": ["alex", "maya", "user", "boris", "oleg", "graf","masha", "af"]
+
+}

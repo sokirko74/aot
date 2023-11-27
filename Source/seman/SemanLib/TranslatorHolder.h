@@ -12,8 +12,7 @@
 #include  "synan/SynanLib/SyntaxHolder.h"
 
 
-enum LanguageEnum { Russian, English};
-class CRossHolder;
+class CStructDictHolder;
 
 const char g_strRegRusOborDicPath[]    = "Software\\Dialing\\Obor\\DictPath"; 	 
 const long UnknownParadigmId = -1;

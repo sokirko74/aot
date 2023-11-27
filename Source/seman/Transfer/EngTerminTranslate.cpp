@@ -48,7 +48,7 @@ void CEngSemStructure::translate_abbr_termin_node(int MainNodeNo)
 	std::string  Form = Term.m_AbbrForm;
 	if (Form == "")
 		Form = Term.m_TerminStr;
-	m_Nodes[MainNodeNo].m_Words[0].m_Word = Form;
+	m_Nodes[MainNodeNo].m_Words[0].SetWord(Form);
 	m_Nodes[MainNodeNo].m_Words[0].m_bDoNotChangeForm = true;  
 	m_Nodes[MainNodeNo].m_Words[0].m_Poses = 1<<eNOUN;
 };
@@ -154,7 +154,7 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 	}
 
 	m_Nodes[NodeNo].m_Words.resize(1);
-	m_Nodes[NodeNo].m_Words[0].m_Word = result;  
+	m_Nodes[NodeNo].m_Words[0].SetWord(result);  
 	m_Nodes[NodeNo].m_Words[0].m_bDoNotChangeForm = true;  
 	m_Nodes[NodeNo].m_Words[0].m_Poses = 1<<MainPos;
 	Trim(AllLemmas);

@@ -39,7 +39,7 @@ public:
  		POSITION pos = m_WordList.GetFirstSelectedItemPosition();
 
   		if (pos == NULL)
-			{ ::MessageBox(0, "No dictionary entries are highlighted in the list", "Message Box", MB_OK);
+			{ ::MessageBox(0, _T("No dictionary entries are highlighted in the list"), _T("Message Box"), MB_OK);
 			  return false;};
 
 		UnitNo = m_WordList.GetNextSelectedItem(pos);

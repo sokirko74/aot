@@ -37,7 +37,7 @@ struct  CDictUnitInterp : public CRossInterp {
 
 	CDictUnitInterp();
 	CDictUnitInterp (DictTypeEnum   DictType,	uint16_t UnitNo);
-	CDictUnitInterp (const  CRossHolder* RossDoc, DictTypeEnum   DictType,	uint16_t UnitNo, bool bNegativeForm, bool bPassiveForm);
+	CDictUnitInterp (const  CStructDictHolder* RossDoc, DictTypeEnum   DictType,	uint16_t UnitNo, bool bNegativeForm, bool bPassiveForm);
 	CDictUnitInterp ( const CRossInterp& X );
 	bool operator == ( const CDictUnitInterp& X ) const;
 	uint16_t  GetSemCorrectUnitNo () const;

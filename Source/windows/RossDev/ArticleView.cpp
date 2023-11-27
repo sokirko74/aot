@@ -166,7 +166,7 @@ void CArticleView::DeleteLine(size_t i)
 {
 	SelectLine(i);
 
-	m_RichEdit.ReplaceSel("");
+	m_RichEdit.ReplaceSel(_T(""));
 };
 
 
@@ -222,10 +222,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege>& L, size_t nPos)
 	else
 		for (int i=A.m_Fields[nPos].StartLine; i <=  A.m_Fields[nPos].EndLine; i++)
 			DeleteLine (A.m_Fields[nPos].StartLine); 
-
-
-
-	size_t LevelId = 0;
+		size_t LevelId = 0;
 	CString S;
 	// сначала записываем первую строку, т.к. она сильно отличается от всех
 	if (L.size() > 0)
@@ -240,10 +237,10 @@ void CArticleView::WriteToEdit (std::vector<TCortege>& L, size_t nPos)
 		};
 
 		CString FieldStr =  ConstructFldName(GetRoss(), A.m_Fields[nPos].FieldNo, A.m_Fields[nPos].LeafId, A.m_Fields[nPos].BracketLeafId);
-		S.Format (_FieldFormat,FieldStr ,Q.c_str());
+		S.Format (_U16(_FieldFormat), FieldStr, (const TCHAR*)_U16(Q));
 	}
 	else
-		S.Format (_FieldFormat, ConstructFldName(GetRoss(), A.m_Fields[nPos].FieldNo, A.m_Fields[nPos].LeafId, A.m_Fields[nPos].BracketLeafId)," ");
+		S.Format (_U16(_FieldFormat), ConstructFldName(GetRoss(), A.m_Fields[nPos].FieldNo, A.m_Fields[nPos].LeafId, A.m_Fields[nPos].BracketLeafId)," ");
 
 
 	InsertLine (A.m_Fields[nPos].StartLine, S);
@@ -255,7 +252,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege>& L, size_t nPos)
 		if (L[i].m_LevelId > LevelId)
 		{
 			LevelId = L[i].m_LevelId;
-			S.Format ("%i %s",LevelId, Q.c_str());
+			S.Format (_T("%i %s"), LevelId, Q.c_str());
 
 		}
 		else
@@ -267,7 +264,7 @@ void CArticleView::WriteToEdit (std::vector<TCortege>& L, size_t nPos)
 				S = Q.c_str();
 
 		CString R;
-		R.Format ("%10s%s"," ",S);
+		R.Format (_T("%10s%s")," ",S);
 
 		InsertLine (i+A.m_Fields[nPos].StartLine,R);
 	}
@@ -276,43 +273,6 @@ void CArticleView::WriteToEdit (std::vector<TCortege>& L, size_t nPos)
 	((CArticleDoc*)GetDocument())->Markout();
 };
 
-
-
-
-
-size_t CountLemmatize = 0;
-void Lemmatize(char* OutBuf, char* InBuf) 
-{
-	TRACE (InBuf);
-	TRACE ("\n");
-	OutBuf[0] = 0;
-	if ( !InBuf 
-		|| (strlen(InBuf) == 0)) return;
-	MorphLanguageEnum langua  =  morphRussian;
-	if (is_english_alpha ((BYTE)InBuf[0]))
-		langua = morphEnglish;
-	strcpy (OutBuf, InBuf);
-	const CLemmatizer* P = GetSemBuilder().m_RusStr.m_pData->GetLemmatizer(langua);
-	if (!P) return;
-
-	try 
-	{
-		CountLemmatize++;
-
-		
-		std::vector<CFormInfo> ParadigmCollection;
-		std::string WordForm = InBuf;
-		P->CreateParadigmCollection(false, WordForm, false,false, ParadigmCollection);
-		if (ParadigmCollection.empty()) return;
-		std::string t = ParadigmCollection[0].GetWordForm(0);
-		strcpy(OutBuf, t.c_str());
-		RusMakeLower(OutBuf);
-	}
-	catch (...)
-	{
-
-	};
-};
 
 bool IsRossEntry (const char* ItemStr)
 {
@@ -338,13 +298,13 @@ bool IsKeyWordArticle (const CString& word, COLORREF& C, uint32_t Data)
 {
 	CArticleView* V = (CArticleView*)Data;
 	CRossDoc* RossDoc = V->GetRossDoc();
-	
-	auto it = RossDoc->m_BasicDomItems.find(std::string(word));
+	auto word_u8 = _U8(word);
+	auto it = RossDoc->m_BasicDomItems.find(word_u8);
 
     if (    (it == RossDoc->m_BasicDomItems.end())
 		|| (  RossDoc->GetRoss()->m_Domens[it->second].GetDomStr() == std::string("D_1"))) // если это не элемент метаязыка
 	{
-		if (IsRossEntry(word))
+		if (IsRossEntry(word_u8.c_str()))
 		{
 			C = RGB(0,0,255);
 			return true;
@@ -359,7 +319,7 @@ bool IsKeyWordArticle (const CString& word, COLORREF& C, uint32_t Data)
 		return true;
 	};
 
-	auto field_it = RossDoc->m_Fields.find(std::string(word));
+	auto field_it = RossDoc->m_Fields.find(word_u8);
 	if 	(field_it != RossDoc->m_Fields.end())
 	{
 		C = RGB(90,90,90);
@@ -427,9 +387,18 @@ void CArticleView::OnInitialUpdate()
 
 void CArticleView::SetText(CString S)
 {
-	S.Replace("\n", "\r\n");
+	S.Replace(_T("\n"), _T("\r\n"));
 	m_RichEdit.SetWindowText(S);
+	CString debug = GetText();
 	parse();
+	debug = GetText();
+};
+
+CString CArticleView::GetText() const
+{
+	CString A;
+	m_RichEdit.GetWindowText(A);
+	return  A;
 };
 
 
@@ -451,7 +420,7 @@ void CMyEditCtrl::OnLButtonDblClk( UINT nFlags,  CPoint point )
 	int LineNo = LineFromChar(CharNo);
 	CString SourceText;
 	GetWindowText(SourceText);
-	SourceText.Replace("\r\n", "\n");
+	SourceText.Replace(_T("\r\n"), _T("\n"));
 	int start = CharNo;
 	for (; start >=0; start--)
 		if (!CanBeEntrySymbol( (BYTE)SourceText.GetAt(start) ) )
@@ -485,7 +454,7 @@ void CMyEditCtrl::OnLButtonDblClk( UINT nFlags,  CPoint point )
 	while( pos )
 	{
 		CRossDoc* pDoc = (CRossDoc*)pRossDocTemplate->GetNextDoc(pos);	
-  		uint16_t UnitNo = pDoc->GetRoss()->LocateUnit((const char*)Word, MeanNum);
+  		uint16_t UnitNo = pDoc->GetRoss()->LocateUnit(_U8(Word).c_str(), MeanNum);
 		if (UnitNo != ErrUnitNo) 
 		{
 			GlobalOpenArticle (pDoc, UnitNo);

@@ -437,20 +437,20 @@ bool _node_is_adj(const CEngSemNode& Node)
 
 void set_possessive (CEngSemWord& EngWord)
 {
-   if (EngWord.m_Word.size() == 0) return;
+   if (EngWord.GetWord().empty()) return;
    if  (EngWord.m_Poses == (1 << eNOUN))
    {
-	   if (    (EngWord.m_Word[EngWord.m_Word.size() - 1] == 's')
-			|| (EngWord.m_Word[EngWord.m_Word.size() - 1] == 'S')
+	   if (    (EngWord.GetWord().back() == 's')
+			|| (EngWord.GetWord().back() == 'S')
 		  )
-		  EngWord.m_Word += "'";
+		  EngWord.AddPostfix("'");
 	   else
-		  EngWord.m_Word += "'s";
+		  EngWord.AddPostfix("'s");
    }
    else
    {
 	   if (EngWord.HasOneGrammem(ePersonalPronoun) )
-		   EngWord.m_Word = GetPronounEnglishFormByGrammems(EngWord.GetAllGrammems(), false);
+		   EngWord.SetWord(GetPronounEnglishFormByGrammems(EngWord.GetAllGrammems(), false));
    };
 };
 

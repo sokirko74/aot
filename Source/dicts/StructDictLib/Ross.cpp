@@ -39,6 +39,11 @@ const std::string& TRoss::GetDictFolder() const {
 	return Config.DictFolder;
 }
 
+const TDictConfig& TRoss::GetConfig() const {
+	return Config;
+}
+
+
 void MakePathAndCheck(const std::string path, const std::string fileName, std::string& fullPath) {
     fullPath = MakePath(path, fileName);
     if (!FileExists(fullPath.c_str())) {

@@ -123,7 +123,7 @@ bool CRusSemStructure::InitValsRussian(long NodeNo) {
 
 
     if (m_Nodes[NodeNo].GetType() != NoneRoss) {
-        const CRossHolder *RossDoc = GetRossHolder(m_Nodes[NodeNo].GetType());
+        const CStructDictHolder *RossDoc = GetRossHolder(m_Nodes[NodeNo].GetType());
         const CDictionary *pRoss = RossDoc->GetRoss();
         long UnitNo = m_Nodes[NodeNo].GetUnitNo();
 
@@ -317,7 +317,7 @@ void CRusSemStructure::InitPOs(long ClauseNo) {
         if (IsInClause(NodeNo, ClauseNo)) {
 
             if (m_Nodes[NodeNo].GetType() != NoneRoss) {
-                const CRossHolder *RossDoc = GetRossHolder(m_Nodes[NodeNo].GetType());
+                const CStructDictHolder *RossDoc = GetRossHolder(m_Nodes[NodeNo].GetType());
                 const CDictionary *pRoss = RossDoc->GetRoss();
                 long UnitNo = m_Nodes[NodeNo].GetUnitNo();
 
@@ -409,7 +409,7 @@ bool CRusSemStructure::BuildAnalyticalSupelative() {
     // обрабатываем наречия, которые превращают прилагательные в превосходную степень
     // В этот список входят наречия "наиболее", "самый", "наименее".
     // удаляем наречия,  а прилагательным приписываем оператор "_превос".
-    static const std::vector<std::string> adverbs = {_R("НАИБОЛЕЕ"), _R("НАИМЕНЕЕ"), _R("САМЫЙ")};
+    static const std::vector<std::string> adverbs = {"НАИБОЛЕЕ", "НАИМЕНЕЕ", "САМЫЙ"};
     for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
         if (m_Nodes[NodeNo].IsLemmaList(adverbs)) {
             dom_item_id_t SynHost = GetSynHost(NodeNo);
@@ -422,8 +422,8 @@ bool CRusSemStructure::BuildAnalyticalSupelative() {
                     )
                 continue;
 
-            if (m_Nodes[NodeNo].IsLemmaList({_R("НАИБОЛЕЕ"), _R("САМЫЙ")}))
-                m_Nodes[SynHost].AddGrammems(_QM(rSuperlative)); //m_RelOperators.push_back("Magn");
+            if (m_Nodes[NodeNo].IsLemmaList({"НАИБОЛЕЕ", "САМЫЙ"}))
+                m_Nodes[SynHost].AddGrammems(_QM(rSuperlative));
             else
                 m_Nodes[SynHost].m_RelOperators.push_back("AntiMagn");
 
@@ -500,17 +500,15 @@ void CRusSemStructure::BuildIZCHORelation(long ClauseNo) {
                 if (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЕЩЕ") {
                     long q = FindRightClosestNode(NodeNo);
                     if (q == -1) continue;
-                    if (m_Nodes[q].m_Words.size() == 0) continue;
-                    if ((m_Nodes[q].m_Words[0].m_Lemma == _R("ОДИН"))
-                        || (m_Nodes[q].m_Words[0].m_Lemma == _R("ЧТО-НИБУДЬ"))
-                        || (m_Nodes[q].m_Words[0].m_Lemma == _R("КТО-НИБУДЬ"))
-                        || ((m_Nodes[q].m_Words[0].HasPOS(ADJ_FULL))
-                            && m_Nodes[q].m_Words[0].HasOneGrammem(rComparative)
+                    if (m_Nodes[q].m_Words.empty()) continue;
+                    auto& w = m_Nodes[q].m_Words[0];
+                    if ((w.m_Lemma == "ОДИН")
+                        || (w.m_Lemma == "ЧТО-НИБУДЬ")
+                        || (w.m_Lemma == "КТО-НИБУДЬ")
+                        || ((w.HasPOS(ADJ_FULL))
+                            && w.HasOneGrammem(rComparative)
                         )
-                        || (m_Nodes[q].m_Words[0].HasPOS(ADV)
-                            && (m_Nodes[q].m_Words[0].m_Lemma.substr(m_Nodes[q].m_Words[0].m_Lemma.length() - 2) ==
-                                _R("ШЕ"))
-                        )
+                        || (w.HasPOS(ADV) && endswith(w.m_Lemma,"ШЕ"))
                         || m_Nodes[q].IsMainTimeRossNode()
                             ) {
                         CValency V("ASPECT", C_A);

@@ -103,23 +103,4 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 #endif //_DEBUG
 
-/////////////////////////////////////////////////////////////////////////////
-// CMainFrame message handlers
-
-
-int MakeFName ( char *OFN,  char *IFN,  char *Ext)
- {
-	strcpy (OFN,IFN);
-	 char *s = strrchr (OFN,'.'); // найти последнее расширение
-
-	if ( s == NULL) // если нет, то прибамбасить его
-     {strcat(OFN,".");
-      strcat (OFN,Ext); }
-  else
- 	 strcpy (s+1,Ext);
-  return 1;
- }
-
-
-
 

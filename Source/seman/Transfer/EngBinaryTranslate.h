@@ -2,7 +2,7 @@
 #define EngBinaryTranslate_h
 
 #pragma warning(disable:4786)
-#include "seman/SemanLib/RossHolder.h"
+#include "seman/SemanLib/struct_dict_holder.h"
 class CEngSemWord;
 class CEngSemNode;
 //===========================================================================
@@ -83,7 +83,7 @@ public:
 	long GetParadigmIdByLemma(MorphLanguageEnum langua,  std::string str, part_of_speech_t pos, bool bProper=false) const;
 	grammems_mask_t GetFixedGrammemsByLemma(MorphLanguageEnum langua, std::string str, part_of_speech_t pos, bool bProper) const;
 
-	const CRossHolder* GetRossHolder (DictTypeEnum type) const;
+	const CStructDictHolder* GetRossHolder (DictTypeEnum type) const;
 
     const CLemmatizer* GetEngLemmatizer () const;
 	const CLemmatizer* GetLemmatizer (MorphLanguageEnum langua) const;
@@ -104,7 +104,7 @@ private:
 
 	bool starts_with(const std::string &s, const StringVector &starts) const;
 
-	void init_list_from_ross(const CRossHolder* RossHolder, const std::string &list_name, StringVector &res);
+	void init_list_from_ross(const CStructDictHolder* RossHolder, const std::string &list_name, StringVector &res);
 
 private:
 	std::vector<translate_result_t> result_vec;

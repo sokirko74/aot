@@ -7,7 +7,7 @@
 
 
 void TDictConfig::ReadConfig(std::string folder) {
-	auto path = MakePath(folder, "config.txt");
+	auto path = MakePath(folder, "config.rcf");
 	std::ifstream inp;
 	inp.open(path);
 	if (!inp.good()) {
@@ -20,8 +20,14 @@ void TDictConfig::ReadConfig(std::string folder) {
 		MaxMeanNum = doc["MaxMeanNum"].GetInt();
 	else
 		MaxMeanNum = 7;
-	assert(1 <= MaxMeanNum < 15);
+	assert(1 <= MaxMeanNum && MaxMeanNum < 15);
 	DictName = doc["DictName"].GetString();
+	DictUsers.clear();
+	if (doc.HasMember("users")) {
+		for (const auto& u : doc["users"].GetArray()) {
+			DictUsers.push_back(u.GetString());
+		}
+	}
 	DictFolder = folder;
 	
 

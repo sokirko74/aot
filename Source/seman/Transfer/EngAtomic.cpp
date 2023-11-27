@@ -12,47 +12,6 @@ part_of_speech_t GetOnePOS(part_of_speech_mask_t poses)
 }
 
 
-void CEngSemWord::SetTense(EngVerbTenseEnum	NewTense, std::string Maker)
-{
-	m_Tense = NewTense;
-	m_TenseHistory.push_back(CTenseHistory (NewTense, Maker));
-};
-
-EngVerbTenseEnum CEngSemWord::GetTense() const
-{
- 	return m_Tense; 
-};
-	
-void CEngSemWord::Init() 
-{
-	m_bDoNotChangeForm = false;
-	m_Poses = 0;
-	m_bMorphologicalPassiveForm = false;
-	m_bImperative = false;
-	m_OneselfStr = "";
-	SetTense(zero_tn, "Constructor");
-
-};
-
-CEngSemWord::CEngSemWord() : CSemWord()	 
-{
-	Init();	 
-};
-
-CEngSemWord::CEngSemWord (const CSemWord& X)
-{
-	*((CSemWord*)this) = X;
-	Init();
-};
-    
-  // принадлежит ли данная часть речи набору частей речи, который приписан слову?
-bool   CEngSemWord::HasPOS (part_of_speech_t POS) const
-{
-	return (m_Poses & (1<<POS)) > 0;
-};
-
-
-
 //======================================================
 
 void CEngSemNode::Init () 

@@ -78,16 +78,25 @@ void CPocketForm::OnGetdispinfoList1(NMHDR* pNMHDR, LRESULT* pResult)
 	CRossDoc* RossDoc = m_PocketItems[pItem->iItem].m_pRossDoc;
 	if (pItem->mask & LVIF_TEXT) //valid text buffer?
 	{  switch(pItem->iSubItem){
-		 case 0: //fill in main text            
-			 lstrcpy(pItem->pszText, RossDoc->GetRoss()->GetEntryStr(UnitNo).c_str());            
+		 case 0: //fill in main text    
+		 {
+			 auto s16 = _U16(RossDoc->GetRoss()->GetEntryStr(UnitNo));
+			 lstrcpy(pItem->pszText, s16);
 			 break;
+		 }
 		 case 1: //fill in sub item 1 text            
-			 sprintf(s, "%i", RossDoc->GetRoss()->GetUnitMeanNum(UnitNo));            
-			 lstrcpy(pItem->pszText, s);            
+		 {
+			 CString s1;
+			 s1.Format(_T("%i"), RossDoc->GetRoss()->GetUnitMeanNum(UnitNo));
+			 lstrcpy(pItem->pszText, s1);
 			 break;
+		 }
 		 case 2: 
-			 lstrcpy(pItem->pszText, RossDoc->GetRossHolder()->GetDictName().c_str());            
+		 {			 
+			 auto sd = RossDoc->GetRossHolder()->GetDictName();
+			 lstrcpy(pItem->pszText, _U16(sd));            
 			 break;
+		 }
 
 	};
 	};
@@ -158,11 +167,11 @@ int OpenPocket(   const std::vector<CRossPocketItem>& UnitNos,
 	POSITION pos =  pDocument->GetFirstViewPosition();
 	CPocketForm* V = (CPocketForm*)(pDocument->GetNextView(pos));
 	V->m_PocketItems = UnitNos;
-    V->m_WordList.InsertColumn(1, "Dictionary entry", LVCFMT_LEFT, 200);
-	V->m_WordList.InsertColumn(2, "Sense ID", LVCFMT_LEFT, 60);
-	V->m_WordList.InsertColumn(2, "Dictionary name", LVCFMT_LEFT, 60);
+    V->m_WordList.InsertColumn(1, _T("Dictionary entry"), LVCFMT_LEFT, 200);
+	V->m_WordList.InsertColumn(2, _T("Sense ID"), LVCFMT_LEFT, 60);
+	V->m_WordList.InsertColumn(2, _T("Dictionary name"), LVCFMT_LEFT, 60);
 	V->m_WordList.SetItemCountEx(UnitNos.size());
-	V->m_UnitsSize.Format ("Number dictionary entries: %i",    V->m_WordList.GetItemCount());
+	V->m_UnitsSize.Format (_T("Number dictionary entries: %i"),    V->m_WordList.GetItemCount());
     V->UpdateData(FALSE);
     V->m_WordList.UpdateData(FALSE);
     V->m_WordList.Invalidate();	
@@ -175,13 +184,15 @@ int OpenPocket(   const std::vector<CRossPocketItem>& UnitNos,
 // записать
 void CPocketForm::OnButton2() 
 {
-    CFileDialog D(FALSE, "txt", m_Title);
+    CFileDialog D(FALSE, _T("txt"), m_Title);
 	if (D.DoModal() != IDOK) return;
-	FILE * fp = fopen (D.GetPathName(),"wb");
-	for (size_t i=0; i < m_PocketItems.size(); i++)
+	FILE * fp = fopen (_U8(D.GetPathName()).c_str(), "wb");
+	for (auto& p: m_PocketItems)
 	{
-		CRossDoc* RossDoc = m_PocketItems[i].m_pRossDoc;
-		fprintf (fp, "%s%i\r\n", RossDoc->GetRoss()->GetEntryStr(m_PocketItems[i].m_UnitNo).c_str(), RossDoc->GetRoss()->GetUnitMeanNum(m_PocketItems[i].m_UnitNo));
+		auto ross = p.m_pRossDoc->GetRoss();
+		fprintf (fp, "%s%i\r\n", 
+			ross->GetEntryStr(p.m_UnitNo).c_str(), 
+			ross->GetUnitMeanNum(p.m_UnitNo));
 	}
 	fclose (fp);
 }

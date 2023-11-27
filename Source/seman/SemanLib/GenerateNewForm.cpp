@@ -5,7 +5,7 @@
 static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word, uint64_t OldGrammems)
 {
 	
-	Word.m_Word = Word.m_Lemma;
+	Word.SetWord(Word.m_Lemma);
 
 	CFormInfo Paradigm;
 	//  calculating piParadigm by Lemma and poses from NodeNo
@@ -45,7 +45,7 @@ static void GetMaxSimilarWordForm (const CRusSemStructure& R, CRusSemWord& Word,
 		if (SizeOfIntersection > MaxSizeOfIntersection)
 		{
 			MaxSizeOfIntersection = SizeOfIntersection;
-			Word.m_Word = Paradigm.GetWordForm(k);
+			Word.SetWord(convert_from_utf8(Paradigm.GetWordForm(k).c_str(), morphRussian));
 			Word.SetFormGrammems( currGrammems );
 		}
 	};

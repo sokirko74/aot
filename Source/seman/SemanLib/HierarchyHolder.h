@@ -1,7 +1,7 @@
 #ifndef HierarchyHolder_h
 #define HierarchyHolder_h
 
-#include "RossHolder.h"
+#include "struct_dict_holder.h"
 
 enum CHierarchyEnum {SemRel, SemFet};
 
@@ -53,7 +53,7 @@ public:
 
 	// строковый вариант транзитивного замыкания иерархии
 	std::vector<CStringRelation>   m_TransitiveRels;
-	CRossHolder*              m_pRossDoc;
+	CStructDictHolder*              m_pRossDoc;
 	CDictionary*  GetRoss () {return m_pRossDoc->GetRoss();}
 	const CDictionary*   GetRoss () const {return m_pRossDoc->GetRoss();}
 	CHierarchyEnum    m_Type;
@@ -75,7 +75,7 @@ public:
 	void     WriteToRoss(std::string Entry);
 
 
-	CHierarchyHolder(CRossHolder* pRossDoc = 0);
+	CHierarchyHolder(CStructDictHolder* pRossDoc = 0);
 	~CHierarchyHolder();
 
 };
@@ -85,7 +85,7 @@ public:
 
 
 
-extern bool SemFetActantIsEqualOrLower (CRossHolder* Ross, uint16_t Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc);
+extern bool SemFetActantIsEqualOrLower (CStructDictHolder* Ross, uint16_t Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc);
 // добавляет в SemFets все SF, которые стоят ниже по иерархии 
 extern void  IncludeLowerInHierarchy (CHierarchyHolder* pHierarchyDoc, std::vector<std::string>& SemFets);
 // добавляет в SemFets все SF, которые стоят выше по иерархии 

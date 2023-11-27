@@ -2,41 +2,12 @@
 
 #include "SemanticStructure.h"
 #include "SemanticWeight.h"
+#include "rus_sem_word.h"
 #include "synan/SynCommonLib/RelationsIterator.h"
 
 #include <stack>
 
 
-// ==== класс русское слово
-class CRusSemWord : public CSemWord {
-public:
-    // графематическая помета ЗПР
-    bool m_IsPunct;
-    // графематическая помета ИЛЕ
-    bool m_ILE;
-    // знаки препинаия, которые стоят в тексте после этого слова
-    std::string m_PostPuncts;
-    std::string m_GraphDescrs;
-    //  лемма прилагательного превосходной степени, которая была заменена на положительную степень
-    std::string m_SupAdjLemma;
-    bool m_bRomanNumber;
-    long m_SynWordNo;
-
-    void Init();
-
-    CRusSemWord();
-
-    CRusSemWord(long WordNo, std::string Lemma);
-
-    // словоформа - глагольная форма, которая заканчивается на "ся", "сь"
-    bool IsReflexiveVerb() const;
-
-    uint32_t GetRusRichPoses() const;
-
-    bool HasPOS(part_of_speech_t POS) const;
-
-    bool IsEqualMorph(const CRusSemWord &W) const;
-};
 
 class CRusMorphHomonym {
 public:
@@ -142,9 +113,6 @@ public:
     // (здесь используется слот m_RelationId, в котором хранится уникальный номер валентности
     // в графе, который строит функция СRusSemStructure::IndexRelations)
     bool RelsCanBeTogether(const long RelationId1, const long RelationId2) const;
-
-    // является ли данный узел кавычкой
-    bool IsOneQuoteMark() const;
 
     // является ли данный узел тире
     bool IsOneDash() const;
@@ -288,7 +256,7 @@ public:
     // номер последнего узла клаузы
     long m_EndNodeNo;
     // стек, для сохранения значений номеров узлов
-    stack<long> m_NodeRef;
+    std::stack<long> m_NodeRef;
     // если в клаузе есть "больше"  или "меньше",  то прямое дополнение может стоять в родительном
     bool m_bHasNumeralComp; // больше или меньше
 
@@ -1101,15 +1069,11 @@ public:
     // проверяет, что узел NodeNo может заполнять GFi = ЦК_x
     bool CheckTimeNumeral(long NodeNo, std::string GramFet) const;
 
-    // ===== Интерпретация синтаксиса и некоторый досемантические триггеры
-    // инициализация параметров одного слова
-    void InitWordFeatures(long WordNo, CRusSemWord &SemWord);
-
     // создание примитивного узла по слову
     CRusSemNode CreatePrimitiveNode(size_t WordNo);
 
     // создание примитивного узла по фиксированной группе
-    CRusSemNode CreateNode(const CRelationsIterator *RelIt, long GroupNo);
+    CRusSemNode CreateNodeByFirmGroup(const CRelationsIterator *RelIt, long GroupNo);
 
     // интерпретация предлогов
     void InterpretPrepNouns(long ClauseNo);
@@ -1360,12 +1324,12 @@ public:
 
     void GetClauseVariantCombinations(std::vector<VectorLong> &Variants) const;
 
-    void ApplyTerminSemStrForOneRel(std::string SemRel, long Word1, long Word2, const CRossHolder *RossHolder);
+    void ApplyTerminSemStrForOneRel(std::string SemRel, long Word1, long Word2, const CStructDictHolder *RossHolder);
 
     bool GetClauseVariantCombination();
 
 
-    bool ReadDopField(long ClauseNo, long NodeNo, const CRossHolder *Dict, long UnitNo, long CollocId);
+    bool ReadDopField(long ClauseNo, long NodeNo, const CStructDictHolder *Dict, long UnitNo, long CollocId);
 
     void ReadDopFieldForClause(long ClauseNo);
 
@@ -1590,7 +1554,7 @@ public:
     void FindDividedTermins();
 
     // вызывает функцию GetDopFields, строит по результатпм m_ThesSemRelations
-    long AddThesSemRelations(const CRossHolder *Dict, long UnitNo, long StartNodeNo);
+    long AddThesSemRelations(const CStructDictHolder *Dict, long UnitNo, long StartNodeNo);
 
     // выдает номер словарной статьи по ID термина
     uint16_t GetUnitNoByTerminId(DictTypeEnum DictType, long TerminId) const;
@@ -1766,11 +1730,12 @@ extern void GetCommonVariants(const std::vector<VectorLong> &Parents,
 
 extern bool IsBetween(const CRusSemNode &Node, const CRusSemNode &LowerBound, const CRusSemNode &UpperBound);
 
-extern TCortege GetSubjCortege(const CRossHolder *RossDoc);
+extern TCortege GetSubjCortege(const CStructDictHolder *RossDoc);
 
-extern TCortege GetInstrObj(const CRossHolder *RossDoc);
+extern TCortege GetInstrObj(const CStructDictHolder *RossDoc);
 
 // максимально расстояние от начала клаузы, на котором может находиться  союзное слово,
 // например, "Я знаю дом, в подвале которого нет  мышей"
 const int ConjWordDistance = 5;
 
+const size_t ReflexiveSuffixLen = std::string("СЯ").length(); // СЯ оr CЬ

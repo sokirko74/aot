@@ -59,7 +59,7 @@ void CRusSemStructure::AddCollocHyp (long StartNodeNo,
 								*/
 								if (	(StartNodeNo +1 != Clause.m_EndNodeNo)
 										&&	m_Nodes[StartNodeNo +1].IsWordContainer()
-										&&	ispunct((BYTE)m_Nodes[StartNodeNo +1].m_Words[0].m_Word[0])
+										&&	ispunct((BYTE)m_Nodes[StartNodeNo +1].m_Words[0].GetWord()[0])
 									)
 									break;
 								else
@@ -216,13 +216,13 @@ void CRusSemStructure::FindCollocsHyps(long ClauseNo)
 		// мы предполагем, что в поле CONTENT входят только примитивные узлы
 		if (!m_Nodes[i].IsPrimitive()) continue;
 		std::string S  =  m_Nodes[i].m_Words[0].m_Lemma;
-		if (S == "") S = m_Nodes[i].m_Words[0].m_Word;
+		if (S == "") S = m_Nodes[i].m_Words[0].GetWord();
 
-		std::vector<CCollocItemRefCollect>::const_iterator It = lower_bound(m_pData->m_RusCollocItemRefs.begin(), m_pData->m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
-		if (       (It  != m_pData->m_RusCollocItemRefs.end())
-			&&  (It->Item == S)
+		auto it = lower_bound(m_pData->m_RusCollocItemRefs.begin(), m_pData->m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
+		if (       (it  != m_pData->m_RusCollocItemRefs.end())
+			&&  (it->Item == S)
 		 )
-		 RefCollocItems[i-Clause.m_BeginNodeNo] = It - m_pData->m_RusCollocItemRefs.begin();
+		     RefCollocItems[i-Clause.m_BeginNodeNo] = it - m_pData->m_RusCollocItemRefs.begin();
 		else
 			RefCollocItems[i-Clause.m_BeginNodeNo] = -1;
 	};
@@ -368,7 +368,7 @@ void CRusSemStructure::BuildBlackBoxCollocs(long ClauseNo, size_t SetNo)
 				//  adding prepositon for the synthesis and for a better format
 				std::string Prep = GetPrepOrConjOfNode(m_Nodes[NodeNo]);
 				if (!Prep.empty() && !bMainItem  )
-					W.m_Word =  Prep+" "+W.m_Word;
+					W.SetWord(Prep + " " + W.GetWord());
 				N.m_Words.push_back(W);
 			};
 			// если это главное слово, то нужно изменить характеристики всего словосочетания

@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "DictUnitInterp.h"
-#include "RossHolder.h"
+#include "struct_dict_holder.h"
 
 	
 
-uint16_t CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo);
+uint16_t CorrectAdjectiveWithA0SemFet (const CStructDictHolder* RossDoc, long UnitNo);
 
 
 //===============================================================================
@@ -44,7 +44,7 @@ CDictUnitInterp::CDictUnitInterp (DictTypeEnum   DictType,	uint16_t UnitNo)
 };
 
 
-CDictUnitInterp::CDictUnitInterp (const  CRossHolder* RossDoc, DictTypeEnum   DictType,	uint16_t UnitNo, bool bNegativeForm, bool bPassiveForm)
+CDictUnitInterp::CDictUnitInterp (const  CStructDictHolder* RossDoc, DictTypeEnum   DictType,	uint16_t UnitNo, bool bNegativeForm, bool bPassiveForm)
 {
 	m_DictType = DictType;
 	m_UnitNo = UnitNo;
@@ -75,7 +75,7 @@ uint16_t  CDictUnitInterp::GetSemCorrectUnitNo () const
 
 
 // иначе выдает ErrUnitNo.
-uint16_t CorrectAdjectiveWithA0SemFet (const CRossHolder* RossDoc, long UnitNo)
+uint16_t CorrectAdjectiveWithA0SemFet (const CStructDictHolder* RossDoc, long UnitNo)
 {
  if (UnitNo == ErrUnitNo) return ErrUnitNo;
  if (!RossDoc->GetRoss()->IsEmptyArticle(UnitNo))

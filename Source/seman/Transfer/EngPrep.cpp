@@ -25,7 +25,7 @@ void CEngSynthes::handle_prep(int node_no)
 	  мне больше нечего добавить к тому, что вы уже сказали ->
 	  I have nothing else to add to what wou have already said.
 	*/
-	if (   (E.m_Nodes[node_no].m_Words[0].m_Word == "what")
+	if (   (E.m_Nodes[node_no].m_Words[0].GetWord() == "what")
 		&& (eng_clause_rel != -1)
 	   )
 	eng_rel = eng_clause_rel;

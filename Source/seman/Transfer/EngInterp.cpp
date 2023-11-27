@@ -600,7 +600,7 @@ CSynRealization CEngSemStructure::TranslateRelization(const CSynRealization& Rus
 	{
 		const CRossInterp& prep_int = RusSynReal.m_Preps[i];
 		std::string debug;
-		if (RusNode.IsWordContainer()) debug = RusNode.GetWord(0).m_Word;
+		if (RusNode.IsWordContainer()) debug = RusNode.GetWord(0).GetWord();
 		assert(prep_int.m_DictType == OborRoss);
 		std::vector<SEngEquiv> vectorEngEquivs;
 		

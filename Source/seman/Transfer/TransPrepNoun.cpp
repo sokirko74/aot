@@ -32,7 +32,7 @@ std::string CEngSemStructure::GetPrep(const TCortege& cortege, DictTypeEnum type
 }
 
 //переводит русский предлог с помощью поля PREP
-std::string CEngSemStructure::HasParticularPrepInField( CRossHolder* pRossDoc,int  iRusActant,CEngSemNode&  engActantm)
+std::string CEngSemStructure::HasParticularPrepInField( CStructDictHolder* pRossDoc,int  iRusActant,CEngSemNode&  engActantm)
 {
 	assert( iRusActant != -1 );
 	const CSemNode& rusActant = RusStr.GetNode(iRusActant);
@@ -82,7 +82,7 @@ bool CEngSemStructure::Rule_TranslateRelWithPrepField( int iRusActant, long Rela
 	CEngSemNode& engActant = m_Nodes[iEngActant];	
 	const CSemNode& rusActant = RusStr.GetNode(iRusActant);
 	if (rusActant.GetType() == NoneRoss)  return false;
-	CRossHolder* pRossDoc = GetRossHolder(rusActant.GetType());
+	CStructDictHolder* pRossDoc = GetRossHolder(rusActant.GetType());
 	if( semEngRel.m_RusRel == -1 )
 		return false;
 	const CSemRelation& semRusRel = *RusStr.GetRelation(semEngRel.m_RusRel);	
@@ -116,7 +116,7 @@ bool CEngSemStructure::Rule_TranslatePrepNounGroup( int iRusActant, long EngRelN
 	  )
 		return false;
 
-	CRossHolder* pLocRossDoc = GetRossHolder(LocRoss);
+	CStructDictHolder* pLocRossDoc = GetRossHolder(LocRoss);
 
 	//если есть лексическая функция Loc у англ. слова
 	CLexicalFunctionField LexicalFunct("","");

@@ -126,8 +126,8 @@ bool CHierarchyDoc::OpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
 
     switch (Type)
     {
-    case SemFet: SetPathName("Semantic features hierarchy"); break;
-    case SemRel: SetPathName("Semantic relations hierarchy"); break;
+        case SemFet: SetPathName(_T("Semantic features hierarchy")); break;
+        case SemRel: SetPathName(_T("Semantic relations hierarchy")); break;
     };
 
     GetDocTemplate()->InitialUpdateFrame(pFrame, this, TRUE);
@@ -167,7 +167,7 @@ BOOL CHierarchyDoc::DoFileSave()
     }
     catch (...)
     {
-        ::MessageBox(0, "Cannot save Hierarchy", "Error", MB_OK);
+        ::MessageBox(0, _T("Cannot save Hierarchy"), _T("Error"), MB_OK);
         return FALSE;
     };
 };

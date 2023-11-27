@@ -4,10 +4,10 @@ project(RossDev)
 
 add_definitions(-D_AFXDLL)
 set(CMAKE_MFC_FLAG 2)
+add_link_options(/ENTRY:wWinMainCRTStartup) 
 
-if (WIN32) 
-    include_directories (AFTER ../tk_source/tk8.0.5/generic ../tcl_source/tcl8.0.5/generic ../tk_source/tk8.0.5/xlib)
-endif()
+include_directories (AFTER ../tk_source/tk8.0.5/generic ../tcl_source/tcl8.0.5/generic ../tk_source/tk8.0.5/xlib)
+set(CMAKE_CXX_FLAGS   "${CMAKE_CXX_FLAGS} /utf-8 /D _AFXDLL /D _UNICODE /D UNICODE " )
 
 add_executable (${PROJECT_NAME} WIN32
         ArticleDoc.cpp
@@ -73,5 +73,4 @@ add_subdirectory("tests")
 
 target_precompile_headers(${PROJECT_NAME} PUBLIC StdAfx.h)
 
-CopyExe(${PROJECT_NAME})
 

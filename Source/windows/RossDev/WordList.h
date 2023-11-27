@@ -22,10 +22,10 @@
 
 
 struct CRossDevTermin {
-	uint16_t   m_UnitNo;
-	std::string m_TerminStr;
+	uint16_t m_UnitNo;
+	CString m_TerminStr;
 
-	CRossDevTermin(uint16_t UnitNo, std::string TerminStr) {
+	CRossDevTermin(uint16_t UnitNo, CString TerminStr) {
 		m_TerminStr = TerminStr;
 		m_UnitNo = UnitNo;
 	};
@@ -85,7 +85,9 @@ struct TreeNode{
        CString Line;
        for (size_t i =0; i < Vals.size(); i++)
 	   { CString Q;
-	     Q.Format("%s (%s) ", Ross->GetDomItemStr(Vals[i].ValNo).c_str(), (Vals[i].A_C) ? "A,C" : "C,A");
+	     Q.Format(_T("%s (%s) "), 
+			 _U16(Ross->GetDomItemStr(Vals[i].ValNo)), 
+			 (Vals[i].A_C) ? _T("A,C") : _T("C,A"));
 		 Line += Q;
 	   };
 	   return Line;
@@ -183,32 +185,11 @@ public:
 	bool IsFiltered() const
 	{ return (m_Menu.GetMenuState(IDR_SET_FILTER, MF_BYCOMMAND) & MF_CHECKED) > 0; };
 
-	uint16_t GetUnitNo (uint16_t i) const
-	{
-		if (m_Termins.empty())
-		  return m_Index[i].UnitNo;
-		else
-			return m_Termins[i].m_UnitNo;
-	}
-	std::string GetEntryStr(uint16_t UnitNo) const;
-	uint16_t GetUnitsSize () const
-	{
-	    return IsFiltered() ? GetRoss()->GetSelectedUnitsSize() : GetRoss()->GetUnitsSize();
-	};
-
-	bool GetSelectedUnitNo (uint16_t& UnitNo) const
-	{
- 		POSITION pos = m_WordList.GetFirstSelectedItemPosition();
-
-  		if (pos == NULL)
-			{ ::MessageBox(0, "No selection in the list", "Message Box", MB_OK);
-			  return false;};
-
-		UnitNo = GetUnitNo(m_WordList.GetNextSelectedItem(pos));
-
-		return true;
-
-	};
+	uint16_t GetUnitNo(uint16_t i) const;
+	std::string GetEntryStrUtf8(uint16_t UnitNo) const;
+	CString GetEntryStrUtf16(uint16_t UnitNo) const;
+	uint16_t GetUnitsSize() const;
+	bool GetSelectedUnitNo(uint16_t& UnitNo) const;
 	
 	virtual CRossDoc* GetDocument() const {return ((CRossDoc*)CView::GetDocument());}; 
 	CDictionary* GetRoss() const 	{return GetDocument()->GetRoss();};
@@ -282,7 +263,6 @@ protected:
 	afx_msg void OnChangeTitle();
 	afx_msg void OnComments();
 	afx_msg void OnMenuitem32788();
-	afx_msg void OnValencies();
 	afx_msg void OnSemFet();
 	afx_msg void OnStatisticFieldValue();
 	afx_msg void OnSortByLemma();
@@ -298,10 +278,6 @@ protected:
 	afx_msg void OnFindWrongRefs();
 	afx_msg void OnClickWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnKeydownWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnExportAllDicts();
-	afx_msg void OnEmptyAllDicts();
-	afx_msg void OnImportAllDicts();
-	afx_msg void OnAllDictEntries();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

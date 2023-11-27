@@ -39,7 +39,9 @@ add_library(Transfer
         EngVerbTense.h
         StdAfx.h
 
-)
+ "eng_word.cpp" "eng_word.h" "verb_tense.h")
+
+add_subdirectory(tests)
 
 target_link_libraries(Transfer
     aot_common

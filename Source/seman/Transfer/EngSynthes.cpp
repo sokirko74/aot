@@ -304,10 +304,10 @@ bool CEngSynthes::try_numeral_node(int node_no)
 	//  "вшестером"
 	if (   (W.m_Poses == 1<<eADV) 
 		&& (W.m_Lemma == "") 
-		&& ( atoi (W.m_Word.c_str()) >= 2) //  в "однером"  не бывает
+		&& ( atoi (W.GetWord().c_str()) >= 2) //  в "однером"  не бывает
 	   )
 	{
-		Res(node_no).m_WordForms.push_back(spellout_number(W.m_Word, true));
+		Res(node_no).m_WordForms.push_back(spellout_number(W.GetWord(), true));
 		Res(node_no).m_WordForms.push_back("together");
 		Res(node_no).m_Position = ">>";
 		return true;
@@ -317,7 +317,7 @@ bool CEngSynthes::try_numeral_node(int node_no)
 	if (Node(node_no).GetType() != NoneRoss) return  false;
 
 	if ( (W.m_Poses != 1<<eNUMERAL) && (W.m_Poses != 1<<eORDNUM))  return false;
-	Res(node_no).m_WordForms.push_back(spellout_number(W.m_Word, W.HasPOS(eNUMERAL) ));
+	Res(node_no).m_WordForms.push_back(spellout_number(W.GetWord(), W.HasPOS(eNUMERAL)));
 
 	/*
 	 выставляем артикль у порядковых числительных, которые выполняю роль существительных
@@ -399,7 +399,7 @@ bool CEngSynthes::try_default_node(int node_no)
 	for(int i = 0; i < node.m_Words.size(); i++){
 			CEngSemWord& W = Node(node_no).m_Words[i] ;
 			helper.synthesize(W);
-			result_vec[node_no].m_WordForms.push_back(W.m_Word);
+			result_vec[node_no].m_WordForms.push_back(W.GetWord());
 
 		}
 // sons are here
@@ -423,7 +423,7 @@ bool CEngSynthes::try_mna_node(int node_no)
 	if(node.GetType() == EngObor){
 		// трансфер для оборотов создает примитивныу узел, у которого в слове записан сам оборот
 		assert ( node.IsPrimitive() );
-		tr = node.m_Words[0].m_Word;
+		tr = node.m_Words[0].GetWord();
 	};
 
 	Res(node_no).m_WordForms.push_back(tr);
@@ -479,7 +479,7 @@ bool CEngSynthes::try_simple_group(int node_no)
 	if(node.m_SynGroupTypeStr == WEB_ADDR_STR)
 	{
 		for(int i = 0; i < node.GetWordsSize(); i++){
-			str += node.GetWord(i).m_Word;
+			str += node.GetWord(i).GetWord();
 		}
 	}
 	else if(node.m_SynGroupTypeStr == NAMES_STR)
@@ -510,7 +510,7 @@ bool CEngSynthes::try_simple_group(int node_no)
 
 			if(i > 0)
 				str += " ";
-			str += node.m_Words[i].m_Word.c_str();
+			str += node.m_Words[i].GetWord();
 		}
 
 		std::vector<long> rels;
@@ -886,7 +886,7 @@ std::string CEngSynthes::collect_results(int node)
 				   (i+1 < out_rels.size())
 				&& (ValuePosition(Res(Rel(out_rels[i+1]).m_TargetNodeNo).m_Position) < 0)
 			   )
-		    || (E.m_Nodes[node].IsComma())  
+		    || (E.m_Nodes[node].IsPrimitive() && E.m_Nodes[node].m_Words[0].GetWord() == ",")
 		   )
 			res += ",";
 		
@@ -988,10 +988,10 @@ void CEngSynthes::handle_colloc_words(int node_no, SynthesResult &res)
 	for(int i = 0; i < Node(node_no).m_Words.size(); i++)
 	{
 		if(i < Node(node_no).m_MainWordNo){
-			tmp.push_back(Node(node_no).m_Words[i].m_Word);
+			tmp.push_back(Node(node_no).m_Words[i].GetWord());
 		}
 		else if(i > Node(node_no).m_MainWordNo)
-			res.m_WordForms.push_back(Node(node_no).m_Words[i].m_Word);
+			res.m_WordForms.push_back(Node(node_no).m_Words[i].GetWord());
 	}
 	if(tmp.size()) res.m_WordForms.insert(res.m_WordForms.begin(), tmp.begin(), tmp.end());
 }
@@ -1221,8 +1221,8 @@ void CEngSynthes::find_all_clause_connectors()
 bool CEngSynthes::try_oneself_node(int node_no)
 {
 	const CEngSemNode &node = E.m_Nodes[node_no];
-	bool one_s = node.IsPrimitive() && node.m_Words[0].m_Word == "#one's"; 
-	bool oneself = node.IsPrimitive() && node.m_Words[0].m_Word == "#oneself";
+	bool one_s = node.IsPrimitive() && node.m_Words[0].GetWord() == "#one's";
+	bool oneself = node.IsPrimitive() && node.m_Words[0].GetWord() == "#oneself";
 	if(!one_s && !oneself) return false;
 
 	long AntecedentNodeNo = E.GetEquNode(node_no);

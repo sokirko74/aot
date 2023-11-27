@@ -1224,7 +1224,7 @@ CRusSemNode CreateDummyNode(long WordNo, const CSemanticsHolder* pData)
 	CRusSemWord SemWord(WordNo, Format("%i", WordNo));
 	SemWord.m_pData = pData;
 	N.m_Words.push_back(SemWord);
-	N.m_Words[0].m_Word = Format("%i", WordNo + 1);
+	N.m_Words[0].SetWord(Format("%i", WordNo + 1));
 	N.m_ClauseNo = 0;
 	return N;
 };

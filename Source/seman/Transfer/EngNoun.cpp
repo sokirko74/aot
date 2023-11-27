@@ -52,7 +52,7 @@ bool CEngSynthes::try_noun_node(int node_no)
 			};
 			helper.synthesize_by_node(E.m_Nodes[node_no]);
 			Res(node_no).m_EngParadigmId = Node(node_no).m_Words[main_w].m_ParadigmId;
-			Res(node_no).m_WordForms.push_back(Node(node_no).m_Words[main_w].m_Word);
+			Res(node_no).m_WordForms.push_back(Node(node_no).m_Words[main_w].GetWord());
 		};
 	}
 
@@ -183,17 +183,17 @@ bool CEngSynthes::try_adj_node(int node_no)
 		helper.synthesize_by_node(E.m_Nodes[node_no]);
 
 		if (Node(node_no).HasRelOperator ("AntiMagn"))
-			e_word.m_Word =   "the least "+ e_word.m_Word;
+			e_word.SetWord("the least " + e_word.GetWord());
 
 
-		Res(node_no).m_WordForms.push_back(e_word.m_Word);
+		Res(node_no).m_WordForms.push_back(e_word.GetWord());
 
 	}
 
 
 	// sons are here
-	for(long i = 0; i < rels.size(); i++){
-		translate_node(Rel(rels[i]).m_TargetNodeNo);
+	for(auto& r: rels){
+		translate_node(Rel(r).m_TargetNodeNo);
 	}	
 
 
@@ -255,29 +255,29 @@ bool CEngSynthes::try_pronoun_node(int node_no)
 	{
 		long ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma,  ePN_ADJ);
 		// создаем множественное число 
-		if (ParadigmId != -1)
+		if (ParadigmId != UnknownParadigmId)
 			if  (E.m_Nodes[node_no].GetGrammemsRich() & _QM(eSingular) )
-		     EngWord.m_Word = helper.create_form_by_id(ParadigmId, _QM(eSingular));
+		     EngWord.SetWord(helper.create_form_by_id(ParadigmId, _QM(eSingular)));
 			else
-			 EngWord.m_Word = helper.create_form_by_id(ParadigmId, _QM(ePlural));
+			 EngWord.SetWord(helper.create_form_by_id(ParadigmId, _QM(ePlural)));
 	}
 	else
 	if (!is_norm)
 	{
 		long ParadigmId = helper.GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma, ePN);
 		// не у всех местоимений есть объектная форма
-		if (ParadigmId != -1)
-		 EngWord.m_Word = helper.create_form_by_id(ParadigmId, _QM(eObjectCase));
+		if (ParadigmId != UnknownParadigmId)
+		 EngWord.SetWord(helper.create_form_by_id(ParadigmId, _QM(eObjectCase)));
 	};
 
 	if ( EngWord.HasOneGrammem(ePossessive) )
 		set_possessive(EngWord);
 
-	if(EngWord.m_Word == "i") EngWord.m_Word= "I";
+	if(EngWord.GetWord() == "i") EngWord.SetWord("I");
 
 
 	Res(node_no).m_Article = ZeroArticle;
-	Res(node_no).m_WordForms.push_back(EngWord.m_Word);
+	Res(node_no).m_WordForms.push_back(EngWord.GetWord());
 
 	// sons are here
 	std::vector<long > rels;

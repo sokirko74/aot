@@ -914,9 +914,9 @@ bool CRusSemStructure::CheckSubjectPredicateRelation(long SubjNodeNo, long PredN
 	if (m_Nodes[SubjNodeNo].IsPrimitive())
 	{
 		// "ничего не произошло"
-		if (m_Nodes[SubjNodeNo].m_Words[0].m_Word == "НИЧЕГО") return true;
+		if (m_Nodes[SubjNodeNo].m_Words[0].GetWord() == "НИЧЕГО") return true;
 		// "никто не пришел"
-		if (m_Nodes[SubjNodeNo].m_Words[0].m_Word == "НИКТО") return true;
+		if (m_Nodes[SubjNodeNo].m_Words[0].GetWord() == "НИКТО") return true;
 	};
 	/*
 	  Разрешаем обе формы: "два мальчика пришло" и "два мальчика пришли", т.е
@@ -930,7 +930,7 @@ bool CRusSemStructure::CheckSubjectPredicateRelation(long SubjNodeNo, long PredN
 		long NodeNo = m_Relations[rel_no].m_TargetNodeNo;
 		if (HasRichPOS(NodeNo, NUMERAL)
 			&& m_Nodes[NodeNo].IsPrimitive()
-			&& (atoi(m_Nodes[NodeNo].m_Words[0].m_Word.c_str()) > 1)
+			&& (atoi(m_Nodes[NodeNo].m_Words[0].GetWord().c_str()) > 1)
 			)
 			return true;
 	};

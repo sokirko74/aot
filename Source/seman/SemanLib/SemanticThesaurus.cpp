@@ -25,7 +25,7 @@ void CRusSemStructure::InterpretOrganisations(long ClauseNo)
 
 // все термины были разделены на отдельные слова 
 // создаем отношение из Nd2 в Nd1  (нумерация берется из R (Nd1, Nd2))) 
-void CRusSemStructure::ApplyTerminSemStrForOneRel(std::string RelationStr, long Nd1, long Nd2, const CRossHolder* RossHolder)
+void CRusSemStructure::ApplyTerminSemStrForOneRel(std::string RelationStr, long Nd1, long Nd2, const CStructDictHolder* RossHolder)
 {
 	std::vector<long> Rels;
 
@@ -63,7 +63,7 @@ void CRusSemStructure::ApplyTerminSemStrForOneRel(std::string RelationStr, long 
 
 
 
-long  CRusSemStructure::AddThesSemRelations(const CRossHolder* Dict, long UnitNo, long StartNodeNo)
+long  CRusSemStructure::AddThesSemRelations(const CStructDictHolder* Dict, long UnitNo, long StartNodeNo)
 {
 	std::vector<CDopField> DopFields;
 	long MainItemNo = Dict->GetDopFields(UnitNo, DopFields);
@@ -83,7 +83,7 @@ long  CRusSemStructure::AddThesSemRelations(const CRossHolder* Dict, long UnitNo
 			|| (Rel.m_TargetNodeNo >= EndClauseNo)
 			)
 		{
-			ErrorMessage(_R(" Ошибка в интерпретации поля AUX"));
+			ErrorMessage(" Ошибка в интерпретации поля AUX");
 			m_ThesSemRelations.erase(m_ThesSemRelations.begin() + SaveDopRelationsCount, m_ThesSemRelations.end());
 			return -1;
 		};
@@ -92,14 +92,14 @@ long  CRusSemStructure::AddThesSemRelations(const CRossHolder* Dict, long UnitNo
 	return Result;
 };
 
-bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CRossHolder* Dict, long UnitNo, long CollocId)
+bool CRusSemStructure::ReadDopField(long ClauseNo, long StartNodeNo, const CStructDictHolder* Dict, long UnitNo, long CollocId)
 {
 	long SaveDopRelationsCount = m_ThesSemRelations.size();
 	long MainNodeNo = AddThesSemRelations(Dict, UnitNo, StartNodeNo);
 	if (MainNodeNo == -1)
 		return false;
 	const CThesaurus* Thes = m_pData->GetThes(m_Nodes[StartNodeNo].m_ThesaurusId);
-	std::string ErrorMess = _R("Ошибка в поле AUX термина ");
+	std::string ErrorMess = "Ошибка в поле AUX термина ";
 	ErrorMess += Thes->m_Termins[Thes->GetTerminNoByTextEntryId(m_Nodes[StartNodeNo].m_TerminId)].m_TerminStr;
 
 	for (size_t k = SaveDopRelationsCount; k < m_ThesSemRelations.size(); k++)
@@ -153,7 +153,7 @@ void CRusSemStructure::ReadDopFieldForClause(long ClauseNo)
 		{
 			int ThesaurusId = m_Nodes[StartNodeNo].m_ThesaurusId;
 
-			const CRossHolder* Dict = GetRossHolder(GetRossIdByThesId(ThesaurusId));
+			const CStructDictHolder* Dict = GetRossHolder(GetRossIdByThesId(ThesaurusId));
 
 			if (Dict == 0) continue;
 			std::string UnitStr = Format("%i", m_Nodes[StartNodeNo].m_TerminId);
@@ -189,7 +189,7 @@ void CRusSemStructure::ReadThesInterps(long ClauseNo)
 			&& (m_Nodes[StartNodeNo].m_bFirstInTermin)
 			)
 		{
-			const CRossHolder* Dict = GetRossHolder(GetRossIdByThesId(m_Nodes[StartNodeNo].m_ThesaurusId));
+			const CStructDictHolder* Dict = GetRossHolder(GetRossIdByThesId(m_Nodes[StartNodeNo].m_ThesaurusId));
 			if (Dict == 0) continue;
 			std::string UnitStr = Format("%i", m_Nodes[StartNodeNo].m_TerminId);
 			long UnitNo = Dict->LocateUnit(UnitStr.c_str(), 1);
@@ -239,7 +239,7 @@ void CRusSemStructure::ApplyTerminSemStr(long ClauseNo)
 			if (m_ThesSemRelations[i].m_SemRelName != "PROPERT")
 			{
 				long SourceNodeNo = m_ThesSemRelations[i].m_SourceNodeNo;
-				const CRossHolder* Dict = GetRossHolder(GetRossIdByThesId(m_Nodes[SourceNodeNo].m_ThesaurusId));
+				const CStructDictHolder* Dict = GetRossHolder(GetRossIdByThesId(m_Nodes[SourceNodeNo].m_ThesaurusId));
 
 				ApplyTerminSemStrForOneRel(m_ThesSemRelations[i].m_SemRelName,
 					m_ThesSemRelations[i].m_TargetNodeNo,
@@ -253,7 +253,7 @@ void CRusSemStructure::ApplyTerminSemStr(long ClauseNo)
 
 uint16_t CRusSemStructure::GetUnitNoByTerminId(DictTypeEnum   DictType, long TerminId) const
 {
-	const CRossHolder* Dict = GetRossHolder(DictType);
+	const CStructDictHolder* Dict = GetRossHolder(DictType);
 	if (Dict == 0) return ErrUnitNo;
 	std::string S = Format("%i", TerminId);
 	long UnitNo = Dict->LocateUnit(S.c_str(), 1);
@@ -385,7 +385,7 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 		if (IsInClause(i, ClauseNo))
 			for (long j = 0; j < m_Nodes[i].GetInterps().size(); j++)
 			{
-				const CRossHolder* RossDoc = GetRossHolder(m_Nodes[i].GetInterps()[j].m_DictType);
+				const CStructDictHolder* RossDoc = GetRossHolder(m_Nodes[i].GetInterps()[j].m_DictType);
 				const CDictionary* Ross = RossDoc->GetRoss();
 				uint16_t UnitNo = m_Nodes[i].GetInterps()[j].m_UnitNo;
 				if (!Ross->IsEmptyArticle(UnitNo))
@@ -665,7 +665,7 @@ void CRusSemStructure::FindAbbrTermins()
 				&& m_Nodes[i].m_Words[0].m_CharCase == UpUp
 				)
 			{
-				std::string WordStr = m_Nodes[i].m_Words[0].m_Word;
+				std::string WordStr = m_Nodes[i].m_Words[0].GetWord();
 				long TerminNo = -1;
 				long ThesId = 0;
 				if (TerminNo == -1)

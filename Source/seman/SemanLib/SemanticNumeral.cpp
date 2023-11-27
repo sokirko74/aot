@@ -31,11 +31,11 @@ double ConvertNumeralByTable(std::vector<CRusSemWord>::const_iterator Start, std
 		double Res;
 
 
-		if (!Word->m_Word.empty()
-			&& isdigit((BYTE)Word->m_Word[0])
+		if (!Word->GetWord().empty()
+			&& isdigit((BYTE)Word->GetWord()[0])
 			)
 			//  "15 тысяч граждан"
-			Res = atof(Word->m_Word.c_str());
+			Res = atof(Word->GetWord().c_str());
 		else
 			//  "пятнадцать тысяч граждан"
 			Res = FindInTable(Word->m_Lemma);
@@ -114,27 +114,27 @@ bool FullAdjWithNumeralPrefix(const CRusSemNode& Node)
 {
 	if (!Node.IsPrimitive()) return false;
 	if (!Node.m_Words[0].HasPOS(ADJ_FULL)) return false;
-	if (RussianNumerals.FindAdjPrefix(Node.m_Words[0].m_Word) == nullptr) {
+	auto w = Node.m_Words[0].GetWord();
+	if (RussianNumerals.FindAdjPrefix(w) == nullptr) {
 		return false;
 	}
-	if (Node.m_Words[0].m_Word.substr(0, 3) == _R("СТО"))
+	if (startswith(w, "СТО"))
 	{
-		std::string Word = Node.m_Words[0].m_Word.substr(3);
+		std::string Word = w.substr(std::string("СТО").length());
 		if (RussianNumerals.FindAdjPrefix(Word) != nullptr) {
 			return true;
 		}
 	};
-	if ((Node.m_Words[0].m_Word.substr(0, 3) == _R("СТО"))
-		|| (Node.m_Words[0].m_Word.substr(0, 4) == _R("ОДНО"))
-		)
-		if (Node.m_Words[0].m_ParadigmId != -1) return false;
+	if (startswith(w, "СТО") || startswith(w, "ОДНО"))
+		if (Node.m_Words[0].m_ParadigmId != UnknownParadigmId) 
+			return false;
 	return true;
 };
 
 
 static bool ConvertRusNumeral(const CRusSemNode& Node, double& number)
 {
-	if (Node.m_Words.size() == 1 && (FindFloatingPoint(Node.m_Words[0].m_Word) != -1 || Node.m_Words[0].HasOneGrammem(rComparative)))
+	if (Node.m_Words.size() == 1 && (FindFloatingPoint(Node.m_Words[0].GetWord()) != -1 || Node.m_Words[0].HasOneGrammem(rComparative)))
 		return false;
 	number =  ConvertNumeralByOrderRecursive(Node.m_Words.begin(), Node.m_Words.end(), 1000000000000);
 	return number != -1;
@@ -161,7 +161,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 
 	if (pos != string::npos)
 	{
-		LemmaAfterHyphen = node.m_Words[0].m_Word.substr(pos + 1);
+		LemmaAfterHyphen = node.m_Words[0].GetWord().substr(pos + 1);
 		node.m_Words[0].m_Lemma = node.m_Words[0].m_Lemma.substr(0, pos);
 	};
 
@@ -170,7 +170,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 		&& (node.m_Words[0].HasPOS(NUMERAL_P)
 			|| (
 				node.m_Words[0].HasPOS(ADJ_FULL)
-				&& (RussianNumerals.FindAdjPrefix(node.m_Words[0].m_Word) != nullptr)
+				&& (RussianNumerals.FindAdjPrefix(node.m_Words[0].GetWord()) != nullptr)
 				)
 			)
 		)
@@ -206,7 +206,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 					float Res = FindInTable(node.m_Words[i].m_Lemma);
 					if (Res != -1)
 					{
-						node.m_Words[i].m_Word = DoubleToStr(Res);;
+						node.m_Words[i].SetWord(DoubleToStr(Res));
 						node.m_Words[i].m_Lemma = "";
 						node.m_Words[i].m_ParadigmId = -1;
 					};
@@ -240,7 +240,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 		node.m_Words[0].m_ParadigmId = -1;
 		node.DelAllInterps();
 	};
-	node.m_Words[0].m_Word = ConvertedWord;
+	node.m_Words[0].SetWord(ConvertedWord);
 	if (R.HasRichPOS(node, NOUN)) // миилион, миллиард
 	{
 		node.m_Words[0].m_Poses = 1 << NUMERAL;
@@ -249,7 +249,7 @@ void ConvertOneRusNumeralsToArabic (CRusSemStructure& R, CRusSemNode& node) {
 	}
 	if (ConvertedWordHyphen != "-1")
 	{
-		node.m_Words[0].m_Word += "(" + ConvertedWordHyphen + ")";
+		node.m_Words[0].SetWord(node.m_Words[0].GetWord() + "(" + ConvertedWordHyphen + ")");
 	};
 	node.m_Words[0].m_CharCase = FirstCase;
 	node.SetMainWordNo(0);
@@ -262,12 +262,12 @@ void CRusSemStructure::ConvertRusNumeralsToArabic()
 	for (auto& node : m_Nodes)
 		if (   node.IsPrimitive()
 			&& HasRichPOS(node, ADJ_FULL)
-			&& isdigit((BYTE)node.m_Words[0].m_Word[0])
+			&& isdigit((BYTE)node.m_Words[0].GetWord()[0])
 			)
 		{
-			int i = node.m_Words[0].m_Word.find("#");
-			node.m_Words[0].m_NumeralPrefix = node.m_Words[0].m_Word.substr(0, i);
-			node.m_Words[0].m_Word.erase(0, i + 1);
+			int i = node.m_Words[0].GetWord().find("#");
+			node.m_Words[0].m_NumeralPrefix = node.m_Words[0].GetWord().substr(0, i);
+			node.m_Words[0].SetWord(node.m_Words[0].GetWord().substr(i+1));
 			InterpretAdjectivesWithNumeral(*this, node);
 		};
 
@@ -310,12 +310,11 @@ void CRusSemStructure::NumeralAdverbRule()
 	for (long NumNodeNo = 0; NumNodeNo < m_Nodes.size(); NumNodeNo++)
 		if (m_Nodes[NumNodeNo].IsPrimitive())
 		{
-			std::string Word = m_Nodes[NumNodeNo].m_Words[0].m_Word;
-			EngRusMakeUpper(Word);
+			std::string Word = m_Nodes[NumNodeNo].m_Words[0].GetWord();
 			long NumeralValue = RussianNumerals.IsAdverbRule(Word);
 			if (NumeralValue == -1)  continue;
 			m_Nodes[NumNodeNo].m_Words[0].m_Lemma = "";
-			m_Nodes[NumNodeNo].m_Words[0].m_Word = DoubleToStr(NumeralValue);
+			m_Nodes[NumNodeNo].m_Words[0].SetWord(DoubleToStr(NumeralValue));
 			m_Nodes[NumNodeNo].m_Words[0].m_ParadigmId = -1;
 			m_Nodes[NumNodeNo].SetMainWordNo(0);
 

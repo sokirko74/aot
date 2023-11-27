@@ -207,7 +207,6 @@ bool CTempArticle::ArticleToText()
 		if (C.m_LevelId > 0)
 			if (C.m_LevelId > CurrLevelId)
 			{
-				char s[20];
 				CurrLevelId = C.m_LevelId;
 				if (C.m_LevelId == ErrUChar)
 					right = "*";

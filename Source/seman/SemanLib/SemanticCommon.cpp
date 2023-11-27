@@ -3,7 +3,7 @@
 #include "HierarchyHolder.h"
 
 //=====================================  CSemWord  =====================================
-const CRossHolder* CSemWord::GetRossHolder(DictTypeEnum Type)   const
+const CStructDictHolder* CSemWord::GetRossHolder(DictTypeEnum Type)   const
 {
 	return m_pData->GetRossHolder(Type);
 };
@@ -11,88 +11,6 @@ const CDictionary* CSemWord::GetRoss(DictTypeEnum Type) const
 {
 	return m_pData->GetRossHolder(Type)->GetRoss();
 };
-
-void CSemWord::Init()
-{
-	m_CharCase = LowLow;
-	m_FormGrammems = 0;
-	m_TypeGrammems = 0;
-	m_WordNo = -1;
-	m_ParadigmId = -1;
-	m_WordWeight = 0;
-	m_AdditParadigmId = -1;
-	m_bAdverbFromAdjective = false;
-	m_ArabicNumber = false;
-};
-
-CSemWord::CSemWord() { Init(); }
-
-CSemWord::CSemWord(long WordNo, std::string Lemma)
-{
-	Init();
-	m_WordNo = WordNo;
-	m_Lemma = Lemma;
-};
-// является ли данное слово кавычкой
-bool CSemWord::IsQuoteMark() const
-{
-	return (m_Word.length() == 1) && (m_Word[0] == '"');
-};
-// принадлежит ли граммема слову 
-bool CSemWord::HasOneGrammem(int grammem) const
-{
-	return		((m_FormGrammems & _QM(grammem)) != 0)
-		|| ((m_TypeGrammems & _QM(grammem)) != 0);
-}
-
-bool CSemWord:: operator == (const long& X) const
-{
-	return (m_WordNo == X);
-};
-
-
-bool CSemWord::IsRusSubstPronounP() const
-{
-	if (m_Poses != (1 << PRONOUN_P)) return false;
-
-	return     (m_Lemma == _R("КАЖДЫЙ"))
-		|| (m_Lemma == _R("ЛЮБОЙ"))
-		|| (m_Lemma == _R("ТОТ"))
-		|| (m_Lemma == _R("КОТОРЫЙ"))
-		|| (m_Lemma == _R("ДРУГОЙ"))
-		|| (m_Lemma == _R("ОДИН"));
-};
-
-grammems_mask_t CSemWord::GetAllGrammems() const
-{
-	return m_FormGrammems | m_TypeGrammems;
-}
-
-grammems_mask_t		CSemWord::GetFormGrammems() const
-{
-	return m_FormGrammems;
-}
-
-void		CSemWord::SetFormGrammems(grammems_mask_t g)
-{
-	m_FormGrammems = g;
-}
-
-grammems_mask_t		CSemWord::GetTypeGrammems() const
-{
-	return m_TypeGrammems;
-}
-
-void		CSemWord::SetTypeGrammems(grammems_mask_t g)
-{
-	m_TypeGrammems = g;
-}
-
-void		CSemWord::AddFormGrammem(grammem_t g)
-{
-	m_FormGrammems |= _QM(g);
-};
-
 
 
 //=====================================  CSemNode  =====================================
@@ -322,11 +240,6 @@ bool   CSemNode::HasPOS(part_of_speech_t POS) const
 	if (m_MainWordNo == -1) return false;
 	return GetWord(m_MainWordNo).HasPOS(POS);
 }
-bool   CSemNode::IsComma() const
-{
-	return     IsPrimitive()
-		&& GetWord(0).m_Word[0] == ',';
-};
 
 bool CSemNode::IsLemma(std::string Lemma) const
 {
@@ -438,7 +351,7 @@ void  CSemClause::Copy(const CSemClause& C)
 //=====================================  CSemanticStructure  =====================================
 
 
-CRossHolder* CSemanticStructure::GetRossHolder(DictTypeEnum Type)   const
+CStructDictHolder* CSemanticStructure::GetRossHolder(DictTypeEnum Type)   const
 {
 	return m_pData->GetRossHolder(Type);
 };
@@ -458,7 +371,7 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 	if (UnitNo == ErrUnitNo)
 		return;
 
-	const CRossHolder* pRossDoc = GetRossHolder(Node.GetType());
+	const CStructDictHolder* pRossDoc = GetRossHolder(Node.GetType());
 
 	if (UnitNo != ErrUnitNo)
 		if (!pRossDoc->GetRoss()->IsEmptyArticle(UnitNo))
@@ -467,7 +380,7 @@ void  CSemanticStructure::InitVals(CSemNode& Node)
 				TCortege C = pRossDoc->GetCortegeCopy(i);
 				if (C.m_FieldNo == pRossDoc->ValFieldNo && Node.m_Vals.size() < MaxValsCount)
 				{
-					Node.m_Vals.push_back(CValency(C, pRossDoc->MainWordVarNo, pRossDoc, UnitNo));
+					Node.m_Vals.push_back(CValency(C, pRossDoc, UnitNo));
 				};
 			};
 
@@ -744,7 +657,7 @@ std::string CSemanticStructure::GetTclGraph(bool ShowUnusedValencies, bool UseIs
 				if (!GetRelation(i)->m_SynReal.m_Cortege.is_null(0))
 				{
 					TCortege C = GetRelation(i)->m_SynReal.m_Cortege;
-					const CRossHolder* RossHolder = GetRelation(i)->m_Valency.m_RossHolder;
+					const CStructDictHolder* RossHolder = GetRelation(i)->m_Valency.m_RossHolder;
 					std::string GramFet = RossHolder->GetRoss()->WriteToString(C);
 					Props += "GF";
 					Props += LeafIdStr;
@@ -1990,7 +1903,7 @@ bool			CSemanticStructure::HasSemType(const CSemNode& Node, std::string Type) co
 	return (Node.GetType() != NoneRoss) && HasItem(Node.GetType(), Node.GetUnitNo(), "CAT", Type, "D_CAT", 0, 0);
 };
 
-bool			CSemanticStructure::GramFetAgreeWithPoses(CRossHolder& Ross, uint16_t UnitNo, const CSemWord& W) const
+bool			CSemanticStructure::GramFetAgreeWithPoses(CStructDictHolder& Ross, uint16_t UnitNo, const CSemWord& W) const
 {
 	return (W.m_Poses & GetPosesFromRusArticle(Ross, UnitNo)) > 0;
 };

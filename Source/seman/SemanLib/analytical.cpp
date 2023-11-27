@@ -177,13 +177,13 @@ void CRusSemStructure::CreateVerbAnalyticalForm(long AuxVerbNodeNo)
 	if ((Grammems != 0) && (Poses != 0) && CanBeDeleted(MainVerbNodeNo))
 	{
 		// "стал писать" "стану писать" "стать писать" - совершенный вид
-		if (AuxVerb->IsLemma(_R("СТАТЬ")))
+		if (AuxVerb->IsLemma("СТАТЬ"))
 		{
 			Grammems |= _QM(rPerfective);
 		}
 
 		Word->m_Lemma = m_Nodes[MainVerbNodeNo].m_Words[0].m_Lemma;
-		Word->m_Word += "-" + m_Nodes[MainVerbNodeNo].m_Words[0].m_Word;
+		Word->SetWord (Word->GetWord() + "-" + m_Nodes[MainVerbNodeNo].m_Words[0].GetWord());
 		Word->SetFormGrammems(Grammems);
 		Word->m_Poses = Poses;
 		Word->m_ParadigmId = m_Nodes[MainVerbNodeNo].m_Words[0].m_ParadigmId;

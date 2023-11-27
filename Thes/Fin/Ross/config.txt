@@ -1,5 +1,0 @@
-{
-	"MaxNumDom": 3,
-	"MaxMeanNum":  1,
-	"DictName": "RML_THES_FIN"
-}

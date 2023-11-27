@@ -137,7 +137,7 @@ int CEngSemStructure::GetOutRelationByWord(long NodeNo, std::string Word) const
 	{
 		const CEngSemRelation &rel = m_Relations[rels[i]];
 		if ( m_Nodes[rel.m_TargetNodeNo].IsPrimitive() )
-		if (   m_Nodes[rel.m_TargetNodeNo].m_Words[0].m_Word == Word)
+		if (   m_Nodes[rel.m_TargetNodeNo].m_Words[0].GetWord() == Word)
 			return rels[i];
 	}
 	return -1;

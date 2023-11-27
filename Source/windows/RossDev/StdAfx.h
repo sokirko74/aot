@@ -13,7 +13,7 @@
 #include "common/cortege.h"
 #include "morph_dict/common/utilit.h"
 #include "seman/SemanLib/TranslatorHolder.h"
-#include "seman/SemanLib/RossHolder.h"
+#include "seman/SemanLib/struct_dict_holder.h"
 #include "RossDev.h"
 #include "TckTkWrapper.h"
 	

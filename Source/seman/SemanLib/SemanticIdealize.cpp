@@ -63,8 +63,8 @@ long CRusSemStructure::Idealize() {
 
                 CRusSemWord &W = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo];
                 if (HasReflexiveSuffix(W.m_Lemma)) {
-                    W.m_Lemma.erase(W.m_Lemma.length() - 2, 2);
-                    W.m_Word.erase(W.m_Word.length() - 2, 2);
+                    W.m_Lemma.erase(W.m_Lemma.length() - ReflexiveSuffixLen, ReflexiveSuffixLen);
+                    W.SetWord(W.GetWord().substr(0, W.GetWord().length() - ReflexiveSuffixLen));
                 };
             }
 
@@ -79,8 +79,8 @@ long CRusSemStructure::Idealize() {
                     CRusSemNode &N = m_Nodes[m_Relations[i].m_TargetNodeNo];
                     if (!N.IsPrimitive())
                         continue;
-                    if (!(N.m_Words[0].m_Lemma == _R("ОН"))
-                        && !(N.m_Words[0].m_Lemma == _R("ОНА"))
+                    if (!(N.m_Words[0].m_Lemma == "ОН")
+                        && !(N.m_Words[0].m_Lemma == "ОНА")
                         && !(N.HasOneGrammem(rAnimative) && N.HasOneGrammem(rNonAnimative))
                         )
                         continue;
@@ -99,7 +99,7 @@ long CRusSemStructure::Idealize() {
         // поэтому достраиваем синтаксис
         for (long i = 0; i < m_Relations.size(); i++)
             if (m_Nodes[m_Relations[i].m_TargetNodeNo].IsPrimitive())
-                if (m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Lemma == _R("КАК")) {
+                if (m_Nodes[m_Relations[i].m_TargetNodeNo].m_Words[0].m_Lemma == "КАК") {
                     if (HasRichPOS(m_Relations[i].m_SourceNodeNo, ADJ_SHORT))
                         m_Relations[i].m_SyntacticRelation = "НАР_ПРИЛ";
                     if (HasRichPOS(m_Relations[i].m_SourceNodeNo, PREDK))
@@ -117,16 +117,16 @@ long CRusSemStructure::Idealize() {
         for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++)
             if ((m_Nodes[NodeNo].m_NodeType == MNA)
                 && m_Nodes[NodeNo].IsPrimitive()
-                && (m_Nodes[NodeNo].m_Words[0].m_Word.length() > 0)
-                && (m_Nodes[NodeNo].m_Words[0].m_Word[0] != ',')
+                && (m_Nodes[NodeNo].m_Words[0].GetWord().length() > 0)
+                && (m_Nodes[NodeNo].m_Words[0].GetWord()[0] != ',')
                     ) {
                 CRelSet R = GetIncomingRelations(NodeNo, false);
                 long i = 0;
                 for (; i < R.m_RelsCount; i++) {
                     const CRusSemNode &N = m_Nodes[m_Relations[R.m_Rels[i]].m_SourceNodeNo];
                     if (N.IsPrimitive()
-                        && (N.m_Words[0].m_Word.length() > 0)
-                        && (N.m_Words[0].m_Word[0] == ',')
+                        && (N.m_Words[0].GetWord().length() > 0)
+                        && (N.m_Words[0].GetWord()[0] == ',')
                             )
                         break;
                 };
@@ -173,7 +173,7 @@ long CRusSemStructure::Idealize() {
 void CRusSemStructure::ConvertVSE2_toOperator() {
     for (long NodeNo = 0; NodeNo < m_Nodes.size(); NodeNo++) {
         if (m_Nodes[NodeNo].GetType() != Ross) continue;
-        if (!m_Nodes[NodeNo].IsLemma(_R("ВСЕ"))) continue;
+        if (!m_Nodes[NodeNo].IsLemma("ВСЕ")) continue;
         if (GetRoss(Ross)->GetUnitMeanNum(m_Nodes[NodeNo].GetUnitNo()) != 2) continue;
         CRelSet R = GetIncomingRelations(NodeNo, false);
         if (R.m_RelsCount != 1) continue;
@@ -236,7 +236,7 @@ void CRusSemStructure::ApplySubordinationCases() {
         if (m_Relations[MainRelNo].m_Valency.IsFromDict()) {
             TCortege &C = m_Relations[MainRelNo].m_SynReal.m_Cortege;
             if (C.is_null(1)) continue;
-            const CRossHolder *RossHolder = m_Relations[MainRelNo].m_Valency.m_RossHolder;
+            const CStructDictHolder *RossHolder = m_Relations[MainRelNo].m_Valency.m_RossHolder;
             dom_item_id_t CaseItemNo = EmptyDomItemId;
             
             if (!RossHolder->IsCase(RossHolder->GetSynFet(C))) {
@@ -277,7 +277,7 @@ void CRusSemStructure::ApplySubordinationCases() {
     for (auto &r: m_Relations)
         if ((r.m_Valency.m_RelationStr == "QUANTIT")
             && m_Nodes[r.m_TargetNodeNo].IsPrimitive()
-            && (m_Nodes[r.m_TargetNodeNo].m_Words[0].m_Word == "1.5")
+            && (m_Nodes[r.m_TargetNodeNo].m_Words[0].GetWord() == "1.5")
                 ) {
             m_Nodes[r.m_SourceNodeNo].DeleteGrammems(rAllNumbers);
             m_Nodes[r.m_SourceNodeNo].AddOneGrammem(rSingular);
@@ -350,7 +350,7 @@ void CRusSemStructure::ApplySubordinationCases() {
     for (long i = 0; i < m_Relations.size(); i++)
         if (m_Relations[i].m_Valency.IsFromDict()) {
             const CRusSemRelation &R = m_Relations[i];
-            const CRossHolder *RossHolder = R.m_Valency.m_RossHolder;
+            const CStructDictHolder *RossHolder = R.m_Valency.m_RossHolder;
             const TCortege &C = R.m_SynReal.m_Cortege;
             long SynFet = RossHolder->GetSynFet(R.m_SynReal.m_Cortege);
             if (!RossHolder->IsCase(SynFet)) continue;
@@ -611,8 +611,8 @@ void CRusSemStructure::FindQuestionClauses() {
                                                                    ((j - m_Clauses[HostClauses[i]].m_BeginNodeNo) <
                                                                     ConjWordDistance); j++)
                 if (m_Nodes[j].IsLemmaList({
-                                                   _R("ЧТОБЫ"), _R("ЕСЛИ"), _R("ХОТЯ"), _R("ПОСКОЛЬКУ"), _R("ПОКА"),
-                                                   _R("КОТОРЫЙ")})) {
+                                                   "ЧТОБЫ", "ЕСЛИ", "ХОТЯ", "ПОСКОЛЬКУ", "ПОКА",
+                                                   "КОТОРЫЙ"})) {
                     HostClauses.erase(HostClauses.begin() + i);
                     i--;
                     break;

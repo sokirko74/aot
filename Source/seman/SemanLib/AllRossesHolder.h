@@ -1,7 +1,7 @@
 #ifndef AllRossHolder_H
 #define AllRossHolder_H
 
-#include "RossHolder.h"
+#include "struct_dict_holder.h"
 #include "HierarchyHolder.h"
 
 
@@ -11,19 +11,19 @@
 class CAllRossesHolder : public CTranslatorHolder 	
 { 
 protected:
-	CRossHolder            m_RossDoc;
-	CRossHolder            m_LocRossDoc;
-	CRossHolder            m_TimeRossDoc;
-	CRossHolder            m_RusOborDoc;
-	CRossHolder            m_RusCollocsDoc;
-	CRossHolder            m_EngRossDoc;
-	CRossHolder            m_EngCollocsRossDoc;
-	CRossHolder            m_EngOborRossDoc;
+	CStructDictHolder            m_RossDoc;
+	CStructDictHolder            m_LocRossDoc;
+	CStructDictHolder            m_TimeRossDoc;
+	CStructDictHolder            m_RusOborDoc;
+	CStructDictHolder            m_RusCollocsDoc;
+	CStructDictHolder            m_EngRossDoc;
+	CStructDictHolder            m_EngCollocsRossDoc;
+	CStructDictHolder            m_EngOborRossDoc;
 
-	CRossHolder            m_FinThesRossDoc;
-	CRossHolder            m_LocThesRossDoc;
-	CRossHolder            m_OmniThesRossDoc;
-	CRossHolder            m_CompThesRossDoc;
+	CStructDictHolder            m_FinThesRossDoc;
+	CStructDictHolder            m_LocThesRossDoc;
+	CStructDictHolder            m_OmniThesRossDoc;
+	CStructDictHolder            m_CompThesRossDoc;
 	bool					m_bDontLoadExamples;
 
  public:
@@ -33,12 +33,12 @@ protected:
 
 	 CAllRossesHolder();
 	 
- 	 CRossHolder*		GetRossHolder (DictTypeEnum Type);
-  	 const CRossHolder*	GetRossHolder (DictTypeEnum Type)  const;
-  	 DictTypeEnum		GetTypeByRossHolder (const CRossHolder* pHolder)  const;
+ 	 CStructDictHolder*		GetRossHolder (DictTypeEnum Type);
+  	 const CStructDictHolder*	GetRossHolder (DictTypeEnum Type)  const;
+  	 DictTypeEnum		GetTypeByRossHolder (const CStructDictHolder* pHolder)  const;
 	 DictTypeEnum		GetTypeByStr (std::string DictName);
 	 CDictionary*		GetRoss (DictTypeEnum Type);
-	 std::string				GetRossPath(DictTypeEnum RossId)  const;
+	 std::string		GetRossPath(DictTypeEnum RossId)  const;
 	 DictTypeEnum		GetRegisteredRossId(std::string FileName)  const;
 
 	 bool				InitHierarchies();

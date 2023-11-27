@@ -538,7 +538,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 		std::string strAOP = GetCortegeStr(rusNode.GetType(),vectorAop[i]);
 		if( vectorAop[i].m_LeafId == 0 ) //если это EOPERATOR без индекса
 		{
-			if (strAOP == _R("БЫ"))
+			if (strAOP == "БЫ")
 			{
 			  if ( !RusStr.GetSemClause(rusNode.m_ClauseNo).m_HasParticleBY )
 				  continue;
@@ -980,7 +980,7 @@ bool CEngSemStructure::InterpretWithPlugArticles(long RusNodeNo,CEnglishEquivMap
 
 	// числительные
 	if (		RusStr.GetNode(RusNodeNo).IsPrimitive() 
-			&&	isdigit((unsigned char)RusStr.GetNode(RusNodeNo).GetWord(0).m_Word[0])
+			&&	isdigit((unsigned char)RusStr.GetNode(RusNodeNo).GetWord(0).GetWord()[0])
 			&&	!RusStr.HasPOS (RusNodeNo,ADV)  // "вдвоем"
 	   ) return false;
 

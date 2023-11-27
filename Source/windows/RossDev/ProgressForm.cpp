@@ -65,7 +65,7 @@ void CProgressForm::OnTimer(UINT_PTR dummy)
 			{
 				m_CurrentPos = GetSemBuilder().GetScrollCurrent();
 				m_ProgressCtrl.SetPos(m_CurrentPos);
-				m_Statis.Format ("%i/%i", m_CurrentPos, m_Max);
+				m_Statis.Format (_T("%i/%i"), m_CurrentPos, m_Max);
 				UpdateData(FALSE);
 			};
 

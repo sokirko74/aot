@@ -133,7 +133,7 @@ public:
 	std::string GetUnitTextHeader(uint16_t UnitNo) const;
 
 	
-
+	const TDictConfig& GetConfig() const;
 };
 
 

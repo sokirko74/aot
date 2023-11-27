@@ -3,7 +3,7 @@
 #include "seman/SemanLib/LexFuncts.h"
 
 const int g_PersPronounsCount = 5;
-std::string g_PersPronouns[g_PersPronounsCount] = {_R("Я"),_R("ТЫ"),_R("ОН"),_R("ОНА"), _R("ОНО")};
+std::string g_PersPronouns[g_PersPronounsCount] = {"Я","ТЫ","ОН","ОНА", "ОНО"};
 
 
 bool CEngSemStructure::CheckDomensForCortege(StringVector& domens, TCortege& cortege, DictTypeEnum   DictType ) const
@@ -209,8 +209,8 @@ bool CEngSemStructure::IsChtoOrKto(int iNode)
 	if(	rusNode.GetWordsSize() != 1)		
 		return false;
 
-	if( (rusNode.GetWord(0).m_Lemma == _R("КТО")) ||
-		(rusNode.GetWord(0).m_Lemma == _R("ЧТО")) )
+	if( (rusNode.GetWord(0).m_Lemma == "КТО") ||
+		(rusNode.GetWord(0).m_Lemma == "ЧТО") )
 		return true;
 	
 	return false;
@@ -425,7 +425,7 @@ bool CEngSemStructure::FindSubjPattern(const CEngSemNode& N, CSemPattern& Result
 
 bool CEngSemStructure::SetSubjPattern(CEngSemRelation& semRel)
 {	
-	const CRossHolder* R = semRel.m_Valency.m_RossHolder;
+	const CStructDictHolder* R = semRel.m_Valency.m_RossHolder;
 	if (R == 0)  return false;
 
 	TCortege T;
@@ -533,7 +533,7 @@ void CEngSemStructure::FilLexFunctRel()
 }
 
 
-bool CEngSemStructure::IsPlugArticle( const CRossHolder* RossHolder, uint16_t UnitNo) const
+bool CEngSemStructure::IsPlugArticle( const CStructDictHolder* RossHolder, uint16_t UnitNo) const
 {
     if (!RossHolder || (UnitNo == ErrUnitNo)) return false;
 	std::vector<TCortege> corteges;
@@ -740,20 +740,16 @@ bool CEngSemStructure::has_plural_rel(long NodeNo) const
 	std::vector<long> rels;
 	GetOutcomingRelations(NodeNo, rels);
 	for(int i = 0; i < rels.size(); i++){
-if(m_Relations[rels[i]].m_Valency.m_RelationStr == "QUANTIT"){			const CEngSemNode& node = m_Nodes[m_Relations[rels[i]].m_TargetNodeNo];
+		if(m_Relations[rels[i]].m_Valency.m_RelationStr == "QUANTIT"){			
+			const CEngSemNode& node = m_Nodes[m_Relations[rels[i]].m_TargetNodeNo];
 
 			// случай how_much и how_many, для которых написан специальный алгоритм
-			if(node.m_Words.size() != 1) return false;
-
-			float Number = atof (node.m_Words[0].m_Word.c_str());
-
-// Gri
+			if (node.m_Words.size() != 1) return false;
+			float Number = atof (node.m_Words[0].GetWord().c_str());
 			if( Number==0 )
 				return false; 
-// gri
-
 			if(    ! ( (Number != 0) && (Number <2))
-				&&   node.m_Words[0].m_Lemma != _R("ОДИН")
+				&&   node.m_Words[0].m_Lemma != "ОДИН"
 			  )
 			return true;
 

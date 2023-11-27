@@ -21,7 +21,7 @@ int		CRusSemStructure::GetNodesSize() const
 std::string	CRusSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const  
 { 
 	const CRusSemNode& Node = *(CRusSemNode*)pNode;
-	std::string L = Node.m_Words[WordNo].m_Word;
+	std::string L = Node.m_Words[WordNo].GetWord();
 	if (Node.m_Words[WordNo].m_NumeralPrefix != "")
 		L = Node.m_Words[WordNo].m_NumeralPrefix + "-" + L;
 	return L; 
@@ -143,17 +143,17 @@ std::string CSemClauseVariantResult :: GetStr()
 bool CRusSemStructure::CanBePrefixRelationOperator (long NodeNo) const
 {
 	return     m_Nodes[NodeNo].IsPrimitive()
-		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("НЕ"))
-                || (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ТОЛЬКО"))
-				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ДАЖЕ"))
-				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("НИ"))
+		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "НЕ")
+                || (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ТОЛЬКО")
+				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ДАЖЕ")
+				|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "НИ")
 			   );
 }
 
 bool CRusSemStructure::CanBePostfixRelationOperator (long NodeNo) const
 {
 	return     m_Nodes[NodeNo].IsPrimitive()
-		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("ЖЕ"))
+		   &&  (   (m_Nodes[NodeNo].m_Words[0].m_Lemma == "ЖЕ")
 			   );
 }
 
@@ -167,7 +167,7 @@ bool CRusSemStructure::ContainsSemCopul(long NodeNo) const
 	if (UnitNo ==  ErrUnitNo) 
 		return false;
 
-	const CRossHolder* pHolder = GetRossHolder(Interp->m_DictType);
+	const CStructDictHolder* pHolder = GetRossHolder(Interp->m_DictType);
 	const CDictionary* Ross = pHolder->GetRoss();
 	if (Ross->IsEmptyArticle(UnitNo))	return false;
 	long EndCortegeNo = Ross->GetUnitLastPos(UnitNo);
@@ -877,7 +877,7 @@ bool CRusSemStructure::IsSimpleNounGroupUnderPrep(long NodeNo) const
 							m_Nodes[NodeNo].m_Words[0].HasPOS(NOUN) 
 						|| m_Nodes[NodeNo].m_Words[0].HasPOS(PRONOUN) 
 						|| m_Nodes[NodeNo].m_Words[0].m_ILE
-						|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("КОТОРЫЙ"))
+						|| (m_Nodes[NodeNo].m_Words[0].m_Lemma == "КОТОРЫЙ")
 						)
 				)
 					||  (m_Nodes[NodeNo].m_SynGroupTypeStr == NOUN_ADJ_STR)
@@ -976,16 +976,11 @@ bool CRusSemNode::RelsCanBeTogether(const long RelationId1,  const long Relation
 			return false;
 	return true;
 };
-// является ли данный узел кавычкой
-bool   CRusSemNode::IsOneQuoteMark () const 
-{
-	return IsPrimitive() && GetWord(0).IsQuoteMark();
-};
 
 // является ли данный узел тире
 bool   CRusSemNode::IsOneDash () const 
 {
-	return IsPrimitive() && (GetWord(0).m_Word == "-");
+	return IsPrimitive() && (GetWord(0).GetWord() == "-");
 };
 
 bool CRusSemNode::IsMNA_ButNotCHEM () const  
@@ -1013,10 +1008,10 @@ bool CRusSemNode::operator < (const CRusSemNode& Node) const
 bool CRusSemNode::IsAnaphoricPronoun () const
 {
 	return (     IsPrimitive() 
-		&& (    (m_Words[0].m_Lemma == _R("ОН"))
-		    || (m_Words[0].m_Lemma == _R("ОНА"))
-            || (m_Words[0].m_Lemma == _R("ОНО"))
-			|| (m_Words[0].m_Lemma == _R("ОНИ"))
+		&& (    (m_Words[0].m_Lemma == "ОН")
+		    || (m_Words[0].m_Lemma == "ОНА")
+            || (m_Words[0].m_Lemma == "ОНО")
+			|| (m_Words[0].m_Lemma == "ОНИ")
 			)
 		);
 };
@@ -1036,7 +1031,7 @@ bool CRusSemNode::IsLemma(std::string Lemma) const
 
 bool CRusSemNode::IsWordForm(std::string WordForm) const 
 {
-	return IsPrimitive() && (m_Words[0].m_Word == WordForm);
+	return IsPrimitive() && (m_Words[0].GetWord() == WordForm);
 };
 
 bool CRusSemNode::IsLemmaList(const std::vector<std::string>& lemmas) const
@@ -1086,66 +1081,6 @@ void CRusSemNode::ModifyGramCodes(std::string GramCodes, int mode, const CRusGra
 }
 //================================================
 
-void CRusSemWord::Init() 
-{
-   	m_IsPunct = false;
-  	m_ILE = false;
-	m_bRomanNumber = false;
-	m_SynWordNo = -1;
-	m_ArabicNumber = false;
-};
-
-CRusSemWord::CRusSemWord() : CSemWord()
-{
-	Init();
-};
-CRusSemWord::CRusSemWord   ( long WordNo, std::string Lemma ) : CSemWord(WordNo, Lemma)
-{
-	Init();
-};
-
-
-bool CRusSemWord::IsReflexiveVerb () const 
-{
-	return  (   HasPOS (VERB) 
-				|| HasPOS (INFINITIVE) 
-				|| HasPOS (PARTICIPLE) 
-				|| HasPOS (ADVERB_PARTICIPLE) 
-			) 
-			&& HasReflexiveSuffix(m_Word);
-};
-
-part_of_speech_mask_t CRusSemWord::GetRusRichPoses () const
-{
-	part_of_speech_mask_t Poses = m_Poses;
-
-	if (m_Lemma == _R("ЛИ"))
-		Poses &= ~(1 << CONJ);
-
-	if (    (m_Lemma == _R("ПЕРВОЕ"))
-		|| (m_Lemma == _R("ВТОРОЕ"))
-		|| (m_Lemma == _R("ТРЕТЬЕ"))
-		|| (m_Lemma == _R("ЧЕТВЕРТОЕ"))
-		)
-		Poses |= (1 << NUMERAL_P);
-
-
-	return Poses;
-};
-
-bool   CRusSemWord::HasPOS (part_of_speech_t POS) const
-{
-	return  (GetRusRichPoses()  & 1<<POS) > 0;
-};
-
-bool CRusSemWord::IsEqualMorph  (const CRusSemWord& W) 	const
-{
-	return    (m_Lemma == W.m_Lemma)
-			&& (m_Word == W.m_Word)
-			&& (GetAllGrammems() == W.GetAllGrammems())
-			&& (m_Poses == W.m_Poses);
-};
-
 
 //===========================
 
@@ -1163,23 +1098,13 @@ CRusMorphHomonym::CRusMorphHomonym(const CRusSemWord& X)
 
 
 //=========================
-const std::string PossPronoun [] = {_R("НАШ"), _R("ВАШ"), _R("МОЙ"), _R("ТВОЙ"), _R("ЕЕ"), _R("ЕГО"), _R("ИХ")};
+const std::string PossPronoun [] = {"НАШ", "ВАШ", "МОЙ", "ТВОЙ", "ЕЕ", "ЕГО", "ИХ"};
 bool IsPossesivePronoun(const CSemNode& N)
 {
 	if (!N.IsPrimitive() ) return false;
     return find (PossPronoun, PossPronoun + 7, N.GetWord(0).m_Lemma ) != PossPronoun + 7;
 };
 
-
-bool HasReflexiveSuffix (const std::string& s) 
-{
-	if ( s.length () <  3)   return false;
-	std::string suffix  = s.substr (s.length() - 2);
-	EngRusMakeUpper(suffix);
-	return   (    ( suffix == _R("СЯ"))
-				|| ( suffix == _R("СЬ"))
-				);
-};
 
 
 bool IsBetween (const CRusSemNode& Node, const CRusSemNode& LowerBound, const CRusSemNode& UpperBound)
@@ -1189,7 +1114,7 @@ bool IsBetween (const CRusSemNode& Node, const CRusSemNode& LowerBound, const CR
 			 && Node.GetMinWordNo()		  < UpperBound.GetMinWordNo();
 };
 
-TCortege GetSubjCortege (const CRossHolder* RossDoc)
+TCortege GetSubjCortege (const CStructDictHolder* RossDoc)
 {
           TCortege C;
 		  C.m_FieldNo = RossDoc->GramFetFieldNo;
@@ -1200,7 +1125,7 @@ TCortege GetSubjCortege (const CRossHolder* RossDoc)
 		  return C;
 };
 
-TCortege GetInstrObj (const CRossHolder* RossDoc)
+TCortege GetInstrObj (const CStructDictHolder* RossDoc)
 {
           TCortege C;
 		  C.m_FieldNo = RossDoc->GramFetFieldNo;

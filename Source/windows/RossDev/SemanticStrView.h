@@ -23,11 +23,10 @@ public:
 	~CSemanticStrView();
 	
 	CSemanticStrDoc*    GetDoc();
-	void				BuildTclGraph(CString Graph);
+	void				BuildTclGraph(std::string s_utf8);
 	void				ShowGraph();
 	void				OpenAllRosses();
 	void				PasteClipboard();
-	CRossDoc*			FindRossDoc(DictTypeEnum RossType);
 
 // Operations
 public:
@@ -46,7 +45,6 @@ public:
 // Implementation
 private:
 	void		OpenRossDocIfNeeded(DictTypeEnum RossType);
-	CString		GetNormalizedRossPath(DictTypeEnum RossType) const;
 	void	GetJavaGraph();
 public:
 	

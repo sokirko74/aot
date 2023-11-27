@@ -120,7 +120,7 @@ bool NodeHelper::FieldContainsValue(const CEngSemNode& node, const std::string &
 	{
 		int ThesId = node.m_Colloc.GetThesInterp().m_ThesaurusId;
 		const CThesaurus* Thes = E.m_pData->GetThes(ThesId);
-		const CRossHolder* Dict = E.m_pData->GetRossHolder(GetRossIdByThesId(ThesId));
+		const CStructDictHolder* Dict = E.m_pData->GetRossHolder(GetRossIdByThesId(ThesId));
 		if (Dict == 0) return false;
 
 		long eng_termin;

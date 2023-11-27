@@ -43,7 +43,7 @@ protected:
 };
 
 
-extern bool InputBox (char* Caption, char* OutBuffer, size_t OutBufferLen, char* UpperCaption = "Input Box", CWnd* Parent = NULL);
+extern bool InputBoxUtf8 (char* Caption, char* OutBuffer, size_t OutBufferLen, char* UpperCaption = "Input Box", CWnd* Parent = NULL);
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

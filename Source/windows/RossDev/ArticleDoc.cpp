@@ -88,7 +88,7 @@ void _AfxFontConvertOLE2LOG(CDC& dc, COleFont& from, LOGFONT& to)
 	to.lfClipPrecision = CLIP_DEFAULT_PRECIS;
 	to.lfQuality = PROOF_QUALITY;
 	to.lfPitchAndFamily = VARIABLE_PITCH | TMPF_TRUETYPE | FF_MODERN;
-	strcpy(to.lfFaceName, from.GetName());
+	lstrcpy(to.lfFaceName, from.GetName());
 }
 
 void _AfxFontConvertLOG2OLE(CDC& dc, LOGFONT& from, COleFont& to)
@@ -102,7 +102,7 @@ void _AfxFontConvertLOG2OLE(CDC& dc, LOGFONT& from, COleFont& to)
 	to.SetUnderline(from.lfUnderline);
 	to.SetStrikethrough(from.lfStrikeOut);
 	to.SetCharset(from.lfCharSet);
-	to.SetName("Arial"/*from.lfFaceName*/);
+	to.SetName(_T("Arial"/*from.lfFaceName*/));
 }
 
 
@@ -127,7 +127,7 @@ BOOL CArticleDoc::OpenArticle(uint16_t  UnitNo, CRossDoc* pRossDoc)
 
 	ASSERT_VALID(pFrame);
 
-	SetPathName(GetRoss()->GetEntryStr(m_UnitNo).c_str());
+	SetPathName(_U16(GetRoss()->GetEntryStr(m_UnitNo)));
 
 	// open an existing document
 	GetDocTemplate()->InitialUpdateFrame(pFrame, this, TRUE);
@@ -171,7 +171,7 @@ BOOL CArticleDoc::SaveModified()
 	}
 	catch (...)
 	{
-		prompt.Format("Unit \"%s\" contains errors. Exit without save?", name);
+		prompt.Format(_T("Unit \"%s\" contains errors. Exit without save?"), name);
 
 		switch (AfxMessageBox(prompt, MB_OKCANCEL))
 		{
@@ -213,22 +213,19 @@ BOOL CArticleDoc::SaveModified()
 
 bool CArticleDoc::Markout()
 {
-
 	try
 	{
-		CString SaveArticleStr = GetArticleView()->GetText();
-		m_Article.ReadFromUtf8String(GetArticleView()->GetText());
-
+		m_Article.ReadFromUtf8String(_U8(GetArticleView()->GetText()).c_str());
 		std::string  A = m_Article.GetArticleStrUtf8();
-		GetArticleView()->SetText(A.c_str());
+		GetArticleView()->SetText(_U16(A));
 
 		GetArticleView()->m_FldScroll.SetScrollRange(0, (m_Article.m_Fields.empty() ? 0 : m_Article.m_Fields.size() - 1));
 		GetArticleView()->m_FldScroll.ShowWindow(SW_SHOW);
 		GetArticleView()->m_RichEdit.SetFocus();
 	}
-	catch (article_parse_error a)
+	catch (std::exception& a)
 	{
-		AfxMessageBox(a.what());
+		AfxMessageBox(_U16(a.what()));
 		return false;
 	}
 	catch (...)

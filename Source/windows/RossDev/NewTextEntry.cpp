@@ -65,38 +65,37 @@ LRESULT CNewTextEntry::OnWizardNext()
    CNewArticleWizard* Wzd  = (CNewArticleWizard*)GetParent();
    m_UnitStr.TrimLeft();
    m_UnitStr.TrimRight();
-   BYTE MeanNum = atoi (m_MeanNum);
+   BYTE MeanNum = _ttoi (m_MeanNum);
    if (m_UnitStr.IsEmpty())
    {
-	   AfxMessageBox ("The text entry cannot be empty");
+	   AfxMessageBox (_T("The text entry cannot be empty"));
 	   return -1;
    };
-   uint16_t UnitNo = GetRoss()->LocateUnit ((const char*)m_UnitStr,MeanNum);
+   auto unit_str_u8 = utf16_to_utf8((const TCHAR*)m_UnitStr);
+   uint16_t UnitNo = GetRoss()->LocateUnit (unit_str_u8.c_str(), MeanNum);
    if (UnitNo  != ErrUnitNo)
    {
-	   if (::MessageBox(0, "An entry with the same name already exists. Add a new sense?", "Message Box", MB_OKCANCEL) != IDOK)
+	   if (::MessageBox(0, _T("An entry with the same name already exists. Add a new sense?"), _T("Message Box"), MB_OKCANCEL) != IDOK)
 		 return -1;
 	   int k = UnitNo+1;
 	   for (; k < GetRoss()->GetUnitsSize(); k++)
-		   if (strcmp (m_UnitStr, GetRoss()->GetEntryStr(k).c_str()))
+		   if (unit_str_u8 != GetRoss()->GetEntryStr(k))
 			   break;
-        MeanNum =  GetRoss()->GetUnitMeanNum(k-1)+1;
+        MeanNum =  GetRoss()->GetUnitMeanNum(k-1) + 1;
 	   
    };
-   m_MeanNum.Format("%i", MeanNum);
+   m_MeanNum.Format(_T("%i"), MeanNum);
    UpdateData(FALSE);
       //ищем слово в морфологии
    CRossDevApp* A = ((CRossDevApp*)AfxGetApp());
    ((CPosChoicer*)Wzd->GetPage(1))->m_ParadigmCollection.clear();
    ((CTranslations*)Wzd->GetPage(2))->m_ParadigmCollection.clear();
    std::vector<CFormInfo>& ParadigmCollection = ((CPosChoicer*)Wzd->GetPage(1))->m_ParadigmCollection;
-
-   
    const CLemmatizer* P = GetSemBuilder().m_RusStr.m_pData->GetRusLemmatizer();
    if (P)
    {
-		
-		P->CreateParadigmCollection(true, std::string((const char*)m_UnitStr), false, false, ParadigmCollection);
+		auto s8 = _R(unit_str_u8.c_str());
+		P->CreateParadigmCollection(true, s8, false, false, ParadigmCollection);
  		((CTranslations*)Wzd->GetPage(2))->m_ParadigmCollection = ParadigmCollection;
 	};
 

@@ -72,7 +72,7 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 
  if (m_Clauses[ClauseNo].m_ClauseType != COMPARATIVE_T)
  	 for (long i = m_Clauses[ClauseNo].m_BeginNodeNo+1;  i < m_Clauses[ClauseNo].m_EndNodeNo ; i++)
-		 if (   m_Nodes[i].IsLemmaList({ _R("БОЛЬШОЙ"), _R("МАЛЕНЬКИЙ") })
+		 if (   m_Nodes[i].IsLemmaList({ "БОЛЬШОЙ", "МАЛЕНЬКИЙ" })
 		    &&	m_Nodes[i].HasOneGrammem(rComparative)
 		 )
 	  return false;
@@ -94,7 +94,7 @@ bool CRusSemStructure::FindComparWithNoActantAndCheck(long ClauseNo)
 			  &&	CanBeDeleted(i)
 		 )
 	  {
-			  if ( !m_Nodes[i-1].IsWordForm(_R("ВСЕ")) ) continue;
+			  if ( !m_Nodes[i-1].IsWordForm("ВСЕ") ) continue;
 	  		  m_Nodes[i].m_RelOperators.push_back("ПРОДОЛЖ");
 			  DelNode(i-1);
 			  i--;
@@ -123,7 +123,7 @@ void CRusSemStructure::BuildOutcomingOf_CHEM_Obor(long ClauseNo)
 		long  k=CompNodeNo+1;
 		for (; k < EndNodeNo; k++)
         if  (     m_Nodes[k].IsPrimitive()
-			   && (m_Nodes[k].m_Words[0].m_Lemma == _R("ЧЕМ"))
+			   && (m_Nodes[k].m_Words[0].m_Lemma == "ЧЕМ")
 			 )
 		break;
         if (k == EndNodeNo) continue;
@@ -234,8 +234,8 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 
 	  for (long CompNodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  CompNodeNo <   m_Clauses[ClauseNo].m_EndNodeNo; CompNodeNo++)
 		if (    m_Nodes[CompNodeNo].HasOneGrammem(rComparative)
-			&&  (   m_Nodes[CompNodeNo].IsLemma(_R("БОЛЬШОЙ")) 		
-				 || m_Nodes[CompNodeNo].IsLemma(_R("МАЛЕНЬКИЙ")) 		
+			&&  (   m_Nodes[CompNodeNo].IsLemma("БОЛЬШОЙ") 		
+				 || m_Nodes[CompNodeNo].IsLemma("МАЛЕНЬКИЙ") 		
 				)
 		   )
 		{
@@ -249,7 +249,7 @@ void CRusSemStructure::ZaplataCompar1(long ClauseNo)
 				 break;
 			if ( k == m_Clauses[ClauseNo].m_EndNodeNo ) return;
 			if (!m_Nodes[k].IsPrimitive()) return;
-			m_Nodes[k].m_Words[0].m_Lemma = _R("МНОГО");
+			m_Nodes[k].m_Words[0].m_Lemma = "МНОГО";
 			InitInterps(m_Nodes[k].m_Words[0], false, ClauseNo, m_Nodes[k]);
 		};
 	};
@@ -269,11 +269,11 @@ void CRusSemStructure::ZaplataCompar2(long ClauseNo)
 {
    if (m_Clauses[ClauseNo].m_ClauseSyntaxTop != -1)
    if (    m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].HasRelOperator("НЕ") 
-	    || m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].IsLemma (_R("НЕТ"))
+	    || m_Nodes[m_Clauses[ClauseNo].m_ClauseSyntaxTop].IsLemma ("НЕТ")
 	  )
    for (long CompNodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  CompNodeNo <   m_Clauses[ClauseNo].m_EndNodeNo; CompNodeNo++)
 		if (    m_Nodes[CompNodeNo].HasOneGrammem (rComparative)
-			&&  m_Nodes[CompNodeNo].IsLemma(_R("МНОГО")) 		
+			&&  m_Nodes[CompNodeNo].IsLemma("МНОГО") 		
 		   )
 		{
 			std::vector<long> Rels;
@@ -317,7 +317,7 @@ try {
 		if (	m_Nodes[CompNodeNo].m_bCompAdj		)
 		{
 
-			if (!m_Nodes[CompNodeNo].IsLemma (_R("БОЛЬШОЙ")))
+			if (!m_Nodes[CompNodeNo].IsLemma ("БОЛЬШОЙ"))
 				for	(long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo <	 EndNodeNo;	NodeNo++)
 					if	(		IsVerbForm (m_Nodes[NodeNo])	
 							||	HasRichPOS (NodeNo, PREDK) // "у	меня нет больше	 надежды"

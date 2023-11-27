@@ -2,13 +2,12 @@
 #pragma warning (disable : 4786)
 
 #include "morph_dict/common/utilit.h"
-#include "RossHolder.h"
-#include "dicts/StructDictLib/Ross.h"
+#include "struct_dict_holder.h"
 #include "SemanticsHolder.h"
 #include "SemPattern.h"
 #include "morph_dict/agramtab/RusGramTab.h"
 #include "morph_dict/agramtab/EngGramTab.h"
-
+#include "sem_word.h"
 
 typedef std::vector<long> VectorLong;
 
@@ -49,82 +48,6 @@ struct CRossQuery {
 };
 
 
-class CSemWord {
-
-    // граммемы, которые приписаны слову
-    grammems_mask_t m_FormGrammems;
-    // общие граммемы, которые приписаны слову
-    grammems_mask_t m_TypeGrammems;
-
-public:
-    // прописная или строчная буква
-    RegisterEnum m_CharCase;
-    // входное слово прописными буквами
-    std::string m_Word;
-    // лемма
-    std::string m_Lemma;
-    std::string m_GramCodes;
-    // номер парадигмы в морф. словаре
-    long m_ParadigmId;
-    // добавочный номер парадигмы в морф. словаре (для приложений типа "муж-алкоголик")
-    long m_AdditParadigmId;
-    // части речи, которые приписаны слову
-    part_of_speech_mask_t m_Poses;
-    // номер слова в синтаксическом представлении
-    long m_WordNo;
-    // Полные эквиваленты слова, здесь обычно лежит
-    // аспектный вариант глагола (совершенный, несовершенный виды)
-    StringVector m_WordEquals;
-    // используется в словах типа "трехоконный", которые переводятся в "3-fenestral"
-    std::string m_NumeralPrefix;
-
-    long m_WordWeight;
-    // является ли это слово наречием "по-английски", "по-хорошему"...
-    bool m_bAdverbFromAdjective;
-
-    // графематическая помета ЦК (цифровой комплекс)
-    bool m_ArabicNumber;
-
-    // указатель на все словари системы
-    const CSemanticsHolder *m_pData;
-
-    // две обертки для функций из CSemanticsHolder
-    const CRossHolder *GetRossHolder(DictTypeEnum Type) const;
-
-    const CDictionary *GetRoss(DictTypeEnum Type) const;
-
-
-    CSemWord();
-
-    CSemWord(long WordNo, std::string Lemma);
-
-    void Init();
-
-    // является ли данное слово кавычкой
-    bool IsQuoteMark() const;
-
-    // принадлежит ли граммема слову
-    bool HasOneGrammem(int grammem) const;
-
-    bool operator==(const long &X) const;
-
-    // проверка, что часть речи POS принадлежит  данному слову
-    virtual bool HasPOS(part_of_speech_t POS) const = 0;
-
-    bool IsRusSubstPronounP() const;
-
-    grammems_mask_t GetAllGrammems() const;
-
-    grammems_mask_t GetFormGrammems() const;
-
-    void SetFormGrammems(grammems_mask_t);
-
-    grammems_mask_t GetTypeGrammems() const;
-
-    void SetTypeGrammems(grammems_mask_t);
-
-    void AddFormGrammem(grammem_t g);
-};
 
 
 typedef std::pair<std::string, std::string> PairOfString;
@@ -332,8 +255,6 @@ public:
 
     bool HasPOS(part_of_speech_t POS) const;
 
-    bool IsComma() const;
-
     bool IsLemma(std::string Lemma) const;
 
     // проверяет, что данный узел является пассивным глаголом
@@ -476,7 +397,7 @@ public:
     CSemanticsHolder *m_pData;
 
     // две обертки для функций из CSemanticsHolder
-    CRossHolder *GetRossHolder(DictTypeEnum Type) const;
+    CStructDictHolder *GetRossHolder(DictTypeEnum Type) const;
 
     const CDictionary *GetRoss(DictTypeEnum Type) const;
 
@@ -706,10 +627,10 @@ public:
 
     //======================    работа со словарными интерпретациями
     // выдает набор частей речи по GF-главному статьи UnitNo
-    part_of_speech_mask_t GetPosesFromRusArticle(CRossHolder &Ross, uint16_t UnitNo) const;
+    part_of_speech_mask_t GetPosesFromRusArticle(CStructDictHolder &Ross, uint16_t UnitNo) const;
 
     // проверяет согласование словарной статьи UnitNo со словом W по частям речи
-    bool GramFetAgreeWithPoses(CRossHolder &Ross, uint16_t UnitNo, const CSemWord &W) const;
+    bool GramFetAgreeWithPoses(CStructDictHolder &Ross, uint16_t UnitNo, const CSemWord &W) const;
 
     // проверяет, что в одном из значений поля CAT стоит константа Type		(семантическая категория)
     bool HasSemType(const CSemNode &Node, std::string Type) const;

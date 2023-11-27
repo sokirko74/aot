@@ -71,21 +71,21 @@ bool CRusSemStructure::IsEqualTimeWord(std::string DictLemma, CRusSemNode& N, lo
 	if (DictLemma == "#DAY-OF-WEEK")	  return IsWeekDay(N);
 	if (N.m_Words.empty()) return false;
 	CRusSemWord& W = N.m_Words[0];
-	EngRusMakeUpper(DictLemma);
+	MakeUpperUtf8(DictLemma);
 	AbbrFunctNo = -1;
-	if (DictLemma[DictLemma.length() - 1] == '$') DictLemma.erase(DictLemma.length() - 1);
-	if (IsEqualWithPhonetics(W.m_Lemma, DictLemma)
-		|| (W.m_Word == DictLemma)
+	if (DictLemma.back() == '$') DictLemma.pop_back();
+	if (   IsEqualWithPhonetics(W.m_Lemma, DictLemma)
+		|| (W.GetWord() == DictLemma)
 		)
 		return true;
 	else
 		if (W.m_PostPuncts.find('.') != -1)
 		{
-			AbbrFunctNo = GetFullForm(m_pData->m_TimeAbbrPairs, W.m_Word + ".");
+			AbbrFunctNo = GetFullForm(m_pData->m_TimeAbbrPairs, W.GetWord() + ".");
 			if (AbbrFunctNo == -1) return false;
 			return
-				IsEqualWithPhonetics(m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm, DictLemma)
-				|| (W.m_Word == m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm);
+				   IsEqualWithPhonetics(m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm, DictLemma)
+				|| (W.GetWord() == m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm);
 		};
 
 	return false;
@@ -148,7 +148,7 @@ bool CRusSemStructure::CheckTimeNumeral(long NodeNo, std::string GramFet) const
 {
 	assert(startswith(GramFet, "ЦК"));
 	
-	BYTE Length = 100;
+	int Length = -1;
 
 	if (isdigit((unsigned char)GramFet.back()))
 		Length = GramFet.back() - '0';
@@ -156,12 +156,12 @@ bool CRusSemStructure::CheckTimeNumeral(long NodeNo, std::string GramFet) const
 	return   ((m_Nodes[NodeNo].m_SynGroupTypeStr == SIMILAR_NUMERALS_STR)
 		|| (m_Nodes[NodeNo].m_SynGroupTypeStr == NUMERALS_STR)
 		|| (m_Nodes[NodeNo].m_SynGroupTypeStr == C_NUMERALS_STR) // например, "через 2,5 месяца"
-		|| (m_Nodes[NodeNo].IsPrimitive() && isdigit((unsigned char)m_Nodes[NodeNo].m_Words[0].m_Word[0]))
+		|| (m_Nodes[NodeNo].IsPrimitive() && isdigit((unsigned char)m_Nodes[NodeNo].m_Words[0].GetWord()[0]))
 		|| (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS(NodeNo, NUMERAL))
 		|| (m_Nodes[NodeNo].IsPrimitive() && HasRichPOS(NodeNo, NUMERAL_P))
 		)
-		&& ((Length == 100)
-			|| (m_Nodes[NodeNo].IsPrimitive() && (m_Nodes[NodeNo].m_Words[0].m_Word.length() == Length))
+		&& (   (Length == -1)
+			|| (m_Nodes[NodeNo].IsPrimitive() && (m_Nodes[NodeNo].m_Words[0].GetWord().length() == Length))
 			);
 };
 
@@ -462,7 +462,7 @@ void CRusSemStructure::BuildTimeNodes(long ClauseNo)
 				/*if (      m_pData->m_TimeUnits[BestHypot.m_UnitNo].m_Rels.empty() //не работал TimeHypotIsSyntaxAgree
 					   && (
 							   !BestHypot.m_Periods[PeriodNo].m_bShouldBeNumeral_P 
-							|| !HasSynRelation(nd, _R("ЧИСЛ_СУЩ"))
+							|| !HasSynRelation(nd, "ЧИСЛ_СУЩ")
 						   )
 					)
 					continue;*/

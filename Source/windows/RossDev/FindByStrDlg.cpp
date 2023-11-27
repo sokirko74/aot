@@ -87,18 +87,19 @@ try{
 		size_t UnitNo; 
 		
 		try{
+			auto substr_u8 = _U8((const TCHAR*)m_FindString);
 			for (UnitNo = 0;  UnitNo < pRossDoc->GetRoss()->GetUnitsSize(); UnitNo++)
 			{
 				if (pRossDoc->GetRoss()->IsEmptyArticle(UnitNo)) continue;
 				A.ReadFromDictionary(UnitNo, false, true);
-				if (A.GetArticleStrUtf8().find(m_FindString) != -1)
+				if (A.GetArticleStrUtf8().find(substr_u8) != -1)
 					PocketItems.push_back(CRossPocketItem(UnitNo, pRossDoc));
 			};
 		}
 		catch (...)
 		{
 			std::string Mess = std::string ("Errors in article ") + pRossDoc->GetRoss()->GetEntryStr(UnitNo) ;
-			AfxMessageBox (Mess.c_str());
+			AfxMessageBox (_U16(Mess));
 		};
 
 	};
@@ -108,7 +109,7 @@ try{
 }
 catch (...)
 {
-	AfxMessageBox ("Something is wrong");
+	AfxMessageBox (_T("Something is wrong"));
 };
 
 	CDialog::OnOK();

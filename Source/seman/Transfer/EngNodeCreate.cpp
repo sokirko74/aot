@@ -32,13 +32,13 @@ void CEngSemStructure::InitEngWordAndLemma(CEngSemWord& semWord, std::string str
 		Trim(strPosleLog);
 
 		semWord.m_Lemma = strLemma;
-		semWord.m_Word = strLemma;	
+		semWord.SetWord(strLemma);	
 		semWord.m_PosleLog.m_PosleLog = strPosleLog;
 	}
 	else
 	{
 		semWord.m_Lemma = strEngLemma;
-		semWord.m_Word =  strEngLemma;		
+		semWord.SetWord(strEngLemma);
 	}
 }
 
@@ -46,7 +46,7 @@ void CEngSemStructure::CreateEnglNodeForEngObor(long UnitNo, CEngSemNode& engNod
 {
 	CEngSemWord newWord;
 	newWord.m_Lemma = m_pData->GetEngOborStr(UnitNo);
-	newWord.m_Word = newWord.m_Lemma;
+	newWord.SetWord(newWord.m_Lemma);
 	newWord.m_bDoNotChangeForm = true;	
 	newWord.m_pData = m_pData;	
 	engNode.m_Words.push_back(newWord);
@@ -245,7 +245,7 @@ void CEngSemStructure::CreateSimpleEnglNode(std::string lemma, CEngSemNode& engN
 
 	CEngSemWord semWord;	
 	semWord.m_Lemma = lemma;
-	semWord.m_Word = lemma;	
+	semWord.SetWord(lemma);
 	semWord.m_Poses = 1<<POS;
 	if (lemma == "be")
 		semWord.m_Poses = (1 << eVBE);
@@ -267,7 +267,7 @@ void CEngSemStructure::CreateSimpleEnglNodeWithInterp(CRossInterp UnitInterp, CE
 	CEngSemWord semWord;
 	std::string strEngLemma = GetRoss(UnitInterp.m_DictType)->GetEntryStr(UnitInterp.m_UnitNo);
 	semWord.m_Lemma = strEngLemma.c_str();
-	semWord.m_Word = strEngLemma.c_str();	
+	semWord.SetWord(strEngLemma);	
 	ReadMorphFromMainGF( UnitInterp.m_UnitNo, UnitInterp.m_DictType, semWord);
 	semWord.m_pData = m_pData;	
 	engNode.SetInterp(UnitInterp);

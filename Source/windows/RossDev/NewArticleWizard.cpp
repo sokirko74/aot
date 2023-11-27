@@ -51,7 +51,7 @@ void CNewArticleWizard::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized
 BOOL CNewArticleWizard::OnSetActive( )
 {
 	SetWizardButtons( PSWIZB_BACK|PSWIZB_NEXT|PSWIZB_FINISH);
-    SetFinishText("Finish");
+    SetFinishText(_T("Finish"));
 	return TRUE;
 };
 

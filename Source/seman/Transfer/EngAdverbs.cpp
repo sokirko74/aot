@@ -57,7 +57,7 @@ CAdvPosType get_adv_pos_kind(const CEngSemNode& Node)
 	const CEngSemWord &word = Node.m_Words[0];
 	if(unit_no == ErrUnitNo) return adv_other;
 
-	const CRossHolder* RossDoc = word.GetRossHolder(Node.GetType());
+	const CStructDictHolder* RossDoc = word.GetRossHolder(Node.GetType());
 	if (RossDoc == 0) return adv_other;
 	if(RossDoc->HasFieldValue("GF", "ADVERB:DEGREE", unit_no)) return adv_degree;
 	if(RossDoc->HasFieldValue("GF", "ADVERB:FREQ",unit_no)) return adv_freq;

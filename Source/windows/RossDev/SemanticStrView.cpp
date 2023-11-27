@@ -170,7 +170,7 @@ void CSemanticStrView::PasteClipboard()
 	wchar_t wstr  [5000];
 	if ( GlobalSize(hMem) > 4999) 
 	{
-		AfxMessageBox (" Text is too big!");
+		AfxMessageBox (_T(" Text is too big!"));
 	};
 
 	CopyMemory( wstr, hMem, GlobalSize(hMem));
@@ -193,7 +193,7 @@ void CSemanticStrView::PasteClipboard()
 		m_TclInterp.RunTcl(cmd);
 	}
 	catch (CExpc c) {
-		AfxMessageBox("Cannot set value");
+		AfxMessageBox(_T("Cannot set value"));
 	}
 	CloseClipboard();
 
@@ -231,17 +231,17 @@ static void log(std::string  s)
 	fclose(fp);
 }
 
-void CSemanticStrView::BuildTclGraph(CString S)
+void CSemanticStrView::BuildTclGraph(std::string s_utf8)
 {  
    log (std::string("\nBuildTclGraphn"));
-   if (S.IsEmpty()) return;
+   if (s_utf8.empty()) return;
 
-   char* str = new char[S.GetLength()+1]; 
+   char* str = new char[s_utf8.length() + 1];
    assert (str);
    std::string CurrCommand;
 
    try {
-	 strcpy  (str, S);
+	 strcpy  (str, s_utf8.c_str());
 	 char* s = str;
 	 for (;;)
 	 {
@@ -252,19 +252,18 @@ void CSemanticStrView::BuildTclGraph(CString S)
 		try {
 			m_TclInterp.RunTcl(s);
 		}
-		catch (CExpc e) {
-			char q[5000];
-			sprintf (q, "Cannot interpret TCL Code \"%s\". Proceed?", s);
-			int Result = ::MessageBox(0, q, "Seman", MB_YESNO);
+		catch (std::exception& e) {
+			auto m = Format("Cannot interpret TCL Code \"%s\". Proceed?", e.what());
+			int Result = ::MessageBox(0, _U16(m), _T("Seman"), MB_YESNO);
 			if (Result == IDYES)
-			break;
+				break;
 		};
 		s = q+1;
 	}
    }
 	catch (...)
 	{
-		::MessageBox(0, "Cannot interpret TCL Code", "Seman", MB_OK);
+		::MessageBox(0, _T("Cannot interpret TCL Code"), _T("Seman"), MB_OK);
 	};
 
 	delete str;
@@ -278,20 +277,19 @@ int CreateSynStr (ClientData clienData,
 	CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 	if  (App->m_bGraphanIsBusy)
 	{
-			AfxMessageBox ("Graphan is busy (getting minus list)");
-			return TCL_OK;
+		AfxMessageBox (_T("Graphan is busy (getting minus list)"));
+		return TCL_OK;
 	};
 
-    CString text = "";
-    if (argv[2] != 0) text = argv[2];
-	text.Trim();
-	if (text.IsEmpty()) 
+    std::string utf8text;
+    if (argv[2] != 0) utf8text = argv[2];
+	Trim(utf8text);
+	if (utf8text.empty())
 		return TCL_OK;
 	CSemanticStrDoc* Doc = FindDoc<CSemanticStrDoc>(argv[1], GetSemanticStructureTemplate());
 	if (Doc->m_bBusy) return TCL_OK;
 	Doc->m_bBusy = true;
 	std::string Graph;
-	std::string utf8text = convert_to_utf8((const char*)text, morphRussian);
 	auto& rusStr = GetSemBuilder().m_RusStr;
 	if (!rusStr.GetSyntaxTreeByText(utf8text, atoi(argv[3]), Graph))
 	{
@@ -322,7 +320,7 @@ int ShowArticle (ClientData clienData,
 		}
 	}
 	catch (...) {
-		AfxMessageBox ("Cannot show article");
+		AfxMessageBox (_T("Cannot show article"));
 	};
 
 	return TCL_OK;
@@ -333,7 +331,7 @@ int ShowArticle (ClientData clienData,
 int fc_argc;
 char** fc_argv;
 bool ThreadFinish;
-CString fc_Graph;
+std::string fc_Graph;
 bool bAnswer = false;
 
 UINT FindSituationsInThread    ( LPVOID pParam )
@@ -347,7 +345,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		CRossDevApp* App =  (CRossDevApp*)::AfxGetApp();
 		if  (App->m_bGraphanIsBusy)
 		{
-			AfxMessageBox ("Graphan is busy (getting minus list)");
+			AfxMessageBox (_T("Graphan is busy (getting minus list)"));
 			return TCL_OK;
 		};
 		std::string text = "";
@@ -404,7 +402,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 		}
 		else
 		{
-			fc_Graph = Result.c_str();
+			fc_Graph = Result;
 			if (!Question.empty())
 			{
 				GetSemBuilder().SaveThisSentence();
@@ -429,7 +427,7 @@ UINT FindSituationsInThread    ( LPVOID pParam )
 	}
 	catch  (...)
 	{
-		AfxMessageBox (" Semantics has crushed!");
+		AfxMessageBox (_T(" Semantics has crushed!"));
 	};
 
 
@@ -481,7 +479,7 @@ int FindSituations    (ClientData clienData,
 
 	} catch (...) 
 	{
-			AfxMessageBox (" FindSituations!");
+			AfxMessageBox (_T(" FindSituations!"));
 
 	};
 	return TCL_OK;
@@ -613,8 +611,7 @@ int ShowMessageMicrosoftWindows(ClientData clienData,
 	Tcl_Interp* interp,
 	int argc, char* argv[])
 {
-	std::string s = convert_to_utf8(argv[1], morphRussian);
-	AfxMessageBox(s.c_str());
+	AfxMessageBox(_U16(argv[1]));
 	return 1;
 }
 
@@ -626,50 +623,23 @@ int Update    (ClientData clienData,
 	return TCL_OK;
 };
 
-
-CString		CSemanticStrView::GetNormalizedRossPath(DictTypeEnum RossType) const {
-	return ((CRossDevApp*)AfxGetApp())->GetNormalizedRossPath(RossType);
-}
-
-
-CRossDoc* CSemanticStrView::FindRossDoc(DictTypeEnum RossType)
-{
-	CString strPathName = GetNormalizedRossPath(RossType);
-
-	CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-	assert(pRossDocTemplate);
-
-	CDocument* pDoc;
-	POSITION pos = pRossDocTemplate->GetFirstDocPosition();
-	while( pos )
-	{
-		pDoc = pRossDocTemplate->GetNextDoc(pos);	
-		CString strPathNameDoc = pDoc->GetPathName();
-		strPathNameDoc.MakeLower();
-		if( strPathNameDoc == strPathName )
-		{
-			return (CRossDoc*)pDoc;
-		}				
-	}
-
-	return 0;
-}
-
-
 void CSemanticStrView::OpenRossDocIfNeeded(DictTypeEnum RossType)
 {
+	CAllRossesHolder* Trans = ((CRossDevApp*)AfxGetApp())->m_SemBuilder.m_RusStr.m_pData;
+	std::string dir = Trans->GetRossPath(RossType).c_str();
+	std::string path = (fs::path(dir) / "config.rcf").string();
 	try
 	{
-		if (!FindRossDoc(RossType))
+		if (!((CRossDevApp*)AfxGetApp())->FindRossDoc(RossType))
 		{
 			((CRossDevApp*)AfxGetApp())->m_OpenRossDocReadOnly = true;
-			GetRossDocTemplate()->OpenDocumentFile(GetNormalizedRossPath(RossType));
+			GetRossDocTemplate()->OpenDocumentFile(_U16(path));
 			((CRossDevApp*)AfxGetApp())->m_OpenRossDocReadOnly = false;
 		};
 	}
 	catch(...)
 	{
-		CString Mess = "Cannot open " + GetNormalizedRossPath(RossType);
+		CString Mess = CString("Cannot open ") + path.c_str();
 		AfxMessageBox (Mess);
 	}
 }
@@ -685,7 +655,7 @@ void  CSemanticStrView::OpenAllRosses()
 	}
 	catch (...)
 	{
-		AfxMessageBox ("Cannot open some semantic dictionary .");
+		AfxMessageBox (_T("Cannot open some semantic dictionary."));
 		return;
 	};
 };
@@ -702,6 +672,6 @@ void  CSemanticStrView::GetJavaGraph()
 		TRACE(s.c_str());
 	}
 	catch (CExpc c) {
-		AfxMessageBox("failed");
+		AfxMessageBox(_T("failed"));
 	}
 };

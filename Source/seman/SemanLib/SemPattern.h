@@ -2,8 +2,8 @@
 #define SemPattern_H
 
 class CSemanRossHolder;
-class CRossHolder;
-#include "RossHolder.h"
+class CStructDictHolder;
+#include "struct_dict_holder.h"
 
 class CSemPattern {
 public:	 
@@ -24,12 +24,12 @@ public:
   // SFi для этого актанита
   std::vector< std::vector<std::string> >		m_ActantSemFets;
   // словарь, из которого было взято это грамматическое выражение
-  const CRossHolder*			m_pRossDoc;
-  const CRossHolder*			GetRossHolder() const;
+  const CStructDictHolder*			m_pRossDoc;
+  const CStructDictHolder*			GetRossHolder() const;
 
 
   CSemPattern ();
-  void		InitSemPattern(const CRossHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId);
+  void		InitSemPattern(const CStructDictHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId);
   dom_item_id_t		GetSynRel(long CortegeNo) const;
   dom_item_id_t		GetSynFet(long CortegeNo) const;
   // то же, что и предыдущие две функции, но выдаются строки

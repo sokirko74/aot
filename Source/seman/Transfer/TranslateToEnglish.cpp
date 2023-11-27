@@ -431,7 +431,7 @@ bool CEngSemStructure::TranslateCasesIfNeed(long NodeNo)
 std::string CEngSemStructure::GetInterfaceWordStr(const CSemNode* pNode, int WordNo) const
 {
 	CEngSemNode& Node = *(CEngSemNode*)pNode;
-	std::string L = Node.m_Words[WordNo].m_Word;
+	std::string L = Node.m_Words[WordNo].GetWord();
 	if (Node.m_Words[WordNo].m_NumeralPrefix != "")
 		L = Node.m_Words[WordNo].m_NumeralPrefix + "-" + L;
 

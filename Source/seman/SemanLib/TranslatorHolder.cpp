@@ -209,6 +209,7 @@ uint32_t CTranslatorHolder::GetFirstParadigmId(const MorphLanguageEnum langua, s
     try {
 
         std::vector<CFormInfo> ParadigmCollection;
+        Lemma = convert_from_utf8(Lemma.c_str(), langua);
         L->CreateParadigmCollection(true, Lemma, false, false, ParadigmCollection);
 
 

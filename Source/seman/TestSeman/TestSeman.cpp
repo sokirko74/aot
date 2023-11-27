@@ -26,7 +26,7 @@ public:
         plog::util::nostringstream ss;
         ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << severityToString(record.getSeverity()) << PLOG_NSTR(" ");
         ss << PLOG_NSTR("[") << record.getFunc() << PLOG_NSTR("@") << record.getLine() << PLOG_NSTR("] ");
-        ss << convert_to_utf8(record.getMessage(), morphRussian) << PLOG_NSTR("\n");
+        ss << record.getMessage() << PLOG_NSTR("\n");
         auto mess = ss.str();
         if (record.getSeverity() != plog::Severity::verbose) {
             std::cerr << mess << "\n";
@@ -71,7 +71,7 @@ nlohmann::json getNodeInfo(const CRusSemStructure& semStr, int nodeIndex) {
 
     for (auto& w : Node.m_Words) {
         words.push_back({
-            {"word", w.m_Word},
+            {"word", w.GetWord()},
             {"lemma", w.m_Lemma},
             {"inner morph", GetGramInfo(semStr, w.m_Poses, w.GetAllGrammems())}
             });
@@ -88,7 +88,7 @@ nlohmann::json getNodeInfo(const CRusSemStructure& semStr, int nodeIndex) {
     if (!Node.m_AntecedentStr.empty()) {
         res["anteceden"] = Node.m_AntecedentStr;
     }
-    if (Node.m_Words.empty() || Node.m_Words[0].m_Word != semStr.GetNodeStr1(nodeIndex)) {
+    if (Node.m_Words.empty() || Node.m_Words[0].GetWord() != semStr.GetNodeStr1(nodeIndex)) {
         res["node_str"] = semStr.GetNodeStr1(nodeIndex);
     }
     return res;
@@ -259,7 +259,7 @@ int main(int argc, const char* argv[]) {
         }
         PLOGD << "normal exit\n";
     }
-    catch (CExpc e) {
+    catch (std::exception& e) {
         PLOGE << e.what() << "\n";
         return 1;
     }

@@ -145,9 +145,9 @@ LRESULT CTranslations::OnWizardNext()
 	  {
 		  CString Q;
 		  m_List.GetText(i, Q);
-		  CString T = Q.SpanExcluding(" ");
+		  CString T = Q.SpanExcluding(_T(" "));
 		  T.MakeLower();
-		  m_ResultString +=   T + CString ("\n");;
+		  m_ResultString +=   T + CString (_T("\n"));;
 
 	  };
 

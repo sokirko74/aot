@@ -73,7 +73,7 @@ bool CHierarchyRelation::operator ==  (const CHierarchyRelation& X) const
 //=========  CHierarchyHolder ================
 //===========================================
 
-CHierarchyHolder::CHierarchyHolder(CRossHolder* pRossDoc) :m_pRossDoc(pRossDoc)
+CHierarchyHolder::CHierarchyHolder(CStructDictHolder* pRossDoc) :m_pRossDoc(pRossDoc)
 {
 
 };
@@ -319,7 +319,7 @@ const int MaxLevelId = 30;
 
 // проверяет что все SF актанта с номером LeafId равны  ItemStr или 
 // ниже по иерархии
-bool SemFetActantIsEqualOrLower(CRossHolder* Ross, uint16_t Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc)
+bool SemFetActantIsEqualOrLower(CStructDictHolder* Ross, uint16_t Host, BYTE LeafId, BYTE BracketLeafId, const std::string& ItemStr, CHierarchyHolder* pHierarchyDoc)
 {
 	dom_item_id_t ItemNo = Ross->GetRoss()->GetItemIdByItemStr(ItemStr, Ross->SemFetDomNo);
 	assert(!is_null(ItemNo));

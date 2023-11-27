@@ -1,6 +1,7 @@
 #pragma once 
 
 #include <string>
+#include <vector>
 
 struct TDictConfig {
 	
@@ -10,6 +11,7 @@ struct TDictConfig {
 
 	std::string DictFolder;
 
+	std::vector<std::string> DictUsers;
 	
 	void ReadConfig(std::string path);
 };

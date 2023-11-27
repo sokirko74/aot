@@ -46,18 +46,12 @@ public:
 	void InsertLine (int LineNo, const CString& S);
 	void Clear ()
 	{
-		m_RichEdit.SetWindowText("");
+		m_RichEdit.SetWindowText(_T(""));
 	};
 	void SelectLine ( long LineNo );
 	void SetText(CString S);
 	void DeleteLine(size_t i);
-
-	CString GetText() const
-	{
-		CString A;
-		m_RichEdit.GetWindowText(A);
-		return  A;
-	};
+	CString GetText() const;
    
 	
 

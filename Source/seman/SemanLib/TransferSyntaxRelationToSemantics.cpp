@@ -33,7 +33,7 @@ bool CRusSemStructure::IsPragmaticallyStrongSynRel (long RelNo) const
 	// собрать другие группы, как бы игнорируя частицы, например:
 	// "Я не знаю, эту ли книгу ты дал мне."
 	// но нам нужно выделить "ли" из ПРИЛ_СУЩ, чтобы соединились клаузы.
-	if (m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsLemma(_R("ЛИ")))
+	if (m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsLemma("ЛИ"))
 		return false;
 
 	/*
@@ -41,8 +41,8 @@ bool CRusSemStructure::IsPragmaticallyStrongSynRel (long RelNo) const
 	*/
 	if  (m_SynRelations[RelNo].m_SynRelName == "НАР_ЧИСЛ_СУЩ")
 	{
-		if (   m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm(_R("БОЛЬШЕ"))			
-			|| m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm(_R("МЕНЬШЕ"))  
+		if (   m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm("БОЛЬШЕ")			
+			|| m_Nodes[m_SynRelations[RelNo].m_TargetNodeNo].IsWordForm("МЕНЬШЕ")  
 			)
 		{
 			return false;

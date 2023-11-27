@@ -82,7 +82,6 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_BN_CLICKED(IDC_CHANGE_TITLE, OnChangeTitle)
 	ON_COMMAND(ID_MENUITEM32786, OnComments)
 	ON_COMMAND(ID_MENUITEM32788, OnMenuitem32788)
-	ON_COMMAND(ID_VALENCIES, OnValencies)
 	ON_COMMAND(ID_SEMFET, OnSemFet)
 	ON_COMMAND(ID_STATISTIC_FIELD_VALUE, OnStatisticFieldValue)
 	ON_COMMAND(ID_SORT_BY_LEMMA, OnSortByLemma)
@@ -97,12 +96,9 @@ BEGIN_MESSAGE_MAP(CWordList, CSizeFormView)
 	ON_COMMAND(ID_FIND_BY_STR, OnFindByString)
 	ON_COMMAND(ID_FIND_WRONG_REFS, OnFindWrongRefs)
 	ON_NOTIFY(NM_CLICK, IDC_WORDLIST_GRID, OnClickWordlistGrid)
-	ON_COMMAND(IDD_EXPORT_ALL_DICTS, OnExportAllDicts)
-	ON_COMMAND(EMPTY_ALL_DICTS, OnEmptyAllDicts)
 	ON_COMMAND(ID_RELOAD, OnReload)
 	ON_WM_LBUTTONUP()
 	ON_WM_KEYDOWN()
-	ON_COMMAND(ID_ALL_DICT_ENTRIES, OnAllDictEntries)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -137,13 +133,42 @@ extern  CRossDevApp theApp;
 tm Str2Tm(CString TimeStr)
 {
 	tm output;
-	sscanf(TimeStr, "%i/%i/%i %i:%i:%i", &output.tm_mday, &output.tm_mon, &output.tm_year, &output.tm_hour, &output.tm_min, &output.tm_sec);
+	sscanf(_U8(TimeStr).c_str(), "%i/%i/%i %i:%i:%i", &output.tm_mday, &output.tm_mon, &output.tm_year, &output.tm_hour, &output.tm_min, &output.tm_sec);
 	output.tm_mon--;
 	return output;
 };
 
+uint16_t CWordList::GetUnitNo(uint16_t i) const
+{
+	if (m_Termins.empty())
+		return m_Index[i].UnitNo;
+	else
+		return m_Termins[i].m_UnitNo;
+}
 
-std::string CWordList::GetEntryStr(uint16_t UnitNo) const
+uint16_t CWordList::GetUnitsSize() const
+{
+	return IsFiltered() ? GetRoss()->GetSelectedUnitsSize() : GetRoss()->GetUnitsSize();
+};
+
+bool CWordList::GetSelectedUnitNo(uint16_t& UnitNo) const
+{
+	POSITION pos = m_WordList.GetFirstSelectedItemPosition();
+
+	if (pos == NULL)
+	{
+		::MessageBox(0, _T("No selection in the list"), _T("Message Box"), MB_OK);
+		return false;
+	};
+
+	UnitNo = GetUnitNo(m_WordList.GetNextSelectedItem(pos));
+
+	return true;
+
+};
+
+
+std::string CWordList::GetEntryStrUtf8(uint16_t UnitNo) const
 {
 	if (!GetDocument()->IsThesRoss())
 		return GetRoss()->GetEntryStr(UnitNo);
@@ -165,6 +190,9 @@ std::string CWordList::GetEntryStr(uint16_t UnitNo) const
 	};
 
 };
+CString CWordList::GetEntryStrUtf16(uint16_t UnitNo) const {
+	return _U16(GetEntryStrUtf8(UnitNo));
+}
 
 
 
@@ -172,64 +200,64 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	LV_DISPINFO* pDispInfo = (LV_DISPINFO*)pNMHDR;
 	*pResult = 0;
-	// TODO: Add your control notification handler code here
 	LV_ITEM* pItem = &(pDispInfo)->item;
 	if (GetUnitsSize() == 0) return;
-	char s[10];
+	TCHAR s[10];
 	CString S;
 	uint16_t UnitNo = GetUnitNo(pItem->iItem);
-	std::string entry_str;
+	CString entry_str;
 	if (pItem->mask & LVIF_TEXT) //valid text buffer?
 	{
 		switch (pItem->iSubItem) {
 		case 0: //fill in main text
 			if (m_Termins.empty()) {
-				entry_str = GetRoss()->GetEntryStr(UnitNo);
+				entry_str = _U16(GetRoss()->GetEntryStr(UnitNo));
 			}
 			else {
-				entry_str = m_Termins[pItem->iItem].m_TerminStr.c_str();
+				entry_str = m_Termins[pItem->iItem].m_TerminStr;
 			}
-			lstrcpy(pItem->pszText, entry_str.c_str());
+			lstrcpy(pItem->pszText, entry_str);
+
 			break;
 		case 1: //fill in sub item 1 text            
-			sprintf(s, "%i", GetRoss()->GetUnitMeanNum(UnitNo));
-			lstrcpy(pItem->pszText, s);
+			S.Format(_T("%i"), GetRoss()->GetUnitMeanNum(UnitNo));
+			lstrcpy(pItem->pszText, S);
 			break;
 		case 2: //fill in main text            
 			if (GetDocument()->m_ReadOnly)
-				lstrcpy(pItem->pszText, "");
+				lstrcpy(pItem->pszText, _T(""));
 			else
 			{
-				const char* coms = GetRoss()->GetCommentsByUnitId(GetRoss()->GetUnits()[UnitNo].m_EntryId)->Comments;
-				lstrcpy(pItem->pszText, convert_to_utf8(coms, GetRoss()->m_Language).c_str());
+				std::string coms = GetRoss()->GetCommentsByUnitId(GetRoss()->GetUnits()[UnitNo].m_EntryId)->Comments;
+				lstrcpy(pItem->pszText, _U16(coms));
 			}
 			break;
 
 		case 3:
 
 			if (GetDocument()->m_ReadOnly)
-				lstrcpy(pItem->pszText, "");
+				lstrcpy(pItem->pszText, _T(""));
 			else
-				lstrcpy(pItem->pszText, GetRoss()->GetUnitModifTimeStr(UnitNo).c_str());
+				lstrcpy(pItem->pszText, _U16(GetRoss()->GetUnitModifTimeStr(UnitNo)));
 			break;
 
 		case 4:
-			sprintf(s, "%s", GetRoss()->GetUnits()[UnitNo].m_bSelected ? "      +" : "       -");
-			lstrcpy(pItem->pszText, s);
+			S = GetRoss()->GetUnits()[UnitNo].m_bSelected ? _T("      +") : _T("       -");
+			lstrcpy(pItem->pszText, S);
 			break;
 		case 5:
 			if (GetDocument()->m_ReadOnly)
-				lstrcpy(pItem->pszText, "");
+				lstrcpy(pItem->pszText, _T(""));
 			else
 			{
-				lstrcpy(pItem->pszText, GetRoss()->GetUnits()[UnitNo].GetAuthorStr().c_str());
+				lstrcpy(pItem->pszText, _U16(GetRoss()->GetUnits()[UnitNo].GetAuthorStr()));
 			}
 			break;
 		case 6:
 			if (GetDocument()->m_ReadOnly)
-				lstrcpy(pItem->pszText, "");
+				lstrcpy(pItem->pszText, _T(""));
 			else
-				lstrcpy(pItem->pszText, GetRoss()->GetUnitEditor(UnitNo).c_str());
+				lstrcpy(pItem->pszText, _U16(GetRoss()->GetUnitEditor(UnitNo)));
 			break;
 
 
@@ -239,7 +267,8 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 	POSITION pos = m_WordList.GetFirstSelectedItemPosition();
 	if (pos != 0)
 		UnitNo = m_WordList.GetNextSelectedItem(pos);
-	m_UnitsSize.Format("Dictionary entry %i (out of %i)", UnitNo + 1, m_WordList.GetItemCount());
+	m_UnitsSize.Format(_T("Dictionary entry %i (out of %i)"),
+		UnitNo + 1, m_WordList.GetItemCount());
 }
 
 
@@ -264,7 +293,7 @@ void CWordList::BuildIndex()
 		long Count = GetRoss()->GetUnitsSize();
 		m_Termins.clear();
 		for (long i = 0; i < Count; i++)
-			m_Termins.push_back(CRossDevTermin(i, GetEntryStr(i)));
+			m_Termins.push_back(CRossDevTermin(i, GetEntryStrUtf16(i)));
 		sort(m_Termins.begin(), m_Termins.end());
 		return;
 	};
@@ -309,19 +338,17 @@ void CWordList::OnInitialUpdate()
 	if (m_Menu.LoadMenu(IDR_POPUP_WORDLIST))
 		SetMenu(&m_Menu);
 	else
-		CExpc("Cannot load menu");
+		throw CExpc("Cannot load menu");
 	m_Menu.CheckMenuItem(IDR_SET_FILTER, MF_BYCOMMAND | MF_UNCHECKED);
 
-
-
 	//установка основного списка
-	m_WordList.InsertColumn(1, "Title", LVCFMT_LEFT, 200);
-	m_WordList.InsertColumn(2, "Sense", LVCFMT_LEFT, 60);
-	m_WordList.InsertColumn(3, "Comm.", LVCFMT_LEFT, 70);
-	m_WordList.InsertColumn(4, "Last modif.", LVCFMT_LEFT, 100);
-	m_WordList.InsertColumn(5, "Mark", LVCFMT_LEFT, 40);
-	m_WordList.InsertColumn(6, "Author", LVCFMT_LEFT, 60);
-	m_WordList.InsertColumn(7, "Editor", LVCFMT_LEFT, 60);
+	m_WordList.InsertColumn(1, _T("Title"), LVCFMT_LEFT, 200);
+	m_WordList.InsertColumn(2, _T("Sense"), LVCFMT_LEFT, 60);
+	m_WordList.InsertColumn(3, _T("Comm."), LVCFMT_LEFT, 70);
+	m_WordList.InsertColumn(4, _T("Last modif."), LVCFMT_LEFT, 100);
+	m_WordList.InsertColumn(5, _T("Mark"), LVCFMT_LEFT, 40);
+	m_WordList.InsertColumn(6, _T("Author"), LVCFMT_LEFT, 60);
+	m_WordList.InsertColumn(7, _T("Editor"), LVCFMT_LEFT, 60);
 
 	Update();
 	if (GetDocument()->IsThesRoss())
@@ -366,11 +393,11 @@ bool CWordList::SetArticle(uint16_t UnitNo, CString Value)
 	try {
 		CTempArticle A(GetRoss());
 		A.ReadFromDictionary(UnitNo, true, false);
-		A.ReadFromUtf8String(Value);
+		A.ReadFromUtf8String(_U8(Value).c_str());
 		A.WriteToDictionary();
 	}
-	catch (article_parse_error a) {
-		AfxMessageBox(a.what());
+	catch (article_parse_error& a) {
+		AfxMessageBox(_U16(a.what()));
 		return false;
 	}
 	return true;
@@ -385,7 +412,7 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 		CTranslations Trans;
 		CNewTextEntry  TextEntry;
 		TextEntry.m_pRoss = GetRoss();
-		CNewArticleWizard Sheet("New entry", GetDocument());
+		CNewArticleWizard Sheet(_T("New entry"), GetDocument());
 		Sheet.SetWizardMode();
 		Sheet.AddPage(&TextEntry);
 		Sheet.AddPage(&PosChoicer);
@@ -400,26 +427,26 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 				CString Article = ((CNewRefArticles*)Sheet.GetPage(3))->m_ResultString;
 				CString Lemma = ((CNewRefArticles*)Sheet.GetPage(3))->m_Lemma;
 				if (!Article.IsEmpty())
-					if (GetRoss()->LocateUnit((const char*)Lemma, 1) != ErrUnitNo)
+					if (GetRoss()->LocateUnit(_U8(Lemma).c_str(), 1) != ErrUnitNo)
 					{
-						AfxMessageBox("The reference article cannot be created");
+						AfxMessageBox(_T("The reference article cannot be created"));
 					}
 					else
 					{
-						UnitNo = GetRoss()->InsertUnit((const char*)Lemma, 1);
+						UnitNo = GetRoss()->InsertUnit(_U8(Lemma).c_str(), 1);
 						GetRoss()->GetUnits()[UnitNo].m_bSelected = IsFiltered();
-						GetRoss()->SetUnitAuthor(UnitNo, (const char*)((CRossDoc*)GetDocument())->m_Author);
-						GetRoss()->SetUnitEditor(UnitNo, (const char*)((CRossDoc*)GetDocument())->m_Author);
+						GetRoss()->SetUnitAuthor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str() );
+						GetRoss()->SetUnitEditor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str() );
 						SetArticle(UnitNo, Article);
 						Update();
 					};
 			};
 
-			BYTE MeanNum = atoi(TextEntry.m_MeanNum);
-			UnitNo = GetRoss()->InsertUnit((const char*)TextEntry.m_UnitStr, MeanNum);
+			BYTE MeanNum = _ttoi(TextEntry.m_MeanNum);
+			UnitNo = GetRoss()->InsertUnit(_U8(TextEntry.m_UnitStr).c_str(), MeanNum);
 			GetRoss()->GetUnits()[UnitNo].m_bSelected = IsFiltered();
-			GetRoss()->SetUnitAuthor(UnitNo, (const char*)((CRossDoc*)GetDocument())->m_Author);
-			GetRoss()->SetUnitEditor(UnitNo, (const char*)((CRossDoc*)GetDocument())->m_Author);
+			GetRoss()->SetUnitAuthor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str());
+			GetRoss()->SetUnitEditor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str());
 			Update();
 			SetArticle(UnitNo, PosChoicer.m_ResultString + Trans.m_ResultString);
 
@@ -428,13 +455,13 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 			GetDocument()->SetModifiedFlag();
 		}
 	}
-	catch (CExpc e)
+	catch (CExpc& e)
 	{
-		AfxMessageBox(e.what());
+		AfxMessageBox(_U16(e.what()));
 	}
 	catch (...)
 	{
-		AfxMessageBox("Cannot add the entry");
+		AfxMessageBox(_T("Cannot add the entry"));
 		return false;
 
 	};
@@ -465,15 +492,15 @@ void PrintExportHeader(const CWordList& Parent, FILE* fp)
 void CWordList::OnSaveWordlist()
 {
 	try {
-		CFileDialog  D(FALSE, "txt", "wordlist.txt");
+		CFileDialog  D(FALSE, _T("txt"), _T("wordlist.txt"));
 		if (D.DoModal() != IDOK) return;
-		FILE* fp = fopen(D.GetPathName(), "wb");
+		FILE* fp = fopen(_U8(D.GetPathName()).c_str(), "wb");
 
 		PrintExportHeader(*this, fp);
 
 		for (size_t i = 0; i < m_WordList.GetItemCount(); i++)
 		{
-			fprintf(fp, "%s %i\r\n", GetEntryStr(GetUnitNo(i)).c_str(), GetRoss()->GetUnitMeanNum(GetUnitNo(i)));
+			fprintf(fp, "%s %i\r\n", GetEntryStrUtf8(GetUnitNo(i)).c_str(), GetRoss()->GetUnitMeanNum(GetUnitNo(i)));
 		};
 
 		fclose(fp);
@@ -481,7 +508,7 @@ void CWordList::OnSaveWordlist()
 	}
 	catch (...) {
 
-		AfxMessageBox("Cannot write file");
+		AfxMessageBox(_T("Cannot write file"));
 
 	};
 
@@ -575,15 +602,15 @@ void CWordList::OnChangeLemmaLocator()
 	UpdateData(TRUE);
 	if (!GetDocument()->IsThesRoss())
 	{
-		uint16_t i = GetRoss()->UnitsLowerBound((const char*)m_LemmaLocator);
+		uint16_t i = GetRoss()->UnitsLowerBound(_U8(m_LemmaLocator).c_str());
 		uint16_t k = lower_bound(m_Index.begin(), m_Index.end(), i, LessByUnitNo()) - m_Index.begin();
 		SetCursor(k);
 	}
 	else
 	{
-		CRossDevTermin T(0, (const char*)m_LemmaLocator);
-		std::vector<CRossDevTermin>::iterator It = lower_bound(m_Termins.begin(), m_Termins.end(), T);
-		SetCursor(It - m_Termins.begin());
+		CRossDevTermin T(0, m_LemmaLocator);
+		auto it = lower_bound(m_Termins.begin(), m_Termins.end(), T);
+		SetCursor(it - m_Termins.begin());
 
 	};
 	// установка курсора на нужную строку 
@@ -599,8 +626,9 @@ void CWordList::OnWordlistDel()
 	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
 	CString S;
-	S.Format("Delete entry %s%i ?", GetEntryStr(UnitNo).c_str(), GetRoss()->GetUnitMeanNum(UnitNo));
-	if (::MessageBox(0, S, "Message Box", MB_OKCANCEL) != IDOK)
+	S.Format(_T("Delete entry %s%i ?"), 
+		GetEntryStrUtf16(UnitNo), GetRoss()->GetUnitMeanNum(UnitNo));
+	if (::MessageBox(0, S, _T("Message Box"), MB_OKCANCEL) != IDOK)
 		return;
 	GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
 	BuildIndex();
@@ -643,7 +671,7 @@ void CWordList::OnWordlistArticleBtn()
 	}
 	catch (...)
 	{
-		AfxMessageBox("Unexpected error!");
+		AfxMessageBox(_T("Unexpected error!"));
 	};
 }
 
@@ -652,7 +680,7 @@ void CWordList::SaveRossToTxt(CString FileName) const
 {
 	try {
 
-		FILE* fp = fopen(FileName, "wb");
+		FILE* fp = fopen(_U8(FileName).c_str(), "wb");
 
 		PrintExportHeader(*this, fp);
 
@@ -679,7 +707,7 @@ void CWordList::SaveRossToTxt(CString FileName) const
 		fclose(fp);
 	}
 	catch (...) {
-		AfxMessageBox("Cannot write file");
+		AfxMessageBox(_T("Cannot write file"));
 
 	};
 
@@ -688,7 +716,7 @@ void CWordList::SaveRossToTxt(CString FileName) const
 void CWordList::OnSaveRossToTxt()
 {
 	CWaitCursor C;
-	CFileDialog D(FALSE, "txt", "ross.txt");
+	CFileDialog D(FALSE, _T("txt"), _T("ross.txt"));
 	if (D.DoModal() != IDOK) return;
 	SaveRossToTxt(D.GetPathName());
 };
@@ -741,7 +769,7 @@ void CWordList::OnSearchByArticle()
 	C.Restore();
 
 	CString S;
-	S.Format("%s%i", GetEntryStr(UnitNo).c_str(), GetRoss()->GetUnitMeanNum(UnitNo));
+	S.Format(_T("%s%i"), GetEntryStrUtf16(UnitNo), GetRoss()->GetUnitMeanNum(UnitNo));
 	OpenPocket(UnitNos, CString(" dictionary entry ") + S);
 };
 
@@ -768,24 +796,24 @@ void CWordList::OnChangeTitle()
 
 	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
-	CString UnitStr = GetRoss()->GetEntryStr(UnitNo).c_str();
-	int i = GetRoss()->LocateUnit((const char*)UnitStr, 2);
+	std::string unitStr = GetRoss()->GetEntryStr(UnitNo);
+	int i = GetRoss()->LocateUnit(unitStr.c_str(), 2);
 	if (i != ErrUnitNo)
 	{
-		AfxMessageBox("You cannot change entry name, if this entry has many senses");
+		AfxMessageBox(_T("You cannot change entry name, if this entry has many senses"));
 		return;
 	};
 
 	char s[1000];
-	strcpy(s, UnitStr);
-	if (!InputBox("Edit entry name:", s, 1000))
+	strcpy(s, unitStr.c_str());
+	if (!InputBoxUtf8("Edit entry name:", s, 1000))
 		return;
-	if (!strcmp(s, UnitStr)) return;
+	if (s == unitStr) return;
 
 	i = GetRoss()->LocateUnit(s, 1);
 	if (i != ErrUnitNo)
 	{
-		AfxMessageBox("This entry name already exists");
+		AfxMessageBox(_T("This entry name already exists"));
 		return;
 	};
 
@@ -802,12 +830,11 @@ void CWordList::OnComments()
 	if (GetDocument()->m_ReadOnly) return;
 
 	const TUnitComment* pComms = GetRoss()->GetCommentsByUnitId(GetRoss()->GetUnits()[UnitNo].m_EntryId);
-	CString  C = pComms->Comments;
 	char s[100];
-	strcpy(s, C);
-	if (!InputBox("Comments:", s, 100, "ROSS", this))
+	strcpy(s, pComms->Comments);
+	if (!InputBoxUtf8("Comments:", s, 100, "ROSS", this))
 		return;
-	if (!strcmp(s, C)) return;
+	if (!strcmp(s, pComms->Comments)) return;
 	GetRoss()->SetUnitCommentStr(UnitNo, s);
 	GetDocument()->SetModifiedFlag();
 	Update();
@@ -817,7 +844,7 @@ void CWordList::OnComments()
 inline bool GlobalOpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
 {
 	if (pRossDoc == nullptr) {
-		AfxMessageBox("please, open the main Russian dictionary");
+		AfxMessageBox(_T("please, open the main Russian dictionary"));
 		return false;
 	}
 	else {
@@ -826,8 +853,8 @@ inline bool GlobalOpenHierarchy(CRossDoc* pRossDoc, CHierarchyEnum Type)
 		try {
 			((CHierarchyDoc*)pDocument)->OpenHierarchy(pRossDoc, Type);
 		}
-		catch (CExpc e) {
-			AfxMessageBox(e.what());
+		catch (CExpc& e) {
+			AfxMessageBox(_U16(e.what()));
 		}
 		return true;
 	}
@@ -862,107 +889,6 @@ void CWordList::BuildVals(std::vector<Valency>& Vals, uint16_t UnitNo)
 		};
 };
 
-// построить дерево вложения валентных структур 
-void CWordList::OnValencies()
-{
-	try {
-		CWaitCursor C;
-		CHierarchyHolder D(GetDocument()->GetRossHolder());
-		D.m_Type = SemRel;
-		D.MySerialize(false, true);
-
-		TreeNode Tree;
-		if ((GetDocument()->GetRossHolder()->ValFieldNo == ErrUChar)
-			|| (GetDocument()->GetRossHolder()->ActDomNo == ErrUChar)
-			|| (GetDocument()->GetRossHolder()->SelfLabelNo == -1)
-			)
-		{
-			AfxMessageBox("This operation is not applicable!");
-			return;
-		};
-
-		for (size_t i = 0; i < GetUnitsSize(); i++)
-		{
-			std::vector<Valency> Vals;
-
-			BuildVals(Vals, GetUnitNo(i));
-
-			if (Vals.size() == 0) continue;
-
-			sort(Vals.begin(), Vals.end());
-
-			std::vector<TreeNode>::iterator It = find(Tree.SubItems.begin(), Tree.SubItems.end(), Vals);
-			if (It == Tree.SubItems.end())
-			{
-				TreeNode N;
-				N.Vals = Vals;
-				N.UnitNos.push_back(GetUnitNo(i));
-				Tree.SubItems.push_back(N);
-			}
-			else
-				It->UnitNos.push_back(GetUnitNo(i));
-
-		};
-
-		sort(Tree.SubItems.begin(), Tree.SubItems.end());
-		size_t k;
-
-		TreeNode NormTree;
-		for (k = 0; k < Tree.SubItems.size(); k++)
-		{
-			TreeNode N;
-			N.Vals = Tree.SubItems[k].Vals;
-			TreeNode::Normalize(D, N.Vals);
-			std::vector<TreeNode>::iterator It = find(NormTree.SubItems.begin(), NormTree.SubItems.end(), N.Vals);
-			if (It == NormTree.SubItems.end())
-			{
-				NormTree.SubItems.push_back(N);
-				It = NormTree.SubItems.begin() + NormTree.SubItems.size() - 1;
-			};
-			It->SubItems.push_back(Tree.SubItems[k]);
-		};
-
-		sort(NormTree.SubItems.begin(), NormTree.SubItems.end());
-
-		CString S = "_______________________________________________________\r\n";
-
-		for (k = 0; k < NormTree.SubItems.size(); k++)
-		{
-			CString Record = NormTree.SubItems[k].GetVals(GetRoss());
-			Record += "\r\n";
-
-			for (size_t j = 0; j < NormTree.SubItems[k].SubItems.size(); j++)
-			{
-				CString Line;
-				TreeNode& N = NormTree.SubItems[k].SubItems[j];
-				Line.Format("   %i %s // ", N.UnitNos.size(), N.GetVals(GetRoss()));
-
-				for (int i = 0; (i < N.UnitNos.size()) && (i < 8); i++)
-				{
-					CString Q;
-					Q.Format("%s%i ", GetRoss()->GetEntryStr(N.UnitNos[i]).c_str(), GetRoss()->GetUnitMeanNum(N.UnitNos[i]));
-					Line += Q;
-				};
-
-				if (N.UnitNos.size() > 8)
-					Line += "...";
-
-				Line += "\r\n";
-				Record += Line;
-
-			};
-			S += Record;
-		};
-
-		GlobalOpenReport(S, "Valency structures");
-	}
-	catch (...)
-	{
-		AfxMessageBox("an error occured");
-	};
-};
-
-
 struct CFieldValue {
 	TCortege cortege;
 	BYTE FieldNo;
@@ -988,14 +914,14 @@ void CWordList::OnStatisticFieldValue()
 	std::vector<CFieldValue> V;
 	char s[200];
 	s[0] = 0;
-	if (!InputBox("Enter field name (* for all fields):", s, 200)) return;
+	if (!InputBoxUtf8("Enter field name (* for all fields):", s, 200)) return;
 	BYTE FieldNo = ErrUChar;
 	if (s[0] != '*')
 	{
 		FieldNo = GetRoss()->GetFieldNoByFieldStr(s);
 		if (FieldNo == ErrUChar)
 		{
-			AfxMessageBox("Cannot find this field");
+			AfxMessageBox(_T("Cannot find this field"));
 			return;
 		};
 	};
@@ -1014,7 +940,7 @@ void CWordList::OnStatisticFieldValue()
 		Value.cortege = GetRoss()->GetCortege(i);
 		Value.freq = 1;
 		Value.FieldNo = GetRoss()->GetCortege(i).m_FieldNo;
-		std::vector<CFieldValue>::iterator It = find(V.begin(), V.end(), Value);
+		auto It = find(V.begin(), V.end(), Value);
 		if (It == V.end())
 			V.push_back(Value);
 		else
@@ -1029,9 +955,10 @@ void CWordList::OnStatisticFieldValue()
 		BYTE FieldNo = V[i].FieldNo;
 
 		CString Q;
-		Q.Format("%-16s %-5s %-30s %-5s %-16i\r\n",
-			GetRoss()->Fields[V[i].FieldNo].FieldStr.c_str(), "|",
-			GetRoss()->WriteToString(V[i].cortege).c_str(), "|", V[i].freq);
+		Q.Format(_T("%-16s %-5s %-30s %-5s %-16i\r\n"),
+			_U16(GetRoss()->Fields[V[i].FieldNo].FieldStr), "|",
+			_U16(GetRoss()->WriteToString(V[i].cortege)), "|", 
+			V[i].freq);
 		S += Q;
 	};
 
@@ -1132,7 +1059,8 @@ void CWordList::OnArticleAppend()
 		CTempArticle A2(GetRoss());
 
 		CString S;
-		if (::MessageBox(this->m_hWnd, "The environment add the current entry to all entries, if there is no intersection by fields. Procees?", "Confirmation", MB_YESNO) == IDNO) return;
+		if (::MessageBox(this->m_hWnd, _T("The environment add the current entry to all entries, if there is no intersection by fields. Procees?"),
+			_T("Confirmation"), MB_YESNO) == IDNO) return;
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
@@ -1144,13 +1072,13 @@ void CWordList::OnArticleAppend()
 			A2.WriteToDictionary();
 		};
 	}
-	catch (article_parse_error a)
+	catch (std::exception& a)
 	{
-		AfxMessageBox(a.what());
+		AfxMessageBox(_U16(a.what()));
 	}
 	catch (...)
 	{
-		AfxMessageBox("Some error has occured");
+		AfxMessageBox(_T("Some error has occured"));
 	};
 	
 };
@@ -1164,8 +1092,9 @@ void CWordList::OnDelAllSelected()
 {
 	try {
 		CString Q;
-		Q.Format("You are going to delete all entries (%i entries). Proceed?", GetUnitsSize());
-		if (::MessageBox(this->m_hWnd, Q, "Confirmation", MB_YESNO) == IDNO) return;
+		Q.Format(_T("You are going to delete all entries (%i entries). Proceed?"),
+			GetUnitsSize());
+		if (::MessageBox(this->m_hWnd, Q, _T("Confirmation"), MB_YESNO) == IDNO) return;
 		CWaitCursor C;
 		std::vector <TUnit> UnitNos;
 
@@ -1192,7 +1121,7 @@ void CWordList::OnDelAllSelected()
 	}
 	catch (...)
 	{
-		AfxMessageBox("An exception occured!");
+		AfxMessageBox(_T("An exception occured!"));
 
 	};
 };
@@ -1201,11 +1130,12 @@ void CWordList::OnSetAuthor()
 {
 	if (GetDocument()->m_ReadOnly) return;
 	CString Q;
-	Q.Format("You are going to change the author of all entries(%i entries). Proceed?", GetUnitsSize());
-	if (::MessageBox(this->m_hWnd, Q, "Confirmation", MB_YESNO) == IDNO) return;
+	Q.Format(_T("You are going to change the author of all entries(%i entries). Proceed?"),
+		GetUnitsSize());
+	if (::MessageBox(this->m_hWnd, Q, _T("Confirmation"), MB_YESNO) == IDNO) return;
 	char s[200];
 	s[0] = 0;
-	if (!InputBox("Enter author name:", s, 15)) return;
+	if (!InputBoxUtf8("Enter author name:", s, 15)) return;
 	CWaitCursor C;
 	std::vector <TUnit> UnitNos;
 
@@ -1213,10 +1143,7 @@ void CWordList::OnSetAuthor()
 	{
 		size_t u = GetUnitNo(i);
 		GetRoss()->SetUnitAuthor(u, s);
-
 	};
-
-
 	Update();
 	GetDocument()->SetModifiedFlag();
 };
@@ -1225,15 +1152,15 @@ void CWordList::OnSelectByAuthor()
 {
 	char s[200];
 	s[0] = 0;
-	if (!InputBox("Input author name:", s, 15)) return;
+	if (!InputBoxUtf8("Input author name:", s, 15)) return;
 	CWaitCursor C;
 
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 	{
-		size_t u = GetUnitNo(i);
-		CString Author = GetRoss()->GetUnits()[u].GetAuthorStr().c_str();
-		if (Author == CString(s))
-			GetRoss()->GetUnits()[u].m_bSelected = true;
+		auto& u = GetRoss()->GetUnits()[GetUnitNo(i)];
+		auto author = u.GetAuthorStr();
+		if (author == s)
+			u.m_bSelected = true;
 
 	};
 
@@ -1287,7 +1214,7 @@ void CWordList::OnSelectDownward()
 
 	if (pos == NULL)
 	{
-		::MessageBox(0, "No selection found", "Message Box", MB_OK);
+		::MessageBox(0, _T("No selection found"), _T("Message Box"), MB_OK);
 		return;
 	};
 
@@ -1305,8 +1232,8 @@ void CWordList::OnEmptyArticles()
 {
 	try {
 		CString Q;
-		Q.Format("You are going to clear all entries (%i entries). Proceed?", GetUnitsSize());
-		if (::MessageBox(this->m_hWnd, Q, "Confirmation", MB_YESNO) == IDNO) return;
+		Q.Format(_T("You are going to clear all entries (%i entries). Proceed?"), GetUnitsSize());
+		if (::MessageBox(this->m_hWnd, Q, _T("Confirmation"), MB_YESNO) == IDNO) return;
 		CWaitCursor C;
 		std::vector <TUnit> UnitNos;
 
@@ -1317,14 +1244,12 @@ void CWordList::OnEmptyArticles()
 			strcpy(U.UnitStr, GetRoss()->GetEntryStr(u).c_str());
 			U.MeanNum = GetRoss()->GetUnitMeanNum(u);
 			UnitNos.push_back(U);
-
 		};
 
 		for (int i = 0; i < UnitNos.size(); i++)
 		{
 			uint16_t UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr, UnitNos[i].MeanNum);
 			GetRoss()->ClearUnit(UnitNo);
-
 		};
 
 		BuildIndex();
@@ -1333,7 +1258,7 @@ void CWordList::OnEmptyArticles()
 	}
 	catch (...)
 	{
-		AfxMessageBox("An exception occured!");
+		AfxMessageBox(_T("An exception occured!"));
 	};
 };
 
@@ -1341,7 +1266,8 @@ void CWordList::OnReload()
 {
 	if (GetDocument()->IsModified())
 	{
-		if (::MessageBox(0, "You are going to lose all changes, which you have made", "Confirmation", MB_OKCANCEL) != IDOK)
+		if (::MessageBox(0, _T("You are going to lose all changes, which you have made"),
+			_T("Confirmation"), MB_OKCANCEL) != IDOK)
 			return;
 	};
 
@@ -1381,7 +1307,8 @@ void CWordList::UpdateCurrentPos()
 	if (pos != 0)
 	{
 		UnitNo = m_WordList.GetNextSelectedItem(pos);
-		m_UnitsSize.Format("Entry No %i (out of %i)", UnitNo + 1, m_WordList.GetItemCount());
+		m_UnitsSize.Format(_T("Entry No %i (out of %i)"),
+			UnitNo + 1, m_WordList.GetItemCount());
 		UpdateData(FALSE);
 	};
 
@@ -1436,63 +1363,6 @@ LRESULT CWordList::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 	return CSizeFormView::DefWindowProc(message, wParam, lParam);
 }
 
-BOOL FGetDirectory(LPTSTR szDir, HWND hwnd)
-{
-	BOOL  fRet;
-	TCHAR  szPath[MAX_PATH];
-	LPITEMIDLIST pidl;
-	LPITEMIDLIST pidlRoot;
-	LPMALLOC lpMalloc;
-	BROWSEINFO bi = { hwnd, NULL, szPath, "Choose directory", BIF_RETURNONLYFSDIRS, NULL, 0L, 0 };
-	if (0 != SHGetSpecialFolderLocation(HWND_DESKTOP, CSIDL_DRIVES, &pidlRoot))
-		return FALSE;
-	if (NULL == pidlRoot)
-		return FALSE;
-	bi.pidlRoot = pidlRoot;
-	pidl = SHBrowseForFolder(&bi);
-
-	if (NULL != pidl)
-		fRet = SHGetPathFromIDList(pidl, szDir);
-	else
-		fRet = FALSE;  // Get the shell's allocator to free PIDLs 
-
-	if (!SHGetMalloc(&lpMalloc) && (NULL != lpMalloc))
-	{
-		if (NULL != pidlRoot) { lpMalloc->Free(pidlRoot); }
-
-		if (NULL != pidl) { lpMalloc->Free(pidl); }
-
-		lpMalloc->Release();
-	}
-	return fRet;
-}
-
-void CWordList::OnExportAllDicts()
-{
-	try {
-		char Folder[1000];
-		FGetDirectory(Folder, this->m_hWnd);
-
-		CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-		POSITION pos = pRossDocTemplate->GetFirstDocPosition();
-		int RossNo = 0;
-		while (pos)
-		{
-			CDocument* pDoc = pRossDocTemplate->GetNextDoc(pos);
-			POSITION pos1 = pDoc->GetFirstViewPosition();
-			if (pos1 == 0) return;
-			CWordList* pView = (CWordList*)pDoc->GetNextView(pos1);
-			CString FileName;
-			FileName.Format("%s\\ross%i.txt", Folder, RossNo++);
-			pView->SaveRossToTxt(FileName);
-		};
-	}
-	catch (...)
-	{
-		AfxMessageBox("An exception occured!");
-	};
-};
-
 
 bool UnlockAllDicts()
 {
@@ -1511,14 +1381,14 @@ bool UnlockAllDicts()
 			while (pView->GetDocument()->m_ReadOnly)
 			{
 				CString S;
-				S.Format("The dictionary %s is locked. Delete lock file !", pView->GetDocument()->GetRossHolder()->GetDictName().c_str());
+				S.Format(_T("The dictionary %s is locked. Delete lock file !"), pView->GetDocument()->GetRossHolder()->GetDictName().c_str());
 				if (i == 1)
 					AfxMessageBox(S);
 
 				pView->OnReload();
 				if (i == 1)
 				{
-					S.Format("The dictionary %s is locked. Exit from the procedure!", pView->GetDocument()->GetRossHolder()->GetDictName().c_str());
+					S.Format(_T("The dictionary %s is locked. Exit from the procedure!"), pView->GetDocument()->GetRossHolder()->GetDictName().c_str());
 					return false;
 				};
 				i++;
@@ -1528,38 +1398,12 @@ bool UnlockAllDicts()
 	}
 	catch (...)
 	{
-		AfxMessageBox("An exception occured!");
+		AfxMessageBox(_T("An exception occured!"));
 		return false;
 	};
 	return true;
 
 }
-
-void CWordList::OnEmptyAllDicts()
-{
-	if (!UnlockAllDicts()) return;
-	try {
-		CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-		POSITION pos = pRossDocTemplate->GetFirstDocPosition();
-		int RossNo = 0;
-		while (pos)
-		{
-			CDocument* pDoc = pRossDocTemplate->GetNextDoc(pos);
-			POSITION pos1 = pDoc->GetFirstViewPosition();
-			if (pos1 == 0) return;
-
-			CWordList* pView = (CWordList*)pDoc->GetNextView(pos1);
-			pView->OnDelAllSelected();
-		};
-	}
-	catch (...)
-	{
-		AfxMessageBox("An exception occured!");
-	};
-
-};
-
-
 
 
 struct CDictInterp {
@@ -1606,60 +1450,3 @@ void AddEntries(const CWordList* WordList, std::vector<CDictInterp>& AllEntries)
 		};
 	};
 };
-void CWordList::OnAllDictEntries()
-{
-	try {
-		bool bAllEntries = ::MessageBox(0, "Export only entries with many senses?", "Confirmation", MB_YESNO) != IDYES;
-
-		CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-		POSITION pos = pRossDocTemplate->GetFirstDocPosition();
-		int RossNo = 0;
-		std::vector<CDictInterp> AllEntries;
-		while (pos)
-		{
-			const CRossDoc* pDoc = (const CRossDoc*)pRossDocTemplate->GetNextDoc(pos);
-			POSITION pos1 = pDoc->GetFirstViewPosition();
-			if (pos1 == 0) return;
-			const CWordList* pView = (CWordList*)pDoc->GetNextView(pos1);
-			AddEntries(pView, AllEntries);
-
-		};
-
-		sort(AllEntries.begin(), AllEntries.end());
-		if (!bAllEntries)
-		{
-			for (long i = 0; i < AllEntries.size() - 1; i++)
-				if (AllEntries[i].m_UnitStr != AllEntries[i + 1].m_UnitStr)
-				{
-					AllEntries.erase(AllEntries.begin() + i);
-					i--;
-				}
-				else
-				{
-					for (; i < AllEntries.size() - 1; i++)
-						if (AllEntries[i].m_UnitStr != AllEntries[i + 1].m_UnitStr)
-							break;
-				};
-			if (AllEntries.size() == 1)
-				AllEntries.clear();
-			if (AllEntries.size() > 1)
-				if (AllEntries.back().m_UnitStr != AllEntries[AllEntries.size() - 2].m_UnitStr)
-					AllEntries.pop_back();
-
-		};
-
-		std::string Result;
-		for (long i = 0; i < AllEntries.size(); i++)
-		{
-			Result += Format("%-40s %s %i\n", AllEntries[i].m_UnitStr.c_str(),
-				AllEntries[i].m_Owner->GetDocument()->GetRossHolder()->GetDictName().c_str(),
-				AllEntries[i].m_MeanNum);
-
-		};
-		GlobalOpenReport(Result.c_str(), Format("Number of entries: %i", AllEntries.size()).c_str());
-	}
-	catch (...)
-	{
-		AfxMessageBox("An exception occured!");
-	};
-}

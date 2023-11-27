@@ -8,9 +8,9 @@ CSemPattern::CSemPattern ()
 		SetEmpty();
 };
 
-const CRossHolder*	CSemPattern::GetRossHolder()  const
+const CStructDictHolder*	CSemPattern::GetRossHolder()  const
 {
-	return (CRossHolder*)m_pRossDoc;
+	return (CStructDictHolder*)m_pRossDoc;
 };
 
 void		CSemPattern::SetEmpty() 
@@ -33,7 +33,7 @@ dom_item_id_t CSemPattern::GetSynRel(long cortege_no) const
 	return m_pRossDoc->GetSynRel(m_GramCorteges[cortege_no]);
 };
 
-void CSemPattern::InitSemPattern(const CRossHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId)
+void CSemPattern::InitSemPattern(const CStructDictHolder* pRossDoc, uint16_t UnitNo, BYTE LeafId, BYTE BracketLeafId)
 {
 	m_PatternValency.m_LeafId =  LeafId;
 	m_PatternValency.m_BracketLeafId = BracketLeafId;

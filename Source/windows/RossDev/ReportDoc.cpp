@@ -52,13 +52,13 @@ void CReportDoc::InitFonts()
 	CHARFORMAT cf;
 	C.GetSelectionCharFormat (cf);
 	cf.yHeight = 300;
-	strcpy (cf.szFaceName,"Times New Roman");
+	lstrcpy (cf.szFaceName,_T("Times New Roman"));
 	cf.bCharSet = RUSSIAN_CHARSET;
 	C.SetSelectionCharFormat (cf);
 
 	C.SetSel (l+1, S.GetLength());
 	C.GetSelectionCharFormat (cf);
-	strcpy (cf.szFaceName,"FixedSys");
+	lstrcpy (cf.szFaceName, _T("FixedSys"));
 	cf.bCharSet = RUSSIAN_CHARSET;
 	C.SetSelectionCharFormat (cf);
 	C.SetSel (0, 0);

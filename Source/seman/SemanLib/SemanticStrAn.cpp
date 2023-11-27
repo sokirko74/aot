@@ -184,8 +184,8 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 
 				if (HasGramFetAfterColon(i, "с_опр"))
 					if (m_Nodes[i].IsPrimitive())
-						if (m_Nodes[i].IsLemma(_R("ОДИН"))
-							|| m_Nodes[i].IsLemma(_R("САМ"))
+						if (m_Nodes[i].IsLemma("ОДИН")
+							|| m_Nodes[i].IsLemma("САМ")
 							)
 							if (!HasIncomingNotWeakSynRelation(i))
 								return false;
@@ -196,7 +196,7 @@ bool CRusSemStructure::CheckSAMNode(long ClauseNo) const
 
 
 /*
-Функция вставляет узел _R("сам") или "один" и проводит отношения ASPECT к нему для всех потециальных подлежащих. Если ни одного отношения не удалось провести,
+Функция вставляет узел "сам" или "один" и проводит отношения ASPECT к нему для всех потециальных подлежащих. Если ни одного отношения не удалось провести,
  тогда возвращаем ложь.
  Между подлежащим и узлом сам проверяется согласование.
 */
@@ -480,17 +480,17 @@ CLexVariant CRusSemStructure::BuildTheVariant(long ClauseNo)
 void UnitDisruptedConjunctions(CRusSemStructure& R, long ClauseNo)
 {
 	for (long i = R.m_Clauses[ClauseNo].m_BeginNodeNo; i < R.m_Clauses[ClauseNo].m_EndNodeNo; i++)
-		if (R.m_Nodes[i].IsLemmaList({ _R("КТО"),_R("ЧТО"),_R("СКОЛЬКО"),_R("КАКОЙ") }))
+		if (R.m_Nodes[i].IsLemmaList({ "КТО","ЧТО","СКОЛЬКО","КАКОЙ" }))
 		{
 			//"НИ" может стоять контактно или быть разделено предлогом 
 			if ((i > 0)
-				&& R.m_Nodes[i - 1].IsWordForm(_R("НИ"))
+				&& R.m_Nodes[i - 1].IsWordForm("НИ")
 				&& R.CanBeDeleted(i - 1)
 				)
 				R.DelNode(i - 1);
 			else
 				if ((i > 1)
-					&& R.m_Nodes[i - 2].IsWordForm(_R("НИ"))
+					&& R.m_Nodes[i - 2].IsWordForm("НИ")
 					&& R.CanBeDeleted(i - 2)
 					)
 					R.DelNode(i - 2);
@@ -501,7 +501,7 @@ void UnitDisruptedConjunctions(CRusSemStructure& R, long ClauseNo)
 
 
 			CRusSemWord& W = R.m_Nodes[i].m_Words[0];
-			W.m_Lemma = _R("НИ") + W.m_Lemma;
+			W.m_Lemma = "НИ" + W.m_Lemma;
 			W.m_ParadigmId = R.m_pData->GetFirstParadigmId(morphRussian, W.m_Lemma, 0);
 			R.m_Nodes[i].DelAllInterps();
 

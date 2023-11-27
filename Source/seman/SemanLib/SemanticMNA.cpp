@@ -83,9 +83,9 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 	*/
 	if (IncomRelsCount == 1)
 		if	(		R.HasSemFetPro(R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].m_NodeSemFets, "MODL")
-				||	R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].IsLemma(_R("БЫТЬ"))
+				||	R.m_Nodes[R.m_Relations[IncomRels[0]].m_SourceNodeNo].IsLemma("БЫТЬ")
 			)
-			if (!R.m_Nodes[NodeNo].IsLemmaList({ _R("МНОГО"),	_R("МАЛО"),	_R("ОСТРЫЙ"), _R("СКОРЫЙ"),	_R("СИЛЬНЫЙ"), _R("РАННИЙ"), _R("ОХОТНЫЙ") }))
+			if (!R.m_Nodes[NodeNo].IsLemmaList({ "МНОГО",	"МАЛО",	"ОСТРЫЙ", "СКОРЫЙ",	"СИЛЬНЫЙ", "РАННИЙ", "ОХОТНЫЙ" }))
 				Result += 20;
 	/*
 	Примеры на	модальные  глаголы со сравнительными степенями:
@@ -98,7 +98,7 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 
 	*/
 	if	(IncomRelsCount	== 1)
-		if ( R.m_Relations[IncomRels[0]].m_SyntacticRelation ==	_R("чистое_обстоятельство"))
+		if ( R.m_Relations[IncomRels[0]].m_SyntacticRelation ==	"чистое_обстоятельство")
 			if (SubordNodesCount > 0) 
 				Result +=	20;
 
@@ -117,10 +117,10 @@ long GetMNAViolationsCountForChemOborot(const CRusSemStructure& R, long NodeNo, 
 	*/
 	if	(SubordNodesCount	== 2) 
 		if	(  (   R.m_Nodes[SubordNodes[0]].IsPrimitive() 
-				&& (R.m_Nodes[SubordNodes[0]].m_Words[0].m_Word	== _R("ЕГО"))
+				&& (R.m_Nodes[SubordNodes[0]].m_Words[0].GetWord() == "ЕГО")
 				)
 			||	(		R.m_Nodes[SubordNodes[1]].IsPrimitive() 
-					&&	(R.m_Nodes[SubordNodes[1]].m_Words[0].m_Word	== _R("ЕГО"))
+					&&	(R.m_Nodes[SubordNodes[1]].m_Words[0].GetWord() == "ЕГО")
 				)
 			)
 			if (	(IncomRelsCount == 1) 
@@ -305,7 +305,7 @@ void CRusSemStructure::ConvertFreeCoordConjToMNA (long ClauseNo)
 long RepeatConjCount = 2;
 const std::string RepeatConj[2]  =
 {
-	_R("ТО"), _R("ЛИБО")
+	"ТО", "ЛИБО"
 };
 
 long CRusSemStructure::GetRepeatConj (long NodeNo)
@@ -314,7 +314,7 @@ long CRusSemStructure::GetRepeatConj (long NodeNo)
 	for (size_t i=0; i <RepeatConjCount; i++)
 	{
 
-		std::string WordStr = m_Nodes[NodeNo].m_Words[0].m_Word;
+		std::string WordStr = m_Nodes[NodeNo].m_Words[0].GetWord();
 	 	if (WordStr == std::string(RepeatConj[i]))
 			return i;
 	};
@@ -431,7 +431,7 @@ void CRusSemStructure::BuildMNA_KAK(long ClauseNo)
 		for (long NodeNo = m_Clauses[ClauseNo].m_BeginNodeNo;  NodeNo < m_Clauses[ClauseNo].m_EndNodeNo; NodeNo++)
 			if (    
 				m_Nodes[NodeNo].IsPrimitive()
-				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == _R("КАК")) 
+				&& (m_Nodes[NodeNo].m_Words[0].m_Lemma == "КАК") 
 				&& (m_Nodes[NodeNo].GetType() == OborRoss) 
 				&& (m_Nodes[NodeNo].m_MNAType != RepeatMNA)
 				)
@@ -630,7 +630,7 @@ void CRusSemStructure::BuildMNAIncoming(long ClauseNo)
 				  // не может управлят этим однородным рядом
 				   if (m_Relations[m_Nodes[i].m_OutRels[j]].m_Valency.IsFromDict())
 				   {
-					  const CRossHolder* RossHolder =  m_Relations[m_Nodes[i].m_OutRels[j]].m_Valency.m_RossHolder;
+					  const CStructDictHolder* RossHolder =  m_Relations[m_Nodes[i].m_OutRels[j]].m_Valency.m_RossHolder;
 					  const TCortege& C = m_Relations[m_Nodes[i].m_OutRels[j]].m_SynReal.m_Cortege;
 					  bool IsPrepCortege =     RossHolder->IsLemGroupBegining(RossHolder->GetSynFet(C)) 
 											|| (RossHolder->GetSynRel(C) == RossHolder->AdverbialGrpNo);

@@ -653,12 +653,12 @@ class CSemanticsHolder  : public CAllRossesHolder
 	
 
 	DictTypeEnum	IsRegisteredRoss(std::string FileName) const;
-	std::string			GetRossPath(DictTypeEnum RossId)  const;
+	std::string		GetRossPath(DictTypeEnum RossId)  const;
 
 };
 
-extern  size_t GetCaseGrammem (const CRossHolder* RossDoc, long ItemNo); 
-extern  size_t GetCaseItemNo (CRossHolder* RossDoc, long GrammemNo);
+extern  size_t GetCaseGrammem (const CStructDictHolder* RossDoc, long ItemNo); 
+extern  size_t GetCaseItemNo (CStructDictHolder* RossDoc, long GrammemNo);
 
 
 

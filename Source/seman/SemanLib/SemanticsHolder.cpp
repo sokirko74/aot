@@ -104,7 +104,7 @@ bool CSemanticsHolder::ReadAbstractArticles(DictTypeEnum type)
 				}
 
 				if (FieldStr == "VAL")
-					A.m_Vals.push_back(CValency(C, GetRossHolder(type)->MainWordVarNo, GetRossHolder(type)));
+					A.m_Vals.push_back(CValency(C,  GetRossHolder(type)));
 
 				if (C.IsUsedForInclusion())
 				{
@@ -716,7 +716,7 @@ bool  CSemanticsHolder::BuildOborottos()
 		for (size_t UnitNo = 0; UnitNo < count; UnitNo++)
 		{
 			CObor O;
-			O.m_UnitStr = _R(GetRoss(OborRoss)->GetEntryStr(UnitNo));
+			O.m_UnitStr = GetRoss(OborRoss)->GetEntryStr(UnitNo);
 			if (GetRossHolder(OborRoss)->HasItem(UnitNo, "GF", "ПОДЧ_СОЮЗ", "D_PART_OF_SPEECH", 0, 0))
 				O.m_bRusSubConj = true;
 
@@ -758,7 +758,7 @@ bool  CSemanticsHolder::BuildOborottos()
 	return TokenizeDoubleConj();
 };
 
-bool CRossHolder::HasBeenModified(long T)
+bool CStructDictHolder::HasBeenModified(long T)
 {
 	return m_LastUpdateTime > T;
 };
@@ -806,8 +806,6 @@ void CSemanticsHolder::GetPrepsFromArticle(const CDictionary* Ross, long UnitNo,
 */
 uint32_t CSemanticsHolder::GetAdverbWith_O_ByAdjective(uint32_t AdjParadigmId, std::string AdjWordForm)
 {
-	std::string AdvLemma;
-
 	CFormInfo Paradigm;
 	try {
 		if (!GetRusLemmatizer()->CreateParadigmFromID(AdjParadigmId, Paradigm))
@@ -819,28 +817,20 @@ uint32_t CSemanticsHolder::GetAdverbWith_O_ByAdjective(uint32_t AdjParadigmId, s
 
 
 	// ищем краткое прилагательное среднего рода
-	long k = 0;
-	for (; k < Paradigm.GetCount(); k++)
+	for (long k = 0; k < Paradigm.GetCount(); k++)
 	{
-		std::string Form = Paradigm.GetWordForm(k);
 		std::string AnCode = Paradigm.GetAncode(k);
-		uint64_t Grammems;
+		grammems_mask_t Grammems;
 		BYTE POS;
 		GetRusGramTab()->ProcessPOSAndGrammems(AnCode.c_str(), POS, Grammems);
 
-		if ((Grammems & _QM(rNeutrum)) && POS == ADJ_SHORT)
-			break;
+		if ((Grammems & _QM(rNeutrum)) && POS == ADJ_SHORT) {
+			auto s = convert_to_utf8(Paradigm.GetWordForm(k), morphRussian);
+			return GetFirstParadigmId(morphRussian, s, (1 << ADV));
+		}
 	};
-	if (k == Paradigm.GetCount()) return -1;
-
-	AdvLemma = Paradigm.GetWordForm(k);
-
-	return GetFirstParadigmId(morphRussian, AdvLemma, (1 << ADV));
+	return UnknownParadigmId;
 };
-
-
-
-
 
 
 // ============================= 
@@ -863,7 +853,7 @@ bool FindField(const CDictionary* Ross, long UnitNo, std::string FieldStr)
 };
 
 
-bool IsConditional(const CRossHolder& RossDoc, long UnitNo)
+bool IsConditional(const CStructDictHolder& RossDoc, long UnitNo)
 {
 	BYTE FieldNo = RossDoc.GetRoss()->GetFieldNoByFieldStr("TYP");
 
@@ -1057,7 +1047,7 @@ bool CSemanticsHolder::BuildCollocs()
 
 
 
-size_t GetCaseGrammem(const CRossHolder* RossDoc, long ItemNo)
+size_t GetCaseGrammem(const CStructDictHolder* RossDoc, long ItemNo)
 {
 	if (ItemNo == RossDoc->NominativeNo)
 		return _QM(rNominativ);
@@ -1099,7 +1089,7 @@ size_t GetCaseGrammem(const CRossHolder* RossDoc, long ItemNo)
 		return 0;
 };
 
-size_t GetCaseItemNo(CRossHolder* RossDoc, long GrammemNo)
+size_t GetCaseItemNo(CStructDictHolder* RossDoc, long GrammemNo)
 {
 	if (GrammemNo == rNominativ)
 		return RossDoc->NominativeNo;

@@ -58,7 +58,6 @@ public:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	CString GetNormalizedRossPath(DictTypeEnum RossType) const;
 	CRossDoc* FindRossDoc(DictTypeEnum RossType);
 };
 
@@ -136,7 +135,7 @@ inline bool GlobalPocketAndArticleDocTempalteAreEmpty(CRossDoc* RossDoc)
     CArticleDoc* Doc  = (CArticleDoc*)tmpl->GetNextDoc(pos);
 	if (Doc->m_pRossDoc == RossDoc)
 	{
-		AfxMessageBox ("Close all windows of this dictionary!");
+		AfxMessageBox (_T("Close all windows of this dictionary!"));
 		return false;
 	};
   };
@@ -153,7 +152,7 @@ inline bool GlobalPocketAndArticleDocTempalteAreEmpty(CRossDoc* RossDoc)
 	for (long i=0; i < View->m_PocketItems.size(); i++)
 		if (View->m_PocketItems[i].m_pRossDoc == RossDoc)
 		{
-			AfxMessageBox ("Close the pockets that contain links to this dictionary!");
+			AfxMessageBox (_T("Close the pockets that contain links to this dictionary!"));
 			return false;
 		};
   };
@@ -176,7 +175,7 @@ inline CString ConstructFldName (const CDictionary* pIRossForSyntax, BYTE FieldN
     if (LeafId > 0)
 	 {
           CString  Q;
-          Q.Format("%i",LeafId);
+          Q.Format(_T("%i"), LeafId);
 	      S +=  Q;
 	 }
 
@@ -186,7 +185,7 @@ inline CString ConstructFldName (const CDictionary* pIRossForSyntax, BYTE FieldN
       if (BracketLeafId > 0)
 	  {
 		CString  Q;
-        Q.Format("(%i)",BracketLeafId);
+        Q.Format(_T("(%i)"), BracketLeafId);
 	    S +=  Q;
 	  };
 
@@ -223,3 +222,10 @@ inline CSemStructureBuilder&	GetSemBuilder()
 	return App->m_SemBuilder;
 }
 
+inline std::string _U8(CString s) {
+	return utf16_to_utf8((const TCHAR*)s);
+}
+
+inline CString _U16(std::string s) {
+	return utf8_to_utf16(s.c_str()).c_str();
+}

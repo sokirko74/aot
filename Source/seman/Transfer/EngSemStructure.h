@@ -4,37 +4,9 @@
 
 #include "seman/SemanLib/SemanticStructure.h"
 #include "morph_dict/agramtab/EngGramTab.h"
+#include "eng_word.h"
 #include "EngBinaryTranslate.h"
 
-enum EngVerbTenseEnum
-{
-	zero_tn,
-	present_smp_tn,		 // he works
-	past_smp_tn,		 // he worked
-	future_smp_tn,		 // he will work
-	present_prf_tn,		 // he has worked
-	past_prf_tn,		 // he had worked
-	future_prf_tn,		 // he will have worked
-	present_cnt_tn,		 // he is working
-	past_cnt_tn,		 // he was working
-	future_cnt_tn,		 // he will be working
-	present_prf_cnt_tn,  // he has been working
-	past_prf_cnt_tn,     // he had been working
-	future_prf_cnt_tn,   // he will have been working
-	would_smp_tn,        // he would work
-	would_prf_tn,        // he would have worked
-	would_cnt_tn,        // he would be working
-	would_prf_cnt_tn,    // he would have been working    
-	gerund_tn,			 // working
-	gerund_prf_tn,		 // having  worked
-	pp_tn,		 // worked	
-	present_inf_tn,		 // to work
-	present_cont_inf_tn, // to be working
-	prf_inf_tn,			 // to have worked
-	prf_cont_inf_tn,	 // to have been working 
-	pp_cont_tn,			 // been working
-	ing_tn				 // working (морфологически совпадает с gerund_tn)
-};
 
 
 const uint64_t eAllPersons = _QM(eFirstPerson) | _QM(eSecondPerson) | _QM(eThirdPerson);
@@ -56,69 +28,6 @@ enum EDicSource { FromRoss, FromLocRoss, FromTimeRoss, NotFound };
 
 int FindConj(const char* arrConjs, int iLen, const char* word);
 
-struct SPosleLog
-{
-	SPosleLog()
-	{
-		m_Position = ">>";
-	};
-
-	CRossInterp   m_PosleLogPrep;
-	std::string        m_PosleLog;
-	// домен D_POSITION (<,<<,>>,>,^, "dir_obj _")
-	std::string	      m_Position;
-
-};
-
-
-struct CTenseHistory {
-	EngVerbTenseEnum	m_Tense;
-	std::string				m_Maker;
-	CTenseHistory(EngVerbTenseEnum	Tense, std::string Maker)
-	{
-		m_Tense = Tense;
-		m_Maker = Maker;
-	};
-	CTenseHistory()
-	{
-		m_Tense = zero_tn;
-		m_Maker = "";
-	};
-};
-
-
-
-
-class CEngSemWord : public CSemWord {
-	// время для английской глагольной формы, если узел не является гл. формой, то
-	// m_Tense = zero_tn;
-	EngVerbTenseEnum	m_Tense;
-
-public:
-
-	SPosleLog		 m_PosleLog;
-	// флаг для синтеза, чтобы он не пытался поставить  слово в форму, указананную в граммемах
-	bool            m_bDoNotChangeForm;
-
-
-	//  использует для порождение всп. глагола be перед основным глаголом и конвертации глагола  в P2
-	// вспомогательный  глагол будет добавлен функцией BuildAuxiliaryVerbs
-	bool			 m_bMorphologicalPassiveForm;
-	bool			 m_bImperative;
-	std::string			 m_OneselfStr;
-
-
-
-	std::vector<CTenseHistory>  m_TenseHistory;
-
-	void SetTense(EngVerbTenseEnum	NewTense, std::string Maker);
-	EngVerbTenseEnum GetTense() const;
-	void Init();
-	CEngSemWord();
-	CEngSemWord(const CSemWord& X);
-	// принадлежит ли данная часть речи набору частей речи, который приписан слову?
-	virtual bool   HasPOS(part_of_speech_t POS) const;
-};
 
 enum ArticleCauseEnum {
 	ArticleFromDict, ArticleFromOrdNum, ZeroArticleForProperNames,
@@ -342,7 +251,7 @@ public:
 	void TranslateOneActant(int iRel, int iEngNode);
 	void TranslateActants(int iEngNode, int iClause);
 	std::string GetPrep(const TCortege& cortege, DictTypeEnum type);
-	std::string HasParticularPrepInField(CRossHolder* pLocRossDoc, int  iRusActant, CEngSemNode& engActantm);
+	std::string HasParticularPrepInField(CStructDictHolder* pLocRossDoc, int  iRusActant, CEngSemNode& engActantm);
 
 
 	bool Rule_TranslatePoss(int iRusActant, long RelationNo, const std::vector<TCortege>& GramCorteges, int iEngNode);
@@ -452,7 +361,7 @@ public:
 	void CorrectNodeNumByRelNum();
 	void AddFixedGrammemsToNode();
 
-	bool CompareCortegeItems(const CRossHolder* RossHolder,
+	bool CompareCortegeItems(const CStructDictHolder* RossHolder,
 		const TCortege& X, const TCortege& Y) const;
 
 	bool HasALG(DictTypeEnum type, long UnitNo, std::string strAlg);
@@ -537,7 +446,7 @@ public:
 	void					SetInterpreted(long RusNodeNo);
 
 	// является ли статья UnitNo заглушечной
-	bool					IsPlugArticle(const CRossHolder* RossHolder, uint16_t UnitNo) const;
+	bool					IsPlugArticle(const CStructDictHolder* RossHolder, uint16_t UnitNo) const;
 	bool					IsValFromRossArticle(const CSemRelation& semRel) const;
 
 	// переводит тайм-группу (на вход подается главный узел группы)

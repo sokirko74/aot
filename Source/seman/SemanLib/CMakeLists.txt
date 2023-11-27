@@ -7,7 +7,7 @@ add_library(SemanLib
         DictUnitInterp.cpp
         GenerateNewForm.cpp
         HierarchyHolder.cpp
-        RossHolder.cpp
+        "struct_dict_holder.cpp"
         RussianSynthesis.cpp
         SemPattern.cpp
         SemStructureBuilder.cpp
@@ -44,7 +44,7 @@ add_library(SemanLib
         DictUnitInterp.h
         HierarchyHolder.h
         LexFuncts.h
-        RossHolder.h
+        "struct_dict_holder.h"
         SemanticRusStructure.h
         SemanticsHolder.h
         SemanticStructure.h
@@ -55,7 +55,13 @@ add_library(SemanLib
         TranslatorHolder.h
         Valency.h
         VisualGraph.h
- "analytical.cpp")
+        "analytical.cpp" 
+        "fem_deriv.cpp" 
+        "rus_sem_word.cpp" 
+        "rus_sem_word.h"
+        "sem_word.cpp" 
+        "sem_word.h"
+)
 
 target_link_libraries(SemanLib
     SynanLib

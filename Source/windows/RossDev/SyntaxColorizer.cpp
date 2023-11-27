@@ -35,7 +35,7 @@ CSyntaxColorizer::CSyntaxColorizer()
 	m_cfDefault.bPitchAndFamily = FIXED_PITCH | FF_MODERN;
 	m_cfDefault.yOffset = 0;
 	m_cfDefault.crTextColor = CLR_PLAIN;
-	strcpy(m_cfDefault.szFaceName,"Courier New");
+	lstrcpy(m_cfDefault.szFaceName, _T("Courier New"));
 	m_cfDefault.cbSize = sizeof(m_cfDefault);
 
 }
@@ -53,7 +53,7 @@ void CSyntaxColorizer::Colorize(CRichEditCtrl *pCtrl, long nStartChar, long nEnd
 {
 	CString SourceText;
 	pCtrl->GetWindowText(SourceText);
-	SourceText.Replace("\r\n", "\n");
+	SourceText.Replace(_T("\r\n"), _T("\n"));
 	pCtrl->SetSel(nStartChar,nEndChar);
 	pCtrl->SetSelectionCharFormat(m_cfDefault);
 

@@ -128,14 +128,13 @@ BOOL CPosChoicer::OnSetActive()
 	P->SetWizardButtons( PSWIZB_BACK|PSWIZB_NEXT);
 	const CRusGramTab* A = GetSemBuilder().m_RusStr.m_pData->GetRusGramTab();
 	m_List.ResetContent();
-	m_List.AddString("other");
+	m_List.AddString(_T("other"));
 
-	for (int i =0; i<m_ParadigmCollection.size(); i++)
+	for (auto& p: m_ParadigmCollection)
 	{
-		const CFormInfo& Paradigm = m_ParadigmCollection[i];
-		CString S((char *)Paradigm.GetSrcAncode().c_str());
-		if (S.GetLength() < 2)  throw CExpc("Bad morph_dict format");
-		size_t PartOfSpeech = A->GetPartOfSpeech((const char*) S);
+		auto ancode = p.GetSrcAncode();
+		if (ancode.length() < 2)  throw CExpc("Bad morph_dict format");
+		size_t PartOfSpeech = A->GetPartOfSpeech(ancode.c_str());
 
 		CString LineToAdd;
 		switch  (PartOfSpeech) 

@@ -43,11 +43,11 @@ END_MESSAGE_MAP()
 // CInputBox message handlers
 
 
-bool InputBox (char* Caption, char* OutBuffer, size_t OutBufferLen, char* UpperCaption, CWnd* Parent)
+bool InputBoxUtf8 (char* Caption, char* OutBuffer, size_t OutBufferLen, char* UpperCaption, CWnd* Parent)
 {
 	CInputBox* C =  new CInputBox(Parent);
 	C->m_Caption = Caption; 
-	C->m_Edit = OutBuffer;
+	C->m_Edit = _U16(std::string(OutBuffer));
 	C->m_UpperCaption = UpperCaption;
 
 	if (C->DoModal() != IDOK) 
@@ -55,14 +55,13 @@ bool InputBox (char* Caption, char* OutBuffer, size_t OutBufferLen, char* UpperC
 		delete C;
 		return false;
 	};
-
-	if (strlen (C->m_Edit) < OutBufferLen - 1)
-		strcpy (OutBuffer, C->m_Edit);
-    else
-		{
-		 strncpy (OutBuffer, C->m_Edit, OutBufferLen - 2);
+	std::string result_s8 = _U8((const wchar_t*)C->m_Edit);
+	if (result_s8.length() < OutBufferLen - 1)
+		strcpy (OutBuffer, result_s8.c_str());
+    else {
+		 strncpy(OutBuffer, result_s8.c_str(), OutBufferLen - 2);
 		 OutBuffer[OutBufferLen - 1] = 0;
-		};
+	};
 	delete C;
 
 	

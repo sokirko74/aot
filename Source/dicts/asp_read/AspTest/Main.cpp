@@ -6,8 +6,10 @@
 #include <ctime>
 #include <set>
 
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "morph_dict/contrib/doctest/doctest.h"
 
-int main()
+TEST_CASE("test_one_pair")
 {
 	CAspPairDict d;
 	d.Load();
@@ -21,12 +23,12 @@ int main()
 		d.nonperf2perf(id1, res);
 		perf_ids.insert(res.begin(), res.end());
 	}
+	size_t count = 0;
 	for (auto id2 : ids2) {
 		if (perf_ids.find(id2) != perf_ids.end()) {
-			return 0;
+			++count;
 		}
 	}
-	return 1;
-
+	CHECK(count > 0);
 }
 

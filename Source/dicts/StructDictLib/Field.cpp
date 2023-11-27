@@ -28,7 +28,7 @@ void CField::ReadFromJson(const rapidjson::Value& js) {
         if (SignatId2SignatNo[S.SignatId] != UnknownSignatId) {
             throw CExpc("Signats must have unique identifiers; Field = " + FieldStr);
         }
-        SignatId2SignatNo[S.SignatId] = m_Signats.size() - 1;
+        SignatId2SignatNo[S.SignatId] = (BYTE)(m_Signats.size() - 1);
     };
 
     if (m_Signats.size() >= UnknownSignatId) {

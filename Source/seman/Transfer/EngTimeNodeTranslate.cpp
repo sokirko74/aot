@@ -11,7 +11,7 @@
 
 
 
-std::string get_field(CRossHolder*  RossHolder, uint16_t UnitNo, std::string Field, BYTE LeafId, BYTE BracketLeafId, BYTE LevelId)
+std::string get_field(CStructDictHolder*  RossHolder, uint16_t UnitNo, std::string Field, BYTE LeafId, BYTE BracketLeafId, BYTE LevelId)
 {
  if (UnitNo ==  ErrUnitNo) return "";
  BYTE FieldNo = RossHolder->GetRoss()->GetFieldNoByFieldStr(Field.c_str());
@@ -32,7 +32,7 @@ std::string get_field(CRossHolder*  RossHolder, uint16_t UnitNo, std::string Fie
 };
 
 
-std::string tr_by_ross_simple(CRossHolder*  RossHolder, std::string UnitStr)
+std::string tr_by_ross_simple(CStructDictHolder*  RossHolder, std::string UnitStr)
 {
 	EngRusMakeLower(UnitStr);
 	uint16_t UnitNo = RossHolder->GetRoss()->LocateUnit(UnitStr.c_str(), 1);
@@ -77,7 +77,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 	if ( RusNode.IsWordContainer() && RusNode.GetWord(0).m_Poses == 0)
 	{
 		for (long i=0; i < RusNode.GetWordsSize(); i++)
-			res +=  RusNode.GetWord(i).m_Word + " ";
+			res +=  RusNode.GetWord(i).GetWord() + " ";
 	}
 	else 
 	// переводим группу однородных числительных, которые заполняют одно место в поле CONTENT
@@ -94,9 +94,9 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 			// но семанттика преобразует числа прописью в арабскую запись
 			std::string one_numeral;
 			if (W.m_Poses != 0)
-			   one_numeral = spellout_number (W.m_Word, W.m_Poses & (1 < NUMERAL));
+			   one_numeral = spellout_number (W.GetWord(), W.m_Poses & (1 < NUMERAL));
 			else
-			   one_numeral = W.m_Word.c_str();
+			   one_numeral = W.GetWord();
 			if (i == Nodes.size() - 1)  // вставка союза, который должен стоять на предпоследнем месте
 			{
 			    res += tr_by_ross_simple(GetRossHolder(OborRoss), RusNode.GetWord(0).m_Lemma);			
@@ -159,16 +159,16 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 			) 
 		{
 			if (!RusNode.GetWord(0).m_ArabicNumber)
-				return  spellout_number(RusNode.GetWord(0).m_Word, RusNode.GetWord(0).HasPOS(NUMERAL));
+				return  spellout_number(RusNode.GetWord(0).GetWord(), RusNode.GetWord(0).HasPOS(NUMERAL));
 			else
-				return RusNode.GetWord(0).m_Word;
+				return RusNode.GetWord(0).GetWord();
 		}
 
 		grammems_mask_t grammems = 0;
 		if(is_pl) grammems |= ePlural;
 
         long ParadigmId = helper.GetParadigmIdByLemma(morphRussian, RusNode.GetWord(0).m_Lemma,  0);
-		if (ParadigmId == -1) return "!!!error!!!";
+		if (ParadigmId == UnknownParadigmId) return "!!!error!!!";
 		std::vector<long> Ids;
 		helper.translate_id(ParadigmId, Ids, 0);
 		if (Ids.size() == 0) return "!!!error!!!";
@@ -208,7 +208,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		std::string EngField = get_field(GetRossHolder(TimeRoss), RusStr.GetNode(MainNode.RusNode).GetUnitNo(), "ENG", 0, 0, ErrUChar);
 		if (EngField == "") return false;
 		MainNode.m_Words.resize(1);
-		MainNode.m_Words[0].m_Word = EngField;  
+		MainNode.m_Words[0].SetWord(EngField);  
 		MainNode.m_Words[0].m_Lemma = EngField;  
 		EngRusMakeLower(MainNode.m_Words[0].m_Lemma);
 		MainNode.m_bReached = true;  
@@ -302,7 +302,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 				 тогда надо взять русский текст как есть. Например,
 				 "в 1960-х годах" -> "in 1960s"
 				*/
-				if (isdigit(N.GetWord(0).m_Word[0]))
+				if (isdigit(N.GetWord(0).GetWord()[0]))
 					tr = N.GetWord(0).m_Lemma;
 				else
 	   				tr = time_tr_by_ross(nodes[PlaceNo]->RusNode, GrammemsStr);
@@ -328,7 +328,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 
 
 	MainNode.m_Words.resize(1);
-	MainNode.m_Words[0].m_Word = res;  
+	MainNode.m_Words[0].SetWord(res);  
 	MainNode.m_Words[0].m_Lemma = "";
 	MainNode.m_Words[0].m_ParadigmId = -1;
 	MainNode.m_Words[0].SetFormGrammems(0);

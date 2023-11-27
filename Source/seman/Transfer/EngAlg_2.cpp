@@ -427,7 +427,7 @@ void CEngSemStructure::ApplyNoRule(int iEngNode)
 	if( objNode.RusNode != -1 &&
 		RusStr.GetNode(objNode.RusNode).m_NodeType == MNA &&
 		RusStr.GetNode(objNode.RusNode).m_MainWordNo != -1 &&
-		RusStr.GetNode(objNode.RusNode).GetWord(RusStr.GetNode(objNode.RusNode).m_MainWordNo).m_Lemma == _R("НИ") )
+		RusStr.GetNode(objNode.RusNode).GetWord(RusStr.GetNode(objNode.RusNode).m_MainWordNo).m_Lemma == "НИ" )
 	{
 		negMna = true;
 	}

@@ -7,17 +7,23 @@ std::string GetStringByNode (const CRusSemStructure& R, int NodeNo)
 {
 	const CRusSemNode& Node = R.m_Nodes[NodeNo];
 	std::string Result;
-	for (size_t i=0; i < Node.m_Words.size(); i++)
+	for (auto& w: Node.m_Words)
 	{
-		std::string W = Node.m_Words[i].m_Word;
-		RmlMakeLower(W, morphRussian);
-		if (Node.m_Words[i].m_CharCase != LowLow)
-			W[0] = ReverseChar(W[0], morphRussian);
-		Result += W + " ";
+		std::string str = w.GetWord();
+		if (w.m_CharCase == LowLow) {
+			MakeLowerUtf8(str);
+		}
+		else if (w.m_CharCase == UpLow) {
+			MakeTitleUtf8(str);
+		}
+		else {
+			// already uppercase
+		}
+		Result += str + " ";
 		
 	};
 	if (Node.m_bQuoteMarks)
-		Result = "<Quote> "+Result + "</Quote> ";
+		Result = "<Quote> " + Result + "</Quote> ";
 
 	return Result;
 };

@@ -8,7 +8,6 @@ set(CMAKE_MFC_FLAG 2)
 
 add_link_options(/ENTRY:wWinMainCRTStartup) 
 set(CMAKE_CXX_FLAGS   "${CMAKE_CXX_FLAGS} /utf-8 /D _AFXDLL /D _UNICODE /D UNICODE " )
-#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /utf-8 /D _AFXDLL /D _UNICODE /D UNICODE" )
 
 add_executable (${PROJECT_NAME} WIN32
         AccentWizardDlg.cpp

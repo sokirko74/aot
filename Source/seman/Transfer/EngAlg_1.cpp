@@ -456,7 +456,7 @@ void CEngSemStructure::ApplyALG_AL1(int iEngNode)
 // CompareCortegeItems()
 // это появилось из-за ">> Х! : ИГ"
 
-bool CEngSemStructure::CompareCortegeItems(const CRossHolder* RossHolder,
+bool CEngSemStructure::CompareCortegeItems(const CStructDictHolder* RossHolder,
 										   const TCortege &X,const TCortege &Y) const
 {
 	int iX = 0;

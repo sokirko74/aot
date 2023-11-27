@@ -320,8 +320,6 @@ void CEngSemStructure::ApplyInvitatoryRule(int iEngNode)
 /////////////////////////////////////////////////////////////////////////////
 // RefineByNumeralMarks()
 
-std::string fix_case(const CEngSemWord& EngWord);
-
 void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 {
 	if( m_Nodes[iEngNode].m_MainWordNo==-1 )
@@ -387,8 +385,7 @@ void CEngSemStructure::RefineByNumeralMarks(int iEngNode)
 	if( pid<0 )
 		return;
 //
-	engWord.m_Word = helper.create_form_by_id(pid,_QM(ePastParticiple));
-	engWord.m_Word = fix_case(engWord);
+	engWord.SetWord(helper.create_form_by_id(pid,_QM(ePastParticiple)), true);
 	engNode.m_Words[engNode.m_MainWordNo].m_Poses = _QM(eVERB);
 	engNode.m_Words[engNode.m_MainWordNo].SetFormGrammems(_QM(ePastParticiple));
 	engNode.m_Words[engNode.m_MainWordNo].SetTense(pp_tn,"RefineByNumeralMarks");
@@ -458,7 +455,7 @@ void CEngSemStructure::TranslateAdverbAdjectiveRule(int EngNodeNo)
 	int ParentNodeNo = m_Relations[inRels[0]].m_SourceNodeNo;
 	const CEngSemNode& ParentNode = m_Nodes[ParentNodeNo];
 	if	(	(		HasSemFet(ParentNode, "INTEL")||	HasSemFet(ParentNode, "COMMUNIC")			)
-				&&	m_pData->GetThes(OmniThes)->IsA(TerminId, _R("_ЯЗЫК"))
+				&&	m_pData->GetThes(OmniThes)->IsA(TerminId, "_ЯЗЫК")
 			)
 	{
 			if (		!HasOutRelationByName(ParentNodeNo, "CONTEN")&&	!HasOutRelationByName(ParentNodeNo, "OBJ")				)
@@ -473,7 +470,7 @@ void CEngSemStructure::TranslateAdverbAdjectiveRule(int EngNodeNo)
 	{
 		//he was dressed in the Eastern fashion - он был одет по-восточному
 		CEngSemWord W;
-		W.m_Word = "fashion";
+		W.SetWord("fashion");
 		W.m_Lemma = "FASHION";
 		W.m_Poses = _QM(eNOUN);
 		engNode.m_Words.push_back(W);

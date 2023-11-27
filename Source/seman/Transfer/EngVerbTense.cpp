@@ -251,7 +251,7 @@ void CEngVerbTense::make_string()
 	{
 			// слово "трехногий" переходит в слово "3-legged" (pp)
 			// "3-legged" обязательно должно быть помечено m_bDoNotChangeForm
-			std::string Word = m_pVerbMainWord->m_Word;
+			std::string Word = m_pVerbMainWord->GetWord();
 			if (m_pVerbMainWord->m_NumeralPrefix != "")
 				Word =   m_pVerbMainWord->m_NumeralPrefix+"-"+ Word;
 			res += Word;
@@ -270,7 +270,7 @@ void CEngVerbTense::make_string()
 			  res += S.helper.create_form_by_id(m_pVerbMainWord->m_ParadigmId, _QM(ePastParticiple));
 			}
 		else 
-			res += m_pVerbMainWord->m_Word;
+			res += m_pVerbMainWord->GetWord();
 
 
 	// ставим отрицание после вспомогатльного глагола

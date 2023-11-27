@@ -21,7 +21,7 @@ void translate_helper::SetData(const CSemanticsHolder* pData)
 }
 
 
-const CRossHolder* translate_helper::GetRossHolder(DictTypeEnum type) const
+const CStructDictHolder* translate_helper::GetRossHolder(DictTypeEnum type) const
 {
 	return m_pData->GetRossHolder(type);
 }
@@ -57,8 +57,6 @@ std::string translate_helper::create_form_by_id(long Id, grammems_mask_t eng_gra
 	CFormInfo Paradigm;
 	bool bRes = GetEngLemmatizer()->CreateParadigmFromID(Id, Paradigm);
 	assert(bRes);
-
-
 	int count = Paradigm.GetCount();
 	LOGV << "lemma %s try to find a word form with grammems " << Paradigm.GetSrcNorm().c_str(), GetEngGramTab()->GrammemsToStr(eng_grammems);
 	for (j = 0; j < count; j++)
@@ -67,9 +65,8 @@ std::string translate_helper::create_form_by_id(long Id, grammems_mask_t eng_gra
 			break;
 	}
 	if (j == count) j = 0;
-	std::string res = Paradigm.GetWordForm(j);
-	EngRusMakeLower(res);
-
+	std::string res = Paradigm.GetWordForm(j); // it is English, so already in utf8
+	MakeLowerUtf8(res);
 	return res;
 }
 
@@ -89,32 +86,12 @@ std::string translate_helper::create_norm_by_id(long EngId) const
 
 
 
-
-// устанавливает  нужный регистр
-std::string fix_case(const CEngSemWord& EngWord)
-{
-	std::string s = EngWord.m_Word;
-	if (s.empty()) return s;
-	if (!EngWord.m_bDoNotChangeForm)
-	{
-		EngRusMakeLower(s);
-		if (((EngWord.m_CharCase == UpLow)
-			|| EngWord.HasOneGrammem(eProper)
-			)
-			)
-			s[0] = toupper((unsigned char)s[0]);
-		if (EngWord.m_CharCase == UpUp) EngRusMakeUpper(s);
-	};
-	return s;
-}
-
-
 void translate_helper::synthesize(CEngSemWord& EngWord) const
 {
 	EngWord.m_ParadigmId = GetParadigmIdByLemma(morphEnglish, EngWord.m_Lemma, GetOnePOS(EngWord.m_Poses));
 	if (EngWord.m_ParadigmId == -1)
 	{
-		EngWord.m_Word = fix_case(EngWord);
+		EngWord.SetWord(EngWord.GetWord(), true);
 
 		// получаем притяжательную форму
 		if (EngWord.HasOneGrammem(ePossessive))
@@ -122,22 +99,22 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 
 		// слово "трехоконный" переходит в слово "3-fenestral"
 		if (EngWord.m_NumeralPrefix != "")
-			EngWord.m_Word = EngWord.m_NumeralPrefix + "-" + EngWord.m_Word;
+			EngWord.SetWord( EngWord.m_NumeralPrefix + "-" + EngWord.GetWord());
 
 
 		// добавим окончание "-s" или "-es" к существительному 
 		if (EngWord.m_Poses == _QM(eNOUN))
 			if (EngWord.HasOneGrammem(ePlural) // есть множественное
 				&& !EngWord.HasOneGrammem(eSingular) // но нет единственного
-				&& !EngWord.m_Word.empty()
+				&& !EngWord.GetWord().empty()
 				)
 			{
-				if ((EngWord.m_Word[EngWord.m_Word.size() - 1] == 'S')
-					|| (EngWord.m_Word[EngWord.m_Word.size() - 1] == 's')
+				if ((EngWord.GetWord().back() == 'S')
+					|| (EngWord.GetWord().back() == 's')
 					)// если заканчивается на "s", тогда добавим "es"
-					EngWord.m_Word += "es";
+					EngWord.AddPostfix("es");
 				else
-					EngWord.m_Word += "s";
+					EngWord.AddPostfix("s");
 			};
 
 
@@ -201,7 +178,7 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 		if (!EngWord.m_bDoNotChangeForm)
 		{
 			// получаем форму по Id и  граммемам
-			EngWord.m_Word = create_form_by_id(EngWord.m_ParadigmId, eng_grammems);
+			EngWord.SetWord(create_form_by_id(EngWord.m_ParadigmId, eng_grammems));
 
 			// получаем притяжательную форму
 			if (EngWord.HasOneGrammem(ePossessive))
@@ -209,10 +186,10 @@ void translate_helper::synthesize(CEngSemWord& EngWord) const
 
 			// слово "трехоконный" переходит в слово "3-fenestral"
 			if (EngWord.m_NumeralPrefix != "")
-				EngWord.m_Word = EngWord.m_NumeralPrefix + "-" + EngWord.m_Word;
+				EngWord.AddPrefix(EngWord.m_NumeralPrefix + "-");
 
 			// выправлем регистр слова
-			EngWord.m_Word = prefix + fix_case(EngWord);
+			EngWord.AddPrefix(prefix, true);
 		};
 	}
 	catch (...) {
@@ -232,20 +209,20 @@ void add_rel_operators(CEngSemNode& Node)
 	if (Node.m_RelOperators.size() > 0)
 		for (long i = Node.m_RelOperators.size() - 1; i >= 0; i--)
 			if (Node.m_RelOperators[i] == "АВИА")
-				Node.m_Words[WordNo].m_Word = "aero" + Node.m_Words[WordNo].m_Word;
+				Node.m_Words[WordNo].AddPrefix("aero");
 			else
 				if (Node.m_RelOperators[i] == "ВИЦЕ-")
-					Node.m_Words[WordNo].m_Word = "vice-" + Node.m_Words[WordNo].m_Word;
+					Node.m_Words[WordNo].AddPrefix("vice-");
 				else
 					if (Node.m_RelOperators[i] == "ЭКС-")
-						Node.m_Words[WordNo].m_Word = "ex-" + Node.m_Words[WordNo].m_Word;
+						Node.m_Words[WordNo].AddPrefix("ex-");
 					else
 						if (Node.m_RelOperators[i] == "ПОЛУ")
 						{
 							if (Node.GetPos() == eADJ)
-								Node.m_Words[WordNo].m_Word = "semi" + Node.m_Words[WordNo].m_Word;
+								Node.m_Words[WordNo].AddPrefix("semi");
 							else
-								Node.m_Words[WordNo].m_Word = "half " + Node.m_Words[WordNo].m_Word;
+								Node.m_Words[WordNo].AddPrefix("half ");
 						}
 						else
 							/* переводим фразу "все больше людей"-> "more and more people"*/
@@ -253,10 +230,10 @@ void add_rel_operators(CEngSemNode& Node)
 								&& (Node.HasGrammemRich(eComparativ))
 								)
 							{
-								std::string s = Node.m_Words[WordNo].m_Word;
-								EngRusMakeLower(s);
+								std::string s = Node.m_Words[WordNo].GetWord();
+								MakeLowerUtf8(s);
 								Trim(s);
-								Node.m_Words[WordNo].m_Word += " and  " + s + " ";
+								Node.m_Words[WordNo].AddPostfix(" and  " + s + " ");
 							};
 };
 
@@ -266,8 +243,6 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 	assert(Node.m_MainWordNo != -1);
 
 	long WordNo = Node.m_MainWordNo;
-
-
 
 	if (Node.m_Words[WordNo].m_bDoNotChangeForm)
 	{
@@ -306,7 +281,7 @@ void translate_helper::synthesize_by_node(CEngSemNode& Node) const
 
 	// снова выправляем регистр, поскольку, возможно, были добавлены приставки
 	if (!Node.m_Words[WordNo].m_bDoNotChangeForm)
-		Node.m_Words[WordNo].m_Word = fix_case(Node.m_Words[WordNo]);
+		Node.m_Words[WordNo].SetWord(Node.m_Words[WordNo].GetWord(), true);
 
 };
 
@@ -471,25 +446,26 @@ void translate_helper::translate_id(long Id, std::vector<long>& res, part_of_spe
 //--------------------------------------------------------------------------------
 // выдает по строке все леммы из морфологического словаря нужной части речи
 // если pos=-1, тогда часть речи не проверяется
-long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::string norm, part_of_speech_t pos, bool bProper) const
+long  translate_helper::GetParadigmIdByLemma(MorphLanguageEnum langua, std::string lemma, part_of_speech_t pos, bool bProper) const
 {
 
 	std::vector<CFormInfo> ParadigmCollection;
-	Trim(norm);
+	Trim(lemma);
 	const CLemmatizer* lemmatizer = GetLemmatizer(langua);
 	const CAgramtab* GramTab = GetGramTab(langua);
-	RmlMakeUpper(norm, langua);
+	lemma = convert_from_utf8(lemma.c_str(), langua);
+	RmlMakeUpper(lemma, langua);
 
-	if (!lemmatizer->CheckABC(norm.c_str()))
+	if (!lemmatizer->CheckABC(lemma.c_str()))
 		return -1;
 
 	try
 	{
-		lemmatizer->CreateParadigmCollection(true, norm, true, false, ParadigmCollection);
+		lemmatizer->CreateParadigmCollection(true, lemma, true, false, ParadigmCollection);
 	}
 	catch (...)
 	{
-		return -1;
+		return UnknownParadigmId;
 	}
 	int count = ParadigmCollection.size();
 	int AgreedWithProper = -1;
@@ -571,78 +547,81 @@ std::string translate_helper::an_article_before(const std::string& _str) const
 // проверяет, что строка s начинается с одного из префиксов starts
 bool translate_helper::starts_with(const std::string& s, const StringVector& starts) const
 {
-	std::string lower_s = s;
-	EngRusMakeLower(lower_s);
-	for (int i = 0; i < starts.size(); i++)
+	std::string word = s;
+	MakeLowerUtf8(word);
+	for (const auto& prefix : starts)
 	{
-		int size = std::min(starts[i].size(), s.size());
-		if (lower_s.substr(0, size) == starts[i])
+		if (startswith(word, prefix)) {
 			return true;
+		}
 	}
 	return false;
 }
 
 struct CTransliteration {
-	StringVector Rus2Eng;
-
-	void init_char(const std::string& rus, const std::string& eng) {
-		BYTE rus_char = _R(rus.c_str())[0];
-		Rus2Eng[rus_char] = eng;
-	}
+	std::unordered_map<uint32_t, std::string> Rus2Eng;
 
 	CTransliteration() {
-		Rus2Eng.resize(256);
-		for (int i = 0; i < 256; i++) {
-			Rus2Eng[i] = (char)(unsigned char)i;
-		}
-		init_char("А", "A");
-		init_char("Б", "B");
-		init_char("В", "V");
-		init_char("Г", "G");
-		init_char("Д", "D");
-		//		init_char("Е", "Е");
-		init_char("Ё", "E");
-		init_char("Ж", "Zh");
-		init_char("З", "Z");
-		init_char("И", "I");
-		init_char("Й", "Y");
-		init_char("К", "K");
-		init_char("Л", "L");
-		init_char("М", "M");
-		init_char("Н", "N");
-		init_char("О", "O");
-		init_char("П", "P");
-		init_char("Р", "R");
-		init_char("С", "S");
-		init_char("Т", "T");
-		init_char("У", "U");
-		init_char("Ф", "F");
-		init_char("Х", "Kh");
-		init_char("Ц", "Ts");
-		init_char("Ч", "Ch");
-		init_char("Ш", "Sh");
-		init_char("Щ", "Shch");
-		init_char("Ъ", "\"");
-		init_char("Ы", "Y");
-		init_char("Ь", "'");
-		init_char("Э", "E");
-		init_char("Ю", "Yu");
-		init_char("Я", "Ya");
+		Rus2Eng = {
+			{U'А', "A"},
+			{U'Б', "B"},
+			{U'В', "V"},
+			{U'Г', "G"},
+			{U'Д', "D"},
+			//		{U'Е', "Е"},
+			{U'Ё', "E"},
+			{U'Ж', "Zh"},
+			{U'З', "Z"},
+			{U'И', "I"},
+			{U'Й', "Y"},
+			{U'К', "K"},
+			{U'Л', "L"},
+			{U'М', "M"},
+			{U'Н', "N"},
+			{U'О', "O"},
+			{U'П', "P"},
+			{U'Р', "R"},
+			{U'С', "S"},
+			{U'Т', "T"},
+			{U'У', "U"},
+			{U'Ф', "F"},
+			{U'Х', "Kh"},
+			{U'Ц', "Ts"},
+			{U'Ч', "Ch"},
+			{U'Ш', "Sh"},
+			{U'Щ', "Shch"},
+			{U'Ъ', "\""},
+			{U'Ы', "Y"},
+			{U'Ь', "'"},
+			{U'Э', "E"},
+			{U'Ю', "Yu"},
+			{U'Я', "Ya"}
+		};
 	}
 	std::string transliterate(std::string str) const {
-		EngRusMakeUpper(str);
-		const std::string before_e = _R("УЕЪЫАОЭЯИЬЮ");
+		MakeUpperUtf8(str);
+		auto s32 = convert_utf8_to_utf32(str);
+		const std::u32string before_e = U"УЕЪЫАОЭЯИЬЮ";
 		std::string res;
-		for (size_t i = 0; i < str.length(); i++)
-			if (str[i] == _R("Е")[0])
-				if (i == 0
-					|| before_e.find((unsigned char)str[i - 1]) != std::string::npos
-					)
+		uint32_t prev_ch = 0;
+		for (size_t i = 0; i < s32.length(); i++) {
+			auto ch = s32[i];
+			if (ch == U'Е')
+				if (before_e.find(prev_ch) != std::string::npos)
 					res += "Ye";
 				else
 					res += "E";
-			else
-				res += Rus2Eng[(unsigned char)str[i]];
+			else {
+				auto it = Rus2Eng.find(ch);
+				if (it != Rus2Eng.end()) {
+					res += it->second;
+				}
+				else {
+					res += ch;
+				}
+			}
+			prev_ch = ch;
+		}
 		return res;
 	}
 };
@@ -656,19 +635,16 @@ void translate_helper::transliterate(CEngSemWord& W)
 	if (!W.m_Lemma.empty())
 		str = W.m_Lemma;
 	else
-		str = W.m_Word;
+		str = W.GetWord();
 
 	std::string res = RusEngTransliteration.transliterate(str);
 	W.m_Lemma = res;
-	W.m_Word = res;
-	W.m_Word = fix_case(W);
+	W.SetWord(res, true);
 }
 
 
-
-
 // загружает перечень слов из РОСС
-void translate_helper::init_list_from_ross(const CRossHolder* RossHolder, const std::string& list_name, StringVector& res)
+void translate_helper::init_list_from_ross(const CStructDictHolder* RossHolder, const std::string& list_name, StringVector& res)
 {
 	uint16_t UnitNo = RossHolder->GetRoss()->LocateUnit(list_name.c_str(), 1);
 
@@ -711,12 +687,12 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 	if (EngIds.empty() || W.HasOneGrammem(rPatronymic))
 	{
 
-		if (isdigit((unsigned char)W.m_Word[0])
+		if (isdigit((unsigned char)W.GetWord()[0])
 			&& W.HasPOS(ADV) // "вдвоем", "втроем"
 			)
 		{
 			m_Nodes[NodeNo].m_Words[0].m_Lemma = "together";
-			m_Nodes[NodeNo].m_Words[0].m_Word = "together";
+			m_Nodes[NodeNo].m_Words[0].SetWord("together");
 		}
 		else
 			// транслитерируем
@@ -736,7 +712,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 	{
 		std::string Lemma = helper.create_norm_by_id(EngIds[0]);
 		m_Nodes[NodeNo].m_Words[0].m_Lemma = Lemma;
-		m_Nodes[NodeNo].m_Words[0].m_Word = Lemma;
+		m_Nodes[NodeNo].m_Words[0].SetWord(Lemma);
 		m_Nodes[NodeNo].m_Words[0].m_ParadigmId = EngIds[0];
 		if (W.m_AdditParadigmId != -1)
 		{
@@ -745,7 +721,7 @@ bool CEngSemStructure::translate_binary(long NodeNo)
 			{
 				std::string Lemma = helper.create_norm_by_id(EngIds[0]);
 				m_Nodes[NodeNo].m_Words[0].m_Lemma += "-" + Lemma;
-				m_Nodes[NodeNo].m_Words[0].m_Word += "-" + Lemma;
+				m_Nodes[NodeNo].m_Words[0].AddPostfix("-" + Lemma);
 				m_Nodes[NodeNo].m_Words[0].m_AdditParadigmId = EngIds[0];
 			};
 

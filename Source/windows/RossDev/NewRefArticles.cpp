@@ -69,11 +69,13 @@ BOOL CNewRefArticles::OnSetActive()
     m_List.ResetContent();
 	P->SetWizardButtons( PSWIZB_BACK|PSWIZB_NEXT|PSWIZB_FINISH);
 
-	for (size_t k = 0;  k < m_RefsId.size(); k++)
+	for (auto& ref: m_RefsId)
 	{
 		CFormInfo Prd;
-		if (GetSemBuilder().m_RusStr.m_pData->GetRusLemmatizer()->CreateParadigmFromID(m_RefsId[k], Prd))
-			m_List.AddString(Prd.GetWordForm(0).c_str());
+		if (GetSemBuilder().m_RusStr.m_pData->GetRusLemmatizer()->CreateParadigmFromID(ref, Prd)) {
+			auto lemma = convert_to_utf8(Prd.GetWordForm(0), morphRussian);
+			m_List.AddString(_U16(lemma));
+		}
 	};
 	return CPropertyPage::OnSetActive();
 }

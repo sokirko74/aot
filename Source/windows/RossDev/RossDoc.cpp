@@ -25,12 +25,11 @@ BEGIN_MESSAGE_MAP(CRossDoc, CDocument)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/////////////////////////////////////////////////////////////////////////////
-// CRossDoc construction/destruction
+const char guest_user_name[] = "guest";
 
 CRossDoc::CRossDoc() : m_ExternalRossHolder(GetSemBuilder().m_RusStr.m_pData)
 {
-	m_Author = "user";
+	m_Author = guest_user_name;
 	m_ReadOnly = true;
 	m_FirstLoadReadonly = false;
 	m_DoNotLock = false;
@@ -57,7 +56,7 @@ const CDictionary*	CRossDoc::GetRoss() const
 {
 	return GetRossHolder()->GetRoss();
 }
-CRossHolder*	CRossDoc::GetRossHolder()
+CStructDictHolder*	CRossDoc::GetRossHolder()
 {
 	if (m_RossId != NoneRoss)
 		return GetSemBuilder().m_RusStr.m_pData->GetRossHolder(m_RossId);
@@ -65,7 +64,7 @@ CRossHolder*	CRossDoc::GetRossHolder()
 		return &m_ExternalRossHolder;
 }
 
-const CRossHolder*	CRossDoc::GetRossHolder() const
+const CStructDictHolder*	CRossDoc::GetRossHolder() const
 {
 	if (m_RossId != NoneRoss)
 		return GetSemBuilder().m_RusStr.m_pData->GetRossHolder(m_RossId);
@@ -85,8 +84,8 @@ void CRossDoc::RemoveLock() const
    try 
    {
 		std::string FileName = GetLockFileName();
-		if (access(FileName.c_str(), 0) != -1)
-			CFile::Remove(FileName.c_str());
+		if (fs::exists(FileName))
+			fs::remove(FileName);
 	}
 	catch (...) 
 	{
@@ -99,7 +98,7 @@ void CRossDoc::MakeReadOnly()
 	  if    (!m_ReadOnly)
 	  {	 
 			m_ReadOnly = true;
-			m_Author = "guest";
+			m_Author = guest_user_name;
 			RemoveLock();
 	  };
 };
@@ -124,298 +123,82 @@ BOOL CRossDoc::CanCloseFrame(CFrameWnd* pFrame)
 
 	return CDocument::CanCloseFrame(pFrame);
 };
-/////////////////////////////////////////////////////////////////////////////
-// CRossDoc serialization
+
+std::string get_user_name(const std::vector<std::string>& users) {
+	//todo: save last user name to registry
+	size_t trial_count = 3;
+	for (size_t i = 0; i < trial_count; i++)
+	{
+		char login[20];
+		strcpy(login, guest_user_name);
+		if (!InputBoxUtf8("Input your login (\"guest\" - for ReadOnly):", login, 20 - 1, "Password Dialog", AfxGetApp()->m_pMainWnd)
+			|| (strlen(login) == 0))
+		{
+			if (i + 1 < trial_count) {
+				AfxMessageBox(_T("Your must enter your login, try one more time!"));
+				continue;
+			}
+
+		}
+		std::string user = login;
+		Trim(user);
+		if (user == guest_user_name)
+		{
+			return user;
+		};
+
+		for (auto& u : users) {
+			if (user == u) {
+				return user;
+			}
+		}
+		if (i + 1 < trial_count) {
+			AfxMessageBox(_T("Your login is incorrect"));
+		}
+	};
+	AfxMessageBox(_T("Cannot find your login in loginlist. Logging as guest..."));
+	return guest_user_name;
+}
 
 
 void CRossDoc::Serialize(CArchive& ar)
 {
 
 	m_FirstLoadReadonly =  ((CRossDevApp*)AfxGetApp())->m_OpenRossDocReadOnly; 
-	CString S = SerializeInner(ar);
+	SerializeInner(ar);
 	BuildBasicDomItems();
-	char Login[LoginSize];
-	strcpy (Login, (const char*) S);
-	if (strlen(Login) == 0)
-		strcpy (Login, "guest");
-
 
 	try {
-		if (!ar.IsStoring())
-			if (!m_IsDefault)
-				if (!m_ReadOnly)
-				{
-					size_t i =0;
-					for (; i < 3; i++)
-					{
-						if (   !InputBox("Input your login (\"guest\" - for ReadOnly):", Login, LoginSize-1, "Password Dialog", AfxGetApp()->m_pMainWnd)
-							|| (strlen (Login) == 0)) 
-						{
-							AfxMessageBox("Your must enter your login!");
-						}
-						else
-						{
-
-							char* q = strtok (Login," \t");
-							if (!stricmp (q, "guest"))
-							{
-								MakeReadOnly();
-								break;
-							};
-
-							size_t k =0;
-							for (; k < m_Authors.size(); k++)
-								if (!stricmp (q, m_Authors[k]))
-								{
-									m_Author = m_Authors[k];
-
-									break;
-								};
-
-							if (k !=  m_Authors.size()) break;
-						};
-
-						if (i < 2) AfxMessageBox ("Your login is incorrect");
-					};
-
-					if (i==3)
-					{
-						AfxMessageBox ("Cannot find your login in loginlist. Logging as guest...");
-						MakeReadOnly();
-						return;
-					};
-				}
-				else
-					m_Author = Login;
+		if (!ar.IsStoring()) {
+			if (!m_ReadOnly)
+			{
+				m_Author = get_user_name(GetRoss()->GetConfig().DictUsers).c_str();
+			}
+			if (m_Author == guest_user_name) {
+				MakeReadOnly();
+			}
+		}
 	}
 	catch (...)
 	{
-		AfxMessageBox ("An exception while entering login");
+		AfxMessageBox (_T("An exception while entering login"));
 		return;
 	};
 
 }
 
-bool GetLine(const char* Buffer, int& CurrOffset, int BufferLength, CString& S)
+void CreateLockFile(std::string fileName)
 {
-	bool bSpace = true;
-	for (int i = CurrOffset; i < BufferLength+1; i++)
-	 if (    (i == BufferLength)
-		  || (Buffer[i] == '\n')
-		)
-	 {
-		 if (bSpace)
-		 {
-			 continue;
-		 };
-		 char part[1000];
-		 assert (i - CurrOffset < 1000);
-		 strncpy(part,Buffer+CurrOffset, i - CurrOffset);
-		 part[i-CurrOffset] = 0;
-		 S = part;
-		 if (S.GetLength()> 1)
-			 if (S[S.GetLength() -1] == '\r')
-				 S.Delete(S.GetLength() -1);
-		 S.TrimLeft();
-		 S.TrimRight();
- 		 CurrOffset = i+1;
-		 return true;
-	 }
-	 else
-		 bSpace = bSpace && isspace((unsigned char)Buffer[i]);
-	 
-	 return false;
-
-};
-
-
-void CreateLockFile(CString FileName)
-{
-	FILE* fp = fopen (FileName, "wb");
-	try {
-		fprintf (fp,"Date = %s\r\n", CTime::GetCurrentTime().Format( "%A, %B %d, %Y " )); 
-		fprintf (fp,"Time = %s\r\n", CTime::GetCurrentTime().Format( "%H : %M" )); 
-		CString UserName = getenv("USERNAME");
-        if (!UserName.IsEmpty())
-			fprintf (fp, "UserName = %s \r\n", (const char*)UserName);
-
-	}
-	catch (...) {
-		// UNDER windows 95/98 it doesn't work
-        //AfxMessageBox("Cannot write lock file");
-	};
+	FILE* fp = fopen (fileName.c_str(), "w");
+	fprintf (fp,"Date = %s\n", CTime::GetCurrentTime().Format( "%A, %B %d, %Y " )); 
+	fprintf (fp,"Time = %s\n", CTime::GetCurrentTime().Format( "%H : %M" )); 
+	CString UserName = getenv("USERNAME");
+    if (!UserName.IsEmpty())
+		fprintf (fp, "UserName = %s\n", utf16_to_utf8((const TCHAR*)UserName).c_str());
 	fclose(fp);
-
 };
+	
 
-void CRossDoc::ReadConfig(CArchive& ar, CString& Login)
-{
-	m_bRussianFields = false;
-	CFile* File;
-	CString S;
-	int FileLength = ar.GetFile()->GetLength();
-	int CurrByte = 0;
-	char* Buffer = new char [FileLength+1];
-	ar.Read(Buffer, FileLength);
-	int CurrBytes = 0;
-
-	try {
-		File = ar.GetFile();
-		std::string FilePath = (const char*)File->GetFilePath();
-		m_ReadOnly  =  (access(GetLockFileName().c_str(), 0) != -1) || m_FirstLoadReadonly;
-
-
-		//  чтение зоны авторов 
-		m_IsDefault  = false;
-
-		Login = "";
-		GetLine(Buffer, CurrByte, FileLength,  S);
-		m_Authors.clear();
-		while (GetLine(Buffer, CurrByte, FileLength,  S))
-		{
-			// начинается новая зона 
-			if (S[0] == '[')
-				break;
-
-			if (S.Find ("Last", 0) != -1)
-			{
-				S = S.Left(S.GetLength()- 4);
-				S.TrimRight();
-				Login =  S;
-			};
-
-			if (S.Find ("Default", 0) != -1)
-			{
-				S = S.Left(S.GetLength()- 7);
-				S.TrimRight();
-				Login = S;
-				m_IsDefault = true;
-			};
-
-			if (S.GetLength() > LoginSize - 1)
-				throw CExpc("The length of login cannot be more than 10!");
-
-			m_Authors.push_back (S);
-		};
-	}
-	catch (...)
-	{
-		std::string Mess = "Cannot read user zone "+File->GetFileName();
-		AfxMessageBox (Mess.c_str());
-	};
-
-
-		// чтение зоны настроек доменов
-	try
-	{
-		m_DomainParams.clear();
-
-		if (S == "[DomensParams]")
-			while (GetLine(Buffer, CurrByte, FileLength,  S))
-			{
-				// начинается новая зона 
-				if (S[0] == '[')
-					break;
-				CDomainParam C;
-				C.InitFromString(S);
-				m_DomainParams.push_back(C);
-			};
-
-		m_OptionsComments.clear();
-		if (S == "[Options]")
-			while (GetLine(Buffer, CurrByte, FileLength,  S))
-			{
-				// начинается новая зона 
-				if (S[0] == '[')
-					break;
-				size_t i = 0;
-
-
-				if (S.Mid (0,2) == "//")
-					m_OptionsComments.push_back(S);
-
-				if (sscanf (S,"DoNotLock %u", &i) == 1)
-				{
-					m_DoNotLock = (i!=0) ? true : false;
-				};
-
-				if (sscanf (S,"ArticleInitTextMode %u", &i) == 1)
-				{
-					m_bArticleInitTextMode = (i!=0) ? true : false;
-				};
-
-				if (sscanf (S,"DoNotSaveLastUserName %u", &i) == 1)
-				{
-					m_bDoNotSaveLastUserName = (i!=0) ? true : false;
-				};
-
-
-				char s[200];
-
-				if (sscanf (S,"Language  %s", s) == 1)
-				{
-					if (stricmp (s, "English") == 0)
-						m_LanguageId = English;
-					if (stricmp (s, "Russian") == 0)
-						m_LanguageId = Russian;
-				};
-
-				if (S == "RussianFields")
-				{
-					m_bRussianFields = true;
-				};
-
-			};
-		}
-		catch (...)
-		{
-			std::string Mess = "Cannot read options zone "+File->GetFileName();
-			AfxMessageBox (Mess.c_str());
-		};
-	delete Buffer;
-}
-
-void CRossDoc::WriteConfig(CArchive& ar)
-{
-	ar.WriteString("[Configuration]\r\n");
-	for (size_t k =0; k < m_Authors.size(); k++)
-	{
-		ar.WriteString(m_Authors[k]);
-		if (!stricmp (m_Author, m_Authors[k]))
-			if (m_IsDefault)
-				ar.WriteString(" Default");
-			else
-				if (!m_bDoNotSaveLastUserName)
-					ar.WriteString(" Last");
-		ar.WriteString("\r\n");
-	};
-	ar.WriteString("[DomensParams]\r\n");
-	for (size_t k =0; k < m_DomainParams.size(); k++)
-	{
-		CString S;
-		S.Format("%s %i %i\r\n", m_DomainParams[k].DomStr, m_DomainParams[k].Color, m_DomainParams[k].DropDownCount);
-		ar.WriteString(S);
-
-	};
-	ar.WriteString("[Options]\r\n");
-	CString Q;
-	if (m_LanguageId == Russian)
-		ar.WriteString("Language Russian\r\n");
-	else
-		ar.WriteString("Language English\r\n");
-
-	Q.Format("DoNotLock %i\r\n", m_DoNotLock ?  1 : 0);
-	ar.WriteString(Q);
-
-	Q.Format("DoNotSaveLastUserName %i\r\n", m_bDoNotSaveLastUserName ?  1 : 0);
-	ar.WriteString(Q);
-
-	Q.Format("ArticleInitTextMode %i\r\n", m_bArticleInitTextMode ?  1 : 0);
-	ar.WriteString(Q);
-
-	for (long j=0;j < m_OptionsComments.size();j++)
-		ar.WriteString(m_OptionsComments[j]);
-};
 
 bool CRossDoc::IsThesRoss() const
 {
@@ -428,7 +211,7 @@ int	CRossDoc::GetThesId() const
 	return GetThesIdByRossId(m_RossId);
 }
 
-CString CRossDoc::SerializeInner(CArchive& ar)
+void CRossDoc::SerializeInner(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
@@ -436,31 +219,29 @@ CString CRossDoc::SerializeInner(CArchive& ar)
 		if (!GetRoss()->Save())
 			throw CExpc (Format ("Cannot save %s", GetRossHolder()->m_DictPath.c_str()));
 
-		WriteConfig(ar);	
-		return "";
 	}
 	else
 	{       
 		m_bSerialized = true;
+		std::string DictFileName = _U8(ar.GetFile()->GetFilePath());  
+		std::string dict_directory = fs::path(DictFileName).parent_path().string();
+		m_ReadOnly = FileExists(GetLockFileName().c_str()) || m_FirstLoadReadonly;
+		m_DomainParams.clear(); // todo: restore colors for domains in rossdev
+		m_OptionsComments.clear();
 
-		CString Login;
-		std::string DictFileName = (const char*)ar.GetFile()->GetFilePath();  
-		ReadConfig(ar, Login);
 		CAllRossesHolder* Trans = GetSemBuilder().m_RusStr.m_pData;
 		Trans->m_LastUpdateTime++;
 
-		m_RossId = Trans->GetRegisteredRossId(DictFileName);
-		GetRossHolder()->m_DictPath = DictFileName;
+		m_RossId = Trans->GetRegisteredRossId(dict_directory);
+		GetRossHolder()->m_DictPath = dict_directory;
 		GetRossHolder()->m_LastUpdateTime =  Trans->m_LastUpdateTime;
 
-		GetRossHolder()->OpenRossHolder(DictFileName.c_str(), false);
+		GetRossHolder()->OpenRossHolder(dict_directory, false);
 
 		if (   !m_ReadOnly && !m_DoNotLock	)
-			CreateLockFile(GetLockFileName().c_str());
+			CreateLockFile(GetLockFileName());
 
 		m_FirstLoadReadonly = false;
-
-		return Login;
 	}
 }
 
@@ -487,16 +268,19 @@ void CRossDoc::Dump(CDumpContext& dc) const
 void CRossDoc::SetTitle(LPCTSTR lpszTitle) 
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CDocument::SetTitle(GetRossHolder()->GetDictName().c_str());
+	CDocument::SetTitle(_U16(GetRossHolder()->GetDictName()));
 }
 
+DictTypeEnum CRossDoc::GetRossType() const {
+	return m_RossId;
+}
 
 BOOL CRossDoc::OnSaveDocument(LPCTSTR lpszPathName) 
 {
 	// TODO: Add your specialized code here and/or call the base class
 	if (m_ReadOnly)
 	{
-		::MessageBox(0, "Cannot write: the dictionary is read only.", "Error", MB_OK);
+		::MessageBox(0, _T("Cannot write: the dictionary is read only."), _T("Error"), MB_OK);
 		return FALSE;
 	};
 	
@@ -519,9 +303,9 @@ BOOL CRossDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	 if (!CDocument::OnOpenDocument(lpszPathName))
 		return FALSE;
 	}
-	catch (CExpc c)
+	catch (std::exception& c)
 	{
-       AfxMessageBox  (c.what());
+       AfxMessageBox  (_U16(c.what()));
 	   return FALSE;
 
 	};

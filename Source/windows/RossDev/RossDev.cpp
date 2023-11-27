@@ -66,8 +66,8 @@ public:
 	virtual void ParseParam(const TCHAR* pszParam, BOOL bFlag, BOOL bLast)
 	{
 		CString S = pszParam;
-		if (stricmp((const char*)S, "seman") == 0) bSeman = true;
-		if (stricmp((const char*)S, "onlyross") == 0) bOnlyRoss = true;
+		if (S == _T("seman")) bSeman = true;
+		if (S == _T("onlyross")) bOnlyRoss = true;
 		CCommandLineInfo::ParseParam(pszParam, bFlag, bLast);
 	};
 };
@@ -110,7 +110,7 @@ void CALLBACK TclTimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 /////////////////////////////////////////////////////////////////////////////
 void InitError()
 {
-	AfxMessageBox("cannot initialize Tcl/Tk");
+	AfxMessageBox(_T("cannot initialize Tcl/Tk"));
 }
 
 
@@ -158,7 +158,7 @@ BOOL CRossDevApp::InitInstance()
 		m_TclInterp.RunTcl(Format("set env(GRAPHLET_DIR) \"%s/Bin/Lib/graphlet\"", GetRmlVariable().c_str()));
 	}
 	catch (CExpc e) {
-		AfxMessageBox(e.what());
+		AfxMessageBox(_U16(e.what()));
 	}
 
 	// CG: The following block was added by the Splash Screen component.
@@ -278,7 +278,7 @@ BOOL CRossDevApp::InitInstance()
 		memset(&lf, 0, sizeof(LOGFONT));   // Clear out structure.
 		std::string strFontSize = GetRegistryString(g_strFontSizeRegPath);
 		lf.lfHeight = atoi(strFontSize.c_str());                  // Request a 20-pixel-high font
-		strcpy(lf.lfFaceName, GetRegistryString(g_strFontNameRegPath).c_str());    //    with face name "Arial".
+		lstrcpy(lf.lfFaceName, _U16(GetRegistryString(g_strFontNameRegPath)));    //    with face name "Arial".
 		m_TextFont.CreateFontIndirect(&lf);    // Create the font.
 	}
 	catch (...)
@@ -309,8 +309,8 @@ BOOL CRossDevApp::InitInstance()
 		if (cmdInfo.bSeman)
 			OnSemAn();
 	}
-	catch (CExpc e) {
-		AfxMessageBox(e.what());
+	catch (std::exception& e) {
+		AfxMessageBox(_U16(e.what()));
 	}
 
 	return TRUE;
@@ -450,7 +450,7 @@ BOOL CRossDevApp::OnIdle(LONG lCount)
 		if (WaitForSingleObject(m_hEventMinusListReport, 0) == WAIT_OBJECT_0)
 		{
 			ResetEvent(m_hEventMinusListReport);
-			((CFrameWnd*)((CRossDevApp*)AfxGetApp())->m_pMainWnd)->SetMessageText("");
+			((CFrameWnd*)((CRossDevApp*)AfxGetApp())->m_pMainWnd)->SetMessageText(_T(""));
 			GlobalOpenReport(m_strMinusListReport,
 				"List of all lemmas that were not found in the dictionary");
 
@@ -464,7 +464,7 @@ void CRossDevApp::OnSemAn()
 {
 	if (m_OnlyRoss)
 	{
-		AfxMessageBox("Seman is disabled because of switch  -onlyross ");
+		AfxMessageBox(_T("Seman is disabled because of switch  -onlyross "));
 		return;
 	};
 
@@ -502,14 +502,14 @@ void CRossDevApp::OnSemAn()
 	}
 	catch (CExpc& c)
 	{
-		AfxMessageBox(c.what());
+		AfxMessageBox(_U16(c.what()));
 		delete pDocument;
 		return;
 
 	}
 	catch (...)
 	{
-		AfxMessageBox("Cannot create Semantic Structure Window");
+		AfxMessageBox(_U16("Cannot create Semantic Structure Window"));
 		delete pDocument;
 		return;
 	};
@@ -519,11 +519,11 @@ void CRossDevApp::OnSemAn()
 void CRossDevApp::AddToRecentFileList(LPCTSTR lpszPathName)
 {
 	// TODO: Add your specialized code here and/or call the base class
-	if (strlen(lpszPathName) < 4) return;
-	char s[4];
+	if (lstrlen(lpszPathName) < 4) return;
+	TCHAR s[4];
 	s[3] = 0;
-	strcpy(s, lpszPathName + strlen(lpszPathName) - 3);
-	if (strcmp(s, "rcf")) return;
+	lstrcpy(s, lpszPathName + lstrlen(lpszPathName) - 3);
+	if (lstrcmp(s, _T("rcf"))) return;
 
 	CWinApp::AddToRecentFileList(lpszPathName);
 }
@@ -555,7 +555,7 @@ bool  FocusSemanWindow()
 	}
 	catch (...)
 	{
-		AfxMessageBox("Cannot find seman");
+		AfxMessageBox(_T("Cannot find seman"));
 		return false;
 	}
 	return true;
@@ -585,37 +585,21 @@ void CRossDevApp::OnMinimizeAllDicts()
 }
 
 
-CString CRossDevApp::GetNormalizedRossPath(DictTypeEnum RossType) const
-{
-	CAllRossesHolder* Trans = m_SemBuilder.m_RusStr.m_pData;
-	const CString _strPathName = Trans->GetRossPath(RossType).c_str();
-	CString strPathName = _strPathName;
-	CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
-	strPathName.MakeLower();
-	assert(pRossDocTemplate);
-	strPathName.Replace('/', '\\');
-	return strPathName;
-}
 
-CRossDoc* CRossDevApp::FindRossDoc(DictTypeEnum RossType)
+CRossDoc* CRossDevApp::FindRossDoc(DictTypeEnum rossType)
 {
-	CString strPathName = GetNormalizedRossPath(RossType);
-
 	CDocTemplate* pRossDocTemplate = GetRossDocTemplate();
 	assert(pRossDocTemplate);
 
-	CDocument* pDoc;
 	POSITION pos = pRossDocTemplate->GetFirstDocPosition();
 	while (pos)
 	{
-		pDoc = pRossDocTemplate->GetNextDoc(pos);
-		CString strPathNameDoc = pDoc->GetPathName();
-		strPathNameDoc.MakeLower();
-		if (strPathNameDoc == strPathName)
-		{
-			return (CRossDoc*)pDoc;
+		auto pDoc = dynamic_cast<CRossDoc*>(pRossDocTemplate->GetNextDoc(pos));
+		if (pDoc != nullptr) {
+			if (pDoc->GetRossType() == rossType) {
+				return pDoc;
+			}
 		}
 	}
-
-	return 0;
+	return nullptr;
 }

@@ -272,11 +272,11 @@ std::string  CSemanticStructure::GetNodeStr(const CSemNode& N, size_t MaxLength)
 	std::string S;
 	if (N.m_NodeType == Copul) return "Copul";
 	if (N.m_NodeType == ModalCopul) return "ModalCopul";
-	if (N.m_NodeType == SJA) return _R("СЯ");
+	if (N.m_NodeType == SJA) return "СЯ";
 	if (N.m_NodeType == Situat) return "SIT";
 
 	for (size_t i = 0; i < N.GetWordsSize(); i++)
-		if (!N.GetWord(i).IsQuoteMark())
+		if (N.GetWord(i).GetWord() != "\"")
 			S = S + GetInterfaceWordStr(&N, i) + std::string(" ");
 
 	Trim(S);
@@ -311,12 +311,12 @@ std::string  CSemanticStructure::GetNodeLemStr(size_t NodeNo) const
 	std::string S;
 	for (size_t i = 0; i < N.GetWordsSize(); i++)
 	{
-		if (!ispunct((BYTE)N.GetWord(i).m_Word[0]))
+		if (!ispunct((BYTE)N.GetWord(i).GetWord()[0]))
 		{
 			S = S + N.GetWord(i).m_Lemma + std::string(" ");
 		}
 		else
-			S = S + N.GetWord(i).m_Word + std::string(" ");
+			S = S + N.GetWord(i).GetWord() + std::string(" ");
 
 		if (!N.GetWord(i).m_NumeralPrefix.empty())
 			S += "(NumeralPrefix = " + N.GetWord(i).m_NumeralPrefix + ") ";

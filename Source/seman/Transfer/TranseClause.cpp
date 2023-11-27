@@ -16,7 +16,7 @@
 #include "StdAfx.h"
 
 const int AntecWordsCount = 8;
-std::string g_strAntecWords[AntecWordsCount] = {_R("ВСЕ"), _R("КТО-НИБУДЬ"), _R("КТО-ТО"), _R("ОДИН"), _R("КАЖДЫЙ"), _R("ТОТ"), _R("ТО"), _R("ЧТО-НИБУДЬ")};
+std::string g_strAntecWords[AntecWordsCount] = {"ВСЕ", "КТО-НИБУДЬ", "КТО-ТО", "ОДИН", "КАЖДЫЙ", "ТОТ", "ТО", "ЧТО-НИБУДЬ"};
 
 
 #define _SWITCH(X) std::string __switch_val = X;
@@ -54,15 +54,15 @@ EClauseRelsType CEngSemStructure::GetClauseRelType(int iRel)
 	if (rusSourceNode.m_MainWordNo != -1)
 	{
 
-		if(			rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == _R("КОТОРЫЙ") 
+		if(			rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == "КОТОРЫЙ" 
 				&&	semRel.m_Valency.m_RelationStr == "THESAME" )			
 			return Kotoryj;
 
-		if(		rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma  == _R("КАК") 
+		if(		rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma  == "КАК" 
 			&& semRel.m_Valency.m_RelationStr == "THESAME" )			
 			return  Kak;
 
-		if( rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == _R("ЛИ") )
+		if( rusSourceNode.GetWord(rusSourceNode.m_MainWordNo).m_Lemma == "ЛИ" )
 			return Li;
 	};
 
@@ -76,11 +76,11 @@ EClauseRelsType CEngSemStructure::GetClauseRelType(int iRel)
 		return Participle;
 
 	if( rusTargetNode.m_MainWordNo!=-1 &&
-		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma == _R("КАКОЙ") )
+		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma == "КАКОЙ" )
 		return Kakoj;
 
 	if( rusTargetNode.m_MainWordNo!=-1 &&
-		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma  == _R("КАК"))
+		rusTargetNode.GetWord(rusTargetNode.m_MainWordNo).m_Lemma  == "КАК")
 		return  Kak;
 
 	if( IsChtoOrKto(semRel.m_TargetNodeNo) || IsChtoOrKto(semRel.m_SourceNodeNo) )
@@ -401,14 +401,14 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 	bool bDelNode = false;
 	
 	if(	(iAntecRusNode != -1) &&
-		(	( rusNode.GetWord(0).m_Lemma == _R("ЧТО")) ||
-			( rusNode.GetWord(0).m_Lemma == _R("КТО")) ))
+		(	( rusNode.GetWord(0).m_Lemma == "ЧТО") ||
+			( rusNode.GetWord(0).m_Lemma == "КТО") ))
 	{
 		const CSemNode& rusAntecNode = RusStr.GetNode(iAntecRusNode);
 		std::string strAntecWord = rusAntecNode.GetWord(0).m_Lemma;
-		if( rusNode.GetWord(0).m_Lemma == _R("ЧТО")) 
+		if( rusNode.GetWord(0).m_Lemma == "ЧТО") 
 		{
-			if( strAntecWord == _R("ТОТ") )
+			if( strAntecWord == "ТОТ" )
 			{
 				m_Relations.erase(m_Relations.begin() + iRelNum);
 				std::vector<long> inRels;
@@ -427,11 +427,11 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 		} 
 		else
 		{
-			if( rusNode.GetWord(0).m_Lemma == _R("КТО"))
+			if( rusNode.GetWord(0).m_Lemma == "КТО")
 			{
 				_SWITCH(strAntecWord)
 				{
-					_CASE(_R("ТОТ"))
+					_CASE("ТОТ")
 					{		
 						
 						CEngSemNode newNode;
@@ -445,7 +445,7 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 						m_Nodes[iAntecEngNode] = newNode;
 					}
 
-					_CASE(_R("ВЕСЬ"))
+					_CASE("ВЕСЬ")
 					{
 						CEngSemNode newNode;
 						CreateSimpleEnglNodeByOldNode("everybody", newNode, 0, true, m_Nodes[iAntecEngNode]);					
@@ -454,7 +454,7 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 						m_Nodes[iAntecEngNode] = newNode;
 					}
 
-					_CASE(_R("КАЖДЫЙ"))
+					_CASE("КАЖДЫЙ")
 					{
 						CEngSemNode newNode;
 						CreateSimpleEnglNodeByOldNode("everyone", newNode, 0, true, m_Nodes[iAntecEngNode]);					
@@ -474,16 +474,16 @@ void CEngSemStructure::ClauseRelRule_ChtoKtoAsConjWords(int iRelNum)
 
 	_SWITCH(rusNode.GetWord(0).m_Lemma)
 	{
-		_CASE(_R("ЧТО"))
+		_CASE("ЧТО")
 		{			
 			engNode.m_Words[0].m_Lemma = "what";
-			engNode.m_Words[0].m_Word = "what";
+			engNode.m_Words[0].SetWord("what");
 		}
 
-		_CASE(_R("КТО"))
+		_CASE("КТО")
 		{
 			engNode.m_Words[0].m_Lemma = "who";
-			engNode.m_Words[0].m_Word = "who";			
+			engNode.m_Words[0].SetWord("who");
 		}
 	}
 

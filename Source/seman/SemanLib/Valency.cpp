@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "Valency.h"
-#include "RossHolder.h"
+#include "struct_dict_holder.h"
 
 CValency::CValency  () 
 {
@@ -20,11 +20,11 @@ CValency::CValency  ()
 };
 
 
-CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossHolder* Ross, uint16_t UnitNo)
+CValency  :: CValency  (const TCortege C, const CStructDictHolder* Ross, uint16_t UnitNo)
 {
-	m_Direction  =  (C.GetItem(1) ==	MainWordVarNo) ? C_A : A_C;
+	m_Direction  =  (C.GetItem(1) == Ross->SelfLabelNo) ? C_A : A_C;
 	m_RelationStr	= Ross->GetDomItemStrWrapper(C.GetItem(0));
-	bool leaf_item_no = (m_Direction == A_C) ? 1 : 2;
+	BYTE leaf_item_no = (m_Direction == A_C) ? 1 : 2;
 	std::string S = Ross->GetDomItemStrWrapper(C.GetItem(leaf_item_no));
 	assert ( S.length() >	1 );
 	assert(isdigit ((unsigned	char)S[1]) );
@@ -44,7 +44,7 @@ CValency  :: CValency  (const TCortege C, const	long MainWordVarNo,	const CRossH
 	m_RelationId = -1;
 };
 
-CValency::CValency  (std::string  RelationStr, Valency_Direction Direction, const CRossHolder* Ross, BYTE LeafId, BYTE BracketLeafId, uint16_t UnitNo)
+CValency::CValency  (std::string  RelationStr, Valency_Direction Direction, const CStructDictHolder* Ross, BYTE LeafId, BYTE BracketLeafId, uint16_t UnitNo)
 {
 	m_RelationStr = RelationStr;
 	m_Direction = Direction;
