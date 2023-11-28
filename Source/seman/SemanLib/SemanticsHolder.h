@@ -653,7 +653,6 @@ class CSemanticsHolder  : public CAllRossesHolder
 	
 
 	DictTypeEnum	IsRegisteredRoss(std::string FileName) const;
-	std::string		GetRossPath(DictTypeEnum RossId)  const;
 
 };
 

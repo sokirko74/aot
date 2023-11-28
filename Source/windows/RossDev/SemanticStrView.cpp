@@ -626,7 +626,7 @@ int Update    (ClientData clienData,
 void CSemanticStrView::OpenRossDocIfNeeded(DictTypeEnum RossType)
 {
 	CAllRossesHolder* Trans = ((CRossDevApp*)AfxGetApp())->m_SemBuilder.m_RusStr.m_pData;
-	std::string dir = Trans->GetRossPath(RossType).c_str();
+	std::string dir = GetRossPath(RossType).c_str();
 	std::string path = (fs::path(dir) / "config.rcf").string();
 	try
 	{

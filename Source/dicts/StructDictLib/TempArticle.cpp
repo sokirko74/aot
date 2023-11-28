@@ -38,10 +38,10 @@ const TCortege& CTempArticle::GetRossCortege(size_t i) const
 size_t CTempArticle::GetCortegesSize() const
 {
 	if (m_ReadOnly)
-		if ((m_UnitNo != ErrUnitNo) && (m_pRoss->m_Units[m_UnitNo].HasEmptyArticle()))
+		if ((m_UnitNo != ErrUnitNo) && (m_pRoss->GetEntries()[m_UnitNo].HasEmptyArticle()))
 			return 0;
 		else
-			return m_pRoss->m_Units[m_UnitNo].m_LastCortegeNo - m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo + 1;
+			return m_pRoss->GetEntries()[m_UnitNo].m_LastCortegeNo - m_pRoss->GetEntries()[m_UnitNo].m_StartCortegeNo + 1;
 	else
 		return _GetCortegesSize();
 };
@@ -50,7 +50,7 @@ size_t CTempArticle::GetCortegesSize() const
 const TCortege& CTempArticle::GetCortege(size_t i)  const
 {
 	if (m_ReadOnly)
-		return GetRossCortege(m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo + i);
+		return GetRossCortege(m_pRoss->GetEntries()[m_UnitNo].m_StartCortegeNo + i);
 	else
 		return TCortegeContainer::GetCortege(i);
 };
@@ -544,13 +544,13 @@ void CTempArticle::ReadFromDictionary(uint16_t UnitNo, bool VisualOrder, bool Re
 	m_UnitNo = UnitNo;
 	m_ReadOnly = ReadOnly;
 	ClearCorteges();
-	const CStructEntry& U = m_pRoss->GetUnits()[UnitNo];
+	const CStructEntry& U = m_pRoss->GetEntries()[UnitNo];
 	m_EntryStr = U.GetEntryStr();
 	m_MeanNum = U.m_MeanNum;
 
 	if (!m_ReadOnly)
-		if (!m_pRoss->GetUnits()[UnitNo].HasEmptyArticle())
-			for (int i = m_pRoss->GetUnits()[UnitNo].m_StartCortegeNo; i <= m_pRoss->GetUnits()[UnitNo].m_LastCortegeNo; i++)
+		if (!m_pRoss->GetEntries()[UnitNo].HasEmptyArticle())
+			for (int i = m_pRoss->GetEntries()[UnitNo].m_StartCortegeNo; i <= m_pRoss->GetEntries()[UnitNo].m_LastCortegeNo; i++)
 				if (VisualOrder)
 					PutCortegeOnTheRigthPosition(GetRossCortege(i));
 				else
@@ -657,25 +657,8 @@ void  CTempArticle::WriteToDictionary()
 	{
 		throw CExpc("Article is readonly");
 	};
-
 	CheckCortegeVector();
-
-	std::vector<CStructEntry>& Units = m_pRoss->m_Units;
-
-	if (!m_pRoss->m_Units[m_UnitNo].HasEmptyArticle())
-		m_pRoss->DelCorteges(Units[m_UnitNo].m_StartCortegeNo, Units[m_UnitNo].m_LastCortegeNo + 1);
-
-	Units[m_UnitNo].m_StartCortegeNo = m_pRoss->_GetCortegesSize();
-
-	m_pRoss->ConcatOtherContainer(*this);
-
-
-	Units[m_UnitNo].m_LastCortegeNo = m_pRoss->_GetCortegesSize() - 1;
-
-	if (GetCortegesSize() == 0)
-	{
-		Units[m_UnitNo].MakeEmpty();
-	};
+	m_pRoss->WriteUnitCorteges(m_UnitNo, *this);
 }
 
 bool CTempArticle::IsModified() const
@@ -684,10 +667,10 @@ bool CTempArticle::IsModified() const
 	CTempArticle saved(m_pRoss);
 	saved.m_pRoss = m_pRoss;
 
-	int StartPos = m_pRoss->m_Units[m_UnitNo].m_StartCortegeNo;
-	int EndPos = m_pRoss->m_Units[m_UnitNo].m_LastCortegeNo;
+	int StartPos = m_pRoss->GetEntries()[m_UnitNo].m_StartCortegeNo;
+	int EndPos = m_pRoss->GetEntries()[m_UnitNo].m_LastCortegeNo;
 
-	if (!m_pRoss->m_Units[m_UnitNo].HasEmptyArticle())
+	if (!m_pRoss->GetEntries()[m_UnitNo].HasEmptyArticle())
 		for (size_t i = StartPos; i <= EndPos; i++)
 		{
 			saved._AddCortege(m_pRoss->GetCortege(i));

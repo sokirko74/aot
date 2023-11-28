@@ -202,20 +202,11 @@ std::string HTML::GetTextFromHTMLBuffer(const char* Buffer, size_t BufferLen)
 
 					if (NotTextTags.empty())
 					{
-						if(cur_amp == "amp")       { result += "&"; addOffset(old_offset); }
-						else if(cur_amp == "lt")   { result += "<"; addOffset(old_offset); }
-						else if(cur_amp == "gt")   { result += ">"; addOffset(old_offset); }
-						else if(cur_amp == "nbsp") { result += " "; addOffset(old_offset); }
-						else if(cur_amp == "ouml") { result += ouml; addOffset(old_offset); }
-						else if(cur_amp == "auml") { result += auml; addOffset(old_offset); }
-						else if(cur_amp == "uuml") { result += uuml; addOffset(old_offset); }
-						else if(cur_amp == "Ouml") { result += Ouml; addOffset(old_offset); }
-						else if(cur_amp == "Auml") { result += Auml; addOffset(old_offset); }
-						else if(cur_amp == "Uuml") { result += Uuml; addOffset(old_offset); }
-						else if(cur_amp == "szlig") { result += szlig; addOffset(old_offset); }
-						else if(cur_amp == "agrave") { result += agrave; addOffset(old_offset); }
-						else if(cur_amp == "egrave") { result += egrave; addOffset(old_offset); }
-						else if(cur_amp == "eacute") { result += eacute; addOffset(old_offset); }
+						BYTE ch = convert_html_entity_to_char(cur_amp);
+						if (ch != 0) {
+							result += ch;
+							addOffset(old_offset);
+						}
 					}
 					state = normal;
 				}

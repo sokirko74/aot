@@ -24,27 +24,23 @@ CFreqDict				CompFreq;
 CFreqDict				FinFreq;
 
 
-void string_to_id(const char *str, DwordVector &ids, const CMorphanHolder& Holder)
+void string_to_id(const CMorphanHolder& Holder, const char *str, DwordVector &ids)
 {
-	bool is_capital = is_russian_upper((BYTE)str[0]) != 0;
-	if (is_capital)
-	{
-		fprintf (stderr,"First char is uppercase\n");
-	}
+	bool is_capital = FirstLetterIsUpper(str);
+	std::string s8 = convert_from_utf8(str, Holder.m_CurrentLanguage);
 	std::vector<CFormInfo> ParadigmCollection;
-	std::string input = str;
-	if (!Holder.m_pLemmatizer->CreateParadigmCollection(false, input, is_capital, false, ParadigmCollection))
+	if (!Holder.m_pLemmatizer->CreateParadigmCollection(false, s8, is_capital, false, ParadigmCollection))
 	{
 		std::cerr << "Catch " << str<< std::endl;
 		return;
 	}
 	if(ParadigmCollection.empty())
 		std::cerr << "No paradigm" << std::endl;
-	for(int i = 0; i < ParadigmCollection.size(); i++){
-		const CFormInfo& Paradigm = ParadigmCollection[i];
-		if(!Paradigm.m_bFound) continue;
 
-		ids.push_back(Paradigm.GetParadigmId());
+	for(auto& p: ParadigmCollection){
+		if (p.m_bFound) {
+			ids.push_back(p.GetParadigmId());
+		}
 	}
 }
 
@@ -100,7 +96,6 @@ int main()
 			Direct = true;
 		else {
 			Direct = false;
-			alt = convert_from_utf8(alt.c_str(), morphRussian);
 		}
 		{
 			std::string s(alt);
@@ -127,7 +122,7 @@ int main()
 		DwordVector ids;
 		const CMorphanHolder& Holder =  (Direct ? EnglishHolder : RussianHolder);
 		const CMorphanHolder& TransHolder =  (Direct ?  RussianHolder : EnglishHolder);
-		string_to_id(alt.c_str(), ids, Holder);
+		string_to_id(Holder, alt.c_str(), ids);
 
 		for(i = 0; i < ids.size(); i++)
 		{

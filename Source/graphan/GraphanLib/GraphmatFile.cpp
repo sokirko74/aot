@@ -237,6 +237,12 @@ void CGraphmatFile::LoadStringToGraphan(const std::string& szBuffer)
 	GraphmatMain();
 }
 
+static bool IsHtmlFile(const std::string& FileName)
+{
+	std::string r = FileName;
+	MakeLowerUtf8(r);
+	return endswith(r, ".htm") || endswith(r, ".html") || endswith(r, ".shtm");
+}
 
 void CGraphmatFile :: LoadFileToGraphan (const std::string&  fileName)
 {

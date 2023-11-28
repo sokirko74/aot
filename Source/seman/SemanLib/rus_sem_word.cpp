@@ -65,6 +65,8 @@ bool CRusSemWord::IsEqualMorph(const CRusSemWord& W) 	const
 		&& (m_Poses == W.m_Poses);
 };
 
+const std::locale c_locale("C");
+
 void CRusSemWord::InitWordFeatures(const CSentence* piSent, long WordNo) {
     const CSynWord& W = piSent->m_Words[WordNo];
     SetWord(W.m_strWord);
@@ -96,8 +98,9 @@ void CRusSemWord::InitWordFeatures(const CSentence* piSent, long WordNo) {
 римские цифры определяются так: у них должен быть приписана графета ЦК
 и первый символ должен быть латиницей
 */
+    
     if (m_ArabicNumber)
-        if (is_english_alpha((BYTE)GetWord()[0])) {
+        if (std::isalpha((BYTE)GetWord()[0], c_locale)) {
             m_bRomanNumber = true;
             /*
              Римские цифры могут писаться большими или маленькими буквами,

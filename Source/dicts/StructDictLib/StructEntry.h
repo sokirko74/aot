@@ -13,7 +13,7 @@ public:
 	BYTE	m_MeanNum;
 	int		m_StartCortegeNo;
 	int		m_LastCortegeNo;
-	bool	m_bSelected;
+	mutable bool	m_bSelected; //runtime, todo: move it to RossDev
 
 
 	CStructEntry(std::string entry_str="", int _MeanNum = 0);

@@ -132,7 +132,7 @@ std::vector<CBigramAndFreq> CBigrams::GetBigrams(std::string Word, int MinBigram
     std::vector<CBigramAndFreq> Result;
     if (!m_Bigrams) return Result;
     if (!m_BigramsRev) return Result;
-    EngRusMakeUpper(Word);
+    MakeUpperUtf8(Word);
     // find word in the index
     std::vector<CBigramsWordInfo>::const_iterator it = lower_bound(m_Word2Infos.begin(), m_Word2Infos.end(), Word,
                                                               IsLessBigramsWordInfo());

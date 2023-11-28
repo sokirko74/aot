@@ -43,7 +43,7 @@ SEngEquiv CEngSemStructure::GetV0Value(const CSemNode& rusActant)
 		LexFunIndexes.m_LexFunValue.m_MeanNum = GetRoss(type)->GetUnitMeanNum(RusActUnitNo);
 
 	LexFunIndexes.m_LexFunValue.m_UnitStr = rusActant.GetWord(rusActant.m_MainWordNo).m_Lemma;
-	EngRusMakeLower(LexFunIndexes.m_LexFunValue.m_UnitStr);
+	MakeLowerUtf8(LexFunIndexes.m_LexFunValue.m_UnitStr);
 	LexFunIndexes.m_LexFun = "S0";
 	std::vector<SLexFunIndexes>::const_iterator it;
 	

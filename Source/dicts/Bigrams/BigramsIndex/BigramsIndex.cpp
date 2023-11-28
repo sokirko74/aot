@@ -59,7 +59,7 @@ std::vector<CWordInfo> ReadWordFreqs(std::string WordFreqFileName) {
         CWordInfo I;
         I.m_Freq = freq;
         I.m_WordStr = w;
-        EngRusMakeUpper(I.m_WordStr);
+        MakeUpperUtf8(I.m_WordStr);
         if (!wordInfos.empty())
             if (!(wordInfos.back() < w)) {
                 throw CExpc("Wrong  position  for word \"%s\" is found\n", w);
@@ -91,8 +91,8 @@ void ReadBigrams(std::string BigramsFileName, std::vector<CWordInfo> &wordInfos)
                     BigramsFileName.c_str(), linesCount, buffer, res);
             continue;
         }
-        EngRusMakeUpper(w1);
-        EngRusMakeUpper(w2);
+        MakeUpperUtf8(w1);
+        MakeUpperUtf8(w2);
         auto curr_it = lower_bound(wordInfos.begin(), wordInfos.end(), w1);
         if (curr_it == wordInfos.end()) {
             throw CExpc("Cannot find word \"%s\" in at line %zu\n", w1, linesCount);

@@ -506,7 +506,7 @@ void UnitDisruptedConjunctions(CRusSemStructure& R, long ClauseNo)
 			R.m_Nodes[i].DelAllInterps();
 
 			std::string UnitStr = W.m_Lemma;
-			EngRusMakeLower(UnitStr);
+			MakeLowerUtf8(UnitStr);
 			uint16_t UnitNo = R.GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
 			if (UnitNo != ErrUnitNo)
 				for (long j = UnitNo; UnitStr == R.GetRoss(Ross)->GetEntryStr(j); j++)

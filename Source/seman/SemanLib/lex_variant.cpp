@@ -143,7 +143,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
                 (W.m_Poses & (1 << PARTICIPLE_SHORT))
                 ) {
             UnitStr = GetNormOfParticiple(W);
-            EngRusMakeLower(UnitStr);
+            MakeLowerUtf8(UnitStr);
             UnitNo = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
             /*
             (1)	Там	были лица, не заинтересованные в нормализации обстановки
@@ -160,7 +160,7 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
 
         if (UnitNo == ErrUnitNo) {
             UnitStr = W.m_Lemma;
-            EngRusMakeLower(UnitStr);
+            MakeLowerUtf8(UnitStr);
         };
 
         bool bHasSuffixFemine = true;
@@ -175,8 +175,8 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
         if (UnitNo == ErrUnitNo)
             for (long i = 0; i < W.m_WordEquals.size(); i++) {
                 UnitStr = W.m_WordEquals[i];
-                EngRusMakeLower(UnitStr);
-                UnitNo = GetRossHolder(Ross)->LocateUnit(convert_to_utf8(UnitStr, morphRussian).c_str(), 1);
+                MakeLowerUtf8(UnitStr);
+                UnitNo = GetRossHolder(Ross)->LocateUnit(UnitStr.c_str(), 1);
                 if (UnitNo != ErrUnitNo) break;
             };
 
@@ -313,6 +313,10 @@ void CRusSemStructure::InitInterps(CRusSemWord &W, bool PassiveForm, long Clause
         DelProhibitedInterps(UnitStr, N);
 
     }
+    catch (std::exception& e) {
+        LOGE << e.what() << " for word " << W.GetWord();
+        throw;
+    }
     catch (...) {
         throw CExpc("Bad dict interpretation");
     };
@@ -329,10 +333,6 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     CSynHomonym H(const_cast<CSentence *>(m_piSent));
     GetHomonym(ClauseNo, WordNo, H);
 
-
-    std::string S = H.GetLemma();
-
-    EngRusMakeLower(S);
     unsigned short UnitNo = ErrUnitNo;
     CRusSemWord SemWord(WordNo, H.GetLemma());
     SemWord.m_SynWordNo = WordNo;
@@ -437,7 +437,7 @@ CRusSemNode CRusSemStructure::CreatePrimitiveNode(size_t WordNo) {
     };
 
 
-    S = SemWord.GetWord();
+    std::string S = SemWord.GetWord();
     //  создаем интерпретацию для наречий типа "по-английски", "по-человечески"
     if (startswith(S, "ПО-")
         &&

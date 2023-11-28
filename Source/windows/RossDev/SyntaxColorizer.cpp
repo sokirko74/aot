@@ -22,11 +22,12 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
+inline bool is_a_token_part(int i) {
+	return std::isdigit(i) > 0 || std::isalpha(i) > 0 || i > 127;
+}
+
 CSyntaxColorizer::CSyntaxColorizer()
 {
-	for (int i = 0; i < 256; i++)
-		Alphas[i] = is_alpha(i) || isdigit(i) || (i == '_');
-
 	m_cfDefault.dwMask = CFM_CHARSET | CFM_FACE | CFM_SIZE | CFM_OFFSET | CFM_COLOR;
 	m_cfDefault.dwMask ^= CFM_ITALIC ^ CFM_BOLD ^ CFM_STRIKEOUT ^ CFM_UNDERLINE;
 	m_cfDefault.dwEffects = 0;
@@ -72,7 +73,7 @@ void CSyntaxColorizer::Colorize(CRichEditCtrl *pCtrl, long nStartChar, long nEnd
 	for (long x = nStartChar; x < nEndChar; x++)
 	{
 		long end = x;
-		for (; ((end - x) < MaxKeyWordLen) &&  Alphas[(unsigned char) SourceText.GetAt(end) ]; end++)
+		for (; ((end - x) < MaxKeyWordLen) && is_a_token_part(SourceText.GetAt(end)); end++)
 			buffer[end - x] = SourceText.GetAt(end);
 
 		if (end == x) 
@@ -80,7 +81,7 @@ void CSyntaxColorizer::Colorize(CRichEditCtrl *pCtrl, long nStartChar, long nEnd
 
 		if ( (end - x) >= MaxKeyWordLen)
 		{
-			while (Alphas[(unsigned char) SourceText.GetAt(end) ])
+			while (is_a_token_part(SourceText.GetAt(end)))
 				end++;
 		}
 		else

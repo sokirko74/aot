@@ -11,12 +11,6 @@
 #include "TempArticle.h"
 
 
-
-
-//=========================================================
-//============           TRoss                 ============
-//=========================================================
-
 TRoss::TRoss() 
 {
 	m_bShouldSaveComments = false;
@@ -143,14 +137,15 @@ void   TRoss::ClearUnit(uint16_t UnitNo)
 
 
 
-void  TRoss::DelUnit(std::vector<CStructEntry>::iterator It)
+void  TRoss::DelUnit(uint16_t unit_no)
 {
-	if (!It->HasEmptyArticle())
-		DelCorteges(It->m_StartCortegeNo, It->m_LastCortegeNo + 1);
-	std::vector<TUnitComment>::iterator C = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(It->m_EntryId));
-	assert(C->m_EntryId == It->m_EntryId);
+	auto& unit = m_Units[unit_no];
+	if (!unit.HasEmptyArticle())
+		DelCorteges(unit.m_StartCortegeNo, unit.m_LastCortegeNo + 1);
+	auto C = lower_bound(m_UnitComments.begin(), m_UnitComments.end(), TUnitComment(unit.m_EntryId));
+	assert(C->m_EntryId == unit.m_EntryId);
 	m_UnitComments.erase(C);
-	m_Units.erase(It);
+	m_Units.erase(m_Units.begin() + unit_no);
 };
 
 
@@ -200,11 +195,39 @@ uint16_t    TRoss::InsertUnit(CStructEntry& T)
 	return res;
 };
 
-
 uint16_t   TRoss::InsertUnit(const char* EntryStr, BYTE MeanNum)
 {
 	return TRoss::InsertUnit(CStructEntry(EntryStr, MeanNum));
 }
+
+void TRoss::WriteUnitCorteges(uint16_t unit_no, const TCortegeContainer& corteges)
+{
+	auto& unit = m_Units[unit_no];
+
+	if (!unit.HasEmptyArticle())
+		DelCorteges(unit.m_StartCortegeNo, unit.m_LastCortegeNo + 1);
+
+	unit.m_StartCortegeNo = _GetCortegesSize();
+	ConcatOtherContainer(corteges);
+	unit.m_LastCortegeNo = _GetCortegesSize() - 1;
+	if (corteges._GetCortegesSize() == 0)
+	{
+		unit.MakeEmpty();
+	};
+
+}
+
+const std::vector<CStructEntry>& TRoss::GetEntries()
+{
+	return m_Units;
+};
+
+uint16_t    TRoss::UnitsLowerBound(const char* EntryStr)  const
+{
+	return lower_bound(m_Units.begin(), m_Units.end(), CStructEntry(EntryStr, 1)) - m_Units.begin();
+};
+
+
 
 inline size_t get_size_in_bytes(const tm& t)
 {
@@ -650,11 +673,6 @@ CDictionary::CDictionary() : TRoss()
 {
 }
 
-std::vector<CStructEntry>& CDictionary::GetUnits()
-{
-	return m_Units;
-};
-
 bool CDictionary::IsEmptyArticle(uint16_t UnitNo) const
 {
 	return m_Units[UnitNo].HasEmptyArticle();
@@ -908,7 +926,7 @@ void CDictionary::LoadAndExportDict(std::string folder, std::string fileName)
 
 void CDictionary::SetUnitCurrentTime(uint16_t UnitNo)
 {
-	TUnitComment* C = GetCommentsByUnitId(GetUnits()[UnitNo].m_EntryId);
+	TUnitComment* C = GetCommentsByUnitId(GetEntries()[UnitNo].m_EntryId);
 	C->modif_tm = RmlGetCurrentTime();
 }
 

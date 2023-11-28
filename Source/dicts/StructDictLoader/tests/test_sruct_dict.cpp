@@ -45,7 +45,7 @@ TEST_CASE("search_by_cortege") {
 	CHECK(!is_null(item_id2));
 
 	size_t count = 0;
-	for (auto& unit: D.GetUnits()) {
+	for (auto& unit: D.GetEntries()) {
 		for (size_t i = unit.m_StartCortegeNo; i <= unit.m_LastCortegeNo; ++i) {
 			auto& c = D.GetCortege(i);
 			if (c.GetItem(0) == item_id1 && c.GetItem(1) == item_id2) {

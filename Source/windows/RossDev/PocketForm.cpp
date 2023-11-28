@@ -201,10 +201,10 @@ void CPocketForm::OnButton2()
 // отобразить в пометы 
 void CPocketForm::OnButton3() 
 {
-	for (size_t i=0; i < m_PocketItems.size(); i++)
+	for (auto& item: m_PocketItems)
 	{
-		CRossDoc* RossDoc = m_PocketItems[i].m_pRossDoc;
-		RossDoc->GetRoss()->GetUnits()[m_PocketItems[i].m_UnitNo].m_bSelected =  true;
+		CRossDoc* RossDoc = item.m_pRossDoc;
+		RossDoc->GetRoss()->GetEntries()[item.m_UnitNo].m_bSelected =  true;
 	};
 	
 }

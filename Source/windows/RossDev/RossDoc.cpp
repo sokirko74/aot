@@ -27,7 +27,7 @@ END_MESSAGE_MAP()
 
 const char guest_user_name[] = "guest";
 
-CRossDoc::CRossDoc() : m_ExternalRossHolder(GetSemBuilder().m_RusStr.m_pData)
+CRossDoc::CRossDoc() : m_ExternalRossHolder(NoneRoss)
 {
 	m_Author = guest_user_name;
 	m_ReadOnly = true;
@@ -74,7 +74,7 @@ const CStructDictHolder*	CRossDoc::GetRossHolder() const
 
 std::string CRossDoc::GetLockFileName()  const
 {
-	return MakeFName(GetRossHolder()->m_DictPath,"lck").c_str();
+	return MakeFName(GetRossHolder()->GetDictPath(), "lck").c_str();
 }
 
 
@@ -217,7 +217,7 @@ void CRossDoc::SerializeInner(CArchive& ar)
 	{
 		
 		if (!GetRoss()->Save())
-			throw CExpc (Format ("Cannot save %s", GetRossHolder()->m_DictPath.c_str()));
+			throw CExpc (Format ("Cannot save %s", GetRossHolder()->GetDictPath().c_str()));
 
 	}
 	else
@@ -233,10 +233,7 @@ void CRossDoc::SerializeInner(CArchive& ar)
 		Trans->m_LastUpdateTime++;
 
 		m_RossId = Trans->GetRegisteredRossId(dict_directory);
-		GetRossHolder()->m_DictPath = dict_directory;
-		GetRossHolder()->m_LastUpdateTime =  Trans->m_LastUpdateTime;
-
-		GetRossHolder()->OpenRossHolder(dict_directory, false);
+		GetRossHolder()->LoadStructDict(dict_directory, false, Trans->m_LastUpdateTime);
 
 		if (   !m_ReadOnly && !m_DoNotLock	)
 			CreateLockFile(GetLockFileName());
@@ -319,7 +316,8 @@ void CRossDoc::SetModifiedFlag( BOOL bModified)
 	if (m_bSerialized)
 	{
 		CDocument::SetModifiedFlag(bModified);
-		GetRossHolder()->m_LastUpdateTime = ++GetSemBuilder().m_RusStr.m_pData->m_LastUpdateTime;
+		auto t = ++GetSemBuilder().m_RusStr.m_pData->m_LastUpdateTime;
+		GetRossHolder()->SetUpdateTime(t);
 	}
 };
 

@@ -43,8 +43,8 @@ int GetMorphSignPosition(const char* LineStr)
 	int LineLength= strlen(LineStr);
 	for (int i = 0; i < LineLength - 3; i++)
 	if( 		 ( (LineStr [i] == '+')			 || (LineStr [i] == '-') || (LineStr [i] == '?'))
-			&&	 ( is_alpha((BYTE)LineStr [i+1])  || (LineStr [i+1] == '?') )
-			&&	 ( is_alpha((BYTE)LineStr [i+2])  || (LineStr [i+2] == '?') )
+			&&	 (is_english_alpha((BYTE)LineStr [i+1])  || (LineStr [i+1] == '?') )
+			&&	 (is_english_alpha((BYTE)LineStr [i+2])  || (LineStr [i+2] == '?') )
 		)   
 		return i;
 
@@ -176,7 +176,7 @@ bool CPlmLine :: LoadPlmLineFromString (std::string LineStr, bool bStartLine, co
 
 	long i = 1; // the first char can be a space (if this line contains a homonym)
 	for (; i < LineStr.length(); i++)
-		if (!isspace((BYTE) LineStr[i]) == 0)
+		if (!isspace((BYTE) LineStr[i]))
 			break;
 
 	if (sscanf (LineStr.c_str()+i, "%i %i", &m_FilePosition, &m_TokenLengthInFile) != 2)
@@ -381,7 +381,7 @@ void	CPlmLine::SetWord(std::string s)
 {
 	m_Word = s;
 	m_UpperWord = s;
-	EngRusMakeUpper(m_UpperWord);
+	MakeUpperUtf8(m_UpperWord);
 };
 
 const std::string&  CPlmLine::GetWord() const

@@ -741,7 +741,7 @@ bool CRusSemStructure::TryClauseCHTOBY_GG(long ClauseRuleNo, long ClauseNo1, lon
 		if (Nodes2.size() != 2) return false;
 		long RootNodeNo2 = Nodes2[Nodes2.size() - 1];
 
-		EngRusMakeLower(ConjStr);
+		MakeLowerUtf8(ConjStr);
 		std::string SynFet1 = std::string(ConjStr) + std::string("+ГГ");
 		std::string SynFet2 = std::string(ConjStr) + std::string("+инф");
 		std::string SynFet3 = std::string(ConjStr) + std::string("+ГГ_прш");

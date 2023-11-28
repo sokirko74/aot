@@ -54,7 +54,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
-	afx_msg void OnBnClickedFixAccentBtn();
 	void			DoDataExchangeTypeGrammems(bool bSaveAndValidate);
 protected:
 	CButton		m_Ok;

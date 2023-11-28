@@ -113,7 +113,7 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
 
         for (i = 0; i < iSize; i++) {
             A.ReadFromDictionary(i, false, true);
-            const std::string& word = piRossDict->m_Units[i].GetEntryStr();
+            const std::string& word = piRossDict->GetEntries()[i].GetEntryStr();
             if (A1.IsPartOf(&A, true)) {
                 m_AdvAdj.add_lemma(word);
             }
@@ -128,7 +128,7 @@ void CRusSyntaxOpt::LoadFromRoss(CDictionary *piRossDict) {
         }
     }
     catch (...) {
-        std::string m = "Problems with ROSS, word : " + piRossDict->m_Units[i].GetEntryStr();
+        std::string m = "Problems with ROSS, word : " + piRossDict->GetEntries()[i].GetEntryStr();
         OutputErrorString(m);
     }
 }

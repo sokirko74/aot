@@ -658,7 +658,7 @@ void translate_helper::init_list_from_ross(const CStructDictHolder* RossHolder, 
 				)
 			{
 				std::string Item = RossHolder->GetRoss()->GetDomItemStr(i, 0);
-				EngRusMakeLower(Item);
+				MakeLowerUtf8(Item);
 				res.push_back(Item);
 			};
 }

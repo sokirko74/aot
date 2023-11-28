@@ -34,7 +34,7 @@ std::string get_field(CStructDictHolder*  RossHolder, uint16_t UnitNo, std::stri
 
 std::string tr_by_ross_simple(CStructDictHolder*  RossHolder, std::string UnitStr)
 {
-	EngRusMakeLower(UnitStr);
+	MakeLowerUtf8(UnitStr);
 	uint16_t UnitNo = RossHolder->GetRoss()->LocateUnit(UnitStr.c_str(), 1);
 	if(UnitNo == ErrUnitNo) return "";
 	return get_field(RossHolder,UnitNo, "ENG", 0, 0, ErrUChar);
@@ -109,7 +109,7 @@ std::string CEngSemStructure::time_tr_by_ross(long RusNodeNo, std::string &brack
 	else
 	if(RusNode.IsPrimitive()){
 		std::string word = RusNode.GetWord(0).m_Lemma;
-		EngRusMakeLower(word);
+		MakeLowerUtf8(word);
 
 		/*
 		 если есть числительное полу, тогда слово должно быть в единственном
@@ -210,7 +210,7 @@ bool  CEngSemStructure::translate_time_node ( int MainNodeNo)
 		MainNode.m_Words.resize(1);
 		MainNode.m_Words[0].SetWord(EngField);  
 		MainNode.m_Words[0].m_Lemma = EngField;  
-		EngRusMakeLower(MainNode.m_Words[0].m_Lemma);
+		MakeLowerUtf8(MainNode.m_Words[0].m_Lemma);
 		MainNode.m_bReached = true;  
 		MainNode.DelAllInterps();
 		return true;

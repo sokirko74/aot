@@ -399,10 +399,8 @@ void CRusSemStructure::FindConceptFetsFromArticles(long ClauseNo)
 							)
 						{
 							std::string S = RossDoc->GetDomItemStrWrapper(C.GetItem(0));
-							EngRusMakeUpper(S);
-							if ((S.length() > 0)
-								&& (S[0] == '#')
-								)
+							MakeUpperUtf8(S);
+							if (startswith(S, "#"))
 								ConceptStrs.push_back(S);
 						}
 					};

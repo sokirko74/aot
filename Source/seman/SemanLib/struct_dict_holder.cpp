@@ -2,26 +2,51 @@
 #include "struct_dict_holder.h"
 #include "morph_dict/common/utilit.h"
 
-CStructDictHolder::CStructDictHolder(CTranslatorHolder* TranslatorHolder)
+CStructDictHolder::CStructDictHolder(DictTypeEnum dictType)
 {
-	GetDictName() = "unknown";
 	m_LastUpdateTime = 0;
-	m_bOwnDictionary = true;
-	m_TranslatorHolder = TranslatorHolder;
+	m_DictType = dictType;
 };
+
+bool CStructDictHolder::HasBeenModified(long T) const
+{
+	return m_LastUpdateTime > T;
+};
+
+void CStructDictHolder::SetUpdateTime(long T) 
+{
+	m_LastUpdateTime = T;
+}
 
 CStructDictHolder::~CStructDictHolder()
 {
 
 };
 
-std::string  CStructDictHolder::GetDictName() {
+std::string  CStructDictHolder::GetDictName() const {
 	return m_Ross.GetDictName();
 }
 
-bool CStructDictHolder::OpenRossHolder(const std::string directory, bool bDontLoadExamples)
+CDictionary* CStructDictHolder::GetRoss() { 
+	return &m_Ross; 
+}
+
+DictTypeEnum CStructDictHolder::GetRossType() const {
+	return m_DictType; 
+}
+
+const CDictionary* CStructDictHolder::GetRoss() const {
+	return &m_Ross; 
+}
+
+const std::string& CStructDictHolder::GetDictPath() const {
+	return m_Ross.GetConfig().DictFolder; 
+}
+
+
+bool CStructDictHolder::LoadStructDict(const std::string directory, bool bDontLoadExamples, long last_update_time)
 {
-	m_LastUpdateTime = 1;
+	m_LastUpdateTime = last_update_time;
 	m_Ross.Load(directory.c_str());
 	if (!bDontLoadExamples)
 		if (!m_Ross.ReadUnitComments())
@@ -106,36 +131,37 @@ dom_item_id_t CStructDictHolder::GetItemNoByItemStr(const std::string& ItemStr, 
 void CStructDictHolder::InitDomainsConsts()
 {
 	SelfLabelNo = GetItemNoByItemStr1("C", ActDomNo);
-
-	AdvAdjMainNo = GetItemNoByItemStr("НАР:нар_опр", "D_GF_MAIN");
-	NounMainNo = GetItemNoByItemStr("СУЩ:ИГ", "D_GF_MAIN");
-	VerbMainNo = GetItemNoByItemStr("ГЛ:ГГ", "D_GF_MAIN");
-	AdjMainNo = GetItemNoByItemStr("ПРИЛ:с_опр", "D_GF_MAIN");
-	PronMainNo = GetItemNoByItemStr("МЕСТОИМ:с_опр", "D_GF_MAIN");
-	ClauseGrpNo = GetItemNoByItemStr("ПРИД_ПР", "D_GROUPS");
-	NounGrpNo = GetItemNoByItemStr("ИГ", "D_GROUPS");
-	AdverbialGrpNo = GetItemNoByItemStr("ОБСТ_ГР", "D_GROUPS");
-	VerbGrpNo = GetItemNoByItemStr("ГГ", "D_GROUPS");
-	CopulNo = GetItemNoByItemStr("Copul", "D_GROUPS");
-	ModalCopulNo = GetItemNoByItemStr("ModalCopul", "D_GROUPS");
+	bool is_english = GetDictLanguage(m_DictType) == morphEnglish;
+	bool is_russian = GetDictLanguage(m_DictType) == morphRussian;
+	AdvAdjMainNo = GetItemNoByItemStr("НАР:нар_опр", "D_GF_MAIN", is_russian);
+	NounMainNo = GetItemNoByItemStr("СУЩ:ИГ", "D_GF_MAIN", is_russian);
+	VerbMainNo = GetItemNoByItemStr("ГЛ:ГГ", "D_GF_MAIN", is_russian);
+	AdjMainNo = GetItemNoByItemStr("ПРИЛ:с_опр", "D_GF_MAIN", is_russian);
+	PronMainNo = GetItemNoByItemStr("МЕСТОИМ:с_опр", "D_GF_MAIN", is_russian);
+	ClauseGrpNo = GetItemNoByItemStr("ПРИД_ПР", "D_GROUPS", false);
+	NounGrpNo = GetItemNoByItemStr("ИГ", "D_GROUPS", is_russian);
+	AdverbialGrpNo = GetItemNoByItemStr("ОБСТ_ГР", "D_GROUPS", false);
+	VerbGrpNo = GetItemNoByItemStr("ГГ", "D_GROUPS", is_russian);
+	CopulNo = GetItemNoByItemStr("Copul", "D_GROUPS", false);
+	ModalCopulNo = GetItemNoByItemStr("ModalCopul", "D_GROUPS", false);
 	NumerComplexNo = GetItemNoByItemStr("ЦК", "D_GRAFEM_DESC");
 	NumerSymbComplexNo = GetItemNoByItemStr("ЦБК", "D_GRAFEM_DESC");
 	HyphenNo = GetItemNoByItemStr("ДЕФ", "D_GRAFEM_DESC");
-	AdvNo = GetItemNoByItemStr("НАР", "D_PART_OF_SPEECH");
-	AdjNo = GetItemNoByItemStr("ПРИЛ", "D_PART_OF_SPEECH");
-	NumeralNo = GetItemNoByItemStr("ЧИСЛ", "D_PART_OF_SPEECH");
-	PossPronNo = GetItemNoByItemStr("ПРИТ_МЕСТМ", "D_PART_OF_SPEECH");
+	AdvNo = GetItemNoByItemStr("НАР", "D_PART_OF_SPEECH", false);
+	AdjNo = GetItemNoByItemStr("ПРИЛ", "D_PART_OF_SPEECH", false);
+	NumeralNo = GetItemNoByItemStr("ЧИСЛ", "D_PART_OF_SPEECH", false);
+	PossPronNo = GetItemNoByItemStr("ПРИТ_МЕСТМ", "D_PART_OF_SPEECH", false);
 
-	NominativeNo = GetItemNoByItemStr1("И", CaseDomNo);
-	InstrumentalisNo = GetItemNoByItemStr1("Т", CaseDomNo);
-	GenitivNo = GetItemNoByItemStr1("Р", CaseDomNo);
-	DativNo = GetItemNoByItemStr1("Д", CaseDomNo);
-	VocativNo = GetItemNoByItemStr1("П", CaseDomNo);
-	AccusativNo = GetItemNoByItemStr1("В", CaseDomNo);
+	NominativeNo = GetItemNoByItemStr1("И", CaseDomNo, is_russian);
+	InstrumentalisNo = GetItemNoByItemStr1("Т", CaseDomNo, is_russian);
+	GenitivNo = GetItemNoByItemStr1("Р", CaseDomNo, is_russian);
+	DativNo = GetItemNoByItemStr1("Д", CaseDomNo, is_russian);
+	VocativNo = GetItemNoByItemStr1("П", CaseDomNo, is_russian);
+	AccusativNo = GetItemNoByItemStr1("В", CaseDomNo, is_russian);
 
-	NominativePluralisNo = GetItemNoByItemStr1("И_мн", CaseNumberDomNo);
-	InstrumentalisPluralisNo = GetItemNoByItemStr1("Т_мн", CaseNumberDomNo);
-	GenitivPluralisNo = GetItemNoByItemStr1("Р_мн", CaseNumberDomNo);
+	NominativePluralisNo = GetItemNoByItemStr1("И_мн", CaseNumberDomNo, false);
+	InstrumentalisPluralisNo = GetItemNoByItemStr1("Т_мн", CaseNumberDomNo, false);
+	GenitivPluralisNo = GetItemNoByItemStr1("Р_мн", CaseNumberDomNo, false);
 	DativPluralisNo = GetItemNoByItemStr1("Д_мн", CaseNumberDomNo, false);
 	VocativPluralisNo = GetItemNoByItemStr1("П_мн", CaseNumberDomNo, false);
 
@@ -149,14 +175,14 @@ void CStructDictHolder::InitDomainsConsts()
 
 
 	InstrumentalisAdjNo = GetItemNoByItemStr("Т_ПРИЛ", "D_CASE_POS");
-	InfinitiveNo = GetItemNoByItemStr("инф", "D_VP_SPECIF");
-	NegativeNo = GetItemNoByItemStr("отр", "D_VP_SPECIF");
-	PassiveNo = GetItemNoByItemStr("стр", "D_VP_SPECIF");
+	InfinitiveNo = GetItemNoByItemStr("инф", "D_VP_SPECIF", is_russian);
+	NegativeNo = GetItemNoByItemStr("отр", "D_VP_SPECIF", false);
+	PassiveNo = GetItemNoByItemStr("стр", "D_VP_SPECIF", false);
 	QuoteMarkNo = GetItemNoByItemStr("квч", "D_GRAFEM_DESC");
-	ILENo = GetItemNoByItemStr("ИЛЕ", "D_GRAFEM_DESC");
-	A0LexFunctNo = GetItemNoByItemStr1("A0", LexFunctDomNo);
-	S0LexFunctNo = GetItemNoByItemStr1("S0", LexFunctDomNo);
-	RightDirectionNo = GetItemNoByItemStr(">", "D_POSITION");
+	ILENo = GetItemNoByItemStr("ИЛЕ", "D_GRAFEM_DESC", false);
+	A0LexFunctNo = GetItemNoByItemStr1("A0", LexFunctDomNo, false);
+	S0LexFunctNo = GetItemNoByItemStr1("S0", LexFunctDomNo, false);
+	RightDirectionNo = GetItemNoByItemStr(">", "D_POSITION", false);
 
 };
 
@@ -350,7 +376,7 @@ void CStructDictHolder::GetLexFuncts(size_t UnitNo, std::vector<CLexicalFunction
 			if (GetRoss()->GetCortegeFieldNo(i) == LexFunctFieldNo)
 			{
 				std::string Lemma = GetDomItemStrWrapper1(i, 1);
-				EngRusMakeUpper(Lemma);
+				MakeUpperUtf8(Lemma);
 				//Lemma = Lemma.SpanExcluding(" ");
 				std::string LexFunct = GetDomItemStrWrapper1(i, 0);
 				long MeanNum = -1;
@@ -374,7 +400,7 @@ void CStructDictHolder::GetLexFuncts(size_t UnitNo, std::vector<CLexicalFunction
 									   отрезать все, что стоит после "+" нужно только, если
 									   мы имеем дело с английским словарем
 									*/
-									if (is_alpha((BYTE)S[0], morphEnglish))
+									if (is_english_alpha((BYTE)S[0]))
 										S = S.substr(0, ii);
 
 									long UnitNo = pRossHolderObor->LocateUnit(S.c_str(), 1);
@@ -487,5 +513,12 @@ TCortege CStructDictHolder::GetCortegeCopy(size_t cortege_no) const {
 	return GetRoss()->GetCortegeCopy(cortege_no);
 
 }
+
+bool CStructDictHolder::IsGenitiv(dom_item_id_t ItemNo) const
+{
+	return     (ItemNo == GenitivSingularNo)
+		|| (ItemNo == GenitivPluralisNo)
+		|| (ItemNo == GenitivNo);
+};
 
 

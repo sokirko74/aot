@@ -288,7 +288,7 @@ void CEngSemStructure::ConvertClosedCollocToOpen()
 			int no = vecSArt[k].m_BracketLeafId - 1;
 			if (no >= 0 && no < nWords) {
 				std::string  s = GetCortegeStr(type, vecSArt[k]);
-				EngRusMakeLower(s);
+				MakeLowerUtf8(s);
 				articles[no] = ArticleTypeByString(s);
 				assert(articles[no] != UnknownArticle);
 			}

@@ -9,8 +9,8 @@
 // should be without "bleiben"
 const size_t PerfeckAnomalieWordsCount = 11;
 std::unordered_set<std::string> PerfeckAnomalieWords = 
-{_G("MÜSSEN"), _G("KÖNNEN"), _G("DÜRFEN"),_G("MÖGEN"), 
-"WOLLEN", "SOLLEN",_G("HЦREN"),"LASSEN","SEHEN", "HELFEN", "LEHREN"};
+{"MÜSSEN", "KÖNNEN", "DÜRFEN", "MÖGEN", 
+"WOLLEN", "SOLLEN", "HÖREN", "LASSEN","SEHEN", "HELFEN", "LEHREN"};
 
 
 void CGerSentence::InitHomonymMorphInfo (CSynHomonym& H)
@@ -66,7 +66,7 @@ bool is_article_for_mixed_declination(const CSynHomonym& H)
 
 const size_t PrepArticlesCount = 16;
 std::string PrepArticles[PrepArticlesCount] = { "AM","ANS","AUFS","BEIM","DURCHS",
-_G("FÜRS"), "HINTERM","HINTERS","IM","INS","UMS","VOM","VORM","VORS","ZUM","ZUR" };
+"FÜRS", "HINTERM","HINTERS","IM","INS","UMS","VOM","VORM","VORS","ZUM","ZUR" };
 
 
 bool IsPrepositionArticle(const char* WordUpper, uint64_t& Grammems)

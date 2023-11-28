@@ -116,8 +116,6 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 				for(int i = 0; i < ParadigmCollection.size(); i++)
 				{
 					const CFormInfo& piParadigm = ParadigmCollection[i];
-
-
 					std::string Ancode = piParadigm.GetAncode(0);
 					if  (		(pos != 255) 
 							&&	( m_pData->GetEngGramTab()->GetPartOfSpeech(Ancode.c_str()) != pos)
@@ -138,10 +136,10 @@ bool  CEngSemStructure::set_multiword_termin(int NodeNo, const CInnerTermin* eng
 		{
 		}
 
-		EngRusMakeLower(form); // по умолчанию в lowercase
+		MakeLowerUtf8(form); // по умолчанию в lowercase
 		if( SynItem.m_Flags & siUpUp ) 
 		{	
-			EngRusMakeUpper(form);
+			MakeUpperUtf8(form);
 		}
 
 		if( SynItem.m_Flags & siUpLw ) 

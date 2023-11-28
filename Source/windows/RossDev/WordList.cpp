@@ -202,7 +202,6 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 	LV_ITEM* pItem = &(pDispInfo)->item;
 	if (GetUnitsSize() == 0) return;
-	TCHAR s[10];
 	CString S;
 	uint16_t UnitNo = GetUnitNo(pItem->iItem);
 	CString entry_str;
@@ -228,7 +227,7 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 				lstrcpy(pItem->pszText, _T(""));
 			else
 			{
-				std::string coms = GetRoss()->GetCommentsByUnitId(GetRoss()->GetUnits()[UnitNo].m_EntryId)->Comments;
+				std::string coms = GetRoss()->GetCommentsByUnitId(GetRoss()->GetEntries()[UnitNo].m_EntryId)->Comments;
 				lstrcpy(pItem->pszText, _U16(coms));
 			}
 			break;
@@ -242,7 +241,7 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 			break;
 
 		case 4:
-			S = GetRoss()->GetUnits()[UnitNo].m_bSelected ? _T("      +") : _T("       -");
+			S = GetRoss()->GetEntries()[UnitNo].m_bSelected ? _T("      +") : _T("       -");
 			lstrcpy(pItem->pszText, S);
 			break;
 		case 5:
@@ -250,7 +249,7 @@ void CWordList::OnGetdispinfoWordlistGrid(NMHDR* pNMHDR, LRESULT* pResult)
 				lstrcpy(pItem->pszText, _T(""));
 			else
 			{
-				lstrcpy(pItem->pszText, _U16(GetRoss()->GetUnits()[UnitNo].GetAuthorStr()));
+				lstrcpy(pItem->pszText, _U16(GetRoss()->GetEntries()[UnitNo].GetAuthorStr()));
 			}
 			break;
 		case 6:
@@ -434,7 +433,7 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 					else
 					{
 						UnitNo = GetRoss()->InsertUnit(_U8(Lemma).c_str(), 1);
-						GetRoss()->GetUnits()[UnitNo].m_bSelected = IsFiltered();
+						GetRoss()->GetEntries()[UnitNo].m_bSelected = IsFiltered();
 						GetRoss()->SetUnitAuthor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str() );
 						GetRoss()->SetUnitEditor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str() );
 						SetArticle(UnitNo, Article);
@@ -444,7 +443,7 @@ bool CWordList::AddNewRecordToUnits(char* Word, bool bTalk, char* Comments)
 
 			BYTE MeanNum = _ttoi(TextEntry.m_MeanNum);
 			UnitNo = GetRoss()->InsertUnit(_U8(TextEntry.m_UnitStr).c_str(), MeanNum);
-			GetRoss()->GetUnits()[UnitNo].m_bSelected = IsFiltered();
+			GetRoss()->GetEntries()[UnitNo].m_bSelected = IsFiltered();
 			GetRoss()->SetUnitAuthor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str());
 			GetRoss()->SetUnitEditor(UnitNo, _U8(((CRossDoc*)GetDocument())->m_Author).c_str());
 			Update();
@@ -483,7 +482,7 @@ void CWordList::OnWordlistAdd()
 void PrintExportHeader(const CWordList& Parent, FILE* fp)
 {
 	fprintf(fp, "//Export dictionary %s\r\n", Parent.GetRoss()->GetDictName().c_str());
-	fprintf(fp, "//Date = %s\r\n", CTime::GetCurrentTime().Format("%A, %B %d, %Y"));
+	fprintf(fp, "//Date = %s\r\n", _U8(CTime::GetCurrentTime().Format("%A, %B %d, %Y")).c_str());
 	fprintf(fp, "//Records count = %i\r\n", Parent.GetUnitsSize());
 	fprintf(fp, "//Filtered = %s\r\n\r\n", (Parent.IsFiltered() ? "yes" : "no"));
 };
@@ -531,7 +530,7 @@ void CWordList::SetSelected(bool Value)
 {
 	uint16_t UnitsSize = GetUnitsSize();
 	for (size_t i = 0; i < UnitsSize; i++)
-		GetRoss()->GetUnits()[GetUnitNo(i)].m_bSelected = Value;
+		GetRoss()->GetEntries()[GetUnitNo(i)].m_bSelected = Value;
 
 };
 
@@ -553,8 +552,8 @@ void CWordList::OnInvertAllWords()
 	uint16_t UnitsSize = GetUnitsSize();
 	for (size_t i = 0; i < UnitsSize; i++)
 	{
-		bool R = !GetRoss()->GetUnits()[GetUnitNo(i)].m_bSelected;
-		GetRoss()->GetUnits()[GetUnitNo(i)].m_bSelected = R;
+		bool R = !GetRoss()->GetEntries()[GetUnitNo(i)].m_bSelected;
+		GetRoss()->GetEntries()[GetUnitNo(i)].m_bSelected = R;
 	};
 
 	m_WordList.Invalidate();
@@ -630,7 +629,7 @@ void CWordList::OnWordlistDel()
 		GetEntryStrUtf16(UnitNo), GetRoss()->GetUnitMeanNum(UnitNo));
 	if (::MessageBox(0, S, _T("Message Box"), MB_OKCANCEL) != IDOK)
 		return;
-	GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
+	GetRoss()->DelUnit(UnitNo);
 	BuildIndex();
 	Update();
 
@@ -652,8 +651,8 @@ void CWordList::OnSetSelectedButton()
 	// TODO: Add your control notification handler code here
 	uint16_t UnitNo;
 	if (!GetSelectedUnitNo(UnitNo)) return;
-	bool b = GetRoss()->GetUnits()[UnitNo].m_bSelected;
-	GetRoss()->GetUnits()[UnitNo].m_bSelected = !b;
+	bool b = GetRoss()->GetEntries()[UnitNo].m_bSelected;
+	GetRoss()->GetEntries()[UnitNo].m_bSelected = !b;
 	m_WordList.Invalidate();
 	CDocument* D = GetDocument();
 	D->SetModifiedFlag();
@@ -829,7 +828,7 @@ void CWordList::OnComments()
 	if (!GetSelectedUnitNo(UnitNo)) return;
 	if (GetDocument()->m_ReadOnly) return;
 
-	const TUnitComment* pComms = GetRoss()->GetCommentsByUnitId(GetRoss()->GetUnits()[UnitNo].m_EntryId);
+	const TUnitComment* pComms = GetRoss()->GetCommentsByUnitId(GetRoss()->GetEntries()[UnitNo].m_EntryId);
 	char s[100];
 	strcpy(s, pComms->Comments);
 	if (!InputBoxUtf8("Comments:", s, 100, "ROSS", this))
@@ -1084,10 +1083,11 @@ void CWordList::OnArticleAppend()
 };
 
 
-struct TUnit {
-	char UnitStr[200];
+struct TUnitInfo {
+	std::string UnitStr;
 	BYTE MeanNum;
 };
+
 void CWordList::OnDelAllSelected()
 {
 	try {
@@ -1096,22 +1096,22 @@ void CWordList::OnDelAllSelected()
 			GetUnitsSize());
 		if (::MessageBox(this->m_hWnd, Q, _T("Confirmation"), MB_YESNO) == IDNO) return;
 		CWaitCursor C;
-		std::vector <TUnit> UnitNos;
+		std::vector <TUnitInfo> UnitNos;
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
 			size_t u = GetUnitNo(i);
-			TUnit U;
-			strcpy(U.UnitStr, GetRoss()->GetEntryStr(u).c_str());
+			TUnitInfo U;
+			U.UnitStr = GetRoss()->GetEntryStr(u);
 			U.MeanNum = GetRoss()->GetUnitMeanNum(u);
 			UnitNos.push_back(U);
 
 		};
 
-		for (int i = 0; i < UnitNos.size(); i++)
+		for (auto& unit_info: UnitNos)
 		{
-			uint16_t UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr, UnitNos[i].MeanNum);
-			GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
+			uint16_t UnitNo = GetRoss()->LocateUnit(unit_info.UnitStr.c_str(), unit_info.MeanNum);
+			GetRoss()->DelUnit(UnitNo);
 
 		};
 
@@ -1137,7 +1137,7 @@ void CWordList::OnSetAuthor()
 	s[0] = 0;
 	if (!InputBoxUtf8("Enter author name:", s, 15)) return;
 	CWaitCursor C;
-	std::vector <TUnit> UnitNos;
+	std::vector <TUnitInfo> UnitNos;
 
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 	{
@@ -1157,7 +1157,7 @@ void CWordList::OnSelectByAuthor()
 
 	for (size_t i = 0; i < GetUnitsSize(); i++)
 	{
-		auto& u = GetRoss()->GetUnits()[GetUnitNo(i)];
+		auto& u = GetRoss()->GetEntries()[GetUnitNo(i)];
 		auto author = u.GetAuthorStr();
 		if (author == s)
 			u.m_bSelected = true;
@@ -1221,7 +1221,7 @@ void CWordList::OnSelectDownward()
 	for (size_t i = m_WordList.GetNextSelectedItem(pos); i < m_WordList.GetItemCount(); i++)
 	{
 		uint16_t UnitNo = GetUnitNo(i);
-		GetRoss()->GetUnits()[UnitNo].m_bSelected = true;
+		GetRoss()->GetEntries()[UnitNo].m_bSelected = true;
 	};
 	Update();
 
@@ -1235,20 +1235,20 @@ void CWordList::OnEmptyArticles()
 		Q.Format(_T("You are going to clear all entries (%i entries). Proceed?"), GetUnitsSize());
 		if (::MessageBox(this->m_hWnd, Q, _T("Confirmation"), MB_YESNO) == IDNO) return;
 		CWaitCursor C;
-		std::vector <TUnit> UnitNos;
+		std::vector <TUnitInfo> UnitNos;
 
 		for (size_t i = 0; i < GetUnitsSize(); i++)
 		{
 			size_t u = GetUnitNo(i);
-			TUnit U;
-			strcpy(U.UnitStr, GetRoss()->GetEntryStr(u).c_str());
+			TUnitInfo U;
+			U.UnitStr = GetRoss()->GetEntryStr(u);
 			U.MeanNum = GetRoss()->GetUnitMeanNum(u);
 			UnitNos.push_back(U);
 		};
 
 		for (int i = 0; i < UnitNos.size(); i++)
 		{
-			uint16_t UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr, UnitNos[i].MeanNum);
+			uint16_t UnitNo = GetRoss()->LocateUnit(UnitNos[i].UnitStr.c_str(), UnitNos[i].MeanNum);
 			GetRoss()->ClearUnit(UnitNo);
 		};
 

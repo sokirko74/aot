@@ -77,7 +77,7 @@ bool IsBigramToken(const CGraLine& L)
 interp_t GetTokensBySentences(CGraphmatFile& Graphan)
 {
 	interp_t Result;
-	size_t TokensCount = Graphan.GetUnits().size();
+	size_t TokensCount = Graphan.GetEntries().size();
 	std::vector<std::string> tokens;
 	for (size_t LineNo=1; LineNo < TokensCount; LineNo++)
 	{
@@ -263,7 +263,7 @@ try
 			fprintf (stderr,"===== [%zu/%zu] %s ===== \n",FileNo+1, Files.size(), InputFileName.c_str());
 			AllFileSize += FileSize(InputFileName.c_str());
 			Graphan.LoadFileToGraphan(InputFileName);
-			size_t TokensCount = Graphan.GetUnits().size();
+			size_t TokensCount = Graphan.GetEntries().size();
 			interp_t Tokens =  GetTokensBySentences(Graphan);
 
 			if (bOnlyWords)
@@ -275,7 +275,7 @@ try
 				for (size_t LineNo = 0; LineNo < SentSize; LineNo++)
 				{
 					std::string  s1 = (*it)[LineNo];
-					EngRusMakeUpper(s1);
+					MakeUpperUtf8(s1);
 					std::map<std::string,size_t>::iterator freq_it  = WordFreqs.find(s1);
 					if (freq_it == WordFreqs.end())
 						WordFreqs[s1] = 1;
@@ -289,7 +289,7 @@ try
 					for (size_t k=LineNo+1; k < WindowEnd; k++)
 					{
 							std::string  s2 = (*it)[k];
-							EngRusMakeUpper(s2);
+							MakeUpperUtf8(s2);
 							auto p = std::make_pair(s1, s2);
 							BigramsType::iterator it = Bigrams.find(p);
 							if (it != Bigrams.end())

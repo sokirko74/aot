@@ -331,16 +331,16 @@ bool CRusSemStructure::TimeHypotIsSyntaxAgree(CNodeHypotVector& V, CTimeUnit& U)
 // инициализация словарных статей TimeRoss
 void CRusSemStructure::GetTimeInterps(std::string Lemma, std::string WordStr, std::string PostPuncts, CRusSemNode& N) const
 {
-	EngRusMakeLower(Lemma);
+	MakeLowerUtf8(Lemma);
 	if (PostPuncts.find('.') != string::npos)
 	{
 		std::string WordUpper = WordStr;
-		EngRusMakeUpper(WordUpper);
+		MakeUpperUtf8(WordUpper);
 		long AbbrFunctNo = GetFullForm(m_pData->m_TimeAbbrPairs, WordUpper + ".");
 		if (AbbrFunctNo != -1)
 		{
 			Lemma = m_pData->m_TimeAbbrPairs[AbbrFunctNo].m_FullForm;
-			EngRusMakeLower(Lemma);
+			MakeLowerUtf8(Lemma);
 		};
 	};
 

@@ -61,7 +61,7 @@ add_library(SemanLib
         "rus_sem_word.h"
         "sem_word.cpp" 
         "sem_word.h"
-)
+ "dict_type.h" "dict_type.cpp")
 
 target_link_libraries(SemanLib
     SynanLib

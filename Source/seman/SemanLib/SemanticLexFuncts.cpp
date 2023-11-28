@@ -161,7 +161,7 @@ void AddByLemma(const std::vector<SLexFunIndexes>& base, std::string Lemma, std:
 {
 	SLexFunIndexes LexFunIndexes;
 	LexFunIndexes.m_LexFunValue.m_UnitStr = Lemma;
-	EngRusMakeLower(LexFunIndexes.m_LexFunValue.m_UnitStr);
+	MakeLowerUtf8(LexFunIndexes.m_LexFunValue.m_UnitStr);
 	for (
 		std::vector<SLexFunIndexes>::const_iterator  it = lower_bound(base.begin(), base.end(), LexFunIndexes, LexFunValueComp);
 		 (		(it != base.end() )
@@ -202,10 +202,10 @@ void CRusSemStructure::FindVerbsOfS0(long NodeNo)
 	if (!m_Nodes[NodeNo].IsPrimitive()) return;
 	SLexFunIndexes LexFunIndexes;
 	LexFunIndexes.m_LexFunValue.m_UnitStr = m_Nodes[NodeNo].m_Words[0].m_Lemma;
-	EngRusMakeLower(LexFunIndexes.m_LexFunValue.m_UnitStr);
+	MakeLowerUtf8(LexFunIndexes.m_LexFunValue.m_UnitStr);
 	const std::vector<SLexFunIndexes>& base = m_pData->m_LexFunIndexesRusByValue;
 	for (
-		std::vector<SLexFunIndexes>::const_iterator  it = lower_bound(base.begin(), base.end(), LexFunIndexes, LexFunValueComp);
+		auto  it = lower_bound(base.begin(), base.end(), LexFunIndexes, LexFunValueComp);
 		 (		(it != base.end() )
 			&&	( (*it).EqByLexFunValue(LexFunIndexes.m_LexFunValue)  )
 		 );
@@ -213,7 +213,7 @@ void CRusSemStructure::FindVerbsOfS0(long NodeNo)
 		 if (it->m_LexFun == "S0")
 		 {
 		    m_Nodes[NodeNo].m_VerbsOfS0.push_back(it->m_LexFunArg.m_UnitStr);
-			EngRusMakeUpper (m_Nodes[NodeNo].m_VerbsOfS0[m_Nodes[NodeNo].m_VerbsOfS0.size() - 1]);
+			MakeUpperUtf8(m_Nodes[NodeNo].m_VerbsOfS0.back());
 		 };
 
 };
@@ -221,7 +221,6 @@ void CRusSemStructure::FindVerbsOfS0(long NodeNo)
 
 void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, long ParamNodeNo)
 {
-
 	const CRusSemNode& SitNode = m_Nodes[SitNodeNo];
 	const CRusSemNode& ParamNode = m_Nodes[ParamNodeNo];
 	std::vector<CLexicalFunctionField>::const_iterator It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), ParamNode.m_Words[ParamNode.m_MainWordNo].m_Lemma);
@@ -244,7 +243,7 @@ void  CRusSemStructure::BuildVerbLexFunctParameterForTheNodes (long  SitNodeNo, 
 		{
 			// берем TITLЕ	  
 			std::string UnitStr = GetRoss(CollocRoss)->GetEntryStr(ParamNode.GetInterp()->m_UnitNo);
-			EngRusMakeUpper(UnitStr);
+			MakeUpperUtf8(UnitStr);
 			It = find(SitNode.m_LexFunctFields.begin(), SitNode.m_LexFunctFields.end(), UnitStr);
 		};
 

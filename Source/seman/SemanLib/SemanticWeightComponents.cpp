@@ -860,25 +860,23 @@ long CRusSemStructure::IsLexFetAgree(long NodeNo) const
 
 	// ищем как простую лемму 
 	if (m_Nodes[NodeNo].m_MainWordNo == -1) return false;
-	string40 Lemmas[10];
-	int LemmasCount = 0;
-	Lemmas[LemmasCount++] = m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma;
+	std::vector<std::string> Lemmas;
+	Lemmas.push_back(m_Nodes[NodeNo].m_Words[m_Nodes[NodeNo].m_MainWordNo].m_Lemma);
 	if (m_Nodes[NodeNo].GetType() == CollocRoss)
 	{
-		Lemmas[LemmasCount++] = string40(GetRoss(CollocRoss)->GetEntryStr(m_Nodes[NodeNo].GetUnitNo()).c_str());
-		EngRusMakeUpper((char*)Lemmas[LemmasCount - 1]);
+		Lemmas.push_back(GetRoss(CollocRoss)->GetEntryStr(m_Nodes[NodeNo].GetUnitNo()));
+		MakeUpperUtf8(Lemmas.back());
 	};
 
 	if (m_Nodes[NodeNo].IsPrimitive())
 		for (long j = 0; j < m_Nodes[NodeNo].m_Words[0].m_WordEquals.size(); j++)
 		{
-			Lemmas[LemmasCount++] = m_Nodes[NodeNo].m_Words[0].m_WordEquals[j];
-			EngRusMakeUpper((char*)Lemmas[LemmasCount - 1]);
+			Lemmas.push_back(m_Nodes[NodeNo].m_Words[0].m_WordEquals[j]);
+			MakeUpperUtf8(Lemmas.back());
 		};
 
-	for (long i = 0; i < LemmasCount; i++)
+	for (auto& lem: Lemmas)
 	{
-		std::string lem((const char*)Lemmas[i]);
 		if (_find(m_Relations[R1.m_Rels[0]].m_LexFets, lem)
 			|| ((R2.m_RelsCount == 1)
 				&& _find(m_Relations[R2.m_Rels[0]].m_LexFets, lem)

@@ -3,29 +3,20 @@
 #pragma warning (disable : 4355)
 
 
-const char g_strRegEngRossDicPath[]    = "Software\\Dialing\\Aross\\DictPath"; 	 
-const char g_strRegRusRossDicPath[]    = "Software\\Dialing\\Ross\\DictPath"; 	 
-const char g_strRegRusTimeRossDicPath[] = "Software\\Dialing\\TimeRoss\\DictPath"; 	 
-const char g_strRegEngCollocsDicPath[] = "Software\\Dialing\\EngCollocs\\DictPath";
-const char g_strRegRusCollocsDicPath[] = "Software\\Dialing\\Collocs\\DictPath";
-const char g_strRegEngOborDicPath[] = "Software\\Dialing\\EngObor\\DictPath";
-
-
 
 
 CAllRossesHolder::CAllRossesHolder() :
-		m_RossDoc(this),
-		m_LocRossDoc(this),
-		m_TimeRossDoc(this),
-		m_RusOborDoc(this),
-		m_RusCollocsDoc(this),
-		m_EngRossDoc(this),
-		m_EngCollocsRossDoc(this),
-		m_EngOborRossDoc(this),
-		m_FinThesRossDoc(this),
-		m_LocThesRossDoc(this),
-		m_OmniThesRossDoc(this),
-		m_CompThesRossDoc(this)
+		m_RossDoc(Ross),
+		m_TimeRossDoc(TimeRoss),
+		m_RusOborDoc(OborRoss),
+		m_RusCollocsDoc(CollocRoss),
+		m_EngRossDoc(Aoss),
+		m_EngCollocsRossDoc(EngCollocRoss),
+		m_EngOborRossDoc(EngObor),
+		m_FinThesRossDoc(FinRoss),
+		m_LocThesRossDoc(LocRoss),
+		m_OmniThesRossDoc(OmniRoss),
+		m_CompThesRossDoc(CompRoss)
 {
 };
 
@@ -74,17 +65,6 @@ CStructDictHolder* CAllRossesHolder:: GetRossHolder (DictTypeEnum Type)
 };
 
 
-std::string  GetThesRossPath  (DictTypeEnum Type)
-{
-	int ThesId = GetThesIdByRossId(Type);
-	std::string Name = GetRmlThesNameThesId( ThesId );
-	std::string  R = Format("Software\\Dialing\\%s\\DictPath",Name.c_str());
-	std::string  strPath = GetRegistryString( R.c_str());;
-	DictTypeEnum RossId =  GetRossIdByThesId(ThesId);
-	strPath += "/Ross/ross.rcf";
-	return strPath;
-}
-
 const CStructDictHolder* CAllRossesHolder::GetRossHolder (DictTypeEnum Type)  const
 {
 	switch (Type) {
@@ -115,12 +95,12 @@ void setbackslash(std::string& s)
 DictTypeEnum  CAllRossesHolder::GetRegisteredRossId(std::string FileName)  const
 {
 	setbackslash(FileName);
-	EngRusMakeLower(FileName);
+	MakeLowerUtf8(FileName);
 	for (int i=0; i < NoneRoss; i++)
 	{
 		std::string path = GetRossPath((DictTypeEnum)i);
 		setbackslash(path);
-		EngRusMakeLower(path);
+		MakeLowerUtf8(path);
 		if ( path == FileName)
 			return (DictTypeEnum)i;
 	}
@@ -129,67 +109,10 @@ DictTypeEnum  CAllRossesHolder::GetRegisteredRossId(std::string FileName)  const
 
 
 
-std::string  CAllRossesHolder::GetRossPath(DictTypeEnum RossId)  const
-{
-	if (IsThesRoss(RossId))
-		return  GetThesRossPath(RossId);
-	else
-	{
-		switch (RossId) {
-			case Ross			:	return GetRegistryString( g_strRegRusRossDicPath );;
-			case TimeRoss		:	return GetRegistryString( g_strRegRusTimeRossDicPath );
-			case OborRoss		:	return GetRegistryString( g_strRegRusOborDicPath );
-			case CollocRoss		:	return GetRegistryString( g_strRegRusCollocsDicPath );
-			case Aoss			:	return GetRegistryString( g_strRegEngRossDicPath );
-			case EngCollocRoss 	:	return GetRegistryString( g_strRegEngCollocsDicPath );
-			case EngObor		:	return GetRegistryString( g_strRegEngOborDicPath );
-		}
-
-	};
-
-	throw CExpc ("Unknown Ross");
-}
-
 
 DictTypeEnum CAllRossesHolder::GetTypeByRossHolder (const CStructDictHolder* pHolder)  const
 { 
-	if (&m_RossDoc  == pHolder)
-		return Ross;
-	else
-	if (&m_TimeRossDoc == pHolder)
-		return TimeRoss;
-	else
-	if (&m_RusOborDoc == pHolder)
-		return OborRoss;
-	else
-	if (&m_RusCollocsDoc == pHolder)
-		return CollocRoss;
-	else
-	if (&m_EngRossDoc == pHolder)
-		return Aoss;
-	else
-	if (&m_EngCollocsRossDoc == pHolder)
-		return EngCollocRoss;
-	else
-	if (&m_EngOborRossDoc == pHolder)
-		return EngObor;
-	else
-	if (&m_FinThesRossDoc == pHolder)
-		return FinRoss;
-	else
-	if (&m_OmniThesRossDoc == pHolder)
-		return OmniRoss;
-	else
-	if (&m_CompThesRossDoc == pHolder)
-		return CompRoss;
-	else
-	if (&m_LocThesRossDoc == pHolder)
-		return LocRoss;
-	else
-	{
-		assert (false); 
-		return NoneRoss;
-	};
+	return pHolder->GetRossType();
 };
 
 
@@ -234,13 +157,12 @@ DictTypeEnum CAllRossesHolder::GetTypeByStr (std::string DictName)
 
 void  CAllRossesHolder::Initialize() 
 {
-	for (int i=0; i < NoneRoss; i++)
+	for (int i=Ross; i < NoneRoss; i++)
 	{
 		DictTypeEnum RossId = (DictTypeEnum)i;
 		CStructDictHolder* RossHolder = GetRossHolder(RossId);
-		if (RossHolder->m_DictPath.empty())
-			if (!RossHolder->OpenRossHolder(GetRossPath(RossId), m_bDontLoadExamples))
-				throw CExpc("Cannot load " + GetRossPath(RossId));
+		if (!RossHolder->LoadStructDict(GetRossPath(RossId), m_bDontLoadExamples))
+			throw CExpc("Cannot load " + GetRossPath(RossId));
 	}
 
 	m_LastUpdateTime = 1;

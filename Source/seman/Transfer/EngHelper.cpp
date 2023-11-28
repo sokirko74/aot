@@ -167,7 +167,7 @@ part_of_speech_mask_t CEngSemStructure::EngPOSesByRusPOS(part_of_speech_t rus_po
 		case VERB:				{	return 1<<eVERB;	};
 		case PRONOUN:			
 			{	
-				EngRusMakeUpper(lemma);
+				MakeUpperUtf8(lemma);
 				if( WordInList((const char*)g_PersPronouns, g_PersPronounsCount, lemma) )
 					return 1<<ePN;
 				return	1<<ePRON;   

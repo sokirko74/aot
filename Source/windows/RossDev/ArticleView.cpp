@@ -407,12 +407,14 @@ BEGIN_MESSAGE_MAP(CMyEditCtrl, CRichEditCtrl)
 		ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
-inline bool CanBeEntrySymbol(BYTE c)
+inline bool CanBeEntrySymbol(int c)
 {
-	return		is_alpha(c) 
+	return		is_english_alpha(c)
+			||  c > 127
 			||  c == '_'
-			||	 c == '-';
+			||	c == '-';
 };
+
 void CMyEditCtrl::OnLButtonDblClk( UINT nFlags,  CPoint point )
 {
 	CArticleView* V = (CArticleView*)GetParent();
@@ -423,13 +425,13 @@ void CMyEditCtrl::OnLButtonDblClk( UINT nFlags,  CPoint point )
 	SourceText.Replace(_T("\r\n"), _T("\n"));
 	int start = CharNo;
 	for (; start >=0; start--)
-		if (!CanBeEntrySymbol( (BYTE)SourceText.GetAt(start) ) )
+		if (!CanBeEntrySymbol(SourceText.GetAt(start) ) )
 			break;
 	start++;
 	if (start > CharNo) return;
 	int end = CharNo;
 	for (; end < SourceText.GetLength(); end++)
-		if ( !CanBeEntrySymbol( (BYTE)SourceText.GetAt(end) ) )
+		if ( !CanBeEntrySymbol(SourceText.GetAt(end) ) )
 			break;
 
 	CString Word =  SourceText.Mid(start, end-start);

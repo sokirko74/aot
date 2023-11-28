@@ -1038,7 +1038,7 @@ std::string CEngSynthes::translate_son(int node_no)
 
 bool IsWh_NounWord(std::string Lemma)
 {
-	EngRusMakeUpper(Lemma);
+	MakeUpperUtf8(Lemma);
 	return    (Lemma == "WHO") 
 			||(Lemma == "WHICH")  
 			||(Lemma == "WHAT")  

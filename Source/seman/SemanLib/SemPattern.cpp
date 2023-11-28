@@ -187,7 +187,7 @@ bool CSemPattern::LoadGramFromDict()
 		if (C.m_FieldNo == m_PatternValency.m_RossHolder->LexFetFieldNo) 
 		{
 			std::string S =   m_PatternValency.m_RossHolder->GetDomItemStrWrapper(C.GetItem(0));
-			EngRusMakeUpper(S);
+			MakeUpperUtf8(S);
 			m_LexFets.push_back(S);
 			IsFound = true;
 		}
@@ -195,7 +195,7 @@ bool CSemPattern::LoadGramFromDict()
 		if (C.m_FieldNo == m_PatternValency.m_RossHolder->ObligLexFetFieldNo) 
 		{
 			std::string S =   m_PatternValency.m_RossHolder->GetDomItemStrWrapper(C.GetItem(0));
-			EngRusMakeUpper(S);
+			MakeUpperUtf8(S);
 			m_ObligLexFets.push_back(S);
 			IsFound = true;
 		}

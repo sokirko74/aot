@@ -16,8 +16,8 @@
 const size_t NumeralModifCount = 9;
 const std::string NumeralModif[NumeralModifCount] = 
 {
-	_G("UNGEFÄHR"), _G("HÖCHSTENS"), "ETWA",	"WENIGSTENS",
-	"ZIRKA", _G("FRÜHESTENS"), _G("SPÄTESTENS"), "MINDESTENS",
+	"UNGEFÄHR", "HÖCHSTENS", "ETWA",	"WENIGSTENS",
+	"ZIRKA", "FRÜHESTENS", "SPÄTESTENS", "MINDESTENS",
 	"RUND"
 };
 

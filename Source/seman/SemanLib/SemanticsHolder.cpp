@@ -209,14 +209,9 @@ std::string CSemanticsHolder::GetContentsOborStr(long UnitNo, std::vector<CUnitC
 	return "";
 };
 
-
-
-
-
-
 bool GetLemmaFromTitle(std::string S, long PlaceNo, std::string& Lemma)
 {
-	EngRusMakeUpper(S);
+	MakeUpperUtf8(S);
 	for (size_t i = 0; i < PlaceNo + 1; i++)
 	{
 		int u = S.find_first_of(" ");
@@ -235,7 +230,7 @@ StringVector InitThesList(const CThesaurus* Thes, const std::string& conceptStr)
 	for (auto i : Thes->QueryLowerTermins(conceptStr, morphRussian))
 	{
 		std::string terminStr = Thes->m_Termins[i].m_TerminStr;
-		EngRusMakeUpper(terminStr);
+		MakeUpperUtf8(terminStr);
 		result.push_back(terminStr);
 	};
 	sort(result.begin(), result.end());
@@ -326,9 +321,9 @@ bool CSemanticsHolder::InitTimeUnits()
 							)
 							continue;
 						std::string FullForm = GetRoss(TimeRoss)->GetEntryStr(UnitNo);
-						EngRusMakeUpper(FullForm);
+						MakeUpperUtf8(FullForm);
 						std::string AbbrForm = GetRossHolder(TimeRoss)->GetDomItemStrWrapper(C.GetItem(1));
-						EngRusMakeUpper(AbbrForm);
+						MakeUpperUtf8(AbbrForm);
 						m_TimeAbbrPairs.push_back(CAbbrFunct(AbbrForm, FullForm, GetRossHolder(TimeRoss)->GetDomItemStrWrapper(C.GetItem(0))));
 					};
 
@@ -338,7 +333,7 @@ bool CSemanticsHolder::InitTimeUnits()
 					if (FieldStr == "LEX")
 					{
 						std::string S = GetRossHolder(TimeRoss)->GetDomItemStrWrapper(C.GetItem(0));
-						EngRusMakeUpper(S);
+						MakeUpperUtf8(S);
 						long LexFillingNoNo = U.GetLexicalFillingNo(CTimeLexicalFilling(C.m_LeafId, C.m_BracketLeafId));
 						U.m_LexicalFillings[LexFillingNoNo].m_LexFets.push_back(StringLong(S, C.m_LevelId));
 					}
@@ -417,27 +412,29 @@ bool CSemanticsHolder::CreateEngDictIndex(DictTypeEnum type, std::vector<CEngUni
 	if (RusFieldNo == ErrUChar) return false;
 	for (long i = 0; i < UnitsCount; i++)
 	{
-		long EndPos = GetRoss(type)->GetUnitLastPos(i);
-		for (long j = GetRoss(type)->GetUnitStartPos(i); j <= EndPos; j++)
-			if (RusFieldNo == GetRoss(type)->GetCortegeFieldNo(j))
-			{
-				CEngUnitNoToRusUnit Item;
-				TCortege C = GetRossHolder(type)->GetCortegeCopy(j);
-				if (C.is_null(0))
-					continue;
-
-				Item.m_RusUnitStr = GetRossHolder(type)->GetDomItemStrWrapper(C.GetItem(0));
-
-				if (!C.is_null(1))
+		const CStructEntry& u = GetRoss(type)->GetEntries()[i];
+		if (!u.HasEmptyArticle()) {
+			for (long j = u.m_StartCortegeNo; j <= u.m_LastCortegeNo; j++)
+				if (RusFieldNo == GetRoss(type)->GetCortegeFieldNo(j))
 				{
-					std::string buf = GetRossHolder(type)->GetDomItemStrWrapper(C.GetItem(1));
-					assert(buf.length() == 1);
-					Item.m_RusMeanNum = buf[0] - '0';
+					CEngUnitNoToRusUnit Item;
+					TCortege C = GetRossHolder(type)->GetCortegeCopy(j);
+					if (C.is_null(0))
+						continue;
 
+					Item.m_RusUnitStr = GetRossHolder(type)->GetDomItemStrWrapper(C.GetItem(0));
+
+					if (!C.is_null(1))
+					{
+						std::string buf = GetRossHolder(type)->GetDomItemStrWrapper(C.GetItem(1));
+						assert(buf.length() == 1);
+						Item.m_RusMeanNum = buf[0] - '0';
+
+					}
+					Item.m_EngUnitNo = i;
+					RusEquivs.push_back(Item);
 				}
-				Item.m_EngUnitNo = i;
-				RusEquivs.push_back(Item);
-			}
+		}
 	}
 	sort(RusEquivs.begin(), RusEquivs.end());
 
@@ -478,8 +475,8 @@ bool CSemanticsHolder::CreateLexFunIndexes(const CDictionary* pRoss, std::vector
 
 	for (long j = 0; j < UnitsCount; j++)
 	{
-		int iEndPos = pRoss->GetUnitLastPos(j);
-		for (int i = pRoss->GetUnitStartPos(j); i <= iEndPos; i++)
+		if (pRoss->IsEmptyArticle(j)) continue;
+		for (int i = pRoss->GetUnitStartPos(j); i <= pRoss->GetUnitLastPos(j); i++)
 		{
 			if (SXFieldNo == pRoss->GetCortegeFieldNo(i))
 			{
@@ -628,20 +625,20 @@ bool BuildByFieldContents(std::string s, uint16_t UnitNo, std::vector<CUnitConte
 bool BuildContensField(const CDictionary* Dict, std::vector<CUnitContent>& Vect)
 {
 	Vect.clear();
-	long size = Dict->GetUnitsSize();
-	std::string strField = "CONTENT";
-	for (long j = 0; j < size; j++)
+	auto fieldNo = Dict->GetFieldNoByFieldStr("CONTENT");
+	assert(fieldNo != ErrUChar);
+	for (long j = 0; j < Dict->GetUnitsSize(); j++)
 	{
-
-		int iEndPos = Dict->GetUnitLastPos(j);
-		for (int i = Dict->GetUnitStartPos(j); i <= iEndPos; i++)
-		{
-			long FieldNo = Dict->GetCortegeFieldNo(i);
-			if (Dict->Fields[FieldNo].FieldStr == strField)
+		if (!Dict->IsEmptyArticle(j)) {
+			for (int i = Dict->GetUnitStartPos(j); i <= Dict->GetUnitLastPos(j); i++)
 			{
-				std::string s = Dict->GetDomItemStr(i, 0);
-				if (!BuildByFieldContents(s, j, Vect))
-					return false;
+				long FieldNo = Dict->GetCortegeFieldNo(i);
+				if (Dict->GetCortegeFieldNo(i) == fieldNo)
+				{
+					std::string s = Dict->GetDomItemStr(i, 0);
+					if (!BuildByFieldContents(s, j, Vect))
+						return false;
+				}
 			}
 		}
 	}
@@ -670,7 +667,7 @@ bool CSemanticsHolder::TokenizeDoubleConj()
 			while (word = token())
 			{
 				std::string s = word;
-				EngRusMakeUpper(s);
+				MakeUpperUtf8(s);
 
 				if (!strcmp(word, "..."))
 					InFirstPart = false;
@@ -756,11 +753,6 @@ bool  CSemanticsHolder::BuildOborottos()
 	};
 
 	return TokenizeDoubleConj();
-};
-
-bool CStructDictHolder::HasBeenModified(long T)
-{
-	return m_LastUpdateTime > T;
 };
 
 
@@ -983,7 +975,7 @@ bool CSemanticsHolder::BuildColloc(std::string ContentFieldStr, int CollocUnitNo
 
 CCollocItemRefCollect* CSemanticsHolder::InsertRusCollocItemRef(std::string S)
 {
-	EngRusMakeUpper(S);
+	MakeUpperUtf8(S);
 	std::vector<CCollocItemRefCollect>::iterator It = lower_bound(m_RusCollocItemRefs.begin(), m_RusCollocItemRefs.end(), S, LessCollocItemRefCollect());
 	if ((It == m_RusCollocItemRefs.end())
 		|| !(It->Item == S)
@@ -1024,7 +1016,7 @@ bool CSemanticsHolder::BuildCollocs()
 			{
 
 				std::string S = m_RusCollocs[i].Items[k].Item;
-				EngRusMakeUpper(S);
+				MakeUpperUtf8(S);
 				CCollocItemRefCollect* It = InsertRusCollocItemRef(S);
 				It->Refs.push_back(CCollocItemRef(i, k));
 

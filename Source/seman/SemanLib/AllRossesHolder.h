@@ -12,7 +12,6 @@ class CAllRossesHolder : public CTranslatorHolder
 { 
 protected:
 	CStructDictHolder            m_RossDoc;
-	CStructDictHolder            m_LocRossDoc;
 	CStructDictHolder            m_TimeRossDoc;
 	CStructDictHolder            m_RusOborDoc;
 	CStructDictHolder            m_RusCollocsDoc;
@@ -38,7 +37,6 @@ protected:
   	 DictTypeEnum		GetTypeByRossHolder (const CStructDictHolder* pHolder)  const;
 	 DictTypeEnum		GetTypeByStr (std::string DictName);
 	 CDictionary*		GetRoss (DictTypeEnum Type);
-	 std::string		GetRossPath(DictTypeEnum RossId)  const;
 	 DictTypeEnum		GetRegisteredRossId(std::string FileName)  const;
 
 	 bool				InitHierarchies();

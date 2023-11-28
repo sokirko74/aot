@@ -233,11 +233,7 @@ void CThesaurus::QueryEnglishTranslations(uint32_t TextEntryId, std::vector<int>
 				std::string s = m_Termins[k].m_TerminStr;
 				long j = 0;
 				for (; j < s.length(); j++)
-					if (!is_english_alpha((BYTE)s[j])
-						&& !isdigit((BYTE)s[j])
-						&& !ispunct((BYTE)s[j])
-						&& !isspace((BYTE)s[j])
-						)
+					if ( (BYTE)s[j] > 127) // not english ABC
 						break;
 
 				if (j == s.length())
@@ -257,7 +253,7 @@ int CThesaurus::GetTerminIdBySingleWord(std::string WordStr) const
 	CInnerSynItem I;
 	I.m_ItemStr = WordStr;
 
-	EngRusMakeUpper(I.m_ItemStr);
+	MakeUpperUtf8(I.m_ItemStr);
 
 	for (std::vector<CInnerSynItem>::const_iterator It = lower_bound(m_SynItems.begin(), m_SynItems.end(), I);
 		(It < m_SynItems.end()) && (It->m_ItemStr == I.m_ItemStr);

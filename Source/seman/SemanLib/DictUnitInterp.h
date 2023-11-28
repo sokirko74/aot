@@ -1,7 +1,7 @@
 #ifndef DictUnitInterp_H
 #define DictUnitInterp_H
 
-#include "TranslatorHolder.h"
+#include "dict_type.h"
 
 // словарная интерпретация 
 struct  CRossInterp 

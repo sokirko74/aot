@@ -43,6 +43,7 @@ class TRoss  : public TCortegeContainer, public TItemContainer
 
 protected:
 	TDictConfig Config;
+	std::vector<CStructEntry>	m_Units;
 
 	void BuildCorteges();
 
@@ -56,7 +57,6 @@ public:
 	const std::string& GetDictName() const;
 	const std::string& GetDictFolder() const;
 	
-	std::vector<CStructEntry>	m_Units;
 	std::vector<TUnitComment>	m_UnitComments;
 	bool					m_bShouldSaveComments;
 
@@ -73,18 +73,18 @@ public:
 
 	void	BuildUnits();
 	uint16_t	GetUnitsSize() const { return (uint16_t)m_Units.size();	};
+	const std::vector<CStructEntry>& GetEntries();
+
 	bool	ClearUnits();
 	void	ClearUnit(uint16_t UnitNo);
-	void	DelUnit(std::vector<CStructEntry>::iterator It);
+	void    WriteUnitCorteges(uint16_t unit_no, const TCortegeContainer& c);
+	void	DelUnit(uint16_t unit_no);
 	uint16_t	LocateUnit (const char * EntryStr, int MeanNum) const;
 	uint16_t    GetSelectedUnitNo (uint16_t i) const;
 	uint16_t	GetSelectedUnitsSize() const;
 	uint16_t    InsertUnit (CStructEntry& T);
 	uint16_t	InsertUnit(const char* EntryStr, BYTE MeanNum);
-	uint16_t    UnitsLowerBound(const char* EntryStr)  const 
-	{ 
-		return lower_bound(m_Units.begin() , m_Units.end(), CStructEntry(EntryStr, 1)) - m_Units.begin();
-	};
+	uint16_t    UnitsLowerBound(const char* EntryStr)  const;
 
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -156,8 +156,6 @@ class CDictionary : public TRoss
 
 public:
 	
-	std::vector<CStructEntry>& GetUnits();
-
 	CDictionary();
 	void LoadAndExportDict(std::string fileName, std::string folder);
 	void ImportFromTextFile(std::string fileName);

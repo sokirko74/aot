@@ -190,7 +190,7 @@ void CEngSemStructure::FindEquivForLexFunct(CEnglishEquivMap& mapRNodeToENode)
 		{
 			if( HasThisLexFunc(lexFun.m_LexFunctName,SitEquivs->second[k],LexicalFunct) )
 			{
-				EngRusMakeLower(LexicalFunct.m_Lemma);
+				MakeLowerUtf8(LexicalFunct.m_Lemma);
 				long ParamUnitNo = GetRoss(Aoss)->LocateUnit(LexicalFunct.m_Lemma.c_str(),LexicalFunct.m_MeanNum);
 				if(ParamUnitNo != ErrUnitNo)
 				{
@@ -461,7 +461,7 @@ void CEngSemStructure::GetEngEquivsFromRusArticle(std::vector< SEngEquiv >& vect
 		}
 
 		std::string strALX = GetCortegeStr(rusNode.GetType(),vectorAlx[i]);
-		EngRusMakeUpper(strALX);
+		MakeUpperUtf8(strALX);
 
 		for( int k=0; k<usingRels.size(); k++ )
 		{

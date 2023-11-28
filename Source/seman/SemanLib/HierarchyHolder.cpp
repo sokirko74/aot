@@ -90,7 +90,7 @@ void CHierarchyHolder::WriteToRoss(std::string Entry)
 	std::string EntryName = (m_Type == SemFet) ? "_иерархСХ" : "_иерархСО";
 	uint16_t UnitNo = GetRoss()->LocateUnit(EntryName.c_str(), 1);
 	if (UnitNo != ErrUnitNo)
-		GetRoss()->DelUnit(GetRoss()->GetUnits().begin() + UnitNo);
+		GetRoss()->DelUnit(UnitNo);
 	UnitNo = GetRoss()->InsertUnit(EntryName.c_str(), 1);
 	CTempArticle A(const_cast<CDictionary*>(GetRoss()));
 	A.ReadFromDictionary(UnitNo, true, false);

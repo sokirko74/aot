@@ -14,7 +14,7 @@ BEGIN_MESSAGE_MAP(CColorRichEditView, CRichEditView)
 	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
-//----------------------------------------------------------------------------
+
 CRichEditRedrawer::CRichEditRedrawer( CColorRichEditView& view )
 : m_view(view)
 {

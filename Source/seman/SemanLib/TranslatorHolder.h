@@ -18,55 +18,6 @@ const char g_strRegRusOborDicPath[]    = "Software\\Dialing\\Obor\\DictPath";
 const long UnknownParadigmId = -1;
 const part_of_speech_t UnknownPOS = 0xff;
 
-/*анадлогичное перечисление в seman.idl*/
-enum DictTypeEnum   { Ross=0, LocRoss=1, CollocRoss=2, TimeRoss=3, OborRoss=4, Aoss=5, EngCollocRoss=6, EngObor=7, FinRoss=8, CompRoss=9, OmniRoss=10, NoneRoss=11 };
-
-inline bool IsThesRoss(DictTypeEnum RossId)  
-{
-  return (RossId == LocRoss) ||  (RossId == CompRoss) || (RossId == FinRoss) ||  (RossId == OmniRoss);
-};
-
-inline int GetThesIdByRossId(DictTypeEnum RossId) 
-{ 
-		assert (IsThesRoss(RossId));
-		switch  (RossId)  {
-		   case LocRoss  : return LocThes;
-		   case CompRoss : return CompThes;
-		   case FinRoss  : return FinThes;
-		   case OmniRoss : return OmniThes;
-		   default       : return OmniThes; 
-		};
-};
-
-inline DictTypeEnum GetRossIdByThesId(int ThesId) 
-{ 
-		switch  (ThesId)  {
-		   case LocThes  : return LocRoss;
-		   case CompThes : return CompRoss;
-		   case FinThes  : return FinRoss;
-		   case OmniThes : return OmniRoss;
-		   default       : return OmniRoss; 
-		};
-};
-
-inline std::string GetRmlThesNameThesId(int ThesId) 
-{ 
-  switch (ThesId) {
-	 case LocThes  : return  "RML_THES_LOC"; 
-	 case OmniThes  : return   "RML_THES_OMNI";
-	 case CompThes : return   "RML_THES_COMP"; 
-	 case FinThes  : return  "RML_THES_FIN"; 
-     default : return "RML_THES_FIN"; 
-	};
-};
-inline int GetThesIdByRmlThesName(const char* Name) 
-{ 
-  if (!strcmp(Name,"RML_THES_LOC")) return LocThes;
-  if (!strcmp(Name,"RML_THES_OMNI")) return OmniThes;
-  if (!strcmp(Name,"RML_THES_COMP")) return CompThes;
-  if (!strcmp(Name,"RML_THES_FIN")) return FinThes ;
-  return -1;
-};
 
 class CTranslatorHolder  
 {
